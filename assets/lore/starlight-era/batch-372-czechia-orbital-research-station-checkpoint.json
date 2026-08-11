@@ -1,0 +1,1643 @@
+{
+  "batch": 372,
+  "country": "Czechia",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "98173b1e86f7f467c63ca63a37237cf32aec10b6",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch372-czechia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 359 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "orbital research-station couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Honduras",
+  "nextQueueBatch": 373,
+  "nextQueueScenes": [
+    1512,
+    1513,
+    1514,
+    1515
+  ],
+  "nextCinematicTheme": {
+    "active": "private-jet aviation couture",
+    "batchOrdinalWithinTheme": 1
+  },
+  "researchSources": [
+    {
+      "url": "https://whc.unesco.org/en/list/616/",
+      "usedFor": "Prague historic center and Vltava setting"
+    },
+    {
+      "url": "https://www.britannica.com/place/Czech-Republic",
+      "usedFor": "Czechia geography, cities and regions"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/617/",
+      "usedFor": "Cesky Krumlov town and river setting"
+    },
+    {
+      "url": "https://www.britannica.com/place/Karlovy-Vary",
+      "usedFor": "Karlovy Vary spa valley and architecture"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch372-czechia-male-model-scene",
+    "fullHash": 3315040148,
+    "roll": 48,
+    "selectedScenePosition": 1,
+    "selectedScene": 1508,
+    "maleEmotion": {
+      "key": "batch372-czechia-scene1-male-emotion",
+      "roll": 71,
+      "result": "suspicion"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Czechia flag, coat of arms, official seal, sacred symbol, copied ceremonial or traditional pattern, political messaging, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular bridge arches, Vltava curves, Prague rooflines, Krumlov river bends, karst domes, colonnade rhythms and valley bands instead.",
+    "palette": "Prague gold, Vltava teal, Bohemian garnet, Krumlov ochre, Moravian emerald, karst graphite, Karlovy crystal blue, orbital pearl, station silver and aurora cyan",
+    "minimumCoverage": "Scenes 1508 and 1509 each carry hard large Czechia motifs on three women and orbital-station construction language on at least two. Scenes 1510 and 1511 use four different theme-led orbital-research outfits without country map prints while Czechia landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Prague, Český Krumlov, the Moravian Karst, and Karlovy Vary.",
+    "prohibitions": "Use respectful secular Czech geography and architecture through complete bridge arches, Prague rooflines, Vltava curves, Krumlov river bends, castle terraces, karst domes, colonnade rhythms and spa-valley bands. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch372-czechia-x-heart",
+      "roll": 93,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch372-czechia-x-internalagency",
+      "roll": 61,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch372-czechia-x-worldxxxseries",
+      "roll": 14,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Czechia images plus one accepted Cuba image",
+    "captionIfEligible": "Czechia 🤍 Cuba #Czechia #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1508 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1508 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch372-czechia-male-model-scene",
+        48
+      ],
+      [
+        "batch372-czechia-scene1-male-emotion",
+        71
+      ],
+      [
+        "batch372-czechia-scene1508-weather",
+        95
+      ],
+      [
+        "batch372-czechia-scene1508-mascotState",
+        39
+      ],
+      [
+        "batch372-czechia-scene1508-poleDanceTheme",
+        15
+      ],
+      [
+        "batch372-czechia-scene1508-rainbowOnly",
+        55
+      ],
+      [
+        "batch372-czechia-scene1508-rainbowHosiery",
+        86
+      ],
+      [
+        "batch372-czechia-scene1508-romanceBeat",
+        70
+      ],
+      [
+        "batch372-czechia-scene1508-compoundLoveBeat",
+        64
+      ],
+      [
+        "batch372-czechia-scene1508-hardLoveBeat",
+        72
+      ],
+      [
+        "batch372-czechia-scene1508-interestingProp",
+        84
+      ],
+      [
+        "batch372-czechia-scene1508-eceMissionProp-poseTargetRoll",
+        33
+      ],
+      [
+        "batch372-czechia-scene1508-Radiance-emotion",
+        24
+      ],
+      [
+        "batch372-czechia-scene1508-Radiance-visibleMidriff",
+        94
+      ],
+      [
+        "batch372-czechia-scene1508-Radiance-straplessDress",
+        77
+      ],
+      [
+        "batch372-czechia-scene1508-Radiance-fullyOpenBack",
+        18
+      ],
+      [
+        "batch372-czechia-scene1508-Ellie-emotion",
+        78
+      ],
+      [
+        "batch372-czechia-scene1508-Ellie-visibleMidriff",
+        64
+      ],
+      [
+        "batch372-czechia-scene1508-Ellie-straplessDress",
+        23
+      ],
+      [
+        "batch372-czechia-scene1508-Ellie-fullyOpenBack",
+        0
+      ],
+      [
+        "batch372-czechia-scene1508-Alia-emotion",
+        10
+      ],
+      [
+        "batch372-czechia-scene1508-Alia-visibleMidriff",
+        0
+      ],
+      [
+        "batch372-czechia-scene1508-Alia-straplessDress",
+        59
+      ],
+      [
+        "batch372-czechia-scene1508-Alia-fullyOpenBack",
+        28
+      ],
+      [
+        "batch372-czechia-scene1508-AI ECE-emotion",
+        88
+      ],
+      [
+        "batch372-czechia-scene1508-AI ECE-visibleMidriff",
+        34
+      ],
+      [
+        "batch372-czechia-scene1508-AI ECE-straplessDress",
+        17
+      ],
+      [
+        "batch372-czechia-scene1508-AI ECE-fullyOpenBack",
+        30
+      ],
+      [
+        "batch372-czechia-scene1509-weather",
+        76
+      ],
+      [
+        "batch372-czechia-scene1509-mascotState",
+        36
+      ],
+      [
+        "batch372-czechia-scene1509-poleDanceTheme",
+        2
+      ],
+      [
+        "batch372-czechia-scene1509-rainbowOnly",
+        12
+      ],
+      [
+        "batch372-czechia-scene1509-rainbowHosiery",
+        83
+      ],
+      [
+        "batch372-czechia-scene1509-romanceBeat",
+        93
+      ],
+      [
+        "batch372-czechia-scene1509-compoundLoveBeat",
+        29
+      ],
+      [
+        "batch372-czechia-scene1509-hardLoveBeat",
+        1
+      ],
+      [
+        "batch372-czechia-scene1509-interestingProp",
+        67
+      ],
+      [
+        "batch372-czechia-scene1509-eceMissionProp-poseTargetRoll",
+        94
+      ],
+      [
+        "batch372-czechia-scene1509-Radiance-emotion",
+        69
+      ],
+      [
+        "batch372-czechia-scene1509-Radiance-visibleMidriff",
+        33
+      ],
+      [
+        "batch372-czechia-scene1509-Radiance-straplessDress",
+        70
+      ],
+      [
+        "batch372-czechia-scene1509-Radiance-fullyOpenBack",
+        3
+      ],
+      [
+        "batch372-czechia-scene1509-Ellie-emotion",
+        85
+      ],
+      [
+        "batch372-czechia-scene1509-Ellie-visibleMidriff",
+        29
+      ],
+      [
+        "batch372-czechia-scene1509-Ellie-straplessDress",
+        82
+      ],
+      [
+        "batch372-czechia-scene1509-Ellie-fullyOpenBack",
+        51
+      ],
+      [
+        "batch372-czechia-scene1509-Alia-emotion",
+        39
+      ],
+      [
+        "batch372-czechia-scene1509-Alia-visibleMidriff",
+        11
+      ],
+      [
+        "batch372-czechia-scene1509-Alia-straplessDress",
+        16
+      ],
+      [
+        "batch372-czechia-scene1509-Alia-fullyOpenBack",
+        53
+      ],
+      [
+        "batch372-czechia-scene1509-AI ECE-emotion",
+        69
+      ],
+      [
+        "batch372-czechia-scene1509-AI ECE-emotion-disambiguation",
+        52
+      ],
+      [
+        "batch372-czechia-scene1509-AI ECE-visibleMidriff",
+        41
+      ],
+      [
+        "batch372-czechia-scene1509-AI ECE-straplessDress",
+        82
+      ],
+      [
+        "batch372-czechia-scene1509-AI ECE-fullyOpenBack",
+        11
+      ],
+      [
+        "batch372-czechia-scene1510-weather",
+        26
+      ],
+      [
+        "batch372-czechia-scene1510-mascotState",
+        42
+      ],
+      [
+        "batch372-czechia-scene1510-poleDanceTheme",
+        60
+      ],
+      [
+        "batch372-czechia-scene1510-rainbowOnly",
+        26
+      ],
+      [
+        "batch372-czechia-scene1510-rainbowHosiery",
+        53
+      ],
+      [
+        "batch372-czechia-scene1510-romanceBeat",
+        7
+      ],
+      [
+        "batch372-czechia-scene1510-compoundLoveBeat",
+        55
+      ],
+      [
+        "batch372-czechia-scene1510-hardLoveBeat",
+        15
+      ],
+      [
+        "batch372-czechia-scene1510-interestingProp",
+        9
+      ],
+      [
+        "batch372-czechia-scene1510-eceMissionProp-poseTargetRoll",
+        64
+      ],
+      [
+        "batch372-czechia-scene1510-Radiance-emotion",
+        71
+      ],
+      [
+        "batch372-czechia-scene1510-Radiance-visibleMidriff",
+        63
+      ],
+      [
+        "batch372-czechia-scene1510-Radiance-straplessDress",
+        52
+      ],
+      [
+        "batch372-czechia-scene1510-Radiance-fullyOpenBack",
+        41
+      ],
+      [
+        "batch372-czechia-scene1510-Ellie-emotion",
+        67
+      ],
+      [
+        "batch372-czechia-scene1510-Ellie-visibleMidriff",
+        15
+      ],
+      [
+        "batch372-czechia-scene1510-Ellie-straplessDress",
+        48
+      ],
+      [
+        "batch372-czechia-scene1510-Ellie-fullyOpenBack",
+        77
+      ],
+      [
+        "batch372-czechia-scene1510-Alia-emotion",
+        29
+      ],
+      [
+        "batch372-czechia-scene1510-Alia-visibleMidriff",
+        53
+      ],
+      [
+        "batch372-czechia-scene1510-Alia-straplessDress",
+        82
+      ],
+      [
+        "batch372-czechia-scene1510-Alia-fullyOpenBack",
+        79
+      ],
+      [
+        "batch372-czechia-scene1510-AI ECE-emotion",
+        51
+      ],
+      [
+        "batch372-czechia-scene1510-AI ECE-visibleMidriff",
+        27
+      ],
+      [
+        "batch372-czechia-scene1510-AI ECE-straplessDress",
+        60
+      ],
+      [
+        "batch372-czechia-scene1510-AI ECE-fullyOpenBack",
+        13
+      ],
+      [
+        "batch372-czechia-scene1511-weather",
+        41
+      ],
+      [
+        "batch372-czechia-scene1511-mascotState",
+        25
+      ],
+      [
+        "batch372-czechia-scene1511-poleDanceTheme",
+        13
+      ],
+      [
+        "batch372-czechia-scene1511-rainbowOnly",
+        97
+      ],
+      [
+        "batch372-czechia-scene1511-rainbowHosiery",
+        0
+      ],
+      [
+        "batch372-czechia-scene1511-romanceBeat",
+        52
+      ],
+      [
+        "batch372-czechia-scene1511-compoundLoveBeat",
+        66
+      ],
+      [
+        "batch372-czechia-scene1511-hardLoveBeat",
+        18
+      ],
+      [
+        "batch372-czechia-scene1511-interestingProp",
+        74
+      ],
+      [
+        "batch372-czechia-scene1511-eceMissionProp-poseTargetRoll",
+        3
+      ],
+      [
+        "batch372-czechia-scene1511-Radiance-emotion",
+        10
+      ],
+      [
+        "batch372-czechia-scene1511-Radiance-visibleMidriff",
+        48
+      ],
+      [
+        "batch372-czechia-scene1511-Radiance-straplessDress",
+        87
+      ],
+      [
+        "batch372-czechia-scene1511-Radiance-fullyOpenBack",
+        36
+      ],
+      [
+        "batch372-czechia-scene1511-Ellie-emotion",
+        16
+      ],
+      [
+        "batch372-czechia-scene1511-Ellie-visibleMidriff",
+        86
+      ],
+      [
+        "batch372-czechia-scene1511-Ellie-straplessDress",
+        53
+      ],
+      [
+        "batch372-czechia-scene1511-Ellie-fullyOpenBack",
+        70
+      ],
+      [
+        "batch372-czechia-scene1511-Alia-emotion",
+        76
+      ],
+      [
+        "batch372-czechia-scene1511-Alia-visibleMidriff",
+        2
+      ],
+      [
+        "batch372-czechia-scene1511-Alia-straplessDress",
+        69
+      ],
+      [
+        "batch372-czechia-scene1511-Alia-fullyOpenBack",
+        2
+      ],
+      [
+        "batch372-czechia-scene1511-AI ECE-emotion",
+        18
+      ],
+      [
+        "batch372-czechia-scene1511-AI ECE-emotion-disambiguation",
+        81
+      ],
+      [
+        "batch372-czechia-scene1511-AI ECE-visibleMidriff",
+        68
+      ],
+      [
+        "batch372-czechia-scene1511-AI ECE-straplessDress",
+        95
+      ],
+      [
+        "batch372-czechia-scene1511-AI ECE-fullyOpenBack",
+        48
+      ],
+      [
+        "batch372-czechia-x-heart",
+        93
+      ],
+      [
+        "batch372-czechia-x-internalagency",
+        61
+      ],
+      [
+        "batch372-czechia-x-worldxxxseries",
+        14
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch372-czechia-scene1508-rainbowHosieryWearer",
+        26
+      ],
+      [
+        "batch372-czechia-scene1508-rainbowHosieryPaletteMode",
+        6
+      ],
+      [
+        "batch372-czechia-scene1508-mascotHolder",
+        64
+      ],
+      [
+        "batch372-czechia-scene1508-interestingPropHolder",
+        66
+      ],
+      [
+        "batch372-czechia-scene1508-interestingPropFamily",
+        44
+      ],
+      [
+        "batch372-czechia-scene1509-rainbowHosieryWearer",
+        23
+      ],
+      [
+        "batch372-czechia-scene1509-rainbowHosieryPaletteMode",
+        41
+      ],
+      [
+        "batch372-czechia-scene1509-mascotHolder",
+        77
+      ],
+      [
+        "batch372-czechia-scene1509-interestingPropHolder",
+        61
+      ],
+      [
+        "batch372-czechia-scene1509-interestingPropFamily",
+        35
+      ],
+      [
+        "batch372-czechia-scene1510-rainbowHosieryWearer",
+        45
+      ],
+      [
+        "batch372-czechia-scene1510-rainbowHosieryPaletteMode",
+        83
+      ],
+      [
+        "batch372-czechia-scene1510-mascotHolder",
+        67
+      ],
+      [
+        "batch372-czechia-scene1510-interestingPropHolder",
+        15
+      ],
+      [
+        "batch372-czechia-scene1510-interestingPropFamily",
+        69
+      ],
+      [
+        "batch372-czechia-scene1511-rainbowHosieryWearer",
+        72
+      ],
+      [
+        "batch372-czechia-scene1511-rainbowHosieryPaletteMode",
+        32
+      ],
+      [
+        "batch372-czechia-scene1511-mascotHolder",
+        38
+      ],
+      [
+        "batch372-czechia-scene1511-interestingPropHolder",
+        76
+      ],
+      [
+        "batch372-czechia-scene1511-interestingPropFamily",
+        46
+      ]
+    ],
+    "primaryPairCount": 111,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "3887D98A2D35B4C2D2B2ECB3B90998C636680BC40093422EAD83E94F6064696F",
+    "selectorPairsSha256": "AC672C86D97D3CA4A9BAAA75F42923E311CCC5EF57D9F893CED36451693752FB"
+  },
+  "scenePlans": {
+    "1508": {
+      "scene": 1508,
+      "mode": "country-led hybrid",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Prague overlook with the complete Charles Bridge arch sequence, Vltava River curve, recognizable Prague Castle skyline, red-roofed Old Town and distant modern city, fused in the foreground with a peaceful fictional civilian orbital-research cupola, docking tunnel and solar-array laboratory deck",
+      "motifs": "complete bridge arches, Vltava bands, castle spires, red-roof terraces, cupola windows, docking rings and solar trusses",
+      "culture": "Prague reads through Charles Bridge, the Vltava, Prague Castle and Old Town roofscape, presented as secular civic architecture without religious or royal symbolism copied into clothing.",
+      "weather": {
+        "key": "batch372-czechia-scene1508-weather",
+        "roll": 95,
+        "result": "stacked lenticular clouds",
+        "materialized": "stacked lenticular clouds"
+      },
+      "mascotState": {
+        "key": "batch372-czechia-scene1508-mascotState",
+        "roll": 39,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch372-czechia-scene1508-mascotHolder",
+        "roll": 64,
+        "result": "Ellie"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry lounge far from bridge edges, target line, river water and orbital equipment.",
+      "interestingProp": {
+        "key": "batch372-czechia-scene1508-interestingProp",
+        "roll": 84,
+        "active": false,
+        "holder": {
+          "key": "batch372-czechia-scene1508-interestingPropHolder",
+          "roll": 66,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch372-czechia-scene1508-interestingPropFamily",
+          "roll": 44,
+          "result": "mechanical ribbon loom"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch372-czechia-scene1508-poleDanceTheme",
+        "roll": 15,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch372-czechia-scene1508-rainbowOnly",
+        "roll": 55,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch372-czechia-scene1508-rainbowHosiery",
+        "roll": 86,
+        "active": false,
+        "wearer": {
+          "key": "batch372-czechia-scene1508-rainbowHosieryWearer",
+          "roll": 26,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch372-czechia-scene1508-rainbowHosieryPaletteMode",
+          "roll": 6,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch372-czechia-scene1508-eceMissionProp-poseTargetRoll",
+        "roll": 33
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera",
+      "romanceBeat": {
+        "key": "batch372-czechia-scene1508-romanceBeat",
+        "roll": 70,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch372-czechia-scene1508-compoundLoveBeat",
+        "roll": 64,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "hardLoveBeat": {
+        "key": "batch372-czechia-scene1508-hardLoveBeat",
+        "roll": 72,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch372-czechia-scene1508-Radiance-emotion",
+            "roll": 24,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1508-Radiance-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1508-Radiance-straplessDress",
+            "roll": 77,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1508-Radiance-fullyOpenBack",
+            "roll": 18,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch372-czechia-scene1508-Ellie-emotion",
+            "roll": 78,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1508-Ellie-visibleMidriff",
+            "roll": 64,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1508-Ellie-straplessDress",
+            "roll": 23,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1508-Ellie-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch372-czechia-scene1508-Alia-emotion",
+            "roll": 10,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1508-Alia-visibleMidriff",
+            "roll": 0,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1508-Alia-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1508-Alia-fullyOpenBack",
+            "roll": 28,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch372-czechia-scene1508-AI ECE-emotion",
+            "roll": 88,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1508-AI ECE-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1508-AI ECE-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1508-AI ECE-fullyOpenBack",
+            "roll": 30,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "calm contentment expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "fear and urgent vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Vltava-teal orbital-cupola lantern tunic over opaque pearl tailored shorts with dimensional bridge arches, station-silver hoops and gyroscope boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Prague-gold roofline-fold asymmetric trousers with garnet spire ribs, graphite laboratory panels and cantilever platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Bohemian-garnet castle fan skirt with a secure teal stepped bodice, braided pearl river cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan docking-ring cuirass over opaque graphite sculpted culottes with solar-truss fins and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Czech bridge-arch and karst-dome embroidery with subtle orbital-research seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Vltava-teal orbital-cupola lantern tunic over opaque pearl tailored shorts with dimensional bridge arches, station-silver hoops and gyroscope boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Prague-gold roofline-fold asymmetric trousers with garnet spire ribs, graphite laboratory panels and cantilever platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Bohemian-garnet castle fan skirt with a secure teal stepped bodice, braided pearl river cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan docking-ring cuirass over opaque graphite sculpted culottes with solar-truss fins and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Czech bridge-arch and karst-dome embroidery with subtle orbital-research seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "Ellie initiates a close turning invitation toward Radiance while Alia catches Ellie's trailing forearm and ECE steps into the open side with a firm waist contact and sustained rival eye line.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Ellie invites Radiance",
+        "Alia catches Ellie",
+        "ECE completes visible waist contact"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch372-czechia-scene1-male-emotion",
+          "roll": 71,
+          "result": "suspicion"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry Prague overlook with the complete Charles Bridge arch sequence, Vltava River curve, recognizable Prague Castle skyline, red-roofed Old Town and distant modern city, fused in the foreground with a peaceful fictional civilian orbital-research cupola, docking tunnel and solar-array laboratory deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: orbital research-station couture. The theme and Czechia location must both be immediate foreground reads. Prague reads through Charles Bridge, the Vltava, Prague Castle and Old Town roofscape, presented as secular civic architecture without religious or royal symbolism copied into clothing. Stored scene rolls: weather 95=stacked lenticular clouds; mascot state 39=MAX only; mascot holder selector 64=Ellie; odd prop 84=inactive; odd holder 66=Radiance; odd family 44=mechanical ribbon loom; pole 15=inactive; rainbow-only 55=inactive; rainbow hosiery 86=inactive; wearer 26=Radiance; palette 6=country-palette rainbow-like gradient; romance 70; compound 64; hard love 72; mission-prop pose/target 33. Exact wardrobe rolls: Radiance: midriff 94=covered, strapless 77=inactive, open back 18=active; Ellie: midriff 64=covered, strapless 23=active, open back 0=active; Alia: midriff 0=visible, strapless 59=inactive, open back 28=active; AI ECE: midriff 34=visible, strapless 17=active, open back 30=inactive. Exact outfit fingerprints, no substitutions: Radiance: Vltava-teal orbital-cupola lantern tunic over opaque pearl tailored shorts with dimensional bridge arches, station-silver hoops and gyroscope boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: Prague-gold roofline-fold asymmetric trousers with garnet spire ribs, graphite laboratory panels and cantilever platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: Bohemian-garnet castle fan skirt with a secure teal stepped bodice, braided pearl river cords and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cyan docking-ring cuirass over opaque graphite sculpted culottes with solar-truss fins and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Czech bridge-arch and karst-dome embroidery with subtle orbital-research seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large bridge, river and roofline motifs; Radiance and ECE use cupola-window, docking-ring and solar-truss construction. Location design vocabulary: complete bridge arches, Vltava bands, castle spires, red-roof terraces, cupola windows, docking rings and solar trusses. Use respectful secular Czech geography and architecture through complete bridge arches, Prague rooflines, Vltava curves, Krumlov river bends, castle terraces, karst domes, colonnade rhythms and spa-valley bands. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 24=calm contentment, performed as calm contentment expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 78=deep sadness, performed as deep sadness expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 10=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 88=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 71=suspicion, performed as suspicion expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 70: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 64: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Mandatory hard-love roll 72: a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Ellie initiates a close turning invitation toward Radiance while Alia catches Ellie's trailing forearm and ECE steps into the open side with a firm waist contact and sustained rival eye line. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Ellie invites Radiance; Alia catches Ellie; ECE completes visible waist contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 39=MAX only. Mascot holder selector 64=Ellie. Only rolled mascots appear on a padded dry lounge far from bridge edges, target line, river water and orbital equipment. Odd-prop roll 84 is inactive. Do not add any bizarre secondary prop; stored inactive holder 66=Radiance and family 44=mechanical ribbon loom remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render stacked lenticular clouds cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1509": {
+      "scene": 1509,
+      "mode": "country-led hybrid",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Český Krumlov overlook with the complete S-shaped Vltava bend, recognizable castle tower, layered red roofs, pastel facades, castle terraces and forested Bohemian hills, fused equally with a peaceful civilian orbital laboratory, docking node and solar-observation truss",
+      "motifs": "complete river bend, castle-tower arcs, roof bands, pastel facade planes, docking nodes and solar-panel lattices",
+      "culture": "Český Krumlov reads through its S-shaped river, castle tower, red roofs, pastel facades and wooded hills, treated as secular urban heritage.",
+      "weather": {
+        "key": "batch372-czechia-scene1509-weather",
+        "roll": 76,
+        "result": "powerful windstorm with controlled fabric motion",
+        "materialized": "powerful windstorm with controlled fabric motion"
+      },
+      "mascotState": {
+        "key": "batch372-czechia-scene1509-mascotState",
+        "roll": 36,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch372-czechia-scene1509-mascotHolder",
+        "roll": 77,
+        "result": "Alia"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded terrace far from slopes, river edges, visitors, props and orbital equipment.",
+      "interestingProp": {
+        "key": "batch372-czechia-scene1509-interestingProp",
+        "roll": 67,
+        "active": false,
+        "holder": {
+          "key": "batch372-czechia-scene1509-interestingPropHolder",
+          "roll": 61,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch372-czechia-scene1509-interestingPropFamily",
+          "roll": 35,
+          "result": "kinetic umbrella with rotating mirrored petals"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch372-czechia-scene1509-poleDanceTheme",
+        "roll": 2,
+        "active": true
+      },
+      "rainbowOnly": {
+        "key": "batch372-czechia-scene1509-rainbowOnly",
+        "roll": 12,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch372-czechia-scene1509-rainbowHosiery",
+        "roll": 83,
+        "active": false,
+        "wearer": {
+          "key": "batch372-czechia-scene1509-rainbowHosieryWearer",
+          "roll": 23,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch372-czechia-scene1509-rainbowHosieryPaletteMode",
+          "roll": 41,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch372-czechia-scene1509-eceMissionProp-poseTargetRoll",
+        "roll": 94
+      },
+      "materializedPropAction": "AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera",
+      "romanceBeat": {
+        "key": "batch372-czechia-scene1509-romanceBeat",
+        "roll": 93,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch372-czechia-scene1509-compoundLoveBeat",
+        "roll": 29,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "hardLoveBeat": {
+        "key": "batch372-czechia-scene1509-hardLoveBeat",
+        "roll": 1,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch372-czechia-scene1509-Radiance-emotion",
+            "roll": 69,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1509-Radiance-visibleMidriff",
+            "roll": 33,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1509-Radiance-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1509-Radiance-fullyOpenBack",
+            "roll": 3,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch372-czechia-scene1509-Ellie-emotion",
+            "roll": 85,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "materializedResult": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1509-Ellie-visibleMidriff",
+            "roll": 29,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1509-Ellie-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1509-Ellie-fullyOpenBack",
+            "roll": 51,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch372-czechia-scene1509-Alia-emotion",
+            "roll": 39,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1509-Alia-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1509-Alia-straplessDress",
+            "roll": 16,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1509-Alia-fullyOpenBack",
+            "roll": 53,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch372-czechia-scene1509-AI ECE-emotion",
+            "roll": 69,
+            "result": "suspicion",
+            "materializedResult": "intense curiosity",
+            "disambiguation": {
+              "key": "batch372-czechia-scene1509-AI ECE-emotion-disambiguation",
+              "roll": 52
+            },
+            "performance": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1509-AI ECE-visibleMidriff",
+            "roll": 41,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1509-AI ECE-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1509-AI ECE-fullyOpenBack",
+            "roll": 11,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "full sobbing with tear-streaked face and shaking posture expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Krumlov-ochre river-facet peplum dress with dimensional garnet roof discs, emerald hill inlays and orbital heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-pearl split-tail docking waistcoat over opaque graphite balloon trousers with silver solar pleats and platform mules; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Vltava-teal tower spiral skirt with secure gold laboratory-shell top, braided pearl facade relief and mirror pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan articulated antenna tabard over opaque station-silver shorts with docking framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Krumlov-ochre river-facet peplum dress with dimensional garnet roof discs, emerald hill inlays and orbital heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-pearl split-tail docking waistcoat over opaque graphite balloon trousers with silver solar pleats and platform mules; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Vltava-teal tower spiral skirt with secure gold laboratory-shell top, braided pearl facade relief and mirror pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan articulated antenna tabard over opaque station-silver shorts with docking framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Alia supports Ellie through a controlled dip while Radiance catches Ellie's free hand and ECE answers by reclaiming Alia's shoulder, creating a stable three-way interruption and visible jealousy.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Alia supports Ellie's dip",
+        "Radiance catches Ellie's free hand",
+        "ECE reclaims Alia's shoulder"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Český Krumlov overlook with the complete S-shaped Vltava bend, recognizable castle tower, layered red roofs, pastel facades, castle terraces and forested Bohemian hills, fused equally with a peaceful civilian orbital laboratory, docking node and solar-observation truss. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: orbital research-station couture. The theme and Czechia location must both be immediate foreground reads. Český Krumlov reads through its S-shaped river, castle tower, red roofs, pastel facades and wooded hills, treated as secular urban heritage. Stored scene rolls: weather 76=powerful windstorm with controlled fabric motion; mascot state 36=PAWS only; mascot holder selector 77=Alia; odd prop 67=inactive; odd holder 61=Ellie; odd family 35=kinetic umbrella with rotating mirrored petals; pole 2=active; rainbow-only 12=inactive; rainbow hosiery 83=inactive; wearer 23=Radiance; palette 41=country-palette rainbow-like gradient; romance 93; compound 29; hard love 1; mission-prop pose/target 94. Exact wardrobe rolls: Radiance: midriff 33=visible, strapless 70=inactive, open back 3=active; Ellie: midriff 29=visible, strapless 82=inactive, open back 51=inactive; Alia: midriff 11=visible, strapless 16=active, open back 53=inactive; AI ECE: midriff 41=visible, strapless 82=inactive, open back 11=active. Exact outfit fingerprints, no substitutions: Radiance: Krumlov-ochre river-facet peplum dress with dimensional garnet roof discs, emerald hill inlays and orbital heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: station-pearl split-tail docking waistcoat over opaque graphite balloon trousers with silver solar pleats and platform mules; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: Vltava-teal tower spiral skirt with secure gold laboratory-shell top, braided pearl facade relief and mirror pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cyan articulated antenna tabard over opaque station-silver shorts with docking framework and suspension boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large river, tower and roof motifs; Ellie and ECE use docking-node, laboratory-shell and solar-array construction. Location design vocabulary: complete river bend, castle-tower arcs, roof bands, pastel facade planes, docking nodes and solar-panel lattices. Use respectful secular Czech geography and architecture through complete bridge arches, Prague rooflines, Vltava curves, Krumlov river bends, castle terraces, karst domes, colonnade rhythms and spa-valley bands. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 69=suspicion, performed as suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 85=full sobbing with tear-streaked face and shaking posture, performed as full sobbing with tear-streaked face and shaking posture expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 39=magnetic confidence, performed as magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 69=suspicion, collision resolver 52 gives distinct performance intense curiosity, performed as intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 93: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Compound roll 29: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Mandatory hard-love roll 1: one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia supports Ellie through a controlled dip while Radiance catches Ellie's free hand and ECE answers by reclaiming Alia's shoulder, creating a stable three-way interruption and visible jealousy. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Alia supports Ellie's dip; Radiance catches Ellie's free hand; ECE reclaims Alia's shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 36=PAWS only. Mascot holder selector 77=Alia. Only rolled mascots appear on a secured padded terrace far from slopes, river edges, visitors, props and orbital equipment. Odd-prop roll 67 is inactive. Do not add any bizarre secondary prop; stored inactive holder 61=Ellie and family 35=kinetic umbrella with rotating mirrored petals remain audit-only. Pole theme is active only as a stationary public-safe fashion motif, with no dance, stripping, or suggestive performance. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1510": {
+      "scene": 1510,
+      "mode": "theme-led original",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Moravian Karst overlook with the complete Macocha Abyss limestone amphitheater, forested rim, visible Punkva cave entrance, pale karst cliffs and layered Moravian woodland, fused equally with a peaceful orbital research station and panoramic geology laboratory deck",
+      "motifs": "location-only karst amphitheater, limestone strata, cave-mouth arc, forest bands, solar lattices and station-module geometry",
+      "culture": "The Moravian Karst reads through Macocha's limestone amphitheater, forested rim, cave entrance and pale cliffs; the cast remains on stable dry ground far from every drop.",
+      "weather": {
+        "key": "batch372-czechia-scene1510-weather",
+        "roll": 26,
+        "result": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast"
+      },
+      "mascotState": {
+        "key": "batch372-czechia-scene1510-mascotState",
+        "roll": 42,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch372-czechia-scene1510-mascotHolder",
+        "roll": 67,
+        "result": "Ellie"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded platform far from abyss edges, caves, wildlife, props and orbital machinery.",
+      "interestingProp": {
+        "key": "batch372-czechia-scene1510-interestingProp",
+        "roll": 9,
+        "active": true,
+        "holder": {
+          "key": "batch372-czechia-scene1510-interestingPropHolder",
+          "roll": 15,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch372-czechia-scene1510-interestingPropFamily",
+          "roll": 69,
+          "result": "folding solar fan with articulated panels"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch372-czechia-scene1510-poleDanceTheme",
+        "roll": 60,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch372-czechia-scene1510-rainbowOnly",
+        "roll": 26,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch372-czechia-scene1510-rainbowHosiery",
+        "roll": 53,
+        "active": false,
+        "wearer": {
+          "key": "batch372-czechia-scene1510-rainbowHosieryWearer",
+          "roll": 45,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch372-czechia-scene1510-rainbowHosieryPaletteMode",
+          "roll": 83,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch372-czechia-scene1510-eceMissionProp-poseTargetRoll",
+        "roll": 64
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera",
+      "romanceBeat": {
+        "key": "batch372-czechia-scene1510-romanceBeat",
+        "roll": 7,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch372-czechia-scene1510-compoundLoveBeat",
+        "roll": 55,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch372-czechia-scene1510-hardLoveBeat",
+        "roll": 15,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch372-czechia-scene1510-Radiance-emotion",
+            "roll": 71,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1510-Radiance-visibleMidriff",
+            "roll": 63,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1510-Radiance-straplessDress",
+            "roll": 52,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1510-Radiance-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch372-czechia-scene1510-Ellie-emotion",
+            "roll": 67,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1510-Ellie-visibleMidriff",
+            "roll": 15,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1510-Ellie-straplessDress",
+            "roll": 48,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1510-Ellie-fullyOpenBack",
+            "roll": 77,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch372-czechia-scene1510-Alia-emotion",
+            "roll": 29,
+            "result": "hope",
+            "materializedResult": "hope",
+            "performance": "hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1510-Alia-visibleMidriff",
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1510-Alia-straplessDress",
+            "roll": 82,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1510-Alia-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch372-czechia-scene1510-AI ECE-emotion",
+            "roll": 51,
+            "result": "intense curiosity",
+            "materializedResult": "intense curiosity",
+            "performance": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1510-AI ECE-visibleMidriff",
+            "roll": 27,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1510-AI ECE-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1510-AI ECE-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "orbital-pearl solar-lattice pannier coat-dress with opaque Moravian-emerald hub plates, cyan array pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-graphite radiator-truss culotte coat with one rigid asymmetric shoulder bridge, limestone panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "laboratory-silver pressure-sail draped jumpsuit with braided garnet seams, curved karst side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan orbital-keel bodice with an opaque high-low crystal-blue skirt, silver telemetry hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "orbital-pearl solar-lattice pannier coat-dress with opaque Moravian-emerald hub plates, cyan array pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "station-graphite radiator-truss culotte coat with one rigid asymmetric shoulder bridge, limestone panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "laboratory-silver pressure-sail draped jumpsuit with braided garnet seams, curved karst side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cyan orbital-keel bodice with an opaque high-low crystal-blue skirt, silver telemetry hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Radiance rises from a stable low seat into ECE's side embrace while Alia draws Radiance's other hand toward herself and Ellie crosses the open side with a protective shoulder contact and jealous backward glance.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "ECE supports Radiance's rise",
+        "Alia draws Radiance's free hand",
+        "Ellie completes protective shoulder contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Moravian Karst overlook with the complete Macocha Abyss limestone amphitheater, forested rim, visible Punkva cave entrance, pale karst cliffs and layered Moravian woodland, fused equally with a peaceful orbital research station and panoramic geology laboratory deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: orbital research-station couture. The theme and Czechia location must both be immediate foreground reads. The Moravian Karst reads through Macocha's limestone amphitheater, forested rim, cave entrance and pale cliffs; the cast remains on stable dry ground far from every drop. Stored scene rolls: weather 26=soft dramatic overcast; mascot state 42=MAX only; mascot holder selector 67=Ellie; odd prop 9=active; odd holder 15=Radiance; odd family 69=folding solar fan with articulated panels; pole 60=inactive; rainbow-only 26=inactive; rainbow hosiery 53=inactive; wearer 45=Radiance; palette 83=original independent rainbow gradient; romance 7; compound 55; hard love 15; mission-prop pose/target 64. Exact wardrobe rolls: Radiance: midriff 63=covered, strapless 52=inactive, open back 41=inactive; Ellie: midriff 15=visible, strapless 48=inactive, open back 77=inactive; Alia: midriff 53=covered, strapless 82=inactive, open back 79=inactive; AI ECE: midriff 27=visible, strapless 60=inactive, open back 13=active. Exact outfit fingerprints, no substitutions: Radiance: orbital-pearl solar-lattice pannier coat-dress with opaque Moravian-emerald hub plates, cyan array pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: station-graphite radiator-truss culotte coat with one rigid asymmetric shoulder bridge, limestone panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: laboratory-silver pressure-sail draped jumpsuit with braided garnet seams, curved karst side vanes and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cyan orbital-keel bodice with an opaque high-low crystal-blue skirt, silver telemetry hoops and module boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Solar lattice, radiator truss, laboratory sail and orbital keel create four unrelated station silhouettes while the Moravian Karst remains equally large and foregrounded. Location design vocabulary: location-only karst amphitheater, limestone strata, cave-mouth arc, forest bands, solar lattices and station-module geometry. Use respectful secular Czech geography and architecture through complete bridge arches, Prague rooflines, Vltava curves, Krumlov river bends, castle terraces, karst domes, colonnade rhythms and spa-valley bands. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 71=suspicion, performed as suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 67=possessive tension, performed as possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 29=hope, performed as hope expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 51=intense curiosity, performed as intense curiosity expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 7: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Compound roll 55: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 15: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Radiance rises from a stable low seat into ECE's side embrace while Alia draws Radiance's other hand toward herself and Ellie crosses the open side with a protective shoulder contact and jealous backward glance. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; ECE supports Radiance's rise; Alia draws Radiance's free hand; Ellie completes protective shoulder contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 42=MAX only. Mascot holder selector 67=Ellie. Only rolled mascots appear on a secured padded platform far from abyss edges, caves, wildlife, props and orbital machinery. Odd-prop roll is active. Exactly Radiance owns and creatively integrates one folding solar fan with articulated panels into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render soft dramatic overcast cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1511": {
+      "scene": 1511,
+      "mode": "theme-led original",
+      "theme": "orbital research-station couture",
+      "landmark": "a broad dry Karlovy Vary overlook with the complete Teplá River valley, recognizable Mill Colonnade rhythm, pastel hillside facades, forested slopes and distant Grandhotel Pupp silhouette, fused equally with a peaceful civilian orbital research station and panoramic climate-imaging deck",
+      "motifs": "location-only river-valley bands, colonnade rhythms, pastel facade terraces, forest slopes, cupola modules and antenna-cage geometry",
+      "culture": "Karlovy Vary reads through the Teplá valley, Mill Colonnade, pastel hillside architecture, forest slopes and secular spa-city landscape.",
+      "weather": {
+        "key": "batch372-czechia-scene1511-weather",
+        "roll": 41,
+        "result": "rolling thunderstorm",
+        "materialized": "rolling thunderstorm"
+      },
+      "mascotState": {
+        "key": "batch372-czechia-scene1511-mascotState",
+        "roll": 25,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch372-czechia-scene1511-mascotHolder",
+        "roll": 38,
+        "result": "AI ECE"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry overlook far from river edges, streets, props and orbital equipment.",
+      "interestingProp": {
+        "key": "batch372-czechia-scene1511-interestingProp",
+        "roll": 74,
+        "active": false,
+        "holder": {
+          "key": "batch372-czechia-scene1511-interestingPropHolder",
+          "roll": 76,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch372-czechia-scene1511-interestingPropFamily",
+          "roll": 46,
+          "result": "portable miniature planetarium projector"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch372-czechia-scene1511-poleDanceTheme",
+        "roll": 13,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch372-czechia-scene1511-rainbowOnly",
+        "roll": 97,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch372-czechia-scene1511-rainbowHosiery",
+        "roll": 0,
+        "active": true,
+        "wearer": {
+          "key": "batch372-czechia-scene1511-rainbowHosieryWearer",
+          "roll": 72,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch372-czechia-scene1511-rainbowHosieryPaletteMode",
+          "roll": 32,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch372-czechia-scene1511-eceMissionProp-poseTargetRoll",
+        "roll": 3
+      },
+      "materializedPropAction": "Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera",
+      "romanceBeat": {
+        "key": "batch372-czechia-scene1511-romanceBeat",
+        "roll": 52,
+        "dynamicIndex": 4,
+        "contractResult": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLoveBeat": {
+        "key": "batch372-czechia-scene1511-compoundLoveBeat",
+        "roll": 66,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "hardLoveBeat": {
+        "key": "batch372-czechia-scene1511-hardLoveBeat",
+        "roll": 18,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch372-czechia-scene1511-Radiance-emotion",
+            "roll": 10,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1511-Radiance-visibleMidriff",
+            "roll": 48,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1511-Radiance-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1511-Radiance-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch372-czechia-scene1511-Ellie-emotion",
+            "roll": 16,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1511-Ellie-visibleMidriff",
+            "roll": 86,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1511-Ellie-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1511-Ellie-fullyOpenBack",
+            "roll": 70,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch372-czechia-scene1511-Alia-emotion",
+            "roll": 76,
+            "result": "contained resentment",
+            "materializedResult": "contained resentment",
+            "performance": "contained resentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1511-Alia-visibleMidriff",
+            "roll": 2,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1511-Alia-straplessDress",
+            "roll": 69,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1511-Alia-fullyOpenBack",
+            "roll": 2,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch372-czechia-scene1511-AI ECE-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "crying with visible tears",
+            "disambiguation": {
+              "key": "batch372-czechia-scene1511-AI ECE-emotion-disambiguation",
+              "roll": 81
+            },
+            "performance": "crying with visible tears expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch372-czechia-scene1511-AI ECE-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch372-czechia-scene1511-AI ECE-straplessDress",
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch372-czechia-scene1511-AI ECE-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "contained resentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "crying with visible tears expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "crystal-pearl observation-blister cape dress with station-silver ribs, Karlovy-blue lens appliques and spherical ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "garnet thermal-lattice tapered trouser suit with graphite hex panels, colonnade pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "orbital-silver navigation-spindle peplum over an opaque emerald asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cobalt habitat-balloon bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "crystal-pearl observation-blister cape dress with station-silver ribs, Karlovy-blue lens appliques and spherical ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "garnet thermal-lattice tapered trouser suit with graphite hex panels, colonnade pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "orbital-silver navigation-spindle peplum over an opaque emerald asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "aurora-cobalt habitat-balloon bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "ECE leads Alia through a close partner turn while Radiance catches Alia's trailing forearm and Ellie steps into the open side to claim ECE's shoulder, creating pursuit, interruption and a clear four-way contact graph.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "ECE leads Alia's turn",
+        "Radiance catches Alia",
+        "Ellie completes visible shoulder contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Karlovy Vary overlook with the complete Teplá River valley, recognizable Mill Colonnade rhythm, pastel hillside facades, forested slopes and distant Grandhotel Pupp silhouette, fused equally with a peaceful civilian orbital research station and panoramic climate-imaging deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: orbital research-station couture. The theme and Czechia location must both be immediate foreground reads. Karlovy Vary reads through the Teplá valley, Mill Colonnade, pastel hillside architecture, forest slopes and secular spa-city landscape. Stored scene rolls: weather 41=rolling thunderstorm; mascot state 25=PAWS only; mascot holder selector 38=AI ECE; odd prop 74=inactive; odd holder 76=Ellie; odd family 46=portable miniature planetarium projector; pole 13=inactive; rainbow-only 97=inactive; rainbow hosiery 0=active; wearer 72=AI ECE; palette 32=country-palette rainbow-like gradient; romance 52; compound 66; hard love 18; mission-prop pose/target 3. Exact wardrobe rolls: Radiance: midriff 48=visible, strapless 87=inactive, open back 36=inactive; Ellie: midriff 86=covered, strapless 53=inactive, open back 70=inactive; Alia: midriff 2=visible, strapless 69=inactive, open back 2=active; AI ECE: midriff 68=covered, strapless 95=inactive, open back 48=inactive. Exact outfit fingerprints, no substitutions: Radiance: crystal-pearl observation-blister cape dress with station-silver ribs, Karlovy-blue lens appliques and spherical ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: garnet thermal-lattice tapered trouser suit with graphite hex panels, colonnade pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: orbital-silver navigation-spindle peplum over an opaque emerald asymmetric skirt with braided cyan seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: aurora-cobalt habitat-balloon bodice over opaque gold petal culottes with pearl conduit arcs and ballast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Observation blister, thermal lattice, navigation spindle and habitat balloon create four distinct orbital-station outfits while Karlovy Vary remains foregrounded. Location design vocabulary: location-only river-valley bands, colonnade rhythms, pastel facade terraces, forest slopes, cupola modules and antenna-cage geometry. Use respectful secular Czech geography and architecture through complete bridge arches, Prague rooflines, Vltava curves, Krumlov river bends, castle terraces, karst domes, colonnade rhythms and spa-valley bands. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied space-agency uniform, logo, badge, readable text, combat, threat or weaponized orbital equipment. Four visibly distinct coherent emotions: Radiance: roll 10=romantic joy, performed as romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 16=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 76=contained resentment, performed as contained resentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 18=extreme happiness, radiant laughing delight, collision resolver 81 gives distinct performance crying with visible tears, performed as crying with visible tears expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 52: Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips. Compound roll 66: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Mandatory hard-love roll 18: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. ECE leads Alia through a close partner turn while Radiance catches Alia's trailing forearm and Ellie steps into the open side to claim ECE's shoulder, creating pursuit, interruption and a clear four-way contact graph. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; ECE leads Alia's turn; Radiance catches Alia; Ellie completes visible shoulder contact. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, research station and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 25=PAWS only. Mascot holder selector 38=AI ECE. Only rolled mascots appear on a padded dry overlook far from river edges, streets, props and orbital equipment. Odd-prop roll 74 is inactive. Do not add any bizarre secondary prop; stored inactive holder 76=Ellie and family 46=portable miniature planetarium projector remain audit-only. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render rolling thunderstorm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete",
+      "requested": 4,
+      "fulfilled": 3,
+      "moderationBlocked": 1,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "complete",
+      "attemptedScenes": [
+        1510,
+        1511
+      ],
+      "acceptedScenes": [
+        1510,
+        1511
+      ],
+      "maximumPerBlockedScene": 1,
+      "reason": "Raw scenes 1510 and 1511 failed the mission-prop ownership gate; each received one exact side-profile two-hand recovery and passed."
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1508,
+      "file": "1508-czechia-prague-orbital-research-station-male-fast-pass.png",
+      "decision": "accepted-fast-pass",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-821954bb-4343-463e-b6e3-1c82b97b050f.png",
+      "audit": {
+        "coreCast": "Exactly four clearly adult core women plus the established adult male are present; Alia retains the braided anchor.",
+        "anatomy": "No glaring extra whole person or limb is visible; ten owned arms and hands read plausibly.",
+        "missionProp": "ECE alone uses a visible two-hand grip toward an empty paper target and complete backstop, away from every person and the camera.",
+        "romance": "The male sustains his strongest eye line toward ECE while the quartet forms a clear multi-contact slow-dance chain.",
+        "themeLocation": "Prague rooflines, Vltava setting and orbital-research architecture read together in one foreground composition.",
+        "deviations": [
+          "Rolled MAX-only mascot is absent."
+        ]
+      }
+    },
+    {
+      "scene": 1510,
+      "file": "1510-czechia-moravian-karst-orbital-research-station-recovery.png",
+      "decision": "accepted-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-1648bd53-c6e3-4d68-9c07-035b2db006f1.png",
+      "audit": {
+        "coreCast": "Exactly four clearly adult core women are present; Alia retains the braided anchor.",
+        "anatomy": "No glaring extra whole person or limb is visible; eight owned arms and hands read plausibly.",
+        "missionProp": "ECE alone uses a clear eye-level two-hand side-profile grip toward a visible empty paper target and complete stone backstop.",
+        "romance": "The women maintain a linked shoulder, hand and arm contact chain behind the muzzle corridor.",
+        "themeLocation": "Moravian Karst cliffs, cavern mouth and civilian orbital-research structures remain large and recognizable.",
+        "deviations": [
+          "The rolled folding solar fan is absent.",
+          "The close partner-dance beat resolves as a stationary linked contact chain."
+        ]
+      }
+    },
+    {
+      "scene": 1511,
+      "file": "1511-czechia-karlovy-vary-orbital-research-station-recovery.png",
+      "decision": "accepted-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-73ff066f-cea6-4400-a7e7-5709bc76335b.png",
+      "audit": {
+        "coreCast": "Exactly four clearly adult core women are present; Alia is the sole braided mission-prop handler.",
+        "anatomy": "No glaring extra whole person or limb is visible; eight owned arms and hands read plausibly.",
+        "missionProp": "Alia alone uses a clear two-hand side-profile grip toward a visible empty paper target and complete stone backstop.",
+        "romance": "Radiance and rainbow-hosiery ECE are the affectionate center of a visible three-person hand-and-shoulder contact cluster.",
+        "themeLocation": "Karlovy Vary hillside architecture, valley, storm and orbital-research modules read together.",
+        "deviations": [
+          "The close partner-dance beat resolves as a stationary three-person affectionate contact.",
+          "PAWS appears on a padded platform but nearer the group than requested."
+        ]
+      }
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1509,
+      "status": "terminal-renderer-output-moderation-block",
+      "requestId": "c8d3c4d2-ae46-4510-bb25-caa0fce00166",
+      "reason": "The image service rejected the output before an auditable asset was delivered."
+    },
+    {
+      "scene": 1510,
+      "status": "rejected-raw-replaced-by-accepted-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-159478eb-911b-46cd-84c8-23412c713199.png",
+      "reason": "The raw render showed one-hand mission-prop control and no visible target."
+    },
+    {
+      "scene": 1511,
+      "status": "rejected-raw-replaced-by-accepted-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-2a3509eb-d5e7-4075-8960-07fa674e23c7.png",
+      "reason": "The raw render omitted Alia and the active mission prop entirely."
+    }
+  ],
+  "xPost": {
+    "status": "eligible-queued-behind-confirmation-gated-bolivia-composer",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "acceptedCurrentCountryAssets": 3,
+    "caption": "Czechia white-heart Cuba #Czechia #WorldXXXSeries",
+    "attachmentPlan": [
+      "1508-czechia-prague-orbital-research-station-male-fast-pass.png",
+      "1510-czechia-moravian-karst-orbital-research-station-recovery.png",
+      "1504-cuba-havana-orbital-research-station-recovery.png"
+    ],
+    "reason": "An earlier exact Bolivia post remains staged in the signed-in X composer behind a required final-post confirmation. The composer was not overwritten or duplicated."
+  }
+}
