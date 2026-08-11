@@ -21,6 +21,8 @@ pub mod production_dispatch;
 pub mod production_instruction;
 #[cfg(feature = "runtime-production-open-position")]
 pub mod production_open_position;
+#[cfg(feature = "runtime-production-open-position-executor")]
+pub mod production_open_position_executor;
 #[cfg(feature = "runtime-account-lifecycle")]
 pub mod production_set_eligibility;
 #[cfg(feature = "runtime-production-settle-position-week")]

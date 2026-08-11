@@ -48,6 +48,9 @@ runtime-production-open-position = [
     "runtime-account-lifecycle",
     "runtime-token-2022-stake-ingress",
 ]
+runtime-production-open-position-executor = [
+    "runtime-production-open-position",
+]
 runtime-production-settle-position-week = [
     "runtime-write-adapter",
     "runtime-token-2022-stake-ingress",

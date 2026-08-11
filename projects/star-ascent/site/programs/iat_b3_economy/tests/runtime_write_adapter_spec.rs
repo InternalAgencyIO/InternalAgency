@@ -221,7 +221,14 @@ fn completed_ingress(
     let stake = ReadonlyTokenState {
         key: config.stake_token_account,
         mint: binding.mint(),
-        owner: binding.config(),
+        owner: derive_pda(
+            binding,
+            PdaIdentity::VaultAuthority {
+                config: binding.config(),
+            },
+        )
+        .unwrap()
+        .key,
         amount: config.staked_principal,
     };
     CompletedStakeIngress {
@@ -528,6 +535,20 @@ fn production_active_config_cas_changes_only_staked_principal_and_revalidates_pr
 
     hostile_completed = completed;
     hostile_completed.ecosystem.lane = TREASURY;
+    assert_eq!(
+        execute_production_active_config_stake_principal_cas_for_completed_ingress(
+            &gate,
+            &active_config,
+            &binding,
+            &hostile_completed,
+            &account,
+        ),
+        Err(RuntimeWriteAdapterError::CompletedStakeIngressMismatch)
+    );
+    assert_eq!(&*account.try_borrow_data().unwrap(), &original_data);
+
+    hostile_completed = completed;
+    hostile_completed.stake.owner = binding.config();
     assert_eq!(
         execute_production_active_config_stake_principal_cas_for_completed_ingress(
             &gate,

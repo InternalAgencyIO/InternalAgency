@@ -13,7 +13,7 @@ use alloc::vec::Vec;
 use core::array;
 
 use crate::native_adapter::{
-    seal_atomic_write_batch, validate_atomic_write_preconditions, AtomicWriteBatch,
+    derive_pda, seal_atomic_write_batch, validate_atomic_write_preconditions, AtomicWriteBatch,
     NativeAccountObservation, NativeAdapterError, NativeEconomyBinding, PdaIdentity,
     StateWriteIntent, StrictStateValue,
 };
@@ -208,6 +208,12 @@ pub(crate) fn require_completed_ingress_binding(
     binding: &NativeEconomyBinding,
     completed: &CompletedStakeIngress,
 ) -> Result<u64, RuntimeWriteAdapterError> {
+    let vault_authority = derive_pda(
+        binding,
+        PdaIdentity::VaultAuthority {
+            config: binding.config(),
+        },
+    )?;
     let principal_delta = completed.position.principal;
     let next_staked_principal = active_config
         .state()
@@ -228,7 +234,7 @@ pub(crate) fn require_completed_ingress_binding(
         || completed.liquidity.lane != LIQUIDITY
         || completed.stake.key != active_config.state().config.stake_token_account
         || completed.stake.mint != binding.mint()
-        || completed.stake.owner != binding.config()
+        || completed.stake.owner != vault_authority.key
         || completed.stake.amount != next_staked_principal
     {
         return Err(RuntimeWriteAdapterError::CompletedStakeIngressMismatch);

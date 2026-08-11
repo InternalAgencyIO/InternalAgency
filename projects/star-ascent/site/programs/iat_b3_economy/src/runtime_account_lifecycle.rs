@@ -1108,7 +1108,14 @@ mod tests {
             stake: ReadonlyTokenState {
                 key: config.stake_token_account,
                 mint: binding.mint(),
-                owner: binding.config(),
+                owner: derive_pda(
+                    binding,
+                    PdaIdentity::VaultAuthority {
+                        config: binding.config(),
+                    },
+                )
+                .unwrap()
+                .key,
                 amount: config.staked_principal,
             },
         }
@@ -2025,6 +2032,17 @@ mod tests {
         );
         hostile = completed;
         hostile.config.agency_count = 1;
+        assert_eq!(
+            validate_production_completed_ingress_position_lifecycle_binding(
+                &active_config,
+                &binding,
+                &hostile,
+                PAYER,
+            ),
+            Err(RuntimeAccountLifecycleError::CompletedStakeIngressMismatch)
+        );
+        hostile = completed;
+        hostile.stake.owner = binding.config();
         assert_eq!(
             validate_production_completed_ingress_position_lifecycle_binding(
                 &active_config,

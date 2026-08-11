@@ -1098,17 +1098,11 @@ fn restore_original_delegate(
     accounts: StakeIngressRuntimeAccounts<'_, '_>,
 ) -> Result<(), StakeIngressRuntimeError> {
     if let DelegateRestorationIntent::ApproveChecked(intent) = plan.restore_delegate {
-        let prior_delegate = accounts
-            .prior_delegate
-            .ok_or(StakeIngressRuntimeError::InvalidAccountBinding)?;
-        if prior_delegate.key.to_bytes() != intent.delegate
-            || prior_delegate.is_signer
-            || prior_delegate.is_writable
-            || prior_delegate.executable
-            || intent.decimals != TOKEN_DECIMALS
-        {
-            return Err(StakeIngressRuntimeError::InvalidAccountBinding);
-        }
+        let prior_delegate = require_prior_delegate_restoration_account(
+            accounts.prior_delegate,
+            intent.delegate,
+            intent.decimals,
+        )?;
         let restore = approve_checked(
             &TOKEN_2022_PROGRAM_ID,
             accounts.source.key,
@@ -1131,6 +1125,22 @@ fn restore_original_delegate(
         )?;
     }
     Ok(())
+}
+
+/// Bind only the pubkey encoded in the retained Token-2022 delegate state.
+/// `ApproveChecked` does not require the delegate to be a non-signer,
+/// read-only, or non-executable outer account. In particular, duplicate metas
+/// such as `delegate == owner` inherit unified transaction privileges.
+fn require_prior_delegate_restoration_account<'a, 'info>(
+    prior_delegate: Option<&'a AccountInfo<'info>>,
+    expected_delegate: [u8; 32],
+    decimals: u8,
+) -> Result<&'a AccountInfo<'info>, StakeIngressRuntimeError> {
+    let prior_delegate = prior_delegate.ok_or(StakeIngressRuntimeError::InvalidAccountBinding)?;
+    if prior_delegate.key.to_bytes() != expected_delegate || decimals != TOKEN_DECIMALS {
+        return Err(StakeIngressRuntimeError::InvalidAccountBinding);
+    }
+    Ok(prior_delegate)
 }
 
 #[cfg(test)]
@@ -1311,6 +1321,67 @@ mod canonical_stake_binding_tests {
             observe_stake_ingress_vault(&account, &MINT, &canonical.vault_authority).unwrap();
         assert_eq!(observed.key, canonical.stake_vault.to_bytes());
         assert_eq!(observed.owner, canonical.vault_authority.to_bytes());
+    }
+
+    #[test]
+    fn prior_delegate_restoration_accepts_unified_or_executable_outer_privileges() {
+        let owner = Pubkey::new_from_array([0xA1; 32]);
+        let native_loader = Pubkey::new_from_array([0xB1; 32]);
+
+        let mut owner_lamports = 1;
+        let mut owner_data = Vec::new();
+        let owner_delegate = AccountInfo::new(
+            &owner,
+            true,
+            true,
+            &mut owner_lamports,
+            &mut owner_data,
+            &native_loader,
+            false,
+        );
+        assert_eq!(
+            require_prior_delegate_restoration_account(
+                Some(&owner_delegate),
+                owner.to_bytes(),
+                TOKEN_DECIMALS,
+            )
+            .unwrap()
+            .key
+            .to_bytes(),
+            owner.to_bytes()
+        );
+
+        let executable = Pubkey::new_from_array([0xD1; 32]);
+        let mut executable_lamports = 1;
+        let mut executable_data = Vec::new();
+        let executable_delegate = AccountInfo::new(
+            &executable,
+            false,
+            false,
+            &mut executable_lamports,
+            &mut executable_data,
+            &native_loader,
+            true,
+        );
+        assert_eq!(
+            require_prior_delegate_restoration_account(
+                Some(&executable_delegate),
+                executable.to_bytes(),
+                TOKEN_DECIMALS,
+            )
+            .unwrap()
+            .key
+            .to_bytes(),
+            executable.to_bytes()
+        );
+        assert!(matches!(
+            require_prior_delegate_restoration_account(
+                Some(&executable_delegate),
+                owner.to_bytes(),
+                TOKEN_DECIMALS,
+            ),
+            Err(StakeIngressRuntimeError::InvalidAccountBinding)
+        ));
     }
 }
 
