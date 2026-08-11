@@ -35,6 +35,12 @@ const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const MANIFEST_PATH = fileURLToPath(new URL("../docs/b3/iat-b3-owner-policy-freeze.v1.json", import.meta.url));
 const SCHEMA_PATH = fileURLToPath(new URL("../docs/b3/iat-b3-owner-policy-freeze.v1.schema.json", import.meta.url));
 const CLI_PATH = fileURLToPath(new URL("../scripts/validate-iat-b3-owner-policy-freeze.mjs", import.meta.url));
+const STANDARD_PROGRAM_SOURCE_EQUIVALENCE_EVIDENCE_PATH = fileURLToPath(
+  new URL(
+    "../docs/b3/evidence/iat-b3-standard-program-mainnet-source-equivalence-20260811T040023Z.json",
+    import.meta.url,
+  ),
+);
 
 function canonicalManifest() {
   return loadB3OwnerPolicyFreezeManifest(MANIFEST_PATH);
@@ -885,4 +891,41 @@ test("standard-program observation rejects substituted loaders, native bytes, an
       /exact-toolchain build plus zero Loader padding/u,
     );
   }
+});
+
+test("standard-program source-equivalence evidence is source-bound, reproducible, and nonauthorizing", () => {
+  const evidence = JSON.parse(readFileSync(STANDARD_PROGRAM_SOURCE_EQUIVALENCE_EVIDENCE_PATH, "utf8"));
+  const observerPath = join(SITE_ROOT, evidence.sourceBinding.observerPath);
+  const observerSha256 = createHash("sha256").update(readFileSync(observerPath)).digest("hex");
+
+  assert.equal(evidence.schema, "iat-b3-standard-program-mainnet-source-equivalence-evidence/v1");
+  assert.equal(evidence.sourceBinding.gitHead, "bfe3c188b86c233998665962c6a3c8f8822ca3cd");
+  assert.equal(observerSha256, evidence.sourceBinding.observerSha256);
+  assert.equal(evidence.network, "mainnet-beta");
+  assert.equal(evidence.genesisHash, IAT_B3_MAINNET_GENESIS_HASH);
+  assert.equal(evidence.token2022.programId, TOKEN_2022_PROGRAM_ID);
+  assert.equal(evidence.token2022.programBytes, TOKEN_2022_OFFICIAL_RELEASE.deployedCapacityBytes);
+  assert.equal(evidence.token2022.releaseIdentity.buildArtifactBytes, TOKEN_2022_OFFICIAL_RELEASE.buildArtifactBytes);
+  assert.equal(
+    evidence.token2022.releaseIdentity.buildArtifactSha256,
+    TOKEN_2022_OFFICIAL_RELEASE.buildArtifactSha256,
+  );
+  assert.equal(evidence.token2022.releaseIdentity.taggedSourceCommit, TOKEN_2022_OFFICIAL_RELEASE.taggedSourceCommit);
+  assert.equal(evidence.token2022.releaseIdentity.repeatedCleanBuilds, 2);
+  assert.equal(evidence.token2022.releaseIdentity.exactSourceBytesRebuiltAndMatched, true);
+  assert.equal(evidence.token2022.releaseIdentity.zeroLoaderPaddingVerified, true);
+  assert.equal(evidence.sourceReleaseBindingComplete, true);
+  assert.equal(evidence.reproducibleOfficialBuildMatched, true);
+  assert.equal(evidence.token2022.immutable, false);
+  assert.equal(evidence.rpcObservationAuthenticated, false);
+  assert.equal(evidence.token2022ImmutableBytecodeVerified, false);
+  assert.equal(evidence.hostCompatibilityComplete, false);
+  assert.equal(evidence.publicNetworkWrites, false);
+  assert.equal(evidence.activationReady, false);
+  assert.equal(evidence.mainnetExecutionAuthorized, false);
+  assert.equal(evidence.mainnetStatus, "HOLD");
+  assert.equal(
+    evidence.blocker,
+    "TOKEN_2022_CEREMONY_TIME_REATTESTATION_REMAINS_REQUIRED_BECAUSE_PROGRAM_IS_UPGRADEABLE",
+  );
 });
