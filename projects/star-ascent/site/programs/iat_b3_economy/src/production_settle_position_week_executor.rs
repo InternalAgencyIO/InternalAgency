@@ -14,16 +14,19 @@ use alloc::vec::Vec;
 use crate::native_adapter::{NativeEconomyBinding, VAULT_AUTHORITY_SEED};
 use crate::production_settle_position_week::{
     prepare_runtime_production_settle_position_week_account_infos,
-    PreparedProductionSettlePositionWeek, ProductionSettlePositionError,
-    PRODUCTION_SETTLE_POSITION_STANDARD_ACCOUNT_COUNT, PRODUCTION_SETTLE_POSITION_WRITE_COUNT,
+    PreparedProductionSettlePositionWeek, PreparedProductionSettlePositionWrites,
+    ProductionSettlePositionError, PRODUCTION_SETTLE_POSITION_STANDARD_ACCOUNT_COUNT,
+    PRODUCTION_SETTLE_POSITION_WRITE_COUNT,
 };
 use crate::runtime_adapter::{
     authenticate_runtime_production_active_config, RuntimeAdapterError,
     RuntimeValidatedDailyLawWrite,
 };
+#[cfg(test)]
+use crate::runtime_write_adapter::execute_production_active_existing_write_batch_account_infos;
 use crate::runtime_write_adapter::{
-    execute_production_active_existing_write_batch_account_infos, RuntimeWriteAdapterError,
-    RuntimeWriteReceipt,
+    execute_production_active_existing_write_batch_borrowed_4_account_infos,
+    RuntimeWriteAdapterError, RuntimeWriteReceipt,
 };
 use crate::token_2022_runtime::{
     authenticate_canonical_economy_mint_account_info, CanonicalEconomyMintBinding,
@@ -213,6 +216,17 @@ struct SettleTransferCpi<'a> {
     vault_authority_bump: u8,
 }
 
+#[derive(Clone, Copy)]
+struct PreparedSettleExecutionFacts {
+    caller: [u8; 32],
+    config: [u8; 32],
+    position: [u8; 32],
+    week: u64,
+    amount: u64,
+    transfer_amounts: [u64; 3],
+    law_account_sha256: [u8; 32],
+}
+
 impl SettleTransferCpi<'_> {
     fn invoke(&self) -> ProgramResult {
         if self.transfer_index >= 3 || self.amount == 0 {
@@ -248,16 +262,195 @@ pub fn execute_runtime_production_settle_position_week_standard_account_infos(
     ProductionSettlePositionStandardExecutionReceipt,
     ProductionSettlePositionStandardExecutorError,
 > {
-    execute_with_transfers(
-        program_id,
+    require_account_count(accounts)?;
+
+    // Reuse the frozen standard-only seam verbatim before executor-only
+    // identities. Passing exactly its first 13 accounts makes an optional CCC
+    // Round structurally impossible at this executable boundary.
+    let prepared = prepare_runtime_production_settle_position_week_account_infos(
         runtime_law,
         binding,
         instruction_data,
+        &accounts[..PRODUCTION_SETTLE_POSITION_STANDARD_ACCOUNT_COUNT],
+    )?;
+    let active_config =
+        authenticate_runtime_production_active_config(runtime_law, binding, &accounts[1])?;
+    execute_production_validated_settlement_stage(
+        program_id,
+        runtime_law,
+        &active_config,
+        binding,
         accounts,
-        SettleTransferCpi::invoke,
+        prepared,
     )
 }
 
+#[inline(never)]
+fn execute_production_validated_settlement_stage<'a>(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    active_config: &crate::runtime_adapter::RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'a>],
+    prepared: PreparedProductionSettlePositionWeek,
+) -> Result<
+    ProductionSettlePositionStandardExecutionReceipt,
+    ProductionSettlePositionStandardExecutorError,
+> {
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionSettlePositionStandardExecutorError::ProgramIdentityMismatch);
+    }
+
+    require_supplemental_accounts(runtime_law, accounts)?;
+    authenticate_executor_mint(runtime_law, binding, accounts)?;
+    require_law_capability_rebound(runtime_law, &accounts[LAW_STATE_INDEX])?;
+    require_exact_transfer_plan(&prepared, binding, accounts)?;
+
+    let facts = PreparedSettleExecutionFacts {
+        caller: prepared.caller(),
+        config: prepared.config(),
+        position: prepared.position(),
+        week: prepared.plan().week,
+        amount: prepared.plan().amount,
+        transfer_amounts: prepared.plan().transfers.map(|intent| intent.amount),
+        law_account_sha256: runtime_law.law_account_sha256(),
+    };
+    execute_production_transfer_stage(
+        runtime_law,
+        active_config,
+        binding,
+        accounts,
+        prepared,
+        facts,
+    )
+}
+
+#[inline(never)]
+fn execute_production_transfer_stage<'a>(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    active_config: &crate::runtime_adapter::RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'a>],
+    prepared: PreparedProductionSettlePositionWeek,
+    facts: PreparedSettleExecutionFacts,
+) -> Result<
+    ProductionSettlePositionStandardExecutionReceipt,
+    ProductionSettlePositionStandardExecutorError,
+> {
+    let mut executed_transfer_count = execute_one_production_transfer(&prepared, 0, accounts)?;
+    executed_transfer_count = executed_transfer_count
+        .checked_add(execute_one_production_transfer(&prepared, 1, accounts)?)
+        .ok_or(ProductionSettlePositionStandardExecutorError::TransferPlanMismatch)?;
+    executed_transfer_count = executed_transfer_count
+        .checked_add(execute_one_production_transfer(&prepared, 2, accounts)?)
+        .ok_or(ProductionSettlePositionStandardExecutorError::TransferPlanMismatch)?;
+    execute_production_reload_stage(
+        runtime_law,
+        active_config,
+        binding,
+        accounts,
+        prepared,
+        facts,
+        executed_transfer_count,
+    )
+}
+
+#[inline(never)]
+fn execute_one_production_transfer<'a>(
+    prepared: &PreparedProductionSettlePositionWeek,
+    transfer_index: usize,
+    accounts: &[AccountInfo<'a>],
+) -> Result<u8, ProductionSettlePositionStandardExecutorError> {
+    let amount = prepared
+        .plan()
+        .transfers
+        .get(transfer_index)
+        .ok_or(ProductionSettlePositionStandardExecutorError::TransferPlanMismatch)?
+        .amount;
+    if amount == 0 {
+        return Ok(0);
+    }
+    build_settle_transfer_cpi(prepared, transfer_index, accounts)?.invoke()?;
+    Ok(1)
+}
+
+#[inline(never)]
+fn execute_production_reload_stage<'a>(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    active_config: &crate::runtime_adapter::RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'a>],
+    prepared: PreparedProductionSettlePositionWeek,
+    facts: PreparedSettleExecutionFacts,
+    executed_transfer_count: u8,
+) -> Result<
+    ProductionSettlePositionStandardExecutionReceipt,
+    ProductionSettlePositionStandardExecutorError,
+> {
+    let mut writes = PreparedProductionSettlePositionWrites::empty();
+    prepared.prepare_post_transfer_write_intents_account_infos(
+        runtime_law.gate(),
+        binding,
+        [
+            &accounts[SOURCE_TOKEN_INDICES[0]],
+            &accounts[SOURCE_TOKEN_INDICES[1]],
+            &accounts[SOURCE_TOKEN_INDICES[2]],
+        ],
+        &accounts[DESTINATION_TOKEN_INDEX],
+        &mut writes,
+    )?;
+    execute_production_settlement_write_stage(
+        runtime_law,
+        active_config,
+        binding,
+        accounts,
+        &writes,
+        facts,
+        executed_transfer_count,
+    )
+}
+
+#[inline(never)]
+fn execute_production_settlement_write_stage(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    active_config: &crate::runtime_adapter::RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    writes: &PreparedProductionSettlePositionWrites,
+    facts: PreparedSettleExecutionFacts,
+    executed_transfer_count: u8,
+) -> Result<
+    ProductionSettlePositionStandardExecutionReceipt,
+    ProductionSettlePositionStandardExecutorError,
+> {
+    let batch = writes.seal_borrowed(runtime_law.gate(), binding)?;
+    let write_accounts = [
+        accounts[POSITION_INDEX].clone(),
+        accounts[LANE_STATE_INDICES[0]].clone(),
+        accounts[LANE_STATE_INDICES[1]].clone(),
+        accounts[LANE_STATE_INDICES[2]].clone(),
+    ];
+    let state_write = execute_production_active_existing_write_batch_borrowed_4_account_infos(
+        runtime_law.gate(),
+        active_config,
+        binding,
+        batch,
+        &write_accounts,
+    )?;
+    Ok(ProductionSettlePositionStandardExecutionReceipt {
+        caller: facts.caller,
+        config: facts.config,
+        position: facts.position,
+        week: facts.week,
+        amount: facts.amount,
+        transfer_amounts: facts.transfer_amounts,
+        executed_transfer_count,
+        law_account_sha256: facts.law_account_sha256,
+        state_write,
+    })
+}
+
+#[cfg(test)]
 #[inline(never)]
 fn execute_with_transfers<'a, F>(
     program_id: &Pubkey,

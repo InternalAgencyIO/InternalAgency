@@ -12,10 +12,12 @@ extern crate alloc;
 use alloc::boxed::Box;
 
 use crate::native_adapter::{
-    derive_pda, prepare_existing_state_write, seal_atomic_write_batch, AtomicWriteBatch,
-    AuthenticatedStateAccount, NativeAdapterError, NativeEconomyBinding, PdaIdentity,
-    StrictStateValue,
+    derive_pda, prepare_existing_state_write_intent, seal_existing_write_batch_borrowed,
+    AuthenticatedStateAccount, BorrowedExistingWriteBatch, ExistingStateWriteIntent,
+    NativeAdapterError, NativeEconomyBinding, PdaIdentity, StrictStateValue,
 };
+#[cfg(not(target_os = "solana"))]
+use crate::native_adapter::{seal_atomic_write_batch, AtomicWriteBatch, StateWriteIntent};
 use crate::production_instruction::{
     decode_production_instruction, ProductionInstruction, ProductionInstructionError,
 };
@@ -103,6 +105,7 @@ pub enum ProductionSettlePositionError {
     TokenReloadIdentityMismatch,
     TokenReloadAmountMismatch,
     TokenBalanceArithmetic,
+    PreparedStateIncomplete,
     Runtime(RuntimeAdapterError),
     Native(NativeAdapterError),
     Economy(EconomyError),
@@ -144,6 +147,126 @@ pub struct PreparedProductionSettlePositionWeek {
     destination_before: SourceTokenState,
 }
 
+pub(crate) struct PreparedProductionSettlePositionWrites {
+    position: Option<ExistingStateWriteIntent>,
+    treasury: Option<ExistingStateWriteIntent>,
+    ecosystem: Option<ExistingStateWriteIntent>,
+    liquidity: Option<ExistingStateWriteIntent>,
+}
+
+impl PreparedProductionSettlePositionWrites {
+    pub(crate) const fn empty() -> Self {
+        Self {
+            position: None,
+            treasury: None,
+            ecosystem: None,
+            liquidity: None,
+        }
+    }
+
+    #[inline(never)]
+    pub(crate) fn seal_borrowed<'a>(
+        &'a self,
+        gate: &ValidatedDailyLawWrite,
+        binding: &NativeEconomyBinding,
+    ) -> Result<
+        BorrowedExistingWriteBatch<'a, PRODUCTION_SETTLE_POSITION_WRITE_COUNT>,
+        ProductionSettlePositionError,
+    > {
+        let position = self
+            .position
+            .as_ref()
+            .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?;
+        let treasury = self
+            .treasury
+            .as_ref()
+            .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?;
+        let ecosystem = self
+            .ecosystem
+            .as_ref()
+            .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?;
+        let liquidity = self
+            .liquidity
+            .as_ref()
+            .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?;
+        seal_existing_write_batch_borrowed(
+            gate,
+            binding,
+            [position, treasury, ecosystem, liquidity],
+        )
+        .map_err(Into::into)
+    }
+
+    #[cfg(not(target_os = "solana"))]
+    #[cfg_attr(not(test), allow(dead_code))]
+    fn into_owning_batch(
+        mut self,
+        gate: &ValidatedDailyLawWrite,
+        binding: &NativeEconomyBinding,
+    ) -> Result<
+        AtomicWriteBatch<PRODUCTION_SETTLE_POSITION_WRITE_COUNT>,
+        ProductionSettlePositionError,
+    > {
+        let intents = [
+            StateWriteIntent::Existing(
+                self.position
+                    .take()
+                    .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+            ),
+            StateWriteIntent::Existing(
+                self.treasury
+                    .take()
+                    .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+            ),
+            StateWriteIntent::Existing(
+                self.ecosystem
+                    .take()
+                    .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+            ),
+            StateWriteIntent::Existing(
+                self.liquidity
+                    .take()
+                    .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+            ),
+        ];
+        seal_atomic_write_batch(gate, binding, intents).map_err(Into::into)
+    }
+}
+
+struct SettlePreparationSlots {
+    caller: [u8; 32],
+    config: [u8; 32],
+    position: [u8; 32],
+    vault_authority: [u8; 32],
+    position_authenticated: Option<AuthenticatedStateAccount>,
+    round: Option<RoundState>,
+    treasury_authenticated: Option<AuthenticatedStateAccount>,
+    ecosystem_authenticated: Option<AuthenticatedStateAccount>,
+    liquidity_authenticated: Option<AuthenticatedStateAccount>,
+    source_before: Option<[ReadonlyTokenState; 3]>,
+    destination_before: Option<SourceTokenState>,
+    plan: Option<Box<SettlePositionWeekPreCpiPlan>>,
+}
+
+impl SettlePreparationSlots {
+    const fn empty(caller: [u8; 32], config: [u8; 32], position: [u8; 32]) -> Self {
+        Self {
+            caller,
+            config,
+            position,
+            vault_authority: [0; 32],
+            position_authenticated: None,
+            round: None,
+            treasury_authenticated: None,
+            ecosystem_authenticated: None,
+            liquidity_authenticated: None,
+            source_before: None,
+            destination_before: None,
+            plan: None,
+        }
+    }
+}
+
 impl PreparedProductionSettlePositionWeek {
     pub const fn caller(&self) -> [u8; 32] {
         self.caller
@@ -169,6 +292,7 @@ impl PreparedProductionSettlePositionWeek {
     /// ordered hook-aware token executor holding the same live AccountInfos.
     /// This function performs reload validation and seals CAS intents, but it
     /// never invokes Token-2022 or executes the returned state batch.
+    #[cfg(not(target_os = "solana"))]
     #[cfg_attr(not(test), allow(dead_code))]
     pub(crate) fn seal_post_transfer_cas_account_infos(
         self,
@@ -180,6 +304,73 @@ impl PreparedProductionSettlePositionWeek {
         AtomicWriteBatch<PRODUCTION_SETTLE_POSITION_WRITE_COUNT>,
         ProductionSettlePositionError,
     > {
+        let mut prepared = PreparedProductionSettlePositionWrites::empty();
+        self.prepare_post_transfer_write_intents_account_infos(
+            gate,
+            binding,
+            source_accounts,
+            destination_account,
+            &mut prepared,
+        )?;
+        prepared.into_owning_batch(gate, binding)
+    }
+
+    /// Live executor boundary. Exact Token-2022 reloads complete before any
+    /// state intent is prepared; every intent is then written into a distinct
+    /// caller-owned slot so no aggregate postimage return area is required.
+    #[inline(never)]
+    pub(crate) fn prepare_post_transfer_write_intents_account_infos(
+        self,
+        gate: &ValidatedDailyLawWrite,
+        binding: &NativeEconomyBinding,
+        source_accounts: [&AccountInfo<'_>; 3],
+        destination_account: &AccountInfo<'_>,
+        prepared: &mut PreparedProductionSettlePositionWrites,
+    ) -> Result<(), ProductionSettlePositionError> {
+        self.require_exact_reload_account_infos(source_accounts, destination_account)?;
+
+        // Retained V2 performs these two Position operations only after every
+        // nonzero transfer CPI succeeds. Keeping them here preserves that
+        // precedence for the runtime executor.
+        let mut position = self.plan.position;
+        position.paid = position.paid.checked_add(self.plan.amount).ok_or(
+            ProductionSettlePositionError::Economy(EconomyError::ArithmeticOverflow),
+        )?;
+        position.settled_mask |= self.plan.settlement_bit;
+
+        prepared.position = Some(prepare_existing_state_write_intent(
+            gate,
+            binding,
+            &self.authenticated[0],
+            StrictStateValue::Position(position),
+        )?);
+        prepared.treasury = Some(prepare_existing_state_write_intent(
+            gate,
+            binding,
+            &self.authenticated[1],
+            StrictStateValue::Lane(self.plan.treasury),
+        )?);
+        prepared.ecosystem = Some(prepare_existing_state_write_intent(
+            gate,
+            binding,
+            &self.authenticated[2],
+            StrictStateValue::Lane(self.plan.ecosystem),
+        )?);
+        prepared.liquidity = Some(prepare_existing_state_write_intent(
+            gate,
+            binding,
+            &self.authenticated[3],
+            StrictStateValue::Lane(self.plan.liquidity),
+        )?);
+        Ok(())
+    }
+
+    #[inline(never)]
+    fn require_exact_reload_account_infos(
+        &self,
+        source_accounts: [&AccountInfo<'_>; 3],
+        destination_account: &AccountInfo<'_>,
+    ) -> Result<(), ProductionSettlePositionError> {
         let vault_authority = Pubkey::new_from_array(self.vault_authority);
         let mint = Pubkey::new_from_array(self.plan.config_snapshot.mint);
         let after = [
@@ -196,45 +387,7 @@ impl PreparedProductionSettlePositionWeek {
             &Pubkey::new_from_array(self.plan.position.owner),
         )
         .map_err(|_| ProductionSettlePositionError::DestinationTokenRejected)?;
-        self.require_exact_reload_deltas(after, destination_after)?;
-
-        // Retained V2 performs these two Position operations only after every
-        // nonzero transfer CPI succeeds. Keeping them here preserves that
-        // precedence for the future runtime executor.
-        let mut position = self.plan.position;
-        position.paid = position.paid.checked_add(self.plan.amount).ok_or(
-            ProductionSettlePositionError::Economy(EconomyError::ArithmeticOverflow),
-        )?;
-        position.settled_mask |= self.plan.settlement_bit;
-
-        let authenticated = *self.authenticated;
-        let intents = [
-            prepare_existing_state_write(
-                gate,
-                binding,
-                &authenticated[0],
-                StrictStateValue::Position(position),
-            )?,
-            prepare_existing_state_write(
-                gate,
-                binding,
-                &authenticated[1],
-                StrictStateValue::Lane(self.plan.treasury),
-            )?,
-            prepare_existing_state_write(
-                gate,
-                binding,
-                &authenticated[2],
-                StrictStateValue::Lane(self.plan.ecosystem),
-            )?,
-            prepare_existing_state_write(
-                gate,
-                binding,
-                &authenticated[3],
-                StrictStateValue::Lane(self.plan.liquidity),
-            )?,
-        ];
-        seal_atomic_write_batch(gate, binding, intents).map_err(Into::into)
+        self.require_exact_reload_deltas(after, destination_after)
     }
 
     #[cfg_attr(not(test), allow(dead_code))]
@@ -336,6 +489,7 @@ pub fn prepare_runtime_production_settle_position_week_account_infos(
     let layout = AccountLayout::for_count(accounts.len())?;
     let active_config =
         authenticate_runtime_production_active_config(runtime_law, binding, &accounts[1])?;
+    let mut prepared = None;
     prepare_with_active_config(
         runtime_law.gate(),
         &active_config,
@@ -343,7 +497,9 @@ pub fn prepare_runtime_production_settle_position_week_account_infos(
         accounts,
         layout,
         week,
-    )
+        &mut prepared,
+    )?;
+    prepared.ok_or(ProductionSettlePositionError::PreparedStateIncomplete)
 }
 
 /// Host/rehearsal seam. Runtime composition must use
@@ -360,7 +516,17 @@ pub fn prepare_production_settle_position_week_account_infos(
     let layout = AccountLayout::for_count(accounts.len())?;
     let active_config =
         authenticate_production_active_config_account_info(gate, binding, &accounts[1])?;
-    prepare_with_active_config(gate, &active_config, binding, accounts, layout, week)
+    let mut prepared = None;
+    prepare_with_active_config(
+        gate,
+        &active_config,
+        binding,
+        accounts,
+        layout,
+        week,
+        &mut prepared,
+    )?;
+    prepared.ok_or(ProductionSettlePositionError::PreparedStateIncomplete)
 }
 
 fn require_settle_position_instruction(
@@ -372,6 +538,7 @@ fn require_settle_position_instruction(
     }
 }
 
+#[inline(never)]
 fn prepare_with_active_config(
     gate: &ValidatedDailyLawWrite,
     active_config: &RuntimeProductionActiveConfig,
@@ -379,19 +546,17 @@ fn prepare_with_active_config(
     accounts: &[AccountInfo<'_>],
     layout: AccountLayout,
     week: u64,
-) -> Result<PreparedProductionSettlePositionWeek, ProductionSettlePositionError> {
+    prepared: &mut Option<PreparedProductionSettlePositionWeek>,
+) -> Result<(), ProductionSettlePositionError> {
     let caller = authenticate_caller(gate, binding, &accounts[0])?;
     let config = active_config.state().config;
     if config.mint != binding.mint() || config.token_program != TOKEN_2022_PROGRAM_ID.to_bytes() {
         return Err(ProductionSettlePositionError::AccountBindingMismatch);
     }
 
-    let (position_authenticated, position) =
-        authenticate_position(gate, binding, &accounts[2], active_config.key())?;
-    let round = layout
-        .round
-        .map(|index| parse_optional_round(binding, &accounts[index]))
-        .transpose()?;
+    let mut slots =
+        SettlePreparationSlots::empty(caller, active_config.key(), accounts[2].key.to_bytes());
+    prepare_position_round_slots(gate, active_config, binding, accounts, layout, &mut slots)?;
     require_mint_meta(binding, &accounts[layout.mint])?;
     require_token_program(&accounts[layout.token_program])?;
 
@@ -405,32 +570,84 @@ fn prepare_with_active_config(
         return Err(ProductionSettlePositionError::AccountBindingMismatch);
     }
     require_vault_authority_meta(&accounts[layout.vault_authority], vault_authority.key)?;
+    slots.vault_authority = vault_authority.key;
 
-    let (treasury_authenticated, treasury) = authenticate_lane(
+    prepare_lane_slots(gate, active_config, binding, accounts, layout, &mut slots)?;
+    prepare_token_observation_slots(binding, accounts, layout, &mut slots)?;
+    prepare_settle_plan_slot(gate, active_config, binding, week, &mut slots)?;
+    finish_prepared_settlement(&mut slots, prepared)
+}
+
+#[inline(never)]
+fn prepare_position_round_slots(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    layout: AccountLayout,
+    slots: &mut SettlePreparationSlots,
+) -> Result<(), ProductionSettlePositionError> {
+    let (authenticated, _) =
+        authenticate_position(gate, binding, &accounts[2], active_config.key())?;
+    slots.position_authenticated = Some(authenticated);
+    slots.round = layout
+        .round
+        .map(|index| parse_optional_round(binding, &accounts[index]))
+        .transpose()?;
+    Ok(())
+}
+
+#[inline(never)]
+fn prepare_lane_slots(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    layout: AccountLayout,
+    slots: &mut SettlePreparationSlots,
+) -> Result<(), ProductionSettlePositionError> {
+    let (authenticated, _) = authenticate_lane(
         gate,
         binding,
         &accounts[layout.treasury],
         active_config.key(),
         TREASURY,
     )?;
-    let (ecosystem_authenticated, ecosystem) = authenticate_lane(
+    slots.treasury_authenticated = Some(authenticated);
+    let (authenticated, _) = authenticate_lane(
         gate,
         binding,
         &accounts[layout.ecosystem],
         active_config.key(),
         ECOSYSTEM,
     )?;
-    let (liquidity_authenticated, liquidity) = authenticate_lane(
+    slots.ecosystem_authenticated = Some(authenticated);
+    let (authenticated, _) = authenticate_lane(
         gate,
         binding,
         &accounts[layout.liquidity],
         active_config.key(),
         LIQUIDITY,
     )?;
+    slots.liquidity_authenticated = Some(authenticated);
+    Ok(())
+}
+
+#[inline(never)]
+fn prepare_token_observation_slots(
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    layout: AccountLayout,
+    slots: &mut SettlePreparationSlots,
+) -> Result<(), ProductionSettlePositionError> {
+    let position = require_position_slot(slots)?;
+    let treasury = require_lane_slot(&slots.treasury_authenticated)?;
+    let ecosystem = require_lane_slot(&slots.ecosystem_authenticated)?;
+    let liquidity = require_lane_slot(&slots.liquidity_authenticated)?;
 
     let mint = Pubkey::new_from_array(binding.mint());
-    let vault = Pubkey::new_from_array(vault_authority.key);
-    let source_before = [
+    let vault = Pubkey::new_from_array(slots.vault_authority);
+    slots.source_before = Some([
         observe_lane_token(
             &accounts[layout.treasury_tokens],
             treasury.token_account,
@@ -449,46 +666,129 @@ fn prepare_with_active_config(
             &mint,
             &vault,
         )?,
-    ];
-    let destination_before = observe_stake_ingress_source(
-        &accounts[layout.destination_tokens],
-        &mint,
-        &Pubkey::new_from_array(position.owner),
-    )
-    .map_err(|_| ProductionSettlePositionError::DestinationTokenRejected)?;
+    ]);
+    slots.destination_before = Some(
+        observe_stake_ingress_source(
+            &accounts[layout.destination_tokens],
+            &mint,
+            &Pubkey::new_from_array(position.owner),
+        )
+        .map_err(|_| ProductionSettlePositionError::DestinationTokenRejected)?,
+    );
+    Ok(())
+}
 
-    let plan = prepare_settle_position_week(
-        gate,
-        PrepareSettlePositionWeekInput {
-            config_key: active_config.key(),
-            config,
-            position,
-            round,
-            mint: binding.mint(),
-            vault_authority: vault_authority.key,
-            destination_tokens: destination_before.token,
-            treasury,
-            ecosystem,
-            liquidity,
-            week,
-        },
-    )?;
+#[inline(never)]
+fn prepare_settle_plan_slot(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    week: u64,
+    slots: &mut SettlePreparationSlots,
+) -> Result<(), ProductionSettlePositionError> {
+    let position = require_position_slot(slots)?;
+    let treasury = require_lane_slot(&slots.treasury_authenticated)?;
+    let ecosystem = require_lane_slot(&slots.ecosystem_authenticated)?;
+    let liquidity = require_lane_slot(&slots.liquidity_authenticated)?;
+    let destination_before = slots
+        .destination_before
+        .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?;
 
-    Ok(PreparedProductionSettlePositionWeek {
-        caller,
-        config: active_config.key(),
-        position: accounts[2].key.to_bytes(),
-        vault_authority: vault_authority.key,
-        plan: Box::new(plan),
+    let input = PrepareSettlePositionWeekInput {
+        config_key: active_config.key(),
+        config: active_config.state().config,
+        position,
+        round: slots.round,
+        mint: binding.mint(),
+        vault_authority: slots.vault_authority,
+        destination_tokens: destination_before.token,
+        treasury,
+        ecosystem,
+        liquidity,
+        week,
+    };
+    store_settle_plan(gate, input, &mut slots.plan)
+}
+
+#[inline(never)]
+fn store_settle_plan(
+    gate: &ValidatedDailyLawWrite,
+    input: PrepareSettlePositionWeekInput,
+    plan: &mut Option<Box<SettlePositionWeekPreCpiPlan>>,
+) -> Result<(), ProductionSettlePositionError> {
+    *plan = Some(Box::new(prepare_settle_position_week(gate, input)?));
+    Ok(())
+}
+
+#[inline(never)]
+fn finish_prepared_settlement(
+    slots: &mut SettlePreparationSlots,
+    prepared: &mut Option<PreparedProductionSettlePositionWeek>,
+) -> Result<(), ProductionSettlePositionError> {
+    *prepared = Some(PreparedProductionSettlePositionWeek {
+        caller: slots.caller,
+        config: slots.config,
+        position: slots.position,
+        vault_authority: slots.vault_authority,
+        plan: slots
+            .plan
+            .take()
+            .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
         authenticated: Box::new([
-            position_authenticated,
-            treasury_authenticated,
-            ecosystem_authenticated,
-            liquidity_authenticated,
+            slots
+                .position_authenticated
+                .take()
+                .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+            slots
+                .treasury_authenticated
+                .take()
+                .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+            slots
+                .ecosystem_authenticated
+                .take()
+                .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+            slots
+                .liquidity_authenticated
+                .take()
+                .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
         ]),
-        source_before,
-        destination_before,
-    })
+        source_before: slots
+            .source_before
+            .take()
+            .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+        destination_before: slots
+            .destination_before
+            .take()
+            .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?,
+    });
+    Ok(())
+}
+
+fn require_position_slot(
+    slots: &SettlePreparationSlots,
+) -> Result<PositionState, ProductionSettlePositionError> {
+    match slots
+        .position_authenticated
+        .as_ref()
+        .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?
+        .state()
+    {
+        StrictStateValue::Position(state) => Ok(state),
+        _ => Err(ProductionSettlePositionError::StateTypeMismatch),
+    }
+}
+
+fn require_lane_slot(
+    slot: &Option<AuthenticatedStateAccount>,
+) -> Result<LaneState, ProductionSettlePositionError> {
+    match slot
+        .as_ref()
+        .ok_or(ProductionSettlePositionError::PreparedStateIncomplete)?
+        .state()
+    {
+        StrictStateValue::Lane(state) => Ok(state),
+        _ => Err(ProductionSettlePositionError::StateTypeMismatch),
+    }
 }
 
 fn authenticate_caller(
