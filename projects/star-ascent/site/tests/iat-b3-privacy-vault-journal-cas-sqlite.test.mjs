@@ -565,6 +565,9 @@ test("post-bind verifier artifact substitution is detected before another commit
   const tampered = readFileSync(copiedArtifact);
   tampered[0] ^= 1;
   writeFileSync(copiedArtifact, tampered);
-  assert.throws(() => commit(adapter, 0), /Rust verifier artifact (SHA-256 mismatch|identity changed)/);
+  const expectedSubstitutionError = process.platform === "win32"
+    ? /Rust verifier artifact (SHA-256 mismatch|identity changed)/
+    : /verifier launch executable (SHA-256 mismatch|identity changed)/;
+  assert.throws(() => commit(adapter, 0), expectedSubstitutionError);
   adapter.close();
 });
