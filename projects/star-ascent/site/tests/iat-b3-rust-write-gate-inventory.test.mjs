@@ -77,6 +77,10 @@ const economySbfPreflightSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/sbf_preflight.rs", import.meta.url),
   "utf8",
 );
+const economyProductionInstructionSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/production_instruction.rs", import.meta.url),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -779,6 +783,21 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
   assert.match(
     lawAdapter,
     /source file[\s\S]+src\/stake_ingress\.rs[\s\S]+not exported[\s\S]+deployable crate module graph/u,
+  );
+});
+
+test("the exact OpenPosition production codec is frozen without a dispatcher or entrypoint", () => {
+  assert.match(economySource, /pub mod production_instruction;/u);
+  assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_NAMESPACE: &\[u8; 8\] = b"IATB3EC1"/u);
+  assert.match(economyProductionInstructionSource, /OPEN_POSITION_OPCODE: u8 = 6/u);
+  assert.match(economyProductionInstructionSource, /OPEN_POSITION_INSTRUCTION_LEN: usize = 32/u);
+  assert.match(economyProductionInstructionSource, /all_15_instruction_abi_frozen: false/u);
+  assert.match(economyProductionInstructionSource, /production_dispatcher_exposed: false/u);
+  assert.match(economyProductionInstructionSource, /production_entrypoint_exposed: false/u);
+  assert.match(economyProductionInstructionSource, /mainnet_hold: true/u);
+  assert.doesNotMatch(
+    economyProductionInstructionSource,
+    /AccountInfo|process_instruction|entrypoint!|invoke(?:_signed)?\s*\(|try_borrow_mut|RpcClient/u,
   );
 });
 

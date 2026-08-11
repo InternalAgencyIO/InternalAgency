@@ -388,6 +388,12 @@ any Token-2022 CPI, then executes the Config/lane CAS. A later callback failure 
 inside the same instruction and requires rollback of all earlier Token-2022 and
 System CPIs.
 No handler or release gate is complete.
+The separate pure `production_instruction` module now freezes the exact
+32-byte `OpenPosition` envelope (`IATB3EC1`, version 1, retained ordinal 6,
+six zero reserved bytes, little-endian position id and principal). It performs
+no semantic policy check, account read, dispatch, CPI, or write, so Daily Law
+can still remain first when the future production dispatcher is composed. The
+other fourteen production instruction codecs and the dispatcher remain absent.
 The older unphased combined entry remains only for the pinned structural SBF
 fixture and is not the production route.
 

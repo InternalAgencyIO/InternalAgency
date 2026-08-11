@@ -210,6 +210,15 @@ earlier Token-2022 and System CPIs. There is still no public lifecycle
 dispatcher, frozen identity, entrypoint, or public ABI; those remain the
 security boundary.
 
+The first exact production instruction representation is now isolated in the
+pure `production_instruction` module. `OpenPosition` is a strict 32-byte
+`IATB3EC1` version-1 envelope using retained handler ordinal 6, six zero
+reserved bytes, and little-endian `position_id` plus `principal`. The decoder
+does not evaluate principal policy, read accounts, dispatch, invoke CPI, or
+write state; therefore it cannot run ahead of Daily Law. The other fourteen
+production codecs, the all-15 ABI, dispatcher, entrypoint, and identities are
+still incomplete and Mainnet remains HOLD.
+
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
 a mint-authority operation and it is not a Transfer Hook call.
