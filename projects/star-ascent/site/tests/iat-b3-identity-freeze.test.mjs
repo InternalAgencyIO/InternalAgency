@@ -17,6 +17,10 @@ const draft = JSON.parse(readFileSync(
   new URL("../docs/b3/iat-b3-identity-freeze.v1.json", import.meta.url),
   "utf8",
 ));
+const ownerPolicyBytes = readFileSync(
+  new URL("../docs/b3/iat-b3-owner-policy-freeze.v1.json", import.meta.url),
+);
+const productionOptions = Object.freeze({ ownerPolicyBytes });
 
 function clone(value) {
   return structuredClone(value);
@@ -62,11 +66,13 @@ function expectBlocked(mutator, pattern) {
 }
 
 test("the production identity-freeze draft is honestly BLOCKED and never claims release readiness", () => {
-  const result = validateIdentityFreezeManifest(draft);
+  const result = validateIdentityFreezeManifest(draft, productionOptions);
   assert.equal(result.valid, true);
   assert.equal(result.identityFreezeReady, false);
   assert.equal(result.productionIdentityReady, false);
   assert.equal(result.productionCombinedArtifactBindingReady, false);
+  assert.equal(result.ownerPolicyBindingVerified, true);
+  assert.equal(result.ownerPolicyExternalTruthVerified, false);
   assert.equal(result.combinedArtifactBuildEnvironment, null);
   assert.equal("productionReady" in result, false);
   assert.ok(result.blockers.length >= 7);
@@ -79,11 +85,49 @@ test("the production identity-freeze draft is honestly BLOCKED and never claims 
     "REVIEWED_BINARY_HASHES_OR_DEPLOYED_BYTES",
     "MAINNET_OR_RELEASE_READINESS",
   ]);
-  assert.throws(() => assertIdentityFreezeReady(draft), /identity freeze is not ready/iu);
+  assert.throws(() => assertIdentityFreezeReady(draft, productionOptions), /identity freeze is not ready/iu);
   assert.throws(
-    () => assertProductionCombinedArtifactBindingReady(draft),
+    () => assertProductionCombinedArtifactBindingReady(draft, productionOptions),
     /production combined-artifact binding is not ready/iu,
   );
+});
+
+test("the owner-selected new Token-2022 inception choice is byte-bound and never self-attests external truth", () => {
+  assert.deepEqual(draft.ownerPolicyBinding.requiredLiveEstateOwnerChoices, {
+    liveEstateAssertion: "NO_LIVE_ESTATE_MINT",
+    candidateMint: null,
+    candidateTokenProgramId: null,
+    canonicalMintDecision: "NEW_TOKEN_2022_FROM_INCEPTION",
+    duplicateSupplyRetirementPolicy: "NOT_APPLICABLE",
+  });
+  const withoutPacket = validateIdentityFreezeManifest(draft);
+  assert.equal(withoutPacket.ownerPolicyBindingVerified, false);
+  assert.match(withoutPacket.blockers.join("\n"), /exact committed owner-policy packet bytes were not supplied/iu);
+
+  const tamperedPacket = Buffer.from(ownerPolicyBytes);
+  tamperedPacket[tamperedPacket.length - 2] ^= 1;
+  const tamperedResult = validateIdentityFreezeManifest(draft, { ownerPolicyBytes: tamperedPacket });
+  assert.equal(tamperedResult.ownerPolicyBindingVerified, false);
+  assert.match(tamperedResult.violations.join("\n"), /do not match the frozen digest/iu);
+
+  const substitutedChoice = clone(draft);
+  substitutedChoice.ownerPolicyBinding.requiredLiveEstateOwnerChoices.canonicalMintDecision = "ADOPT_EXISTING_COMPATIBLE_TOKEN_2022";
+  const substitutedResult = validateIdentityFreezeManifest(substitutedChoice, productionOptions);
+  assert.equal(substitutedResult.ownerPolicyBindingVerified, false);
+  assert.match(substitutedResult.violations.join("\n"), /owner-selected inception tuple drifted/iu);
+
+  const identityDrift = clone(draft);
+  identityDrift.identities.canonicalMint = COMBINED_HOOK_HOST_TEST_IDENTITIES.canonicalMint;
+  const identityDriftResult = validateIdentityFreezeManifest(identityDrift, productionOptions);
+  assert.match(
+    identityDriftResult.violations.join("\n"),
+    /identities\.canonicalMint: must equal the exact owner-policy PRODUCTION_IDENTITY_INPUT_FREEZE choice/iu,
+  );
+
+  const prematureSeedFreeze = clone(draft);
+  for (const seed of prematureSeedFreeze.seedTable) Object.assign(seed, { status: "FROZEN", blocker: null });
+  const seedResult = validateIdentityFreezeManifest(prematureSeedFreeze, productionOptions);
+  assert.match(seedResult.violations.join("\n"), /must exactly match the owner-policy acceptCanonicalSeedTable choice/iu);
 });
 
 test("a complete, explicitly test-only freeze fixture passes every semantic check", () => {
@@ -217,7 +261,7 @@ test("combined artifact inputs are exact, owner-only, and cannot self-freeze", (
   const premature = clone(draft);
   premature.combinedArtifactBinding.status = "FROZEN";
   premature.combinedArtifactBinding.blocker = null;
-  const prematureResult = validateIdentityFreezeManifest(premature);
+  const prematureResult = validateIdentityFreezeManifest(premature, productionOptions);
   assert.equal(prematureResult.productionCombinedArtifactBindingReady, false);
   assert.match(
     prematureResult.violations.join("\n"),

@@ -1,8 +1,14 @@
 #!/usr/bin/env node
 
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+
+import {
+  parseB3OwnerPolicyFreezeJson,
+  validateB3OwnerPolicyFreezeManifest,
+} from "./validate-iat-b3-owner-policy-freeze.mjs";
 
 export const TOKEN_2022_PROGRAM_ID = "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb";
 export const IAT_V2_PROGRAM_ID = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
@@ -15,6 +21,7 @@ const TOP_LEVEL_KEYS = [
   "profile",
   "readiness",
   "scope",
+  "ownerPolicyBinding",
   "identities",
   "combinedArtifactBinding",
   "clusterPolicy",
@@ -33,6 +40,22 @@ const SCOPE_EXCLUSIONS = Object.freeze([
   "REVIEWED_BINARY_HASHES_OR_DEPLOYED_BYTES",
   "MAINNET_OR_RELEASE_READINESS",
 ]);
+export const PRODUCTION_OWNER_POLICY_BINDING = Object.freeze({
+  status: "FROZEN",
+  packetPath: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+  packetSha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+  liveEstateNodeId: "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+  requiredLiveEstateOwnerChoices: Object.freeze({
+    liveEstateAssertion: "NO_LIVE_ESTATE_MINT",
+    candidateMint: null,
+    candidateTokenProgramId: null,
+    canonicalMintDecision: "NEW_TOKEN_2022_FROM_INCEPTION",
+    duplicateSupplyRetirementPolicy: "NOT_APPLICABLE",
+  }),
+  inputPolicy: "EXACT_COMMITTED_OWNER_POLICY_PACKET_ONLY",
+  testFixturesSatisfyProduction: false,
+  blocker: null,
+});
 export const TEST_FIXTURE_IDENTITIES = Object.freeze({
   lawProgramId: "29dv8e1WcjL4w6a7HDaHbUfXrF12yiJiVcKQ1qgeT3rF",
   economyProgramId: "2xfTrFbdiJtncBaCWoVK5yvgn9XT4UYZCWKGiQDqR3ij",
@@ -234,6 +257,119 @@ function exactKeys(value, expected, path, violations) {
     return false;
   }
   return true;
+}
+
+function validateOwnerPolicyBinding(manifest, options, blockers, violations) {
+  const violationCountBeforeBinding = violations.length;
+  const binding = manifest.ownerPolicyBinding;
+  const expected = PRODUCTION_OWNER_POLICY_BINDING;
+  const bindingKeys = [
+    "status",
+    "packetPath",
+    "packetSha256",
+    "liveEstateNodeId",
+    "requiredLiveEstateOwnerChoices",
+    "inputPolicy",
+    "testFixturesSatisfyProduction",
+    "blocker",
+  ];
+  if (!exactKeys(binding, bindingKeys, "ownerPolicyBinding", violations)) {
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+  for (const key of bindingKeys.filter((key) => key !== "requiredLiveEstateOwnerChoices")) {
+    if (binding[key] !== expected[key]) {
+      violations.push(`ownerPolicyBinding.${key}: expected ${String(expected[key])}`);
+    }
+  }
+  const choiceKeys = Object.keys(expected.requiredLiveEstateOwnerChoices);
+  if (exactKeys(
+    binding.requiredLiveEstateOwnerChoices,
+    choiceKeys,
+    "ownerPolicyBinding.requiredLiveEstateOwnerChoices",
+    violations,
+  )) {
+    for (const key of choiceKeys) {
+      if (binding.requiredLiveEstateOwnerChoices[key] !== expected.requiredLiveEstateOwnerChoices[key]) {
+        violations.push(`ownerPolicyBinding.requiredLiveEstateOwnerChoices.${key}: owner-selected inception tuple drifted`);
+      }
+    }
+  }
+
+  if (manifest.profile === "TEST_FIXTURE" && options.allowTestFixture === true) {
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+
+  const source = options.ownerPolicyBytes;
+  if (source === undefined) {
+    blockers.push("ownerPolicyBinding: exact committed owner-policy packet bytes were not supplied to the identity validator");
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+  if (typeof source !== "string" && !Buffer.isBuffer(source)) {
+    violations.push("ownerPolicyBinding: ownerPolicyBytes must be an exact UTF-8 string or Buffer");
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+  const bytes = Buffer.isBuffer(source) ? source : Buffer.from(source, "utf8");
+  const digest = createHash("sha256").update(bytes).digest("hex");
+  if (digest !== binding.packetSha256) {
+    violations.push("ownerPolicyBinding.packetSha256: supplied owner-policy bytes do not match the frozen digest");
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+
+  let ownerPolicy;
+  try {
+    ownerPolicy = parseB3OwnerPolicyFreezeJson(bytes.toString("utf8"), binding.packetPath);
+  } catch (error) {
+    violations.push(`ownerPolicyBinding: strict owner-policy parse failed (${error.message})`);
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+  const result = validateB3OwnerPolicyFreezeManifest(ownerPolicy);
+  for (const violation of result.violations) {
+    violations.push(`ownerPolicyBinding.ownerPolicy: ${violation}`);
+  }
+  if (!result.valid) {
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+
+  const liveChoices = ownerPolicy.nodes?.[binding.liveEstateNodeId]?.ownerChoices;
+  if (!exactKeys(liveChoices, choiceKeys, `ownerPolicyBinding.ownerPolicy.nodes.${binding.liveEstateNodeId}.ownerChoices`, violations)) {
+    return { ownerPolicyBindingVerified: false, ownerPolicyExternalTruthVerified: false };
+  }
+  for (const key of choiceKeys) {
+    if (liveChoices[key] !== binding.requiredLiveEstateOwnerChoices[key]) {
+      violations.push(`ownerPolicyBinding.ownerPolicy.nodes.${binding.liveEstateNodeId}.ownerChoices.${key}: does not match the frozen owner-selected inception tuple`);
+    }
+  }
+
+  const identityChoices = ownerPolicy.nodes?.PRODUCTION_IDENTITY_INPUT_FREEZE?.ownerChoices;
+  const identityMappings = [
+    ["identities.lawProgramId", manifest.identities?.lawProgramId, identityChoices?.lawProgramId],
+    ["identities.economyProgramId", manifest.identities?.economyProgramId, identityChoices?.economyProgramId],
+    ["identities.canonicalMint", manifest.identities?.canonicalMint, identityChoices?.canonicalMint],
+    ["clusterPolicy.identityPolicy", manifest.clusterPolicy?.identityPolicy, identityChoices?.clusterIdentityPolicy],
+    ["entropy.lagSlots", manifest.entropy?.lagSlots, identityChoices?.entropyLagSlots],
+    ["mintConfig.metadataPolicy", manifest.mintConfig?.metadataPolicy, identityChoices?.metadataPolicy],
+  ];
+  for (const [path, manifestValue, policyValue] of identityMappings) {
+    if (manifestValue !== policyValue) {
+      violations.push(`${path}: must equal the exact owner-policy PRODUCTION_IDENTITY_INPUT_FREEZE choice`);
+    }
+  }
+  const everyCanonicalSeedFrozen = Array.isArray(manifest.seedTable)
+    && manifest.seedTable.length === SEED_SPECS.length
+    && manifest.seedTable.every((entry) => entry?.status === "FROZEN");
+  const manifestSeedAcceptance = everyCanonicalSeedFrozen ? true : null;
+  if (manifestSeedAcceptance !== identityChoices?.acceptCanonicalSeedTable) {
+    violations.push("seedTable: FROZEN state must exactly match the owner-policy acceptCanonicalSeedTable choice");
+  }
+
+  const ownerPolicyBindingVerified = violations.length === violationCountBeforeBinding;
+  const ownerPolicyExternalTruthVerified = result.ownerAcceptanceVerified === true
+    && result.externalEvidenceVerified === true
+    && result.chainTruthVerified === true;
+  if (!ownerPolicyExternalTruthVerified) {
+    blockers.push("ownerPolicyBinding: authenticated owner acceptance plus independent live-estate and chain evidence remain unverified");
+  }
+  return { ownerPolicyBindingVerified, ownerPolicyExternalTruthVerified };
 }
 
 function validateStatus(section, path, blockers, violations) {
@@ -712,6 +848,8 @@ export function validateIdentityFreezeManifest(manifest, options = {}) {
       identityFreezeReady: false,
       productionIdentityReady: false,
       productionCombinedArtifactBindingReady: false,
+      ownerPolicyBindingVerified: false,
+      ownerPolicyExternalTruthVerified: false,
       combinedArtifactBuildEnvironment: null,
       blockers,
       violations,
@@ -726,6 +864,7 @@ export function validateIdentityFreezeManifest(manifest, options = {}) {
   if (manifest.readiness !== "BLOCKED" && manifest.readiness !== "READY") violations.push("manifest.readiness: expected BLOCKED or READY");
 
   validateScope(manifest, violations);
+  const ownerPolicy = validateOwnerPolicyBinding(manifest, options, blockers, violations);
   validateIdentities(manifest, blockers, violations);
   validateCombinedArtifactBinding(manifest, blockers, violations);
   rejectFixtureIdentityRelabel(manifest, options, violations);
@@ -738,7 +877,11 @@ export function validateIdentityFreezeManifest(manifest, options = {}) {
   validateSealOrder(manifest, blockers, violations);
 
   const valid = violations.length === 0;
-  const computedIdentityFreezeReady = valid && blockers.length === 0;
+  const computedIdentityFreezeReady = valid
+    && blockers.length === 0
+    && (manifest.profile === "TEST_FIXTURE"
+      || (ownerPolicy.ownerPolicyBindingVerified === true
+        && ownerPolicy.ownerPolicyExternalTruthVerified === true));
   if (manifest.readiness === "READY" && !computedIdentityFreezeReady) {
     violations.push("manifest.readiness: READY contradicts unresolved or invalid fields");
   } else if (manifest.readiness === "BLOCKED" && computedIdentityFreezeReady) {
@@ -761,6 +904,8 @@ export function validateIdentityFreezeManifest(manifest, options = {}) {
     identityFreezeReady,
     productionIdentityReady,
     productionCombinedArtifactBindingReady,
+    ownerPolicyBindingVerified: ownerPolicy.ownerPolicyBindingVerified,
+    ownerPolicyExternalTruthVerified: ownerPolicy.ownerPolicyExternalTruthVerified,
     combinedArtifactBuildEnvironment,
     blockers,
     violations,
@@ -776,8 +921,8 @@ export function assertIdentityFreezeReady(manifest, options = {}) {
   return result;
 }
 
-export function assertProductionCombinedArtifactBindingReady(manifest) {
-  const result = validateIdentityFreezeManifest(manifest);
+export function assertProductionCombinedArtifactBindingReady(manifest, options = {}) {
+  const result = validateIdentityFreezeManifest(manifest, options);
   if (!result.productionCombinedArtifactBindingReady) {
     const reasons = [...result.violations, ...result.blockers];
     throw new Error(`IAT B3 production combined-artifact binding is not ready:\n- ${reasons.join("\n- ")}`);
@@ -810,7 +955,14 @@ const invokedPath = process.argv[1] ? pathToFileURL(resolve(process.argv[1])).hr
 if (invokedPath === import.meta.url) {
   try {
     const { manifestPath, allowTestFixture } = parseCliArgs(process.argv.slice(2));
-    const result = validateIdentityFreezeManifest(loadIdentityFreezeManifest(manifestPath), { allowTestFixture });
+    const ownerPolicyPath = resolve(fileURLToPath(new URL(
+      "../docs/b3/iat-b3-owner-policy-freeze.v1.json",
+      import.meta.url,
+    )));
+    const result = validateIdentityFreezeManifest(loadIdentityFreezeManifest(manifestPath), {
+      allowTestFixture,
+      ownerPolicyBytes: allowTestFixture ? undefined : readFileSync(ownerPolicyPath),
+    });
     console.log(JSON.stringify({ manifestPath, ...result }, null, 2));
     if (!result.identityFreezeReady) process.exitCode = 2;
   } catch (error) {

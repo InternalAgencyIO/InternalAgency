@@ -12,6 +12,22 @@
       "MAINNET_OR_RELEASE_READINESS"
     ]
   },
+  "ownerPolicyBinding": {
+    "status": "FROZEN",
+    "packetPath": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+    "packetSha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+    "liveEstateNodeId": "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+    "requiredLiveEstateOwnerChoices": {
+      "liveEstateAssertion": "NO_LIVE_ESTATE_MINT",
+      "candidateMint": null,
+      "candidateTokenProgramId": null,
+      "canonicalMintDecision": "NEW_TOKEN_2022_FROM_INCEPTION",
+      "duplicateSupplyRetirementPolicy": "NOT_APPLICABLE"
+    },
+    "inputPolicy": "EXACT_COMMITTED_OWNER_POLICY_PACKET_ONLY",
+    "testFixturesSatisfyProduction": false,
+    "blocker": null
+  },
   "identities": {
     "status": "BLOCKED",
     "lawProgramId": null,

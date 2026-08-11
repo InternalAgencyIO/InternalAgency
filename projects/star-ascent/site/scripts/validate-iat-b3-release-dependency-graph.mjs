@@ -30,7 +30,12 @@ const DEFAULT_MANIFEST_PATH = resolve(
 );
 const V2_PARITY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-  sha256: "e74a1e3b68d04d101f4f36f05516c522c5171b74d69d40eaeefd1f68831ad819",
+  sha256: "25ed3bdf419cffddc3503306218c9349a88f5961c93a5a93d77b12428349c18f",
+});
+const OWNER_POLICY_SCOPED_PACKET = Object.freeze({
+  path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+  sha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+  bindingScope: "REFERENCE_CONTRACT_ONLY",
 });
 
 const SCOPE = Object.freeze({
@@ -63,6 +68,7 @@ export const RELEASE_DEPENDENCY_ARTIFACT_POLICY = Object.freeze({
   dirtyOrUnresolvedArtifactDisposition: "NULL_AND_BLOCKED",
   arbitraryValidatorExecutionAllowed: false,
   networkReadsAllowed: false,
+  ownerPolicyFreezeBinding: OWNER_POLICY_SCOPED_PACKET,
 });
 
 const artifact = (path, sha256) => Object.freeze({
@@ -102,15 +108,15 @@ const ARTIFACTS = Object.freeze({
   ),
   identity: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-    "613e864effa7ac6d9c94b81b9fb4dbb42756dfe8065f313caefc7355bbc89c62",
+    "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
   ),
   law: artifact(
     "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
-    "5f37529cbc12c0f171e026d08e37d465ea639bd16de9eaa3de009b8d5c081df8",
+    "cb885b7f05ac45cf907e33e9c4858f1d22b6995091d06269b7a7dda08e1191ec",
   ),
   localRehearsal: artifact(
     "projects/star-ascent/site/docs/b3/LOCAL_VALIDATOR_REHEARSAL.md",
-    "463daa6afe5641087f477c755853e720a027aed73aaf3dfc2c3c9f9b506afca4",
+    "749ba3ba66f2ac71246bf45dc0da7c65ada8251999abc9a36fee9c5fa6c8631e",
   ),
   waterfall: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-reward-capacity-waterfall.v1.json",
@@ -467,6 +473,7 @@ function readCommittedArtifact(path, expectedSha256, violations) {
   const allowed = [...new Set(RELEASE_DEPENDENCY_NODE_SPECS
     .map(({ contractArtifact }) => contractArtifact?.path)
     .filter(Boolean))];
+  allowed.push(RELEASE_DEPENDENCY_ARTIFACT_POLICY.ownerPolicyFreezeBinding.path);
   if (!allowed.includes(path)) {
     violations.push(`artifact ${path}: path is not in the immutable B3 artifact allowlist`);
     return null;
@@ -658,7 +665,9 @@ function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnix
   const identity = stableArtifactJson("PRODUCTION_IDENTITY_INPUT_FREEZE", bytesByPath, violations);
   if (identity) {
     try {
-      const result = validateIdentityFreezeManifest(identity);
+      const result = validateIdentityFreezeManifest(identity, {
+        ownerPolicyBytes: bytesByPath.get(OWNER_POLICY_SCOPED_PACKET.path),
+      });
       states.set("PRODUCTION_IDENTITY_INPUT_FREEZE", result.productionIdentityReady === true);
     } catch (error) {
       violations.push(`PRODUCTION_IDENTITY_INPUT_FREEZE: scoped validator failed closed (${error.message})`);
@@ -965,6 +974,12 @@ export function validateReleaseDependencyGraphManifest(manifest, options = {}) {
     }
     const parityBytes = readCommittedScopedPacket(V2_PARITY_SCOPED_PACKET, violations);
     if (parityBytes) bytesByPath.set(V2_PARITY_SCOPED_PACKET.path, parityBytes);
+    const ownerPolicyBytes = readCommittedArtifact(
+      OWNER_POLICY_SCOPED_PACKET.path,
+      OWNER_POLICY_SCOPED_PACKET.sha256,
+      violations,
+    );
+    if (ownerPolicyBytes) bytesByPath.set(OWNER_POLICY_SCOPED_PACKET.path, ownerPolicyBytes);
   }
   const scopedStates = scopedProductionPredicateStates(
     bytesByPath,

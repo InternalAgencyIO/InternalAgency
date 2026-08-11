@@ -10,6 +10,7 @@
     "profile",
     "readiness",
     "scope",
+    "ownerPolicyBinding",
     "identities",
     "combinedArtifactBinding",
     "clusterPolicy",
@@ -43,6 +44,32 @@
           "minItems": 4,
           "maxItems": 4
         }
+      }
+    },
+    "ownerPolicyBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "packetPath", "packetSha256", "liveEstateNodeId", "requiredLiveEstateOwnerChoices", "inputPolicy", "testFixturesSatisfyProduction", "blocker"],
+      "properties": {
+        "status": { "const": "FROZEN" },
+        "packetPath": { "const": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json" },
+        "packetSha256": { "const": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c" },
+        "liveEstateNodeId": { "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION" },
+        "requiredLiveEstateOwnerChoices": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["liveEstateAssertion", "candidateMint", "candidateTokenProgramId", "canonicalMintDecision", "duplicateSupplyRetirementPolicy"],
+          "properties": {
+            "liveEstateAssertion": { "const": "NO_LIVE_ESTATE_MINT" },
+            "candidateMint": { "type": "null" },
+            "candidateTokenProgramId": { "type": "null" },
+            "canonicalMintDecision": { "const": "NEW_TOKEN_2022_FROM_INCEPTION" },
+            "duplicateSupplyRetirementPolicy": { "const": "NOT_APPLICABLE" }
+          }
+        },
+        "inputPolicy": { "const": "EXACT_COMMITTED_OWNER_POLICY_PACKET_ONLY" },
+        "testFixturesSatisfyProduction": { "const": false },
+        "blocker": { "type": "null" }
       }
     },
     "identities": {

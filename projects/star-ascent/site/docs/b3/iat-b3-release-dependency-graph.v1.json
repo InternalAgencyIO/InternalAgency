@@ -30,9 +30,14 @@
     "stableCommittedB3ArtifactsOnly": true,
     "dirtyOrUnresolvedArtifactDisposition": "NULL_AND_BLOCKED",
     "arbitraryValidatorExecutionAllowed": false,
-    "networkReadsAllowed": false
+    "networkReadsAllowed": false,
+    "ownerPolicyFreezeBinding": {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+      "sha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+      "bindingScope": "REFERENCE_CONTRACT_ONLY"
+    }
   },
-  "graphDefinitionSha256": "1299256f34d40131144c76c22510408255cb06970a09ffdd653c9326f4b7fa00",
+  "graphDefinitionSha256": "2079889c8f48d33304f6f76e3d693a7a8ed157d5dc09f9664443569878e5fce1",
   "nodes": [
     {
       "id": "LIVE_ESTATE_CANONICAL_MINT_DECISION",
@@ -142,7 +147,7 @@
       "completionPredicate": "PRODUCTION_IDENTITY_INPUT_FREEZE_SCOPED_OUTPUT",
       "contractArtifact": {
         "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-        "sha256": "613e864effa7ac6d9c94b81b9fb4dbb42756dfe8065f313caefc7355bbc89c62",
+        "sha256": "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
         "bindingScope": "REFERENCE_CONTRACT_ONLY"
       },
       "completionEvidence": null,
@@ -155,7 +160,7 @@
       "completionPredicate": "PRODUCTION_DAILY_LAW_NATIVE_HOOK_PACKET",
       "contractArtifact": {
         "path": "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
-        "sha256": "5f37529cbc12c0f171e026d08e37d465ea639bd16de9eaa3de009b8d5c081df8",
+        "sha256": "cb885b7f05ac45cf907e33e9c4858f1d22b6995091d06269b7a7dda08e1191ec",
         "bindingScope": "REFERENCE_CONTRACT_ONLY"
       },
       "completionEvidence": null,
@@ -168,7 +173,7 @@
       "completionPredicate": "SAME_ARTIFACT_DAILY_LAW_AND_STAKE_INGRESS_PACKET",
       "contractArtifact": {
         "path": "projects/star-ascent/site/docs/b3/LOCAL_VALIDATOR_REHEARSAL.md",
-        "sha256": "463daa6afe5641087f477c755853e720a027aed73aaf3dfc2c3c9f9b506afca4",
+        "sha256": "749ba3ba66f2ac71246bf45dc0da7c65ada8251999abc9a36fee9c5fa6c8631e",
         "bindingScope": "REFERENCE_CONTRACT_ONLY"
       },
       "completionEvidence": null,

@@ -173,6 +173,11 @@ test("canonical production graph is valid, records the completed host root, and 
   ]) assert.equal(result[key], false);
   assert.equal(result.mainnetStatus, "HOLD");
   assert.equal(RELEASE_DEPENDENCY_GRAPH_MAINNET_STATUS, "HOLD");
+  assert.deepEqual(DRAFT.artifactBindingPolicy.ownerPolicyFreezeBinding, {
+    path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+    sha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+    bindingScope: "REFERENCE_CONTRACT_ONLY",
+  });
   assert.equal("ready" in result, false);
   assert.equal("GO" in result, false);
   assert.equal("productionReady" in result, false);
@@ -262,7 +267,7 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
   assert.equal(RELEASE_DEPENDENCY_EDGES.length, 132);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "1299256f34d40131144c76c22510408255cb06970a09ffdd653c9326f4b7fa00");
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "2079889c8f48d33304f6f76e3d693a7a8ed157d5dc09f9664443569878e5fce1");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
@@ -296,6 +301,7 @@ test("inventory completeness is false for node, edge, scope, or artifact inconsi
     (value) => { value.nodes[4] = clone(value.nodes[3]); },
     (value) => { value.edges[1] = ["UNRECOGNIZED_NODE", value.edges[1][1]]; },
     (value) => { value.scope.contract = "ALTERED_STRUCTURAL_SCOPE"; },
+    (value) => { value.artifactBindingPolicy.ownerPolicyFreezeBinding.sha256 = "ab".repeat(32); },
     (value) => {
       node(value, "CORE_CUSTODY_POLICY_ADAPTER").contractArtifact = clone(
         node(value, "FACTION_ECONOMICS_FUNDING").contractArtifact,
@@ -389,6 +395,7 @@ test("artifact bindings reject traversal, absolute, command-like, swap, stale, a
   assert.equal(existsSync(join(SITE, "touch-pwned")), false);
   assert.match(VALIDATOR_SOURCE, /path is not in the immutable B3 artifact allowlist/u);
   assert.match(VALIDATOR_SOURCE, /symbolic links are forbidden/u);
+  assert.match(VALIDATOR_SOURCE, /ownerPolicyBytes: bytesByPath\.get\(OWNER_POLICY_SCOPED_PACKET\.path\)/u);
   assert.doesNotMatch(VALIDATOR_SOURCE, /shell\s*:\s*true/u);
 });
 
