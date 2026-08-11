@@ -7,6 +7,10 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { canonicalizeRfc8785 } from "./iat-v2-canonical-json.mjs";
 import { validateExternalCheckpointProviderReadinessManifest } from "./validate-iat-b3-external-checkpoint-provider-readiness.mjs";
 import { validateIdentityFreezeManifest } from "./validate-iat-b3-identity-freeze.mjs";
+import {
+  TOKEN_2022_HOST_SOURCE_BINDINGS,
+  validateToken2022ConfidentialHostCompatibilityManifest,
+} from "./validate-iat-b3-token-2022-confidential-host-compatibility.mjs";
 import { validateXSocialEvidenceProviderReadinessManifest } from "./validate-iat-b3-x-social-evidence-provider-readiness.mjs";
 
 export const RELEASE_DEPENDENCY_GRAPH_SCHEMA = "iat-b3-release-dependency-graph/v1";
@@ -72,6 +76,10 @@ const ARTIFACTS = Object.freeze({
     "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
     "c2540c628e37eabc720ceeee6686141e06b6725a8139b343cef1f2f43d315c68",
   ),
+  tokenHost: artifact(
+    "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
+    "90ee8a911cd33fc64ffe475421251539dadfc8d617508bd9302d88269c4a74c3",
+  ),
   core: artifact(
     "projects/star-ascent/site/docs/b3/CORE_TEAM_CAP.md",
     "cf29a6cdda6c2e5024e0c003566958f7a2711d6379be1d4f33aac902c2405014",
@@ -136,7 +144,7 @@ const spec = (id, dependencies, completionPredicate, contractArtifact = null) =>
 const RELEASE_DEPENDENCY_NONTERMINAL_NODE_SPECS = Object.freeze([
   spec("LIVE_ESTATE_CANONICAL_MINT_DECISION", [], "SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET", ARTIFACTS.estate),
   spec("V2_FEATURE_PARITY", [], "ZERO_UNAUTHORIZED_CUT_V2_PARITY_PACKET", ARTIFACTS.parity),
-  spec("TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", [], "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET", ARTIFACTS.shielded),
+  spec("TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", [], "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET", ARTIFACTS.tokenHost),
   spec("CORE_CUSTODY_POLICY_ADAPTER", ["V2_FEATURE_PARITY"], "SCOPED_CORE_CUSTODY_POLICY_AND_NATIVE_ADAPTER_PACKET", ARTIFACTS.core),
   spec("FACTION_ECONOMICS_FUNDING", ["V2_FEATURE_PARITY"], "SCOPED_FACTION_ECONOMICS_FUNDING_PACKET", ARTIFACTS.factions),
   spec("CONFIG_GENESIS_PHASE_CODEC", ["V2_FEATURE_PARITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"], "NONVACUOUS_GENESIS_BOOTSTRAP_PHASE_AND_CONFIG_CODEC_PACKET", ARTIFACTS.economyMatrix),
@@ -491,6 +499,49 @@ function readCommittedArtifact(path, expectedSha256, violations) {
   }
 }
 
+function readCommittedTokenHostBinding(binding, violations) {
+  if (!TOKEN_2022_HOST_SOURCE_BINDINGS.some((entry) => entry.path === binding.path)
+    || isAbsolute(binding.path)
+    || binding.path.includes("\\")
+    || binding.path.split("/").includes("..")) {
+    violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: invalid source binding ${binding.path}`);
+    return null;
+  }
+  const absolutePath = resolve(REPOSITORY_ROOT, binding.path);
+  try {
+    if (lstatSync(absolutePath).isSymbolicLink()) {
+      violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: symbolic source binding forbidden ${binding.path}`);
+      return null;
+    }
+  } catch (error) {
+    violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: cannot inspect source binding ${binding.path} (${error.message})`);
+    return null;
+  }
+  const clean = spawnSync("git", ["diff", "--quiet", "HEAD", "--", binding.path], {
+    cwd: REPOSITORY_ROOT,
+    windowsHide: true,
+  });
+  if (clean.status !== 0) {
+    violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: source binding is dirty ${binding.path}`);
+    return null;
+  }
+  try {
+    const bytes = execFileSync("git", ["show", `HEAD:${binding.path}`], {
+      cwd: REPOSITORY_ROOT,
+      maxBuffer: 64 * 1024 * 1024,
+      windowsHide: true,
+    });
+    if (bytes.length !== binding.byteLength || sha256Bytes(bytes) !== binding.sha256) {
+      violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: source binding drifted ${binding.path}`);
+      return null;
+    }
+    return bytes;
+  } catch (error) {
+    violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: cannot read committed source binding ${binding.path} (${error.message})`);
+    return null;
+  }
+}
+
 function stableArtifactJson(nodeId, bytesByPath, violations) {
   const contractArtifact = NODE_SPEC_BY_ID.get(nodeId)?.contractArtifact;
   if (!contractArtifact) return null;
@@ -506,6 +557,28 @@ function stableArtifactJson(nodeId, bytesByPath, violations) {
 
 function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnixSeconds) {
   const states = new Map(RELEASE_DEPENDENCY_NODE_IDS.map((id) => [id, false]));
+
+  const tokenHost = stableArtifactJson(
+    "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY",
+    bytesByPath,
+    violations,
+  );
+  if (tokenHost) {
+    try {
+      const result = validateToken2022ConfidentialHostCompatibilityManifest(tokenHost, {
+        boundFiles: bytesByPath,
+      });
+      states.set(
+        "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY",
+        result.valid === true && result.hostCompatibilityComplete === true,
+      );
+      for (const violation of result.violations) {
+        violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: ${violation}`);
+      }
+    } catch (error) {
+      violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: scoped validator failed closed (${error.message})`);
+    }
+  }
 
   const identity = stableArtifactJson("PRODUCTION_IDENTITY_INPUT_FREEZE", bytesByPath, violations);
   if (identity) {
@@ -810,6 +883,10 @@ export function validateReleaseDependencyGraphManifest(manifest, options = {}) {
     ).values()) {
       const bytes = readCommittedArtifact(contractArtifact.path, contractArtifact.sha256, violations);
       if (bytes) bytesByPath.set(contractArtifact.path, bytes);
+    }
+    for (const binding of TOKEN_2022_HOST_SOURCE_BINDINGS) {
+      const bytes = readCommittedTokenHostBinding(binding, violations);
+      if (bytes) bytesByPath.set(binding.path, bytes);
     }
   }
   const scopedStates = scopedProductionPredicateStates(

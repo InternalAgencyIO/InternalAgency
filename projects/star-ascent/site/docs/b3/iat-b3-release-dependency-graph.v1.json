@@ -32,7 +32,7 @@
     "arbitraryValidatorExecutionAllowed": false,
     "networkReadsAllowed": false
   },
-  "graphDefinitionSha256": "32863906bd13d40b34bfe0a014aebd5cc2968e3c43546390bde5a6d1ea5eb14d",
+  "graphDefinitionSha256": "1299256f34d40131144c76c22510408255cb06970a09ffdd653c9326f4b7fa00",
   "nodes": [
     {
       "id": "LIVE_ESTATE_CANONICAL_MINT_DECISION",
@@ -63,15 +63,22 @@
     {
       "id": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY",
       "applicability": "REQUIRED",
-      "status": "BLOCKED",
+      "status": "STRUCTURAL_REVIEW_PACKET_COMPLETE",
       "completionPredicate": "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET",
       "contractArtifact": {
-        "path": "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
-        "sha256": "c2540c628e37eabc720ceeee6686141e06b6725a8139b343cef1f2f43d315c68",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
+        "sha256": "90ee8a911cd33fc64ffe475421251539dadfc8d617508bd9302d88269c4a74c3",
         "bindingScope": "REFERENCE_CONTRACT_ONLY"
       },
-      "completionEvidence": null,
-      "blocker": "Exact Token-2022 confidential-transfer host compatibility evidence remains incomplete."
+      "completionEvidence": {
+        "schema": "iat-b3-release-dependency-node-evidence/v1",
+        "nodeId": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY",
+        "predicate": "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET",
+        "subjectSha256": "5a2cd52006cb4ab09c7c1d34f743aef02bd5c1e7f9804c8332c22d81c0f38e29",
+        "artifactSha256": "90ee8a911cd33fc64ffe475421251539dadfc8d617508bd9302d88269c4a74c3",
+        "environment": "PRODUCTION"
+      },
+      "blocker": null
     },
     {
       "id": "CORE_CUSTODY_POLICY_ADAPTER",

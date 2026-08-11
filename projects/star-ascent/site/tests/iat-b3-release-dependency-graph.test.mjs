@@ -121,7 +121,7 @@ function expectFixtureViolation(mutator, pattern) {
   assert.match(result.violations.join("\n"), pattern);
 }
 
-test("canonical production graph is valid, comprehensively blocked, and nonactivating", () => {
+test("canonical production graph is valid, records the completed host root, and remains nonactivating", () => {
   const result = validateReleaseDependencyGraphManifest(DRAFT);
   assert.equal(DRAFT.schema, RELEASE_DEPENDENCY_GRAPH_SCHEMA);
   assert.equal(DRAFT.status, "BLOCKED");
@@ -131,8 +131,14 @@ test("canonical production graph is valid, comprehensively blocked, and nonactiv
   assert.equal(result.dependencyGraphValid, true);
   assert.equal(result.dependencyReviewPacketComplete, false);
   assert.equal(result.productionDependencyReviewPacketComplete, false);
-  assert.equal(result.blockers.length, 29);
+  assert.equal(result.blockers.length, 28);
   assert.deepEqual(result.violations, []);
+  assert.equal(node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").status, "STRUCTURAL_REVIEW_PACKET_COMPLETE");
+  assert.equal(node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").blocker, null);
+  assert.equal(
+    node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").completionEvidence.artifactSha256,
+    "90ee8a911cd33fc64ffe475421251539dadfc8d617508bd9302d88269c4a74c3",
+  );
   for (const key of [
     "externalTruthVerified",
     "runtimeAuthenticationVerified",
@@ -210,7 +216,7 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
   assert.equal(RELEASE_DEPENDENCY_EDGES.length, 132);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "32863906bd13d40b34bfe0a014aebd5cc2968e3c43546390bde5a6d1ea5eb14d");
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "1299256f34d40131144c76c22510408255cb06970a09ffdd653c9326f4b7fa00");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
