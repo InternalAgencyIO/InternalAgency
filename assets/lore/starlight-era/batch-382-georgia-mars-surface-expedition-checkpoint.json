@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-clean-fresh-round-20-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-20",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -3426,7 +3426,41 @@
           "accepted": false
         },
         "recoveryPrompt": "Use case: precise-object-edit.\nInput: the supplied Georgia Batch 382 scene 1551 clean fresh round 20 raw.\n\nONE RECOVERY ONLY\nThis is the single allowed recovery for clean round 20. Edit only the clearly adult fictional Alia at the far right. Preserve the clean natural photographic surface. Do not redraw, reinterpret, or restyle the full image.\n\nCORRECTION 1: ALIA'S STRAPLESS OPEN-BACK COUTURE\nRemove only the thin metallic neck loop, every thin shoulder strap, every diagonal upper-back strap, and every crossing back band from Alia's copper top. Rebuild only the top edge as one secure opaque sculpted strapless copper bodice with a high straight front edge and wide continuous wraparound side panels. Both shoulders and the full upper back from shoulder blades to the existing secure high waist remain visibly bare, with no strap, sleeve, halter, collar, neckband, crossing band, fabric panel, or illusion mesh. Preserve complete opaque breast and side coverage, the existing restrained three-centimeter bare midriff band, the cobalt pleated skort, green conduits, boots, braided ponytail, face, body, stance, and respectful public-fashion framing.\n\nCORRECTION 2: INDEXED TRIGGER FINGER\nKeep the one rainbow-gradient short-barrel orange-plugged inert cinema-training pistol replica in exactly the same position, angle, scale, and two-hand grip. Straighten only Alia's primary trigger index so it lies fully extended and flat along the colored frame above and outside the trigger guard. Leave the trigger guard visibly empty. Preserve both existing hands, wrists, arms, elbows, shoulders, the orange muzzle, and the exact muzzle-to-diamond axis.\n\nPRESERVE EVERY OTHER ELEMENT\nPreserve Radiance, Ellie, and AI ECE pixel-faithfully, including all six of their arms and hands, the reciprocal Ellie-Radiance clasp, Ellie's back support, Radiance's palm on ECE's shoulder, Radiance's affirmative acceptance and rainbow hosiery, ECE's two compass hands, the hands-free holographic map, and the clean InternalAgency victory-dance party beat. Preserve Alia's two existing arms and two existing hands with no added or removed limb. Final anatomy remains exactly eight human arms and exactly eight human hands.\nPreserve the heavy straight rain, Batumi skyline, Alphabet Tower, Ferris wheel, Black Sea, palms, wet flat tiles, transparent safety panel, complete sand backstop, one white paper, and one black route diamond. The orange muzzle center and black diamond center already share one horizontal row; do not move either one. Preserve exactly one tiny collarless golden kitten PAWS and one distinct small young golden retriever puppy MAX together on the dry lounge.\n\nSURFACE AND SCOPE GATE\nThe only visible changes are removal of Alia's thin straps and straightening of her trigger index outside the guard. Add no person, limb, hand, animal, prop, decoration, crowd, drink, confetti, text, logo, or target. Add no wavy processing, liquify distortion, marbling, rippled skin, rippled fabric, melted edge, embossed contour, halo, excessive sharpening, bent architecture, or painterly texture. Keep one clean coherent photographic exposure.",
-        "recoveryPromptSha256": "5BE5FD7E80B631F5A4B06C2555C97BCBB855358D3A62641B37250E0109D93282"
+        "recoveryPromptSha256": "5BE5FD7E80B631F5A4B06C2555C97BCBB855358D3A62641B37250E0109D93282",
+        "visualAudit": {
+          "renderSurfaceQuality": "pass-clean-natural-photographic-texture-without-wavy-artifacts-after-one-recovery",
+          "identity": "pass-four-adult-identities-with-Alia-braids",
+          "anatomy": "reject-Alia-two-hand-mission-cluster-is-not-separately-traceable",
+          "handOwnership": "reject-Alia-two-arms-converge-into-one-ambiguous-hand-cluster-at-the-grip",
+          "weather": "pass-heavy-straight-rain",
+          "locationThemeFusion": "pass-Batumi-and-Mars-expedition-couture",
+          "outfitOriginality": "pass-four-distinct-silhouettes-and-material-languages",
+          "rolledWardrobe": "pass-recovery-removes-Alia-neck-shoulder-and-back-straps-while-preserving-strapless-open-back-midriff-construction",
+          "romance": "pass-controlled-dip-three-clear-contacts-and-Radiance-ECE-affection-center",
+          "radianceAgreement": "pass-deliberate-reciprocal-clasp-and-voluntary-turn-toward-ECE-make-agreement-readable",
+          "partyActivation": "pass-restrained-four-adult-victory-dance-party-beat-without-decorative-clutter",
+          "mascots": "pass-one-PAWS-and-one-MAX-safe-play",
+          "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+          "routeMap": "pass-separate-hands-free-holographic-map",
+          "missionHandling": "reject-primary-trigger-index-remains-curled-inside-the-guard",
+          "missionTargetAxis": "pass-orange-muzzle-center-and-black-diamond-center-on-one-horizontal-row",
+          "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+          "qaCrops": {
+            "hands": {
+              "path": "tmp/world-195x4/batch-382/qa/clean-fresh-round-20-recovery-scene-1551-hands-crop.png",
+              "sha256": "053FA069541B949688053CE8AC7F4EEE8F7A93C27A4CF111B872DBB1E2E470B5"
+            },
+            "target": {
+              "path": "tmp/world-195x4/batch-382/qa/clean-fresh-round-20-recovery-scene-1551-target-crop.png",
+              "sha256": "C5AF4C1C6CE77C3A45F1CA17C29D8F69CF8DC7C92D8D1145DBBC4FF63FE0D25E"
+            },
+            "trigger4x": {
+              "path": "tmp/world-195x4/batch-382/qa/clean-fresh-round-20-recovery-scene-1551-trigger-crop-4x.png",
+              "sha256": "73DE487F6D8C0E71EF275FBAC4B440881852F2A24095B257410F260ECF0EEA09"
+            }
+          },
+          "accepted": false
+        }
       },
       "radianceRealtimeAgreementParty": {
         "offeredChoice": "Ellie offers Radiance her hand to turn the stable controlled dip into the opening step of a rain-lit Batumi victory dance with ECE and Alia after the safe route demonstration.",
@@ -7230,7 +7264,7 @@
       }
     },
     "freshRound20": {
-      "status": "fresh-completed-rejected-recovery-materialized",
+      "status": "completed-rejected-after-single-recovery",
       "preparedAt": "2026-08-11T18:59:05.552Z",
       "sceneNumbers": [
         1551
@@ -7371,9 +7405,16 @@
       "freshCompletedAt": "2026-08-11T19:06:18.526Z",
       "rawOutputs": {
         "1551": {
-          "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-20/scene-1551.png",
-          "sha256": "B8076CA0DA60917A5235C2448400FCCAAB203B6194A3B8BB1CA7142C5D24C0D4",
-          "preserved": true
+          "fresh": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-20/scene-1551.png",
+            "sha256": "B8076CA0DA60917A5235C2448400FCCAAB203B6194A3B8BB1CA7142C5D24C0D4",
+            "preserved": true
+          },
+          "recovery": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-20-recovery/scene-1551.png",
+            "sha256": "17B562AA995E806EA712A9263BF066B4B0ED3853C22F4EBBD637B39F97919820",
+            "preserved": true
+          }
         }
       },
       "freshStrictAudit": {
@@ -7426,6 +7467,52 @@
           "muzzle-to-diamond axis",
           "clean natural photographic surface"
         ]
+      },
+      "completedAt": "2026-08-11T19:12:11.184Z",
+      "recoveryCompletedAt": "2026-08-11T19:12:11.184Z",
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1551
+      ],
+      "rejectionReasons": {
+        "1551": [
+          "Alia's two mission hands converge into one ambiguous grip cluster instead of two separately traceable hands",
+          "Alia's primary trigger index remains visibly curled inside the trigger guard instead of lying straight along the frame outside it"
+        ]
+      },
+      "strictAudit": {
+        "renderSurfaceQuality": "pass-clean-natural-photographic-texture-without-wavy-artifacts-after-one-recovery",
+        "identity": "pass-four-adult-identities-with-Alia-braids",
+        "anatomy": "reject-Alia-two-hand-mission-cluster-is-not-separately-traceable",
+        "handOwnership": "reject-Alia-two-arms-converge-into-one-ambiguous-hand-cluster-at-the-grip",
+        "weather": "pass-heavy-straight-rain",
+        "locationThemeFusion": "pass-Batumi-and-Mars-expedition-couture",
+        "outfitOriginality": "pass-four-distinct-silhouettes-and-material-languages",
+        "rolledWardrobe": "pass-recovery-removes-Alia-neck-shoulder-and-back-straps-while-preserving-strapless-open-back-midriff-construction",
+        "romance": "pass-controlled-dip-three-clear-contacts-and-Radiance-ECE-affection-center",
+        "radianceAgreement": "pass-deliberate-reciprocal-clasp-and-voluntary-turn-toward-ECE-make-agreement-readable",
+        "partyActivation": "pass-restrained-four-adult-victory-dance-party-beat-without-decorative-clutter",
+        "mascots": "pass-one-PAWS-and-one-MAX-safe-play",
+        "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+        "routeMap": "pass-separate-hands-free-holographic-map",
+        "missionHandling": "reject-primary-trigger-index-remains-curled-inside-the-guard",
+        "missionTargetAxis": "pass-orange-muzzle-center-and-black-diamond-center-on-one-horizontal-row",
+        "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+        "qaCrops": {
+          "hands": {
+            "path": "tmp/world-195x4/batch-382/qa/clean-fresh-round-20-recovery-scene-1551-hands-crop.png",
+            "sha256": "053FA069541B949688053CE8AC7F4EEE8F7A93C27A4CF111B872DBB1E2E470B5"
+          },
+          "target": {
+            "path": "tmp/world-195x4/batch-382/qa/clean-fresh-round-20-recovery-scene-1551-target-crop.png",
+            "sha256": "C5AF4C1C6CE77C3A45F1CA17C29D8F69CF8DC7C92D8D1145DBBC4FF63FE0D25E"
+          },
+          "trigger4x": {
+            "path": "tmp/world-195x4/batch-382/qa/clean-fresh-round-20-recovery-scene-1551-trigger-crop-4x.png",
+            "sha256": "73DE487F6D8C0E71EF275FBAC4B440881852F2A24095B257410F260ECF0EEA09"
+          }
+        },
+        "accepted": false
       }
     }
   },
@@ -8481,6 +8568,24 @@
         "The paper diamond center remains visibly above the horizontal barrel and orange muzzle-plug centerline, so the authoritative paper-route target geometry fails."
       ],
       "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 20,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-20-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c27dd687-2460-458c-b728-0a23f38f52a4.png",
+      "sha256": "17B562AA995E806EA712A9263BF066B4B0ED3853C22F4EBBD637B39F97919820",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Alia's two mission hands converge into one ambiguous grip cluster instead of two separately traceable hands",
+        "Alia's primary trigger index remains visibly curled inside the trigger guard instead of lying straight along the frame outside it"
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -8492,7 +8597,7 @@
     "requiredCurrentCountryAssets": 4,
     "note": "Georgia has accepted scenes 1548, 1549, and 1550. Historical X backlog is empty. Publication remains mandatory immediately after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T19:06:18.526Z",
+  "checkpointedAt": "2026-08-11T19:12:11.184Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -9193,13 +9298,25 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1551,
+      "round": 20,
+      "kind": "clean-fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-20-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c27dd687-2460-458c-b728-0a23f38f52a4.png",
+      "sha256": "17B562AA995E806EA712A9263BF066B4B0ED3853C22F4EBBD637B39F97919820",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-single-clean-fresh-round-20-recovery-scene-1551-only",
+    "action": "clean-fresh-round-21-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -9211,7 +9328,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T18:59:05.552Z",
+    "checkedAt": "2026-08-11T19:12:11.184Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -9265,7 +9382,7 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "Signed-in profile checked. No eligible unposted World Series item. Georgia remains X-blocked until scene 1551 is accepted.",
+    "reconciliationDecision": "Signed-in profile checked and no eligible unposted World Series item remains. Georgia still has three accepted scenes, so no X upload or country advance is permitted.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -9304,12 +9421,12 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 19,
-    "lastCleanRoundResult": "clean-surface-pass-contract-reject-without-recovery",
-    "nextCleanRound": 20,
-    "nextSourcePolicy": "original identity anchors only; no round 19 image input",
-    "activeCleanRound": 20,
-    "activeSourcePolicy": "single targeted recovery from clean round 20 raw only",
-    "priorBatumiRenderInputCount": 1
+    "lastCompletedCleanRound": 20,
+    "lastCleanRoundResult": "clean-surface-recovery-wardrobe-pass-mission-hand-safety-reject",
+    "nextCleanRound": 21,
+    "nextSourcePolicy": "original identity anchors only; no round 20 image input",
+    "activeCleanRound": null,
+    "activeSourcePolicy": "four original identity anchors only",
+    "priorBatumiRenderInputCount": 0
   }
 }
