@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-fresh-round-10-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-fresh-round-10",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -4330,7 +4330,7 @@
       "completedAt": "2026-08-11T13:58:14.066Z"
     },
     "freshRound10": {
-      "status": "fresh-rejected-recovery-materialized",
+      "status": "completed-zero-new-accepted-two-rejected",
       "preparedAt": "2026-08-11T14:14:12.701Z",
       "sceneNumbers": [
         1548,
@@ -4412,7 +4412,7 @@
         }
       },
       "recovery": {
-        "status": "materialized-pending-launch",
+        "status": "completed-zero-new-accepted-two-rejected",
         "preparedAt": "2026-08-11T14:23:34.320Z",
         "sceneNumbers": [
           1548,
@@ -4442,8 +4442,55 @@
             "phase": "recovery",
             "referenceGuidedEdit": true
           }
-        }
-      }
+        },
+        "completedAt": "2026-08-11T14:32:14.981Z",
+        "perScene": {
+          "1548": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-10-recovery/scene-1548.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-d5e57b0e-436e-4341-bcc5-491e82e84e51.png",
+            "sha256": "9F89195203B57DBACD1DD0224F207687E470265E462B082E91D82BD21764D7D2",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves four adult identities, Tbilisi, hard hail, MAX, distinct couture, ECE's route map, safe two-hand mission stance, orange disk, complete transparent backstop, and no visible trajectory connector.",
+              "The raised Radiance-Ellie clasp, low Alia-Ellie clasp, and Radiance palm on Alia are clear, but Alia's second hand around Radiance is hidden or missing, leaving only seven unambiguous human hands under the strict ownership gate.",
+              "Alia's active restrained visible-midriff band is absent after the trio was reposed."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1551": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-10-recovery/scene-1551.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-f5315a4e-f4f9-4f37-998d-161fb25cdd54.png",
+            "sha256": "F3A6A3BBEE1E303832006F1B02D7BF13C6B24FDDE6E43E252BC83AF270601E62",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves Batumi, heavy rain, PAWS and MAX, four distinct outfits, Radiance's hosiery and open back, Alia's strapless opaque front and open back, the separate route map, safe mission stance, compass, and complete sand backstop.",
+              "Exactly eight human hands are now visually traceable: two Ellie support hands, two Radiance relationship hands, two ECE compass hands, and two Alia mission hands.",
+              "Alia's active restrained bare midriff band remains absent; the copper bodice meets the copper waistband without the required visible skin band.",
+              "The paper diamond center sits visibly above the horizontal barrel and muzzle centerline rather than on it."
+            ],
+            "recoveryPassConsumedThisRound": true
+          }
+        },
+        "newlyAcceptedSceneNumbers": [],
+        "rejectedSceneNumbers": [
+          1548,
+          1551
+        ],
+        "acceptedSceneNumbersOverall": [
+          1549,
+          1550
+        ],
+        "laterWakeAction": "Start fresh round 11 for scenes 1548 and 1551 only; preserve accepted scenes 1549 and 1550 and do not advance to Fiji."
+      },
+      "completedAt": "2026-08-11T14:32:14.981Z"
     }
   },
   "acceptedAssets": [
@@ -5401,6 +5448,45 @@
         "Alia's active restrained bare midriff band is still absent.",
         "The paper diamond center now sits visibly below the horizontal barrel and muzzle centerline rather than on it."
       ]
+    },
+    {
+      "scene": 1548,
+      "round": 10,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-10-recovery/scene-1548.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-d5e57b0e-436e-4341-bcc5-491e82e84e51.png",
+      "sha256": "9F89195203B57DBACD1DD0224F207687E470265E462B082E91D82BD21764D7D2",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves four adult identities, Tbilisi, hard hail, MAX, distinct couture, ECE's route map, safe two-hand mission stance, orange disk, complete transparent backstop, and no visible trajectory connector.",
+        "The raised Radiance-Ellie clasp, low Alia-Ellie clasp, and Radiance palm on Alia are clear, but Alia's second hand around Radiance is hidden or missing, leaving only seven unambiguous human hands under the strict ownership gate.",
+        "Alia's active restrained visible-midriff band is absent after the trio was reposed."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 10,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-10-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-f5315a4e-f4f9-4f37-998d-161fb25cdd54.png",
+      "sha256": "F3A6A3BBEE1E303832006F1B02D7BF13C6B24FDDE6E43E252BC83AF270601E62",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves Batumi, heavy rain, PAWS and MAX, four distinct outfits, Radiance's hosiery and open back, Alia's strapless opaque front and open back, the separate route map, safe mission stance, compass, and complete sand backstop.",
+        "Exactly eight human hands are now visually traceable: two Ellie support hands, two Radiance relationship hands, two ECE compass hands, and two Alia mission hands.",
+        "Alia's active restrained bare midriff band remains absent; the copper bodice meets the copper waistband without the required visible skin band.",
+        "The paper diamond center sits visibly above the horizontal barrel and muzzle centerline rather than on it."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -5410,9 +5496,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 2,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia remains active with accepted scenes 1549 and 1550 preserved. X publication is mandatory only after scenes 1548 and 1551 are accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia remains active at two accepted scenes. Historical X backlog is empty. Georgia publication remains mandatory immediately after all four scenes are accepted and the completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T14:23:34.320Z",
+  "checkpointedAt": "2026-08-11T14:32:14.981Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -6029,13 +6115,37 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1548,
+      "round": 10,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-10-recovery/scene-1548.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-d5e57b0e-436e-4341-bcc5-491e82e84e51.png",
+      "sha256": "9F89195203B57DBACD1DD0224F207687E470265E462B082E91D82BD21764D7D2",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1551,
+      "round": 10,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-10-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-f5315a4e-f4f9-4f37-998d-161fb25cdd54.png",
+      "sha256": "F3A6A3BBEE1E303832006F1B02D7BF13C6B24FDDE6E43E252BC83AF270601E62",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-fresh-round-10-recovery-missing-scenes-only",
+    "action": "fresh-round-11-missing-scenes-only",
     "preserveAcceptedSceneNumbers": [
       1549,
       1550
@@ -6047,7 +6157,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T14:14:12.701Z",
+    "checkedAt": "2026-08-11T14:32:14.981Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -6100,6 +6210,9 @@
       "attachments": 3,
       "liveVerified": true
     },
-    "reconciliationDecision": "Live Honduras status matches the ledger; no eligible historical post remains and no duplicate upload is allowed."
+    "reconciliationDecision": "User requested immediate backlog drain; the authoritative ledger and signed-in live profile have zero eligible unposted historical items, so no duplicate or unauthorized post was sent.",
+    "pendingPost": null,
+    "preparedPostQueueCount": 0,
+    "deferredPostCheckpoint": null
   }
 }
