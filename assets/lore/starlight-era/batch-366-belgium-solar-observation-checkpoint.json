@@ -1,0 +1,1596 @@
+{
+  "batch": 366,
+  "country": "Belgium",
+  "status": "terminal-partially-accepted",
+  "sourceCommit": "de581d1ec9f24db41d63a014128b264c757248bc",
+  "contractSha256": "DE6789258B6D0DF600B16ED331C8AD4EF2EC250E68EF5ADE93DB1214AA0F21AE",
+  "rollMethod": "FNV-1a over the recorded batch366-belgium keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 359 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "hardLoveBeat": "0-14 lap sitting; 15-29 partner dance; 30-44 controlled dip; 45-59 seated embrace; 60-74 three-person slow dance; 75-89 pulled-away choice; 90-99 seated-to-standing assist",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "cinematicTheme": {
+    "active": "near-Sun solar-observation couture",
+    "batchOrdinalWithinTheme": 2,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "nextQueueCountry": "Haiti",
+  "nextQueueBatch": 367,
+  "nextQueueScenes": [
+    1488,
+    1489,
+    1490,
+    1491
+  ],
+  "nextCinematicTheme": {
+    "active": "deep-sea submersible couture",
+    "batchOrdinalWithinTheme": 1
+  },
+  "researchSources": [
+    {
+      "url": "https://www.britannica.com/place/Brussels",
+      "usedFor": "Brussels Grand Place and city setting"
+    },
+    {
+      "url": "https://www.britannica.com/place/Belgium",
+      "usedFor": "Belgium cities, rivers and regional geography"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/996/",
+      "usedFor": "Bruges historic center and canal architecture"
+    },
+    {
+      "url": "https://www.britannica.com/place/Antwerp-Belgium",
+      "usedFor": "Antwerp Scheldt waterfront and port setting"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch366-belgium-male-model-scene",
+    "fullHash": 4214942163,
+    "roll": 63,
+    "selectedScenePosition": 4,
+    "selectedScene": 1487,
+    "maleEmotion": {
+      "key": "batch366-belgium-scene4-male-emotion",
+      "roll": 19,
+      "result": "playful mischief"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Belgium flag, coat of arms, official seal, sacred symbol, copied ceremonial or traditional pattern, political messaging, copied military identity, or official service identity is used. Country-led scenes use large dimensional secular guildhall rooflines, canal currents, belfry arcs, port geometry, river bands and limestone cliff profiles instead.",
+    "palette": "Brussels gold, guildhall charcoal, Bruges canal blue, Flemish brick red, Antwerp silver, Meuse emerald, solar-observation graphite, heat-shield pearl, corona amber and visor cyan",
+    "minimumCoverage": "Scenes 1484 and 1485 each carry hard large Belgium motifs on three women and solar-observation construction language on at least two. Scenes 1486 and 1487 use four different theme-led solar-observation outfits without country map prints while Belgium landmarks remain equally foregrounded.",
+    "cultureScene": "The scenes foreground Brussels Grand Place, Bruges canals, Antwerp waterfront, and Dinant on the Meuse.",
+    "prohibitions": "Use respectful secular Belgian geography and architecture through complete guildhall rooflines, canal currents, belfry arcs, port geometry, river bands and limestone cliff profiles. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied agency identity, logo, badge, readable text, combat, threat or weaponized solar equipment."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch366-belgium-x-heart",
+      "roll": 4,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch366-belgium-x-internalagency",
+      "roll": 66,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch366-belgium-x-worldxxxseries",
+      "roll": 53,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Belgium images plus one accepted South Sudan image",
+    "captionIfEligible": "Belgium ❤️ South Sudan #Belgium",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1487 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1487 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch366-belgium-male-model-scene",
+        63
+      ],
+      [
+        "batch366-belgium-scene4-male-emotion",
+        19
+      ],
+      [
+        "batch366-belgium-scene1484-weather",
+        5
+      ],
+      [
+        "batch366-belgium-scene1484-mascotState",
+        37
+      ],
+      [
+        "batch366-belgium-scene1484-poleDanceTheme",
+        89
+      ],
+      [
+        "batch366-belgium-scene1484-rainbowOnly",
+        49
+      ],
+      [
+        "batch366-belgium-scene1484-rainbowHosiery",
+        8
+      ],
+      [
+        "batch366-belgium-scene1484-romanceBeat",
+        56
+      ],
+      [
+        "batch366-belgium-scene1484-compoundLoveBeat",
+        42
+      ],
+      [
+        "batch366-belgium-scene1484-hardLoveBeat",
+        34
+      ],
+      [
+        "batch366-belgium-scene1484-interestingProp",
+        2
+      ],
+      [
+        "batch366-belgium-scene1484-eceMissionProp-poseTargetRoll",
+        79
+      ],
+      [
+        "batch366-belgium-scene1484-Radiance-emotion",
+        78
+      ],
+      [
+        "batch366-belgium-scene1484-Radiance-visibleMidriff",
+        68
+      ],
+      [
+        "batch366-belgium-scene1484-Radiance-straplessDress",
+        31
+      ],
+      [
+        "batch366-belgium-scene1484-Radiance-fullyOpenBack",
+        56
+      ],
+      [
+        "batch366-belgium-scene1484-Ellie-emotion",
+        84
+      ],
+      [
+        "batch366-belgium-scene1484-Ellie-visibleMidriff",
+        78
+      ],
+      [
+        "batch366-belgium-scene1484-Ellie-straplessDress",
+        33
+      ],
+      [
+        "batch366-belgium-scene1484-Ellie-fullyOpenBack",
+        50
+      ],
+      [
+        "batch366-belgium-scene1484-Alia-emotion",
+        36
+      ],
+      [
+        "batch366-belgium-scene1484-Alia-visibleMidriff",
+        74
+      ],
+      [
+        "batch366-belgium-scene1484-Alia-straplessDress",
+        1
+      ],
+      [
+        "batch366-belgium-scene1484-Alia-fullyOpenBack",
+        58
+      ],
+      [
+        "batch366-belgium-scene1484-AI ECE-emotion",
+        2
+      ],
+      [
+        "batch366-belgium-scene1484-AI ECE-visibleMidriff",
+        64
+      ],
+      [
+        "batch366-belgium-scene1484-AI ECE-straplessDress",
+        95
+      ],
+      [
+        "batch366-belgium-scene1484-AI ECE-fullyOpenBack",
+        8
+      ],
+      [
+        "batch366-belgium-scene1485-weather",
+        26
+      ],
+      [
+        "batch366-belgium-scene1485-mascotState",
+        14
+      ],
+      [
+        "batch366-belgium-scene1485-poleDanceTheme",
+        0
+      ],
+      [
+        "batch366-belgium-scene1485-rainbowOnly",
+        22
+      ],
+      [
+        "batch366-belgium-scene1485-rainbowHosiery",
+        77
+      ],
+      [
+        "batch366-belgium-scene1485-romanceBeat",
+        55
+      ],
+      [
+        "batch366-belgium-scene1485-compoundLoveBeat",
+        67
+      ],
+      [
+        "batch366-belgium-scene1485-hardLoveBeat",
+        15
+      ],
+      [
+        "batch366-belgium-scene1485-interestingProp",
+        69
+      ],
+      [
+        "batch366-belgium-scene1485-eceMissionProp-poseTargetRoll",
+        84
+      ],
+      [
+        "batch366-belgium-scene1485-Radiance-emotion",
+        15
+      ],
+      [
+        "batch366-belgium-scene1485-Radiance-visibleMidriff",
+        39
+      ],
+      [
+        "batch366-belgium-scene1485-Radiance-straplessDress",
+        28
+      ],
+      [
+        "batch366-belgium-scene1485-Radiance-fullyOpenBack",
+        33
+      ],
+      [
+        "batch366-belgium-scene1485-Ellie-emotion",
+        63
+      ],
+      [
+        "batch366-belgium-scene1485-Ellie-visibleMidriff",
+        79
+      ],
+      [
+        "batch366-belgium-scene1485-Ellie-straplessDress",
+        28
+      ],
+      [
+        "batch366-belgium-scene1485-Ellie-fullyOpenBack",
+        85
+      ],
+      [
+        "batch366-belgium-scene1485-Alia-emotion",
+        33
+      ],
+      [
+        "batch366-belgium-scene1485-Alia-visibleMidriff",
+        81
+      ],
+      [
+        "batch366-belgium-scene1485-Alia-straplessDress",
+        98
+      ],
+      [
+        "batch366-belgium-scene1485-Alia-fullyOpenBack",
+        95
+      ],
+      [
+        "batch366-belgium-scene1485-AI ECE-emotion",
+        55
+      ],
+      [
+        "batch366-belgium-scene1485-AI ECE-visibleMidriff",
+        95
+      ],
+      [
+        "batch366-belgium-scene1485-AI ECE-straplessDress",
+        0
+      ],
+      [
+        "batch366-belgium-scene1485-AI ECE-fullyOpenBack",
+        29
+      ],
+      [
+        "batch366-belgium-scene1486-weather",
+        31
+      ],
+      [
+        "batch366-belgium-scene1486-mascotState",
+        51
+      ],
+      [
+        "batch366-belgium-scene1486-poleDanceTheme",
+        39
+      ],
+      [
+        "batch366-belgium-scene1486-rainbowOnly",
+        91
+      ],
+      [
+        "batch366-belgium-scene1486-rainbowHosiery",
+        22
+      ],
+      [
+        "batch366-belgium-scene1486-romanceBeat",
+        86
+      ],
+      [
+        "batch366-belgium-scene1486-compoundLoveBeat",
+        0
+      ],
+      [
+        "batch366-belgium-scene1486-hardLoveBeat",
+        52
+      ],
+      [
+        "batch366-belgium-scene1486-interestingProp",
+        4
+      ],
+      [
+        "batch366-belgium-scene1486-eceMissionProp-poseTargetRoll",
+        93
+      ],
+      [
+        "batch366-belgium-scene1486-Radiance-emotion",
+        92
+      ],
+      [
+        "batch366-belgium-scene1486-Radiance-visibleMidriff",
+        82
+      ],
+      [
+        "batch366-belgium-scene1486-Radiance-straplessDress",
+        37
+      ],
+      [
+        "batch366-belgium-scene1486-Radiance-fullyOpenBack",
+        10
+      ],
+      [
+        "batch366-belgium-scene1486-Ellie-emotion",
+        66
+      ],
+      [
+        "batch366-belgium-scene1486-Ellie-visibleMidriff",
+        4
+      ],
+      [
+        "batch366-belgium-scene1486-Ellie-straplessDress",
+        39
+      ],
+      [
+        "batch366-belgium-scene1486-Ellie-fullyOpenBack",
+        72
+      ],
+      [
+        "batch366-belgium-scene1486-Alia-emotion",
+        34
+      ],
+      [
+        "batch366-belgium-scene1486-Alia-visibleMidriff",
+        60
+      ],
+      [
+        "batch366-belgium-scene1486-Alia-straplessDress",
+        87
+      ],
+      [
+        "batch366-belgium-scene1486-Alia-fullyOpenBack",
+        36
+      ],
+      [
+        "batch366-belgium-scene1486-AI ECE-emotion",
+        56
+      ],
+      [
+        "batch366-belgium-scene1486-AI ECE-visibleMidriff",
+        62
+      ],
+      [
+        "batch366-belgium-scene1486-AI ECE-straplessDress",
+        41
+      ],
+      [
+        "batch366-belgium-scene1486-AI ECE-fullyOpenBack",
+        26
+      ],
+      [
+        "batch366-belgium-scene1487-weather",
+        88
+      ],
+      [
+        "batch366-belgium-scene1487-mascotState",
+        4
+      ],
+      [
+        "batch366-belgium-scene1487-poleDanceTheme",
+        94
+      ],
+      [
+        "batch366-belgium-scene1487-rainbowOnly",
+        84
+      ],
+      [
+        "batch366-belgium-scene1487-rainbowHosiery",
+        91
+      ],
+      [
+        "batch366-belgium-scene1487-romanceBeat",
+        97
+      ],
+      [
+        "batch366-belgium-scene1487-compoundLoveBeat",
+        25
+      ],
+      [
+        "batch366-belgium-scene1487-hardLoveBeat",
+        57
+      ],
+      [
+        "batch366-belgium-scene1487-interestingProp",
+        19
+      ],
+      [
+        "batch366-belgium-scene1487-eceMissionProp-poseTargetRoll",
+        14
+      ],
+      [
+        "batch366-belgium-scene1487-Radiance-emotion",
+        5
+      ],
+      [
+        "batch366-belgium-scene1487-Radiance-visibleMidriff",
+        49
+      ],
+      [
+        "batch366-belgium-scene1487-Radiance-straplessDress",
+        86
+      ],
+      [
+        "batch366-belgium-scene1487-Radiance-fullyOpenBack",
+        39
+      ],
+      [
+        "batch366-belgium-scene1487-Ellie-emotion",
+        33
+      ],
+      [
+        "batch366-belgium-scene1487-Ellie-visibleMidriff",
+        73
+      ],
+      [
+        "batch366-belgium-scene1487-Ellie-straplessDress",
+        98
+      ],
+      [
+        "batch366-belgium-scene1487-Ellie-fullyOpenBack",
+        91
+      ],
+      [
+        "batch366-belgium-scene1487-Alia-emotion",
+        35
+      ],
+      [
+        "batch366-belgium-scene1487-Alia-visibleMidriff",
+        55
+      ],
+      [
+        "batch366-belgium-scene1487-Alia-straplessDress",
+        36
+      ],
+      [
+        "batch366-belgium-scene1487-Alia-fullyOpenBack",
+        65
+      ],
+      [
+        "batch366-belgium-scene1487-AI ECE-emotion",
+        25
+      ],
+      [
+        "batch366-belgium-scene1487-AI ECE-visibleMidriff",
+        17
+      ],
+      [
+        "batch366-belgium-scene1487-AI ECE-straplessDress",
+        6
+      ],
+      [
+        "batch366-belgium-scene1487-AI ECE-fullyOpenBack",
+        7
+      ],
+      [
+        "batch366-belgium-x-heart",
+        4
+      ],
+      [
+        "batch366-belgium-x-internalagency",
+        66
+      ],
+      [
+        "batch366-belgium-x-worldxxxseries",
+        53
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch366-belgium-scene1484-rainbowHosieryWearer",
+        88
+      ],
+      [
+        "batch366-belgium-scene1484-rainbowHosieryPaletteMode",
+        52
+      ],
+      [
+        "batch366-belgium-scene1484-mascotHolder",
+        50
+      ],
+      [
+        "batch366-belgium-scene1484-interestingPropHolder",
+        44
+      ],
+      [
+        "batch366-belgium-scene1484-interestingPropFamily",
+        34
+      ],
+      [
+        "batch366-belgium-scene1485-rainbowHosieryWearer",
+        37
+      ],
+      [
+        "batch366-belgium-scene1485-rainbowHosieryPaletteMode",
+        71
+      ],
+      [
+        "batch366-belgium-scene1485-mascotHolder",
+        83
+      ],
+      [
+        "batch366-belgium-scene1485-interestingPropHolder",
+        95
+      ],
+      [
+        "batch366-belgium-scene1485-interestingPropFamily",
+        77
+      ],
+      [
+        "batch366-belgium-scene1486-rainbowHosieryWearer",
+        38
+      ],
+      [
+        "batch366-belgium-scene1486-rainbowHosieryPaletteMode",
+        54
+      ],
+      [
+        "batch366-belgium-scene1486-mascotHolder",
+        16
+      ],
+      [
+        "batch366-belgium-scene1486-interestingPropHolder",
+        34
+      ],
+      [
+        "batch366-belgium-scene1486-interestingPropFamily",
+        84
+      ],
+      [
+        "batch366-belgium-scene1487-rainbowHosieryWearer",
+        71
+      ],
+      [
+        "batch366-belgium-scene1487-rainbowHosieryPaletteMode",
+        93
+      ],
+      [
+        "batch366-belgium-scene1487-mascotHolder",
+        37
+      ],
+      [
+        "batch366-belgium-scene1487-interestingPropHolder",
+        65
+      ],
+      [
+        "batch366-belgium-scene1487-interestingPropFamily",
+        71
+      ]
+    ],
+    "primaryPairCount": 109,
+    "selectorPairCount": 20,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "22C38362B2A9E6CD7DDA321B4ECAF9B2C4934E6A65C8E5FE0F3A8BC314E992AC",
+    "selectorPairsSha256": "0C99D691FF24B441C52FDADBC09193197F65FABA6C7E2F43C70AAEBF6A8DAE5D"
+  },
+  "scenePlans": {
+    "1484": {
+      "scene": 1484,
+      "mode": "country-led hybrid",
+      "theme": "near-Sun solar-observation couture",
+      "landmark": "a broad dry Brussels Grand Place terrace with the complete ornate guildhall facades, Town Hall spire, cobbled square and surrounding historic roofline, fused in the foreground with a peaceful fictional near-Sun solar-observation deck, coronagraph arch and thermal sampling platform",
+      "motifs": "complete guildhall rooflines, spire arcs, cobble geometry, coronagraph rings and solar-plasma strata",
+      "culture": "Brussels reads through the Grand Place guildhalls, Town Hall spire, broad cobbled square and dense historic roofline; every solar-observation element is peaceful civilian research hardware.",
+      "weather": {
+        "key": "batch366-belgium-scene1484-weather",
+        "roll": 5,
+        "result": "clear golden-hour radiance",
+        "materialized": "clear golden-hour radiance"
+      },
+      "mascotState": {
+        "key": "batch366-belgium-scene1484-mascotState",
+        "roll": 37,
+        "result": "PAWS only"
+      },
+      "mascotHolder": {
+        "key": "batch366-belgium-scene1484-mascotHolder",
+        "roll": 50,
+        "result": "AI ECE"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry observation lounge far from square traffic, target line and solar equipment.",
+      "interestingProp": {
+        "key": "batch366-belgium-scene1484-interestingProp",
+        "roll": 2,
+        "active": true,
+        "holder": {
+          "key": "batch366-belgium-scene1484-interestingPropHolder",
+          "roll": 44,
+          "result": "AI ECE"
+        },
+        "family": {
+          "key": "batch366-belgium-scene1484-interestingPropFamily",
+          "roll": 34,
+          "result": "chromatic brass telescope with folding legs"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch366-belgium-scene1484-poleDanceTheme",
+        "roll": 89,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch366-belgium-scene1484-rainbowOnly",
+        "roll": 49,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch366-belgium-scene1484-rainbowHosiery",
+        "roll": 8,
+        "active": true,
+        "wearer": {
+          "key": "batch366-belgium-scene1484-rainbowHosieryWearer",
+          "roll": 88,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch366-belgium-scene1484-rainbowHosieryPaletteMode",
+          "roll": 52,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch366-belgium-scene1484-eceMissionProp-poseTargetRoll",
+        "roll": 79
+      },
+      "materializedPropAction": "A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch366-belgium-scene1484-romanceBeat",
+        "roll": 56,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch366-belgium-scene1484-compoundLoveBeat",
+        "roll": 42,
+        "index": 6,
+        "contractResult": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "hardLoveBeat": {
+        "key": "batch366-belgium-scene1484-hardLoveBeat",
+        "roll": 34,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch366-belgium-scene1484-Radiance-emotion",
+            "roll": 78,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1484-Radiance-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1484-Radiance-straplessDress",
+            "roll": 31,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1484-Radiance-fullyOpenBack",
+            "roll": 56,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch366-belgium-scene1484-Ellie-emotion",
+            "roll": 84,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1484-Ellie-visibleMidriff",
+            "roll": 78,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1484-Ellie-straplessDress",
+            "roll": 33,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1484-Ellie-fullyOpenBack",
+            "roll": 50,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch366-belgium-scene1484-Alia-emotion",
+            "roll": 36,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1484-Alia-visibleMidriff",
+            "roll": 74,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1484-Alia-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1484-Alia-fullyOpenBack",
+            "roll": 58,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch366-belgium-scene1484-AI ECE-emotion",
+            "roll": 2,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1484-AI ECE-visibleMidriff",
+            "roll": 64,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1484-AI ECE-straplessDress",
+            "roll": 95,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1484-AI ECE-fullyOpenBack",
+            "roll": 8,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Brussels-gold coronagraph-petal tunic over opaque charcoal tailored shorts with dimensional guildhall fans, silver thermal hoops and solar ankle boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Flemish-brick architectural sail trousers with pearl spire ribs, gold heat-shield panels and gyroscope platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "cobble-silver scalloped fan skirt with a secure emerald arcade bodice, braided gold roofline cords and prism pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "solar-graphite flare-shield bodice over opaque cyan tulip shorts with corona seal rings and observation boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "Brussels-gold coronagraph-petal tunic over opaque charcoal tailored shorts with dimensional guildhall fans, silver thermal hoops and solar ankle boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Flemish-brick architectural sail trousers with pearl spire ribs, gold heat-shield panels and gyroscope platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "cobble-silver scalloped fan skirt with a secure emerald arcade bodice, braided gold roofline cords and prism pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "solar-graphite flare-shield bodice over opaque cyan tulip shorts with corona seal rings and observation boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Radiance leads ECE through a stable turning dance while Alia catches Radiance's linked hand and Ellie interrupts with a clear waist embrace and rival eye line.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance links Alia",
+        "Alia links Radiance",
+        "Ellie and ECE complete visible waist and shoulder contacts"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Brussels Grand Place terrace with the complete ornate guildhall facades, Town Hall spire, cobbled square and surrounding historic roofline, fused in the foreground with a peaceful fictional near-Sun solar-observation deck, coronagraph arch and thermal sampling platform. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: near-Sun solar-observation couture. The theme and Belgium location must both be immediate foreground reads. Brussels reads through the Grand Place guildhalls, Town Hall spire, broad cobbled square and dense historic roofline; every solar-observation element is peaceful civilian research hardware. Stored scene rolls: weather 5=clear golden-hour radiance; mascot state 37=PAWS only; mascot holder selector 50=AI ECE; odd prop 2=active; odd holder 44=AI ECE; odd family 34=chromatic brass telescope with folding legs; pole 89=inactive; rainbow-only 49=inactive; rainbow hosiery 8=active; wearer 88=AI ECE; palette 52=original independent rainbow gradient; romance 56; compound 42; hard love 34; mission-prop pose/target 79. Exact wardrobe rolls: Radiance: midriff 68=covered, strapless 31=active, open back 56=inactive; Ellie: midriff 78=covered, strapless 33=active, open back 50=inactive; Alia: midriff 74=covered, strapless 1=active, open back 58=inactive; AI ECE: midriff 64=covered, strapless 95=inactive, open back 8=active. Exact outfit fingerprints, no substitutions: Radiance: Brussels-gold coronagraph-petal tunic over opaque charcoal tailored shorts with dimensional guildhall fans, silver thermal hoops and solar ankle boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: Flemish-brick architectural sail trousers with pearl spire ribs, gold heat-shield panels and gyroscope platforms; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: cobble-silver scalloped fan skirt with a secure emerald arcade bodice, braided gold roofline cords and prism pumps; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: solar-graphite flare-shield bodice over opaque cyan tulip shorts with corona seal rings and observation boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large guildhall, spire and square motifs; Radiance and ECE use coronagraph-shell, thermal-seal and light-baffle construction. Location design vocabulary: complete guildhall rooflines, spire arcs, cobble geometry, coronagraph rings and solar-plasma strata. Use respectful secular Belgian geography and architecture through complete guildhall rooflines, canal currents, belfry arcs, port geometry, river bands and limestone cliff profiles. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied agency identity, logo, badge, readable text, combat, threat or weaponized solar equipment. Four visibly distinct coherent emotions: Radiance: roll 78=deep sadness, performed as deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 84=crying with visible tears, performed as crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 36=magnetic confidence, performed as magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 2=tender affection, performed as tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 56: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 42: Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look. Mandatory hard-love roll 34: a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Radiance leads ECE through a stable turning dance while Alia catches Radiance's linked hand and Ellie interrupts with a clear waist embrace and rival eye line. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance links Alia; Alia links Radiance; Ellie and ECE complete visible waist and shoulder contacts. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 37=PAWS only. Mascot holder selector 50=AI ECE. Only rolled mascots appear on a padded dry observation lounge far from square traffic, target line and solar equipment. Odd-prop roll is active. Exactly AI ECE owns and creatively integrates one chromatic brass telescope with folding legs into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render clear golden-hour radiance cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1485": {
+      "scene": 1485,
+      "mode": "country-led hybrid",
+      "theme": "near-Sun solar-observation couture",
+      "landmark": "a broad dry Bruges canal terrace with the complete Rozenhoedkaai waterfront, stepped-gable houses, Belfry tower, stone bridges and reflective canal, fused equally with a peaceful solar telescope, heat-shield gallery and plasma-monitoring array",
+      "motifs": "complete canal currents, stepped gables, belfry arcs, telescope ribs and heat-shield geometry",
+      "culture": "Bruges reads through its reflective canal, stepped-gable waterfront, stone bridges and Belfry skyline, using only secular architectural forms.",
+      "weather": {
+        "key": "batch366-belgium-scene1485-weather",
+        "roll": 26,
+        "result": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast"
+      },
+      "mascotState": {
+        "key": "batch366-belgium-scene1485-mascotState",
+        "roll": 14,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch366-belgium-scene1485-mascotHolder",
+        "roll": 83,
+        "result": "Alia"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded canal-view platform far from water, bridges, visitors, props and solar equipment.",
+      "interestingProp": {
+        "key": "batch366-belgium-scene1485-interestingProp",
+        "roll": 69,
+        "active": false,
+        "holder": {
+          "key": "batch366-belgium-scene1485-interestingPropHolder",
+          "roll": 95,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch366-belgium-scene1485-interestingPropFamily",
+          "roll": 77,
+          "result": "mirrored megaphone sculpture"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch366-belgium-scene1485-poleDanceTheme",
+        "roll": 0,
+        "active": true
+      },
+      "rainbowOnly": {
+        "key": "batch366-belgium-scene1485-rainbowOnly",
+        "roll": 22,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch366-belgium-scene1485-rainbowHosiery",
+        "roll": 77,
+        "active": false,
+        "wearer": {
+          "key": "batch366-belgium-scene1485-rainbowHosieryWearer",
+          "roll": 37,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch366-belgium-scene1485-rainbowHosieryPaletteMode",
+          "roll": 71,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch366-belgium-scene1485-eceMissionProp-poseTargetRoll",
+        "roll": 84
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line",
+      "romanceBeat": {
+        "key": "batch366-belgium-scene1485-romanceBeat",
+        "roll": 55,
+        "dynamicIndex": 7,
+        "contractResult": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compoundLoveBeat": {
+        "key": "batch366-belgium-scene1485-compoundLoveBeat",
+        "roll": 67,
+        "index": 7,
+        "contractResult": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLoveBeat": {
+        "key": "batch366-belgium-scene1485-hardLoveBeat",
+        "roll": 15,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch366-belgium-scene1485-Radiance-emotion",
+            "roll": 15,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1485-Radiance-visibleMidriff",
+            "roll": 39,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1485-Radiance-straplessDress",
+            "roll": 28,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1485-Radiance-fullyOpenBack",
+            "roll": 33,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch366-belgium-scene1485-Ellie-emotion",
+            "roll": 63,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1485-Ellie-visibleMidriff",
+            "roll": 79,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1485-Ellie-straplessDress",
+            "roll": 28,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1485-Ellie-fullyOpenBack",
+            "roll": 85,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch366-belgium-scene1485-Alia-emotion",
+            "roll": 33,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1485-Alia-visibleMidriff",
+            "roll": 81,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1485-Alia-straplessDress",
+            "roll": 98,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1485-Alia-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch366-belgium-scene1485-AI ECE-emotion",
+            "roll": 55,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1485-AI ECE-visibleMidriff",
+            "roll": 95,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1485-AI ECE-straplessDress",
+            "roll": 0,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1485-AI ECE-fullyOpenBack",
+            "roll": 29,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "canal-blue bubble-hem dress with three-dimensional stepped-gable corsage, pearl bridge lattice and corona heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "heat-shield pearl split-tail waistcoat over opaque graphite balloon trousers with solar-fin pleats, belfry shoulders and platform mules; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Flemish-brick spiral-wrap skirt with secure gold canal-shell top, braided silver bridge relief and mirror pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "visor-cyan articulated solar tabard over opaque emerald shorts with flare framework, thermal-joint appliques and suspension boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "canal-blue bubble-hem dress with three-dimensional stepped-gable corsage, pearl bridge lattice and corona heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "heat-shield pearl split-tail waistcoat over opaque graphite balloon trousers with solar-fin pleats, belfry shoulders and platform mules; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "Flemish-brick spiral-wrap skirt with secure gold canal-shell top, braided silver bridge relief and mirror pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "visor-cyan articulated solar tabard over opaque emerald shorts with flare framework, thermal-joint appliques and suspension boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Ellie rises from a stable observation bench into Alia's full embrace while ECE gives Ellie a quick cheek kiss and Radiance blocks the open path with a linked-hand invitation.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Alia supports Ellie",
+        "ECE kisses Ellie",
+        "Radiance completes the linked-hand interruption"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Bruges canal terrace with the complete Rozenhoedkaai waterfront, stepped-gable houses, Belfry tower, stone bridges and reflective canal, fused equally with a peaceful solar telescope, heat-shield gallery and plasma-monitoring array. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: country-led hybrid. Active cinematic fashion theme: near-Sun solar-observation couture. The theme and Belgium location must both be immediate foreground reads. Bruges reads through its reflective canal, stepped-gable waterfront, stone bridges and Belfry skyline, using only secular architectural forms. Stored scene rolls: weather 26=soft dramatic overcast; mascot state 14=PAWS and MAX together; mascot holder selector 83=Alia; odd prop 69=inactive; odd holder 95=Alia; odd family 77=mirrored megaphone sculpture; pole 0=active; rainbow-only 22=inactive; rainbow hosiery 77=inactive; wearer 37=Radiance; palette 71=original independent rainbow gradient; romance 55; compound 67; hard love 15; mission-prop pose/target 84. Exact wardrobe rolls: Radiance: midriff 39=visible, strapless 28=active, open back 33=inactive; Ellie: midriff 79=covered, strapless 28=active, open back 85=inactive; Alia: midriff 81=covered, strapless 98=inactive, open back 95=inactive; AI ECE: midriff 95=covered, strapless 0=active, open back 29=active. Exact outfit fingerprints, no substitutions: Radiance: canal-blue bubble-hem dress with three-dimensional stepped-gable corsage, pearl bridge lattice and corona heels; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: heat-shield pearl split-tail waistcoat over opaque graphite balloon trousers with solar-fin pleats, belfry shoulders and platform mules; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: Flemish-brick spiral-wrap skirt with secure gold canal-shell top, braided silver bridge relief and mirror pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: visor-cyan articulated solar tabard over opaque emerald shorts with flare framework, thermal-joint appliques and suspension boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Radiance, Ellie and Alia carry hard large canal, gable and belfry motifs; Ellie and ECE use telescope-shell, thermal-joint and shield-array construction. Location design vocabulary: complete canal currents, stepped gables, belfry arcs, telescope ribs and heat-shield geometry. Use respectful secular Belgian geography and architecture through complete guildhall rooflines, canal currents, belfry arcs, port geometry, river bands and limestone cliff profiles. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied agency identity, logo, badge, readable text, combat, threat or weaponized solar equipment. Four visibly distinct coherent emotions: Radiance: roll 15=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 63=visible jealousy, performed as visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 33=overwhelming relief, performed as overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 55=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 55: Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy. Compound roll 67: Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon. Mandatory hard-love roll 15: a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Ellie rises from a stable observation bench into Alia's full embrace while ECE gives Ellie a quick cheek kiss and Radiance blocks the open path with a linked-hand invitation. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Alia supports Ellie; ECE kisses Ellie; Radiance completes the linked-hand interruption. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, habitat, building or camera along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 14=PAWS and MAX together. Mascot holder selector 83=Alia. Only rolled mascots appear on a secured padded canal-view platform far from water, bridges, visitors, props and solar equipment. Odd-prop roll 69 is inactive. Do not add any bizarre secondary prop; stored inactive holder 95=Alia and family 77=mirrored megaphone sculpture remain audit-only. Pole theme is active only as a stationary public-safe fashion motif, with no dance, stripping, or suggestive performance. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render soft dramatic overcast cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1486": {
+      "scene": 1486,
+      "mode": "theme-led original",
+      "theme": "near-Sun solar-observation couture",
+      "landmark": "a broad dry Antwerp waterfront overlook with the complete Scheldt river, MAS museum block geometry, port cranes, red-brick warehouses and modern skyline, fused equally with a peaceful near-Sun observation station and panoramic heliophysics deck",
+      "motifs": "location-only river bands, museum blocks, crane lines, telescope irises and plasma rings",
+      "culture": "Antwerp reads through the broad Scheldt, MAS block tower, port cranes, red-brick warehouses and modern skyline; vessels remain distant and outside every prop line.",
+      "weather": {
+        "key": "batch366-belgium-scene1486-weather",
+        "roll": 31,
+        "result": "cinematic light rain with reflections",
+        "materialized": "cinematic light rain with reflections"
+      },
+      "mascotState": {
+        "key": "batch366-belgium-scene1486-mascotState",
+        "roll": 51,
+        "result": "MAX only"
+      },
+      "mascotHolder": {
+        "key": "batch366-belgium-scene1486-mascotHolder",
+        "roll": 16,
+        "result": "Ellie"
+      },
+      "mascotPlan": "Only rolled mascots appear on a secured padded platform far from water, vessels, port equipment, props and solar machinery.",
+      "interestingProp": {
+        "key": "batch366-belgium-scene1486-interestingProp",
+        "roll": 4,
+        "active": true,
+        "holder": {
+          "key": "batch366-belgium-scene1486-interestingPropHolder",
+          "roll": 34,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch366-belgium-scene1486-interestingPropFamily",
+          "roll": 84,
+          "result": "giant tuning fork instrument"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch366-belgium-scene1486-poleDanceTheme",
+        "roll": 39,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch366-belgium-scene1486-rainbowOnly",
+        "roll": 91,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch366-belgium-scene1486-rainbowHosiery",
+        "roll": 22,
+        "active": true,
+        "wearer": {
+          "key": "batch366-belgium-scene1486-rainbowHosieryWearer",
+          "roll": 38,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch366-belgium-scene1486-rainbowHosieryPaletteMode",
+          "roll": 54,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch366-belgium-scene1486-eceMissionProp-poseTargetRoll",
+        "roll": 93
+      },
+      "materializedPropAction": "Alia demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera",
+      "romanceBeat": {
+        "key": "batch366-belgium-scene1486-romanceBeat",
+        "roll": 86,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch366-belgium-scene1486-compoundLoveBeat",
+        "roll": 0,
+        "index": 0,
+        "contractResult": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "hardLoveBeat": {
+        "key": "batch366-belgium-scene1486-hardLoveBeat",
+        "roll": 52,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch366-belgium-scene1486-Radiance-emotion",
+            "roll": 92,
+            "result": "guilt and remorse",
+            "materializedResult": "guilt and remorse",
+            "performance": "guilt and remorse expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1486-Radiance-visibleMidriff",
+            "roll": 82,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1486-Radiance-straplessDress",
+            "roll": 37,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1486-Radiance-fullyOpenBack",
+            "roll": 10,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch366-belgium-scene1486-Ellie-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1486-Ellie-visibleMidriff",
+            "roll": 4,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1486-Ellie-straplessDress",
+            "roll": 39,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1486-Ellie-fullyOpenBack",
+            "roll": 72,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch366-belgium-scene1486-Alia-emotion",
+            "roll": 34,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1486-Alia-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1486-Alia-straplessDress",
+            "roll": 87,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1486-Alia-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch366-belgium-scene1486-AI ECE-emotion",
+            "roll": 56,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1486-AI ECE-visibleMidriff",
+            "roll": 62,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1486-AI ECE-straplessDress",
+            "roll": 41,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1486-AI ECE-fullyOpenBack",
+            "roll": 26,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "guilt and remorse expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "corona-gold telescope-iris pannier dress with opaque pearl hub plates, Antwerp-red aperture pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "solar-graphite sensor-truss culotte coat with a rigid asymmetric shoulder bridge, silver crane panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "heat-shield white solar-sail draped jumpsuit with braided emerald seams, curved Scheldt-blue side sails and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Antwerp-silver flare-shield bodice with an opaque high-low cobalt skirt, cyan plasma hoops and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "outfitFingerprints": {
+        "Radiance": "corona-gold telescope-iris pannier dress with opaque pearl hub plates, Antwerp-red aperture pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "solar-graphite sensor-truss culotte coat with a rigid asymmetric shoulder bridge, silver crane panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "heat-shield white solar-sail draped jumpsuit with braided emerald seams, curved Scheldt-blue side sails and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "Antwerp-silver flare-shield bodice with an opaque high-low cobalt skirt, cyan plasma hoops and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory"
+      },
+      "composition": "Alia sits securely sideways across ECE's lap on a stable low bench while Radiance draws Alia into a linked-hand choice and Ellie interrupts with a close shoulder embrace and direct rival eye line.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "ECE supports Alia",
+        "Radiance links Alia",
+        "Ellie completes a visible shoulder contact"
+      ],
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry Antwerp waterfront overlook with the complete Scheldt river, MAS museum block geometry, port cranes, red-brick warehouses and modern skyline, fused equally with a peaceful near-Sun observation station and panoramic heliophysics deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: near-Sun solar-observation couture. The theme and Belgium location must both be immediate foreground reads. Antwerp reads through the broad Scheldt, MAS block tower, port cranes, red-brick warehouses and modern skyline; vessels remain distant and outside every prop line. Stored scene rolls: weather 31=cinematic light rain with reflections; mascot state 51=MAX only; mascot holder selector 16=Ellie; odd prop 4=active; odd holder 34=Ellie; odd family 84=giant tuning fork instrument; pole 39=inactive; rainbow-only 91=inactive; rainbow hosiery 22=active; wearer 38=Radiance; palette 54=original independent rainbow gradient; romance 86; compound 0; hard love 52; mission-prop pose/target 93. Exact wardrobe rolls: Radiance: midriff 82=covered, strapless 37=inactive, open back 10=active; Ellie: midriff 4=visible, strapless 39=inactive, open back 72=inactive; Alia: midriff 60=covered, strapless 87=inactive, open back 36=inactive; AI ECE: midriff 62=covered, strapless 41=inactive, open back 26=active. Exact outfit fingerprints, no substitutions: Radiance: corona-gold telescope-iris pannier dress with opaque pearl hub plates, Antwerp-red aperture pleats and gyroscope heels; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: solar-graphite sensor-truss culotte coat with a rigid asymmetric shoulder bridge, silver crane panels and expedition platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: heat-shield white solar-sail draped jumpsuit with braided emerald seams, curved Scheldt-blue side sails and prism pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: Antwerp-silver flare-shield bodice with an opaque high-low cobalt skirt, cyan plasma hoops and mast boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Telescope iris, sensor truss, solar sail and flare shield create four unrelated silhouettes while Antwerp remains equally large. Location design vocabulary: location-only river bands, museum blocks, crane lines, telescope irises and plasma rings. Use respectful secular Belgian geography and architecture through complete guildhall rooflines, canal currents, belfry arcs, port geometry, river bands and limestone cliff profiles. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied agency identity, logo, badge, readable text, combat, threat or weaponized solar equipment. Four visibly distinct coherent emotions: Radiance: roll 92=guilt and remorse, performed as guilt and remorse expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 66=possessive tension, performed as possessive tension expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 34=overwhelming relief, performed as overwhelming relief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 56=aching romantic longing, performed as aching romantic longing expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 86: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Compound roll 0: Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy. Mandatory hard-love roll 52: a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia sits securely sideways across ECE's lap on a stable low bench while Radiance draws Alia into a linked-hand choice and Ellie interrupts with a close shoulder embrace and direct rival eye line. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; ECE supports Alia; Radiance links Alia; Ellie completes a visible shoulder contact. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly Radiance wears varied opaque public-safe knee socks in an original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. Mascot state 51=MAX only. Mascot holder selector 16=Ellie. Only rolled mascots appear on a secured padded platform far from water, vessels, port equipment, props and solar machinery. Odd-prop roll is active. Exactly Ellie owns and creatively integrates one giant tuning fork instrument into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render cinematic light rain with reflections cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1487": {
+      "scene": 1487,
+      "mode": "theme-led original",
+      "theme": "near-Sun solar-observation couture",
+      "landmark": "a broad dry Dinant overlook with the complete Meuse river bend, Citadel cliff, Collegiate Church silhouette, arched bridge and colorful riverfront houses, fused equally with a peaceful near-Sun research station and panoramic solar-imaging deck",
+      "motifs": "location-only river bands, cliff profiles, bridge arcs, observatory modules and corona geometry",
+      "culture": "Dinant reads through the Meuse bend, limestone Citadel cliff, church silhouette, bridge and colorful riverfront, while couture motifs remain secular and geographic.",
+      "weather": {
+        "key": "batch366-belgium-scene1487-weather",
+        "roll": 88,
+        "result": "rare aurora sky",
+        "materialized": "rare aurora sky"
+      },
+      "mascotState": {
+        "key": "batch366-belgium-scene1487-mascotState",
+        "roll": 4,
+        "result": "PAWS and MAX together"
+      },
+      "mascotHolder": {
+        "key": "batch366-belgium-scene1487-mascotHolder",
+        "roll": 37,
+        "result": "Ellie"
+      },
+      "mascotPlan": "Only rolled mascots appear on a padded dry overlook far from cliff edges, river traffic, props and solar equipment.",
+      "interestingProp": {
+        "key": "batch366-belgium-scene1487-interestingProp",
+        "roll": 19,
+        "active": true,
+        "holder": {
+          "key": "batch366-belgium-scene1487-interestingPropHolder",
+          "roll": 65,
+          "result": "Alia"
+        },
+        "family": {
+          "key": "batch366-belgium-scene1487-interestingPropFamily",
+          "roll": 71,
+          "result": "gyroscopic hard-shell suitcase"
+        }
+      },
+      "poleDanceTheme": {
+        "key": "batch366-belgium-scene1487-poleDanceTheme",
+        "roll": 94,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch366-belgium-scene1487-rainbowOnly",
+        "roll": 84,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch366-belgium-scene1487-rainbowHosiery",
+        "roll": 91,
+        "active": false,
+        "wearer": {
+          "key": "batch366-belgium-scene1487-rainbowHosieryWearer",
+          "roll": 71,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch366-belgium-scene1487-rainbowHosieryPaletteMode",
+          "roll": 93,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch366-belgium-scene1487-eceMissionProp-poseTargetRoll",
+        "roll": 14
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera",
+      "romanceBeat": {
+        "key": "batch366-belgium-scene1487-romanceBeat",
+        "roll": 97,
+        "dynamicIndex": 1,
+        "contractResult": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compoundLoveBeat": {
+        "key": "batch366-belgium-scene1487-compoundLoveBeat",
+        "roll": 25,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLoveBeat": {
+        "key": "batch366-belgium-scene1487-hardLoveBeat",
+        "roll": 57,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch366-belgium-scene1487-Radiance-emotion",
+            "roll": 5,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1487-Radiance-visibleMidriff",
+            "roll": 49,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1487-Radiance-straplessDress",
+            "roll": 86,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1487-Radiance-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch366-belgium-scene1487-Ellie-emotion",
+            "roll": 33,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1487-Ellie-visibleMidriff",
+            "roll": 73,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1487-Ellie-straplessDress",
+            "roll": 98,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1487-Ellie-fullyOpenBack",
+            "roll": 91,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch366-belgium-scene1487-Alia-emotion",
+            "roll": 35,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1487-Alia-visibleMidriff",
+            "roll": 55,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1487-Alia-straplessDress",
+            "roll": 36,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1487-Alia-fullyOpenBack",
+            "roll": 65,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch366-belgium-scene1487-AI ECE-emotion",
+            "roll": 25,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch366-belgium-scene1487-AI ECE-visibleMidriff",
+            "roll": 17,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch366-belgium-scene1487-AI ECE-straplessDress",
+            "roll": 6,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch366-belgium-scene1487-AI ECE-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "heat-shield pearl coronagraph-dome cape dress with corona-gold ribs, Meuse-blue lens appliques and solar ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Dinant-cobalt radiator-lattice tapered trouser suit with graphite hex panels, bridge pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "silver navigation-spindle peplum top over an opaque emerald asymmetric skirt with braided cliff-green seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "solar-graphite thermal-shield bodice over opaque corona-amber culottes with pearl conduit lattice and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Belgium guildhall-roofline and canal-current embroidery with subtle near-Sun solar-observation seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "outfitFingerprints": {
+        "Radiance": "heat-shield pearl coronagraph-dome cape dress with corona-gold ribs, Meuse-blue lens appliques and solar ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Ellie": "Dinant-cobalt radiator-lattice tapered trouser suit with graphite hex panels, bridge pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Alia": "silver navigation-spindle peplum top over an opaque emerald asymmetric skirt with braided cliff-green seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "AI ECE": "solar-graphite thermal-shield bodice over opaque corona-amber culottes with pearl conduit lattice and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Belgium guildhall-roofline and canal-current embroidery with subtle near-Sun solar-observation seam tailoring, fitted black jeans, and practical black boots"
+      },
+      "composition": "Alia steps away in visible hurt while Radiance and Ellie each catch one forearm and ECE closes from behind into a protective embrace, creating a clear three-way reconciliation choice.",
+      "handInventory": [
+        "resolved handler uses two hands on the inert mission prop",
+        "Radiance catches Alia",
+        "Ellie catches Alia",
+        "ECE completes a protective behind contact"
+      ],
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch366-belgium-scene4-male-emotion",
+          "roll": 19,
+          "result": "playful mischief"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry Dinant overlook with the complete Meuse river bend, Citadel cliff, Collegiate Church silhouette, arched bridge and colorful riverfront houses, fused equally with a peaceful near-Sun research station and panoramic solar-imaging deck. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Scene mode: theme-led original. Active cinematic fashion theme: near-Sun solar-observation couture. The theme and Belgium location must both be immediate foreground reads. Dinant reads through the Meuse bend, limestone Citadel cliff, church silhouette, bridge and colorful riverfront, while couture motifs remain secular and geographic. Stored scene rolls: weather 88=rare aurora sky; mascot state 4=PAWS and MAX together; mascot holder selector 37=Ellie; odd prop 19=active; odd holder 65=Alia; odd family 71=gyroscopic hard-shell suitcase; pole 94=inactive; rainbow-only 84=inactive; rainbow hosiery 91=inactive; wearer 71=AI ECE; palette 93=original independent rainbow gradient; romance 97; compound 25; hard love 57; mission-prop pose/target 14. Exact wardrobe rolls: Radiance: midriff 49=visible, strapless 86=inactive, open back 39=inactive; Ellie: midriff 73=covered, strapless 98=inactive, open back 91=inactive; Alia: midriff 55=covered, strapless 36=inactive, open back 65=inactive; AI ECE: midriff 17=visible, strapless 6=active, open back 7=active. Exact outfit fingerprints, no substitutions: Radiance: heat-shield pearl coronagraph-dome cape dress with corona-gold ribs, Meuse-blue lens appliques and solar ankle boots; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Ellie: Dinant-cobalt radiator-lattice tapered trouser suit with graphite hex panels, bridge pleats and magnetic platforms; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Alia: silver navigation-spindle peplum top over an opaque emerald asymmetric skirt with braided cliff-green seams and optic pumps; the rolled neckline keeps a deeply open-necked bare-arm architectural bodice with no sleeves or neck-covering layer; the rolled waist stays fully covered through an opaque engineered join; the rolled back uses the blueprint's secure distinct back architecture; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; AI ECE: solar-graphite thermal-shield bodice over opaque corona-amber culottes with pearl conduit lattice and module boots; the rolled neckline overrides the base as a fully strapless secure opaque sculpted bodice with completely bare shoulders and no straps, sleeves, collar, or illusion mesh; the rolled waist uses a deliberate narrow visible midriff panel between separate opaque upper and lower constructions; the rolled back is completely open from shoulder blades to the secure lower-back waistline with no crossing straps, fabric panel, illusion mesh, or hair covering it; secure opaque lined above-knee coverage and complete distinct footwear remain mandatory; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top with restrained Belgium guildhall-roofline and canal-current embroidery with subtle near-Sun solar-observation seam tailoring, fitted black jeans, and practical black boots. Materialize every rolled cut exactly. The four silhouettes, constructions, materials, motif techniques, hems, and footwear must remain unmistakably different. No palette-swapped copies, matching mini-dress set, repeated map print, or color-only differentiation. Mode-specific country/theme balance: Coronagraph dome, radiator lattice, navigation spindle and thermal shield make four distinct solar-observation outfits while Dinant remains foregrounded. Location design vocabulary: location-only river bands, cliff profiles, bridge arcs, observatory modules and corona geometry. Use respectful secular Belgian geography and architecture through complete guildhall rooflines, canal currents, belfry arcs, port geometry, river bands and limestone cliff profiles. No literal flag, coat of arms, sacred or ritual symbol, copied ceremonial pattern, political messaging, military imagery, copied agency identity, logo, badge, readable text, combat, threat or weaponized solar equipment. Four visibly distinct coherent emotions: Radiance: roll 5=tender affection, performed as tender affection expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 33=overwhelming relief, performed as overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 35=magnetic confidence, performed as magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 25=calm contentment, performed as calm contentment expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 19=playful mischief, performed as playful mischief expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 97: Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance. Compound roll 25: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Mandatory hard-love roll 57: a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand Use those stored rolls as emotional and movement direction, resolved into the exact original choreography below without stacking incompatible extra hands. Alia steps away in visible hurt while Radiance and Ellie each catch one forearm and ECE closes from behind into a protective embrace, creating a clear three-way reconciliation choice. The relationship event must read before the mission prop: clear pursuit, choice, interruption, dance, jealousy, or protection through aligned eye lines, torso direction, and movement. No clustered cheek-touch tableau, static lineup, decorative hands, or interchangeable posing. Exact hand inventory, no others: resolved handler uses two hands on the inert mission prop; Radiance catches Alia; Ellie catches Alia; ECE completes a protective behind contact. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly empty paper route target fixed to a complete thick earth-and-sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, habitat and camera. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. Mascot state 4=PAWS and MAX together. Mascot holder selector 37=Ellie. Only rolled mascots appear on a padded dry overlook far from cliff edges, river traffic, props and solar equipment. Odd-prop roll is active. Exactly Alia owns and creatively integrates one gyroscopic hard-shell suitcase into the love beat using only her existing two hands. It is inert, secured, nonthreatening, and kept far from every mascot and the mission-prop line. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render rare aurora sky cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "complete",
+      "requested": 4,
+      "fulfilled": 2,
+      "moderationBlocked": 2,
+      "concurrency": "four independent built-in image generation calls launched together with settled-result collection"
+    },
+    "recovery": {
+      "status": "complete-accepted",
+      "requested": 1,
+      "fulfilled": 1,
+      "moderationBlocked": 0,
+      "scene": 1484,
+      "reason": "The only hard-failure raw output received one empty-lane recovery pass and cleared the safety gate."
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1484,
+      "file": "1484-belgium-brussels-solar-observation-recovery-fast-pass.png",
+      "audit": "Accepted recovery fast-pass. Exactly four adult women appear against the complete Brussels Grand Place guildhall facades and Town Hall spire fused with peaceful solar-observation architecture. Alia alone uses a stable two-hand grip on the inert rainbow cinema-training prop toward a clearly empty marker in a cordoned water lane, with every other adult behind and left of the line. Exactly one woman wears opaque rainbow hosiery and the four outfits remain visibly distinct. Logged deviations: the controlled dip resolves as close linked-hand affection, and the chromatic telescope is partly supported by its folded stand rather than fully integrated into ECE's two-hand romance action."
+    },
+    {
+      "scene": 1487,
+      "file": "1487-belgium-dinant-solar-observation-fast-pass.png",
+      "audit": "Accepted fast-pass. Exactly five adults appear with the Meuse bend, Dinant riverfront, bridge, church silhouette and Citadel cliff under the rolled aurora, fused with a peaceful solar-imaging deck. The four women use distinct cape dress, trouser suit, peplum skirt and thermal culotte constructions. The male is added without replacing a woman, wears the required fitted short-sleeve top and black jeans, and keeps his strongest eye line toward ECE. ECE alone directs the inert rainbow cinema-training prop into empty off-group space. Alia visibly owns the gyroscopic hard-shell suitcase. Logged deviations: the seated embrace resolves as a standing pursuit chain, the route target is outside the visible crop, and PAWS plus MAX render as two small dogs rather than the specified kitten and golden retriever pup."
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1484,
+      "status": "rejected-raw-unsafe-prop-line-recovered",
+      "rawFile": "exec-d3bb80d1-8aab-48b8-b316-d76e2c622300.png",
+      "reason": "The raw prop line crossed the group; its single recovery output was accepted instead."
+    },
+    {
+      "scene": 1485,
+      "status": "rejected-output-moderation",
+      "requestId": "abbb44b7-c023-4aeb-97dc-1be3548187b0",
+      "reason": "No image asset was returned."
+    },
+    {
+      "scene": 1486,
+      "status": "rejected-output-moderation",
+      "requestId": "0a94c1be-03e2-4a49-a3d4-a11f6e34b372",
+      "reason": "No image asset was returned."
+    }
+  ],
+  "xPost": {
+    "status": "eligible-queued-behind-bolivia-confirmation",
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "currentCountryAcceptedAssets": 2,
+    "caption": "Belgium red-heart South Sudan #Belgium",
+    "plannedAttachments": [
+      "1484-belgium-brussels-solar-observation-recovery-fast-pass.png",
+      "1487-belgium-dinant-solar-observation-fast-pass.png",
+      "1481-south-sudan-sudd-solar-observation-fast-pass.png"
+    ],
+    "reason": "Belgium is eligible, but the signed-in X composer is already holding the exact Bolivia post at its confirmation gate and must not be overwritten or duplicated."
+  },
+  "completedAt": "2026-08-11T00:07:03.944Z",
+  "throughputMode": "fast-pass per explicit user direction; minor choreography, target-visibility, odd-prop and mascot deviations are accepted and logged while unsafe prop lines and core-cast failures remain rejecting",
+  "queueAdvance": {
+    "country": "Haiti",
+    "batch": 367,
+    "scenes": [
+      1488,
+      1489,
+      1490,
+      1491
+    ],
+    "cinematicTheme": "deep-sea submersible couture",
+    "batchOrdinalWithinTheme": 1
+  }
+}
