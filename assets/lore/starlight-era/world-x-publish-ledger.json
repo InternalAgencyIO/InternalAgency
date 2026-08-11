@@ -17,20 +17,20 @@
   "preferredAttachmentCount": 4,
   "videoActivationBatch": 199,
   "videoActivationImageNumber": 816,
-  "maxPostsPerRun": 1,
+  "maxPostsPerRun": 50,
   "publishingMode": "guardian-autonomous-cadence-after-overdrive-drain",
   "backlogDrainPolicy": {
     "status": "drained-clear",
     "requestedAt": "2026-08-03T18:02:10.035Z",
-    "completedAt": "2026-08-04T13:30:38.839Z",
+    "completedAt": "2026-08-05T08:03:06.000Z",
     "instruction": "Clear the entire deterministically eligible X campaign backlog now through the signed-in Chrome account; the prior 45-50 minute cadence is explicitly overridden for this drain.",
-    "outcome": "Eleven exactly verified 2+1 posts cleared the requested eligible backlog. The final Mexico ❤️ Japan reservation transmitted as an exact-caption three-image post after the user-authorized retry; the earlier captionless exact-media duplicate remains preserved as an audit exception.",
-    "confirmedPostCount": 11,
+    "outcome": "Thirteen exactly verified 2+1 posts cleared the user-requested eligible backlog. Japan 💚 Egypt and Egypt 🧡 Japan were completed through the preserved handoff composers after the automated write-session rejection, then reconciled to exact captions and three public photo endpoints each. The earlier captionless Mexico ❤️ Japan duplicate remains preserved as an audit exception.",
+    "confirmedPostCount": 13,
     "residualImageNumbers": [],
     "restartRequestedAt": "2026-08-04T09:32:23.369Z",
     "restartInstruction": "Clear the remaining X country-post backlog now; do not wait for the normal cadence once an exact eligible group exists.",
     "restartCadenceOverride": "immediate-first-eligible-group",
-    "currentGate": "Clear. Exact caption, country order, image order, public status URL, and photo/1 through photo/3 endpoints were confirmed for the final reservation.",
+    "currentGate": "Clear. Japan 💚 Egypt and Egypt 🧡 Japan each have an exact public status URL and photo/1 through photo/3 proof; pendingPost, preparedPostQueue and deferredPostCheckpoint are empty.",
     "coverHandling": "Cover updates remain paused and no profile fields were modified.",
     "cadenceAfterDrain": "Return future X publishing to one exactly verified logical group at the established 45-50 minute cadence unless the user explicitly requests another immediate bulk drain."
   },
@@ -83,11 +83,11 @@
         "❤️",
         "💜"
       ],
-      "nextIndex": 7,
+      "nextIndex": 9,
       "lastReservedImageNumbers": [
-        854,
-        855,
-        856
+        861,
+        862,
+        859
       ]
     },
     "quotes": false,
@@ -167,6 +167,34 @@
         "Japan"
       ],
       "reason": "The exact reserved three-image media appeared publicly without the frozen Mexico ❤️ Japan caption. It is preserved as a nonconforming duplicate and did not clear the reservation; the later exact-caption status 2084633110621147508 is the authoritative logical publication."
+    },
+    {
+      "observedAt": "2026-08-09T06:46:42.6857252Z",
+      "postUrl": "https://x.com/dogramaci/status/2086336194346958963",
+      "postRange": {
+        "oldest": "https://x.com/dogramaci/status/2086334223590293564",
+        "newest": "https://x.com/dogramaci/status/2086336194346958963",
+        "count": 51
+      },
+      "imageNumbers": [],
+      "countries": [
+        "Moldova",
+        "Monaco",
+        "Montenegro",
+        "Netherlands",
+        "North Macedonia",
+        "Norway",
+        "Poland",
+        "Portugal",
+        "Romania",
+        "San Marino",
+        "Serbia",
+        "Slovakia",
+        "Slovenia",
+        "Spain",
+        "Sweden"
+      ],
+      "reason": "The signed-in @dogramaci profile already exposed a 51-status reverse-order raw-media burst spanning Batch 299 through Batch 285. Several statuses are captionless or use nonconforming attachment counts, and the batch checkpoints classify these source renders as rejected, so they are retained as audit exceptions rather than conforming logical publications. Their public presence is nevertheless authoritative for duplicate prevention."
     }
   ],
   "pendingPost": null,
@@ -3671,6 +3699,399 @@
       "mediaMode": "video-pause-image-only",
       "verification": "exact frozen Mexico ❤️ Japan caption, exact reserved 854/855/856 order, public status URL, and photo/1 through photo/3 endpoints",
       "transmission": "user-authorized-retry-exact-public-proof-cover-paused"
+    },
+    {
+      "postedAt": "2026-08-05T08:03:00.000Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2084913046518947956",
+      "caption": "Japan 💚 Egypt",
+      "imageNumbers": [
+        857,
+        858,
+        860
+      ],
+      "countries": [
+        "Japan",
+        "Egypt"
+      ],
+      "assets": [
+        {
+          "file": "857-japan-himeji-castle-cabin-signal-cipher.png",
+          "sha256": "8a73db873af240f5d221f3f1e2ecdf0c878fd523387c7c4ff9f86e178c6ca4a2"
+        },
+        {
+          "file": "858-japan-fuji-kawaguchi-star-map-relay.png",
+          "sha256": "3929b2e3eb6d3a4108aea292042dfcc31a08e7594b2f0959b158be2abad80cae"
+        },
+        {
+          "file": "860-egypt-cairo-tower-nile-route-light-grid.png",
+          "sha256": "cf945fe8b9ed7b2da60501c908ed619680bcae3032c8f3b5abce9c884119e01b"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "verification": "exact frozen Japan 💚 Egypt caption, exact reserved 857/858/860 order, public status URL, and photo/1 through photo/3 endpoints",
+      "transmission": "user-handoff-after-agent-session-binding-rejection-exact-public-proof-cover-paused"
+    },
+    {
+      "postedAt": "2026-08-05T08:03:06.000Z",
+      "postUrl": "https://x.com/RaymondRR777/status/2084913070027993355",
+      "caption": "Egypt 🧡 Japan",
+      "imageNumbers": [
+        861,
+        862,
+        859
+      ],
+      "countries": [
+        "Egypt",
+        "Japan"
+      ],
+      "assets": [
+        {
+          "file": "861-egypt-alexandria-bibliotheca-cabin-signal-cipher.png",
+          "sha256": "333d971bd6cd936ea13e2025498a943823495ca994634d608c00ea617f1058fa"
+        },
+        {
+          "file": "862-egypt-white-desert-star-map-relay.png",
+          "sha256": "3890ce8c02b19acbdf6e48fd402acf05c42f2b6fb4c3b505e0e515dc6b4b1758"
+        },
+        {
+          "file": "859-japan-yokohama-minato-mirai-arrival-beacon-finale.png",
+          "sha256": "48b7802d13bb0af8f9ad6a7565cc527f2c933a640cce63bce2476f56a89a8eea"
+        }
+      ],
+      "mediaMode": "video-pause-image-only",
+      "verification": "exact frozen Egypt 🧡 Japan caption, exact reserved 861/862/859 order, public status URL, and photo/1 through photo/3 endpoints",
+      "transmission": "user-handoff-after-agent-session-binding-rejection-exact-public-proof-cover-paused"
+    },
+    {
+      "batch": 359,
+      "postedAt": "2026-08-11T07:56:55.387Z",
+      "postUrl": "https://x.com/dogramaci/status/2087085841235550351",
+      "caption": "Guinea ❤️ Zimbabwe #Guinea #InternalAgency #WorldXXXSeries",
+      "imageNumbers": [
+        1457,
+        1459
+      ],
+      "countries": [
+        "Guinea",
+        "Zimbabwe"
+      ],
+      "assets": [
+        {
+          "file": "1457-guinea-fouta-djallon-orbital-waterfall-cupola.png",
+          "sha256": "a9ad0d516db608eedc49a9acd0e292b9941203b0f9d3f7a36256b2b9685fd3e3"
+        },
+        {
+          "file": "1459-guinea-niger-headwaters-orbital-choice.png",
+          "sha256": "4d5f333dcff33925a9b19047a56478bf775d4f7c8e1f3499875063f1f7f83121"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 2 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "continuous-backlog-drain-user-authorized"
+    },
+    {
+      "batch": 363,
+      "postedAt": "2026-08-11T04:48:10.900Z",
+      "postUrl": "https://x.com/dogramaci/status/2087038342894424285",
+      "caption": "Bolivia ❤️ Burundi #Bolivia #InternalAgency",
+      "imageNumbers": [
+        1472,
+        1473,
+        1468
+      ],
+      "countries": [
+        "Bolivia",
+        "Burundi"
+      ],
+      "assets": [
+        {
+          "file": "1472-bolivia-la-paz-illimani-lunar-habitat-fast-pass.png",
+          "sha256": "4062154b1192b5b719565ca063a67a783890891c97cf5580c3bddbc2437e0183"
+        },
+        {
+          "file": "1473-bolivia-salar-uyuni-lunar-lander-fast-pass.png",
+          "sha256": "ac68d0861b6adeb4b5ca6aeef4a1a6cb37ea7977a479e1d8ee831d9c6ddb7e5f"
+        },
+        {
+          "file": "1468-burundi-bujumbura-tanganyika-mars-habitat-fast-pass.png",
+          "sha256": "0cc1c4b67e282a2c6d370737dd6fdfb26a513d59ca4cc4b8bd5faa4129eaeaa7"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "live-reconciled-no-duplicate"
+    },
+    {
+      "batch": 364,
+      "postedAt": "2026-08-11T07:59:53.514Z",
+      "postUrl": "https://x.com/dogramaci/status/2087086588354261209",
+      "caption": "Tunisia ❤️ Bolivia #Tunisia #WorldXXXSeries",
+      "imageNumbers": [
+        1477,
+        1478,
+        1472
+      ],
+      "countries": [
+        "Tunisia",
+        "Bolivia"
+      ],
+      "assets": [
+        {
+          "file": "1477-tunisia-sidi-bou-said-lunar-lander-fast-pass.png",
+          "sha256": "169547a424e16bc5213f2f68987aebdccd8ec0a1883ededa97497427ade43109"
+        },
+        {
+          "file": "1478-tunisia-el-jem-lunar-crater-habitat-fast-pass.png",
+          "sha256": "b117653c62acb9099ecef9a6c07fa8645f1da7d837e66b67b0787ddb526f3c87"
+        },
+        {
+          "file": "1472-bolivia-la-paz-illimani-lunar-habitat-fast-pass.png",
+          "sha256": "4062154b1192b5b719565ca063a67a783890891c97cf5580c3bddbc2437e0183"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "continuous-backlog-drain-user-authorized"
+    },
+    {
+      "batch": 366,
+      "postedAt": "2026-08-11T08:03:06.898Z",
+      "postUrl": "https://x.com/dogramaci/status/2087087399465627713",
+      "caption": "Belgium ❤️ South Sudan #Belgium",
+      "imageNumbers": [
+        1484,
+        1487,
+        1481
+      ],
+      "countries": [
+        "Belgium",
+        "South Sudan"
+      ],
+      "assets": [
+        {
+          "file": "1484-belgium-brussels-solar-observation-recovery-fast-pass.png",
+          "sha256": "f1645f79deb0ac5cc26a787568d88416520ea4a9bcf97d9d1c9a6764a6b5738a"
+        },
+        {
+          "file": "1487-belgium-dinant-solar-observation-fast-pass.png",
+          "sha256": "9267e6ef4bc9dfa88011642daac16bc967e6cb413a2c4adcd9cecc4ab0c907a0"
+        },
+        {
+          "file": "1481-south-sudan-sudd-solar-observation-fast-pass.png",
+          "sha256": "72814ee340072ea3ac918157691c5fc7de553909ca4f0f84e70365dc919180c6"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "continuous-backlog-drain-user-authorized"
+    },
+    {
+      "batch": 368,
+      "postedAt": "2026-08-11T08:04:42.147Z",
+      "postUrl": "https://x.com/dogramaci/status/2087087798968844508",
+      "caption": "Jordan ❤️ Haiti #Jordan",
+      "imageNumbers": [
+        1492,
+        1494,
+        1491
+      ],
+      "countries": [
+        "Jordan",
+        "Haiti"
+      ],
+      "assets": [
+        {
+          "file": "1492-jordan-amman-citadel-deep-sea-submersible-fast-pass.png",
+          "sha256": "fb11f760520f79d247cc9d3d9506d211141ccaebffd7f37212513f80719c3ccf"
+        },
+        {
+          "file": "1494-jordan-wadi-rum-deep-sea-submersible-male-fast-pass.png",
+          "sha256": "8b79fa06490cac44e5472e54f524270484c1d89d2ac45711ad22d7f193433fb5"
+        },
+        {
+          "file": "1491-haiti-ile-a-vache-deep-sea-submersible-fast-pass.png",
+          "sha256": "ba4137f319ded1d6bb71f13de3a541c2294d620b8a286216a12c1fdf765df93f"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "continuous-backlog-drain-user-authorized"
+    },
+    {
+      "batch": 371,
+      "postedAt": "2026-08-11T08:05:59.090Z",
+      "postUrl": "https://x.com/dogramaci/status/2087088121691169160",
+      "caption": "Cuba ❤️ United Arab Emirates #Cuba #WorldXXXSeries",
+      "imageNumbers": [
+        1504,
+        1507,
+        1500
+      ],
+      "countries": [
+        "Cuba",
+        "United Arab Emirates"
+      ],
+      "assets": [
+        {
+          "file": "1504-cuba-havana-orbital-research-station-recovery.png",
+          "sha256": "af28ee9e20248eb0c6d815e2bb3fd4c23150420989e2dc743c03d1f3806966de"
+        },
+        {
+          "file": "1507-cuba-santiago-bay-orbital-research-station-fast-pass.png",
+          "sha256": "7253c01f072259c3918785316490fcff88326bb252a5b9e523a23a3c8b2a11e7"
+        },
+        {
+          "file": "1500-united-arab-emirates-dubai-polar-airship-fast-pass.png",
+          "sha256": "650cfebe6902ff4b3cd25202815f2832c465ea8fd77e25ca0b0b20f1db200ce8"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "continuous-backlog-drain-user-authorized"
+    },
+    {
+      "batch": 372,
+      "postedAt": "2026-08-11T08:06:49.292Z",
+      "postUrl": "https://x.com/dogramaci/status/2087088332253577528",
+      "caption": "Czechia 🤍 Cuba #Czechia #WorldXXXSeries",
+      "imageNumbers": [
+        1508,
+        1510,
+        1504
+      ],
+      "countries": [
+        "Czechia",
+        "Cuba"
+      ],
+      "assets": [
+        {
+          "file": "1508-czechia-prague-orbital-research-station-male-fast-pass.png",
+          "sha256": "38d605f4ef5961db957a1d6060dd71881b020a5521c155f85256c279e74f21fd"
+        },
+        {
+          "file": "1510-czechia-moravian-karst-orbital-research-station-recovery.png",
+          "sha256": "2a3c9cdad4d728ded9fa4f2723341793fe3b969839cc322d58cd7c01dfa85a61"
+        },
+        {
+          "file": "1504-cuba-havana-orbital-research-station-recovery.png",
+          "sha256": "af28ee9e20248eb0c6d815e2bb3fd4c23150420989e2dc743c03d1f3806966de"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "continuous-backlog-drain-user-authorized"
+    },
+    {
+      "batch": 373,
+      "postedAt": "2026-08-11T08:07:39.657Z",
+      "postUrl": "https://x.com/dogramaci/status/2087088543499768003",
+      "caption": "Honduras ❤️ Czechia #Honduras",
+      "imageNumbers": [
+        1512,
+        1515,
+        1508
+      ],
+      "countries": [
+        "Honduras",
+        "Czechia"
+      ],
+      "assets": [
+        {
+          "file": "1512-honduras-tegucigalpa-private-jet-male-recovery.png",
+          "sha256": "ecabf293eab85904fec10930bd3b4f000b05216a4da132fcd099140c0482af7f"
+        },
+        {
+          "file": "1515-honduras-lake-yojoa-private-jet-recovery.png",
+          "sha256": "639402ca4f1b4f1a35bc41433e5b4cb9afd0ae8895aac678e4e5916b12d11d87"
+        },
+        {
+          "file": "1508-czechia-prague-orbital-research-station-male-fast-pass.png",
+          "sha256": "38d605f4ef5961db957a1d6060dd71881b020a5521c155f85256c279e74f21fd"
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
+      "transmission": "continuous-backlog-drain-user-authorized"
     }
-  ]
+  ],
+  "latestAssistedDrain": {
+    "status": "publicly-clear-live-audited",
+    "requestedAt": "2026-08-09T06:46:42.6857252Z",
+    "observedAt": "2026-08-09T06:46:42.6857252Z",
+    "account": "@dogramaci",
+    "batchRange": [
+      285,
+      299
+    ],
+    "publicStatusCount": 51,
+    "oldestStatusUrl": "https://x.com/dogramaci/status/2086334223590293564",
+    "newestStatusUrl": "https://x.com/dogramaci/status/2086336194346958963",
+    "boundaryProof": [
+      "The oldest status photo/1 perceptually matches the preserved Sweden Batch 299 source with zero dHash distance.",
+      "The newest status photo/1 perceptually matches the preserved Moldova Batch 285 source with zero dHash distance.",
+      "Intermediate spot checks match Monaco Batch 286, Romania Batch 293, and Serbia Batch 295."
+    ],
+    "action": "No additional status was submitted because the signed-in live profile already contained the complete reverse-order Batch 299 through Batch 285 burst.",
+    "duplicatePrevention": "Treat these 51 public statuses as already transmitted and never re-upload their media during a later guardian wake."
+  },
+  "deferredPostCheckpoint": null,
+  "continuousDrainPolicy": {
+    "activeFrom": "2026-08-11T07:22:46.656Z",
+    "drainAllEligiblePerWake": true,
+    "liveProfileFirst": true,
+    "duplicatePrevention": "Search and reconcile the signed-in @dogramaci profile before every upload.",
+    "activeCountryRule": "From Batch 382 onward publish only after all four current-country scenes are accepted, and do not advance until the live status URL is recorded."
+  },
+  "latestContinuousDrain": {
+    "status": "publicly-clear-live-verified",
+    "requestedAt": "2026-08-11T07:22:46.656Z",
+    "completedAt": "2026-08-11T08:07:39.657Z",
+    "account": "@dogramaci",
+    "reconciledWithoutReupload": [
+      {
+        "batch": 363,
+        "country": "Bolivia",
+        "postUrl": "https://x.com/dogramaci/status/2087038342894424285"
+      }
+    ],
+    "newlyPublished": [
+      {
+        "batch": 359,
+        "country": "Guinea",
+        "postUrl": "https://x.com/dogramaci/status/2087085841235550351"
+      },
+      {
+        "batch": 364,
+        "country": "Tunisia",
+        "postUrl": "https://x.com/dogramaci/status/2087086588354261209"
+      },
+      {
+        "batch": 366,
+        "country": "Belgium",
+        "postUrl": "https://x.com/dogramaci/status/2087087399465627713"
+      },
+      {
+        "batch": 368,
+        "country": "Jordan",
+        "postUrl": "https://x.com/dogramaci/status/2087087798968844508"
+      },
+      {
+        "batch": 371,
+        "country": "Cuba",
+        "postUrl": "https://x.com/dogramaci/status/2087088121691169160"
+      },
+      {
+        "batch": 372,
+        "country": "Czechia",
+        "postUrl": "https://x.com/dogramaci/status/2087088332253577528"
+      },
+      {
+        "batch": 373,
+        "country": "Honduras",
+        "postUrl": "https://x.com/dogramaci/status/2087088543499768003"
+      }
+    ],
+    "eligibleBacklogRemaining": 0,
+    "verification": "Every exact caption, attachment count, public status URL, and current home-timeline article was verified in the signed-in in-app browser."
+  }
 }
