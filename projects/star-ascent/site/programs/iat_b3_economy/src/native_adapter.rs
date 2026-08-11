@@ -1072,6 +1072,62 @@ pub fn prepare_create_state_account(
     initial_state: StrictStateValue,
     rent_minimum_lamports: u64,
 ) -> Result<StateWriteIntent, NativeAdapterError> {
+    prepare_create_state_account_with_rent_policy(
+        gate,
+        binding,
+        payer,
+        target,
+        identity,
+        initial_state,
+        rent_minimum_lamports,
+        CreateRentMinimumPolicy::RequirePositive,
+    )
+}
+
+/// Internal counterpart for a lifecycle that has already authenticated the
+/// runtime Rent sysvar. Pinned Anchor 1.0.2 permits a raw zero Rent minimum on
+/// its vacant `create_account` branch; the public native planning API above
+/// intentionally retains its positive-Rent prerequisite.
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn prepare_runtime_rent_create_state_account(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    payer: &AuthenticatedSystemPayer,
+    target: NativeAccountObservation<'_>,
+    identity: PdaIdentity,
+    initial_state: StrictStateValue,
+    rent_minimum_lamports: u64,
+) -> Result<StateWriteIntent, NativeAdapterError> {
+    prepare_create_state_account_with_rent_policy(
+        gate,
+        binding,
+        payer,
+        target,
+        identity,
+        initial_state,
+        rent_minimum_lamports,
+        CreateRentMinimumPolicy::AuthenticatedRuntimeRent,
+    )
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum CreateRentMinimumPolicy {
+    RequirePositive,
+    AuthenticatedRuntimeRent,
+}
+
+#[allow(clippy::too_many_arguments)]
+fn prepare_create_state_account_with_rent_policy(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    payer: &AuthenticatedSystemPayer,
+    target: NativeAccountObservation<'_>,
+    identity: PdaIdentity,
+    initial_state: StrictStateValue,
+    rent_minimum_lamports: u64,
+    rent_policy: CreateRentMinimumPolicy,
+) -> Result<StateWriteIntent, NativeAdapterError> {
     require_gate_mint(gate, binding)?;
     let law = LawWriteStamp::from_gate(gate);
     if payer.law != law {
@@ -1091,7 +1147,7 @@ pub fn prepare_create_state_account(
     if !target.data.is_empty() {
         return Err(NativeAdapterError::VacantAccountDataNotEmpty);
     }
-    if rent_minimum_lamports == 0 {
+    if rent_minimum_lamports == 0 && rent_policy == CreateRentMinimumPolicy::RequirePositive {
         return Err(NativeAdapterError::RentMinimumMustBePositive);
     }
     if state_identity(initial_state) != identity {

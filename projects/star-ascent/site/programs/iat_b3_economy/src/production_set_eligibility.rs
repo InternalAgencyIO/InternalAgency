@@ -1,11 +1,13 @@
-//! Exact retained-V2 `set_eligibility` composition through a sealed lifecycle
-//! plan.
+//! Exact retained-V2 `set_eligibility` composition and three-phase lifecycle
+//! execution.
 //!
 //! This module binds the frozen instruction bytes and five-account order to
 //! the production-ACTIVE Config, its administrator, the public wallet key, the
 //! exact wallet-scoped Eligibility PDA, and the retained V2 transition. It
-//! returns an opaque existing-CAS-or-init plan but deliberately exposes no
-//! executor, dispatcher, or entrypoint and claims no complete handler.
+//! retains the nonexecuting opaque existing-CAS-or-init plan and also exposes
+//! one undispatched executor that performs pre-body lifecycle work, then the
+//! retained body, then the exact postimage write. It exposes no dispatcher or
+//! entrypoint and claims no complete handler or Devnet rollback proof.
 
 use crate::native_adapter::{
     derive_pda, NativeAdapterError, NativeEconomyBinding, PdaIdentity, StrictStateKind,
@@ -17,9 +19,12 @@ use crate::production_instruction::{
 #[cfg(test)]
 use crate::runtime_account_lifecycle::prepare_production_active_init_if_needed_constraints_with_rent;
 use crate::runtime_account_lifecycle::{
+    execute_production_active_init_if_needed_pre_body_account_infos,
     prepare_production_active_init_if_needed_constraints_account_infos, require_system_program,
-    seal_production_active_init_if_needed_postimage, PreparedProductionInitIfNeeded,
-    ProductionInitIfNeededPath, RuntimeAccountLifecycleError,
+    seal_and_execute_production_active_init_if_needed_postimage_account_infos,
+    seal_production_active_init_if_needed_postimage, ExecutedProductionInitIfNeededPreBody,
+    PreparedProductionInitIfNeeded, PreparedProductionInitIfNeededConstraints,
+    ProductionInitIfNeededPath, ProductionInitIfNeededReceipt, RuntimeAccountLifecycleError,
 };
 use crate::runtime_adapter::{
     authenticate_production_active_config_account_info,
@@ -31,13 +36,16 @@ use crate::{
     set_eligibility, EconomyError, EligibilityState, SetEligibilityInput, ValidatedDailyLawWrite,
 };
 use solana_account_info::AccountInfo;
+use solana_pubkey::Pubkey;
 #[cfg(test)]
 use solana_rent::Rent;
 use solana_sdk_ids::system_program;
 
 pub const PRODUCTION_SET_ELIGIBILITY_ACCOUNT_COUNT: usize = 5;
 pub const PRODUCTION_SET_ELIGIBILITY_STATUS: &str =
-    "EXACT_V2_COMPOSITION_SEALED_INIT_IF_NEEDED_PLAN_NO_EXECUTOR_NO_ENTRYPOINT_MAINNET_HOLD";
+    "EXACT_V2_NONEXECUTING_COMPOSITION_SEALED_INIT_IF_NEEDED_PLAN_MAINNET_HOLD";
+pub const PRODUCTION_SET_ELIGIBILITY_EXECUTOR_STATUS: &str =
+    "EXACT_V2_THREE_PHASE_INIT_IF_NEEDED_EXECUTOR_NO_DISPATCH_NO_ENTRYPOINT_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionSetEligibilityTruth {
@@ -85,6 +93,40 @@ pub const PRODUCTION_SET_ELIGIBILITY_TRUTH: ProductionSetEligibilityTruth =
         mainnet_hold: true,
     };
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionSetEligibilityExecutorTruth {
+    pub exact_five_account_graph_required: bool,
+    pub production_program_identity_required: bool,
+    pub pre_cpi_constraints_execute_before_retained_body: bool,
+    pub vacant_create_account_supported: bool,
+    pub prefunded_transfer_allocate_assign_supported: bool,
+    pub post_cpi_checks_precede_retained_body: bool,
+    pub exact_postimage_write_follows_retained_success: bool,
+    pub transaction_rollback_required_after_cpi: bool,
+    pub production_dispatcher_exposed: bool,
+    pub production_entrypoint_exposed: bool,
+    pub handler_complete: bool,
+    pub devnet_transaction_rollback_proven: bool,
+    pub mainnet_hold: bool,
+}
+
+pub const PRODUCTION_SET_ELIGIBILITY_EXECUTOR_TRUTH: ProductionSetEligibilityExecutorTruth =
+    ProductionSetEligibilityExecutorTruth {
+        exact_five_account_graph_required: true,
+        production_program_identity_required: true,
+        pre_cpi_constraints_execute_before_retained_body: true,
+        vacant_create_account_supported: true,
+        prefunded_transfer_allocate_assign_supported: true,
+        post_cpi_checks_precede_retained_body: true,
+        exact_postimage_write_follows_retained_success: true,
+        transaction_rollback_required_after_cpi: true,
+        production_dispatcher_exposed: false,
+        production_entrypoint_exposed: false,
+        handler_complete: false,
+        devnet_transaction_rollback_proven: false,
+        mainnet_hold: true,
+    };
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum ProductionSetEligibilityError {
     Instruction(ProductionInstructionError),
@@ -95,6 +137,7 @@ pub enum ProductionSetEligibilityError {
     Native(NativeAdapterError),
     Economy(EconomyError),
     Lifecycle(RuntimeAccountLifecycleError),
+    ProgramIdentityMismatch,
     RetainedV2PostimageMismatch,
 }
 
@@ -136,6 +179,42 @@ pub struct PreparedProductionSetEligibility {
     eligibility: [u8; 32],
     next: EligibilityState,
     lifecycle: PreparedProductionInitIfNeeded,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionSetEligibilityExecutionReceipt {
+    config: [u8; 32],
+    admin: [u8; 32],
+    wallet: [u8; 32],
+    eligibility: [u8; 32],
+    next: EligibilityState,
+    lifecycle: ProductionInitIfNeededReceipt,
+}
+
+impl ProductionSetEligibilityExecutionReceipt {
+    pub const fn config(&self) -> [u8; 32] {
+        self.config
+    }
+
+    pub const fn admin(&self) -> [u8; 32] {
+        self.admin
+    }
+
+    pub const fn wallet(&self) -> [u8; 32] {
+        self.wallet
+    }
+
+    pub const fn eligibility(&self) -> [u8; 32] {
+        self.eligibility
+    }
+
+    pub const fn next(&self) -> EligibilityState {
+        self.next
+    }
+
+    pub const fn lifecycle(&self) -> &ProductionInitIfNeededReceipt {
+        &self.lifecycle
+    }
 }
 
 impl PreparedProductionSetEligibility {
@@ -180,6 +259,24 @@ struct PreparedSetEligibilityKernel {
     projected_next: EligibilityState,
 }
 
+struct PreparedSetEligibilityPreBody {
+    kernel: PreparedSetEligibilityKernel,
+    constraints: PreparedProductionInitIfNeededConstraints,
+}
+
+trait SetEligibilityExecutionObserver {
+    fn retained_body_entered(&mut self);
+    fn postimage_write_completed(&mut self);
+}
+
+struct NoopSetEligibilityExecutionObserver;
+
+impl SetEligibilityExecutionObserver for NoopSetEligibilityExecutionObserver {
+    fn retained_body_entered(&mut self) {}
+
+    fn postimage_write_completed(&mut self) {}
+}
+
 /// Runtime production composition. The opaque Law capability and live Config
 /// account are authenticated before the retained V2 kernel or lifecycle
 /// planner runs. This function only returns a sealed plan; it writes nothing.
@@ -195,6 +292,34 @@ pub fn prepare_runtime_production_set_eligibility_account_infos(
     let active_config =
         authenticate_runtime_production_active_config(runtime_law, binding, &accounts[1])?;
     prepare_with_active_config(
+        runtime_law.gate(),
+        &active_config,
+        binding,
+        accounts,
+        role,
+        agency_index,
+    )
+}
+
+/// Execute the exact five-account retained-V2 SetEligibility path in Anchor
+/// 1.0.2 order: account constraints and any System lifecycle CPI first, the
+/// retained handler body second, and the exact successful postimage write last.
+/// A returned error after the first CPI relies on Solana transaction rollback.
+/// This callable seam remains undispatched and has no program entrypoint.
+#[inline(never)]
+pub fn execute_runtime_production_set_eligibility_account_infos(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    instruction_data: &[u8],
+    accounts: &[AccountInfo<'_>],
+) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
+    let (role, agency_index) = require_set_eligibility_instruction(instruction_data)?;
+    require_exact_account_count(accounts)?;
+    let active_config =
+        authenticate_runtime_production_active_config(runtime_law, binding, &accounts[1])?;
+    execute_with_active_config(
+        program_id,
         runtime_law.gate(),
         &active_config,
         binding,
@@ -248,13 +373,51 @@ fn prepare_with_active_config(
     role: u8,
     agency_index: Option<u32>,
 ) -> Result<PreparedProductionSetEligibility, ProductionSetEligibilityError> {
-    let kernel = prepare_kernel_inputs(gate, active_config, binding, accounts, role, agency_index)?;
+    let prepared = prepare_pre_body_with_active_config(
+        gate,
+        active_config,
+        binding,
+        accounts,
+        role,
+        agency_index,
+    )?;
+    let kernel = prepared.kernel;
     // Anchor 1.0.2 executes its full `init_if_needed` lifecycle before entering
     // the handler body, but it does not serialize that body's next state during
     // constraint evaluation. This nonexecuting seam validates and plans only
     // the pre-CPI Rent, payer-funding, target-shape, and CAS facts before the
     // retained error ordering begins below. System CPIs and their post-CPI
-    // assertions remain executor work and are truthfully false in this module.
+    // assertions remain executor work and are truthfully false in the
+    // nonexecuting preparation truth record above.
+    let result = set_eligibility(gate, kernel.input)?;
+    if result.eligibility != kernel.projected_next {
+        return Err(ProductionSetEligibilityError::RetainedV2PostimageMismatch);
+    }
+    let lifecycle = seal_production_active_init_if_needed_postimage(
+        gate,
+        binding,
+        prepared.constraints,
+        StrictStateValue::Eligibility(result.eligibility),
+    )?;
+    Ok(finish_plan(
+        active_config,
+        accounts,
+        kernel,
+        result.eligibility,
+        lifecycle,
+    ))
+}
+
+#[allow(clippy::too_many_arguments)]
+fn prepare_pre_body_with_active_config(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    role: u8,
+    agency_index: Option<u32>,
+) -> Result<PreparedSetEligibilityPreBody, ProductionSetEligibilityError> {
+    let kernel = prepare_kernel_inputs(gate, active_config, binding, accounts, role, agency_index)?;
     let constraints = prepare_production_active_init_if_needed_constraints_account_infos(
         gate,
         active_config,
@@ -265,23 +428,130 @@ fn prepare_with_active_config(
         kernel.identity,
         StrictStateKind::Eligibility,
     )?;
+    Ok(PreparedSetEligibilityPreBody {
+        kernel,
+        constraints,
+    })
+}
+
+#[allow(clippy::too_many_arguments)]
+fn execute_with_active_config(
+    program_id: &Pubkey,
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    role: u8,
+    agency_index: Option<u32>,
+) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
+    let mut observer = NoopSetEligibilityExecutionObserver;
+    execute_with_active_config_using(
+        program_id,
+        gate,
+        active_config,
+        binding,
+        accounts,
+        role,
+        agency_index,
+        |constraints| {
+            execute_production_active_init_if_needed_pre_body_account_infos(
+                gate,
+                active_config,
+                binding,
+                constraints,
+                &accounts[0],
+                &accounts[3],
+                &accounts[4],
+            )
+        },
+        &mut observer,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn execute_with_active_config_using<F, O>(
+    program_id: &Pubkey,
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    role: u8,
+    agency_index: Option<u32>,
+    execute_pre_body: F,
+    observer: &mut O,
+) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError>
+where
+    F: FnOnce(
+        PreparedProductionInitIfNeededConstraints,
+    ) -> Result<ExecutedProductionInitIfNeededPreBody, RuntimeAccountLifecycleError>,
+    O: SetEligibilityExecutionObserver,
+{
+    let prepared = prepare_pre_body_with_active_config(
+        gate,
+        active_config,
+        binding,
+        accounts,
+        role,
+        agency_index,
+    )?;
+    execute_prepared_with_active_config_using(
+        program_id,
+        gate,
+        active_config,
+        binding,
+        accounts,
+        prepared,
+        execute_pre_body,
+        observer,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn execute_prepared_with_active_config_using<F, O>(
+    program_id: &Pubkey,
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    prepared: PreparedSetEligibilityPreBody,
+    execute_pre_body: F,
+    observer: &mut O,
+) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError>
+where
+    F: FnOnce(
+        PreparedProductionInitIfNeededConstraints,
+    ) -> Result<ExecutedProductionInitIfNeededPreBody, RuntimeAccountLifecycleError>,
+    O: SetEligibilityExecutionObserver,
+{
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionSetEligibilityError::ProgramIdentityMismatch);
+    }
+    let kernel = prepared.kernel;
+    let executed = execute_pre_body(prepared.constraints)?;
+    observer.retained_body_entered();
     let result = set_eligibility(gate, kernel.input)?;
     if result.eligibility != kernel.projected_next {
         return Err(ProductionSetEligibilityError::RetainedV2PostimageMismatch);
     }
-    let lifecycle = seal_production_active_init_if_needed_postimage(
+    let lifecycle = seal_and_execute_production_active_init_if_needed_postimage_account_infos(
         gate,
-        binding,
-        constraints,
-        StrictStateValue::Eligibility(result.eligibility),
-    )?;
-    Ok(finish_plan(
         active_config,
-        accounts,
-        kernel,
-        result.eligibility,
+        binding,
+        executed,
+        StrictStateValue::Eligibility(result.eligibility),
+        &accounts[0],
+        &accounts[3],
+        &accounts[4],
+    )?;
+    observer.postimage_write_completed();
+    Ok(ProductionSetEligibilityExecutionReceipt {
+        config: active_config.key(),
+        admin: active_config.state().config.admin,
+        wallet: kernel.wallet,
+        eligibility: accounts[3].key.to_bytes(),
+        next: result.eligibility,
         lifecycle,
-    ))
+    })
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -455,7 +725,10 @@ mod tests {
         encode_production_instruction, PRODUCTION_INSTRUCTION_LEN,
     };
     use crate::runtime_account_lifecycle::{
-        execute_production_active_init_if_needed_account_infos, ProductionInitIfNeededReceipt,
+        execute_production_active_init_if_needed_account_infos,
+        execute_production_active_init_if_needed_pre_body_with_test_harness,
+        InitIfNeededTestCpiCall, InitIfNeededTestCpiHarness, InitIfNeededTestPostCpiCorruption,
+        ProductionInitIfNeededReceipt,
     };
     use crate::{
         decode_eligibility_state, encode_config_genesis_state, encode_eligibility_state,
@@ -464,6 +737,7 @@ mod tests {
         LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY,
     };
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
+    use solana_program_error::ProgramError;
     use solana_pubkey::Pubkey;
     use solana_sdk_ids::{native_loader, system_program};
 
@@ -681,6 +955,484 @@ mod tests {
             ];
             operation(&mut infos)
         }
+    }
+
+    #[derive(Default)]
+    struct ExecutionCounters {
+        retained_body_entries: usize,
+        completed_postimage_writes: usize,
+    }
+
+    impl SetEligibilityExecutionObserver for ExecutionCounters {
+        fn retained_body_entered(&mut self) {
+            self.retained_body_entries += 1;
+        }
+
+        fn postimage_write_completed(&mut self) {
+            self.completed_postimage_writes += 1;
+        }
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn execute_with_rent_and_harness(
+        gate: &ValidatedDailyLawWrite,
+        binding: &NativeEconomyBinding,
+        instruction_data: &[u8],
+        accounts: &[AccountInfo<'_>],
+        rent: Option<&Rent>,
+        harness: &mut InitIfNeededTestCpiHarness,
+        counters: &mut ExecutionCounters,
+    ) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
+        let (role, agency_index) = require_set_eligibility_instruction(instruction_data)?;
+        require_exact_account_count(accounts)?;
+        let active_config =
+            authenticate_production_active_config_account_info(gate, binding, &accounts[1])?;
+        let kernel =
+            prepare_kernel_inputs(gate, &active_config, binding, accounts, role, agency_index)?;
+        let constraints = prepare_production_active_init_if_needed_constraints_with_rent(
+            gate,
+            &active_config,
+            binding,
+            &accounts[0],
+            &accounts[3],
+            &accounts[4],
+            kernel.identity,
+            StrictStateKind::Eligibility,
+            rent,
+        )?;
+        let prepared = PreparedSetEligibilityPreBody {
+            kernel,
+            constraints,
+        };
+        execute_prepared_with_active_config_using(
+            &Pubkey::new_from_array(binding.program_id()),
+            gate,
+            &active_config,
+            binding,
+            accounts,
+            prepared,
+            |constraints| {
+                execute_production_active_init_if_needed_pre_body_with_test_harness(
+                    gate,
+                    &active_config,
+                    binding,
+                    constraints,
+                    &accounts[0],
+                    &accounts[3],
+                    &accounts[4],
+                    harness,
+                )
+            },
+            counters,
+        )
+    }
+
+    #[test]
+    fn three_phase_executor_preserves_exact_existing_vacant_and_prefunded_order() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        let instruction = encoded(ProductionInstruction::SetEligibility {
+            role: 0,
+            agency_index: None,
+        });
+
+        for (shape, expected_calls, expected_created) in [
+            (EligibilityShape::Existing, Vec::new(), false),
+            (
+                EligibilityShape::SystemOwned { lamports: 0 },
+                vec![InitIfNeededTestCpiCall::CreateAccount {
+                    lamports: rent_minimum,
+                    data_len: ELIGIBILITY_ACCOUNT_LEN,
+                }],
+                true,
+            ),
+            (
+                EligibilityShape::SystemOwned {
+                    lamports: rent_minimum / 2,
+                },
+                vec![
+                    InitIfNeededTestCpiCall::Transfer {
+                        lamports: rent_minimum - (rent_minimum / 2),
+                    },
+                    InitIfNeededTestCpiCall::Allocate {
+                        data_len: ELIGIBILITY_ACCOUNT_LEN,
+                    },
+                    InitIfNeededTestCpiCall::Assign {
+                        owner: ECONOMY_PROGRAM,
+                    },
+                ],
+                true,
+            ),
+            (
+                EligibilityShape::SystemOwned {
+                    lamports: rent_minimum + 1,
+                },
+                vec![
+                    InitIfNeededTestCpiCall::Allocate {
+                        data_len: ELIGIBILITY_ACCOUNT_LEN,
+                    },
+                    InitIfNeededTestCpiCall::Assign {
+                        owner: ECONOMY_PROGRAM,
+                    },
+                ],
+                true,
+            ),
+        ] {
+            let mut fixture = Fixture::new(&binding, shape);
+            fixture.with_infos(|accounts| {
+                let mut harness = InitIfNeededTestCpiHarness::default();
+                let mut counters = ExecutionCounters::default();
+                let receipt = execute_with_rent_and_harness(
+                    &gate,
+                    &binding,
+                    &instruction,
+                    accounts,
+                    Some(&rent),
+                    &mut harness,
+                    &mut counters,
+                )
+                .unwrap();
+                assert_eq!(harness.calls(), expected_calls.as_slice());
+                assert_eq!(counters.retained_body_entries, 1);
+                assert_eq!(counters.completed_postimage_writes, 1);
+                assert_eq!(
+                    matches!(
+                        receipt.lifecycle(),
+                        ProductionInitIfNeededReceipt::Created(_)
+                    ),
+                    expected_created
+                );
+                assert_eq!(
+                    decode_eligibility_state(&accounts[3].try_borrow_data().unwrap()).unwrap(),
+                    receipt.next()
+                );
+            });
+        }
+    }
+
+    #[test]
+    fn successful_system_lifecycle_then_retained_error_writes_no_postimage_and_requires_rollback() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        let instruction = encoded(ProductionInstruction::SetEligibility {
+            role: u8::MAX,
+            agency_index: None,
+        });
+
+        for shape in [
+            EligibilityShape::SystemOwned { lamports: 0 },
+            EligibilityShape::SystemOwned {
+                lamports: rent_minimum / 2,
+            },
+        ] {
+            let mut fixture = Fixture::new(&binding, shape);
+            fixture.with_infos(|accounts| {
+                let mut harness = InitIfNeededTestCpiHarness::default();
+                let mut counters = ExecutionCounters::default();
+                assert_eq!(
+                    execute_with_rent_and_harness(
+                        &gate,
+                        &binding,
+                        &instruction,
+                        accounts,
+                        Some(&rent),
+                        &mut harness,
+                        &mut counters,
+                    ),
+                    Err(ProductionSetEligibilityError::Economy(
+                        EconomyError::UnknownRole
+                    ))
+                );
+                assert!(!harness.calls().is_empty());
+                assert_eq!(counters.retained_body_entries, 1);
+                assert_eq!(counters.completed_postimage_writes, 0);
+                let data = accounts[3].try_borrow_data().unwrap();
+                assert_eq!(data.len(), ELIGIBILITY_ACCOUNT_LEN);
+                assert!(data.iter().all(|byte| *byte == 0));
+                assert!(decode_eligibility_state(&data).is_err());
+            });
+        }
+        let truth = PRODUCTION_SET_ELIGIBILITY_EXECUTOR_TRUTH;
+        assert!(truth.transaction_rollback_required_after_cpi);
+        assert!(!truth.devnet_transaction_rollback_proven);
+    }
+
+    #[test]
+    fn lifecycle_and_cpi_failures_precede_invalid_role_and_never_reach_body_or_write() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        let invalid = encoded(ProductionInstruction::SetEligibility {
+            role: u8::MAX,
+            agency_index: None,
+        });
+
+        let mut unfunded = Fixture::new(&binding, EligibilityShape::SystemOwned { lamports: 0 });
+        unfunded.admin.lamports = 0;
+        unfunded.with_infos(|accounts| {
+            let mut harness = InitIfNeededTestCpiHarness::default();
+            let mut counters = ExecutionCounters::default();
+            assert_eq!(
+                execute_with_rent_and_harness(
+                    &gate,
+                    &binding,
+                    &invalid,
+                    accounts,
+                    Some(&rent),
+                    &mut harness,
+                    &mut counters,
+                ),
+                Err(ProductionSetEligibilityError::Lifecycle(
+                    RuntimeAccountLifecycleError::Native(
+                        NativeAdapterError::InsufficientPayerBalance
+                    )
+                ))
+            );
+            assert!(harness.calls().is_empty());
+            assert_eq!(counters.retained_body_entries, 0);
+            assert_eq!(counters.completed_postimage_writes, 0);
+        });
+
+        for (shape, fail_at, expected_error, expected_successful_calls) in [
+            (
+                EligibilityShape::SystemOwned { lamports: 0 },
+                0,
+                ProgramError::Custom(201),
+                0,
+            ),
+            (
+                EligibilityShape::SystemOwned {
+                    lamports: rent_minimum / 2,
+                },
+                0,
+                ProgramError::Custom(204),
+                0,
+            ),
+            (
+                EligibilityShape::SystemOwned {
+                    lamports: rent_minimum / 2,
+                },
+                1,
+                ProgramError::Custom(202),
+                1,
+            ),
+            (
+                EligibilityShape::SystemOwned {
+                    lamports: rent_minimum / 2,
+                },
+                2,
+                ProgramError::Custom(203),
+                2,
+            ),
+        ] {
+            let mut fixture = Fixture::new(&binding, shape);
+            fixture.with_infos(|accounts| {
+                let mut harness = InitIfNeededTestCpiHarness::failing_at(fail_at);
+                let mut counters = ExecutionCounters::default();
+                assert_eq!(
+                    execute_with_rent_and_harness(
+                        &gate,
+                        &binding,
+                        &invalid,
+                        accounts,
+                        Some(&rent),
+                        &mut harness,
+                        &mut counters,
+                    ),
+                    Err(ProductionSetEligibilityError::Lifecycle(
+                        RuntimeAccountLifecycleError::CpiFailed(expected_error)
+                    ))
+                );
+                assert_eq!(harness.calls().len(), expected_successful_calls);
+                assert_eq!(counters.retained_body_entries, 0);
+                assert_eq!(counters.completed_postimage_writes, 0);
+            });
+        }
+    }
+
+    #[test]
+    fn every_post_cpi_drift_fails_before_retained_body_and_postimage_write() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        let instruction = encoded(ProductionInstruction::SetEligibility {
+            role: 0,
+            agency_index: None,
+        });
+
+        for (corruption, expected) in [
+            (
+                InitIfNeededTestPostCpiCorruption::Owner,
+                RuntimeAccountLifecycleError::PostCpiOwnerMismatch,
+            ),
+            (
+                InitIfNeededTestPostCpiCorruption::TargetLamports,
+                RuntimeAccountLifecycleError::PostCpiLamportMismatch,
+            ),
+            (
+                InitIfNeededTestPostCpiCorruption::PayerLamports,
+                RuntimeAccountLifecycleError::PostCpiPayerLamportMismatch,
+            ),
+            (
+                InitIfNeededTestPostCpiCorruption::DataLength,
+                RuntimeAccountLifecycleError::PostCpiDataLengthMismatch,
+            ),
+            (
+                InitIfNeededTestPostCpiCorruption::NonzeroData,
+                RuntimeAccountLifecycleError::PostCpiDataNotZero,
+            ),
+        ] {
+            let mut fixture = Fixture::new(
+                &binding,
+                EligibilityShape::SystemOwned {
+                    lamports: rent_minimum / 2,
+                },
+            );
+            fixture.with_infos(|accounts| {
+                let mut harness = InitIfNeededTestCpiHarness::corrupting(corruption);
+                let mut counters = ExecutionCounters::default();
+                assert_eq!(
+                    execute_with_rent_and_harness(
+                        &gate,
+                        &binding,
+                        &instruction,
+                        accounts,
+                        Some(&rent),
+                        &mut harness,
+                        &mut counters,
+                    ),
+                    Err(ProductionSetEligibilityError::Lifecycle(expected))
+                );
+                assert_eq!(harness.calls().len(), 3);
+                assert_eq!(counters.retained_body_entries, 0);
+                assert_eq!(counters.completed_postimage_writes, 0);
+            });
+        }
+    }
+
+    #[test]
+    fn injected_zero_rent_preserves_distinct_anchor_vacant_and_prefunded_paths() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::free();
+        assert_eq!(rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN), 0);
+        let instruction = encoded(ProductionInstruction::SetEligibility {
+            role: 0,
+            agency_index: None,
+        });
+
+        for (shape, expected_calls) in [
+            (
+                EligibilityShape::SystemOwned { lamports: 0 },
+                vec![InitIfNeededTestCpiCall::CreateAccount {
+                    lamports: 0,
+                    data_len: ELIGIBILITY_ACCOUNT_LEN,
+                }],
+            ),
+            (
+                EligibilityShape::SystemOwned { lamports: 1 },
+                vec![
+                    InitIfNeededTestCpiCall::Allocate {
+                        data_len: ELIGIBILITY_ACCOUNT_LEN,
+                    },
+                    InitIfNeededTestCpiCall::Assign {
+                        owner: ECONOMY_PROGRAM,
+                    },
+                ],
+            ),
+        ] {
+            let mut fixture = Fixture::new(&binding, shape);
+            fixture.with_infos(|accounts| {
+                let mut harness = InitIfNeededTestCpiHarness::default();
+                let mut counters = ExecutionCounters::default();
+                let receipt = execute_with_rent_and_harness(
+                    &gate,
+                    &binding,
+                    &instruction,
+                    accounts,
+                    Some(&rent),
+                    &mut harness,
+                    &mut counters,
+                )
+                .unwrap();
+                assert_eq!(harness.calls(), expected_calls.as_slice());
+                assert_eq!(counters.retained_body_entries, 1);
+                assert_eq!(counters.completed_postimage_writes, 1);
+                assert_eq!(
+                    decode_eligibility_state(&accounts[3].try_borrow_data().unwrap()).unwrap(),
+                    receipt.next()
+                );
+            });
+        }
+    }
+
+    #[test]
+    fn wrong_runtime_program_identity_fails_before_cpi_body_or_write() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let instruction = encoded(ProductionInstruction::SetEligibility {
+            role: 0,
+            agency_index: None,
+        });
+        let mut fixture = Fixture::new(&binding, EligibilityShape::SystemOwned { lamports: 0 });
+        fixture.with_infos(|accounts| {
+            let (role, agency_index) = require_set_eligibility_instruction(&instruction).unwrap();
+            let active_config =
+                authenticate_production_active_config_account_info(&gate, &binding, &accounts[1])
+                    .unwrap();
+            let kernel = prepare_kernel_inputs(
+                &gate,
+                &active_config,
+                &binding,
+                accounts,
+                role,
+                agency_index,
+            )
+            .unwrap();
+            let constraints = prepare_production_active_init_if_needed_constraints_with_rent(
+                &gate,
+                &active_config,
+                &binding,
+                &accounts[0],
+                &accounts[3],
+                &accounts[4],
+                kernel.identity,
+                StrictStateKind::Eligibility,
+                Some(&rent),
+            )
+            .unwrap();
+            let mut pre_body_calls = 0usize;
+            let mut counters = ExecutionCounters::default();
+            assert_eq!(
+                execute_prepared_with_active_config_using(
+                    &Pubkey::new_unique(),
+                    &gate,
+                    &active_config,
+                    &binding,
+                    accounts,
+                    PreparedSetEligibilityPreBody {
+                        kernel,
+                        constraints,
+                    },
+                    |_| {
+                        pre_body_calls += 1;
+                        unreachable!("program identity must fail before lifecycle execution")
+                    },
+                    &mut counters,
+                ),
+                Err(ProductionSetEligibilityError::ProgramIdentityMismatch)
+            );
+            assert_eq!(pre_body_calls, 0);
+            assert_eq!(counters.retained_body_entries, 0);
+            assert_eq!(counters.completed_postimage_writes, 0);
+        });
     }
 
     #[test]
@@ -1058,6 +1810,83 @@ mod tests {
     }
 
     #[test]
+    fn late_created_write_borrow_failure_has_zero_postimage_and_requires_cpi_rollback() {
+        let binding = binding();
+        let gate = open_gate();
+        let rent = Rent::default();
+        let rent_minimum = rent.minimum_balance(ELIGIBILITY_ACCOUNT_LEN);
+        let instruction = encoded(ProductionInstruction::SetEligibility {
+            role: 0,
+            agency_index: None,
+        });
+        let mut fixture = Fixture::new(
+            &binding,
+            EligibilityShape::SystemOwned {
+                lamports: rent_minimum / 2,
+            },
+        );
+        fixture.with_infos(|accounts| {
+            let (role, agency_index) = require_set_eligibility_instruction(&instruction).unwrap();
+            let active_config =
+                authenticate_production_active_config_account_info(&gate, &binding, &accounts[1])
+                    .unwrap();
+            let kernel = prepare_kernel_inputs(
+                &gate,
+                &active_config,
+                &binding,
+                accounts,
+                role,
+                agency_index,
+            )
+            .unwrap();
+            let constraints = prepare_production_active_init_if_needed_constraints_with_rent(
+                &gate,
+                &active_config,
+                &binding,
+                &accounts[0],
+                &accounts[3],
+                &accounts[4],
+                kernel.identity,
+                StrictStateKind::Eligibility,
+                Some(&rent),
+            )
+            .unwrap();
+            let mut harness = InitIfNeededTestCpiHarness::default();
+            let executed = execute_production_active_init_if_needed_pre_body_with_test_harness(
+                &gate,
+                &active_config,
+                &binding,
+                constraints,
+                &accounts[0],
+                &accounts[3],
+                &accounts[4],
+                &mut harness,
+            )
+            .unwrap();
+            let result = set_eligibility(&gate, kernel.input).unwrap();
+            let held = accounts[3].try_borrow_data().unwrap();
+            assert!(held.iter().all(|byte| *byte == 0));
+            assert_eq!(
+                seal_and_execute_production_active_init_if_needed_postimage_account_infos(
+                    &gate,
+                    &active_config,
+                    &binding,
+                    executed,
+                    StrictStateValue::Eligibility(result.eligibility),
+                    &accounts[0],
+                    &accounts[3],
+                    &accounts[4],
+                ),
+                Err(RuntimeAccountLifecycleError::AccountBorrowFailed)
+            );
+            assert!(held.iter().all(|byte| *byte == 0));
+            assert_eq!(harness.calls().len(), 3);
+        });
+        let truth = PRODUCTION_SET_ELIGIBILITY_EXECUTOR_TRUTH;
+        assert!(truth.transaction_rollback_required_after_cpi);
+    }
+
+    #[test]
     fn truth_is_prepared_composition_only_and_unconditionally_held() {
         let truth = PRODUCTION_SET_ELIGIBILITY_TRUTH;
         assert!(truth.feature_gated);
@@ -1080,5 +1909,24 @@ mod tests {
         assert!(!truth.devnet_executed);
         assert!(truth.mainnet_hold);
         assert!(PRODUCTION_SET_ELIGIBILITY_STATUS.contains("MAINNET_HOLD"));
+    }
+
+    #[test]
+    fn executor_truth_is_narrow_undispatched_and_unconditionally_held() {
+        let truth = PRODUCTION_SET_ELIGIBILITY_EXECUTOR_TRUTH;
+        assert!(truth.exact_five_account_graph_required);
+        assert!(truth.production_program_identity_required);
+        assert!(truth.pre_cpi_constraints_execute_before_retained_body);
+        assert!(truth.vacant_create_account_supported);
+        assert!(truth.prefunded_transfer_allocate_assign_supported);
+        assert!(truth.post_cpi_checks_precede_retained_body);
+        assert!(truth.exact_postimage_write_follows_retained_success);
+        assert!(truth.transaction_rollback_required_after_cpi);
+        assert!(!truth.production_dispatcher_exposed);
+        assert!(!truth.production_entrypoint_exposed);
+        assert!(!truth.handler_complete);
+        assert!(!truth.devnet_transaction_rollback_proven);
+        assert!(truth.mainnet_hold);
+        assert!(PRODUCTION_SET_ELIGIBILITY_EXECUTOR_STATUS.contains("MAINNET_HOLD"));
     }
 }

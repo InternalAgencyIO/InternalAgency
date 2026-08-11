@@ -12,13 +12,16 @@
 
 extern crate alloc;
 
+#[cfg(test)]
+use alloc::boxed::Box;
 use alloc::vec::Vec;
 use core::array;
 
 use crate::native_adapter::{
     derive_pda, prepare_create_state_account, prepare_existing_state_write,
-    seal_atomic_write_batch, validate_atomic_write_preconditions, with_pda_signer_seeds,
-    AtomicWriteBatch, AuthenticatedStateAccount, AuthenticatedSystemPayer, CreatePdaLifecycle,
+    prepare_runtime_rent_create_state_account, seal_atomic_write_batch,
+    validate_atomic_write_preconditions, with_pda_signer_seeds, AtomicWriteBatch,
+    AuthenticatedStateAccount, AuthenticatedSystemPayer, CreatePdaLifecycle,
     NativeAccountObservation, NativeAdapterError, NativeEconomyBinding, PdaIdentity,
     StateWriteIntent, StrictStateKind, StrictStateValue,
 };
@@ -106,6 +109,7 @@ pub enum RuntimeAccountLifecycleError {
     PostCpiPayerLamportMismatch,
     PostCpiDataLengthMismatch,
     PostCpiDataNotZero,
+    PostCpiRentExemptionMismatch,
     ActiveConfigCapabilityMismatch,
     CompletedStakeIngressMismatch,
     InitIfNeededTargetShapeMismatch,
@@ -217,12 +221,18 @@ struct SystemOwnedInitIfNeededTarget {
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+struct ExistingInitIfNeededTarget {
+    authenticated: AuthenticatedStateAccount,
+    lamports: u64,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 // Keep the authenticated strict-state snapshot inline and `Copy`: introducing
 // heap indirection at this SBF lifecycle boundary would weaken its fixed-size,
 // allocation-free plan semantics.
 #[allow(clippy::large_enum_variant)]
 enum PreparedInitIfNeededTarget {
-    Existing(AuthenticatedStateAccount),
+    Existing(ExistingInitIfNeededTarget),
     SystemOwned(SystemOwnedInitIfNeededTarget),
 }
 
@@ -230,7 +240,7 @@ enum PreparedInitIfNeededTarget {
 /// `init_if_needed` lifecycle. It does not attest that any System CPI or
 /// post-CPI assertion ran, and it intentionally contains no postimage: handler
 /// output must not be serialized until the retained body has succeeded.
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq)]
 pub(crate) struct PreparedProductionInitIfNeededConstraints {
     path: ProductionInitIfNeededPath,
     payer: AuthenticatedSystemPayer,
@@ -238,6 +248,15 @@ pub(crate) struct PreparedProductionInitIfNeededConstraints {
     identity: PdaIdentity,
     kind: StrictStateKind,
     target: PreparedInitIfNeededTarget,
+}
+
+/// Consumed capability proving that the exact `init_if_needed` account
+/// lifecycle constraints, any required System CPI, and all post-CPI checks ran
+/// before a retained handler body. It is deliberately non-`Clone`, non-`Copy`,
+/// and field-private so a sibling handler cannot fabricate or replay it.
+#[derive(Debug, Eq, PartialEq)]
+pub(crate) struct ExecutedProductionInitIfNeededPreBody {
+    constraints: PreparedProductionInitIfNeededConstraints,
 }
 
 impl PreparedProductionInitIfNeeded {
@@ -373,6 +392,173 @@ impl SystemCpiInvoker for SolanaSystemCpi {
             &system_instruction::transfer(payer.key, target.key, lamports),
             &[payer.clone(), target.clone(), system.clone()],
         )
+    }
+}
+
+/// Controlled host-only invoker used to test cross-module handler ordering
+/// without exposing the injectable CPI trait or lifecycle snapshots.
+#[cfg(test)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub(crate) enum InitIfNeededTestCpiCall {
+    CreateAccount { lamports: u64, data_len: usize },
+    Transfer { lamports: u64 },
+    Allocate { data_len: usize },
+    Assign { owner: [u8; 32] },
+}
+
+#[cfg(test)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub(crate) enum InitIfNeededTestPostCpiCorruption {
+    Owner,
+    TargetLamports,
+    PayerLamports,
+    DataLength,
+    NonzeroData,
+}
+
+#[cfg(test)]
+#[derive(Default)]
+pub(crate) struct InitIfNeededTestCpiHarness {
+    calls: Vec<InitIfNeededTestCpiCall>,
+    fail_at: Option<usize>,
+    corruption: Option<InitIfNeededTestPostCpiCorruption>,
+}
+
+#[cfg(test)]
+impl InitIfNeededTestCpiHarness {
+    pub(crate) fn failing_at(fail_at: usize) -> Self {
+        Self {
+            calls: Vec::new(),
+            fail_at: Some(fail_at),
+            corruption: None,
+        }
+    }
+
+    pub(crate) fn corrupting(corruption: InitIfNeededTestPostCpiCorruption) -> Self {
+        Self {
+            calls: Vec::new(),
+            fail_at: None,
+            corruption: Some(corruption),
+        }
+    }
+
+    pub(crate) fn calls(&self) -> &[InitIfNeededTestCpiCall] {
+        &self.calls
+    }
+
+    fn should_fail(&self) -> bool {
+        self.fail_at == Some(self.calls.len())
+    }
+
+    fn allocate_zeroed_data(target: &AccountInfo<'_>, data_len: usize) {
+        let allocated: &'static mut [u8] = Box::leak(vec![0u8; data_len].into_boxed_slice());
+        *target.data.borrow_mut() = allocated;
+    }
+
+    fn corrupt_created_target(&self, target: &AccountInfo<'_>) -> Result<(), ProgramError> {
+        match self.corruption {
+            Some(InitIfNeededTestPostCpiCorruption::Owner) => {
+                target.assign(&system_program::ID);
+            }
+            Some(InitIfNeededTestPostCpiCorruption::TargetLamports) => {
+                **target.try_borrow_mut_lamports()? += 1;
+            }
+            Some(InitIfNeededTestPostCpiCorruption::DataLength) => {
+                let current = target.data_len();
+                Self::allocate_zeroed_data(target, current.saturating_sub(1));
+            }
+            Some(InitIfNeededTestPostCpiCorruption::NonzeroData) => {
+                let mut data = target.try_borrow_mut_data()?;
+                if let Some(first) = data.first_mut() {
+                    *first = 1;
+                }
+            }
+            Some(InitIfNeededTestPostCpiCorruption::PayerLamports) | None => {}
+        }
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+impl SystemCpiInvoker for InitIfNeededTestCpiHarness {
+    fn create_account<'a>(
+        &mut self,
+        payer: &AccountInfo<'a>,
+        target: &AccountInfo<'a>,
+        _system: &AccountInfo<'a>,
+        lamports: u64,
+        data_len: usize,
+        owner: &Pubkey,
+        _signer_seeds: &[&[u8]],
+    ) -> Result<(), ProgramError> {
+        if self.should_fail() {
+            return Err(ProgramError::Custom(201));
+        }
+        self.calls
+            .push(InitIfNeededTestCpiCall::CreateAccount { lamports, data_len });
+        **payer.try_borrow_mut_lamports()? -= lamports;
+        **target.try_borrow_mut_lamports()? += lamports;
+        Self::allocate_zeroed_data(target, data_len);
+        target.assign(owner);
+        if self.corruption == Some(InitIfNeededTestPostCpiCorruption::PayerLamports) {
+            **payer.try_borrow_mut_lamports()? += 1;
+        }
+        self.corrupt_created_target(target)?;
+        Ok(())
+    }
+
+    fn allocate<'a>(
+        &mut self,
+        target: &AccountInfo<'a>,
+        _system: &AccountInfo<'a>,
+        data_len: usize,
+        _signer_seeds: &[&[u8]],
+    ) -> Result<(), ProgramError> {
+        if self.should_fail() {
+            return Err(ProgramError::Custom(202));
+        }
+        self.calls
+            .push(InitIfNeededTestCpiCall::Allocate { data_len });
+        Self::allocate_zeroed_data(target, data_len);
+        Ok(())
+    }
+
+    fn assign<'a>(
+        &mut self,
+        target: &AccountInfo<'a>,
+        _system: &AccountInfo<'a>,
+        owner: &Pubkey,
+        _signer_seeds: &[&[u8]],
+    ) -> Result<(), ProgramError> {
+        if self.should_fail() {
+            return Err(ProgramError::Custom(203));
+        }
+        self.calls.push(InitIfNeededTestCpiCall::Assign {
+            owner: owner.to_bytes(),
+        });
+        target.assign(owner);
+        self.corrupt_created_target(target)?;
+        Ok(())
+    }
+
+    fn transfer<'a>(
+        &mut self,
+        payer: &AccountInfo<'a>,
+        target: &AccountInfo<'a>,
+        _system: &AccountInfo<'a>,
+        lamports: u64,
+    ) -> Result<(), ProgramError> {
+        if self.should_fail() {
+            return Err(ProgramError::Custom(204));
+        }
+        self.calls
+            .push(InitIfNeededTestCpiCall::Transfer { lamports });
+        **payer.try_borrow_mut_lamports()? -= lamports;
+        **target.try_borrow_mut_lamports()? += lamports;
+        if self.corruption == Some(InitIfNeededTestPostCpiCorruption::PayerLamports) {
+            **payer.try_borrow_mut_lamports()? += 1;
+        }
+        Ok(())
     }
 }
 
@@ -556,14 +742,18 @@ fn prepare_production_active_init_if_needed_constraints_from_authenticated(
         let target_lamports = target
             .try_borrow_lamports()
             .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
-        if **target_lamports < rent_minimum_lamports {
+        let lamports = **target_lamports;
+        if lamports < rent_minimum_lamports {
             return Err(RuntimeAccountLifecycleError::ExistingAccountNotRentExempt);
         }
         drop(target_lamports);
         let authenticated = authenticate_state_account_info(gate, binding, target, identity)?;
         (
             ProductionInitIfNeededPath::ExistingCas,
-            PreparedInitIfNeededTarget::Existing(authenticated),
+            PreparedInitIfNeededTarget::Existing(ExistingInitIfNeededTarget {
+                authenticated,
+                lamports,
+            }),
         )
     } else if target.owner.to_bytes() == system_program::ID.to_bytes() {
         let target_lamports = target
@@ -611,22 +801,18 @@ fn prepare_production_active_init_if_needed_constraints_from_authenticated(
                 NativeAdapterError::VacantAccountDataNotEmpty,
             ));
         }
-        if rent_minimum_lamports == 0 {
-            return Err(RuntimeAccountLifecycleError::Native(
-                NativeAdapterError::RentMinimumMustBePositive,
-            ));
-        }
-        let funding_lamports = rent_minimum_lamports.saturating_sub(lamports);
-        if authenticated_payer.lamports() < funding_lamports {
-            return Err(RuntimeAccountLifecycleError::Native(
-                NativeAdapterError::InsufficientPayerBalance,
-            ));
-        }
         let path = if lamports == 0 {
             ProductionInitIfNeededPath::CreateAccount
         } else {
             ProductionInitIfNeededPath::AllocateAssignAndFund
         };
+        let funding_lamports =
+            init_if_needed_funding_lamports(path, rent_minimum_lamports, lamports)?;
+        if authenticated_payer.lamports() < funding_lamports {
+            return Err(RuntimeAccountLifecycleError::Native(
+                NativeAdapterError::InsufficientPayerBalance,
+            ));
+        }
         (
             path,
             PreparedInitIfNeededTarget::SystemOwned(SystemOwnedInitIfNeededTarget {
@@ -652,6 +838,27 @@ fn prepare_production_active_init_if_needed_constraints_from_authenticated(
     })
 }
 
+fn init_if_needed_funding_lamports(
+    path: ProductionInitIfNeededPath,
+    rent_minimum_lamports: u64,
+    current_lamports: u64,
+) -> Result<u64, RuntimeAccountLifecycleError> {
+    match path {
+        // Pinned Anchor 1.0.2 passes the raw Rent minimum to CreateAccount.
+        ProductionInitIfNeededPath::CreateAccount if current_lamports == 0 => {
+            Ok(rent_minimum_lamports)
+        }
+        // Its prefunded branch independently normalizes the funding target to
+        // at least one lamport before Transfer -> Allocate -> Assign.
+        ProductionInitIfNeededPath::AllocateAssignAndFund if current_lamports != 0 => {
+            Ok(rent_minimum_lamports
+                .max(1)
+                .saturating_sub(current_lamports))
+        }
+        _ => Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch),
+    }
+}
+
 /// Seal only the exact successful handler result against the already-validated
 /// entry snapshots. No AccountInfo fact is re-read or reordered here, and no
 /// planned System CPI or post-CPI assertion is executed or attested.
@@ -666,8 +873,8 @@ pub(crate) fn seal_production_active_init_if_needed_postimage(
         return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
     }
     let intent = match constraints.target {
-        PreparedInitIfNeededTarget::Existing(authenticated) => {
-            prepare_existing_state_write(gate, binding, &authenticated, next)?
+        PreparedInitIfNeededTarget::Existing(target) => {
+            prepare_existing_state_write(gate, binding, &target.authenticated, next)?
         }
         PreparedInitIfNeededTarget::SystemOwned(target) => prepare_create_state_account(
             gate,
@@ -706,6 +913,392 @@ pub(crate) fn seal_production_active_init_if_needed_postimage(
         rent_minimum_lamports: Some(constraints.rent_minimum_lamports),
         batch: seal_atomic_write_batch(gate, binding, [intent])?,
     })
+}
+
+/// Seal a created-path postimage only after the consumed pre-body capability
+/// proves that runtime Rent and the full System lifecycle were executed. This
+/// is the only bridge to the native helper that can represent Anchor 1.0.2's
+/// raw zero-Rent vacant-account vector.
+fn seal_executed_runtime_rent_init_if_needed_postimage(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    constraints: PreparedProductionInitIfNeededConstraints,
+    next: StrictStateValue,
+) -> Result<PreparedProductionInitIfNeeded, RuntimeAccountLifecycleError> {
+    if next.kind() != constraints.kind {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    let PreparedInitIfNeededTarget::SystemOwned(target) = constraints.target else {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    };
+    let intent = prepare_runtime_rent_create_state_account(
+        gate,
+        binding,
+        &constraints.payer,
+        NativeAccountObservation {
+            key: target.key,
+            owner: target.owner,
+            lamports: target.lamports,
+            data: &[],
+            is_signer: target.is_signer,
+            is_writable: target.is_writable,
+            executable: target.executable,
+        },
+        constraints.identity,
+        next,
+        constraints.rent_minimum_lamports,
+    )?;
+    let StateWriteIntent::Create(create) = intent else {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    };
+    let sealed_path = match create.lifecycle() {
+        CreatePdaLifecycle::CreateAccount => ProductionInitIfNeededPath::CreateAccount,
+        CreatePdaLifecycle::AllocateAssignAndFund => {
+            ProductionInitIfNeededPath::AllocateAssignAndFund
+        }
+    };
+    if sealed_path != constraints.path {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    Ok(PreparedProductionInitIfNeeded {
+        path: constraints.path,
+        payer: constraints.payer.key(),
+        rent_minimum_lamports: Some(constraints.rent_minimum_lamports),
+        batch: seal_atomic_write_batch(gate, binding, [StateWriteIntent::Create(create)])?,
+    })
+}
+
+/// Consume the opaque pre-CPI constraint plan and execute only the account
+/// lifecycle work that Anchor 1.0.2 performs before entering the retained
+/// handler body. The returned capability is the sole input accepted by the
+/// post-body finalizer below.
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn execute_production_active_init_if_needed_pre_body_account_infos<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    constraints: PreparedProductionInitIfNeededConstraints,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+) -> Result<ExecutedProductionInitIfNeededPreBody, RuntimeAccountLifecycleError> {
+    execute_production_active_init_if_needed_pre_body_with(
+        gate,
+        active_config,
+        binding,
+        constraints,
+        payer,
+        target,
+        system,
+        &mut SolanaSystemCpi,
+    )
+}
+
+#[cfg(test)]
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn execute_production_active_init_if_needed_pre_body_with_test_harness<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    constraints: PreparedProductionInitIfNeededConstraints,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+    harness: &mut InitIfNeededTestCpiHarness,
+) -> Result<ExecutedProductionInitIfNeededPreBody, RuntimeAccountLifecycleError> {
+    execute_production_active_init_if_needed_pre_body_with(
+        gate,
+        active_config,
+        binding,
+        constraints,
+        payer,
+        target,
+        system,
+        harness,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn execute_production_active_init_if_needed_pre_body_with<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    constraints: PreparedProductionInitIfNeededConstraints,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+    invoker: &mut impl SystemCpiInvoker,
+) -> Result<ExecutedProductionInitIfNeededPreBody, RuntimeAccountLifecycleError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    require_system_program(system)?;
+    let observed_payer = authenticate_system_payer_account_info(
+        gate,
+        binding,
+        payer,
+        active_config.state().config.admin,
+    )?;
+    if observed_payer != constraints.payer {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+
+    match constraints.target {
+        PreparedInitIfNeededTarget::Existing(expected) => {
+            if constraints.path != ProductionInitIfNeededPath::ExistingCas
+                || target.lamports() != expected.lamports
+                || target.lamports() < constraints.rent_minimum_lamports
+            {
+                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+            }
+            let observed =
+                authenticate_state_account_info(gate, binding, target, constraints.identity)?;
+            if observed != expected.authenticated {
+                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+            }
+        }
+        PreparedInitIfNeededTarget::SystemOwned(expected) => {
+            require_system_owned_init_if_needed_entry(binding, &constraints, expected, target)?;
+            let funding_lamports = init_if_needed_funding_lamports(
+                constraints.path,
+                constraints.rent_minimum_lamports,
+                expected.lamports,
+            )?;
+            let derived = derive_pda(binding, constraints.identity)?;
+            if derived.key != expected.key {
+                return Err(RuntimeAccountLifecycleError::CanonicalPdaMismatch);
+            }
+            let owner = Pubkey::new_from_array(binding.program_id());
+            with_pda_signer_seeds(constraints.identity, derived.bump, |signer_seeds| {
+                match constraints.path {
+                    ProductionInitIfNeededPath::CreateAccount if expected.lamports == 0 => invoker
+                        .create_account(
+                            payer,
+                            target,
+                            system,
+                            funding_lamports,
+                            constraints.kind.account_len(),
+                            &owner,
+                            signer_seeds,
+                        ),
+                    ProductionInitIfNeededPath::AllocateAssignAndFund if expected.lamports != 0 => {
+                        if funding_lamports != 0 {
+                            invoker.transfer(payer, target, system, funding_lamports)?;
+                        }
+                        invoker.allocate(
+                            target,
+                            system,
+                            constraints.kind.account_len(),
+                            signer_seeds,
+                        )?;
+                        invoker.assign(target, system, &owner, signer_seeds)
+                    }
+                    _ => Err(ProgramError::InvalidArgument),
+                }
+            })
+            .map_err(RuntimeAccountLifecycleError::CpiFailed)?;
+            require_system_owned_init_if_needed_post_cpi(
+                binding,
+                &constraints,
+                expected,
+                payer,
+                target,
+            )?;
+        }
+    }
+
+    Ok(ExecutedProductionInitIfNeededPreBody { constraints })
+}
+
+fn require_system_owned_init_if_needed_entry(
+    binding: &NativeEconomyBinding,
+    constraints: &PreparedProductionInitIfNeededConstraints,
+    expected: SystemOwnedInitIfNeededTarget,
+    target: &AccountInfo<'_>,
+) -> Result<(), RuntimeAccountLifecycleError> {
+    let data = target
+        .try_borrow_data()
+        .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
+    if target.key.to_bytes() != expected.key
+        || target.owner.to_bytes() != expected.owner
+        || expected.owner != system_program::ID.to_bytes()
+        || target.lamports() != expected.lamports
+        || target.is_signer != expected.is_signer
+        || target.is_writable != expected.is_writable
+        || target.executable != expected.executable
+        || !data.is_empty()
+        || constraints.kind.account_len() == 0
+    {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    let derived = derive_pda(binding, constraints.identity)?;
+    if derived.key != expected.key {
+        return Err(RuntimeAccountLifecycleError::CanonicalPdaMismatch);
+    }
+    Ok(())
+}
+
+fn require_system_owned_init_if_needed_post_cpi(
+    binding: &NativeEconomyBinding,
+    constraints: &PreparedProductionInitIfNeededConstraints,
+    expected: SystemOwnedInitIfNeededTarget,
+    payer: &AccountInfo<'_>,
+    target: &AccountInfo<'_>,
+) -> Result<(), RuntimeAccountLifecycleError> {
+    if target.key.to_bytes() != expected.key
+        || target.owner.to_bytes() != binding.program_id()
+        || target.is_signer != expected.is_signer
+        || target.is_writable != expected.is_writable
+        || target.executable != expected.executable
+    {
+        return Err(RuntimeAccountLifecycleError::PostCpiOwnerMismatch);
+    }
+    let funding_lamports = init_if_needed_funding_lamports(
+        constraints.path,
+        constraints.rent_minimum_lamports,
+        expected.lamports,
+    )?;
+    let expected_target_lamports = expected
+        .lamports
+        .checked_add(funding_lamports)
+        .ok_or(RuntimeAccountLifecycleError::PostCpiLamportMismatch)?;
+    if target.lamports() != expected_target_lamports {
+        return Err(RuntimeAccountLifecycleError::PostCpiLamportMismatch);
+    }
+    if target.lamports() < constraints.rent_minimum_lamports {
+        return Err(RuntimeAccountLifecycleError::PostCpiRentExemptionMismatch);
+    }
+    let expected_payer_lamports = constraints
+        .payer
+        .lamports()
+        .checked_sub(funding_lamports)
+        .ok_or(RuntimeAccountLifecycleError::PostCpiPayerLamportMismatch)?;
+    if payer.lamports() != expected_payer_lamports {
+        return Err(RuntimeAccountLifecycleError::PostCpiPayerLamportMismatch);
+    }
+    let data = target
+        .try_borrow_data()
+        .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
+    if data.len() != constraints.kind.account_len() {
+        return Err(RuntimeAccountLifecycleError::PostCpiDataLengthMismatch);
+    }
+    if data.iter().any(|byte| *byte != 0) {
+        return Err(RuntimeAccountLifecycleError::PostCpiDataNotZero);
+    }
+    Ok(())
+}
+
+/// Consume the post-CPI capability and write only the exact successful retained
+/// handler postimage. Created paths never invoke the System Program again.
+/// Any error after a prior CPI is returned to the enclosing instruction, whose
+/// transaction rollback is required to undo the lifecycle effects.
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn seal_and_execute_production_active_init_if_needed_postimage_account_infos<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    executed: ExecutedProductionInitIfNeededPreBody,
+    next: StrictStateValue,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+) -> Result<ProductionInitIfNeededReceipt, RuntimeAccountLifecycleError> {
+    require_active_config_capability(gate, active_config, binding)?;
+    require_system_program(system)?;
+    let constraints = executed.constraints;
+    let observed_payer = authenticate_system_payer_account_info(
+        gate,
+        binding,
+        payer,
+        active_config.state().config.admin,
+    )?;
+    if observed_payer.key() != constraints.payer.key() {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    match constraints.target {
+        PreparedInitIfNeededTarget::Existing(expected) => {
+            if target.lamports() != expected.lamports {
+                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+            }
+            let prepared =
+                seal_production_active_init_if_needed_postimage(gate, binding, constraints, next)?;
+            if prepared.path != ProductionInitIfNeededPath::ExistingCas {
+                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+            }
+            execute_production_active_init_if_needed_account_infos(
+                gate,
+                active_config,
+                binding,
+                prepared,
+                payer,
+                target,
+                system,
+            )
+        }
+        PreparedInitIfNeededTarget::SystemOwned(expected) => {
+            require_system_owned_init_if_needed_post_cpi(
+                binding,
+                &constraints,
+                expected,
+                payer,
+                target,
+            )?;
+            let identity = constraints.identity;
+            let derived = derive_pda(binding, identity)?;
+            let payer_key = constraints.payer.key();
+            let payer_lamports = constraints.payer.lamports();
+            let rent_minimum_lamports = constraints.rent_minimum_lamports;
+            let data_len = constraints.kind.account_len();
+            let funding_lamports = init_if_needed_funding_lamports(
+                constraints.path,
+                rent_minimum_lamports,
+                expected.lamports,
+            )?;
+            let prepared = seal_executed_runtime_rent_init_if_needed_postimage(
+                gate,
+                binding,
+                constraints,
+                next,
+            )?;
+            let StateWriteIntent::Create(create) = prepared.batch.intents()[0] else {
+                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+            };
+            let expected_lifecycle = match prepared.path {
+                ProductionInitIfNeededPath::CreateAccount => CreatePdaLifecycle::CreateAccount,
+                ProductionInitIfNeededPath::AllocateAssignAndFund => {
+                    CreatePdaLifecycle::AllocateAssignAndFund
+                }
+                ProductionInitIfNeededPath::ExistingCas => {
+                    return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+                }
+            };
+            if create.lifecycle() != expected_lifecycle
+                || create.payer() != payer_key
+                || create.key() != expected.key
+                || create.owner() != binding.program_id()
+                || create.identity() != identity
+                || create.bump() != derived.bump
+                || create.expected_lamports() != expected.lamports
+                || create.expected_payer_lamports() != payer_lamports
+                || create.rent_minimum_lamports() != rent_minimum_lamports
+                || create.funding_lamports() != funding_lamports
+                || create.data_len() != data_len
+                || !create.invoke_signed_required()
+            {
+                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+            }
+            let mut data = target
+                .try_borrow_mut_data()
+                .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
+            data.copy_from_slice(create.postimage());
+            Ok(ProductionInitIfNeededReceipt::Created(
+                RuntimeAccountLifecycleReceipt {
+                    batch_commitment_sha256: prepared.batch.commitment_sha256(),
+                    postimage_sha256: [create.postimage_sha256()],
+                },
+            ))
+        }
+    }
 }
 
 /// Execute only the path selected by the sealed read-only preparation above.
