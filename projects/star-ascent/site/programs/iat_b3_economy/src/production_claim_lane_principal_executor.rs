@@ -19,7 +19,7 @@ use crate::production_claim_lane_principal::{
 };
 use crate::runtime_adapter::{
     authenticate_runtime_production_active_config, RuntimeAdapterError,
-    RuntimeValidatedDailyLawWrite,
+    RuntimeProductionActiveConfig, RuntimeValidatedDailyLawWrite,
 };
 use crate::runtime_write_adapter::{
     execute_production_active_existing_write_batch_account_infos, RuntimeWriteAdapterError,
@@ -266,21 +266,8 @@ where
     transfer(&cpi)?;
     drop(cpi);
 
-    // V2 reloads both token accounts and mutates `principal_claimed` only
-    // after the transfer CPI returns success.
-    let batch = prepared.seal_post_transfer_cas_account_infos(
-        runtime_law.gate(),
-        binding,
-        &accounts[5],
-        &accounts[6],
-    )?;
-    let state_write = execute_production_active_existing_write_batch_account_infos(
-        runtime_law.gate(),
-        &active_config,
-        binding,
-        batch,
-        &accounts[4..5],
-    )?;
+    let state_write =
+        execute_post_transfer_cas(prepared, runtime_law, &active_config, binding, accounts)?;
 
     Ok(ProductionClaimLanePrincipalExecutionReceipt {
         caller,
@@ -291,6 +278,36 @@ where
         law_account_sha256: runtime_law.law_account_sha256(),
         state_write,
     })
+}
+
+// Keep the owning sealed write batch out of the transfer frame. V2 reloads
+// both token accounts and mutates `principal_claimed` only after the transfer
+// CPI returns success; this stage preserves that exact late boundary.
+#[inline(never)]
+fn execute_post_transfer_cas(
+    prepared: PreparedProductionClaimLanePrincipal,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+) -> Result<
+    RuntimeWriteReceipt<PRODUCTION_CLAIM_LANE_PRINCIPAL_WRITE_COUNT>,
+    ProductionClaimLanePrincipalExecutorError,
+> {
+    let batch = prepared.seal_post_transfer_cas_account_infos(
+        runtime_law.gate(),
+        binding,
+        &accounts[5],
+        &accounts[6],
+    )?;
+    execute_production_active_existing_write_batch_account_infos(
+        runtime_law.gate(),
+        active_config,
+        binding,
+        batch,
+        &accounts[4..5],
+    )
+    .map_err(Into::into)
 }
 
 fn require_account_count(
