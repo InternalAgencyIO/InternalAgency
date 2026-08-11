@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-recovery-round-1-materialized",
+  "status": "active-four-scene-gate-incomplete-after-round-1",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -23,7 +23,8 @@
       1551
     ],
     "gitCheckpointPushed": true,
-    "xPublicStatusVerified": false
+    "xPublicStatusVerified": false,
+    "gateSatisfied": false
   },
   "sourceCommit": "c49d3927942055238a19be43056339343ee09bea",
   "contractSha256": "F7B247DF3BCE256C2A0BB2B51EB282EC4E6FBC5FE8E85A17970F311F26138FEC",
@@ -65,7 +66,7 @@
     "active": "Moon-surface expedition couture",
     "batchOrdinalWithinTheme": 1
   },
-  "nextQueueStatus": "locked-until-Georgia-four-scene-Git-and-X-completion",
+  "nextQueueStatus": "locked-on-Georgia-until-four-accepted-git-pushed-and-X-live-verified",
   "researchSources": [
     {
       "url": "https://georgia.travel/tbilisi-peace-bridge",
@@ -1613,7 +1614,7 @@
       "note": "The concurrent wrapper returned one output-stage moderation rejection and no Georgia raw file was emitted; older generated images were not treated as this batch."
     },
     "recovery": {
-      "status": "materialized-pending-launch",
+      "status": "completed-zero-accepted",
       "maximumPerBlockedScenePerRound": 1,
       "laterWakeFreshRoundsAllowed": true,
       "round": 1,
@@ -1658,17 +1659,172 @@
           "countryLocationCorrection": "The unmistakable real-world setting is Batumi Boulevard, Georgia: keep the Black Sea horizon, Alphabet Tower silhouette, Ferris wheel, palms, and modern skyline large and plainly recognizable. This is not a Mars landscape. Mars-surface language appears only in the four couture structures and small portable observation elements."
         }
       },
-      "storedRollsChanged": false
+      "storedRollsChanged": false,
+      "completedAt": "2026-08-11T08:42:43.651Z",
+      "perScene": {
+        "1548": {
+          "status": "rejected-output-moderation-no-raw",
+          "rawOutput": null,
+          "moderationCategories": [
+            "sexual"
+          ],
+          "requestId": "36ea6a8f-a516-496a-b3bb-addd41e0ec49",
+          "recoveryPassConsumedThisRound": true
+        },
+        "1549": {
+          "status": "rejected-output-moderation-no-raw",
+          "rawOutput": null,
+          "moderationCategories": [
+            "violence",
+            "sexual"
+          ],
+          "requestId": "3a17c36b-3f6a-4f4a-82e1-0a2f21d887ea",
+          "recoveryPassConsumedThisRound": true
+        },
+        "1550": {
+          "status": "rejected-strict-visual-audit",
+          "rawOutput": "tmp/world-195x4/batch-382/raw/recovery-round-1/scene-1550.png",
+          "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-774d0075-d594-4da4-99a5-338146986187.png",
+          "sha256": "F09EB669BCCA2CC7E5AA2C7F319779837C90ADD8467A41CAFD4F38361DA1C8F2",
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "decisiveRejectionReasons": [
+            "The inert mission-prop muzzle line points left across the occupied romance group instead of terminating at the clearly empty blue water marker and complete safe backstop.",
+            "The unsafe occupied line fails the mission-prop acceptance gate even though the five adults, Sighnaghi landmarks, aurora, male drama, and geometric balloon pack are visible."
+          ],
+          "recoveryPassConsumedThisRound": true
+        },
+        "1551": {
+          "status": "rejected-strict-visual-audit",
+          "rawOutput": "tmp/world-195x4/batch-382/raw/recovery-round-1/scene-1551.png",
+          "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-644df9dc-a5cc-44eb-9ea1-b130a9436ea1.png",
+          "sha256": "BCF0D3FFABD1478080B57143AB2D1FEA81C9CA74F9076DE93597AB870797597F",
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "decisiveRejectionReasons": [
+            "The required PAWS-plus-MAX state is malformed: the render shows one adult golden retriever and one black-and-tan dog instead of a tiny collarless golden kitten and a distinct small young golden retriever pup.",
+            "Mascot identity is a hard gate even though Batumi landmarks, heavy rain, Radiance rainbow hosiery, the controlled dip, magnetic compass table, and isolated paper-target line are visible."
+          ],
+          "recoveryPassConsumedThisRound": true
+        }
+      },
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1548,
+        1549,
+        1550,
+        1551
+      ],
+      "laterWakeAction": "Start a fresh recovery round for the same Georgia batch; do not advance to Fiji."
     }
   },
   "acceptedAssets": [],
-  "rejectedAssets": [],
+  "rejectedAssets": [
+    {
+      "scene": 1548,
+      "status": "rejected-output-moderation-no-raw",
+      "rawOutput": null,
+      "moderationCategories": [
+        "sexual"
+      ],
+      "requestId": "36ea6a8f-a516-496a-b3bb-addd41e0ec49",
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1549,
+      "status": "rejected-output-moderation-no-raw",
+      "rawOutput": null,
+      "moderationCategories": [
+        "violence",
+        "sexual"
+      ],
+      "requestId": "3a17c36b-3f6a-4f4a-82e1-0a2f21d887ea",
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1550,
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/recovery-round-1/scene-1550.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-774d0075-d594-4da4-99a5-338146986187.png",
+      "sha256": "F09EB669BCCA2CC7E5AA2C7F319779837C90ADD8467A41CAFD4F38361DA1C8F2",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The inert mission-prop muzzle line points left across the occupied romance group instead of terminating at the clearly empty blue water marker and complete safe backstop.",
+        "The unsafe occupied line fails the mission-prop acceptance gate even though the five adults, Sighnaghi landmarks, aurora, male drama, and geometric balloon pack are visible."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/recovery-round-1/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-644df9dc-a5cc-44eb-9ea1-b130a9436ea1.png",
+      "sha256": "BCF0D3FFABD1478080B57143AB2D1FEA81C9CA74F9076DE93597AB870797597F",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The required PAWS-plus-MAX state is malformed: the render shows one adult golden retriever and one black-and-tan dog instead of a tiny collarless golden kitten and a distinct small young golden retriever pup.",
+        "Mascot identity is a hard gate even though Batumi landmarks, heavy rain, Radiance rainbow hosiery, the controlled dip, magnetic compass table, and isolated paper-target line are visible."
+      ],
+      "recoveryPassConsumedThisRound": true
+    }
+  ],
   "xPost": {
-    "status": "blocked-until-four-accepted-and-git-pushed",
+    "status": "blocked-active-country-incomplete-not-skipped",
     "minimumCurrentCountryAcceptedAssets": 4,
     "plannedCaption": "Georgia ❤️ Honduras #Georgia #InternalAgency",
-    "url": null
+    "url": null,
+    "acceptedCurrentCountryAssets": 0,
+    "requiredCurrentCountryAssets": 4,
+    "note": "Georgia remains active. X is not terminally deferred; posting is mandatory immediately after all four accepted assets and the pushed completion checkpoint exist."
   },
-  "checkpointedAt": "2026-08-11T08:30:28.319Z",
-  "rawOutputs": []
+  "checkpointedAt": "2026-08-11T08:42:43.651Z",
+  "rawOutputs": [
+    {
+      "scene": 1550,
+      "round": 1,
+      "kind": "recovery-raw-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/recovery-round-1/scene-1550.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-774d0075-d594-4da4-99a5-338146986187.png",
+      "sha256": "F09EB669BCCA2CC7E5AA2C7F319779837C90ADD8467A41CAFD4F38361DA1C8F2",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1551,
+      "round": 1,
+      "kind": "recovery-raw-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/recovery-round-1/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-644df9dc-a5cc-44eb-9ea1-b130a9436ea1.png",
+      "sha256": "BCF0D3FFABD1478080B57143AB2D1FEA81C9CA74F9076DE93597AB870797597F",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    }
+  ],
+  "terminal": false,
+  "nextWakeAction": {
+    "country": "Georgia",
+    "batch": 382,
+    "action": "fresh-recovery-round",
+    "sceneNumbers": [
+      1548,
+      1549,
+      1550,
+      1551
+    ],
+    "laterCountryStartAllowed": false
+  }
 }
