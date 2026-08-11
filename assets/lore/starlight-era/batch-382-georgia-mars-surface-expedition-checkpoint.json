@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-clean-fresh-round-25-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-25",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -4373,6 +4373,26 @@
           "consentScope": "This response applies only to this recorded round-25 invitation in scene 1551 and does not transfer to another act, participant, prop interaction, scene, country, or future image.",
           "recoveryDecisionContinuity": "This single technical correction remains the same round-25 image event, so the recorded invitation, explicit yes, and all-four willing participant set do not change.",
           "recoveryEvidenceRequirement": "Radiance's nod, torso turn, and affectionate ECE eye line plus Ellie, ECE, and Alia's willing expressions must be visually explicit without adding a hand, contact, or object."
+        },
+        "visualAudit": {
+          "renderSurfaceQuality": "pass-clean-natural-photographic-texture-without-wavy-artifacts-after-one-recovery",
+          "identity": "pass-four-adult-identities-with-Alia-braids",
+          "anatomy": "reject-Radiance-non-clasp-support-hand-and-forearm-remain-hidden-between-torsos",
+          "handOwnership": "reject-one-left-support-owner-path-not-continuously-visible; all other arms and hands are distinct",
+          "weather": "pass-heavy-straight-rain",
+          "locationThemeFusion": "pass-recognizable-Batumi-with-distinct-Mars-expedition-couture",
+          "outfitOriginality": "pass-four-distinct-silhouettes-constructions-and-footwear",
+          "rolledWardrobe": "reject-Alia-active-fully-open-back-and-visible-midriff-rolls; Radiance-open-back-and-other-active-rolls-pass",
+          "romance": "pass-stable-shallow-dip-reciprocal-clasp-and-three-clear-left-group-contacts",
+          "radianceResponse": "reject-round-25-affirmative-ECE-eye-line-and-torso-turn-not-visible",
+          "partyActivation": "reject-all-four-party-beat-because-Radiance-ECE-center-and-Alia-willing-nod-are-not-readable",
+          "mascots": "pass-one-PAWS-and-one-MAX-together-on-raised-dry-padded-lounge",
+          "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+          "routeMap": "pass-separate-hands-free-holographic-map",
+          "missionHandling": "pass-full-size-heavy-metallic-inert-replica-with-two-distinct-Alia-hands-and-indexed-finger-outside-visible-guard",
+          "missionTargetAxis": "pass-distant-separated-paper-diamond-and-complete-backstop-aligned-to-safe-muzzle-axis",
+          "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+          "accepted": false
         }
       }
     }
@@ -9501,7 +9521,7 @@
       }
     },
     "freshRound25": {
-      "status": "fresh-completed-rejected-recovery-materialized",
+      "status": "completed-rejected-after-single-recovery",
       "preparedAt": "2026-08-11T21:07:47.824Z",
       "sceneNumbers": [
         1551
@@ -9682,9 +9702,16 @@
       "freshCompletedAt": "2026-08-11T21:14:10.285Z",
       "rawOutputs": {
         "1551": {
-          "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-25/scene-1551.png",
-          "sha256": "2990E5B728916EF3946D4A4497EA54EF56BBF055BD1B18D426EC7832C00FBB20",
-          "preserved": true
+          "fresh": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-25/scene-1551.png",
+            "sha256": "2990E5B728916EF3946D4A4497EA54EF56BBF055BD1B18D426EC7832C00FBB20",
+            "preserved": true
+          },
+          "recovery": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-25-recovery/scene-1551.png",
+            "sha256": "F27524045E26CC2C61CF10F23F6419317B97DC2AB59D172A3674AF8534E46219",
+            "preserved": true
+          }
         }
       },
       "freshStrictAudit": {
@@ -9778,6 +9805,41 @@
           "recoveryDecisionContinuity": "This single technical correction remains the same round-25 image event, so the recorded invitation, explicit yes, and all-four willing participant set do not change.",
           "recoveryEvidenceRequirement": "Radiance's nod, torso turn, and affectionate ECE eye line plus Ellie, ECE, and Alia's willing expressions must be visually explicit without adding a hand, contact, or object."
         }
+      },
+      "completedAt": "2026-08-11T21:19:44.060Z",
+      "recoveryCompletedAt": "2026-08-11T21:19:44.060Z",
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1551
+      ],
+      "rejectionReasons": {
+        "1551": [
+          "Radiance's non-clasp support hand and forearm remain hidden between the two left torsos instead of continuously traceable",
+          "Radiance continues looking toward Ellie instead of visibly turning and sustaining the recorded affectionate eye line to ECE",
+          "Alia's recovery closes her active fully-open-back construction with an opaque copper corset panel",
+          "Alia's required restrained visible midriff band is absent in the recovered rear three-quarter view",
+          "Alia remains fully focused downrange without a readable willing side-eye nod for the all-four party beat"
+        ]
+      },
+      "strictAudit": {
+        "renderSurfaceQuality": "pass-clean-natural-photographic-texture-without-wavy-artifacts-after-one-recovery",
+        "identity": "pass-four-adult-identities-with-Alia-braids",
+        "anatomy": "reject-Radiance-non-clasp-support-hand-and-forearm-remain-hidden-between-torsos",
+        "handOwnership": "reject-one-left-support-owner-path-not-continuously-visible; all other arms and hands are distinct",
+        "weather": "pass-heavy-straight-rain",
+        "locationThemeFusion": "pass-recognizable-Batumi-with-distinct-Mars-expedition-couture",
+        "outfitOriginality": "pass-four-distinct-silhouettes-constructions-and-footwear",
+        "rolledWardrobe": "reject-Alia-active-fully-open-back-and-visible-midriff-rolls; Radiance-open-back-and-other-active-rolls-pass",
+        "romance": "pass-stable-shallow-dip-reciprocal-clasp-and-three-clear-left-group-contacts",
+        "radianceResponse": "reject-round-25-affirmative-ECE-eye-line-and-torso-turn-not-visible",
+        "partyActivation": "reject-all-four-party-beat-because-Radiance-ECE-center-and-Alia-willing-nod-are-not-readable",
+        "mascots": "pass-one-PAWS-and-one-MAX-together-on-raised-dry-padded-lounge",
+        "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+        "routeMap": "pass-separate-hands-free-holographic-map",
+        "missionHandling": "pass-full-size-heavy-metallic-inert-replica-with-two-distinct-Alia-hands-and-indexed-finger-outside-visible-guard",
+        "missionTargetAxis": "pass-distant-separated-paper-diamond-and-complete-backstop-aligned-to-safe-muzzle-axis",
+        "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+        "accepted": false
       }
     }
   },
@@ -10934,6 +10996,27 @@
       ],
       "recoveryPassConsumedThisRound": false,
       "broadRecoveryDeclinedToPreventArtifactAccumulation": true
+    },
+    {
+      "scene": 1551,
+      "round": 25,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-25-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-90071896-0b5d-4a65-be32-b074a9c409dc.png",
+      "sha256": "F27524045E26CC2C61CF10F23F6419317B97DC2AB59D172A3674AF8534E46219",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Radiance's non-clasp support hand and forearm remain hidden between the two left torsos instead of continuously traceable",
+        "Radiance continues looking toward Ellie instead of visibly turning and sustaining the recorded affectionate eye line to ECE",
+        "Alia's recovery closes her active fully-open-back construction with an opaque copper corset panel",
+        "Alia's required restrained visible midriff band is absent in the recovered rear three-quarter view",
+        "Alia remains fully focused downrange without a readable willing side-eye nod for the all-four party beat"
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -10943,9 +11026,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Round 24 scene 1551 failed broad strict gates and received no recovery to avoid artifact accumulation. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Round 25 scene 1551 exhausted its single recovery and still failed anatomy, live-response, and Alia wardrobe gates. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T21:14:10.285Z",
+  "checkpointedAt": "2026-08-11T21:19:44.060Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -11754,13 +11837,25 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1551,
+      "round": 25,
+      "kind": "clean-fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-25-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-90071896-0b5d-4a65-be32-b074a9c409dc.png",
+      "sha256": "F27524045E26CC2C61CF10F23F6419317B97DC2AB59D172A3674AF8534E46219",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-single-clean-fresh-round-25-recovery-scene-1551-only",
+    "action": "clean-fresh-round-26-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -11772,7 +11867,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T21:07:47.824Z",
+    "checkedAt": "2026-08-11T21:19:44.060Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -11826,7 +11921,7 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "Signed-in profile checked. No eligible unposted World Series country pair. Georgia remains X-blocked until scene 1551 is accepted.",
+    "reconciliationDecision": "Signed-in profile checked and no eligible unposted World Series country pair remains. Georgia still has three accepted scenes, so no X upload or country advance is permitted.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -11864,12 +11959,12 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 24,
-    "lastCleanRoundResult": "clean-surface-fresh-rejected-without-broad-recovery",
-    "nextCleanRound": 25,
-    "nextSourcePolicy": "original identity anchors only; no round 24 image input",
-    "activeCleanRound": 25,
-    "activeSourcePolicy": "single targeted recovery from clean round 25 raw only",
-    "priorBatumiRenderInputCount": 1
+    "lastCompletedCleanRound": 25,
+    "lastCleanRoundResult": "clean-surface-recovery-improved-mission-and-romance-but-rejected-anatomy-live-response-and-Alia-rolls",
+    "nextCleanRound": 26,
+    "nextSourcePolicy": "original identity anchors only; no round 25 image input",
+    "activeCleanRound": null,
+    "activeSourcePolicy": "four original identity anchors only",
+    "priorBatumiRenderInputCount": 0
   }
 }
