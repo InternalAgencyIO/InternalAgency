@@ -151,10 +151,12 @@ test("canonical production graph is valid, records the completed host root, and 
   assert.equal(result.dependencyGraphValid, true);
   assert.equal(result.dependencyReviewPacketComplete, false);
   assert.equal(result.productionDependencyReviewPacketComplete, false);
-  assert.equal(result.blockers.length, 28);
+  assert.equal(result.blockers.length, 27);
   assert.deepEqual(result.violations, []);
   assert.equal(node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").status, "STRUCTURAL_REVIEW_PACKET_COMPLETE");
   assert.equal(node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").blocker, null);
+  assert.equal(node(DRAFT, "V2_FEATURE_PARITY").status, "STRUCTURAL_REVIEW_PACKET_COMPLETE");
+  assert.equal(node(DRAFT, "V2_FEATURE_PARITY").blocker, null);
   assert.equal(
     node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").completionEvidence.artifactSha256,
     "90ee8a911cd33fc64ffe475421251539dadfc8d617508bd9302d88269c4a74c3",
@@ -402,7 +404,7 @@ test("fixtures, valid booleans, V2 gates, parsed matrices, and partial proof sha
   assert.match(relabeledResult.violations.join("\n"), /immutable committed contract artifact SHA-256/u);
   assert.match(relabeledResult.violations.join("\n"), /scoped production completion predicate is false/u);
   assert.match(relabeledResult.violations.join("\n"), /ECONOMY_ALL_15_WRITE_ADAPTER/u);
-  assert.match(relabeledResult.violations.join("\n"), /V2_FEATURE_PARITY/u);
+  assert.match(relabeledResult.violations.join("\n"), /LIVE_ESTATE_CANONICAL_MINT_DECISION/u);
 
   const localRelabel = fixture();
   localRelabel.profile = "LOCAL";

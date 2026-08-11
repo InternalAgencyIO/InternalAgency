@@ -50,15 +50,22 @@
     {
       "id": "V2_FEATURE_PARITY",
       "applicability": "REQUIRED",
-      "status": "BLOCKED",
+      "status": "STRUCTURAL_REVIEW_PACKET_COMPLETE",
       "completionPredicate": "ZERO_UNAUTHORIZED_CUT_V2_PARITY_PACKET",
       "contractArtifact": {
         "path": "projects/star-ascent/site/docs/b3/V2_FEATURE_PARITY.md",
         "sha256": "360a8511d5f2cc92a3a3e78509134a6c7096322ab88fca1be5e67f6fdf8fce26",
         "bindingScope": "REFERENCE_CONTRACT_ONLY"
       },
-      "completionEvidence": null,
-      "blocker": "Retained V2 feature parity and explicit supersession evidence remain incomplete."
+      "completionEvidence": {
+        "schema": "iat-b3-release-dependency-node-evidence/v1",
+        "nodeId": "V2_FEATURE_PARITY",
+        "predicate": "ZERO_UNAUTHORIZED_CUT_V2_PARITY_PACKET",
+        "subjectSha256": "0d18342443ae240024dfbd97711f3704da3365c3d78e7f1df8c380b17149c9e3",
+        "artifactSha256": "360a8511d5f2cc92a3a3e78509134a6c7096322ab88fca1be5e67f6fdf8fce26",
+        "environment": "PRODUCTION"
+      },
+      "blocker": null
     },
     {
       "id": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY",

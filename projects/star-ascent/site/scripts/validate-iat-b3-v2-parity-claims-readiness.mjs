@@ -61,7 +61,7 @@ const INPUT_SPECS = Object.freeze({
   }),
   releaseDependencyGraph: Object.freeze({
     path: "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",
-    sha256: "d636b5ac39ef6b5fab0c8e245a67547542d83aa99e5e63b0f0d45ea67d6aa16c",
+    sha256: "4e15b792d991debe6a1fbacef8357cb7920f96d9e5e66a8858e04d74e157354b",
   }),
 });
 
@@ -584,8 +584,16 @@ function validateReleaseClaimsBoundary(boundary, releaseGraph, violations) {
   const nodes = new Map(releaseGraph.nodes.map((node) => [node?.id, node]));
   for (const id of RELEASE_CLAIMS_PREREQUISITES) {
     const node = nodes.get(id);
-    if (!node || node.status !== "BLOCKED" || node.completionEvidence !== null || typeof node.blocker !== "string") {
-      violations.push(`releaseDependencyGraph: ${id} must remain explicitly BLOCKED with no completion evidence`);
+    const parityInventoryComplete = id === "V2_FEATURE_PARITY"
+      && node?.status === "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+      && node?.completionEvidence?.predicate === "ZERO_UNAUTHORIZED_CUT_V2_PARITY_PACKET"
+      && node?.blocker === null;
+    const releasePrerequisiteBlocked = id !== "V2_FEATURE_PARITY"
+      && node?.status === "BLOCKED"
+      && node?.completionEvidence === null
+      && typeof node?.blocker === "string";
+    if (!parityInventoryComplete && !releasePrerequisiteBlocked) {
+      violations.push(`releaseDependencyGraph: ${id} must retain its exact scoped completion or BLOCKED state`);
       held = false;
     }
   }

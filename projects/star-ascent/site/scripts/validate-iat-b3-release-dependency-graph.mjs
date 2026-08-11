@@ -11,6 +11,10 @@ import {
   TOKEN_2022_HOST_SOURCE_BINDINGS,
   validateToken2022ConfidentialHostCompatibilityManifest,
 } from "./validate-iat-b3-token-2022-confidential-host-compatibility.mjs";
+import {
+  parseV2ParityClaimsReadinessJson,
+  validateV2ParityClaimsReadinessManifest,
+} from "./validate-iat-b3-v2-parity-claims-readiness.mjs";
 import { validateXSocialEvidenceProviderReadinessManifest } from "./validate-iat-b3-x-social-evidence-provider-readiness.mjs";
 
 export const RELEASE_DEPENDENCY_GRAPH_SCHEMA = "iat-b3-release-dependency-graph/v1";
@@ -24,6 +28,10 @@ const DEFAULT_MANIFEST_PATH = resolve(
   SITE_ROOT,
   "docs/b3/iat-b3-release-dependency-graph.v1.json",
 );
+const V2_PARITY_SCOPED_PACKET = Object.freeze({
+  path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
+  sha256: "e74a1e3b68d04d101f4f36f05516c522c5171b74d69d40eaeefd1f68831ad819",
+});
 
 const SCOPE = Object.freeze({
   contract: RELEASE_DEPENDENCY_GRAPH_STATUS,
@@ -542,6 +550,49 @@ function readCommittedTokenHostBinding(binding, violations) {
   }
 }
 
+function readCommittedScopedPacket(binding, violations) {
+  if (binding !== V2_PARITY_SCOPED_PACKET
+    || isAbsolute(binding.path)
+    || binding.path.includes("\\")
+    || binding.path.split("/").includes("..")) {
+    violations.push("V2_FEATURE_PARITY: invalid scoped packet binding");
+    return null;
+  }
+  const absolutePath = resolve(REPOSITORY_ROOT, binding.path);
+  try {
+    if (lstatSync(absolutePath).isSymbolicLink()) {
+      violations.push("V2_FEATURE_PARITY: symbolic scoped packet is forbidden");
+      return null;
+    }
+  } catch (error) {
+    violations.push(`V2_FEATURE_PARITY: cannot inspect scoped packet (${error.message})`);
+    return null;
+  }
+  const clean = spawnSync("git", ["diff", "--quiet", "HEAD", "--", binding.path], {
+    cwd: REPOSITORY_ROOT,
+    windowsHide: true,
+  });
+  if (clean.status !== 0) {
+    violations.push("V2_FEATURE_PARITY: scoped packet is dirty");
+    return null;
+  }
+  try {
+    const bytes = execFileSync("git", ["show", `HEAD:${binding.path}`], {
+      cwd: REPOSITORY_ROOT,
+      maxBuffer: 64 * 1024 * 1024,
+      windowsHide: true,
+    });
+    if (sha256Bytes(bytes) !== binding.sha256) {
+      violations.push("V2_FEATURE_PARITY: scoped packet SHA-256 drifted");
+      return null;
+    }
+    return bytes;
+  } catch (error) {
+    violations.push(`V2_FEATURE_PARITY: cannot read committed scoped packet (${error.message})`);
+    return null;
+  }
+}
+
 function stableArtifactJson(nodeId, bytesByPath, violations) {
   const contractArtifact = NODE_SPEC_BY_ID.get(nodeId)?.contractArtifact;
   if (!contractArtifact) return null;
@@ -557,6 +608,30 @@ function stableArtifactJson(nodeId, bytesByPath, violations) {
 
 function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnixSeconds) {
   const states = new Map(RELEASE_DEPENDENCY_NODE_IDS.map((id) => [id, false]));
+
+  const parityBytes = bytesByPath.get(V2_PARITY_SCOPED_PACKET.path);
+  if (parityBytes) {
+    try {
+      const parity = parseV2ParityClaimsReadinessJson(
+        parityBytes.toString("utf8"),
+        V2_PARITY_SCOPED_PACKET.path,
+      );
+      const result = validateV2ParityClaimsReadinessManifest(parity);
+      states.set(
+        "V2_FEATURE_PARITY",
+        result.valid === true
+          && result.sourceInheritanceVerified === true
+          && result.featureInventoryMapped === true
+          && result.zeroUnauthorizedCuts === true
+          && result.implementationSliceInventoryComplete === true,
+      );
+      for (const violation of result.violations) {
+        violations.push(`V2_FEATURE_PARITY: ${violation}`);
+      }
+    } catch (error) {
+      violations.push(`V2_FEATURE_PARITY: scoped validator failed closed (${error.message})`);
+    }
+  }
 
   const tokenHost = stableArtifactJson(
     "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY",
@@ -888,6 +963,8 @@ export function validateReleaseDependencyGraphManifest(manifest, options = {}) {
       const bytes = readCommittedTokenHostBinding(binding, violations);
       if (bytes) bytesByPath.set(binding.path, bytes);
     }
+    const parityBytes = readCommittedScopedPacket(V2_PARITY_SCOPED_PACKET, violations);
+    if (parityBytes) bytesByPath.set(V2_PARITY_SCOPED_PACKET.path, parityBytes);
   }
   const scopedStates = scopedProductionPredicateStates(
     bytesByPath,

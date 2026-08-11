@@ -56,7 +56,7 @@ test("the canonical packet maps every retained V2 row and keeps all release surf
   assert.equal(result.deploymentAuthorized, false);
   assert.equal(result.mainnetExecutionAuthorized, false);
   assert.equal(result.mainnetStatus, "HOLD");
-  assert.equal(result.blockers.length, 22);
+  assert.equal(result.blockers.length, 21);
   assert.deepEqual(result.violations, []);
   assert.equal(manifest.schema, V2_PARITY_CLAIMS_SCHEMA);
   assert.equal(V2_PARITY_CLAIMS_MAINNET_STATUS, "HOLD");
