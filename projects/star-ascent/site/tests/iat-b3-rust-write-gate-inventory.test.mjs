@@ -786,12 +786,13 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
   );
 });
 
-test("the exact OpenPosition production codec is frozen without a dispatcher or entrypoint", () => {
+test("all fifteen production codecs are frozen without a dispatcher or entrypoint", () => {
   assert.match(economySource, /pub mod production_instruction;/u);
   assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_NAMESPACE: &\[u8; 8\] = b"IATB3EC1"/u);
   assert.match(economyProductionInstructionSource, /OPEN_POSITION_OPCODE: u8 = 6/u);
-  assert.match(economyProductionInstructionSource, /OPEN_POSITION_INSTRUCTION_LEN: usize = 32/u);
-  assert.match(economyProductionInstructionSource, /all_15_instruction_abi_frozen: false/u);
+  assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_LEN: usize = 32/u);
+  assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_COUNT: usize = 15/u);
+  assert.match(economyProductionInstructionSource, /all_15_instruction_abi_frozen: true/u);
   assert.match(economyProductionInstructionSource, /production_dispatcher_exposed: false/u);
   assert.match(economyProductionInstructionSource, /production_entrypoint_exposed: false/u);
   assert.match(economyProductionInstructionSource, /mainnet_hold: true/u);
