@@ -1217,88 +1217,152 @@ pub(crate) fn seal_and_execute_production_active_init_if_needed_postimage_accoun
     }
     match constraints.target {
         PreparedInitIfNeededTarget::Existing(expected) => {
-            if target.lamports() != expected.lamports {
-                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
-            }
-            let prepared =
-                seal_production_active_init_if_needed_postimage(gate, binding, constraints, next)?;
-            if prepared.path != ProductionInitIfNeededPath::ExistingCas {
-                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
-            }
-            execute_production_active_init_if_needed_account_infos(
+            seal_and_execute_existing_init_if_needed_postimage(
                 gate,
                 active_config,
                 binding,
-                prepared,
+                constraints,
+                expected,
+                next,
                 payer,
                 target,
                 system,
             )
         }
         PreparedInitIfNeededTarget::SystemOwned(expected) => {
-            require_system_owned_init_if_needed_post_cpi(
-                binding,
-                &constraints,
-                expected,
-                payer,
-                target,
-            )?;
-            let identity = constraints.identity;
-            let derived = derive_pda(binding, identity)?;
-            let payer_key = constraints.payer.key();
-            let payer_lamports = constraints.payer.lamports();
-            let rent_minimum_lamports = constraints.rent_minimum_lamports;
-            let data_len = constraints.kind.account_len();
-            let funding_lamports = init_if_needed_funding_lamports(
-                constraints.path,
-                rent_minimum_lamports,
-                expected.lamports,
-            )?;
-            let prepared = seal_executed_runtime_rent_init_if_needed_postimage(
+            seal_and_execute_created_init_if_needed_postimage(
                 gate,
                 binding,
                 constraints,
+                expected,
                 next,
-            )?;
-            let StateWriteIntent::Create(create) = prepared.batch.intents()[0] else {
-                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
-            };
-            let expected_lifecycle = match prepared.path {
-                ProductionInitIfNeededPath::CreateAccount => CreatePdaLifecycle::CreateAccount,
-                ProductionInitIfNeededPath::AllocateAssignAndFund => {
-                    CreatePdaLifecycle::AllocateAssignAndFund
-                }
-                ProductionInitIfNeededPath::ExistingCas => {
-                    return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
-                }
-            };
-            if create.lifecycle() != expected_lifecycle
-                || create.payer() != payer_key
-                || create.key() != expected.key
-                || create.owner() != binding.program_id()
-                || create.identity() != identity
-                || create.bump() != derived.bump
-                || create.expected_lamports() != expected.lamports
-                || create.expected_payer_lamports() != payer_lamports
-                || create.rent_minimum_lamports() != rent_minimum_lamports
-                || create.funding_lamports() != funding_lamports
-                || create.data_len() != data_len
-                || !create.invoke_signed_required()
-            {
-                return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
-            }
-            let mut data = target
-                .try_borrow_mut_data()
-                .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
-            data.copy_from_slice(create.postimage());
-            Ok(ProductionInitIfNeededReceipt::Created(
-                RuntimeAccountLifecycleReceipt {
-                    batch_commitment_sha256: prepared.batch.commitment_sha256(),
-                    postimage_sha256: [create.postimage_sha256()],
-                },
-            ))
+                payer,
+                target,
+            )
         }
     }
+}
+
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+fn seal_and_execute_existing_init_if_needed_postimage<'a>(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    constraints: PreparedProductionInitIfNeededConstraints,
+    expected: ExistingInitIfNeededTarget,
+    next: StrictStateValue,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+    system: &AccountInfo<'a>,
+) -> Result<ProductionInitIfNeededReceipt, RuntimeAccountLifecycleError> {
+    if target.lamports() != expected.lamports {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    let prepared =
+        seal_production_active_init_if_needed_postimage(gate, binding, constraints, next)?;
+    if prepared.path != ProductionInitIfNeededPath::ExistingCas {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    execute_production_active_init_if_needed_account_infos(
+        gate,
+        active_config,
+        binding,
+        prepared,
+        payer,
+        target,
+        system,
+    )
+}
+
+struct ExecutedCreatedPostimageFacts {
+    expected: SystemOwnedInitIfNeededTarget,
+    identity: PdaIdentity,
+    bump: u8,
+    payer_key: [u8; 32],
+    payer_lamports: u64,
+    rent_minimum_lamports: u64,
+    data_len: usize,
+    funding_lamports: u64,
+}
+
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+fn seal_and_execute_created_init_if_needed_postimage<'a>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    constraints: PreparedProductionInitIfNeededConstraints,
+    expected: SystemOwnedInitIfNeededTarget,
+    next: StrictStateValue,
+    payer: &AccountInfo<'a>,
+    target: &AccountInfo<'a>,
+) -> Result<ProductionInitIfNeededReceipt, RuntimeAccountLifecycleError> {
+    require_system_owned_init_if_needed_post_cpi(binding, &constraints, expected, payer, target)?;
+    let identity = constraints.identity;
+    let derived = derive_pda(binding, identity)?;
+    let facts = ExecutedCreatedPostimageFacts {
+        expected,
+        identity,
+        bump: derived.bump,
+        payer_key: constraints.payer.key(),
+        payer_lamports: constraints.payer.lamports(),
+        rent_minimum_lamports: constraints.rent_minimum_lamports,
+        data_len: constraints.kind.account_len(),
+        funding_lamports: init_if_needed_funding_lamports(
+            constraints.path,
+            constraints.rent_minimum_lamports,
+            expected.lamports,
+        )?,
+    };
+    let prepared =
+        seal_executed_runtime_rent_init_if_needed_postimage(gate, binding, constraints, next)?;
+    execute_sealed_created_init_if_needed_postimage(binding, prepared, facts, target)
+}
+
+#[inline(never)]
+fn execute_sealed_created_init_if_needed_postimage(
+    binding: &NativeEconomyBinding,
+    prepared: PreparedProductionInitIfNeeded,
+    facts: ExecutedCreatedPostimageFacts,
+    target: &AccountInfo<'_>,
+) -> Result<ProductionInitIfNeededReceipt, RuntimeAccountLifecycleError> {
+    let StateWriteIntent::Create(create) = &prepared.batch.intents()[0] else {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    };
+    let expected_lifecycle = match prepared.path {
+        ProductionInitIfNeededPath::CreateAccount => CreatePdaLifecycle::CreateAccount,
+        ProductionInitIfNeededPath::AllocateAssignAndFund => {
+            CreatePdaLifecycle::AllocateAssignAndFund
+        }
+        ProductionInitIfNeededPath::ExistingCas => {
+            return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+        }
+    };
+    if create.lifecycle() != expected_lifecycle
+        || create.payer() != facts.payer_key
+        || create.key() != facts.expected.key
+        || create.owner() != binding.program_id()
+        || create.identity() != facts.identity
+        || create.bump() != facts.bump
+        || create.expected_lamports() != facts.expected.lamports
+        || create.expected_payer_lamports() != facts.payer_lamports
+        || create.rent_minimum_lamports() != facts.rent_minimum_lamports
+        || create.funding_lamports() != facts.funding_lamports
+        || create.data_len() != facts.data_len
+        || !create.invoke_signed_required()
+    {
+        return Err(RuntimeAccountLifecycleError::InitIfNeededPlanMismatch);
+    }
+    let mut data = target
+        .try_borrow_mut_data()
+        .map_err(|_| RuntimeAccountLifecycleError::AccountBorrowFailed)?;
+    data.copy_from_slice(create.postimage());
+    Ok(ProductionInitIfNeededReceipt::Created(
+        RuntimeAccountLifecycleReceipt {
+            batch_commitment_sha256: prepared.batch.commitment_sha256(),
+            postimage_sha256: [create.postimage_sha256()],
+        },
+    ))
 }
 
 /// Execute only the path selected by the sealed read-only preparation above.

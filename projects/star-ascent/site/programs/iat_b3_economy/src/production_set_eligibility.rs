@@ -264,17 +264,10 @@ struct PreparedSetEligibilityPreBody {
     constraints: PreparedProductionInitIfNeededConstraints,
 }
 
+#[cfg(test)]
 trait SetEligibilityExecutionObserver {
     fn retained_body_entered(&mut self);
     fn postimage_write_completed(&mut self);
-}
-
-struct NoopSetEligibilityExecutionObserver;
-
-impl SetEligibilityExecutionObserver for NoopSetEligibilityExecutionObserver {
-    fn retained_body_entered(&mut self) {}
-
-    fn postimage_write_completed(&mut self) {}
 }
 
 /// Runtime production composition. The opaque Law capability and live Config
@@ -435,6 +428,7 @@ fn prepare_pre_body_with_active_config(
 }
 
 #[allow(clippy::too_many_arguments)]
+#[inline(never)]
 fn execute_with_active_config(
     program_id: &Pubkey,
     gate: &ValidatedDailyLawWrite,
@@ -444,48 +438,6 @@ fn execute_with_active_config(
     role: u8,
     agency_index: Option<u32>,
 ) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
-    let mut observer = NoopSetEligibilityExecutionObserver;
-    execute_with_active_config_using(
-        program_id,
-        gate,
-        active_config,
-        binding,
-        accounts,
-        role,
-        agency_index,
-        |constraints| {
-            execute_production_active_init_if_needed_pre_body_account_infos(
-                gate,
-                active_config,
-                binding,
-                constraints,
-                &accounts[0],
-                &accounts[3],
-                &accounts[4],
-            )
-        },
-        &mut observer,
-    )
-}
-
-#[allow(clippy::too_many_arguments)]
-fn execute_with_active_config_using<F, O>(
-    program_id: &Pubkey,
-    gate: &ValidatedDailyLawWrite,
-    active_config: &RuntimeProductionActiveConfig,
-    binding: &NativeEconomyBinding,
-    accounts: &[AccountInfo<'_>],
-    role: u8,
-    agency_index: Option<u32>,
-    execute_pre_body: F,
-    observer: &mut O,
-) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError>
-where
-    F: FnOnce(
-        PreparedProductionInitIfNeededConstraints,
-    ) -> Result<ExecutedProductionInitIfNeededPreBody, RuntimeAccountLifecycleError>,
-    O: SetEligibilityExecutionObserver,
-{
     let prepared = prepare_pre_body_with_active_config(
         gate,
         active_config,
@@ -494,18 +446,98 @@ where
         role,
         agency_index,
     )?;
-    execute_prepared_with_active_config_using(
-        program_id,
+    execute_production_pre_body_stage(program_id, gate, active_config, binding, accounts, prepared)
+}
+
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+fn execute_production_pre_body_stage(
+    program_id: &Pubkey,
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    prepared: PreparedSetEligibilityPreBody,
+) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionSetEligibilityError::ProgramIdentityMismatch);
+    }
+    let kernel = prepared.kernel;
+    let lifecycle = execute_production_active_init_if_needed_pre_body_account_infos(
+        gate,
+        active_config,
+        binding,
+        prepared.constraints,
+        &accounts[0],
+        &accounts[3],
+        &accounts[4],
+    )?;
+    execute_production_retained_body_stage(
         gate,
         active_config,
         binding,
         accounts,
-        prepared,
-        execute_pre_body,
-        observer,
+        kernel,
+        lifecycle,
     )
 }
 
+#[inline(never)]
+fn execute_production_retained_body_stage(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    kernel: PreparedSetEligibilityKernel,
+    lifecycle: ExecutedProductionInitIfNeededPreBody,
+) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
+    let result = set_eligibility(gate, kernel.input)?;
+    if result.eligibility != kernel.projected_next {
+        return Err(ProductionSetEligibilityError::RetainedV2PostimageMismatch);
+    }
+    execute_production_postimage_stage(
+        gate,
+        active_config,
+        binding,
+        accounts,
+        kernel,
+        lifecycle,
+        result.eligibility,
+    )
+}
+
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+fn execute_production_postimage_stage(
+    gate: &ValidatedDailyLawWrite,
+    active_config: &RuntimeProductionActiveConfig,
+    binding: &NativeEconomyBinding,
+    accounts: &[AccountInfo<'_>],
+    kernel: PreparedSetEligibilityKernel,
+    lifecycle_capability: ExecutedProductionInitIfNeededPreBody,
+    next: EligibilityState,
+) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
+    let lifecycle = seal_and_execute_production_active_init_if_needed_postimage_account_infos(
+        gate,
+        active_config,
+        binding,
+        lifecycle_capability,
+        StrictStateValue::Eligibility(next),
+        &accounts[0],
+        &accounts[3],
+        &accounts[4],
+    )?;
+    Ok(ProductionSetEligibilityExecutionReceipt {
+        config: active_config.key(),
+        admin: active_config.state().config.admin,
+        wallet: kernel.wallet,
+        eligibility: accounts[3].key.to_bytes(),
+        next,
+        lifecycle,
+    })
+}
+
+#[cfg(test)]
 #[allow(clippy::too_many_arguments)]
 fn execute_prepared_with_active_config_using<F, O>(
     program_id: &Pubkey,
