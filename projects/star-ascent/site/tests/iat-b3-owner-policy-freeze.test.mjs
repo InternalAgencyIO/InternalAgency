@@ -20,6 +20,13 @@ import {
   TOKEN_2022_PROGRAM_ID,
   observeIatB3LiveEstateMainnet,
 } from "../scripts/observe-iat-b3-live-estate-mainnet.mjs";
+import {
+  NATIVE_LOADER_ID,
+  UPGRADEABLE_LOADER_ID,
+  ZK_ELGAMAL_NATIVE_PROGRAM_NAME,
+  ZK_ELGAMAL_PROOF_PROGRAM_ID,
+  observeIatB3StandardProgramsMainnet,
+} from "../scripts/observe-iat-b3-standard-programs-mainnet.mjs";
 
 const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const MANIFEST_PATH = fileURLToPath(new URL("../docs/b3/iat-b3-owner-policy-freeze.v1.json", import.meta.url));
@@ -582,5 +589,116 @@ test("live-estate observation fails closed on malformed keys, wrong networks, an
       },
     }),
     /preceded the finalized observation boundary/u,
+  );
+});
+
+test("standard-program observation pins finalized Token-2022 bytes and the native ZK program without authorizing release", async () => {
+  const programDataKey = Uint8Array.from({ length: 32 }, (_, index) => index + 1);
+  const upgradeAuthority = Uint8Array.from({ length: 32 }, (_, index) => 0x80 + index);
+  const tokenProgramState = Buffer.alloc(36);
+  tokenProgramState.writeUInt32LE(2, 0);
+  tokenProgramState.set(programDataKey, 4);
+  const tokenProgramData = Buffer.alloc(49);
+  tokenProgramData.writeUInt32LE(3, 0);
+  tokenProgramData.writeBigUInt64LE(427_147_035n, 4);
+  tokenProgramData[12] = 1;
+  tokenProgramData.set(upgradeAuthority, 13);
+  tokenProgramData.set([1, 2, 3, 4], 45);
+  const calls = [];
+  const rpcCall = async (method, params, id) => {
+    calls.push({ method, params, id });
+    if (method === "getGenesisHash") return IAT_B3_MAINNET_GENESIS_HASH;
+    if (method === "getSlot") return 438_000_000;
+    if (method === "getMultipleAccounts") {
+      return {
+        context: { slot: 438_000_001 },
+        value: [
+          { data: [tokenProgramState.toString("base64"), "base64"], executable: true, owner: UPGRADEABLE_LOADER_ID },
+          {
+            data: [Buffer.from(ZK_ELGAMAL_NATIVE_PROGRAM_NAME, "ascii").toString("base64"), "base64"],
+            executable: true,
+            owner: NATIVE_LOADER_ID,
+          },
+        ],
+      };
+    }
+    if (method === "getAccountInfo") {
+      return {
+        context: { slot: 438_000_002 },
+        value: { data: [tokenProgramData.toString("base64"), "base64"], executable: false, owner: UPGRADEABLE_LOADER_ID },
+      };
+    }
+    throw new Error(`unexpected method ${method}`);
+  };
+
+  const result = await observeIatB3StandardProgramsMainnet({
+    rpcCall,
+    observedAtUtc: "2026-08-11T02:00:00.000Z",
+  });
+  assert.deepEqual(calls.map(({ method, id }) => [method, id]), [
+    ["getGenesisHash", 1],
+    ["getSlot", 2],
+    ["getMultipleAccounts", 3],
+    ["getAccountInfo", 4],
+  ]);
+  assert.deepEqual(calls[2].params[0], [TOKEN_2022_PROGRAM_ID, ZK_ELGAMAL_PROOF_PROGRAM_ID]);
+  assert.equal(result.token2022.deploymentSlot, 427_147_035);
+  assert.equal(result.token2022.programBytes, 4);
+  assert.equal(result.token2022.immutable, false);
+  assert.equal(result.zkElgamalProof.immutable, true);
+  assert.equal(result.standardProgramSnapshotComplete, true);
+  assert.equal(result.token2022ImmutableBytecodeVerified, false);
+  assert.equal(result.hostCompatibilityComplete, false);
+  assert.equal(result.mainnetExecutionAuthorized, false);
+  assert.equal(result.mainnetStatus, "HOLD");
+});
+
+test("standard-program observation rejects substituted loaders, native bytes, and stale ProgramData", async () => {
+  const tokenProgramState = Buffer.alloc(36);
+  tokenProgramState.writeUInt32LE(2, 0);
+  tokenProgramState.fill(7, 4);
+  const validPrograms = {
+    context: { slot: 438_000_001 },
+    value: [
+      { data: [tokenProgramState.toString("base64"), "base64"], executable: true, owner: UPGRADEABLE_LOADER_ID },
+      {
+        data: [Buffer.from(ZK_ELGAMAL_NATIVE_PROGRAM_NAME, "ascii").toString("base64"), "base64"],
+        executable: true,
+        owner: NATIVE_LOADER_ID,
+      },
+    ],
+  };
+  const baseRpc = (mutatePrograms, programDataSlot = 438_000_002) => async (method) => {
+    if (method === "getGenesisHash") return IAT_B3_MAINNET_GENESIS_HASH;
+    if (method === "getSlot") return 438_000_000;
+    if (method === "getMultipleAccounts") return mutatePrograms(structuredClone(validPrograms));
+    if (method === "getAccountInfo") {
+      const bytes = Buffer.alloc(46);
+      bytes.writeUInt32LE(3, 0);
+      bytes.writeBigUInt64LE(427_147_035n, 4);
+      bytes[45] = 1;
+      return {
+        context: { slot: programDataSlot },
+        value: { data: [bytes.toString("base64"), "base64"], executable: false, owner: UPGRADEABLE_LOADER_ID },
+      };
+    }
+    throw new Error(`unexpected method ${method}`);
+  };
+
+  await assert.rejects(
+    observeIatB3StandardProgramsMainnet({
+      rpcCall: baseRpc((programs) => { programs.value[0].owner = NATIVE_LOADER_ID; return programs; }),
+    }),
+    /Token-2022 program account/u,
+  );
+  await assert.rejects(
+    observeIatB3StandardProgramsMainnet({
+      rpcCall: baseRpc((programs) => { programs.value[1].data[0] = Buffer.from("substitute").toString("base64"); return programs; }),
+    }),
+    /ZK ElGamal proof program/u,
+  );
+  await assert.rejects(
+    observeIatB3StandardProgramsMainnet({ rpcCall: baseRpc((programs) => programs, 438_000_000) }),
+    /ProgramData observation preceded/u,
   );
 });
