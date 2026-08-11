@@ -822,8 +822,33 @@ export function removeSelfCreatedBuildRoot(buildRoot) {
     || !basename(realBuildRoot).startsWith(BUILD_ROOT_PREFIX)) {
     throw new Error("IAT_B3_COMBINED_LAW_BUILD_ROOT_CLEANUP_BOUNDARY_INVALID");
   }
+  restoreDirectoryRemovalPermissions(realBuildRoot, realBuildRoot);
   rmSync(realBuildRoot, { recursive: true, force: true });
   ACTIVE_BUILD_ROOTS.delete(realBuildRoot);
+}
+
+function restoreDirectoryRemovalPermissions(directory, boundary) {
+  const resolvedDirectory = resolve(directory);
+  if (
+    resolvedDirectory !== boundary
+    && !isWithin(boundary, resolvedDirectory)
+  ) {
+    throw new Error("IAT_B3_COMBINED_LAW_BUILD_ROOT_CLEANUP_PATH_ESCAPE");
+  }
+  const stat = lstatSync(resolvedDirectory);
+  if (!stat.isDirectory() || stat.isSymbolicLink()) {
+    throw new Error("IAT_B3_COMBINED_LAW_BUILD_ROOT_CLEANUP_DIRECTORY_INVALID");
+  }
+
+  // Exact-source materialization deliberately removes owner write permission.
+  // Restore it only inside the process-branded, already boundary-checked temp
+  // root so POSIX cleanup can unlink files from every nested directory. Never
+  // follow symlinks while reopening directory permissions.
+  chmodSync(resolvedDirectory, 0o700);
+  for (const entry of readdirSync(resolvedDirectory, { withFileTypes: true })) {
+    if (!entry.isDirectory() || entry.isSymbolicLink()) continue;
+    restoreDirectoryRemovalPermissions(join(resolvedDirectory, entry.name), boundary);
+  }
 }
 
 function decodeExactUtf8(bytes, label) {
