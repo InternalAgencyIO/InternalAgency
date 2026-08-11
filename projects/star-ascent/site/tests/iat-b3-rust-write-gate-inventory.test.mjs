@@ -14,6 +14,14 @@ const lawSource = readFileSync(
   new URL("../programs/iat_b3_law/src/lib.rs", import.meta.url),
   "utf8",
 );
+const lawCargo = readFileSync(
+  new URL("../programs/iat_b3_law/Cargo.toml", import.meta.url),
+  "utf8",
+);
+const lawBuildSource = readFileSync(
+  new URL("../programs/iat_b3_law/build.rs", import.meta.url),
+  "utf8",
+);
 const stakeIngressSource = readFileSync(
   new URL("../programs/iat_b3_law/src/stake_ingress.rs", import.meta.url),
   "utf8",
@@ -130,7 +138,7 @@ function anchorProgramBody(source) {
 }
 
 function functionBody(source, name) {
-  const signature = new RegExp(`(?:pub )?fn ${name}\\b`, "u");
+  const signature = new RegExp(`(?:pub(?:\\(crate\\))? )?fn ${name}\\b`, "u");
   const match = signature.exec(source);
   assert.ok(match, `missing Rust function ${name}`);
   const open = source.indexOf("{", match.index);
@@ -600,7 +608,7 @@ test("native adapter keeps exactly two own writes and one canonical transfer gat
   assert.match(execute, /IatTransferDisposition::RejectedDailyLockdown/u);
 });
 
-test("production stake-ingress kernels stay fail-closed and entrypoint-unwired", () => {
+test("production combined-hook build stays identity-gated and fail-closed", () => {
   const binding = structBody(stakeIngressSource, "StakeIngressBinding");
   assertTokensInOrder(
     binding,
@@ -635,26 +643,84 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
     enforce,
     [
       "binding.validate()?",
-      "mint != &binding.mint",
-      "destination != &binding.stake_vault",
-      "authority != &binding.ingress_authority",
+      "enforce_frozen_stake_ingress(",
+      "&binding.mint",
+      "&binding.stake_vault",
+      "&binding.ingress_authority",
+    ],
+    "reference-to-executable admission delegation",
+  );
+  const frozenEnforce = functionBody(stakeIngressSource, "enforce_frozen_stake_ingress");
+  assertTokensInOrder(
+    frozenEnforce,
+    [
+      "canonical_mint == &Pubkey::default()",
+      "stake_vault == &Pubkey::default()",
+      "ingress_authority == &Pubkey::default()",
+      "mint != canonical_mint",
+      "destination != stake_vault",
+      "authority != ingress_authority",
       "UnauthorizedStakeIngress",
     ],
-    "stake-ingress admission rule",
+    "build-frozen stake-ingress admission rule",
   );
   assert.doesNotMatch(
-    enforce,
+    `${enforce}\n${frozenEnforce}`,
     /authority_is_signer|\.is_signer|Clock|oracle|admin|sweep|update|disposition/iu,
   );
 
-  for (const body of [
-    functionBody(lawSource, "process_instruction"),
-    functionBody(lawSource, "process_initialize_law"),
-    functionBody(lawSource, "process_execute"),
-  ]) {
-    assert.doesNotMatch(body, /StakeIngressBinding|enforce_stake_ingress/u);
-  }
+  assert.match(lawCargo, /production-combined-hook = \[\]/u);
+  assert.match(
+    lawSource,
+    /#\[cfg\(feature = "production-combined-hook"\)\]\s+#\[allow\(dead_code\)\]\s+mod stake_ingress;/u,
+  );
   assert.doesNotMatch(lawSource, /pub mod stake_ingress;/u);
+  assert.match(
+    functionBody(lawSource, "process_instruction"),
+    /require_compiled_law_program\(program_id\)\?/u,
+  );
+  for (const handler of ["process_initialize_law", "process_finalize_day", "process_execute"]) {
+    assert.match(
+      functionBody(lawSource, handler),
+      /require_compiled_canonical_mint\(mint\.key\)\?/u,
+      `${handler} must bind the build-frozen mint`,
+    );
+  }
+  assertTokensInOrder(
+    functionBody(lawSource, "process_execute"),
+    [
+      "state.transfer_disposition_at(clock.unix_timestamp)?",
+      "IatTransferDisposition::Allowed",
+      "enforce_compiled_stake_ingress(mint.key, destination.key, authority.key)",
+    ],
+    "Daily Law before compiled stake-ingress admission",
+  );
+  const compiledEnforcement = functionBody(lawSource, "enforce_compiled_stake_ingress");
+  assertTokensInOrder(
+    compiledEnforcement,
+    [
+      "CANONICAL_MINT_BYTES",
+      "STAKE_VAULT_BYTES",
+      "INGRESS_AUTHORITY_BYTES",
+      "enforce_frozen_stake_ingress",
+    ],
+    "build-frozen stake-ingress enforcement",
+  );
+  assert.doesNotMatch(compiledEnforcement, /Clock|is_signer|try_borrow|invoke/u);
+  for (const identity of [
+    "IAT_B3_PRODUCTION_LAW_PROGRAM_ID",
+    "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID",
+    "IAT_B3_PRODUCTION_CANONICAL_MINT",
+  ]) {
+    assert.match(lawBuildSource, new RegExp(identity, "u"));
+  }
+  assert.match(
+    lawBuildSource,
+    /CARGO_FEATURE_PRODUCTION_COMBINED_HOOK[\s\S]+required_pubkey[\s\S]+find_program_address/u,
+  );
+  assert.match(lawBuildSource, /ECONOMY_STAKE_TOKEN_SEED/u);
+  assert.match(lawBuildSource, /ECONOMY_STAKE_INGRESS_AUTHORITY_SEED/u);
+  assert.doesNotMatch(lawBuildSource, /mainnetExecutionAuthorized|sendTransaction|RpcClient/u);
   assert.match(economySource, /pub mod stake_ingress;/u);
   const combined = functionBody(
     economyStakeIngressSource,
@@ -760,13 +826,10 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
     initialize,
     /ExtraAccountMetaList::init::<ExecuteInstruction>[\s\S]+&\[extra_meta\]/u,
   );
-  assert.match(
-    audit,
-    /bounded,\s+identity-unwired anti-donation kernel[\s\S]+absent from `src\/lib\.rs`[\s\S]+process_execute/u,
-  );
+  assert.match(audit, /production-combined-hook[\s\S]+identit(?:y|ies)[\s\S]+process_execute/u);
   assert.match(
     lawAdapter,
-    /not frozen[\s\S]+host-only[\s\S]+no\s+committed public[\s\S]+unpublished/u,
+    /identities remain unfrozen[\s\S]+no approved production[\s\S]+no committed production[\s\S]+unpublished/u,
   );
   assert.match(
     lawAdapter,
@@ -774,7 +837,7 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
   );
   assert.match(
     lawAdapter,
-    /no\s+binding account is created, allocated, written, or read[\s\S]+no binding-account seed, storage address, or storage opcode exists/u,
+    /adds no instruction opcode, account meta, binding account[\s\S]+no such path\s+exists/u,
   );
   assert.match(
     lawAdapter,
@@ -782,11 +845,11 @@ test("production stake-ingress kernels stay fail-closed and entrypoint-unwired",
   );
   assert.match(
     lawAdapter,
-    /compile[\s\S]+canonical stake-vault and ingress-authority public keys[\s\S]+existing law-state[\s\S]+must\s+not add an account to every transfer/u,
+    /derives[\s\S]+stake-vault[\s\S]+ingress-\s*authority PDAs at build time[\s\S]+must\s+freeze[\s\S]+No design may add an account to every\s+transfer/u,
   );
   assert.match(
     lawAdapter,
-    /source file[\s\S]+src\/stake_ingress\.rs[\s\S]+not exported[\s\S]+deployable crate module graph/u,
+    /source file[\s\S]+src\/stake_ingress\.rs[\s\S]+production-combined-hook[\s\S]+feature-disabled/u,
   );
 });
 

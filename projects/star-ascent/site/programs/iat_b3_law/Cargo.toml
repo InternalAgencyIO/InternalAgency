@@ -15,6 +15,7 @@ default = []
 no-entrypoint = []
 custom-heap = []
 custom-panic = []
+production-combined-hook = []
 
 [dependencies]
 iat-b3-consensus = { path = "../iat_b3_consensus" }
@@ -31,6 +32,9 @@ solana-sysvar = { version = "=3.1.1", features = ["bytemuck"] }
 spl-tlv-account-resolution = "=0.11.1"
 spl-token-2022-interface = "=2.1.0"
 spl-transfer-hook-interface = "=2.1.0"
+
+[build-dependencies]
+solana-pubkey = { version = "=3.0.0", features = ["curve25519"] }
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

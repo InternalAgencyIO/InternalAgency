@@ -122,20 +122,21 @@ The machine-readable record is
 [`evidence/local-validator-stake-ingress-rehearsal-20260809.json`](evidence/local-validator-stake-ingress-rehearsal-20260809.json).
 
 This does **not** claim combined production coverage. Token-2022 permits one
-hook program per mint, while the current production law artifact intentionally
-leaves stake-ingress admission unwired until the law ID, economy ID, and mint
-are frozen. The run therefore exercises the reviewed ingress rule and the same
+hook program per mint. The law crate now has a `production-combined-hook`
+feature that embeds explicitly supplied law/economy/mint identities and calls
+the ingress rule after authenticated OPEN Daily Law, but those production
+identities are not frozen and no feature-enabled SBF has passed this runner.
+The historical run therefore exercises the reviewed ingress rule and the same
 Token-2022 `transferring` semantics in a disposable hook; the separate Daily
 Law rehearsal remains the evidence for the production law artifact. The final
 frozen binary must combine both rules and repeat both adversarial matrices.
 The law admission kernel and full transaction-local ingress/V2 finalizer state
-machine now live beside the program crates as an inert reference seam. The law
-source is imported directly by its host integration test and is not exported
-from the deployable law crate; the default build remains the reviewed law-only
-artifact. There is still no combined entrypoint or dispatcher. This
-reduces implementation duplication but does not upgrade the historical fixture
-into combined-binary evidence. The retained V2 economic math was neither
-modified nor exercised by this fixture.
+machine now live beside the program crates. The feature-disabled default build
+remains law-only; enabling the combined path without every explicit identity
+fails before compilation. The feature adds no dispatcher opcode or account
+meta. This does not upgrade the historical fixture into combined-binary
+evidence. The retained V2 economic math was neither modified nor exercised by
+this fixture.
 
 ## Real-validator coverage
 

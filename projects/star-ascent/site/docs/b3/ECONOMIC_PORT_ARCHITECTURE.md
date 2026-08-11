@@ -146,24 +146,23 @@ authentication before setting `TransferHookAccount.transferring`, and the hook
 already requires that transferring flag. The crate has a regression test for
 the non-signer authority meta.
 
-The law crate's host-test `stake_ingress` source implements a
+The law crate's `stake_ingress` source implements a
 self-validating 176-byte binding codec, the three canonical economy-PDA
 derivations, and the pure fail-closed admission rule. Its integration test
-imports the file directly; it is absent from the deployable crate module graph
-and cannot be called by `process_execute` or any initialization path. No binding
-account is currently created or stored, and there is no binding-account seed,
-storage address, or storage opcode. The config derivation retains V2's exact
-`["config", mint]` seed. The default economy kernel remains host-only and the
-feature-gated SBF surface is structural-only; there is no production economic
-entrypoint or frozen program ID. The law program ID is not committed, and the
-canonical mint is unpublished. Until all three identities and seed domains are frozen, storing
-an initializer-selected economy identity would not be an immutable protocol
-law. The final least-cost preference is compile-time frozen stake-vault and
-ingress-authority keys. An alternative may embed compact binding facts into the
-existing law-state codec before Genesis, but no design may add a new account
-meta to every IAT transfer merely for stake ingress. Mainnet remains blocked on
-final identity binding, temporary-delegate restoration, and adversarial atomic
-rollback rehearsal.
+imports the same file directly. The law crate's `production-combined-hook`
+feature additionally compiles the bounded admission function into the
+deployable hook only when explicit law, economy, and mint build inputs exist.
+The build derives and embeds the canonical stake-vault and ingress-authority
+keys; `process_execute` calls the rule only after authenticated OPEN Daily Law.
+No binding account is created or stored, and there is no binding-account seed,
+storage address, storage opcode, new instruction, or added hook account meta.
+The config derivation retains V2's exact `["config", mint]` seed. The default
+economy kernel remains host-only and the feature-gated SBF surface is
+structural-only; there is no approved production economic entrypoint or frozen
+program ID. The law program ID and canonical mint are also unpublished, so the
+combined feature has not produced an accepted binary. Mainnet remains blocked
+on final identity binding, one exact combined-binary rehearsal, temporary-
+delegate restoration, and adversarial atomic rollback evidence.
 
 The economy crate's production-source `stake_ingress` kernel and feature-gated
 `stake_ingress_runtime` executor now authenticate the finalized OPEN Daily Law

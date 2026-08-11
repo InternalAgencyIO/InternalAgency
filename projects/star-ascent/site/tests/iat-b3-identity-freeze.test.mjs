@@ -3,9 +3,13 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
+  COMBINED_HOOK_HOST_TEST_IDENTITIES,
   IAT_V2_PROGRAM_ID,
+  PRODUCTION_COMBINED_ARTIFACT_INPUT_SPECS,
+  PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
   TEST_FIXTURE_IDENTITIES as FIXTURE_IDENTITIES,
   assertIdentityFreezeReady,
+  assertProductionCombinedArtifactBindingReady,
   validateIdentityFreezeManifest,
 } from "../scripts/validate-iat-b3-identity-freeze.mjs";
 
@@ -25,6 +29,7 @@ function completeFixture() {
 
   Object.assign(manifest.identities, FIXTURE_IDENTITIES, { status: "FROZEN", blocker: null });
   delete manifest.identities.genesisHash;
+  Object.assign(manifest.combinedArtifactBinding, { status: "FROZEN", blocker: null });
   Object.assign(manifest.clusterPolicy, {
     status: "FROZEN",
     identityPolicy: "SAME_LAW_ECONOMY_AND_MINT_IDS_ACROSS_CLUSTERS",
@@ -61,6 +66,8 @@ test("the production identity-freeze draft is honestly BLOCKED and never claims 
   assert.equal(result.valid, true);
   assert.equal(result.identityFreezeReady, false);
   assert.equal(result.productionIdentityReady, false);
+  assert.equal(result.productionCombinedArtifactBindingReady, false);
+  assert.equal(result.combinedArtifactBuildEnvironment, null);
   assert.equal("productionReady" in result, false);
   assert.ok(result.blockers.length >= 7);
   assert.match(result.blockers.join("\n"), /production law program, economy program, and canonical Token-2022 mint/iu);
@@ -73,6 +80,10 @@ test("the production identity-freeze draft is honestly BLOCKED and never claims 
     "MAINNET_OR_RELEASE_READINESS",
   ]);
   assert.throws(() => assertIdentityFreezeReady(draft), /identity freeze is not ready/iu);
+  assert.throws(
+    () => assertProductionCombinedArtifactBindingReady(draft),
+    /production combined-artifact binding is not ready/iu,
+  );
 });
 
 test("a complete, explicitly test-only freeze fixture passes every semantic check", () => {
@@ -83,7 +94,13 @@ test("a complete, explicitly test-only freeze fixture passes every semantic chec
   assert.equal(result.valid, true);
   assert.equal(result.identityFreezeReady, true);
   assert.equal(result.productionIdentityReady, false);
+  assert.equal(result.productionCombinedArtifactBindingReady, false);
+  assert.equal(result.combinedArtifactBuildEnvironment, null);
   assert.equal(assertIdentityFreezeReady(manifest, { allowTestFixture: true }).identityFreezeReady, true);
+  assert.throws(
+    () => assertProductionCombinedArtifactBindingReady(manifest),
+    /production combined-artifact binding is not ready/iu,
+  );
 
   const productionAttempt = validateIdentityFreezeManifest(manifest);
   assert.equal(productionAttempt.identityFreezeReady, false);
@@ -116,9 +133,96 @@ test("identities fail closed on placeholders, malformed keys, collisions, V2, an
     "6c725SoXTRThCVgEFrG6q2f3GKLR5m3A7dv7Gf11hNrq",
     "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
     "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+    "11111111111111111111111111111111",
+    COMBINED_HOOK_HOST_TEST_IDENTITIES.lawProgramId,
+    COMBINED_HOOK_HOST_TEST_IDENTITIES.canonicalMint,
   ]) {
     expectBlocked((value) => { value.identities.economyProgramId = forbidden; }, /cannot be a B3 production identity/u);
   }
+});
+
+test("combined artifact inputs are exact, owner-only, and cannot self-freeze", () => {
+  const buildScript = readFileSync(
+    new URL("../programs/iat_b3_law/build.rs", import.meta.url),
+    "utf8",
+  );
+  const cargoManifest = readFileSync(
+    new URL("../programs/iat_b3_law/Cargo.toml", import.meta.url),
+    "utf8",
+  );
+  const rustToolchain = readFileSync(
+    new URL("../rust-toolchain.toml", import.meta.url),
+    "utf8",
+  );
+  const costEvidence = readFileSync(
+    new URL("../docs/b3/COST_FEASIBILITY.md", import.meta.url),
+    "utf8",
+  );
+  const releaseWorkflow = readFileSync(
+    new URL("../../../../.github/workflows/iat-v2-proof.yml", import.meta.url),
+    "utf8",
+  );
+  assert.deepEqual(
+    draft.combinedArtifactBinding.inputs,
+    PRODUCTION_COMBINED_ARTIFACT_INPUT_SPECS.map(({ identityField: _identityField, ...input }) => input),
+  );
+  assert.equal(draft.combinedArtifactBinding.status, "BLOCKED");
+  assert.equal(draft.combinedArtifactBinding.inputPolicy, "OWNER_SUPPLIED_PUBLIC_IDENTITIES_ONLY");
+  assert.equal(draft.combinedArtifactBinding.testFixturesSatisfyProduction, false);
+  assert.deepEqual(
+    draft.combinedArtifactBinding.reproducibleSbfBuild,
+    PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+  );
+  assert.match(cargoManifest, /^production-combined-hook = \[\]$/mu);
+  assert.match(buildScript, /CARGO_FEATURE_PRODUCTION_COMBINED_HOOK/u);
+  assert.match(rustToolchain, /channel = "1\.97\.1"/u);
+  assert.match(releaseWorkflow, /agave-install-init-x86_64-unknown-linux-gnu/u);
+  assert.match(releaseWorkflow, /"\$agave_install_init" v3\.1\.10/u);
+  assert.match(costEvidence, /platform-tools 1\.52/u);
+  for (const input of draft.combinedArtifactBinding.inputs) {
+    assert.ok(
+      buildScript.includes(`"${input.environmentVariable}"`),
+      `build.rs is not bound to ${input.environmentVariable}`,
+    );
+  }
+  for (const fixture of Object.values(COMBINED_HOOK_HOST_TEST_IDENTITIES)) {
+    assert.equal(JSON.stringify(draft).includes(fixture), false, "production packet embedded a host-test identity");
+  }
+
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.inputs[0].environmentVariable = "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID";
+  }, /inputs\[0\]\.environmentVariable: expected IAT_B3_PRODUCTION_LAW_PROGRAM_ID/u);
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.inputPolicy = "ALLOW_CI_FIXTURES";
+  }, /only owner-supplied public identities/u);
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.testFixturesSatisfyProduction = true;
+  }, /test fixtures must never satisfy production binding/u);
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.reproducibleSbfBuild.arguments[6] = "v1";
+  }, /exact offline, locked, fresh-target production command/u);
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.reproducibleSbfBuild.arguments.splice(11, 1);
+  }, /exact offline, locked, fresh-target production command/u);
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.reproducibleSbfBuild.repetitions = 1;
+  }, /repetitions: expected 2/u);
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.reproducibleSbfBuild.requiresNoTrackedOrUntrackedChanges = false;
+  }, /requiresNoTrackedOrUntrackedChanges: expected true/u);
+  expectBlocked((value) => {
+    value.combinedArtifactBinding.reproducibleSbfBuild.publicNetworkWrites = true;
+  }, /publicNetworkWrites: expected false/u);
+
+  const premature = clone(draft);
+  premature.combinedArtifactBinding.status = "FROZEN";
+  premature.combinedArtifactBinding.blocker = null;
+  const prematureResult = validateIdentityFreezeManifest(premature);
+  assert.equal(prematureResult.productionCombinedArtifactBindingReady, false);
+  assert.match(
+    prematureResult.violations.join("\n"),
+    /cannot freeze build inputs before all three production identities are frozen/u,
+  );
 });
 
 test("the complete account namespace includes stake ingress and every faction state role", () => {

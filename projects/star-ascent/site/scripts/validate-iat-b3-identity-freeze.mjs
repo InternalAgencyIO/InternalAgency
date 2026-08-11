@@ -16,6 +16,7 @@ const TOP_LEVEL_KEYS = [
   "readiness",
   "scope",
   "identities",
+  "combinedArtifactBinding",
   "clusterPolicy",
   "networkBinding",
   "entropy",
@@ -39,16 +40,86 @@ export const TEST_FIXTURE_IDENTITIES = Object.freeze({
   genesisHash: "4zEL9HZwTFoanu5RbmGspF5a6uqVGP99xkJxToZoq3Pw",
 });
 const TEST_FIXTURE_IDENTITY_VALUES = new Set(Object.values(TEST_FIXTURE_IDENTITIES));
+export const COMBINED_HOOK_HOST_TEST_IDENTITIES = Object.freeze({
+  lawProgramId: "D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY",
+  economyProgramId: "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+  canonicalMint: "3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3",
+});
 const FORBIDDEN_IDENTITY_LABELS = new Map([
   [IAT_V2_PROGRAM_ID, "retained V2 program ID"],
   ["6c725SoXTRThCVgEFrG6q2f3GKLR5m3A7dv7Gf11hNrq", "disposable local Daily Law program ID"],
-  ["GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU", "disposable stake-ingress economy fixture ID"],
+  [COMBINED_HOOK_HOST_TEST_IDENTITIES.economyProgramId, "disposable stake-ingress economy fixture ID"],
   ["DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F", "disposable stake-ingress hook fixture ID"],
+  [COMBINED_HOOK_HOST_TEST_IDENTITIES.lawProgramId, "combined-hook host-test law fixture ID"],
+  [COMBINED_HOOK_HOST_TEST_IDENTITIES.canonicalMint, "combined-hook host-test mint fixture ID"],
   ["11111111111111111111111111111111", "System Program ID"],
   ["TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA", "Original SPL Token Program ID"],
   [TOKEN_2022_PROGRAM_ID, "Token-2022 program ID"],
   ["BPFLoaderUpgradeab1e11111111111111111111111", "upgradeable loader ID"],
 ]);
+
+export const PRODUCTION_COMBINED_ARTIFACT_INPUT_SPECS = Object.freeze([
+  Object.freeze({
+    role: "LAW_PROGRAM_ID",
+    environmentVariable: "IAT_B3_PRODUCTION_LAW_PROGRAM_ID",
+    manifestPath: "identities.lawProgramId",
+    identityField: "lawProgramId",
+  }),
+  Object.freeze({
+    role: "ECONOMY_PROGRAM_ID",
+    environmentVariable: "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID",
+    manifestPath: "identities.economyProgramId",
+    identityField: "economyProgramId",
+  }),
+  Object.freeze({
+    role: "CANONICAL_MINT",
+    environmentVariable: "IAT_B3_PRODUCTION_CANONICAL_MINT",
+    manifestPath: "identities.canonicalMint",
+    identityField: "canonicalMint",
+  }),
+]);
+
+export const PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE = Object.freeze({
+  status: "FROZEN",
+  sourcePolicy: "EXACT_COMMITTED_CLEAN_HEAD",
+  sourceHeadEnvironmentVariable: "IAT_B3_EXACT_SOURCE_HEAD_SHA",
+  requiresNoTrackedOrUntrackedChanges: true,
+  hostPlatform: "linux/amd64",
+  rustToolchain: "1.97.1",
+  cargoBuildSbfVersion: "3.1.10",
+  platformToolsVersion: "1.52",
+  networkPolicy: "OFFLINE_PREINSTALLED_TOOLCHAIN_ONLY",
+  command: "cargo",
+  arguments: Object.freeze([
+    "build-sbf",
+    "--manifest-path",
+    "projects/star-ascent/site/programs/iat_b3_law/Cargo.toml",
+    "--sbf-out-dir",
+    "<FRESH_OUTPUT_DIRECTORY>",
+    "--arch",
+    "v0",
+    "--no-default-features",
+    "--features",
+    "production-combined-hook",
+    "--optimize-size",
+    "--offline",
+    "--skip-tools-install",
+    "--tools-version",
+    "v1.52",
+    "--",
+    "--locked",
+    "--target-dir",
+    "<FRESH_TARGET_DIRECTORY>",
+  ]),
+  outputFileName: "iat_b3_law.so",
+  repetitions: 2,
+  requiresIdenticalSha256: true,
+  requiresIdenticalByteLength: true,
+  publicNetworkWrites: false,
+  signing: false,
+  deployment: false,
+  blocker: null,
+});
 
 export const SEED_SPECS = Object.freeze([
   ["lawState", "LAW", ["utf8:law-state", "pubkey:mint"]],
@@ -221,6 +292,88 @@ function validateIdentities(manifest, blockers, violations) {
   const present = entries.filter(([, value]) => typeof value === "string");
   if (new Set(present.map(([, value]) => value)).size !== present.length) {
     violations.push("identities: law program, economy program, and canonical mint must be distinct");
+  }
+}
+
+function validateCombinedArtifactSbfBuildRecipe(recipe, violations) {
+  const expected = PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE;
+  const keys = [
+    "status",
+    "sourcePolicy",
+    "sourceHeadEnvironmentVariable",
+    "requiresNoTrackedOrUntrackedChanges",
+    "hostPlatform",
+    "rustToolchain",
+    "cargoBuildSbfVersion",
+    "platformToolsVersion",
+    "networkPolicy",
+    "command",
+    "arguments",
+    "outputFileName",
+    "repetitions",
+    "requiresIdenticalSha256",
+    "requiresIdenticalByteLength",
+    "publicNetworkWrites",
+    "signing",
+    "deployment",
+    "blocker",
+  ];
+  if (!exactKeys(recipe, keys, "combinedArtifactBinding.reproducibleSbfBuild", violations)) return;
+  for (const key of keys.filter((key) => key !== "arguments")) {
+    if (recipe[key] !== expected[key]) {
+      violations.push(`combinedArtifactBinding.reproducibleSbfBuild.${key}: expected ${String(expected[key])}`);
+    }
+  }
+  if (!equalArray(recipe.arguments, expected.arguments)) {
+    violations.push("combinedArtifactBinding.reproducibleSbfBuild.arguments: exact offline, locked, fresh-target production command is required");
+  }
+}
+
+function validateCombinedArtifactBinding(manifest, blockers, violations) {
+  const binding = manifest.combinedArtifactBinding;
+  const keys = [
+    "status",
+    "programCrate",
+    "cargoFeature",
+    "inputPolicy",
+    "testFixturesSatisfyProduction",
+    "inputs",
+    "reproducibleSbfBuild",
+    "blocker",
+  ];
+  if (!exactKeys(binding, keys, "combinedArtifactBinding", violations)) return;
+  validateStatus(binding, "combinedArtifactBinding", blockers, violations);
+  if (binding.programCrate !== "projects/star-ascent/site/programs/iat_b3_law") {
+    violations.push("combinedArtifactBinding.programCrate: expected the executable Daily Law crate");
+  }
+  if (binding.cargoFeature !== "production-combined-hook") {
+    violations.push("combinedArtifactBinding.cargoFeature: expected production-combined-hook");
+  }
+  if (binding.inputPolicy !== "OWNER_SUPPLIED_PUBLIC_IDENTITIES_ONLY") {
+    violations.push("combinedArtifactBinding.inputPolicy: only owner-supplied public identities may bind production bytes");
+  }
+  if (binding.testFixturesSatisfyProduction !== false) {
+    violations.push("combinedArtifactBinding.testFixturesSatisfyProduction: test fixtures must never satisfy production binding");
+  }
+  if (!Array.isArray(binding.inputs)
+    || binding.inputs.length !== PRODUCTION_COMBINED_ARTIFACT_INPUT_SPECS.length) {
+    violations.push("combinedArtifactBinding.inputs: expected exactly three ordered production build inputs");
+  } else {
+    for (let index = 0; index < PRODUCTION_COMBINED_ARTIFACT_INPUT_SPECS.length; index += 1) {
+      const actual = binding.inputs[index];
+      const expected = PRODUCTION_COMBINED_ARTIFACT_INPUT_SPECS[index];
+      const path = `combinedArtifactBinding.inputs[${index}]`;
+      if (!exactKeys(actual, ["role", "environmentVariable", "manifestPath"], path, violations)) continue;
+      for (const key of ["role", "environmentVariable", "manifestPath"]) {
+        if (actual[key] !== expected[key]) {
+          violations.push(`${path}.${key}: expected ${expected[key]}`);
+        }
+      }
+    }
+  }
+  validateCombinedArtifactSbfBuildRecipe(binding.reproducibleSbfBuild, violations);
+  if (binding.status === "FROZEN" && manifest.identities?.status !== "FROZEN") {
+    violations.push("combinedArtifactBinding.status: cannot freeze build inputs before all three production identities are frozen");
   }
 }
 
@@ -558,6 +711,8 @@ export function validateIdentityFreezeManifest(manifest, options = {}) {
       valid: false,
       identityFreezeReady: false,
       productionIdentityReady: false,
+      productionCombinedArtifactBindingReady: false,
+      combinedArtifactBuildEnvironment: null,
       blockers,
       violations,
     };
@@ -572,6 +727,7 @@ export function validateIdentityFreezeManifest(manifest, options = {}) {
 
   validateScope(manifest, violations);
   validateIdentities(manifest, blockers, violations);
+  validateCombinedArtifactBinding(manifest, blockers, violations);
   rejectFixtureIdentityRelabel(manifest, options, violations);
   validateClusterAndNetwork(manifest, blockers, violations);
   validateEntropy(manifest, blockers, violations);
@@ -591,10 +747,21 @@ export function validateIdentityFreezeManifest(manifest, options = {}) {
   const identityFreezeReady = violations.length === 0
     && blockers.length === 0
     && manifest.readiness === "READY";
+  const productionIdentityReady = identityFreezeReady && manifest.profile === "PRODUCTION";
+  const productionCombinedArtifactBindingReady = productionIdentityReady
+    && manifest.combinedArtifactBinding.status === "FROZEN";
+  const combinedArtifactBuildEnvironment = productionCombinedArtifactBindingReady
+    ? Object.fromEntries(PRODUCTION_COMBINED_ARTIFACT_INPUT_SPECS.map((input) => [
+      input.environmentVariable,
+      manifest.identities[input.identityField],
+    ]))
+    : null;
   return {
     valid: violations.length === 0,
     identityFreezeReady,
-    productionIdentityReady: identityFreezeReady && manifest.profile === "PRODUCTION",
+    productionIdentityReady,
+    productionCombinedArtifactBindingReady,
+    combinedArtifactBuildEnvironment,
     blockers,
     violations,
   };
@@ -605,6 +772,15 @@ export function assertIdentityFreezeReady(manifest, options = {}) {
   if (!result.identityFreezeReady) {
     const reasons = [...result.violations, ...result.blockers];
     throw new Error(`IAT B3 identity freeze is not ready:\n- ${reasons.join("\n- ")}`);
+  }
+  return result;
+}
+
+export function assertProductionCombinedArtifactBindingReady(manifest) {
+  const result = validateIdentityFreezeManifest(manifest);
+  if (!result.productionCombinedArtifactBindingReady) {
+    const reasons = [...result.violations, ...result.blockers];
+    throw new Error(`IAT B3 production combined-artifact binding is not ready:\n- ${reasons.join("\n- ")}`);
   }
   return result;
 }

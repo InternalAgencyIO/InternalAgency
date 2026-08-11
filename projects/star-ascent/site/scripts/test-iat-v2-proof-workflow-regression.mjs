@@ -175,6 +175,15 @@ function validateConfiguration(workflowText, scripts) {
   ) {
     fail("B3 law adapter must retain its pinned build-only SBF and SHA-256 evidence step");
   }
+  for (const identityFixture of [
+    "IAT_B3_PRODUCTION_LAW_PROGRAM_ID: D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY",
+    "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+    "IAT_B3_PRODUCTION_CANONICAL_MINT: 3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3",
+  ]) {
+    if (!workflowText.includes(identityFixture)) {
+      fail(`all-features host test is missing non-production combined-hook fixture ${identityFixture}`);
+    }
+  }
 
   for (const command of commandLines) {
     const scriptName = command.match(/^npm run ([^\s]+)$/)?.[1];

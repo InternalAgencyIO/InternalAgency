@@ -19,6 +19,72 @@
     "canonicalMint": null,
     "blocker": "The production law program, economy program, and canonical Token-2022 mint identities have not been generated, independently bound to reviewed bytes, or approved for Mainnet."
   },
+  "combinedArtifactBinding": {
+    "status": "BLOCKED",
+    "programCrate": "projects/star-ascent/site/programs/iat_b3_law",
+    "cargoFeature": "production-combined-hook",
+    "inputPolicy": "OWNER_SUPPLIED_PUBLIC_IDENTITIES_ONLY",
+    "testFixturesSatisfyProduction": false,
+    "inputs": [
+      {
+        "role": "LAW_PROGRAM_ID",
+        "environmentVariable": "IAT_B3_PRODUCTION_LAW_PROGRAM_ID",
+        "manifestPath": "identities.lawProgramId"
+      },
+      {
+        "role": "ECONOMY_PROGRAM_ID",
+        "environmentVariable": "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID",
+        "manifestPath": "identities.economyProgramId"
+      },
+      {
+        "role": "CANONICAL_MINT",
+        "environmentVariable": "IAT_B3_PRODUCTION_CANONICAL_MINT",
+        "manifestPath": "identities.canonicalMint"
+      }
+    ],
+    "reproducibleSbfBuild": {
+      "status": "FROZEN",
+      "sourcePolicy": "EXACT_COMMITTED_CLEAN_HEAD",
+      "sourceHeadEnvironmentVariable": "IAT_B3_EXACT_SOURCE_HEAD_SHA",
+      "requiresNoTrackedOrUntrackedChanges": true,
+      "hostPlatform": "linux/amd64",
+      "rustToolchain": "1.97.1",
+      "cargoBuildSbfVersion": "3.1.10",
+      "platformToolsVersion": "1.52",
+      "networkPolicy": "OFFLINE_PREINSTALLED_TOOLCHAIN_ONLY",
+      "command": "cargo",
+      "arguments": [
+        "build-sbf",
+        "--manifest-path",
+        "projects/star-ascent/site/programs/iat_b3_law/Cargo.toml",
+        "--sbf-out-dir",
+        "<FRESH_OUTPUT_DIRECTORY>",
+        "--arch",
+        "v0",
+        "--no-default-features",
+        "--features",
+        "production-combined-hook",
+        "--optimize-size",
+        "--offline",
+        "--skip-tools-install",
+        "--tools-version",
+        "v1.52",
+        "--",
+        "--locked",
+        "--target-dir",
+        "<FRESH_TARGET_DIRECTORY>"
+      ],
+      "outputFileName": "iat_b3_law.so",
+      "repetitions": 2,
+      "requiresIdenticalSha256": true,
+      "requiresIdenticalByteLength": true,
+      "publicNetworkWrites": false,
+      "signing": false,
+      "deployment": false,
+      "blocker": null
+    },
+    "blocker": "Owner-supplied public law, economy, and canonical mint identities are absent, so no production combined-hook build environment can be emitted."
+  },
   "clusterPolicy": {
     "status": "BLOCKED",
     "identityPolicy": null,

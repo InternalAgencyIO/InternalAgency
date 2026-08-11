@@ -311,8 +311,8 @@ also block principal withdrawal). This slice deliberately does not relax the
 equality. An immutable mitigation preserving solvency and permissionlessness
 must be frozen and rehearsed before Mainnet.
 
-The law crate's host-test `stake_ingress` source contains a bounded,
-identity-unwired anti-donation kernel. A 176-byte `StakeIngressBinding` codec
+The law crate's `stake_ingress` source contains a bounded anti-donation kernel.
+A 176-byte `StakeIngressBinding` codec
 recomputes the
 economic config, stake-token, and dedicated `stake-ingress` authority PDAs from
 the codec's economy program ID and mint. Its pure rule rejects a canonical
@@ -320,14 +320,17 @@ stake-vault destination unless the exact ingress PDA is the Token-2022-
 validated transfer-authority key, while ordinary destinations pass through.
 Forged fields, bumps, zero identities, reserved bytes, versions, and lengths
 fail closed, and there is no caller-provided disposition. The integration test
-imports the source file directly; it is absent from `src/lib.rs` and the
-deployable crate module graph. `process_execute`, `process_initialize_law`, the two-
-opcode dispatcher, the 160-byte Daily Law codec, and its current one-entry hook
-meta list remain unchanged. The config derivation is the exact retained V2/B3
-`["config", mint]` seed. No binding account is created, stored, loaded, or
+imports the same source directly. The `production-combined-hook` feature now
+also compiles the bounded enforcement function into the deployable law crate.
+Its build script requires explicit frozen law, economy, and mint identities,
+derives the exact retained V2/B3 `["config", mint]`, stake-token, and stake-
+ingress PDAs at build time, and embeds the final vault/authority keys. The
+runtime binds its own program ID and canonical mint, then calls the ingress rule
+only after `process_execute` authenticates a current finalized OPEN Daily Law.
+The two-opcode dispatcher, 160-byte Daily Law codec, and one-entry hook meta
+list remain unchanged. No binding account is created, stored, loaded, or
 addressed by an instruction, and no binding-account seed or storage opcode
-exists. The default optimized SBF therefore remains exactly 154,952 bytes with
-SHA-256 `927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+exists.
 
 The pinned Transfer Hook 2.1.0 interface marks the hook's authority meta
 read-only and non-signer. The enforcement kernel intentionally has no
@@ -336,14 +339,14 @@ before hook invocation, and `validate_transfer_context` separately requires the
 source account's active `TransferHookAccount.transferring` flag. A Rust
 regression test pins the de-escalated authority meta.
 
-This is not active protection. `iat_b3_economy` remains host-only without a
-program ID, `iat_b3_law` has no committed public program ID, and the canonical
-Token-2022 mint is not published. Wiring any placeholder or initializer-chosen
-identity would violate immutability. The final adapter must freeze those three
-identities and all seed domains, then either compile the two final destination/
-authority keys into the frozen binary or embed compact binding facts in the
-existing law-state codec before Genesis. It must not append a new account to
-every transfer for this rule. The economy ingress PDA is an exact-amount
+This is not active protection. The feature-disabled build remains law-only;
+the combined feature refuses to compile without explicit inputs, and no
+production inputs have been frozen. `iat_b3_economy` remains without an
+approved production program ID, `iat_b3_law` has no committed production
+program ID, and the canonical Token-2022 mint is not published. No placeholder
+or initializer-chosen identity is present. Mainnet still requires those three
+identities, exact feature-enabled reproducible SBF bytes, and both adversarial
+matrices executed against that same artifact. The economy ingress PDA is an exact-amount
 temporary delegate; the adapter must restore any prior delegate and prove
 complete rollback on every approval, transfer, hook, restoration, and post-CPI
 failure. No update, administrator, sweep, recovery, oracle, or bypass opcode is

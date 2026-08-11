@@ -11,6 +11,7 @@
     "readiness",
     "scope",
     "identities",
+    "combinedArtifactBinding",
     "clusterPolicy",
     "networkBinding",
     "entropy",
@@ -53,6 +54,107 @@
         "lawProgramId": { "$ref": "#/$defs/nullableString" },
         "economyProgramId": { "$ref": "#/$defs/nullableString" },
         "canonicalMint": { "$ref": "#/$defs/nullableString" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "combinedArtifactBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "programCrate", "cargoFeature", "inputPolicy", "testFixturesSatisfyProduction", "inputs", "reproducibleSbfBuild", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "programCrate": { "const": "projects/star-ascent/site/programs/iat_b3_law" },
+        "cargoFeature": { "const": "production-combined-hook" },
+        "inputPolicy": { "const": "OWNER_SUPPLIED_PUBLIC_IDENTITIES_ONLY" },
+        "testFixturesSatisfyProduction": { "const": false },
+        "inputs": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "environmentVariable", "manifestPath"],
+              "properties": {
+                "role": { "const": "LAW_PROGRAM_ID" },
+                "environmentVariable": { "const": "IAT_B3_PRODUCTION_LAW_PROGRAM_ID" },
+                "manifestPath": { "const": "identities.lawProgramId" }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "environmentVariable", "manifestPath"],
+              "properties": {
+                "role": { "const": "ECONOMY_PROGRAM_ID" },
+                "environmentVariable": { "const": "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID" },
+                "manifestPath": { "const": "identities.economyProgramId" }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "environmentVariable", "manifestPath"],
+              "properties": {
+                "role": { "const": "CANONICAL_MINT" },
+                "environmentVariable": { "const": "IAT_B3_PRODUCTION_CANONICAL_MINT" },
+                "manifestPath": { "const": "identities.canonicalMint" }
+              }
+            }
+          ],
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "reproducibleSbfBuild": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "sourcePolicy", "sourceHeadEnvironmentVariable", "requiresNoTrackedOrUntrackedChanges", "hostPlatform", "rustToolchain", "cargoBuildSbfVersion", "platformToolsVersion", "networkPolicy", "command", "arguments", "outputFileName", "repetitions", "requiresIdenticalSha256", "requiresIdenticalByteLength", "publicNetworkWrites", "signing", "deployment", "blocker"],
+          "properties": {
+            "status": { "const": "FROZEN" },
+            "sourcePolicy": { "const": "EXACT_COMMITTED_CLEAN_HEAD" },
+            "sourceHeadEnvironmentVariable": { "const": "IAT_B3_EXACT_SOURCE_HEAD_SHA" },
+            "requiresNoTrackedOrUntrackedChanges": { "const": true },
+            "hostPlatform": { "const": "linux/amd64" },
+            "rustToolchain": { "const": "1.97.1" },
+            "cargoBuildSbfVersion": { "const": "3.1.10" },
+            "platformToolsVersion": { "const": "1.52" },
+            "networkPolicy": { "const": "OFFLINE_PREINSTALLED_TOOLCHAIN_ONLY" },
+            "command": { "const": "cargo" },
+            "arguments": {
+              "type": "array",
+              "prefixItems": [
+                { "const": "build-sbf" },
+                { "const": "--manifest-path" },
+                { "const": "projects/star-ascent/site/programs/iat_b3_law/Cargo.toml" },
+                { "const": "--sbf-out-dir" },
+                { "const": "<FRESH_OUTPUT_DIRECTORY>" },
+                { "const": "--arch" },
+                { "const": "v0" },
+                { "const": "--no-default-features" },
+                { "const": "--features" },
+                { "const": "production-combined-hook" },
+                { "const": "--optimize-size" },
+                { "const": "--offline" },
+                { "const": "--skip-tools-install" },
+                { "const": "--tools-version" },
+                { "const": "v1.52" },
+                { "const": "--" },
+                { "const": "--locked" },
+                { "const": "--target-dir" },
+                { "const": "<FRESH_TARGET_DIRECTORY>" }
+              ],
+              "minItems": 19,
+              "maxItems": 19
+            },
+            "outputFileName": { "const": "iat_b3_law.so" },
+            "repetitions": { "const": 2 },
+            "requiresIdenticalSha256": { "const": true },
+            "requiresIdenticalByteLength": { "const": true },
+            "publicNetworkWrites": { "const": false },
+            "signing": { "const": false },
+            "deployment": { "const": false },
+            "blocker": { "type": "null" }
+          }
+        },
         "blocker": { "$ref": "#/$defs/nullableString" }
       }
     },

@@ -32,6 +32,19 @@ use spl_transfer_hook_interface::{
     instruction::{ExecuteInstruction, TransferHookInstruction},
 };
 
+#[cfg(feature = "production-combined-hook")]
+#[allow(dead_code)]
+mod stake_ingress;
+
+#[cfg(feature = "production-combined-hook")]
+#[allow(dead_code)]
+mod production_combined_identity {
+    include!(concat!(
+        env!("OUT_DIR"),
+        "/iat_b3_production_combined_identity.rs"
+    ));
+}
+
 #[cfg(not(feature = "no-entrypoint"))]
 solana_program_entrypoint::entrypoint!(process_instruction);
 
@@ -194,6 +207,8 @@ pub fn process_instruction(
     accounts: &[AccountInfo<'_>],
     instruction_data: &[u8],
 ) -> ProgramResult {
+    #[cfg(feature = "production-combined-hook")]
+    require_compiled_law_program(program_id)?;
     if let Ok(TransferHookInstruction::Execute { amount }) =
         TransferHookInstruction::unpack(instruction_data)
     {
@@ -230,6 +245,9 @@ fn process_initialize_law(
     let validation = next_account_info(account_iter)?;
     let system = next_account_info(account_iter)?;
     let token_2022_program = next_account_info(account_iter)?;
+
+    #[cfg(feature = "production-combined-hook")]
+    require_compiled_canonical_mint(mint.key)?;
 
     if !payer.is_signer {
         return Err(IatB3LawError::MissingSignature.into());
@@ -320,6 +338,9 @@ fn process_finalize_day(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> Pr
     let mint = next_account_info(account_iter)?;
     let law_state = next_account_info(account_iter)?;
 
+    #[cfg(feature = "production-combined-hook")]
+    require_compiled_canonical_mint(mint.key)?;
+
     if mint.owner != &TOKEN_2022_PROGRAM_ID {
         return Err(IatB3LawError::IncorrectOwner.into());
     }
@@ -364,9 +385,13 @@ fn process_execute(
     let source = next_account_info(account_iter)?;
     let mint = next_account_info(account_iter)?;
     let destination = next_account_info(account_iter)?;
-    let _authority = next_account_info(account_iter)?;
+    #[cfg_attr(not(feature = "production-combined-hook"), allow(unused_variables))]
+    let authority = next_account_info(account_iter)?;
     let validation = next_account_info(account_iter)?;
     let law_state = next_account_info(account_iter)?;
+
+    #[cfg(feature = "production-combined-hook")]
+    require_compiled_canonical_mint(mint.key)?;
 
     if mint.owner != &TOKEN_2022_PROGRAM_ID
         || source.owner != &TOKEN_2022_PROGRAM_ID
@@ -388,10 +413,62 @@ fn process_execute(
     }
     let clock = Clock::get()?;
     match state.transfer_disposition_at(clock.unix_timestamp)? {
-        IatTransferDisposition::Allowed => Ok(()),
+        IatTransferDisposition::Allowed => {
+            #[cfg(feature = "production-combined-hook")]
+            return enforce_compiled_stake_ingress(mint.key, destination.key, authority.key);
+            #[cfg(not(feature = "production-combined-hook"))]
+            Ok(())
+        }
         IatTransferDisposition::DayUnfinalized => Err(IatB3LawError::DayUnfinalized.into()),
         IatTransferDisposition::RejectedDailyLockdown => Err(IatB3LawError::DailyLockdown.into()),
     }
+}
+
+#[cfg(feature = "production-combined-hook")]
+fn require_compiled_law_program(program_id: &Pubkey) -> ProgramResult {
+    let expected = Pubkey::new_from_array(production_combined_identity::LAW_PROGRAM_ID_BYTES);
+    if program_id != &expected {
+        return Err(IatB3LawError::InvalidPda.into());
+    }
+    Ok(())
+}
+
+#[cfg(feature = "production-combined-hook")]
+fn require_compiled_canonical_mint(mint: &Pubkey) -> ProgramResult {
+    let expected = Pubkey::new_from_array(production_combined_identity::CANONICAL_MINT_BYTES);
+    if mint != &expected {
+        return Err(IatB3LawError::InvalidMint.into());
+    }
+    Ok(())
+}
+
+#[cfg(feature = "production-combined-hook")]
+fn enforce_compiled_stake_ingress(
+    mint: &Pubkey,
+    destination: &Pubkey,
+    authority: &Pubkey,
+) -> ProgramResult {
+    let canonical_mint = Pubkey::new_from_array(production_combined_identity::CANONICAL_MINT_BYTES);
+    let stake_vault = Pubkey::new_from_array(production_combined_identity::STAKE_VAULT_BYTES);
+    let ingress_authority =
+        Pubkey::new_from_array(production_combined_identity::INGRESS_AUTHORITY_BYTES);
+    stake_ingress::enforce_frozen_stake_ingress(
+        &canonical_mint,
+        &stake_vault,
+        &ingress_authority,
+        mint,
+        destination,
+        authority,
+    )
+    .map_err(|error| match error {
+        stake_ingress::StakeIngressBindingError::InvalidMint => {
+            ProgramError::from(IatB3LawError::InvalidMint)
+        }
+        stake_ingress::StakeIngressBindingError::InvalidBinding
+        | stake_ingress::StakeIngressBindingError::UnauthorizedStakeIngress => {
+            ProgramError::from(IatB3LawError::InvalidPda)
+        }
+    })
 }
 
 fn validate_mint_extensions(
@@ -850,6 +927,69 @@ mod tests {
         assert_eq!(
             state.transfer_disposition_at(FRIDAY_BOUNDARY_UTC),
             Ok(IatTransferDisposition::Allowed)
+        );
+    }
+
+    #[cfg(feature = "production-combined-hook")]
+    #[test]
+    fn combined_build_binds_exact_program_mint_and_derived_ingress_keys() {
+        let law_program =
+            Pubkey::new_from_array(production_combined_identity::LAW_PROGRAM_ID_BYTES);
+        let economy_program =
+            Pubkey::new_from_array(production_combined_identity::ECONOMY_PROGRAM_ID_BYTES);
+        let canonical_mint =
+            Pubkey::new_from_array(production_combined_identity::CANONICAL_MINT_BYTES);
+        let stake_vault = Pubkey::new_from_array(production_combined_identity::STAKE_VAULT_BYTES);
+        let ingress_authority =
+            Pubkey::new_from_array(production_combined_identity::INGRESS_AUTHORITY_BYTES);
+        let derived = stake_ingress::StakeIngressBinding::derive(economy_program, canonical_mint)
+            .expect("build inputs must derive one canonical binding");
+
+        assert_eq!(derived.stake_vault(), stake_vault);
+        assert_eq!(derived.ingress_authority(), ingress_authority);
+        assert_eq!(require_compiled_law_program(&law_program), Ok(()));
+        assert_eq!(require_compiled_canonical_mint(&canonical_mint), Ok(()));
+        assert_eq!(
+            require_compiled_law_program(&Pubkey::new_unique()),
+            Err(IatB3LawError::InvalidPda.into())
+        );
+        assert_eq!(
+            require_compiled_canonical_mint(&Pubkey::new_unique()),
+            Err(IatB3LawError::InvalidMint.into())
+        );
+    }
+
+    #[cfg(feature = "production-combined-hook")]
+    #[test]
+    fn combined_build_rejects_direct_stake_donations_but_not_ordinary_transfers() {
+        let economy_program =
+            Pubkey::new_from_array(production_combined_identity::ECONOMY_PROGRAM_ID_BYTES);
+        let canonical_mint =
+            Pubkey::new_from_array(production_combined_identity::CANONICAL_MINT_BYTES);
+        let binding = stake_ingress::StakeIngressBinding::derive(economy_program, canonical_mint)
+            .expect("build inputs must derive one canonical binding");
+        let ordinary_destination = Pubkey::new_unique();
+        let owner = Pubkey::new_unique();
+
+        assert_eq!(
+            enforce_compiled_stake_ingress(&canonical_mint, &ordinary_destination, &owner),
+            Ok(())
+        );
+        assert_eq!(
+            enforce_compiled_stake_ingress(
+                &canonical_mint,
+                &binding.stake_vault(),
+                &binding.ingress_authority(),
+            ),
+            Ok(())
+        );
+        assert_eq!(
+            enforce_compiled_stake_ingress(&canonical_mint, &binding.stake_vault(), &owner),
+            Err(IatB3LawError::InvalidPda.into())
+        );
+        assert_eq!(
+            enforce_compiled_stake_ingress(&Pubkey::new_unique(), &ordinary_destination, &owner,),
+            Err(IatB3LawError::InvalidMint.into())
         );
     }
 }

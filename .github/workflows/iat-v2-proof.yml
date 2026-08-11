@@ -66,6 +66,12 @@ jobs:
       - name: Test default feature isolation
         run: cargo test --workspace --all-targets --locked
       - name: Test feature-gated runtime bridges
+        # Conspicuous host-test identities exercise the fail-closed combined
+        # hook build. They are not deployment, Devnet, or Mainnet identities.
+        env:
+          IAT_B3_PRODUCTION_LAW_PROGRAM_ID: D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY
+          IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU
+          IAT_B3_PRODUCTION_CANONICAL_MINT: 3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3
         run: cargo test --workspace --all-targets --all-features --locked
 
   verifiable-sbf:

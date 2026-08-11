@@ -1,9 +1,10 @@
 //! Immutable stake-ingress address binding and Transfer Hook admission kernel.
 //!
-//! This module is production source, but it is intentionally not wired into
-//! [`crate::process_instruction`] until the law program, economy program, and
-//! canonical mint identities are frozen. It has no initializer, update path,
-//! account allocation, dispatcher opcode, or caller-provided disposition.
+//! The default law artifact does not compile this module. The explicit
+//! `production-combined-hook` build compiles it only after the law program,
+//! economy program, and canonical mint identities are supplied as immutable
+//! build inputs. It has no initializer, update path, account allocation,
+//! dispatcher opcode, or caller-provided disposition.
 
 use solana_pubkey::Pubkey;
 
@@ -154,13 +155,43 @@ pub fn enforce_stake_ingress(
     authority: &Pubkey,
 ) -> Result<(), StakeIngressBindingError> {
     binding.validate()?;
-    if mint != &binding.mint {
+    enforce_frozen_stake_ingress(
+        &binding.mint,
+        &binding.stake_vault,
+        &binding.ingress_authority,
+        mint,
+        destination,
+        authority,
+    )
+}
+
+/// Apply an already-derived, build-frozen admission binding without deriving
+/// PDAs in every Transfer Hook execution.
+///
+/// The three canonical inputs are private build output in the executable law
+/// crate. This helper is shared with the reference codec only to prevent the
+/// executable and review kernels from drifting.
+pub(crate) fn enforce_frozen_stake_ingress(
+    canonical_mint: &Pubkey,
+    stake_vault: &Pubkey,
+    ingress_authority: &Pubkey,
+    mint: &Pubkey,
+    destination: &Pubkey,
+    authority: &Pubkey,
+) -> Result<(), StakeIngressBindingError> {
+    if canonical_mint == &Pubkey::default()
+        || stake_vault == &Pubkey::default()
+        || ingress_authority == &Pubkey::default()
+    {
+        return Err(StakeIngressBindingError::InvalidBinding);
+    }
+    if mint != canonical_mint {
         return Err(StakeIngressBindingError::InvalidMint);
     }
-    if destination != &binding.stake_vault {
+    if destination != stake_vault {
         return Ok(());
     }
-    if authority != &binding.ingress_authority {
+    if authority != ingress_authority {
         return Err(StakeIngressBindingError::UnauthorizedStakeIngress);
     }
     Ok(())

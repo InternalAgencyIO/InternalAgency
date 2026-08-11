@@ -72,7 +72,7 @@ There is no administrator, threshold, timezone, result, or bypass update
 instruction. The loader upgrade authority must still be finalized before this
 instruction, as required by the rehearsal sequence.
 
-### Stake-ingress anti-donation boundary (host-test reference kernel, identity-unwired)
+### Stake-ingress anti-donation boundary (feature-gated executable seam, identity-unfrozen)
 
 The source file at
 `programs/iat_b3_law/src/stake_ingress.rs` contains a separate 176-byte,
@@ -101,38 +101,46 @@ focused Rust test constructs the pinned interface instruction and requires its
 authority meta to remain non-signer so this privilege de-escalation cannot be
 silently misunderstood later.
 
-This boundary is deliberately **not** called by `process_execute`, is not in the
-extra-account-meta list, and has no initialization or update opcode. The
-current source derives addresses only inside the unreachable pure kernel: no
-binding account is created, allocated, written, or read by any instruction, and
-no binding-account seed, storage address, or storage opcode exists. The required
-identities are not frozen: `iat_b3_economy` is
-still a host-only library with no executable program ID, this law crate has no
-committed public program ID, and the canonical Token-2022 mint is unpublished.
-Accepting those facts from the initializer now would substitute caller choice
-for an immutable protocol binding; compiling placeholder identities would
-either authorize the wrong transfer authority or permanently reject the real
-stake flow.
+The law crate now exposes this rule only behind the
+`production-combined-hook` Cargo feature. Its build script refuses that feature
+unless explicit frozen law-program, economy-program, and canonical-mint public
+keys are supplied as canonical Base58 build inputs. It rejects zero or
+colliding identities, derives the retained config, stake-vault, and ingress-
+authority PDAs at build time, and compiles only the resulting keys into the
+artifact. The runtime rejects a different law program or mint. After the
+existing hook has authenticated the Token-2022 transfer context and a current
+finalized OPEN Daily Law decision, `process_execute` applies the compiled
+stake-vault admission rule. Missing, stale, forged, or locked Daily Law still
+wins before the stake-ingress decision.
 
-Before wiring, the final source must freeze the law program ID, economy program
-ID, canonical mint, and seed domains. The least-cost preference is to compile
-the resulting canonical stake-vault and ingress-authority public keys directly
-into the frozen law binary. If final SBF measurement or ceremony requirements
-instead require stored facts, they must be embedded in the existing law-state
-codec before Genesis so the existing hook account supplies them. Storage
-topology remains open until the identities and binary are frozen, but it must
-not add an account to every transfer merely for this rule. Either form exposes
-no update, sweep, recovery, administrator, or caller-disposition instruction.
+The feature adds no instruction opcode, account meta, binding account,
+initializer input, update path, or runtime PDA derivation. The feature-disabled
+build preserves the law-only behavior. Enabling it without all three identity
+inputs fails before crate compilation; fixture-only tests use conspicuous
+non-production identities and are not an identity freeze. The real required
+identities remain unfrozen: `iat_b3_economy` has no approved production program
+ID, this law crate has no committed production program ID, and the canonical
+Token-2022 mint is unpublished. Accepting those facts from instruction bytes
+would substitute caller choice for immutable protocol law, so no such path
+exists.
+
+Before candidate acceptance, the owner and independent reviewers must freeze
+the three identities and seed domains, reproduce the exact feature-enabled SBF
+bytes, and execute both Daily Law and stake-ingress adversarial matrices against
+that one artifact. The current 160-byte law-state codec and one-entry extra-
+account-meta list remain unchanged. No design may add an account to every
+transfer merely for this rule, and no update, sweep, recovery, administrator,
+or caller-disposition instruction is exposed.
 The economic adapter must temporarily approve the dedicated PDA for exactly
 the requested principal, invoke the hooked transfer with that PDA via
 `invoke_signed`, and restore the source account's prior delegate state in the
 same atomic transaction. Token CPI, hook, delegate restoration, economic state,
 and position lifecycle must all roll back together on any failure.
 
-Once that path is frozen and rehearsed, direct Token-2022 donations into the
+Once that exact artifact is frozen and rehearsed, direct Token-2022 donations into the
 stake vault fail at the hook while the retained V2 invariant
 `stake_tokens.amount == config.staked_principal` stays exact. The present source
-now makes the final codec, derivation, and admission semantics production-code
+now makes the compile-time identity binding and executable admission path
 reviewable; it does not yet claim active donation protection.
 
 ### Prototype instruction ABI
@@ -219,17 +227,17 @@ permissionless Clock plus SlotHashes finalization, direct-call rejection, and
 missing/stale/open/locked/forged state gates. No public network was written. See
 [`LOCAL_VALIDATOR_REHEARSAL.md`](LOCAL_VALIDATOR_REHEARSAL.md).
 
-The file is imported directly by the host integration test and is not exported
-from the deployable crate module graph. This preserves the reviewed default
-law-only artifact byte-for-byte. An earlier pinned
+The `154,952`-byte law-only digest above is historical evidence for the prior
+reviewed source and is not silently rebound to this feature addition. The
+feature-disabled code path remains law-only, but its exact SBF bytes must be
+rebuilt and compared before any byte-identity claim. An earlier pinned
 `solana-cargo-build-sbf 3.1.10 --optimize-size` compiler-only experiment with
-the reference module exported was repeated byte-identically, remained 154,952
-bytes, and produced SHA-256
-`10e468525e491bb9b03ab4cd1b700ffde57904e7d209aa6fa0527d73bfd97613`.
-That digest is source/build evidence only: the guard is still unreachable, the
-artifact has not run either validator matrix, and the existing CI and Devnet
-pins must not be changed or used until the identity freeze and deliberate
-candidate-review step.
+the reference module exported was repeated byte-identically and produced
+SHA-256 `10e468525e491bb9b03ab4cd1b700ffde57904e7d209aa6fa0527d73bfd97613`;
+its guard was unreachable and that digest remains historical source/build
+evidence only. The new feature-enabled path has no production identity inputs,
+pinned SBF digest, or combined-validator evidence. Existing CI and Devnet pins
+must not be rebound until identity freeze and deliberate candidate review.
 
 A 2026-08-09 disposable stake-ingress rehearsal separately passed the pinned
 Token-2022 runtime primitives: exact owner-signed approval CPI, stateless
