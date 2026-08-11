@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-fresh-round-2-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-fresh-round-2",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -15,10 +15,9 @@
     "queueAdvanceAllowed": false,
     "queueAdvanceCondition": "All four Georgia scenes accepted, narrow checkpoint committed and pushed, and public X status URL recorded.",
     "zeroOrPartialTerminalForbidden": true,
-    "acceptedSceneCount": 0,
+    "acceptedSceneCount": 1,
     "missingSceneNumbers": [
       1548,
-      1549,
       1550,
       1551
     ],
@@ -1830,7 +1829,7 @@
       "laterWakeAction": "Start a fresh recovery round for the same Georgia batch; do not advance to Fiji."
     },
     "freshRound2": {
-      "status": "raw-complete-zero-accepted-recovery-materialized",
+      "status": "completed-one-accepted-three-missing",
       "preparedAt": "2026-08-11T08:57:33.878Z",
       "sceneNumbers": [
         1548,
@@ -1962,7 +1961,7 @@
         1551
       ],
       "recovery": {
-        "status": "materialized-pending-launch",
+        "status": "completed-one-accepted-three-rejected",
         "preparedAt": "2026-08-11T09:11:27.356Z",
         "sceneNumbers": [
           1548,
@@ -2021,11 +2020,114 @@
             ]
           }
         },
-        "storedRollsChanged": false
-      }
+        "storedRollsChanged": false,
+        "completedAt": "2026-08-11T09:30:24.799Z",
+        "perScene": {
+          "1548": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1548.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-0902d251-4710-4414-becc-3b6c7bc06abb.png",
+            "sha256": "7FB8BDCD05C0B28822F6ABBC580C2DB42B30A4CF3C5584D1D61F98E4006E1BDC",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery fixes the eight-hand dance chain, movement, MAX identity, Tbilisi geography, hail, and outfit differentiation.",
+              "The mission-prop muzzle points right over the open river while the orange route marker sits below and outside the visible sight line; the required aligned empty water marker and complete catch wall are not visibly present, so the safety line remains ambiguous and fails the hard gate."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1549": {
+            "status": "accepted-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1549.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-9dd4eef8-6d62-4db0-952f-23958671ddf1.png",
+            "acceptedAsset": "1549-georgia-stepantsminda-mars-surface-expedition-round-2-recovery.png",
+            "sha256": "A3C1E18F6FDC393A36AAABA56394CA4C12EBD83F3646FD58BF227438EC251C99",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "audit": {
+              "coreCast": "Exactly four clearly adult fictional women are present with distinct anchored identities; Alia alone retains the high sculptural braided ponytail.",
+              "anatomy": "Exactly eight human arms and eight human hands are visibly owned: two on ECE's inert training prop, two supporting the dip by Alia, two owned by dipped Ellie, and two owned by Radiance, with no extra or fused limb cluster.",
+              "activeRolls": "Soft overcast, neither mascot, no odd prop, no pole, no rainbow-only styling, no hosiery, Radiance/Ellie/ECE midriff cuts, and Ellie/ECE open-back panels are visibly resolved.",
+              "romance": "The controlled dip, linked-hand choice, protective back support, and ECE's separate invitation create the required first-read adult consensual love beat with more than three clear contacts.",
+              "missionProp": "ECE alone uses the full-size polished rainbow-gradient inert cinema-training replica in a right-facing two-hand stance; the trigger finger reads indexed outside the guard and the uninterrupted line terminates at a plain paper route symbol on a complete earth backstop behind transparent panels, with every person behind the muzzle plane.",
+              "themeLocation": "Mount Kazbek, the Terek valley, Darial cliffs, town roofs, and four distinct country-led Mars-expedition couture fingerprints read together without replacing Georgia with a theme landscape.",
+              "mascotsAndProps": "No mascot or odd prop appears, matching both inactive rolls.",
+              "decision": "Accepted with no hard-gate deviation."
+            },
+            "recoveryPassConsumedThisRound": true
+          },
+          "1550": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1550.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-bb0caf89-9bb5-4d9b-9800-7cad17344863.png",
+            "sha256": "A69E02A4B6B6764293A21CBC464BF9B660DA3FAA4C3899615E9DF3AF0B7D6426",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery fixes the three-piece secured geometric balloon pack, Sighnaghi geography, aurora, five-person cast, male-to-ECE contacts, and right-facing water-marker lane.",
+              "The exact love-beat hand graph is not materialized: Ellie's linked-hand choice and sitter-shoulder contact are absent or ambiguous while Alia's contacts remain concentrated on Radiance, so the mandatory contact ownership gate fails."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1551": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1551.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-5c62afe4-d8df-4107-9628-f65110f94b2a.png",
+            "sha256": "529E99E579E76EA29682C565418CE0FBD0B843023C993C148F099C0C34E08CF7",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery fixes Alia's strapless cut, the distinct golden kitten and golden retriever puppy, Batumi geography, rainbow hosiery, compass table, rain, and isolated paper-target lane.",
+              "The controlled-dip hand graph still fails: Ellie's required upper-back support hand is replaced by a contact toward ECE and Radiance's two prescribed contact hands are not both continuously traceable, leaving the exact eight-hand ownership gate ambiguous."
+            ],
+            "recoveryPassConsumedThisRound": true
+          }
+        },
+        "acceptedSceneNumbers": [
+          1549
+        ],
+        "rejectedSceneNumbers": [
+          1548,
+          1550,
+          1551
+        ],
+        "laterWakeAction": "Start fresh round 3 for scenes 1548, 1550, and 1551 only; preserve accepted scene 1549 and do not advance to Fiji."
+      },
+      "completedAt": "2026-08-11T09:30:24.799Z"
     }
   },
-  "acceptedAssets": [],
+  "acceptedAssets": [
+    {
+      "scene": 1549,
+      "file": "1549-georgia-stepantsminda-mars-surface-expedition-round-2-recovery.png",
+      "decision": "accepted-fresh-round-2-recovery",
+      "sourceRaw": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-9dd4eef8-6d62-4db0-952f-23958671ddf1.png",
+      "sha256": "A3C1E18F6FDC393A36AAABA56394CA4C12EBD83F3646FD58BF227438EC251C99",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "acceptedAt": "2026-08-11T09:30:24.799Z",
+      "audit": {
+        "coreCast": "Exactly four clearly adult fictional women are present with distinct anchored identities; Alia alone retains the high sculptural braided ponytail.",
+        "anatomy": "Exactly eight human arms and eight human hands are visibly owned: two on ECE's inert training prop, two supporting the dip by Alia, two owned by dipped Ellie, and two owned by Radiance, with no extra or fused limb cluster.",
+        "activeRolls": "Soft overcast, neither mascot, no odd prop, no pole, no rainbow-only styling, no hosiery, Radiance/Ellie/ECE midriff cuts, and Ellie/ECE open-back panels are visibly resolved.",
+        "romance": "The controlled dip, linked-hand choice, protective back support, and ECE's separate invitation create the required first-read adult consensual love beat with more than three clear contacts.",
+        "missionProp": "ECE alone uses the full-size polished rainbow-gradient inert cinema-training replica in a right-facing two-hand stance; the trigger finger reads indexed outside the guard and the uninterrupted line terminates at a plain paper route symbol on a complete earth backstop behind transparent panels, with every person behind the muzzle plane.",
+        "themeLocation": "Mount Kazbek, the Terek valley, Darial cliffs, town roofs, and four distinct country-led Mars-expedition couture fingerprints read together without replacing Georgia with a theme landscape.",
+        "mascotsAndProps": "No mascot or odd prop appears, matching both inactive rolls.",
+        "decision": "Accepted with no hard-gate deviation."
+      }
+    }
+  ],
   "rejectedAssets": [
     {
       "scene": 1548,
@@ -2143,6 +2245,60 @@
         "Alia's active strapless roll is not materialized because the copper bodice visibly retains a shoulder strap.",
         "Ellie's upper-back support hand is partially obscured and not continuously traceable through the controlled dip."
       ]
+    },
+    {
+      "scene": 1548,
+      "round": 2,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1548.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-0902d251-4710-4414-becc-3b6c7bc06abb.png",
+      "sha256": "7FB8BDCD05C0B28822F6ABBC580C2DB42B30A4CF3C5584D1D61F98E4006E1BDC",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery fixes the eight-hand dance chain, movement, MAX identity, Tbilisi geography, hail, and outfit differentiation.",
+        "The mission-prop muzzle points right over the open river while the orange route marker sits below and outside the visible sight line; the required aligned empty water marker and complete catch wall are not visibly present, so the safety line remains ambiguous and fails the hard gate."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1550,
+      "round": 2,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1550.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-bb0caf89-9bb5-4d9b-9800-7cad17344863.png",
+      "sha256": "A69E02A4B6B6764293A21CBC464BF9B660DA3FAA4C3899615E9DF3AF0B7D6426",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery fixes the three-piece secured geometric balloon pack, Sighnaghi geography, aurora, five-person cast, male-to-ECE contacts, and right-facing water-marker lane.",
+        "The exact love-beat hand graph is not materialized: Ellie's linked-hand choice and sitter-shoulder contact are absent or ambiguous while Alia's contacts remain concentrated on Radiance, so the mandatory contact ownership gate fails."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 2,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-5c62afe4-d8df-4107-9628-f65110f94b2a.png",
+      "sha256": "529E99E579E76EA29682C565418CE0FBD0B843023C993C148F099C0C34E08CF7",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery fixes Alia's strapless cut, the distinct golden kitten and golden retriever puppy, Batumi geography, rainbow hosiery, compass table, rain, and isolated paper-target lane.",
+        "The controlled-dip hand graph still fails: Ellie's required upper-back support hand is replaced by a contact toward ECE and Radiance's two prescribed contact hands are not both continuously traceable, leaving the exact eight-hand ownership gate ambiguous."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -2150,11 +2306,11 @@
     "minimumCurrentCountryAcceptedAssets": 4,
     "plannedCaption": "Georgia ❤️ Honduras #Georgia #InternalAgency",
     "url": null,
-    "acceptedCurrentCountryAssets": 0,
+    "acceptedCurrentCountryAssets": 1,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia remains active. X is not terminally deferred; posting is mandatory immediately after all four accepted assets and the pushed completion checkpoint exist."
+    "note": "Georgia remains active with accepted scene 1549 preserved. X publication is mandatory immediately after scenes 1548, 1550, and 1551 are accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T09:11:27.356Z",
+  "checkpointedAt": "2026-08-11T09:30:24.799Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -2227,16 +2383,70 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1548,
+      "round": 2,
+      "phase": "recovery",
+      "kind": "recovery-raw-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1548.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-0902d251-4710-4414-becc-3b6c7bc06abb.png",
+      "sha256": "7FB8BDCD05C0B28822F6ABBC580C2DB42B30A4CF3C5584D1D61F98E4006E1BDC",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1549,
+      "round": 2,
+      "phase": "recovery",
+      "kind": "recovery-raw-accepted",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1549.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-9dd4eef8-6d62-4db0-952f-23958671ddf1.png",
+      "sha256": "A3C1E18F6FDC393A36AAABA56394CA4C12EBD83F3646FD58BF227438EC251C99",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1550,
+      "round": 2,
+      "phase": "recovery",
+      "kind": "recovery-raw-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1550.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-bb0caf89-9bb5-4d9b-9800-7cad17344863.png",
+      "sha256": "A69E02A4B6B6764293A21CBC464BF9B660DA3FAA4C3899615E9DF3AF0B7D6426",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1551,
+      "round": 2,
+      "phase": "recovery",
+      "kind": "recovery-raw-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-2-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-5c62afe4-d8df-4107-9628-f65110f94b2a.png",
+      "sha256": "529E99E579E76EA29682C565418CE0FBD0B843023C993C148F099C0C34E08CF7",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-fresh-round-2-recovery",
+    "action": "fresh-round-3-missing-scenes-only",
+    "preserveAcceptedSceneNumbers": [
+      1549
+    ],
     "sceneNumbers": [
       1548,
-      1549,
       1550,
       1551
     ],
