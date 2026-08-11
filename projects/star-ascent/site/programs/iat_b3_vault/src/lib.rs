@@ -13,6 +13,7 @@
 
 pub mod journal_codec;
 pub mod journal_transition;
+pub mod journal_transition_codec;
 #[cfg(feature = "token-2022-host-compatibility")]
 pub mod token_2022_host;
 
