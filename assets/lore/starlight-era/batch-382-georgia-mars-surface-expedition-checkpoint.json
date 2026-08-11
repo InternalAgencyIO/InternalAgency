@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-fresh-round-4-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-fresh-round-4",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -2477,7 +2477,7 @@
       "completedAt": "2026-08-11T10:07:24.062Z"
     },
     "freshRound4": {
-      "status": "raw-complete-zero-new-accepted-recovery-materialized",
+      "status": "completed-zero-new-accepted-three-rejected",
       "preparedAt": "2026-08-11T10:24:17.021Z",
       "sceneNumbers": [
         1548,
@@ -2588,7 +2588,7 @@
         1551
       ],
       "recovery": {
-        "status": "materialized-pending-launch",
+        "status": "completed-zero-new-accepted-three-rejected",
         "preparedAt": "2026-08-11T10:38:55.885Z",
         "sceneNumbers": [
           1548,
@@ -2636,8 +2636,70 @@
             ]
           }
         },
-        "storedRollsChanged": false
-      }
+        "storedRollsChanged": false,
+        "completedAt": "2026-08-11T10:50:26.668Z",
+        "perScene": {
+          "1548": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1548.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-845b0378-16b1-45e1-9c36-b2bcf70b701c.png",
+            "sha256": "1854E4359C71054F8E67B4E441885F0E43E4AC9F8163B19FC9CCF7364CBDA395",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves the Tbilisi landmarks, hard hail, MAX, four distinct adult identities, country-led couture, and an active overhead dance arch.",
+              "The required full-size rainbow-gradient Desert Eagle-style inert training prop mutates into a long-gun form, which fails the mission-prop identity gate.",
+              "The dance contact graph remains reassigned and owner-ambiguous, including a reach toward the prop-side adult instead of the stored six-hand dance inventory."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1550": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1550.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-2bc3d9b1-a1e1-4827-b185-7eb69f5b65c2.png",
+            "sha256": "AA43DC95A323801499B35A2BF568CBFBA33E0B7D5544EF3596F1A05F03A92D83",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves Sighnaghi, aurora, five adult identities, three geometric balloons, an Alia-Ellie link, male contacts, and the empty basin marker.",
+              "The required large-frame inert pistol mutates into a long-gun form, Radiance still owns the balloons with one visible hand, and her other arm exits the frame, failing prop identity and exact ten-hand anatomy.",
+              "Alia sits beside Radiance rather than securely sideways across Radiance's lap, so the rolled hard-love beat is incomplete."
+            ],
+            "recoveryPassConsumedThisRound": true
+          },
+          "1551": {
+            "status": "rejected-strict-visual-audit",
+            "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1551.png",
+            "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-a3093074-4839-476d-9b52-f9f5e1f01873.png",
+            "sha256": "154319D9F7E7503BB54CC3389257434191C906DC38348135A3E6C6CCB19906C4",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "decisiveRejectionReasons": [
+              "The recovery preserves Batumi, heavy rain, PAWS and MAX, Radiance's rainbow socks and open back, Alia's active cuts, ECE's two compass hands, and Alia's two mission-prop hands.",
+              "Ellie's upper-back support hand and Radiance's contact hand toward Ellie remain hidden or owner-ambiguous, so the exact eight-hand dip graph fails.",
+              "The muzzle meets the lower edge of the paper while the black route diamond remains visibly above the muzzle axis, so the stored target is not aligned."
+            ],
+            "recoveryPassConsumedThisRound": true
+          }
+        },
+        "newlyAcceptedSceneNumbers": [],
+        "rejectedSceneNumbers": [
+          1548,
+          1550,
+          1551
+        ],
+        "acceptedSceneNumbersOverall": [
+          1549
+        ],
+        "laterWakeAction": "Start fresh round 5 for scenes 1548, 1550, and 1551 only; preserve accepted scene 1549 and do not advance to Fiji."
+      },
+      "completedAt": "2026-08-11T10:50:26.668Z"
     }
   },
   "acceptedAssets": [
@@ -2996,6 +3058,63 @@
         "The clean raw preserves Batumi, heavy rain, PAWS and MAX, rainbow socks, Alia's active cuts, a clear dip, and a correctly aligned paper target with sand backstop.",
         "ECE uses only one hand on the compass while leaning into an added kiss, and at least one Ellie support hand and one Radiance contact hand remain hidden, so the exact eight-hand graph fails."
       ]
+    },
+    {
+      "scene": 1548,
+      "round": 4,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1548.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-845b0378-16b1-45e1-9c36-b2bcf70b701c.png",
+      "sha256": "1854E4359C71054F8E67B4E441885F0E43E4AC9F8163B19FC9CCF7364CBDA395",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves the Tbilisi landmarks, hard hail, MAX, four distinct adult identities, country-led couture, and an active overhead dance arch.",
+        "The required full-size rainbow-gradient Desert Eagle-style inert training prop mutates into a long-gun form, which fails the mission-prop identity gate.",
+        "The dance contact graph remains reassigned and owner-ambiguous, including a reach toward the prop-side adult instead of the stored six-hand dance inventory."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1550,
+      "round": 4,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1550.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-2bc3d9b1-a1e1-4827-b185-7eb69f5b65c2.png",
+      "sha256": "AA43DC95A323801499B35A2BF568CBFBA33E0B7D5544EF3596F1A05F03A92D83",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves Sighnaghi, aurora, five adult identities, three geometric balloons, an Alia-Ellie link, male contacts, and the empty basin marker.",
+        "The required large-frame inert pistol mutates into a long-gun form, Radiance still owns the balloons with one visible hand, and her other arm exits the frame, failing prop identity and exact ten-hand anatomy.",
+        "Alia sits beside Radiance rather than securely sideways across Radiance's lap, so the rolled hard-love beat is incomplete."
+      ],
+      "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 4,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-a3093074-4839-476d-9b52-f9f5e1f01873.png",
+      "sha256": "154319D9F7E7503BB54CC3389257434191C906DC38348135A3E6C6CCB19906C4",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The recovery preserves Batumi, heavy rain, PAWS and MAX, Radiance's rainbow socks and open back, Alia's active cuts, ECE's two compass hands, and Alia's two mission-prop hands.",
+        "Ellie's upper-back support hand and Radiance's contact hand toward Ellie remain hidden or owner-ambiguous, so the exact eight-hand dip graph fails.",
+        "The muzzle meets the lower edge of the paper while the black route diamond remains visibly above the muzzle axis, so the stored target is not aligned."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -3005,9 +3124,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 1,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia remains active with accepted scene 1549 preserved. X publication is mandatory immediately after scenes 1548, 1550, and 1551 are accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia remains active with accepted scene 1549 preserved. X publication is mandatory only after scenes 1548, 1550, and 1551 are accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T10:38:55.885Z",
+  "checkpointedAt": "2026-08-11T10:50:26.668Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -3240,13 +3359,49 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1548,
+      "round": 4,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1548.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-845b0378-16b1-45e1-9c36-b2bcf70b701c.png",
+      "sha256": "1854E4359C71054F8E67B4E441885F0E43E4AC9F8163B19FC9CCF7364CBDA395",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1550,
+      "round": 4,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1550.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-2bc3d9b1-a1e1-4827-b185-7eb69f5b65c2.png",
+      "sha256": "AA43DC95A323801499B35A2BF568CBFBA33E0B7D5544EF3596F1A05F03A92D83",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
+    },
+    {
+      "scene": 1551,
+      "round": 4,
+      "kind": "fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/fresh-round-4-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-a3093074-4839-476d-9b52-f9f5e1f01873.png",
+      "sha256": "154319D9F7E7503BB54CC3389257434191C906DC38348135A3E6C6CCB19906C4",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-fresh-round-4-recovery-missing-scenes-only",
+    "action": "fresh-round-5-missing-scenes-only",
     "preserveAcceptedSceneNumbers": [
       1549
     ],
