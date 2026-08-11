@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-clean-fresh-round-29-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-29",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -5172,6 +5172,26 @@
           "consentScope": "This response applies only to this recorded round-29 invitation in scene 1551 and does not transfer to another act, participant, prop interaction, scene, country, or future image.",
           "recoveryDecisionContinuity": "This single technical correction remains the same round-29 image event, so Ellie's invitation, Radiance's explicit yes, the Radiance-Ellie-ECE participant set, Alia's exclusion, and every consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Preserve the visible clasp and dip while exposing Radiance's shoulder-contact arm and turning the Radiance-ECE eye line into the affectionate center."
+        },
+        "visualAudit": {
+          "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-and-no-wavy-marbling-after-one-recovery",
+          "identity": "pass-four-adult-identities-with-Alia-braids",
+          "anatomy": "reject-Radiance-left-arm-and-hand-missing-and-Ellie-support-arm-hidden; only-seven-complete-owner-paths-auditable",
+          "handOwnership": "reject-Ellie-Radiance-four-hand-inventory-incomplete; ECE-and-Alia-two-hand-inventories-pass",
+          "weather": "pass-heavy-individually-straight-rain-streaks-and-wet-tiles",
+          "locationThemeFusion": "pass-recognizable-Batumi-with-four-distinct-futurist-expedition-silhouettes",
+          "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-and-footwear",
+          "rolledWardrobe": "pass-Radiance-and-Alia-open-backs-Ellie-and-Alia-midriff-bands-Alia-strapless-shell-and-Radiance-rainbow-hosiery",
+          "romance": "reject-controlled-dip-and-two-contacts-pass-but-third-shoulder-contact-and-eight-hand-anatomy-fail",
+          "radianceResponse": "pass-Radiance-Ellie-clasp-and-committed-dip-as-explicit-yes-to-Ellie",
+          "partyActivation": "reject-Radiance-and-Ellie-read-but-ECE-is-not-in-the-mutual-eye-line-and-does-not-visibly-join",
+          "mascots": "pass-one-PAWS-and-one-MAX-together-on-raised-dry-padded-lounge",
+          "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+          "routeMap": "pass-separate-hands-free-holographic-map",
+          "missionHandling": "reject-replica-still-undersized-orange-insert-unreadable-and-indexed-trigger-finger-outside-empty-guard-not-auditable",
+          "missionTargetAxis": "pass-separated-paper-diamond-complete-backstop-and-safe-right-facing-axis",
+          "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+          "accepted": false
         }
       }
     }
@@ -11570,7 +11590,7 @@
       }
     },
     "freshRound29": {
-      "status": "fresh-completed-rejected-recovery-materialized",
+      "status": "completed-rejected-after-single-recovery",
       "preparedAt": "2026-08-11T22:45:44.083Z",
       "sceneNumbers": [
         1551
@@ -11745,9 +11765,16 @@
       "freshCompletedAt": "2026-08-11T22:49:33.497Z",
       "rawOutputs": {
         "1551": {
-          "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-29/scene-1551.png",
-          "sha256": "3AF93A022813CCFF02B39F137518A01151AF7E361F72F0C0875E60183F7CC83F",
-          "preserved": true
+          "fresh": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-29/scene-1551.png",
+            "sha256": "3AF93A022813CCFF02B39F137518A01151AF7E361F72F0C0875E60183F7CC83F",
+            "preserved": true
+          },
+          "recovery": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-29-recovery/scene-1551.png",
+            "sha256": "71F674E95C5BC050DA9D9CF8966CABC1D3E73608E5A2757D1ED48A8867D894A7",
+            "preserved": true
+          }
         }
       },
       "freshStrictAudit": {
@@ -11839,6 +11866,42 @@
           "recoveryDecisionContinuity": "This single technical correction remains the same round-29 image event, so Ellie's invitation, Radiance's explicit yes, the Radiance-Ellie-ECE participant set, Alia's exclusion, and every consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Preserve the visible clasp and dip while exposing Radiance's shoulder-contact arm and turning the Radiance-ECE eye line into the affectionate center."
         }
+      },
+      "completedAt": "2026-08-11T22:53:12.317Z",
+      "recoveryCompletedAt": "2026-08-11T22:53:12.317Z",
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1551
+      ],
+      "rejectionReasons": {
+        "1551": [
+          "Radiance's left arm and shoulder-contact hand remain fully absent from view",
+          "Ellie's visible support palm still emerges from behind Radiance without a continuously traceable white-sleeved arm",
+          "Only seven hands and seven complete owner paths are auditable, below the exact eight required",
+          "The dip has only the right-hand clasp and Ellie's support palm, so the required third shoulder contact is missing",
+          "Radiance continues looking only at Ellie, so the required Radiance-ECE affectionate center and ECE party participation do not read",
+          "The metallic replica remains undersized, its orange muzzle insert is absent or unreadable, and the trigger index outside the empty guard is not auditable"
+        ]
+      },
+      "strictAudit": {
+        "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-and-no-wavy-marbling-after-one-recovery",
+        "identity": "pass-four-adult-identities-with-Alia-braids",
+        "anatomy": "reject-Radiance-left-arm-and-hand-missing-and-Ellie-support-arm-hidden; only-seven-complete-owner-paths-auditable",
+        "handOwnership": "reject-Ellie-Radiance-four-hand-inventory-incomplete; ECE-and-Alia-two-hand-inventories-pass",
+        "weather": "pass-heavy-individually-straight-rain-streaks-and-wet-tiles",
+        "locationThemeFusion": "pass-recognizable-Batumi-with-four-distinct-futurist-expedition-silhouettes",
+        "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-and-footwear",
+        "rolledWardrobe": "pass-Radiance-and-Alia-open-backs-Ellie-and-Alia-midriff-bands-Alia-strapless-shell-and-Radiance-rainbow-hosiery",
+        "romance": "reject-controlled-dip-and-two-contacts-pass-but-third-shoulder-contact-and-eight-hand-anatomy-fail",
+        "radianceResponse": "pass-Radiance-Ellie-clasp-and-committed-dip-as-explicit-yes-to-Ellie",
+        "partyActivation": "reject-Radiance-and-Ellie-read-but-ECE-is-not-in-the-mutual-eye-line-and-does-not-visibly-join",
+        "mascots": "pass-one-PAWS-and-one-MAX-together-on-raised-dry-padded-lounge",
+        "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+        "routeMap": "pass-separate-hands-free-holographic-map",
+        "missionHandling": "reject-replica-still-undersized-orange-insert-unreadable-and-indexed-trigger-finger-outside-empty-guard-not-auditable",
+        "missionTargetAxis": "pass-separated-paper-diamond-complete-backstop-and-safe-right-facing-axis",
+        "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+        "accepted": false
       }
     }
   },
@@ -13081,6 +13144,28 @@
         "Alia continues to face only downrange, so her invitation and the all-four affirmative party response do not read clearly"
       ],
       "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 29,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-29-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-1a6dd62e-2c8a-4e66-bb32-8b9d8d286845.png",
+      "sha256": "71F674E95C5BC050DA9D9CF8966CABC1D3E73608E5A2757D1ED48A8867D894A7",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Radiance's left arm and shoulder-contact hand remain fully absent from view",
+        "Ellie's visible support palm still emerges from behind Radiance without a continuously traceable white-sleeved arm",
+        "Only seven hands and seven complete owner paths are auditable, below the exact eight required",
+        "The dip has only the right-hand clasp and Ellie's support palm, so the required third shoulder contact is missing",
+        "Radiance continues looking only at Ellie, so the required Radiance-ECE affectionate center and ECE party participation do not read",
+        "The metallic replica remains undersized, its orange muzzle insert is absent or unreadable, and the trigger index outside the empty guard is not auditable"
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -13090,9 +13175,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Clean round 29 scene 1551 is preserved but rejected; its sole bounded recovery is materialized. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Round 29 scene 1551 exhausted its single clean recovery and still failed exact anatomy, third-contact romance, Radiance-ECE center, ECE party participation, and mission-replica safety gates. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-11T22:49:33.497Z",
+  "checkpointedAt": "2026-08-11T22:53:12.317Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -13997,13 +14082,25 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1551,
+      "round": 29,
+      "kind": "clean-fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-29-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-1a6dd62e-2c8a-4e66-bb32-8b9d8d286845.png",
+      "sha256": "71F674E95C5BC050DA9D9CF8966CABC1D3E73608E5A2757D1ED48A8867D894A7",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-single-clean-fresh-round-29-recovery-scene-1551-only",
+    "action": "clean-fresh-round-30-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -14015,7 +14112,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-11T22:45:44.083Z",
+    "checkedAt": "2026-08-11T22:53:12.317Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -14069,7 +14166,7 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "Signed-in live profile checked. No eligible unposted World Series country pair exists. Georgia remains X-blocked until scene 1551 is accepted.",
+    "reconciliationDecision": "Signed-in live profile checked and no eligible unposted World Series country pair exists. Georgia still has three accepted scenes, so no X upload or country advance is permitted.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -14099,12 +14196,12 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 28,
-    "lastCleanRoundResult": "clean-surface-and-rain-pass-but-rejected-hidden-Ellie-hand-missing-dip-graph-Alia-midriff-and-unsafe-toy-like-replica",
-    "nextCleanRound": 29,
-    "nextSourcePolicy": "original identity anchors only; no round 28 image input",
-    "activeCleanRound": 29,
-    "activeSourcePolicy": "single targeted recovery from clean round 29 raw only",
-    "priorBatumiRenderInputCount": 1
+    "lastCompletedCleanRound": 29,
+    "lastCleanRoundResult": "clean-standard-dip-and-wardrobe-pass-but-rejected-missing-Radiance-arm-hidden-Ellie-support-third-contact-ECE-center-and-replica-safety",
+    "nextCleanRound": 30,
+    "nextSourcePolicy": "original identity anchors only; no round 29 image input",
+    "activeCleanRound": null,
+    "activeSourcePolicy": "four original identity anchors only",
+    "priorBatumiRenderInputCount": 0
   }
 }
