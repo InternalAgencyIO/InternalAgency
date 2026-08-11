@@ -397,6 +397,14 @@ rehearsal-mode or timestamp override bytes. The codecs perform no semantic
 policy check, account read, dispatch, CPI, or write, so Daily Law can still
 remain first when the future production dispatcher is composed. The dispatcher
 and executable account routing remain absent.
+The feature-gated `production_dispatch` preflight now joins those bytes to the
+exact retained all-15 account-meta shapes after an already-constructed opaque
+Daily-Law/native-binding/canonical-mint capability. It reads only signer,
+writable, and executable flags and handles the single optional Round slot by
+exact account count. It does not authenticate account identities or data and
+cannot call a handler, mutate, invoke CPI, expose an entrypoint, or authorize
+Devnet/Mainnet. The executable dispatcher and identity graph therefore remain
+absent/HOLD.
 The older unphased combined entry remains only for the pinned structural SBF
 fixture and is not the production route.
 

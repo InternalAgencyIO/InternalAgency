@@ -10,6 +10,8 @@ mod genesis_conservation;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod genesis_conservation_runtime;
 pub mod native_adapter;
+#[cfg(feature = "runtime-account-bridge")]
+pub mod production_dispatch;
 pub mod production_instruction;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod rehearsal_adapter;

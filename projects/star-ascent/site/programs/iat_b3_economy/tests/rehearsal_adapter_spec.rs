@@ -2,6 +2,10 @@
 
 use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
 use iat_b3_economy::native_adapter::{NativeAdapterError, NativeEconomyBinding};
+use iat_b3_economy::production_dispatch::*;
+use iat_b3_economy::production_instruction::{
+    encode_production_instruction, ProductionInstruction, PRODUCTION_INSTRUCTION_LEN,
+};
 use iat_b3_economy::rehearsal_adapter::*;
 use iat_b3_economy::token_2022_runtime::*;
 use iat_b3_economy::{
@@ -327,6 +331,44 @@ fn public_binding() -> PublicTokenAccountBinding {
         true,
     )
     .unwrap()
+}
+
+fn production_instructions() -> [ProductionInstruction; EXPECTED_REHEARSAL_HANDLER_COUNT] {
+    [
+        ProductionInstruction::InitializeConfig,
+        ProductionInstruction::InitializeLaneVault { lane: 1 },
+        ProductionInstruction::InitializeStakeVault,
+        ProductionInstruction::Activate,
+        ProductionInstruction::RegisterAgency,
+        ProductionInstruction::SetEligibility {
+            role: 2,
+            agency_index: Some(7),
+        },
+        ProductionInstruction::OpenPosition {
+            position_id: 9,
+            principal: 10,
+        },
+        ProductionInstruction::SettlePositionWeek { week: 11 },
+        ProductionInstruction::SettleCoreWeek { ordinal: 12 },
+        ProductionInstruction::ClaimLanePrincipal { lane: 3 },
+        ProductionInstruction::WithdrawPositionPrincipal,
+        ProductionInstruction::ClosePosition,
+        ProductionInstruction::CommitRound { week: 13 },
+        ProductionInstruction::SettleRound,
+        ProductionInstruction::ExpireRound,
+    ]
+}
+
+fn production_meta_account(slot: RehearsalAccountSlot, index: usize) -> TestAccount {
+    TestAccount {
+        key: Pubkey::new_from_array([u8::try_from(index + 1).unwrap(); 32]),
+        owner: Pubkey::new_from_array([0x99; 32]),
+        lamports: 1,
+        data: Vec::new(),
+        is_signer: slot.signer,
+        is_writable: slot.writable,
+        executable: slot.executable,
+    }
 }
 
 #[test]
@@ -887,4 +929,149 @@ fn composed_session_rejects_cross_mint_and_only_returns_structural_graph_checks(
         All15RehearsalPreflight::new(&gate, &native, &other_mint),
         Err(RehearsalPreflightError::CanonicalMintMismatch)
     ));
+}
+
+#[test]
+fn production_dispatch_preflight_routes_every_exact_abi_to_its_account_graph() {
+    let gate = open_gate(MINT);
+    let native = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+    let mint = canonical_mint();
+    let capabilities = All15RehearsalPreflight::new(&gate, &native, &mint).unwrap();
+
+    for (index, instruction) in production_instructions().into_iter().enumerate() {
+        let expected_operation = ALL_REHEARSAL_OPERATIONS[index];
+        let descriptor = capabilities.descriptor(expected_operation);
+        let mut observed: Vec<_> = descriptor
+            .accounts
+            .iter()
+            .enumerate()
+            .map(|(account_index, slot)| production_meta_account(*slot, account_index))
+            .collect();
+        let infos: Vec<_> = observed.iter_mut().map(TestAccount::info).collect();
+        let mut instruction_data = [0u8; PRODUCTION_INSTRUCTION_LEN];
+        encode_production_instruction(instruction, &mut instruction_data).unwrap();
+
+        let preflight =
+            prepare_production_dispatch_preflight(&capabilities, &instruction_data, &infos)
+                .unwrap();
+        assert_eq!(preflight.instruction(), instruction);
+        assert_eq!(preflight.operation(), expected_operation);
+        assert_eq!(preflight.hold(), descriptor.hold);
+        assert_eq!(preflight.observed_account_count(), infos.len());
+        assert!(!preflight.authorizes_handler());
+        assert!(!preflight.devnet_executable());
+    }
+}
+
+#[test]
+fn production_dispatch_preflight_accepts_only_the_exact_optional_shape_and_flags() {
+    let gate = open_gate(MINT);
+    let native = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+    let mint = canonical_mint();
+    let capabilities = All15RehearsalPreflight::new(&gate, &native, &mint).unwrap();
+    let descriptor = capabilities.descriptor(RehearsalOperation::SettlePositionWeek);
+    let mut instruction_data = [0u8; PRODUCTION_INSTRUCTION_LEN];
+    encode_production_instruction(
+        ProductionInstruction::SettlePositionWeek { week: 9 },
+        &mut instruction_data,
+    )
+    .unwrap();
+
+    let mut without_optional: Vec<_> = descriptor
+        .accounts
+        .iter()
+        .filter(|slot| !slot.optional)
+        .enumerate()
+        .map(|(index, slot)| production_meta_account(*slot, index))
+        .collect();
+    let infos: Vec<_> = without_optional.iter_mut().map(TestAccount::info).collect();
+    assert!(
+        prepare_production_dispatch_preflight(&capabilities, &instruction_data, &infos).is_ok()
+    );
+    drop(infos);
+
+    without_optional[0].is_signer = false;
+    let infos: Vec<_> = without_optional.iter_mut().map(TestAccount::info).collect();
+    assert_eq!(
+        prepare_production_dispatch_preflight(&capabilities, &instruction_data, &infos),
+        Err(ProductionDispatchPreflightError::AccountMetaMismatch)
+    );
+    drop(infos);
+
+    without_optional[0].is_signer = true;
+    without_optional[0].is_writable = !without_optional[0].is_writable;
+    let infos: Vec<_> = without_optional.iter_mut().map(TestAccount::info).collect();
+    assert_eq!(
+        prepare_production_dispatch_preflight(&capabilities, &instruction_data, &infos),
+        Err(ProductionDispatchPreflightError::AccountMetaMismatch)
+    );
+    drop(infos);
+
+    without_optional[0].is_writable = !without_optional[0].is_writable;
+    without_optional[0].executable = !without_optional[0].executable;
+    let infos: Vec<_> = without_optional.iter_mut().map(TestAccount::info).collect();
+    assert_eq!(
+        prepare_production_dispatch_preflight(&capabilities, &instruction_data, &infos),
+        Err(ProductionDispatchPreflightError::AccountMetaMismatch)
+    );
+    drop(infos);
+
+    let mut too_many: Vec<_> = descriptor
+        .accounts
+        .iter()
+        .enumerate()
+        .map(|(index, slot)| production_meta_account(*slot, index))
+        .collect();
+    too_many.push(production_meta_account(
+        descriptor.accounts[0],
+        too_many.len(),
+    ));
+    let infos: Vec<_> = too_many.iter_mut().map(TestAccount::info).collect();
+    assert_eq!(
+        prepare_production_dispatch_preflight(&capabilities, &instruction_data, &infos),
+        Err(ProductionDispatchPreflightError::UnexpectedAccount)
+    );
+
+    let mut too_short: Vec<_> = descriptor
+        .accounts
+        .iter()
+        .filter(|slot| !slot.optional)
+        .take(12)
+        .enumerate()
+        .map(|(index, slot)| production_meta_account(*slot, index))
+        .collect();
+    let infos: Vec<_> = too_short.iter_mut().map(TestAccount::info).collect();
+    assert_eq!(
+        prepare_production_dispatch_preflight(&capabilities, &instruction_data, &infos),
+        Err(ProductionDispatchPreflightError::MissingRequiredAccount)
+    );
+
+    let mut invalid = instruction_data;
+    invalid[0] ^= 1;
+    assert!(matches!(
+        prepare_production_dispatch_preflight(&capabilities, &invalid, &[]),
+        Err(ProductionDispatchPreflightError::Instruction(_))
+    ));
+}
+
+#[test]
+fn production_dispatch_truth_is_routing_only_and_remains_held() {
+    let truth = PRODUCTION_DISPATCH_PREFLIGHT_TRUTH;
+    assert!(truth.feature_gated);
+    assert!(truth.instruction_abi_frozen);
+    assert!(truth.all_15_instruction_routes_frozen);
+    assert!(truth.opaque_daily_law_capability_required);
+    assert!(truth.native_binding_required);
+    assert!(truth.canonical_mint_capability_required);
+    assert!(truth.exact_account_meta_shape_required);
+    assert!(!truth.account_identity_graph_complete);
+    assert!(!truth.account_data_read);
+    assert!(!truth.mutable_account_borrow);
+    assert!(!truth.handler_dispatch_exposed);
+    assert!(!truth.entrypoint_exposed);
+    assert!(!truth.account_writes_executed);
+    assert!(!truth.system_cpi_executed);
+    assert!(!truth.token_cpi_executed);
+    assert!(!truth.any_handler_complete);
+    assert!(truth.mainnet_hold);
 }

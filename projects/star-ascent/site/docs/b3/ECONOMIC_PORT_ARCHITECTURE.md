@@ -221,6 +221,15 @@ accounts, dispatch, invoke CPI, or write state; therefore it cannot run ahead
 of Daily Law. The dispatcher, entrypoint, production identities, executable
 account routing, and Mainnet authorization remain incomplete/HOLD.
 
+Behind the existing `runtime-account-bridge` feature, the separate
+`production_dispatch` preflight now binds each decoded opcode to its exact
+retained all-15 account-meta graph only after the opaque Daily-Law,
+native-economy, and canonical-mint capability set has already been constructed.
+It checks exact signer/writable/executable flags, including the sole optional
+Round slot, without borrowing account data. This freezes deterministic routing,
+not execution: account identities, handler calls, mutable borrows, CPI, writes,
+the public dispatcher, entrypoint, Devnet, and Mainnet remain false/HOLD.
+
 Burning is different from transferring. The sole core-cap burn path uses
 Token-2022 `BurnChecked`, signed by the economic vault-authority PDA. It is not
 a mint-authority operation and it is not a Transfer Hook call.

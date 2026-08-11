@@ -81,6 +81,10 @@ const economyProductionInstructionSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/production_instruction.rs", import.meta.url),
   "utf8",
 );
+const economyProductionDispatchSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/production_dispatch.rs", import.meta.url),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -799,6 +803,38 @@ test("all fifteen production codecs are frozen without a dispatcher or entrypoin
   assert.doesNotMatch(
     economyProductionInstructionSource,
     /AccountInfo|process_instruction|entrypoint!|invoke(?:_signed)?\s*\(|try_borrow_mut|RpcClient/u,
+  );
+});
+
+test("production ABI routing requires the composed capability and stays nonexecuting", () => {
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-account-bridge"\)\]\s+pub mod production_dispatch;/u,
+  );
+  assert.match(economyProductionDispatchSource, /all_15_instruction_routes_frozen: true/u);
+  assert.match(economyProductionDispatchSource, /opaque_daily_law_capability_required: true/u);
+  assert.match(economyProductionDispatchSource, /canonical_mint_capability_required: true/u);
+  assert.match(economyProductionDispatchSource, /account_identity_graph_complete: false/u);
+  assert.match(economyProductionDispatchSource, /handler_dispatch_exposed: false/u);
+  assert.match(economyProductionDispatchSource, /entrypoint_exposed: false/u);
+  assert.match(economyProductionDispatchSource, /mainnet_hold: true/u);
+  const prepare = functionBody(
+    economyProductionDispatchSource,
+    "prepare_production_dispatch_preflight",
+  );
+  assertTokensInOrder(
+    prepare,
+    [
+      "decode_production_instruction(instruction_data)",
+      "operation_for_instruction(instruction)",
+      "capabilities.descriptor(operation)",
+      "validate_account_meta_shape(descriptor.accounts, accounts)",
+    ],
+    "production instruction-to-account-graph route",
+  );
+  assert.doesNotMatch(
+    economyProductionDispatchSource,
+    /try_borrow(?:_mut)?_(?:data|lamports)|invoke(?:_signed)?\s*\(|process_instruction|entrypoint!|RpcClient|send_and_confirm/u,
   );
 });
 
