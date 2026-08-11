@@ -66,17 +66,17 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_reference/provider-authenticated-envelope.mjs":
     "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
   "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs":
-    "2f5368df00e77b94619f89587c8e026f3ba630545177369a9558fb3b42f1a2fe",
+    "a71ce36dc45103d02361ba956a4e2567de939d11664a09db329a8834651319ee",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs":
     "7aeca55b1821fa632444f6d4485ab6d2f6ea809cc495fe4f6a9ac54e30074dd7",
   "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs":
-    "55ce6f4739226cb02b7ff3927bd97814f05d30578695b8bce1fd2e7ea13780ec",
+    "746af3f0d8f77c7766b95abae66b78ce36af10b1c660625b1c9d7d3dba8e9385",
   "programs/iat_b3_reference/reward-consumer-gate.mjs":
     "7139c8d2a57d630ca59306730f16a5d6f979a06280422b69eee4978310918b4f",
   "programs/iat_b3_reference/reward-external-rollback-anchor.mjs":
     "9efb430f51f5f81caf413dce20e68f0d0b4a0090151b400fb28426f55af03c3e",
   "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs":
-    "a9a5b18ee5c2a119a002a15cbb9a7dc69bdcf5230137cb472456a92b108e60e4",
+    "2857bcec8cfc46526e4aecc9796e65efdd73710101e766a816ad5e9a5c041a29",
   "programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs":
     "e935fafcfd947822f9a75f54a08369d4c8b7336a11e6ba37e8a3904a4c1fc23f",
   "programs/iat_b3_reference/reward-persistence-cas.mjs":
@@ -104,15 +104,18 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs": 2,
   }),
   consumePermit: Object.freeze({
-    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 2,
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 4,
     "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs": 1,
     "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs": 1,
   }),
   consumeAnchoredLocalProjection: Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
   }),
+  consumeAnchoredMaterializedProjection: Object.freeze({
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
+  }),
   consumeSignedAnchorReceipt: Object.freeze({
-    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 2,
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
   }),
   createProviderTrustBinding: Object.freeze({
@@ -125,6 +128,9 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-persistence-cas.mjs": 1,
   }),
   createRewardAuthenticatedConsumerRuntime: Object.freeze({
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
+  }),
+  createRewardAuthenticatedMaterializedConsumerRuntime: Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
   }),
   createSqliteRewardConsumerCursor: Object.freeze({
@@ -143,7 +149,7 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-persistence-cas.mjs": 1,
   }),
   prepareRewardConsumerPermit: Object.freeze({
-    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 2,
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
     "programs/iat_b3_reference/reward-consumer-gate.mjs": 1,
   }),
   recordPremiumUpgradeCas: Object.freeze({
@@ -169,7 +175,9 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
   }),
-  "reward-materialized-projection-sqlite.mjs": Object.freeze({}),
+  "reward-materialized-projection-sqlite.mjs": Object.freeze({
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
+  }),
   "reward-persistence-cas-sqlite.mjs": Object.freeze({}),
   "reward-persistence-cas.mjs": Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
@@ -211,7 +219,7 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 2,
   }),
   verifyRewardExternalRollbackAnchor: Object.freeze({
-    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 2,
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 1,
   }),
 });
@@ -561,8 +569,11 @@ export function auditRewardGuardedSourceFiles(sourceFiles, {
     markerInventory,
     filesystemEnumerationVerified,
     exactGuardedAdapterSourceDigestsVerified: true,
-    unlistedSensitiveSourceMarkerRejected: true,
-    deployableRewardConsumerPathsInventoried: true,
+    staticSensitiveSourceMarkerLocationsMatched: true,
+    unlistedSensitiveSourceMarkerRejected: false,
+    deployableRewardConsumerPathsInventoried: false,
+    dynamicComputedDispatchRejected: false,
+    reflectiveDispatchRejected: false,
     runtimeDirectStoreBypassPreventionVerified: false,
     providerAuthenticationVerified: false,
     rollbackProtectionVerified: false,

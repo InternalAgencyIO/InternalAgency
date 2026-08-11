@@ -30,8 +30,11 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.status, REWARD_GUARDED_SOURCE_INVENTORY_STATUS);
   assert.equal(result.filesystemEnumerationVerified, true);
   assert.equal(result.exactGuardedAdapterSourceDigestsVerified, true);
-  assert.equal(result.unlistedSensitiveSourceMarkerRejected, true);
-  assert.equal(result.deployableRewardConsumerPathsInventoried, true);
+  assert.equal(result.staticSensitiveSourceMarkerLocationsMatched, true);
+  assert.equal(result.unlistedSensitiveSourceMarkerRejected, false);
+  assert.equal(result.deployableRewardConsumerPathsInventoried, false);
+  assert.equal(result.dynamicComputedDispatchRejected, false);
+  assert.equal(result.reflectiveDispatchRejected, false);
   assert.equal(result.criticalSources.length, 11);
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs"
@@ -138,12 +141,81 @@ test("split or escaped static paths, properties, and IdentifierNames fail closed
       "ESCAPED_IDENTIFIER_MARKER",
       "createSqliteRewardMaterializedProjection",
     ],
+    [
+      "worker/escaped-authenticated-materialized-runtime.mjs",
+      `export const open = (adapter, options) =>
+        adapter.createRewardAuthenticated\\u004daterializedConsumerRuntime(options);`,
+      "ESCAPED_IDENTIFIER_MARKER",
+      "createRewardAuthenticatedMaterializedConsumerRuntime",
+    ],
   ]) {
     assert.throws(
       () => auditRewardGuardedSourceFiles(withSource(path, source)),
       new RegExp(`REWARD_GUARDED_SOURCE_${expectedError}_FORBIDDEN:.*:${marker}`, "u"),
       path,
     );
+  }
+});
+
+test("runtime-computed and reflective dispatch remain an explicit accepted-but-HOLD gap", () => {
+  const cases = [
+    [
+      "worker/dynamic-materialized-array-join.mjs",
+      `export function bypass(runtime, input) {
+        const operation = ["consume", "Anchored", "Materialized", "Projection"].join("");
+        return runtime[operation](input);
+      }`,
+    ],
+    [
+      "worker/dynamic-materialized-char-code.mjs",
+      `export function bypass(runtime, input) {
+        const operation = String.fromCharCode(
+          99, 111, 110, 115, 117, 109, 101, 65, 110, 99, 104, 111, 114, 101, 100,
+          77, 97, 116, 101, 114, 105, 97, 108, 105, 122, 101, 100, 80, 114, 111,
+          106, 101, 99, 116, 105, 111, 110,
+        );
+        return runtime[operation](input);
+      }`,
+    ],
+    [
+      "worker/dynamic-materialized-variable.mjs",
+      `export const bypass = (runtime, input, operation) => runtime[operation](input);`,
+    ],
+    [
+      "worker/dynamic-materialized-optional.mjs",
+      `export const bypass = (runtime, input, operation) => runtime?.[operation]?.(input);`,
+    ],
+    [
+      "worker/dynamic-materialized-parenthesized.mjs",
+      `export const bypass = (runtime, input, operation) =>
+        (runtime)[(operation)](input);`,
+    ],
+    [
+      "worker/dynamic-materialized-two-step.mjs",
+      `export function bypass(runtime, input, operation) {
+        const invoke = runtime[operation];
+        return invoke(input);
+      }`,
+    ],
+    [
+      "worker/dynamic-materialized-reflect-call.mjs",
+      `export function bypass(runtime, input, operation) {
+        const invoke = Reflect.get(runtime, operation);
+        return invoke.call(runtime, input);
+      }`,
+    ],
+  ];
+  for (const [path, source] of cases) {
+    const result = auditRewardGuardedSourceFiles(withSource(path, source));
+    assert.equal(result.staticSensitiveSourceMarkerLocationsMatched, true, path);
+    assert.equal(result.unlistedSensitiveSourceMarkerRejected, false, path);
+    assert.equal(result.deployableRewardConsumerPathsInventoried, false, path);
+    assert.equal(result.dynamicComputedDispatchRejected, false, path);
+    assert.equal(result.reflectiveDispatchRejected, false, path);
+    assert.equal(result.runtimeDirectStoreBypassPreventionVerified, false, path);
+    assert.equal(result.externalSideEffectsAuthorized, false, path);
+    assert.equal(result.activationReady, false, path);
+    assert.equal(result.mainnetStatus, "HOLD", path);
   }
 });
 
@@ -197,6 +269,18 @@ test("unlisted signed-anchor, mirror, and composed-runtime callers fail the inve
       `import { createRewardAuthenticatedConsumerRuntime } from
         "../programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs";
        export const start = (options) => createRewardAuthenticatedConsumerRuntime(options);`,
+    ],
+    [
+      "worker/unlisted-materialized-runtime.mjs",
+      `import { createRewardAuthenticatedMaterializedConsumerRuntime } from
+        "../programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs";
+       export const start = (options) =>
+         createRewardAuthenticatedMaterializedConsumerRuntime(options);`,
+    ],
+    [
+      "worker/unlisted-materialized-operation.mjs",
+      `export const consume = (runtime, input) =>
+        runtime.consumeAnchoredMaterializedProjection(input);`,
     ],
     [
       "scripts/direct-anchor-history-write.mjs",

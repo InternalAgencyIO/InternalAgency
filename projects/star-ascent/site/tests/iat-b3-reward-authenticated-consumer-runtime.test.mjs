@@ -53,6 +53,11 @@ import {
   REWARD_CONSUMER_CURSOR_SQLITE_SCHEMA_MANIFEST_SHA256,
   createSqliteRewardConsumerCursor,
 } from "../programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs";
+import {
+  REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE,
+  REWARD_MATERIALIZED_PROJECTION_SQLITE_SCHEMA_MANIFEST_SHA256,
+  createSqliteRewardMaterializedProjection,
+} from "../programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs";
 import { REWARD_CONSUMER_SCOPE } from "../programs/iat_b3_reference/reward-consumer-gate.mjs";
 import {
   createDailyLawState,
@@ -66,9 +71,19 @@ import {
   REWARD_AUTHENTICATED_CONSUMER_RUNTIME_MAINNET_STATUS,
   REWARD_AUTHENTICATED_CONSUMER_RUNTIME_SCHEMA,
   REWARD_AUTHENTICATED_CONSUMER_RUNTIME_STATUS,
+  REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION,
+  REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RECEIPT_SCHEMA,
+  REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_BINDING_SCHEMA,
+  REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_MAINNET_STATUS,
+  REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_SCHEMA,
+  REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_STATUS,
   createRewardAuthenticatedConsumerRuntime,
   createRewardAuthenticatedConsumerRuntimeBinding,
+  createRewardAuthenticatedMaterializedConsumerRuntime,
+  createRewardAuthenticatedMaterializedConsumerRuntimeBinding,
   validateRewardAuthenticatedConsumerCompositionReceipt,
+  validateRewardAuthenticatedMaterializedConsumerCompositionReceipt,
+  validateRewardAuthenticatedMaterializedConsumerRuntimeBinding,
   validateRewardAuthenticatedConsumerRuntimeBinding,
 } from "../programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs";
 
@@ -345,6 +360,10 @@ function runtimeInput(context, overrides = {}) {
   };
 }
 
+function materializedRuntimeInput(context, overrides = {}) {
+  return runtimeInput({ ...context, binding: context.materializedBinding }, overrides);
+}
+
 function fixture(t) {
   const directory = mkdtempSync(join(tmpdir(), "iat-b3-authenticated-runtime-"));
   const ledger = laneLedger();
@@ -391,7 +410,10 @@ function fixture(t) {
   const consumerCursor = createSqliteRewardConsumerCursor({
     databasePath: join(directory, "consumer-cursor.sqlite"),
   });
-  const binding = createRewardAuthenticatedConsumerRuntimeBinding({
+  const materializedProjection = createSqliteRewardMaterializedProjection({
+    databasePath: join(directory, "materialized-projection.sqlite"),
+  });
+  const bindingInput = {
     environment: "PRODUCTION",
     runtimeIdentitySha256: digest("runtime-identity"),
     productionIdentityFreezeManifestSha256: digest("identity-freeze-manifest"),
@@ -419,6 +441,19 @@ function fixture(t) {
     consumerId: "reward-projection-v1",
     projectionKind: "reward-ledger-projection",
     projectionKey: "canonical-reward-state",
+  };
+  const binding = createRewardAuthenticatedConsumerRuntimeBinding(bindingInput);
+  const materializedBindingInput = Object.fromEntries(Object.entries(bindingInput).map(
+    ([key, value]) => key === "consumerCursorSchemaManifestSha256"
+      ? [
+        "materializedProjectionSchemaManifestSha256",
+        REWARD_MATERIALIZED_PROJECTION_SQLITE_SCHEMA_MANIFEST_SHA256,
+      ]
+      : [key, value],
+  ));
+  const materializedBinding = createRewardAuthenticatedMaterializedConsumerRuntimeBinding({
+    ...materializedBindingInput,
+    consumerId: "reward-materialized-projection-v2",
   });
   const runtime = createRewardAuthenticatedConsumerRuntime({
     runtimeBinding: binding,
@@ -427,8 +462,16 @@ function fixture(t) {
     rollbackAnchorMirror,
     consumerCursor,
   });
+  const materializedRuntime = createRewardAuthenticatedMaterializedConsumerRuntime({
+    runtimeBinding: materializedBinding,
+    trustBinding: providerContext.trustBinding,
+    rewardStore,
+    rollbackAnchorMirror,
+    materializedProjection,
+  });
   t.after(() => {
     consumerCursor.close();
+    materializedProjection.close();
     rollbackAnchorMirror.close();
     rewardStore.close();
     rmSync(directory, { recursive: true, force: true });
@@ -440,8 +483,11 @@ function fixture(t) {
     providerContext,
     rollbackAnchorMirror,
     consumerCursor,
+    materializedProjection,
     binding,
+    materializedBinding,
     runtime,
+    materializedRuntime,
     genesisCheckpoint: genesisExchange.checkpoint,
     currentExchange,
   };
@@ -870,4 +916,345 @@ test("input extra fields, symbols, prototypes, and accessors fail without persis
   assert.equal(projectionAccessorRead, false);
   assert.deepEqual(context.rollbackAnchorMirror.snapshot(), anchorBefore);
   assert.deepEqual(context.consumerCursor.snapshot(), cursorBefore);
+});
+
+test("authenticated materialized runtime atomically commits canonical local state under HOLD", (t) => {
+  const context = fixture(t);
+  assert.equal(
+    context.materializedBinding.schema,
+    REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_BINDING_SCHEMA,
+  );
+  assert.equal(
+    validateRewardAuthenticatedMaterializedConsumerRuntimeBinding(
+      context.materializedBinding,
+    ),
+    context.materializedBinding,
+  );
+  assert.deepEqual(context.materializedProjection.snapshot().cursors, []);
+  assert.deepEqual(context.materializedProjection.snapshot().projectionEvents, []);
+  assert.deepEqual(context.materializedProjection.snapshot().materializedStates, []);
+  assert.equal(
+    context.materializedRuntime.schema,
+    REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_SCHEMA,
+  );
+  assert.equal(
+    context.materializedRuntime.status,
+    REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_STATUS,
+  );
+  assert.equal(context.materializedRuntime.materializedProjectionStateVerified, false);
+  assert.equal(context.materializedRuntime.projectionEffectAtomicityVerified, false);
+  assert.equal(
+    context.materializedRuntime.projectionEffectScope,
+    REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE,
+  );
+  assert.equal(context.materializedRuntime.crossDatabaseAnchorProjectionAtomicityVerified, false);
+  assert.equal(context.materializedRuntime.runtimeAuthenticationVerified, false);
+  assert.equal(
+    context.materializedRuntime.mainnetStatus,
+    REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_MAINNET_STATUS,
+  );
+
+  const receipt = context.materializedRuntime.consumeAnchoredMaterializedProjection(
+    materializedRuntimeInput(context),
+  );
+  assert.equal(receipt.schema, REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RECEIPT_SCHEMA);
+  assert.equal(
+    receipt.disposition,
+    REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.COMMITTED,
+  );
+  assert.equal(receipt.durableLocalMaterializedProjectionMatched, true);
+  assert.equal(receipt.materializedProjectionStateVerified, true);
+  assert.equal(receipt.projectionEffectAtomicityVerified, true);
+  assert.equal(receipt.projectionEffectScope, REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE);
+  assert.equal(receipt.exactReplayReadbackReconciled, false);
+  for (const flag of [
+    "providerAuthenticationVerified",
+    "providerIdentityVerified",
+    "productionKeyOwnershipVerified",
+    "keyRegistryAuthenticityVerified",
+    "externalProviderDurabilityVerified",
+    "externalMonotonicityVerified",
+    "independentRollbackProtectionVerified",
+    "suppliedStateAuthenticityVerified",
+    "externalRollbackAnchorVerified",
+    "crossDatabaseAnchorProjectionAtomicityVerified",
+    "runtimeAuthenticationVerified",
+    "runtimeConfinementVerified",
+    "runtimeIntegrationVerified",
+    "externalSideEffectsAuthorized",
+    "independentReviewAccepted",
+    "activationReady",
+  ]) assert.equal(receipt[flag], false, flag);
+  assert.equal(
+    validateRewardAuthenticatedMaterializedConsumerCompositionReceipt(receipt),
+    receipt,
+  );
+  assert.throws(
+    () => validateRewardAuthenticatedMaterializedConsumerCompositionReceipt({
+      ...structuredClone(receipt),
+      mainnetStatus: "READY",
+    }),
+    /not issued by this process/u,
+  );
+
+  const snapshot = context.materializedProjection.snapshot();
+  assert.equal(snapshot.cursors.length, 1);
+  assert.equal(snapshot.projectionEvents.length, 1);
+  assert.equal(snapshot.materializedStates.length, 1);
+  assert.equal(snapshot.cursors[0].cursorSha256, receipt.materializedCursorSha256);
+  assert.equal(
+    snapshot.projectionEvents[0].eventRecordSha256,
+    receipt.materializedProjectionEventRecordSha256,
+  );
+  assert.equal(
+    snapshot.materializedStates[0].materializedStateSha256,
+    receipt.materializedStateSha256,
+  );
+});
+
+test("authenticated materialized runtime reconciles exact retry without duplicate writes", (t) => {
+  const context = fixture(t);
+  const input = materializedRuntimeInput(context);
+  const first = context.materializedRuntime.consumeAnchoredMaterializedProjection(input);
+  const anchorBefore = context.rollbackAnchorMirror.snapshot();
+  const projectionBefore = context.materializedProjection.snapshot();
+  const replay = context.materializedRuntime.consumeAnchoredMaterializedProjection(input);
+  assert.equal(
+    replay.disposition,
+    REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.RECONCILED_EXACT_REPLAY,
+  );
+  assert.equal(replay.exactReplayReadbackReconciled, true);
+  assert.equal(replay.materializedCursorSha256, first.materializedCursorSha256);
+  assert.equal(replay.materializedStateSha256, first.materializedStateSha256);
+  assert.deepEqual(context.rollbackAnchorMirror.snapshot(), anchorBefore);
+  assert.deepEqual(context.materializedProjection.snapshot(), projectionBefore);
+});
+
+test("materialized runtime constructor rejects every unbranded adapter without candidate reads", (t) => {
+  const context = fixture(t);
+  const options = {
+    runtimeBinding: context.materializedBinding,
+    trustBinding: context.providerContext.trustBinding,
+    rewardStore: context.rewardStore,
+    rollbackAnchorMirror: context.rollbackAnchorMirror,
+    materializedProjection: context.materializedProjection,
+  };
+  const materializedBindingInput = Object.fromEntries(
+    Object.entries(context.materializedBinding).filter(([key]) => ![
+      "schema",
+      "status",
+      "productionIdentityEvidenceAccepted",
+      "providerAuthenticationVerified",
+      "externalMonotonicityVerified",
+      "independentRollbackProtectionVerified",
+      "runtimeConfinementVerified",
+      "runtimeIntegrationVerified",
+      "independentReviewAccepted",
+      "activationReady",
+      "mainnetStatus",
+      "runtimeBindingSha256",
+    ].includes(key)),
+  );
+  const cursorManifestBinding = createRewardAuthenticatedMaterializedConsumerRuntimeBinding({
+    ...materializedBindingInput,
+    materializedProjectionSchemaManifestSha256:
+      REWARD_CONSUMER_CURSOR_SQLITE_SCHEMA_MANIFEST_SHA256,
+  });
+  assert.throws(
+    () => createRewardAuthenticatedMaterializedConsumerRuntime({
+      ...options,
+      runtimeBinding: cursorManifestBinding,
+    }),
+    /projection adapter/u,
+  );
+  assert.throws(
+    () => validateRewardAuthenticatedMaterializedConsumerRuntimeBinding({
+      ...context.materializedBinding,
+      materializedProjectionSchemaManifestSha256:
+        REWARD_CONSUMER_CURSOR_SQLITE_SCHEMA_MANIFEST_SHA256,
+    }),
+    /DIGEST_MISMATCH/u,
+  );
+  const adapter = context.materializedProjection;
+  const boundAliases = Object.freeze({
+    ...adapter,
+    readCursor: adapter.readCursor.bind(adapter),
+    readProjectionEvent: adapter.readProjectionEvent.bind(adapter),
+    readMaterializedProjection: adapter.readMaterializedProjection.bind(adapter),
+    snapshot: adapter.snapshot.bind(adapter),
+    consumePermit: adapter.consumePermit.bind(adapter),
+  });
+  let hostileRead = false;
+  const accessorFake = {};
+  Object.defineProperty(accessorFake, "status", {
+    enumerable: true,
+    get() {
+      hostileRead = true;
+      throw new Error("MATERIALIZED_RUNTIME_ACCESSOR_EXECUTED");
+    },
+  });
+  const hostileProxy = new Proxy(adapter, {
+    get() {
+      hostileRead = true;
+      throw new Error("MATERIALIZED_RUNTIME_PROXY_EXECUTED");
+    },
+  });
+  const { proxy: revokedProxy, revoke } = Proxy.revocable(adapter, {});
+  revoke();
+  for (const candidate of [
+    Object.freeze({ ...adapter }),
+    boundAliases,
+    Object.create(adapter),
+    accessorFake,
+    new Proxy(adapter, {}),
+    hostileProxy,
+    revokedProxy,
+  ]) {
+    assert.throws(
+      () => createRewardAuthenticatedMaterializedConsumerRuntime({
+        ...options,
+        materializedProjection: candidate,
+      }),
+      /process-branded SQLite adapter/u,
+    );
+  }
+  assert.equal(hostileRead, false);
+});
+
+test("byte payloads remain detached across V1 and materialized commit, reopen, and replay", (t) => {
+  const context = fixture(t);
+  const v1Buffer = Buffer.from([1, 2, 3, 4]);
+  const v1Typed = new Uint8Array([5, 6, 7, 8]);
+  context.runtime.consumeAnchoredLocalProjection(runtimeInput(context, {
+    projection: {
+      kind: context.binding.projectionKind,
+      key: context.binding.projectionKey,
+      payload: { v1Buffer, v1Typed },
+    },
+  }));
+  v1Buffer[0] = 99;
+  v1Typed[0] = 99;
+  const v1Payload = context.consumerCursor.snapshot().projectionEvents[0].payload;
+  assert.deepEqual([...v1Payload.v1Buffer], [1, 2, 3, 4]);
+  assert.deepEqual([...v1Payload.v1Typed], [5, 6, 7, 8]);
+  context.consumerCursor.close();
+  const reopenedV1Cursor = createSqliteRewardConsumerCursor({
+    databasePath: join(context.directory, "consumer-cursor.sqlite"),
+  });
+  t.after(() => reopenedV1Cursor.close());
+  const reopenedV1Runtime = createRewardAuthenticatedConsumerRuntime({
+    runtimeBinding: context.binding,
+    trustBinding: context.providerContext.trustBinding,
+    rewardStore: context.rewardStore,
+    rollbackAnchorMirror: context.rollbackAnchorMirror,
+    consumerCursor: reopenedV1Cursor,
+  });
+  const v1Replay = reopenedV1Runtime.consumeAnchoredLocalProjection(runtimeInput(context, {
+    projection: {
+      kind: context.binding.projectionKind,
+      key: context.binding.projectionKey,
+      payload: {
+        v1Buffer: Buffer.from([1, 2, 3, 4]),
+        v1Typed: new Uint8Array([5, 6, 7, 8]),
+      },
+    },
+  }));
+  assert.equal(
+    v1Replay.disposition,
+    REWARD_AUTHENTICATED_CONSUMER_DISPOSITION.RECONCILED_AFTER_COMMIT,
+  );
+  assert.equal(v1Replay.lostResponseReadbackReconciled, true);
+  reopenedV1Cursor.close();
+
+  const materializedBuffer = Buffer.from([9, 10, 11, 12]);
+  const materializedTyped = new Uint8Array([13, 14, 15, 16]);
+  const input = materializedRuntimeInput(context, {
+    projection: {
+      kind: context.materializedBinding.projectionKind,
+      key: context.materializedBinding.projectionKey,
+      payload: { materializedBuffer, materializedTyped },
+    },
+  });
+  const first = context.materializedRuntime.consumeAnchoredMaterializedProjection(input);
+  materializedBuffer[0] = 99;
+  materializedTyped[0] = 99;
+  let state = context.materializedProjection.readMaterializedProjection(
+    context.materializedBinding.consumerId,
+    context.materializedBinding.projectionKind,
+    context.materializedBinding.projectionKey,
+  );
+  assert.deepEqual([...state.payload.materializedBuffer], [9, 10, 11, 12]);
+  assert.deepEqual([...state.payload.materializedTyped], [13, 14, 15, 16]);
+
+  context.materializedProjection.close();
+  const reopened = createSqliteRewardMaterializedProjection({
+    databasePath: join(context.directory, "materialized-projection.sqlite"),
+  });
+  t.after(() => reopened.close());
+  const reopenedRuntime = createRewardAuthenticatedMaterializedConsumerRuntime({
+    runtimeBinding: context.materializedBinding,
+    trustBinding: context.providerContext.trustBinding,
+    rewardStore: context.rewardStore,
+    rollbackAnchorMirror: context.rollbackAnchorMirror,
+    materializedProjection: reopened,
+  });
+  state = reopened.readMaterializedProjection(
+    context.materializedBinding.consumerId,
+    context.materializedBinding.projectionKind,
+    context.materializedBinding.projectionKey,
+  );
+  assert.deepEqual([...state.payload.materializedBuffer], [9, 10, 11, 12]);
+  assert.deepEqual([...state.payload.materializedTyped], [13, 14, 15, 16]);
+  const replay = reopenedRuntime.consumeAnchoredMaterializedProjection(
+    materializedRuntimeInput(context, {
+      projection: {
+        kind: context.materializedBinding.projectionKind,
+        key: context.materializedBinding.projectionKey,
+        payload: {
+          materializedBuffer: Buffer.from([9, 10, 11, 12]),
+          materializedTyped: new Uint8Array([13, 14, 15, 16]),
+        },
+      },
+    }),
+  );
+  assert.equal(
+    replay.disposition,
+    REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.RECONCILED_EXACT_REPLAY,
+  );
+  assert.equal(replay.materializedStateSha256, first.materializedStateSha256);
+  reopened.close();
+});
+
+test("materialized path rejects Daily Law and signature failures before local projection writes", (t) => {
+  const context = fixture(t);
+  const projectionBefore = context.materializedProjection.snapshot();
+  let hostileRead = false;
+  const hostile = { dailyLawState: LOCKED_LAW };
+  Object.defineProperty(hostile, "providerEnvelope", {
+    enumerable: true,
+    get() {
+      hostileRead = true;
+      throw new Error("MATERIALIZED_PROVIDER_ACCESSOR_EXECUTED");
+    },
+  });
+  assert.throws(
+    () => context.materializedRuntime.consumeAnchoredMaterializedProjection(hostile),
+    /IAT_DAILY_LOCKDOWN/u,
+  );
+  assert.equal(hostileRead, false);
+  const input = materializedRuntimeInput(context);
+  const providerEnvelope = {
+    ...input.providerEnvelope,
+    signatureBase64url:
+      `${input.providerEnvelope.signatureBase64url[0] === "A" ? "B" : "A"}`
+      + input.providerEnvelope.signatureBase64url.slice(1),
+  };
+  assert.throws(
+    () => context.materializedRuntime.consumeAnchoredMaterializedProjection({
+      ...input,
+      providerEnvelope,
+    }),
+    /digest|signature|envelope/iu,
+  );
+  assert.deepEqual(context.materializedProjection.snapshot(), projectionBefore);
 });

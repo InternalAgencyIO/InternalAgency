@@ -33,6 +33,7 @@ import {
   REWARD_MATERIALIZED_PROJECTION_SQLITE_ADAPTER_SCHEMA,
   REWARD_MATERIALIZED_PROJECTION_SQLITE_SCHEMA_MANIFEST_SHA256,
   REWARD_MATERIALIZED_PROJECTION_SQLITE_TEST_FAULT,
+  assertSqliteRewardMaterializedProjectionAdapter,
   createSqliteRewardMaterializedProjection,
   validateRewardMaterializedProjectionCursor,
   validateRewardMaterializedProjectionEvent,
@@ -232,6 +233,54 @@ function consumeInput(permitRecord, balance = permitRecord.targetCommitSequence 
     },
   };
 }
+
+test("materialized adapter brand rejects clones, aliases, proxies, and lookalikes without reads", (t) => {
+  const context = fixture(t);
+  const adapter = context.projectionStore();
+  assert.equal(assertSqliteRewardMaterializedProjectionAdapter(adapter), adapter);
+
+  const boundAliases = Object.freeze({
+    ...adapter,
+    readCursor: adapter.readCursor.bind(adapter),
+    readProjectionEvent: adapter.readProjectionEvent.bind(adapter),
+    readMaterializedProjection: adapter.readMaterializedProjection.bind(adapter),
+    snapshot: adapter.snapshot.bind(adapter),
+    consumePermit: adapter.consumePermit.bind(adapter),
+  });
+  let hostileRead = false;
+  const accessorFake = {};
+  Object.defineProperty(accessorFake, "adapterSchema", {
+    enumerable: true,
+    get() {
+      hostileRead = true;
+      throw new Error("MATERIALIZED_ADAPTER_ACCESSOR_EXECUTED");
+    },
+  });
+  const hostileProxy = new Proxy(adapter, {
+    get() {
+      hostileRead = true;
+      throw new Error("MATERIALIZED_ADAPTER_PROXY_EXECUTED");
+    },
+  });
+  const { proxy: revokedProxy, revoke } = Proxy.revocable(adapter, {});
+  revoke();
+
+  for (const candidate of [
+    Object.freeze({ ...adapter }),
+    boundAliases,
+    Object.create(adapter),
+    accessorFake,
+    new Proxy(adapter, {}),
+    hostileProxy,
+    revokedProxy,
+  ]) {
+    assert.throws(
+      () => assertSqliteRewardMaterializedProjectionAdapter(candidate),
+      /process-branded SQLite adapter/u,
+    );
+  }
+  assert.equal(hostileRead, false);
+});
 
 test("cursor, event, and canonical materialized state commit atomically and survive reopen", (t) => {
   const context = fixture(t);

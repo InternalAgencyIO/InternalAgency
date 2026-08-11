@@ -45,9 +45,24 @@ import {
   validateRewardConsumerCursorRecord,
   validateRewardConsumerProjectionEventRecord,
 } from "./reward-consumer-cursor-sqlite.mjs";
+import {
+  REWARD_MATERIALIZED_PROJECTION_COMMITMENT_SCHEMA,
+  REWARD_MATERIALIZED_PROJECTION_DISPOSITION,
+  REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE,
+  REWARD_MATERIALIZED_PROJECTION_MAINNET_STATUS,
+  REWARD_MATERIALIZED_PROJECTION_SQLITE_ADAPTER_SCHEMA,
+  REWARD_MATERIALIZED_PROJECTION_SQLITE_SCHEMA_VERSION,
+  REWARD_MATERIALIZED_PROJECTION_STATUS,
+  assertSqliteRewardMaterializedProjectionAdapter,
+  validateRewardMaterializedProjectionCursor,
+  validateRewardMaterializedProjectionEvent,
+  validateRewardMaterializedProjectionState,
+} from "./reward-materialized-projection-sqlite.mjs";
 
 export const REWARD_AUTHENTICATED_CONSUMER_RUNTIME_BINDING_SCHEMA =
   "iat-b3-reward-authenticated-consumer-runtime-binding/v1";
+export const REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_BINDING_SCHEMA =
+  "iat-b3-reward-authenticated-materialized-consumer-runtime-binding/v1";
 export const REWARD_AUTHENTICATED_CONSUMER_RUNTIME_SCHEMA =
   "iat-b3-reward-authenticated-consumer-runtime/v1";
 export const REWARD_AUTHENTICATED_CONSUMER_RECEIPT_SCHEMA =
@@ -55,9 +70,20 @@ export const REWARD_AUTHENTICATED_CONSUMER_RECEIPT_SCHEMA =
 export const REWARD_AUTHENTICATED_CONSUMER_RUNTIME_STATUS =
   "HOST_ONLY_NON_ACTIVATING_SIGNED_ANCHOR_LOCAL_CONSUMER_COMPOSITION";
 export const REWARD_AUTHENTICATED_CONSUMER_RUNTIME_MAINNET_STATUS = "HOLD";
+export const REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_SCHEMA =
+  "iat-b3-reward-authenticated-materialized-consumer-runtime/v1";
+export const REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RECEIPT_SCHEMA =
+  "iat-b3-reward-authenticated-materialized-consumer-receipt/v1";
+export const REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_STATUS =
+  "HOST_ONLY_NON_ACTIVATING_SIGNED_ANCHOR_MATERIALIZED_LOCAL_CONSUMER_COMPOSITION";
+export const REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_MAINNET_STATUS = "HOLD";
 export const REWARD_AUTHENTICATED_CONSUMER_DISPOSITION = Object.freeze({
   COMMITTED: "COMMITTED",
   RECONCILED_AFTER_COMMIT: "RECONCILED_AFTER_COMMIT",
+});
+export const REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION = Object.freeze({
+  COMMITTED: "COMMITTED",
+  RECONCILED_EXACT_REPLAY: "RECONCILED_EXACT_REPLAY",
 });
 
 const U64_MAX = (1n << 64n) - 1n;
@@ -66,6 +92,7 @@ const IDENTIFIER = /^[a-z0-9][a-z0-9._:/-]{7,127}$/u;
 const CONSUMER_ID = /^[a-z0-9](?:[a-z0-9._-]{0,126}[a-z0-9])?$/u;
 const PROJECTION_LABEL = /^[a-z0-9](?:[a-z0-9._:/-]{0,126}[a-z0-9])?$/u;
 const EXECUTED_COMPOSITION_RECEIPTS = new WeakSet();
+const EXECUTED_MATERIALIZED_COMPOSITION_RECEIPTS = new WeakSet();
 
 const BINDING_INPUT_KEYS = Object.freeze([
   "environment",
@@ -97,6 +124,28 @@ const BINDING_KEYS = Object.freeze([
   "schema",
   "status",
   ...BINDING_INPUT_KEYS,
+  "productionIdentityEvidenceAccepted",
+  "providerAuthenticationVerified",
+  "externalMonotonicityVerified",
+  "independentRollbackProtectionVerified",
+  "runtimeConfinementVerified",
+  "runtimeIntegrationVerified",
+  "independentReviewAccepted",
+  "activationReady",
+  "mainnetStatus",
+  "runtimeBindingSha256",
+]);
+
+const MATERIALIZED_BINDING_INPUT_KEYS = Object.freeze(BINDING_INPUT_KEYS.map((key) => (
+  key === "consumerCursorSchemaManifestSha256"
+    ? "materializedProjectionSchemaManifestSha256"
+    : key
+)));
+
+const MATERIALIZED_BINDING_KEYS = Object.freeze([
+  "schema",
+  "status",
+  ...MATERIALIZED_BINDING_INPUT_KEYS,
   "productionIdentityEvidenceAccepted",
   "providerAuthenticationVerified",
   "externalMonotonicityVerified",
@@ -165,6 +214,60 @@ const RECEIPT_KEYS = Object.freeze([
   "suppliedStateAuthenticityVerified",
   "materializedProjectionStateVerified",
   "projectionEffectAtomicityVerified",
+  "runtimeConfinementVerified",
+  "runtimeIntegrationVerified",
+  "externalSideEffectsAuthorized",
+  "independentReviewAccepted",
+  "activationReady",
+  "mainnetStatus",
+  "compositionReceiptSha256",
+]);
+
+const MATERIALIZED_RECEIPT_KEYS = Object.freeze([
+  "schema",
+  "status",
+  "disposition",
+  "runtimeBindingSha256",
+  "consumerId",
+  "targetCommitSequence",
+  "targetCommitSha256",
+  "checkpointSha256",
+  "checkpointCommitSequence",
+  "checkpointHeadCommitSha256",
+  "anchorSequence",
+  "anchorSha256",
+  "providerEnvelopeSequence",
+  "providerEnvelopeSha256",
+  "sourceAnchorVerificationReceiptSha256",
+  "durableAnchorReceiptRecordSha256",
+  "durableAnchorCursorSha256",
+  "consumerPermitSha256",
+  "materializedCursorSha256",
+  "projectionCommitmentSha256",
+  "materializedProjectionEventRecordSha256",
+  "materializedStateSha256",
+  "materializedStateRevision",
+  "projectionEffectScope",
+  "dailyLawGatePassed",
+  "configuredRuntimeBindingMatched",
+  "cryptographicSignaturePrerequisiteVerified",
+  "exactSignedCheckpointMatched",
+  "durableLocalAnchorMirrorMatched",
+  "durableLocalMaterializedProjectionMatched",
+  "exactReplayReadbackReconciled",
+  "providerAuthenticationVerified",
+  "providerIdentityVerified",
+  "productionKeyOwnershipVerified",
+  "keyRegistryAuthenticityVerified",
+  "externalProviderDurabilityVerified",
+  "externalMonotonicityVerified",
+  "independentRollbackProtectionVerified",
+  "suppliedStateAuthenticityVerified",
+  "externalRollbackAnchorVerified",
+  "materializedProjectionStateVerified",
+  "projectionEffectAtomicityVerified",
+  "crossDatabaseAnchorProjectionAtomicityVerified",
+  "runtimeAuthenticationVerified",
   "runtimeConfinementVerified",
   "runtimeIntegrationVerified",
   "externalSideEffectsAuthorized",
@@ -261,11 +364,16 @@ function asPositiveVersion(value, label) {
 
 function freezeClone(value) {
   const copy = structuredClone(value);
+  const seen = new Set();
   const freeze = (entry) => {
-    if (entry && typeof entry === "object" && !Object.isFrozen(entry)) {
-      for (const child of Object.values(entry)) freeze(child);
-      Object.freeze(entry);
-    }
+    if (entry === null || typeof entry !== "object" || seen.has(entry)) return entry;
+    seen.add(entry);
+    // Nonempty integer-indexed views cannot be frozen. structuredClone and the
+    // typed CAS codec already detached these bytes from caller-owned memory;
+    // every durable read returns another detached clone.
+    if (Buffer.isBuffer(entry) || entry instanceof Uint8Array) return entry;
+    for (const child of Object.values(entry)) freeze(child);
+    Object.freeze(entry);
     return entry;
   };
   return freeze(copy);
@@ -393,6 +501,116 @@ export function validateRewardAuthenticatedConsumerRuntimeBinding(binding) {
   return binding;
 }
 
+function materializedBindingCore(input) {
+  const values = exactDataValues(
+    input,
+    MATERIALIZED_BINDING_INPUT_KEYS,
+    "INVALID_REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_BINDING_INPUT",
+  );
+  if (values.environment !== "PRODUCTION") {
+    throw new Error("reward authenticated materialized consumer binding requires PRODUCTION");
+  }
+  return {
+    schema: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_BINDING_SCHEMA,
+    status: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_STATUS,
+    environment: "PRODUCTION",
+    runtimeIdentitySha256: asDigest(values.runtimeIdentitySha256, "runtime identity"),
+    productionIdentityFreezeManifestSha256: asDigest(
+      values.productionIdentityFreezeManifestSha256,
+      "production identity-freeze manifest",
+    ),
+    productionDeploymentDomainSha256: asDigest(
+      values.productionDeploymentDomainSha256,
+      "production deployment domain",
+    ),
+    productionPersistenceIdentitySha256: asDigest(
+      values.productionPersistenceIdentitySha256,
+      "production persistence identity",
+    ),
+    rewardAdapterSchema: asIdentifier(values.rewardAdapterSchema, "reward adapter schema"),
+    rewardAdapterSchemaVersion: asPositiveVersion(
+      values.rewardAdapterSchemaVersion,
+      "reward adapter schema version",
+    ),
+    rewardSchemaManifestSha256: asDigest(
+      values.rewardSchemaManifestSha256,
+      "reward schema manifest",
+    ),
+    rewardGenesisEntitySetSha256: asDigest(
+      values.rewardGenesisEntitySetSha256,
+      "reward Genesis entity set",
+    ),
+    anchorNamespaceSha256: asDigest(values.anchorNamespaceSha256, "anchor namespace"),
+    providerTrustBindingSha256: asDigest(
+      values.providerTrustBindingSha256,
+      "provider trust binding",
+    ),
+    providerTrustRootSha256: asDigest(values.providerTrustRootSha256, "provider trust root"),
+    providerKeyRegistrySnapshotSha256: asDigest(
+      values.providerKeyRegistrySnapshotSha256,
+      "provider key-registry snapshot",
+    ),
+    providerReceiptDomainSha256: asDigest(
+      values.providerReceiptDomainSha256,
+      "provider receipt domain",
+    ),
+    ownerProductionKeyEvidenceSha256: asDigest(
+      values.ownerProductionKeyEvidenceSha256,
+      "owner production-key evidence",
+    ),
+    providerReadinessPacketSha256: asDigest(
+      values.providerReadinessPacketSha256,
+      "provider readiness packet",
+    ),
+    failureDomainSeparationEvidenceSha256: asDigest(
+      values.failureDomainSeparationEvidenceSha256,
+      "failure-domain separation evidence",
+    ),
+    consumerInventoryEvidenceSha256: asDigest(
+      values.consumerInventoryEvidenceSha256,
+      "consumer inventory evidence",
+    ),
+    anchorMirrorSchemaManifestSha256: asDigest(
+      values.anchorMirrorSchemaManifestSha256,
+      "anchor mirror schema manifest",
+    ),
+    materializedProjectionSchemaManifestSha256: asDigest(
+      values.materializedProjectionSchemaManifestSha256,
+      "materialized projection schema manifest",
+    ),
+    consumerId: asConsumerId(values.consumerId),
+    projectionKind: asProjectionLabel(values.projectionKind, "projection kind"),
+    projectionKey: asProjectionLabel(values.projectionKey, "projection key"),
+    productionIdentityEvidenceAccepted: false,
+    ...falseBoundary(),
+  };
+}
+
+export function createRewardAuthenticatedMaterializedConsumerRuntimeBinding(input) {
+  const core = materializedBindingCore(input);
+  return Object.freeze({
+    ...core,
+    runtimeBindingSha256: rewardCasStateSha256(core),
+  });
+}
+
+export function validateRewardAuthenticatedMaterializedConsumerRuntimeBinding(binding) {
+  const values = exactDataValues(
+    binding,
+    MATERIALIZED_BINDING_KEYS,
+    "INVALID_REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_BINDING",
+  );
+  const canonical = createRewardAuthenticatedMaterializedConsumerRuntimeBinding(
+    Object.fromEntries(MATERIALIZED_BINDING_INPUT_KEYS.map((key) => [key, values[key]])),
+  );
+  if (JSON.stringify(binding) !== JSON.stringify(canonical)) {
+    throw new Error(
+      "REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_BINDING_DIGEST_MISMATCH",
+    );
+  }
+  return binding;
+}
+
 function requireRewardStore(store, binding) {
   assertCheckpointGatedRewardPersistenceCasAdapter(store);
   if (!store
@@ -473,6 +691,41 @@ function requireConsumerCursor(cursor, binding) {
   }
   cursor.snapshot();
   return cursor;
+}
+
+function requireMaterializedProjection(materializedProjection, binding) {
+  assertSqliteRewardMaterializedProjectionAdapter(materializedProjection);
+  if (materializedProjection.adapterSchema
+      !== REWARD_MATERIALIZED_PROJECTION_SQLITE_ADAPTER_SCHEMA
+    || materializedProjection.schemaVersion
+      !== REWARD_MATERIALIZED_PROJECTION_SQLITE_SCHEMA_VERSION
+    || materializedProjection.status !== REWARD_MATERIALIZED_PROJECTION_STATUS
+    || materializedProjection.schemaManifestSha256
+      !== binding.materializedProjectionSchemaManifestSha256
+    || materializedProjection.durableCursorPersistenceVerified !== true
+    || materializedProjection.localProjectionEventAppendAtomicityVerified !== true
+    || materializedProjection.materializedProjectionStateVerified !== true
+    || materializedProjection.projectionEffectScope
+      !== REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE
+    || materializedProjection.projectionEffectAtomicityVerified !== true
+    || materializedProjection.runtimeAuthenticationVerified !== false
+    || materializedProjection.providerAuthenticityVerified !== false
+    || materializedProjection.externalRollbackAnchorVerified !== false
+    || materializedProjection.rollbackProtectionVerified !== false
+    || materializedProjection.externalSideEffectsAuthorized !== false
+    || materializedProjection.activationReady !== false
+    || materializedProjection.mainnetStatus !== REWARD_MATERIALIZED_PROJECTION_MAINNET_STATUS
+    || typeof materializedProjection.readCursor !== "function"
+    || typeof materializedProjection.readProjectionEvent !== "function"
+    || typeof materializedProjection.readMaterializedProjection !== "function"
+    || typeof materializedProjection.snapshot !== "function"
+    || typeof materializedProjection.consumePermit !== "function") {
+    throw new TypeError(
+      "authenticated materialized reward consumer requires the exact durable projection adapter",
+    );
+  }
+  materializedProjection.snapshot();
+  return materializedProjection;
 }
 
 function assertTrustBindingMatches(binding, trustBinding) {
@@ -612,6 +865,27 @@ function bindCanonicalProjection(projection, permit) {
   });
 }
 
+function bindCanonicalMaterializedProjection(projection, permit) {
+  const core = {
+    schema: REWARD_MATERIALIZED_PROJECTION_COMMITMENT_SCHEMA,
+    consumerId: permit.consumerId,
+    targetCommitSequence: permit.targetCommitSequence,
+    targetCommitSha256: permit.targetCommitSha256,
+    checkpointSha256: permit.checkpointSha256,
+    permitSha256: permit.permitSha256,
+    projectionKind: projection.kind,
+    projectionKey: projection.key,
+    payloadSha256: projection.payloadSha256,
+  };
+  return Object.freeze({
+    kind: projection.kind,
+    key: projection.key,
+    payload: projection.payload,
+    payloadSha256: core.payloadSha256,
+    projectionCommitmentSha256: rewardCasStateSha256(core),
+  });
+}
+
 function consumerHistory(cursor, consumerId) {
   const snapshot = cursor.snapshot();
   const cursors = snapshot.cursors
@@ -659,6 +933,99 @@ function assertCursorAdvanceAllowed(cursor, consumerId, targetSequence) {
       throw new Error("REWARD_AUTHENTICATED_CONSUMER_CURSOR_REPLAY");
     }
     throw new Error("REWARD_AUTHENTICATED_CONSUMER_CURSOR_SKIP_FORBIDDEN");
+  }
+}
+
+function materializedHistory(materializedProjection, binding) {
+  const snapshot = materializedProjection.snapshot();
+  const cursors = snapshot.cursors
+    .filter((record) => record.consumerId === binding.consumerId)
+    .sort((left, right) => (left.cursorRevision < right.cursorRevision ? -1 : 1));
+  const events = snapshot.projectionEvents
+    .filter((record) => record.consumerId === binding.consumerId)
+    .sort((left, right) => (
+      left.targetCommitSequence < right.targetCommitSequence ? -1 : 1
+    ));
+  const states = snapshot.materializedStates
+    .filter((record) => record.consumerId === binding.consumerId)
+    .sort((left, right) => (left.stateRevision < right.stateRevision ? -1 : 1));
+  if (cursors.length !== events.length || cursors.length !== states.length
+    || events.some((record) => record.projectionKind !== binding.projectionKind
+      || record.projectionKey !== binding.projectionKey)
+    || states.some((record) => record.projectionKind !== binding.projectionKind
+      || record.projectionKey !== binding.projectionKey)) {
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_ATOMIC_SET_MISMATCH");
+  }
+  for (let index = 0; index < cursors.length; index += 1) {
+    const cursor = cursors[index];
+    const event = events[index];
+    const state = states[index];
+    validateRewardMaterializedProjectionCursor(cursor, cursors[index - 1] ?? null);
+    validateRewardMaterializedProjectionState(state, cursor, states[index - 1] ?? null);
+    validateRewardMaterializedProjectionEvent(event, cursor, state);
+    if (cursor.targetCommitSequence !== event.targetCommitSequence
+      || cursor.targetCommitSequence !== state.targetCommitSequence) {
+      throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_SEQUENCE_SET_MISMATCH");
+    }
+  }
+  return { cursors, events, states };
+}
+
+function assertMaterializedProjectionReadback({
+  materializedProjection,
+  permit,
+  projection,
+  binding,
+}) {
+  const { cursors, events, states } = materializedHistory(materializedProjection, binding);
+  const current = cursors.at(-1) ?? null;
+  const target = permit.targetCommitSequence;
+  if (!current || current.targetCommitSequence < target) return current;
+  if (current.targetCommitSequence > target) {
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_CURSOR_ALREADY_ADVANCED");
+  }
+  const cursor = cursors.find((record) => record.targetCommitSequence === target);
+  const event = events.find((record) => record.targetCommitSequence === target);
+  const state = states.find((record) => record.targetCommitSequence === target);
+  if (!cursor || !event || !state
+    || cursor.targetCommitSha256 !== permit.targetCommitSha256
+    || cursor.checkpointSha256 !== permit.checkpointSha256
+    || cursor.permitSha256 !== permit.permitSha256
+    || cursor.projectionCommitmentSha256 !== projection.projectionCommitmentSha256
+    || event.projectionKind !== projection.kind
+    || event.projectionKey !== projection.key
+    || event.payloadSha256 !== projection.payloadSha256
+    || event.projectionCommitmentSha256 !== projection.projectionCommitmentSha256
+    || state.projectionKind !== projection.kind
+    || state.projectionKey !== projection.key
+    || state.payloadSha256 !== projection.payloadSha256
+    || state.projectionCommitmentSha256 !== projection.projectionCommitmentSha256
+    || rewardCasStateSha256(state.payload) !== rewardCasStateSha256(projection.payload)) {
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_COMMITTED_PROJECTION_MISMATCH");
+  }
+  const directCursor = materializedProjection.readCursor(binding.consumerId);
+  const directEvent = materializedProjection.readProjectionEvent(binding.consumerId, target);
+  const directState = materializedProjection.readMaterializedProjection(
+    binding.consumerId,
+    binding.projectionKind,
+    binding.projectionKey,
+  );
+  if (directCursor?.cursorSha256 !== cursor.cursorSha256
+    || directEvent?.eventRecordSha256 !== event.eventRecordSha256
+    || directState?.materializedStateSha256 !== state.materializedStateSha256) {
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DIRECT_READBACK_MISMATCH");
+  }
+  return Object.freeze({ cursor, event, state });
+}
+
+function assertMaterializedAdvanceAllowed(materializedProjection, binding, targetSequence) {
+  const { cursors } = materializedHistory(materializedProjection, binding);
+  const currentSequence = cursors.at(-1)?.targetCommitSequence ?? 0n;
+  if (targetSequence !== currentSequence + 1n) {
+    if (targetSequence <= currentSequence) {
+      throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_CURSOR_REPLAY");
+    }
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_CURSOR_SKIP_FORBIDDEN");
   }
 }
 
@@ -826,6 +1193,201 @@ export function validateRewardAuthenticatedConsumerCompositionReceipt(candidate)
   return candidate;
 }
 
+function createMaterializedCompositionReceipt({
+  disposition,
+  binding,
+  permit,
+  anchorReceipt,
+  anchorResult,
+  cursor,
+  event,
+  state,
+}) {
+  const withoutDigest = {
+    schema: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RECEIPT_SCHEMA,
+    status: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_STATUS,
+    disposition,
+    runtimeBindingSha256: binding.runtimeBindingSha256,
+    consumerId: binding.consumerId,
+    targetCommitSequence: permit.targetCommitSequence,
+    targetCommitSha256: permit.targetCommitSha256,
+    checkpointSha256: permit.checkpointSha256,
+    checkpointCommitSequence: anchorReceipt.casCommitSequence,
+    checkpointHeadCommitSha256: anchorReceipt.casHeadCommitSha256,
+    anchorSequence: anchorReceipt.anchorSequence,
+    anchorSha256: anchorReceipt.anchorSha256,
+    providerEnvelopeSequence: anchorReceipt.providerEnvelopeSequence,
+    providerEnvelopeSha256: anchorReceipt.providerEnvelopeSha256,
+    sourceAnchorVerificationReceiptSha256: anchorReceipt.verificationReceiptSha256,
+    durableAnchorReceiptRecordSha256: anchorResult.receiptRecord.receiptRecordSha256,
+    durableAnchorCursorSha256: anchorResult.cursor.cursorSha256,
+    consumerPermitSha256: permit.permitSha256,
+    materializedCursorSha256: cursor.cursorSha256,
+    projectionCommitmentSha256: cursor.projectionCommitmentSha256,
+    materializedProjectionEventRecordSha256: event.eventRecordSha256,
+    materializedStateSha256: state.materializedStateSha256,
+    materializedStateRevision: state.stateRevision,
+    projectionEffectScope: REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE,
+    dailyLawGatePassed: true,
+    configuredRuntimeBindingMatched: true,
+    cryptographicSignaturePrerequisiteVerified: true,
+    exactSignedCheckpointMatched: true,
+    durableLocalAnchorMirrorMatched: true,
+    durableLocalMaterializedProjectionMatched: true,
+    exactReplayReadbackReconciled:
+      disposition
+        === REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.RECONCILED_EXACT_REPLAY,
+    providerAuthenticationVerified: false,
+    providerIdentityVerified: false,
+    productionKeyOwnershipVerified: false,
+    keyRegistryAuthenticityVerified: false,
+    externalProviderDurabilityVerified: false,
+    externalMonotonicityVerified: false,
+    independentRollbackProtectionVerified: false,
+    suppliedStateAuthenticityVerified: false,
+    externalRollbackAnchorVerified: false,
+    materializedProjectionStateVerified: true,
+    projectionEffectAtomicityVerified: true,
+    crossDatabaseAnchorProjectionAtomicityVerified: false,
+    runtimeAuthenticationVerified: false,
+    runtimeConfinementVerified: false,
+    runtimeIntegrationVerified: false,
+    externalSideEffectsAuthorized: false,
+    independentReviewAccepted: false,
+    activationReady: false,
+    mainnetStatus: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_MAINNET_STATUS,
+  };
+  const receipt = Object.freeze({
+    ...withoutDigest,
+    compositionReceiptSha256: rewardCasStateSha256(withoutDigest),
+  });
+  EXECUTED_MATERIALIZED_COMPOSITION_RECEIPTS.add(receipt);
+  validateRewardAuthenticatedMaterializedConsumerCompositionReceipt(receipt);
+  return receipt;
+}
+
+export function validateRewardAuthenticatedMaterializedConsumerCompositionReceipt(candidate) {
+  if (!EXECUTED_MATERIALIZED_COMPOSITION_RECEIPTS.has(candidate)) {
+    throw new Error(
+      "reward authenticated materialized consumer receipt was not issued by this process",
+    );
+  }
+  const receipt = exactDataValues(
+    candidate,
+    MATERIALIZED_RECEIPT_KEYS,
+    "INVALID_REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_COMPOSITION_RECEIPT",
+  );
+  if (receipt.schema !== REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RECEIPT_SCHEMA
+    || receipt.status !== REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_STATUS
+    || !Object.values(REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION)
+      .includes(receipt.disposition)
+    || receipt.mainnetStatus
+      !== REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_MAINNET_STATUS
+    || receipt.projectionEffectScope !== REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE) {
+    throw new Error(
+      "INVALID_REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_COMPOSITION_RECEIPT_HEADER",
+    );
+  }
+  asConsumerId(receipt.consumerId);
+  const targetSequence = asU64(
+    receipt.targetCommitSequence,
+    "materialized receipt target commit sequence",
+  );
+  const stateRevision = asU64(
+    receipt.materializedStateRevision,
+    "materialized receipt state revision",
+  );
+  if (targetSequence === 0n || stateRevision !== targetSequence) {
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_REVISION_MISMATCH");
+  }
+  for (const key of [
+    "runtimeBindingSha256",
+    "targetCommitSha256",
+    "checkpointSha256",
+    "checkpointHeadCommitSha256",
+    "anchorSha256",
+    "providerEnvelopeSha256",
+    "sourceAnchorVerificationReceiptSha256",
+    "durableAnchorReceiptRecordSha256",
+    "durableAnchorCursorSha256",
+    "consumerPermitSha256",
+    "materializedCursorSha256",
+    "projectionCommitmentSha256",
+    "materializedProjectionEventRecordSha256",
+    "materializedStateSha256",
+    "compositionReceiptSha256",
+  ]) asDigest(receipt[key], `materializedReceipt.${key}`);
+  const checkpointSequence = asU64Decimal(
+    receipt.checkpointCommitSequence,
+    "materializedReceipt.checkpointCommitSequence",
+  );
+  const anchorSequence = asU64Decimal(
+    receipt.anchorSequence,
+    "materializedReceipt.anchorSequence",
+    { positive: true },
+  );
+  const providerSequence = asU64Decimal(
+    receipt.providerEnvelopeSequence,
+    "materializedReceipt.providerEnvelopeSequence",
+    { positive: true },
+  );
+  if (targetSequence > checkpointSequence
+    || anchorSequence !== checkpointSequence + 1n
+    || providerSequence !== anchorSequence) {
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_SEQUENCE_MISMATCH");
+  }
+  for (const flag of [
+    "dailyLawGatePassed",
+    "configuredRuntimeBindingMatched",
+    "cryptographicSignaturePrerequisiteVerified",
+    "exactSignedCheckpointMatched",
+    "durableLocalAnchorMirrorMatched",
+    "durableLocalMaterializedProjectionMatched",
+    "materializedProjectionStateVerified",
+    "projectionEffectAtomicityVerified",
+  ]) {
+    if (receipt[flag] !== true) throw new Error(`materializedReceipt.${flag} must be true`);
+  }
+  if (receipt.exactReplayReadbackReconciled
+    !== (receipt.disposition
+      === REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.RECONCILED_EXACT_REPLAY)) {
+    throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RECONCILIATION_MISMATCH");
+  }
+  for (const flag of [
+    "providerAuthenticationVerified",
+    "providerIdentityVerified",
+    "productionKeyOwnershipVerified",
+    "keyRegistryAuthenticityVerified",
+    "externalProviderDurabilityVerified",
+    "externalMonotonicityVerified",
+    "independentRollbackProtectionVerified",
+    "suppliedStateAuthenticityVerified",
+    "externalRollbackAnchorVerified",
+    "crossDatabaseAnchorProjectionAtomicityVerified",
+    "runtimeAuthenticationVerified",
+    "runtimeConfinementVerified",
+    "runtimeIntegrationVerified",
+    "externalSideEffectsAuthorized",
+    "independentReviewAccepted",
+    "activationReady",
+  ]) {
+    if (receipt[flag] !== false) {
+      throw new Error(`materializedReceipt.${flag} must remain false`);
+    }
+  }
+  const expectedSha256 = rewardCasStateSha256(Object.fromEntries(
+    MATERIALIZED_RECEIPT_KEYS
+      .filter((key) => key !== "compositionReceiptSha256")
+      .map((key) => [key, receipt[key]]),
+  ));
+  if (receipt.compositionReceiptSha256 !== expectedSha256) {
+    throw new Error(
+      "REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_COMPOSITION_RECEIPT_DIGEST_MISMATCH",
+    );
+  }
+  return candidate;
+}
+
 export function createRewardAuthenticatedConsumerRuntime(options = {}) {
   const values = exactDataValues(
     options,
@@ -961,6 +1523,187 @@ export function createRewardAuthenticatedConsumerRuntime(options = {}) {
         anchorResult,
         cursor: cursorRecord,
         event: projectionEvent,
+      });
+    },
+  };
+  return Object.freeze(runtime);
+}
+
+export function createRewardAuthenticatedMaterializedConsumerRuntime(options = {}) {
+  const values = exactDataValues(
+    options,
+    [
+      "runtimeBinding",
+      "trustBinding",
+      "rewardStore",
+      "rollbackAnchorMirror",
+      "materializedProjection",
+    ],
+    "INVALID_REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_OPTIONS",
+  );
+  const binding = validateRewardAuthenticatedMaterializedConsumerRuntimeBinding(
+    values.runtimeBinding,
+  );
+  assertTrustBindingMatches(binding, values.trustBinding);
+  const rewardStore = requireRewardStore(values.rewardStore, binding);
+  const rollbackAnchorMirror = requireAnchorMirror(values.rollbackAnchorMirror, binding);
+  const materializedProjection = requireMaterializedProjection(
+    values.materializedProjection,
+    binding,
+  );
+
+  const runtime = {
+    schema: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_SCHEMA,
+    status: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_STATUS,
+    runtimeBindingSha256: binding.runtimeBindingSha256,
+    configuredRuntimeBindingMatched: true,
+    materializedProjectionStateVerified: false,
+    projectionEffectScope: REWARD_MATERIALIZED_PROJECTION_EFFECT_SCOPE,
+    projectionEffectAtomicityVerified: false,
+    providerAuthenticationVerified: false,
+    externalMonotonicityVerified: false,
+    independentRollbackProtectionVerified: false,
+    externalRollbackAnchorVerified: false,
+    crossDatabaseAnchorProjectionAtomicityVerified: false,
+    runtimeAuthenticationVerified: false,
+    runtimeConfinementVerified: false,
+    runtimeIntegrationVerified: false,
+    externalSideEffectsAuthorized: false,
+    activationReady: false,
+    mainnetStatus: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_MAINNET_STATUS,
+    consumeAnchoredMaterializedProjection(input) {
+      const dailyLawState = assertDailyLawWriteAllowed(input?.dailyLawState);
+      const request = exactDataValues(
+        input,
+        CONSUME_INPUT_KEYS,
+        "INVALID_REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_INPUT",
+      );
+      if (request.scope !== REWARD_CONSUMER_SCOPE.LOCAL_PROJECTION) {
+        throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_EXTERNAL_EFFECTS_HOLD");
+      }
+      const consumerId = asConsumerId(request.consumerId);
+      const targetCommitSequence = asU64(
+        request.targetCommitSequence,
+        "target commit sequence",
+      );
+      const targetCommitSha256 = asDigest(request.targetCommitSha256, "target commit digest");
+      if (consumerId !== binding.consumerId || targetCommitSequence === 0n) {
+        throw new Error("REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_TARGET_BINDING_MISMATCH");
+      }
+      const projectionInput = canonicalProjectionInput(request.projection, binding);
+
+      const identity = rewardStore.readPersistenceIdentity();
+      validateRewardCasPersistenceIdentity(identity);
+      const snapshot = rewardStore.snapshot();
+      validateRewardCasSnapshot(snapshot);
+      assertCheckpointBinding({
+        checkpoint: request.checkpoint,
+        identity,
+        snapshot,
+        binding,
+      });
+      const anchorCheckpoint = signedAnchorCheckpointProjection(request.checkpoint);
+
+      const anchorReceipt = verifyRewardExternalRollbackAnchor({
+        trustBinding: values.trustBinding,
+        currentProviderState: request.currentProviderState,
+        providerEnvelope: request.providerEnvelope,
+        requestBytes: request.requestBytes,
+        anchorBytes: request.anchorBytes,
+        expectedRequestNonceSha256: request.expectedRequestNonceSha256,
+        currentAnchorState: request.currentAnchorState,
+        expectedCheckpoint: anchorCheckpoint,
+        evaluationUnixSeconds: request.evaluationUnixSeconds,
+      });
+      assertAnchorReceiptBinding(anchorReceipt, request.checkpoint, binding);
+      const anchorResult = assertDurableAnchorResult({
+        mirror: rollbackAnchorMirror,
+        result: rollbackAnchorMirror.consumeSignedAnchorReceipt({ receipt: anchorReceipt }),
+        receipt: anchorReceipt,
+      });
+
+      const permit = prepareRewardConsumerPermit({
+        dailyLawState,
+        store: rewardStore,
+        checkpoint: request.checkpoint,
+        consumerId,
+        scope: request.scope,
+        targetCommitSequence,
+        targetCommitSha256,
+      });
+      const projection = bindCanonicalMaterializedProjection(projectionInput, permit);
+      const existing = assertMaterializedProjectionReadback({
+        materializedProjection,
+        permit,
+        projection,
+        binding,
+      });
+      let disposition;
+      let cursorRecord;
+      let projectionEvent;
+      let materializedState;
+      if (existing?.cursor) {
+        disposition =
+          REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.RECONCILED_EXACT_REPLAY;
+        cursorRecord = existing.cursor;
+        projectionEvent = existing.event;
+        materializedState = existing.state;
+      } else {
+        assertMaterializedAdvanceAllowed(
+          materializedProjection,
+          binding,
+          targetCommitSequence,
+        );
+        const result = materializedProjection.consumePermit({
+          dailyLawState,
+          permit,
+          consumerId,
+          targetCommitSequence,
+          targetCommitSha256,
+          projection: {
+            kind: projection.kind,
+            key: projection.key,
+            payload: projection.payload,
+          },
+        });
+        if (!result || !Object.values(REWARD_MATERIALIZED_PROJECTION_DISPOSITION)
+          .includes(result.disposition)) {
+          throw new Error(
+            "REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_COMMIT_RESULT_MISMATCH",
+          );
+        }
+        const readback = assertMaterializedProjectionReadback({
+          materializedProjection,
+          permit,
+          projection,
+          binding,
+        });
+        if (!readback?.cursor
+          || readback.cursor.cursorSha256 !== result.cursor?.cursorSha256
+          || readback.event.eventRecordSha256 !== result.projectionEvent?.eventRecordSha256
+          || readback.state.materializedStateSha256
+            !== result.materializedState?.materializedStateSha256) {
+          throw new Error(
+            "REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_COMMIT_READBACK_MISMATCH",
+          );
+        }
+        disposition = result.disposition === REWARD_MATERIALIZED_PROJECTION_DISPOSITION.COMMITTED
+          ? REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.COMMITTED
+          : REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_DISPOSITION.RECONCILED_EXACT_REPLAY;
+        cursorRecord = readback.cursor;
+        projectionEvent = readback.event;
+        materializedState = readback.state;
+      }
+
+      return createMaterializedCompositionReceipt({
+        disposition,
+        binding,
+        permit,
+        anchorReceipt,
+        anchorResult,
+        cursor: cursorRecord,
+        event: projectionEvent,
+        state: materializedState,
       });
     },
   };

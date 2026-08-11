@@ -313,6 +313,51 @@ test("durable cursor consumes branded permits contiguously and survives reopen",
   assert.equal(validateRewardConsumerProjectionEventRecord(firstProjectionEvent, first), firstProjectionEvent);
 });
 
+test("nonempty Buffer and Uint8Array payloads detach across commit, reopen, reads, and replay denial", (t) => {
+  const context = fixture(t);
+  const permitRecord = permit(context, "reward-byte-projection-v1", 1n);
+  const bufferBytes = Buffer.from([1, 2, 3, 4]);
+  const typedBytes = new Uint8Array([5, 6, 7, 8]);
+  const input = {
+    ...consumeInput(permitRecord),
+    projection: {
+      kind: "reward-ledger-projection",
+      key: "canonical-reward-state",
+      payload: { bufferBytes, typedBytes },
+    },
+  };
+  const cursor = context.cursorStore().consumePermit(input);
+  bufferBytes[0] = 99;
+  typedBytes[0] = 99;
+  let event = context.cursorStore().readProjectionEvent(permitRecord.consumerId, 1n);
+  assert.deepEqual([...event.payload.bufferBytes], [1, 2, 3, 4]);
+  assert.deepEqual([...event.payload.typedBytes], [5, 6, 7, 8]);
+
+  event.payload.bufferBytes[1] = 88;
+  event.payload.typedBytes[1] = 88;
+  event = context.cursorStore().readProjectionEvent(permitRecord.consumerId, 1n);
+  assert.deepEqual([...event.payload.bufferBytes], [1, 2, 3, 4]);
+  assert.deepEqual([...event.payload.typedBytes], [5, 6, 7, 8]);
+
+  const reopened = context.reopenCursor();
+  event = reopened.readProjectionEvent(permitRecord.consumerId, 1n);
+  assert.deepEqual([...event.payload.bufferBytes], [1, 2, 3, 4]);
+  assert.deepEqual([...event.payload.typedBytes], [5, 6, 7, 8]);
+  const beforeReplay = reopened.snapshot();
+  assert.throws(() => reopened.consumePermit({
+    ...input,
+    projection: {
+      ...input.projection,
+      payload: {
+        bufferBytes: Buffer.from([1, 2, 3, 4]),
+        typedBytes: new Uint8Array([5, 6, 7, 8]),
+      },
+    },
+  }), /CURSOR_REPLAY/u);
+  assert.deepEqual(reopened.snapshot(), beforeReplay);
+  assert.equal(reopened.readCursor(permitRecord.consumerId).cursorSha256, cursor.cursorSha256);
+});
+
 test("replay, skip, copied permits, and cross-consumer substitution fail without mutation", (t) => {
   const context = fixture(t);
   const cursor = context.cursorStore();

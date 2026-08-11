@@ -6,26 +6,32 @@ every external effect remain **HOLD**.
 [`reward-authenticated-consumer-runtime.mjs`](../../programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs)
 closes one narrow reference gap: the provider-envelope verifier, signed reward
 rollback anchor, durable local anchor mirror, exact-checkpoint reward-consumer
-permit, and durable local cursor/projection event now have one static,
-inventory-visible call path. The returned object exposes only
-`consumeAnchoredLocalProjection`; it does not expose the injected reward store,
-anchor mirror, consumer cursor, or process-branded permit.
+permit, and durable local projection persistence now have static,
+inventory-visible call paths. The V1 factory retains
+`consumeAnchoredLocalProjection` and its cursor/event receipt. The separate V2
+factory exposes `consumeAnchoredMaterializedProjection`, which atomically
+persists a cursor, event, and canonical projection state in one local SQLite
+database. Neither runtime exposes its injected reward store, anchor mirror,
+cursor/projection adapter, or process-branded permit.
 
 This is not a production provider client, credential loader, network adapter,
-materialized reward projection, payment executor, runtime-confinement proof,
-or launch switch. No app or worker calls it. Its production binding fields are
+payment executor, runtime-confinement proof, cross-database transaction, or
+launch switch. No statically visible app or worker caller is present, but the
+source inventory cannot reject a caller that computes a property name at
+runtime or obtains it reflectively. Its production binding fields are
 currently unavailable, provider readiness remains `BLOCKED`, and its broad
 truth flags remain false.
 
 ## Exact configuration boundary
 
-The factory accepts exactly five caller-supplied values:
+Each factory accepts exactly five caller-supplied values:
 
 - one content-addressed runtime binding;
 - one explicit `PRODUCTION` `EXTERNAL_CHECKPOINT_PROVIDER` trust binding;
 - the exact checkpoint-gated reward SQLite store;
 - the exact durable rollback-anchor SQLite mirror; and
-- the exact durable reward-consumer cursor.
+- either the exact durable V1 reward-consumer cursor or the exact V2
+  materialized-projection adapter.
 
 The runtime binding has no defaults. It commits to:
 
@@ -38,12 +44,18 @@ The runtime binding has no defaults. It commits to:
   and owner production-key evidence digests;
 - provider-readiness packet, failure-domain separation, and complete consumer-
   inventory evidence digests;
-- rollback-anchor and consumer-cursor schema-manifest digests; and
+- rollback-anchor schema-manifest digest plus either the V1 consumer-cursor
+  manifest or the V2 materialized-projection manifest; and
 - one approved consumer ID, projection kind, and projection key.
+
+V1 and V2 use distinct binding schemas and content-addressed digests. V2's
+field is named `materializedProjectionSchemaManifestSha256`; it cannot relabel
+or reuse V1's `consumerCursorSchemaManifestSha256`. A cursor manifest supplied
+to V2 is rejected before an operation can write projection state.
 
 Before reading any adapter property, the factory requires a process-private
 factory brand from the exact loaded checkpoint-gated store, rollback-anchor
-mirror, and consumer-cursor modules. The brands are held only in module-local
+mirror, and selected cursor/projection module. The brands are held only in module-local
 `WeakSet`s; exported assertions can test membership but cannot add it. Exact-
 property clones, bound-method aliases, transparent or hostile proxies,
 prototype lookalikes, and accessor-backed fakes therefore fail before their
@@ -67,9 +79,11 @@ key-registry resource ID, owner key-evidence digest, maximum envelope age,
 future skew, and key-overlap sequence bound. There is no default key, identity,
 provider, tenant, service, or resource.
 
-## One ordered local operation
+## Ordered local operations
 
-`consumeAnchoredLocalProjection` accepts an exact data-only input containing:
+Both `consumeAnchoredLocalProjection` and
+`consumeAnchoredMaterializedProjection` accept the same exact data-only input
+containing:
 
 - the canonical Daily-Law state;
 - current supplied provider-envelope and reward-anchor states;
@@ -102,26 +116,33 @@ The operation proceeds in this order:
    constructor. It revalidates the local reward snapshot, exact checkpoint,
    target commit, operation-specific proof, and indivisible reservation
    evidence, returning a process-branded local-only permit.
-7. The permit and canonical projection enter the existing durable consumer
-   cursor. Cursor and projection event commit atomically, then are read back and
-   checked against the permit, checkpoint, target, payload, and configured
-   runtime binding.
+7. On V1, the permit and canonical projection enter the existing durable
+   consumer cursor; cursor and projection event commit atomically. On V2, the
+   permit enters the process-branded materialized adapter; cursor, projection
+   event, and canonical full state commit atomically in its one local SQLite
+   transaction. The selected complete record set is read back through both
+   snapshot and direct-read APIs and checked against the permit, checkpoint,
+   target, payload, adapter manifest, and configured runtime binding.
 8. A frozen process-branded composition receipt binds both durable local
    records and preserves every nonauthorization fact.
 
-All integration calls and imports are static. The guarded-source inventory
-pins this module's exact SHA-256 and exact marker locations. A new caller,
-alias, computed access, direct table path, raw store path, or change to this
-module fails that source gate until an explicit ledger update and review.
+The two reference compositions themselves use only static calls and imports.
+The guarded-source inventory pins this module's exact SHA-256 and exact static
+marker locations. A new literal caller, alias retaining a guarded token,
+encoded static token, direct table path, raw store path, or change to this
+module fails that static source check until an explicit ledger update and
+review. Runtime-computed member dispatch, two-step function extraction, and
+reflection are not rejected by that check; exhaustive deployable-path
+inventory and runtime confinement remain false.
 
 ## Partial commit and reconciliation boundary
 
-The rollback-anchor database and consumer-cursor database are separate local
-persistence units. They do not share one SQLite transaction. If the signed
-anchor commits and later permit or cursor processing fails, the anchor remains
-validly advanced while no consumer event exists. Retrying the exact signed
-exchange is idempotent at the anchor mirror and can continue the consumer
-operation.
+The rollback-anchor database and selected cursor/projection database are
+separate local persistence units. They do not share one SQLite transaction. If
+the signed anchor commits and later permit or projection processing fails, the
+anchor remains validly advanced while no consumer event/state exists. Retrying
+the exact signed exchange is idempotent at the anchor mirror and can continue
+the consumer operation.
 
 If the consumer cursor/event transaction commits but the caller loses the
 return value, an exact retry re-verifies the signed exchange, reconciles the
@@ -131,9 +152,16 @@ permit digest, checkpoint, projection namespace, or payload cannot reconcile
 over the committed record. A cursor already beyond the requested sequence is
 not treated as an exact retry.
 
+The V2 equivalent returns `RECONCILED_EXACT_REPLAY` only after exact durable
+readback of the cursor, event, and materialized state. Changed bytes,
+namespace, permit, checkpoint, or target fail closed. Within that projection
+database, `projectionEffectAtomicityVerified: true` is valid only on the
+post-readback receipt and only with
+`projectionEffectScope: DURABLE_LOCAL_SQLITE_STATE_ONLY`.
+
 This is local recovery, not distributed atomicity. There is no transaction
-with a provider, materialized projection, queue, webhook, token transfer, or
-other service. Whole-unit rollback of both local databases and both supplied
+with a provider, queue, webhook, token transfer, external database, or other
+service. Whole-unit rollback of both local databases and both supplied
 provider/anchor states remains undetectable without an independent higher
 anchor.
 
@@ -142,24 +170,29 @@ anchor.
 A valid composition receipt establishes only that this process observed:
 
 - a passing Daily-Law write gate;
-- three exact factory-created, process-branded local adapters rather than
-  structural clones or proxies;
+- three exact factory-created, process-branded local adapters for the selected
+  V1 or V2 path rather than structural clones or proxies;
 - exact configured local runtime-binding matches;
 - the predecessor verifier's canonical Ed25519 signature prerequisite;
 - an exact signed checkpoint equal to the validated local reward head;
 - an exact durable local anchor receipt and mirror cursor;
-- an exact durable local consumer cursor and projection event; and
-- either a new local cursor/event commit or exact lost-return readback.
+- an exact durable local consumer cursor and projection event on V1, or an
+  exact durable local cursor/event/full-state triplet on V2; and
+- either a new selected local commit or exact lost-return readback.
 
 The positive field is
 `cryptographicSignaturePrerequisiteVerified`, not provider authentication.
-Likewise, `durableLocalAnchorMirrorMatched` and
-`durableLocalCursorEventMatched` describe local records only.
+Likewise, `durableLocalAnchorMirrorMatched`,
+`durableLocalCursorEventMatched`, and
+`durableLocalMaterializedProjectionMatched` describe local records only. V2's
+receipt sets `materializedProjectionStateVerified` and
+`projectionEffectAtomicityVerified` true only after exact readback and only for
+the local SQLite state scope; the newly constructed empty runtime keeps those
+operation facts false.
 
 ## Deliberate HOLD boundary
 
-The runtime and/or every composition receipt preserve these broader fields as
-false:
+Both runtimes and receipts preserve these broader fields as false:
 
 - `providerAuthenticationVerified`;
 - `providerIdentityVerified`;
@@ -169,8 +202,9 @@ false:
 - `externalMonotonicityVerified`;
 - `independentRollbackProtectionVerified`;
 - `suppliedStateAuthenticityVerified`;
-- `materializedProjectionStateVerified`;
-- `projectionEffectAtomicityVerified`;
+- `externalRollbackAnchorVerified`;
+- `crossDatabaseAnchorProjectionAtomicityVerified`;
+- `runtimeAuthenticationVerified`;
 - `runtimeConfinementVerified`;
 - `runtimeIntegrationVerified`;
 - `externalSideEffectsAuthorized`;
@@ -185,6 +219,12 @@ only this path or that a deployed process cannot load other code. Process-
 private adapter identity blocks in-process structural substitution at this
 constructor; it is not final-artifact runtime confinement and does not prevent
 other code from retaining or invoking an underlying store.
+
+The V1 runtime and receipt also keep `materializedProjectionStateVerified` and
+`projectionEffectAtomicityVerified` false. The V2 runtime keeps them false
+until an operation succeeds; only its process-issued, post-readback receipt
+sets them true, inseparably from
+`projectionEffectScope: DURABLE_LOCAL_SQLITE_STATE_ONLY`.
 
 ## Missing production inputs and evidence
 
@@ -204,16 +244,17 @@ owner-selected and independently reviewed values for:
    and a complete downstream consumer inventory;
 6. authenticated provider read/CAS, linearizability, monotonicity, outage,
    uncertain-response, rollback, backup/restore, RTO, and RPO evidence;
-7. a same-transaction materialized projection or reviewed durable outbox with
-   cross-system idempotency;
+7. reviewed cross-database anchor/projection recovery plus any durable outbox,
+   external effect, and cross-system idempotency required by the production
+   consumer;
 8. final-artifact runtime confinement and enforcement against dynamic loading,
    alternate clients, retained raw stores, and direct database access;
 9. exact final binaries and full adversarial Devnet rehearsal; and
 10. independent security, operations, economic, privacy, legal, and disaster-
     recovery acceptance plus terminal authorization.
 
-No runtime binding, signature, mirror row, permit, cursor, projection event, or
-composition receipt from this module is a provider credential, authenticated
-production observation, independent rollback proof, materialized reward,
-external-effect authorization, Devnet result, deployment, or Mainnet
-authorization.
+No runtime binding, signature, mirror row, permit, cursor, projection event,
+local materialized state, or composition receipt from this module is a
+provider credential, authenticated production observation, independent
+rollback proof, externally durable reward, external-effect authorization,
+Devnet result, deployment, or Mainnet authorization.

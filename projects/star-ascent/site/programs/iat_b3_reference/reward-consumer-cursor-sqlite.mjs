@@ -292,11 +292,17 @@ function u64FromBe(value, label) {
 
 function cloneAndFreeze(value) {
   const copy = structuredClone(value);
+  const seen = new Set();
   const freeze = (entry) => {
-    if (entry && typeof entry === "object" && !Object.isFrozen(entry)) {
-      for (const child of Object.values(entry)) freeze(child);
-      Object.freeze(entry);
-    }
+    if (entry === null || typeof entry !== "object" || seen.has(entry)) return entry;
+    seen.add(entry);
+    // ECMAScript forbids freezing a nonempty integer-indexed view. The typed
+    // CAS codec and structuredClone above already detach the bytes; each
+    // public read returns another detached clone, so no durable/caller alias
+    // is exposed even though the copied view itself cannot be frozen.
+    if (Buffer.isBuffer(entry) || entry instanceof Uint8Array) return entry;
+    for (const child of Object.values(entry)) freeze(child);
+    Object.freeze(entry);
     return entry;
   };
   return freeze(copy);

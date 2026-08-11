@@ -41,6 +41,7 @@ const U64_MAX = (1n << 64n) - 1n;
 const CONSUMER_ID = /^[a-z0-9](?:[a-z0-9._-]{0,126}[a-z0-9])?$/u;
 const PROJECTION_LABEL = /^[a-z0-9](?:[a-z0-9._:/-]{0,126}[a-z0-9])?$/u;
 const HEX_32_CHECK = "length(%s) = 64 AND %s NOT GLOB '*[^0-9a-f]*'";
+const SQLITE_REWARD_MATERIALIZED_PROJECTION_ADAPTERS = new WeakSet();
 const ACCEPTED_FAULTS = new Set([
   null,
   ...Object.values(REWARD_MATERIALIZED_PROJECTION_SQLITE_TEST_FAULT),
@@ -1118,6 +1119,23 @@ function exactReplayResult(history, permit, projection) {
   );
 }
 
+/**
+ * Require a materialized-projection adapter created by this exact loaded
+ * module instance. Candidate properties are never read before process-private
+ * WeakSet membership succeeds, so clones, aliases, proxies, prototypes, and
+ * accessor fakes cannot manufacture the factory brand.
+ */
+export function assertSqliteRewardMaterializedProjectionAdapter(value) {
+  if ((typeof value !== "object" && typeof value !== "function")
+    || value === null
+    || !SQLITE_REWARD_MATERIALIZED_PROJECTION_ADAPTERS.has(value)) {
+    throw new TypeError(
+      "materialized reward projection requires its process-branded SQLite adapter",
+    );
+  }
+  return value;
+}
+
 export function createSqliteRewardMaterializedProjection({
   databasePath,
   busyTimeoutMs = 0,
@@ -1288,5 +1306,7 @@ export function createSqliteRewardMaterializedProjection({
       }
     },
   };
-  return Object.freeze(store);
+  const frozen = Object.freeze(store);
+  SQLITE_REWARD_MATERIALIZED_PROJECTION_ADAPTERS.add(frozen);
+  return frozen;
 }
