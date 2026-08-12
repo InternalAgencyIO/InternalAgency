@@ -139,6 +139,9 @@ pub enum RewardCapacityRecomputationError {
     UnsupportedPriority,
     WorkspaceLengthMismatch,
     CandidateCountMismatch,
+    DuplicateCandidateId,
+    DuplicateCccQualificationPda,
+    MultipleWeeklyFactionManifests,
     CandidateIdMismatch,
     CandidateDigestMismatch,
     CandidateOrderMismatch,
@@ -178,6 +181,9 @@ pub struct RewardCapacityRecomputationTruth {
     pub committed_ccc_order_recomputed: bool,
     pub lane_waterfall_recomputed: bool,
     pub downstream_commitments_recomputed: bool,
+    pub candidate_id_uniqueness_verified: bool,
+    pub per_ccc_priority_tier_qualification_pda_uniqueness_verified: bool,
+    pub at_most_one_weekly_faction_manifest_verified: bool,
     pub canonical_seal_semantics_verified: bool,
     pub candidate_identifier_derivations_verified: bool,
     pub non_ccc_chronology_recomputed: bool,
@@ -201,6 +207,9 @@ pub const REWARD_CAPACITY_RECOMPUTATION_TRUTH: RewardCapacityRecomputationTruth 
         committed_ccc_order_recomputed: true,
         lane_waterfall_recomputed: true,
         downstream_commitments_recomputed: true,
+        candidate_id_uniqueness_verified: true,
+        per_ccc_priority_tier_qualification_pda_uniqueness_verified: true,
+        at_most_one_weekly_faction_manifest_verified: true,
         canonical_seal_semantics_verified: false,
         candidate_identifier_derivations_verified: false,
         non_ccc_chronology_recomputed: false,
@@ -324,6 +333,7 @@ pub fn verify_reward_capacity_allocation_recomputation(
     if parsed.ledger_sha256 != batch.pre_ledger_sha256 {
         return Err(RewardCapacityRecomputationError::LedgerDigestMismatch);
     }
+    validate_sealed_candidate_uniqueness(workspace.candidates)?;
 
     for (index, slot) in workspace.allocation_order.iter_mut().enumerate() {
         *slot = u32::try_from(index)
@@ -449,6 +459,34 @@ pub fn verify_reward_capacity_allocation_recomputation(
         outcome_sha256,
         finalization_sha256,
     })
+}
+
+fn validate_sealed_candidate_uniqueness(
+    candidates: &[RewardCapacityCandidateScratch],
+) -> Result<(), RewardCapacityRecomputationError> {
+    let mut weekly_faction_count = 0usize;
+    for (index, candidate) in candidates.iter().enumerate() {
+        if candidate.priority == Priority::WeeklyFaction {
+            weekly_faction_count = weekly_faction_count
+                .checked_add(1)
+                .ok_or(RewardCapacityRecomputationError::MultipleWeeklyFactionManifests)?;
+            if weekly_faction_count > 1 {
+                return Err(RewardCapacityRecomputationError::MultipleWeeklyFactionManifests);
+            }
+        }
+        for previous in &candidates[..index] {
+            if candidate.id == previous.id {
+                return Err(RewardCapacityRecomputationError::DuplicateCandidateId);
+            }
+            if candidate.priority.is_ccc()
+                && candidate.priority == previous.priority
+                && candidate.qualification_pda == previous.qualification_pda
+            {
+                return Err(RewardCapacityRecomputationError::DuplicateCccQualificationPda);
+            }
+        }
+    }
+    Ok(())
 }
 
 #[derive(Clone, Copy)]

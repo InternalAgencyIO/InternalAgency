@@ -47,6 +47,18 @@ fn fixture() -> Vectors {
     }
 }
 
+fn hostile_fixture(name: &str) -> Vectors {
+    let values: BTreeMap<&str, &str> = FIXTURE
+        .lines()
+        .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        .map(|line| line.split_once('=').expect("valid fixture line"))
+        .collect();
+    let mut vectors = fixture();
+    vectors.seal = decode_hex(values[format!("hostile.{name}.seal").as_str()]);
+    vectors.batch = decode_hex(values[format!("hostile.{name}.batch").as_str()]);
+    vectors
+}
+
 fn decode_hex(value: &str) -> Vec<u8> {
     assert_eq!(value.len() % 2, 0);
     value
@@ -144,6 +156,26 @@ fn rejects_a_digest_rebound_seal_outside_the_supported_prevalidated_shape() {
 }
 
 #[test]
+fn rejects_host_generated_digest_rebound_uniqueness_violations() {
+    for (name, expected) in [
+        (
+            "duplicateCandidateId",
+            RewardCapacityRecomputationError::DuplicateCandidateId,
+        ),
+        (
+            "duplicateCccQualificationPda",
+            RewardCapacityRecomputationError::DuplicateCccQualificationPda,
+        ),
+        (
+            "multipleWeeklyFactionManifests",
+            RewardCapacityRecomputationError::MultipleWeeklyFactionManifests,
+        ),
+    ] {
+        assert_eq!(verify(&hostile_fixture(name)), Err(expected), "{name}");
+    }
+}
+
+#[test]
 fn rejects_wrong_reveal_and_any_receipt_semantic_mutation() {
     let mut wrong_reveal = fixture();
     wrong_reveal.randomness[0] ^= 1;
@@ -231,6 +263,9 @@ fn truth_boundary_is_permanently_nonactivating_and_hold() {
     assert!(truth.committed_ccc_order_recomputed);
     assert!(truth.lane_waterfall_recomputed);
     assert!(truth.downstream_commitments_recomputed);
+    assert!(truth.candidate_id_uniqueness_verified);
+    assert!(truth.per_ccc_priority_tier_qualification_pda_uniqueness_verified);
+    assert!(truth.at_most_one_weekly_faction_manifest_verified);
     assert!(!truth.canonical_seal_semantics_verified);
     assert!(!truth.candidate_identifier_derivations_verified);
     assert!(!truth.non_ccc_chronology_recomputed);

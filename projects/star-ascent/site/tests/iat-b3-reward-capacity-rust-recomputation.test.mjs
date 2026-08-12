@@ -16,6 +16,7 @@ import {
   createCccPrecommitRegistrySnapshot,
   createCccRevealCommitment,
   sealRewardCapacityRound,
+  validateFinalizedRewardCapacityRound,
 } from "../programs/iat_b3_reference/reward-capacity-waterfall.mjs";
 import {
   createDailyLawState,
@@ -135,8 +136,13 @@ function xBound(rewardIdNumber, trancheKind, sequence) {
   };
 }
 
-function factionManifest() {
-  const rewardId = hex(80_001);
+function factionManifest({
+  rewardNumber = 80_001,
+  weekId = "week-1",
+  sequence = 80,
+  identity = "faction-follower-1",
+} = {}) {
+  const rewardId = hex(rewardNumber);
   const trancheKinds = ["X_BASE_10"];
   const fragment = {
     id: sha256(`IAT_B3_X_FUNDING_V1|${rewardId}|${FUNDING_ROUND}|${trancheKinds[0]}`),
@@ -150,16 +156,16 @@ function factionManifest() {
     fundingPool: "SHARED_REWARD_RESERVE",
     reservationStatus: "NEW_UNRESERVED",
     chronology: {
-      eligibleSequence: 80n,
-      activitySequence: 80n,
-      nodeSequence: 80n,
-      immutableIdentity: "faction-follower-1",
+      eligibleSequence: BigInt(sequence),
+      activitySequence: BigInt(sequence),
+      nodeSequence: BigInt(sequence),
+      immutableIdentity: identity,
       commitmentDigest: rewardId,
     },
   };
   return buildWeeklyFactionManifestObligation({
     fundingRoundAtUnixSeconds: FUNDING_ROUND,
-    factionWeekId: "week-1",
+    factionWeekId: weekId,
     followerObligations: [fragment],
   });
 }
@@ -212,6 +218,7 @@ function canonicalVectors() {
   const outcomes = [...allocation.funded, ...allocation.nullOutcomes]
     .sort((left, right) => allocation.orderedIds.indexOf(left.id) - allocation.orderedIds.indexOf(right.id));
   return Object.freeze({
+    roundState: allocation.roundState,
     sealBytes: canonicalBytes(allocation.roundState.roundSeal),
     batchBytes: encodeAllocatorBatchFromFinalizedRound(allocation.roundState),
     receiptBytes: outcomes.map((outcome, allocationIndex) => encodeAllocatorReceiptFromOutcome({
@@ -225,8 +232,47 @@ function canonicalVectors() {
   });
 }
 
+function bindHostileSeal(canonical, mutate) {
+  const roundSeal = structuredClone(canonical.roundState.roundSeal);
+  mutate(roundSeal);
+  roundSeal.candidateSetSha256 = sha256(canonicalBytes(roundSeal.candidates));
+  const sealBytes = canonicalBytes(roundSeal);
+  const batchBytes = Buffer.from(canonical.batchBytes);
+  createHash("sha256").update(sealBytes).digest().copy(batchBytes, 88);
+  Buffer.from(roundSeal.candidateSetSha256, "hex").copy(batchBytes, 120);
+  return Object.freeze({
+    roundState: Object.freeze({ ...canonical.roundState, roundSeal }),
+    sealBytes,
+    batchBytes,
+  });
+}
+
+function hostileUniquenessVectors(canonical) {
+  return Object.freeze({
+    duplicateCandidateId: bindHostileSeal(canonical, (roundSeal) => {
+      roundSeal.candidates[1].id = roundSeal.candidates[0].id;
+      roundSeal.candidateIds[1] = roundSeal.candidateIds[0];
+    }),
+    duplicateCccQualificationPda: bindHostileSeal(canonical, (roundSeal) => {
+      roundSeal.candidates[1].qualificationPda = roundSeal.candidates[0].qualificationPda;
+    }),
+    multipleWeeklyFactionManifests: bindHostileSeal(canonical, (roundSeal) => {
+      const replacement = factionManifest({
+        rewardNumber: 81_001,
+        weekId: "week-2",
+        sequence: 81,
+        identity: "faction-follower-2",
+      });
+      const index = roundSeal.candidates.length - 1;
+      roundSeal.candidates[index] = replacement;
+      roundSeal.candidateIds[index] = replacement.id;
+    }),
+  });
+}
+
 function renderFixture() {
   const vectors = canonicalVectors();
+  const hostile = hostileUniquenessVectors(vectors);
   const lines = [
     "# Generated only from the exact host reference; consumed read-only by Rust tests.",
     "schema=iat-b3-reward-capacity-rust-recomputation/v1",
@@ -239,6 +285,10 @@ function renderFixture() {
   for (let index = 0; index < vectors.receiptBytes.length; index += 1) {
     lines.push(`receipt.${index}=${vectors.receiptBytes[index].toString("hex")}`);
     lines.push(`reference_core.${index}=${vectors.referenceCores[index].toString("hex")}`);
+  }
+  for (const [name, vector] of Object.entries(hostile)) {
+    lines.push(`hostile.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.${name}.batch=${vector.batchBytes.toString("hex")}`);
   }
   return `${lines.join("\n")}\n`;
 }
@@ -261,6 +311,7 @@ if (UPDATE) {
   test("canonical host allocation bytes exactly match the native recomputation fixture", () => {
     const fixture = parseFixture();
     const vectors = canonicalVectors();
+    const hostile = hostileUniquenessVectors(vectors);
     assert.equal(fixture.schema, "iat-b3-reward-capacity-rust-recomputation/v1");
     assert.equal(fixture.source_id, Buffer.from(SOURCE_ID).toString("hex"));
     assert.equal(fixture.randomness, RANDOMNESS);
@@ -271,11 +322,42 @@ if (UPDATE) {
       assert.equal(fixture[`receipt.${index}`], vectors.receiptBytes[index].toString("hex"));
       assert.equal(fixture[`reference_core.${index}`], vectors.referenceCores[index].toString("hex"));
     }
+    for (const [name, vector] of Object.entries(hostile)) {
+      assert.equal(
+        fixture[`hostile.${name}.seal`],
+        vector.sealBytes.toString("hex"),
+        `${name} seal`,
+      );
+      assert.equal(
+        fixture[`hostile.${name}.batch`],
+        vector.batchBytes.toString("hex"),
+        `${name} batch`,
+      );
+    }
     assert.deepEqual(vectors.dispositions, [
       "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
       "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
       "NULL_UNDERFUNDED", "NULL_BLOCKED", "NULL_BLOCKED",
     ]);
+  });
+
+  test("host validator rejects every uniqueness-hostile seal committed for native parity", () => {
+    const canonical = canonicalVectors();
+    const hostile = hostileUniquenessVectors(canonical);
+    for (const [name, expected] of [
+      ["duplicateCandidateId", /DUPLICATE_REWARD_OBLIGATION_ID/u],
+      ["duplicateCccQualificationPda", /DUPLICATE_CCC_QUALIFICATION_PDA_IN_TIER/u],
+      ["multipleWeeklyFactionManifests", /ONE_AGGREGATE_WEEKLY_FACTION_MANIFEST/u],
+    ]) {
+      assert.throws(
+        () => validateFinalizedRewardCapacityRound({
+          roundState: hostile[name].roundState,
+          cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+        }),
+        expected,
+        name,
+      );
+    }
   });
 
   test("native no_std suite accepts the host vector and rejects hostile committed drift", {
