@@ -35,7 +35,7 @@ const DEFAULT_MANIFEST_PATH = resolve(
 );
 const V2_PARITY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-  sha256: "adf07cb5ff0f2b1d49a79fd724e0385777269b2d7c4055d91934a13995fb843a",
+  sha256: "e24ab3ed90e3f48cf5fb5530d8afa4ab6bb21ff8f15c1cbc08e2f44c28aaa7fb",
 });
 const OWNER_POLICY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
@@ -127,7 +127,7 @@ const ARTIFACTS = Object.freeze({
   ),
   localRehearsal: artifact(
     "projects/star-ascent/site/docs/b3/LOCAL_VALIDATOR_REHEARSAL.md",
-    "749ba3ba66f2ac71246bf45dc0da7c65ada8251999abc9a36fee9c5fa6c8631e",
+    "745608e5bccb1cfbf2e62dea195479cf08298b567fa3c9f7b917b251ef6ed3f5",
   ),
   waterfall: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-reward-capacity-waterfall.v1.json",
