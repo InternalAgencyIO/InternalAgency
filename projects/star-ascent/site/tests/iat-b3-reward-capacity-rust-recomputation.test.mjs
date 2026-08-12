@@ -212,6 +212,7 @@ function factionFragment({
   eligibleSequence = sequence,
   activitySequence = sequence,
   nodeSequence = sequence,
+  commitmentNumber = rewardNumber,
 }) {
   const rewardId = hex(rewardNumber);
   const trancheKinds = [trancheKind];
@@ -231,7 +232,7 @@ function factionFragment({
       activitySequence: BigInt(activitySequence),
       nodeSequence: BigInt(nodeSequence),
       immutableIdentity: identity,
-      commitmentDigest: rewardId,
+      commitmentDigest: hex(commitmentNumber),
     },
     ...(trancheKind === "X_PREMIUM_UPGRADE_90" ? {
       originalBaseAdmissionLineage: {
@@ -281,9 +282,10 @@ function multiEntryFactionManifest() {
         sequence: 91,
         identity: "follower-base",
         amount: 100,
-        eligibleSequence: 3,
-        activitySequence: 2,
-        nodeSequence: 1,
+        eligibleSequence: 5,
+        activitySequence: 9,
+        nodeSequence: 10,
+        commitmentNumber: 990_001,
       }),
       factionFragment({
         rewardNumber: 91_002,
@@ -291,9 +293,10 @@ function multiEntryFactionManifest() {
         sequence: 92,
         identity: "follower-full",
         amount: 200,
-        eligibleSequence: 4,
+        eligibleSequence: 5,
         activitySequence: 9,
-        nodeSequence: 2,
+        nodeSequence: 10,
+        commitmentNumber: 990_001,
       }),
       factionFragment({
         rewardNumber: 91_003,
@@ -302,8 +305,9 @@ function multiEntryFactionManifest() {
         identity: WEEKLY_FACTION_FOLLOWER_IDENTITY,
         amount: 300,
         eligibleSequence: 5,
-        activitySequence: 6,
+        activitySequence: 9,
         nodeSequence: 10,
+        commitmentNumber: 990_001,
       }),
     ],
   });
@@ -728,6 +732,53 @@ function hostileWeeklyPayoutEntryVectors(canonical) {
   });
 }
 
+function hostileWeeklyPayoutUniquenessVectors(canonical) {
+  const rebind = (mutate) => bindHostileSeal(canonical, (roundSeal) => {
+    const candidate = findWeeklyFactionCandidate(roundSeal);
+    assert.equal(candidate.payoutEntries.length, 3, "three-entry uniqueness fixture");
+    mutate(candidate.payoutEntries);
+    refreshWeeklyManifestBindings(roundSeal, candidate);
+  });
+  const deriveFragment = (entry) => sha256(
+    `IAT_B3_X_FUNDING_V1|${entry.rewardId}|${FUNDING_ROUND}|${entry.trancheKinds[0]}`,
+  );
+  const copyFragmentSemantics = (target, source) => {
+    target.rewardId = source.rewardId;
+    target.trancheKinds = [...source.trancheKinds];
+    target.fragmentId = source.fragmentId;
+    if (source.trancheKinds[0] === "X_PREMIUM_UPGRADE_90") {
+      target.originalBaseAdmissionLineage = structuredClone(source.originalBaseAdmissionLineage);
+    } else {
+      delete target.originalBaseAdmissionLineage;
+    }
+  };
+  return Object.freeze({
+    duplicateFragmentAdjacentFirstMiddle: rebind((entries) => {
+      copyFragmentSemantics(entries[1], entries[0]);
+    }),
+    duplicateFragmentFirstLast: rebind((entries) => {
+      copyFragmentSemantics(entries[2], entries[0]);
+    }),
+    duplicateRewardAdjacentDistinctFragment: rebind((entries) => {
+      entries[1].rewardId = entries[0].rewardId;
+      entries[1].originalBaseAdmissionLineage.rewardId = entries[0].rewardId;
+      entries[1].fragmentId = deriveFragment(entries[1]);
+      assert.notEqual(entries[1].fragmentId, entries[0].fragmentId);
+    }),
+    duplicateRewardFirstLastDistinctFragment: rebind((entries) => {
+      entries[2].rewardId = entries[0].rewardId;
+      entries[2].fragmentId = deriveFragment(entries[2]);
+      assert.notEqual(entries[2].fragmentId, entries[0].fragmentId);
+    }),
+    duplicateIdentityAdjacentFirstMiddle: rebind((entries) => {
+      entries[1].chronology.immutableIdentity = entries[0].chronology.immutableIdentity;
+    }),
+    duplicateIdentityFirstLast: rebind((entries) => {
+      entries[2].chronology.immutableIdentity = entries[0].chronology.immutableIdentity;
+    }),
+  });
+}
+
 function replaceBufferOnce(bytes, needle, replacement) {
   const offset = bytes.indexOf(needle);
   assert.ok(offset >= 0, `raw marker ${needle.toString("utf8")}`);
@@ -893,6 +944,7 @@ function renderFixture() {
   const hostileXBound = hostileXBoundVectors(xbound);
   const hostileWeekly = hostileWeeklyFactionVectors(weekly);
   const hostileWeeklyEntry = hostileWeeklyPayoutEntryVectors(weekly);
+  const hostileWeeklyUnique = hostileWeeklyPayoutUniquenessVectors(weekly);
   const rawHostileWeekly = rawHostileWeeklyFactionVectors(weekly);
   const rawHostileWeeklyEntry = rawHostileWeeklyPayoutEntryVectors(weekly);
   const lines = [
@@ -951,6 +1003,10 @@ function renderFixture() {
     lines.push(`hostile.weeklyEntry.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.weeklyEntry.${name}.batch=${vector.batchBytes.toString("hex")}`);
   }
+  for (const [name, vector] of Object.entries(hostileWeeklyUnique)) {
+    lines.push(`hostile.weeklyUnique.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.weeklyUnique.${name}.batch=${vector.batchBytes.toString("hex")}`);
+  }
   for (const [name, vector] of Object.entries(rawHostileWeekly)) {
     lines.push(`hostile.weeklyRaw.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.weeklyRaw.${name}.batch=${vector.batchBytes.toString("hex")}`);
@@ -987,6 +1043,7 @@ if (UPDATE) {
     const hostileXBound = hostileXBoundVectors(xbound);
     const hostileWeekly = hostileWeeklyFactionVectors(weekly);
     const hostileWeeklyEntry = hostileWeeklyPayoutEntryVectors(weekly);
+    const hostileWeeklyUnique = hostileWeeklyPayoutUniquenessVectors(weekly);
     const rawHostileWeekly = rawHostileWeeklyFactionVectors(weekly);
     const rawHostileWeeklyEntry = rawHostileWeeklyPayoutEntryVectors(weekly);
     assert.equal(fixture.schema, "iat-b3-reward-capacity-rust-recomputation/v1");
@@ -1088,6 +1145,18 @@ if (UPDATE) {
         `${name} payout-entry batch`,
       );
     }
+    for (const [name, vector] of Object.entries(hostileWeeklyUnique)) {
+      assert.equal(
+        fixture[`hostile.weeklyUnique.${name}.seal`],
+        vector.sealBytes.toString("hex"),
+        `${name} uniqueness seal`,
+      );
+      assert.equal(
+        fixture[`hostile.weeklyUnique.${name}.batch`],
+        vector.batchBytes.toString("hex"),
+        `${name} uniqueness batch`,
+      );
+    }
     for (const [name, vector] of Object.entries(rawHostileWeekly)) {
       assert.equal(
         fixture[`hostile.weeklyRaw.${name}.seal`],
@@ -1181,6 +1250,21 @@ if (UPDATE) {
       ).chronology.immutableIdentity,
       WEEKLY_FACTION_FOLLOWER_IDENTITY,
     );
+    assert.equal(new Set(candidate.payoutEntries.map(
+      ({ chronology }) => chronology.eligibleSequence,
+    )).size, 1);
+    assert.equal(new Set(candidate.payoutEntries.map(
+      ({ chronology }) => chronology.activitySequence,
+    )).size, 1);
+    assert.equal(new Set(candidate.payoutEntries.map(
+      ({ chronology }) => chronology.nodeSequence,
+    )).size, 1);
+    assert.equal(new Set(candidate.payoutEntries.map(
+      ({ chronology }) => chronology.commitmentDigest,
+    )).size, 1);
+    assert.equal(new Set(candidate.payoutEntries.map(
+      ({ chronology }) => chronology.immutableIdentity,
+    )).size, 3);
     assert.equal(candidate.amount, 600n);
     assert.equal(candidate.followerCount, 3);
     assert.equal(candidate.factionWeekId, WEEKLY_FACTION_WEEK_ID);
@@ -1295,6 +1379,20 @@ if (UPDATE) {
           cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
         }),
         /FACTION|faction|X_BOUND|LINEAGE|lineage|chronology|u64|U64|trim|digest/u,
+        name,
+      );
+    }
+  });
+
+  test("host rejects adjacent and nonadjacent weekly fragment, reward, and identity duplicates", () => {
+    const canonical = weeklyFactionVectors();
+    for (const [name, vector] of Object.entries(hostileWeeklyPayoutUniquenessVectors(canonical))) {
+      assert.throws(
+        () => validateFinalizedRewardCapacityRound({
+          roundState: vector.roundState,
+          cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+        }),
+        /DUPLICATE|duplicate|CANONICALLY_ORDERED/u,
         name,
       );
     }

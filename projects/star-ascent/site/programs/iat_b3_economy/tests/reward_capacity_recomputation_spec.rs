@@ -501,6 +501,40 @@ fn rejects_every_digest_rebound_weekly_payout_entry_shape_and_type_violation() {
 }
 
 #[test]
+fn rejects_adjacent_and_nonadjacent_weekly_entry_identifier_duplicates() {
+    for name in [
+        "duplicateFragmentAdjacentFirstMiddle",
+        "duplicateFragmentFirstLast",
+    ] {
+        assert_eq!(
+            verify(&hostile_weekly_fixture("weeklyUnique", name)),
+            Err(RewardCapacityRecomputationError::DuplicateWeeklyFactionFragmentId),
+            "{name}"
+        );
+    }
+    for name in [
+        "duplicateRewardAdjacentDistinctFragment",
+        "duplicateRewardFirstLastDistinctFragment",
+    ] {
+        assert_eq!(
+            verify(&hostile_weekly_fixture("weeklyUnique", name)),
+            Err(RewardCapacityRecomputationError::DuplicateWeeklyFactionRewardId),
+            "{name}"
+        );
+    }
+    for name in [
+        "duplicateIdentityAdjacentFirstMiddle",
+        "duplicateIdentityFirstLast",
+    ] {
+        assert_eq!(
+            verify(&hostile_weekly_fixture("weeklyUnique", name)),
+            Err(RewardCapacityRecomputationError::DuplicateWeeklyFactionImmutableIdentity),
+            "{name}"
+        );
+    }
+}
+
+#[test]
 fn lineage_contents_remain_external_even_though_upgrade_key_presence_is_enforced() {
     for name in ["upgradeNullLineageContents", "upgradeOpaqueLineageContents"] {
         let result = verify(&hostile_weekly_fixture("weeklyEntry", name));
@@ -712,6 +746,7 @@ fn truth_boundary_is_permanently_nonactivating_and_hold() {
     assert!(truth.weekly_faction_singleton_accepted_tranche_verified);
     assert!(truth.weekly_faction_payout_entry_chronology_field_types_verified);
     assert!(truth.weekly_faction_upgrade_lineage_key_presence_verified);
+    assert!(truth.weekly_faction_fragment_reward_and_identity_uniqueness_verified);
     assert!(!truth.weekly_faction_payout_entry_order_verified);
     assert!(truth.weekly_faction_nested_fragment_identifier_derivations_verified);
     assert!(!truth.weekly_faction_payout_entry_uniqueness_verified);
