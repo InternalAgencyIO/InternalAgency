@@ -8,6 +8,7 @@ import test from "node:test";
 // pinned bytes and executable durability proof in the same fail-closed gate.
 import "./iat-b3-reward-waterfall-audit-sqlite.test.mjs";
 import "./iat-b3-reward-allocator-rust-differential.test.mjs";
+import "./iat-b3-reward-capacity-rust-recomputation.test.mjs";
 
 import {
   REWARD_GUARDED_SOURCE_INVENTORY_MAINNET_STATUS,
@@ -43,6 +44,19 @@ test("canonical guarded entry point retains waterfall and native differential su
     fileURLToPath(new URL("./iat-b3-reward-allocator-rust-differential.test.mjs", import.meta.url)),
     "utf8",
   ));
+  const recomputationTestFileName = [
+    "iat-b3-reward-capacity-rust",
+    "recomputation.test.mjs",
+  ].join("-");
+  const exactRecomputationImport = `import "./${recomputationTestFileName}";`;
+  assert.equal(
+    entryPointSource.split(/\r?\n/u).filter((line) => line === exactRecomputationImport).length,
+    1,
+  );
+  assert.doesNotThrow(() => readFileSync(
+    fileURLToPath(new URL("./iat-b3-reward-capacity-rust-recomputation.test.mjs", import.meta.url)),
+    "utf8",
+  ));
   const packageJson = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
   const canonicalCommand = packageJson.scripts?.["check:iat-b3-spec"];
   assert.equal(typeof canonicalCommand, "string");
@@ -73,10 +87,14 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.deployableRewardConsumerPathsInventoried, false);
   assert.equal(result.dynamicComputedDispatchRejected, false);
   assert.equal(result.reflectiveDispatchRejected, false);
-  assert.equal(result.criticalSources.length, 15);
+  assert.equal(result.criticalSources.length, 16);
   assert.ok(result.criticalSources.some(({ path, sourceSha256 }) => (
     path === "programs/iat_b3_economy/src/reward_allocator_transcript.rs"
       && sourceSha256 === "a9fab4007e1dc7fa24b0e2248ee6ace8cd0c904f7643c87c79311deb6942a99d"
+  )));
+  assert.ok(result.criticalSources.some(({ path, sourceSha256 }) => (
+    path === "programs/iat_b3_economy/src/reward_capacity_recomputation.rs"
+      && sourceSha256 === "421e4538e730482f5e1c235ce6af9e8ac54bbc920fc8023bc0d471fff8ee03f3"
   )));
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs"
@@ -494,10 +512,13 @@ test("critical adapter drift or omission fails before an updated inventory can a
   );
 });
 
-test("native reward transcript bytes, exports, truth, and validator fail closed on drift", () => {
+test("native reward proof bytes, exports, truth, and validators fail closed on drift", () => {
   const modulePath = "programs/iat_b3_economy/src/reward_allocator_transcript.rs";
+  const recomputationPath =
+    "programs/iat_b3_economy/src/reward_capacity_recomputation.rs";
   const libPath = "programs/iat_b3_economy/src/lib.rs";
   assert.ok(productionSources.some(({ path }) => path === modulePath));
+  assert.ok(productionSources.some(({ path }) => path === recomputationPath));
   assert.throws(
     () => auditRewardGuardedSourceFiles(replaceSource(
       modulePath,
@@ -513,6 +534,19 @@ test("native reward transcript bytes, exports, truth, and validator fail closed 
   );
   assert.throws(
     () => auditRewardGuardedSourceFiles(replaceSource(
+      recomputationPath,
+      (source) => `${source}\n// unreviewed native reward recomputation drift\n`,
+    )),
+    /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH:.*reward_capacity_recomputation\.rs/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(
+      productionSources.filter(({ path }) => path !== recomputationPath),
+    ),
+    /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING:.*reward_capacity_recomputation\.rs/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
       libPath,
       (source) => source.replace(
         "validate_reward_allocator_transcript_binding",
@@ -520,6 +554,16 @@ test("native reward transcript bytes, exports, truth, and validator fail closed 
       ),
     )),
     /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:validate_reward_allocator_transcript_binding/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
+      libPath,
+      (source) => source.replace(
+        "verify_reward_capacity_allocation_recomputation",
+        "verify_reward_capacity_allocation_recomputatio_",
+      ),
+    )),
+    /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:verify_reward_capacity_allocation_recomputation/u,
   );
   for (const [path, source, marker] of [
     [
@@ -556,6 +600,36 @@ test("native reward transcript bytes, exports, truth, and validator fail closed 
       "worker/unreviewed-native-reward-reexport.rs",
       "pub use reward_allocator_transcript::*;",
       "pub use reward_allocator_transcript",
+    ],
+    [
+      "worker/unreviewed-native-recomputation-validator.rs",
+      "fn bypass() { verify_reward_capacity_allocation_recomputation(); }",
+      "verify_reward_capacity_allocation_recomputation",
+    ],
+    [
+      "worker/unreviewed-native-recomputation-truth.rs",
+      "const BYPASS: bool = REWARD_CAPACITY_RECOMPUTATION_TRUTH.activation_ready;",
+      "REWARD_CAPACITY_RECOMPUTATION_TRUTH",
+    ],
+    [
+      "worker/unreviewed-native-recomputation-status.rs",
+      "const STATUS: &str = REWARD_CAPACITY_RECOMPUTATION_MAINNET_STATUS;",
+      "REWARD_CAPACITY_RECOMPUTATION_MAINNET_STATUS",
+    ],
+    [
+      "worker/unreviewed-native-recomputation-structural-status.rs",
+      "const STATUS: &str = REWARD_CAPACITY_RECOMPUTATION_STATUS;",
+      "REWARD_CAPACITY_RECOMPUTATION_STATUS",
+    ],
+    [
+      "worker/unreviewed-native-recomputation-module.rs",
+      "mod reward_capacity_recomputation;",
+      "mod reward_capacity_recomputation",
+    ],
+    [
+      "worker/unreviewed-native-recomputation-reexport.rs",
+      "pub use reward_capacity_recomputation::*;",
+      "pub use reward_capacity_recomputation",
     ],
   ]) {
     assert.throws(

@@ -36,6 +36,7 @@ pub mod production_withdraw_position_executor;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod rehearsal_adapter;
 mod reward_allocator_transcript;
+mod reward_capacity_recomputation;
 #[cfg(feature = "runtime-account-lifecycle")]
 pub mod runtime_account_lifecycle;
 #[cfg(feature = "runtime-account-bridge")]
@@ -102,6 +103,13 @@ pub use reward_allocator_transcript::{
     REFERENCE_DEPLOYMENT_DOMAIN_SHA256, REWARD_ALLOCATOR_TRANSCRIPT_MAINNET_STATUS,
     REWARD_ALLOCATOR_TRANSCRIPT_STATUS, REWARD_ALLOCATOR_TRANSCRIPT_TRUTH,
     REWARD_CAPACITY_POLICY_CANONICAL_SHA256,
+};
+pub use reward_capacity_recomputation::{
+    verify_reward_capacity_allocation_recomputation, RewardCapacityCandidateScratch,
+    RewardCapacityCccReveal, RewardCapacityReceiptInput, RewardCapacityRecomputationError,
+    RewardCapacityRecomputationReceipt, RewardCapacityRecomputationTruth,
+    RewardCapacityRecomputationWorkspace, REWARD_CAPACITY_RECOMPUTATION_MAINNET_STATUS,
+    REWARD_CAPACITY_RECOMPUTATION_STATUS, REWARD_CAPACITY_RECOMPUTATION_TRUTH,
 };
 
 use iat_b3_consensus::{
