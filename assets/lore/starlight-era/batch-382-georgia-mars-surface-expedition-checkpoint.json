@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-clean-fresh-round-37-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-37",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -6880,6 +6880,26 @@
           "consentScope": "This pause applies only to this recorded round-37 invitation in scene 1551. It conveys no agreement to any act, participant, prop interaction, scene, country, or future image.",
           "recoveryDecisionContinuity": "This single correction remains the same round-37 event. Alia's invitation, Radiance's explicit pause, partyActivation false, zero willing participants, and every consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Preserve Radiance's raised open wait palm, thoughtful expression, and planted feet. Keep ECE and Alia task-focused and show no celebration cue from anyone."
+        },
+        "visualAudit": {
+          "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-flat-tiles-and-no-wavy-marbling-after-one-recovery",
+          "identity": "pass-four-clearly-adult-identities-with-Alia-braids",
+          "anatomy": "pass-exact-eight-arms-and-eight-hands",
+          "handOwnership": "reject-Ellie-support-hand-owner-arm-disappears-behind-Radiance; clasp-pause-compass-and-mission-owner-paths-pass",
+          "weather": "pass-heavy-straight-rain-and-flat-wet-tiles",
+          "locationThemeFusion": "pass-recognizable-Batumi-with-Alphabet-Tower-Ferris-wheel-sea-skyline-and-four-distinct-expedition-silhouettes",
+          "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-materials-and-footwear",
+          "rolledWardrobe": "pass-Radiance-open-back-Ellie-midriff-Alia-midriff-Alia-strapless-Alia-open-back-and-Radiance-hosiery",
+          "romance": "reject-low-clasp-and-support-palm-pass-but-visible-forearm-side-brace-and-covered-hip-thigh-contact-are-absent",
+          "radianceResponse": "pass-explicit-pause-through-large-open-wait-palm-thoughtful-expression-and-planted-feet",
+          "partyActivation": "pass-partyActivation-false-with-zero-willing-participants-and-no-celebration-cue",
+          "mascots": "reject-one-PAWS-and-one-MAX-are-on-raised-bed-but-MAX-has-a-visible-dark-collar",
+          "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+          "routeMap": "pass-separate-hands-free-holographic-map",
+          "missionHandling": "reject-safe-right-facing-metal-replica-and-orange-insert-pass-but-primary-index-remains-curled-at-guard",
+          "missionTargetAxis": "reject-complete-target-and-backstop-pass-but-paper-center-is-above-muzzle-continuation-and-complete-safety-panel-is-not-auditable",
+          "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+          "accepted": false
         }
       }
     }
@@ -15920,7 +15940,7 @@
       }
     },
     "freshRound37": {
-      "status": "fresh-completed-rejected-recovery-materialized",
+      "status": "completed-rejected-after-single-recovery",
       "preparedAt": "2026-08-12T02:38:58.580Z",
       "sceneNumbers": [
         1551
@@ -16101,9 +16121,16 @@
       "freshCompletedAt": "2026-08-12T02:43:17.990Z",
       "rawOutputs": {
         "1551": {
-          "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-37/scene-1551.png",
-          "sha256": "415E1308BFC54456B0934134E212E73172E55C2E4E9BD90CF6B88EA8B7329073",
-          "preserved": true
+          "fresh": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-37/scene-1551.png",
+            "sha256": "415E1308BFC54456B0934134E212E73172E55C2E4E9BD90CF6B88EA8B7329073",
+            "preserved": true
+          },
+          "recovery": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-37-recovery/scene-1551.png",
+            "sha256": "681FBB937C2726B75D0D0D261088A31A27B8D9F231E284C8200EC8E0DFCE25AD",
+            "preserved": true
+          }
         }
       },
       "freshStrictAudit": {
@@ -16200,6 +16227,40 @@
           "recoveryDecisionContinuity": "This single correction remains the same round-37 event. Alia's invitation, Radiance's explicit pause, partyActivation false, zero willing participants, and every consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Preserve Radiance's raised open wait palm, thoughtful expression, and planted feet. Keep ECE and Alia task-focused and show no celebration cue from anyone."
         }
+      },
+      "completedAt": "2026-08-12T02:50:00.082Z",
+      "recoveryCompletedAt": "2026-08-12T02:50:00.082Z",
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1551
+      ],
+      "rejectionReasons": {
+        "1551": [
+          "Alia now faces safely right with everyone behind the muzzle plane, but her primary index remains curled at the trigger-guard area instead of lying straight above and entirely outside a clearly empty guard.",
+          "The paper route target and complete backstop are visible, but the target center sits substantially above the shoulder-height muzzle continuation and no complete safety panel is auditable between muzzle and target.",
+          "Ellie's support palm is visible on Radiance's back, but the white-sleeved owner arm disappears behind Radiance; the intended forearm-to-side and covered hip-to-thigh braces are absent, leaving only two unambiguous relationship contacts.",
+          "MAX wears a visible dark collar despite the required small young collarless golden retriever state."
+        ]
+      },
+      "strictAudit": {
+        "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-flat-tiles-and-no-wavy-marbling-after-one-recovery",
+        "identity": "pass-four-clearly-adult-identities-with-Alia-braids",
+        "anatomy": "pass-exact-eight-arms-and-eight-hands",
+        "handOwnership": "reject-Ellie-support-hand-owner-arm-disappears-behind-Radiance; clasp-pause-compass-and-mission-owner-paths-pass",
+        "weather": "pass-heavy-straight-rain-and-flat-wet-tiles",
+        "locationThemeFusion": "pass-recognizable-Batumi-with-Alphabet-Tower-Ferris-wheel-sea-skyline-and-four-distinct-expedition-silhouettes",
+        "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-materials-and-footwear",
+        "rolledWardrobe": "pass-Radiance-open-back-Ellie-midriff-Alia-midriff-Alia-strapless-Alia-open-back-and-Radiance-hosiery",
+        "romance": "reject-low-clasp-and-support-palm-pass-but-visible-forearm-side-brace-and-covered-hip-thigh-contact-are-absent",
+        "radianceResponse": "pass-explicit-pause-through-large-open-wait-palm-thoughtful-expression-and-planted-feet",
+        "partyActivation": "pass-partyActivation-false-with-zero-willing-participants-and-no-celebration-cue",
+        "mascots": "reject-one-PAWS-and-one-MAX-are-on-raised-bed-but-MAX-has-a-visible-dark-collar",
+        "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+        "routeMap": "pass-separate-hands-free-holographic-map",
+        "missionHandling": "reject-safe-right-facing-metal-replica-and-orange-insert-pass-but-primary-index-remains-curled-at-guard",
+        "missionTargetAxis": "reject-complete-target-and-backstop-pass-but-paper-center-is-above-muzzle-continuation-and-complete-safety-panel-is-not-auditable",
+        "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+        "accepted": false
       }
     }
   },
@@ -17610,6 +17671,26 @@
         "A copper rear band still crosses Alia's middle back, interrupting the large continuous bare-back construction required by her active fully-open-back roll."
       ],
       "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 37,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-37-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-86c6b11a-21e6-4dad-bf8e-96cecaac244d.png",
+      "sha256": "681FBB937C2726B75D0D0D261088A31A27B8D9F231E284C8200EC8E0DFCE25AD",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Alia now faces safely right with everyone behind the muzzle plane, but her primary index remains curled at the trigger-guard area instead of lying straight above and entirely outside a clearly empty guard.",
+        "The paper route target and complete backstop are visible, but the target center sits substantially above the shoulder-height muzzle continuation and no complete safety panel is auditable between muzzle and target.",
+        "Ellie's support palm is visible on Radiance's back, but the white-sleeved owner arm disappears behind Radiance; the intended forearm-to-side and covered hip-to-thigh braces are absent, leaving only two unambiguous relationship contacts.",
+        "MAX wears a visible dark collar despite the required small young collarless golden retriever state."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -17619,9 +17700,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Clean round 37 scene 1551 is preserved but rejected; its sole bounded recovery is materialized from that clean raw only. The live X webview also requires retry. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Round 37 scene 1551 exhausted its single clean recovery and still failed support-hand owner-path, three-contact romance, trigger-index safety, target-axis and safety-panel geometry, and MAX's collarless state. The live X webview also requires retry. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-12T02:43:17.990Z",
+  "checkpointedAt": "2026-08-12T02:50:00.082Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -18708,13 +18789,25 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1551,
+      "round": 37,
+      "kind": "clean-fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-37-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-86c6b11a-21e6-4dad-bf8e-96cecaac244d.png",
+      "sha256": "681FBB937C2726B75D0D0D261088A31A27B8D9F231E284C8200EC8E0DFCE25AD",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-single-clean-fresh-round-37-recovery-scene-1551-only",
+    "action": "clean-fresh-round-38-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -18726,7 +18819,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-12T02:38:58.580Z",
+    "checkedAt": "2026-08-12T02:50:00.082Z",
     "account": "@dogramaci",
     "signedIn": false,
     "eligibleBacklogRemaining": 0,
@@ -18811,12 +18904,12 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 36,
-    "lastCleanRoundResult": "clean-Batumi-identities-eight-hand-anatomy-open-Radiance-back-mascots-compass-map-and-complete-backstop-pass-but-rejected-third-contact-Alia-response-Alia-open-back-and-trigger-index",
-    "nextCleanRound": 37,
-    "nextSourcePolicy": "original identity anchors only; no round 36 image input",
-    "activeCleanRound": 37,
-    "activeSourcePolicy": "single targeted recovery from clean round 37 raw only",
-    "priorBatumiRenderInputCount": 1
+    "lastCompletedCleanRound": 37,
+    "lastCleanRoundResult": "clean-Batumi-identities-eight-hands-pause-open-backs-safe-rightward-lane-and-complete-backstop-pass-but-rejected-support-owner-path-three-contact-romance-trigger-index-target-axis-panel-and-MAX-collar",
+    "nextCleanRound": 38,
+    "nextSourcePolicy": "original identity anchors only; no round 37 image input",
+    "activeCleanRound": null,
+    "activeSourcePolicy": "four original identity anchors only",
+    "priorBatumiRenderInputCount": 0
   }
 }
