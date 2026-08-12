@@ -52,6 +52,9 @@ pub const LAW_STATE_SEED: &[u8] = b"law-state";
 pub const INSTRUCTION_NAMESPACE: &[u8; 8] = b"IATB3LAW";
 pub const INITIALIZE_LAW_OPCODE: u8 = 0;
 pub const FINALIZE_DAY_OPCODE: u8 = 1;
+pub const INITIALIZE_LAW_ACCOUNT_COUNT: usize = 6;
+pub const FINALIZE_DAY_ACCOUNT_COUNT: usize = 2;
+pub const TRANSFER_HOOK_EXECUTE_ACCOUNT_COUNT: usize = 6;
 pub const LAW_STATE_MAGIC: &[u8; 8] = b"IATB3S01";
 pub const LAW_STATE_VERSION: u8 = 1;
 pub const LAW_STATE_LEN: usize = 160;
@@ -86,6 +89,7 @@ pub enum IatB3LawError {
     InvalidConfidentialTransferConfig = 17,
     MintNotWritable = 18,
     WrongTokenProgram = 19,
+    IncorrectAccountCount = 20,
 }
 
 impl From<IatB3LawError> for ProgramError {
@@ -238,6 +242,7 @@ fn process_initialize_law(
     if network_genesis_hash == [0; 32] {
         return Err(IatB3LawError::InvalidMint.into());
     }
+    require_exact_account_count(accounts.len(), INITIALIZE_LAW_ACCOUNT_COUNT)?;
     let account_iter = &mut accounts.iter();
     let payer = next_account_info(account_iter)?;
     let mint = next_account_info(account_iter)?;
@@ -334,6 +339,7 @@ fn process_initialize_law(
 }
 
 fn process_finalize_day(program_id: &Pubkey, accounts: &[AccountInfo<'_>]) -> ProgramResult {
+    require_exact_account_count(accounts.len(), FINALIZE_DAY_ACCOUNT_COUNT)?;
     let account_iter = &mut accounts.iter();
     let mint = next_account_info(account_iter)?;
     let law_state = next_account_info(account_iter)?;
@@ -381,6 +387,7 @@ fn process_execute(
     accounts: &[AccountInfo<'_>],
     _amount: u64,
 ) -> ProgramResult {
+    require_exact_account_count(accounts.len(), TRANSFER_HOOK_EXECUTE_ACCOUNT_COUNT)?;
     let account_iter = &mut accounts.iter();
     let source = next_account_info(account_iter)?;
     let mint = next_account_info(account_iter)?;
@@ -422,6 +429,13 @@ fn process_execute(
         IatTransferDisposition::DayUnfinalized => Err(IatB3LawError::DayUnfinalized.into()),
         IatTransferDisposition::RejectedDailyLockdown => Err(IatB3LawError::DailyLockdown.into()),
     }
+}
+
+fn require_exact_account_count(observed: usize, expected: usize) -> ProgramResult {
+    if observed != expected {
+        return Err(IatB3LawError::IncorrectAccountCount.into());
+    }
+    Ok(())
 }
 
 #[cfg(feature = "production-combined-hook")]
@@ -737,6 +751,24 @@ mod tests {
             TransferHookInstruction::unpack(&data),
             Ok(TransferHookInstruction::Execute { amount: 100 })
         );
+    }
+
+    #[test]
+    fn every_executable_route_rejects_missing_and_trailing_accounts() {
+        for expected in [
+            INITIALIZE_LAW_ACCOUNT_COUNT,
+            FINALIZE_DAY_ACCOUNT_COUNT,
+            TRANSFER_HOOK_EXECUTE_ACCOUNT_COUNT,
+        ] {
+            assert_eq!(require_exact_account_count(expected, expected), Ok(()));
+            for observed in [0, expected - 1, expected + 1, usize::MAX] {
+                assert_eq!(
+                    require_exact_account_count(observed, expected),
+                    Err(IatB3LawError::IncorrectAccountCount.into()),
+                    "observed={observed} expected={expected}"
+                );
+            }
+        }
     }
 
     #[test]

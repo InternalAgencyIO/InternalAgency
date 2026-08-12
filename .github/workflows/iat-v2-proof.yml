@@ -161,13 +161,13 @@ jobs:
           test -s target/verifiable/iat_b3_law.so
           # Fixture build gate only: this proves one combined artifact shape;
           # it does not assert production identities, Devnet parity, or launch readiness.
-          expected_b3_law_bytes=156000
+          expected_b3_law_bytes=155496
           actual_b3_law_bytes="$(stat --format='%s' target/verifiable/iat_b3_law.so)"
           if [[ "$actual_b3_law_bytes" != "$expected_b3_law_bytes" ]]; then
             echo "B3 law candidate size mismatch: expected $expected_b3_law_bytes bytes, got $actual_b3_law_bytes" >&2
             exit 1
           fi
-          expected_b3_law_sha256="83b34e61c4da2c7e676172a3ad158df12e9237a865c833585c71ea89dad0fca7"
+          expected_b3_law_sha256="39f95d13821aee92ad0bd3967ab3ab2365669deda6e0775be9dfe9f6dee84c12"
           printf '%s  %s\n' "$expected_b3_law_sha256" target/verifiable/iat_b3_law.so \
             | sha256sum --check --strict -
           sha256sum target/verifiable/iat_b3_law.so \

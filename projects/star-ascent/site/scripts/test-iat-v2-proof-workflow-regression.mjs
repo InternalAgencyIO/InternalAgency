@@ -81,9 +81,9 @@ const agaveInstallerUrl =
 const agaveInstallerSha256 = "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b";
 const anchorSourceRevision = "1314a6b83b16e6a31947b372d57988fd0e81559c";
 const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
-const combinedLawFixtureBytes = 156_000;
+const combinedLawFixtureBytes = 155_496;
 const combinedLawFixtureSha256 =
-  "83b34e61c4da2c7e676172a3ad158df12e9237a865c833585c71ea89dad0fca7";
+  "39f95d13821aee92ad0bd3967ab3ab2365669deda6e0775be9dfe9f6dee84c12";
 const combinedLawFixtureIdentities = Object.freeze({
   lawProgramId: "D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY",
   economyProgramId: "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",

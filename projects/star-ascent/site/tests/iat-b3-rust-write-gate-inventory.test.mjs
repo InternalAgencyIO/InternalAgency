@@ -668,16 +668,22 @@ test("native adapter keeps exactly two own writes and one canonical transfer gat
   assert.match(dispatcher, /process_execute\(program_id, accounts, amount\)/u);
 
   const initialize = functionBody(lawSource, "process_initialize_law");
+  assert.match(lawSource, /INITIALIZE_LAW_ACCOUNT_COUNT: usize = 6/u);
+  assert.match(initialize, /require_exact_account_count\(accounts\.len\(\), INITIALIZE_LAW_ACCOUNT_COUNT\)\?/u);
   assert.match(initialize, /LawState::uninitialized/u);
   assert.match(initialize, /ExtraAccountMetaList::init::<ExecuteInstruction>/u);
 
   const finalize = functionBody(lawSource, "process_finalize_day");
+  assert.match(lawSource, /FINALIZE_DAY_ACCOUNT_COUNT: usize = 2/u);
+  assert.match(finalize, /require_exact_account_count\(accounts\.len\(\), FINALIZE_DAY_ACCOUNT_COUNT\)\?/u);
   assert.match(finalize, /Clock::get\(\)/u);
   assert.match(finalize, /PodSlotHashes::fetch\(\)/u);
   assert.match(finalize, /ensure_day_can_finalize/u);
   assert.match(finalize, /create_solana_daily_decision/u);
 
   const execute = functionBody(lawSource, "process_execute");
+  assert.match(lawSource, /TRANSFER_HOOK_EXECUTE_ACCOUNT_COUNT: usize = 6/u);
+  assert.match(execute, /require_exact_account_count\(accounts\.len\(\), TRANSFER_HOOK_EXECUTE_ACCOUNT_COUNT\)\?/u);
   assert.match(execute, /validate_law_state_account/u);
   assert.match(execute, /validate_transfer_context/u);
   assert.match(execute, /state\.transfer_disposition_at\(clock\.unix_timestamp\)/u);
