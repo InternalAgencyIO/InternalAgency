@@ -21,6 +21,14 @@ struct Vectors {
 }
 
 fn fixture() -> Vectors {
+    fixture_with_prefix("")
+}
+
+fn escaped_fixture() -> Vectors {
+    fixture_with_prefix("escaped.")
+}
+
+fn fixture_with_prefix(prefix: &str) -> Vectors {
     let values: BTreeMap<&str, &str> = FIXTURE
         .lines()
         .filter(|line| !line.is_empty() && !line.starts_with('#'))
@@ -30,19 +38,21 @@ fn fixture() -> Vectors {
         values["schema"],
         "iat-b3-reward-capacity-rust-recomputation/v1"
     );
-    let count: usize = values["count"].parse().expect("count");
+    let count: usize = values[format!("{prefix}count").as_str()]
+        .parse()
+        .expect("count");
     let mut randomness = [0; 32];
-    randomness.copy_from_slice(&decode_hex(values["randomness"]));
+    randomness.copy_from_slice(&decode_hex(values[format!("{prefix}randomness").as_str()]));
     Vectors {
-        source_id: decode_hex(values["source_id"]),
+        source_id: decode_hex(values[format!("{prefix}source_id").as_str()]),
         randomness,
-        seal: decode_hex(values["seal"]),
-        batch: decode_hex(values["batch"]),
+        seal: decode_hex(values[format!("{prefix}seal").as_str()]),
+        batch: decode_hex(values[format!("{prefix}batch").as_str()]),
         receipts: (0..count)
-            .map(|index| decode_hex(values[format!("receipt.{index}").as_str()]))
+            .map(|index| decode_hex(values[format!("{prefix}receipt.{index}").as_str()]))
             .collect(),
         cores: (0..count)
-            .map(|index| decode_hex(values[format!("reference_core.{index}").as_str()]))
+            .map(|index| decode_hex(values[format!("{prefix}reference_core.{index}").as_str()]))
             .collect(),
     }
 }
@@ -106,9 +116,90 @@ fn verify(vectors: &Vectors) -> Result<(), RewardCapacityRecomputationError> {
     Ok(())
 }
 
+fn replace_once(bytes: &mut Vec<u8>, needle: &[u8], replacement: &[u8]) {
+    let offset = bytes
+        .windows(needle.len())
+        .position(|window| window == needle)
+        .expect("fixture marker");
+    bytes.splice(offset..offset + needle.len(), replacement.iter().copied());
+}
+
+fn rebind_seal_sha256(vectors: &mut Vectors) {
+    vectors.batch[88..120].copy_from_slice(&Sha256::digest(&vectors.seal));
+}
+
 #[test]
 fn accepts_exact_host_seal_and_recomputes_every_downstream_commitment() {
     verify(&fixture()).expect("exact host vector must verify");
+}
+
+#[test]
+fn accepts_exact_host_canonical_escaped_source_and_binds_downstream_json() {
+    verify(&escaped_fixture()).expect("escaped host vector must verify");
+}
+
+#[test]
+fn rejects_noncanonical_malformed_or_unsupported_source_encodings() {
+    let mutations: &[(&[u8], &[u8])] = &[
+        (b"ccc/", b"ccc\\/"),
+        (b"\\\"", b"\\u0022"),
+        (b"\\b", b"\\u0008"),
+        (b"\\u001e", b"\\u001E"),
+        (b"\\u001e", b"\\u001"),
+        (b"\\n", b"\\q"),
+        (b"\\n", b"\n"),
+        ("é".as_bytes(), b"\\u00e9"),
+        ("🚀".as_bytes(), b"\\ud800"),
+        ("🚀".as_bytes(), b"\\ud83d\\ude80"),
+    ];
+    for (needle, replacement) in mutations {
+        let mut hostile = escaped_fixture();
+        replace_once(&mut hostile.seal, needle, replacement);
+        rebind_seal_sha256(&mut hostile);
+        assert_eq!(
+            verify(&hostile),
+            Err(RewardCapacityRecomputationError::InvalidCanonicalJson),
+            "{} -> {}",
+            String::from_utf8_lossy(needle),
+            String::from_utf8_lossy(replacement),
+        );
+    }
+}
+
+#[test]
+fn rejects_empty_mismatched_or_invalid_utf8_decoded_source() {
+    for source_id in [Vec::new(), b"different-source".to_vec(), vec![0xff]] {
+        let hostile = Vectors {
+            source_id,
+            ..escaped_fixture()
+        };
+        assert_eq!(
+            verify(&hostile),
+            Err(RewardCapacityRecomputationError::CccRevealMismatch)
+        );
+    }
+}
+
+#[test]
+fn preserves_exact_raw_commitment_object_equality() {
+    let mut hostile = escaped_fixture();
+    let marker = b"ccc/";
+    let first = hostile
+        .seal
+        .windows(marker.len())
+        .position(|window| window == marker)
+        .expect("registry source");
+    let second_relative = hostile.seal[first + marker.len()..]
+        .windows(marker.len())
+        .position(|window| window == marker)
+        .expect("reveal source");
+    let second = first + marker.len() + second_relative;
+    hostile.seal[second] = b'd';
+    rebind_seal_sha256(&mut hostile);
+    assert_eq!(
+        verify(&hostile),
+        Err(RewardCapacityRecomputationError::CccTieContractMismatch)
+    );
 }
 
 #[test]
@@ -269,7 +360,8 @@ fn truth_boundary_is_permanently_nonactivating_and_hold() {
     assert!(!truth.canonical_seal_semantics_verified);
     assert!(!truth.candidate_identifier_derivations_verified);
     assert!(!truth.non_ccc_chronology_recomputed);
-    assert!(!truth.escaped_source_identifiers_supported);
+    assert!(truth.canonical_escaped_well_formed_utf8_ccc_source_binding_verified);
+    assert!(!truth.lone_surrogate_source_identifiers_supported);
     assert!(!truth.source_kind_authenticated);
     assert!(!truth.chronology_authenticated);
     assert!(!truth.round_clock_authenticated);

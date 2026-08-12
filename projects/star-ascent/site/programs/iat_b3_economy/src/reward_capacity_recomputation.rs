@@ -8,8 +8,10 @@
 //! The caller must first establish exact host canonical-seal semantics. This
 //! module does not validate candidate derivations, all nested variant semantics,
 //! non-CCC chronology ordering, source authenticity, the round clock, Daily Law,
-//! or how the seal reached the caller. It exposes no instruction, account writer,
-//! CPI, dispatcher, authority, or activation edge.
+//! or how the seal reached the caller. Canonically escaped, well-formed UTF-8 CCC
+//! source identifiers are bound without allocation; JavaScript lone-surrogate
+//! strings remain deliberately unsupported. It exposes no instruction, account
+//! writer, CPI, dispatcher, authority, or activation edge.
 
 use core::cmp::Ordering;
 
@@ -108,7 +110,8 @@ pub struct RewardCapacityReceiptInput<'a> {
 
 #[derive(Clone, Copy, Debug)]
 pub struct RewardCapacityCccReveal<'a> {
-    /// Exact unescaped UTF-8 source identifier committed by the seal.
+    /// Exact decoded, nonempty, well-formed UTF-8 source identifier committed by
+    /// the seal. Its seal representation may contain canonical JSON escapes.
     pub source_id: &'a [u8],
     pub randomness: [u8; 32],
 }
@@ -187,7 +190,8 @@ pub struct RewardCapacityRecomputationTruth {
     pub canonical_seal_semantics_verified: bool,
     pub candidate_identifier_derivations_verified: bool,
     pub non_ccc_chronology_recomputed: bool,
-    pub escaped_source_identifiers_supported: bool,
+    pub canonical_escaped_well_formed_utf8_ccc_source_binding_verified: bool,
+    pub lone_surrogate_source_identifiers_supported: bool,
     pub source_kind_authenticated: bool,
     pub chronology_authenticated: bool,
     pub round_clock_authenticated: bool,
@@ -213,7 +217,8 @@ pub const REWARD_CAPACITY_RECOMPUTATION_TRUTH: RewardCapacityRecomputationTruth 
         canonical_seal_semantics_verified: false,
         candidate_identifier_derivations_verified: false,
         non_ccc_chronology_recomputed: false,
-        escaped_source_identifiers_supported: false,
+        canonical_escaped_well_formed_utf8_ccc_source_binding_verified: true,
+        lone_surrogate_source_identifiers_supported: false,
         source_kind_authenticated: false,
         chronology_authenticated: false,
         round_clock_authenticated: false,
@@ -270,7 +275,7 @@ struct Ledger {
 #[derive(Clone, Copy)]
 struct Registry<'a> {
     entry_span: Option<Span>,
-    source_id: Option<&'a [u8]>,
+    source_json: Option<&'a [u8]>,
     committed_at: Option<i64>,
     commitment_sha256: Option<[u8; 32]>,
     snapshot_sha256: [u8; 32],
@@ -491,7 +496,7 @@ fn validate_sealed_candidate_uniqueness(
 
 #[derive(Clone, Copy)]
 struct VerifiedCcc<'a> {
-    source_id: &'a [u8],
+    source_json: &'a [u8],
     randomness: [u8; 32],
     reveal_sha256: [u8; 32],
     commitment_sha256: [u8; 32],
@@ -530,14 +535,14 @@ fn validate_ccc_contract<'a>(
         return Err(RewardCapacityRecomputationError::CccTieContractMismatch);
     }
     let supplied = reveal.ok_or(RewardCapacityRecomputationError::CccRevealMismatch)?;
-    let source_id = parsed
+    let source_json = parsed
         .registry
-        .source_id
+        .source_json
         .ok_or(RewardCapacityRecomputationError::CccTieContractMismatch)?;
-    if source_id.is_empty() || core::str::from_utf8(source_id).is_err() {
+    if supplied.source_id.is_empty() || core::str::from_utf8(supplied.source_id).is_err() {
         return Err(RewardCapacityRecomputationError::CccRevealMismatch);
     }
-    if supplied.source_id != source_id {
+    if !canonical_json_string_decodes_to(source_json, supplied.source_id)? {
         return Err(RewardCapacityRecomputationError::CccRevealMismatch);
     }
     let committed_at = parsed
@@ -556,7 +561,7 @@ fn validate_ccc_contract<'a>(
     let randomness_hex = lower_hex(&supplied.randomness);
     let actual_commitment = hash_pipe(&[
         CCC_COMMITMENT_SCHEME,
-        source_id,
+        supplied.source_id,
         &committed_decimal[committed_start..],
         &funding_decimal[funding_start..],
         &randomness_hex,
@@ -575,7 +580,7 @@ fn validate_ccc_contract<'a>(
         &candidate_hex,
         &ledger_hex,
         &registry_hex,
-        source_id,
+        supplied.source_id,
         &committed_decimal[committed_start..],
         &commitment_hex,
     ]);
@@ -584,7 +589,7 @@ fn validate_ccc_contract<'a>(
     }
     let reveal_sha256: [u8; 32] = Sha256::digest(randomness_hex).into();
     Ok(Some(VerifiedCcc {
-        source_id,
+        source_json,
         randomness: supplied.randomness,
         reveal_sha256,
         commitment_sha256,
@@ -1010,7 +1015,7 @@ fn parse_registry<'a>(p: &mut Json<'a>) -> Result<Registry<'a>, RewardCapacityRe
     p.comma_key(b"entries")?;
     let entries_start = p.pos;
     p.byte(b'[')?;
-    let (entry_span, source_id, committed_at, commitment_sha256) = if p.peek() == Some(b']') {
+    let (entry_span, source_json, committed_at, commitment_sha256) = if p.peek() == Some(b']') {
         (None, None, None, None)
     } else {
         let start = p.pos;
@@ -1052,7 +1057,7 @@ fn parse_registry<'a>(p: &mut Json<'a>) -> Result<Registry<'a>, RewardCapacityRe
     }
     Ok(Registry {
         entry_span,
-        source_id,
+        source_json,
         committed_at,
         commitment_sha256,
         snapshot_sha256: actual_snapshot,
@@ -1071,7 +1076,7 @@ fn parse_commitment<'a>(
     p.comma_key(b"scheme")?;
     p.exact_string(CCC_COMMITMENT_SCHEME)?;
     p.comma_key(b"sourceId")?;
-    let source = p.plain_string()?;
+    let source = p.canonical_json_string()?;
     p.byte(b'}')?;
     Ok((source, committed_at, digest))
 }
@@ -1131,6 +1136,50 @@ impl<'a> Json<'a> {
                 return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
             }
             self.pos += 1;
+        }
+        Err(RewardCapacityRecomputationError::InvalidCanonicalJson)
+    }
+
+    /// Return the exact quoted bytes of a JavaScript `JSON.stringify` canonical
+    /// string. Literal well-formed UTF-8 is retained. Only the escapes emitted
+    /// by `JSON.stringify` are accepted: quote, backslash, the five short
+    /// control escapes, and lowercase `\\u00xx` for the remaining C0 controls.
+    fn canonical_json_string(&mut self) -> Result<&'a [u8], RewardCapacityRecomputationError> {
+        let start = self.pos;
+        self.byte(b'"')?;
+        while let Some(byte) = self.peek() {
+            match byte {
+                b'"' => {
+                    self.pos += 1;
+                    return Ok(&self.bytes[start..self.pos]);
+                }
+                0..=0x1f => return Err(RewardCapacityRecomputationError::InvalidCanonicalJson),
+                b'\\' => {
+                    self.pos += 1;
+                    match self.peek() {
+                        Some(b'"' | b'\\' | b'b' | b'f' | b'n' | b'r' | b't') => {
+                            self.pos += 1;
+                        }
+                        Some(b'u') => {
+                            self.pos += 1;
+                            let digits = self
+                                .bytes
+                                .get(self.pos..self.pos + 4)
+                                .ok_or(RewardCapacityRecomputationError::InvalidCanonicalJson)?;
+                            if digits[0] != b'0' || digits[1] != b'0' {
+                                return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+                            }
+                            let value = (hex_nibble(digits[2])? << 4) | hex_nibble(digits[3])?;
+                            if value > 0x1f || matches!(value, 0x08 | 0x09 | 0x0a | 0x0c | 0x0d) {
+                                return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+                            }
+                            self.pos += 4;
+                        }
+                        _ => return Err(RewardCapacityRecomputationError::InvalidCanonicalJson),
+                    }
+                }
+                _ => self.pos += 1,
+            }
         }
         Err(RewardCapacityRecomputationError::InvalidCanonicalJson)
     }
@@ -1303,6 +1352,55 @@ fn parse_i64(value: &[u8]) -> Result<i64, RewardCapacityRecomputationError> {
         .map_err(|_| RewardCapacityRecomputationError::InvalidCanonicalJson)
 }
 
+fn canonical_json_string_decodes_to(
+    encoded: &[u8],
+    expected_utf8: &[u8],
+) -> Result<bool, RewardCapacityRecomputationError> {
+    if encoded.len() < 2 || encoded.first() != Some(&b'"') || encoded.last() != Some(&b'"') {
+        return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+    }
+    let mut encoded_index = 1usize;
+    let mut expected_index = 0usize;
+    while encoded_index < encoded.len() - 1 {
+        let (decoded, consumed) = if encoded[encoded_index] == b'\\' {
+            let escape = *encoded
+                .get(encoded_index + 1)
+                .ok_or(RewardCapacityRecomputationError::InvalidCanonicalJson)?;
+            match escape {
+                b'"' => (b'"', 2),
+                b'\\' => (b'\\', 2),
+                b'b' => (0x08, 2),
+                b'f' => (0x0c, 2),
+                b'n' => (b'\n', 2),
+                b'r' => (b'\r', 2),
+                b't' => (b'\t', 2),
+                b'u' => {
+                    let digits = encoded
+                        .get(encoded_index + 2..encoded_index + 6)
+                        .ok_or(RewardCapacityRecomputationError::InvalidCanonicalJson)?;
+                    if digits[0] != b'0' || digits[1] != b'0' {
+                        return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+                    }
+                    let value = (hex_nibble(digits[2])? << 4) | hex_nibble(digits[3])?;
+                    if value > 0x1f || matches!(value, 0x08 | 0x09 | 0x0a | 0x0c | 0x0d) {
+                        return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+                    }
+                    (value, 6)
+                }
+                _ => return Err(RewardCapacityRecomputationError::InvalidCanonicalJson),
+            }
+        } else {
+            (encoded[encoded_index], 1)
+        };
+        if expected_utf8.get(expected_index) != Some(&decoded) {
+            return Ok(false);
+        }
+        encoded_index += consumed;
+        expected_index += 1;
+    }
+    Ok(expected_index == expected_utf8.len())
+}
+
 fn decode_hex32(value: &[u8]) -> Result<[u8; 32], RewardCapacityRecomputationError> {
     if value.len() != 64 {
         return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
@@ -1465,7 +1563,7 @@ fn canonical_outcome_sha256(
     hash.update(b",\"cccRevealSha256\":");
     update_nullable_hex(&mut hash, ccc.as_ref().map(|value| value.reveal_sha256));
     hash.update(b",\"cccRevealSourceId\":");
-    update_nullable_source(&mut hash, ccc.as_ref().map(|value| value.source_id));
+    update_nullable_source_json(&mut hash, ccc.as_ref().map(|value| value.source_json));
     hash.update(b",\"postLedgerSha256\":");
     update_quoted_hex(&mut hash, &post_ledger);
     hash.update(b",\"preLedgerSha256\":");
@@ -1498,7 +1596,7 @@ fn canonical_finalization_sha256(
     hash.update(b",\"cccRevealSha256\":");
     update_nullable_hex(&mut hash, ccc.as_ref().map(|value| value.reveal_sha256));
     hash.update(b",\"cccRevealSourceId\":");
-    update_nullable_source(&mut hash, ccc.as_ref().map(|value| value.source_id));
+    update_nullable_source_json(&mut hash, ccc.as_ref().map(|value| value.source_json));
     hash.update(b",\"finalized\":true,\"fundingRoundAtUnixSeconds\":\"");
     update_i64(&mut hash, parsed.funding_round);
     hash.update(b"\",\"outcomeSha256\":");
@@ -1525,11 +1623,11 @@ fn update_nullable_hex(hash: &mut Sha256, value: Option<[u8; 32]>) {
     }
 }
 
-fn update_nullable_source(hash: &mut Sha256, value: Option<&[u8]>) {
+fn update_nullable_source_json(hash: &mut Sha256, value: Option<&[u8]>) {
     if let Some(value) = value {
-        hash.update(b"\"");
+        // `value` is the exact, already quoted JSON.stringify representation
+        // validated while parsing the externally canonical seal.
         hash.update(value);
-        hash.update(b"\"");
     } else {
         hash.update(b"null");
     }

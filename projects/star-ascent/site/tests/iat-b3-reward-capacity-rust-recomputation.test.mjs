@@ -34,6 +34,7 @@ const FUNDING_ROUND = 1_786_060_800n;
 const LOCAL_0001_UTC = 1_786_050_060n;
 const RANDOMNESS = "42".repeat(32);
 const SOURCE_ID = "ccc-test-source";
+const ESCAPED_SOURCE_ID = "ccc/\"quoted\"\\path\b\f\n\r\t\u0001\u001e|é|雪|🚀|\u2028|end";
 const UPDATE = process.env.IAT_B3_PRINT_REWARD_RECOMPUTATION_FIXTURE === "1";
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const hex = (value) => BigInt(value).toString(16).padStart(64, "0");
@@ -175,36 +176,19 @@ function referenceCoreBytes(receipt) {
     .filter(([key]) => key !== "receiptSha256")));
 }
 
-function canonicalVectors() {
+function finalizedVectors({ sourceId, obligations, ledgerSnapshot }) {
   const revealCommitment = createCccRevealCommitment({
-    sourceId: SOURCE_ID,
+    sourceId,
     committedAtUnixSeconds: FUNDING_ROUND - 10n,
     fundingRoundAtUnixSeconds: FUNDING_ROUND,
     randomnessHex: RANDOMNESS,
   });
-  const obligations = [
-    generic(1, "CCC_AGENT", 100, 1),
-    generic(2, "CCC_AGENT", 100, 1),
-    generic(3, "CCC_ASSOCIATE", 100, 2),
-    generic(4, "STANDARD_10_PERCENT_AND_X_CAMPAIGN", 100, 40),
-    xBound(50_001, "X_BASE_10", 50),
-    xBound(50_002, "X_PREMIUM_FULL_100", 60),
-    xBound(50_003, "X_PREMIUM_UPGRADE_90", 70),
-    factionManifest(),
-    generic(9, "CORE", 100, 90),
-  ];
   const pending = sealRewardCapacityRound({
     dailyLawState: law,
     fundingRoundAtUnixSeconds: FUNDING_ROUND,
     sealedAtUnixSeconds: FUNDING_ROUND,
     obligations,
-    ledgerSnapshot: {
-      lanes: {
-        treasury: { unlocked: 150n, reserved: 0n, paid: 0n, withdrawn: 0n },
-        ecosystem: { unlocked: 250n, reserved: 0n, paid: 0n, withdrawn: 0n },
-        liquidity: { unlocked: 250n, reserved: 0n, paid: 0n, withdrawn: 0n },
-      },
-    },
+    ledgerSnapshot,
     cccPrecommitRegistrySnapshot: createCccPrecommitRegistrySnapshot({
       fundingRoundAtUnixSeconds: FUNDING_ROUND,
       commitments: [revealCommitment],
@@ -213,7 +197,7 @@ function canonicalVectors() {
   const allocation = allocateRewardCapacity({
     dailyLawState: law,
     roundState: pending,
-    cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+    cccRandomnessReveal: { sourceId, randomnessHex: RANDOMNESS },
   });
   const outcomes = [...allocation.funded, ...allocation.nullOutcomes]
     .sort((left, right) => allocation.orderedIds.indexOf(left.id) - allocation.orderedIds.indexOf(right.id));
@@ -229,6 +213,47 @@ function canonicalVectors() {
     referenceCores: outcomes.map(({ allocatorReceipt }) => referenceCoreBytes(allocatorReceipt)),
     orderedIds: allocation.orderedIds,
     dispositions: outcomes.map(({ allocatorReceipt }) => allocatorReceipt.disposition),
+  });
+}
+
+function canonicalVectors() {
+  return finalizedVectors({
+    sourceId: SOURCE_ID,
+    obligations: [
+      generic(1, "CCC_AGENT", 100, 1),
+      generic(2, "CCC_AGENT", 100, 1),
+      generic(3, "CCC_ASSOCIATE", 100, 2),
+      generic(4, "STANDARD_10_PERCENT_AND_X_CAMPAIGN", 100, 40),
+      xBound(50_001, "X_BASE_10", 50),
+      xBound(50_002, "X_PREMIUM_FULL_100", 60),
+      xBound(50_003, "X_PREMIUM_UPGRADE_90", 70),
+      factionManifest(),
+      generic(9, "CORE", 100, 90),
+    ],
+    ledgerSnapshot: {
+      lanes: {
+        treasury: { unlocked: 150n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        ecosystem: { unlocked: 250n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        liquidity: { unlocked: 250n, reserved: 0n, paid: 0n, withdrawn: 0n },
+      },
+    },
+  });
+}
+
+function escapedSourceVectors() {
+  return finalizedVectors({
+    sourceId: ESCAPED_SOURCE_ID,
+    obligations: [
+      generic(101, "CCC_AGENT", 100, 1),
+      generic(102, "CCC_AGENT", 100, 1),
+    ],
+    ledgerSnapshot: {
+      lanes: {
+        treasury: { unlocked: 200n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        ecosystem: { unlocked: 0n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        liquidity: { unlocked: 0n, reserved: 0n, paid: 0n, withdrawn: 0n },
+      },
+    },
   });
 }
 
@@ -272,6 +297,7 @@ function hostileUniquenessVectors(canonical) {
 
 function renderFixture() {
   const vectors = canonicalVectors();
+  const escaped = escapedSourceVectors();
   const hostile = hostileUniquenessVectors(vectors);
   const lines = [
     "# Generated only from the exact host reference; consumed read-only by Rust tests.",
@@ -285,6 +311,15 @@ function renderFixture() {
   for (let index = 0; index < vectors.receiptBytes.length; index += 1) {
     lines.push(`receipt.${index}=${vectors.receiptBytes[index].toString("hex")}`);
     lines.push(`reference_core.${index}=${vectors.referenceCores[index].toString("hex")}`);
+  }
+  lines.push(`escaped.source_id=${Buffer.from(ESCAPED_SOURCE_ID, "utf8").toString("hex")}`);
+  lines.push(`escaped.randomness=${RANDOMNESS}`);
+  lines.push(`escaped.seal=${escaped.sealBytes.toString("hex")}`);
+  lines.push(`escaped.batch=${escaped.batchBytes.toString("hex")}`);
+  lines.push(`escaped.count=${escaped.receiptBytes.length}`);
+  for (let index = 0; index < escaped.receiptBytes.length; index += 1) {
+    lines.push(`escaped.receipt.${index}=${escaped.receiptBytes[index].toString("hex")}`);
+    lines.push(`escaped.reference_core.${index}=${escaped.referenceCores[index].toString("hex")}`);
   }
   for (const [name, vector] of Object.entries(hostile)) {
     lines.push(`hostile.${name}.seal=${vector.sealBytes.toString("hex")}`);
@@ -311,6 +346,7 @@ if (UPDATE) {
   test("canonical host allocation bytes exactly match the native recomputation fixture", () => {
     const fixture = parseFixture();
     const vectors = canonicalVectors();
+    const escaped = escapedSourceVectors();
     const hostile = hostileUniquenessVectors(vectors);
     assert.equal(fixture.schema, "iat-b3-reward-capacity-rust-recomputation/v1");
     assert.equal(fixture.source_id, Buffer.from(SOURCE_ID).toString("hex"));
@@ -321,6 +357,21 @@ if (UPDATE) {
     for (let index = 0; index < vectors.receiptBytes.length; index += 1) {
       assert.equal(fixture[`receipt.${index}`], vectors.receiptBytes[index].toString("hex"));
       assert.equal(fixture[`reference_core.${index}`], vectors.referenceCores[index].toString("hex"));
+    }
+    assert.equal(fixture["escaped.source_id"], Buffer.from(ESCAPED_SOURCE_ID).toString("hex"));
+    assert.equal(fixture["escaped.randomness"], RANDOMNESS);
+    assert.equal(fixture["escaped.seal"], escaped.sealBytes.toString("hex"));
+    assert.equal(fixture["escaped.batch"], escaped.batchBytes.toString("hex"));
+    assert.equal(Number(fixture["escaped.count"]), escaped.receiptBytes.length);
+    for (let index = 0; index < escaped.receiptBytes.length; index += 1) {
+      assert.equal(
+        fixture[`escaped.receipt.${index}`],
+        escaped.receiptBytes[index].toString("hex"),
+      );
+      assert.equal(
+        fixture[`escaped.reference_core.${index}`],
+        escaped.referenceCores[index].toString("hex"),
+      );
     }
     for (const [name, vector] of Object.entries(hostile)) {
       assert.equal(
@@ -339,6 +390,25 @@ if (UPDATE) {
       "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
       "NULL_UNDERFUNDED", "NULL_BLOCKED", "NULL_BLOCKED",
     ]);
+    assert.deepEqual(escaped.dispositions, ["ADMITTED_RESERVED", "ADMITTED_RESERVED"]);
+  });
+
+  test("host JSON.stringify source vector covers every supported canonical escape and Unicode literal", () => {
+    const vectors = escapedSourceVectors();
+    validateFinalizedRewardCapacityRound({
+      roundState: vectors.roundState,
+      cccRandomnessReveal: { sourceId: ESCAPED_SOURCE_ID, randomnessHex: RANDOMNESS },
+    });
+    const seal = vectors.sealBytes.toString("utf8");
+    for (const escape of ["\\\"", "\\\\", "\\b", "\\f", "\\n", "\\r", "\\t", "\\u0001", "\\u001e"]) {
+      assert.ok(seal.includes(escape), `missing canonical escape ${escape}`);
+    }
+    for (const literal of ["é", "雪", "🚀", "\u2028"]) {
+      assert.ok(seal.includes(literal), `missing literal ${JSON.stringify(literal)}`);
+    }
+    for (const forbidden of ["\\/", "\\u0022", "\\u00e9", "\\ud83d", "\\u2028"]) {
+      assert.ok(!seal.includes(forbidden), `noncanonical escape ${forbidden}`);
+    }
   });
 
   test("host validator rejects every uniqueness-hostile seal committed for native parity", () => {
