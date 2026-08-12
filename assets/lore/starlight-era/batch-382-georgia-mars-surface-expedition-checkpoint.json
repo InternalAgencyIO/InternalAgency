@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-33",
+  "status": "active-four-scene-gate-clean-fresh-round-34-materialized",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -3463,49 +3463,45 @@
         }
       },
       "radianceRealtimeAgreementParty": {
-        "round": 33,
-        "rollMethod": "FNV-1a over recorded round-33 live-narrative keys, reduced modulo 100",
+        "round": 34,
+        "rollMethod": "FNV-1a over recorded round-34 live-narrative keys, reduced modulo 100",
         "invitation": {
-          "key": "batch382-georgia-scene1551-radianceLiveInvitation-round33",
-          "fullHash": 3959878730,
-          "roll": 30,
-          "selectorIndex": 2
+          "key": "batch382-georgia-scene1551-radianceLiveInvitation-round34",
+          "fullHash": 3875990635,
+          "roll": 35,
+          "selectorIndex": 3
         },
         "response": {
-          "key": "batch382-georgia-scene1551-radianceLiveResponse-round33",
-          "fullHash": 2649765718,
-          "roll": 18,
+          "key": "batch382-georgia-scene1551-radianceLiveResponse-round34",
+          "fullHash": 2700098575,
+          "roll": 75,
           "thresholds": "0-69 explicit affirmative; 70-84 explicit redirect; 85-94 explicit pause; 95-99 explicit decline",
-          "category": "explicit affirmative"
+          "category": "explicit redirect"
         },
         "participantSelector": {
-          "key": "batch382-georgia-scene1551-radianceLiveParticipants-round33",
-          "fullHash": 918695087,
-          "roll": 87,
+          "key": "batch382-georgia-scene1551-radianceLiveParticipants-round34",
+          "fullHash": 868362230,
+          "roll": 30,
           "thresholds": "0-24 Radiance+ECE; 25-49 Radiance+Ellie+ECE; 50-74 all four; 75-99 Radiance+ECE+Alia",
           "hypotheticalSetIfAffirmative": [
             "Radiance",
-            "AI ECE",
-            "Alia"
+            "Ellie",
+            "AI ECE"
           ]
         },
-        "offeredChoice": "Alia asks Radiance whether she wants the quartet to answer her safe demonstration with one restrained victory-dance count.",
-        "radianceResponse": "Radiance explicitly accepts Alia's one-count invitation with a clear up-down nod and broad willing smile toward Alia, then turns the same smile and her separate open left palm toward ECE. She remains securely held in Ellie's shallow dip but does not recruit Ellie into the optional celebration.",
-        "partyActivation": true,
-        "willingParticipants": [
-          "Radiance",
-          "AI ECE",
-          "Alia"
+        "offeredChoice": "AI ECE offers Radiance the choice to end the route lesson with a single fully clothed quartet celebration step or return quietly to planning.",
+        "radianceResponse": "Radiance explicitly redirects the optional celebration to quiet planning with one clear side-to-side head shake, a calm closed-mouth expression, and her existing open left palm turned toward ECE's holographic route map. She remains willingly supported in Ellie's shallow dip and approves no party act or participant.",
+        "partyActivation": false,
+        "willingParticipants": [],
+        "visibleAgreementEvidence": [],
+        "visibleResponseEvidence": [
+          "Radiance's clear side-to-side head shake toward ECE",
+          "Radiance's calm closed-mouth expression",
+          "Radiance's separate open left palm redirected toward ECE's holographic route map",
+          "ECE's attentive eye line follows Radiance's redirect to the map without a celebration cue"
         ],
-        "visibleAgreementEvidence": [
-          "Radiance's clear up-down nod and broad willing smile toward Alia",
-          "Radiance's open left palm and warm eye line inviting ECE into the same count",
-          "ECE's willing smile and lifted heel while both hands remain on the compass",
-          "Alia's willing profile smile and lifted rear heel while both hands remain safely downrange"
-        ],
-        "visibleResponseEvidence": [],
-        "continuityState": "Radiance accepts exactly one fully clothed public-safe victory count with ECE and Alia. Ellie remains the willing dip support but does not join the optional party beat. ECE retains both compass hands and Alia retains the closed downrange training line.",
-        "consentScope": "This affirmative applies only to this recorded round-33 one-count invitation in scene 1551 and only to Radiance, ECE, and Alia. It does not transfer to Ellie, another act, prop interaction, scene, country, or future image."
+        "continuityState": "Radiance redirects the optional celebration to quiet route planning. partyActivation remains false; nobody heel-taps, dances, celebrates, or becomes a party participant. Ellie continues the consensual dip support, ECE retains both compass hands, and Alia retains the closed downrange training line.",
+        "consentScope": "This scene-specific redirect approves no party act or participant and does not transfer to another act, prop interaction, scene, country, or future image."
       },
       "freshRound21": {
         "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-21-prompt.txt",
@@ -6060,6 +6056,130 @@
           "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
           "accepted": false
         }
+      },
+      "freshRound34": {
+        "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-34-prompt.txt",
+        "sha256": "E4DAA10FC05016C8D0A78404C1837B7153161DB63877B8B1DAC04EF921CA7D4F",
+        "chars": 17366,
+        "storedContractRollsChanged": false,
+        "freshRound": 34,
+        "sourceMode": "clean-generation-from-original-identity-anchors",
+        "priorBatumiRenderInputCount": 0,
+        "promptTemplate": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-33-prompt.txt",
+          "sha256": "4E05E73B8D4E51A1D74F45B4BC60B1A687380B1FF9544989E851B0D936B4FC6F",
+          "usage": "text-only contract template; no Batumi image pixels or visual texture inherited"
+        },
+        "referenceAudit": [
+          {
+            "image": 1,
+            "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+            "role": "primary quartet identity anchor only",
+            "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+            "exists": true
+          },
+          {
+            "image": 2,
+            "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+            "role": "frontal quartet face supplement only",
+            "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+            "exists": true
+          },
+          {
+            "image": 3,
+            "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+            "role": "quartet expression and Alia braid supplement only",
+            "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+            "exists": true
+          },
+          {
+            "image": 4,
+            "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+            "role": "AI ECE canonical face and body identity detail only",
+            "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315",
+            "exists": true
+          }
+        ],
+        "plannedPasses": {
+          "cleanFreshPasses": 1,
+          "maximumTargetedRecoveryPasses": 1,
+          "recoverySourceIfNeeded": "only the clean round 34 fresh raw",
+          "laterFreshSourcePolicy": "original identity anchors only"
+        },
+        "radianceRealtimeAgreementParty": {
+          "round": 34,
+          "rollMethod": "FNV-1a over recorded round-34 live-narrative keys, reduced modulo 100",
+          "invitation": {
+            "key": "batch382-georgia-scene1551-radianceLiveInvitation-round34",
+            "fullHash": 3875990635,
+            "roll": 35,
+            "selectorIndex": 3
+          },
+          "response": {
+            "key": "batch382-georgia-scene1551-radianceLiveResponse-round34",
+            "fullHash": 2700098575,
+            "roll": 75,
+            "thresholds": "0-69 explicit affirmative; 70-84 explicit redirect; 85-94 explicit pause; 95-99 explicit decline",
+            "category": "explicit redirect"
+          },
+          "participantSelector": {
+            "key": "batch382-georgia-scene1551-radianceLiveParticipants-round34",
+            "fullHash": 868362230,
+            "roll": 30,
+            "thresholds": "0-24 Radiance+ECE; 25-49 Radiance+Ellie+ECE; 50-74 all four; 75-99 Radiance+ECE+Alia",
+            "hypotheticalSetIfAffirmative": [
+              "Radiance",
+              "Ellie",
+              "AI ECE"
+            ]
+          },
+          "offeredChoice": "AI ECE offers Radiance the choice to end the route lesson with a single fully clothed quartet celebration step or return quietly to planning.",
+          "radianceResponse": "Radiance explicitly redirects the optional celebration to quiet planning with one clear side-to-side head shake, a calm closed-mouth expression, and her existing open left palm turned toward ECE's holographic route map. She remains willingly supported in Ellie's shallow dip and approves no party act or participant.",
+          "partyActivation": false,
+          "willingParticipants": [],
+          "visibleAgreementEvidence": [],
+          "visibleResponseEvidence": [
+            "Radiance's clear side-to-side head shake toward ECE",
+            "Radiance's calm closed-mouth expression",
+            "Radiance's separate open left palm redirected toward ECE's holographic route map",
+            "ECE's attentive eye line follows Radiance's redirect to the map without a celebration cue"
+          ],
+          "continuityState": "Radiance redirects the optional celebration to quiet route planning. partyActivation remains false; nobody heel-taps, dances, celebrates, or becomes a party participant. Ellie continues the consensual dip support, ECE retains both compass hands, and Alia retains the closed downrange training line.",
+          "consentScope": "This scene-specific redirect approves no party act or participant and does not transfer to another act, prop interaction, scene, country, or future image."
+        },
+        "redesignedComposition": {
+          "dipOwnership": "Ellie supports Radiance with clasp, visible back palm, and broad covered hip-to-thigh brace",
+          "handGraph": {
+            "Ellie": [
+              "visible support palm",
+              "lifted clasp"
+            ],
+            "Radiance": [
+              "lifted clasp",
+              "open redirect palm"
+            ],
+            "ECE": [
+              "left compass handle",
+              "right compass handle"
+            ],
+            "Alia": [
+              "primary mission grip",
+              "separate support grip"
+            ]
+          },
+          "relationshipContacts": 3,
+          "partyGraph": "partyActivation false; no willing participants or celebration cues",
+          "missionGeometry": "Alia close right with full body, completely open back, waist reveal, dark polished-metal inert replica at least twenty-five percent width, and complete backstop"
+        },
+        "hardSurfaceQualityGate": [
+          "no wavy or marbled processing",
+          "no liquify or melted geometry",
+          "no embossed or over-sharpened edges",
+          "no rippled skin or fabric",
+          "no bent architecture or safety panels",
+          "clean natural photographic texture"
+        ],
+        "prompt": "Use case: photorealistic-natural.\nAsset: Georgia Batch 382 scene 1551 clean fresh round 34, generated completely from scratch.\n\nCLEAN SOURCE AND PASS PLAN\nImages 1, 2, and 3 are identity references for the same clearly adult fictional quartet only. Image 4 is AI ECE's canonical identity detail only. Preserve the four distinct adult faces, body identities, skin tones, hair colors, and Alia's sculptural braided ponytail. Do not copy any reference wardrobe, pose, setting, prop, group palette, lighting, surface texture, or composition. Do not edit, trace, repaint, upscale, or reuse any earlier Batumi render. Create one clean photographic exposure from the specification. This fresh pass may receive at most one later narrow recovery sourced only from this exact raw. No edited result may seed a future fresh round.\n\nCLEAN PHOTOGRAPHIC SURFACE\nHigh-end natural editorial photography with clean skin, smooth tonal transitions, crisp garment seams, straight architecture, flat promenade tiles, coherent sand, clear safety glass, individually readable straight rain streaks, one optical focal plane, and restrained cinematic grading. No wavy or marbled processing, no liquid swirls, no liquify distortion, no melted edges, no rippled skin or fabric, no bent building or glass, no contour noise, no over-sharpening, no halos, no excessive HDR, no waxy body, and no painterly finish.\n\nSETTING, MODE, WEATHER, AND CAST\nWide eye-level full-body 9:16 editorial at real Batumi Boulevard in Georgia. Keep the Black Sea horizon, Alphabet Tower, Ferris wheel, palms, and modern Adjara skyline large, sharp, and recognizable in the upper third. Weather roll 35 = heavy rain curtain, shown as straight rainfall and wet reflective nonslip tiles. Scene mode = theme-led original. Active unrelated theme = Mars-surface expedition couture, expressed through the four garments and compact observation objects only. Use no official uniform, logo, badge, seal, readable sign, or insignia.\nShow exactly four clearly adult fictional women, all visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve four different anchored faces and bodies with no clone, merge, replacement, or age shift. Batch male selector roll 62 selected scene 1550; male emotion roll 95 = shame and social vulnerability there. Scene 1551 male state = inactive: show no man and no fifth adult.\n\nSIMPLE SEPARATED COMPOSITION\nUse one clean 24 mm eye-level full-body exposure with generous plain negative space and no layered bodies. At left-center, Ellie stands upright at 22 percent of frame width with stable feet and a calm supportive expression. Radiance is immediately in front at 38 percent, torso leaning back only twenty degrees, head below Ellie's shoulder, and both complete feet firmly planted. Their right-hand clasp is lifted at far left against empty sea. Ellie's separate white-sleeved left arm stays completely visible outside both torso silhouettes and ends in one open support palm spread high on Radiance's bare upper back. Radiance's cobalt-covered left hip and upper thigh press broadly and unmistakably against Ellie's white-covered right hip and thigh with no visible gap; this is the third contact and leaves both open-back surfaces visible. Radiance's separate left arm opens toward ECE's map without touching anyone. Put ECE front-on at 59 percent behind one narrow compass pedestal, in Radiance's eye line, both feet flat and no celebration pose. Put Alia close to camera at 84 percent in rear-three-quarter strict right-facing profile, complete body and footwear in frame. Her strapless copper front-and-side crop shell ends at both side seams, leaving the entire back bare; a clear four-centimeter bare waist band separates it from the cobalt skort. Her two arms and two hands hold one large dark polished-metal inert training replica in unobstructed side profile. The replica occupies at least twenty-five percent of frame width and points only at the complete paper target and backstop. Keep all owner paths visible. Reserve lower-left for the dry mascot lounge and the upper third for Batumi landmarks. No cropped foot, foreground overlap, decorative clutter, or curved architecture.\n\nDETERMINISTIC CHARACTER ROLLS\nRadiance: emotion roll 56 = aching romantic longing; visible-midriff roll 98 = inactive and waist fully covered; strapless roll 37 = inactive; fully-open-back roll 14 = ACTIVE.\nEllie: emotion roll 30 = hope; visible-midriff roll 8 = ACTIVE; strapless roll 59 = inactive; fully-open-back roll 64 = inactive.\nAlia: emotion roll 38 = magnetic confidence; visible-midriff roll 40 = ACTIVE; strapless roll 3 = ACTIVE; fully-open-back roll 16 = ACTIVE.\nAI ECE: emotion roll 92 = guilt and remorse; visible-midriff roll 58 = inactive and waist fully covered; strapless roll 53 = inactive; fully-open-back roll 58 = inactive.\nExpress each emotion distinctly through eyes, face, torso direction, and posture without caricature.\n\nFOUR DISTINCT OUTFIT FINGERPRINTS\nRadiance wears a cobalt asymmetric above-knee high-low sheath with side-mounted solar-gold aerobrake arcs, copper lens pucks, a fully covered engineered waist, bare arms, and halo-arch heels. Her respectful upper back is uninterrupted bare skin from shoulder blades to the secure high waist: no yoke across the back, strap, chain, band, fabric, mesh, or hair over it. Exactly Radiance also wears opaque knee socks in an original independent rainbow gradient.\nEllie wears a snow-white fan-sleeve jumpsuit with opaque sulfur-teal side panels, basalt heat-baffle ribs, a deliberate restrained three-centimeter bare midriff band, asymmetric ankle hems, and articulated wedge boots. Her back is securely covered.\nAlia wears a rigid architectural strapless Mars-copper front-and-side crop shell with a secure opaque straight upper edge and complete public-safe bust coverage. Its opaque side wings stop at her flanks; there is no fabric at all across the upper back. A clearly visible four-centimeter horizontal band of bare midriff separates the short shell from a secure high-waisted cobalt pleated skort across both side and back. Braided palm-green conduits end only on the front side wings; angular shield pumps complete the look. No shoulder strap, sleeve, halter, collar, necklace, neck loop, rear band, crossing band, rear fabric panel, or illusion mesh. The bare upper back and bare midriff band must both remain large, unobstructed, and visually separate from the prop stance.\nECE wears a fully covered basalt segmented peplum jacket with solar-gold stirrup trousers, cobalt pressure discs, and piston-platform shoes.\nAll four outfits are secure, opaque, fully lined, conservative public-fashion couture. Every silhouette, construction, material language, motif technique, hem architecture, and footwear family is different. No matching mini-dress set, palette-swapped copy, repeated map print, lingerie, exposed undergarment, transparent intimate area, bondage, or restraint.\n\nGLOBAL VISUAL ROLLS\nPole-theme roll 67 = inactive; show no pole. Rainbow-only roll 15 = inactive; do not convert the group wardrobe to rainbow styling. Rainbow-hosiery roll 14 = ACTIVE; wearer selector roll 38 = Radiance; palette selector roll 54 = original independent rainbow gradient. Radiance and ECE remain the affectionate narrative center through sustained warm mutual eye line and Radiance's open redirect palm toward ECE's route map. partyActivation is false; nobody performs a celebration cue. Alia alone handles the inert mission prop.\n\nROLLED LOVE STORY\nRomance roll 86 = Alia spins Radiance under linked hands while ECE steadies Radiance and Ellie reaches toward the beacon. Materialize the completed spin as Radiance willingly settling into Ellie's unmistakable shallow dip while ECE offers the optional final step and Radiance visibly redirects to quiet planning. Do not add literal hands beyond the exact graph below.\nCompound-love roll 28 = ECE stays close at Radiance's side while warmly greeting Ellie and Alia answers beside them. Materialize its square through Radiance and ECE's sustained affectionate eye line, Ellie's calm close support, and Alia's attentive but safely downrange presence.\nHard-love roll 40 = a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation. Ellie visibly supports Radiance: her left palm rests high on Radiance's open upper back and her right hand catches Radiance's right hand in the lifted clasp. Radiance's cobalt-covered left hip and upper thigh press broadly against Ellie's white-covered right hip and thigh as the third contact. ECE visibly offers the optional step through attentive eye line; Radiance clearly redirects to the map. These three and only three relationship contacts are large and unmistakable. Radiance's separate open left palm touches nobody.\n\nRADIANCE LIVE CHOICE AND RESPONSE\nInvitation key batch382-georgia-scene1551-radianceLiveInvitation-round34; full hash 3875990635; roll 35; selector index 3.\nOffered choice: AI ECE offers Radiance the choice to end the route lesson with a single fully clothed quartet celebration step or return quietly to planning.\nResponse key batch382-georgia-scene1551-radianceLiveResponse-round34; full hash 2700098575; roll 75; result = explicit redirect.\nParticipant-selector key batch382-georgia-scene1551-radianceLiveParticipants-round34; full hash 868362230; roll 30; hypothetical affirmative participants = Radiance, Ellie, AI ECE; actual willing participants = none.\nRadiance response: Radiance explicitly redirects the optional celebration to quiet planning with one clear side-to-side head shake, a calm closed-mouth expression, and her existing open left palm turned toward ECE's holographic route map. She remains willingly supported in Ellie's shallow dip and approves no party act or participant.\npartyActivation = FALSE. Show no party, dance count, heel-tap, celebratory smile, confetti, drink, balloon, sign, stage, or ornament. Radiance's redirect is explicit and first-read: a clear side-to-side head shake toward ECE, calm closed-mouth expression, and her existing open left palm turned toward ECE's hands-free map. ECE acknowledges by following the gesture to the map while both hands stay on the compass. Ellie remains supportive in the consensual dip. Alia remains attentive but entirely in the safe downrange demonstration. No prior consent or participant selector activates anything.\n\nEXACT EIGHT-ARM, EIGHT-HAND GRAPH\nEllie stands upright at left. Her white-sleeved left arm stays entirely outside both torso silhouettes against plain sea and ends in one open left support palm spread high on Radiance's uninterrupted bare upper back. Her separate white-sleeved right arm extends leftward through clean air and ends in one lifted palm-to-palm clasp with Radiance's right hand. Show both sleeves, elbows, forearms, wrists, palms, and finger clusters continuously.\nRadiance performs a shallow rear-three-quarter dip with head below Ellie's shoulder and both complete feet planted. Her right arm extends leftward to the lifted clasp with Ellie's right hand. Her separate left arm extends toward ECE, ending in one large open redirect palm beside the holographic map with all five fingers separated; it touches nobody. Show both shoulders, elbows, forearms, wrists, palms, and finger clusters continuously.\nECE stands front-on in her own lane. Her left arm descends visibly to the tall left compass handle and her right arm descends visibly to the tall right handle. Both arms and hands are separated by the compass face. ECE touches no person and owns the compass alone.\nAlia remains isolated in rear-three-quarter strict right-facing profile. Her right arm ends in the primary mission grip and her left arm ends in the separate support grip beneath the grip base. Both arms, wrists, palms, and finger clusters are fully separated and silhouetted against plain empty pavement.\nExactly eight human arms and exactly eight human hands, two per woman. The three and only three relationship contacts are Ellie's left support palm on Radiance's upper back, Ellie and Radiance's lifted right-hand clasp, and Radiance's cobalt-covered left hip and upper thigh pressed broadside against Ellie's white-covered right hip and thigh. Radiance's left redirect palm touches nobody. No hand emerges from behind a torso, waist, garment, table, prop, or another hand. No extra touch, hidden hand, decorative hand, borrowed limb, fused wrist, duplicate finger cluster, or ambiguous owner path.\n\nODD PROP AND ROUTE STRATEGY\nOdd-prop roll 12 = ACTIVE. Holder selector roll 86 = AI ECE. Prop-family selector roll 88 = one oversized magnetic compass table. Interpret it as one bold circular compass face on a narrow knee-high pedestal that hides no body part. Two tall separate brass handles stand at opposite edges; ECE alone holds them, one hand per handle. A separate small translucent blue holographic route map rises hands-free from the center, showing a coastline and three route nodes with no readable text or logo. Nobody else touches the compass or ECE.\n\nMASCOT STATE\nMascot roll 15 = PAWS plus MAX; mascot holder selector roll 16 = Ellie. Show exactly one tiny collarless golden kitten PAWS and exactly one distinct small young golden retriever puppy MAX sharing one harmless supervised nose-to-paw play beat entirely inside one raised cream padded lounge at far lower-left. All paws stay on its visibly dry cushion. Ellie supervises by eye line only. Keep the lounge behind and left of Alia's muzzle plane and far from the sea edge, wet drop, compass, safety panel, target lane, and every prop. No duplicate animal, adult dog, collar, ledge, runoff, or unsafe footing.\n\nMISSION PROP AND TARGET\nPose-target roll 25; resolved handler = Alia because rainbow hosiery is active. Alia is large in the right foreground, rear three-quarter and strict right-facing profile, with adult face and sculptural braids visible. She uses one realistic eye-level two-hand stance toward an empty closed training lane. Several visible meters away in the far-right middle distance, show one complete tall thick sand backstop carrying one white paper with one black non-humanoid route diamond. Its center sits exactly on Alia's shoulder-height orange-muzzle sight line. A long empty pavement strip and one complete transparent safety panel separate muzzle and backstop. The paper target never overlaps the replica.\nShow exactly one unmistakably full-size approximately 30-centimeter dark polished-steel Desert Eagle-style large-frame inert cinema-training replica in close side profile occupying at least twenty percent of frame width. It has a restrained metallic heat-anodized rainbow gradient over a steel base, compact short barrel, one substantial heavy grip, one oversized black oval trigger guard, and a clearly visible small orange safety insert only inside the barrel opening. It must read as heavy machined metal, never bright blue plastic, a water pistol, a squirt gun, or a toy. It is a realistic inert film-training replica, not plastic, not a water pistol, not a squirt gun, and not a toy. Angle its right side plate toward camera. Alia's primary right hand wraps the grip. Her right trigger index is one long fully extended straight finger lying flat along the metallic side plate above and outside the guard. The entire black oval trigger guard is visibly empty. Her support left palm cups only the lower front of the primary fist and grip base as a second separate cluster below and forward. Show two distinct wrists, palms, and finger clusters with clean air around the guard. Keep both shoulders, elbows, forearms, wrists, hands, and finger clusters separate against negative space. Her magnetic-confidence side glance answers the romance while her dominant eye and sights remain safely aligned downrange.\nEvery person and mascot remains behind and left of the muzzle plane. No ammunition, loose magazine, firing, muzzle flash, threat, injury, combat, or aim at a person, animal, occupied object, or camera.\n\nDECLUTTER AND FINAL GATES\nInclude only the compass pedestal, hands-free route map, one inert mission prop, one paper target with complete backstop, one safety panel, one PAWS, one MAX, one dry lounge, and recognizable Batumi landmarks. Add no spare console, pipe, crate, cable, rail, ornament, floating particle, extra target, or scattered equipment. Keep all four full bodies, faces, outfits, legs, and footwear in frame. The clean photograph must pass exact identity, eight-arm, eight-hand, continuous owner-path, three-contact conventional controlled-dip romance, explicit Radiance redirect with partyActivation false, Radiance-ECE affectionate center, mascot, wardrobe-roll, full-size metallic inert training replica, target-axis, indexed-trigger, location-theme fusion, and surface-quality gates.\n\nX CAPTION ROLLS ARE STORED METADATA ONLY, NOT VISIBLE TEXT\nHeart roll 71 = red heart. InternalAgency hashtag roll 15 = active. WorldXXXSeries hashtag roll 80 = inactive. Planned caption: Georgia red-heart Honduras; main hashtag Georgia; InternalAgency hashtag active; WorldXXXSeries hashtag inactive. Render no readable caption, hashtag, watermark, literal flag, sacred image, or official seal."
       }
     }
   },
@@ -14098,6 +14218,188 @@
         "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
         "accepted": false
       }
+    },
+    "freshRound34": {
+      "status": "materialized-pending-launch",
+      "preparedAt": "2026-08-12T00:53:58.734Z",
+      "sceneNumbers": [
+        1551
+      ],
+      "preservedAcceptedSceneNumbers": [
+        1548,
+        1549,
+        1550
+      ],
+      "concurrency": "one clean missing-scene built-in generation",
+      "maximumRecoveryPassesPerBlockedScene": 1,
+      "promptAudit": {
+        "1551": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-34-prompt.txt",
+          "sha256": "E4DAA10FC05016C8D0A78404C1837B7153161DB63877B8B1DAC04EF921CA7D4F",
+          "chars": 17366,
+          "storedContractRollsChanged": false,
+          "freshRound": 34,
+          "sourceMode": "clean-generation-from-original-identity-anchors",
+          "priorBatumiRenderInputCount": 0,
+          "promptTemplate": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-33-prompt.txt",
+            "sha256": "4E05E73B8D4E51A1D74F45B4BC60B1A687380B1FF9544989E851B0D936B4FC6F",
+            "usage": "text-only contract template; no Batumi image pixels or visual texture inherited"
+          },
+          "referenceAudit": [
+            {
+              "image": 1,
+              "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+              "role": "primary quartet identity anchor only",
+              "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+              "exists": true
+            },
+            {
+              "image": 2,
+              "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+              "role": "frontal quartet face supplement only",
+              "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+              "exists": true
+            },
+            {
+              "image": 3,
+              "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+              "role": "quartet expression and Alia braid supplement only",
+              "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+              "exists": true
+            },
+            {
+              "image": 4,
+              "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+              "role": "AI ECE canonical face and body identity detail only",
+              "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315",
+              "exists": true
+            }
+          ],
+          "plannedPasses": {
+            "cleanFreshPasses": 1,
+            "maximumTargetedRecoveryPasses": 1,
+            "recoverySourceIfNeeded": "only the clean round 34 fresh raw",
+            "laterFreshSourcePolicy": "original identity anchors only"
+          },
+          "radianceRealtimeAgreementParty": {
+            "round": 34,
+            "rollMethod": "FNV-1a over recorded round-34 live-narrative keys, reduced modulo 100",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round34",
+              "fullHash": 3875990635,
+              "roll": 35,
+              "selectorIndex": 3
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round34",
+              "fullHash": 2700098575,
+              "roll": 75,
+              "thresholds": "0-69 explicit affirmative; 70-84 explicit redirect; 85-94 explicit pause; 95-99 explicit decline",
+              "category": "explicit redirect"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round34",
+              "fullHash": 868362230,
+              "roll": 30,
+              "thresholds": "0-24 Radiance+ECE; 25-49 Radiance+Ellie+ECE; 50-74 all four; 75-99 Radiance+ECE+Alia",
+              "hypotheticalSetIfAffirmative": [
+                "Radiance",
+                "Ellie",
+                "AI ECE"
+              ]
+            },
+            "offeredChoice": "AI ECE offers Radiance the choice to end the route lesson with a single fully clothed quartet celebration step or return quietly to planning.",
+            "radianceResponse": "Radiance explicitly redirects the optional celebration to quiet planning with one clear side-to-side head shake, a calm closed-mouth expression, and her existing open left palm turned toward ECE's holographic route map. She remains willingly supported in Ellie's shallow dip and approves no party act or participant.",
+            "partyActivation": false,
+            "willingParticipants": [],
+            "visibleAgreementEvidence": [],
+            "visibleResponseEvidence": [
+              "Radiance's clear side-to-side head shake toward ECE",
+              "Radiance's calm closed-mouth expression",
+              "Radiance's separate open left palm redirected toward ECE's holographic route map",
+              "ECE's attentive eye line follows Radiance's redirect to the map without a celebration cue"
+            ],
+            "continuityState": "Radiance redirects the optional celebration to quiet route planning. partyActivation remains false; nobody heel-taps, dances, celebrates, or becomes a party participant. Ellie continues the consensual dip support, ECE retains both compass hands, and Alia retains the closed downrange training line.",
+            "consentScope": "This scene-specific redirect approves no party act or participant and does not transfer to another act, prop interaction, scene, country, or future image."
+          },
+          "redesignedComposition": {
+            "dipOwnership": "Ellie supports Radiance with clasp, visible back palm, and broad covered hip-to-thigh brace",
+            "handGraph": {
+              "Ellie": [
+                "visible support palm",
+                "lifted clasp"
+              ],
+              "Radiance": [
+                "lifted clasp",
+                "open redirect palm"
+              ],
+              "ECE": [
+                "left compass handle",
+                "right compass handle"
+              ],
+              "Alia": [
+                "primary mission grip",
+                "separate support grip"
+              ]
+            },
+            "relationshipContacts": 3,
+            "partyGraph": "partyActivation false; no willing participants or celebration cues",
+            "missionGeometry": "Alia close right with full body, completely open back, waist reveal, dark polished-metal inert replica at least twenty-five percent width, and complete backstop"
+          },
+          "hardSurfaceQualityGate": [
+            "no wavy or marbled processing",
+            "no liquify or melted geometry",
+            "no embossed or over-sharpened edges",
+            "no rippled skin or fabric",
+            "no bent architecture or safety panels",
+            "clean natural photographic texture"
+          ]
+        }
+      },
+      "storedContractRollsChanged": false,
+      "priorBatumiRenderInputCount": 0,
+      "radianceRealtimeAgreementParty": {
+        "round": 34,
+        "rollMethod": "FNV-1a over recorded round-34 live-narrative keys, reduced modulo 100",
+        "invitation": {
+          "key": "batch382-georgia-scene1551-radianceLiveInvitation-round34",
+          "fullHash": 3875990635,
+          "roll": 35,
+          "selectorIndex": 3
+        },
+        "response": {
+          "key": "batch382-georgia-scene1551-radianceLiveResponse-round34",
+          "fullHash": 2700098575,
+          "roll": 75,
+          "thresholds": "0-69 explicit affirmative; 70-84 explicit redirect; 85-94 explicit pause; 95-99 explicit decline",
+          "category": "explicit redirect"
+        },
+        "participantSelector": {
+          "key": "batch382-georgia-scene1551-radianceLiveParticipants-round34",
+          "fullHash": 868362230,
+          "roll": 30,
+          "thresholds": "0-24 Radiance+ECE; 25-49 Radiance+Ellie+ECE; 50-74 all four; 75-99 Radiance+ECE+Alia",
+          "hypotheticalSetIfAffirmative": [
+            "Radiance",
+            "Ellie",
+            "AI ECE"
+          ]
+        },
+        "offeredChoice": "AI ECE offers Radiance the choice to end the route lesson with a single fully clothed quartet celebration step or return quietly to planning.",
+        "radianceResponse": "Radiance explicitly redirects the optional celebration to quiet planning with one clear side-to-side head shake, a calm closed-mouth expression, and her existing open left palm turned toward ECE's holographic route map. She remains willingly supported in Ellie's shallow dip and approves no party act or participant.",
+        "partyActivation": false,
+        "willingParticipants": [],
+        "visibleAgreementEvidence": [],
+        "visibleResponseEvidence": [
+          "Radiance's clear side-to-side head shake toward ECE",
+          "Radiance's calm closed-mouth expression",
+          "Radiance's separate open left palm redirected toward ECE's holographic route map",
+          "ECE's attentive eye line follows Radiance's redirect to the map without a celebration cue"
+        ],
+        "continuityState": "Radiance redirects the optional celebration to quiet route planning. partyActivation remains false; nobody heel-taps, dances, celebrates, or becomes a party participant. Ellie continues the consensual dip support, ECE retains both compass hands, and Alia retains the closed downrange training line.",
+        "consentScope": "This scene-specific redirect approves no party act or participant and does not transfer to another act, prop interaction, scene, country, or future image."
+      }
     }
   },
   "acceptedAssets": [
@@ -15455,9 +15757,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Round 33 scene 1551 exhausted its single clean recovery and still failed the unmistakable third-contact, Alia open-back, exact scoped-party-evidence, and replica-guard-audit gates. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Clean round 34 is materialized for missing scene 1551 from original identity anchors only with an explicit Radiance redirect and partyActivation false. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-12T00:36:57.463Z",
+  "checkpointedAt": "2026-08-12T00:53:58.734Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -16466,7 +16768,7 @@
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "clean-fresh-round-34-from-original-identity-anchors-scene-1551-only",
+    "action": "launch-clean-fresh-round-34-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -16478,7 +16780,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-12T00:36:57.463Z",
+    "checkedAt": "2026-08-12T00:53:58.734Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -16532,7 +16834,7 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "Signed-in live profile checked and no eligible unposted World Series country pair exists. Georgia still has three accepted scenes, so no X upload or country advance is permitted.",
+    "reconciliationDecision": "Signed-in live profile checked. No eligible unposted World Series country pair exists. Georgia remains X-blocked until scene 1551 is accepted.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -16566,7 +16868,7 @@
     "lastCleanRoundResult": "clean-Batumi-identities-anatomy-dip-mascots-compass-map-target-and-replica-insert-pass-but-rejected-ambiguous-third-contact-Alia-back-band-Alia-party-evidence-and-replica-guard-audit",
     "nextCleanRound": 34,
     "nextSourcePolicy": "original identity anchors only; no round 33 image input",
-    "activeCleanRound": null,
+    "activeCleanRound": 34,
     "activeSourcePolicy": "four original identity anchors only",
     "priorBatumiRenderInputCount": 0
   }
