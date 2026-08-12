@@ -30,5 +30,3 @@ spl-transfer-hook-interface.workspace = true
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
-
-
