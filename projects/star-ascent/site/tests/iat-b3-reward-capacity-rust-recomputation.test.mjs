@@ -36,6 +36,8 @@ const RANDOMNESS = "42".repeat(32);
 const SOURCE_ID = "ccc-test-source";
 const ESCAPED_SOURCE_ID = "ccc/\"quoted\"\\path\b\f\n\r\t\u0001\u001e|é|雪|🚀|\u2028|end";
 const WEEKLY_FACTION_WEEK_ID = "week/\"quoted\"\\path\b\f\n\r\t\u0001|é|雪|🚀|\u2028|\u2029|end";
+const WEEKLY_FACTION_FOLLOWER_IDENTITY =
+  "follower/\"quoted\"\\path\b\f\n\r\t\u0001|é|雪|🚀|\u2028|\u2029|end";
 const X_BOUND_SOURCE_PRIORITY = Object.freeze({
   GENESIS_AIRDROP: "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
   X_INTERACTION: "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
@@ -297,7 +299,7 @@ function multiEntryFactionManifest() {
         rewardNumber: 91_003,
         trancheKind: "X_PREMIUM_UPGRADE_90",
         sequence: 93,
-        identity: "follower-upgrade",
+        identity: WEEKLY_FACTION_FOLLOWER_IDENTITY,
         amount: 300,
         eligibleSequence: 5,
         activitySequence: 6,
@@ -648,6 +650,195 @@ function hostileWeeklyFactionVectors(canonical) {
   return Object.freeze(vectors);
 }
 
+function hostileWeeklyPayoutEntryVectors(canonical) {
+  const canonicalEntries = findWeeklyFactionCandidate(canonical.roundState.roundSeal).payoutEntries;
+  const entryIndexFor = (tranche) => {
+    const index = canonicalEntries.findIndex((entry) => entry.trancheKinds[0] === tranche);
+    assert.ok(index >= 0, `weekly payout entry ${tranche}`);
+    return index;
+  };
+  const mutateEntry = (mutate, index = 1) => bindHostileSeal(canonical, (roundSeal) => {
+    const candidate = findWeeklyFactionCandidate(roundSeal);
+    mutate(candidate.payoutEntries[index], candidate);
+    refreshWeeklyManifestBindings(roundSeal, candidate);
+  });
+  return Object.freeze({
+    middleMissingAmount: mutateEntry((entry) => { delete entry.amount; }),
+    middleMissingChronology: mutateEntry((entry) => { delete entry.chronology; }),
+    middleMissingFragmentId: mutateEntry((entry) => { delete entry.fragmentId; }),
+    middleMissingRewardId: mutateEntry((entry) => { delete entry.rewardId; }),
+    middleMissingTrancheKinds: mutateEntry((entry) => { delete entry.trancheKinds; }),
+    middleExtraField: mutateEntry((entry) => { entry.unexpected = false; }),
+    middleEmptyTranche: mutateEntry((entry) => { entry.trancheKinds = []; }),
+    middleMultipleTranches: mutateEntry((entry) => {
+      entry.trancheKinds = ["X_PREMIUM_FULL_100", "X_BASE_10"];
+    }),
+    middleUnknownTranche: mutateEntry((entry) => { entry.trancheKinds = ["X_UNKNOWN"]; }),
+    middleFragmentIdMismatch: mutateEntry((entry) => { entry.fragmentId = hex(991_001); }),
+    middleRewardIdDerivedMismatch: mutateEntry((entry) => { entry.rewardId = hex(991_002); }),
+    middleUppercaseFragmentId: mutateEntry((entry) => {
+      entry.fragmentId = entry.fragmentId.toUpperCase();
+    }),
+    middleUppercaseRewardId: mutateEntry((entry) => {
+      entry.rewardId = entry.rewardId.toUpperCase();
+    }),
+    baseExtraLineage: mutateEntry((entry) => {
+      entry.originalBaseAdmissionLineage = structuredClone(
+        canonicalEntries[entryIndexFor("X_PREMIUM_UPGRADE_90")].originalBaseAdmissionLineage,
+      );
+    }, entryIndexFor("X_BASE_10")),
+    upgradeMissingLineage: mutateEntry((entry) => {
+      delete entry.originalBaseAdmissionLineage;
+    }, entryIndexFor("X_PREMIUM_UPGRADE_90")),
+    upgradeNullLineageContents: mutateEntry((entry) => {
+      entry.originalBaseAdmissionLineage = null;
+    }, entryIndexFor("X_PREMIUM_UPGRADE_90")),
+    upgradeOpaqueLineageContents: mutateEntry((entry) => {
+      entry.originalBaseAdmissionLineage = { opaque: "externally-prevalidated-only" };
+    }, entryIndexFor("X_PREMIUM_UPGRADE_90")),
+    chronologyMissingActivity: mutateEntry((entry) => {
+      delete entry.chronology.activitySequence;
+    }),
+    chronologyMissingCommitment: mutateEntry((entry) => {
+      delete entry.chronology.commitmentDigest;
+    }),
+    chronologyMissingEligible: mutateEntry((entry) => {
+      delete entry.chronology.eligibleSequence;
+    }),
+    chronologyMissingIdentity: mutateEntry((entry) => {
+      delete entry.chronology.immutableIdentity;
+    }),
+    chronologyMissingNode: mutateEntry((entry) => {
+      delete entry.chronology.nodeSequence;
+    }),
+    chronologyExtraField: mutateEntry((entry) => { entry.chronology.unexpected = "0"; }),
+    chronologyActivityWrongStoredType: mutateEntry((entry) => {
+      entry.chronology.activitySequence = 9;
+    }),
+    chronologyCommitmentNotHex32: mutateEntry((entry) => {
+      entry.chronology.commitmentDigest = "not-a-canonical-digest";
+    }),
+    chronologyIdentityEmpty: mutateEntry((entry) => { entry.chronology.immutableIdentity = ""; }),
+    chronologyIdentityLeadingTrim: mutateEntry((entry) => {
+      entry.chronology.immutableIdentity = `\u00a0${WEEKLY_FACTION_FOLLOWER_IDENTITY}`;
+    }),
+    chronologyIdentityTrailingTrim: mutateEntry((entry) => {
+      entry.chronology.immutableIdentity = `${WEEKLY_FACTION_FOLLOWER_IDENTITY}\t`;
+    }),
+  });
+}
+
+function replaceBufferOnce(bytes, needle, replacement) {
+  const offset = bytes.indexOf(needle);
+  assert.ok(offset >= 0, `raw marker ${needle.toString("utf8")}`);
+  return Buffer.concat([
+    bytes.subarray(0, offset),
+    replacement,
+    bytes.subarray(offset + needle.length),
+  ]);
+}
+
+function bindRawWeeklyPayout(canonical, mutatePayoutBytes) {
+  const roundSeal = structuredClone(canonical.roundState.roundSeal);
+  const candidate = findWeeklyFactionCandidate(roundSeal);
+  const canonicalPayout = canonicalBytes(candidate.payoutEntries);
+  const mutatedPayout = mutatePayoutBytes(Buffer.from(canonicalPayout), candidate);
+  const payoutDigest = sha256(mutatedPayout);
+  candidate.payoutDigest = payoutDigest;
+  candidate.chronology.commitmentDigest = payoutDigest;
+  candidate.id = sha256(
+    `IAT_B3_WEEKLY_FACTION_MANIFEST_V1|${FUNDING_ROUND}|${candidate.factionWeekId}|${payoutDigest}`,
+  );
+  const candidateIndex = roundSeal.candidates.indexOf(candidate);
+  roundSeal.candidateIds[candidateIndex] = candidate.id;
+  roundSeal.candidateSetSha256 = "0".repeat(64);
+
+  let sealBytes = replaceBufferOnce(canonicalBytes(roundSeal), canonicalPayout, mutatedPayout);
+  const candidatesMarker = Buffer.from("\"candidates\":", "utf8");
+  const candidatesStart = sealBytes.indexOf(candidatesMarker) + candidatesMarker.length;
+  assert.ok(candidatesStart >= candidatesMarker.length, "raw candidates marker");
+  const candidatesEnd = sealBytes.indexOf(
+    Buffer.from(",\"candidateSetSha256\":", "utf8"),
+    candidatesStart,
+  );
+  assert.ok(candidatesEnd > candidatesStart, "raw candidate-set boundary");
+  const candidateSetSha256 = sha256(sealBytes.subarray(candidatesStart, candidatesEnd));
+  sealBytes = replaceBufferOnce(
+    sealBytes,
+    Buffer.from(`\"candidateSetSha256\":\"${"0".repeat(64)}\"`, "utf8"),
+    Buffer.from(`\"candidateSetSha256\":\"${candidateSetSha256}\"`, "utf8"),
+  );
+  const batchBytes = Buffer.from(canonical.batchBytes);
+  createHash("sha256").update(sealBytes).digest().copy(batchBytes, 88);
+  Buffer.from(candidateSetSha256, "hex").copy(batchBytes, 120);
+  return Object.freeze({ sealBytes, batchBytes });
+}
+
+function rawHostileWeeklyPayoutEntryVectors(canonical) {
+  const mutateMiddleEntry = (mutateEntryBytes) => (payoutBytes, candidate) => {
+    const middle = canonicalBytes(candidate.payoutEntries[1]);
+    return replaceBufferOnce(payoutBytes, middle, mutateEntryBytes(Buffer.from(middle), candidate));
+  };
+  const mutateIdentity = (mutateQuotedBytes) => mutateMiddleEntry((entryBytes) => {
+    const quoted = Buffer.from(JSON.stringify(WEEKLY_FACTION_FOLLOWER_IDENTITY), "utf8");
+    return replaceBufferOnce(entryBytes, quoted, mutateQuotedBytes(Buffer.from(quoted)));
+  });
+  const replaceQuoted = (needle, replacement) => (quoted) => replaceBufferOnce(
+    quoted,
+    Buffer.from(needle, "utf8"),
+    Buffer.from(replacement, "utf8"),
+  );
+  return Object.freeze({
+    escapedFragmentKey: bindRawWeeklyPayout(canonical, mutateMiddleEntry((entryBytes) => (
+      replaceBufferOnce(
+        entryBytes,
+        Buffer.from("\"fragmentId\"", "utf8"),
+        Buffer.from("\"fragm\\u0065ntId\"", "utf8"),
+      )
+    ))),
+    wrongRewardTrancheKeyOrder: bindRawWeeklyPayout(canonical, mutateMiddleEntry((entryBytes, candidate) => {
+      const entry = candidate.payoutEntries[1];
+      const reward = Buffer.from(`\"rewardId\":\"${entry.rewardId}\"`, "utf8");
+      const tranche = Buffer.from(`\"trancheKinds\":[\"${entry.trancheKinds[0]}\"]`, "utf8");
+      return replaceBufferOnce(
+        entryBytes,
+        Buffer.concat([reward, Buffer.from(","), tranche]),
+        Buffer.concat([tranche, Buffer.from(","), reward]),
+      );
+    })),
+    identityRedundantSlashEscape: bindRawWeeklyPayout(
+      canonical,
+      mutateIdentity(replaceQuoted("follower/", "follower\\/")),
+    ),
+    identityRedundantUnicodeEscape: bindRawWeeklyPayout(
+      canonical,
+      mutateIdentity(replaceQuoted("follower", "f\\u006fllower")),
+    ),
+    identitySurrogatePairEscape: bindRawWeeklyPayout(
+      canonical,
+      mutateIdentity(replaceQuoted("🚀", "\\ud83d\\ude80")),
+    ),
+    identityLoneSurrogateEscape: bindRawWeeklyPayout(
+      canonical,
+      mutateIdentity(replaceQuoted("🚀", "\\ud800")),
+    ),
+    identityMalformedEscape: bindRawWeeklyPayout(
+      canonical,
+      mutateIdentity(replaceQuoted("\\t", "\\q")),
+    ),
+    identityInvalidUtf8: bindRawWeeklyPayout(canonical, mutateIdentity((quoted) => {
+      const marker = Buffer.from("é", "utf8");
+      const offset = quoted.indexOf(marker);
+      assert.ok(offset >= 0, "raw payout identity UTF-8 marker");
+      return Buffer.concat([
+        quoted.subarray(0, offset),
+        Buffer.from([0xff]),
+        quoted.subarray(offset + marker.length),
+      ]);
+    })),
+  });
+}
+
 function bindRawWeeklyWeekId(canonical, mutateQuotedBytes) {
   const quoted = Buffer.from(JSON.stringify(WEEKLY_FACTION_WEEK_ID), "utf8");
   const marker = Buffer.concat([Buffer.from("\"factionWeekId\":", "utf8"), quoted]);
@@ -701,7 +892,9 @@ function renderFixture() {
   const hostile = hostileUniquenessVectors(vectors);
   const hostileXBound = hostileXBoundVectors(xbound);
   const hostileWeekly = hostileWeeklyFactionVectors(weekly);
+  const hostileWeeklyEntry = hostileWeeklyPayoutEntryVectors(weekly);
   const rawHostileWeekly = rawHostileWeeklyFactionVectors(weekly);
+  const rawHostileWeeklyEntry = rawHostileWeeklyPayoutEntryVectors(weekly);
   const lines = [
     "# Generated only from the exact host reference; consumed read-only by Rust tests.",
     "schema=iat-b3-reward-capacity-rust-recomputation/v1",
@@ -754,9 +947,17 @@ function renderFixture() {
     lines.push(`hostile.weekly.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.weekly.${name}.batch=${vector.batchBytes.toString("hex")}`);
   }
+  for (const [name, vector] of Object.entries(hostileWeeklyEntry)) {
+    lines.push(`hostile.weeklyEntry.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.weeklyEntry.${name}.batch=${vector.batchBytes.toString("hex")}`);
+  }
   for (const [name, vector] of Object.entries(rawHostileWeekly)) {
     lines.push(`hostile.weeklyRaw.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.weeklyRaw.${name}.batch=${vector.batchBytes.toString("hex")}`);
+  }
+  for (const [name, vector] of Object.entries(rawHostileWeeklyEntry)) {
+    lines.push(`hostile.weeklyEntryRaw.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.weeklyEntryRaw.${name}.batch=${vector.batchBytes.toString("hex")}`);
   }
   return `${lines.join("\n")}\n`;
 }
@@ -785,7 +986,9 @@ if (UPDATE) {
     const hostile = hostileUniquenessVectors(vectors);
     const hostileXBound = hostileXBoundVectors(xbound);
     const hostileWeekly = hostileWeeklyFactionVectors(weekly);
+    const hostileWeeklyEntry = hostileWeeklyPayoutEntryVectors(weekly);
     const rawHostileWeekly = rawHostileWeeklyFactionVectors(weekly);
+    const rawHostileWeeklyEntry = rawHostileWeeklyPayoutEntryVectors(weekly);
     assert.equal(fixture.schema, "iat-b3-reward-capacity-rust-recomputation/v1");
     assert.equal(fixture.source_id, Buffer.from(SOURCE_ID).toString("hex"));
     assert.equal(fixture.randomness, RANDOMNESS);
@@ -873,6 +1076,18 @@ if (UPDATE) {
         fixture[`hostile.weekly.${name}.batch`], vector.batchBytes.toString("hex"), `${name} batch`,
       );
     }
+    for (const [name, vector] of Object.entries(hostileWeeklyEntry)) {
+      assert.equal(
+        fixture[`hostile.weeklyEntry.${name}.seal`],
+        vector.sealBytes.toString("hex"),
+        `${name} payout-entry seal`,
+      );
+      assert.equal(
+        fixture[`hostile.weeklyEntry.${name}.batch`],
+        vector.batchBytes.toString("hex"),
+        `${name} payout-entry batch`,
+      );
+    }
     for (const [name, vector] of Object.entries(rawHostileWeekly)) {
       assert.equal(
         fixture[`hostile.weeklyRaw.${name}.seal`],
@@ -883,6 +1098,18 @@ if (UPDATE) {
         fixture[`hostile.weeklyRaw.${name}.batch`],
         vector.batchBytes.toString("hex"),
         `${name} raw batch`,
+      );
+    }
+    for (const [name, vector] of Object.entries(rawHostileWeeklyEntry)) {
+      assert.equal(
+        fixture[`hostile.weeklyEntryRaw.${name}.seal`],
+        vector.sealBytes.toString("hex"),
+        `${name} raw payout-entry seal`,
+      );
+      assert.equal(
+        fixture[`hostile.weeklyEntryRaw.${name}.batch`],
+        vector.batchBytes.toString("hex"),
+        `${name} raw payout-entry batch`,
       );
     }
     assert.deepEqual(vectors.dispositions, [
@@ -928,6 +1155,32 @@ if (UPDATE) {
     const vectors = weeklyFactionVectors();
     const candidate = findWeeklyFactionCandidate(vectors.roundState.roundSeal);
     assert.equal(candidate.payoutEntries.length, 3);
+    assert.deepEqual(
+      candidate.payoutEntries.map(({ trancheKinds }) => trancheKinds[0]).sort(),
+      [...X_BOUND_TRANCHES].sort(),
+    );
+    for (const entry of candidate.payoutEntries) {
+      assert.equal(
+        entry.fragmentId,
+        sha256(`IAT_B3_X_FUNDING_V1|${entry.rewardId}|${FUNDING_ROUND}|${entry.trancheKinds[0]}`),
+      );
+      assert.deepEqual(Object.keys(entry), entry.trancheKinds[0] === "X_PREMIUM_UPGRADE_90"
+        ? [
+          "fragmentId", "rewardId", "amount", "trancheKinds", "chronology",
+          "originalBaseAdmissionLineage",
+        ]
+        : ["fragmentId", "rewardId", "amount", "trancheKinds", "chronology"]);
+      assert.deepEqual(Object.keys(entry.chronology), [
+        "eligibleSequence", "activitySequence", "nodeSequence", "immutableIdentity",
+        "commitmentDigest",
+      ]);
+    }
+    assert.equal(
+      candidate.payoutEntries.find(
+        ({ trancheKinds }) => trancheKinds[0] === "X_PREMIUM_UPGRADE_90",
+      ).chronology.immutableIdentity,
+      WEEKLY_FACTION_FOLLOWER_IDENTITY,
+    );
     assert.equal(candidate.amount, 600n);
     assert.equal(candidate.followerCount, 3);
     assert.equal(candidate.factionWeekId, WEEKLY_FACTION_WEEK_ID);
@@ -1033,6 +1286,20 @@ if (UPDATE) {
     }
   });
 
+  test("host rejects every structured weekly payout-entry field and fragment drift", () => {
+    const canonical = weeklyFactionVectors();
+    for (const [name, vector] of Object.entries(hostileWeeklyPayoutEntryVectors(canonical))) {
+      assert.throws(
+        () => validateFinalizedRewardCapacityRound({
+          roundState: vector.roundState,
+          cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+        }),
+        /FACTION|faction|X_BOUND|LINEAGE|lineage|chronology|u64|U64|trim|digest/u,
+        name,
+      );
+    }
+  });
+
   test("raw weekly week-ID vectors fail the supported canonical seal subset", () => {
     const canonical = weeklyFactionVectors();
     for (const [name, vector] of Object.entries(rawHostileWeeklyFactionVectors(canonical))) {
@@ -1046,6 +1313,24 @@ if (UPDATE) {
       if (name === "loneSurrogateEscape") {
         // JSON.stringify preserves lone surrogate escapes; this native subset
         // intentionally rejects them instead of claiming JS string parity.
+        assert.deepEqual(canonicalRoundTrip, vector.sealBytes, name);
+      } else {
+        assert.notDeepEqual(canonicalRoundTrip, vector.sealBytes, name);
+      }
+    }
+  });
+
+  test("raw weekly payout-entry key and identity vectors fail canonical round-trip", () => {
+    const canonical = weeklyFactionVectors();
+    for (const [name, vector] of Object.entries(rawHostileWeeklyPayoutEntryVectors(canonical))) {
+      const decoded = vector.sealBytes.toString("utf8");
+      let canonicalRoundTrip = null;
+      try {
+        canonicalRoundTrip = canonicalBytes(JSON.parse(decoded));
+      } catch {
+        // Malformed JSON and invalid UTF-8 are both expected to fail closed.
+      }
+      if (name === "identityLoneSurrogateEscape") {
         assert.deepEqual(canonicalRoundTrip, vector.sealBytes, name);
       } else {
         assert.notDeepEqual(canonicalRoundTrip, vector.sealBytes, name);

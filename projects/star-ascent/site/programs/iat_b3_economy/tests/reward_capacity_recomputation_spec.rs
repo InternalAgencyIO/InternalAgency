@@ -445,6 +445,105 @@ fn rejects_host_generated_digest_rebound_weekly_faction_aggregate_violations() {
 }
 
 #[test]
+fn rejects_every_digest_rebound_weekly_payout_entry_shape_and_type_violation() {
+    for name in [
+        "middleMissingAmount",
+        "middleMissingChronology",
+        "middleMissingFragmentId",
+        "middleMissingRewardId",
+        "middleMissingTrancheKinds",
+        "middleExtraField",
+        "middleEmptyTranche",
+        "middleMultipleTranches",
+        "middleUnknownTranche",
+        "middleUppercaseFragmentId",
+        "middleUppercaseRewardId",
+        "baseExtraLineage",
+        "upgradeMissingLineage",
+        "chronologyMissingActivity",
+        "chronologyMissingCommitment",
+        "chronologyMissingEligible",
+        "chronologyMissingIdentity",
+        "chronologyMissingNode",
+        "chronologyExtraField",
+        "chronologyActivityWrongStoredType",
+        "chronologyCommitmentNotHex32",
+    ] {
+        let result = verify(&hostile_weekly_fixture("weeklyEntry", name));
+        assert!(
+            matches!(
+                result,
+                Err(RewardCapacityRecomputationError::InvalidCanonicalJson
+                    | RewardCapacityRecomputationError::InvalidSealShape
+                    | RewardCapacityRecomputationError::WeeklyFactionPayoutEntryShapeMismatch)
+            ),
+            "{name}: {result:?}"
+        );
+    }
+    for name in ["middleFragmentIdMismatch", "middleRewardIdDerivedMismatch"] {
+        assert_eq!(
+            verify(&hostile_weekly_fixture("weeklyEntry", name)),
+            Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryIdentifierMismatch),
+            "{name}"
+        );
+    }
+    for name in [
+        "chronologyIdentityEmpty",
+        "chronologyIdentityLeadingTrim",
+        "chronologyIdentityTrailingTrim",
+    ] {
+        assert_eq!(
+            verify(&hostile_weekly_fixture("weeklyEntry", name)),
+            Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryChronologyMismatch),
+            "{name}"
+        );
+    }
+}
+
+#[test]
+fn lineage_contents_remain_external_even_though_upgrade_key_presence_is_enforced() {
+    for name in ["upgradeNullLineageContents", "upgradeOpaqueLineageContents"] {
+        let result = verify(&hostile_weekly_fixture("weeklyEntry", name));
+        assert!(
+            result.is_err(),
+            "downstream bindings must still reject {name}"
+        );
+        assert!(
+            !matches!(
+                result,
+                Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryShapeMismatch
+                    | RewardCapacityRecomputationError::WeeklyFactionPayoutEntryIdentifierMismatch
+                    | RewardCapacityRecomputationError::WeeklyFactionPayoutEntryChronologyMismatch)
+            ),
+            "lineage contents must remain outside the native entry semantic claim: {name}: {result:?}"
+        );
+    }
+}
+
+#[test]
+fn rejects_raw_escaped_or_reordered_entry_keys_and_noncanonical_identity_bytes() {
+    for name in [
+        "escapedFragmentKey",
+        "wrongRewardTrancheKeyOrder",
+        "identityRedundantSlashEscape",
+        "identityRedundantUnicodeEscape",
+        "identitySurrogatePairEscape",
+        "identityLoneSurrogateEscape",
+        "identityMalformedEscape",
+        "identityInvalidUtf8",
+    ] {
+        assert!(
+            matches!(
+                verify(&hostile_weekly_fixture("weeklyEntryRaw", name)),
+                Err(RewardCapacityRecomputationError::InvalidCanonicalJson
+                    | RewardCapacityRecomputationError::InvalidSealShape)
+            ),
+            "{name}"
+        );
+    }
+}
+
+#[test]
 fn rejects_every_ecmascript_boundary_trim_scalar_on_week_id() {
     let names = [
         "tab",
@@ -609,8 +708,12 @@ fn truth_boundary_is_permanently_nonactivating_and_hold() {
     assert!(truth.weekly_faction_checked_aggregate_fields_verified);
     assert!(truth.weekly_faction_manifest_identifier_derivation_verified);
     assert!(truth.weekly_faction_exact_week_identity_binding_verified);
+    assert!(truth.weekly_faction_exact_payout_entry_field_shapes_verified);
+    assert!(truth.weekly_faction_singleton_accepted_tranche_verified);
+    assert!(truth.weekly_faction_payout_entry_chronology_field_types_verified);
+    assert!(truth.weekly_faction_upgrade_lineage_key_presence_verified);
     assert!(!truth.weekly_faction_payout_entry_order_verified);
-    assert!(!truth.weekly_faction_nested_fragment_identifier_derivations_verified);
+    assert!(truth.weekly_faction_nested_fragment_identifier_derivations_verified);
     assert!(!truth.weekly_faction_payout_entry_uniqueness_verified);
     assert!(!truth.weekly_faction_reward_provenance_verified);
     assert!(!truth.weekly_faction_tranche_lineage_semantics_verified);

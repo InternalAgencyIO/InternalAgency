@@ -6,12 +6,15 @@
 //! applies the committed CCC reveal ordering, recomputes the three-lane
 //! waterfall, and binds every result to the strict allocator receipt decoder.
 //! The caller must first establish exact host canonical-seal semantics. This
-//! module does not validate candidate derivations, all nested variant semantics,
-//! non-CCC chronology ordering, source authenticity, the round clock, Daily Law,
-//! or how the seal reached the caller. Canonically escaped, well-formed UTF-8 CCC
-//! source identifiers are bound without allocation; JavaScript lone-surrogate
-//! strings remain deliberately unsupported. It exposes no instruction, account
-//! writer, CPI, dispatcher, authority, or activation edge.
+//! module does not validate all candidate derivations or all nested variant
+//! semantics, non-CCC chronology ordering, source authenticity, the round clock,
+//! Daily Law, or how the seal reached the caller. Weekly faction payout entries
+//! have their literal field shape, stored chronology types, singleton tranche,
+//! and X-fragment identifier derivation checked without claiming payout order,
+//! uniqueness, provenance, lineage contents, or chronology semantics. Canonically
+//! escaped, well-formed UTF-8 identifiers are bound without allocation;
+//! JavaScript lone-surrogate strings remain deliberately unsupported. It exposes
+//! no instruction, account writer, CPI, dispatcher, authority, or activation edge.
 
 use core::cmp::Ordering;
 
@@ -222,6 +225,9 @@ pub enum RewardCapacityRecomputationError {
     WeeklyFactionAggregateMismatch,
     WeeklyFactionIdentifierMismatch,
     WeeklyFactionWeekIdMismatch,
+    WeeklyFactionPayoutEntryShapeMismatch,
+    WeeklyFactionPayoutEntryIdentifierMismatch,
+    WeeklyFactionPayoutEntryChronologyMismatch,
     CandidateIdMismatch,
     CandidateDigestMismatch,
     CandidateOrderMismatch,
@@ -277,6 +283,10 @@ pub struct RewardCapacityRecomputationTruth {
     pub weekly_faction_checked_aggregate_fields_verified: bool,
     pub weekly_faction_manifest_identifier_derivation_verified: bool,
     pub weekly_faction_exact_week_identity_binding_verified: bool,
+    pub weekly_faction_exact_payout_entry_field_shapes_verified: bool,
+    pub weekly_faction_singleton_accepted_tranche_verified: bool,
+    pub weekly_faction_payout_entry_chronology_field_types_verified: bool,
+    pub weekly_faction_upgrade_lineage_key_presence_verified: bool,
     pub weekly_faction_payout_entry_order_verified: bool,
     pub weekly_faction_nested_fragment_identifier_derivations_verified: bool,
     pub weekly_faction_payout_entry_uniqueness_verified: bool,
@@ -322,8 +332,12 @@ pub const REWARD_CAPACITY_RECOMPUTATION_TRUTH: RewardCapacityRecomputationTruth 
         weekly_faction_checked_aggregate_fields_verified: true,
         weekly_faction_manifest_identifier_derivation_verified: true,
         weekly_faction_exact_week_identity_binding_verified: true,
+        weekly_faction_exact_payout_entry_field_shapes_verified: true,
+        weekly_faction_singleton_accepted_tranche_verified: true,
+        weekly_faction_payout_entry_chronology_field_types_verified: true,
+        weekly_faction_upgrade_lineage_key_presence_verified: true,
         weekly_faction_payout_entry_order_verified: false,
-        weekly_faction_nested_fragment_identifier_derivations_verified: false,
+        weekly_faction_nested_fragment_identifier_derivations_verified: true,
         weekly_faction_payout_entry_uniqueness_verified: false,
         weekly_faction_reward_provenance_verified: false,
         weekly_faction_tranche_lineage_semantics_verified: false,
@@ -1243,7 +1257,10 @@ fn validate_weekly_faction_manifest_candidate(
     if Sha256::digest(payout_entries_span.bytes(seal_bytes)).as_slice() != payout_digest {
         return Err(RewardCapacityRecomputationError::WeeklyFactionPayoutDigestMismatch);
     }
-    let aggregate = parse_weekly_faction_payout_entries(payout_entries_span.bytes(seal_bytes))?;
+    let aggregate = parse_weekly_faction_payout_entries(
+        payout_entries_span.bytes(seal_bytes),
+        candidate.funding_round,
+    )?;
     if aggregate.count != follower_count || aggregate.amount != candidate.amount {
         return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
     }
@@ -1272,6 +1289,7 @@ fn validate_weekly_faction_manifest_candidate(
 
 fn parse_weekly_faction_payout_entries(
     bytes: &[u8],
+    funding_round: i64,
 ) -> Result<WeeklyFactionAggregate, RewardCapacityRecomputationError> {
     let mut p = Json::new(bytes)?;
     p.byte(b'[')?;
@@ -1291,7 +1309,7 @@ fn parse_weekly_faction_payout_entries(
             p.byte(b',')?;
         }
         first = false;
-        let entry = parse_weekly_faction_payout_entry(&mut p)?;
+        let entry = parse_weekly_faction_payout_entry(&mut p, funding_round)?;
         aggregate.count = aggregate
             .count
             .checked_add(1)
@@ -1314,35 +1332,43 @@ fn parse_weekly_faction_payout_entries(
 
 fn parse_weekly_faction_payout_entry(
     p: &mut Json<'_>,
+    funding_round: i64,
 ) -> Result<WeeklyFactionAggregate, RewardCapacityRecomputationError> {
-    let mut amount = None;
-    let mut chronology = None;
-    let mut last_key: Option<&[u8]> = None;
     p.byte(b'{')?;
-    let mut first = true;
-    while p.peek() != Some(b'}') {
-        if !first {
-            p.byte(b',')?;
-        }
-        first = false;
-        let key = p.plain_string()?;
-        if last_key.is_some_and(|last| last >= key) {
-            return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
-        }
-        last_key = Some(key);
-        p.byte(b':')?;
-        match key {
-            b"amount" => amount = Some(p.u64_string()?),
-            b"chronology" => chronology = Some(parse_weekly_faction_entry_chronology(p)?),
-            _ => p.skip_value(0)?,
-        }
+    p.key(b"amount")?;
+    let amount = p.u64_string()?;
+    if amount == 0 {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
     }
+    p.comma_key(b"chronology")?;
+    let chronology = parse_weekly_faction_entry_chronology(p)?;
+    p.comma_key(b"fragmentId")?;
+    let fragment_id = p.hex32_string()?;
+
+    p.byte(b',')?;
+    let next_key = p.plain_string()?;
+    p.byte(b':')?;
+    let lineage_present = if next_key == b"originalBaseAdmissionLineage" {
+        // Exact contents remain an externally prevalidated host-seal precondition.
+        // They are nevertheless covered by the exact raw payoutEntries digest.
+        p.skip_value(0)?;
+        p.comma_key(b"rewardId")?;
+        true
+    } else if next_key == b"rewardId" {
+        false
+    } else {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryShapeMismatch);
+    };
+    let reward_id = p.hex32_string()?;
+    p.comma_key(b"trancheKinds")?;
+    let tranche = parse_weekly_faction_singleton_tranche(p)?;
     p.byte(b'}')?;
-    let amount = amount
-        .filter(|value| *value != 0)
-        .ok_or(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch)?;
-    let chronology =
-        chronology.ok_or(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch)?;
+    if lineage_present != (tranche == XBoundTranche::Upgrade) {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryShapeMismatch);
+    }
+    if fragment_id != derive_x_bound_funding_id(reward_id, funding_round, tranche) {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryIdentifierMismatch);
+    }
     Ok(WeeklyFactionAggregate {
         count: 1,
         amount,
@@ -1359,15 +1385,36 @@ fn parse_weekly_faction_entry_chronology(
     p.key(b"activitySequence")?;
     let activity = p.u64_string()?;
     p.comma_key(b"commitmentDigest")?;
-    p.skip_value(0)?;
+    let _commitment_digest = p.hex32_string()?;
     p.comma_key(b"eligibleSequence")?;
     let eligible = p.u64_string()?;
     p.comma_key(b"immutableIdentity")?;
-    p.skip_value(0)?;
+    let identity = p.canonical_json_string()?;
+    validate_canonical_nonempty_no_trim_json(
+        identity,
+        RewardCapacityRecomputationError::WeeklyFactionPayoutEntryChronologyMismatch,
+    )?;
     p.comma_key(b"nodeSequence")?;
     let node = p.u64_string()?;
     p.byte(b'}')?;
     Ok((eligible, activity, node))
+}
+
+fn parse_weekly_faction_singleton_tranche(
+    p: &mut Json<'_>,
+) -> Result<XBoundTranche, RewardCapacityRecomputationError> {
+    p.byte(b'[')?;
+    let tranche = match p.plain_string()? {
+        b"X_BASE_10" => XBoundTranche::Base,
+        b"X_PREMIUM_FULL_100" => XBoundTranche::PremiumFull,
+        b"X_PREMIUM_UPGRADE_90" => XBoundTranche::Upgrade,
+        _ => return Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryShapeMismatch),
+    };
+    if p.peek() != Some(b']') {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionPayoutEntryShapeMismatch);
+    }
+    p.byte(b']')?;
+    Ok(tranche)
 }
 
 fn validate_weekly_faction_chronology(
@@ -1897,6 +1944,16 @@ fn canonical_json_string_decodes_to_prefix_and_json(
 }
 
 fn validate_week_id_json(encoded: &[u8]) -> Result<(), RewardCapacityRecomputationError> {
+    validate_canonical_nonempty_no_trim_json(
+        encoded,
+        RewardCapacityRecomputationError::WeeklyFactionWeekIdMismatch,
+    )
+}
+
+fn validate_canonical_nonempty_no_trim_json(
+    encoded: &[u8],
+    mismatch: RewardCapacityRecomputationError,
+) -> Result<(), RewardCapacityRecomputationError> {
     let mut decoded_count = 0usize;
     let mut first_trim = false;
     let mut last_trim = false;
@@ -1935,7 +1992,7 @@ fn validate_week_id_json(encoded: &[u8]) -> Result<(), RewardCapacityRecomputati
         }
     })?;
     if decoded_count == 0 || scalar_len != 0 || first_trim || last_trim {
-        return Err(RewardCapacityRecomputationError::WeeklyFactionWeekIdMismatch);
+        return Err(mismatch);
     }
     Ok(())
 }
