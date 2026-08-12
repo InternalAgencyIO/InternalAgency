@@ -1,0 +1,142 @@
+{
+  "schema": "iat-b3-combined-law-stake-local-validator-record/v1",
+  "status": "PASS_HOLD",
+  "generatedAt": "2026-08-12T13:44:14.263Z",
+  "canonicalHead": {
+    "local": "66228315396321aa5e8a9d8589f83a81d332d160",
+    "upstream": "66228315396321aa5e8a9d8589f83a81d332d160"
+  },
+  "toolchain": {
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "cargoBuildSbf": "solana-cargo-build-sbf 3.1.10",
+    "platformTools": "v1.52",
+    "sbfRustc": "rustc 1.89.0",
+    "solana": "solana-cli 3.1.10",
+    "splTokenCli": "5.5.0",
+    "nodeMajor": 24
+  },
+  "source": {
+    "lawLibSha256": "ba404c92cbe80c5952f1c525be486636e694ced2525a8dc2b8610f41adfd2cea",
+    "lawStakeIngressSha256": "7b75b63695a652f53da5597c4dc7cbe282471022f60acfd5807aafc7ae1121b8",
+    "lawBuildScriptSha256": "2142dcad25b300977e1cc0cf59774ca05abe85d8a44ff1bb4bda75920ad4f5c9",
+    "economyStakeIngressRuntimeSha256": "2a719a5e7edd80711090e424fb9a3a3172678bf1b689fafa853afdd5ae0c15e8",
+    "fixtureLibSha256": "d994d5af155a686998e06337dc6a16ac418319625535cbe9e22d4e2242d7db56",
+    "fixtureManifestSha256": "f88d45fb58df65cc22c3c48150f8497fee58d37f4e3d64cb77809711b85c9426",
+    "fixtureLockSha256": "aec6a406ed36a9c832fea7b9a5aed623424e7e91400ddd667b9ad69d6f9ae029",
+    "fixtureReadmeSha256": "a359c1d2d15f5a94440e502d4b08dffa33ee5782013164d730c29ad7a3155161",
+    "runnerSha256": "51cda6b048648f6333bf530b76284bef047215b433e2fa58bb9aa325bb08b666",
+    "driverSha256": "0e687403a11b19dd2190fba4441306fc488a5cbff5c3dc6056e309eaa1d5ebe3"
+  },
+  "fixture": {
+    "productionCandidate": false,
+    "lawProgramId": "D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY",
+    "economyProgramId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+    "disposableMint": "4cXrA1uDuG9qCAvsKYmnwv4EpeqvC1cPoLKGhcAvfhod",
+    "cargoFeature": "production-combined-hook",
+    "lawArtifact": {
+      "sha256": "27ac7fc3c31f101776905bc071875541dad89751b3864504634cddf2595aeb50",
+      "byteLength": 155688
+    },
+    "economyArtifact": {
+      "sha256": "733a6a27bfd057a970f542c9d2d100c1251c81999004cba5c7a1fa5f505e4ff7",
+      "byteLength": 211368
+    }
+  },
+  "sbfDiagnostics": {
+    "freshTargets": true,
+    "unsafePattern": "Stack offset of|stack frame of [0-9]+ bytes exceeds|max offset exceeded|overwrites values|undefined behavior",
+    "stack4096": {
+      "lawSha256": "27ac7fc3c31f101776905bc071875541dad89751b3864504634cddf2595aeb50",
+      "lawByteLength": 155688,
+      "economySha256": "733a6a27bfd057a970f542c9d2d100c1251c81999004cba5c7a1fa5f505e4ff7",
+      "economyByteLength": 211368,
+      "unsafeDiagnosticCount": 0
+    },
+    "stack3072": {
+      "lawSha256": "27ac7fc3c31f101776905bc071875541dad89751b3864504634cddf2595aeb50",
+      "lawByteLength": 155688,
+      "economySha256": "733a6a27bfd057a970f542c9d2d100c1251c81999004cba5c7a1fa5f505e4ff7",
+      "economyByteLength": 211368,
+      "unsafeDiagnosticCount": 0
+    },
+    "byteIdenticalAcrossStackCaps": true
+  },
+  "observed": {
+    "oneLawElfForFinalizerAndHook": true,
+    "actualLawInitializationExecuted": true,
+    "extensionAuthoritiesSealedAtomically": true,
+    "actualPermissionlessFinalizerExecuted": true,
+    "actualDecisionRecomputed": true,
+    "actualSlotHashSelectionMatched": true,
+    "actualFinalizedDisposition": "OPEN",
+    "actualFinalizedLocalDay": "20677",
+    "productionSourceIngressExecutorExercised": true,
+    "realToken2022HookContext": true,
+    "ordinaryOpenTransferAccepted": true,
+    "directHookBypassRejected": true,
+    "directStakeVaultDonationRejected": true,
+    "noDelegateIngressAccepted": true,
+    "priorDelegateRestoredExactly": true,
+    "fundedStatelessIngressPdaAccepted": true,
+    "rawAndBalanceRollbackAsserted": true,
+    "syntheticVariants": [
+      "missing",
+      "stale",
+      "open",
+      "locked",
+      "forged"
+    ],
+    "syntheticVariantsFinalizerProvenance": false,
+    "syntheticVariantExpectedErrors": {
+      "missing": {
+        "hook": 7,
+        "ingress": 45836
+      },
+      "stale": {
+        "hook": 7,
+        "ingress": 45836
+      },
+      "locked": {
+        "hook": 8,
+        "ingress": 45837
+      },
+      "forged": {
+        "hook": 11,
+        "ingress": 45835
+      }
+    }
+  },
+  "hostValidation": {
+    "fixtureFmtCheck": true,
+    "fixtureClippyAllTargetsNoDepsDenyWarnings": true,
+    "fixtureLockedHostTest": true,
+    "workflowRegressionMutationCount": 46,
+    "workflowRegressionPassed": true
+  },
+  "cleanup": {
+    "temporaryLedgerRemoved": true,
+    "validatorStopped": true,
+    "generatedKeyMaterialRemoved": true,
+    "compiledArtifactsRemoved": true,
+    "accountFixturesRemoved": true
+  },
+  "scope": {
+    "rpcScope": "LOOPBACK_ONLY",
+    "publicNetworkWrites": false,
+    "signing": "DISPOSABLE_LOCAL_FIXTURE_ONLY",
+    "deployment": false,
+    "productionIdentitiesFrozen": false,
+    "ownerManifestAccepted": false,
+    "productionEconomyEntrypoint": false,
+    "productionEconomyDispatcher": false,
+    "all15Adapters": false,
+    "retainedV2PersistenceComplete": false,
+    "finalBinary": false,
+    "devnetExecuted": false,
+    "mainnetExecuted": false,
+    "graphNodeCompleted": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "statusGate": "HOLD"
+  }
+}

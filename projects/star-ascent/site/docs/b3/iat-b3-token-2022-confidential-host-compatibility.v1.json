@@ -1,0 +1,95 @@
+{
+  "$schema": "./iat-b3-token-2022-confidential-host-compatibility.v1.schema.json",
+  "schema": "iat-b3-token-2022-confidential-host-compatibility/v1",
+  "status": "EXACT_HOST_COMPATIBILITY_COMPLETE_RELEASE_HOLD",
+  "scope": {
+    "predicate": "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET",
+    "certifies": [
+      "EXACT_DEPENDENCY_AND_STANDARD_PROGRAM_IDENTITY_BINDING",
+      "STRICT_READ_ONLY_MINT_AND_CONFIDENTIAL_ACCOUNT_PARSING",
+      "ELGAMAL_PUBLIC_KEY_AND_PERSISTED_CIPHERTEXT_CURVE_VALIDATION",
+      "PUBLIC_KEY_VALIDITY_AND_ZERO_CIPHERTEXT_PROOF_PRIMITIVE_ROUND_TRIPS",
+      "FINALIZED_MAINNET_STANDARD_PROGRAM_SOURCE_EQUIVALENCE_OBSERVATION"
+    ],
+    "doesNotCertify": [
+      "CONFIDENTIAL_TRANSFER_OR_WITHDRAW_PROOF_LIFECYCLE",
+      "PROOF_CONTEXT_INSTRUCTION_CONSTRUCTION_OR_CLOSURE",
+      "WALLET_KEYSTORE_JOURNAL_OR_RECOVERY",
+      "TOKEN_2022_CEREMONY_TIME_BYTECODE_REATTESTATION",
+      "DEVNET_TRANSFER_HOOK_OR_ROLLBACK_EXECUTION",
+      "PRODUCTION_IDENTITY_MINT_DEPLOYMENT_ACTIVATION_OR_MAINNET_AUTHORIZATION"
+    ]
+  },
+  "sourceBindings": [
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/Cargo.toml",
+      "sha256": "333389a41625cf9bc40ccaa21f94298a4de6244ad6bab2dd03dcaf789b2c54be",
+      "byteLength": 861
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/src/lib.rs",
+      "sha256": "d09d02b6f7124241d0d7e80d310a724b56f296422d729d9c5f34363ffa39127f",
+      "byteLength": 52248
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/src/token_2022_host.rs",
+      "sha256": "8499cf37e7a50b8c07912d3d2f1b51f767300e15722478dafc7e52e185fdeb5a",
+      "byteLength": 23419
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/tests/token_2022_host_spec.rs",
+      "sha256": "888cf3fb0398dff84aab61d1937c57bf67d71e1d5726d71bfa8a1782d4888c84",
+      "byteLength": 24986
+    },
+    {
+      "path": "projects/star-ascent/site/docs/b3/evidence/iat-b3-standard-program-mainnet-source-equivalence-20260811T040023Z.json",
+      "sha256": "9cef1db0263c3322ac80e9d4ee249461878cbf3a3e33fe1eb08fe1a17053b000",
+      "byteLength": 3477
+    }
+  ],
+  "dependencyPins": {
+    "splToken2022Interface": "=2.1.0",
+    "solanaZkSdk": "=4.0.0",
+    "token2022ProgramId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+    "zkElgamalProofProgramId": "ZkE1Gama1Proof11111111111111111111111111111"
+  },
+  "hostChecks": {
+    "featureGated": true,
+    "readOnlyAccountInfoParsing": true,
+    "exactMintAndAccountLengths": true,
+    "exactExtensionAllowlists": true,
+    "canonicalPodBooleans": true,
+    "elgamalPublicKeyCurveValidity": true,
+    "allPersistedElgamalCiphertextCurveValidity": true,
+    "pubkeyValidityProofGenerationAndVerification": true,
+    "zeroCiphertextProofGenerationAndVerification": true,
+    "mismatchedPubkeyStatementRejected": true,
+    "nonzeroCiphertextZeroProofRejected": true,
+    "mutableAccountBorrow": false,
+    "accountWrite": false,
+    "tokenCpi": false,
+    "instructionConstruction": false
+  },
+  "standardProgramObservation": {
+    "network": "mainnet-beta",
+    "commitment": "finalized",
+    "observedAtUtc": "2026-08-11T04:00:23.820Z",
+    "finalizedBoundarySlot": 438534028,
+    "token2022ReleaseTag": "program@v11.0.0",
+    "token2022SourceCommit": "9bc02757f600ffe754746708a8a072bcd49d1260",
+    "token2022DeployedProgramSha256": "0999dbf708971e723b08d1caafc988826a59c6001ed6dc02260da07defbe1469",
+    "token2022RebuiltArtifactSha256": "9bbf90b30e06778ca0feca100b29f0eeb9be576ae024f6323cc207308f51a5d1",
+    "token2022SourceEquivalenceVerified": true,
+    "token2022Upgradeable": true,
+    "token2022CeremonyTimeReattestationRequired": true,
+    "zkElgamalProofProgramNativeAndImmutable": true,
+    "rpcObservationAuthenticated": false
+  },
+  "hostCompatibilityComplete": true,
+  "privacyVaultLifecycleComplete": false,
+  "devnetVerified": false,
+  "activationReady": false,
+  "releaseAuthorizationVerified": false,
+  "mainnetExecutionAuthorized": false,
+  "mainnetStatus": "HOLD"
+}

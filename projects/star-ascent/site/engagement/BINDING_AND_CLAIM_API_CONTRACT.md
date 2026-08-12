@@ -1,5 +1,10 @@
 # Node binding and claim API contract
 
+Status: legacy Premium-only v1 HOLD blueprint. It is not the runtime for the
+owner-directed v2 10%/90% policy. The v2 policy and ledger reference remain
+non-activating until the global reward-capacity allocator, migration, provider
+evidence, and claim path are complete.
+
 This contract is a production blueprint. It does not authorize a hosted endpoint, accept secrets, or transfer tokens by itself.
 
 ## Binding flow

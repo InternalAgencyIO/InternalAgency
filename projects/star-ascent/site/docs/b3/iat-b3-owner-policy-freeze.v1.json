@@ -1,0 +1,301 @@
+{
+  "$schema": "./iat-b3-owner-policy-freeze.v1.schema.json",
+  "schema": "iat-b3-owner-policy-freeze/v1",
+  "profile": "PRODUCTION",
+  "status": "BLOCKED",
+  "scope": {
+    "contract": "NON_ACTIVATING_OWNER_POLICY_INTAKE_ONLY",
+    "nodeIds": [
+      "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+      "CORE_CUSTODY_POLICY_ADAPTER",
+      "FACTION_ECONOMICS_FUNDING",
+      "CONFIG_GENESIS_PHASE_CODEC",
+      "GENESIS_ALLOCATIONS_CONSERVATION",
+      "PRODUCTION_IDENTITY_INPUT_FREEZE",
+      "B3_COST_CEREMONY_FUNDING"
+    ],
+    "doesNotCertify": [
+      "OWNER_IDENTITY_OR_SIGNATURE_AUTHENTICITY",
+      "CHAIN_TRUTH_OR_LIVE_ESTATE_STATE",
+      "REVIEWED_BINARY_OR_DEPLOYED_BYTES",
+      "GENESIS_CONSERVATION_OR_FUNDING",
+      "DEVNET_REHEARSAL_OR_ACTIVATION",
+      "RELEASE_OR_MAINNET_AUTHORIZATION"
+    ]
+  },
+  "decisionOrder": [
+    {
+      "stage": 1,
+      "mode": "SERIAL",
+      "nodeIds": ["LIVE_ESTATE_CANONICAL_MINT_DECISION"]
+    },
+    {
+      "stage": 2,
+      "mode": "PARALLEL",
+      "nodeIds": ["CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"]
+    },
+    {
+      "stage": 3,
+      "mode": "SERIAL",
+      "nodeIds": ["CONFIG_GENESIS_PHASE_CODEC"]
+    },
+    {
+      "stage": 4,
+      "mode": "SERIAL",
+      "nodeIds": ["GENESIS_ALLOCATIONS_CONSERVATION"]
+    },
+    {
+      "stage": 5,
+      "mode": "SERIAL",
+      "nodeIds": ["PRODUCTION_IDENTITY_INPUT_FREEZE"]
+    },
+    {
+      "stage": 6,
+      "mode": "SERIAL",
+      "nodeIds": ["B3_COST_CEREMONY_FUNDING"]
+    }
+  ],
+  "invariants": {
+    "v2DefaultDisposition": "KEEP",
+    "v2FeatureCutsPermitted": false,
+    "dailyLawWeakeningPermitted": false,
+    "runtimeMutationPermitted": false,
+    "secretsPermitted": false,
+    "ownerChoicesAreExternalProof": false,
+    "ownerAcceptanceReferenceIsExternalProof": false,
+    "graphCompletionPermitted": false
+  },
+  "nodes": {
+    "LIVE_ESTATE_CANONICAL_MINT_DECISION": {
+      "dependencies": [],
+      "frozenConstraints": {
+        "canonicalAssetModel": "SINGLE_HOOKED_TOKEN_2022_MINT",
+        "originalSplDisposition": "MIGRATION_SOURCE_ONLY_IF_LIVE",
+        "duplicateCanonicalSupplyPermitted": false
+      },
+      "ownerChoices": {
+        "liveEstateAssertion": "NO_LIVE_ESTATE_MINT",
+        "candidateMint": null,
+        "candidateTokenProgramId": null,
+        "canonicalMintDecision": "NEW_TOKEN_2022_FROM_INCEPTION",
+        "duplicateSupplyRetirementPolicy": "NOT_APPLICABLE"
+      },
+      "evidenceRequirements": {
+        "external": [
+          "INDEPENDENT_LIVE_ESTATE_INVENTORY",
+          "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT",
+          "CANONICAL_SUPPLY_RECONCILIATION"
+        ],
+        "engineering": [
+          "TOKEN_PROGRAM_AND_EXTENSION_COMPATIBILITY_REPORT",
+          "MIGRATION_OR_NEW_MINT_REHEARSAL"
+        ]
+      }
+    },
+    "CORE_CUSTODY_POLICY_ADAPTER": {
+      "dependencies": ["LIVE_ESTATE_CANONICAL_MINT_DECISION"],
+      "frozenConstraints": {
+        "liveSupplyDefinition": "CANONICAL_TOKEN_2022_MINT_SUPPLY_AFTER_PRIOR_BURNS",
+        "custodyScope": "PROGRAM_ORIGINATED_CORE_PRINCIPAL_AND_REWARDS_ONLY",
+        "burnFormula": "CEIL_MAX_ZERO_10C_MINUS_S_OVER_9",
+        "delegatePermitted": false,
+        "releaseOrdering": "CURRENT_OPEN_DAILY_LAW_AND_SAME_DAY_RECONCILIATION_ATOMICALLY_REQUIRED"
+      },
+      "ownerChoices": {
+        "acceptFrozenScope": null,
+        "releasePolicy": null
+      },
+      "evidenceRequirements": {
+        "external": [
+          "INDEPENDENT_CUSTODY_AND_RELEASE_POLICY_ACCEPTANCE",
+          "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION"
+        ],
+        "engineering": [
+          "NATIVE_CORE_CUSTODY_ADAPTER_AND_CPI_EVIDENCE",
+          "BURN_STALE_DAY_DEPOSIT_RACE_AND_LOCKDOWN_REHEARSAL"
+        ]
+      }
+    },
+    "FACTION_ECONOMICS_FUNDING": {
+      "dependencies": ["LIVE_ESTATE_CANONICAL_MINT_DECISION"],
+      "frozenConstraints": {
+        "factions": [
+          { "id": "radiance", "displayLabel": "Radiance" },
+          { "id": "ellie", "displayLabel": "Ellie" },
+          { "id": "alia", "displayLabel": "Alia" },
+          { "id": "ece", "displayLabel": "Ece" },
+          { "id": "boss", "displayLabel": "the boss" }
+        ],
+        "leadersHaveProtocolAuthority": false,
+        "allegianceCooldownSeconds": 86400,
+        "allWritesRequireCurrentDailyLaw": true,
+        "rewardPriority": "AFTER_STANDARD_AND_X_BEFORE_CORE",
+        "debtLeapfrogOrPartialFundingPermitted": false
+      },
+      "ownerChoices": {
+        "scoringPolicySha256": null,
+        "sybilPolicy": null,
+        "weeklyEpochAnchorUnixSeconds": null,
+        "tieRule": null,
+        "communityCarveOutBaseUnits": null,
+        "weeklyEmissionBaseUnits": null,
+        "fundingHorizonWeeks": null,
+        "unusedBalanceDestination": null,
+        "followerSnapshotPolicySha256": null,
+        "prizePolicySha256": null,
+        "nftPrizePolicy": null,
+        "claimExpirySeconds": null
+      },
+      "evidenceRequirements": {
+        "external": [
+          "AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS",
+          "INDEPENDENT_SYBIL_AND_PRIZE_POLICY_REVIEW",
+          "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE"
+        ],
+        "engineering": [
+          "NATIVE_FACTION_CODEC_AND_WRITE_HANDLERS",
+          "SOLVENCY_CONSERVATION_TIE_REPLAY_AND_LOCKDOWN_REHEARSAL"
+        ]
+      }
+    },
+    "CONFIG_GENESIS_PHASE_CODEC": {
+      "dependencies": ["CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"],
+      "frozenConstraints": {
+        "phaseOrder": ["UNINITIALIZED", "GENESIS_STAGING", "ACTIVE"],
+        "stagingAllowedWrites": ["CREATE_CANONICAL_ACCOUNT", "FUND_CANONICAL_VAULT"],
+        "stagingForbiddenWrites": ["RELEASE", "REWARD", "FACTION", "POSITION", "ELIGIBILITY", "RESERVATION", "WITHDRAWAL", "CLAIM"],
+        "publicEconomicWritesBeforeActivationPermitted": false,
+        "activationTransition": "ONE_WAY_ATOMIC_AND_DISABLING_STAGING_WRITES"
+      },
+      "ownerChoices": {
+        "acceptExactBootstrapPolicy": null,
+        "canonicalAccountSetSha256": null,
+        "bootstrapReplayPolicy": null,
+        "preActivationCoreCapPolicy": null
+      },
+      "evidenceRequirements": {
+        "external": [
+          "INDEPENDENT_BOOTSTRAP_AND_ACTIVATION_POLICY_ACCEPTANCE"
+        ],
+        "engineering": [
+          "CONFIG_AND_GENESIS_PHASE_CODEC_BYTES",
+          "PREACTIVATION_REJECTION_REENTRY_ROLLBACK_AND_ATOMIC_ACTIVATION_TESTS"
+        ]
+      }
+    },
+    "GENESIS_ALLOCATIONS_CONSERVATION": {
+      "dependencies": ["CONFIG_GENESIS_PHASE_CODEC"],
+      "frozenConstraints": {
+        "fixedSupplyBaseUnits": "1000000000000000000",
+        "allocations": [
+          { "lane": "community", "totalBaseUnits": "500000000000000000", "genesisUnlockedBaseUnits": "500000000000000000", "cliffWeek": 0, "linearEndWeek": 0 },
+          { "lane": "treasury", "totalBaseUnits": "200000000000000000", "genesisUnlockedBaseUnits": "50000000000000000", "cliffWeek": 52, "linearEndWeek": 208 },
+          { "lane": "ecosystem", "totalBaseUnits": "150000000000000000", "genesisUnlockedBaseUnits": "37500000000000000", "cliffWeek": 26, "linearEndWeek": 104 },
+          { "lane": "core", "totalBaseUnits": "100000000000000000", "genesisUnlockedBaseUnits": "0", "cliffWeek": 26, "linearEndWeek": 104 },
+          { "lane": "liquidity", "totalBaseUnits": "50000000000000000", "genesisUnlockedBaseUnits": "12500000000000000", "cliffWeek": 26, "linearEndWeek": 104 }
+        ],
+        "rewardLaneOrder": ["treasury", "ecosystem", "liquidity"]
+      },
+      "ownerChoices": {
+        "communityOwner": null,
+        "treasuryBeneficiary": null,
+        "ecosystemBeneficiary": null,
+        "coreBeneficiary": null,
+        "liquidityBeneficiary": null,
+        "factionCarveOutBaseUnits": null,
+        "coreDestinationPolicy": null,
+        "programVaultDestinationPolicy": null
+      },
+      "evidenceRequirements": {
+        "external": [
+          "BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATIONS",
+          "INDEPENDENT_GENESIS_MANIFEST_ACCEPTANCE"
+        ],
+        "engineering": [
+          "EXACT_ALLOCATION_AND_VESTING_VECTORS",
+          "GENESIS_CONSERVATION_AND_CANONICAL_DESTINATION_PROOF"
+        ]
+      }
+    },
+    "PRODUCTION_IDENTITY_INPUT_FREEZE": {
+      "dependencies": ["GENESIS_ALLOCATIONS_CONSERVATION"],
+      "frozenConstraints": {
+        "lawDomainSeparator": "IAT_B3_SOLANA_DAILY_LAW_V1",
+        "canonicalClusterScope": "MAINNET_BETA_ONLY",
+        "seedRoles": [
+          "lawState", "extraAccountMetas", "economyConfig", "vaultAuthority", "laneState", "laneToken", "stakeToken", "stakeIngress", "coreReward", "agency", "agencyOwnerIndex", "eligibility", "position", "round", "factionConfig", "factionAllegiance", "factionWeek", "factionScore", "factionRewardVault", "factionRewardManifest", "factionFollowerSnapshot", "factionClaim"
+        ],
+        "tokenProgramId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "decimals": 9,
+        "fixedSupplyBaseUnits": "1000000000000000000",
+        "extensionsOrdered": ["ConfidentialTransferMint", "TransferHook"],
+        "additionalExtensionsPermitted": false,
+        "terminalMintFreezeHookAndConfidentialAuthoritiesNull": true,
+        "auditorPermanentDelegateAndMintCloseAbsent": true
+      },
+      "ownerChoices": {
+        "lawProgramId": null,
+        "economyProgramId": null,
+        "canonicalMint": null,
+        "clusterIdentityPolicy": null,
+        "entropyLagSlots": null,
+        "metadataPolicy": null,
+        "acceptCanonicalSeedTable": null
+      },
+      "evidenceRequirements": {
+        "external": [
+          "INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS",
+          "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE"
+        ],
+        "engineering": [
+          "REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS",
+          "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE"
+        ]
+      }
+    },
+    "B3_COST_CEREMONY_FUNDING": {
+      "dependencies": ["PRODUCTION_IDENTITY_INPUT_FREEZE"],
+      "frozenConstraints": {
+        "aggregateFreshPayerPeakCeilingLamports": "3000000000",
+        "featureCutsPermittedToMeetCeiling": false,
+        "costCategories": ["PROGRAM_DEPLOYMENT", "PROGRAM_DATA_RENT", "MINT_AND_EXTENSION_STATE", "GENESIS_ACCOUNTS", "TRANSACTION_FEES"]
+      },
+      "ownerChoices": {
+        "payerPublicKey": null,
+        "fundingSourcePolicySha256": null,
+        "ceremonyFloorLamports": null,
+        "overCeilingDisposition": null
+      },
+      "evidenceRequirements": {
+        "external": [
+          "ACCOUNTABLE_NON_SECRET_FUNDING_SOURCE_APPROVAL",
+          "INDEPENDENT_PAYER_BALANCE_OBSERVATION"
+        ],
+        "engineering": [
+          "EXACT_FRESH_PAYER_COST_MEASUREMENT",
+          "FEE_RENT_BUFFER_AND_RECOVERY_RECONCILIATION"
+        ]
+      }
+    }
+  },
+  "ownerAcceptance": null,
+  "evidenceBoundary": {
+    "acceptsExternalEvidence": false,
+    "acceptsEngineeringEvidence": false,
+    "selfAttestationIsExternalProof": false,
+    "evidenceVerificationOutOfScope": true
+  },
+  "assurance": {
+    "chainTruthVerified": false,
+    "binaryEvidenceVerified": false,
+    "genesisConservationVerified": false,
+    "ceremonyFundingVerified": false,
+    "ownerAcceptanceVerified": false,
+    "devnetAuthorized": false,
+    "devnetRehearsalComplete": false,
+    "activationReady": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

@@ -1,0 +1,397 @@
+{
+  "$schema": "./iat-b3-identity-freeze.v1.schema.json",
+  "schema": "iat-b3-identity-freeze/v1",
+  "profile": "PRODUCTION",
+  "readiness": "BLOCKED",
+  "scope": {
+    "contract": "IDENTITY_FREEZE_INPUTS_ONLY",
+    "doesNotCertify": [
+      "FACTION_ECONOMICS",
+      "GENESIS_ALLOCATION_AMOUNTS_OR_CONSERVATION_EVIDENCE",
+      "REVIEWED_BINARY_HASHES_OR_DEPLOYED_BYTES",
+      "MAINNET_OR_RELEASE_READINESS"
+    ]
+  },
+  "ownerPolicyBinding": {
+    "status": "FROZEN",
+    "packetPath": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+    "packetSha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+    "liveEstateNodeId": "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+    "requiredLiveEstateOwnerChoices": {
+      "liveEstateAssertion": "NO_LIVE_ESTATE_MINT",
+      "candidateMint": null,
+      "candidateTokenProgramId": null,
+      "canonicalMintDecision": "NEW_TOKEN_2022_FROM_INCEPTION",
+      "duplicateSupplyRetirementPolicy": "NOT_APPLICABLE"
+    },
+    "inputPolicy": "EXACT_COMMITTED_OWNER_POLICY_PACKET_ONLY",
+    "testFixturesSatisfyProduction": false,
+    "blocker": null
+  },
+  "identities": {
+    "status": "BLOCKED",
+    "lawProgramId": null,
+    "economyProgramId": null,
+    "canonicalMint": null,
+    "blocker": "The production law program, economy program, and canonical Token-2022 mint identities have not been generated, independently bound to reviewed bytes, or approved for Mainnet."
+  },
+  "combinedArtifactBinding": {
+    "status": "BLOCKED",
+    "programCrate": "projects/star-ascent/site/programs/iat_b3_law",
+    "cargoFeature": "production-combined-hook",
+    "inputPolicy": "OWNER_SUPPLIED_PUBLIC_IDENTITIES_ONLY",
+    "testFixturesSatisfyProduction": false,
+    "inputs": [
+      {
+        "role": "LAW_PROGRAM_ID",
+        "environmentVariable": "IAT_B3_PRODUCTION_LAW_PROGRAM_ID",
+        "manifestPath": "identities.lawProgramId"
+      },
+      {
+        "role": "ECONOMY_PROGRAM_ID",
+        "environmentVariable": "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID",
+        "manifestPath": "identities.economyProgramId"
+      },
+      {
+        "role": "CANONICAL_MINT",
+        "environmentVariable": "IAT_B3_PRODUCTION_CANONICAL_MINT",
+        "manifestPath": "identities.canonicalMint"
+      }
+    ],
+    "reproducibleSbfBuild": {
+      "status": "FROZEN",
+      "sourcePolicy": "EXACT_COMMITTED_CLEAN_HEAD",
+      "sourceHeadEnvironmentVariable": "IAT_B3_EXACT_SOURCE_HEAD_SHA",
+      "requiresNoTrackedOrUntrackedChanges": true,
+      "hostPlatform": "linux/amd64",
+      "rustToolchain": "1.97.1",
+      "cargoBuildSbfVersion": "3.1.10",
+      "platformToolsVersion": "1.52",
+      "networkPolicy": "OFFLINE_PREINSTALLED_TOOLCHAIN_ONLY",
+      "command": "cargo",
+      "arguments": [
+        "build-sbf",
+        "--manifest-path",
+        "projects/star-ascent/site/programs/iat_b3_law/Cargo.toml",
+        "--sbf-out-dir",
+        "<FRESH_OUTPUT_DIRECTORY>",
+        "--arch",
+        "v0",
+        "--no-default-features",
+        "--features",
+        "production-combined-hook",
+        "--optimize-size",
+        "--offline",
+        "--skip-tools-install",
+        "--tools-version",
+        "v1.52",
+        "--",
+        "--locked",
+        "--target-dir",
+        "<FRESH_TARGET_DIRECTORY>"
+      ],
+      "outputFileName": "iat_b3_law.so",
+      "repetitions": 2,
+      "requiresIdenticalSha256": true,
+      "requiresIdenticalByteLength": true,
+      "publicNetworkWrites": false,
+      "signing": false,
+      "deployment": false,
+      "blocker": null
+    },
+    "blocker": "Owner-supplied public law, economy, and canonical mint identities are absent, so no production combined-hook build environment can be emitted."
+  },
+  "clusterPolicy": {
+    "status": "BLOCKED",
+    "identityPolicy": null,
+    "canonicalScope": "MAINNET_BETA_ONLY",
+    "nonProductionIdentitiesAreCanonical": false,
+    "blocker": "The owner has not frozen whether law, economy, and mint public keys are shared across clusters or independently generated; non-production state remains noncanonical and disposable under every permitted policy."
+  },
+  "networkBinding": {
+    "status": "BLOCKED",
+    "lawDomainSeparator": "IAT_B3_SOLANA_DAILY_LAW_V1",
+    "cluster": "mainnet-beta",
+    "genesisHash": null,
+    "genesisHashSource": "SOLANA_GET_GENESIS_HASH_FINALIZED",
+    "bindMintAndEntropySlot": true,
+    "blocker": "The exact Mainnet Genesis hash has not been captured and independently verified for the freeze packet."
+  },
+  "entropy": {
+    "status": "BLOCKED",
+    "lagSlots": null,
+    "skippedSlotRule": "NEWEST_AVAILABLE_ANCESTOR_AT_OR_BEFORE_CURRENT_SLOT_MINUS_LAG",
+    "insufficientHistoryRule": "FAIL_CLOSED",
+    "blocker": "The source value of 150 slots is provisional; the final lag awaits skipped-slot, fork, congestion, and delayed-finalization measurement."
+  },
+  "seedTable": [
+    {
+      "name": "lawState",
+      "program": "LAW",
+      "status": "BLOCKED",
+      "components": ["utf8:law-state", "pubkey:mint"],
+      "purpose": "Current immutable Daily Law decision",
+      "blocker": "Candidate already exists in the law prototype but is not frozen against a production law ID and mint."
+    },
+    {
+      "name": "extraAccountMetas",
+      "program": "LAW",
+      "status": "BLOCKED",
+      "components": ["utf8:extra-account-metas", "pubkey:mint"],
+      "purpose": "Standard Token-2022 transfer-hook account resolution",
+      "blocker": "Candidate already exists in the law prototype but is not frozen against a production law ID and mint."
+    },
+    {
+      "name": "economyConfig",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:config", "pubkey:mint"],
+      "purpose": "Genesis and V2-continuity configuration",
+      "blocker": "Retained V2 seed candidate; the B3 economy program is still host-only."
+    },
+    {
+      "name": "vaultAuthority",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:vault-authority", "pubkey:economyConfig"],
+      "purpose": "Sole signer for public economic vaults",
+      "blocker": "Retained V2 seed candidate; the B3 economy program is still host-only."
+    },
+    {
+      "name": "laneState",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:lane", "pubkey:economyConfig", "u8:lane"],
+      "purpose": "Treasury, ecosystem, core, and liquidity accounting",
+      "blocker": "Retained V2 seed candidate; lane encoding is not frozen in a deployable B3 economy binary."
+    },
+    {
+      "name": "laneToken",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:lane-token", "pubkey:economyConfig", "u8:lane"],
+      "purpose": "Canonical public Token-2022 lane custody",
+      "blocker": "Retained V2 seed candidate; Token-2022 account creation is not implemented in the B3 economy program."
+    },
+    {
+      "name": "stakeToken",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:stake-token", "pubkey:economyConfig"],
+      "purpose": "Canonical public principal custody",
+      "blocker": "Retained V2 seed candidate; final identity binding is absent."
+    },
+    {
+      "name": "stakeIngress",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:stake-ingress", "pubkey:economyConfig"],
+      "purpose": "Exact-amount temporary delegate for donation-safe stake ingress",
+      "blocker": "The runtime primitive is rehearsed only in disposable fixtures and is not wired into the production law hook."
+    },
+    {
+      "name": "coreReward",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:core-reward", "pubkey:economyConfig"],
+      "purpose": "Retained weekly core reservation state",
+      "blocker": "Retained V2 seed candidate; core custody semantics remain unresolved."
+    },
+    {
+      "name": "agency",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:agency", "pubkey:economyConfig", "u32le:agencyIndex"],
+      "purpose": "Registered agency by immutable ordinal",
+      "blocker": "Retained V2 seed candidate; B3 codec and public dispatcher are not frozen."
+    },
+    {
+      "name": "agencyOwnerIndex",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:agency-owner", "pubkey:economyConfig", "pubkey:agencyOwner"],
+      "purpose": "One agency registration per owner key",
+      "blocker": "Retained V2 seed candidate; B3 codec and public dispatcher are not frozen."
+    },
+    {
+      "name": "eligibility",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:eligibility", "pubkey:economyConfig", "pubkey:operator"],
+      "purpose": "Preserved wallet and X eligibility binding",
+      "blocker": "Retained V2 seed candidate; the B3 identity-dependency policy remains unresolved."
+    },
+    {
+      "name": "position",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:position", "pubkey:economyConfig", "pubkey:operator", "u64le:positionId"],
+      "purpose": "Operator position with caller-selected identifier",
+      "blocker": "Retained V2 seed candidate; the deployable position lifecycle is incomplete."
+    },
+    {
+      "name": "round",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:round", "pubkey:economyConfig", "u64le:week"],
+      "purpose": "Retained V2 weekly CCC boundary",
+      "blocker": "Retained V2 seed candidate with a frozen strict B3 Round codec; CCC remains compile-time inactive, while the public adapter, account lifecycle, and production identity remain unfrozen."
+    },
+    {
+      "name": "factionConfig",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-config", "pubkey:economyConfig"],
+      "purpose": "Fixed five-faction policy and epoch anchor",
+      "blocker": "Faction scoring, carve-out, and epoch rules remain unresolved."
+    },
+    {
+      "name": "factionAllegiance",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-allegiance", "pubkey:factionConfig", "pubkey:operator"],
+      "purpose": "One operator allegiance with the exact 24-hour cooldown",
+      "blocker": "Faction account codecs and Sybil boundary remain unresolved."
+    },
+    {
+      "name": "factionWeek",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-week", "pubkey:factionConfig", "u64le:week"],
+      "purpose": "Canonical weekly competition state",
+      "blocker": "The weekly epoch anchor and tie rule remain unresolved."
+    },
+    {
+      "name": "factionScore",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-score", "pubkey:factionWeek", "u8:factionId"],
+      "purpose": "Score commitment for one of five fixed factions",
+      "blocker": "Eligible actions, weights, proofs, and replay prevention remain unresolved."
+    },
+    {
+      "name": "factionRewardVault",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-reward-vault", "pubkey:factionConfig"],
+      "purpose": "Capped pre-funded community carve-out custody",
+      "blocker": "The carve-out amount, emission schedule, and unused-balance policy remain unresolved."
+    },
+    {
+      "name": "factionRewardManifest",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-reward", "pubkey:factionWeek"],
+      "purpose": "Prize commitment sealed before the scoring period",
+      "blocker": "Prize types, authority boundary, expiry, and carry-forward rules remain unresolved."
+    },
+    {
+      "name": "factionFollowerSnapshot",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-followers", "pubkey:factionWeek", "u8:factionId"],
+      "purpose": "Immutable follower eligibility commitment",
+      "blocker": "Snapshot source, cutoff, and challenge policy remain unresolved."
+    },
+    {
+      "name": "factionClaim",
+      "program": "ECONOMY",
+      "status": "BLOCKED",
+      "components": ["utf8:faction-claim", "pubkey:factionRewardManifest", "pubkey:operator"],
+      "purpose": "Idempotent reward receipt per eligible operator",
+      "blocker": "Claim expiry, remainder, and unclaimed-prize policy remain unresolved."
+    }
+  ],
+  "factionPolicy": {
+    "status": "FROZEN",
+    "factions": [
+      { "id": "radiance", "displayLabel": "Radiance" },
+      { "id": "ellie", "displayLabel": "Ellie" },
+      { "id": "alia", "displayLabel": "Alia" },
+      { "id": "ece", "displayLabel": "Ece" },
+      { "id": "boss", "displayLabel": "the boss" }
+    ],
+    "allegianceCooldownSeconds": 86400,
+    "sameFactionPledgeRule": "REJECT_NO_OP",
+    "leadersHaveProtocolAuthority": false,
+    "blocker": null
+  },
+  "mintConfig": {
+    "status": "BLOCKED",
+    "tokenProgramId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+    "decimals": 9,
+    "fixedSupplyBaseUnits": "1000000000000000000",
+    "extensionsOrdered": ["ConfidentialTransferMint", "TransferHook"],
+    "allowAdditionalExtensions": false,
+    "mintAuthorityAtCreation": "CEREMONY_SIGNER",
+    "mintAuthorityAfterFunding": null,
+    "freezeAuthorityAtCreation": "CEREMONY_SIGNER",
+    "freezeAuthorityBeforeLawInitialization": null,
+    "permanentDelegate": "ABSENT",
+    "mintCloseAuthority": "ABSENT",
+    "transferHook": {
+      "programId": null,
+      "authorityAtCreation": "CEREMONY_SIGNER",
+      "authorityAfterLawInitialization": null
+    },
+    "confidentialTransferMint": {
+      "autoApproveNewAccounts": true,
+      "auditorElGamalPubkey": null,
+      "authorityAtCreation": "CEREMONY_SIGNER",
+      "authorityAfterLawInitialization": null
+    },
+    "metadataPolicy": null,
+    "blocker": "The hook identity and metadata policy are unresolved; the exact two-extension allowlist and null terminal authorities remain mandatory."
+  },
+  "genesis": {
+    "status": "BLOCKED",
+    "phaseOrder": ["UNINITIALIZED", "GENESIS_STAGING", "ACTIVE"],
+    "stagingPredicate": {
+      "requiresPhase": "GENESIS_STAGING",
+      "requiresProgramsImmutable": true,
+      "canonicalAddressesOnly": true,
+      "exactManifestAmountsOnly": true,
+      "lawDecisionRequired": false,
+      "allowedWrites": ["CREATE_CANONICAL_ACCOUNT", "FUND_CANONICAL_VAULT"],
+      "forbiddenWrites": ["RELEASE", "REWARD", "FACTION", "POSITION", "ELIGIBILITY", "RESERVATION", "WITHDRAWAL", "CLAIM"]
+    },
+    "activationPredicate": {
+      "oneWay": true,
+      "requiresCurrentFinalizedOpenLaw": true,
+      "requiresCanonicalAccountsExact": true,
+      "requiresGenesisConservation": true,
+      "requiresCoreCapCompliant": true,
+      "requiresStakeIngressEnforced": true,
+      "requiresFactionPolicySealed": true,
+      "requiresMintAuthorityNull": true,
+      "requiresFreezeAuthorityNull": true,
+      "requiresTransferHookAuthorityNull": true,
+      "requiresConfidentialTransferMintAuthorityNull": true,
+      "disablesStagingWrites": true
+    },
+    "blocker": "The economy entrypoint, separately owned faction economics and funding policy, core-custody semantics, and one-way activation transition are not implemented or frozen."
+  },
+  "sealOrder": {
+    "status": "BLOCKED",
+    "steps": [
+      "DEPLOY_LAW_WITH_HARDWARE_UPGRADE_AUTHORITY",
+      "DEPLOY_ECONOMY_WITH_HARDWARE_UPGRADE_AUTHORITY",
+      "VERIFY_EXACT_PROGRAM_BYTES_AND_IDENTITIES",
+      "REVOKE_LAW_UPGRADE_AUTHORITY",
+      "REVOKE_ECONOMY_UPGRADE_AUTHORITY",
+      "VERIFY_BOTH_PROGRAMS_IMMUTABLE",
+      "CREATE_EXACT_TOKEN_2022_MINT",
+      "ENTER_GENESIS_STAGING",
+      "CREATE_AND_FUND_CANONICAL_ACCOUNTS",
+      "VERIFY_GENESIS_CONSERVATION_AND_BINDINGS",
+      "REVOKE_MINT_AUTHORITY",
+      "REVOKE_FREEZE_AUTHORITY",
+      "INITIALIZE_LAW_AND_SEAL_EXTENSION_AUTHORITIES",
+      "VERIFY_MINT_AND_PROGRAM_AUTHORITIES_SEALED",
+      "FINALIZE_CURRENT_DAY",
+      "ACTIVATE_ONLY_IF_CURRENT_DAY_OPEN",
+      "VERIFY_ACTIVE_AND_STAGING_DISABLED"
+    ],
+    "blocker": "This order is a fail-closed ceremony policy, not ceremony evidence; it cannot be authorized until identities, the deployable economy binary, Genesis predicate, and separately owned faction economics are complete."
+  }
+}

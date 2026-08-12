@@ -1,0 +1,270 @@
+{
+  "schema": "iat-b3-v2-parity-claims-readiness/v1",
+  "profile": "PRODUCTION",
+  "status": "BLOCKED",
+  "scope": {
+    "contract": "NON_ACTIVATING_V2_SOURCE_INHERITANCE_AND_PUBLIC_CLAIMS_BOUNDARY",
+    "doesNotCertify": [
+      "B3_RUNTIME_FEATURE_PARITY",
+      "FULL_FEATURE_DEVNET_REHEARSAL",
+      "PRODUCTION_IDENTITY_OR_DEPLOYED_BYTES",
+      "LOCALIZATION_OR_MEDIA_ACCEPTANCE",
+      "RELEASE_AUTHORIZATION",
+      "MAINNET_READINESS"
+    ]
+  },
+  "inputBindings": {
+    "featureParityContract": {
+      "path": "projects/star-ascent/site/docs/b3/V2_FEATURE_PARITY.md",
+      "sha256": "360a8511d5f2cc92a3a3e78509134a6c7096322ab88fca1be5e67f6fdf8fce26"
+    },
+    "sourceInventory": {
+      "path": "projects/star-ascent/site/docs/b3/V2_SOURCE_INVENTORY.md",
+      "sha256": "70ecb803e5c063b7d8ac230b08792e4d95090d663d705e0b1b94eae5577f2914"
+    },
+    "releaseDependencyGraph": {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",
+      "sha256": "e8a2b5eaa3d92983a41550daaeb74c79613e915a7d0faa4ac8cd8d9ee7d8e70b"
+    }
+  },
+  "sourceInheritance": {
+    "canonicalV2SourceCommit": "f0a794952ab822d823c8d8eba0c4c8f5d9ae4796",
+    "requiredPaths": [
+      "projects/star-ascent/site/programs/iat_v2/src/lib.rs",
+      "projects/star-ascent/site/programs/iat_v2/src/policy.rs",
+      "projects/star-ascent/site/programs/iat_v2/src/switchboard_randomness.rs",
+      "projects/star-ascent/site/programs/iat_v2/client.mjs",
+      "projects/star-ascent/site/programs/iat_v2/instructions.mjs",
+      "projects/star-ascent/site/programs/iat_v2/feature-instructions.mjs",
+      "projects/star-ascent/site/engagement/iat-v2-reference-engine.mjs",
+      "projects/star-ascent/site/engagement/node-binding-policy.mjs",
+      "projects/star-ascent/site/engagement/x-oauth-state.mjs",
+      "projects/star-ascent/site/app/api/network/route.ts",
+      "projects/star-ascent/site/app/i18n/config.ts",
+      "projects/star-ascent/site/app/future/page.tsx",
+      "projects/star-ascent/site/tools/iat-v2-admin-console/main.jsx"
+    ],
+    "requiredEntrypoints": [
+      "initialize_config",
+      "initialize_lane_vault",
+      "initialize_stake_vault",
+      "activate",
+      "register_agency",
+      "set_eligibility",
+      "open_position",
+      "settle_position_week",
+      "settle_core_week",
+      "claim_lane_principal",
+      "withdraw_position_principal",
+      "close_position",
+      "commit_round",
+      "settle_round",
+      "expire_round"
+    ]
+  },
+  "featureRows": [
+    { "ordinal": 1, "capability": "Fixed 1B IAT supply, 9 decimals" },
+    { "ordinal": 2, "capability": "Original SPL representation" },
+    { "ordinal": 3, "capability": "Optional Privacy Vault" },
+    { "ordinal": 4, "capability": "Five allocation lanes" },
+    { "ordinal": 5, "capability": "Community hardware custody boundary" },
+    { "ordinal": 6, "capability": "Treasury/ecosystem/core/liquidity vesting" },
+    { "ordinal": 7, "capability": "Ordered reward lanes" },
+    { "ordinal": 8, "capability": "Full collateral reservation" },
+    { "ordinal": 9, "capability": "No reward debt" },
+    { "ordinal": 10, "capability": "Existing-reservation priority" },
+    { "ordinal": 11, "capability": "52-week positions" },
+    { "ordinal": 12, "capability": "104-week core rewards at 17%" },
+    { "ordinal": 13, "capability": "Standard 10% rate" },
+    { "ordinal": 14, "capability": "CCC Agent 28% rate" },
+    { "ordinal": 15, "capability": "CCC Associate 20% rate" },
+    { "ordinal": 16, "capability": "No automatic compounding" },
+    { "ordinal": 17, "capability": "Append-only agency registry" },
+    { "ordinal": 18, "capability": "Immutable registry snapshots" },
+    { "ordinal": 19, "capability": "Universal one-roll tiebreak" },
+    { "ordinal": 20, "capability": "Exact-uniform rejection sampling" },
+    { "ordinal": 21, "capability": "No operator reroll" },
+    { "ordinal": 22, "capability": "24-hour first CCC delay" },
+    { "ordinal": 23, "capability": "Weekly CCC cadence" },
+    { "ordinal": 24, "capability": "24-hour reveal timeout" },
+    { "ordinal": 25, "capability": "Terminal expired-neutral settlement" },
+    { "ordinal": 26, "capability": "Switchboard adapter behavior" },
+    { "ordinal": 27, "capability": "Program activation/funding invariants" },
+    { "ordinal": 28, "capability": "Mint/freeze revocation effect" },
+    { "ordinal": 29, "capability": "Model T signing boundary" },
+    { "ordinal": 30, "capability": "Sole-device concentration risk disclosure" },
+    { "ordinal": 31, "capability": "Wallet/X binding and uniqueness" },
+    { "ordinal": 32, "capability": "X age/subscription checks" },
+    { "ordinal": 33, "capability": "Atomic D1 activation and cap semantics" },
+    { "ordinal": 34, "capability": "Read-only bounded RPC proxy" },
+    { "ordinal": 35, "capability": "Public network explorer" },
+    { "ordinal": 36, "capability": "English and Turkish public domains" },
+    { "ordinal": 37, "capability": "50-locale route architecture" },
+    { "ordinal": 38, "capability": "AI-generated unverified localization policy" },
+    { "ordinal": 39, "capability": "Inactive future previews" },
+    { "ordinal": 40, "capability": "Hero Promotions future DLC" },
+    { "ordinal": 41, "capability": "Predictive Engine Market preview" },
+    { "ordinal": 42, "capability": "Casino DLC preview" },
+    { "ordinal": 43, "capability": "Admin inspection mode" },
+    { "ordinal": 44, "capability": "Reproducible SBF and source binding" },
+    { "ordinal": 45, "capability": "Public audit/evidence chain" },
+    { "ordinal": 46, "capability": "Launch HOLD and ceremony gates" },
+    { "ordinal": 47, "capability": "Daily Lockdown Law" },
+    { "ordinal": 48, "capability": "Five operator factions" },
+    { "ordinal": 49, "capability": "Weekly faction rewards" },
+    { "ordinal": 50, "capability": "Core-team 10% live-supply cap" },
+    { "ordinal": 51, "capability": "Genesis and X interaction eligibility" },
+    { "ordinal": 52, "capability": "X-bound reward tiering" },
+    { "ordinal": 53, "capability": "New-obligation reward-capacity waterfall" }
+  ],
+  "decisionPolicy": {
+    "defaultDecision": "RETAIN",
+    "cutExceptions": [],
+    "ownerCutAuthorizationArtifacts": [],
+    "acceptanceState": "INCOMPLETE"
+  },
+  "implementationSlices": [
+    {
+      "id": "CANONICAL_ASSET_AND_PRIVACY",
+      "featureOrdinals": [1, 2, 3, 28],
+      "state": "BLOCKED_PRODUCTION_ASSET_AND_PRIVACY",
+      "evidencePaths": [
+        "projects/star-ascent/site/docs/b3/ESTATE_BASELINE.md",
+        "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
+        "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json"
+      ],
+      "blockers": [
+        "Signed canonical mint decision and migration evidence are absent.",
+        "Exact-version native Privacy Vault lifecycle and independent privacy review are incomplete."
+      ]
+    },
+    {
+      "id": "V2_ECONOMY_REWARDS_AND_CCC",
+      "featureOrdinals": [4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27],
+      "state": "PARTIAL_NATIVE_PORT",
+      "evidencePaths": [
+        "projects/star-ascent/site/docs/b3/ECONOMIC_PORT_ARCHITECTURE.md",
+        "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
+        "projects/star-ascent/site/docs/b3/REWARD_CAPACITY_WATERFALL.md"
+      ],
+      "blockers": [
+        "The B3 economy surface lacks a production entrypoint, dispatcher, CPI execution, and complete native write handlers.",
+        "End-to-end V2 differential, migration, and adversarial Devnet evidence is incomplete."
+      ]
+    },
+    {
+      "id": "CUSTODY_CEREMONY_AND_REPRODUCIBILITY",
+      "featureOrdinals": [5, 29, 30, 44, 45, 46],
+      "state": "INHERITED_TRANSITION_BOUNDARY",
+      "evidencePaths": [
+        "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
+        "projects/star-ascent/site/docs/b3/MAINNET_PATH.md",
+        "projects/star-ascent/site/docs/b3/V2_SOURCE_INVENTORY.md"
+      ],
+      "blockers": [
+        "B3 supersession, custody policy, accountable ceremony funding, and production binary reproduction are incomplete.",
+        "V2 and Mainnet remain on HOLD."
+      ]
+    },
+    {
+      "id": "IDENTITY_SOCIAL_AND_NETWORK",
+      "featureOrdinals": [31, 32, 33, 34, 35, 51, 52],
+      "state": "PARTIAL_REFERENCE_AND_APP_ADAPTERS",
+      "evidencePaths": [
+        "projects/star-ascent/site/docs/b3/X_SOCIAL_EVIDENCE_PROVIDER_READINESS.md",
+        "projects/star-ascent/site/docs/b3/EXTERNAL_CHECKPOINT_PROVIDER_READINESS.md",
+        "projects/star-ascent/site/docs/b3/V2_SOURCE_INVENTORY.md"
+      ],
+      "blockers": [
+        "Production X evidence and checkpoint providers are unfrozen and unauthenticated.",
+        "B3 identity, network read-adapter, rollback, and full integration rehearsals are incomplete."
+      ]
+    },
+    {
+      "id": "PUBLIC_DOMAINS_AND_LOCALIZATION",
+      "featureOrdinals": [36, 37, 38],
+      "state": "INHERITED_RUNTIME_REVIEW_BLOCKED",
+      "evidencePaths": [
+        "projects/star-ascent/site/docs/b3/V2_SOURCE_INVENTORY.md",
+        "projects/star-ascent/site/docs/b3/MAINNET_PATH.md"
+      ],
+      "blockers": [
+        "All 50 locales lack complete native review and immutable acceptance evidence.",
+        "Production dual-host render and hydration evidence is incomplete."
+      ]
+    },
+    {
+      "id": "INACTIVE_FUTURE_AND_ADMIN_SURFACES",
+      "featureOrdinals": [39, 40, 41, 42, 43],
+      "state": "INHERITED_INACTIVE_EVIDENCE_PENDING",
+      "evidencePaths": [
+        "projects/star-ascent/site/docs/b3/ARCHITECTURE_BASELINE.md",
+        "projects/star-ascent/site/docs/b3/V2_SOURCE_INVENTORY.md"
+      ],
+      "blockers": [
+        "Inherited inactive surfaces still require final source-bound no-activation and cross-engine isolation evidence.",
+        "No future module is authorized for activation."
+      ]
+    },
+    {
+      "id": "B3_LOCKDOWN_FACTIONS_CORE_AND_WATERFALL",
+      "featureOrdinals": [47, 48, 49, 50, 53],
+      "state": "PARTIAL_B3_REFERENCE_AND_NATIVE_PREPARATION",
+      "evidencePaths": [
+        "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
+        "projects/star-ascent/site/docs/b3/FACTIONS.md",
+        "projects/star-ascent/site/docs/b3/CORE_TEAM_CAP.md",
+        "projects/star-ascent/site/docs/b3/REWARD_CAPACITY_WATERFALL.md"
+      ],
+      "blockers": [
+        "Production Daily Law hook invocation and combined stake-ingress enforcement are incomplete.",
+        "Faction economics, core-custody release policy, downstream consumers, and end-to-end conservation remain unresolved."
+      ]
+    }
+  ],
+  "releaseClaimsBoundary": {
+    "prerequisiteNodeIds": [
+      "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+      "V2_FEATURE_PARITY",
+      "PRODUCTION_IDENTITY_INPUT_FREEZE",
+      "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE",
+      "LOCALIZATION_EVIDENCE",
+      "MEDIA_MASTER_COMPLETENESS",
+      "V2_LAUNCH_CEREMONY_BOUNDARY"
+    ],
+    "requiredCurrentStatus": "BLOCKED",
+    "publishableClaimClasses": [
+      "V2_SOURCE_INHERITED",
+      "B3_REFERENCE_OR_PARTIAL_IMPLEMENTATION",
+      "LOCAL_TEST_RESULT_WITH_EXACT_SCOPE",
+      "DEVNET_ATTEMPT_WITH_EXACT_SCOPE",
+      "MAINNET_HOLD"
+    ],
+    "forbiddenClaimClasses": [
+      "FULL_V2_PARITY_COMPLETE",
+      "ALL_FEATURES_DEVNET_REHEARSED",
+      "PRODUCTION_IDENTITIES_FROZEN",
+      "ALL_50_LOCALES_NATIVE_ACCEPTED",
+      "ALL_MEDIA_MASTERS_COMPLETE",
+      "B3_DEPLOYED_OR_ACTIVATION_READY",
+      "MAINNET_LAUNCH_AUTHORIZED"
+    ]
+  },
+  "ownerAndExternalInputs": [
+    "Signed canonical mint and migration decision for every live Estate.",
+    "Frozen production program, mint, cluster, entropy, metadata, and authority inputs.",
+    "Owner acceptance of core custody/release and faction economics, scoring, Sybil, snapshot, tie, authorization, carve-out, and funding rules.",
+    "Production checkpoint and X evidence providers with authenticated, rollback-safe, independently observed evidence.",
+    "Accountable native review and immutable acceptance evidence for all 50 locales.",
+    "All 16 release media masters with license and legal clearance; 14 are currently missing.",
+    "Independent security, economic, privacy, dependency, and legal review of final bytes and evidence."
+  ],
+  "zeroUnauthorizedCuts": true,
+  "allFeatureRowsMapped": true,
+  "productionParityPacketComplete": false,
+  "releaseSurfaceClaimsPacketComplete": false,
+  "activationReady": false,
+  "deploymentAuthorized": false,
+  "mainnetExecutionAuthorized": false,
+  "mainnetStatus": "HOLD"
+}

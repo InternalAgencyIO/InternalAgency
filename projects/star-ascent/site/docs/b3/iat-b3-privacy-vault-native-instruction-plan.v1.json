@@ -1,0 +1,143 @@
+{
+  "$schema": "./iat-b3-privacy-vault-native-instruction-plan.v1.schema.json",
+  "schema": "iat-b3-privacy-vault-native-instruction-plan/v1",
+  "status": "ACCOUNT_LOCAL_UNSIGNED_INSTRUCTION_PREREQUISITE_COMPLETE_RELEASE_HOLD",
+  "scope": {
+    "predicate": "PRIVACY_VAULT_ACCOUNT_LOCAL_NATIVE_INSTRUCTION_PREREQUISITE_PACKET",
+    "certifies": [
+      "CANONICAL_PRIVACY_PLAN_CODEC_AND_DIGEST_ADMISSION",
+      "READ_ONLY_TOKEN_2022_MINT_AND_ACCOUNT_CAPABILITY_CROSS_BINDING",
+      "EXACT_PINNED_OFFICIAL_ACCOUNT_LOCAL_INSTRUCTION_BUILDERS",
+      "RELEVANT_RUNTIME_PUBLIC_FIELD_DRIFT_REJECTION",
+      "UNSIGNED_INERT_INSTRUCTION_RECEIPT_BOUNDARY"
+    ],
+    "doesNotCertify": [
+      "CONFIGURE_TRANSFER_WITHDRAW_EMPTY_OR_CLOSE_INSTRUCTIONS",
+      "PROOF_GENERATION_CONTEXT_CREATION_VERIFICATION_OR_CLOSURE",
+      "RUNTIME_DAILY_LAW_OR_TRANSFER_HOOK_ACCOUNT_AUTHENTICATION",
+      "SIGNER_KEYSTORE_RPC_CPI_SUBMISSION_OR_CONFIRMATION",
+      "DURABLE_JOURNAL_RECOVERY_OR_ROLLBACK_PROTECTION",
+      "CHAIN_STATE_MUTATION_OR_DEPLOYED_PROGRAM_BYTECODE",
+      "DEVNET_LIFECYCLE_OR_FINAL_BINARY_REPRODUCIBILITY",
+      "PRIVACY_VAULT_ACTIVATION_RELEASE_OR_MAINNET_AUTHORIZATION"
+    ]
+  },
+  "hostPrerequisiteBinding": {
+    "path": "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
+    "sha256": "0f8bc5f9622877e4f6298ea1d4c4f7eea4a0427f04e0f6a49f6a07eb66c5fb1b",
+    "hostPacketInstructionConstruction": false,
+    "separateNativeInstructionModuleRequired": true
+  },
+  "sourceBindings": [
+    {
+      "path": "projects/star-ascent/site/Cargo.lock",
+      "sha256": "9cdf2e9bb6b618c993dd482e6b5e2558359826e2aff0a80eb1b62957d2578d84",
+      "byteLength": 62795
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/Cargo.toml",
+      "sha256": "333389a41625cf9bc40ccaa21f94298a4de6244ad6bab2dd03dcaf789b2c54be",
+      "byteLength": 861
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/src/lib.rs",
+      "sha256": "d09d02b6f7124241d0d7e80d310a724b56f296422d729d9c5f34363ffa39127f",
+      "byteLength": 52248
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/src/journal_codec.rs",
+      "sha256": "8ec6468fbdf8e58588b3fce5835863237b37c8991abb323c2d88b0e5e297699e",
+      "byteLength": 25558
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/src/token_2022_host.rs",
+      "sha256": "8499cf37e7a50b8c07912d3d2f1b51f767300e15722478dafc7e52e185fdeb5a",
+      "byteLength": 23419
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/src/native_instruction_plan.rs",
+      "sha256": "105221cbaf3b9d9e77440f8a17d126a700494c1cc945306f7b4987da450b3508",
+      "byteLength": 11360
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_vault/tests/native_instruction_plan_spec.rs",
+      "sha256": "1febcfe6fad1d1456ff46de8eb4698ee1f46a218e024bf2e40ef5b7a324ccaa1",
+      "byteLength": 17919
+    },
+    {
+      "path": "projects/star-ascent/site/docs/b3/PRIVACY_VAULT_NATIVE_INSTRUCTION_PLAN_REFERENCE.md",
+      "sha256": "5afb2e9c3d4a6cf8c5e259dd0606cd8e9dbeb3ed8aabbd85185974223f38f9de",
+      "byteLength": 5291
+    }
+  ],
+  "dependencyPins": {
+    "splToken2022Interface": "=2.1.0",
+    "solanaInstruction": "=3.5.0",
+    "solanaPubkey": "=3.0.0",
+    "token2022ProgramId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+  },
+  "supportedInstructions": [
+    {
+      "operation": "DEPOSIT",
+      "officialBuilder": "deposit",
+      "material": "CANONICAL_PLAN_CLEARTEXT_AMOUNT"
+    },
+    {
+      "operation": "APPLY_PENDING_BALANCE",
+      "officialBuilder": "apply_pending_balance",
+      "material": "CALLER_SUPPLIED_DECRYPTABLE_AVAILABLE_BALANCE"
+    },
+    {
+      "operation": "ENABLE_CONFIDENTIAL_CREDITS",
+      "officialBuilder": "enable_confidential_credits",
+      "material": "NONE"
+    },
+    {
+      "operation": "DISABLE_CONFIDENTIAL_CREDITS",
+      "officialBuilder": "disable_confidential_credits",
+      "material": "NONE"
+    },
+    {
+      "operation": "ENABLE_NON_CONFIDENTIAL_CREDITS",
+      "officialBuilder": "enable_non_confidential_credits",
+      "material": "NONE"
+    },
+    {
+      "operation": "DISABLE_NON_CONFIDENTIAL_CREDITS",
+      "officialBuilder": "disable_non_confidential_credits",
+      "material": "NONE"
+    }
+  ],
+  "constructionChecks": {
+    "featureGated": true,
+    "canonicalPlanCodecAndDigestRequired": true,
+    "readOnlyMintCapabilityRequired": true,
+    "readOnlyAccountCapabilityRequired": true,
+    "programMintAccountOwnerCrossBindingRequired": true,
+    "relevantRuntimePublicStateCrossBindingRequired": true,
+    "officialBuilderAccountAndDataEqualityTested": true,
+    "unsupportedOperationRejected": true,
+    "materialMismatchRejected": true,
+    "instructionConstruction": true,
+    "hostParserInstructionConstruction": false,
+    "configureAccountInstructionSupported": false,
+    "confidentialTransferInstructionSupported": false,
+    "withdrawInstructionSupported": false,
+    "emptyAndCloseInstructionSupported": false,
+    "proofContextLifecycleSupported": false,
+    "officialTransferHookResolutionExecuted": false,
+    "runtimeDailyLawAuthenticated": false,
+    "instructionSigned": false,
+    "rpcPerformed": false,
+    "tokenCpiExecuted": false,
+    "instructionSubmitted": false,
+    "chainStateMutated": false
+  },
+  "accountLocalInstructionPrerequisiteComplete": true,
+  "privacyVaultLifecycleComplete": false,
+  "devnetVerified": false,
+  "activationReady": false,
+  "releaseAuthorizationVerified": false,
+  "mainnetExecutionAuthorized": false,
+  "mainnetStatus": "HOLD"
+}

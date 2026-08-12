@@ -1,0 +1,97 @@
+{
+  "$schema": "./iat-b3-dependency-security-remediation.v1.schema.json",
+  "schema": "iat-b3-dependency-security-remediation/v1",
+  "status": "TECHNICAL_REMEDIATION_COMPLETE_INDEPENDENT_ACCEPTANCE_PENDING",
+  "scope": {
+    "predicate": "ZERO_UNACCEPTED_DEPENDENCY_FINDINGS_PACKET",
+    "certifies": [
+      "EXACT_REMEDIATION_COMMIT_AND_LOCKFILE_BINDING",
+      "ZERO_NPM_AUDIT_VULNERABILITIES_AT_OBSERVATION",
+      "ZERO_CARGO_AUDIT_VULNERABILITIES_AT_OBSERVATION",
+      "EXPLICIT_INFORMATIONAL_FINDING_INVENTORY"
+    ],
+    "doesNotCertify": [
+      "FUTURE_REGISTRY_OR_ADVISORY_DATABASE_STATE",
+      "TRANSITIVE_UNMAINTAINED_DEPENDENCY_RISK_ACCEPTANCE",
+      "INDEPENDENT_SECURITY_REVIEW_ACCEPTANCE",
+      "PRODUCTION_BINARY_DEVNET_RELEASE_OR_MAINNET_AUTHORIZATION"
+    ]
+  },
+  "remediationCommit": {
+    "sha": "57478cd8e2dff3e91cccbf976895f93b63b2cc9b",
+    "parentSha": "1bc5155d0e3009b728e41b4b607113b0d253f210",
+    "subject": "fix(b3): remediate dependency security findings"
+  },
+  "sourceBindings": [
+    { "path": "package-lock.json", "sha256": "0dfd49b12e400d874af6a4da5cd156196837cf18bab41691eca9ee8976360eb0", "byteLength": 143731 },
+    { "path": "projects/star-ascent/site/package.json", "sha256": "de4981304d3061bdd46c380134ce583f4c89ba37da054b0de0715c3bcab7ed26", "byteLength": 16752 },
+    { "path": "projects/star-ascent/site/package-lock.json", "sha256": "0d9fa00ab4bad2ea159cb602961bf0a0344b67f26f393f41bc17a3f85bbf4170", "byteLength": 458039 },
+    { "path": "projects/star-ascent/site/Cargo.lock", "sha256": "83b98114ddef72cd0a1dfd41b44859075a1ee5870e2bcf5fedb28e12653bd905", "byteLength": 62772 },
+    { "path": "projects/star-ascent/site/tests/fixtures/iat-b3-account-lifecycle/Cargo.lock", "sha256": "77965964970f9ef1fb4e43dd86c2e59f4cc29e2382b202d506041872e0be22cc", "byteLength": 48126 },
+    { "path": "projects/star-ascent/site/tests/fixtures/iat-b3-stake-ingress/Cargo.lock", "sha256": "54608994b8d349adf7b802794173b63648aa29ef1afb840a0c4e36eed765da1a", "byteLength": 50158 },
+    { "path": "projects/star-ascent/site/tests/iat-b3-dependency-security-overrides.test.mjs", "sha256": "145b9a3b85b1e6664dcdebd701d938c45441a903c67e5647a7a1f34a4426fcfb", "byteLength": 2714 },
+    { "path": "projects/star-ascent/site/tests/iat-b3-safe-bigint-buffer.test.mjs", "sha256": "2831e4720d21285b712c85a719d883921eac443209d3b678200127cc92e069a0", "byteLength": 3899 },
+    { "path": "projects/star-ascent/site/tests/iat-b3-safe-image-size.test.mjs", "sha256": "675f955ef8d9de2a1f5a1c0da8bd7d9eedb6579e3e4ee2d80f34c24d1af447e6", "byteLength": 4108 },
+    { "path": "projects/star-ascent/site/vendor/bigint-buffer-1.1.6.tgz", "sha256": "1bd899ffcb225326bfc75cccf3dba51402ab7893c665506ffe60b8548fbf99c9", "byteLength": 1334 },
+    { "path": "projects/star-ascent/site/vendor/bigint-buffer-safe/package.json", "sha256": "618eaf84147d588de4890a903e6a77644c456d6be19452d5573ed271aec5a1e0", "byteLength": 356 },
+    { "path": "projects/star-ascent/site/vendor/bigint-buffer-safe/index.cjs", "sha256": "d1304b498602eced0cb2cb5111f1a55d2cc7087d0d2680f6eb300f738ddf3f22", "byteLength": 1559 },
+    { "path": "projects/star-ascent/site/vendor/image-size-safe/package.json", "sha256": "8a0ad356309bfe2ebf828671de609bcf573ade8bf8539ae0998d49542d709ad8", "byteLength": 1757 },
+    { "path": "projects/star-ascent/site/vendor/image-size-safe/dist/types/heif.mjs", "sha256": "30e9ef642aece578182496b3acbfb7abd2c6dab5e4d536d0acf940ac5645831b", "byteLength": 2788 },
+    { "path": "projects/star-ascent/site/vendor/image-size-safe/dist/types/icns.mjs", "sha256": "e97adf289187be3b446a25fa44172dac6126b95b940f4635fd1f234f81b2954f", "byteLength": 2513 },
+    { "path": "projects/star-ascent/site/vendor/image-size-safe/dist/types/jxl.mjs", "sha256": "cbcb05ee94848bb085a667b53f13411f60a37f289c4cf26eac1916ce2ab4b0bb", "byteLength": 5068 },
+    { "path": "projects/star-ascent/site/vendor/image-size-safe/dist/types/jxl-stream.mjs", "sha256": "551aaf0ad6a7729baa606962ac5316f24317681eba7f31c5237d0a50b92c2d66", "byteLength": 2592 }
+  ],
+  "observedAtUtc": "2026-08-11T07:32:18.212Z",
+  "auditToolchain": {
+    "npmVersion": "10.8.2",
+    "cargoAuditVersion": "0.22.2",
+    "rustSecDatabaseCommit": "2ae3ea41b89902e846595002ca29a91df471097d",
+    "rustSecDatabaseUpdatedAt": "2026-08-10T21:33:56+02:00",
+    "rustSecAdvisoryCount": 1207
+  },
+  "beforeRemediation": {
+    "siteNpmHigh": 6,
+    "siteNpmModerate": 13,
+    "siteNpmTotal": 19
+  },
+  "auditObservations": [
+    { "kind": "NPM_LOCKFILE", "path": "package-lock.json", "dependencyCount": 320, "vulnerabilityCount": 0, "informationalWarningCount": 0 },
+    { "kind": "NPM_LOCKFILE", "path": "projects/star-ascent/site/package-lock.json", "dependencyCount": 866, "vulnerabilityCount": 0, "informationalWarningCount": 0 },
+    { "kind": "CARGO_LOCKFILE", "path": "projects/star-ascent/site/Cargo.lock", "dependencyCount": 234, "vulnerabilityCount": 0, "informationalWarningCount": 1 },
+    { "kind": "CARGO_LOCKFILE", "path": "projects/star-ascent/site/tests/fixtures/iat-b3-account-lifecycle/Cargo.lock", "dependencyCount": 188, "vulnerabilityCount": 0, "informationalWarningCount": 1 },
+    { "kind": "CARGO_LOCKFILE", "path": "projects/star-ascent/site/tests/fixtures/iat-b3-stake-ingress/Cargo.lock", "dependencyCount": 192, "vulnerabilityCount": 0, "informationalWarningCount": 1 }
+  ],
+  "remediations": [
+    "LOCAL_PURE_JAVASCRIPT_BIGINT_BUFFER_1_1_6_WITH_API_REGRESSION",
+    "LOCAL_IMAGE_SIZE_2_0_3_NONADVANCING_LENGTH_FIX_WITH_HOSTILE_REGRESSION",
+    "JAYSON_UUID_OVERRIDE_11_1_1",
+    "ESBUILD_KIT_CORE_UTILS_ESBUILD_OVERRIDE_0_25_12"
+  ],
+  "informationalFindings": [
+    {
+      "id": "RUSTSEC-2025-0141",
+      "package": "bincode",
+      "version": "1.3.3",
+      "classification": "UNMAINTAINED_NOT_KNOWN_VULNERABLE",
+      "transitiveThrough": ["ANCHOR", "SOLANA"],
+      "patchedVersions": [],
+      "unaffectedVersions": [],
+      "accepted": false,
+      "disposition": "PENDING_INDEPENDENT_RISK_ACCEPTANCE"
+    }
+  ],
+  "independentReview": {
+    "accepted": false,
+    "reviewerIdentity": null,
+    "reviewedAtUtc": null,
+    "acceptanceReference": null
+  },
+  "technicalRemediationComplete": true,
+  "zeroKnownVulnerabilitiesObserved": true,
+  "zeroUnacceptedDependencyFindings": false,
+  "completionPredicateSatisfied": false,
+  "activationReady": false,
+  "releaseAuthorizationVerified": false,
+  "mainnetExecutionAuthorized": false,
+  "mainnetStatus": "HOLD"
+}

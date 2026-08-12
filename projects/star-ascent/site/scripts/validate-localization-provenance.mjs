@@ -12,6 +12,8 @@ const manifestPath = join(siteRoot, auditRelative, "translation-provenance.v1.js
 const manifestRelativeToRepository =
   "projects/star-ascent/site/public/audits/localization-qa-20260803/translation-provenance.v1.json";
 const catalogRelativeToRepository = "projects/star-ascent/site/app/i18n/messages.json";
+const activeContentEvidenceMode = "APPEND_ONLY_ACTIVE_CONTENT_V1";
+const activeEvidenceManifestPath = "public/audits/localization-qa-20260808/manifest.json";
 const gitNoLfsFilters = [
   "-c", "filter.lfs.clean=",
   "-c", "filter.lfs.smudge=",
@@ -62,6 +64,31 @@ function sha256(buffer) {
 
 function historicalCatalog(commit) {
   return JSON.parse(git(["show", `${commit}:${catalogRelativeToRepository}`]));
+}
+
+function introductionCommit(runId) {
+  const history = git([
+    "log",
+    "--reverse",
+    "--format=%H",
+    "-S",
+    runId,
+    "--",
+    manifestRelativeToRepository,
+  ]).split(/\r?\n/u).filter(Boolean);
+  return history[0] ?? null;
+}
+
+function manifestHasUncommittedChange() {
+  const worktree = spawnSync("git", [...gitNoLfsFilters, "diff", "--quiet", "--", manifestRelativeToRepository], {
+    cwd: repositoryRoot,
+    encoding: "utf8",
+  });
+  const index = spawnSync("git", [...gitNoLfsFilters, "diff", "--cached", "--quiet", "--", manifestRelativeToRepository], {
+    cwd: repositoryRoot,
+    encoding: "utf8",
+  });
+  return worktree.status === 1 || index.status === 1;
 }
 
 function validateAppendOnlyHistory(currentManifest) {
@@ -115,20 +142,35 @@ validateAppendOnlyHistory(manifest);
 assert(Array.isArray(manifest.runs) && manifest.runs.length > 0, "at least one run is required");
 assert(new Set(manifest.runs.map((run) => run.id)).size === manifest.runs.length, "run IDs must be unique");
 
-for (const run of manifest.runs) {
+for (const [runIndex, run] of manifest.runs.entries()) {
+  const isActiveContentRun = run.evidenceMode === activeContentEvidenceMode;
   assert(/^[0-9a-f]{40}$/.test(run.baselineCommit), `${run.id} baseline commit is invalid`);
   assert(/^[0-9a-f]{40}$/.test(run.outputCommit), `${run.id} output commit is invalid`);
   assert(commitExists(run.baselineCommit), `${run.id} baseline commit is absent`);
   assert(commitExists(run.outputCommit), `${run.id} output commit is absent`);
   assert(isAncestor(run.baselineCommit, run.outputCommit), `${run.id} output does not descend from baseline`);
-  assert(
-    git(["show", "-s", "--format=%cI", run.outputCommit]) === run.recordedAt,
-    `${run.id} recordedAt does not equal output committer time`,
-  );
-  assert(
-    run.timeBasis === "OUTPUT_COMMIT_COMMITTER_TIME_NOT_MODEL_START_TIME",
-    `${run.id} timestamp basis is not explicit`,
-  );
+  if (isActiveContentRun) {
+    const recordedAtMs = Date.parse(run.recordedAt);
+    assert(
+      Number.isFinite(recordedAtMs)
+        && new Date(recordedAtMs).toISOString().replace(".000Z", "Z") === run.recordedAt,
+      `${run.id} active-content timestamp must be canonical UTC`,
+    );
+    assert(run.baselineCommit === run.outputCommit, `${run.id} active-content run must declare no catalog commit delta`);
+    assert(
+      run.timeBasis === "EVIDENCE_MANIFEST_RECORDED_AT_UTC_BEFORE_PUBLICATION_COMMIT",
+      `${run.id} active-content timestamp basis is not explicit`,
+    );
+  } else {
+    assert(
+      git(["show", "-s", "--format=%cI", run.outputCommit]) === run.recordedAt,
+      `${run.id} recordedAt does not equal output committer time`,
+    );
+    assert(
+      run.timeBasis === "OUTPUT_COMMIT_COMMITTER_TIME_NOT_MODEL_START_TIME",
+      `${run.id} timestamp basis is not explicit`,
+    );
+  }
   if (run.model?.used === false) {
     assert(run.model.provider === "none" && run.model.identifier === "none" && run.model.revision === null, `${run.id} no-model declaration is incomplete`);
   } else {
@@ -140,7 +182,11 @@ for (const run of manifest.runs) {
 
   const chain = run.commitChain.map((entry) => entry.commit);
   assert(chain[0] === run.baselineCommit, `${run.id} chain must begin at baseline`);
-  assert(chain[1] === run.outputCommit, `${run.id} chain must bind output second`);
+  if (isActiveContentRun) {
+    assert(chain.length === 1 && chain[0] === run.outputCommit, `${run.id} active-content chain must contain its unchanged source commit once`);
+  } else {
+    assert(chain[1] === run.outputCommit, `${run.id} chain must bind output second`);
+  }
   assert(new Set(chain).size === chain.length, `${run.id} commit chain contains duplicates`);
   for (let index = 0; index < chain.length; index += 1) {
     assert(/^[0-9a-f]{40}$/.test(chain[index]), `${run.id} chain commit ${index} is invalid`);
@@ -150,14 +196,35 @@ for (const run of manifest.runs) {
     }
   }
 
+  const introducedAt = isActiveContentRun ? introductionCommit(run.id) : null;
+  if (isActiveContentRun) {
+    assert(runIndex === manifest.runs.length - 1 || introducedAt, `${run.id} uncommitted active-content run is not the final run`);
+    assert(introducedAt || manifestHasUncommittedChange(), `${run.id} active-content run is neither committed nor an explicit working-tree append`);
+    if (introducedAt) assert(isAncestor(introducedAt, "HEAD"), `${run.id} introduction commit is not an ancestor of HEAD`);
+  }
   for (const artifact of run.artifacts) {
     assert(!artifact.path.startsWith("/") && !artifact.path.includes(".."), `unsafe artifact path ${artifact.path}`);
-    assert(chain.includes(artifact.bindingCommit), `${artifact.path} is bound outside the run commit chain`);
-    const buffer = execFileSync(
-      "git",
-      [...gitNoLfsFilters, "show", `${artifact.bindingCommit}:projects/star-ascent/site/${artifact.path}`],
-      { cwd: repositoryRoot, maxBuffer: 32 * 1024 * 1024 },
-    );
+    let buffer;
+    if (isActiveContentRun) {
+      assert(
+        JSON.stringify(Object.keys(artifact).sort()) === JSON.stringify(["bytes", "path", "sha256"]),
+        `${run.id} active-content artifact fields are not exact`,
+      );
+      buffer = introducedAt
+        ? execFileSync(
+          "git",
+          [...gitNoLfsFilters, "show", `${introducedAt}:projects/star-ascent/site/${artifact.path}`],
+          { cwd: repositoryRoot, maxBuffer: 32 * 1024 * 1024 },
+        )
+        : readFileSync(join(siteRoot, artifact.path));
+    } else {
+      assert(chain.includes(artifact.bindingCommit), `${artifact.path} is bound outside the run commit chain`);
+      buffer = execFileSync(
+        "git",
+        [...gitNoLfsFilters, "show", `${artifact.bindingCommit}:projects/star-ascent/site/${artifact.path}`],
+        { cwd: repositoryRoot, maxBuffer: 32 * 1024 * 1024 },
+      );
+    }
     assert(buffer.length === artifact.bytes, `${artifact.path} historical byte count drifted`);
     assert(sha256(buffer) === artifact.sha256, `${artifact.path} SHA-256 drifted`);
   }
@@ -250,7 +317,15 @@ assert(catalog.meta.runtimeLocalizationPolicy?.fallbackRuntimeCells === activeRu
 const pending = readJson(join(siteRoot, "app/i18n/pending-visible-source.json"));
 assert(pending.capture.routeCount === activeRun.scope.canonicalRoutes, "pending capture route count drifted");
 assert(pending.capture.pendingSourceCount === activeRun.outcomes.pendingVisibleSourceStrings, "pending source count drifted");
-assert(pending.capture.routesWithPendingSource === 0, "routes still contain pending source");
+assert(pending.capture.pendingSourceCount === pending.sources?.length, "pending source inventory cardinality drifted");
+assert(pending.capture.routesWithPendingSource === Object.keys(pending.capture.byRoute ?? {}).length, "pending route inventory cardinality drifted");
+assert(
+  pending.runtime?.active === false
+    && pending.runtime?.automaticEnglishFallbackApproved === false
+    && pending.runtime?.translationComplete === false
+    && pending.runtime?.nativeReviewComplete === false,
+  "pending source escaped its inactive translation/native-review HOLD",
+);
 
 const render = readJson(join(siteRoot, "app/i18n/language-render-evidence.v1.json"));
 assert(render.status === "PASS", "render evidence is not PASS");
@@ -281,6 +356,52 @@ assert(scorecard.scope.canonicalFallbackCells === activeRun.outcomes.canonicalFa
 assert(scorecard.assurance.nativeQualityClaimAllowed === false, "scorecard improperly allows native-quality claim");
 assert(scorecard.assurance.releaseApproved === false, "scorecard improperly approves release");
 assert(scorecard.assurance.mainnetStateChanged === false, "scorecard improperly changes mainnet state");
+
+const activeEvidence = readJson(join(siteRoot, activeEvidenceManifestPath));
+assert(activeEvidence.schema === "iat-localization-active-artifact-evidence/v1", "active-artifact evidence schema drifted");
+assert(activeEvidence.runId === activeRun.id, "active-artifact evidence run ID drifted");
+assert(activeEvidence.recordedAt === activeRun.recordedAt, "active-artifact evidence timestamp drifted");
+assert(activeEvidence.status === "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD", "active-artifact evidence escaped HOLD");
+assert(activeEvidence.mainnetStatus === "UNSCHEDULED_HOLD", "active-artifact evidence changed Mainnet status");
+assert(activeEvidence.sourceBinding?.captureCommit === activeRun.baselineCommit, "active-artifact capture commit drifted");
+assert(activeEvidence.sourceBinding?.evidenceMode === activeContentEvidenceMode, "active-artifact evidence mode drifted");
+assert(
+  JSON.stringify(activeEvidence.localizationState) === JSON.stringify({
+    configuredLocales: 50,
+    sourceLocales: 1,
+    holdLocales: 49,
+    canonicalStrings: activeRun.scope.canonicalStrings,
+    reviewedRuntimeCells: 0,
+    canonicalFallbackCells: activeRun.outcomes.canonicalFallbackCells,
+    pendingVisibleSourceStrings: activeRun.outcomes.pendingVisibleSourceStrings,
+    routesWithPendingVisibleSource: pending.capture.routesWithPendingSource,
+    activatedTranslations: 0,
+  }),
+  "active-artifact localization state drifted",
+);
+const activeRunArtifacts = new Map(activeRun.artifacts.map((artifact) => [artifact.path, artifact]));
+assert(activeRunArtifacts.size === activeRun.artifacts.length, "active run artifact paths are not unique");
+assert(Array.isArray(activeEvidence.artifacts) && activeEvidence.artifacts.length > 0, "active-artifact evidence inventory is empty");
+for (const artifact of activeEvidence.artifacts) {
+  assert(
+    JSON.stringify(activeRunArtifacts.get(artifact.path)) === JSON.stringify(artifact),
+    `${artifact.path} evidence manifest binding differs from active run`,
+  );
+  const buffer = readFileSync(join(siteRoot, artifact.path));
+  assert(buffer.length === artifact.bytes && sha256(buffer) === artifact.sha256, `${artifact.path} evidence manifest content drifted`);
+}
+assert(
+  activeRunArtifacts.size === activeEvidence.artifacts.length + 1
+    && activeRunArtifacts.has(activeEvidenceManifestPath),
+  "active run must bind exactly the evidence inventory plus its manifest",
+);
+assert(
+  activeEvidence.assurance?.runtimeActivation === false
+    && activeEvidence.assurance?.nativeQualityClaimAllowed === false
+    && activeEvidence.assurance?.releaseApproved === false
+    && activeEvidence.assurance?.mainnetStateChanged === false,
+  "active-artifact evidence improperly grants assurance",
+);
 
 console.log(
   `localization provenance PASS: ${manifest.runs.length} append-only run(s), ` +

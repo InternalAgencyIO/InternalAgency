@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createHash } from "node:crypto";
 import { Connection } from "@solana/web3.js";
 import {
   SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
@@ -8,9 +9,14 @@ import {
 import {
   DEVNET_FEATURE_MINT_SEED,
   IAT_V2_PROGRAM_ADMIN,
+  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID,
+  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES,
+  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
   deriveDeterministicDevnetMint,
+  inspectReviewedUpgradeableProgramArtifact,
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
   parseV2ConfigAccount,
@@ -81,6 +87,14 @@ const programData = parseUpgradeableProgramData(programDataInfo.data);
 if (!programData.upgradeAuthority.equals(IAT_V2_PROGRAM_ADMIN)) {
   throw new Error("IAT V2 devnet program is not controlled by the reviewed Model T address");
 }
+const hashBytes = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const deployedRegionSha256 = hashBytes(programData.programBytes);
+const deployedArtifact = await inspectReviewedUpgradeableProgramArtifact({
+  programBytes: programData.programBytes,
+  sha256Hex: async (bytes) => hashBytes(bytes),
+  expectedArtifactBytes: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES,
+  expectedArtifactSha256: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256,
+});
 
 const adminLamports = await connection.getBalance(IAT_V2_PROGRAM_ADMIN, "confirmed");
 const participantLamports = await connection.getBalance(
@@ -92,9 +106,34 @@ const proposedGenesisTimestamp = unixNow()
   + BOUNDARY_LEAD_SECONDS;
 const config = configInfo ? parseV2ConfigAccount(configInfo.data) : null;
 const selectedTiming = timing(config?.genesisTimestamp ?? proposedGenesisTimestamp);
+const featureInstanceStatus = config?.active
+  ? "FEATURE_INSTANCE_ACTIVE"
+  : mintInfo
+    ? "FEATURE_INSTANCE_PARTIAL"
+    : "READY_TO_INITIALIZE";
+const currentSourceUpgradeCompatibility = {
+  status: "BLOCKED_CCC_DISABLED_AND_ROUND_MIGRATION_ABSENT",
+  publicUpgradeAuthorized: false,
+  preservesActiveV2Features: false,
+  cccDlcGenesisEnabled: false,
+  deployedRoundAccountBytes: 198,
+  reviewedRoundAccountBytes: 206,
+  roundAccountMigrationAvailable: false,
+};
+const activeInstanceIncompatibleWithReviewedArtifact =
+  featureInstanceStatus === "FEATURE_INSTANCE_ACTIVE"
+  && !deployedArtifact.matchesReviewedArtifact;
 const report = {
   schema: "iat-v2-feature-rehearsal-preflight/v1",
-  status: config?.active ? "FEATURE_INSTANCE_ACTIVE" : mintInfo ? "FEATURE_INSTANCE_PARTIAL" : "READY_TO_INITIALIZE",
+  status: activeInstanceIncompatibleWithReviewedArtifact
+    ? "HOLD_CURRENT_SOURCE_INCOMPATIBLE_WITH_ACTIVE_V2_STATE"
+    : deployedArtifact.matchesReviewedArtifact
+      ? featureInstanceStatus
+      : "HOLD_REVIEWED_ARTIFACT_NOT_DEPLOYED",
+  featureInstanceStatus,
+  readyForSignedFeatureRehearsal:
+    deployedArtifact.matchesReviewedArtifact
+    && currentSourceUpgradeCompatibility.preservesActiveV2Features,
   network: "devnet",
   rpc: DEVNET_RPC,
   mainnetStatus: "HOLD",
@@ -103,7 +142,18 @@ const report = {
     programId: IAT_V2_PROGRAM_ID,
     programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
     upgradeAuthority: programData.upgradeAuthority,
+    deployedArtifactBytes: deployedArtifact.artifactBytes,
+    deployedArtifactSha256: deployedArtifact.artifactSha256,
+    deployedRegionBytes: deployedArtifact.loaderRegionBytes,
+    deployedRegionSha256,
+    loaderZeroPaddingBytes: deployedArtifact.loaderPaddingBytes,
+    loaderZeroPaddingVerified: deployedArtifact.loaderPaddingIsZero,
+    reviewedArtifactBytes: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES,
+    reviewedArtifactSha256: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256,
+    reviewedArtifactSourceHead: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD,
+    reviewedArtifactBuildRunId: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   },
+  currentSourceUpgradeCompatibility,
   hardwareOperator: {
     address: IAT_V2_PROGRAM_ADMIN,
     balanceLamports: adminLamports,
@@ -129,7 +179,9 @@ const report = {
   timing: selectedTiming,
   gates: {
     initializeSecondScaledMint: !mintInfo,
-    programRemainsExactDeployedArtifact: true,
+    programRemainsExactDeployedArtifact: deployedArtifact.matchesReviewedArtifact,
+    currentSourcePreservesActiveV2Features:
+      currentSourceUpgradeCompatibility.preservesActiveV2Features,
     liveSwitchboardCommitRevealRequired: true,
     participantHardwareSignatureRequiredForStake: true,
     independentFeatureReviewRequired: true,

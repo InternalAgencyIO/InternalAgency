@@ -26,6 +26,7 @@ import {
   buildMintRehearsalAllocationsTransaction,
   buildRevokeV2AuthorityTransaction,
   deriveDeterministicDevnetMint,
+  inspectReviewedUpgradeableProgramArtifact,
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
   parseV2ConfigAccount,
@@ -231,4 +232,53 @@ test("fixed Config and upgradeable-loader layouts decode without trusting UI sta
   assert.equal(parsedProgramData.slot, 42n);
   assert.equal(parsedProgramData.upgradeAuthority.toBase58(), IAT_V2_PROGRAM_ADMIN.toBase58());
   assert.equal(parsedProgramData.programBytes.length, 32);
+});
+
+test("reviewed artifact inspection handles Loader-v3 zero padding fail-closed", async () => {
+  const sha256Hex = async (bytes) => createHash("sha256").update(bytes).digest("hex");
+  const reviewedPrefix = Buffer.alloc(64, 0x5a);
+  const expectedArtifactSha256 = await sha256Hex(reviewedPrefix);
+  const zeroPadded = Buffer.concat([reviewedPrefix, Buffer.alloc(17_856)]);
+  const inspected = await inspectReviewedUpgradeableProgramArtifact({
+    programBytes: zeroPadded,
+    sha256Hex,
+    expectedArtifactBytes: reviewedPrefix.length,
+    expectedArtifactSha256,
+  });
+  assert.equal(inspected.artifactBytes, reviewedPrefix.length);
+  assert.equal(inspected.loaderRegionBytes, reviewedPrefix.length + 17_856);
+  assert.equal(inspected.loaderPaddingBytes, 17_856);
+  assert.equal(inspected.loaderPaddingIsZero, true);
+  assert.equal(inspected.matchesReviewedArtifact, true);
+
+  const nonzeroTail = Buffer.from(zeroPadded);
+  nonzeroTail[nonzeroTail.length - 1] = 1;
+  const tainted = await inspectReviewedUpgradeableProgramArtifact({
+    programBytes: nonzeroTail,
+    sha256Hex,
+    expectedArtifactBytes: reviewedPrefix.length,
+    expectedArtifactSha256,
+  });
+  assert.equal(tainted.loaderPaddingIsZero, false);
+  assert.equal(tainted.matchesReviewedArtifact, false, "nonzero Loader tail must not pass");
+
+  const wrongPrefix = Buffer.from(zeroPadded);
+  wrongPrefix[0] ^= 0xff;
+  const mismatched = await inspectReviewedUpgradeableProgramArtifact({
+    programBytes: wrongPrefix,
+    sha256Hex,
+    expectedArtifactBytes: reviewedPrefix.length,
+    expectedArtifactSha256,
+  });
+  assert.equal(mismatched.matchesReviewedArtifact, false, "wrong reviewed prefix must not pass");
+
+  await assert.rejects(
+    inspectReviewedUpgradeableProgramArtifact({
+      programBytes: reviewedPrefix.subarray(0, reviewedPrefix.length - 1),
+      sha256Hex,
+      expectedArtifactBytes: reviewedPrefix.length,
+      expectedArtifactSha256,
+    }),
+    /expected at least/u,
+  );
 });

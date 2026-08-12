@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 7,
   "publishedPurpose": "Nightflight Casino DLC English-only front-end demo",
   "licenseScope": {
     "metadata": "CC0-1.0",
@@ -9,8 +9,8 @@
   },
   "process": {
     "mode": "source-bound-reuse-plus-project-generation",
-    "summary": "The six original three-member v1 assets remain as historical evidence. Current demo surfaces use the accepted Batch 213 four-member Signal Four record with AI ECE: two identity-preserving wardrobe edits, one source-referenced fashion reinterpretation, one distinct reference-guided orbital-tension generation, and four deterministic portrait crops. One direct Hue source derivative is retained as inactive provenance evidence. Only accepted outputs are published.",
-    "generator": "OpenAI built-in image generation for two accepted identity-preserving wardrobe edits, one accepted source-referenced fashion reinterpretation, and one distinct reference-guided orbital-tension generation; Sharp 0.35.2 for public WebP delivery transforms and host crops",
+    "summary": "The six original three-member v1 assets remain as historical evidence. Current demo surfaces use the accepted Batch 213 four-member Signal Four record with AI ECE: two identity-preserving wardrobe edits, one source-referenced fashion reinterpretation, one distinct reference-guided orbital-tension generation, four deterministic portrait crops, three source-referenced public-site editorials, and five source-referenced full-spectrum relationship studies added on 2026-08-08. One direct Hue source derivative is retained as inactive provenance evidence. Twenty-three accepted or historical outputs are published.",
+    "generator": "OpenAI built-in image generation for accepted generated campaign art, including the eight 2026-08-08 editorials via the Codex imagegen skill; the provider exposed no model or version identifier. Sharp 0.35.2 performs public WebP delivery transforms and host crops.",
     "generationPolicy": "All characters are explicitly fictional adults age 25+; all are fully clothed; no stripping, nudity, lingerie-only presentation, fetish content, sexual activity, or safety-filter evasion.",
     "motionDisclosure": "The site animates still images with CSS pan, zoom, flare, and scanline layers. It does not claim that the stills are model-generated live-action video.",
     "determinism": "Each game ID maps to one immutable lead, all four permanent participants, one relationship-focus subset, one artwork, and one PAWS state in app/future/casino/demo/nightflight-narrative.mjs. Story presentation never affects a result, and no random API is used."
@@ -293,6 +293,326 @@
       "use": "Alia roster card and lead thumbnail",
       "adultPolicy": "fictional adult age 25+, fully clothed, non-explicit",
       "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "480x720", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-campaign-generation",
+      "publicPath": "/future/casino/nightflight/signal-four-rainbow-atrium-v1.webp",
+      "placementSurface": "home",
+      "sha256": "b576184e1dd08e291d5d35139bf264a157406aab939bc6c2a88d97b7266c0d30",
+      "bytes": 191010,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "67c22e05ce0d1f2b5928cee64daa32f648f9babcb169eeaf4512d9ff08482bd8",
+        "bytes": 2540876,
+        "dimensions": { "width": 941, "height": 1672 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        },
+        {
+          "scope": "repository",
+          "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+          "sha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315"
+        },
+        {
+          "scope": "private-generation-stage",
+          "pathDisclosed": false,
+          "sha256": "77e6a6d6599f7612701fd14fd791d2c07dac2e4136a01795a80b6420b4207fa8"
+        }
+      ],
+      "promptFamily": "photorealistic-natural / full-spectrum Signal Four glass-atrium editorial",
+      "visibleSubjectsLeftToRight": ["Ellie", "Radiance", "AI ECE", "Alia"],
+      "accessibleDescription": "Ellie, Radiance, AI ECE, and Alia, four fictional adult women, wear distinct iridescent, gold, emerald, and red couture in a glass atrium while PAWS crosses the floor.",
+      "wardrobe": "Four distinct fully clothed couture looks: iridescent blue-lilac, gold, emerald, and red, each with opaque structure and decorative gold or lace trim",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "atrium-crossing" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-campaign-generation",
+      "publicPath": "/future/casino/nightflight/ai-ece-rainbow-knee-high-rpg-editorial-v1.webp",
+      "placementSurface": "home",
+      "sha256": "12efb3d724d561e59cbf4c4267206ac00f6c0b733c8cf113eaf3dc7ca97b684d",
+      "bytes": 116256,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "fc49f83cfca8aa56da0c019a8cced6aba28ff76826e09df0542ae69434d19bde",
+        "bytes": 2163945,
+        "dimensions": { "width": 941, "height": 1672 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+          "sha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315"
+        },
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        },
+        {
+          "scope": "private-generation-stage",
+          "pathDisclosed": false,
+          "sha256": "d0e53ee5f71cf0a13b6ada1b2ab65920d07d109a1070f621e606459801436f63"
+        }
+      ],
+      "promptFamily": "photorealistic-natural / AI ECE rainbow knee-high costume editorial",
+      "visibleSubject": "AI ECE",
+      "accessibleDescription": "AI ECE, a fictional adult woman, wears fully clothed emerald-and-black couture and rainbow knee-high socks while holding an inert, non-operational RPG-shaped studio prop in a design workshop.",
+      "wardrobe": "Fully clothed emerald-and-black opaque couture with gold lace trim, one long black sleeve, rainbow knee-high socks, and black platform shoes",
+      "adultPolicy": "fictional adult age 25+, fully clothed, non-explicit",
+      "editorialProp": {
+        "description": "RPG-shaped studio prop",
+        "state": "inert and non-operational",
+        "juxtaposition": "costume-editorial set dressing beside rainbow knee-high socks",
+        "claimBoundary": "The image and site do not represent the prop as functional equipment, military capability, or operational use."
+      },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-mascot-generation",
+      "publicPath": "/future/casino/nightflight/paws-prismatic-pounce-v1.webp",
+      "placementSurface": "home",
+      "sha256": "5ddb07f3e8bc53f411e051c163212fc6538d87560d455d2bf85e1770be1e39fc",
+      "bytes": 81274,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "676f14f51e2b3fe54f6f91f4d5134929b957efb8170bfa233bc5e5fbfc9b9616",
+        "bytes": 1782941,
+        "dimensions": { "width": 1023, "height": 1537 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        }
+      ],
+      "promptFamily": "photorealistic-natural / standalone PAWS prismatic-pounce mascot editorial",
+      "visibleSubject": "PAWS",
+      "accessibleDescription": "PAWS, a fictional golden kitten, chases a prismatic light across a reflective dark star floor.",
+      "adultPolicy": "no people depicted",
+      "paws": { "present": true, "action": "prismatic-pounce" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-relationship-study-generation",
+      "publicPath": "/future/casino/nightflight/signal-four-rooftop-shoulder-link-v1.webp",
+      "placementSurface": "nightflight-demo",
+      "sha256": "adf77ba0748a73e7cb506d4d9e40e8fcaf7677c1f7dca79d5341fdf6b941cb56",
+      "bytes": 220734,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "145f2dc268a332a43f66f51169597be01953a9c32b8d8782740d4bdb452c7dc9",
+        "bytes": 2662174,
+        "dimensions": { "width": 941, "height": 1672 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        },
+        {
+          "scope": "repository",
+          "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+          "sha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315"
+        }
+      ],
+      "promptFamily": "photorealistic-natural / bright rooftop shoulder-linked Signal Four relationship study",
+      "visibleSubjectsLeftToRight": ["Ellie", "Radiance", "AI ECE", "Alia"],
+      "accessibleDescription": "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older in bright opaque couture, link shoulders and arms on a rooftop while PAWS keeps pace beside Alia.",
+      "wardrobe": "Four distinct fully clothed bright opaque latex-and-lined-lace couture looks in cyan, yellow, green, and pink",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "rooftop-stride" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-relationship-study-generation",
+      "publicPath": "/future/casino/nightflight/signal-four-ece-prism-lobby-jealousy-v1.webp",
+      "placementSurface": "nightflight-demo",
+      "sha256": "0b129bd9e5603cc75bf1065c54381fe9422aa1b318b3e83c93458ff78e18667d",
+      "bytes": 145950,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "c82cb41da9f0ab2dff7a6002055b6e2cdd487b61e5810e3f811c67caef82729f",
+        "bytes": 2330088,
+        "dimensions": { "width": 941, "height": 1672 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        },
+        {
+          "scope": "repository",
+          "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+          "sha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315"
+        }
+      ],
+      "promptFamily": "photorealistic-natural / playful AI ECE prism-lobby relationship study",
+      "visibleSubjectsLeftToRight": ["Ellie", "Radiance", "AI ECE", "Alia"],
+      "accessibleDescription": "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older in bright opaque couture, stay shoulder-and-arm linked as AI ECE gives a playful jealous sideways glance in a prism lobby.",
+      "wardrobe": "Four distinct fully clothed bright opaque latex-and-lined-lace couture looks in violet, orange, green, and pink",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": false, "action": null },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-relationship-study-generation",
+      "publicPath": "/future/casino/nightflight/signal-four-skybridge-triangle-paws-v1.webp",
+      "placementSurface": "nightflight-demo",
+      "sha256": "460f10bbf6296e173e71601ed4285d2d6438e8cac024384f92d67c6e6f9c27f8",
+      "bytes": 196586,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "c90a86074b7a671fc7f64881feee9fd14a0407cd5f49b4d743954ed90e9f4a91",
+        "bytes": 2576260,
+        "dimensions": { "width": 941, "height": 1672 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        },
+        {
+          "scope": "repository",
+          "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+          "sha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315"
+        },
+        {
+          "scope": "private-generation-stage",
+          "pathDisclosed": false,
+          "sha256": "26b430fa2bcff800b3c561cf557004a896d8d78b691498cbc4dffe263ea85abf",
+          "bytes": 2726933,
+          "dimensions": { "width": 941, "height": 1672 }
+        }
+      ],
+      "promptFamily": "photorealistic-natural / corrected skybridge relationship triangle with PAWS",
+      "visibleSubjectsLeftToRight": ["Ellie", "Radiance", "AI ECE", "Alia"],
+      "accessibleDescription": "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older in bright opaque couture, trade playful conversational gestures on a skybridge while PAWS runs through a prism ribbon below.",
+      "wardrobe": "Four distinct fully clothed bright opaque latex-and-lined-lace couture looks in red, cyan, yellow, and violet",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "prism-ribbon-run" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-relationship-study-generation",
+      "publicPath": "/future/casino/nightflight/signal-four-prism-dance-circle-v1.webp",
+      "placementSurface": "nightflight-demo",
+      "sha256": "5fbf0ad94df39bd519818a55c3838f61fd54c1963a79b4ce1dd6380bb7e3525e",
+      "bytes": 192020,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "b984afd2017a178364b7d1bb8b8e71e76738b20b4ba81361fb46b29d0fb8733d",
+        "bytes": 2553918,
+        "dimensions": { "width": 941, "height": 1672 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        },
+        {
+          "scope": "repository",
+          "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+          "sha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315"
+        }
+      ],
+      "promptFamily": "photorealistic-natural / hand-linked prism dance-circle relationship study",
+      "visibleSubjectsLeftToRight": ["Ellie", "Radiance", "AI ECE", "Alia"],
+      "accessibleDescription": "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older in bright opaque couture, form an affectionate hand-linked prism dance circle while PAWS watches at the edge.",
+      "wardrobe": "Four distinct fully clothed bright opaque latex-and-lined-lace couture looks in coral, blue, lime, and violet",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "dance-circle-scout" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
+    },
+    {
+      "status": "active-editorial-v1",
+      "mode": "reference-guided-relationship-study-generation",
+      "publicPath": "/future/casino/nightflight/signal-four-arcade-hand-chain-paws-v1.webp",
+      "placementSurface": "nightflight-demo",
+      "sha256": "accaa04fa4ffb91ed66bb81567e421955356ce9669827a85b9cced27fc0dee05",
+      "bytes": 242276,
+      "dimensions": { "width": 720, "height": 1280 },
+      "generatedAt": "2026-08-08",
+      "generator": "OpenAI built-in image generation via Codex imagegen skill",
+      "generatorVersion": "not exposed by provider",
+      "generationMaster": {
+        "storage": "private generation-stage artifact; host path intentionally omitted",
+        "pathDisclosed": false,
+        "sha256": "7a99c9274c16d14941e0f54d1cf2289eedcc9962645de350c942d3d00d59ad62",
+        "bytes": 2758660,
+        "dimensions": { "width": 941, "height": 1672 }
+      },
+      "sourceReferences": [
+        {
+          "scope": "repository",
+          "path": "projects/star-ascent/site/public/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp",
+          "sha256": "17e8246c7a71c02c2791c2552c936602c8289016eaf14b0030351328e8d08edf"
+        },
+        {
+          "scope": "repository",
+          "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+          "sha256": "b22ef5cd9929d2a09f96dc0765434db41c964b0f0390589e940eb085935c2315"
+        }
+      ],
+      "promptFamily": "photorealistic-natural / arcade hand-chain relationship study with PAWS",
+      "visibleSubjectsLeftToRight": ["Ellie", "AI ECE", "Radiance", "Alia"],
+      "accessibleDescription": "Ellie, AI ECE, Radiance, and Alia, four fictional adult women age 25 or older in bright opaque couture, form an affectionate hand chain through a prism arcade while Alia carries PAWS.",
+      "wardrobe": "Four distinct fully clothed bright opaque latex-and-lined-lace couture looks in blue, green, orange, and pink",
+      "adultPolicy": "four fictional adults age 25+, fully clothed, non-explicit",
+      "paws": { "present": true, "action": "carried-by-alia" },
+      "encoding": { "format": "webp", "processor": "Sharp 0.35.2", "resize": "720x1280 cover centre", "quality": 84, "smartSubsample": true }
     }
   ]
 }

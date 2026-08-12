@@ -1,0 +1,31 @@
+[package]
+name = "iat-b3-stake-ingress-rehearsal-economy"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[features]
+default = []
+custom-heap = []
+custom-panic = []
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+iat-b3-consensus = { path = "../../../../programs/iat_b3_consensus" }
+iat-b3-economy = { path = "../../../../programs/iat_b3_economy", features = ["runtime-token-2022-stake-ingress"] }
+solana-account-info.workspace = true
+solana-clock = { version = "=3.2.0", features = ["sysvar"] }
+solana-cpi.workspace = true
+solana-program-entrypoint.workspace = true
+solana-program-error.workspace = true
+solana-pubkey.workspace = true
+solana-rent.workspace = true
+solana-sdk-ids.workspace = true
+solana-system-interface.workspace = true
+solana-sysvar.workspace = true
+spl-token-2022-interface.workspace = true
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

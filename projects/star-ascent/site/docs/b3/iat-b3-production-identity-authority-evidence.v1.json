@@ -1,0 +1,228 @@
+{
+  "$schema": "./iat-b3-production-identity-authority-evidence.v1.schema.json",
+  "schema": "iat-b3-production-identity-authority-evidence/v1",
+  "profile": "PRODUCTION",
+  "status": "PENDING",
+  "scope": {
+    "contract": "NONACTIVATING_PRODUCTION_IDENTITY_AUTHORITY_EVIDENCE_INTAKE",
+    "stagedPredicates": [
+      "A_PRODUCTION_IDENTITY_INPUT_FREEZE",
+      "B_COST_CEREMONY_FUNDING",
+      "C_DEPLOYED_IDENTITY_AUTHORITY_SEAL"
+    ],
+    "doesNotCertify": [
+      "PACKET_SELECTED_TRUST_KEYS",
+      "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SIGNED_OBSERVATIONS",
+      "FINAL_BINARY_TRUTH_WITHOUT_EXACT_BINDINGS",
+      "OWNER_OR_REVIEWER_IDENTITY_WITHOUT_EXTERNAL_TRUST_CONFIGURATION",
+      "TRANSACTION_SIGNING_DEPLOYMENT_FUNDING_OR_ACTIVATION_AUTHORITY",
+      "INDEPENDENT_GATE_8_ACCEPTANCE",
+      "RELEASE_OR_MAINNET_EXECUTION_AUTHORIZATION"
+    ]
+  },
+  "sourceBindings": {
+    "ownerPolicyFreeze": {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+      "sha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+      "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
+    },
+    "identityInputFreeze": {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
+      "sha256": "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+      "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
+    },
+    "costFeasibilityReference": {
+      "path": "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
+      "sha256": "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
+      "bindingScope": "REFERENCE_ONLY_NEVER_COMPLETION_EVIDENCE"
+    }
+  },
+  "productionChoices": {
+    "lawProgramId": null,
+    "economyProgramId": null,
+    "canonicalMint": null,
+    "mainnetGenesisHash": null,
+    "ceremonySignerPublicKey": null,
+    "lawUpgradeAuthorityPublicKey": null,
+    "economyUpgradeAuthorityPublicKey": null,
+    "payerPublicKey": null
+  },
+  "phaseAProductionIdentityFreeze": {
+    "status": "PENDING",
+    "subjectSha256": null,
+    "ownerDecisionPreimageSha256": null,
+    "ownerAcceptance": null,
+    "mainnetGenesisObservations": [],
+    "independentReview": null,
+    "blocker": "Production law, economy, mint, Mainnet Genesis, ceremony, upgrade-authority, and payer choices plus authenticated owner acceptance remain absent."
+  },
+  "phaseBCeremonyFunding": {
+    "status": "PENDING",
+    "subjectSha256": null,
+    "finalBinaries": {
+      "law": {
+        "programId": null,
+        "sha256": null,
+        "byteLength": null,
+        "sourceHeadSha256": null
+      },
+      "economy": {
+        "programId": null,
+        "sha256": null,
+        "byteLength": null,
+        "sourceHeadSha256": null
+      }
+    },
+    "freshCostMeasurementSha256": null,
+    "fundingSourceApprovalSha256": null,
+    "ceremonyFloorPolicySha256": null,
+    "bufferRecoveryPlanSha256": null,
+    "ceremonyFloorLamports": null,
+    "aggregateFreshPayerPeakLamports": null,
+    "aggregatePermanentRentLamports": null,
+    "aggregateRecoverableBufferLamports": null,
+    "aggregateFeeBudgetLamports": null,
+    "expiresAtUnixSeconds": null,
+    "fundingApproval": null,
+    "payerBalanceObservations": [],
+    "independentReview": null,
+    "blocker": "Exact final binaries, fresh cost and recovery preimages, accountable funding acceptance, ceremony floor, and two independent payer observations remain absent."
+  },
+  "phaseCDeployedSeal": {
+    "status": "PENDING",
+    "subjectSha256": null,
+    "journal": [
+      {
+        "ordinal": 1,
+        "step": "DEPLOY_LAW_WITH_HARDWARE_UPGRADE_AUTHORITY",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 2,
+        "step": "DEPLOY_ECONOMY_WITH_HARDWARE_UPGRADE_AUTHORITY",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 3,
+        "step": "VERIFY_EXACT_PROGRAM_BYTES_AND_IDENTITIES",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 4,
+        "step": "REVOKE_LAW_UPGRADE_AUTHORITY",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 5,
+        "step": "REVOKE_ECONOMY_UPGRADE_AUTHORITY",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 6,
+        "step": "VERIFY_BOTH_PROGRAMS_IMMUTABLE",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 7,
+        "step": "CREATE_EXACT_TOKEN_2022_MINT",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 8,
+        "step": "ENTER_GENESIS_STAGING",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 9,
+        "step": "CREATE_AND_FUND_CANONICAL_ACCOUNTS",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 10,
+        "step": "VERIFY_GENESIS_CONSERVATION_AND_BINDINGS",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 11,
+        "step": "REVOKE_MINT_AUTHORITY",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 12,
+        "step": "REVOKE_FREEZE_AUTHORITY",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 13,
+        "step": "INITIALIZE_LAW_AND_SEAL_EXTENSION_AUTHORITIES",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 14,
+        "step": "VERIFY_MINT_AND_PROGRAM_AUTHORITIES_SEALED",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 15,
+        "step": "FINALIZE_CURRENT_DAY",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 16,
+        "step": "ACTIVATE_ONLY_IF_CURRENT_DAY_OPEN",
+        "status": "PENDING",
+        "evidenceSha256": null
+      },
+      {
+        "ordinal": 17,
+        "step": "VERIFY_ACTIVE_AND_STAGING_DISABLED",
+        "status": "PENDING",
+        "evidenceSha256": null
+      }
+    ],
+    "terminalState": {
+      "lawProgramId": null,
+      "economyProgramId": null,
+      "canonicalMint": null,
+      "lawBinarySha256": null,
+      "economyBinarySha256": null,
+      "lawUpgradeAuthority": null,
+      "economyUpgradeAuthority": null,
+      "mintAuthority": null,
+      "freezeAuthority": null,
+      "transferHookAuthority": null,
+      "confidentialTransferMintAuthority": null,
+      "active": null,
+      "genesisStagingWritesDisabled": null,
+      "stateSha256": null
+    },
+    "terminalEndpointObservations": [],
+    "independentReview": null,
+    "blocker": "No Mainnet ceremony has run; the exact 17-stage journal, terminal authority state, two endpoint observations, and independent review remain absent."
+  },
+  "authorizationBoundary": {
+    "signingAuthorized": false,
+    "deploymentAuthorized": false,
+    "fundingSpendAuthorized": false,
+    "activationAuthorized": false,
+    "independentGate8Accepted": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

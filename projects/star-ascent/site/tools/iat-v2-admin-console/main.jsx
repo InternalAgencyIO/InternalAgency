@@ -34,6 +34,7 @@ import {
   buildMintRehearsalAllocationsTransaction,
   buildRevokeV2AuthorityTransaction,
   deriveDeterministicDevnetMint,
+  inspectReviewedUpgradeableProgramArtifact,
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
   parseV2ConfigAccount,
@@ -57,6 +58,7 @@ const CONSOLE_PARAMS = new URLSearchParams(window.location.search);
 const FEATURE_MODE = CONSOLE_PARAMS.get("mode") === "features";
 const UPGRADE_MODE = CONSOLE_PARAMS.get("mode") === "upgrade";
 const INSPECTION_MODE = CONSOLE_PARAMS.get("mode") === "inspect";
+const ATTENDED_WEEK9_MODE = CONSOLE_PARAMS.get("mode") === "settle-week9";
 const FEATURE_GENESIS_OVERRIDE = CONSOLE_PARAMS.get("genesis");
 const ACTIVE_MINT_SEED = FEATURE_MODE ? DEVNET_FEATURE_MINT_SEED : DEVNET_MINT_SEED;
 const STORAGE_KEY = FEATURE_MODE
@@ -68,7 +70,16 @@ const FEATURE_BOUNDARY_LEAD_SECONDS = 7_200;
 const connection = new Connection(DEVNET_RPC, "confirmed");
 const FeatureRehearsal = lazy(() => import("./FeatureRehearsal.jsx"));
 const ProgramUpgrade = lazy(() => import("./ProgramUpgrade.jsx"));
-document.documentElement.dataset.iatAdminMode = INSPECTION_MODE ? "inspection" : UPGRADE_MODE ? "upgrade" : FEATURE_MODE ? "features" : "initialization";
+const AttendedWeek9Settlement = lazy(() => import("./AttendedWeek9Settlement.jsx"));
+document.documentElement.dataset.iatAdminMode = INSPECTION_MODE
+  ? "inspection"
+  : UPGRADE_MODE
+    ? "upgrade"
+    : ATTENDED_WEEK9_MODE
+      ? "settle-week9"
+      : FEATURE_MODE
+        ? "features"
+        : "initialization";
 document.documentElement.dataset.iatTrezorConnect = "unloaded";
 let trezorConnect;
 let trezorConnectReady;
@@ -224,15 +235,20 @@ async function verifyProgramDeployment() {
   if (!parsed.upgradeAuthority.equals(IAT_V2_PROGRAM_ADMIN)) {
     throw new Error(`Upgrade authority is ${parsed.upgradeAuthority.toBase58()}, not the reviewed Model T`);
   }
-  const artifactSha256 = await sha256Hex(parsed.programBytes);
-  if (artifactSha256 !== IAT_V2_PROGRAM_ARTIFACT_SHA256) {
+  const artifact = await inspectReviewedUpgradeableProgramArtifact({
+    programBytes: parsed.programBytes,
+    sha256Hex,
+  });
+  if (!artifact.matchesReviewedArtifact) {
     throw new Error("On-chain program bytes do not match the reviewed verifiable artifact");
   }
   return {
-    artifactSha256,
+    artifactSha256: artifact.artifactSha256,
     slot: parsed.slot,
     upgradeAuthority: parsed.upgradeAuthority,
-    programBytes: parsed.programBytes.length,
+    programBytes: artifact.artifactBytes,
+    loaderRegionBytes: artifact.loaderRegionBytes,
+    loaderZeroPaddingBytes: artifact.loaderPaddingBytes,
   };
 }
 
@@ -769,6 +785,8 @@ function App() {
       programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
       artifactSha256: snapshot.deployment.artifactSha256,
       programBytes: snapshot.deployment.programBytes,
+      programDataRegionBytes: snapshot.deployment.loaderRegionBytes,
+      loaderZeroPaddingBytes: snapshot.deployment.loaderZeroPaddingBytes,
       deploymentSlot: snapshot.deployment.slot,
       upgradeAuthority: snapshot.deployment.upgradeAuthority,
       expectedHardwareSigner: IAT_V2_PROGRAM_ADMIN,
@@ -1023,6 +1041,15 @@ createRoot(document.getElementById("root")).render(
             short={short}
           />
         )
+      : ATTENDED_WEEK9_MODE
+        ? (
+            <AttendedWeek9Settlement
+              explorer={explorer}
+              getHardwareProvider={getHardwareProvider}
+              localOperator={isLocalOperatorHost(window.location.hostname)}
+              sha256Hex={sha256Hex}
+            />
+          )
       : <App />}
   </Suspense>,
 );

@@ -6,6 +6,10 @@ Radiance remains independently maintained elsewhere in this repository.
 
 Start with the [Public Release Index](./RELEASE_INDEX.md).
 
+B3 is now the primary forward protocol architecture. V2 remains the source of
+truth until B3's public Devnet, audit, migration, and Mainnet gates pass. See the
+[B3 architecture workspace](./site/docs/b3/README.md).
+
 See [the repository architecture](../../docs/REPOSITORY_ARCHITECTURE.md) for
 the public repository map and publishing rules.
 

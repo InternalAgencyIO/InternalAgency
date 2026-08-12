@@ -36,6 +36,12 @@ export const IAT_V2_PROGRAM_ADMIN = new PublicKey("7XZjd7aNNci63LZy9syqgjvjNHvkQ
 export const IAT_V2_PROGRAM_ARTIFACT_SHA256 =
   "634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7";
 export const IAT_V2_PROGRAM_ARTIFACT_BYTES = 597_336;
+export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256 =
+  "d437be9a78aeaa09eeef419554bd0c0598a18239edeb226912c79a973f24d2a4";
+export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES = 579_480;
+export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD =
+  "dd3cb28f6b985c84fddcb971beaa9f00126f5d99";
+export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID = 31_372_599_971;
 export const BPF_UPGRADEABLE_LOADER_ID = new PublicKey(
   "BPFLoaderUpgradeab1e11111111111111111111111",
 );
@@ -422,6 +428,43 @@ export function parseUpgradeableProgramData(data) {
     slot: bytes.readBigUInt64LE(4),
     upgradeAuthority: new PublicKey(bytes.subarray(13, 45)),
     programBytes: bytes.subarray(45),
+  };
+}
+
+export async function inspectReviewedUpgradeableProgramArtifact({
+  programBytes,
+  sha256Hex,
+  expectedArtifactBytes = IAT_V2_PROGRAM_ARTIFACT_BYTES,
+  expectedArtifactSha256 = IAT_V2_PROGRAM_ARTIFACT_SHA256,
+} = {}) {
+  const loaderRegion = Buffer.from(programBytes ?? []);
+  if (!Number.isSafeInteger(expectedArtifactBytes) || expectedArtifactBytes <= 0) {
+    throw new Error("Expected program artifact byte length must be a positive safe integer");
+  }
+  if (!/^[0-9a-f]{64}$/u.test(expectedArtifactSha256)) {
+    throw new Error("Expected program artifact SHA-256 must be lowercase hexadecimal");
+  }
+  if (loaderRegion.length < expectedArtifactBytes) {
+    throw new Error(
+      `ProgramData region contains ${loaderRegion.length} bytes, expected at least ${expectedArtifactBytes}`,
+    );
+  }
+  if (typeof sha256Hex !== "function") {
+    throw new Error("Program artifact inspection requires a SHA-256 function");
+  }
+
+  const artifactBytes = loaderRegion.subarray(0, expectedArtifactBytes);
+  const loaderPadding = loaderRegion.subarray(expectedArtifactBytes);
+  const loaderPaddingIsZero = loaderPadding.every((value) => value === 0);
+  const artifactSha256 = await sha256Hex(artifactBytes);
+  return {
+    artifactBytes: artifactBytes.length,
+    artifactSha256,
+    loaderPaddingBytes: loaderPadding.length,
+    loaderPaddingIsZero,
+    loaderRegionBytes: loaderRegion.length,
+    matchesReviewedArtifact:
+      artifactSha256 === expectedArtifactSha256 && loaderPaddingIsZero,
   };
 }
 

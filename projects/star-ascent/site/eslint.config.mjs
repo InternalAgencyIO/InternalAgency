@@ -25,6 +25,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // This checked-in third-party CLI is intentionally CommonJS. Its runtime
+    // bytes are covered by the dependency-remediation tests, not our TS rule.
+    "vendor/image-size-safe/bin/image-size.js",
     // Playwright owns these generated browser traces, reports, screenshots,
     // videos, and attachments. Lint the tests and app source, not vendored
     // report-viewer bundles emitted by a preceding CI step.

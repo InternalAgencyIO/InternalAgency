@@ -30,9 +30,11 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
   const heroImage = page.locator('.demo-campaign-hero > img[src="/future/casino/nightflight/signal-four-hanoi-anchor-latex-lace-v2.webp"]');
   await expect(heroImage).toBeVisible();
   await expect(heroImage).toHaveAttribute("fetchpriority", "high");
-  await expect(page.locator('main.casino-demo img[loading="lazy"][decoding="async"]')).toHaveCount(19);
+  await expect(page.locator('main.casino-demo img[loading="lazy"][decoding="async"]')).toHaveCount(24);
   const activeCampaignImages = page.locator('img[src*="/future/casino/nightflight/signal-four-"]');
-  await expect(activeCampaignImages).toHaveCount(20);
+  await expect(activeCampaignImages).toHaveCount(25);
+  const relationshipStudyImages = page.locator(".relationship-studies-grid img");
+  await expect(relationshipStudyImages).toHaveCount(5);
   expect(new Set(Object.values(campaignScenes).map((scene) => scene.src)).size).toBe(4);
   for (const selector of [".night-crew", ".nightflight-cinema", "#game-lobby", "#demo-table"]) await page.locator(selector).scrollIntoViewIfNeeded();
   for (const src of new Set(Object.values(campaignScenes).map((scene) => scene.src))) {
@@ -42,6 +44,12 @@ test("Casino DLC demo is labeled, contained, accessible, deterministic, and loca
       await sourceImage.evaluate((image) => image.scrollIntoView({ block: "center", behavior: "auto" }));
       await expect.poll(() => sourceImage.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
     }
+  }
+  await page.locator(".relationship-studies").scrollIntoViewIfNeeded();
+  for (let index = 0; index < await relationshipStudyImages.count(); index += 1) {
+    const image = relationshipStudyImages.nth(index);
+    await image.evaluate((element) => element.scrollIntoView({ block: "center", behavior: "auto" }));
+    await expect.poll(() => image.evaluate((element) => element.complete && element.naturalWidth > 0)).toBe(true);
   }
   const cinemaControl = page.getByRole("button", { name: "CINEMA LOOP ON" });
   await expect(cinemaControl).toHaveAttribute("aria-pressed", "true");

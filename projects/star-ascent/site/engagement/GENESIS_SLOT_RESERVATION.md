@@ -1,5 +1,10 @@
 # Genesis slot reservation gate
 
+Status: retained Premium-only v1 HOLD gate. It remains fail-closed and must not
+be presented as the owner-directed v2 Genesis implementation. V2 will retain
+the first-1,000/100-IAT nominal cap while using separate atomic 10% and
+conditional 90% records; no active migration or claim route exists yet.
+
 The first 1,000 Genesis Gifts are allocated by one conditional insert inside the same D1 transactional batch that activates the verified binding, never by a browser counter or a read-then-write application counter.
 
 1. Verify the wallet proof, wallet-bound host session, immutable country, signed/PKCE X state, immutable X user ID, and exact Premium/PremiumPlus tier.

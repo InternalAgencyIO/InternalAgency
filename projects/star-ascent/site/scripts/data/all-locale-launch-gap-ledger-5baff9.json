@@ -1,0 +1,1184 @@
+{
+  "schema": "iat-all-locale-launch-gap-ledger/v1",
+  "status": "HOLD",
+  "activationReady": false,
+  "launchReady": false,
+  "claims": {
+    "snapshotOnly": true,
+    "generationOnly": true,
+    "runtimeMutationPermitted": false,
+    "nativeReviewClaim": "NONE",
+    "providerApprovalClaim": "NONE",
+    "canonicalEnglishControls": true,
+    "generatedPublicPayloadClaim": "OBSERVED_IF_PRESENT_NOT_REQUIRED_BUILD_OUTPUT"
+  },
+  "sourceFreeze": {
+    "sourceCount": 1491,
+    "sourceKeysSha256": "5baff9a147d6390100a976e2d77b860ec0225db92f05ebb0d6361ac2c8981004",
+    "evidenceFileSha256": "ed8b33a06e77245db7497752f02db4938ded1a3e498b37fdebe0acb55ae2c5c3",
+    "evidenceCanonicalSha256": "991dbd6670f96d8e39e8ffbc0ff155e10e7790b90bc38e263253074550b46f3f",
+    "provenanceCanonicalSha256": "e2cb96f2e95123ef2ff58598e4ddd9b365eb30f2f924f7c920a7eeef3c1c8c47"
+  },
+  "pcmArtifact": {
+    "fileSha256": "b8db39ae2b58314d11be382658075bd7a58b0e5b3b412896775baa73773d8fdc",
+    "canonicalSha256": "85605497b0e2f5c2cf5167858a56878ba5578d7588cabb769dddbab76ceea2f6",
+    "proofFileSha256": "78c01f4b00a3888d6d3a48a852c67d1b61a19199131dc9e605b31838d151030a",
+    "proofCanonicalSha256": "eb5003579eac39973453b5ea4d683e857f85d9d1157658b340ff60775b815c2f",
+    "messageEntriesSha256": "6dcf8451a2dd9bbf3f578eb470ac78775752d66aaa9f5cb94463cd78b9c6d557",
+    "sourceCount": 1491,
+    "linguisticallyChangedCells": 1438,
+    "sourceEquivalentLabelCells": 53,
+    "aiGenerated": true,
+    "verified": false,
+    "activationReady": false
+  },
+  "runtimeSnapshot": {
+    "canonicalSourceMembership": {
+      "frozenSourceCount": 1491,
+      "runtimeInputUniqueSourceCountBeforeRetirementFiltering": 1033,
+      "activeCatalogSourceCount": 985,
+      "pendingVisibleSourceCount": 48,
+      "pendingRouteCount": 13,
+      "criticalUiEntryCount": 8
+    },
+    "activeCatalog": {
+      "fileSha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f",
+      "sourceCount": 985,
+      "localeCount": 50,
+      "targetLocaleCount": 49,
+      "targetCells": 48265,
+      "targetTranslatedCells": 0,
+      "targetSourceEquivalentCells": 48265,
+      "targetEmptyCells": 0,
+      "byLocale": {
+        "en": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "zh": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "es": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "hi": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "fr": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ar": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "bn": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "pt": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "id": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ur": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ru": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "de": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ja": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "pcm": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "tr": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "sq": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ca": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "be": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "nl": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "bs": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "bg": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "hr": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "el": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "cs": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "da": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "et": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "fi": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "hu": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "is": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ga": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "it": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "lv": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "lt": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "lb": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "mk": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "mt": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "no": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "pl": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ro": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "sr": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "sk": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "sl": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "sv": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "uk": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ht": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "gn": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "qu": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "hy": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "az": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        },
+        "ka": {
+          "sourceCells": 985,
+          "translatedCells": 0,
+          "sourceEquivalentCells": 985,
+          "emptyCells": 0
+        }
+      }
+    },
+    "activeMetadata": {
+      "fileSha256": "429983d0fbe36c648e36de881add769b53b1c412c32e2156fb82b4ccb064e3a1",
+      "leavesPerLocale": 67,
+      "targetTranslatedLeaves": 0,
+      "targetSourceEquivalentLeaves": 3283
+    },
+    "pendingVisibleSource": {
+      "fileSha256": "a36577d20ee0214b4b164d0c39744edc9c68495aa01cc4397937517b4c59baa9",
+      "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
+      "pendingSourceCount": 48,
+      "pendingRouteCount": 13,
+      "translationComplete": false,
+      "activeInRuntimeCatalog": false
+    },
+    "criticalUiSource": {
+      "fileSha256": "9dc18e75204d0133784aa110575d26be7238b67abbf995c7326fb2942ca83ccc",
+      "entryCount": 8,
+      "uniqueValueCount": 8
+    },
+    "runtimePolicy": {
+      "fileSha256": "66662977cf8867f6a7aba1dfe6e5126e6fd55b22a43aae226850bf5fbbeca358",
+      "mode": "GLOBAL_FAIL_CLOSED",
+      "machineDraftRuntimeAllowed": false,
+      "targetLocalesMarkedAiGeneratedUnverified": 0,
+      "note": "A policy label is not translation, source binding, or review evidence."
+    },
+    "publicPayloads": {
+      "contractFileSha256": "e446e81ad48d31902f00f89c4c677f5f7582db14bd9f6c33898ab43559cb6b09",
+      "namespace": "i18n-v2/511c7c65f33b7d29",
+      "bundleCount": 0,
+      "missingBundleCount": 50,
+      "missingBundleLocales": [
+        "en",
+        "zh",
+        "es",
+        "hi",
+        "fr",
+        "ar",
+        "bn",
+        "pt",
+        "id",
+        "ur",
+        "ru",
+        "de",
+        "ja",
+        "pcm",
+        "tr",
+        "sq",
+        "ca",
+        "be",
+        "nl",
+        "bs",
+        "bg",
+        "hr",
+        "el",
+        "cs",
+        "da",
+        "et",
+        "fi",
+        "hu",
+        "is",
+        "ga",
+        "it",
+        "lv",
+        "lt",
+        "lb",
+        "mk",
+        "mt",
+        "no",
+        "pl",
+        "ro",
+        "sr",
+        "sk",
+        "sl",
+        "sv",
+        "uk",
+        "ht",
+        "gn",
+        "qu",
+        "hy",
+        "az",
+        "ka"
+      ],
+      "sourceCountPerBundle": null,
+      "targetCells": 0,
+      "targetTranslatedCells": 0,
+      "targetSourceEquivalentCells": 0,
+      "targetEmptyCells": 0,
+      "bundleSetSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    }
+  },
+  "totals": {
+    "requiredLocales": 50,
+    "targetLocales": 49,
+    "canonicalSourceCellsPerLocale": 1491,
+    "targetTranslationCellsRequired": 73059,
+    "sourceBoundDraftCellsPresent": 1491,
+    "translationCellsRemaining": 71568,
+    "targetLocaleDraftsComplete": 1,
+    "targetLocaleDraftsMissing": 48,
+    "committedMachineDraftCheckpoints": 0,
+    "providerDecisionsPresent": 1,
+    "providerDecisionsRemaining": 48,
+    "nativeReviewLocaleAcceptancesRequired": 50,
+    "nativeReviewLocaleAcceptancesPresent": 0,
+    "nativeReviewLocaleAcceptancesRemaining": 50,
+    "nativeReviewChecksRequired": 250,
+    "nativeReviewChecksPassed": 0,
+    "nativeReviewChecksRemaining": 250,
+    "immutableAcceptanceRecordsPresent": 0
+  },
+  "blockers": [
+    "71568 source-bound target-language cells remain across 48 locales.",
+    "48 target locales have no approved provider decision or committed checkpoint.",
+    "50 locale acceptances and 250 native-review checks remain.",
+    "0 translated target cells are present in the active 985-source runtime catalog.",
+    "48 visible source strings across 13 routes remain pending.",
+    "50 generated public locale bundles are absent from the repository snapshot.",
+    "The PCM artifact is source-bound and deterministic but remains non-activating, AI-generated, and unverified."
+  ],
+  "perLocale": {
+    "en": {
+      "role": "CANONICAL_SOURCE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "translationCellsRemaining": 0,
+      "providerDecision": "NOT_APPLICABLE_SOURCE_LOCALE",
+      "checkpoint": "NOT_APPLICABLE_SOURCE_LOCALE",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "zh": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "es": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "hi": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "fr": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ar": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "bn": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "pt": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "id": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ur": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ru": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "de": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ja": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "pcm": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 1491,
+      "linguisticallyChangedCells": 1438,
+      "sourceEquivalentLabelCells": 53,
+      "translationCellsRemaining": 0,
+      "providerDecision": "SOURCE_BOUND_LOCAL_MODEL_ARTIFACT_PRESENT",
+      "provider": {
+        "engine": "LOCAL_MARIAN_MACHINE_DRAFT",
+        "model": "NITHUB-AI/marian-mt-bbc-en-pcm",
+        "modelRevision": "99c6ff5290bad2b2cd4ada9fe52151e67adf6058",
+        "declaredLicense": "CC-BY-4.0",
+        "legalClearanceClaim": "NONE"
+      },
+      "checkpoint": "IMMUTABLE_NON_ACTIVATING_ARTIFACT_AND_ASSEMBLY_PROOF_PRESENT",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "tr": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "sq": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ca": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "be": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "nl": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "bs": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "bg": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "hr": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "el": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "cs": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "da": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "et": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "fi": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "hu": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "is": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ga": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "it": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "lv": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "lt": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "lb": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "mk": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "mt": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "no": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "pl": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ro": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "sr": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "sk": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "sl": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "sv": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "uk": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ht": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "gn": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "qu": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "hy": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "az": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    },
+    "ka": {
+      "role": "TARGET_LOCALE",
+      "frozenSourceCells": 1491,
+      "sourceBoundDraftCells": 0,
+      "linguisticallyChangedCells": 0,
+      "sourceEquivalentLabelCells": 0,
+      "translationCellsRemaining": 1491,
+      "providerDecision": "UNRESOLVED",
+      "checkpoint": "MISSING",
+      "nativeReviewAcceptance": "MISSING",
+      "nativeReviewChecksRequired": 5,
+      "nativeReviewChecksPassed": 0,
+      "activationReady": false
+    }
+  },
+  "ledgerCanonicalSha256": "4471ecbbcda122765cf4889a5aad29d60e8358e5f9713439b04f8a08e6cf3f06"
+}

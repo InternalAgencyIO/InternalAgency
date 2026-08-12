@@ -15,6 +15,7 @@ import {
   IAT_V2_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
+  inspectReviewedUpgradeableProgramArtifact,
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
 } from "../../programs/iat_v2/instructions.mjs";
@@ -140,12 +141,20 @@ export default function ProgramUpgrade({
     if (!deployed.upgradeAuthority.equals(IAT_V2_PROGRAM_ADMIN)) {
       throw new Error(`Program upgrade authority is ${deployed.upgradeAuthority.toBase58()}`);
     }
-    const deployedHash = await sha256Hex(deployed.programBytes);
-    if (deployedHash === IAT_V2_PROGRAM_ARTIFACT_SHA256) {
+    const deployedRegionHash = await sha256Hex(deployed.programBytes);
+    const deployedArtifact = await inspectReviewedUpgradeableProgramArtifact({
+      programBytes: deployed.programBytes,
+      sha256Hex,
+    });
+    const deployedHash = deployedArtifact.artifactSha256;
+    if (deployedArtifact.matchesReviewedArtifact) {
       return {
         buffer,
         bufferHash: IAT_V2_PROGRAM_ARTIFACT_SHA256,
         deployedHash,
+        deployedRegionHash,
+        loaderZeroPaddingBytes: deployedArtifact.loaderPaddingBytes,
+        loaderZeroPaddingVerified: deployedArtifact.loaderPaddingIsZero,
         alreadyUpgraded: true,
         bufferAuthority: IAT_V2_PROGRAM_ADMIN,
         action: "complete",
@@ -172,6 +181,9 @@ export default function ProgramUpgrade({
       bufferHash,
       bufferAuthority: parsedBuffer.authority,
       deployedHash,
+      deployedRegionHash,
+      loaderZeroPaddingBytes: deployedArtifact.loaderPaddingBytes,
+      loaderZeroPaddingVerified: deployedArtifact.loaderPaddingIsZero,
       alreadyUpgraded: false,
       action: bufferMatches
         ? (adminControlsBuffer ? "upgrade" : "handoff-required")
@@ -355,6 +367,13 @@ export default function ProgramUpgrade({
             <div><span>BUFFER AUTHORITY</span><code>{snapshot?.bufferAuthority?.toBase58() ?? "NOT VERIFIED"}</code></div>
             <div><span>BUFFER HASH</span><code>{snapshot?.bufferHash ?? "NOT VERIFIED"}</code></div>
             <div><span>CURRENT HASH</span><code>{snapshot?.deployedHash ?? "NOT VERIFIED"}</code></div>
+            <div><span>CURRENT REGION HASH</span><code>{snapshot?.deployedRegionHash ?? "NOT VERIFIED"}</code></div>
+            <div>
+              <span>LOADER ZERO PADDING</span>
+              <code>{snapshot
+                ? `${snapshot.loaderZeroPaddingBytes} BYTES // ${snapshot.loaderZeroPaddingVerified ? "VERIFIED" : "NOT ZERO"}`
+                : "NOT VERIFIED"}</code>
+            </div>
             <div><span>NEW REVIEWED HASH</span><code>{IAT_V2_PROGRAM_ARTIFACT_SHA256}</code></div>
             <div><span>PROGRAM BYTES</span><code>{IAT_V2_PROGRAM_ARTIFACT_BYTES}</code></div>
           </div>

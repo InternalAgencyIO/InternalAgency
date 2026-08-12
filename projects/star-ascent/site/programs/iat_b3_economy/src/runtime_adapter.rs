@@ -1,0 +1,1017 @@
+//! Feature-gated, read-only Solana runtime bridge for the held B3 economy port.
+//!
+//! This module reads immutable facts from real [`AccountInfo`] values and the
+//! `Clock`/`Rent` sysvars, then delegates to the existing strict host kernels.
+//! It has no entrypoint, instruction decoder, mutable account borrow, account
+//! write, CPI, token operation, or public dispatcher. Runtime program, mint,
+//! Daily Law, and network identities remain inputs to opaque bindings and are
+//! not accepted from instruction data here.
+
+use crate::native_adapter::{
+    authenticate_signer, authenticate_state_account, authenticate_system_payer, derive_pda,
+    prepare_create_state_account, prepare_existing_state_write, AuthenticatedSigner,
+    AuthenticatedStateAccount, AuthenticatedSystemPayer, NativeAccountObservation,
+    NativeAdapterError, NativeEconomyBinding, PdaIdentity, StateWriteIntent, StrictStateValue,
+};
+use crate::{
+    decode_config_genesis_state, verify_daily_law_open, CanonicalDailyLawBinding,
+    ConfigGenesisCodecError, ConfigGenesisState, EconomyError, GenesisPhase,
+    ReadonlyDailyLawAccount, ValidatedDailyLawWrite, MAINNET_SUPPLY,
+};
+use sha2::{Digest, Sha256};
+use solana_account_info::AccountInfo;
+use solana_clock::Clock;
+use solana_rent::Rent;
+use solana_sysvar::Sysvar;
+
+pub const RUNTIME_ACCOUNT_BRIDGE_STATUS: &str =
+    "FEATURE_GATED_READ_ONLY_ACCOUNTINFO_CLOCK_RENT_NO_DISPATCH";
+pub const CONFIG_GENESIS_RUNTIME_STATUS: &str =
+    "FEATURE_GATED_READ_ONLY_CONFIG_PARSER_PHASE_TRANSITIONS_UNRESOLVED_MAINNET_HOLD";
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ConfigGenesisRuntimeTruth {
+    pub feature_gated: bool,
+    pub requires_open_daily_law_capability: bool,
+    pub immutable_account_borrow_only: bool,
+    pub binding_relative_config_identity_checked: bool,
+    pub production_active_config_capability_present: bool,
+    pub production_identity_binding_frozen: bool,
+    pub owner_bootstrap_policy_accepted: bool,
+    pub phase_transition_predicate_frozen: bool,
+    pub genesis_conservation_proved: bool,
+    pub transition_authorized: bool,
+    pub account_writes_executed: bool,
+    pub instruction_abi_frozen: bool,
+    pub entrypoint_exposed: bool,
+    pub dispatcher_exposed: bool,
+    pub any_handler_complete: bool,
+    pub mainnet_hold: bool,
+}
+
+pub const CONFIG_GENESIS_RUNTIME_TRUTH: ConfigGenesisRuntimeTruth = ConfigGenesisRuntimeTruth {
+    feature_gated: true,
+    requires_open_daily_law_capability: true,
+    immutable_account_borrow_only: true,
+    binding_relative_config_identity_checked: true,
+    production_active_config_capability_present: true,
+    production_identity_binding_frozen: false,
+    owner_bootstrap_policy_accepted: false,
+    phase_transition_predicate_frozen: false,
+    genesis_conservation_proved: false,
+    transition_authorized: false,
+    account_writes_executed: false,
+    instruction_abi_frozen: false,
+    entrypoint_exposed: false,
+    dispatcher_exposed: false,
+    any_handler_complete: false,
+    mainnet_hold: true,
+};
+
+/// Opaque capability that can only be produced by authenticating a real,
+/// read-only Daily-Law AccountInfo against the runtime Clock. It remains a
+/// permission prerequisite, never a phase-transition or write authorization.
+#[derive(Debug, Eq, PartialEq)]
+pub struct RuntimeValidatedDailyLawWrite {
+    gate: ValidatedDailyLawWrite,
+    law_account_key: [u8; 32],
+    law_program_owner: [u8; 32],
+}
+
+impl RuntimeValidatedDailyLawWrite {
+    pub const fn mint(&self) -> [u8; 32] {
+        self.gate.mint()
+    }
+
+    pub const fn unix_timestamp(&self) -> i64 {
+        self.gate.unix_timestamp()
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.gate.law_account_sha256()
+    }
+
+    pub const fn law_account_key(&self) -> [u8; 32] {
+        self.law_account_key
+    }
+
+    pub const fn law_program_owner(&self) -> [u8; 32] {
+        self.law_program_owner
+    }
+
+    pub(crate) const fn gate(&self) -> &ValidatedDailyLawWrite {
+        &self.gate
+    }
+
+    #[cfg(test)]
+    pub(crate) const fn from_test_gate(
+        gate: ValidatedDailyLawWrite,
+        law_account_key: [u8; 32],
+        law_program_owner: [u8; 32],
+    ) -> Self {
+        Self {
+            gate,
+            law_account_key,
+            law_program_owner,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RuntimeAccountBridgeTruth {
+    pub feature_gated: bool,
+    pub account_info_reads: bool,
+    pub clock_sysvar_authenticated: bool,
+    pub rent_sysvar_authenticated: bool,
+    pub mutable_account_borrows: bool,
+    pub account_writes_executed: bool,
+    pub system_cpi_executed: bool,
+    pub token_cpi_executed: bool,
+    pub instruction_abi_frozen: bool,
+    pub entrypoint_exposed: bool,
+    pub dispatcher_exposed: bool,
+    pub production_identity_binding_frozen: bool,
+    pub config_codec_supported: bool,
+    pub any_handler_complete: bool,
+    pub mainnet_hold: bool,
+}
+
+pub const RUNTIME_ACCOUNT_BRIDGE_TRUTH: RuntimeAccountBridgeTruth = RuntimeAccountBridgeTruth {
+    feature_gated: true,
+    account_info_reads: true,
+    clock_sysvar_authenticated: true,
+    rent_sysvar_authenticated: true,
+    mutable_account_borrows: false,
+    account_writes_executed: false,
+    system_cpi_executed: false,
+    token_cpi_executed: false,
+    instruction_abi_frozen: false,
+    entrypoint_exposed: false,
+    dispatcher_exposed: false,
+    production_identity_binding_frozen: false,
+    // Aggregate handler/write-adapter support remains blocked. The separate
+    // parser below produces only a read-only observation.
+    config_codec_supported: false,
+    any_handler_complete: false,
+    mainnet_hold: true,
+};
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum RuntimeAdapterError {
+    Economy(EconomyError),
+    Native(NativeAdapterError),
+    ConfigGenesisCodec(ConfigGenesisCodecError),
+    AccountBorrowFailed,
+    ConfigAccountMustBeReadOnly,
+    ConfigAccountMustBeWritable,
+    ConfigMintMismatch,
+    ConfigBumpMismatch,
+    ConfigPhaseNotActive,
+    ConfigPhaseNotGenesisStaging,
+    ConfigProductionShapeMismatch,
+    ClockSysvarUnavailable,
+    RentSysvarUnavailable,
+}
+
+impl From<EconomyError> for RuntimeAdapterError {
+    fn from(value: EconomyError) -> Self {
+        Self::Economy(value)
+    }
+}
+
+impl From<NativeAdapterError> for RuntimeAdapterError {
+    fn from(value: NativeAdapterError) -> Self {
+        Self::Native(value)
+    }
+}
+
+impl From<ConfigGenesisCodecError> for RuntimeAdapterError {
+    fn from(value: ConfigGenesisCodecError) -> Self {
+        Self::ConfigGenesisCodec(value)
+    }
+}
+
+/// Opaque result of the feature-gated read-only Config parser. Private fields
+/// prevent callers from manufacturing this observation, but the value still
+/// carries no phase-transition or write authorization.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ReadonlyConfigGenesisAccount {
+    key: [u8; 32],
+    state: ConfigGenesisState,
+    preimage_sha256: [u8; 32],
+}
+
+/// Opaque proof that a real binding-relative Config PDA is in the exact B3
+/// ACTIVE phase and has the production funding shape. This is a runtime
+/// prerequisite only; it conveys no handler, transition, or release authority.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RuntimeProductionActiveConfig {
+    key: [u8; 32],
+    state: ConfigGenesisState,
+    preimage_sha256: [u8; 32],
+    law_account_sha256: [u8; 32],
+    law_unix_timestamp: i64,
+    law_local_day: i64,
+    program_id: [u8; 32],
+    mint: [u8; 32],
+}
+
+/// Opaque proof that the exact binding-relative Config PDA was observed as a
+/// writable account in the B3 `GENESIS_STAGING` phase under the same runtime
+/// Daily-Law capability. This type is intentionally disjoint from both the
+/// read-only Genesis observation and the production-ACTIVE capability: it can
+/// only feed the held Config/Genesis persistence prerequisite and conveys no
+/// phase-transition or execution authority by itself.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RuntimeGenesisStagingWritableConfig {
+    key: [u8; 32],
+    state: ConfigGenesisState,
+    preimage_sha256: [u8; 32],
+    law_account_sha256: [u8; 32],
+    law_unix_timestamp: i64,
+    law_local_day: i64,
+    program_id: [u8; 32],
+    mint: [u8; 32],
+}
+
+impl RuntimeGenesisStagingWritableConfig {
+    pub const fn key(&self) -> [u8; 32] {
+        self.key
+    }
+
+    pub const fn state(&self) -> ConfigGenesisState {
+        self.state
+    }
+
+    pub const fn preimage_sha256(&self) -> [u8; 32] {
+        self.preimage_sha256
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.law_account_sha256
+    }
+
+    pub const fn law_unix_timestamp(&self) -> i64 {
+        self.law_unix_timestamp
+    }
+
+    pub const fn law_local_day(&self) -> i64 {
+        self.law_local_day
+    }
+
+    pub const fn program_id(&self) -> [u8; 32] {
+        self.program_id
+    }
+
+    pub const fn mint(&self) -> [u8; 32] {
+        self.mint
+    }
+
+    pub(crate) const fn as_readonly_observation(&self) -> ReadonlyConfigGenesisAccount {
+        ReadonlyConfigGenesisAccount {
+            key: self.key,
+            state: self.state,
+            preimage_sha256: self.preimage_sha256,
+        }
+    }
+}
+
+impl RuntimeProductionActiveConfig {
+    pub const fn key(&self) -> [u8; 32] {
+        self.key
+    }
+
+    pub const fn state(&self) -> ConfigGenesisState {
+        self.state
+    }
+
+    pub const fn preimage_sha256(&self) -> [u8; 32] {
+        self.preimage_sha256
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.law_account_sha256
+    }
+
+    pub const fn law_unix_timestamp(&self) -> i64 {
+        self.law_unix_timestamp
+    }
+
+    pub const fn law_local_day(&self) -> i64 {
+        self.law_local_day
+    }
+
+    pub const fn program_id(&self) -> [u8; 32] {
+        self.program_id
+    }
+
+    pub const fn mint(&self) -> [u8; 32] {
+        self.mint
+    }
+}
+
+impl ReadonlyConfigGenesisAccount {
+    pub const fn key(&self) -> [u8; 32] {
+        self.key
+    }
+
+    pub const fn state(&self) -> ConfigGenesisState {
+        self.state
+    }
+
+    pub const fn preimage_sha256(&self) -> [u8; 32] {
+        self.preimage_sha256
+    }
+}
+
+fn with_account_observation<T>(
+    account: &AccountInfo<'_>,
+    operation: impl FnOnce(NativeAccountObservation<'_>) -> Result<T, NativeAdapterError>,
+) -> Result<T, RuntimeAdapterError> {
+    let lamports = account
+        .try_borrow_lamports()
+        .map_err(|_| RuntimeAdapterError::AccountBorrowFailed)?;
+    let data = account
+        .try_borrow_data()
+        .map_err(|_| RuntimeAdapterError::AccountBorrowFailed)?;
+    operation(NativeAccountObservation {
+        key: account.key.to_bytes(),
+        owner: account.owner.to_bytes(),
+        lamports: **lamports,
+        data: &data,
+        is_signer: account.is_signer,
+        is_writable: account.is_writable,
+        executable: account.executable,
+    })
+    .map_err(RuntimeAdapterError::Native)
+}
+
+fn require_daily_law_header(
+    binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'_>,
+) -> Result<(), RuntimeAdapterError> {
+    if law_state.key.to_bytes() != binding.law_state_address()
+        || law_state.owner.to_bytes() != binding.law_program_id()
+        || law_state.is_writable
+        || law_state.executable
+    {
+        return Err(RuntimeAdapterError::Economy(
+            EconomyError::NonCanonicalDailyLawAccount,
+        ));
+    }
+    Ok(())
+}
+
+fn verify_daily_law_open_at_clock(
+    binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'_>,
+    clock: &Clock,
+) -> Result<ValidatedDailyLawWrite, RuntimeAdapterError> {
+    require_daily_law_header(binding, law_state)?;
+    let data = law_state
+        .try_borrow_data()
+        .map_err(|_| RuntimeAdapterError::AccountBorrowFailed)?;
+    verify_daily_law_open(
+        binding,
+        ReadonlyDailyLawAccount::new(
+            law_state.key.to_bytes(),
+            law_state.owner.to_bytes(),
+            law_state.is_writable,
+            &data,
+        ),
+        clock.unix_timestamp,
+    )
+    .map_err(RuntimeAdapterError::Economy)
+}
+
+/// Derive the opaque open-Day capability from a real read-only law account and
+/// the runtime Clock sysvar. No timestamp or disposition is caller supplied.
+#[inline(never)]
+pub fn verify_daily_law_open_account_info(
+    binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'_>,
+) -> Result<ValidatedDailyLawWrite, RuntimeAdapterError> {
+    require_daily_law_header(binding, law_state)?;
+    let clock = Clock::get().map_err(|_| RuntimeAdapterError::ClockSysvarUnavailable)?;
+    verify_daily_law_open_at_clock(binding, law_state, &clock)
+}
+
+/// Authenticate the real runtime Law account and retain its AccountInfo
+/// identity in an opaque capability for later Config/Genesis composition.
+#[inline(never)]
+pub fn verify_runtime_daily_law_open_account_info(
+    binding: &CanonicalDailyLawBinding,
+    law_state: &AccountInfo<'_>,
+) -> Result<RuntimeValidatedDailyLawWrite, RuntimeAdapterError> {
+    let gate = verify_daily_law_open_account_info(binding, law_state)?;
+    Ok(RuntimeValidatedDailyLawWrite {
+        gate,
+        law_account_key: law_state.key.to_bytes(),
+        law_program_owner: law_state.owner.to_bytes(),
+    })
+}
+
+pub fn authenticate_signer_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    expected_key: [u8; 32],
+    must_be_writable: bool,
+) -> Result<AuthenticatedSigner, RuntimeAdapterError> {
+    with_account_observation(account, |observed| {
+        authenticate_signer(gate, binding, observed, expected_key, must_be_writable)
+    })
+}
+
+pub fn authenticate_system_payer_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    expected_key: [u8; 32],
+) -> Result<AuthenticatedSystemPayer, RuntimeAdapterError> {
+    with_account_observation(account, |observed| {
+        authenticate_system_payer(gate, binding, observed, expected_key)
+    })
+}
+
+#[inline(never)]
+pub fn authenticate_state_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    expected_identity: PdaIdentity,
+) -> Result<AuthenticatedStateAccount, RuntimeAdapterError> {
+    with_account_observation(account, |observed| {
+        authenticate_state_account(gate, binding, observed, expected_identity)
+    })
+}
+
+/// Parse the binding-relative economy Config PDA only after Daily Law has
+/// produced an opaque open-Day capability. The account meta must itself be
+/// read-only. This function never selects or authorizes a Genesis phase edge
+/// and never returns a mutable or executable intent.
+pub fn parse_config_genesis_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<ReadonlyConfigGenesisAccount, RuntimeAdapterError> {
+    parse_config_genesis_account_info_with_expected_writability(gate, binding, account, false)
+}
+
+fn parse_config_genesis_account_info_with_expected_writability(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    expected_writable: bool,
+) -> Result<ReadonlyConfigGenesisAccount, RuntimeAdapterError> {
+    if gate.mint() != binding.mint() {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::LawMintMismatch,
+        ));
+    }
+    let identity = PdaIdentity::Config {
+        mint: binding.mint(),
+    };
+    let derived = derive_pda(binding, identity).map_err(RuntimeAdapterError::Native)?;
+    if account.key.to_bytes() != derived.key {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::AccountKeyMismatch,
+        ));
+    }
+    if account.owner.to_bytes() != binding.program_id() {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::AccountOwnerMismatch,
+        ));
+    }
+    if account.is_writable && !expected_writable {
+        return Err(RuntimeAdapterError::ConfigAccountMustBeReadOnly);
+    }
+    if !account.is_writable && expected_writable {
+        return Err(RuntimeAdapterError::ConfigAccountMustBeWritable);
+    }
+    if account.executable {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::AccountMustNotBeExecutable,
+        ));
+    }
+    if account.is_signer {
+        return Err(RuntimeAdapterError::Native(
+            NativeAdapterError::PdaAccountMustNotBeSigner,
+        ));
+    }
+
+    let data = account
+        .try_borrow_data()
+        .map_err(|_| RuntimeAdapterError::AccountBorrowFailed)?;
+    let state = decode_config_genesis_state(&data)?;
+    if state.config.mint != binding.mint() {
+        return Err(RuntimeAdapterError::ConfigMintMismatch);
+    }
+    if state.config.bump != derived.bump {
+        return Err(RuntimeAdapterError::ConfigBumpMismatch);
+    }
+    Ok(ReadonlyConfigGenesisAccount {
+        key: derived.key,
+        state,
+        preimage_sha256: Sha256::digest(&*data).into(),
+    })
+}
+
+/// Parse the Config PDA using an opaque runtime-authenticated Law capability.
+/// This closes the caller-shaped Law path for Config/Genesis composition while
+/// retaining the same read-only parser and all of its fail-closed checks.
+pub fn parse_config_genesis_account_info_with_runtime_law(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<ReadonlyConfigGenesisAccount, RuntimeAdapterError> {
+    parse_config_genesis_account_info(runtime_law.gate(), binding, account)
+}
+
+/// Authenticate the runtime Config as production ACTIVE. The strict codec has
+/// already enforced phase/legacy-active consistency; this adds production
+/// supply, funding-shape, and opaque runtime-Law binding checks.
+pub fn authenticate_runtime_production_active_config(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed =
+        parse_config_genesis_account_info_with_runtime_law(runtime_law, binding, account)?;
+    require_production_active_config(observed, runtime_law.gate(), binding)
+}
+
+/// Authenticate the exact writable Config PDA for the production CAS path.
+/// This is intentionally separate from the read-only parser so general
+/// Config/Genesis observations cannot silently acquire mutation semantics.
+pub fn authenticate_runtime_production_active_writable_config(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed = parse_config_genesis_account_info_with_expected_writability(
+        runtime_law.gate(),
+        binding,
+        account,
+        true,
+    )?;
+    require_production_active_config(observed, runtime_law.gate(), binding)
+}
+
+/// Authenticate the retained `Activate` Config meta without weakening the
+/// existing read-only Genesis parser or conflating staging with the separate
+/// production-ACTIVE capability. The account is borrowed immutably even though
+/// its transaction meta must be writable.
+pub fn authenticate_runtime_genesis_staging_writable_config(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeGenesisStagingWritableConfig, RuntimeAdapterError> {
+    let observed = parse_config_genesis_account_info_with_expected_writability(
+        runtime_law.gate(),
+        binding,
+        account,
+        true,
+    )?;
+    require_genesis_staging_writable_config(observed, runtime_law.gate(), binding)
+}
+
+/// Host/rehearsal seam for authenticating the real Config PDA with an existing
+/// opaque Law gate. Production runtime composition uses
+/// [`authenticate_runtime_production_active_config`] so the Law AccountInfo and
+/// Clock are also opaque runtime facts.
+pub fn authenticate_production_active_config_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed = parse_config_genesis_account_info(gate, binding, account)?;
+    require_production_active_config(observed, gate, binding)
+}
+
+/// Host/rehearsal seam for the narrow writable-Config production CAS. Runtime
+/// composition must use [`authenticate_runtime_production_active_writable_config`]
+/// so the Law AccountInfo and Clock remain opaque facts.
+pub fn authenticate_production_active_writable_config_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let observed =
+        parse_config_genesis_account_info_with_expected_writability(gate, binding, account, true)?;
+    require_production_active_config(observed, gate, binding)
+}
+
+fn require_production_active_config(
+    observed: ReadonlyConfigGenesisAccount,
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+) -> Result<RuntimeProductionActiveConfig, RuntimeAdapterError> {
+    let state = observed.state();
+    if state.phase != GenesisPhase::Active || !state.config.active {
+        return Err(RuntimeAdapterError::ConfigPhaseNotActive);
+    }
+    if state.config.rehearsal_mode
+        || state.config.expected_supply != MAINNET_SUPPLY
+        || state.config.lane_mask != 0b1_1110
+        || !state.config.stake_vault_initialized
+        || state.config.stake_token_account == [0; 32]
+        || state.config.token_program == [0; 32]
+    {
+        return Err(RuntimeAdapterError::ConfigProductionShapeMismatch);
+    }
+    Ok(RuntimeProductionActiveConfig {
+        key: observed.key(),
+        state,
+        preimage_sha256: observed.preimage_sha256(),
+        law_account_sha256: gate.law_account_sha256(),
+        law_unix_timestamp: gate.unix_timestamp(),
+        law_local_day: gate.local_day(),
+        program_id: binding.program_id(),
+        mint: binding.mint(),
+    })
+}
+
+fn require_genesis_staging_writable_config(
+    observed: ReadonlyConfigGenesisAccount,
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+) -> Result<RuntimeGenesisStagingWritableConfig, RuntimeAdapterError> {
+    let state = observed.state();
+    if state.phase != GenesisPhase::GenesisStaging || state.config.active {
+        return Err(RuntimeAdapterError::ConfigPhaseNotGenesisStaging);
+    }
+    if state.config.rehearsal_mode
+        || state.config.expected_supply != MAINNET_SUPPLY
+        || state.config.lane_mask != 0b1_1110
+        || !state.config.stake_vault_initialized
+        || state.config.stake_token_account == [0; 32]
+        || state.config.token_program == [0; 32]
+    {
+        return Err(RuntimeAdapterError::ConfigProductionShapeMismatch);
+    }
+    Ok(RuntimeGenesisStagingWritableConfig {
+        key: observed.key(),
+        state,
+        preimage_sha256: observed.preimage_sha256(),
+        law_account_sha256: gate.law_account_sha256(),
+        law_unix_timestamp: gate.unix_timestamp(),
+        law_local_day: gate.local_day(),
+        program_id: binding.program_id(),
+        mint: binding.mint(),
+    })
+}
+
+/// Authenticate one existing strict state account from `AccountInfo` and
+/// prepare its owned CAS postimage. This does not reborrow or write the account.
+#[inline(never)]
+pub fn prepare_existing_state_write_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+    expected_identity: PdaIdentity,
+    next: StrictStateValue,
+) -> Result<StateWriteIntent, RuntimeAdapterError> {
+    let authenticated = authenticate_state_account_info(gate, binding, account, expected_identity)?;
+    prepare_existing_state_write(gate, binding, &authenticated, next)
+        .map_err(RuntimeAdapterError::Native)
+}
+
+fn prepare_create_state_account_with_rent(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    authenticated_payer: &AuthenticatedSystemPayer,
+    target: &AccountInfo<'_>,
+    identity: PdaIdentity,
+    initial_state: StrictStateValue,
+    rent: &Rent,
+) -> Result<StateWriteIntent, RuntimeAdapterError> {
+    let rent_minimum_lamports = rent.minimum_balance(initial_state.kind().account_len());
+    with_account_observation(target, |observed| {
+        prepare_create_state_account(
+            gate,
+            binding,
+            authenticated_payer,
+            observed,
+            identity,
+            initial_state,
+            rent_minimum_lamports,
+        )
+    })
+}
+
+/// Authenticate a real system-owned payer and vacant target, derive the exact
+/// codec length, and source its rent minimum from the runtime Rent sysvar. The
+/// returned value is still an inert intent; no allocation, funding, or write is
+/// executed here.
+#[inline(never)]
+pub fn prepare_create_state_account_info(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    payer: &AccountInfo<'_>,
+    expected_payer_key: [u8; 32],
+    target: &AccountInfo<'_>,
+    identity: PdaIdentity,
+    initial_state: StrictStateValue,
+) -> Result<StateWriteIntent, RuntimeAdapterError> {
+    let authenticated_payer =
+        authenticate_system_payer_account_info(gate, binding, payer, expected_payer_key)?;
+    let rent = Rent::get().map_err(|_| RuntimeAdapterError::RentSysvarUnavailable)?;
+    prepare_create_state_account_with_rent(
+        gate,
+        binding,
+        &authenticated_payer,
+        target,
+        identity,
+        initial_state,
+        &rent,
+    )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::native_adapter::{derive_pda, CreatePdaLifecycle, StrictStateKind};
+    use crate::{
+        encode_config_genesis_state, ConfigState, EligibilityState, CONFIG_GENESIS_ACCOUNT_LEN,
+        LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION,
+    };
+    use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day, SolanaDailyDecision};
+    use solana_sdk_ids::system_program;
+
+    const ECONOMY_PROGRAM: [u8; 32] = [0xE1; 32];
+    const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
+    const LAW_STATE: [u8; 32] = [0x51; 32];
+    const LAW_BUMP: u8 = 254;
+    const MINT: [u8; 32] = [0x22; 32];
+    const NETWORK: [u8; 32] = [0x11; 32];
+    const OWNER: [u8; 32] = [0xA1; 32];
+    const CLOCK_TIMESTAMP: i64 = 1_786_050_060;
+
+    fn decision() -> SolanaDailyDecision {
+        let local_day = protocol_local_day(CLOCK_TIMESTAMP);
+        for candidate in 0u16..=u8::MAX.into() {
+            let mut hash = [0u8; 32];
+            hash[31] = candidate as u8;
+            let decision =
+                create_solana_daily_decision(local_day, 42_424_242, hash, NETWORK, MINT).unwrap();
+            if !decision.locked {
+                return decision;
+            }
+        }
+        panic!("test vector search did not find an open decision")
+    }
+
+    fn law_data() -> [u8; LAW_STATE_LEN] {
+        let decision = decision();
+        let mut data = [0u8; LAW_STATE_LEN];
+        data[0..8].copy_from_slice(LAW_STATE_MAGIC);
+        data[8] = LAW_STATE_VERSION;
+        data[9] = LAW_BUMP;
+        data[10] = 1;
+        data[11] = u8::from(decision.locked);
+        data[16..48].copy_from_slice(&MINT);
+        data[48..80].copy_from_slice(&NETWORK);
+        data[80..88].copy_from_slice(&decision.local_day.to_le_bytes());
+        data[88..96].copy_from_slice(&decision.entropy_slot.to_le_bytes());
+        data[96..128].copy_from_slice(&decision.ancestor_slot_hash);
+        data[128..136].copy_from_slice(&decision.draw_counter.to_le_bytes());
+        data[136..138].copy_from_slice(&decision.draw_bucket.to_le_bytes());
+        data[138..140].copy_from_slice(&decision.chance_numerator.to_le_bytes());
+        data[140..142].copy_from_slice(&decision.chance_denominator.to_le_bytes());
+        data
+    }
+
+    fn runtime_gate() -> RuntimeValidatedDailyLawWrite {
+        let binding =
+            CanonicalDailyLawBinding::new(LAW_PROGRAM, LAW_STATE, LAW_BUMP, MINT, NETWORK);
+        let key = LAW_STATE.into();
+        let owner = LAW_PROGRAM.into();
+        let mut lamports = 1;
+        let mut data = law_data();
+        let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
+        let clock = Clock {
+            unix_timestamp: CLOCK_TIMESTAMP,
+            ..Clock::default()
+        };
+        let gate = verify_daily_law_open_at_clock(&binding, &account, &clock).unwrap();
+        RuntimeValidatedDailyLawWrite {
+            gate,
+            law_account_key: LAW_STATE,
+            law_program_owner: LAW_PROGRAM,
+        }
+    }
+
+    fn active_config_state(
+        binding: &NativeEconomyBinding,
+        phase: GenesisPhase,
+        rehearsal_mode: bool,
+    ) -> ConfigGenesisState {
+        ConfigGenesisState {
+            phase,
+            config: ConfigState {
+                admin: OWNER,
+                mint: MINT,
+                token_program: [0x33; 32],
+                randomness_program: [0x44; 32],
+                stake_token_account: [0x55; 32],
+                agency_registry_hash: [0; 32],
+                genesis_timestamp: CLOCK_TIMESTAMP - 60,
+                expected_supply: MAINNET_SUPPLY,
+                staked_principal: 0,
+                agency_count: 0,
+                rehearsal_mode,
+                active: phase == GenesisPhase::Active,
+                lane_mask: 0b1_1110,
+                stake_vault_initialized: true,
+                bump: binding.config_bump(),
+                vault_authority_bump: 202,
+            },
+        }
+    }
+
+    #[test]
+    fn injected_clock_seam_proves_success_without_exposing_a_timestamp_api() {
+        let binding =
+            CanonicalDailyLawBinding::new(LAW_PROGRAM, LAW_STATE, LAW_BUMP, MINT, NETWORK);
+        let key = LAW_STATE.into();
+        let owner = LAW_PROGRAM.into();
+        let mut lamports = 1;
+        let mut data = law_data();
+        let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
+        let clock = Clock {
+            unix_timestamp: CLOCK_TIMESTAMP,
+            ..Clock::default()
+        };
+        let gate = verify_daily_law_open_at_clock(&binding, &account, &clock).unwrap();
+        assert_eq!(gate.unix_timestamp(), CLOCK_TIMESTAMP);
+        assert_eq!(gate.mint(), MINT);
+    }
+
+    #[test]
+    fn production_active_config_capability_requires_exact_runtime_phase_and_shape() {
+        let runtime_law = runtime_gate();
+        let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+        let key = binding.config().into();
+        let owner = binding.program_id().into();
+        let mut lamports = 1;
+        let mut data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+        encode_config_genesis_state(
+            &active_config_state(&binding, GenesisPhase::Active, false),
+            &mut data,
+        )
+        .unwrap();
+        let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
+        let active =
+            authenticate_runtime_production_active_config(&runtime_law, &binding, &account)
+                .unwrap();
+        assert_eq!(active.key(), binding.config());
+        assert_eq!(active.program_id(), binding.program_id());
+        assert_eq!(active.mint(), MINT);
+        assert_eq!(active.state().phase, GenesisPhase::Active);
+        assert_eq!(
+            active.law_account_sha256(),
+            runtime_law.law_account_sha256()
+        );
+    }
+
+    #[test]
+    fn staging_or_rehearsal_config_cannot_create_the_active_capability() {
+        let runtime_law = runtime_gate();
+        let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+        let key = binding.config().into();
+        let owner = binding.program_id().into();
+        let mut lamports = 1;
+        let mut staging_data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+        encode_config_genesis_state(
+            &active_config_state(&binding, GenesisPhase::GenesisStaging, false),
+            &mut staging_data,
+        )
+        .unwrap();
+        let staging = AccountInfo::new(
+            &key,
+            false,
+            false,
+            &mut lamports,
+            &mut staging_data,
+            &owner,
+            false,
+        );
+        assert_eq!(
+            authenticate_runtime_production_active_config(&runtime_law, &binding, &staging),
+            Err(RuntimeAdapterError::ConfigPhaseNotActive)
+        );
+        drop(staging);
+
+        let mut rehearsal_data = [0u8; CONFIG_GENESIS_ACCOUNT_LEN];
+        encode_config_genesis_state(
+            &active_config_state(&binding, GenesisPhase::Active, true),
+            &mut rehearsal_data,
+        )
+        .unwrap();
+        let rehearsal = AccountInfo::new(
+            &key,
+            false,
+            false,
+            &mut lamports,
+            &mut rehearsal_data,
+            &owner,
+            false,
+        );
+        assert_eq!(
+            authenticate_runtime_production_active_config(&runtime_law, &binding, &rehearsal),
+            Err(RuntimeAdapterError::ConfigProductionShapeMismatch)
+        );
+    }
+
+    #[test]
+    fn injected_rent_seam_uses_exact_codec_length_without_writing_accounts() {
+        let law_binding =
+            CanonicalDailyLawBinding::new(LAW_PROGRAM, LAW_STATE, LAW_BUMP, MINT, NETWORK);
+        let law_key = LAW_STATE.into();
+        let law_owner = LAW_PROGRAM.into();
+        let mut law_lamports = 1;
+        let mut data = law_data();
+        let law_account = AccountInfo::new(
+            &law_key,
+            false,
+            false,
+            &mut law_lamports,
+            &mut data,
+            &law_owner,
+            false,
+        );
+        let clock = Clock {
+            unix_timestamp: CLOCK_TIMESTAMP,
+            ..Clock::default()
+        };
+        let gate = verify_daily_law_open_at_clock(&law_binding, &law_account, &clock).unwrap();
+
+        let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+        let identity = PdaIdentity::Eligibility {
+            config: binding.config(),
+            operator: OWNER,
+        };
+        let derived = derive_pda(&binding, identity).unwrap();
+        let initial_state = StrictStateValue::Eligibility(EligibilityState {
+            config: binding.config(),
+            wallet: OWNER,
+            agency_index: u32::MAX,
+            role: 0,
+            bump: derived.bump,
+        });
+
+        let payer_key = OWNER.into();
+        let system_owner = system_program::id().to_bytes().into();
+        let target_key = derived.key.into();
+        let mut payer_lamports = 10_000_000;
+        let mut payer_data = [];
+        let mut target_lamports = 0;
+        let mut target_data = [];
+        let payer = AccountInfo::new(
+            &payer_key,
+            true,
+            true,
+            &mut payer_lamports,
+            &mut payer_data,
+            &system_owner,
+            false,
+        );
+        let target = AccountInfo::new(
+            &target_key,
+            false,
+            true,
+            &mut target_lamports,
+            &mut target_data,
+            &system_owner,
+            false,
+        );
+        let authenticated_payer =
+            authenticate_system_payer_account_info(&gate, &binding, &payer, OWNER).unwrap();
+        let rent = Rent::default();
+        let intent = prepare_create_state_account_with_rent(
+            &gate,
+            &binding,
+            &authenticated_payer,
+            &target,
+            identity,
+            initial_state,
+            &rent,
+        )
+        .unwrap();
+        let StateWriteIntent::Create(create) = intent else {
+            panic!("expected create intent")
+        };
+        assert_eq!(create.lifecycle(), CreatePdaLifecycle::CreateAccount);
+        assert_eq!(
+            create.data_len(),
+            StrictStateKind::Eligibility.account_len()
+        );
+        assert_eq!(
+            create.rent_minimum_lamports(),
+            rent.minimum_balance(StrictStateKind::Eligibility.account_len())
+        );
+        assert_eq!(target.data_len(), 0);
+        assert_eq!(target.lamports(), 0);
+    }
+}

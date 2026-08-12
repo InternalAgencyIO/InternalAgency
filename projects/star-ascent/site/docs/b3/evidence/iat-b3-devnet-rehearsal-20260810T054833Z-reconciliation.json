@@ -1,0 +1,78 @@
+{
+  "schema": "iat-b3-devnet-rehearsal-reconciliation/v1",
+  "attemptEvidence": "iat-b3-devnet-rehearsal-20260810T054833Z.jsonl",
+  "attemptEvidenceSha256": "5a0f946f8e9ed3d9c027651e75048bb81c3a4ff9125038207b76a8bff8c8a3b7",
+  "sourceBindings": {
+    "gitHead": "f4e376015de196b1b93d1f3cbaa293e13c736283",
+    "inputsMatchedGitHead": true,
+    "wrapperSha256": "bc41c3cea6866289bb1dcce81a7e99380817f602b1ccba6f408d71620cd23b40",
+    "driverSha256": "f09b5c874dc3a16ab9064f30f174d0aa303723d2611c52f3fb5d88daf0ed1842",
+    "safetyTestSha256": "cc6be8eda83231fc5a5526570b02b62932f8a7e005502b5ed4b3a3270004a40e",
+    "reviewDocumentSha256": "0dc182a9bb4d861356767aeb277b7e74c3b5a394af531180d3782a935658c110",
+    "lawArtifactSha256": "927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c",
+    "lawArtifactBytes": 154952
+  },
+  "network": "solana-devnet",
+  "rpc": "https://api.devnet.solana.com",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "observedAtUtc": "2026-08-10T05:51:17.5472091Z",
+  "commitment": "finalized",
+  "finalizedSlot": 482564058,
+  "attemptPhase": "devnet_airdrop_1",
+  "wrapperReachedFirstPublicWriteBoundary": true,
+  "firstPublicWriteCommandLaunchAttempted": true,
+  "faucetRequestProviderReceiptObserved": false,
+  "faucetFundingConfirmed": false,
+  "confirmedTransactionCount": 0,
+  "publicAccountCount": 0,
+  "permanentDevnetArtifactsConfirmed": false,
+  "cliExitCode": 1,
+  "cliEvidenceSanitized": false,
+  "sanitizerErrorType": "SyntaxError",
+  "temporarySecretsRemoved": true,
+  "secondAttemptPermittedByThisRecord": false,
+  "rpcObservationAuthenticated": false,
+  "independentProviderEvidenceVerified": false,
+  "addresses": [
+    {
+      "role": "payer",
+      "address": "HrRfUJNHDSywkRdFYa1dCU3gLvUyLwGqCtEiciuA16Bp",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "program",
+      "address": "Fk3zwPUFjXzLcrLpNecyrdFG9EAPaYTESqcXVNQbNmBw",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "deploymentBuffer",
+      "address": "FKLKpnm1Q2gh9zCz4QwJ7T76o8XvUxkNF32azVGkHoD1",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "mint",
+      "address": "2sVuesvRS78dWZ8WHzbN3CyJFGw7tXYmMM75K1uFZvRc",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "recipient",
+      "address": "HUusiLnVse5NAn7w6ytcKaNP4nECSBcs7zHeGVs6Mnp9",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    }
+  ],
+  "result": "NO_FINALIZED_PUBLIC_ARTIFACTS_OBSERVED",
+  "dailyLawOnlyRehearsalComplete": false,
+  "fullFeatureDevnetRehearsalComplete": false,
+  "activationReady": false,
+  "mainnetStatus": "HOLD"
+}

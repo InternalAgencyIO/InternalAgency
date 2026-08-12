@@ -3,14 +3,17 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateArchitectureSourceLineage } from "./iat-architecture-source-lineage.mjs";
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const repositoryRoot = resolve(siteRoot, "..", "..", "..");
 const auditDir = join(siteRoot, "public", "audits", "iat-v2-architecture-work-20260805");
+const successorAuditDir = join(siteRoot, "public", "audits", "b3-canonical-lineage-20260808");
 const readJson = (name) => JSON.parse(readFileSync(join(auditDir, name), "utf8"));
 const manifest = readJson("manifest.json");
 const ledger = readJson("work-ledger.json");
 const proof = readJson("hydration-proof.json");
+const successorManifest = JSON.parse(readFileSync(join(successorAuditDir, "manifest.json"), "utf8"));
 const reviewedLocalizationPolicy = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "reviewed-localization-policy.json"), "utf8"));
 const currentPayloadContract = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "payload-contract.json"), "utf8"));
 
@@ -73,15 +76,16 @@ assert(!/(mnemonic|private[_ -]?key|seed phrase|bearer token|api[_ -]?secret)/iu
 
 const sourceCommit = manifest.sourceBinding?.commit;
 assert(/^[0-9a-f]{40}$/u.test(sourceCommit ?? ""), "invalid source-binding commit");
-assert(commitExists(sourceCommit), "source-binding commit is absent");
-assert(git(["rev-parse", `${sourceCommit}^{tree}`]) === manifest.sourceBinding.gitTree, "source-binding tree differs");
-assert(isAncestor(sourceCommit, "HEAD"), "source-binding commit is not an ancestor of HEAD");
-assert(JSON.stringify(manifest.sourceBinding) === JSON.stringify({
-  repository: ledger.sourceBinding.repository,
-  branch: ledger.sourceBinding.branch,
-  commit: ledger.sourceBinding.commit,
-  gitTree: ledger.sourceBinding.gitTree,
-}), "manifest and ledger source bindings differ");
+const lineage = validateArchitectureSourceLineage({
+  historicalManifest: manifest,
+  historicalLedger: ledger,
+  historicalManifestSha256: sha256(readFileSync(join(auditDir, "manifest.json"))),
+  successorManifest,
+  commitExists,
+  treeForCommit: (commit) => git(["rev-parse", `${commit}^{tree}`]),
+  isAncestor,
+});
+assert(lineage.historicalSourceCommit === sourceCommit, "lineage historical source commit differs");
 
 const requiredArtifacts = ["README.md", "hydration-proof.json", "work-ledger.json"];
 assert(JSON.stringify(Object.keys(manifest.artifactSha256).sort()) === JSON.stringify(requiredArtifacts.sort()), "artifact inventory differs");
@@ -162,5 +166,6 @@ assert(ledger.preservation.forcePushAllowed === false && ledger.preservation.mer
 console.log(
   `IAT V2 architecture work ledger valid: ${completed.length}/${tasks.length} safe tasks complete, ` +
     `${proof.result.completedPages}/${proof.result.plannedPages} historical hydration pages retained (not current localization approval), ` +
+    `B3 successor ${lineage.b3SourceCommit.slice(0, 12)} bound to current HEAD, ` +
     `current 50-locale runtime GLOBAL_FAIL_CLOSED, ${externalBlockers.length} external blockers HOLD, Mainnet UNSCHEDULED_HOLD.`,
 );

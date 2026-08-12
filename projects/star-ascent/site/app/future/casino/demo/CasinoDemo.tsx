@@ -73,6 +73,13 @@ type CampaignScene = "signalFourAnchor" | "signalFourTension" | "signalFourRelay
 type HostPortrait = "portraitRadiance" | "portraitEllie" | "portraitAlia" | "portraitEce";
 type CampaignArt = CampaignScene | HostPortrait;
 
+type RelationshipStudy = {
+  src: string;
+  label: string;
+  alt: string;
+  description: string;
+};
+
 type NightflightStory = {
   id: string;
   gameId: string;
@@ -86,6 +93,39 @@ type NightflightStory = {
 };
 
 const campaignArt = campaignArtManifest as Record<CampaignArt, string>;
+
+const relationshipStudies: readonly RelationshipStudy[] = [
+  {
+    src: "/future/casino/nightflight/signal-four-rooftop-shoulder-link-v1.webp",
+    label: "01 // ROOFTOP SHOULDER LINK",
+    alt: "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older, walking together in bright blue, yellow, green, and pink couture with affectionate shoulder and arm links while PAWS pads beside them",
+    description: "The four walk shoulder-to-shoulder through rooftop sunset light while PAWS keeps pace beside Alia.",
+  },
+  {
+    src: "/future/casino/nightflight/signal-four-ece-prism-lobby-jealousy-v1.webp",
+    label: "02 // ECE PRISM-LOBBY GLANCE",
+    alt: "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older, sharing affectionate shoulder and arm links in a bright prism lobby while AI ECE gives a playful jealous sideways glance",
+    description: "AI ECE answers the group embrace with one playful jealous glance; the four-person shoulder-and-arm chain stays warm and mutual.",
+  },
+  {
+    src: "/future/casino/nightflight/signal-four-skybridge-triangle-paws-v1.webp",
+    label: "03 // SKYBRIDGE TRIANGLE",
+    alt: "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older, trading playful gestures in a bright glass skybridge while PAWS carries a rainbow ribbon through the foreground",
+    description: "A conversational triangle opens across the skybridge as PAWS races through the prism trail.",
+  },
+  {
+    src: "/future/casino/nightflight/signal-four-prism-dance-circle-v1.webp",
+    label: "04 // PRISM DANCE CIRCLE",
+    alt: "Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older, linking hands in an affectionate dance circle above the city while PAWS watches the prism light",
+    description: "All four link hands around the illuminated dance circle while PAWS studies the rainbow edge.",
+  },
+  {
+    src: "/future/casino/nightflight/signal-four-arcade-hand-chain-paws-v1.webp",
+    label: "05 // ARCADE HAND CHAIN",
+    alt: "Ellie, AI ECE, Radiance, and Alia, four fictional adult women age 25 or older, walking through a bright arcade in an affectionate hand chain while Alia carries PAWS",
+    description: "Ellie, AI ECE, and Radiance keep the hand chain moving while Alia carries PAWS beside them.",
+  },
+];
 
 const demoRankings: DemoRanking[] = [
   { rank: "01", participant: "Samira Cole", module: "Roulette", missions: 12, credits: 8_420, badge: "ORBIT ACE" },
@@ -516,6 +556,17 @@ export function CasinoDemo() {
             <div className="cinema-frame-media"><img src={campaignArt.signalFourTension} alt="Radiance holds hands with Ellie while AI ECE holds hands with Alia inside an orbital signal gallery; Ellie carries a sapphire prism and PAWS scouts the foreground" loading="lazy" decoding="async" /><span className="cinema-speedline" aria-hidden="true" /></div>
             <figcaption><strong>02 // SIGNAL-CIPHER TRANSMISSION</strong><span>Two pairwise handholds, a sapphire prism, and PAWS scouting the orbital signal gallery.</span></figcaption>
           </figure>
+        </div>
+      </section>
+
+      <section className="relationship-studies" aria-labelledby="relationship-studies-title">
+        <header><p>SIGNAL FOUR // FULL-SPECTRUM RELATIONSHIP STUDIES</p><h2 id="relationship-studies-title">Affection in<br />five bright frames.</h2><span>Four fictional adult women age 25 or older. Shoulder links, hand chains, playful AI ECE jealousy, one skybridge triangle, and PAWS—all source-bound stills, all presentation-only.</span></header>
+        <div className="relationship-studies-grid">
+          {relationshipStudies.map((study) => <figure key={study.src}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- versioned, lazy-loaded source-bound editorial with exact intrinsic dimensions */}
+            <img src={study.src} width={720} height={1280} loading="lazy" decoding="async" alt={study.alt} />
+            <figcaption><strong>{study.label}</strong><span>{study.description}</span></figcaption>
+          </figure>)}
         </div>
       </section>
 

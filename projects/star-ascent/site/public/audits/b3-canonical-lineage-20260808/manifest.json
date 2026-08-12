@@ -1,0 +1,32 @@
+{
+  "schema": "iat-b3-canonical-source-lineage/v1",
+  "status": "B3_PRIMARY_FORWARD_ARCHITECTURE",
+  "generatedAtUtc": "2026-08-08T00:00:00Z",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "relationship": "EXPLICIT_SUCCESSOR_RETAINING_HISTORICAL_V2_EVIDENCE_WITHOUT_HEAD_ANCESTRY_REQUIREMENT",
+  "historicalV2Audit": {
+    "path": "public/audits/iat-v2-architecture-work-20260805/manifest.json",
+    "manifestSha256": "04e6cd8a8624d074e3dcdd504b321e054132d19ea2338a9d920f9931660f0b8f",
+    "status": "RETAINED_HISTORICAL_EVIDENCE",
+    "sourceBinding": {
+      "repository": "InternalAgencyIO/InternalAgency",
+      "branch": "agent/iat-launch-window",
+      "commit": "ebbcc910450114333541539e2bd71eec26acc3d0",
+      "gitTree": "6fcca377e567afee64f010b1a94e8271b291a239"
+    }
+  },
+  "b3SuccessorBinding": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "branch": "agent/iat-b3-architecture",
+    "commit": "d8c11aa852cfd678ce63816125214cd0db85e54e",
+    "gitTree": "cb5ceff77a46237b915e59630fe67712d8287c3b",
+    "status": "PRIMARY_FORWARD_SOURCE"
+  },
+  "releaseBoundary": {
+    "deploymentApproved": false,
+    "fundingApproved": false,
+    "signingApproved": false,
+    "broadcastApproved": false,
+    "mainnetApproved": false
+  }
+}

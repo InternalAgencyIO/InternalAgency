@@ -1,0 +1,111 @@
+{
+  "schema": "iat-localization-active-artifact-evidence/v1",
+  "runId": "2026-08-08-pending-visible-source-refresh-v1",
+  "recordedAt": "2026-08-08T09:15:18Z",
+  "status": "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "sourceBinding": {
+    "captureCommit": "d8c11aa852cfd678ce63816125214cd0db85e54e",
+    "evidenceMode": "APPEND_ONLY_ACTIVE_CONTENT_V1"
+  },
+  "localizationState": {
+    "configuredLocales": 50,
+    "sourceLocales": 1,
+    "holdLocales": 49,
+    "canonicalStrings": 985,
+    "reviewedRuntimeCells": 0,
+    "canonicalFallbackCells": 48265,
+    "pendingVisibleSourceStrings": 48,
+    "routesWithPendingVisibleSource": 13,
+    "activatedTranslations": 0
+  },
+  "artifacts": [
+    {
+      "path": "app/i18n/messages.json",
+      "sha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f",
+      "bytes": 5917932
+    },
+    {
+      "path": "app/i18n/pending-visible-source.json",
+      "sha256": "a36577d20ee0214b4b164d0c39744edc9c68495aa01cc4397937517b4c59baa9",
+      "bytes": 13456
+    },
+    {
+      "path": "app/i18n/reviewed-localization-policy.json",
+      "sha256": "66662977cf8867f6a7aba1dfe6e5126e6fd55b22a43aae226850bf5fbbeca358",
+      "bytes": 1507
+    },
+    {
+      "path": "app/i18n/language-render-evidence.v1.json",
+      "sha256": "e943ba3ef561bff028d13f983730b28c0352fc679b1e1821903783afe26c23b6",
+      "bytes": 187556
+    },
+    {
+      "path": "public/audits/localization-qa-20260803/language-qa-scorecard.json",
+      "sha256": "40533bb68f0c7de430730a9fddb7bc32e35b7d9c02152c41eadf366b39e69cd2",
+      "bytes": 1572071
+    },
+    {
+      "path": "public/audits/localization-qa-20260803/hold-remediation-ledger.json",
+      "sha256": "75339c3e7b00eb41d2d54aad3bd04a83bbc6273e59fbc54acbab3892ecddbadd",
+      "bytes": 3407
+    },
+    {
+      "path": "public/audits/localization-qa-20260803/report.json",
+      "sha256": "4b8c92c449b3aebc1e2ee509370132ba9656b2729475882f66b3dd6d85a69ea6",
+      "bytes": 36920
+    },
+    {
+      "path": "public/audits/localization-qa-20260803/README.md",
+      "sha256": "09dc9462fbb11bf9f622c30713eb61b2b2c8680aceb018775c9cee294f9915a3",
+      "bytes": 6324
+    },
+    {
+      "path": "public/audits/localization-qa-20260803/TRANSLATION-PROCESS.md",
+      "sha256": "4d9200642eb504fe569e0fe07813839b6cfa1b90eff5babbdc87242426758586",
+      "bytes": 15582
+    },
+    {
+      "path": "public/audits/localization-qa-20260808/README.md",
+      "sha256": "4f795f5d68fa8cf4c97773af05b7bfc38c16bbae5a4a8af4e56ad16f68e07495",
+      "bytes": 1327
+    },
+    {
+      "path": "scripts/check-localization-active-artifact-drift.mjs",
+      "sha256": "db47c6a6c0c24cb1041ec773866a2d0dd5b13f1e0ff67ec615d30e6b3c0a0f01",
+      "bytes": 2295
+    },
+    {
+      "path": "scripts/test-localization-active-artifact-drift-regression.mjs",
+      "sha256": "8563a18821b573fea990de424b2fbae289d971f34248444181d0b2607a28b45d",
+      "bytes": 1692
+    },
+    {
+      "path": "scripts/generate-localization-qa-report.mjs",
+      "sha256": "2fc3ba283715a7b43cc2a47c41df4174d0d92c30daeebd24d59eef5d46a5b58e",
+      "bytes": 18697
+    },
+    {
+      "path": "scripts/validate-localization-provenance.mjs",
+      "sha256": "74819b22cd7c51cad2eda52b2597558e3314104f9cb6889207bec5830bd923b6",
+      "bytes": 21892
+    },
+    {
+      "path": "scripts/test-localization-provenance-regression.mjs",
+      "sha256": "36cc4a7489322d4bd41f9862a4cb70ea24690ed3749419052ce0fea9d35f2ed3",
+      "bytes": 6484
+    }
+  ],
+  "assurance": {
+    "runtimeActivation": false,
+    "nativeQualityClaimAllowed": false,
+    "releaseApproved": false,
+    "mainnetStateChanged": false
+  },
+  "limitations": [
+    "Pending English source is captured but is not part of the active translated catalog.",
+    "No translation model ran and no target-language copy was activated.",
+    "The 300 language QA HOLD results still require external evidence and accountable native review.",
+    "This evidence does not authorize deployment, funding, signing, broadcast, Devnet, or Mainnet action."
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iat.example/schemas/iat-b3-token-2022-confidential-host-compatibility.v1.schema.json",
+  "title": "IAT B3 Token-2022 confidential host compatibility packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "status",
+    "scope",
+    "sourceBindings",
+    "dependencyPins",
+    "hostChecks",
+    "standardProgramObservation",
+    "hostCompatibilityComplete",
+    "privacyVaultLifecycleComplete",
+    "devnetVerified",
+    "activationReady",
+    "releaseAuthorizationVerified",
+    "mainnetExecutionAuthorized",
+    "mainnetStatus"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./iat-b3-token-2022-confidential-host-compatibility.v1.schema.json"
+    },
+    "schema": {
+      "const": "iat-b3-token-2022-confidential-host-compatibility/v1"
+    },
+    "status": {
+      "const": "EXACT_HOST_COMPATIBILITY_COMPLETE_RELEASE_HOLD"
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "certifies", "doesNotCertify"],
+      "properties": {
+        "predicate": {
+          "const": "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET"
+        },
+        "certifies": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 24 }
+        },
+        "doesNotCertify": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 24 }
+        }
+      }
+    },
+    "sourceBindings": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "byteLength"],
+        "properties": {
+          "path": { "type": "string", "minLength": 24 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "byteLength": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "dependencyPins": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "splToken2022Interface",
+        "solanaZkSdk",
+        "token2022ProgramId",
+        "zkElgamalProofProgramId"
+      ],
+      "properties": {
+        "splToken2022Interface": { "const": "=2.1.0" },
+        "solanaZkSdk": { "const": "=4.0.0" },
+        "token2022ProgramId": { "type": "string", "minLength": 32 },
+        "zkElgamalProofProgramId": { "type": "string", "minLength": 32 }
+      }
+    },
+    "hostChecks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "featureGated",
+        "readOnlyAccountInfoParsing",
+        "exactMintAndAccountLengths",
+        "exactExtensionAllowlists",
+        "canonicalPodBooleans",
+        "elgamalPublicKeyCurveValidity",
+        "allPersistedElgamalCiphertextCurveValidity",
+        "pubkeyValidityProofGenerationAndVerification",
+        "zeroCiphertextProofGenerationAndVerification",
+        "mismatchedPubkeyStatementRejected",
+        "nonzeroCiphertextZeroProofRejected",
+        "mutableAccountBorrow",
+        "accountWrite",
+        "tokenCpi",
+        "instructionConstruction"
+      ],
+      "properties": {
+        "featureGated": { "const": true },
+        "readOnlyAccountInfoParsing": { "const": true },
+        "exactMintAndAccountLengths": { "const": true },
+        "exactExtensionAllowlists": { "const": true },
+        "canonicalPodBooleans": { "const": true },
+        "elgamalPublicKeyCurveValidity": { "const": true },
+        "allPersistedElgamalCiphertextCurveValidity": { "const": true },
+        "pubkeyValidityProofGenerationAndVerification": { "const": true },
+        "zeroCiphertextProofGenerationAndVerification": { "const": true },
+        "mismatchedPubkeyStatementRejected": { "const": true },
+        "nonzeroCiphertextZeroProofRejected": { "const": true },
+        "mutableAccountBorrow": { "const": false },
+        "accountWrite": { "const": false },
+        "tokenCpi": { "const": false },
+        "instructionConstruction": { "const": false }
+      }
+    },
+    "standardProgramObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network",
+        "commitment",
+        "observedAtUtc",
+        "finalizedBoundarySlot",
+        "token2022ReleaseTag",
+        "token2022SourceCommit",
+        "token2022DeployedProgramSha256",
+        "token2022RebuiltArtifactSha256",
+        "token2022SourceEquivalenceVerified",
+        "token2022Upgradeable",
+        "token2022CeremonyTimeReattestationRequired",
+        "zkElgamalProofProgramNativeAndImmutable",
+        "rpcObservationAuthenticated"
+      ],
+      "properties": {
+        "network": { "const": "mainnet-beta" },
+        "commitment": { "const": "finalized" },
+        "observedAtUtc": { "type": "string", "format": "date-time" },
+        "finalizedBoundarySlot": { "type": "integer", "minimum": 1 },
+        "token2022ReleaseTag": { "type": "string", "minLength": 8 },
+        "token2022SourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "token2022DeployedProgramSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "token2022RebuiltArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "token2022SourceEquivalenceVerified": { "const": true },
+        "token2022Upgradeable": { "const": true },
+        "token2022CeremonyTimeReattestationRequired": { "const": true },
+        "zkElgamalProofProgramNativeAndImmutable": { "const": true },
+        "rpcObservationAuthenticated": { "const": false }
+      }
+    },
+    "hostCompatibilityComplete": { "const": true },
+    "privacyVaultLifecycleComplete": { "const": false },
+    "devnetVerified": { "const": false },
+    "activationReady": { "const": false },
+    "releaseAuthorizationVerified": { "const": false },
+    "mainnetExecutionAuthorized": { "const": false },
+    "mainnetStatus": { "const": "HOLD" }
+  }
+}

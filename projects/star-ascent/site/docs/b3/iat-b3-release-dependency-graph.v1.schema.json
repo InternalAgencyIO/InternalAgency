@@ -1,0 +1,3714 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:iat:b3:release-dependency-graph:v1",
+  "title": "IAT B3 nonactivating structural release dependency graph",
+  "description": "Strict shape contract only; it never certifies production truth, authorization, release readiness, or Mainnet execution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "profile",
+    "status",
+    "scope",
+    "applicabilityPolicy",
+    "artifactBindingPolicy",
+    "graphDefinitionSha256",
+    "nodes",
+    "edges",
+    "terminalPredicate",
+    "externalTruthVerified",
+    "runtimeAuthenticationVerified",
+    "providerEvidenceVerified",
+    "rollbackProtectionVerified",
+    "runtimeEnforcementVerified",
+    "activationReady",
+    "releaseAuthorizationVerified",
+    "mainnetExecutionAuthorized",
+    "mainnetStatus"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./iat-b3-release-dependency-graph.v1.schema.json"
+    },
+    "schema": {
+      "const": "iat-b3-release-dependency-graph/v1"
+    },
+    "profile": {
+      "enum": [
+        "PRODUCTION",
+        "TEST_FIXTURE"
+      ]
+    },
+    "status": {
+      "enum": [
+        "BLOCKED",
+        "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+      ]
+    },
+    "scope": {
+      "const": {
+        "contract": "NONACTIVATING_STRUCTURAL_DEPENDENCY_REVIEW_PACKET",
+        "doesNotCertify": [
+          "PRODUCTION_OR_PROVIDER_TRUTH",
+          "AUTHENTICATION_OR_AUTHORIZATION",
+          "RUNTIME_ENFORCEMENT_OR_ATOMICITY",
+          "ROLLBACK_PROTECTION",
+          "OWNER_CUT_AUTHENTICITY",
+          "RELEASE_OR_MAINNET_READINESS",
+          "TRANSACTION_SIGNING_DEPLOYMENT_OR_EXECUTION_AUTHORITY"
+        ]
+      }
+    },
+    "applicabilityPolicy": {
+      "const": {
+        "allNodesRequired": true,
+        "privacyVaultRequired": true,
+        "requiredLocaleCount": 50,
+        "localizationRequired": true,
+        "mediaRequired": true,
+        "inactiveFutureMediaDisposition": "RETAINED_INACTIVE_REQUIRED",
+        "radianceStandaloneDisposition": "SEPARATE_PRODUCT_BLOCKER_REQUIRED",
+        "naDispositionAllowed": false,
+        "ownerCutAuthenticationSupported": false
+      }
+    },
+    "artifactBindingPolicy": {
+      "const": {
+        "stableCommittedB3ArtifactsOnly": true,
+        "dirtyOrUnresolvedArtifactDisposition": "NULL_AND_BLOCKED",
+        "arbitraryValidatorExecutionAllowed": false,
+        "networkReadsAllowed": false,
+        "ownerPolicyFreezeBinding": {
+          "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+          "sha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+          "bindingScope": "REFERENCE_CONTRACT_ONLY"
+        },
+        "privacyVaultNativeInstructionPlanBinding": {
+          "path": "projects/star-ascent/site/docs/b3/iat-b3-privacy-vault-native-instruction-plan.v1.json",
+          "sha256": "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
+          "bindingScope": "NONACTIVATING_PREREQUISITE_ONLY"
+        },
+        "productionIdentityAuthorityTrustBinding": {
+          "schema": "iat-b3-production-identity-authority-trust-binding/v1",
+          "status": "EXTERNAL_ACCEPTANCE_REQUIRED",
+          "keys": [],
+          "trustRootSha256": null,
+          "packetMaySelectTrustKeys": false
+        }
+      }
+    },
+    "graphDefinitionSha256": {
+      "const": "f89309a25236a9c0a4b4640b45c5d6b8a850a35c6a40b0774ccd44928532c37e"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 28,
+      "maxItems": 28,
+      "prefixItems": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/ESTATE_BASELINE.md",
+                "sha256": "dbe8dca34e9423b7daff2bb1e47cbf34b5318cfba6bf31300a053917833f5e66",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "V2_FEATURE_PARITY"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "ZERO_UNAUTHORIZED_CUT_V2_PARITY_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/V2_FEATURE_PARITY.md",
+                "sha256": "360a8511d5f2cc92a3a3e78509134a6c7096322ab88fca1be5e67f6fdf8fce26",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
+                "sha256": "0f8bc5f9622877e4f6298ea1d4c4f7eea4a0427f04e0f6a49f6a07eb66c5fb1b",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "SCOPED_CORE_CUSTODY_POLICY_AND_NATIVE_ADAPTER_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/CORE_TEAM_CAP.md",
+                "sha256": "cf29a6cdda6c2e5024e0c003566958f7a2711d6379be1d4f33aac902c2405014",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "SCOPED_FACTION_ECONOMICS_FUNDING_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/FACTIONS.md",
+                "sha256": "1bc82c007b235da3073daa7fc418665a9f5d8bd01923974ff77ad41dec933b3c",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "NONVACUOUS_GENESIS_BOOTSTRAP_PHASE_AND_CONFIG_CODEC_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
+                "sha256": "d73e68b031589c63cb126251aed20b79eac5a82402e41dfdafeb41292b54dd5a",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "EXACT_GENESIS_ALLOCATION_CONSERVATION_PACKET"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE_SCOPED_OUTPUT"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "PRODUCTION_DAILY_LAW_NATIVE_HOOK_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
+                "sha256": "cb885b7f05ac45cf907e33e9c4858f1d22b6995091d06269b7a7dda08e1191ec",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "SAME_ARTIFACT_DAILY_LAW_AND_STAKE_INGRESS_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/LOCAL_VALIDATOR_REHEARSAL.md",
+                "sha256": "745608e5bccb1cfbf2e62dea195479cf08298b567fa3c9f7b917b251ef6ed3f5",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "REWARD_WATERFALL_PROOFS"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "REWARD_WATERFALL_PROOF_CONTRACT_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-reward-capacity-waterfall.v1.json",
+                "sha256": "423fc268c184271023af0ca0664b194e9570149e4c61a916c27bad5d9bb17858",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "DURABLE_REWARD_CAS"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "DURABLE_CAS_AND_ROLLBACK_BOUNDARY_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/REWARD_PERSISTENCE_CAS_REFERENCE.md",
+                "sha256": "f9a08da6e337afba1acd0eb439ebc193b8ae93625c425ad71ab82e89e72eda9a",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "EXTERNAL_CHECKPOINT_PROVIDER"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "EXTERNAL_CHECKPOINT_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-external-checkpoint-provider-readiness.v1.json",
+                "sha256": "f36ed9746c756c16d5b517e3c26c5da592fcce01ee79facfa49141bc6753872d",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "X_SOCIAL_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-x-social-evidence-provider-readiness.v1.json",
+                "sha256": "4f1ef74e606be4436590e495492866d4b553bff6bed60d489ff425341168b87b",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "ALL_15_ECONOMY_WRITE_ADAPTER_SCOPED_OUTPUT"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
+                "sha256": "d73e68b031589c63cb126251aed20b79eac5a82402e41dfdafeb41292b54dd5a",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "REWARD_LOCAL_WRITE_AND_EVERY_CONSUMER_GATE_PACKET"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "PRIVACY_VAULT_CLIENT"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "PRIVACY_VAULT_FULL_LIFECYCLE_REVIEW_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
+                "sha256": "a9df9c5c976bba0ebdc5cbcbe9c77fe0de77b4949a3cc72b57c75717517c77df",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "DEPENDENCY_SECURITY_REMEDIATION"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "ZERO_UNACCEPTED_DEPENDENCY_FINDINGS_PACKET"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "REPRODUCIBLE_FINAL_BINARIES_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
+                "sha256": "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "ADVERSARIAL_DEVNET_REHEARSAL"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "FULL_SYSTEM_ADVERSARIAL_DEVNET_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/DEVNET_REHEARSAL.md",
+                "sha256": "5ff71a52ae43c155582b2d1007d7ac5bc314a80c0e1dd33b7ceb414e40df12aa",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "DEPLOYED_BYTES_IDENTITIES_AND_AUTHORITY_SEAL_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "B3_COST_AND_CEREMONY_FUNDING_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "LOCALIZATION_EVIDENCE"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "ALL_50_LOCALES_ACCEPTED_NATIVE_REVIEW_PACKET"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "MEDIA_MASTER_COMPLETENESS"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "ALL_REQUIRED_MEDIA_MASTERS_PACKET"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "V2_LAUNCH_CEREMONY_BOUNDARY"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "V2_HOLD_AND_B3_SUPERSESSION_PACKET"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "SOURCE_BOUND_RELEASE_SURFACE_CLAIMS_PACKET"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "INDEPENDENT_MULTI_DOMAIN_REVIEW_PACKET"
+            },
+            "contractArtifact": {
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/MAINNET_PATH.md",
+                "sha256": "e6c8bf20f713fb5c8fea7c5fadab09bea7d3c4cf8250c17d733a26c571600763",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "applicability",
+            "status",
+            "completionPredicate",
+            "contractArtifact",
+            "completionEvidence",
+            "blocker"
+          ],
+          "properties": {
+            "id": {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            },
+            "applicability": {
+              "const": "REQUIRED"
+            },
+            "status": {
+              "enum": [
+                "BLOCKED",
+                "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+              ]
+            },
+            "completionPredicate": {
+              "const": "ALL_27_PREREQUISITES_STRUCTURALLY_COMPLETE"
+            },
+            "contractArtifact": {
+              "const": null
+            },
+            "completionEvidence": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/evidence"
+                }
+              ]
+            },
+            "blocker": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "minLength": 24
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "items": false
+    },
+    "edges": {
+      "type": "array",
+      "minItems": 134,
+      "maxItems": 134,
+      "prefixItems": [
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION"
+            },
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            },
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION"
+            },
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            },
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            },
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            },
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "DURABLE_REWARD_CAS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            },
+            {
+              "const": "DURABLE_REWARD_CAS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "EXTERNAL_CHECKPOINT_PROVIDER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DURABLE_REWARD_CAS"
+            },
+            {
+              "const": "EXTERNAL_CHECKPOINT_PROVIDER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            },
+            {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DURABLE_REWARD_CAS"
+            },
+            {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "EXTERNAL_CHECKPOINT_PROVIDER"
+            },
+            {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            },
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            },
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DURABLE_REWARD_CAS"
+            },
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "EXTERNAL_CHECKPOINT_PROVIDER"
+            },
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            },
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            },
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "PRIVACY_VAULT_CLIENT"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "PRIVACY_VAULT_CLIENT"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "PRIVACY_VAULT_CLIENT"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "PRIVACY_VAULT_CLIENT"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "DEPENDENCY_SECURITY_REMEDIATION"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRIVACY_VAULT_CLIENT"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DEPENDENCY_SECURITY_REMEDIATION"
+            },
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "ADVERSARIAL_DEVNET_REHEARSAL"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            },
+            {
+              "const": "ADVERSARIAL_DEVNET_REHEARSAL"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION"
+            },
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            },
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "ADVERSARIAL_DEVNET_REHEARSAL"
+            },
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            },
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            },
+            {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            },
+            {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "LOCALIZATION_EVIDENCE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "MEDIA_MASTER_COMPLETENESS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION"
+            },
+            {
+              "const": "V2_LAUNCH_CEREMONY_BOUNDARY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "V2_LAUNCH_CEREMONY_BOUNDARY"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION"
+            },
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            },
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LOCALIZATION_EVIDENCE"
+            },
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "MEDIA_MASTER_COMPLETENESS"
+            },
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_LAUNCH_CEREMONY_BOUNDARY"
+            },
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DURABLE_REWARD_CAS"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "EXTERNAL_CHECKPOINT_PROVIDER"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRIVACY_VAULT_CLIENT"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DEPENDENCY_SECURITY_REMEDIATION"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "ADVERSARIAL_DEVNET_REHEARSAL"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LOCALIZATION_EVIDENCE"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "MEDIA_MASTER_COMPLETENESS"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            },
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LIVE_ESTATE_CANONICAL_MINT_DECISION"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_FEATURE_PARITY"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CORE_CUSTODY_POLICY_ADAPTER"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "FACTION_ECONOMICS_FUNDING"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "CONFIG_GENESIS_PHASE_CODEC"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DAILY_LAW_NATIVE_HOOK"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "COMBINED_STAKE_INGRESS_HOOK"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_WATERFALL_PROOFS"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DURABLE_REWARD_CAS"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "EXTERNAL_CHECKPOINT_PROVIDER"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "X_SOCIAL_EVIDENCE_PROVIDER"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRIVACY_VAULT_CLIENT"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DEPENDENCY_SECURITY_REMEDIATION"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "ADVERSARIAL_DEVNET_REHEARSAL"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "LOCALIZATION_EVIDENCE"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "MEDIA_MASTER_COMPLETENESS"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "V2_LAUNCH_CEREMONY_BOUNDARY"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            },
+            {
+              "const": "TERMINAL_B3_REVIEW_PACKET"
+            }
+          ],
+          "items": false
+        }
+      ],
+      "items": false
+    },
+    "terminalPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "requiredNodeIds",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "STRUCTURAL_REVIEW_PACKET_COMPLETE"
+          ]
+        },
+        "requiredNodeIds": {
+          "const": [
+            "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+            "V2_FEATURE_PARITY",
+            "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY",
+            "CORE_CUSTODY_POLICY_ADAPTER",
+            "FACTION_ECONOMICS_FUNDING",
+            "CONFIG_GENESIS_PHASE_CODEC",
+            "GENESIS_ALLOCATIONS_CONSERVATION",
+            "PRODUCTION_IDENTITY_INPUT_FREEZE",
+            "DAILY_LAW_NATIVE_HOOK",
+            "COMBINED_STAKE_INGRESS_HOOK",
+            "REWARD_WATERFALL_PROOFS",
+            "DURABLE_REWARD_CAS",
+            "EXTERNAL_CHECKPOINT_PROVIDER",
+            "X_SOCIAL_EVIDENCE_PROVIDER",
+            "ECONOMY_ALL_15_WRITE_ADAPTER",
+            "REWARD_LOCAL_WRITE_CONSUMER_GATING",
+            "PRIVACY_VAULT_CLIENT",
+            "DEPENDENCY_SECURITY_REMEDIATION",
+            "PRODUCTION_BINARY_REPRODUCIBILITY",
+            "ADVERSARIAL_DEVNET_REHEARSAL",
+            "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE",
+            "B3_COST_CEREMONY_FUNDING",
+            "LOCALIZATION_EVIDENCE",
+            "MEDIA_MASTER_COMPLETENESS",
+            "V2_LAUNCH_CEREMONY_BOUNDARY",
+            "RELEASE_SURFACE_PUBLIC_CLAIMS",
+            "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+          ]
+        },
+        "blocker": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "minLength": 24
+            }
+          ]
+        }
+      }
+    },
+    "externalTruthVerified": {
+      "const": false
+    },
+    "runtimeAuthenticationVerified": {
+      "const": false
+    },
+    "providerEvidenceVerified": {
+      "const": false
+    },
+    "rollbackProtectionVerified": {
+      "const": false
+    },
+    "runtimeEnforcementVerified": {
+      "const": false
+    },
+    "activationReady": {
+      "const": false
+    },
+    "releaseAuthorizationVerified": {
+      "const": false
+    },
+    "mainnetExecutionAuthorized": {
+      "const": false
+    },
+    "mainnetStatus": {
+      "const": "HOLD"
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "nodeId",
+        "predicate",
+        "subjectSha256",
+        "artifactSha256",
+        "environment"
+      ],
+      "properties": {
+        "schema": {
+          "const": "iat-b3-release-dependency-node-evidence/v1"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "predicate": {
+          "type": "string"
+        },
+        "subjectSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "artifactSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        }
+      }
+    }
+  }
+}

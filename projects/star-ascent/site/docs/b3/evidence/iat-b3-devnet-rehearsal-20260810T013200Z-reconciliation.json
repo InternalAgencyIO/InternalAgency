@@ -1,0 +1,73 @@
+{
+  "schema": "iat-b3-devnet-rehearsal-reconciliation/v1",
+  "attemptEvidence": "iat-b3-devnet-rehearsal-20260810T013200Z.jsonl",
+  "attemptEvidenceSha256": "c0b45aedf4a0e7457524610ed66249232e516a33c72ce31d7fb83b4fe1c46ba5",
+  "sourceBindings": {
+    "gitHead": "f618ef8ffb0a7eabc2f08e1ef5a5afedb1468498",
+    "inputsMatchedGitHead": true,
+    "wrapperSha256": "bd31c3a2c497e5ec8b3ba7ae4a3b79c585978eb5560be75a9ae0ea8fca7560bb",
+    "driverSha256": "f09b5c874dc3a16ab9064f30f174d0aa303723d2611c52f3fb5d88daf0ed1842",
+    "safetyTestSha256": "08413f27c742bbf32d0e2f6da8f45773d55b4f09e2e7fc2c3ea945a352025701",
+    "reviewDocumentSha256": "0dc182a9bb4d861356767aeb277b7e74c3b5a394af531180d3782a935658c110",
+    "lawArtifactSha256": "927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c",
+    "lawArtifactBytes": 154952
+  },
+  "network": "solana-devnet",
+  "rpc": "https://api.devnet.solana.com",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "observedAtUtc": "2026-08-10T01:36:38.103Z",
+  "commitment": "finalized",
+  "finalizedSlot": 482515615,
+  "attemptPhase": "devnet_airdrop_1",
+  "wrapperReachedFirstPublicWriteBoundary": true,
+  "faucetRequestProviderReceiptObserved": false,
+  "faucetFundingConfirmed": false,
+  "confirmedTransactionCount": 0,
+  "publicAccountCount": 0,
+  "permanentDevnetArtifactsConfirmed": false,
+  "temporarySecretsRemoved": true,
+  "secondAttemptPermittedByThisRecord": false,
+  "rpcObservationAuthenticated": false,
+  "independentProviderEvidenceVerified": false,
+  "addresses": [
+    {
+      "role": "payer",
+      "address": "12xiy9JdoctycuoAzYccNex5sXtNSkC7AaUSZpoVHGj6",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "program",
+      "address": "74mdiFkvS9GqnEvj7qj6jmHYSFDSnz4qLMsMLEPvw7Hk",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "deploymentBuffer",
+      "address": "2AgEj3x3dcHNLuejx3grhyrMKgh9WfDMUCg19UGdiCyw",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "mint",
+      "address": "2JVdoLtVwvTTMiTTQSgdWQbbCwos1nR2BRPVKHeToxVF",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    },
+    {
+      "role": "recipient",
+      "address": "89TiP6VKgfawxvEYDWCSYS4GWnfCtWcCqfwfeBLMGobJ",
+      "lamports": 0,
+      "accountExists": false,
+      "signatureCount": 0
+    }
+  ],
+  "result": "NO_FINALIZED_PUBLIC_ARTIFACTS_OBSERVED",
+  "fullFeatureDevnetRehearsalComplete": false,
+  "activationReady": false,
+  "mainnetStatus": "HOLD"
+}

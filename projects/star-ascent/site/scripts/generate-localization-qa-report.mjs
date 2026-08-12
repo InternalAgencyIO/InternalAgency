@@ -8,6 +8,10 @@ import { runtimeContentLocaleForPolicy } from "../app/i18n/runtime-content-polic
 const root = process.cwd();
 const repoRoot = resolve(root, "../../..");
 const auditDir = join(root, "public", "audits", "localization-qa-20260803");
+const activeArtifactRun = {
+  id: "2026-08-08-pending-visible-source-refresh-v1",
+  recordedAt: "2026-08-08T09:15:18Z",
+};
 const trackedFiles = [
   "app/i18n/language-qa-checks.v1.json",
   "app/i18n/messages.json",
@@ -73,13 +77,28 @@ const currentBindings = {
   messagesFileSha256: files["app/i18n/messages.json"].sha256,
   metadataSha256: canonicalDigest(metadata),
   routeSeoSha256: canonicalDigest(routeSeo),
-  pendingSha256: canonicalDigest(pending),
   reviewedPolicySha256: canonicalDigest(reviewedPolicy),
 };
 for (const [field, expected] of Object.entries(currentBindings)) {
   if (scorecard.sourceBinding?.[field] !== expected) throw new Error(`Language QA scorecard has stale ${field}`);
   if (renderEvidence.sourceBinding?.[field] !== expected) throw new Error(`Language render evidence has stale ${field}`);
 }
+if (scorecard.sourceBinding?.pendingSha256 !== renderEvidence.sourceBinding?.pendingSha256) {
+  throw new Error("Language QA scorecard and render evidence disagree about their historical pending-source input");
+}
+const pendingSourceCount = pending.capture?.pendingSourceCount;
+const pendingRouteCount = pending.capture?.routesWithPendingSource;
+if (
+  pending.schema !== "iat-pending-visible-i18n-source/v1"
+  || pending.status !== "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD"
+  || !Array.isArray(pending.sources)
+  || pendingSourceCount !== pending.sources.length
+  || pendingRouteCount !== Object.keys(pending.capture?.byRoute ?? {}).length
+  || pending.runtime?.active !== false
+  || pending.runtime?.automaticEnglishFallbackApproved !== false
+  || pending.runtime?.translationComplete !== false
+  || pending.runtime?.nativeReviewComplete !== false
+) throw new Error("Pending visible-source ledger is not complete and fail closed");
 const scorecardResults = Object.values(scorecard.summary ?? {}).reduce((total, count) => total + count, 0);
 if (scorecard.scope?.locales !== 50 || scorecard.scope?.checksPerLocale !== 100 || scorecardResults !== 5000) throw new Error("Language QA scorecard cardinality is not 100 checks across 50 locales");
 if (scorecard.status !== "HOLD" || scorecard.summary.FAIL !== 0 || scorecard.summary.NOT_RUN !== 0 || scorecard.summary.HOLD === 0) throw new Error("Language QA scorecard must remain a zero-FAIL, zero-NOT_RUN, evidence-dependent HOLD");
@@ -138,6 +157,8 @@ const report = {
     criticalHydrationOnlyStrings: criticalSources.length,
     canonicalRoutes: scorecard.scope.canonicalRoutes,
     languageQaResults: scorecardResults,
+    pendingVisibleSourceStrings: pendingSourceCount,
+    routesWithPendingVisibleSource: pendingRouteCount,
     reviewedRuntimeCells: catalog.meta.runtimeLocalizationPolicy?.reviewedRuntimeCells ?? 0,
     canonicalFallbackCells: catalog.meta.runtimeLocalizationPolicy?.fallbackRuntimeCells ?? 0,
   },
@@ -148,7 +169,16 @@ const report = {
     reviewedExactMatchHeuristic: "ADVISORY — applies only to evidence-backed target-language cells; canonical fallback is excluded",
     sourceBoundLanguageScorecard: scorecard.status,
     sourceBoundRenderEvidence: renderEvidence.status,
+    pendingLocalizationActivation: pendingSourceCount === 0 ? "NONE" : "HOLD_PENDING_TRANSLATION_AND_NATIVE_REVIEW",
     browserAccessibilityReview: browserQa.outcome,
+  },
+  activeArtifactRefresh: {
+    ...activeArtifactRun,
+    sourceCommit: pending.sourceBinding?.commit,
+    pendingLedgerSha256: files["app/i18n/pending-visible-source.json"].sha256,
+    pendingVisibleSourceStrings: pendingSourceCount,
+    routesWithPendingVisibleSource: pendingRouteCount,
+    runtimeActivation: false,
   },
   historicalValidation: {
     runDate: "2026-08-03",
@@ -166,6 +196,7 @@ const report = {
     "Automated completeness proves that a static value exists; it does not prove idiomatic or culturally fluent language.",
     "Legacy editorial and critical-copy drafts are AI-assisted evidence only and are not active runtime translations.",
     "Canonical English fallback is an intentional safety state, not native-language approval.",
+    `${pendingSourceCount} newly captured English source strings remain outside the active catalog and require translation plus accountable native review before any non-English activation.`,
     "Exact source-match counts inspect reviewed cells only and remain a triage heuristic, not a standalone defect count.",
     "Rendered browser checks are representative, not an exhaustive physical-device or assistive-technology certification.",
     "This package does not authorize deployment, signing, broadcasting, funding, or mainnet launch.",
@@ -207,6 +238,7 @@ const validation = [
   `- Exact scorecard: **${scorecard.summary.PASS} PASS / ${scorecard.summary.FAIL} FAIL / ${scorecard.summary.HOLD} HOLD / ${scorecard.summary.NOT_RUN} NOT_RUN** across ${scorecardResults} results.`,
   `- HOLD remediation ledger: [\`hold-remediation-ledger.json\`](./hold-remediation-ledger.json) separates **${holdLedger.holdSummary.externalEvidenceOnly} external-evidence gates** from **${holdLedger.holdSummary.heuristicEditorialReview} heuristic editorial reviews** without closing or downgrading any result.`,
   `- Source-bound browser/render evidence: **${renderEvidence.status}** for ${renderRecords.length}/${renderRecords.length} recorded checks.`,
+  `- Pending visible-source ledger: **${pendingSourceCount} strings across ${pendingRouteCount} routes**, all runtime-inactive and held for translation plus accountable native review.`,
   `- Public process: [\`TRANSLATION-PROCESS.md\`](./TRANSLATION-PROCESS.md) records the model revision, runtime, generation parameters, deterministic repair stages, public commit chain, and future append-only update protocol.`,
   "- Machine-readable provenance: [`translation-provenance.v1.json`](./translation-provenance.v1.json) is append-only and is validated separately against exact tracked bytes and commit ancestry.",
   `- Data license: [\`CC0-DATA-DEDICATION.md\`](./CC0-DATA-DEDICATION.md) dedicates the project-owned, non-secret localization data and QA evidence under CC0 1.0 while explicitly excluding software, third-party model weights and runtimes, trademarks, secrets, and material the project does not own.`,
@@ -220,12 +252,21 @@ const validation = [
   historicalValidation,
 ].join("\n");
 const markdown = `# DRAFT localization, usability, and accessibility QA\n\n**STATIC QA / NOT LAUNCH APPROVAL / MAINNET HOLD / NO DEPLOYMENT PERFORMED**\n\nGenerated: ${report.generatedAt}\n\n## Outcome\n\n- Catalog completeness: **${report.outcome.automatedCatalogCompleteness}** across ${report.scope.locales} locales and ${report.scope.canonicalStrings} canonical strings.\n- Reviewed-runtime policy gate: **${report.outcome.reviewedRuntimePolicyGate}** with ${report.scope.reviewedRuntimeCells} reviewed cells and ${report.scope.canonicalFallbackCells} canonical-English fallback cells.\n- Native-language signoff: **HOLD**. Every non-English locale still requires an accountable native review before it can be described as native-quality.\n- Mainnet decision: **HOLD, unchanged**. This package is not launch approval.\n\nUnreviewed target-language drafts are not served. Safety-critical copy remains canonical English until exact review evidence is committed.\n\n## Validation\n\n${validation}\n\n## Locale matrix\n\n| Route locale | Content locale | Runtime status | Empty | Reviewed cells | Fallback cells | Policy violations | Native review |\n|---|---|---|---:|---:|---:|---:|---|\n${table}\n\n## Limitations\n\n${report.limitations.map((item) => `- ${item}`).join("\n")}\n\nSee [report.json](./report.json) for source digests, samples, and machine-readable results.\n`;
+const refreshedMarkdown = markdown
+  .replace(
+    `Generated: ${report.generatedAt}`,
+    `Generated: ${report.generatedAt}\n\nActive-artifact refresh: ${report.activeArtifactRefresh.recordedAt}`,
+  )
+  .replace(
+    "- Native-language signoff: **HOLD**.",
+    `- Pending visible-source ledger: **${report.scope.pendingVisibleSourceStrings} strings across ${report.scope.routesWithPendingVisibleSource} routes** remain runtime-inactive until translation and accountable native review.\n- Native-language signoff: **HOLD**.`,
+  );
 await mkdir(auditDir, { recursive: true });
 await Promise.all([
   writeFile(join(auditDir, "report.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8"),
   writeFile(
     join(auditDir, "README.md"),
-    markdown.replace(
+    refreshedMarkdown.replace(
       "See [report.json](./report.json) for source digests, samples, and machine-readable results.",
       "See [report.json](./report.json) for source digests, samples, and machine-readable results. Run `npm run check:i18n:provenance` from `projects/star-ascent/site` to verify public commit ancestry, historical mutation counts, file hashes, evidence totals, HOLD boundaries, and the append-only run policy.",
     ),

@@ -1,0 +1,149 @@
+{
+  "schema": "iat-b3-reward-capacity-waterfall/v1",
+  "status": "REFERENCE_ONLY_BLOCKED_NON_ACTIVATING",
+  "activationReady": false,
+  "directApplicationPermitted": false,
+  "runtimeDependency": false,
+  "dailyLaw": {
+    "lawId": "IAT_B3_DAILY_LOCKDOWN_LAW_V1",
+    "writeRule": "CANONICAL_CURRENT_OPEN_DAILY_LAW_CAPABILITY_FIRST",
+    "expiryReadRequiresWrite": false,
+    "cleanupRequiresWrite": true
+  },
+  "capacity": {
+    "priorityClasses": [
+      "CCC_AGENT",
+      "CCC_ASSOCIATE",
+      "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+      "WEEKLY_FACTION",
+      "CORE"
+    ],
+    "physicalRewardLanes": [
+      "treasury",
+      "ecosystem",
+      "liquidity"
+    ],
+    "existingReservationsHavePriority": true,
+    "existingCoreReservationGrandfathered": true,
+    "existingFactionCarveoutReservationsGrandfathered": true,
+    "corePrincipalIsRewardSource": false,
+    "obligationPaymentRule": "EXACT_ATOMIC_ALL_OR_NOTHING",
+    "referenceAllocationEffect": "PURE_RESERVATION_PLAN_NO_PERSISTENCE_OR_CPI",
+    "underfundedRule": "STOP_NO_SKIP_NO_LOWER_CLASS",
+    "rewardDebtAllowed": false
+  },
+  "xBoundRewards": {
+    "sourceKindPriorityMap": {
+      "GENESIS_AIRDROP": "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+      "X_INTERACTION": "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+      "STANDARD_POSITION": "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+      "CCC_AGENT": "CCC_AGENT",
+      "CCC_ASSOCIATE": "CCC_ASSOCIATE",
+      "FACTION_FOLLOWER": "WEEKLY_FACTION"
+    },
+    "genericAirdropKindAllowed": false,
+    "coreAutomaticallyXBound": false,
+    "retroactiveSplitOfExistingObligations": false,
+    "knownNonPremiumSubscriptionTypes": [
+      "None",
+      "Basic"
+    ],
+    "premiumSubscriptionTypes": [
+      "Premium",
+      "PremiumPlus"
+    ],
+    "unknownOrMissingSubscriptionAction": "REJECT",
+    "grossBaseUnitDivisor": 10,
+    "baseTrancheNumerator": 1,
+    "upgradeTrancheNumerator": 9,
+    "trancheDenominator": 10,
+    "premiumObservationMaximumAgeSeconds": 86400,
+    "upgradeMustFollowQualification": true,
+    "upgradeIdentityBinding": "SAME_IMMUTABLE_X_USER_ID_AND_WALLET",
+    "trancheKinds": [
+      "X_BASE_10",
+      "X_PREMIUM_FULL_100",
+      "X_PREMIUM_UPGRADE_90"
+    ],
+    "trancheBasisPoints": {
+      "X_BASE_10": 1000,
+      "X_PREMIUM_FULL_100": 10000,
+      "X_PREMIUM_UPGRADE_90": 9000
+    },
+    "premiumAtQualificationTrancheKind": "X_PREMIUM_FULL_100",
+    "premiumAtQualificationAtomic": true,
+    "originalFundingDecision": "ORIGINAL_EPOCH_CLOSE_00_00_UTC",
+    "upgradeFundingDecision": "FIRST_00_00_UTC_AFTER_PREMIUM_PROOF_ACCEPTANCE",
+    "fundingAttemptsPerTranche": 1,
+    "unfundedOrMissedFundingDisposition": "NULL_TRANCHE_NO_DEBT_NO_RECREATION",
+    "baseFailureVoidsUpgrade": true,
+    "claimExpiryDays": 30,
+    "claimExpiryInterval": "HALF_OPEN",
+    "admittedDisposition": "RESERVED_UNTIL_ORIGINAL_CLAIM_EXPIRY",
+    "upgradeOrderRule": "MAX_ORIGINAL_ACTIVITY_NODE_AND_PREMIUM_PROOF_SEQUENCE",
+    "premiumProofSequenceRule": "STRICTLY_GREATER_THAN_ORIGINAL_ACTIVITY_AND_NODE",
+    "priorityClassFromSourceKind": true
+  },
+  "roundSealing": {
+    "candidateSetRule": "COMPLETE_DUE_SET_SEALED_AT_DESIGNATED_00_00_UTC",
+    "capacitySnapshotRule": "EXACT_LEDGER_WITH_EXISTING_RESERVATIONS_SEALED_AT_DESIGNATED_00_00_UTC",
+    "sealedAtMustEqualFundingRound": true,
+    "omittedDueCandidateDisposition": "NULL_MISSED_NO_DEBT_NO_REOPEN",
+    "absentSealMissDecidable": "STRICTLY_AFTER_DESIGNATED_BOUNDARY",
+    "missDecidableAtRule": "FUNDING_ROUND_PLUS_ONE_SECOND_EARLIEST",
+    "allocationExecutionDelayChangesSealedResult": false,
+    "freeAllocatorLedgerInputAllowed": false,
+    "finalizationBindsPreAndPostLedgerDigests": true,
+    "typedRoundStateRule": "BY_VALUE_SEALED_THEN_FINALIZED_NO_FREE_REPLAY_GUARD",
+    "outcomeValidationRule": "EXACT_DETERMINISTIC_RECOMPUTATION_FROM_SEALED_INPUTS",
+    "conflictingSealOrFinalizationAction": "REJECT"
+  },
+  "cccOrdering": {
+    "primary": "qualifyingActivityStartSlotAscending",
+    "secondary": "nodeActivationSlotAscending",
+    "tertiary": "xEligibilitySequenceAscending",
+    "exactTieCandidateOrdering": "QUALIFICATION_PDA_BYTES_ASCENDING",
+    "exactTieResolution": "ONE_REVEAL_EXACT_UNIFORM_WITHOUT_REPLACEMENT",
+    "revealRule": "PREBOUND_SOURCE_AND_SHA256_COMMITMENT_STRICTLY_BEFORE_FUNDING_ROUND",
+    "precommitRegistryRule": "COMPLETE_CANONICAL_ZERO_OR_ONE_ENTRY_SNAPSHOT_BOUND_IN_SEAL",
+    "exactTieRegistryRequirement": "EXACTLY_ONE_ENTRY_MATCHING_REVEAL_COMMITMENT",
+    "duplicateOrMismatchedRegistryAction": "REJECT",
+    "decisionContextRule": "DERIVED_FROM_POLICY_ROUND_CANDIDATE_CAPACITY_REGISTRY_AND_REVEAL_COMMITMENT",
+    "freeAllocatorDecisionContextAllowed": false,
+    "finalizationBindsRevealAndContext": true,
+    "operatorReroll": false
+  },
+  "faction": {
+    "existingFundingBoundary": "SEPARATE_CAPPED_COMMUNITY_CARVEOUT",
+    "newUnreservedFundingBoundary": "SHARED_REWARD_RESERVE_AFTER_STANDARD_BEFORE_CORE",
+    "sharedRewardLaneCompetition": true,
+    "existingCarveoutMayEnterNewWaterfall": false,
+    "weeklyManifestIsIndivisible": true,
+    "maximumNewWeeklyManifestsPerFundingRound": 1,
+    "individualFollowerObligationMayEnterWaterfall": false,
+    "manifestBinding": "CANONICAL_ALL_FOLLOWER_PAYOUT_DIGEST_AND_EXACT_TOTAL"
+  },
+  "allocatorReceipts": {
+    "requiredForXFundingStateTransition": true,
+    "binding": "ROUND_SEAL_PRECOMMIT_REGISTRY_FINALIZATION_OBLIGATION_EXACT_AMOUNT_AND_LANES",
+    "validationRule": "RECOMPUTE_COMPLETE_ALLOCATION_AND_FINALIZATION_FROM_SEALED_SNAPSHOT",
+    "replayStateRule": "ALLOCATOR_CONSUMES_PENDING_TYPED_ROUND_STATE_AND_RETURNS_FINALIZED_STATE",
+    "callerAssertedDispositionAllowed": false,
+    "replayAllowed": false,
+    "referencePersistenceEffect": "NONE_NON_ACTIVATING"
+  },
+  "scope": {
+    "cccGenesisActive": false,
+    "changesExistingReservations": false,
+    "changesDailyLaw": false,
+    "changesRuntimeCatalog": false,
+    "authorizesDeployment": false,
+    "chronologyAdapterAuthenticated": false,
+    "roundSnapshotAdapterAuthenticated": false,
+    "sourceKindAdapterAuthenticated": false,
+    "cccRandomnessProvenanceAuthenticated": false,
+    "cccPrecommitRegistryAuthenticated": false,
+    "roundStatePersistenceAuthenticated": false,
+    "allocatorReceiptPersistenceAuthenticated": false
+  }
+}

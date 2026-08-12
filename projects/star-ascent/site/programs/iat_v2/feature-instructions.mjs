@@ -30,6 +30,17 @@ export const IAT_V2_ROUND_STATUS = Object.freeze({
   EXPIRED_NEUTRAL: 2,
 });
 
+export const IAT_V2_ROUND_LAYOUT = Object.freeze({
+  LEGACY_V1: "legacy-v1-198",
+  HARDENED_V2: "hardened-v2-206",
+  LEGACY_V1_BYTES: 198,
+  HARDENED_V2_BYTES: 206,
+});
+
+export const IAT_V2_ROUND_ACCOUNT_DISCRIMINATOR = Object.freeze([
+  87, 127, 165, 51, 73, 78, 116, 174,
+]);
+
 export const IAT_V2_FEATURE_DISCRIMINATORS = Object.freeze({
   registerAgency: [102, 193, 24, 185, 91, 84, 85, 245],
   setEligibility: [101, 95, 132, 213, 175, 252, 123, 46],
@@ -569,20 +580,39 @@ export function parsePositionAccount(data) {
 }
 
 export function parseRoundAccount(data) {
-  const value = bytes(data, 206, "CCC round");
+  const value = Buffer.from(data);
+  const legacy = value.length === IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES;
+  const hardened = value.length === IAT_V2_ROUND_LAYOUT.HARDENED_V2_BYTES;
+  if (!legacy && !hardened) {
+    throw new Error(
+      `CCC round has unreviewed byte length ${value.length}; expected 198 or 206`,
+    );
+  }
+  if (!value.subarray(0, 8).equals(Buffer.from(IAT_V2_ROUND_ACCOUNT_DISCRIMINATOR))) {
+    throw new Error("CCC round has an unexpected Anchor account discriminator");
+  }
+
+  const randomnessOffset = legacy ? 88 : 96;
+  const registryHashOffset = legacy ? 120 : 128;
+  const decisionContextOffset = legacy ? 152 : 160;
+  const agencyCountOffset = legacy ? 184 : 192;
   return {
+    layoutVersion: legacy
+      ? IAT_V2_ROUND_LAYOUT.LEGACY_V1
+      : IAT_V2_ROUND_LAYOUT.HARDENED_V2,
+    accountBytes: value.length,
     config: new PublicKey(value.subarray(8, 40)),
     randomnessAccount: new PublicKey(value.subarray(40, 72)),
     week: value.readBigUInt64LE(72),
     commitSlot: value.readBigUInt64LE(80),
-    commitTimestamp: value.readBigInt64LE(88),
-    randomness: value.subarray(96, 128),
-    agencyRegistryHashSnapshot: value.subarray(128, 160),
-    decisionContext: value.subarray(160, 192),
-    agencyCountSnapshot: value.readUInt32LE(192),
-    selectedAgencyIndex: value.readUInt32LE(196),
-    derivationCounter: value.readUInt32LE(200),
-    status: value[204],
-    bump: value[205],
+    commitTimestamp: legacy ? null : value.readBigInt64LE(88),
+    randomness: value.subarray(randomnessOffset, randomnessOffset + 32),
+    agencyRegistryHashSnapshot: value.subarray(registryHashOffset, registryHashOffset + 32),
+    decisionContext: value.subarray(decisionContextOffset, decisionContextOffset + 32),
+    agencyCountSnapshot: value.readUInt32LE(agencyCountOffset),
+    selectedAgencyIndex: value.readUInt32LE(agencyCountOffset + 4),
+    derivationCounter: value.readUInt32LE(agencyCountOffset + 8),
+    status: value[agencyCountOffset + 12],
+    bump: value[agencyCountOffset + 13],
   };
 }

@@ -1,0 +1,218 @@
+{
+  "schema": "iat-b3-withdraw-position-production-executor-loopback/v1",
+  "status": "PASS",
+  "gitHead": "b8a99f6221f4b9c2b07ebbf36d7459e6742e142f",
+  "generatedAt": "2026-08-12T18:28:10.954Z",
+  "scope": {
+    "rpc": "http://127.0.0.1:19499",
+    "loopbackOnly": true,
+    "publicNetworkWrites": false,
+    "syntheticFixtureInstructionWrapper": true,
+    "syntheticProgramErrorMapping": true,
+    "syntheticStakeFundingHookBypass": true
+  },
+  "fixture": {
+    "productionCandidate": false,
+    "economyProgramId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+    "lawHookProgramId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+    "economyArtifactSha256": "b2c405ec2f7c5352ea3007962055118f9c5447e37d5c66874a981413c71e8969",
+    "lawArtifactSha256": "1a7e0e734b80d6749c8b663c06c2df61ccc63923ae4609935830867272565213",
+    "economySourceSha256": "7679c3d77595a6cc21f34f5aed987d414f9c7ceb29b32cd982712136158d49e4",
+    "lawHookSourceSha256": "a024789c525a1f09c0144abacec4cb6233c658d66a452cc2404f4473593d6a16",
+    "driverSha256": "9929b2c0e86cf3bba275f65425dec3e83eab4dcd8a5db9460497aaf087a5421f",
+    "cargoLockSha256": "6c465701b6d4e1210ed68bff6d46dcd429874b9fa1aecea7e096bbb351a46b00",
+    "economyBuildLogSha256": "ee81c12fbe84b666129dacdd072b8018bfc8641e74e51f7bbe56b047aa37448c",
+    "lawBuildLogSha256": "10d4cf09d75682a6267f4d396a802ad856f595d862b22939486b8dcb148e005a",
+    "runnerSha256": "8d930e759ff4ec7a5b8f6c019f82cda1e0d77416d95d0615bf718431d4f577f3"
+  },
+  "productionSource": {
+    "withdrawExecutorSha256": "0607677a0153a14fbf9291e60944b0b0d4b5bf7f0299c4cd43b4a1106c0fcf19",
+    "withdrawPreflightSha256": "7f05d3f4c3f7a3a1d6a572eb3e8b1b40a7a9544153e648201d38ef265d7632ef",
+    "stakeIngressRuntimeSha256": "2a719a5e7edd80711090e424fb9a3a3172678bf1b689fafa853afdd5ae0c15e8",
+    "runtimeLifecycleSha256": "4b41cee16f307c15071dea476a5a5ab9afb4ee114c4065849bc6913d3d2d94cd",
+    "runtimeWriteAdapterSha256": "4c98e70708a38c1accecaf38df43119cdac6d07ac308042cd91f76e1d40367da"
+  },
+  "cluster": {
+    "genesisHash": "3yowfAmXwH6PeUhunABWS2WAQQyvFACuSyf2XNY5qNjh",
+    "commitment": "finalized"
+  },
+  "mint": {
+    "extensionTypes": [
+      4,
+      14
+    ],
+    "supply": "1000000000000000000",
+    "decimals": 9,
+    "mintAuthority": null,
+    "freezeAuthority": null,
+    "confidentialAuthority": null,
+    "confidentialAutoApprove": true,
+    "confidentialAuditor": null,
+    "transferHookAuthority": null,
+    "transferHookProgramId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F"
+  },
+  "validationTlv": {
+    "owner": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+    "metaCount": 1,
+    "exactLawState": "nGicHtD2DotFM2iziTTqk4qw1Wn5C6BGcL5V3eXPHHu",
+    "readOnly": true,
+    "nonsigner": true
+  },
+  "observed": {
+    "realProductionWithdrawPositionExecutorInvoked": true,
+    "exactProductionInstructionCodecPassedThrough": true,
+    "exactTwelveAccountSuccess": true,
+    "canonicalToken2022MintAuthenticated": true,
+    "exactHookLawGraphResolved": true,
+    "lawAuthenticationPrecededMalformedInstructionDecode": true,
+    "hookFailureRolledBackDelegateConfigPositionAndTokens": true,
+    "lateWrapperFailureRolledBackConfigPositionAndTokens": true,
+    "exactConfigPositionCasObserved": true,
+    "exactStakeToDestinationTransferObserved": true,
+    "exactLocalSbfExecutionProven": true,
+    "loopbackFinalizedTransactionRollbackProven": true,
+    "requestedComputeUnitLimit": 1400000,
+    "computeUnitsConsumed": [
+      {
+        "label": "initialize-law",
+        "computeUnitsConsumed": 30124
+      },
+      {
+        "label": "initialize-validation",
+        "computeUnitsConsumed": 41655
+      },
+      {
+        "label": "initialize-stake",
+        "computeUnitsConsumed": 17667
+      },
+      {
+        "label": "seed-withdraw-state",
+        "computeUnitsConsumed": 91463
+      },
+      {
+        "label": "transfer-to-stake",
+        "computeUnitsConsumed": 55150
+      },
+      {
+        "label": "law-first",
+        "computeUnitsConsumed": 5739
+      },
+      {
+        "label": "hook-rejection",
+        "computeUnitsConsumed": 309099
+      },
+      {
+        "label": "clear-hook-fixture-marker",
+        "computeUnitsConsumed": 932
+      },
+      {
+        "label": "post-success-wrapper-rollback",
+        "computeUnitsConsumed": 419466
+      },
+      {
+        "label": "withdraw-success",
+        "computeUnitsConsumed": 419458
+      }
+    ],
+    "globalSbfStackDiagnosticsPresent": false
+  },
+  "transactions": [
+    {
+      "label": "initialize-law",
+      "signature": "4FxX8jQ9iPQkYz1TfYd7w6FAEUAX99tPMtnCVmhDNLx65dquvRvpG8VGz3wu8f75g7HZL39mRQChov8Ssk98kdA1",
+      "success": true,
+      "computeUnitsConsumed": 30124
+    },
+    {
+      "label": "initialize-validation",
+      "signature": "3rtqybykGozZWQbZHcYk9oCGctUuYsWjpzB92AEnEqkFd1gU8DZv5jN4XjGqvg2Ar1KjccaLcrjRxgzho4sGE4ou",
+      "success": true,
+      "computeUnitsConsumed": 41655
+    },
+    {
+      "label": "initialize-stake",
+      "signature": "3JnquSSj8q7xfBGf1vk5kmS3YNCqGgBRJLKcvNgVCRZEFipnPPifGzzCxZ5bc2FNcnnXiv8DskRTavb12ooVZibM",
+      "success": true,
+      "computeUnitsConsumed": 17667
+    },
+    {
+      "label": "seed-withdraw-state",
+      "signature": "5UVELG5kKCjNyUubRZS4x6eYAeQsBSXvtTNmunec2GqNQRN9PHYGFHe8a8M9dXhYStN155V5mTtoAXUdXR3X28Wq",
+      "success": true,
+      "computeUnitsConsumed": 91463
+    },
+    {
+      "label": "transfer-to-stake",
+      "signature": "3yRHL5qeiiyhr8Kxgnnd9NJKFYRCJxjbY3pMmaXAaTLwJe249AKdoJ9UdzjxXVAGYTkBVCmxzQWqLPWNjyxQJrta",
+      "success": true,
+      "computeUnitsConsumed": 55150
+    },
+    {
+      "label": "law-first",
+      "signature": "66qVNNVuCEpKvZYhGYrVRk8xed9o9BuXREkARMDQYC1ikpV6WRVrDawAH27HQZBaLwY6zpYmJ5J1GfTkeynLL9zt",
+      "success": false,
+      "computeUnitsConsumed": 5739
+    },
+    {
+      "label": "hook-rejection",
+      "signature": "2stVosXaJVBkfKb6kUadnGqVUUkxBp5GcW2HbzBiF1DBcdNp2E5WhMzZgsH1bE8tLqR4ShBeStZGYbnPQXwfruE3",
+      "success": false,
+      "computeUnitsConsumed": 309099
+    },
+    {
+      "label": "clear-hook-fixture-marker",
+      "signature": "2opnu28NUJKZ2zmPVwhXWTr5hx9N8T1AiyVgmHj7hB8CwsAoFBBqJvyhaMbKPou3phpg5JuuYsueDwfUPuyT7SE9",
+      "success": true,
+      "computeUnitsConsumed": 932
+    },
+    {
+      "label": "post-success-wrapper-rollback",
+      "signature": "cBbUDXpeYyP6351aU4XwpeLwWBnFSjHTe42p9RbcDkY5JLKoU3QtoetdrTujevmSMDmsSz3Mj8VfLcwNxfE47T2",
+      "success": false,
+      "computeUnitsConsumed": 419466
+    },
+    {
+      "label": "withdraw-success",
+      "signature": "62Zmy4aEiisYz7AjPcrQEdCwRQ9EvgWARgHm6iRUxTa96DdZvsk526eriaH6chFuRFReNyWJRDsYWZCLak9UzZ3v",
+      "success": true,
+      "computeUnitsConsumed": 419458
+    }
+  ],
+  "limits": {
+    "productionComputeBudgetProven": false,
+    "productionProgramErrorAbiProven": false,
+    "productionDispatcherProven": false,
+    "productionEntrypointProven": false,
+    "productionFinalCombinedBinaryProven": false,
+    "buildSourceClosureVerified": false,
+    "reproducibleBinaryProven": false,
+    "productionStakeIngressProven": false,
+    "productionIdentitiesFrozen": false,
+    "productionGenesisTokenDistributionConservationProven": false,
+    "activationLifecycleProven": false,
+    "fundingCeremonyProven": false,
+    "adversarialDevnetProven": false,
+    "publicDevnetExecuted": false,
+    "all15HandlersComplete": false,
+    "releaseGraphNodeComplete": false,
+    "activationReady": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetHold": true
+  },
+  "mainnetStatus": "HOLD",
+  "cleanup": {
+    "temporaryLedgerRemoved": true,
+    "validatorStopped": true,
+    "generatedKeyMaterialRemoved": true
+  },
+  "build": {
+    "cargoBuildSbfExitCode": 0,
+    "canonicalCompilerDiagnosticsPresent": false,
+    "explicitSbfStackLimitBytes": 4096,
+    "cargoVersion": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "rustcVersion": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "solanaVersion": "solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)",
+    "splTokenVersion": "spl-token-cli 5.5.0",
+    "nodeVersion": "v24.14.0"
+  }
+}

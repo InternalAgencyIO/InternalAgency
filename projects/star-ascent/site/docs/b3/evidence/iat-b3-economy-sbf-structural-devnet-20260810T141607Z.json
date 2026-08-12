@@ -1,0 +1,124 @@
+{
+  "schema": "iat-b3-economy-sbf-structural-devnet-evidence/v1",
+  "status": "PASS",
+  "scope": "STRUCTURAL_ACCOUNT_META_PREFLIGHT_ONLY",
+  "network": "solana-devnet",
+  "rpc": "https://api.devnet.solana.com",
+  "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "sourceBindings": {
+    "executionHead": "3dbeeed98c136882e12505b2f3055ef96c8b2b9a",
+    "matrixSha256": "a1bf88797d64b9236119fefcfaec01a6ba54e767cb2cc192e702d54b3cce41fa",
+    "driverSha256": "459eaef1ed560e0aeb9aabd843199cb1d9607594040828fe48f97a823288fb06",
+    "runnerSha256": "ac4228299893c0b4963b57e1ee405e52164139aadef3e5969f37dcbf41e47bd5",
+    "artifactBytes": 21120,
+    "artifactSha256": "3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588"
+  },
+  "payer": "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4",
+  "deployment": {
+    "programId": "D8FDYUMd5PZxDenEDvE3KRERzKdU8k3rrebw173HUZLh",
+    "programData": "5BZUz3HXj3wRJaH4z3TP7KGuSw2PRRVVGNj2fHQ6PFtJ",
+    "deploySignature": "5hL6zTm6Mb9o9WfwhQvhe6LH72YhrQQ8mmfYNRugpxEYn5yy5e1UJCJfvksLa5DuW6n1vYd2BxNodWYgz9Na98r4",
+    "lastDeploySlot": 482657602,
+    "programDataLamports": 148199280,
+    "executable": true,
+    "upgradeAuthority": null,
+    "loaderPaddingBytes": 0,
+    "deployedArtifactBytes": 21120,
+    "deployedArtifactSha256": "3bdffb2bcd9ee919e012d71522c8667883efea196ce5b58a2aef354b720a1588"
+  },
+  "initialAttempt": {
+    "result": "RPC_RATE_LIMITED_BEFORE_OPERATION_TRANSACTIONS",
+    "operationTransactionCount": 0,
+    "funding": [
+      {
+        "role": "readonly-signer",
+        "address": "H17DYw6GCVdeZhrLGt55sU2Z2pM8RZC2KgCLeorNGFb5",
+        "signature": "56ept9JnUvsFb3t9ngg9q9T56KkrtKhD6eyfVwxdhoiMRg72t7vR6KUYtcJkC382nQAodVZaT9DM8bhnMGzd4aB3"
+      },
+      {
+        "role": "writable-dummy",
+        "address": "9g8h5qQSwvCTjG7ipjsvE4s9SfSkhMgyfwvJKuqnTBg8",
+        "signature": "2HsDuwV2bRxZu1pTSBqytWP6QgK2JiyFzyq58gWKDcc59b6yfKJNMEVrwPDpqJeJLG5BD815zcfcPyUQyAYX1fmx"
+      },
+      {
+        "role": "readonly-dummy",
+        "address": "DdHuq9E2BXbssUpS85j2gxywYD94dPxW24BNgh9z9RLt",
+        "signature": "29z2k1nWcaQT6uRf3J3EhMiJbb8pg7r7ZvMJQRQQ5nbqpq5ab3zMG75ePLrq6XVgxZf1m2Zic4opA49dLqGxCPgH"
+      }
+    ],
+    "cleanupSignatures": [
+      "oVd2Q5JQJwZBLyfrhqnUDYyUDQ4Pk9bv4neCBUZXVBzYYNsYxrZvkwUnQBsRXt1VHwkrzi41foGoqCZFhm7hefM",
+      "58c8Ky634R92eYVmPLb66ttEXvYXxAxjVCRdCFrZFcpKhqcEHfHfmzh11aNniyED3qw4F23mSaywhnocQkufKsv7",
+      "5GwtKbFLi5QR13Sky3m94P996RrGeS5dGDvcRhzRriM4wpRZaofiww6gTavbNa93GGjm2vCg8sVZf1WWGGr4tPz4"
+    ]
+  },
+  "resume": {
+    "immutableProgramReconciledBeforeFunding": true,
+    "funding": [
+      {
+        "role": "readonly-signer",
+        "address": "Anq4j9WDMvFvXukgmz52mxV35L7X3NY4kGMb7WyS1j6Z",
+        "signature": "5GbUd7pRU627FpVM18JmgkW3CixDNbkPCGoHYHU99uDws7rbFUTxJfchiBUAhKiE4DPr9votBnUXYKmQsm8yVbzQ"
+      },
+      {
+        "role": "writable-dummy",
+        "address": "6vQyAr6woyFyqDR2R1CkcAZqdUk3Y1Bnoi7iAKSsVBxa",
+        "signature": "zozZcZowuay3MtJVRaaRskYZpMcM5vmqpWeop9Gr71ZTd3jL3aKWx3iNar39ppq3f5svkbAG6VTSZcTcNwDeVYD"
+      },
+      {
+        "role": "readonly-dummy",
+        "address": "6cdKNZJGP6WZf68ew65RfBKsYPnwbkBs9grjmrwUPsUH",
+        "signature": "3dMf4qv7kEeerCH28Eb2SoMkR69L6RyaWdQaF12SNdsSYepBkUwNtE7oGKkdemdUPeFTaLkix1aYu59ijUh5W2s6"
+      }
+    ],
+    "operations": [
+      { "index": 0, "name": "initialize_config", "signature": "53XnvenswFUi46A6CGuX4P1CU2tj9KPZTMMB4FLgnyNFNPNQbynFxTR69wG2mawBj9w2mkDDonCXAJQcijo9Uor2", "slot": 482658852, "unitsConsumed": 1739 },
+      { "index": 1, "name": "initialize_lane_vault", "signature": "eFRahS3q6WdJFTN8w4vWUT2P9KKYRGnEMNYWUWrRcH3bxgVxuqjJaf5iJ6aDa8UykqbQrPyXHGT1D1sTLv3UJ2u", "slot": 482658899, "unitsConsumed": 1953 },
+      { "index": 2, "name": "initialize_stake_vault", "signature": "4LfWW8MA8xAzzrFAGFhEwmLHNW9j5gF9KMPDszxwrdEe6fLpvDsCi1QqJpv6y8Hh9fxrig1J6u2MGcm2ar3C6Adf", "slot": 482658953, "unitsConsumed": 1846 },
+      { "index": 3, "name": "activate", "signature": "2mqQP2RoJpT7VSkwPGDEdH29M42RCzfMWjK2guCXSsByzSCq8T55tKRMvL4bdQ5XLirocPkdgdMGnek8T4syVKon", "slot": 482658993, "unitsConsumed": 2810 },
+      { "index": 4, "name": "register_agency", "signature": "4ytXSywiD3GCXWGoQShNvWG7v3yWU6KxW3r6aF5pneRFox4Vm2MuQbZCNzyqHJFtSJ5XfGVTBDX2DQXCGsnjsGnm", "slot": 482659034, "unitsConsumed": 1740 },
+      { "index": 5, "name": "set_eligibility", "signature": "46H4BVaASQVwQULXuRdhqZpaHLrpwKAhErR3tVEj2GmzGZFp1p7uYUn5YRVadKWoRGBJV6irYSnybAYYFfxPwTjp", "slot": 482659075, "unitsConsumed": 1633 },
+      { "index": 6, "name": "open_position", "signature": "2iWw1rsGFPMfDJEC2tC5SoZGd4LYvD4B275fsAKf2VTRLq37pcpSAex6G195hs1qEAMoyc8ScfgXU1DP9f27gArL", "slot": 482659126, "unitsConsumed": 2381 },
+      { "index": 7, "name": "settle_position_week", "signature": "5MqT96C6MHvjhrBDHuhGuv9Z8j3CUYFhJ8pGz1xxNuDyDoKhUxG8x6kRpRMDdCCtcCn1UELJAazopvvjGCpf7k17", "slot": 482659175, "unitsConsumed": 2597 },
+      { "index": 8, "name": "settle_core_week", "signature": "51V3JEjdkuhmYx3LWAvmPV9wY4vuNo7kWAEa3WRwkZK9FLH7ahhoeijiSPezQpnniUUd6i87P85c7kGkMMNTurKi", "slot": 482659227, "unitsConsumed": 2490 },
+      { "index": 9, "name": "claim_lane_principal", "signature": "nuuwTDzdPedFYcyTojsqBTeAvxmNds4MJsHrrB8Cusxe5Gu9AtRfvXNiC1ucEGt2vUWcm3xT14Xzmw6auP2C7cv", "slot": 482659272, "unitsConsumed": 1955 },
+      { "index": 10, "name": "withdraw_position_principal", "signature": "2rJQXnZr3mVSNrc71uySfbVhauPrA2hYWnp289pkEgz1j5ahdWPPdVPbCMuK815XgHoh7iwoNpvT3ebbJfsi2Fmg", "slot": 482659312, "unitsConsumed": 1955 },
+      { "index": 11, "name": "close_position", "signature": "2XaMYpZMFMjRwR1Jt4BAzb9M9qA4YbKZDLTk2hUuYoSwegt2fRF6Sw3szC9TRP9ipX1bhpcTAV2VyXFbXPU63D6t", "slot": 482659355, "unitsConsumed": 1519 },
+      { "index": 12, "name": "commit_round", "signature": "4bmGkUgCSUzRc8pojytT4C5q9AmvdXEYtYr3VtgUmRXNTsuXwkKXnMSjFpyNDF8kjPeyjMY4VLWcxzhj3VNhLS9V", "slot": 482659399, "unitsConsumed": 1740 },
+      { "index": 13, "name": "settle_round", "signature": "5C85bJhoA4oaWMA2dHRTWyGAfU7Um4JiVE23B8Euc3W9Yob8cm3eJExkWqbmLd8tsG3v77fBDHnGsFaMx4rfxjwD", "slot": 482659448, "unitsConsumed": 978 },
+      { "index": 14, "name": "expire_round", "signature": "2g3cBi4B63w69Wj8UpAxsee41N5C4e14ig9pGdA5X7SPf7uv5x39UmCpkfiQsXSkeZaHzsh5Fv4otiMyzGWAqh5C", "slot": 482659494, "unitsConsumed": 872 }
+    ],
+    "hostileSignerDrift": {
+      "transactionSent": false,
+      "rejected": true,
+      "customError": 3,
+      "simulationSlot": 482659543
+    },
+    "cleanupSignatures": [
+      "3dEinXw8YpEVkwqJ3kb63GKZuthremYRuLuT33j6CqJRrhFRvLks8hbuLSPveANgu8fs7uJcmn35JJs8K1JrvLiN",
+      "RMT1Hxv6q4iin2kKmzv46xDgTey4DUJ5UGGZc8wwHxnjndCvaCVBDBsZ45LVFTo181xXAVJagJ5mokwSEXesLHM",
+      "44wtjcL7MkeNNfeHdvxjqcFxNwq6FyaciBieAJbjqaCJn6yzveYMr3p7uZ97wvpKLzk5f9tT9WJ2ypEUrZXsfrSd"
+    ]
+  },
+  "independentFinalizedObservation": {
+    "observedAtUtc": "2026-08-10T14:16:07.255Z",
+    "slot": 482660051,
+    "signatureCount": 28,
+    "allSignaturesFinalizedWithoutError": true,
+    "minimumSignatureSlot": 482657602,
+    "maximumSignatureSlot": 482659628,
+    "temporaryAccountsAbsent": true,
+    "payerLamports": 1910332608,
+    "programExecutable": true,
+    "programUpgradeAuthority": null,
+    "programBytesExact": true
+  },
+  "structuralPreflightComplete": true,
+  "writesExecutedByEconomyProgram": false,
+  "productionInstructionAbiFrozen": false,
+  "fullEconomicHandlerRehearsalComplete": false,
+  "anyHandlerComplete": false,
+  "activationReady": false,
+  "mainnetExecutionAuthorized": false,
+  "mainnetStatus": "HOLD"
+}

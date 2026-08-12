@@ -2,11 +2,11 @@
 
 ## Authority
 
-The canonical working repository is:
+The canonical forward repository is `InternalAgencyIO/InternalAgency`. B3 is developed in the tracked `projects/star-ascent/site` tree on public GitHub branches, with reviewed changes merged through the repository's normal history.
 
-`C:\Users\A\Documents\Codex\2026-07-26\realtime-voice-chat-9`
+The earlier standalone V2 checkout is retained as historical source and evidence. It is not the current B3 authority and must not be copied over newer GitHub work. The V2-to-B3 transition is recorded in `public/audits/b3-canonical-lineage-20260808/manifest.json`: historical V2 evidence stays bound to its original commit, tree, and digest, while the separate B3 successor commit must remain an ancestor of the checkout under review.
 
-The GitHub monorepo copy under `projects/star-ascent/site` and any standalone exports are mirrors. They must not be edited independently or treated as fresher than this repository. A mirror update must copy a tested, committed canonical state and preserve unrelated work.
+Standalone exports remain mirrors. A mirror update must copy a tested, committed canonical state and preserve unrelated work.
 
 ## What automation may do
 

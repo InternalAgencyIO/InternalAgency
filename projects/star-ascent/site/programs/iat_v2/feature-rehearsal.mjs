@@ -1,5 +1,9 @@
 export const IAT_V2_SECONDS_PER_DAY = 86_400;
 export const IAT_V2_SECONDS_PER_WEEK = 604_800;
+export const IAT_V2_POSITION_TERM_WEEKS = 52;
+
+const IAT_V2_POSITION_SETTLED_MASK =
+  (1n << BigInt(IAT_V2_POSITION_TERM_WEEKS)) - 1n;
 
 function integerTimestamp(value, label) {
   const normalized = Number(value);
@@ -7,6 +11,90 @@ function integerTimestamp(value, label) {
     throw new Error(`${label} must be a safe integer Unix timestamp`);
   }
   return normalized;
+}
+
+function nonNegativeSafeInteger(value, label) {
+  const normalized = Number(value);
+  if (!Number.isSafeInteger(normalized) || normalized < 0) {
+    throw new Error(`${label} must be a non-negative safe integer`);
+  }
+  return normalized;
+}
+
+function positionSettledMask(value) {
+  if (
+    typeof value !== "bigint"
+    || value < 0n
+    || value > IAT_V2_POSITION_SETTLED_MASK
+  ) {
+    throw new Error("Position settled mask must be an unsigned 52-bit bigint");
+  }
+  return value;
+}
+
+export function* iterateUnsetIatV2PositionWeeks({
+  firstAccrualWeek,
+  settledMask,
+}) {
+  const firstWeek = nonNegativeSafeInteger(firstAccrualWeek, "First accrual week");
+  const lastWeek = firstWeek + IAT_V2_POSITION_TERM_WEEKS - 1;
+  if (!Number.isSafeInteger(lastWeek)) {
+    throw new Error("Position settlement range is outside the safe integer range");
+  }
+  const mask = positionSettledMask(settledMask);
+  for (let ordinal = 0; ordinal < IAT_V2_POSITION_TERM_WEEKS; ordinal += 1) {
+    if ((mask & (1n << BigInt(ordinal))) === 0n) {
+      yield Object.freeze({ ordinal, week: firstWeek + ordinal });
+    }
+  }
+}
+
+export function earliestDueIatV2PositionWeek({
+  firstAccrualWeek,
+  settledMask,
+  currentWeek,
+}) {
+  const next = iterateUnsetIatV2PositionWeeks({ firstAccrualWeek, settledMask }).next();
+  if (currentWeek === null) return null;
+  const throughWeek = nonNegativeSafeInteger(currentWeek, "Current policy week");
+  if (next.done || next.value.week > throughWeek) return null;
+  return next.value;
+}
+
+export function isIatV2LinkedRoundReadyForSettlement(round) {
+  return (
+    round !== null
+    && typeof round === "object"
+    && (round.status === 1 || round.status === 2)
+  );
+}
+
+export function selectIatV2FeatureDuePositionSettlement({
+  positions,
+  currentWeek,
+  linkedRounds = {},
+}) {
+  if (!Array.isArray(positions)) throw new Error("Feature positions must be an array");
+  const due = positions.map((position) => (
+    position
+      ? earliestDueIatV2PositionWeek({
+        firstAccrualWeek: position.firstAccrualWeek,
+        settledMask: position.settledMask,
+        currentWeek,
+      })
+      : null
+  ));
+  if (positions[0] && due[0]) {
+    return Object.freeze({ positionIndex: 0, ...due[0], round: null });
+  }
+  for (let positionIndex = 1; positionIndex < positions.length; positionIndex += 1) {
+    if (!positions[positionIndex] || !due[positionIndex]) continue;
+    const round = linkedRounds[due[positionIndex].week];
+    if (isIatV2LinkedRoundReadyForSettlement(round)) {
+      return Object.freeze({ positionIndex, ...due[positionIndex], round });
+    }
+  }
+  return null;
 }
 
 export function assertIatV2RehearsalAllocationBalances({

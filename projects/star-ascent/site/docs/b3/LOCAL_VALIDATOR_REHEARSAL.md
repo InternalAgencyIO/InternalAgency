@@ -1,0 +1,272 @@
+# B3 Daily Law local-validator rehearsal
+
+Status: **DISPOSABLE LOCAL EVIDENCE ONLY**
+
+This rehearsal exercises the optimized native Daily Law artifact against a
+disposable `solana-test-validator`. It never selects Devnet or Mainnet, never
+uses an owner wallet, and never retains generated key material or ledger state.
+Passing it is necessary local integration evidence; it is not a Mainnet or
+Devnet release authorization.
+
+## Run
+
+From `projects/star-ascent/site` on a host with Agave and SPL Token tooling:
+
+```bash
+bash scripts/run-iat-b3-local-rehearsal.sh --require-tools
+```
+
+The wrapper uses:
+
+- `target/deploy/iat_b3_law.so`;
+- `target/deploy/iat_b3_law-keypair.json` only to preserve the generated local
+  program identity;
+- a loopback RPC URL;
+- fresh disposable payer, recipient, and mint keypairs;
+- a temporary ledger beneath `target/` whose resolved path is checked before
+  recursive removal.
+
+The script traps success, failure, interruption, and termination, stops its own
+validator process, and removes the temporary directory. Standard output is
+newline-delimited JSON using schema `iat-b3-local-validator-rehearsal/v1`.
+Private-key bytes, seed phrases, and filesystem paths are not included in those
+records.
+
+## Recorded run — 2026-08-08
+
+The required-tools run passed locally with Agave `3.1.10`, SPL Token CLI
+`5.5.0`, and the optimized 141,824-byte law artifact:
+
+```text
+artifact SHA-256: 50fc66ec95bc68a71e6a1288f6fb830e2a3c996bd93348f4b832de954ca6dbc4
+local program id: 6c725SoXTRThCVgEFrG6q2f3GKLR5m3A7dv7Gf11hNrq
+actual finalized day: open, bucket 3661 / 10000
+actual selected entropy slot: 20 at finalization slot 172
+```
+
+The actual public hooked transfer moved one base unit. Missing and stale records
+rejected with custom error `7`; the deterministic locked record rejected with
+`8`; a same-day reroll rejected with `9`; a forged record rejected with `11`;
+and direct hook execution outside Token-2022 rejected with `12`. All rejected
+transfers left both token balances unchanged. The final summary reported
+`publicNetworkWrites: false` and verified cleanup before reporting
+`temporaryLedgerRemoved: true`.
+
+This is immutable historical evidence for the pre-allowlist candidate. The
+current optimized atomic-sealing candidate is 154,952 bytes with SHA-256
+`927f22cbb431caf1fe9a1cd3782194c20e292f40d72757e7b7dcdf62e8f0381c`.
+It completed a fresh disposable loopback rehearsal with the expanded authority
+and confidential-policy adversary. The older machine-readable record remains
+bound only to its historical 141,824-byte artifact and is not rewritten.
+
+The sanitized current-candidate record is
+[`evidence/local-validator-atomic-sealing-rehearsal-20260808.json`](evidence/local-validator-atomic-sealing-rehearsal-20260808.json).
+
+The sanitized historical run record is
+[`evidence/local-validator-rehearsal-20260808.json`](evidence/local-validator-rehearsal-20260808.json).
+The harness itself emits more granular newline-delimited JSON on every run.
+
+For that Daily Law runner, without `--require-tools`, missing validator,
+Token-2022 CLI, Node, checksum, or local artifact prerequisites emit a machine-
+readable `SKIP` record and exit successfully. This makes the Daily Law
+rehearsal CI-optional without turning a present but failing validator stack
+into a pass. With `--require-tools`, the same absence is an error.
+
+## Stake-ingress primitive rehearsal — 2026-08-09
+
+A separate disposable two-program fixture now proves the proposed temporary-
+delegate ingress mechanics against Agave `3.1.10`, SPL Token CLI `5.5.0`,
+Token-2022 interface `2.1.0`, and Transfer Hook interface `2.1.0`. Run it with:
+
+```bash
+bash scripts/run-iat-b3-stake-ingress-local-rehearsal.sh
+```
+
+The real loopback run proved an owner-signed exact `ApproveChecked` CPI, a
+stateless `PDA(economy, ["stake-ingress", config])` authority used with
+`invoke_signed`, a hooked `TransferChecked`, authority de-escalation to a
+non-signer at hook execution, exact allowance consumption and automatic
+delegate clearing, and exact restoration of a pre-existing delegate and its
+allowance. It also proved that a direct owner-authorized donation into the
+canonical stake vault is rejected.
+
+Stateless means the rule binds the PDA key and signer seeds only: it has no
+account-existence, lamports, owner, data length/content, executable-bit, or
+other account-state prerequisite. Before both successful ingress cases, the
+runner sent `1,000,000` lamports to the previously absent PDA and verified the
+resulting account was System Program-owned, zero-data, and non-executable. Both
+paths still succeeded unchanged. This funded state is a concrete griefing
+adversary; the fixture source and static tests separately require the adapter
+and hook to avoid every listed state predicate.
+
+A direct hook invocation outside Token-2022 transfer context rejected with
+fixture error `102` and left both balances and delegate state unchanged. The
+successful paths separately observed Token-2022 de-escalate the authenticated
+transfer authority to a hook-visible non-signer.
+
+Four failure paths left source balance, stake-vault balance, delegate, and
+delegated allowance unchanged: an injected hook rejection after approval, an
+injected post-transfer error, an actual restoration `ApproveChecked` decimals
+mismatch, and Token-2022 CPI Guard rejecting the first in-program approval.
+The runner removed its ledger and generated keys, stopped its validator, and
+reported `publicNetworkWrites: false`.
+
+The fixture artifacts are deliberately not production candidates:
+
+```text
+economy: 93,736 bytes, d535745640720c116ae50b50f2bfb30c02404f2518815546c9e54d8146e25fd2
+hook:    84,864 bytes, 70f2b25fb16d385f25948e625345c2b8d082270f2383de39ed72ed74b6407e55
+```
+
+The machine-readable record is
+[`evidence/local-validator-stake-ingress-rehearsal-20260809.json`](evidence/local-validator-stake-ingress-rehearsal-20260809.json).
+
+This does **not** claim combined production coverage. Token-2022 permits one
+hook program per mint. The law crate now has a `production-combined-hook`
+feature that embeds explicitly supplied law/economy/mint identities and calls
+the ingress rule after authenticated OPEN Daily Law, but those production
+identities are not frozen and no feature-enabled SBF has passed this runner.
+The historical run therefore exercises the reviewed ingress rule and the same
+Token-2022 `transferring` semantics in a disposable hook; the separate Daily
+Law rehearsal remains the evidence for the production law artifact. The final
+frozen binary must combine both rules and repeat both adversarial matrices.
+The law admission kernel and full transaction-local ingress/V2 finalizer state
+machine now live beside the program crates. The feature-disabled default build
+remains law-only; enabling the combined path without every explicit identity
+fails before compilation. The feature adds no dispatcher opcode or account
+meta. This does not upgrade the historical fixture into combined-binary
+evidence. The retained V2 economic math was neither modified nor exercised by
+this fixture.
+
+## Real-validator coverage
+
+Before the valid baseline, the harness constructs an otherwise exact mint with
+manual confidential-account approval. It proves initialization rejects that
+configuration and commits neither PDA creation nor either authority change.
+
+The baseline run:
+
+1. loads the exact native `.so` at Genesis under the disposable payer, revokes
+   that local upgrade authority, and verifies the program-data authority is
+   absent before exercising the law;
+2. creates a Token-2022 mint with Transfer Hook and Confidential Transfer mint
+   extensions;
+3. mints exactly `1,000,000,000,000,000,000` base units at nine decimals, leaves
+   no freeze authority, and revokes mint authority;
+4. derives the mint-bound law-state and validation PDAs;
+5. calls `initialize_law`, verifies the serialized empty state, and proves that
+   the same instruction atomically set both Transfer Hook and Confidential
+   Transfer mint authorities to null while preserving the hook program,
+   auto-approval, and null auditor key;
+6. proves a real Token-2022 transfer rejects with `DayUnfinalized` before a
+   result exists;
+7. proves a direct call cannot fake Token-2022's transferring flag;
+8. waits for more than the immutable 150-slot lag and calls permissionless
+   `finalize_day` using on-chain `Clock` and `SlotHashes`;
+9. recomputes the stored draw and verifies the chosen slot/hash is the newest
+   available ancestor at or before `finalize_slot - 150`;
+10. proves a same-day reroll rejects; and
+11. performs a real hooked transfer if the finalized result is open, or proves
+    `DailyLockdown` rejection if the actual result is selected.
+
+The run then starts isolated validators from public-account fixtures and sends
+real Token-2022 transfers through five deterministic law states:
+
+| Fixture | Expected result |
+| --- | --- |
+| missing | `DayUnfinalized`, balances unchanged |
+| stale | `DayUnfinalized`, balances unchanged |
+| open | accepted, exactly one base unit moves |
+| locked | `DailyLockdown`, balances unchanged |
+| forged | `StateCorrupt`, balances unchanged |
+
+The open, locked, and stale fixture decisions are generated with the production
+Solana domain separator and exact rejection sampler. The forged fixture starts
+from that valid open decision and deliberately changes its bucket. These are
+synthetic state-gate vectors: they prove the deployed hook recomputes and
+enforces open, locked, stale, and forged records, but they do not claim that
+those records were each produced by a separate real `finalize_day` call.
+
+## Time-boundary coverage
+
+`solana-test-validator` exposes slot warping but not a supported command for
+setting `Clock.unix_timestamp` to both sides of an arbitrary civil-time second.
+The rehearsal therefore does not misrepresent slot warp as time warp. Exact
+fixed-UTC+03:00 boundary evidence remains deterministic and cross-language:
+
+```text
+protocol_day(t) = floor((t + 10_800 - 60) / 86_400)
+```
+
+The harness unit test and the consensus/reference suites prove that local
+`00:00:59` uses the prior protocol day and local `00:01:00` begins the next one,
+including negative Unix timestamps. Runtime transfer fixtures additionally
+prove that a stale stored day fails closed.
+
+## Combined Law + stake-ingress artifact rehearsal
+
+`scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh` closes a narrower,
+executable gap that the two historical rehearsals deliberately left open. It
+generates a disposable mint key before compilation, then builds the unchanged
+`programs/iat_b3_law` source exactly once with `production-combined-hook`, the
+fixed conspicuous fixture Law/economy IDs, and that generated mint. The one
+resulting Law ELF is loaded once in each loopback validator and serves both the
+permissionless Daily Law finalizer and the Token-2022 Transfer Hook. The hook is
+not copied into the economy fixture.
+
+The separate disposable economy ELF imports the feature-gated production
+`execute_daily_law_authenticated_stake_ingress` executor. It supplies only the
+minimal fixture entrypoint and a transaction-local callback that returns
+success; therefore this evidence does **not** claim a production economy
+dispatcher, frozen ABI, or retained-V2 persistence completion.
+
+The rehearsal observes all of the following on real `solana-test-validator`
+transactions:
+
+1. the disposable Token-2022 mint has exactly the required Transfer Hook and
+   Confidential Transfer extensions, fixed supply, and revoked mint/freeze
+   authorities;
+2. real Law initialization creates the Law/validation PDAs and atomically
+   seals both extension authorities;
+3. a funded, zero-data, System-owned, non-executable ingress PDA does not grief
+   the stateless signer path;
+4. an unfinalized actual Law rejects the production-source ingress before any
+   token byte changes;
+5. permissionless finalization selects the lagged `SlotHashes` ancestor and
+   the driver independently recomputes the stored decision;
+6. five isolated deterministic synthetic states (`missing`, `stale`, `open`,
+   `locked`, and `forged`) exercise both ordinary Token-2022 transfers and the
+   production-source ingress boundary;
+7. the OPEN state accepts an ordinary ownership transfer, rejects a direct
+   hook call without Token-2022's transferring context, rejects an
+   owner-authorized direct donation to the canonical stake vault, accepts an
+   ingress with no prior delegate, and restores an existing delegate and its
+   exact allowance after ingress; and
+8. every expected failure asserts both parsed balances/delegates and SHA-256
+   hashes of the raw token-account bytes are unchanged.
+
+The five injected decisions are labeled deterministic synthetic gate variants,
+not separate finalizer provenance. All generated keys, account fixtures,
+compiled artifacts, logs, ledgers, and temporary target directories are under
+one safety-checked ignored directory and are removed on success or failure.
+The runner contains no public RPC URL and the checked evidence keeps
+`productionIdentitiesFrozen`, `finalBinary`, `devnetExecuted`,
+`mainnetExecuted`, `graphNodeCompleted`, `releaseAuthorized`, and
+`mainnetExecutionAuthorized` false with status `HOLD`.
+
+## Limits that remain
+
+- `SlotHashes` proves the chosen value was a Solana ancestor visible to the
+  executing bank. It does not expose an on-chain RPC-style commitment-finality
+  certificate.
+- The first successful caller can still influence which eligible lagged hash is
+  selected by delaying finalization. Permissionless competition reduces but
+  does not remove that timing surface.
+- Fixture injection is a test-validator capability, not a production
+  instruction or administrator path in the law program.
+- This rehearsal covers canonical Token-2022 ownership transfers. Every ported
+  B3 instruction that mutates other economic state must still invoke the shared
+  law kernel directly.
+- Devnet still needs transaction-size, compute-unit, fee, skipped-slot,
+  congestion, confidential-transfer, rollback, and client-compatibility
+  evidence before any authority can be frozen.

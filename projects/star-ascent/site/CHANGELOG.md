@@ -6,6 +6,14 @@ All timestamps and chain-specific facts require independent verification at Gene
 
 ### Added
 
+- The first native B3 Daily Law adapter with standard Token-2022 Transfer Hook
+  dispatch, one-time mint/extension binding, fixed-rent law state,
+  permissionless lagged-SlotHashes finalization, same-day no-reroll enforcement,
+  direct-call rejection, and fail-closed canonical-IAT transfer gating.
+- B3 promoted to the primary forward architecture: one canonical Token-2022 IAT
+  mint, an immutable IAT-wide Daily Law hook for every public and confidential
+  ownership transfer, optional confidential balances on the same mint, a gated
+  Mainnet path, and no sovereign validator investment.
 - Scorpion Generation editorial visual system: hot-red signal palette, moving atmosphere, responsive story panels, and Genesis-stage artwork.
 - An in-page Genesis Activation Terminal with Activation, Claim Status, and Broadcast views.
 - Canonical Dossier route and direct public document links in English and Turkish.

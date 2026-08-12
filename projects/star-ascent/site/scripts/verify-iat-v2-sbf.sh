@@ -44,6 +44,15 @@ if ! grep -Fq 'anchor_version = "1.0.2"' Anchor.toml \
   echo "FAIL: Anchor.toml toolchain pins drifted" >&2
   exit 1
 fi
+python3 - <<'PY'
+import pathlib
+import tomllib
+
+with pathlib.Path("Anchor.toml").open("rb") as source:
+    document = tomllib.load(source)
+if document.get("workspace", {}).get("members") != ["programs/iat_v2"]:
+    raise SystemExit("FAIL: Anchor workspace must contain only the reviewed iat_v2 program")
+PY
 if ! grep -Fq 'wallet = "launch/HOLD-no-signing-wallet.json"' Anchor.toml \
   || [[ -e launch/HOLD-no-signing-wallet.json ]]; then
   echo "FAIL: build-only Anchor wallet boundary drifted" >&2
@@ -139,7 +148,7 @@ print(matches[0])'
   echo "PASS: immutable container index, linux/amd64 descriptor, and local image platform match"
 } 2>&1 | tee "$sbf_log"
 
-anchor build --verifiable --ignore-keys --docker-image "$build_container_reference" 2>&1 | tee -a "$sbf_log"
+anchor build --verifiable --program-name iat_v2 --ignore-keys --docker-image "$build_container_reference" 2>&1 | tee -a "$sbf_log"
 
 if ! grep -Fxq "Using image \"$build_container_reference\"" "$sbf_log"; then
   echo "FAIL: Anchor did not use the reviewed immutable build-container digest" >&2

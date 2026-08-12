@@ -40,7 +40,7 @@ requireIn("page", [
 ]);
 requireIn("rewards", ["PROPOSED STAKING RATES // NOT ACTIVE", "400M IAT", "CCC AGENT", "CCC ASSOCIATE"]);
 requireIn("dossier", ["every week", "MAINNET: HOLD"]);
-requireIn("reader", ["POLICY V2 / NOT ACTIVE / MAINNET HOLD"]);
+requireIn("reader", ["B3 ARCHITECTURE / V2 FEATURES RETAINED / MAINNET HOLD"]);
 requireIn("en", ["Status: PROPOSED — NOT ACTIVE — MAINNET HOLD", "24 hours after Genesis", "every seven days after that", "operator cannot reroll", "all three lanes to reach zero"]);
 requireIn("tr", ["Durum: ÖNERİ — AKTİF DEĞİL — MAINNET BEKLET", "Başlangıçtan 24 saat sonra", "her yedi günde", "yeniden çekiliş yapamaz", "üç hattın da sıfıra ulaşmasına"]);
 

@@ -1,5 +1,11 @@
 [workspace]
-members = ["programs/iat_v2"]
+members = [
+    "programs/iat_b3_consensus",
+    "programs/iat_b3_economy",
+    "programs/iat_b3_law",
+    "programs/iat_b3_vault",
+    "programs/iat_v2",
+]
 resolver = "2"
 
 [profile.release]

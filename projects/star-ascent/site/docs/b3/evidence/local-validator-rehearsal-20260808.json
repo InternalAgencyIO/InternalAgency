@@ -1,0 +1,75 @@
+{
+  "schema": "iat-b3-local-validator-rehearsal-record/v1",
+  "recordedDate": "2026-08-08",
+  "status": "PASS",
+  "environment": {
+    "agave": "3.1.10",
+    "splTokenCli": "5.5.0",
+    "rpcScope": "loopback-only"
+  },
+  "artifact": {
+    "path": "target/deploy/iat_b3_law.so",
+    "sizeBytes": 141824,
+    "sha256": "50fc66ec95bc68a71e6a1288f6fb830e2a3c996bd93348f4b832de954ca6dbc4",
+    "localProgramId": "6c725SoXTRThCVgEFrG6q2f3GKLR5m3A7dv7Gf11hNrq",
+    "executable": true,
+    "upgradeAuthority": null
+  },
+  "mintShape": {
+    "program": "Token-2022",
+    "decimals": 9,
+    "supplyBaseUnits": "1000000000000000000",
+    "mintAuthority": null,
+    "freezeAuthority": null,
+    "extensions": [
+      "ConfidentialTransferMint",
+      "TransferHook"
+    ]
+  },
+  "actualFinalization": {
+    "protocolDay": "20673",
+    "finalizationSlot": 172,
+    "entropySlot": "20",
+    "drawBucket": "3661",
+    "chanceNumerator": "100",
+    "chanceDenominator": "10000",
+    "locked": false,
+    "slotHashSelectionMatched": true,
+    "decisionRecomputed": true,
+    "realHookedTransferAccepted": true,
+    "baseUnitsMoved": "1"
+  },
+  "failClosedChecks": {
+    "missingDayCustomError": 7,
+    "staleDayCustomError": 7,
+    "lockedDayCustomError": 8,
+    "sameDayRerollCustomError": 9,
+    "forgedStateCustomError": 11,
+    "directExecuteCustomError": 12,
+    "rejectedTransferBalancesChanged": false
+  },
+  "syntheticGateFixtures": [
+    "missing",
+    "stale",
+    "open",
+    "locked",
+    "forged"
+  ],
+  "boundaryEvidence": {
+    "formula": "floor((unix_timestamp + 10800 - 60) / 86400)",
+    "lastPriorDaySecond": "00:00:59",
+    "firstNewDaySecond": "00:01:00",
+    "method": "deterministic Rust and JavaScript vectors; validator Clock was not falsified"
+  },
+  "cleanup": {
+    "publicNetworkWrites": false,
+    "temporaryLedgerRemoved": true,
+    "validatorProcessRemaining": false,
+    "privateKeyMaterialRecorded": false
+  },
+  "limitations": [
+    "Synthetic fixtures prove transfer-gate enforcement but were not each produced by finalize_day.",
+    "SlotHashes exposes an ancestor hash, not an on-chain RPC commitment-finality certificate.",
+    "ConfidentialTransferMint coexistence was verified; a confidential transfer flow was not rehearsed."
+  ]
+}

@@ -41,7 +41,7 @@ function runtimeSourceFiles(root) {
   return files;
 }
 
-test("unpatched bigint-buffer advisory remains explicit and non-authorizing", () => {
+test("historical unpatched bigint-buffer advisory remains explicit and non-authorizing", () => {
   assert.equal(policy.schema, "iat-v2-dependency-advisory-preconditions/v1");
   assert.equal(policy.status, "DRAFT_QA_HOLD_UNPATCHED_DEPENDENCY");
   assert.equal(policy.mainnetStatus, "UNSCHEDULED_HOLD");
@@ -58,10 +58,22 @@ test("unpatched bigint-buffer advisory remains explicit and non-authorizing", ()
   assert.ok(Object.values(policy.assurance).every((value) => value === false));
 });
 
-test("locked protocol path matches the reviewed unpatched dependency graph", () => {
+test("current lock supersedes the historical bigint graph with the reviewed local remediation", () => {
   for (const [name, expected] of Object.entries(policy.lockedGraph)) {
+    if (name === "bigint-buffer") continue;
     assert.equal(lock.packages[`node_modules/${name}`]?.version, expected, `${name} lock version drifted`);
   }
+  assert.equal(policy.lockedGraph["bigint-buffer"], "1.1.5");
+  assert.equal(lock.packages["node_modules/bigint-buffer"].version, "1.1.6");
+  assert.equal(
+    lock.packages["node_modules/bigint-buffer"].resolved,
+    "file:vendor/bigint-buffer-1.1.6.tgz",
+  );
+  assert.match(
+    lock.packages["node_modules/bigint-buffer"].integrity,
+    /^sha512-[A-Za-z0-9+/]+={0,2}$/u,
+  );
+  assert.equal(lock.packages["node_modules/@solana/buffer-layout-utils/node_modules/bigint-buffer"], undefined);
   assert.equal(lock.packages["node_modules/@solana/spl-token"].dependencies["@solana/buffer-layout-utils"], "^0.3.0");
   assert.equal(lock.packages["node_modules/@solana/buffer-layout-utils"].dependencies["bigint-buffer"], "^1.1.5");
 });

@@ -132,6 +132,24 @@ Failed experiments, private paths, model caches, credentials, wallet material,
 and transient files are not public evidence. A failed gate is reported but not
 published as passing.
 
+### Active-artifact refresh runs
+
+A copy-only or public-wording change may update the pending visible-source
+ledger without changing the active catalog, render evidence, scorecard, or HOLD
+ledger. Such a change uses an append-only `APPEND_ONLY_ACTIVE_CONTENT_V1` run.
+The run records exact byte counts and SHA-256 digests for the current pending
+ledger, fail-closed policy, catalog, report, and supporting evidence. Before the
+run is committed, validation requires it to be the final run and checks the
+working files directly. After publication, validation derives the first Git
+commit that introduced the stable run ID and replays every recorded artifact
+from that commit. Later active-artifact changes therefore do not rewrite or
+invalidate earlier evidence runs.
+
+This mode cannot activate translations or grant release authority. Pending
+English source remains outside the active catalog; English stays `SOURCE`, all
+49 non-English locales stay `HOLD`, reviewed runtime cells stay at zero, and
+Mainnet stays `UNSCHEDULED_HOLD`.
+
 Before report generation, `npm run check:i18n:active-artifacts` verifies every
 file bound by the active public report. Any content, size, missing-file, or path
 ownership drift fails before generated evidence can be rewritten. A deliberate

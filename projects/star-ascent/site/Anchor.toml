@@ -7,6 +7,9 @@ package_manager = "npm"
 resolution = true
 skip-lint = false
 
+[workspace]
+members = ["programs/iat_v2"]
+
 [programs.localnet]
 iat_v2 = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj"
 

@@ -1,6 +1,7 @@
 {
-  "schema": "star-ascent-daily-rewards-policy/v1",
-  "status": "HOLD_UNTIL_X_BUDGET_AND_TREZOR_GATES_PASS",
+  "schema": "star-ascent-daily-rewards-policy/v2",
+  "status": "HOLD_PENDING_GLOBAL_REWARD_WATERFALL",
+  "publicationAllowed": false,
   "asset": {
     "symbol": "IAT",
     "decimals": 9,
@@ -8,33 +9,91 @@
     "mint": "PUBLISH_ONLY_AFTER_INDEPENDENT_VERIFICATION"
   },
   "genesis": {
+    "rewardSourceKind": "GENESIS_AIRDROP",
     "rewardDisplayUnits": 100,
     "maximumClaims": 1000,
-    "eligibility": "The first 1,000 verified nodes: one immutable X user ID with an observed Premium or PremiumPlus tier linked to one public Solana wallet through OAuth plus a wallet-signature challenge.",
-    "claimModel": "First-come claimable after the verified Genesis record is public. A slot is reserved only after the X link and wallet-signature challenge both complete; never sent to an unlinked or unverified wallet.",
+    "selectionRule": "FIRST_1000_ASCENDING_IMMUTABLE_BINDING_RESERVATION_SEQUENCE",
+    "bindingSnapshotRequirement": "COMPLETE_AUTHENTICATED_FIRST_1000_REGISTRY_SNAPSHOT_NO_PARTIAL_OR_OMITTED_INPUT",
+    "requiredReservationEvidence": ["bindingReservationSequence", "bindingReservedAtUtc", "bindingReservationReceiptSha256", "designatedFundingRoundAtUtc"],
+    "fundingRoundRule": "NEXT_UTC_00:00_AFTER_RESERVATION_SNAPSHOT",
+    "claimValidityInterval": "HALF_OPEN_[FUNDING_ROUND,FUNDING_ROUND_PLUS_30_DAYS)",
+    "eligibility": "The first 1,000 bound nodes: one OAuth-authenticated immutable numeric X user ID, one public Solana wallet proven by signature, one selected country, and an X account at least 40 full days old. A known None or Basic tier does not disqualify the node.",
+    "claimModel": "The nominal reward is 100 IAT. Fresh Premium or PremiumPlus receives one atomic 100% tranche. Fresh known None or Basic receives one atomic 10% tranche and one unreserved 90% Premium-upgrade entitlement under the common 30-day rule. Nothing is publishable until the global reward waterfall is implemented.",
     "onePerWallet": true,
     "onePerXAccount": true
   },
   "identityModel": {
-    "unit": "UNIQUE_WALLET_PLUS_IMMUTABLE_X_ID_PLUS_X_PREMIUM",
+    "unit": "UNIQUE_OAUTH_X_ID_PLUS_SIGNED_WALLET_PLUS_COUNTRY_WITH_OBSERVED_X_TIER",
+    "oauthRequired": true,
+    "immutableNumericXUserIdRequired": true,
+    "walletSignatureRequired": true,
+    "countryRequired": true,
     "oneHumanPerAccountRequired": false,
     "multipleQualifyingPairsPerPersonAllowed": true,
     "oneWalletPerPair": true,
     "oneImmutableXUserIdPerPair": true,
-    "allowedSubscriptionTypes": ["Premium", "PremiumPlus"],
+    "recognizedSubscriptionTypes": ["None", "Basic", "Premium", "PremiumPlus"],
+    "tenPercentSubscriptionTypes": ["None", "Basic"],
+    "fullRewardSubscriptionTypes": ["Premium", "PremiumPlus"],
     "minimumXAccountAgeDays": 40,
-    "premiumObservationMaximumAgeHours": 24,
+    "subscriptionObservationMaximumAgeHours": 24,
+    "missingUnknownOrStaleObservationAction": "FAIL_CLOSED",
+    "subscriptionDecisionKey": "subscription_type",
+    "verifiedBooleanPayoutRole": "INFORMATIONAL_ONLY_NEVER_ELIGIBILITY_OR_AMOUNT_KEY",
     "xHandleIsIdentityKey": false
   },
+  "payoutTiers": {
+    "denominatorBasisPoints": 10000,
+    "nonPremiumImmediateBasisPoints": 1000,
+    "nonPremiumDeferredBasisPoints": 9000,
+    "premiumImmediateBasisPoints": 10000,
+    "atomicTranches": true,
+    "partialPaymentsAllowed": false,
+    "rewardClass": "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+    "ownerRewardLaneLabel": "10% reward lanes",
+    "rewardSourceKinds": ["X_INTERACTION", "GENESIS_AIRDROP"],
+    "trancheKinds": {
+      "nonPremiumImmediate": "X_BASE_10",
+      "premiumImmediate": "X_PREMIUM_FULL_100",
+      "premiumUpgrade": "X_PREMIUM_UPGRADE_90"
+    },
+    "trancheBasisPoints": {
+      "X_BASE_10": 1000,
+      "X_PREMIUM_FULL_100": 10000,
+      "X_PREMIUM_UPGRADE_90": 9000
+    },
+    "deferredEntitlementReserved": false,
+    "deferredEntitlementCreatesDebt": false,
+    "deferredEntitlementActivationRule": "CREATE_ONLY_AFTER_ORIGINAL_X_BASE_10_IS_ADMITTED_IN_FULL_AT_ITS_ORIGINAL_UTC_00:00_ROUND",
+    "deferredEntitlementAuthorizationRule": "TYPED_BUILDER_LINEAGE_PLUS_AUTHENTICATED_IMMUTABLE_ORIGINAL_ADMISSION_LEDGER_RECEIPT_DIGEST",
+    "deferredEntitlementExpiryDays": 30,
+    "upgradeIdentityRule": "SAME_IMMUTABLE_X_ID_AND_WALLET",
+    "upgradeTierRule": "FRESH_PREMIUM_OR_PREMIUMPLUS_OBSERVED_LATER_AND_FRESH_AT_PROOF_ACCEPTANCE_BEFORE_EXPIRY",
+    "upgradeProofAcceptanceTimeRule": "AT_OR_AFTER_OBSERVATION_AFTER_ORIGINAL_FUNDING_ROUND_AND_BEFORE_EXPIRY",
+    "upgradeDecisionBoundary": "NEXT_UTC_00:00_STRICTLY_AFTER_PREMIUM_PROOF_ACCEPTANCE",
+    "upgradePriorityRule": "MAX_ORIGINAL_ACTIVITY_SLOT_NODE_HISTORY_START_SLOT_PREMIUM_PROOF_ACCEPTED_FINALIZED_SLOT_THEN_NODE_HISTORY_START_SLOT_NUMERIC_X_ID_WALLET",
+    "unfundedUpgradeAction": "NULL_NO_DEBT_NO_RETRY"
+  },
   "daily": {
+    "rewardSourceKind": "X_INTERACTION",
     "snapshotAtUtc": "00:00",
     "claimOpenAtUtc": "00:05",
     "rewardDisplayUnits": 12,
     "maximumClaimsPerEpoch": 1000,
     "maximumQualifyingActionsPerEpoch": 1,
-    "epoch": "Previous closed UTC day. No retroactive edits after the manifest is published.",
-    "qualifyingAction": "One original X post or reply that matches the public daily prompt, includes the canonical campaign tag, and is returned by the official X API collection job.",
-    "excludedActions": ["likes alone", "reposts alone", "duplicate posts", "copied text", "automated posting", "deleted posts", "activity outside the closed UTC window"],
+    "epoch": "Previous closed UTC day. No retroactive edits after the 00:00 UTC candidate snapshot is sealed.",
+    "qualifyingActions": ["original", "reply", "quote", "repost", "like", "follow"],
+    "actionAliases": { "retweet": "repost" },
+    "qualifyingAction": "At most one reward per bound node for one collected original, reply, quote, repost, like, or follow tied to canonical campaign-target evidence during the closed UTC epoch.",
+    "allocatorOrderingInputs": ["activityStartSlot", "nodeHistoryStartSlot", "numericXUserId", "wallet"],
+    "postEvidenceRule": "Originals, replies, quotes, and reposts require the canonical numeric X post ID, canonical X post created_at inside the closed UTC epoch, and an actor immutable X ID equal to the bound X ID.",
+    "likeAndFollowEvidenceRule": "Likes and follows have no trusted event timestamp in lookup responses. Their activityStartSlot is the append-only collector's first-observed finalized Solana slot, collectorFirstObservedAtUtc must be inside the closed UTC epoch, and each must bind the actor and canonical campaign target evidence. Caller action IDs and occurrence timestamps are forbidden; the engine derives the stable synthetic action ID from action type, actor X ID, and target ID.",
+    "requiredCommonActionEvidence": ["actionType", "actorXUserId", "activityStartSlot", "nodeHistoryStartSlot", "canonicalCampaignTargetId", "canonicalCampaignTargetEvidenceSha256"],
+    "requiredPostActionEvidence": ["numeric actionId", "xPostCreatedAtUtc"],
+    "requiredLikeFollowActionEvidence": ["collectorFirstObservedAtUtc", "collectorFirstObservedFinalizedSlot", "internally derived synthetic action ID"],
+    "actionCommitmentRule": "Bind policy schema version, epoch, UTC snapshot, candidate snapshot digest, finalized-slot hash, canonical actor/action/target evidence, and the bound wallet in deterministic commitments.",
+    "persistentReplayRule": "The candidate set rejects duplicate canonical action keys. A future append-only v2 activity ledger must enforce canonical action-key uniqueness across epochs before any admission.",
+    "excludedActions": ["duplicate or replayed canonical activity", "copied text represented as a second action", "automated posting", "deleted or unavailable evidence", "activity outside the closed UTC window", "unbound campaign target", "caller-authored like or follow action ID or occurrence timestamp", "private or unattributable bookmark", "private or unattributable view", "private or unattributable impression"],
     "claimExpiryDays": 30
   },
   "budget": {
@@ -43,23 +102,33 @@
     "maximumLifetimeBaseUnits": "4380000000000000",
     "refillAllowed": false,
     "expiredClaimsRecycled": false,
-    "consumptionRule": "Every amount placed in a published epoch permanently consumes lifetime budget, whether later claimed or expired.",
+    "consumptionRule": "Every selected node consumes the full nominal 12 IAT lifetime and epoch budget at the original 00:00 UTC round, including an unreserved 90% entitlement that may later null. Immediate payout size never reduces nominal budget consumption.",
     "oversubscriptionRule": "IAT_DAILY_BUDGET_V1_ASCENDING_SHA256",
     "oversubscriptionInputs": ["closed UTC epoch", "canonical candidate snapshot SHA-256", "predeclared finalized Solana slot hash after snapshot", "immutable X user ID", "wallet"],
-    "exhaustionRule": "Stop creating claims when 365 epochs are published, fewer than 12 IAT remain, or the next epoch would exceed either cap. Never create debt, prorate, refill, or silently reassign an expired claim."
+    "exhaustionRule": "Stop creating nominal rewards when 365 epochs are accounted, fewer than 12 nominal IAT remain, or the next epoch would exceed either cap. Never create debt, prorate, refill, retry an unfunded deferred tranche, or silently reassign an expired or nulled entitlement."
+  },
+  "globalRewardWaterfall": {
+    "status": "HOLD_PENDING_GLOBAL_REWARD_WATERFALL",
+    "implemented": false,
+    "publicationAllowed": false,
+    "requiredDecisionBoundary": "UTC_00:00",
+    "requiresExactUnlockedLaneSnapshot": true,
+    "noPartialPayments": true,
+    "unfundedRewardAction": "NULL_NO_DEBT",
+    "interpretation": "This policy and pure engine classify source-bound nominal rewards and the three exact tranche kinds only. They do not authenticate a durable registry or ledger receipt, reserve lane capacity, publish a claim root, activate a route, or authorize a transfer."
   },
   "fairness": {
-    "walletBinding": "A wallet may bind to only one X account; an X account may bind to only one wallet until a documented cooldown and re-verification complete.",
-    "auditability": "Each epoch publishes its UTC window, policy hash, eligible-wallet count, total claimable amount, manifest digest, and Merkle root before claims open.",
-    "manualHold": "Suspicious or duplicate activity is held from that epoch and documented; it is never silently reassigned."
+    "walletBinding": "A wallet may bind to only one immutable X user ID; an X user ID may bind to only one wallet until a separately documented cooldown and re-verification complete.",
+    "auditability": "A future publishable round must bind its UTC window, policy hash, exact ordered candidate snapshot, action evidence, nominal liability, immediate claims, deferred entitlements, lane decision, manifest digest, and Merkle root.",
+    "manualHold": "Missing, unknown, stale, suspicious, duplicate, or conflicting identity or activity evidence fails closed; it is never silently reassigned."
   },
   "distribution": {
-    "model": "Merkle-proof manifests and unsigned distribution batches are prepared offline. The web application has no signing key and cannot submit a transfer.",
-    "payer": "The owner-controlled Trezor Model T is the only signing device. Every bounded batch requires physical review and confirmation; no hot distributor key or separate authority is authorized.",
+    "model": "The pure engine emits non-publishable claim plans only. The web application has no signing key and cannot submit a transfer.",
+    "payer": "The owner-controlled Trezor Model T remains the only signing device. Every future bounded batch requires physical review and confirmation; no hot distributor key or separate authority is authorized.",
     "serverSigningAllowed": false,
     "automaticBroadcastAllowed": false,
-    "proofPayload": ["epoch", "wallet", "amountBaseUnits", "merkleProof", "policyHash", "manifestDigest"],
-    "publicEvidence": ["epoch manifest", "Merkle root", "claim total", "distribution transaction links", "unclaimed-expiry policy"]
+    "proofPayload": ["rewardSourceKind", "rewardLineageDigest", "epoch", "wallet", "immutableXUserId", "actionEvidenceSha256", "amountBaseUnits", "tranche", "merkleProof", "policyHash", "manifestDigest"],
+    "publicEvidence": ["complete authenticated Genesis binding snapshot", "ordered candidate snapshot", "nominal budget total", "immediate claim root", "deferred entitlement inventory", "authenticated original-admission receipt", "global waterfall decision", "distribution transaction links"]
   },
-  "disclosure": "Participation rewards are campaign rewards, not yield, not interest, not APY, and not a promise of value. Eligibility and claims remain subject to the published epoch evidence."
+  "disclosure": "Participation rewards are campaign rewards, not yield, not interest, not APY, and not a promise of value. A deferred 90% record is unreserved, creates no debt, and may become claimable exactly once only if every identity, time, freshness, and future reward-lane gate passes."
 }

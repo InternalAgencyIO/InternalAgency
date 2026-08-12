@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internalagency.io/schemas/iat-b3-external-checkpoint-provider-readiness.v1.schema.json",
+  "title": "IAT B3 external checkpoint provider-readiness review packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "profile",
+    "readiness",
+    "status",
+    "scope",
+    "referenceContract",
+    "subjectBinding",
+    "providerBinding",
+    "failureDomainSeparation",
+    "controlRequirements",
+    "terminalPredicate",
+    "runtimeAuthenticationVerified",
+    "externalMonotonicityVerified",
+    "rollbackProtectionVerified",
+    "activationReady",
+    "mainnetStatus"
+  ],
+  "properties": {
+    "$schema": { "const": "./iat-b3-external-checkpoint-provider-readiness.v1.schema.json" },
+    "schema": { "const": "iat-b3-external-checkpoint-provider-readiness/v1" },
+    "profile": { "enum": ["PRODUCTION", "TEST_FIXTURE"] },
+    "readiness": { "enum": ["BLOCKED", "READY_FOR_PROVIDER_REVIEW"] },
+    "status": { "const": "NON_ACTIVATING_PROVIDER_READINESS_REVIEW_PACKET" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract", "doesNotCertify"],
+      "properties": {
+        "contract": { "const": "EXTERNAL_CHECKPOINT_PROVIDER_READINESS_INPUTS_ONLY" },
+        "doesNotCertify": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "PROVIDER_OPERATIONAL_TRUTH" },
+            { "const": "RUNTIME_AUTHENTICATION" },
+            { "const": "EXTERNAL_MONOTONICITY" },
+            { "const": "ROLLBACK_PROTECTION" },
+            { "const": "MAINNET_OR_RELEASE_READINESS" },
+            { "const": "ACTIVATION_PAYMENT_OR_MINT_AUTHORITY" }
+          ],
+          "minItems": 6,
+          "maxItems": 6
+        }
+      }
+    },
+    "referenceContract": { "$ref": "#/$defs/referenceContract" },
+    "subjectBinding": { "$ref": "#/$defs/subjectBinding" },
+    "providerBinding": { "$ref": "#/$defs/providerBinding" },
+    "failureDomainSeparation": { "$ref": "#/$defs/failureDomainSeparation" },
+    "controlRequirements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/controlRequirement" },
+      "minItems": 12,
+      "maxItems": 12
+    },
+    "terminalPredicate": { "$ref": "#/$defs/terminalPredicate" },
+    "runtimeAuthenticationVerified": { "const": false },
+    "externalMonotonicityVerified": { "const": false },
+    "rollbackProtectionVerified": { "const": false },
+    "activationReady": { "const": false },
+    "mainnetStatus": { "const": "HOLD" }
+  },
+  "$defs": {
+    "packetStatus": { "enum": ["BLOCKED", "PACKET_COMPLETE"] },
+    "nullableString": { "type": ["string", "null"] },
+    "nullableSha256": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nullablePositiveInteger": {
+      "type": ["integer", "null"],
+      "minimum": 1
+    },
+    "evidence": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "evidenceKind",
+        "artifactSha256",
+        "subjectBindingSha256",
+        "policySha256",
+        "independentObserverId",
+        "observerIdentitySha256",
+        "capturedAtUnixSeconds",
+        "validThroughUnixSeconds",
+        "environment"
+      ],
+      "properties": {
+        "evidenceKind": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{7,95}$" },
+        "artifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "subjectBindingSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "policySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "independentObserverId": { "type": "string", "minLength": 8, "maxLength": 160 },
+        "observerIdentitySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "capturedAtUnixSeconds": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+        "validThroughUnixSeconds": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+        "environment": { "enum": ["PRODUCTION", "TEST_FIXTURE"] }
+      }
+    },
+    "referenceContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checkpointSchema",
+        "persistenceIdentitySchema",
+        "dailyLawId",
+        "checkpointAdvanceRule",
+        "localCommitOrdering",
+        "providerIntegrationPresent"
+      ],
+      "properties": {
+        "checkpointSchema": { "const": "iat-b3-reward-cas-external-checkpoint/v1" },
+        "persistenceIdentitySchema": { "const": "iat-b3-reward-cas-persistence-identity/v1" },
+        "dailyLawId": { "const": "IAT_B3_DAILY_LOCKDOWN_LAW_V1" },
+        "checkpointAdvanceRule": { "const": "GENESIS_ONLY_FIRST_ANCHOR_THEN_EXACTLY_ONE_RETAINED_CAS_COMMIT" },
+        "localCommitOrdering": { "const": "LOCAL_COMMIT_FIRST_EXTERNAL_CHECKPOINT_SECOND" },
+        "providerIntegrationPresent": { "const": false }
+      }
+    },
+    "subjectBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "productionIdentityFreezeManifestSha256",
+        "productionPersistenceIdentitySha256",
+        "productionDeploymentDomainSha256",
+        "adapterSchema",
+        "adapterSchemaVersion",
+        "schemaManifestSha256",
+        "genesisEntitySetSha256",
+        "externalNamespaceSha256",
+        "externalTrustPolicySha256",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/packetStatus" },
+        "environment": { "enum": ["PRODUCTION", "TEST_FIXTURE"] },
+        "productionIdentityFreezeManifestSha256": { "$ref": "#/$defs/nullableSha256" },
+        "productionPersistenceIdentitySha256": { "$ref": "#/$defs/nullableSha256" },
+        "productionDeploymentDomainSha256": { "$ref": "#/$defs/nullableSha256" },
+        "adapterSchema": { "$ref": "#/$defs/nullableString" },
+        "adapterSchemaVersion": { "$ref": "#/$defs/nullablePositiveInteger" },
+        "schemaManifestSha256": { "$ref": "#/$defs/nullableSha256" },
+        "genesisEntitySetSha256": { "$ref": "#/$defs/nullableSha256" },
+        "externalNamespaceSha256": { "$ref": "#/$defs/nullableSha256" },
+        "externalTrustPolicySha256": { "$ref": "#/$defs/nullableSha256" },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "providerBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "providerLegalEntityId",
+        "serviceProductId",
+        "tenantId",
+        "resourceId",
+        "serviceRegionPolicyId",
+        "termsVersion",
+        "termsSha256",
+        "retentionPolicySha256",
+        "receiptFormatId",
+        "receiptTrustRootSha256",
+        "keyRegistryResourceId",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/packetStatus" },
+        "environment": { "enum": ["PRODUCTION", "TEST_FIXTURE"] },
+        "providerLegalEntityId": { "$ref": "#/$defs/nullableString" },
+        "serviceProductId": { "$ref": "#/$defs/nullableString" },
+        "tenantId": { "$ref": "#/$defs/nullableString" },
+        "resourceId": { "$ref": "#/$defs/nullableString" },
+        "serviceRegionPolicyId": { "$ref": "#/$defs/nullableString" },
+        "termsVersion": { "$ref": "#/$defs/nullableString" },
+        "termsSha256": { "$ref": "#/$defs/nullableSha256" },
+        "retentionPolicySha256": { "$ref": "#/$defs/nullableSha256" },
+        "receiptFormatId": { "$ref": "#/$defs/nullableString" },
+        "receiptTrustRootSha256": { "$ref": "#/$defs/nullableSha256" },
+        "keyRegistryResourceId": { "$ref": "#/$defs/nullableString" },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "failureDomainSeparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "localPersistenceFailureDomainId",
+        "providerWriteFailureDomainId",
+        "administrativeFailureDomainId",
+        "credentialFailureDomainId",
+        "backupFailureDomainId",
+        "separationRule",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": { "$ref": "#/$defs/packetStatus" },
+        "environment": { "enum": ["PRODUCTION", "TEST_FIXTURE"] },
+        "localPersistenceFailureDomainId": { "$ref": "#/$defs/nullableString" },
+        "providerWriteFailureDomainId": { "$ref": "#/$defs/nullableString" },
+        "administrativeFailureDomainId": { "$ref": "#/$defs/nullableString" },
+        "credentialFailureDomainId": { "$ref": "#/$defs/nullableString" },
+        "backupFailureDomainId": { "$ref": "#/$defs/nullableString" },
+        "separationRule": { "const": "LOCAL_DB_PROVIDER_WRITE_ADMIN_CREDENTIAL_AND_BACKUP_DOMAINS_ALL_DISTINCT" },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "controlRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "requiredClaims", "evidence", "blocker"],
+      "properties": {
+        "id": {
+          "enum": [
+            "LINEARIZABLE_CAS_READBACK",
+            "AUTHENTICATED_RECEIPTS_AND_KEY_LIFECYCLE",
+            "MONOTONIC_SEQUENCE_AND_FORK_PREVENTION",
+            "AVAILABILITY_AND_RECOVERY",
+            "SINK_ROLLBACK_AND_RESTORE_DETECTION",
+            "DAILY_LAW_AND_LOCAL_HEAD_BINDING",
+            "SEQUENTIAL_CHECKPOINT_CONTINUITY",
+            "UNANCHORED_WRITE_AND_CONSUMER_GATING",
+            "UNCERTAIN_RESPONSE_RECONCILIATION",
+            "CREDENTIAL_ISOLATION",
+            "BACKUP_INCIDENT_AND_DR",
+            "INDEPENDENT_AUDIT_AND_REVIEW"
+          ]
+        },
+        "status": { "$ref": "#/$defs/packetStatus" },
+        "requiredClaims": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{7,127}$" },
+          "minItems": 2,
+          "maxItems": 8,
+          "uniqueItems": true
+        },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "terminalPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "requiredSections", "evaluationRule", "blocker"],
+      "properties": {
+        "status": { "$ref": "#/$defs/packetStatus" },
+        "requiredSections": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 15,
+          "maxItems": 15,
+          "uniqueItems": true
+        },
+        "evaluationRule": { "const": "ALL_REQUIRED_PACKETS_COMPLETE_ZERO_VIOLATIONS_ZERO_BLOCKERS" },
+        "blocker": { "$ref": "#/$defs/nullableString" }
+      }
+    }
+  }
+}

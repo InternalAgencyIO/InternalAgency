@@ -11,10 +11,31 @@ const workflowPath = resolve(
 const workflow = readFileSync(workflowPath, "utf8").replaceAll("\r\n", "\n");
 const sbfProofScriptPath = resolve(process.cwd(), "scripts/verify-iat-v2-sbf.sh");
 const sbfProofScript = readFileSync(sbfProofScriptPath, "utf8").replaceAll("\r\n", "\n");
+const currentB3LawEvidence = JSON.parse(readFileSync(
+  resolve(
+    process.cwd(),
+    "docs/b3/evidence/local-validator-atomic-sealing-rehearsal-20260808.json",
+  ),
+  "utf8",
+));
+const b3DevnetWrapper = readFileSync(
+  resolve(process.cwd(), "scripts/run-iat-b3-devnet-rehearsal.sh"),
+  "utf8",
+).replaceAll("\r\n", "\n");
+const b3DevnetDriver = readFileSync(
+  resolve(process.cwd(), "scripts/iat-b3-devnet-rehearsal-driver.mjs"),
+  "utf8",
+).replaceAll("\r\n", "\n");
+const combinedLawStakeRunner = readFileSync(
+  resolve(process.cwd(), "scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh"),
+  "utf8",
+).replaceAll("\r\n", "\n");
 const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), "package.json"), "utf8"));
 
 const requiredOrderedCommands = [
   "npm run check:iat-v2-proof-workflow",
+  "npm run check:iat-b3-spec",
+  "node --test tests/iat-b3-combined-law-reproducible-build.test.mjs",
   "npm run check:release-surface",
   "npm run check:ui-regression",
   "npm run check:iat-v2",
@@ -52,6 +73,8 @@ const requiredLaunchGateScripts = [
 ];
 const exactSignoffCommand =
   "node scripts/validate-iat-v2-independent-signoff.mjs && node scripts/validate-iat-v2-feature-signoff.mjs && node scripts/test-iat-v2-signoff-regression.mjs";
+const exactArchitectureWorkCommand =
+  "node scripts/test-iat-architecture-source-lineage-regression.mjs && node scripts/validate-iat-v2-architecture-work.mjs";
 const requiredActionPins = new Map([
   ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 3],
   ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 2],
@@ -62,9 +85,20 @@ const agaveInstallerUrl =
 const agaveInstallerSha256 = "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b";
 const anchorSourceRevision = "1314a6b83b16e6a31947b372d57988fd0e81559c";
 const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
+const combinedLawFixtureBytes = 155_496;
+const combinedLawFixtureSha256 =
+  "39f95d13821aee92ad0bd3967ab3ab2365669deda6e0775be9dfe9f6dee84c12";
+const combinedLawFixtureIdentities = Object.freeze({
+  lawProgramId: "D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY",
+  economyProgramId: "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+  canonicalMint: "3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3",
+});
 const requiredSbfArtifactPaths = [
   "projects/star-ascent/site/target/verifiable/iat_v2.so",
   "projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json",
+  "projects/star-ascent/site/target/verifiable/iat_b3_law.so",
+  "projects/star-ascent/site/target/verifiable/iat-b3-law.sha256",
+  "projects/star-ascent/site/target/verifiable/iat-b3-combined-law-stake-local-rehearsal.jsonl",
   "projects/star-ascent/site/target/idl/iat_v2.json",
   "projects/star-ascent/site/target/iat-v2-sbf-build.log",
 ];
@@ -81,6 +115,76 @@ function validateConfiguration(workflowText, scripts) {
     .map((line) => line.match(/^\s*- uses:\s+([^\s#]+)(?:\s+#.*)?$/)?.[1] ?? null)
     .filter(Boolean);
   const orderedPositions = requiredOrderedCommands.map((command) => commandLines.indexOf(command));
+
+  const combinedBuildStart = workflowText.indexOf(
+    "      - name: Build the B3 native law adapter without deploying it\n",
+  );
+  const combinedBuildEnd = workflowText.indexOf(
+    "      - name: Rehearse B3 sealed account lifecycle on an isolated local validator\n",
+    combinedBuildStart,
+  );
+  const combinedBuildStep = combinedBuildStart >= 0 && combinedBuildEnd > combinedBuildStart
+    ? workflowText.slice(combinedBuildStart, combinedBuildEnd)
+    : "";
+  const requiredCombinedBuildBindings = [
+    `IAT_B3_PRODUCTION_LAW_PROGRAM_ID: ${combinedLawFixtureIdentities.lawProgramId}`,
+    `IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: ${combinedLawFixtureIdentities.economyProgramId}`,
+    `IAT_B3_PRODUCTION_CANONICAL_MINT: ${combinedLawFixtureIdentities.canonicalMint}`,
+    "--arch v0",
+    "--no-default-features",
+    "--features production-combined-hook",
+    "--optimize-size",
+    "--offline",
+    "--skip-tools-install",
+    "--tools-version v1.52",
+    "--locked",
+  ];
+  if (
+    combinedBuildStep.length === 0
+    || requiredCombinedBuildBindings.some((binding) => !combinedBuildStep.includes(binding))
+  ) {
+    fail("B3 law SBF step must build the exact pinned combined-hook fixture offline and without deployment");
+  }
+  const combinedPrefetchStart = workflowText.indexOf(
+    "      - name: Prefetch the locked B3 combined-law and loopback-fixture crate graphs\n",
+  );
+  const combinedPrefetchStep = combinedPrefetchStart >= 0 && combinedBuildStart > combinedPrefetchStart
+    ? workflowText.slice(combinedPrefetchStart, combinedBuildStart)
+    : "";
+  const requiredCombinedPrefetchBindings = [
+    "run: |",
+    "cargo +1.97.1 fetch",
+    "--locked",
+    "--manifest-path programs/iat_b3_law/Cargo.toml",
+    "--manifest-path tests/fixtures/iat-b3-combined-law-stake/Cargo.toml",
+  ];
+  if (
+    combinedPrefetchStep.length === 0
+    || requiredCombinedPrefetchBindings.some((binding) => !combinedPrefetchStep.includes(binding))
+    || (combinedPrefetchStep.match(/cargo \+1\.97\.1 fetch/gu) ?? []).length !== 2
+    || (combinedPrefetchStep.match(/--locked/gu) ?? []).length !== 2
+  ) {
+    fail("B3 law and combined loopback fixture inputs must be checksum-prefetched from their exact locked manifests before offline builds");
+  }
+  const combinedToolsStart = workflowText.indexOf(
+    "      - name: Install the pinned B3 SBF platform tools\n",
+  );
+  const combinedToolsStep = combinedToolsStart >= 0 && combinedPrefetchStart > combinedToolsStart
+    ? workflowText.slice(combinedToolsStart, combinedPrefetchStart)
+    : "";
+  const requiredCombinedToolsBindings = [
+    "run: >-",
+    "cargo build-sbf",
+    "--install-only",
+    "--force-tools-install",
+    "--tools-version v1.52",
+  ];
+  if (
+    combinedToolsStep.length === 0
+    || requiredCombinedToolsBindings.some((binding) => !combinedToolsStep.includes(binding))
+  ) {
+    fail("B3 law SBF build must force-install the exact pinned platform-tools version before offline use");
+  }
 
   if (orderedPositions.some((position) => position === -1)) {
     const missing = requiredOrderedCommands.filter((_, index) => orderedPositions[index] === -1);
@@ -147,6 +251,31 @@ function validateConfiguration(workflowText, scripts) {
       fail(`release-proof workflow does not publish required SBF evidence artifact ${artifactPath}`);
     }
   }
+  if (
+    !workflowText.includes("Rehearse one combined B3 Law and stake-ingress artifact on isolated local validators")
+    || !workflowText.includes("bash scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh --require-tools \\")
+    || !workflowText.includes("tee target/verifiable/iat-b3-combined-law-stake-local-rehearsal.jsonl")
+  ) {
+    fail("combined Law/stake local-validator evidence must run fail-closed and publish its complete JSONL transcript");
+  }
+  if (
+    !workflowText.includes("cargo build-sbf \\")
+    || !workflowText.includes("--manifest-path programs/iat_b3_law/Cargo.toml")
+    || !workflowText.includes("--sbf-out-dir target/verifiable")
+    || !workflowText.includes("test -s target/verifiable/iat_b3_law.so")
+    || !workflowText.includes("sha256sum target/verifiable/iat_b3_law.so")
+  ) {
+    fail("B3 law adapter must retain its pinned build-only SBF and SHA-256 evidence step");
+  }
+  for (const identityFixture of [
+    "IAT_B3_PRODUCTION_LAW_PROGRAM_ID: D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY",
+    "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+    "IAT_B3_PRODUCTION_CANONICAL_MINT: 3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3",
+  ]) {
+    if (!workflowText.includes(identityFixture)) {
+      fail(`all-features host test is missing non-production combined-hook fixture ${identityFixture}`);
+    }
+  }
 
   for (const command of commandLines) {
     const scriptName = command.match(/^npm run ([^\s]+)$/)?.[1];
@@ -165,6 +294,12 @@ function validateConfiguration(workflowText, scripts) {
   }
   if (!scripts["check:iat-v2"]?.includes("npm run check:iat-v2-ci-sbf-evidence")) {
     fail("main IAT V2 validation must retain the SBF evidence regression suite");
+  }
+  if (scripts["check:iat-v2-architecture-work"] !== exactArchitectureWorkCommand) {
+    fail("architecture-work gate must run the B3 successor-lineage regression before validating retained V2 evidence");
+  }
+  if (!scripts["check:iat-v2"]?.includes("npm run check:iat-v2-architecture-work")) {
+    fail("main IAT V2 validation must retain the V2-to-B3 source-lineage gate");
   }
   if (scripts["check:iat-v2-signoff"] !== exactSignoffCommand) {
     fail("signoff package script must retain both canonical validators in order");
@@ -203,6 +338,15 @@ function validateSbfProofScript(scriptText) {
   const failures = [];
   const fail = (message) => failures.push(message);
 
+  if (!scriptText.includes('anchor build --verifiable --program-name iat_v2 --ignore-keys --docker-image "$build_container_reference"')) {
+    fail("Anchor verifiable build must be scoped to the Anchor-based iat_v2 program; native B3 programs use their dedicated cargo build-sbf step");
+  }
+  if (
+    !scriptText.includes('tomllib.load(source)')
+    || !scriptText.includes('document.get("workspace", {}).get("members") != ["programs/iat_v2"]')
+  ) {
+    fail("Anchor discovery must be fail-closed to the reviewed iat_v2 workspace before the verifiable build");
+  }
   if (!scriptText.includes('idl="target/idl/iat_v2.json"') || !scriptText.includes('[[ ! -s "$idl" ]]')) {
     fail("SBF proof must reject a missing or empty generated IDL");
   }
@@ -269,9 +413,155 @@ function validateSbfProofScript(scriptText) {
   return failures;
 }
 
+function validateB3LawArtifactBindings({
+  workflowText,
+  devnetWrapperText,
+  devnetDriverText,
+  evidence,
+}) {
+  const failures = [];
+  const fail = (message) => failures.push(message);
+  const artifact = evidence?.artifact;
+
+  if (
+    evidence?.schema !== "iat-b3-local-validator-rehearsal-record/v1"
+    || evidence?.status !== "PASS"
+    || artifact?.path !== "target/deploy/iat_b3_law.so"
+  ) {
+    fail("canonical B3 law candidate evidence must remain a PASS record for target/deploy/iat_b3_law.so");
+  }
+
+  const canonicalBytes = artifact?.sizeBytes;
+  const canonicalSha256 = artifact?.sha256;
+  if (!Number.isSafeInteger(canonicalBytes) || canonicalBytes <= 0) {
+    fail("canonical B3 law candidate evidence contains an invalid artifact size");
+  }
+  if (!/^[0-9a-f]{64}$/u.test(canonicalSha256 ?? "")) {
+    fail("canonical B3 law candidate evidence contains an invalid artifact SHA-256");
+  }
+
+  const singlePin = (text, pattern, label, normalize = (value) => value) => {
+    const matches = [...text.matchAll(pattern)];
+    if (matches.length !== 1) {
+      fail(`${label} must appear exactly once; found ${matches.length}`);
+      return null;
+    }
+    return normalize(matches[0][1]);
+  };
+  const decimal = (value) => Number(value.replaceAll("_", ""));
+
+  const bindings = [
+    {
+      label: "release-proof workflow B3 law byte pin",
+      actual: singlePin(
+        workflowText,
+        /^\s*expected_b3_law_bytes=(\d+)\s*$/gmu,
+        "release-proof workflow B3 law byte pin",
+        decimal,
+      ),
+      expected: combinedLawFixtureBytes,
+    },
+    {
+      label: "release-proof workflow B3 law SHA-256 pin",
+      actual: singlePin(
+        workflowText,
+        /^\s*expected_b3_law_sha256="([0-9a-f]{64})"\s*$/gmu,
+        "release-proof workflow B3 law SHA-256 pin",
+      ),
+      expected: combinedLawFixtureSha256,
+    },
+    {
+      label: "Devnet wrapper B3 law byte pin",
+      actual: singlePin(
+        devnetWrapperText,
+        /^expected_artifact_size="(\d+)"\s*$/gmu,
+        "Devnet wrapper B3 law byte pin",
+        decimal,
+      ),
+      expected: canonicalBytes,
+    },
+    {
+      label: "Devnet wrapper B3 law SHA-256 pin",
+      actual: singlePin(
+        devnetWrapperText,
+        /^expected_artifact_sha256="([0-9a-f]{64})"\s*$/gmu,
+        "Devnet wrapper B3 law SHA-256 pin",
+      ),
+      expected: canonicalSha256,
+    },
+    {
+      label: "Devnet driver B3 law byte pin",
+      actual: singlePin(
+        devnetDriverText,
+        /^export const EXPECTED_ARTIFACT_SIZE = ([\d_]+);\s*$/gmu,
+        "Devnet driver B3 law byte pin",
+        decimal,
+      ),
+      expected: canonicalBytes,
+    },
+    {
+      label: "Devnet driver B3 law SHA-256 pin",
+      actual: singlePin(
+        devnetDriverText,
+        /export const EXPECTED_ARTIFACT_SHA256\s*=\s*"([0-9a-f]{64})";/gu,
+        "Devnet driver B3 law SHA-256 pin",
+      ),
+      expected: canonicalSha256,
+    },
+  ];
+
+  for (const { label, actual, expected } of bindings) {
+    if (actual !== null && expected !== undefined && actual !== expected) {
+      fail(`${label} does not match its frozen artifact binding: expected ${expected}, got ${actual}`);
+    }
+  }
+
+  return failures;
+}
+
+function validateCombinedLawStakeRunner(runnerText) {
+  const failures = [];
+  const fail = (message) => failures.push(message);
+  for (const binding of [
+    'rpc_url="http://127.0.0.1:${rpc_port}"',
+    'law_id="D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY"',
+    'economy_id="GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU"',
+    'IAT_B3_PRODUCTION_CANONICAL_MINT="$mint_pubkey"',
+    "--features production-combined-hook",
+    '--bpf-program "$law_id" "$law_artifact"',
+    '--bpf-program "$economy_id" "$economy_artifact"',
+    "for variant in missing stale open locked forged",
+    'trap finish EXIT',
+    'rm -rf -- "$temp_dir"',
+    '"productionSourceIngressExecutorExercised":true',
+    '"syntheticVariantsFinalizerProvenance":false',
+    '"rawAndBalanceRollbackAsserted":true',
+    '"fixtureProductionCandidate":false',
+    '"finalBinary":false',
+    '"mainnetExecutionAuthorized":false',
+    '"statusGate":"HOLD"',
+  ]) {
+    if (!runnerText.includes(binding)) fail(`combined Law/stake runner lost binding: ${binding}`);
+  }
+  if (/api\.(?:devnet|mainnet-beta)\.solana\.com/iu.test(runnerText)) {
+    fail("combined Law/stake runner must remain loopback-only");
+  }
+  if (runnerText.includes('IAT_B3_PRODUCTION_CANONICAL_MINT="3JF3')) {
+    fail("combined Law/stake runner must compile against its disposable generated mint");
+  }
+  return failures;
+}
+
 const failures = [
   ...validateConfiguration(workflow, packageJson.scripts ?? {}),
   ...validateSbfProofScript(sbfProofScript),
+  ...validateCombinedLawStakeRunner(combinedLawStakeRunner),
+  ...validateB3LawArtifactBindings({
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  }),
 ];
 const mutationProbes = [
   {
@@ -307,6 +597,51 @@ const mutationProbes = [
     scripts: packageJson.scripts,
   },
   {
+    name: "missing combined-law SBF feature",
+    workflow: workflow.replace("            --features production-combined-hook \\\n", ""),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "unlocked combined-law crate prefetch",
+    workflow: workflow.replace(
+      "          cargo +1.97.1 fetch \\\n            --locked \\\n            --manifest-path programs/iat_b3_law/Cargo.toml\n",
+      "          cargo +1.97.1 fetch \\\n            --manifest-path programs/iat_b3_law/Cargo.toml\n",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "combined-law fixture graph not prefetched",
+    workflow: workflow.replace(
+      "          cargo +1.97.1 fetch \\\n            --locked \\\n            --manifest-path tests/fixtures/iat-b3-combined-law-stake/Cargo.toml\n",
+      "",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "combined-law loopback runner bypassed",
+    workflow: workflow.replace(
+      "          bash scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh --require-tools \\\n",
+      "          true \\\n",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "floating combined-law platform tools",
+    workflow: workflow.replace(
+      "          --force-tools-install\n          --tools-version v1.52\n",
+      "          --force-tools-install\n",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "substituted combined-law fixture identity",
+    workflow: workflow.replaceAll(
+      combinedLawFixtureIdentities.canonicalMint,
+      combinedLawFixtureIdentities.lawProgramId,
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
     name: "drifted Agave installer checksum",
     workflow: workflow.replace(agaveInstallerSha256, `${agaveInstallerSha256.slice(0, -1)}0`),
     scripts: packageJson.scripts,
@@ -330,6 +665,11 @@ const mutationProbes = [
       "            projects/star-ascent/site/target/iat-v2-sbf-build.log\n",
       "",
     ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "B3 law SBF build bypassed",
+    workflow: workflow.replace("test -s target/verifiable/iat_b3_law.so", "true"),
     scripts: packageJson.scripts,
   },
   {
@@ -357,6 +697,14 @@ const mutationProbes = [
         .replace(" && npm run check:iat-v2-ci-sbf-evidence", ""),
     },
   },
+  {
+    name: "B3 successor-lineage regression omitted",
+    workflow,
+    scripts: {
+      ...packageJson.scripts,
+      "check:iat-v2-architecture-work": "node scripts/validate-iat-v2-architecture-work.mjs",
+    },
+  },
 ];
 
 for (const probe of mutationProbes) {
@@ -365,7 +713,43 @@ for (const probe of mutationProbes) {
   }
 }
 
+const combinedLawStakeRunnerMutationProbes = [
+  {
+    name: "combined Law/stake feature omitted",
+    runner: combinedLawStakeRunner.replace("  --features production-combined-hook \\\n", ""),
+  },
+  {
+    name: "combined Law/stake dynamic mint replaced",
+    runner: combinedLawStakeRunner.replace(
+      'IAT_B3_PRODUCTION_CANONICAL_MINT="$mint_pubkey"',
+      'IAT_B3_PRODUCTION_CANONICAL_MINT="3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3"',
+    ),
+  },
+  {
+    name: "combined Law/stake HOLD flipped",
+    runner: combinedLawStakeRunner.replace('"statusGate":"HOLD"', '"statusGate":"READY"'),
+  },
+  {
+    name: "combined Law/stake rollback claim omitted",
+    runner: combinedLawStakeRunner.replace('"rawAndBalanceRollbackAsserted":true', '"rawAndBalanceRollbackAsserted":false'),
+  },
+];
+
+for (const probe of combinedLawStakeRunnerMutationProbes) {
+  if (validateCombinedLawStakeRunner(probe.runner).length === 0) {
+    failures.push(`mutation probe did not fail closed: ${probe.name}`);
+  }
+}
+
 const sbfProofMutationProbes = [
+  {
+    name: "workspace-wide Anchor discovery reintroduced",
+    script: sbfProofScript.replace('["programs/iat_v2"]', '["programs/*"]'),
+  },
+  {
+    name: "workspace-wide Anchor build reintroduced",
+    script: sbfProofScript.replace(" --program-name iat_v2", ""),
+  },
   {
     name: "missing generated IDL size gate",
     script: sbfProofScript.replace('if [[ ! -s "$idl" ]]; then', 'if [[ -s "$idl" ]]; then'),
@@ -425,11 +809,100 @@ for (const probe of sbfProofMutationProbes) {
   }
 }
 
+const canonicalB3LawBytes = currentB3LawEvidence.artifact.sizeBytes;
+const canonicalB3LawSha256 = currentB3LawEvidence.artifact.sha256;
+const driftedCombinedLawFixtureBytes = combinedLawFixtureBytes + 1;
+const driftedCombinedLawFixtureSha256 = `${combinedLawFixtureSha256.slice(0, -1)}${
+  combinedLawFixtureSha256.endsWith("0") ? "1" : "0"
+}`;
+const driftedB3LawBytes = canonicalB3LawBytes + 1;
+const driftedB3LawSha256 = `${canonicalB3LawSha256.slice(0, -1)}${canonicalB3LawSha256.endsWith("0") ? "1" : "0"}`;
+const driftedB3LawEvidenceBytes = structuredClone(currentB3LawEvidence);
+driftedB3LawEvidenceBytes.artifact.sizeBytes = driftedB3LawBytes;
+const driftedB3LawEvidenceSha256 = structuredClone(currentB3LawEvidence);
+driftedB3LawEvidenceSha256.artifact.sha256 = driftedB3LawSha256;
+const b3CandidateBindingMutationProbes = [
+  {
+    name: "drifted workflow B3 law byte pin",
+    workflowText: workflow.replace(
+      `expected_b3_law_bytes=${combinedLawFixtureBytes}`,
+      `expected_b3_law_bytes=${driftedCombinedLawFixtureBytes}`,
+    ),
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted workflow B3 law SHA-256 pin",
+    workflowText: workflow.replace(
+      combinedLawFixtureSha256,
+      driftedCombinedLawFixtureSha256,
+    ),
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet wrapper B3 law byte pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper.replace(
+      `expected_artifact_size="${canonicalB3LawBytes}"`,
+      `expected_artifact_size="${driftedB3LawBytes}"`,
+    ),
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet wrapper B3 law SHA-256 pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper.replace(canonicalB3LawSha256, driftedB3LawSha256),
+    devnetDriverText: b3DevnetDriver,
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet driver B3 law byte pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver.replace(
+      `EXPECTED_ARTIFACT_SIZE = ${canonicalB3LawBytes.toLocaleString("en-US").replaceAll(",", "_")}`,
+      `EXPECTED_ARTIFACT_SIZE = ${driftedB3LawBytes.toLocaleString("en-US").replaceAll(",", "_")}`,
+    ),
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted Devnet driver B3 law SHA-256 pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver.replace(canonicalB3LawSha256, driftedB3LawSha256),
+    evidence: currentB3LawEvidence,
+  },
+  {
+    name: "drifted canonical evidence B3 law byte pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: driftedB3LawEvidenceBytes,
+  },
+  {
+    name: "drifted canonical evidence B3 law SHA-256 pin",
+    workflowText: workflow,
+    devnetWrapperText: b3DevnetWrapper,
+    devnetDriverText: b3DevnetDriver,
+    evidence: driftedB3LawEvidenceSha256,
+  },
+];
+
+for (const probe of b3CandidateBindingMutationProbes) {
+  if (validateB3LawArtifactBindings(probe).length === 0) {
+    failures.push(`mutation probe did not fail closed: ${probe.name}`);
+  }
+}
+
 if (failures.length) {
   failures.forEach((message) => console.error(`FAIL: ${message}`));
   process.exit(1);
 }
 
 console.log(
-  `IAT V2 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, exact head/checkout/public-run/container-bound binary/IDL evidence, canonical manifest validation, exact-source-head concurrency, read-only permissions, and 24 fail-closed mutation probes remain bound.`,
+  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, iat_v2-only Anchor discovery/build, exact head/checkout/public-run/container-bound binary/IDL evidence, fixture-combined B3 workflow and canonical-evidence Devnet SBF pins, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and ${mutationProbes.length + combinedLawStakeRunnerMutationProbes.length + sbfProofMutationProbes.length + b3CandidateBindingMutationProbes.length} fail-closed mutation probes remain bound.`,
 );

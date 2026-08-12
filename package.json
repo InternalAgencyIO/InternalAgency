@@ -19,7 +19,7 @@
     "video:scene": "powershell -ExecutionPolicy Bypass -File scripts/video/render-scene.ps1",
     "video:all": "powershell -ExecutionPolicy Bypass -File scripts/video/render-all.ps1",
     "video:enrich": "powershell -ExecutionPolicy Bypass -File scripts/video/render-enrichment.ps1",
-    "test": "node --test test/scene-engine.test.js test/main-security.test.js",
+    "test": "node --test test/scene-engine.test.js test/main-security.test.js test/video-assets-validator.test.js",
     "smoke": "electron . --screenshot=artifacts/radiance-overlay.png"
   },
   "devDependencies": {

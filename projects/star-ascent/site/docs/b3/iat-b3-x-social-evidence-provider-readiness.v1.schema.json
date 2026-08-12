@@ -1,0 +1,1224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internalagency.io/schemas/iat-b3-x-social-evidence-provider-readiness.v1.schema.json",
+  "title": "IAT B3 X and social reward evidence provider-readiness review packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "profile",
+    "readiness",
+    "status",
+    "scope",
+    "referenceContract",
+    "subjectBinding",
+    "xProviderBinding",
+    "walletAndIdentityBinding",
+    "collectorAndTargetBinding",
+    "receiptTrustBinding",
+    "privacyTermsAndRetention",
+    "failureDomainSeparation",
+    "controlRequirements",
+    "terminalPredicate",
+    "providerEvidenceAuthenticationVerified",
+    "collectorCompletenessVerified",
+    "walletBindingAuthenticationVerified",
+    "allocatorLineageAuthenticationVerified",
+    "externalMonotonicityVerified",
+    "rollbackProtectionVerified",
+    "runtimeConsumerGatingVerified",
+    "activationReady",
+    "mainnetOrReleaseReady",
+    "mainnetStatus"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./iat-b3-x-social-evidence-provider-readiness.v1.schema.json"
+    },
+    "schema": {
+      "const": "iat-b3-x-social-evidence-provider-readiness/v1"
+    },
+    "profile": {
+      "enum": [
+        "PRODUCTION",
+        "TEST_FIXTURE"
+      ]
+    },
+    "readiness": {
+      "enum": [
+        "BLOCKED",
+        "REVIEW_PACKET_COMPLETE"
+      ]
+    },
+    "status": {
+      "const": "NON_ACTIVATING_X_SOCIAL_EVIDENCE_REVIEW_PACKET"
+    },
+    "scope": {
+      "const": {
+        "contract": "X_SOCIAL_EVIDENCE_REVIEW_PACKET_INPUTS_ONLY",
+        "doesNotCertify": [
+          "PROVIDER_OPERATIONAL_TRUTH",
+          "X_ACCOUNT_EQUALS_ONE_BIOLOGICAL_HUMAN",
+          "BIOLOGICAL_SYBIL_RESISTANCE",
+          "COLLECTOR_COMPLETENESS",
+          "RUNTIME_AUTHENTICATION",
+          "EXTERNAL_MONOTONICITY_OR_ROLLBACK_PROTECTION",
+          "MAINNET_OR_RELEASE_READINESS",
+          "ACTIVATION_PAYMENT_OR_MINT_AUTHORITY"
+        ]
+      }
+    },
+    "referenceContract": {
+      "const": {
+        "rewardPolicySchema": "star-ascent-daily-rewards-policy/v2",
+        "rewardLedgerSchemaVersion": 2,
+        "rewardCapacityPolicySchema": "iat-b3-reward-capacity-waterfall/v1",
+        "dailyLawId": "IAT_B3_DAILY_LOCKDOWN_LAW_V1",
+        "oauthScopes": [
+          "users.read"
+        ],
+        "recognizedSubscriptionTypes": [
+          "None",
+          "Basic",
+          "Premium",
+          "PremiumPlus"
+        ],
+        "tenPercentSubscriptionTypes": [
+          "None",
+          "Basic"
+        ],
+        "fullRewardSubscriptionTypes": [
+          "Premium",
+          "PremiumPlus"
+        ],
+        "verifiedBooleanPayoutRole": "INFORMATIONAL_ONLY_NEVER_ELIGIBILITY_OR_AMOUNT_KEY",
+        "minimumXAccountAgeDays": 40,
+        "subscriptionObservationMaximumAgeHours": 24,
+        "qualifyingActions": [
+          "original",
+          "reply",
+          "quote",
+          "repost",
+          "like",
+          "follow"
+        ],
+        "actionAliases": {
+          "retweet": "repost"
+        },
+        "postActions": [
+          "original",
+          "reply",
+          "quote",
+          "repost"
+        ],
+        "collectorFirstObservedActions": [
+          "like",
+          "follow"
+        ],
+        "trancheBasisPoints": {
+          "X_BASE_10": 1000,
+          "X_PREMIUM_FULL_100": 10000,
+          "X_PREMIUM_UPGRADE_90": 9000
+        },
+        "rewardSourceKinds": [
+          "X_INTERACTION",
+          "GENESIS_AIRDROP"
+        ],
+        "upgradeProofRule": "SAME_X_ID_AND_WALLET_FRESH_LATER_PREMIUM_ACCEPTED_AFTER_ORIGINAL_ROUND_BEFORE_EXPIRY",
+        "upgradeDecisionBoundary": "NEXT_UTC_00:00_STRICTLY_AFTER_PROOF_ACCEPTANCE",
+        "dailyDecisionBoundary": "EXACT_UTC_00:00_ALL_OR_NULL_NO_BACKFILL",
+        "partialPaymentsAllowed": false,
+        "providerIntegrationPresent": false
+      }
+    },
+    "subjectBinding": {
+      "$ref": "#/$defs/subjectBinding"
+    },
+    "xProviderBinding": {
+      "$ref": "#/$defs/xProviderBinding"
+    },
+    "walletAndIdentityBinding": {
+      "$ref": "#/$defs/walletAndIdentityBinding"
+    },
+    "collectorAndTargetBinding": {
+      "$ref": "#/$defs/collectorAndTargetBinding"
+    },
+    "receiptTrustBinding": {
+      "$ref": "#/$defs/receiptTrustBinding"
+    },
+    "privacyTermsAndRetention": {
+      "$ref": "#/$defs/privacyTermsAndRetention"
+    },
+    "failureDomainSeparation": {
+      "$ref": "#/$defs/failureDomainSeparation"
+    },
+    "controlRequirements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/controlRequirement"
+      },
+      "minItems": 17,
+      "maxItems": 17
+    },
+    "terminalPredicate": {
+      "$ref": "#/$defs/terminalPredicate"
+    },
+    "providerEvidenceAuthenticationVerified": {
+      "const": false
+    },
+    "collectorCompletenessVerified": {
+      "const": false
+    },
+    "walletBindingAuthenticationVerified": {
+      "const": false
+    },
+    "allocatorLineageAuthenticationVerified": {
+      "const": false
+    },
+    "externalMonotonicityVerified": {
+      "const": false
+    },
+    "rollbackProtectionVerified": {
+      "const": false
+    },
+    "runtimeConsumerGatingVerified": {
+      "const": false
+    },
+    "activationReady": {
+      "const": false
+    },
+    "mainnetOrReleaseReady": {
+      "const": false
+    },
+    "mainnetStatus": {
+      "const": "HOLD"
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "evidenceKind",
+        "artifactSha256",
+        "subjectBindingSha256",
+        "policySha256",
+        "independentObserverId",
+        "observerFailureDomainId",
+        "observerIdentitySha256",
+        "independentReviewerId",
+        "reviewerFailureDomainId",
+        "reviewerIdentitySha256",
+        "capturedAtUnixSeconds",
+        "validThroughUnixSeconds",
+        "maximumAgeSeconds",
+        "environment",
+        "evidenceDescriptorSha256"
+      ],
+      "properties": {
+        "evidenceKind": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{7,127}$"
+        },
+        "artifactSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "subjectBindingSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "independentObserverId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "observerFailureDomainId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "observerIdentitySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "independentReviewerId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "reviewerFailureDomainId": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "reviewerIdentitySha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "capturedAtUnixSeconds": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "validThroughUnixSeconds": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "maximumAgeSeconds": {
+          "const": "2592000"
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "evidenceDescriptorSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "controlRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "status",
+        "requiredClaims",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{7,127}$"
+        },
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "requiredClaims": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{7,191}$"
+          },
+          "minItems": 1
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "terminalPredicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "requiredSections",
+        "evaluationRule",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "requiredSections": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{7,127}$"
+          },
+          "minItems": 24,
+          "maxItems": 24
+        },
+        "evaluationRule": {
+          "const": "ALL_REQUIRED_PACKETS_COMPLETE_ZERO_VIOLATIONS_ZERO_BLOCKERS"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "subjectBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "productionIdentityFreezeManifestSha256",
+        "productionCheckpointProviderReviewPacketSha256",
+        "productionDeploymentDomainSha256",
+        "productionPersistenceIdentitySha256",
+        "rewardPolicyArtifactSha256",
+        "rewardLedgerSchemaArtifactSha256",
+        "epochEngineArtifactSha256",
+        "rewardCapacityPolicySha256",
+        "dailyLawBindingSha256",
+        "actionEvidenceContractSha256",
+        "sourceLineageContractSha256",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "productionIdentityFreezeManifestSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "productionCheckpointProviderReviewPacketSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "productionDeploymentDomainSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "productionPersistenceIdentitySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rewardPolicyArtifactSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rewardLedgerSchemaArtifactSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "epochEngineArtifactSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rewardCapacityPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "dailyLawBindingSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "actionEvidenceContractSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceLineageContractSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "xProviderBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "oauthScopePolicySha256",
+        "termsSha256",
+        "rateLimitPolicySha256",
+        "paginationPolicySha256",
+        "tierObservationPolicySha256",
+        "providerLegalEntityId",
+        "developerProjectId",
+        "applicationId",
+        "apiProductId",
+        "apiVersion",
+        "oauthAuthorizationEndpointId",
+        "oauthTokenEndpointId",
+        "userLookupEndpointId",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "oauthScopePolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "termsSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rateLimitPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "paginationPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "tierObservationPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "providerLegalEntityId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "developerProjectId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "applicationId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "apiProductId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "apiVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "oauthAuthorizationEndpointId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "oauthTokenEndpointId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "userLookupEndpointId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "walletAndIdentityBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "walletChallengeDomainSha256",
+        "countryEvidencePolicySha256",
+        "accountAgePolicySha256",
+        "identityUniquenessPolicySha256",
+        "tombstonePolicySha256",
+        "walletChallengeFormatId",
+        "walletVerifierServiceId",
+        "bindingStoreResourceId",
+        "identityTombstoneStoreResourceId",
+        "sybilClaimBoundary",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "walletChallengeDomainSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "countryEvidencePolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "accountAgePolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "identityUniquenessPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "tombstonePolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "walletChallengeFormatId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "walletVerifierServiceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "bindingStoreResourceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "identityTombstoneStoreResourceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "sybilClaimBoundary": {
+          "const": "ONE_X_ID_ONE_WALLET_NOT_ONE_BIOLOGICAL_HUMAN"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "collectorAndTargetBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "activityCollectionPolicySha256",
+        "campaignTargetRegistrySha256",
+        "finalizedSlotPolicySha256",
+        "completenessPolicySha256",
+        "replayPolicySha256",
+        "collectorServiceId",
+        "collectorResourceId",
+        "collectorRegionPolicyId",
+        "campaignTargetRegistryResourceId",
+        "finalizedSlotProviderId",
+        "replayStoreResourceId",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "activityCollectionPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "campaignTargetRegistrySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "finalizedSlotPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "completenessPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "replayPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "collectorServiceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "collectorResourceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "collectorRegionPolicyId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "campaignTargetRegistryResourceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "finalizedSlotProviderId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "replayStoreResourceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "receiptTrustBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "receiptDomainSha256",
+        "trustRootSha256",
+        "rotationPolicySha256",
+        "revocationPolicySha256",
+        "compromisePolicySha256",
+        "antiReplayPolicySha256",
+        "receiptFormatId",
+        "signatureAlgorithmId",
+        "keyRegistryResourceId",
+        "currentKeyId",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "receiptDomainSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "trustRootSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rotationPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "revocationPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "compromisePolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "antiReplayPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "receiptFormatId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "signatureAlgorithmId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "keyRegistryResourceId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "currentKeyId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "privacyTermsAndRetention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "privacyPolicySha256",
+        "xTermsSha256",
+        "dataInventorySha256",
+        "retentionScheduleSha256",
+        "deletionAndAppealPolicySha256",
+        "tombstonePseudonymizationPolicySha256",
+        "incidentResponsePolicySha256",
+        "privacyPolicyVersion",
+        "xTermsVersion",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "privacyPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "xTermsSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "dataInventorySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "retentionScheduleSha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "deletionAndAppealPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "tombstonePseudonymizationPolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "incidentResponsePolicySha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "privacyPolicyVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "xTermsVersion": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "failureDomainSeparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "environment",
+        "xProviderFailureDomainId",
+        "collectorRuntimeFailureDomainId",
+        "finalizedSlotFailureDomainId",
+        "localPersistenceFailureDomainId",
+        "externalCheckpointFailureDomainId",
+        "administrativeFailureDomainId",
+        "credentialCustodyFailureDomainId",
+        "backupFailureDomainId",
+        "independentObserverFailureDomainId",
+        "independentReviewerFailureDomainId",
+        "separationRule",
+        "evidence",
+        "blocker"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "BLOCKED",
+            "PACKET_COMPLETE"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "PRODUCTION",
+            "TEST_FIXTURE"
+          ]
+        },
+        "xProviderFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "collectorRuntimeFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "finalizedSlotFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "localPersistenceFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "externalCheckpointFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "administrativeFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "credentialCustodyFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "backupFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "independentObserverFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "independentReviewerFailureDomainId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 8,
+          "maxLength": 160
+        },
+        "separationRule": {
+          "const": "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_OBSERVER_AND_REVIEWER_DOMAINS_ALL_DISTINCT"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "blocker": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

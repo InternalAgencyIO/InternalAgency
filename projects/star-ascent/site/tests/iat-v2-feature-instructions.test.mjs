@@ -4,6 +4,8 @@ import { PublicKey } from "@solana/web3.js";
 import { getAssociatedTokenAddressSync } from "@solana/spl-token";
 import {
   IAT_V2_ROLE,
+  IAT_V2_ROUND_ACCOUNT_DISCRIMINATOR,
+  IAT_V2_ROUND_LAYOUT,
   IAT_V2_ROUND_STATUS,
   buildClaimLanePrincipalInstruction,
   buildClosePositionInstruction,
@@ -226,6 +228,7 @@ test("feature account parsers preserve every reviewed field offset", () => {
   assert.equal(parsedPosition.principalReturned, true);
 
   const roundData = Buffer.alloc(206);
+  Buffer.from(IAT_V2_ROUND_ACCOUNT_DISCRIMINATOR).copy(roundData, 0);
   mint.toBuffer().copy(roundData, 8);
   owner.toBuffer().copy(roundData, 40);
   roundData.writeBigUInt64LE(8n, 72);
@@ -240,9 +243,63 @@ test("feature account parsers preserve every reviewed field offset", () => {
   roundData[204] = IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL;
   roundData[205] = 252;
   const parsedRound = parseRoundAccount(roundData);
+  assert.equal(parsedRound.layoutVersion, IAT_V2_ROUND_LAYOUT.HARDENED_V2);
+  assert.equal(parsedRound.accountBytes, IAT_V2_ROUND_LAYOUT.HARDENED_V2_BYTES);
   assert.equal(parsedRound.week, 8n);
   assert.equal(parsedRound.commitTimestamp, 1_900_000_000n);
   assert.equal(parsedRound.agencyCountSnapshot, 100);
   assert.equal(parsedRound.selectedAgencyIndex, 42);
   assert.equal(parsedRound.status, IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL);
+});
+
+test("the Round parser preserves the deployed 198-byte V1 layout without inventing a timestamp", () => {
+  const legacyRound = Buffer.alloc(IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES);
+  Buffer.from(IAT_V2_ROUND_ACCOUNT_DISCRIMINATOR).copy(legacyRound, 0);
+  mint.toBuffer().copy(legacyRound, 8);
+  owner.toBuffer().copy(legacyRound, 40);
+  legacyRound.writeBigUInt64LE(8n, 72);
+  legacyRound.writeBigUInt64LE(480_373_914n, 80);
+  legacyRound.fill(0xa5, 88, 120);
+  legacyRound.fill(0xb6, 120, 152);
+  legacyRound.fill(0xc7, 152, 184);
+  legacyRound.writeUInt32LE(2, 184);
+  legacyRound.writeUInt32LE(1, 188);
+  legacyRound.writeUInt32LE(0, 192);
+  legacyRound[196] = IAT_V2_ROUND_STATUS.SETTLED;
+  legacyRound[197] = 253;
+
+  const parsed = parseRoundAccount(legacyRound);
+  assert.equal(parsed.layoutVersion, IAT_V2_ROUND_LAYOUT.LEGACY_V1);
+  assert.equal(parsed.accountBytes, IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES);
+  assert.equal(parsed.week, 8n);
+  assert.equal(parsed.commitSlot, 480_373_914n);
+  assert.equal(parsed.commitTimestamp, null);
+  assert.deepEqual([...parsed.randomness], Array(32).fill(0xa5));
+  assert.deepEqual([...parsed.agencyRegistryHashSnapshot], Array(32).fill(0xb6));
+  assert.deepEqual([...parsed.decisionContext], Array(32).fill(0xc7));
+  assert.equal(parsed.agencyCountSnapshot, 2);
+  assert.equal(parsed.selectedAgencyIndex, 1);
+  assert.equal(parsed.derivationCounter, 0);
+  assert.equal(parsed.status, IAT_V2_ROUND_STATUS.SETTLED);
+  assert.equal(parsed.bump, 253);
+
+  for (const unreviewedBytes of [197, 199, 205, 207]) {
+    assert.throws(
+      () => parseRoundAccount(Buffer.alloc(unreviewedBytes)),
+      new RegExp(`unreviewed byte length ${unreviewedBytes}`, "u"),
+    );
+  }
+
+  for (const reviewedBytes of [
+    IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES,
+    IAT_V2_ROUND_LAYOUT.HARDENED_V2_BYTES,
+  ]) {
+    const hostile = Buffer.alloc(reviewedBytes);
+    Buffer.from(IAT_V2_ROUND_ACCOUNT_DISCRIMINATOR).copy(hostile);
+    hostile[0] ^= 0xff;
+    assert.throws(
+      () => parseRoundAccount(hostile),
+      /unexpected Anchor account discriminator/u,
+    );
+  }
 });

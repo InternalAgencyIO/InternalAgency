@@ -2,6 +2,17 @@
 
 This is the live public-build repository for the STAR ASCENT Genesis surface.
 
+## Primary protocol direction
+
+**B3 is the primary forward architecture.** V2 remains the complete behavioral,
+economic, launch-control, and evidence baseline until B3 passes its Devnet,
+audit, migration, and Mainnet gates. B3 keeps the Daily Law IAT-wide while
+making confidential balances optional. Mainnet remains **HOLD**; this status is
+an implementation direction, not a deployment or migration claim.
+
+Start with [`docs/b3/README.md`](docs/b3/README.md) and the gated
+[`docs/b3/MAINNET_PATH.md`](docs/b3/MAINNET_PATH.md).
+
 The work is intentionally visible: source, public documents, visual iterations, and production decisions are committed as the project advances. The repository is a record of what is present—not a substitute for independent verification.
 
 ## Live surfaces and localization status

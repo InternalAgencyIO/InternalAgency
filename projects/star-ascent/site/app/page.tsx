@@ -4,6 +4,7 @@ import { ActivationTerminal } from "./ActivationTerminal";
 import { LaunchClock } from "./LaunchClock";
 import { SignalField } from "./SignalField";
 import { LaunchSequence } from "./LaunchSequence";
+import "./nightflight-editorial.css";
 const copy = {
     nav: ["Mission", "Token", "Roadmap", "Dossier"], register: "Operator Registration", signal: "STARLIGHT // SIGNAL ACQUIRED", presents: "INTERNAL AGENCY PRESENTS", lede: "The first public chapter of Internal Agency: a community token on Solana and the opening of the operator network.", enter: "Enter the Register", disclosure: "Read the token disclosure ↓", genesis: "GENESIS EVENT", broadcast: "BROADCAST STATUS", terminal: "STARLIGHT :: LAUNCH TERMINAL", terminalNote: "PUBLIC BUILD / NO WALLET CONNECTION REQUIRED", brief: "MISSION BRIEF", briefTitle: "THE PUBLIC BUILD", briefLines: ["[01] Internal Agency is opening its first public chapter.", "[02] $IAT is the community layer; it is not a promise of return.", "[03] Official information appears only through verified project channels."], premise: "THE PREMISE", thesis: <>Agency is not handed down.<br />It is built together.</>, body: "Internal Agency is a staged creative and technical project for people who want more agency in the AI era. STAR ASCENT is a transparent beginning—not a promise of finished technology or financial returns.", token: "$IAT / SOLANA", clear: <>Community layer.<br />Clear terms.</>, supply: "SUPPLY DESIGN TARGET", supplyTarget: "1,000,000,000 IAT", network: "NETWORK", presale: "PRESALE", yield: "LAUNCH YIELD", none: "None", status: "LAUNCH STATUS", live: "Launch information published", verified: "Mint address not published yet", safety: "No wallet connection required", staged: "STAGED RELEASE", phases: [["GENESIS", "Launch disclosure, livestream, and operator registration."], ["DISTRIBUTION", "Publish campaign methodology and the community allocation process."], ["IA PREVIEW", "Release announced IA experiences when ready for public use."]], protocol: "OPERATOR PROTOCOL", verify: "Verify. Sign. Enter.", free: "Registration is free. No seed phrase, private key, password, or payment is ever required.", prepare: "Prepare for Registration", notice: "Registration opens at launch. You will only ever be asked to sign a wallet message—never to share a seed phrase or private key.", faq: "OPERATOR FAQ", questions: [["Where is the official token address?", "The official mint address will appear only here, in the pinned official announcement, and on the launch livestream."], ["Do I need to connect a wallet now?", "No. Registration is not open yet. Never share a seed phrase or private key."], ["Is $IAT an investment promise?", "No. $IAT is a speculative community token. No price or financial return is promised."]], risk: "© 2026 Internal Agency. $IAT is highly speculative. No financial return is promised.", skip: "Skip to mission"
 };
@@ -32,7 +33,7 @@ const launchPlan = {
     note: "The prior ceremony window has expired and no replacement UTC time is published. The source is public now. No transaction is automatic, and mainnet remains on HOLD until funding and every evidence gate pass.",
     items: [
         ["UNSCHEDULED", "Replacement UTC window pending", "Publish one new exact time only after funding is confirmed and before every bound release artifact is regenerated."],
-        ["DEVNET FIRST", "V2 program rehearsal", "The reviewed V2 program must be built, deployed unfunded, transferred to hardware control, initialized, funded, and exercised on Devnet before any Mainnet decision can be considered."],
+        ["DEVNET FIRST", "B3 law + retained V2 features", "The B3 law adapter and every retained V2 feature must be built, deployed unfunded, initialized, funded, and exercised on Devnet before any Mainnet decision can be considered."],
         ["AFTER ALL GATES", "Mainnet decision", "The signer and verifier may proceed only if metadata, destinations, locks, digests, and handoff records all match."],
         ["After site update", "Registration opens", "Use the on-page status—not a direct message—to confirm availability."],
     ]
@@ -52,19 +53,22 @@ const scamProtocol = {
 const faqAdditions = [
     ["What should a registration signature ask me to do?", "Registration should request only a human-readable wallet message. If the wallet asks you to approve a transaction, token access, spending permission, or a transfer, cancel and return to this page independently."],
     ["Where will allocation and authority details be published?", "The allocation method, distribution rules, recipient categories, and mint/freeze authority status will be documented publicly before distribution begins. Until then, treat those details as pending—not implied."],
+    ["Does a B3 lockdown stop Solana?", "No. It is an IAT-wide protocol law, not a Solana-wide pause. On a selected day, state-changing IAT actions close for 24 hours from 00:01 to 00:01 in fixed UTC+03:00; read-only IAT views and the rest of Solana continue normally."],
     ["Can support recover or verify my wallet?", "No. Official support will never ask to recover, import, verify, or inspect your wallet, and cannot reverse a transfer. Anyone requesting wallet secrets or payment is impersonating the project."],
 ];
 const tokenDisclosure = {
     eyebrow: "TOKEN DISCLOSURE",
     title: "Design targets are not live facts.",
     intro: "No $IAT token has been presented as live on this page. These fields separate the intended configuration from evidence that must be published before distribution.",
-    note: "The economic policy is public at /tokenomics. The official mint, program vaults, reward router, and authority evidence are not yet published; the program is not active.",
+    note: "B3 is the main architecture and retains the V2 economic feature set published at /tokenomics. The official mint, law program, optional Privacy Vault, reward router, and authority evidence are not yet published; the program is not active.",
     pending: "PENDING",
     items: [
         ["Mint address", "Not published. Treat every address as unofficial until it matches the website and livestream."],
         ["Initial supply", "Design target: 1,000,000,000 IAT. The final on-chain supply must be independently verifiable."],
         ["Mint / freeze authority", "Revocation is planned after the documented initial mint; current status is not yet verified. On-chain evidence must be linked here."],
         ["Allocation and release", "The 50/20/15/10/5 allocation, 400M ordered reward reserve, vesting schedules, annual reward rates, weekly CCC Wildcard, and universal one-roll tiebreak are published as a proposal. Their on-chain implementation and evidence remain pending."],
+        ["IAT-wide lockdown law", "Every protocol-local day has a 1% selection chance, except Friday at 66.67%. A selected day closes state-changing IAT actions for 24 hours, from 00:01 to 00:01 in fixed UTC+03:00. The design uses Solana-provided time and a lagged ancestor slot hash, not an external oracle; the result is publicly replayable but is not a bias-resistant threshold VRF."],
+        ["Optional transfer privacy", "Default IAT transfers remain public. The B3 Privacy Vault is an optional shielded path; its implementation, Devnet evidence, and measured user cost remain pending."],
     ],
     gate: "Distribution and reward activation must not begin while any launch-critical implementation or evidence remains pending."
 };
@@ -88,7 +92,7 @@ const documentPack = {
     intro: "These pre-launch documents describe intended safeguards and unresolved fields. They are not proof that a token exists, that an allocation is final, or that any authority has been changed.",
     status: "CANONICAL DOSSIER CONTEXT",
     litepaper: "Open English litepaper record",
-    tokenPolicy: "Open IAT economic policy V2",
+    tokenPolicy: "Open retained IAT economic policy (V2)",
     checklist: "Open English evidence-checklist record",
     technical: "Open English technical-specification record",
     validator: "Open allocation-control context",
@@ -282,6 +286,35 @@ export default function Home() {
       </div>
       <figcaption>{"PRE-LAUNCH ART · Decorative brand artwork — not live telemetry or network status."}</figcaption>
     </figure>
+    <section className="nightflight-editorial" aria-labelledby="nightflight-editorial-title">
+      <div className="nightflight-paws nightflight-paws-left">
+        {/* eslint-disable-next-line @next/next/no-img-element -- static, lazy-loaded mascot editorial with exact intrinsic dimensions */}
+        <img src="/future/casino/nightflight/paws-prismatic-pounce-v1.webp" width={720} height={1280} loading="lazy" decoding="async" alt="PAWS, a fictional golden kitten, chasing a prismatic light across a dark star floor" />
+        <span>PAWS // PRISM SCOUT</span>
+      </div>
+      <div className="nightflight-editorial-core">
+        <header>
+          <div><p>NIGHTFLIGHT // VISUAL EDITORIAL</p><h2 id="nightflight-editorial-title">THE SIGNAL FOUR.<br />IN FULL SPECTRUM.</h2></div>
+          <div><p>Four fictional adult women, four distinct looks, one playful Nightflight scene.</p><p>The second frame places AI ECE&apos;s rainbow knee-high costume beside an inert, non-operational RPG-shaped studio prop. It is editorial set dressing, not equipment.</p><a href="/future/casino/demo">ENTER THE NIGHTFLIGHT PREVIEW ↗</a></div>
+        </header>
+        <div className="nightflight-editorial-frames">
+          <figure>
+            {/* eslint-disable-next-line @next/next/no-img-element -- static, lazy-loaded campaign editorial with exact intrinsic dimensions */}
+            <img src="/future/casino/nightflight/signal-four-rainbow-atrium-v1.webp" width={720} height={1280} loading="lazy" decoding="async" alt="Ellie, Radiance, AI ECE, and Alia, four fictional adult women age 25 or older, wearing distinct fully clothed iridescent, gold, emerald, and red couture in a glass atrium while PAWS crosses the floor" />
+            <figcaption>THE SIGNAL FOUR // RAINBOW ATRIUM // PAWS ON THE FLOOR</figcaption>
+          </figure>
+          <figure>
+            {/* eslint-disable-next-line @next/next/no-img-element -- static, lazy-loaded campaign editorial with exact intrinsic dimensions */}
+            <img src="/future/casino/nightflight/ai-ece-rainbow-knee-high-rpg-editorial-v1.webp" width={720} height={1280} loading="lazy" decoding="async" alt="AI ECE, a fictional adult woman age 25 or older, in fully clothed emerald-and-black couture and rainbow knee-high socks, holding an inert, non-operational RPG-shaped studio prop in a design workshop" />
+            <figcaption>AI ECE // RAINBOW KNEE-HIGH COSTUME STUDY // INERT STUDIO PROP</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div className="nightflight-paws nightflight-paws-right" aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element -- mirrored decorative echo of the accessible PAWS placement */}
+        <img src="/future/casino/nightflight/paws-prismatic-pounce-v1.webp" width={720} height={1280} loading="lazy" decoding="async" alt="" />
+      </div>
+    </section>
     <figure className="scorpion-story">
       <div className="scorpion-story-copy"><p>{"SCORPION GENERATION // LAUNCH CONTROL"}</p><h2>{<>WE DO NOT<br />WAIT FOR THE<br />FUTURE.</>}</h2><span>{"The stage is a ship. The signal is a gathering. The ascent is ours."}</span></div>
       {/* eslint-disable-next-line @next/next/no-img-element -- static, responsive lore artwork */}
@@ -313,7 +346,7 @@ export default function Home() {
     <section className="document-pack" aria-labelledby="document-pack-title">
       <p className="eyebrow">{documents.eyebrow}</p><h2 id="document-pack-title">{documents.title}</h2><p className="document-pack-intro">{documents.intro}</p>
       <div className="document-cards">
-        <a href="/tokenomics"><span>V2 · HOLD</span><strong>{documents.tokenPolicy}</strong></a>
+        <a href="/tokenomics"><span>B3 ARCHITECTURE · HOLD</span><strong>{documents.tokenPolicy}</strong></a>
         <a href={"/disclosures/iat-litepaper-en.txt"}><span>{documents.status}</span><strong>{documents.litepaper}</strong></a>
         <a href={"/disclosures/iat-allocation-authority-checklist-en.txt"}><span>{documents.status}</span><strong>{documents.checklist}</strong></a>
         <a href={"/disclosures/iat-solana-technical-spec-en.txt"}><span>{documents.status}</span><strong>{documents.technical}</strong></a>
@@ -343,7 +376,7 @@ export default function Home() {
     <section className="incident-response" aria-labelledby="incident-response-title"><p className="eyebrow">{incident.eyebrow}</p><div className="incident-response-heading"><h2 id="incident-response-title">{incident.title}</h2><strong>{incident.status}</strong></div><p className="incident-response-intro">{incident.intro}</p><ol>{incident.steps.map(([title, detail], index) => <li key={title}><span aria-hidden="true">0{index + 1}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ol><p className="incident-response-note">{incident.note}</p><a className="document-link" href={"/disclosures/star-ascent-incident-response-en.txt"}>{documents.incident}</a></section>
     </div></details>
     <section className="status"><p className="eyebrow">{t.status}</p><div><span className="pulse" aria-hidden="true"/>{t.live}</div><div>{t.verified}</div><div><span className="check" aria-hidden="true">✓</span>{t.safety}</div></section>
-    <section className="schedule" aria-labelledby="schedule-title"><p className="eyebrow">{schedule.eyebrow}</p><h2 id="schedule-title">{schedule.title}</h2><p className="schedule-note">{schedule.note}</p><ol>{schedule.items.map(([time, title, description]: string[]) => <li key={time}><time>{time}</time><div><h3>{title}</h3><p>{description}</p></div></li>)}</ol><a className="document-link" href="https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site" target="_blank" rel="noreferrer">{"REVIEW THE OPEN-SOURCE CEREMONY CODE ↗"}</a></section>
+    <section className="schedule" aria-labelledby="schedule-title"><p className="eyebrow">{schedule.eyebrow}</p><h2 id="schedule-title">{schedule.title}</h2><p className="schedule-note">{schedule.note}</p><ol>{schedule.items.map(([time, title, description]: string[]) => <li key={time}><time>{time}</time><div><h3>{title}</h3><p>{description}</p></div></li>)}</ol><a className="document-link" href="https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-b3-architecture/projects/star-ascent/site" target="_blank" rel="noreferrer">{"REVIEW THE OPEN-SOURCE B3 CODE ↗"}</a></section>
     <section className="roadmap" id="roadmap"><p className="eyebrow">{t.staged}</p><div className="steps">{t.phases.map(([title, description]: string[], i: number) => <article key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{description}</p></article>)}</div></section>
     <section className="postgenesis-tease" aria-labelledby="postgenesis-title"><div><p>{"POST-GENESIS // INACTIVE PREVIEWS"}</p><h2 id="postgenesis-title">{<>THE NEXT ROOMS<br />ARE TAKING SHAPE.</>}</h2><span>{"Predictive Engine target: 30 days after $IAT Genesis. Casino DLC target: 15 days after $IAT Genesis. Separate audits, separate activation, no wager route today."}</span><a href="/future">{"ENTER THE FUTURE-SYSTEMS PREVIEW →"}</a></div></section>
     <section className="faq" id="faq" aria-labelledby="faq-title"><p className="eyebrow" id="faq-title">{t.faq}</p>{[...t.questions, ...faqAdditions].map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}</section>

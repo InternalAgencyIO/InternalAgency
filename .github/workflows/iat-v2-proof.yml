@@ -48,6 +48,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run check:iat-v2-proof-workflow
+      - run: npm run check:iat-b3-spec
+      - run: node --test tests/iat-b3-combined-law-reproducible-build.test.mjs
       - run: npm run check:release-surface
       - run: npm run check:ui-regression
       - run: npm run check:iat-v2
@@ -62,7 +64,16 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-      - run: cargo test --workspace --all-targets --locked
+      - name: Test default feature isolation
+        run: cargo test --workspace --all-targets --locked
+      - name: Test feature-gated runtime bridges
+        # Conspicuous host-test identities exercise the fail-closed combined
+        # hook build. They are not deployment, Devnet, or Mainnet identities.
+        env:
+          IAT_B3_PRODUCTION_LAW_PROGRAM_ID: D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY
+          IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU
+          IAT_B3_PRODUCTION_CANONICAL_MINT: 3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3
+        run: cargo test --workspace --all-targets --all-features --locked
 
   verifiable-sbf:
     name: Verifiable Solana SBF build
@@ -82,6 +93,8 @@ jobs:
           node-version: 24
       - name: Install the pinned official Solana and Anchor toolchain
         run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends libudev-dev pkg-config
           rustup toolchain install 1.97.1 --profile minimal
           agave_install_init="$RUNNER_TEMP/agave-install-init-v3.1.10"
           curl --proto '=https' --tlsv1.2 -sSfL \
@@ -97,18 +110,90 @@ jobs:
             --locked \
             --force \
             anchor-cli
+          cargo +1.97.1 install \
+            --version 5.5.0 \
+            --locked \
+            --force \
+            spl-token-cli
           {
             echo "$HOME/.local/share/solana/install/active_release/bin"
             echo "$HOME/.cargo/bin"
           } >> "$GITHUB_PATH"
+      - name: Verify Privacy Vault journal transition CAS
+        run: node --test tests/iat-b3-privacy-vault-journal-cas-sqlite.test.mjs
       - name: Produce deterministic build evidence
         run: bash scripts/verify-iat-v2-sbf.sh
+      - name: Install the pinned B3 SBF platform tools
+        run: >-
+          cargo build-sbf
+          --install-only
+          --force-tools-install
+          --tools-version v1.52
+      - name: Prefetch the locked B3 combined-law and loopback-fixture crate graphs
+        # Network access is confined to Cargo's checksum-verified locked input
+        # fetch. Both artifact builds remain strictly offline below.
+        run: |
+          cargo +1.97.1 fetch \
+            --locked \
+            --manifest-path programs/iat_b3_law/Cargo.toml
+          cargo +1.97.1 fetch \
+            --locked \
+            --manifest-path tests/fixtures/iat-b3-combined-law-stake/Cargo.toml
+      - name: Build the B3 native law adapter without deploying it
+        # These conspicuous fixture identities prove that the combined Daily
+        # Law + stake-ingress artifact builds reproducibly. They are neither
+        # production identities nor deployment authorization.
+        env:
+          IAT_B3_PRODUCTION_LAW_PROGRAM_ID: D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY
+          IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU
+          IAT_B3_PRODUCTION_CANONICAL_MINT: 3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3
+        run: |
+          mkdir -p target/verifiable
+          cargo build-sbf \
+            --manifest-path programs/iat_b3_law/Cargo.toml \
+            --sbf-out-dir target/verifiable \
+            --arch v0 \
+            --no-default-features \
+            --features production-combined-hook \
+            --optimize-size \
+            --offline \
+            --skip-tools-install \
+            --tools-version v1.52 \
+            -- \
+            --locked
+          test -s target/verifiable/iat_b3_law.so
+          # Fixture build gate only: this proves one combined artifact shape;
+          # it does not assert production identities, Devnet parity, or launch readiness.
+          expected_b3_law_bytes=155496
+          actual_b3_law_bytes="$(stat --format='%s' target/verifiable/iat_b3_law.so)"
+          if [[ "$actual_b3_law_bytes" != "$expected_b3_law_bytes" ]]; then
+            echo "B3 law candidate size mismatch: expected $expected_b3_law_bytes bytes, got $actual_b3_law_bytes" >&2
+            exit 1
+          fi
+          expected_b3_law_sha256="39f95d13821aee92ad0bd3967ab3ab2365669deda6e0775be9dfe9f6dee84c12"
+          printf '%s  %s\n' "$expected_b3_law_sha256" target/verifiable/iat_b3_law.so \
+            | sha256sum --check --strict -
+          sha256sum target/verifiable/iat_b3_law.so \
+            | tee target/verifiable/iat-b3-law.sha256
+      - name: Rehearse B3 sealed account lifecycle on an isolated local validator
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          bash scripts/run-iat-b3-account-lifecycle-local.sh
+      - name: Rehearse B3 production-source Token-2022 stake ingress on an isolated local validator
+        run: bash scripts/run-iat-b3-stake-ingress-local-rehearsal.sh
+      - name: Rehearse one combined B3 Law and stake-ingress artifact on isolated local validators
+        run: |
+          bash scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh --require-tools \
+            | tee target/verifiable/iat-b3-combined-law-stake-local-rehearsal.jsonl
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: iat-v2-verifiable-sbf
+          name: iat-v2-b3-verifiable-sbf
           path: |
             projects/star-ascent/site/target/verifiable/iat_v2.so
             projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json
+            projects/star-ascent/site/target/verifiable/iat_b3_law.so
+            projects/star-ascent/site/target/verifiable/iat-b3-law.sha256
+            projects/star-ascent/site/target/verifiable/iat-b3-combined-law-stake-local-rehearsal.jsonl
             projects/star-ascent/site/target/idl/iat_v2.json
             projects/star-ascent/site/target/iat-v2-sbf-build.log
           if-no-files-found: error

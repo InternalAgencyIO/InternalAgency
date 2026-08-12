@@ -1,5 +1,10 @@
 # X OAuth activation configuration
 
+Status: retained Premium-only v1 HOLD configuration. The current callback must
+stay fail-closed until a reviewed v2 migration can bind known `None`/`Basic`
+observations to non-publishable 10%/90% reward records without weakening OAuth,
+wallet, age, uniqueness, Daily Law, or reward-capacity gates.
+
 The node service uses X OAuth 2.0 Authorization Code with PKCE. It is deliberately inactive until the deployment secret manager contains the values below.
 
 ## Configure in the deployment secret manager
