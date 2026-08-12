@@ -50,6 +50,9 @@ const X_BOUND_TRANCHES = Object.freeze([
   "X_PREMIUM_FULL_100",
   "X_PREMIUM_UPGRADE_90",
 ]);
+const X_BASE_ADMISSION_LINEAGE_SCHEMA = "iat-b3-x-base-admission-lineage/v1";
+const X_BASE_ADMISSION_LINEAGE_STATUS =
+  "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE";
 const UPDATE = process.env.IAT_B3_PRINT_REWARD_RECOMPUTATION_FIXTURE === "1";
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const hex = (value) => BigInt(value).toString(16).padStart(64, "0");
@@ -130,8 +133,8 @@ function xBound(rewardIdNumber, trancheKind, sequence) {
     reservationStatus: "NEW_UNRESERVED",
     ...(trancheKind === "X_PREMIUM_UPGRADE_90" ? {
       originalBaseAdmissionLineage: {
-        schema: "iat-b3-x-base-admission-lineage/v1",
-        status: "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE",
+        schema: X_BASE_ADMISSION_LINEAGE_SCHEMA,
+        status: X_BASE_ADMISSION_LINEAGE_STATUS,
         rewardId,
         fundingRoundAtUnixSeconds: FUNDING_ROUND - 86_400n,
         allocationIndex: 0,
@@ -169,8 +172,8 @@ function matrixXBound(rewardIdNumber, rewardSourceKind, trancheKind, sequence) {
     reservationStatus: "NEW_UNRESERVED",
     ...(trancheKind === "X_PREMIUM_UPGRADE_90" ? {
       originalBaseAdmissionLineage: {
-        schema: "iat-b3-x-base-admission-lineage/v1",
-        status: "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE",
+        schema: X_BASE_ADMISSION_LINEAGE_SCHEMA,
+        status: X_BASE_ADMISSION_LINEAGE_STATUS,
         rewardId,
         fundingRoundAtUnixSeconds: FUNDING_ROUND - 86_400n,
         allocationIndex: sequence,
@@ -236,8 +239,8 @@ function factionFragment({
     },
     ...(trancheKind === "X_PREMIUM_UPGRADE_90" ? {
       originalBaseAdmissionLineage: {
-        schema: "iat-b3-x-base-admission-lineage/v1",
-        status: "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE",
+        schema: X_BASE_ADMISSION_LINEAGE_SCHEMA,
+        status: X_BASE_ADMISSION_LINEAGE_STATUS,
         rewardId,
         fundingRoundAtUnixSeconds: FUNDING_ROUND - 86_400n,
         allocationIndex: sequence,
@@ -408,6 +411,19 @@ function xBoundMatrixVectors() {
       return candidate;
     })
   ));
+  const upgrades = obligations.filter(({ trancheKinds }) => (
+    trancheKinds[0] === "X_PREMIUM_UPGRADE_90"
+  ));
+  upgrades[0].originalBaseAdmissionLineage.allocationIndex = 0;
+  upgrades[1].originalBaseAdmissionLineage.allocationIndex = 0xffff_ffff;
+  upgrades[1].originalBaseAdmissionLineage.fundingRoundAtUnixSeconds =
+    FUNDING_ROUND - (10n * 86_400n);
+  Object.assign(upgrades[0].originalBaseAdmissionLineage, {
+    referenceReceiptSha256: "a1".repeat(32),
+    referenceFinalizationSha256: "b2".repeat(32),
+    batchCommitmentSha256: "c3".repeat(32),
+    binaryReceiptSha256: "d4".repeat(32),
+  });
   return finalizedVectors({
     sourceId: SOURCE_ID,
     obligations,
@@ -496,6 +512,11 @@ function findWeeklyFactionCandidate(roundSeal) {
 }
 
 function hostileXBoundVectors(canonical) {
+  const mutateLineage = (mutate) => bindHostileSeal(canonical, (roundSeal) => {
+    mutate(findXBoundCandidate(
+      roundSeal, "X_INTERACTION", "X_PREMIUM_UPGRADE_90",
+    ).originalBaseAdmissionLineage);
+  });
   return Object.freeze({
     rewardIdDerivedMismatch: bindHostileSeal(canonical, (roundSeal) => {
       findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").rewardId = hex(900_001);
@@ -555,6 +576,110 @@ function hostileXBoundVectors(canonical) {
       candidate.rewardSourceKind = "X_INTERACTION";
       candidate.priorityClass = "STANDARD_10_PERCENT_AND_X_CAMPAIGN";
     }),
+    lineageMissingKey: mutateLineage((lineage) => { delete lineage.batchCommitmentSha256; }),
+    lineageExtraKey: mutateLineage((lineage) => { lineage.unexpected = false; }),
+    lineageSchemaDrift: mutateLineage((lineage) => { lineage.schema = "wrong-schema"; }),
+    lineageStatusDrift: mutateLineage((lineage) => { lineage.status = "wrong-status"; }),
+    lineageAuthenticatedTrue: mutateLineage((lineage) => { lineage.authenticated = true; }),
+    lineageRewardMismatch: mutateLineage((lineage) => { lineage.rewardId = hex(990_001); }),
+    lineageRewardUppercase: mutateLineage((lineage) => {
+      lineage.rewardId = lineage.rewardId.toUpperCase();
+    }),
+    lineageRewardShort: mutateLineage((lineage) => {
+      lineage.rewardId = lineage.rewardId.slice(2);
+    }),
+    lineageRewardNonHex: mutateLineage((lineage) => {
+      lineage.rewardId = `g${lineage.rewardId.slice(1)}`;
+    }),
+    lineageBatchDigestUppercase: mutateLineage((lineage) => {
+      lineage.batchCommitmentSha256 = lineage.batchCommitmentSha256.toUpperCase();
+    }),
+    lineageBinaryDigestUppercase: mutateLineage((lineage) => {
+      lineage.binaryReceiptSha256 = lineage.binaryReceiptSha256.toUpperCase();
+    }),
+    lineageFinalizationDigestUppercase: mutateLineage((lineage) => {
+      lineage.referenceFinalizationSha256 = lineage.referenceFinalizationSha256.toUpperCase();
+    }),
+    lineageReceiptDigestUppercase: mutateLineage((lineage) => {
+      lineage.referenceReceiptSha256 = lineage.referenceReceiptSha256.toUpperCase();
+    }),
+    lineageDigestShort: mutateLineage((lineage) => {
+      lineage.referenceReceiptSha256 = lineage.referenceReceiptSha256.slice(2);
+    }),
+    lineageDigestNonHex: mutateLineage((lineage) => {
+      lineage.referenceReceiptSha256 = `g${lineage.referenceReceiptSha256.slice(1)}`;
+    }),
+    lineageRoundNonMidnight: mutateLineage((lineage) => {
+      lineage.fundingRoundAtUnixSeconds += 1n;
+    }),
+    lineageRoundWrongStoredType: mutateLineage((lineage) => {
+      lineage.fundingRoundAtUnixSeconds = Number(lineage.fundingRoundAtUnixSeconds);
+    }),
+    lineageRoundOutOfI64: mutateLineage((lineage) => {
+      lineage.fundingRoundAtUnixSeconds = 9_223_372_036_854_775_808n;
+    }),
+    lineageAllocationNegative: mutateLineage((lineage) => { lineage.allocationIndex = -1; }),
+    lineageAllocationFraction: mutateLineage((lineage) => { lineage.allocationIndex = 0.5; }),
+    lineageAllocationString: mutateLineage((lineage) => { lineage.allocationIndex = "0"; }),
+    lineageAllocationOverflow: mutateLineage((lineage) => {
+      lineage.allocationIndex = 0x1_0000_0000;
+    }),
+  });
+}
+
+function bindRawXBoundLineage(canonical, mutateLineageBytes) {
+  const roundSeal = structuredClone(canonical.roundState.roundSeal);
+  const candidate = findXBoundCandidate(
+    roundSeal, "GENESIS_AIRDROP", "X_PREMIUM_UPGRADE_90",
+  );
+  const candidateBytes = canonicalBytes(candidate);
+  const lineageBytes = canonicalBytes(candidate.originalBaseAdmissionLineage);
+  const mutatedLineage = mutateLineageBytes(
+    Buffer.from(lineageBytes), candidate.originalBaseAdmissionLineage,
+  );
+  const mutatedCandidate = replaceBufferOnce(candidateBytes, lineageBytes, mutatedLineage);
+  roundSeal.candidateSetSha256 = "0".repeat(64);
+  let sealBytes = replaceBufferOnce(canonicalBytes(roundSeal), candidateBytes, mutatedCandidate);
+  const candidatesMarker = Buffer.from("\"candidates\":", "utf8");
+  const candidatesStart = sealBytes.indexOf(candidatesMarker) + candidatesMarker.length;
+  assert.ok(candidatesStart >= candidatesMarker.length, "raw X-bound candidates marker");
+  const candidatesEnd = sealBytes.indexOf(
+    Buffer.from(",\"candidateSetSha256\":", "utf8"), candidatesStart,
+  );
+  assert.ok(candidatesEnd > candidatesStart, "raw X-bound candidate-set boundary");
+  const candidateSetSha256 = sha256(sealBytes.subarray(candidatesStart, candidatesEnd));
+  sealBytes = replaceBufferOnce(
+    sealBytes,
+    Buffer.from(`\"candidateSetSha256\":\"${"0".repeat(64)}\"`, "utf8"),
+    Buffer.from(`\"candidateSetSha256\":\"${candidateSetSha256}\"`, "utf8"),
+  );
+  const batchBytes = Buffer.from(canonical.batchBytes);
+  createHash("sha256").update(sealBytes).digest().copy(batchBytes, 88);
+  Buffer.from(candidateSetSha256, "hex").copy(batchBytes, 120);
+  return Object.freeze({ sealBytes, batchBytes });
+}
+
+function rawHostileXBoundLineageVectors(canonical) {
+  return Object.freeze({
+    escapedRewardKey: bindRawXBoundLineage(canonical, (lineageBytes) => replaceBufferOnce(
+      lineageBytes,
+      Buffer.from("\"rewardId\"", "utf8"),
+      Buffer.from("\"reward\\u0049d\"", "utf8"),
+    )),
+    reorderedReceiptAndRewardKeys: bindRawXBoundLineage(canonical, (_lineageBytes, lineage) => {
+      const entries = Object.entries(canonicalize(lineage));
+      const receiptIndex = entries.findIndex(([key]) => key === "referenceReceiptSha256");
+      const rewardIndex = entries.findIndex(([key]) => key === "rewardId");
+      [entries[receiptIndex], entries[rewardIndex]] = [entries[rewardIndex], entries[receiptIndex]];
+      return Buffer.from(JSON.stringify(Object.fromEntries(entries), (_key, value) => (
+        typeof value === "bigint" ? value.toString() : value
+      )), "utf8");
+    }),
+    allocationLeadingZero: bindRawXBoundLineage(canonical, (lineageBytes) => replaceBufferOnce(
+      lineageBytes,
+      Buffer.from("\"allocationIndex\":0", "utf8"),
+      Buffer.from("\"allocationIndex\":00", "utf8"),
+    )),
   });
 }
 
@@ -942,6 +1067,7 @@ function renderFixture() {
   const weekly = weeklyFactionVectors();
   const hostile = hostileUniquenessVectors(vectors);
   const hostileXBound = hostileXBoundVectors(xbound);
+  const rawHostileXBoundLineage = rawHostileXBoundLineageVectors(xbound);
   const hostileWeekly = hostileWeeklyFactionVectors(weekly);
   const hostileWeeklyEntry = hostileWeeklyPayoutEntryVectors(weekly);
   const hostileWeeklyUnique = hostileWeeklyPayoutUniquenessVectors(weekly);
@@ -995,6 +1121,10 @@ function renderFixture() {
     lines.push(`hostile.xbound.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.xbound.${name}.batch=${vector.batchBytes.toString("hex")}`);
   }
+  for (const [name, vector] of Object.entries(rawHostileXBoundLineage)) {
+    lines.push(`hostile.xboundLineageRaw.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.xboundLineageRaw.${name}.batch=${vector.batchBytes.toString("hex")}`);
+  }
   for (const [name, vector] of Object.entries(hostileWeekly)) {
     lines.push(`hostile.weekly.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.weekly.${name}.batch=${vector.batchBytes.toString("hex")}`);
@@ -1041,6 +1171,7 @@ if (UPDATE) {
     const weekly = weeklyFactionVectors();
     const hostile = hostileUniquenessVectors(vectors);
     const hostileXBound = hostileXBoundVectors(xbound);
+    const rawHostileXBoundLineage = rawHostileXBoundLineageVectors(xbound);
     const hostileWeekly = hostileWeeklyFactionVectors(weekly);
     const hostileWeeklyEntry = hostileWeeklyPayoutEntryVectors(weekly);
     const hostileWeeklyUnique = hostileWeeklyPayoutUniquenessVectors(weekly);
@@ -1123,6 +1254,18 @@ if (UPDATE) {
         fixture[`hostile.xbound.${name}.batch`],
         vector.batchBytes.toString("hex"),
         `${name} X-bound batch`,
+      );
+    }
+    for (const [name, vector] of Object.entries(rawHostileXBoundLineage)) {
+      assert.equal(
+        fixture[`hostile.xboundLineageRaw.${name}.seal`],
+        vector.sealBytes.toString("hex"),
+        `${name} raw X-bound lineage seal`,
+      );
+      assert.equal(
+        fixture[`hostile.xboundLineageRaw.${name}.batch`],
+        vector.batchBytes.toString("hex"),
+        `${name} raw X-bound lineage batch`,
       );
     }
     for (const [name, vector] of Object.entries(hostileWeekly)) {
@@ -1214,6 +1357,33 @@ if (UPDATE) {
         assert.equal(Object.hasOwn(candidate, "qualificationPda"), priority.startsWith("CCC_"));
       }
     }
+    const upgrades = candidates.filter(({ trancheKinds }) => (
+      trancheKinds[0] === "X_PREMIUM_UPGRADE_90"
+    ));
+    assert.equal(upgrades.length, 5);
+    const genesisUpgrade = findXBoundCandidate(
+      vectors.roundState.roundSeal, "GENESIS_AIRDROP", "X_PREMIUM_UPGRADE_90",
+    );
+    const interactionUpgrade = findXBoundCandidate(
+      vectors.roundState.roundSeal, "X_INTERACTION", "X_PREMIUM_UPGRADE_90",
+    );
+    assert.equal(genesisUpgrade.originalBaseAdmissionLineage.allocationIndex, 0);
+    assert.equal(interactionUpgrade.originalBaseAdmissionLineage.allocationIndex, 0xffff_ffff);
+    for (const candidate of upgrades) {
+      const lineage = candidate.originalBaseAdmissionLineage;
+      assert.notEqual(lineage.fundingRoundAtUnixSeconds, candidate.fundingRoundAtUnixSeconds);
+      assert.equal(lineage.rewardId, candidate.rewardId);
+      assert.equal(lineage.authenticated, false);
+    }
+    assert.deepEqual(
+      [
+        genesisUpgrade.originalBaseAdmissionLineage.referenceReceiptSha256,
+        genesisUpgrade.originalBaseAdmissionLineage.referenceFinalizationSha256,
+        genesisUpgrade.originalBaseAdmissionLineage.batchCommitmentSha256,
+        genesisUpgrade.originalBaseAdmissionLineage.binaryReceiptSha256,
+      ],
+      ["a1".repeat(32), "b2".repeat(32), "c3".repeat(32), "d4".repeat(32)],
+    );
     validateFinalizedRewardCapacityRound({
       roundState: vectors.roundState,
       cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
@@ -1343,6 +1513,28 @@ if (UPDATE) {
       ["genericFieldSmuggling", /X_BOUND_SOURCE_KIND_REQUIRES_X_BOUND_FUNDING_KIND/u],
       ["chronologyOnCcc", /VARIANT_KEY_SET/u],
       ["cccOrderingOnStandard", /VARIANT_KEY_SET/u],
+      ["lineageMissingKey", /LINEAGE/u],
+      ["lineageExtraKey", /LINEAGE/u],
+      ["lineageSchemaDrift", /LINEAGE/u],
+      ["lineageStatusDrift", /LINEAGE/u],
+      ["lineageAuthenticatedTrue", /LINEAGE/u],
+      ["lineageRewardMismatch", /LINEAGE_REWARD_MISMATCH/u],
+      ["lineageRewardUppercase", /CANONICAL_STORED_TYPES/u],
+      ["lineageRewardShort", /hexadecimal/u],
+      ["lineageRewardNonHex", /hexadecimal/u],
+      ["lineageBatchDigestUppercase", /CANONICAL_STORED_TYPES/u],
+      ["lineageBinaryDigestUppercase", /CANONICAL_STORED_TYPES/u],
+      ["lineageFinalizationDigestUppercase", /CANONICAL_STORED_TYPES/u],
+      ["lineageReceiptDigestUppercase", /CANONICAL_STORED_TYPES/u],
+      ["lineageDigestShort", /hexadecimal/u],
+      ["lineageDigestNonHex", /hexadecimal/u],
+      ["lineageRoundNonMidnight", /00:00 UTC/u],
+      ["lineageRoundWrongStoredType", /CANONICAL_STORED_TYPES/u],
+      ["lineageRoundOutOfI64", /fit i64/u],
+      ["lineageAllocationNegative", /ALLOCATION_INDEX/u],
+      ["lineageAllocationFraction", /ALLOCATION_INDEX/u],
+      ["lineageAllocationString", /ALLOCATION_INDEX/u],
+      ["lineageAllocationOverflow", /ALLOCATION_INDEX/u],
     ]) {
       assert.throws(
         () => validateFinalizedRewardCapacityRound({
@@ -1352,6 +1544,20 @@ if (UPDATE) {
         expected,
         name,
       );
+    }
+  });
+
+  test("raw X-bound lineage key/order/number drift fails canonical round-trip", () => {
+    const canonical = xBoundMatrixVectors();
+    for (const [name, vector] of Object.entries(rawHostileXBoundLineageVectors(canonical))) {
+      const decoded = vector.sealBytes.toString("utf8");
+      let canonicalRoundTrip = null;
+      try {
+        canonicalRoundTrip = canonicalBytes(JSON.parse(decoded));
+      } catch {
+        // Leading-zero JSON is intentionally malformed and must fail closed.
+      }
+      assert.notDeepEqual(canonicalRoundTrip, vector.sealBytes, name);
     }
   });
 

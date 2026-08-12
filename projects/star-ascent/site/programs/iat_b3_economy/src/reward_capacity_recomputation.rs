@@ -13,8 +13,11 @@
 //! and X-fragment identifier derivation checked. Fragment IDs, reward IDs, and
 //! canonical immutable identities are unique within the one weekly manifest,
 //! without claiming payout order, cross-manifest uniqueness, provenance, lineage
-//! contents, or chronology semantics. Canonically escaped, well-formed UTF-8
-//! identifiers are bound without allocation;
+//! semantics, or chronology semantics. X-bound upgrade candidates additionally
+//! require the exact canonical unauthenticated lineage envelope and bind its
+//! reward ID to the candidate, without authenticating the four opaque digests or
+//! relating the lineage round to the candidate round. Canonically escaped,
+//! well-formed UTF-8 identifiers are bound without allocation;
 //! JavaScript lone-surrogate strings remain deliberately unsupported. It exposes
 //! no instruction, account writer, CPI, dispatcher, authority, or activation edge.
 
@@ -37,6 +40,8 @@ const CCC_CONTEXT_DOMAIN: &[u8] = b"IAT_B3_CCC_CAPACITY_DECISION_CONTEXT_V1";
 const CCC_ORDER_DOMAIN: &[u8] = b"IAT_B3_CCC_CAPACITY_ORDER_V1";
 const TIEBREAK_DOMAIN: &[u8] = b"IAT_TIEBREAK_V1";
 const X_FUNDING_ID_DOMAIN: &[u8] = b"IAT_B3_X_FUNDING_V1";
+const X_BASE_ADMISSION_LINEAGE_SCHEMA: &[u8] = b"iat-b3-x-base-admission-lineage/v1";
+const X_BASE_ADMISSION_LINEAGE_STATUS: &[u8] = b"NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE";
 const WEEKLY_FACTION_MANIFEST_ID_DOMAIN: &[u8] = b"IAT_B3_WEEKLY_FACTION_MANIFEST_V1";
 const WEEKLY_FACTION_IDENTITY_PREFIX: &[u8] = b"FACTION_WEEK|";
 const JS_MAX_SAFE_INTEGER: u64 = 9_007_199_254_740_991;
@@ -222,6 +227,8 @@ pub enum RewardCapacityRecomputationError {
     XBoundVariantShapeMismatch,
     XBoundSourcePriorityMismatch,
     XBoundIdentifierMismatch,
+    XBoundUpgradeLineageEnvelopeMismatch,
+    XBoundUpgradeLineageRewardMismatch,
     WeeklyFactionVariantShapeMismatch,
     WeeklyFactionPayoutDigestMismatch,
     WeeklyFactionAggregateMismatch,
@@ -279,6 +286,7 @@ pub struct RewardCapacityRecomputationTruth {
     pub x_bound_funding_five_source_priority_mapping_verified: bool,
     pub x_bound_funding_singleton_accepted_tranche_verified: bool,
     pub x_bound_funding_upgrade_lineage_key_presence_verified: bool,
+    pub x_bound_upgrade_canonical_lineage_envelope_and_reward_binding_verified: bool,
     pub x_bound_funding_variant_field_separation_verified: bool,
     pub x_bound_funding_amount_basis_points_verified: bool,
     pub x_bound_reward_id_provenance_verified: bool,
@@ -329,6 +337,7 @@ pub const REWARD_CAPACITY_RECOMPUTATION_TRUTH: RewardCapacityRecomputationTruth 
         x_bound_funding_five_source_priority_mapping_verified: true,
         x_bound_funding_singleton_accepted_tranche_verified: true,
         x_bound_funding_upgrade_lineage_key_presence_verified: true,
+        x_bound_upgrade_canonical_lineage_envelope_and_reward_binding_verified: true,
         x_bound_funding_variant_field_separation_verified: true,
         x_bound_funding_amount_basis_points_verified: false,
         x_bound_reward_id_provenance_verified: false,
@@ -1018,6 +1027,7 @@ fn parse_candidate(
     let mut reward_id = [0u8; 32];
     let mut source = XBoundSource::None;
     let mut tranche = XBoundTranche::None;
+    let mut lineage_reward_id = None;
     let mut chronology_span = None;
     let mut faction_week_id_span = None;
     let mut follower_count = 0u64;
@@ -1062,7 +1072,7 @@ fn parse_candidate(
                 fields |= FOLLOWER_COUNT;
             }
             b"originalBaseAdmissionLineage" => {
-                p.skip_value(0)?;
+                lineage_reward_id = Some(parse_x_bound_upgrade_lineage(p)?);
                 fields |= ORIGINAL_LINEAGE;
             }
             b"payoutEntries" => {
@@ -1172,6 +1182,9 @@ fn parse_candidate(
             if fields != expected || tranche == XBoundTranche::None {
                 return Err(RewardCapacityRecomputationError::XBoundVariantShapeMismatch);
             }
+            if tranche == XBoundTranche::Upgrade && lineage_reward_id != Some(reward_id) {
+                return Err(RewardCapacityRecomputationError::XBoundUpgradeLineageRewardMismatch);
+            }
             if out.id != derive_x_bound_funding_id(reward_id, out.funding_round, tranche) {
                 return Err(RewardCapacityRecomputationError::XBoundIdentifierMismatch);
             }
@@ -1204,6 +1217,43 @@ fn parse_candidate(
         }
     }
     Ok(out)
+}
+
+fn parse_x_bound_upgrade_lineage(
+    p: &mut Json<'_>,
+) -> Result<[u8; 32], RewardCapacityRecomputationError> {
+    let parsed = (|| {
+        p.byte(b'{')?;
+        p.key(b"allocationIndex")?;
+        let allocation_index = p.safe_integer_number()?;
+        if allocation_index > u64::from(u32::MAX) {
+            return Err(RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch);
+        }
+        p.comma_key(b"authenticated")?;
+        p.literal(b"false")?;
+        p.comma_key(b"batchCommitmentSha256")?;
+        let _batch_commitment_sha256 = p.hex32_string()?;
+        p.comma_key(b"binaryReceiptSha256")?;
+        let _binary_receipt_sha256 = p.hex32_string()?;
+        p.comma_key(b"fundingRoundAtUnixSeconds")?;
+        let lineage_round = p.i64_string()?;
+        if lineage_round % UTC_DAY_SECONDS != 0 {
+            return Err(RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch);
+        }
+        p.comma_key(b"referenceFinalizationSha256")?;
+        let _reference_finalization_sha256 = p.hex32_string()?;
+        p.comma_key(b"referenceReceiptSha256")?;
+        let _reference_receipt_sha256 = p.hex32_string()?;
+        p.comma_key(b"rewardId")?;
+        let reward_id = p.hex32_string()?;
+        p.comma_key(b"schema")?;
+        p.exact_string(X_BASE_ADMISSION_LINEAGE_SCHEMA)?;
+        p.comma_key(b"status")?;
+        p.exact_string(X_BASE_ADMISSION_LINEAGE_STATUS)?;
+        p.byte(b'}')?;
+        Ok(reward_id)
+    })();
+    parsed.map_err(|_| RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch)
 }
 
 fn parse_x_bound_singleton_tranche(

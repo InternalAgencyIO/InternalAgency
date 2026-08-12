@@ -89,6 +89,18 @@ fn hostile_xbound_fixture(name: &str) -> Vectors {
     vectors
 }
 
+fn hostile_raw_xbound_lineage_fixture(name: &str) -> Vectors {
+    let values: BTreeMap<&str, &str> = FIXTURE
+        .lines()
+        .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        .map(|line| line.split_once('=').expect("valid fixture line"))
+        .collect();
+    let mut vectors = xbound_fixture();
+    vectors.seal = decode_hex(values[format!("hostile.xboundLineageRaw.{name}.seal").as_str()]);
+    vectors.batch = decode_hex(values[format!("hostile.xboundLineageRaw.{name}.batch").as_str()]);
+    vectors
+}
+
 fn hostile_weekly_fixture(prefix: &str, name: &str) -> Vectors {
     let values: BTreeMap<&str, &str> = FIXTURE
         .lines()
@@ -371,10 +383,113 @@ fn rejects_host_generated_digest_rebound_x_bound_contract_violations() {
             "cccOrderingOnStandard",
             RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
         ),
+        (
+            "lineageMissingKey",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageExtraKey",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageSchemaDrift",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageStatusDrift",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageAuthenticatedTrue",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageRewardMismatch",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageRewardMismatch,
+        ),
+        (
+            "lineageRewardUppercase",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageRewardShort",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageRewardNonHex",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageBatchDigestUppercase",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageBinaryDigestUppercase",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageFinalizationDigestUppercase",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageReceiptDigestUppercase",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageDigestShort",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageDigestNonHex",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageRoundNonMidnight",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageRoundWrongStoredType",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageRoundOutOfI64",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageAllocationNegative",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageAllocationFraction",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageAllocationString",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
+        (
+            "lineageAllocationOverflow",
+            RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch,
+        ),
     ] {
         assert_eq!(
             verify(&hostile_xbound_fixture(name)),
             Err(expected),
+            "{name}"
+        );
+    }
+}
+
+#[test]
+fn rejects_raw_noncanonical_x_bound_upgrade_lineage_encodings() {
+    for name in [
+        "escapedRewardKey",
+        "reorderedReceiptAndRewardKeys",
+        "allocationLeadingZero",
+    ] {
+        assert_eq!(
+            verify(&hostile_raw_xbound_lineage_fixture(name)),
+            Err(RewardCapacityRecomputationError::XBoundUpgradeLineageEnvelopeMismatch),
             "{name}"
         );
     }
@@ -733,6 +848,7 @@ fn truth_boundary_is_permanently_nonactivating_and_hold() {
     assert!(truth.x_bound_funding_five_source_priority_mapping_verified);
     assert!(truth.x_bound_funding_singleton_accepted_tranche_verified);
     assert!(truth.x_bound_funding_upgrade_lineage_key_presence_verified);
+    assert!(truth.x_bound_upgrade_canonical_lineage_envelope_and_reward_binding_verified);
     assert!(truth.x_bound_funding_variant_field_separation_verified);
     assert!(!truth.x_bound_funding_amount_basis_points_verified);
     assert!(!truth.x_bound_reward_id_provenance_verified);

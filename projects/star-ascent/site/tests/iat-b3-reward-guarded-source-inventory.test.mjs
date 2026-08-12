@@ -94,7 +94,7 @@ test("repository source inventory binds every current reward adapter edge and st
   )));
   assert.ok(result.criticalSources.some(({ path, sourceSha256 }) => (
     path === "programs/iat_b3_economy/src/reward_capacity_recomputation.rs"
-      && sourceSha256 === "0eaef39494695c7b051342161290829e439f2fcba5af4a334cc932e94a1d710f"
+      && sourceSha256 === "9d56715d9d2ccf569b5558cd1192cdd9deffec56c1d3f023afb6ebc983b3d4ab"
   )));
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs"
