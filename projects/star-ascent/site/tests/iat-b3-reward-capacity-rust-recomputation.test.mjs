@@ -35,6 +35,7 @@ const LOCAL_0001_UTC = 1_786_050_060n;
 const RANDOMNESS = "42".repeat(32);
 const SOURCE_ID = "ccc-test-source";
 const ESCAPED_SOURCE_ID = "ccc/\"quoted\"\\path\b\f\n\r\t\u0001\u001e|é|雪|🚀|\u2028|end";
+const WEEKLY_FACTION_WEEK_ID = "week/\"quoted\"\\path\b\f\n\r\t\u0001|é|雪|🚀|\u2028|\u2029|end";
 const X_BOUND_SOURCE_PRIORITY = Object.freeze({
   GENESIS_AIRDROP: "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
   X_INTERACTION: "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
@@ -200,37 +201,109 @@ function matrixXBound(rewardIdNumber, rewardSourceKind, trancheKind, sequence) {
   };
 }
 
+function factionFragment({
+  rewardNumber,
+  trancheKind,
+  sequence,
+  identity,
+  amount,
+  eligibleSequence = sequence,
+  activitySequence = sequence,
+  nodeSequence = sequence,
+}) {
+  const rewardId = hex(rewardNumber);
+  const trancheKinds = [trancheKind];
+  return {
+    id: sha256(`IAT_B3_X_FUNDING_V1|${rewardId}|${FUNDING_ROUND}|${trancheKind}`),
+    kind: "X_BOUND_FACTION_FRAGMENT",
+    rewardId,
+    rewardSourceKind: "FACTION_FOLLOWER",
+    trancheKinds,
+    priorityClass: "WEEKLY_FACTION",
+    amount: BigInt(amount),
+    fundingRoundAtUnixSeconds: FUNDING_ROUND,
+    fundingPool: "SHARED_REWARD_RESERVE",
+    reservationStatus: "NEW_UNRESERVED",
+    chronology: {
+      eligibleSequence: BigInt(eligibleSequence),
+      activitySequence: BigInt(activitySequence),
+      nodeSequence: BigInt(nodeSequence),
+      immutableIdentity: identity,
+      commitmentDigest: rewardId,
+    },
+    ...(trancheKind === "X_PREMIUM_UPGRADE_90" ? {
+      originalBaseAdmissionLineage: {
+        schema: "iat-b3-x-base-admission-lineage/v1",
+        status: "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE",
+        rewardId,
+        fundingRoundAtUnixSeconds: FUNDING_ROUND - 86_400n,
+        allocationIndex: sequence,
+        referenceReceiptSha256: hex(810_000 + sequence),
+        referenceFinalizationSha256: hex(820_000 + sequence),
+        batchCommitmentSha256: hex(830_000 + sequence),
+        binaryReceiptSha256: hex(840_000 + sequence),
+        authenticated: false,
+      },
+    } : {}),
+  };
+}
+
 function factionManifest({
   rewardNumber = 80_001,
   weekId = "week-1",
   sequence = 80,
   identity = "faction-follower-1",
 } = {}) {
-  const rewardId = hex(rewardNumber);
-  const trancheKinds = ["X_BASE_10"];
-  const fragment = {
-    id: sha256(`IAT_B3_X_FUNDING_V1|${rewardId}|${FUNDING_ROUND}|${trancheKinds[0]}`),
-    kind: "X_BOUND_FACTION_FRAGMENT",
-    rewardId,
-    rewardSourceKind: "FACTION_FOLLOWER",
-    trancheKinds,
-    priorityClass: "WEEKLY_FACTION",
-    amount: 100n,
-    fundingRoundAtUnixSeconds: FUNDING_ROUND,
-    fundingPool: "SHARED_REWARD_RESERVE",
-    reservationStatus: "NEW_UNRESERVED",
-    chronology: {
-      eligibleSequence: BigInt(sequence),
-      activitySequence: BigInt(sequence),
-      nodeSequence: BigInt(sequence),
-      immutableIdentity: identity,
-      commitmentDigest: rewardId,
-    },
-  };
+  const fragment = factionFragment({
+    rewardNumber,
+    trancheKind: "X_BASE_10",
+    sequence,
+    identity,
+    amount: 100,
+  });
   return buildWeeklyFactionManifestObligation({
     fundingRoundAtUnixSeconds: FUNDING_ROUND,
     factionWeekId: weekId,
     followerObligations: [fragment],
+  });
+}
+
+function multiEntryFactionManifest() {
+  return buildWeeklyFactionManifestObligation({
+    fundingRoundAtUnixSeconds: FUNDING_ROUND,
+    factionWeekId: WEEKLY_FACTION_WEEK_ID,
+    followerObligations: [
+      factionFragment({
+        rewardNumber: 91_001,
+        trancheKind: "X_BASE_10",
+        sequence: 91,
+        identity: "follower-base",
+        amount: 100,
+        eligibleSequence: 3,
+        activitySequence: 2,
+        nodeSequence: 1,
+      }),
+      factionFragment({
+        rewardNumber: 91_002,
+        trancheKind: "X_PREMIUM_FULL_100",
+        sequence: 92,
+        identity: "follower-full",
+        amount: 200,
+        eligibleSequence: 4,
+        activitySequence: 9,
+        nodeSequence: 2,
+      }),
+      factionFragment({
+        rewardNumber: 91_003,
+        trancheKind: "X_PREMIUM_UPGRADE_90",
+        sequence: 93,
+        identity: "follower-upgrade",
+        amount: 300,
+        eligibleSequence: 5,
+        activitySequence: 6,
+        nodeSequence: 10,
+      }),
+    ],
   });
 }
 
@@ -342,6 +415,24 @@ function xBoundMatrixVectors() {
   });
 }
 
+function weeklyFactionVectors() {
+  return finalizedVectors({
+    sourceId: SOURCE_ID,
+    obligations: [
+      generic(301, "CCC_AGENT", 100, 1),
+      generic(302, "CCC_AGENT", 100, 1),
+      multiEntryFactionManifest(),
+    ],
+    ledgerSnapshot: {
+      lanes: {
+        treasury: { unlocked: 800n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        ecosystem: { unlocked: 0n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        liquidity: { unlocked: 0n, reserved: 0n, paid: 0n, withdrawn: 0n },
+      },
+    },
+  });
+}
+
 function bindHostileSeal(canonical, mutate) {
   const roundSeal = structuredClone(canonical.roundState.roundSeal);
   mutate(roundSeal);
@@ -387,6 +478,14 @@ function findXBoundCandidate(roundSeal, rewardSourceKind, trancheKind) {
       && entry.trancheKinds[0] === trancheKind
   ));
   assert.ok(candidate, `${rewardSourceKind}/${trancheKind} candidate`);
+  return candidate;
+}
+
+function findWeeklyFactionCandidate(roundSeal) {
+  const candidate = roundSeal.candidates.find((entry) => (
+    entry.kind === "WEEKLY_FACTION_MANIFEST"
+  ));
+  assert.ok(candidate, "weekly faction manifest candidate");
   return candidate;
 }
 
@@ -453,12 +552,156 @@ function hostileXBoundVectors(canonical) {
   });
 }
 
+function refreshWeeklyManifestBindings(roundSeal, candidate) {
+  const payoutDigest = sha256(canonicalBytes(candidate.payoutEntries));
+  candidate.payoutDigest = payoutDigest;
+  candidate.chronology.commitmentDigest = payoutDigest;
+  const index = roundSeal.candidates.indexOf(candidate);
+  candidate.id = sha256(
+    `IAT_B3_WEEKLY_FACTION_MANIFEST_V1|${FUNDING_ROUND}|${candidate.factionWeekId}|${payoutDigest}`,
+  );
+  roundSeal.candidateIds[index] = candidate.id;
+}
+
+function hostileWeeklyFactionVectors(canonical) {
+  const vectors = {
+    payoutRawMutation: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).payoutEntries[0].chronology.commitmentDigest = hex(999_001);
+    }),
+    emptyPayoutEntries: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findWeeklyFactionCandidate(roundSeal);
+      candidate.payoutEntries = [];
+      candidate.followerCount = 0;
+      candidate.chronology = {
+        eligibleSequence: 0n,
+        activitySequence: 0n,
+        nodeSequence: 0n,
+        immutableIdentity: `FACTION_WEEK|${candidate.factionWeekId}`,
+        commitmentDigest: hex(0),
+      };
+      refreshWeeklyManifestBindings(roundSeal, candidate);
+    }),
+    zeroEntryAmount: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findWeeklyFactionCandidate(roundSeal);
+      candidate.payoutEntries[0].amount = 0n;
+      refreshWeeklyManifestBindings(roundSeal, candidate);
+    }),
+    entryAmountSumOverflow: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findWeeklyFactionCandidate(roundSeal);
+      candidate.payoutEntries[0].amount = (1n << 64n) - 1n;
+      candidate.payoutEntries[1].amount = 1n;
+      refreshWeeklyManifestBindings(roundSeal, candidate);
+    }),
+    declaredAmountMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).amount = 601n;
+    }),
+    followerCountMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).followerCount = 4;
+    }),
+    eligibleMaximumMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).chronology.eligibleSequence = 6n;
+    }),
+    activityMaximumMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).chronology.activitySequence = 10n;
+    }),
+    nodeMaximumMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).chronology.nodeSequence = 11n;
+    }),
+    identityMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).chronology.immutableIdentity = "FACTION_WEEK|wrong";
+    }),
+    commitmentMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).chronology.commitmentDigest = hex(999_002);
+    }),
+    identifierMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findWeeklyFactionCandidate(roundSeal);
+      const index = roundSeal.candidates.indexOf(candidate);
+      candidate.id = hex(999_003);
+      roundSeal.candidateIds[index] = candidate.id;
+    }),
+    weekIdIdentifierMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findWeeklyFactionCandidate(roundSeal);
+      candidate.factionWeekId = "week-other";
+      candidate.chronology.immutableIdentity = "FACTION_WEEK|week-other";
+    }),
+  };
+  const boundaryTrimScalars = [
+    ["tab", "\u0009"], ["lineFeed", "\u000a"], ["verticalTab", "\u000b"],
+    ["formFeed", "\u000c"], ["carriageReturn", "\u000d"], ["space", "\u0020"],
+    ["nbsp", "\u00a0"], ["ogham", "\u1680"], ["enQuad", "\u2000"],
+    ["emQuad", "\u2001"], ["enSpace", "\u2002"], ["emSpace", "\u2003"],
+    ["threePerEm", "\u2004"], ["fourPerEm", "\u2005"], ["sixPerEm", "\u2006"],
+    ["figureSpace", "\u2007"], ["punctuationSpace", "\u2008"], ["thinSpace", "\u2009"],
+    ["hairSpace", "\u200a"], ["lineSeparator", "\u2028"],
+    ["paragraphSeparator", "\u2029"], ["narrowNbsp", "\u202f"],
+    ["mediumMathematicalSpace", "\u205f"], ["ideographicSpace", "\u3000"],
+    ["bom", "\ufeff"],
+  ];
+  for (const [name, scalar] of boundaryTrimScalars) {
+    vectors[`leadingTrim${name}`] = bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).factionWeekId = `${scalar}${WEEKLY_FACTION_WEEK_ID}`;
+    });
+    vectors[`trailingTrim${name}`] = bindHostileSeal(canonical, (roundSeal) => {
+      findWeeklyFactionCandidate(roundSeal).factionWeekId = `${WEEKLY_FACTION_WEEK_ID}${scalar}`;
+    });
+  }
+  return Object.freeze(vectors);
+}
+
+function bindRawWeeklyWeekId(canonical, mutateQuotedBytes) {
+  const quoted = Buffer.from(JSON.stringify(WEEKLY_FACTION_WEEK_ID), "utf8");
+  const marker = Buffer.concat([Buffer.from("\"factionWeekId\":", "utf8"), quoted]);
+  const offset = canonical.sealBytes.indexOf(marker);
+  assert.ok(offset >= 0, "weekly faction week ID marker");
+  const replacementQuoted = mutateQuotedBytes(Buffer.from(quoted));
+  const sealBytes = Buffer.concat([
+    canonical.sealBytes.subarray(0, offset + marker.length - quoted.length),
+    replacementQuoted,
+    canonical.sealBytes.subarray(offset + marker.length),
+  ]);
+  const batchBytes = Buffer.from(canonical.batchBytes);
+  createHash("sha256").update(sealBytes).digest().copy(batchBytes, 88);
+  return Object.freeze({ sealBytes, batchBytes });
+}
+
+function rawHostileWeeklyFactionVectors(canonical) {
+  const replaceQuoted = (needle, replacement) => (quoted) => {
+    const offset = quoted.indexOf(Buffer.from(needle, "utf8"));
+    assert.ok(offset >= 0, `raw week ID marker ${needle}`);
+    return Buffer.concat([
+      quoted.subarray(0, offset),
+      Buffer.from(replacement, "utf8"),
+      quoted.subarray(offset + Buffer.byteLength(needle)),
+    ]);
+  };
+  return Object.freeze({
+    redundantSlashEscape: bindRawWeeklyWeekId(canonical, replaceQuoted("week/", "week\\/")),
+    redundantUnicodeEscape: bindRawWeeklyWeekId(canonical, replaceQuoted("week", "w\\u0065ek")),
+    redundantShortControlEscape: bindRawWeeklyWeekId(canonical, replaceQuoted("\\t", "\\u0009")),
+    uppercaseUnicodeEscape: bindRawWeeklyWeekId(canonical, replaceQuoted("\\u0001", "\\u001E")),
+    surrogatePairEscape: bindRawWeeklyWeekId(canonical, replaceQuoted("🚀", "\\ud83d\\ude80")),
+    loneSurrogateEscape: bindRawWeeklyWeekId(canonical, replaceQuoted("🚀", "\\ud800")),
+    malformedEscape: bindRawWeeklyWeekId(canonical, replaceQuoted("\\t", "\\q")),
+    invalidUtf8: bindRawWeeklyWeekId(canonical, (quoted) => {
+      const marker = Buffer.from("é", "utf8");
+      const offset = quoted.indexOf(marker);
+      assert.ok(offset >= 0, "raw UTF-8 marker");
+      return Buffer.concat([
+        quoted.subarray(0, offset), Buffer.from([0xff]), quoted.subarray(offset + marker.length),
+      ]);
+    }),
+  });
+}
+
 function renderFixture() {
   const vectors = canonicalVectors();
   const escaped = escapedSourceVectors();
   const xbound = xBoundMatrixVectors();
+  const weekly = weeklyFactionVectors();
   const hostile = hostileUniquenessVectors(vectors);
   const hostileXBound = hostileXBoundVectors(xbound);
+  const hostileWeekly = hostileWeeklyFactionVectors(weekly);
+  const rawHostileWeekly = rawHostileWeeklyFactionVectors(weekly);
   const lines = [
     "# Generated only from the exact host reference; consumed read-only by Rust tests.",
     "schema=iat-b3-reward-capacity-rust-recomputation/v1",
@@ -490,6 +733,15 @@ function renderFixture() {
     lines.push(`xbound.receipt.${index}=${xbound.receiptBytes[index].toString("hex")}`);
     lines.push(`xbound.reference_core.${index}=${xbound.referenceCores[index].toString("hex")}`);
   }
+  lines.push(`weekly.source_id=${Buffer.from(SOURCE_ID, "utf8").toString("hex")}`);
+  lines.push(`weekly.randomness=${RANDOMNESS}`);
+  lines.push(`weekly.seal=${weekly.sealBytes.toString("hex")}`);
+  lines.push(`weekly.batch=${weekly.batchBytes.toString("hex")}`);
+  lines.push(`weekly.count=${weekly.receiptBytes.length}`);
+  for (let index = 0; index < weekly.receiptBytes.length; index += 1) {
+    lines.push(`weekly.receipt.${index}=${weekly.receiptBytes[index].toString("hex")}`);
+    lines.push(`weekly.reference_core.${index}=${weekly.referenceCores[index].toString("hex")}`);
+  }
   for (const [name, vector] of Object.entries(hostile)) {
     lines.push(`hostile.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.${name}.batch=${vector.batchBytes.toString("hex")}`);
@@ -497,6 +749,14 @@ function renderFixture() {
   for (const [name, vector] of Object.entries(hostileXBound)) {
     lines.push(`hostile.xbound.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.xbound.${name}.batch=${vector.batchBytes.toString("hex")}`);
+  }
+  for (const [name, vector] of Object.entries(hostileWeekly)) {
+    lines.push(`hostile.weekly.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.weekly.${name}.batch=${vector.batchBytes.toString("hex")}`);
+  }
+  for (const [name, vector] of Object.entries(rawHostileWeekly)) {
+    lines.push(`hostile.weeklyRaw.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.weeklyRaw.${name}.batch=${vector.batchBytes.toString("hex")}`);
   }
   return `${lines.join("\n")}\n`;
 }
@@ -521,8 +781,11 @@ if (UPDATE) {
     const vectors = canonicalVectors();
     const escaped = escapedSourceVectors();
     const xbound = xBoundMatrixVectors();
+    const weekly = weeklyFactionVectors();
     const hostile = hostileUniquenessVectors(vectors);
     const hostileXBound = hostileXBoundVectors(xbound);
+    const hostileWeekly = hostileWeeklyFactionVectors(weekly);
+    const rawHostileWeekly = rawHostileWeeklyFactionVectors(weekly);
     assert.equal(fixture.schema, "iat-b3-reward-capacity-rust-recomputation/v1");
     assert.equal(fixture.source_id, Buffer.from(SOURCE_ID).toString("hex"));
     assert.equal(fixture.randomness, RANDOMNESS);
@@ -563,6 +826,21 @@ if (UPDATE) {
         xbound.referenceCores[index].toString("hex"),
       );
     }
+    assert.equal(fixture["weekly.source_id"], Buffer.from(SOURCE_ID).toString("hex"));
+    assert.equal(fixture["weekly.randomness"], RANDOMNESS);
+    assert.equal(fixture["weekly.seal"], weekly.sealBytes.toString("hex"));
+    assert.equal(fixture["weekly.batch"], weekly.batchBytes.toString("hex"));
+    assert.equal(Number(fixture["weekly.count"]), weekly.receiptBytes.length);
+    for (let index = 0; index < weekly.receiptBytes.length; index += 1) {
+      assert.equal(
+        fixture[`weekly.receipt.${index}`],
+        weekly.receiptBytes[index].toString("hex"),
+      );
+      assert.equal(
+        fixture[`weekly.reference_core.${index}`],
+        weekly.referenceCores[index].toString("hex"),
+      );
+    }
     for (const [name, vector] of Object.entries(hostile)) {
       assert.equal(
         fixture[`hostile.${name}.seal`],
@@ -587,6 +865,26 @@ if (UPDATE) {
         `${name} X-bound batch`,
       );
     }
+    for (const [name, vector] of Object.entries(hostileWeekly)) {
+      assert.equal(
+        fixture[`hostile.weekly.${name}.seal`], vector.sealBytes.toString("hex"), `${name} seal`,
+      );
+      assert.equal(
+        fixture[`hostile.weekly.${name}.batch`], vector.batchBytes.toString("hex"), `${name} batch`,
+      );
+    }
+    for (const [name, vector] of Object.entries(rawHostileWeekly)) {
+      assert.equal(
+        fixture[`hostile.weeklyRaw.${name}.seal`],
+        vector.sealBytes.toString("hex"),
+        `${name} raw seal`,
+      );
+      assert.equal(
+        fixture[`hostile.weeklyRaw.${name}.batch`],
+        vector.batchBytes.toString("hex"),
+        `${name} raw batch`,
+      );
+    }
     assert.deepEqual(vectors.dispositions, [
       "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
       "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
@@ -595,6 +893,9 @@ if (UPDATE) {
     assert.deepEqual(escaped.dispositions, ["ADMITTED_RESERVED", "ADMITTED_RESERVED"]);
     assert.equal(xbound.dispositions.length, 15);
     assert.ok(xbound.dispositions.every((value) => value === "ADMITTED_RESERVED"));
+    assert.deepEqual(weekly.dispositions, [
+      "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
+    ]);
   });
 
   test("host finalization covers every five-source by three-tranche X-bound pair", () => {
@@ -617,6 +918,33 @@ if (UPDATE) {
         assert.equal(Object.hasOwn(candidate, "qualificationPda"), priority.startsWith("CCC_"));
       }
     }
+    validateFinalizedRewardCapacityRound({
+      roundState: vectors.roundState,
+      cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+    });
+  });
+
+  test("host-generated weekly manifest binds raw payouts, checked aggregates, week identity, and ID", () => {
+    const vectors = weeklyFactionVectors();
+    const candidate = findWeeklyFactionCandidate(vectors.roundState.roundSeal);
+    assert.equal(candidate.payoutEntries.length, 3);
+    assert.equal(candidate.amount, 600n);
+    assert.equal(candidate.followerCount, 3);
+    assert.equal(candidate.factionWeekId, WEEKLY_FACTION_WEEK_ID);
+    assert.deepEqual(candidate.chronology, {
+      eligibleSequence: 5n,
+      activitySequence: 9n,
+      nodeSequence: 10n,
+      immutableIdentity: `FACTION_WEEK|${WEEKLY_FACTION_WEEK_ID}`,
+      commitmentDigest: candidate.payoutDigest,
+    });
+    assert.equal(candidate.payoutDigest, sha256(canonicalBytes(candidate.payoutEntries)));
+    assert.equal(
+      candidate.id,
+      sha256(
+        `IAT_B3_WEEKLY_FACTION_MANIFEST_V1|${FUNDING_ROUND}|${WEEKLY_FACTION_WEEK_ID}|${candidate.payoutDigest}`,
+      ),
+    );
     validateFinalizedRewardCapacityRound({
       roundState: vectors.roundState,
       cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
@@ -687,6 +1015,41 @@ if (UPDATE) {
         expected,
         name,
       );
+    }
+  });
+
+  test("host rejects every structured weekly aggregate and boundary-trim drift", () => {
+    const canonical = weeklyFactionVectors();
+    const hostile = hostileWeeklyFactionVectors(canonical);
+    for (const [name, vector] of Object.entries(hostile)) {
+      assert.throws(
+        () => validateFinalizedRewardCapacityRound({
+          roundState: vector.roundState,
+          cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+        }),
+        /FACTION|faction|week|trim|u64|U64/u,
+        name,
+      );
+    }
+  });
+
+  test("raw weekly week-ID vectors fail the supported canonical seal subset", () => {
+    const canonical = weeklyFactionVectors();
+    for (const [name, vector] of Object.entries(rawHostileWeeklyFactionVectors(canonical))) {
+      const decoded = vector.sealBytes.toString("utf8");
+      let canonicalRoundTrip = null;
+      try {
+        canonicalRoundTrip = canonicalBytes(JSON.parse(decoded));
+      } catch {
+        // Malformed JSON and invalid UTF-8 are both expected to fail closed.
+      }
+      if (name === "loneSurrogateEscape") {
+        // JSON.stringify preserves lone surrogate escapes; this native subset
+        // intentionally rejects them instead of claiming JS string parity.
+        assert.deepEqual(canonicalRoundTrip, vector.sealBytes, name);
+      } else {
+        assert.notDeepEqual(canonicalRoundTrip, vector.sealBytes, name);
+      }
     }
   });
 

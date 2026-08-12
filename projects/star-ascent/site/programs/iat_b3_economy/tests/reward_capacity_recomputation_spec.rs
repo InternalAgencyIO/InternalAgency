@@ -32,6 +32,10 @@ fn xbound_fixture() -> Vectors {
     fixture_with_prefix("xbound.")
 }
 
+fn weekly_fixture() -> Vectors {
+    fixture_with_prefix("weekly.")
+}
+
 fn fixture_with_prefix(prefix: &str) -> Vectors {
     let values: BTreeMap<&str, &str> = FIXTURE
         .lines()
@@ -82,6 +86,18 @@ fn hostile_xbound_fixture(name: &str) -> Vectors {
     let mut vectors = xbound_fixture();
     vectors.seal = decode_hex(values[format!("hostile.xbound.{name}.seal").as_str()]);
     vectors.batch = decode_hex(values[format!("hostile.xbound.{name}.batch").as_str()]);
+    vectors
+}
+
+fn hostile_weekly_fixture(prefix: &str, name: &str) -> Vectors {
+    let values: BTreeMap<&str, &str> = FIXTURE
+        .lines()
+        .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        .map(|line| line.split_once('=').expect("valid fixture line"))
+        .collect();
+    let mut vectors = weekly_fixture();
+    vectors.seal = decode_hex(values[format!("hostile.{prefix}.{name}.seal").as_str()]);
+    vectors.batch = decode_hex(values[format!("hostile.{prefix}.{name}.batch").as_str()]);
     vectors
 }
 
@@ -159,6 +175,13 @@ fn accepts_exact_host_x_bound_five_source_three_tranche_matrix() {
     let vectors = xbound_fixture();
     assert_eq!(vectors.receipts.len(), 15);
     verify(&vectors).expect("exact host X-bound matrix must verify");
+}
+
+#[test]
+fn accepts_exact_host_weekly_faction_multi_entry_aggregate() {
+    let vectors = weekly_fixture();
+    assert_eq!(vectors.receipts.len(), 3);
+    verify(&vectors).expect("exact host weekly faction aggregate must verify");
 }
 
 #[test]
@@ -358,6 +381,131 @@ fn rejects_host_generated_digest_rebound_x_bound_contract_violations() {
 }
 
 #[test]
+fn rejects_host_generated_digest_rebound_weekly_faction_aggregate_violations() {
+    for (name, expected) in [
+        (
+            "payoutRawMutation",
+            RewardCapacityRecomputationError::WeeklyFactionPayoutDigestMismatch,
+        ),
+        (
+            "emptyPayoutEntries",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "zeroEntryAmount",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "entryAmountSumOverflow",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "declaredAmountMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "followerCountMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "eligibleMaximumMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "activityMaximumMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "nodeMaximumMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "identityMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "commitmentMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch,
+        ),
+        (
+            "identifierMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionIdentifierMismatch,
+        ),
+        (
+            "weekIdIdentifierMismatch",
+            RewardCapacityRecomputationError::WeeklyFactionIdentifierMismatch,
+        ),
+    ] {
+        assert_eq!(
+            verify(&hostile_weekly_fixture("weekly", name)),
+            Err(expected),
+            "{name}"
+        );
+    }
+}
+
+#[test]
+fn rejects_every_ecmascript_boundary_trim_scalar_on_week_id() {
+    let names = [
+        "tab",
+        "lineFeed",
+        "verticalTab",
+        "formFeed",
+        "carriageReturn",
+        "space",
+        "nbsp",
+        "ogham",
+        "enQuad",
+        "emQuad",
+        "enSpace",
+        "emSpace",
+        "threePerEm",
+        "fourPerEm",
+        "sixPerEm",
+        "figureSpace",
+        "punctuationSpace",
+        "thinSpace",
+        "hairSpace",
+        "lineSeparator",
+        "paragraphSeparator",
+        "narrowNbsp",
+        "mediumMathematicalSpace",
+        "ideographicSpace",
+        "bom",
+    ];
+    for name in names {
+        for edge in ["leadingTrim", "trailingTrim"] {
+            let vector_name = format!("{edge}{name}");
+            assert_eq!(
+                verify(&hostile_weekly_fixture("weekly", &vector_name)),
+                Err(RewardCapacityRecomputationError::WeeklyFactionWeekIdMismatch),
+                "{vector_name}"
+            );
+        }
+    }
+}
+
+#[test]
+fn rejects_malformed_or_noncanonical_week_id_json_bytes() {
+    for name in [
+        "redundantSlashEscape",
+        "redundantUnicodeEscape",
+        "redundantShortControlEscape",
+        "uppercaseUnicodeEscape",
+        "surrogatePairEscape",
+        "loneSurrogateEscape",
+        "malformedEscape",
+        "invalidUtf8",
+    ] {
+        assert_eq!(
+            verify(&hostile_weekly_fixture("weeklyRaw", name)),
+            Err(RewardCapacityRecomputationError::InvalidCanonicalJson),
+            "{name}"
+        );
+    }
+}
+
+#[test]
 fn rejects_wrong_reveal_and_any_receipt_semantic_mutation() {
     let mut wrong_reveal = fixture();
     wrong_reveal.randomness[0] ^= 1;
@@ -457,6 +605,15 @@ fn truth_boundary_is_permanently_nonactivating_and_hold() {
     assert!(!truth.x_bound_reward_id_provenance_verified);
     assert!(!truth.x_bound_tranche_eligibility_verified);
     assert!(!truth.x_bound_upgrade_lineage_contents_verified);
+    assert!(truth.weekly_faction_raw_payout_entries_digest_verified);
+    assert!(truth.weekly_faction_checked_aggregate_fields_verified);
+    assert!(truth.weekly_faction_manifest_identifier_derivation_verified);
+    assert!(truth.weekly_faction_exact_week_identity_binding_verified);
+    assert!(!truth.weekly_faction_payout_entry_order_verified);
+    assert!(!truth.weekly_faction_nested_fragment_identifier_derivations_verified);
+    assert!(!truth.weekly_faction_payout_entry_uniqueness_verified);
+    assert!(!truth.weekly_faction_reward_provenance_verified);
+    assert!(!truth.weekly_faction_tranche_lineage_semantics_verified);
     assert!(!truth.canonical_seal_semantics_verified);
     assert!(!truth.candidate_identifier_derivations_verified);
     assert!(!truth.non_ccc_chronology_recomputed);

@@ -32,6 +32,9 @@ const CCC_CONTEXT_DOMAIN: &[u8] = b"IAT_B3_CCC_CAPACITY_DECISION_CONTEXT_V1";
 const CCC_ORDER_DOMAIN: &[u8] = b"IAT_B3_CCC_CAPACITY_ORDER_V1";
 const TIEBREAK_DOMAIN: &[u8] = b"IAT_TIEBREAK_V1";
 const X_FUNDING_ID_DOMAIN: &[u8] = b"IAT_B3_X_FUNDING_V1";
+const WEEKLY_FACTION_MANIFEST_ID_DOMAIN: &[u8] = b"IAT_B3_WEEKLY_FACTION_MANIFEST_V1";
+const WEEKLY_FACTION_IDENTITY_PREFIX: &[u8] = b"FACTION_WEEK|";
+const JS_MAX_SAFE_INTEGER: u64 = 9_007_199_254_740_991;
 const MAX_TIEBREAK_ATTEMPTS: u32 = 16;
 const POLICY_HEX: &[u8] = b"2054c881f9c7524acb965454286950445cd37c99f7485b45e2c787bcfb3617e2";
 
@@ -214,6 +217,11 @@ pub enum RewardCapacityRecomputationError {
     XBoundVariantShapeMismatch,
     XBoundSourcePriorityMismatch,
     XBoundIdentifierMismatch,
+    WeeklyFactionVariantShapeMismatch,
+    WeeklyFactionPayoutDigestMismatch,
+    WeeklyFactionAggregateMismatch,
+    WeeklyFactionIdentifierMismatch,
+    WeeklyFactionWeekIdMismatch,
     CandidateIdMismatch,
     CandidateDigestMismatch,
     CandidateOrderMismatch,
@@ -265,6 +273,15 @@ pub struct RewardCapacityRecomputationTruth {
     pub x_bound_reward_id_provenance_verified: bool,
     pub x_bound_tranche_eligibility_verified: bool,
     pub x_bound_upgrade_lineage_contents_verified: bool,
+    pub weekly_faction_raw_payout_entries_digest_verified: bool,
+    pub weekly_faction_checked_aggregate_fields_verified: bool,
+    pub weekly_faction_manifest_identifier_derivation_verified: bool,
+    pub weekly_faction_exact_week_identity_binding_verified: bool,
+    pub weekly_faction_payout_entry_order_verified: bool,
+    pub weekly_faction_nested_fragment_identifier_derivations_verified: bool,
+    pub weekly_faction_payout_entry_uniqueness_verified: bool,
+    pub weekly_faction_reward_provenance_verified: bool,
+    pub weekly_faction_tranche_lineage_semantics_verified: bool,
     pub canonical_seal_semantics_verified: bool,
     pub candidate_identifier_derivations_verified: bool,
     pub non_ccc_chronology_recomputed: bool,
@@ -301,6 +318,15 @@ pub const REWARD_CAPACITY_RECOMPUTATION_TRUTH: RewardCapacityRecomputationTruth 
         x_bound_reward_id_provenance_verified: false,
         x_bound_tranche_eligibility_verified: false,
         x_bound_upgrade_lineage_contents_verified: false,
+        weekly_faction_raw_payout_entries_digest_verified: true,
+        weekly_faction_checked_aggregate_fields_verified: true,
+        weekly_faction_manifest_identifier_derivation_verified: true,
+        weekly_faction_exact_week_identity_binding_verified: true,
+        weekly_faction_payout_entry_order_verified: false,
+        weekly_faction_nested_fragment_identifier_derivations_verified: false,
+        weekly_faction_payout_entry_uniqueness_verified: false,
+        weekly_faction_reward_provenance_verified: false,
+        weekly_faction_tranche_lineage_semantics_verified: false,
         canonical_seal_semantics_verified: false,
         candidate_identifier_derivations_verified: false,
         non_ccc_chronology_recomputed: false,
@@ -971,6 +997,10 @@ fn parse_candidate(
     let mut reward_id = [0u8; 32];
     let mut source = XBoundSource::None;
     let mut tranche = XBoundTranche::None;
+    let mut chronology_span = None;
+    let mut faction_week_id_span = None;
+    let mut follower_count = 0u64;
+    let mut payout_entries_span = None;
     let mut last_key: Option<&[u8]> = None;
     p.byte(b'{')?;
     let mut first = true;
@@ -991,7 +1021,9 @@ fn parse_candidate(
                 fields |= AMOUNT;
             }
             b"chronology" => {
+                let start = p.pos;
                 p.skip_value(0)?;
+                chronology_span = Some(Span { start, end: p.pos });
                 fields |= CHRONOLOGY;
             }
             b"eligibleSequence" => {
@@ -999,11 +1031,13 @@ fn parse_candidate(
                 fields |= ELIGIBLE_SEQUENCE;
             }
             b"factionWeekId" => {
-                p.skip_value(0)?;
+                let start = p.pos;
+                let _ = p.canonical_json_string()?;
+                faction_week_id_span = Some(Span { start, end: p.pos });
                 fields |= FACTION_WEEK_ID;
             }
             b"followerCount" => {
-                p.skip_value(0)?;
+                follower_count = p.safe_integer_number()?;
                 fields |= FOLLOWER_COUNT;
             }
             b"originalBaseAdmissionLineage" => {
@@ -1011,7 +1045,9 @@ fn parse_candidate(
                 fields |= ORIGINAL_LINEAGE;
             }
             b"payoutEntries" => {
+                let start = p.pos;
                 p.skip_value(0)?;
+                payout_entries_span = Some(Span { start, end: p.pos });
                 fields |= PAYOUT_ENTRIES;
             }
             b"rewardId" => {
@@ -1131,8 +1167,19 @@ fn parse_candidate(
                 || fields != expected
                 || out.faction_payout_sha256.is_none()
             {
-                return Err(RewardCapacityRecomputationError::InvalidSealShape);
+                return Err(RewardCapacityRecomputationError::WeeklyFactionVariantShapeMismatch);
             }
+            validate_weekly_faction_manifest_candidate(
+                p.bytes,
+                &out,
+                faction_week_id_span
+                    .ok_or(RewardCapacityRecomputationError::WeeklyFactionVariantShapeMismatch)?,
+                follower_count,
+                payout_entries_span
+                    .ok_or(RewardCapacityRecomputationError::WeeklyFactionVariantShapeMismatch)?,
+                chronology_span
+                    .ok_or(RewardCapacityRecomputationError::WeeklyFactionVariantShapeMismatch)?,
+            )?;
         }
     }
     Ok(out)
@@ -1171,6 +1218,193 @@ fn derive_x_bound_funding_id(
         &round_decimal[round_start..],
         tranche.ascii(),
     ])
+}
+
+#[derive(Clone, Copy)]
+struct WeeklyFactionAggregate {
+    count: u64,
+    amount: u64,
+    eligible_sequence: u64,
+    activity_sequence: u64,
+    node_sequence: u64,
+}
+
+fn validate_weekly_faction_manifest_candidate(
+    seal_bytes: &[u8],
+    candidate: &RewardCapacityCandidateScratch,
+    week_id_span: Span,
+    follower_count: u64,
+    payout_entries_span: Span,
+    chronology_span: Span,
+) -> Result<(), RewardCapacityRecomputationError> {
+    let payout_digest = candidate
+        .faction_payout_sha256
+        .ok_or(RewardCapacityRecomputationError::WeeklyFactionVariantShapeMismatch)?;
+    if Sha256::digest(payout_entries_span.bytes(seal_bytes)).as_slice() != payout_digest {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionPayoutDigestMismatch);
+    }
+    let aggregate = parse_weekly_faction_payout_entries(payout_entries_span.bytes(seal_bytes))?;
+    if aggregate.count != follower_count || aggregate.amount != candidate.amount {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+    }
+    let week_id_json = week_id_span.bytes(seal_bytes);
+    validate_week_id_json(week_id_json)?;
+    validate_weekly_faction_chronology(
+        chronology_span.bytes(seal_bytes),
+        week_id_json,
+        payout_digest,
+        aggregate,
+    )?;
+    let mut id_hash = Sha256::new();
+    id_hash.update(WEEKLY_FACTION_MANIFEST_ID_DOMAIN);
+    id_hash.update(b"|");
+    let (round_start, round_decimal) = decimal_i64(candidate.funding_round);
+    id_hash.update(&round_decimal[round_start..]);
+    id_hash.update(b"|");
+    update_decoded_canonical_json_string(&mut id_hash, week_id_json)?;
+    id_hash.update(b"|");
+    id_hash.update(lower_hex(&payout_digest));
+    if <[u8; 32]>::from(id_hash.finalize()) != candidate.id {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionIdentifierMismatch);
+    }
+    Ok(())
+}
+
+fn parse_weekly_faction_payout_entries(
+    bytes: &[u8],
+) -> Result<WeeklyFactionAggregate, RewardCapacityRecomputationError> {
+    let mut p = Json::new(bytes)?;
+    p.byte(b'[')?;
+    if p.peek() == Some(b']') {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+    }
+    let mut aggregate = WeeklyFactionAggregate {
+        count: 0,
+        amount: 0,
+        eligible_sequence: 0,
+        activity_sequence: 0,
+        node_sequence: 0,
+    };
+    let mut first = true;
+    while p.peek() != Some(b']') {
+        if !first {
+            p.byte(b',')?;
+        }
+        first = false;
+        let entry = parse_weekly_faction_payout_entry(&mut p)?;
+        aggregate.count = aggregate
+            .count
+            .checked_add(1)
+            .ok_or(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch)?;
+        if aggregate.count > JS_MAX_SAFE_INTEGER {
+            return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+        }
+        aggregate.amount = aggregate
+            .amount
+            .checked_add(entry.amount)
+            .ok_or(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch)?;
+        aggregate.eligible_sequence = aggregate.eligible_sequence.max(entry.eligible_sequence);
+        aggregate.activity_sequence = aggregate.activity_sequence.max(entry.activity_sequence);
+        aggregate.node_sequence = aggregate.node_sequence.max(entry.node_sequence);
+    }
+    p.byte(b']')?;
+    p.end()?;
+    Ok(aggregate)
+}
+
+fn parse_weekly_faction_payout_entry(
+    p: &mut Json<'_>,
+) -> Result<WeeklyFactionAggregate, RewardCapacityRecomputationError> {
+    let mut amount = None;
+    let mut chronology = None;
+    let mut last_key: Option<&[u8]> = None;
+    p.byte(b'{')?;
+    let mut first = true;
+    while p.peek() != Some(b'}') {
+        if !first {
+            p.byte(b',')?;
+        }
+        first = false;
+        let key = p.plain_string()?;
+        if last_key.is_some_and(|last| last >= key) {
+            return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+        }
+        last_key = Some(key);
+        p.byte(b':')?;
+        match key {
+            b"amount" => amount = Some(p.u64_string()?),
+            b"chronology" => chronology = Some(parse_weekly_faction_entry_chronology(p)?),
+            _ => p.skip_value(0)?,
+        }
+    }
+    p.byte(b'}')?;
+    let amount = amount
+        .filter(|value| *value != 0)
+        .ok_or(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch)?;
+    let chronology =
+        chronology.ok_or(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch)?;
+    Ok(WeeklyFactionAggregate {
+        count: 1,
+        amount,
+        eligible_sequence: chronology.0,
+        activity_sequence: chronology.1,
+        node_sequence: chronology.2,
+    })
+}
+
+fn parse_weekly_faction_entry_chronology(
+    p: &mut Json<'_>,
+) -> Result<(u64, u64, u64), RewardCapacityRecomputationError> {
+    p.byte(b'{')?;
+    p.key(b"activitySequence")?;
+    let activity = p.u64_string()?;
+    p.comma_key(b"commitmentDigest")?;
+    p.skip_value(0)?;
+    p.comma_key(b"eligibleSequence")?;
+    let eligible = p.u64_string()?;
+    p.comma_key(b"immutableIdentity")?;
+    p.skip_value(0)?;
+    p.comma_key(b"nodeSequence")?;
+    let node = p.u64_string()?;
+    p.byte(b'}')?;
+    Ok((eligible, activity, node))
+}
+
+fn validate_weekly_faction_chronology(
+    bytes: &[u8],
+    week_id_json: &[u8],
+    payout_digest: [u8; 32],
+    aggregate: WeeklyFactionAggregate,
+) -> Result<(), RewardCapacityRecomputationError> {
+    let mut p = Json::new(bytes)?;
+    p.byte(b'{')?;
+    p.key(b"activitySequence")?;
+    if p.u64_string()? != aggregate.activity_sequence {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+    }
+    p.comma_key(b"commitmentDigest")?;
+    if p.hex32_string()? != payout_digest {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+    }
+    p.comma_key(b"eligibleSequence")?;
+    if p.u64_string()? != aggregate.eligible_sequence {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+    }
+    p.comma_key(b"immutableIdentity")?;
+    let identity = p.canonical_json_string()?;
+    if !canonical_json_string_decodes_to_prefix_and_json(
+        identity,
+        WEEKLY_FACTION_IDENTITY_PREFIX,
+        week_id_json,
+    )? {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+    }
+    p.comma_key(b"nodeSequence")?;
+    if p.u64_string()? != aggregate.node_sequence {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+    }
+    p.byte(b'}')?;
+    p.end()
 }
 
 fn parse_ledger(p: &mut Json<'_>) -> Result<Ledger, RewardCapacityRecomputationError> {
@@ -1432,6 +1666,22 @@ impl<'a> Json<'a> {
             .map_err(|_| RewardCapacityRecomputationError::CandidateCountMismatch)
     }
 
+    fn safe_integer_number(&mut self) -> Result<u64, RewardCapacityRecomputationError> {
+        let start = self.pos;
+        while matches!(self.peek(), Some(b'0'..=b'9')) {
+            self.pos += 1;
+        }
+        let digits = &self.bytes[start..self.pos];
+        if digits.is_empty() || (digits.len() > 1 && digits[0] == b'0') {
+            return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+        }
+        let value = parse_u64(digits)?;
+        if value > JS_MAX_SAFE_INTEGER {
+            return Err(RewardCapacityRecomputationError::WeeklyFactionAggregateMismatch);
+        }
+        Ok(value)
+    }
+
     fn skip_value(&mut self, depth: u8) -> Result<(), RewardCapacityRecomputationError> {
         if depth > 24 {
             return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
@@ -1604,6 +1854,184 @@ fn canonical_json_string_decodes_to(
         expected_index += 1;
     }
     Ok(expected_index == expected_utf8.len())
+}
+
+fn update_decoded_canonical_json_string(
+    hash: &mut Sha256,
+    encoded: &[u8],
+) -> Result<(), RewardCapacityRecomputationError> {
+    for_each_decoded_canonical_json_byte(encoded, |byte| hash.update([byte]))
+}
+
+fn canonical_json_string_decodes_to_prefix_and_json(
+    encoded: &[u8],
+    prefix: &[u8],
+    suffix_json: &[u8],
+) -> Result<bool, RewardCapacityRecomputationError> {
+    let mut expected_index = 0usize;
+    let prefix_len = prefix.len();
+    let mut matched = true;
+    let mut suffix_bytes = JsonDecodedBytes::new(suffix_json)?;
+    let mut callback_error = None;
+    for_each_decoded_canonical_json_byte(encoded, |byte| {
+        let expected = if expected_index < prefix_len {
+            Some(prefix[expected_index])
+        } else {
+            match suffix_bytes.next_decoded() {
+                Ok(value) => value,
+                Err(error) => {
+                    callback_error = Some(error);
+                    None
+                }
+            }
+        };
+        if expected != Some(byte) {
+            matched = false;
+        }
+        expected_index += 1;
+    })?;
+    if let Some(error) = callback_error {
+        return Err(error);
+    }
+    Ok(matched && expected_index >= prefix_len && suffix_bytes.next_decoded()?.is_none())
+}
+
+fn validate_week_id_json(encoded: &[u8]) -> Result<(), RewardCapacityRecomputationError> {
+    let mut decoded_count = 0usize;
+    let mut first_trim = false;
+    let mut last_trim = false;
+    let mut scalar = [0u8; 4];
+    let mut scalar_len = 0usize;
+    let mut scalar_index = 0usize;
+    for_each_decoded_canonical_json_byte(encoded, |byte| {
+        decoded_count += 1;
+        if scalar_len == 0 {
+            scalar[0] = byte;
+            scalar_len = utf8_scalar_len(byte);
+            scalar_index = 1;
+            if scalar_len == 1 {
+                let trim = is_ecmascript_trim_scalar(&scalar[..1]);
+                if decoded_count == 1 {
+                    first_trim = trim;
+                }
+                last_trim = trim;
+                scalar = [0; 4];
+                scalar_len = 0;
+                scalar_index = 0;
+            }
+        } else {
+            scalar[scalar_index] = byte;
+            scalar_index += 1;
+            if scalar_index == scalar_len {
+                let trim = is_ecmascript_trim_scalar(&scalar[..scalar_len]);
+                if decoded_count == scalar_len {
+                    first_trim = trim;
+                }
+                last_trim = trim;
+                scalar = [0; 4];
+                scalar_len = 0;
+                scalar_index = 0;
+            }
+        }
+    })?;
+    if decoded_count == 0 || scalar_len != 0 || first_trim || last_trim {
+        return Err(RewardCapacityRecomputationError::WeeklyFactionWeekIdMismatch);
+    }
+    Ok(())
+}
+
+fn utf8_scalar_len(first: u8) -> usize {
+    match first {
+        0x00..=0x7f => 1,
+        0xc2..=0xdf => 2,
+        0xe0..=0xef => 3,
+        _ => 4,
+    }
+}
+
+fn is_ecmascript_trim_scalar(bytes: &[u8]) -> bool {
+    matches!(
+        bytes,
+        [0x09..=0x0d]
+            | [0x20]
+            | [0xc2, 0xa0]
+            | [0xe1, 0x9a, 0x80]
+            | [0xe2, 0x80, 0x80..=0x8a]
+            | [0xe2, 0x80, 0xa8..=0xa9]
+            | [0xe2, 0x80, 0xaf]
+            | [0xe2, 0x81, 0x9f]
+            | [0xe3, 0x80, 0x80]
+            | [0xef, 0xbb, 0xbf]
+    )
+}
+
+struct JsonDecodedBytes<'a> {
+    encoded: &'a [u8],
+    index: usize,
+}
+
+impl<'a> JsonDecodedBytes<'a> {
+    fn new(encoded: &'a [u8]) -> Result<Self, RewardCapacityRecomputationError> {
+        if encoded.len() < 2 || encoded.first() != Some(&b'"') || encoded.last() != Some(&b'"') {
+            return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+        }
+        Ok(Self { encoded, index: 1 })
+    }
+
+    fn next_decoded(&mut self) -> Result<Option<u8>, RewardCapacityRecomputationError> {
+        if self.index == self.encoded.len() - 1 {
+            return Ok(None);
+        }
+        let (decoded, consumed) = decode_canonical_json_byte(self.encoded, self.index)?;
+        self.index += consumed;
+        Ok(Some(decoded))
+    }
+}
+
+fn for_each_decoded_canonical_json_byte(
+    encoded: &[u8],
+    mut visit: impl FnMut(u8),
+) -> Result<(), RewardCapacityRecomputationError> {
+    let mut bytes = JsonDecodedBytes::new(encoded)?;
+    while let Some(byte) = bytes.next_decoded()? {
+        visit(byte);
+    }
+    Ok(())
+}
+
+fn decode_canonical_json_byte(
+    encoded: &[u8],
+    index: usize,
+) -> Result<(u8, usize), RewardCapacityRecomputationError> {
+    if encoded[index] != b'\\' {
+        return Ok((encoded[index], 1));
+    }
+    let escape = *encoded
+        .get(index + 1)
+        .ok_or(RewardCapacityRecomputationError::InvalidCanonicalJson)?;
+    match escape {
+        b'"' => Ok((b'"', 2)),
+        b'\\' => Ok((b'\\', 2)),
+        b'b' => Ok((0x08, 2)),
+        b'f' => Ok((0x0c, 2)),
+        b'n' => Ok((b'\n', 2)),
+        b'r' => Ok((b'\r', 2)),
+        b't' => Ok((b'\t', 2)),
+        b'u' => {
+            let digits = encoded
+                .get(index + 2..index + 6)
+                .ok_or(RewardCapacityRecomputationError::InvalidCanonicalJson)?;
+            if digits[0] != b'0' || digits[1] != b'0' {
+                return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+            }
+            let value = (hex_nibble(digits[2])? << 4) | hex_nibble(digits[3])?;
+            if value > 0x1f || matches!(value, 0x08 | 0x09 | 0x0a | 0x0c | 0x0d) {
+                return Err(RewardCapacityRecomputationError::InvalidCanonicalJson);
+            }
+            Ok((value, 6))
+        }
+        _ => Err(RewardCapacityRecomputationError::InvalidCanonicalJson),
+    }
 }
 
 fn decode_hex32(value: &[u8]) -> Result<[u8; 32], RewardCapacityRecomputationError> {
