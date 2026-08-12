@@ -496,20 +496,27 @@ preparation only, not a native adapter or handler completion.
 The production source now includes a non-executing candidate for the two
 frozen Config edges. Staging requires an empty production-shaped economic state
 and deliberately no Daily Law capability, avoiding a circular dependency on an
-active core-custody regime. Activation checks the opaque OPEN-law capability
-first, then a same-mint/token-program conservation receipt, exact lane/stake
-funding shape, and zero observable preactivation economic state. The current
-source names the exact facts: Config staked principal and agency count plus
-aggregate Lane reserved, paid, and principal-claimed values. Candidate receipts
-hash the Config preimage, law account, conservation manifest, and those
-current-state facts.
+active core-custody regime. Activation no longer returns an ACTIVE Config-only
+candidate. It binds the exact Config key/current Config, checks the opaque
+OPEN-law capability and same-mint/token-program conservation receipt, checks
+the exact stake-token identity, and derives vacuity directly from Config plus
+all twelve `reserved`/`paid`/`principal_claimed` fields across the four input
+Lanes. Independent caller totals cannot substitute for those fields.
 
-The candidate is not accepted policy or executable evidence. Its preactivation
-facts are still caller-shaped, the owner acceptance and production identity
-flags remain false, and no write adapter consumes it. There is no AccountInfo,
-mutable borrow, CPI, ABI, entrypoint, dispatcher, or positive authorization;
-the matrix and graph therefore remain blocked rather than treating a reviewable
-predicate as a frozen transition.
+After those B3 prerequisites, the source invokes the retained V2 `activate`
+kernel once and privately holds all five poststates together: Config,
+Treasury, Ecosystem, Liquidity, and CoreReward. One domain-separated hash binds
+the complete read set (Config key, mint, vault authority, six token
+observations, four Lane encodings, and CoreReward bump); another binds the five
+strict poststate encodings. The public review surface can compare only the
+complete retained result and exposes no per-account poststate accessor.
+
+The plan is not accepted policy or executable evidence. Owner acceptance and
+production identity flags remain false, and no mixed existing-plus-create
+five-account write adapter consumes it. There is no AccountInfo, mutable borrow,
+CPI, ABI, entrypoint, dispatcher, or positive authorization; the matrix and
+graph therefore remain blocked rather than treating a reviewable projection as
+a frozen transition.
 
 The production source now also contains a pure Genesis conservation kernel for
 the fixed five-way allocation. It checks exact role order and
@@ -547,13 +554,24 @@ read-only Law AccountInfo plus Clock; the runtime conservation wrapper is
 produced only from exact Token-2022 and strict Lane-PDA capabilities. The new
 feature-gated composer parses the binding-relative Config PDA with that Law
 wrapper, binds the same Config/mint/token program, derives the observable
-zero-state facts, and returns data only.
+zero-state facts, and returns prerequisite hashes only. It cannot return the
+held activation plan because this runtime surface does not yet authenticate the
+stake-token read or the CoreReward lifecycle target; both facts are explicitly
+false in its truth record.
 
 This closes authentication of current observable preactivation state, not
 historical write absence or the Config graph node. The source says
 `complete_preactivation_write_history_authenticated: false`; owner policy,
 production identities, transition authorization, writes, entrypoint,
 dispatcher, activation, and Mainnet remain false/HOLD.
+
+This batch also does not implement the graph node's `finalize` requirement.
+The Law-program finalizer has no Config-phase gate and no atomic active-phase
+core-cap reconciliation, and the repository has no production
+`reconcile_core_cap` implementation. Canonical preactivation-account absence,
+mixed existing/create rollback, owner bootstrap and custody choices, a scoped
+Config/Genesis graph predicate, independent packets, Devnet, and terminal
+authorization remain separate blockers.
 
 The runtime parser also returns a separate opaque production-ACTIVE Config
 capability only after the strict phase codec and real Config PDA pass. It rejects

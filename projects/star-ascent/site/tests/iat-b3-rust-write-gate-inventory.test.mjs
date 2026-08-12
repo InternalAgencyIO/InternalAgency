@@ -436,7 +436,8 @@ test("the Config Genesis codec is a strict read-only representation, not a phase
 test("the Config Genesis candidate is non-circular but never self-authorizes policy", () => {
   assert.match(economySource, /mod config_genesis_transition;/u);
   assert.match(economyConfigGenesisTransitionSource, /prepare_enter_genesis_staging_candidate/u);
-  assert.match(economyConfigGenesisTransitionSource, /prepare_activate_genesis_candidate/u);
+  assert.match(economyConfigGenesisTransitionSource, /prepare_config_genesis_activation_plan/u);
+  assert.doesNotMatch(economyConfigGenesisTransitionSource, /prepare_activate_genesis_candidate/u);
   assert.match(economyConfigGenesisTransitionSource, /staging_daily_law_not_required: true/u);
   assert.match(economyConfigGenesisTransitionSource, /activation_requires_open_daily_law: true/u);
   assert.match(
@@ -446,6 +447,28 @@ test("the Config Genesis candidate is non-circular but never self-authorizes pol
   assert.match(
     economyConfigGenesisTransitionSource,
     /activation_requires_zero_preactivation_economic_state: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionSource,
+    /activation_binds_complete_readset: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionSource,
+    /activation_binds_retained_five_account_poststate: true/u,
+  );
+  assert.match(economyConfigGenesisTransitionSource, /CONFIG_GENESIS_ACTIVATION_READSET_DOMAIN/u);
+  assert.match(
+    economyConfigGenesisTransitionSource,
+    /CONFIG_GENESIS_ACTIVATION_POSTSTATES_DOMAIN/u,
+  );
+  assert.match(economyConfigGenesisTransitionSource, /input\.config_key != expected_config_key/u);
+  assert.match(economyConfigGenesisTransitionSource, /input\.mint\.key != current\.config\.mint/u);
+  assert.match(economyConfigGenesisTransitionSource, /require_activation_lane_bindings/u);
+  assert.match(economyConfigGenesisTransitionSource, /require_vacuous_activation_input/u);
+  assert.match(economyConfigGenesisTransitionSource, /matches_exact_retained_result/u);
+  assert.doesNotMatch(
+    economyConfigGenesisTransitionSource,
+    /pub const fn (?:config|treasury|ecosystem|liquidity|core_reward)\(&self\)/u,
   );
   assert.match(economyConfigGenesisTransitionSource, /owner_bootstrap_policy_accepted: false/u);
   assert.match(
@@ -484,7 +507,7 @@ test("Config Genesis runtime composition authenticates current state without inv
   );
   assert.match(
     economyConfigGenesisTransitionRuntimeSource,
-    /prepare_runtime_authenticated_activate_genesis_candidate/u,
+    /prepare_runtime_authenticated_activate_genesis_prerequisites/u,
   );
   assert.match(
     economyConfigGenesisTransitionRuntimeSource,
@@ -501,6 +524,14 @@ test("Config Genesis runtime composition authenticates current state without inv
   assert.match(
     economyConfigGenesisTransitionRuntimeSource,
     /current_preactivation_economic_state_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /complete_activation_readset_authenticated: false/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /stake_vault_and_core_reward_lifecycle_authenticated: false/u,
   );
   assert.match(
     economyConfigGenesisTransitionRuntimeSource,

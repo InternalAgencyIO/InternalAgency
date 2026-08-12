@@ -619,17 +619,25 @@ non-circular bootstrap rule concrete for owner and independent review. The
 `UNINITIALIZED -> GENESIS_STAGING` candidate admits only a production-shaped
 Config with zero stake account, principal, agencies, lane mask, and economic
 activity; it intentionally does not require Daily Law because no economic
-write is yet permitted. The `GENESIS_STAGING -> ACTIVE` candidate first
-requires an opaque current OPEN Daily Law capability for the same mint, then a
-mint/program-bound exact conservation receipt, the complete lane/stake funding
-shape, and zero observable preactivation Config/Lane economic state: staked
-principal, agencies, reserved rewards, paid rewards, and claimed principal. It
-binds the Config preimage, law account, conservation manifest, and exact current
-state facts into the candidate.
+write is yet permitted. The `GENESIS_STAGING -> ACTIVE` projection is no longer
+a Config-only candidate. It requires the exact Config key and current Config,
+an opaque current OPEN Daily Law capability for the same mint, a
+mint/program-bound exact conservation receipt, the stake-token identity, and
+zero `reserved`, `paid`, and `principal_claimed` counters on each of all four
+input Lanes. It then invokes the unchanged retained V2 `activate` kernel once
+and privately holds its indivisible five-account result: ACTIVE Config,
+Treasury Lane, Ecosystem Lane, Liquidity Lane, and the new CoreReward.
 
-The pure candidate is not the frozen phase predicate. Its public input remains
-caller-shaped, the owner has not accepted the rule, production identities and
-final binaries are absent, and no writer consumes the result. It exposes no
+Two domain-separated commitments prevent selective or incomplete downstream
+use. The read-set commitment binds the Config key, mint facts, vault authority,
+community/stake/four-Lane token facts, all four strict Lane encodings, and the
+CoreReward bump. The poststate commitment binds all five strict output
+encodings. Review code can compare the plan only with one complete retained
+`ActivateResult`; no public Config, Lane, or CoreReward accessor is exposed.
+
+The held plan is not the frozen phase predicate. The owner has not accepted the
+rule, production identities and final binaries are absent, and no mixed
+existing-plus-create five-account writer consumes the result. It exposes no
 AccountInfo, mutable borrow, CPI, ABI, entrypoint, or dispatcher; all
 authorization fields remain false and the Config graph node remains
 blocked/Mainnet HOLD.
@@ -675,14 +683,25 @@ the Token-2022 and four strict Lane-PDA capabilities pass the conservation
 composition. A feature-gated Config/Genesis composer then parses the real
 read-only Config PDA with the opaque runtime Law capability, requires the same
 Config/mint/token-program binding, derives the five current preactivation facts
-from authenticated Config and Lane state, and returns an opaque held activation
-candidate.
+from authenticated Config and Lane state, and returns opaque held prerequisite
+hashes only. It deliberately cannot return activation poststates because this
+composer does not yet authenticate the stake-token read or a vacant/prefunded
+CoreReward lifecycle target.
 
 This authenticates current observable preactivation state. It does not prove a
 complete historical absence of prior writes, owner acceptance, production
 identity freeze, phase authorization, or execution. Those truth fields remain
 false, no write/ABI/entrypoint/dispatcher was added, and the graph remains
 `BLOCKED`/Mainnet `HOLD`.
+
+Activation projection does not close `finalize`. The current Law-program
+`process_finalize_day` persists the Daily Law decision without a Config-phase
+check or atomic active-phase core-cap reconciliation, and no production
+`reconcile_core_cap` implementation exists. That cross-program rule depends on
+accepted core-custody policy and remains a separate blocker. Staging account
+absence, the mixed existing/create rollback executor, owner bootstrap choices,
+the scoped graph predicate, independent review packets, Devnet evidence, and
+Mainnet authorization likewise remain unresolved.
 
 The same runtime boundary now exposes an opaque production-ACTIVE Config
 capability. It can only be returned after the runtime Law capability parses the

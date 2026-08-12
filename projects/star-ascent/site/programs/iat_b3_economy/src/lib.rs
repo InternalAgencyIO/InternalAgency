@@ -73,11 +73,13 @@ pub use config_genesis_codec::{
     CONFIG_GENESIS_CODEC_TRUTH,
 };
 pub use config_genesis_transition::{
-    prepare_activate_genesis_candidate, prepare_enter_genesis_staging_candidate,
-    ConfigGenesisTransitionCandidate, ConfigGenesisTransitionCandidateError,
-    ConfigGenesisTransitionCandidateTruth, ConfigGenesisTransitionEdge,
-    GenesisPreactivationCandidateFacts, CONFIG_GENESIS_TRANSITION_CANDIDATE_DOMAIN,
-    CONFIG_GENESIS_TRANSITION_CANDIDATE_STATUS, CONFIG_GENESIS_TRANSITION_CANDIDATE_TRUTH,
+    prepare_config_genesis_activation_plan, prepare_enter_genesis_staging_candidate,
+    ConfigGenesisActivationPlan, ConfigGenesisTransitionCandidate,
+    ConfigGenesisTransitionCandidateError, ConfigGenesisTransitionCandidateTruth,
+    ConfigGenesisTransitionEdge, GenesisPreactivationCandidateFacts,
+    CONFIG_GENESIS_ACTIVATION_POSTSTATES_DOMAIN, CONFIG_GENESIS_ACTIVATION_READSET_DOMAIN,
+    CONFIG_GENESIS_TRANSITION_CANDIDATE_DOMAIN, CONFIG_GENESIS_TRANSITION_CANDIDATE_STATUS,
+    CONFIG_GENESIS_TRANSITION_CANDIDATE_TRUTH,
 };
 pub use genesis_conservation::{
     verify_genesis_allocation_conservation, GenesisAllocationEntry, GenesisAllocationManifest,

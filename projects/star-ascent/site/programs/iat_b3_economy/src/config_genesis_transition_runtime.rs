@@ -1,5 +1,5 @@
-//! Runtime-authenticated composition for the held Config/Genesis activation
-//! candidate.
+//! Runtime-authenticated prerequisites for a future Config/Genesis activation
+//! executor.
 //!
 //! This feature-gated module accepts only an opaque runtime Daily-Law
 //! capability, a real immutable Config PDA, and an opaque runtime Genesis
@@ -7,16 +7,14 @@
 //! state, but cannot prove complete historical absence of prior writes and
 //! cannot authorize or execute the transition.
 
+use crate::config_genesis_transition::validate_activate_genesis_prerequisites;
 use crate::genesis_conservation_runtime::AuthenticatedGenesisConservationReceipt;
 use crate::native_adapter::NativeEconomyBinding;
 use crate::runtime_adapter::{
     parse_config_genesis_account_info_with_runtime_law, RuntimeAdapterError,
     RuntimeValidatedDailyLawWrite,
 };
-use crate::{
-    prepare_activate_genesis_candidate, ConfigGenesisTransitionCandidate,
-    ConfigGenesisTransitionCandidateError, GenesisPreactivationCandidateFacts,
-};
+use crate::{ConfigGenesisTransitionCandidateError, GenesisPreactivationCandidateFacts};
 use solana_account_info::AccountInfo;
 
 pub const CONFIG_GENESIS_TRANSITION_RUNTIME_STATUS: &str =
@@ -29,6 +27,8 @@ pub struct ConfigGenesisTransitionRuntimeTruth {
     pub runtime_config_pda_authenticated: bool,
     pub runtime_genesis_balances_and_lanes_authenticated: bool,
     pub current_preactivation_economic_state_authenticated: bool,
+    pub complete_activation_readset_authenticated: bool,
+    pub stake_vault_and_core_reward_lifecycle_authenticated: bool,
     pub complete_preactivation_write_history_authenticated: bool,
     pub owner_bootstrap_policy_accepted: bool,
     pub production_identity_binding_frozen: bool,
@@ -46,6 +46,8 @@ pub const CONFIG_GENESIS_TRANSITION_RUNTIME_TRUTH: ConfigGenesisTransitionRuntim
         runtime_config_pda_authenticated: true,
         runtime_genesis_balances_and_lanes_authenticated: true,
         current_preactivation_economic_state_authenticated: true,
+        complete_activation_readset_authenticated: false,
+        stake_vault_and_core_reward_lifecycle_authenticated: false,
         complete_preactivation_write_history_authenticated: false,
         owner_bootstrap_policy_accepted: false,
         production_identity_binding_frozen: false,
@@ -78,23 +80,19 @@ impl From<ConfigGenesisTransitionCandidateError> for ConfigGenesisTransitionRunt
     }
 }
 
-/// Opaque composition result. The embedded candidate is inspectable, but the
-/// wrapper intentionally exposes no instruction data, write intent, or
-/// authorization bit.
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub struct RuntimeAuthenticatedConfigGenesisCandidate {
-    candidate: ConfigGenesisTransitionCandidate,
+/// Opaque composition result for runtime-authenticated current facts only.
+/// It deliberately carries no Config-only activation poststate, instruction
+/// data, write intent, or authorization bit.
+#[derive(Debug, Eq, PartialEq)]
+pub struct RuntimeAuthenticatedConfigGenesisPrerequisites {
     config_account_key: [u8; 32],
     config_account_sha256: [u8; 32],
     law_account_key: [u8; 32],
     conservation_manifest_sha256: [u8; 32],
+    candidate_facts_sha256: [u8; 32],
 }
 
-impl RuntimeAuthenticatedConfigGenesisCandidate {
-    pub const fn candidate(&self) -> ConfigGenesisTransitionCandidate {
-        self.candidate
-    }
-
+impl RuntimeAuthenticatedConfigGenesisPrerequisites {
     pub const fn config_account_key(&self) -> [u8; 32] {
         self.config_account_key
     }
@@ -110,17 +108,22 @@ impl RuntimeAuthenticatedConfigGenesisCandidate {
     pub const fn conservation_manifest_sha256(&self) -> [u8; 32] {
         self.conservation_manifest_sha256
     }
+
+    pub const fn candidate_facts_sha256(&self) -> [u8; 32] {
+        self.candidate_facts_sha256
+    }
 }
 
-/// Compose the exact runtime-authenticated inputs into a held activation
-/// candidate. This function reads the Config AccountInfo immutably and returns
-/// data only. It neither proves historical write absence nor performs a write.
-pub fn prepare_runtime_authenticated_activate_genesis_candidate(
+/// Compose the currently available runtime-authenticated inputs into held
+/// prerequisites. This function reads the Config AccountInfo immutably and
+/// returns data only. It deliberately does not produce activation poststates:
+/// the stake-token read and CoreReward lifecycle target are not supplied here.
+pub fn prepare_runtime_authenticated_activate_genesis_prerequisites(
     runtime_law: &RuntimeValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
     config_account: &AccountInfo<'_>,
     conservation: &AuthenticatedGenesisConservationReceipt,
-) -> Result<RuntimeAuthenticatedConfigGenesisCandidate, ConfigGenesisTransitionRuntimeError> {
+) -> Result<RuntimeAuthenticatedConfigGenesisPrerequisites, ConfigGenesisTransitionRuntimeError> {
     if runtime_law.mint() != binding.mint() {
         return Err(ConfigGenesisTransitionRuntimeError::RuntimeLawBindingMismatch);
     }
@@ -144,18 +147,27 @@ pub fn prepare_runtime_authenticated_activate_genesis_candidate(
         lane_paid_total: conservation.lane_paid_total(),
         lane_principal_claimed_total: conservation.lane_principal_claimed_total(),
     };
-    let candidate = prepare_activate_genesis_candidate(
+    let (current_config_sha256, candidate_facts_sha256) = validate_activate_genesis_prerequisites(
         state,
         runtime_law.gate(),
         conservation.receipt(),
         facts,
     )?;
-    Ok(RuntimeAuthenticatedConfigGenesisCandidate {
-        candidate,
+    if state.config.lane_mask != 0b1_1110
+        || !state.config.stake_vault_initialized
+        || state.config.stake_token_account == [0; 32]
+    {
+        return Err(ConfigGenesisTransitionRuntimeError::Candidate(
+            ConfigGenesisTransitionCandidateError::GenesisFundingIncomplete,
+        ));
+    }
+    debug_assert_eq!(current_config_sha256, config.preimage_sha256());
+    Ok(RuntimeAuthenticatedConfigGenesisPrerequisites {
         config_account_key: config.key(),
-        config_account_sha256: config.preimage_sha256(),
+        config_account_sha256: current_config_sha256,
         law_account_key: runtime_law.law_account_key(),
         conservation_manifest_sha256: conservation.manifest_sha256(),
+        candidate_facts_sha256,
     })
 }
 
@@ -309,6 +321,8 @@ mod tests {
                 runtime_config_pda_authenticated: true,
                 runtime_genesis_balances_and_lanes_authenticated: true,
                 current_preactivation_economic_state_authenticated: true,
+                complete_activation_readset_authenticated: false,
+                stake_vault_and_core_reward_lifecycle_authenticated: false,
                 complete_preactivation_write_history_authenticated: false,
                 owner_bootstrap_policy_accepted: false,
                 production_identity_binding_frozen: false,
@@ -322,7 +336,7 @@ mod tests {
     }
 
     #[test]
-    fn runtime_law_config_and_conservation_compose_one_held_candidate() {
+    fn runtime_law_config_and_conservation_compose_held_prerequisites_only() {
         let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
         let law = runtime_law();
         let conservation = conservation(&binding);
@@ -331,7 +345,7 @@ mod tests {
         let mut lamports = 1;
         let mut data = config_data(&binding);
         let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
-        let result = prepare_runtime_authenticated_activate_genesis_candidate(
+        let result = prepare_runtime_authenticated_activate_genesis_prerequisites(
             &law,
             &binding,
             &account,
@@ -344,8 +358,8 @@ mod tests {
             result.conservation_manifest_sha256(),
             conservation.manifest_sha256()
         );
-        assert_eq!(result.candidate().next_state().phase, GenesisPhase::Active);
-        assert!(result.candidate().next_state().config.active);
+        assert_ne!(result.config_account_sha256(), [0; 32]);
+        assert_ne!(result.candidate_facts_sha256(), [0; 32]);
     }
 
     #[test]
@@ -362,14 +376,14 @@ mod tests {
         let mut lamports = 1;
         let account = AccountInfo::new(&key, false, false, &mut lamports, &mut data, &owner, false);
         assert_eq!(
-            prepare_runtime_authenticated_activate_genesis_candidate(
+            prepare_runtime_authenticated_activate_genesis_prerequisites(
                 &law,
                 &binding,
                 &account,
                 &conservation,
             ),
             Err(ConfigGenesisTransitionRuntimeError::Candidate(
-                ConfigGenesisTransitionCandidateError::GenesisFundingIncomplete
+                ConfigGenesisTransitionCandidateError::PreactivationEconomicStateNotVacuous
             ))
         );
     }
@@ -386,7 +400,7 @@ mod tests {
         let mut data = config_data(&binding);
         let account = AccountInfo::new(&key, false, true, &mut lamports, &mut data, &owner, false);
         assert_eq!(
-            prepare_runtime_authenticated_activate_genesis_candidate(
+            prepare_runtime_authenticated_activate_genesis_prerequisites(
                 &law,
                 &binding,
                 &account,
@@ -397,7 +411,7 @@ mod tests {
 
         let conservation = conservation(&binding);
         assert_eq!(
-            prepare_runtime_authenticated_activate_genesis_candidate(
+            prepare_runtime_authenticated_activate_genesis_prerequisites(
                 &law,
                 &binding,
                 &account,
@@ -421,6 +435,9 @@ mod tests {
             concat!("transition_authorized", ": true"),
             concat!("account_writes_executed", ": true"),
             concat!("mainnet_hold", ": false"),
+            concat!("prepare_config_genesis_", "activation_plan"),
+            concat!("ConfigGenesis", "ActivationPlan"),
+            concat!("next_", "state"),
         ] {
             assert!(!source.contains(forbidden), "forbidden source: {forbidden}");
         }
