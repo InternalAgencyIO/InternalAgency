@@ -35,6 +35,18 @@ const LOCAL_0001_UTC = 1_786_050_060n;
 const RANDOMNESS = "42".repeat(32);
 const SOURCE_ID = "ccc-test-source";
 const ESCAPED_SOURCE_ID = "ccc/\"quoted\"\\path\b\f\n\r\t\u0001\u001e|é|雪|🚀|\u2028|end";
+const X_BOUND_SOURCE_PRIORITY = Object.freeze({
+  GENESIS_AIRDROP: "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+  X_INTERACTION: "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+  STANDARD_POSITION: "STANDARD_10_PERCENT_AND_X_CAMPAIGN",
+  CCC_AGENT: "CCC_AGENT",
+  CCC_ASSOCIATE: "CCC_ASSOCIATE",
+});
+const X_BOUND_TRANCHES = Object.freeze([
+  "X_BASE_10",
+  "X_PREMIUM_FULL_100",
+  "X_PREMIUM_UPGRADE_90",
+]);
 const UPDATE = process.env.IAT_B3_PRINT_REWARD_RECOMPUTATION_FIXTURE === "1";
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const hex = (value) => BigInt(value).toString(16).padStart(64, "0");
@@ -132,6 +144,57 @@ function xBound(rewardIdNumber, trancheKind, sequence) {
       activitySequence: BigInt(sequence),
       nodeSequence: BigInt(sequence),
       immutableIdentity: `x-identity-${sequence}`,
+      commitmentDigest: rewardId,
+    },
+  };
+}
+
+function matrixXBound(rewardIdNumber, rewardSourceKind, trancheKind, sequence) {
+  const rewardId = hex(rewardIdNumber);
+  const priorityClass = X_BOUND_SOURCE_PRIORITY[rewardSourceKind];
+  const id = sha256(`IAT_B3_X_FUNDING_V1|${rewardId}|${FUNDING_ROUND}|${trancheKind}`);
+  const common = {
+    id,
+    kind: "X_BOUND_FUNDING",
+    rewardId,
+    rewardSourceKind,
+    trancheKinds: [trancheKind],
+    priorityClass,
+    amount: 100n,
+    fundingRoundAtUnixSeconds: FUNDING_ROUND,
+    fundingPool: "SHARED_REWARD_RESERVE",
+    reservationStatus: "NEW_UNRESERVED",
+    ...(trancheKind === "X_PREMIUM_UPGRADE_90" ? {
+      originalBaseAdmissionLineage: {
+        schema: "iat-b3-x-base-admission-lineage/v1",
+        status: "NON_ACTIVATING_UNAUTHENTICATED_REFERENCE_LINEAGE",
+        rewardId,
+        fundingRoundAtUnixSeconds: FUNDING_ROUND - 86_400n,
+        allocationIndex: sequence,
+        referenceReceiptSha256: hex(200_000 + sequence),
+        referenceFinalizationSha256: hex(300_000 + sequence),
+        batchCommitmentSha256: hex(400_000 + sequence),
+        binaryReceiptSha256: hex(500_000 + sequence),
+        authenticated: false,
+      },
+    } : {}),
+  };
+  if (priorityClass === "CCC_AGENT" || priorityClass === "CCC_ASSOCIATE") {
+    return {
+      ...common,
+      qualifyingActivityStartSlot: 100n + BigInt(priorityClass === "CCC_ASSOCIATE"),
+      nodeActivationSlot: 200n,
+      eligibleSequence: 300n,
+      qualificationPda: hex(600_000 + sequence),
+    };
+  }
+  return {
+    ...common,
+    chronology: {
+      eligibleSequence: BigInt(sequence),
+      activitySequence: BigInt(sequence),
+      nodeSequence: BigInt(sequence),
+      immutableIdentity: `matrix-${sequence}`,
       commitmentDigest: rewardId,
     },
   };
@@ -257,6 +320,28 @@ function escapedSourceVectors() {
   });
 }
 
+function xBoundMatrixVectors() {
+  let sequence = 1;
+  const obligations = Object.keys(X_BOUND_SOURCE_PRIORITY).flatMap((rewardSourceKind) => (
+    X_BOUND_TRANCHES.map((trancheKind) => {
+      const candidate = matrixXBound(100_000 + sequence, rewardSourceKind, trancheKind, sequence);
+      sequence += 1;
+      return candidate;
+    })
+  ));
+  return finalizedVectors({
+    sourceId: SOURCE_ID,
+    obligations,
+    ledgerSnapshot: {
+      lanes: {
+        treasury: { unlocked: 1_500n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        ecosystem: { unlocked: 0n, reserved: 0n, paid: 0n, withdrawn: 0n },
+        liquidity: { unlocked: 0n, reserved: 0n, paid: 0n, withdrawn: 0n },
+      },
+    },
+  });
+}
+
 function bindHostileSeal(canonical, mutate) {
   const roundSeal = structuredClone(canonical.roundState.roundSeal);
   mutate(roundSeal);
@@ -295,10 +380,85 @@ function hostileUniquenessVectors(canonical) {
   });
 }
 
+function findXBoundCandidate(roundSeal, rewardSourceKind, trancheKind) {
+  const candidate = roundSeal.candidates.find((entry) => (
+    entry.kind === "X_BOUND_FUNDING"
+      && entry.rewardSourceKind === rewardSourceKind
+      && entry.trancheKinds[0] === trancheKind
+  ));
+  assert.ok(candidate, `${rewardSourceKind}/${trancheKind} candidate`);
+  return candidate;
+}
+
+function hostileXBoundVectors(canonical) {
+  return Object.freeze({
+    rewardIdDerivedMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").rewardId = hex(900_001);
+    }),
+    idDerivedMismatch: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10");
+      const index = roundSeal.candidates.indexOf(candidate);
+      candidate.id = hex(900_002);
+      roundSeal.candidateIds[index] = candidate.id;
+    }),
+    wrongSourcePriority: bindHostileSeal(canonical, (roundSeal) => {
+      findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").rewardSourceKind = "CCC_AGENT";
+    }),
+    factionFollowerDirect: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10");
+      candidate.rewardSourceKind = "FACTION_FOLLOWER";
+      candidate.priorityClass = "WEEKLY_FACTION";
+    }),
+    coreDirect: bindHostileSeal(canonical, (roundSeal) => {
+      findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").rewardSourceKind = "CORE";
+    }),
+    emptyTranche: bindHostileSeal(canonical, (roundSeal) => {
+      findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").trancheKinds = [];
+    }),
+    multipleTranches: bindHostileSeal(canonical, (roundSeal) => {
+      findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").trancheKinds = [
+        "X_BASE_10", "X_PREMIUM_FULL_100",
+      ];
+    }),
+    unknownTranche: bindHostileSeal(canonical, (roundSeal) => {
+      findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").trancheKinds = ["UNKNOWN"];
+    }),
+    missingRewardId: bindHostileSeal(canonical, (roundSeal) => {
+      delete findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").rewardId;
+    }),
+    missingUpgradeLineage: bindHostileSeal(canonical, (roundSeal) => {
+      delete findXBoundCandidate(
+        roundSeal, "X_INTERACTION", "X_PREMIUM_UPGRADE_90",
+      ).originalBaseAdmissionLineage;
+    }),
+    extraBaseLineage: bindHostileSeal(canonical, (roundSeal) => {
+      const base = findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10");
+      base.originalBaseAdmissionLineage = structuredClone(findXBoundCandidate(
+        roundSeal, "X_INTERACTION", "X_PREMIUM_UPGRADE_90",
+      ).originalBaseAdmissionLineage);
+    }),
+    genericFieldSmuggling: bindHostileSeal(canonical, (roundSeal) => {
+      delete findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10").kind;
+    }),
+    chronologyOnCcc: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findXBoundCandidate(roundSeal, "X_INTERACTION", "X_BASE_10");
+      candidate.rewardSourceKind = "CCC_AGENT";
+      candidate.priorityClass = "CCC_AGENT";
+    }),
+    cccOrderingOnStandard: bindHostileSeal(canonical, (roundSeal) => {
+      const candidate = findXBoundCandidate(roundSeal, "CCC_AGENT", "X_BASE_10");
+      candidate.rewardSourceKind = "X_INTERACTION";
+      candidate.priorityClass = "STANDARD_10_PERCENT_AND_X_CAMPAIGN";
+    }),
+  });
+}
+
 function renderFixture() {
   const vectors = canonicalVectors();
   const escaped = escapedSourceVectors();
+  const xbound = xBoundMatrixVectors();
   const hostile = hostileUniquenessVectors(vectors);
+  const hostileXBound = hostileXBoundVectors(xbound);
   const lines = [
     "# Generated only from the exact host reference; consumed read-only by Rust tests.",
     "schema=iat-b3-reward-capacity-rust-recomputation/v1",
@@ -321,9 +481,22 @@ function renderFixture() {
     lines.push(`escaped.receipt.${index}=${escaped.receiptBytes[index].toString("hex")}`);
     lines.push(`escaped.reference_core.${index}=${escaped.referenceCores[index].toString("hex")}`);
   }
+  lines.push(`xbound.source_id=${Buffer.from(SOURCE_ID, "utf8").toString("hex")}`);
+  lines.push(`xbound.randomness=${RANDOMNESS}`);
+  lines.push(`xbound.seal=${xbound.sealBytes.toString("hex")}`);
+  lines.push(`xbound.batch=${xbound.batchBytes.toString("hex")}`);
+  lines.push(`xbound.count=${xbound.receiptBytes.length}`);
+  for (let index = 0; index < xbound.receiptBytes.length; index += 1) {
+    lines.push(`xbound.receipt.${index}=${xbound.receiptBytes[index].toString("hex")}`);
+    lines.push(`xbound.reference_core.${index}=${xbound.referenceCores[index].toString("hex")}`);
+  }
   for (const [name, vector] of Object.entries(hostile)) {
     lines.push(`hostile.${name}.seal=${vector.sealBytes.toString("hex")}`);
     lines.push(`hostile.${name}.batch=${vector.batchBytes.toString("hex")}`);
+  }
+  for (const [name, vector] of Object.entries(hostileXBound)) {
+    lines.push(`hostile.xbound.${name}.seal=${vector.sealBytes.toString("hex")}`);
+    lines.push(`hostile.xbound.${name}.batch=${vector.batchBytes.toString("hex")}`);
   }
   return `${lines.join("\n")}\n`;
 }
@@ -347,7 +520,9 @@ if (UPDATE) {
     const fixture = parseFixture();
     const vectors = canonicalVectors();
     const escaped = escapedSourceVectors();
+    const xbound = xBoundMatrixVectors();
     const hostile = hostileUniquenessVectors(vectors);
+    const hostileXBound = hostileXBoundVectors(xbound);
     assert.equal(fixture.schema, "iat-b3-reward-capacity-rust-recomputation/v1");
     assert.equal(fixture.source_id, Buffer.from(SOURCE_ID).toString("hex"));
     assert.equal(fixture.randomness, RANDOMNESS);
@@ -373,6 +548,21 @@ if (UPDATE) {
         escaped.referenceCores[index].toString("hex"),
       );
     }
+    assert.equal(fixture["xbound.source_id"], Buffer.from(SOURCE_ID).toString("hex"));
+    assert.equal(fixture["xbound.randomness"], RANDOMNESS);
+    assert.equal(fixture["xbound.seal"], xbound.sealBytes.toString("hex"));
+    assert.equal(fixture["xbound.batch"], xbound.batchBytes.toString("hex"));
+    assert.equal(Number(fixture["xbound.count"]), xbound.receiptBytes.length);
+    for (let index = 0; index < xbound.receiptBytes.length; index += 1) {
+      assert.equal(
+        fixture[`xbound.receipt.${index}`],
+        xbound.receiptBytes[index].toString("hex"),
+      );
+      assert.equal(
+        fixture[`xbound.reference_core.${index}`],
+        xbound.referenceCores[index].toString("hex"),
+      );
+    }
     for (const [name, vector] of Object.entries(hostile)) {
       assert.equal(
         fixture[`hostile.${name}.seal`],
@@ -385,12 +575,52 @@ if (UPDATE) {
         `${name} batch`,
       );
     }
+    for (const [name, vector] of Object.entries(hostileXBound)) {
+      assert.equal(
+        fixture[`hostile.xbound.${name}.seal`],
+        vector.sealBytes.toString("hex"),
+        `${name} X-bound seal`,
+      );
+      assert.equal(
+        fixture[`hostile.xbound.${name}.batch`],
+        vector.batchBytes.toString("hex"),
+        `${name} X-bound batch`,
+      );
+    }
     assert.deepEqual(vectors.dispositions, [
       "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
       "ADMITTED_RESERVED", "ADMITTED_RESERVED", "ADMITTED_RESERVED",
       "NULL_UNDERFUNDED", "NULL_BLOCKED", "NULL_BLOCKED",
     ]);
     assert.deepEqual(escaped.dispositions, ["ADMITTED_RESERVED", "ADMITTED_RESERVED"]);
+    assert.equal(xbound.dispositions.length, 15);
+    assert.ok(xbound.dispositions.every((value) => value === "ADMITTED_RESERVED"));
+  });
+
+  test("host finalization covers every five-source by three-tranche X-bound pair", () => {
+    const vectors = xBoundMatrixVectors();
+    const candidates = vectors.roundState.roundSeal.candidates;
+    assert.equal(candidates.length, 15);
+    for (const [source, priority] of Object.entries(X_BOUND_SOURCE_PRIORITY)) {
+      for (const tranche of X_BOUND_TRANCHES) {
+        const candidate = findXBoundCandidate(vectors.roundState.roundSeal, source, tranche);
+        assert.equal(candidate.priorityClass, priority);
+        assert.equal(
+          candidate.id,
+          sha256(`IAT_B3_X_FUNDING_V1|${candidate.rewardId}|${FUNDING_ROUND}|${tranche}`),
+        );
+        assert.equal(
+          Object.hasOwn(candidate, "originalBaseAdmissionLineage"),
+          tranche === "X_PREMIUM_UPGRADE_90",
+        );
+        assert.equal(Object.hasOwn(candidate, "chronology"), priority.startsWith("STANDARD_"));
+        assert.equal(Object.hasOwn(candidate, "qualificationPda"), priority.startsWith("CCC_"));
+      }
+    }
+    validateFinalizedRewardCapacityRound({
+      roundState: vectors.roundState,
+      cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+    });
   });
 
   test("host JSON.stringify source vector covers every supported canonical escape and Unicode literal", () => {
@@ -418,6 +648,36 @@ if (UPDATE) {
       ["duplicateCandidateId", /DUPLICATE_REWARD_OBLIGATION_ID/u],
       ["duplicateCccQualificationPda", /DUPLICATE_CCC_QUALIFICATION_PDA_IN_TIER/u],
       ["multipleWeeklyFactionManifests", /ONE_AGGREGATE_WEEKLY_FACTION_MANIFEST/u],
+    ]) {
+      assert.throws(
+        () => validateFinalizedRewardCapacityRound({
+          roundState: hostile[name].roundState,
+          cccRandomnessReveal: { sourceId: SOURCE_ID, randomnessHex: RANDOMNESS },
+        }),
+        expected,
+        name,
+      );
+    }
+  });
+
+  test("host validator rejects every X-bound semantic drift committed for native parity", () => {
+    const canonical = xBoundMatrixVectors();
+    const hostile = hostileXBoundVectors(canonical);
+    for (const [name, expected] of [
+      ["rewardIdDerivedMismatch", /ID_NOT_DERIVED/u],
+      ["idDerivedMismatch", /ID_NOT_DERIVED/u],
+      ["wrongSourcePriority", /SOURCE_PRIORITY_CLASS_MISMATCH/u],
+      ["factionFollowerDirect", /WEEKLY_FACTION_REQUIRES_AGGREGATE/u],
+      ["coreDirect", /SOURCE_PRIORITY_CLASS_MISMATCH/u],
+      ["emptyTranche", /INVALID_X_BOUND_FUNDING_TRANCHE_SET/u],
+      ["multipleTranches", /INVALID_X_BOUND_FUNDING_TRANCHE_SET/u],
+      ["unknownTranche", /INVALID_X_BOUND_FUNDING_TRANCHE_SET/u],
+      ["missingRewardId", /VARIANT_KEY_SET/u],
+      ["missingUpgradeLineage", /VARIANT_KEY_SET/u],
+      ["extraBaseLineage", /VARIANT_KEY_SET/u],
+      ["genericFieldSmuggling", /X_BOUND_SOURCE_KIND_REQUIRES_X_BOUND_FUNDING_KIND/u],
+      ["chronologyOnCcc", /VARIANT_KEY_SET/u],
+      ["cccOrderingOnStandard", /VARIANT_KEY_SET/u],
     ]) {
       assert.throws(
         () => validateFinalizedRewardCapacityRound({

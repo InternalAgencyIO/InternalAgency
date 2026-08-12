@@ -79,7 +79,7 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_economy/src/reward_allocator_transcript.rs":
     "a9fab4007e1dc7fa24b0e2248ee6ace8cd0c904f7643c87c79311deb6942a99d",
   "programs/iat_b3_economy/src/reward_capacity_recomputation.rs":
-    "d597b1148829a73d3ec1521e9ab605e0249283b5f5ea9310769f46cf605c56dc",
+    "7824650bd5f9d4a8acf5a632a445d82ef625c5163ee6bc600d178266eaa962ec",
   "programs/iat_b3_reference/provider-authenticated-envelope.mjs":
     "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
   "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs":

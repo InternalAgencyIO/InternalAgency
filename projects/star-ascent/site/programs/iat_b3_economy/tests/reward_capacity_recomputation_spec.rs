@@ -28,6 +28,10 @@ fn escaped_fixture() -> Vectors {
     fixture_with_prefix("escaped.")
 }
 
+fn xbound_fixture() -> Vectors {
+    fixture_with_prefix("xbound.")
+}
+
 fn fixture_with_prefix(prefix: &str) -> Vectors {
     let values: BTreeMap<&str, &str> = FIXTURE
         .lines()
@@ -66,6 +70,18 @@ fn hostile_fixture(name: &str) -> Vectors {
     let mut vectors = fixture();
     vectors.seal = decode_hex(values[format!("hostile.{name}.seal").as_str()]);
     vectors.batch = decode_hex(values[format!("hostile.{name}.batch").as_str()]);
+    vectors
+}
+
+fn hostile_xbound_fixture(name: &str) -> Vectors {
+    let values: BTreeMap<&str, &str> = FIXTURE
+        .lines()
+        .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        .map(|line| line.split_once('=').expect("valid fixture line"))
+        .collect();
+    let mut vectors = xbound_fixture();
+    vectors.seal = decode_hex(values[format!("hostile.xbound.{name}.seal").as_str()]);
+    vectors.batch = decode_hex(values[format!("hostile.xbound.{name}.batch").as_str()]);
     vectors
 }
 
@@ -136,6 +152,13 @@ fn accepts_exact_host_seal_and_recomputes_every_downstream_commitment() {
 #[test]
 fn accepts_exact_host_canonical_escaped_source_and_binds_downstream_json() {
     verify(&escaped_fixture()).expect("escaped host vector must verify");
+}
+
+#[test]
+fn accepts_exact_host_x_bound_five_source_three_tranche_matrix() {
+    let vectors = xbound_fixture();
+    assert_eq!(vectors.receipts.len(), 15);
+    verify(&vectors).expect("exact host X-bound matrix must verify");
 }
 
 #[test]
@@ -267,6 +290,74 @@ fn rejects_host_generated_digest_rebound_uniqueness_violations() {
 }
 
 #[test]
+fn rejects_host_generated_digest_rebound_x_bound_contract_violations() {
+    for (name, expected) in [
+        (
+            "rewardIdDerivedMismatch",
+            RewardCapacityRecomputationError::XBoundIdentifierMismatch,
+        ),
+        (
+            "idDerivedMismatch",
+            RewardCapacityRecomputationError::XBoundIdentifierMismatch,
+        ),
+        (
+            "wrongSourcePriority",
+            RewardCapacityRecomputationError::XBoundSourcePriorityMismatch,
+        ),
+        (
+            "factionFollowerDirect",
+            RewardCapacityRecomputationError::XBoundSourcePriorityMismatch,
+        ),
+        (
+            "coreDirect",
+            RewardCapacityRecomputationError::XBoundSourcePriorityMismatch,
+        ),
+        (
+            "emptyTranche",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "multipleTranches",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "unknownTranche",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "missingRewardId",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "missingUpgradeLineage",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "extraBaseLineage",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "genericFieldSmuggling",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "chronologyOnCcc",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+        (
+            "cccOrderingOnStandard",
+            RewardCapacityRecomputationError::XBoundVariantShapeMismatch,
+        ),
+    ] {
+        assert_eq!(
+            verify(&hostile_xbound_fixture(name)),
+            Err(expected),
+            "{name}"
+        );
+    }
+}
+
+#[test]
 fn rejects_wrong_reveal_and_any_receipt_semantic_mutation() {
     let mut wrong_reveal = fixture();
     wrong_reveal.randomness[0] ^= 1;
@@ -357,6 +448,15 @@ fn truth_boundary_is_permanently_nonactivating_and_hold() {
     assert!(truth.candidate_id_uniqueness_verified);
     assert!(truth.per_ccc_priority_tier_qualification_pda_uniqueness_verified);
     assert!(truth.at_most_one_weekly_faction_manifest_verified);
+    assert!(truth.x_bound_funding_identifier_derivation_verified);
+    assert!(truth.x_bound_funding_five_source_priority_mapping_verified);
+    assert!(truth.x_bound_funding_singleton_accepted_tranche_verified);
+    assert!(truth.x_bound_funding_upgrade_lineage_key_presence_verified);
+    assert!(truth.x_bound_funding_variant_field_separation_verified);
+    assert!(!truth.x_bound_funding_amount_basis_points_verified);
+    assert!(!truth.x_bound_reward_id_provenance_verified);
+    assert!(!truth.x_bound_tranche_eligibility_verified);
+    assert!(!truth.x_bound_upgrade_lineage_contents_verified);
     assert!(!truth.canonical_seal_semantics_verified);
     assert!(!truth.candidate_identifier_derivations_verified);
     assert!(!truth.non_ccc_chronology_recomputed);

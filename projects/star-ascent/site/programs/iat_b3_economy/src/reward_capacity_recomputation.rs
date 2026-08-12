@@ -31,6 +31,7 @@ const CCC_COMMITMENT_SCHEME: &[u8] = b"IAT_B3_CCC_REVEAL_COMMITMENT_V1";
 const CCC_CONTEXT_DOMAIN: &[u8] = b"IAT_B3_CCC_CAPACITY_DECISION_CONTEXT_V1";
 const CCC_ORDER_DOMAIN: &[u8] = b"IAT_B3_CCC_CAPACITY_ORDER_V1";
 const TIEBREAK_DOMAIN: &[u8] = b"IAT_TIEBREAK_V1";
+const X_FUNDING_ID_DOMAIN: &[u8] = b"IAT_B3_X_FUNDING_V1";
 const MAX_TIEBREAK_ATTEMPTS: u32 = 16;
 const POLICY_HEX: &[u8] = b"2054c881f9c7524acb965454286950445cd37c99f7485b45e2c787bcfb3617e2";
 
@@ -67,6 +68,71 @@ impl Priority {
             Self::Standard => b"STANDARD_10_PERCENT_AND_X_CAMPAIGN",
             Self::WeeklyFaction => b"WEEKLY_FACTION",
             Self::Core => b"CORE",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum CandidateKind {
+    Generic,
+    XBoundFunding,
+    WeeklyFactionManifest,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum XBoundSource {
+    None,
+    GenesisAirdrop,
+    XInteraction,
+    StandardPosition,
+    CccAgent,
+    CccAssociate,
+}
+
+impl XBoundSource {
+    fn parse(value: &[u8]) -> Result<Self, RewardCapacityRecomputationError> {
+        match value {
+            b"GENESIS_AIRDROP" => Ok(Self::GenesisAirdrop),
+            b"X_INTERACTION" => Ok(Self::XInteraction),
+            b"STANDARD_POSITION" => Ok(Self::StandardPosition),
+            b"CCC_AGENT" => Ok(Self::CccAgent),
+            b"CCC_ASSOCIATE" => Ok(Self::CccAssociate),
+            // FACTION_FOLLOWER must first enter the canonical weekly aggregate
+            // manifest; CORE is not an X-bound reward source.
+            b"FACTION_FOLLOWER" | b"CORE" => {
+                Err(RewardCapacityRecomputationError::XBoundSourcePriorityMismatch)
+            }
+            _ => Err(RewardCapacityRecomputationError::XBoundSourcePriorityMismatch),
+        }
+    }
+
+    const fn expected_priority(self) -> Option<Priority> {
+        match self {
+            Self::GenesisAirdrop | Self::XInteraction | Self::StandardPosition => {
+                Some(Priority::Standard)
+            }
+            Self::CccAgent => Some(Priority::CccAgent),
+            Self::CccAssociate => Some(Priority::CccAssociate),
+            Self::None => None,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum XBoundTranche {
+    None,
+    Base,
+    PremiumFull,
+    Upgrade,
+}
+
+impl XBoundTranche {
+    const fn ascii(self) -> &'static [u8] {
+        match self {
+            Self::Base => b"X_BASE_10",
+            Self::PremiumFull => b"X_PREMIUM_FULL_100",
+            Self::Upgrade => b"X_PREMIUM_UPGRADE_90",
+            Self::None => b"",
         }
     }
 }
@@ -145,6 +211,9 @@ pub enum RewardCapacityRecomputationError {
     DuplicateCandidateId,
     DuplicateCccQualificationPda,
     MultipleWeeklyFactionManifests,
+    XBoundVariantShapeMismatch,
+    XBoundSourcePriorityMismatch,
+    XBoundIdentifierMismatch,
     CandidateIdMismatch,
     CandidateDigestMismatch,
     CandidateOrderMismatch,
@@ -187,6 +256,15 @@ pub struct RewardCapacityRecomputationTruth {
     pub candidate_id_uniqueness_verified: bool,
     pub per_ccc_priority_tier_qualification_pda_uniqueness_verified: bool,
     pub at_most_one_weekly_faction_manifest_verified: bool,
+    pub x_bound_funding_identifier_derivation_verified: bool,
+    pub x_bound_funding_five_source_priority_mapping_verified: bool,
+    pub x_bound_funding_singleton_accepted_tranche_verified: bool,
+    pub x_bound_funding_upgrade_lineage_key_presence_verified: bool,
+    pub x_bound_funding_variant_field_separation_verified: bool,
+    pub x_bound_funding_amount_basis_points_verified: bool,
+    pub x_bound_reward_id_provenance_verified: bool,
+    pub x_bound_tranche_eligibility_verified: bool,
+    pub x_bound_upgrade_lineage_contents_verified: bool,
     pub canonical_seal_semantics_verified: bool,
     pub candidate_identifier_derivations_verified: bool,
     pub non_ccc_chronology_recomputed: bool,
@@ -214,6 +292,15 @@ pub const REWARD_CAPACITY_RECOMPUTATION_TRUTH: RewardCapacityRecomputationTruth 
         candidate_id_uniqueness_verified: true,
         per_ccc_priority_tier_qualification_pda_uniqueness_verified: true,
         at_most_one_weekly_faction_manifest_verified: true,
+        x_bound_funding_identifier_derivation_verified: true,
+        x_bound_funding_five_source_priority_mapping_verified: true,
+        x_bound_funding_singleton_accepted_tranche_verified: true,
+        x_bound_funding_upgrade_lineage_key_presence_verified: true,
+        x_bound_funding_variant_field_separation_verified: true,
+        x_bound_funding_amount_basis_points_verified: false,
+        x_bound_reward_id_provenance_verified: false,
+        x_bound_tranche_eligibility_verified: false,
+        x_bound_upgrade_lineage_contents_verified: false,
         canonical_seal_semantics_verified: false,
         candidate_identifier_derivations_verified: false,
         non_ccc_chronology_recomputed: false,
@@ -857,9 +944,33 @@ fn parse_candidates(
 fn parse_candidate(
     p: &mut Json<'_>,
 ) -> Result<RewardCapacityCandidateScratch, RewardCapacityRecomputationError> {
+    const AMOUNT: u32 = 1 << 0;
+    const CHRONOLOGY: u32 = 1 << 1;
+    const ELIGIBLE_SEQUENCE: u32 = 1 << 2;
+    const FUNDING_ROUND: u32 = 1 << 3;
+    const ID: u32 = 1 << 4;
+    const NODE_ACTIVATION: u32 = 1 << 5;
+    const PRIORITY: u32 = 1 << 6;
+    const QUALIFICATION_PDA: u32 = 1 << 7;
+    const QUALIFYING_ACTIVITY: u32 = 1 << 8;
+    const RESERVATION_STATUS: u32 = 1 << 9;
+    const FUNDING_POOL: u32 = 1 << 10;
+    const KIND: u32 = 1 << 11;
+    const REWARD_ID: u32 = 1 << 12;
+    const REWARD_SOURCE: u32 = 1 << 13;
+    const TRANCHE_KINDS: u32 = 1 << 14;
+    const ORIGINAL_LINEAGE: u32 = 1 << 15;
+    const FACTION_WEEK_ID: u32 = 1 << 16;
+    const FOLLOWER_COUNT: u32 = 1 << 17;
+    const PAYOUT_ENTRIES: u32 = 1 << 18;
+    const PAYOUT_DIGEST: u32 = 1 << 19;
+
     let mut out = RewardCapacityCandidateScratch::EMPTY;
     let mut fields = 0u32;
-    let mut kind = 0u8;
+    let mut kind = CandidateKind::Generic;
+    let mut reward_id = [0u8; 32];
+    let mut source = XBoundSource::None;
+    let mut tranche = XBoundTranche::None;
     let mut last_key: Option<&[u8]> = None;
     p.byte(b'{')?;
     let mut first = true;
@@ -877,68 +988,89 @@ fn parse_candidate(
         match key {
             b"amount" => {
                 out.amount = p.u64_string()?;
-                fields |= 1 << 0;
+                fields |= AMOUNT;
             }
             b"chronology" => {
                 p.skip_value(0)?;
-                fields |= 1 << 1;
+                fields |= CHRONOLOGY;
             }
             b"eligibleSequence" => {
                 out.eligible_sequence = p.u64_string()?;
-                fields |= 1 << 2;
+                fields |= ELIGIBLE_SEQUENCE;
             }
-            b"factionWeekId"
-            | b"followerCount"
-            | b"originalBaseAdmissionLineage"
-            | b"payoutEntries"
-            | b"rewardId"
-            | b"trancheKinds" => p.skip_value(0)?,
+            b"factionWeekId" => {
+                p.skip_value(0)?;
+                fields |= FACTION_WEEK_ID;
+            }
+            b"followerCount" => {
+                p.skip_value(0)?;
+                fields |= FOLLOWER_COUNT;
+            }
+            b"originalBaseAdmissionLineage" => {
+                p.skip_value(0)?;
+                fields |= ORIGINAL_LINEAGE;
+            }
+            b"payoutEntries" => {
+                p.skip_value(0)?;
+                fields |= PAYOUT_ENTRIES;
+            }
+            b"rewardId" => {
+                reward_id = p.hex32_string()?;
+                fields |= REWARD_ID;
+            }
+            b"trancheKinds" => {
+                tranche = parse_x_bound_singleton_tranche(p)?;
+                fields |= TRANCHE_KINDS;
+            }
             b"fundingPool" => {
                 p.exact_string(b"SHARED_REWARD_RESERVE")?;
-                fields |= 1 << 10;
+                fields |= FUNDING_POOL;
             }
             b"fundingRoundAtUnixSeconds" => {
                 out.funding_round = p.i64_string()?;
-                fields |= 1 << 3;
+                fields |= FUNDING_ROUND;
             }
             b"id" => {
                 out.id = p.hex32_string()?;
-                fields |= 1 << 4;
+                fields |= ID;
             }
             b"kind" => {
                 let parsed_kind = p.plain_string()?;
                 kind = match parsed_kind {
-                    b"X_BOUND_FUNDING" => 1,
-                    b"WEEKLY_FACTION_MANIFEST" => 2,
+                    b"X_BOUND_FUNDING" => CandidateKind::XBoundFunding,
+                    b"WEEKLY_FACTION_MANIFEST" => CandidateKind::WeeklyFactionManifest,
                     _ => return Err(RewardCapacityRecomputationError::InvalidSealShape),
                 };
+                fields |= KIND;
             }
             b"nodeActivationSlot" => {
                 out.node_activation_slot = p.u64_string()?;
-                fields |= 1 << 5;
+                fields |= NODE_ACTIVATION;
             }
-            b"payoutDigest" => out.faction_payout_sha256 = Some(p.hex32_string()?),
+            b"payoutDigest" => {
+                out.faction_payout_sha256 = Some(p.hex32_string()?);
+                fields |= PAYOUT_DIGEST;
+            }
             b"priorityClass" => {
                 out.priority = Priority::parse(p.plain_string()?)?;
-                fields |= 1 << 6;
+                fields |= PRIORITY;
             }
             b"qualificationPda" => {
                 out.qualification_pda = p.hex32_string()?;
-                fields |= 1 << 7;
+                fields |= QUALIFICATION_PDA;
             }
             b"qualifyingActivityStartSlot" => {
                 out.qualifying_activity_start_slot = p.u64_string()?;
-                fields |= 1 << 8;
+                fields |= QUALIFYING_ACTIVITY;
             }
             b"reservationStatus" => {
                 p.exact_string(b"NEW_UNRESERVED")?;
-                fields |= 1 << 9;
+                fields |= RESERVATION_STATUS;
             }
-            b"rewardSourceKind" => match p.plain_string()? {
-                b"GENESIS_AIRDROP" | b"X_INTERACTION" | b"STANDARD_POSITION" | b"CCC_AGENT"
-                | b"CCC_ASSOCIATE" => {}
-                _ => return Err(RewardCapacityRecomputationError::InvalidSealShape),
-            },
+            b"rewardSourceKind" => {
+                source = XBoundSource::parse(p.plain_string()?)?;
+                fields |= REWARD_SOURCE;
+            }
             _ => return Err(RewardCapacityRecomputationError::UnsupportedSealSemantics),
         }
     }
@@ -946,26 +1078,99 @@ fn parse_candidate(
     if out.amount == 0 {
         return Err(RewardCapacityRecomputationError::CandidateAmountZero);
     }
-    let common = (1 << 0) | (1 << 3) | (1 << 4) | (1 << 6) | (1 << 9) | (1 << 10);
-    if fields & common != common {
-        return Err(RewardCapacityRecomputationError::InvalidSealShape);
-    }
-    if out.priority.is_ccc() {
-        let ccc = (1 << 2) | (1 << 5) | (1 << 7) | (1 << 8);
-        if fields & ccc != ccc || fields & (1 << 1) != 0 {
-            return Err(RewardCapacityRecomputationError::InvalidSealShape);
+    let common = AMOUNT | FUNDING_ROUND | ID | PRIORITY | RESERVATION_STATUS | FUNDING_POOL;
+    let ccc_ordering =
+        ELIGIBLE_SEQUENCE | NODE_ACTIVATION | QUALIFICATION_PDA | QUALIFYING_ACTIVITY;
+    match kind {
+        CandidateKind::Generic => {
+            if out.priority == Priority::WeeklyFaction {
+                return Err(RewardCapacityRecomputationError::InvalidSealShape);
+            }
+            let expected = common
+                | if out.priority.is_ccc() {
+                    ccc_ordering
+                } else {
+                    CHRONOLOGY
+                };
+            if fields != expected {
+                return Err(RewardCapacityRecomputationError::XBoundVariantShapeMismatch);
+            }
         }
-    } else if fields & (1 << 1) == 0 {
-        return Err(RewardCapacityRecomputationError::InvalidSealShape);
-    }
-    if out.priority == Priority::WeeklyFaction {
-        if kind != 2 || out.faction_payout_sha256.is_none() {
-            return Err(RewardCapacityRecomputationError::InvalidSealShape);
+        CandidateKind::XBoundFunding => {
+            let expected_priority = source
+                .expected_priority()
+                .ok_or(RewardCapacityRecomputationError::XBoundSourcePriorityMismatch)?;
+            if out.priority != expected_priority {
+                return Err(RewardCapacityRecomputationError::XBoundSourcePriorityMismatch);
+            }
+            let mut expected = common | KIND | REWARD_ID | REWARD_SOURCE | TRANCHE_KINDS;
+            expected |= if out.priority.is_ccc() {
+                ccc_ordering
+            } else {
+                CHRONOLOGY
+            };
+            if tranche == XBoundTranche::Upgrade {
+                expected |= ORIGINAL_LINEAGE;
+            }
+            if fields != expected || tranche == XBoundTranche::None {
+                return Err(RewardCapacityRecomputationError::XBoundVariantShapeMismatch);
+            }
+            if out.id != derive_x_bound_funding_id(reward_id, out.funding_round, tranche) {
+                return Err(RewardCapacityRecomputationError::XBoundIdentifierMismatch);
+            }
         }
-    } else if kind == 2 || out.faction_payout_sha256.is_some() {
-        return Err(RewardCapacityRecomputationError::InvalidSealShape);
+        CandidateKind::WeeklyFactionManifest => {
+            let expected = common
+                | KIND
+                | FACTION_WEEK_ID
+                | FOLLOWER_COUNT
+                | PAYOUT_ENTRIES
+                | PAYOUT_DIGEST
+                | CHRONOLOGY;
+            if out.priority != Priority::WeeklyFaction
+                || fields != expected
+                || out.faction_payout_sha256.is_none()
+            {
+                return Err(RewardCapacityRecomputationError::InvalidSealShape);
+            }
+        }
     }
     Ok(out)
+}
+
+fn parse_x_bound_singleton_tranche(
+    p: &mut Json<'_>,
+) -> Result<XBoundTranche, RewardCapacityRecomputationError> {
+    p.byte(b'[')?;
+    if p.peek() == Some(b']') {
+        return Err(RewardCapacityRecomputationError::XBoundVariantShapeMismatch);
+    }
+    let tranche = match p.plain_string()? {
+        b"X_BASE_10" => XBoundTranche::Base,
+        b"X_PREMIUM_FULL_100" => XBoundTranche::PremiumFull,
+        b"X_PREMIUM_UPGRADE_90" => XBoundTranche::Upgrade,
+        _ => return Err(RewardCapacityRecomputationError::XBoundVariantShapeMismatch),
+    };
+    if p.peek() != Some(b']') {
+        return Err(RewardCapacityRecomputationError::XBoundVariantShapeMismatch);
+    }
+    p.byte(b']')?;
+    Ok(tranche)
+}
+
+fn derive_x_bound_funding_id(
+    reward_id: [u8; 32],
+    funding_round: i64,
+    tranche: XBoundTranche,
+) -> [u8; 32] {
+    let reward_hex = lower_hex(&reward_id);
+    let (round_start, round_decimal) = decimal_i64(funding_round);
+    hash_pipe(&[
+        X_FUNDING_ID_DOMAIN,
+        &reward_hex,
+        &round_decimal[round_start..],
+        tranche.ascii(),
+    ])
 }
 
 fn parse_ledger(p: &mut Json<'_>) -> Result<Ledger, RewardCapacityRecomputationError> {
