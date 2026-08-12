@@ -199,3 +199,116 @@ test("current production-executor record binds source and preserves the release 
   assert.equal(record.fixture.driverSha256, sha256(driver));
   assert.equal(record.fixture.cargoLockSha256, sha256(cargoLock));
 });
+
+test("combined Law and stake-ingress rehearsal builds one dynamic fixture-bound Law ELF", async () => {
+  const [runner, driver, workflow, manifest, fixture, readme] = await Promise.all([
+    text("../scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh"),
+    text("../scripts/iat-b3-combined-law-stake-local-rehearsal-driver.mjs"),
+    text("../../../../.github/workflows/iat-v2-proof.yml"),
+    text("./fixtures/iat-b3-combined-law-stake/Cargo.toml"),
+    text("./fixtures/iat-b3-combined-law-stake/src/lib.rs"),
+    text("./fixtures/iat-b3-combined-law-stake/README.md"),
+  ]);
+  assert.match(runner, /http:\/\/127\.0\.0\.1:\$\{rpc_port\}/u);
+  assert.doesNotMatch(runner, /api\.(?:devnet|mainnet-beta)\.solana\.com/iu);
+  assert.match(runner, /IAT_B3_PRODUCTION_CANONICAL_MINT="\$mint_pubkey"/u);
+  assert.doesNotMatch(runner, /IAT_B3_PRODUCTION_CANONICAL_MINT="3JF3/u);
+  assert.match(runner, /--no-default-features[\s\S]+--features production-combined-hook/u);
+  assert.match(runner, /--bpf-program "\$law_id" "\$law_artifact"/u);
+  assert.equal((runner.match(/law_artifact="\$deploy_dir\/iat_b3_law\.so"/gu) ?? []).length, 1);
+  assert.match(runner, /for variant in missing stale open locked forged/u);
+  assert.match(runner, /trap finish EXIT/u);
+  assert.match(runner, /rm -rf -- "\$temp_dir"/u);
+  assert.match(runner, /generatedKeyMaterialRemoved/u);
+  assert.match(runner, /"statusGate":"HOLD"/u);
+  assert.match(driver, /lawFinalizerAndHookSha256Equal: true/u);
+  assert.match(driver, /permissionlessFinalizeSignature/u);
+  assert.match(driver, /finalizerAuthoritySignerRequired: false/u);
+  assert.match(driver, /DETERMINISTIC_SYNTHETIC_GATE_VARIANTS_NOT_FINALIZER_PROVENANCE/u);
+  assert.match(
+    manifest,
+    /iat-b3-economy = \{ path = "\.\.\/\.\.\/\.\.\/programs\/iat_b3_economy", features = \["runtime-token-2022-stake-ingress"\] \}/u,
+  );
+  assert.match(fixture, /execute_daily_law_authenticated_stake_ingress\(/u);
+  assert.match(fixture, /additional_hook_accounts: core::slice::from_ref\(law_state\)/u);
+  assert.match(fixture, /Pubkey::find_program_address\(&\[b"law-state", mint\.key\.as_ref\(\)\], &LAW_PROGRAM_ID\)/u);
+  assert.doesNotMatch(fixture, /ingress_authority\.is_signer/u);
+  assert.match(readme, /exact single ELF[\s\S]+Daily Law finalizer and Token-2022 Transfer Hook/u);
+  assert.match(workflow, /tests\/fixtures\/iat-b3-combined-law-stake\/Cargo\.toml/u);
+  assert.match(
+    workflow,
+    /run-iat-b3-combined-law-stake-local-rehearsal\.sh --require-tools[\s\S]+iat-b3-combined-law-stake-local-rehearsal\.jsonl/u,
+  );
+});
+
+test("combined rehearsal asserts real hook context, ingress semantics, rollback, and immutable HOLDs", async () => {
+  const [driver, runner] = await Promise.all([
+    text("../scripts/iat-b3-combined-law-stake-local-rehearsal-driver.mjs"),
+    text("../scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh"),
+  ]);
+  assert.match(driver, /createTransferCheckedWithTransferHookInstruction\(/u);
+  assert.match(driver, /createExecuteInstruction\(/u);
+  assert.match(driver, /direct hook invocation without Token-2022 transfer context/u);
+  assert.match(driver, /owner-authorized canonical stake-vault donation/u);
+  assert.match(driver, /noDelegateConsumedAndCleared: true/u);
+  assert.match(driver, /priorDelegateRestoredExactly: true/u);
+  assert.match(driver, /ingressPdaFundedStatelessAdversary: true/u);
+  assert.match(driver, /rawDataSha256: sha256\(raw\.data\)/u);
+  assert.match(driver, /assertSnapshotEqual\(/u);
+  for (const code of ["0xB30B", "0xB30C", "0xB30D"]) assert(driver.includes(code));
+  for (const falseClaim of [
+    "fixtureProductionCandidate: false",
+    "productionEconomyEntrypoint: false",
+    "productionEconomyDispatcher: false",
+    "retainedV2PersistenceComplete: false",
+    "all15Adapters: false",
+    "finalBinary: false",
+    "devnetExecuted: false",
+    "mainnetExecuted: false",
+    "graphNodeCompleted: false",
+    "releaseAuthorized: false",
+    "mainnetExecutionAuthorized: false",
+  ]) assert(driver.includes(falseClaim), `missing false/HOLD claim ${falseClaim}`);
+  assert.match(runner, /unsafe_diagnostic='Stack offset of\|stack frame/u);
+  assert.match(runner, /temporaryLedgerRemoved/u);
+  assert.match(runner, /syntheticVariantsFinalizerProvenance/u);
+  assert.doesNotMatch(`${driver}\n${runner}`, /(?:deploy|program deploy|mainnet-beta|api\.devnet)\.solana\.com/iu);
+});
+
+test("combined rehearsal evidence replays exact source hashes without launch overclaim", async () => {
+  const [recordText, law, ingress, build, fixture, manifest, lock, runner, driver] = await Promise.all([
+    text("../docs/b3/evidence/local-validator-combined-law-stake-rehearsal-20260812.json"),
+    text("../programs/iat_b3_law/src/lib.rs"),
+    text("../programs/iat_b3_law/src/stake_ingress.rs"),
+    text("../programs/iat_b3_law/build.rs"),
+    text("./fixtures/iat-b3-combined-law-stake/src/lib.rs"),
+    text("./fixtures/iat-b3-combined-law-stake/Cargo.toml"),
+    text("./fixtures/iat-b3-combined-law-stake/Cargo.lock"),
+    text("../scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh"),
+    text("../scripts/iat-b3-combined-law-stake-local-rehearsal-driver.mjs"),
+  ]);
+  const record = JSON.parse(recordText);
+  assert.equal(record.schema, "iat-b3-combined-law-stake-local-validator-record/v1");
+  assert.equal(record.status, "PASS_HOLD");
+  assert.equal(record.observed.oneLawElfForFinalizerAndHook, true);
+  assert.equal(record.observed.productionSourceIngressExecutorExercised, true);
+  assert.equal(record.observed.realToken2022HookContext, true);
+  assert.equal(record.observed.rawAndBalanceRollbackAsserted, true);
+  assert.equal(record.observed.syntheticVariantsFinalizerProvenance, false);
+  assert.equal(record.scope.publicNetworkWrites, false);
+  assert.equal(record.scope.devnetExecuted, false);
+  assert.equal(record.scope.mainnetExecuted, false);
+  assert.equal(record.scope.mainnetExecutionAuthorized, false);
+  assert.equal(record.scope.finalBinary, false);
+  assert.equal(record.source.lawLibSha256, sha256(law));
+  assert.equal(record.source.lawStakeIngressSha256, sha256(ingress));
+  assert.equal(record.source.lawBuildScriptSha256, sha256(build));
+  assert.equal(record.source.fixtureLibSha256, sha256(fixture));
+  assert.equal(record.source.fixtureManifestSha256, sha256(manifest));
+  assert.equal(record.source.fixtureLockSha256, sha256(lock));
+  assert.equal(record.source.runnerSha256, sha256(runner));
+  assert.equal(record.source.driverSha256, sha256(driver));
+  assert.equal(record.cleanup.temporaryLedgerRemoved, true);
+  assert.equal(record.cleanup.validatorStopped, true);
+  assert.equal(record.cleanup.generatedKeyMaterialRemoved, true);
+});

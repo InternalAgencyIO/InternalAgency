@@ -129,13 +129,16 @@ jobs:
           --install-only
           --force-tools-install
           --tools-version v1.52
-      - name: Prefetch the locked B3 combined-law crate graph
+      - name: Prefetch the locked B3 combined-law and loopback-fixture crate graphs
         # Network access is confined to Cargo's checksum-verified locked input
-        # fetch. The artifact build itself remains strictly offline below.
-        run: >-
-          cargo +1.97.1 fetch
-          --locked
-          --manifest-path programs/iat_b3_law/Cargo.toml
+        # fetch. Both artifact builds remain strictly offline below.
+        run: |
+          cargo +1.97.1 fetch \
+            --locked \
+            --manifest-path programs/iat_b3_law/Cargo.toml
+          cargo +1.97.1 fetch \
+            --locked \
+            --manifest-path tests/fixtures/iat-b3-combined-law-stake/Cargo.toml
       - name: Build the B3 native law adapter without deploying it
         # These conspicuous fixture identities prove that the combined Daily
         # Law + stake-ingress artifact builds reproducibly. They are neither
@@ -178,6 +181,10 @@ jobs:
           bash scripts/run-iat-b3-account-lifecycle-local.sh
       - name: Rehearse B3 production-source Token-2022 stake ingress on an isolated local validator
         run: bash scripts/run-iat-b3-stake-ingress-local-rehearsal.sh
+      - name: Rehearse one combined B3 Law and stake-ingress artifact on isolated local validators
+        run: |
+          bash scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh --require-tools \
+            | tee target/verifiable/iat-b3-combined-law-stake-local-rehearsal.jsonl
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: iat-v2-b3-verifiable-sbf
@@ -186,6 +193,7 @@ jobs:
             projects/star-ascent/site/target/verifiable/iat-v2-build-evidence.json
             projects/star-ascent/site/target/verifiable/iat_b3_law.so
             projects/star-ascent/site/target/verifiable/iat-b3-law.sha256
+            projects/star-ascent/site/target/verifiable/iat-b3-combined-law-stake-local-rehearsal.jsonl
             projects/star-ascent/site/target/idl/iat_v2.json
             projects/star-ascent/site/target/iat-v2-sbf-build.log
           if-no-files-found: error

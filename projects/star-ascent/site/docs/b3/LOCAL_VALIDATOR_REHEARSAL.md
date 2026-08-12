@@ -203,6 +203,57 @@ The harness unit test and the consensus/reference suites prove that local
 including negative Unix timestamps. Runtime transfer fixtures additionally
 prove that a stale stored day fails closed.
 
+## Combined Law + stake-ingress artifact rehearsal
+
+`scripts/run-iat-b3-combined-law-stake-local-rehearsal.sh` closes a narrower,
+executable gap that the two historical rehearsals deliberately left open. It
+generates a disposable mint key before compilation, then builds the unchanged
+`programs/iat_b3_law` source exactly once with `production-combined-hook`, the
+fixed conspicuous fixture Law/economy IDs, and that generated mint. The one
+resulting Law ELF is loaded once in each loopback validator and serves both the
+permissionless Daily Law finalizer and the Token-2022 Transfer Hook. The hook is
+not copied into the economy fixture.
+
+The separate disposable economy ELF imports the feature-gated production
+`execute_daily_law_authenticated_stake_ingress` executor. It supplies only the
+minimal fixture entrypoint and a transaction-local callback that returns
+success; therefore this evidence does **not** claim a production economy
+dispatcher, frozen ABI, or retained-V2 persistence completion.
+
+The rehearsal observes all of the following on real `solana-test-validator`
+transactions:
+
+1. the disposable Token-2022 mint has exactly the required Transfer Hook and
+   Confidential Transfer extensions, fixed supply, and revoked mint/freeze
+   authorities;
+2. real Law initialization creates the Law/validation PDAs and atomically
+   seals both extension authorities;
+3. a funded, zero-data, System-owned, non-executable ingress PDA does not grief
+   the stateless signer path;
+4. an unfinalized actual Law rejects the production-source ingress before any
+   token byte changes;
+5. permissionless finalization selects the lagged `SlotHashes` ancestor and
+   the driver independently recomputes the stored decision;
+6. five isolated deterministic synthetic states (`missing`, `stale`, `open`,
+   `locked`, and `forged`) exercise both ordinary Token-2022 transfers and the
+   production-source ingress boundary;
+7. the OPEN state accepts an ordinary ownership transfer, rejects a direct
+   hook call without Token-2022's transferring context, rejects an
+   owner-authorized direct donation to the canonical stake vault, accepts an
+   ingress with no prior delegate, and restores an existing delegate and its
+   exact allowance after ingress; and
+8. every expected failure asserts both parsed balances/delegates and SHA-256
+   hashes of the raw token-account bytes are unchanged.
+
+The five injected decisions are labeled deterministic synthetic gate variants,
+not separate finalizer provenance. All generated keys, account fixtures,
+compiled artifacts, logs, ledgers, and temporary target directories are under
+one safety-checked ignored directory and are removed on success or failure.
+The runner contains no public RPC URL and the checked evidence keeps
+`productionIdentitiesFrozen`, `finalBinary`, `devnetExecuted`,
+`mainnetExecuted`, `graphNodeCompleted`, `releaseAuthorized`, and
+`mainnetExecutionAuthorized` false with status `HOLD`.
+
 ## Limits that remain
 
 - `SlotHashes` proves the chosen value was a Solana ancestor visible to the
