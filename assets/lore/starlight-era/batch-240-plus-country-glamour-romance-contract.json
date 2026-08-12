@@ -360,12 +360,39 @@
     "intent": "Keep rendering, X publication, Git checkpoints, and country advancement synchronized with one complete four-scene country at a time.",
     "countryCompletionDefinition": "A country is complete only when each of its four planned scene numbers has exactly one accepted current-country asset, the narrow checkpoint and directly related contract or ledger updates are committed and pushed to agent/iat-launch-window-recovery-batch-220, and the country X post is publicly verified with its status URL recorded in both checkpoint and publishing ledger.",
     "noAdvanceRule": "Never open, roll, render, checkpoint as terminal, or advance to the next country while the active country has fewer than four accepted scenes, an unpushed country checkpoint, or an unpublished or unverified X post. Terminal zero-accepted and terminal partially-accepted outcomes are forbidden from Batch 382 onward.",
-    "renderContinuation": "Preserve every raw output and every accepted scene. Rerender only missing or rejected scenes. A scene may receive at most one recovery pass within one render round, but later guardian wakes may start a fresh round for the still-active scene. Continue the same country across wakes until all four scenes are accepted.",
+    "renderContinuation": "Preserve every raw output and every accepted scene. Rerender only missing or rejected scenes. Follow rapidConsolidatedRenderPolicy: one initial coordinated generation wave plus at most two consolidated correction waves per country batch. Never restart an unlimited fresh-round chain on later guardian wakes.",
     "acceptanceRule": "Apply every active contract field and strict anatomy, identity, safety, romance, mascot, odd-prop, theme-location, and outfit-originality gates. Do not lower the gate merely to advance the queue.",
     "xEligibility": "Exactly four accepted current-country scene assets are required before composing the country post. Keep the existing deterministic caption and attachment rules, verify the live status, record its URL, and never duplicate media already present on the signed-in account.",
     "xBacklogRule": "At every wake reconcile the local ledger against the signed-in live X profile before posting. Drain every eligible unposted historical entry without duplication, then publish the completed active country before any country advance. An X platform or session failure keeps the active country open and must be retried; it is not permission to skip posting.",
     "gitCadence": "Push every coherent contract repair and every narrow country progress or completion checkpoint promptly. Stage only the active batch, directly requested contract or publishing-ledger updates, and accepted assets for that batch; leave unrelated dirty files untouched.",
     "historicalBoundary": "Do not rewrite or reopen Batch 381 or earlier solely because it ended with zero or partial acceptance. The strict four-scene completion gate begins with Georgia Batch 382."
+  },
+  "rapidConsolidatedRenderPolicy": {
+    "active": true,
+    "requestedAt": "2026-08-12T06:15:22.6615747Z",
+    "activeFromBatch": 382,
+    "intent": "Increase first-pass acceptance and throughput by solving the complete scene before generation and eliminating serial one-defect rerender chains.",
+    "roundDefinition": "One render round is one coordinated generation wave in which every currently missing or rejected scene is generated at most once. A batch with four missing scenes attempts those four independent scenes concurrently when supported; later waves attempt only the rejected subset concurrently.",
+    "countryRoundCeiling": 3,
+    "countryRoundShape": "At most one initial full wave and two consolidated correction waves. This is a hard automated ceiling, not a target to consume.",
+    "perSceneGenerationCeiling": 3,
+    "correctionPassCeiling": 2,
+    "consolidationRule": "Before each correction wave, complete one holistic strict audit and fold every known identity, anatomy, hand-ownership, romance, wardrobe, location-theme, mascot, odd-prop, mission-safety, and surface defect into one revised composition and prompt. Do not launch serial single-defect edits or prompt patches.",
+    "sourceRule": "Prefer a clean fresh rerender from the original identity anchors. A single image edit is allowed only when every failure is genuinely local and the source is the untouched clean raw from that round. Never edit an edit, chain recoveries, or seed a later fresh wave with a rejected or processed country image.",
+    "promptRule": "Resolve composition geometry, exact visible contacts, full limb ownership, active wardrobe cuts, prop ownership, target axis, mascot count and species, landmark framing, and all deterministic rolls together before calling the renderer. Keep prompts decisive and remove contradictory or obsolete correction history.",
+    "acceptanceRule": "The render ceiling does not weaken any active acceptance gate. Accepted scenes remain preserved and are never rerendered merely for stylistic consistency.",
+    "capExhaustionRule": "If any scene remains unaccepted after the third country wave, stop automated image generation for that country, keep it active and nonterminal, record the unresolved gates, and notify the user. Do not advance, reroll, publish, or begin another country until the user explicitly authorizes a new bounded closure window or changes the gate.",
+    "activeGeorgiaTransition": {
+      "historicalRoundsBeforeDirective": 43,
+      "historicalRoundsDoNotConsumeNewCountryDefaults": true,
+      "additionalWaveCeiling": 2,
+      "authorizedWaveNumbers": [
+        44,
+        45
+      ],
+      "scope": "Scene 1551 only; preserve accepted scenes 1548, 1549, and 1550.",
+      "execution": "Round 44 is one clean consolidated fresh render from the original identity anchors. If and only if it fails, round 45 is one final consolidated fresh render or one local edit from the untouched round-44 raw. No further automated Georgia render follows without explicit user authorization."
+    }
   },
   "anatomyIntegrity": {
     "requiredEveryImage": true,

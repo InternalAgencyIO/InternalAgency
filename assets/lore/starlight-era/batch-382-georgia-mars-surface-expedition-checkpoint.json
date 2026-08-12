@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-43",
+  "status": "active-accelerated-closure-window-round-44-ready",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -24,7 +24,7 @@
     "gateSatisfied": false
   },
   "sourceCommit": "c49d3927942055238a19be43056339343ee09bea",
-  "contractSha256": "69EB6C84A2467A4234D901C3086ECECE9E583B55C41BB9382CD5ED523C482EF5",
+  "contractSha256": "3F23FAFCCBD38F46681CC3186A310240F566E48C68D57AB5DEE7DB98C239EE7F",
   "contractAmendments": {
     "radianceRealtimeAgreementPartyRule": {
       "recordedAt": "2026-08-11T18:49:40.151Z",
@@ -37,6 +37,25 @@
       "queueAdvanceChanged": false,
       "nextRenderRequirement": "Georgia scene 1551 clean fresh round 20 must record the offered choice, Radiance response, partyActivation boolean, willing participants, visible agreement evidence, and continuity state before generation.",
       "consentBoundary": "Agreement is explicit, invitation-specific, and scene-specific; it never transfers to another act, participant, prop interaction, scene, country, or future image."
+    },
+    "rapidConsolidatedRenderDirective": {
+      "recordedAt": "2026-08-12T06:15:22.6615747Z",
+      "activeFromBatch": 382,
+      "requestedMeaning": "Stop serial micro-renders. Solve all known defects together, use one initial coordinated wave plus at most two consolidated correction waves per future country, and prefer clean source renders over edit chains.",
+      "contractSha256Before": "69EB6C84A2467A4234D901C3086ECECE9E583B55C41BB9382CD5ED523C482EF5",
+      "contractSha256After": "3F23FAFCCBD38F46681CC3186A310240F566E48C68D57AB5DEE7DB98C239EE7F",
+      "storedDeterministicRollsChanged": false,
+      "acceptedAssetsChanged": false,
+      "queueAdvanceChanged": false,
+      "futureCountryWaveCeiling": 3,
+      "futureCountryCorrectionWaveCeiling": 2,
+      "activeGeorgiaAdditionalWaveCeiling": 2,
+      "activeGeorgiaAuthorizedRounds": [
+        44,
+        45
+      ],
+      "noMicroEdits": true,
+      "noEditOfEdit": true
     }
   },
   "rollMethod": "FNV-1a over the recorded batch382-georgia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 382 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
@@ -21776,7 +21795,7 @@
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "clean-fresh-round-44-from-original-identity-anchors-scene-1551-only",
+    "action": "one-consolidated-clean-fresh-round-44-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -21785,7 +21804,10 @@
     "sceneNumbers": [
       1551
     ],
-    "laterCountryStartAllowed": false
+    "laterCountryStartAllowed": false,
+    "allKnownCorrectionsMustBeCombined": true,
+    "serialMicroEditsAllowed": false,
+    "remainingAutomatedGeorgiaWavesIncludingThisOne": 2
   },
   "xBacklogAudit": {
     "checkedAt": "2026-08-12T06:02:09.385Z",
@@ -21877,7 +21899,7 @@
     "reason": "User rejected visible wavy artifacts caused by repeated edit-on-edit passes.",
     "appliesFromFreshRound": 16,
     "cleanSourcePolicy": "Every fresh round starts from the original stored identity anchors only and includes no prior Batumi render as an image input.",
-    "plannedPassPolicy": "One clean fresh render, followed by at most one narrowly targeted recovery from that same clean fresh raw when a local correctable gate fails.",
+    "plannedPassPolicy": "Superseded for automated throughput by rapidConsolidatedRenderPolicy. Use round 44 as one clean consolidated fresh render. If it fails, use only one final round 45 fresh render or one genuinely local edit from the untouched round-44 raw; never run both or chain edits.",
     "antiAccumulationPolicy": "Never use a recovery output or any earlier edited Batumi output as the source of a later fresh round.",
     "assetPolicy": "Preserve audit raws under tmp; copy only a fully accepted clean result to assets/lore/starlight-era.",
     "originalIdentityAnchors": [
@@ -21893,5 +21915,32 @@
     "activeCleanRound": null,
     "activeSourcePolicy": "four original identity anchors only",
     "priorBatumiRenderInputCount": 0
+  },
+  "rapidConsolidatedClosureWindow": {
+    "requestedAt": "2026-08-12T06:15:22.6615747Z",
+    "contractSection": "rapidConsolidatedRenderPolicy",
+    "reason": "The user capped rendering at two or three coordinated waves per batch and requested all corrections be combined into one or two passes.",
+    "historicalCompletedRounds": 43,
+    "historicalRoundsAreAuditOnly": true,
+    "preservedAcceptedSceneNumbers": [
+      1548,
+      1549,
+      1550
+    ],
+    "missingSceneNumbers": [
+      1551
+    ],
+    "additionalWaveCeiling": 2,
+    "authorizedWaveNumbers": [
+      44,
+      45
+    ],
+    "currentWave": 44,
+    "remainingWaves": 2,
+    "round44Mode": "clean fresh render from original identity anchors with every known round-43 failure resolved in one composition",
+    "round45ModeIfNeeded": "one final consolidated clean fresh render, or one local edit from untouched round-44 raw when and only when every failure is local",
+    "microEditChainForbidden": true,
+    "editOfEditForbidden": true,
+    "capExhaustionAction": "Keep Georgia active and nonterminal, stop automated image generation, record unresolved gates, notify the user, and wait for explicit authorization. Do not advance to Fiji."
   }
 }
