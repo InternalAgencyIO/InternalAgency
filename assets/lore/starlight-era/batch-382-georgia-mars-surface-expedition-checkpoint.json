@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-four-scene-gate-clean-fresh-round-38-recovery-materialized",
+  "status": "active-four-scene-gate-incomplete-after-clean-fresh-round-38",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -7110,6 +7110,26 @@
           "consentScope": "This affirmative applies only to this recorded round-38 one-step invitation in scene 1551 and only to Radiance, Ellie, ECE, and Alia. It does not transfer to another act, prop interaction, scene, country, or future image.",
           "recoveryDecisionContinuity": "This single correction remains the same round-38 event. ECE's invitation, Radiance's explicit affirmative, partyActivation true, the four willing participants, and every invitation-specific consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Radiance visibly smiles and tips her face toward ECE in a clear mid-nod while squeezing the existing low clasp. Ellie and ECE visibly smile. Alia visibly smiles in profile while her gaze and both mission hands remain safely downrange."
+        },
+        "visualAudit": {
+          "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-flat-tiles-and-no-wavy-marbling-after-one-recovery",
+          "identity": "pass-four-clearly-adult-distinct-identities-with-Alia-braids",
+          "anatomy": "pass-exact-eight-arms-and-eight-hands-with-two-per-woman",
+          "handOwnership": "pass-three-distinct-relationship-contacts-plus-ECE-compass-and-Alia-mission-owner-paths",
+          "weather": "pass-heavy-straight-rain-and-flat-wet-tiles",
+          "locationThemeFusion": "pass-recognizable-Batumi-with-Alphabet-Tower-Ferris-wheel-sea-skyline-and-four-distinct-expedition-silhouettes",
+          "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-materials-and-footwear",
+          "rolledWardrobe": "pass-Radiance-open-back-Ellie-midriff-Alia-midriff-Alia-strapless-open-back-Radiance-rainbow-hosiery-and-ECE-covered-waist",
+          "romance": "pass-three-visible-contacts-high-shoulder-palm-middle-support-palm-and-low-clasp",
+          "radianceResponse": "reject-Radiance-still-looks-to-Ellie-instead-of-visibly-answering-ECE-with-the-stored-mid-nod",
+          "partyActivation": "reject-Ellie-and-ECE-read-willing-but-Alia-does-not-unambiguously-display-the-stored-all-four-celebration-smile",
+          "mascots": "pass-one-collarless-PAWS-and-one-accessory-free-MAX-sharing-dry-bed",
+          "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+          "routeMap": "pass-separate-hands-free-holographic-map",
+          "missionHandling": "uncertifiable-primary-index-is-improved-and-outside-guard-but-too-small-to-certify-fully-straight-side-plate-placement",
+          "missionTargetAxis": "reject-panel-and-single-target-pass-but-sand-backstop-right-edge-remains-cropped",
+          "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+          "accepted": false
         }
       }
     }
@@ -16474,7 +16494,7 @@
       }
     },
     "freshRound38": {
-      "status": "fresh-completed-rejected-recovery-materialized",
+      "status": "completed-rejected-after-single-recovery",
       "preparedAt": "2026-08-12T03:03:28.133Z",
       "sceneNumbers": [
         1551
@@ -16671,9 +16691,16 @@
       "freshCompletedAt": "2026-08-12T03:12:40.113Z",
       "rawOutputs": {
         "1551": {
-          "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-38/scene-1551.png",
-          "sha256": "0205A153F478CEC5A9A39067CF9F43B1A5B6F5B606A029AF37E56EF5892D5914",
-          "preserved": true
+          "fresh": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-38/scene-1551.png",
+            "sha256": "0205A153F478CEC5A9A39067CF9F43B1A5B6F5B606A029AF37E56EF5892D5914",
+            "preserved": true
+          },
+          "recovery": {
+            "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-38-recovery/scene-1551.png",
+            "sha256": "17B5B44F97E1A599EEC620409B166C9222B678E9FDD040238FECBCF77936954C",
+            "preserved": true
+          }
         }
       },
       "freshStrictAudit": {
@@ -16777,6 +16804,40 @@
           "recoveryDecisionContinuity": "This single correction remains the same round-38 event. ECE's invitation, Radiance's explicit affirmative, partyActivation true, the four willing participants, and every invitation-specific consent boundary remain unchanged.",
           "recoveryEvidenceRequirement": "Radiance visibly smiles and tips her face toward ECE in a clear mid-nod while squeezing the existing low clasp. Ellie and ECE visibly smile. Alia visibly smiles in profile while her gaze and both mission hands remain safely downrange."
         }
+      },
+      "completedAt": "2026-08-12T03:17:45.123Z",
+      "recoveryCompletedAt": "2026-08-12T03:17:45.123Z",
+      "acceptedSceneNumbers": [],
+      "rejectedSceneNumbers": [
+        1551
+      ],
+      "rejectionReasons": {
+        "1551": [
+          "Radiance still turns her face and sustained eye line toward Ellie instead of visibly answering ECE with the stored mid-nod, so the round-38 invitation-specific affirmative is not certifiable.",
+          "Alia remains task-focused in profile without an unambiguous willing celebration smile, so the stored all-four participant activation is not fully visible.",
+          "The sand backstop's right edge remains cropped by the frame, so the complete-backstop safety gate fails even though the panel and single paper diamond remain visible.",
+          "The primary index is improved and appears outside the guard, but its exact fully straight side-plate placement is still too small to certify independently of the unresolved party and backstop failures."
+        ]
+      },
+      "strictAudit": {
+        "renderSurfaceQuality": "pass-clean-coherent-photographic-texture-with-straight-rain-flat-tiles-and-no-wavy-marbling-after-one-recovery",
+        "identity": "pass-four-clearly-adult-distinct-identities-with-Alia-braids",
+        "anatomy": "pass-exact-eight-arms-and-eight-hands-with-two-per-woman",
+        "handOwnership": "pass-three-distinct-relationship-contacts-plus-ECE-compass-and-Alia-mission-owner-paths",
+        "weather": "pass-heavy-straight-rain-and-flat-wet-tiles",
+        "locationThemeFusion": "pass-recognizable-Batumi-with-Alphabet-Tower-Ferris-wheel-sea-skyline-and-four-distinct-expedition-silhouettes",
+        "outfitOriginality": "pass-four-distinct-silhouettes-constructions-hems-materials-and-footwear",
+        "rolledWardrobe": "pass-Radiance-open-back-Ellie-midriff-Alia-midriff-Alia-strapless-open-back-Radiance-rainbow-hosiery-and-ECE-covered-waist",
+        "romance": "pass-three-visible-contacts-high-shoulder-palm-middle-support-palm-and-low-clasp",
+        "radianceResponse": "reject-Radiance-still-looks-to-Ellie-instead-of-visibly-answering-ECE-with-the-stored-mid-nod",
+        "partyActivation": "reject-Ellie-and-ECE-read-willing-but-Alia-does-not-unambiguously-display-the-stored-all-four-celebration-smile",
+        "mascots": "pass-one-collarless-PAWS-and-one-accessory-free-MAX-sharing-dry-bed",
+        "oddProp": "pass-ECE-two-hands-on-opposite-compass-handles",
+        "routeMap": "pass-separate-hands-free-holographic-map",
+        "missionHandling": "uncertifiable-primary-index-is-improved-and-outside-guard-but-too-small-to-certify-fully-straight-side-plate-placement",
+        "missionTargetAxis": "reject-panel-and-single-target-pass-but-sand-backstop-right-edge-remains-cropped",
+        "recoveryBudget": "consumed-one-of-one-planned-recovery-no-further-edit-chain-permitted",
+        "accepted": false
       }
     }
   },
@@ -18207,6 +18268,26 @@
         "MAX wears a visible dark collar despite the required small young collarless golden retriever state."
       ],
       "recoveryPassConsumedThisRound": true
+    },
+    {
+      "scene": 1551,
+      "round": 38,
+      "phase": "recovery",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/clean-fresh-round-38-recovery/scene-1551.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-5b366aba-fb11-4c9f-b743-2f5400433d3c.png",
+      "sha256": "17B5B44F97E1A599EEC620409B166C9222B678E9FDD040238FECBCF77936954C",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Radiance still turns her face and sustained eye line toward Ellie instead of visibly answering ECE with the stored mid-nod, so the round-38 invitation-specific affirmative is not certifiable.",
+        "Alia remains task-focused in profile without an unambiguous willing celebration smile, so the stored all-four participant activation is not fully visible.",
+        "The sand backstop's right edge remains cropped by the frame, so the complete-backstop safety gate fails even though the panel and single paper diamond remain visible.",
+        "The primary index is improved and appears outside the guard, but its exact fully straight side-plate placement is still too small to certify independently of the unresolved party and backstop failures."
+      ],
+      "recoveryPassConsumedThisRound": true
     }
   ],
   "xPost": {
@@ -18216,9 +18297,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Clean round 38 scene 1551 is preserved but rejected; its sole bounded recovery is materialized from that clean raw only. The live X webview also requires retry. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia has accepted scenes 1548, 1549, and 1550. Round 38 scene 1551 exhausted its single clean recovery and still failed the invitation-specific Radiance-to-ECE response, all-four party visibility, complete-backstop safety, and independently certifiable indexed-trigger placement. The live X webview also requires retry. Publication remains mandatory after scene 1551 is accepted and the four-scene completion checkpoint is pushed."
   },
-  "checkpointedAt": "2026-08-12T03:12:40.113Z",
+  "checkpointedAt": "2026-08-12T03:17:45.123Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -19329,13 +19410,25 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1551,
+      "round": 38,
+      "kind": "clean-fresh-recovery-rejected",
+      "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-38-recovery/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-5b366aba-fb11-4c9f-b743-2f5400433d3c.png",
+      "sha256": "17B5B44F97E1A599EEC620409B166C9222B678E9FDD040238FECBCF77936954C",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      }
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-single-clean-fresh-round-38-recovery-scene-1551-only",
+    "action": "clean-fresh-round-39-from-original-identity-anchors-scene-1551-only",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -19347,7 +19440,7 @@
     "laterCountryStartAllowed": false
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-12T03:03:28.133Z",
+    "checkedAt": "2026-08-12T03:17:45.123Z",
     "account": "@dogramaci",
     "signedIn": false,
     "eligibleBacklogRemaining": 0,
@@ -19432,12 +19525,12 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 37,
-    "lastCleanRoundResult": "clean-Batumi-identities-eight-hands-pause-open-backs-safe-rightward-lane-and-complete-backstop-pass-but-rejected-support-owner-path-three-contact-romance-trigger-index-target-axis-panel-and-MAX-collar",
-    "nextCleanRound": 38,
-    "nextSourcePolicy": "original identity anchors only; no round 37 image input",
-    "activeCleanRound": 38,
-    "activeSourcePolicy": "single targeted recovery from clean round 38 raw only",
-    "priorBatumiRenderInputCount": 1
+    "lastCompletedCleanRound": 38,
+    "lastCleanRoundResult": "clean-Batumi-identities-eight-hands-three-contacts-open-backs-mascots-and-artifact-free-surface-pass-but-rejected-Radiance-to-ECE-response-all-four-party-visibility-complete-backstop-and-certifiable-index",
+    "nextCleanRound": 39,
+    "nextSourcePolicy": "original identity anchors only; no round 38 image input",
+    "activeCleanRound": null,
+    "activeSourcePolicy": "four original identity anchors only",
+    "priorBatumiRenderInputCount": 0
   }
 }
