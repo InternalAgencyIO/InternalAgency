@@ -1,0 +1,411 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:iat:b3:production-identity-authority-evidence:v1",
+  "title": "IAT B3 staged production identity, funding, and deployed-authority evidence",
+  "description": "Strict nonactivating evidence intake. Trust keys are supplied by the release graph, Gate 8 remains separate, and this schema never authorizes signing, deployment, spending, activation, release, or Mainnet execution.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "profile",
+    "status",
+    "scope",
+    "sourceBindings",
+    "productionChoices",
+    "phaseAProductionIdentityFreeze",
+    "phaseBCeremonyFunding",
+    "phaseCDeployedSeal",
+    "authorizationBoundary"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./iat-b3-production-identity-authority-evidence.v1.schema.json"
+    },
+    "schema": {
+      "const": "iat-b3-production-identity-authority-evidence/v1"
+    },
+    "profile": {
+      "enum": ["PRODUCTION", "TEST_FIXTURE"]
+    },
+    "status": {
+      "enum": ["PENDING", "EVIDENCE_COMPLETE"]
+    },
+    "scope": {
+      "const": {
+        "contract": "NONACTIVATING_PRODUCTION_IDENTITY_AUTHORITY_EVIDENCE_INTAKE",
+        "stagedPredicates": [
+          "A_PRODUCTION_IDENTITY_INPUT_FREEZE",
+          "B_COST_CEREMONY_FUNDING",
+          "C_DEPLOYED_IDENTITY_AUTHORITY_SEAL"
+        ],
+        "doesNotCertify": [
+          "PACKET_SELECTED_TRUST_KEYS",
+          "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SIGNED_OBSERVATIONS",
+          "FINAL_BINARY_TRUTH_WITHOUT_EXACT_BINDINGS",
+          "OWNER_OR_REVIEWER_IDENTITY_WITHOUT_EXTERNAL_TRUST_CONFIGURATION",
+          "TRANSACTION_SIGNING_DEPLOYMENT_FUNDING_OR_ACTIVATION_AUTHORITY",
+          "INDEPENDENT_GATE_8_ACCEPTANCE",
+          "RELEASE_OR_MAINNET_EXECUTION_AUTHORIZATION"
+        ]
+      }
+    },
+    "sourceBindings": {
+      "const": {
+        "ownerPolicyFreeze": {
+          "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+          "sha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+          "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
+        },
+        "identityInputFreeze": {
+          "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
+          "sha256": "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+          "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
+        },
+        "costFeasibilityReference": {
+          "path": "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
+          "sha256": "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
+          "bindingScope": "REFERENCE_ONLY_NEVER_COMPLETION_EVIDENCE"
+        }
+      }
+    },
+    "productionChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lawProgramId",
+        "economyProgramId",
+        "canonicalMint",
+        "mainnetGenesisHash",
+        "ceremonySignerPublicKey",
+        "lawUpgradeAuthorityPublicKey",
+        "economyUpgradeAuthorityPublicKey",
+        "payerPublicKey"
+      ],
+      "properties": {
+        "lawProgramId": { "$ref": "#/$defs/nullableBase58" },
+        "economyProgramId": { "$ref": "#/$defs/nullableBase58" },
+        "canonicalMint": { "$ref": "#/$defs/nullableBase58" },
+        "mainnetGenesisHash": { "$ref": "#/$defs/nullableBase58" },
+        "ceremonySignerPublicKey": { "$ref": "#/$defs/nullableBase58" },
+        "lawUpgradeAuthorityPublicKey": { "$ref": "#/$defs/nullableBase58" },
+        "economyUpgradeAuthorityPublicKey": { "$ref": "#/$defs/nullableBase58" },
+        "payerPublicKey": { "$ref": "#/$defs/nullableBase58" }
+      }
+    },
+    "phaseAProductionIdentityFreeze": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "subjectSha256",
+        "ownerDecisionPreimageSha256",
+        "ownerAcceptance",
+        "mainnetGenesisObservations",
+        "independentReview",
+        "blocker"
+      ],
+      "properties": {
+        "status": { "enum": ["PENDING", "EVIDENCE_COMPLETE"] },
+        "subjectSha256": { "$ref": "#/$defs/nullableSha256" },
+        "ownerDecisionPreimageSha256": { "$ref": "#/$defs/nullableSha256" },
+        "ownerAcceptance": { "$ref": "#/$defs/nullableAttestation" },
+        "mainnetGenesisObservations": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/attestation" }
+        },
+        "independentReview": { "$ref": "#/$defs/nullableAttestation" },
+        "blocker": { "$ref": "#/$defs/nullableBlocker" }
+      }
+    },
+    "phaseBCeremonyFunding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "subjectSha256",
+        "finalBinaries",
+        "freshCostMeasurementSha256",
+        "fundingSourceApprovalSha256",
+        "ceremonyFloorPolicySha256",
+        "bufferRecoveryPlanSha256",
+        "ceremonyFloorLamports",
+        "aggregateFreshPayerPeakLamports",
+        "aggregatePermanentRentLamports",
+        "aggregateRecoverableBufferLamports",
+        "aggregateFeeBudgetLamports",
+        "expiresAtUnixSeconds",
+        "fundingApproval",
+        "payerBalanceObservations",
+        "independentReview",
+        "blocker"
+      ],
+      "properties": {
+        "status": { "enum": ["PENDING", "EVIDENCE_COMPLETE"] },
+        "subjectSha256": { "$ref": "#/$defs/nullableSha256" },
+        "finalBinaries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["law", "economy"],
+          "properties": {
+            "law": { "$ref": "#/$defs/binaryBinding" },
+            "economy": { "$ref": "#/$defs/binaryBinding" }
+          }
+        },
+        "freshCostMeasurementSha256": { "$ref": "#/$defs/nullableSha256" },
+        "fundingSourceApprovalSha256": { "$ref": "#/$defs/nullableSha256" },
+        "ceremonyFloorPolicySha256": { "$ref": "#/$defs/nullableSha256" },
+        "bufferRecoveryPlanSha256": { "$ref": "#/$defs/nullableSha256" },
+        "ceremonyFloorLamports": { "$ref": "#/$defs/nullableU64" },
+        "aggregateFreshPayerPeakLamports": { "$ref": "#/$defs/nullableU64" },
+        "aggregatePermanentRentLamports": { "$ref": "#/$defs/nullableU64" },
+        "aggregateRecoverableBufferLamports": { "$ref": "#/$defs/nullableU64" },
+        "aggregateFeeBudgetLamports": { "$ref": "#/$defs/nullableU64" },
+        "expiresAtUnixSeconds": { "$ref": "#/$defs/nullableU64" },
+        "fundingApproval": { "$ref": "#/$defs/nullableAttestation" },
+        "payerBalanceObservations": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/attestation" }
+        },
+        "independentReview": { "$ref": "#/$defs/nullableAttestation" },
+        "blocker": { "$ref": "#/$defs/nullableBlocker" }
+      }
+    },
+    "phaseCDeployedSeal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "subjectSha256",
+        "journal",
+        "terminalState",
+        "terminalEndpointObservations",
+        "independentReview",
+        "blocker"
+      ],
+      "properties": {
+        "status": { "enum": ["PENDING", "EVIDENCE_COMPLETE"] },
+        "subjectSha256": { "$ref": "#/$defs/nullableSha256" },
+        "journal": {
+          "type": "array",
+          "minItems": 17,
+          "maxItems": 17,
+          "prefixItems": [
+            { "$ref": "#/$defs/journal1" },
+            { "$ref": "#/$defs/journal2" },
+            { "$ref": "#/$defs/journal3" },
+            { "$ref": "#/$defs/journal4" },
+            { "$ref": "#/$defs/journal5" },
+            { "$ref": "#/$defs/journal6" },
+            { "$ref": "#/$defs/journal7" },
+            { "$ref": "#/$defs/journal8" },
+            { "$ref": "#/$defs/journal9" },
+            { "$ref": "#/$defs/journal10" },
+            { "$ref": "#/$defs/journal11" },
+            { "$ref": "#/$defs/journal12" },
+            { "$ref": "#/$defs/journal13" },
+            { "$ref": "#/$defs/journal14" },
+            { "$ref": "#/$defs/journal15" },
+            { "$ref": "#/$defs/journal16" },
+            { "$ref": "#/$defs/journal17" }
+          ],
+          "items": false
+        },
+        "terminalState": { "$ref": "#/$defs/terminalState" },
+        "terminalEndpointObservations": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/attestation" }
+        },
+        "independentReview": { "$ref": "#/$defs/nullableAttestation" },
+        "blocker": { "$ref": "#/$defs/nullableBlocker" }
+      }
+    },
+    "authorizationBoundary": {
+      "const": {
+        "signingAuthorized": false,
+        "deploymentAuthorized": false,
+        "fundingSpendAuthorized": false,
+        "activationAuthorized": false,
+        "independentGate8Accepted": false,
+        "releaseAuthorized": false,
+        "mainnetExecutionAuthorized": false,
+        "mainnetStatus": "HOLD"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nullableSha256": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/sha256" }
+      ]
+    },
+    "base58": {
+      "type": "string",
+      "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+    },
+    "nullableBase58": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/base58" }
+      ]
+    },
+    "u64": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "nullableU64": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/u64" }
+      ]
+    },
+    "nullableBlocker": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "minLength": 24 }
+      ]
+    },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "kind",
+        "stage",
+        "keyId",
+        "observedAtUnixSeconds",
+        "endpointSha256",
+        "subjectSha256",
+        "observationValue",
+        "decision",
+        "signatureBase64url"
+      ],
+      "properties": {
+        "schema": { "const": "iat-b3-production-identity-authority-attestation/v1" },
+        "kind": {
+          "enum": [
+            "OWNER_IDENTITY_DECISION_ACCEPTANCE",
+            "MAINNET_GENESIS_OBSERVATION",
+            "INDEPENDENT_IDENTITY_REVIEW",
+            "OWNER_FUNDING_SOURCE_ACCEPTANCE",
+            "PAYER_BALANCE_OBSERVATION",
+            "INDEPENDENT_FUNDING_REVIEW",
+            "TERMINAL_AUTHORITY_STATE_OBSERVATION",
+            "INDEPENDENT_DEPLOYED_SEAL_REVIEW"
+          ]
+        },
+        "stage": { "enum": ["A", "B", "C"] },
+        "keyId": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._:/-]{7,127}$"
+        },
+        "observedAtUnixSeconds": { "$ref": "#/$defs/u64" },
+        "endpointSha256": { "$ref": "#/$defs/nullableSha256" },
+        "subjectSha256": { "$ref": "#/$defs/sha256" },
+        "observationValue": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "decision": { "enum": ["ACCEPT", "MATCHED"] },
+        "signatureBase64url": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{86}$"
+        }
+      }
+    },
+    "nullableAttestation": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/attestation" }
+      ]
+    },
+    "binaryBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["programId", "sha256", "byteLength", "sourceHeadSha256"],
+      "properties": {
+        "programId": { "$ref": "#/$defs/nullableBase58" },
+        "sha256": { "$ref": "#/$defs/nullableSha256" },
+        "byteLength": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "integer", "minimum": 1, "maximum": 10000000 }
+          ]
+        },
+        "sourceHeadSha256": { "$ref": "#/$defs/nullableSha256" }
+      }
+    },
+    "journalEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ordinal", "step", "status", "evidenceSha256"],
+      "properties": {
+        "ordinal": { "type": "integer", "minimum": 1, "maximum": 17 },
+        "step": { "type": "string" },
+        "status": { "enum": ["PENDING", "FINALIZED_MATCHED"] },
+        "evidenceSha256": { "$ref": "#/$defs/nullableSha256" }
+      }
+    },
+    "journal1": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 1 }, "step": { "const": "DEPLOY_LAW_WITH_HARDWARE_UPGRADE_AUTHORITY" } } }] },
+    "journal2": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 2 }, "step": { "const": "DEPLOY_ECONOMY_WITH_HARDWARE_UPGRADE_AUTHORITY" } } }] },
+    "journal3": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 3 }, "step": { "const": "VERIFY_EXACT_PROGRAM_BYTES_AND_IDENTITIES" } } }] },
+    "journal4": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 4 }, "step": { "const": "REVOKE_LAW_UPGRADE_AUTHORITY" } } }] },
+    "journal5": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 5 }, "step": { "const": "REVOKE_ECONOMY_UPGRADE_AUTHORITY" } } }] },
+    "journal6": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 6 }, "step": { "const": "VERIFY_BOTH_PROGRAMS_IMMUTABLE" } } }] },
+    "journal7": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 7 }, "step": { "const": "CREATE_EXACT_TOKEN_2022_MINT" } } }] },
+    "journal8": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 8 }, "step": { "const": "ENTER_GENESIS_STAGING" } } }] },
+    "journal9": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 9 }, "step": { "const": "CREATE_AND_FUND_CANONICAL_ACCOUNTS" } } }] },
+    "journal10": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 10 }, "step": { "const": "VERIFY_GENESIS_CONSERVATION_AND_BINDINGS" } } }] },
+    "journal11": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 11 }, "step": { "const": "REVOKE_MINT_AUTHORITY" } } }] },
+    "journal12": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 12 }, "step": { "const": "REVOKE_FREEZE_AUTHORITY" } } }] },
+    "journal13": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 13 }, "step": { "const": "INITIALIZE_LAW_AND_SEAL_EXTENSION_AUTHORITIES" } } }] },
+    "journal14": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 14 }, "step": { "const": "VERIFY_MINT_AND_PROGRAM_AUTHORITIES_SEALED" } } }] },
+    "journal15": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 15 }, "step": { "const": "FINALIZE_CURRENT_DAY" } } }] },
+    "journal16": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 16 }, "step": { "const": "ACTIVATE_ONLY_IF_CURRENT_DAY_OPEN" } } }] },
+    "journal17": { "allOf": [{ "$ref": "#/$defs/journalEntry" }, { "properties": { "ordinal": { "const": 17 }, "step": { "const": "VERIFY_ACTIVE_AND_STAGING_DISABLED" } } }] },
+    "terminalState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lawProgramId",
+        "economyProgramId",
+        "canonicalMint",
+        "lawBinarySha256",
+        "economyBinarySha256",
+        "lawUpgradeAuthority",
+        "economyUpgradeAuthority",
+        "mintAuthority",
+        "freezeAuthority",
+        "transferHookAuthority",
+        "confidentialTransferMintAuthority",
+        "active",
+        "genesisStagingWritesDisabled",
+        "stateSha256"
+      ],
+      "properties": {
+        "lawProgramId": { "$ref": "#/$defs/nullableBase58" },
+        "economyProgramId": { "$ref": "#/$defs/nullableBase58" },
+        "canonicalMint": { "$ref": "#/$defs/nullableBase58" },
+        "lawBinarySha256": { "$ref": "#/$defs/nullableSha256" },
+        "economyBinarySha256": { "$ref": "#/$defs/nullableSha256" },
+        "lawUpgradeAuthority": { "$ref": "#/$defs/nullableBase58" },
+        "economyUpgradeAuthority": { "$ref": "#/$defs/nullableBase58" },
+        "mintAuthority": { "$ref": "#/$defs/nullableBase58" },
+        "freezeAuthority": { "$ref": "#/$defs/nullableBase58" },
+        "transferHookAuthority": { "$ref": "#/$defs/nullableBase58" },
+        "confidentialTransferMintAuthority": { "$ref": "#/$defs/nullableBase58" },
+        "active": { "type": ["boolean", "null"] },
+        "genesisStagingWritesDisabled": { "type": ["boolean", "null"] },
+        "stateSha256": { "$ref": "#/$defs/nullableSha256" }
+      }
+    }
+  }
+}

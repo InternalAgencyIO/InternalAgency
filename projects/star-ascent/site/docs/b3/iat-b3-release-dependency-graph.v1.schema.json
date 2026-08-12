@@ -88,11 +88,18 @@
           "path": "projects/star-ascent/site/docs/b3/iat-b3-privacy-vault-native-instruction-plan.v1.json",
           "sha256": "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
           "bindingScope": "NONACTIVATING_PREREQUISITE_ONLY"
+        },
+        "productionIdentityAuthorityTrustBinding": {
+          "schema": "iat-b3-production-identity-authority-trust-binding/v1",
+          "status": "EXTERNAL_ACCEPTANCE_REQUIRED",
+          "keys": [],
+          "trustRootSha256": null,
+          "packetMaySelectTrustKeys": false
         }
       }
     },
     "graphDefinitionSha256": {
-      "const": "ef54d0f4196474c3fa93237f6fda3fa368e8207d8d6f1d1798395781c3bbcc05"
+      "const": "f89309a25236a9c0a4b4640b45c5d6b8a850a35c6a40b0774ccd44928532c37e"
     },
     "nodes": {
       "type": "array",
@@ -531,8 +538,8 @@
             },
             "contractArtifact": {
               "const": {
-                "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-                "sha256": "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -1276,7 +1283,11 @@
               "const": "DEPLOYED_BYTES_IDENTITIES_AND_AUTHORITY_SEAL_PACKET"
             },
             "contractArtifact": {
-              "const": null
+              "const": {
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+                "bindingScope": "REFERENCE_CONTRACT_ONLY"
+              }
             },
             "completionEvidence": {
               "anyOf": [
@@ -1331,8 +1342,8 @@
             },
             "contractArtifact": {
               "const": {
-                "path": "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
-                "sha256": "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
+                "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -1692,8 +1703,8 @@
     },
     "edges": {
       "type": "array",
-      "minItems": 132,
-      "maxItems": 132,
+      "minItems": 134,
+      "maxItems": 134,
       "prefixItems": [
         {
           "type": "array",
@@ -2667,7 +2678,35 @@
           "maxItems": 2,
           "prefixItems": [
             {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            },
+            {
+              "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
               "const": "GENESIS_ALLOCATIONS_CONSERVATION"
+            },
+            {
+              "const": "B3_COST_CEREMONY_FUNDING"
+            }
+          ],
+          "items": false
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
             },
             {
               "const": "B3_COST_CEREMONY_FUNDING"

@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 // Keep the separately versioned Privacy Vault prerequisite in the canonical
 // B3 spec inventory without touching unrelated package-script work.
 import "./iat-b3-privacy-vault-native-instruction-plan.test.mjs";
+import "./iat-b3-production-identity-authority-evidence.test.mjs";
 
 import {
   RELEASE_DEPENDENCY_APPLICABILITY_POLICY,
@@ -32,6 +33,10 @@ import {
   parseReleaseDependencyGraphJson,
   validateReleaseDependencyGraphManifest,
 } from "../scripts/validate-iat-b3-release-dependency-graph.mjs";
+import {
+  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
+  PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS,
+} from "../scripts/validate-iat-b3-production-identity-authority-evidence.mjs";
 import {
   parsePrivacyVaultNativeInstructionPlanJson,
   PRIVACY_VAULT_NATIVE_HOST_PREREQUISITE_BINDING,
@@ -136,8 +141,8 @@ const EXPECTED_DEPENDENCIES = Object.freeze({
   DEPENDENCY_SECURITY_REMEDIATION: ["V2_FEATURE_PARITY"],
   PRODUCTION_BINARY_REPRODUCIBILITY: ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "ECONOMY_ALL_15_WRITE_ADAPTER", "REWARD_LOCAL_WRITE_CONSUMER_GATING", "PRIVACY_VAULT_CLIENT", "DEPENDENCY_SECURITY_REMEDIATION"],
   ADVERSARIAL_DEVNET_REHEARSAL: ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_BINARY_REPRODUCIBILITY"],
-  DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE: ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL"],
-  B3_COST_CEREMONY_FUNDING: ["GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_BINARY_REPRODUCIBILITY"],
+  DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE: ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL", "B3_COST_CEREMONY_FUNDING"],
+  B3_COST_CEREMONY_FUNDING: ["GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY"],
   LOCALIZATION_EVIDENCE: ["V2_FEATURE_PARITY"],
   MEDIA_MASTER_COMPLETENESS: ["V2_FEATURE_PARITY"],
   V2_LAUNCH_CEREMONY_BOUNDARY: ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "V2_FEATURE_PARITY"],
@@ -151,6 +156,9 @@ const EXPECTED_EDGES = Object.freeze(EXPECTED_NODE_IDS.flatMap((dependent) =>
 const clone = (value) => structuredClone(value);
 const fixture = () => createReleaseDependencyGraphTestFixture(DRAFT);
 const node = (manifest, id) => manifest.nodes.find((entry) => entry.id === id);
+const schemaNode = (id) => SCHEMA.properties.nodes.prefixItems.find(
+  (entry) => entry.properties.id.const === id,
+);
 
 function fixtureResult(manifest) {
   return validateReleaseDependencyGraphManifest(manifest, {
@@ -210,6 +218,35 @@ test("canonical production graph is valid, records the completed host root, and 
     sha256: "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
     bindingScope: "NONACTIVATING_PREREQUISITE_ONLY",
   });
+  assert.deepEqual(
+    DRAFT.artifactBindingPolicy.productionIdentityAuthorityTrustBinding,
+    EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
+  );
+  const identityArtifact = {
+    path: "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+    sha256: "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+    bindingScope: "REFERENCE_CONTRACT_ONLY",
+  };
+  const costArtifact = {
+    path: "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
+    sha256: "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
+    bindingScope: "REFERENCE_CONTRACT_ONLY",
+  };
+  const expectedContractArtifacts = {
+    PRODUCTION_IDENTITY_INPUT_FREEZE: identityArtifact,
+    REWARD_LOCAL_WRITE_CONSUMER_GATING: null,
+    PRODUCTION_BINARY_REPRODUCIBILITY: costArtifact,
+    DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE: identityArtifact,
+    B3_COST_CEREMONY_FUNDING: identityArtifact,
+  };
+  for (const [id, expectedArtifact] of Object.entries(expectedContractArtifacts)) {
+    assert.deepEqual(node(DRAFT, id).contractArtifact, expectedArtifact, `${id} graph artifact`);
+    assert.deepEqual(
+      schemaNode(id).properties.contractArtifact.const,
+      expectedArtifact,
+      `${id} schema artifact`,
+    );
+  }
   assert.equal("ready" in result, false);
   assert.equal("GO" in result, false);
   assert.equal("productionReady" in result, false);
@@ -261,16 +298,16 @@ test("source-bound native instruction prerequisite preserves the blocked Privacy
   );
 });
 
-test("schema pins the exact 28-node, 132-edge structural-only surface", () => {
+test("schema pins the exact 28-node, 134-edge structural-only surface", () => {
   assert.equal(SCHEMA.$id, "urn:iat:b3:release-dependency-graph:v1");
   assert.equal(SCHEMA.additionalProperties, false);
   assert.deepEqual([...SCHEMA.required].sort(), Object.keys(DRAFT).sort());
   assert.equal(SCHEMA.properties.nodes.minItems, 28);
   assert.equal(SCHEMA.properties.nodes.maxItems, 28);
   assert.equal(SCHEMA.properties.nodes.prefixItems.length, 28);
-  assert.equal(SCHEMA.properties.edges.minItems, 132);
-  assert.equal(SCHEMA.properties.edges.maxItems, 132);
-  assert.equal(SCHEMA.properties.edges.prefixItems.length, 132);
+  assert.equal(SCHEMA.properties.edges.minItems, 134);
+  assert.equal(SCHEMA.properties.edges.maxItems, 134);
+  assert.equal(SCHEMA.properties.edges.prefixItems.length, 134);
   assert.deepEqual(SCHEMA.properties.applicabilityPolicy.const, RELEASE_DEPENDENCY_APPLICABILITY_POLICY);
   assert.deepEqual(SCHEMA.properties.artifactBindingPolicy.const, RELEASE_DEPENDENCY_ARTIFACT_POLICY);
   for (const key of [
@@ -319,8 +356,8 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(DRAFT.nodes.map(({ id }) => id), EXPECTED_NODE_IDS);
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
-  assert.equal(RELEASE_DEPENDENCY_EDGES.length, 132);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "ef54d0f4196474c3fa93237f6fda3fa368e8207d8d6f1d1798395781c3bbcc05");
+  assert.equal(RELEASE_DEPENDENCY_EDGES.length, 134);
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "f89309a25236a9c0a4b4640b45c5d6b8a850a35c6a40b0774ccd44928532c37e");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
@@ -337,7 +374,7 @@ test("missing, extra, duplicate, unknown, self, cyclic, and sparse graph members
   expectFixtureViolation((value) => value.nodes.push(clone(value.nodes[0])), /exact ordered 28-node inventory/u);
   expectFixtureViolation((value) => { value.nodes[4] = clone(value.nodes[3]); }, /exact ordered node inventory drifted/u);
   expectFixtureViolation((value) => { value.nodes[4] = null; }, /expected an object/u);
-  expectFixtureViolation((value) => value.edges.pop(), /exact 132-edge inventory/u);
+  expectFixtureViolation((value) => value.edges.pop(), /exact 134-edge inventory/u);
   expectFixtureViolation((value) => { value.edges[1] = clone(value.edges[0]); }, /duplicate edge|exact ordered edge/u);
   expectFixtureViolation((value) => { value.edges[1] = ["UNRECOGNIZED_NODE", value.edges[1][1]]; }, /unknown node/u);
   expectFixtureViolation((value) => { value.edges[1] = [value.edges[1][1], value.edges[1][1]]; }, /self edge/u);
@@ -357,6 +394,10 @@ test("inventory completeness is false for node, edge, scope, or artifact inconsi
     (value) => { value.artifactBindingPolicy.ownerPolicyFreezeBinding.sha256 = "ab".repeat(32); },
     (value) => {
       value.artifactBindingPolicy.privacyVaultNativeInstructionPlanBinding.sha256 = "cd".repeat(32);
+    },
+    (value) => {
+      value.artifactBindingPolicy.productionIdentityAuthorityTrustBinding.trustRootSha256 =
+        "ef".repeat(32);
     },
     (value) => {
       node(value, "CORE_CUSTODY_POLICY_ADAPTER").contractArtifact = clone(
@@ -452,6 +493,14 @@ test("artifact bindings reject traversal, absolute, command-like, swap, stale, a
   assert.match(VALIDATOR_SOURCE, /path is not in the immutable B3 artifact allowlist/u);
   assert.match(VALIDATOR_SOURCE, /symbolic links are forbidden/u);
   assert.match(VALIDATOR_SOURCE, /ownerPolicyBytes: bytesByPath\.get\(OWNER_POLICY_SCOPED_PACKET\.path\)/u);
+  assert.match(
+    VALIDATOR_SOURCE,
+    /identityInputBytes: bytesByPath\.get\([\s\S]*PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS\.identityInputFreeze\.path/u,
+  );
+  assert.match(
+    VALIDATOR_SOURCE,
+    /productionIdentityAuthorityTrustBinding/u,
+  );
   assert.doesNotMatch(VALIDATOR_SOURCE, /shell\s*:\s*true/u);
 });
 
@@ -626,6 +675,14 @@ test("validator remains host-only, read-only, nonactivating, and free of runtime
   assert.equal(DRAFT.scope.doesNotCertify.includes("TRANSACTION_SIGNING_DEPLOYMENT_OR_EXECUTION_AUTHORITY"), true);
   assert.equal(DRAFT.artifactBindingPolicy.arbitraryValidatorExecutionAllowed, false);
   assert.equal(DRAFT.artifactBindingPolicy.networkReadsAllowed, false);
+  assert.deepEqual(
+    PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze,
+    {
+      path: "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
+      sha256: "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+      bindingScope: "EXACT_COMMITTED_INPUT_ONLY",
+    },
+  );
 });
 
 test("CLI reports canonical BLOCKED, requires explicit fixture authority, and enforces completion on demand", () => {

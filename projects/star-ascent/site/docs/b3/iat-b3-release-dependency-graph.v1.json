@@ -40,9 +40,16 @@
       "path": "projects/star-ascent/site/docs/b3/iat-b3-privacy-vault-native-instruction-plan.v1.json",
       "sha256": "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
       "bindingScope": "NONACTIVATING_PREREQUISITE_ONLY"
+    },
+    "productionIdentityAuthorityTrustBinding": {
+      "schema": "iat-b3-production-identity-authority-trust-binding/v1",
+      "status": "EXTERNAL_ACCEPTANCE_REQUIRED",
+      "keys": [],
+      "trustRootSha256": null,
+      "packetMaySelectTrustKeys": false
     }
   },
-  "graphDefinitionSha256": "ef54d0f4196474c3fa93237f6fda3fa368e8207d8d6f1d1798395781c3bbcc05",
+  "graphDefinitionSha256": "f89309a25236a9c0a4b4640b45c5d6b8a850a35c6a40b0774ccd44928532c37e",
   "nodes": [
     {
       "id": "LIVE_ESTATE_CANONICAL_MINT_DECISION",
@@ -151,8 +158,8 @@
       "status": "BLOCKED",
       "completionPredicate": "PRODUCTION_IDENTITY_INPUT_FREEZE_SCOPED_OUTPUT",
       "contractArtifact": {
-        "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-        "sha256": "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+        "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
         "bindingScope": "REFERENCE_CONTRACT_ONLY"
       },
       "completionEvidence": null,
@@ -311,7 +318,11 @@
       "applicability": "REQUIRED",
       "status": "BLOCKED",
       "completionPredicate": "DEPLOYED_BYTES_IDENTITIES_AND_AUTHORITY_SEAL_PACKET",
-      "contractArtifact": null,
+      "contractArtifact": {
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+        "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+        "bindingScope": "REFERENCE_CONTRACT_ONLY"
+      },
       "completionEvidence": null,
       "blocker": "Deployed bytes and authority seal evidence remain absent because there is no Mainnet deployment."
     },
@@ -321,8 +332,8 @@
       "status": "BLOCKED",
       "completionPredicate": "B3_COST_AND_CEREMONY_FUNDING_PACKET",
       "contractArtifact": {
-        "path": "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
-        "sha256": "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+        "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
         "bindingScope": "REFERENCE_CONTRACT_ONLY"
       },
       "completionEvidence": null,
@@ -665,7 +676,15 @@
       "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
     ],
     [
+      "B3_COST_CEREMONY_FUNDING",
+      "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
+    ],
+    [
       "GENESIS_ALLOCATIONS_CONSERVATION",
+      "B3_COST_CEREMONY_FUNDING"
+    ],
+    [
+      "PRODUCTION_IDENTITY_INPUT_FREEZE",
       "B3_COST_CEREMONY_FUNDING"
     ],
     [

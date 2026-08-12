@@ -6,7 +6,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { canonicalizeRfc8785 } from "./iat-v2-canonical-json.mjs";
 import { validateExternalCheckpointProviderReadinessManifest } from "./validate-iat-b3-external-checkpoint-provider-readiness.mjs";
-import { validateIdentityFreezeManifest } from "./validate-iat-b3-identity-freeze.mjs";
+import {
+  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
+  PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS,
+  parseProductionIdentityAuthorityEvidenceJson,
+  validateProductionIdentityAuthorityEvidenceManifest,
+} from "./validate-iat-b3-production-identity-authority-evidence.mjs";
 import {
   parsePrivacyVaultNativeInstructionPlanJson,
   PRIVACY_VAULT_NATIVE_INSTRUCTION_SOURCE_BINDINGS,
@@ -35,7 +40,7 @@ const DEFAULT_MANIFEST_PATH = resolve(
 );
 const V2_PARITY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-  sha256: "e24ab3ed90e3f48cf5fb5530d8afa4ab6bb21ff8f15c1cbc08e2f44c28aaa7fb",
+  sha256: "5e783b6826da19e0d31c2e5bbccddb7875d362cc6b4072cc420161c85f69b6d6",
 });
 const OWNER_POLICY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
@@ -80,6 +85,8 @@ export const RELEASE_DEPENDENCY_ARTIFACT_POLICY = Object.freeze({
   networkReadsAllowed: false,
   ownerPolicyFreezeBinding: OWNER_POLICY_SCOPED_PACKET,
   privacyVaultNativeInstructionPlanBinding: PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET,
+  productionIdentityAuthorityTrustBinding:
+    EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
 });
 
 const artifact = (path, sha256) => Object.freeze({
@@ -117,9 +124,9 @@ const ARTIFACTS = Object.freeze({
     "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
     "d73e68b031589c63cb126251aed20b79eac5a82402e41dfdafeb41292b54dd5a",
   ),
-  identity: artifact(
-    "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-    "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+  identityAuthorityEvidence: artifact(
+    "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+    "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
   ),
   law: artifact(
     "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
@@ -174,7 +181,7 @@ const RELEASE_DEPENDENCY_NONTERMINAL_NODE_SPECS = Object.freeze([
   spec("FACTION_ECONOMICS_FUNDING", ["V2_FEATURE_PARITY"], "SCOPED_FACTION_ECONOMICS_FUNDING_PACKET", ARTIFACTS.factions),
   spec("CONFIG_GENESIS_PHASE_CODEC", ["V2_FEATURE_PARITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"], "NONVACUOUS_GENESIS_BOOTSTRAP_PHASE_AND_CONFIG_CODEC_PACKET", ARTIFACTS.economyMatrix),
   spec("GENESIS_ALLOCATIONS_CONSERVATION", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "V2_FEATURE_PARITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC"], "EXACT_GENESIS_ALLOCATION_CONSERVATION_PACKET"),
-  spec("PRODUCTION_IDENTITY_INPUT_FREEZE", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC", "GENESIS_ALLOCATIONS_CONSERVATION"], "PRODUCTION_IDENTITY_INPUT_FREEZE_SCOPED_OUTPUT", ARTIFACTS.identity),
+  spec("PRODUCTION_IDENTITY_INPUT_FREEZE", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC", "GENESIS_ALLOCATIONS_CONSERVATION"], "PRODUCTION_IDENTITY_INPUT_FREEZE_SCOPED_OUTPUT", ARTIFACTS.identityAuthorityEvidence),
   spec("DAILY_LAW_NATIVE_HOOK", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_IDENTITY_INPUT_FREEZE"], "PRODUCTION_DAILY_LAW_NATIVE_HOOK_PACKET", ARTIFACTS.law),
   spec("COMBINED_STAKE_INGRESS_HOOK", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CONFIG_GENESIS_PHASE_CODEC", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK"], "SAME_ARTIFACT_DAILY_LAW_AND_STAKE_INGRESS_PACKET", ARTIFACTS.localRehearsal),
   spec("REWARD_WATERFALL_PROOFS", ["V2_FEATURE_PARITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"], "REWARD_WATERFALL_PROOF_CONTRACT_PACKET", ARTIFACTS.waterfall),
@@ -187,8 +194,8 @@ const RELEASE_DEPENDENCY_NONTERMINAL_NODE_SPECS = Object.freeze([
   spec("DEPENDENCY_SECURITY_REMEDIATION", ["V2_FEATURE_PARITY"], "ZERO_UNACCEPTED_DEPENDENCY_FINDINGS_PACKET"),
   spec("PRODUCTION_BINARY_REPRODUCIBILITY", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "ECONOMY_ALL_15_WRITE_ADAPTER", "REWARD_LOCAL_WRITE_CONSUMER_GATING", "PRIVACY_VAULT_CLIENT", "DEPENDENCY_SECURITY_REMEDIATION"], "REPRODUCIBLE_FINAL_BINARIES_PACKET", ARTIFACTS.cost),
   spec("ADVERSARIAL_DEVNET_REHEARSAL", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_BINARY_REPRODUCIBILITY"], "FULL_SYSTEM_ADVERSARIAL_DEVNET_PACKET", ARTIFACTS.devnet),
-  spec("DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL"], "DEPLOYED_BYTES_IDENTITIES_AND_AUTHORITY_SEAL_PACKET"),
-  spec("B3_COST_CEREMONY_FUNDING", ["GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_BINARY_REPRODUCIBILITY"], "B3_COST_AND_CEREMONY_FUNDING_PACKET", ARTIFACTS.cost),
+  spec("DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL", "B3_COST_CEREMONY_FUNDING"], "DEPLOYED_BYTES_IDENTITIES_AND_AUTHORITY_SEAL_PACKET", ARTIFACTS.identityAuthorityEvidence),
+  spec("B3_COST_CEREMONY_FUNDING", ["GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY"], "B3_COST_AND_CEREMONY_FUNDING_PACKET", ARTIFACTS.identityAuthorityEvidence),
   spec("LOCALIZATION_EVIDENCE", ["V2_FEATURE_PARITY"], "ALL_50_LOCALES_ACCEPTED_NATIVE_REVIEW_PACKET"),
   spec("MEDIA_MASTER_COMPLETENESS", ["V2_FEATURE_PARITY"], "ALL_REQUIRED_MEDIA_MASTERS_PACKET"),
   spec("V2_LAUNCH_CEREMONY_BOUNDARY", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "V2_FEATURE_PARITY"], "V2_HOLD_AND_B3_SUPERSESSION_PACKET"),
@@ -216,7 +223,7 @@ export const RELEASE_DEPENDENCY_EDGES = Object.freeze(
   }),
 );
 
-if (RELEASE_DEPENDENCY_NODE_IDS.length !== 28 || RELEASE_DEPENDENCY_EDGES.length !== 132) {
+if (RELEASE_DEPENDENCY_NODE_IDS.length !== 28 || RELEASE_DEPENDENCY_EDGES.length !== 134) {
   throw new Error("IAT B3 release dependency graph constant count drift");
 }
 
@@ -488,6 +495,7 @@ function readCommittedArtifact(path, expectedSha256, violations) {
   allowed.push(
     RELEASE_DEPENDENCY_ARTIFACT_POLICY.privacyVaultNativeInstructionPlanBinding.path,
   );
+  allowed.push(PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze.path);
   if (!allowed.includes(path)) {
     violations.push(`artifact ${path}: path is not in the immutable B3 artifact allowlist`);
     return null;
@@ -743,15 +751,41 @@ function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnix
     }
   }
 
-  const identity = stableArtifactJson("PRODUCTION_IDENTITY_INPUT_FREEZE", bytesByPath, violations);
-  if (identity) {
+  const identityEvidenceBytes = bytesByPath.get(
+    ARTIFACTS.identityAuthorityEvidence.path,
+  );
+  if (identityEvidenceBytes) {
     try {
-      const result = validateIdentityFreezeManifest(identity, {
+      const identityEvidence = parseProductionIdentityAuthorityEvidenceJson(
+        identityEvidenceBytes.toString("utf8"),
+        ARTIFACTS.identityAuthorityEvidence.path,
+      );
+      const result = validateProductionIdentityAuthorityEvidenceManifest(identityEvidence, {
+        trustBinding:
+          RELEASE_DEPENDENCY_ARTIFACT_POLICY.productionIdentityAuthorityTrustBinding,
+        identityInputBytes: bytesByPath.get(
+          PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze.path,
+        ),
         ownerPolicyBytes: bytesByPath.get(OWNER_POLICY_SCOPED_PACKET.path),
+        evaluationUnixSeconds,
       });
-      states.set("PRODUCTION_IDENTITY_INPUT_FREEZE", result.productionIdentityReady === true);
+      states.set(
+        "PRODUCTION_IDENTITY_INPUT_FREEZE",
+        result.productionIdentityFreezeEvidenceComplete === true,
+      );
+      states.set(
+        "B3_COST_CEREMONY_FUNDING",
+        result.ceremonyFundingEvidenceComplete === true,
+      );
+      states.set(
+        "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE",
+        result.deployedIdentityAuthoritySealEvidenceComplete === true,
+      );
+      for (const violation of result.violations) {
+        violations.push(`PRODUCTION_IDENTITY_AUTHORITY_EVIDENCE: ${violation}`);
+      }
     } catch (error) {
-      violations.push(`PRODUCTION_IDENTITY_INPUT_FREEZE: scoped validator failed closed (${error.message})`);
+      violations.push(`PRODUCTION_IDENTITY_AUTHORITY_EVIDENCE: staged validator failed closed (${error.message})`);
     }
   }
 
@@ -1076,6 +1110,17 @@ export function validateReleaseDependencyGraphManifest(manifest, options = {}) {
       violations,
     );
     if (ownerPolicyBytes) bytesByPath.set(OWNER_POLICY_SCOPED_PACKET.path, ownerPolicyBytes);
+    const identityInputBytes = readCommittedArtifact(
+      PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze.path,
+      PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze.sha256,
+      violations,
+    );
+    if (identityInputBytes) {
+      bytesByPath.set(
+        PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze.path,
+        identityInputBytes,
+      );
+    }
   }
   const scopedStates = scopedProductionPredicateStates(
     bytesByPath,
@@ -1132,7 +1177,7 @@ export function validateReleaseDependencyGraphManifest(manifest, options = {}) {
   const inventoryComplete = violations.length === 0
     && graphValid
     && safe.nodes?.length === 28
-    && safe.edges?.length === 132
+    && safe.edges?.length === 134
     && safe.graphDefinitionSha256 === RELEASE_DEPENDENCY_GRAPH_SHA256
     && exactJson(safe.applicabilityPolicy, RELEASE_DEPENDENCY_APPLICABILITY_POLICY)
     && exactJson(safe.artifactBindingPolicy, RELEASE_DEPENDENCY_ARTIFACT_POLICY);
