@@ -82,12 +82,13 @@ pub use config_genesis_transition::{
     CONFIG_GENESIS_TRANSITION_CANDIDATE_TRUTH,
 };
 pub use genesis_conservation::{
-    verify_genesis_allocation_conservation, GenesisAllocationEntry, GenesisAllocationManifest,
-    GenesisAllocationRole, GenesisConservationError, GenesisConservationInput,
-    GenesisConservationReceipt, GenesisConservationTruth, ObservedGenesisAllocation,
-    ObservedGenesisMint, GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_COUNT,
-    GENESIS_ALLOCATION_ROLES, GENESIS_CONSERVATION_DOMAIN, GENESIS_CONSERVATION_STATUS,
-    GENESIS_CONSERVATION_TRUTH,
+    genesis_allocation_manifest_sha256, verify_genesis_allocation_conservation,
+    GenesisAllocationEntry, GenesisAllocationManifest, GenesisAllocationRole,
+    GenesisConservationError, GenesisConservationInput, GenesisConservationReceipt,
+    GenesisConservationTruth, GenesisVestingTerms, ObservedGenesisAllocation, ObservedGenesisMint,
+    GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_COUNT, GENESIS_ALLOCATION_ROLES,
+    GENESIS_CONSERVATION_DOMAIN, GENESIS_CONSERVATION_STATUS, GENESIS_CONSERVATION_TRUTH,
+    GENESIS_VESTING_TERMS,
 };
 
 use iat_b3_consensus::{

@@ -854,8 +854,9 @@ mod tests {
         GenesisAllocationManifest, GenesisConservationInput, GenesisPhase, LaneState,
         ObservedGenesisAllocation, ObservedGenesisMint, ReadonlyDailyLawAccount, COMMUNITY,
         COMMUNITY_CUSTODY, CONFIG_GENESIS_ACCOUNT_LEN, CORE_REWARD_ACCOUNT_LEN,
-        GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_ROLES, LANE_ACCOUNT_LEN, LAW_STATE_LEN,
-        LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY, TOKEN_DECIMALS,
+        GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_ROLES, GENESIS_VESTING_TERMS,
+        LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY,
+        TOKEN_DECIMALS,
     };
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day};
     use solana_pubkey::Pubkey;
@@ -1001,6 +1002,7 @@ mod tests {
             token_authority: [0x70 + index as u8; 32],
             beneficiary: [0x80 + index as u8; 32],
             amount: GENESIS_ALLOCATION_AMOUNTS[index],
+            vesting: GENESIS_VESTING_TERMS[index],
         });
         let allocations = core::array::from_fn(|index| ObservedGenesisAllocation {
             role: entries[index].role,
@@ -1193,6 +1195,7 @@ mod tests {
                     token_authority: COMMUNITY_CUSTODY,
                     beneficiary: COMMUNITY_CUSTODY,
                     amount: GENESIS_ALLOCATION_AMOUNTS[index],
+                    vesting: GENESIS_VESTING_TERMS[index],
                 }
             } else {
                 GenesisAllocationEntry {
@@ -1209,6 +1212,7 @@ mod tests {
                     token_authority: vault,
                     beneficiary: beneficiary(role as u8).unwrap(),
                     amount: GENESIS_ALLOCATION_AMOUNTS[index],
+                    vesting: GENESIS_VESTING_TERMS[index],
                 }
             }
         });
@@ -1316,7 +1320,7 @@ mod tests {
         });
         let lanes = runtime_lanes(binding, law, &manifest);
         let conservation =
-            verify_authenticated_genesis_conservation(binding, manifest, &mint, &tokens, &lanes)
+            verify_authenticated_genesis_conservation(binding, &manifest, &mint, &tokens, &lanes)
                 .unwrap();
         let stake_key = derive_pda(
             binding,

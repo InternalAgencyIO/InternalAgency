@@ -9,8 +9,9 @@ use iat_b3_economy::{
     ReadonlyDailyLawAccount, ReadonlyMintState, ReadonlyTokenState, COMMUNITY_CUSTODY,
     CONFIG_GENESIS_TRANSITION_CANDIDATE_STATUS, CONFIG_GENESIS_TRANSITION_CANDIDATE_TRUTH,
     CORE_BENEFICIARY, CORE_TEAM, ECOSYSTEM, ECOSYSTEM_BENEFICIARY, GENESIS_ALLOCATION_AMOUNTS,
-    GENESIS_ALLOCATION_ROLES, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION, LIQUIDITY,
-    LIQUIDITY_BENEFICIARY, MAINNET_SUPPLY, TOKEN_DECIMALS, TREASURY, TREASURY_BENEFICIARY,
+    GENESIS_ALLOCATION_ROLES, GENESIS_VESTING_TERMS, LAW_STATE_LEN, LAW_STATE_MAGIC,
+    LAW_STATE_VERSION, LIQUIDITY, LIQUIDITY_BENEFICIARY, MAINNET_SUPPLY, TOKEN_DECIMALS, TREASURY,
+    TREASURY_BENEFICIARY,
 };
 
 const LAW_PROGRAM: [u8; 32] = [0xB3; 32];
@@ -108,6 +109,7 @@ fn conservation(token_program: [u8; 32]) -> iat_b3_economy::GenesisConservationR
         token_authority: [0x70 + index as u8; 32],
         beneficiary: [0x80 + index as u8; 32],
         amount: GENESIS_ALLOCATION_AMOUNTS[index],
+        vesting: GENESIS_VESTING_TERMS[index],
     });
     let allocations = core::array::from_fn(|index| ObservedGenesisAllocation {
         role: entries[index].role,

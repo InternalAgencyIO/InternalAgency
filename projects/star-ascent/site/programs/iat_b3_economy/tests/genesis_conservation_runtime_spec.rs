@@ -20,8 +20,8 @@ use iat_b3_economy::{
     encode_lane_state, verify_daily_law_open, CanonicalDailyLawBinding, GenesisAllocationEntry,
     GenesisAllocationManifest, LaneState, ReadonlyDailyLawAccount, ValidatedDailyLawWrite,
     GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_COUNT, GENESIS_ALLOCATION_ROLES,
-    LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY,
-    TOKEN_DECIMALS,
+    GENESIS_VESTING_TERMS, LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION,
+    MAINNET_SUPPLY, TOKEN_DECIMALS,
 };
 use solana_account_info::AccountInfo;
 use solana_pubkey::Pubkey;
@@ -208,6 +208,7 @@ fn manifest(binding: &NativeEconomyBinding) -> GenesisAllocationManifest {
                 token_authority: [0x40; 32],
                 beneficiary: [0x40; 32],
                 amount: GENESIS_ALLOCATION_AMOUNTS[index],
+                vesting: GENESIS_VESTING_TERMS[index],
             }
         } else {
             GenesisAllocationEntry {
@@ -224,6 +225,7 @@ fn manifest(binding: &NativeEconomyBinding) -> GenesisAllocationManifest {
                 token_authority: vault,
                 beneficiary: [0x40 + index as u8; 32],
                 amount: GENESIS_ALLOCATION_AMOUNTS[index],
+                vesting: GENESIS_VESTING_TERMS[index],
             }
         }
     });
@@ -386,7 +388,7 @@ fn opaque_token_and_lane_capabilities_produce_the_exact_receipt() {
         GENESIS_ACTIVATE_LANE_WRITABILITY
     );
     let receipt =
-        verify_authenticated_genesis_conservation(&binding, manifest, &mint, &tokens, &lanes)
+        verify_authenticated_genesis_conservation(&binding, &manifest, &mint, &tokens, &lanes)
             .unwrap();
     assert_eq!(receipt.observed_supply(), MAINNET_SUPPLY);
     assert_eq!(receipt.observed_allocation_total(), MAINNET_SUPPLY);
@@ -401,13 +403,42 @@ fn opaque_token_and_lane_capabilities_produce_the_exact_receipt() {
     let alternate_tokens = token_capabilities(&mint, &alternate_manifest);
     let alternate = verify_authenticated_genesis_conservation(
         &binding,
-        alternate_manifest,
+        &alternate_manifest,
         &mint,
         &alternate_tokens,
         &lanes,
     )
     .unwrap();
     assert_ne!(alternate.account_set_sha256(), receipt.account_set_sha256());
+}
+
+#[test]
+fn every_manifest_vesting_drift_is_rejected_after_exact_runtime_authentication() {
+    let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+    let canonical_manifest = manifest(&binding);
+    let mint = canonical_mint();
+    let tokens = token_capabilities(&mint, &canonical_manifest);
+    let lanes = lane_capabilities(&binding, &open_gate(), &canonical_manifest, None);
+
+    for index in 0..GENESIS_ALLOCATION_COUNT {
+        for field in 0..3 {
+            let mut drifted = canonical_manifest;
+            match field {
+                0 => drifted.entries[index].vesting.genesis_unlocked ^= 1,
+                1 => drifted.entries[index].vesting.cliff_week ^= 1,
+                _ => drifted.entries[index].vesting.linear_end_week ^= 1,
+            }
+            assert_eq!(
+                verify_authenticated_genesis_conservation(
+                    &binding, &drifted, &mint, &tokens, &lanes,
+                ),
+                Err(GenesisConservationRuntimeError::Conservation(
+                    iat_b3_economy::GenesisConservationError::WrongVestingVector,
+                )),
+                "allocation {index} vesting field {field}"
+            );
+        }
+    }
 }
 
 #[test]
@@ -426,7 +457,9 @@ fn retained_activate_lane_writability_escalation_and_downgrade_fail_closed() {
         let hostile =
             lane_capabilities_with_writability(&binding, &gate, &manifest, None, hostile_shape);
         assert_eq!(
-            verify_authenticated_genesis_conservation(&binding, manifest, &mint, &tokens, &hostile,),
+            verify_authenticated_genesis_conservation(
+                &binding, &manifest, &mint, &tokens, &hostile,
+            ),
             Err(GenesisConservationRuntimeError::LaneWritabilityMismatch)
         );
     }
@@ -443,14 +476,20 @@ fn account_order_community_custody_and_lane_capabilities_fail_closed() {
     let mut swapped = tokens;
     swapped.swap(0, 1);
     assert_eq!(
-        verify_authenticated_genesis_conservation(&binding, base_manifest, &mint, &swapped, &lanes),
+        verify_authenticated_genesis_conservation(
+            &binding,
+            &base_manifest,
+            &mint,
+            &swapped,
+            &lanes,
+        ),
         Err(GenesisConservationRuntimeError::CommunityCustodyMismatch)
     );
 
     let mut community = base_manifest;
     community.entries[0].beneficiary[0] ^= 1;
     assert_eq!(
-        verify_authenticated_genesis_conservation(&binding, community, &mint, &tokens, &lanes),
+        verify_authenticated_genesis_conservation(&binding, &community, &mint, &tokens, &lanes),
         Err(GenesisConservationRuntimeError::CommunityCustodyMismatch)
     );
 
@@ -459,7 +498,7 @@ fn account_order_community_custody_and_lane_capabilities_fail_closed() {
     assert_eq!(
         verify_authenticated_genesis_conservation(
             &binding,
-            base_manifest,
+            &base_manifest,
             &mint,
             &tokens,
             &wrong_order
@@ -476,7 +515,7 @@ fn nonzero_genesis_lane_accounting_is_rejected_even_when_the_pda_is_authentic() 
     let tokens = token_capabilities(&mint, &manifest);
     let lanes = lane_capabilities(&binding, &open_gate(), &manifest, Some(2));
     assert_eq!(
-        verify_authenticated_genesis_conservation(&binding, manifest, &mint, &tokens, &lanes),
+        verify_authenticated_genesis_conservation(&binding, &manifest, &mint, &tokens, &lanes),
         Err(GenesisConservationRuntimeError::LaneEconomicsMismatch)
     );
 }

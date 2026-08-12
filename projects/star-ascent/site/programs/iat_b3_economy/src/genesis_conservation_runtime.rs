@@ -17,8 +17,8 @@ use crate::native_adapter::{
 };
 use crate::token_2022_runtime::{ReadonlyCanonicalEconomyMint, ReadonlyPublicTokenAccount};
 use crate::{
-    lane_policy, verify_genesis_allocation_conservation, GenesisAllocationManifest,
-    GenesisAllocationRole, GenesisConservationError, GenesisConservationInput,
+    genesis_conservation::verify_genesis_allocation_conservation_parts, lane_policy,
+    GenesisAllocationManifest, GenesisAllocationRole, GenesisConservationError,
     GenesisConservationReceipt, ObservedGenesisAllocation, ObservedGenesisMint,
     GENESIS_ALLOCATION_COUNT, GENESIS_ALLOCATION_ROLES,
 };
@@ -267,7 +267,7 @@ impl From<GenesisConservationError> for GenesisConservationRuntimeError {
 /// PDAs in exact order. No caller-supplied balance or beneficiary is accepted.
 pub fn verify_authenticated_genesis_conservation(
     binding: &NativeEconomyBinding,
-    manifest: GenesisAllocationManifest,
+    manifest: &GenesisAllocationManifest,
     canonical_mint: &ReadonlyCanonicalEconomyMint,
     token_accounts: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT],
     lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
@@ -366,19 +366,17 @@ pub fn verify_authenticated_genesis_conservation(
         };
     }
 
-    let receipt = verify_genesis_allocation_conservation(&GenesisConservationInput {
-        manifest,
-        mint: ObservedGenesisMint {
-            key: canonical_mint.canonical_mint(),
-            token_program: canonical_mint.token_2022_program(),
-            decimals: canonical_mint.decimals(),
-            supply: canonical_mint.supply(),
-            mint_authority: None,
-            freeze_authority: None,
-        },
-        allocations: observations,
-    })
-    .map_err(GenesisConservationRuntimeError::Conservation)?;
+    let observed_mint = ObservedGenesisMint {
+        key: canonical_mint.canonical_mint(),
+        token_program: canonical_mint.token_2022_program(),
+        decimals: canonical_mint.decimals(),
+        supply: canonical_mint.supply(),
+        mint_authority: None,
+        freeze_authority: None,
+    };
+    let receipt =
+        verify_genesis_allocation_conservation_parts(manifest, &observed_mint, &observations)
+            .map_err(GenesisConservationRuntimeError::Conservation)?;
 
     Ok(AuthenticatedGenesisConservationReceipt {
         receipt,

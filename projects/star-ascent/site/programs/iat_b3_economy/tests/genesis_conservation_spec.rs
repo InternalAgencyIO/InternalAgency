@@ -1,9 +1,11 @@
 use iat_b3_economy::{
-    verify_genesis_allocation_conservation, GenesisAllocationEntry, GenesisAllocationManifest,
-    GenesisAllocationRole, GenesisConservationError, GenesisConservationInput,
-    GenesisConservationTruth, ObservedGenesisAllocation, ObservedGenesisMint,
-    GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_COUNT, GENESIS_ALLOCATION_ROLES,
-    GENESIS_CONSERVATION_STATUS, GENESIS_CONSERVATION_TRUTH, MAINNET_SUPPLY, TOKEN_DECIMALS,
+    genesis_allocation_manifest_sha256, verify_genesis_allocation_conservation,
+    GenesisAllocationEntry, GenesisAllocationManifest, GenesisAllocationRole,
+    GenesisConservationError, GenesisConservationInput, GenesisConservationTruth,
+    ObservedGenesisAllocation, ObservedGenesisMint, GENESIS_ALLOCATION_AMOUNTS,
+    GENESIS_ALLOCATION_COUNT, GENESIS_ALLOCATION_ROLES, GENESIS_CONSERVATION_DOMAIN,
+    GENESIS_CONSERVATION_STATUS, GENESIS_CONSERVATION_TRUTH, GENESIS_VESTING_TERMS, MAINNET_SUPPLY,
+    TOKEN_DECIMALS,
 };
 
 fn identity(byte: u8) -> [u8; 32] {
@@ -19,6 +21,7 @@ fn valid_input() -> GenesisConservationInput {
         token_authority: identity(0x30 + index as u8),
         beneficiary: identity(0x40 + index as u8),
         amount: GENESIS_ALLOCATION_AMOUNTS[index],
+        vesting: GENESIS_VESTING_TERMS[index],
     });
     let allocations = core::array::from_fn(|index| ObservedGenesisAllocation {
         role: entries[index].role,
@@ -56,13 +59,18 @@ fn valid_input() -> GenesisConservationInput {
 fn truth_is_structural_only_and_never_authorizes_genesis_or_mainnet() {
     assert_eq!(
         GENESIS_CONSERVATION_STATUS,
-        "STRUCTURAL_CONSERVATION_VERIFIED_OWNER_AND_RUNTIME_EVIDENCE_REQUIRED_MAINNET_HOLD"
+        "STRUCTURAL_ALLOCATION_AND_VESTING_CONSERVATION_VERIFIED_OWNER_AND_RUNTIME_EVIDENCE_REQUIRED_MAINNET_HOLD"
+    );
+    assert_eq!(
+        GENESIS_CONSERVATION_DOMAIN,
+        b"IAT_B3_GENESIS_CONSERVATION_V2"
     );
     assert_eq!(
         GENESIS_CONSERVATION_TRUTH,
         GenesisConservationTruth {
             fixed_supply_and_decimals_checked: true,
             exact_allocation_arithmetic_checked: true,
+            exact_vesting_vectors_checked: true,
             distinct_destination_accounts_checked: true,
             distinct_beneficiaries_checked: true,
             terminal_base_mint_authorities_checked: true,
@@ -120,6 +128,97 @@ fn exact_five_lane_allocation_conserves_the_fixed_supply() {
         verify_genesis_allocation_conservation(&other)
             .unwrap()
             .manifest_sha256()
+    );
+
+    let mut exact_vesting_other_destination = valid_input();
+    exact_vesting_other_destination.manifest.entries[3].token_account = identity(0x71);
+    exact_vesting_other_destination.allocations[3].token_account = identity(0x71);
+    let exact_vesting_receipt =
+        verify_genesis_allocation_conservation(&exact_vesting_other_destination).unwrap();
+    assert_ne!(
+        receipt.manifest_sha256(),
+        exact_vesting_receipt.manifest_sha256()
+    );
+}
+
+#[test]
+fn every_ordered_amount_and_vesting_field_is_committed_and_fails_closed() {
+    let base = valid_input();
+    let canonical_commitment = genesis_allocation_manifest_sha256(&base.manifest);
+    assert_eq!(
+        canonical_commitment,
+        [
+            0x4b, 0xbc, 0xe8, 0xce, 0x49, 0x27, 0x97, 0x2f, 0x64, 0x61, 0x85, 0xb0, 0x98, 0x05,
+            0x86, 0x91, 0x01, 0x3c, 0x2f, 0xbe, 0x31, 0x8e, 0xcd, 0x48, 0x06, 0xd9, 0x85, 0x59,
+            0x3e, 0xc1, 0x7f, 0xe7,
+        ]
+    );
+    assert_eq!(
+        canonical_commitment,
+        verify_genesis_allocation_conservation(&base)
+            .unwrap()
+            .manifest_sha256()
+    );
+
+    for index in 0..GENESIS_ALLOCATION_COUNT {
+        let cases = [
+            (
+                "amount",
+                {
+                    let mut value = base;
+                    value.manifest.entries[index].amount ^= 1;
+                    value
+                },
+                GenesisConservationError::WrongAllocationAmount,
+            ),
+            (
+                "genesis_unlocked",
+                {
+                    let mut value = base;
+                    value.manifest.entries[index].vesting.genesis_unlocked ^= 1;
+                    value
+                },
+                GenesisConservationError::WrongVestingVector,
+            ),
+            (
+                "cliff_week",
+                {
+                    let mut value = base;
+                    value.manifest.entries[index].vesting.cliff_week ^= 1;
+                    value
+                },
+                GenesisConservationError::WrongVestingVector,
+            ),
+            (
+                "linear_end_week",
+                {
+                    let mut value = base;
+                    value.manifest.entries[index].vesting.linear_end_week ^= 1;
+                    value
+                },
+                GenesisConservationError::WrongVestingVector,
+            ),
+        ];
+        for (field, candidate, expected_error) in cases {
+            assert_ne!(
+                genesis_allocation_manifest_sha256(&candidate.manifest),
+                canonical_commitment,
+                "allocation {index} field {field} was not committed"
+            );
+            assert_eq!(
+                verify_genesis_allocation_conservation(&candidate),
+                Err(expected_error),
+                "allocation {index} field {field} did not fail closed"
+            );
+        }
+    }
+
+    let mut precedence = base;
+    precedence.manifest.entries[2].amount ^= 1;
+    precedence.manifest.entries[2].vesting.cliff_week ^= 1;
+    assert_eq!(
+        verify_genesis_allocation_conservation(&precedence),
+        Err(GenesisConservationError::WrongAllocationAmount)
     );
 }
 
@@ -221,6 +320,33 @@ fn manifest_order_amounts_and_unique_bindings_fail_closed() {
                 value
             },
             GenesisConservationError::WrongAllocationAmount,
+        ),
+        (
+            "genesis unlock",
+            {
+                let mut value = base;
+                value.manifest.entries[1].vesting.genesis_unlocked -= 1;
+                value
+            },
+            GenesisConservationError::WrongVestingVector,
+        ),
+        (
+            "cliff week",
+            {
+                let mut value = base;
+                value.manifest.entries[2].vesting.cliff_week += 1;
+                value
+            },
+            GenesisConservationError::WrongVestingVector,
+        ),
+        (
+            "linear end week",
+            {
+                let mut value = base;
+                value.manifest.entries[4].vesting.linear_end_week -= 1;
+                value
+            },
+            GenesisConservationError::WrongVestingVector,
         ),
         (
             "zero destination",
