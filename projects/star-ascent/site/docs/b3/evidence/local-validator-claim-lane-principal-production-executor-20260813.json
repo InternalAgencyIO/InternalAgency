@@ -1,0 +1,708 @@
+{
+  "schema": "iat-b3-claim-lane-principal-production-executor-loopback/v1",
+  "status": "PASS",
+  "gitHead": "18152e950c7cac13c28fe4582fb351638fee42bf",
+  "generatedAt": "2026-08-12T23:04:02.641Z",
+  "scope": {
+    "rpc": "http://127.0.0.1:19499",
+    "loopbackOnly": true,
+    "publicNetworkWrites": false,
+    "syntheticFixtureInstructionWrapper": true,
+    "syntheticProgramErrorMapping": true,
+    "syntheticLaneFundingHookBypass": true,
+    "syntheticFundingAuthorizationReliesOnToken2022OuterTransfer": true,
+    "syntheticFundingAuthorityAppearsNonsignerInsideHook": true,
+    "laneToLaneHostileIsClassifierOnly": true,
+    "syntheticValidationPdaControlTlv": true,
+    "syntheticValidationControlOrdinalFailureFlag": true,
+    "syntheticFixtureAdminConfigControl": true,
+    "syntheticShadowLawCapabilityDigestMismatch": true,
+    "realStaleLawAccountReboundClaimed": false,
+    "nonCoreClaimsOnly": true,
+    "coreCustodyPolicyUnresolved": true
+  },
+  "fixture": {
+    "productionCandidate": false,
+    "economyProgramId": "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU",
+    "lawHookProgramId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+    "economyArtifactSha256": "6bfcd3fb1e046b44db72404bdaa4a27c579dab5965ccae2dc75bd6fed63d7bdd",
+    "lawArtifactSha256": "6bc2e6938add29084169f6a21f3470142087f18fac48c46e11b237a82448f1d4",
+    "economySourceSha256": "8dbb60debbfe7e74373d981df46826591db0800d7ba8c05bce87fe6973051f52",
+    "lawHookSourceSha256": "a0965eb490e127719b78e0449fdde4722e25650e4f5fc5873357d71c133a515a",
+    "driverSha256": "e6649b8ac3d632aa4cb0ede44527b3ce17c0db29c8bfc4689630c7ba2de66f2c",
+    "cargoLockSha256": "e1989effc463adc35d22afdce351e72bca59768d62ce98ce858f883dfaadb2b4",
+    "economyBuildLogSha256": "ff652c525789e14293163d60b80f61dd752516acacfb2ed02f24feab944a23cf",
+    "lawBuildLogSha256": "3d92cbdd9ef33c9a35e80bce355215d155a0679ced79f65552dc7eefecad5907",
+    "runnerSha256": "1e9e44422543b330ae78577b3f40c5801ec826a9fb23d6ad505fd839cfb4f4a8"
+  },
+  "productionSource": {
+    "claimExecutorSha256": "b181a16cc5c5241e9950a28aae34f1f067d6da00b8aef9fbf2aeff4d286be4e6",
+    "claimPreflightSha256": "7c3a8a3994aad6f5ccbd9f19679c16639f5bb839e11ba759aecee74c571c3ab0",
+    "stakeIngressRuntimeSha256": "2a719a5e7edd80711090e424fb9a3a3172678bf1b689fafa853afdd5ae0c15e8",
+    "nativeAdapterSha256": "58b38c081b7915f57fe2c06f33ea6a84da7a0ba35d108f7e22e1d3350c126331",
+    "runtimeAdapterSha256": "16a37aebf77d38e0ab179052bf74a98065df2f2d29e5c72991d21742c7d60f30",
+    "runtimeWriteAdapterSha256": "4c98e70708a38c1accecaf38df43119cdac6d07ac308042cd91f76e1d40367da",
+    "token2022RuntimeSha256": "f7bd28254c3766142dc7a71593aedcaa67e59e6c1c9be60e7f48f3f99f0f4c3b",
+    "productionInstructionSha256": "cc3d05e63d5db8df4280b797758c8a40f0cf0c4eb1cc528f717a103d3f5b3eb1"
+  },
+  "cluster": {
+    "genesisHash": "BrBMe4Xtqanss2XoGZsvRMfx2upqckDfZ8CgP8Fp2HNo",
+    "commitment": "finalized"
+  },
+  "mint": {
+    "extensionTypes": [
+      4,
+      14
+    ],
+    "supply": "1000000000000000000",
+    "decimals": 9,
+    "mintAuthority": null,
+    "freezeAuthority": null,
+    "confidentialAuthority": null,
+    "confidentialAutoApprove": true,
+    "confidentialAuditor": null,
+    "transferHookAuthority": null,
+    "transferHookProgramId": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F"
+  },
+  "validationTlv": {
+    "owner": "DAQCmCpqSgTn7J2MWmiPNZvJwasEESabaSy7VR4qUy4F",
+    "metaCount": 1,
+    "exactLawState": "2kVRcFPWqo2CPk16bmsNs7m1rKF6uVD9eSsx2X71oomJ",
+    "readOnly": true,
+    "nonsigner": true,
+    "controlDiscriminator": "IATB3CTL",
+    "controlPayloadLength": 34,
+    "controlVersion": 1,
+    "controlController": "BVG5cXaszCwV8VD6Yx6HwJYyAtXTotT3vd72jbVoCrVT",
+    "controlBaselineOrdinal": 0,
+    "executeListSha256": "fbcca44b14c87898a1cb5f10cc201e7bd76952d3958a7f3ded80b97c1dff78c8"
+  },
+  "observed": {
+    "realProductionClaimLanePrincipalExecutorInvoked": true,
+    "exactProductionInstructionCodecPassedThrough": true,
+    "exactTwelveAccountGraphObserved": true,
+    "allThreeNonCoreLanesClaimed": true,
+    "coreLaneRejectedWithoutCpiOrWrites": true,
+    "canonicalToken2022MintAuthenticated": true,
+    "exactHookLawGraphResolved": true,
+    "exactlyOneLawMetaInvariantAcrossControlUpdates": true,
+    "authenticatedLawBytesInvariantAcrossControlUpdates": true,
+    "executeMetaListBytesInvariantAcrossControlUpdates": true,
+    "onlyValidationControlOrdinalMutatedAndClearedToBaseline": true,
+    "hostileControlUpdatesRejectedWithoutAccountMutation": true,
+    "wrongFixtureConfigControllerRejectedWithoutAccountMutation": true,
+    "directSignerAndNonsignerHookBypassesRejected": true,
+    "delegatedFundingRejectedWithExactRollback": true,
+    "zeroAndNonLaneFundingRejectedWithExactRollback": true,
+    "positiveOwnerFundingExactDeltasObserved": true,
+    "lawAuthenticationPrecededMalformedInstructionDecode": true,
+    "accountGraphHostilesRejectedBeforeCpiWithoutWrites": true,
+    "syntheticShadowLawCapabilityDigestMismatchRejectedBeforeCpiReloadAndCas": true,
+    "eachNonCoreHookFailureRejectedCpiBeforeReloadAndCasWithExactRawStateUnchanged": true,
+    "lateWrapperFailureRolledBackOneCpiAndOneLaneCas": true,
+    "nothingVestedRejectedBeforeCpiWithoutWrites": true,
+    "exactOneLaneRawPostimagePerClaimObserved": true,
+    "exactOneSourceAndDestinationTokenRawPostimagesPerClaimObserved": true,
+    "exactEconomicConservationObserved": true,
+    "oneLaneClaimConservationObserved": true,
+    "exactLocalSbfExecutionProven": true,
+    "loopbackFinalizedTransactionRollbackProven": true,
+    "requestedComputeUnitLimit": 1400000,
+    "computeUnitsConsumed": [
+      {
+        "label": "fund-wrong-config-controller",
+        "computeUnitsConsumed": 300
+      },
+      {
+        "label": "initialize-law",
+        "computeUnitsConsumed": 30124
+      },
+      {
+        "label": "initialize-validation",
+        "computeUnitsConsumed": 35912
+      },
+      {
+        "label": "initialize-treasury-token",
+        "computeUnitsConsumed": 20692
+      },
+      {
+        "label": "initialize-ecosystem-token",
+        "computeUnitsConsumed": 23692
+      },
+      {
+        "label": "initialize-core-token",
+        "computeUnitsConsumed": 20692
+      },
+      {
+        "label": "initialize-liquidity-token",
+        "computeUnitsConsumed": 20692
+      },
+      {
+        "label": "set-control-unsigned-controller-rejected",
+        "computeUnitsConsumed": 4766
+      },
+      {
+        "label": "set-control-wrong-validation-rejected",
+        "computeUnitsConsumed": 4530
+      },
+      {
+        "label": "set-control-invalid-ordinal-rejected",
+        "computeUnitsConsumed": 1617
+      },
+      {
+        "label": "seed-claim-state",
+        "computeUnitsConsumed": 153280
+      },
+      {
+        "label": "create-hostile-destination",
+        "computeUnitsConsumed": 2738
+      },
+      {
+        "label": "direct-hook-nonsigner-rejected",
+        "computeUnitsConsumed": 31746
+      },
+      {
+        "label": "direct-hook-signer-rejected",
+        "computeUnitsConsumed": 31745
+      },
+      {
+        "label": "zero-funding-rejected",
+        "computeUnitsConsumed": 64029
+      },
+      {
+        "label": "nonlane-funding-rejected",
+        "computeUnitsConsumed": 64101
+      },
+      {
+        "label": "approve-hostile-delegate",
+        "computeUnitsConsumed": 1570
+      },
+      {
+        "label": "delegate-funding-rejected",
+        "computeUnitsConsumed": 64088
+      },
+      {
+        "label": "revoke-hostile-delegate",
+        "computeUnitsConsumed": 947
+      },
+      {
+        "label": "fund-treasury-lane",
+        "computeUnitsConsumed": 65347
+      },
+      {
+        "label": "fund-ecosystem-lane",
+        "computeUnitsConsumed": 65347
+      },
+      {
+        "label": "fund-core-lane",
+        "computeUnitsConsumed": 65347
+      },
+      {
+        "label": "fund-liquidity-lane",
+        "computeUnitsConsumed": 65347
+      },
+      {
+        "label": "lock-law-for-precedence",
+        "computeUnitsConsumed": 26923
+      },
+      {
+        "label": "set-control-locked-law-rejected",
+        "computeUnitsConsumed": 6370
+      },
+      {
+        "label": "law-first-malformed-production",
+        "computeUnitsConsumed": 30035
+      },
+      {
+        "label": "reopen-law",
+        "computeUnitsConsumed": 26941
+      },
+      {
+        "label": "set-config-wrong-controller-rejected",
+        "computeUnitsConsumed": 50476
+      },
+      {
+        "label": "set-config-inactive",
+        "computeUnitsConsumed": 50625
+      },
+      {
+        "label": "inactive-config-rejected",
+        "computeUnitsConsumed": 88895
+      },
+      {
+        "label": "restore-config-active",
+        "computeUnitsConsumed": 50622
+      },
+      {
+        "label": "wrong-beneficiary-rejected",
+        "computeUnitsConsumed": 132763
+      },
+      {
+        "label": "core-policy-rejected",
+        "computeUnitsConsumed": 123376
+      },
+      {
+        "label": "wrong-lane-state-rejected",
+        "computeUnitsConsumed": 107987
+      },
+      {
+        "label": "wrong-source-pda-rejected",
+        "computeUnitsConsumed": 132157
+      },
+      {
+        "label": "wrong-mint-rejected",
+        "computeUnitsConsumed": 7239
+      },
+      {
+        "label": "wrong-hook-program-rejected",
+        "computeUnitsConsumed": 171717
+      },
+      {
+        "label": "wrong-validation-rejected",
+        "computeUnitsConsumed": 173276
+      },
+      {
+        "label": "wrong-law-rejected",
+        "computeUnitsConsumed": 5739
+      },
+      {
+        "label": "synthetic-shadow-law-capability-mismatch-rejected",
+        "computeUnitsConsumed": 199815
+      },
+      {
+        "label": "wrong-program-identity-rejected",
+        "computeUnitsConsumed": 171661
+      },
+      {
+        "label": "set-hook-rejection-treasury",
+        "computeUnitsConsumed": 31490
+      },
+      {
+        "label": "hook-rejection-treasury",
+        "computeUnitsConsumed": 267280
+      },
+      {
+        "label": "clear-hook-rejection-treasury",
+        "computeUnitsConsumed": 31490
+      },
+      {
+        "label": "set-hook-rejection-ecosystem",
+        "computeUnitsConsumed": 31490
+      },
+      {
+        "label": "hook-rejection-ecosystem",
+        "computeUnitsConsumed": 265779
+      },
+      {
+        "label": "clear-hook-rejection-ecosystem",
+        "computeUnitsConsumed": 31490
+      },
+      {
+        "label": "set-hook-rejection-liquidity",
+        "computeUnitsConsumed": 31490
+      },
+      {
+        "label": "hook-rejection-liquidity",
+        "computeUnitsConsumed": 258280
+      },
+      {
+        "label": "clear-hook-rejection-liquidity",
+        "computeUnitsConsumed": 31490
+      },
+      {
+        "label": "post-success-wrapper-rollback",
+        "computeUnitsConsumed": 431445
+      },
+      {
+        "label": "claim-success-treasury",
+        "computeUnitsConsumed": 431437
+      },
+      {
+        "label": "claim-success-ecosystem",
+        "computeUnitsConsumed": 428436
+      },
+      {
+        "label": "claim-success-liquidity",
+        "computeUnitsConsumed": 413437
+      },
+      {
+        "label": "nothing-vested-rejected",
+        "computeUnitsConsumed": 133796
+      }
+    ],
+    "globalSbfStackDiagnosticsPresent": false
+  },
+  "transactions": [
+    {
+      "label": "fund-wrong-config-controller",
+      "signature": "gD2adrTSmfX81ZzbvDB4wiZRngyrhuTSK9TtBqMoQ3YAq2PQ5xsnRTG9Aa185uGnbZQD76MENmSR4ekN3ffuet1",
+      "success": true,
+      "computeUnitsConsumed": 300
+    },
+    {
+      "label": "initialize-law",
+      "signature": "3ifqquTA641UJo2e27jJgEyeBxms5RWGMG7FYsCeze5MGGFVwAsni5Diy87VS6THiAJ9GGx54nD7WfL6iCNHixiv",
+      "success": true,
+      "computeUnitsConsumed": 30124
+    },
+    {
+      "label": "initialize-validation",
+      "signature": "5ktn7tSqxuiZGryaCnpyHdCGkRMfx5qXCmprJ6g29a9YTc425PiLEZ4tz4KyMEGiTjfgPdgTgeSZzVKuBozmUsNY",
+      "success": true,
+      "computeUnitsConsumed": 35912
+    },
+    {
+      "label": "initialize-treasury-token",
+      "signature": "XF6CPqak4DKYE4nCiAN7BEPTjAEA9YNVyytqGMSFGXmGn3Qh49ajFHD5kYNabA9o3fDE8mmncTPBEe4JfcTBFTQ",
+      "success": true,
+      "computeUnitsConsumed": 20692
+    },
+    {
+      "label": "initialize-ecosystem-token",
+      "signature": "2NqdwUr8YNXuB9LrcAKCPuv5DGnEGLf3jNfKmZG4kJTjgNzCusazVHSkWchcDqxSXpkT2jHSs1igcBsYpwrmM5m7",
+      "success": true,
+      "computeUnitsConsumed": 23692
+    },
+    {
+      "label": "initialize-core-token",
+      "signature": "581MHiWmmQ2FdJiFbfUdR5xTeznPVhEzBqeK9PCu9dQdo7CestMQrZuD1LSqzScQQf54CwCFXrvptdtRVTp31ZxL",
+      "success": true,
+      "computeUnitsConsumed": 20692
+    },
+    {
+      "label": "initialize-liquidity-token",
+      "signature": "4kPWPnuWWYnsPMKnzZLXCY5BWaHTz6yoh8CGPqWReRsWtURZvToHpzzoq3myGyfWCFodTmniczMCk9tE7VmX7T5h",
+      "success": true,
+      "computeUnitsConsumed": 20692
+    },
+    {
+      "label": "set-control-unsigned-controller-rejected",
+      "signature": "Qs9Du6XhEKgtjHX8EmAoJooAhSQY2QYybfQEdcPMVg2yUUScYbWSNv1eZBin73ewKxmXBiBeRZ3GBExV2F7T7DA",
+      "success": false,
+      "computeUnitsConsumed": 4766
+    },
+    {
+      "label": "set-control-wrong-validation-rejected",
+      "signature": "4ot2WpP2fPWTNxfbyPXcb31uwcWhBw4WyqTwpUHxXXgUTsEuzXNZR3x1cLsvs99p4VPHJcx3oYohkvYyALNm33BD",
+      "success": false,
+      "computeUnitsConsumed": 4530
+    },
+    {
+      "label": "set-control-invalid-ordinal-rejected",
+      "signature": "5zcMZygjcysADHA9wenZHvbhJNnUppbitY1e4Zo6bvkzYx3AuF7XbctZhuaYWF2KpzdKm9vkouS8rttKx7uJ2Jki",
+      "success": false,
+      "computeUnitsConsumed": 1617
+    },
+    {
+      "label": "seed-claim-state",
+      "signature": "5t8BYMHuMTXrRyTGRhFDQBM7CPGuYSAhSZEETjwbrXVMybwYxezNPqkjeQ4BGCMEnZkfXk4hKQ6JJVDr3ZaBkhQw",
+      "success": true,
+      "computeUnitsConsumed": 153280
+    },
+    {
+      "label": "create-hostile-destination",
+      "signature": "2PKpJPaLm5PA7GYeZmSifKCuy5PTWRTXGUHS3wBqeAiXRTx1S1gWQJ4wCLh4fKk7e79jsH5sacqKfZRAUVMUnM7W",
+      "success": true,
+      "computeUnitsConsumed": 2738
+    },
+    {
+      "label": "direct-hook-nonsigner-rejected",
+      "signature": "3vZUi3fSAx8PZDnYVKEJbipb7wTbFJK3WpYMQxi6ewfhU2KiN2naC5Uq7CCWJyUfbS6xRN7Si9Tr4FL4qs8zeqTs",
+      "success": false,
+      "computeUnitsConsumed": 31746
+    },
+    {
+      "label": "direct-hook-signer-rejected",
+      "signature": "4jsV27y5KEX2S4WvaT2XVfLXB147S58qCXvFJTqubH7nLktzHGx3S6vfyuANN6zH9GoaB5dKfKNqDm2S8anBNu59",
+      "success": false,
+      "computeUnitsConsumed": 31745
+    },
+    {
+      "label": "zero-funding-rejected",
+      "signature": "42FgGVPuBGC2aLtu6KFNykLvjERWxa3uPBaGjBotYYXK4QMHBYmbpDqpU5m7fW8juZ967EtUXZRZSUuJ7twG2Acy",
+      "success": false,
+      "computeUnitsConsumed": 64029
+    },
+    {
+      "label": "nonlane-funding-rejected",
+      "signature": "5TdQCV9W6C5sXszYFHm2zgb13d3o7GnsspwjyEWVU6CjcxhZr5BjYd78UBQjuxJht8DmvDzxn5WZKn72FtzDxbVk",
+      "success": false,
+      "computeUnitsConsumed": 64101
+    },
+    {
+      "label": "approve-hostile-delegate",
+      "signature": "42cnZu1nVLBFig7nnfFLbtecNRvgRCW1bpReoCVdiZnhx543NsorcXt7ZW47ngnVyKuzsDEa97DJAmwMukwegdmR",
+      "success": true,
+      "computeUnitsConsumed": 1570
+    },
+    {
+      "label": "delegate-funding-rejected",
+      "signature": "3VFZV9GFC3EF9xxrGSfaE85QHfwUiY9picFM485jm7T62z3CQK7zvN1hpSwPa8TtAWXdTvtqVFc6VACjx3s8gLxS",
+      "success": false,
+      "computeUnitsConsumed": 64088
+    },
+    {
+      "label": "revoke-hostile-delegate",
+      "signature": "NbcSri6fAP3saBr81k92LLvDowtTLAmHNwnk9em42SkktowMw2RbYC4nAmqL5srLWvUVCaNioWPiwdFYmN4SSpi",
+      "success": true,
+      "computeUnitsConsumed": 947
+    },
+    {
+      "label": "fund-treasury-lane",
+      "signature": "T2nuxn5hpBLxeG9DkidHxJXHWKgwoHSWXhn6cTWPqxuW7p5e1QH7mEjqJeKtUcwm2vxacdtbndrhgt94uKNUKFH",
+      "success": true,
+      "computeUnitsConsumed": 65347
+    },
+    {
+      "label": "fund-ecosystem-lane",
+      "signature": "3dbQzZTUyaWdPmDU3qaMhBETsRYpPJU7o4GdxcZHvUH9wT3JZRJ9tgMJ7RvkrqPFHt8KGvPvPrWjYFvM2n4UKhrs",
+      "success": true,
+      "computeUnitsConsumed": 65347
+    },
+    {
+      "label": "fund-core-lane",
+      "signature": "rqQ4QTN5MAFNGF979DVoDu5HrkcV9eFzVxsrTftnM2fL3Hf4Z49RgLV4sPMbteM4VbyFcT5LugxWU9CFjvLbbzu",
+      "success": true,
+      "computeUnitsConsumed": 65347
+    },
+    {
+      "label": "fund-liquidity-lane",
+      "signature": "5XnGZ3JpRMEG37fbEhGT6AoPC3sgJcrhkSKnG2UzA2ZLk5bx9UeyqmokwbU731uLMmm4C3SNPRT5uyEJnTc3T6UY",
+      "success": true,
+      "computeUnitsConsumed": 65347
+    },
+    {
+      "label": "lock-law-for-precedence",
+      "signature": "AFdj3jH6wkcxRVcKA7wwS4ZVkYyhQsgQaTgTWJBEJLqh17C46pFdhsS4MnBP7ie2bJuxp8bPjyVUZJEVNKL8UeN",
+      "success": true,
+      "computeUnitsConsumed": 26923
+    },
+    {
+      "label": "set-control-locked-law-rejected",
+      "signature": "wbyqWFfKqJWsaLfYmPpmtPoLjAQsPRaHcG1CCuF3iNyr2VDvGaM9NHzxYZWcLQ4ZDA5wmUNrUpHE33DENsy17az",
+      "success": false,
+      "computeUnitsConsumed": 6370
+    },
+    {
+      "label": "law-first-malformed-production",
+      "signature": "PvWAtu9pX5Jn2S4D9U2GC7zQbQ8cwFM6Tguwv3Jj2t9deFBz8AxTaj8wu7Hb2MyCnWwhgtrtYSg5CsqpN6J8SLk",
+      "success": false,
+      "computeUnitsConsumed": 30035
+    },
+    {
+      "label": "reopen-law",
+      "signature": "4JGkCfMU9mR9GYmRR6UQcuwSrdfq8PYW769gXDgGhGJKfmXQ2nxbzxNVazvi6WkQs2i74gwQFkcoScoXvvBX148e",
+      "success": true,
+      "computeUnitsConsumed": 26941
+    },
+    {
+      "label": "set-config-wrong-controller-rejected",
+      "signature": "QBoq4YLQM87NwjTGU7Wm9UJg8pZTMcafP98Y3b9wERJ1dmCUhe15Wb69qT9SazLqS1yKspvbzLCiqorTguyG5nf",
+      "success": false,
+      "computeUnitsConsumed": 50476
+    },
+    {
+      "label": "set-config-inactive",
+      "signature": "39qehZG6BeB7pJebMvNUumP5nUbtqhmzvTDQo6rmCriL3wpi5CwwtGtBvQBaft5DRwWCTFWUQ9oEPfcdiMn7CyGG",
+      "success": true,
+      "computeUnitsConsumed": 50625
+    },
+    {
+      "label": "inactive-config-rejected",
+      "signature": "3N49GgVjRnNCG4unj9bdJ9VBpfDVTv51H4uYpcoc5hdBQHgjQLDhVUch7MU3NaCvcqGmFoQmNS52a4GrA7389392",
+      "success": false,
+      "computeUnitsConsumed": 88895
+    },
+    {
+      "label": "restore-config-active",
+      "signature": "PtCwhpZeoypvr4wbe9H142H6Cd6Nkox6YZi6RpiYQMeXjPEnvsTwUcCvUXiGsXyAdbobGCN6GpeVHUUxosxUz1T",
+      "success": true,
+      "computeUnitsConsumed": 50622
+    },
+    {
+      "label": "wrong-beneficiary-rejected",
+      "signature": "nEPouW67qDuV9KXw1Ts2QN92YorGnd8DiuFwhp2NEdVA6soF5puNdTkcLdDMbpTk6gu5y25XQpANR3bSzVV4Nov",
+      "success": false,
+      "computeUnitsConsumed": 132763
+    },
+    {
+      "label": "core-policy-rejected",
+      "signature": "2MBtJLd97YNs8sejKDxwh2tjeLvE9dj271K3gj7AmKgoahnPtQztMHSFkJXzmUxAdUb2nhxVZaiRRagEpRFomzcK",
+      "success": false,
+      "computeUnitsConsumed": 123376
+    },
+    {
+      "label": "wrong-lane-state-rejected",
+      "signature": "3pFP19bthBXiyMMVZjKZfbqBpYhu6ZE1uhYzu94cfsVndPVRGXsswURXSj3mbLfVKFw5ryLA34uYYgyi1ZSZpfWe",
+      "success": false,
+      "computeUnitsConsumed": 107987
+    },
+    {
+      "label": "wrong-source-pda-rejected",
+      "signature": "LtgBz5Le3hk7wvAXL4ZXywT17ZscQy5vuhg8xrnP1pyStjSoXMX24pD43ohv5M2cgQAEQvrEsppEP4BqXMz7eFp",
+      "success": false,
+      "computeUnitsConsumed": 132157
+    },
+    {
+      "label": "wrong-mint-rejected",
+      "signature": "5ZtmVT9KwdPA8hVwiomsmjLBiAmipQ4QTzGsnt72p8324wufj4G1f7Y8mYBYpxMDG6pNhDdYDqohjjRZAwVPr17e",
+      "success": false,
+      "computeUnitsConsumed": 7239
+    },
+    {
+      "label": "wrong-hook-program-rejected",
+      "signature": "XVboUN9PtYoZaHeNXG9y13xwm2cFeh3Z9rHQbAynwfjBuzqjyLXeajqUjb7sDbmRkTQ2v1EvKDmqdKEEsxwURb1",
+      "success": false,
+      "computeUnitsConsumed": 171717
+    },
+    {
+      "label": "wrong-validation-rejected",
+      "signature": "2LcW9T2zTw2xUkFFfTFZCBZFarXAY2hKGwdC8trPcuKhCV6ZFSivSrRsWqhZuzT8X35829JSconWWiSSDAjTDaiZ",
+      "success": false,
+      "computeUnitsConsumed": 173276
+    },
+    {
+      "label": "wrong-law-rejected",
+      "signature": "5cW1QXXWvjbAaAxwMLWMnvGaN6tuAHk755j2YAMK2qHUbBmxaijfBftnnwTtaYvQsBarmo2xPvPQ99ihUKWHe446",
+      "success": false,
+      "computeUnitsConsumed": 5739
+    },
+    {
+      "label": "synthetic-shadow-law-capability-mismatch-rejected",
+      "signature": "5b4rh19W7nnv5poDRb5Jghz9Tta8UX6bboADE4uawYpdH5q9jv548MuBU6No8f13uWX8BPzAUQP4afFYZ6EokBCm",
+      "success": false,
+      "computeUnitsConsumed": 199815
+    },
+    {
+      "label": "wrong-program-identity-rejected",
+      "signature": "2Rnx1ntzCx6RPpR6W4aBK1L1L2K8dQCtwJCHgeQa6bXNQjM8UExA4Vy41wbfWpzxSZ4fPo6xmsxKdnG8ZW4CjN8U",
+      "success": false,
+      "computeUnitsConsumed": 171661
+    },
+    {
+      "label": "set-hook-rejection-treasury",
+      "signature": "2dM446ASw2Thzmjm2s8LxCoG1sgHXfakmfGQ1LRe3Dv6ZCyTdD6hTuieUjMwSEz2dqEwUZzCgkBV7CaURpZNELQD",
+      "success": true,
+      "computeUnitsConsumed": 31490
+    },
+    {
+      "label": "hook-rejection-treasury",
+      "signature": "v7kbhv2c8fGvqEjBJ9MwehbntwFoxrfBygssK4oXWhDVWsu92kFznq7Kv1jGcZ5y4vc4WetoKpj9J3EF48G4qtz",
+      "success": false,
+      "computeUnitsConsumed": 267280
+    },
+    {
+      "label": "clear-hook-rejection-treasury",
+      "signature": "45rXWFdHEYR66697zhQsEv6tPYzwTr8cLattJ9rMsyCn9r4oVrDNyYQHLXfBXqZAq81UTGATBFFVbEfcfbxvhpXx",
+      "success": true,
+      "computeUnitsConsumed": 31490
+    },
+    {
+      "label": "set-hook-rejection-ecosystem",
+      "signature": "3jdv6uA7oadqqvmimquUJ7dw365fPTEe26x8CR7eCX8jNHF6WewjU5dFyRY7SNPwzbrNrbLMUKeVadWTWYkxLGB",
+      "success": true,
+      "computeUnitsConsumed": 31490
+    },
+    {
+      "label": "hook-rejection-ecosystem",
+      "signature": "S6GP1arRwDmeeT1j1oBB72q3BJMWA9zQRBkDWdNCySdEw1GTa7opxx7EcRerrRCSQfXvPGzAewpkfDADZNc7b14",
+      "success": false,
+      "computeUnitsConsumed": 265779
+    },
+    {
+      "label": "clear-hook-rejection-ecosystem",
+      "signature": "2tLoAb9kgjDkKBqQuPhXxWujPetpXAUchvoaLmGTsYTv6r1KkQz7N4VoUkDTHXiz9pW457uFS1jfgmEHZSXaZvsr",
+      "success": true,
+      "computeUnitsConsumed": 31490
+    },
+    {
+      "label": "set-hook-rejection-liquidity",
+      "signature": "63dicBv3HMk9PuqM7FC6mDxE68YoK9w7GTe1ChwcDWA4kakZpC6VvuvhfY1K5joz37cjBQda1HRJ1GKPDncRvPJh",
+      "success": true,
+      "computeUnitsConsumed": 31490
+    },
+    {
+      "label": "hook-rejection-liquidity",
+      "signature": "5pRG1zGS6LsGqLb5a9szx61yxQNmzf4ycU7HF8kewRFMr2X9XFTxy4MyFTdui7M9rvnXfSQAKrAy5tkhPE3chWEF",
+      "success": false,
+      "computeUnitsConsumed": 258280
+    },
+    {
+      "label": "clear-hook-rejection-liquidity",
+      "signature": "5M38PCEK6w9pQYzJov7fMxn7xq7uWiFVNpjSawyvYviNaCJS2PknLpkixHE2QL1Bz853cokrkLSvnbpbivj86aYn",
+      "success": true,
+      "computeUnitsConsumed": 31490
+    },
+    {
+      "label": "post-success-wrapper-rollback",
+      "signature": "4XU26wtPUXNwjfYKHkN7JaHnaWMdnpkJhFr35Ma6PbAtLb2JdLKsGF3zFwDqVNHtAUfLXhKQ5oCtakMDvYsRtA8x",
+      "success": false,
+      "computeUnitsConsumed": 431445
+    },
+    {
+      "label": "claim-success-treasury",
+      "signature": "5BiRgQp5W6nFnuzimLrVYqrkjaw9nUhWkK7WPaadNjJULhYcdE5TjhfP4BwfTV2QyPL4Fsq24uNSJjmtXLgBDeN",
+      "success": true,
+      "computeUnitsConsumed": 431437
+    },
+    {
+      "label": "claim-success-ecosystem",
+      "signature": "3vAx9bKmH6P8XZzVnJGmmibP16A2Yp7skmtqeEYJRcvp1wxBKZUj4iDzW2KbE6Pf4bKx5C7KSyLb3p7vJzofu7rF",
+      "success": true,
+      "computeUnitsConsumed": 428436
+    },
+    {
+      "label": "claim-success-liquidity",
+      "signature": "54BPw6DeyUroh4U11nzJX8ynoFpTgBBW2h7TA8E2Te4jDTuaBPZU4dAexiYeRiLYEeDAHQSNKCLy2JLZ6FGyNvLc",
+      "success": true,
+      "computeUnitsConsumed": 413437
+    },
+    {
+      "label": "nothing-vested-rejected",
+      "signature": "4UopDyyT38SvK16xfVBGPNG6AiS7SXPb8pUNWh8zT3psYVGd8qfMhZcfdVZrzPgkmu3rHeRMHyMukzDYxXFxfgeA",
+      "success": false,
+      "computeUnitsConsumed": 133796
+    }
+  ],
+  "limits": {
+    "productionComputeBudgetProven": false,
+    "productionProgramErrorAbiProven": false,
+    "productionDispatcherProven": false,
+    "productionEntrypointProven": false,
+    "productionHandlerComplete": false,
+    "productionFinalCombinedBinaryProven": false,
+    "buildSourceClosureVerified": false,
+    "reproducibleBinaryProven": false,
+    "productionLaneFundingProven": false,
+    "productionValidationControlAbiProven": false,
+    "productionFailureInjectionControlProven": false,
+    "coreLaneClaimProven": false,
+    "productionIdentitiesFrozen": false,
+    "productionGenesisTokenDistributionConservationProven": false,
+    "activationLifecycleProven": false,
+    "fundingCeremonyProven": false,
+    "adversarialDevnetProven": false,
+    "publicDevnetExecuted": false,
+    "all15HandlersComplete": false,
+    "releaseGraphNodeComplete": false,
+    "activationReady": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetHold": true
+  },
+  "mainnetStatus": "HOLD",
+  "cleanup": {
+    "temporaryLedgerRemoved": true,
+    "validatorStopped": true,
+    "generatedKeyMaterialRemoved": true
+  },
+  "build": {
+    "cargoBuildSbfExitCode": 0,
+    "canonicalCompilerDiagnosticsPresent": false,
+    "explicitSbfStackLimitBytes": 4096,
+    "cargoVersion": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "rustcVersion": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "solanaVersion": "solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)",
+    "splTokenVersion": "spl-token-cli 5.5.0",
+    "nodeVersion": "v24.14.0"
+  }
+}
