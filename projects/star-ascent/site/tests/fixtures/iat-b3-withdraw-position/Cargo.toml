@@ -1,0 +1,30 @@
+[workspace]
+members = ["economy", "law-hook"]
+resolver = "2"
+
+[workspace.dependencies]
+solana-account-info = "=3.1.1"
+solana-clock = { version = "=3.2.0", features = ["sysvar"] }
+solana-cpi = "=3.1.0"
+solana-program-entrypoint = "=3.1.1"
+solana-program-error = "=3.0.1"
+solana-pubkey = { version = "=3.0.0", features = ["curve25519"] }
+solana-rent = { version = "=3.1.0", features = ["sysvar"] }
+solana-sdk-ids = "=3.1.0"
+solana-system-interface = { version = "=2.0.0", features = ["bincode"] }
+solana-sysvar = "=3.1.1"
+spl-tlv-account-resolution = "=0.11.1"
+spl-token-2022-interface = "=2.1.0"
+spl-transfer-hook-interface = "=2.1.0"
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
+
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1
+
+
