@@ -551,13 +551,31 @@ Opaque runtime wrappers now prevent the Config/Genesis composition path from
 silently accepting the pure semantic receipt or a caller-labeled Law result as
 runtime evidence. The runtime Law wrapper is produced only from the real
 read-only Law AccountInfo plus Clock; the runtime conservation wrapper is
-produced only from exact Token-2022 and strict Lane-PDA capabilities. The new
-feature-gated composer parses the binding-relative Config PDA with that Law
-wrapper, binds the same Config/mint/token program, derives the observable
-zero-state facts, and returns prerequisite hashes only. It cannot return the
-held activation plan because this runtime surface does not yet authenticate the
-stake-token read or the CoreReward lifecycle target; both facts are explicitly
-false in its truth record.
+produced only from exact Token-2022 and strict Lane-PDA capabilities and now
+commits the canonical mint, Config/vault identities, five conservation token
+observations, and four ordered Lane keys/owners/preimages plus their exact
+retained `Activate` meta shape: Treasury writable, Ecosystem writable,
+CoreTeam read-only, and Liquidity writable. A separate Law-stamped read-only
+strict-state capability preserves every owner/PDA/codec/bump/preimage check
+without being accepted by any native write-intent API; the existing writable
+capability is unchanged. The feature-gated full
+read-set composer requires that exact commitment to reproduce from its own
+mint, community/four-Lane token, and four current-Law Lane capabilities. It
+then authenticates the derived zero-balance stake PDA observation, Config and
+vault bumps, plus the exact system-owned, writable, empty CoreReward PDA target
+and classifies its zero/nonzero lamports as vacant/prefunded. Only after those
+checks does it build the held indivisible five-poststate plan from the exact
+runtime observations. An outer domain-separated runtime read-set commitment
+binds the Config and Law hashes, conservation manifest and exact account-set
+commitment, retained semantic activation read-set hash, and CoreReward key,
+system owner, lamports, and lifecycle shape so those proofs cannot be spliced.
+
+This closes current runtime read-set cross-binding, not the CoreReward creation
+lifecycle. The result has no payer, Rent observation, System CPI, post-CPI
+assertion, atomic mixed existing/create persistence, or rollback receipt. Its
+truth record therefore keeps the aggregate stake/CoreReward lifecycle flag
+false even though the stake observation and vacant/prefunded target-shape flags
+are true.
 
 This closes authentication of current observable preactivation state, not
 historical write absence or the Config graph node. The source says

@@ -4,21 +4,33 @@
 //! This module cannot parse caller-shaped semantic observations. Canonical
 //! mint and token-account values must first pass the exact Token-2022 runtime
 //! parser, and every program-custody beneficiary must come from an
-//! authenticated strict Lane PDA. The result is still not an activation or
+//! authenticated strict Lane PDA with the exact retained Activate account
+//! meta. The result is still not an activation or
 //! Mainnet authorization: production identities, owner acceptance, prior-mint
 //! retirement, phase policy, writes, and deployment evidence remain absent.
 
+use sha2::{Digest, Sha256};
+
 use crate::native_adapter::{
-    derive_pda, AuthenticatedStateAccount, NativeAdapterError, NativeEconomyBinding, PdaIdentity,
-    StrictStateValue,
+    derive_pda, AuthenticatedReadonlyStateAccount, AuthenticatedStateAccount, NativeAdapterError,
+    NativeEconomyBinding, PdaIdentity, StrictStateValue,
 };
 use crate::token_2022_runtime::{ReadonlyCanonicalEconomyMint, ReadonlyPublicTokenAccount};
 use crate::{
     lane_policy, verify_genesis_allocation_conservation, GenesisAllocationManifest,
     GenesisAllocationRole, GenesisConservationError, GenesisConservationInput,
     GenesisConservationReceipt, ObservedGenesisAllocation, ObservedGenesisMint,
-    GENESIS_ALLOCATION_COUNT,
+    GENESIS_ALLOCATION_COUNT, GENESIS_ALLOCATION_ROLES,
 };
+
+pub const GENESIS_CONSERVATION_RUNTIME_ACCOUNT_SET_DOMAIN: &[u8] =
+    b"IAT_B3_GENESIS_CONSERVATION_RUNTIME_ACCOUNT_SET_V2";
+
+/// Exact retained `Activate` Lane account metas in Treasury, Ecosystem,
+/// CoreTeam, Liquidity order. CoreTeam is read-only because the retained body
+/// reads it only to initialize CoreReward; the other three Lane states mutate.
+pub const GENESIS_ACTIVATE_LANE_WRITABILITY: [bool; GENESIS_ALLOCATION_COUNT - 1] =
+    [true, true, false, true];
 
 pub const GENESIS_CONSERVATION_RUNTIME_STATUS: &str =
     "FEATURE_GATED_AUTHENTICATED_TOKEN_AND_LANE_CAPABILITIES_OWNER_POLICY_REQUIRED_MAINNET_HOLD";
@@ -30,6 +42,7 @@ pub struct GenesisConservationRuntimeTruth {
     pub opaque_lane_state_capabilities_required: bool,
     pub exact_runtime_balances_authenticated: bool,
     pub exact_lane_beneficiaries_authenticated: bool,
+    pub exact_retained_activate_lane_writability_authenticated: bool,
     pub immutable_account_borrows_only: bool,
     pub owner_destination_manifest_accepted: bool,
     pub production_identity_binding_frozen: bool,
@@ -48,6 +61,7 @@ pub const GENESIS_CONSERVATION_RUNTIME_TRUTH: GenesisConservationRuntimeTruth =
         opaque_lane_state_capabilities_required: true,
         exact_runtime_balances_authenticated: true,
         exact_lane_beneficiaries_authenticated: true,
+        exact_retained_activate_lane_writability_authenticated: true,
         immutable_account_borrows_only: true,
         owner_destination_manifest_accepted: false,
         production_identity_binding_frozen: false,
@@ -58,6 +72,68 @@ pub const GENESIS_CONSERVATION_RUNTIME_TRUTH: GenesisConservationRuntimeTruth =
         dispatcher_exposed: false,
         mainnet_hold: true,
     };
+
+/// Role-aware strict Lane capability used by Genesis conservation and the
+/// held activation read-set composer. Both variants are opaque and
+/// Daily-Law-stamped; neither variant can be forged from semantic fields.
+/// The read-only variant is intentionally unusable by native write-intent
+/// preparation.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum AuthenticatedGenesisLaneCapability {
+    Writable(AuthenticatedStateAccount),
+    Readonly(AuthenticatedReadonlyStateAccount),
+}
+
+impl AuthenticatedGenesisLaneCapability {
+    pub const fn key(self) -> [u8; 32] {
+        match self {
+            Self::Writable(value) => value.key(),
+            Self::Readonly(value) => value.key(),
+        }
+    }
+
+    pub const fn owner(self) -> [u8; 32] {
+        match self {
+            Self::Writable(value) => value.owner(),
+            Self::Readonly(value) => value.owner(),
+        }
+    }
+
+    pub const fn identity(self) -> PdaIdentity {
+        match self {
+            Self::Writable(value) => value.identity(),
+            Self::Readonly(value) => value.identity(),
+        }
+    }
+
+    pub const fn state(self) -> StrictStateValue {
+        match self {
+            Self::Writable(value) => value.state(),
+            Self::Readonly(value) => value.state(),
+        }
+    }
+
+    pub const fn preimage_sha256(self) -> [u8; 32] {
+        match self {
+            Self::Writable(value) => value.preimage_sha256(),
+            Self::Readonly(value) => value.preimage_sha256(),
+        }
+    }
+
+    pub const fn observed_writable(self) -> bool {
+        match self {
+            Self::Writable(value) => value.observed_writable(),
+            Self::Readonly(value) => value.observed_writable(),
+        }
+    }
+
+    pub(crate) fn is_bound_to_gate(self, gate: &crate::ValidatedDailyLawWrite) -> bool {
+        match self {
+            Self::Writable(value) => value.is_bound_to_gate(gate),
+            Self::Readonly(value) => value.is_bound_to_gate(gate),
+        }
+    }
+}
 
 /// Opaque proof that the pure conservation receipt was produced from the
 /// feature-gated Token-2022 and strict Lane-PDA capability path. Callers can
@@ -72,6 +148,7 @@ pub struct AuthenticatedGenesisConservationReceipt {
     lane_reserved_total: u64,
     lane_paid_total: u64,
     lane_principal_claimed_total: u64,
+    account_set_sha256: [u8; 32],
 }
 
 impl AuthenticatedGenesisConservationReceipt {
@@ -111,6 +188,29 @@ impl AuthenticatedGenesisConservationReceipt {
         self.lane_principal_claimed_total
     }
 
+    /// Commitment to the exact canonical mint, Config/vault identities, five
+    /// public Token-2022 observations, and four strict Lane capabilities that
+    /// produced this receipt. It is evidence data only, not authorization.
+    pub const fn account_set_sha256(&self) -> [u8; 32] {
+        self.account_set_sha256
+    }
+
+    pub(crate) fn matches_exact_account_set(
+        &self,
+        binding: &NativeEconomyBinding,
+        canonical_mint: &ReadonlyCanonicalEconomyMint,
+        token_accounts: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT],
+        lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
+    ) -> Result<bool, GenesisConservationRuntimeError> {
+        Ok(self.account_set_sha256
+            == hash_authenticated_account_set(
+                binding,
+                canonical_mint,
+                token_accounts,
+                lane_states,
+            )?)
+    }
+
     pub(crate) const fn receipt(&self) -> &GenesisConservationReceipt {
         &self.receipt
     }
@@ -130,6 +230,7 @@ impl AuthenticatedGenesisConservationReceipt {
             lane_reserved_total: 0,
             lane_paid_total: 0,
             lane_principal_claimed_total: 0,
+            account_set_sha256: [0; 32],
         }
     }
 }
@@ -142,6 +243,7 @@ pub enum GenesisConservationRuntimeError {
     TokenProgramBindingMismatch,
     CommunityCustodyMismatch,
     LaneCapabilityMismatch,
+    LaneWritabilityMismatch,
     LaneEconomicsMismatch,
 }
 
@@ -168,7 +270,7 @@ pub fn verify_authenticated_genesis_conservation(
     manifest: GenesisAllocationManifest,
     canonical_mint: &ReadonlyCanonicalEconomyMint,
     token_accounts: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT],
-    lane_states: &[AuthenticatedStateAccount; GENESIS_ALLOCATION_COUNT - 1],
+    lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
 ) -> Result<AuthenticatedGenesisConservationReceipt, GenesisConservationRuntimeError> {
     if manifest.mint != binding.mint() || canonical_mint.canonical_mint() != binding.mint() {
         return Err(GenesisConservationRuntimeError::MintBindingMismatch);
@@ -213,6 +315,9 @@ pub fn verify_authenticated_genesis_conservation(
         } else {
             let expected_lane = entry.role as u8;
             let authenticated = lane_states[index - 1];
+            if authenticated.observed_writable() != GENESIS_ACTIVATE_LANE_WRITABILITY[index - 1] {
+                return Err(GenesisConservationRuntimeError::LaneWritabilityMismatch);
+            }
             if authenticated.identity()
                 != (PdaIdentity::LaneState {
                     config: binding.config(),
@@ -285,5 +390,58 @@ pub fn verify_authenticated_genesis_conservation(
         lane_reserved_total: 0,
         lane_paid_total: 0,
         lane_principal_claimed_total: 0,
+        account_set_sha256: hash_authenticated_account_set(
+            binding,
+            canonical_mint,
+            token_accounts,
+            lane_states,
+        )?,
     })
+}
+
+fn hash_authenticated_account_set(
+    binding: &NativeEconomyBinding,
+    canonical_mint: &ReadonlyCanonicalEconomyMint,
+    token_accounts: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT],
+    lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
+) -> Result<[u8; 32], GenesisConservationRuntimeError> {
+    let vault_authority = derive_pda(
+        binding,
+        PdaIdentity::VaultAuthority {
+            config: binding.config(),
+        },
+    )?
+    .key;
+    let mut hasher = Sha256::new();
+    hasher.update(GENESIS_CONSERVATION_RUNTIME_ACCOUNT_SET_DOMAIN);
+    hasher.update(binding.program_id());
+    hasher.update(binding.config());
+    hasher.update(vault_authority);
+    hasher.update(canonical_mint.token_2022_program());
+    hasher.update(canonical_mint.zk_elgamal_proof_program());
+    hasher.update(canonical_mint.canonical_mint());
+    hasher.update(canonical_mint.transfer_hook_program());
+    hasher.update(canonical_mint.supply().to_le_bytes());
+    hasher.update([canonical_mint.decimals()]);
+    hasher.update((canonical_mint.data_len() as u64).to_le_bytes());
+    for token in token_accounts {
+        hasher.update(token.token_account());
+        hasher.update(token.mint());
+        hasher.update(token.wallet_owner());
+        hasher.update(token.public_amount().to_le_bytes());
+        hasher.update([u8::from(token.immutable_owner())]);
+        hasher.update([u8::from(token.observed_writable())]);
+        hasher.update((token.data_len() as u64).to_le_bytes());
+    }
+    for (index, lane) in lane_states.iter().enumerate() {
+        if lane.observed_writable() != GENESIS_ACTIVATE_LANE_WRITABILITY[index] {
+            return Err(GenesisConservationRuntimeError::LaneWritabilityMismatch);
+        }
+        hasher.update([GENESIS_ALLOCATION_ROLES[index + 1] as u8]);
+        hasher.update(lane.key());
+        hasher.update(lane.owner());
+        hasher.update([u8::from(lane.observed_writable())]);
+        hasher.update(lane.preimage_sha256());
+    }
+    Ok(hasher.finalize().into())
 }

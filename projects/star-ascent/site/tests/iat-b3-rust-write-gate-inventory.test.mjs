@@ -511,6 +511,31 @@ test("Config Genesis runtime composition authenticates current state without inv
   );
   assert.match(
     economyConfigGenesisTransitionRuntimeSource,
+    /prepare_runtime_authenticated_config_genesis_activation_plan/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /CONFIG_GENESIS_RUNTIME_ACTIVATION_READSET_DOMAIN/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /runtime_activation_readset_sha256/u,
+  );
+  assert.match(
+    economyGenesisConservationRuntimeSource,
+    /GENESIS_CONSERVATION_RUNTIME_ACCOUNT_SET_DOMAIN/u,
+  );
+  assert.match(economyGenesisConservationRuntimeSource, /account_set_sha256/u);
+  assert.match(economyGenesisConservationRuntimeSource, /GENESIS_ACTIVATE_LANE_WRITABILITY/u);
+  assert.match(
+    economyGenesisConservationRuntimeSource,
+    /AuthenticatedGenesisLaneCapability/u,
+  );
+  assert.match(economyNativeAdapterSource, /AuthenticatedReadonlyStateAccount/u);
+  assert.match(economyNativeAdapterSource, /authenticate_readonly_state_account/u);
+  assert.match(economyNativeAdapterSource, /AccountMustBeReadonly/u);
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
     /runtime_daily_law_account_authenticated: true/u,
   );
   assert.match(
@@ -527,7 +552,23 @@ test("Config Genesis runtime composition authenticates current state without inv
   );
   assert.match(
     economyConfigGenesisTransitionRuntimeSource,
-    /complete_activation_readset_authenticated: false/u,
+    /conservation_account_set_cross_bound_to_activation_readset: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /complete_activation_readset_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /exact_retained_activate_lane_writability_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /stake_vault_observation_authenticated: true/u,
+  );
+  assert.match(
+    economyConfigGenesisTransitionRuntimeSource,
+    /core_reward_vacant_or_prefunded_target_authenticated: true/u,
   );
   assert.match(
     economyConfigGenesisTransitionRuntimeSource,
@@ -585,7 +626,12 @@ test("Genesis runtime conservation requires opaque Token-2022 and Lane capabilit
   );
   assert.match(economyGenesisConservationRuntimeSource, /ReadonlyCanonicalEconomyMint/u);
   assert.match(economyGenesisConservationRuntimeSource, /ReadonlyPublicTokenAccount/u);
-  assert.match(economyGenesisConservationRuntimeSource, /AuthenticatedStateAccount/u);
+  assert.match(economyGenesisConservationRuntimeSource, /AuthenticatedGenesisLaneCapability/u);
+  assert.match(economyGenesisConservationRuntimeSource, /GENESIS_ACTIVATE_LANE_WRITABILITY/u);
+  assert.match(
+    economyGenesisConservationRuntimeSource,
+    /exact_retained_activate_lane_writability_authenticated: true/u,
+  );
   assert.match(economyGenesisConservationRuntimeSource, /verify_authenticated_genesis_conservation/u);
   assert.match(economyGenesisConservationRuntimeSource, /PdaIdentity::VaultAuthority/u);
   assert.match(economyGenesisConservationRuntimeSource, /PdaIdentity::LaneState/u);

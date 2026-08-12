@@ -97,6 +97,7 @@ pub enum NativeAdapterError {
     AccountKeyMismatch,
     AccountOwnerMismatch,
     AccountMustBeWritable,
+    AccountMustBeReadonly,
     AccountMustNotBeExecutable,
     PdaAccountMustNotBeSigner,
     SignerKeyMismatch,
@@ -842,6 +843,10 @@ impl AuthenticatedStateAccount {
         self.key
     }
 
+    pub const fn owner(&self) -> [u8; 32] {
+        self.owner
+    }
+
     pub const fn identity(&self) -> PdaIdentity {
         self.identity
     }
@@ -852,6 +857,62 @@ impl AuthenticatedStateAccount {
 
     pub const fn preimage_sha256(&self) -> [u8; 32] {
         self.preimage_sha256
+    }
+
+    pub const fn observed_writable(&self) -> bool {
+        true
+    }
+
+    /// Crate-internal equality check used when multiple opaque runtime
+    /// capabilities must prove they came from the same open Daily-Law
+    /// decision. The private stamp remains unforgeable and is not exposed.
+    pub(crate) fn is_bound_to_gate(&self, gate: &ValidatedDailyLawWrite) -> bool {
+        self.law == LawWriteStamp::from_gate(gate)
+    }
+}
+
+/// Opaque strict-state capability for retained read-only account metas.
+///
+/// This is deliberately a distinct type from [`AuthenticatedStateAccount`]:
+/// it cannot be passed to any existing-state write-intent function, and the
+/// writable authenticator remains unchanged and fail-closed.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct AuthenticatedReadonlyStateAccount {
+    law: LawWriteStamp,
+    key: [u8; 32],
+    owner: [u8; 32],
+    identity: PdaIdentity,
+    state: StrictStateValue,
+    preimage_sha256: [u8; 32],
+}
+
+impl AuthenticatedReadonlyStateAccount {
+    pub const fn key(&self) -> [u8; 32] {
+        self.key
+    }
+
+    pub const fn owner(&self) -> [u8; 32] {
+        self.owner
+    }
+
+    pub const fn identity(&self) -> PdaIdentity {
+        self.identity
+    }
+
+    pub const fn state(&self) -> StrictStateValue {
+        self.state
+    }
+
+    pub const fn preimage_sha256(&self) -> [u8; 32] {
+        self.preimage_sha256
+    }
+
+    pub const fn observed_writable(&self) -> bool {
+        false
+    }
+
+    pub(crate) fn is_bound_to_gate(&self, gate: &ValidatedDailyLawWrite) -> bool {
+        self.law == LawWriteStamp::from_gate(gate)
     }
 }
 
@@ -874,6 +935,38 @@ pub fn authenticate_state_account(
     let state = decode_expected_state(expected_identity, account.data)?;
     validate_state_identity(binding, state, expected_identity, derived.bump)?;
     Ok(AuthenticatedStateAccount {
+        law: LawWriteStamp::from_gate(gate),
+        key: account.key,
+        owner: account.owner,
+        identity: expected_identity,
+        state,
+        preimage_sha256: sha256(account.data),
+    })
+}
+
+/// Authenticate the same strict PDA identity, owner, codec, embedded seed
+/// identities, bump, companion PDA, preimage, and Daily-Law stamp as the
+/// writable capability, while requiring the observed account meta to remain
+/// read-only. The resulting type has no conversion into a write capability.
+pub fn authenticate_readonly_state_account(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: NativeAccountObservation<'_>,
+    expected_identity: PdaIdentity,
+) -> Result<AuthenticatedReadonlyStateAccount, NativeAdapterError> {
+    require_gate_mint(gate, binding)?;
+    let derived = derive_pda(binding, expected_identity)?;
+    if account.key != derived.key {
+        return Err(NativeAdapterError::AccountKeyMismatch);
+    }
+    if account.owner != binding.program_id {
+        return Err(NativeAdapterError::AccountOwnerMismatch);
+    }
+    require_readonly_pda_account_flags(account)?;
+
+    let state = decode_expected_state(expected_identity, account.data)?;
+    validate_state_identity(binding, state, expected_identity, derived.bump)?;
+    Ok(AuthenticatedReadonlyStateAccount {
         law: LawWriteStamp::from_gate(gate),
         key: account.key,
         owner: account.owner,
@@ -1576,6 +1669,21 @@ fn require_pda_account_flags(
 ) -> Result<(), NativeAdapterError> {
     if !account.is_writable {
         return Err(NativeAdapterError::AccountMustBeWritable);
+    }
+    if account.executable {
+        return Err(NativeAdapterError::AccountMustNotBeExecutable);
+    }
+    if account.is_signer {
+        return Err(NativeAdapterError::PdaAccountMustNotBeSigner);
+    }
+    Ok(())
+}
+
+fn require_readonly_pda_account_flags(
+    account: NativeAccountObservation<'_>,
+) -> Result<(), NativeAdapterError> {
+    if account.is_writable {
+        return Err(NativeAdapterError::AccountMustBeReadonly);
     }
     if account.executable {
         return Err(NativeAdapterError::AccountMustNotBeExecutable);

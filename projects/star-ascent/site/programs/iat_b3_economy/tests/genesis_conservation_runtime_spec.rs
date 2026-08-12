@@ -2,13 +2,14 @@
 
 use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day};
 use iat_b3_economy::genesis_conservation_runtime::{
-    verify_authenticated_genesis_conservation, GenesisConservationRuntimeError,
-    GenesisConservationRuntimeTruth, GENESIS_CONSERVATION_RUNTIME_STATUS,
-    GENESIS_CONSERVATION_RUNTIME_TRUTH,
+    verify_authenticated_genesis_conservation, AuthenticatedGenesisLaneCapability,
+    GenesisConservationRuntimeError, GenesisConservationRuntimeTruth,
+    GENESIS_ACTIVATE_LANE_WRITABILITY, GENESIS_CONSERVATION_RUNTIME_ACCOUNT_SET_DOMAIN,
+    GENESIS_CONSERVATION_RUNTIME_STATUS, GENESIS_CONSERVATION_RUNTIME_TRUTH,
 };
 use iat_b3_economy::native_adapter::{
-    authenticate_state_account, derive_pda, AuthenticatedStateAccount, NativeAccountObservation,
-    NativeEconomyBinding, PdaIdentity,
+    authenticate_readonly_state_account, authenticate_state_account, derive_pda,
+    NativeAccountObservation, NativeEconomyBinding, PdaIdentity,
 };
 use iat_b3_economy::token_2022_runtime::{
     authenticate_canonical_economy_mint_account_info, authenticate_public_token_account_info,
@@ -264,7 +265,23 @@ fn lane_capabilities(
     gate: &ValidatedDailyLawWrite,
     manifest: &GenesisAllocationManifest,
     reserved_lane_index: Option<usize>,
-) -> [AuthenticatedStateAccount; GENESIS_ALLOCATION_COUNT - 1] {
+) -> [AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1] {
+    lane_capabilities_with_writability(
+        binding,
+        gate,
+        manifest,
+        reserved_lane_index,
+        GENESIS_ACTIVATE_LANE_WRITABILITY,
+    )
+}
+
+fn lane_capabilities_with_writability(
+    binding: &NativeEconomyBinding,
+    gate: &ValidatedDailyLawWrite,
+    manifest: &GenesisAllocationManifest,
+    reserved_lane_index: Option<usize>,
+    writability: [bool; GENESIS_ALLOCATION_COUNT - 1],
+) -> [AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1] {
     let genesis_unlocked = [
         50_000_000_000_000_000,
         37_500_000_000_000_000,
@@ -308,21 +325,24 @@ fn lane_capabilities(
         };
         let mut data = [0u8; LANE_ACCOUNT_LEN];
         encode_lane_state(&lane, &mut data).unwrap();
-        authenticate_state_account(
-            gate,
-            binding,
-            NativeAccountObservation {
-                key: derived.key,
-                owner: binding.program_id(),
-                lamports: 1,
-                data: &data,
-                is_signer: false,
-                is_writable: true,
-                executable: false,
-            },
-            identity,
-        )
-        .unwrap()
+        let observation = NativeAccountObservation {
+            key: derived.key,
+            owner: binding.program_id(),
+            lamports: 1,
+            data: &data,
+            is_signer: false,
+            is_writable: writability[lane_index],
+            executable: false,
+        };
+        if writability[lane_index] {
+            AuthenticatedGenesisLaneCapability::Writable(
+                authenticate_state_account(gate, binding, observation, identity).unwrap(),
+            )
+        } else {
+            AuthenticatedGenesisLaneCapability::Readonly(
+                authenticate_readonly_state_account(gate, binding, observation, identity).unwrap(),
+            )
+        }
     })
 }
 
@@ -340,6 +360,7 @@ fn truth_reports_authenticated_runtime_partial_without_authorization() {
             opaque_lane_state_capabilities_required: true,
             exact_runtime_balances_authenticated: true,
             exact_lane_beneficiaries_authenticated: true,
+            exact_retained_activate_lane_writability_authenticated: true,
             immutable_account_borrows_only: true,
             owner_destination_manifest_accepted: false,
             production_identity_binding_frozen: false,
@@ -360,11 +381,55 @@ fn opaque_token_and_lane_capabilities_produce_the_exact_receipt() {
     let mint = canonical_mint();
     let tokens = token_capabilities(&mint, &manifest);
     let lanes = lane_capabilities(&binding, &open_gate(), &manifest, None);
+    assert_eq!(
+        lanes.map(|lane| lane.observed_writable()),
+        GENESIS_ACTIVATE_LANE_WRITABILITY
+    );
     let receipt =
         verify_authenticated_genesis_conservation(&binding, manifest, &mint, &tokens, &lanes)
             .unwrap();
     assert_eq!(receipt.observed_supply(), MAINNET_SUPPLY);
     assert_eq!(receipt.observed_allocation_total(), MAINNET_SUPPLY);
+    assert_ne!(receipt.account_set_sha256(), [0; 32]);
+    assert_eq!(
+        GENESIS_CONSERVATION_RUNTIME_ACCOUNT_SET_DOMAIN,
+        b"IAT_B3_GENESIS_CONSERVATION_RUNTIME_ACCOUNT_SET_V2"
+    );
+
+    let mut alternate_manifest = manifest;
+    alternate_manifest.entries[0].token_account = [0x21; 32];
+    let alternate_tokens = token_capabilities(&mint, &alternate_manifest);
+    let alternate = verify_authenticated_genesis_conservation(
+        &binding,
+        alternate_manifest,
+        &mint,
+        &alternate_tokens,
+        &lanes,
+    )
+    .unwrap();
+    assert_ne!(alternate.account_set_sha256(), receipt.account_set_sha256());
+}
+
+#[test]
+fn retained_activate_lane_writability_escalation_and_downgrade_fail_closed() {
+    let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+    let manifest = manifest(&binding);
+    let mint = canonical_mint();
+    let tokens = token_capabilities(&mint, &manifest);
+    let gate = open_gate();
+    for hostile_shape in [
+        [true, true, true, true],
+        [false, true, false, true],
+        [true, false, false, true],
+        [true, true, false, false],
+    ] {
+        let hostile =
+            lane_capabilities_with_writability(&binding, &gate, &manifest, None, hostile_shape);
+        assert_eq!(
+            verify_authenticated_genesis_conservation(&binding, manifest, &mint, &tokens, &hostile,),
+            Err(GenesisConservationRuntimeError::LaneWritabilityMismatch)
+        );
+    }
 }
 
 #[test]

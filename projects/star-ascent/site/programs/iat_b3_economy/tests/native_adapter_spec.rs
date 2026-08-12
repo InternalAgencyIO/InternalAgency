@@ -529,6 +529,48 @@ fn every_strict_codec_is_bound_to_owner_pda_embedded_identity_and_bump() {
 }
 
 #[test]
+fn readonly_strict_capability_is_disjoint_from_the_existing_write_capability() {
+    let binding = binding();
+    let gate = open_gate_at(CLOCK_TIMESTAMP);
+    let (identity, state, data) = strict_state_cases(&binding).remove(1);
+    let key = derive_pda(&binding, identity).unwrap().key;
+    let writable = observed(key, ECONOMY_PROGRAM, &data);
+    let readonly = NativeAccountObservation {
+        is_writable: false,
+        ..writable
+    };
+
+    let capability =
+        authenticate_readonly_state_account(&gate, &binding, readonly, identity).unwrap();
+    let writable_capability =
+        authenticate_state_account(&gate, &binding, writable, identity).unwrap();
+    assert_eq!(capability.key(), key);
+    assert_eq!(capability.owner(), ECONOMY_PROGRAM);
+    assert_eq!(capability.identity(), identity);
+    assert_eq!(capability.state(), state);
+    assert_ne!(capability.preimage_sha256(), [0; 32]);
+    assert!(!capability.observed_writable());
+    assert_eq!(capability.key(), writable_capability.key());
+    assert_eq!(capability.owner(), writable_capability.owner());
+    assert_eq!(capability.identity(), writable_capability.identity());
+    assert_eq!(capability.state(), writable_capability.state());
+    assert_eq!(
+        capability.preimage_sha256(),
+        writable_capability.preimage_sha256()
+    );
+    assert!(writable_capability.observed_writable());
+
+    assert_eq!(
+        authenticate_readonly_state_account(&gate, &binding, writable, identity),
+        Err(NativeAdapterError::AccountMustBeReadonly)
+    );
+    assert_eq!(
+        authenticate_state_account(&gate, &binding, readonly, identity),
+        Err(NativeAdapterError::AccountMustBeWritable)
+    );
+}
+
+#[test]
 fn existing_write_is_daily_law_stamped_cas_bound_and_batch_atomic() {
     let binding = binding();
     let gate = open_gate_at(CLOCK_TIMESTAMP);

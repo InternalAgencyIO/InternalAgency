@@ -667,7 +667,11 @@ four opaque strict Lane-PDA capabilities returned by the Daily-Law-gated native
 account authenticator. Community custody must bind its token owner directly;
 the other four accounts must bind the canonical vault-authority PDA, exact Lane
 PDA/role/token account/beneficiary/policy, and zero reserved, paid, and claimed
-Genesis accounting before the pure conservation receipt can exist.
+Genesis accounting before the pure conservation receipt can exist. The Lane
+capabilities also reproduce the retained `Activate` account metas exactly as
+`[Treasury W, Ecosystem W, CoreTeam R, Liquidity W]`. CoreTeam uses a distinct
+Law-stamped read-only strict-state capability that cannot enter a write-intent
+API; the three writable Lane capabilities keep their existing stronger checks.
 
 This closes runtime authentication of the five observed public balances and
 Lane beneficiary bindings, not the graph packet. The owner has not accepted
@@ -680,13 +684,28 @@ The runtime bridge now preserves that distinction through opaque capability
 types. One wrapper can only be returned after the real Daily-Law AccountInfo and
 runtime Clock pass the open-day verifier; another can only be returned after
 the Token-2022 and four strict Lane-PDA capabilities pass the conservation
-composition. A feature-gated Config/Genesis composer then parses the real
-read-only Config PDA with the opaque runtime Law capability, requires the same
-Config/mint/token-program binding, derives the five current preactivation facts
-from authenticated Config and Lane state, and returns opaque held prerequisite
-hashes only. It deliberately cannot return activation poststates because this
-composer does not yet authenticate the stake-token read or a vacant/prefunded
-CoreReward lifecycle target.
+composition. The latter now commits its exact canonical mint, Config/vault,
+five token-observation, and four ordered Lane-capability account set. A
+feature-gated Config/Genesis composer parses the real read-only Config PDA with
+the opaque runtime Law capability and refuses any conservation subset that does
+not reproduce that commitment. It additionally requires the four Lane
+capabilities to carry the same current-Law stamp and exact `[W,W,R,W]` retained
+meta shape, rejects CoreTeam writable escalation or any writable-Lane downgrade,
+authenticates the canonical
+zero-balance stake PDA and derived vault bump, and checks an exact system-owned,
+writable, empty CoreReward PDA target. Zero lamports selects the vacant shape;
+nonzero lamports selects the prefunded shape. The composer can then return one
+opaque held five-poststate plan whose inputs came exclusively from that exact
+runtime read set. A separate outer commitment binds the Config/Law hashes,
+conservation manifest/account-set hashes, retained semantic activation hash,
+and CoreReward target key/system-owner/lamports/path as one nonspliceable
+runtime prestate.
+
+The new result still is not an `init_if_needed` lifecycle plan or writer. It
+contains no payer, Rent value, System instruction, CPI execution, post-CPI
+assertion, mixed existing/create atomic batch, or rollback receipt. The
+aggregate CoreReward lifecycle truth remains false; only current stake and
+vacant/prefunded target-shape authentication are complete.
 
 This authenticates current observable preactivation state. It does not prove a
 complete historical absence of prior writes, owner acceptance, production
