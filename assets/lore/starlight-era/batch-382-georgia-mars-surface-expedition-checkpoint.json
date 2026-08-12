@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-render-cap-exhausted-awaiting-explicit-authorization",
+  "status": "active-two-bank-render-cap-exhausted-scene-1551-unresolved",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -23,8 +23,8 @@
     "xPublicStatusVerified": false,
     "gateSatisfied": false
   },
-  "sourceCommit": "fed51e69b97349d006c9b252a24009766e2ff173",
-  "contractSha256": "3F23FAFCCBD38F46681CC3186A310240F566E48C68D57AB5DEE7DB98C239EE7F",
+  "sourceCommit": "25039b90139e5a5398edda611d4617415cdc0ae4",
+  "contractSha256": "52F4E013FD5535A6B7E4A12049A2543344FB2EF2B1D2DA733BF250D8903D9E00",
   "contractAmendments": {
     "radianceRealtimeAgreementPartyRule": {
       "recordedAt": "2026-08-11T18:49:40.151Z",
@@ -56,6 +56,463 @@
       ],
       "noMicroEdits": true,
       "noEditOfEdit": true
+    },
+    "persistentContinuationAuthorization": {
+      "recordedAt": "2026-08-12T08:42:57.8228310Z",
+      "userDirective": "go next renders, dont stop",
+      "contractSha256Before": "3F23FAFCCBD38F46681CC3186A310240F566E48C68D57AB5DEE7DB98C239EE7F",
+      "contractSha256After": "2C0BC33ED650948B1D05005C88AA02324EC6CAECE4C1DD0724067897446E2E50",
+      "effect": "Supersedes the automatic stop at cap exhaustion while preserving bounded two-wave windows, one active country, accepted-scene preservation, consolidated corrections, and no edit chains.",
+      "storedDeterministicRollsChanged": false,
+      "acceptedAssetsChanged": false,
+      "queueAdvanceChanged": false,
+      "currentAuthorizedRounds": [
+        48,
+        49
+      ],
+      "completedWindowRounds": [
+        46,
+        47
+      ]
+    },
+    "fixedFourSlotParallelRenderBank": {
+      "recordedAt": "2026-08-12T09:16:26.6171819Z",
+      "userDirective": "4 parallel renders all the time code it into guardian and go",
+      "contractSha256Before": "2C0BC33ED650948B1D05005C88AA02324EC6CAECE4C1DD0724067897446E2E50",
+      "contractSha256After": "5C5741D772F8CF301C95CFEF0C3BEF9B1FBE67BF7AC64F64AD9B65A920A5DC2D",
+      "effect": "Every wave launches exactly four independent candidates concurrently and preserves all four raws; accepted scenes receive no slots.",
+      "storedSceneRollsChanged": false,
+      "acceptedAssetsChanged": false,
+      "queueAdvanceChanged": false,
+      "activeRound": 49,
+      "slotAllocation": {
+        "A": 1551,
+        "B": 1551,
+        "C": 1551,
+        "D": 1551
+      },
+      "commonPrompt": {
+        "path": "tmp/world-195x4/batch-382/scene-1551-round-48-four-slot-common-prompt.txt",
+        "sha256": "846A8911D187C52AEF1E7323FD85CB50B06FE9DF1736C4376C98EC1D776281C4",
+        "chars": 9123
+      },
+      "candidateNarratives": {
+        "A": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-round-48-candidate-A-narrative.txt",
+          "sha256": "5C8D462160DF5ADA2C2D35A3DECFEE829DD8928BA7C6E625B5C4E8B575E09F07",
+          "chars": 1581,
+          "response": "explicit affirmative",
+          "partyActivation": true,
+          "willingParticipants": [
+            "Radiance",
+            "Ellie",
+            "Alia",
+            "AI ECE"
+          ]
+        },
+        "B": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-round-48-candidate-B-narrative.txt",
+          "sha256": "DAAA70FF4A56A51C85F46EFFDD3A7E589E3630E16886F07E72D530D2E829A54D",
+          "chars": 1426,
+          "response": "explicit redirect",
+          "partyActivation": false,
+          "willingParticipants": []
+        },
+        "C": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-round-48-candidate-C-narrative.txt",
+          "sha256": "97702ECD204C80C85A5AD1E99986D152A04042422D8F6BA112F3A85AF706B4",
+          "chars": 1422,
+          "response": "explicit pause",
+          "partyActivation": false,
+          "willingParticipants": []
+        },
+        "D": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-round-48-candidate-D-narrative.txt",
+          "sha256": "BE72881FF9DD7338BAE7F7AFB5FB960A190DB5F42973050380A5651B1A138EEC",
+          "chars": 1589,
+          "response": "explicit affirmative",
+          "partyActivation": true,
+          "willingParticipants": [
+            "Radiance",
+            "AI ECE"
+          ]
+        }
+      },
+      "sourceMode": "four-clean-independent-generations-from-original-identity-anchors-only",
+      "priorBatumiRenderInputCount": 0,
+      "launchMode": "four-concurrent-image-generation-calls-in-one-orchestration",
+      "auditOrder": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "winnerRule": "first exact passing candidate in deterministic audit order",
+      "round48BankAudit": {
+        "completedAt": "2026-08-12T14:30:26.382Z",
+        "scene": 1551,
+        "launchMode": "four-concurrent-clean-generations-from-original-identity-anchors",
+        "sourceRenderInputCount": 0,
+        "rawOutputs": [
+          {
+            "scene": 1551,
+            "round": 48,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "A",
+            "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-A.png",
+            "sha256": "F5C2EFC0EACAD93BAE1F6E729975BF75CB2119DA2E281CDA383850BBFF8773FD",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          },
+          {
+            "scene": 1551,
+            "round": 48,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "B",
+            "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-B.png",
+            "sha256": "6938302CEA0D48B613436B147AEEFA693A1A955C586CD993EC5D6FDFD02B61F3",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          },
+          {
+            "scene": 1551,
+            "round": 48,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "C",
+            "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-C.png",
+            "sha256": "1642A6A5027250D7DFBA222958379E1627699C4484C6D02015A5F34F9530E70D",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          },
+          {
+            "scene": 1551,
+            "round": 48,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "D",
+            "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-D.png",
+            "sha256": "0323995D282C5A365A73F72FAA1DE41B5F26B1C9C2FC5EB0836F7BD3185D3675",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          }
+        ],
+        "slotAudit": {
+          "A": {
+            "accepted": false,
+            "decisiveRejectionReasons": [
+              "The right trigger index is not independently certifiable as one straight finger entirely above and outside the empty guard.",
+              "The paper diamond sits below the muzzle row rather than on the required horizontal eye-sight-barrel-target axis.",
+              "The complete backstop ends beside the frame edge, leaving far less than eleven percent empty promenade beyond it."
+            ],
+            "retainedPasses": "Four distinct adults, exact eight-arm ownership, the three-contact dip graph, Batumi landmarks, PAWS plus MAX, ECE compass ownership, Alia two-hand prop ownership, and the active wardrobe cuts remain broadly readable, but no hard-gate waiver is allowed."
+          },
+          "B": {
+            "accepted": false,
+            "decisiveRejectionReasons": [
+              "The right trigger index remains visually merged with the grip and guard geometry rather than independently straight above the empty guard.",
+              "The target diamond is materially below the muzzle axis.",
+              "The backstop occupies the far-right edge and leaves substantially less than eleven percent empty promenade beyond it."
+            ],
+            "retainedPasses": "Four distinct adults, eight owned arms and hands, the contact graph, Batumi, both mascots, compass ownership, and Alia's two-hand stance are readable, but the mission lane fails strict certification."
+          },
+          "C": {
+            "accepted": false,
+            "decisiveRejectionReasons": [
+              "The right trigger index is not separately readable from the guard and grip cluster.",
+              "The paper diamond is below the barrel and muzzle row.",
+              "The target and backstop sit at the edge with no certifiable eleven-percent empty promenade after the complete backstop."
+            ],
+            "retainedPasses": "Four adults, the intended relationship triangle, Batumi, mascots, compass, and distinct couture are present, but the mission lane is not an exact pass."
+          },
+          "D": {
+            "accepted": false,
+            "decisiveRejectionReasons": [
+              "The right trigger index is not independently certifiable outside the guard.",
+              "An extra orange circular marker appears directly on the muzzle row, creating a second route target and violating the one-paper-target-only gate.",
+              "The required black diamond paper target remains below the muzzle row, and the backstop leaves less than eleven percent empty promenade beyond it."
+            ],
+            "retainedPasses": "Four distinct adults, eight owned arms and hands, three relationship contacts, Batumi, mascots, compass ownership, and Alia's two-hand stance are readable, but the extra marker and mission geometry are decisive failures."
+          }
+        },
+        "auditOrder": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "acceptedCandidate": null,
+        "allRejected": true,
+        "unresolvedGates": [
+          "one independently readable straight trigger index entirely above and outside the empty guard",
+          "one exact horizontal eye-sight-muzzle-black-diamond axis",
+          "one complete backstop followed by at least eleven percent visibly empty promenade",
+          "no second marker or target"
+        ]
+      },
+      "round49Preparation": {
+        "preparedAt": "2026-08-12T14:30:26.382Z",
+        "round": 49,
+        "sceneNumbers": [
+          1551
+        ],
+        "preservedAcceptedSceneNumbers": [
+          1548,
+          1549,
+          1550
+        ],
+        "slotAllocation": {
+          "A": 1551,
+          "B": 1551,
+          "C": 1551,
+          "D": 1551
+        },
+        "commonPrompt": {
+          "path": "tmp/world-195x4/batch-382/scene-1551-round-49-four-slot-common-prompt.txt",
+          "sha256": "7F072220D413C3B41E52A5D84984D14752AFB1C7E78BDDD54B679758DBA85681",
+          "chars": 9766
+        },
+        "candidateNarratives": {
+          "A": {
+            "scene": 1551,
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-49-candidate-A-narrative.txt",
+            "sha256": "30AAC13C61542F0E693F5F83BBBBD134C4834887A719091A57BD8ADA62F86902",
+            "chars": 1618,
+            "response": "explicit affirmative",
+            "partyActivation": true,
+            "willingParticipants": [
+              "Radiance",
+              "AI ECE"
+            ]
+          },
+          "B": {
+            "scene": 1551,
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-49-candidate-B-narrative.txt",
+            "sha256": "627F86EFDF4B90D3E42EB82D4DD88706B0D45EDE5CEE84E6CE23A66BB7C51BF6",
+            "chars": 1507,
+            "response": "explicit pause",
+            "partyActivation": false,
+            "willingParticipants": []
+          },
+          "C": {
+            "scene": 1551,
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-49-candidate-C-narrative.txt",
+            "sha256": "FF9DE6F761005626EF659C95D426674F8064ECB50CA16FC19566F5F495BF80FE",
+            "chars": 1572,
+            "response": "explicit affirmative",
+            "partyActivation": true,
+            "willingParticipants": [
+              "Radiance",
+              "Alia",
+              "AI ECE"
+            ]
+          },
+          "D": {
+            "scene": 1551,
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-49-candidate-D-narrative.txt",
+            "sha256": "FDFECF8BDEB7838A13D7A4FDE314836F8BD7ACFCDD4BBB11F8326B6DE78DFF19",
+            "chars": 1631,
+            "response": "explicit affirmative",
+            "partyActivation": true,
+            "willingParticipants": [
+              "Radiance",
+              "Ellie",
+              "Alia",
+              "AI ECE"
+            ]
+          }
+        },
+        "allKnownRound48CorrectionsConsolidated": true,
+        "sourceMode": "four-clean-independent-generations-from-original-identity-anchors-only",
+        "priorBatumiRenderInputCount": 0,
+        "launchMode": "four-concurrent-image-generation-calls-in-one-orchestration",
+        "auditOrder": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "winnerRule": "first exact passing candidate in deterministic slot order",
+        "status": "completed-rejected-strict-visual-audit",
+        "completedAt": "2026-08-12T15:34:58.201Z",
+        "rawOutputs": [
+          {
+            "scene": 1551,
+            "round": 49,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "A",
+            "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-A.png",
+            "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8895728e-3840-4848-9921-f318c0450d8f.png",
+            "sha256": "3C28A5039BF32E3062DE0BBDC042918639DD0E9FEB587419C130250CEF4F9332",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          },
+          {
+            "scene": 1551,
+            "round": 49,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "B",
+            "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-B.png",
+            "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c87f88e7-7bc5-4e08-b62c-4b154f0154da.png",
+            "sha256": "8F5A512DD95272945E8192BA78B54EE8CDB5DE25321D82F4CB49C7707C30457E",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          },
+          {
+            "scene": 1551,
+            "round": 49,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "C",
+            "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-C.png",
+            "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-940364ad-e21e-4c5d-b8c7-cf868555e9c5.png",
+            "sha256": "5AD71ADAF8FFA55B4E30450355BFA44358F65B77E8D408CEDABE2D36C3B0077C",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          },
+          {
+            "scene": 1551,
+            "round": 49,
+            "kind": "four-slot-clean-candidate-rejected",
+            "candidateSlot": "D",
+            "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-D.png",
+            "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-538ae1f4-30fb-4d53-b354-e5611ee17044.png",
+            "sha256": "303EABD03A3CD3BCED1AB38920648523A0E13B0F152EFEE312EA8DD8F94FC525",
+            "dimensions": {
+              "width": 941,
+              "height": 1672
+            },
+            "preserved": true
+          }
+        ],
+        "slotAudit": {
+          "A": {
+            "accepted": false,
+            "identity": "pass-exactly-four-distinct-clearly-adult-anchored-women-with-Alia-only-braided-ponytail",
+            "anatomy": "pass-eight-traceable-human-arms-and-eight-traceable-human-hands-but-hand-role-ownership-fails",
+            "locationWeather": "pass-recognizable-Batumi-Alphabet-Tower-Ferris-wheel-Black-Sea-palms-and-heavy-straight-rain",
+            "wardrobe": "partial-Radiance-open-back-knee-hosiery-Ellie-midriff-and-Alia-midriff-read; reject-Alia-neck-connector-and-braids-obstruct-the-required-completely-open-back-and-ECE-circular-badge-like-discs-violate-civilian-no-insignia-styling",
+            "romance": "reject-the-group-reads-as-an-upright-embrace-not-the-stored-supported-dip-and-ECE-adds-contact-instead-of-keeping-both-hands-on-the-compass",
+            "radianceResponse": "partial-Radiance-and-ECE-smile-and-meet-each-other-but-the-recorded-up-down-nod-is-not-certifiable",
+            "partyActivation": "reject-the-A-specific-Radiance-ECE-party-evidence-is-incomplete-and-hand-geometry-changed",
+            "mascots": "pass-one-tiny-collarless-golden-PAWS-and-one-small-young-golden-MAX-on-one-raised-dry-lounge",
+            "oddProp": "reject-ECE-does-not-own-two-tall-opposite-compass-handles",
+            "missionHandling": "reject-Alia-has-two-mission-hands-but-the-trigger-index-is-curled-or-visually-merged-at-the-guard-rather-than-independently-straight-above-and-outside-it",
+            "missionTargetAxis": "reject-the-black-diamond-paper-is-far-below-the-muzzle-row-and-the-complete-backstop-leaves-only-a-narrow-edge-strip-not-eleven-percent-empty-promenade",
+            "decisiveRejectionReasons": [
+              "ECE abandons the two-handle compass ownership and adds unrolled contact, so the exact eight-hand role graph and stored dip do not pass.",
+              "Alia's trigger index is not independently straight above and outside the empty guard.",
+              "The paper diamond is substantially below the muzzle axis.",
+              "The complete backstop leaves far less than eleven percent empty promenade to the right edge.",
+              "Alia's open-back construction and the candidate-specific affirmative evidence are not fully certifiable."
+            ]
+          },
+          "B": {
+            "accepted": false,
+            "identity": "pass-exactly-four-distinct-clearly-adult-anchored-women-with-Alia-only-braided-ponytail",
+            "anatomy": "pass-eight-traceable-human-arms-and-eight-traceable-human-hands-with-two-per-woman",
+            "locationWeather": "pass-recognizable-Batumi-Alphabet-Tower-Ferris-wheel-Black-Sea-palms-and-heavy-straight-rain",
+            "wardrobe": "reject-Radiance-has-a-rear-neck-connector-instead-of-an-uninterrupted-open-back-and-Alia-has-visible-shoulder-neck-connectors-instead-of-the-active-strapless-fully-open-back-shell; midriffs-and-hosiery-otherwise-read",
+            "romance": "reject-Radiance-is-standing-upright-and-uses-two-ECE-torso-contacts-rather-than-one-outer-upper-arm-palm-while-Ellie-does-not-materialize-the-exact-high-back-support",
+            "radianceResponse": "partial-the-calm-noncelebratory-ECE-gaze-suits-the-stored-pause-but-the-required-splayed-outer-upper-arm-hold-cue-is-not-exact",
+            "partyActivation": "pass-no-party-celebration-is-visible-for-the-explicit-pause",
+            "mascots": "pass-one-tiny-collarless-golden-PAWS-and-one-small-young-golden-MAX-on-one-raised-dry-lounge",
+            "oddProp": "pass-ECE-owns-two-separated-compass-handles-and-the-route-map-is-hands-free",
+            "missionHandling": "reject-Alia's-trigger-index-enters-or-overlaps-the-guard-instead-of-remaining-independently-straight-above-and-outside-it",
+            "missionTargetAxis": "reject-the-paper-diamond-is-below-the-muzzle-row-and-the-backstop-sits-at-the-right-edge-without-eleven-percent-empty-reserve",
+            "decisiveRejectionReasons": [
+              "The stored controlled dip and exact three-contact graph are absent.",
+              "Radiance and Alia fail their active open-back construction gates, and Alia is not unambiguously strapless.",
+              "Alia's trigger index overlaps or enters the guard.",
+              "The paper diamond is below the muzzle axis.",
+              "The complete backstop leaves no certifiable eleven-percent empty promenade beyond it."
+            ]
+          },
+          "C": {
+            "accepted": false,
+            "identity": "pass-exactly-four-distinct-clearly-adult-anchored-women-with-Alia-only-braided-ponytail",
+            "anatomy": "pass-eight-traceable-human-arms-and-eight-traceable-human-hands-but-compass-and-contact-role-ownership-fails",
+            "locationWeather": "pass-recognizable-Batumi-Ferris-wheel-Black-Sea-skyline-palms-and-heavy-straight-rain",
+            "wardrobe": "partial-Radiance-open-back-knee-hosiery-Ellie-midriff-and-Alia-midriff-read; reject-Alia's-neck-connector-and-braids-obstruct-the-active-strapless-fully-open-back-gate",
+            "romance": "reject-Radiance-holds-a-compass-handle-instead-of-touching-ECE's-outer-upper-arm-and-the-pose-is-an-unsupported-lean-without-the-exact-high-back-support",
+            "radianceResponse": "partial-Radiance-and-ECE-share-a-warm-gaze-but-the-recorded-nod-and-exact-maintained-ECE-contact-are-not-certifiable",
+            "partyActivation": "reject-the-C-specific-Radiance-Alia-ECE-willing-evidence-is-incomplete-and-Radiance-changes-the-compass-hand-graph",
+            "mascots": "pass-one-tiny-collarless-golden-PAWS-and-one-small-young-golden-MAX-on-one-raised-dry-lounge",
+            "oddProp": "reject-Radiance-borrows-one-compass-handle-so-ECE-is-not-the-exclusive-two-handle-owner",
+            "missionHandling": "reject-Alia's-trigger-index-is-curled-or-visually-merged-at-the-guard-rather-than-independently-straight-above-and-outside-it",
+            "missionTargetAxis": "reject-the-paper-diamond-is-far-below-the-muzzle-row-and-the-backstop-leaves-only-a-thin-right-edge-strip",
+            "decisiveRejectionReasons": [
+              "Radiance borrows a compass handle, so ECE's exclusive two-hand odd-prop ownership and the exact third relationship contact fail.",
+              "The supported controlled dip and three-contact graph are not exact.",
+              "Alia's trigger index is not independently straight above and outside the guard.",
+              "The paper diamond is substantially below the muzzle axis.",
+              "The complete backstop leaves far less than eleven percent empty promenade beyond it."
+            ]
+          },
+          "D": {
+            "accepted": false,
+            "identity": "pass-exactly-four-distinct-clearly-adult-anchored-women-with-Alia-only-braided-ponytail",
+            "anatomy": "reject-Radiance's-lowered-right-hand-is-discolored-and-malformed-and-the-required-hand-role-graph-is-not-traceable-exactly",
+            "locationWeather": "pass-recognizable-Batumi-Alphabet-Tower-Ferris-wheel-Black-Sea-palms-and-heavy-straight-rain",
+            "wardrobe": "partial-Radiance-open-back-and-Alia-midriff-strapless-shell-read; reject-only-one-knee-hosiery-leg-is-clearly-certifiable-Alia's-braids-obstruct-the-open-back-and-ECE-circular-badge-like-discs-violate-the-no-insignia-civilian-style",
+            "romance": "reject-ECE-uses-both-hands-on-Radiance-instead-of-the-compass-Radiance's-required-ECE-upper-arm-palm-is-absent-and-the-pose-does-not-read-as-the-exact-supported-dip",
+            "radianceResponse": "partial-Radiance-and-ECE-smile-and-meet-each-other-but-the-recorded-nod-is-not-certifiable",
+            "partyActivation": "reject-the-D-specific-all-four-party-evidence-is-incomplete-and-the-hand-geometry-changed",
+            "mascots": "pass-one-tiny-collarless-golden-PAWS-and-one-small-young-golden-MAX-on-one-raised-dry-lounge",
+            "oddProp": "reject-ECE-abandons-the-two-compass-handles-and-the-pedestal-has-no-certifiable-opposite-handles",
+            "missionHandling": "reject-Alia's-trigger-index-touches-or-overlaps-the-guard-rather-than-showing-a-full-air-gap-above-and-outside-it",
+            "missionTargetAxis": "reject-the-paper-diamond-is-far-below-the-muzzle-row-and-the-complete-backstop-leaves-only-a-narrow-edge-strip",
+            "decisiveRejectionReasons": [
+              "Radiance has a malformed discolored lowered hand, failing strict anatomy and hand ownership.",
+              "ECE abandons both compass handles and adds unrolled support contacts; the exact dip graph is absent.",
+              "Alia's trigger index is not independently separated above and outside the empty guard.",
+              "The paper diamond is substantially below the muzzle axis.",
+              "The complete backstop leaves far less than eleven percent empty promenade beyond it."
+            ]
+          }
+        },
+        "acceptedCandidate": null,
+        "allRejected": true,
+        "acceptedSceneNumbersChanged": false
+      },
+      "completedWindow48And49": {
+        "completedAt": "2026-08-12T15:34:58.201Z",
+        "rounds": [
+          48,
+          49
+        ],
+        "candidatesGenerated": 8,
+        "allRawOutputsPreserved": true,
+        "acceptedCandidate": null,
+        "acceptedSceneNumbersChanged": false,
+        "countryRemainsActive": true,
+        "terminal": false,
+        "queueAdvanceAllowed": false,
+        "xPublishAllowed": false,
+        "additionalRenderThisWakeAllowed": false,
+        "additionalAutomatedBanksAllowed": 0,
+        "nextWindowRounds": [],
+        "nextWindowOpensOn": null,
+        "automaticRenderingStopped": true
+      }
     }
   },
   "rollMethod": "FNV-1a over the recorded batch382-georgia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 382 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
@@ -20583,6 +21040,170 @@
       ],
       "recoveryPassConsumedThisRound": false,
       "recoveryNotAttemptedReason": "not-launched-because-failures-span-the-entire-three-contact-romance-graph-two-open-back-wardrobes-Alia-party-evidence-trigger-index-and-reversed-target-axis; one recovery would require broad redraw rather than a narrow correction"
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "A",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-A.png",
+      "sha256": "F5C2EFC0EACAD93BAE1F6E729975BF75CB2119DA2E281CDA383850BBFF8773FD",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The right trigger index is not independently certifiable as one straight finger entirely above and outside the empty guard.",
+        "The paper diamond sits below the muzzle row rather than on the required horizontal eye-sight-barrel-target axis.",
+        "The complete backstop ends beside the frame edge, leaving far less than eleven percent empty promenade beyond it."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "B",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-B.png",
+      "sha256": "6938302CEA0D48B613436B147AEEFA693A1A955C586CD993EC5D6FDFD02B61F3",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The right trigger index remains visually merged with the grip and guard geometry rather than independently straight above the empty guard.",
+        "The target diamond is materially below the muzzle axis.",
+        "The backstop occupies the far-right edge and leaves substantially less than eleven percent empty promenade beyond it."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "C",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-C.png",
+      "sha256": "1642A6A5027250D7DFBA222958379E1627699C4484C6D02015A5F34F9530E70D",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The right trigger index is not separately readable from the guard and grip cluster.",
+        "The paper diamond is below the barrel and muzzle row.",
+        "The target and backstop sit at the edge with no certifiable eleven-percent empty promenade after the complete backstop."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "D",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-D.png",
+      "sha256": "0323995D282C5A365A73F72FAA1DE41B5F26B1C9C2FC5EB0836F7BD3185D3675",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The right trigger index is not independently certifiable outside the guard.",
+        "An extra orange circular marker appears directly on the muzzle row, creating a second route target and violating the one-paper-target-only gate.",
+        "The required black diamond paper target remains below the muzzle row, and the backstop leaves less than eleven percent empty promenade beyond it."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "A",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-A.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8895728e-3840-4848-9921-f318c0450d8f.png",
+      "sha256": "3C28A5039BF32E3062DE0BBDC042918639DD0E9FEB587419C130250CEF4F9332",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "ECE abandons the two-handle compass ownership and adds unrolled contact, so the exact eight-hand role graph and stored dip do not pass.",
+        "Alia's trigger index is not independently straight above and outside the empty guard.",
+        "The paper diamond is substantially below the muzzle axis.",
+        "The complete backstop leaves far less than eleven percent empty promenade to the right edge.",
+        "Alia's open-back construction and the candidate-specific affirmative evidence are not fully certifiable."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "B",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-B.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c87f88e7-7bc5-4e08-b62c-4b154f0154da.png",
+      "sha256": "8F5A512DD95272945E8192BA78B54EE8CDB5DE25321D82F4CB49C7707C30457E",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "The stored controlled dip and exact three-contact graph are absent.",
+        "Radiance and Alia fail their active open-back construction gates, and Alia is not unambiguously strapless.",
+        "Alia's trigger index overlaps or enters the guard.",
+        "The paper diamond is below the muzzle axis.",
+        "The complete backstop leaves no certifiable eleven-percent empty promenade beyond it."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "C",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-C.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-940364ad-e21e-4c5d-b8c7-cf868555e9c5.png",
+      "sha256": "5AD71ADAF8FFA55B4E30450355BFA44358F65B77E8D408CEDABE2D36C3B0077C",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Radiance borrows a compass handle, so ECE's exclusive two-hand odd-prop ownership and the exact third relationship contact fail.",
+        "The supported controlled dip and three-contact graph are not exact.",
+        "Alia's trigger index is not independently straight above and outside the guard.",
+        "The paper diamond is substantially below the muzzle axis.",
+        "The complete backstop leaves far less than eleven percent empty promenade beyond it."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "D",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-D.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-538ae1f4-30fb-4d53-b354-e5611ee17044.png",
+      "sha256": "303EABD03A3CD3BCED1AB38920648523A0E13B0F152EFEE312EA8DD8F94FC525",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Radiance has a malformed discolored lowered hand, failing strict anatomy and hand ownership.",
+        "ECE abandons both compass handles and adds unrolled support contacts; the exact dip graph is absent.",
+        "Alia's trigger index is not independently separated above and outside the empty guard.",
+        "The paper diamond is substantially below the muzzle axis.",
+        "The complete backstop leaves far less than eleven percent empty promenade beyond it."
+      ],
+      "recoveryPassConsumedThisRound": false
     }
   ],
   "xPost": {
@@ -20592,9 +21213,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia has accepted scenes 1548, 1549, and 1550. The user-requested X backlog clear is complete with zero eligible items and zero uploads after live @dogramaci reconciliation. Georgia remains publication-blocked until scene 1551 is accepted and the four-scene completion checkpoint is pushed."
+    "note": "Georgia retains accepted scenes 1548-1550. All four round-49 candidates were preserved and rejected under strict audit. The signed-in live @dogramaci profile is verified and the eligible backlog remains empty. Scene 1551, X publication, Fiji, and every later country remain blocked. The two-bank cap is exhausted, so no third automatic bank may open."
   },
-  "checkpointedAt": "2026-08-12T06:41:25.3161892Z",
+  "checkpointedAt": "2026-08-12T15:34:58.201Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -21789,13 +22410,121 @@
         "width": 941,
         "height": 1672
       }
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "A",
+      "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-A.png",
+      "sha256": "F5C2EFC0EACAD93BAE1F6E729975BF75CB2119DA2E281CDA383850BBFF8773FD",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "B",
+      "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-B.png",
+      "sha256": "6938302CEA0D48B613436B147AEEFA693A1A955C586CD993EC5D6FDFD02B61F3",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "C",
+      "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-C.png",
+      "sha256": "1642A6A5027250D7DFBA222958379E1627699C4484C6D02015A5F34F9530E70D",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 48,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "D",
+      "path": "tmp/world-195x4/batch-382/raw/round-48-four-slot-bank/candidate-D.png",
+      "sha256": "0323995D282C5A365A73F72FAA1DE41B5F26B1C9C2FC5EB0836F7BD3185D3675",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "A",
+      "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-A.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-8895728e-3840-4848-9921-f318c0450d8f.png",
+      "sha256": "3C28A5039BF32E3062DE0BBDC042918639DD0E9FEB587419C130250CEF4F9332",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "B",
+      "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-B.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-c87f88e7-7bc5-4e08-b62c-4b154f0154da.png",
+      "sha256": "8F5A512DD95272945E8192BA78B54EE8CDB5DE25321D82F4CB49C7707C30457E",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "C",
+      "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-C.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-940364ad-e21e-4c5d-b8c7-cf868555e9c5.png",
+      "sha256": "5AD71ADAF8FFA55B4E30450355BFA44358F65B77E8D408CEDABE2D36C3B0077C",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 49,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "D",
+      "path": "tmp/world-195x4/batch-382/raw/round-49-four-slot-bank/candidate-D.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-538ae1f4-30fb-4d53-b354-e5611ee17044.png",
+      "sha256": "303EABD03A3CD3BCED1AB38920648523A0E13B0F152EFEE312EA8DD8F94FC525",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "stop-automated-rendering-and-notify-user-render-cap-exhausted",
+    "action": "hold-Georgia-active-and-audit-for-an-explicit-contract-change-or-an-independently-accepted-scene-1551-asset-without-automatic-rendering",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -21804,14 +22533,21 @@
     "sceneNumbers": [
       1551
     ],
+    "unresolvedGates": [
+      "restore the exact supported controlled dip with only the three recorded relationship contacts",
+      "ECE alone owns both opposite compass handles while Radiance touches only ECE's outer upper arm",
+      "one independently readable straight trigger index entirely above and outside the empty guard",
+      "black diamond center exactly horizontal with the eye-sights-barrel-muzzle row",
+      "one complete backstop followed by at least eleven percent visibly empty promenade",
+      "preserve both active open backs, Alia strapless construction, and candidate-specific consent evidence without adding badge-like styling"
+    ],
     "laterCountryStartAllowed": false,
-    "allKnownCorrectionsMustBeCombined": true,
-    "serialMicroEditsAllowed": false,
-    "remainingAutomatedGeorgiaWavesIncludingThisOne": 0,
-    "requiresExplicitUserAuthorizationForAnyFurtherRender": true
+    "xPublishAllowed": false,
+    "automaticRenderAllowed": false,
+    "additionalAutomatedBanksAllowed": 0
   },
   "xBacklogAudit": {
-    "checkedAt": "2026-08-12T06:02:09.385Z",
+    "checkedAt": "2026-08-12T15:34:58.201Z",
     "account": "@dogramaci",
     "signedIn": true,
     "eligibleBacklogRemaining": 0,
@@ -21865,17 +22601,27 @@
       "liveVerified": true,
       "viewsAtAudit": 42
     },
-    "reconciliationDecision": "The user-requested X backlog clear completed against the signed-in live @dogramaci profile. The explicit queue is empty, all threshold-qualified checkpoints are already public, and Georgia remains ineligible at three of four accepted scenes, so zero uploads were submitted and no duplicate was created.",
+    "reconciliationDecision": "The signed-in live @dogramaci profile and authoritative ledger show no eligible World Series backlog item. Georgia remains publication-blocked at three accepted scenes after rounds 48 and 49, so no upload or country advance occurred.",
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
     "latestVisibleAccountStatus": {
-      "url": "https://x.com/dogramaci/status/2087416716372378042",
-      "classification": "unrelated-account-image-post-not-a-World-Series-ledger-item"
+      "url": "https://x.com/dogramaci/status/2087465140144759273",
+      "classification": "captionless-single-image-account-status-not-a-conforming-Georgia-World-Series-publication"
     },
     "latestVisibleAccountStatuses": [
-      "https://x.com/dogramaci/status/2087242564432806133",
-      "https://x.com/dogramaci/status/2087241970661941705"
+      {
+        "url": "https://x.com/dogramaci/status/2087541233283408297",
+        "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
+      },
+      {
+        "url": "https://x.com/dogramaci/status/2087540947533877380",
+        "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
+      },
+      {
+        "url": "https://x.com/dogramaci/status/2087540818387128543",
+        "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
+      }
     ],
     "lastPublicStatusVerified": "https://x.com/dogramaci/status/2087088543499768003",
     "lastPublicStatusObservedViews": 54,
@@ -21893,14 +22639,16 @@
     },
     "explicitClearRequestedAt": "2026-08-12T06:00:46.627Z",
     "explicitClearCompletedAt": "2026-08-12T06:02:09.385Z",
-    "explicitClearPostedCount": 0
+    "explicitClearPostedCount": 0,
+    "latestWakeAuditCompletedAt": "2026-08-12T09:06:27.9754989Z",
+    "latestWakePostedCount": 0
   },
   "renderStrategyReset": {
     "requestedAt": "2026-08-11T16:40:53.356Z",
     "reason": "User rejected visible wavy artifacts caused by repeated edit-on-edit passes.",
     "appliesFromFreshRound": 16,
     "cleanSourcePolicy": "Every fresh round starts from the original stored identity anchors only and includes no prior Batumi render as an image input.",
-    "plannedPassPolicy": "Superseded for automated throughput by rapidConsolidatedRenderPolicy. Use round 44 as one clean consolidated fresh render. If it fails, use only one final round 45 fresh render or one genuinely local edit from the untouched round-44 raw; never run both or chain edits.",
+    "plannedPassPolicy": "Superseded for automated throughput by rapidConsolidatedRenderPolicy and persistentContinuationAuthorization. The completed 46-47 window is audit-only. Open rounds 48-49 on the next wake, using one clean round-48 render from original identity anchors and at most one consolidated round-49 correction; never chain edits.",
     "antiAccumulationPolicy": "Never use a recovery output or any earlier edited Batumi output as the source of a later fresh round.",
     "assetPolicy": "Preserve audit raws under tmp; copy only a fully accepted clean result to assets/lore/starlight-era.",
     "originalIdentityAnchors": [
@@ -21909,10 +22657,10 @@
       "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
       "assets/lore/starlight-era/ece-canonical-identity-v1.png"
     ],
-    "lastCompletedCleanRound": 45,
-    "lastCleanRoundResult": "clean-artifact-free-Batumi-identities-eight-hands-Radiance-ECE-eye-line-Radiance-open-back-Alia-open-back-midriff-mascots-compass-and-complete-right-side-target-lane-pass-but-rejected-controlled-dip-third-contact-Radiance-hosiery-knee-length-Alia-fully-open-back-continuity-and-party-nod-certification",
-    "nextCleanRound": null,
-    "nextSourcePolicy": "no automated source authorized after cap exhaustion",
+    "lastCompletedCleanRound": 46,
+    "lastCleanRoundResult": "clean-artifact-free-Batumi-identities-eight-hands-three-contacts-controlled-dip-Radiance-hosiery-mascots-compass-and-safe-target-order-pass-but-rejected-Radiance-ECE-response-eye-line-Alia-open-back-and-right-margin",
+    "nextCleanRound": 48,
+    "nextSourcePolicy": "four original identity anchors only; no prior Batumi render input",
     "activeCleanRound": null,
     "activeSourcePolicy": "four original identity anchors only",
     "priorBatumiRenderInputCount": 0
@@ -21933,16 +22681,26 @@
     ],
     "additionalWaveCeiling": 2,
     "authorizedWaveNumbers": [
-      44,
-      45
+      48,
+      49
     ],
-    "currentWave": null,
+    "currentWave": 49,
     "remainingWaves": 0,
-    "round44Mode": "clean fresh render from original identity anchors with every known round-43 failure resolved in one composition",
-    "round45ModeIfNeeded": "one final consolidated clean fresh render, or one local edit from untouched round-44 raw when and only when every failure is local",
+    "round44Mode": "historical completed first closure window wave",
+    "round45ModeIfNeeded": "historical completed first closure window wave",
+    "completedPersistentWindowRounds": [
+      46,
+      47
+    ],
     "microEditChainForbidden": true,
     "editOfEditForbidden": true,
-    "capExhaustionAction": "Keep Georgia active and nonterminal, stop automated image generation, record unresolved gates, notify the user, and wait for explicit authorization. Do not advance to Fiji."
+    "capExhaustionAction": "Under persistent continuation, checkpoint and push the failed two-wave window, then open the next bounded two-wave window for Georgia on the next wake. Do not advance to Fiji.",
+    "round48Result": "four-clean-candidates-preserved-and-rejected; every slot failed the independently certifiable trigger-index and empty-right-reserve gates, slots A-C also missed the exact horizontal paper-target axis, and slot D introduced a forbidden second marker",
+    "status": "completed-final-two-bank-cap-rejected-automatic-rendering-stopped",
+    "completedAt": "2026-08-12T15:34:58.201Z",
+    "acceptedSceneNumbersChanged": false,
+    "nextWindowRounds": [],
+    "nextWindowStatus": "forbidden-without-explicit-contract-change"
   },
   "activeRenderPreparation": {
     "status": "completed-rejected-strict-visual-audit",
@@ -22095,6 +22853,191 @@
       "remainingAuthorizedGeorgiaWaves": 1
     }
   },
+  "persistentContinuationWindow2": {
+    "status": "completed-two-wave-window-rejected-next-window-authorized",
+    "authorizedAt": "2026-08-12T08:42:57.8228310Z",
+    "rounds": [
+      46,
+      47
+    ],
+    "currentRound": 47,
+    "remainingWaves": 0,
+    "sceneNumbers": [
+      1551
+    ],
+    "preservedAcceptedSceneNumbers": [
+      1548,
+      1549,
+      1550
+    ],
+    "sourceMode": "round-46-clean-generation-from-original-identity-anchors-then-one-consolidated-local-edit-from-untouched-round-46-raw",
+    "priorBatumiRenderInputCount": 0,
+    "round46PromptAudit": {
+      "path": "tmp/world-195x4/batch-382/scene-1551-clean-fresh-round-46-prompt.txt",
+      "sha256": "882981D258BDD6C65101A3B8C0757358ABAA4D61DDA0458D4BD14BFAC6EE50EE",
+      "chars": 9548,
+      "storedContractRollsChanged": false,
+      "allKnownRound45CorrectionsConsolidated": true
+    },
+    "radianceRealtimeAgreementParty": {
+      "round": 46,
+      "rollMethod": "FNV-1a over recorded round-46 live-narrative keys, reduced modulo 100",
+      "invitation": {
+        "key": "batch382-georgia-scene1551-radianceLiveInvitation-round46",
+        "fullHash": 3874857802,
+        "roll": 2,
+        "selectorIndex": 2
+      },
+      "response": {
+        "key": "batch382-georgia-scene1551-radianceLiveResponse-round46",
+        "fullHash": 2700245670,
+        "roll": 70,
+        "thresholds": "0-69 explicit affirmative; 70-84 explicit redirect; 85-94 explicit pause; 95-99 explicit decline",
+        "category": "explicit redirect"
+      },
+      "participantSelector": {
+        "key": "batch382-georgia-scene1551-radianceLiveParticipants-round46",
+        "fullHash": 1137245419,
+        "roll": 19,
+        "ignoredBecausePartyInactive": true
+      },
+      "offeredChoice": "Alia asks Radiance whether she wants the quartet to answer the completed safe demonstration with one restrained victory-count or return to route planning.",
+      "radianceResponse": "Radiance explicitly redirects by turning her face and chest toward ECE's route map, turning away from Alia's invitation, and deliberately placing her right palm on ECE's outer upper arm to return attention to planning.",
+      "partyActivation": false,
+      "willingParticipants": [],
+      "visibleAgreementEvidence": [],
+      "visibleResponseEvidence": [
+        "Radiance turns away from Alia's invitation toward ECE and the route map",
+        "Radiance deliberately places her right palm on ECE's outer upper arm",
+        "ECE meets Radiance's gaze with a calm accepting expression",
+        "no celebration cue or party object appears"
+      ],
+      "continuityState": "The safe dip and mission demonstration continue while Radiance redirects the group back to route planning.",
+      "consentScope": "This redirect applies only to the round-46 invitation and does not transfer to another act, participant, prop interaction, scene, country, or future image."
+    },
+    "round46CompletedAt": "2026-08-12T08:51:30Z",
+    "round46RawOutput": {
+      "path": "tmp/world-195x4/batch-382/raw/clean-fresh-round-46/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-b6075d21-ca9d-442e-a332-ac0c01426510.png",
+      "sha256": "0C9C501152701DC63AE73A1EC8F81187C50391421B6E6759C2A9B77B6044F296",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    "round46StrictAudit": {
+      "renderSurfaceQuality": "pass-clean-natural-photograph-with-straight-Batumi-architecture-flat-wet-tiles-and-no-edit-accumulation-artifacts",
+      "identity": "pass-four-clearly-adult-distinct-identities-with-Alia-high-sculptural-braided-ponytail",
+      "anatomy": "pass-exact-eight-traceable-human-arms-and-eight-traceable-human-hands-with-two-per-woman",
+      "romance": "pass-obvious-supported-controlled-dip-and-three-readable-contacts-in-the-recorded-hand-graph",
+      "rolledWardrobe": "partial-Radiance-open-back-knee-reaching-rainbow-hosiery-Ellie-midriff-Alia-midriff-and-strapless-ECE-covered-waist-pass-but-reject-Alia-narrow-rear-band-breaks-fully-open-back",
+      "radianceResponse": "reject-Radiance-looks-toward-Ellie-rather-than-materializing-the-recorded-turn-and-mutual-ECE-eye-line",
+      "partyActivation": "pass-party-false-with-no-celebration-cue",
+      "locationThemeFusion": "pass-recognizable-Batumi-Black-Sea-Alphabet-Tower-Ferris-wheel-palms-and-four-distinct-Mars-expedition-couture-silhouettes",
+      "mascots": "pass-one-tiny-collarless-golden-PAWS-and-one-small-young-golden-retriever-MAX-on-one-dry-lounge",
+      "oddPropAndMap": "pass-ECE-alone-holds-two-compass-handles-beneath-a-separate-hands-free-route-map",
+      "missionHandling": "pass-Alia-two-hand-owner-paths-inert-rainbow-replica-orange-muzzle-and-right-facing-safe-lane",
+      "missionTargetAxis": "reject-complete-panel-paper-and-backstop-are-crowded-against-the-right-frame-without-eleven-percent-empty-promenade-beyond-the-backstop",
+      "accepted": false
+    },
+    "round46RejectionReasons": [
+      "Radiance does not give the recorded direct ECE eye line or visibly complete the explicit redirect.",
+      "Alia's narrow copper rear band breaks her active fully-open-back roll.",
+      "The complete target and backstop do not leave the required eleven-percent empty right margin."
+    ],
+    "round47PromptAudit": {
+      "path": "tmp/world-195x4/batch-382/scene-1551-consolidated-round-47-edit-prompt.txt",
+      "sha256": "55708B32962B0A998A8E59E895AB6136F199227876D203D1EC8A64DBA021B1D9",
+      "chars": 6470,
+      "storedContractRollsChanged": false,
+      "allKnownRound46CorrectionsConsolidated": true,
+      "sourceWasUntouchedRound46Raw": true,
+      "editOfEdit": false
+    },
+    "round47RadianceRealtimeAgreementParty": {
+      "round": 47,
+      "rollMethod": "FNV-1a over recorded round-47 live-narrative keys, reduced modulo 100",
+      "invitation": {
+        "key": "batch382-georgia-scene1551-radianceLiveInvitation-round47",
+        "fullHash": 3891635421,
+        "roll": 21,
+        "selectorIndex": 1
+      },
+      "response": {
+        "key": "batch382-georgia-scene1551-radianceLiveResponse-round47",
+        "fullHash": 2717023289,
+        "roll": 89,
+        "thresholds": "0-69 explicit affirmative; 70-84 explicit redirect; 85-94 explicit pause; 95-99 explicit decline",
+        "category": "explicit pause"
+      },
+      "participantSelector": {
+        "key": "batch382-georgia-scene1551-radianceLiveParticipants-round47",
+        "fullHash": 1120467800,
+        "roll": 0,
+        "ignoredBecausePartyInactive": true
+      },
+      "offeredChoice": "Ellie asks Radiance whether she wants to keep their supported lean while answering ECE's route count, with Alia free to join from the separate mission lane.",
+      "radianceResponse": "Radiance explicitly pauses by holding her existing open palm gently on ECE's outer upper arm, meeting ECE's gaze with an attentive non-celebratory expression, and remaining in Ellie's supported dip without beginning a victory count.",
+      "partyActivation": false,
+      "willingParticipants": [],
+      "visibleAgreementEvidence": [],
+      "visibleResponseEvidence": [
+        "Radiance and ECE sustain direct mutual eye contact",
+        "Radiance's existing open palm remains gently splayed on ECE's outer upper arm as a hold-there cue",
+        "no nod, celebration, drink, confetti, banner, crowd, or stage appears"
+      ],
+      "continuityState": "The controlled dip, route planning, and separate safe mission demonstration remain paused in place.",
+      "consentScope": "This pause applies only to the round-47 invitation and does not transfer to another act, participant, prop interaction, scene, country, or future image."
+    },
+    "round47CompletedAt": "2026-08-12T08:59:42Z",
+    "round47RawOutput": {
+      "path": "tmp/world-195x4/batch-382/raw/consolidated-round-47/scene-1551.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019fd625-0bf6-78d2-9fb8-3f3e22c1d086/exec-04886767-4d84-40a0-a604-b85f63dc2f8f.png",
+      "sha256": "982022DB218DC0683A8BD6CF33A8D4EC0271D1CFD7C2A2EAD39FCAA008B2D39A",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    "round47StrictAudit": {
+      "renderSurfaceQuality": "pass-clean-natural-photograph-with-straight-Batumi-architecture-flat-wet-tiles-and-no-edit-accumulation-artifacts",
+      "identity": "pass-four-clearly-adult-distinct-identities-with-Alia-high-sculptural-braided-ponytail",
+      "anatomy": "pass-exact-eight-traceable-human-arms-and-eight-traceable-human-hands-with-two-per-woman",
+      "handOwnership": "pass-Ellie-two-Radiance-two-ECE-two-compass-and-Alia-two-mission-hand-owner-paths",
+      "romance": "pass-obvious-supported-controlled-dip-three-readable-contacts-and-direct-Radiance-ECE-mutual-eye-line",
+      "radianceResponse": "pass-explicit-pause-through-sustained-mutual-eye-line-existing-open-palm-hold-there-contact-and-no-celebration-cue",
+      "partyActivation": "pass-party-false-and-no-party-evidence-inferred",
+      "rolledWardrobe": "pass-Radiance-fully-open-back-covered-waist-knee-reaching-rainbow-hosiery-Ellie-midriff-Alia-strapless-midriff-uninterrupted-open-back-and-ECE-covered-waist",
+      "locationThemeFusion": "pass-recognizable-Batumi-Black-Sea-Alphabet-Tower-Ferris-wheel-palms-and-four-distinct-Mars-expedition-couture-silhouettes",
+      "outfitOriginality": "pass-four-distinct-silhouettes-constructions-materials-hems-and-footwear",
+      "mascots": "pass-one-tiny-collarless-golden-PAWS-and-one-small-young-golden-retriever-MAX-on-one-dry-lounge",
+      "oddPropAndMap": "pass-ECE-alone-holds-two-compass-handles-beneath-a-separate-hands-free-route-map",
+      "missionHandling": "reject-Alia-retains-two-hands-and-safe-right-facing-direction-but-the-trigger-index-is-too-compressed-against-the-grip-to-certify-one-independent-long-straight-finger-above-and-outside-the-empty-guard",
+      "missionTargetAxis": "partial-complete-glass-paper-target-and-thick-backstop-pass-in-correct-downrange-order-but-only-about-four-to-five-percent-empty-right-margin-remains-instead-of-the-required-eleven-percent",
+      "accepted": false
+    },
+    "round47RejectionReasons": [
+      "Alia's trigger index cannot be independently certified as one long straight finger lying flat above and outside the empty trigger guard.",
+      "The complete backstop leaves only about four to five percent empty promenade before the right frame edge instead of the required eleven percent."
+    ],
+    "windowCloseDecision": {
+      "closedAt": "2026-08-12T09:06:27.9754989Z",
+      "wavesConsumed": 2,
+      "acceptedSceneNumbersChanged": false,
+      "countryRemainsActive": true,
+      "terminal": false,
+      "queueAdvanceAllowed": false,
+      "xPublishAllowed": false,
+      "nextCountryAllowed": false,
+      "nextAuthorizedWindowRounds": [
+        48,
+        49
+      ],
+      "nextWakeRequiresUserAuthorization": false
+    }
+  },
   "finalRenderPreparation": {
     "status": "completed-rejected-strict-visual-audit-cap-exhausted",
     "preparedAt": "2026-08-12T06:37:03.7282744Z",
@@ -22227,5 +23170,18 @@
       "nextCountryAllowed": false,
       "requiresExplicitUserAuthorizationForAnyFurtherRender": true
     }
+  },
+  "latestProgressCheckpoint": {
+    "status": "committed-and-pushed",
+    "preparedAt": "2026-08-12T15:34:58.201Z",
+    "branch": "agent/iat-launch-window-recovery-batch-220",
+    "auditRounds": [
+      48,
+      49
+    ],
+    "acceptedSceneCount": 3,
+    "missingSceneNumbers": [
+      1551
+    ]
   }
 }

@@ -103,13 +103,34 @@
       "activeFromBatch": 333,
       "method": "Roll once per image from 0 through 99 and store the exact selected adult choreography before rendering. The selected beat is mandatory and must remain readable without relying on the prompt text.",
       "distribution": [
-        { "range": "0-14", "beat": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line" },
-        { "range": "15-29", "beat": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention" },
-        { "range": "30-44", "beat": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation" },
-        { "range": "45-59", "beat": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand" },
-        { "range": "60-74", "beat": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair" },
-        { "range": "75-89", "beat": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice" },
-        { "range": "90-99", "beat": "a playful seated-to-standing lift assist with one adult rising from a stable bench into a full embrace, a second partner stealing a cheek kiss, and the fourth blocking their route with a flirtatious invitation" }
+        {
+          "range": "0-14",
+          "beat": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+        },
+        {
+          "range": "15-29",
+          "beat": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+        },
+        {
+          "range": "30-44",
+          "beat": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+        },
+        {
+          "range": "45-59",
+          "beat": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+        },
+        {
+          "range": "60-74",
+          "beat": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+        },
+        {
+          "range": "75-89",
+          "beat": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+        },
+        {
+          "range": "90-99",
+          "beat": "a playful seated-to-standing lift assist with one adult rising from a stable bench into a full embrace, a second partner stealing a cheek kiss, and the fourth blocking their route with a flirtatious invitation"
+        }
       ],
       "safety": "All participants are clearly adult and consenting. Lap sitting and dancing are affectionate public editorial choreography, never explicit, fetishized, coercive, unstable, or framed toward intimate body parts. Preserve complete opaque coverage, stable supports, complete heels, and exact traceable limb ownership."
     },
@@ -160,7 +181,10 @@
   "radianceEceRainbowHosieryRoll": {
     "activeForward": true,
     "perImagePercent": 25,
-    "eligibleCharacters": ["Radiance", "AI ECE"],
+    "eligibleCharacters": [
+      "Radiance",
+      "AI ECE"
+    ],
     "selection": "When active, use a second deterministic roll to choose exactly one wearer: 0 through 49 selects Radiance and 50 through 99 selects AI ECE.",
     "paletteMode": "When active, use a third deterministic roll. Results 0 through 49 create a rainbow-like multicolor gradient anchored to the current country's base palette and expanded with harmonious transition hues. Results 50 through 99 use an original independent rainbow gradient unrelated to country colors.",
     "styles": "Use varied public-safe opaque rainbow stockings or knee socks: soft ombre, prismatic fade, two-to-four-color gradient, broken-spectrum blocks, diagonal sweeps, reflective shifts, or asymmetric color placement. Avoid repeating the same treatment in consecutive images and make the stored palette-mode result visually clear.",
@@ -175,11 +199,31 @@
     "poseTargetRoll": {
       "scope": "Roll once per image with a stored deterministic integer from 0 through 99. Materialize the selected action, target, stance geometry, handler, muzzle direction, and indexed trigger finger explicitly in the scene plan, prompt, and checkpoint.",
       "distribution": [
-        { "range": "0-34", "percent": 35, "action": "The resolved handler uses a realistic eye-level two-hand large-frame-pistol stance, both hands visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned at a clearly unoccupied geometric paper route target fixed to a full safe earth or sand backstop." },
-        { "range": "35-59", "percent": 25, "action": "The resolved handler uses the same realistic two-hand sight picture toward a distant clearly empty floating route buoy or marked navigation target on open water, with no boat, swimmer, animal, person, or occupied structure anywhere along the line." },
-        { "range": "60-74", "percent": 15, "action": "A second woman gives behind-the-shoulder wrist and stance guidance while the resolved handler retains sole ownership of the prop; every arm and hand remains traceable, the muzzle stays downrange at a clearly empty route target and safe backstop, and every trigger finger stays indexed." },
-        { "range": "75-87", "percent": 13, "action": "A controlled handoff finishes with the resolved handler establishing a stable two-hand sight picture at a clearly empty route target and full safe backstop; the other woman releases completely before the final pose, preventing shared or ambiguous prop ownership." },
-        { "range": "88-99", "percent": 12, "action": "The resolved handler demonstrates the unloaded magazine-removed mechanism with the action visibly open, then holds the muzzle toward a clearly empty marked route target and safe backstop; no ammunition, reload, firing, or trigger contact appears." }
+        {
+          "range": "0-34",
+          "percent": 35,
+          "action": "The resolved handler uses a realistic eye-level two-hand large-frame-pistol stance, both hands visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned at a clearly unoccupied geometric paper route target fixed to a full safe earth or sand backstop."
+        },
+        {
+          "range": "35-59",
+          "percent": 25,
+          "action": "The resolved handler uses the same realistic two-hand sight picture toward a distant clearly empty floating route buoy or marked navigation target on open water, with no boat, swimmer, animal, person, or occupied structure anywhere along the line."
+        },
+        {
+          "range": "60-74",
+          "percent": 15,
+          "action": "A second woman gives behind-the-shoulder wrist and stance guidance while the resolved handler retains sole ownership of the prop; every arm and hand remains traceable, the muzzle stays downrange at a clearly empty route target and safe backstop, and every trigger finger stays indexed."
+        },
+        {
+          "range": "75-87",
+          "percent": 13,
+          "action": "A controlled handoff finishes with the resolved handler establishing a stable two-hand sight picture at a clearly empty route target and full safe backstop; the other woman releases completely before the final pose, preventing shared or ambiguous prop ownership."
+        },
+        {
+          "range": "88-99",
+          "percent": 12,
+          "action": "The resolved handler demonstrates the unloaded magazine-removed mechanism with the action visibly open, then holds the muzzle toward a clearly empty marked route target and safe backstop; no ammunition, reload, firing, or trigger contact appears."
+        }
       ]
     },
     "poseGeometry": "Make the full-size heavy large-frame silhouette and handling believable: firm two-hand grip for sighted poses, straight stacked wrists, modest elbow bend, shoulders slightly forward, stable staggered footing, dominant eye aligned through the sights, and the trigger finger visibly straight on the frame. Do not balance, pinch, dangle, plate, cradle like tableware, or hold the prop by the slide or barrel.",
@@ -192,64 +236,272 @@
     "scope": "Roll independently for Radiance, Ellie, Alia, and AI ECE in every image using a stored deterministic integer from 0 through 99. Do not give all four characters the same emotion unless their independent rolls match.",
     "performance": "Make each result readable in eyes, brows, mouth, breathing, tears where applicable, posture, touch pressure, and attention direction while preserving facial identity and attractive natural anatomy.",
     "distribution": [
-      { "range": "0-7", "percent": 8, "emotion": "tender affection" },
-      { "range": "8-14", "percent": 7, "emotion": "romantic joy" },
-      { "range": "15-18", "percent": 4, "emotion": "extreme happiness, radiant laughing delight" },
-      { "range": "19-23", "percent": 5, "emotion": "playful mischief" },
-      { "range": "24-26", "percent": 3, "emotion": "calm contentment" },
-      { "range": "27-30", "percent": 4, "emotion": "hope" },
-      { "range": "31-34", "percent": 4, "emotion": "overwhelming relief" },
-      { "range": "35-39", "percent": 5, "emotion": "magnetic confidence" },
-      { "range": "40-43", "percent": 4, "emotion": "determination" },
-      { "range": "44-47", "percent": 4, "emotion": "awe" },
-      { "range": "48-50", "percent": 3, "emotion": "startled surprise" },
-      { "range": "51-53", "percent": 3, "emotion": "intense curiosity" },
-      { "range": "54-59", "percent": 6, "emotion": "aching romantic longing" },
-      { "range": "60-65", "percent": 6, "emotion": "visible jealousy" },
-      { "range": "66-68", "percent": 3, "emotion": "possessive tension" },
-      { "range": "69-71", "percent": 3, "emotion": "suspicion" },
-      { "range": "72-74", "percent": 3, "emotion": "betrayal shock" },
-      { "range": "75-77", "percent": 3, "emotion": "contained resentment" },
-      { "range": "78-81", "percent": 4, "emotion": "deep sadness" },
-      { "range": "82-84", "percent": 3, "emotion": "crying with visible tears" },
-      { "range": "85-86", "percent": 2, "emotion": "full sobbing with tear-streaked face and shaking posture" },
-      { "range": "87-88", "percent": 2, "emotion": "fear and urgent vulnerability" },
-      { "range": "89-91", "percent": 3, "emotion": "anger" },
-      { "range": "92-93", "percent": 2, "emotion": "guilt and remorse" },
-      { "range": "94-95", "percent": 2, "emotion": "shame and social vulnerability" },
-      { "range": "96-98", "percent": 3, "emotion": "defiance" },
-      { "range": "99", "percent": 1, "emotion": "emotional exhaustion" }
+      {
+        "range": "0-7",
+        "percent": 8,
+        "emotion": "tender affection"
+      },
+      {
+        "range": "8-14",
+        "percent": 7,
+        "emotion": "romantic joy"
+      },
+      {
+        "range": "15-18",
+        "percent": 4,
+        "emotion": "extreme happiness, radiant laughing delight"
+      },
+      {
+        "range": "19-23",
+        "percent": 5,
+        "emotion": "playful mischief"
+      },
+      {
+        "range": "24-26",
+        "percent": 3,
+        "emotion": "calm contentment"
+      },
+      {
+        "range": "27-30",
+        "percent": 4,
+        "emotion": "hope"
+      },
+      {
+        "range": "31-34",
+        "percent": 4,
+        "emotion": "overwhelming relief"
+      },
+      {
+        "range": "35-39",
+        "percent": 5,
+        "emotion": "magnetic confidence"
+      },
+      {
+        "range": "40-43",
+        "percent": 4,
+        "emotion": "determination"
+      },
+      {
+        "range": "44-47",
+        "percent": 4,
+        "emotion": "awe"
+      },
+      {
+        "range": "48-50",
+        "percent": 3,
+        "emotion": "startled surprise"
+      },
+      {
+        "range": "51-53",
+        "percent": 3,
+        "emotion": "intense curiosity"
+      },
+      {
+        "range": "54-59",
+        "percent": 6,
+        "emotion": "aching romantic longing"
+      },
+      {
+        "range": "60-65",
+        "percent": 6,
+        "emotion": "visible jealousy"
+      },
+      {
+        "range": "66-68",
+        "percent": 3,
+        "emotion": "possessive tension"
+      },
+      {
+        "range": "69-71",
+        "percent": 3,
+        "emotion": "suspicion"
+      },
+      {
+        "range": "72-74",
+        "percent": 3,
+        "emotion": "betrayal shock"
+      },
+      {
+        "range": "75-77",
+        "percent": 3,
+        "emotion": "contained resentment"
+      },
+      {
+        "range": "78-81",
+        "percent": 4,
+        "emotion": "deep sadness"
+      },
+      {
+        "range": "82-84",
+        "percent": 3,
+        "emotion": "crying with visible tears"
+      },
+      {
+        "range": "85-86",
+        "percent": 2,
+        "emotion": "full sobbing with tear-streaked face and shaking posture"
+      },
+      {
+        "range": "87-88",
+        "percent": 2,
+        "emotion": "fear and urgent vulnerability"
+      },
+      {
+        "range": "89-91",
+        "percent": 3,
+        "emotion": "anger"
+      },
+      {
+        "range": "92-93",
+        "percent": 2,
+        "emotion": "guilt and remorse"
+      },
+      {
+        "range": "94-95",
+        "percent": 2,
+        "emotion": "shame and social vulnerability"
+      },
+      {
+        "range": "96-98",
+        "percent": 3,
+        "emotion": "defiance"
+      },
+      {
+        "range": "99",
+        "percent": 1,
+        "emotion": "emotional exhaustion"
+      }
     ],
     "interactionRule": "Translate all four independent emotions into one coherent romance-square beat. Tears receive comfort or conflicted attention; joy creates shared motion; jealousy, anger, resentment, suspicion, guilt, shame, fear, and defiance remain consensual and nonviolent."
   },
   "weatherRolls": {
     "scope": "Roll once per image using a stored deterministic integer from 0 through 99. Weather affects the whole scene, lighting, fabric motion, hair, reflections, atmosphere, and landmark visibility.",
     "distribution": [
-      { "range": "0-10", "percent": 11, "weather": "clear golden-hour radiance" },
-      { "range": "11-18", "percent": 8, "weather": "crisp blue hour" },
-      { "range": "19-26", "percent": 8, "weather": "soft dramatic overcast" },
-      { "range": "27-34", "percent": 8, "weather": "cinematic light rain with reflections" },
-      { "range": "35-40", "percent": 6, "weather": "heavy rain curtain" },
-      { "range": "41-47", "percent": 7, "weather": "rolling thunderstorm" },
-      { "range": "48-51", "percent": 4, "weather": "active lightning storm with distant bolts" },
-      { "range": "52-54", "percent": 3, "weather": "hailstorm with suspended ice and hard backlight" },
-      { "range": "55-58", "percent": 4, "weather": "snow flurries" },
-      { "range": "59-61", "percent": 3, "weather": "heavy snow or cinematic blizzard" },
-      { "range": "62-67", "percent": 6, "weather": "dense rolling fog" },
-      { "range": "68-71", "percent": 4, "weather": "coastal sea mist" },
-      { "range": "72-73", "percent": 2, "weather": "red-gold dust storm" },
-      { "range": "74-75", "percent": 2, "weather": "dramatic sandstorm wall" },
-      { "range": "76-80", "percent": 5, "weather": "powerful windstorm with controlled fabric motion" },
-      { "range": "81-84", "percent": 4, "weather": "sunshower with sparkling droplets" },
-      { "range": "85-86", "percent": 2, "weather": "double rainbow after rain" },
-      { "range": "87-88", "percent": 2, "weather": "rare aurora sky" },
-      { "range": "89-90", "percent": 2, "weather": "meteor shower" },
-      { "range": "91", "percent": 1, "weather": "solar eclipse atmosphere" },
-      { "range": "92", "percent": 1, "weather": "distant volcanic-ash sunset sky" },
-      { "range": "93", "percent": 1, "weather": "distant waterspout over open water" },
-      { "range": "94-95", "percent": 2, "weather": "stacked lenticular clouds" },
-      { "range": "96-97", "percent": 2, "weather": "mammatus storm ceiling" },
-      { "range": "98-99", "percent": 2, "weather": "silent heat lightning on the horizon" }
+      {
+        "range": "0-10",
+        "percent": 11,
+        "weather": "clear golden-hour radiance"
+      },
+      {
+        "range": "11-18",
+        "percent": 8,
+        "weather": "crisp blue hour"
+      },
+      {
+        "range": "19-26",
+        "percent": 8,
+        "weather": "soft dramatic overcast"
+      },
+      {
+        "range": "27-34",
+        "percent": 8,
+        "weather": "cinematic light rain with reflections"
+      },
+      {
+        "range": "35-40",
+        "percent": 6,
+        "weather": "heavy rain curtain"
+      },
+      {
+        "range": "41-47",
+        "percent": 7,
+        "weather": "rolling thunderstorm"
+      },
+      {
+        "range": "48-51",
+        "percent": 4,
+        "weather": "active lightning storm with distant bolts"
+      },
+      {
+        "range": "52-54",
+        "percent": 3,
+        "weather": "hailstorm with suspended ice and hard backlight"
+      },
+      {
+        "range": "55-58",
+        "percent": 4,
+        "weather": "snow flurries"
+      },
+      {
+        "range": "59-61",
+        "percent": 3,
+        "weather": "heavy snow or cinematic blizzard"
+      },
+      {
+        "range": "62-67",
+        "percent": 6,
+        "weather": "dense rolling fog"
+      },
+      {
+        "range": "68-71",
+        "percent": 4,
+        "weather": "coastal sea mist"
+      },
+      {
+        "range": "72-73",
+        "percent": 2,
+        "weather": "red-gold dust storm"
+      },
+      {
+        "range": "74-75",
+        "percent": 2,
+        "weather": "dramatic sandstorm wall"
+      },
+      {
+        "range": "76-80",
+        "percent": 5,
+        "weather": "powerful windstorm with controlled fabric motion"
+      },
+      {
+        "range": "81-84",
+        "percent": 4,
+        "weather": "sunshower with sparkling droplets"
+      },
+      {
+        "range": "85-86",
+        "percent": 2,
+        "weather": "double rainbow after rain"
+      },
+      {
+        "range": "87-88",
+        "percent": 2,
+        "weather": "rare aurora sky"
+      },
+      {
+        "range": "89-90",
+        "percent": 2,
+        "weather": "meteor shower"
+      },
+      {
+        "range": "91",
+        "percent": 1,
+        "weather": "solar eclipse atmosphere"
+      },
+      {
+        "range": "92",
+        "percent": 1,
+        "weather": "distant volcanic-ash sunset sky"
+      },
+      {
+        "range": "93",
+        "percent": 1,
+        "weather": "distant waterspout over open water"
+      },
+      {
+        "range": "94-95",
+        "percent": 2,
+        "weather": "stacked lenticular clouds"
+      },
+      {
+        "range": "96-97",
+        "percent": 2,
+        "weather": "mammatus storm ceiling"
+      },
+      {
+        "range": "98-99",
+        "percent": 2,
+        "weather": "silent heat lightning on the horizon"
+      }
     ],
     "safetyRule": "Rare weather is cinematic background and atmosphere only. Preserve clear faces, complete anatomy, stable footing, landmark readability, and no injury, disaster victim framing, or unsafe weapon handling."
   },
@@ -272,10 +524,26 @@
     "activeFromBatch": 333,
     "method": "One deterministic 0 through 99 state roll per image replaces the earlier independent PAWS chance.",
     "distribution": [
-      { "range": "0-22", "percent": 23, "state": "PAWS and MAX together" },
-      { "range": "23-37", "percent": 15, "state": "PAWS only" },
-      { "range": "38-52", "percent": 15, "state": "MAX only" },
-      { "range": "53-99", "percent": 47, "state": "neither mascot" }
+      {
+        "range": "0-22",
+        "percent": 23,
+        "state": "PAWS and MAX together"
+      },
+      {
+        "range": "23-37",
+        "percent": 15,
+        "state": "PAWS only"
+      },
+      {
+        "range": "38-52",
+        "percent": 15,
+        "state": "MAX only"
+      },
+      {
+        "range": "53-99",
+        "percent": 47,
+        "state": "neither mascot"
+      }
     ],
     "pawsIdentity": "PAWS is the established tiny collarless golden kitten.",
     "maxIdentity": "MAX is a small young golden retriever pup with soft golden fur, clearly a dog and visually distinct from PAWS.",
@@ -372,16 +640,16 @@
     "requestedAt": "2026-08-12T06:15:22.6615747Z",
     "activeFromBatch": 382,
     "intent": "Increase first-pass acceptance and throughput by solving the complete scene before generation and eliminating serial one-defect rerender chains.",
-    "roundDefinition": "One render round is one coordinated generation wave in which every currently missing or rejected scene is generated at most once. A batch with four missing scenes attempts those four independent scenes concurrently when supported; later waves attempt only the rejected subset concurrently.",
-    "countryRoundCeiling": 3,
-    "countryRoundShape": "At most one initial full wave and two consolidated correction waves. This is a hard automated ceiling, not a target to consume.",
-    "perSceneGenerationCeiling": 3,
-    "correctionPassCeiling": 2,
+    "roundDefinition": "One render pass is one coordinated four-slot candidate bank. Launch exactly four independent image candidates concurrently in one orchestration, allocated only across currently missing or rejected scenes. The complete four-candidate bank counts as one pass regardless of how many slots target the same scene.",
+    "countryRoundCeiling": 2,
+    "countryRoundShape": "Exactly one initial four-slot bank may be followed by at most one consolidated four-slot correction bank. Stop sooner when all four scenes pass; never open a third automatic bank.",
+    "perSceneGenerationCeiling": "A scene may receive at most four clean candidates in a pass. Across one country, automated generation is limited to the two authorized four-slot banks.",
+    "correctionPassCeiling": 1,
     "consolidationRule": "Before each correction wave, complete one holistic strict audit and fold every known identity, anatomy, hand-ownership, romance, wardrobe, location-theme, mascot, odd-prop, mission-safety, and surface defect into one revised composition and prompt. Do not launch serial single-defect edits or prompt patches.",
-    "sourceRule": "Prefer a clean fresh rerender from the original identity anchors. A single image edit is allowed only when every failure is genuinely local and the source is the untouched clean raw from that round. Never edit an edit, chain recoveries, or seed a later fresh wave with a rejected or processed country image.",
+    "sourceRule": "Every candidate slot is a clean fresh render from the original identity anchors. Never edit an edit, substitute a lone edit for the four-slot bank, chain recoveries, or seed a later fresh wave with a rejected or processed country image.",
     "promptRule": "Resolve composition geometry, exact visible contacts, full limb ownership, active wardrobe cuts, prop ownership, target axis, mascot count and species, landmark framing, and all deterministic rolls together before calling the renderer. Keep prompts decisive and remove contradictory or obsolete correction history.",
     "acceptanceRule": "The render ceiling does not weaken any active acceptance gate. Accepted scenes remain preserved and are never rerendered merely for stylistic consistency.",
-    "capExhaustionRule": "If any scene remains unaccepted after the third country wave, stop automated image generation for that country, keep it active and nonterminal, record the unresolved gates, and notify the user. Do not advance, reroll, publish, or begin another country until the user explicitly authorizes a new bounded closure window or changes the gate.",
+    "capExhaustionRule": "After the second four-slot bank, stop automated image generation. Preserve accepted scenes, keep the same incomplete country active and nonterminal, record and push every unresolved gate, notify the user, and wait for an explicit contract change or an independently accepted asset. Never open another render window, publish early, or advance countries.",
     "activeGeorgiaTransition": {
       "historicalRoundsBeforeDirective": 43,
       "historicalRoundsDoNotConsumeNewCountryDefaults": true,
@@ -391,7 +659,79 @@
         45
       ],
       "scope": "Scene 1551 only; preserve accepted scenes 1548, 1549, and 1550.",
-      "execution": "Round 44 is one clean consolidated fresh render from the original identity anchors. If and only if it fails, round 45 is one final consolidated fresh render or one local edit from the untouched round-44 raw. No further automated Georgia render follows without explicit user authorization."
+      "execution": "Rounds 44 and 45 were the first bounded Georgia closure window and remain historical. The later persistent continuation authorization opens fresh bounded windows without rewriting those results."
+    },
+    "persistentContinuationAuthorization": {
+      "active": false,
+      "requestedAt": "2026-08-12T08:42:57.8228310Z",
+      "userDirective": "go next renders, dont stop",
+      "scope": "Georgia Batch 382 and every later active country until explicitly revoked",
+      "effect": "Superseded. Successive automatic continuation windows are forbidden after the second four-slot bank.",
+      "windowWaveCeiling": 2,
+      "sourcePolicy": "Every continuation wave is one clean four-slot candidate bank from the original identity anchors. Never substitute a lone edit, edit an edit, or seed a slot from a rejected country render.",
+      "speedPolicy": "Before each wave combine every known correction into one decisive composition and prompt. Never use serial one-defect micro-edits or rerender an accepted scene.",
+      "wakePolicy": "Superseded. Later guardian wakes inspect and reconcile state but do not open another render bank without an explicit contract change.",
+      "currentGeorgiaWindow": {
+        "sceneNumbers": [
+          1551
+        ],
+        "preservedAcceptedSceneNumbers": [
+          1548,
+          1549,
+          1550
+        ],
+        "authorizedWaveNumbers": [
+          48,
+          49
+        ],
+        "status": "completed-final-two-bank-cap-rejected",
+        "completedAt": "2026-08-12T15:34:58.201Z",
+        "acceptedSceneNumbersChanged": false,
+        "result": "All eight clean candidates from rounds 48 and 49 were preserved and rejected. Round 49 retained four distinct adults, Batumi, heavy rain, mascots, distinct couture, and a complete target assembly, but no slot simultaneously passed exact relationship and compass-hand ownership, the independently straight trigger index, the horizontal paper-target axis, and at least eleven percent empty promenade beyond the complete backstop.",
+        "unresolvedGates": [
+          "restore the exact supported controlled dip with only the three recorded relationship contacts",
+          "ECE alone owns both opposite compass handles while Radiance touches only ECE's outer upper arm",
+          "one independently readable straight trigger index entirely above and outside the empty guard",
+          "black diamond center exactly horizontal with the eye-sights-barrel-muzzle row",
+          "one complete backstop followed by at least eleven percent visibly empty promenade",
+          "preserve both active open backs, Alia strapless construction, and candidate-specific consent evidence without adding badge-like styling"
+        ],
+        "nextWindow": null,
+        "additionalAutomatedBanksAllowed": 0,
+        "automaticRenderingStopped": true,
+        "explicitContractChangeRequiredForAnotherBank": true
+      },
+      "supersededAt": "2026-08-12T15:34:58.201Z",
+      "supersededBy": "twoBankThroughputPolicy"
+    },
+    "fixedFourSlotParallelRenderBank": {
+      "active": true,
+      "requestedAt": "2026-08-12T09:16:26.6171819Z",
+      "userDirective": "4 parallel renders all the time code it into guardian and go",
+      "slotsPerWave": 4,
+      "concurrencyRule": "Launch all four image-generation calls concurrently in one orchestration. Do not serialize the slots and do not count individual candidates as separate waves.",
+      "allocationRule": {
+        "oneMissingScene": "4 slots for that scene",
+        "twoMissingScenes": "2 slots per scene",
+        "threeMissingScenes": "2 slots for the lowest-numbered missing scene and 1 slot for each other missing scene",
+        "fourMissingScenes": "1 slot per scene"
+      },
+      "candidateRule": "Each slot uses the stored scene contract plus its own deterministic candidate key for every per-image live-narrative field. Materialize every candidate-specific invitation, Radiance response, partyActivation boolean, willing participants, visible evidence, and continuity state before launch.",
+      "sourceRule": "Every slot is a clean independent generation from the original identity anchors only. No prior rejected country render, processed output, or edit may be an image input.",
+      "auditRule": "Preserve all four raw outputs. Audit all candidates once against every active gate, in deterministic slot order A through D. For each missing scene, accept the first exact passing candidate in that order, copy only that winner to assets, and keep other candidates as raw audit artifacts.",
+      "acceptedSceneRule": "Never allocate a slot to an already accepted scene. If a scene gains a passing candidate in a wave, preserve it and exclude it from every later wave.",
+      "waveCeilingInteraction": "Exactly two four-slot banks per country maximum: one initial bank and one consolidated correction bank. Individual candidates are not separate passes, and no continuation window opens after bank two."
+    },
+    "twoBankThroughputPolicy": {
+      "active": true,
+      "requestedAt": "2026-08-12T15:34:58.201Z",
+      "userDirective": "make all your edits in 2 passes and move on; never move on without 4 posts ready per country; use less renders; 4 parallel 7/24",
+      "scope": "Georgia Batch 382 and every later country until explicitly changed",
+      "passesPerCountry": 2,
+      "slotsPerPass": 4,
+      "execution": "Pass one is the initial coordinated bank. Pass two is one holistic correction bank that combines every known defect. Launch all four slots concurrently, preserve every raw, and never rerender an accepted scene.",
+      "completionGate": "Advancement still requires four accepted current-country scene assets, the narrow checkpoint committed and pushed to the recovery branch, and one publicly verified X status URL.",
+      "exhaustion": "If fewer than four scenes are accepted after pass two, stop automatic rendering, keep the country active and nonterminal, block X and the next country, and notify the user. A later heartbeat audits state but does not create a third bank."
     }
   },
   "anatomyIntegrity": {

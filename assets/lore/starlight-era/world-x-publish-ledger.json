@@ -5171,5 +5171,50 @@
     "newlyPublished": [],
     "action": "No upload was submitted because the explicit queue is empty and no unpublished country meets its authoritative publication gate.",
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
+  },
+  "latestGuardianWakeAudit": {
+    "status": "clear-no-eligible-backlog-georgia-final-two-bank-cap-closed",
+    "checkedAt": "2026-08-12T15:34:58.201Z",
+    "account": "@dogramaci",
+    "liveProfileVerified": true,
+    "signedInAccount": "@dogramaci",
+    "pendingPost": null,
+    "preparedPostQueueCount": 0,
+    "deferredPostCheckpoint": null,
+    "eligibleBacklogRemaining": 0,
+    "activeCountryAudit": {
+      "batch": 382,
+      "country": "Georgia",
+      "acceptedCurrentCountryAssets": 3,
+      "required": 4,
+      "eligible": false
+    },
+    "latestVisibleAccountStatuses": [
+      {
+        "url": "https://x.com/dogramaci/status/2087541233283408297",
+        "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
+      },
+      {
+        "url": "https://x.com/dogramaci/status/2087540947533877380",
+        "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
+      },
+      {
+        "url": "https://x.com/dogramaci/status/2087540818387128543",
+        "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
+      }
+    ],
+    "action": "No upload was submitted because the eligible queue is empty and Georgia remains below its authoritative four-accepted-scene gate.",
+    "duplicatePrevention": "Do not classify unrelated recent account posts as Georgia's required three-attachment publication and do not upload Georgia before scene 1551 is accepted.",
+    "renderWindowAudit": {
+      "rounds": [
+        48,
+        49
+      ],
+      "candidateCount": 8,
+      "acceptedSceneNumbersChanged": false,
+      "nextWindowRounds": [],
+      "nextWindowStatus": "forbidden-without-explicit-contract-change",
+      "additionalAutomatedBanksAllowed": 0
+    }
   }
 }
