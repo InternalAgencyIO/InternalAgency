@@ -29,7 +29,10 @@ const INVENTORIED_SOURCE_PATHS = Object.freeze([
   "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs",
   "programs/iat_b3_reference/privacy-vault-recovery-lifecycle.mjs",
   "programs/iat_b3_reference/privacy-vault-recovery-sqlite.mjs",
+  "programs/iat_b3_reference/reward-allocator-proof-bundle.mjs",
+  "programs/iat_b3_reference/reward-allocator-receipt-codec.mjs",
   "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs",
+  "programs/iat_b3_reference/reward-capacity-waterfall.mjs",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs",
   "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs",
   "programs/iat_b3_reference/reward-consumer-gate.mjs",
@@ -39,6 +42,7 @@ const INVENTORIED_SOURCE_PATHS = Object.freeze([
   "programs/iat_b3_reference/reward-persistence-cas.mjs",
   "programs/iat_b3_reference/reward-persistence-checkpoint.mjs",
   "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs",
+  "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs",
   "scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs",
   "scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs",
 ]);

@@ -158,7 +158,8 @@ The exact critical-source ledger is:
 - `programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs`;
 - `programs/iat_b3_reference/reward-external-rollback-anchor.mjs`;
 - `programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs`;
-- `programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs`.
+- `programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs`;
+- `programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs`.
 
 The privacy-vault external rollback-anchor prerequisite is included only
 because it is a reviewed static consumer of the generic provider-envelope
@@ -166,6 +167,17 @@ verifier. Its exact path, complete source digest, single provider-module import
 marker, and verifier entry-point occurrences are pinned here. This does not
 make it a reward consumer, expand the reward runtime boundary, or promote any
 provider, rollback, runtime, activation, or Mainnet truth claim.
+
+The waterfall replay-audit adapter is pinned only as a reviewed host-local,
+nonactivating retention surface. Its complete source digest and exact static
+imports of the allocator receipt codec, allocator proof-bundle validator, and
+reward CAS codec are bound, together with its factory and append entry points,
+schema/status identity, private `reward_waterfall_audit_` SQLite namespace, and
+explicit Mainnet-status constant occurrences. A new importer or caller, direct
+private-table reference, altered truth flag, changed source byte, or renamed
+dependency edge fails closed. This binding does not authenticate a runtime or
+provider, establish independent rollback protection, prove built-artifact
+parity, authorize activation, or change Mainnet from `HOLD`.
 
 The host-only authenticated recovery runtime is also pinned by exact path and
 complete source digest. The static inventory confines its reviewed generic
@@ -387,7 +399,11 @@ raw mutators, raw adapter-symbol access, permit-only and cursor-only consumers,
 unlisted literal provider/anchor/mirror/composed-runtime callers, direct
 private-table writes, split or Unicode-escaped static dynamic-import paths,
 statically computed factory names, and escaped IdentifierNames, plus source
-omission, digest drift, and hostile source descriptors. A separate limitation
+omission, digest drift, and hostile source descriptors. They additionally pin
+the waterfall replay-audit module's exact bytes, dependency imports, factory,
+append entry point, schema/status identities, private SQLite namespace, and
+`HOLD` truth; hostile drift to authentication, rollback protection, activation,
+or a non-HOLD Mainnet status is rejected as unreviewed source. A separate limitation
 matrix preserves accepted array-join, character-code, variable, optional,
 parenthesized, two-step, and reflective runtime dispatch while verifying that
 all exhaustive-inventory, bypass-prevention, activation, and Mainnet claims

@@ -78,6 +78,13 @@ test("mutator, module, schema, SQLite, source-map, and binary bypass markers fai
     "iat-b3-reward-consumer-local-projection-event/v1",
     "INSERT INTO reward_consumer_projection_events VALUES (?)",
     "INSERT INTO reward_cas_entity_versions VALUES (?)",
+    "reward-waterfall-audit-sqlite.mjs",
+    "createRewardWaterfallAuditSqlite",
+    "appendFinalizedRound",
+    "REWARD_WATERFALL_AUDIT_SQLITE_MAINNET_STATUS",
+    "iat-b3-reward-waterfall-audit-sqlite/v1",
+    "HOST_ONLY_NONACTIVATING_REPLAY_AUDIT",
+    "INSERT INTO reward_waterfall_audit_rounds VALUES (?)",
     JSON.stringify({
       version: 3,
       sources: ["programs/iat_b3_reference/reward-consumer-gate.mjs"],

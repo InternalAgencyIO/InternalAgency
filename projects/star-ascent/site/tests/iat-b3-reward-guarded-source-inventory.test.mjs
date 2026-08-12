@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+
+// This guarded inventory test is a canonical check:iat-b3-spec entry point.
+// Loading the critical adapter's hostile functional suite here keeps its exact
+// pinned bytes and executable durability proof in the same fail-closed gate.
+import "./iat-b3-reward-waterfall-audit-sqlite.test.mjs";
 
 import {
   REWARD_GUARDED_SOURCE_INVENTORY_MAINNET_STATUS,
@@ -13,6 +19,24 @@ import {
 
 const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const productionSources = collectRewardProductionSourceFiles(SITE_ROOT);
+
+test("canonical guarded entry point retains the waterfall audit functional suite", () => {
+  const entryPointSource = readFileSync(fileURLToPath(import.meta.url), "utf8");
+  const testFileName = ["iat-b3-reward-waterfall", "audit-sqlite.test.mjs"].join("-");
+  const exactImport = `import "./${testFileName}";`;
+  assert.equal(entryPointSource.split(/\r?\n/u).filter((line) => line === exactImport).length, 1);
+  assert.doesNotThrow(() => readFileSync(
+    fileURLToPath(new URL("./iat-b3-reward-waterfall-audit-sqlite.test.mjs", import.meta.url)),
+    "utf8",
+  ));
+  const packageJson = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+  const canonicalCommand = packageJson.scripts?.["check:iat-b3-spec"];
+  assert.equal(typeof canonicalCommand, "string");
+  assert.equal(
+    canonicalCommand.split("tests/iat-b3-reward-guarded-source-inventory.test.mjs").length - 1,
+    1,
+  );
+});
 
 function withSource(path, source) {
   return [...productionSources, { path, source }];
@@ -35,7 +59,7 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.deployableRewardConsumerPathsInventoried, false);
   assert.equal(result.dynamicComputedDispatchRejected, false);
   assert.equal(result.reflectiveDispatchRejected, false);
-  assert.equal(result.criticalSources.length, 13);
+  assert.equal(result.criticalSources.length, 14);
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs"
   )));
@@ -50,6 +74,10 @@ test("repository source inventory binds every current reward adapter edge and st
   )));
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs"
+  )));
+  assert.ok(result.criticalSources.some(({ path, sourceSha256 }) => (
+    path === "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs"
+      && sourceSha256 === "d09fd2e22838200f1952f61a3a5682bd79105ed734d01b05ec1272076e174268"
   )));
   assert.ok(result.scannedSourceFileCount >= 300);
   assert.match(result.sourceSetSha256, /^[0-9a-f]{64}$/u);
@@ -296,6 +324,91 @@ test("unlisted signed-anchor, mirror, and composed-runtime callers fail the inve
     assert.throws(
       () => auditRewardGuardedSourceFiles(withSource(path, source)),
       /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH/u,
+      path,
+    );
+  }
+});
+
+test("waterfall replay-audit bytes, HOLD truth, imports, factory, and SQLite namespace fail closed", () => {
+  const auditPath = "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs";
+  const auditSource = productionSources.find(({ path }) => path === auditPath);
+  assert.ok(auditSource);
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(
+      productionSources.filter(({ path }) => path !== auditPath),
+    ),
+    /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING:.*reward-waterfall-audit-sqlite/u,
+  );
+  for (const mutate of [
+    (source) => `${source}\n// unreviewed replay-audit drift\n`,
+    (source) => source.replace(
+      'REWARD_WATERFALL_AUDIT_SQLITE_MAINNET_STATUS = "HOLD"',
+      'REWARD_WATERFALL_AUDIT_SQLITE_MAINNET_STATUS = "READY"',
+    ),
+    (source) => source.replace(
+      "runtimeAuthenticationVerified: false",
+      "runtimeAuthenticationVerified: true",
+    ),
+    (source) => source.replace(
+      "rollbackProtectionVerified: false",
+      "rollbackProtectionVerified: true",
+    ),
+    (source) => source.replace("activationReady: false", "activationReady: true"),
+  ]) {
+    assert.throws(
+      () => auditRewardGuardedSourceFiles(replaceSource(auditPath, mutate)),
+      /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH:.*reward-waterfall-audit-sqlite/u,
+    );
+  }
+
+  for (const [path, source, marker] of [
+    [
+      "worker/unreviewed-waterfall-audit-import.mjs",
+      `export * from
+        "../programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs";`,
+      "reward-waterfall-audit-sqlite.mjs",
+    ],
+    [
+      "worker/unreviewed-waterfall-audit-factory.mjs",
+      "export const open = (adapter, options) => adapter.createRewardWaterfallAuditSqlite(options);",
+      "createRewardWaterfallAuditSqlite",
+    ],
+    [
+      "scripts/unreviewed-waterfall-audit-delete.mjs",
+      "export const sql = 'DELETE FROM reward_waterfall_audit_rounds';",
+      "reward_waterfall_audit_",
+    ],
+    [
+      "worker/unreviewed-waterfall-audit-schema.mjs",
+      "export const schema = 'iat-b3-reward-waterfall-audit-sqlite/v1';",
+      "iat-b3-reward-waterfall-audit-sqlite/v1",
+    ],
+    [
+      "worker/unreviewed-waterfall-audit-status.mjs",
+      "export const status = 'HOST_ONLY_NONACTIVATING_REPLAY_AUDIT';",
+      "HOST_ONLY_NONACTIVATING_REPLAY_AUDIT",
+    ],
+    [
+      "worker/unreviewed-waterfall-audit-append.mjs",
+      "export const append = (adapter, input) => adapter.appendFinalizedRound(input);",
+      "appendFinalizedRound",
+    ],
+    [
+      "worker/unreviewed-proof-bundle-import.mjs",
+      `export { validateRewardAllocatorProofBundle } from
+        "../programs/iat_b3_reference/reward-allocator-proof-bundle.mjs";`,
+      "reward-allocator-proof-bundle.mjs",
+    ],
+    [
+      "worker/unreviewed-receipt-codec-import.mjs",
+      `export { allocatorTranscriptSha256 } from
+        "../programs/iat_b3_reference/reward-allocator-receipt-codec.mjs";`,
+      "reward-allocator-receipt-codec.mjs",
+    ],
+  ]) {
+    assert.throws(
+      () => auditRewardGuardedSourceFiles(withSource(path, source)),
+      new RegExp(`REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:${marker}`),
       path,
     );
   }

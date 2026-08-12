@@ -89,6 +89,8 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
     "38c652179120d2d5e1bf084d8f2ae0fb169fec4b800359503270e0925e0380c4",
   "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs":
     "622bf21521daca38a8272252425c18354d64b1e380bc63a84469730118acc51a",
+  "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs":
+    "d09fd2e22838200f1952f61a3a5682bd79105ed734d01b05ec1272076e174268",
 });
 
 // Raw substring counts are intentional. Imports renamed with `as`, comments
@@ -97,6 +99,9 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
 // folds directly concatenated static string literals so split dynamic-import
 // paths and split computed factory names cannot evade these exact markers.
 const EXPECTED_MARKER_LOCATIONS = Object.freeze({
+  appendFinalizedRound: Object.freeze({
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
+  }),
   REWARD_CAS_STORE_ADAPTER: Object.freeze({
     "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs": 3,
     "programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs": 2,
@@ -132,6 +137,9 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
   }),
+  createRewardWaterfallAuditSqlite: Object.freeze({
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
+  }),
   createProviderTrustBinding: Object.freeze({
     "programs/iat_b3_reference/provider-authenticated-envelope.mjs": 2,
   }),
@@ -165,6 +173,12 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
   }),
   finalizeRewardCapacityRoundCas: Object.freeze({
     "programs/iat_b3_reference/reward-persistence-cas.mjs": 1,
+  }),
+  HOST_ONLY_NONACTIVATING_REPLAY_AUDIT: Object.freeze({
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
+  }),
+  "iat-b3-reward-waterfall-audit-sqlite/v1": Object.freeze({
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
   }),
   prepareRewardConsumerPermit: Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 3,
@@ -201,6 +215,21 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
   "reward-checkpoint-gated-cas.mjs": Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
   }),
+  "reward-allocator-proof-bundle.mjs": Object.freeze({
+    "programs/iat_b3_reference/reward-persistence-cas.mjs": 1,
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
+  }),
+  "reward-allocator-receipt-codec.mjs": Object.freeze({
+    "programs/iat_b3_reference/reward-allocator-proof-bundle.mjs": 1,
+    "programs/iat_b3_reference/reward-capacity-waterfall.mjs": 1,
+    "programs/iat_b3_reference/reward-consumer-gate.mjs": 1,
+    "programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs": 1,
+    "programs/iat_b3_reference/reward-persistence-cas.mjs": 1,
+    "programs/iat_b3_reference/reward-persistence-checkpoint.mjs": 1,
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
+    "scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs": 1,
+    "scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs": 1,
+  }),
   "reward-consumer-cursor-sqlite.mjs": Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
   }),
@@ -225,6 +254,7 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs": 1,
     "programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs": 1,
     "programs/iat_b3_reference/reward-persistence-checkpoint.mjs": 1,
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
   }),
   "reward-persistence-checkpoint.mjs": Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
@@ -236,6 +266,10 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
   }),
   "reward-rollback-anchor-sqlite.mjs": Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
+  }),
+  "reward-waterfall-audit-sqlite.mjs": Object.freeze({}),
+  REWARD_WATERFALL_AUDIT_SQLITE_MAINNET_STATUS: Object.freeze({
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 8,
   }),
   reward_cas_: Object.freeze({
     "programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs": 55,
@@ -251,6 +285,9 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
   }),
   reward_rollback_anchor_: Object.freeze({
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 16,
+  }),
+  reward_waterfall_audit_: Object.freeze({
+    "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 2,
   }),
   verifyProviderSignedEnvelope: Object.freeze({
     "programs/iat_b3_reference/provider-authenticated-envelope.mjs": 1,
