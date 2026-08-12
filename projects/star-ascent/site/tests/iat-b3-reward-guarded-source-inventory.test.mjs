@@ -7,6 +7,7 @@ import test from "node:test";
 // Loading the critical adapter's hostile functional suite here keeps its exact
 // pinned bytes and executable durability proof in the same fail-closed gate.
 import "./iat-b3-reward-waterfall-audit-sqlite.test.mjs";
+import "./iat-b3-reward-allocator-rust-differential.test.mjs";
 
 import {
   REWARD_GUARDED_SOURCE_INVENTORY_MAINNET_STATUS,
@@ -20,13 +21,26 @@ import {
 const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const productionSources = collectRewardProductionSourceFiles(SITE_ROOT);
 
-test("canonical guarded entry point retains the waterfall audit functional suite", () => {
+test("canonical guarded entry point retains waterfall and native differential suites", () => {
   const entryPointSource = readFileSync(fileURLToPath(import.meta.url), "utf8");
   const testFileName = ["iat-b3-reward-waterfall", "audit-sqlite.test.mjs"].join("-");
   const exactImport = `import "./${testFileName}";`;
   assert.equal(entryPointSource.split(/\r?\n/u).filter((line) => line === exactImport).length, 1);
   assert.doesNotThrow(() => readFileSync(
     fileURLToPath(new URL("./iat-b3-reward-waterfall-audit-sqlite.test.mjs", import.meta.url)),
+    "utf8",
+  ));
+  const differentialTestFileName = [
+    "iat-b3-reward-allocator-rust",
+    "differential.test.mjs",
+  ].join("-");
+  const exactDifferentialImport = `import "./${differentialTestFileName}";`;
+  assert.equal(
+    entryPointSource.split(/\r?\n/u).filter((line) => line === exactDifferentialImport).length,
+    1,
+  );
+  assert.doesNotThrow(() => readFileSync(
+    fileURLToPath(new URL("./iat-b3-reward-allocator-rust-differential.test.mjs", import.meta.url)),
     "utf8",
   ));
   const packageJson = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
@@ -59,7 +73,11 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.deployableRewardConsumerPathsInventoried, false);
   assert.equal(result.dynamicComputedDispatchRejected, false);
   assert.equal(result.reflectiveDispatchRejected, false);
-  assert.equal(result.criticalSources.length, 14);
+  assert.equal(result.criticalSources.length, 15);
+  assert.ok(result.criticalSources.some(({ path, sourceSha256 }) => (
+    path === "programs/iat_b3_economy/src/reward_allocator_transcript.rs"
+      && sourceSha256 === "a9fab4007e1dc7fa24b0e2248ee6ace8cd0c904f7643c87c79311deb6942a99d"
+  )));
   assert.ok(result.criticalSources.some(({ path }) => (
     path === "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs"
   )));
@@ -474,6 +492,78 @@ test("critical adapter drift or omission fails before an updated inventory can a
     ]),
     /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING/u,
   );
+});
+
+test("native reward transcript bytes, exports, truth, and validator fail closed on drift", () => {
+  const modulePath = "programs/iat_b3_economy/src/reward_allocator_transcript.rs";
+  const libPath = "programs/iat_b3_economy/src/lib.rs";
+  assert.ok(productionSources.some(({ path }) => path === modulePath));
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
+      modulePath,
+      (source) => `${source}\n// unreviewed native reward transcript drift\n`,
+    )),
+    /REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH:.*reward_allocator_transcript\.rs/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(
+      productionSources.filter(({ path }) => path !== modulePath),
+    ),
+    /REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING:.*reward_allocator_transcript\.rs/u,
+  );
+  assert.throws(
+    () => auditRewardGuardedSourceFiles(replaceSource(
+      libPath,
+      (source) => source.replace(
+        "validate_reward_allocator_transcript_binding",
+        "validate_reward_allocator_transcript_bindin_",
+      ),
+    )),
+    /REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:validate_reward_allocator_transcript_binding/u,
+  );
+  for (const [path, source, marker] of [
+    [
+      "worker/unreviewed-native-reward-validator.rs",
+      "fn bypass() { validate_reward_allocator_transcript_binding(); }",
+      "validate_reward_allocator_transcript_binding",
+    ],
+    [
+      "worker/unreviewed-native-reward-decoder.rs",
+      "fn bypass(bytes: &[u8]) { decode_reward_allocator_receipt(bytes); }",
+      "decode_reward_allocator_receipt",
+    ],
+    [
+      "worker/unreviewed-native-reward-truth.rs",
+      "const BYPASS: bool = REWARD_ALLOCATOR_TRANSCRIPT_TRUTH.activation_ready;",
+      "REWARD_ALLOCATOR_TRANSCRIPT_TRUTH",
+    ],
+    [
+      "worker/unreviewed-native-reward-status.rs",
+      "const STATUS: &str = REWARD_ALLOCATOR_TRANSCRIPT_MAINNET_STATUS;",
+      "REWARD_ALLOCATOR_TRANSCRIPT_MAINNET_STATUS",
+    ],
+    [
+      "worker/unreviewed-native-reward-structural-status.rs",
+      "const STATUS: &str = REWARD_ALLOCATOR_TRANSCRIPT_STATUS;",
+      "REWARD_ALLOCATOR_TRANSCRIPT_STATUS",
+    ],
+    [
+      "worker/unreviewed-native-reward-module.rs",
+      "mod reward_allocator_transcript;",
+      "mod reward_allocator_transcript",
+    ],
+    [
+      "worker/unreviewed-native-reward-reexport.rs",
+      "pub use reward_allocator_transcript::*;",
+      "pub use reward_allocator_transcript",
+    ],
+  ]) {
+    assert.throws(
+      () => auditRewardGuardedSourceFiles(withSource(path, source)),
+      new RegExp(`REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:${marker}`, "u"),
+      path,
+    );
+  }
 });
 
 test("the reviewed privacy anchor provider import marker cannot drift to another source", () => {

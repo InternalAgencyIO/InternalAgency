@@ -57,12 +57,17 @@ const JAVASCRIPT_SOURCE_EXTENSIONS = new Set([
   ".ts",
   ".tsx",
 ]);
+const NATIVE_REWARD_TRANSCRIPT_PATH =
+  "programs/iat_b3_economy/src/reward_allocator_transcript.rs";
+const NATIVE_REWARD_EXPORT_PATH = "programs/iat_b3_economy/src/lib.rs";
 
 // These hashes deliberately bind the source inventory to the exact guarded
 // adapter implementations it audited. Updating one requires an explicit
 // inventory update and review; this module does not independently review or
 // authorize such an update.
 const CRITICAL_SOURCE_SHA256 = Object.freeze({
+  "programs/iat_b3_economy/src/reward_allocator_transcript.rs":
+    "a9fab4007e1dc7fa24b0e2248ee6ace8cd0c904f7643c87c79311deb6942a99d",
   "programs/iat_b3_reference/provider-authenticated-envelope.mjs":
     "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
   "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs":
@@ -99,6 +104,48 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
 // folds directly concatenated static string literals so split dynamic-import
 // paths and split computed factory names cannot evade these exact markers.
 const EXPECTED_MARKER_LOCATIONS = Object.freeze({
+  decode_reward_allocator_batch: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 2,
+  }),
+  decode_reward_allocator_receipt: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 2,
+  }),
+  encode_reward_allocator_batch: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 2,
+  }),
+  encode_reward_allocator_receipt: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 2,
+  }),
+  "mod reward_allocator_transcript": Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+  }),
+  "pub use reward_allocator_transcript": Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+  }),
+  REWARD_ALLOCATOR_TRANSCRIPT_MAINNET_STATUS: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 1,
+  }),
+  REWARD_ALLOCATOR_TRANSCRIPT_STATUS: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 1,
+  }),
+  REWARD_ALLOCATOR_TRANSCRIPT_TRUTH: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 1,
+  }),
+  reward_allocator_batch_sha256: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 2,
+  }),
+  validate_reward_allocator_transcript_binding: Object.freeze({
+    "programs/iat_b3_economy/src/lib.rs": 1,
+    "programs/iat_b3_economy/src/reward_allocator_transcript.rs": 1,
+  }),
   appendFinalizedRound: Object.freeze({
     "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs": 1,
   }),
@@ -610,27 +657,41 @@ export function auditRewardGuardedSourceFiles(sourceFiles, {
     assertNoEncodedStaticMarkers(file);
   }
 
-  const criticalSources = Object.entries(CRITICAL_SOURCE_SHA256).map(([path, expectedSha256]) => {
-    const source = byPath.get(path);
-    if (source === undefined) {
-      throw new Error(`REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING:${path}`);
-    }
-    const actualSha256 = sha256(source);
-    if (actualSha256 !== expectedSha256) {
-      throw new Error(`REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH:${path}`);
-    }
-    return Object.freeze({ path, sourceSha256: actualSha256 });
-  });
+  // Narrow build-provenance fixtures intentionally contain only the guarded
+  // host reference surface. Once either native transcript file or its economy
+  // export anchor is in an enumerated source root, both the exact native path
+  // and digest become mandatory. The canonical repository contains the export
+  // anchor, so deleting or relocating only the native module still fails.
+  const nativeRewardSurfacePresent = byPath.has(NATIVE_REWARD_EXPORT_PATH)
+    || byPath.has(NATIVE_REWARD_TRANSCRIPT_PATH);
+  const criticalSources = Object.entries(CRITICAL_SOURCE_SHA256)
+    .filter(([path]) => path !== NATIVE_REWARD_TRANSCRIPT_PATH || nativeRewardSurfacePresent)
+    .map(([path, expectedSha256]) => {
+      const source = byPath.get(path);
+      if (source === undefined) {
+        throw new Error(`REWARD_GUARDED_SOURCE_CRITICAL_PATH_MISSING:${path}`);
+      }
+      const actualSha256 = sha256(source);
+      if (actualSha256 !== expectedSha256) {
+        throw new Error(`REWARD_GUARDED_SOURCE_CRITICAL_DIGEST_MISMATCH:${path}`);
+      }
+      return Object.freeze({ path, sourceSha256: actualSha256 });
+    });
 
   const markerInventory = Object.entries(EXPECTED_MARKER_LOCATIONS)
     .sort(([left], [right]) => left.localeCompare(right, "en"))
     .map(([marker, expected]) => {
+      const expectedForSurface = nativeRewardSurfacePresent
+        ? expected
+        : Object.fromEntries(Object.entries(expected).filter(([path]) => (
+          path !== NATIVE_REWARD_EXPORT_PATH && path !== NATIVE_REWARD_TRANSCRIPT_PATH
+        )));
       const actual = {};
       for (const file of files) {
         const count = countOccurrences(file.source, marker);
         if (count > 0) actual[file.path] = count;
       }
-      if (!sameLocationRecord(actual, expected)) {
+      if (!sameLocationRecord(actual, expectedForSurface)) {
         throw new Error(`REWARD_GUARDED_SOURCE_BYPASS_MARKER_MISMATCH:${marker}`);
       }
       return Object.freeze({ markerSha256: sha256(marker), locations: canonicalLocationRecord(actual) });
