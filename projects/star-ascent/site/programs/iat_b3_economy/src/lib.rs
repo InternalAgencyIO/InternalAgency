@@ -35,6 +35,7 @@ pub mod production_withdraw_position;
 pub mod production_withdraw_position_executor;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod rehearsal_adapter;
+mod reward_allocator_transcript;
 #[cfg(feature = "runtime-account-lifecycle")]
 pub mod runtime_account_lifecycle;
 #[cfg(feature = "runtime-account-bridge")]
@@ -89,6 +90,18 @@ pub use genesis_conservation::{
     GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_COUNT, GENESIS_ALLOCATION_ROLES,
     GENESIS_CONSERVATION_DOMAIN, GENESIS_CONSERVATION_STATUS, GENESIS_CONSERVATION_TRUTH,
     GENESIS_VESTING_TERMS,
+};
+pub use reward_allocator_transcript::{
+    decode_reward_allocator_batch, decode_reward_allocator_receipt, encode_reward_allocator_batch,
+    encode_reward_allocator_receipt, reward_allocator_batch_sha256,
+    validate_reward_allocator_transcript_binding, AllocatorDisposition, AllocatorReason,
+    RewardAllocatorBatch, RewardAllocatorReceipt, RewardAllocatorReferenceReceipt,
+    RewardAllocatorTranscriptBinding, RewardAllocatorTranscriptError,
+    RewardAllocatorTranscriptTruth, ALLOCATOR_BATCH_TRANSCRIPT_LEN,
+    ALLOCATOR_RECEIPT_TRANSCRIPT_LEN, MAX_REFERENCE_RECEIPT_CORE_LEN,
+    REFERENCE_DEPLOYMENT_DOMAIN_SHA256, REWARD_ALLOCATOR_TRANSCRIPT_MAINNET_STATUS,
+    REWARD_ALLOCATOR_TRANSCRIPT_STATUS, REWARD_ALLOCATOR_TRANSCRIPT_TRUTH,
+    REWARD_CAPACITY_POLICY_CANONICAL_SHA256,
 };
 
 use iat_b3_consensus::{
