@@ -7,7 +7,7 @@ This reference is the canonical machine-enforced inventory and dependency graph 
 The canonical production manifest is structurally valid but blocked:
 
 - 28 exact ordered nodes;
-- 132 exact ordered prerequisite edges;
+- 134 exact ordered prerequisite edges;
 - all nodes are `REQUIRED`;
 - Privacy Vault, all 50 locales, and required media cannot be marked optional or `N/A`;
 - 27 nonterminal nodes feed the terminal node directly;
@@ -61,8 +61,8 @@ The notation `node <- prerequisites` means the node cannot complete until every 
 18. `DEPENDENCY_SECURITY_REMEDIATION <- [V2_FEATURE_PARITY]`
 19. `PRODUCTION_BINARY_REPRODUCIBILITY <- [TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY, PRODUCTION_IDENTITY_INPUT_FREEZE, DAILY_LAW_NATIVE_HOOK, COMBINED_STAKE_INGRESS_HOOK, ECONOMY_ALL_15_WRITE_ADAPTER, REWARD_LOCAL_WRITE_CONSUMER_GATING, PRIVACY_VAULT_CLIENT, DEPENDENCY_SECURITY_REMEDIATION]`
 20. `ADVERSARIAL_DEVNET_REHEARSAL <- [TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY, PRODUCTION_BINARY_REPRODUCIBILITY]`
-21. `DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE <- [LIVE_ESTATE_CANONICAL_MINT_DECISION, PRODUCTION_IDENTITY_INPUT_FREEZE, PRODUCTION_BINARY_REPRODUCIBILITY, ADVERSARIAL_DEVNET_REHEARSAL]`
-22. `B3_COST_CEREMONY_FUNDING <- [GENESIS_ALLOCATIONS_CONSERVATION, PRODUCTION_BINARY_REPRODUCIBILITY]`
+21. `DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE <- [LIVE_ESTATE_CANONICAL_MINT_DECISION, PRODUCTION_IDENTITY_INPUT_FREEZE, PRODUCTION_BINARY_REPRODUCIBILITY, ADVERSARIAL_DEVNET_REHEARSAL, B3_COST_CEREMONY_FUNDING]`
+22. `B3_COST_CEREMONY_FUNDING <- [GENESIS_ALLOCATIONS_CONSERVATION, PRODUCTION_IDENTITY_INPUT_FREEZE, PRODUCTION_BINARY_REPRODUCIBILITY]`
 23. `LOCALIZATION_EVIDENCE <- [V2_FEATURE_PARITY]`
 24. `MEDIA_MASTER_COMPLETENESS <- [V2_FEATURE_PARITY]`
 25. `V2_LAUNCH_CEREMONY_BOUNDARY <- [LIVE_ESTATE_CANONICAL_MINT_DECISION, V2_FEATURE_PARITY]`
@@ -106,7 +106,7 @@ Only fixed, repository-relative, allowlisted B3 reference artifacts may be bound
 The artifact policy also binds the separately versioned Privacy Vault native
 instruction-plan prerequisite packet and its exact source inventory. That
 auxiliary binding is fail-closed audit input only: it neither adds a graph node
-nor changes the 28-node/132-edge topology, and it cannot promote the blocked
+nor changes the 28-node/134-edge topology, and it cannot promote the blocked
 `PRIVACY_VAULT_CLIENT` full-lifecycle predicate.
 
 The unresolved localization and media inputs intentionally have `contractArtifact: null` and remain blocked. The validator does not read or hash the changing site/i18n files. The canonical media blocker retains the exact 14 missing full masters; it is not an accepted failure and cannot be marked `N/A`.

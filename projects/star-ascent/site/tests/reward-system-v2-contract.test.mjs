@@ -827,7 +827,19 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   );
   assert.equal(RELEASE_DEPENDENCY_GRAPH_MAINNET_STATUS, "HOLD");
   assert.equal(releaseDependencyGraphManifest.nodes.length, 28);
-  assert.equal(releaseDependencyGraphManifest.edges.length, 132);
+  assert.equal(releaseDependencyGraphManifest.edges.length, 134);
+  assert.equal(
+    releaseDependencyGraphManifest.edges.some(([prerequisite, node]) =>
+      prerequisite === "PRODUCTION_IDENTITY_INPUT_FREEZE"
+      && node === "B3_COST_CEREMONY_FUNDING"),
+    true,
+  );
+  assert.equal(
+    releaseDependencyGraphManifest.edges.some(([prerequisite, node]) =>
+      prerequisite === "B3_COST_CEREMONY_FUNDING"
+      && node === "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"),
+    true,
+  );
   assert.equal(dependencyGraphResult.valid, true);
   assert.equal(dependencyGraphResult.dependencyGraphValid, true);
   assert.equal(dependencyGraphResult.dependencyReviewPacketComplete, false);
@@ -918,7 +930,7 @@ test("the ledger and allocator remain static reference artifacts with no runtime
   assert.match(xSocialEvidenceBoundarySource, /all operational truth flags remain false/iu);
   assert.match(xSocialEvidenceBoundarySource, /Premium-only V1 HOLD path/iu);
   assert.match(releaseDependencyGraphBoundarySource, /28 exact ordered nodes/iu);
-  assert.match(releaseDependencyGraphBoundarySource, /132 exact ordered prerequisite edges/iu);
+  assert.match(releaseDependencyGraphBoundarySource, /134 exact ordered prerequisite edges/iu);
   assert.match(releaseDependencyGraphBoundarySource, /not a pre-execution launch switch/iu);
   assert.match(releaseDependencyGraphValidatorSource, /allNodesRequired: true/u);
   assert.match(releaseDependencyGraphValidatorSource, /requiredLocaleCount: 50/u);
