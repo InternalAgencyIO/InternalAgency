@@ -5087,23 +5087,29 @@
     "verification": "Every exact caption, attachment count, public status URL, and current home-timeline article was verified in the signed-in in-app browser."
   },
   "latestExplicitDrainAudit": {
-    "status": "complete-no-eligible-backlog",
-    "requestedAt": "2026-08-12T05:05:06.102Z",
-    "completedAt": "2026-08-12T05:11:58.719Z",
+    "status": "cleared-no-eligible-backlog",
+    "requestedAt": "2026-08-12T06:00:46.627Z",
+    "completedAt": "2026-08-12T06:02:09.385Z",
     "account": "@dogramaci",
-    "instruction": "post entire X backlog now",
+    "instruction": "clear X post backlog now",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
+    "latestVisibleAccountStatus": {
+      "url": "https://x.com/dogramaci/status/2087416716372378042",
+      "classification": "unrelated-account-image-post-not-a-World-Series-ledger-item"
+    },
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
-    "historicalCheckpointAudit": {
+    "ledgerPublicPostCount": 169,
+    "checkpointAudit": {
       "batchRange": [
-        374,
-        381
+        320,
+        382
       ],
-      "eligibleCountryCount": 0,
-      "insufficientCountries": [
+      "thresholdQualifiedUnpublishedCount": 0,
+      "publishedCheckpointCount": 25,
+      "insufficientCountriesFromBatch374": [
         {
           "batch": 374,
           "country": "Armenia",
@@ -5163,7 +5169,7 @@
     },
     "eligibleBacklogRemaining": 0,
     "newlyPublished": [],
-    "action": "No upload was submitted because no country meets its authoritative publication gate.",
-    "duplicatePrevention": "The live signed-in profile and ledger were reconciled before any composer action; no already-public or ineligible media was re-uploaded."
+    "action": "No upload was submitted because the explicit queue is empty and no unpublished country meets its authoritative publication gate.",
+    "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   }
 }
