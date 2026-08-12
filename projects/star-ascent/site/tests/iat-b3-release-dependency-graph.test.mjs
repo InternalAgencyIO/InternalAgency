@@ -13,6 +13,10 @@ import { spawnSync } from "node:child_process";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+// Keep the separately versioned Privacy Vault prerequisite in the canonical
+// B3 spec inventory without touching unrelated package-script work.
+import "./iat-b3-privacy-vault-native-instruction-plan.test.mjs";
+
 import {
   RELEASE_DEPENDENCY_APPLICABILITY_POLICY,
   RELEASE_DEPENDENCY_ARTIFACT_POLICY,
@@ -28,6 +32,12 @@ import {
   parseReleaseDependencyGraphJson,
   validateReleaseDependencyGraphManifest,
 } from "../scripts/validate-iat-b3-release-dependency-graph.mjs";
+import {
+  parsePrivacyVaultNativeInstructionPlanJson,
+  PRIVACY_VAULT_NATIVE_HOST_PREREQUISITE_BINDING,
+  PRIVACY_VAULT_NATIVE_INSTRUCTION_SOURCE_BINDINGS,
+  validatePrivacyVaultNativeInstructionPlanManifest,
+} from "../scripts/validate-iat-b3-privacy-vault-native-instruction-plan.mjs";
 import {
   TOKEN_2022_HOST_SOURCE_BINDINGS,
   parseToken2022ConfidentialHostCompatibilityJson,
@@ -56,6 +66,23 @@ const TOKEN_HOST_BOUND_FILES = new Map(TOKEN_2022_HOST_SOURCE_BINDINGS.map((bind
   binding.path,
   readFileSync(join(REPOSITORY_ROOT, binding.path)),
 ]));
+const PRIVACY_NATIVE_PACKET_PATH = join(
+  SITE,
+  "docs",
+  "b3",
+  "iat-b3-privacy-vault-native-instruction-plan.v1.json",
+);
+const PRIVACY_NATIVE_PACKET = parsePrivacyVaultNativeInstructionPlanJson(
+  readFileSync(PRIVACY_NATIVE_PACKET_PATH, "utf8"),
+  PRIVACY_NATIVE_PACKET_PATH,
+);
+const PRIVACY_NATIVE_BOUND_FILES = new Map([
+  ...new Set([
+    ...PRIVACY_VAULT_NATIVE_INSTRUCTION_SOURCE_BINDINGS.map(({ path }) => path),
+    ...TOKEN_2022_HOST_SOURCE_BINDINGS.map(({ path }) => path),
+    PRIVACY_VAULT_NATIVE_HOST_PREREQUISITE_BINDING.path,
+  ]),
+].map((path) => [path, readFileSync(join(REPOSITORY_ROOT, path))]));
 
 const EXPECTED_NODE_IDS = Object.freeze([
   "LIVE_ESTATE_CANONICAL_MINT_DECISION",
@@ -159,7 +186,7 @@ test("canonical production graph is valid, records the completed host root, and 
   assert.equal(node(DRAFT, "V2_FEATURE_PARITY").blocker, null);
   assert.equal(
     node(DRAFT, "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY").completionEvidence.artifactSha256,
-    "ccf5a60779598ef0c6ea719603f49cd6824b8a8489d83109c4d537e382e8c5f8",
+    "0f8bc5f9622877e4f6298ea1d4c4f7eea4a0427f04e0f6a49f6a07eb66c5fb1b",
   );
   for (const key of [
     "externalTruthVerified",
@@ -177,6 +204,11 @@ test("canonical production graph is valid, records the completed host root, and 
     path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
     sha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
     bindingScope: "REFERENCE_CONTRACT_ONLY",
+  });
+  assert.deepEqual(DRAFT.artifactBindingPolicy.privacyVaultNativeInstructionPlanBinding, {
+    path: "projects/star-ascent/site/docs/b3/iat-b3-privacy-vault-native-instruction-plan.v1.json",
+    sha256: "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
+    bindingScope: "NONACTIVATING_PREREQUISITE_ONLY",
   });
   assert.equal("ready" in result, false);
   assert.equal("GO" in result, false);
@@ -206,6 +238,27 @@ test("completed Token-2022 host root is source-bound and cannot promote privacy,
       boundFiles: TOKEN_HOST_BOUND_FILES,
     }).valid, false);
   }
+});
+
+test("source-bound native instruction prerequisite preserves the blocked Privacy Vault parent", () => {
+  const result = validatePrivacyVaultNativeInstructionPlanManifest(PRIVACY_NATIVE_PACKET, {
+    boundFiles: PRIVACY_NATIVE_BOUND_FILES,
+  });
+  assert.equal(result.valid, true);
+  assert.equal(result.accountLocalInstructionPrerequisiteComplete, true);
+  assert.equal(result.privacyVaultLifecycleComplete, false);
+  assert.equal(result.runtimeDailyLawAuthenticationVerified, false);
+  assert.equal(result.proofContextLifecycleComplete, false);
+  assert.equal(result.devnetVerified, false);
+  assert.equal(result.activationReady, false);
+  assert.equal(result.mainnetExecutionAuthorized, false);
+  assert.equal(result.mainnetStatus, "HOLD");
+  assert.equal(node(DRAFT, "PRIVACY_VAULT_CLIENT").status, "BLOCKED");
+  assert.equal(node(DRAFT, "PRIVACY_VAULT_CLIENT").completionEvidence, null);
+  assert.match(
+    node(DRAFT, "PRIVACY_VAULT_CLIENT").blocker,
+    /lifecycle and native integration evidence remain incomplete/u,
+  );
 });
 
 test("schema pins the exact 28-node, 132-edge structural-only surface", () => {
@@ -267,7 +320,7 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
   assert.equal(RELEASE_DEPENDENCY_EDGES.length, 132);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "9c1919ed11aa48363e024a20aef164fbee87258e77e6c025f7b3da927ac5aee8");
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "d0890f284394350b01f08a693bf7c4272e34b707d0c558bc1cb90d92f4b270f3");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
@@ -302,6 +355,9 @@ test("inventory completeness is false for node, edge, scope, or artifact inconsi
     (value) => { value.edges[1] = ["UNRECOGNIZED_NODE", value.edges[1][1]]; },
     (value) => { value.scope.contract = "ALTERED_STRUCTURAL_SCOPE"; },
     (value) => { value.artifactBindingPolicy.ownerPolicyFreezeBinding.sha256 = "ab".repeat(32); },
+    (value) => {
+      value.artifactBindingPolicy.privacyVaultNativeInstructionPlanBinding.sha256 = "cd".repeat(32);
+    },
     (value) => {
       node(value, "CORE_CUSTODY_POLICY_ADAPTER").contractArtifact = clone(
         node(value, "FACTION_ECONOMICS_FUNDING").contractArtifact,

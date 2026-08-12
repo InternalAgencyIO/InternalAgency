@@ -103,6 +103,12 @@ Only fixed, repository-relative, allowlisted B3 reference artifacts may be bound
 4. recomputes SHA-256 and rejects drift;
 5. runs only fixed in-process scoped validators—never a validator named by the manifest.
 
+The artifact policy also binds the separately versioned Privacy Vault native
+instruction-plan prerequisite packet and its exact source inventory. That
+auxiliary binding is fail-closed audit input only: it neither adds a graph node
+nor changes the 28-node/132-edge topology, and it cannot promote the blocked
+`PRIVACY_VAULT_CLIENT` full-lifecycle predicate.
+
 The unresolved localization and media inputs intentionally have `contractArtifact: null` and remain blocked. The validator does not read or hash the changing site/i18n files. The canonical media blocker retains the exact 14 missing full masters; it is not an accepted failure and cannot be marked `N/A`.
 
 ## Canonical input hardening

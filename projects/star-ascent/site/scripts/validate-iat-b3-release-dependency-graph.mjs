@@ -8,6 +8,11 @@ import { canonicalizeRfc8785 } from "./iat-v2-canonical-json.mjs";
 import { validateExternalCheckpointProviderReadinessManifest } from "./validate-iat-b3-external-checkpoint-provider-readiness.mjs";
 import { validateIdentityFreezeManifest } from "./validate-iat-b3-identity-freeze.mjs";
 import {
+  parsePrivacyVaultNativeInstructionPlanJson,
+  PRIVACY_VAULT_NATIVE_INSTRUCTION_SOURCE_BINDINGS,
+  validatePrivacyVaultNativeInstructionPlanManifest,
+} from "./validate-iat-b3-privacy-vault-native-instruction-plan.mjs";
+import {
   TOKEN_2022_HOST_SOURCE_BINDINGS,
   validateToken2022ConfidentialHostCompatibilityManifest,
 } from "./validate-iat-b3-token-2022-confidential-host-compatibility.mjs";
@@ -30,12 +35,17 @@ const DEFAULT_MANIFEST_PATH = resolve(
 );
 const V2_PARITY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-  sha256: "4ba839dfcfe49a87194e849ea7445e433817f7494791b6eaee4c45039bb2dd0e",
+  sha256: "adf07cb5ff0f2b1d49a79fd724e0385777269b2d7c4055d91934a13995fb843a",
 });
 const OWNER_POLICY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
   sha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
   bindingScope: "REFERENCE_CONTRACT_ONLY",
+});
+const PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET = Object.freeze({
+  path: "projects/star-ascent/site/docs/b3/iat-b3-privacy-vault-native-instruction-plan.v1.json",
+  sha256: "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
+  bindingScope: "NONACTIVATING_PREREQUISITE_ONLY",
 });
 
 const SCOPE = Object.freeze({
@@ -69,6 +79,7 @@ export const RELEASE_DEPENDENCY_ARTIFACT_POLICY = Object.freeze({
   arbitraryValidatorExecutionAllowed: false,
   networkReadsAllowed: false,
   ownerPolicyFreezeBinding: OWNER_POLICY_SCOPED_PACKET,
+  privacyVaultNativeInstructionPlanBinding: PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET,
 });
 
 const artifact = (path, sha256) => Object.freeze({
@@ -88,11 +99,11 @@ const ARTIFACTS = Object.freeze({
   ),
   shielded: artifact(
     "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
-    "c2540c628e37eabc720ceeee6686141e06b6725a8139b343cef1f2f43d315c68",
+    "a9df9c5c976bba0ebdc5cbcbe9c77fe0de77b4949a3cc72b57c75717517c77df",
   ),
   tokenHost: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
-    "ccf5a60779598ef0c6ea719603f49cd6824b8a8489d83109c4d537e382e8c5f8",
+    "0f8bc5f9622877e4f6298ea1d4c4f7eea4a0427f04e0f6a49f6a07eb66c5fb1b",
   ),
   core: artifact(
     "projects/star-ascent/site/docs/b3/CORE_TEAM_CAP.md",
@@ -474,6 +485,9 @@ function readCommittedArtifact(path, expectedSha256, violations) {
     .map(({ contractArtifact }) => contractArtifact?.path)
     .filter(Boolean))];
   allowed.push(RELEASE_DEPENDENCY_ARTIFACT_POLICY.ownerPolicyFreezeBinding.path);
+  allowed.push(
+    RELEASE_DEPENDENCY_ARTIFACT_POLICY.privacyVaultNativeInstructionPlanBinding.path,
+  );
   if (!allowed.includes(path)) {
     violations.push(`artifact ${path}: path is not in the immutable B3 artifact allowlist`);
     return null;
@@ -553,6 +567,50 @@ function readCommittedTokenHostBinding(binding, violations) {
     return bytes;
   } catch (error) {
     violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: cannot read committed source binding ${binding.path} (${error.message})`);
+    return null;
+  }
+}
+
+function readCommittedPrivacyNativeInstructionBinding(binding, violations) {
+  if (!PRIVACY_VAULT_NATIVE_INSTRUCTION_SOURCE_BINDINGS.some(
+    (entry) => entry.path === binding.path,
+  ) || isAbsolute(binding.path)
+    || binding.path.includes("\\")
+    || binding.path.split("/").includes("..")) {
+    violations.push(`PRIVACY_VAULT_CLIENT: invalid native instruction source binding ${binding.path}`);
+    return null;
+  }
+  const absolutePath = resolve(REPOSITORY_ROOT, binding.path);
+  try {
+    if (lstatSync(absolutePath).isSymbolicLink()) {
+      violations.push(`PRIVACY_VAULT_CLIENT: symbolic native instruction source binding forbidden ${binding.path}`);
+      return null;
+    }
+  } catch (error) {
+    violations.push(`PRIVACY_VAULT_CLIENT: cannot inspect native instruction source binding ${binding.path} (${error.message})`);
+    return null;
+  }
+  const clean = spawnSync("git", ["diff", "--quiet", "HEAD", "--", binding.path], {
+    cwd: REPOSITORY_ROOT,
+    windowsHide: true,
+  });
+  if (clean.status !== 0) {
+    violations.push(`PRIVACY_VAULT_CLIENT: native instruction source binding is dirty ${binding.path}`);
+    return null;
+  }
+  try {
+    const bytes = execFileSync("git", ["show", `HEAD:${binding.path}`], {
+      cwd: REPOSITORY_ROOT,
+      maxBuffer: 64 * 1024 * 1024,
+      windowsHide: true,
+    });
+    if (bytes.length !== binding.byteLength || sha256Bytes(bytes) !== binding.sha256) {
+      violations.push(`PRIVACY_VAULT_CLIENT: native instruction source binding drifted ${binding.path}`);
+      return null;
+    }
+    return bytes;
+  } catch (error) {
+    violations.push(`PRIVACY_VAULT_CLIENT: cannot read committed native instruction source binding ${binding.path} (${error.message})`);
     return null;
   }
 }
@@ -659,6 +717,29 @@ function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnix
       }
     } catch (error) {
       violations.push(`TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: scoped validator failed closed (${error.message})`);
+    }
+  }
+
+  const privacyNativeBytes = bytesByPath.get(
+    PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET.path,
+  );
+  if (privacyNativeBytes) {
+    try {
+      const privacyNative = parsePrivacyVaultNativeInstructionPlanJson(
+        privacyNativeBytes.toString("utf8"),
+        PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET.path,
+      );
+      const result = validatePrivacyVaultNativeInstructionPlanManifest(privacyNative, {
+        boundFiles: bytesByPath,
+      });
+      for (const violation of result.violations) {
+        violations.push(`PRIVACY_VAULT_CLIENT: native instruction prerequisite: ${violation}`);
+      }
+      // This packet is a source-bound prerequisite only. It deliberately does
+      // not set PRIVACY_VAULT_CLIENT true; that node requires the full native,
+      // proof, runtime, recovery, Devnet, and independent-review lifecycle.
+    } catch (error) {
+      violations.push(`PRIVACY_VAULT_CLIENT: native instruction prerequisite validator failed closed (${error.message})`);
     }
   }
 
@@ -970,6 +1051,21 @@ export function validateReleaseDependencyGraphManifest(manifest, options = {}) {
     }
     for (const binding of TOKEN_2022_HOST_SOURCE_BINDINGS) {
       const bytes = readCommittedTokenHostBinding(binding, violations);
+      if (bytes) bytesByPath.set(binding.path, bytes);
+    }
+    const privacyNativePacketBytes = readCommittedArtifact(
+      PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET.path,
+      PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET.sha256,
+      violations,
+    );
+    if (privacyNativePacketBytes) {
+      bytesByPath.set(
+        PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET.path,
+        privacyNativePacketBytes,
+      );
+    }
+    for (const binding of PRIVACY_VAULT_NATIVE_INSTRUCTION_SOURCE_BINDINGS) {
+      const bytes = readCommittedPrivacyNativeInstructionBinding(binding, violations);
       if (bytes) bytesByPath.set(binding.path, bytes);
     }
     const parityBytes = readCommittedScopedPacket(V2_PARITY_SCOPED_PACKET, violations);

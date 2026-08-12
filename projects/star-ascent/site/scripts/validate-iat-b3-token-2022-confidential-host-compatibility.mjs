@@ -56,13 +56,13 @@ const DOES_NOT_CERTIFY = Object.freeze([
 export const TOKEN_2022_HOST_SOURCE_BINDINGS = Object.freeze([
   Object.freeze({
     path: "projects/star-ascent/site/programs/iat_b3_vault/Cargo.toml",
-    sha256: "02838be1e69291fa509278222e91b1c166fddedca6c44c1e10d89e010792c147",
-    byteLength: 770,
+    sha256: "333389a41625cf9bc40ccaa21f94298a4de6244ad6bab2dd03dcaf789b2c54be",
+    byteLength: 861,
   }),
   Object.freeze({
     path: "projects/star-ascent/site/programs/iat_b3_vault/src/lib.rs",
-    sha256: "af336e7b79566525f408c7fead51c03583b69740ac55bf1e1eaf08b0590429ef",
-    byteLength: 52037,
+    sha256: "d09d02b6f7124241d0d7e80d310a724b56f296422d729d9c5f34363ffa39127f",
+    byteLength: 52248,
   }),
   Object.freeze({
     path: "projects/star-ascent/site/programs/iat_b3_vault/src/token_2022_host.rs",

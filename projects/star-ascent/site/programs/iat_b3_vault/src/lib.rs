@@ -4,16 +4,20 @@
 //! Host-only lifecycle planner for the optional IAT B3 Privacy Vault client.
 //!
 //! This crate performs no RPC, persistent key storage, signing, account
-//! mutation, or token instruction encoding. The optional host-compatibility
-//! feature generates only fresh ephemeral proof test vectors and returns no key
-//! material. It cannot authorize Devnet or Mainnet. Its purpose is to make the
-//! documented lifecycle shape and its fail-closed boundaries deterministic
-//! before an exact-version native client adapter is implemented and
-//! independently reviewed.
+//! mutation, token CPI, or instruction submission. The optional
+//! `native_instruction_plan` module constructs only unsigned, inert,
+//! account-local Token-2022 instructions; the host-compatibility feature also
+//! generates fresh ephemeral proof test vectors and returns no key material. It
+//! cannot authorize Devnet or Mainnet. Its purpose is to make the documented
+//! lifecycle shape and its fail-closed boundaries deterministic before a full
+//! exact-version native client adapter is implemented and independently
+//! reviewed.
 
 pub mod journal_codec;
 pub mod journal_transition;
 pub mod journal_transition_codec;
+#[cfg(feature = "token-2022-host-compatibility")]
+pub mod native_instruction_plan;
 #[cfg(feature = "token-2022-host-compatibility")]
 pub mod token_2022_host;
 

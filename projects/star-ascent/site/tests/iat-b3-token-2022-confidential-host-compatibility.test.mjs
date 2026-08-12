@@ -32,6 +32,7 @@ test("canonical Token-2022 confidential host compatibility packet is complete bu
   assert.deepEqual(result.violations, []);
   assert.equal(result.valid, true);
   assert.equal(result.hostCompatibilityComplete, true);
+  assert.equal(MANIFEST.hostChecks.instructionConstruction, false);
   assert.equal(result.privacyVaultLifecycleComplete, false);
   assert.equal(result.devnetVerified, false);
   assert.equal(result.activationReady, false);

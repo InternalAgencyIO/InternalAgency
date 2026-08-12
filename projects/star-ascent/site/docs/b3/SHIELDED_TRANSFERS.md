@@ -202,6 +202,22 @@ verified and the migration question is resolved.
 
 ## 10. Release gates
 
+The current source-bound prerequisite inventory is deliberately narrower than
+this full lifecycle gate:
+
+- `iat-b3-token-2022-confidential-host-compatibility.v1.json` certifies the
+  read-only exact-version host parser and proof primitives. Its host-only
+  `instructionConstruction` field remains `false`.
+- `iat-b3-privacy-vault-native-instruction-plan.v1.json` separately certifies
+  exact unsigned official builders for deposit, pending-balance application,
+  and both credit-permission toggles. It certifies no signer, RPC, submission,
+  mutation, proof-context lifecycle, Daily Law runtime authentication, Devnet,
+  activation, release, or Mainnet authority.
+
+These packets close prerequisites only. They do not satisfy
+`PRIVACY_VAULT_FULL_LIFECYCLE_REVIEW_PACKET`; `PRIVACY_VAULT_CLIENT` remains
+blocked.
+
 - independently determine whether a canonical live mint already exists;
 - pin the exact Token-2022 and ZK proof program identities available on Mainnet;
 - prove ordinary and confidential IAT transfers both invoke the hook on Devnet;

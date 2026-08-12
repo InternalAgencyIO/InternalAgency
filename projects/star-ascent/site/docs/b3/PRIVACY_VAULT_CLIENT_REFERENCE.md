@@ -1,8 +1,8 @@
 # B3 Privacy Vault client lifecycle reference
 
-Status: **documented host-only lifecycle shape covered, nonactivating**; no
-RPC, proof generation, instruction encoding, signing, deployment, or
-activation. Mainnet remains **HOLD**.
+Status: **documented host lifecycle plus a source-bound account-local native
+instruction subset, nonactivating**; no RPC, proof lifecycle, signing,
+deployment, or activation. Mainnet remains **HOLD**.
 
 [`iat_b3_vault`](../../programs/iat_b3_vault) is an isolated `no_std` Rust
 workspace library for the optional wallet-facing Privacy Vault lifecycle. It
@@ -36,9 +36,11 @@ The planner represents these documented wallet phases:
     proof-context cleanup plans.
 
 `documented_lifecycle_shape_covered: true` means only that these reference
-shapes are represented. It does not mean the instructions are encoded, the
-proofs or observations are authenticated, the journal is durable, or any phase
-has executed on Solana.
+shapes are represented. A separately versioned prerequisite encodes exact
+unsigned Token-2022 instructions for deposit, pending-balance application, and
+both credit-permission toggles. It does not encode the remaining operations,
+authenticate proofs or observations, make the journal durable, sign or submit
+transactions, or prove that any phase executed on Solana.
 
 Every phase requires the same canonical Token-2022 mint and an owner-bound token
 account. Configuration additionally requires explicit opt-in, owner
@@ -123,11 +125,14 @@ Every plan fixes these truth flags:
 - `activation_ready: false`;
 - `mainnet_hold: true`.
 
-The crate validates caller-supplied reference facts; it does not authenticate
-Solana accounts or bytecode. Production completion still requires pinned
-Token-2022/ZK client and program versions; authenticated account owner, address,
-data, and program-bytecode reads; native instruction construction; real local
-proof generation and verification; secure platform keystore integration;
+The crate validates caller-supplied reference facts and can construct an inert,
+unsigned account-local instruction subset from read-only Token-2022 mint and
+account capabilities. It does not authenticate Daily Law state or deployed
+program bytecode. Production completion still requires ceremony-time pinned
+Token-2022/ZK program bytes; authenticated Daily Law, account, and chain reads;
+native construction for configure, confidential transfer, withdraw,
+empty/close, proof contexts, and hook resolution; real local proof generation
+and verification; secure platform keystore integration;
 durable atomic journal persistence; RPC-finality/fork-aware uncertain-result
 recovery; authenticated proof-context discovery and cleanup; key-loss UX;
 enforcement against direct-client bypasses; adversarial tests; complete Devnet

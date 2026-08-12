@@ -83,11 +83,16 @@
           "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
           "sha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
           "bindingScope": "REFERENCE_CONTRACT_ONLY"
+        },
+        "privacyVaultNativeInstructionPlanBinding": {
+          "path": "projects/star-ascent/site/docs/b3/iat-b3-privacy-vault-native-instruction-plan.v1.json",
+          "sha256": "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
+          "bindingScope": "NONACTIVATING_PREREQUISITE_ONLY"
         }
       }
     },
     "graphDefinitionSha256": {
-      "const": "9c1919ed11aa48363e024a20aef164fbee87258e77e6c025f7b3da927ac5aee8"
+      "const": "d0890f284394350b01f08a693bf7c4272e34b707d0c558bc1cb90d92f4b270f3"
     },
     "nodes": {
       "type": "array",
@@ -241,7 +246,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
-                "sha256": "ccf5a60779598ef0c6ea719603f49cd6824b8a8489d83109c4d537e382e8c5f8",
+                "sha256": "0f8bc5f9622877e4f6298ea1d4c4f7eea4a0427f04e0f6a49f6a07eb66c5fb1b",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -1045,7 +1050,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
-                "sha256": "c2540c628e37eabc720ceeee6686141e06b6725a8139b343cef1f2f43d315c68",
+                "sha256": "a9df9c5c976bba0ebdc5cbcbe9c77fe0de77b4949a3cc72b57c75717517c77df",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
