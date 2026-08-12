@@ -6,6 +6,12 @@
 //! change: owner acceptance, authenticated preactivation facts, production
 //! identities, final binaries, and execution evidence remain absent.
 
+#[cfg(feature = "runtime-account-lifecycle")]
+pub mod runtime_persistence;
+
+extern crate alloc;
+
+use alloc::boxed::Box;
 use core::fmt;
 use sha2::{Digest, Sha256};
 
@@ -260,6 +266,28 @@ pub fn prepare_config_genesis_activation_plan(
     conservation: &GenesisConservationReceipt,
     input: ActivateInput,
 ) -> Result<ConfigGenesisActivationPlan, ConfigGenesisTransitionCandidateError> {
+    prepare_config_genesis_activation_plan_boxed(
+        expected_config_key,
+        current,
+        law,
+        conservation,
+        Box::new(input),
+    )
+    .map(|plan| *plan)
+}
+
+/// Heap-bounded counterpart used by the runtime full-readset composer. Keeping
+/// the retained input, activation result, and indivisible five-poststate plan
+/// behind one indirection apiece prevents their fixed arrays from sharing a
+/// single SBF frame; it does not change validation order or expose poststates.
+#[inline(never)]
+pub(crate) fn prepare_config_genesis_activation_plan_boxed(
+    expected_config_key: [u8; 32],
+    current: ConfigGenesisState,
+    law: &ValidatedDailyLawWrite,
+    conservation: &GenesisConservationReceipt,
+    input: Box<ActivateInput>,
+) -> Result<Box<ConfigGenesisActivationPlan>, ConfigGenesisTransitionCandidateError> {
     if current.phase != GenesisPhase::GenesisStaging || current.config.active {
         return Err(ConfigGenesisTransitionCandidateError::NonCanonicalPhase);
     }
@@ -297,8 +325,9 @@ pub fn prepare_config_genesis_activation_plan(
     require_vacuous_activation_input(&current, &input)?;
 
     let activation_readset_sha256 = hash_activation_readset(expected_config_key, &input)?;
-    let result =
-        activate(law, input).map_err(ConfigGenesisTransitionCandidateError::RetainedActivation)?;
+    let result = Box::new(
+        activate(law, *input).map_err(ConfigGenesisTransitionCandidateError::RetainedActivation)?,
+    );
     let config = ConfigGenesisState {
         phase: GenesisPhase::Active,
         config: result.config,
@@ -311,7 +340,7 @@ pub fn prepare_config_genesis_activation_plan(
         &result.liquidity,
         &result.core_reward,
     )?;
-    Ok(ConfigGenesisActivationPlan {
+    Ok(Box::new(ConfigGenesisActivationPlan {
         config_key: expected_config_key,
         config,
         treasury: result.treasury,
@@ -323,7 +352,7 @@ pub fn prepare_config_genesis_activation_plan(
         conservation_manifest_sha256: conservation.manifest_sha256(),
         activation_readset_sha256,
         poststates_sha256,
-    })
+    }))
 }
 
 /// Runtime composers may reuse the exact B3 preconditions without obtaining a

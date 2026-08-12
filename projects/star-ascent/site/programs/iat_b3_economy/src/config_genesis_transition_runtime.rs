@@ -7,17 +7,40 @@
 //! state, but cannot prove complete historical absence of prior writes and
 //! cannot authorize or execute the transition.
 
+extern crate alloc;
+
+use alloc::boxed::Box;
+
+#[cfg(feature = "runtime-account-lifecycle")]
+use crate::config_genesis_transition::runtime_persistence::prepare_held_config_genesis_runtime_persistence_plan;
+#[cfg(feature = "runtime-account-lifecycle")]
+pub use crate::config_genesis_transition::runtime_persistence::{
+    execute_held_config_genesis_runtime_persistence_plan, ConfigGenesisRuntimePersistenceError,
+    ConfigGenesisRuntimePersistenceExecutionGuard, ConfigGenesisRuntimePersistenceReceipt,
+    ConfigGenesisRuntimePersistenceTruth, HeldConfigGenesisRuntimePersistencePlan,
+    CONFIG_GENESIS_MIXED_PERSISTENCE_DOMAIN, CONFIG_GENESIS_RUNTIME_PERSISTENCE_STATUS,
+    CONFIG_GENESIS_RUNTIME_PERSISTENCE_TRUTH,
+};
 use crate::config_genesis_transition::{
-    prepare_config_genesis_activation_plan, validate_activate_genesis_prerequisites,
+    prepare_config_genesis_activation_plan_boxed, validate_activate_genesis_prerequisites,
 };
 use crate::genesis_conservation_runtime::{
     AuthenticatedGenesisConservationReceipt, AuthenticatedGenesisLaneCapability,
     GenesisConservationRuntimeError, GENESIS_ACTIVATE_LANE_WRITABILITY,
 };
+#[cfg(feature = "runtime-account-lifecycle")]
+use crate::native_adapter::CreatePdaLifecycle;
 use crate::native_adapter::{derive_pda, NativeEconomyBinding, PdaIdentity, StrictStateValue};
+#[cfg(feature = "runtime-account-lifecycle")]
+use crate::runtime_account_lifecycle::require_system_program;
+#[cfg(feature = "runtime-account-lifecycle")]
 use crate::runtime_adapter::{
-    parse_config_genesis_account_info_with_runtime_law, RuntimeAdapterError,
-    RuntimeValidatedDailyLawWrite,
+    authenticate_runtime_genesis_staging_writable_config, authenticate_system_payer_account_info,
+    RuntimeGenesisStagingWritableConfig,
+};
+use crate::runtime_adapter::{
+    parse_config_genesis_account_info_with_runtime_law, ReadonlyConfigGenesisAccount,
+    RuntimeAdapterError, RuntimeValidatedDailyLawWrite,
 };
 use crate::token_2022_runtime::{ReadonlyCanonicalEconomyMint, ReadonlyPublicTokenAccount};
 use crate::{
@@ -27,7 +50,11 @@ use crate::{
 };
 use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
+#[cfg(feature = "runtime-account-lifecycle")]
+use solana_rent::Rent;
 use solana_sdk_ids::system_program;
+#[cfg(feature = "runtime-account-lifecycle")]
+use solana_sysvar::Sysvar;
 
 pub const CONFIG_GENESIS_RUNTIME_ACTIVATION_READSET_DOMAIN: &[u8] =
     b"IAT_B3_CONFIG_GENESIS_RUNTIME_ACTIVATION_READSET_V2";
@@ -88,6 +115,8 @@ pub enum ConfigGenesisTransitionRuntimeError {
     Runtime(RuntimeAdapterError),
     ConservationRuntime(GenesisConservationRuntimeError),
     Candidate(ConfigGenesisTransitionCandidateError),
+    #[cfg(feature = "runtime-account-lifecycle")]
+    Persistence(ConfigGenesisRuntimePersistenceError),
     RuntimeLawBindingMismatch,
     ConservationConfigMismatch,
     ConservationMintMismatch,
@@ -121,6 +150,13 @@ impl From<GenesisConservationRuntimeError> for ConfigGenesisTransitionRuntimeErr
     }
 }
 
+#[cfg(feature = "runtime-account-lifecycle")]
+impl From<ConfigGenesisRuntimePersistenceError> for ConfigGenesisTransitionRuntimeError {
+    fn from(value: ConfigGenesisRuntimePersistenceError) -> Self {
+        Self::Persistence(value)
+    }
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum RuntimeCoreRewardTargetPath {
     Vacant,
@@ -133,7 +169,7 @@ pub enum RuntimeCoreRewardTargetPath {
 /// Rent value, System CPI, write intent, dispatcher, or authorization bit.
 #[derive(Debug, Eq, PartialEq)]
 pub struct RuntimeAuthenticatedConfigGenesisActivationPlan {
-    plan: ConfigGenesisActivationPlan,
+    plan: Box<ConfigGenesisActivationPlan>,
     conservation_account_set_sha256: [u8; 32],
     runtime_activation_readset_sha256: [u8; 32],
     core_reward_target_key: [u8; 32],
@@ -302,34 +338,284 @@ pub fn prepare_runtime_authenticated_config_genesis_activation_plan(
     lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
     core_reward_target: &AccountInfo<'_>,
 ) -> Result<RuntimeAuthenticatedConfigGenesisActivationPlan, ConfigGenesisTransitionRuntimeError> {
-    let law_program_id = runtime_law.gate().law_program_id();
-    if runtime_law.mint() != binding.mint()
-        || runtime_law.law_program_owner() != law_program_id
-        || canonical_mint.transfer_hook_program() != law_program_id
-    {
-        return Err(ConfigGenesisTransitionRuntimeError::RuntimeLawBindingMismatch);
-    }
-    if conservation.config() != binding.config() {
-        return Err(ConfigGenesisTransitionRuntimeError::ConservationConfigMismatch);
-    }
-    if conservation.mint() != binding.mint() {
-        return Err(ConfigGenesisTransitionRuntimeError::ConservationMintMismatch);
-    }
-
+    require_runtime_activation_outer_bindings(runtime_law, binding, conservation, canonical_mint)?;
     let config =
         parse_config_genesis_account_info_with_runtime_law(runtime_law, binding, config_account)?;
+    prepare_runtime_authenticated_config_genesis_activation_plan_from_config(
+        runtime_law,
+        binding,
+        config,
+        conservation,
+        canonical_mint,
+        community_tokens,
+        stake_tokens,
+        lane_tokens,
+        lane_states,
+        core_reward_target,
+    )
+}
+
+/// Extend the exact runtime activation read set into one held mixed
+/// persistence prerequisite. The retained writable Config meta is authenticated
+/// through a distinct `GENESIS_STAGING` capability; CoreReward lifecycle shape
+/// is derived from its live vacant/prefunded prestate, while payer, System
+/// Program, and runtime Rent are frozen into the returned commitment.
+///
+/// The result remains nonactivating: its execution guard has no production
+/// constructor and no ABI, entrypoint, dispatcher, or authorization source
+/// consumes it.
+#[cfg(feature = "runtime-account-lifecycle")]
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+pub fn prepare_runtime_authenticated_config_genesis_persistence_plan(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    config_account: &AccountInfo<'_>,
+    conservation: &AuthenticatedGenesisConservationReceipt,
+    canonical_mint: &ReadonlyCanonicalEconomyMint,
+    community_tokens: &ReadonlyPublicTokenAccount,
+    stake_tokens: &ReadonlyPublicTokenAccount,
+    lane_tokens: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT - 1],
+    lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
+    core_reward_target: &AccountInfo<'_>,
+    payer: &AccountInfo<'_>,
+    system: &AccountInfo<'_>,
+) -> Result<Box<HeldConfigGenesisRuntimePersistencePlan>, ConfigGenesisTransitionRuntimeError> {
+    let constraints = prepare_runtime_authenticated_config_genesis_persistence_constraints(
+        runtime_law,
+        binding,
+        config_account,
+        conservation,
+        canonical_mint,
+        community_tokens,
+        stake_tokens,
+        lane_tokens,
+        lane_states,
+        core_reward_target,
+    )?;
+    require_runtime_persistence_system_and_payer(
+        runtime_law,
+        binding,
+        &constraints.staging_config,
+        payer,
+        system,
+    )?;
+    let rent = load_config_genesis_runtime_rent()?;
+    finish_runtime_authenticated_config_genesis_persistence_plan(
+        runtime_law,
+        binding,
+        constraints,
+        lane_states,
+        core_reward_target,
+        payer,
+        system,
+        &rent,
+    )
+}
+
+#[cfg(all(feature = "runtime-account-lifecycle", test))]
+#[allow(clippy::too_many_arguments)]
+fn prepare_runtime_authenticated_config_genesis_persistence_plan_with_rent(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    config_account: &AccountInfo<'_>,
+    conservation: &AuthenticatedGenesisConservationReceipt,
+    canonical_mint: &ReadonlyCanonicalEconomyMint,
+    community_tokens: &ReadonlyPublicTokenAccount,
+    stake_tokens: &ReadonlyPublicTokenAccount,
+    lane_tokens: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT - 1],
+    lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
+    core_reward_target: &AccountInfo<'_>,
+    payer: &AccountInfo<'_>,
+    system: &AccountInfo<'_>,
+    rent: &Rent,
+) -> Result<Box<HeldConfigGenesisRuntimePersistencePlan>, ConfigGenesisTransitionRuntimeError> {
+    let constraints = prepare_runtime_authenticated_config_genesis_persistence_constraints(
+        runtime_law,
+        binding,
+        config_account,
+        conservation,
+        canonical_mint,
+        community_tokens,
+        stake_tokens,
+        lane_tokens,
+        lane_states,
+        core_reward_target,
+    )?;
+    require_runtime_persistence_system_and_payer(
+        runtime_law,
+        binding,
+        &constraints.staging_config,
+        payer,
+        system,
+    )?;
+    finish_runtime_authenticated_config_genesis_persistence_plan(
+        runtime_law,
+        binding,
+        constraints,
+        lane_states,
+        core_reward_target,
+        payer,
+        system,
+        rent,
+    )
+}
+
+#[cfg(feature = "runtime-account-lifecycle")]
+struct RuntimeConfigGenesisPersistenceConstraints {
+    staging_config: RuntimeGenesisStagingWritableConfig,
+    activation: RuntimeAuthenticatedConfigGenesisActivationPlan,
+}
+
+#[cfg(feature = "runtime-account-lifecycle")]
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+fn prepare_runtime_authenticated_config_genesis_persistence_constraints(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    config_account: &AccountInfo<'_>,
+    conservation: &AuthenticatedGenesisConservationReceipt,
+    canonical_mint: &ReadonlyCanonicalEconomyMint,
+    community_tokens: &ReadonlyPublicTokenAccount,
+    stake_tokens: &ReadonlyPublicTokenAccount,
+    lane_tokens: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT - 1],
+    lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
+    core_reward_target: &AccountInfo<'_>,
+) -> Result<RuntimeConfigGenesisPersistenceConstraints, ConfigGenesisTransitionRuntimeError> {
+    require_runtime_activation_outer_bindings(runtime_law, binding, conservation, canonical_mint)?;
+    let staging_config =
+        authenticate_runtime_genesis_staging_writable_config(runtime_law, binding, config_account)?;
+    let activation = prepare_runtime_authenticated_config_genesis_activation_plan_from_config(
+        runtime_law,
+        binding,
+        staging_config.as_readonly_observation(),
+        conservation,
+        canonical_mint,
+        community_tokens,
+        stake_tokens,
+        lane_tokens,
+        lane_states,
+        core_reward_target,
+    )?;
+    Ok(RuntimeConfigGenesisPersistenceConstraints {
+        staging_config,
+        activation,
+    })
+}
+
+#[cfg(feature = "runtime-account-lifecycle")]
+#[inline(never)]
+fn require_runtime_persistence_system_and_payer(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    staging_config: &RuntimeGenesisStagingWritableConfig,
+    payer: &AccountInfo<'_>,
+    system: &AccountInfo<'_>,
+) -> Result<(), ConfigGenesisTransitionRuntimeError> {
+    require_system_program(system).map_err(|error| {
+        ConfigGenesisTransitionRuntimeError::Persistence(
+            ConfigGenesisRuntimePersistenceError::Lifecycle(error),
+        )
+    })?;
+    authenticate_system_payer_account_info(
+        runtime_law.gate(),
+        binding,
+        payer,
+        staging_config.state().config.admin,
+    )
+    .map_err(|error| {
+        ConfigGenesisTransitionRuntimeError::Persistence(
+            ConfigGenesisRuntimePersistenceError::Runtime(error),
+        )
+    })?;
+    Ok(())
+}
+
+#[cfg(feature = "runtime-account-lifecycle")]
+#[inline(never)]
+fn load_config_genesis_runtime_rent() -> Result<Rent, ConfigGenesisTransitionRuntimeError> {
+    Rent::get().map_err(|_| {
+        ConfigGenesisTransitionRuntimeError::Runtime(RuntimeAdapterError::RentSysvarUnavailable)
+    })
+}
+
+#[cfg(feature = "runtime-account-lifecycle")]
+#[inline(never)]
+#[allow(clippy::too_many_arguments)]
+fn finish_runtime_authenticated_config_genesis_persistence_plan(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    constraints: RuntimeConfigGenesisPersistenceConstraints,
+    lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
+    core_reward_target: &AccountInfo<'_>,
+    payer: &AccountInfo<'_>,
+    system: &AccountInfo<'_>,
+    rent: &Rent,
+) -> Result<Box<HeldConfigGenesisRuntimePersistencePlan>, ConfigGenesisTransitionRuntimeError> {
+    let RuntimeConfigGenesisPersistenceConstraints {
+        staging_config,
+        activation,
+    } = constraints;
+    let RuntimeAuthenticatedConfigGenesisActivationPlan {
+        plan,
+        runtime_activation_readset_sha256,
+        core_reward_target_key,
+        core_reward_target_lamports,
+        core_reward_target_path,
+        ..
+    } = activation;
+    let expected_lifecycle = match core_reward_target_path {
+        RuntimeCoreRewardTargetPath::Vacant => CreatePdaLifecycle::CreateAccount,
+        RuntimeCoreRewardTargetPath::Prefunded => CreatePdaLifecycle::AllocateAssignAndFund,
+    };
+    let held = prepare_held_config_genesis_runtime_persistence_plan(
+        runtime_law.gate(),
+        binding,
+        &staging_config,
+        plan,
+        runtime_activation_readset_sha256,
+        core_reward_target_key,
+        core_reward_target_lamports,
+        lane_states,
+        payer,
+        core_reward_target,
+        system,
+        rent,
+    )?;
+    if held.core_reward_lifecycle() != expected_lifecycle {
+        return Err(ConfigGenesisTransitionRuntimeError::Persistence(
+            ConfigGenesisRuntimePersistenceError::CoreRewardPrestateMismatch,
+        ));
+    }
+    Ok(held)
+}
+
+#[allow(clippy::too_many_arguments)]
+#[inline(never)]
+fn prepare_runtime_authenticated_config_genesis_activation_plan_from_config(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    config: ReadonlyConfigGenesisAccount,
+    conservation: &AuthenticatedGenesisConservationReceipt,
+    canonical_mint: &ReadonlyCanonicalEconomyMint,
+    community_tokens: &ReadonlyPublicTokenAccount,
+    stake_tokens: &ReadonlyPublicTokenAccount,
+    lane_tokens: &[ReadonlyPublicTokenAccount; GENESIS_ALLOCATION_COUNT - 1],
+    lane_states: &[AuthenticatedGenesisLaneCapability; GENESIS_ALLOCATION_COUNT - 1],
+    core_reward_target: &AccountInfo<'_>,
+) -> Result<RuntimeAuthenticatedConfigGenesisActivationPlan, ConfigGenesisTransitionRuntimeError> {
     let current = config.state();
     if conservation.token_program() != current.config.token_program {
         return Err(ConfigGenesisTransitionRuntimeError::ConservationTokenProgramMismatch);
     }
 
-    let conservation_tokens = [
+    let conservation_tokens = Box::new([
         *community_tokens,
         lane_tokens[0],
         lane_tokens[1],
         lane_tokens[2],
         lane_tokens[3],
-    ];
+    ]);
     for (index, lane) in lane_states.iter().enumerate() {
         if lane.observed_writable() != GENESIS_ACTIVATE_LANE_WRITABILITY[index] {
             return Err(ConfigGenesisTransitionRuntimeError::LaneAccountMetaMismatch);
@@ -347,11 +633,13 @@ pub fn prepare_runtime_authenticated_config_genesis_activation_plan(
         return Err(ConfigGenesisTransitionRuntimeError::ConservationAccountSetMismatch);
     }
     let lanes = [TREASURY, ECOSYSTEM, CORE_TEAM, LIQUIDITY];
-    let lane_values = core::array::from_fn(|index| match lane_states[index].state() {
-        StrictStateValue::Lane(lane) if lane.lane == lanes[index] => Some(lane),
-        _ => None,
-    });
-    let [Some(treasury), Some(ecosystem), Some(core_team), Some(liquidity)] = lane_values else {
+    let lane_values = Box::new(core::array::from_fn(|index| {
+        match lane_states[index].state() {
+            StrictStateValue::Lane(lane) if lane.lane == lanes[index] => Some(lane),
+            _ => None,
+        }
+    }));
+    let [Some(treasury), Some(ecosystem), Some(core_team), Some(liquidity)] = *lane_values else {
         return Err(ConfigGenesisTransitionRuntimeError::LaneCapabilityOrderMismatch);
     };
 
@@ -400,7 +688,7 @@ pub fn prepare_runtime_authenticated_config_genesis_activation_plan(
 
     let (core_reward_target_lamports, core_reward_target_path) =
         authenticate_core_reward_target(core_reward_target, core_reward.key)?;
-    let input = ActivateInput {
+    let input = Box::new(ActivateInput {
         config_key: binding.config(),
         config: current.config,
         mint: ReadonlyMintState {
@@ -421,8 +709,8 @@ pub fn prepare_runtime_authenticated_config_genesis_activation_plan(
         liquidity,
         liquidity_tokens: semantic_token(lane_tokens[3]),
         core_reward_bump: core_reward.bump,
-    };
-    let plan = prepare_config_genesis_activation_plan(
+    });
+    let plan = prepare_config_genesis_activation_plan_boxed(
         binding.config(),
         current,
         runtime_law.gate(),
@@ -444,6 +732,28 @@ pub fn prepare_runtime_authenticated_config_genesis_activation_plan(
         core_reward_target_lamports,
         core_reward_target_path,
     })
+}
+
+fn require_runtime_activation_outer_bindings(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    conservation: &AuthenticatedGenesisConservationReceipt,
+    canonical_mint: &ReadonlyCanonicalEconomyMint,
+) -> Result<(), ConfigGenesisTransitionRuntimeError> {
+    let law_program_id = runtime_law.gate().law_program_id();
+    if runtime_law.mint() != binding.mint()
+        || runtime_law.law_program_owner() != law_program_id
+        || canonical_mint.transfer_hook_program() != law_program_id
+    {
+        return Err(ConfigGenesisTransitionRuntimeError::RuntimeLawBindingMismatch);
+    }
+    if conservation.config() != binding.config() {
+        return Err(ConfigGenesisTransitionRuntimeError::ConservationConfigMismatch);
+    }
+    if conservation.mint() != binding.mint() {
+        return Err(ConfigGenesisTransitionRuntimeError::ConservationMintMismatch);
+    }
+    Ok(())
 }
 
 fn hash_runtime_activation_readset(
@@ -514,13 +824,22 @@ fn authenticate_core_reward_target(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[cfg(feature = "runtime-account-lifecycle")]
+    use crate::config_genesis_transition::runtime_persistence::{
+        execute_held_config_genesis_runtime_persistence_plan_with_test_invoker,
+        seal_equivalent_owning_mixed_batch_for_test, ConfigGenesisRuntimePersistenceExecutionGuard,
+    };
     use crate::genesis_conservation_runtime::{
         verify_authenticated_genesis_conservation, AuthenticatedGenesisConservationReceipt,
         AuthenticatedGenesisLaneCapability,
     };
     use crate::native_adapter::{
         authenticate_readonly_state_account, authenticate_state_account, derive_pda,
-        NativeAccountObservation, NativeEconomyBinding, PdaIdentity,
+        CreatePdaLifecycle, NativeAccountObservation, NativeEconomyBinding, PdaIdentity,
+    };
+    #[cfg(feature = "runtime-account-lifecycle")]
+    use crate::runtime_account_lifecycle::{
+        InitIfNeededTestCpiCall, InitIfNeededTestCpiHarness, InitIfNeededTestPostCpiCorruption,
     };
     use crate::runtime_adapter::RuntimeValidatedDailyLawWrite;
     use crate::token_2022_runtime::{
@@ -529,18 +848,22 @@ mod tests {
         ReadonlyCanonicalEconomyMint, ReadonlyPublicTokenAccount,
     };
     use crate::{
-        beneficiary, encode_config_genesis_state, encode_lane_state, lane_policy,
-        verify_daily_law_open, verify_genesis_allocation_conservation, CanonicalDailyLawBinding,
-        ConfigGenesisState, ConfigState, GenesisAllocationEntry, GenesisAllocationManifest,
-        GenesisConservationInput, GenesisPhase, LaneState, ObservedGenesisAllocation,
-        ObservedGenesisMint, ReadonlyDailyLawAccount, COMMUNITY, COMMUNITY_CUSTODY,
-        CONFIG_GENESIS_ACCOUNT_LEN, GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_ROLES,
-        LANE_ACCOUNT_LEN, LAW_STATE_LEN, LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY,
-        TOKEN_DECIMALS,
+        beneficiary, decode_config_genesis_state, encode_config_genesis_state, encode_lane_state,
+        lane_policy, verify_daily_law_open, verify_genesis_allocation_conservation,
+        CanonicalDailyLawBinding, ConfigGenesisState, ConfigState, GenesisAllocationEntry,
+        GenesisAllocationManifest, GenesisConservationInput, GenesisPhase, LaneState,
+        ObservedGenesisAllocation, ObservedGenesisMint, ReadonlyDailyLawAccount, COMMUNITY,
+        COMMUNITY_CUSTODY, CONFIG_GENESIS_ACCOUNT_LEN, CORE_REWARD_ACCOUNT_LEN,
+        GENESIS_ALLOCATION_AMOUNTS, GENESIS_ALLOCATION_ROLES, LANE_ACCOUNT_LEN, LAW_STATE_LEN,
+        LAW_STATE_MAGIC, LAW_STATE_VERSION, MAINNET_SUPPLY, TOKEN_DECIMALS,
     };
     use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day};
     use solana_pubkey::Pubkey;
+    #[cfg(feature = "runtime-account-lifecycle")]
+    use solana_rent::Rent;
     use solana_sdk_ids::zk_elgamal_proof_program;
+    #[cfg(feature = "runtime-account-lifecycle")]
+    use solana_sdk_ids::{native_loader, system_program};
     use spl_token_2022_interface::{
         extension::{
             confidential_transfer::ConfidentialTransferMint,
@@ -569,6 +892,7 @@ mod tests {
         owner: Pubkey,
         lamports: u64,
         data: Vec<u8>,
+        is_signer: bool,
         is_writable: bool,
         executable: bool,
     }
@@ -580,6 +904,7 @@ mod tests {
                 owner: owner.into(),
                 lamports: 1,
                 data,
+                is_signer: false,
                 is_writable: false,
                 executable: false,
             }
@@ -591,6 +916,7 @@ mod tests {
                 owner: [0x99; 32].into(),
                 lamports: 1,
                 data: Vec::new(),
+                is_signer: false,
                 is_writable: false,
                 executable: true,
             }
@@ -599,7 +925,7 @@ mod tests {
         fn info(&mut self) -> AccountInfo<'_> {
             AccountInfo::new(
                 &self.key,
-                false,
+                self.is_signer,
                 self.is_writable,
                 &mut self.lamports,
                 &mut self.data,
@@ -1007,6 +1333,171 @@ mod tests {
             stake: token_capability(&mint, stake_key, vault, 0),
             lane_tokens: [tokens[1], tokens[2], tokens[3], tokens[4]],
             lanes,
+        }
+    }
+
+    #[cfg(feature = "runtime-account-lifecycle")]
+    struct PersistenceFixture {
+        law: RuntimeValidatedDailyLawWrite,
+        binding: NativeEconomyBinding,
+        readset: RuntimeReadSet,
+        config: TestAccount,
+        lanes: [TestAccount; 3],
+        core: TestAccount,
+        payer: TestAccount,
+        system: TestAccount,
+        rent: Rent,
+    }
+
+    #[cfg(feature = "runtime-account-lifecycle")]
+    impl PersistenceFixture {
+        fn new(core_lamports: u64) -> Self {
+            let law = runtime_law();
+            let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+            let readset = runtime_readset(&binding, &law, [0x61; 32]);
+            let mut config = TestAccount::data(
+                binding.config(),
+                ECONOMY_PROGRAM,
+                config_data(&binding).to_vec(),
+            );
+            config.is_writable = true;
+            let writable_lanes = [0usize, 1, 3].map(|index| {
+                let AuthenticatedGenesisLaneCapability::Writable(capability) = readset.lanes[index]
+                else {
+                    panic!("retained writable lane must use writable capability")
+                };
+                let StrictStateValue::Lane(state) = capability.state() else {
+                    panic!("lane capability must carry Lane state")
+                };
+                let mut data = [0u8; LANE_ACCOUNT_LEN];
+                encode_lane_state(&state, &mut data).unwrap();
+                let mut account =
+                    TestAccount::data(capability.key(), ECONOMY_PROGRAM, data.to_vec());
+                account.is_writable = true;
+                account
+            });
+            let core = derive_pda(
+                &binding,
+                PdaIdentity::CoreReward {
+                    config: binding.config(),
+                },
+            )
+            .unwrap();
+            let mut core_account =
+                TestAccount::data(core.key, system_program::ID.to_bytes(), Vec::new());
+            core_account.lamports = core_lamports;
+            core_account.is_writable = true;
+            let mut payer = TestAccount::data(
+                state(&binding).config.admin,
+                system_program::ID.to_bytes(),
+                Vec::new(),
+            );
+            payer.lamports = 20_000_000;
+            payer.is_signer = true;
+            payer.is_writable = true;
+            let mut system = TestAccount::program(system_program::ID.to_bytes());
+            system.owner = native_loader::ID;
+            Self {
+                law,
+                binding,
+                readset,
+                config,
+                lanes: writable_lanes,
+                core: core_account,
+                payer,
+                system,
+                rent: Rent::default(),
+            }
+        }
+
+        fn try_prepare(
+            &mut self,
+        ) -> Result<Box<HeldConfigGenesisRuntimePersistencePlan>, ConfigGenesisTransitionRuntimeError>
+        {
+            let config = self.config.info();
+            let core = self.core.info();
+            let payer = self.payer.info();
+            let system = self.system.info();
+            prepare_runtime_authenticated_config_genesis_persistence_plan_with_rent(
+                &self.law,
+                &self.binding,
+                &config,
+                &self.readset.conservation,
+                &self.readset.mint,
+                &self.readset.community,
+                &self.readset.stake,
+                &self.readset.lane_tokens,
+                &self.readset.lanes,
+                &core,
+                &payer,
+                &system,
+                &self.rent,
+            )
+        }
+
+        fn prepare(&mut self) -> Box<HeldConfigGenesisRuntimePersistencePlan> {
+            self.try_prepare().unwrap()
+        }
+
+        fn existing_bytes(&self) -> [Vec<u8>; 4] {
+            [
+                self.config.data.clone(),
+                self.lanes[0].data.clone(),
+                self.lanes[1].data.clone(),
+                self.lanes[2].data.clone(),
+            ]
+        }
+
+        fn account_key(&self, index: usize) -> Pubkey {
+            match index {
+                0 => self.config.key,
+                1 => self.payer.key,
+                2 => self.lanes[0].key,
+                3 => self.lanes[1].key,
+                4 => self.lanes[2].key,
+                5 => self.core.key,
+                _ => panic!("invalid persistence account index"),
+            }
+        }
+
+        fn set_account_key(&mut self, index: usize, key: Pubkey) {
+            match index {
+                0 => self.config.key = key,
+                1 => self.payer.key = key,
+                2 => self.lanes[0].key = key,
+                3 => self.lanes[1].key = key,
+                4 => self.lanes[2].key = key,
+                5 => self.core.key = key,
+                _ => panic!("invalid persistence account index"),
+            }
+        }
+
+        fn execute_with(
+            &mut self,
+            plan: Box<HeldConfigGenesisRuntimePersistencePlan>,
+            harness: &mut InitIfNeededTestCpiHarness,
+        ) -> Result<ConfigGenesisRuntimePersistenceReceipt, ConfigGenesisRuntimePersistenceError>
+        {
+            let config = self.config.info();
+            let [treasury, ecosystem, liquidity] = &mut self.lanes;
+            let treasury = treasury.info();
+            let ecosystem = ecosystem.info();
+            let liquidity = liquidity.info();
+            let core = self.core.info();
+            let payer = self.payer.info();
+            let system = self.system.info();
+            execute_held_config_genesis_runtime_persistence_plan_with_test_invoker(
+                ConfigGenesisRuntimePersistenceExecutionGuard::for_test(),
+                self.law.gate(),
+                &self.binding,
+                plan,
+                &config,
+                [&treasury, &ecosystem, &liquidity],
+                &core,
+                &payer,
+                &system,
+                harness,
+            )
         }
     }
 
@@ -1420,8 +1911,397 @@ mod tests {
         );
     }
 
+    #[cfg(feature = "runtime-account-lifecycle")]
     #[test]
-    fn runtime_composer_source_has_no_write_or_public_execution_surface() {
+    fn held_persistence_executes_exact_vacant_and_prefunded_core_paths() {
+        for (prefund, expected_path) in [
+            (0, CreatePdaLifecycle::CreateAccount),
+            (1_000_000, CreatePdaLifecycle::AllocateAssignAndFund),
+        ] {
+            let mut fixture = PersistenceFixture::new(prefund);
+            let plan = fixture.prepare();
+            assert_eq!(plan.core_reward_lifecycle(), expected_path);
+            assert_eq!(
+                plan.rent_minimum_lamports(),
+                fixture.rent.minimum_balance(CORE_REWARD_ACCOUNT_LEN)
+            );
+            let commitment_sha256 = plan.commitment_sha256();
+            let mixed_batch_commitment_sha256 = plan.mixed_batch_commitment_sha256();
+            let owning_mixed_batch = seal_equivalent_owning_mixed_batch_for_test(
+                fixture.law.gate(),
+                &fixture.binding,
+                &plan,
+            )
+            .unwrap();
+            assert_eq!(
+                owning_mixed_batch.commitment_sha256(),
+                mixed_batch_commitment_sha256
+            );
+            let rent_minimum_lamports = plan.rent_minimum_lamports();
+            let mut harness = InitIfNeededTestCpiHarness::default_for_test();
+            let receipt = fixture.execute_with(plan, &mut harness).unwrap();
+            assert_eq!(receipt.commitment_sha256(), commitment_sha256);
+            assert_eq!(
+                receipt.mixed_batch_commitment_sha256(),
+                mixed_batch_commitment_sha256
+            );
+            assert_eq!(receipt.postimage_sha256().len(), 5);
+            match expected_path {
+                CreatePdaLifecycle::CreateAccount => assert_eq!(
+                    harness.calls(),
+                    &[InitIfNeededTestCpiCall::CreateAccount {
+                        lamports: rent_minimum_lamports,
+                        data_len: CORE_REWARD_ACCOUNT_LEN,
+                    }]
+                ),
+                CreatePdaLifecycle::AllocateAssignAndFund => {
+                    let funding = rent_minimum_lamports.saturating_sub(prefund);
+                    let expected = if funding == 0 {
+                        vec![
+                            InitIfNeededTestCpiCall::Allocate {
+                                data_len: CORE_REWARD_ACCOUNT_LEN,
+                            },
+                            InitIfNeededTestCpiCall::Assign {
+                                owner: fixture.binding.program_id(),
+                            },
+                        ]
+                    } else {
+                        vec![
+                            InitIfNeededTestCpiCall::Transfer { lamports: funding },
+                            InitIfNeededTestCpiCall::Allocate {
+                                data_len: CORE_REWARD_ACCOUNT_LEN,
+                            },
+                            InitIfNeededTestCpiCall::Assign {
+                                owner: fixture.binding.program_id(),
+                            },
+                        ]
+                    };
+                    assert_eq!(harness.calls(), expected);
+                }
+            }
+            assert_eq!(
+                decode_config_genesis_state(&fixture.config.data)
+                    .unwrap()
+                    .phase,
+                GenesisPhase::Active
+            );
+            assert_eq!(fixture.core.owner.to_bytes(), fixture.binding.program_id());
+            // The host AccountInfo harness swaps its internal data slice during
+            // CPI; the outer Vec backing used by TestAccount remains empty.
+            // Receipt hash and CPI data_len above prove the sealed postimage.
+        }
+
+        let mut rent_exempt = PersistenceFixture::new(0);
+        rent_exempt.core.lamports = rent_exempt.rent.minimum_balance(CORE_REWARD_ACCOUNT_LEN);
+        let plan = rent_exempt.prepare();
+        assert_eq!(
+            plan.core_reward_lifecycle(),
+            CreatePdaLifecycle::AllocateAssignAndFund
+        );
+        let mut harness = InitIfNeededTestCpiHarness::default_for_test();
+        rent_exempt.execute_with(plan, &mut harness).unwrap();
+        assert_eq!(
+            harness.calls(),
+            &[
+                InitIfNeededTestCpiCall::Allocate {
+                    data_len: CORE_REWARD_ACCOUNT_LEN,
+                },
+                InitIfNeededTestCpiCall::Assign {
+                    owner: rent_exempt.binding.program_id(),
+                },
+            ]
+        );
+    }
+
+    #[cfg(feature = "runtime-account-lifecycle")]
+    #[test]
+    #[allow(deprecated)]
+    fn held_persistence_commits_exact_runtime_rent_even_when_minimum_is_unchanged() {
+        let mut first = PersistenceFixture::new(0);
+        let first_plan = first.prepare();
+
+        let mut second = PersistenceFixture::new(0);
+        second.rent.burn_percent = second.rent.burn_percent.saturating_add(1);
+        let second_plan = second.prepare();
+
+        assert_eq!(
+            first_plan.rent_minimum_lamports(),
+            second_plan.rent_minimum_lamports()
+        );
+        assert_ne!(
+            first_plan.runtime_rent_sha256(),
+            second_plan.runtime_rent_sha256()
+        );
+        assert_ne!(
+            first_plan.commitment_sha256(),
+            second_plan.commitment_sha256()
+        );
+    }
+
+    #[cfg(feature = "runtime-account-lifecycle")]
+    #[test]
+    fn held_persistence_rejects_meta_drift_admin_system_and_underfunding() {
+        let mut readonly_config = PersistenceFixture::new(0);
+        readonly_config.config.is_writable = false;
+        let result = {
+            let config = readonly_config.config.info();
+            let core = readonly_config.core.info();
+            let payer = readonly_config.payer.info();
+            let system = readonly_config.system.info();
+            prepare_runtime_authenticated_config_genesis_persistence_plan_with_rent(
+                &readonly_config.law,
+                &readonly_config.binding,
+                &config,
+                &readonly_config.readset.conservation,
+                &readonly_config.readset.mint,
+                &readonly_config.readset.community,
+                &readonly_config.readset.stake,
+                &readonly_config.readset.lane_tokens,
+                &readonly_config.readset.lanes,
+                &core,
+                &payer,
+                &system,
+                &readonly_config.rent,
+            )
+        };
+        assert_eq!(
+            result,
+            Err(ConfigGenesisTransitionRuntimeError::Runtime(
+                RuntimeAdapterError::ConfigAccountMustBeWritable
+            ))
+        );
+
+        let mut active_config = PersistenceFixture::new(0);
+        let mut active_state = decode_config_genesis_state(&active_config.config.data).unwrap();
+        active_state.phase = GenesisPhase::Active;
+        active_state.config.active = true;
+        encode_config_genesis_state(&active_state, &mut active_config.config.data).unwrap();
+        assert_eq!(
+            active_config.try_prepare(),
+            Err(ConfigGenesisTransitionRuntimeError::Runtime(
+                RuntimeAdapterError::ConfigPhaseNotGenesisStaging
+            ))
+        );
+
+        for writability in [
+            [false, true, false, true],
+            [true, false, false, true],
+            [true, true, true, true],
+            [true, true, false, false],
+        ] {
+            let mut fixture = PersistenceFixture::new(0);
+            let manifest =
+                runtime_manifest(&fixture.binding, fixture.readset.community.token_account());
+            fixture.readset.lanes = runtime_lanes_with_writability(
+                &fixture.binding,
+                &fixture.law,
+                &manifest,
+                writability,
+            );
+            let result = {
+                let config = fixture.config.info();
+                let core = fixture.core.info();
+                let payer = fixture.payer.info();
+                let system = fixture.system.info();
+                prepare_runtime_authenticated_config_genesis_persistence_plan_with_rent(
+                    &fixture.law,
+                    &fixture.binding,
+                    &config,
+                    &fixture.readset.conservation,
+                    &fixture.readset.mint,
+                    &fixture.readset.community,
+                    &fixture.readset.stake,
+                    &fixture.readset.lane_tokens,
+                    &fixture.readset.lanes,
+                    &core,
+                    &payer,
+                    &system,
+                    &fixture.rent,
+                )
+            };
+            assert!(result.is_err());
+        }
+
+        let mut wrong_admin = PersistenceFixture::new(0);
+        wrong_admin.payer.key = [0x77; 32].into();
+        assert_eq!(
+            wrong_admin.try_prepare(),
+            Err(ConfigGenesisTransitionRuntimeError::Persistence(
+                ConfigGenesisRuntimePersistenceError::Runtime(RuntimeAdapterError::Native(
+                    crate::native_adapter::NativeAdapterError::SignerKeyMismatch
+                ))
+            ))
+        );
+
+        let mut wrong_system = PersistenceFixture::new(0);
+        wrong_system.system.key = [0x88; 32].into();
+        assert_eq!(
+            wrong_system.try_prepare(),
+            Err(ConfigGenesisTransitionRuntimeError::Persistence(
+                ConfigGenesisRuntimePersistenceError::Lifecycle(
+                    crate::runtime_account_lifecycle::RuntimeAccountLifecycleError::SystemProgramKeyMismatch
+                )
+            ))
+        );
+
+        let mut underfunded = PersistenceFixture::new(0);
+        underfunded.payer.lamports = 0;
+        assert_eq!(
+            underfunded.try_prepare(),
+            Err(ConfigGenesisTransitionRuntimeError::Persistence(
+                ConfigGenesisRuntimePersistenceError::Native(
+                    crate::native_adapter::NativeAdapterError::InsufficientPayerBalance
+                )
+            ))
+        );
+    }
+
+    #[cfg(feature = "runtime-account-lifecycle")]
+    #[test]
+    fn held_persistence_stale_preimages_and_cpi_failures_leave_existing_bytes_unchanged() {
+        for lane in 0..3 {
+            let mut stale = PersistenceFixture::new(0);
+            let stale_plan = stale.prepare();
+            stale.lanes[lane].data[0] ^= 1;
+            let stale_before = stale.existing_bytes();
+            let mut harness = InitIfNeededTestCpiHarness::default_for_test();
+            assert!(stale.execute_with(stale_plan, &mut harness).is_err());
+            assert!(harness.calls().is_empty());
+            assert_eq!(stale.existing_bytes(), stale_before);
+        }
+
+        let mut stale_config = PersistenceFixture::new(0);
+        let stale_config_plan = stale_config.prepare();
+        stale_config.config.data[16] ^= 1;
+        let stale_config_before = stale_config.existing_bytes();
+        let mut harness = InitIfNeededTestCpiHarness::default_for_test();
+        assert!(stale_config
+            .execute_with(stale_config_plan, &mut harness)
+            .is_err());
+        assert!(harness.calls().is_empty());
+        assert_eq!(stale_config.existing_bytes(), stale_config_before);
+
+        let mut stale_core = PersistenceFixture::new(0);
+        let stale_core_plan = stale_core.prepare();
+        stale_core.core.lamports = 1;
+        let stale_core_before = stale_core.existing_bytes();
+        let mut harness = InitIfNeededTestCpiHarness::default_for_test();
+        assert!(stale_core
+            .execute_with(stale_core_plan, &mut harness)
+            .is_err());
+        assert!(harness.calls().is_empty());
+        assert_eq!(stale_core.existing_bytes(), stale_core_before);
+
+        let mut stale_payer = PersistenceFixture::new(0);
+        let stale_payer_plan = stale_payer.prepare();
+        stale_payer.payer.lamports -= 1;
+        let stale_payer_before = stale_payer.existing_bytes();
+        let mut harness = InitIfNeededTestCpiHarness::default_for_test();
+        assert!(stale_payer
+            .execute_with(stale_payer_plan, &mut harness)
+            .is_err());
+        assert!(harness.calls().is_empty());
+        assert_eq!(stale_payer.existing_bytes(), stale_payer_before);
+
+        for failure_index in 0..=2 {
+            let mut fixture = PersistenceFixture::new(1_000_000);
+            let plan = fixture.prepare();
+            let before = fixture.existing_bytes();
+            let mut harness = InitIfNeededTestCpiHarness::failing_at(failure_index);
+            assert!(fixture.execute_with(plan, &mut harness).is_err());
+            assert_eq!(fixture.existing_bytes(), before);
+        }
+
+        for corruption in [
+            InitIfNeededTestPostCpiCorruption::Owner,
+            InitIfNeededTestPostCpiCorruption::TargetLamports,
+            InitIfNeededTestPostCpiCorruption::PayerLamports,
+            InitIfNeededTestPostCpiCorruption::DataLength,
+            InitIfNeededTestPostCpiCorruption::NonzeroData,
+        ] {
+            let mut fixture = PersistenceFixture::new(0);
+            let plan = fixture.prepare();
+            let before = fixture.existing_bytes();
+            let mut harness = InitIfNeededTestCpiHarness::corrupting(corruption);
+            assert!(fixture.execute_with(plan, &mut harness).is_err());
+            assert_eq!(fixture.existing_bytes(), before);
+        }
+    }
+
+    #[cfg(feature = "runtime-account-lifecycle")]
+    #[test]
+    fn held_persistence_rejects_every_config_payer_lane_core_collision_pair_before_cpi() {
+        // Fixed class order: Config, admin payer, Treasury, Ecosystem,
+        // Liquidity, CoreReward. Exercise all C(6,2)=15 pairwise aliases.
+        let mut exercised = 0usize;
+        for left in 0..6 {
+            for right in (left + 1)..6 {
+                let mut fixture = PersistenceFixture::new(0);
+                let plan = fixture.prepare();
+                let duplicate = fixture.account_key(left);
+                fixture.set_account_key(right, duplicate);
+                let before = fixture.existing_bytes();
+                let mut harness = InitIfNeededTestCpiHarness::default_for_test();
+                assert_eq!(
+                    fixture.execute_with(plan, &mut harness),
+                    Err(ConfigGenesisRuntimePersistenceError::AccountCollision),
+                    "collision pair {left}/{right}"
+                );
+                assert!(harness.calls().is_empty());
+                assert_eq!(fixture.existing_bytes(), before);
+                exercised += 1;
+            }
+        }
+        assert_eq!(exercised, 15);
+    }
+
+    #[cfg(feature = "runtime-account-lifecycle")]
+    #[test]
+    fn held_persistence_source_keeps_guard_private_and_truth_held() {
+        let source = include_str!("config_genesis_transition/runtime_persistence.rs");
+        assert!(CONFIG_GENESIS_RUNTIME_PERSISTENCE_STATUS.contains("ROLLBACK_EVIDENCE_UNPROVED"));
+        assert!(CONFIG_GENESIS_RUNTIME_PERSISTENCE_STATUS.ends_with("MAINNET_HOLD"));
+        assert_eq!(
+            CONFIG_GENESIS_RUNTIME_PERSISTENCE_TRUTH,
+            ConfigGenesisRuntimePersistenceTruth {
+                feature_gated: true,
+                distinct_writable_genesis_staging_config_required: true,
+                exact_retained_lane_writability_required: true,
+                admin_system_payer_and_runtime_rent_required: true,
+                vacant_or_prefunded_core_path_derived_from_prestate: true,
+                all_existing_borrows_and_preimages_checked_before_first_cpi: true,
+                existing_writes_delayed_until_core_lifecycle_success: true,
+                post_cpi_transaction_rollback_required: true,
+                rollback_evidence_present: false,
+                production_execution_guard_constructible: false,
+                transition_authorized: false,
+                instruction_abi_frozen: false,
+                entrypoint_exposed: false,
+                dispatcher_exposed: false,
+                mainnet_hold: true,
+            }
+        );
+        assert_eq!(
+            source
+                .matches("ConfigGenesisRuntimePersistenceExecutionGuard {")
+                .count(),
+            2
+        );
+        assert!(source.contains("#[cfg(test)]\n    pub(crate) const fn for_test()"));
+        for forbidden in [
+            concat!("pub const fn ", "new("),
+            concat!("pub fn ", "new("),
+            concat!("entry", "point!"),
+            concat!("process_", "instruction"),
+            concat!("transition_authorized", ": true"),
+            concat!("mainnet_hold", ": false"),
+        ] {
+            assert!(!source.contains(forbidden), "forbidden source: {forbidden}");
+        }
+    }
+
+    #[test]
+    fn read_only_runtime_composer_source_has_no_inline_write_or_unguarded_execution_surface() {
         let source = include_str!("config_genesis_transition_runtime.rs");
         for forbidden in [
             concat!("try_borrow_", "mut"),

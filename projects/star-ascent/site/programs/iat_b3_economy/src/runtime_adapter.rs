@@ -167,6 +167,7 @@ pub enum RuntimeAdapterError {
     ConfigMintMismatch,
     ConfigBumpMismatch,
     ConfigPhaseNotActive,
+    ConfigPhaseNotGenesisStaging,
     ConfigProductionShapeMismatch,
     ClockSysvarUnavailable,
     RentSysvarUnavailable,
@@ -213,6 +214,66 @@ pub struct RuntimeProductionActiveConfig {
     law_local_day: i64,
     program_id: [u8; 32],
     mint: [u8; 32],
+}
+
+/// Opaque proof that the exact binding-relative Config PDA was observed as a
+/// writable account in the B3 `GENESIS_STAGING` phase under the same runtime
+/// Daily-Law capability. This type is intentionally disjoint from both the
+/// read-only Genesis observation and the production-ACTIVE capability: it can
+/// only feed the held Config/Genesis persistence prerequisite and conveys no
+/// phase-transition or execution authority by itself.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct RuntimeGenesisStagingWritableConfig {
+    key: [u8; 32],
+    state: ConfigGenesisState,
+    preimage_sha256: [u8; 32],
+    law_account_sha256: [u8; 32],
+    law_unix_timestamp: i64,
+    law_local_day: i64,
+    program_id: [u8; 32],
+    mint: [u8; 32],
+}
+
+impl RuntimeGenesisStagingWritableConfig {
+    pub const fn key(&self) -> [u8; 32] {
+        self.key
+    }
+
+    pub const fn state(&self) -> ConfigGenesisState {
+        self.state
+    }
+
+    pub const fn preimage_sha256(&self) -> [u8; 32] {
+        self.preimage_sha256
+    }
+
+    pub const fn law_account_sha256(&self) -> [u8; 32] {
+        self.law_account_sha256
+    }
+
+    pub const fn law_unix_timestamp(&self) -> i64 {
+        self.law_unix_timestamp
+    }
+
+    pub const fn law_local_day(&self) -> i64 {
+        self.law_local_day
+    }
+
+    pub const fn program_id(&self) -> [u8; 32] {
+        self.program_id
+    }
+
+    pub const fn mint(&self) -> [u8; 32] {
+        self.mint
+    }
+
+    pub(crate) const fn as_readonly_observation(&self) -> ReadonlyConfigGenesisAccount {
+        ReadonlyConfigGenesisAccount {
+            key: self.key,
+            state: self.state,
+            preimage_sha256: self.preimage_sha256,
+        }
+    }
 }
 
 impl RuntimeProductionActiveConfig {
@@ -497,6 +558,24 @@ pub fn authenticate_runtime_production_active_writable_config(
     require_production_active_config(observed, runtime_law.gate(), binding)
 }
 
+/// Authenticate the retained `Activate` Config meta without weakening the
+/// existing read-only Genesis parser or conflating staging with the separate
+/// production-ACTIVE capability. The account is borrowed immutably even though
+/// its transaction meta must be writable.
+pub fn authenticate_runtime_genesis_staging_writable_config(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    account: &AccountInfo<'_>,
+) -> Result<RuntimeGenesisStagingWritableConfig, RuntimeAdapterError> {
+    let observed = parse_config_genesis_account_info_with_expected_writability(
+        runtime_law.gate(),
+        binding,
+        account,
+        true,
+    )?;
+    require_genesis_staging_writable_config(observed, runtime_law.gate(), binding)
+}
+
 /// Host/rehearsal seam for authenticating the real Config PDA with an existing
 /// opaque Law gate. Production runtime composition uses
 /// [`authenticate_runtime_production_active_config`] so the Law AccountInfo and
@@ -542,6 +621,36 @@ fn require_production_active_config(
         return Err(RuntimeAdapterError::ConfigProductionShapeMismatch);
     }
     Ok(RuntimeProductionActiveConfig {
+        key: observed.key(),
+        state,
+        preimage_sha256: observed.preimage_sha256(),
+        law_account_sha256: gate.law_account_sha256(),
+        law_unix_timestamp: gate.unix_timestamp(),
+        law_local_day: gate.local_day(),
+        program_id: binding.program_id(),
+        mint: binding.mint(),
+    })
+}
+
+fn require_genesis_staging_writable_config(
+    observed: ReadonlyConfigGenesisAccount,
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+) -> Result<RuntimeGenesisStagingWritableConfig, RuntimeAdapterError> {
+    let state = observed.state();
+    if state.phase != GenesisPhase::GenesisStaging || state.config.active {
+        return Err(RuntimeAdapterError::ConfigPhaseNotGenesisStaging);
+    }
+    if state.config.rehearsal_mode
+        || state.config.expected_supply != MAINNET_SUPPLY
+        || state.config.lane_mask != 0b1_1110
+        || !state.config.stake_vault_initialized
+        || state.config.stake_token_account == [0; 32]
+        || state.config.token_program == [0; 32]
+    {
+        return Err(RuntimeAdapterError::ConfigProductionShapeMismatch);
+    }
+    Ok(RuntimeGenesisStagingWritableConfig {
         key: observed.key(),
         state,
         preimage_sha256: observed.preimage_sha256(),

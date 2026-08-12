@@ -1,8 +1,10 @@
 //! Host-only native account adapter and atomic write-intent boundary.
 //!
 //! This production source is deliberately unreachable from a Solana
-//! dispatcher or entrypoint. It performs no borrow, allocation, CPI, token
-//! transfer, or account write. It derives the frozen economy PDA recipes,
+//! dispatcher or entrypoint. It performs no account borrow, CPI, token
+//! transfer, or account write. A crate-private heap-backed batch seal allocates
+//! only immutable plan storage to keep mixed intent arrays SBF-stack-bounded.
+//! It derives the frozen economy PDA recipes,
 //! authenticates read-only account observations, binds the seven already-
 //! frozen strict state codecs to their PDA identities, and prepares CAS-style
 //! transaction-local intents. A future executable adapter must validate Daily
@@ -15,6 +17,8 @@
 //! Genesis-staging/Active/cap rule. Nothing here changes that HOLD,
 //! authenticates owner policy, or makes a retained handler complete.
 
+extern crate alloc;
+
 use crate::{
     decode_agency_owner_index_state, decode_agency_state, decode_core_reward_state,
     decode_eligibility_state, decode_lane_state, decode_position_state, decode_round_state,
@@ -25,6 +29,7 @@ use crate::{
     AGENCY_OWNER_INDEX_ACCOUNT_LEN, CORE_REWARD_ACCOUNT_LEN, ELIGIBILITY_ACCOUNT_LEN,
     LANE_ACCOUNT_LEN, POSITION_ACCOUNT_LEN, ROUND_ACCOUNT_LEN,
 };
+use alloc::boxed::Box;
 use sha2::{Digest, Sha256};
 use solana_pubkey::Pubkey;
 use solana_sdk_ids::system_program;
@@ -1298,6 +1303,27 @@ pub struct AtomicWriteBatch<const N: usize> {
     commitment_sha256: [u8; 32],
 }
 
+/// Crate-private heap-backed counterpart for a large mixed batch. The exact
+/// intent bytes and commitment domain are unchanged; indirection only prevents
+/// SBF callers from copying both the N-intent input and owning return value in
+/// one frame. It is deliberately neither `Clone` nor `Copy`.
+#[derive(Debug, Eq, PartialEq)]
+pub(crate) struct BoxedAtomicWriteBatch<const N: usize> {
+    law: LawWriteStamp,
+    intents: Box<[StateWriteIntent; N]>,
+    commitment_sha256: [u8; 32],
+}
+
+impl<const N: usize> BoxedAtomicWriteBatch<N> {
+    pub(crate) fn intents(&self) -> &[StateWriteIntent; N] {
+        &self.intents
+    }
+
+    pub(crate) const fn commitment_sha256(&self) -> [u8; 32] {
+        self.commitment_sha256
+    }
+}
+
 /// A sealed existing-only batch that borrows each caller-owned intent instead
 /// of copying fixed-size postimages into a second owning batch. The fields are
 /// private and the value is deliberately non-`Clone`/non-`Copy`; its lifetime
@@ -1334,6 +1360,20 @@ pub struct ValidatedAtomicWriteBatch<const N: usize> {
     batch: AtomicWriteBatch<N>,
 }
 
+/// Borrowed, consumed validation proof for a heap-backed mixed batch. Private
+/// construction and the lifetime bind this capability to the exact sealed
+/// batch; it is deliberately neither `Clone` nor `Copy`.
+#[derive(Debug, Eq, PartialEq)]
+pub(crate) struct ValidatedBoxedAtomicWriteBatch<'a, const N: usize> {
+    batch: &'a BoxedAtomicWriteBatch<N>,
+}
+
+impl<'a, const N: usize> ValidatedBoxedAtomicWriteBatch<'a, N> {
+    pub(crate) const fn into_batch(self) -> &'a BoxedAtomicWriteBatch<N> {
+        self.batch
+    }
+}
+
 /// Consumed validation capability for a borrowed sealed batch. Like the seal,
 /// this is intentionally non-`Clone`/non-`Copy`.
 #[derive(Debug, Eq, PartialEq)]
@@ -1363,6 +1403,22 @@ pub fn seal_atomic_write_batch<const N: usize>(
 ) -> Result<AtomicWriteBatch<N>, NativeAdapterError> {
     let (law, commitment_sha256) = seal_atomic_write_intents(gate, binding, &intents)?;
     Ok(AtomicWriteBatch {
+        law,
+        intents,
+        commitment_sha256,
+    })
+}
+
+/// Seal a heap-owned mixed batch through the exact owning-batch kernel without
+/// materializing another N-intent value on the caller's SBF frame.
+#[inline(never)]
+pub(crate) fn seal_boxed_atomic_write_batch<const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    intents: Box<[StateWriteIntent; N]>,
+) -> Result<BoxedAtomicWriteBatch<N>, NativeAdapterError> {
+    let (law, commitment_sha256) = seal_atomic_write_intents(gate, binding, &intents)?;
+    Ok(BoxedAtomicWriteBatch {
         law,
         intents,
         commitment_sha256,
@@ -1443,6 +1499,29 @@ pub fn validate_atomic_write_preconditions<const N: usize>(
         payer_observations,
     )?;
     Ok(ValidatedAtomicWriteBatch { batch })
+}
+
+/// Validate a heap-backed mixed batch by reference through the exact owning
+/// precondition kernel. The returned proof is lifetime-bound and non-Copy; no
+/// intent, postimage, or account observation is normalized or rewritten.
+#[inline(never)]
+pub(crate) fn validate_boxed_atomic_write_preconditions_borrowed<'a, const N: usize>(
+    gate: &ValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    batch: &'a BoxedAtomicWriteBatch<N>,
+    observations: &[NativeAccountObservation<'_>],
+    payer_observations: &[NativeAccountObservation<'_>],
+) -> Result<ValidatedBoxedAtomicWriteBatch<'a, N>, NativeAdapterError> {
+    validate_atomic_write_preconditions_inner(
+        gate,
+        binding,
+        batch.law,
+        &batch.intents,
+        batch.commitment_sha256,
+        observations,
+        payer_observations,
+    )?;
+    Ok(ValidatedBoxedAtomicWriteBatch { batch })
 }
 
 pub fn validate_existing_write_preconditions_borrowed<'a, const N: usize>(
@@ -2041,4 +2120,200 @@ fn update_create_intent_commitment(hash: &mut Sha256, value: &CreateStateAccount
     hash.update(value.funding_lamports.to_le_bytes());
     hash.update(value.data_len.to_le_bytes());
     hash.update(value.postimage_sha256);
+}
+
+#[cfg(test)]
+mod boxed_batch_tests {
+    use super::*;
+    use crate::{
+        encode_lane_state, verify_daily_law_open, CanonicalDailyLawBinding, LaneState,
+        ReadonlyDailyLawAccount, ValidatedDailyLawWrite, LANE_ACCOUNT_LEN, LAW_STATE_LEN,
+        LAW_STATE_MAGIC, LAW_STATE_VERSION, TREASURY,
+    };
+    use iat_b3_consensus::{create_solana_daily_decision, protocol_local_day};
+
+    const LAW_PROGRAM: [u8; 32] = [0x11; 32];
+    const LAW_STATE: [u8; 32] = [0x12; 32];
+    const MINT: [u8; 32] = [0x13; 32];
+    const NETWORK: [u8; 32] = [0x14; 32];
+    const ECONOMY_PROGRAM: [u8; 32] = [0x15; 32];
+    const CLOCK_TIMESTAMP: i64 = 1_786_050_060;
+
+    fn gate() -> ValidatedDailyLawWrite {
+        let binding = CanonicalDailyLawBinding::new(LAW_PROGRAM, LAW_STATE, 7, MINT, NETWORK);
+        let local_day = protocol_local_day(CLOCK_TIMESTAMP);
+        let decision = (0u16..=u8::MAX.into())
+            .map(|candidate| {
+                let mut hash = [0u8; 32];
+                hash[31] = candidate as u8;
+                create_solana_daily_decision(local_day, 42_424_242, hash, NETWORK, MINT).unwrap()
+            })
+            .find(|decision| !decision.locked)
+            .unwrap();
+        let mut data = [0u8; LAW_STATE_LEN];
+        data[0..8].copy_from_slice(LAW_STATE_MAGIC);
+        data[8] = LAW_STATE_VERSION;
+        data[9] = 7;
+        data[10] = 1;
+        data[11] = u8::from(decision.locked);
+        data[16..48].copy_from_slice(&MINT);
+        data[48..80].copy_from_slice(&NETWORK);
+        data[80..88].copy_from_slice(&decision.local_day.to_le_bytes());
+        data[88..96].copy_from_slice(&decision.entropy_slot.to_le_bytes());
+        data[96..128].copy_from_slice(&decision.ancestor_slot_hash);
+        data[128..136].copy_from_slice(&decision.draw_counter.to_le_bytes());
+        data[136..138].copy_from_slice(&decision.draw_bucket.to_le_bytes());
+        data[138..140].copy_from_slice(&decision.chance_numerator.to_le_bytes());
+        data[140..142].copy_from_slice(&decision.chance_denominator.to_le_bytes());
+        verify_daily_law_open(
+            &binding,
+            ReadonlyDailyLawAccount::new(LAW_STATE, LAW_PROGRAM, false, &data),
+            CLOCK_TIMESTAMP,
+        )
+        .unwrap()
+    }
+
+    fn intent(
+        gate: &ValidatedDailyLawWrite,
+        binding: &NativeEconomyBinding,
+        lane: u8,
+    ) -> (StateWriteIntent, [u8; LANE_ACCOUNT_LEN], [u8; 32]) {
+        let config = binding.config();
+        let identity = PdaIdentity::LaneState { config, lane };
+        let derived = derive_pda(binding, identity).unwrap();
+        let token = derive_pda(binding, PdaIdentity::LaneToken { config, lane }).unwrap();
+        let state = LaneState {
+            config,
+            token_account: token.key,
+            beneficiary: [lane; 32],
+            total: u64::from(lane),
+            genesis_unlocked: 0,
+            cliff_week: 0,
+            linear_end_week: 0,
+            reserved: 0,
+            paid: 0,
+            principal_claimed: 0,
+            lane,
+            bump: derived.bump,
+            reward_source: true,
+            token_bump: token.bump,
+        };
+        let mut data = [0u8; LANE_ACCOUNT_LEN];
+        encode_lane_state(&state, &mut data).unwrap();
+        let authenticated = authenticate_state_account(
+            gate,
+            binding,
+            NativeAccountObservation {
+                key: derived.key,
+                owner: ECONOMY_PROGRAM,
+                lamports: 1,
+                data: &data,
+                is_signer: false,
+                is_writable: true,
+                executable: false,
+            },
+            identity,
+        )
+        .unwrap();
+        let mut next = state;
+        next.paid = 1;
+        (
+            prepare_existing_state_write(
+                gate,
+                binding,
+                &authenticated,
+                StrictStateValue::Lane(next),
+            )
+            .unwrap(),
+            data,
+            derived.key,
+        )
+    }
+
+    #[test]
+    fn boxed_mixed_batch_matches_owning_n4_commitment_and_validation_errors() {
+        let gate = gate();
+        let binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, MINT).unwrap();
+        let (first, first_data, first_key) = intent(&gate, &binding, TREASURY);
+        let (second, second_data, second_key) = intent(&gate, &binding, TREASURY + 1);
+        let (third, third_data, third_key) = intent(&gate, &binding, TREASURY + 2);
+        let (fourth, fourth_data, fourth_key) = intent(&gate, &binding, TREASURY + 3);
+        let intents = [first, second, third, fourth];
+
+        let owning = seal_atomic_write_batch(&gate, &binding, intents).unwrap();
+        let boxed = seal_boxed_atomic_write_batch(&gate, &binding, Box::new(intents)).unwrap();
+        assert_eq!(boxed.commitment_sha256(), owning.commitment_sha256());
+        assert_eq!(boxed.intents(), owning.intents());
+
+        let observations = [
+            NativeAccountObservation {
+                key: first_key,
+                owner: ECONOMY_PROGRAM,
+                lamports: 1,
+                data: &first_data,
+                is_signer: false,
+                is_writable: true,
+                executable: false,
+            },
+            NativeAccountObservation {
+                key: second_key,
+                owner: ECONOMY_PROGRAM,
+                lamports: 1,
+                data: &second_data,
+                is_signer: false,
+                is_writable: true,
+                executable: false,
+            },
+            NativeAccountObservation {
+                key: third_key,
+                owner: ECONOMY_PROGRAM,
+                lamports: 1,
+                data: &third_data,
+                is_signer: false,
+                is_writable: true,
+                executable: false,
+            },
+            NativeAccountObservation {
+                key: fourth_key,
+                owner: ECONOMY_PROGRAM,
+                lamports: 1,
+                data: &fourth_data,
+                is_signer: false,
+                is_writable: true,
+                executable: false,
+            },
+        ];
+        validate_atomic_write_preconditions(&gate, &binding, owning, &observations, &[]).unwrap();
+        let validated = validate_boxed_atomic_write_preconditions_borrowed(
+            &gate,
+            &binding,
+            &boxed,
+            &observations,
+            &[],
+        )
+        .unwrap();
+        assert_eq!(
+            validated.into_batch().commitment_sha256(),
+            boxed.commitment_sha256()
+        );
+        assert!(core::mem::needs_drop::<BoxedAtomicWriteBatch<4>>());
+        let source = include_str!("native_adapter.rs");
+        assert!(!source.contains(concat!("try_borrow_", "mut_data")));
+        assert!(!source.contains(concat!("un", "safe")));
+
+        let mut hostile = observations;
+        hostile[2].is_writable = false;
+        let owning_error =
+            validate_atomic_write_preconditions(&gate, &binding, owning, &hostile, &[])
+                .unwrap_err();
+        let boxed_error = validate_boxed_atomic_write_preconditions_borrowed(
+            &gate,
+            &binding,
+            &boxed,
+            &hostile,
+            &[],
+        )
+        .unwrap_err();
+        assert_eq!(boxed_error, owning_error);
+    }
 }

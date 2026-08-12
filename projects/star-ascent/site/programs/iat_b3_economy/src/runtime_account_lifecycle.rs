@@ -283,7 +283,7 @@ pub enum ProductionInitIfNeededReceipt {
     Created(RuntimeAccountLifecycleReceipt<1>),
 }
 
-trait SystemCpiInvoker {
+pub(crate) trait SystemCpiInvoker {
     #[allow(clippy::too_many_arguments)]
     fn create_account<'a>(
         &mut self,
@@ -321,7 +321,7 @@ trait SystemCpiInvoker {
     ) -> Result<(), ProgramError>;
 }
 
-struct SolanaSystemCpi;
+pub(crate) struct SolanaSystemCpi;
 
 impl SystemCpiInvoker for SolanaSystemCpi {
     fn create_account<'a>(
@@ -444,6 +444,10 @@ impl InitIfNeededTestCpiHarness {
 
     pub(crate) fn calls(&self) -> &[InitIfNeededTestCpiCall] {
         &self.calls
+    }
+
+    pub(crate) fn default_for_test() -> Self {
+        Self::default()
     }
 
     fn should_fail(&self) -> bool {
@@ -1597,7 +1601,7 @@ fn execute_production_active_create_state_batch_with<'a, const N: usize>(
 }
 
 #[inline(never)]
-fn execute_create_state_batch_with<'a, const N: usize>(
+pub(crate) fn execute_create_state_batch_with<'a, const N: usize>(
     gate: &ValidatedDailyLawWrite,
     binding: &NativeEconomyBinding,
     batch: AtomicWriteBatch<N>,
