@@ -14,21 +14,21 @@
   },
   "sourceScan": {
     "sessionRootPolicy": "Read every locally available Codex session JSONL below USERPROFILE/.codex/sessions and USERPROFILE/.codex/archived_sessions (or CODEX_SESSION_ROOT) and retain failed image_generation_end events.",
-    "physicalFailedEventsScanned": 1890,
-    "uniqueRuntimeFailureOccurrences": 955,
-    "projectMarkerMatchedOccurrences": 782,
-    "projectThreadOrMarkerMatchedOccurrences": 904,
+    "physicalFailedEventsScanned": 1892,
+    "uniqueRuntimeFailureOccurrences": 957,
+    "projectMarkerMatchedOccurrences": 784,
+    "projectThreadOrMarkerMatchedOccurrences": 906,
     "excludedUnrelatedOccurrences": 0,
     "note": "All failed image-generation prompts are retained, including unrelated image requests, because the public-build directive explicitly covers every Codex image/video output and rejected prompt. Marker counts are informational only and never filter the tracker."
   },
   "summary": {
-    "runtimeFailureOccurrenceCount": 955,
-    "runtimePromptShaPassCount": 955,
-    "noByteRuntimeOccurrenceCount": 955,
-    "physicalFailedEventsScanned": 1890,
+    "runtimeFailureOccurrenceCount": 957,
+    "runtimePromptShaPassCount": 957,
+    "noByteRuntimeOccurrenceCount": 957,
+    "physicalFailedEventsScanned": 1892,
     "activeCheckpointBoundOccurrenceCount": 139,
     "activeCheckpointEntriesWithoutNormalizedFailedRuntimePromptMatchCount": 135,
-    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1465,
+    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1467,
     "historicalExactPromptOccurrenceCount": 249,
     "historicalCanonicalSourceAliasCount": 4,
     "knownTextMissingHistoricalEvidenceCount": 0,
@@ -4122,7 +4122,7 @@
     ]
   },
   "runtimeFailures": {
-    "entryCount": 955,
+    "entryCount": 957,
     "entries": [
       {
         "entryId": "codex-image-failure-call_uFOZy6HPAj3sjhBalW0dkvUe-68932f6b1921",
@@ -47015,6 +47015,88 @@
           {
             "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
             "timestamp": "2026-08-13T13:22:24.343Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-c274e281-21ff-4685-928c-e9ea09a0d6cc-f898ab34c064",
+        "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+        "callId": "exec-c274e281-21ff-4685-928c-e9ea09a0d6cc",
+        "occurredAt": "2026-08-13T14:25:18.387Z",
+        "batch": null,
+        "scene": 4,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered esplanade along Georgetown's Kingston Seawall at clear golden hour, with the complete sea defence, cast-iron Seawall Bandstand, red-and-white octagonal Georgetown Lighthouse, Round House and Atlantic surf recognizable. Near-Sun solar-observation couture is fictional shielded fashion at this real Guyana location: pearl-gold thermal facets, abstract corona arcs, smoked-filter geometry, radiator seams and compact sunshield panels. Nobody is literally on or near the Sun. Country-led hybrid: two or three looks carry large secular seawall, cast-iron-bandstand, octagonal-lighthouse, Atlantic-wave, Demerara-window and woven-basket fields; at least two also carry solar construction. No literal flag, Golden Arrowhead, official or sacred symbol, religious architecture, copied dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a secure strapless pearl architectural top showing a narrow ordinary midriff over an Atlantic-blue upper-thigh skort, closed back, with seawall and solar-shield panels; Ellie wears a secure strapless scarlet upper-thigh mini with covered waist and closed back, carrying complete bandstand ironwork and gold thermal facets; Alia wears a rainforest-green one-shoulder architectural top showing a narrow ordinary midriff over Demerara-gold tailored short shorts, closed back, with lighthouse geometry; ECE wears a black asymmetric architectural top showing a narrow ordinary midriff over shell-bronze upper-thigh shorts, closed back, with pearl radiator seams. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge nearest Radiance, outside every mission lane; no adult hand is reassigned to them. The odd-prop roll is inactive; no odd prop appears. Pole and rainbow-only rolls are inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. The rolled guidance has already finished and is now noncontact. Ellie supports Radiance with one hand flat at her upper back and one hand at her near forearm; Radiance links her free hand with Alia's near hand. Every other relationship hand stays open at its owner's side. These are the only three human contacts. Emotions: Radiance: emotional exhaustion; Ellie: shame and social vulnerability; Alia: overwhelming relief; AI ECE: visible jealousy. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in a side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick sand backstop behind a transparent safety panel on a closed dry lane away from the lighthouse, ocean and public route. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nGolden-hour light keeps the dry esplanade, landmark, faces and downrange assembly clear. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "F898AB34C064F2A0FF5905AD8FD2456744D0041BE9568B0B8A45D57F89B3134D",
+          "normalizedSha256": "E4F13369939EA3657921700CB88DB68462C2A62964408473A77A8F9CD66601C1",
+          "encoding": "utf-8",
+          "bytes": 4350,
+          "chars": 4350,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+          "callId": "exec-c274e281-21ff-4685-928c-e9ea09a0d6cc",
+          "timestamp": "2026-08-13T14:25:18.387Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-c274e281-21ff-4685-928c-e9ea09a0d6cc|F898AB34C064F2A0FF5905AD8FD2456744D0041BE9568B0B8A45D57F89B3134D",
+        "observedIn": [
+          {
+            "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+            "timestamp": "2026-08-13T14:25:18.387Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-561561f5-0163-4c2d-9e9a-385269e5c49e-b5965fbbf6a4",
+        "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+        "callId": "exec-561561f5-0163-4c2d-9e9a-385269e5c49e",
+        "occurredAt": "2026-08-13T14:28:40.608Z",
+        "batch": null,
+        "scene": 4,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered biodiversity overlook at the Kanuku Mountains Protected Area, with the complete eastern and western ranges, immense rainforest canopy, open Rupununi savannah and winding tributary recognizable beyond a heavy rain curtain. Near-Sun solar-observation couture is fictional shielded fashion at this real Guyana location: pearl-gold thermal facets, abstract corona arcs, smoked-filter geometry, radiator seams and compact sunshield panels. Nobody is literally on or near the Sun. Theme-led original: the landmark remains the Guyana read while all four looks use distinct near-Sun thermal, corona, solar-filter, radiator and sunshield structures. No literal flag, Golden Arrowhead, official or sacred symbol, religious architecture, copied dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a Demerara-gold asymmetric solar top showing a narrow ordinary midriff over a black upper-thigh skort, closed back, with pearl thermal facets; Ellie wears an Atlantic-blue sleeveless solar top showing a narrow ordinary midriff over shell-bronze tailored short shorts, closed back, with gold radiator seams; Alia wears a rainforest-green one-shoulder upper-thigh solar mini with covered waist and complete open upper back to the secure waist, with scarlet corona arcs; ECE wears a pearl sleeveless upper-thigh solar mini with covered waist and closed back, black sunshield panels and Demerara-gold heels. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nNeither mascot appears. The active odd prop is Ellie's inert gyroscopic hard-shell suitcase with its mechanism locked; it is secured flat as the broad stable low seat and cannot roll, spin or tip. Pole and rainbow-only rolls are inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Ellie's inert locked suitcase is secured as a broad low seat. Radiance sits upright sideways across Ellie's knees; Ellie uses one hand at Radiance's upper back while Alia links one hand with Radiance's free hand. Their other hands stay open and separated. The seated body support and two hand contacts are the only three human contacts. Emotions: Radiance: playful mischief; Ellie: guilt and remorse; Alia: extreme happiness, radiant laughing delight; AI ECE: defiance. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in a side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nThe heavy rain remains outside the covered overlook; footing, faces, target and complete backstop stay dry and readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "B5965FBBF6A4445F7935E01DE0EA16E3692F68743A0A0A7602E61D8548C1B35C",
+          "normalizedSha256": "99597579648860868AB87352619E9C30CCE6B5A7EAF5726301BD4678451F8C2D",
+          "encoding": "utf-8",
+          "bytes": 4220,
+          "chars": 4220,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+          "callId": "exec-561561f5-0163-4c2d-9e9a-385269e5c49e",
+          "timestamp": "2026-08-13T14:28:40.608Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-561561f5-0163-4c2d-9e9a-385269e5c49e|B5965FBBF6A4445F7935E01DE0EA16E3692F68743A0A0A7602E61D8548C1B35C",
+        "observedIn": [
+          {
+            "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+            "timestamp": "2026-08-13T14:28:40.608Z"
           }
         ],
         "immutable": true
