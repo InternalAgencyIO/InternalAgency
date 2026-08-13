@@ -14,21 +14,21 @@
   },
   "sourceScan": {
     "sessionRootPolicy": "Read every locally available Codex session JSONL below USERPROFILE/.codex/sessions and USERPROFILE/.codex/archived_sessions (or CODEX_SESSION_ROOT) and retain failed image_generation_end events.",
-    "physicalFailedEventsScanned": 1888,
-    "uniqueRuntimeFailureOccurrences": 953,
-    "projectMarkerMatchedOccurrences": 780,
-    "projectThreadOrMarkerMatchedOccurrences": 902,
+    "physicalFailedEventsScanned": 1889,
+    "uniqueRuntimeFailureOccurrences": 954,
+    "projectMarkerMatchedOccurrences": 781,
+    "projectThreadOrMarkerMatchedOccurrences": 903,
     "excludedUnrelatedOccurrences": 0,
     "note": "All failed image-generation prompts are retained, including unrelated image requests, because the public-build directive explicitly covers every Codex image/video output and rejected prompt. Marker counts are informational only and never filter the tracker."
   },
   "summary": {
-    "runtimeFailureOccurrenceCount": 953,
-    "runtimePromptShaPassCount": 953,
-    "noByteRuntimeOccurrenceCount": 953,
-    "physicalFailedEventsScanned": 1888,
+    "runtimeFailureOccurrenceCount": 954,
+    "runtimePromptShaPassCount": 954,
+    "noByteRuntimeOccurrenceCount": 954,
+    "physicalFailedEventsScanned": 1889,
     "activeCheckpointBoundOccurrenceCount": 139,
     "activeCheckpointEntriesWithoutNormalizedFailedRuntimePromptMatchCount": 135,
-    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1463,
+    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1464,
     "historicalExactPromptOccurrenceCount": 249,
     "historicalCanonicalSourceAliasCount": 4,
     "knownTextMissingHistoricalEvidenceCount": 0,
@@ -4122,7 +4122,7 @@
     ]
   },
   "runtimeFailures": {
-    "entryCount": 953,
+    "entryCount": 954,
     "entries": [
       {
         "entryId": "codex-image-failure-call_uFOZy6HPAj3sjhBalW0dkvUe-68932f6b1921",
@@ -46933,6 +46933,47 @@
           {
             "threadId": "019ffb36-4916-73e3-a88e-eb9ec715eac5",
             "timestamp": "2026-08-13T13:01:07.005Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-5c48c713-d03a-4ced-8f32-8a3670d8fcd3-1bbf31469cae",
+        "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+        "callId": "exec-5c48c713-d03a-4ced-8f32-8a3670d8fcd3",
+        "occurredAt": "2026-08-13T13:12:49.228Z",
+        "batch": null,
+        "scene": 4,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: photorealistic-natural. Asset type: fresh vertical Starlight World Series public-fashion scene. Images 1-3 are identity references for the four fictional adult women; Image 4 anchors brunette AI ECE only. Generate one new independent 9:16 full-length image from these original identity references only, never from a prior country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve four distinct anchored faces and skin tones; no clone, merge, fifth person, man, or age shift.\n\nScene: Coelacanth National Park on Grande Comore, immediately recognizable through black basalt coast, clear deep-ocean water, reef shelves, tropical forest, and a distant harmless waterspout offshore. Fuse this country-led location with civilian Moon-surface expedition couture through matte pearl regolith, circular crater rims, basalt lattice, vanilla-gold foil, and compact observation beacons in lagoon blue, reef green, clove red, ylang yellow, charcoal, violet, coral, and deep ocean. No literal flag, crescent, star, emblem, religious architecture, copied ceremonial dress, uniform, badge, logo, text, or watermark.\n\nPermanent short foundation: four distinct shortest secure opaque lined upper-thigh looks with bare arms and complete bust, seat, pelvis, and intimate coverage. Radiance wears a lagoon-blue crop top with 4 cm midriff and pearl skort, closed back. Ellie wears a covered-waist reef-green mini with a fully open back. Alia wears a covered-waist strapless clove-red mini, closed back. ECE wears a strapless violet crop top with 4 cm midriff and charcoal tailored short shorts, fully open back. No trousers, leggings, jumpsuit, long front/side panels, knee/calf/midi/maxi hem, underwear, lingerie, sheer intimate area, accidental exposure, or intimate camera angle.\n\nWeather roll 93: distant waterspout only; the basalt observation platform is dry and safe. Mascot roll 1: exactly PAWS the tiny golden kitten and MAX the young golden-retriever pup rest together on one padded lounge nearest Alia, well away from the platform edge and mission lane. Odd prop, pole theme, rainbow-only wardrobe, and hosiery are inactive.\n\nSimple anatomy-first seated-to-standing assist among Radiance, Ellie, and Alia: Ellie uses one hand at Radiance's forearm, Alia uses one hand at Radiance's upper back, and Radiance shares one hand with Ellie. Their remaining hands are clearly open at their own sides. ECE stands fully separate and touches nobody. Exactly three human contacts. Radiance shows possessiveness, Ellie defiance, Alia tenderness, and ECE hope. The stored wrist-guidance beat is materialized as non-contact alignment coaching so the handler remains isolated. Every woman has exactly two continuously traceable arms/hands and two complete legs/feet, one role per hand, visible shoulder-elbow-wrist chains, separated silhouettes, and complete footwear.\n\nECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in stable two-hand control. Both hands stay on the grip; the index is visibly straight along the frame outside an empty guard. The muzzle points away from every person, mascot, landmark, occupied object, and camera toward one plain non-humanoid paper route symbol on a complete thick basalt-and-sand backstop behind a transparent safety panel. No ammunition, firing, flash, smoke, threat, injury, combat, holster, unsafe aim, second target, or cropped backstop.\n\nEye-level 50 mm full-body editorial. Keep all four faces, shoulders, elbows, wrists, hands, legs, feet, heels, both mascots, target, panel, and complete backstop inside frame. Natural skin, fabric, basalt, forest, water, and light. No extra, missing, fused, grossly malformed, ownerless, or impossible limb, hand, face, leg, foot, person, or mascot.\n",
+          "sha256": "1BBF31469CAEA4057C97E8012B994DC95207D6951140A79560030F4D77AE8CC1",
+          "normalizedSha256": "1688DD0327A25972E97449BA556EA1C2E9DB6A2CE2D9D1557227AE76A4521ACC",
+          "encoding": "utf-8",
+          "bytes": 3896,
+          "chars": 3896,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+          "callId": "exec-5c48c713-d03a-4ced-8f32-8a3670d8fcd3",
+          "timestamp": "2026-08-13T13:12:49.228Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-5c48c713-d03a-4ced-8f32-8a3670d8fcd3|1BBF31469CAEA4057C97E8012B994DC95207D6951140A79560030F4D77AE8CC1",
+        "observedIn": [
+          {
+            "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+            "timestamp": "2026-08-13T13:12:49.228Z"
           }
         ],
         "immutable": true

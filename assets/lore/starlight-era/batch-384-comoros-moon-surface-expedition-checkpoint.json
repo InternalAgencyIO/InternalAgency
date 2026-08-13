@@ -1,14 +1,14 @@
 {
   "batch": 384,
   "country": "Comoros",
-  "status": "pass-1-scene-1556-output-moderation-block-scenes-1557-1559-no-terminal-pending-continuation",
+  "status": "pass-1-scenes-1556-1557-output-moderation-block-scenes-1558-1559-no-terminal-pending-continuation",
   "sourceCommit": "6a5d6474f0f148cc158255907473da4513cdc8da",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
     "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
     "passCeiling": 2,
     "pass1CandidatesAuthorized": 4,
-    "pass1CandidatesConsumed": 1,
+    "pass1CandidatesConsumed": 2,
     "pass2CandidatesConsumed": 0,
     "automaticThirdPassAllowed": false
   },
@@ -47,7 +47,7 @@
   },
   "renderPasses": {
     "pass1": {
-      "status": "scene-1556-failed-output-moderation-scenes-1557-1559-no-terminal",
+      "status": "scenes-1556-1557-failed-output-moderation-scenes-1558-1559-no-terminal",
       "launchMode": "four scene prompts submitted concurrently; the wrapper surfaced scene 1556 rejection and exited while scenes 1557-1559 produced no terminal events or bytes; only untouched no-terminal slots may be submitted concurrently to complete this same initial pass",
       "allocation": {"A":1556,"B":1557,"C":1558,"D":1559},
       "sourceMode": "original identity anchors only; no country render input",
@@ -63,9 +63,21 @@
           "promptSha256": "1BA2B1D74421EC9DE1FCC9ACC47739922A1B3BFC230FE3C87956E60EE2D0C4CF",
           "promptBytes": 3940,
           "rawState": "no-bytes"
+        },
+        {
+          "scene": 1557,
+          "callId": "exec-5c48c713-d03a-4ced-8f32-8a3670d8fcd3",
+          "occurredAt": "2026-08-13T13:12:49.228Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "9994c4c0-7fe8-49f9-becd-1446fcef6a5e",
+          "categories": ["sexual"],
+          "promptPath": "tmp/world-195x4/batch-384/scene-1557-initial-prompt.txt",
+          "promptSha256": "1BBF31469CAEA4057C97E8012B994DC95207D6951140A79560030F4D77AE8CC1",
+          "promptBytes": 3896,
+          "rawState": "no-bytes"
         }
       ],
-      "untouchedNoTerminalSceneNumbers": [1557,1558,1559]
+      "untouchedNoTerminalSceneNumbers": [1558,1559]
     },
     "pass2": {"status":"not-authorized-before-single-pass-audit"}
   },
