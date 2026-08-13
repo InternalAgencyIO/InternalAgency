@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-08-13T06:25:00.000Z",
+  "policy": "Ignored non-media diagnostic files are catalogued by sanitized repository-relative path and SHA-256. Raw logs containing local paths are withheld and may be deleted after cataloguing.",
+  "entries": [
+    {
+      "path": "artifacts/enrichment-render-queue.err.log",
+      "sha256": "6f3d4c84be655a199daad02ca74ba15e8944564dc7d13ed9cb1a09879ca69cf7",
+      "bytes": 8401,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/enrichment-render-queue.out.log",
+      "sha256": "cfe8a22fc081aa11d42e78fe8ccbf4da8dfdf84e963ca4ae8c09ea31ce5f442c",
+      "bytes": 1234,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/full-render-queue.err.log",
+      "sha256": "e0bd885b4ce12ca837f1a9fa0b8c589a277de235195a5659d73c03e8e320f283",
+      "bytes": 8385,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/full-render-queue.out.log",
+      "sha256": "723403f2925d1ef1f62cc50619460fcb92210c2b938eaf128867e805e321499e",
+      "bytes": 1395,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/proof-render.err.log",
+      "sha256": "458476f916ca5968e20c00619458e2756f16b8bf05d36e535e7541adf967fe45",
+      "bytes": 544,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/proof-render.out.log",
+      "sha256": "5f7b998ff1e3957b939f08d253d713f4e39555e8a5f6d0cc9ace3fcb2d3ae7ed",
+      "bytes": 43,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/proof-render-2.err.log",
+      "sha256": "458476f916ca5968e20c00619458e2756f16b8bf05d36e535e7541adf967fe45",
+      "bytes": 544,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/proof-render-2.out.log",
+      "sha256": "5f7b998ff1e3957b939f08d253d713f4e39555e8a5f6d0cc9ace3fcb2d3ae7ed",
+      "bytes": 43,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/proof-render-3.err.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/proof-render-3.out.log",
+      "sha256": "f434c55b75f1bb7773b97180cca1fd8d250642016abe61f43529fd4d71e00dcc",
+      "bytes": 175,
+      "disposition": "withheld-local-diagnostic"
+    },
+    {
+      "path": "artifacts/test-codex/pets/radiance-butterfly/pet.json",
+      "sha256": "349f0870b8aa8c0e48db17b5720cbac5c6c1414fd39b833a86aeae483f1e6bfd",
+      "bytes": 252,
+      "disposition": "non-media-artifact-retained"
+    }
+  ]
+}
