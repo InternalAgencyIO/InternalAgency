@@ -5173,21 +5173,21 @@
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   },
   "latestGuardianWakeAudit": {
-    "status": "five-eligible-country-posts-live-unverified-browser-unavailable",
-    "checkedAt": "2026-08-13T15:30:00.000Z",
+    "status": "six-eligible-country-posts-live-unverified-browser-unavailable",
+    "checkedAt": "2026-08-13T17:17:32.505Z",
     "account": "@dogramaci",
     "liveProfileVerified": false,
     "signedInAccount": null,
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 5,
+    "eligibleBacklogRemaining": 6,
     "checkpointAudit": {
       "batchRange": [
         382,
-        386
+        387
       ],
-      "eligibleWithNoRecordedUrlCount": 5,
+      "eligibleWithNoRecordedUrlCount": 6,
       "eligibleWithNoRecordedUrl": [
         {
           "batch": 382,
@@ -5243,18 +5243,29 @@
           "caption": "Solomon Islands 🤍 Guyana #SolomonIslands",
           "recordedUrl": null,
           "liveState": "unverified-no-fresh-duplicate-proof"
+        },
+        {
+          "batch": 387,
+          "country": "Bhutan",
+          "checkpoint": "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json",
+          "acceptedCurrentCountryAssets": 4,
+          "required": 4,
+          "eligible": true,
+          "caption": "Bhutan ❤️ Solomon Islands #Bhutan",
+          "recordedUrl": null,
+          "liveState": "unverified-no-fresh-duplicate-proof"
         }
       ]
     },
     "activeCountryAudit": {
-      "batch": 386,
-      "country": "Solomon Islands",
+      "batch": 387,
+      "country": "Bhutan",
       "acceptedCurrentCountryAssets": 4,
       "required": 4,
       "eligible": true
     },
     "latestVisibleAccountStatuses": [],
-    "action": "Browser access was unavailable. No composer opened, no media uploaded, and no Post click occurred; all five locally eligible countries remain live-unreconciled.",
+    "action": "Browser access was unavailable. No composer opened, no media uploaded, and no Post click occurred; all six locally eligible countries remain live-unreconciled.",
     "duplicatePrevention": "Do not reserve, upload, append a posts entry, or write a checkpoint URL until signed-in @dogramaci reconciliation proves absence or returns the existing public status URL. The latest-four window is insufficient evidence for older posts."
   }
 }

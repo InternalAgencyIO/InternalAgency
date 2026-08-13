@@ -1,7 +1,7 @@
 {
   "batch": 387,
   "country": "Bhutan",
-  "status": "pass-1-complete-three-hard-safe-accepted-one-hard-unusable-pass-2-one-slot-pending",
+  "status": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-bhutan-rendering",
   "sourceCommit": "b069e1d928ee9b47eb42027f18e9454b294b684a",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -10,7 +10,7 @@
     "pass1CandidatesPrepared": 4,
     "pass1CandidatesAuthorized": 4,
     "pass1CandidatesConsumed": 4,
-    "pass2CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 1,
     "automaticThirdPassAllowed": false,
     "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
   },
@@ -348,14 +348,16 @@
       ]
     },
     "pass2": {
-      "status": "authorized-one-fresh-holistic-correction",
+      "status": "completed-one-fresh-correction-hard-safe-accepted",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
       "sceneNumbers":[1571],
       "candidatesAuthorized":1,
-      "candidatesConsumed": 0,
+      "candidatesConsumed": 1,
       "launchMode":"one fresh clean candidate from original identity anchors only",
       "consolidatedCorrections":["remove every person, animal, bird, fish, elephant, langur, boat and structure from the full downrange river lane and beyond the marker","retain five separated adults, opaque public-safe coverage, complete anatomy and isolated side-on handling"],
       "prompts":{"1571":{"path":"tmp/world-195x4/batch-387/scene-1571-pass-2-holistic-prompt.txt","sha256":"A80B196C14CDDB01448617F711937221ACBFB1BCCB0C6D2E12BE4978F6E6E203","bytes":3057}},
+      "events":[{"scene":1571,"callId":"exec-ba518f81-75f6-490f-86ba-60fa7f3a80a5","occurredAt":"2026-08-13T17:09:23.727Z","status":"completed-hard-safe-accepted","promptPath":"tmp/world-195x4/batch-387/scene-1571-pass-2-holistic-prompt.txt","promptSha256":"A80B196C14CDDB01448617F711937221ACBFB1BCCB0C6D2E12BE4978F6E6E203","promptBytes":3057,"rawPath":"tmp/world-195x4/batch-387/raw/pass-2/scene-1571.png","rawSha256":"7D9724E8CF8621834F50E7A137A17F168AC70E0F96007BEA50A29382DEBE65EE","rawBytes":2459822,"dimensions":[941,1672],"hardGateAudit":"five anchored adults, opaque public-safe short fashion, complete gross anatomy and footwear, no mascots or odd prop; isolated side-on Alia handles the inert prop toward a visible orange marker across a completely empty animal-free and person-free Manas River lane","acceptedAsset":"assets/lore/starlight-era/1571-bhutan-royal-manas-deep-sea-submersible-male-bounded-pass-2.png"}],
+      "auditStandard":"bounded hard gates only; exact garment microdetails, motifs, eye line, emotion, contact count, choreography, and pixel-perfect marker alignment remain soft quality targets",
       "thirdPassAllowed": false
     }
   },
@@ -363,6 +365,7 @@
     {"scene":1568,"file":"assets/lore/starlight-era/1568-bhutan-thimphu-clock-tower-deep-sea-submersible-bounded-pass-1.png","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1568.png","sha256":"4C76C95CF0A592AD53E55814EFAE866AA4C3AC4D591516A8144174604AB812C0","bytes":2890834,"dimensions":[941,1672],"acceptance":"bounded-hard-safe-pass-1"},
     {"scene":1569,"file":"assets/lore/starlight-era/1569-bhutan-punakha-suspension-bridge-deep-sea-submersible-bounded-pass-1.png","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1569.png","sha256":"44FCD5B294A7E21DB75C5B1240FEC87D14EB18CC1053A72970F56B1AF0EA286C","bytes":2593807,"dimensions":[941,1672],"acceptance":"bounded-hard-safe-pass-1"},
     {"scene":1570,"file":"assets/lore/starlight-era/1570-bhutan-phobjikha-valley-deep-sea-submersible-bounded-pass-1.png","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1570.png","sha256":"80DD2FBA57EFE665BC8FFC4B4CA9267A991945B4F6D73CCC293BC26AC5D29E18","bytes":2389939,"dimensions":[941,1672],"acceptance":"bounded-hard-safe-pass-1"}
+    ,{"scene":1571,"file":"assets/lore/starlight-era/1571-bhutan-royal-manas-deep-sea-submersible-male-bounded-pass-2.png","rawPath":"tmp/world-195x4/batch-387/raw/pass-2/scene-1571.png","sha256":"7D9724E8CF8621834F50E7A137A17F168AC70E0F96007BEA50A29382DEBE65EE","bytes":2459822,"dimensions":[941,1672],"acceptance":"bounded-hard-safe-pass-2"}
   ],
   "rejectedAssets": [{"scene":1571,"status":"completed-hard-unusable-visual-reject","callId":"exec-7eb54e76-610b-4a96-aba4-462e83502059","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1571.png","sha256":"EB345290EFA892481E0970E485AEA31E56ADBD1DECC85C496DBC38AF845D47FD","bytes":2544012,"dimensions":[941,1672],"hardFailure":"wildlife in downrange river lane"}],
   "rejectedPromptLedger": {
@@ -389,10 +392,10 @@
     ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
-  "hardSafeAcceptedCount": 3,
-  "missingSceneNumbers": [1571],
+  "hardSafeAcceptedCount": 4,
+  "missingSceneNumbers": [],
   "xPost": {
-    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "status": "eligible-pending-live-duplicate-reconciliation-and-publication",
     "caption": "Bhutan ❤️ Solomon Islands #Bhutan",
     "url": null
   },
@@ -414,7 +417,8 @@
     "themeEvidence": [
       "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7"
     ],
-    "lockedUntilBatch387Closed": true
+    "lockedUntilBatch387Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch387Closure": true
   },
   "preflight": {
     "path": "tmp/world-195x4/batch-387/batch-387-bhutan-preflight.json",
