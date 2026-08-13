@@ -1,7 +1,7 @@
 {
   "batch": 386,
   "country": "Solomon Islands",
-  "status": "active-pass-1-ready-not-launched",
+  "status": "pass-1-complete-three-hard-safe-accepted-one-hard-unusable-pass-2-one-slot-pending",
   "sourceCommit": "b2f1ab5215c4dce1e4feab375b8bb04a2c1bd9ff",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -9,7 +9,7 @@
     "passCeiling": 2,
     "pass1CandidatesPrepared": 4,
     "pass1CandidatesAuthorized": 4,
-    "pass1CandidatesConsumed": 0,
+    "pass1CandidatesConsumed": 4,
     "pass2CandidatesConsumed": 0,
     "automaticThirdPassAllowed": false,
     "authorizationCondition": "Batch 385 is closed; exactly four concurrent pass-1 candidates are authorized but not launched by this materializer."
@@ -329,7 +329,7 @@
   },
   "renderPasses": {
     "pass1": {
-      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "status": "completed-three-hard-safe-accepted-one-hard-unusable-visual-reject",
       "allocation": {
         "A": 1564,
         "B": 1565,
@@ -338,32 +338,174 @@
       },
       "candidatesPrepared": 4,
       "candidatesAuthorized": 4,
-      "candidatesConsumed": 0,
+      "candidatesConsumed": 4,
       "launchWhenUnlocked": "Exactly four concurrent clean candidates, one per scene.",
       "sourceMode": "original identity anchors only; no prior country render input",
-      "events": []
+      "events": [
+        {
+          "scene": 1564,
+          "callId": "exec-f081f369-0cf7-4ab7-8c82-c28964f91c2d",
+          "occurredAt": "2026-08-13T15:26:42.888Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-386/scene-1564-initial-prompt.txt",
+          "promptSha256": "FB38835C7965AD01B043BAB3A54A8C6677582AD670C5CBD212970FF860B83C76",
+          "promptBytes": 4520,
+          "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1564.png",
+          "rawSha256": "2DB0E266D2CD6567075488F5351CF1EC982CC8DD4C0F7311F3DB2FCC8E47AF87",
+          "rawBytes": 2470294,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "four anchored adults, opaque public-safe short fashion, no gross anatomy corruption, PAWS and MAX safe together on a lounge; isolated side-on ECE aims the inert prop at a non-humanoid paper target on a complete backstop"
+        },
+        {
+          "scene": 1565,
+          "callId": "exec-b0415a62-ef71-4aec-9632-930a8c65a583",
+          "occurredAt": "2026-08-13T15:28:14.762Z",
+          "status": "completed-hard-unusable-visual-reject",
+          "promptPath": "tmp/world-195x4/batch-386/scene-1565-initial-prompt.txt",
+          "promptSha256": "16C26E40D020129C6A5F6F9E70C187DEBDBA38F0B237630CD8791012FFA30D10",
+          "promptBytes": 4250,
+          "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1565.png",
+          "rawSha256": "AF689C8998F7D510944117C9CED965696C6D7B13243291A98E77B390E09FCE54",
+          "rawBytes": 2460499,
+          "dimensions": [941, 1672],
+          "hardFailures": [
+            "the paper endpoint is a humanoid stick figure rather than a harmless non-humanoid route symbol"
+          ],
+          "retainedPasses": [
+            "four anchored adults",
+            "opaque public-safe short fashion",
+            "no gross anatomy corruption",
+            "isolated handler and complete backstop",
+            "no mascots required"
+          ]
+        },
+        {
+          "scene": 1566,
+          "callId": "exec-e73826b0-5017-4fb9-8382-f32d1f899758",
+          "occurredAt": "2026-08-13T15:29:40.137Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-386/scene-1566-initial-prompt.txt",
+          "promptSha256": "05C754548A958F53DDBE51BA11A6E6D648D869F83C33D3228C9DE2669CE88D6F",
+          "promptBytes": 4678,
+          "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1566.png",
+          "rawSha256": "854965DB986190AA20A44144D877BEE4EA5C04AB253DE840915279A67420D2FD",
+          "rawBytes": 2851362,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "five anchored adults, opaque public-safe short fashion, no gross anatomy corruption, two substituted dogs remain safe on a lounge; isolated side-on ECE aims the inert prop over empty ocean toward a visible unoccupied marker"
+        },
+        {
+          "scene": 1567,
+          "callId": "exec-831d8116-1aa3-4a71-b18b-1319dab76b9b",
+          "occurredAt": "2026-08-13T15:31:12.189Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-386/scene-1567-initial-prompt.txt",
+          "promptSha256": "AEEFBDEAD172BD2FD1C58D8044E9CF75489A54A2FE20289ABA4DBE9A88F55D28",
+          "promptBytes": 4418,
+          "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1567.png",
+          "rawSha256": "304D8D3704A8C8326D4A716520AA5A9E3A1E58F6BA7BAF1BE82A4ECA1BE578CC",
+          "rawBytes": 2588942,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "four anchored adults, opaque public-safe short fashion, no gross anatomy corruption, two substituted dogs remain safe on a lounge; isolated side-on ECE aims the inert prop at a paper target on a complete stone-and-sand backstop behind a transparent panel"
+        }
+      ]
     },
     "pass2": {
-      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "status": "authorized-one-fresh-holistic-correction",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "sceneNumbers": [1565],
+      "candidatesAuthorized": 1,
       "candidatesConsumed": 0,
+      "launchMode": "one fresh clean candidate from original identity anchors only",
+      "consolidatedCorrections": [
+        "replace the humanoid stick-figure endpoint with exactly one plain non-humanoid black diamond on white paper",
+        "retain separated adult silhouettes, full opaque coverage, complete anatomy, and isolated side-on handling"
+      ],
+      "prompts": {
+        "1565": {
+          "path": "tmp/world-195x4/batch-386/scene-1565-pass-2-holistic-prompt.txt",
+          "sha256": "B9C14376E0657E93076ADC4199A380BA3C96E802E91D28BE898207805BFA83A5",
+          "bytes": 3045
+        }
+      },
       "thirdPassAllowed": false
     }
   },
-  "acceptedAssets": [],
-  "rejectedAssets": [],
+  "acceptedAssets": [
+    {
+      "scene": 1564,
+      "file": "assets/lore/starlight-era/1564-solomon-islands-matanikau-cascade-near-sun-solar-observation-bounded-pass-1.png",
+      "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1564.png",
+      "sha256": "2DB0E266D2CD6567075488F5351CF1EC982CC8DD4C0F7311F3DB2FCC8E47AF87",
+      "bytes": 2470294,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-1"
+    },
+    {
+      "scene": 1566,
+      "file": "assets/lore/starlight-era/1566-solomon-islands-tetepare-island-near-sun-solar-observation-male-bounded-pass-1.png",
+      "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1566.png",
+      "sha256": "854965DB986190AA20A44144D877BEE4EA5C04AB253DE840915279A67420D2FD",
+      "bytes": 2851362,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-1"
+    },
+    {
+      "scene": 1567,
+      "file": "assets/lore/starlight-era/1567-solomon-islands-lake-tegano-near-sun-solar-observation-bounded-pass-1.png",
+      "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1567.png",
+      "sha256": "304D8D3704A8C8326D4A716520AA5A9E3A1E58F6BA7BAF1BE82A4ECA1BE578CC",
+      "bytes": 2588942,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-1"
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1565,
+      "status": "completed-hard-unusable-visual-reject",
+      "callId": "exec-b0415a62-ef71-4aec-9632-930a8c65a583",
+      "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1565.png",
+      "sha256": "AF689C8998F7D510944117C9CED965696C6D7B13243291A98E77B390E09FCE54",
+      "bytes": 2460499,
+      "dimensions": [941, 1672],
+      "hardFailure": "humanoid stick-figure target"
+    }
+  ],
   "rejectedPromptLedger": {
-    "status": "empty-before-render",
-    "entries": [],
+    "status": "one-completed-visual-reject-exact-text-recorded",
+    "entries": [
+      {
+        "entryId": "batch386-scene1565-pass1-exec-b0415a62",
+        "scene": 1565,
+        "phase": "pass-1",
+        "status": "completed-hard-unusable-visual-reject",
+        "callId": "exec-b0415a62-ef71-4aec-9632-930a8c65a583",
+        "occurredAt": "2026-08-13T15:28:14.762Z",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered marine-observation terrace above Marovo Lagoon, with the complete double barrier lagoon, raised reef islands, turquoise channels, mangrove and seagrass edges, and Vangunu and Gatokae slopes recognizable beyond a strong windstorm. Near-Sun solar-observation couture is fictional shielded fashion at this real Solomon Islands location: pearl-gold thermal facets, abstract corona arcs, smoked-filter geometry, radiator seams and compact sunshield panels. Nobody is literally on or near the Sun. Country-led hybrid: two or three looks carry large secular double-barrier-lagoon, reef-island, mangrove, seagrass, canoe-craft and conservation fields; at least two also carry solar construction. No literal Solomon Islands flag, five-star field, official emblem or sacred symbol, religious architecture, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a sunrise-gold asymmetric upper-thigh mini with covered waist and closed back, carrying lagoon channels and pearl thermal facets; Ellie wears a sea-glass-blue sleeveless upper-thigh mini with covered waist and closed back, carrying a complete reef-island field and gold radiator seams; Alia wears a rainforest-green sleeveless solar top showing a narrow ordinary midriff over a coral-rose upper-thigh skort, closed back, with mangrove arcs; ECE wears a secure strapless shell-ivory solar top showing a narrow ordinary midriff over volcanic-black tailored upper-thigh shorts, closed back, with smoked-filter geometry. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nNeither mascot appears. The active odd prop is Ellie's kinetic umbrella with rotating mirrored petals; its dry mechanism is visibly locked and she supports its stable vertical shaft with both hands. Pole and rainbow-only rolls are inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Ellie stands separately with both hands visibly supporting the locked kinetic umbrella shaft. Radiance and Alia stand in separated three-quarter poses with both hands open and visible. There is no human contact and no hidden hand. Emotions: Radiance: overwhelming relief; Ellie: betrayal shock; Alia: playful mischief; AI ECE: calm contentment. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in a side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick sand backstop behind a transparent safety panel on a closed dry lane away from water and public routes. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nThe windstorm remains beyond the shielded terrace; the umbrella mechanism is locked and dry footing, faces, lagoon, target and complete backstop stay readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "16C26E40D020129C6A5F6F9E70C187DEBDBA38F0B237630CD8791012FFA30D10",
+          "encoding": "utf-8",
+          "bytes": 4250
+        },
+        "rawOutput": {
+          "state": "completed-hard-unusable-visual-reject",
+          "path": "tmp/world-195x4/batch-386/raw/pass-1/scene-1565.png",
+          "sha256": "AF689C8998F7D510944117C9CED965696C6D7B13243291A98E77B390E09FCE54",
+          "bytes": 2460499,
+          "dimensions": [941, 1672]
+        },
+        "auditRef": "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json#/renderPasses/pass1/events/1",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-386/scene-1565-initial-prompt.txt",
+          "rawPath": "tmp/world-195x4/batch-386/raw/pass-1/scene-1565.png"
+        },
+        "immutable": true
+      }
+    ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
-  "hardSafeAcceptedCount": 0,
-  "missingSceneNumbers": [
-    1564,
-    1565,
-    1566,
-    1567
-  ],
+  "hardSafeAcceptedCount": 3,
+  "missingSceneNumbers": [1565],
   "xPost": {
     "status": "ineligible-until-four-of-four-and-git-remote-verification",
     "caption": "Solomon Islands 🤍 Guyana #SolomonIslands",
