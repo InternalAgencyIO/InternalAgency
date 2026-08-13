@@ -5173,21 +5173,21 @@
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   },
   "latestGuardianWakeAudit": {
-    "status": "four-eligible-country-posts-live-unverified-browser-unavailable",
-    "checkedAt": "2026-08-13T15:21:51.481Z",
+    "status": "five-eligible-country-posts-live-unverified-browser-unavailable",
+    "checkedAt": "2026-08-13T15:30:00.000Z",
     "account": "@dogramaci",
     "liveProfileVerified": false,
     "signedInAccount": null,
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 4,
+    "eligibleBacklogRemaining": 5,
     "checkpointAudit": {
       "batchRange": [
         382,
-        385
+        386
       ],
-      "eligibleWithNoRecordedUrlCount": 4,
+      "eligibleWithNoRecordedUrlCount": 5,
       "eligibleWithNoRecordedUrl": [
         {
           "batch": 382,
@@ -5232,18 +5232,29 @@
           "caption": "Guyana ❤️ Comoros #Guyana #WorldXXXSeries",
           "recordedUrl": null,
           "liveState": "unverified-no-fresh-duplicate-proof"
+        },
+        {
+          "batch": 386,
+          "country": "Solomon Islands",
+          "checkpoint": "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json",
+          "acceptedCurrentCountryAssets": 4,
+          "required": 4,
+          "eligible": true,
+          "caption": "Solomon Islands 🤍 Guyana #SolomonIslands",
+          "recordedUrl": null,
+          "liveState": "unverified-no-fresh-duplicate-proof"
         }
       ]
     },
     "activeCountryAudit": {
-      "batch": 385,
-      "country": "Guyana",
+      "batch": 386,
+      "country": "Solomon Islands",
       "acceptedCurrentCountryAssets": 4,
       "required": 4,
       "eligible": true
     },
     "latestVisibleAccountStatuses": [],
-    "action": "Browser access was unavailable. No composer opened, no media uploaded, and no Post click occurred; all four locally eligible countries remain live-unreconciled.",
+    "action": "Browser access was unavailable. No composer opened, no media uploaded, and no Post click occurred; all five locally eligible countries remain live-unreconciled.",
     "duplicatePrevention": "Do not reserve, upload, append a posts entry, or write a checkpoint URL until signed-in @dogramaci reconciliation proves absence or returns the existing public status URL. The latest-four window is insufficient evidence for older posts."
   }
 }

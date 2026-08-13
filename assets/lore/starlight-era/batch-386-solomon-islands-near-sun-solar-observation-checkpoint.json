@@ -1,7 +1,7 @@
 {
   "batch": 386,
   "country": "Solomon Islands",
-  "status": "pass-1-complete-three-hard-safe-accepted-one-hard-unusable-pass-2-one-slot-pending",
+  "status": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-solomon-islands-rendering",
   "sourceCommit": "b2f1ab5215c4dce1e4feab375b8bb04a2c1bd9ff",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -10,7 +10,7 @@
     "pass1CandidatesPrepared": 4,
     "pass1CandidatesAuthorized": 4,
     "pass1CandidatesConsumed": 4,
-    "pass2CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 1,
     "automaticThirdPassAllowed": false,
     "authorizationCondition": "Batch 385 is closed; exactly four concurrent pass-1 candidates are authorized but not launched by this materializer."
   },
@@ -410,11 +410,11 @@
       ]
     },
     "pass2": {
-      "status": "authorized-one-fresh-holistic-correction",
+      "status": "completed-one-fresh-correction-hard-safe-accepted",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
       "sceneNumbers": [1565],
       "candidatesAuthorized": 1,
-      "candidatesConsumed": 0,
+      "candidatesConsumed": 1,
       "launchMode": "one fresh clean candidate from original identity anchors only",
       "consolidatedCorrections": [
         "replace the humanoid stick-figure endpoint with exactly one plain non-humanoid black diamond on white paper",
@@ -427,6 +427,24 @@
           "bytes": 3045
         }
       },
+      "events": [
+        {
+          "scene": 1565,
+          "callId": "exec-12db8b89-2a88-4ecc-87f0-c0b9a88813f4",
+          "occurredAt": "2026-08-13T16:02:33.638Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-386/scene-1565-pass-2-holistic-prompt.txt",
+          "promptSha256": "B9C14376E0657E93076ADC4199A380BA3C96E802E91D28BE898207805BFA83A5",
+          "promptBytes": 3045,
+          "rawPath": "tmp/world-195x4/batch-386/raw/pass-2/scene-1565.png",
+          "rawSha256": "9F4B5DEFEC5AA756AD688D3DAF035D79FF567053B3AC6814147C12FA56078DBE",
+          "rawBytes": 2485660,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "exactly four anchored adult women, opaque public-safe short fashion, complete gross anatomy and footwear, no mascots as rolled, locked umbrella stable; isolated side-on ECE aims the inert prop at one non-humanoid black diamond on a complete backstop behind a transparent panel",
+          "acceptedAsset": "assets/lore/starlight-era/1565-solomon-islands-marovo-lagoon-near-sun-solar-observation-bounded-pass-2.png"
+        }
+      ],
+      "auditStandard": "bounded hard gates only; exact garment microdetails, motifs, eye line, emotion, contact count, choreography, and pixel-perfect marker alignment remain soft quality targets",
       "thirdPassAllowed": false
     }
   },
@@ -457,6 +475,15 @@
       "bytes": 2588942,
       "dimensions": [941, 1672],
       "acceptance": "bounded-hard-safe-pass-1"
+    },
+    {
+      "scene": 1565,
+      "file": "assets/lore/starlight-era/1565-solomon-islands-marovo-lagoon-near-sun-solar-observation-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-386/raw/pass-2/scene-1565.png",
+      "sha256": "9F4B5DEFEC5AA756AD688D3DAF035D79FF567053B3AC6814147C12FA56078DBE",
+      "bytes": 2485660,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-2"
     }
   ],
   "rejectedAssets": [
@@ -504,10 +531,10 @@
     ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
-  "hardSafeAcceptedCount": 3,
-  "missingSceneNumbers": [1565],
+  "hardSafeAcceptedCount": 4,
+  "missingSceneNumbers": [],
   "xPost": {
-    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "status": "eligible-pending-live-duplicate-reconciliation-and-publication",
     "caption": "Solomon Islands 🤍 Guyana #SolomonIslands",
     "url": null
   },
@@ -529,7 +556,8 @@
     "themeEvidence": [
       "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7"
     ],
-    "lockedUntilBatch386Closed": true
+    "lockedUntilBatch386Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch386Closure": true
   },
   "preflight": {
     "path": "tmp/world-195x4/batch-386/batch-386-solomon-islands-preflight.json",
