@@ -1,7 +1,7 @@
 {
   "batch": 387,
   "country": "Bhutan",
-  "status": "active-pass-1-ready-not-launched",
+  "status": "pass-1-complete-three-hard-safe-accepted-one-hard-unusable-pass-2-one-slot-pending",
   "sourceCommit": "b069e1d928ee9b47eb42027f18e9454b294b684a",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -9,7 +9,7 @@
     "passCeiling": 2,
     "pass1CandidatesPrepared": 4,
     "pass1CandidatesAuthorized": 4,
-    "pass1CandidatesConsumed": 0,
+    "pass1CandidatesConsumed": 4,
     "pass2CandidatesConsumed": 0,
     "automaticThirdPassAllowed": false,
     "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
@@ -328,7 +328,7 @@
   },
   "renderPasses": {
     "pass1": {
-      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "status": "completed-three-hard-safe-accepted-one-hard-unusable-visual-reject",
       "allocation": {
         "A": 1568,
         "B": 1569,
@@ -337,32 +337,60 @@
       },
       "candidatesPrepared": 4,
       "candidatesAuthorized": 4,
-      "candidatesConsumed": 0,
+      "candidatesConsumed": 4,
       "launchWhenUnlocked": "Exactly four concurrent clean candidates, one per scene.",
       "sourceMode": "original identity anchors only; no prior country render input",
-      "events": []
+      "events": [
+        {"scene":1568,"callId":"exec-06844870-ee09-4cdb-a25f-0edf9a5a2573","occurredAt":"2026-08-13T16:36:34.062Z","status":"completed-hard-safe-accepted","promptPath":"tmp/world-195x4/batch-387/scene-1568-initial-prompt.txt","promptSha256":"AB0CA84218B7D28B8AD72A64F61616E78BE604FF4EB3EDAB929F20D5F50EE442","promptBytes":4596,"rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1568.png","rawSha256":"4C76C95CF0A592AD53E55814EFAE866AA4C3AC4D591516A8144174604AB812C0","rawBytes":2890834,"dimensions":[941,1672],"hardGateAudit":"four anchored adults, opaque public-safe short fashion, complete gross anatomy and footwear, kitten safe on lounge; isolated ECE aims the inert prop at a complete paper target and backstop"},
+        {"scene":1569,"callId":"exec-db5c4949-8618-476b-821b-aab6d735c381","occurredAt":"2026-08-13T16:37:41.442Z","status":"completed-hard-safe-accepted","promptPath":"tmp/world-195x4/batch-387/scene-1569-initial-prompt.txt","promptSha256":"F4D6F28E1C4C3641D88386C28F6489C5029EEA4496856BD2DF8E55C7239EB390","promptBytes":4623,"rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1569.png","rawSha256":"44FCD5B294A7E21DB75C5B1240FEC87D14EB18CC1053A72970F56B1AF0EA286C","rawBytes":2593807,"dimensions":[941,1672],"hardGateAudit":"four anchored adults, opaque public-safe short fashion, complete gross anatomy and footwear, no mascots; isolated Alia aims the inert prop at a non-humanoid paper target on a complete backstop"},
+        {"scene":1570,"callId":"exec-0300af9e-989d-416a-aea1-f0a7388e238f","occurredAt":"2026-08-13T16:39:09.358Z","status":"completed-hard-safe-accepted","promptPath":"tmp/world-195x4/batch-387/scene-1570-initial-prompt.txt","promptSha256":"4EA7FD5E8CEAF5B548B8505B13FADA4F7CEA931E3219371FEBA45D1E1A89FA4A","promptBytes":4557,"rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1570.png","rawSha256":"80DD2FBA57EFE665BC8FFC4B4CA9267A991945B4F6D73CCC293BC26AC5D29E18","rawBytes":2389939,"dimensions":[941,1672],"hardGateAudit":"four anchored adults, opaque public-safe short fashion, complete gross anatomy and footwear, safe resting kitten; isolated ECE aims the inert prop across empty basin water at a visible orange marker"},
+        {"scene":1571,"callId":"exec-7eb54e76-610b-4a96-aba4-462e83502059","occurredAt":"2026-08-13T16:40:46.410Z","status":"completed-hard-unusable-visual-reject","promptPath":"tmp/world-195x4/batch-387/scene-1571-initial-prompt.txt","promptSha256":"506706575523C534ABBA6FE35854400C6D7364AEFF9A7E7F5B7D91B54031C522","promptBytes":4788,"rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1571.png","rawSha256":"EB345290EFA892481E0970E485AEA31E56ADBD1DECC85C496DBC38AF845D47FD","rawBytes":2544012,"dimensions":[941,1672],"hardFailures":["elephants and other wildlife occupy the downrange river area near and beyond the muzzle-to-marker lane"],"retainedPasses":["five anchored adults","opaque public-safe short fashion","complete gross anatomy and footwear","isolated handler","visible orange water marker"]}
+      ]
     },
     "pass2": {
-      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "status": "authorized-one-fresh-holistic-correction",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "sceneNumbers":[1571],
+      "candidatesAuthorized":1,
       "candidatesConsumed": 0,
+      "launchMode":"one fresh clean candidate from original identity anchors only",
+      "consolidatedCorrections":["remove every person, animal, bird, fish, elephant, langur, boat and structure from the full downrange river lane and beyond the marker","retain five separated adults, opaque public-safe coverage, complete anatomy and isolated side-on handling"],
+      "prompts":{"1571":{"path":"tmp/world-195x4/batch-387/scene-1571-pass-2-holistic-prompt.txt","sha256":"A80B196C14CDDB01448617F711937221ACBFB1BCCB0C6D2E12BE4978F6E6E203","bytes":3057}},
       "thirdPassAllowed": false
     }
   },
-  "acceptedAssets": [],
-  "rejectedAssets": [],
+  "acceptedAssets": [
+    {"scene":1568,"file":"assets/lore/starlight-era/1568-bhutan-thimphu-clock-tower-deep-sea-submersible-bounded-pass-1.png","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1568.png","sha256":"4C76C95CF0A592AD53E55814EFAE866AA4C3AC4D591516A8144174604AB812C0","bytes":2890834,"dimensions":[941,1672],"acceptance":"bounded-hard-safe-pass-1"},
+    {"scene":1569,"file":"assets/lore/starlight-era/1569-bhutan-punakha-suspension-bridge-deep-sea-submersible-bounded-pass-1.png","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1569.png","sha256":"44FCD5B294A7E21DB75C5B1240FEC87D14EB18CC1053A72970F56B1AF0EA286C","bytes":2593807,"dimensions":[941,1672],"acceptance":"bounded-hard-safe-pass-1"},
+    {"scene":1570,"file":"assets/lore/starlight-era/1570-bhutan-phobjikha-valley-deep-sea-submersible-bounded-pass-1.png","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1570.png","sha256":"80DD2FBA57EFE665BC8FFC4B4CA9267A991945B4F6D73CCC293BC26AC5D29E18","bytes":2389939,"dimensions":[941,1672],"acceptance":"bounded-hard-safe-pass-1"}
+  ],
+  "rejectedAssets": [{"scene":1571,"status":"completed-hard-unusable-visual-reject","callId":"exec-7eb54e76-610b-4a96-aba4-462e83502059","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1571.png","sha256":"EB345290EFA892481E0970E485AEA31E56ADBD1DECC85C496DBC38AF845D47FD","bytes":2544012,"dimensions":[941,1672],"hardFailure":"wildlife in downrange river lane"}],
   "rejectedPromptLedger": {
-    "status": "empty-before-render",
-    "entries": [],
+    "status": "one-completed-visual-reject-exact-text-recorded",
+    "entries": [
+      {
+        "entryId": "batch387-scene1571-pass1-exec-7eb54e76",
+        "scene": 1571,
+        "phase": "pass-1",
+        "status": "completed-hard-unusable-visual-reject",
+        "callId": "exec-7eb54e76-610b-4a96-aba4-462e83502059",
+        "occurredAt": "2026-08-13T16:40:46.410Z",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women, Image 4 anchors ECE, and Image 5 anchors the man. Use these original identity references only, never an earlier country render. Exactly five fictional adults visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the established athletic bearded man from Image 5. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered river observatory in Royal Manas National Park, with the complete broadleaf forest, clearly empty Manas River channel, layered foothills, a distant golden-langur canopy crossing, faraway elephant silhouettes and golden-mahseer water recognizable while a rolling thunderstorm stays beyond the shelter. Deep-sea submersible couture is fictional public fashion at this real Bhutan location: pressure-shell facets, porthole rings, bathymetric lines, cool bioluminescent piping, ballast geometry and manipulator-joint seams. Nobody is underwater or inside a vehicle. Theme-led original: the landmark remains the Bhutan read while all four women's looks use distinct deep-sea pressure-shell, porthole, bathymetric, bioluminescent, ballast and manipulator-joint structures. No literal Bhutan flag, thunder dragon, official emblem or sacred symbol, religious architecture, prayer flag, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a secure strapless crane-white upper-thigh submersible mini with covered waist and closed back, carrying chili-red porthole rings; Ellie wears a secure strapless Himalayan-sky-blue submersible top showing a narrow ordinary midriff and complete open upper back to the secure waist over a charcoal-black upper-thigh skort, with pearl pressure facets; Alia wears a secure strapless saffron-gold submersible top showing a narrow ordinary midriff over alpine-green tailored upper-thigh shorts, closed back, with river-turquoise bathymetric lines; ECE wears a chili-red sleeveless upper-thigh submersible mini with covered waist and closed back, cloud-silver manipulator seams, plus the scene's only opaque Bhutan-palette knee socks ending below both kneecaps; the established bearded adult man wears an opaque crane-white short-sleeve top, tailored above-knee charcoal shorts and complete black shoes. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nNeither mascot appears. The odd-prop roll is inactive; no odd prop appears. Pole and rainbow-only rolls are inactive. Rainbow hosiery is active: AI ECE alone wears the specified country-palette rainbow-like gradient; nobody else wears hosiery.\n\nAnatomy-first relationship: Alia stands fully isolated at far right and uses both hands only on the inert mission prop; the rolled handoff is complete and every prior participant is now noncontact. Radiance, Ellie, ECE and the man remain in four separated lanes with open visible hands; the man's strongest eye line returns to ECE. There is no human contact and no hidden hand. Emotions: Radiance: tender affection; Ellie: deep sadness; Alia: determination; AI ECE: contained resentment. The man's stored emotion is shame and social vulnerability. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nThe rolled handoff is complete and noncontact. Alia alone now retains one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one highly visible orange unoccupied conservation-route marker on clearly empty Manas River water, with no person, boat, animal, structure or camera in or beyond the line and all distant wildlife outside the lane. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nThe thunderstorm remains beyond the covered observatory; dry footing, faces, river, wildlife separation and empty-water marker stay clear. Eye-level 50 mm full-body editorial. Render exactly ten arms, ten hands, ten legs and ten complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "506706575523C534ABBA6FE35854400C6D7364AEFF9A7E7F5B7D91B54031C522",
+          "encoding": "utf-8",
+          "bytes": 4788
+        },
+        "rawOutput": {"state":"completed-hard-unusable-visual-reject","path":"tmp/world-195x4/batch-387/raw/pass-1/scene-1571.png","sha256":"EB345290EFA892481E0970E485AEA31E56ADBD1DECC85C496DBC38AF845D47FD","bytes":2544012,"dimensions":[941,1672]},
+        "auditRef": "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json#/renderPasses/pass1/events/3",
+        "source": {"promptPath":"tmp/world-195x4/batch-387/scene-1571-initial-prompt.txt","rawPath":"tmp/world-195x4/batch-387/raw/pass-1/scene-1571.png"},
+        "immutable": true
+      }
+    ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
-  "hardSafeAcceptedCount": 0,
-  "missingSceneNumbers": [
-    1568,
-    1569,
-    1570,
-    1571
-  ],
+  "hardSafeAcceptedCount": 3,
+  "missingSceneNumbers": [1571],
   "xPost": {
     "status": "ineligible-until-four-of-four-and-git-remote-verification",
     "caption": "Bhutan ❤️ Solomon Islands #Bhutan",
