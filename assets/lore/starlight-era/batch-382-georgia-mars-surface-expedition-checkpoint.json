@@ -23056,12 +23056,138 @@
       }
     },
     "round51": {
-      "status": "holistic-correction-authorized-pending-round-50-public-push",
+      "status": "holistic-correction-prompt-ready-pending-four-concurrent-launch",
       "launchCondition": "round50-all-rejected",
       "slots": 4,
       "sourceMode": "four-fresh-generations-from-original-identity-anchors-only",
       "holisticAuditRequired": true,
-      "editOfRejectedOutputAllowed": false
+      "editOfRejectedOutputAllowed": false,
+      "round50PublicTrail": {
+        "status": "committed-pushed-and-remote-verified",
+        "branch": "agent/starlight-progress-archive",
+        "commit": "11aa150626ee6f1a4944efa3c7aa791288ad4d09"
+      },
+      "promptPreparation": {
+        "preparedAt": "2026-08-13T07:07:30.7530093Z",
+        "commonPromptPath": "tmp/world-195x4/batch-382/scene-1551-round-51-four-slot-common-prompt.txt",
+        "commonPromptSha256": "1F8F2D49ED4F6CBB006AADDA3AB7B9104F81EB8EB6739982D97CDE82D76955BC",
+        "commonPromptChars": 11636,
+        "storedSceneRollsChanged": false,
+        "priorBatumiRenderInputCount": 0,
+        "allRound50FailuresConsolidated": true,
+        "knownCorrections": [
+          "change to an approximately fifty-millimeter full-body camera and make Alia's hand-and-replica silhouette at least 240 native pixels wide",
+          "place the complete backstop inside x=71-76 and reserve at least 198 empty native pixels from x=79 to the right edge",
+          "put Alia's eye, sights, barrel, muzzle, and one solid black diamond on the same sampled horizontal pixel row",
+          "place one straight trigger index on the top slide at least fifteen native pixels above a wholly empty guard while the support hand stays below",
+          "restore Ellie's high scapula support palm, a 28-35-degree supported dip, the low clasp, and Radiance's isolated ECE upper-arm palm",
+          "give ECE one hand per separated opposite compass handle and no rim or map contact",
+          "correct Ellie to bare arms with detached side fan panels, ECE to a sleeveless open neckline with no upper-body discs, and lift Alia's braid off her open back",
+          "materialize each candidate response and the mandatory hard-love fourth-partner counterbeat without adding hands or gestures"
+        ],
+        "candidateNarratives": {
+          "A": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-51-candidate-A-narrative.txt",
+            "sha256": "195BCC50A2FD033F6BECFBF00F4272A4094553F7B46C0C3CF079AF071B8AB0B7",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round51-candidateA",
+              "fullHash": 1927097901,
+              "roll": 1,
+              "selectorIndex": 1,
+              "offeredChoice": "Ellie asks Radiance whether she wants to keep their supported dip for one restrained fully clothed route-count with Ellie and ECE while Alia keeps the separate safe lane."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round51-candidateA",
+              "fullHash": 620231833,
+              "roll": 33,
+              "category": "explicit affirmative"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round51-candidateA",
+              "fullHash": 3991760938,
+              "roll": 38,
+              "willingParticipants": [
+                "Radiance",
+                "Ellie",
+                "AI ECE"
+              ]
+            },
+            "partyActivation": true
+          },
+          "B": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-51-candidate-B-narrative.txt",
+            "sha256": "F153E318872F3BC03B9583A106494B7FE46EC5C66FE24EA27E193BC6C03EF871",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round51-candidateB",
+              "fullHash": 1876765044,
+              "roll": 44,
+              "selectorIndex": 0,
+              "offeredChoice": "AI ECE asks Radiance whether she wants one measured fully clothed route-count with ECE while Ellie maintains the supported dip and Alia holds the separate safe lane."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round51-candidateB",
+              "fullHash": 569898976,
+              "roll": 76,
+              "category": "explicit redirect"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round51-candidateB",
+              "fullHash": 3974983319,
+              "roll": 19,
+              "ignoredBecausePartyInactive": true
+            },
+            "partyActivation": false
+          },
+          "C": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-51-candidate-C-narrative.txt",
+            "sha256": "AA2191433FF281BCFF6BC01A59700B4467E6B66438E28670B24275FFE6782B09",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round51-candidateC",
+              "fullHash": 1893542663,
+              "roll": 63,
+              "selectorIndex": 3,
+              "offeredChoice": "AI ECE offers Radiance the choice to close the safe route lesson with one restrained fully clothed quartet count or return quietly to planning."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round51-candidateC",
+              "fullHash": 586676595,
+              "roll": 95,
+              "category": "explicit decline"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round51-candidateC",
+              "fullHash": 3958205700,
+              "roll": 0,
+              "ignoredBecausePartyInactive": true
+            },
+            "partyActivation": false
+          },
+          "D": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-51-candidate-D-narrative.txt",
+            "sha256": "DE85264CFBD199A592F4240006C7FF048C3EC8FAF3B139FB2AD4F0D8BBAA6B74",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round51-candidateD",
+              "fullHash": 1843209806,
+              "roll": 6,
+              "selectorIndex": 2,
+              "offeredChoice": "Alia asks Radiance whether she wants the quartet to answer the completed safe demonstration with one restrained fully clothed route-count or pause for another geometry check."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round51-candidateD",
+              "fullHash": 670564690,
+              "roll": 90,
+              "category": "explicit pause"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round51-candidateD",
+              "fullHash": 3941428081,
+              "roll": 81,
+              "ignoredBecausePartyInactive": true
+            },
+            "partyActivation": false
+          }
+        }
+      }
     },
     "earlyStopRule": "Accept the first exact passing round-50 slot in A-D order and skip round 51.",
     "archiveBeforeLaterWork": true,
