@@ -1,0 +1,389 @@
+{
+  "batch": 385,
+  "country": "Guyana",
+  "status": "active-pass-1-ready-not-launched",
+  "sourceCommit": "bb31b97d4b9d630649983b430850bfa495449699",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-313-comoros-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/159"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation",
+      "assets/lore/starlight-era/batch-364-tunisia-moon-expedition-checkpoint.json#/nextCinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "rollMethod": "FNV-1a over recorded batch385-guyana keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "cinematicTheme": "near-Sun solar-observation couture",
+  "themePairPosition": 1,
+  "sceneNumbers": [
+    1560,
+    1561,
+    1562,
+    1563
+  ],
+  "researchSources": [
+    {
+      "url": "https://tourismguyana.gy/the-kaieteur-and-orinduik-experience/",
+      "usedFor": "Orinduik Falls, Ireng River jasper terraces, and rolling Pakaraima grass-covered hills"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/kingston-seawall/",
+      "usedFor": "Kingston Seawall civil infrastructure, Round House, and coastal setting"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/seawall-bandstand/",
+      "usedFor": "Seawall Bandstand cast-iron ornament and public music history"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/lighthouse/",
+      "usedFor": "Georgetown Lighthouse octagonal brick form, red-white stripes, iron gallery, and maritime beacon role"
+    },
+    {
+      "url": "https://www.pac.gov.gy/",
+      "usedFor": "Shell Beach and Kanuku Mountains status in Guyana's national protected areas system"
+    },
+    {
+      "url": "https://dpi.gov.gy/shell-beach-protected-area-a-haven-for-marine-life-conservation-efforts/",
+      "usedFor": "Shell Beach coastline, multiple beaches, four marine-turtle species, and conservation monitoring"
+    },
+    {
+      "url": "https://www.pac.gov.gy/kanuku-mountains-protected-area/",
+      "usedFor": "Kanuku eastern and western ranges, rainforest and savannah, biodiversity, flagship species, and community management"
+    },
+    {
+      "url": "https://www.pac.gov.gy/our-work/",
+      "usedFor": "Guyana protected-area biodiversity, Kanuku bat diversity, and Shell Beach coastal-bird importance"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch385-guyana-male-model-scene",
+    "fullHash": 3087420340,
+    "position": 1,
+    "scene": 1560,
+    "emotionRoll": 27,
+    "emotion": "hope"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Guyana flag, Golden Arrowhead, coat of arms, official seal or official emblem is copied onto clothing. Secular waterfall, river, mountain, seawall, lighthouse, shell-beach, mangrove, forest, savannah, wildlife and craft fields replace them in country-led scenes.",
+    "palette": "rainforest green, Demerara gold, pearl white, scarlet red, black, Atlantic blue, jasper rose, shell bronze, orchid violet, and savannah ochre",
+    "minimumCoverage": "Scenes 1560 and 1561 each foreground large Guyana motif fields on two or three looks and near-Sun construction on at least two. Scenes 1562 and 1563 use four distinct theme-led looks while the Guyana landmark remains equally foregrounded.",
+    "cultureScene": "The scenes foreground Orinduik waterfall geology, Georgetown coastal civil heritage, Shell Beach marine conservation and Kanuku mountain biodiversity.",
+    "prohibitions": "No literal flag, Golden Arrowhead, coat of arms, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied medical or command uniform, badge, weapon threat, sexualized care, alcohol, or branded product."
+  },
+  "rollAudit": {
+    "1560": {
+      "weather": 89,
+      "mascotState": 57,
+      "mascotHolder": 58,
+      "oddProp": 82,
+      "oddHolder": 36,
+      "oddFamily": 82,
+      "pole": 29,
+      "rainbowOnly": 61,
+      "hosiery": 92,
+      "hosieryWearer": 84,
+      "hosieryPalette": 52,
+      "romance": 60,
+      "compound": 22,
+      "hardLove": 86,
+      "missionPoseTarget": 3,
+      "emotions": {
+        "Radiance": 98,
+        "Ellie": 48,
+        "Alia": 60,
+        "AI ECE": 98,
+        "AI ECE disambiguation": 53,
+        "Male": 27
+      },
+      "cuts": {
+        "Radiance": [
+          84,
+          59,
+          84
+        ],
+        "Ellie": [
+          70,
+          17,
+          98
+        ],
+        "Alia": [
+          2,
+          29,
+          78
+        ],
+        "AI ECE": [
+          36,
+          27,
+          20
+        ]
+      }
+    },
+    "1561": {
+      "weather": 10,
+      "mascotState": 18,
+      "mascotHolder": 63,
+      "oddProp": 33,
+      "oddHolder": 31,
+      "oddFamily": 37,
+      "pole": 32,
+      "rainbowOnly": 6,
+      "hosiery": 49,
+      "hosieryWearer": 57,
+      "hosieryPalette": 35,
+      "romance": 19,
+      "compound": 99,
+      "hardLove": 43,
+      "missionPoseTarget": 68,
+      "emotions": {
+        "Radiance": 99,
+        "Ellie": 95,
+        "Alia": 33,
+        "AI ECE": 63
+      },
+      "cuts": {
+        "Radiance": [
+          7,
+          32,
+          45
+        ],
+        "Ellie": [
+          79,
+          4,
+          81
+        ],
+        "Alia": [
+          45,
+          70,
+          39
+        ],
+        "AI ECE": [
+          3,
+          88,
+          65
+        ]
+      }
+    },
+    "1562": {
+      "weather": 43,
+      "mascotState": 39,
+      "mascotHolder": 48,
+      "oddProp": 12,
+      "oddHolder": 66,
+      "oddFamily": 80,
+      "pole": 75,
+      "rainbowOnly": 19,
+      "hosiery": 22,
+      "hosieryWearer": 30,
+      "hosieryPalette": 18,
+      "romance": 34,
+      "compound": 52,
+      "hardLove": 72,
+      "missionPoseTarget": 37,
+      "emotions": {
+        "Radiance": 28,
+        "Ellie": 14,
+        "Alia": 18,
+        "AI ECE": 48
+      },
+      "cuts": {
+        "Radiance": [
+          90,
+          85,
+          22
+        ],
+        "Ellie": [
+          88,
+          23,
+          36
+        ],
+        "Alia": [
+          88,
+          23,
+          0
+        ],
+        "AI ECE": [
+          22,
+          65,
+          42
+        ]
+      }
+    },
+    "1563": {
+      "weather": 40,
+      "mascotState": 60,
+      "mascotHolder": 13,
+      "oddProp": 23,
+      "oddHolder": 97,
+      "oddFamily": 23,
+      "pole": 94,
+      "rainbowOnly": 92,
+      "hosiery": 39,
+      "hosieryWearer": 59,
+      "hosieryPalette": 53,
+      "romance": 13,
+      "compound": 97,
+      "hardLove": 9,
+      "missionPoseTarget": 14,
+      "emotions": {
+        "Radiance": 21,
+        "Ellie": 93,
+        "Alia": 15,
+        "AI ECE": 93,
+        "AI ECE disambiguation": 96
+      },
+      "cuts": {
+        "Radiance": [
+          49,
+          42,
+          63
+        ],
+        "Ellie": [
+          17,
+          54,
+          47
+        ],
+        "Alia": [
+          63,
+          92,
+          5
+        ],
+        "AI ECE": [
+          81,
+          46,
+          35
+        ]
+      }
+    }
+  },
+  "rollAuditHashes": {
+    "primaryPairCount": 111,
+    "primarySha256": "D00122150E5BD7BD361951A14BB2D72C0C103F5A9C3AE4659C4FC81522C9AEAB",
+    "selectorPairCount": 20,
+    "selectorSha256": "1B4C85B32900BE0A5C4B1ABF32416959BCF0849E86F7C19BC959727DFB9EECA4"
+  },
+  "scenePlans": {
+    "1560": {
+      "location": "Orinduik Falls, Ireng River and Pakaraima hills",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1560-initial-prompt.txt",
+      "promptSha256": "927CFB0C8441ABDA615DCF6EC0A118E10F302B560AC9C7CF4214705B20B898CC",
+      "promptBytes": 4379
+    },
+    "1561": {
+      "location": "Kingston Seawall, Bandstand and Georgetown Lighthouse",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1561-initial-prompt.txt",
+      "promptSha256": "F898AB34C064F2A0FF5905AD8FD2456744D0041BE9568B0B8A45D57F89B3134D",
+      "promptBytes": 4350
+    },
+    "1562": {
+      "location": "Shell Beach Protected Area",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1562-initial-prompt.txt",
+      "promptSha256": "743AB24E0BEB644A1697CA6A222D86F459B8BC35CBD472085B9A10583CA6C29E",
+      "promptBytes": 4633
+    },
+    "1563": {
+      "location": "Kanuku Mountains Protected Area",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-385/scene-1563-initial-prompt.txt",
+      "promptSha256": "B5965FBBF6A4445F7935E01DE0EA16E3692F68743A0A0A7602E61D8548C1B35C",
+      "promptBytes": 4220
+    }
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "allocation": {
+        "A": 1560,
+        "B": 1561,
+        "C": 1562,
+        "D": 1563
+      },
+      "candidatesAuthorized": 4,
+      "candidatesConsumed": 0,
+      "sourceMode": "original identity anchors only; no prior country render input",
+      "events": []
+    },
+    "pass2": {
+      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "candidatesConsumed": 0,
+      "thirdPassAllowed": false
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "rejectedPromptLedger": {
+    "status": "empty-before-render",
+    "entries": [],
+    "appendBeforeLaterPassPublicationCommitOrPush": true
+  },
+  "hardSafeAcceptedCount": 0,
+  "missingSceneNumbers": [
+    1560,
+    1561,
+    1562,
+    1563
+  ],
+  "xPost": {
+    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "caption": "Guyana ❤️ Comoros #Guyana #WorldXXXSeries",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Solomon Islands",
+    "nextBatch": 386,
+    "sceneNumbers": [
+      1564,
+      1565,
+      1566,
+      1567
+    ],
+    "cinematicTheme": "near-Sun solar-observation couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-314-guyana-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/160"
+    ],
+    "lockedUntilBatch385Closed": true
+  },
+  "preflight": {
+    "path": "tmp/world-195x4/batch-385/batch-385-guyana-preflight.json",
+    "sha256": "534091575AD7EBF4E8B3C852032D32165E943D0C9614844B588A603BC068F8CC",
+    "bytes": 46433
+  }
+}
