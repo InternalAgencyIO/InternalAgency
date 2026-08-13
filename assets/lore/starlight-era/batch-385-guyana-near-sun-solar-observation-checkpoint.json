@@ -1,7 +1,7 @@
 {
   "batch": 385,
   "country": "Guyana",
-  "status": "pass-1-complete-two-hard-safe-accepted-two-no-byte-pass-2-two-slot-pending",
+  "status": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-guyana-rendering",
   "sourceCommit": "3e40265b2fd65e99b01313309f78ce107a11cf1e",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -9,7 +9,7 @@
     "passCeiling": 2,
     "pass1CandidatesAuthorized": 4,
     "pass1CandidatesConsumed": 4,
-    "pass2CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 2,
     "automaticThirdPassAllowed": false
   },
   "queueResolution": {
@@ -402,13 +402,13 @@
       ]
     },
     "pass2": {
-      "status": "authorized-two-concurrent-holistic-corrections",
+      "status": "completed-two-concurrent-two-hard-safe-accepted",
       "sceneNumbers": [
         1561,
         1563
       ],
       "candidatesAuthorized": 2,
-      "candidatesConsumed": 0,
+      "candidatesConsumed": 2,
       "launchMode": "two concurrent clean candidates from original identity anchors only",
       "thirdPassAllowed": false,
       "consolidatedCorrections": [
@@ -428,7 +428,46 @@
           "sha256": "8A0AC5976F8C6E1EB8674DD505CB684CDB398D28A6376A3B91F09E8707A388B7",
           "bytes": 2771
         }
-      }
+      },
+      "events": [
+        {
+          "scene": 1561,
+          "callId": "exec-89fb3402-d906-4d6f-aa2c-e218fddb06ad",
+          "occurredAt": "2026-08-13T15:07:36.363Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-385/scene-1561-pass-2-holistic-prompt.txt",
+          "promptSha256": "5774C6301A29677129BCECC8506AFEAF37CDCF8E1461C2EBCF0EF0F9A778938C",
+          "promptBytes": 2752,
+          "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1561.png",
+          "rawSha256": "0B200E4D90F14DA068C70979EBB5B654D19E5A85008847EC8B1639E07924F1AC",
+          "rawBytes": 2538815,
+          "dimensions": [
+            941,
+            1672
+          ],
+          "hardGateAudit": "four anchored adult women, opaque public-safe short looks, complete gross anatomy and footwear, PAWS and MAX safe together on a padded lounge; isolated side-on ECE handles the harmless inert rainbow prop toward one diamond paper target on a complete thick backstop behind a transparent safety panel",
+          "acceptedAsset": "assets/lore/starlight-era/1561-guyana-kingston-seawall-near-sun-solar-observation-bounded-pass-2.png"
+        },
+        {
+          "scene": 1563,
+          "callId": "exec-ae42ab76-7e4a-407b-84ca-a840c5a52f21",
+          "occurredAt": "2026-08-13T15:08:48.429Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-385/scene-1563-pass-2-holistic-prompt.txt",
+          "promptSha256": "8A0AC5976F8C6E1EB8674DD505CB684CDB398D28A6376A3B91F09E8707A388B7",
+          "promptBytes": 2771,
+          "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1563.png",
+          "rawSha256": "4179ABEDF7D657F3F33F96337E1F084EEA3D10188B603A1B803B6972BCFE5F68",
+          "rawBytes": 2950160,
+          "dimensions": [
+            941,
+            1672
+          ],
+          "hardGateAudit": "four anchored adult women, opaque public-safe short looks, complete gross anatomy and footwear, no mascots present and the locked suitcase remains harmless; isolated side-on ECE handles the inert rainbow prop toward one diamond paper target on a complete thick earth backstop behind a transparent safety panel",
+          "acceptedAsset": "assets/lore/starlight-era/1563-guyana-kanuku-mountains-near-sun-solar-observation-bounded-pass-2.png"
+        }
+      ],
+      "auditStandard": "bounded hard gates only; exact garment microdetails, motifs, eye line, emotion, contact count, choreography, and pixel-perfect marker alignment remain soft quality targets"
     }
   },
   "acceptedAssets": [
@@ -455,6 +494,30 @@
         1672
       ],
       "acceptance": "accepted-bounded-hard-safe-pass-1"
+    },
+    {
+      "scene": 1561,
+      "file": "assets/lore/starlight-era/1561-guyana-kingston-seawall-near-sun-solar-observation-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1561.png",
+      "sha256": "0B200E4D90F14DA068C70979EBB5B654D19E5A85008847EC8B1639E07924F1AC",
+      "bytes": 2538815,
+      "dimensions": [
+        941,
+        1672
+      ],
+      "acceptance": "bounded-hard-safe-pass-2"
+    },
+    {
+      "scene": 1563,
+      "file": "assets/lore/starlight-era/1563-guyana-kanuku-mountains-near-sun-solar-observation-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-385/raw/pass-2/scene-1563.png",
+      "sha256": "4179ABEDF7D657F3F33F96337E1F084EEA3D10188B603A1B803B6972BCFE5F68",
+      "bytes": 2950160,
+      "dimensions": [
+        941,
+        1672
+      ],
+      "acceptance": "bounded-hard-safe-pass-2"
     }
   ],
   "rejectedAssets": [
@@ -517,13 +580,10 @@
     ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
-  "hardSafeAcceptedCount": 2,
-  "missingSceneNumbers": [
-    1561,
-    1563
-  ],
+  "hardSafeAcceptedCount": 4,
+  "missingSceneNumbers": [],
   "xPost": {
-    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "status": "eligible-pending-live-duplicate-reconciliation-and-publication",
     "caption": "Guyana ❤️ Comoros #Guyana #WorldXXXSeries",
     "url": null
   },
@@ -542,7 +602,8 @@
       "assets/lore/starlight-era/batch-314-guyana-recovery-checkpoint.json#/nextQueueCountry",
       "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/160"
     ],
-    "lockedUntilBatch385Closed": true
+    "lockedUntilBatch385Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch385Closure": true
   },
   "preflight": {
     "path": "tmp/world-195x4/batch-385/batch-385-guyana-preflight.json",

@@ -1,0 +1,397 @@
+{
+  "batch": 386,
+  "country": "Solomon Islands",
+  "status": "active-pass-1-ready-not-launched",
+  "sourceCommit": "b2f1ab5215c4dce1e4feab375b8bb04a2c1bd9ff",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Batch 385 is closed; exactly four concurrent pass-1 candidates are authorized but not launched by this materializer."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-385-guyana-near-sun-solar-observation-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-314-guyana-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/160"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation",
+      "assets/lore/starlight-era/batch-385-guyana-near-sun-solar-observation-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-385-guyana-near-sun-solar-observation-checkpoint.json",
+    "checkpointSha256": "B43459B80F5B5B23E62C861AA7CA01853839CB96F20AB1572943049891694E3D",
+    "observedStatus": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-guyana-rendering",
+    "observedHardSafeAcceptedCount": 4,
+    "observedMissingSceneNumbers": [],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "preparationOnly": true,
+    "batch386RenderAuthorized": true,
+    "reason": "Batch 385 is closed at four of four; Batch 386 pass 1 may be launched only as a separate later action."
+  },
+  "rollMethod": "FNV-1a over recorded batch386-solomon-islands keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "cinematicTheme": "near-Sun solar-observation couture",
+  "themePairPosition": 2,
+  "sceneNumbers": [
+    1564,
+    1565,
+    1566,
+    1567
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.visitsolomons.com.sb/about-the-solomon/provinces/",
+      "usedFor": "Guadalcanal mountains, Matanikau cascade, Honiara Central Market, Point Cruz, Marau Sound, Marovo Lagoon, Western Province islands, and Lake Tegano"
+    },
+    {
+      "url": "https://www.visitsolomons.com.sb/about-the-solomon/people-culture/",
+      "usedFor": "Honiara Central Market produce and crafts, coconut, sweet potato, taro, fishing, stilt houses, and modern urban context"
+    },
+    {
+      "url": "https://whc.unesco.org/en/tentativelists/5414",
+      "usedFor": "Marovo double barrier lagoon, Tetepare lowland rainforest, coral reefs, mangroves, seagrass, endemic wildlife, marine turtles, dugong, and community conservation"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/854/",
+      "usedFor": "East Rennell raised coral atoll, Lake Tegano, limestone islets, dense forest, endemic species, and customary community management"
+    },
+    {
+      "url": "https://whc.unesco.org/en/news/2443",
+      "usedFor": "Lake Tegano World Heritage Site Association and community-led nature-based conservation livelihoods"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch386-solomon-islands-male-model-scene",
+    "fullHash": 2171450454,
+    "position": 3,
+    "scene": 1566,
+    "emotionRoll": 67,
+    "emotion": "possessive tension"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Solomon Islands flag, five-star field, coat of arms, or official emblem is copied onto clothing. Large researched secular waterfall, market, harbor, lagoon, reef, rainforest, lake, raised-atoll, wildlife, food, craft, and conservation fields replace them.",
+    "palette": "lagoon turquoise, rainforest green, hibiscus red, shell ivory, volcanic black, sunrise gold, orchid violet, coral rose, sea-glass blue, and pandanus tan",
+    "minimumCoverage": "Scenes 1564 and 1565 each foreground large Solomon Islands motif fields on two or three looks and near-Sun construction on at least two. Scenes 1566 and 1567 use four distinct theme-led looks while the Solomon Islands landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Guadalcanal cascades and Honiara market life, Marovo Lagoon biodiversity, Tetepare conservation, and East Rennell/Lake Tegano ecology.",
+    "prohibitions": "No literal flag, five-star field, coat of arms, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied medical, command, or performance uniform, badge, weapon threat, sexualized care or performance, alcohol, or branded product."
+  },
+  "rollAudit": {
+    "1564": {
+      "weather": 43,
+      "mascotState": 11,
+      "mascotHolder": 84,
+      "oddProp": 8,
+      "oddHolder": 38,
+      "oddFamily": 4,
+      "pole": 75,
+      "rainbowOnly": 71,
+      "hosiery": 98,
+      "hosieryWearer": 50,
+      "hosieryPalette": 54,
+      "romance": 78,
+      "compound": 32,
+      "hardLove": 36,
+      "missionPoseTarget": 73,
+      "emotions": {
+        "Radiance": 92,
+        "Ellie": 74,
+        "Alia": 46,
+        "AI ECE": 12
+      },
+      "cuts": {
+        "Radiance": [
+          86,
+          53,
+          62
+        ],
+        "Ellie": [
+          60,
+          7,
+          16
+        ],
+        "Alia": [
+          4,
+          55,
+          68
+        ],
+        "AI ECE": [
+          66,
+          65,
+          78
+        ]
+      }
+    },
+    "1565": {
+      "weather": 76,
+      "mascotState": 56,
+      "mascotHolder": 89,
+      "oddProp": 19,
+      "oddHolder": 61,
+      "oddFamily": 67,
+      "pole": 46,
+      "rainbowOnly": 44,
+      "hosiery": 99,
+      "hosieryWearer": 31,
+      "hosieryPalette": 85,
+      "romance": 93,
+      "compound": 85,
+      "hardLove": 5,
+      "missionPoseTarget": 2,
+      "emotions": {
+        "Radiance": 33,
+        "Ellie": 73,
+        "Alia": 23,
+        "AI ECE": 21,
+        "AI ECE disambiguation": 20
+      },
+      "cuts": {
+        "Radiance": [
+          93,
+          70,
+          91
+        ],
+        "Ellie": [
+          73,
+          90,
+          63
+        ],
+        "Alia": [
+          7,
+          56,
+          77
+        ],
+        "AI ECE": [
+          9,
+          22,
+          31
+        ]
+      }
+    },
+    "1566": {
+      "weather": 53,
+      "mascotState": 5,
+      "mascotHolder": 74,
+      "oddProp": 14,
+      "oddHolder": 72,
+      "oddFamily": 30,
+      "pole": 33,
+      "rainbowOnly": 37,
+      "hosiery": 36,
+      "hosieryWearer": 36,
+      "hosieryPalette": 84,
+      "romance": 88,
+      "compound": 58,
+      "hardLove": 54,
+      "missionPoseTarget": 43,
+      "emotions": {
+        "Radiance": 46,
+        "Ellie": 76,
+        "Alia": 24,
+        "AI ECE": 46,
+        "AI ECE disambiguation": 21,
+        "Male": 67
+      },
+      "cuts": {
+        "Radiance": [
+          88,
+          39,
+          12
+        ],
+        "Ellie": [
+          14,
+          65,
+          46
+        ],
+        "Alia": [
+          78,
+          33,
+          86
+        ],
+        "AI ECE": [
+          12,
+          31,
+          48
+        ]
+      }
+    },
+    "1567": {
+      "weather": 58,
+      "mascotState": 6,
+      "mascotHolder": 51,
+      "oddProp": 25,
+      "oddHolder": 59,
+      "oddFamily": 73,
+      "pole": 28,
+      "rainbowOnly": 34,
+      "hosiery": 29,
+      "hosieryWearer": 41,
+      "hosieryPalette": 71,
+      "romance": 3,
+      "compound": 23,
+      "hardLove": 43,
+      "missionPoseTarget": 24,
+      "emotions": {
+        "Radiance": 27,
+        "Ellie": 15,
+        "Alia": 13,
+        "AI ECE": 67
+      },
+      "cuts": {
+        "Radiance": [
+          23,
+          76,
+          41
+        ],
+        "Ellie": [
+          75,
+          96,
+          61
+        ],
+        "Alia": [
+          13,
+          2,
+          63
+        ],
+        "AI ECE": [
+          91,
+          40,
+          37
+        ]
+      }
+    }
+  },
+  "rollAuditHashes": {
+    "primaryPairCount": 111,
+    "primarySha256": "C8CF9C3A1BA9F5CE57DB1E26328BE677AD247E42A3B4C185A8A014730C3930DE",
+    "selectorPairCount": 20,
+    "selectorSha256": "8D5BA9BFFDA1321BBA20E33DD437AB596D07FFDA103AA0D76AA0BA6D9192DD9F"
+  },
+  "scenePlans": {
+    "1564": {
+      "location": "Matanikau cascade, Guadalcanal",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-386/scene-1564-initial-prompt.txt",
+      "promptSha256": "FB38835C7965AD01B043BAB3A54A8C6677582AD670C5CBD212970FF860B83C76",
+      "promptBytes": 4520
+    },
+    "1565": {
+      "location": "Marovo Lagoon marine-observation terrace",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-386/scene-1565-initial-prompt.txt",
+      "promptSha256": "16C26E40D020129C6A5F6F9E70C187DEBDBA38F0B237630CD8791012FFA30D10",
+      "promptBytes": 4250
+    },
+    "1566": {
+      "location": "Tetepare Island conservation boardwalk",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-386/scene-1566-initial-prompt.txt",
+      "promptSha256": "05C754548A958F53DDBE51BA11A6E6D648D869F83C33D3228C9DE2669CE88D6F",
+      "promptBytes": 4678
+    },
+    "1567": {
+      "location": "Lake Tegano, East Rennell karst observatory",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-386/scene-1567-initial-prompt.txt",
+      "promptSha256": "AEEFBDEAD172BD2FD1C58D8044E9CF75489A54A2FE20289ABA4DBE9A88F55D28",
+      "promptBytes": 4418
+    }
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "allocation": {
+        "A": 1564,
+        "B": 1565,
+        "C": 1566,
+        "D": 1567
+      },
+      "candidatesPrepared": 4,
+      "candidatesAuthorized": 4,
+      "candidatesConsumed": 0,
+      "launchWhenUnlocked": "Exactly four concurrent clean candidates, one per scene.",
+      "sourceMode": "original identity anchors only; no prior country render input",
+      "events": []
+    },
+    "pass2": {
+      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "candidatesConsumed": 0,
+      "thirdPassAllowed": false
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "rejectedPromptLedger": {
+    "status": "empty-before-render",
+    "entries": [],
+    "appendBeforeLaterPassPublicationCommitOrPush": true
+  },
+  "hardSafeAcceptedCount": 0,
+  "missingSceneNumbers": [
+    1564,
+    1565,
+    1566,
+    1567
+  ],
+  "xPost": {
+    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "caption": "Solomon Islands 🤍 Guyana #SolomonIslands",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Bhutan",
+    "nextBatch": 387,
+    "sceneNumbers": [
+      1568,
+      1569,
+      1570,
+      1571
+    ],
+    "cinematicTheme": "deep-sea submersible couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-315-solomon-islands-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/161"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7"
+    ],
+    "lockedUntilBatch386Closed": true
+  },
+  "preflight": {
+    "path": "tmp/world-195x4/batch-386/batch-386-solomon-islands-preflight.json",
+    "sha256": "52AE8213F155E6B5EA01F5E3EF15DB96A869A1A9C103CC2BCA9FB81BC8B3761D",
+    "bytes": 49441
+  }
+}
