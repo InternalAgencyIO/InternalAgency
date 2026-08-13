@@ -1,0 +1,34 @@
+{
+  "schema": "world-195x4-recovery-4-correction-lock-v1",
+  "batch": 219,
+  "sceneNumber": 896,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/896-foundation-recovery-4.txt",
+  "promptSha256": "8f5ac8b8628712e5ff3031fd5646179c5c888947c94e7819b7aeaea46f999d9f",
+  "blockedCorpusSha256": "ab47398c6a335d3f537eabffc99b8ff99ff5db2a441af8e432870fbbc05e9fad",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-ab47398c6a335d3f537eabffc99b8ff99ff5db2a441af8e432870fbbc05e9fad.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "correctionLock": "PRIORITY CORRECTION LOCK: Make the stored original trio pose unmistakable: Radiance, Ellie and Alia are hip-to-hip in a shallow arc and all three show coordinated alternating leg pops. Radiance links one hand with Ellie; Ellie clearly interlaces her other fingers with Alia. ECE stays shoulder-close to Alia, looks down toward PAWS and visibly opens a safe floor lane with one foot. PAWS must be caught in a crisp small crew scamper between the floor marks, not parked. Preserve Radiance's glove-removal flourish at her mouth.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-3/896-recovery-3-rejected.png",
+    "bytes": 2306937,
+    "sha256": "2eb38d8df9b7255e17aaa9e133f46791df2bd7dd7c4f64002161895906798ce0",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "PAWS appears but no woman visibly reciprocates her stored crew-dash action",
+      "the stored alternating trio leg-pop tableau is weakened into a mostly straight standing chain",
+      "ECE does not visibly open the promised safe lane toward PAWS"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

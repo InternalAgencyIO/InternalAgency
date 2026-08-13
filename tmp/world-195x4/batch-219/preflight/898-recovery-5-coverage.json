@@ -1,0 +1,34 @@
+{
+  "schema": "world-195x4-recovery-5-spatial-lock-v1",
+  "batch": 219,
+  "sceneNumber": 898,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/898-foundation-recovery-5.txt",
+  "promptSha256": "df3970bb66da82c65134b0553e6f3afecb277804e19cf10ba7fedd41499b028c",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "spatialLock": "SPATIAL RIBBON-CIRCUIT LOCK: left-to-right Alia, Ellie, Radiance, ECE. Alia holds the slack left ribbon end; Ellie and Radiance interlace their adjacent hands over the broad loose ribbon; Radiance and ECE interlace their adjacent hands over the continuing ribbon. This exact order makes both required hand links physically possible and closes the original Alia-Ellie-Radiance triangle while ECE remains attached to Radiance. Radiance's modest skirt opening clearly reveals the upper outer-thigh tattoo. Radiance and Ellie show the two visible natural navels.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-4/898-recovery-4-rejected.png",
+    "bytes": 2477368,
+    "sha256": "8756144de1d66b5c0b49ca509306a43e38954aedf8e3c49e9b00347c8b24f68d",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Radiance-ECE triggered interlaced-hand beat is missing",
+      "ECE is placed too far from Radiance for the stored contact",
+      "the ribbon connects the group but does not prove every required hand link"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "batch": 211,
+  "country": "Philippines",
+  "status": "completed-four-accepted-foundations",
+  "materializedAt": "2026-08-05T08:18:39.6689559Z",
+  "completedAt": "2026-08-05T08:50:59.8695002Z",
+  "publicFinalCommit": "6c62652c9d8393394205bbe047e5bd31bc5bfb93",
+  "publicFinalUrl": "https://github.com/InternalAgencyIO/InternalAgency/commit/6c62652c9d8393394205bbe047e5bd31bc5bfb93",
+  "reason": "User rejected the incremental artifact chain and authorized a clean batch restart to minimize passes.",
+  "preflight": {
+    "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+    "cache": "tmp/world-195x4/batch-211/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+    "order": "longest-phrase-first",
+    "status": "reused-no-new-block"
+  },
+  "previousIncrementalChain": {
+    "status": "rejected-by-user-minimize-passes",
+    "preservation": "Existing files remain untouched as audit history and are ineligible for promotion.",
+    "deletion": "none"
+  },
+  "passPolicy": "Generate one integrated clean foundation per scene. Do not create a dependent pass chain unless visual review identifies one narrow correction that preserves every invariant.",
+    "attemptLog": [
+      {
+      "attempt": 1,
+      "stage": "four-lane clean foundation generation",
+      "outcome": "aggregate-output-moderation-block-all-results-rejected-as-ambiguous",
+      "moderationStage": "output",
+      "moderationCategory": "sexual",
+      "requestId": "afbb4219-1b2c-410b-8cd7-5c7528b640b6",
+        "laneMapping": "The aggregate renderer returned before exposing per-lane results, so no scene is falsely assigned. No generated file was surfaced or promoted. The full four-lane attempt is rejected and the next prompts conservatively replace relationship, exposed-skin and body-mark vocabulary across every lane."
+      },
+      {
+        "attempt": 2,
+        "stage": "four-lane simplified clean foundation generation",
+        "outcome": "four-renderer-successes-two-accepted-two-rejected-by-contract-gate",
+        "laneMapping": "Lane 1 scene 864 accepted; lane 2 scene 865 rejected because PAWS was beside rather than on the lap and the rear underlay read translucent; lane 3 scene 866 rejected because footwear was obscured; lane 4 scene 867 accepted. Accepted lanes are frozen and only the two failed scenes remain eligible."
+      },
+      {
+        "attempt": 3,
+        "stage": "two-lane clean replacement foundations",
+        "outcome": "two-renderer-successes-one-accepted-one-rejected-by-contract-gate",
+        "laneMapping": "Lane 2 scene 865 V2 accepted and frozen. Lane 3 scene 866 V2 rejected because the left white shoe was clipped by the image boundary; only scene 866 remains eligible."
+      },
+      {
+        "attempt": 4,
+        "stage": "single remaining clean replacement foundation",
+        "outcome": "renderer-success-accepted",
+        "laneMapping": "Lane 3 scene 866 V3 passed every full-resolution gate. Batch 211 now has four accepted frozen restart foundations and no unresolved render lane."
+      }
+  ],
+  "lanes": [
+    {
+      "lane": 1,
+      "scene": 864,
+      "output": "tmp/world-195x4/batch-211-rerun/foundations/864-philippines-manila-bay-final-foundation-v1.png",
+      "status": "accepted-frozen",
+      "bytes": 2321129,
+      "sha256": "dfd99fe9440c27df9b5ede9c7ca707ad9b4eddd103e4acb8818642b6b7753333",
+      "validation": "passed full-resolution identity, clean-face, anatomy, footwear, mission, landmark and active PAWS ribbon-chase gates",
+      "roles": { "Radiance": "cabin host", "Ellie": "captain", "Alia": "first officer" },
+      "mission": "completed compact Manila Bay navigation grid",
+      "pawsAction": "ribbon-chase",
+      "integratedDetails": ["Radiance swept gala hair", "sculptural gala headpiece", "opaque back-panel lacing", "Ellie small secular shoulder-blade mark", "side-waist hand over garment", "loose linked-hand ribbon"]
+    },
+    {
+      "lane": 2,
+      "scene": 865,
+      "output": "tmp/world-195x4/batch-211-rerun/foundations/865-philippines-vigan-final-foundation-v1.png",
+      "status": "accepted-v2-frozen",
+      "rejectedSource": "generated image exec-a01d3e67-af6c-4f9a-b38e-844c0c545de0.png retained outside the campaign as renderer audit only",
+      "rejectionReasons": [
+        "PAWS beside the lap instead of secure lap-copilot placement",
+        "Ellie rear underlay reads translucent rather than fully opaque"
+      ],
+      "acceptedOutput": "tmp/world-195x4/batch-211-rerun/foundations/865-philippines-vigan-final-foundation-v2.png",
+      "bytes": 2874954,
+      "sha256": "8e901987c897bb56a5f0c7c3d4669ad7c422410894238d0abff949081c80723f",
+      "validation": "passed full-resolution identity, clean-face, opacity, anatomy, complete footwear, Vigan mission and secure PAWS lap-copilot gates",
+      "roles": { "Radiance": "captain", "Ellie": "first officer", "Alia": "cabin host" },
+      "mission": "completed capiz-and-copper cabin-signal cipher",
+      "pawsAction": "lap-copilot",
+      "integratedDetails": ["Radiance gala hair and captain headpiece", "Ellie wrist sculpture and modest open-back architecture", "independent ankle ornaments", "Alia cabin-host headpiece", "signal-token reach", "decorative fashion wand", "opera-glove strap adjustment", "coordinated gala glance", "loose gold garland in separate hand segments", "dual collar-closure styling"]
+    },
+    {
+      "lane": 3,
+      "scene": 866,
+      "output": "tmp/world-195x4/batch-211-rerun/foundations/866-philippines-banaue-final-foundation-v1.png",
+      "status": "accepted-v3-frozen",
+      "rejectedSource": "generated image exec-676ab86b-8a2c-4c73-ad80-b076458057ea.png retained outside the campaign as renderer audit only",
+      "rejectionReasons": [
+        "V1: Alia footwear and lower-leg anatomy obscured by the PAWS console",
+        "V2: Radiance left white shoe clipped by the image boundary"
+      ],
+      "rejectedSourceV2": "generated image exec-2c7ea540-752b-4d46-9252-6a682dba116e.png retained outside the campaign as renderer audit only",
+      "acceptedOutput": "tmp/world-195x4/batch-211-rerun/foundations/866-philippines-banaue-final-foundation-v3.png",
+      "bytes": 2328477,
+      "sha256": "1afe174c0420fa7b215ab5048b1d27693de4ba0c9c4cb1f7e660451e975cf123",
+      "validation": "passed full-resolution identity, clean-face, opacity, anatomy, six-footwear, Banaue mission, landmark and active PAWS console-inspection gates",
+      "roles": { "Radiance": "first officer", "Ellie": "cabin host", "Alia": "captain" },
+      "mission": "completed pearl-cobalt star-map relay",
+      "pawsAction": "console-inspector",
+      "integratedDetails": ["Radiance small secular shoulder mark", "playful side-eye", "low shoe-buckle styling pose", "Ellie geometric tailoring overlay and ring-collar jewelry", "Alia curled gala hair", "mission whisper with interlaced hands", "layered collar necklace", "staggered jewelry line"]
+    },
+    {
+      "lane": 4,
+      "scene": 867,
+      "output": "tmp/world-195x4/batch-211-rerun/foundations/867-philippines-el-nido-final-foundation-v1.png",
+      "status": "accepted-frozen",
+      "bytes": 2344239,
+      "sha256": "ba997231ec6bd0ffaca16f1dfeff2ea3d77a11d6aa6fff1a75e6b695913a7fb9",
+      "validation": "passed full-resolution identity, clean-face, anatomy, footwear, mission, landmark and active PAWS crew-scamper gates",
+      "roles": { "Radiance": "cabin host", "Ellie": "captain", "Alia": "first officer" },
+      "mission": "completed pearl-white, cobalt and warm-red arrival beacon",
+      "pawsAction": "crew-dash",
+      "integratedDetails": ["Ellie swept-back gala bob", "small right rear-waist garment window with tiny secular gold star-route skin ornament", "Alia collarbone jewelry and velvet signal-pendant choker", "balanced three-person close team huddle and triangular forehead-near pose"]
+    }
+  ]
+}

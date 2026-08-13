@@ -1,0 +1,34 @@
+{
+  "schema": "world-195x4-recovery-4-correction-lock-v1",
+  "batch": 219,
+  "sceneNumber": 899,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/899-foundation-recovery-4.txt",
+  "promptSha256": "c387a15fe90427788f86856bf874a2b3b3673960ee618bc1aa3898b44c235f93",
+  "blockedCorpusSha256": "ab47398c6a335d3f537eabffc99b8ff99ff5db2a441af8e432870fbbc05e9fad",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-ab47398c6a335d3f537eabffc99b8ff99ff5db2a441af8e432870fbbc05e9fad.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "correctionLock": "PRIORITY CORRECTION LOCK: Radiance turns mostly away so her lower-back tattoo is fully readable while Ellie gives the exact two-handed side-waist embrace. Alia closes the trio with one hand on Radiance's shoulder and a clear gaze to Ellie. ECE and Alia visibly link their inner hands. ECE looks down at PAWS and opens her free palm directly toward the kitten's very short crystal hop. Make Ellie's and Alia's natural navels clearly visible; Radiance and ECE may remain navel-covered.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-3/899-recovery-3-rejected.png",
+    "bytes": 2268368,
+    "sha256": "3a495a7f597b591901e9a7d52ceb4bbc945551e5346a41038ef5ced8cb303c01",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "only Ellie's navel is clearly visible; the binding minimum is two",
+      "ECE does not visibly look down or open her palm toward PAWS's crystal hop",
+      "the Alia-ECE hand link is not readable enough to prove the fourth reciprocal connection"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

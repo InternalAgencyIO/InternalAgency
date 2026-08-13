@@ -1,0 +1,34 @@
+{
+  "schema": "world-195x4-recovery-5-spatial-lock-v1",
+  "batch": 219,
+  "sceneNumber": 896,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/896-foundation-recovery-5.txt",
+  "promptSha256": "25d499d90ca1b49dbea9d44c34c0902d90cfb3c8e3a2a3f15370c262c7c57b7e",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "spatialLock": "SPATIAL HAND-ALLOCATION LOCK: left-to-right Radiance, Ellie, Alia, ECE. Radiance uses her right hand for the glove-at-mouth flourish and MUST use her left hand to hold Ellie's right hand. Ellie MUST use her left hand to interlace fingers with Alia's right hand. Alia's left arm rests around ECE's side waist. ECE's outside right hand opens palm-down toward PAWS while ECE's eyes look directly at the kitten. Radiance, Ellie and Alia each show a different clear leg pop. PAWS is crisply mid-scamper between the floor lights.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-4/896-recovery-4-rejected.png",
+    "bytes": 2418855,
+    "sha256": "fe633f15f3917cf8727787761169a51573117c967f1adec49bbd6e2231aaab75",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Radiance-Ellie required hand link is missing",
+      "PAWS has no readable human reciprocation",
+      "ECE does not visibly look down or open the floor lane toward PAWS"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

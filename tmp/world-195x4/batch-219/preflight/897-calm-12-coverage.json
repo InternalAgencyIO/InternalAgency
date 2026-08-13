@@ -1,0 +1,39 @@
+{
+  "schema": "world-195x4-scene-897-calm-spatial-language-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-calm-12.txt",
+  "promptSha256": "db8d22f99215e979d750dbee310e2acb685be1a6e6893e2ea64a1909863d95f5",
+  "blockedCorpusSha256": "e9b763ddca2158abd876e846fa331d11892c4254e09151080758ca187d6113ed",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-e9b763ddca2158abd876e846fa331d11892c4254e09151080758ca187d6113ed.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "translations": [
+    {
+      "riskyPhrase": "ELLIE'S FOREHEAD IS IN GENTLE CONTACT WITH ECE'S FOREHEAD",
+      "safeEquivalent": "Ellie and ECE rest their foreheads lightly together"
+    },
+    {
+      "riskyPhrase": "LARGE GOLD CLASP LOCATED ONLY ON ALIA'S NEAR RED SHOULDER",
+      "safeEquivalent": "prominent gold fastening placed exclusively on Alia's near red shoulder"
+    }
+  ],
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "foreheadContact": true,
+    "AliaExclusiveShoulderFastening": true,
+    "RadianceAdjustmentAction": true,
+    "navelJewel": true,
+    "exactlyTwoVisibleNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalECEConnection": true,
+    "pawsLapCopilot": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

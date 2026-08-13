@@ -1,0 +1,34 @@
+{
+  "schema": "world-195x4-recovery-4-correction-lock-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-recovery-4.txt",
+  "promptSha256": "ab63a1327830bc57cdd0db8deba2c4e99c2e43fac2b236c29cb68fbb74f9bf2e",
+  "blockedCorpusSha256": "ab47398c6a335d3f537eabffc99b8ff99ff5db2a441af8e432870fbbc05e9fad",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-ab47398c6a335d3f537eabffc99b8ff99ff5db2a441af8e432870fbbc05e9fad.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "correctionLock": "PRIORITY CORRECTION LOCK: ECE is securely seated on the low platform with PAWS on her lap. Ellie leans down so Ellie's and ECE's foreheads visibly touch and their eyes meet; at the same time Ellie's free hand straightens Radiance's sleeve. Radiance's gloved hand visibly straightens Alia's shoulder detail. Alia uses her other hand on Radiance's loose cape closure. These three separate styling contacts plus the forehead connection must all read clearly.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-3/897-recovery-3-rejected.png",
+    "bytes": 2512835,
+    "sha256": "ee84f1506897f6a5efa5dc5903ea1c1791ef67bdd609de019c9f3945beed306e",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "the triggered Ellie-ECE forehead-to-forehead mutual look is missing",
+      "Radiance does not visibly execute her triggered shoulder-detail styling action toward Alia",
+      "the original trio styling circuit is incomplete even though the center cape tableau and PAWS lap action are strong"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

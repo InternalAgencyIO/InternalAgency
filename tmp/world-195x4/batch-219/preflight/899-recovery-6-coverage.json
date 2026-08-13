@@ -1,0 +1,35 @@
+{
+  "schema": "world-195x4-recovery-6-final-detail-lock-v1",
+  "batch": 219,
+  "sceneNumber": 899,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/899-foundation-recovery-6.txt",
+  "promptSha256": "d10938f4c9c52d1f7297d2f215fadf7ff233bb3cdf6aa6a948a32f91ce2a1b6e",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No new moderation block occurred in round 5; only visually rejected candidates were recorded.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "finalDetailLock": "FINAL COLLISION-RESOLVED DETAIL LOCK: Alia's two hands remain correctly occupied—left on Radiance's shoulder, right linked with ECE—so show a small protected side ledge immediately behind Alia with an OPEN VINTAGE SEALING KIT and one FRESH CLEAR CRIMSON WAX SEAL on the completed fictional dossier, visibly proving Alia has just finished the stored sealing action. Preserve the low styling wand at Alia's boot, Radiance's lower-back tattoo, Ellie's waist embrace, Alia and ECE's two navels, ECE's downward gaze and open palm, and PAWS's crystal hop.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-5/899-recovery-5-rejected.png",
+    "bytes": 2374188,
+    "sha256": "d1ceac1c043443c1ad401a1e8eb4b70964dd75fdf9f8d1d7a1c7011855831273",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Alia's triggered dossier-sealing wax beat has no visible completed seal or open kit",
+      "tattoo, two navels, exact waist embrace, Alia-ECE hand link and ECE-to-PAWS reciprocation are all strong"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

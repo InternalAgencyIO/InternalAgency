@@ -1,0 +1,377 @@
+{
+  "schema": "world-195x4-render-checkpoint-v1",
+  "batch": 214,
+  "country": "Iran",
+  "updatedAt": "2026-08-05T18:11:11.671Z",
+  "status": "complete-four-member-iran-pushed",
+  "preflight": {
+    "blockedCorpusSha256": "0f818e540d8dab5e665b751dff33f7e1a44933e93429b9435a962740756aca72",
+    "parentCorpusSha256": "5fd1755d3e11364440a4787f00ef5ba91f6e01aabba7c3e12c0838a1c7b1b261",
+    "cache": "tmp/world-195x4/batch-214/preflight/blocklist-transform-0f818e540d8dab5e665b751dff33f7e1a44933e93429b9435a962740756aca72.json",
+    "order": "longest-phrase-first",
+    "recompileRequired": false,
+    "appendedBlockRequestIds": [
+      "376edefe-6032-46fc-a934-3b419dae4ac1"
+    ]
+  },
+  "passPolicy": "Batch 214 Iran is complete, validated, narrowly committed and pushed. All Iran lanes remain frozen; Batch 215 Germany continues independently.",
+  "lanes": [
+    {
+      "scene": 876,
+      "file": "876-iran-tehran-milad-alborz-route-light-grid.png",
+      "status": "accepted-four-member-final",
+      "attempts": 3,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/876-iran-tehran-milad-alborz-route-light-grid.png",
+      "planSha256": "8e829a77f443176f819de54f14369763c9f83bbe44ad9e0748b6761c2fd747bc",
+      "promptSha256": "37e08735ca25143c5b4c4ce498f7dc969baa6f7c8421f5d3ac1ba016deb7ba05",
+      "pawsTriggered": false,
+      "pawsAction": null,
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 876,
+        "source": "exec-3dea7efc-4206-4735-9ac7-e19014cea2fb.png",
+        "file": "876-iran-tehran-milad-alborz-route-light-grid.png",
+        "bytes": 2155560,
+        "sha256": "b524f0e64bfda954223334a6b28625c7c2f60afd9f54429728784e9b4ba154aa",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "canonicalIdentityOrder": true,
+          "eceRadiancePrimaryGaze": true,
+          "fourPersonRelationshipRead": true,
+          "exclusiveLatexLookAndOpaqueLaceMaterials": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "locationAndMissionReadable": true,
+          "pawsCorrectlyAbsent": true,
+          "noExtraPersonAnimalTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/876-iran-tehran-milad-alborz-route-light-grid.png",
+        "acceptedAt": "2026-08-05T14:50:52.113Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 877,
+      "file": "877-iran-isfahan-naqsh-e-jahan-cabin-signal-cipher.png",
+      "status": "accepted-four-member-final",
+      "attempts": 4,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/877-iran-isfahan-naqsh-e-jahan-cabin-signal-cipher.png",
+      "planSha256": "fa6981de48ac69622c03ab6d78a8519a591e975ff708dd81b9dabaeea4d901ab",
+      "promptSha256": "2e12ac9ab6331be1c3adfba7ff2410ca14765a1fbd5a6fe19d973a235303184c",
+      "pawsTriggered": false,
+      "pawsAction": null,
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 877,
+        "source": "exec-f28fbe82-550b-49c3-8d38-42743e5850d9.png",
+        "file": "877-iran-isfahan-naqsh-e-jahan-cabin-signal-cipher.png",
+        "bytes": 2283049,
+        "sha256": "983d422ffae15a769f37d2742cd91a86726500c302edf1d5e612327177e217ec",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "emptyBackgroundAndNoExtraPerson": true,
+          "canonicalIdentityOrder": true,
+          "eceRadiancePrimaryGaze": true,
+          "eceAliaFamiliarity": true,
+          "ellieRadianceWarmth": true,
+          "exclusiveLatexLookAndOpaqueLaceMaterials": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "isfahanLocationAndCipherMissionReadable": true,
+          "pawsCorrectlyAbsent": true,
+          "noReadableTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/877-iran-isfahan-naqsh-e-jahan-cabin-signal-cipher.png",
+        "acceptedAt": "2026-08-05T14:50:52.113Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 878,
+      "file": "878-iran-shiraz-eram-garden-star-map-relay.png",
+      "status": "accepted-four-member-final",
+      "attempts": 3,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/878-iran-shiraz-eram-garden-star-map-relay.png",
+      "planSha256": "d1ec59a6044af357a4f70a72fe2d63b40b075d679ad7d51ca78b419c8f73851c",
+      "promptSha256": "f58a921ca8644d647aabf3a3bfb04e1e5f0677efca63a8697b428ce417e48f50",
+      "pawsTriggered": true,
+      "pawsAction": "lap-copilot",
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 878,
+        "source": "exec-f555ed56-3a05-410b-961c-9ef94e197d81.png",
+        "file": "878-iran-shiraz-eram-garden-star-map-relay.png",
+        "bytes": 2715188,
+        "sha256": "b410bc0b0bd905c30755d06eed823351d816143c448c47d111b38d43858e151c",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "eceRadiancePrimaryGaze": true,
+          "fourPersonRelationshipRead": true,
+          "exclusiveLatexLookAndOpaqueLaceMaterials": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "shirazLocationAndRelayMissionReadable": true,
+          "pawsTriggered": true,
+          "pawsBabyScaleGoldenCoatAndAnatomyReadable": true,
+          "pawsLapCopilotActive": true,
+          "noExtraPersonAnimalTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/878-iran-shiraz-eram-garden-star-map-relay.png",
+        "acceptedAt": "2026-08-05T14:50:52.113Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 879,
+      "file": "879-iran-kish-persian-gulf-arrival-beacon-finale.png",
+      "status": "accepted-four-member-final",
+      "attempts": 4,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/879-iran-kish-persian-gulf-arrival-beacon-finale.png",
+      "planSha256": "ca7641394b09142663fafd9c1878040e979d71ddc091bce61f67c72122b724d4",
+      "promptSha256": "7117558d96d49cb9ca9838b67f92427f39c615259dcc3c0e7e34ad3adcca5019",
+      "pawsTriggered": false,
+      "pawsAction": null,
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 879,
+        "source": "exec-a6d4619f-17ef-40dd-8095-2d441c630196.png",
+        "file": "879-iran-kish-persian-gulf-arrival-beacon-finale.png",
+        "bytes": 2061470,
+        "sha256": "4331d1b5630cdaab41e2af5e75fc89bcf55388ebd2275f43dfa1c63c273e5e5b",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "emptyBackgroundAndNoExtraPerson": true,
+          "canonicalIdentityOrder": true,
+          "eceRadiancePrimaryGaze": true,
+          "eceAliaFamiliarity": true,
+          "ellieRadianceWarmth": true,
+          "exclusiveLatexLookAndOpaqueLaceMaterials": true,
+          "cleanFacesAndNaturalHands": true,
+          "allEightCompleteShoes": true,
+          "kishLocationAndBeaconMissionReadable": true,
+          "pawsCorrectlyAbsent": true,
+          "noReadableTextOrLogo": true
+        },
+        "destination": "assets/lore/starlight-era/879-iran-kish-persian-gulf-arrival-beacon-finale.png",
+        "acceptedAt": "2026-08-05T14:50:52.113Z",
+        "status": "accepted-four-member-final"
+      }
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "number": 876,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-278aa131-0556-4109-b6ec-1a5d0b008c72.png",
+      "bytes": 2390399,
+      "sha256": "439f6a20ab38d148e1bee2ffb04ccfd968eda34e2eb37f2261381efcfb4c4952",
+      "width": 940,
+      "height": 1672,
+      "status": "rejected-contract-breaking-foundation",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "cleanFaces": true,
+        "completeFootwear": true,
+        "locationReadable": true,
+        "eceRadiancePrimaryLink": false,
+        "prominentOpaqueGuipure": false,
+        "noReadableTextLikeArtifacts": false
+      },
+      "reasons": [
+        "Ellie and ECE joined hands instead of ECE and Radiance",
+        "requested opaque guipure material family under-read",
+        "console contains text-like map artifacts"
+      ]
+    },
+    {
+      "number": 878,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-5260edfe-41e5-479a-8234-82b899406830.png",
+      "bytes": 2645076,
+      "sha256": "bf810fee3f8677d690dc97c4c47ddf8dc85a2cf849c70738a3bff127f2db3246",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-contract-breaking-foundation",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "cleanFaces": true,
+        "pawsPresent": true,
+        "pawsBabyScale": false,
+        "allEightCompleteShoes": false,
+        "missionUnobstructed": false,
+        "locationReadable": true
+      },
+      "reasons": [
+        "PAWS reads too large and mature",
+        "foreground console hides Alia's complete footwear and obscures other shoe geometry",
+        "mission furniture dominates the relationship and role read"
+      ]
+    },
+    {
+      "number": 877,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-9a861a9c-6442-418a-83cd-3b8e61ff9d5b.png",
+      "bytes": 2479210,
+      "sha256": "e335f3a3f9aedb305b70ca41efbe0569dd4b03b353f406ed665ae55103b177f6",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-cast-continuity-failure",
+      "validation": {
+        "exactlyFourForegroundAdultWomen": true,
+        "cleanFaces": true,
+        "allEightCompleteShoes": true,
+        "locationReadable": true,
+        "exclusiveCoatedAndOpaqueGuipureMaterials": true,
+        "backgroundPeopleAbsent": false
+      },
+      "reasons": [
+        "multiple distant background people violate the exact four-person cast gate"
+      ]
+    }
+  ],
+  "publicBuild": {
+    "status": "pushed",
+    "commit": "6355432c7fd13b05ada525ce8097499e4b57ba30",
+    "rejectedMediaPublished": false,
+    "commitUrl": "https://github.com/InternalAgencyIO/InternalAgency/commit/6355432c7fd13b05ada525ce8097499e4b57ba30",
+    "buildUrl": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/assets/lore/starlight-era/world-195x4-live-build/batch-214-iran",
+    "pushedAt": "2026-08-05T18:11:11.671Z"
+  },
+  "moderationBlocks": [
+    {
+      "scene": 877,
+      "attempt": 1,
+      "stage": "output",
+      "category": "sexual",
+      "requestId": "68c8d9c4-ead5-4a5f-80f1-4f7481b91456",
+      "promptSha256": "b5ae17c2fb15b963a5f226bf6e88f6450b385ef5f9e6b5d2928ee6b82af0e266"
+    },
+    {
+      "scene": 879,
+      "attempt": 1,
+      "stage": "output",
+      "category": "sexual",
+      "requestId": "1367c68d-3f02-4a2d-b651-b4fc4b6f527d",
+      "promptSha256": "b290c217b333322a8d5d27e0bbb50684a280fa15617bbc73d895f23d85b6d073"
+    },
+    {
+      "scene": 876,
+      "attempt": 2,
+      "stage": "output",
+      "category": "sexual",
+      "requestId": "b7f05361-ff81-4fcc-b9e1-76639d34750a",
+      "promptSha256": "3a2fd3a1fb4651b6e3f4d2d7c5c0bf5be48685bf04dea9cf3d76533c22924d18"
+    },
+    {
+      "scene": 877,
+      "attempt": 2,
+      "stage": "output",
+      "category": "sexual",
+      "requestId": "fbf7e2b6-ef01-4c76-bf28-f8863b239d1f",
+      "promptSha256": "ab2c51794369e80051407160cfdf2b6520efbd4428df5b1a10166353fdd455a8"
+    },
+    {
+      "scene": 878,
+      "attempt": 2,
+      "stage": "output",
+      "category": "sexual",
+      "requestId": "f9aa7e9f-2869-49e5-9756-3a6e8732521b",
+      "promptSha256": "0d90d46035b97a3416c8c4c985bad5c6e32dda86004b7f609059767b9a9545f8"
+    },
+    {
+      "scene": 879,
+      "attempt": 2,
+      "stage": "output",
+      "category": "sexual",
+      "requestId": "becd0b16-abef-45a6-a8c5-b29577377980",
+      "promptSha256": "8d5b524349a74aad5914be73f1d9f9a749417112b5b2438c4c46b5954c6d810d"
+    },
+    {
+      "scene": 879,
+      "attempt": 3,
+      "stage": "output",
+      "category": "sexual",
+      "requestId": "376edefe-6032-46fc-a934-3b419dae4ac1",
+      "promptSha256": "edf0b4438df0f651676adfe70fdb487a6ef59c9c4f54f10d590db73b3064158a"
+    }
+  ],
+  "completedAt": "2026-08-05T14:50:52.113Z",
+  "activeRenderCallCount": 0,
+  "acceptedLanes": [
+    {
+      "number": 876,
+      "file": "876-iran-tehran-milad-alborz-route-light-grid.png",
+      "bytes": 2155560,
+      "sha256": "b524f0e64bfda954223334a6b28625c7c2f60afd9f54429728784e9b4ba154aa",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 877,
+      "file": "877-iran-isfahan-naqsh-e-jahan-cabin-signal-cipher.png",
+      "bytes": 2283049,
+      "sha256": "983d422ffae15a769f37d2742cd91a86726500c302edf1d5e612327177e217ec",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 878,
+      "file": "878-iran-shiraz-eram-garden-star-map-relay.png",
+      "bytes": 2715188,
+      "sha256": "b410bc0b0bd905c30755d06eed823351d816143c448c47d111b38d43858e151c",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 879,
+      "file": "879-iran-kish-persian-gulf-arrival-beacon-finale.png",
+      "bytes": 2061470,
+      "sha256": "4331d1b5630cdaab41e2af5e75fc89bcf55388ebd2275f43dfa1c63c273e5e5b",
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "finalAssets": [
+    {
+      "number": 876,
+      "file": "876-iran-tehran-milad-alborz-route-light-grid.png",
+      "bytes": 2155560,
+      "sha256": "b524f0e64bfda954223334a6b28625c7c2f60afd9f54429728784e9b4ba154aa",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 877,
+      "file": "877-iran-isfahan-naqsh-e-jahan-cabin-signal-cipher.png",
+      "bytes": 2283049,
+      "sha256": "983d422ffae15a769f37d2742cd91a86726500c302edf1d5e612327177e217ec",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 878,
+      "file": "878-iran-shiraz-eram-garden-star-map-relay.png",
+      "bytes": 2715188,
+      "sha256": "b410bc0b0bd905c30755d06eed823351d816143c448c47d111b38d43858e151c",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 879,
+      "file": "879-iran-kish-persian-gulf-arrival-beacon-finale.png",
+      "bytes": 2061470,
+      "sha256": "4331d1b5630cdaab41e2af5e75fc89bcf55388ebd2275f43dfa1c63c273e5e5b",
+      "width": 941,
+      "height": 1672
+    }
+  ]
+}

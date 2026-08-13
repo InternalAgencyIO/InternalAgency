@@ -1,0 +1,391 @@
+{
+  "schema": "world-195x4-render-checkpoint-v1",
+  "batch": 218,
+  "country": "Bulgaria",
+  "updatedAt": "2026-08-05T20:33:24.453Z",
+  "status": "complete-four-member-bulgaria-pushed",
+  "preflight": {
+    "blockedCorpusSha256": "7f0ced957a48adfc4186457bb14ab4313884f82c9c903521014c4532da84e6e1",
+    "cache": "tmp/world-195x4/batch-218/preflight/blocklist-transform-7f0ced957a48adfc4186457bb14ab4313884f82c9c903521014c4532da84e6e1.json",
+    "reusedFrom": "tmp/world-195x4/batch-217/preflight/blocklist-transform-7f0ced957a48adfc4186457bb14ab4313884f82c9c903521014c4532da84e6e1.json",
+    "order": "longest-phrase-first",
+    "recompileRequired": false
+  },
+  "passPolicy": "Batch 218 Bulgaria is complete, validated, narrowly committed and pushed. All four lanes are frozen; Batch 219 begins on a later wake.",
+  "lanes": [
+    {
+      "scene": 892,
+      "file": "892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+      "status": "accepted-four-member-final",
+      "attempts": 1,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+      "planSha256": "099161c11eed186979ce3446ca2973e32bf22d6f7affc0260779485ea73238cb",
+      "promptSha256": "f7ac392a5fd20d8c38221bb0bc801792bba50bd346bf9082d9e33df0eb3e6710",
+      "pawsTriggered": true,
+      "pawsAction": "paws-up-request",
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 892,
+        "source": "exec-9f3b43f8-f930-44c8-801d-7dafe1460667.png",
+        "file": "892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+        "bytes": 2441673,
+        "sha256": "18b9e0446ec15adaeb7e6a74a7bc57219de8a738da6adbe31c855dd26d64da7a",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "exactIdentityOrderAndHeightGeometry": true,
+          "eceRadiancePrimaryMutualGaze": true,
+          "elliePlayfulAttentionAndAliaFamiliarity": true,
+          "exclusiveCoatedTextileAndOpaqueGuipure": true,
+          "continuousOpaqueFrontsAndShortSecureHems": true,
+          "cleanFacesNaturalHandsAndAllEightShoes": true,
+          "sofiaNationalPalaceVitoshaAndMissionReadable": true,
+          "pawsBabyScaleShadedGoldenCoatAndAnatomy": true,
+          "pawsGroundedPawsUpActionWithEllieReciprocation": true,
+          "noExtraPersonAnimalTextLogoOrWatermark": true
+        },
+        "destination": "assets/lore/starlight-era/892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+        "acceptedAt": "2026-08-05T20:26:27.433Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 893,
+      "file": "893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+      "status": "accepted-four-member-final",
+      "attempts": 1,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+      "planSha256": "1193f4fa5fe87fb698e79360f21a522dd8f3e27e80d464e81f37ee216122e771",
+      "promptSha256": "6198f1e3a0e454f8d5b9f0f4f31241f4269596eab0a1a7f44de40b2d0343ae56",
+      "pawsTriggered": false,
+      "pawsAction": null,
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 893,
+        "source": "exec-d47e4e35-7a19-4fdb-aa50-69567c5034e1.png",
+        "file": "893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+        "bytes": 2357744,
+        "sha256": "95848f634a003510c23c77f2a95cbf3c88aaeb3999065c57aa7a5a97c64192a8",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "exactIdentityOrderAndHeightGeometry": true,
+          "eceRadiancePrimaryMutualGaze": true,
+          "elliePlayfulAttentionAndAliaFamiliarity": true,
+          "exclusiveCoatedTextileAndOpaqueGuipure": true,
+          "continuousOpaqueFrontsAndShortSecureHems": true,
+          "cleanFacesNaturalHandsAndAllEightShoes": true,
+          "plovdivAncientTheatreOldTownAndMissionReadable": true,
+          "pawsCorrectlyAbsent": true,
+          "noExtraPersonAnimalTextLogoOrWatermark": true
+        },
+        "destination": "assets/lore/starlight-era/893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+        "acceptedAt": "2026-08-05T20:26:27.433Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 894,
+      "file": "894-bulgaria-belogradchik-rocks-star-map-relay.png",
+      "status": "accepted-four-member-final",
+      "attempts": 2,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/894-bulgaria-belogradchik-rocks-star-map-relay.png",
+      "planSha256": "78cbf5fbf2978f5f8791205ca0cb7632959b3dac0036eebfe6a07c94d2910923",
+      "promptSha256": "10e0866bd800ec8c63391b1fe2486067a13d7f976cd8a3871cdd0baba21a38d0",
+      "pawsTriggered": true,
+      "pawsAction": "crew-dash",
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 894,
+        "source": "exec-a3d562d5-1a6e-4fd1-9c2c-9063f423c7ef.png",
+        "file": "894-bulgaria-belogradchik-rocks-star-map-relay.png",
+        "bytes": 2557014,
+        "sha256": "725f773cafef27d2b9c41a3067405403524141d4b1211968ba40c8279a755313",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "exactIdentityOrderAndHeightGeometry": true,
+          "eceRadiancePrimaryMutualGaze": true,
+          "elliePlayfulAttentionAndAliaFamiliarity": true,
+          "exclusiveCoatedTextileAndOpaqueGuipure": true,
+          "continuousOpaqueFrontsAndShortSecureHems": true,
+          "cleanFacesNaturalHandsAndAllEightShoes": true,
+          "belogradchikRocksAndMissionReadable": true,
+          "pawsBabyScaleNY11ShadedGoldenCoatAndAnatomy": true,
+          "pawsCrewDashWithAliaReciprocation": true,
+          "noExtraPersonAnimalTextLogoOrWatermark": true
+        },
+        "destination": "assets/lore/starlight-era/894-bulgaria-belogradchik-rocks-star-map-relay.png",
+        "acceptedAt": "2026-08-05T20:26:27.433Z",
+        "status": "accepted-four-member-final"
+      }
+    },
+    {
+      "scene": 895,
+      "file": "895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+      "status": "accepted-four-member-final",
+      "attempts": 2,
+      "lastValidStage": "final-clean-foundation",
+      "lastValidAsset": "assets/lore/starlight-era/895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+      "planSha256": "f88724f7c72772084e0e12e9b7a625af4d7049722de70c9b393fbf714ad007b1",
+      "promptSha256": "797f4bc9aad05218d4b5a2b1c07e61512ba140f77847eda7f9891e8c4a62a9ff",
+      "pawsTriggered": false,
+      "pawsAction": null,
+      "nextStage": "frozen",
+      "accepted": {
+        "number": 895,
+        "source": "exec-e04fc0e3-dcdf-4e59-965d-60886c88e648.png",
+        "file": "895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+        "bytes": 2346822,
+        "sha256": "0f3766a6f1b3b8dd181edf729cedfdcc1f671f30b18186dd12ccf4d6c59a8f98",
+        "width": 941,
+        "height": 1672,
+        "validation": {
+          "exactlyFourAdultWomen": true,
+          "exactIdentityOrderAndHeightGeometry": true,
+          "eceRadiancePrimaryMutualGaze": true,
+          "elliePlayfulAttentionAndAliaFamiliarity": true,
+          "exclusiveCoatedTextileAndOpaqueGuipure": true,
+          "continuousOpaqueHighFrontsAndShortSecureHems": true,
+          "cleanFacesNaturalHandsAndAllEightShoes": true,
+          "varnaSeaGardenBlackSeaAndMissionReadable": true,
+          "pawsCorrectlyAbsent": true,
+          "noExtraPersonAnimalTextLogoOrWatermark": true
+        },
+        "destination": "assets/lore/starlight-era/895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+        "acceptedAt": "2026-08-05T20:26:27.433Z",
+        "status": "accepted-four-member-final"
+      }
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "number": 894,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-3d8a1596-7401-4ea4-8664-53a6b9525777.png",
+      "bytes": 2465650,
+      "sha256": "ce4072d4a0e011b3b495dbd091145e2453f538f280397f47f62cd12c5c942ca7",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-companion-coat-drift",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "canonicalIdentitiesAndCompleteFootwear": true,
+        "eceRadiancePrimaryMutualGaze": true,
+        "belogradchikLocationAndCrewDashReadable": true,
+        "pawsBabyScaleAndAnatomy": true,
+        "pawsNY11ShadedGoldenCoat": false
+      },
+      "reasons": [
+        "PAWS reads as a visibly striped orange tabby instead of the locked smooth NY11 shaded honey-apricot-gold baby coat."
+      ],
+      "rejectedAt": "2026-08-05T20:12:17.667Z"
+    },
+    {
+      "number": 895,
+      "asset": "C:/Users/A/.codex/generated_images/019fc83b-b7ab-7c70-a1b9-0953296a4666/exec-54aae216-71ff-43e6-b9b2-486e1955261b.png",
+      "bytes": 2535632,
+      "sha256": "003e9436cc8045ec9f68656c721d78ba19e2f7f9ebe88d9c8ad3762435c6a3a2",
+      "width": 941,
+      "height": 1672,
+      "status": "rejected-opaque-front-coverage",
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "canonicalIdentitiesAndCompleteFootwear": true,
+        "eceRadiancePrimaryMutualGaze": true,
+        "varnaBlackSeaAndMissionReadable": true,
+        "exclusiveWardrobeMaterials": true,
+        "continuousOpaqueHighFrontOnAllFour": false,
+        "pawsCorrectlyAbsent": true
+      },
+      "reasons": [
+        "Alia's red silhouette opens into a low front neckline instead of preserving one continuous high opaque panel from collar through torso."
+      ],
+      "rejectedAt": "2026-08-05T20:18:09.499Z"
+    }
+  ],
+  "publicBuild": {
+    "status": "pushed",
+    "commit": "03ad10b9fd90d0e0c16ccb0bf598e61aa5b9b216",
+    "commitUrl": "https://github.com/InternalAgencyIO/InternalAgency/commit/03ad10b9fd90d0e0c16ccb0bf598e61aa5b9b216",
+    "buildUrl": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/assets/lore/starlight-era/world-195x4-live-build/batch-218-bulgaria",
+    "pushedAt": "2026-08-05T20:33:24.453Z",
+    "rejectedMediaPublished": false
+  },
+  "moderationBlocks": [],
+  "acceptedCandidates": [
+    {
+      "number": 892,
+      "source": "exec-9f3b43f8-f930-44c8-801d-7dafe1460667.png",
+      "file": "892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+      "bytes": 2441673,
+      "sha256": "18b9e0446ec15adaeb7e6a74a7bc57219de8a738da6adbe31c855dd26d64da7a",
+      "width": 941,
+      "height": 1672,
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "exactIdentityOrderAndHeightGeometry": true,
+        "eceRadiancePrimaryMutualGaze": true,
+        "elliePlayfulAttentionAndAliaFamiliarity": true,
+        "exclusiveCoatedTextileAndOpaqueGuipure": true,
+        "continuousOpaqueFrontsAndShortSecureHems": true,
+        "cleanFacesNaturalHandsAndAllEightShoes": true,
+        "sofiaNationalPalaceVitoshaAndMissionReadable": true,
+        "pawsBabyScaleShadedGoldenCoatAndAnatomy": true,
+        "pawsGroundedPawsUpActionWithEllieReciprocation": true,
+        "noExtraPersonAnimalTextLogoOrWatermark": true
+      },
+      "destination": "assets/lore/starlight-era/892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+      "acceptedAt": "2026-08-05T20:26:27.433Z",
+      "status": "accepted-four-member-final"
+    },
+    {
+      "number": 893,
+      "source": "exec-d47e4e35-7a19-4fdb-aa50-69567c5034e1.png",
+      "file": "893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+      "bytes": 2357744,
+      "sha256": "95848f634a003510c23c77f2a95cbf3c88aaeb3999065c57aa7a5a97c64192a8",
+      "width": 941,
+      "height": 1672,
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "exactIdentityOrderAndHeightGeometry": true,
+        "eceRadiancePrimaryMutualGaze": true,
+        "elliePlayfulAttentionAndAliaFamiliarity": true,
+        "exclusiveCoatedTextileAndOpaqueGuipure": true,
+        "continuousOpaqueFrontsAndShortSecureHems": true,
+        "cleanFacesNaturalHandsAndAllEightShoes": true,
+        "plovdivAncientTheatreOldTownAndMissionReadable": true,
+        "pawsCorrectlyAbsent": true,
+        "noExtraPersonAnimalTextLogoOrWatermark": true
+      },
+      "destination": "assets/lore/starlight-era/893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+      "acceptedAt": "2026-08-05T20:26:27.433Z",
+      "status": "accepted-four-member-final"
+    },
+    {
+      "number": 894,
+      "source": "exec-a3d562d5-1a6e-4fd1-9c2c-9063f423c7ef.png",
+      "file": "894-bulgaria-belogradchik-rocks-star-map-relay.png",
+      "bytes": 2557014,
+      "sha256": "725f773cafef27d2b9c41a3067405403524141d4b1211968ba40c8279a755313",
+      "width": 941,
+      "height": 1672,
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "exactIdentityOrderAndHeightGeometry": true,
+        "eceRadiancePrimaryMutualGaze": true,
+        "elliePlayfulAttentionAndAliaFamiliarity": true,
+        "exclusiveCoatedTextileAndOpaqueGuipure": true,
+        "continuousOpaqueFrontsAndShortSecureHems": true,
+        "cleanFacesNaturalHandsAndAllEightShoes": true,
+        "belogradchikRocksAndMissionReadable": true,
+        "pawsBabyScaleNY11ShadedGoldenCoatAndAnatomy": true,
+        "pawsCrewDashWithAliaReciprocation": true,
+        "noExtraPersonAnimalTextLogoOrWatermark": true
+      },
+      "destination": "assets/lore/starlight-era/894-bulgaria-belogradchik-rocks-star-map-relay.png",
+      "acceptedAt": "2026-08-05T20:26:27.433Z",
+      "status": "accepted-four-member-final"
+    },
+    {
+      "number": 895,
+      "source": "exec-e04fc0e3-dcdf-4e59-965d-60886c88e648.png",
+      "file": "895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+      "bytes": 2346822,
+      "sha256": "0f3766a6f1b3b8dd181edf729cedfdcc1f671f30b18186dd12ccf4d6c59a8f98",
+      "width": 941,
+      "height": 1672,
+      "validation": {
+        "exactlyFourAdultWomen": true,
+        "exactIdentityOrderAndHeightGeometry": true,
+        "eceRadiancePrimaryMutualGaze": true,
+        "elliePlayfulAttentionAndAliaFamiliarity": true,
+        "exclusiveCoatedTextileAndOpaqueGuipure": true,
+        "continuousOpaqueHighFrontsAndShortSecureHems": true,
+        "cleanFacesNaturalHandsAndAllEightShoes": true,
+        "varnaSeaGardenBlackSeaAndMissionReadable": true,
+        "pawsCorrectlyAbsent": true,
+        "noExtraPersonAnimalTextLogoOrWatermark": true
+      },
+      "destination": "assets/lore/starlight-era/895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+      "acceptedAt": "2026-08-05T20:26:27.433Z",
+      "status": "accepted-four-member-final"
+    }
+  ],
+  "completedAt": "2026-08-05T20:26:27.433Z",
+  "activeRenderCallCount": 0,
+  "acceptedLanes": [
+    {
+      "number": 892,
+      "file": "892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+      "bytes": 2441673,
+      "sha256": "18b9e0446ec15adaeb7e6a74a7bc57219de8a738da6adbe31c855dd26d64da7a",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 893,
+      "file": "893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+      "bytes": 2357744,
+      "sha256": "95848f634a003510c23c77f2a95cbf3c88aaeb3999065c57aa7a5a97c64192a8",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 894,
+      "file": "894-bulgaria-belogradchik-rocks-star-map-relay.png",
+      "bytes": 2557014,
+      "sha256": "725f773cafef27d2b9c41a3067405403524141d4b1211968ba40c8279a755313",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 895,
+      "file": "895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+      "bytes": 2346822,
+      "sha256": "0f3766a6f1b3b8dd181edf729cedfdcc1f671f30b18186dd12ccf4d6c59a8f98",
+      "width": 941,
+      "height": 1672
+    }
+  ],
+  "finalAssets": [
+    {
+      "number": 892,
+      "file": "892-bulgaria-sofia-national-palace-vitosha-route-light-grid.png",
+      "bytes": 2441673,
+      "sha256": "18b9e0446ec15adaeb7e6a74a7bc57219de8a738da6adbe31c855dd26d64da7a",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 893,
+      "file": "893-bulgaria-plovdiv-ancient-theatre-old-town-cabin-signal-cipher.png",
+      "bytes": 2357744,
+      "sha256": "95848f634a003510c23c77f2a95cbf3c88aaeb3999065c57aa7a5a97c64192a8",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 894,
+      "file": "894-bulgaria-belogradchik-rocks-star-map-relay.png",
+      "bytes": 2557014,
+      "sha256": "725f773cafef27d2b9c41a3067405403524141d4b1211968ba40c8279a755313",
+      "width": 941,
+      "height": 1672
+    },
+    {
+      "number": 895,
+      "file": "895-bulgaria-varna-sea-garden-black-sea-arrival-beacon-finale.png",
+      "bytes": 2346822,
+      "sha256": "0f3766a6f1b3b8dd181edf729cedfdcc1f671f30b18186dd12ccf4d6c59a8f98",
+      "width": 941,
+      "height": 1672
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "schema": "world-195x4-materialization-coverage-v2",
+  "batch": 219,
+  "country": "El Salvador",
+  "sceneNumber": 898,
+  "status": "passed-lossless",
+  "requiredCoveragePercent": 100,
+  "achievedCoveragePercent": 100,
+  "evidence": {
+    "canonical identity and relative height geometry": {
+      "status": "present",
+      "section": "CAST AND GEOMETRY",
+      "identityReferenceCount": 3
+    },
+    "country and exact recognizable location": {
+      "status": "present",
+      "section": "COUNTRY, LOCATION AND MISSION",
+      "location": "a broad dry private temporary overlook deck with recognizable Lake Coatepeque and the Santa Ana Volcano ridge behind it at rose-gold dawn, safely set back from water, slopes, roads and visitors"
+    },
+    "rotated aircrew roles and harmless completed mission": {
+      "status": "present",
+      "section": "AIRCREW ROLES",
+      "roles": {
+        "Radiance": "captain",
+        "Ellie": "first officer",
+        "Alia": "cabin host",
+        "AI ECE": "signal officer"
+      },
+      "missionState": "already-complete-secondary"
+    },
+    "original stored relationship pose or exact resolved pose beat": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "tableauSha256": "0e8a6adb705e97691f23e41c29a69305efd9db6a6a937538b04d820e9219c9a4"
+    },
+    "closed Radiance-Ellie-Alia triangle geometry": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "primary closed Radiance-Ellie-Alia romantic triangle"
+    },
+    "ECE reciprocal relationship connection without displacing the original trio": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "ECE reciprocal and non-displacing"
+    },
+    "four distinct bold country-derived latex-and-lace silhouettes": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "distinctSilhouetteCount": 4
+    },
+    "intentional natural midriff and navel visibility": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "specifiedVisibleNavelCount": 4
+    },
+    "all deterministic appearance rolls with triggered outcomes": {
+      "status": "present",
+      "artifact": "898-roll-audit.json",
+      "evaluatedRollCount": 356
+    },
+    "all triggered tattoo, piercing, jewelry, hair, accessory, touch, expression and pose rules": {
+      "status": "present",
+      "section": "ALL TRIGGERED DETERMINISTIC DETAILS",
+      "triggeredCount": 10,
+      "tattooCount": 1
+    },
+    "all trio-static rolls and any triggered original tableau": {
+      "status": "present",
+      "artifact": "898-roll-audit.json",
+      "evaluatedTrioRollCount": 20,
+      "triggeredTrioCount": 1
+    },
+    "PAWS presence roll, resolved action roll, growth epoch and reciprocation": {
+      "status": "present",
+      "section": "PAWS CONTRACT",
+      "presenceRoll": 66,
+      "rawActionRoll": 3,
+      "resolvedActionIndex": 3,
+      "growthEpoch": 1,
+      "effectiveTriggered": false
+    },
+    "clean-face, anatomy, hands, complete footwear and technical invariants": {
+      "status": "present",
+      "section": "COMPOSITION AND VALIDATION",
+      "cleanFace": true,
+      "hands": 8,
+      "footwear": 8,
+      "portrait": "9:16 full-length"
+    }
+  },
+  "semanticDiff": {
+    "status": "passed",
+    "positiveInstructionDeletionCount": 0,
+    "generalizedTriggeredDetailCount": 0,
+    "expectedTriggeredIds": [
+      "Radiance.tattoo",
+      "Radiance.opaqueContrastEdge",
+      "Ellie.shoulderBodyChain",
+      "Alia.hairVariation",
+      "AI ECE.sculpturalCuff",
+      "AI ECE.opaqueContrastEdge",
+      "AI ECE.subtleTacticalWebbing",
+      "AI ECE.metallicCorsetBeltReveal",
+      "AI ECE.silkRibbonInterlacedHands",
+      "trio.trioVChainChokerFormation"
+    ],
+    "materializedTriggeredIds": [
+      "Radiance.tattoo",
+      "Radiance.opaqueContrastEdge",
+      "Ellie.shoulderBodyChain",
+      "Alia.hairVariation",
+      "AI ECE.sculpturalCuff",
+      "AI ECE.opaqueContrastEdge",
+      "AI ECE.subtleTacticalWebbing",
+      "AI ECE.metallicCorsetBeltReveal",
+      "AI ECE.silkRibbonInterlacedHands",
+      "trio.trioVChainChokerFormation"
+    ],
+    "exactTriggeredSetMatch": true,
+    "originalTableauSha256": "0e8a6adb705e97691f23e41c29a69305efd9db6a6a937538b04d820e9219c9a4",
+    "finalPromptSha256": "8ccf3d05bfd8d4aba67726cf111d02bb4b0d2be27332110157340d1337a3ae50",
+    "blocklistSubstitutionCount": 0,
+    "blocklistSubstitutions": []
+  },
+  "transformations": {
+    "blockedCorpusSha256": "7f0ced957a48adfc4186457bb14ab4313884f82c9c903521014c4532da84e6e1",
+    "longestPhraseFirst": true,
+    "substitutions": []
+  },
+  "triggerMaterialization": [
+    {
+      "id": "Radiance.tattoo",
+      "scope": "Radiance",
+      "trait": "tattoo",
+      "seed": "898|Radiance|tattoo|mile-high-v1",
+      "firstEightHex": "6b1a41da",
+      "roll": 6,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Add one tasteful non-explicit thorn, rose, scorpion, geometric star-facet or country-craft tattoo on upper back, shoulder blade, outer thigh or lower back where the garment naturally leaves skin visible; never place it on intimate anatomy.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 01",
+      "materializedInstruction": "Radiance's outer thigh carries one clearly visible tasteful thorned-rose and abstract volcanic star-facet tattoo, safely away from intimate anatomy and naturally framed by the skirt opening.",
+      "storedRuleSha256": "4567f881ad7badbe3b11a9313c5cc1092b7e0bde77fbd34f5360f30238cd575f",
+      "materializedInstructionSha256": "99f5c27c1db734f15d9929a7d2d5b2e14138e3fc1857da080344902b2984cbe8",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Radiance.opaqueContrastEdge",
+      "scope": "Radiance",
+      "trait": "opaqueContrastEdge",
+      "seed": "898|Radiance|opaqueContrastEdge|mile-high-v1",
+      "firstEightHex": "b2a7bff5",
+      "roll": 1,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Show a deliberately visible opaque contrast edge or integrated dancewear-style lining as part of the principal garment. It is not underwear, never transparent and never adds a redundant clothing layer.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 02",
+      "materializedInstruction": "Radiance's principal crop has one deliberately visible pearl opaque contrast edge integrated into the lacquered construction.",
+      "storedRuleSha256": "3b1589f3b6ca6fc21e5d4e3d2bb51cfc85a822a942be6eedfaa942141a3188da",
+      "materializedInstructionSha256": "9ceb20c09b0c46ad74de6ac9e6f65275810458c2065a6901f574b69195536543",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.shoulderBodyChain",
+      "scope": "Ellie",
+      "trait": "shoulderBodyChain",
+      "seed": "898|Ellie|shoulderBodyChain|mile-high-v1",
+      "firstEightHex": "9635626c",
+      "roll": 4,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 13 inclusive",
+      "probability": "1.4%",
+      "triggered": true,
+      "storedRule": "Drape a delicate silver jewelry chain elegantly across the shoulders over the principal opaque evening garment. Keep it loose, removable, non-restraining and away from intimate anatomy.",
+      "otherwise": null,
+      "rendererSafeAlias": "Ellie appearance beat 03",
+      "materializedInstruction": "A delicate loose silver jewelry chain drapes across Ellie's shoulders over her fully opaque principal garment, removable and clear of intimate anatomy.",
+      "storedRuleSha256": "7592c66aeb96a5c51becaedcfa06e257b33b4189434d59d1b6895b1699fdc50e",
+      "materializedInstructionSha256": "a899f84d55ccad0027c34f8dcb3c938a3299474fd73b43e2a8e172020330766d",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.hairVariation",
+      "scope": "Alia",
+      "trait": "hairVariation",
+      "seed": "898|Alia|hairVariation|mile-high-v1",
+      "firstEightHex": "12950e43",
+      "roll": 3,
+      "rollScale": 100,
+      "trigger": "roll 0 through 33 inclusive",
+      "probability": "34%",
+      "triggered": true,
+      "storedRule": "When triggered, create one original hairstyle or fashion-color experiment for that character while preserving the canonical face, hairline, age read and identity. Rotate cuts, curls, braids, ponytails, updos, sculptural waves, wet-look styling and controlled luminous color accents; do not clone another character's hair. The user's 34/67 wording is treated as rounded guidance, with the exact deterministic roll totaling 100%.",
+      "otherwise": "66% canonical regular hair",
+      "rendererSafeAlias": "Alia appearance beat 04",
+      "materializedInstruction": "Alia keeps her canonical face and dark-auburn curl identity while wearing a distinct high braided curl ponytail with controlled sculptural volume.",
+      "storedRuleSha256": "b5e790dd9d811a953018e341657b3c591b13567d74c7c8dc6ff833606ad2c053",
+      "materializedInstructionSha256": "bee1fc5e09ddfdab6b5b94dc747e952752e81ad6703679c294e76ec3ef3e26bb",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.sculpturalCuff",
+      "scope": "AI ECE",
+      "trait": "sculpturalCuff",
+      "seed": "898|AI ECE|sculpturalCuff|mile-high-v1",
+      "firstEightHex": "6d731b07",
+      "roll": 3,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Use one removable runway cuff, collar or harness-inspired seam accessory as fashion design only. It never restrains, locks, injures or controls a person.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 05",
+      "materializedInstruction": "ECE wears one removable turquoise sculptural runway cuff, unconnected and comfortable.",
+      "storedRuleSha256": "549d36b30192fe8aa24bd9f6e2de9df3dfd42883a253bb1522ebd7669f485da0",
+      "materializedInstructionSha256": "26c28d0b0eaa08f865cb4df888660e1d4c92977a6eb9e389bb3831ed20937705",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.opaqueContrastEdge",
+      "scope": "AI ECE",
+      "trait": "opaqueContrastEdge",
+      "seed": "898|AI ECE|opaqueContrastEdge|mile-high-v1",
+      "firstEightHex": "f8e8f668",
+      "roll": 0,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Show a deliberately visible opaque contrast edge or integrated dancewear-style lining as part of the principal garment. It is not underwear, never transparent and never adds a redundant clothing layer.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 06",
+      "materializedInstruction": "ECE's principal signal crop has one unmistakable turquoise opaque contrast edge.",
+      "storedRuleSha256": "3b1589f3b6ca6fc21e5d4e3d2bb51cfc85a822a942be6eedfaa942141a3188da",
+      "materializedInstructionSha256": "a19978e41ba81a33a3823839123a39e10bdaca9e837a4712944f77d188d3e2b0",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.subtleTacticalWebbing",
+      "scope": "AI ECE",
+      "trait": "subtleTacticalWebbing",
+      "seed": "898|AI ECE|subtleTacticalWebbing|mile-high-v1",
+      "firstEightHex": "fcabbb30",
+      "roll": 8,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 17 inclusive",
+      "probability": "1.8%",
+      "triggered": true,
+      "storedRule": "Integrate intricate woven utility-webbing geometry subtly into the principal garment beneath one open-front lightweight trench-dress silhouette. The webbing is decorative, non-load-bearing and non-restraining; avoid military insignia, weapons and excess layers.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 07",
+      "materializedInstruction": "ECE's open cloak-and-crop silhouette uses sparse decorative woven route geometry, non-load-bearing and non-restraining, with no insignia.",
+      "storedRuleSha256": "bf2aab182d193ff1b960b035025d3f1cdfbb75daf00005ea6a59c36de837379c",
+      "materializedInstructionSha256": "8eeddfdfb8d1b57765be7a27a5e65b66dff3e7974d8163596716424eb13523d3",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.metallicCorsetBeltReveal",
+      "scope": "AI ECE",
+      "trait": "metallicCorsetBeltReveal",
+      "seed": "898|AI ECE|metallicCorsetBeltReveal|mile-high-v1",
+      "firstEightHex": "ac7d3230",
+      "roll": 0,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 9 inclusive",
+      "probability": "1.0%",
+      "triggered": true,
+      "storedRule": "Briefly reveal an ornate interlocking metallic waist belt with a decorative faux-lock clasp beneath a carried-open lightweight floor-length cloak. The belt fits comfortably, never locks or constricts, and the cloak functions only as a removable reveal prop over a fully opaque principal garment.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 08",
+      "materializedInstruction": "ECE carries open a lightweight opaque-guipure cloak to reveal one ornate interlocking metallic waist belt with a decorative faux clasp; it fits comfortably and neither locks nor constricts.",
+      "storedRuleSha256": "6218d96c2fc0d099301e82719231472a0a125299482cbed2c1b2607ba4d603b9",
+      "materializedInstructionSha256": "6461dbb9272b027a151aee5d70a60f30513e20413aebceb0ea8ee6b1e42a5b15",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.silkRibbonInterlacedHands",
+      "scope": "AI ECE",
+      "trait": "silkRibbonInterlacedHands",
+      "seed": "898|AI ECE|silkRibbonInterlacedHands|mile-high-v1",
+      "firstEightHex": "ac17d8e7",
+      "roll": 7,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Thread one long silk ribbon through two partners' interlaced fingers so it spills between their joined hands like a secret signal, with a third woman catching the loose end and completing the triangle. Preserve generous slack and leave every wrist free.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 09",
+      "materializedInstruction": "ECE and Radiance interlace one pair of fingers around a long loose silk signal ribbon while Ellie and Alia catch its slack continuation, leaving every wrist free and completing the larger relationship circuit.",
+      "storedRuleSha256": "cd8bb5a1f7ed1287d998145ac05c675b40b1f3ef580eb6836b44758db4714041",
+      "materializedInstructionSha256": "f5daf569c7e5cb44da290844496f3a161180512b5a6a911566b326ded5dc25c8",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "trio.trioVChainChokerFormation",
+      "scope": "trio",
+      "trait": "trioVChainChokerFormation",
+      "seed": "898|trio|trioVChainChokerFormation|mile-high-v1",
+      "firstEightHex": "4065daf2",
+      "roll": 10,
+      "rollScale": 1000,
+      "trigger": "trio precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Hold a close triangular portrait with three coordinated chokers and two short ornamental chains forming a gleaming V between them, the middle pendant floating at upper-chest level as all three exchange charged side glances. Keep both chains visibly slack with easy-release jewelry clasps and no neck tension.",
+      "otherwise": null,
+      "rendererSafeAlias": "original trio tableau beat 10",
+      "materializedInstruction": "Radiance, Ellie and Alia hold the original close triangular portrait with three coordinated chokers and two short ornamental chains forming a slack gleaming V at upper-chest level; easy-release clasps, no neck tension and charged three-way side glances remain visible.",
+      "storedRuleSha256": "7c14058244a4135e80d3c3976f6629ca1a9c5aae3c29bd61735b3cb4634b7079",
+      "materializedInstructionSha256": "0912180c6fc3b5bed09817b1a4b41a5f811afd6e3315b61ec3c3e97e3eacaa92",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "world-195x4-recovery-6-final-detail-lock-v1",
+  "batch": 219,
+  "sceneNumber": 898,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/898-foundation-recovery-6.txt",
+  "promptSha256": "56102a3ce1d80033c1e2fc68dc1eb2db60ff6aa5902e2f5d42d282d02650a58b",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No new moderation block occurred in round 5; only visually rejected candidates were recorded.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "finalDetailLock": "FINAL GAZE LOCK: Alia looks directly at Ellie; Ellie looks directly at Radiance; Radiance looks directly back toward Alia, completing the stored three-way trio gaze. ECE looks warmly at Radiance. Keep the exact Alia-Ellie-Radiance-ECE order, both interlaced-hand links over the loose ribbon, two visible navels, and Radiance's outer-thigh tattoo.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-5/898-recovery-5-rejected.png",
+    "bytes": 2523519,
+    "sha256": "cc59d2d708bd7e66f2a3688cae0c250086e075eeec1c04511d598eb814eb945a",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Alia looks downward instead of completing the stored three-way trio gaze",
+      "both required interlaced hand links, the ribbon circuit, two navels and outer-thigh tattoo now read clearly"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

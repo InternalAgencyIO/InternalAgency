@@ -1,0 +1,34 @@
+{
+  "schema": "world-195x4-recovery-5-spatial-lock-v1",
+  "batch": 219,
+  "sceneNumber": 899,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/899-foundation-recovery-5.txt",
+  "promptSha256": "618f47f2f9ba3abec52a14bc6351fd1717f48d26eee6a44304bb527ffbda080a",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "spatialLock": "SPATIAL FINALE LOCK: left-to-right Radiance mostly back-facing, Ellie turned toward Radiance, Alia front-facing, ECE front-facing. Ellie uses both hands in the side-waist embrace around Radiance. Alia's left hand rests on Radiance's shoulder and Alia's right hand links ECE's left hand. ECE's free right palm opens down toward PAWS and ECE's eyes look directly at the kitten's crystal hop. Alia and ECE are the two clearly front-facing visible-natural-navel wearers; Radiance's lower-back tattoo remains fully visible.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-4/899-recovery-4-rejected.png",
+    "bytes": 2391614,
+    "sha256": "855b7f60a2253e1efe4efd03d90b0b5b4a0007569e7416e254fc45f7734e040d",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "only Alia's navel is clearly visible",
+      "ECE looks toward Alia rather than down toward PAWS",
+      "the PAWS crystal hop is strong but reciprocal eye-line remains absent"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

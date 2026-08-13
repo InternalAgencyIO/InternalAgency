@@ -1,0 +1,46 @@
+{
+  "schema": "world-195x4-scene-897-whole-hand-brooch-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-brooch-14.txt",
+  "promptSha256": "2028f83f2b0ff121fb9e521c2a6f808552c7083ca9f52bf7d282df3f3ce10dd7",
+  "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e.json",
+  "blocklistSubstitutionCount": 2,
+  "positiveRequirementDeletionCount": 0,
+  "translations": [
+    {
+      "riskyPhrase": "firmly holds the prominent gold fastening on Alia's near red shoulder between her right gloved thumb and curled index finger; the thumb and finger visibly contact opposite sides of the fastening while every finger remains bent",
+      "safeEquivalent": "uses her right white-gloved hand to adjust the prominent gold brooch on Alia's near red shoulder; the whole glove forms one softly closed styling grip around the brooch"
+    },
+    {
+      "riskyPhrase": "No index finger extends; Radiance's right index finger stays curled around the fastening with her thumb",
+      "safeEquivalent": "Radiance's adjusting glove reads as one softly closed styling hand"
+    }
+  ],
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "foreheadContact": true,
+    "AliaExclusiveShoulderBrooch": true,
+    "RadianceWholeHandAdjustment": true,
+    "visibleLowWand": true,
+    "navelJewel": true,
+    "exactlyTwoVisibleNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalECEConnection": true,
+    "pawsLapCopilot": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  },
+  "gestureLock": {
+    "action": "Radiance adjusts Alia's shoulder brooch",
+    "handShape": "whole white glove softly closed around the brooch",
+    "presenterGesture": false
+  },
+  "amendedBeforeFirstCall": true
+}
