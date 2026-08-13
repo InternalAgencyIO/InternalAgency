@@ -1,14 +1,14 @@
 {
   "batch": 384,
   "country": "Comoros",
-  "status": "pass-1-scenes-1556-1558-output-moderation-block-scene-1559-no-terminal-pending-continuation",
+  "status": "pass-1-complete-four-hard-unusable-pass-2-holistic-bank-pending",
   "sourceCommit": "6a5d6474f0f148cc158255907473da4513cdc8da",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
     "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
     "passCeiling": 2,
     "pass1CandidatesAuthorized": 4,
-    "pass1CandidatesConsumed": 3,
+    "pass1CandidatesConsumed": 4,
     "pass2CandidatesConsumed": 0,
     "automaticThirdPassAllowed": false
   },
@@ -47,7 +47,7 @@
   },
   "renderPasses": {
     "pass1": {
-      "status": "scenes-1556-1558-failed-output-moderation-scene-1559-no-terminal",
+      "status": "completed-three-output-moderation-blocks-one-completed-visual-reject",
       "launchMode": "four scene prompts submitted concurrently; the wrapper surfaced scene 1556 rejection and exited while scenes 1557-1559 produced no terminal events or bytes; only untouched no-terminal slots may be submitted concurrently to complete this same initial pass",
       "allocation": {"A":1556,"B":1557,"C":1558,"D":1559},
       "sourceMode": "original identity anchors only; no country render input",
@@ -87,11 +87,42 @@
           "promptSha256": "235F249F9C52A23648233B26FBC9D8AAB5EF1301A4A5B7A8A3DF6C24E3651D87",
           "promptBytes": 3740,
           "rawState": "no-bytes"
+        },
+        {
+          "scene": 1559,
+          "callId": "exec-ee71ab7d-e179-4a93-a37e-70b9c941c001",
+          "occurredAt": "2026-08-13T13:30:46.037Z",
+          "status": "completed-hard-unusable-visual-reject",
+          "promptPath": "tmp/world-195x4/batch-384/scene-1559-initial-prompt.txt",
+          "promptSha256": "B46DCE7B02C0E522758B6269B63F633E5909B177E345E3D894D3398CFCF688A2",
+          "promptBytes": 3676,
+          "rawPath": "tmp/world-195x4/batch-384/raw/pass-1/scene-1559.png",
+          "rawSha256": "F42E36567C2ED37C1F453D43C5D86BA16E6673789E3C0A46038FAFFDD70B767F",
+          "rawBytes": 2562479,
+          "dimensions": [941,1672],
+          "hardFailures": [
+            "no visible harmless unoccupied lagoon-water marker or complete isolated endpoint",
+            "muzzle lane angles down toward the lower frame instead of a clearly isolated downrange endpoint"
+          ],
+          "retainedPasses": ["four distinct adults","secure opaque short looks","no gross limb corruption","both mascots together on padded lounge","no ammunition or firing"]
         }
       ],
-      "untouchedNoTerminalSceneNumbers": [1559]
+      "untouchedNoTerminalSceneNumbers": []
     },
-    "pass2": {"status":"not-authorized-before-single-pass-audit"}
+    "pass2": {
+      "status":"authorized-one-holistic-correction-per-hard-unusable-scene",
+      "sceneNumbers":[1556,1557,1558,1559],
+      "candidatesAuthorized":4,
+      "candidatesConsumed":0,
+      "launchMode":"four concurrent clean candidates from original identity anchors only",
+      "consolidatedCorrections":["fully covered torsos/waists/backs and sleeveless short looks to reduce moderation risk","independent separated stances with no hand overlap","handler isolated at far right in exact side profile","simple visible horizontal endpoint: complete target/backstop or orange empty-water marker","index on upper frame outside visibly empty guard"],
+      "prompts": {
+        "1556":{"path":"tmp/world-195x4/batch-384/scene-1556-pass-2-holistic-prompt.txt","sha256":"EC6F2C9890E0B832D78422C032FA282A365F9594F51B8165F24A6878445276B6","bytes":2710},
+        "1557":{"path":"tmp/world-195x4/batch-384/scene-1557-pass-2-holistic-prompt.txt","sha256":"64266A59E044E1F1619B6CAF3872436352659E8342FD734A333E4AFC14FACD72","bytes":2735},
+        "1558":{"path":"tmp/world-195x4/batch-384/scene-1558-pass-2-holistic-prompt.txt","sha256":"A1052A79295A74FDF27207CC35E108E55F5D8AFEC78377349BC797B378B3A186","bytes":2822},
+        "1559":{"path":"tmp/world-195x4/batch-384/scene-1559-pass-2-holistic-prompt.txt","sha256":"ABA56702719ECB12BFDFBC06DE2F45CA45396256644E9E63957DF0260CF9A90F","bytes":2697}
+      }
+    }
   },
   "acceptedAssets": [],
   "hardSafeAcceptedCount": 0,
