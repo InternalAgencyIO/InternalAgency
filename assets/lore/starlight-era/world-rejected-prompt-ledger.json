@@ -14,21 +14,21 @@
   },
   "sourceScan": {
     "sessionRootPolicy": "Read every locally available Codex session JSONL below USERPROFILE/.codex/sessions and USERPROFILE/.codex/archived_sessions (or CODEX_SESSION_ROOT) and retain failed image_generation_end events.",
-    "physicalFailedEventsScanned": 1895,
-    "uniqueRuntimeFailureOccurrences": 960,
-    "projectMarkerMatchedOccurrences": 787,
-    "projectThreadOrMarkerMatchedOccurrences": 909,
+    "physicalFailedEventsScanned": 1896,
+    "uniqueRuntimeFailureOccurrences": 961,
+    "projectMarkerMatchedOccurrences": 788,
+    "projectThreadOrMarkerMatchedOccurrences": 910,
     "excludedUnrelatedOccurrences": 0,
     "note": "All failed image-generation prompts are retained, including unrelated image requests, because the public-build directive explicitly covers every Codex image/video output and rejected prompt. Marker counts are informational only and never filter the tracker."
   },
   "summary": {
-    "runtimeFailureOccurrenceCount": 960,
-    "runtimePromptShaPassCount": 960,
-    "noByteRuntimeOccurrenceCount": 960,
-    "physicalFailedEventsScanned": 1895,
+    "runtimeFailureOccurrenceCount": 961,
+    "runtimePromptShaPassCount": 961,
+    "noByteRuntimeOccurrenceCount": 961,
+    "physicalFailedEventsScanned": 1896,
     "activeCheckpointBoundOccurrenceCount": 139,
     "activeCheckpointEntriesWithoutNormalizedFailedRuntimePromptMatchCount": 135,
-    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1470,
+    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1471,
     "historicalExactPromptOccurrenceCount": 249,
     "historicalCanonicalSourceAliasCount": 4,
     "knownTextMissingHistoricalEvidenceCount": 0,
@@ -4122,7 +4122,7 @@
     ]
   },
   "runtimeFailures": {
-    "entryCount": 960,
+    "entryCount": 961,
     "entries": [
       {
         "entryId": "codex-image-failure-call_uFOZy6HPAj3sjhBalW0dkvUe-68932f6b1921",
@@ -47220,6 +47220,47 @@
           {
             "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
             "timestamp": "2026-08-13T18:02:42.900Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-86d493e8-2186-460d-b0e5-5c06d0aa867a-384495258a30",
+        "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+        "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+        "occurredAt": "2026-08-13T18:15:03.577Z",
+        "batch": null,
+        "scene": null,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image from the original identity references only, never from a prior country render.\n\nExactly four fictional adult women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve their distinct anchored faces and skin tones. No extra, merged, cloned, or younger-looking person.\n\nShow Luxembourg's complete Schiessentumpel triple waterfall and small sandstone bridge on the Black Ernz, with three cascade streams, mossy boulders, sandstone formations, beech canopy, and forest path visible beyond a broad dry protected overlook. Use deep-sea submersible couture details such as pressure-shell facets, porthole rings, bathymetric lines, and cool luminous seams. No flag, crest, official emblem, religious symbol, uniform, logo, or text.\n\nAll four wear secure opaque lined public-fashion looks with complete bust, seat, pelvic, and intimate coverage: Radiance a sandstone sleeveless upper-thigh mini; Ellie a green one-shoulder upper-thigh skort look; Alia a cobalt sleeveless top with covered waist and white upper-thigh shorts; ECE a red one-shoulder top with covered waist and silver upper-thigh skort. Use ordinary secure necklines, closed or securely covered backs, and complete footwear. No sheer fabric or accidental exposure.\n\nKeep all four in separate standing lanes with no contact. Radiance, Ellie, and ECE show both empty hands. A fixed beacon mast is locked behind a transparent guard in ECE's separate bay and nobody touches it. No mascots or odd props appear.\n\nAlia alone stands isolated at far right and holds one polished rainbow-gradient inert cinema-training frame in a simple side-on two-hand stance. One index lies straight along the outside of the frame. Its forward end points away from every person, animal, waterfall, path, occupied object, and camera toward one plain black diamond paper marker fixed to a complete thick earth-and-sand backstop behind a transparent safety panel. The full lane and space beyond it are empty. No ammunition, firing, flash, threat, injury, or combat.\n\nEye-level full-body editorial framing. Show exactly two plausible arms and hands and two complete legs and feet per woman, separated silhouettes, visible joints, one role per hand, and every face, limb, shoe, target, and complete backstop in frame.\n",
+          "sha256": "384495258A306DCEB59DA1C0366A116CACAA98C0591685ADC9F949F7F1046138",
+          "normalizedSha256": "2BB0289D69D26CB649AE422006AEA19F5E79E60E6042E39DC97F09F1625B04A5",
+          "encoding": "utf-8",
+          "bytes": 2426,
+          "chars": 2426,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+          "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+          "timestamp": "2026-08-13T18:15:03.577Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a|384495258A306DCEB59DA1C0366A116CACAA98C0591685ADC9F949F7F1046138",
+        "observedIn": [
+          {
+            "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
+            "timestamp": "2026-08-13T18:15:03.577Z"
           }
         ],
         "immutable": true

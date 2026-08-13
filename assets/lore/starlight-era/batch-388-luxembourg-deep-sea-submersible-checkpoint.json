@@ -1,7 +1,7 @@
 {
   "batch": 388,
   "country": "Luxembourg",
-  "status": "active-pass-1-complete-one-hard-safe-three-no-byte-failures-pass-2-authorized",
+  "status": "closed-three-of-four-after-cap-no-more-luxembourg-rendering",
   "sourceCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -11,9 +11,9 @@
     "pass1CandidatesAuthorized": 4,
     "pass1CandidatesConsumed": 4,
     "pass2CandidatesAuthorized": 3,
-    "pass2CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 3,
     "automaticThirdPassAllowed": false,
-    "authorizationCondition": "Pass 1 is closed after exactly four terminal scene slots: scene 1574 is hard-safe accepted and scenes 1572, 1573, and 1575 are definitive output-moderation no-byte failures. Exactly three concurrent fresh holistic pass-2 corrections are authorized for the three missing scenes from original anchors only."
+    "authorizationCondition": "The exactly-three concurrent pass-2 bank is fully consumed. Scenes 1572 and 1573 are hard-safe accepted; scene 1575 ended failed with no bytes and no surfaced request ID or preserved runtime cause. The two-pass cap is closed and no more Luxembourg rendering is allowed."
   },
   "queueResolution": {
     "countryEvidence": [
@@ -436,7 +436,7 @@
       }
     },
     "pass2": {
-      "status": "authorized-exactly-three-concurrent-holistic-corrections",
+      "status": "completed-two-hard-safe-one-runtime-failed-no-bytes-cap-closed",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
       "sceneNumbers": [
         1572,
@@ -444,7 +444,7 @@
         1575
       ],
       "candidatesAuthorized": 3,
-      "candidatesConsumed": 0,
+      "candidatesConsumed": 3,
       "launchMode": "exactly three concurrent fresh clean candidates from original identity anchors only",
       "consolidatedCorrections": [
         "use secure opaque sleeveless or one-shoulder upper-thigh mini, skort, or tailored shorts instead of repeated strapless or open-back construction",
@@ -468,11 +468,76 @@
           "bytes": 2426
         }
       },
-      "events": [],
+      "events": [
+        {
+          "scene": 1572,
+          "callId": "exec-dfcdc82f-d90b-4125-b362-59aa4b1ac0d0",
+          "occurredAt": "2026-08-13T18:11:46.298Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1572-pass-2-holistic-prompt.txt",
+          "promptSha256": "BDF1A0AFCAD37E7ECE9B2BC89F905C8FEC82A0FFAC838DBEBFA4B0B469322972",
+          "promptBytes": 2346,
+          "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1572.png",
+          "rawSha256": "04A226AA95982D72EF689A7AA7CC2953DBAE098E4D0BE6EBE0ACD50955D784F5",
+          "rawBytes": 2350224,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "four anchored adult women in opaque public-safe short looks with plausible complete gross anatomy and footwear; PAWS and MAX safe together on their lounge; isolated ECE side-on with two-hand inert-prop control toward a black diamond marker on a complete earth backstop behind a transparent panel, with no person, animal, or camera in the lane",
+          "acceptedAsset": "assets/lore/starlight-era/1572-luxembourg-adolphe-bridge-deep-sea-submersible-bounded-pass-2.png"
+        },
+        {
+          "scene": 1573,
+          "callId": "exec-0ae6cabb-8e23-44cf-aaf7-b6dfc60377e1",
+          "occurredAt": "2026-08-13T18:13:44.709Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1573-pass-2-holistic-prompt.txt",
+          "promptSha256": "64683BC3862957414DAE13C133A58030625CB4A1EC97286DD2663D4E4463F9AA",
+          "promptBytes": 2406,
+          "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1573.png",
+          "rawSha256": "33A3A4C7B6A2421223C876555D8277D44288544BA1AF79B5909B91A9EF3E2BE7",
+          "rawBytes": 2346540,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "four anchored adult women in opaque public-safe short looks with plausible complete gross anatomy and footwear; no mascots; isolated ECE side-on with two-hand inert-prop control toward a black diamond marker on a complete backstop behind a transparent panel, with an empty lane",
+          "acceptedAsset": "assets/lore/starlight-era/1573-luxembourg-belval-deep-sea-submersible-bounded-pass-2.png"
+        },
+        {
+          "scene": 1575,
+          "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+          "occurredAt": "2026-08-13T18:15:03.577Z",
+          "status": "failed-no-bytes-cause-runtime-error-not-preserved",
+          "requestId": null,
+          "requestIdProvenance": "unknown-not-surfaced",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1575-pass-2-holistic-prompt.txt",
+          "promptSha256": "384495258A306DCEB59DA1C0366A116CACAA98C0591685ADC9F949F7F1046138",
+          "promptBytes": 2426,
+          "rawState": "no-bytes",
+          "rawPath": null,
+          "rawSha256": null,
+          "rawBytes": 0,
+          "runtimeCause": "not-preserved"
+        }
+      ],
       "thirdPassAllowed": false
     }
   },
   "acceptedAssets": [
+    {
+      "scene": 1572,
+      "file": "assets/lore/starlight-era/1572-luxembourg-adolphe-bridge-deep-sea-submersible-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1572.png",
+      "sha256": "04A226AA95982D72EF689A7AA7CC2953DBAE098E4D0BE6EBE0ACD50955D784F5",
+      "bytes": 2350224,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-2"
+    },
+    {
+      "scene": 1573,
+      "file": "assets/lore/starlight-era/1573-luxembourg-belval-deep-sea-submersible-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1573.png",
+      "sha256": "33A3A4C7B6A2421223C876555D8277D44288544BA1AF79B5909B91A9EF3E2BE7",
+      "bytes": 2346540,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-2"
+    },
     {
       "scene": 1574,
       "file": "assets/lore/starlight-era/1574-luxembourg-upper-sure-deep-sea-submersible-male-bounded-pass-1.png",
@@ -519,10 +584,24 @@
       "rawPath": null,
       "sha256": null,
       "bytes": 0
+    },
+    {
+      "scene": 1575,
+      "phase": "pass-2",
+      "status": "failed-no-bytes-cause-runtime-error-not-preserved",
+      "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+      "requestId": null,
+      "requestIdProvenance": "unknown-not-surfaced",
+      "occurredAt": "2026-08-13T18:15:03.577Z",
+      "rawState": "no-bytes",
+      "rawPath": null,
+      "sha256": null,
+      "bytes": 0,
+      "runtimeCause": "not-preserved"
     }
   ],
   "rejectedPromptLedger": {
-    "status": "three-no-byte-failures-exact-text-recorded",
+    "status": "four-no-byte-failures-exact-text-recorded",
     "entries": [
       {
         "entryId": "batch388-scene1572-pass1-exec-7f38554f",
@@ -616,18 +695,45 @@
           "rawPath": null
         },
         "immutable": true
+      },
+      {
+        "entryId": "batch388-scene1575-pass2-exec-86d493e8",
+        "scene": 1575,
+        "phase": "pass-2",
+        "status": "failed-no-bytes-cause-runtime-error-not-preserved",
+        "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+        "requestId": null,
+        "requestIdProvenance": "unknown-not-surfaced",
+        "occurredAt": "2026-08-13T18:15:03.577Z",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image from the original identity references only, never from a prior country render.\n\nExactly four fictional adult women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve their distinct anchored faces and skin tones. No extra, merged, cloned, or younger-looking person.\n\nShow Luxembourg's complete Schiessentumpel triple waterfall and small sandstone bridge on the Black Ernz, with three cascade streams, mossy boulders, sandstone formations, beech canopy, and forest path visible beyond a broad dry protected overlook. Use deep-sea submersible couture details such as pressure-shell facets, porthole rings, bathymetric lines, and cool luminous seams. No flag, crest, official emblem, religious symbol, uniform, logo, or text.\n\nAll four wear secure opaque lined public-fashion looks with complete bust, seat, pelvic, and intimate coverage: Radiance a sandstone sleeveless upper-thigh mini; Ellie a green one-shoulder upper-thigh skort look; Alia a cobalt sleeveless top with covered waist and white upper-thigh shorts; ECE a red one-shoulder top with covered waist and silver upper-thigh skort. Use ordinary secure necklines, closed or securely covered backs, and complete footwear. No sheer fabric or accidental exposure.\n\nKeep all four in separate standing lanes with no contact. Radiance, Ellie, and ECE show both empty hands. A fixed beacon mast is locked behind a transparent guard in ECE's separate bay and nobody touches it. No mascots or odd props appear.\n\nAlia alone stands isolated at far right and holds one polished rainbow-gradient inert cinema-training frame in a simple side-on two-hand stance. One index lies straight along the outside of the frame. Its forward end points away from every person, animal, waterfall, path, occupied object, and camera toward one plain black diamond paper marker fixed to a complete thick earth-and-sand backstop behind a transparent safety panel. The full lane and space beyond it are empty. No ammunition, firing, flash, threat, injury, or combat.\n\nEye-level full-body editorial framing. Show exactly two plausible arms and hands and two complete legs and feet per woman, separated silhouettes, visible joints, one role per hand, and every face, limb, shoe, target, and complete backstop in frame.\n",
+          "sha256": "384495258A306DCEB59DA1C0366A116CACAA98C0591685ADC9F949F7F1046138",
+          "encoding": "utf-8",
+          "bytes": 2426
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "runtimeCause": "not-preserved",
+        "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass2/events/2",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-388/scene-1575-pass-2-holistic-prompt.txt",
+          "rawPath": null
+        },
+        "immutable": true
       }
     ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
-  "hardSafeAcceptedCount": 1,
+  "hardSafeAcceptedCount": 3,
   "missingSceneNumbers": [
-    1572,
-    1573,
     1575
   ],
   "xPost": {
-    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "status": "ineligible-closed-three-of-four-after-cap",
     "caption": "Luxembourg 🤍 Bhutan #Luxembourg #WorldXXXSeries",
     "url": null
   },
@@ -649,7 +755,8 @@
     "themeEvidence": [
       "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8"
     ],
-    "lockedUntilBatch388Closed": true
+    "lockedUntilBatch388Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch388Closure": true
   },
   "preflight": {
     "path": "tmp/world-195x4/batch-388/batch-388-luxembourg-preflight.json",
