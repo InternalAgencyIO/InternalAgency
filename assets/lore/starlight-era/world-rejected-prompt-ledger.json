@@ -14,7 +14,7 @@
   },
   "sourceScan": {
     "sessionRootPolicy": "Read every locally available Codex session JSONL below USERPROFILE/.codex/sessions and USERPROFILE/.codex/archived_sessions (or CODEX_SESSION_ROOT) and retain failed image_generation_end events.",
-    "physicalFailedEventsScanned": 1882,
+    "physicalFailedEventsScanned": 1885,
     "uniqueRuntimeFailureOccurrences": 952,
     "projectMarkerMatchedOccurrences": 779,
     "projectThreadOrMarkerMatchedOccurrences": 901,
@@ -25,7 +25,7 @@
     "runtimeFailureOccurrenceCount": 952,
     "runtimePromptShaPassCount": 952,
     "noByteRuntimeOccurrenceCount": 952,
-    "physicalFailedEventsScanned": 1882,
+    "physicalFailedEventsScanned": 1885,
     "activeCheckpointBoundOccurrenceCount": 139,
     "activeCheckpointEntriesWithoutNormalizedFailedRuntimePromptMatchCount": 135,
     "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1462,
@@ -46872,6 +46872,18 @@
           {
             "threadId": "019ff973-4f4e-7c73-89d5-ffae7c69d47c",
             "timestamp": "2026-08-13T11:59:43.437Z"
+          },
+          {
+            "threadId": "019ffb1b-8995-7110-a444-9390728b1f07",
+            "timestamp": "2026-08-13T12:31:53.911Z"
+          },
+          {
+            "threadId": "019ffb1c-5253-7b00-8246-d1afa5be0c1d",
+            "timestamp": "2026-08-13T12:32:45.297Z"
+          },
+          {
+            "threadId": "019ffb1c-d6b8-7610-8c10-950818177fb1",
+            "timestamp": "2026-08-13T12:33:19.204Z"
           }
         ],
         "immutable": true
