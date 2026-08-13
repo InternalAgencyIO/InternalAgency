@@ -1,0 +1,83 @@
+export const ecuadorPalette = "Ecuador sun gold, Pacific cobalt, Andean sky blue, cloud white, volcanic charcoal, Cotopaxi ice silver, Amazon emerald, Quito terracotta, Cuenca rose, helicopter graphite, rotor copper and cockpit cyan";
+export const ecuadorProhibitions = "Use respectful secular Ecuador geography through complete Andean ridge bands, volcanic cones, equatorial arcs, river braids, orchid forms, Galapagos lava contours and ocean-current spirals. No literal flag, coat of arms, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied airline identity, logo, badge, readable text, combat, threat or weaponized aviation equipment.";
+const target = "one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, helicopter and camera";
+const water = "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, helicopter, building or camera along or beyond the line";
+
+export const ecuadorSceneSpecs = [
+  {
+    scene: 1440,
+    mode: "country-led hybrid",
+    theme: "civilian helicopter flight couture",
+    landmark: "a broad dry rooftop terrace above Quito's complete historic center with tiled roofs, the Basilica towers, El Panecillo hill and Pichincha ridge, fused in the foreground with a sleek fictional civilian glass-cockpit helicopter on a secured landing platform",
+    motifs: "complete Andean ridge bands, equatorial arcs, Quito roof grids, rotor discs and cockpit glazing",
+    culture: "Quito reads through its high-altitude historic roofscape, Basilica silhouette, El Panecillo and Pichincha ridge; the helicopter is peaceful civilian transport with no copied operator identity.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large Andean, equatorial and Quito motifs; Radiance and ECE use rotor-disc, cockpit-glass and landing-skid construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "Ellie sits securely on a fixed cockpit bench while Radiance settles sideways across her lap; Alia draws Radiance into a linked-hand choice and ECE closes from behind into a protective shoulder embrace.",
+    outfits: {
+      Radiance: "sun-gold rotor-petal dress with dimensional Andean ridge blades, cyan cockpit panes and curved-skid heels",
+      Ellie: "Quito-terracotta asymmetric flight culottes with white equatorial hoop shoulders, graphite glazing panels and rotor platforms",
+      Alia: "Amazon-emerald open-back jumpsuit with braided cobalt ridge cords, orchid hip cages and copper pumps",
+      "AI ECE": "helicopter-graphite cockpit-shell peplum over opaque sky-blue shorts with silver rotor hoops, cyan glazing and landing-skid boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance touches Ellie and links Alia", "Ellie supports Radiance securely", "Alia and ECE complete visible affectionate contacts"],
+    mascotPlan: "Only rolled mascots appear on a padded dry rooftop lounge far from edges, target line and helicopter machinery.",
+  },
+  {
+    scene: 1441,
+    mode: "country-led hybrid",
+    theme: "civilian helicopter flight couture",
+    landmark: "a broad dry volcanic overlook facing Cotopaxi's complete snow-capped cone, high paramo grassland and broad foothills, fused equally with a copper-and-glass civilian helicopter cabin and stationary rotor",
+    motifs: "complete Cotopaxi cone, ice-cap crescents, paramo sweeps, rotor arcs and landing-skid geometry",
+    culture: "Cotopaxi reads through its symmetrical volcanic cone, bright ice cap and Andean paramo landscape, with all aircraft systems parked and inert.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large volcano, ice-cap and paramo motifs; Ellie and ECE use rotor, cabin-shell and landing-skid construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "Alia leads ECE through a stable turning dance while Radiance catches Alia's linked hand and Ellie interrupts with a clear waist embrace and jealous eye line.",
+    outfits: {
+      Radiance: "Cotopaxi-white cone-corsage tulip dress with cobalt ice terraces, copper rotor ribs and volcanic-arch heels",
+      Ellie: "cockpit-cyan oval-glass culotte jumpsuit with graphite cabin panels, gold paramo fans and turbine platforms",
+      Alia: "volcanic-charcoal strapless ridge coat-dress with braided silver ice currents, dimensional rotor crescents and emerald pumps",
+      "AI ECE": "rotor-copper cabin-cradle bodice over opaque burgundy shorts with cyan window cells, silver skid fins and suspension boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Alia links Radiance and leans into ECE", "Radiance links Alia", "Ellie and ECE complete clear waist and shoulder contacts"],
+    mascotPlan: "Only rolled mascots appear on a secured padded observation platform far from slopes, props and helicopter equipment.",
+  },
+  {
+    scene: 1442,
+    mode: "theme-led original",
+    theme: "civilian helicopter flight couture",
+    landmark: "a broad dry river terrace in Cuenca with the complete Tomebamba riverfront, stacked red-tile roofs, blue cathedral domes and mountain rim, fused equally with a fictional civilian helicopter cockpit and sculptural rotor canopy",
+    motifs: "location-only river braids, roof terraces, dome curves, rotor hubs and cockpit-navigation rings",
+    culture: "Cuenca reads through the Tomebamba river edge, layered tile roofs, blue domes and Andean mountain setting without sacred activity.",
+    motifPolicy: "Rotor iris, skid lattice, cockpit sail and tail-boom shield create four unrelated silhouettes while Cuenca remains equally large.",
+    paperTarget: target, waterTarget: water,
+    composition: "ECE sits and draws Ellie into a face-to-face embrace; Radiance gives Ellie a forehead kiss while taking ECE's linked hand, and Alia joins from the side with a visible invitation.",
+    outfits: {
+      Radiance: "rotor-copper iris dress with opaque silver hub rings, cyan aperture ribs and gyroscope heels",
+      Ellie: "helicopter-graphite skid-lattice culotte coat with burgundy conduit channels, rigid shoulder bridge and rotor platforms",
+      Alia: "cockpit-white tail-boom jumpsuit with braided cobalt seams, curved emerald side sails and prism pumps",
+      "AI ECE": "Andean-sky cockpit-shield coat-dress with gold field hoops, glass peplum and mast boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "ECE supports Ellie and links Radiance", "Ellie touches ECE", "Radiance links ECE and touches Ellie while Alia joins with one visible contact"],
+    mascotPlan: "Only rolled mascots appear on a secured padded terrace far from river edges, props and helicopter machinery.",
+  },
+  {
+    scene: 1443,
+    mode: "theme-led original",
+    theme: "civilian helicopter flight couture",
+    landmark: "a broad dry overlook above Bartolome Island in the Galapagos with complete Pinnacle Rock, black lava fields, twin crescent bays and cobalt Pacific water, fused equally with a peaceful civilian helicopter, panoramic bubble cockpit and stationary rotor deck",
+    motifs: "location-only lava contours, twin-bay crescents, ocean-current spirals, bubble cockpit modules and rotor geometry",
+    culture: "Bartolome reads through Pinnacle Rock, lava landscape, twin bays and Pacific horizon; all wildlife remains distant and outside every prop line.",
+    motifPolicy: "Bubble dome, rotor gearbox, navigation spindle and tail radiator make four distinct outfits while Pinnacle Rock and twin bays remain foregrounded.",
+    paperTarget: target, waterTarget: water,
+    composition: "Radiance rises from a stable cockpit bench into Alia's full embrace while Ellie gives Radiance a cheek kiss and ECE interrupts their route with a decisive linked-hand invitation.",
+    outfits: {
+      Radiance: "rotor-copper bubble-dome column dress with silver ribs, cyan light appliques and blade-tip heels",
+      Ellie: "Pacific-cobalt gearbox culotte jumpsuit with charcoal hex tiles, lava pleats and magnetic platforms",
+      Alia: "cockpit-white navigation-spindle coat-dress with braided emerald seams, burgundy side frames and optic pumps",
+      "AI ECE": "helicopter-graphite tail-radiator bodice over opaque sun-gold shorts with silver conduit lattice and skid boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance embraces Alia", "Alia supports Radiance", "Ellie touches Radiance while ECE links one free hand into the group"],
+    mascotPlan: "Only rolled mascots appear on a padded dry overlook far from wildlife, lava edges, props and helicopter machinery.",
+  },
+];

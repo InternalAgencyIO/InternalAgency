@@ -1,0 +1,83 @@
+export const senegalPalette = "Atlantic cobalt, Senegal River teal, mangrove emerald, Saint-Louis ochre, shell ivory, Djoudj silver, baobab charcoal, jet pearl, aviation brass, cabin burgundy, runway cyan and solar amber";
+export const senegalProhibitions = "Use respectful secular Senegal geography through complete Atlantic waves, river currents, island-quay grids, wetland channels, mangrove fans, shell-islet arcs and baobab contours. No literal flag, official seal, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied airline identity, logo, badge, readable text, combat, threat or weaponized aviation equipment.";
+const target = "one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, aircraft and camera";
+const water = "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, aircraft, building or camera along or beyond the line";
+
+export const senegalSceneSpecs = [
+  {
+    scene: 1432,
+    mode: "country-led hybrid",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry Atlantic overlook in Dakar with complete volcanic coastal cliffs, ocean surf and city silhouette, fused in the foreground with a sleek fictional civilian private jet on an elevated transparent arrival deck",
+    motifs: "complete Atlantic wave bands, Dakar cliff arcs, coastal-current pleats, jet-wing sweeps and oval cabin windows",
+    culture: "Dakar reads through its Atlantic peninsula, volcanic coast and urban horizon; the aircraft is a fictional peaceful civilian private jet with no copied airline identity.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large Atlantic, cliff and coastal motifs; Radiance and ECE use jet-wing, cabin-window and engine-cowl construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "Radiance sits securely sideways across Ellie's lap on a fixed low cabin bench while Alia draws Radiance into a linked-hand departure choice and ECE interrupts with a close forehead invitation.",
+    outfits: {
+      Radiance: "Atlantic-cobalt strapless jet-wing dress with dimensional current pleats, brass cabin hoops and swept-wing heels",
+      Ellie: "Saint-Louis-ochre asymmetric culotte coat with cliff lattice shoulders, pearl cabin panels and turbine platforms",
+      Alia: "mangrove-emerald open-back jumpsuit with braided ocean-current beadwork, silver tail fins and surf pumps",
+      "AI ECE": "aviation-charcoal engine-cowl peplum over ivory shorts with cyan cabin discs, burgundy ribs and runway boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance touches Ellie and links Alia", "Ellie supports Radiance securely", "Alia links Radiance while ECE completes one visible affectionate touch"],
+    mascotPlan: "Only rolled mascots appear on a padded dry cabin bench far from cliffs, surf, target line and aircraft machinery.",
+  },
+  {
+    scene: 1433,
+    mode: "country-led hybrid",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry riverside platform beside the complete Island of Saint-Louis with the Senegal River mouth, regular town grid, long quays, low ochre facades and bridge silhouette, fused with a pearl private jet cabin and open wing equally foregrounded",
+    motifs: "complete island outline, river-mouth currents, quay grids, bridge arcs, oval windows and wing-rib geometry",
+    culture: "Saint-Louis reads through its island setting at the Senegal River mouth, regular town plan, quays and distinctive low architecture.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large island, river, quay and bridge motifs; Ellie and ECE use cabin, wing-rib and turbine construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "ECE and Radiance perform a stable controlled dance dip beside the open cabin while Ellie catches Radiance's linked hand and Alia closes the circle with protective shoulder and waist contact.",
+    outfits: {
+      Radiance: "river-teal quay-corsage tulip dress with ochre grid inlays, brass wing ribs and bridge-arch heels",
+      Ellie: "jet-pearl oval-window culotte jumpsuit with cobalt cabin panels, island-relief shoulders and turbine platforms",
+      Alia: "Saint-Louis-ochre strapless river coat-dress with braided teal currents, dimensional quay fans and estuary pumps",
+      "AI ECE": "aviation-charcoal cabin-shell bodice over burgundy shorts with cyan portholes, silver wing fins and suspension boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance supports ECE and links Ellie", "ECE supports Radiance at the waist", "Ellie and Alia complete visible affectionate contacts"],
+    mascotPlan: "Only rolled mascots appear on a secured padded cabin platform far from water, quays, props and aircraft equipment.",
+  },
+  {
+    scene: 1434,
+    mode: "theme-led original",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry overlook above the complete Djoudj National Bird Sanctuary with its large lake, streams, ponds, backwaters and sandbanks, all distant birds outside every route line, fused equally with a fictional private-jet wing, glass cabin and peaceful ecology lounge",
+    motifs: "location-only lake sweep, backwater braids, sandbank arcs, wing spars and cabin-navigation rings",
+    culture: "Djoudj reads through its Senegal River delta wetland, lake, streams, ponds, backwaters and sandbanks; all birds remain distant and protected.",
+    motifPolicy: "Cabin iris, wing-spar lattice, turbine sail and tail shield create four different silhouettes while Djoudj's wetland remains equally large.",
+    paperTarget: target, waterTarget: water,
+    composition: "Ellie sits and draws Alia into a face-to-face embrace; Radiance gives Alia a forehead kiss while taking Ellie's linked hand, and ECE joins from the side with a clear jealous invitation.",
+    outfits: {
+      Radiance: "aviation-brass cabin-iris tulip dress with opaque silver rings, cyan aperture ribs and lens heels",
+      Ellie: "baobab-charcoal wing-spar culotte coat with burgundy conduit channels, lattice cape and turbine platforms",
+      Alia: "jet-pearl turbine-sail jumpsuit with braided cobalt seams, curved side sails and prism pumps",
+      "AI ECE": "cabin-ivory tail-shield coat-dress with emerald field hoops, window peplum and mast boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Ellie supports Alia and links Radiance", "Alia touches Ellie", "Radiance links Ellie and touches Alia while ECE joins with one visible contact"],
+    mascotPlan: "Only rolled mascots appear on a secured padded platform far from wildlife, wetland edges, props and aircraft machinery.",
+  },
+  {
+    scene: 1435,
+    mode: "theme-led original",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry delta overlook above the complete Saloum Delta with brackish channels, mangrove forest, sandy islets, Atlantic shoreline and shell-mound contours, fused equally with a peaceful private jet, panoramic cabin and wingtip observation deck",
+    motifs: "location-only channel braids, mangrove fans, sandy-islet crescents, shell-mound arcs, cabin modules and wing geometry",
+    culture: "Saloum reads through its river arms, brackish channels, many islands and islets, mangroves, Atlantic coast, dry forest and shell-mound landscape.",
+    motifPolicy: "Panoramic dome, pressure cabin, navigation spindle and engine radiator make four distinct outfits while the delta and Atlantic coast remain foregrounded.",
+    paperTarget: target, waterTarget: water,
+    composition: "Radiance rises from a stable cabin bench into ECE's full embrace while Ellie gives Radiance a cheek kiss and Alia interrupts their route with a playful linked-hand invitation.",
+    outfits: {
+      Radiance: "aviation-brass panoramic-dome column dress with silver ribs, cyan light appliques and wingtip heels",
+      Ellie: "mangrove-emerald pressure-cabin culotte jumpsuit with charcoal hex tiles, channel pleats and magnetic platforms",
+      Alia: "jet-pearl navigation-spindle coat-dress with braided cobalt seams, burgundy side frames and optic pumps",
+      "AI ECE": "aviation-charcoal engine-radiator bodice over ochre shorts with silver conduit lattice and module boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance embraces ECE", "Ellie touches Radiance and ECE", "Alia links one free hand into the group"],
+    mascotPlan: "Only rolled mascots appear on a padded dry overlook far from water edges, props and aircraft machinery.",
+  },
+];

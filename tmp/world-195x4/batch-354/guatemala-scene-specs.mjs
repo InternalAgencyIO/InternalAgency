@@ -1,0 +1,83 @@
+export const guatemalaPalette = "Guatemala sky blue, cloud white, jade green, volcanic charcoal, Antigua ochre, bougainvillea magenta, lake cobalt, rainforest emerald, jet pearl, aviation brass, cabin burgundy and runway cyan";
+export const guatemalaProhibitions = "Use respectful secular Guatemala geography through complete volcanic ridges, jade facets, lake currents, civic relief grids, colonial arch curves, rainforest canopies and limestone stair profiles. No literal flag, coat of arms, sacred symbol, copied ceremonial pattern, political messaging, military imagery, copied airline identity, logo, badge, readable text, combat, threat or weaponized aviation equipment.";
+const target = "one clearly empty paper route target fixed to a complete thick sand backstop on a separate closed dry cinema-training lane away from every person, mascot, landmark, aircraft and camera";
+const water = "one clearly empty floating route marker in a cordoned unoccupied water lane with no person, animal, vessel, aircraft, building or camera along or beyond the line";
+
+export const guatemalaSceneSpecs = [
+  {
+    scene: 1436,
+    mode: "country-led hybrid",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry plaza at Guatemala City's complete Centro Civico modernist ensemble with geometric relief facades and the volcanic highland skyline, fused in the foreground with a sleek fictional civilian private jet arrival salon and open wing",
+    motifs: "complete civic relief grids, volcanic ridge arcs, jade facets, swept jet wings and oval cabin windows",
+    culture: "Guatemala City reads through Centro Civico's modernist massing, broad plaza and volcanic horizon; the aircraft is a fictional peaceful civilian private jet with no copied airline identity.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large civic, volcanic and jade motifs; Radiance and ECE use jet-wing, cabin-window and engine-cowl construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "Radiance sits securely sideways across Alia's lap on a fixed cabin bench while Ellie draws Radiance into a linked-hand invitation and ECE interrupts with a close forehead-to-forehead reconciliation.",
+    outfits: {
+      Radiance: "sky-blue strapless jet-wing bubble dress with dimensional civic-relief plates, brass cabin hoops and split-fin heels",
+      Ellie: "cloud-white asymmetric culotte coat with jade volcanic-ridge lattice, pearl window panels and turbine platforms",
+      Alia: "volcanic-charcoal open-back jumpsuit with braided bougainvillea beadwork, sculpted jade hip fins and arch pumps",
+      "AI ECE": "aviation-brass engine-cowl peplum over opaque cobalt shorts with cyan cabin discs, burgundy ribs and runway boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance touches Alia and links Ellie", "Alia supports Radiance securely", "Ellie and ECE complete visible affectionate contacts"],
+    mascotPlan: "Only rolled mascots appear on a padded dry cabin bench far from traffic, target line and aircraft machinery.",
+  },
+  {
+    scene: 1437,
+    mode: "country-led hybrid",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry cobbled terrace in Antigua Guatemala with the complete yellow Santa Catalina Arch, pastel facades and Volcan de Agua aligned beyond, fused equally with a pearl private-jet cabin and open wing",
+    motifs: "complete arch curve, cobble fans, volcano silhouette, bougainvillea corsages, oval windows and wing-rib geometry",
+    culture: "Antigua reads through its Santa Catalina Arch, pastel streetscape, cobbles and Volcan de Agua alignment, without sacred activity or copied ceremonial clothing.",
+    motifPolicy: "Radiance, Ellie and Alia carry hard large arch, volcano, cobble and bougainvillea motifs; Ellie and ECE use cabin, wing-rib and turbine construction.",
+    paperTarget: target, waterTarget: water,
+    composition: "ECE leads Radiance through a stable turning dance under the arch while Alia catches Radiance's linked hand and Ellie steps between them with a protective waist embrace.",
+    outfits: {
+      Radiance: "Antigua-ochre arch-corsage tulip dress with jade cobble inlays, brass wing ribs and curved-arch heels",
+      Ellie: "jet-pearl oval-window culotte jumpsuit with cobalt cabin panels, bougainvillea shoulder fans and turbine platforms",
+      Alia: "rainforest-emerald strapless volcano coat-dress with braided magenta contours, dimensional arch ribs and jade pumps",
+      "AI ECE": "aviation-charcoal cabin-shell bodice over opaque burgundy shorts with cyan portholes, silver wing fins and suspension boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Radiance links Alia and leans into ECE", "Alia links Radiance", "Ellie and ECE complete clear waist and shoulder contacts"],
+    mascotPlan: "Only rolled mascots appear on a secured padded cabin platform far from cobbled traffic lanes, props and aircraft equipment.",
+  },
+  {
+    scene: 1438,
+    mode: "theme-led original",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry overlook above the complete Lake Atitlan basin with its cobalt water, steep volcanic rim and three great volcano silhouettes, fused equally with a fictional private-jet wing, glass cabin and panoramic lake lounge",
+    motifs: "location-only lake sweep, volcanic rim, cloud terraces, wing spars and cabin-navigation rings",
+    culture: "Lake Atitlan reads through its enclosed highland basin, cobalt water and unmistakable volcano skyline; no copied traditional textile pattern appears.",
+    motifPolicy: "Cabin iris, wing-spar lattice, turbine sail and tail shield create four unrelated silhouettes while Lake Atitlan remains equally large.",
+    paperTarget: target, waterTarget: water,
+    composition: "Ellie sits and draws ECE into a face-to-face embrace; Radiance gives ECE a forehead kiss while taking Ellie's linked hand, and Alia joins from the side with a visibly jealous invitation.",
+    outfits: {
+      Radiance: "aviation-brass cabin-iris petal dress with opaque silver rings, cyan aperture ribs and lens heels",
+      Ellie: "volcanic-charcoal wing-spar culotte coat with burgundy conduit channels, lattice capelet and turbine platforms",
+      Alia: "jet-pearl turbine-sail jumpsuit with braided cobalt seams, curved jade side sails and prism pumps",
+      "AI ECE": "cloud-white tail-shield coat-dress with emerald field hoops, window peplum and mast boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Ellie supports ECE and links Radiance", "ECE touches Ellie", "Radiance links Ellie and touches ECE while Alia joins with one visible contact"],
+    mascotPlan: "Only rolled mascots appear on a secured padded platform far from lake edges, props and aircraft machinery.",
+  },
+  {
+    scene: 1439,
+    mode: "theme-led original",
+    theme: "private-jet aviation couture",
+    landmark: "a broad dry clearing facing Tikal's complete Great Plaza with two towering limestone temple profiles rising above the rainforest canopy, fused equally with a peaceful private jet, panoramic cabin and wingtip observation deck",
+    motifs: "location-only limestone stair profiles, rainforest canopy tiers, temple roof-comb silhouettes, cabin modules and wing geometry",
+    culture: "Tikal reads through the Great Plaza, soaring limestone temple profiles and rainforest canopy, shown respectfully as a protected archaeological landscape without sacred activity.",
+    motifPolicy: "Panoramic dome, pressure cabin, navigation spindle and engine radiator make four distinct outfits while the Great Plaza and rainforest remain foregrounded.",
+    paperTarget: target, waterTarget: water,
+    composition: "Alia rises from a stable cabin bench into Ellie's full embrace while Radiance gives Alia a cheek kiss and ECE interrupts their route with a decisive linked-hand invitation.",
+    outfits: {
+      Radiance: "aviation-brass panoramic-dome column dress with silver ribs, cyan light appliques and wingtip heels",
+      Ellie: "rainforest-emerald pressure-cabin culotte jumpsuit with charcoal hex tiles, stair pleats and magnetic platforms",
+      Alia: "jet-pearl navigation-spindle coat-dress with braided cobalt seams, burgundy side frames and optic pumps",
+      "AI ECE": "aviation-charcoal engine-radiator bodice over opaque ochre shorts with silver conduit lattice and module boots",
+    },
+    hands: ["resolved handler uses two hands on the inert mission prop", "Alia embraces Ellie", "Ellie supports Alia", "Radiance touches Alia while ECE links one free hand into the group"],
+    mascotPlan: "Only rolled mascots appear on a padded dry overlook far from ruins, forest edges, props and aircraft machinery.",
+  },
+];
