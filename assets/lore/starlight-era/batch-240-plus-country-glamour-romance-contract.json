@@ -662,7 +662,8 @@
     "futureCadence": "Collect, commit, explicitly push, and remote-verify every generated four-slot bank before opening a later bank or country. Preserve all four raws regardless of acceptance.",
     "rejectedPromptTracking": {
       "active": true,
-      "tracker": "The active batch checkpoint's top-level rejectedPromptLedger",
+      "tracker": "assets/lore/starlight-era/world-rejected-prompt-ledger.json is the global append-only tracker; the active batch checkpoint's top-level rejectedPromptLedger remains its canonical batch-local source and is bound into the global tracker by file and ledger SHA-256.",
+      "globalTracker": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
       "oneEntryPerRejectedOrFailedGeneration": true,
       "completeCanonicalUtf8PromptSourceRequiredForHistoricalBackfill": true,
       "runtimeLaunchByteExactTextRequiredForEveryFutureGeneration": true,
@@ -677,7 +678,7 @@
         "rejection audit pointer"
       ],
       "appendOnly": true,
-      "syncAndVerifyCommand": "node scripts/sync-rejected-prompt-ledger.mjs --verify",
+      "syncAndVerifyCommand": "node scripts/sync-rejected-prompt-ledger.mjs --verify; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; node scripts/sync-project-failed-prompt-ledger.mjs --verify",
       "gate": "Append and verify every newly rejected or failed prompt before the next commit, push, render bank, country, X publication, or queue advance.",
       "historicalBackfillRequired": true
     },

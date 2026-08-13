@@ -34,3 +34,6 @@ progress-reports/codex-generated-media/blobs/**/*.webm filter=lfs diff=lfs merge
 progress-reports/codex-generated-media/blobs/**/*.mkv filter=lfs diff=lfs merge=lfs -text
 progress-reports/codex-generated-media/blobs/**/*.avi filter=lfs diff=lfs merge=lfs -text
 progress-reports/codex-generated-media/blobs/**/*.m4v filter=lfs diff=lfs merge=lfs -text
+assets/lore/starlight-era/*.json text eol=lf
+tmp/world-195x4/**/*.json text eol=lf
+scripts/*.mjs text eol=lf
