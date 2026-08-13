@@ -11,7 +11,8 @@ The canonical production manifest is structurally valid but blocked:
 - all nodes are `REQUIRED`;
 - Privacy Vault, all 50 locales, and required media cannot be marked optional or `N/A`;
 - 27 nonterminal nodes feed the terminal node directly;
-- all 28 nodes and the terminal predicate are `BLOCKED`;
+- 2 nodes (`V2_FEATURE_PARITY` and `TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY`) are `STRUCTURAL_REVIEW_PACKET_COMPLETE`;
+- the remaining 26 nodes, including the terminal node, and the terminal predicate are `BLOCKED`;
 - every operational, authentication, rollback, activation, release, and Mainnet flag is immutable `false` / `HOLD`.
 
 The files are:
