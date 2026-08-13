@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
@@ -23,6 +24,7 @@ import {
   LOCAL_REHEARSAL_HOLD,
   LOCAL_REHEARSAL_READY,
   LOCAL_REHEARSAL_READINESS_INPUT_SCHEMA,
+  LOCAL_REHEARSAL_READINESS_SCHEMA,
   assessLocalRehearsalReadiness,
   deriveLawBoundaryAndGrindingPlan,
   deriveProductionOpcodeDispositions,
@@ -582,13 +584,27 @@ test("R01 law handoff accepts only the canonical validated build receipt", () =>
 
 test("R01 reaches READY only with both validated exact-source receipts", () => {
   const assessment = readyAssessment();
+  assert.equal(
+    LOCAL_REHEARSAL_READINESS_SCHEMA,
+    "iat-b3-local-rehearsal-readiness-assessment/v2",
+  );
+  assert.equal(assessment.schema, LOCAL_REHEARSAL_READINESS_SCHEMA);
   assert.equal(assessment.status, LOCAL_REHEARSAL_READY);
   assert.equal(assessment.exitCode, 0);
   assert.equal(assessment.artifacts.lawReady, true);
   assert.equal(assessment.artifacts.economyReady, true);
   assert.equal(
+    assessment.artifacts.lawReceiptContract,
+    "iat-b3-combined-law-exact-source-dual-sbf-build/v2",
+  );
+  assert.equal(
     assessment.artifacts.economyReceiptContract,
-    "iat-b3-economy-exact-source-dual-sbf-build/v1",
+    "iat-b3-economy-exact-source-dual-sbf-build/v2",
+  );
+  assert.equal(assessment.source.repositoryCleanTrackedAndNonignoredUntracked, true);
+  assert.equal(
+    Object.hasOwn(assessment.source, "repositoryCleanTrackedAndUntracked"),
+    false,
   );
   assert.deepEqual(assessment.blockers, []);
   assert.equal(assessment.scope.readyDoesNotMeanAll15Active, true);
@@ -635,6 +651,14 @@ test("R01 exact-source observer reads a linked worktree without weakening dirty 
   const root = mkdtempSync(resolve(tmpdir(), "iat-b3-r01-linked-worktree-test-"));
   const primary = resolve(root, "primary");
   const linked = resolve(root, "linked");
+  const lfsPayload = Buffer.from("R01 exact smudged LFS payload\n", "utf8");
+  const lfsOid = createHash("sha256").update(lfsPayload).digest("hex");
+  const lfsPointer = [
+    "version https://git-lfs.github.com/spec/v1",
+    `oid sha256:${lfsOid}`,
+    `size ${lfsPayload.length}`,
+    "",
+  ].join("\n");
   try {
     mkdirSync(primary, { recursive: true });
     const git = (cwd, arguments_) => {
@@ -649,31 +673,40 @@ test("R01 exact-source observer reads a linked worktree without weakening dirty 
     git(primary, ["config", "user.name", "R01 linked worktree test"]);
     git(primary, ["config", "user.email", "r01@example.invalid"]);
     writeFileSync(resolve(primary, "bound.txt"), "committed\n");
-    git(primary, ["add", "bound.txt"]);
+    writeFileSync(resolve(primary, "asset.bin"), lfsPointer);
+    git(primary, ["add", "bound.txt", "asset.bin"]);
     git(primary, ["commit", "--quiet", "-m", "bound source"]);
     git(primary, ["worktree", "add", "--quiet", "--detach", linked, "HEAD"]);
     git(linked, ["config", "core.autocrlf", "false"]);
     git(linked, ["reset", "--hard", "--quiet", "HEAD"]);
+    writeFileSync(resolve(linked, "asset.bin"), lfsPayload);
     const clean = observeLocalRehearsalGitSource(linked);
     assert.match(clean.headSha, /^[0-9a-f]{40}$/u);
     assert.match(clean.treeSha, /^[0-9a-f]{40}$/u);
     assert.equal(clean.statusPorcelain, "");
-    if (process.platform === "linux") {
-      const control = readFileSync(resolve(linked, ".git"), "utf8").trim();
-      const gitDirectory = /^gitdir: (?<path>.+)$/u.exec(control)?.groups?.path;
-      assert.ok(gitDirectory);
-      const backlinkPath = resolve(gitDirectory, "gitdir");
-      const originalBacklink = readFileSync(backlinkPath, "utf8");
-      try {
-        writeFileSync(backlinkPath, `${resolve(primary, ".git")}\n`);
-        assert.throws(
-          () => observeLocalRehearsalGitSource(linked),
-          /IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_MISMATCH/u,
-        );
-      } finally {
-        writeFileSync(backlinkPath, originalBacklink);
-      }
+    const control = readFileSync(resolve(linked, ".git"), "utf8").trim();
+    const gitDirectory = /^gitdir: (?<path>.+)$/u.exec(control)?.groups?.path;
+    assert.ok(gitDirectory);
+    const backlinkPath = resolve(gitDirectory, "gitdir");
+    const originalBacklink = readFileSync(backlinkPath, "utf8");
+    try {
+      writeFileSync(backlinkPath, `${resolve(primary, ".git")}\n`);
+      assert.throws(
+        () => observeLocalRehearsalGitSource(linked),
+        /IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_MISMATCH/u,
+      );
+    } finally {
+      writeFileSync(backlinkPath, originalBacklink);
     }
+    const wrongLfsPayload = Buffer.from(lfsPayload);
+    wrongLfsPayload[0] ^= 0xff;
+    writeFileSync(resolve(linked, "asset.bin"), wrongLfsPayload);
+    assert.match(
+      observeLocalRehearsalGitSource(linked).statusPorcelain,
+      / M asset\.bin\0/u,
+    );
+    writeFileSync(resolve(linked, "asset.bin"), lfsPayload);
+    assert.equal(observeLocalRehearsalGitSource(linked).statusPorcelain, "");
     writeFileSync(resolve(linked, "untracked.txt"), "drift\n");
     const dirty = observeLocalRehearsalGitSource(linked);
     assert.notEqual(dirty.statusPorcelain, "");

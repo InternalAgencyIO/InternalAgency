@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { spawnSync } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
 import {
   existsSync,
@@ -31,6 +30,7 @@ import {
   COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA,
   COMBINED_LAW_SUBMODULE_POLICY,
   PINNED_COMBINED_LAW_BUILD_CONTAINER,
+  PINNED_DOCKER_COMMAND_PURPOSE,
   assertExactCleanSourceSequence,
   assertCleanSourceObservation,
   assertExactMaterializedSourceSequence,
@@ -38,6 +38,7 @@ import {
   assertPinnedToolchainObservation,
   createExactSourceBuildRoot,
   createNativeSourceReceiptBinding,
+  executePinnedDocker,
   loadExactDeclaredHeadSource,
   observeExactSource,
   observeMaterializedSourceSnapshot,
@@ -63,11 +64,11 @@ import {
 } from "./iat-b3-native-wsl-build-backend.mjs";
 
 export const ECONOMY_BUILD_PREFLIGHT_SCHEMA =
-  "iat-b3-economy-exact-source-build-preflight/v1";
+  "iat-b3-economy-exact-source-build-preflight/v2";
 export const ECONOMY_BUILD_PREFLIGHT_READY = "READY_TO_EXECUTE_DUAL_BUILD";
 export const ECONOMY_BUILD_PREFLIGHT_HOLD = "HOLD";
 export const ECONOMY_BUILD_RECEIPT_SCHEMA =
-  "iat-b3-economy-exact-source-dual-sbf-build/v1";
+  "iat-b3-economy-exact-source-dual-sbf-build/v2";
 export const ECONOMY_BUILD_RECEIPT_STATUS =
   "EXACT_SOURCE_DUAL_FRESH_SBF_BYTE_EQUALITY_VERIFIED";
 export const ECONOMY_BUILD_MAINNET_STATUS = "HOLD";
@@ -233,27 +234,6 @@ function nodeVersionSupported(value) {
     if (observed[index] < minimum[index]) return false;
   }
   return true;
-}
-
-function execute(command, arguments_, options = {}) {
-  const result = spawnSync(command, arguments_, {
-    cwd: options.cwd,
-    env: options.env,
-    encoding: options.binary === true ? null : "utf8",
-    input: options.input,
-    timeout: options.timeout ?? 120_000,
-    maxBuffer: 64 * 1024 * 1024,
-    windowsHide: true,
-  });
-  if (result.error || result.status !== 0) {
-    const detail = result.error instanceof Error
-      ? result.error.message
-      : Buffer.isBuffer(result.stderr)
-        ? result.stderr.toString("utf8")
-        : result.stderr;
-    throw new Error(`IAT_B3_ECONOMY_COMMAND_FAILED_${command}: ${String(detail).slice(0, 512)}`);
-  }
-  return result;
 }
 
 function readCommittedFile(repositoryRoot, headSha, relativePath) {
@@ -467,20 +447,20 @@ function observeCommittedSourceClosure(repositoryRoot, headSha) {
 
 function observeContainerAndToolchain() {
   try {
-    const platform = execute("docker", [
+    const platform = executePinnedDocker([
       `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
       "image",
       "inspect",
       "--format={{.Os}}/{{.Architecture}}",
       PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference,
-    ]).stdout.trim();
-    const localImageId = execute("docker", [
+    ], { purpose: PINNED_DOCKER_COMMAND_PURPOSE.imagePlatformInspect }).stdout.trim();
+    const localImageId = executePinnedDocker([
       `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
       "image",
       "inspect",
       "--format={{.Id}}",
       PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference,
-    ]).stdout.trim();
+    ], { purpose: PINNED_DOCKER_COMMAND_PURPOSE.imageIdInspect }).stdout.trim();
     const container = assertPinnedContainerObservation({
       ...PINNED_COMBINED_LAW_BUILD_CONTAINER,
       platform,
@@ -499,11 +479,15 @@ function observeContainerAndToolchain() {
       PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference,
     ];
     const toolchain = assertPinnedToolchainObservation({
-      rustc: execute("docker", [...common("rustc"), "--version"]).stdout.trim(),
-      cargo: execute("docker", [...common("cargo"), "--version"]).stdout.trim(),
-      cargoBuildSbf: execute(
-        "docker",
+      rustc: executePinnedDocker([...common("rustc"), "--version"], {
+        purpose: PINNED_DOCKER_COMMAND_PURPOSE.toolchainRustc,
+      }).stdout.trim(),
+      cargo: executePinnedDocker([...common("cargo"), "--version"], {
+        purpose: PINNED_DOCKER_COMMAND_PURPOSE.toolchainCargo,
+      }).stdout.trim(),
+      cargoBuildSbf: executePinnedDocker(
         [...common("cargo"), "build-sbf", "--version"],
+        { purpose: PINNED_DOCKER_COMMAND_PURPOSE.toolchainCargoBuildSbf },
       ).stdout.trim(),
     });
     return Object.freeze({ container, toolchain, failure: null });
@@ -592,7 +576,7 @@ export function createEconomyBuildPreflight({
       "EXACT_SOURCE_HEAD_MATCH",
       sourceObservation?.headSha === declaredHeadSha,
     ),
-    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED", cleanSource),
+    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED", cleanSource),
     preflightCheck(
       "EXECUTED_RUNNER_MATCHES_DECLARED_HEAD",
       HEX_SHA256.test(executedRunnerSha256 ?? "")
@@ -639,7 +623,7 @@ export function createEconomyBuildPreflight({
       declaredHeadSha: declaredHeadSha ?? null,
       observedHeadSha: sourceObservation?.headSha ?? null,
       observedTreeSha: sourceObservation?.treeSha ?? null,
-      repositoryCleanTrackedAndUntracked: cleanSource,
+      repositoryCleanTrackedAndNonignoredUntracked: cleanSource,
       dirtyStatusEntryCount: statusEntryCount(sourceObservation?.statusPorcelain),
       statusPorcelainSha256: typeof sourceObservation?.statusPorcelain === "string"
         ? sha256(sourceObservation.statusPorcelain)
@@ -726,8 +710,8 @@ export function validateEconomyBuildPreflight(preflight) {
       preflight.source?.declaredHeadSha === preflight.source?.observedHeadSha,
     ),
     preflightCheck(
-      "REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED",
-      preflight.source?.repositoryCleanTrackedAndUntracked === true
+      "REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED",
+      preflight.source?.repositoryCleanTrackedAndNonignoredUntracked === true
         && preflight.source?.dirtyStatusEntryCount === 0
         && preflight.source?.statusPorcelainSha256 === sha256(""),
     ),
@@ -894,7 +878,7 @@ export function observeEconomyNativeWslBuildPreflight({
       declaredHeadSha: base.source.declaredHeadSha,
       observedHeadSha: base.source.observedHeadSha,
       observedTreeSha: base.source.observedTreeSha,
-      statusPorcelain: base.source.repositoryCleanTrackedAndUntracked ? "" : "DIRTY",
+      statusPorcelain: base.source.repositoryCleanTrackedAndNonignoredUntracked ? "" : "DIRTY",
     },
     runnerBinding: {
       executedRunnerSha256: base.tooling.executedRunnerSha256,
@@ -929,7 +913,7 @@ const RECEIPT_SOURCE_KEYS = Object.freeze([
   "declaredHeadSha",
   "observedHeadSha",
   "observedTreeSha",
-  "repositoryCleanTrackedAndUntracked",
+  "repositoryCleanTrackedAndNonignoredUntracked",
   "revalidationCount",
   "executedRunnerSha256",
   "committedRunnerSha256",
@@ -1164,7 +1148,7 @@ export function createEconomyBuildReceipt({
       declaredHeadSha,
       observedHeadSha: source.headSha,
       observedTreeSha: source.treeSha,
-      repositoryCleanTrackedAndUntracked: true,
+      repositoryCleanTrackedAndNonignoredUntracked: true,
       revalidationCount: sourceObservations.length,
       executedRunnerSha256: runnerBinding.executedRunnerSha256,
       committedRunnerSha256: runnerBinding.committedRunnerSha256,
@@ -1241,7 +1225,7 @@ export function validateEconomyBuildReceipt(receipt) {
     || !isCanonicalTimestamp(receipt.generatedAt)
     || !exactKeys(receipt.source, RECEIPT_SOURCE_KEYS)
     || receipt.source.declaredHeadSha !== receipt.source.observedHeadSha
-    || receipt.source.repositoryCleanTrackedAndUntracked !== true
+    || receipt.source.repositoryCleanTrackedAndNonignoredUntracked !== true
     || receipt.source.revalidationCount < 3
     || receipt.source.executedRunnerSha256 !== receipt.source.committedRunnerSha256
     || receipt.source.materializationSchema !== COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA
@@ -1460,12 +1444,12 @@ function executeFreshBuild({
     containerBuildRoot,
     identityEnvironmentNames: Object.keys(identityEnvironment),
   });
-  const result = execute("docker", arguments_, {
-    env: {
-      ...process.env,
+  const result = executePinnedDocker(arguments_, {
+    environment: {
       IAT_B3_EXACT_SOURCE_HEAD_SHA: declaredHeadSha,
       ...identityEnvironment,
     },
+    purpose: PINNED_DOCKER_COMMAND_PURPOSE.economyBuild,
     timeout: 30 * 60 * 1_000,
   });
   const logBytes = Buffer.from(

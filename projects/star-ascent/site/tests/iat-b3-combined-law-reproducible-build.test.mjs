@@ -3,16 +3,20 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   chmodSync,
+  copyFileSync,
   existsSync,
+  linkSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
   readdirSync,
   rmSync,
+  symlinkSync,
+  unlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { delimiter, dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -29,12 +33,15 @@ import {
   COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA,
   COMBINED_LAW_SUBMODULE_POLICY,
   PINNED_COMBINED_LAW_BUILD_CONTAINER,
+  PINNED_DOCKER_COMMAND_PURPOSE,
   assertIdentityAndOwnerPolicyBytes,
   assertExactCleanSourceSequence,
   assertExactMaterializedSourceSequence,
   assertPinnedContainerObservation,
+  assertPinnedDockerCommandArguments,
   assertPinnedToolchainObservation,
   createExactSourceGitEnvironment,
+  createPinnedDockerEnvironment,
   createCombinedLawBuildPreflight,
   createCombinedLawBuildRoot,
   createCombinedLawBuildReceipt,
@@ -44,8 +51,11 @@ import {
   observeExactSource,
   observeCombinedLawBuildPreflight,
   observeMaterializedSourceSnapshot,
+  observePinnedDockerHostExecutableBoundary,
   observePreservedArtifact,
+  parseCanonicalLfsPointer,
   parseExactGitBlobBatchResponse,
+  parseExactGitIndexListing,
   parseExactGitTreeListing,
   preserveReceiptBoundArtifact,
   removeSelfCreatedBuildRoot,
@@ -95,6 +105,9 @@ const OWNER_POLICY_BYTES = readFileSync(
   new URL("../docs/b3/iat-b3-owner-policy-freeze.v1.json", import.meta.url),
 );
 const EXACT_TEST_GIT_ENVIRONMENT = createExactSourceGitEnvironment(process.env);
+const TRUSTED_TEST_GIT_EXECUTABLE = process.platform === "win32"
+  ? "C:\\Program Files\\Git\\bin\\git.exe"
+  : "/usr/bin/git";
 
 function sourceObservations() {
   return Array.from({ length: 4 }, () => ({
@@ -169,6 +182,31 @@ function runGit(repositoryRoot, arguments_, {
     `git ${arguments_.join(" ")} failed: ${result.error?.message ?? result.stderr}`,
   );
   return result.stdout.trim();
+}
+
+function runTrustedGit(repositoryRoot, arguments_, { input } = {}) {
+  const result = spawnSync(TRUSTED_TEST_GIT_EXECUTABLE, [
+    `--git-dir=${join(repositoryRoot, ".git")}`,
+    `--work-tree=${repositoryRoot}`,
+    ...arguments_,
+  ], {
+    cwd: dirname(TRUSTED_TEST_GIT_EXECUTABLE),
+    env: EXACT_TEST_GIT_ENVIRONMENT,
+    input,
+    encoding: "utf8",
+    maxBuffer: 16 * 1024 * 1024,
+    windowsHide: true,
+  });
+  assert.equal(
+    result.status,
+    0,
+    `trusted git ${arguments_.join(" ")} failed: ${result.error?.message ?? result.stderr}`,
+  );
+  return result.stdout.trim();
+}
+
+function gitShellQuote(path) {
+  return `'${path.replaceAll("\\", "/").replaceAll("'", `'\\''`)}'`;
 }
 
 function createCommittedRepository(prefix, content) {
@@ -263,7 +301,7 @@ test("offline preflight binds the exact dual-build contract without proving a bu
   assert.equal(preflight.status, COMBINED_LAW_BUILD_PREFLIGHT_READY);
   assert.equal(preflight.exitCode, 0);
   assert.equal(preflight.buildExecuted, false);
-  assert.equal(preflight.source.repositoryCleanTrackedAndUntracked, true);
+  assert.equal(preflight.source.repositoryCleanTrackedAndNonignoredUntracked, true);
   assert.equal(preflight.tooling.hostNodeExactPin, null);
   assert.equal(preflight.tooling.hostNodeMinimumVersion, "22.13.0");
   assert.equal(preflight.tooling.ciNodeMajor, 24);
@@ -296,7 +334,7 @@ test("preflight fails closed for every source, host, identity, toolchain, and di
       input: { declaredHeadSha: "c".repeat(40) },
     },
     {
-      blocker: "REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED",
+      blocker: "REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED",
       input: {
         sourceObservation: {
           headSha: HEAD_SHA,
@@ -379,7 +417,7 @@ test("preflight digest and blocker-set tampering fail validation", () => {
   promotionTamper.status = COMBINED_LAW_BUILD_PREFLIGHT_READY;
   promotionTamper.exitCode = 0;
   promotionTamper.checks.find(
-    ({ id }) => id === "REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED",
+    ({ id }) => id === "REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED",
   ).passed = true;
   promotionTamper.blockers = [];
   const { preflightSha256: ignoredSha256, ...promotionCore } = promotionTamper;
@@ -415,7 +453,7 @@ test("a valid receipt proves only exact-source dual-build equality and preserves
   assert.equal(receipt.status, COMBINED_LAW_BUILD_RECEIPT_STATUS);
   assert.equal(receipt.source.declaredHeadSha, HEAD_SHA);
   assert.equal(receipt.source.observedHeadSha, HEAD_SHA);
-  assert.equal(receipt.source.repositoryCleanTrackedAndUntracked, true);
+  assert.equal(receipt.source.repositoryCleanTrackedAndNonignoredUntracked, true);
   assert.equal(receipt.source.executedRunnerSha256, "8".repeat(64));
   assert.equal(receipt.source.committedRunnerSha256, "8".repeat(64));
   assert.equal(receipt.source.revalidationCount, 4);
@@ -492,7 +530,7 @@ test("source binding rejects missing, mismatched, dirty, and drifting observatio
       /SOURCE_HEAD_MISMATCH_AT_2/u,
     );
   });
-  await t.test("tracked and untracked dirt both fail closed", () => {
+  await t.test("tracked and nonignored untracked dirt both fail closed", () => {
     for (const statusPorcelain of [" M tracked.rs\0", "?? untracked.json\0"]) {
       const observations = sourceObservations();
       observations[1].statusPorcelain = statusPorcelain;
@@ -724,6 +762,113 @@ test("Docker build argv is immutable, offline, non-signing, and uses fresh exter
     }),
     /DOCKER_MOUNT_PATH_UNSAFE/u,
   );
+
+  assert.equal(
+    assertPinnedDockerCommandArguments(
+      arguments_,
+      PINNED_DOCKER_COMMAND_PURPOSE.lawBuild,
+    ),
+    true,
+  );
+  for (const mutate of [
+    (value) => value.splice(5, 0, "--network=host"),
+    (value) => value.push("--pull=always"),
+    (value) => value.push("--privileged=true"),
+    (value) => value.push("--cap-add=ALL"),
+    (value) => value.push("--security-opt=seccomp=unconfined"),
+    (value) => value.splice(2, 0, "--pid", "host"),
+    (value) => { value[0] = "--host=tcp://attacker.invalid:2375"; },
+    (value) => { value[value.indexOf("--entrypoint=cargo")] = "--entrypoint=/bin/sh"; },
+    (value) => value.splice(9, 0, "--device=/dev/sda"),
+    (value) => value.splice(9, 0, "--mount=type=bind,source=/,target=/host"),
+  ]) {
+    const forged = [...arguments_];
+    mutate(forged);
+    assert.throws(
+      () => assertPinnedDockerCommandArguments(
+        forged,
+        PINNED_DOCKER_COMMAND_PURPOSE.lawBuild,
+      ),
+      /PINNED_DOCKER_.+HOLD/u,
+    );
+  }
+});
+
+test("pinned Docker host boundary ignores repository-local and hostile PATH shims without invoking Docker", () => {
+  const repository = createCommittedRepository(
+    "iat-b3-repository-local-docker-shim-",
+    "docker-shim-boundary\n",
+  );
+  const helperRoot = temporaryDirectory("iat-b3-hostile-docker-path-");
+  const configRoot = join(helperRoot, "empty-docker-config");
+  const markerPath = join(helperRoot, "hostile-docker-ran.marker");
+  const previousPath = process.env.PATH;
+  try {
+    mkdirSync(configRoot);
+    let probe;
+    if (process.platform === "win32") {
+      writeFileSync(join(repository.root, "docker.cmd"), `@echo ran>>"${markerPath}"\r\n`, "utf8");
+      writeFileSync(join(repository.root, "docker.bat"), `@echo ran>>"${markerPath}"\r\n`, "utf8");
+      copyFileSync(join(process.env.SystemRoot ?? "C:\\Windows", "System32", "where.exe"), join(repository.root, "docker.exe"));
+      probe = spawnSync(
+        join(process.env.SystemRoot ?? "C:\\Windows", "System32", "cmd.exe"),
+        ["/d", "/c", `${join(repository.root, "docker.cmd")} --version`],
+        { cwd: repository.root, encoding: "utf8", windowsHide: true },
+      );
+    } else {
+      const shim = join(repository.root, "docker");
+      writeFileSync(shim, `#!/bin/sh\nprintf 'ran\\n' >> ${gitShellQuote(markerPath)}\nexit 0\n`, "utf8");
+      chmodSync(shim, 0o755);
+      probe = spawnSync(shim, ["--version"], {
+        cwd: repository.root,
+        encoding: "utf8",
+      });
+    }
+    assert.equal(probe.status, 0, probe.stderr);
+    assert.equal(existsSync(markerPath), true);
+    unlinkSync(markerPath);
+    process.env.PATH = [repository.root, "", ".", helperRoot, previousPath ?? ""]
+      .join(delimiter);
+
+    if (process.platform === "linux") {
+      const observation = observePinnedDockerHostExecutableBoundary();
+      assert.equal(observation.executablePath, "/usr/bin/docker");
+      const environment = createPinnedDockerEnvironment({
+        configRoot,
+        environment: {
+          PATH: process.env.PATH,
+          DOCKER_HOST: "tcp://attacker.invalid:2375",
+          DOCKER_CONTEXT: "attacker",
+          DOCKER_CONFIG: repository.root,
+          LD_PRELOAD: join(repository.root, "hostile.so"),
+          IAT_B3_EXACT_SOURCE_HEAD_SHA: "a".repeat(40),
+        },
+      });
+      assert.equal(environment.PATH, "/usr/bin:/bin");
+      assert.equal(environment.DOCKER_CONFIG, configRoot);
+      assert.equal("DOCKER_HOST" in environment, false);
+      assert.equal("DOCKER_CONTEXT" in environment, false);
+      assert.equal("LD_PRELOAD" in environment, false);
+    } else {
+      assert.throws(
+        () => observePinnedDockerHostExecutableBoundary(),
+        /PINNED_DOCKER_HOST_PLATFORM_HOLD/u,
+      );
+    }
+    const source = readFileSync(
+      new URL("../scripts/run-iat-b3-combined-law-reproducible-build.mjs", import.meta.url),
+      "utf8",
+    );
+    assert.doesNotMatch(source, /spawnSync\(\s*["']docker["']/u);
+    assert.doesNotMatch(source, /execute\(\s*["']docker["']/u);
+    assert.match(source, /spawnSync\(executable\.absolutePath/u);
+    assert.equal(existsSync(markerPath), false, "pinned boundary executed hostile Docker shim");
+  } finally {
+    if (previousPath === undefined) delete process.env.PATH;
+    else process.env.PATH = previousPath;
+    rmSync(repository.root, { recursive: true, force: true });
+    rmSync(helperRoot, { recursive: true, force: true });
+  }
 });
 
 test("Git tree intake rejects submodules, symlinks, unsafe paths, and malformed listings", () => {
@@ -779,6 +924,303 @@ test("Git blob batch intake binds every exact object and rejects truncation, sub
     }),
     /GIT_BLOB_BATCH_TRAILING_DATA/u,
   );
+});
+
+test("canonical Git-LFS pointers and index records bind exact object identity and size", () => {
+  const payload = Buffer.from("source-bound-smudged-lfs-object\n", "utf8");
+  const oidSha256 = createHash("sha256").update(payload).digest("hex");
+  const pointer = Buffer.from([
+    "version https://git-lfs.github.com/spec/v1",
+    `oid sha256:${oidSha256}`,
+    `size ${payload.length}`,
+    "",
+  ].join("\n"), "utf8");
+  assert.deepEqual(parseCanonicalLfsPointer(pointer), {
+    oidSha256,
+    byteLength: payload.length,
+  });
+  assert.equal(parseCanonicalLfsPointer(Buffer.from("ordinary\n")), null);
+  assert.throws(
+    () => parseCanonicalLfsPointer(Buffer.from(
+      `version https://git-lfs.github.com/spec/v1\noid sha256:${oidSha256}\nsize 01\n`,
+    )),
+    /LFS_POINTER_NONCANONICAL_HOLD/u,
+  );
+
+  const blob = exactGitBlob("asset.bin", pointer);
+  const listing = Buffer.from(
+    `${blob.gitMode} ${blob.gitObjectSha1} 0\t${blob.path}\0`,
+    "utf8",
+  );
+  assert.deepEqual(parseExactGitIndexListing(listing), [{
+    path: blob.path,
+    gitMode: blob.gitMode,
+    gitObjectSha1: blob.gitObjectSha1,
+  }]);
+  assert.throws(
+    () => parseExactGitIndexListing(Buffer.from(
+      `${blob.gitMode} ${blob.gitObjectSha1} 1\t${blob.path}\0`,
+      "utf8",
+    )),
+    /GIT_INDEX_ENTRY_INVALID_HOLD/u,
+  );
+});
+
+test("linked-worktree exact-source observation validates smudged LFS bytes without filters and rejects adversarial drift", async (t) => {
+  const root = temporaryDirectory("iat-b3-lfs-linked-observer-");
+  const primary = join(root, "primary");
+  const linked = join(root, "linked");
+  const outside = join(root, "outside");
+  const payload = Buffer.from("source-bound-smudged-lfs-object\n", "utf8");
+  const sameSizeWrongPayload = Buffer.from(payload);
+  sameSizeWrongPayload[0] ^= 0xff;
+  const oidSha256 = createHash("sha256").update(payload).digest("hex");
+  const pointer = Buffer.from([
+    "version https://git-lfs.github.com/spec/v1",
+    `oid sha256:${oidSha256}`,
+    `size ${payload.length}`,
+    "",
+  ].join("\n"), "utf8");
+  const assetPath = join(linked, "asset.bin");
+  try {
+    mkdirSync(primary, { recursive: true });
+    runGit(primary, ["init", "--quiet"]);
+    runGit(primary, ["config", "user.name", "IAT B3 LFS observer"]);
+    runGit(primary, ["config", "user.email", "iat-b3-lfs@example.invalid"]);
+    writeFileSync(join(primary, ".gitattributes"), "*.bin filter=lfs diff=lfs merge=lfs -text\n");
+    writeFileSync(join(primary, "asset.bin"), pointer);
+    writeFileSync(join(primary, "ordinary.txt"), "ordinary committed bytes\n");
+    mkdirSync(join(primary, "nested"));
+    writeFileSync(join(primary, "nested", "bound.txt"), "nested committed bytes\n");
+    const committedPaths = [
+      ".gitattributes", "asset.bin", "ordinary.txt", "nested/bound.txt",
+    ];
+    if (process.platform !== "win32") {
+      writeFileSync(join(primary, "executable.sh"), "#!/bin/sh\nexit 0\n");
+      chmodSync(join(primary, "executable.sh"), 0o755);
+      committedPaths.push("executable.sh");
+    }
+    runGit(primary, ["add", "--", ...committedPaths]);
+    runGit(primary, ["commit", "--quiet", "-m", "exact LFS pointer source"]);
+    runGit(primary, ["worktree", "add", "--quiet", "--detach", linked, "HEAD"]);
+    runGit(linked, ["config", "core.autocrlf", "false"]);
+    writeFileSync(assetPath, payload);
+
+    runGit(linked, ["config", "filter.lfs.clean", "false"]);
+    runGit(linked, ["config", "filter.lfs.smudge", "false"]);
+    runGit(linked, ["config", "filter.lfs.process", "false"]);
+    runGit(linked, ["config", "filter.lfs.required", "true"]);
+    const clean = observeExactSource(linked);
+    assert.equal(clean.statusPorcelain, "");
+
+    await t.test("linked-worktree control and reciprocal backlink are authenticated on every host", () => {
+      const controlPath = join(linked, ".git");
+      const control = readFileSync(controlPath, "utf8");
+      const gitDirectory = /^gitdir: (?<path>[^\r\n]+)\r?\n?$/u.exec(control)?.groups?.path;
+      assert.ok(gitDirectory);
+      const backlinkPath = join(gitDirectory, "gitdir");
+      const originalBacklink = readFileSync(backlinkPath, "utf8");
+      try {
+        writeFileSync(backlinkPath, `${join(primary, ".git")}\n`);
+        assert.throws(
+          () => observeExactSource(linked),
+          /IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_MISMATCH/u,
+        );
+      } finally {
+        writeFileSync(backlinkPath, originalBacklink);
+      }
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+
+    await t.test("ordinary tracked mutation and every untracked path remain dirty", () => {
+      const ordinaryPath = join(linked, "ordinary.txt");
+      writeFileSync(ordinaryPath, "ordinary mutation\n");
+      assert.match(observeExactSource(linked).statusPorcelain, / M ordinary\.txt\0/u);
+      writeFileSync(ordinaryPath, "ordinary committed bytes\n");
+      writeFileSync(join(linked, "untracked.txt"), "untracked\n");
+      assert.match(observeExactSource(linked).statusPorcelain, /\?\? untracked\.txt\0/u);
+      rmSync(join(linked, "untracked.txt"));
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+
+    await t.test("tracked hardlinks and POSIX execute-bit drift fail closed", () => {
+      const ordinaryPath = join(linked, "ordinary.txt");
+      const aliasPath = join(root, "ordinary-hardlink.txt");
+      linkSync(ordinaryPath, aliasPath);
+      try {
+        assert.throws(
+          () => observeExactSource(linked),
+          /WORKTREE_TRACKED_FILE_HARDLINK_HOLD/u,
+        );
+      } finally {
+        unlinkSync(aliasPath);
+      }
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+
+      if (process.platform !== "win32") {
+        chmodSync(ordinaryPath, 0o755);
+        assert.throws(
+          () => observeExactSource(linked),
+          /WORKTREE_TRACKED_FILE_EXECUTE_MODE_DRIFT_HOLD/u,
+        );
+        chmodSync(ordinaryPath, 0o644);
+        const executablePath = join(linked, "executable.sh");
+        chmodSync(executablePath, 0o644);
+        assert.throws(
+          () => observeExactSource(linked),
+          /WORKTREE_TRACKED_FILE_EXECUTE_MODE_DRIFT_HOLD/u,
+        );
+        chmodSync(executablePath, 0o755);
+        assert.equal(observeExactSource(linked).statusPorcelain, "");
+      }
+    });
+
+    await t.test("linked commondir is same-file bound to the canonical common Git directory", () => {
+      const control = readFileSync(join(linked, ".git"), "utf8");
+      const gitDirectory = /^gitdir: (?<path>[^\r\n]+)\r?\n?$/u.exec(control)?.groups?.path;
+      assert.ok(gitDirectory);
+      const commondirPath = join(gitDirectory, "commondir");
+      const original = readFileSync(commondirPath, "utf8");
+      try {
+        mkdirSync(outside, { recursive: true });
+        writeFileSync(commondirPath, `${outside}\n`, "utf8");
+        assert.throws(
+          () => observeExactSource(linked),
+          /IAT_B3_EXACT_SOURCE_COMMONDIR_CONTROL_INVALID/u,
+        );
+        writeFileSync(commondirPath, "../../../outside\n", "utf8");
+        assert.throws(
+          () => observeExactSource(linked),
+          /IAT_B3_EXACT_SOURCE_COMMONDIR_BOUNDARY_INVALID/u,
+        );
+      } finally {
+        writeFileSync(commondirPath, original, "utf8");
+      }
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+
+    await t.test("linked common object-store alternates are forbidden", () => {
+      const alternatesPath = join(primary, ".git", "objects", "info", "alternates");
+      mkdirSync(outside, { recursive: true });
+      writeFileSync(alternatesPath, `${outside}\n`, "utf8");
+      try {
+        assert.throws(
+          () => observeExactSource(linked),
+          /IAT_B3_EXACT_SOURCE_GIT_OBJECT_ALTERNATES_FORBIDDEN_HOLD/u,
+        );
+      } finally {
+        rmSync(alternatesPath, { force: true });
+      }
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+
+    await t.test("LFS pointer mutation, wrong size, and wrong SHA-256 remain dirty", () => {
+      writeFileSync(assetPath, Buffer.from(
+        pointer.toString("utf8").replace(oidSha256, "f".repeat(64)),
+        "utf8",
+      ));
+      assert.match(observeExactSource(linked).statusPorcelain, / M asset\.bin\0/u);
+      writeFileSync(assetPath, payload.subarray(0, payload.length - 1));
+      assert.match(observeExactSource(linked).statusPorcelain, / M asset\.bin\0/u);
+      writeFileSync(assetPath, sameSizeWrongPayload);
+      assert.match(observeExactSource(linked).statusPorcelain, / M asset\.bin\0/u);
+      writeFileSync(assetPath, payload);
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+
+    await t.test("missing tracked files and nonstandard index flags fail closed", () => {
+      rmSync(assetPath);
+      assert.throws(
+        () => observeExactSource(linked),
+        /WORKTREE_TRACKED_FILE_REQUIRED_HOLD/u,
+      );
+      writeFileSync(assetPath, payload);
+      runGit(linked, ["update-index", "--skip-worktree", "ordinary.txt"]);
+      assert.throws(
+        () => observeExactSource(linked),
+        /GIT_INDEX_NONSTANDARD_FLAG_HOLD/u,
+      );
+      runGit(linked, ["update-index", "--no-skip-worktree", "ordinary.txt"]);
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+
+    await t.test("staged index drift never receives the LFS exception", () => {
+      writeFileSync(assetPath, sameSizeWrongPayload);
+      const wrongBlobSha = runGit(linked, [
+        "hash-object",
+        "-w",
+        "--no-filters",
+        "--",
+        "asset.bin",
+      ]);
+      runGit(linked, ["update-index", "--cacheinfo", `100644,${wrongBlobSha},asset.bin`]);
+      assert.throws(
+        () => observeExactSource(linked),
+        /INDEX_HEAD_TREE_MISMATCH_HOLD/u,
+      );
+      const pointerBlobSha = runGit(linked, ["rev-parse", "HEAD:asset.bin"]);
+      runGit(linked, [
+        "update-index",
+        "--cacheinfo",
+        `100644,${pointerBlobSha},asset.bin`,
+      ]);
+      writeFileSync(assetPath, payload);
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+
+    if (process.platform === "linux") {
+      await t.test("file and parent-directory symlink drift fail closed", () => {
+        mkdirSync(outside, { recursive: true });
+        const outsideAsset = join(outside, "asset.bin");
+        writeFileSync(outsideAsset, payload);
+        rmSync(assetPath);
+        symlinkSync(outsideAsset, assetPath);
+        assert.throws(
+          () => observeExactSource(linked),
+          /WORKTREE_TRACKED_FILE_REPARSE_OR_TYPE_DRIFT_HOLD/u,
+        );
+        rmSync(assetPath);
+        writeFileSync(assetPath, payload);
+
+        const nestedPath = join(linked, "nested");
+        const outsideNested = join(outside, "nested");
+        mkdirSync(outsideNested);
+        writeFileSync(join(outsideNested, "bound.txt"), "nested committed bytes\n");
+        rmSync(nestedPath, { recursive: true, force: true });
+        symlinkSync(outsideNested, nestedPath, "dir");
+        assert.throws(
+          () => observeExactSource(linked),
+          /WORKTREE_DIRECTORY_REPARSE_OR_TYPE_DRIFT_HOLD/u,
+        );
+        unlinkSync(nestedPath);
+        mkdirSync(nestedPath);
+        writeFileSync(join(nestedPath, "bound.txt"), "nested committed bytes\n");
+        assert.equal(observeExactSource(linked).statusPorcelain, "");
+      });
+    }
+
+    await t.test("a missing committed pointer blob fails closed", () => {
+      const pointerBlobSha = runGit(primary, ["rev-parse", "HEAD:asset.bin"]);
+      const objectPath = join(
+        primary,
+        ".git",
+        "objects",
+        pointerBlobSha.slice(0, 2),
+        pointerBlobSha.slice(2),
+      );
+      assert.equal(existsSync(objectPath), true);
+      rmSync(objectPath);
+      assert.throws(
+        () => observeExactSource(linked),
+        /COMBINED_LAW_COMMAND_FAILED|GIT_BLOB_BATCH/u,
+      );
+      const restored = runGit(primary, ["hash-object", "-w", "--stdin"], { input: pointer });
+      assert.equal(restored, pointerBlobSha);
+      assert.equal(observeExactSource(linked).statusPorcelain, "");
+    });
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test("exact source loading ignores mutable Git replacement refs", () => {
@@ -854,7 +1296,26 @@ test("source Git environment strips repository, object, index, namespace, and co
     GIT_CONFIG_KEY_0: "core.worktree",
     GIT_CONFIG_VALUE_0: poison.root,
     GIT_CONFIG_PARAMETERS: `'core.worktree=${poison.root}'`,
+    GIT_ALLOW_PROTOCOL: "http:https:ssh:file",
+    GIT_NO_LAZY_FETCH: "0",
     GIT_NO_REPLACE_OBJECTS: "0",
+    GIT_OPTIONAL_LOCKS: "1",
+    GIT_PROTOCOL_FROM_USER: "1",
+    GIT_TERMINAL_PROMPT: "1",
+    GCM_INTERACTIVE: "Always",
+    SSH_ASKPASS_REQUIRE: "force",
+    GIT_ASKPASS: join(poison.root, "askpass"),
+    GIT_EDITOR: join(poison.root, "editor"),
+    GIT_EXTERNAL_DIFF: join(poison.root, "external-diff"),
+    GIT_PAGER: join(poison.root, "pager"),
+    GIT_SEQUENCE_EDITOR: join(poison.root, "sequence-editor"),
+    BASH_ENV: join(poison.root, "bash-env"),
+    EDITOR: join(poison.root, "editor"),
+    LD_AUDIT: join(poison.root, "audit"),
+    LD_PRELOAD: join(poison.root, "preload"),
+    PAGER: join(poison.root, "pager"),
+    SSH_ASKPASS: join(poison.root, "ssh-askpass"),
+    VISUAL: join(poison.root, "visual"),
   };
   try {
     assert.equal(
@@ -886,9 +1347,28 @@ test("source Git environment strips repository, object, index, namespace, and co
         "GIT_CONFIG_KEY_0",
         "GIT_CONFIG_VALUE_0",
         "GIT_CONFIG_PARAMETERS",
+        "BASH_ENV",
+        "EDITOR",
+        "LD_AUDIT",
+        "LD_PRELOAD",
+        "PAGER",
+        "SSH_ASKPASS",
+        "VISUAL",
       ]) assert.equal(Object.prototype.hasOwnProperty.call(scrubbed, name), false, name);
+      assert.equal(scrubbed.GCM_INTERACTIVE, "Never");
+      assert.equal(scrubbed.SSH_ASKPASS_REQUIRE, "never");
+      assert.equal(scrubbed.GIT_ALLOW_PROTOCOL, "file");
+      assert.equal(scrubbed.GIT_NO_LAZY_FETCH, "1");
       assert.equal(scrubbed.GIT_NO_REPLACE_OBJECTS, "1");
+      assert.equal(scrubbed.GIT_OPTIONAL_LOCKS, "0");
+      assert.equal(scrubbed.GIT_PROTOCOL_FROM_USER, "0");
+      assert.equal(scrubbed.GIT_TERMINAL_PROMPT, "0");
       assert.equal(scrubbed.GIT_CONFIG_NOSYSTEM, "1");
+      assert.equal(scrubbed.GIT_ASKPASS, "");
+      assert.equal(scrubbed.GIT_EDITOR, "");
+      assert.equal(scrubbed.GIT_EXTERNAL_DIFF, "");
+      assert.equal(scrubbed.GIT_PAGER, "");
+      assert.equal(scrubbed.GIT_SEQUENCE_EDITOR, "");
       assert.notEqual(scrubbed.GIT_CONFIG_GLOBAL, overrides.GIT_CONFIG_GLOBAL);
 
       const observation = observeExactSource(canonical.root);
@@ -908,6 +1388,253 @@ test("source Git environment strips repository, object, index, namespace, and co
     removeSelfCreatedBuildRoot(buildRoot);
     rmSync(canonical.root, { recursive: true, force: true });
     rmSync(poison.root, { recursive: true, force: true });
+  }
+});
+
+test("repository-local fsmonitor and other process-bearing Git config never execute", () => {
+  const repository = createCommittedRepository(
+    "iat-b3-hostile-fsmonitor-source-",
+    "canonical-source-with-hostile-local-config\n",
+  );
+  const helperRoot = temporaryDirectory("iat-b3-hostile-fsmonitor-helper-");
+  const helperPath = join(helperRoot, "hostile-fsmonitor.mjs");
+  const markerPath = join(helperRoot, "hostile-fsmonitor-ran.marker");
+  const buildRoot = createCombinedLawBuildRoot();
+  const helperSource = [
+    'import { appendFileSync } from "node:fs";',
+    'appendFileSync(process.argv[2], "ran\\n", "utf8");',
+    'process.stdout.write("b16-token\\0");',
+    "",
+  ].join("\n");
+  writeFileSync(helperPath, helperSource, "utf8");
+  const hostileCommand = [process.execPath, helperPath, markerPath]
+    .map(gitShellQuote)
+    .join(" ");
+  try {
+    runGit(repository.root, ["config", "core.fsmonitor", hostileCommand]);
+    runGit(repository.root, ["config", "core.fsmonitorHookVersion", "2"]);
+    runGit(repository.root, ["config", "core.untrackedCache", "true"]);
+    runGit(repository.root, ["config", "core.splitIndex", "true"]);
+    runGit(repository.root, ["config", "core.hooksPath", helperRoot]);
+    runGit(repository.root, ["config", "core.pager", hostileCommand]);
+    runGit(repository.root, ["config", "core.editor", hostileCommand]);
+    runGit(repository.root, ["config", "sequence.editor", hostileCommand]);
+    runGit(repository.root, ["config", "credential.helper", `!${hostileCommand}`]);
+    runGit(repository.root, ["config", "core.sshCommand", hostileCommand]);
+    runGit(repository.root, ["config", "diff.external", hostileCommand]);
+    runGit(repository.root, ["config", "interactive.diffFilter", hostileCommand]);
+    runGit(repository.root, ["update-index", "--untracked-cache"]);
+    runGit(repository.root, ["update-index", "--split-index"]);
+
+    runGit(repository.root, ["status", "--porcelain=v1"]);
+    assert.equal(
+      existsSync(markerPath),
+      true,
+      "the hostile fixture must prove ordinary Git executes core.fsmonitor",
+    );
+    unlinkSync(markerPath);
+
+    const observation = observeExactSource(repository.root);
+    assert.equal(observation.headSha, repository.headSha);
+    assert.equal(observation.treeSha, repository.treeSha);
+    assert.equal(observation.statusPorcelain, "");
+    assert.equal(existsSync(markerPath), false, "exact-source observation invoked hostile config");
+
+    const snapshot = loadExactDeclaredHeadSource({
+      repositoryRoot: repository.root,
+      buildRoot,
+      declaredHeadSha: repository.headSha,
+    });
+    assert.equal(snapshot.treeSha, repository.treeSha);
+    assert.equal(
+      readFileSync(join(snapshot.root, "input.txt"), "utf8"),
+      "canonical-source-with-hostile-local-config\n",
+    );
+    assert.equal(existsSync(markerPath), false, "source materialization invoked hostile config");
+  } finally {
+    removeSelfCreatedBuildRoot(buildRoot);
+    rmSync(repository.root, { recursive: true, force: true });
+    rmSync(helperRoot, { recursive: true, force: true });
+  }
+});
+
+test("exact-source Git is absolute and ignores repository-local executables and hostile PATH", () => {
+  const repository = createCommittedRepository(
+    "iat-b3-repository-local-git-shim-",
+    "canonical-source-with-hostile-git-shim\n",
+  );
+  const helperRoot = temporaryDirectory("iat-b3-hostile-git-path-");
+  const markerPath = join(helperRoot, "hostile-git-ran.marker");
+  const previousPath = process.env.PATH;
+  try {
+    if (process.platform === "win32") {
+      copyFileSync(join(process.env.SystemRoot ?? "C:\\Windows", "System32", "where.exe"), join(repository.root, "git.exe"));
+      writeFileSync(join(repository.root, "git.cmd"), `@echo ran>>"${markerPath}"\r\n`, "utf8");
+      writeFileSync(join(repository.root, "git.bat"), `@echo ran>>"${markerPath}"\r\n`, "utf8");
+    } else {
+      const shim = join(repository.root, "git");
+      writeFileSync(shim, `#!/bin/sh\nprintf 'ran\\n' >> ${gitShellQuote(markerPath)}\nexec /usr/bin/git "$@"\n`, "utf8");
+      chmodSync(shim, 0o755);
+      writeFileSync(join(repository.root, "git.shim"), "hostile-path-shim\n", "utf8");
+    }
+    runTrustedGit(repository.root, ["add", "--", "."]);
+    runTrustedGit(repository.root, ["commit", "--quiet", "-m", "hostile local Git shims"]);
+    const expectedHead = runTrustedGit(repository.root, ["rev-parse", "HEAD"]);
+    const expectedTree = runTrustedGit(repository.root, ["rev-parse", "HEAD^{tree}"]);
+    process.env.PATH = [repository.root, "", ".", helperRoot, previousPath ?? ""]
+      .join(delimiter);
+
+    const bareProbe = process.platform === "win32"
+      ? spawnSync(
+        join(process.env.SystemRoot ?? "C:\\Windows", "System32", "cmd.exe"),
+        ["/d", "/c", `${join(repository.root, "git.cmd")} --version`],
+        { cwd: repository.root, env: process.env, encoding: "utf8", windowsHide: true },
+      )
+      : spawnSync(join(repository.root, "git"), ["--version"], {
+        cwd: repository.root,
+        env: process.env,
+        encoding: "utf8",
+        windowsHide: true,
+      });
+    assert.equal(bareProbe.status, 0, bareProbe.stderr);
+    assert.equal(
+      existsSync(markerPath),
+      true,
+      "the hostile fixture must prove the repository-local Git shim is executable",
+    );
+    unlinkSync(markerPath);
+
+    const scrubbed = createExactSourceGitEnvironment(process.env);
+    assert.ok(scrubbed.PATH.split(delimiter).every(
+      (path) => path.length > 0 && path !== "." && path !== repository.root,
+    ));
+    const observation = observeExactSource(repository.root);
+    assert.equal(observation.headSha, expectedHead);
+    assert.equal(observation.treeSha, expectedTree);
+    assert.equal(observation.statusPorcelain, "");
+    assert.equal(existsSync(markerPath), false, "exact-source observer executed a hostile Git shim");
+  } finally {
+    if (previousPath === undefined) delete process.env.PATH;
+    else process.env.PATH = previousPath;
+    rmSync(repository.root, { recursive: true, force: true });
+    rmSync(helperRoot, { recursive: true, force: true });
+  }
+});
+
+test("explicit authenticated work-tree defeats core.worktree and mutable exclude redirection", () => {
+  const repository = createCommittedRepository(
+    "iat-b3-core-worktree-redirection-",
+    "canonical-source-with-explicit-worktree\n",
+  );
+  const outsideWorktree = temporaryDirectory("iat-b3-hostile-core-worktree-");
+  const externalExclude = join(outsideWorktree, "external-excludes");
+  try {
+    writeFileSync(externalExclude, "external-hidden.txt\n", "utf8");
+    writeFileSync(
+      join(repository.root, ".git", "info", "exclude"),
+      "info-hidden.txt\n",
+      "utf8",
+    );
+    runTrustedGit(repository.root, ["config", "core.excludesFile", externalExclude]);
+    runTrustedGit(repository.root, ["config", "core.bare", "true"]);
+    runTrustedGit(repository.root, ["config", "core.worktree", outsideWorktree]);
+    writeFileSync(join(repository.root, "root-untracked.txt"), "must be seen\n", "utf8");
+    writeFileSync(join(repository.root, "external-hidden.txt"), "must be seen\n", "utf8");
+    writeFileSync(join(repository.root, "info-hidden.txt"), "must be seen\n", "utf8");
+
+    const observation = observeExactSource(repository.root);
+    assert.equal(observation.headSha, repository.headSha);
+    assert.equal(observation.treeSha, repository.treeSha);
+    assert.match(observation.statusPorcelain, /\?\? root-untracked\.txt\0/u);
+    assert.match(observation.statusPorcelain, /\?\? external-hidden\.txt\0/u);
+    assert.match(observation.statusPorcelain, /\?\? info-hidden\.txt\0/u);
+  } finally {
+    rmSync(repository.root, { recursive: true, force: true });
+    rmSync(outsideWorktree, { recursive: true, force: true });
+  }
+});
+
+test("ordinary repositories reject local and HTTP object alternates before Git executes", () => {
+  const repository = createCommittedRepository(
+    "iat-b3-object-alternates-",
+    "self-contained-object-store\n",
+  );
+  const outsideObjects = temporaryDirectory("iat-b3-external-object-store-");
+  const infoRoot = join(repository.root, ".git", "objects", "info");
+  try {
+    for (const name of ["alternates", "http-alternates"]) {
+      const path = join(infoRoot, name);
+      writeFileSync(path, `${outsideObjects}\n`, "utf8");
+      assert.throws(
+        () => observeExactSource(repository.root),
+        /IAT_B3_EXACT_SOURCE_GIT_OBJECT_ALTERNATES_FORBIDDEN_HOLD/u,
+        name,
+      );
+      rmSync(path, { force: true });
+    }
+    if (process.platform !== "win32") {
+      const dangling = join(infoRoot, "alternates");
+      symlinkSync(join(outsideObjects, "missing-alternates"), dangling);
+      assert.throws(
+        () => observeExactSource(repository.root),
+        /IAT_B3_EXACT_SOURCE_GIT_OBJECT_ALTERNATES_FORBIDDEN_HOLD/u,
+      );
+      rmSync(dangling, { force: true });
+    }
+    const outsideInfo = join(outsideObjects, "info");
+    rmSync(infoRoot, { recursive: true, force: true });
+    mkdirSync(outsideInfo);
+    symlinkSync(outsideInfo, infoRoot, process.platform === "win32" ? "junction" : "dir");
+    assert.throws(
+      () => observeExactSource(repository.root),
+      /IAT_B3_EXACT_SOURCE_GIT_OBJECT_INFO_REPARSE_HOLD/u,
+    );
+    rmSync(infoRoot, { recursive: true, force: true });
+    mkdirSync(infoRoot);
+    assert.equal(observeExactSource(repository.root).statusPorcelain, "");
+  } finally {
+    rmSync(repository.root, { recursive: true, force: true });
+    rmSync(outsideObjects, { recursive: true, force: true });
+  }
+});
+
+test("missing promisor objects fail closed without lazy fetch or object-store mutation", () => {
+  const repository = createCommittedRepository(
+    "iat-b3-no-lazy-fetch-client-",
+    "promisor-bound-source\n",
+  );
+  const remote = temporaryDirectory("iat-b3-no-lazy-fetch-remote-");
+  try {
+    runGit(remote, ["init", "--bare", "--quiet"]);
+    runGit(repository.root, ["remote", "add", "origin", remote]);
+    runGit(repository.root, ["push", "--quiet", "origin", "HEAD:refs/heads/main"]);
+    const blobSha = runGit(repository.root, ["rev-parse", "HEAD:input.txt"]);
+    const objectPath = join(
+      repository.root,
+      ".git",
+      "objects",
+      blobSha.slice(0, 2),
+      blobSha.slice(2),
+    );
+    assert.equal(existsSync(objectPath), true);
+    runGit(repository.root, ["config", "core.repositoryformatversion", "1"]);
+    runGit(repository.root, ["config", "extensions.partialClone", "origin"]);
+    runGit(repository.root, ["config", "remote.origin.promisor", "true"]);
+    runGit(repository.root, ["config", "remote.origin.partialCloneFilter", "blob:none"]);
+    rmSync(objectPath);
+    assert.equal(existsSync(objectPath), false);
+    const packDirectory = join(repository.root, ".git", "objects", "pack");
+    const beforePacks = readdirSync(packDirectory).sort();
+
+    assert.throws(
+      () => observeExactSource(repository.root),
+      /GIT_BLOB_BATCH|COMBINED_LAW_COMMAND_FAILED/u,
+    );
+    assert.equal(existsSync(objectPath), false);
+    assert.deepEqual(readdirSync(packDirectory).sort(), beforePacks);
+  } finally {
+    rmSync(repository.root, { recursive: true, force: true });
+    rmSync(remote, { recursive: true, force: true });
   }
 });
 
@@ -1204,10 +1931,20 @@ test("the executable path is canonical-manifest-only and the current production 
   assert.match(script, /assertProductionCombinedArtifactBindingReady\(manifest, \{ ownerPolicyBytes \}\)/u);
   assert.match(script, /"ls-tree"[\s\S]*"--full-tree"/u);
   assert.match(script, /"cat-file"[\s\S]*"--batch"/u);
-  assert.match(script, /git[\s\S]*status[\s\S]*--porcelain=v1[\s\S]*--untracked-files=all/u);
+  assert.match(script, /"ls-files"[\s\S]*"--stage"[\s\S]*"--others"[\s\S]*"--exclude-per-directory=\.gitignore"/u);
+  assert.match(script, /parseCanonicalLfsPointer\(file\.bytes\)[\s\S]*sha256\(bytes\) === pointer\.oidSha256/u);
+  assert.match(script, /GIT_NO_LAZY_FETCH: "1"[\s\S]*GIT_TERMINAL_PROMPT: "0"/u);
+  assert.match(script, /"-c", "core\.fsmonitor=false"/u);
+  assert.match(script, /"-c", "core\.hooksPath="/u);
+  assert.match(script, /"-c", "diff\.external="/u);
+  assert.match(script, /"--no-optional-locks"[\s\S]*"--no-pager"/u);
+  assert.match(script, /stat\.nlink !== 1n[\s\S]*WORKTREE_TRACKED_FILE_HARDLINK_HOLD/u);
+  assert.match(script, /finalUntrackedListing[\s\S]*assertObservedTrackedWorktreeStable\(trackedObservation\)/u);
   assert.match(script, /loadCanonicalIdentityBinding\(sourceSnapshot\)/u);
   assert.match(script, /sourceSnapshotRoot[\s\S]*target=\/iat-source,readonly/u);
-  assert.doesNotMatch(script, /--manifest/u);
+  const cliSurface = /function parseCliArguments\(argv\)[\s\S]*?const invokedPath/u.exec(script)?.[0];
+  assert.ok(cliSurface);
+  assert.doesNotMatch(cliSurface, /--manifest/u);
   assert.equal(script.includes('execute("docker", ["pull"'), false);
 
   const manifest = parseIdentityFreezeJson(

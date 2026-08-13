@@ -68,6 +68,80 @@ test("the canonical packet maps every retained V2 row and keeps all release surf
   assert.equal(manifest.implementationSlices.length, 7);
 });
 
+test("the economy slice records the six active source routes without promoting all-15 or release truth", () => {
+  const exactEconomyBlocker =
+    "The feature-gated B3 production entrypoint and dispatcher expose six active source handlers and their CPI executors, but all-15 active completion, production identities, final-binary Devnet and rollback evidence, rewards/CCC/core/init policy closure, and release authorization remain unresolved.";
+  const economySlice = manifest.implementationSlices.find(
+    ({ id }) => id === "V2_ECONOMY_REWARDS_AND_CCC",
+  );
+  assert.ok(economySlice);
+  assert.deepEqual(economySlice.blockers, [
+    exactEconomyBlocker,
+    "End-to-end V2 differential, migration, and adversarial Devnet evidence is incomplete.",
+  ]);
+
+  const entrypointSource = readFileSync(
+    new URL("../programs/iat_b3_economy/src/production_entrypoint.rs", import.meta.url),
+    "utf8",
+  );
+  const dispatcherSource = readFileSync(
+    new URL("../programs/iat_b3_economy/src/production_dispatch.rs", import.meta.url),
+    "utf8",
+  );
+  assert.match(entrypointSource, /entrypoint!\(process_instruction\);/u);
+  const activeExecutors = [
+    "execute_runtime_production_set_eligibility_account_infos",
+    "execute_runtime_production_open_position_with_daily_law_prefix_account_infos",
+    "execute_runtime_production_settle_position_week_standard_with_daily_law_prefix_account_infos",
+    "execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos",
+    "execute_runtime_production_withdraw_position_with_daily_law_prefix_account_infos",
+    "execute_runtime_production_close_position_account_infos",
+  ];
+  for (const executor of activeExecutors) {
+    assert.match(dispatcherSource, new RegExp(`${executor}\\(`, "u"));
+  }
+
+  const writeGateMatrix = JSON.parse(readFileSync(
+    new URL("../docs/b3/iat-b3-economic-write-gates.v1.json", import.meta.url),
+    "utf8",
+  ));
+  assert.deepEqual(writeGateMatrix.currentProductionSourceSurface, {
+    ...writeGateMatrix.currentProductionSourceSurface,
+    productionInstructionAbiExposed: true,
+    productionDispatcherExposed: true,
+    productionSolanaEntrypointExposed: true,
+    exactDiscriminantCount: 15,
+    sourceDispositionCompleteCount: 15,
+    activeHandlerCount: 6,
+    initializationPolicyHoldCount: 5,
+    cccDisabledHandlerCount: 3,
+    coreCustodyPolicyHoldCount: 1,
+    all15HandlersActive: false,
+    all15HandlersComplete: false,
+    productionIdentityEvidenceVerified: false,
+    devnetExecuted: false,
+    devnetTransactionRollbackProven: false,
+    releaseAuthorized: false,
+    mainnetHold: true,
+  });
+  assert.equal(manifest.productionParityPacketComplete, false);
+  assert.equal(manifest.releaseSurfaceClaimsPacketComplete, false);
+  assert.equal(manifest.activationReady, false);
+  assert.equal(manifest.deploymentAuthorized, false);
+  assert.equal(manifest.mainnetExecutionAuthorized, false);
+  assert.equal(manifest.mainnetStatus, "HOLD");
+
+  const staleAbsenceClaim = clone(manifest);
+  staleAbsenceClaim.implementationSlices[1].blockers[0] =
+    "The B3 economy surface lacks a production entrypoint, dispatcher, CPI execution, and complete native write handlers.";
+  const result = validateV2ParityClaimsReadinessManifest(staleAbsenceClaim);
+  assertFailClosed(result);
+  assert.match(
+    result.violations.join("\n"),
+    /id, state, evidence, blockers, or exact feature coverage drifted/u,
+  );
+});
+
 test("the migrated graph repin preserves exact feature, source, and implementation requirements", () => {
   const featureContract = readFileSync(new URL("../docs/b3/V2_FEATURE_PARITY.md", import.meta.url));
   const sourceInventory = readFileSync(new URL("../docs/b3/V2_SOURCE_INVENTORY.md", import.meta.url));

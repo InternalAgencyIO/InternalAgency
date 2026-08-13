@@ -4,11 +4,15 @@ import { spawnSync } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
 import {
   chmodSync,
+  closeSync,
+  constants as fsConstants,
   existsSync,
+  fstatSync,
   linkSync,
   lstatSync,
   mkdirSync,
   mkdtempSync,
+  openSync,
   readFileSync,
   realpathSync,
   readdirSync,
@@ -20,6 +24,7 @@ import {
 import { tmpdir } from "node:os";
 import {
   basename,
+  delimiter,
   dirname,
   isAbsolute,
   join,
@@ -48,7 +53,7 @@ import {
 } from "./iat-b3-native-wsl-build-backend.mjs";
 
 export const COMBINED_LAW_BUILD_RECEIPT_SCHEMA =
-  "iat-b3-combined-law-exact-source-dual-sbf-build/v1";
+  "iat-b3-combined-law-exact-source-dual-sbf-build/v2";
 export const COMBINED_LAW_BUILD_RECEIPT_STATUS =
   "EXACT_SOURCE_DUAL_FRESH_SBF_BYTE_EQUALITY_VERIFIED";
 export const COMBINED_LAW_BUILD_MAINNET_STATUS = "HOLD";
@@ -58,7 +63,7 @@ export const COMBINED_LAW_SUBMODULE_POLICY = "REJECT_ALL_GITLINKS";
 export const COMBINED_LAW_LFS_POLICY =
   "RAW_COMMITTED_POINTER_BLOBS_ONLY_NO_SMUDGE";
 export const COMBINED_LAW_BUILD_PREFLIGHT_SCHEMA =
-  "iat-b3-combined-law-exact-source-build-preflight/v1";
+  "iat-b3-combined-law-exact-source-build-preflight/v2";
 export const COMBINED_LAW_BUILD_PREFLIGHT_READY = "READY_TO_EXECUTE_DUAL_BUILD";
 export const COMBINED_LAW_BUILD_PREFLIGHT_HOLD = "HOLD";
 
@@ -139,14 +144,174 @@ const CONTAINER_DIGEST = /^sha256:[0-9a-f]{64}$/u;
 const RUSTC_VERSION = /^rustc 1\.97\.1 \([0-9a-f]+ 2026-07-14\)$/u;
 const CARGO_VERSION = /^cargo 1\.97\.1 \([0-9a-f]+ 2026-06-30\)$/u;
 const CARGO_BUILD_SBF_VERSION = /^solana-cargo-build-sbf 3\.1\.10$/u;
+const WSL_V9FS_SUPER_MAGIC = 0x01021997n;
 const UNSAFE_COMPILER_DIAGNOSTIC =
   /Stack offset of|stack frame of [0-9]+ bytes exceeds|max offset exceeded|overwrites values|undefined behavior/iu;
 // Shared process-owned root registry for every exact-source production runner.
 // Materialization remains closed to arbitrary caller-provided paths.
 const ACTIVE_BUILD_ROOTS = new Map();
 const MATERIALIZED_SOURCE_SNAPSHOTS = new WeakSet();
+const ACTIVE_MATERIALIZED_SOURCE_ROOTS = new Map();
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 const NULL_GIT_CONFIG_PATH = process.platform === "win32" ? "NUL" : "/dev/null";
+const EXACT_SOURCE_GIT_PROCESS_CONFIG = Object.freeze([
+  "-c", "core.fsmonitor=false",
+  "-c", "core.untrackedCache=false",
+  "-c", "core.splitIndex=false",
+  "-c", "core.hooksPath=",
+  "-c", "core.askPass=",
+  "-c", "core.editor=",
+  "-c", "core.pager=",
+  "-c", "sequence.editor=",
+  "-c", "credential.helper=",
+  "-c", "core.sshCommand=",
+  "-c", "diff.external=",
+  "-c", "diff.trustExitCode=false",
+  "-c", "interactive.diffFilter=",
+]);
+const PINNED_EXACT_SOURCE_GIT = Object.freeze({
+  win32: Object.freeze({
+    executablePath: "C:\\Program Files\\Git\\bin\\git.exe",
+    executableSha256: "7b7971dd13f0c3a284e538601f2f9770b3a87dfaccb5fb52d68141c67ed22364",
+    executableByteLength: 46_920,
+    executableLinkCount: 1,
+    version: "git version 2.55.0.windows.3",
+    implementationPath: "C:\\Program Files\\Git\\mingw64\\bin\\git.exe",
+    implementationSha256: "1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9",
+    implementationByteLength: 4_383_048,
+    implementationLinkCount: 4,
+    trustedPathDirectories: Object.freeze([
+      "C:\\Program Files\\Git\\bin",
+      "C:\\Windows\\System32",
+      "C:\\Windows",
+    ]),
+  }),
+  linux: Object.freeze({
+    executablePath: "/usr/bin/git",
+    executableSha256: "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668",
+    executableByteLength: 4_066_232,
+    executableLinkCount: 1,
+    version: "git version 2.43.0",
+    implementationPath: "/usr/bin/git",
+    implementationSha256: "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668",
+    implementationByteLength: 4_066_232,
+    implementationLinkCount: 1,
+    trustedPathDirectories: Object.freeze(["/usr/bin", "/bin"]),
+  }),
+});
+const EXACT_SOURCE_GIT_DISCARDED_ENVIRONMENT = new Set([
+  "BASH_ENV",
+  "CDPATH",
+  "DYLD_INSERT_LIBRARIES",
+  "DYLD_LIBRARY_PATH",
+  "EDITOR",
+  "ENV",
+  "GIT_EDITOR",
+  "GIT_EXTERNAL_DIFF",
+  "GIT_PAGER",
+  "GIT_SEQUENCE_EDITOR",
+  "LD_AUDIT",
+  "LD_LIBRARY_PATH",
+  "LD_PRELOAD",
+  "PAGER",
+  "SEQUENCE_EDITOR",
+  "SSH_ASKPASS",
+  "VISUAL",
+]);
+const PINNED_DOCKER_HOST_RUNTIME = Object.freeze({
+  platform: "linux",
+  architecture: "x64",
+  executablePath: "/usr/bin/docker",
+  executableSha256: "7ed12b00293d64742419a6601ae97960a367a0ce97c88b06e3278cc0a409557b",
+  executableByteLength: 31_369_824,
+  executableLinkCount: 1,
+  clientVersionLine: "Docker version 29.1.3, build 29.1.3-0ubuntu3~24.04.2",
+  client: Object.freeze({
+    Version: "29.1.3",
+    ApiVersion: "1.52",
+    DefaultAPIVersion: "1.52",
+    GitCommit: "29.1.3-0ubuntu3~24.04.2",
+    GoVersion: "go1.24.4",
+    Os: "linux",
+    Arch: "amd64",
+  }),
+  server: Object.freeze({
+    Version: "29.1.3",
+    ApiVersion: "1.52",
+    MinAPIVersion: "1.44",
+    GitCommit: "29.1.3-0ubuntu3~24.04.2",
+    GoVersion: "go1.24.4",
+    Os: "linux",
+    Arch: "amd64",
+  }),
+  engine: Object.freeze({
+    Name: "Engine",
+    Version: "29.1.3",
+    ApiVersion: "1.52",
+    MinAPIVersion: "1.44",
+    GitCommit: "29.1.3-0ubuntu3~24.04.2",
+    GoVersion: "go1.24.4",
+    Os: "linux",
+    Arch: "amd64",
+  }),
+  componentVersions: Object.freeze({
+    containerd: "2.2.1",
+    runc: "1.3.4-0ubuntu1~24.04.1",
+    "docker-init": "0.19.0",
+  }),
+  socketPath: "/var/run/docker.sock",
+  canonicalSocketPath: "/run/docker.sock",
+  socketUid: 0,
+  socketGid: 108,
+  socketMode: 0o660,
+  socketLinkCount: 1,
+  temporaryRoot: "/tmp",
+  temporaryRootUid: 0,
+  temporaryRootGid: 0,
+  temporaryRootMode: 0o1777,
+  trustedPathDirectories: Object.freeze(["/usr/bin", "/bin"]),
+});
+const PINNED_DOCKER_ALLOWED_ENVIRONMENT = new Set([
+  "IAT_B3_EXACT_SOURCE_HEAD_SHA",
+  ...REQUIRED_IDENTITY_ENVIRONMENT_NAMES,
+  "IAT_B3_PRODUCTION_MAINNET_GENESIS_HASH",
+]);
+export const PINNED_DOCKER_COMMAND_PURPOSE = Object.freeze({
+  imagePlatformInspect: "IMAGE_PLATFORM_INSPECT",
+  imageIdInspect: "IMAGE_ID_INSPECT",
+  toolchainRustc: "TOOLCHAIN_RUSTC",
+  toolchainCargo: "TOOLCHAIN_CARGO",
+  toolchainCargoBuildSbf: "TOOLCHAIN_CARGO_BUILD_SBF",
+  lawBuild: "LAW_BUILD",
+  economyBuild: "ECONOMY_BUILD",
+});
+const PINNED_ECONOMY_IDENTITY_ENVIRONMENT_NAMES = Object.freeze([
+  "IAT_B3_PRODUCTION_LAW_PROGRAM_ID",
+  "IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID",
+  "IAT_B3_PRODUCTION_CANONICAL_MINT",
+  "IAT_B3_PRODUCTION_MAINNET_GENESIS_HASH",
+]);
+const PINNED_ECONOMY_BUILD_ARGUMENT_TEMPLATE = Object.freeze([
+  "build-sbf",
+  "--manifest-path",
+  "projects/star-ascent/site/programs/iat_b3_economy/Cargo.toml",
+  "--sbf-out-dir",
+  "<FRESH_OUTPUT_DIRECTORY>",
+  "--arch",
+  "v0",
+  "--no-default-features",
+  "--features",
+  "runtime-production-entrypoint",
+  "--optimize-size",
+  "--offline",
+  "--skip-tools-install",
+  "--tools-version",
+  "v1.52",
+  "--",
+  "--locked",
+  "--target-dir",
+  "<FRESH_TARGET_DIRECTORY>",
+]);
 
 const RECEIPT_KEYS = Object.freeze([
   "schema",
@@ -166,7 +331,7 @@ const SOURCE_KEYS = Object.freeze([
   "declaredHeadSha",
   "observedHeadSha",
   "observedTreeSha",
-  "repositoryCleanTrackedAndUntracked",
+  "repositoryCleanTrackedAndNonignoredUntracked",
   "revalidationCount",
   "executedRunnerSha256",
   "committedRunnerSha256",
@@ -475,7 +640,7 @@ export function createCombinedLawBuildPreflight({
     preflightCheck("EXACT_SOURCE_HEAD_DECLARED", declaredHeadValid),
     preflightCheck("EXACT_SOURCE_OBSERVED", sourceValid),
     preflightCheck("EXACT_SOURCE_HEAD_MATCH", sourceHeadMatches),
-    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED", sourceClean),
+    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED", sourceClean),
     preflightCheck("EXECUTED_RUNNER_MATCHES_DECLARED_HEAD", runnerMatchesCommittedHead),
     preflightCheck("LINUX_AMD64_HOST", hostSupported),
     preflightCheck("HOST_NODE_AT_LEAST_22_13_0", nodeSupported),
@@ -501,7 +666,7 @@ export function createCombinedLawBuildPreflight({
       declaredHeadSha: declaredHeadValid ? declaredHeadSha : null,
       observedHeadSha: sourceValid ? sourceObservation.headSha : null,
       observedTreeSha: sourceValid ? sourceObservation.treeSha : null,
-      repositoryCleanTrackedAndUntracked: sourceClean,
+      repositoryCleanTrackedAndNonignoredUntracked: sourceClean,
       dirtyStatusEntryCount: sourceClean
         ? 0
         : statusPorcelain.split("\0").filter(Boolean).length,
@@ -665,7 +830,7 @@ export function validateCombinedLawBuildPreflight(preflight) {
     && sourceObserved
     && preflight.source.declaredHeadSha === preflight.source.observedHeadSha;
   const sourceClean = sourceObserved
-    && preflight.source.repositoryCleanTrackedAndUntracked === true
+    && preflight.source.repositoryCleanTrackedAndNonignoredUntracked === true
     && preflight.source.dirtyStatusEntryCount === 0
     && preflight.source.statusPorcelainSha256 === sha256("");
   const runnerMatches = sourceHeadMatches
@@ -760,7 +925,7 @@ export function validateCombinedLawBuildPreflight(preflight) {
     preflightCheck("EXACT_SOURCE_HEAD_DECLARED", declaredHeadValid),
     preflightCheck("EXACT_SOURCE_OBSERVED", sourceObserved),
     preflightCheck("EXACT_SOURCE_HEAD_MATCH", sourceHeadMatches),
-    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED", sourceClean),
+    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED", sourceClean),
     preflightCheck("EXECUTED_RUNNER_MATCHES_DECLARED_HEAD", runnerMatches),
     preflightCheck("LINUX_AMD64_HOST", hostSupported),
     preflightCheck("HOST_NODE_AT_LEAST_22_13_0", nodeSupported),
@@ -1053,7 +1218,7 @@ export function createCombinedLawBuildReceipt({
       declaredHeadSha,
       observedHeadSha: source.headSha,
       observedTreeSha: source.treeSha,
-      repositoryCleanTrackedAndUntracked: true,
+      repositoryCleanTrackedAndNonignoredUntracked: true,
       revalidationCount: sourceObservations.length,
       executedRunnerSha256: runnerBinding.executedRunnerSha256,
       committedRunnerSha256: runnerBinding.committedRunnerSha256,
@@ -1125,7 +1290,7 @@ export function validateCombinedLawBuildReceipt(receipt) {
   }
   if (!hasExactDataKeys(receipt.source, SOURCE_KEYS)
     || receipt.source.declaredHeadSha !== receipt.source.observedHeadSha
-    || receipt.source.repositoryCleanTrackedAndUntracked !== true
+    || receipt.source.repositoryCleanTrackedAndNonignoredUntracked !== true
     || !Number.isSafeInteger(receipt.source.revalidationCount)
     || receipt.source.revalidationCount < 3
     || receipt.source.executedRunnerSha256 !== receipt.source.committedRunnerSha256
@@ -1271,31 +1436,371 @@ export function createExactSourceGitEnvironment(environment = process.env) {
   }
   const scrubbed = {};
   for (const [name, value] of Object.entries(environment)) {
-    if (name.toUpperCase().startsWith("GIT_") || value === undefined) continue;
+    const upperName = name.toUpperCase();
+    if (upperName.startsWith("GIT_")
+      || EXACT_SOURCE_GIT_DISCARDED_ENVIRONMENT.has(upperName)
+      || value === undefined) continue;
     scrubbed[name] = String(value);
+  }
+  const policy = PINNED_EXACT_SOURCE_GIT[process.platform];
+  if (!policy) throw new Error("IAT_B3_COMBINED_LAW_PINNED_GIT_PLATFORM_UNSUPPORTED");
+  const trustedPath = policy.trustedPathDirectories.join(delimiter);
+  if (policy.trustedPathDirectories.some((path) => !isAbsolute(path))
+    || trustedPath.split(delimiter).some((path) => path.length === 0 || path === ".")) {
+    throw new Error("IAT_B3_COMBINED_LAW_PINNED_GIT_PATH_POLICY_INVALID");
   }
   return Object.freeze({
     ...scrubbed,
+    PATH: trustedPath,
+    GCM_INTERACTIVE: "Never",
+    SSH_ASKPASS_REQUIRE: "never",
+    GIT_ASKPASS: "",
+    GIT_EDITOR: "",
+    GIT_EXTERNAL_DIFF: "",
+    GIT_PAGER: "",
+    GIT_SEQUENCE_EDITOR: "",
+    GIT_ALLOW_PROTOCOL: "file",
+    GIT_NO_LAZY_FETCH: "1",
     GIT_NO_REPLACE_OBJECTS: "1",
+    GIT_OPTIONAL_LOCKS: "0",
+    GIT_PROTOCOL_FROM_USER: "0",
+    GIT_TERMINAL_PROMPT: "0",
     GIT_CONFIG_NOSYSTEM: "1",
     GIT_CONFIG_GLOBAL: NULL_GIT_CONFIG_PATH,
   });
 }
 
-function resolveLinuxGitControlTarget(controlValue) {
+function observePinnedExactSourceGitFile({
+  path,
+  expectedSha256,
+  expectedByteLength,
+  expectedLinkCount,
+  label,
+}) {
+  if (!isAbsolute(path) || /[\r\n\0]/u.test(path)) {
+    throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_PATH_INVALID`);
+  }
+  const absolutePath = resolve(path);
+  const before = lstatSync(absolutePath, { bigint: true });
+  if (!before.isFile() || before.isSymbolicLink()
+    || before.nlink !== BigInt(expectedLinkCount)
+    || before.size !== BigInt(expectedByteLength)
+    || normalizedRealPath(realpathSync(absolutePath)) !== normalizedRealPath(absolutePath)) {
+    throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_BOUNDARY_HOLD`);
+  }
+  const descriptor = openSync(
+    absolutePath,
+    fsConstants.O_RDONLY | (fsConstants.O_NOFOLLOW ?? 0),
+  );
+  try {
+    const opened = fstatSync(descriptor, { bigint: true });
+    if (statFingerprint(opened) !== statFingerprint(before)) {
+      throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_DESCRIPTOR_HOLD`);
+    }
+    const bytes = readFileSync(descriptor);
+    const afterDescriptor = fstatSync(descriptor, { bigint: true });
+    const afterPath = lstatSync(absolutePath, { bigint: true });
+    if (statFingerprint(opened) !== statFingerprint(afterDescriptor)
+      || statFingerprint(opened) !== statFingerprint(afterPath)
+      || bytes.length !== expectedByteLength
+      || sha256(bytes) !== expectedSha256) {
+      throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_BYTES_DRIFT_HOLD`);
+    }
+    return Object.freeze({ absolutePath, fingerprint: statFingerprint(afterPath) });
+  } finally {
+    closeSync(descriptor);
+  }
+}
+
+function assertPinnedExactSourceGitFileStable(observation, label) {
+  const stat = lstatSync(observation.absolutePath, { bigint: true });
+  if (!stat.isFile() || stat.isSymbolicLink()
+    || statFingerprint(stat) !== observation.fingerprint
+    || normalizedRealPath(realpathSync(observation.absolutePath))
+      !== normalizedRealPath(observation.absolutePath)) {
+    throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_CHANGED_DURING_COMMAND_HOLD`);
+  }
+}
+
+function observePinnedExactSourceGit() {
+  const policy = PINNED_EXACT_SOURCE_GIT[process.platform];
+  if (!policy) throw new Error("IAT_B3_COMBINED_LAW_PINNED_GIT_PLATFORM_UNSUPPORTED");
+  const executable = observePinnedExactSourceGitFile({
+    path: policy.executablePath,
+    expectedSha256: policy.executableSha256,
+    expectedByteLength: policy.executableByteLength,
+    expectedLinkCount: policy.executableLinkCount,
+    label: "EXECUTABLE",
+  });
+  const implementation = policy.implementationPath === policy.executablePath
+    ? executable
+    : observePinnedExactSourceGitFile({
+      path: policy.implementationPath,
+      expectedSha256: policy.implementationSha256,
+      expectedByteLength: policy.implementationByteLength,
+      expectedLinkCount: policy.implementationLinkCount,
+      label: "IMPLEMENTATION",
+    });
+  const trustedCwd = realpathSync(dirname(executable.absolutePath));
+  if (normalizedRealPath(trustedCwd)
+    !== normalizedRealPath(dirname(executable.absolutePath))) {
+    throw new Error("IAT_B3_COMBINED_LAW_PINNED_GIT_TRUSTED_CWD_REPARSE_HOLD");
+  }
+  const environment = createExactSourceGitEnvironment(process.env);
+  const version = spawnSync(executable.absolutePath, ["--version"], {
+    cwd: trustedCwd,
+    env: environment,
+    encoding: "utf8",
+    maxBuffer: 1024 * 1024,
+    windowsHide: true,
+  });
+  assertPinnedExactSourceGitFileStable(executable, "EXECUTABLE");
+  assertPinnedExactSourceGitFileStable(implementation, "IMPLEMENTATION");
+  if (version.error || version.status !== 0 || version.signal !== null
+    || version.stderr !== "" || version.stdout.trim() !== policy.version) {
+    throw new Error("IAT_B3_COMBINED_LAW_PINNED_GIT_VERSION_DRIFT_HOLD");
+  }
+  return Object.freeze({
+    executablePath: executable.absolutePath,
+    trustedCwd,
+    environment,
+    executable,
+    implementation,
+  });
+}
+
+function resolveGitControlTarget(controlValue) {
   if (typeof controlValue !== "string"
     || controlValue.length === 0
     || /[\r\n\0]/u.test(controlValue)) {
     throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
   }
   const windowsPath = /^(?<drive>[A-Za-z]):[\\/](?<path>.+)$/u.exec(controlValue);
-  const translated = windowsPath?.groups
-    ? `/mnt/${windowsPath.groups.drive.toLowerCase()}/${windowsPath.groups.path.replaceAll("\\", "/")}`
-    : controlValue;
-  if (!translated.startsWith("/")) {
+  let translated = controlValue;
+  if (process.platform === "linux" && windowsPath?.groups) {
+    translated = `/mnt/${windowsPath.groups.drive.toLowerCase()}/${windowsPath.groups.path.replaceAll("\\", "/")}`;
+  } else if (process.platform === "win32") {
+    if (!windowsPath?.groups || /^(?:\\\\|\/\/)/u.test(controlValue)) {
+      throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
+    }
+  } else if (!controlValue.startsWith("/")) {
     throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
   }
-  return realpathSync(translated);
+  const declared = resolve(translated);
+  const actual = realpathSync(declared);
+  if (normalizedRealPath(actual) !== normalizedRealPath(declared)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BOUNDARY_INVALID");
+  }
+  return actual;
+}
+
+function readAuthenticatedGitControlFile(path, label) {
+  let before;
+  try {
+    before = lstatSync(path, { bigint: true });
+  } catch {
+    throw new Error(`IAT_B3_EXACT_SOURCE_${label}_REQUIRED`);
+  }
+  if (!before.isFile() || before.isSymbolicLink() || before.nlink !== 1n) {
+    throw new Error(`IAT_B3_EXACT_SOURCE_${label}_INVALID`);
+  }
+  const actual = realpathSync(path);
+  if (normalizedRealPath(actual) !== normalizedRealPath(path)) {
+    throw new Error(`IAT_B3_EXACT_SOURCE_${label}_REPARSE_INVALID`);
+  }
+  const descriptor = openSync(
+    path,
+    fsConstants.O_RDONLY | (fsConstants.O_NOFOLLOW ?? 0),
+  );
+  try {
+    const opened = fstatSync(descriptor, { bigint: true });
+    if (!opened.isFile()
+      || opened.nlink !== 1n
+      || statFingerprint(before) !== statFingerprint(opened)) {
+      throw new Error(`IAT_B3_EXACT_SOURCE_${label}_DESCRIPTOR_BINDING_INVALID`);
+    }
+    const bytes = readFileSync(descriptor);
+    const afterDescriptor = fstatSync(descriptor, { bigint: true });
+    const afterPath = lstatSync(path, { bigint: true });
+    if (statFingerprint(opened) !== statFingerprint(afterDescriptor)
+      || statFingerprint(opened) !== statFingerprint(afterPath)
+      || BigInt(bytes.length) !== afterDescriptor.size) {
+      throw new Error(`IAT_B3_EXACT_SOURCE_${label}_CHANGED_DURING_READ_HOLD`);
+    }
+    return decodeExactUtf8(bytes, `IAT_B3_EXACT_SOURCE_${label}`);
+  } finally {
+    closeSync(descriptor);
+  }
+}
+
+function assertAuthenticatedGitDirectory(path) {
+  const before = lstatSync(path, { bigint: true });
+  if (!before.isDirectory() || before.isSymbolicLink()) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BOUNDARY_INVALID");
+  }
+  const actual = realpathSync(path);
+  if (normalizedRealPath(actual) !== normalizedRealPath(path)
+    || !actual.replaceAll("\\", "/").toLowerCase().includes("/.git/worktrees/")) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BOUNDARY_INVALID");
+  }
+  const after = lstatSync(path, { bigint: true });
+  if (statFingerprint(before) !== statFingerprint(after)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CHANGED_DURING_READ_HOLD");
+  }
+  return actual;
+}
+
+function assertAuthenticatedOrdinaryGitDirectory(path, canonicalRoot) {
+  const before = lstatSync(path, { bigint: true });
+  if (!before.isDirectory() || before.isSymbolicLink()
+    || dirname(path) !== canonicalRoot || basename(path) !== ".git") {
+    throw new Error("IAT_B3_EXACT_SOURCE_GIT_DIRECTORY_BOUNDARY_INVALID");
+  }
+  const actual = realpathSync(path);
+  if (normalizedRealPath(actual) !== normalizedRealPath(path)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_GIT_DIRECTORY_REPARSE_INVALID");
+  }
+  const after = lstatSync(path, { bigint: true });
+  if (statFingerprint(before) !== statFingerprint(after)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_GIT_DIRECTORY_CHANGED_DURING_READ_HOLD");
+  }
+  return actual;
+}
+
+function assertAuthenticatedGitCommonDirectory(gitDirectory) {
+  const commondirPath = join(gitDirectory, "commondir");
+  try {
+    lstatSync(commondirPath, { bigint: true });
+  } catch (error) {
+    if (error?.code === "ENOENT") return gitDirectory;
+    throw new Error("IAT_B3_EXACT_SOURCE_COMMONDIR_CONTROL_INVALID");
+  }
+  const commondir = readAuthenticatedGitControlFile(commondirPath, "COMMONDIR_CONTROL");
+  const match = /^(?<path>[^\r\n\0]+)(?:\r?\n)?$/u.exec(commondir);
+  if (!match?.groups?.path || isAbsolute(match.groups.path)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_COMMONDIR_CONTROL_INVALID");
+  }
+  const declared = resolve(gitDirectory, match.groups.path);
+  const expected = resolve(gitDirectory, "..", "..");
+  let actual;
+  let before;
+  try {
+    actual = realpathSync(declared);
+    before = lstatSync(actual, { bigint: true });
+  } catch {
+    throw new Error("IAT_B3_EXACT_SOURCE_COMMONDIR_BOUNDARY_INVALID");
+  }
+  if (!before.isDirectory() || before.isSymbolicLink()
+    || normalizedRealPath(actual) !== normalizedRealPath(declared)
+    || normalizedRealPath(actual) !== normalizedRealPath(expected)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_COMMONDIR_BOUNDARY_INVALID");
+  }
+  const after = lstatSync(actual, { bigint: true });
+  if (statFingerprint(before) !== statFingerprint(after)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_COMMONDIR_CHANGED_DURING_READ_HOLD");
+  }
+  return actual;
+}
+
+function assertGitObjectStoreSelfContained(gitDirectory, commonDirectory) {
+  for (const root of new Set([gitDirectory, commonDirectory])) {
+    const objects = join(root, "objects");
+    let before;
+    try {
+      before = lstatSync(objects, { bigint: true });
+    } catch (error) {
+      if (error?.code === "ENOENT") continue;
+      throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_STORE_INVALID_HOLD");
+    }
+    if (!before.isDirectory() || before.isSymbolicLink()
+      || normalizedRealPath(realpathSync(objects)) !== normalizedRealPath(objects)) {
+      throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_STORE_REPARSE_HOLD");
+    }
+    const infoDirectory = join(objects, "info");
+    let infoBefore = null;
+    try {
+      infoBefore = lstatSync(infoDirectory, { bigint: true });
+    } catch (error) {
+      if (error?.code !== "ENOENT") {
+        throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_INFO_INVALID_HOLD");
+      }
+    }
+    if (infoBefore !== null
+      && (!infoBefore.isDirectory()
+        || infoBefore.isSymbolicLink()
+        || normalizedRealPath(realpathSync(infoDirectory))
+          !== normalizedRealPath(infoDirectory))) {
+      throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_INFO_REPARSE_HOLD");
+    }
+    for (const name of ["alternates", "http-alternates"]) {
+      const path = join(infoDirectory, name);
+      try {
+        lstatSync(path, { bigint: true });
+        throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_ALTERNATES_FORBIDDEN_HOLD");
+      } catch (error) {
+        if (error?.message === "IAT_B3_EXACT_SOURCE_GIT_OBJECT_ALTERNATES_FORBIDDEN_HOLD") {
+          throw error;
+        }
+        if (error?.code !== "ENOENT") {
+          throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_ALTERNATES_INVALID_HOLD");
+        }
+      }
+    }
+    if (infoBefore !== null) {
+      const infoAfter = lstatSync(infoDirectory, { bigint: true });
+      if (statFingerprint(infoBefore) !== statFingerprint(infoAfter)) {
+        throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_INFO_CHANGED_DURING_READ_HOLD");
+      }
+    }
+    const after = lstatSync(objects, { bigint: true });
+    if (statFingerprint(before) !== statFingerprint(after)) {
+      throw new Error("IAT_B3_EXACT_SOURCE_GIT_OBJECT_STORE_CHANGED_DURING_READ_HOLD");
+    }
+  }
+}
+
+function exactSourceGitRepositoryArguments(repositoryRoot) {
+  const canonicalRoot = realpathSync(repositoryRoot);
+  if (normalizedRealPath(canonicalRoot) !== normalizedRealPath(repositoryRoot)) {
+    throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_ROOT_REPARSE_DRIFT_HOLD");
+  }
+  const controlPath = join(canonicalRoot, ".git");
+  let controlStat;
+  try {
+    controlStat = lstatSync(controlPath, { bigint: true });
+  } catch {
+    throw new Error("IAT_B3_EXACT_SOURCE_GIT_CONTROL_REQUIRED");
+  }
+  if (controlStat.isDirectory() && !controlStat.isSymbolicLink()) {
+    const gitDirectory = assertAuthenticatedOrdinaryGitDirectory(controlPath, canonicalRoot);
+    const commonDirectory = assertAuthenticatedGitCommonDirectory(gitDirectory);
+    assertGitObjectStoreSelfContained(gitDirectory, commonDirectory);
+    return [`--git-dir=${gitDirectory}`, `--work-tree=${canonicalRoot}`];
+  }
+  if (!controlStat.isFile() || controlStat.isSymbolicLink()) {
+    throw new Error("IAT_B3_EXACT_SOURCE_GIT_CONTROL_INVALID");
+  }
+  const control = readAuthenticatedGitControlFile(controlPath, "GITDIR_CONTROL");
+  const controlMatch = /^gitdir: (?<path>[^\r\n\0]+)(?:\r?\n)?$/u.exec(control);
+  if (!controlMatch?.groups?.path) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
+  }
+  const gitDirectory = assertAuthenticatedGitDirectory(
+    resolveGitControlTarget(controlMatch.groups.path),
+  );
+  const commonDirectory = assertAuthenticatedGitCommonDirectory(gitDirectory);
+  assertGitObjectStoreSelfContained(gitDirectory, commonDirectory);
+  const backlinkPath = join(gitDirectory, "gitdir");
+  const backlink = readAuthenticatedGitControlFile(backlinkPath, "GITDIR_BACKLINK");
+  const backlinkMatch = /^(?<path>[^\r\n\0]+)(?:\r?\n)?$/u.exec(backlink);
+  if (!backlinkMatch?.groups?.path) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_INVALID");
+  }
+  const backlinkControlPath = resolveGitControlTarget(backlinkMatch.groups.path);
+  if (normalizedRealPath(backlinkControlPath) !== normalizedRealPath(controlPath)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_MISMATCH");
+  }
+  return [`--git-dir=${gitDirectory}`, `--work-tree=${canonicalRoot}`];
 }
 
 function executeExactSourceGit(
@@ -1304,50 +1809,42 @@ function executeExactSourceGit(
   { binary = false, ...options } = {},
 ) {
   const executeGit = binary ? executeBinary : execute;
-  let repositoryArguments = ["-C", repositoryRoot];
-  if (process.platform === "linux") {
-    const controlPath = join(repositoryRoot, ".git");
-    let stat = null;
-    try {
-      stat = lstatSync(controlPath);
-    } catch {
-      stat = null;
-    }
-    if (stat?.isFile() && !stat.isSymbolicLink()) {
-      const control = readFileSync(controlPath, "utf8").trim();
-      const controlMatch = /^gitdir: (?<path>[^\r\n]+)$/u.exec(control);
-      if (!controlMatch?.groups?.path) {
-        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
-      }
-      const gitDirectory = resolveLinuxGitControlTarget(controlMatch.groups.path);
-      const gitDirectoryStat = lstatSync(gitDirectory);
-      if (!gitDirectoryStat.isDirectory()
-        || gitDirectoryStat.isSymbolicLink()
-        || !gitDirectory.replaceAll("\\", "/").includes("/.git/worktrees/")) {
-        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BOUNDARY_INVALID");
-      }
-      const backlinkPath = join(gitDirectory, "gitdir");
-      const backlinkStat = lstatSync(backlinkPath);
-      if (!backlinkStat.isFile() || backlinkStat.isSymbolicLink()) {
-        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_INVALID");
-      }
-      const backlinkControlPath = resolveLinuxGitControlTarget(
-        readFileSync(backlinkPath, "utf8").trim(),
-      );
-      if (backlinkControlPath !== realpathSync(controlPath)) {
-        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_MISMATCH");
-      }
-      repositoryArguments = [`--git-dir=${gitDirectory}`, `--work-tree=${repositoryRoot}`];
-    }
+  const pinnedGit = observePinnedExactSourceGit();
+  const repositoryArguments = exactSourceGitRepositoryArguments(repositoryRoot);
+  const workTreeArgument = repositoryArguments.find((value) => value.startsWith("--work-tree="));
+  const canonicalWorkTree = workTreeArgument?.slice("--work-tree=".length);
+  if (!canonicalWorkTree || !isAbsolute(canonicalWorkTree)
+    || normalizedRealPath(pinnedGit.trustedCwd) === normalizedRealPath(canonicalWorkTree)
+    || isWithin(canonicalWorkTree, pinnedGit.trustedCwd)) {
+    throw new Error("IAT_B3_COMBINED_LAW_PINNED_GIT_CWD_OR_WORKTREE_INVALID");
   }
-  return executeGit("git", [
+  const result = executeGit(pinnedGit.executablePath, [
     "--no-replace-objects",
+    "--no-optional-locks",
+    "--no-pager",
+    ...EXACT_SOURCE_GIT_PROCESS_CONFIG,
+    "-c", `core.worktree=${canonicalWorkTree}`,
+    "-c", "core.bare=false",
+    "-c", "extensions.worktreeConfig=false",
+    "-c", `core.excludesFile=${NULL_GIT_CONFIG_PATH}`,
+    "-c", `core.attributesFile=${NULL_GIT_CONFIG_PATH}`,
     ...repositoryArguments,
     ...arguments_,
   ], {
     ...options,
-    env: createExactSourceGitEnvironment(process.env),
+    // Never let Windows or a hostile PATH resolve a repository-local git.exe,
+    // cmd, bat, or shim. Explicit --git-dir/--work-tree retains full-root
+    // semantics while the process launches from the pinned Git installation.
+    cwd: pinnedGit.trustedCwd,
+    env: pinnedGit.environment,
   });
+  assertPinnedExactSourceGitFileStable(pinnedGit.executable, "EXECUTABLE");
+  assertPinnedExactSourceGitFileStable(pinnedGit.implementation, "IMPLEMENTATION");
+  const finalRepositoryArguments = exactSourceGitRepositoryArguments(repositoryRoot);
+  if (finalRepositoryArguments.join("\0") !== repositoryArguments.join("\0")) {
+    throw new Error("IAT_B3_COMBINED_LAW_GIT_CONTROL_CHANGED_DURING_COMMAND_HOLD");
+  }
+  return result;
 }
 
 export function createExactSourceBuildRoot({ prefix = BUILD_ROOT_PREFIX } = {}) {
@@ -1383,6 +1880,9 @@ export function removeExactSourceBuildRoot(buildRoot) {
   }
   restoreDirectoryRemovalPermissions(realBuildRoot, realBuildRoot);
   rmSync(realBuildRoot, { recursive: true, force: true });
+  for (const sourceRoot of ACTIVE_MATERIALIZED_SOURCE_ROOTS.keys()) {
+    if (isWithin(realBuildRoot, sourceRoot)) ACTIVE_MATERIALIZED_SOURCE_ROOTS.delete(sourceRoot);
+  }
   ACTIVE_BUILD_ROOTS.delete(realBuildRoot);
 }
 
@@ -1543,14 +2043,29 @@ function readExactGitBlobs(repositoryRoot, descriptors) {
   return parseExactGitBlobBatchResponse({ descriptors, response });
 }
 
-function isCanonicalLfsPointer(bytes) {
+export function parseCanonicalLfsPointer(bytes) {
+  if (!Buffer.isBuffer(bytes)) {
+    throw new Error("IAT_B3_COMBINED_LAW_LFS_POINTER_BYTES_REQUIRED");
+  }
   const prefix = Buffer.from("version https://git-lfs.github.com/spec/v1\n", "utf8");
-  if (!bytes.subarray(0, prefix.length).equals(prefix)) return false;
+  if (!bytes.subarray(0, prefix.length).equals(prefix)) return null;
   const text = decodeExactUtf8(bytes, "IAT_B3_COMBINED_LAW_LFS_POINTER");
-  if (!/^version https:\/\/git-lfs\.github\.com\/spec\/v1\noid sha256:[0-9a-f]{64}\nsize (?:0|[1-9][0-9]*)\n?$/u.test(text)) {
+  const match = /^version https:\/\/git-lfs\.github\.com\/spec\/v1\noid sha256:(?<oidSha256>[0-9a-f]{64})\nsize (?<byteLength>0|[1-9][0-9]*)\n?$/u.exec(text);
+  if (!match?.groups) {
     throw new Error("IAT_B3_COMBINED_LAW_LFS_POINTER_NONCANONICAL_HOLD");
   }
-  return true;
+  const byteLength = Number(match.groups.byteLength);
+  if (!Number.isSafeInteger(byteLength) || byteLength < 0) {
+    throw new Error("IAT_B3_COMBINED_LAW_LFS_POINTER_SIZE_INVALID_HOLD");
+  }
+  return Object.freeze({
+    oidSha256: match.groups.oidSha256,
+    byteLength,
+  });
+}
+
+function isCanonicalLfsPointer(bytes) {
+  return parseCanonicalLfsPointer(bytes) !== null;
 }
 
 function exactSourceEntryFromFile(file) {
@@ -1694,6 +2209,7 @@ export function materializeExactSourceSnapshot({
     entries,
   });
   MATERIALIZED_SOURCE_SNAPSHOTS.add(snapshot);
+  ACTIVE_MATERIALIZED_SOURCE_ROOTS.set(snapshotRoot, snapshot);
   observeMaterializedSourceSnapshot(snapshot);
   return snapshot;
 }
@@ -1804,17 +2320,914 @@ function readExactMaterializedPacket({ snapshot, relativePath, expectedSha256, l
   return committedBytes;
 }
 
+function parseExactNulPathListing(listingBytes, label) {
+  if (!Buffer.isBuffer(listingBytes)) {
+    throw new Error(`IAT_B3_COMBINED_LAW_${label}_LISTING_REQUIRED`);
+  }
+  if (listingBytes.length === 0) return Object.freeze([]);
+  const paths = [];
+  const seen = new Set();
+  let cursor = 0;
+  while (cursor < listingBytes.length) {
+    const end = listingBytes.indexOf(0, cursor);
+    if (end < 0 || end === cursor) {
+      throw new Error(`IAT_B3_COMBINED_LAW_${label}_LISTING_MALFORMED`);
+    }
+    const path = assertCanonicalGitPath(decodeExactUtf8(
+      listingBytes.subarray(cursor, end),
+      `IAT_B3_COMBINED_LAW_${label}_PATH`,
+    ));
+    if (seen.has(path)) {
+      throw new Error(`IAT_B3_COMBINED_LAW_${label}_DUPLICATE_PATH`);
+    }
+    seen.add(path);
+    paths.push(path);
+    cursor = end + 1;
+  }
+  return Object.freeze(paths);
+}
+
+export function parseExactGitIndexListing(listingBytes) {
+  if (!Buffer.isBuffer(listingBytes) || listingBytes.length === 0) {
+    throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_LISTING_REQUIRED");
+  }
+  const descriptors = [];
+  const seen = new Set();
+  let cursor = 0;
+  while (cursor < listingBytes.length) {
+    const end = listingBytes.indexOf(0, cursor);
+    if (end < 0 || end === cursor) {
+      throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_LISTING_MALFORMED");
+    }
+    const record = listingBytes.subarray(cursor, end);
+    cursor = end + 1;
+    const separator = record.indexOf(9);
+    if (separator <= 0 || separator === record.length - 1) {
+      throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_LISTING_MALFORMED");
+    }
+    const metadata = decodeExactUtf8(
+      record.subarray(0, separator),
+      "IAT_B3_COMBINED_LAW_GIT_INDEX_METADATA",
+    );
+    const match = /^(?<gitMode>[0-7]{6}) (?<gitObjectSha1>[0-9a-f]{40}) (?<stage>[0-3])$/u.exec(metadata);
+    if (!match?.groups || match.groups.stage !== "0") {
+      throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_ENTRY_INVALID_HOLD");
+    }
+    const path = assertCanonicalGitPath(decodeExactUtf8(
+      record.subarray(separator + 1),
+      "IAT_B3_COMBINED_LAW_GIT_INDEX_PATH",
+    ));
+    if (seen.has(path)) {
+      throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_DUPLICATE_PATH_HOLD");
+    }
+    seen.add(path);
+    descriptors.push(Object.freeze({
+      path,
+      gitMode: match.groups.gitMode,
+      gitObjectSha1: match.groups.gitObjectSha1,
+    }));
+  }
+  return Object.freeze(descriptors);
+}
+
+function assertExactIndexMatchesHead({ treeDescriptors, indexDescriptors } = {}) {
+  if (!Array.isArray(treeDescriptors)
+    || !Array.isArray(indexDescriptors)
+    || treeDescriptors.length !== indexDescriptors.length) {
+    throw new Error("IAT_B3_COMBINED_LAW_INDEX_HEAD_TREE_MISMATCH_HOLD");
+  }
+  for (let index = 0; index < treeDescriptors.length; index += 1) {
+    const tree = treeDescriptors[index];
+    const cached = indexDescriptors[index];
+    if (tree.path !== cached.path
+      || tree.gitMode !== cached.gitMode
+      || tree.gitObjectSha1 !== cached.gitObjectSha1) {
+      throw new Error("IAT_B3_COMBINED_LAW_INDEX_HEAD_TREE_MISMATCH_HOLD");
+    }
+  }
+}
+
+function parseExactIndexFlags(listingBytes, expectedPaths) {
+  if (!Buffer.isBuffer(listingBytes) || !Array.isArray(expectedPaths)) {
+    throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_FLAGS_REQUIRED");
+  }
+  const records = [];
+  let cursor = 0;
+  while (cursor < listingBytes.length) {
+    const end = listingBytes.indexOf(0, cursor);
+    if (end < 0 || end - cursor < 3) {
+      throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_FLAGS_MALFORMED");
+    }
+    const prefix = decodeExactUtf8(
+      listingBytes.subarray(cursor, cursor + 2),
+      "IAT_B3_COMBINED_LAW_GIT_INDEX_FLAG",
+    );
+    const path = assertCanonicalGitPath(decodeExactUtf8(
+      listingBytes.subarray(cursor + 2, end),
+      "IAT_B3_COMBINED_LAW_GIT_INDEX_FLAG_PATH",
+    ));
+    if (prefix !== "H ") {
+      throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_NONSTANDARD_FLAG_HOLD");
+    }
+    records.push(path);
+    cursor = end + 1;
+  }
+  if (records.length !== expectedPaths.length
+    || records.some((path, index) => path !== expectedPaths[index])) {
+    throw new Error("IAT_B3_COMBINED_LAW_GIT_INDEX_FLAGS_PATH_MISMATCH_HOLD");
+  }
+  return Object.freeze(records);
+}
+
+function normalizedRealPath(path) {
+  const normalized = resolve(path);
+  return process.platform === "win32" ? normalized.toLowerCase() : normalized;
+}
+
+function exactWorktreeStat(path, label) {
+  try {
+    return lstatSync(path, { bigint: true });
+  } catch {
+    throw new Error(`IAT_B3_COMBINED_LAW_WORKTREE_${label}_REQUIRED_HOLD`);
+  }
+}
+
+function statFingerprint(stat) {
+  return [
+    stat.dev,
+    stat.ino,
+    stat.mode,
+    stat.nlink,
+    stat.size,
+    stat.mtimeNs,
+    stat.ctimeNs,
+  ].join(":");
+}
+
+function assertExactWorktreeDirectory({ absolutePath, observedDirectories, label }) {
+  if (observedDirectories.has(absolutePath)) return;
+  const stat = exactWorktreeStat(absolutePath, label);
+  if (!stat.isDirectory() || stat.isSymbolicLink()) {
+    throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_DIRECTORY_REPARSE_OR_TYPE_DRIFT_HOLD");
+  }
+  observedDirectories.set(absolutePath, statFingerprint(stat));
+}
+
+function assertExactWorktreeDirectorySequence({ repositoryRoot, path, observedDirectories }) {
+  const parts = path.split("/");
+  let current = repositoryRoot;
+  assertExactWorktreeDirectory({
+    absolutePath: current,
+    observedDirectories,
+    label: "ROOT_DIRECTORY",
+  });
+  for (let index = 0; index < parts.length - 1; index += 1) {
+    current = join(current, parts[index]);
+    assertExactWorktreeDirectory({
+      absolutePath: current,
+      observedDirectories,
+      label: "PARENT_DIRECTORY",
+    });
+  }
+}
+
+function assertObservedDirectoriesStable(observedDirectories) {
+  for (const [absolutePath, fingerprint] of observedDirectories) {
+    const stat = exactWorktreeStat(absolutePath, "DIRECTORY_REVALIDATION");
+    if (!stat.isDirectory()
+      || stat.isSymbolicLink()
+      || statFingerprint(stat) !== fingerprint) {
+      throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_DIRECTORY_CHANGED_DURING_OBSERVATION_HOLD");
+    }
+  }
+}
+
+function assertTrackedWorktreeFileStat(stat, gitMode, enforcePosixExecuteBits) {
+  if (!stat.isFile() || stat.isSymbolicLink()) {
+    throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_TRACKED_FILE_REPARSE_OR_TYPE_DRIFT_HOLD");
+  }
+  if (stat.nlink !== 1n) {
+    throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_TRACKED_FILE_HARDLINK_HOLD");
+  }
+  if (enforcePosixExecuteBits) {
+    const executable = (stat.mode & 0o111n) !== 0n;
+    if (executable !== (gitMode === "100755")) {
+      throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_TRACKED_FILE_EXECUTE_MODE_DRIFT_HOLD");
+    }
+  }
+}
+
+function assertObservedTrackedWorktreeStable({ observedDirectories, observedFiles }) {
+  for (const [absolutePath, observation] of observedFiles) {
+    const stat = exactWorktreeStat(absolutePath, "TRACKED_FILE_FINAL_REVALIDATION");
+    assertTrackedWorktreeFileStat(
+      stat,
+      observation.gitMode,
+      observation.enforcePosixExecuteBits,
+    );
+    if (statFingerprint(stat) !== observation.fingerprint) {
+      throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_FILE_CHANGED_DURING_OBSERVATION_HOLD");
+    }
+  }
+  assertObservedDirectoriesStable(observedDirectories);
+}
+
+function observeExactTrackedWorktree({ repositoryRoot, files }) {
+  const canonicalRoot = realpathSync(repositoryRoot);
+  if (normalizedRealPath(canonicalRoot) !== normalizedRealPath(repositoryRoot)) {
+    throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_ROOT_REPARSE_DRIFT_HOLD");
+  }
+  const worktreeFileSystem = statfsSync(canonicalRoot, { bigint: true });
+  const enforcePosixExecuteBits = process.platform !== "win32"
+    && worktreeFileSystem.type !== WSL_V9FS_SUPER_MAGIC;
+  const observedDirectories = new Map();
+  const observedFiles = new Map();
+  const dirty = [];
+  for (const file of files) {
+    assertExactWorktreeDirectorySequence({
+      repositoryRoot: canonicalRoot,
+      path: file.path,
+      observedDirectories,
+    });
+    const absolutePath = join(canonicalRoot, ...file.path.split("/"));
+    const before = exactWorktreeStat(absolutePath, "TRACKED_FILE");
+    assertTrackedWorktreeFileStat(before, file.gitMode, enforcePosixExecuteBits);
+    const bytes = readFileSync(absolutePath);
+    const after = exactWorktreeStat(absolutePath, "TRACKED_FILE_REVALIDATION");
+    assertTrackedWorktreeFileStat(after, file.gitMode, enforcePosixExecuteBits);
+    if (statFingerprint(before) !== statFingerprint(after)
+      || BigInt(bytes.length) !== after.size) {
+      throw new Error("IAT_B3_COMBINED_LAW_WORKTREE_FILE_CHANGED_DURING_OBSERVATION_HOLD");
+    }
+    observedFiles.set(absolutePath, Object.freeze({
+      fingerprint: statFingerprint(after),
+      gitMode: file.gitMode,
+      enforcePosixExecuteBits,
+    }));
+    const pointer = parseCanonicalLfsPointer(file.bytes);
+    const matches = pointer === null
+      ? bytes.equals(file.bytes)
+      : bytes.equals(file.bytes)
+        || (bytes.length === pointer.byteLength && sha256(bytes) === pointer.oidSha256);
+    if (!matches) dirty.push(` M ${file.path}\0`);
+  }
+  return Object.freeze({
+    observedDirectories,
+    observedFiles,
+    statusPorcelain: dirty.join(""),
+  });
+}
+
 export function observeExactSource(repositoryRoot) {
   const headSha = executeExactSourceGit(repositoryRoot, ["rev-parse", "HEAD"]).stdout.trim();
   const treeSha = executeExactSourceGit(repositoryRoot, ["rev-parse", "HEAD^{tree}"])
     .stdout.trim();
-  const statusPorcelain = executeExactSourceGit(repositoryRoot, [
-    "status",
-    "--porcelain=v1",
+  assertHex(headSha, HEX_SHA1, "IAT_B3_COMBINED_LAW_OBSERVED_HEAD");
+  assertHex(treeSha, HEX_SHA1, "IAT_B3_COMBINED_LAW_OBSERVED_TREE");
+  const treeListing = executeExactSourceGit(repositoryRoot, [
+    "ls-tree",
+    "-r",
     "-z",
-    "--untracked-files=all",
-  ]).stdout;
+    "--full-tree",
+    treeSha,
+  ], { binary: true });
+  const treeDescriptors = parseExactGitTreeListing(treeListing);
+  const indexListing = executeExactSourceGit(repositoryRoot, [
+    "ls-files",
+    "--stage",
+    "-z",
+    "--full-name",
+  ], { binary: true });
+  const indexDescriptors = parseExactGitIndexListing(indexListing);
+  assertExactIndexMatchesHead({ treeDescriptors, indexDescriptors });
+  const indexFlags = executeExactSourceGit(repositoryRoot, [
+    "ls-files",
+    "-v",
+    "-z",
+    "--full-name",
+  ], { binary: true });
+  parseExactIndexFlags(indexFlags, treeDescriptors.map(({ path }) => path));
+  const files = readExactGitBlobs(repositoryRoot, treeDescriptors);
+  const trackedObservation = observeExactTrackedWorktree({ repositoryRoot, files });
+  const untrackedListing = executeExactSourceGit(repositoryRoot, [
+    "ls-files",
+    "--others",
+    "--exclude-per-directory=.gitignore",
+    "-z",
+    "--full-name",
+  ], { binary: true });
+  const untracked = parseExactNulPathListing(untrackedListing, "UNTRACKED");
+  const statusPorcelain = `${trackedObservation.statusPorcelain}${untracked.map((path) => `?? ${path}\0`).join("")}`;
+
+  const finalHeadSha = executeExactSourceGit(repositoryRoot, ["rev-parse", "HEAD"]).stdout.trim();
+  const finalTreeSha = executeExactSourceGit(repositoryRoot, ["rev-parse", "HEAD^{tree}"])
+    .stdout.trim();
+  const finalIndexListing = executeExactSourceGit(repositoryRoot, [
+    "ls-files",
+    "--stage",
+    "-z",
+    "--full-name",
+  ], { binary: true });
+  const finalIndexFlags = executeExactSourceGit(repositoryRoot, [
+    "ls-files",
+    "-v",
+    "-z",
+    "--full-name",
+  ], { binary: true });
+  const finalUntrackedListing = executeExactSourceGit(repositoryRoot, [
+    "ls-files",
+    "--others",
+    "--exclude-per-directory=.gitignore",
+    "-z",
+    "--full-name",
+  ], { binary: true });
+  if (finalHeadSha !== headSha
+    || finalTreeSha !== treeSha
+    || !finalIndexListing.equals(indexListing)
+    || !finalIndexFlags.equals(indexFlags)
+    || !finalUntrackedListing.equals(untrackedListing)) {
+    throw new Error("IAT_B3_COMBINED_LAW_SOURCE_CHANGED_DURING_OBSERVATION_HOLD");
+  }
+  assertObservedTrackedWorktreeStable(trackedObservation);
   return Object.freeze({ headSha, treeSha, statusPorcelain });
+}
+
+function observePinnedDockerExecutable() {
+  const policy = PINNED_DOCKER_HOST_RUNTIME;
+  if (process.platform !== policy.platform || process.arch !== policy.architecture) {
+    throw new Error("IAT_B3_PINNED_DOCKER_HOST_PLATFORM_HOLD");
+  }
+  const absolutePath = resolve(policy.executablePath);
+  let before;
+  try {
+    before = lstatSync(absolutePath, { bigint: true });
+  } catch {
+    throw new Error("IAT_B3_PINNED_DOCKER_EXECUTABLE_REQUIRED_HOLD");
+  }
+  if (!before.isFile() || before.isSymbolicLink()
+    || before.nlink !== BigInt(policy.executableLinkCount)
+    || before.size !== BigInt(policy.executableByteLength)
+    || normalizedRealPath(realpathSync(absolutePath)) !== normalizedRealPath(absolutePath)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_EXECUTABLE_BOUNDARY_HOLD");
+  }
+  const descriptor = openSync(
+    absolutePath,
+    fsConstants.O_RDONLY | (fsConstants.O_NOFOLLOW ?? 0),
+  );
+  try {
+    const opened = fstatSync(descriptor, { bigint: true });
+    const bytes = readFileSync(descriptor);
+    const afterDescriptor = fstatSync(descriptor, { bigint: true });
+    const afterPath = lstatSync(absolutePath, { bigint: true });
+    if (statFingerprint(before) !== statFingerprint(opened)
+      || statFingerprint(opened) !== statFingerprint(afterDescriptor)
+      || statFingerprint(opened) !== statFingerprint(afterPath)
+      || bytes.length !== policy.executableByteLength
+      || sha256(bytes) !== policy.executableSha256) {
+      throw new Error("IAT_B3_PINNED_DOCKER_EXECUTABLE_BYTES_DRIFT_HOLD");
+    }
+    const trustedCwd = realpathSync(dirname(absolutePath));
+    if (normalizedRealPath(trustedCwd) !== normalizedRealPath(dirname(absolutePath))) {
+      throw new Error("IAT_B3_PINNED_DOCKER_TRUSTED_CWD_REPARSE_HOLD");
+    }
+    return Object.freeze({
+      absolutePath,
+      trustedCwd,
+      fingerprint: statFingerprint(afterPath),
+    });
+  } finally {
+    closeSync(descriptor);
+  }
+}
+
+export function observePinnedDockerHostExecutableBoundary() {
+  const observation = observePinnedDockerExecutable();
+  assertPinnedDockerExecutableStable(observation);
+  return Object.freeze({
+    executablePath: observation.absolutePath,
+    executableSha256: PINNED_DOCKER_HOST_RUNTIME.executableSha256,
+    executableByteLength: PINNED_DOCKER_HOST_RUNTIME.executableByteLength,
+  });
+}
+
+function assertPinnedDockerExecutableStable(observation) {
+  const stat = lstatSync(observation.absolutePath, { bigint: true });
+  if (!stat.isFile() || stat.isSymbolicLink()
+    || statFingerprint(stat) !== observation.fingerprint
+    || normalizedRealPath(realpathSync(observation.absolutePath))
+      !== normalizedRealPath(observation.absolutePath)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_EXECUTABLE_CHANGED_DURING_COMMAND_HOLD");
+  }
+}
+
+function observePinnedDockerSocket() {
+  const policy = PINNED_DOCKER_HOST_RUNTIME;
+  let stat;
+  let canonical;
+  try {
+    stat = lstatSync(policy.socketPath, { bigint: true });
+    canonical = realpathSync(policy.socketPath);
+  } catch {
+    throw new Error("IAT_B3_PINNED_DOCKER_SOCKET_REQUIRED_HOLD");
+  }
+  if (!stat.isSocket() || stat.isSymbolicLink()
+    || stat.nlink !== BigInt(policy.socketLinkCount)
+    || stat.uid !== BigInt(policy.socketUid)
+    || stat.gid !== BigInt(policy.socketGid)
+    || (stat.mode & 0o777n) !== BigInt(policy.socketMode)
+    || normalizedRealPath(canonical) !== normalizedRealPath(policy.canonicalSocketPath)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_SOCKET_BOUNDARY_HOLD");
+  }
+  return Object.freeze({ path: policy.socketPath, fingerprint: statFingerprint(stat) });
+}
+
+function assertPinnedDockerSocketStable(observation) {
+  const current = observePinnedDockerSocket();
+  if (current.fingerprint !== observation.fingerprint) {
+    throw new Error("IAT_B3_PINNED_DOCKER_SOCKET_CHANGED_DURING_COMMAND_HOLD");
+  }
+}
+
+function createPinnedDockerConfigRoot() {
+  const policy = PINNED_DOCKER_HOST_RUNTIME;
+  const temporaryRoot = realpathSync(policy.temporaryRoot);
+  const temporaryRootStat = lstatSync(temporaryRoot, { bigint: true });
+  if (!temporaryRootStat.isDirectory() || temporaryRootStat.isSymbolicLink()
+    || normalizedRealPath(temporaryRoot) !== normalizedRealPath(policy.temporaryRoot)
+    || temporaryRootStat.uid !== BigInt(policy.temporaryRootUid)
+    || temporaryRootStat.gid !== BigInt(policy.temporaryRootGid)
+    || (temporaryRootStat.mode & 0o7777n) !== BigInt(policy.temporaryRootMode)
+    || isWithin(realpathSync(REPOSITORY_ROOT), temporaryRoot)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_TEMPORARY_ROOT_INVALID");
+  }
+  const root = mkdtempSync(join(temporaryRoot, "iat-b3-docker-cli-config-"));
+  const stat = lstatSync(root, { bigint: true });
+  if (!stat.isDirectory() || stat.isSymbolicLink()
+    || normalizedRealPath(realpathSync(root)) !== normalizedRealPath(root)
+    || dirname(root) !== temporaryRoot
+    || !/^iat-b3-docker-cli-config-[A-Za-z0-9]+$/u.test(basename(root))
+    || readdirSync(root).length !== 0) {
+    throw new Error("IAT_B3_PINNED_DOCKER_CONFIG_ROOT_INVALID");
+  }
+  return root;
+}
+
+function removePinnedDockerConfigRoot(root) {
+  const temporaryRoot = realpathSync(PINNED_DOCKER_HOST_RUNTIME.temporaryRoot);
+  const normalized = resolve(root);
+  let stat;
+  try {
+    stat = lstatSync(normalized, { bigint: true });
+  } catch {
+    return;
+  }
+  if (!stat.isDirectory() || stat.isSymbolicLink()
+    || dirname(normalized) !== temporaryRoot
+    || !/^iat-b3-docker-cli-config-[A-Za-z0-9]+$/u.test(basename(normalized))
+    || normalizedRealPath(realpathSync(normalized)) !== normalizedRealPath(normalized)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_CONFIG_ROOT_REMOVAL_REFUSED");
+  }
+  rmSync(normalized, { recursive: true, force: false });
+}
+
+export function createPinnedDockerEnvironment({
+  configRoot,
+  environment = {},
+} = {}) {
+  if (process.platform !== "linux" || process.arch !== "x64"
+    || typeof configRoot !== "string" || !isAbsolute(configRoot)
+    || !environment || typeof environment !== "object" || Array.isArray(environment)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_ENVIRONMENT_INPUT_INVALID");
+  }
+  const canonicalConfigRoot = realpathSync(configRoot);
+  const configStat = lstatSync(canonicalConfigRoot, { bigint: true });
+  if (!configStat.isDirectory() || configStat.isSymbolicLink()
+    || normalizedRealPath(canonicalConfigRoot) !== normalizedRealPath(configRoot)
+    || readdirSync(canonicalConfigRoot).length !== 0) {
+    throw new Error("IAT_B3_PINNED_DOCKER_CONFIG_ROOT_INVALID");
+  }
+  const selected = {};
+  for (const name of PINNED_DOCKER_ALLOWED_ENVIRONMENT) {
+    if (environment[name] === undefined) continue;
+    const value = String(environment[name]);
+    if (value.length === 0 || /[\r\n\0]/u.test(value)) {
+      throw new Error("IAT_B3_PINNED_DOCKER_ENVIRONMENT_VALUE_INVALID");
+    }
+    selected[name] = value;
+  }
+  const path = PINNED_DOCKER_HOST_RUNTIME.trustedPathDirectories.join(delimiter);
+  if (path.split(delimiter).some((entry) => entry.length === 0 || entry === "." || !isAbsolute(entry))) {
+    throw new Error("IAT_B3_PINNED_DOCKER_PATH_POLICY_INVALID");
+  }
+  return Object.freeze({
+    PATH: path,
+    HOME: canonicalConfigRoot,
+    DOCKER_CONFIG: canonicalConfigRoot,
+    DOCKER_CLI_HINTS: "false",
+    DOCKER_CONTENT_TRUST: "0",
+    LANG: "C.UTF-8",
+    LC_ALL: "C.UTF-8",
+    TZ: "UTC",
+    ...selected,
+  });
+}
+
+function assertPinnedDockerRuntimeValue(actual, expected, label) {
+  for (const [name, value] of Object.entries(expected)) {
+    if (actual?.[name] !== value) {
+      throw new Error(`IAT_B3_PINNED_DOCKER_${label}_DRIFT_HOLD`);
+    }
+  }
+}
+
+function spawnPinnedDockerRaw({ executable, configRoot, environment, arguments_, timeout }) {
+  return spawnSync(executable.absolutePath, [
+    `--config=${configRoot}`,
+    ...arguments_,
+  ], {
+    cwd: executable.trustedCwd,
+    env: environment,
+    encoding: "utf8",
+    timeout,
+    maxBuffer: 64 * 1024 * 1024,
+    windowsHide: true,
+  });
+}
+
+function observePinnedDockerRuntime({ executable, socket, configRoot, environment }) {
+  const version = spawnPinnedDockerRaw({
+    executable,
+    configRoot,
+    environment,
+    arguments_: ["--version"],
+    timeout: 15_000,
+  });
+  assertPinnedDockerExecutableStable(executable);
+  assertPinnedDockerSocketStable(socket);
+  if (version.error || version.status !== 0 || version.signal !== null
+    || version.stderr !== ""
+    || version.stdout.trim() !== PINNED_DOCKER_HOST_RUNTIME.clientVersionLine) {
+    throw new Error("IAT_B3_PINNED_DOCKER_CLIENT_VERSION_DRIFT_HOLD");
+  }
+  const runtime = spawnPinnedDockerRaw({
+    executable,
+    configRoot,
+    environment,
+    arguments_: [
+      `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+      "version",
+      "--format={{json .}}",
+    ],
+    timeout: 15_000,
+  });
+  assertPinnedDockerExecutableStable(executable);
+  assertPinnedDockerSocketStable(socket);
+  if (runtime.error || runtime.status !== 0 || runtime.signal !== null
+    || runtime.stderr !== "") {
+    throw new Error("IAT_B3_PINNED_DOCKER_SERVER_VERSION_OBSERVATION_HOLD");
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(runtime.stdout);
+  } catch {
+    throw new Error("IAT_B3_PINNED_DOCKER_SERVER_VERSION_JSON_INVALID");
+  }
+  assertPinnedDockerRuntimeValue(
+    parsed?.Client,
+    PINNED_DOCKER_HOST_RUNTIME.client,
+    "CLIENT_RUNTIME",
+  );
+  assertPinnedDockerRuntimeValue(
+    parsed?.Server,
+    PINNED_DOCKER_HOST_RUNTIME.server,
+    "SERVER_RUNTIME",
+  );
+  const components = parsed?.Server?.Components;
+  if (!Array.isArray(components)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_SERVER_COMPONENTS_INVALID");
+  }
+  const engine = components.find((component) => component?.Name === "Engine");
+  assertPinnedDockerRuntimeValue(engine, {
+    Name: PINNED_DOCKER_HOST_RUNTIME.engine.Name,
+    Version: PINNED_DOCKER_HOST_RUNTIME.engine.Version,
+  }, "ENGINE");
+  assertPinnedDockerRuntimeValue(
+    engine?.Details,
+    Object.fromEntries(
+      Object.entries(PINNED_DOCKER_HOST_RUNTIME.engine).filter(([name]) => !["Name", "Version"].includes(name)),
+    ),
+    "ENGINE_DETAILS",
+  );
+  for (const [name, expectedVersion] of Object.entries(
+    PINNED_DOCKER_HOST_RUNTIME.componentVersions,
+  )) {
+    if (components.find((component) => component?.Name === name)?.Version !== expectedVersion) {
+      throw new Error("IAT_B3_PINNED_DOCKER_SERVER_COMPONENT_DRIFT_HOLD");
+    }
+  }
+}
+
+function exactStringArrayEquals(actual, expected) {
+  return Array.isArray(actual)
+    && actual.length === expected.length
+    && actual.every((value, index) => value === expected[index]);
+}
+
+function pinnedEconomyBuildArguments(containerBuildRoot) {
+  return PINNED_ECONOMY_BUILD_ARGUMENT_TEMPLATE.map((argument) => {
+    if (argument === "<FRESH_OUTPUT_DIRECTORY>") return `${containerBuildRoot}/output`;
+    if (argument === "<FRESH_TARGET_DIRECTORY>") return `${containerBuildRoot}/target`;
+    return argument;
+  });
+}
+
+function parsePinnedDockerBuildMounts(arguments_, purpose) {
+  const source = /^--mount=type=bind,source=(?<path>[^,\r\n\0]+),target=\/iat-source,readonly$/u
+    .exec(arguments_[9])?.groups?.path;
+  const build = /^--mount=type=bind,source=(?<path>[^,\r\n\0]+),target=(?<target>\/iat(?:-economy)?-build\/run-[12])$/u
+    .exec(arguments_[10]);
+  if (!source || !build?.groups?.path || !build.groups.target
+    || !isAbsolute(source) || !isAbsolute(build.groups.path)
+    || (purpose === PINNED_DOCKER_COMMAND_PURPOSE.lawBuild
+      && !/^\/iat-build\/run-[12]$/u.test(build.groups.target))
+    || (purpose === PINNED_DOCKER_COMMAND_PURPOSE.economyBuild
+      && !/^\/iat-economy-build\/run-[12]$/u.test(build.groups.target))) {
+    throw new Error("IAT_B3_PINNED_DOCKER_BUILD_MOUNT_GRAMMAR_HOLD");
+  }
+  return Object.freeze({
+    sourceSnapshotRoot: source,
+    hostBuildRoot: build.groups.path,
+    containerBuildRoot: build.groups.target,
+  });
+}
+
+function assertPinnedDockerBuildMountOwnership(arguments_, purpose) {
+  if (![PINNED_DOCKER_COMMAND_PURPOSE.lawBuild,
+    PINNED_DOCKER_COMMAND_PURPOSE.economyBuild].includes(purpose)) return null;
+  const mounts = parsePinnedDockerBuildMounts(arguments_, purpose);
+  let sourceRoot;
+  let hostBuildRoot;
+  try {
+    sourceRoot = realpathSync(mounts.sourceSnapshotRoot);
+    hostBuildRoot = realpathSync(mounts.hostBuildRoot);
+  } catch {
+    throw new Error("IAT_B3_PINNED_DOCKER_BUILD_MOUNT_REQUIRED_HOLD");
+  }
+  if (normalizedRealPath(sourceRoot) !== normalizedRealPath(mounts.sourceSnapshotRoot)
+    || normalizedRealPath(hostBuildRoot) !== normalizedRealPath(mounts.hostBuildRoot)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_BUILD_MOUNT_REPARSE_HOLD");
+  }
+  const snapshot = ACTIVE_MATERIALIZED_SOURCE_ROOTS.get(sourceRoot);
+  const buildRoot = [...ACTIVE_BUILD_ROOTS.keys()].find((root) => (
+    normalizedRealPath(sourceRoot)
+      === normalizedRealPath(join(root, MATERIALIZED_SOURCE_DIRECTORY))
+    && normalizedRealPath(hostBuildRoot) === normalizedRealPath(join(
+      root,
+      basename(mounts.containerBuildRoot),
+    ))
+  ));
+  const buildStat = lstatSync(hostBuildRoot, { bigint: true });
+  if (!snapshot || !buildRoot
+    || !buildStat.isDirectory() || buildStat.isSymbolicLink()
+    || readdirSync(hostBuildRoot).length !== 0) {
+    throw new Error("IAT_B3_PINNED_DOCKER_BUILD_MOUNT_PROCESS_OWNERSHIP_HOLD");
+  }
+  observeMaterializedSourceSnapshot(snapshot);
+  const containerName = `iat-b3-${purpose === PINNED_DOCKER_COMMAND_PURPOSE.lawBuild ? "law" : "economy"}-${sha256(Buffer.from(hostBuildRoot, "utf8")).slice(0, 32)}`;
+  return Object.freeze({
+    snapshot,
+    buildRoot,
+    hostBuildRoot,
+    containerName,
+    buildDirectoryFingerprint: statFingerprint(buildStat),
+  });
+}
+
+function createPinnedDockerRuntimeArguments(arguments_, buildBoundary) {
+  if (buildBoundary === null) return Object.freeze([...arguments_]);
+  if (!/^iat-b3-(?:law|economy)-[0-9a-f]{32}$/u.test(buildBoundary.containerName)
+    || arguments_[1] !== "run") {
+    throw new Error("IAT_B3_PINNED_DOCKER_CONTAINER_NAME_INVALID");
+  }
+  return Object.freeze([
+    arguments_[0],
+    arguments_[1],
+    `--name=${buildBoundary.containerName}`,
+    ...arguments_.slice(2),
+  ]);
+}
+
+function pinnedDockerContainerAbsent({
+  executable,
+  configRoot,
+  environment,
+  socket,
+  containerName,
+}) {
+  const result = spawnPinnedDockerRaw({
+    executable,
+    configRoot,
+    environment,
+    arguments_: [
+      `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+      "container",
+      "inspect",
+      "--format={{.Id}}",
+      containerName,
+    ],
+    timeout: 15_000,
+  });
+  assertPinnedDockerExecutableStable(executable);
+  assertPinnedDockerSocketStable(socket);
+  if (result.error || result.signal !== null || result.status !== 1
+    || result.stdout !== ""
+    || !result.stderr.includes(`No such container: ${containerName}`)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_CONTAINER_ABSENCE_NOT_PROVEN_HOLD");
+  }
+}
+
+function cleanupPinnedDockerContainer({
+  executable,
+  configRoot,
+  environment,
+  socket,
+  containerName,
+}) {
+  const cleanup = spawnPinnedDockerRaw({
+    executable,
+    configRoot,
+    environment,
+    arguments_: [
+      `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+      "container",
+      "rm",
+      "--force",
+      containerName,
+    ],
+    timeout: 30_000,
+  });
+  assertPinnedDockerExecutableStable(executable);
+  assertPinnedDockerSocketStable(socket);
+  if (cleanup.error || cleanup.signal !== null
+    || ![0, 1].includes(cleanup.status)
+    || (cleanup.status === 1
+      && !cleanup.stderr.includes(`No such container: ${containerName}`))) {
+    throw new Error("IAT_B3_PINNED_DOCKER_CONTAINER_CLEANUP_HOLD");
+  }
+  pinnedDockerContainerAbsent({
+    executable,
+    configRoot,
+    environment,
+    socket,
+    containerName,
+  });
+}
+
+export function assertPinnedDockerCommandArguments(arguments_, purpose) {
+  if (!Array.isArray(arguments_)
+    || arguments_.some((value) => typeof value !== "string" || /[\r\n\0]/u.test(value))
+    || !Object.values(PINNED_DOCKER_COMMAND_PURPOSE).includes(purpose)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_ARGUMENT_BOUNDARY_HOLD");
+  }
+  const host = `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`;
+  const image = PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference;
+  const fixed = {
+    [PINNED_DOCKER_COMMAND_PURPOSE.imagePlatformInspect]: [
+      host, "image", "inspect", "--format={{.Os}}/{{.Architecture}}", image,
+    ],
+    [PINNED_DOCKER_COMMAND_PURPOSE.imageIdInspect]: [
+      host, "image", "inspect", "--format={{.Id}}", image,
+    ],
+    [PINNED_DOCKER_COMMAND_PURPOSE.toolchainRustc]: [
+      ...commonDockerRunArguments("rustc"), "--version",
+    ],
+    [PINNED_DOCKER_COMMAND_PURPOSE.toolchainCargo]: [
+      ...commonDockerRunArguments("cargo"), "--version",
+    ],
+    [PINNED_DOCKER_COMMAND_PURPOSE.toolchainCargoBuildSbf]: [
+      ...commonDockerRunArguments("cargo"), "build-sbf", "--version",
+    ],
+  };
+  if (fixed[purpose]) {
+    if (!exactStringArrayEquals(arguments_, fixed[purpose])) {
+      throw new Error("IAT_B3_PINNED_DOCKER_EXACT_COMMAND_GRAMMAR_HOLD");
+    }
+    return true;
+  }
+
+  const mounts = parsePinnedDockerBuildMounts(arguments_, purpose);
+  const identityEnvironmentNames = purpose === PINNED_DOCKER_COMMAND_PURPOSE.lawBuild
+    ? REQUIRED_IDENTITY_ENVIRONMENT_NAMES
+    : PINNED_ECONOMY_IDENTITY_ENVIRONMENT_NAMES;
+  const recipeArguments = purpose === PINNED_DOCKER_COMMAND_PURPOSE.lawBuild
+    ? materializeBuildArguments(mounts.containerBuildRoot)
+    : pinnedEconomyBuildArguments(mounts.containerBuildRoot);
+  const expected = [
+    host,
+    "run",
+    "--rm",
+    "--pull=never",
+    "--network=none",
+    "--platform=linux/amd64",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--workdir=/iat-source",
+    `--mount=type=bind,source=${mounts.sourceSnapshotRoot},target=/iat-source,readonly`,
+    `--mount=type=bind,source=${mounts.hostBuildRoot},target=${mounts.containerBuildRoot}`,
+    "--env=IAT_B3_EXACT_SOURCE_HEAD_SHA",
+    ...identityEnvironmentNames.map((name) => `--env=${name}`),
+    "--entrypoint=cargo",
+    image,
+    ...recipeArguments,
+  ];
+  if (!exactStringArrayEquals(arguments_, expected)) {
+    throw new Error("IAT_B3_PINNED_DOCKER_EXACT_BUILD_GRAMMAR_HOLD");
+  }
+  return true;
+}
+
+export function executePinnedDocker(arguments_, {
+  environment = {},
+  purpose,
+  timeout = 120_000,
+} = {}) {
+  assertPinnedDockerCommandArguments(arguments_, purpose);
+  if (!Number.isSafeInteger(timeout) || timeout < 1_000 || timeout > 30 * 60 * 1_000) {
+    throw new Error("IAT_B3_PINNED_DOCKER_TIMEOUT_INVALID");
+  }
+  const executable = observePinnedDockerExecutable();
+  const socket = observePinnedDockerSocket();
+  const buildBoundary = assertPinnedDockerBuildMountOwnership(arguments_, purpose);
+  const runtimeArguments = createPinnedDockerRuntimeArguments(arguments_, buildBoundary);
+  let configRoot = null;
+  let pinnedEnvironment = null;
+  let buildCommandStarted = false;
+  let buildContainerAbsenceProven = buildBoundary === null;
+  try {
+    configRoot = createPinnedDockerConfigRoot();
+    pinnedEnvironment = createPinnedDockerEnvironment({ configRoot, environment });
+    observePinnedDockerRuntime({ executable, socket, configRoot, environment: pinnedEnvironment });
+    if (buildBoundary !== null) {
+      pinnedDockerContainerAbsent({
+        executable,
+        configRoot,
+        environment: pinnedEnvironment,
+        socket,
+        containerName: buildBoundary.containerName,
+      });
+    }
+    const result = spawnPinnedDockerRaw({
+      executable,
+      configRoot,
+      environment: pinnedEnvironment,
+      arguments_: runtimeArguments,
+      timeout,
+    });
+    buildCommandStarted = buildBoundary !== null;
+    if (buildBoundary !== null && (result.error || result.status !== 0 || result.signal !== null)) {
+      cleanupPinnedDockerContainer({
+        executable,
+        configRoot,
+        environment: pinnedEnvironment,
+        socket,
+        containerName: buildBoundary.containerName,
+      });
+    } else if (buildBoundary !== null) {
+      pinnedDockerContainerAbsent({
+        executable,
+        configRoot,
+        environment: pinnedEnvironment,
+        socket,
+        containerName: buildBoundary.containerName,
+      });
+    }
+    if (buildBoundary !== null) buildContainerAbsenceProven = true;
+    assertPinnedDockerExecutableStable(executable);
+    assertPinnedDockerSocketStable(socket);
+    if (buildBoundary !== null) observeMaterializedSourceSnapshot(buildBoundary.snapshot);
+    observePinnedDockerRuntime({ executable, socket, configRoot, environment: pinnedEnvironment });
+    if (readdirSync(configRoot).length !== 0) {
+      throw new Error("IAT_B3_PINNED_DOCKER_CONFIG_MUTATION_HOLD");
+    }
+    if (result.error || result.status !== 0 || result.signal !== null) {
+      const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`.trim().slice(-4_096);
+      const reason = result.error instanceof Error ? result.error.message : `exit ${String(result.status)}`;
+      throw new Error(`IAT_B3_PINNED_DOCKER_COMMAND_FAILED: ${reason}${output ? `\n${output}` : ""}`);
+    }
+    return Object.freeze({ stdout: result.stdout ?? "", stderr: result.stderr ?? "" });
+  } finally {
+    if (buildBoundary !== null && buildCommandStarted && !buildContainerAbsenceProven
+      && configRoot !== null && pinnedEnvironment !== null) {
+      cleanupPinnedDockerContainer({
+        executable,
+        configRoot,
+        environment: pinnedEnvironment,
+        socket,
+        containerName: buildBoundary.containerName,
+      });
+    }
+    if (configRoot !== null) removePinnedDockerConfigRoot(configRoot);
+  }
 }
 
 function assertHostPlatform() {
@@ -1839,20 +3252,20 @@ function commonDockerRunArguments(entrypoint) {
 }
 
 function observeContainer() {
-  const platform = execute("docker", [
+  const platform = executePinnedDocker([
     `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
     "image",
     "inspect",
     "--format={{.Os}}/{{.Architecture}}",
     PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference,
-  ]).stdout.trim();
-  const localImageId = execute("docker", [
+  ], { purpose: PINNED_DOCKER_COMMAND_PURPOSE.imagePlatformInspect }).stdout.trim();
+  const localImageId = executePinnedDocker([
     `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
     "image",
     "inspect",
     "--format={{.Id}}",
     PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference,
-  ]).stdout.trim();
+  ], { purpose: PINNED_DOCKER_COMMAND_PURPOSE.imageIdInspect }).stdout.trim();
   return assertPinnedContainerObservation({
     ...PINNED_COMBINED_LAW_BUILD_CONTAINER,
     platform,
@@ -1861,19 +3274,19 @@ function observeContainer() {
 }
 
 function observeToolchain() {
-  const rustc = execute("docker", [
+  const rustc = executePinnedDocker([
     ...commonDockerRunArguments("rustc"),
     "--version",
-  ]).stdout.trim();
-  const cargo = execute("docker", [
+  ], { purpose: PINNED_DOCKER_COMMAND_PURPOSE.toolchainRustc }).stdout.trim();
+  const cargo = executePinnedDocker([
     ...commonDockerRunArguments("cargo"),
     "--version",
-  ]).stdout.trim();
-  const cargoBuildSbf = execute("docker", [
+  ], { purpose: PINNED_DOCKER_COMMAND_PURPOSE.toolchainCargo }).stdout.trim();
+  const cargoBuildSbf = executePinnedDocker([
     ...commonDockerRunArguments("cargo"),
     "build-sbf",
     "--version",
-  ]).stdout.trim();
+  ], { purpose: PINNED_DOCKER_COMMAND_PURPOSE.toolchainCargoBuildSbf }).stdout.trim();
   return assertPinnedToolchainObservation({ rustc, cargo, cargoBuildSbf });
 }
 
@@ -2122,7 +3535,7 @@ export function observeCombinedLawNativeWslBuildPreflight({
       declaredHeadSha: base.source.declaredHeadSha,
       observedHeadSha: base.source.observedHeadSha,
       observedTreeSha: base.source.observedTreeSha,
-      statusPorcelain: base.source.repositoryCleanTrackedAndUntracked ? "" : "DIRTY",
+      statusPorcelain: base.source.repositoryCleanTrackedAndNonignoredUntracked ? "" : "DIRTY",
     },
     runnerBinding: {
       executedRunnerSha256: base.tooling.executedRunnerSha256,
@@ -2211,12 +3624,13 @@ function executeFreshBuild({
     containerBuildRoot,
     identityEnvironmentNames: Object.keys(identityEnvironment),
   });
-  const result = execute("docker", arguments_, {
-    env: {
-      ...process.env,
+  const result = executePinnedDocker(arguments_, {
+    environment: {
       IAT_B3_EXACT_SOURCE_HEAD_SHA: declaredHeadSha,
       ...identityEnvironment,
     },
+    purpose: PINNED_DOCKER_COMMAND_PURPOSE.lawBuild,
+    timeout: 30 * 60 * 1_000,
   });
   const logBytes = Buffer.from(`${result.stdout}\n${result.stderr}`, "utf8");
   if (UNSAFE_COMPILER_DIAGNOSTIC.test(logBytes.toString("utf8"))) {

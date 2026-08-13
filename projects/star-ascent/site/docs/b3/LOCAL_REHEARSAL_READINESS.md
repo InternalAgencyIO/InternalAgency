@@ -53,10 +53,30 @@ post-rehearsal reserve. Build caches are not included.
 
 The policy field `testNode: 24.14.0` records the Windows test runtime; it is not
 an exact-patch execution requirement. The installed WSL Node `v24.10.0`
-satisfies the source-enforced `>=22.13.0` rule. Under WSL, the assessor resolves
-the Windows-linked worktree `.git` control file to its actual Git directory and
-then performs the same exact HEAD, clean tracked-and-untracked state, and
-committed-runner checks. It does not relax or replace any of them.
+satisfies the source-enforced `>=22.13.0` rule. On both Windows and WSL, a
+linked worktree is accepted only after its regular, one-link `.git` control
+file, non-reparse Git-directory target, and regular, one-link reciprocal
+`gitdir` backlink authenticate each other. WSL path translation is the only
+platform-specific step. The assessor then performs the same exact HEAD, clean
+tracked-and-untracked state, and committed-runner checks.
+
+The exact-source observer does not require `git-lfs` and never enables a Git
+clean/smudge/process filter. It reads every committed blob and the exact stage-0
+index directly. An ordinary tracked file must equal its committed bytes. When
+the committed blob is a canonical Git-LFS pointer, the worktree may contain
+either those exact pointer bytes or a smudged regular file whose byte length and
+SHA-256 exactly equal the pointer. Wrong or missing content, malformed pointer
+text, index or flag drift, untracked paths, symlink/reparse substitution, and
+linked-worktree control/backlink drift remain fail-closed. Git runs with lazy
+fetch, credential prompting, interactive credential managers, replacement
+objects, mutable global/system configuration, and non-file transports disabled;
+a missing promisor object is a HOLD and is never fetched. Every tracked file
+must be a one-link regular file. On a POSIX permission-bearing filesystem its
+execute bits must agree with Git mode `100644` or `100755`; Windows and WSL
+V9FS/DrvFS do not expose authoritative POSIX execute bits, so their exact
+stage-0 index-to-HEAD mode equality remains the authority. Every file's full
+stat fingerprint is retained and rechecked only after the final HEAD, tree,
+index, flags, and untracked-path observations.
 
 ## Source-derived operation contract
 
@@ -118,14 +138,14 @@ hash. `receiptSha256` in the input descriptor is the SHA-256 of the exact
 receipt **file bytes**, not the receipt record's internal canonical digest.
 
 For `LAW`, the receipt must parse and pass the existing
-`iat-b3-combined-law-exact-source-dual-sbf-build/v1` validator. The local gate
+`iat-b3-combined-law-exact-source-dual-sbf-build/v2` validator. The local gate
 then projects and cross-checks its internal receipt digest, declared HEAD,
 identity-manifest and build-environment bindings, output filename, both build
 and log hashes, and preserved artifact hash/size. A file containing arbitrary
 JSON with a matching outer hash does not pass.
 
 For `ECONOMY`, the receipt must parse and pass
-`iat-b3-economy-exact-source-dual-sbf-build/v1`. Its source closure and recipe
+`iat-b3-economy-exact-source-dual-sbf-build/v2`. Its source closure and recipe
 must prove the sole feature is `runtime-production-entrypoint`; the structural
 `sbf-preflight-entrypoint` feature is forbidden. The gate cross-checks the
 receipt's exact HEAD, four-input identity environment, both distinct build-log

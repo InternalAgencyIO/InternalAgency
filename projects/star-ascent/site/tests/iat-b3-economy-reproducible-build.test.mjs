@@ -19,6 +19,8 @@ import {
   COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA,
   COMBINED_LAW_SUBMODULE_POLICY,
   PINNED_COMBINED_LAW_BUILD_CONTAINER,
+  PINNED_DOCKER_COMMAND_PURPOSE,
+  assertPinnedDockerCommandArguments,
 } from "../scripts/run-iat-b3-combined-law-reproducible-build.mjs";
 import {
   ECONOMY_BUILD_PREFLIGHT_HOLD,
@@ -245,7 +247,7 @@ test("B02 preflight reaches READY only with every exact offline prerequisite", (
   assert.equal(validateEconomyBuildPreflight(preflight), preflight);
 
   for (const [blocker, override] of [
-    ["REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED", {
+    ["REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED", {
       sourceObservation: { headSha: HEAD, treeSha: TREE, statusPorcelain: "?? dirt\0" },
     }],
     ["EXECUTED_RUNNER_MATCHES_DECLARED_HEAD", { committedRunnerSha256: "b".repeat(64) }],
@@ -357,6 +359,13 @@ test("B02 Docker argv is exact, offline, isolated, and production-feature-only",
   assert.ok(!arguments_.includes("sbf-preflight-entrypoint"));
   assert.equal(arguments_.filter((value) => value === "--features").length, 1);
   assert.equal(arguments_.filter((value) => value.startsWith("--env=IAT_B3_PRODUCTION_")).length, 4);
+  assert.equal(
+    assertPinnedDockerCommandArguments(
+      arguments_,
+      PINNED_DOCKER_COMMAND_PURPOSE.economyBuild,
+    ),
+    true,
+  );
 });
 
 test("B02 runtime preflight is source-only HOLD and the runner has no signing/RPC surface", () => {
@@ -419,7 +428,7 @@ test("B02 observes source closure and runner only from the exact committed head"
       nodeVersion: "24.14.0",
       probeContainer: false,
     });
-    assert.equal(preflight.source.repositoryCleanTrackedAndUntracked, true);
+    assert.equal(preflight.source.repositoryCleanTrackedAndNonignoredUntracked, true);
     assert.equal(preflight.tooling.executedRunnerMatchesDeclaredHead, true);
     assert.equal(preflight.sourceClosure.ready, true);
     assert.equal(preflight.identityBinding.ready, false);
@@ -438,7 +447,7 @@ test("B02 observes source closure and runner only from the exact committed head"
       nodeVersion: "24.14.0",
       probeContainer: false,
     });
-    assert.ok(dirty.blockers.includes("REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED"));
+    assert.ok(dirty.blockers.includes("REPOSITORY_CLEAN_TRACKED_AND_NONIGNORED_UNTRACKED"));
     assert.equal(dirty.sourceClosure.ready, true);
   } finally {
     rmSync(repositoryRoot, { recursive: true, force: true });

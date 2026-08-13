@@ -58,6 +58,8 @@ jobs:
         run: node scripts/run-iat-b3-mandatory-ci-gate.mjs production-transaction-builders
       - name: Validate the production loopback driver and nonauthorizing plan
         run: node scripts/run-iat-b3-mandatory-ci-gate.mjs production-local-rehearsal
+      - name: Validate the official local-rehearsal evidence contract without execution
+        run: node scripts/run-iat-b3-mandatory-ci-gate.mjs production-official-local-rehearsal
       - name: Validate the all-feature Devnet readiness assessor without Devnet execution
         run: node scripts/run-iat-b3-mandatory-ci-gate.mjs all-feature-devnet-readiness
       - run: npx playwright install --with-deps chromium firefox webkit

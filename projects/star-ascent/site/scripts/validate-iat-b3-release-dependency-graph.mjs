@@ -40,7 +40,7 @@ const DEFAULT_MANIFEST_PATH = resolve(
 );
 const V2_PARITY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-  sha256: "114b17900867df54407bb5f4bdec5f9916596f57e8e096df1cbad595c93edca2",
+  sha256: "4c19a7f250f0caa496476bc64e669e3bbcb46cac03092b3b272fc0c8b19037ba",
 });
 const OWNER_POLICY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",

@@ -133,7 +133,7 @@ export const REQUIRED_RUNTIME_SURFACES = Object.freeze([
 ]);
 
 export const EXPECTED_SOURCE_BINDINGS = Object.freeze([
-  Object.freeze({ path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json", sha256: "114b17900867df54407bb5f4bdec5f9916596f57e8e096df1cbad595c93edca2", byteLength: 12662 }),
+  Object.freeze({ path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json", sha256: "4c19a7f250f0caa496476bc64e669e3bbcb46cac03092b3b272fc0c8b19037ba", byteLength: 12841 }),
   Object.freeze({ path: "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json", sha256: "68b22e29f555adb2f59fe5cf42e6a1bf7783a8c962195de6f7736ccd9b1ea843", byteLength: 31813 }),
   Object.freeze({ path: "projects/star-ascent/site/engagement/reward-policy.v1.json", sha256: "3af08bde5d9b2723880e000a48e78471634edac0854f09f8f4e21c84150869cd", byteLength: 10464 }),
   Object.freeze({ path: "projects/star-ascent/site/engagement/generate-epoch-manifest.mjs", sha256: "fea3502557002814755069a4788e894ed8d4c1d60acbbf9b3f9225460def263a", byteLength: 1645 }),

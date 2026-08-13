@@ -65,8 +65,8 @@ test("current reward/provider/privacy truth is structurally valid but explicitly
   assert.deepEqual(EXPECTED_SOURCE_BINDINGS.slice(0, 2), [
     {
       path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-      sha256: "114b17900867df54407bb5f4bdec5f9916596f57e8e096df1cbad595c93edca2",
-      byteLength: 12662,
+      sha256: "4c19a7f250f0caa496476bc64e669e3bbcb46cac03092b3b272fc0c8b19037ba",
+      byteLength: 12841,
     },
     {
       path: "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",

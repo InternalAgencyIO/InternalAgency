@@ -27,6 +27,9 @@ export const IAT_B3_MANDATORY_CI_GATES = Object.freeze({
     "tests/iat-b3-production-local-rehearsal-driver.test.mjs",
     "tests/iat-b3-production-local-rehearsal-plan.test.mjs",
   ]),
+  "production-official-local-rehearsal": Object.freeze([
+    "tests/iat-b3-production-official-local-rehearsal-evidence.test.mjs",
+  ]),
   "all-feature-devnet-readiness": Object.freeze([
     "tests/iat-b3-all-feature-devnet-readiness.test.mjs",
   ]),
@@ -39,7 +42,8 @@ export const IAT_B3_MANDATORY_CI_EXPECTED_TEST_COUNTS = Object.freeze({
   "local-rehearsal-readiness": 9,
   "production-transaction-builders": 11,
   "production-local-rehearsal": 29,
-  "all-feature-devnet-readiness": 12,
+  "production-official-local-rehearsal": 18,
+  "all-feature-devnet-readiness": 14,
 });
 
 const SITE_ROOT = resolve(fileURLToPath(new URL("../", import.meta.url)));

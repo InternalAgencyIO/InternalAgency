@@ -1,0 +1,39 @@
+{
+  "schema": "iat-b3-disposable-devnet-build-execution-provenance-state/v1",
+  "status": "HOLD",
+  "evidence": {
+    "transcript": null
+  },
+  "truth": {
+    "modulePrivateLiveProcessBrandObserved": false,
+    "executionProvenanceObserved": false,
+    "twoIsolatedBuildsObserved": false,
+    "recursiveKeyScanPassed": false,
+    "cleanupObserved": false,
+    "productionFinalByteEvidence": false,
+    "devnetBehavioralExecutionObserved": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  },
+  "blockers": [
+    "HERMETIC_MOUNT_CAUSALITY_UNPROVEN",
+    "EXACT_COMMITTED_CLEAN_B15_RUNNER_REQUIRED",
+    "PINNED_EXECUTABLE_MODULE_CLOSURE_NOT_OBSERVED",
+    "EXPLICIT_OFFLINE_BUILD_EXECUTION_GATE_NOT_OBSERVED",
+    "DISPOSABLE_PUBLIC_IDENTITIES_NOT_BOUND",
+    "DEVNET_GENESIS_OBSERVATION_NOT_BOUND",
+    "PINNED_NODE24_AND_GIT_CLIENT_NOT_OBSERVED",
+    "PINNED_DOCKER_CLIENT_NOT_OBSERVED",
+    "PINNED_DOCKER_SOCKET_AND_DAEMON_RUNTIME_NOT_OBSERVED",
+    "PINNED_PLATFORM_MANIFEST_NOT_OBSERVED",
+    "PINNED_RUST_1_97_1_SOLANA_3_1_10_PLATFORM_TOOLS_1_52_NOT_OBSERVED",
+    "TWO_ISOLATED_LAW_AND_ECONOMY_BUILDS_NOT_EXECUTED",
+    "RECURSIVE_KEY_MATERIAL_SCAN_NOT_EXECUTED",
+    "PROCESS_OWNED_BUILD_ROOT_CLEANUP_NOT_OBSERVED",
+    "LIVE_PROCESS_BRAND_UNAVAILABLE",
+    "DISPOSABLE_DEVNET_BEHAVIORAL_REHEARSAL_NOT_EXECUTED",
+    "PRODUCTION_FINAL_BYTE_EVIDENCE_UNAVAILABLE",
+    "MAINNET_HOLD"
+  ]
+}

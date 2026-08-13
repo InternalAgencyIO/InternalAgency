@@ -47,7 +47,7 @@ import {
 export const LOCAL_REHEARSAL_READINESS_INPUT_SCHEMA =
   "iat-b3-local-rehearsal-readiness-input/v1";
 export const LOCAL_REHEARSAL_READINESS_SCHEMA =
-  "iat-b3-local-rehearsal-readiness-assessment/v1";
+  "iat-b3-local-rehearsal-readiness-assessment/v2";
 export const LOCAL_REHEARSAL_READY = "READY";
 export const LOCAL_REHEARSAL_HOLD = "HOLD";
 
@@ -930,7 +930,7 @@ export function assessLocalRehearsalReadiness({
       declaredHeadSha: inputShapeValid ? inputPacket.declaredHeadSha : null,
       observedHeadSha: source?.headSha ?? null,
       observedTreeSha: source?.treeSha ?? null,
-      repositoryCleanTrackedAndUntracked: source?.statusPorcelain === "",
+      repositoryCleanTrackedAndNonignoredUntracked: source?.statusPorcelain === "",
       dirtyEntryCount: typeof source?.statusPorcelain === "string"
         ? source.statusPorcelain.split("\0").filter(Boolean).length
         : null,

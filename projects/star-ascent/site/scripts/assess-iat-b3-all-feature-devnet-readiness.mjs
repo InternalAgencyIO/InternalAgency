@@ -38,6 +38,16 @@ import {
   validateIatB3ProductionLocalRehearsalPreflight,
 } from "./lib/iat-b3-production-local-rehearsal-contract.mjs";
 import {
+  DISPOSABLE_DEVNET_GENESIS_HASH,
+  DISPOSABLE_DEVNET_MAINNET_STATUS,
+  DISPOSABLE_DEVNET_PREFLIGHT_SCHEMA,
+  DISPOSABLE_DEVNET_RECEIPT_SCHEMA,
+  DISPOSABLE_DEVNET_SCOPE,
+  collectDisposableDevnetCommittedSourceContext,
+  validateDisposableDevnetDualBuildPreflight,
+  validateDisposableDevnetDualBuildReceipt,
+} from "./validate-iat-b3-disposable-devnet-dual-build-evidence.mjs";
+import {
   IAT_B3_PRODUCTION_SOURCE_KEYS,
   extractIatB3ProductionTransactionMaps,
   validateIatB3ProductionTransactionMaps,
@@ -64,9 +74,9 @@ import {
 } from "./validate-iat-b3-release-dependency-graph.mjs";
 
 export const ALL_FEATURE_DEVNET_INPUT_SCHEMA =
-  "iat-b3-all-feature-devnet-readiness-input/v3";
+  "iat-b3-all-feature-devnet-readiness-input/v4";
 export const ALL_FEATURE_DEVNET_ASSESSMENT_SCHEMA =
-  "iat-b3-all-feature-devnet-readiness-assessment/v2";
+  "iat-b3-all-feature-devnet-readiness-assessment/v3";
 export const ALL_FEATURE_DEVNET_AUTHORIZATION_CONFIRMATION =
   "CONFIRMED_ALL_FEATURE_B3_PUBLIC_DEVNET_REHEARSAL";
 export const ALL_FEATURE_DEVNET_AUTHORIZATION_SCOPE =
@@ -244,20 +254,14 @@ const EXACT_LOCAL_VALIDATOR_EVIDENCE_KEYS = Object.freeze([
 ]);
 const EXACT_PUBLIC_DEVNET_BEHAVIORAL_KEYS = Object.freeze([
   "policy",
-  "artifacts",
+  "preflightPath",
+  "preflightFileSha256",
+  "receiptPath",
+  "receiptFileSha256",
   "devnetDomain",
   "disposableIdentities",
   "productionArtifactReuseForbidden",
   "finalByteEvidenceAccepted",
-]);
-const EXACT_PUBLIC_DEVNET_ARTIFACT_KEYS = Object.freeze([
-  "kind",
-  "path",
-  "sha256",
-  "byteLength",
-  "sourceHeadSha",
-  "identityBindingSha256",
-  "networkGenesisHash",
 ]);
 const EXACT_CLUSTER_POLICY_KEYS = Object.freeze([
   "network",
@@ -497,6 +501,28 @@ function observeProductionBuildSourceBindings({ exactBytes }) {
       identities: null,
       identityBindingSha256: null,
       runnerSha256,
+    });
+  }
+}
+
+function observeDisposableDevnetBuildSource({ repositoryRoot, source }) {
+  try {
+    const sourceContext = collectDisposableDevnetCommittedSourceContext({ repositoryRoot });
+    if (sourceContext.headSha !== source.headSha
+      || sourceContext.treeSha !== source.treeSha
+      || sourceContext.statusPorcelain !== source.statusPorcelain
+      || sourceContext.executedRunnerSha256 !== sourceContext.committedRunnerSha256
+      || sourceContext.genesisHash !== DISPOSABLE_DEVNET_GENESIS_HASH) {
+      throw new Error(
+        "B09 disposable-Devnet contract source does not match D03 exact source",
+      );
+    }
+    return Object.freeze({ ready: true, failure: null, sourceContext });
+  } catch (error) {
+    return Object.freeze({
+      ready: false,
+      failure: error instanceof Error ? error.message : String(error),
+      sourceContext: null,
     });
   }
 }
@@ -852,6 +878,10 @@ function collectCanonicalContext({ repositoryRoot = REPOSITORY_ROOT } = {}) {
     .map(({ id, status, blocker }) => Object.freeze({ id, status, blocker }));
   const context = Object.freeze({
     source,
+    disposableDevnetBuildSource: observeDisposableDevnetBuildSource({
+      repositoryRoot,
+      source,
+    }),
     devnetBoundary: extractCanonicalDevnetBoundary(exactText(DEVNET_DRIVER_REPOSITORY_PATH)),
     operationMaps,
     ceremonyStages,
@@ -1262,7 +1292,51 @@ function validateProductionByteEvidence(packet, context, repositoryRoot, blocker
   return Object.freeze({ ...summary, bindingSha256: canonicalSha256(summary) });
 }
 
-function validatePublicDevnetBehavioralEvidence(packet, context, cluster, repositoryRoot, blockers) {
+function disposableDevnetEvidencePaths(evidence, preflight, receipt) {
+  return Object.freeze([
+    evidence.preflightPath,
+    evidence.receiptPath,
+    preflight.identities.observation.absolutePath,
+    preflight.devnet.observation.absolutePath,
+    ...[receipt.builds.first, receipt.builds.second].flatMap((build) => [
+      build.law.artifact.absolutePath,
+      build.law.rawLog.absolutePath,
+      build.economy.artifact.absolutePath,
+      build.economy.rawLog.absolutePath,
+    ]),
+    receipt.artifacts.law.preservedArtifact.absolutePath,
+    receipt.artifacts.economy.preservedArtifact.absolutePath,
+  ]);
+}
+
+function unavailablePublicDevnetEvidence(evidence, declaredEvidenceSha256 = null) {
+  return Object.freeze({
+    policy: evidence?.policy ?? null,
+    ready: false,
+    artifacts: Object.freeze({ law: null, economy: null }),
+    declaredEvidenceSha256,
+    preflightFileSha256: null,
+    receiptFileSha256: null,
+    receiptSha256: null,
+    laneId: null,
+    evidencePaths: Object.freeze([]),
+    descriptorBytesObservedOnly: false,
+    structuralContractValidated: false,
+    exactSourceReceiptValidated: false,
+    executionProvenanceObserved: false,
+    finalByteEvidenceAccepted: false,
+    bindingSha256: declaredEvidenceSha256,
+  });
+}
+
+function validatePublicDevnetBehavioralEvidence(
+  packet,
+  context,
+  cluster,
+  repositoryRoot,
+  blockers,
+  evaluationUnixSeconds,
+) {
   const evidence = packet?.publicDevnetBehavioralEvidence;
   if (!exactKeys(evidence, EXACT_PUBLIC_DEVNET_BEHAVIORAL_KEYS)
     || evidence.policy !== ALL_FEATURE_PUBLIC_DEVNET_BEHAVIORAL_EVIDENCE_POLICY
@@ -1270,58 +1344,172 @@ function validatePublicDevnetBehavioralEvidence(packet, context, cluster, reposi
     || evidence.disposableIdentities !== true
     || evidence.productionArtifactReuseForbidden !== true
     || evidence.finalByteEvidenceAccepted !== false
-    || !exactKeys(evidence.artifacts, EXACT_ARTIFACT_SET_KEYS)) {
-    addBlocker(blockers, "PUBLIC_DEVNET_BEHAVIORAL_EVIDENCE_INVALID", "public Devnet must be disposable-identity, Devnet-domain behavioral evidence and never final-byte proof", "public-devnet-behavioral-evidence");
-    return Object.freeze({ ready: false, artifacts: Object.freeze({ law: null, economy: null }), bindingSha256: null });
+    || !HEX_SHA256.test(evidence.preflightFileSha256 ?? "")
+    || !HEX_SHA256.test(evidence.receiptFileSha256 ?? "")) {
+    addBlocker(
+      blockers,
+      "PUBLIC_DEVNET_BEHAVIORAL_EVIDENCE_INVALID",
+      "public Devnet must supply exact B09 preflight/receipt files for disposable-identity Devnet-domain behavioral evidence only",
+      "public-devnet-behavioral-evidence",
+    );
+    addBlocker(
+      blockers,
+      "DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE",
+      "the exact B09 preflight and receipt inputs are missing or malformed",
+      "public-devnet-behavioral-evidence",
+    );
+    return unavailablePublicDevnetEvidence(evidence);
   }
   const declaredEvidenceSha256 = canonicalSha256(evidence);
-  const artifacts = {};
-  for (const [name, kind] of [["law", "LAW"], ["economy", "ECONOMY"]]) {
-    const descriptor = evidence.artifacts[name];
-    try {
-      if (!exactKeys(descriptor, EXACT_PUBLIC_DEVNET_ARTIFACT_KEYS)
-        || descriptor.kind !== kind
-        || descriptor.sourceHeadSha !== context.source.headSha
-        || descriptor.identityBindingSha256 !== cluster.identityBindingSha256
-        || descriptor.networkGenesisHash !== context.devnetBoundary.genesisHash) {
-        throw new Error(`${kind} disposable Devnet descriptor is not exact`);
-      }
-      const observed = readExactExternalFile(descriptor.path, repositoryRoot, {
-        label: `${kind} disposable Devnet artifact`, maximumBytes: MAX_ARTIFACT_BYTES, requireElf: true,
-      });
-      if (descriptor.sha256 !== observed.sha256 || descriptor.byteLength !== observed.byteLength) {
-        throw new Error(`${kind} disposable Devnet artifact bytes do not match`);
-      }
-      artifacts[name] = Object.freeze({ kind, path: observed.path, sha256: observed.sha256, byteLength: observed.byteLength });
-    } catch (error) {
-      addBlocker(blockers, `PUBLIC_DEVNET_${kind}_ARTIFACT_INVALID`, error instanceof Error ? error.message : String(error), "public-devnet-behavioral-evidence");
-      artifacts[name] = null;
+  if (context.disposableDevnetBuildSource?.ready !== true
+    || context.disposableDevnetBuildSource.sourceContext === null) {
+    addBlocker(
+      blockers,
+      "DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE",
+      context.disposableDevnetBuildSource?.failure
+        ?? "the exact committed B09 validator source is unavailable",
+      "public-devnet-behavioral-evidence",
+    );
+    return unavailablePublicDevnetEvidence(evidence, declaredEvidenceSha256);
+  }
+  try {
+    const preflightFile = readExactExternalFile(evidence.preflightPath, repositoryRoot, {
+      label: "B09 disposable Devnet preflight",
+      maximumBytes: MAX_RECEIPT_BYTES,
+    });
+    const receiptFile = readExactExternalFile(evidence.receiptPath, repositoryRoot, {
+      label: "B09 disposable Devnet receipt",
+      maximumBytes: MAX_RECEIPT_BYTES,
+    });
+    if (preflightFile.path === receiptFile.path
+      || preflightFile.sha256 !== evidence.preflightFileSha256
+      || receiptFile.sha256 !== evidence.receiptFileSha256) {
+      throw new Error("B09 preflight/receipt paths or observed file hashes do not match");
     }
+    const preflight = parseB3OwnerPolicyFreezeJson(
+      preflightFile.bytes.toString("utf8"),
+      preflightFile.path,
+    );
+    const receipt = parseB3OwnerPolicyFreezeJson(
+      receiptFile.bytes.toString("utf8"),
+      receiptFile.path,
+    );
+    if (preflight.schema !== DISPOSABLE_DEVNET_PREFLIGHT_SCHEMA
+      || receipt.schema !== DISPOSABLE_DEVNET_RECEIPT_SCHEMA) {
+      throw new Error("B09 preflight or receipt schema is not the disposable-Devnet schema");
+    }
+    const b09Context = context.disposableDevnetBuildSource.sourceContext;
+    validateDisposableDevnetDualBuildPreflight(preflight, {
+      sourceContext: b09Context,
+      repositoryRoot,
+    });
+    validateDisposableDevnetDualBuildReceipt(receipt, {
+      preflight,
+      sourceContext: b09Context,
+      repositoryRoot,
+    });
+    const preflightUnixSeconds = BigInt(Math.floor(Date.parse(
+      preflight.generatedAtUtc,
+    ) / 1_000));
+    const receiptUnixSeconds = BigInt(Math.floor(Date.parse(
+      receipt.generatedAtUtc,
+    ) / 1_000));
+    if (preflightUnixSeconds > evaluationUnixSeconds
+        + ALL_FEATURE_DEVNET_MAX_FUTURE_SKEW_SECONDS
+      || evaluationUnixSeconds - preflightUnixSeconds
+        > ALL_FEATURE_DEVNET_MAX_OBSERVATION_AGE_SECONDS
+      || receiptUnixSeconds < preflightUnixSeconds
+      || receiptUnixSeconds > evaluationUnixSeconds
+        + ALL_FEATURE_DEVNET_MAX_FUTURE_SKEW_SECONDS
+      || evaluationUnixSeconds - receiptUnixSeconds
+        > ALL_FEATURE_DEVNET_MAX_OBSERVATION_AGE_SECONDS) {
+      throw new Error("B09 preflight/receipt is stale, future-dated, or out of order");
+    }
+    const clusterIdentities = packet.clusterPolicy?.identities;
+    const observedIdentities = {
+      lawProgramId: preflight.identities.lawProgramId,
+      economyProgramId: preflight.identities.economyProgramId,
+      canonicalMint: preflight.identities.canonicalMint,
+    };
+    if (cluster.ready !== true
+      || canonicalSha256(clusterIdentities) !== canonicalSha256(observedIdentities)
+      || preflight.source.declaredHeadSha !== context.source.headSha
+      || preflight.source.observedHeadSha !== context.source.headSha
+      || preflight.source.observedTreeSha !== context.source.treeSha
+      || preflight.source.executedRunnerSha256
+        !== preflight.source.committedRunnerSha256
+      || preflight.source.committedRunnerSha256 !== b09Context.committedRunnerSha256
+      || preflight.devnet.observedGenesisHash !== context.devnetBoundary.genesisHash
+      || receipt.scope !== DISPOSABLE_DEVNET_SCOPE
+      || receipt.safety.productionCandidate !== false
+      || receipt.safety.productionReceiptCompatible !== false
+      || receipt.safety.productionFinalByteEvidence !== false
+      || receipt.safety.devnetExecutionObserved !== false
+      || receipt.safety.mainnetStatus !== DISPOSABLE_DEVNET_MAINNET_STATUS) {
+      throw new Error(
+        "B09 evidence does not cross-match D03 source, cluster, Devnet, or safety boundaries",
+      );
+    }
+    const artifacts = Object.freeze(Object.fromEntries(
+      [["law", "LAW"], ["economy", "ECONOMY"]].map(([name, kind]) => [
+        name,
+        Object.freeze({
+          kind,
+          path: receipt.artifacts[name].preservedArtifact.absolutePath,
+          sha256: receipt.artifacts[name].sha256,
+          byteLength: receipt.artifacts[name].byteLength,
+        }),
+      ]),
+    ));
+    const productionHashes = new Set([
+      packet.productionByteEvidence?.artifacts?.law?.artifactSha256,
+      packet.productionByteEvidence?.artifacts?.economy?.artifactSha256,
+    ].filter((value) => typeof value === "string"));
+    const ready = false;
+    if (Object.values(artifacts).some((entry) => productionHashes.has(entry.sha256))) {
+      addBlocker(
+        blockers,
+        "PUBLIC_DEVNET_PRODUCTION_ARTIFACT_REUSE",
+        "public Devnet cannot deploy a production-identity/Mainnet-domain final artifact",
+        "public-devnet-behavioral-evidence",
+      );
+    }
+    const evidencePaths = disposableDevnetEvidencePaths(evidence, preflight, receipt);
+    if (new Set(evidencePaths).size !== evidencePaths.length) {
+      throw new Error("B09 preflight, receipt, raw logs, observations, and artifacts alias");
+    }
+    addBlocker(
+      blockers,
+      "DISPOSABLE_DEVNET_EXECUTION_PROVENANCE_UNAVAILABLE",
+      "B09 validates source/file structure and dual-build byte equality, but no non-forgeable execution-provenance observation exists",
+      "public-devnet-behavioral-evidence",
+    );
+    const summary = Object.freeze({
+      policy: evidence.policy,
+      ready,
+      artifacts,
+      declaredEvidenceSha256,
+      preflightFileSha256: preflightFile.sha256,
+      receiptFileSha256: receiptFile.sha256,
+      receiptSha256: receipt.receiptSha256,
+      laneId: receipt.laneId,
+      evidencePaths,
+      descriptorBytesObservedOnly: false,
+      structuralContractValidated: true,
+      exactSourceReceiptValidated: true,
+      executionProvenanceObserved: false,
+      finalByteEvidenceAccepted: false,
+    });
+    return Object.freeze({ ...summary, bindingSha256: declaredEvidenceSha256 });
+  } catch (error) {
+    addBlocker(
+      blockers,
+      "DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE",
+      error instanceof Error ? error.message : String(error),
+      "public-devnet-behavioral-evidence",
+    );
+    return unavailablePublicDevnetEvidence(evidence, declaredEvidenceSha256);
   }
-  const productionHashes = new Set([
-    packet.productionByteEvidence?.artifacts?.law?.artifactSha256,
-    packet.productionByteEvidence?.artifacts?.economy?.artifactSha256,
-  ].filter((value) => typeof value === "string"));
-  if (Object.values(artifacts).some((entry) => entry && productionHashes.has(entry.sha256))) {
-    addBlocker(blockers, "PUBLIC_DEVNET_PRODUCTION_ARTIFACT_REUSE", "public Devnet cannot deploy a production-identity/Mainnet-domain final artifact", "public-devnet-behavioral-evidence");
-  }
-  addBlocker(
-    blockers,
-    "DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE",
-    "no dedicated source-bound disposable-identity/Devnet-domain Docker receipt schema and validator exists; ELF descriptors alone are not evidence",
-    "public-devnet-behavioral-evidence",
-  );
-  const ready = false;
-  const summary = Object.freeze({
-    policy: evidence.policy,
-    ready,
-    artifacts: Object.freeze(artifacts),
-    declaredEvidenceSha256,
-    descriptorBytesObservedOnly: true,
-    exactSourceReceiptValidated: false,
-    finalByteEvidenceAccepted: false,
-  });
-  return Object.freeze({ ...summary, bindingSha256: declaredEvidenceSha256 });
 }
 
 function validateFunding(packet, evaluationUnixSeconds, blockers) {
@@ -1478,6 +1666,15 @@ function addCanonicalSourceBlockers(context, blockers) {
       context.productionBuildSource?.failure
         ?? "exact production identity, runner, and environment source bindings are unavailable",
       "production-byte-evidence",
+    );
+  }
+  if (context.disposableDevnetBuildSource?.ready !== true) {
+    addBlocker(
+      blockers,
+      "DISPOSABLE_DEVNET_CONTRACT_SOURCE_UNAVAILABLE",
+      context.disposableDevnetBuildSource?.failure
+        ?? "the exact committed B09 disposable-Devnet contract source is unavailable",
+      "public-devnet-behavioral-evidence",
     );
   }
   if (context.ceremonyStages?.valid === false) {
@@ -1681,19 +1878,35 @@ export function assessAllFeatureDevnetReadiness({
       cluster,
       repositoryRoot,
       blockers,
+      evaluationUnixSeconds,
     );
     const productionArtifactPaths = new Set(
       Object.values(productionByteEvidence.artifacts ?? {})
         .filter(Boolean)
         .map((entry) => entry.artifactPath),
     );
-    if (Object.values(publicDevnetBehavioralEvidence.artifacts ?? {})
+    const productionEvidencePaths = new Set([
+      ...Object.values(productionByteEvidence.artifacts ?? {})
+        .filter(Boolean)
+        .flatMap((entry) => [
+          entry.artifactPath,
+          entry.receiptPath,
+          entry.firstBuildLogPath,
+          entry.secondBuildLogPath,
+        ]),
+      packet.productionByteEvidence?.localValidator?.preflightPath,
+      packet.productionByteEvidence?.localValidator?.executionReceiptPath,
+    ].filter((value) => typeof value === "string"));
+    const artifactPathReused = Object.values(publicDevnetBehavioralEvidence.artifacts ?? {})
       .filter(Boolean)
-      .some((entry) => productionArtifactPaths.has(entry.path))) {
+      .some((entry) => productionArtifactPaths.has(entry.path));
+    const evidencePathReused = (publicDevnetBehavioralEvidence.evidencePaths ?? [])
+      .some((path) => productionEvidencePaths.has(path));
+    if (artifactPathReused || evidencePathReused) {
       addBlocker(
         blockers,
         "PUBLIC_DEVNET_PRODUCTION_ARTIFACT_PATH_REUSE",
-        "public Devnet behavioral artifacts must be separate files from exact production artifacts",
+        "public Devnet behavioral evidence must use files separate from all exact production evidence",
         "public-devnet-behavioral-evidence",
       );
       publicDevnetBehavioralEvidence = Object.freeze({
@@ -1788,6 +2001,16 @@ export function assessAllFeatureDevnetReadiness({
         adversarialDevnetAncestors: context.releaseNodes,
       }),
       productionBuildSource: context.productionBuildSource,
+      disposableDevnetBuildSource: Object.freeze({
+        ready: context.disposableDevnetBuildSource?.ready === true,
+        failure: context.disposableDevnetBuildSource?.failure ?? null,
+        runnerSha256:
+          context.disposableDevnetBuildSource?.sourceContext?.committedRunnerSha256
+          ?? null,
+        sourceClosureSha256:
+          context.disposableDevnetBuildSource?.sourceContext?.sourceClosureSha256
+          ?? null,
+      }),
     }),
     input: packetSummary,
     productionByteEvidence,

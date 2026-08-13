@@ -122,14 +122,14 @@ export const LAW_FIRST_BOOTSTRAP_SOURCE_BINDINGS = Object.freeze([
   Object.freeze({
     id: "LOCAL_REHEARSAL_ASSESSOR",
     path: "projects/star-ascent/site/scripts/assess-iat-b3-local-rehearsal-readiness.mjs",
-    sha256: "c6f018759664bfa537bf56315836c460f50dbf2fea3fff15a357f7c35cd08cee",
-    byteLength: 47486,
+    sha256: "21ff25560e667f3642cbbcd8aba20a836a6131d38d327e07d8f7757b08b28993",
+    byteLength: 47496,
   }),
   Object.freeze({
     id: "ALL_FEATURE_DEVNET_ASSESSOR",
     path: "projects/star-ascent/site/scripts/assess-iat-b3-all-feature-devnet-readiness.mjs",
-    sha256: "6f7ffc5920982cc69013ed2a4bf0413204fe23d675344129ce6cb7a9ef39f3ce",
-    byteLength: 75983,
+    sha256: "510c0e48d311061b39f2c9a0b12017acf5867c263047c39041da589176db3375",
+    byteLength: 84389,
   }),
 ]);
 

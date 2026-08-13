@@ -218,7 +218,7 @@ cargo build-sbf \
 The only permitted output file is nonempty `iat_b3_law.so`. The two outputs
 must have identical bytes, byte lengths, and SHA-256 values. The atomically
 preserved artifact is read back and bound to receipt schema
-`iat-b3-combined-law-exact-source-dual-sbf-build/v1`. The receipt binds the
+`iat-b3-combined-law-exact-source-dual-sbf-build/v2`. The receipt binds the
 declared commit and tree, exact executing-runner bytes against the runner blob
 in that commit, materialized-input digest, identity and environment digests,
 container manifest and local-image IDs, compiler versions, recipe
@@ -264,7 +264,7 @@ node scripts/run-iat-b3-economy-reproducible-build.mjs \
 ```
 
 Its receipt schema is
-`iat-b3-economy-exact-source-dual-sbf-build/v1`. It uses the same clean exact-
+`iat-b3-economy-exact-source-dual-sbf-build/v2`. It uses the same clean exact-
 HEAD Git-object materialization, committed runner binding, pinned Linux/AMD64
 container, offline toolchain, two isolated target/output directories, exact
 byte equality, atomic no-overwrite publication, and Mainnet-HOLD boundary as

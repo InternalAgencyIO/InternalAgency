@@ -18,11 +18,17 @@ The assessor deliberately separates two non-interchangeable lanes:
    claimed as Mainnet. The public network cannot satisfy this lane.
 2. **Public Devnet behavioral evidence.** This lane requires disposable program
    and mint identities plus the real Devnet domain. Production-identity/Mainnet-
-   domain artifacts are forbidden. No dedicated source-bound disposable-Devnet
-   build-receipt schema exists yet, so this lane always emits
-   `DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE`. An arbitrary ELF plus
-   self-declared hashes, source head, identities, or Genesis can never make the
-   lane ready.
+   domain artifacts are forbidden. The assessor opens and strictly parses the
+   B09 disposable-Devnet preflight and receipt, invokes both B09 validators, and
+   independently cross-matches the clean head/tree, committed/executed runner,
+   production-feature source closures, fresh identities, observed Devnet
+   Genesis, Docker-only toolchain, lane, raw logs, and ELF bytes. Only that full
+   pair can clear `DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE`.
+   However, B09 files are self-contained structural evidence and do not prove
+   that an external build or Devnet execution actually occurred. Therefore the
+   lane remains not ready with
+   `DISPOSABLE_DEVNET_EXECUTION_PROVENANCE_UNAVAILABLE`. B09 can never satisfy
+   the production final-byte or isolated-local-execution lane.
 
 ## Source-bound operation truth
 
@@ -69,7 +75,7 @@ permissive fallback. Direct calls with an injected context are test seams and
 always return `HOLD_TEST`; injected observations cannot authorize readiness.
 
 The current strict input schema is
-`iat-b3-all-feature-devnet-readiness-input/v3`, with these exact top-level
+`iat-b3-all-feature-devnet-readiness-input/v4`, with these exact top-level
 members:
 
 ```text
@@ -118,10 +124,32 @@ not accept completed final-byte evidence, so the assessor truthfully remains
 
 `clusterPolicy` pins the canonical `solana-devnet` RPC and Genesis constants,
 three distinct fresh disposable identities, a cleanup-plan digest, and an
-explicit prohibition on Mainnet identity reuse. Its paths/artifact bytes must
-not alias either production artifact. Even internally consistent public-Devnet
-artifact descriptors remain observation-only until a dedicated exact-source
-receipt runner and validator are implemented.
+explicit prohibition on Mainnet identity reuse. The exact v4
+`publicDevnetBehavioralEvidence` record contains only:
+
+```text
+policy
+preflightPath / preflightFileSha256
+receiptPath / receiptFileSha256
+devnetDomain
+disposableIdentities
+productionArtifactReuseForbidden
+finalByteEvidenceAccepted
+```
+
+Both outer files and every identity/Genesis observation, build log, isolated
+build artifact, and preserved artifact referenced by B09 must be absolute,
+external, stable, bounded, non-symlink, one-link files with exact hashes and
+lengths. The two build roots and preserved root must be distinct and fresh.
+Native builds, dirty source, uncommitted runner bytes, wrong Genesis, stale or
+cross-lane records, self-digested forgeries, checked-in/production identities,
+artifact disagreement, and any path or byte reuse with production evidence all
+fail closed. Arbitrary descriptors are no longer part of the input schema.
+Even a fully self-consistent preflight, receipt, observation set, Docker-shaped
+logs, and ELF-magic byte set can be synthesized by one process. D03 reports
+`structuralContractValidated: true` for a valid pair but keeps `ready: false`
+and `executionProvenanceObserved: false`. No non-forgeable execution-provenance
+predicate is currently defined, and the assessor does not invent or infer one.
 
 Funding requires an explicitly approved disposable Devnet payer, a balance
 observation no older than one hour, and balance at least equal to the approved
@@ -149,6 +177,9 @@ partial state is reconciled.
 The truthful result is `HOLD`. At minimum, production identities/Mainnet Law
 domain and committed Docker runners must be frozen; exact Law and Economy
 receipts/artifacts/logs must exist; an accepted isolated final-byte execution
-receipt contract and run must exist; and a dedicated exact-source disposable-
-Devnet receipt runner/schema must be implemented and exercised. Mainnet remains
+receipt contract and run must exist; and a fresh B09 disposable-Devnet
+preflight/receipt pair plus non-forgeable execution provenance must be produced
+and observed. The checked-in B09 contract/state—or even a structurally valid
+self-authored bundle—is not execution evidence. No canonical pair or accepted
+execution-provenance predicate is present in this repository. Mainnet remains
 `HOLD` in every assessment output.

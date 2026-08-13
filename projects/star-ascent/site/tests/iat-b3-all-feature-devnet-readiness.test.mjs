@@ -59,6 +59,17 @@ import {
   loadProductionIdentityAuthorityEvidenceManifest,
   validateProductionIdentityAuthorityEvidenceManifest,
 } from "../scripts/validate-iat-b3-production-identity-authority-evidence.mjs";
+import {
+  DISPOSABLE_DEVNET_GENESIS_HASH,
+  DISPOSABLE_DEVNET_GENESIS_OBSERVATION_SCHEMA,
+  DISPOSABLE_DEVNET_IDENTITY_OBSERVATION_SCHEMA,
+  DISPOSABLE_DEVNET_RPC_URL,
+  createDisposableDevnetDualBuildPreflight,
+  createDisposableDevnetDualBuildReceipt,
+  describeDisposableDevnetExternalFile,
+  disposableDevnetCanonicalSha256,
+  formatDisposableDevnetBuildLog,
+} from "../scripts/validate-iat-b3-disposable-devnet-dual-build-evidence.mjs";
 
 const SITE_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const SCRIPT_PATH = resolve(SITE_ROOT, "scripts/assess-iat-b3-all-feature-devnet-readiness.mjs");
@@ -70,6 +81,10 @@ const AUTHORITY_EVIDENCE_PATH = resolve(
 );
 const DEVNET_DRIVER_PATH = resolve(SITE_ROOT, "scripts/iat-b3-devnet-rehearsal-driver.mjs");
 const EVALUATION_UNIX_SECONDS = 2_000_000_000n;
+const B09_OBSERVED_AT = "2033-05-18T03:23:20.000Z";
+const B09_PREFLIGHT_AT = "2033-05-18T03:28:20.000Z";
+const B09_RECEIPT_AT = "2033-05-18T03:30:20.000Z";
+const B09_LANE_ID = "b09-devnet-20330518T032320Z-0123456789abcdef";
 const HEAD = "1".repeat(40);
 const TREE = "2".repeat(40);
 const HEX = (character) => character.repeat(64);
@@ -145,6 +160,28 @@ function sourceObservations() {
   }));
 }
 
+function disposableDevnetSourceContext(overrides = {}) {
+  return {
+    mode: "COMMITTED_REPOSITORY_DIRECT",
+    headSha: HEAD,
+    treeSha: TREE,
+    statusPorcelain: "",
+    runnerPath:
+      "projects/star-ascent/site/scripts/validate-iat-b3-disposable-devnet-dual-build-evidence.mjs",
+    executedRunnerSha256: HEX("b"),
+    committedRunnerSha256: HEX("b"),
+    sourceClosureFileCount: 47,
+    sourceClosureSha256: HEX("c"),
+    lawProductionFeatureClosureSha256: HEX("d"),
+    economyProductionFeatureClosureSha256: HEX("e"),
+    devnetDriverSha256: HEX("f"),
+    rpcUrl: DISPOSABLE_DEVNET_RPC_URL,
+    genesisHash: DISPOSABLE_DEVNET_GENESIS_HASH,
+    forbiddenIdentities: [TEST_FIXTURE_IDENTITIES.lawProgramId],
+    ...overrides,
+  };
+}
+
 function readyContext() {
   const identities = {
     lawProgramId: TEST_FIXTURE_IDENTITIES.lawProgramId,
@@ -215,6 +252,11 @@ function readyContext() {
       identities,
       identityBindingSha256: canonicalSha256(identities),
       runnerSha256: { law: HEX("9"), economy: HEX("a") },
+    },
+    disposableDevnetBuildSource: {
+      ready: true,
+      failure: null,
+      sourceContext: disposableDevnetSourceContext(),
     },
     toolchainPolicy: {
       hostPlatform: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.hostPlatform,
@@ -369,42 +411,182 @@ function createProductionEvidence(context, root) {
   };
 }
 
-function readyFixture() {
+function describeB09(path, maximumBytes = 16 * 1024 * 1024) {
+  return describeDisposableDevnetExternalFile({
+    absolutePath: resolve(path),
+    repositoryRoot: SITE_ROOT,
+    maximumBytes,
+  });
+}
+
+function writeB09Json(path, value) {
+  writeFileSync(path, `${JSON.stringify(value)}\n`, "utf8");
+  return describeB09(path, 16 * 1024);
+}
+
+function repinB09(value, digestKey) {
+  value[digestKey] = disposableDevnetCanonicalSha256(
+    Object.fromEntries(Object.entries(value).filter(([key]) => key !== digestKey)),
+  );
+  return value;
+}
+
+function createB09Evidence(
+  context,
+  root,
+  { lawBytes: lawBytesOverride, laneId = B09_LANE_ID } = {},
+) {
+  const sourceContext = context.disposableDevnetBuildSource.sourceContext;
+  const identityPath = join(root, "b09-identity-observation.json");
+  const genesisPath = join(root, "b09-genesis-observation.json");
+  const identityRecord = {
+    schema: DISPOSABLE_DEVNET_IDENTITY_OBSERVATION_SCHEMA,
+    laneId,
+    observedAtUtc: B09_OBSERVED_AT,
+    sourceHeadSha: sourceContext.headSha,
+    runnerSha256: sourceContext.committedRunnerSha256,
+    generationMode: "FRESH_ISOLATED_OFFLINE_KEYGEN",
+    ...COMBINED_HOOK_HOST_TEST_IDENTITIES,
+    publicKeysOnly: true,
+    privateKeyMaterialIncluded: false,
+  };
+  const genesisRecord = {
+    schema: DISPOSABLE_DEVNET_GENESIS_OBSERVATION_SCHEMA,
+    laneId,
+    observedAtUtc: B09_OBSERVED_AT,
+    sourceHeadSha: sourceContext.headSha,
+    runnerSha256: sourceContext.committedRunnerSha256,
+    rpcUrl: DISPOSABLE_DEVNET_RPC_URL,
+    method: "getGenesisHash",
+    request: { jsonrpc: "2.0", id: 1, method: "getGenesisHash" },
+    response: { jsonrpc: "2.0", id: 1, result: DISPOSABLE_DEVNET_GENESIS_HASH },
+  };
+  const identityObservation = writeB09Json(identityPath, identityRecord);
+  const genesisObservation = writeB09Json(genesisPath, genesisRecord);
+  const preflight = createDisposableDevnetDualBuildPreflight({
+    generatedAtUtc: B09_PREFLIGHT_AT,
+    laneId,
+    sourceContext,
+    identityObservation,
+    genesisObservation,
+    container: CONTAINER,
+    toolchain: TOOLCHAIN,
+    repositoryRoot: SITE_ROOT,
+  });
+  const firstRoot = join(root, "b09-fresh-build-1");
+  const secondRoot = join(root, "b09-fresh-build-2");
+  const preservedRoot = join(root, "b09-preserved");
+  for (const directory of [firstRoot, secondRoot, preservedRoot]) mkdirSync(directory);
+  const lawBytes = lawBytesOverride ?? Buffer.concat([
+    Buffer.from([0x7f, 0x45, 0x4c, 0x46]),
+    Buffer.from("b09-law-disposable-devnet"),
+  ]);
+  const economyBytes = Buffer.concat([
+    Buffer.from([0x7f, 0x45, 0x4c, 0x46]),
+    Buffer.from("b09-economy-disposable-devnet"),
+  ]);
+  function build(ordinal, workspaceRoot) {
+    const lawArtifactPath = join(workspaceRoot, "iat_b3_law.so");
+    const economyArtifactPath = join(workspaceRoot, "iat_b3_economy.so");
+    const lawLogPath = join(workspaceRoot, "law-build.log");
+    const economyLogPath = join(workspaceRoot, "economy-build.log");
+    writeFileSync(lawArtifactPath, lawBytes);
+    writeFileSync(economyArtifactPath, economyBytes);
+    const lawArtifact = describeB09(lawArtifactPath);
+    const economyArtifact = describeB09(economyArtifactPath);
+    for (const [kind, path, artifact] of [
+      ["LAW", lawLogPath, lawArtifact],
+      ["ECONOMY", economyLogPath, economyArtifact],
+    ]) {
+      writeFileSync(path, formatDisposableDevnetBuildLog({
+        laneId: preflight.laneId,
+        preflightSha256: preflight.preflightSha256,
+        sourceHeadSha: preflight.source.declaredHeadSha,
+        sourceClosureSha256: preflight.source.sourceClosureSha256,
+        identityBindingSha256: preflight.identities.bindingSha256,
+        buildOrdinal: ordinal,
+        kind,
+        workspaceRoot,
+        backend: "DOCKER_ONLY",
+        containerExecutionReference: preflight.container.executionReference,
+        networkMode: "none",
+        pullPolicy: "never",
+        recipeSha256: preflight.recipes[kind.toLowerCase()].recipeSha256,
+        environmentSha256: preflight.recipes[kind.toLowerCase()].environmentSha256,
+        artifactSha256: artifact.sha256,
+        artifactByteLength: artifact.byteLength,
+        rawBuildOutput: `synthetic offline Docker output ${kind} ${ordinal}\n`,
+      }));
+    }
+    return {
+      ordinal,
+      workspaceRoot,
+      workspaceWasFresh: true,
+      targetDirectoryWasFresh: true,
+      outputDirectoryWasFresh: true,
+      law: { artifact: lawArtifact, rawLog: describeB09(lawLogPath) },
+      economy: { artifact: economyArtifact, rawLog: describeB09(economyLogPath) },
+    };
+  }
+  const firstBuild = build(1, firstRoot);
+  const secondBuild = build(2, secondRoot);
+  const preservedLawPath = join(preservedRoot, "iat_b3_law.so");
+  const preservedEconomyPath = join(preservedRoot, "iat_b3_economy.so");
+  writeFileSync(preservedLawPath, lawBytes);
+  writeFileSync(preservedEconomyPath, economyBytes);
+  const receipt = createDisposableDevnetDualBuildReceipt({
+    generatedAtUtc: B09_RECEIPT_AT,
+    preflight,
+    sourceContext,
+    firstBuild,
+    secondBuild,
+    preservedRoot,
+    preservedLawArtifact: describeB09(preservedLawPath),
+    preservedEconomyArtifact: describeB09(preservedEconomyPath),
+    repositoryRoot: SITE_ROOT,
+  });
+  const preflightFile = writeBound(root, "b09-preflight.json", JSON.stringify(preflight));
+  const receiptFile = writeBound(root, "b09-receipt.json", JSON.stringify(receipt));
+  return {
+    evidence: {
+      policy: ALL_FEATURE_PUBLIC_DEVNET_BEHAVIORAL_EVIDENCE_POLICY,
+      preflightPath: preflightFile.path,
+      preflightFileSha256: preflightFile.sha256,
+      receiptPath: receiptFile.path,
+      receiptFileSha256: receiptFile.sha256,
+      devnetDomain: devnetBoundary.genesisHash,
+      disposableIdentities: true,
+      productionArtifactReuseForbidden: true,
+      finalByteEvidenceAccepted: false,
+    },
+    sourceContext,
+    preflight,
+    receipt,
+    identityRecord,
+    genesisRecord,
+    files: { identityPath, genesisPath, preflightFile, receiptFile },
+  };
+}
+
+function refreshPublicBindings(fixture) {
+  const binding = canonicalSha256(fixture.packet.publicDevnetBehavioralEvidence);
+  fixture.packet.authorization.publicDevnetBehavioralEvidenceSha256 = binding;
+  fixture.packet.automatedVerification.publicDevnetBehavioralEvidenceSha256 = binding;
+}
+
+function readyFixture({ reuseProductionLawBytes = false, laneId = B09_LANE_ID } = {}) {
   const context = readyContext();
   const root = mkdtempSync(join(tmpdir(), "iat-b3-d03-"));
   temporaryRoots.push(root);
   const production = createProductionEvidence(context, root);
-  const devnetLaw = writeBound(
-    root,
-    "devnet-law.so",
-    Buffer.concat([Buffer.from([0x7f, 0x45, 0x4c, 0x46]), Buffer.from("devnet-law")]),
-  );
-  const devnetEconomy = writeBound(
-    root,
-    "devnet-economy.so",
-    Buffer.concat([Buffer.from([0x7f, 0x45, 0x4c, 0x46]), Buffer.from("devnet-economy")]),
-  );
+  const publicBuild = createB09Evidence(context, root, {
+    lawBytes: reuseProductionLawBytes
+      ? readFileSync(production.files.lawArtifact.path)
+      : undefined,
+    laneId,
+  });
   const identities = { ...COMBINED_HOOK_HOST_TEST_IDENTITIES };
-  const clusterBinding = canonicalSha256(identities);
-  const publicEvidence = {
-    policy: ALL_FEATURE_PUBLIC_DEVNET_BEHAVIORAL_EVIDENCE_POLICY,
-    artifacts: {
-      law: {
-        kind: "LAW", path: devnetLaw.path, sha256: devnetLaw.sha256,
-        byteLength: devnetLaw.byteLength, sourceHeadSha: HEAD,
-        identityBindingSha256: clusterBinding, networkGenesisHash: devnetBoundary.genesisHash,
-      },
-      economy: {
-        kind: "ECONOMY", path: devnetEconomy.path, sha256: devnetEconomy.sha256,
-        byteLength: devnetEconomy.byteLength, sourceHeadSha: HEAD,
-        identityBindingSha256: clusterBinding, networkGenesisHash: devnetBoundary.genesisHash,
-      },
-    },
-    devnetDomain: devnetBoundary.genesisHash,
-    disposableIdentities: true,
-    productionArtifactReuseForbidden: true,
-    finalByteEvidenceAccepted: false,
-  };
+  const publicEvidence = publicBuild.evidence;
   const funding = {
     mode: "EXPLICIT_DISPOSABLE_DEVNET_PAYER",
     payerPublicKey: "D8FDYUMd5PZxDenEDvE3KRERzKdU8k3rrebw173HUZLh",
@@ -470,7 +652,7 @@ function readyFixture() {
     },
     failurePolicy,
   };
-  return { context, packet, production, root };
+  return { context, packet, production, publicBuild, root };
 }
 
 function assess(fixture) {
@@ -579,25 +761,31 @@ test("native, duplicate-key, and hard-linked receipt files are categorically rej
   }
 });
 
-test("self-consistent arbitrary public-Devnet ELF descriptors never become behavioral evidence", () => {
+test("a complete synthetic B09 bundle validates structure but cannot prove execution", () => {
   const fixture = readyFixture();
   const result = assess(fixture);
+  assert.equal(result.status, "HOLD_TEST");
   assert.equal(result.publicDevnetBehavioralEvidence.artifacts.law.kind, "LAW");
   assert.equal(result.publicDevnetBehavioralEvidence.artifacts.economy.kind, "ECONOMY");
   assert.equal(result.publicDevnetBehavioralEvidence.ready, false);
-  assert.equal(result.publicDevnetBehavioralEvidence.exactSourceReceiptValidated, false);
-  assert(blockerCodes(result).has("DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE"));
+  assert.equal(result.publicDevnetBehavioralEvidence.structuralContractValidated, true);
+  assert.equal(result.publicDevnetBehavioralEvidence.exactSourceReceiptValidated, true);
+  assert.equal(result.publicDevnetBehavioralEvidence.executionProvenanceObserved, false);
+  assert.equal(result.publicDevnetBehavioralEvidence.descriptorBytesObservedOnly, false);
+  assert.equal(result.publicDevnetBehavioralEvidence.finalByteEvidenceAccepted, false);
+  assert.equal(result.input.publicDevnetBehavioralEvidenceReady, false);
+  assert.equal(result.productionByteEvidence.ready, false);
+  const codes = blockerCodes(result);
+  assert(!codes.has("DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE"));
+  assert(codes.has("DISPOSABLE_DEVNET_EXECUTION_PROVENANCE_UNAVAILABLE"));
+  assert(codes.has("PRODUCTION_LOCAL_FINAL_BYTE_EXECUTION_NOT_ACCEPTED"));
+  assert(codes.has("TEST_ONLY_CONTEXT_INJECTED"));
 });
 
 test("public Devnet cannot reuse a production final artifact by bytes or path", () => {
-  const fixture = readyFixture();
-  const productionLaw = fixture.packet.productionByteEvidence.artifacts.law;
-  fixture.packet.publicDevnetBehavioralEvidence.artifacts.law = {
-    ...fixture.packet.publicDevnetBehavioralEvidence.artifacts.law,
-    path: productionLaw.artifactPath,
-    sha256: productionLaw.artifactSha256,
-    byteLength: productionLaw.artifactByteLength,
-  };
+  const fixture = readyFixture({ reuseProductionLawBytes: true });
+  fixture.packet.productionByteEvidence.artifacts.law.artifactPath =
+    fixture.publicBuild.receipt.artifacts.law.preservedArtifact.absolutePath;
   const result = assess(fixture);
   const codes = blockerCodes(result);
   assert(codes.has("PUBLIC_DEVNET_PRODUCTION_ARTIFACT_REUSE"));
@@ -605,9 +793,91 @@ test("public Devnet cannot reuse a production final artifact by bytes or path", 
   assert.equal(result.publicDevnetBehavioralEvidence.ready, false);
 });
 
-test("legacy v2 input and injected observations cannot bypass the v3 strict evidence schema", () => {
+test("missing, forged, native, and wrong-Genesis B09 inputs fail closed", () => {
+  for (const variant of ["missing", "forged", "native", "wrong-genesis"]) {
+    const fixture = readyFixture();
+    if (variant === "missing") {
+      fixture.packet.publicDevnetBehavioralEvidence.preflightPath =
+        join(fixture.root, "missing-b09-preflight.json");
+    } else if (variant === "forged") {
+      const receipt = structuredClone(fixture.publicBuild.receipt);
+      receipt.builds.first.law.artifact.sha256 = HEX("7");
+      repinB09(receipt, "receiptSha256");
+      const bytes = Buffer.from(JSON.stringify(receipt));
+      writeFileSync(fixture.publicBuild.files.receiptFile.path, bytes);
+      fixture.packet.publicDevnetBehavioralEvidence.receiptFileSha256 = sha256(bytes);
+    } else {
+      const preflight = structuredClone(fixture.publicBuild.preflight);
+      if (variant === "native") preflight.recipes.law.backend = "NATIVE_WSL";
+      else preflight.devnet.observedGenesisHash = TEST_FIXTURE_IDENTITIES.genesisHash;
+      repinB09(preflight, "preflightSha256");
+      const bytes = Buffer.from(JSON.stringify(preflight));
+      writeFileSync(fixture.publicBuild.files.preflightFile.path, bytes);
+      fixture.packet.publicDevnetBehavioralEvidence.preflightFileSha256 = sha256(bytes);
+    }
+    refreshPublicBindings(fixture);
+    const result = assess(fixture);
+    assert.equal(result.status, "HOLD_TEST", variant);
+    assert.equal(result.publicDevnetBehavioralEvidence.ready, false, variant);
+    assert.equal(result.publicDevnetBehavioralEvidence.exactSourceReceiptValidated, false, variant);
+    assert(
+      blockerCodes(result).has("DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE"),
+      variant,
+    );
+  }
+});
+
+test("production-identity, cross-lane receipt, and dirty-source substitutions fail closed", () => {
+  {
+    const fixture = readyFixture();
+    const identityRecord = structuredClone(fixture.publicBuild.identityRecord);
+    identityRecord.lawProgramId = TEST_FIXTURE_IDENTITIES.lawProgramId;
+    const observation = writeB09Json(fixture.publicBuild.files.identityPath, identityRecord);
+    const preflight = structuredClone(fixture.publicBuild.preflight);
+    preflight.identities.lawProgramId = identityRecord.lawProgramId;
+    preflight.identities.observation = observation;
+    repinB09(preflight, "preflightSha256");
+    const bytes = Buffer.from(JSON.stringify(preflight));
+    writeFileSync(fixture.publicBuild.files.preflightFile.path, bytes);
+    fixture.packet.publicDevnetBehavioralEvidence.preflightFileSha256 = sha256(bytes);
+    fixture.packet.clusterPolicy.identities.lawProgramId = identityRecord.lawProgramId;
+    refreshPublicBindings(fixture);
+    const result = assess(fixture);
+    const codes = blockerCodes(result);
+    assert(codes.has("CLUSTER_IDENTITIES_NOT_FRESH"));
+    assert(codes.has("DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE"));
+    assert.equal(result.publicDevnetBehavioralEvidence.ready, false);
+  }
+  {
+    const fixture = readyFixture();
+    const other = readyFixture({
+      laneId: "b09-devnet-20330518T032320Z-fedcba9876543210",
+    });
+    fixture.packet.publicDevnetBehavioralEvidence.receiptPath =
+      other.publicBuild.files.receiptFile.path;
+    fixture.packet.publicDevnetBehavioralEvidence.receiptFileSha256 =
+      other.publicBuild.files.receiptFile.sha256;
+    refreshPublicBindings(fixture);
+    const result = assess(fixture);
+    assert(blockerCodes(result).has("DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE"));
+    assert.equal(result.publicDevnetBehavioralEvidence.ready, false);
+  }
+  {
+    const fixture = readyFixture();
+    fixture.context.source.statusPorcelain = "?? dirty-source";
+    fixture.context.disposableDevnetBuildSource.sourceContext.statusPorcelain =
+      "?? dirty-source";
+    const result = assess(fixture);
+    const codes = blockerCodes(result);
+    assert(codes.has("SOURCE_NOT_CLEAN"));
+    assert(codes.has("DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE"));
+    assert.equal(result.publicDevnetBehavioralEvidence.ready, false);
+  }
+});
+
+test("legacy v3 input and injected observations cannot bypass the v4 strict evidence schema", () => {
   const fixture = readyFixture();
-  fixture.packet.schema = "iat-b3-all-feature-devnet-readiness-input/v2";
+  fixture.packet.schema = "iat-b3-all-feature-devnet-readiness-input/v3";
   fixture.packet.artifacts = { law: {}, economy: {} };
   const result = assessAllFeatureDevnetReadiness({
     packet: fixture.packet,
@@ -726,6 +996,9 @@ test("orchestrator source and docs freeze two lanes and remain observation-only"
   assert.doesNotMatch(source, /rehearsal_adapter\.rs/u);
   assert.match(source, /extractIatB3ProductionTransactionMaps/u);
   assert.match(source, /DISPOSABLE_DEVNET_EXACT_SOURCE_RECEIPT_UNAVAILABLE/u);
+  assert.match(source, /DISPOSABLE_DEVNET_EXECUTION_PROVENANCE_UNAVAILABLE/u);
+  assert.match(source, /validateDisposableDevnetDualBuildPreflight/u);
+  assert.match(source, /validateDisposableDevnetDualBuildReceipt/u);
   assert.doesNotMatch(source, /\.(?:sendRawTransaction|sendTransaction|requestAirdrop|confirmTransaction)\s*\(/u);
   assert.doesNotMatch(source, /\b(?:Keypair|TransactionInstruction|SystemProgram)\b/u);
   assert.doesNotMatch(source, /api\.mainnet-beta\.solana\.com/iu);
@@ -736,6 +1009,10 @@ test("orchestrator source and docs freeze two lanes and remain observation-only"
   );
   assert.match(documentation, /production-byte|production byte/iu);
   assert.match(documentation, /public Devnet/iu);
+  assert.match(documentation, /readiness-input\/v4/u);
+  assert.match(documentation, /B09 disposable-Devnet preflight and receipt/u);
+  assert.match(documentation, /can never satisfy\s+the production final-byte/u);
+  assert.match(documentation, /DISPOSABLE_DEVNET_EXECUTION_PROVENANCE_UNAVAILABLE/u);
   assert.match(documentation, /never signs, broadcasts, deploys,\s+funds, activates, or queries RPC/u);
   assert.match(documentation, /exit code `2`/u);
 });

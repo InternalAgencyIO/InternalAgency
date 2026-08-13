@@ -154,7 +154,7 @@ const EXPECTED_SLICE_SPECS = Object.freeze([
       "projects/star-ascent/site/docs/b3/REWARD_CAPACITY_WATERFALL.md",
     ]),
     blockers: Object.freeze([
-      "The B3 economy surface lacks a production entrypoint, dispatcher, CPI execution, and complete native write handlers.",
+      "The feature-gated B3 production entrypoint and dispatcher expose six active source handlers and their CPI executors, but all-15 active completion, production identities, final-binary Devnet and rollback evidence, rewards/CCC/core/init policy closure, and release authorization remain unresolved.",
       "End-to-end V2 differential, migration, and adversarial Devnet evidence is incomplete.",
     ]),
   }),
