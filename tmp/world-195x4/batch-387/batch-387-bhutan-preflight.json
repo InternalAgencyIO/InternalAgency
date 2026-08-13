@@ -1,0 +1,1617 @@
+{
+  "batch": 387,
+  "country": "Bhutan",
+  "status": "render-preflight-stored-pass-1-not-launched",
+  "sourceCommit": "b069e1d928ee9b47eb42027f18e9454b294b684a",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-315-solomon-islands-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/161"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7",
+      "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json",
+    "checkpointSha256": "5BAC48AF34E53CEAC67FD71FB00394303666FE6AE2269C2F3FB95E14FFA82BD5",
+    "observedStatus": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-solomon-islands-rendering",
+    "observedHardSafeAcceptedCount": 4,
+    "observedMissingSceneNumbers": [],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "remoteRef": "origin/agent/starlight-progress-archive",
+    "remoteCommit": "b069e1d928ee9b47eb42027f18e9454b294b684a",
+    "remoteCheckpointSha256": "5BAC48AF34E53CEAC67FD71FB00394303666FE6AE2269C2F3FB95E14FFA82BD5",
+    "predecessorRemoteVerified": true,
+    "preparationOnly": true,
+    "batch387RenderAuthorized": true,
+    "note": "This materialization records no render, publication, commit, push, or X-ledger change.",
+    "reason": "Batch 386 is closed at four of four and its checkpoint is remote-verified; exactly four concurrent Batch 387 pass-1 slots are prepared but not launched."
+  },
+  "rollMethod": "FNV-1a over recorded batch387-bhutan keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "missionPropPoseTarget": "0-34 paper target/backstop; 35-59 open-water marker; 60-74 wrist-guidance category at paper target/backstop; 75-87 completed-handoff category at open-water marker; 88-99 open-mechanism category at paper target/backstop"
+  },
+  "cinematicTheme": {
+    "active": "deep-sea submersible couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "sceneNumbers": [
+    1568,
+    1569,
+    1570,
+    1571
+  ],
+  "researchSources": [
+    {
+      "url": "https://services.bhutan.travel/search/hotel/thimphu-towers",
+      "usedFor": "Thimphu Clock Tower Square and Changlimithang Stadium civic setting"
+    },
+    {
+      "url": "https://bhutan.travel/journal/editorial/bhutan-is-family-friendly",
+      "usedFor": "Punakha pedestrian suspension bridge, Po Chhu River, valley views, farming, crafts, and mountain trails"
+    },
+    {
+      "url": "https://bhutan.travel/experiences-landing-pages-2/experiences-wildlife-and-nature",
+      "usedFor": "Phobjikha black-necked cranes, protected forests, Royal Manas National Park, and Bhutan wildlife"
+    },
+    {
+      "url": "https://bhutan.travel/experiences-eco-tourism",
+      "usedFor": "Ecotourism, black-necked cranes, golden langurs, golden mahseer, protected areas, and biological corridors"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch387-bhutan-male-model-scene",
+    "fullHash": 3156670579,
+    "roll": 79,
+    "position": 4,
+    "scene": 1571,
+    "emotion": {
+      "key": "batch387-bhutan-scene4-male-emotion",
+      "roll": 95,
+      "result": "shame and social vulnerability"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Bhutan flag, thunder dragon, coat of arms, or official emblem is copied onto clothing. Large researched secular civic-square, bridge, river, valley, wetland, wildlife, farming, weaving, sport, and conservation fields replace them.",
+    "palette": "Himalayan-sky blue, alpine green, chili red, rice ivory, charcoal black, rhododendron pink, crane white, river turquoise, cloud silver, and saffron gold",
+    "minimumCoverage": "Scenes 1568 and 1569 each foreground large Bhutan motif fields on two or three looks and deep-sea construction on at least two. Scenes 1570 and 1571 use four distinct theme-led looks while the Bhutan landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Thimphu civic life, the Punakha suspension bridge and Po Chhu, Phobjikha crane conservation, and Royal Manas biodiversity.",
+    "prohibitions": "No literal flag, thunder dragon, coat of arms, official seal, sacred symbol, religious architecture, prayer flag, copied ceremonial dress, copied performance or runway uniform, badge, weapon threat, sexualized performance, alcohol, or branded product."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch387-bhutan-male-model-scene",
+        79
+      ],
+      [
+        "batch387-bhutan-scene4-male-emotion",
+        95
+      ],
+      [
+        "batch387-bhutan-scene1568-weather",
+        52
+      ],
+      [
+        "batch387-bhutan-scene1568-mascotState",
+        24
+      ],
+      [
+        "batch387-bhutan-scene1568-poleDanceTheme",
+        50
+      ],
+      [
+        "batch387-bhutan-scene1568-rainbowOnly",
+        20
+      ],
+      [
+        "batch387-bhutan-scene1568-rainbowHosiery",
+        51
+      ],
+      [
+        "batch387-bhutan-scene1568-romanceBeat",
+        29
+      ],
+      [
+        "batch387-bhutan-scene1568-compoundLoveBeat",
+        57
+      ],
+      [
+        "batch387-bhutan-scene1568-hardLoveBeat",
+        21
+      ],
+      [
+        "batch387-bhutan-scene1568-interestingProp",
+        23
+      ],
+      [
+        "batch387-bhutan-scene1568-eceMissionProp-poseTargetRoll",
+        22
+      ],
+      [
+        "batch387-bhutan-scene1568-Radiance-emotion",
+        65
+      ],
+      [
+        "batch387-bhutan-scene1568-Radiance-visibleMidriff",
+        93
+      ],
+      [
+        "batch387-bhutan-scene1568-Radiance-straplessDress",
+        62
+      ],
+      [
+        "batch387-bhutan-scene1568-Radiance-fullyOpenBack",
+        43
+      ],
+      [
+        "batch387-bhutan-scene1568-Ellie-emotion",
+        53
+      ],
+      [
+        "batch387-bhutan-scene1568-Ellie-visibleMidriff",
+        45
+      ],
+      [
+        "batch387-bhutan-scene1568-Ellie-straplessDress",
+        22
+      ],
+      [
+        "batch387-bhutan-scene1568-Ellie-fullyOpenBack",
+        15
+      ],
+      [
+        "batch387-bhutan-scene1568-Alia-emotion",
+        87
+      ],
+      [
+        "batch387-bhutan-scene1568-Alia-visibleMidriff",
+        27
+      ],
+      [
+        "batch387-bhutan-scene1568-Alia-straplessDress",
+        32
+      ],
+      [
+        "batch387-bhutan-scene1568-Alia-fullyOpenBack",
+        85
+      ],
+      [
+        "batch387-bhutan-scene1568-AI ECE-emotion",
+        85
+      ],
+      [
+        "batch387-bhutan-scene1568-AI ECE-visibleMidriff",
+        93
+      ],
+      [
+        "batch387-bhutan-scene1568-AI ECE-straplessDress",
+        50
+      ],
+      [
+        "batch387-bhutan-scene1568-AI ECE-fullyOpenBack",
+        67
+      ],
+      [
+        "batch387-bhutan-scene1569-weather",
+        71
+      ],
+      [
+        "batch387-bhutan-scene1569-mascotState",
+        71
+      ],
+      [
+        "batch387-bhutan-scene1569-poleDanceTheme",
+        27
+      ],
+      [
+        "batch387-bhutan-scene1569-rainbowOnly",
+        91
+      ],
+      [
+        "batch387-bhutan-scene1569-rainbowHosiery",
+        10
+      ],
+      [
+        "batch387-bhutan-scene1569-romanceBeat",
+        62
+      ],
+      [
+        "batch387-bhutan-scene1569-compoundLoveBeat",
+        56
+      ],
+      [
+        "batch387-bhutan-scene1569-hardLoveBeat",
+        80
+      ],
+      [
+        "batch387-bhutan-scene1569-interestingProp",
+        8
+      ],
+      [
+        "batch387-bhutan-scene1569-eceMissionProp-poseTargetRoll",
+        97
+      ],
+      [
+        "batch387-bhutan-scene1569-Radiance-emotion",
+        8
+      ],
+      [
+        "batch387-bhutan-scene1569-Radiance-visibleMidriff",
+        58
+      ],
+      [
+        "batch387-bhutan-scene1569-Radiance-straplessDress",
+        5
+      ],
+      [
+        "batch387-bhutan-scene1569-Radiance-fullyOpenBack",
+        6
+      ],
+      [
+        "batch387-bhutan-scene1569-Ellie-emotion",
+        74
+      ],
+      [
+        "batch387-bhutan-scene1569-Ellie-visibleMidriff",
+        80
+      ],
+      [
+        "batch387-bhutan-scene1569-Ellie-straplessDress",
+        39
+      ],
+      [
+        "batch387-bhutan-scene1569-Ellie-fullyOpenBack",
+        64
+      ],
+      [
+        "batch387-bhutan-scene1569-Alia-emotion",
+        50
+      ],
+      [
+        "batch387-bhutan-scene1569-Alia-visibleMidriff",
+        16
+      ],
+      [
+        "batch387-bhutan-scene1569-Alia-straplessDress",
+        63
+      ],
+      [
+        "batch387-bhutan-scene1569-Alia-fullyOpenBack",
+        12
+      ],
+      [
+        "batch387-bhutan-scene1569-AI ECE-emotion",
+        60
+      ],
+      [
+        "batch387-bhutan-scene1569-AI ECE-visibleMidriff",
+        98
+      ],
+      [
+        "batch387-bhutan-scene1569-AI ECE-straplessDress",
+        9
+      ],
+      [
+        "batch387-bhutan-scene1569-AI ECE-fullyOpenBack",
+        94
+      ],
+      [
+        "batch387-bhutan-scene1570-weather",
+        21
+      ],
+      [
+        "batch387-bhutan-scene1570-mascotState",
+        33
+      ],
+      [
+        "batch387-bhutan-scene1570-poleDanceTheme",
+        89
+      ],
+      [
+        "batch387-bhutan-scene1570-rainbowOnly",
+        17
+      ],
+      [
+        "batch387-bhutan-scene1570-rainbowHosiery",
+        76
+      ],
+      [
+        "batch387-bhutan-scene1570-romanceBeat",
+        32
+      ],
+      [
+        "batch387-bhutan-scene1570-compoundLoveBeat",
+        38
+      ],
+      [
+        "batch387-bhutan-scene1570-hardLoveBeat",
+        10
+      ],
+      [
+        "batch387-bhutan-scene1570-interestingProp",
+        90
+      ],
+      [
+        "batch387-bhutan-scene1570-eceMissionProp-poseTargetRoll",
+        39
+      ],
+      [
+        "batch387-bhutan-scene1570-Radiance-emotion",
+        38
+      ],
+      [
+        "batch387-bhutan-scene1570-Radiance-visibleMidriff",
+        40
+      ],
+      [
+        "batch387-bhutan-scene1570-Radiance-straplessDress",
+        67
+      ],
+      [
+        "batch387-bhutan-scene1570-Radiance-fullyOpenBack",
+        4
+      ],
+      [
+        "batch387-bhutan-scene1570-Ellie-emotion",
+        56
+      ],
+      [
+        "batch387-bhutan-scene1570-Ellie-visibleMidriff",
+        30
+      ],
+      [
+        "batch387-bhutan-scene1570-Ellie-straplessDress",
+        37
+      ],
+      [
+        "batch387-bhutan-scene1570-Ellie-fullyOpenBack",
+        74
+      ],
+      [
+        "batch387-bhutan-scene1570-Alia-emotion",
+        80
+      ],
+      [
+        "batch387-bhutan-scene1570-Alia-visibleMidriff",
+        86
+      ],
+      [
+        "batch387-bhutan-scene1570-Alia-straplessDress",
+        41
+      ],
+      [
+        "batch387-bhutan-scene1570-Alia-fullyOpenBack",
+        2
+      ],
+      [
+        "batch387-bhutan-scene1570-AI ECE-emotion",
+        50
+      ],
+      [
+        "batch387-bhutan-scene1570-AI ECE-visibleMidriff",
+        20
+      ],
+      [
+        "batch387-bhutan-scene1570-AI ECE-straplessDress",
+        59
+      ],
+      [
+        "batch387-bhutan-scene1570-AI ECE-fullyOpenBack",
+        28
+      ],
+      [
+        "batch387-bhutan-scene1571-weather",
+        42
+      ],
+      [
+        "batch387-bhutan-scene1571-mascotState",
+        74
+      ],
+      [
+        "batch387-bhutan-scene1571-poleDanceTheme",
+        52
+      ],
+      [
+        "batch387-bhutan-scene1571-rainbowOnly",
+        86
+      ],
+      [
+        "batch387-bhutan-scene1571-rainbowHosiery",
+        21
+      ],
+      [
+        "batch387-bhutan-scene1571-romanceBeat",
+        23
+      ],
+      [
+        "batch387-bhutan-scene1571-compoundLoveBeat",
+        39
+      ],
+      [
+        "batch387-bhutan-scene1571-hardLoveBeat",
+        43
+      ],
+      [
+        "batch387-bhutan-scene1571-interestingProp",
+        93
+      ],
+      [
+        "batch387-bhutan-scene1571-eceMissionProp-poseTargetRoll",
+        76
+      ],
+      [
+        "batch387-bhutan-scene1571-Radiance-emotion",
+        7
+      ],
+      [
+        "batch387-bhutan-scene1571-Radiance-visibleMidriff",
+        75
+      ],
+      [
+        "batch387-bhutan-scene1571-Radiance-straplessDress",
+        16
+      ],
+      [
+        "batch387-bhutan-scene1571-Radiance-fullyOpenBack",
+        61
+      ],
+      [
+        "batch387-bhutan-scene1571-Ellie-emotion",
+        79
+      ],
+      [
+        "batch387-bhutan-scene1571-Ellie-visibleMidriff",
+        11
+      ],
+      [
+        "batch387-bhutan-scene1571-Ellie-straplessDress",
+        4
+      ],
+      [
+        "batch387-bhutan-scene1571-Ellie-fullyOpenBack",
+        5
+      ],
+      [
+        "batch387-bhutan-scene1571-Alia-emotion",
+        41
+      ],
+      [
+        "batch387-bhutan-scene1571-Alia-visibleMidriff",
+        5
+      ],
+      [
+        "batch387-bhutan-scene1571-Alia-straplessDress",
+        14
+      ],
+      [
+        "batch387-bhutan-scene1571-Alia-fullyOpenBack",
+        35
+      ],
+      [
+        "batch387-bhutan-scene1571-AI ECE-emotion",
+        75
+      ],
+      [
+        "batch387-bhutan-scene1571-AI ECE-visibleMidriff",
+        55
+      ],
+      [
+        "batch387-bhutan-scene1571-AI ECE-straplessDress",
+        80
+      ],
+      [
+        "batch387-bhutan-scene1571-AI ECE-fullyOpenBack",
+        41
+      ],
+      [
+        "batch387-bhutan-x-heart",
+        0
+      ],
+      [
+        "batch387-bhutan-x-internalagency",
+        34
+      ],
+      [
+        "batch387-bhutan-x-worldxxxseries",
+        85
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch387-bhutan-scene1568-rainbowHosieryWearer",
+        67
+      ],
+      [
+        "batch387-bhutan-scene1568-rainbowHosieryPaletteMode",
+        73
+      ],
+      [
+        "batch387-bhutan-scene1568-mascotHolder",
+        41
+      ],
+      [
+        "batch387-bhutan-scene1568-interestingPropHolder",
+        9
+      ],
+      [
+        "batch387-bhutan-scene1568-interestingPropFamily",
+        55
+      ],
+      [
+        "batch387-bhutan-scene1569-rainbowHosieryWearer",
+        14
+      ],
+      [
+        "batch387-bhutan-scene1569-rainbowHosieryPaletteMode",
+        42
+      ],
+      [
+        "batch387-bhutan-scene1569-mascotHolder",
+        0
+      ],
+      [
+        "batch387-bhutan-scene1569-interestingPropHolder",
+        42
+      ],
+      [
+        "batch387-bhutan-scene1569-interestingPropFamily",
+        52
+      ],
+      [
+        "batch387-bhutan-scene1570-rainbowHosieryWearer",
+        84
+      ],
+      [
+        "batch387-bhutan-scene1570-rainbowHosieryPaletteMode",
+        44
+      ],
+      [
+        "batch387-bhutan-scene1570-mascotHolder",
+        26
+      ],
+      [
+        "batch387-bhutan-scene1570-interestingPropHolder",
+        36
+      ],
+      [
+        "batch387-bhutan-scene1570-interestingPropFamily",
+        22
+      ],
+      [
+        "batch387-bhutan-scene1571-rainbowHosieryWearer",
+        85
+      ],
+      [
+        "batch387-bhutan-scene1571-rainbowHosieryPaletteMode",
+        19
+      ],
+      [
+        "batch387-bhutan-scene1571-mascotHolder",
+        59
+      ],
+      [
+        "batch387-bhutan-scene1571-interestingPropHolder",
+        43
+      ],
+      [
+        "batch387-bhutan-scene1571-interestingPropFamily",
+        69
+      ]
+    ],
+    "primaryPairCount": 109,
+    "selectorPairCount": 20,
+    "primarySha256": "22654D2EFF0BFFD85990BE4A880F1528537C106DA2846BB0FEE19E9B2F383D5E",
+    "selectorSha256": "51ED2713C170461997CEED50CBF91392F01DEFAE53E92EB9B4B055EBE989B585",
+    "mismatchCount": 0,
+    "scenes": {
+      "1568": {
+        "weather": 52,
+        "mascotState": 24,
+        "mascotHolder": 41,
+        "oddProp": 23,
+        "oddHolder": 9,
+        "oddFamily": 55,
+        "pole": 50,
+        "rainbowOnly": 20,
+        "hosiery": 51,
+        "hosieryWearer": 67,
+        "hosieryPalette": 73,
+        "romance": 29,
+        "compound": 57,
+        "hardLove": 21,
+        "missionPoseTarget": 22,
+        "emotions": {
+          "Radiance": 65,
+          "Ellie": 53,
+          "Alia": 87,
+          "AI ECE": 85
+        },
+        "cuts": {
+          "Radiance": [
+            93,
+            62,
+            43
+          ],
+          "Ellie": [
+            45,
+            22,
+            15
+          ],
+          "Alia": [
+            27,
+            32,
+            85
+          ],
+          "AI ECE": [
+            93,
+            50,
+            67
+          ]
+        }
+      },
+      "1569": {
+        "weather": 71,
+        "mascotState": 71,
+        "mascotHolder": 0,
+        "oddProp": 8,
+        "oddHolder": 42,
+        "oddFamily": 52,
+        "pole": 27,
+        "rainbowOnly": 91,
+        "hosiery": 10,
+        "hosieryWearer": 14,
+        "hosieryPalette": 42,
+        "romance": 62,
+        "compound": 56,
+        "hardLove": 80,
+        "missionPoseTarget": 97,
+        "emotions": {
+          "Radiance": 8,
+          "Ellie": 74,
+          "Alia": 50,
+          "AI ECE": 60
+        },
+        "cuts": {
+          "Radiance": [
+            58,
+            5,
+            6
+          ],
+          "Ellie": [
+            80,
+            39,
+            64
+          ],
+          "Alia": [
+            16,
+            63,
+            12
+          ],
+          "AI ECE": [
+            98,
+            9,
+            94
+          ]
+        }
+      },
+      "1570": {
+        "weather": 21,
+        "mascotState": 33,
+        "mascotHolder": 26,
+        "oddProp": 90,
+        "oddHolder": 36,
+        "oddFamily": 22,
+        "pole": 89,
+        "rainbowOnly": 17,
+        "hosiery": 76,
+        "hosieryWearer": 84,
+        "hosieryPalette": 44,
+        "romance": 32,
+        "compound": 38,
+        "hardLove": 10,
+        "missionPoseTarget": 39,
+        "emotions": {
+          "Radiance": 38,
+          "Ellie": 56,
+          "Alia": 80,
+          "AI ECE": 50
+        },
+        "cuts": {
+          "Radiance": [
+            40,
+            67,
+            4
+          ],
+          "Ellie": [
+            30,
+            37,
+            74
+          ],
+          "Alia": [
+            86,
+            41,
+            2
+          ],
+          "AI ECE": [
+            20,
+            59,
+            28
+          ]
+        }
+      },
+      "1571": {
+        "weather": 42,
+        "mascotState": 74,
+        "mascotHolder": 59,
+        "oddProp": 93,
+        "oddHolder": 43,
+        "oddFamily": 69,
+        "pole": 52,
+        "rainbowOnly": 86,
+        "hosiery": 21,
+        "hosieryWearer": 85,
+        "hosieryPalette": 19,
+        "romance": 23,
+        "compound": 39,
+        "hardLove": 43,
+        "missionPoseTarget": 76,
+        "emotions": {
+          "Radiance": 7,
+          "Ellie": 79,
+          "Alia": 41,
+          "AI ECE": 75,
+          "Male": 95
+        },
+        "cuts": {
+          "Radiance": [
+            75,
+            16,
+            61
+          ],
+          "Ellie": [
+            11,
+            4,
+            5
+          ],
+          "Alia": [
+            5,
+            14,
+            35
+          ],
+          "AI ECE": [
+            55,
+            80,
+            41
+          ]
+        }
+      }
+    }
+  },
+  "scenePlans": {
+    "1568": {
+      "location": "Thimphu Clock Tower Square and Changlimithang Stadium",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 52,
+        "raw": "hailstorm with suspended ice and hard backlight",
+        "materialized": "hail safely outside an impact-rated clear canopy"
+      },
+      "mascot": {
+        "roll": 24,
+        "state": "PAWS only",
+        "holder": {
+          "key": "batch387-bhutan-scene1568-mascotHolder",
+          "roll": 41,
+          "result": "Alia"
+        }
+      },
+      "oddProp": {
+        "roll": 23,
+        "active": true,
+        "holder": {
+          "key": "batch387-bhutan-scene1568-interestingPropHolder",
+          "roll": 9,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch387-bhutan-scene1568-interestingPropFamily",
+          "roll": 55,
+          "result": "gyroscopic hard-shell suitcase"
+        }
+      },
+      "pole": {
+        "roll": 50,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 20,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch387-bhutan-scene1568-rainbowHosiery",
+        "roll": 51,
+        "active": false,
+        "wearer": {
+          "key": "batch387-bhutan-scene1568-rainbowHosieryWearer",
+          "roll": 67,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch387-bhutan-scene1568-rainbowHosieryPaletteMode",
+          "roll": 73,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch387-bhutan-scene1568-romanceBeat",
+        "roll": 29,
+        "index": 5,
+        "result": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compound": {
+        "key": "batch387-bhutan-scene1568-compoundLoveBeat",
+        "roll": 57,
+        "index": 9,
+        "result": "Radiance cradles Alia's face with one hand while Alia hugs her waist; Ellie kisses Radiance's opposite cheek and ECE watches from inches away with one hand still linked to Radiance."
+      },
+      "hardLove": {
+        "key": "batch387-bhutan-scene1568-hardLoveBeat",
+        "roll": 21,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "mission": {
+        "key": "batch387-bhutan-scene1568-eceMissionProp-poseTargetRoll",
+        "roll": 22,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch387-bhutan-scene1568-Radiance-emotion",
+          "roll": 65,
+          "result": "visible jealousy",
+          "materialized": "visible jealousy"
+        },
+        "Ellie": {
+          "key": "batch387-bhutan-scene1568-Ellie-emotion",
+          "roll": 53,
+          "result": "intense curiosity",
+          "materialized": "intense curiosity"
+        },
+        "Alia": {
+          "key": "batch387-bhutan-scene1568-Alia-emotion",
+          "roll": 87,
+          "result": "fear and urgent vulnerability",
+          "materialized": "fear and urgent vulnerability"
+        },
+        "AI ECE": {
+          "key": "batch387-bhutan-scene1568-AI ECE-emotion",
+          "roll": 85,
+          "result": "full sobbing with tear-streaked face and shaking posture",
+          "materialized": "full sobbing with tear-streaked face and shaking posture"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1568-Radiance-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1568-Radiance-straplessDress",
+            "roll": 62,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1568-Radiance-fullyOpenBack",
+            "roll": 43,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1568-Ellie-visibleMidriff",
+            "roll": 45,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1568-Ellie-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1568-Ellie-fullyOpenBack",
+            "roll": 15,
+            "active": true
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1568-Alia-visibleMidriff",
+            "roll": 27,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1568-Alia-straplessDress",
+            "roll": 32,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1568-Alia-fullyOpenBack",
+            "roll": 85,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1568-AI ECE-visibleMidriff",
+            "roll": 93,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1568-AI ECE-straplessDress",
+            "roll": 50,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1568-AI ECE-fullyOpenBack",
+            "roll": 67,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-387/scene-1568-initial-prompt.txt",
+        "sha256": "AB0CA84218B7D28B8AD72A64F61616E78BE604FF4EB3EDAB929F20D5F50EE442",
+        "bytes": 4596
+      }
+    },
+    "1569": {
+      "location": "Punakha pedestrian suspension bridge and Po Chhu River",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 71,
+        "raw": "coastal sea mist",
+        "materialized": "the raw coastal-mist roll localized as soft Po Chhu river mist, with no false coastline"
+      },
+      "mascot": {
+        "roll": 71,
+        "state": "neither mascot",
+        "holder": {
+          "key": "batch387-bhutan-scene1569-mascotHolder",
+          "roll": 0,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 8,
+        "active": true,
+        "holder": {
+          "key": "batch387-bhutan-scene1569-interestingPropHolder",
+          "roll": 42,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch387-bhutan-scene1569-interestingPropFamily",
+          "roll": 52,
+          "result": "giant tuning fork instrument"
+        }
+      },
+      "pole": {
+        "roll": 27,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 91,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch387-bhutan-scene1569-rainbowHosiery",
+        "roll": 10,
+        "active": true,
+        "wearer": {
+          "key": "batch387-bhutan-scene1569-rainbowHosieryWearer",
+          "roll": 14,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch387-bhutan-scene1569-rainbowHosieryPaletteMode",
+          "roll": 42,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch387-bhutan-scene1569-romanceBeat",
+        "roll": 62,
+        "index": 2,
+        "result": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compound": {
+        "key": "batch387-bhutan-scene1569-compoundLoveBeat",
+        "roll": 56,
+        "index": 8,
+        "result": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "hardLove": {
+        "key": "batch387-bhutan-scene1569-hardLoveBeat",
+        "roll": 80,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "mission": {
+        "key": "batch387-bhutan-scene1569-eceMissionProp-poseTargetRoll",
+        "roll": 97,
+        "category": "open-mechanism paper-target inspection",
+        "handler": "Alia",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch387-bhutan-scene1569-Radiance-emotion",
+          "roll": 8,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        },
+        "Ellie": {
+          "key": "batch387-bhutan-scene1569-Ellie-emotion",
+          "roll": 74,
+          "result": "betrayal shock",
+          "materialized": "betrayal shock"
+        },
+        "Alia": {
+          "key": "batch387-bhutan-scene1569-Alia-emotion",
+          "roll": 50,
+          "result": "startled surprise",
+          "materialized": "startled surprise"
+        },
+        "AI ECE": {
+          "key": "batch387-bhutan-scene1569-AI ECE-emotion",
+          "roll": 60,
+          "result": "visible jealousy",
+          "materialized": "visible jealousy"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1569-Radiance-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1569-Radiance-straplessDress",
+            "roll": 5,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1569-Radiance-fullyOpenBack",
+            "roll": 6,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1569-Ellie-visibleMidriff",
+            "roll": 80,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1569-Ellie-straplessDress",
+            "roll": 39,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1569-Ellie-fullyOpenBack",
+            "roll": 64,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1569-Alia-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1569-Alia-straplessDress",
+            "roll": 63,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1569-Alia-fullyOpenBack",
+            "roll": 12,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1569-AI ECE-visibleMidriff",
+            "roll": 98,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1569-AI ECE-straplessDress",
+            "roll": 9,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1569-AI ECE-fullyOpenBack",
+            "roll": 94,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-387/scene-1569-initial-prompt.txt",
+        "sha256": "F4D6F28E1C4C3641D88386C28F6489C5029EEA4496856BD2DF8E55C7239EB390",
+        "bytes": 4623
+      }
+    },
+    "1570": {
+      "location": "Phobjikha Valley conservation observatory",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 21,
+        "raw": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast above a fully dry conservation observatory"
+      },
+      "mascot": {
+        "roll": 33,
+        "state": "PAWS only",
+        "holder": {
+          "key": "batch387-bhutan-scene1570-mascotHolder",
+          "roll": 26,
+          "result": "Alia"
+        }
+      },
+      "oddProp": {
+        "roll": 90,
+        "active": false,
+        "holder": {
+          "key": "batch387-bhutan-scene1570-interestingPropHolder",
+          "roll": 36,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch387-bhutan-scene1570-interestingPropFamily",
+          "roll": 22,
+          "result": "neon acrylic cello with no loose strings"
+        }
+      },
+      "pole": {
+        "roll": 89,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 17,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch387-bhutan-scene1570-rainbowHosiery",
+        "roll": 76,
+        "active": false,
+        "wearer": {
+          "key": "batch387-bhutan-scene1570-rainbowHosieryWearer",
+          "roll": 84,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch387-bhutan-scene1570-rainbowHosieryPaletteMode",
+          "roll": 44,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch387-bhutan-scene1570-romanceBeat",
+        "roll": 32,
+        "index": 8,
+        "result": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compound": {
+        "key": "batch387-bhutan-scene1570-compoundLoveBeat",
+        "roll": 38,
+        "index": 2,
+        "result": "Ellie holds Radiance close at the waist and shoulder while Radiance gives Alia a forehead kiss; ECE steps between their linked hands and raises the beacon to reclaim attention."
+      },
+      "hardLove": {
+        "key": "batch387-bhutan-scene1570-hardLoveBeat",
+        "roll": 10,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "mission": {
+        "key": "batch387-bhutan-scene1570-eceMissionProp-poseTargetRoll",
+        "roll": 39,
+        "category": "two-hand open-water sight picture",
+        "handler": "AI ECE",
+        "target": "unoccupied open-water marker"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch387-bhutan-scene1570-Radiance-emotion",
+          "roll": 38,
+          "result": "magnetic confidence",
+          "materialized": "magnetic confidence"
+        },
+        "Ellie": {
+          "key": "batch387-bhutan-scene1570-Ellie-emotion",
+          "roll": 56,
+          "result": "aching romantic longing",
+          "materialized": "aching romantic longing"
+        },
+        "Alia": {
+          "key": "batch387-bhutan-scene1570-Alia-emotion",
+          "roll": 80,
+          "result": "deep sadness",
+          "materialized": "deep sadness"
+        },
+        "AI ECE": {
+          "key": "batch387-bhutan-scene1570-AI ECE-emotion",
+          "roll": 50,
+          "result": "startled surprise",
+          "materialized": "startled surprise"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1570-Radiance-visibleMidriff",
+            "roll": 40,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1570-Radiance-straplessDress",
+            "roll": 67,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1570-Radiance-fullyOpenBack",
+            "roll": 4,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1570-Ellie-visibleMidriff",
+            "roll": 30,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1570-Ellie-straplessDress",
+            "roll": 37,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1570-Ellie-fullyOpenBack",
+            "roll": 74,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1570-Alia-visibleMidriff",
+            "roll": 86,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1570-Alia-straplessDress",
+            "roll": 41,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1570-Alia-fullyOpenBack",
+            "roll": 2,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1570-AI ECE-visibleMidriff",
+            "roll": 20,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1570-AI ECE-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1570-AI ECE-fullyOpenBack",
+            "roll": 28,
+            "active": true
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-387/scene-1570-initial-prompt.txt",
+        "sha256": "4EA7FD5E8CEAF5B548B8505B13FADA4F7CEA931E3219371FEBA45D1E1A89FA4A",
+        "bytes": 4557
+      }
+    },
+    "1571": {
+      "location": "Royal Manas National Park river observatory",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 42,
+        "raw": "rolling thunderstorm",
+        "materialized": "a rolling thunderstorm beyond a fully dry covered river observatory"
+      },
+      "mascot": {
+        "roll": 74,
+        "state": "neither mascot",
+        "holder": {
+          "key": "batch387-bhutan-scene1571-mascotHolder",
+          "roll": 59,
+          "result": "AI ECE"
+        }
+      },
+      "oddProp": {
+        "roll": 93,
+        "active": false,
+        "holder": {
+          "key": "batch387-bhutan-scene1571-interestingPropHolder",
+          "roll": 43,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch387-bhutan-scene1571-interestingPropFamily",
+          "roll": 69,
+          "result": "folding solar fan with articulated panels"
+        }
+      },
+      "pole": {
+        "roll": 52,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 86,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch387-bhutan-scene1571-rainbowHosiery",
+        "roll": 21,
+        "active": true,
+        "wearer": {
+          "key": "batch387-bhutan-scene1571-rainbowHosieryWearer",
+          "roll": 85,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch387-bhutan-scene1571-rainbowHosieryPaletteMode",
+          "roll": 19,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch387-bhutan-scene1571-romanceBeat",
+        "roll": 23,
+        "index": 11,
+        "result": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compound": {
+        "key": "batch387-bhutan-scene1571-compoundLoveBeat",
+        "roll": 39,
+        "index": 3,
+        "result": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "hardLove": {
+        "key": "batch387-bhutan-scene1571-hardLoveBeat",
+        "roll": 43,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "mission": {
+        "key": "batch387-bhutan-scene1571-eceMissionProp-poseTargetRoll",
+        "roll": 76,
+        "category": "completed handoff to open-water marker",
+        "handler": "Alia",
+        "target": "unoccupied open-water marker"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch387-bhutan-scene1571-Radiance-emotion",
+          "roll": 7,
+          "result": "tender affection",
+          "materialized": "tender affection"
+        },
+        "Ellie": {
+          "key": "batch387-bhutan-scene1571-Ellie-emotion",
+          "roll": 79,
+          "result": "deep sadness",
+          "materialized": "deep sadness"
+        },
+        "Alia": {
+          "key": "batch387-bhutan-scene1571-Alia-emotion",
+          "roll": 41,
+          "result": "determination",
+          "materialized": "determination"
+        },
+        "AI ECE": {
+          "key": "batch387-bhutan-scene1571-AI ECE-emotion",
+          "roll": 75,
+          "result": "contained resentment",
+          "materialized": "contained resentment"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1571-Radiance-visibleMidriff",
+            "roll": 75,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1571-Radiance-straplessDress",
+            "roll": 16,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1571-Radiance-fullyOpenBack",
+            "roll": 61,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1571-Ellie-visibleMidriff",
+            "roll": 11,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1571-Ellie-straplessDress",
+            "roll": 4,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1571-Ellie-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1571-Alia-visibleMidriff",
+            "roll": 5,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1571-Alia-straplessDress",
+            "roll": 14,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1571-Alia-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch387-bhutan-scene1571-AI ECE-visibleMidriff",
+            "roll": 55,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch387-bhutan-scene1571-AI ECE-straplessDress",
+            "roll": 80,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch387-bhutan-scene1571-AI ECE-fullyOpenBack",
+            "roll": 41,
+            "active": false
+          }
+        }
+      },
+      "malePresent": true,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-387/scene-1571-initial-prompt.txt",
+        "sha256": "506706575523C534ABBA6FE35854400C6D7364AEFF9A7E7F5B7D91B54031C522",
+        "bytes": 4788
+      }
+    }
+  },
+  "renderPlan": {
+    "pass1": "Exactly four clean candidates, one per scene, launched concurrently from original identity anchors only.",
+    "pass2": "Only hard-unusable scenes may receive one fresh holistic correction candidate each, launched concurrently; no filler variants.",
+    "archiveBeforeLaterWork": true,
+    "thirdPassAllowed": false
+  },
+  "xPublishing": {
+    "rolls": {
+      "heart": {
+        "key": "batch387-bhutan-x-heart",
+        "roll": 0,
+        "result": "red heart"
+      },
+      "internalAgency": {
+        "key": "batch387-bhutan-x-internalagency",
+        "roll": 34,
+        "active": false
+      },
+      "worldXXXSeries": {
+        "key": "batch387-bhutan-x-worldxxxseries",
+        "roll": 85,
+        "active": false
+      }
+    },
+    "captionIfEligible": "Bhutan ❤️ Solomon Islands #Bhutan",
+    "eligibility": "ineligible until four of four Bhutan scenes are hard-safe accepted and the checkpoint is pushed and remote-verified"
+  },
+  "nextQueue": {
+    "nextCountry": "Luxembourg",
+    "nextBatch": 388,
+    "sceneNumbers": [
+      1572,
+      1573,
+      1574,
+      1575
+    ],
+    "cinematicTheme": "deep-sea submersible couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-316-bhutan-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/162"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7"
+    ],
+    "lockedUntilBatch387Closed": true
+  }
+}

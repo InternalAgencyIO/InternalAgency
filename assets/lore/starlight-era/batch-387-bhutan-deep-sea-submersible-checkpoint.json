@@ -1,0 +1,396 @@
+{
+  "batch": 387,
+  "country": "Bhutan",
+  "status": "active-pass-1-ready-not-launched",
+  "sourceCommit": "b069e1d928ee9b47eb42027f18e9454b294b684a",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-315-solomon-islands-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/161"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7",
+      "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json",
+    "checkpointSha256": "5BAC48AF34E53CEAC67FD71FB00394303666FE6AE2269C2F3FB95E14FFA82BD5",
+    "observedStatus": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-solomon-islands-rendering",
+    "observedHardSafeAcceptedCount": 4,
+    "observedMissingSceneNumbers": [],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "remoteRef": "origin/agent/starlight-progress-archive",
+    "remoteCommit": "b069e1d928ee9b47eb42027f18e9454b294b684a",
+    "remoteCheckpointSha256": "5BAC48AF34E53CEAC67FD71FB00394303666FE6AE2269C2F3FB95E14FFA82BD5",
+    "predecessorRemoteVerified": true,
+    "preparationOnly": true,
+    "batch387RenderAuthorized": true,
+    "note": "This materialization records no render, publication, commit, push, or X-ledger change.",
+    "reason": "Batch 386 is closed at four of four and its checkpoint is remote-verified; exactly four concurrent Batch 387 pass-1 slots are prepared but not launched."
+  },
+  "rollMethod": "FNV-1a over recorded batch387-bhutan keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "cinematicTheme": "deep-sea submersible couture",
+  "themePairPosition": 1,
+  "sceneNumbers": [
+    1568,
+    1569,
+    1570,
+    1571
+  ],
+  "researchSources": [
+    {
+      "url": "https://services.bhutan.travel/search/hotel/thimphu-towers",
+      "usedFor": "Thimphu Clock Tower Square and Changlimithang Stadium civic setting"
+    },
+    {
+      "url": "https://bhutan.travel/journal/editorial/bhutan-is-family-friendly",
+      "usedFor": "Punakha pedestrian suspension bridge, Po Chhu River, valley views, farming, crafts, and mountain trails"
+    },
+    {
+      "url": "https://bhutan.travel/experiences-landing-pages-2/experiences-wildlife-and-nature",
+      "usedFor": "Phobjikha black-necked cranes, protected forests, Royal Manas National Park, and Bhutan wildlife"
+    },
+    {
+      "url": "https://bhutan.travel/experiences-eco-tourism",
+      "usedFor": "Ecotourism, black-necked cranes, golden langurs, golden mahseer, protected areas, and biological corridors"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch387-bhutan-male-model-scene",
+    "fullHash": 3156670579,
+    "position": 4,
+    "scene": 1571,
+    "emotionRoll": 95,
+    "emotion": "shame and social vulnerability"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Bhutan flag, thunder dragon, coat of arms, or official emblem is copied onto clothing. Large researched secular civic-square, bridge, river, valley, wetland, wildlife, farming, weaving, sport, and conservation fields replace them.",
+    "palette": "Himalayan-sky blue, alpine green, chili red, rice ivory, charcoal black, rhododendron pink, crane white, river turquoise, cloud silver, and saffron gold",
+    "minimumCoverage": "Scenes 1568 and 1569 each foreground large Bhutan motif fields on two or three looks and deep-sea construction on at least two. Scenes 1570 and 1571 use four distinct theme-led looks while the Bhutan landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Thimphu civic life, the Punakha suspension bridge and Po Chhu, Phobjikha crane conservation, and Royal Manas biodiversity.",
+    "prohibitions": "No literal flag, thunder dragon, coat of arms, official seal, sacred symbol, religious architecture, prayer flag, copied ceremonial dress, copied performance or runway uniform, badge, weapon threat, sexualized performance, alcohol, or branded product."
+  },
+  "rollAudit": {
+    "1568": {
+      "weather": 52,
+      "mascotState": 24,
+      "mascotHolder": 41,
+      "oddProp": 23,
+      "oddHolder": 9,
+      "oddFamily": 55,
+      "pole": 50,
+      "rainbowOnly": 20,
+      "hosiery": 51,
+      "hosieryWearer": 67,
+      "hosieryPalette": 73,
+      "romance": 29,
+      "compound": 57,
+      "hardLove": 21,
+      "missionPoseTarget": 22,
+      "emotions": {
+        "Radiance": 65,
+        "Ellie": 53,
+        "Alia": 87,
+        "AI ECE": 85
+      },
+      "cuts": {
+        "Radiance": [
+          93,
+          62,
+          43
+        ],
+        "Ellie": [
+          45,
+          22,
+          15
+        ],
+        "Alia": [
+          27,
+          32,
+          85
+        ],
+        "AI ECE": [
+          93,
+          50,
+          67
+        ]
+      }
+    },
+    "1569": {
+      "weather": 71,
+      "mascotState": 71,
+      "mascotHolder": 0,
+      "oddProp": 8,
+      "oddHolder": 42,
+      "oddFamily": 52,
+      "pole": 27,
+      "rainbowOnly": 91,
+      "hosiery": 10,
+      "hosieryWearer": 14,
+      "hosieryPalette": 42,
+      "romance": 62,
+      "compound": 56,
+      "hardLove": 80,
+      "missionPoseTarget": 97,
+      "emotions": {
+        "Radiance": 8,
+        "Ellie": 74,
+        "Alia": 50,
+        "AI ECE": 60
+      },
+      "cuts": {
+        "Radiance": [
+          58,
+          5,
+          6
+        ],
+        "Ellie": [
+          80,
+          39,
+          64
+        ],
+        "Alia": [
+          16,
+          63,
+          12
+        ],
+        "AI ECE": [
+          98,
+          9,
+          94
+        ]
+      }
+    },
+    "1570": {
+      "weather": 21,
+      "mascotState": 33,
+      "mascotHolder": 26,
+      "oddProp": 90,
+      "oddHolder": 36,
+      "oddFamily": 22,
+      "pole": 89,
+      "rainbowOnly": 17,
+      "hosiery": 76,
+      "hosieryWearer": 84,
+      "hosieryPalette": 44,
+      "romance": 32,
+      "compound": 38,
+      "hardLove": 10,
+      "missionPoseTarget": 39,
+      "emotions": {
+        "Radiance": 38,
+        "Ellie": 56,
+        "Alia": 80,
+        "AI ECE": 50
+      },
+      "cuts": {
+        "Radiance": [
+          40,
+          67,
+          4
+        ],
+        "Ellie": [
+          30,
+          37,
+          74
+        ],
+        "Alia": [
+          86,
+          41,
+          2
+        ],
+        "AI ECE": [
+          20,
+          59,
+          28
+        ]
+      }
+    },
+    "1571": {
+      "weather": 42,
+      "mascotState": 74,
+      "mascotHolder": 59,
+      "oddProp": 93,
+      "oddHolder": 43,
+      "oddFamily": 69,
+      "pole": 52,
+      "rainbowOnly": 86,
+      "hosiery": 21,
+      "hosieryWearer": 85,
+      "hosieryPalette": 19,
+      "romance": 23,
+      "compound": 39,
+      "hardLove": 43,
+      "missionPoseTarget": 76,
+      "emotions": {
+        "Radiance": 7,
+        "Ellie": 79,
+        "Alia": 41,
+        "AI ECE": 75,
+        "Male": 95
+      },
+      "cuts": {
+        "Radiance": [
+          75,
+          16,
+          61
+        ],
+        "Ellie": [
+          11,
+          4,
+          5
+        ],
+        "Alia": [
+          5,
+          14,
+          35
+        ],
+        "AI ECE": [
+          55,
+          80,
+          41
+        ]
+      }
+    }
+  },
+  "rollAuditHashes": {
+    "primaryPairCount": 109,
+    "primarySha256": "22654D2EFF0BFFD85990BE4A880F1528537C106DA2846BB0FEE19E9B2F383D5E",
+    "selectorPairCount": 20,
+    "selectorSha256": "51ED2713C170461997CEED50CBF91392F01DEFAE53E92EB9B4B055EBE989B585"
+  },
+  "scenePlans": {
+    "1568": {
+      "location": "Thimphu Clock Tower Square and Changlimithang Stadium",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-387/scene-1568-initial-prompt.txt",
+      "promptSha256": "AB0CA84218B7D28B8AD72A64F61616E78BE604FF4EB3EDAB929F20D5F50EE442",
+      "promptBytes": 4596
+    },
+    "1569": {
+      "location": "Punakha pedestrian suspension bridge and Po Chhu River",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-387/scene-1569-initial-prompt.txt",
+      "promptSha256": "F4D6F28E1C4C3641D88386C28F6489C5029EEA4496856BD2DF8E55C7239EB390",
+      "promptBytes": 4623
+    },
+    "1570": {
+      "location": "Phobjikha Valley conservation observatory",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-387/scene-1570-initial-prompt.txt",
+      "promptSha256": "4EA7FD5E8CEAF5B548B8505B13FADA4F7CEA931E3219371FEBA45D1E1A89FA4A",
+      "promptBytes": 4557
+    },
+    "1571": {
+      "location": "Royal Manas National Park river observatory",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-387/scene-1571-initial-prompt.txt",
+      "promptSha256": "506706575523C534ABBA6FE35854400C6D7364AEFF9A7E7F5B7D91B54031C522",
+      "promptBytes": 4788
+    }
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "allocation": {
+        "A": 1568,
+        "B": 1569,
+        "C": 1570,
+        "D": 1571
+      },
+      "candidatesPrepared": 4,
+      "candidatesAuthorized": 4,
+      "candidatesConsumed": 0,
+      "launchWhenUnlocked": "Exactly four concurrent clean candidates, one per scene.",
+      "sourceMode": "original identity anchors only; no prior country render input",
+      "events": []
+    },
+    "pass2": {
+      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "candidatesConsumed": 0,
+      "thirdPassAllowed": false
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "rejectedPromptLedger": {
+    "status": "empty-before-render",
+    "entries": [],
+    "appendBeforeLaterPassPublicationCommitOrPush": true
+  },
+  "hardSafeAcceptedCount": 0,
+  "missingSceneNumbers": [
+    1568,
+    1569,
+    1570,
+    1571
+  ],
+  "xPost": {
+    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "caption": "Bhutan ❤️ Solomon Islands #Bhutan",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Luxembourg",
+    "nextBatch": 388,
+    "sceneNumbers": [
+      1572,
+      1573,
+      1574,
+      1575
+    ],
+    "cinematicTheme": "deep-sea submersible couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-316-bhutan-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/162"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7"
+    ],
+    "lockedUntilBatch387Closed": true
+  },
+  "preflight": {
+    "path": "tmp/world-195x4/batch-387/batch-387-bhutan-preflight.json",
+    "sha256": "97A3F4A69616387C01CE58CDB06E46944C788C455B9F83149E2C89618029BE48",
+    "bytes": 46785
+  }
+}
