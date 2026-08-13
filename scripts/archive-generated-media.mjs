@@ -362,7 +362,9 @@ async function main() {
     if (!canonicalPath && group[0].bytes > 0) {
       const source = group[0];
       const blobExtension = source.extension || ".bin";
-      canonicalPath = `progress-reports/codex-generated-media/blobs/${digest}${blobExtension}`;
+      canonicalPath =
+        `progress-reports/codex-generated-media/blobs/${digest.slice(0, 2)}/` +
+        `${digest}${blobExtension}`;
       if (options.apply) {
         const mode = await materializeBlob(
           source.absolutePath,
