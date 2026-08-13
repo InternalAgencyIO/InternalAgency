@@ -660,6 +660,27 @@
       "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
     },
     "futureCadence": "Collect, commit, explicitly push, and remote-verify every generated four-slot bank before opening a later bank or country. Preserve all four raws regardless of acceptance.",
+    "rejectedPromptTracking": {
+      "active": true,
+      "tracker": "The active batch checkpoint's top-level rejectedPromptLedger",
+      "oneEntryPerRejectedOrFailedGeneration": true,
+      "completeCanonicalUtf8PromptSourceRequiredForHistoricalBackfill": true,
+      "runtimeLaunchByteExactTextRequiredForEveryFutureGeneration": true,
+      "legacyTransportCaveat": "Historical PowerShell transport could alter terminal whitespace or character encoding in the runtime echo. Historical entries must preserve all canonical prompt prose and label fidelity honestly; rounds with verified originating launch strings may be labeled runtime-launch-byte-exact.",
+      "promptPathHashOrComponentsAloneAreInsufficient": true,
+      "requiredEntryFields": [
+        "immutable entryId",
+        "scene round phase and candidate slot when applicable",
+        "rejection or failure status",
+        "complete prompt text and SHA-256 plus an explicit canonical-source-text or runtime-launch-byte-exact fidelity label",
+        "preserved raw path and SHA-256 or explicit no-bytes state",
+        "rejection audit pointer"
+      ],
+      "appendOnly": true,
+      "syncAndVerifyCommand": "node scripts/sync-rejected-prompt-ledger.mjs --verify",
+      "gate": "Append and verify every newly rejected or failed prompt before the next commit, push, render bank, country, X publication, or queue advance.",
+      "historicalBackfillRequired": true
+    },
     "acceptanceEffect": "Archive presence never changes acceptedAssets, acceptedSceneCount, X eligibility, or queue advancement."
   },
   "rapidConsolidatedRenderPolicy": {
