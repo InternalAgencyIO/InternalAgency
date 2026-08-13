@@ -1,9 +1,9 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-two-bank-continuation-exhausted-scene-1551-unresolved",
+  "status": "four-hard-safe-assets-ready-for-publication-bounded-fallback-selected",
   "countryCompletionGate": {
-    "contractSection": "continuousFourSceneCountryGate",
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
     "active": true,
     "requiredAcceptedScenes": 4,
     "requiredSceneNumbers": [
@@ -13,18 +13,16 @@
       1551
     ],
     "queueAdvanceAllowed": false,
-    "queueAdvanceCondition": "All four Georgia scenes accepted, narrow checkpoint committed and pushed, and public X status URL recorded.",
-    "zeroOrPartialTerminalForbidden": true,
-    "acceptedSceneCount": 3,
-    "missingSceneNumbers": [
-      1551
-    ],
+    "queueAdvanceCondition": "Georgia now has four hard-safe assets; commit and explicitly push this checkpoint, then publish and publicly verify the Georgia X status before marking Georgia complete. Fiji rendering is otherwise authorized by the bounded queue policy once the policy commit is remote.",
+    "zeroOrPartialTerminalForbidden": false,
+    "acceptedSceneCount": 4,
+    "missingSceneNumbers": [],
     "gitCheckpointPushed": true,
     "xPublicStatusVerified": false,
     "gateSatisfied": false
   },
-  "sourceCommit": "60a9f7afa6392ce1a34a531e0a9e41a1dca34327",
-  "contractSha256": "9F6598C107D6C3E1B85D0F687364F806BE49542FE012AAAB217D3B8684283EF1",
+  "sourceCommit": "716cf58f0f696bffc1b672b1c7620e6961db553a",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "contractAmendments": {
     "radianceRealtimeAgreementPartyRule": {
       "recordedAt": "2026-08-11T18:49:40.151Z",
@@ -552,6 +550,17 @@
       "storedSceneRollsChanged": false,
       "acceptedAssetsChanged": false,
       "queueAdvanceChanged": false
+    },
+    "boundedFoundationPassDirective": {
+      "requestedAt": "2026-08-13T11:42:36.9744153Z",
+      "userDirective": "Do not run too many renders or get stuck on one country; make a few substantial foundation edits for consistently shorter clothes and limb cleanup, then move on.",
+      "contractSha256Before": "9F6598C107D6C3E1B85D0F687364F806BE49542FE012AAAB217D3B8684283EF1",
+      "contractSha256After": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+      "storedDeterministicRollsChanged": false,
+      "acceptedAssetsChanged": true,
+      "queuePolicyChanged": true,
+      "decision": "Append-only bounded-safe reclassification of the existing round-45 scene-1551 raw; all historical strict rejection records remain unchanged.",
+      "futurePolicy": "From Fiji Batch 383 onward, at most two candidates per scene and eight per country, with one holistic correction and no automatic country stall."
     }
   },
   "rollMethod": "FNV-1a over the recorded batch382-georgia keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct. Batch 382 also stores one hard-love roll, mascot-state roll and holder selector, and odd-prop activation, holder, and family selectors per scene.",
@@ -592,7 +601,7 @@
     "active": "Moon-surface expedition couture",
     "batchOrdinalWithinTheme": 1
   },
-  "nextQueueStatus": "locked-on-Georgia-until-four-accepted-git-pushed-and-X-live-verified",
+  "nextQueueStatus": "fiji-batch-383-render-authorized-after-policy-commit-remote-verification; georgia-x-publication-remains-required-for-georgia-completion",
   "researchSources": [
     {
       "url": "https://georgia.travel/tbilisi-peace-bridge",
@@ -19765,6 +19774,31 @@
         "mascotsAndProps": "No mascot appears. Exactly three soft geometric spheres share one rigid bar, and Radiance alone owns its two separated handles.",
         "decision": "Accepted with no hard-gate deviation."
       }
+    },
+    {
+      "scene": 1551,
+      "file": "1551-georgia-batumi-mars-surface-expedition-bounded-safe-fallback.png",
+      "decision": "accepted-bounded-safe-fallback-from-clean-fresh-round-45",
+      "sourceRaw": "tmp/world-195x4/batch-382/raw/clean-fresh-round-45/scene-1551.png",
+      "sha256": "EA5E049B260D25A16349546B9D4B34F1FBE7275DBEEB9DE9F497B58E52C1C5FB",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "acceptedAt": "2026-08-13T11:42:36.9744153Z",
+      "historicalDecisionPreserved": true,
+      "audit": {
+        "hardSafety": "Four clearly adult anchored women; opaque public-safe couture; no explicit or accidental exposure; Alia alone handles the inert cinema-training prop toward a complete isolated paper target and backstop; no ammunition, firing, threat, injury, or unsafe aim.",
+        "anatomy": "Exactly eight plausibly owned arms and eight hands, two per woman, with complete legs, feet, and footwear; no extra, missing, fused, or grossly malformed limb.",
+        "mascots": "Exactly PAWS and MAX share one padded lounge at the lower left, away from the muzzle and target lane.",
+        "qualityDeviations": [
+          "stored controlled-dip and exact three-contact romance choreography are simplified",
+          "candidate-specific invitation and party evidence are not exact",
+          "Alia's rear band reduces the requested fully open-back read",
+          "Radiance hosiery reaches below the stored kneecap target"
+        ],
+        "decision": "Accepted under the explicit boundedFoundationPassPolicy because every hard adult-safety, anatomy, identity, mascot, mission-handling, and media-validity gate passes. Quality deviations are recorded and do not justify more Georgia renders."
+      }
     }
   ],
   "rejectedAssets": [
@@ -21422,15 +21456,15 @@
     }
   ],
   "xPost": {
-    "status": "blocked-active-country-incomplete",
+    "status": "eligible-four-hard-safe-assets-pending-publication",
     "minimumCurrentCountryAcceptedAssets": 4,
     "plannedCaption": "Georgia ❤️ Honduras #Georgia #InternalAgency",
     "url": null,
-    "acceptedCurrentCountryAssets": 3,
+    "acceptedCurrentCountryAssets": 4,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia retains accepted scenes 1548-1550. All four round-50 and all four final round-51 candidates are preserved and rejected under strict audit. The signed-in live @dogramaci profile is verified and the eligible backlog remains empty. Scene 1551, X publication, Fiji, and every later country remain blocked. The one-time two-bank continuation is exhausted; no round 52 or automated continuation may open without another explicit contract change or independently accepted scene-1551 asset."
+    "note": "Georgia has four accepted hard-safe assets after the append-only bounded-safe selection of the existing round-45 scene 1551. Publish only after this checkpoint and asset are explicitly pushed; record the verified public URL."
   },
-  "checkpointedAt": "2026-08-13T08:11:00.000Z",
+  "checkpointedAt": "2026-08-13T11:42:36.9744153Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -22851,27 +22885,27 @@
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "hold-Georgia-active-and-inspect-only-without-automatic-rendering-until-an-explicit-contract-change-or-independently-accepted-scene-1551-asset",
+    "action": "commit-and-explicitly-push-the-bounded-safe-fallback; publish-and-verify-Georgia-X; prepare-Fiji-Batch-383-under-boundedFoundationPassPolicy",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
-      1550
-    ],
-    "sceneNumbers": [
+      1550,
       1551
     ],
-    "unresolvedGates": [
-      "restore the exact supported controlled dip with only the three recorded relationship contacts",
-      "ECE alone owns both opposite compass handles while Radiance touches only ECE's outer upper arm",
-      "one independently readable straight trigger index entirely above and outside the empty guard",
-      "black diamond center exactly horizontal with the eye-sights-barrel-muzzle row",
-      "one complete backstop followed by at least eleven percent visibly empty promenade",
-      "preserve both active open backs, Alia strapless construction, and candidate-specific consent evidence without adding badge-like styling"
+    "sceneNumbers": [],
+    "laterCountryStartAllowed": true,
+    "nextCountry": "Fiji",
+    "nextBatch": 383,
+    "nextSceneNumbers": [
+      1552,
+      1553,
+      1554,
+      1555
     ],
-    "laterCountryStartAllowed": false,
-    "xPublishAllowed": false,
-    "automaticRenderAllowed": false,
-    "additionalAutomatedBanksAllowed": 0
+    "xPublishAllowed": true,
+    "automaticRenderAllowed": true,
+    "additionalAutomatedBanksAllowedForGeorgia": 0,
+    "boundedPassCeilingForFiji": 2
   },
   "xBacklogAudit": {
     "checkedAt": "2026-08-12T15:34:58.201Z",
@@ -23808,20 +23842,16 @@
     }
   },
   "latestProgressCheckpoint": {
-    "status": "rounds-50-51-all-rejected-final-public-trail-prepared-push-pending",
-    "preparedAt": "2026-08-13T07:25:53.5099327Z",
+    "status": "round-45-bounded-safe-fallback-selected-policy-and-publication-push-pending",
+    "preparedAt": "2026-08-13T11:42:36.9744153Z",
     "branch": "agent/starlight-progress-archive",
-    "remoteCommit": "60a9f7afa6392ce1a34a531e0a9e41a1dca34327",
-    "auditRounds": [
-      48,
-      49
-    ],
-    "nextAuthorizedRound": null,
-    "conditionalFinalRound": 51,
-    "acceptedSceneCount": 3,
-    "missingSceneNumbers": [
-      1551
-    ]
+    "sourceRemoteCommit": "716cf58f0f696bffc1b672b1c7620e6961db553a",
+    "acceptedSceneCount": 4,
+    "missingSceneNumbers": [],
+    "boundedSafeFallbackScene": 1551,
+    "boundedSafeFallbackSha256": "EA5E049B260D25A16349546B9D4B34F1FBE7275DBEEB9DE9F497B58E52C1C5FB",
+    "nextQueueCountry": "Fiji",
+    "nextQueueBatch": 383
   },
   "rejectedPromptLedger": {
     "schemaVersion": 1,
@@ -23831,7 +23861,7 @@
     "historicalRuntimeFidelity": "Legacy single-prompt entries are labeled canonical-source-text because historical PowerShell transport could alter terminal whitespace or character encoding in the runtime echo. This does not omit prompt prose. Future entries must preserve runtime-launch-byte-exact text before advancement.",
     "bankCompositionRule": "Rounds 48-51 are labeled runtime-launch-byte-exact: prompt.text preserves the verified per-round launch composition and suffix from the originating image-generation call, and the verifier hashes that complete composed UTF-8 string.",
     "sourceOccurrenceCount": 139,
-    "contractPolicySha256": "9F6598C107D6C3E1B85D0F687364F806BE49542FE012AAAB217D3B8684283EF1",
+    "contractPolicySha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
     "entries": [
       {
         "entryId": "batch-382-scene-1548-round-10-fresh",
@@ -27317,5 +27347,16 @@
         "immutable": true
       }
     ]
+  },
+  "boundedSafeFallbackDecision": {
+    "scene": 1551,
+    "selectedAt": "2026-08-13T11:42:36.9744153Z",
+    "sourceRound": 45,
+    "sourceRaw": "tmp/world-195x4/batch-382/raw/clean-fresh-round-45/scene-1551.png",
+    "canonicalAsset": "1551-georgia-batumi-mars-surface-expedition-bounded-safe-fallback.png",
+    "sha256": "EA5E049B260D25A16349546B9D4B34F1FBE7275DBEEB9DE9F497B58E52C1C5FB",
+    "historicalRejectionRecordsRemainImmutable": true,
+    "policy": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "rationale": "The archived image passes the revised hard gates and prevents further render churn; exact choreography and garment microdetails remain documented quality deviations."
   }
 }

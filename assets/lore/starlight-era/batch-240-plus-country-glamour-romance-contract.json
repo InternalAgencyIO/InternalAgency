@@ -27,7 +27,7 @@
     "frequency": "Exactly one of the four images in every country batch includes the male model in addition to Radiance, Ellie, Alia, and AI ECE. The other three images retain the four-woman cast only.",
     "sceneSelection": "Store one deterministic FNV-1a roll over batch-number, country slug, and male-model-scene, reduced modulo 4. Results 0 through 3 select scene positions one through four. Never replace or remove a woman to make room for him.",
     "identity": "A distinct clearly adult male special-operative fashion model with an athletic muscular build, closely trimmed beard, recognizable consistent face, and calm alert posture. Establish his first accepted appearance as the forward face anchor, then preserve it without cloning, face substitution, or age shift.",
-    "wardrobe": "He wears a fitted opaque short-sleeve T-shirt or short-sleeve polo carrying a restrained country-palette accent, black jeans, and practical black shoes or boots. Keep him fully clothed and public-safe. Vary shirt construction, texture, collar, country accent, and footwear across countries without changing the core silhouette.",
+    "wardrobe": "He wears a fitted opaque short-sleeve T-shirt or short-sleeve polo carrying a restrained country-palette accent, opaque tailored above-knee black shorts, and practical black shoes or boots. Keep him fully clothed and public-safe. Vary shirt construction, texture, collar, country accent, shorts tailoring, and footwear across countries without changing the core silhouette.",
     "relationship": "He is married to AI ECE. The selected image shows adult infidelity drama in plain sight: he shares a flirtatious hug, linked hands, cheek kiss, or waist touch with Alia or Ellie, while Radiance openly seeks his attention and ECE visibly registers the betrayal, jealousy, control, hurt, or complicated affection. His strongest sustained eye line returns to ECE even while Alia or Ellie receives the overt affectionate action.",
     "integration": "Integrate him fully into the country landmark, weather, profession theme, motif story, mission action, and love-beat choreography. Preserve every existing per-character roll for the four women. Add a stored independent male emotion roll from the existing emotion distribution without changing any other roll or threshold.",
     "contactRule": "The selected five-person scene still requires the four-woman romance square to read clearly and must add at least two unambiguous male contacts, one with Alia or Ellie and one relationship-counter contact or eye-line with ECE or pursuing Radiance. All contact remains consensual, nonviolent, and non-explicit.",
@@ -47,11 +47,11 @@
       "sceneRule": "Use different motif placements and scales across the selected outfits, such as a full bodice graphic, skirt panel, structured hip piece, metallic applique, large embroidery field, or footwear construction. Keep motifs respectful, legible, and integrated into couture rather than pasted on."
     },
     "prohibitions": "No literal flags, official emblems, sacred symbols, political insignia, copied ceremonial dress, or generic rainbow replacement.",
-    "glamour": "After-dark performance couture with dramatic heels, glossy or reflective tailoring, concise secure hemlines, and opaque lined coverage.",
+    "glamour": "Across all four clearly adult women's looks, use the shortest secure opaque public-fashion construction compatible with the stored rolls: concise upper-thigh mini hems, tailored short shorts or skorts, and cropped, strapless, or open-back structures where active. Every garment remains lined, stable in motion, and fully covers bust, seat, pelvis, and intimate areas; no accidental exposure or intimate-angle framing.",
     "wardrobeUniqueness": {
       "requiredEveryImage": true,
       "rule": "All four characters must have unmistakably different silhouettes, garment construction, hem architecture, material treatment, and footwear design in every image. Color changes alone do not count as unique styling.",
-      "silhouetteSet": "Choose four different structures per scene from sculpted mini dress, cropped bodice with asymmetric skirt, tailored short romper, strapless folded dress, high-waist shorts with architectural top, one-shoulder cocktail mini, peplum micro-suit, cutout column mini, corsage-inspired two-piece, or another equally distinct public-safe couture form.",
+      "silhouetteSet": "Choose four different short-hem structures per scene from sculpted upper-thigh mini dress, cropped bodice with asymmetric upper-thigh skort, tailored short romper, strapless folded mini, high-waist tailored shorts with architectural top, one-shoulder cocktail mini, peplum micro-suit over short shorts, cutout column mini, corsage-inspired short two-piece, or another equally distinct secure opaque public-safe form. Base outfit nouns yield to this short-hem foundation.",
       "continuity": "Do not repeat an outfit design within a batch or carry it unchanged into the next country. Preserve every triggered per-character midriff, strapless, and open-back roll while making the four resulting looks visibly different.",
       "antiConvergenceGate": "Reject palette-swapped copies, a quartet built from the same mini-dress or two-piece template, repeated map-print surfaces, matching neckline and hem families, or four looks distinguished mainly by color. Before rendering, assign each woman a different structural idea, material language, motif technique, hem architecture, and footwear construction. At least two looks must use dimensional construction such as sculpted applique, pleating, beadwork, metallic framework, woven panels, corsage forms, architectural drape, or cut-panel tailoring instead of printed surface graphics.",
       "crossSceneMemory": "Record a concise outfit fingerprint for every woman and scene. No later scene in the country may reuse the same silhouette, neckline, waist treatment, hem, primary material, motif placement, and footwear combination. The next country must also avoid the immediately preceding country's dominant silhouette family and surface treatment.",
@@ -62,9 +62,18 @@
       "neck": "Fully unobstructed neck with no high collar, scarf, tie, or neck-covering layer.",
       "arms": "Bare arms from shoulder to wrist with no sleeves.",
       "back": "Open upper back and shoulder blades through a securely engineered backless or low-back silhouette.",
-      "legs": "Exposed legs through a short secure hem, high-cut tailored shorts, or asymmetric mini silhouette.",
+      "legs": "Every woman shows complete legs through one secure opaque lined upper-thigh mini, skort, tailored short, or short-romper silhouette. No trousers, leggings, midi/maxi skirts, or front/side coat panels may extend below the primary short hem; a narrow rear-only drape may trail without hiding either leg.",
       "front": "Dramatic plunging, sweetheart, wrap, or sculpted low-cut neckline with secure opaque built-in support and no nipple or under-bust exposure.",
       "tone": "Bold teasing adult glamour, intentional and confident, never accidental exposure or explicit framing."
+    },
+    "shortHemFoundation": {
+      "active": true,
+      "requestedAt": "2026-08-13T11:42:36.9744153Z",
+      "requiredEveryImage": true,
+      "appliesTo": "all four clearly adult women prospectively from Batch 383 onward; any later bounded recovery uses the same foundation",
+      "precedence": "This short, bare-leg public-fashion foundation overrides longer garment nouns while preserving every deterministic midriff, strapless, and open-back roll.",
+      "publicSafety": "Opaque built-in support and full bust, seat, pelvic, and intimate coverage are hard requirements. No exposed underwear, accidental exposure, upskirt framing, fetish styling, or intimate-angle composition.",
+      "throughputTreatment": "Hem length and exact couture microdetails are high-priority quality targets folded into the single holistic correction pass; they never authorize a third pass."
     }
   },
   "romance": {
@@ -621,19 +630,21 @@
     "xEligibility": "Historical only through Batch 381. Batch 382 onward requires four accepted current-country scenes before publication."
   },
   "continuousFourSceneCountryGate": {
-    "active": true,
+    "active": false,
     "activeFromBatch": 382,
     "requestedAt": "2026-08-11T07:22:46.656Z",
     "startingCountry": "Georgia",
     "intent": "Keep rendering, X publication, Git checkpoints, and country advancement synchronized with one complete four-scene country at a time.",
     "countryCompletionDefinition": "A country is complete only when each of its four planned scene numbers has exactly one accepted current-country asset, the narrow checkpoint and directly related contract, progress-archive, or ledger updates are committed and explicitly pushed to agent/starlight-progress-archive, and the country X post is publicly verified with its status URL recorded in both checkpoint and publishing ledger.",
-    "noAdvanceRule": "Never open, roll, render, checkpoint as terminal, or advance to the next country while the active country has fewer than four accepted scenes, an unpushed country checkpoint, or an unpublished or unverified X post. Terminal zero-accepted and terminal partially-accepted outcomes are forbidden from Batch 382 onward.",
-    "renderContinuation": "Preserve every raw output and every accepted scene. Rerender only missing or rejected scenes. Follow rapidConsolidatedRenderPolicy: one initial coordinated generation wave plus at most two consolidated correction waves per country batch. Never restart an unlimited fresh-round chain on later guardian wakes.",
-    "acceptanceRule": "Apply every active contract field and strict anatomy, identity, safety, romance, mascot, odd-prop, theme-location, and outfit-originality gates. Do not lower the gate merely to advance the queue.",
+    "noAdvanceRule": "Historical rule, superseded prospectively by boundedFoundationPassPolicy. Four accepted assets remain the preferred completion and X gate, but a country may no longer stall the render queue after its bounded pass cap.",
+    "renderContinuation": "Historical rule, superseded prospectively by boundedFoundationPassPolicy. Preserve every raw and accepted asset; never reopen unlimited recovery chains.",
+    "acceptanceRule": "Historical strict gate. Under boundedFoundationPassPolicy, public safety, recognizable identity, plausible anatomy, harmless mission handling, mascot safety, and valid media remain hard; couture and choreography precision remain quality targets.",
     "xEligibility": "Exactly four accepted current-country scene assets are required before composing the country post. Keep the existing deterministic caption and attachment rules, verify the live status, record its URL, and never duplicate media already present on the signed-in account.",
     "xBacklogRule": "At every wake reconcile the local ledger against the signed-in live X profile before posting. Drain every eligible unposted historical entry without duplication, then publish the completed active country before any country advance. An X platform or session failure keeps the active country open and must be retried; it is not permission to skip posting.",
     "gitCadence": "Push every coherent contract repair and every narrow country progress or completion checkpoint promptly to agent/starlight-progress-archive with an explicit refspec. Preserve canonical accepted assets under assets and preserve every generated image or video through generatedMediaProgressArchive. Never use a bare push from a divergently tracked branch.",
-    "historicalBoundary": "Do not rewrite or reopen Batch 381 or earlier solely because it ended with zero or partial acceptance. The strict four-scene completion gate begins with Georgia Batch 382."
+    "historicalBoundary": "Do not rewrite or reopen Batch 381 or earlier solely because it ended with zero or partial acceptance. The strict four-scene completion gate begins with Georgia Batch 382.",
+    "supersededAt": "2026-08-13T11:42:36.9744153Z",
+    "supersededBy": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy"
   },
   "generatedMediaProgressArchive": {
     "active": true,
@@ -688,17 +699,17 @@
     "active": true,
     "requestedAt": "2026-08-12T06:15:22.6615747Z",
     "activeFromBatch": 382,
-    "intent": "Increase first-pass acceptance and throughput by solving the complete scene before generation and eliminating serial one-defect rerender chains.",
-    "roundDefinition": "One render pass is one coordinated four-slot candidate bank. Launch exactly four independent image candidates concurrently in one orchestration, allocated only across currently missing or rejected scenes. The complete four-candidate bank counts as one pass regardless of how many slots target the same scene.",
+    "intent": "Keep country renders moving by solving wardrobe and anatomy foundations up front, using at most one initial bank and one holistic correction bank, then accepting the best hard-safe result or closing the scene without a safe asset.",
+    "roundDefinition": "Pass one is exactly four concurrent clean candidates, one for each of the four country scenes. Pass two, only if needed, is at most one fresh corrected candidate for each scene lacking a hard-safe usable result; launch those one to four calls concurrently and never fill unused slots with variants.",
     "countryRoundCeiling": 2,
-    "countryRoundShape": "Exactly one initial four-slot bank may be followed by at most one consolidated four-slot correction bank. Stop sooner when all four scenes pass; never open a third automatic bank.",
-    "perSceneGenerationCeiling": "A scene may receive at most four clean candidates in a pass. Across one country, automated generation is limited to the two authorized four-slot banks.",
+    "countryRoundShape": "At most two passes: one four-scene initial bank and one holistic correction bank containing only hard-unusable scenes. Stop sooner when every scene has a hard-safe usable result; never open a third automatic pass.",
+    "perSceneGenerationCeiling": "At most two automated candidates per scene and at most eight per country, usually fewer because pass two includes only hard-unusable scenes.",
     "correctionPassCeiling": 1,
-    "consolidationRule": "Before each correction wave, complete one holistic strict audit and fold every known identity, anatomy, hand-ownership, romance, wardrobe, location-theme, mascot, odd-prop, mission-safety, and surface defect into one revised composition and prompt. Do not launch serial single-defect edits or prompt patches.",
+    "consolidationRule": "Audit pass one once. Fold every known identity, gross-anatomy, hand-ownership, wardrobe, location, mascot, prop-safety, landmark, and surface defect into one decisive foundation revision. Do not launch serial micro-fixes, filler variants, or edit-of-edit chains.",
     "sourceRule": "Every candidate slot is a clean fresh render from the original identity anchors. Never edit an edit, substitute a lone edit for the four-slot bank, chain recoveries, or seed a later fresh wave with a rejected or processed country image.",
-    "promptRule": "Resolve composition geometry, exact visible contacts, full limb ownership, active wardrobe cuts, prop ownership, target axis, mascot count and species, landmark framing, and all deterministic rolls together before calling the renderer. Keep prompts decisive and remove contradictory or obsolete correction history.",
-    "acceptanceRule": "The render ceiling does not weaken any active acceptance gate. Accepted scenes remain preserved and are never rerendered merely for stylistic consistency.",
-    "capExhaustionRule": "After the second four-slot bank, stop automated image generation. Preserve accepted scenes, keep the same incomplete country active and nonterminal, record and push every unresolved gate, notify the user, and wait for an explicit contract change or an independently accepted asset. Never open another render window, publish early, or advance countries.",
+    "promptRule": "Resolve simple limb topology, one role per hand, short secure wardrobe silhouettes, safe prop ownership and downrange geometry, mascots, landmark, and deterministic rolls before launch. State each invariant once and omit obsolete correction history and native-pixel micromanagement.",
+    "acceptanceRule": "Hard gates are clearly adult and opaque public-safe presentation, recognizable identities, no gross anatomy corruption, harmless isolated inert-prop handling with a visibly safe downrange target/backstop, mascot safety, and valid noncorrupt media. Exact garment microdetails, motif fidelity, eye line, emotion, contact count, choreography, and pixel-perfect target alignment are quality targets, not reasons for a third pass.",
+    "capExhaustionRule": "After pass two, archive, ledger, commit, explicitly push, and remote-verify every output. Accept the best hard-safe candidate for each scene despite recorded quality deviations. If a scene has no hard-safe candidate, close it as closed-no-safe-asset-after-cap, keep it in the bounded recovery backlog, keep that country X-ineligible when below four accepted assets, and advance the render queue. Never force-accept unsafe media and never reopen the country automatically.",
     "activeGeorgiaTransition": {
       "historicalRoundsBeforeDirective": 43,
       "historicalRoundsDoNotConsumeNewCountryDefaults": true,
@@ -754,7 +765,7 @@
       "supersededBy": "twoBankThroughputPolicy"
     },
     "fixedFourSlotParallelRenderBank": {
-      "active": true,
+      "active": false,
       "requestedAt": "2026-08-12T09:16:26.6171819Z",
       "userDirective": "4 parallel renders all the time code it into guardian and go",
       "slotsPerWave": 4,
@@ -769,10 +780,12 @@
       "sourceRule": "Every slot is a clean independent generation from the original identity anchors only. No prior rejected country render, processed output, or edit may be an image input.",
       "auditRule": "Preserve all four raw outputs. Audit all candidates once against every active gate, in deterministic slot order A through D. For each missing scene, accept the first exact passing candidate in that order, copy only that winner to assets, and keep other candidates as raw audit artifacts.",
       "acceptedSceneRule": "Never allocate a slot to an already accepted scene. If a scene gains a passing candidate in a wave, preserve it and exclude it from every later wave.",
-      "waveCeilingInteraction": "Exactly two four-slot banks per country maximum: one initial bank and one consolidated correction bank. Individual candidates are not separate passes, and no continuation window opens after bank two."
+      "waveCeilingInteraction": "Exactly two four-slot banks per country maximum: one initial bank and one consolidated correction bank. Individual candidates are not separate passes, and no continuation window opens after bank two.",
+      "supersededAt": "2026-08-13T11:42:36.9744153Z",
+      "supersededBy": "boundedFoundationPassPolicy"
     },
     "twoBankThroughputPolicy": {
-      "active": true,
+      "active": false,
       "requestedAt": "2026-08-12T15:34:58.201Z",
       "userDirective": "make all your edits in 2 passes and move on; never move on without 4 posts ready per country; use less renders; 4 parallel 7/24",
       "scope": "Georgia Batch 382 and every later country until explicitly changed",
@@ -780,7 +793,7 @@
       "slotsPerPass": 4,
       "execution": "Pass one is the initial coordinated bank. Pass two is one holistic correction bank that combines every known defect. Launch all four slots concurrently, preserve every raw, and never rerender an accepted scene.",
       "completionGate": "Advancement still requires four accepted current-country scene assets, the narrow checkpoint and generated-media trail committed and explicitly pushed to agent/starlight-progress-archive, and one publicly verified X status URL.",
-      "exhaustion": "If fewer than four scenes are accepted after pass two, stop automatic rendering, keep the country active and nonterminal, block X and the next country, and notify the user. A later heartbeat audits state but does not create a third bank.",
+      "exhaustion": "Historical rule, superseded by boundedFoundationPassPolicy: after the cap, archive and advance rather than blocking the render queue.",
       "oneTimeGeorgiaScene1551Reauthorization": {
         "active": false,
         "requestedAt": "2026-08-13T06:33:35.425Z",
@@ -849,14 +862,44 @@
         "earlyStopRule": "If round 50 yields an exact pass, accept the first passing slot in A-D order and do not run round 51.",
         "archiveRule": "Preserve, collect, commit, explicitly push, and remote-verify all four raw outputs before a later bank or country.",
         "exhaustionRule": "If round 51 also fails, stop automatic rendering, keep Georgia active and nonterminal, block Fiji and X, and require another explicit contract change. No round 52 or third bank is permitted."
-      }
+      },
+      "supersededAt": "2026-08-13T11:42:36.9744153Z",
+      "supersededBy": "boundedFoundationPassPolicy"
+    },
+    "boundedFoundationPassPolicy": {
+      "active": true,
+      "requestedAt": "2026-08-13T11:42:36.9744153Z",
+      "userDirective": "Do not run too many renders or get stuck on one country; make a few substantial foundation edits for consistently shorter clothes and limb cleanup, then move on.",
+      "activeFromBatch": 383,
+      "passCeiling": 2,
+      "perSceneCandidateCeiling": 2,
+      "countryCandidateCeiling": 8,
+      "initialPass": "Exactly four clean candidates launched concurrently, one per scene.",
+      "correctionPass": "At most one fresh corrected candidate per hard-unusable scene, one to four calls launched concurrently; no filler variants.",
+      "hardGates": [
+        "clearly adult, opaque, securely covered public-fashion presentation",
+        "recognizable anchored identities and correct adult count",
+        "no grossly extra, missing, fused, impossible, or ownerless limbs, face, legs, hands, or feet",
+        "harmless inert-prop ownership and visibly isolated safe downrange geometry",
+        "mascot safety and valid noncorrupt media"
+      ],
+      "qualityTargets": [
+        "short-hem and stored wardrobe-roll precision",
+        "country motifs and theme-location balance",
+        "eye line, emotion, invitation, romance, hard-love, and exact contact choreography",
+        "target alignment, reserve margin, surface polish, and minor finger detail"
+      ],
+      "completion": "After the cap accept the best hard-safe result for each scene; close any scene with no hard-safe result, retain it in the bounded recovery backlog, preserve every output and exact prompt, and advance the render queue.",
+      "xRule": "Publish normally only when four current-country assets are accepted. An incomplete country remains X-ineligible but may no longer block later-country rendering.",
+      "recoveryRule": "Revisit an incomplete country only after an explicit recovery request or a later explicitly authorized bounded backlog rotation; never through automatic heartbeat repetition."
     }
   },
   "anatomyIntegrity": {
     "requiredEveryImage": true,
     "limbCount": "In standard scenes render exactly four adult characters with exactly two arms and two hands per character, eight arms and eight hands total. In the selected male-model scene render exactly five adult characters with exactly two arms and two hands per character, ten arms and ten hands total. Every character also has anatomically correct legs and feet. Never create an extra, duplicated, floating, fused, borrowed, ownerless, or partially emerging hand, arm, finger cluster, leg, or foot.",
     "contactClarity": "Every affectionate contact must have an unambiguous owner. Trace each visible arm continuously from shoulder through elbow and wrist to one hand. Keep overlapping hugs readable through clean silhouettes and natural occlusion.",
-    "acceptanceGate": "Audit every character for gross anatomy. The Batch 336 throughput override applies only through Batch 381. From Batch 382 onward require exactly eight traceable human arms and eight traceable human hands in four-person scenes and exactly ten of each in the selected male scene; reject every extra, duplicated, floating, fused, borrowed, emerging, missing, or ambiguous limb or finger cluster."
+    "acceptanceGate": "Hard-reject extra, duplicated, fused, impossible, grossly malformed, or ownerless limbs, hands, faces, legs, or feet. Natural occlusion or minor finger ambiguity is a quality deviation, not a blocker, when the owner, limb count, pose, and public-safe action remain anatomically plausible and readable.",
+    "foundationCompositionRule": "Before launch, pre-assign exactly two arms, two hands, two legs, and two feet to every person. Give each hand exactly one role; isolate any mission-prop handler from human contact; keep at most three simple human-to-human contacts; stage shoulder-to-elbow-to-wrist-to-hand chains against open background with separated silhouettes and no crossed wrist clusters. Audit the whole pose once and fold every limb, contact, face, and footwear correction into the one holistic correction prompt."
   },
   "frame": "9:16 full-length cinematic editorial with complete faces, hands, heels or boots, country landmark, and readable mission action"
 }
