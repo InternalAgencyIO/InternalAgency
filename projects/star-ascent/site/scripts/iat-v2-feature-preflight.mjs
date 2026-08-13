@@ -184,7 +184,9 @@ const report = {
       currentSourceUpgradeCompatibility.preservesActiveV2Features,
     liveSwitchboardCommitRevealRequired: true,
     participantHardwareSignatureRequiredForStake: true,
-    independentFeatureReviewRequired: true,
+    automatedFeatureDirectEvidenceRequired: true,
+    humanFeatureReviewerRequired: false,
+    noSelfAttestation: true,
     cccLinkedSettlementCannotCompleteSameDay: true,
   },
 };

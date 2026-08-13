@@ -1,6 +1,6 @@
 {
   "$schema": "./iat-b3-production-identity-authority-evidence.v1.schema.json",
-  "schema": "iat-b3-production-identity-authority-evidence/v1",
+  "schema": "iat-b3-production-identity-authority-evidence/v3",
   "profile": "PRODUCTION",
   "status": "PENDING",
   "scope": {
@@ -11,24 +11,26 @@
       "C_DEPLOYED_IDENTITY_AUTHORITY_SEAL"
     ],
     "doesNotCertify": [
-      "PACKET_SELECTED_TRUST_KEYS",
-      "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SIGNED_OBSERVATIONS",
+      "PACKET_SELECTED_AUTOMATED_EVIDENCE_SOURCES",
+      "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SOURCE_BOUND_ENDPOINT_RECEIPTS",
       "FINAL_BINARY_TRUTH_WITHOUT_EXACT_BINDINGS",
-      "OWNER_OR_REVIEWER_IDENTITY_WITHOUT_EXTERNAL_TRUST_CONFIGURATION",
+      "OWNER_DECISION_OR_AUTOMATED_CLOSURE_TRUTH_WITHOUT_EXTERNAL_SOURCE_CONFIGURATION",
+      "MODEL_T_SOLANA_OCMS_CAPABILITY_WITHOUT_SEPARATE_SOURCE_BOUND_DEVICE_OBSERVATION",
+      "MODEL_T_HARDWARE_PROVENANCE_FROM_ED25519_SIGNATURE_BYTES_ALONE",
       "TRANSACTION_SIGNING_DEPLOYMENT_FUNDING_OR_ACTIVATION_AUTHORITY",
-      "INDEPENDENT_GATE_8_ACCEPTANCE",
+      "AUTOMATED_GATE_8_EVIDENCE_COMPLETION",
       "RELEASE_OR_MAINNET_EXECUTION_AUTHORIZATION"
     ]
   },
   "sourceBindings": {
     "ownerPolicyFreeze": {
       "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-      "sha256": "04f515105124b7176ac4d4eec0e52539ccd6fab28273170b93797b075f570702",
+      "sha256": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
       "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
     },
     "identityInputFreeze": {
       "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-      "sha256": "99bee9984df75f8b1037ad0454924640b7b106285b89a51d5f8d632c55650df5",
+      "sha256": "17bcf00f97c5fd95bc39fa9eff120fd7f7678ed77f9bc333c36189f44633cacf",
       "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
     },
     "costFeasibilityReference": {
@@ -36,6 +38,21 @@
       "sha256": "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
       "bindingScope": "REFERENCE_ONLY_NEVER_COMPLETION_EVIDENCE"
     }
+  },
+  "modelTCapabilityBoundary": {
+    "predicate": "MODEL_T_SOLANA_OCMS_CAPABILITY_OBSERVED",
+    "requiredDeviceModel": "Trezor Model T",
+    "acceptedOcmsVersions": [
+      "OCMS_V0",
+      "OCMS_V1"
+    ],
+    "ocmsV0FirmwareRange": ">=2.12.1 <2.12.4",
+    "ocmsV1FirmwareRange": ">=2.12.4",
+    "sourceRequirement": "SEPARATE_EXTERNAL_SOURCE_BOUND_DEVICE_OBSERVATION_RECEIPT",
+    "signerPathAndPublicKeyMustMatchObservation": true,
+    "signatureBytesProveHardwareProvenance": false,
+    "rawEd25519OwnerDecisionAllowed": false,
+    "packetSelfAttestedCapabilityObserved": false
   },
   "productionChoices": {
     "lawProgramId": null,
@@ -51,10 +68,10 @@
     "status": "PENDING",
     "subjectSha256": null,
     "ownerDecisionPreimageSha256": null,
-    "ownerAcceptance": null,
-    "mainnetGenesisObservations": [],
-    "independentReview": null,
-    "blocker": "Production law, economy, mint, Mainnet Genesis, ceremony, upgrade-authority, and payer choices plus authenticated owner acceptance remain absent."
+    "ownerDecisionReceipt": null,
+    "mainnetGenesisEndpointReceipts": [],
+    "automatedClosureReceipt": null,
+    "blocker": "Production choices, a separate source-bound Model T firmware/OCMS capability observation, and an exact OCMS owner-decision envelope remain absent."
   },
   "phaseBCeremonyFunding": {
     "status": "PENDING",
@@ -83,10 +100,10 @@
     "aggregateRecoverableBufferLamports": null,
     "aggregateFeeBudgetLamports": null,
     "expiresAtUnixSeconds": null,
-    "fundingApproval": null,
-    "payerBalanceObservations": [],
-    "independentReview": null,
-    "blocker": "Exact final binaries, fresh cost and recovery preimages, accountable funding acceptance, ceremony floor, and two independent payer observations remain absent."
+    "fundingDecisionReceipt": null,
+    "payerBalanceEndpointReceipts": [],
+    "automatedClosureReceipt": null,
+    "blocker": "Exact final binaries, fresh cost and recovery preimages, explicit funding decision, ceremony floor, two source-bound payer endpoint receipts, and automated closure remain absent."
   },
   "phaseCDeployedSeal": {
     "status": "PENDING",
@@ -211,16 +228,16 @@
       "genesisStagingWritesDisabled": null,
       "stateSha256": null
     },
-    "terminalEndpointObservations": [],
-    "independentReview": null,
-    "blocker": "No Mainnet ceremony has run; the exact 17-stage journal, terminal authority state, two endpoint observations, and independent review remain absent."
+    "terminalEndpointReceipts": [],
+    "automatedClosureReceipt": null,
+    "blocker": "No Mainnet ceremony has run; the exact 17-stage journal, terminal authority state, two source-bound endpoint receipts, and automated closure receipt remain absent."
   },
   "authorizationBoundary": {
     "signingAuthorized": false,
     "deploymentAuthorized": false,
     "fundingSpendAuthorized": false,
     "activationAuthorized": false,
-    "independentGate8Accepted": false,
+    "automatedGate8EvidenceComplete": false,
     "releaseAuthorized": false,
     "mainnetExecutionAuthorized": false,
     "mainnetStatus": "HOLD"

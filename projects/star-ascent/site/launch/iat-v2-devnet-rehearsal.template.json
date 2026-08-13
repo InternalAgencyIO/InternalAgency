@@ -7,8 +7,10 @@
     "mainnetTransactionsAllowed": false,
     "automaticWalletSignaturesAllowed": false,
     "secretsAllowedInRepositoryOrEvidence": false,
-    "hardwareConfirmationRequired": true,
-    "independentVerifierRequired": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true,
+    "automatedSourceReceiptStateObservationRequired": true,
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
     "programMustBeHardwareControlledBeforeTokenFunding": true
   },
   "toolchain": {
@@ -101,10 +103,8 @@
     "confirmedActions": [],
     "completedAtUtc": null
   },
-  "verifier": {
-    "label": "FDF Guard",
-    "address": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja",
-    "independentOfOperator": true,
+  "automatedObservation": {
+    "mode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
     "comparedDestinations": false,
     "comparedPolicyAndProgramDigests": false,
     "comparedVaultsAndProgramAuthority": false,

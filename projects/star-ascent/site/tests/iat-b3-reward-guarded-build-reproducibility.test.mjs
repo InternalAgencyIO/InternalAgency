@@ -46,6 +46,7 @@ const INVENTORIED_SOURCE_PATHS = Object.freeze([
   "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs",
   "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs",
   "scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs",
+  "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs",
   "scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs",
 ]);
 const DETERMINISTIC_BUILD = `
@@ -138,7 +139,7 @@ test("two independent fresh builds produce a narrow byte-equality receipt", (t) 
   assert.equal(comparison.rollbackProtectionVerified, false);
   assert.equal(comparison.materializedProjectionStateVerified, false);
   assert.equal(comparison.externalSideEffectsAuthorized, false);
-  assert.equal(comparison.independentReviewAccepted, false);
+  assert.equal(comparison.sourceBoundAutomatedDirectEvidenceVerified, false);
   assert.equal(comparison.activationReady, false);
   assert.equal(comparison.mainnetStatus, REWARD_GUARDED_BUILD_REPRODUCIBILITY_MAINNET_STATUS);
   assert.equal(comparison.mainnetStatus, "HOLD");

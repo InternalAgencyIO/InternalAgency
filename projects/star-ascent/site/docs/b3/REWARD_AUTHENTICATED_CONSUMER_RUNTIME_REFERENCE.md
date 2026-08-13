@@ -67,8 +67,8 @@ wrapper's fixed HOLD flags, checks both SQLite adapters' exact schemas/manifests
 and truth boundaries, and requires all available live values to equal the
 binding. Merely supplying an evidence digest does not establish evidence
 acceptance. The binding therefore fixes
-`productionIdentityEvidenceAccepted`, provider authentication, independent
-review, runtime integration, and activation to false.
+`productionIdentityEvidenceAccepted`, provider authentication, source-bound
+automated direct evidence, runtime integration, and activation to false.
 
 The provider trust binding still requires explicit owner-supplied Ed25519
 public-key records. Each record binds key ID, canonical SPKI bytes and digest,
@@ -208,7 +208,7 @@ Both runtimes and receipts preserve these broader fields as false:
 - `runtimeConfinementVerified`;
 - `runtimeIntegrationVerified`;
 - `externalSideEffectsAuthorized`;
-- `independentReviewAccepted`; and
+- `sourceBoundAutomatedDirectEvidenceVerified`; and
 - `activationReady`.
 
 Every artifact remains `mainnetStatus: "HOLD"`. A configured key and valid

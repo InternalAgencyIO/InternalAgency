@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://internal.agency/schemas/iat-b3-dependency-security-remediation.v1.schema.json",
-  "title": "IAT B3 dependency security remediation packet v1",
+  "title": "IAT B3 dependency security remediation packet v2 (compatibility filename retained)",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -17,7 +17,7 @@
     "auditObservations",
     "remediations",
     "informationalFindings",
-    "independentReview",
+    "automatedDirectEvidence",
     "technicalRemediationComplete",
     "zeroKnownVulnerabilitiesObserved",
     "zeroUnacceptedDependencyFindings",
@@ -29,8 +29,8 @@
   ],
   "properties": {
     "$schema": { "const": "./iat-b3-dependency-security-remediation.v1.schema.json" },
-    "schema": { "const": "iat-b3-dependency-security-remediation/v1" },
-    "status": { "const": "TECHNICAL_REMEDIATION_COMPLETE_INDEPENDENT_ACCEPTANCE_PENDING" },
+    "schema": { "const": "iat-b3-dependency-security-remediation/v2" },
+    "status": { "const": "TECHNICAL_REMEDIATION_COMPLETE_AUTOMATED_DIRECT_EVIDENCE_PENDING" },
     "scope": {
       "type": "object",
       "additionalProperties": false,
@@ -49,7 +49,7 @@
           "const": [
             "FUTURE_REGISTRY_OR_ADVISORY_DATABASE_STATE",
             "TRANSITIVE_UNMAINTAINED_DEPENDENCY_RISK_ACCEPTANCE",
-            "INDEPENDENT_SECURITY_REVIEW_ACCEPTANCE",
+            "SOURCE_BOUND_AUTOMATED_SECURITY_EVIDENCE_CLOSURE",
             "PRODUCTION_BINARY_DEVNET_RELEASE_OR_MAINNET_AUTHORIZATION"
           ]
         }
@@ -135,19 +135,26 @@
           "patchedVersions": { "const": [] },
           "unaffectedVersions": { "const": [] },
           "accepted": { "const": false },
-          "disposition": { "const": "PENDING_INDEPENDENT_RISK_ACCEPTANCE" }
+          "disposition": { "const": "PENDING_EXPLICIT_OWNER_RISK_DECISION" }
         }
       }
     },
-    "independentReview": {
+    "automatedDirectEvidence": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["accepted", "reviewerIdentity", "reviewedAtUtc", "acceptanceReference"],
+      "required": ["schema", "status", "receiptSha256", "stateDigestSha256", "endpointEvidenceSha256", "observedAtUtc", "freshnessWindowSeconds", "directEvidenceOnly", "packetMaySelectEvidenceSources", "noSelfAttestation", "humanReviewerRequired"],
       "properties": {
-        "accepted": { "const": false },
-        "reviewerIdentity": { "type": "null" },
-        "reviewedAtUtc": { "type": "null" },
-        "acceptanceReference": { "type": "null" }
+        "schema": { "const": "iat-b3-dependency-security-automated-direct-evidence/v1" },
+        "status": { "const": "SOURCE_BOUND_RECEIPT_STATE_ENDPOINT_EVIDENCE_UNOBSERVED" },
+        "receiptSha256": { "type": "null" },
+        "stateDigestSha256": { "type": "null" },
+        "endpointEvidenceSha256": { "type": "null" },
+        "observedAtUtc": { "type": "null" },
+        "freshnessWindowSeconds": { "const": 900 },
+        "directEvidenceOnly": { "const": true },
+        "packetMaySelectEvidenceSources": { "const": false },
+        "noSelfAttestation": { "const": true },
+        "humanReviewerRequired": { "const": false }
       }
     },
     "technicalRemediationComplete": { "const": true },

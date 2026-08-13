@@ -816,7 +816,7 @@ export default function FeatureRehearsal({
     if (!state) return;
     const payload = {
       schema: "iat-v2-devnet-on-chain-feature-rehearsal-evidence/v1",
-      status: "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+      status: "PARTIAL_PENDING_ALL_TIME_GATES_AND_AUTOMATED_DIRECT_EVIDENCE",
       network: "devnet",
       rpc: DEVNET_RPC,
       programId: IAT_V2_PROGRAM_ID,
@@ -836,7 +836,9 @@ export default function FeatureRehearsal({
       transactions: evidence,
       exportedAtUtc: new Date().toISOString(),
       mainnetStatus: "HOLD",
-      independentReviewRequired: true,
+      automatedDirectEvidenceRequired: true,
+      humanReviewerRequired: false,
+      noSelfAttestation: true,
       secretMaterialIncluded: false,
     };
     const blob = new Blob([`${json(payload)}\n`], { type: "application/json" });

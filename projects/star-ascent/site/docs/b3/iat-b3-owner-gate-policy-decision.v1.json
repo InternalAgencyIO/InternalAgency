@@ -1,0 +1,195 @@
+{
+  "schema": "iat-b3-owner-gate-policy-decision/v1",
+  "profile": "PRODUCTION",
+  "status": "REPOSITORY_POLICY_APPLIED_HOLD",
+  "scope": {
+    "contract": "NON_ACTIVATING_OWNER_POLICY_MIGRATION_RECORD",
+    "appliesTo": "B3_RELEASE_EVIDENCE_AND_REQUIRED_SIGNATURE_GATES",
+    "doesNotCertify": [
+      "OWNER_IDENTITY_OR_POLICY_AUTHORIZATION",
+      "TREZOR_DEVICE_OR_SIGNATURE_AUTHENTICITY",
+      "GRAPH_PREDICATE_SATISFACTION_OR_NODE_COMPLETION",
+      "AUTOMATED_EVIDENCE_COMPLETENESS_OR_CORRECTNESS",
+      "DEVNET_REHEARSAL_OR_ACTIVATION",
+      "RELEASE_OR_MAINNET_AUTHORIZATION"
+    ]
+  },
+  "sourceBindings": {
+    "declaredHeadSha": "09ec025b5b301925d49bc24347bafc8a0c7f733d",
+    "releaseDependencyGraph": {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",
+      "fileSha256": "68b22e29f555adb2f59fe5cf42e6a1bf7783a8c962195de6f7736ccd9b1ea843",
+      "schema": "iat-b3-release-dependency-graph/v1",
+      "graphDefinitionSha256": "fd1c3648508e8ad72a933355b4b87a44d60466997bedce4e83693583f9996689",
+      "status": "BLOCKED",
+      "mainnetStatus": "HOLD"
+    },
+    "ownerPolicyFreeze": {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+      "fileSha256": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
+      "schema": "iat-b3-owner-policy-freeze/v2",
+      "status": "BLOCKED",
+      "mainnetStatus": "HOLD"
+    }
+  },
+  "policy": {
+    "humanGate": {
+      "count": 1,
+      "soleGate": "TREZOR_MODEL_T_PHYSICAL_CONFIRMATION",
+      "deviceModel": "TREZOR_MODEL_T",
+      "appliesTo": "EVERY_REQUIRED_CRYPTOGRAPHIC_SIGNATURE",
+      "otherHumanApprovalGatePermitted": false,
+      "independentHumanReviewerPrerequisitePermitted": false,
+      "nativeHumanReviewerPrerequisitePermitted": false
+    },
+    "nonSignatureGateClosure": {
+      "mode": "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION",
+      "automatedDirectEvidenceMayClose": true,
+      "directObservationRequired": true,
+      "exactMigratedPredicateEvidenceRequired": true,
+      "assertionOnlyEvidenceMayClose": false,
+      "inferredEvidenceMayClose": false,
+      "simulatedEvidenceMayCloseProductionClaim": false,
+      "humanReviewPrerequisitePermitted": false
+    },
+    "claimDisposition": {
+      "unobserved": "HOLD",
+      "partiallyObserved": "HOLD",
+      "stale": "HOLD",
+      "contradictory": "HOLD",
+      "invalid": "HOLD",
+      "scopeExpansionPermitted": false
+    }
+  },
+  "migrationBoundary": {
+    "state": "APPLIED_TO_CANONICAL_GRAPH",
+    "currentGraphRemainsAuthoritative": true,
+    "policyCandidateOverridesGraph": false,
+    "conflictingNodesRemainBlocked": true,
+    "graphCompletionClaimed": false,
+    "separateGraphMigrationRequired": false
+  },
+  "predicateMigrations": [
+    {
+      "nodeId": "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+      "currentNodeStatus": "BLOCKED",
+      "currentPredicate": "SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET",
+      "conflictClass": "SIGNATURE_DEVICE_UNDERSPECIFIED",
+      "proposedNodeId": "LIVE_ESTATE_CANONICAL_MINT_DECISION",
+      "proposedPredicate": "TREZOR_MODEL_T_SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET",
+      "gateClass": "SIGNATURE",
+      "closureMode": "TREZOR_MODEL_T_PHYSICAL_CONFIRMATION_AND_VERIFIED_SIGNATURE",
+      "migrationState": "APPLIED_TO_CANONICAL_GRAPH",
+      "completionClaimed": false
+    },
+    {
+      "nodeId": "EXTERNAL_CHECKPOINT_PROVIDER",
+      "currentNodeStatus": "BLOCKED",
+      "currentPredicate": "EXTERNAL_CHECKPOINT_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT",
+      "conflictClass": "HUMAN_REVIEW_AUTHORITY_AMBIGUOUS",
+      "proposedNodeId": "EXTERNAL_CHECKPOINT_PROVIDER",
+      "proposedPredicate": "EXTERNAL_CHECKPOINT_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT",
+      "gateClass": "NON_SIGNATURE",
+      "closureMode": "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION",
+      "migrationState": "APPLIED_TO_CANONICAL_GRAPH",
+      "completionClaimed": false
+    },
+    {
+      "nodeId": "X_SOCIAL_EVIDENCE_PROVIDER",
+      "currentNodeStatus": "BLOCKED",
+      "currentPredicate": "X_SOCIAL_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT",
+      "conflictClass": "HUMAN_REVIEW_AUTHORITY_AMBIGUOUS",
+      "proposedNodeId": "X_SOCIAL_EVIDENCE_PROVIDER",
+      "proposedPredicate": "X_SOCIAL_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT",
+      "gateClass": "NON_SIGNATURE",
+      "closureMode": "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION",
+      "migrationState": "APPLIED_TO_CANONICAL_GRAPH",
+      "completionClaimed": false
+    },
+    {
+      "nodeId": "PRIVACY_VAULT_CLIENT",
+      "currentNodeStatus": "BLOCKED",
+      "currentPredicate": "PRIVACY_VAULT_FULL_LIFECYCLE_REVIEW_PACKET",
+      "conflictClass": "HUMAN_REVIEW_AUTHORITY_AMBIGUOUS",
+      "proposedNodeId": "PRIVACY_VAULT_CLIENT",
+      "proposedPredicate": "PRIVACY_VAULT_FULL_LIFECYCLE_AUTOMATED_DIRECT_EVIDENCE_PACKET",
+      "gateClass": "NON_SIGNATURE",
+      "closureMode": "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION",
+      "migrationState": "APPLIED_TO_CANONICAL_GRAPH",
+      "completionClaimed": false
+    },
+    {
+      "nodeId": "DEPENDENCY_SECURITY_REMEDIATION",
+      "currentNodeStatus": "BLOCKED",
+      "currentPredicate": "ZERO_UNACCEPTED_DEPENDENCY_FINDINGS_PACKET",
+      "conflictClass": "INDEPENDENT_CLOSURE_SEMANTICS_IN_BLOCKER",
+      "proposedNodeId": "DEPENDENCY_SECURITY_REMEDIATION",
+      "proposedPredicate": "ZERO_UNRESOLVED_DEPENDENCY_FINDINGS_AUTOMATED_DIRECT_EVIDENCE_PACKET",
+      "gateClass": "NON_SIGNATURE",
+      "closureMode": "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION",
+      "migrationState": "APPLIED_TO_CANONICAL_GRAPH",
+      "completionClaimed": false
+    },
+    {
+      "nodeId": "LOCALIZATION_EVIDENCE",
+      "currentNodeStatus": "BLOCKED",
+      "currentPredicate": "ALL_50_LOCALES_ACCEPTED_NATIVE_REVIEW_PACKET",
+      "conflictClass": "NATIVE_HUMAN_REVIEW_PREREQUISITE",
+      "proposedNodeId": "LOCALIZATION_EVIDENCE",
+      "proposedPredicate": "ALL_50_LOCALE_CLAIMS_AUTOMATED_DIRECT_EVIDENCE_PACKET",
+      "gateClass": "NON_SIGNATURE",
+      "closureMode": "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION",
+      "migrationState": "APPLIED_TO_CANONICAL_GRAPH",
+      "completionClaimed": false
+    },
+    {
+      "nodeId": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW",
+      "currentNodeStatus": "BLOCKED",
+      "currentPredicate": "INDEPENDENT_MULTI_DOMAIN_REVIEW_PACKET",
+      "conflictClass": "INDEPENDENT_HUMAN_REVIEW_PREREQUISITE",
+      "proposedNodeId": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE",
+      "proposedPredicate": "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE_PACKET",
+      "gateClass": "NON_SIGNATURE",
+      "closureMode": "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION",
+      "migrationState": "APPLIED_TO_CANONICAL_GRAPH",
+      "completionClaimed": false
+    }
+  ],
+  "topologyMigration": {
+    "renamedNode": {
+      "currentNodeId": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW",
+      "proposedNodeId": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE",
+      "replaceEveryEdgeEndpoint": true,
+      "expectedIncomingEdgeCount": 23,
+      "expectedOutgoingEdgeCount": 1,
+      "replaceTerminalRequiredNodeId": true
+    },
+    "terminalAggregator": {
+      "nodeId": "TERMINAL_B3_REVIEW_PACKET",
+      "predicate": "ALL_27_PREREQUISITES_STRUCTURALLY_COMPLETE",
+      "interpretation": "AUTOMATION_NEUTRAL_STRUCTURAL_AGGREGATION",
+      "humanReviewPrerequisite": false,
+      "renameRequired": false
+    }
+  },
+  "authorization": {
+    "state": "REPOSITORY_POLICY_APPLIED_NO_CRYPTOGRAPHIC_SIGNATURE_REQUIRED",
+    "repositoryPolicyEditSignatureRequired": false,
+    "ownerDecisionAuthenticated": false,
+    "trezorModelTConfirmationObserved": false,
+    "signatureVerified": false,
+    "effective": true
+  },
+  "assurance": {
+    "policyStructureValidated": false,
+    "sourceBindingsValidated": false,
+    "graphMigrationApplied": true,
+    "graphPredicatesSatisfied": false,
+    "automatedEvidenceVerified": false,
+    "ownerDecisionAuthorized": false,
+    "devnetAuthorized": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

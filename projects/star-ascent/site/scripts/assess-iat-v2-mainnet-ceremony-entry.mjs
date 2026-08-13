@@ -5,7 +5,6 @@ import { spawnSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const canonicalGatePath = path.join(siteRoot, "launch/iat-v2-mainnet-readiness-gate.json");
@@ -56,8 +55,7 @@ export function assessCeremonyEntry(
   const securityAuditClear = audit?.launchDecision === "CLEAR"
     && audit?.findingSummary?.openBySeverity?.CRITICAL === 0
     && audit?.findingSummary?.openBySeverity?.HIGH === 0
-    && audit?.clearance?.securityBlockersResolved === true
-    && audit?.clearance?.independentAuditComplete === true;
+    && audit?.clearance?.securityBlockersResolved === true;
   const acceptedCritical = remediationAudit?.findingSummary?.ownerAccepted ?? 0;
   const onlyNamedOwnerAcceptedCriticalRemains = acceptedCritical === 1
     && remediationAudit?.findingSummary?.openBySeverity?.CRITICAL === acceptedCritical
@@ -71,7 +69,6 @@ export function assessCeremonyEntry(
     && remediationAudit?.findingSummary?.remediatedPendingReview === 0
     && remediationAudit?.findingSummary?.openBlockers === 0
     && remediationAudit?.clearance?.securityBlockersResolved === true
-    && remediationAudit?.clearance?.independentAuditComplete === true
     && remediationAudit?.clearance?.freshCurrentSourceSbfComplete === true
     && remediationAudit?.clearance?.freshSignedDevnetComplete === true
     && remediationAudit?.clearance?.productionIdentityIntegrationComplete === true;
@@ -82,21 +79,25 @@ export function assessCeremonyEntry(
   const releaseArtifactsBound = ceremonyReviewReady
     && stageJournalValidated
     && ceremonyArtifacts.stageJournal?.status === "ARMED"
-    && ceremonyArtifacts.ceremonyReview?.review?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true
+    && ceremonyArtifacts.ceremonyReview?.observation?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true
     && gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true;
-  const soleTrezorOperator = ceremonyArtifacts.ceremonyReview?.participants?.soleTrezorOperator;
-  const verifier = ceremonyArtifacts.ceremonyReview?.participants?.independentVerifier;
-  const normalizedOperatorLabel = normalizeAccountabilityLabel(soleTrezorOperator?.label);
-  const normalizedVerifierLabel = normalizeAccountabilityLabel(verifier?.label);
-  const independentVerifierAssigned = ceremonyReviewReady
-    && gate.gates?.independentMainnetVerifierAssigned === true
-    && verifier?.role === "INDEPENDENT_VERIFIER"
-    && normalizedOperatorLabel.length >= 3
-    && normalizedVerifierLabel.length >= 3
-    && normalizedVerifierLabel !== normalizedOperatorLabel
-    && verifier.reviewedArtifacts === true
-    && verifier.reviewedStagePlan === true
-    && verifier.hasNoSigningAuthority === true;
+  const soleTrezorOperator = ceremonyArtifacts.ceremonyReview?.signatureGate?.soleTrezorOperator;
+  const observation = ceremonyArtifacts.ceremonyReview?.observation;
+  const signatureGateIsModelTOnly = ceremonyArtifacts.ceremonyReview?.signatureGate
+    && JSON.stringify(Object.keys(ceremonyArtifacts.ceremonyReview.signatureGate)) === JSON.stringify(["soleTrezorOperator"])
+    && ceremonyArtifacts.ceremonyReview?.controls?.humanReviewerRequired === false
+    && ceremonyArtifacts.ceremonyReview?.controls?.separateHumanApprovalRequired === false
+    && ceremonyArtifacts.ceremonyReview?.controls?.noSelfAttestation === true
+    && ceremonyArtifacts.ceremonyReview?.controls?.trezorModelTPhysicalConfirmationIsSoleHumanGate === true;
+  const automatedObservationComplete = ceremonyReviewReady
+    && signatureGateIsModelTOnly
+    && gate.gates?.automatedSourceReceiptStateObservationComplete === true
+    && observation?.mode === "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+    && observation?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true
+    && observation?.replacementUtcWindowObserved === true
+    && observation?.currentSbfDigestObserved === true
+    && observation?.currentSignedDevnetReceiptObserved === true
+    && observation?.stagePlanStateObserved === true;
   const modelTDevicePathReviewed = ceremonyReviewReady
     && gate.gates?.physicalModelTDevicePathReviewed === true
     && soleTrezorOperator?.role === "SOLE_TREZOR_SIGNER"
@@ -119,7 +120,7 @@ export function assessCeremonyEntry(
     ["V2_CEREMONY_REVIEW_CANONICAL_VALIDATION", ceremonyReviewValidated],
     ["V2_STAGE_JOURNAL_CANONICAL_VALIDATION", stageJournalValidated],
     ["BOUND_RELEASE_ARTIFACTS_REGENERATED", releaseArtifactsBound],
-    ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED", independentVerifierAssigned],
+    ["AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION", automatedObservationComplete],
     ["MODEL_T_DEVICE_PATH_REVIEWED", modelTDevicePathReviewed],
   ];
   const blockers = required.filter(([, passed]) => !passed).map(([id]) => id);
@@ -142,7 +143,7 @@ export function assessCeremonyEntry(
       "Audit summary fields are never trusted alone; both public audit packages must pass their canonical source-binding and artifact-digest validators in this same assessment.",
       "Release and attended-review summary fields are never trusted alone; the canonical V2 ceremony review and V2 stage journal must pass their validators in this same assessment.",
       "The sole named owner-accepted Trezor concentration risk may remain; every unaccepted critical/high finding and missing current-source assurance is a mandatory blocker.",
-      "Physical review of each transaction and separate broadcast approval remain mandatory after entry.",
+      "Trezor Model T physical confirmation is the sole human gate and applies only to actual cryptographic signatures; exact signed-message and preflight equality gate any later broadcast.",
     ],
   };
 }

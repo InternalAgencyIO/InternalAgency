@@ -13,6 +13,7 @@ import {
   realpathSync,
   readdirSync,
   rmSync,
+  statfsSync,
   unlinkSync,
   writeFileSync,
 } from "node:fs";
@@ -34,6 +35,17 @@ import {
   assertProductionCombinedArtifactBindingReady,
   parseIdentityFreezeJson,
 } from "./validate-iat-b3-identity-freeze.mjs";
+import {
+  NATIVE_WSL_BUILD_BACKEND,
+  assertNativeWslObservationOnlyBuildDisabled,
+  createNativeWslBuildPreflight,
+  createNativeWslBuildReceipt,
+  executeNativeWslFreshBuild,
+  observeNativeWslPinnedToolchain,
+  selectReproducibleBuildBackend,
+  validateNativeWslBuildReceipt,
+  verifyNativeCargoLockArchiveClosure,
+} from "./iat-b3-native-wsl-build-backend.mjs";
 
 export const COMBINED_LAW_BUILD_RECEIPT_SCHEMA =
   "iat-b3-combined-law-exact-source-dual-sbf-build/v1";
@@ -45,6 +57,57 @@ export const COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA =
 export const COMBINED_LAW_SUBMODULE_POLICY = "REJECT_ALL_GITLINKS";
 export const COMBINED_LAW_LFS_POLICY =
   "RAW_COMMITTED_POINTER_BLOBS_ONLY_NO_SMUDGE";
+export const COMBINED_LAW_BUILD_PREFLIGHT_SCHEMA =
+  "iat-b3-combined-law-exact-source-build-preflight/v1";
+export const COMBINED_LAW_BUILD_PREFLIGHT_READY = "READY_TO_EXECUTE_DUAL_BUILD";
+export const COMBINED_LAW_BUILD_PREFLIGHT_HOLD = "HOLD";
+
+const GIBIBYTE = 1024 ** 3;
+export const COMBINED_LAW_BUILD_DISK_BUDGET = Object.freeze({
+  estimatedDualFreshBuildWorkspaceBytes: 16 * GIBIBYTE,
+  requiredPostRunReserveBytes: 8 * GIBIBYTE,
+  minimumFreeBytes: 24 * GIBIBYTE,
+  containerImageAlreadyPresentRequired: true,
+  containerImageBytesIncluded: false,
+});
+
+export const COMBINED_LAW_PROGRAMDATA_BINDING = Object.freeze({
+  loaderProgramId: "BPFLoaderUpgradeab1e11111111111111111111111",
+  programAccount: Object.freeze({
+    executable: true,
+    byteLength: 36,
+    stateDiscriminatorU32Le: 2,
+    programDataAddressOffset: 4,
+    programDataAddressByteLength: 32,
+  }),
+  programDataAccount: Object.freeze({
+    stateDiscriminatorU32Le: 3,
+    programBytesOffset: 45,
+    reviewedTemporaryAuthorityRequiredBeforeFreeze: true,
+    terminalUpgradeAuthorityOption: 0,
+    terminalUnusedAuthorityBytesAllZero: true,
+    artifactBinding: "EXACT_RECEIPT_SHA256_BYTE_LENGTH_AND_BYTES",
+    trailingLoaderPadding: "ALL_ZERO",
+  }),
+  requiredEvidenceFields: Object.freeze([
+    "programAddress",
+    "programDataAddress",
+    "programAccountOwner",
+    "programAccountExecutable",
+    "programAccountDataByteLength",
+    "programAccountStateDiscriminatorU32Le",
+    "programDataAccountOwner",
+    "programDataAccountStateDiscriminatorU32Le",
+    "upgradeAuthority",
+    "artifactSha256",
+    "artifactByteLength",
+    "deployedProgramBytesSha256",
+    "deployedProgramBytesByteLength",
+    "trailingZeroPaddingByteLength",
+    "observationSlot",
+    "rpcGenesisHash",
+  ]),
+});
 
 export const PINNED_COMBINED_LAW_BUILD_CONTAINER = Object.freeze({
   image: "solanafoundation/anchor",
@@ -62,6 +125,9 @@ const REPOSITORY_ROOT = resolve(fileURLToPath(new URL("../../../../", import.met
 const IDENTITY_MANIFEST_RELATIVE_PATH =
   "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json";
 const OWNER_POLICY_RELATIVE_PATH = PRODUCTION_OWNER_POLICY_BINDING.packetPath;
+const RUNNER_RELATIVE_PATH =
+  "projects/star-ascent/site/scripts/run-iat-b3-combined-law-reproducible-build.mjs";
+const CARGO_LOCK_RELATIVE_PATH = "projects/star-ascent/site/Cargo.lock";
 const BUILD_ROOT_PREFIX = "iat-b3-combined-law-sbf-";
 const MATERIALIZED_SOURCE_DIRECTORY = "exact-source";
 const REQUIRED_IDENTITY_ENVIRONMENT_NAMES = Object.freeze(
@@ -75,7 +141,9 @@ const CARGO_VERSION = /^cargo 1\.97\.1 \([0-9a-f]+ 2026-06-30\)$/u;
 const CARGO_BUILD_SBF_VERSION = /^solana-cargo-build-sbf 3\.1\.10$/u;
 const UNSAFE_COMPILER_DIAGNOSTIC =
   /Stack offset of|stack frame of [0-9]+ bytes exceeds|max offset exceeded|overwrites values|undefined behavior/iu;
-const ACTIVE_BUILD_ROOTS = new Set();
+// Shared process-owned root registry for every exact-source production runner.
+// Materialization remains closed to arbitrary caller-provided paths.
+const ACTIVE_BUILD_ROOTS = new Map();
 const MATERIALIZED_SOURCE_SNAPSHOTS = new WeakSet();
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 const NULL_GIT_CONFIG_PATH = process.platform === "win32" ? "NUL" : "/dev/null";
@@ -100,6 +168,8 @@ const SOURCE_KEYS = Object.freeze([
   "observedTreeSha",
   "repositoryCleanTrackedAndUntracked",
   "revalidationCount",
+  "executedRunnerSha256",
+  "committedRunnerSha256",
   "materializationSchema",
   "materializedTreeSha",
   "mountedInputSha256",
@@ -185,7 +255,6 @@ const SAFETY_KEYS = Object.freeze([
   "signing",
   "deployment",
   "identityAuthorityVerified",
-  "independentReviewAccepted",
   "adversarialDevnetFinalBinaryAccepted",
   "productionCandidate",
   "mainnetExecutionAuthorized",
@@ -304,7 +373,429 @@ function assertExactBuildRecipe(recipe) {
   return recipe;
 }
 
-function assertCleanSourceObservation({
+function isSupportedNodeVersion(value) {
+  const match = typeof value === "string"
+    ? value.match(/^v?(\d+)\.(\d+)\.(\d+)$/u)
+    : null;
+  if (!match) return false;
+  const observed = match.slice(1).map(Number);
+  const minimum = [22, 13, 0];
+  for (let index = 0; index < minimum.length; index += 1) {
+    if (observed[index] > minimum[index]) return true;
+    if (observed[index] < minimum[index]) return false;
+  }
+  return true;
+}
+
+function failureSummary(error) {
+  const message = error instanceof Error ? error.message : String(error);
+  return message.replaceAll("\r\n", "\n").split("\n", 1)[0].slice(0, 512);
+}
+
+function preflightCheck(id, passed) {
+  return Object.freeze({ id, passed: passed === true });
+}
+
+export function createCombinedLawBuildPreflight({
+  generatedAt,
+  declaredHeadSha,
+  sourceObservation,
+  sourceFailure = null,
+  executedRunnerSha256,
+  committedRunnerSha256,
+  nodeVersion,
+  hostPlatform,
+  hostArchitecture,
+  diskVolumePath,
+  diskFreeBytes,
+  diskFailure = null,
+  identityObservation,
+  containerObservation = null,
+  containerFailure = null,
+  toolchainObservation = null,
+  toolchainFailure = null,
+} = {}) {
+  const declaredHeadValid = typeof declaredHeadSha === "string" && HEX_SHA1.test(declaredHeadSha);
+  const sourceValid = hasExactDataKeys(
+    sourceObservation,
+    ["headSha", "treeSha", "statusPorcelain"],
+  )
+    && typeof sourceObservation.statusPorcelain === "string"
+    && HEX_SHA1.test(sourceObservation.headSha)
+    && HEX_SHA1.test(sourceObservation.treeSha);
+  const sourceHeadMatches = sourceValid
+    && declaredHeadValid
+    && sourceObservation.headSha === declaredHeadSha;
+  const sourceClean = sourceValid && sourceObservation.statusPorcelain === "";
+  const runnerMatchesCommittedHead = sourceHeadMatches
+    && typeof executedRunnerSha256 === "string"
+    && HEX_SHA256.test(executedRunnerSha256)
+    && typeof committedRunnerSha256 === "string"
+    && HEX_SHA256.test(committedRunnerSha256)
+    && executedRunnerSha256 === committedRunnerSha256;
+  const hostSupported = hostPlatform === "linux" && hostArchitecture === "x64";
+  const nodeSupported = isSupportedNodeVersion(nodeVersion);
+  const diskSufficient = Number.isSafeInteger(diskFreeBytes)
+    && diskFreeBytes >= COMBINED_LAW_BUILD_DISK_BUDGET.minimumFreeBytes;
+
+  let recipePinned = true;
+  try {
+    assertExactBuildRecipe(PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE);
+  } catch {
+    recipePinned = false;
+  }
+  let containerPinned = false;
+  try {
+    if (containerObservation !== null) assertPinnedContainerObservation(containerObservation);
+    containerPinned = containerObservation !== null;
+  } catch {
+    containerPinned = false;
+  }
+  let toolchainPinned = false;
+  try {
+    if (toolchainObservation !== null) assertPinnedToolchainObservation(toolchainObservation);
+    toolchainPinned = toolchainObservation !== null;
+  } catch {
+    toolchainPinned = false;
+  }
+  const identityReady = identityObservation?.ready === true
+    && Number.isSafeInteger(identityObservation.manifestByteLength)
+    && identityObservation.manifestByteLength > 0
+    && typeof identityObservation.manifestSha256 === "string"
+    && HEX_SHA256.test(identityObservation.manifestSha256)
+    && Number.isSafeInteger(identityObservation.ownerPolicyByteLength)
+    && identityObservation.ownerPolicyByteLength > 0
+    && typeof identityObservation.ownerPolicySha256 === "string"
+    && HEX_SHA256.test(identityObservation.ownerPolicySha256)
+    && typeof identityObservation.environmentBindingSha256 === "string"
+    && HEX_SHA256.test(identityObservation.environmentBindingSha256);
+
+  const checks = Object.freeze([
+    preflightCheck("CANONICAL_GENERATED_AT", isCanonicalTimestamp(generatedAt)),
+    preflightCheck("EXACT_SOURCE_HEAD_DECLARED", declaredHeadValid),
+    preflightCheck("EXACT_SOURCE_OBSERVED", sourceValid),
+    preflightCheck("EXACT_SOURCE_HEAD_MATCH", sourceHeadMatches),
+    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED", sourceClean),
+    preflightCheck("EXECUTED_RUNNER_MATCHES_DECLARED_HEAD", runnerMatchesCommittedHead),
+    preflightCheck("LINUX_AMD64_HOST", hostSupported),
+    preflightCheck("HOST_NODE_AT_LEAST_22_13_0", nodeSupported),
+    preflightCheck("PRODUCTION_COMBINED_IDENTITY_BINDING", identityReady),
+    preflightCheck("PINNED_CONTAINER_PRESENT", containerPinned),
+    preflightCheck("PINNED_CONTAINER_TOOLCHAIN", toolchainPinned),
+    preflightCheck("BUILD_VOLUME_MINIMUM_24_GIB_FREE", diskSufficient),
+    preflightCheck("FROZEN_PRODUCTION_BUILD_RECIPE", recipePinned),
+  ]);
+  const blockers = Object.freeze(checks.filter(({ passed }) => !passed).map(({ id }) => id));
+  const status = blockers.length === 0
+    ? COMBINED_LAW_BUILD_PREFLIGHT_READY
+    : COMBINED_LAW_BUILD_PREFLIGHT_HOLD;
+  const statusPorcelain = sourceValid ? sourceObservation.statusPorcelain : "";
+  const core = {
+    schema: COMBINED_LAW_BUILD_PREFLIGHT_SCHEMA,
+    status,
+    exitCode: status === COMBINED_LAW_BUILD_PREFLIGHT_READY ? 0 : 2,
+    generatedAt: isCanonicalTimestamp(generatedAt) ? generatedAt : null,
+    scope: "OFFLINE_PRE_BUILD_ELIGIBILITY_ONLY",
+    buildExecuted: false,
+    source: {
+      declaredHeadSha: declaredHeadValid ? declaredHeadSha : null,
+      observedHeadSha: sourceValid ? sourceObservation.headSha : null,
+      observedTreeSha: sourceValid ? sourceObservation.treeSha : null,
+      repositoryCleanTrackedAndUntracked: sourceClean,
+      dirtyStatusEntryCount: sourceClean
+        ? 0
+        : statusPorcelain.split("\0").filter(Boolean).length,
+      statusPorcelainSha256: sourceValid ? sha256(statusPorcelain) : null,
+      observationFailure: sourceFailure,
+      sourcePolicy: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.sourcePolicy,
+    },
+    tooling: {
+      runnerPath: RUNNER_RELATIVE_PATH,
+      executedRunnerSha256: typeof executedRunnerSha256 === "string"
+        && HEX_SHA256.test(executedRunnerSha256)
+        ? executedRunnerSha256
+        : null,
+      committedRunnerSha256: typeof committedRunnerSha256 === "string"
+        && HEX_SHA256.test(committedRunnerSha256)
+        ? committedRunnerSha256
+        : null,
+      executedRunnerMatchesDeclaredHead: runnerMatchesCommittedHead,
+      hostNodeExactPin: null,
+      hostNodeMinimumVersion: "22.13.0",
+      ciNodeMajor: 24,
+      observedNodeVersion: typeof nodeVersion === "string" ? nodeVersion : null,
+      observedNodeSupported: nodeSupported,
+    },
+    host: {
+      requiredPlatform: "linux",
+      requiredArchitecture: "x64",
+      observedPlatform: typeof hostPlatform === "string" ? hostPlatform : null,
+      observedArchitecture: typeof hostArchitecture === "string" ? hostArchitecture : null,
+      supported: hostSupported,
+    },
+    identityBinding: {
+      manifestPath: IDENTITY_MANIFEST_RELATIVE_PATH,
+      ownerPolicyPath: OWNER_POLICY_RELATIVE_PATH,
+      requiredEnvironmentVariables: [...REQUIRED_IDENTITY_ENVIRONMENT_NAMES],
+      manifestSha256: identityObservation?.manifestSha256 ?? null,
+      manifestByteLength: identityObservation?.manifestByteLength ?? null,
+      ownerPolicySha256: identityObservation?.ownerPolicySha256 ?? null,
+      ownerPolicyByteLength: identityObservation?.ownerPolicyByteLength ?? null,
+      environmentBindingSha256: identityObservation?.environmentBindingSha256 ?? null,
+      canonicalProductionBindingReady: identityReady,
+      failure: identityObservation?.failure ?? null,
+    },
+    container: {
+      ...PINNED_COMBINED_LAW_BUILD_CONTAINER,
+      localImageId: containerObservation?.localImageId ?? null,
+      observedPlatform: containerObservation?.platform ?? null,
+      pinnedObservationReady: containerPinned,
+      failure: containerFailure,
+    },
+    toolchain: {
+      expectedRustc: "rustc 1.97.1 (* 2026-07-14)",
+      expectedCargo: "cargo 1.97.1 (* 2026-06-30)",
+      expectedCargoBuildSbf: "solana-cargo-build-sbf 3.1.10",
+      requestedPlatformToolsVersion: "v1.52",
+      platformToolsAvailabilityProof:
+        "PINNED_IMAGE_DIGEST_PLUS_SUCCESSFUL_SKIP_TOOLS_INSTALL_BUILD",
+      observedRustc: toolchainObservation?.rustc ?? null,
+      observedCargo: toolchainObservation?.cargo ?? null,
+      observedCargoBuildSbf: toolchainObservation?.cargoBuildSbf ?? null,
+      pinnedObservationReady: toolchainPinned,
+      failure: toolchainFailure,
+    },
+    disk: {
+      volumePath: typeof diskVolumePath === "string" ? diskVolumePath : null,
+      observedFreeBytes: Number.isSafeInteger(diskFreeBytes) ? diskFreeBytes : null,
+      ...COMBINED_LAW_BUILD_DISK_BUDGET,
+      sufficient: diskSufficient,
+      failure: diskFailure,
+    },
+    recipe: {
+      recipeSha256: digestRecord(PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE),
+      command: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.command,
+      arguments: [...PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.arguments],
+      productionFeature: "production-combined-hook",
+      outputFileName: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.outputFileName,
+      repetitions: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.repetitions,
+      requiresIdenticalSha256:
+        PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.requiresIdenticalSha256,
+      requiresIdenticalByteLength:
+        PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.requiresIdenticalByteLength,
+      freshOutputAndTargetDirectories: true,
+    },
+    finalBinaryEvidenceRequired: {
+      receiptSchema: COMBINED_LAW_BUILD_RECEIPT_SCHEMA,
+      receiptStatus: COMBINED_LAW_BUILD_RECEIPT_STATUS,
+      fields: [
+        "source.declaredHeadSha",
+        "source.observedTreeSha",
+        "source.executedRunnerSha256",
+        "source.committedRunnerSha256",
+        "source.mountedInputSha256",
+        "identityBinding.manifestSha256",
+        "identityBinding.environmentBindingSha256",
+        "container.platformManifestDigest",
+        "container.localImageId",
+        "toolchain.rustc",
+        "toolchain.cargo",
+        "toolchain.cargoBuildSbf",
+        "recipe.recipeSha256",
+        "artifact.byteLength",
+        "artifact.sha256",
+        "artifact.firstBuildSha256",
+        "artifact.secondBuildSha256",
+        "artifact.firstBuildLogSha256",
+        "artifact.secondBuildLogSha256",
+        "artifact.preservedArtifactSha256",
+      ],
+      unavailableUntilTwoBuildsComplete: true,
+    },
+    programDataBinding: COMBINED_LAW_PROGRAMDATA_BINDING,
+    checks,
+    blockers,
+    safety: {
+      publicNetworkWrites: false,
+      signing: false,
+      deployment: false,
+      reproducibleBuildVerified: false,
+      finalProgramDataBindingVerified: false,
+      productionCandidate: false,
+      mainnetExecutionAuthorized: false,
+      mainnetStatus: COMBINED_LAW_BUILD_MAINNET_STATUS,
+    },
+  };
+  const preflight = freezeResult({ ...core, preflightSha256: digestRecord(core) });
+  return validateCombinedLawBuildPreflight(preflight);
+}
+
+export function validateCombinedLawBuildPreflight(preflight) {
+  if (!preflight
+    || typeof preflight !== "object"
+    || Array.isArray(preflight)
+    || preflight.schema !== COMBINED_LAW_BUILD_PREFLIGHT_SCHEMA
+    || !Array.isArray(preflight.checks)
+    || !Array.isArray(preflight.blockers)
+    || preflight.buildExecuted !== false
+    || preflight.scope !== "OFFLINE_PRE_BUILD_ELIGIBILITY_ONLY"
+    || preflight.recipe?.recipeSha256
+      !== digestRecord(PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE)
+    || canonicalJson(preflight.programDataBinding)
+      !== canonicalJson(COMBINED_LAW_PROGRAMDATA_BINDING)
+    || preflight.safety?.publicNetworkWrites !== false
+    || preflight.safety?.signing !== false
+    || preflight.safety?.deployment !== false
+    || preflight.safety?.reproducibleBuildVerified !== false
+    || preflight.safety?.finalProgramDataBindingVerified !== false
+    || preflight.safety?.productionCandidate !== false
+    || preflight.safety?.mainnetExecutionAuthorized !== false
+    || preflight.safety?.mainnetStatus !== COMBINED_LAW_BUILD_MAINNET_STATUS) {
+    throw new Error("INVALID_IAT_B3_COMBINED_LAW_BUILD_PREFLIGHT");
+  }
+  const declaredHeadValid = typeof preflight.source?.declaredHeadSha === "string"
+    && HEX_SHA1.test(preflight.source.declaredHeadSha);
+  const sourceObserved = typeof preflight.source?.observedHeadSha === "string"
+    && HEX_SHA1.test(preflight.source.observedHeadSha)
+    && typeof preflight.source?.observedTreeSha === "string"
+    && HEX_SHA1.test(preflight.source.observedTreeSha)
+    && typeof preflight.source?.statusPorcelainSha256 === "string"
+    && HEX_SHA256.test(preflight.source.statusPorcelainSha256);
+  const sourceHeadMatches = declaredHeadValid
+    && sourceObserved
+    && preflight.source.declaredHeadSha === preflight.source.observedHeadSha;
+  const sourceClean = sourceObserved
+    && preflight.source.repositoryCleanTrackedAndUntracked === true
+    && preflight.source.dirtyStatusEntryCount === 0
+    && preflight.source.statusPorcelainSha256 === sha256("");
+  const runnerMatches = sourceHeadMatches
+    && typeof preflight.tooling?.executedRunnerSha256 === "string"
+    && HEX_SHA256.test(preflight.tooling.executedRunnerSha256)
+    && typeof preflight.tooling?.committedRunnerSha256 === "string"
+    && HEX_SHA256.test(preflight.tooling.committedRunnerSha256)
+    && preflight.tooling.executedRunnerSha256 === preflight.tooling.committedRunnerSha256
+    && preflight.tooling.executedRunnerMatchesDeclaredHead === true;
+  const hostSupported = preflight.host?.requiredPlatform === "linux"
+    && preflight.host?.requiredArchitecture === "x64"
+    && preflight.host?.observedPlatform === "linux"
+    && preflight.host?.observedArchitecture === "x64"
+    && preflight.host?.supported === true;
+  const nodeSupported = preflight.tooling?.hostNodeExactPin === null
+    && preflight.tooling?.hostNodeMinimumVersion === "22.13.0"
+    && preflight.tooling?.ciNodeMajor === 24
+    && isSupportedNodeVersion(preflight.tooling?.observedNodeVersion)
+    && preflight.tooling?.observedNodeSupported === true;
+  const identityReady = preflight.identityBinding?.manifestPath
+      === IDENTITY_MANIFEST_RELATIVE_PATH
+    && preflight.identityBinding?.ownerPolicyPath === OWNER_POLICY_RELATIVE_PATH
+    && canonicalJson(preflight.identityBinding?.requiredEnvironmentVariables)
+      === canonicalJson(REQUIRED_IDENTITY_ENVIRONMENT_NAMES)
+    && typeof preflight.identityBinding?.manifestSha256 === "string"
+    && HEX_SHA256.test(preflight.identityBinding.manifestSha256)
+    && Number.isSafeInteger(preflight.identityBinding?.manifestByteLength)
+    && preflight.identityBinding.manifestByteLength > 0
+    && typeof preflight.identityBinding?.ownerPolicySha256 === "string"
+    && HEX_SHA256.test(preflight.identityBinding.ownerPolicySha256)
+    && Number.isSafeInteger(preflight.identityBinding?.ownerPolicyByteLength)
+    && preflight.identityBinding.ownerPolicyByteLength > 0
+    && typeof preflight.identityBinding?.environmentBindingSha256 === "string"
+    && HEX_SHA256.test(preflight.identityBinding.environmentBindingSha256)
+    && preflight.identityBinding.canonicalProductionBindingReady === true;
+  let containerPinned = false;
+  try {
+    assertPinnedContainerObservation({
+      image: preflight.container?.image,
+      reviewedIndexDigest: preflight.container?.reviewedIndexDigest,
+      platform: preflight.container?.observedPlatform,
+      platformManifestDigest: preflight.container?.platformManifestDigest,
+      executionReference: preflight.container?.executionReference,
+      dockerEndpoint: preflight.container?.dockerEndpoint,
+      localImageId: preflight.container?.localImageId,
+      pullPolicy: preflight.container?.pullPolicy,
+      networkMode: preflight.container?.networkMode,
+    });
+    containerPinned = preflight.container?.pinnedObservationReady === true;
+  } catch {
+    containerPinned = false;
+  }
+  let toolchainPinned = false;
+  try {
+    assertPinnedToolchainObservation({
+      rustc: preflight.toolchain?.observedRustc,
+      cargo: preflight.toolchain?.observedCargo,
+      cargoBuildSbf: preflight.toolchain?.observedCargoBuildSbf,
+    });
+    toolchainPinned = preflight.toolchain?.pinnedObservationReady === true;
+  } catch {
+    toolchainPinned = false;
+  }
+  const diskSufficient = preflight.disk?.volumePath !== null
+    && typeof preflight.disk?.volumePath === "string"
+    && Number.isSafeInteger(preflight.disk?.observedFreeBytes)
+    && preflight.disk.observedFreeBytes >= COMBINED_LAW_BUILD_DISK_BUDGET.minimumFreeBytes
+    && preflight.disk.estimatedDualFreshBuildWorkspaceBytes
+      === COMBINED_LAW_BUILD_DISK_BUDGET.estimatedDualFreshBuildWorkspaceBytes
+    && preflight.disk.requiredPostRunReserveBytes
+      === COMBINED_LAW_BUILD_DISK_BUDGET.requiredPostRunReserveBytes
+    && preflight.disk.minimumFreeBytes === COMBINED_LAW_BUILD_DISK_BUDGET.minimumFreeBytes
+    && preflight.disk.containerImageAlreadyPresentRequired === true
+    && preflight.disk.containerImageBytesIncluded === false
+    && preflight.disk.sufficient === true;
+  const recipePinned = preflight.recipe?.recipeSha256
+      === digestRecord(PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE)
+    && preflight.recipe?.command === PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.command
+    && hasExactDataArray(
+      preflight.recipe?.arguments,
+      PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.arguments,
+    )
+    && preflight.recipe?.productionFeature === "production-combined-hook"
+    && preflight.recipe?.outputFileName
+      === PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.outputFileName
+    && preflight.recipe?.repetitions === 2
+    && preflight.recipe?.requiresIdenticalSha256 === true
+    && preflight.recipe?.requiresIdenticalByteLength === true
+    && preflight.recipe?.freshOutputAndTargetDirectories === true;
+  const expectedChecks = [
+    preflightCheck("CANONICAL_GENERATED_AT", isCanonicalTimestamp(preflight.generatedAt)),
+    preflightCheck("EXACT_SOURCE_HEAD_DECLARED", declaredHeadValid),
+    preflightCheck("EXACT_SOURCE_OBSERVED", sourceObserved),
+    preflightCheck("EXACT_SOURCE_HEAD_MATCH", sourceHeadMatches),
+    preflightCheck("REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED", sourceClean),
+    preflightCheck("EXECUTED_RUNNER_MATCHES_DECLARED_HEAD", runnerMatches),
+    preflightCheck("LINUX_AMD64_HOST", hostSupported),
+    preflightCheck("HOST_NODE_AT_LEAST_22_13_0", nodeSupported),
+    preflightCheck("PRODUCTION_COMBINED_IDENTITY_BINDING", identityReady),
+    preflightCheck("PINNED_CONTAINER_PRESENT", containerPinned),
+    preflightCheck("PINNED_CONTAINER_TOOLCHAIN", toolchainPinned),
+    preflightCheck("BUILD_VOLUME_MINIMUM_24_GIB_FREE", diskSufficient),
+    preflightCheck("FROZEN_PRODUCTION_BUILD_RECIPE", recipePinned),
+  ];
+  if (canonicalJson(preflight.checks) !== canonicalJson(expectedChecks)) {
+    throw new Error("IAT_B3_COMBINED_LAW_PREFLIGHT_CHECK_SET_MISMATCH");
+  }
+  const failedCheckIds = expectedChecks
+    .filter((check) => check?.passed !== true)
+    .map((check) => check?.id);
+  if (canonicalJson(failedCheckIds) !== canonicalJson(preflight.blockers)) {
+    throw new Error("IAT_B3_COMBINED_LAW_PREFLIGHT_BLOCKER_SET_MISMATCH");
+  }
+  const ready = failedCheckIds.length === 0;
+  if (preflight.status !== (ready
+    ? COMBINED_LAW_BUILD_PREFLIGHT_READY
+    : COMBINED_LAW_BUILD_PREFLIGHT_HOLD)
+    || preflight.exitCode !== (ready ? 0 : 2)) {
+    throw new Error("IAT_B3_COMBINED_LAW_PREFLIGHT_STATUS_MISMATCH");
+  }
+  const { preflightSha256, ...core } = preflight;
+  if (typeof preflightSha256 !== "string"
+    || !HEX_SHA256.test(preflightSha256)
+    || preflightSha256 !== digestRecord(core)) {
+    throw new Error("IAT_B3_COMBINED_LAW_PREFLIGHT_DIGEST_MISMATCH");
+  }
+  return preflight;
+}
+
+export function assertCleanSourceObservation({
   declaredHeadSha,
   observation,
   index,
@@ -506,6 +997,7 @@ export function createCombinedLawBuildReceipt({
   declaredHeadSha,
   sourceObservations,
   materializedSourceObservations,
+  runnerBinding,
   identityBinding,
   containerObservation,
   toolchainObservation,
@@ -546,6 +1038,11 @@ export function createCombinedLawBuildReceipt({
     || !preserved.bytes.equals(first.bytes)) {
     throw new Error("IAT_B3_COMBINED_LAW_PRESERVED_SBF_MISMATCH_HOLD");
   }
+  if (!hasExactDataKeys(runnerBinding, ["executedRunnerSha256", "committedRunnerSha256"])
+    || !HEX_SHA256.test(runnerBinding.executedRunnerSha256 ?? "")
+    || runnerBinding.executedRunnerSha256 !== runnerBinding.committedRunnerSha256) {
+    throw new Error("IAT_B3_COMBINED_LAW_RECEIPT_RUNNER_BINDING_INVALID");
+  }
 
   const core = {
     schema: COMBINED_LAW_BUILD_RECEIPT_SCHEMA,
@@ -558,6 +1055,8 @@ export function createCombinedLawBuildReceipt({
       observedTreeSha: source.treeSha,
       repositoryCleanTrackedAndUntracked: true,
       revalidationCount: sourceObservations.length,
+      executedRunnerSha256: runnerBinding.executedRunnerSha256,
+      committedRunnerSha256: runnerBinding.committedRunnerSha256,
       materializationSchema: materializedSource.schema,
       materializedTreeSha: materializedSource.treeSha,
       mountedInputSha256: materializedSource.mountedInputSha256,
@@ -604,7 +1103,6 @@ export function createCombinedLawBuildReceipt({
       signing: false,
       deployment: false,
       identityAuthorityVerified: false,
-      independentReviewAccepted: false,
       adversarialDevnetFinalBinaryAccepted: false,
       productionCandidate: false,
       mainnetExecutionAuthorized: false,
@@ -630,6 +1128,7 @@ export function validateCombinedLawBuildReceipt(receipt) {
     || receipt.source.repositoryCleanTrackedAndUntracked !== true
     || !Number.isSafeInteger(receipt.source.revalidationCount)
     || receipt.source.revalidationCount < 3
+    || receipt.source.executedRunnerSha256 !== receipt.source.committedRunnerSha256
     || receipt.source.materializationSchema !== COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA
     || receipt.source.materializedTreeSha !== receipt.source.observedTreeSha
     || !Number.isSafeInteger(receipt.source.materializedFileCount)
@@ -648,6 +1147,11 @@ export function validateCombinedLawBuildReceipt(receipt) {
   }
   assertHex(receipt.source.declaredHeadSha, HEX_SHA1, "IAT_B3_COMBINED_LAW_RECEIPT_HEAD");
   assertHex(receipt.source.observedTreeSha, HEX_SHA1, "IAT_B3_COMBINED_LAW_RECEIPT_TREE");
+  assertHex(
+    receipt.source.executedRunnerSha256,
+    HEX_SHA256,
+    "IAT_B3_COMBINED_LAW_RECEIPT_RUNNER_SHA256",
+  );
   assertHex(
     receipt.source.mountedInputSha256,
     HEX_SHA256,
@@ -713,7 +1217,6 @@ export function validateCombinedLawBuildReceipt(receipt) {
     || receipt.safety.signing !== false
     || receipt.safety.deployment !== false
     || receipt.safety.identityAuthorityVerified !== false
-    || receipt.safety.independentReviewAccepted !== false
     || receipt.safety.adversarialDevnetFinalBinaryAccepted !== false
     || receipt.safety.productionCandidate !== false
     || receipt.safety.mainnetExecutionAuthorized !== false
@@ -779,16 +1282,67 @@ export function createExactSourceGitEnvironment(environment = process.env) {
   });
 }
 
+function resolveLinuxGitControlTarget(controlValue) {
+  if (typeof controlValue !== "string"
+    || controlValue.length === 0
+    || /[\r\n\0]/u.test(controlValue)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
+  }
+  const windowsPath = /^(?<drive>[A-Za-z]):[\\/](?<path>.+)$/u.exec(controlValue);
+  const translated = windowsPath?.groups
+    ? `/mnt/${windowsPath.groups.drive.toLowerCase()}/${windowsPath.groups.path.replaceAll("\\", "/")}`
+    : controlValue;
+  if (!translated.startsWith("/")) {
+    throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
+  }
+  return realpathSync(translated);
+}
+
 function executeExactSourceGit(
   repositoryRoot,
   arguments_,
   { binary = false, ...options } = {},
 ) {
   const executeGit = binary ? executeBinary : execute;
+  let repositoryArguments = ["-C", repositoryRoot];
+  if (process.platform === "linux") {
+    const controlPath = join(repositoryRoot, ".git");
+    let stat = null;
+    try {
+      stat = lstatSync(controlPath);
+    } catch {
+      stat = null;
+    }
+    if (stat?.isFile() && !stat.isSymbolicLink()) {
+      const control = readFileSync(controlPath, "utf8").trim();
+      const controlMatch = /^gitdir: (?<path>[^\r\n]+)$/u.exec(control);
+      if (!controlMatch?.groups?.path) {
+        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_CONTROL_INVALID");
+      }
+      const gitDirectory = resolveLinuxGitControlTarget(controlMatch.groups.path);
+      const gitDirectoryStat = lstatSync(gitDirectory);
+      if (!gitDirectoryStat.isDirectory()
+        || gitDirectoryStat.isSymbolicLink()
+        || !gitDirectory.replaceAll("\\", "/").includes("/.git/worktrees/")) {
+        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BOUNDARY_INVALID");
+      }
+      const backlinkPath = join(gitDirectory, "gitdir");
+      const backlinkStat = lstatSync(backlinkPath);
+      if (!backlinkStat.isFile() || backlinkStat.isSymbolicLink()) {
+        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_INVALID");
+      }
+      const backlinkControlPath = resolveLinuxGitControlTarget(
+        readFileSync(backlinkPath, "utf8").trim(),
+      );
+      if (backlinkControlPath !== realpathSync(controlPath)) {
+        throw new Error("IAT_B3_EXACT_SOURCE_WSL_GITDIR_BACKLINK_MISMATCH");
+      }
+      repositoryArguments = [`--git-dir=${gitDirectory}`, `--work-tree=${repositoryRoot}`];
+    }
+  }
   return executeGit("git", [
     "--no-replace-objects",
-    "-C",
-    repositoryRoot,
+    ...repositoryArguments,
     ...arguments_,
   ], {
     ...options,
@@ -796,35 +1350,48 @@ function executeExactSourceGit(
   });
 }
 
-export function createCombinedLawBuildRoot() {
+export function createExactSourceBuildRoot({ prefix = BUILD_ROOT_PREFIX } = {}) {
+  if (typeof prefix !== "string"
+    || !/^iat-b3-[a-z0-9-]+-sbf-$/u.test(prefix)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_BUILD_ROOT_PREFIX_INVALID");
+  }
   const realTemporaryRoot = realpathSync(tmpdir());
-  const created = mkdtempSync(join(realTemporaryRoot, BUILD_ROOT_PREFIX));
+  const created = mkdtempSync(join(realTemporaryRoot, prefix));
   const realBuildRoot = realpathSync(created);
   const stat = lstatSync(realBuildRoot);
   if (!stat.isDirectory()
     || stat.isSymbolicLink()
     || dirname(realBuildRoot) !== realTemporaryRoot
-    || !basename(realBuildRoot).startsWith(BUILD_ROOT_PREFIX)) {
-    throw new Error("IAT_B3_COMBINED_LAW_BUILD_ROOT_CREATION_BOUNDARY_INVALID");
+    || !basename(realBuildRoot).startsWith(prefix)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_BUILD_ROOT_CREATION_BOUNDARY_INVALID");
   }
-  ACTIVE_BUILD_ROOTS.add(realBuildRoot);
+  ACTIVE_BUILD_ROOTS.set(realBuildRoot, prefix);
   return realBuildRoot;
 }
 
-export function removeSelfCreatedBuildRoot(buildRoot) {
-  if (typeof buildRoot !== "string" || !ACTIVE_BUILD_ROOTS.has(buildRoot)) {
-    throw new Error("IAT_B3_COMBINED_LAW_BUILD_ROOT_NOT_PROCESS_CREATED");
+export function removeExactSourceBuildRoot(buildRoot) {
+  const prefix = typeof buildRoot === "string" ? ACTIVE_BUILD_ROOTS.get(buildRoot) : null;
+  if (!prefix) {
+    throw new Error("IAT_B3_EXACT_SOURCE_BUILD_ROOT_NOT_PROCESS_CREATED");
   }
   const realTemporaryRoot = realpathSync(tmpdir());
   const realBuildRoot = realpathSync(buildRoot);
   if (realBuildRoot !== buildRoot
     || dirname(realBuildRoot) !== realTemporaryRoot
-    || !basename(realBuildRoot).startsWith(BUILD_ROOT_PREFIX)) {
-    throw new Error("IAT_B3_COMBINED_LAW_BUILD_ROOT_CLEANUP_BOUNDARY_INVALID");
+    || !basename(realBuildRoot).startsWith(prefix)) {
+    throw new Error("IAT_B3_EXACT_SOURCE_BUILD_ROOT_CLEANUP_BOUNDARY_INVALID");
   }
   restoreDirectoryRemovalPermissions(realBuildRoot, realBuildRoot);
   rmSync(realBuildRoot, { recursive: true, force: true });
   ACTIVE_BUILD_ROOTS.delete(realBuildRoot);
+}
+
+export function createCombinedLawBuildRoot() {
+  return createExactSourceBuildRoot({ prefix: BUILD_ROOT_PREFIX });
+}
+
+export function removeSelfCreatedBuildRoot(buildRoot) {
+  return removeExactSourceBuildRoot(buildRoot);
 }
 
 function restoreDirectoryRemovalPermissions(directory, boundary) {
@@ -1355,6 +1922,222 @@ function loadCanonicalIdentityBinding(snapshot) {
   return assertIdentityAndOwnerPolicyBytes({ identityManifestBytes, ownerPolicyBytes });
 }
 
+export function readExactCommittedFile(repositoryRoot, headSha, relativePath) {
+  assertHex(headSha, HEX_SHA1, "IAT_B3_COMBINED_LAW_PREFLIGHT_HEAD");
+  if (typeof relativePath !== "string"
+    || relativePath.length === 0
+    || relativePath.startsWith("/")
+    || relativePath.includes("\\")
+    || relativePath.includes("..")
+    || /[\r\n\0:]/u.test(relativePath)) {
+    throw new Error("IAT_B3_COMBINED_LAW_PREFLIGHT_SOURCE_PATH_INVALID");
+  }
+  return executeExactSourceGit(
+    repositoryRoot,
+    ["show", `${headSha}:${relativePath}`],
+    { binary: true },
+  );
+}
+
+export function observeCombinedLawBuildPreflight({
+  repositoryRoot = REPOSITORY_ROOT,
+  environment = process.env,
+  generatedAt = new Date().toISOString(),
+  hostPlatform = process.platform,
+  hostArchitecture = process.arch,
+  nodeVersion = process.versions.node,
+  probeContainer = true,
+} = {}) {
+  const declaredHeadSha = environment?.IAT_B3_EXACT_SOURCE_HEAD_SHA ?? null;
+  let sourceObservation = null;
+  let sourceFailure = null;
+  try {
+    sourceObservation = observeExactSource(repositoryRoot);
+  } catch (error) {
+    sourceFailure = failureSummary(error);
+  }
+
+  let committedRunnerSha256 = null;
+  let identityObservation = Object.freeze({
+    ready: false,
+    manifestSha256: null,
+    manifestByteLength: null,
+    ownerPolicySha256: null,
+    ownerPolicyByteLength: null,
+    environmentBindingSha256: null,
+    failure: "EXACT_COMMITTED_SOURCE_UNAVAILABLE",
+  });
+  if (sourceObservation !== null && HEX_SHA1.test(sourceObservation.headSha)) {
+    try {
+      const committedRunnerBytes = readExactCommittedFile(
+        repositoryRoot,
+        sourceObservation.headSha,
+        RUNNER_RELATIVE_PATH,
+      );
+      committedRunnerSha256 = sha256(committedRunnerBytes);
+      const identityManifestBytes = readExactCommittedFile(
+        repositoryRoot,
+        sourceObservation.headSha,
+        IDENTITY_MANIFEST_RELATIVE_PATH,
+      );
+      const ownerPolicyBytes = readExactCommittedFile(
+        repositoryRoot,
+        sourceObservation.headSha,
+        OWNER_POLICY_RELATIVE_PATH,
+      );
+      let identityBinding = null;
+      let identityFailure = null;
+      try {
+        identityBinding = assertIdentityAndOwnerPolicyBytes({
+          identityManifestBytes,
+          ownerPolicyBytes,
+        });
+      } catch (error) {
+        identityFailure = failureSummary(error);
+      }
+      identityObservation = Object.freeze({
+        ready: identityBinding !== null,
+        manifestSha256: sha256(identityManifestBytes),
+        manifestByteLength: identityManifestBytes.length,
+        ownerPolicySha256: sha256(ownerPolicyBytes),
+        ownerPolicyByteLength: ownerPolicyBytes.length,
+        environmentBindingSha256:
+          identityBinding?.receiptBinding.environmentBindingSha256 ?? null,
+        failure: identityFailure,
+      });
+    } catch (error) {
+      identityObservation = Object.freeze({
+        ...identityObservation,
+        failure: failureSummary(error),
+      });
+    }
+  }
+
+  const executedRunnerSha256 = sha256(readFileSync(fileURLToPath(import.meta.url)));
+  const diskVolumePath = realpathSync(tmpdir());
+  let diskFreeBytes = null;
+  let diskFailure = null;
+  try {
+    const fileSystem = statfsSync(diskVolumePath);
+    const observedFreeBytes = fileSystem.bavail * fileSystem.bsize;
+    if (!Number.isSafeInteger(observedFreeBytes) || observedFreeBytes < 0) {
+      throw new Error("IAT_B3_COMBINED_LAW_PREFLIGHT_DISK_OBSERVATION_INVALID");
+    }
+    diskFreeBytes = observedFreeBytes;
+  } catch (error) {
+    diskFailure = failureSummary(error);
+  }
+
+  let containerObservation = null;
+  let containerFailure = null;
+  let toolchainObservation = null;
+  let toolchainFailure = null;
+  if (hostPlatform !== "linux" || hostArchitecture !== "x64") {
+    containerFailure = "PINNED_CONTAINER_PROBE_SKIPPED_UNSUPPORTED_HOST";
+    toolchainFailure = "PINNED_TOOLCHAIN_PROBE_SKIPPED_UNSUPPORTED_HOST";
+  } else if (probeContainer !== true) {
+    containerFailure = "PINNED_CONTAINER_PROBE_DISABLED";
+    toolchainFailure = "PINNED_TOOLCHAIN_PROBE_DISABLED";
+  } else {
+    try {
+      containerObservation = observeContainer();
+    } catch (error) {
+      containerFailure = failureSummary(error);
+    }
+    if (containerObservation !== null) {
+      try {
+        toolchainObservation = observeToolchain();
+      } catch (error) {
+        toolchainFailure = failureSummary(error);
+      }
+    } else {
+      toolchainFailure = "PINNED_CONTAINER_REQUIRED_BEFORE_TOOLCHAIN_PROBE";
+    }
+  }
+
+  return createCombinedLawBuildPreflight({
+    generatedAt,
+    declaredHeadSha,
+    sourceObservation,
+    sourceFailure,
+    executedRunnerSha256,
+    committedRunnerSha256,
+    nodeVersion,
+    hostPlatform,
+    hostArchitecture,
+    diskVolumePath,
+    diskFreeBytes,
+    diskFailure,
+    identityObservation,
+    containerObservation,
+    containerFailure,
+    toolchainObservation,
+    toolchainFailure,
+  });
+}
+
+export function observeCombinedLawNativeWslBuildPreflight({
+  repositoryRoot = REPOSITORY_ROOT,
+  environment = process.env,
+  generatedAt = new Date().toISOString(),
+  probeNative = true,
+} = {}) {
+  const base = observeCombinedLawBuildPreflight({
+    repositoryRoot,
+    environment,
+    generatedAt,
+    probeContainer: false,
+  });
+  let toolchainObservation = null;
+  let dependencyClosure = null;
+  if (probeNative === true && process.platform === "linux" && process.arch === "x64") {
+    try {
+      toolchainObservation = observeNativeWslPinnedToolchain();
+    } catch {
+      toolchainObservation = null;
+    }
+    try {
+      dependencyClosure = verifyNativeCargoLockArchiveClosure(
+        readExactCommittedFile(
+          repositoryRoot,
+          base.source.observedHeadSha,
+          CARGO_LOCK_RELATIVE_PATH,
+        ),
+      );
+    } catch {
+      dependencyClosure = null;
+    }
+  }
+  let sourceClosureReady = false;
+  try {
+    assertExactBuildRecipe(PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE);
+    sourceClosureReady = true;
+  } catch {
+    sourceClosureReady = false;
+  }
+  return createNativeWslBuildPreflight({
+    generatedAt,
+    programKind: "LAW",
+    source: {
+      declaredHeadSha: base.source.declaredHeadSha,
+      observedHeadSha: base.source.observedHeadSha,
+      observedTreeSha: base.source.observedTreeSha,
+      statusPorcelain: base.source.repositoryCleanTrackedAndUntracked ? "" : "DIRTY",
+    },
+    runnerBinding: {
+      executedRunnerSha256: base.tooling.executedRunnerSha256,
+      committedRunnerSha256: base.tooling.committedRunnerSha256,
+    },
+    identityReady: base.identityBinding.canonicalProductionBindingReady,
+    sourceClosureReady,
+    toolchainObservation,
+    dependencyClosure,
+    disk: { path: base.disk.volumePath, freeBytes: base.disk.observedFreeBytes },
+    recipe: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+    minimumFreeBytes: COMBINED_LAW_BUILD_DISK_BUDGET.minimumFreeBytes,
+  });
+}
+
 function materializeBuildArguments(containerBuildRoot) {
   return PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.arguments.map((argument) => {
     if (argument === "<FRESH_OUTPUT_DIRECTORY>") return `${containerBuildRoot}/output`;
@@ -1608,6 +2391,184 @@ function emitReceipt(receiptPath, receipt) {
   }
 }
 
+function emitNativeWslReceipt(receiptPath, receipt, programKind, recipe) {
+  validateNativeWslBuildReceipt(receipt, {
+    programKind,
+    recipe,
+    outputFileName: recipe.outputFileName,
+  });
+  const bytes = Buffer.from(`${JSON.stringify(receipt, null, 2)}\n`, "utf8");
+  const temporaryPath = join(
+    dirname(receiptPath),
+    `.${basename(receiptPath)}.${process.pid}.${randomBytes(8).toString("hex")}.partial`,
+  );
+  try {
+    writeFileSync(temporaryPath, bytes, { flag: "wx", mode: 0o600 });
+    linkSync(temporaryPath, receiptPath);
+  } finally {
+    if (existsSync(temporaryPath)) unlinkSync(temporaryPath);
+  }
+  if (!readFileSync(receiptPath).equals(bytes)) {
+    throw new Error("IAT_B3_NATIVE_WSL_RECEIPT_WRITE_VERIFICATION_FAILED");
+  }
+}
+
+export function createNativeSourceReceiptBinding({
+  declaredHeadSha,
+  sourceObservations,
+  materializedSourceObservations,
+  executedRunnerSha256,
+  committedRunnerSha256,
+}) {
+  assertExactCleanSourceSequence({ declaredHeadSha, observations: sourceObservations });
+  assertExactMaterializedSourceSequence({
+    declaredHeadSha,
+    observations: materializedSourceObservations,
+  });
+  const source = sourceObservations[0];
+  const materialized = materializedSourceObservations[0];
+  return Object.freeze({
+    declaredHeadSha,
+    observedHeadSha: source.headSha,
+    observedTreeSha: source.treeSha,
+    repositoryCleanTrackedAndUntracked: true,
+    revalidationCount: sourceObservations.length,
+    executedRunnerSha256,
+    committedRunnerSha256,
+    materializationSchema: materialized.schema,
+    materializedTreeSha: materialized.treeSha,
+    mountedInputSha256: materialized.mountedInputSha256,
+    materializedFileCount: materialized.fileCount,
+    materializedByteLength: materialized.byteLength,
+    lfsPointerCount: materialized.lfsPointerCount,
+    ignoredWorktreeBytesIncluded: false,
+    submodulePolicy: materialized.submodulePolicy,
+    lfsPolicy: materialized.lfsPolicy,
+    materializationRevalidationCount: materializedSourceObservations.length,
+  });
+}
+
+export function runCombinedLawNativeWslReproducibleBuild({
+  receiptPath,
+  artifactPath,
+  environment = process.env,
+} = {}) {
+  assertNativeWslObservationOnlyBuildDisabled();
+  assertHostPlatform();
+  assertExactBuildRecipe(PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE);
+  const receiptDestination = validateReceiptDestination(receiptPath, REPOSITORY_ROOT);
+  const artifactDestination = validateArtifactDestination(artifactPath, REPOSITORY_ROOT);
+  const declaredHeadSha = environment.IAT_B3_EXACT_SOURCE_HEAD_SHA;
+  assertHex(declaredHeadSha, HEX_SHA1, "IAT_B3_EXACT_SOURCE_HEAD_SHA");
+  const sourceObservations = [observeExactSource(REPOSITORY_ROOT)];
+  assertCleanSourceObservation({
+    declaredHeadSha,
+    observation: sourceObservations[0],
+    index: 0,
+  });
+  const toolchainObservations = [observeNativeWslPinnedToolchain()];
+  const executedRunnerSha256 = sha256(readFileSync(fileURLToPath(import.meta.url)));
+  let buildRoot = null;
+  try {
+    buildRoot = createCombinedLawBuildRoot();
+    const snapshot = loadExactDeclaredHeadSource({
+      repositoryRoot: REPOSITORY_ROOT,
+      buildRoot,
+      declaredHeadSha,
+    });
+    const materializedSourceObservations = [observeMaterializedSourceSnapshot(snapshot)];
+    if (snapshot.treeSha !== sourceObservations[0].treeSha) {
+      throw new Error("IAT_B3_COMBINED_LAW_MATERIALIZED_TREE_HEAD_MISMATCH_HOLD");
+    }
+    const committedRunnerSha256 = sha256(readExactMaterializedPacket({
+      snapshot,
+      relativePath: RUNNER_RELATIVE_PATH,
+      expectedSha256: null,
+      label: "RUNNER",
+    }));
+    if (executedRunnerSha256 !== committedRunnerSha256) {
+      throw new Error("IAT_B3_COMBINED_LAW_EXECUTED_RUNNER_NOT_COMMITTED_HOLD");
+    }
+    const identity = loadCanonicalIdentityBinding(snapshot);
+    const dependencyClosure = verifyNativeCargoLockArchiveClosure(
+      readExactMaterializedPacket({
+        snapshot,
+        relativePath: CARGO_LOCK_RELATIVE_PATH,
+        expectedSha256: null,
+        label: "CARGO_LOCK",
+      }),
+    );
+    const sourceClosure = Object.freeze({
+      policy: "EXACT_GIT_OBJECT_SOURCE_PLUS_FROZEN_PRODUCTION_LAW_RECIPE",
+      recipeSha256: digestRecord(PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE),
+      cargoLockSha256: dependencyClosure.lockSha256,
+      mountedInputSha256: snapshot.mountedInputSha256,
+    });
+    toolchainObservations.push(observeNativeWslPinnedToolchain());
+    sourceObservations.push(observeExactSource(REPOSITORY_ROOT));
+    materializedSourceObservations.push(observeMaterializedSourceSnapshot(snapshot));
+    const first = executeNativeWslFreshBuild({
+      sourceRoot: snapshot.root,
+      buildRoot: join(buildRoot, "run-1"),
+      recipe: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+      identityEnvironment: identity.environment,
+      declaredHeadSha,
+      expectedOutputFileName: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.outputFileName,
+      runLabel: "run-1",
+    });
+    sourceObservations.push(observeExactSource(REPOSITORY_ROOT));
+    materializedSourceObservations.push(observeMaterializedSourceSnapshot(snapshot));
+    const second = executeNativeWslFreshBuild({
+      sourceRoot: snapshot.root,
+      buildRoot: join(buildRoot, "run-2"),
+      recipe: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+      identityEnvironment: identity.environment,
+      declaredHeadSha,
+      expectedOutputFileName: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.outputFileName,
+      runLabel: "run-2",
+    });
+    toolchainObservations.push(observeNativeWslPinnedToolchain());
+    sourceObservations.push(observeExactSource(REPOSITORY_ROOT));
+    materializedSourceObservations.push(observeMaterializedSourceSnapshot(snapshot));
+    const preservedArtifact = preserveReceiptBoundArtifact({
+      outputPath: artifactDestination,
+      artifact: { fileName: first.fileName, bytes: first.bytes },
+    });
+    const receipt = createNativeWslBuildReceipt({
+      generatedAt: new Date().toISOString(),
+      programKind: "LAW",
+      source: createNativeSourceReceiptBinding({
+        declaredHeadSha,
+        sourceObservations,
+        materializedSourceObservations,
+        executedRunnerSha256,
+        committedRunnerSha256,
+      }),
+      identityBinding: {
+        manifestSha256: identity.receiptBinding.manifestSha256,
+        environmentBindingSha256: identity.receiptBinding.environmentBindingSha256,
+        inputNames: [...REQUIRED_IDENTITY_ENVIRONMENT_NAMES],
+      },
+      sourceClosure,
+      dependencyClosure,
+      toolchainObservations,
+      recipe: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+      firstArtifact: first,
+      secondArtifact: second,
+      preservedArtifact,
+    });
+    emitNativeWslReceipt(
+      receiptDestination,
+      receipt,
+      "LAW",
+      PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+    );
+    return receipt;
+  } finally {
+    if (buildRoot !== null) removeSelfCreatedBuildRoot(buildRoot);
+  }
+}
+
 export function runCombinedLawReproducibleBuild({
   receiptPath,
   artifactPath,
@@ -1622,6 +2583,13 @@ export function runCombinedLawReproducibleBuild({
   }
   const declaredHeadSha = environment.IAT_B3_EXACT_SOURCE_HEAD_SHA;
   assertHex(declaredHeadSha, HEX_SHA1, "IAT_B3_EXACT_SOURCE_HEAD_SHA");
+  const executedRunnerSha256 = sha256(readFileSync(fileURLToPath(import.meta.url)));
+  const committedRunnerSha256 = sha256(
+    readExactCommittedFile(REPOSITORY_ROOT, declaredHeadSha, RUNNER_RELATIVE_PATH),
+  );
+  if (executedRunnerSha256 !== committedRunnerSha256) {
+    throw new Error("IAT_B3_COMBINED_LAW_EXECUTED_RUNNER_NOT_COMMITTED_HOLD");
+  }
 
   const sourceObservations = [observeExactSource(REPOSITORY_ROOT)];
   assertCleanSourceObservation({
@@ -1695,6 +2663,7 @@ export function runCombinedLawReproducibleBuild({
       declaredHeadSha,
       sourceObservations,
       materializedSourceObservations,
+      runnerBinding: { executedRunnerSha256, committedRunnerSha256 },
       identityBinding: identityBinding.receiptBinding,
       containerObservation,
       toolchainObservation,
@@ -1716,21 +2685,36 @@ export function runCombinedLawReproducibleBuild({
 }
 
 function parseCliArguments(argv) {
+  if (argv.length === 1 && argv[0] === "--preflight") {
+    return Object.freeze({ mode: "preflight" });
+  }
   if (argv.length !== 4
     || argv[0] !== "--receipt"
     || !argv[1]
     || argv[2] !== "--artifact"
     || !argv[3]) {
-    throw new Error("Usage: run-iat-b3-combined-law-reproducible-build.mjs --receipt <absolute-outside-repository.json> --artifact <absolute-outside-repository/iat_b3_law.so>");
+    throw new Error("Usage: run-iat-b3-combined-law-reproducible-build.mjs --preflight | --receipt <absolute-outside-repository.json> --artifact <absolute-outside-repository/iat_b3_law.so>");
   }
-  return Object.freeze({ receiptPath: argv[1], artifactPath: argv[3] });
+  return Object.freeze({ mode: "build", receiptPath: argv[1], artifactPath: argv[3] });
 }
 
 const invokedPath = process.argv[1] ? pathToFileURL(resolve(process.argv[1])).href : null;
 if (invokedPath === import.meta.url) {
   try {
-    const receipt = runCombinedLawReproducibleBuild(parseCliArguments(process.argv.slice(2)));
-    console.log(JSON.stringify(receipt, null, 2));
+    const arguments_ = parseCliArguments(process.argv.slice(2));
+    const backend = selectReproducibleBuildBackend(process.env);
+    if (arguments_.mode === "preflight") {
+      const preflight = backend === NATIVE_WSL_BUILD_BACKEND
+        ? observeCombinedLawNativeWslBuildPreflight()
+        : observeCombinedLawBuildPreflight();
+      console.log(JSON.stringify(preflight, null, 2));
+      process.exitCode = preflight.exitCode;
+    } else {
+      const receipt = backend === NATIVE_WSL_BUILD_BACKEND
+        ? runCombinedLawNativeWslReproducibleBuild(arguments_)
+        : runCombinedLawReproducibleBuild(arguments_);
+      console.log(JSON.stringify(receipt, null, 2));
+    }
   } catch (error) {
     console.error(`IAT B3 combined-law exact-source build HOLD: ${error instanceof Error ? error.message : String(error)}`);
     process.exitCode = 2;

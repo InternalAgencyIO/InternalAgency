@@ -20,22 +20,26 @@ import {
 import { parseB3OwnerPolicyFreezeJson } from "./validate-iat-b3-owner-policy-freeze.mjs";
 
 export const PRODUCTION_IDENTITY_AUTHORITY_EVIDENCE_SCHEMA =
-  "iat-b3-production-identity-authority-evidence/v1";
-export const PRODUCTION_IDENTITY_AUTHORITY_TRUST_SCHEMA =
-  "iat-b3-production-identity-authority-trust-binding/v1";
-export const PRODUCTION_IDENTITY_AUTHORITY_ATTESTATION_SCHEMA =
-  "iat-b3-production-identity-authority-attestation/v1";
+  "iat-b3-production-identity-authority-evidence/v3";
+export const PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_SCHEMA =
+  "iat-b3-production-identity-authority-automated-evidence-binding/v3";
+export const PRODUCTION_IDENTITY_AUTHORITY_RECEIPT_SCHEMA =
+  "iat-b3-production-identity-authority-automated-receipt/v3";
+export const PRODUCTION_IDENTITY_AUTHORITY_OWNER_DECISION_RECEIPT_SCHEMA =
+  "iat-b3-production-identity-authority-owner-decision-ocms-receipt/v1";
+export const PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_OBSERVATION_SCHEMA =
+  "iat-b3-production-identity-authority-model-t-capability-observation/v1";
 export const PRODUCTION_IDENTITY_AUTHORITY_MAINNET_STATUS = "HOLD";
 
 export const PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS = Object.freeze({
   ownerPolicyFreeze: Object.freeze({
     path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-    sha256: "04f515105124b7176ac4d4eec0e52539ccd6fab28273170b93797b075f570702",
+    sha256: "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
     bindingScope: "EXACT_COMMITTED_INPUT_ONLY",
   }),
   identityInputFreeze: Object.freeze({
     path: "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-    sha256: "99bee9984df75f8b1037ad0454924640b7b106285b89a51d5f8d632c55650df5",
+    sha256: "17bcf00f97c5fd95bc39fa9eff120fd7f7678ed77f9bc333c36189f44633cacf",
     bindingScope: "EXACT_COMMITTED_INPUT_ONLY",
   }),
   costFeasibilityReference: Object.freeze({
@@ -53,22 +57,26 @@ export const PRODUCTION_IDENTITY_AUTHORITY_SCOPE = Object.freeze({
     "C_DEPLOYED_IDENTITY_AUTHORITY_SEAL",
   ]),
   doesNotCertify: Object.freeze([
-    "PACKET_SELECTED_TRUST_KEYS",
-    "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SIGNED_OBSERVATIONS",
+    "PACKET_SELECTED_AUTOMATED_EVIDENCE_SOURCES",
+    "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SOURCE_BOUND_ENDPOINT_RECEIPTS",
     "FINAL_BINARY_TRUTH_WITHOUT_EXACT_BINDINGS",
-    "OWNER_OR_REVIEWER_IDENTITY_WITHOUT_EXTERNAL_TRUST_CONFIGURATION",
+    "OWNER_DECISION_OR_AUTOMATED_CLOSURE_TRUTH_WITHOUT_EXTERNAL_SOURCE_CONFIGURATION",
+    "MODEL_T_SOLANA_OCMS_CAPABILITY_WITHOUT_SEPARATE_SOURCE_BOUND_DEVICE_OBSERVATION",
+    "MODEL_T_HARDWARE_PROVENANCE_FROM_ED25519_SIGNATURE_BYTES_ALONE",
     "TRANSACTION_SIGNING_DEPLOYMENT_FUNDING_OR_ACTIVATION_AUTHORITY",
-    "INDEPENDENT_GATE_8_ACCEPTANCE",
+    "AUTOMATED_GATE_8_EVIDENCE_COMPLETION",
     "RELEASE_OR_MAINNET_EXECUTION_AUTHORIZATION",
   ]),
 });
 
-export const EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING = Object.freeze({
-  schema: PRODUCTION_IDENTITY_AUTHORITY_TRUST_SCHEMA,
-  status: "EXTERNAL_ACCEPTANCE_REQUIRED",
-  keys: Object.freeze([]),
-  trustRootSha256: null,
-  packetMaySelectTrustKeys: false,
+export const EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING = Object.freeze({
+  schema: PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_SCHEMA,
+  status: "AUTOMATED_EVIDENCE_SOURCES_UNCONFIGURED",
+  sources: Object.freeze([]),
+  modelTDeviceObservationReceipt: null,
+  sourceSetSha256: null,
+  packetMaySelectEvidenceSources: false,
+  noSelfAttestation: true,
 });
 
 const SCRIPT_ROOT = fileURLToPath(new URL("./", import.meta.url));
@@ -81,15 +89,34 @@ const U64_DECIMAL = /^(?:0|[1-9][0-9]{0,19})$/u;
 const KEY_ID = /^[a-z0-9][a-z0-9._:/-]{7,127}$/u;
 const BASE64URL = /^[A-Za-z0-9_-]+$/u;
 const ED25519_SPKI_PREFIX = Buffer.from("302a300506032b6570032100", "hex");
-const SIGNING_PREFIX = Buffer.from(
-  "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_ATTESTATION_V1\0",
+const AUTOMATED_RECEIPT_SIGNING_PREFIX = Buffer.from(
+  "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_RECEIPT_V3\0",
   "utf8",
 );
+const MODEL_T_OBSERVATION_SIGNING_PREFIX = Buffer.from(
+  "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_OBSERVATION_V1\0",
+  "utf8",
+);
+const OCMS_PREFIX = Buffer.concat([
+  Buffer.from([0xff]),
+  Buffer.from("solana offchain", "ascii"),
+]);
+const OCMS_V0_APPLICATION_DOMAIN = createHash("sha256")
+  .update("internal.agency/iat-b3/production-identity-authority", "utf8")
+  .digest();
+const OWNER_DECISION_DOMAIN =
+  "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_OWNER_DECISION_OCMS_V1";
+const RAW_ED25519_SCHEME = "RAW_ED25519_SOURCE_BOUND_RECEIPT_V3";
+const MODEL_T_OCMS_SCHEME = "TREZOR_MODEL_T_SOLANA_OCMS";
+const MODEL_T_DEVICE = "Trezor Model T";
+const MODEL_T_CAPABILITY_PREDICATE = "MODEL_T_SOLANA_OCMS_CAPABILITY_OBSERVED";
+const PRODUCTION_DEVICE_OBSERVATION_CLASS = "PRODUCTION_SOURCE_BOUND_DEVICE_OBSERVATION";
+const TEST_DEVICE_OBSERVATION_CLASS = "SYNTHETIC_SOFTWARE_TEST_FIXTURE";
 const MAX_U64 = (1n << 64n) - 1n;
 const COST_CEILING_LAMPORTS = 3_000_000_000n;
 const MAX_LIVE_OBSERVATION_AGE_SECONDS = 900n;
 const MAX_ENDPOINT_PAIR_SKEW_SECONDS = 120n;
-const MAX_INDEPENDENT_REVIEW_LAG_SECONDS = 300n;
+const MAX_AUTOMATED_CLOSURE_LAG_SECONDS = 300n;
 const MAX_FUNDING_EVIDENCE_LIFETIME_SECONDS = 900n;
 const FORBIDDEN_PRODUCTION_IDENTITIES = new Set([
   IAT_V2_PROGRAM_ID,
@@ -108,6 +135,7 @@ const TOP_LEVEL_KEYS = Object.freeze([
   "status",
   "scope",
   "sourceBindings",
+  "modelTCapabilityBoundary",
   "productionChoices",
   "phaseAProductionIdentityFreeze",
   "phaseBCeremonyFunding",
@@ -124,30 +152,74 @@ const CHOICE_KEYS = Object.freeze([
   "economyUpgradeAuthorityPublicKey",
   "payerPublicKey",
 ]);
-const ATTESTATION_KEYS = Object.freeze([
+const RECEIPT_CORE_KEYS = Object.freeze([
   "schema",
   "kind",
   "stage",
-  "keyId",
+  "sourceId",
   "observedAtUnixSeconds",
   "endpointSha256",
   "subjectSha256",
   "observationValue",
   "decision",
+]);
+const AUTOMATED_RECEIPT_KEYS = Object.freeze([
+  ...RECEIPT_CORE_KEYS,
   "signatureBase64url",
 ]);
-const TRUST_KEYS = Object.freeze([
+const OWNER_RECEIPT_KEYS = Object.freeze([
+  ...RECEIPT_CORE_KEYS,
+  "signatureScheme",
+  "ocmsVersion",
+  "signerDerivationPath",
+  "signerSolanaPublicKey",
+  "capabilityObservationSha256",
+  "ocmsApplicationDomainBase64url",
+  "decisionPayloadBase64url",
+  "decisionPayloadSha256",
+  "ocmsMessageBase64url",
+  "ocmsMessageSha256",
+  "ocmsEnvelopeBase64url",
+  "ocmsEnvelopeSha256",
+  "signatureBase64url",
+]);
+const MODEL_T_OBSERVATION_KEYS = Object.freeze([
+  "schema",
+  "sourceId",
+  "observedAtUnixSeconds",
+  "ownerDecisionSourceId",
+  "deviceModel",
+  "firmwareVersion",
+  "capabilityPredicate",
+  "ocmsVersion",
+  "derivationPath",
+  "solanaPublicKey",
+  "observationClass",
+  "observationValue",
+  "signatureBase64url",
+]);
+const EVIDENCE_BINDING_KEYS = Object.freeze([
   "schema",
   "status",
-  "keys",
-  "trustRootSha256",
-  "packetMaySelectTrustKeys",
+  "sources",
+  "modelTDeviceObservationReceipt",
+  "sourceSetSha256",
+  "packetMaySelectEvidenceSources",
+  "noSelfAttestation",
 ]);
-const TRUST_KEY_KEYS = Object.freeze([
-  "keyId",
+const AUTOMATED_EVIDENCE_SOURCE_KEYS = Object.freeze([
+  "sourceId",
   "role",
   "publicKeySpkiDerBase64url",
   "publicKeySha256",
+  "signingScheme",
+]);
+const OWNER_EVIDENCE_SOURCE_KEYS = Object.freeze([
+  ...AUTOMATED_EVIDENCE_SOURCE_KEYS,
+  "deviceModel",
+  "derivationPath",
+  "solanaPublicKey",
+  "capabilityPredicate",
 ]);
 const BINARY_KEYS = Object.freeze([
   "programId",
@@ -172,10 +244,24 @@ const TERMINAL_STATE_KEYS = Object.freeze([
   "genesisStagingWritesDisabled",
   "stateSha256",
 ]);
-const TRUST_ROLES = Object.freeze({
-  OWNER_DECISION: "OWNER_DECISION",
-  ENDPOINT_OBSERVER: "ENDPOINT_OBSERVER",
-  INDEPENDENT_REVIEWER: "INDEPENDENT_REVIEWER",
+const EVIDENCE_SOURCE_ROLES = Object.freeze({
+  OWNER_DECISION_SOURCE: "OWNER_DECISION_SOURCE",
+  AUTOMATED_ENDPOINT_SOURCE: "AUTOMATED_ENDPOINT_SOURCE",
+  AUTOMATED_EVIDENCE_CLOSURE: "AUTOMATED_EVIDENCE_CLOSURE",
+  AUTOMATED_DEVICE_OBSERVATION_SOURCE: "AUTOMATED_DEVICE_OBSERVATION_SOURCE",
+});
+
+export const PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_BOUNDARY = Object.freeze({
+  predicate: MODEL_T_CAPABILITY_PREDICATE,
+  requiredDeviceModel: MODEL_T_DEVICE,
+  acceptedOcmsVersions: Object.freeze(["OCMS_V0", "OCMS_V1"]),
+  ocmsV0FirmwareRange: ">=2.12.1 <2.12.4",
+  ocmsV1FirmwareRange: ">=2.12.4",
+  sourceRequirement: "SEPARATE_EXTERNAL_SOURCE_BOUND_DEVICE_OBSERVATION_RECEIPT",
+  signerPathAndPublicKeyMustMatchObservation: true,
+  signatureBytesProveHardwareProvenance: false,
+  rawEd25519OwnerDecisionAllowed: false,
+  packetSelfAttestedCapabilityObserved: false,
 });
 
 function isPlainObject(value) {
@@ -276,46 +362,347 @@ function decodedBase64url(value, expectedBytes, path, violations) {
   return bytes;
 }
 
-function validateExternalTrustBinding(binding, violations, blockers) {
-  if (!exactKeys(binding, TRUST_KEYS, "trustBinding", violations)) return null;
-  if (binding.schema !== PRODUCTION_IDENTITY_AUTHORITY_TRUST_SCHEMA) {
-    violations.push("trustBinding.schema: unsupported schema");
+function decodedVariableBase64url(value, minimumBytes, maximumBytes, path, violations) {
+  if (typeof value !== "string" || !BASE64URL.test(value)) {
+    violations.push(`${path}: expected canonical unpadded base64url`);
+    return null;
   }
-  if (binding.packetMaySelectTrustKeys !== false) {
-    violations.push("trustBinding.packetMaySelectTrustKeys: packet-selected trust keys are forbidden");
+  const bytes = Buffer.from(value, "base64url");
+  if (bytes.length < minimumBytes
+    || bytes.length > maximumBytes
+    || bytes.toString("base64url") !== value) {
+    violations.push(`${path}: wrong length or noncanonical base64url`);
+    return null;
   }
-  if (binding.status === "EXTERNAL_ACCEPTANCE_REQUIRED") {
-    if (!Array.isArray(binding.keys) || binding.keys.length !== 0 || binding.trustRootSha256 !== null) {
-      violations.push("trustBinding: pending external acceptance requires zero keys and null trust root");
+  return bytes;
+}
+
+const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const BASE58_INDEX = new Map([...BASE58_ALPHABET].map((character, index) => [character, BigInt(index)]));
+
+function decodeBase58PublicKey(value) {
+  if (typeof value !== "string" || value.length === 0) return null;
+  let number = 0n;
+  for (const character of value) {
+    const digit = BASE58_INDEX.get(character);
+    if (digit === undefined) return null;
+    number = number * 58n + digit;
+  }
+  let encoded = number === 0n ? Buffer.alloc(0) : Buffer.from(
+    (number.toString(16).length % 2 === 0 ? "" : "0") + number.toString(16),
+    "hex",
+  );
+  let leadingZeroes = 0;
+  while (leadingZeroes < value.length && value[leadingZeroes] === "1") leadingZeroes += 1;
+  encoded = Buffer.concat([Buffer.alloc(leadingZeroes), encoded]);
+  return encoded.length === 32 ? encoded : null;
+}
+
+function parseFirmwareVersion(value, path, violations) {
+  if (typeof value !== "string" || !/^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$/u.test(value)) {
+    violations.push(`${path}: expected canonical major.minor.patch firmware version`);
+    return null;
+  }
+  return value.split(".").map((part) => Number(part));
+}
+
+function compareFirmware(left, right) {
+  for (let index = 0; index < 3; index += 1) {
+    if (left[index] !== right[index]) return left[index] < right[index] ? -1 : 1;
+  }
+  return 0;
+}
+
+function firmwareSupportsOcms(version, ocmsVersion) {
+  if (ocmsVersion === "OCMS_V0") {
+    return compareFirmware(version, [2, 12, 1]) >= 0
+      && compareFirmware(version, [2, 12, 4]) < 0;
+  }
+  if (ocmsVersion === "OCMS_V1") return compareFirmware(version, [2, 12, 4]) >= 0;
+  return false;
+}
+
+export function productionIdentityAuthorityModelTObservationSigningBytes(unsignedReceipt) {
+  const coreKeys = MODEL_T_OBSERVATION_KEYS.filter((key) => key !== "signatureBase64url");
+  const violations = [];
+  if (!exactKeys(unsignedReceipt, coreKeys, "unsignedModelTObservationReceipt", violations)) {
+    throw new TypeError(violations.join("; "));
+  }
+  return Buffer.concat([
+    MODEL_T_OBSERVATION_SIGNING_PREFIX,
+    Buffer.from(canonicalizeRfc8785(unsignedReceipt), "utf8"),
+  ]);
+}
+
+export function productionIdentityAuthorityModelTObservationSha256(receipt) {
+  return sha256Canonical(
+    "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_OBSERVATION_RECEIPT_V1",
+    receipt,
+  );
+}
+
+export function productionIdentityAuthoritySerializeOcmsMessage(
+  ocmsVersion,
+  signerPublicKey,
+  decisionPayload,
+) {
+  if (!Buffer.isBuffer(signerPublicKey) || signerPublicKey.length !== 32) {
+    throw new TypeError("owner Solana signer must be an exact 32-byte public key");
+  }
+  if (!Buffer.isBuffer(decisionPayload) || decisionPayload.length < 1 || decisionPayload.length > 65_535) {
+    throw new TypeError("owner decision payload must be nonempty and fit the bounded OCMS payload contract");
+  }
+  if (ocmsVersion === "OCMS_V0") {
+    if (decisionPayload.length > 1_147) {
+      throw new TypeError(
+        "OCMS v0 UTF8_SHORT decision payload exceeds 1147 bytes (85-byte framing plus payload must be <=1232)",
+      );
     }
-    blockers.push("trustBinding: externally pinned owner, two observer, and independent reviewer keys are absent");
+    const length = Buffer.alloc(2);
+    length.writeUInt16LE(decisionPayload.length);
+    return Buffer.concat([
+      OCMS_PREFIX,
+      Buffer.from([0]),
+      OCMS_V0_APPLICATION_DOMAIN,
+      Buffer.from([1, 1]),
+      signerPublicKey,
+      length,
+      decisionPayload,
+    ]);
+  }
+  if (ocmsVersion === "OCMS_V1") {
+    return Buffer.concat([
+      OCMS_PREFIX,
+      Buffer.from([1, 1]),
+      signerPublicKey,
+      decisionPayload,
+    ]);
+  }
+  throw new TypeError("unsupported Solana OCMS version");
+}
+
+export function productionIdentityAuthorityOwnerDecisionOcmsSigningMaterial(
+  unsignedReceipt,
+  ownerSource,
+  capabilityObservationReceipt,
+) {
+  const violations = [];
+  if (!exactKeys(unsignedReceipt, RECEIPT_CORE_KEYS, "unsignedOwnerDecisionReceipt", violations)) {
+    throw new TypeError(violations.join("; "));
+  }
+  if (unsignedReceipt.schema !== PRODUCTION_IDENTITY_AUTHORITY_OWNER_DECISION_RECEIPT_SCHEMA
+    || ownerSource?.role !== EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE
+    || ownerSource?.signingScheme !== MODEL_T_OCMS_SCHEME
+    || ownerSource?.deviceModel !== MODEL_T_DEVICE
+    || ownerSource?.capabilityPredicate !== MODEL_T_CAPABILITY_PREDICATE) {
+    throw new TypeError("owner decision source is not an exact Model T Solana OCMS source");
+  }
+  const signerPublicKey = decodeBase58PublicKey(ownerSource.solanaPublicKey);
+  if (!signerPublicKey
+    || capabilityObservationReceipt?.ownerDecisionSourceId !== ownerSource.sourceId
+    || capabilityObservationReceipt?.solanaPublicKey !== ownerSource.solanaPublicKey
+    || capabilityObservationReceipt?.derivationPath !== ownerSource.derivationPath
+    || capabilityObservationReceipt?.deviceModel !== MODEL_T_DEVICE
+    || capabilityObservationReceipt?.capabilityPredicate !== MODEL_T_CAPABILITY_PREDICATE) {
+    throw new TypeError("Model T capability observation does not bind the owner signer, path, and public key");
+  }
+  const capabilityObservationSha256 = productionIdentityAuthorityModelTObservationSha256(
+    capabilityObservationReceipt,
+  );
+  const decisionPayload = Buffer.from(canonicalizeRfc8785({
+    domain: OWNER_DECISION_DOMAIN,
+    receipt: unsignedReceipt,
+    modelTCapability: {
+      capabilityObservationSha256,
+      deviceModel: capabilityObservationReceipt.deviceModel,
+      firmwareVersion: capabilityObservationReceipt.firmwareVersion,
+      ocmsVersion: capabilityObservationReceipt.ocmsVersion,
+      derivationPath: capabilityObservationReceipt.derivationPath,
+      signerSolanaPublicKey: capabilityObservationReceipt.solanaPublicKey,
+    },
+  }), "utf8");
+  const ocmsMessage = productionIdentityAuthoritySerializeOcmsMessage(
+    capabilityObservationReceipt.ocmsVersion,
+    signerPublicKey,
+    decisionPayload,
+  );
+  return {
+    signatureScheme: MODEL_T_OCMS_SCHEME,
+    ocmsVersion: capabilityObservationReceipt.ocmsVersion,
+    signerDerivationPath: ownerSource.derivationPath,
+    signerSolanaPublicKey: ownerSource.solanaPublicKey,
+    capabilityObservationSha256,
+    ocmsApplicationDomainBase64url:
+      capabilityObservationReceipt.ocmsVersion === "OCMS_V0"
+        ? OCMS_V0_APPLICATION_DOMAIN.toString("base64url")
+        : null,
+    decisionPayloadBase64url: decisionPayload.toString("base64url"),
+    decisionPayloadSha256: sha256Bytes(decisionPayload),
+    ocmsMessageBase64url: ocmsMessage.toString("base64url"),
+    ocmsMessageSha256: sha256Bytes(ocmsMessage),
+  };
+}
+
+export function productionIdentityAuthorityOcmsEnvelopeBytes(ocmsMessage, signatures) {
+  if (!Buffer.isBuffer(ocmsMessage) || !Array.isArray(signatures)
+    || signatures.length !== 1 || !Buffer.isBuffer(signatures[0]) || signatures[0].length !== 64) {
+    throw new TypeError("the owner decision OCMS envelope requires exactly one 64-byte signature");
+  }
+  return Buffer.concat([Buffer.from([1]), signatures[0], ocmsMessage]);
+}
+
+function validateModelTDeviceObservation(
+  value,
+  recordsById,
+  profile,
+  evaluationUnixSeconds,
+  path,
+  violations,
+) {
+  const before = violations.length;
+  if (!exactKeys(value, MODEL_T_OBSERVATION_KEYS, path, violations)) return null;
+  if (value.schema !== PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_OBSERVATION_SCHEMA) {
+    violations.push(`${path}.schema: unsupported Model T observation schema`);
+  }
+  const observer = recordsById.get(value.sourceId);
+  const owner = recordsById.get(value.ownerDecisionSourceId);
+  if (!observer
+    || observer.role !== EVIDENCE_SOURCE_ROLES.AUTOMATED_DEVICE_OBSERVATION_SOURCE
+    || observer.signingScheme !== RAW_ED25519_SCHEME
+    || !observer.keyObject) {
+    violations.push(`${path}.sourceId: source is not the configured automated device-observation source`);
+  }
+  if (!owner || owner.role !== EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE || !owner.keyObject) {
+    violations.push(`${path}.ownerDecisionSourceId: source is not the configured owner-decision signer`);
+  }
+  if (value.sourceId === value.ownerDecisionSourceId) {
+    violations.push(`${path}: device capability observation cannot self-attest the owner signer`);
+  }
+  if (value.deviceModel !== MODEL_T_DEVICE
+    || value.capabilityPredicate !== MODEL_T_CAPABILITY_PREDICATE
+    || value.observationValue !== "CAPABILITY_PRESENT") {
+    violations.push(`${path}: exact Model T OCMS capability observation values are required`);
+  }
+  if (value.derivationPath !== owner?.derivationPath
+    || value.solanaPublicKey !== owner?.solanaPublicKey) {
+    violations.push(`${path}: observed derivation path and Solana public key must match the owner source`);
+  }
+  const firmware = parseFirmwareVersion(value.firmwareVersion, `${path}.firmwareVersion`, violations);
+  if (!PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_BOUNDARY.acceptedOcmsVersions.includes(value.ocmsVersion)) {
+    violations.push(`${path}.ocmsVersion: expected OCMS_V0 or OCMS_V1`);
+  } else if (firmware && !firmwareSupportsOcms(firmware, value.ocmsVersion)) {
+    violations.push(`${path}: observed firmware and OCMS version are incompatible`);
+  }
+  const expectedClass = profile === "TEST_FIXTURE"
+    ? TEST_DEVICE_OBSERVATION_CLASS
+    : PRODUCTION_DEVICE_OBSERVATION_CLASS;
+  if (value.observationClass !== expectedClass) {
+    violations.push(`${path}.observationClass: ${profile} requires ${expectedClass}`);
+  }
+  const observedAt = canonicalU64(
+    value.observedAtUnixSeconds,
+    `${path}.observedAtUnixSeconds`,
+    violations,
+    { positive: true },
+  );
+  if (observedAt !== null && evaluationUnixSeconds !== null) {
+    if (observedAt > evaluationUnixSeconds) {
+      violations.push(`${path}.observedAtUnixSeconds: device observation is in the future`);
+    } else if (evaluationUnixSeconds - observedAt > MAX_LIVE_OBSERVATION_AGE_SECONDS) {
+      violations.push(`${path}.observedAtUnixSeconds: Model T capability observation is stale`);
+    }
+  }
+  const signature = decodedBase64url(
+    value.signatureBase64url,
+    64,
+    `${path}.signatureBase64url`,
+    violations,
+  );
+  if (signature && observer?.keyObject) {
+    const unsigned = Object.fromEntries(MODEL_T_OBSERVATION_KEYS
+      .filter((key) => key !== "signatureBase64url")
+      .map((key) => [key, value[key]]));
+    if (!verifySignature(
+      null,
+      productionIdentityAuthorityModelTObservationSigningBytes(unsigned),
+      observer.keyObject,
+      signature,
+    )) violations.push(`${path}.signatureBase64url: source-bound device observation signature is invalid`);
+  }
+  return violations.length === before ? value : null;
+}
+
+function validateAutomatedEvidenceBinding(
+  binding,
+  profile,
+  evaluationUnixSeconds,
+  violations,
+  blockers,
+) {
+  const before = violations.length;
+  if (!exactKeys(binding, EVIDENCE_BINDING_KEYS, "automatedEvidenceBinding", violations)) return null;
+  if (binding.schema !== PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_SCHEMA) {
+    violations.push("automatedEvidenceBinding.schema: unsupported schema");
+  }
+  if (binding.packetMaySelectEvidenceSources !== false) {
+    violations.push("automatedEvidenceBinding.packetMaySelectEvidenceSources: packet-selected evidence sources are forbidden");
+  }
+  if (binding.noSelfAttestation !== true) {
+    violations.push("automatedEvidenceBinding.noSelfAttestation: must be true");
+  }
+  if (binding.status === "AUTOMATED_EVIDENCE_SOURCES_UNCONFIGURED") {
+    if (!Array.isArray(binding.sources)
+      || binding.sources.length !== 0
+      || binding.modelTDeviceObservationReceipt !== null
+      || binding.sourceSetSha256 !== null) {
+      violations.push("automatedEvidenceBinding: unconfigured evidence requires zero sources, null device observation, and null source-set digest");
+    }
+    blockers.push("automatedEvidenceBinding: owner-decision, device-observation, two endpoint, and closure sources are unconfigured");
+    blockers.push("modelTCapability: MODEL_T_SOLANA_OCMS_CAPABILITY_OBSERVED has no separate source-bound device observation receipt");
     return null;
   }
-  if (binding.status !== "CONFIGURED_EXTERNAL_TRUST_ROOT") {
-    violations.push("trustBinding.status: expected EXTERNAL_ACCEPTANCE_REQUIRED or CONFIGURED_EXTERNAL_TRUST_ROOT");
+  if (binding.status !== "CONFIGURED_AUTOMATED_EVIDENCE_SOURCES") {
+    violations.push("automatedEvidenceBinding.status: expected AUTOMATED_EVIDENCE_SOURCES_UNCONFIGURED or CONFIGURED_AUTOMATED_EVIDENCE_SOURCES");
     return null;
   }
-  if (!Array.isArray(binding.keys) || binding.keys.length !== 4) {
-    violations.push("trustBinding.keys: expected exactly owner + two observer + independent reviewer keys");
+  if (!Array.isArray(binding.sources) || binding.sources.length !== 5) {
+    violations.push("automatedEvidenceBinding.sources: expected exactly one owner-decision, one device-observation, two endpoint, and one closure source");
     return null;
   }
   const records = [];
   const ids = new Set();
   const publicKeyDigests = new Set();
-  for (let index = 0; index < binding.keys.length; index += 1) {
-    const entry = binding.keys[index];
-    const path = `trustBinding.keys[${index}]`;
-    if (!exactKeys(entry, TRUST_KEY_KEYS, path, violations)) continue;
-    if (typeof entry.keyId !== "string" || !KEY_ID.test(entry.keyId)) {
-      violations.push(`${path}.keyId: expected a canonical external key identifier`);
+  for (let index = 0; index < binding.sources.length; index += 1) {
+    const entry = binding.sources[index];
+    const path = `automatedEvidenceBinding.sources[${index}]`;
+    const sourceKeys = entry?.role === EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE
+      ? OWNER_EVIDENCE_SOURCE_KEYS
+      : AUTOMATED_EVIDENCE_SOURCE_KEYS;
+    if (!exactKeys(entry, sourceKeys, path, violations)) continue;
+    if (typeof entry.sourceId !== "string" || !KEY_ID.test(entry.sourceId)) {
+      violations.push(`${path}.sourceId: expected a canonical externally configured source identifier`);
     }
-    if (!Object.values(TRUST_ROLES).includes(entry.role)) {
-      violations.push(`${path}.role: unsupported trust role`);
+    if (!Object.values(EVIDENCE_SOURCE_ROLES).includes(entry.role)) {
+      violations.push(`${path}.role: unsupported evidence-source role`);
     }
-    if (ids.has(entry.keyId)) violations.push(`${path}.keyId: duplicate key identifier`);
-    ids.add(entry.keyId);
-    if (index > 0 && String(binding.keys[index - 1]?.keyId) >= String(entry.keyId)) {
-      violations.push("trustBinding.keys: key identifiers must be unique and strictly sorted");
+    if (ids.has(entry.sourceId)) violations.push(`${path}.sourceId: duplicate source identifier`);
+    ids.add(entry.sourceId);
+    if (index > 0 && String(binding.sources[index - 1]?.sourceId) >= String(entry.sourceId)) {
+      violations.push("automatedEvidenceBinding.sources: source identifiers must be unique and strictly sorted");
+    }
+    if (entry.role === EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE) {
+      if (entry.signingScheme !== MODEL_T_OCMS_SCHEME
+        || entry.deviceModel !== MODEL_T_DEVICE
+        || entry.capabilityPredicate !== MODEL_T_CAPABILITY_PREDICATE
+        || typeof entry.derivationPath !== "string"
+        || !/^m\/44'\/501'\/(?:0|[1-9][0-9]*)'\/(?:0|[1-9][0-9]*)'$/u.test(entry.derivationPath)) {
+        violations.push(`${path}: owner source requires exact Model T OCMS scheme, predicate, and canonical Solana derivation path`);
+      }
+      if (!isCanonicalBase58Key(entry.solanaPublicKey)) {
+        violations.push(`${path}.solanaPublicKey: expected a canonical 32-byte Solana public key`);
+      }
+    } else if (entry.signingScheme !== RAW_ED25519_SCHEME) {
+      violations.push(`${path}.signingScheme: automated sources require raw source-bound Ed25519 receipts`);
     }
     const der = decodedBase64url(
       entry.publicKeySpkiDerBase64url,
@@ -345,66 +732,110 @@ function validateExternalTrustBinding(binding, violations, blockers) {
       if (entry.publicKeySha256 !== digest) {
         violations.push(`${path}.publicKeySha256: does not bind exact SPKI bytes`);
       }
-      if (publicKeyDigests.has(digest)) violations.push(`${path}: public key reused across independent roles`);
+      if (publicKeyDigests.has(digest)) violations.push(`${path}: signing key reused across evidence roles`);
       publicKeyDigests.add(digest);
+      if (entry.role === EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE) {
+        const solanaPublicKey = decodeBase58PublicKey(entry.solanaPublicKey);
+        if (!solanaPublicKey
+          || !der.subarray(ED25519_SPKI_PREFIX.length).equals(solanaPublicKey)) {
+          violations.push(`${path}.solanaPublicKey: must match the exact Ed25519 SPKI public key bytes`);
+        }
+      }
     }
     records.push({ ...entry, keyObject });
   }
   const roleCount = (role) => records.filter((entry) => entry.role === role).length;
-  if (roleCount(TRUST_ROLES.OWNER_DECISION) !== 1
-    || roleCount(TRUST_ROLES.ENDPOINT_OBSERVER) !== 2
-    || roleCount(TRUST_ROLES.INDEPENDENT_REVIEWER) !== 1) {
-    violations.push("trustBinding.keys: exact role cardinality is 1 owner, 2 observers, 1 reviewer");
+  if (roleCount(EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE) !== 1
+    || roleCount(EVIDENCE_SOURCE_ROLES.AUTOMATED_ENDPOINT_SOURCE) !== 2
+    || roleCount(EVIDENCE_SOURCE_ROLES.AUTOMATED_EVIDENCE_CLOSURE) !== 1
+    || roleCount(EVIDENCE_SOURCE_ROLES.AUTOMATED_DEVICE_OBSERVATION_SOURCE) !== 1) {
+    violations.push("automatedEvidenceBinding.sources: exact role cardinality is 1 owner-decision, 1 device-observation, 2 endpoint, and 1 closure source");
   }
+  const recordsById = new Map(records.map((entry) => [entry.sourceId, entry]));
+  const modelTDeviceObservationReceipt = validateModelTDeviceObservation(
+    binding.modelTDeviceObservationReceipt,
+    recordsById,
+    profile,
+    evaluationUnixSeconds,
+    "automatedEvidenceBinding.modelTDeviceObservationReceipt",
+    violations,
+  );
   const expectedRoot = sha256Canonical(
-    "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_EXTERNAL_TRUST_ROOT_V1",
+    "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_SOURCE_SET_V3",
     {
       schema: binding.schema,
       status: binding.status,
-      keys: binding.keys,
-      packetMaySelectTrustKeys: binding.packetMaySelectTrustKeys,
+      sources: binding.sources,
+      modelTDeviceObservationReceipt: binding.modelTDeviceObservationReceipt,
+      packetMaySelectEvidenceSources: binding.packetMaySelectEvidenceSources,
+      noSelfAttestation: binding.noSelfAttestation,
     },
   );
-  if (binding.trustRootSha256 !== expectedRoot) {
-    violations.push("trustBinding.trustRootSha256: external trust-root commitment mismatch");
+  if (binding.sourceSetSha256 !== expectedRoot) {
+    violations.push("automatedEvidenceBinding.sourceSetSha256: automated evidence source-set commitment mismatch");
   }
-  if (violations.length > 0) return null;
-  return new Map(records.map((entry) => [entry.keyId, entry]));
+  if (violations.length !== before || !modelTDeviceObservationReceipt) return null;
+  recordsById.modelTDeviceObservationReceipt = modelTDeviceObservationReceipt;
+  recordsById.modelTCapabilityObservationSha256 =
+    productionIdentityAuthorityModelTObservationSha256(modelTDeviceObservationReceipt);
+  recordsById.modelTCapabilityObserved =
+    profile === "PRODUCTION"
+    && modelTDeviceObservationReceipt.observationClass === PRODUCTION_DEVICE_OBSERVATION_CLASS;
+  return recordsById;
 }
 
-export function createProductionIdentityAuthorityTrustBinding(keys) {
-  const sorted = structuredClone(keys).sort((left, right) => left.keyId.localeCompare(right.keyId));
+export function createProductionIdentityAuthorityAutomatedEvidenceBinding(
+  sources,
+  modelTDeviceObservationReceipt,
+) {
+  if (!Array.isArray(sources) || !isPlainObject(modelTDeviceObservationReceipt)) {
+    throw new TypeError(
+      "configured evidence binding requires sources plus a separate Model T device-observation receipt",
+    );
+  }
+  const sorted = structuredClone(sources).sort((left, right) => left.sourceId.localeCompare(right.sourceId));
   const core = {
-    schema: PRODUCTION_IDENTITY_AUTHORITY_TRUST_SCHEMA,
-    status: "CONFIGURED_EXTERNAL_TRUST_ROOT",
-    keys: sorted,
-    packetMaySelectTrustKeys: false,
+    schema: PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_SCHEMA,
+    status: "CONFIGURED_AUTOMATED_EVIDENCE_SOURCES",
+    sources: sorted,
+    modelTDeviceObservationReceipt: structuredClone(modelTDeviceObservationReceipt),
+    packetMaySelectEvidenceSources: false,
+    noSelfAttestation: true,
   };
   return {
     ...core,
-    trustRootSha256: sha256Canonical(
-      "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_EXTERNAL_TRUST_ROOT_V1",
+    sourceSetSha256: sha256Canonical(
+      "IAT_B3_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_SOURCE_SET_V3",
       core,
     ),
   };
 }
 
-export function productionIdentityAuthorityAttestationSigningBytes(unsignedAttestation) {
-  const coreKeys = ATTESTATION_KEYS.filter((key) => key !== "signatureBase64url");
+export function productionIdentityAuthorityReceiptSigningBytes(unsignedReceipt) {
   const violations = [];
-  if (!exactKeys(unsignedAttestation, coreKeys, "unsignedAttestation", violations)) {
+  if (!exactKeys(unsignedReceipt, RECEIPT_CORE_KEYS, "unsignedAutomatedReceipt", violations)
+    || unsignedReceipt.schema !== PRODUCTION_IDENTITY_AUTHORITY_RECEIPT_SCHEMA
+    || String(unsignedReceipt.kind).startsWith("OWNER_")) {
+    if (violations.length === 0) {
+      violations.push("owner decisions require the exact Model T Solana OCMS envelope; raw Ed25519 is forbidden");
+    }
     throw new TypeError(violations.join("; "));
   }
   return Buffer.concat([
-    SIGNING_PREFIX,
-    Buffer.from(canonicalizeRfc8785(unsignedAttestation), "utf8"),
+    AUTOMATED_RECEIPT_SIGNING_PREFIX,
+    Buffer.from(canonicalizeRfc8785(unsignedReceipt), "utf8"),
   ]);
 }
 
-function validateAttestation(value, expected, trustKeys, path, violations) {
-  if (!exactKeys(value, ATTESTATION_KEYS, path, violations)) return false;
-  if (value.schema !== PRODUCTION_IDENTITY_AUTHORITY_ATTESTATION_SCHEMA) {
-    violations.push(`${path}.schema: unsupported attestation schema`);
+function validateReceipt(value, expected, evidenceSources, path, violations) {
+  const ownerDecision = expected.role === EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE;
+  const receiptKeys = ownerDecision ? OWNER_RECEIPT_KEYS : AUTOMATED_RECEIPT_KEYS;
+  if (!exactKeys(value, receiptKeys, path, violations)) return false;
+  const expectedSchema = ownerDecision
+    ? PRODUCTION_IDENTITY_AUTHORITY_OWNER_DECISION_RECEIPT_SCHEMA
+    : PRODUCTION_IDENTITY_AUTHORITY_RECEIPT_SCHEMA;
+  if (value.schema !== expectedSchema) {
+    violations.push(`${path}.schema: unsupported receipt schema`);
   }
   for (const [key, wanted] of Object.entries({
     kind: expected.kind,
@@ -422,7 +853,7 @@ function validateAttestation(value, expected, trustKeys, path, violations) {
   );
   if (observedAt !== null && expected.evaluationUnixSeconds !== null) {
     if (observedAt > expected.evaluationUnixSeconds) {
-      violations.push(`${path}.observedAtUnixSeconds: signed evidence is in the future relative to externally supplied evaluation time`);
+      violations.push(`${path}.observedAtUnixSeconds: receipt is in the future relative to externally supplied evaluation time`);
     } else if (expected.liveEndpoint === true
       && expected.evaluationUnixSeconds - observedAt > MAX_LIVE_OBSERVATION_AGE_SECONDS) {
       violations.push(`${path}.observedAtUnixSeconds: live endpoint evidence is stale`);
@@ -431,29 +862,106 @@ function validateAttestation(value, expected, trustKeys, path, violations) {
   if (expected.endpointRequired) {
     canonicalDigest(value.endpointSha256, `${path}.endpointSha256`, violations);
   } else if (value.endpointSha256 !== null) {
-    violations.push(`${path}.endpointSha256: owner/reviewer attestation must not select an endpoint`);
+    violations.push(`${path}.endpointSha256: decision or closure receipt must not select an endpoint`);
   }
   if (value.observationValue !== expected.observationValue) {
     violations.push(`${path}.observationValue: does not match the bound stage value`);
   }
-  if (typeof value.keyId !== "string" || !KEY_ID.test(value.keyId)) {
-    violations.push(`${path}.keyId: expected a canonical externally configured key ID`);
+  if (typeof value.sourceId !== "string" || !KEY_ID.test(value.sourceId)) {
+    violations.push(`${path}.sourceId: expected a canonical externally configured evidence-source ID`);
   }
-  const record = trustKeys?.get(value.keyId);
+  const record = evidenceSources?.get(value.sourceId);
   if (!record || record.role !== expected.role || !record.keyObject) {
-    violations.push(`${path}.keyId: key is absent from the external ${expected.role} trust role`);
+    violations.push(`${path}.sourceId: source is absent from the configured ${expected.role} evidence role`);
     return false;
   }
   const signature = decodedBase64url(value.signatureBase64url, 64, `${path}.signatureBase64url`, violations);
   if (!signature) return false;
-  const unsigned = Object.fromEntries(ATTESTATION_KEYS
-    .filter((key) => key !== "signatureBase64url")
-    .map((key) => [key, value[key]]));
+  if (ownerDecision) {
+    const capabilityReceipt = evidenceSources.modelTDeviceObservationReceipt;
+    if (!capabilityReceipt
+      || value.capabilityObservationSha256 !== evidenceSources.modelTCapabilityObservationSha256) {
+      violations.push(`${path}.capabilityObservationSha256: owner receipt does not bind the separate Model T device observation`);
+      return false;
+    }
+    const capabilityTime = canonicalU64(
+      capabilityReceipt.observedAtUnixSeconds,
+      `${path}.capabilityObservation.observedAtUnixSeconds`,
+      violations,
+      { positive: true },
+    );
+    if (observedAt !== null && capabilityTime !== null
+      && (observedAt < capabilityTime
+        || observedAt - capabilityTime > MAX_LIVE_OBSERVATION_AGE_SECONDS)) {
+      violations.push(`${path}: owner OCMS decision must follow the fresh Model T capability observation`);
+    }
+    const unsigned = Object.fromEntries(RECEIPT_CORE_KEYS.map((key) => [key, value[key]]));
+    let material;
+    try {
+      material = productionIdentityAuthorityOwnerDecisionOcmsSigningMaterial(
+        unsigned,
+        record,
+        capabilityReceipt,
+      );
+    } catch (error) {
+      violations.push(`${path}: ${error.message}`);
+      return false;
+    }
+    for (const [key, wanted] of Object.entries(material)) {
+      if (value[key] !== wanted) violations.push(`${path}.${key}: OCMS signing material mismatch`);
+    }
+    const ocmsMessage = decodedVariableBase64url(
+      value.ocmsMessageBase64url,
+      1,
+      70_000,
+      `${path}.ocmsMessageBase64url`,
+      violations,
+    );
+    const decisionPayload = decodedVariableBase64url(
+      value.decisionPayloadBase64url,
+      1,
+      65_535,
+      `${path}.decisionPayloadBase64url`,
+      violations,
+    );
+    const envelope = decodedVariableBase64url(
+      value.ocmsEnvelopeBase64url,
+      66,
+      70_065,
+      `${path}.ocmsEnvelopeBase64url`,
+      violations,
+    );
+    if (decisionPayload && value.decisionPayloadSha256 !== sha256Bytes(decisionPayload)) {
+      violations.push(`${path}.decisionPayloadSha256: canonical owner decision payload mismatch`);
+    }
+    if (ocmsMessage && value.ocmsMessageSha256 !== sha256Bytes(ocmsMessage)) {
+      violations.push(`${path}.ocmsMessageSha256: serialized OCMS message mismatch`);
+    }
+    if (envelope && value.ocmsEnvelopeSha256 !== sha256Bytes(envelope)) {
+      violations.push(`${path}.ocmsEnvelopeSha256: serialized OCMS envelope mismatch`);
+    }
+    if (ocmsMessage) {
+      const expectedEnvelope = productionIdentityAuthorityOcmsEnvelopeBytes(ocmsMessage, [signature]);
+      if (!envelope?.equals(expectedEnvelope)) {
+        violations.push(`${path}.ocmsEnvelopeBase64url: envelope must be signature_count || signature || exact OCMS message`);
+      }
+    }
+    let verified = false;
+    try {
+      verified = ocmsMessage !== null
+        && verifySignature(null, ocmsMessage, record.keyObject, signature);
+    } catch {
+      verified = false;
+    }
+    if (!verified) violations.push(`${path}.signatureBase64url: OCMS Ed25519 signature is invalid`);
+    return verified;
+  }
+  const unsigned = Object.fromEntries(RECEIPT_CORE_KEYS.map((key) => [key, value[key]]));
   let verified = false;
   try {
     verified = verifySignature(
       null,
-      productionIdentityAuthorityAttestationSigningBytes(unsigned),
+      productionIdentityAuthorityReceiptSigningBytes(unsigned),
       record.keyObject,
       signature,
     );
@@ -464,33 +972,33 @@ function validateAttestation(value, expected, trustKeys, path, violations) {
   return verified;
 }
 
-function validateTwoEndpointObservations(observations, expected, trustKeys, path, violations) {
-  if (!Array.isArray(observations) || observations.length !== 2) {
-    violations.push(`${path}: expected exactly two independently signed endpoint observations`);
+function validateTwoEndpointReceipts(receipts, expected, evidenceSources, path, violations) {
+  if (!Array.isArray(receipts) || receipts.length !== 2) {
+    violations.push(`${path}: expected exactly two source-bound automated endpoint receipts`);
     return false;
   }
   const before = violations.length;
-  for (let index = 0; index < observations.length; index += 1) {
-    validateAttestation(
-      observations[index],
+  for (let index = 0; index < receipts.length; index += 1) {
+    validateReceipt(
+      receipts[index],
       {
         ...expected,
-        role: TRUST_ROLES.ENDPOINT_OBSERVER,
+        role: EVIDENCE_SOURCE_ROLES.AUTOMATED_ENDPOINT_SOURCE,
         endpointRequired: true,
         liveEndpoint: true,
       },
-      trustKeys,
+      evidenceSources,
       `${path}[${index}]`,
       violations,
     );
   }
-  if (observations[0]?.keyId === observations[1]?.keyId) {
-    violations.push(`${path}: observer key IDs must be distinct`);
+  if (receipts[0]?.sourceId === receipts[1]?.sourceId) {
+    violations.push(`${path}: automated endpoint source IDs must be distinct`);
   }
-  if (observations[0]?.endpointSha256 === observations[1]?.endpointSha256) {
+  if (receipts[0]?.endpointSha256 === receipts[1]?.endpointSha256) {
     violations.push(`${path}: endpoint commitments must be distinct`);
   }
-  const observedTimes = observations.map((entry) => (
+  const observedTimes = receipts.map((entry) => (
     typeof entry?.observedAtUnixSeconds === "string" && U64_DECIMAL.test(entry.observedAtUnixSeconds)
       ? BigInt(entry.observedAtUnixSeconds)
       : null
@@ -499,30 +1007,30 @@ function validateTwoEndpointObservations(observations, expected, trustKeys, path
     && (observedTimes[0] > observedTimes[1]
       ? observedTimes[0] - observedTimes[1]
       : observedTimes[1] - observedTimes[0]) > MAX_ENDPOINT_PAIR_SKEW_SECONDS) {
-    violations.push(`${path}: endpoint observation timestamps exceed the bounded pair skew`);
+    violations.push(`${path}: endpoint receipt timestamps exceed the bounded pair skew`);
   }
   return violations.length === before;
 }
 
-function validateIndependentReviewTiming(attestations, review, path, violations) {
-  const prerequisiteTimes = attestations.map((entry) => (
+function validateAutomatedClosureTiming(receipts, closure, path, violations) {
+  const prerequisiteTimes = receipts.map((entry) => (
     typeof entry?.observedAtUnixSeconds === "string" && U64_DECIMAL.test(entry.observedAtUnixSeconds)
       ? BigInt(entry.observedAtUnixSeconds)
       : null
   ));
-  const reviewTime = typeof review?.observedAtUnixSeconds === "string"
-    && U64_DECIMAL.test(review.observedAtUnixSeconds)
-    ? BigInt(review.observedAtUnixSeconds)
+  const closureTime = typeof closure?.observedAtUnixSeconds === "string"
+    && U64_DECIMAL.test(closure.observedAtUnixSeconds)
+    ? BigInt(closure.observedAtUnixSeconds)
     : null;
-  if (reviewTime === null || prerequisiteTimes.some((value) => value === null)) return;
+  if (closureTime === null || prerequisiteTimes.some((value) => value === null)) return;
   const latestPrerequisite = prerequisiteTimes.reduce(
     (latest, value) => value > latest ? value : latest,
     0n,
   );
-  if (reviewTime < latestPrerequisite) {
-    violations.push(`${path}: independent review predates required signed evidence`);
-  } else if (reviewTime - latestPrerequisite > MAX_INDEPENDENT_REVIEW_LAG_SECONDS) {
-    violations.push(`${path}: independent review exceeds the bounded evidence-review interval`);
+  if (closureTime < latestPrerequisite) {
+    violations.push(`${path}: automated closure predates required source-bound receipts`);
+  } else if (closureTime - latestPrerequisite > MAX_AUTOMATED_CLOSURE_LAG_SECONDS) {
+    violations.push(`${path}: automated closure exceeds the bounded receipt-closure interval`);
   }
 }
 
@@ -616,30 +1124,30 @@ function validateProductionIdentityInput(manifest, options, violations, blockers
   return result.productionIdentityReady === true;
 }
 
-function validatePendingAttestation(value, path, violations) {
+function validatePendingEvidence(value, path, violations) {
   if (value !== null) violations.push(`${path}: PENDING stage requires null`);
 }
 
-function validatePhaseA(manifest, options, trustKeys, evaluationUnixSeconds, violations, blockers) {
+function validatePhaseA(manifest, options, evidenceSources, evaluationUnixSeconds, violations, blockers) {
   const phaseStart = violations.length;
   const phase = manifest.phaseAProductionIdentityFreeze;
   const keys = [
     "status",
     "subjectSha256",
     "ownerDecisionPreimageSha256",
-    "ownerAcceptance",
-    "mainnetGenesisObservations",
-    "independentReview",
+    "ownerDecisionReceipt",
+    "mainnetGenesisEndpointReceipts",
+    "automatedClosureReceipt",
     "blocker",
   ];
   if (!exactKeys(phase, keys, "phaseAProductionIdentityFreeze", violations)) return false;
   if (phase.status === "PENDING") {
-    validatePendingAttestation(phase.subjectSha256, "phaseAProductionIdentityFreeze.subjectSha256", violations);
-    validatePendingAttestation(phase.ownerDecisionPreimageSha256, "phaseAProductionIdentityFreeze.ownerDecisionPreimageSha256", violations);
-    validatePendingAttestation(phase.ownerAcceptance, "phaseAProductionIdentityFreeze.ownerAcceptance", violations);
-    validatePendingAttestation(phase.independentReview, "phaseAProductionIdentityFreeze.independentReview", violations);
-    if (!Array.isArray(phase.mainnetGenesisObservations) || phase.mainnetGenesisObservations.length !== 0) {
-      violations.push("phaseAProductionIdentityFreeze.mainnetGenesisObservations: PENDING requires empty array");
+    validatePendingEvidence(phase.subjectSha256, "phaseAProductionIdentityFreeze.subjectSha256", violations);
+    validatePendingEvidence(phase.ownerDecisionPreimageSha256, "phaseAProductionIdentityFreeze.ownerDecisionPreimageSha256", violations);
+    validatePendingEvidence(phase.ownerDecisionReceipt, "phaseAProductionIdentityFreeze.ownerDecisionReceipt", violations);
+    validatePendingEvidence(phase.automatedClosureReceipt, "phaseAProductionIdentityFreeze.automatedClosureReceipt", violations);
+    if (!Array.isArray(phase.mainnetGenesisEndpointReceipts) || phase.mainnetGenesisEndpointReceipts.length !== 0) {
+      violations.push("phaseAProductionIdentityFreeze.mainnetGenesisEndpointReceipts: PENDING requires empty array");
     }
     if (typeof phase.blocker !== "string" || phase.blocker.length < 24) {
       violations.push("phaseAProductionIdentityFreeze.blocker: PENDING requires a specific blocker");
@@ -656,40 +1164,40 @@ function validatePhaseA(manifest, options, trustKeys, evaluationUnixSeconds, vio
   if (phase.subjectSha256 !== subject) {
     violations.push("phaseAProductionIdentityFreeze.subjectSha256: identity/authority subject commitment mismatch");
   }
-  validateAttestation(phase.ownerAcceptance, {
-    kind: "OWNER_IDENTITY_DECISION_ACCEPTANCE",
+  validateReceipt(phase.ownerDecisionReceipt, {
+    kind: "OWNER_IDENTITY_DECISION_RECEIPT",
     stage: "A",
     subjectSha256: subject,
     observationValue: phase.ownerDecisionPreimageSha256,
     decision: "ACCEPT",
-    role: TRUST_ROLES.OWNER_DECISION,
+    role: EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE,
     endpointRequired: false,
     evaluationUnixSeconds,
-  }, trustKeys, "phaseAProductionIdentityFreeze.ownerAcceptance", violations);
-  validateTwoEndpointObservations(phase.mainnetGenesisObservations, {
-    kind: "MAINNET_GENESIS_OBSERVATION",
+  }, evidenceSources, "phaseAProductionIdentityFreeze.ownerDecisionReceipt", violations);
+  validateTwoEndpointReceipts(phase.mainnetGenesisEndpointReceipts, {
+    kind: "MAINNET_GENESIS_ENDPOINT_RECEIPT",
     stage: "A",
     subjectSha256: subject,
     observationValue: manifest.productionChoices.mainnetGenesisHash,
     decision: "MATCHED",
     evaluationUnixSeconds,
-  }, trustKeys, "phaseAProductionIdentityFreeze.mainnetGenesisObservations", violations);
-  validateAttestation(phase.independentReview, {
-    kind: "INDEPENDENT_IDENTITY_REVIEW",
+  }, evidenceSources, "phaseAProductionIdentityFreeze.mainnetGenesisEndpointReceipts", violations);
+  validateReceipt(phase.automatedClosureReceipt, {
+    kind: "AUTOMATED_IDENTITY_CLOSURE_RECEIPT",
     stage: "A",
     subjectSha256: subject,
     observationValue: subject,
     decision: "ACCEPT",
-    role: TRUST_ROLES.INDEPENDENT_REVIEWER,
+    role: EVIDENCE_SOURCE_ROLES.AUTOMATED_EVIDENCE_CLOSURE,
     endpointRequired: false,
     evaluationUnixSeconds,
-  }, trustKeys, "phaseAProductionIdentityFreeze.independentReview", violations);
-  validateIndependentReviewTiming(
-    [phase.ownerAcceptance, ...(Array.isArray(phase.mainnetGenesisObservations)
-      ? phase.mainnetGenesisObservations
+  }, evidenceSources, "phaseAProductionIdentityFreeze.automatedClosureReceipt", violations);
+  validateAutomatedClosureTiming(
+    [phase.ownerDecisionReceipt, ...(Array.isArray(phase.mainnetGenesisEndpointReceipts)
+      ? phase.mainnetGenesisEndpointReceipts
       : [])],
-    phase.independentReview,
-    "phaseAProductionIdentityFreeze.independentReview",
+    phase.automatedClosureReceipt,
+    "phaseAProductionIdentityFreeze.automatedClosureReceipt",
     violations,
   );
   const inputReady = validateProductionIdentityInput(manifest, options, violations, blockers);
@@ -733,7 +1241,7 @@ export function ceremonyFundingEvidenceSubjectSha256(manifest) {
   });
 }
 
-function validatePhaseB(manifest, phaseAComplete, trustKeys, evaluationUnixSeconds, violations, blockers) {
+function validatePhaseB(manifest, phaseAComplete, evidenceSources, evaluationUnixSeconds, violations, blockers) {
   const phaseStart = violations.length;
   const phase = manifest.phaseBCeremonyFunding;
   const keys = [
@@ -750,9 +1258,9 @@ function validatePhaseB(manifest, phaseAComplete, trustKeys, evaluationUnixSecon
     "aggregateRecoverableBufferLamports",
     "aggregateFeeBudgetLamports",
     "expiresAtUnixSeconds",
-    "fundingApproval",
-    "payerBalanceObservations",
-    "independentReview",
+    "fundingDecisionReceipt",
+    "payerBalanceEndpointReceipts",
+    "automatedClosureReceipt",
     "blocker",
   ];
   if (!exactKeys(phase, keys, "phaseBCeremonyFunding", violations)) return false;
@@ -761,11 +1269,11 @@ function validatePhaseB(manifest, phaseAComplete, trustKeys, evaluationUnixSecon
   validateBinary(phase.finalBinaries.law, "law", manifest.productionChoices.lawProgramId, complete, "phaseBCeremonyFunding.finalBinaries.law", violations);
   validateBinary(phase.finalBinaries.economy, "economy", manifest.productionChoices.economyProgramId, complete, "phaseBCeremonyFunding.finalBinaries.economy", violations);
   if (phase.status === "PENDING") {
-    for (const key of keys.filter((key) => !["status", "finalBinaries", "payerBalanceObservations", "blocker"].includes(key))) {
-      validatePendingAttestation(phase[key], `phaseBCeremonyFunding.${key}`, violations);
+    for (const key of keys.filter((key) => !["status", "finalBinaries", "payerBalanceEndpointReceipts", "blocker"].includes(key))) {
+      validatePendingEvidence(phase[key], `phaseBCeremonyFunding.${key}`, violations);
     }
-    if (!Array.isArray(phase.payerBalanceObservations) || phase.payerBalanceObservations.length !== 0) {
-      violations.push("phaseBCeremonyFunding.payerBalanceObservations: PENDING requires empty array");
+    if (!Array.isArray(phase.payerBalanceEndpointReceipts) || phase.payerBalanceEndpointReceipts.length !== 0) {
+      violations.push("phaseBCeremonyFunding.payerBalanceEndpointReceipts: PENDING requires empty array");
     }
     if (typeof phase.blocker !== "string" || phase.blocker.length < 24) {
       violations.push("phaseBCeremonyFunding.blocker: PENDING requires a specific blocker");
@@ -806,50 +1314,50 @@ function validatePhaseB(manifest, phaseAComplete, trustKeys, evaluationUnixSecon
   }
   const subject = ceremonyFundingEvidenceSubjectSha256(manifest);
   if (phase.subjectSha256 !== subject) violations.push("phaseBCeremonyFunding.subjectSha256: cost/funding subject commitment mismatch");
-  validateAttestation(phase.fundingApproval, {
-    kind: "OWNER_FUNDING_SOURCE_ACCEPTANCE",
+  validateReceipt(phase.fundingDecisionReceipt, {
+    kind: "OWNER_FUNDING_DECISION_RECEIPT",
     stage: "B",
     subjectSha256: subject,
     observationValue: phase.fundingSourceApprovalSha256,
     decision: "ACCEPT",
-    role: TRUST_ROLES.OWNER_DECISION,
+    role: EVIDENCE_SOURCE_ROLES.OWNER_DECISION_SOURCE,
     endpointRequired: false,
     evaluationUnixSeconds,
-  }, trustKeys, "phaseBCeremonyFunding.fundingApproval", violations);
-  if (Array.isArray(phase.payerBalanceObservations)) {
-    for (let index = 0; index < phase.payerBalanceObservations.length; index += 1) {
+  }, evidenceSources, "phaseBCeremonyFunding.fundingDecisionReceipt", violations);
+  if (Array.isArray(phase.payerBalanceEndpointReceipts)) {
+    for (let index = 0; index < phase.payerBalanceEndpointReceipts.length; index += 1) {
       const balance = canonicalU64(
-        phase.payerBalanceObservations[index]?.observationValue,
-        `phaseBCeremonyFunding.payerBalanceObservations[${index}].observationValue`,
+        phase.payerBalanceEndpointReceipts[index]?.observationValue,
+        `phaseBCeremonyFunding.payerBalanceEndpointReceipts[${index}].observationValue`,
         violations,
         { positive: true },
       );
       if (balance !== null && floor !== null && balance < floor) {
-        violations.push(`phaseBCeremonyFunding.payerBalanceObservations[${index}]: observed balance is below ceremony floor`);
+        violations.push(`phaseBCeremonyFunding.payerBalanceEndpointReceipts[${index}]: observed balance is below ceremony floor`);
       }
     }
   }
-  if (!Array.isArray(phase.payerBalanceObservations) || phase.payerBalanceObservations.length !== 2) {
-    violations.push("phaseBCeremonyFunding.payerBalanceObservations: expected exactly two endpoint observations");
+  if (!Array.isArray(phase.payerBalanceEndpointReceipts) || phase.payerBalanceEndpointReceipts.length !== 2) {
+    violations.push("phaseBCeremonyFunding.payerBalanceEndpointReceipts: expected exactly two automated endpoint receipts");
   } else {
     for (let index = 0; index < 2; index += 1) {
-      validateAttestation(phase.payerBalanceObservations[index], {
-        kind: "PAYER_BALANCE_OBSERVATION",
+      validateReceipt(phase.payerBalanceEndpointReceipts[index], {
+        kind: "PAYER_BALANCE_ENDPOINT_RECEIPT",
         stage: "B",
         subjectSha256: subject,
-        observationValue: phase.payerBalanceObservations[index].observationValue,
+        observationValue: phase.payerBalanceEndpointReceipts[index].observationValue,
         decision: "MATCHED",
-        role: TRUST_ROLES.ENDPOINT_OBSERVER,
+        role: EVIDENCE_SOURCE_ROLES.AUTOMATED_ENDPOINT_SOURCE,
         endpointRequired: true,
         liveEndpoint: true,
         evaluationUnixSeconds,
-      }, trustKeys, `phaseBCeremonyFunding.payerBalanceObservations[${index}]`, violations);
+      }, evidenceSources, `phaseBCeremonyFunding.payerBalanceEndpointReceipts[${index}]`, violations);
     }
-    if (phase.payerBalanceObservations[0].keyId === phase.payerBalanceObservations[1].keyId
-      || phase.payerBalanceObservations[0].endpointSha256 === phase.payerBalanceObservations[1].endpointSha256) {
-      violations.push("phaseBCeremonyFunding.payerBalanceObservations: observer keys and endpoints must both be distinct");
+    if (phase.payerBalanceEndpointReceipts[0].sourceId === phase.payerBalanceEndpointReceipts[1].sourceId
+      || phase.payerBalanceEndpointReceipts[0].endpointSha256 === phase.payerBalanceEndpointReceipts[1].endpointSha256) {
+      violations.push("phaseBCeremonyFunding.payerBalanceEndpointReceipts: automated sources and endpoints must both be distinct");
     }
-    const payerObservationTimes = phase.payerBalanceObservations.map((entry) => (
+    const payerObservationTimes = phase.payerBalanceEndpointReceipts.map((entry) => (
       typeof entry?.observedAtUnixSeconds === "string" && U64_DECIMAL.test(entry.observedAtUnixSeconds)
         ? BigInt(entry.observedAtUnixSeconds)
         : null
@@ -858,44 +1366,44 @@ function validatePhaseB(manifest, phaseAComplete, trustKeys, evaluationUnixSecon
       && (payerObservationTimes[0] > payerObservationTimes[1]
         ? payerObservationTimes[0] - payerObservationTimes[1]
         : payerObservationTimes[1] - payerObservationTimes[0]) > MAX_ENDPOINT_PAIR_SKEW_SECONDS) {
-      violations.push("phaseBCeremonyFunding.payerBalanceObservations: endpoint observation timestamps exceed the bounded pair skew");
+      violations.push("phaseBCeremonyFunding.payerBalanceEndpointReceipts: endpoint receipt timestamps exceed the bounded pair skew");
     }
   }
-  validateAttestation(phase.independentReview, {
-    kind: "INDEPENDENT_FUNDING_REVIEW",
+  validateReceipt(phase.automatedClosureReceipt, {
+    kind: "AUTOMATED_FUNDING_CLOSURE_RECEIPT",
     stage: "B",
     subjectSha256: subject,
     observationValue: subject,
     decision: "ACCEPT",
-    role: TRUST_ROLES.INDEPENDENT_REVIEWER,
+    role: EVIDENCE_SOURCE_ROLES.AUTOMATED_EVIDENCE_CLOSURE,
     endpointRequired: false,
     evaluationUnixSeconds,
-  }, trustKeys, "phaseBCeremonyFunding.independentReview", violations);
-  validateIndependentReviewTiming(
-    [phase.fundingApproval, ...(Array.isArray(phase.payerBalanceObservations)
-      ? phase.payerBalanceObservations
+  }, evidenceSources, "phaseBCeremonyFunding.automatedClosureReceipt", violations);
+  validateAutomatedClosureTiming(
+    [phase.fundingDecisionReceipt, ...(Array.isArray(phase.payerBalanceEndpointReceipts)
+      ? phase.payerBalanceEndpointReceipts
       : [])],
-    phase.independentReview,
-    "phaseBCeremonyFunding.independentReview",
+    phase.automatedClosureReceipt,
+    "phaseBCeremonyFunding.automatedClosureReceipt",
     violations,
   );
-  const payerTimes = Array.isArray(phase.payerBalanceObservations)
-    ? phase.payerBalanceObservations.map((entry) => (
+  const payerTimes = Array.isArray(phase.payerBalanceEndpointReceipts)
+    ? phase.payerBalanceEndpointReceipts.map((entry) => (
       typeof entry?.observedAtUnixSeconds === "string" && U64_DECIMAL.test(entry.observedAtUnixSeconds)
         ? BigInt(entry.observedAtUnixSeconds)
         : null
     ))
     : [];
-  const reviewTime = typeof phase.independentReview?.observedAtUnixSeconds === "string"
-    && U64_DECIMAL.test(phase.independentReview.observedAtUnixSeconds)
-    ? BigInt(phase.independentReview.observedAtUnixSeconds)
+  const closureTime = typeof phase.automatedClosureReceipt?.observedAtUnixSeconds === "string"
+    && U64_DECIMAL.test(phase.automatedClosureReceipt.observedAtUnixSeconds)
+    ? BigInt(phase.automatedClosureReceipt.observedAtUnixSeconds)
     : null;
   if (expiresAt !== null) {
     if (evaluationUnixSeconds !== null && evaluationUnixSeconds > expiresAt) {
       violations.push("phaseBCeremonyFunding.expiresAtUnixSeconds: funding evidence has expired at externally supplied evaluation time");
     }
-    if (reviewTime !== null && reviewTime > expiresAt) {
-      violations.push("phaseBCeremonyFunding.expiresAtUnixSeconds: independent acceptance is after expiry");
+    if (closureTime !== null && closureTime > expiresAt) {
+      violations.push("phaseBCeremonyFunding.expiresAtUnixSeconds: automated closure is after expiry");
     }
     if (payerTimes.length === 2 && payerTimes.every((value) => value !== null)) {
       const latestPayer = payerTimes[0] > payerTimes[1] ? payerTimes[0] : payerTimes[1];
@@ -924,7 +1432,7 @@ export function deployedSealEvidenceSubjectSha256(manifest) {
   });
 }
 
-function validatePhaseC(manifest, phaseBComplete, trustKeys, evaluationUnixSeconds, violations, blockers) {
+function validatePhaseC(manifest, phaseBComplete, evidenceSources, evaluationUnixSeconds, violations, blockers) {
   const phaseStart = violations.length;
   const phase = manifest.phaseCDeployedSeal;
   const keys = [
@@ -932,8 +1440,8 @@ function validatePhaseC(manifest, phaseBComplete, trustKeys, evaluationUnixSecon
     "subjectSha256",
     "journal",
     "terminalState",
-    "terminalEndpointObservations",
-    "independentReview",
+    "terminalEndpointReceipts",
+    "automatedClosureReceipt",
     "blocker",
   ];
   if (!exactKeys(phase, keys, "phaseCDeployedSeal", violations)) return false;
@@ -965,11 +1473,11 @@ function validatePhaseC(manifest, phaseBComplete, trustKeys, evaluationUnixSecon
   }
   if (!exactKeys(phase.terminalState, TERMINAL_STATE_KEYS, "phaseCDeployedSeal.terminalState", violations)) return false;
   if (phase.status === "PENDING") {
-    if (phase.subjectSha256 !== null || phase.independentReview !== null) {
-      violations.push("phaseCDeployedSeal: PENDING requires null subject and review");
+    if (phase.subjectSha256 !== null || phase.automatedClosureReceipt !== null) {
+      violations.push("phaseCDeployedSeal: PENDING requires null subject and automated closure receipt");
     }
-    if (!Array.isArray(phase.terminalEndpointObservations) || phase.terminalEndpointObservations.length !== 0) {
-      violations.push("phaseCDeployedSeal.terminalEndpointObservations: PENDING requires empty array");
+    if (!Array.isArray(phase.terminalEndpointReceipts) || phase.terminalEndpointReceipts.length !== 0) {
+      violations.push("phaseCDeployedSeal.terminalEndpointReceipts: PENDING requires empty array");
     }
     if (TERMINAL_STATE_KEYS.some((key) => phase.terminalState[key] !== null)) {
       violations.push("phaseCDeployedSeal.terminalState: PENDING requires every field null");
@@ -1013,30 +1521,30 @@ function validatePhaseC(manifest, phaseBComplete, trustKeys, evaluationUnixSecon
   }
   const subject = deployedSealEvidenceSubjectSha256(manifest);
   if (phase.subjectSha256 !== subject) violations.push("phaseCDeployedSeal.subjectSha256: journal/terminal-state subject mismatch");
-  validateTwoEndpointObservations(phase.terminalEndpointObservations, {
-    kind: "TERMINAL_AUTHORITY_STATE_OBSERVATION",
+  validateTwoEndpointReceipts(phase.terminalEndpointReceipts, {
+    kind: "TERMINAL_AUTHORITY_STATE_ENDPOINT_RECEIPT",
     stage: "C",
     subjectSha256: subject,
     observationValue: stateSha256,
     decision: "MATCHED",
     evaluationUnixSeconds,
-  }, trustKeys, "phaseCDeployedSeal.terminalEndpointObservations", violations);
-  validateAttestation(phase.independentReview, {
-    kind: "INDEPENDENT_DEPLOYED_SEAL_REVIEW",
+  }, evidenceSources, "phaseCDeployedSeal.terminalEndpointReceipts", violations);
+  validateReceipt(phase.automatedClosureReceipt, {
+    kind: "AUTOMATED_DEPLOYED_SEAL_CLOSURE_RECEIPT",
     stage: "C",
     subjectSha256: subject,
     observationValue: subject,
     decision: "ACCEPT",
-    role: TRUST_ROLES.INDEPENDENT_REVIEWER,
+    role: EVIDENCE_SOURCE_ROLES.AUTOMATED_EVIDENCE_CLOSURE,
     endpointRequired: false,
     evaluationUnixSeconds,
-  }, trustKeys, "phaseCDeployedSeal.independentReview", violations);
-  validateIndependentReviewTiming(
-    Array.isArray(phase.terminalEndpointObservations)
-      ? phase.terminalEndpointObservations
+  }, evidenceSources, "phaseCDeployedSeal.automatedClosureReceipt", violations);
+  validateAutomatedClosureTiming(
+    Array.isArray(phase.terminalEndpointReceipts)
+      ? phase.terminalEndpointReceipts
       : [],
-    phase.independentReview,
-    "phaseCDeployedSeal.independentReview",
+    phase.automatedClosureReceipt,
+    "phaseCDeployedSeal.automatedClosureReceipt",
     violations,
   );
   return violations.length === phaseStart;
@@ -1055,7 +1563,7 @@ function validateAuthorizationBoundary(value, violations) {
     deploymentAuthorized: false,
     fundingSpendAuthorized: false,
     activationAuthorized: false,
-    independentGate8Accepted: false,
+    automatedGate8EvidenceComplete: false,
     releaseAuthorized: false,
     mainnetExecutionAuthorized: false,
     mainnetStatus: PRODUCTION_IDENTITY_AUTHORITY_MAINNET_STATUS,
@@ -1066,12 +1574,23 @@ function validateAuthorizationBoundary(value, violations) {
   }
 }
 
-function resultSurface(manifest, phaseAComplete, phaseBComplete, phaseCComplete, trustConfigured, blockers, violations) {
+function resultSurface(
+  manifest,
+  phaseAComplete,
+  phaseBComplete,
+  phaseCComplete,
+  automatedEvidenceSourcesConfigured,
+  modelTCapabilityObserved,
+  blockers,
+  violations,
+) {
   const production = manifest?.profile === "PRODUCTION";
   return {
     valid: violations.length === 0,
     profile: typeof manifest?.profile === "string" ? manifest.profile : null,
-    externalTrustConfigured: trustConfigured,
+    automatedEvidenceSourcesConfigured: automatedEvidenceSourcesConfigured,
+    modelTCapabilityPredicate: MODEL_T_CAPABILITY_PREDICATE,
+    modelTCapabilityObserved: modelTCapabilityObserved === true,
     phaseAProductionIdentityFreezeComplete: phaseAComplete,
     phaseBCeremonyFundingComplete: phaseBComplete,
     phaseCDeployedIdentityAuthoritySealComplete: phaseCComplete,
@@ -1083,7 +1602,7 @@ function resultSurface(manifest, phaseAComplete, phaseBComplete, phaseCComplete,
     deploymentAuthorized: false,
     fundingSpendAuthorized: false,
     activationAuthorized: false,
-    independentGate8Accepted: false,
+    automatedGate8EvidenceComplete: false,
     releaseAuthorized: false,
     mainnetExecutionAuthorized: false,
     mainnetStatus: PRODUCTION_IDENTITY_AUTHORITY_MAINNET_STATUS,
@@ -1097,7 +1616,7 @@ export function validateProductionIdentityAuthorityEvidenceManifest(manifest, op
   const blockers = [];
   const safe = safeCanonicalClone(manifest, violations);
   if (!safe || !exactKeys(safe, TOP_LEVEL_KEYS, "manifest", violations)) {
-    return resultSurface(safe, false, false, false, false, blockers, violations);
+    return resultSurface(safe, false, false, false, false, false, blockers, violations);
   }
   if (safe.$schema !== "./iat-b3-production-identity-authority-evidence.v1.schema.json") {
     violations.push("manifest.$schema: unexpected schema path");
@@ -1114,6 +1633,12 @@ export function validateProductionIdentityAuthorityEvidenceManifest(manifest, op
   if (!exactJson(safe.scope, PRODUCTION_IDENTITY_AUTHORITY_SCOPE)) {
     violations.push("manifest.scope: nonactivating staged evidence boundary drifted");
   }
+  if (!exactJson(
+    safe.modelTCapabilityBoundary,
+    PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_BOUNDARY,
+  )) {
+    violations.push("manifest.modelTCapabilityBoundary: Model T OCMS capability HOLD policy drifted");
+  }
   validateSourceBindings(safe.sourceBindings, violations);
   validateAuthorizationBoundary(safe.authorizationBoundary, violations);
 
@@ -1124,7 +1649,7 @@ export function validateProductionIdentityAuthorityEvidenceManifest(manifest, op
   let evaluationUnixSeconds = null;
   if (anyPhaseDeclaredComplete) {
     if (options.evaluationUnixSeconds === undefined) {
-      violations.push("evaluationUnixSeconds: completed evidence requires externally supplied trusted evaluation time");
+      violations.push("evaluationUnixSeconds: completed evidence requires externally supplied evaluation time");
     } else {
       evaluationUnixSeconds = canonicalU64(
         options.evaluationUnixSeconds,
@@ -1135,15 +1660,21 @@ export function validateProductionIdentityAuthorityEvidenceManifest(manifest, op
     }
   }
   validateChoices(safe.productionChoices, phaseADeclaredComplete, violations);
-  const trustBinding = options.trustBinding ?? EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING;
-  const trustViolationStart = violations.length;
-  const trustKeys = validateExternalTrustBinding(trustBinding, violations, blockers);
-  const trustConfigured = trustKeys !== null && violations.length === trustViolationStart;
+  const automatedEvidenceBinding = options.automatedEvidenceBinding ?? EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING;
+  const bindingViolationStart = violations.length;
+  const evidenceSources = validateAutomatedEvidenceBinding(
+    automatedEvidenceBinding,
+    safe.profile,
+    evaluationUnixSeconds,
+    violations,
+    blockers,
+  );
+  const automatedEvidenceSourcesConfigured = evidenceSources !== null && violations.length === bindingViolationStart;
 
   const phaseAComplete = validatePhaseA(
     safe,
     options,
-    trustKeys,
+    evidenceSources,
     evaluationUnixSeconds,
     violations,
     blockers,
@@ -1151,7 +1682,7 @@ export function validateProductionIdentityAuthorityEvidenceManifest(manifest, op
   const phaseBComplete = validatePhaseB(
     safe,
     phaseAComplete,
-    trustKeys,
+    evidenceSources,
     evaluationUnixSeconds,
     violations,
     blockers,
@@ -1159,7 +1690,7 @@ export function validateProductionIdentityAuthorityEvidenceManifest(manifest, op
   const phaseCComplete = validatePhaseC(
     safe,
     phaseBComplete,
-    trustKeys,
+    evidenceSources,
     evaluationUnixSeconds,
     violations,
     blockers,
@@ -1176,7 +1707,8 @@ export function validateProductionIdentityAuthorityEvidenceManifest(manifest, op
     phaseAComplete && violations.length === 0,
     phaseBComplete && violations.length === 0,
     phaseCComplete && violations.length === 0,
-    trustConfigured,
+    automatedEvidenceSourcesConfigured,
+    evidenceSources?.modelTCapabilityObserved === true,
     blockers,
     violations,
   );

@@ -34,7 +34,7 @@ import {
   validateReleaseDependencyGraphManifest,
 } from "../scripts/validate-iat-b3-release-dependency-graph.mjs";
 import {
-  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
+  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING,
   PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS,
 } from "../scripts/validate-iat-b3-production-identity-authority-evidence.mjs";
 import {
@@ -116,7 +116,7 @@ const EXPECTED_NODE_IDS = Object.freeze([
   "MEDIA_MASTER_COMPLETENESS",
   "V2_LAUNCH_CEREMONY_BOUNDARY",
   "RELEASE_SURFACE_PUBLIC_CLAIMS",
-  "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW",
+  "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE",
   "TERMINAL_B3_REVIEW_PACKET",
 ]);
 
@@ -147,7 +147,7 @@ const EXPECTED_DEPENDENCIES = Object.freeze({
   MEDIA_MASTER_COMPLETENESS: ["V2_FEATURE_PARITY"],
   V2_LAUNCH_CEREMONY_BOUNDARY: ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "V2_FEATURE_PARITY"],
   RELEASE_SURFACE_PUBLIC_CLAIMS: ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "V2_FEATURE_PARITY", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", "LOCALIZATION_EVIDENCE", "MEDIA_MASTER_COMPLETENESS", "V2_LAUNCH_CEREMONY_BOUNDARY"],
-  INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW: ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC", "GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "REWARD_WATERFALL_PROOFS", "DURABLE_REWARD_CAS", "EXTERNAL_CHECKPOINT_PROVIDER", "X_SOCIAL_EVIDENCE_PROVIDER", "ECONOMY_ALL_15_WRITE_ADAPTER", "REWARD_LOCAL_WRITE_CONSUMER_GATING", "PRIVACY_VAULT_CLIENT", "DEPENDENCY_SECURITY_REMEDIATION", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL", "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", "B3_COST_CEREMONY_FUNDING", "LOCALIZATION_EVIDENCE", "MEDIA_MASTER_COMPLETENESS", "RELEASE_SURFACE_PUBLIC_CLAIMS"],
+  AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE: ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC", "GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "REWARD_WATERFALL_PROOFS", "DURABLE_REWARD_CAS", "EXTERNAL_CHECKPOINT_PROVIDER", "X_SOCIAL_EVIDENCE_PROVIDER", "ECONOMY_ALL_15_WRITE_ADAPTER", "REWARD_LOCAL_WRITE_CONSUMER_GATING", "PRIVACY_VAULT_CLIENT", "DEPENDENCY_SECURITY_REMEDIATION", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL", "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", "B3_COST_CEREMONY_FUNDING", "LOCALIZATION_EVIDENCE", "MEDIA_MASTER_COMPLETENESS", "RELEASE_SURFACE_PUBLIC_CLAIMS"],
   TERMINAL_B3_REVIEW_PACKET: EXPECTED_NODE_IDS.slice(0, -1),
 });
 
@@ -176,7 +176,7 @@ function expectFixtureViolation(mutator, pattern) {
   assert.match(result.violations.join("\n"), pattern);
 }
 
-test("canonical production graph is valid, records the completed host root, and remains nonactivating", () => {
+test("canonical production graph is valid, records the completed structural roots, and remains nonactivating", () => {
   const result = validateReleaseDependencyGraphManifest(DRAFT);
   assert.equal(DRAFT.schema, RELEASE_DEPENDENCY_GRAPH_SCHEMA);
   assert.equal(DRAFT.status, "BLOCKED");
@@ -210,7 +210,7 @@ test("canonical production graph is valid, records the completed host root, and 
   assert.equal(RELEASE_DEPENDENCY_GRAPH_MAINNET_STATUS, "HOLD");
   assert.deepEqual(DRAFT.artifactBindingPolicy.ownerPolicyFreezeBinding, {
     path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-    sha256: "04f515105124b7176ac4d4eec0e52539ccd6fab28273170b93797b075f570702",
+    sha256: "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
     bindingScope: "REFERENCE_CONTRACT_ONLY",
   });
   assert.deepEqual(DRAFT.artifactBindingPolicy.privacyVaultNativeInstructionPlanBinding, {
@@ -219,12 +219,12 @@ test("canonical production graph is valid, records the completed host root, and 
     bindingScope: "NONACTIVATING_PREREQUISITE_ONLY",
   });
   assert.deepEqual(
-    DRAFT.artifactBindingPolicy.productionIdentityAuthorityTrustBinding,
-    EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
+    DRAFT.artifactBindingPolicy.productionIdentityAuthorityAutomatedEvidenceBinding,
+    EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING,
   );
   const identityArtifact = {
     path: "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
-    sha256: "d9309dc360530fb80753adce07ba36fecadea6942fed35f441a2056fd0573387",
+    sha256: "94fc32f1380843ec31b2d94077061d7e788114d346d71f7c3a1001f2fcd980c5",
     bindingScope: "REFERENCE_CONTRACT_ONLY",
   };
   const costArtifact = {
@@ -294,7 +294,7 @@ test("source-bound native instruction prerequisite preserves the blocked Privacy
   assert.equal(node(DRAFT, "PRIVACY_VAULT_CLIENT").completionEvidence, null);
   assert.match(
     node(DRAFT, "PRIVACY_VAULT_CLIENT").blocker,
-    /lifecycle and native integration evidence remain incomplete/u,
+    /full-lifecycle automated direct evidence and native integration evidence remain incomplete/u,
   );
 });
 
@@ -357,7 +357,7 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
   assert.equal(RELEASE_DEPENDENCY_EDGES.length, 134);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "c63385fafe40bf5b36705e090b6818e1b1852d633fc6cf70b33b2e391f25b3b3");
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "fd1c3648508e8ad72a933355b4b87a44d60466997bedce4e83693583f9996689");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
@@ -366,6 +366,52 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.equal(
     DRAFT.edges.filter(([, dependent]) => dependent === "TERMINAL_B3_REVIEW_PACKET").length,
     27,
+  );
+});
+
+test("seven owner-policy migrations use direct evidence without completing any graph node", () => {
+  const migratedPredicates = {
+    LIVE_ESTATE_CANONICAL_MINT_DECISION:
+      "TREZOR_MODEL_T_SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET",
+    EXTERNAL_CHECKPOINT_PROVIDER:
+      "EXTERNAL_CHECKPOINT_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT",
+    X_SOCIAL_EVIDENCE_PROVIDER:
+      "X_SOCIAL_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT",
+    PRIVACY_VAULT_CLIENT:
+      "PRIVACY_VAULT_FULL_LIFECYCLE_AUTOMATED_DIRECT_EVIDENCE_PACKET",
+    DEPENDENCY_SECURITY_REMEDIATION:
+      "ZERO_UNRESOLVED_DEPENDENCY_FINDINGS_AUTOMATED_DIRECT_EVIDENCE_PACKET",
+    LOCALIZATION_EVIDENCE:
+      "ALL_50_LOCALE_CLAIMS_AUTOMATED_DIRECT_EVIDENCE_PACKET",
+    AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE:
+      "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE_PACKET",
+  };
+  for (const [id, predicate] of Object.entries(migratedPredicates)) {
+    const entry = node(DRAFT, id);
+    assert.ok(entry, id);
+    assert.equal(entry.applicability, "REQUIRED", id);
+    assert.equal(entry.status, "BLOCKED", id);
+    assert.equal(entry.completionPredicate, predicate, id);
+    assert.equal(entry.completionEvidence, null, id);
+    assert.equal(schemaNode(id).properties.completionPredicate.const, predicate, id);
+  }
+  assert.equal(node(DRAFT, "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"), undefined);
+  assert.equal(
+    DRAFT.edges.some((edge) => edge.includes("INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW")),
+    false,
+  );
+  assert.equal(
+    DRAFT.edges.filter(([, dependent]) => dependent === "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE").length,
+    23,
+  );
+  assert.equal(
+    DRAFT.edges.filter(([prerequisite]) => prerequisite === "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE").length,
+    1,
+  );
+  assert.ok(DRAFT.terminalPredicate.requiredNodeIds.includes("AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"));
+  assert.equal(
+    DRAFT.terminalPredicate.requiredNodeIds.includes("INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"),
+    false,
   );
 });
 
@@ -396,7 +442,7 @@ test("inventory completeness is false for node, edge, scope, or artifact inconsi
       value.artifactBindingPolicy.privacyVaultNativeInstructionPlanBinding.sha256 = "cd".repeat(32);
     },
     (value) => {
-      value.artifactBindingPolicy.productionIdentityAuthorityTrustBinding.trustRootSha256 =
+      value.artifactBindingPolicy.productionIdentityAuthorityAutomatedEvidenceBinding.sourceSetSha256 =
         "ef".repeat(32);
     },
     (value) => {
@@ -499,7 +545,7 @@ test("artifact bindings reject traversal, absolute, command-like, swap, stale, a
   );
   assert.match(
     VALIDATOR_SOURCE,
-    /productionIdentityAuthorityTrustBinding/u,
+    /productionIdentityAuthorityAutomatedEvidenceBinding/u,
   );
   assert.doesNotMatch(VALIDATOR_SOURCE, /shell\s*:\s*true/u);
 });
@@ -569,7 +615,7 @@ test("Privacy Vault, all 50 locales, and media remain REQUIRED with no N/A bypas
   assert.equal(DRAFT.applicabilityPolicy.ownerCutAuthenticationSupported, false);
   assert.equal(node(DRAFT, "LOCALIZATION_EVIDENCE").contractArtifact, null);
   assert.equal(node(DRAFT, "MEDIA_MASTER_COMPLETENESS").contractArtifact, null);
-  assert.match(node(DRAFT, "LOCALIZATION_EVIDENCE").blocker, /50 required locales.*native review/iu);
+  assert.match(node(DRAFT, "LOCALIZATION_EVIDENCE").blocker, /50 required locale claims.*automated.*direct evidence/iu);
   assert.match(node(DRAFT, "MEDIA_MASTER_COMPLETENESS").blocker, /14 full masters are missing.*N\/A is forbidden/iu);
 
   const manifest = clone(DRAFT);
@@ -589,7 +635,7 @@ test("Privacy Vault, all 50 locales, and media remain REQUIRED with no N/A bypas
     "All 50 required locales have only AI-generated review and remain required.";
   assert.match(
     validateReleaseDependencyGraphManifest(relabeledReview).violations.join("\n"),
-    /must retain 50, native review, required blocker detail/u,
+    /must retain 50, automated, direct evidence, required blocker detail/u,
   );
 });
 
@@ -679,7 +725,7 @@ test("validator remains host-only, read-only, nonactivating, and free of runtime
     PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze,
     {
       path: "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-      sha256: "99bee9984df75f8b1037ad0454924640b7b106285b89a51d5f8d632c55650df5",
+      sha256: "17bcf00f97c5fd95bc39fa9eff120fd7f7678ed77f9bc333c36189f44633cacf",
       bindingScope: "EXACT_COMMITTED_INPUT_ONLY",
     },
   );

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -28,6 +29,9 @@ const validatorPath = new URL(
 const manifestText = readFileSync(manifestPath, "utf8");
 const manifest = parseV2ParityClaimsReadinessJson(manifestText, "canonical manifest");
 const clone = (value) => structuredClone(value);
+const sha256 = (value) => createHash("sha256")
+  .update(typeof value === "string" || Buffer.isBuffer(value) ? value : JSON.stringify(value))
+  .digest("hex");
 
 function assertFailClosed(result) {
   assert.equal(result.valid, false);
@@ -62,6 +66,48 @@ test("the canonical packet maps every retained V2 row and keeps all release surf
   assert.equal(V2_PARITY_CLAIMS_MAINNET_STATUS, "HOLD");
   assert.equal(manifest.featureRows.length, 53);
   assert.equal(manifest.implementationSlices.length, 7);
+});
+
+test("the migrated graph repin preserves exact feature, source, and implementation requirements", () => {
+  const featureContract = readFileSync(new URL("../docs/b3/V2_FEATURE_PARITY.md", import.meta.url));
+  const sourceInventory = readFileSync(new URL("../docs/b3/V2_SOURCE_INVENTORY.md", import.meta.url));
+  assert.equal(
+    sha256(featureContract),
+    "360a8511d5f2cc92a3a3e78509134a6c7096322ab88fca1be5e67f6fdf8fce26",
+  );
+  assert.equal(
+    sha256(sourceInventory),
+    "70ecb803e5c063b7d8ac230b08792e4d95090d663d705e0b1b94eae5577f2914",
+  );
+  assert.equal(
+    manifest.inputBindings.releaseDependencyGraph.sha256,
+    "68b22e29f555adb2f59fe5cf42e6a1bf7783a8c962195de6f7736ccd9b1ea843",
+  );
+  assert.equal(
+    sha256(manifest.featureRows),
+    "6671c537a8b62153492c0a8300d394cd8de2593f3448837fe59e7227f5e5204a",
+  );
+  assert.equal(
+    sha256(manifest.sourceInheritance.requiredPaths),
+    "bd8f0491f83972b002d1bd5ccae664755d9f3324a290b7988b785b166cbdfc4b",
+  );
+  assert.equal(
+    sha256(manifest.sourceInheritance.requiredEntrypoints),
+    "4dc7982c5f15c6b028b416e0448dd2dc85fb562d6dfc7f429b8e535461c63a4a",
+  );
+  assert.equal(
+    sha256(manifest.implementationSlices.map(({ id, featureOrdinals, evidencePaths }) => ({
+      id,
+      featureOrdinals,
+      evidencePaths,
+    }))),
+    "073d8dcd321e3aa72c59907f22b1780251c58e7dd1cdbd6db1082bdb7cf57cbe",
+  );
+  assert.match(manifestText, /automated source-bound direct evidence/iu);
+  assert.doesNotMatch(
+    manifestText,
+    /independent privacy review|native review|independently observed evidence|Independent security/iu,
+  );
 });
 
 test("source inheritance is pinned to the canonical ancestor, exact paths, and all 15 entrypoints", () => {

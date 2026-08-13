@@ -24,7 +24,7 @@
     },
     "releaseDependencyGraph": {
       "path": "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",
-      "sha256": "25ed6c07ba52d582e6dbbabb31acbf6214a49bd45959afdb03efefff4de7cf07"
+      "sha256": "68b22e29f555adb2f59fe5cf42e6a1bf7783a8c962195de6f7736ccd9b1ea843"
     }
   },
   "sourceInheritance": {
@@ -135,7 +135,7 @@
       ],
       "blockers": [
         "Signed canonical mint decision and migration evidence are absent.",
-        "Exact-version native Privacy Vault lifecycle and independent privacy review are incomplete."
+        "Exact-version native Privacy Vault lifecycle and automated source-bound privacy direct evidence are incomplete."
       ]
     },
     {
@@ -183,13 +183,13 @@
     {
       "id": "PUBLIC_DOMAINS_AND_LOCALIZATION",
       "featureOrdinals": [36, 37, 38],
-      "state": "INHERITED_RUNTIME_REVIEW_BLOCKED",
+      "state": "INHERITED_RUNTIME_DIRECT_EVIDENCE_BLOCKED",
       "evidencePaths": [
         "projects/star-ascent/site/docs/b3/V2_SOURCE_INVENTORY.md",
         "projects/star-ascent/site/docs/b3/MAINNET_PATH.md"
       ],
       "blockers": [
-        "All 50 locales lack complete native review and immutable acceptance evidence.",
+        "All 50 locale claims lack complete automated source-bound direct evidence.",
         "Production dual-host render and hydration evidence is incomplete."
       ]
     },
@@ -244,7 +244,7 @@
       "FULL_V2_PARITY_COMPLETE",
       "ALL_FEATURES_DEVNET_REHEARSED",
       "PRODUCTION_IDENTITIES_FROZEN",
-      "ALL_50_LOCALES_NATIVE_ACCEPTED",
+      "ALL_50_LOCALE_CLAIMS_AUTOMATED_DIRECT_EVIDENCE_COMPLETE",
       "ALL_MEDIA_MASTERS_COMPLETE",
       "B3_DEPLOYED_OR_ACTIVATION_READY",
       "MAINNET_LAUNCH_AUTHORIZED"
@@ -254,10 +254,10 @@
     "Signed canonical mint and migration decision for every live Estate.",
     "Frozen production program, mint, cluster, entropy, metadata, and authority inputs.",
     "Owner acceptance of core custody/release and faction economics, scoring, Sybil, snapshot, tie, authorization, carve-out, and funding rules.",
-    "Production checkpoint and X evidence providers with authenticated, rollback-safe, independently observed evidence.",
-    "Accountable native review and immutable acceptance evidence for all 50 locales.",
+    "Production checkpoint and X evidence providers with authenticated, rollback-safe, automated source-bound direct evidence.",
+    "Automated source-bound direct evidence for all 50 locale claims.",
     "All 16 release media masters with license and legal clearance; 14 are currently missing.",
-    "Independent security, economic, privacy, dependency, and legal review of final bytes and evidence."
+    "Automated source-bound direct evidence for security, economic, privacy, dependency, and legal claims about final bytes and evidence."
   ],
   "zeroUnauthorizedCuts": true,
   "allFeatureRowsMapped": true,

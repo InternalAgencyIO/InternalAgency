@@ -73,8 +73,8 @@ const NATIVE_REWARD_SURFACE_PATHS = new Set([
 
 // These hashes deliberately bind the source inventory to the exact guarded
 // adapter implementations it audited. Updating one requires an explicit
-// inventory update and review; this module does not independently review or
-// authorize such an update.
+// inventory update backed by source-bound automated direct evidence; this
+// module does not authorize such an update.
 const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_economy/src/reward_allocator_transcript.rs":
     "a9fab4007e1dc7fa24b0e2248ee6ace8cd0c904f7643c87c79311deb6942a99d",
@@ -83,11 +83,11 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_reference/provider-authenticated-envelope.mjs":
     "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
   "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs":
-    "e9c865940798d2f0b415176ce1d607abc0d16ac3c4048dea1cd53e4e61610008",
+    "2277da33d9116cf8410f04f87b76523908d4047a0949f7ce06fe7f175dbd3650",
   "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs":
     "9140ffcf489dfd3b24a5e121214a92705c794d639934649dec8a9217a7468584",
   "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs":
-    "a71ce36dc45103d02361ba956a4e2567de939d11664a09db329a8834651319ee",
+    "10062c50567f1073f1fded1468f95a2b78fe763800f31be19dcdf72e67aa0188",
   "programs/iat_b3_reference/reward-checkpoint-gated-cas.mjs":
     "7aeca55b1821fa632444f6d4485ab6d2f6ea809cc495fe4f6a9ac54e30074dd7",
   "programs/iat_b3_reference/reward-consumer-cursor-sqlite.mjs":
@@ -95,7 +95,7 @@ const CRITICAL_SOURCE_SHA256 = Object.freeze({
   "programs/iat_b3_reference/reward-consumer-gate.mjs":
     "7139c8d2a57d630ca59306730f16a5d6f979a06280422b69eee4978310918b4f",
   "programs/iat_b3_reference/reward-external-rollback-anchor.mjs":
-    "9efb430f51f5f81caf413dce20e68f0d0b4a0090151b400fb28426f55af03c3e",
+    "905eb4b595ea89131a1708e53bf5ca3f9f72fd00c20e87a03a445999d24a82d2",
   "programs/iat_b3_reference/reward-materialized-projection-sqlite.mjs":
     "2857bcec8cfc46526e4aecc9796e65efdd73710101e766a816ad5e9a5c041a29",
   "programs/iat_b3_reference/reward-persistence-cas-sqlite.mjs":
@@ -276,11 +276,14 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 1,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
+    "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs": 1,
   }),
   "prepareAnchorRequest(": Object.freeze({
     "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
   }),
-  "privacy-vault-authenticated-recovery-runtime.mjs": Object.freeze({}),
+  "privacy-vault-authenticated-recovery-runtime.mjs": Object.freeze({
+    "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs": 1,
+  }),
   "privacy-vault-external-rollback-anchor.mjs": Object.freeze({
     "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
   }),
@@ -762,7 +765,7 @@ export function auditRewardGuardedSourceFiles(sourceFiles, {
     materializedProjectionStateVerified: false,
     externalSideEffectsAuthorized: false,
     builtArtifactParityVerified: false,
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     activationReady: false,
     mainnetStatus: REWARD_GUARDED_SOURCE_INVENTORY_MAINNET_STATUS,
   });

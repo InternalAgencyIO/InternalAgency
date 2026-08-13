@@ -10,13 +10,13 @@ Status: **UNSCHEDULED — MAINNET HOLD — NO CLAIM ROUTE**
   `launch/mainnet-handoff.template.json` `APPROVED` and
   `launch/release-packet.template.json` `READY` do not authorize V2 until their
   schemas bind the V2 program evidence.
-- Read aloud: **HOLD until the exact V2 build, devnet deployment, rehearsal, and
-  independent evidence are verified.**
+- Read aloud: **HOLD until the exact V2 build, Devnet deployment, rehearsal, and
+  source-bound automated evidence are verified.**
 
 ## Reviewed V2 sequence
 
-State each boundary, but show a transaction only after the builder and verifier
-have compared it:
+State each boundary, but show a transaction only after source-bound automated
+receipt/state checks match it:
 
 1. `DEPLOY_PROGRAM_WITHOUT_IAT`
 2. `TRANSFER_UPGRADE_AUTHORITY_TO_MODEL_T`
@@ -27,11 +27,11 @@ have compared it:
 7. `REVOKE_FREEZE_AUTHORITY`
 8. `ACTIVATE_AFTER_RANDOMNESS_BUILD_AND_REVIEW_GATES`
 
-For every authority or value boundary, the owner checks the physical device and
-the independent verifier checks the confirmed on-chain result. Then complete
+For every actual signature, the owner confirms the physical Model T; automated
+endpoint and state evidence checks the confirmed on-chain result. Then complete
 the V2 positive and adversarial rehearsal matrix.
 
-Publication is a separate human action. Publish only after matching the source
+Publication remains a separate explicit owner decision. Publish only after matching the source
 commit, SBF hash, program authority, mint, metadata, five allocation accounts,
 vaults, vesting configuration, revoked authorities, and randomness evidence.
 

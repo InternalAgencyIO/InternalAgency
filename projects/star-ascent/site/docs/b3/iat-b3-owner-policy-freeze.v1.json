@@ -1,6 +1,6 @@
 {
   "$schema": "./iat-b3-owner-policy-freeze.v1.schema.json",
-  "schema": "iat-b3-owner-policy-freeze/v1",
+  "schema": "iat-b3-owner-policy-freeze/v2",
   "profile": "PRODUCTION",
   "status": "BLOCKED",
   "scope": {
@@ -17,7 +17,7 @@
     "doesNotCertify": [
       "OWNER_IDENTITY_OR_SIGNATURE_AUTHENTICITY",
       "CHAIN_TRUTH_OR_LIVE_ESTATE_STATE",
-      "REVIEWED_BINARY_OR_DEPLOYED_BYTES",
+      "SOURCE_BOUND_BINARY_OR_DEPLOYED_BYTES",
       "GENESIS_CONSERVATION_OR_FUNDING",
       "DEVNET_REHEARSAL_OR_ACTIVATION",
       "RELEASE_OR_MAINNET_AUTHORIZATION"
@@ -63,6 +63,10 @@
     "secretsPermitted": false,
     "ownerChoicesAreExternalProof": false,
     "ownerAcceptanceReferenceIsExternalProof": false,
+    "nonSignatureEvidenceRequiresAutomatedSourceBoundDirectEvidence": true,
+    "humanReviewPrerequisitePermitted": false,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGateForActualSignatures": true,
+    "unobservedClaimsRemainHold": true,
     "graphCompletionPermitted": false
   },
   "nodes": {
@@ -82,7 +86,7 @@
       },
       "evidenceRequirements": {
         "external": [
-          "INDEPENDENT_LIVE_ESTATE_INVENTORY",
+          "SOURCE_BOUND_AUTOMATED_LIVE_ESTATE_INVENTORY",
           "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT",
           "CANONICAL_SUPPLY_RECONCILIATION"
         ],
@@ -107,7 +111,7 @@
       },
       "evidenceRequirements": {
         "external": [
-          "INDEPENDENT_CUSTODY_AND_RELEASE_POLICY_ACCEPTANCE",
+          "SOURCE_BOUND_AUTOMATED_CUSTODY_AND_RELEASE_POLICY_DIRECT_EVIDENCE",
           "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION"
         ],
         "engineering": [
@@ -149,7 +153,7 @@
       "evidenceRequirements": {
         "external": [
           "AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS",
-          "INDEPENDENT_SYBIL_AND_PRIZE_POLICY_REVIEW",
+          "SOURCE_BOUND_AUTOMATED_SYBIL_AND_PRIZE_POLICY_DIRECT_EVIDENCE",
           "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE"
         ],
         "engineering": [
@@ -175,7 +179,7 @@
       },
       "evidenceRequirements": {
         "external": [
-          "INDEPENDENT_BOOTSTRAP_AND_ACTIVATION_POLICY_ACCEPTANCE"
+          "SOURCE_BOUND_AUTOMATED_BOOTSTRAP_AND_ACTIVATION_POLICY_DIRECT_EVIDENCE_PACKET"
         ],
         "engineering": [
           "CONFIG_AND_GENESIS_PHASE_CODEC_BYTES",
@@ -209,7 +213,7 @@
       "evidenceRequirements": {
         "external": [
           "BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATIONS",
-          "INDEPENDENT_GENESIS_MANIFEST_ACCEPTANCE"
+          "SOURCE_BOUND_AUTOMATED_GENESIS_MANIFEST_CONSERVATION_EVIDENCE"
         ],
         "engineering": [
           "EXACT_ALLOCATION_AND_VESTING_VECTORS",
@@ -249,12 +253,12 @@
       },
       "evidenceRequirements": {
         "external": [
-          "INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS",
+          "TWO_SOURCE_BOUND_AUTOMATED_MAINNET_GENESIS_HASH_ENDPOINT_RECEIPTS",
           "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE",
-          "INDEPENDENT_DAILY_LAW_ENTROPY_RISK_ACCEPTANCE"
+          "SOURCE_BOUND_AUTOMATED_DAILY_LAW_ENTROPY_RISK_MEASUREMENT"
         ],
         "engineering": [
-          "REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS",
+          "SOURCE_BOUND_AUTOMATED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS",
           "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE",
           "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"
         ]
@@ -276,7 +280,7 @@
       "evidenceRequirements": {
         "external": [
           "ACCOUNTABLE_NON_SECRET_FUNDING_SOURCE_APPROVAL",
-          "INDEPENDENT_PAYER_BALANCE_OBSERVATION"
+          "TWO_SOURCE_BOUND_AUTOMATED_PAYER_BALANCE_ENDPOINT_RECEIPTS"
         ],
         "engineering": [
           "EXACT_FRESH_PAYER_COST_MEASUREMENT",
@@ -290,6 +294,11 @@
     "acceptsExternalEvidence": false,
     "acceptsEngineeringEvidence": false,
     "selfAttestationIsExternalProof": false,
+    "automatedDirectEvidenceMayCloseNonSignaturePredicates": true,
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "modelTRequiredOnlyForActualCryptographicSignatures": true,
+    "unobservedEvidenceDisposition": "HOLD",
     "evidenceVerificationOutOfScope": true
   },
   "assurance": {

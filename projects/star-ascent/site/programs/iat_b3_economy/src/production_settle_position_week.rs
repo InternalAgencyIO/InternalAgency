@@ -45,6 +45,117 @@ pub const PRODUCTION_SETTLE_POSITION_WRITE_COUNT: usize = 4;
 pub const PRODUCTION_SETTLE_POSITION_STATUS: &str =
     "STANDARD_PRE_CPI_COMPOSITION_INTERNAL_POST_RELOAD_CAS_NO_EXECUTOR_MAINNET_HOLD";
 
+pub const PRODUCTION_SETTLE_CORE_WEEK_POLICY_HOLD_STATUS: &str =
+    "OPCODE_8_PRODUCTION_ID_DAILY_LAW_EXACT_ABI_CORE_CUSTODY_POLICY_HOLD_BEFORE_ACCOUNT_READS_DEVNET_FALSE_MAINNET_HOLD";
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct ProductionSettleCoreWeekPolicyHoldTruth {
+    pub feature_gated: bool,
+    pub production_program_identity_required_before_decode: bool,
+    pub opaque_runtime_daily_law_required_before_decode: bool,
+    pub exact_instruction_abi_decoded: bool,
+    pub ordinal_preserved_in_typed_hold: bool,
+    pub retained_preflight_called: bool,
+    pub retained_preflight_requires_authenticated_account_facts_absent_from_abi: bool,
+    pub core_custody_destination_and_release_policy_accepted: bool,
+    pub operation_accounts_accepted: bool,
+    pub account_data_read: bool,
+    pub mutable_account_borrowed: bool,
+    pub cpi_executed: bool,
+    pub account_writes_executed: bool,
+    pub devnet_executed: bool,
+    pub mainnet_hold: bool,
+}
+
+pub const PRODUCTION_SETTLE_CORE_WEEK_POLICY_HOLD_TRUTH: ProductionSettleCoreWeekPolicyHoldTruth =
+    ProductionSettleCoreWeekPolicyHoldTruth {
+        feature_gated: true,
+        production_program_identity_required_before_decode: true,
+        opaque_runtime_daily_law_required_before_decode: true,
+        exact_instruction_abi_decoded: true,
+        ordinal_preserved_in_typed_hold: true,
+        retained_preflight_called: false,
+        retained_preflight_requires_authenticated_account_facts_absent_from_abi: true,
+        core_custody_destination_and_release_policy_accepted: false,
+        operation_accounts_accepted: false,
+        account_data_read: false,
+        mutable_account_borrowed: false,
+        cpi_executed: false,
+        account_writes_executed: false,
+        devnet_executed: false,
+        mainnet_hold: true,
+    };
+
+/// The exact opcode-8 ABI contains only the settlement ordinal. The retained
+/// preflight additionally needs authenticated Config, CoreReward, destination
+/// token, Treasury, Ecosystem, and Liquidity state plus the canonical mint and
+/// vault authority. Reading those facts would move the policy boundary after
+/// account access, so the production HOLD deliberately stops before preflight.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ProductionSettleCoreWeekPreflightUnavailable {
+    ExactAbiOmitsAuthenticatedAccountFacts,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ProductionSettleCoreWeekPolicyHoldError {
+    ProgramIdentityMismatch,
+    DailyLawBindingMismatch,
+    Instruction(ProductionInstructionError),
+    WrongInstruction,
+    CoreCustodyPolicyUnresolved {
+        ordinal: u64,
+        retained_preflight: ProductionSettleCoreWeekPreflightUnavailable,
+    },
+}
+
+impl From<ProductionInstructionError> for ProductionSettleCoreWeekPolicyHoldError {
+    fn from(value: ProductionInstructionError) -> Self {
+        Self::Instruction(value)
+    }
+}
+
+/// Authenticate the compiled Economy identity and the already-validated,
+/// opaque Daily-Law capability before decoding exactly opcode 8. No
+/// `AccountInfo` is accepted by this boundary. The retained preflight cannot be
+/// called truthfully from the ordinal-only ABI, and core custody remains an
+/// owner-policy HOLD, so every canonical opcode-8 instruction terminates here.
+#[inline(never)]
+pub(crate) fn execute_runtime_production_settle_core_week_policy_hold(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    instruction_data: &[u8],
+) -> Result<(), ProductionSettleCoreWeekPolicyHoldError> {
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionSettleCoreWeekPolicyHoldError::ProgramIdentityMismatch);
+    }
+    require_settle_core_runtime_law_binding(runtime_law, binding)?;
+    let ordinal = match decode_production_instruction(instruction_data)? {
+        ProductionInstruction::SettleCoreWeek { ordinal } => ordinal,
+        _ => return Err(ProductionSettleCoreWeekPolicyHoldError::WrongInstruction),
+    };
+    Err(
+        ProductionSettleCoreWeekPolicyHoldError::CoreCustodyPolicyUnresolved {
+            ordinal,
+            retained_preflight:
+                ProductionSettleCoreWeekPreflightUnavailable::ExactAbiOmitsAuthenticatedAccountFacts,
+        },
+    )
+}
+
+fn require_settle_core_runtime_law_binding(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+) -> Result<(), ProductionSettleCoreWeekPolicyHoldError> {
+    if runtime_law.mint() != binding.mint()
+        || runtime_law.gate().law_program_id() != runtime_law.law_program_owner()
+        || runtime_law.gate().law_state_address() != runtime_law.law_account_key()
+    {
+        return Err(ProductionSettleCoreWeekPolicyHoldError::DailyLawBindingMismatch);
+    }
+    Ok(())
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionSettlePositionTruth {
     pub feature_gated: bool,
@@ -972,6 +1083,10 @@ mod tests {
         .unwrap()
     }
 
+    fn runtime_law() -> RuntimeValidatedDailyLawWrite {
+        RuntimeValidatedDailyLawWrite::from_test_gate(open_gate(), LAW_STATE, LAW_PROGRAM)
+    }
+
     fn open_decision(timestamp: i64) -> SolanaDailyDecision {
         let local_day = protocol_local_day(timestamp);
         for candidate in 0u16..=u8::MAX.into() {
@@ -1495,6 +1610,119 @@ mod tests {
                 .seal_post_transfer_cas_account_infos(gate, binding, sources, destination)
                 .unwrap()
         })
+    }
+
+    #[test]
+    fn settle_core_policy_hold_authenticates_identity_and_law_before_abi() {
+        let binding = binding();
+        let malformed = [0xFF];
+        let mismatched_law =
+            RuntimeValidatedDailyLawWrite::from_test_gate(open_gate(), [0x52; 32], LAW_PROGRAM);
+
+        assert_eq!(
+            execute_runtime_production_settle_core_week_policy_hold(
+                &Pubkey::new_from_array([0x99; 32]),
+                &mismatched_law,
+                &binding,
+                &malformed,
+            ),
+            Err(ProductionSettleCoreWeekPolicyHoldError::ProgramIdentityMismatch),
+        );
+        assert_eq!(
+            execute_runtime_production_settle_core_week_policy_hold(
+                &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                &mismatched_law,
+                &binding,
+                &malformed,
+            ),
+            Err(ProductionSettleCoreWeekPolicyHoldError::DailyLawBindingMismatch),
+        );
+        assert_eq!(
+            execute_runtime_production_settle_core_week_policy_hold(
+                &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                &runtime_law(),
+                &binding,
+                &malformed,
+            ),
+            Err(ProductionSettleCoreWeekPolicyHoldError::Instruction(
+                ProductionInstructionError::InvalidLength,
+            )),
+        );
+    }
+
+    #[test]
+    fn settle_core_policy_hold_requires_exact_opcode_eight() {
+        let binding = binding();
+        let law = runtime_law();
+        let wrong = encoded(ProductionInstruction::SettlePositionWeek { week: 7 });
+
+        assert_eq!(
+            execute_runtime_production_settle_core_week_policy_hold(
+                &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                &law,
+                &binding,
+                &wrong,
+            ),
+            Err(ProductionSettleCoreWeekPolicyHoldError::WrongInstruction),
+        );
+    }
+
+    #[test]
+    fn every_canonical_settle_core_ordinal_returns_the_typed_pre_account_hold() {
+        let binding = binding();
+        let law = runtime_law();
+        let program_id = Pubkey::new_from_array(ECONOMY_PROGRAM);
+
+        for ordinal in [0, 1, 63, 64, 103, u64::MAX] {
+            let instruction = encoded(ProductionInstruction::SettleCoreWeek { ordinal });
+            assert_eq!(
+                execute_runtime_production_settle_core_week_policy_hold(
+                    &program_id,
+                    &law,
+                    &binding,
+                    &instruction,
+                ),
+                Err(
+                    ProductionSettleCoreWeekPolicyHoldError::CoreCustodyPolicyUnresolved {
+                        ordinal,
+                        retained_preflight: ProductionSettleCoreWeekPreflightUnavailable::
+                            ExactAbiOmitsAuthenticatedAccountFacts,
+                    },
+                ),
+            );
+        }
+    }
+
+    #[test]
+    fn settle_core_hold_surface_accepts_no_accounts_and_keeps_devnet_false() {
+        let _accountless_adapter: fn(
+            &Pubkey,
+            &RuntimeValidatedDailyLawWrite,
+            &NativeEconomyBinding,
+            &[u8],
+        )
+            -> Result<(), ProductionSettleCoreWeekPolicyHoldError> =
+            execute_runtime_production_settle_core_week_policy_hold;
+        let truth = core::hint::black_box(PRODUCTION_SETTLE_CORE_WEEK_POLICY_HOLD_TRUTH);
+        assert!(truth.feature_gated);
+        assert!(truth.production_program_identity_required_before_decode);
+        assert!(truth.opaque_runtime_daily_law_required_before_decode);
+        assert!(truth.exact_instruction_abi_decoded);
+        assert!(truth.ordinal_preserved_in_typed_hold);
+        assert!(!truth.retained_preflight_called);
+        assert!(truth.retained_preflight_requires_authenticated_account_facts_absent_from_abi);
+        assert!(!truth.core_custody_destination_and_release_policy_accepted);
+        assert!(!truth.operation_accounts_accepted);
+        assert!(!truth.account_data_read);
+        assert!(!truth.mutable_account_borrowed);
+        assert!(!truth.cpi_executed);
+        assert!(!truth.account_writes_executed);
+        assert!(!truth.devnet_executed);
+        assert!(truth.mainnet_hold);
+        assert!(
+            core::hint::black_box(PRODUCTION_SETTLE_CORE_WEEK_POLICY_HOLD_STATUS)
+                .contains("BEFORE_ACCOUNT_READS_DEVNET_FALSE_MAINNET_HOLD")
+        );
     }
 
     #[test]

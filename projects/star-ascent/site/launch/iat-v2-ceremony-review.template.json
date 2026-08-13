@@ -1,8 +1,8 @@
 {
-  "schema": "iat-v2-ceremony-review/v1",
+  "schema": "iat-v2-ceremony-review/v2",
   "status": "HOLD",
   "network": "mainnet-beta",
-  "scope": "Non-authorizing V2 attended-review record; this file never signs, simulates for signing, broadcasts, deploys, mints, transfers, schedules, publishes, or stores wallet credentials.",
+  "scope": "Non-authorizing V2 automated source/receipt/state observation record; this file never signs, simulates for signing, broadcasts, deploys, mints, transfers, schedules, publishes, or stores wallet credentials.",
   "sourceArtifacts": {
     "readinessGatePath": "launch/iat-v2-mainnet-readiness-gate.json",
     "stageJournalPath": "launch/iat-v2-mainnet-stage-journal.template.json",
@@ -19,20 +19,13 @@
     "remediationAuditSha256": null,
     "localTimeGateProofSha256": null
   },
-  "participants": {
+  "signatureGate": {
     "soleTrezorOperator": {
       "role": "SOLE_TREZOR_SIGNER",
       "label": null,
       "publicAddress": null,
       "physicalConfirmationRequired": true,
       "devicePathReviewed": false
-    },
-    "independentVerifier": {
-      "role": "INDEPENDENT_VERIFIER",
-      "label": null,
-      "reviewedArtifacts": false,
-      "reviewedStagePlan": false,
-      "hasNoSigningAuthority": true
     }
   },
   "controls": {
@@ -41,20 +34,26 @@
     "noServerSigner": true,
     "noAutomaticSigning": true,
     "noBlindApproval": true,
-    "separateBroadcastApprovalRequired": true,
+    "automaticBroadcastPermitted": false,
+    "separateHumanApprovalRequired": false,
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true,
     "noSecretsInRecord": true
   },
-  "review": {
+  "observation": {
+    "mode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
     "releaseArtifactsRegeneratedAfterFundingAndScheduling": false,
-    "replacementUtcWindowReviewed": false,
-    "currentSbfDigestReviewed": false,
-    "currentSignedDevnetEvidenceReviewed": false,
-    "readyAtUtc": null
+    "replacementUtcWindowObserved": false,
+    "currentSbfDigestObserved": false,
+    "currentSignedDevnetReceiptObserved": false,
+    "stagePlanStateObserved": false,
+    "observedAtUtc": null
   },
   "limitations": [
     "READY permits only attended preflight while mainnet remains HOLD.",
-    "The independent verifier observes and compares evidence but receives no signing authority.",
+    "Only exact automated source, receipt, and state observations may close non-signature gates; assertion-only fields cannot.",
     "The sole-Trezor topology is an owner-accepted concentration risk and is not authority role separation.",
-    "Physical transaction review and separate explicit broadcast approval remain mandatory."
+    "Trezor Model T physical confirmation is the sole human gate and applies only to actual cryptographic signatures."
   ]
 }

@@ -6,7 +6,7 @@
     "allocation lock plan is HOLD; READY is required.",
     "signing checklist is HOLD; READY is required.",
     "Model T devnet rehearsal is PLANNED; COMPLETED is required.",
-    "mainnet handoff is HOLD; APPROVED is required.",
+    "mainnet handoff is HOLD; READY is required.",
     "release packet is HOLD; READY is required.",
     "Mint authority signer and fee payer must both be the reviewed Model T address.",
     "Devnet rehearsal manifestSha256 does not bind the current source.",
@@ -17,7 +17,7 @@
     "Release packet signingChecklistSha256 does not bind the current source.",
     "Release packet devnetRehearsalSha256 does not bind the current source.",
     "Release packet mainnetHandoffSha256 does not bind the current source.",
-    "Release packet approval digest is absent."
+    "Release packet automated-closure digest is absent."
   ],
   "safety": {
     "localOperatorHostOnly": true,
@@ -131,13 +131,13 @@
   },
   "sourceDigests": {
     "manifest": "f07c7340ca0647e293935faaf3159d2d045ee09b9ff919effec788bd6ca2a250",
-    "metadata": "46ae0ef7215331e29b7fcc11c160e68893e9382a6057d031be7bca00f4d91cc1",
+    "metadata": "a09a4d9b249673d3533d717eac89adcdb2304c055abe3d4038c40453774afaee",
     "metadataJson": "72fcf9f1743f7a56227e9037236ff983206a601a9cf2e5b01886ce778169a8f3",
-    "lockPlan": "58cc82876f098be5d569684b1e5bab63bffff4b5becd5693b26fbb8ce3d50136",
-    "checklist": "a6fd1d91a531bc197d11d52eec3edefb7a68df6b7a454df1862bd974ce7073a2",
-    "rehearsal": "b2e5ddbb48620f795cd26e32719a8dda3461318b07f394d587d0291ba514669e",
-    "handoff": "1abd0166113ad32ae3f17a29193796fba2b4aa2bf5dc891e4e919576aa03133b",
-    "packet": "fa4faae6659018c5e3e4065a2e5d88defd0b221a6ca05f768c6ffada911ef037"
+    "lockPlan": "1a7dca79515a8e76e6e59c30082bfd1cb98932402fde6d6d50ef1ce56a06dc65",
+    "checklist": "53d449e128789290f03ec79e38d371def82963fde8e9bd5ba5cb9790891fa14a",
+    "rehearsal": "6e54bdbb5ac72834d5fc6ee02974d2211e63c9fe32c97ae154b7518181a8caaf",
+    "handoff": "8fa6ca005eb7b6bd0604f4925edfd35279c496cebb5d507a6bcb2bd78cc7b5e9",
+    "packet": "a5eb401a1a9b53a97313f16fcb095699514b3a233ac0d9758f803449ef2cec7f"
   },
   "implementationPaths": [
     "app/mint/ceremony.mjs",
@@ -147,8 +147,8 @@
   "implementationDigests": {
     "app/mint/ceremony.mjs": "eebb95fde788853f38c24d5a198392aa2fef645da2a3f6a9cfee04623299511e",
     "app/mint/page.tsx": "a6a7e51c983a89ce01a47252763233ee90fb7a07b161e9f032f9d888679f4255",
-    "package-lock.json": "5cd361bffb0b9d1e4c335868400674f56b765ebf09c039fac07a2b0bdc5c7c95"
+    "package-lock.json": "0d9fa00ab4bad2ea159cb602961bf0a0344b67f26f393f41bc17a3f85bbf4170"
   },
-  "implementationSha256": "e38c9ecc8d6af618df993e2241ba857228569603cae70baf58563f779b38e642",
-  "configurationSha256": "c917168b5537a4ecec2bb43fcfd67c767d733fd07781a6315875cfd5ca75a661"
+  "implementationSha256": "4761b4a81a877da449a059d72e15ed83042ba3db67c17302b1f500be6c8c15f1",
+  "configurationSha256": "dde69eef74989ad7755efc3e722fe2749c26e1c26acc1ffb3a497b8de3a900cd"
 }

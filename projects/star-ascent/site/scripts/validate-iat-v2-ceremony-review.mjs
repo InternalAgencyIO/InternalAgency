@@ -2,7 +2,6 @@
 
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const canonicalPath = "launch/iat-v2-ceremony-review.template.json";
 const reviewPath = process.argv[2] ?? canonicalPath;
@@ -56,11 +55,11 @@ const scan = (value, location = "review") => {
   }
 };
 
-check(exactKeys(review, ["schema", "status", "network", "scope", "sourceArtifacts", "artifactDigests", "participants", "controls", "review", "limitations"]), "review must contain only canonical top-level fields");
-check(review.schema === "iat-v2-ceremony-review/v1", "unexpected ceremony review schema");
+check(exactKeys(review, ["schema", "status", "network", "scope", "sourceArtifacts", "artifactDigests", "signatureGate", "controls", "observation", "limitations"]), "review must contain only canonical top-level fields");
+check(review.schema === "iat-v2-ceremony-review/v2", "unexpected ceremony review schema");
 check(["HOLD", "READY"].includes(review.status), "ceremony review status must be HOLD or READY");
 check(review.network === "mainnet-beta", "ceremony review network must be mainnet-beta");
-check(typeof review.scope === "string" && review.scope.includes("Non-authorizing V2"), "ceremony review must retain its non-authorizing V2 scope");
+check(review.scope === "Non-authorizing V2 automated source/receipt/state observation record; this file never signs, simulates for signing, broadcasts, deploys, mints, transfers, schedules, publishes, or stores wallet credentials.", "ceremony review must retain its non-authorizing automated-observation scope");
 
 const sourcePaths = {
   readinessGatePath: "launch/iat-v2-mainnet-readiness-gate.json",
@@ -81,13 +80,10 @@ const digestFields = {
 check(exactKeys(review.sourceArtifacts, Object.keys(sourcePaths)), "sourceArtifacts must contain only canonical V2 paths");
 for (const [field, expected] of Object.entries(sourcePaths)) check(review.sourceArtifacts?.[field] === expected, `${field} must point to ${expected}`);
 check(exactKeys(review.artifactDigests, Object.keys(digestFields)), "artifactDigests must contain only canonical V2 digest fields");
-check(exactKeys(review.participants, ["soleTrezorOperator", "independentVerifier"]), "participants must contain only the operator and independent verifier");
-check(exactKeys(review.participants?.soleTrezorOperator, ["role", "label", "publicAddress", "physicalConfirmationRequired", "devicePathReviewed"]), "soleTrezorOperator has unexpected fields");
-check(exactKeys(review.participants?.independentVerifier, ["role", "label", "reviewedArtifacts", "reviewedStagePlan", "hasNoSigningAuthority"]), "independentVerifier has unexpected fields");
-check(review.participants?.soleTrezorOperator?.role === "SOLE_TREZOR_SIGNER", "operator role must remain SOLE_TREZOR_SIGNER");
-check(review.participants?.soleTrezorOperator?.physicalConfirmationRequired === true, "sole Trezor signing always requires physical confirmation");
-check(review.participants?.independentVerifier?.role === "INDEPENDENT_VERIFIER", "verifier role must remain INDEPENDENT_VERIFIER");
-check(review.participants?.independentVerifier?.hasNoSigningAuthority === true, "independent verifier must have no signing authority");
+check(exactKeys(review.signatureGate, ["soleTrezorOperator"]), "signatureGate must contain only the sole Trezor operator");
+check(exactKeys(review.signatureGate?.soleTrezorOperator, ["role", "label", "publicAddress", "physicalConfirmationRequired", "devicePathReviewed"]), "soleTrezorOperator has unexpected fields");
+check(review.signatureGate?.soleTrezorOperator?.role === "SOLE_TREZOR_SIGNER", "operator role must remain SOLE_TREZOR_SIGNER");
+check(review.signatureGate?.soleTrezorOperator?.physicalConfirmationRequired === true, "sole Trezor signing always requires physical confirmation");
 
 const expectedControls = {
   soleTrezorAuthorityTopology: true,
@@ -95,45 +91,46 @@ const expectedControls = {
   noServerSigner: true,
   noAutomaticSigning: true,
   noBlindApproval: true,
-  separateBroadcastApprovalRequired: true,
+  automaticBroadcastPermitted: false,
+  separateHumanApprovalRequired: false,
+  humanReviewerRequired: false,
+  noSelfAttestation: true,
+  trezorModelTPhysicalConfirmationIsSoleHumanGate: true,
   noSecretsInRecord: true,
 };
 check(exactKeys(review.controls, Object.keys(expectedControls)), "controls must contain only canonical safety fields");
 for (const [field, expected] of Object.entries(expectedControls)) check(review.controls?.[field] === expected, `${field} must remain ${expected}`);
-check(exactKeys(review.review, ["releaseArtifactsRegeneratedAfterFundingAndScheduling", "replacementUtcWindowReviewed", "currentSbfDigestReviewed", "currentSignedDevnetEvidenceReviewed", "readyAtUtc"]), "review must contain only canonical attended-review fields");
+check(exactKeys(review.observation, ["mode", "releaseArtifactsRegeneratedAfterFundingAndScheduling", "replacementUtcWindowObserved", "currentSbfDigestObserved", "currentSignedDevnetReceiptObserved", "stagePlanStateObserved", "observedAtUtc"]), "observation must contain only canonical automated source/receipt/state fields");
+check(review.observation?.mode === "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION", "observation mode must be automated source/receipt/state observation");
 check(Array.isArray(review.limitations) && review.limitations.length === 4 && review.limitations.every((item) => typeof item === "string" && item.length > 20), "limitations must retain four reviewed statements");
 scan(review);
 
 if (review.status === "HOLD") {
   for (const value of Object.values(review.artifactDigests ?? {})) check(value === null, "HOLD must clear every artifact digest");
-  check(review.participants?.soleTrezorOperator?.label === null, "HOLD must clear the operator label");
-  check(review.participants?.soleTrezorOperator?.publicAddress === null, "HOLD must clear the operator address");
-  check(review.participants?.soleTrezorOperator?.devicePathReviewed === false, "HOLD must retain the device-path blocker");
-  check(review.participants?.independentVerifier?.label === null, "HOLD must clear the verifier label");
-  check(review.participants?.independentVerifier?.reviewedArtifacts === false, "HOLD must clear verifier artifact review");
-  check(review.participants?.independentVerifier?.reviewedStagePlan === false, "HOLD must clear verifier stage-plan review");
-  for (const [field, value] of Object.entries(review.review ?? {})) check(value === (field === "readyAtUtc" ? null : false), `HOLD must clear review.${field}`);
+  check(review.signatureGate?.soleTrezorOperator?.label === null, "HOLD must clear the operator label");
+  check(review.signatureGate?.soleTrezorOperator?.publicAddress === null, "HOLD must clear the operator address");
+  check(review.signatureGate?.soleTrezorOperator?.devicePathReviewed === false, "HOLD must retain the device-path blocker");
+  for (const [field, value] of Object.entries(review.observation ?? {})) {
+    const expected = field === "mode"
+      ? "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+      : field === "observedAtUtc" ? null : false;
+    check(value === expected, `HOLD must clear observation.${field}`);
+  }
 }
 
 if (review.status === "READY") {
   const gate = JSON.parse(readFileSync(sourcePaths.readinessGatePath, "utf8"));
   const journal = JSON.parse(readFileSync(sourcePaths.stageJournalPath, "utf8"));
+  const remediationAudit = JSON.parse(readFileSync(sourcePaths.remediationAuditPath, "utf8"));
   for (const [field, filePath] of Object.entries(digestFields)) {
     check(canonicalDigest(review.artifactDigests?.[field]), `READY requires ${field}`);
     check(review.artifactDigests?.[field] === sha256(filePath), `READY ${field} must match the canonical V2 artifact`);
   }
-  const operator = review.participants?.soleTrezorOperator;
-  const verifier = review.participants?.independentVerifier;
+  const operator = review.signatureGate?.soleTrezorOperator;
   check(label(operator?.label), "READY requires an operator label");
   check(usableAddress(operator?.publicAddress), "READY requires the usable sole-Trezor public address");
   check(operator?.publicAddress === gate.funding?.publicAddress, "READY operator address must match the reviewed mainnet funding/administrator address");
   check(operator?.devicePathReviewed === true, "READY requires attended Model T device-path review");
-  check(label(verifier?.label), "READY requires an independent verifier label");
-  check(
-    normalizeAccountabilityLabel(operator?.label) !== normalizeAccountabilityLabel(verifier?.label),
-    "READY requires a verifier distinct from the sole-Trezor operator after accountability-label normalization",
-  );
-  check(verifier?.reviewedArtifacts === true && verifier?.reviewedStagePlan === true, "READY requires independent artifact and stage-plan review");
   check(journal.status === "ARMED", "READY requires the canonical V2 stage journal to be ARMED");
   const publishedAtMs = utc(gate.schedule?.publishedAtUtc) ? Date.parse(gate.schedule.publishedAtUtc) : Number.NaN;
   const scheduledAtMs = utc(gate.schedule?.scheduledAtUtc) ? Date.parse(gate.schedule.scheduledAtUtc) : Number.NaN;
@@ -145,13 +142,15 @@ if (review.status === "READY") {
     "READY requires one exact replacement UTC ceremony time later than its publication time while mainnet remains HOLD",
   );
   check(gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true, "READY requires post-funding/post-scheduling artifact regeneration");
-  check(review.review?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true, "READY requires regeneration review");
-  check(review.review?.replacementUtcWindowReviewed === true, "READY requires replacement-window review");
-  check(review.review?.currentSbfDigestReviewed === true, "READY requires current SBF digest review");
-  check(review.review?.currentSignedDevnetEvidenceReviewed === true, "READY requires current signed Devnet evidence review");
-  check(utc(review.review?.readyAtUtc), "READY requires a canonical UTC readyAtUtc timestamp");
-  const age = Date.now() - Date.parse(review.review?.readyAtUtc ?? "");
-  check(age >= -60_000 && age <= 30 * 60_000, "READY review must be no more than 30 minutes old with one minute future skew");
+  check(gate.gates?.automatedSourceReceiptStateObservationComplete === true, "READY requires the readiness ledger automated-observation gate");
+  check(review.observation?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true, "READY requires regenerated-artifact state observation");
+  check(review.observation?.replacementUtcWindowObserved === true, "READY requires exact replacement-window observation");
+  check(review.observation?.currentSbfDigestObserved === true && remediationAudit.clearance?.freshCurrentSourceSbfComplete === true, "READY requires current source-bound SBF observation");
+  check(review.observation?.currentSignedDevnetReceiptObserved === true && remediationAudit.clearance?.freshSignedDevnetComplete === true, "READY requires current signed Devnet receipt observation");
+  check(review.observation?.stagePlanStateObserved === true && journal.status === "ARMED", "READY requires ARMED stage-plan state observation");
+  check(utc(review.observation?.observedAtUtc), "READY requires a canonical UTC observedAtUtc timestamp");
+  const age = Date.now() - Date.parse(review.observation?.observedAtUtc ?? "");
+  check(age >= -60_000 && age <= 30 * 60_000, "READY observation must be no more than 30 minutes old with one minute future skew");
 }
 
 if (failures.length) {
@@ -159,4 +158,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`IAT V2 ceremony review passed in ${review.status}: V2-only artifacts, sole-Trezor limits, independent verification, credential rejection, and separate broadcast approval remain bound.`);
+console.log(`IAT V2 ceremony review passed in ${review.status}: exact automated source/receipt/state observations, sole-Model-T signature limits, credential rejection, and nonauthorizing HOLD boundaries remain bound.`);

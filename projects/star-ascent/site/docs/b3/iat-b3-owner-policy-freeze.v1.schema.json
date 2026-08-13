@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://internalagency.io/schemas/iat-b3-owner-policy-freeze.v1.schema.json",
-  "title": "IAT B3 owner policy freeze v1",
-  "description": "Non-activating owner-choice intake. Schema validity and structural choice completeness are never evidence or release authorization.",
+  "$id": "https://internalagency.io/schemas/iat-b3-owner-policy-freeze.v2.schema.json",
+  "title": "IAT B3 owner policy freeze v2",
+  "description": "Non-activating owner-choice intake. Non-signature predicates require automated source-bound direct evidence, while the Model T remains the sole human gate only for actual signatures. Schema validity and structural choice completeness are never evidence or release authorization.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -20,7 +20,7 @@
   ],
   "properties": {
     "$schema": { "const": "./iat-b3-owner-policy-freeze.v1.schema.json" },
-    "schema": { "const": "iat-b3-owner-policy-freeze/v1" },
+    "schema": { "const": "iat-b3-owner-policy-freeze/v2" },
     "profile": { "const": "PRODUCTION" },
     "status": { "const": "BLOCKED" },
     "scope": {
@@ -38,7 +38,7 @@
         "doesNotCertify": [
           "OWNER_IDENTITY_OR_SIGNATURE_AUTHENTICITY",
           "CHAIN_TRUTH_OR_LIVE_ESTATE_STATE",
-          "REVIEWED_BINARY_OR_DEPLOYED_BYTES",
+          "SOURCE_BOUND_BINARY_OR_DEPLOYED_BYTES",
           "GENESIS_CONSERVATION_OR_FUNDING",
           "DEVNET_REHEARSAL_OR_ACTIVATION",
           "RELEASE_OR_MAINNET_AUTHORIZATION"
@@ -64,6 +64,10 @@
         "secretsPermitted": false,
         "ownerChoicesAreExternalProof": false,
         "ownerAcceptanceReferenceIsExternalProof": false,
+        "nonSignatureEvidenceRequiresAutomatedSourceBoundDirectEvidence": true,
+        "humanReviewPrerequisitePermitted": false,
+        "trezorModelTPhysicalConfirmationIsSoleHumanGateForActualSignatures": true,
+        "unobservedClaimsRemainHold": true,
         "graphCompletionPermitted": false
       }
     },
@@ -96,7 +100,7 @@
             "ownerChoices": { "$ref": "#/$defs/liveChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["INDEPENDENT_LIVE_ESTATE_INVENTORY", "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT", "CANONICAL_SUPPLY_RECONCILIATION"],
+                "external": ["SOURCE_BOUND_AUTOMATED_LIVE_ESTATE_INVENTORY", "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT", "CANONICAL_SUPPLY_RECONCILIATION"],
                 "engineering": ["TOKEN_PROGRAM_AND_EXTENSION_COMPATIBILITY_REPORT", "MIGRATION_OR_NEW_MINT_REHEARSAL"]
               }
             }
@@ -120,7 +124,7 @@
             "ownerChoices": { "$ref": "#/$defs/coreChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["INDEPENDENT_CUSTODY_AND_RELEASE_POLICY_ACCEPTANCE", "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION"],
+                "external": ["SOURCE_BOUND_AUTOMATED_CUSTODY_AND_RELEASE_POLICY_DIRECT_EVIDENCE", "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION"],
                 "engineering": ["NATIVE_CORE_CUSTODY_ADAPTER_AND_CPI_EVIDENCE", "BURN_STALE_DAY_DEPOSIT_RACE_AND_LOCKDOWN_REHEARSAL"]
               }
             }
@@ -151,7 +155,7 @@
             "ownerChoices": { "$ref": "#/$defs/factionChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS", "INDEPENDENT_SYBIL_AND_PRIZE_POLICY_REVIEW", "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE"],
+                "external": ["AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS", "SOURCE_BOUND_AUTOMATED_SYBIL_AND_PRIZE_POLICY_DIRECT_EVIDENCE", "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE"],
                 "engineering": ["NATIVE_FACTION_CODEC_AND_WRITE_HANDLERS", "SOLVENCY_CONSERVATION_TIE_REPLAY_AND_LOCKDOWN_REHEARSAL"]
               }
             }
@@ -175,7 +179,7 @@
             "ownerChoices": { "$ref": "#/$defs/configChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["INDEPENDENT_BOOTSTRAP_AND_ACTIVATION_POLICY_ACCEPTANCE"],
+                "external": ["SOURCE_BOUND_AUTOMATED_BOOTSTRAP_AND_ACTIVATION_POLICY_DIRECT_EVIDENCE_PACKET"],
                 "engineering": ["CONFIG_AND_GENESIS_PHASE_CODEC_BYTES", "PREACTIVATION_REJECTION_REENTRY_ROLLBACK_AND_ATOMIC_ACTIVATION_TESTS"]
               }
             }
@@ -203,7 +207,7 @@
             "ownerChoices": { "$ref": "#/$defs/genesisChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATIONS", "INDEPENDENT_GENESIS_MANIFEST_ACCEPTANCE"],
+                "external": ["BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATIONS", "SOURCE_BOUND_AUTOMATED_GENESIS_MANIFEST_CONSERVATION_EVIDENCE"],
                 "engineering": ["EXACT_ALLOCATION_AND_VESTING_VECTORS", "GENESIS_CONSERVATION_AND_CANONICAL_DESTINATION_PROOF"]
               }
             }
@@ -236,8 +240,8 @@
             "ownerChoices": { "$ref": "#/$defs/identityChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE", "INDEPENDENT_DAILY_LAW_ENTROPY_RISK_ACCEPTANCE"],
-                "engineering": ["REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE", "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"]
+                "external": ["TWO_SOURCE_BOUND_AUTOMATED_MAINNET_GENESIS_HASH_ENDPOINT_RECEIPTS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE", "SOURCE_BOUND_AUTOMATED_DAILY_LAW_ENTROPY_RISK_MEASUREMENT"],
+                "engineering": ["SOURCE_BOUND_AUTOMATED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE", "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"]
               }
             }
           }
@@ -258,7 +262,7 @@
             "ownerChoices": { "$ref": "#/$defs/costChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["ACCOUNTABLE_NON_SECRET_FUNDING_SOURCE_APPROVAL", "INDEPENDENT_PAYER_BALANCE_OBSERVATION"],
+                "external": ["ACCOUNTABLE_NON_SECRET_FUNDING_SOURCE_APPROVAL", "TWO_SOURCE_BOUND_AUTOMATED_PAYER_BALANCE_ENDPOINT_RECEIPTS"],
                 "engineering": ["EXACT_FRESH_PAYER_COST_MEASUREMENT", "FEE_RENT_BUFFER_AND_RECOVERY_RECONCILIATION"]
               }
             }
@@ -287,6 +291,11 @@
         "acceptsExternalEvidence": false,
         "acceptsEngineeringEvidence": false,
         "selfAttestationIsExternalProof": false,
+        "automatedDirectEvidenceMayCloseNonSignaturePredicates": true,
+        "humanReviewerRequired": false,
+        "noSelfAttestation": true,
+        "modelTRequiredOnlyForActualCryptographicSignatures": true,
+        "unobservedEvidenceDisposition": "HOLD",
         "evidenceVerificationOutOfScope": true
       }
     },

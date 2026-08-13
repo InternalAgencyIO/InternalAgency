@@ -16,11 +16,7 @@ const sha256File = (path) => createHash("sha256").update(readFileSync(resolve(pa
 const isUtc = (value) => typeof value === "string"
   && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)
   && Number.isFinite(Date.parse(value));
-const usableLabel = (value) => typeof value === "string"
-  && value === value.trim()
-  && value.length >= 3
-  && value.length <= 80
-  && !/^(reviewer|operator|pending|tbd|unknown)$/i.test(value);
+const observationFields = ["mode", "humanReviewerRequired", "noSelfAttestation", "observedAtUtc"];
 
 if (requestedPath.replaceAll("\\", "/") !== canonicalPath) {
   fail(`metadata path must be ${canonicalPath}`);
@@ -37,11 +33,11 @@ if (record) {
   const expectedFields = [
     "version", "status", "network", "metadataProgramId", "name", "symbol", "uri",
     "metadataJsonPath", "metadataJsonSha256", "sellerFeeBasisPoints", "isMutable",
-    "updateAuthorityPolicy", "review",
+    "updateAuthorityPolicy", "automatedObservation",
   ];
   if (!exactKeys(record, expectedFields)) fail("metadata record must contain only canonical fields");
-  if (!exactKeys(record.review, ["reviewedBy", "reviewedAtUtc"])) fail("metadata review must contain only canonical fields");
-  if (record.version !== 1) fail("metadata version must be 1");
+  if (!exactKeys(record.automatedObservation, observationFields)) fail("metadata automated observation must contain only canonical fields");
+  if (record.version !== 2) fail("metadata version must be 2");
   if (!["HOLD", "READY"].includes(record.status)) fail("metadata status must be HOLD or READY");
   if (record.network !== "mainnet-beta") fail("metadata network must be mainnet-beta");
   if (record.metadataProgramId !== "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s") fail("metadata program must be canonical Metaplex Token Metadata");
@@ -52,6 +48,11 @@ if (record) {
   if (record.sellerFeeBasisPoints !== 0) fail("fungible token metadata seller fee must be zero");
   if (record.isMutable !== false) fail("metadata must be immutable at Genesis");
   if (record.updateAuthorityPolicy !== "IMMUTABLE_AT_GENESIS") fail("metadata update-authority policy must be immutable at Genesis");
+  if (record.automatedObservation?.mode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+    || record.automatedObservation?.humanReviewerRequired !== false
+    || record.automatedObservation?.noSelfAttestation !== true) {
+    fail("metadata observation must use the exact automated no-human/no-self-attestation policy");
+  }
 
   let metadataJson;
   try {
@@ -66,8 +67,8 @@ if (record) {
   }
 
   if (record.status === "HOLD") {
-    if (record.metadataJsonSha256 !== null || record.review?.reviewedBy !== null || record.review?.reviewedAtUtc !== null) {
-      fail("HOLD metadata must clear digest and independent-review evidence");
+    if (record.metadataJsonSha256 !== null || record.automatedObservation?.observedAtUtc !== null) {
+      fail("HOLD metadata must clear digest and automated-observation evidence");
     }
   }
 
@@ -76,9 +77,8 @@ if (record) {
     if (!/^[a-f0-9]{64}$/.test(record.metadataJsonSha256 ?? "") || record.metadataJsonSha256 !== actualDigest) {
       fail("READY metadata must bind the exact off-chain JSON SHA-256");
     }
-    if (!usableLabel(record.review?.reviewedBy)) fail("READY metadata requires an independent reviewer label");
-    if (!isUtc(record.review?.reviewedAtUtc)) fail("READY metadata requires a canonical UTC review time");
-    else if (Date.parse(record.review.reviewedAtUtc) > Date.now() + 60_000) fail("metadata review time cannot be in the future");
+    if (!isUtc(record.automatedObservation?.observedAtUtc)) fail("READY metadata requires a canonical UTC automated-observation time");
+    else if (Date.parse(record.automatedObservation.observedAtUtc) > Date.now() + 60_000) fail("metadata observation time cannot be in the future");
   }
 }
 
@@ -87,4 +87,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Metadata gate passes in ${record.status}. No transaction is authorized by this result.`);
+console.log(`Metadata automated-observation gate passes in ${record.status}. No transaction is authorized by this result.`);

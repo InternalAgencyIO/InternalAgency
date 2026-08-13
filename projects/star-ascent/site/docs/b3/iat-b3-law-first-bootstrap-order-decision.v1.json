@@ -1,0 +1,306 @@
+{
+  "schema": "iat-b3-law-first-bootstrap-order-decision/v1",
+  "profile": "PRODUCTION",
+  "status": "ENGINEERING_RECOMMENDED_OWNER_ACCEPTANCE_REQUIRED_HOLD",
+  "scope": {
+    "contract": "NONAUTHORIZING_LAW_FIRST_BOOTSTRAP_ORDER_DECISION",
+    "objective": "MINT_AND_CURRENT_FINALIZED_OPEN_LAW_BEFORE_ANY_ECONOMY_INITIALIZATION_OR_STAGING_OPCODE",
+    "doesNotCertify": [
+      "OWNER_OPTION_SELECTION_OR_AUTHENTICITY",
+      "TRANSIT_CUSTODY_ADDRESS_OWNERSHIP_OR_RECOVERY",
+      "CANONICAL_CEREMONY_ORDER_MIGRATION",
+      "RUNTIME_HANDLER_OR_STAGING_AUTHORIZATION",
+      "DEVNET_REHEARSAL_EXECUTION",
+      "SIGNING_DEPLOYMENT_ACTIVATION_RELEASE_OR_MAINNET_AUTHORIZATION"
+    ]
+  },
+  "sourceBindings": {
+    "declaredHeadSha": "09ec025b5b301925d49bc24347bafc8a0c7f733d",
+    "bindingPolicy": "EXACT_CURRENT_FILE_BYTES_NON_COMPLETION_EVIDENCE",
+    "files": [
+      {
+        "id": "IDENTITY_FREEZE",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
+        "sha256": "17bcf00f97c5fd95bc39fa9eff120fd7f7678ed77f9bc333c36189f44633cacf",
+        "byteLength": 16242
+      },
+      {
+        "id": "PRODUCTION_IDENTITY_AUTHORITY_EVIDENCE",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
+        "sha256": "94fc32f1380843ec31b2d94077061d7e788114d346d71f7c3a1001f2fcd980c5",
+        "byteLength": 8037
+      },
+      {
+        "id": "RELEASE_DEPENDENCY_GRAPH",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",
+        "sha256": "68b22e29f555adb2f59fe5cf42e6a1bf7783a8c962195de6f7736ccd9b1ea843",
+        "byteLength": 31813
+      },
+      {
+        "id": "OWNER_POLICY_FREEZE",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
+        "sha256": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
+        "byteLength": 12681
+      },
+      {
+        "id": "OWNER_GATE_POLICY",
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-gate-policy-decision.v1.json",
+        "sha256": "0a35ca3fd676dee0b57d213314531922c4ac6239b06384fc9b36ea443494f87d",
+        "byteLength": 8160
+      },
+      {
+        "id": "LAW_PROGRAM_SOURCE",
+        "path": "projects/star-ascent/site/programs/iat_b3_law/src/lib.rs",
+        "sha256": "ba404c92cbe80c5952f1c525be486636e694ced2525a8dc2b8610f41adfd2cea",
+        "byteLength": 36873
+      },
+      {
+        "id": "ECONOMY_PROGRAM_SOURCE",
+        "path": "projects/star-ascent/site/programs/iat_b3_economy/src/lib.rs",
+        "sha256": "c83516648a5fefdb7f911b21e8b40b06a13aab54d6ad22cc06cd4c303194a65e",
+        "byteLength": 339522
+      },
+      {
+        "id": "ECONOMY_PRODUCTION_ENTRYPOINT",
+        "path": "projects/star-ascent/site/programs/iat_b3_economy/src/production_entrypoint.rs",
+        "sha256": "e54aef98fa61c9198adf80dc2724a618184cce7fe360e76e221a4ce1a2953672",
+        "byteLength": 22614
+      },
+      {
+        "id": "ECONOMY_INITIALIZATION_POLICY_HOLD",
+        "path": "projects/star-ascent/site/programs/iat_b3_economy/src/production_initialization_policy_hold.rs",
+        "sha256": "e2e44f7981075d41e25a4df40253ba3f5fabf911f427f702e69719c3b8b6f647",
+        "byteLength": 13257
+      },
+      {
+        "id": "ECONOMY_STAGING_PERSISTENCE",
+        "path": "projects/star-ascent/site/programs/iat_b3_economy/src/config_genesis_transition/runtime_staging_persistence.rs",
+        "sha256": "77de06fd578f6c59605616e438180eca231d92fda34aeea12b73f022b24bb493",
+        "byteLength": 21277
+      },
+      {
+        "id": "LOCAL_REHEARSAL_ASSESSOR",
+        "path": "projects/star-ascent/site/scripts/assess-iat-b3-local-rehearsal-readiness.mjs",
+        "sha256": "c6f018759664bfa537bf56315836c460f50dbf2fea3fff15a357f7c35cd08cee",
+        "byteLength": 47486
+      },
+      {
+        "id": "ALL_FEATURE_DEVNET_ASSESSOR",
+        "path": "projects/star-ascent/site/scripts/assess-iat-b3-all-feature-devnet-readiness.mjs",
+        "sha256": "6f7ffc5920982cc69013ed2a4bf0413204fe23d675344129ce6cb7a9ef39f3ce",
+        "byteLength": 75983
+      }
+    ]
+  },
+  "canonicalState": {
+    "identityFreezeStatus": "BLOCKED",
+    "productionEvidenceStatus": "PENDING",
+    "graphStatus": "BLOCKED",
+    "graphMainnetStatus": "HOLD",
+    "stageCount": 17,
+    "ceremonyStagesSha256": "6f6d69392db5e9a7426d26c349dea64e12f177c3429f735fdf87f83b07e108ac",
+    "order": [
+      "DEPLOY_LAW_WITH_HARDWARE_UPGRADE_AUTHORITY",
+      "DEPLOY_ECONOMY_WITH_HARDWARE_UPGRADE_AUTHORITY",
+      "VERIFY_EXACT_PROGRAM_BYTES_AND_IDENTITIES",
+      "REVOKE_LAW_UPGRADE_AUTHORITY",
+      "REVOKE_ECONOMY_UPGRADE_AUTHORITY",
+      "VERIFY_BOTH_PROGRAMS_IMMUTABLE",
+      "CREATE_EXACT_TOKEN_2022_MINT",
+      "ENTER_GENESIS_STAGING",
+      "CREATE_AND_FUND_CANONICAL_ACCOUNTS",
+      "VERIFY_GENESIS_CONSERVATION_AND_BINDINGS",
+      "REVOKE_MINT_AUTHORITY",
+      "REVOKE_FREEZE_AUTHORITY",
+      "INITIALIZE_LAW_AND_SEAL_EXTENSION_AUTHORITIES",
+      "VERIFY_MINT_AND_PROGRAM_AUTHORITIES_SEALED",
+      "FINALIZE_CURRENT_DAY",
+      "ACTIVATE_ONLY_IF_CURRENT_DAY_OPEN",
+      "VERIFY_ACTIVE_AND_STAGING_DISABLED"
+    ],
+    "canonicalOrderChanged": false
+  },
+  "dependencyAnalysis": {
+    "lawInitializationMintBasePrecondition": "INITIALIZED_DECIMALS_9_FIXED_SUPPLY_MINT_AUTHORITY_NULL_FREEZE_AUTHORITY_NULL",
+    "lawInitializationExtensionPrecondition": "EXACT_CONFIDENTIAL_TRANSFER_MINT_AND_TRANSFER_HOOK_WITH_CEREMONY_SIGNER_AS_BOTH_EXTENSION_AUTHORITIES",
+    "lawInitializationEffect": "REVOKE_BOTH_EXTENSION_AUTHORITIES_THEN_CREATE_LAW_STATE_AND_EXTRA_ACCOUNT_METAS",
+    "dayFinalizationDependency": "CANONICAL_MINT_AND_INITIALIZED_LAW_STATE_ONLY",
+    "economyProductionBoundary": "CURRENT_FINALIZED_OPEN_CANONICAL_DAILY_LAW_REQUIRED_BEFORE_INSTRUCTION_DECODE",
+    "economyInitializationRoutes": [
+      "INITIALIZE_CONFIG",
+      "INITIALIZE_LANE_VAULT",
+      "INITIALIZE_STAKE_VAULT",
+      "ACTIVATE",
+      "REGISTER_AGENCY"
+    ],
+    "stagingCandidateBoundary": "CURRENT_SOURCE_HAS_NO_PRODUCTION_GUARD_ABI_ENTRYPOINT_OR_DISPATCH",
+    "currentContradiction": [
+      "CURRENT_STAGE_8_ENTERS_ECONOMY_STAGING_BEFORE_LAW_INITIALIZATION_AT_STAGE_13_AND_DAY_FINALIZATION_AT_STAGE_15",
+      "MOVING_LAW_INITIALIZATION_DIRECTLY_AFTER_MINT_CREATION_FAILS_BECAUSE_FIXED_SUPPLY_AND_NULL_BASE_AUTHORITIES_DO_NOT_YET_EXIST",
+      "CURRENT_CANONICAL_PDA_VAULT_CREATION_AND_FUNDING_DEPEND_ON_ECONOMY_LIFECYCLE_THAT_REQUIRES_CURRENT_OPEN_LAW"
+    ],
+    "simpleStageReorderSafe": false,
+    "exactBlocker": "The engineering policy now identifies the authenticated full-supply transit ATA architecture, but its owner public key, canonical destination manifest, and Model T-signed owner acceptance remain null. Until those exact bindings exist, the fixed supply and null base authorities required by Law initialization cannot be produced under an authorized ceremony."
+  },
+  "engineeringPolicy": {
+    "id": "TREZOR_MODEL_T_CONTROLLED_FULL_SUPPLY_TRANSIT",
+    "status": "ENGINEERING_RECOMMENDED_OWNER_ACCEPTANCE_REQUIRED_HOLD",
+    "recommended": true,
+    "asset": {
+      "tokenProgramId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+      "decimals": 9,
+      "fullSupplyTokens": "1000000000",
+      "fullSupplyBaseUnits": "1000000000000000000",
+      "mintOperationCount": 1,
+      "additionalMintOperationsPermitted": false,
+      "mintAuthorityAfterFullSupplyMint": null,
+      "freezeAuthorityBeforeLawInitialization": null
+    },
+    "transit": {
+      "accountKind": "TOKEN_2022_ASSOCIATED_TOKEN_ACCOUNT",
+      "address": null,
+      "ownerPublicKey": null,
+      "addressAuthentication": "DERIVE_ASSOCIATED_TOKEN_ADDRESS_FROM_CANONICAL_MINT_TOKEN_2022_AND_TRANSIT_OWNER",
+      "authorityCustody": "TREZOR_MODEL_T_ONLY",
+      "hotKeyPermitted": false,
+      "serverAuthorityPermitted": false,
+      "delegate": null,
+      "separateCloseAuthority": null
+    },
+    "lawFirstBoundary": {
+      "fullSupplyInAuthenticatedTransitBeforeLawInitialization": true,
+      "mintAuthorityNullBeforeLawInitialization": true,
+      "freezeAuthorityNullBeforeLawInitialization": true,
+      "lawInitializationSealsExtensionAuthorities": true,
+      "currentDayFinalizedBeforeAnyEconomyOpcode": true,
+      "currentDayVerifiedOpenBeforeAnyEconomyOpcode": true,
+      "economyOpcodeBeforeCurrentOpenLawPermitted": false
+    },
+    "transferPolicy": {
+      "source": "AUTHENTICATED_TRANSIT_ATA_ONLY",
+      "destinationPolicy": "EXACT_CANONICAL_VAULT_OR_OWNER_ACCEPTED_BENEFICIARY_ONLY",
+      "canonicalDestinationManifestSha256": null,
+      "canonicalDestinations": {
+        "communityOwner": null,
+        "treasuryBeneficiary": null,
+        "ecosystemBeneficiary": null,
+        "coreBeneficiary": null,
+        "liquidityBeneficiary": null
+      },
+      "currentFinalizedOpenLawRequiredForEveryTransfer": true,
+      "exactConservationAfterEveryTransfer": true,
+      "arbitraryDestinationPermitted": false
+    },
+    "failurePolicy": {
+      "automaticRetry": false,
+      "automaticResubmission": false,
+      "lockedDayAction": "STOP_BEFORE_ECONOMY_WITH_FULL_IMMUTABLE_SUPPLY_IN_TRANSIT",
+      "preTransferFailureAction": "STOP_WITH_FULL_IMMUTABLE_SUPPLY_IN_TRANSIT",
+      "midTransferFailureAction": "STOP_WITH_UNTRANSFERRED_IMMUTABLE_SUPPLY_IN_TRANSIT_AND_RETAIN_VERIFIED_CANONICAL_TRANSFERS",
+      "manualReconciliationRequiredBeforeAnyNewAttempt": true,
+      "ambiguousTransactionOutcome": "STOP_AND_OBSERVE_CHAIN_STATE_NO_RESUBMISSION"
+    },
+    "closePolicy": {
+      "closePermittedBeforeActivation": false,
+      "requiresActivationObserved": true,
+      "requiresZeroTransitBalance": true,
+      "requiresFinalConservationVerified": true,
+      "closeOnlyAfterActivationAtZero": true,
+      "rentDestination": "TRANSIT_OWNER_PUBLIC_KEY"
+    }
+  },
+  "ownerDecision": {
+    "state": "ENGINEERING_RECOMMENDATION_UNACCEPTED",
+    "engineeringRecommendationId": "TREZOR_MODEL_T_CONTROLLED_FULL_SUPPLY_TRANSIT",
+    "ownerSelectedPolicyId": null,
+    "transitOwnerPublicKey": null,
+    "signedAcceptance": null,
+    "trezorModelTConfirmationObserved": false,
+    "signatureVerified": false,
+    "requiredModelTFields": [
+      "TRANSIT_OWNER_PUBLIC_KEY",
+      "OWNER_SIGNED_POLICY_ACCEPTANCE"
+    ]
+  },
+  "candidateMigration": {
+    "status": "ENGINEERING_RECOMMENDED_OWNER_UNACCEPTED_NONAUTHORIZING",
+    "policyId": "TREZOR_MODEL_T_CONTROLLED_FULL_SUPPLY_TRANSIT",
+    "appliesOnlyIf": "OWNER_ACCEPTS_WITH_TREZOR_MODEL_T_AND_EVERY_NULL_IDENTITY_DESTINATION_AND_EVIDENCE_BINDING_IS_SOURCE_BOUND",
+    "stageCount": 17,
+    "assessorConsumption": "ORDINAL_AND_STEP_ARRAY_CANONICAL_SHA256",
+    "ceremonyStagesSha256": "cbee6085861e858be61036c45cec74e90c782b537365e1c780447370a06dfb0f",
+    "order": [
+      "DEPLOY_LAW_WITH_HARDWARE_UPGRADE_AUTHORITY",
+      "DEPLOY_ECONOMY_WITH_HARDWARE_UPGRADE_AUTHORITY",
+      "VERIFY_EXACT_PROGRAM_BYTES_AND_IDENTITIES",
+      "REVOKE_LAW_UPGRADE_AUTHORITY",
+      "REVOKE_ECONOMY_UPGRADE_AUTHORITY",
+      "VERIFY_BOTH_PROGRAMS_IMMUTABLE",
+      "CREATE_EXACT_TOKEN_2022_MINT_AUTHENTICATED_TRANSIT_ATA_AND_MINT_FULL_SUPPLY_ONCE",
+      "REVOKE_MINT_AUTHORITY",
+      "REVOKE_FREEZE_AUTHORITY",
+      "INITIALIZE_LAW_AND_SEAL_EXTENSION_AUTHORITIES",
+      "VERIFY_MINT_AND_PROGRAM_AUTHORITIES_SEALED",
+      "FINALIZE_CURRENT_DAY_AND_VERIFY_OPEN_BEFORE_ECONOMY",
+      "ENTER_GENESIS_STAGING",
+      "CREATE_EXACT_CANONICAL_DESTINATIONS_AND_TRANSFER_FROM_TRANSIT_UNDER_OPEN_LAW_WITH_PER_TRANSFER_CONSERVATION",
+      "VERIFY_FINAL_GENESIS_CONSERVATION_AND_ZERO_TRANSIT_BALANCE",
+      "ACTIVATE_ONLY_IF_CURRENT_DAY_OPEN",
+      "VERIFY_ACTIVE_STAGING_DISABLED_AND_CLOSE_ZERO_BALANCE_TRANSIT_ATA"
+    ],
+    "invariants": [
+      "EXACTLY_17_UNIQUE_STAGES",
+      "PROGRAM_BYTES_VERIFIED_AND_UPGRADE_AUTHORITIES_REVOKED_BEFORE_MINT_CREATION",
+      "FIXED_SUPPLY_MINTED_AND_BASE_AUTHORITIES_NULL_BEFORE_LAW_INITIALIZATION",
+      "LAW_INITIALIZED_EXTENSION_AUTHORITIES_NULL_AND_CURRENT_DAY_OPEN_BEFORE_ECONOMY",
+      "CANONICAL_DESTINATIONS_FUNDED_ONLY_FROM_AUTHENTICATED_TRANSIT_BY_LAW_GATED_TRANSFERS",
+      "CONSERVATION_VERIFIED_AFTER_EVERY_TRANSFER",
+      "NO_AUTOMATIC_RETRY_OR_RESUBMISSION",
+      "LOCKED_OR_FAILED_FLOW_STOPS_WITH_IMMUTABLE_UNTRANSFERRED_SUPPLY_IN_TRANSIT",
+      "ACTIVATION_ONLY_ON_CURRENT_OPEN_LAW",
+      "TRANSIT_CLOSE_ONLY_AFTER_ACTIVATION_AND_ZERO_BALANCE"
+    ]
+  },
+  "dependentBindingImpact": [
+    {
+      "subject": "IDENTITY_FREEZE_TO_PRODUCTION_EVIDENCE",
+      "currentSha256": "17bcf00f97c5fd95bc39fa9eff120fd7f7678ed77f9bc333c36189f44633cacf",
+      "impactIfCanonicalOrderChanges": "Repin identityInputFreeze in the production evidence JSON, schema, validator, and focused tests; the production evidence artifact bytes then change."
+    },
+    {
+      "subject": "PRODUCTION_EVIDENCE_TO_RELEASE_GRAPH",
+      "currentSha256": "94fc32f1380843ec31b2d94077061d7e788114d346d71f7c3a1001f2fcd980c5",
+      "impactIfCanonicalOrderChanges": "Repin the three reference-contract bindings for PRODUCTION_IDENTITY_INPUT_FREEZE, DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE, and B3_COST_CEREMONY_FUNDING plus graph schema, validator, and focused tests without changing any node status."
+    },
+    {
+      "subject": "LOCAL_AND_DEVNET_CEREMONY_AUTHORIZATION_PACKETS",
+      "currentSha256": "6f6d69392db5e9a7426d26c349dea64e12f177c3429f735fdf87f83b07e108ac",
+      "impactIfCanonicalOrderChanges": "Any packet bound to the prior ceremonyStagesSha256 becomes stale and remains HOLD; both assessors must derive the new digest from the migrated canonical evidence."
+    }
+  ],
+  "signaturePolicy": {
+    "humanGateCount": 1,
+    "soleHumanGate": "TREZOR_MODEL_T_PHYSICAL_CONFIRMATION",
+    "appliesOnlyTo": "ACTUAL_CRYPTOGRAPHIC_SIGNATURES",
+    "repositoryDecisionPacketSignatureRequired": false,
+    "otherHumanReviewPrerequisitePermitted": false,
+    "automatedDirectEvidenceMayCloseNonSignatureGates": true,
+    "unobservedClaims": "HOLD"
+  },
+  "authorizationBoundary": {
+    "engineeringPolicyAccepted": false,
+    "ownerOptionSelected": false,
+    "transitOwnerBound": false,
+    "ownerSignedAcceptancePresent": false,
+    "canonicalOrderChanged": false,
+    "completionEvidencePresent": false,
+    "ceremonyAuthorized": false,
+    "signingAuthorized": false,
+    "deploymentAuthorized": false,
+    "devnetAuthorized": false,
+    "activationAuthorized": false,
+    "releaseAuthorized": false,
+    "mainnetAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

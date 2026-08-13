@@ -15,7 +15,7 @@ import {
 } from "./iat-v2-canonical-json.mjs";
 
 export const X_SOCIAL_EVIDENCE_READINESS_SCHEMA =
-  "iat-b3-x-social-evidence-provider-readiness/v1";
+  "iat-b3-x-social-evidence-provider-readiness/v2";
 export const X_SOCIAL_EVIDENCE_READINESS_STATUS =
   "NON_ACTIVATING_X_SOCIAL_EVIDENCE_REVIEW_PACKET";
 export const X_SOCIAL_EVIDENCE_MAINNET_STATUS = "HOLD";
@@ -27,7 +27,7 @@ const CANONICAL_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{7,159}$/u;
 const GENERIC_URL = /^[a-z][a-z0-9+.-]*:\/\//iu;
 const PLACEHOLDER = /^(?:blocked|change[-_ ]?me|none|null|pending|placeholder|replace[-_ ]?me|tbd|todo|unknown|x+|0+)$/iu;
 const NON_PRODUCTION_MARKER = /(?:^|[._:/-])(?:dev|dummy|example|fake|fixture|invalid|local|mock|sample|sandbox|staging|synthetic|test)(?:$|[._:/-])/iu;
-const OBVIOUS_NON_PRODUCTION_PREFIX = /^(?:dummy|example|fake|fixture|local|mock|sample|synthetic|test)(?:app|artifact|collector|domain|evidence|key|observer|project|provider|registry|resource|reviewer|service|tenant|verifier)/iu;
+const OBVIOUS_NON_PRODUCTION_PREFIX = /^(?:dummy|example|fake|fixture|local|mock|sample|synthetic|test)(?:app|artifact|collector|domain|evidence|key|project|provider|registry|resource|service|source|tenant|verifier)/iu;
 const LOW_ENTROPY_ID = /^(.)\1{7,}$/u;
 const REPEATED_NIBBLE_SHA256 = /^([0-9a-f])\1{63}$/u;
 const NEAR_ZERO_SHA256 = /^0{48,}[0-9a-f]+$/u;
@@ -111,12 +111,12 @@ const EVIDENCE_KEYS = Object.freeze([
   "artifactSha256",
   "subjectBindingSha256",
   "policySha256",
-  "independentObserverId",
-  "observerFailureDomainId",
-  "observerIdentitySha256",
-  "independentReviewerId",
-  "reviewerFailureDomainId",
-  "reviewerIdentitySha256",
+  "automatedEvidenceSourceAId",
+  "evidenceSourceAFailureDomainId",
+  "evidenceSourceAIdentitySha256",
+  "automatedEvidenceSourceBId",
+  "evidenceSourceBFailureDomainId",
+  "evidenceSourceBIdentitySha256",
   "capturedAtUnixSeconds",
   "validThroughUnixSeconds",
   "maximumAgeSeconds",
@@ -258,12 +258,12 @@ export const X_SOCIAL_EVIDENCE_SECTION_SPECS = Object.freeze([
       "administrativeFailureDomainId",
       "credentialCustodyFailureDomainId",
       "backupFailureDomainId",
-      "independentObserverFailureDomainId",
-      "independentReviewerFailureDomainId",
+      "automatedEvidenceSourceAFailureDomainId",
+      "automatedEvidenceSourceBFailureDomainId",
     ],
     constants: {
       separationRule:
-        "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_OBSERVER_AND_REVIEWER_DOMAINS_ALL_DISTINCT",
+        "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_EVIDENCE_SOURCE_A_AND_B_DOMAINS_ALL_DISTINCT",
     },
   }),
 ]);
@@ -351,7 +351,7 @@ export const X_SOCIAL_EVIDENCE_CONTROL_SPECS = Object.freeze([
       "EVERY_ACTION_SOURCE_HAS_PINNED_API_VERSION_CURSOR_AND_PAGINATION_SEMANTICS",
       "RATE_LIMIT_PAGE_GAP_PARTIAL_WINDOW_AND_PROVIDER_OUTAGE_FAIL_CLOSED",
       "CANONICAL_ACTION_KEYS_ARE_GLOBALLY_APPEND_ONLY_AND_REPLAY_UNIQUE",
-      "COMPLETE_CLOSED_EPOCH_SNAPSHOT_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_OBSERVED",
+      "COMPLETE_CLOSED_EPOCH_SNAPSHOT_IS_CONTENT_ADDRESSED_AND_AUTOMATED_SOURCE_BOUND",
     ]),
   }),
   Object.freeze({
@@ -391,7 +391,7 @@ export const X_SOCIAL_EVIDENCE_CONTROL_SPECS = Object.freeze([
       "X_TERMS_PRIVACY_AND_API_POLICY_VERSIONS_ARE_PINNED_AND_REVIEWED",
       "TOKEN_RECEIPT_ACTION_AND_AUDIT_RETENTION_WINDOWS_ARE_EXACT",
       "DELETION_APPEAL_AND_INCIDENT_PATHS_PRESERVE_NON_REBINDING_WITHOUT_UNNECESSARY_PII",
-      "TOMBSTONE_PSEUDONYMIZATION_AND_LEGAL_BASIS_ARE_INDEPENDENTLY_REVIEWED",
+      "TOMBSTONE_PSEUDONYMIZATION_AND_LEGAL_BASIS_ARE_SOURCE_BOUND",
     ]),
   }),
   Object.freeze({
@@ -425,10 +425,10 @@ export const X_SOCIAL_EVIDENCE_CONTROL_SPECS = Object.freeze([
     ]),
   }),
   Object.freeze({
-    id: "INDEPENDENT_AUDIT_AND_PRODUCTION_REVIEW",
+    id: "AUTOMATED_AUDIT_AND_PRODUCTION_DIRECT_EVIDENCE",
     claims: Object.freeze([
       "EVERY_REQUIRED_CONTROL_HAS_CONTENT_ADDRESSED_SUBJECT_AND_POLICY_BOUND_EVIDENCE",
-      "OBSERVER_AND_REVIEWER_IDENTITIES_ARE_DISTINCT_FROM_PROVIDER_RUNTIME_ADMIN_CREDENTIAL_AND_BACKUP_DOMAINS",
+      "AUTOMATED_EVIDENCE_SOURCES_A_AND_B_ARE_DISTINCT_FROM_PROVIDER_RUNTIME_ADMIN_CREDENTIAL_AND_BACKUP_DOMAINS",
       "DECLARED_EVIDENCE_INTERVAL_IS_BOUNDED_AND_CONTAINS_EXPLICIT_EVALUATION_TIME",
       "STRUCTURAL_PACKET_COMPLETENESS_DOES_NOT_CERTIFY_PROVIDER_TRUTH_AUTHENTICATION_SYBIL_RESISTANCE_OR_LAUNCH_READINESS",
     ]),
@@ -458,35 +458,35 @@ const fixtureSectionValues = Object.freeze(Object.fromEntries(
 
 function evidenceIdentityBindingSha256(role, identityId, failureDomainId) {
   return sha256CanonicalJson({
-    domain: "iat-b3-x-social-evidence-independent-identity/v1",
+    domain: "iat-b3-x-social-evidence-automated-source-identity/v2",
     role,
     identityId,
     failureDomainId,
   });
 }
 
-const fixtureObserverId = "fixture-independent-observer";
-const fixtureReviewerId = "fixture-independent-reviewer";
-const fixtureObserverFailureDomainId =
-  fixtureSectionValues.FAILURE_DOMAIN_SEPARATION.independentObserverFailureDomainId;
-const fixtureReviewerFailureDomainId =
-  fixtureSectionValues.FAILURE_DOMAIN_SEPARATION.independentReviewerFailureDomainId;
+const fixtureEvidenceSourceAId = "fixture-automated-evidence-source-a";
+const fixtureEvidenceSourceBId = "fixture-automated-evidence-source-b";
+const fixtureEvidenceSourceAFailureDomainId =
+  fixtureSectionValues.FAILURE_DOMAIN_SEPARATION.automatedEvidenceSourceAFailureDomainId;
+const fixtureEvidenceSourceBFailureDomainId =
+  fixtureSectionValues.FAILURE_DOMAIN_SEPARATION.automatedEvidenceSourceBFailureDomainId;
 
 export const TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES = Object.freeze({
   sections: fixtureSectionValues,
-  independentObserverId: fixtureObserverId,
-  observerFailureDomainId: fixtureObserverFailureDomainId,
-  observerIdentitySha256: evidenceIdentityBindingSha256(
-    "OBSERVER",
-    fixtureObserverId,
-    fixtureObserverFailureDomainId,
+  automatedEvidenceSourceAId: fixtureEvidenceSourceAId,
+  evidenceSourceAFailureDomainId: fixtureEvidenceSourceAFailureDomainId,
+  evidenceSourceAIdentitySha256: evidenceIdentityBindingSha256(
+    "EVIDENCE_SOURCE_A",
+    fixtureEvidenceSourceAId,
+    fixtureEvidenceSourceAFailureDomainId,
   ),
-  independentReviewerId: fixtureReviewerId,
-  reviewerFailureDomainId: fixtureReviewerFailureDomainId,
-  reviewerIdentitySha256: evidenceIdentityBindingSha256(
-    "REVIEWER",
-    fixtureReviewerId,
-    fixtureReviewerFailureDomainId,
+  automatedEvidenceSourceBId: fixtureEvidenceSourceBId,
+  evidenceSourceBFailureDomainId: fixtureEvidenceSourceBFailureDomainId,
+  evidenceSourceBIdentitySha256: evidenceIdentityBindingSha256(
+    "EVIDENCE_SOURCE_B",
+    fixtureEvidenceSourceBId,
+    fixtureEvidenceSourceBFailureDomainId,
   ),
   capturedAtUnixSeconds: "2000000000",
   validThroughUnixSeconds: "2002592000",
@@ -814,12 +814,12 @@ function fixtureKnownValues() {
       visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.sections[spec.id][key]);
     }
   }
-  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.independentObserverId);
-  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.observerFailureDomainId);
-  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.observerIdentitySha256);
-  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.independentReviewerId);
-  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.reviewerFailureDomainId);
-  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.reviewerIdentitySha256);
+  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.automatedEvidenceSourceAId);
+  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceAFailureDomainId);
+  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceAIdentitySha256);
+  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.automatedEvidenceSourceBId);
+  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceBFailureDomainId);
+  visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceBIdentitySha256);
   visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.capturedAtUnixSeconds);
   visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.validThroughUnixSeconds);
   visit(TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.maximumAgeSeconds);
@@ -830,21 +830,21 @@ function fixtureKnownValues() {
     const policySha256 = policyDigestFromSubject("TEST_FIXTURE", subject, id);
     known.add(policySha256);
     known.add(xSocialEvidenceDescriptorSha256({
-      evidenceKind: `${id}_INDEPENDENT_EVIDENCE`,
+      evidenceKind: `${id}_AUTOMATED_DIRECT_EVIDENCE`,
       artifactSha256: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES
         .evidenceArtifactSha256BySection[id],
       subjectBindingSha256: subject,
       policySha256,
-      independentObserverId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.independentObserverId,
-      observerFailureDomainId:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.observerFailureDomainId,
-      observerIdentitySha256:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.observerIdentitySha256,
-      independentReviewerId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.independentReviewerId,
-      reviewerFailureDomainId:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.reviewerFailureDomainId,
-      reviewerIdentitySha256:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.reviewerIdentitySha256,
+      automatedEvidenceSourceAId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.automatedEvidenceSourceAId,
+      evidenceSourceAFailureDomainId:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceAFailureDomainId,
+      evidenceSourceAIdentitySha256:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceAIdentitySha256,
+      automatedEvidenceSourceBId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.automatedEvidenceSourceBId,
+      evidenceSourceBFailureDomainId:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceBFailureDomainId,
+      evidenceSourceBIdentitySha256:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceBIdentitySha256,
       capturedAtUnixSeconds: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.capturedAtUnixSeconds,
       validThroughUnixSeconds:
         TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.validThroughUnixSeconds,
@@ -888,15 +888,15 @@ function validateEvidence({
   expectedPolicySha256,
   profile,
   evaluationUnixSeconds,
-  expectedObserverFailureDomainId,
-  expectedReviewerFailureDomainId,
-  forbiddenObserverIds,
+  expectedEvidenceSourceAFailureDomainId,
+  expectedEvidenceSourceBFailureDomainId,
+  forbiddenEvidenceSourceIds,
   artifacts,
   violations,
 }) {
   if (!exactKeys(evidence, EVIDENCE_KEYS, path, violations)) return;
-  if (evidence.evidenceKind !== `${expectedSectionId}_INDEPENDENT_EVIDENCE`) {
-    violations.push(`${path}.evidenceKind: expected ${expectedSectionId}_INDEPENDENT_EVIDENCE`);
+  if (evidence.evidenceKind !== `${expectedSectionId}_AUTOMATED_DIRECT_EVIDENCE`) {
+    violations.push(`${path}.evidenceKind: expected ${expectedSectionId}_AUTOMATED_DIRECT_EVIDENCE`);
   }
   canonicalSha256(evidence.artifactSha256, `${path}.artifactSha256`, true, violations);
   if (evidence.subjectBindingSha256 !== expectedSubjectSha256) {
@@ -907,40 +907,40 @@ function validateEvidence({
   }
   canonicalSha256(evidence.subjectBindingSha256, `${path}.subjectBindingSha256`, true, violations);
   canonicalSha256(evidence.policySha256, `${path}.policySha256`, true, violations);
-  canonicalIdentifier(evidence.independentObserverId, `${path}.independentObserverId`, true, profile, violations);
-  canonicalIdentifier(evidence.observerFailureDomainId, `${path}.observerFailureDomainId`, true, profile, violations);
-  canonicalSha256(evidence.observerIdentitySha256, `${path}.observerIdentitySha256`, true, violations);
-  canonicalIdentifier(evidence.independentReviewerId, `${path}.independentReviewerId`, true, profile, violations);
-  canonicalIdentifier(evidence.reviewerFailureDomainId, `${path}.reviewerFailureDomainId`, true, profile, violations);
-  canonicalSha256(evidence.reviewerIdentitySha256, `${path}.reviewerIdentitySha256`, true, violations);
-  if (evidence.observerFailureDomainId !== expectedObserverFailureDomainId
-    || evidence.reviewerFailureDomainId !== expectedReviewerFailureDomainId) {
-    violations.push(`${path}: observer and reviewer must bind the exact independently reviewed failure domains`);
+  canonicalIdentifier(evidence.automatedEvidenceSourceAId, `${path}.automatedEvidenceSourceAId`, true, profile, violations);
+  canonicalIdentifier(evidence.evidenceSourceAFailureDomainId, `${path}.evidenceSourceAFailureDomainId`, true, profile, violations);
+  canonicalSha256(evidence.evidenceSourceAIdentitySha256, `${path}.evidenceSourceAIdentitySha256`, true, violations);
+  canonicalIdentifier(evidence.automatedEvidenceSourceBId, `${path}.automatedEvidenceSourceBId`, true, profile, violations);
+  canonicalIdentifier(evidence.evidenceSourceBFailureDomainId, `${path}.evidenceSourceBFailureDomainId`, true, profile, violations);
+  canonicalSha256(evidence.evidenceSourceBIdentitySha256, `${path}.evidenceSourceBIdentitySha256`, true, violations);
+  if (evidence.evidenceSourceAFailureDomainId !== expectedEvidenceSourceAFailureDomainId
+    || evidence.evidenceSourceBFailureDomainId !== expectedEvidenceSourceBFailureDomainId) {
+    violations.push(`${path}: automated evidence sources A and B must bind the exact declared failure domains`);
   }
-  if (evidence.observerFailureDomainId === evidence.reviewerFailureDomainId) {
-    violations.push(`${path}: observer and reviewer failure domains must be distinct`);
+  if (evidence.evidenceSourceAFailureDomainId === evidence.evidenceSourceBFailureDomainId) {
+    violations.push(`${path}: automated evidence source A and B failure domains must be distinct`);
   }
-  const expectedObserverIdentitySha256 = evidenceIdentityBindingSha256(
-    "OBSERVER",
-    evidence.independentObserverId,
-    evidence.observerFailureDomainId,
+  const expectedEvidenceSourceAIdentitySha256 = evidenceIdentityBindingSha256(
+    "EVIDENCE_SOURCE_A",
+    evidence.automatedEvidenceSourceAId,
+    evidence.evidenceSourceAFailureDomainId,
   );
-  const expectedReviewerIdentitySha256 = evidenceIdentityBindingSha256(
-    "REVIEWER",
-    evidence.independentReviewerId,
-    evidence.reviewerFailureDomainId,
+  const expectedEvidenceSourceBIdentitySha256 = evidenceIdentityBindingSha256(
+    "EVIDENCE_SOURCE_B",
+    evidence.automatedEvidenceSourceBId,
+    evidence.evidenceSourceBFailureDomainId,
   );
-  if (evidence.observerIdentitySha256 !== expectedObserverIdentitySha256
-    || evidence.reviewerIdentitySha256 !== expectedReviewerIdentitySha256) {
-    violations.push(`${path}: observer and reviewer identity digests must bind exact identity and failure domain`);
+  if (evidence.evidenceSourceAIdentitySha256 !== expectedEvidenceSourceAIdentitySha256
+    || evidence.evidenceSourceBIdentitySha256 !== expectedEvidenceSourceBIdentitySha256) {
+    violations.push(`${path}: automated evidence source A and B identity digests must bind exact identity and failure domain`);
   }
-  if (evidence.independentObserverId === evidence.independentReviewerId
-    || evidence.observerIdentitySha256 === evidence.reviewerIdentitySha256) {
-    violations.push(`${path}: independent observer and reviewer identities must be distinct`);
+  if (evidence.automatedEvidenceSourceAId === evidence.automatedEvidenceSourceBId
+    || evidence.evidenceSourceAIdentitySha256 === evidence.evidenceSourceBIdentitySha256) {
+    violations.push(`${path}: automated evidence source A and B identities must be distinct`);
   }
-  if (forbiddenObserverIds.has(evidence.independentObserverId)
-    || forbiddenObserverIds.has(evidence.independentReviewerId)) {
-    violations.push(`${path}: observer and reviewer must be independent from provider, runtime, admin, credential, and backup identities`);
+  if (forbiddenEvidenceSourceIds.has(evidence.automatedEvidenceSourceAId)
+    || forbiddenEvidenceSourceIds.has(evidence.automatedEvidenceSourceBId)) {
+    violations.push(`${path}: automated evidence sources A and B must be distinct from provider, runtime, admin, credential, and backup identities`);
   }
   if (evidence.environment !== profile) {
     violations.push(`${path}.environment: evidence must match manifest.profile`);
@@ -985,7 +985,7 @@ function validateSection({
   profile,
   subjectBindingSha256,
   evaluationUnixSeconds,
-  forbiddenObserverIds,
+  forbiddenEvidenceSourceIds,
   artifacts,
   blockers,
   violations,
@@ -1016,11 +1016,11 @@ function validateSection({
       expectedPolicySha256: policyDigestFromSubject(profile, subjectBindingSha256, spec.id),
       profile,
       evaluationUnixSeconds,
-      expectedObserverFailureDomainId:
-        manifest.failureDomainSeparation.independentObserverFailureDomainId,
-      expectedReviewerFailureDomainId:
-        manifest.failureDomainSeparation.independentReviewerFailureDomainId,
-      forbiddenObserverIds,
+      expectedEvidenceSourceAFailureDomainId:
+        manifest.failureDomainSeparation.automatedEvidenceSourceAFailureDomainId,
+      expectedEvidenceSourceBFailureDomainId:
+        manifest.failureDomainSeparation.automatedEvidenceSourceBFailureDomainId,
+      forbiddenEvidenceSourceIds,
       artifacts,
       violations,
     });
@@ -1033,7 +1033,7 @@ function validateControls({
   profile,
   subjectBindingSha256,
   evaluationUnixSeconds,
-  forbiddenObserverIds,
+  forbiddenEvidenceSourceIds,
   artifacts,
   blockers,
   violations,
@@ -1061,11 +1061,11 @@ function validateControls({
         expectedPolicySha256: policyDigestFromSubject(profile, subjectBindingSha256, expected.id),
         profile,
         evaluationUnixSeconds,
-        expectedObserverFailureDomainId:
-          manifest.failureDomainSeparation.independentObserverFailureDomainId,
-        expectedReviewerFailureDomainId:
-          manifest.failureDomainSeparation.independentReviewerFailureDomainId,
-        forbiddenObserverIds,
+        expectedEvidenceSourceAFailureDomainId:
+          manifest.failureDomainSeparation.automatedEvidenceSourceAFailureDomainId,
+        expectedEvidenceSourceBFailureDomainId:
+          manifest.failureDomainSeparation.automatedEvidenceSourceBFailureDomainId,
+        forbiddenEvidenceSourceIds,
         artifacts,
         violations,
       });
@@ -1186,12 +1186,12 @@ export function validateXSocialEvidenceProviderReadinessManifest(manifest, optio
     violations.push(`manifest subject binding: ${error.message}`);
   }
   const artifacts = new Set();
-  const forbiddenObserverIds = new Set();
+  const forbiddenEvidenceSourceIds = new Set();
   for (const spec of X_SOCIAL_EVIDENCE_SECTION_SPECS) {
     const value = safe[spec.key];
     if (!isPlainRecord(value)) continue;
     for (const key of spec.idKeys) {
-      if (typeof value[key] === "string") forbiddenObserverIds.add(value[key]);
+      if (typeof value[key] === "string") forbiddenEvidenceSourceIds.add(value[key]);
     }
   }
   const sectionResults = subjectBindingSha256 === null
@@ -1202,7 +1202,7 @@ export function validateXSocialEvidenceProviderReadinessManifest(manifest, optio
       profile,
       subjectBindingSha256,
       evaluationUnixSeconds,
-      forbiddenObserverIds,
+      forbiddenEvidenceSourceIds,
       artifacts,
       blockers,
       violations,
@@ -1215,7 +1215,7 @@ export function validateXSocialEvidenceProviderReadinessManifest(manifest, optio
       .idKeys
       .map((key) => safe.failureDomainSeparation[key]);
     if (new Set(failureDomains).size !== failureDomains.length) {
-      violations.push("failureDomainSeparation: all ten provider, runtime, finality, persistence, checkpoint, administration, credential, backup, observer, and reviewer domains must be distinct");
+      violations.push("failureDomainSeparation: all ten provider, runtime, finality, persistence, checkpoint, administration, credential, backup, evidence-source-A, and evidence-source-B domains must be distinct");
     }
   }
   const controlResults = subjectBindingSha256 === null
@@ -1225,7 +1225,7 @@ export function validateXSocialEvidenceProviderReadinessManifest(manifest, optio
       profile,
       subjectBindingSha256,
       evaluationUnixSeconds,
-      forbiddenObserverIds,
+      forbiddenEvidenceSourceIds,
       artifacts,
       blockers,
       violations,

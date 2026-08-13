@@ -193,6 +193,8 @@ async function getHardwareProvider(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
     connect,
     path: account.path,
     publicKey,
+    network: "devnet",
+    readGenesisHash: () => connection.getGenesisHash(),
   });
   return { provider, publicKey };
 }
@@ -627,7 +629,7 @@ function App() {
       const next = await loadChainSnapshot();
       setSnapshot(next);
       setStatus(next.complete
-        ? "DEVNET V2 ACTIVE // EXPORT EVIDENCE FOR INDEPENDENT REVIEW"
+        ? "DEVNET V2 ACTIVE // EXPORT SOURCE-BOUND AUTOMATED EVIDENCE"
         : `READY // STAGE ${next.nextStage + 1} OF 7`);
       return next;
     } catch (caught) {
@@ -758,7 +760,7 @@ function App() {
       const next = await loadChainSnapshot();
       setSnapshot(next);
       setStatus(next.complete
-        ? "DEVNET V2 ACTIVE // EXPORT AND INDEPENDENTLY VERIFY"
+        ? "DEVNET V2 ACTIVE // EXPORT SOURCE-BOUND AUTOMATED EVIDENCE"
         : `CONFIRMED // NEXT IS STAGE ${next.nextStage + 1} OF 7`);
     } catch (caught) {
       setStatus("HOLD // BROADCAST OR CONFIRMATION FAILED");
@@ -777,7 +779,7 @@ function App() {
     if (!snapshot) return;
     const payload = {
       schema: "iat-v2-devnet-rehearsal-evidence/v1",
-      status: snapshot.complete ? "DEVNET_ACTIVE_PENDING_INDEPENDENT_REVIEW" : "INCOMPLETE",
+      status: snapshot.complete ? "DEVNET_ACTIVE_PENDING_AUTOMATED_DIRECT_EVIDENCE" : "INCOMPLETE",
       network: "devnet",
       rpc: DEVNET_RPC,
       sourceCommit: SOURCE_COMMIT,
@@ -804,7 +806,9 @@ function App() {
       transactions: evidence,
       exportedAtUtc: new Date().toISOString(),
       mainnetStatus: "HOLD",
-      independentReviewRequired: true,
+      automatedDirectEvidenceRequired: true,
+      humanReviewerRequired: false,
+      noSelfAttestation: true,
       secretMaterialIncluded: false,
     };
     const blob = new Blob([`${json(payload)}\n`], { type: "application/json" });
@@ -1023,7 +1027,7 @@ function App() {
         <footer>
           <span>SOURCE {SOURCE_COMMIT.slice(0, 12)}</span>
           <span>{INSPECTION_MODE ? "RPC // DISABLED" : "RPC // DEVNET ONLY"}</span>
-          <span>INDEPENDENT REVIEW REQUIRED</span>
+          <span>AUTOMATED RECEIPT VERIFICATION REQUIRED</span>
         </footer>
       </section>
     </main>

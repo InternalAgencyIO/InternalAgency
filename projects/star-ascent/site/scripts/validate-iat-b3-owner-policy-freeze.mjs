@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-export const OWNER_POLICY_FREEZE_SCHEMA = "iat-b3-owner-policy-freeze/v1";
+export const OWNER_POLICY_FREEZE_SCHEMA = "iat-b3-owner-policy-freeze/v2";
 export const OWNER_POLICY_FREEZE_MAINNET_STATUS = "HOLD";
 
 const DEFAULT_MANIFEST_PATH = fileURLToPath(new URL(
@@ -42,7 +42,7 @@ const EXPECTED_SCOPE = Object.freeze({
   doesNotCertify: Object.freeze([
     "OWNER_IDENTITY_OR_SIGNATURE_AUTHENTICITY",
     "CHAIN_TRUTH_OR_LIVE_ESTATE_STATE",
-    "REVIEWED_BINARY_OR_DEPLOYED_BYTES",
+    "SOURCE_BOUND_BINARY_OR_DEPLOYED_BYTES",
     "GENESIS_CONSERVATION_OR_FUNDING",
     "DEVNET_REHEARSAL_OR_ACTIVATION",
     "RELEASE_OR_MAINNET_AUTHORIZATION",
@@ -66,6 +66,10 @@ const EXPECTED_INVARIANTS = Object.freeze({
   secretsPermitted: false,
   ownerChoicesAreExternalProof: false,
   ownerAcceptanceReferenceIsExternalProof: false,
+  nonSignatureEvidenceRequiresAutomatedSourceBoundDirectEvidence: true,
+  humanReviewPrerequisitePermitted: false,
+  trezorModelTPhysicalConfirmationIsSoleHumanGateForActualSignatures: true,
+  unobservedClaimsRemainHold: true,
   graphCompletionPermitted: false,
 });
 
@@ -73,6 +77,11 @@ const EXPECTED_EVIDENCE_BOUNDARY = Object.freeze({
   acceptsExternalEvidence: false,
   acceptsEngineeringEvidence: false,
   selfAttestationIsExternalProof: false,
+  automatedDirectEvidenceMayCloseNonSignaturePredicates: true,
+  humanReviewerRequired: false,
+  noSelfAttestation: true,
+  modelTRequiredOnlyForActualCryptographicSignatures: true,
+  unobservedEvidenceDisposition: "HOLD",
   evidenceVerificationOutOfScope: true,
 });
 
@@ -154,7 +163,7 @@ const NODE_SPECS = Object.freeze({
       duplicateCanonicalSupplyPermitted: false,
     }),
     ownerChoiceKeys: Object.freeze(["liveEstateAssertion", "candidateMint", "candidateTokenProgramId", "canonicalMintDecision", "duplicateSupplyRetirementPolicy"]),
-    external: Object.freeze(["INDEPENDENT_LIVE_ESTATE_INVENTORY", "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT", "CANONICAL_SUPPLY_RECONCILIATION"]),
+    external: Object.freeze(["SOURCE_BOUND_AUTOMATED_LIVE_ESTATE_INVENTORY", "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT", "CANONICAL_SUPPLY_RECONCILIATION"]),
     engineering: Object.freeze(["TOKEN_PROGRAM_AND_EXTENSION_COMPATIBILITY_REPORT", "MIGRATION_OR_NEW_MINT_REHEARSAL"]),
   }),
   CORE_CUSTODY_POLICY_ADAPTER: Object.freeze({
@@ -167,7 +176,7 @@ const NODE_SPECS = Object.freeze({
       releaseOrdering: "CURRENT_OPEN_DAILY_LAW_AND_SAME_DAY_RECONCILIATION_ATOMICALLY_REQUIRED",
     }),
     ownerChoiceKeys: Object.freeze(["acceptFrozenScope", "releasePolicy"]),
-    external: Object.freeze(["INDEPENDENT_CUSTODY_AND_RELEASE_POLICY_ACCEPTANCE", "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION"]),
+    external: Object.freeze(["SOURCE_BOUND_AUTOMATED_CUSTODY_AND_RELEASE_POLICY_DIRECT_EVIDENCE", "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION"]),
     engineering: Object.freeze(["NATIVE_CORE_CUSTODY_ADAPTER_AND_CPI_EVIDENCE", "BURN_STALE_DAY_DEPOSIT_RACE_AND_LOCKDOWN_REHEARSAL"]),
   }),
   FACTION_ECONOMICS_FUNDING: Object.freeze({
@@ -181,7 +190,7 @@ const NODE_SPECS = Object.freeze({
       debtLeapfrogOrPartialFundingPermitted: false,
     }),
     ownerChoiceKeys: Object.freeze(["scoringPolicySha256", "sybilPolicy", "weeklyEpochAnchorUnixSeconds", "tieRule", "communityCarveOutBaseUnits", "weeklyEmissionBaseUnits", "fundingHorizonWeeks", "unusedBalanceDestination", "followerSnapshotPolicySha256", "prizePolicySha256", "nftPrizePolicy", "claimExpirySeconds"]),
-    external: Object.freeze(["AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS", "INDEPENDENT_SYBIL_AND_PRIZE_POLICY_REVIEW", "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE"]),
+    external: Object.freeze(["AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS", "SOURCE_BOUND_AUTOMATED_SYBIL_AND_PRIZE_POLICY_DIRECT_EVIDENCE", "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE"]),
     engineering: Object.freeze(["NATIVE_FACTION_CODEC_AND_WRITE_HANDLERS", "SOLVENCY_CONSERVATION_TIE_REPLAY_AND_LOCKDOWN_REHEARSAL"]),
   }),
   CONFIG_GENESIS_PHASE_CODEC: Object.freeze({
@@ -194,7 +203,7 @@ const NODE_SPECS = Object.freeze({
       activationTransition: "ONE_WAY_ATOMIC_AND_DISABLING_STAGING_WRITES",
     }),
     ownerChoiceKeys: Object.freeze(["acceptExactBootstrapPolicy", "canonicalAccountSetSha256", "bootstrapReplayPolicy", "preActivationCoreCapPolicy"]),
-    external: Object.freeze(["INDEPENDENT_BOOTSTRAP_AND_ACTIVATION_POLICY_ACCEPTANCE"]),
+    external: Object.freeze(["SOURCE_BOUND_AUTOMATED_BOOTSTRAP_AND_ACTIVATION_POLICY_DIRECT_EVIDENCE_PACKET"]),
     engineering: Object.freeze(["CONFIG_AND_GENESIS_PHASE_CODEC_BYTES", "PREACTIVATION_REJECTION_REENTRY_ROLLBACK_AND_ATOMIC_ACTIVATION_TESTS"]),
   }),
   GENESIS_ALLOCATIONS_CONSERVATION: Object.freeze({
@@ -205,7 +214,7 @@ const NODE_SPECS = Object.freeze({
       rewardLaneOrder: Object.freeze(["treasury", "ecosystem", "liquidity"]),
     }),
     ownerChoiceKeys: Object.freeze(["communityOwner", "treasuryBeneficiary", "ecosystemBeneficiary", "coreBeneficiary", "liquidityBeneficiary", "factionCarveOutBaseUnits", "coreDestinationPolicy", "programVaultDestinationPolicy"]),
-    external: Object.freeze(["BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATIONS", "INDEPENDENT_GENESIS_MANIFEST_ACCEPTANCE"]),
+    external: Object.freeze(["BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATIONS", "SOURCE_BOUND_AUTOMATED_GENESIS_MANIFEST_CONSERVATION_EVIDENCE"]),
     engineering: Object.freeze(["EXACT_ALLOCATION_AND_VESTING_VECTORS", "GENESIS_CONSERVATION_AND_CANONICAL_DESTINATION_PROOF"]),
   }),
   PRODUCTION_IDENTITY_INPUT_FREEZE: Object.freeze({
@@ -227,8 +236,8 @@ const NODE_SPECS = Object.freeze({
       auditorPermanentDelegateAndMintCloseAbsent: true,
     }),
     ownerChoiceKeys: Object.freeze(["lawProgramId", "economyProgramId", "canonicalMint", "clusterIdentityPolicy", "entropyLagSlots", "entropyRiskAcceptance", "metadataPolicy", "acceptCanonicalSeedTable"]),
-    external: Object.freeze(["INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE", "INDEPENDENT_DAILY_LAW_ENTROPY_RISK_ACCEPTANCE"]),
-    engineering: Object.freeze(["REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE", "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"]),
+    external: Object.freeze(["TWO_SOURCE_BOUND_AUTOMATED_MAINNET_GENESIS_HASH_ENDPOINT_RECEIPTS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE", "SOURCE_BOUND_AUTOMATED_DAILY_LAW_ENTROPY_RISK_MEASUREMENT"]),
+    engineering: Object.freeze(["SOURCE_BOUND_AUTOMATED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE", "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"]),
   }),
   B3_COST_CEREMONY_FUNDING: Object.freeze({
     dependencies: Object.freeze(["PRODUCTION_IDENTITY_INPUT_FREEZE"]),
@@ -238,7 +247,7 @@ const NODE_SPECS = Object.freeze({
       costCategories: Object.freeze(["PROGRAM_DEPLOYMENT", "PROGRAM_DATA_RENT", "MINT_AND_EXTENSION_STATE", "GENESIS_ACCOUNTS", "TRANSACTION_FEES"]),
     }),
     ownerChoiceKeys: Object.freeze(["payerPublicKey", "fundingSourcePolicySha256", "ceremonyFloorLamports", "overCeilingDisposition"]),
-    external: Object.freeze(["ACCOUNTABLE_NON_SECRET_FUNDING_SOURCE_APPROVAL", "INDEPENDENT_PAYER_BALANCE_OBSERVATION"]),
+    external: Object.freeze(["ACCOUNTABLE_NON_SECRET_FUNDING_SOURCE_APPROVAL", "TWO_SOURCE_BOUND_AUTOMATED_PAYER_BALANCE_ENDPOINT_RECEIPTS"]),
     engineering: Object.freeze(["EXACT_FRESH_PAYER_COST_MEASUREMENT", "FEE_RENT_BUFFER_AND_RECOVERY_RECONCILIATION"]),
   }),
 });

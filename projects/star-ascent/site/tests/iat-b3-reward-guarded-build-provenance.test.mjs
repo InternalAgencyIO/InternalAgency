@@ -44,6 +44,7 @@ const INVENTORIED_SOURCE_PATHS = Object.freeze([
   "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs",
   "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs",
   "scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs",
+  "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs",
   "scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs",
 ]);
 const CLEAN_BUILD_SOURCE = `
@@ -118,7 +119,7 @@ test("fresh observed build binds exact source, command, toolchain, environment, 
   assert.equal(receipt.rollbackProtectionVerified, false);
   assert.equal(receipt.materializedProjectionStateVerified, false);
   assert.equal(receipt.externalSideEffectsAuthorized, false);
-  assert.equal(receipt.independentReviewAccepted, false);
+  assert.equal(receipt.sourceBoundAutomatedDirectEvidenceVerified, false);
   assert.equal(receipt.activationReady, false);
   assert.equal(receipt.mainnetStatus, REWARD_GUARDED_BUILD_PROVENANCE_MAINNET_STATUS);
   assert.equal(receipt.mainnetStatus, "HOLD");

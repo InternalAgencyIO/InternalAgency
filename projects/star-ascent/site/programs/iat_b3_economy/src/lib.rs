@@ -18,11 +18,17 @@ pub mod production_claim_lane_principal_executor;
 pub mod production_close_position;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod production_dispatch;
+#[cfg(feature = "runtime-production-entrypoint")]
+pub mod production_entrypoint;
+#[cfg(feature = "runtime-production-dispatch")]
+pub mod production_initialization_policy_hold;
 pub mod production_instruction;
 #[cfg(feature = "runtime-production-open-position")]
 pub mod production_open_position;
 #[cfg(feature = "runtime-production-open-position-executor")]
 pub mod production_open_position_executor;
+#[cfg(feature = "runtime-production-dispatch")]
+pub mod production_round_disabled;
 #[cfg(feature = "runtime-account-lifecycle")]
 pub mod production_set_eligibility;
 #[cfg(feature = "runtime-production-settle-position-week")]
@@ -53,6 +59,15 @@ pub mod token_2022_runtime;
 
 #[cfg(feature = "sbf-preflight-entrypoint")]
 pub use sbf_preflight::process_instruction;
+
+#[cfg(all(
+    feature = "sbf-preflight-entrypoint",
+    feature = "runtime-production-entrypoint",
+    not(feature = "no-entrypoint")
+))]
+compile_error!(
+    "sbf-preflight-entrypoint and runtime-production-entrypoint cannot expose the same SBF artifact"
+);
 
 #[cfg(all(feature = "sbf-preflight-entrypoint", not(feature = "no-entrypoint")))]
 solana_program_entrypoint::entrypoint!(process_instruction);

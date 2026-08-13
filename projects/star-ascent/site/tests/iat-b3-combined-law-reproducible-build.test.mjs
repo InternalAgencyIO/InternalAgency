@@ -17,10 +17,15 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import {
+  COMBINED_LAW_BUILD_DISK_BUDGET,
   COMBINED_LAW_BUILD_MAINNET_STATUS,
+  COMBINED_LAW_BUILD_PREFLIGHT_HOLD,
+  COMBINED_LAW_BUILD_PREFLIGHT_READY,
+  COMBINED_LAW_BUILD_PREFLIGHT_SCHEMA,
   COMBINED_LAW_BUILD_RECEIPT_SCHEMA,
   COMBINED_LAW_BUILD_RECEIPT_STATUS,
   COMBINED_LAW_LFS_POLICY,
+  COMBINED_LAW_PROGRAMDATA_BINDING,
   COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA,
   COMBINED_LAW_SUBMODULE_POLICY,
   PINNED_COMBINED_LAW_BUILD_CONTAINER,
@@ -30,18 +35,21 @@ import {
   assertPinnedContainerObservation,
   assertPinnedToolchainObservation,
   createExactSourceGitEnvironment,
+  createCombinedLawBuildPreflight,
   createCombinedLawBuildRoot,
   createCombinedLawBuildReceipt,
   createCombinedLawDockerBuildArguments,
   loadExactDeclaredHeadSource,
   materializeExactSourceSnapshot,
   observeExactSource,
+  observeCombinedLawBuildPreflight,
   observeMaterializedSourceSnapshot,
   observePreservedArtifact,
   parseExactGitBlobBatchResponse,
   parseExactGitTreeListing,
   preserveReceiptBoundArtifact,
   removeSelfCreatedBuildRoot,
+  validateCombinedLawBuildPreflight,
   validateCombinedLawBuildReceipt,
 } from "../scripts/run-iat-b3-combined-law-reproducible-build.mjs";
 import {
@@ -126,6 +134,20 @@ function exactGitBlob(path, value, gitMode = "100644") {
   return { path, gitMode, gitObjectSha1, bytes };
 }
 
+function canonicalTestJson(value) {
+  if (Array.isArray(value)) return value.map(canonicalTestJson);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.keys(value).sort().map((key) => [key, canonicalTestJson(value[key])]),
+    );
+  }
+  return value;
+}
+
+function testRecordSha256(value) {
+  return createHash("sha256").update(JSON.stringify(canonicalTestJson(value))).digest("hex");
+}
+
 function temporaryDirectory(prefix) {
   return mkdtempSync(join(tmpdir(), prefix));
 }
@@ -186,6 +208,10 @@ function createReceipt(overrides = {}) {
     declaredHeadSha: HEAD_SHA,
     sourceObservations: sourceObservations(),
     materializedSourceObservations: materializedSourceObservations(),
+    runnerBinding: {
+      executedRunnerSha256: "8".repeat(64),
+      committedRunnerSha256: "8".repeat(64),
+    },
     identityBinding: { ...IDENTITY_BINDING },
     containerObservation: { ...CONTAINER },
     toolchainObservation: { ...TOOLCHAIN },
@@ -196,6 +222,193 @@ function createReceipt(overrides = {}) {
   });
 }
 
+function validPreflightInput(overrides = {}) {
+  return {
+    generatedAt: GENERATED_AT,
+    declaredHeadSha: HEAD_SHA,
+    sourceObservation: {
+      headSha: HEAD_SHA,
+      treeSha: TREE_SHA,
+      statusPorcelain: "",
+    },
+    sourceFailure: null,
+    executedRunnerSha256: "8".repeat(64),
+    committedRunnerSha256: "8".repeat(64),
+    nodeVersion: "24.19.0",
+    hostPlatform: "linux",
+    hostArchitecture: "x64",
+    diskVolumePath: "/var/tmp",
+    diskFreeBytes: COMBINED_LAW_BUILD_DISK_BUDGET.minimumFreeBytes,
+    diskFailure: null,
+    identityObservation: {
+      ready: true,
+      manifestSha256: "9".repeat(64),
+      manifestByteLength: 4_096,
+      ownerPolicySha256: "a".repeat(64),
+      ownerPolicyByteLength: 2_048,
+      environmentBindingSha256: "b".repeat(64),
+      failure: null,
+    },
+    containerObservation: { ...CONTAINER },
+    containerFailure: null,
+    toolchainObservation: { ...TOOLCHAIN },
+    toolchainFailure: null,
+    ...overrides,
+  };
+}
+
+test("offline preflight binds the exact dual-build contract without proving a build", () => {
+  const preflight = createCombinedLawBuildPreflight(validPreflightInput());
+  assert.equal(preflight.schema, COMBINED_LAW_BUILD_PREFLIGHT_SCHEMA);
+  assert.equal(preflight.status, COMBINED_LAW_BUILD_PREFLIGHT_READY);
+  assert.equal(preflight.exitCode, 0);
+  assert.equal(preflight.buildExecuted, false);
+  assert.equal(preflight.source.repositoryCleanTrackedAndUntracked, true);
+  assert.equal(preflight.tooling.hostNodeExactPin, null);
+  assert.equal(preflight.tooling.hostNodeMinimumVersion, "22.13.0");
+  assert.equal(preflight.tooling.ciNodeMajor, 24);
+  assert.equal(preflight.identityBinding.canonicalProductionBindingReady, true);
+  assert.deepEqual(
+    preflight.recipe.arguments,
+    PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.arguments,
+  );
+  assert.equal(preflight.recipe.productionFeature, "production-combined-hook");
+  assert.equal(preflight.recipe.repetitions, 2);
+  assert.equal(preflight.disk.minimumFreeBytes, 24 * 1024 ** 3);
+  assert.equal(preflight.disk.containerImageBytesIncluded, false);
+  assert.equal(preflight.programDataBinding.programAccount.byteLength, 36);
+  assert.equal(preflight.programDataBinding.programDataAccount.programBytesOffset, 45);
+  assert.equal(
+    preflight.programDataBinding.programDataAccount.terminalUpgradeAuthorityOption,
+    0,
+  );
+  assert.equal(preflight.programDataBinding, COMBINED_LAW_PROGRAMDATA_BINDING);
+  assert.equal(preflight.safety.reproducibleBuildVerified, false);
+  assert.equal(preflight.safety.finalProgramDataBindingVerified, false);
+  assert.equal(preflight.safety.mainnetStatus, COMBINED_LAW_BUILD_MAINNET_STATUS);
+  assert.equal(validateCombinedLawBuildPreflight(preflight), preflight);
+});
+
+test("preflight fails closed for every source, host, identity, toolchain, and disk prerequisite", () => {
+  const cases = [
+    {
+      blocker: "EXACT_SOURCE_HEAD_MATCH",
+      input: { declaredHeadSha: "c".repeat(40) },
+    },
+    {
+      blocker: "REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED",
+      input: {
+        sourceObservation: {
+          headSha: HEAD_SHA,
+          treeSha: TREE_SHA,
+          statusPorcelain: " M programs/iat_b3_law/src/lib.rs\0",
+        },
+      },
+    },
+    {
+      blocker: "EXECUTED_RUNNER_MATCHES_DECLARED_HEAD",
+      input: { executedRunnerSha256: "7".repeat(64) },
+    },
+    {
+      blocker: "LINUX_AMD64_HOST",
+      input: { hostPlatform: "win32" },
+    },
+    {
+      blocker: "HOST_NODE_AT_LEAST_22_13_0",
+      input: { nodeVersion: "22.12.9" },
+    },
+    {
+      blocker: "PRODUCTION_COMBINED_IDENTITY_BINDING",
+      input: {
+        identityObservation: {
+          ...validPreflightInput().identityObservation,
+          ready: false,
+          environmentBindingSha256: null,
+          failure: "production identity freeze is unresolved",
+        },
+      },
+    },
+    {
+      blocker: "PINNED_CONTAINER_PRESENT",
+      input: { containerObservation: null, containerFailure: "image absent" },
+    },
+    {
+      blocker: "PINNED_CONTAINER_TOOLCHAIN",
+      input: {
+        toolchainObservation: { ...TOOLCHAIN, cargoBuildSbf: "solana-cargo-build-sbf 3.1.11" },
+      },
+    },
+    {
+      blocker: "BUILD_VOLUME_MINIMUM_24_GIB_FREE",
+      input: { diskFreeBytes: COMBINED_LAW_BUILD_DISK_BUDGET.minimumFreeBytes - 1 },
+    },
+  ];
+  for (const { blocker, input } of cases) {
+    const preflight = createCombinedLawBuildPreflight(validPreflightInput(input));
+    assert.equal(preflight.status, COMBINED_LAW_BUILD_PREFLIGHT_HOLD, blocker);
+    assert.equal(preflight.exitCode, 2, blocker);
+    assert.equal(preflight.buildExecuted, false, blocker);
+    assert.ok(preflight.blockers.includes(blocker), blocker);
+  }
+});
+
+test("preflight digest and blocker-set tampering fail validation", () => {
+  const valid = createCombinedLawBuildPreflight(validPreflightInput());
+  const digestTamper = JSON.parse(JSON.stringify(valid));
+  digestTamper.identityBinding.failure = "tampered narrative";
+  assert.throws(
+    () => validateCombinedLawBuildPreflight(digestTamper),
+    /PREFLIGHT_DIGEST_MISMATCH/u,
+  );
+
+  const blockerTamper = JSON.parse(JSON.stringify(valid));
+  blockerTamper.blockers.push("FABRICATED_BLOCKER");
+  assert.throws(
+    () => validateCombinedLawBuildPreflight(blockerTamper),
+    /PREFLIGHT_BLOCKER_SET_MISMATCH/u,
+  );
+
+  const dirty = createCombinedLawBuildPreflight(validPreflightInput({
+    sourceObservation: {
+      headSha: HEAD_SHA,
+      treeSha: TREE_SHA,
+      statusPorcelain: " M Cargo.lock\0",
+    },
+  }));
+  const promotionTamper = JSON.parse(JSON.stringify(dirty));
+  promotionTamper.status = COMBINED_LAW_BUILD_PREFLIGHT_READY;
+  promotionTamper.exitCode = 0;
+  promotionTamper.checks.find(
+    ({ id }) => id === "REPOSITORY_CLEAN_TRACKED_AND_UNTRACKED",
+  ).passed = true;
+  promotionTamper.blockers = [];
+  const { preflightSha256: ignoredSha256, ...promotionCore } = promotionTamper;
+  assert.equal(typeof ignoredSha256, "string");
+  promotionTamper.preflightSha256 = testRecordSha256(promotionCore);
+  assert.throws(
+    () => validateCombinedLawBuildPreflight(promotionTamper),
+    /PREFLIGHT_CHECK_SET_MISMATCH/u,
+  );
+});
+
+test("runtime preflight can be probed without container execution and never runs SBF", () => {
+  const repositoryRoot = fileURLToPath(new URL("../../../../", import.meta.url));
+  const currentHead = observeExactSource(repositoryRoot).headSha;
+  const preflight = observeCombinedLawBuildPreflight({
+    repositoryRoot,
+    environment: { ...process.env, IAT_B3_EXACT_SOURCE_HEAD_SHA: currentHead },
+    generatedAt: GENERATED_AT,
+    probeContainer: false,
+  });
+  assert.equal(preflight.status, COMBINED_LAW_BUILD_PREFLIGHT_HOLD);
+  assert.equal(preflight.exitCode, 2);
+  assert.equal(preflight.buildExecuted, false);
+  assert.equal(preflight.source.observedHeadSha, currentHead);
+  assert.equal(preflight.identityBinding.canonicalProductionBindingReady, false);
+  assert.equal(preflight.safety.reproducibleBuildVerified, false);
+  assert.equal(preflight.safety.deployment, false);
+});
+
 test("a valid receipt proves only exact-source dual-build equality and preserves Mainnet HOLD", () => {
   const receipt = createReceipt();
   assert.equal(receipt.schema, COMBINED_LAW_BUILD_RECEIPT_SCHEMA);
@@ -203,6 +416,8 @@ test("a valid receipt proves only exact-source dual-build equality and preserves
   assert.equal(receipt.source.declaredHeadSha, HEAD_SHA);
   assert.equal(receipt.source.observedHeadSha, HEAD_SHA);
   assert.equal(receipt.source.repositoryCleanTrackedAndUntracked, true);
+  assert.equal(receipt.source.executedRunnerSha256, "8".repeat(64));
+  assert.equal(receipt.source.committedRunnerSha256, "8".repeat(64));
   assert.equal(receipt.source.revalidationCount, 4);
   assert.equal(receipt.source.materializationSchema, COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA);
   assert.equal(receipt.source.materializedTreeSha, TREE_SHA);
@@ -228,7 +443,7 @@ test("a valid receipt proves only exact-source dual-build equality and preserves
   assert.equal(receipt.safety.signing, false);
   assert.equal(receipt.safety.deployment, false);
   assert.equal(receipt.safety.identityAuthorityVerified, false);
-  assert.equal(receipt.safety.independentReviewAccepted, false);
+  assert.equal("sourceBoundAutomatedDirectEvidenceVerified" in receipt.safety, false);
   assert.equal(receipt.safety.adversarialDevnetFinalBinaryAccepted, false);
   assert.equal(receipt.safety.productionCandidate, false);
   assert.equal(receipt.safety.mainnetExecutionAuthorized, false);
@@ -238,6 +453,24 @@ test("a valid receipt proves only exact-source dual-build equality and preserves
   assert.equal(validateCombinedLawBuildReceipt(receipt), receipt);
   const serializedCopy = JSON.parse(JSON.stringify(receipt));
   assert.equal(validateCombinedLawBuildReceipt(serializedCopy), serializedCopy);
+});
+
+test("law receipt requires the exact committed runner bytes", () => {
+  assert.throws(
+    () => createReceipt({
+      runnerBinding: {
+        executedRunnerSha256: "8".repeat(64),
+        committedRunnerSha256: "9".repeat(64),
+      },
+    }),
+    /IAT_B3_COMBINED_LAW_RECEIPT_RUNNER_BINDING_INVALID/u,
+  );
+  const receipt = structuredClone(createReceipt());
+  receipt.source.committedRunnerSha256 = "9".repeat(64);
+  assert.throws(
+    () => validateCombinedLawBuildReceipt(receipt),
+    /INVALID_IAT_B3_COMBINED_LAW_BUILD_SOURCE_BINDING/u,
+  );
 });
 
 test("source binding rejects missing, mismatched, dirty, and drifting observations", async (t) => {
@@ -912,8 +1145,8 @@ test("canonical identity and owner-policy byte intake rejects duplicate and drif
 
   const duplicateOwnerPolicy = Buffer.from(
     OWNER_POLICY_BYTES.toString("utf8").replace(
-      '  "schema": "iat-b3-owner-policy-freeze/v1",',
-      '  "schema": "iat-b3-owner-policy-freeze/v1",\n  "schema": "iat-b3-owner-policy-freeze/v1",',
+      '  "schema": "iat-b3-owner-policy-freeze/v2",',
+      '  "schema": "iat-b3-owner-policy-freeze/v2",\n  "schema": "iat-b3-owner-policy-freeze/v2",',
     ),
   );
   assert.throws(
