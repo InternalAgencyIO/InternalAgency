@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-one-time-rounds-50-51-authorized-round-50-pending",
+  "status": "active-one-time-rounds-50-51-authorized-round-50-prompt-ready",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -21254,7 +21254,7 @@
     "requiredCurrentCountryAssets": 4,
     "note": "Georgia retains accepted scenes 1548-1550. All four round-49 candidates were preserved and rejected under strict audit. The signed-in live @dogramaci profile is verified and the eligible backlog remains empty. Scene 1551, X publication, Fiji, and every later country remain blocked until an exact pass. The explicit public-archive directive now authorizes only rounds 50 and conditional 51; no round 52 may open."
   },
-  "checkpointedAt": "2026-08-13T06:33:35.425Z",
+  "checkpointedAt": "2026-08-13T06:42:30.5429680Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -22744,7 +22744,7 @@
   "oneTimeGeorgiaScene1551ContinuationWindow": {
     "requestedAt": "2026-08-13T06:33:35.425Z",
     "contractSection": "rapidConsolidatedRenderPolicy.twoBankThroughputPolicy.oneTimeGeorgiaScene1551Reauthorization",
-    "status": "authorized-prerequisite-satisfied-round-50-pending",
+    "status": "authorized-prerequisite-satisfied-round-50-prompt-ready",
     "prerequisite": {
       "archiveBackfillCommitted": true,
       "archiveBackfillPushed": true,
@@ -22768,7 +22768,7 @@
     "currentRound": 50,
     "remainingAutomatedBanks": 2,
     "round50": {
-      "status": "pending-launch",
+      "status": "prompt-ready-pending-four-concurrent-launch",
       "slots": 4,
       "allocation": {
         "A": 1551,
@@ -22784,6 +22784,129 @@
         "B": "affirmative-all-four",
         "C": "pause-no-party",
         "D": "pause-no-party"
+      },
+      "promptPreparation": {
+        "preparedAt": "2026-08-13T06:42:30.5429680Z",
+        "commonPromptPath": "tmp/world-195x4/batch-382/scene-1551-round-50-four-slot-common-prompt.txt",
+        "commonPromptSha256": "1DAF93B926C7B6A230D0963A2A4F6F50CD5BF9C4410EA461E411CC49E879DC6D",
+        "allKnownRound48AndRound49CorrectionsConsolidated": true,
+        "storedSceneRollsChanged": false,
+        "priorBatumiRenderInputCount": 0,
+        "candidateNarratives": {
+          "A": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-50-candidate-A-narrative.txt",
+            "sha256": "462B6C8A972CAB3A0649E8B161EC5DE9AC711B88C6942539014B284A60D92519",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round50-candidateA",
+              "fullHash": 3747239024,
+              "roll": 24,
+              "selectorIndex": 0,
+              "offeredChoice": "AI ECE asks Radiance whether she wants one restrained fully clothed route-count with Ellie and ECE while Alia continues the separate safe mission demonstration."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round50-candidateA",
+              "fullHash": 1278695148,
+              "roll": 48,
+              "category": "explicit affirmative"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round50-candidateA",
+              "fullHash": 3084488535,
+              "roll": 35,
+              "willingParticipants": [
+                "Radiance",
+                "Ellie",
+                "AI ECE"
+              ]
+            },
+            "partyActivation": true,
+            "visibleEvidence": "Radiance's lowered-chin mid-nod, willing smile, direct ECE gaze, voluntarily maintained contacts, ECE's returned smile, and Ellie's willing smile.",
+            "continuity": "One restrained three-adult route-count acknowledgment without changing hand, dip, compass, target, or safety geometry."
+          },
+          "B": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-50-candidate-B-narrative.txt",
+            "sha256": "BF437AFC50A331F379A42FBB5895CD3E48D05FD84AFEC0611AF5B595EC2D2B64",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round50-candidateB",
+              "fullHash": 3797571881,
+              "roll": 81,
+              "selectorIndex": 1,
+              "offeredChoice": "Ellie asks Radiance whether all four women may mark the completed safe route lesson with one restrained fully clothed count while every assigned hand remains fixed."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round50-candidateB",
+              "fullHash": 1329028005,
+              "roll": 5,
+              "category": "explicit affirmative"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round50-candidateB",
+              "fullHash": 3101266154,
+              "roll": 54,
+              "willingParticipants": [
+                "Radiance",
+                "Ellie",
+                "Alia",
+                "AI ECE"
+              ]
+            },
+            "partyActivation": true,
+            "visibleEvidence": "Radiance's lowered-chin mid-nod and direct willing smile plus a willing smile from Ellie, Alia, and AI ECE without any extra gesture or contact.",
+            "continuity": "One restrained quartet count without moving support, compass, mission, target, or safety geometry."
+          },
+          "C": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-50-candidate-C-narrative.txt",
+            "sha256": "239EBC65814FDAC5EE8F046FEDE3A9203955CC8CC008D3CC6CF088E4FE8008ED",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round50-candidateC",
+              "fullHash": 3780794262,
+              "roll": 62,
+              "selectorIndex": 2,
+              "offeredChoice": "Alia asks Radiance whether she wants the quartet to continue one restrained route-count or pause while the safe demonstration geometry is checked again."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round50-candidateC",
+              "fullHash": 1312250386,
+              "roll": 86,
+              "category": "explicit pause"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round50-candidateC",
+              "fullHash": 3118043773,
+              "roll": 73,
+              "ignoredBecausePartyInactive": true
+            },
+            "partyActivation": false,
+            "visibleEvidence": "Radiance's attentive direct ECE gaze, broadly splayed hold-there palm, closed mouth, and total absence of celebration.",
+            "continuity": "All four hold the exact safe geometry while Radiance considers the choice."
+          },
+          "D": {
+            "path": "tmp/world-195x4/batch-382/scene-1551-round-50-candidate-D-narrative.txt",
+            "sha256": "80BD8C0E866BC98183D4179F46FDD2C1F68A8C3CC00354FA81C267E6711EE9BC",
+            "invitation": {
+              "key": "batch382-georgia-scene1551-radianceLiveInvitation-round50-candidateD",
+              "fullHash": 3831127119,
+              "roll": 19,
+              "selectorIndex": 3,
+              "offeredChoice": "AI ECE offers Radiance the choice to close the route lesson with one restrained fully clothed quartet count or remain quietly in planning while Alia holds the separate safe lane."
+            },
+            "response": {
+              "key": "batch382-georgia-scene1551-radianceLiveResponse-round50-candidateD",
+              "fullHash": 1228362291,
+              "roll": 91,
+              "category": "explicit pause"
+            },
+            "participantSelector": {
+              "key": "batch382-georgia-scene1551-radianceLiveParticipants-round50-candidateD",
+              "fullHash": 3000600440,
+              "roll": 40,
+              "ignoredBecausePartyInactive": true
+            },
+            "partyActivation": false,
+            "visibleEvidence": "Radiance's still chin, closed mouth, attentive direct ECE gaze, broadly splayed hold-there palm, and total absence of celebration.",
+            "continuity": "All four remain in the exact safe planning geometry."
+          }
+        }
       }
     },
     "round51": {
@@ -23271,8 +23394,8 @@
     }
   },
   "latestProgressCheckpoint": {
-    "status": "generated-media-backfill-pushed-round-50-authorization-prepared",
-    "preparedAt": "2026-08-13T06:33:35.425Z",
+    "status": "generated-media-backfill-and-round-50-prompt-preparation-ready",
+    "preparedAt": "2026-08-13T06:42:30.5429680Z",
     "branch": "agent/starlight-progress-archive",
     "remoteCommit": "60a9f7afa6392ce1a34a531e0a9e41a1dca34327",
     "auditRounds": [
