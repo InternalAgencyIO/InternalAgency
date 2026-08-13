@@ -1,0 +1,77 @@
+{
+  "batch": 384,
+  "country": "Comoros",
+  "status": "pass-1-scene-1556-output-moderation-block-scenes-1557-1559-no-terminal-pending-continuation",
+  "sourceCommit": "6a5d6474f0f148cc158255907473da4513cdc8da",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 1,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/158",
+      "assets/lore/starlight-era/batch-312-fiji-recovery-checkpoint.json#/nextQueueCountry"
+    ],
+    "themeEvidence": "batch-240-plus-country-glamour-romance-contract.json#/countryFashion/cinematicThemes",
+    "notGuessed": true
+  },
+  "rollMethod": "FNV-1a over recorded batch384-comoros keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4.",
+  "cinematicTheme": "Moon-surface expedition couture",
+  "themePairPosition": 2,
+  "sceneNumbers": [1556, 1557, 1558, 1559],
+  "faceAnchors": [
+    {"file":"assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png","sha256":"BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"},
+    {"file":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"},
+    {"file":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"},
+    {"file":"assets/lore/starlight-era/ece-canonical-identity-v1.png","sha256":"B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"},
+    {"file":"assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png","sha256":"0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"}
+  ],
+  "maleModelSelection": {"fullHash":3299975038,"position":3,"scene":1558,"emotionRoll":43,"emotion":"determination"},
+  "rollAudit": {
+    "1556": {"weather":78,"mascotState":18,"mascotHolder":79,"oddProp":61,"oddHolder":59,"oddFamily":41,"pole":36,"rainbowOnly":50,"hosiery":85,"hosieryWearer":29,"hosieryPalette":11,"romance":83,"compound":55,"hardLove":43,"missionPoseTarget":36,"emotions":{"Radiance":47,"Ellie":95,"Alia":53,"AI ECE":91},"cuts":{"Radiance":[83,12,1],"Ellie":[71,48,85],"Alia":[17,74,87],"AI ECE":[63,68,57]}},
+    "1557": {"weather":93,"mascotState":1,"mascotHolder":86,"oddProp":94,"oddHolder":52,"oddFamily":94,"pole":33,"rainbowOnly":49,"hosiery":32,"hosieryWearer":60,"hosieryPalette":40,"romance":40,"compound":50,"hardLove":94,"missionPoseTarget":67,"emotions":{"Radiance":66,"Ellie":96,"Alia":4,"AI ECE":30},"cuts":{"Radiance":[36,95,48],"Ellie":[70,89,10],"Alia":[78,1,66],"AI ECE":[8,19,24]}},
+    "1558": {"weather":0,"mascotState":56,"mascotHolder":61,"oddProp":75,"oddHolder":53,"oddFamily":47,"pole":54,"rainbowOnly":24,"hosiery":23,"hosieryWearer":63,"hosieryPalette":89,"romance":57,"compound":85,"hardLove":25,"missionPoseTarget":14,"emotions":{"Radiance":73,"Ellie":1,"Alia":39,"AI ECE":73,"AI ECE disambiguation":64,"Male":43},"cuts":{"Radiance":[69,90,27],"Ellie":[1,10,27],"Alia":[51,64,33],"AI ECE":[25,42,23]}},
+    "1559": {"weather":7,"mascotState":3,"mascotHolder":72,"oddProp":48,"oddHolder":70,"oddFamily":24,"pole":31,"rainbowOnly":39,"hosiery":86,"hosieryWearer":34,"hosieryPalette":50,"romance":90,"compound":24,"hardLove":80,"missionPoseTarget":81,"emotions":{"Radiance":8,"Ellie":38,"Alia":90,"AI ECE":64},"cuts":{"Radiance":[90,1,78],"Ellie":[12,55,76],"Alia":[48,35,56],"AI ECE":[34,89,70]}}
+  },
+  "rollAuditHashes": {"primaryPairCount":110,"primarySha256":"2E2A01BA1BCAD51EC118C77865FA9444C81D310AEE4C46A0866636C76E23A21A","selectorPairCount":20,"selectorSha256":"6FAA2BA50CBD6C7689F70581442520BB0A7A47E8316160FBB7643F7B7DAA1A19"},
+  "scenePlans": {
+    "1556":{"location":"Ujumbe Palace and Mutsamudu waterfront, Anjouan","layout":"country-led hybrid","promptPath":"tmp/world-195x4/batch-384/scene-1556-initial-prompt.txt","promptSha256":"1BA2B1D74421EC9DE1FCC9ACC47739922A1B3BFC230FE3C87956E60EE2D0C4CF","promptBytes":3940},
+    "1557":{"location":"Coelacanth National Park basalt coast, Grande Comore","layout":"country-led hybrid","promptPath":"tmp/world-195x4/batch-384/scene-1557-initial-prompt.txt","promptSha256":"1BBF31469CAEA4057C97E8012B994DC95207D6951140A79560030F4D77AE8CC1","promptBytes":3896},
+    "1558":{"location":"Karthala National Park caldera, Grande Comore","layout":"theme-led original","promptPath":"tmp/world-195x4/batch-384/scene-1558-initial-prompt.txt","promptSha256":"235F249F9C52A23648233B26FBC9D8AAB5EF1301A4A5B7A8A3DF6C24E3651D87","promptBytes":3740},
+    "1559":{"location":"Mwali Biosphere Reserve lagoon, Moheli","layout":"theme-led original","promptPath":"tmp/world-195x4/batch-384/scene-1559-initial-prompt.txt","promptSha256":"B46DCE7B02C0E522758B6269B63F633E5909B177E345E3D894D3398CFCF688A2","promptBytes":3676}
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "scene-1556-failed-output-moderation-scenes-1557-1559-no-terminal",
+      "launchMode": "four scene prompts submitted concurrently; the wrapper surfaced scene 1556 rejection and exited while scenes 1557-1559 produced no terminal events or bytes; only untouched no-terminal slots may be submitted concurrently to complete this same initial pass",
+      "allocation": {"A":1556,"B":1557,"C":1558,"D":1559},
+      "sourceMode": "original identity anchors only; no country render input",
+      "events": [
+        {
+          "scene": 1556,
+          "callId": "exec-01d34af0-da92-4bc5-81ae-da6d25000147",
+          "occurredAt": "2026-08-13T13:00:54.188Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "3d96ff93-4390-47aa-aaf2-670345648e35",
+          "categories": ["sexual"],
+          "promptPath": "tmp/world-195x4/batch-384/scene-1556-initial-prompt.txt",
+          "promptSha256": "1BA2B1D74421EC9DE1FCC9ACC47739922A1B3BFC230FE3C87956E60EE2D0C4CF",
+          "promptBytes": 3940,
+          "rawState": "no-bytes"
+        }
+      ],
+      "untouchedNoTerminalSceneNumbers": [1557,1558,1559]
+    },
+    "pass2": {"status":"not-authorized-before-single-pass-audit"}
+  },
+  "acceptedAssets": [],
+  "hardSafeAcceptedCount": 0,
+  "missingSceneNumbers": [1556,1557,1558,1559],
+  "xPost": {"status":"ineligible-pending-four-hard-safe-assets","caption":"Comoros ❤️ Fiji #Comoros","url":null},
+  "nextQueue": {"nextCountry":null,"nextBatch":385,"sceneNumbers":[1560,1561,1562,1563],"lockedUntilBatch384Closed":true}
+}
