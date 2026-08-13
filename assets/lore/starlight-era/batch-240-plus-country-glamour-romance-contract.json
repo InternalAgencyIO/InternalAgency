@@ -626,14 +626,41 @@
     "requestedAt": "2026-08-11T07:22:46.656Z",
     "startingCountry": "Georgia",
     "intent": "Keep rendering, X publication, Git checkpoints, and country advancement synchronized with one complete four-scene country at a time.",
-    "countryCompletionDefinition": "A country is complete only when each of its four planned scene numbers has exactly one accepted current-country asset, the narrow checkpoint and directly related contract or ledger updates are committed and pushed to agent/iat-launch-window-recovery-batch-220, and the country X post is publicly verified with its status URL recorded in both checkpoint and publishing ledger.",
+    "countryCompletionDefinition": "A country is complete only when each of its four planned scene numbers has exactly one accepted current-country asset, the narrow checkpoint and directly related contract, progress-archive, or ledger updates are committed and explicitly pushed to agent/starlight-progress-archive, and the country X post is publicly verified with its status URL recorded in both checkpoint and publishing ledger.",
     "noAdvanceRule": "Never open, roll, render, checkpoint as terminal, or advance to the next country while the active country has fewer than four accepted scenes, an unpushed country checkpoint, or an unpublished or unverified X post. Terminal zero-accepted and terminal partially-accepted outcomes are forbidden from Batch 382 onward.",
     "renderContinuation": "Preserve every raw output and every accepted scene. Rerender only missing or rejected scenes. Follow rapidConsolidatedRenderPolicy: one initial coordinated generation wave plus at most two consolidated correction waves per country batch. Never restart an unlimited fresh-round chain on later guardian wakes.",
     "acceptanceRule": "Apply every active contract field and strict anatomy, identity, safety, romance, mascot, odd-prop, theme-location, and outfit-originality gates. Do not lower the gate merely to advance the queue.",
     "xEligibility": "Exactly four accepted current-country scene assets are required before composing the country post. Keep the existing deterministic caption and attachment rules, verify the live status, record its URL, and never duplicate media already present on the signed-in account.",
     "xBacklogRule": "At every wake reconcile the local ledger against the signed-in live X profile before posting. Drain every eligible unposted historical entry without duplication, then publish the completed active country before any country advance. An X platform or session failure keeps the active country open and must be retried; it is not permission to skip posting.",
-    "gitCadence": "Push every coherent contract repair and every narrow country progress or completion checkpoint promptly. Stage only the active batch, directly requested contract or publishing-ledger updates, and accepted assets for that batch; leave unrelated dirty files untouched.",
+    "gitCadence": "Push every coherent contract repair and every narrow country progress or completion checkpoint promptly to agent/starlight-progress-archive with an explicit refspec. Preserve canonical accepted assets under assets and preserve every generated image or video through generatedMediaProgressArchive. Never use a bare push from a divergently tracked branch.",
     "historicalBoundary": "Do not rewrite or reopen Batch 381 or earlier solely because it ended with zero or partial acceptance. The strict four-scene completion gate begins with Georgia Batch 382."
+  },
+  "generatedMediaProgressArchive": {
+    "active": true,
+    "requestedAt": "2026-08-13T06:33:35.425Z",
+    "userDirective": "Keep a public GitHub trail of every image and video output by Codex, including rejected, unused, unrelated-request, intermediate, QA, superseded, and accepted footage.",
+    "scope": "Every locally discoverable image or video created, edited, rendered, or handled by Codex for this project, including failed and zero-byte output occurrences.",
+    "archiveRoot": "progress-reports/codex-generated-media",
+    "manifest": "progress-reports/codex-generated-media/manifest.jsonl",
+    "blobRoot": "progress-reports/codex-generated-media/blobs",
+    "collector": "scripts/archive-generated-media.mjs",
+    "appendOnly": true,
+    "contentAddressing": "Store external or ignored binary content once by SHA-256 under a two-hex-prefix shard while recording every source occurrence in the manifest.",
+    "repositoryMediaPolicy": "Keep useful repository media at its existing path and point the manifest there instead of duplicating it.",
+    "acceptedAssetsRemainCanonical": true,
+    "archiveEntryNeverImpliesAcceptance": true,
+    "largeBinaryPolicy": "Git LFS",
+    "publicationBranch": "agent/starlight-progress-archive",
+    "pushRule": "Use git push origin HEAD:refs/heads/agent/starlight-progress-archive and verify the remote SHA. Never use a bare push.",
+    "historicalBackfill": {
+      "status": "completed-committed-pushed-and-remote-verified",
+      "occurrenceCount": 3902,
+      "externalBlobCount": 745,
+      "remoteCommit": "60a9f7afa6392ce1a34a531e0a9e41a1dca34327",
+      "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+    },
+    "futureCadence": "Collect, commit, explicitly push, and remote-verify every generated four-slot bank before opening a later bank or country. Preserve all four raws regardless of acceptance.",
+    "acceptanceEffect": "Archive presence never changes acceptedAssets, acceptedSceneCount, X eligibility, or queue advancement."
   },
   "rapidConsolidatedRenderPolicy": {
     "active": true,
@@ -730,8 +757,67 @@
       "passesPerCountry": 2,
       "slotsPerPass": 4,
       "execution": "Pass one is the initial coordinated bank. Pass two is one holistic correction bank that combines every known defect. Launch all four slots concurrently, preserve every raw, and never rerender an accepted scene.",
-      "completionGate": "Advancement still requires four accepted current-country scene assets, the narrow checkpoint committed and pushed to the recovery branch, and one publicly verified X status URL.",
-      "exhaustion": "If fewer than four scenes are accepted after pass two, stop automatic rendering, keep the country active and nonterminal, block X and the next country, and notify the user. A later heartbeat audits state but does not create a third bank."
+      "completionGate": "Advancement still requires four accepted current-country scene assets, the narrow checkpoint and generated-media trail committed and explicitly pushed to agent/starlight-progress-archive, and one publicly verified X status URL.",
+      "exhaustion": "If fewer than four scenes are accepted after pass two, stop automatic rendering, keep the country active and nonterminal, block X and the next country, and notify the user. A later heartbeat audits state but does not create a third bank.",
+      "oneTimeGeorgiaScene1551Reauthorization": {
+        "active": true,
+        "requestedAt": "2026-08-13T06:33:35.425Z",
+        "explicitUserContractChange": true,
+        "userDirective": "Locate and upload the public in-progress backlog, then go next renders.",
+        "status": "authorized-prerequisite-satisfied-round-50-pending",
+        "prerequisite": {
+          "kind": "generated-media-backlog-committed-pushed-and-remote-verified",
+          "status": "satisfied",
+          "branch": "agent/starlight-progress-archive",
+          "commit": "60a9f7afa6392ce1a34a531e0a9e41a1dca34327",
+          "verifiedAt": "2026-08-13T06:33:35.425Z",
+          "draftPullRequest": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+        },
+        "batch": 382,
+        "country": "Georgia",
+        "sceneNumbers": [
+          1551
+        ],
+        "preservedAcceptedSceneNumbers": [
+          1548,
+          1549,
+          1550
+        ],
+        "authorizedRoundNumbers": [
+          50,
+          51
+        ],
+        "originalIdentityAnchors": [
+          "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "assets/lore/starlight-era/ece-canonical-identity-v1.png"
+        ],
+        "round50": {
+          "mode": "initial-four-slot-clean-bank",
+          "slots": 4,
+          "allocation": {
+            "A": 1551,
+            "B": 1551,
+            "C": 1551,
+            "D": 1551
+          },
+          "launchMode": "four-concurrent-independent-image-generation-calls",
+          "sourceMode": "original-identity-anchors-only",
+          "priorBatumiRenderInputCount": 0
+        },
+        "round51": {
+          "launchCondition": "round50-all-rejected",
+          "mode": "one-holistic-four-slot-correction-bank",
+          "slots": 4,
+          "correctionRule": "Complete one strict audit of all round-50 candidates and fold every known defect into one revised common prompt.",
+          "sourceMode": "four-fresh-generations-from-original-identity-anchors-only",
+          "editOfRejectedOutputAllowed": false
+        },
+        "earlyStopRule": "If round 50 yields an exact pass, accept the first passing slot in A-D order and do not run round 51.",
+        "archiveRule": "Preserve, collect, commit, explicitly push, and remote-verify all four raw outputs before a later bank or country.",
+        "exhaustionRule": "If round 51 also fails, stop automatic rendering, keep Georgia active and nonterminal, block Fiji and X, and require another explicit contract change. No round 52 or third bank is permitted."
+      }
     }
   },
   "anatomyIntegrity": {
