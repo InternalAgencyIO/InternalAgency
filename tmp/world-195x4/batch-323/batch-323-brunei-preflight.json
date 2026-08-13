@@ -1,0 +1,1321 @@
+{
+  "batch": 323,
+  "country": "Brunei",
+  "status": "render-preflight-stored",
+  "sourceCommit": "a135aefd7197d3fddd89359d56cb1f43f4349c73",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch323-brunei keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "Belize",
+  "nextQueueBatch": 324,
+  "nextQueueScenes": [
+    1316,
+    1317,
+    1318,
+    1319
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.bruneitourism.com/places/kampong-ayer/",
+      "usedFor": "Kampong Ayer stilt settlements, wooden lanes, bridges, water channels, and Brunei River setting"
+    },
+    {
+      "url": "https://www.bruneitourism.com/temburong/",
+      "usedFor": "Ulu Temburong rainforest, canopy walks, river routes, biodiversity, and the Temburong Bridge"
+    },
+    {
+      "url": "https://www.explorebrunei.gov.bn/recreational-brunei-muara/",
+      "usedFor": "Temburong sea bridge over Brunei Bay, mangrove landscapes, and Tanjung Batu Beach open-sea sunset setting"
+    },
+    {
+      "url": "https://www.fisheries.gov.bn/SitePages/Ulu%20Temburong%20National%20Park.aspx",
+      "usedFor": "dense Ulu Temburong canopy layers and protected forest setting"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch323-brunei-male-model-scene",
+    "fullHash": 2477480014,
+    "roll": 14,
+    "selectedScenePosition": 3,
+    "selectedScene": 1314,
+    "maleEmotion": {
+      "key": "batch323-brunei-scene3-male-emotion",
+      "roll": 3,
+      "result": "tender affection"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Brunei flag, coat of arms, official emblem, sacred symbol, palace, or religious building is copied. Large researched secular river, stilt-grid, rainforest, bridge, mangrove, bay, coast, cloud, and route compositions replace them.",
+    "palette": "river turquoise, rainforest emerald, mangrove jade, bridge silver, stiltwood bronze, sunset gold, cloud white, orchid magenta, deep-water navy, and charcoal black",
+    "minimumCoverage": "Every image carries large complete secular Brunei compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Kampong Ayer, Ulu Temburong, the Temburong sea bridge over Brunei Bay, and Tanjung Batu Beach near Muara.",
+    "prohibitions": "Use respectful secular Brunei river channels, stilt-house grids, timber walkways, rainforest canopies, river bends, mangrove roots, longboat wakes, bridge spans, bay curves, coastlines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, palace, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch323-brunei-x-heart",
+      "roll": 99,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch323-brunei-x-internalagency",
+      "roll": 15,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch323-brunei-x-worldxxxseries",
+      "roll": 72,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Brunei images plus one accepted Cabo Verde image",
+    "captionIfEligible": "Brunei 🤍 Cabo Verde #Brunei #InternalAgency",
+    "internalAgencyHashtagActive": true,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1314 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1314 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch323-brunei-male-model-scene",
+        14
+      ],
+      [
+        "batch323-brunei-scene3-male-emotion",
+        3
+      ],
+      [
+        "batch323-brunei-scene1312-weather",
+        92
+      ],
+      [
+        "batch323-brunei-scene1312-paws",
+        1
+      ],
+      [
+        "batch323-brunei-scene1312-poleDanceTheme",
+        26
+      ],
+      [
+        "batch323-brunei-scene1312-rainbowOnly",
+        88
+      ],
+      [
+        "batch323-brunei-scene1312-rainbowHosiery",
+        67
+      ],
+      [
+        "batch323-brunei-scene1312-romanceBeat",
+        53
+      ],
+      [
+        "batch323-brunei-scene1312-compoundLoveBeat",
+        77
+      ],
+      [
+        "batch323-brunei-scene1312-eceMissionProp-poseTargetRoll",
+        74
+      ],
+      [
+        "batch323-brunei-scene1312-Radiance-emotion",
+        9
+      ],
+      [
+        "batch323-brunei-scene1312-Radiance-visibleMidriff",
+        1
+      ],
+      [
+        "batch323-brunei-scene1312-Radiance-straplessDress",
+        94
+      ],
+      [
+        "batch323-brunei-scene1312-Radiance-fullyOpenBack",
+        91
+      ],
+      [
+        "batch323-brunei-scene1312-Ellie-emotion",
+        33
+      ],
+      [
+        "batch323-brunei-scene1312-Ellie-visibleMidriff",
+        1
+      ],
+      [
+        "batch323-brunei-scene1312-Ellie-straplessDress",
+        78
+      ],
+      [
+        "batch323-brunei-scene1312-Ellie-fullyOpenBack",
+        63
+      ],
+      [
+        "batch323-brunei-scene1312-Alia-emotion",
+        3
+      ],
+      [
+        "batch323-brunei-scene1312-Alia-visibleMidriff",
+        95
+      ],
+      [
+        "batch323-brunei-scene1312-Alia-straplessDress",
+        72
+      ],
+      [
+        "batch323-brunei-scene1312-Alia-fullyOpenBack",
+        9
+      ],
+      [
+        "batch323-brunei-scene1312-AI ECE-emotion",
+        41
+      ],
+      [
+        "batch323-brunei-scene1312-AI ECE-visibleMidriff",
+        1
+      ],
+      [
+        "batch323-brunei-scene1312-AI ECE-straplessDress",
+        18
+      ],
+      [
+        "batch323-brunei-scene1312-AI ECE-fullyOpenBack",
+        31
+      ],
+      [
+        "batch323-brunei-scene1313-weather",
+        75
+      ],
+      [
+        "batch323-brunei-scene1313-paws",
+        52
+      ],
+      [
+        "batch323-brunei-scene1313-poleDanceTheme",
+        55
+      ],
+      [
+        "batch323-brunei-scene1313-rainbowOnly",
+        91
+      ],
+      [
+        "batch323-brunei-scene1313-rainbowHosiery",
+        2
+      ],
+      [
+        "batch323-brunei-scene1313-romanceBeat",
+        34
+      ],
+      [
+        "batch323-brunei-scene1313-compoundLoveBeat",
+        28
+      ],
+      [
+        "batch323-brunei-scene1313-eceMissionProp-poseTargetRoll",
+        89
+      ],
+      [
+        "batch323-brunei-scene1313-Radiance-emotion",
+        32
+      ],
+      [
+        "batch323-brunei-scene1313-Radiance-visibleMidriff",
+        34
+      ],
+      [
+        "batch323-brunei-scene1313-Radiance-straplessDress",
+        81
+      ],
+      [
+        "batch323-brunei-scene1313-Radiance-fullyOpenBack",
+        62
+      ],
+      [
+        "batch323-brunei-scene1313-Ellie-emotion",
+        42
+      ],
+      [
+        "batch323-brunei-scene1313-Ellie-visibleMidriff",
+        84
+      ],
+      [
+        "batch323-brunei-scene1313-Ellie-straplessDress",
+        55
+      ],
+      [
+        "batch323-brunei-scene1313-Ellie-fullyOpenBack",
+        60
+      ],
+      [
+        "batch323-brunei-scene1313-Alia-emotion",
+        54
+      ],
+      [
+        "batch323-brunei-scene1313-Alia-visibleMidriff",
+        36
+      ],
+      [
+        "batch323-brunei-scene1313-Alia-straplessDress",
+        3
+      ],
+      [
+        "batch323-brunei-scene1313-Alia-fullyOpenBack",
+        96
+      ],
+      [
+        "batch323-brunei-scene1313-AI ECE-emotion",
+        12
+      ],
+      [
+        "batch323-brunei-scene1313-AI ECE-visibleMidriff",
+        66
+      ],
+      [
+        "batch323-brunei-scene1313-AI ECE-straplessDress",
+        85
+      ],
+      [
+        "batch323-brunei-scene1313-AI ECE-fullyOpenBack",
+        26
+      ],
+      [
+        "batch323-brunei-scene1314-weather",
+        26
+      ],
+      [
+        "batch323-brunei-scene1314-paws",
+        47
+      ],
+      [
+        "batch323-brunei-scene1314-poleDanceTheme",
+        8
+      ],
+      [
+        "batch323-brunei-scene1314-rainbowOnly",
+        22
+      ],
+      [
+        "batch323-brunei-scene1314-rainbowHosiery",
+        13
+      ],
+      [
+        "batch323-brunei-scene1314-romanceBeat",
+        11
+      ],
+      [
+        "batch323-brunei-scene1314-compoundLoveBeat",
+        3
+      ],
+      [
+        "batch323-brunei-scene1314-eceMissionProp-poseTargetRoll",
+        76
+      ],
+      [
+        "batch323-brunei-scene1314-Radiance-emotion",
+        63
+      ],
+      [
+        "batch323-brunei-scene1314-Radiance-visibleMidriff",
+        27
+      ],
+      [
+        "batch323-brunei-scene1314-Radiance-straplessDress",
+        40
+      ],
+      [
+        "batch323-brunei-scene1314-Radiance-fullyOpenBack",
+        45
+      ],
+      [
+        "batch323-brunei-scene1314-Ellie-emotion",
+        11
+      ],
+      [
+        "batch323-brunei-scene1314-Ellie-visibleMidriff",
+        15
+      ],
+      [
+        "batch323-brunei-scene1314-Ellie-straplessDress",
+        36
+      ],
+      [
+        "batch323-brunei-scene1314-Ellie-fullyOpenBack",
+        85
+      ],
+      [
+        "batch323-brunei-scene1314-Alia-emotion",
+        37
+      ],
+      [
+        "batch323-brunei-scene1314-Alia-visibleMidriff",
+        65
+      ],
+      [
+        "batch323-brunei-scene1314-Alia-straplessDress",
+        22
+      ],
+      [
+        "batch323-brunei-scene1314-Alia-fullyOpenBack",
+        15
+      ],
+      [
+        "batch323-brunei-scene1314-AI ECE-emotion",
+        95
+      ],
+      [
+        "batch323-brunei-scene1314-AI ECE-visibleMidriff",
+        15
+      ],
+      [
+        "batch323-brunei-scene1314-AI ECE-straplessDress",
+        88
+      ],
+      [
+        "batch323-brunei-scene1314-AI ECE-fullyOpenBack",
+        65
+      ],
+      [
+        "batch323-brunei-scene1315-weather",
+        85
+      ],
+      [
+        "batch323-brunei-scene1315-paws",
+        34
+      ],
+      [
+        "batch323-brunei-scene1315-poleDanceTheme",
+        65
+      ],
+      [
+        "batch323-brunei-scene1315-rainbowOnly",
+        53
+      ],
+      [
+        "batch323-brunei-scene1315-rainbowHosiery",
+        0
+      ],
+      [
+        "batch323-brunei-scene1315-romanceBeat",
+        60
+      ],
+      [
+        "batch323-brunei-scene1315-compoundLoveBeat",
+        58
+      ],
+      [
+        "batch323-brunei-scene1315-eceMissionProp-poseTargetRoll",
+        91
+      ],
+      [
+        "batch323-brunei-scene1315-Radiance-emotion",
+        26
+      ],
+      [
+        "batch323-brunei-scene1315-Radiance-visibleMidriff",
+        28
+      ],
+      [
+        "batch323-brunei-scene1315-Radiance-straplessDress",
+        91
+      ],
+      [
+        "batch323-brunei-scene1315-Radiance-fullyOpenBack",
+        16
+      ],
+      [
+        "batch323-brunei-scene1315-Ellie-emotion",
+        0
+      ],
+      [
+        "batch323-brunei-scene1315-Ellie-visibleMidriff",
+        94
+      ],
+      [
+        "batch323-brunei-scene1315-Ellie-straplessDress",
+        1
+      ],
+      [
+        "batch323-brunei-scene1315-Ellie-fullyOpenBack",
+        38
+      ],
+      [
+        "batch323-brunei-scene1315-Alia-emotion",
+        20
+      ],
+      [
+        "batch323-brunei-scene1315-Alia-visibleMidriff",
+        2
+      ],
+      [
+        "batch323-brunei-scene1315-Alia-straplessDress",
+        13
+      ],
+      [
+        "batch323-brunei-scene1315-Alia-fullyOpenBack",
+        78
+      ],
+      [
+        "batch323-brunei-scene1315-AI ECE-emotion",
+        30
+      ],
+      [
+        "batch323-brunei-scene1315-AI ECE-visibleMidriff",
+        60
+      ],
+      [
+        "batch323-brunei-scene1315-AI ECE-straplessDress",
+        51
+      ],
+      [
+        "batch323-brunei-scene1315-AI ECE-fullyOpenBack",
+        88
+      ],
+      [
+        "batch323-brunei-x-heart",
+        99
+      ],
+      [
+        "batch323-brunei-x-internalagency",
+        15
+      ],
+      [
+        "batch323-brunei-x-worldxxxseries",
+        72
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch323-brunei-scene1312-rainbowHosieryWearer",
+        43
+      ],
+      [
+        "batch323-brunei-scene1312-rainbowHosieryPaletteMode",
+        53
+      ],
+      [
+        "batch323-brunei-scene1313-rainbowHosieryWearer",
+        50
+      ],
+      [
+        "batch323-brunei-scene1313-rainbowHosieryPaletteMode",
+        62
+      ],
+      [
+        "batch323-brunei-scene1314-rainbowHosieryWearer",
+        85
+      ],
+      [
+        "batch323-brunei-scene1314-rainbowHosieryPaletteMode",
+        15
+      ],
+      [
+        "batch323-brunei-scene1315-rainbowHosieryWearer",
+        64
+      ],
+      [
+        "batch323-brunei-scene1315-rainbowHosieryPaletteMode",
+        44
+      ]
+    ],
+    "primaryPairCount": 101,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "55A2BC250FB54E1F614725CF37FBB23B42CC97CEE088738B2ABFAE02697E122C",
+    "selectorPairsSha256": "05E1243BF10BD04472964B92D5AD34D1E0F433C1F5F9B23A70F80E43DE0AE5D8"
+  },
+  "scenePlans": {
+    "1312": {
+      "scene": 1312,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered public platform above Kampong Ayer on the Brunei River, with a complete layered grid of stilt houses, timber walkways, footbridges, water-taxi wakes, mangrove edges, open river channels, and a sunset Bandar Seri Begawan skyline containing no palace or religious building",
+      "motifs": "complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions",
+      "culture": "Kampong Ayer is presented through its historic stilt settlement, wooden lanes, bridges, lively Brunei River channels, and public cultural gallery setting. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle.",
+      "weather": {
+        "key": "batch323-brunei-scene1312-weather",
+        "roll": 92,
+        "result": "distant volcanic-ash sunset sky",
+        "materialized": "distant volcanic-ash sunset sky"
+      },
+      "paws": {
+        "key": "batch323-brunei-scene1312-paws",
+        "roll": 1,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch323-brunei-scene1312-poleDanceTheme",
+        "roll": 26,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch323-brunei-scene1312-rainbowOnly",
+        "roll": 88,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch323-brunei-scene1312-rainbowHosiery",
+        "roll": 67,
+        "active": false,
+        "wearer": {
+          "key": "batch323-brunei-scene1312-rainbowHosieryWearer",
+          "roll": 43,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch323-brunei-scene1312-rainbowHosieryPaletteMode",
+          "roll": 53,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch323-brunei-scene1312-eceMissionProp-poseTargetRoll",
+        "roll": 74
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete sand-filled timber safety backstop on a closed empty platform lane, with no person, animal, boat, house, structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete sand-filled timber safety backstop on a closed empty platform lane, with no person, animal, boat, house, structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch323-brunei-scene1312-romanceBeat",
+        "roll": 53,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch323-brunei-scene1312-compoundLoveBeat",
+        "roll": 77,
+        "index": 5,
+        "contractResult": "Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch323-brunei-scene1312-Radiance-emotion",
+            "roll": 9,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1312-Radiance-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1312-Radiance-straplessDress",
+            "roll": 94,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1312-Radiance-fullyOpenBack",
+            "roll": 91,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch323-brunei-scene1312-Ellie-emotion",
+            "roll": 33,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1312-Ellie-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1312-Ellie-straplessDress",
+            "roll": 78,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1312-Ellie-fullyOpenBack",
+            "roll": 63,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch323-brunei-scene1312-Alia-emotion",
+            "roll": 3,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1312-Alia-visibleMidriff",
+            "roll": 95,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1312-Alia-straplessDress",
+            "roll": 72,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1312-Alia-fullyOpenBack",
+            "roll": 9,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch323-brunei-scene1312-AI ECE-emotion",
+            "roll": 41,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1312-AI ECE-visibleMidriff",
+            "roll": 1,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1312-AI ECE-straplessDress",
+            "roll": 18,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1312-AI ECE-fullyOpenBack",
+            "roll": 31,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "river turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels",
+        "Ellie": "orchid magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-water navy adult nightlife dance-performance couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through an affectionate crescent to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against river, sky, walkway, or house gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and retains sole ownership",
+        "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder",
+        "Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Ellie's near shoulder"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered public platform above Kampong Ayer on the Brunei River, with a complete layered grid of stilt houses, timber walkways, footbridges, water-taxi wakes, mangrove edges, open river channels, and a sunset Bandar Seri Begawan skyline containing no palace or religious building. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. Kampong Ayer is presented through its historic stilt settlement, wooden lanes, bridges, lively Brunei River channels, and public cultural gallery setting. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle. Stored scene rolls: weather 92=distant volcanic-ash sunset sky; PAWS 1=active; pole 26=inactive; rainbow-only 88=inactive; rainbow hosiery 67=inactive; wearer 43=Radiance; palette 53=original independent rainbow gradient; romance 53; compound 77; mission-prop pose/target 74. Exact wardrobe rolls: Radiance: midriff 1=visible, strapless 94=inactive, open back 91=inactive; Ellie: midriff 1=visible, strapless 78=inactive, open back 63=inactive; Alia: midriff 95=covered, strapless 72=inactive, open back 9=active; AI ECE: midriff 1=visible, strapless 18=active, open back 31=inactive. Exact outfits: Radiance: river turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels; Ellie: orchid magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels; Alia: rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels; AI ECE: deep-water navy adult nightlife dance-performance couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Brunei motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Brunei River bend, Kampong Ayer stilt-house grid, timber-walkway weave, footbridge arc, water-taxi wake, mangrove-root fan, sunset cloud band, and empty route-channel compositions. Use respectful secular Brunei river channels, stilt-house grids, timber walkways, rainforest canopies, river bends, mangrove roots, longboat wakes, bridge spans, bay curves, coastlines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, palace, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 9=romantic joy, performed as romantic joy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 33=overwhelming relief, performed as overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 3=tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 41=determination, performed as determination expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 53: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Compound roll 77: Radiance embraces Ellie from behind while Ellie turns her face to meet Alia cheek-to-cheek; ECE gently catches Ellie's wrist before she can move closer. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through an affectionate crescent to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against river, sky, walkway, or house gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and retains sole ownership; Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder; Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Ellie's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete sand-filled timber safety backstop on a closed empty platform lane, with no person, animal, boat, house, structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render distant volcanic-ash sunset sky cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1313": {
+      "scene": 1313,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry nonslip canopy-view platform in Ulu Temburong National Park, with complete steel canopy towers, layered ancient rainforest crowns, a winding Temburong tributary, mist bands, longboat wakes far below, and protected green horizons",
+      "motifs": "complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions",
+      "culture": "Ulu Temburong is presented as Brunei's protected rainforest landscape through dense canopy, high canopy walks, river routes, biodiversity, and quiet observation. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle.",
+      "weather": {
+        "key": "batch323-brunei-scene1313-weather",
+        "roll": 75,
+        "result": "dramatic sandstorm wall",
+        "materialized": "the stored dramatic-sandstorm-wall roll appears as a distant ochre wall of windblown river mist and pollen haze beyond the sheltered rainforest canopy, with a dry nonslip platform"
+      },
+      "paws": {
+        "key": "batch323-brunei-scene1313-paws",
+        "roll": 52,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch323-brunei-scene1313-poleDanceTheme",
+        "roll": 55,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch323-brunei-scene1313-rainbowOnly",
+        "roll": 91,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch323-brunei-scene1313-rainbowHosiery",
+        "roll": 2,
+        "active": true,
+        "wearer": {
+          "key": "batch323-brunei-scene1313-rainbowHosieryWearer",
+          "roll": 50,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch323-brunei-scene1313-rainbowHosieryPaletteMode",
+          "roll": 62,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch323-brunei-scene1313-eceMissionProp-poseTargetRoll",
+        "roll": 89
+      },
+      "materializedPropAction": "Alia demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty canopy-platform lane, with no person, animal, structure, or camera in or beyond the line. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty canopy-platform lane, with no person, animal, structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch323-brunei-scene1313-romanceBeat",
+        "roll": 34,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch323-brunei-scene1313-compoundLoveBeat",
+        "roll": 28,
+        "index": 4,
+        "contractResult": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch323-brunei-scene1313-Radiance-emotion",
+            "roll": 32,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1313-Radiance-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1313-Radiance-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1313-Radiance-fullyOpenBack",
+            "roll": 62,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch323-brunei-scene1313-Ellie-emotion",
+            "roll": 42,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1313-Ellie-visibleMidriff",
+            "roll": 84,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1313-Ellie-straplessDress",
+            "roll": 55,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1313-Ellie-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch323-brunei-scene1313-Alia-emotion",
+            "roll": 54,
+            "result": "aching romantic longing",
+            "materializedResult": "aching romantic longing",
+            "performance": "aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1313-Alia-visibleMidriff",
+            "roll": 36,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1313-Alia-straplessDress",
+            "roll": 3,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1313-Alia-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch323-brunei-scene1313-AI ECE-emotion",
+            "roll": 12,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1313-AI ECE-visibleMidriff",
+            "roll": 66,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1313-AI ECE-straplessDress",
+            "roll": 85,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1313-AI ECE-fullyOpenBack",
+            "roll": 26,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "overwhelming relief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "river turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels",
+        "Ellie": "orchid magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald adult nightlife dance-performance couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-water navy adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close rotating triangle to the right, every arm separated by sky, mist, canopy, tower, or railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry nonslip canopy-view platform in Ulu Temburong National Park, with complete steel canopy towers, layered ancient rainforest crowns, a winding Temburong tributary, mist bands, longboat wakes far below, and protected green horizons. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. Ulu Temburong is presented as Brunei's protected rainforest landscape through dense canopy, high canopy walks, river routes, biodiversity, and quiet observation. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle. Stored scene rolls: weather 75=dramatic sandstorm wall; PAWS 52=inactive; pole 55=inactive; rainbow-only 91=inactive; rainbow hosiery 2=active; wearer 50=AI ECE; palette 62=original independent rainbow gradient; romance 34; compound 28; mission-prop pose/target 89. Exact wardrobe rolls: Radiance: midriff 34=visible, strapless 81=inactive, open back 62=inactive; Ellie: midriff 84=covered, strapless 55=inactive, open back 60=inactive; Alia: midriff 36=visible, strapless 3=active, open back 96=inactive; AI ECE: midriff 66=covered, strapless 85=inactive, open back 26=active. Exact outfits: Radiance: river turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels; Ellie: orchid magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels; Alia: rainforest emerald adult nightlife dance-performance couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels; AI ECE: deep-water navy adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Brunei motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Temburong river bend, rainforest-canopy layers, canopy-tower lattice, longboat-wake chevron, mist-band contour, buttress-root fan, leaf-vein route grid, and green-horizon compositions. Use respectful secular Brunei river channels, stilt-house grids, timber walkways, rainforest canopies, river bends, mangrove roots, longboat wakes, bridge spans, bay curves, coastlines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, palace, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 32=overwhelming relief, performed as overwhelming relief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 42=determination, performed as determination expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 54=aching romantic longing, performed as aching romantic longing expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 12=romantic joy, performed as romantic joy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 34: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 28: ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close rotating triangle to the right, every arm separated by sky, mist, canopy, tower, or railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty canopy-platform lane, with no person, animal, structure, or camera in or beyond the line. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an original independent rainbow gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render the stored dramatic-sandstorm-wall roll appears as a distant ochre wall of windblown river mist and pollen haze beyond the sheltered rainforest canopy, with a dry nonslip platform cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1314": {
+      "scene": 1314,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry covered public bay overlook beside the Temburong Bridge approach, with the complete repeating sea-bridge spans crossing Brunei Bay, mangrove islands, tidal channels, open water, silver cloud shelves, and a distant rainforest horizon",
+      "motifs": "complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions",
+      "culture": "The Temburong connection is presented through its long sea-bridge spans over Brunei Bay, mangrove landscapes, tidal channels, and rainforest horizon. Paris runway model couture is original public-safe high fashion for a dynamic editorial route tableau, with no copied brand, runway logo, official uniform, badge, palace, religious symbol, threat, or combat.",
+      "weather": {
+        "key": "batch323-brunei-scene1314-weather",
+        "roll": 26,
+        "result": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast"
+      },
+      "paws": {
+        "key": "batch323-brunei-scene1314-paws",
+        "roll": 47,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch323-brunei-scene1314-poleDanceTheme",
+        "roll": 8,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch323-brunei-scene1314-rainbowOnly",
+        "roll": 22,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch323-brunei-scene1314-rainbowHosiery",
+        "roll": 13,
+        "active": true,
+        "wearer": {
+          "key": "batch323-brunei-scene1314-rainbowHosieryWearer",
+          "roll": 85,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch323-brunei-scene1314-rainbowHosieryPaletteMode",
+          "roll": 15,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch323-brunei-scene1314-eceMissionProp-poseTargetRoll",
+        "roll": 76
+      },
+      "materializedPropAction": "A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker on open Brunei Bay water, with no boat, swimmer, animal, person, bridge pier, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one distant clearly empty floating navigation marker on open Brunei Bay water, with no boat, swimmer, animal, person, bridge pier, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch323-brunei-scene1314-romanceBeat",
+        "roll": 11,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch323-brunei-scene1314-compoundLoveBeat",
+        "roll": 3,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch323-brunei-scene1314-Radiance-emotion",
+            "roll": 63,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1314-Radiance-visibleMidriff",
+            "roll": 27,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1314-Radiance-straplessDress",
+            "roll": 40,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1314-Radiance-fullyOpenBack",
+            "roll": 45,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch323-brunei-scene1314-Ellie-emotion",
+            "roll": 11,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1314-Ellie-visibleMidriff",
+            "roll": 15,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1314-Ellie-straplessDress",
+            "roll": 36,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1314-Ellie-fullyOpenBack",
+            "roll": 85,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch323-brunei-scene1314-Alia-emotion",
+            "roll": 37,
+            "result": "magnetic confidence",
+            "materializedResult": "magnetic confidence",
+            "performance": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1314-Alia-visibleMidriff",
+            "roll": 65,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1314-Alia-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1314-Alia-fullyOpenBack",
+            "roll": 15,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch323-brunei-scene1314-AI ECE-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability",
+            "materializedResult": "shame and social vulnerability",
+            "performance": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1314-AI ECE-visibleMidriff",
+            "roll": 15,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1314-AI ECE-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1314-AI ECE-fullyOpenBack",
+            "roll": 65,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "river turquoise Paris runway model couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels",
+        "Ellie": "orchid magenta Paris runway model couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald Paris runway model couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-water navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, fitted black jeans, and practical black boots"
+      },
+      "composition": "Alia stands far left with the rolled target clearly downrange farther left. The remaining adults cross through a runway-like affectionate arc to the right, never a static lineup, and every arm is isolated against bay, sky, mangrove, or bridge gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on ECE's near forearm",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on ECE's near shoulder",
+        "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+        "ECE left hand rests on the male's near forearm and ECE right hand rests on Radiance's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch323-brunei-scene3-male-emotion",
+          "roll": 3,
+          "result": "tender affection"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered public bay overlook beside the Temburong Bridge approach, with the complete repeating sea-bridge spans crossing Brunei Bay, mangrove islands, tidal channels, open water, silver cloud shelves, and a distant rainforest horizon. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: Paris runway model couture, only as original public-safe fictional fashion. The Temburong connection is presented through its long sea-bridge spans over Brunei Bay, mangrove landscapes, tidal channels, and rainforest horizon. Paris runway model couture is original public-safe high fashion for a dynamic editorial route tableau, with no copied brand, runway logo, official uniform, badge, palace, religious symbol, threat, or combat. Stored scene rolls: weather 26=soft dramatic overcast; PAWS 47=inactive; pole 8=inactive; rainbow-only 22=inactive; rainbow hosiery 13=active; wearer 85=AI ECE; palette 15=country-palette rainbow-like gradient; romance 11; compound 3; mission-prop pose/target 76. Exact wardrobe rolls: Radiance: midriff 27=visible, strapless 40=inactive, open back 45=inactive; Ellie: midriff 15=visible, strapless 36=inactive, open back 85=inactive; Alia: midriff 65=covered, strapless 22=active, open back 15=active; AI ECE: midriff 15=visible, strapless 88=inactive, open back 65=inactive. Exact outfits: Radiance: river turquoise Paris runway model couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels; Ellie: orchid magenta Paris runway model couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels; Alia: rainforest emerald Paris runway model couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels; AI ECE: deep-water navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions field, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Brunei motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Temburong Bridge span rhythm, Brunei Bay curve, mangrove-island chain, tidal-channel braid, silver-cloud shelf, rainforest-horizon band, water-route arc, and structural-cable compositions. Use respectful secular Brunei river channels, stilt-house grids, timber walkways, rainforest canopies, river bends, mangrove roots, longboat wakes, bridge spans, bay curves, coastlines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, palace, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 63=visible jealousy, performed as visible jealousy expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 11=romantic joy, performed as romantic joy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 37=magnetic confidence, performed as magnetic confidence expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 95=shame and social vulnerability, performed as shame and social vulnerability expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 3=tender affection, performed as tender affection expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 11: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Compound roll 3: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left with the rolled target clearly downrange farther left. The remaining adults cross through a runway-like affectionate arc to the right, never a static lineup, and every arm is isolated against bay, sky, mangrove, or bridge gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; the male left hand rests on Ellie's near shoulder and his right hand rests on ECE's near forearm; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on ECE's near shoulder; Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm; ECE left hand rests on the male's near forearm and ECE right hand rests on Radiance's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with Alia establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker on open Brunei Bay water, with no boat, swimmer, animal, person, bridge pier, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render soft dramatic overcast cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1315": {
+      "scene": 1315,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry covered coastal overlook above Tanjung Batu Beach near Muara, with complete open-sea views, pale sand, black shore rocks, mangrove edges, layered wave bands, empty fishing jetties, sunset cloud ribbons, and the distant Brunei Bay horizon",
+      "motifs": "complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions",
+      "culture": "Muara is presented through its quiet public coast, open sea views, sunset beach, shore rocks, mangrove edges, and Brunei Bay horizon. Paris runway model couture is original public-safe high fashion for a dynamic editorial route tableau, with no copied brand, runway logo, official uniform, badge, palace, religious symbol, threat, or combat.",
+      "weather": {
+        "key": "batch323-brunei-scene1315-weather",
+        "roll": 85,
+        "result": "double rainbow after rain",
+        "materialized": "double rainbow after rain"
+      },
+      "paws": {
+        "key": "batch323-brunei-scene1315-paws",
+        "roll": 34,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch323-brunei-scene1315-poleDanceTheme",
+        "roll": 65,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch323-brunei-scene1315-rainbowOnly",
+        "roll": 53,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch323-brunei-scene1315-rainbowHosiery",
+        "roll": 0,
+        "active": true,
+        "wearer": {
+          "key": "batch323-brunei-scene1315-rainbowHosieryWearer",
+          "roll": 64,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch323-brunei-scene1315-rainbowHosieryPaletteMode",
+          "roll": 44,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch323-brunei-scene1315-eceMissionProp-poseTargetRoll",
+        "roll": 91
+      },
+      "materializedPropAction": "Alia demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty overlook lane, with no person, animal, vehicle, jetty, structure, or camera in or beyond the line. No ammunition, reload, firing, or trigger contact appears.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty overlook lane, with no person, animal, vehicle, jetty, structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch323-brunei-scene1315-romanceBeat",
+        "roll": 60,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch323-brunei-scene1315-compoundLoveBeat",
+        "roll": 58,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch323-brunei-scene1315-Radiance-emotion",
+            "roll": 26,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1315-Radiance-visibleMidriff",
+            "roll": 28,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1315-Radiance-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1315-Radiance-fullyOpenBack",
+            "roll": 16,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch323-brunei-scene1315-Ellie-emotion",
+            "roll": 0,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1315-Ellie-visibleMidriff",
+            "roll": 94,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1315-Ellie-straplessDress",
+            "roll": 1,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1315-Ellie-fullyOpenBack",
+            "roll": 38,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch323-brunei-scene1315-Alia-emotion",
+            "roll": 20,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1315-Alia-visibleMidriff",
+            "roll": 2,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1315-Alia-straplessDress",
+            "roll": 13,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1315-Alia-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch323-brunei-scene1315-AI ECE-emotion",
+            "roll": 30,
+            "result": "hope",
+            "materializedResult": "hope",
+            "performance": "hope expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch323-brunei-scene1315-AI ECE-visibleMidriff",
+            "roll": 60,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch323-brunei-scene1315-AI ECE-straplessDress",
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch323-brunei-scene1315-AI ECE-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "calm contentment expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "playful mischief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "hope expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "river turquoise Paris runway model couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels",
+        "Ellie": "orchid magenta Paris runway model couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald Paris runway model couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-water navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate runway crescent to the right beneath the shelter, with every arm separated by sky, sea, mangrove, or railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered coastal overlook above Tanjung Batu Beach near Muara, with complete open-sea views, pale sand, black shore rocks, mangrove edges, layered wave bands, empty fishing jetties, sunset cloud ribbons, and the distant Brunei Bay horizon. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: Paris runway model couture, only as original public-safe fictional fashion. Muara is presented through its quiet public coast, open sea views, sunset beach, shore rocks, mangrove edges, and Brunei Bay horizon. Paris runway model couture is original public-safe high fashion for a dynamic editorial route tableau, with no copied brand, runway logo, official uniform, badge, palace, religious symbol, threat, or combat. Stored scene rolls: weather 85=double rainbow after rain; PAWS 34=inactive; pole 65=inactive; rainbow-only 53=inactive; rainbow hosiery 0=active; wearer 64=AI ECE; palette 44=country-palette rainbow-like gradient; romance 60; compound 58; mission-prop pose/target 91. Exact wardrobe rolls: Radiance: midriff 28=visible, strapless 91=inactive, open back 16=active; Ellie: midriff 94=covered, strapless 1=active, open back 38=inactive; Alia: midriff 2=visible, strapless 13=active, open back 78=inactive; AI ECE: midriff 60=covered, strapless 51=inactive, open back 88=inactive. Exact outfits: Radiance: river turquoise Paris runway model couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels; Ellie: orchid magenta Paris runway model couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels; Alia: rainforest emerald Paris runway model couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels; AI ECE: deep-water navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Brunei motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Muara coastline sweep, Tanjung Batu wave bands, black-rock fan, mangrove-edge contour, empty-jetty geometry, sunset-cloud ribbon, Brunei Bay horizon, and open-sea route compositions. Use respectful secular Brunei river channels, stilt-house grids, timber walkways, rainforest canopies, river bends, mangrove roots, longboat wakes, bridge spans, bay curves, coastlines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, palace, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 26=calm contentment, performed as calm contentment expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 0=tender affection, performed as tender affection expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 20=playful mischief, performed as playful mischief expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 30=hope, performed as hope expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 60: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 58: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate runway crescent to the right beneath the shelter, with every arm separated by sky, sea, mangrove, or railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty overlook lane, with no person, animal, vehicle, jetty, structure, or camera in or beyond the line. No ammunition, reload, firing, or trigger contact appears. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render double rainbow after rain cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

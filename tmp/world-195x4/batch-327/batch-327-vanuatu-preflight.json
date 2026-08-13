@@ -1,0 +1,1337 @@
+{
+  "batch": 327,
+  "country": "Vanuatu",
+  "status": "render-preflight-stored",
+  "sourceCommit": "b5a2d3de3c1a37fa024914fe8cb00774d7c50da7",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch327-vanuatu keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "undercover investigator couture",
+    "nurse-care couture"
+  ],
+  "nextThemePair": [
+    "nurse-care couture",
+    "doctor-clinical-command couture"
+  ],
+  "nextQueueCountry": "Barbados",
+  "nextQueueBatch": 328,
+  "nextQueueScenes": [
+    1332,
+    1333,
+    1334,
+    1335
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.vanuatu.travel/en/provinces/efate/port-vila",
+      "usedFor": "Port Vila waterfront, Mele Bay, harbor geometry, and island ridgelines"
+    },
+    {
+      "url": "https://www.vanuatu.travel/en/provinces/tanna/mount-yasur-volcano",
+      "usedFor": "Mount Yasur's volcanic cone, ash plain, caldera rim, rainforest, and public observation setting"
+    },
+    {
+      "url": "https://www.vanuatu.travel/en/provinces/efate/blue-lagoon",
+      "usedFor": "Efate Blue Lagoon, rainforest canopy, freshwater turquoise, and limestone banks"
+    },
+    {
+      "url": "https://www.vanuatu.travel/en/provinces/espiritu-santo/champagne-beach",
+      "usedFor": "Champagne Beach, pale sand, turquoise shallows, rainforest edge, and empty bay"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch327-vanuatu-male-model-scene",
+    "fullHash": 314342213,
+    "roll": 13,
+    "selectedScenePosition": 2,
+    "selectedScene": 1329,
+    "maleEmotion": {
+      "key": "batch327-vanuatu-scene2-male-emotion",
+      "roll": 35,
+      "result": "magnetic confidence"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Vanuatu flag, coat of arms, official emblem, sacred symbol, or religious building is copied. Large researched secular island, volcano, rainforest, reef, lagoon, harbor, beach, waterfall, cloud, and route compositions replace them.",
+    "palette": "Pacific turquoise, lagoon blue, rainforest emerald, volcanic black, lava red, coral magenta, cloud white, pandanus gold, reef violet, and deep-ocean navy",
+    "minimumCoverage": "Every image carries large complete secular Vanuatu compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Port Vila and Mele Bay, Mount Yasur's volcanic landscape, Efate's Blue Lagoon, and Champagne Beach on Espiritu Santo.",
+    "prohibitions": "Use respectful secular Vanuatu island outlines, volcanic ridges, caldera contours, rainforest bands, reef arcs, lagoon channels, harbor geometry, black-sand and white-sand sweeps, waterfall ribbons, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch327-vanuatu-x-heart",
+      "roll": 98,
+      "result": "white heart"
+    },
+    "internalAgency": {
+      "key": "batch327-vanuatu-x-internalagency",
+      "roll": 64,
+      "active": false
+    },
+    "worldXXXSeries": {
+      "key": "batch327-vanuatu-x-worldxxxseries",
+      "roll": 47,
+      "active": false
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Vanuatu images plus one accepted Iceland image",
+    "captionIfEligible": "Vanuatu 🤍 Iceland #Vanuatu",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": false
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1329 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1329 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch327-vanuatu-male-model-scene",
+        13
+      ],
+      [
+        "batch327-vanuatu-scene2-male-emotion",
+        35
+      ],
+      [
+        "batch327-vanuatu-scene1328-weather",
+        52
+      ],
+      [
+        "batch327-vanuatu-scene1328-paws",
+        73
+      ],
+      [
+        "batch327-vanuatu-scene1328-poleDanceTheme",
+        66
+      ],
+      [
+        "batch327-vanuatu-scene1328-rainbowOnly",
+        72
+      ],
+      [
+        "batch327-vanuatu-scene1328-rainbowHosiery",
+        51
+      ],
+      [
+        "batch327-vanuatu-scene1328-romanceBeat",
+        89
+      ],
+      [
+        "batch327-vanuatu-scene1328-compoundLoveBeat",
+        13
+      ],
+      [
+        "batch327-vanuatu-scene1328-eceMissionProp-poseTargetRoll",
+        70
+      ],
+      [
+        "batch327-vanuatu-scene1328-Radiance-emotion",
+        21
+      ],
+      [
+        "batch327-vanuatu-scene1328-Radiance-visibleMidriff",
+        49
+      ],
+      [
+        "batch327-vanuatu-scene1328-Radiance-straplessDress",
+        90
+      ],
+      [
+        "batch327-vanuatu-scene1328-Radiance-fullyOpenBack",
+        59
+      ],
+      [
+        "batch327-vanuatu-scene1328-Ellie-emotion",
+        93
+      ],
+      [
+        "batch327-vanuatu-scene1328-Ellie-visibleMidriff",
+        33
+      ],
+      [
+        "batch327-vanuatu-scene1328-Ellie-straplessDress",
+        42
+      ],
+      [
+        "batch327-vanuatu-scene1328-Ellie-fullyOpenBack",
+        95
+      ],
+      [
+        "batch327-vanuatu-scene1328-Alia-emotion",
+        11
+      ],
+      [
+        "batch327-vanuatu-scene1328-Alia-visibleMidriff",
+        3
+      ],
+      [
+        "batch327-vanuatu-scene1328-Alia-straplessDress",
+        92
+      ],
+      [
+        "batch327-vanuatu-scene1328-Alia-fullyOpenBack",
+        57
+      ],
+      [
+        "batch327-vanuatu-scene1328-AI ECE-emotion",
+        61
+      ],
+      [
+        "batch327-vanuatu-scene1328-AI ECE-visibleMidriff",
+        53
+      ],
+      [
+        "batch327-vanuatu-scene1328-AI ECE-straplessDress",
+        78
+      ],
+      [
+        "batch327-vanuatu-scene1328-AI ECE-fullyOpenBack",
+        79
+      ],
+      [
+        "batch327-vanuatu-scene1329-weather",
+        31
+      ],
+      [
+        "batch327-vanuatu-scene1329-paws",
+        80
+      ],
+      [
+        "batch327-vanuatu-scene1329-poleDanceTheme",
+        59
+      ],
+      [
+        "batch327-vanuatu-scene1329-rainbowOnly",
+        51
+      ],
+      [
+        "batch327-vanuatu-scene1329-rainbowHosiery",
+        90
+      ],
+      [
+        "batch327-vanuatu-scene1329-romanceBeat",
+        74
+      ],
+      [
+        "batch327-vanuatu-scene1329-compoundLoveBeat",
+        44
+      ],
+      [
+        "batch327-vanuatu-scene1329-eceMissionProp-poseTargetRoll",
+        29
+      ],
+      [
+        "batch327-vanuatu-scene1329-Radiance-emotion",
+        84
+      ],
+      [
+        "batch327-vanuatu-scene1329-Radiance-visibleMidriff",
+        14
+      ],
+      [
+        "batch327-vanuatu-scene1329-Radiance-straplessDress",
+        57
+      ],
+      [
+        "batch327-vanuatu-scene1329-Radiance-fullyOpenBack",
+        34
+      ],
+      [
+        "batch327-vanuatu-scene1329-Ellie-emotion",
+        22
+      ],
+      [
+        "batch327-vanuatu-scene1329-Ellie-visibleMidriff",
+        24
+      ],
+      [
+        "batch327-vanuatu-scene1329-Ellie-straplessDress",
+        83
+      ],
+      [
+        "batch327-vanuatu-scene1329-Ellie-fullyOpenBack",
+        52
+      ],
+      [
+        "batch327-vanuatu-scene1329-Alia-emotion",
+        22
+      ],
+      [
+        "batch327-vanuatu-scene1329-Alia-emotion-disambiguation",
+        21
+      ],
+      [
+        "batch327-vanuatu-scene1329-Alia-visibleMidriff",
+        68
+      ],
+      [
+        "batch327-vanuatu-scene1329-Alia-straplessDress",
+        11
+      ],
+      [
+        "batch327-vanuatu-scene1329-Alia-fullyOpenBack",
+        88
+      ],
+      [
+        "batch327-vanuatu-scene1329-AI ECE-emotion",
+        0
+      ],
+      [
+        "batch327-vanuatu-scene1329-AI ECE-visibleMidriff",
+        18
+      ],
+      [
+        "batch327-vanuatu-scene1329-AI ECE-straplessDress",
+        41
+      ],
+      [
+        "batch327-vanuatu-scene1329-AI ECE-fullyOpenBack",
+        74
+      ],
+      [
+        "batch327-vanuatu-scene1330-weather",
+        73
+      ],
+      [
+        "batch327-vanuatu-scene1330-paws",
+        98
+      ],
+      [
+        "batch327-vanuatu-scene1330-poleDanceTheme",
+        21
+      ],
+      [
+        "batch327-vanuatu-scene1330-rainbowOnly",
+        25
+      ],
+      [
+        "batch327-vanuatu-scene1330-rainbowHosiery",
+        40
+      ],
+      [
+        "batch327-vanuatu-scene1330-romanceBeat",
+        72
+      ],
+      [
+        "batch327-vanuatu-scene1330-compoundLoveBeat",
+        70
+      ],
+      [
+        "batch327-vanuatu-scene1330-eceMissionProp-poseTargetRoll",
+        63
+      ],
+      [
+        "batch327-vanuatu-scene1330-Radiance-emotion",
+        66
+      ],
+      [
+        "batch327-vanuatu-scene1330-Radiance-visibleMidriff",
+        40
+      ],
+      [
+        "batch327-vanuatu-scene1330-Radiance-straplessDress",
+        43
+      ],
+      [
+        "batch327-vanuatu-scene1330-Radiance-fullyOpenBack",
+        84
+      ],
+      [
+        "batch327-vanuatu-scene1330-Ellie-emotion",
+        84
+      ],
+      [
+        "batch327-vanuatu-scene1330-Ellie-visibleMidriff",
+        62
+      ],
+      [
+        "batch327-vanuatu-scene1330-Ellie-straplessDress",
+        17
+      ],
+      [
+        "batch327-vanuatu-scene1330-Ellie-fullyOpenBack",
+        26
+      ],
+      [
+        "batch327-vanuatu-scene1330-Alia-emotion",
+        8
+      ],
+      [
+        "batch327-vanuatu-scene1330-Alia-visibleMidriff",
+        6
+      ],
+      [
+        "batch327-vanuatu-scene1330-Alia-straplessDress",
+        61
+      ],
+      [
+        "batch327-vanuatu-scene1330-Alia-fullyOpenBack",
+        34
+      ],
+      [
+        "batch327-vanuatu-scene1330-AI ECE-emotion",
+        86
+      ],
+      [
+        "batch327-vanuatu-scene1330-AI ECE-visibleMidriff",
+        8
+      ],
+      [
+        "batch327-vanuatu-scene1330-AI ECE-straplessDress",
+        15
+      ],
+      [
+        "batch327-vanuatu-scene1330-AI ECE-fullyOpenBack",
+        24
+      ],
+      [
+        "batch327-vanuatu-scene1331-weather",
+        98
+      ],
+      [
+        "batch327-vanuatu-scene1331-paws",
+        75
+      ],
+      [
+        "batch327-vanuatu-scene1331-poleDanceTheme",
+        88
+      ],
+      [
+        "batch327-vanuatu-scene1331-rainbowOnly",
+        90
+      ],
+      [
+        "batch327-vanuatu-scene1331-rainbowHosiery",
+        13
+      ],
+      [
+        "batch327-vanuatu-scene1331-romanceBeat",
+        71
+      ],
+      [
+        "batch327-vanuatu-scene1331-compoundLoveBeat",
+        35
+      ],
+      [
+        "batch327-vanuatu-scene1331-eceMissionProp-poseTargetRoll",
+        24
+      ],
+      [
+        "batch327-vanuatu-scene1331-Radiance-emotion",
+        91
+      ],
+      [
+        "batch327-vanuatu-scene1331-Radiance-visibleMidriff",
+        19
+      ],
+      [
+        "batch327-vanuatu-scene1331-Radiance-straplessDress",
+        24
+      ],
+      [
+        "batch327-vanuatu-scene1331-Radiance-fullyOpenBack",
+        37
+      ],
+      [
+        "batch327-vanuatu-scene1331-Ellie-emotion",
+        63
+      ],
+      [
+        "batch327-vanuatu-scene1331-Ellie-visibleMidriff",
+        95
+      ],
+      [
+        "batch327-vanuatu-scene1331-Ellie-straplessDress",
+        12
+      ],
+      [
+        "batch327-vanuatu-scene1331-Ellie-fullyOpenBack",
+        13
+      ],
+      [
+        "batch327-vanuatu-scene1331-Alia-emotion",
+        65
+      ],
+      [
+        "batch327-vanuatu-scene1331-Alia-emotion-disambiguation",
+        4
+      ],
+      [
+        "batch327-vanuatu-scene1331-Alia-visibleMidriff",
+        49
+      ],
+      [
+        "batch327-vanuatu-scene1331-Alia-straplessDress",
+        26
+      ],
+      [
+        "batch327-vanuatu-scene1331-Alia-fullyOpenBack",
+        91
+      ],
+      [
+        "batch327-vanuatu-scene1331-AI ECE-emotion",
+        19
+      ],
+      [
+        "batch327-vanuatu-scene1331-AI ECE-visibleMidriff",
+        7
+      ],
+      [
+        "batch327-vanuatu-scene1331-AI ECE-straplessDress",
+        36
+      ],
+      [
+        "batch327-vanuatu-scene1331-AI ECE-fullyOpenBack",
+        29
+      ],
+      [
+        "batch327-vanuatu-x-heart",
+        98
+      ],
+      [
+        "batch327-vanuatu-x-internalagency",
+        64
+      ],
+      [
+        "batch327-vanuatu-x-worldxxxseries",
+        47
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch327-vanuatu-scene1328-rainbowHosieryWearer",
+        51
+      ],
+      [
+        "batch327-vanuatu-scene1328-rainbowHosieryPaletteMode",
+        57
+      ],
+      [
+        "batch327-vanuatu-scene1329-rainbowHosieryWearer",
+        62
+      ],
+      [
+        "batch327-vanuatu-scene1329-rainbowHosieryPaletteMode",
+        18
+      ],
+      [
+        "batch327-vanuatu-scene1330-rainbowHosieryWearer",
+        96
+      ],
+      [
+        "batch327-vanuatu-scene1330-rainbowHosieryPaletteMode",
+        44
+      ],
+      [
+        "batch327-vanuatu-scene1331-rainbowHosieryWearer",
+        49
+      ],
+      [
+        "batch327-vanuatu-scene1331-rainbowHosieryPaletteMode",
+        11
+      ]
+    ],
+    "primaryPairCount": 103,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "211D058B69EE999B4E9CD9A97836ED96194F1ED8364BDD03C5A0329AB94CFFB3",
+    "selectorPairsSha256": "BF57DDF349C1C3B9F9DC58E172C3FECE3F101A16A0FF85E7DCBB4802969E3F84"
+  },
+  "scenePlans": {
+    "1328": {
+      "scene": 1328,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered waterfront overlook above Port Vila and Mele Bay on Efate, with the complete harbor crescent, Iririki Island silhouette, empty marina grid, rainforest ridges, coral shelf, turquoise channels, and layered Pacific cloud bands",
+      "motifs": "complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions",
+      "culture": "Efate is presented through secular civic waterfront geography, Port Vila harbor, Mele Bay, Iririki Island, coral shelves, rainforest ridges, and an empty marina. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, or unsafe spectacle.",
+      "weather": {
+        "key": "batch327-vanuatu-scene1328-weather",
+        "roll": 52,
+        "result": "hailstorm with suspended ice and hard backlight",
+        "materialized": "hailstorm with suspended ice and hard backlight"
+      },
+      "paws": {
+        "key": "batch327-vanuatu-scene1328-paws",
+        "roll": 73,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch327-vanuatu-scene1328-poleDanceTheme",
+        "roll": 66,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch327-vanuatu-scene1328-rainbowOnly",
+        "roll": 72,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch327-vanuatu-scene1328-rainbowHosiery",
+        "roll": 51,
+        "active": false,
+        "wearer": {
+          "key": "batch327-vanuatu-scene1328-rainbowHosieryWearer",
+          "roll": 51,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch327-vanuatu-scene1328-rainbowHosieryPaletteMode",
+          "roll": 57,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch327-vanuatu-scene1328-eceMissionProp-poseTargetRoll",
+        "roll": 70
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch327-vanuatu-scene1328-romanceBeat",
+        "roll": 89,
+        "dynamicIndex": 5,
+        "contractResult": "Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch327-vanuatu-scene1328-compoundLoveBeat",
+        "roll": 13,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1328-Radiance-emotion",
+            "roll": 21,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1328-Radiance-visibleMidriff",
+            "roll": 49,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1328-Radiance-straplessDress",
+            "roll": 90,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1328-Radiance-fullyOpenBack",
+            "roll": 59,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1328-Ellie-emotion",
+            "roll": 93,
+            "result": "guilt and remorse",
+            "materializedResult": "guilt and remorse",
+            "performance": "guilt and remorse expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1328-Ellie-visibleMidriff",
+            "roll": 33,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1328-Ellie-straplessDress",
+            "roll": 42,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1328-Ellie-fullyOpenBack",
+            "roll": 95,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1328-Alia-emotion",
+            "roll": 11,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1328-Alia-visibleMidriff",
+            "roll": 3,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1328-Alia-straplessDress",
+            "roll": 92,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1328-Alia-fullyOpenBack",
+            "roll": 57,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1328-AI ECE-emotion",
+            "roll": 61,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1328-AI ECE-visibleMidriff",
+            "roll": 53,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1328-AI ECE-straplessDress",
+            "roll": 78,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1328-AI ECE-fullyOpenBack",
+            "roll": 79,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "guilt and remorse expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald undercover investigator couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate investigative arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, harbor, island, mountain, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and retains sole ownership",
+        "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered waterfront overlook above Port Vila and Mele Bay on Efate, with the complete harbor crescent, Iririki Island silhouette, empty marina grid, rainforest ridges, coral shelf, turquoise channels, and layered Pacific cloud bands. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, only as original public-safe fictional fashion. Efate is presented through secular civic waterfront geography, Port Vila harbor, Mele Bay, Iririki Island, coral shelves, rainforest ridges, and an empty marina. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, or unsafe spectacle. Stored scene rolls: weather 52=hailstorm with suspended ice and hard backlight; PAWS 73=inactive; pole 66=inactive; rainbow-only 72=inactive; rainbow hosiery 51=inactive; wearer 51=AI ECE; palette 57=original independent rainbow gradient; romance 89; compound 13; mission-prop pose/target 70. Exact wardrobe rolls: Radiance: midriff 49=visible, strapless 90=inactive, open back 59=inactive; Ellie: midriff 33=visible, strapless 42=inactive, open back 95=inactive; Alia: midriff 3=visible, strapless 92=inactive, open back 57=inactive; AI ECE: midriff 53=covered, strapless 78=inactive, open back 79=inactive. Exact outfits: Radiance: Pacific turquoise undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels; Ellie: coral magenta undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels; Alia: rainforest emerald undercover investigator couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Vanuatu motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions. Use respectful secular Vanuatu island outlines, volcanic ridges, caldera contours, rainforest bands, reef arcs, lagoon channels, harbor geometry, black-sand and white-sand sweeps, waterfall ribbons, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 21=playful mischief, performed as playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 93=guilt and remorse, performed as guilt and remorse expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 11=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 61=visible jealousy, performed as visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 89: Ellie and Alia pull the same signal ribbon from opposite sides as Radiance places one calming hand on each of them and ECE leans close over Radiance's shoulder. Compound roll 13: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate investigative arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, harbor, island, mountain, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and retains sole ownership; Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render hailstorm with suspended ice and hard backlight cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1329": {
+      "scene": 1329,
+      "theme": "undercover investigator couture",
+      "landmark": "a broad dry covered geological overlook facing Mount Yasur on Tanna, with the complete volcanic cone, caldera rim, broad black-ash plain, lava-red glow confined inside the distant crater, rainforest belt, safe closed observation lane, and layered windblown clouds",
+      "motifs": "complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions",
+      "culture": "Tanna is presented through secular volcanic geology, Mount Yasur's distant cone and caldera, black-ash plains, rainforest, and a protected overlook. Undercover investigator couture is original fictional inquiry fashion only, with no ritual or ceremony, sacred framing, police imitation, official authority, surveillance of people, arrest, raid, interrogation, threat, combat, or unsafe spectacle.",
+      "weather": {
+        "key": "batch327-vanuatu-scene1329-weather",
+        "roll": 31,
+        "result": "cinematic light rain with reflections",
+        "materialized": "cinematic light rain with reflections"
+      },
+      "paws": {
+        "key": "batch327-vanuatu-scene1329-paws",
+        "roll": 80,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch327-vanuatu-scene1329-poleDanceTheme",
+        "roll": 59,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch327-vanuatu-scene1329-rainbowOnly",
+        "roll": 51,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch327-vanuatu-scene1329-rainbowHosiery",
+        "roll": 90,
+        "active": false,
+        "wearer": {
+          "key": "batch327-vanuatu-scene1329-rainbowHosieryWearer",
+          "roll": 62,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch327-vanuatu-scene1329-rainbowHosieryPaletteMode",
+          "roll": 18,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch327-vanuatu-scene1329-eceMissionProp-poseTargetRoll",
+        "roll": 29
+      },
+      "materializedPropAction": "AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-ash safety backstop on a closed empty overlook lane away from the volcano, with no person, animal, crater, trail user, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-ash safety backstop on a closed empty overlook lane away from the volcano, with no person, animal, crater, trail user, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch327-vanuatu-scene1329-romanceBeat",
+        "roll": 74,
+        "dynamicIndex": 2,
+        "contractResult": "Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind."
+      },
+      "compoundLoveBeat": {
+        "key": "batch327-vanuatu-scene1329-compoundLoveBeat",
+        "roll": 44,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1329-Radiance-emotion",
+            "roll": 84,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1329-Radiance-visibleMidriff",
+            "roll": 14,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1329-Radiance-straplessDress",
+            "roll": 57,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1329-Radiance-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1329-Ellie-emotion",
+            "roll": 22,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1329-Ellie-visibleMidriff",
+            "roll": 24,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1329-Ellie-straplessDress",
+            "roll": 83,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1329-Ellie-fullyOpenBack",
+            "roll": 52,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1329-Alia-emotion",
+            "roll": 22,
+            "result": "playful mischief",
+            "materializedResult": "calm contentment",
+            "disambiguation": {
+              "key": "batch327-vanuatu-scene1329-Alia-emotion-disambiguation",
+              "roll": 21
+            },
+            "performance": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1329-Alia-visibleMidriff",
+            "roll": 68,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1329-Alia-straplessDress",
+            "roll": 11,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1329-Alia-fullyOpenBack",
+            "roll": 88,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1329-AI ECE-emotion",
+            "roll": 0,
+            "result": "tender affection",
+            "materializedResult": "tender affection",
+            "performance": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1329-AI ECE-visibleMidriff",
+            "roll": 18,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1329-AI ECE-straplessDress",
+            "roll": 41,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1329-AI ECE-fullyOpenBack",
+            "roll": 74,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald undercover investigator couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, fitted black jeans, and practical black boots"
+      },
+      "composition": "AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning investigative triangle to the right beneath the shelter, every arm separated by sky, cone, ash plain, rainforest, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder",
+        "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+        "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch327-vanuatu-scene2-male-emotion",
+          "roll": 35,
+          "result": "magnetic confidence"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered geological overlook facing Mount Yasur on Tanna, with the complete volcanic cone, caldera rim, broad black-ash plain, lava-red glow confined inside the distant crater, rainforest belt, safe closed observation lane, and layered windblown clouds. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: undercover investigator couture, only as original public-safe fictional fashion. Tanna is presented through secular volcanic geology, Mount Yasur's distant cone and caldera, black-ash plains, rainforest, and a protected overlook. Undercover investigator couture is original fictional inquiry fashion only, with no ritual or ceremony, sacred framing, police imitation, official authority, surveillance of people, arrest, raid, interrogation, threat, combat, or unsafe spectacle. Stored scene rolls: weather 31=cinematic light rain with reflections; PAWS 80=inactive; pole 59=inactive; rainbow-only 51=inactive; rainbow hosiery 90=inactive; wearer 62=AI ECE; palette 18=country-palette rainbow-like gradient; romance 74; compound 44; mission-prop pose/target 29. Exact wardrobe rolls: Radiance: midriff 14=visible, strapless 57=inactive, open back 34=inactive; Ellie: midriff 24=visible, strapless 83=inactive, open back 52=inactive; Alia: midriff 68=covered, strapless 11=active, open back 88=inactive; AI ECE: midriff 18=visible, strapless 41=inactive, open back 74=inactive. Exact outfits: Radiance: Pacific turquoise undercover investigator couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta undercover investigator couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald undercover investigator couture sculpted panel dress with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy undercover investigator couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions field, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Vanuatu motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions. Use respectful secular Vanuatu island outlines, volcanic ridges, caldera contours, rainforest bands, reef arcs, lagoon channels, harbor geometry, black-sand and white-sand sweeps, waterfall ribbons, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 84=crying with visible tears, performed as crying with visible tears expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 22=playful mischief, performed as playful mischief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 22=playful mischief, collision resolver 21 gives distinct performance calm contentment, performed as calm contentment expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 0=tender affection, performed as tender affection expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 35=magnetic confidence, performed as magnetic confidence expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 74: Alia spins Radiance under their linked hands; ECE steadies Radiance at the waist while Ellie reaches toward the beacon they are leaving behind. Compound roll 44: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning investigative triangle to the right beneath the shelter, every arm separated by sky, cone, ash plain, rainforest, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder; Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm; Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. AI ECE uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete basalt-and-ash safety backstop on a closed empty overlook lane away from the volcano, with no person, animal, crater, trail user, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render cinematic light rain with reflections cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1330": {
+      "scene": 1330,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered conservation overlook above Efate's Blue Lagoon, with the complete turquoise freshwater pool, limestone banks, dense rainforest canopy, pandanus and banyan silhouettes, empty footbridge geometry, sunlit shallows, and no swimmers or wildlife",
+      "motifs": "complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions",
+      "culture": "Blue Lagoon is presented through secular freshwater conservation, limestone banks, rainforest ecology, native plant silhouettes, clear shallows, and an empty public overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and conservation research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch327-vanuatu-scene1330-weather",
+        "roll": 73,
+        "result": "red-gold dust storm",
+        "materialized": "red-gold dust storm"
+      },
+      "paws": {
+        "key": "batch327-vanuatu-scene1330-paws",
+        "roll": 98,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch327-vanuatu-scene1330-poleDanceTheme",
+        "roll": 21,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch327-vanuatu-scene1330-rainbowOnly",
+        "roll": 25,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch327-vanuatu-scene1330-rainbowHosiery",
+        "roll": 40,
+        "active": false,
+        "wearer": {
+          "key": "batch327-vanuatu-scene1330-rainbowHosieryWearer",
+          "roll": 96,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch327-vanuatu-scene1330-rainbowHosieryPaletteMode",
+          "roll": 44,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch327-vanuatu-scene1330-eceMissionProp-poseTargetRoll",
+        "roll": 63
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, footbridge, tree, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, footbridge, tree, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch327-vanuatu-scene1330-romanceBeat",
+        "roll": 72,
+        "dynamicIndex": 0,
+        "contractResult": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compoundLoveBeat": {
+        "key": "batch327-vanuatu-scene1330-compoundLoveBeat",
+        "roll": 70,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1330-Radiance-emotion",
+            "roll": 66,
+            "result": "possessive tension",
+            "materializedResult": "possessive tension",
+            "performance": "possessive tension expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1330-Radiance-visibleMidriff",
+            "roll": 40,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1330-Radiance-straplessDress",
+            "roll": 43,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1330-Radiance-fullyOpenBack",
+            "roll": 84,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1330-Ellie-emotion",
+            "roll": 84,
+            "result": "crying with visible tears",
+            "materializedResult": "crying with visible tears",
+            "performance": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1330-Ellie-visibleMidriff",
+            "roll": 62,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1330-Ellie-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1330-Ellie-fullyOpenBack",
+            "roll": 26,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1330-Alia-emotion",
+            "roll": 8,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1330-Alia-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1330-Alia-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1330-Alia-fullyOpenBack",
+            "roll": 34,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1330-AI ECE-emotion",
+            "roll": 86,
+            "result": "full sobbing with tear-streaked face and shaking posture",
+            "materializedResult": "full sobbing with tear-streaked face and shaking posture",
+            "performance": "full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1330-AI ECE-visibleMidriff",
+            "roll": 8,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1330-AI ECE-straplessDress",
+            "roll": 15,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1330-AI ECE-fullyOpenBack",
+            "roll": 24,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "possessive tension expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta nurse-care couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy nurse-care couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults create a curved affectionate care arc to the right beneath the shelter, every arm separated by sky, lagoon, limestone, rainforest, bridge, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and retains sole ownership",
+        "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered conservation overlook above Efate's Blue Lagoon, with the complete turquoise freshwater pool, limestone banks, dense rainforest canopy, pandanus and banyan silhouettes, empty footbridge geometry, sunlit shallows, and no swimmers or wildlife. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, only as original public-safe fictional fashion. Blue Lagoon is presented through secular freshwater conservation, limestone banks, rainforest ecology, native plant silhouettes, clear shallows, and an empty public overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and conservation research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 73=red-gold dust storm; PAWS 98=inactive; pole 21=inactive; rainbow-only 25=inactive; rainbow hosiery 40=inactive; wearer 96=AI ECE; palette 44=country-palette rainbow-like gradient; romance 72; compound 70; mission-prop pose/target 63. Exact wardrobe rolls: Radiance: midriff 40=visible, strapless 43=inactive, open back 84=inactive; Ellie: midriff 62=covered, strapless 17=active, open back 26=active; Alia: midriff 6=visible, strapless 61=inactive, open back 34=inactive; AI ECE: midriff 8=visible, strapless 15=active, open back 24=active. Exact outfits: Radiance: Pacific turquoise nurse-care couture architectural A-line skort dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta nurse-care couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald nurse-care couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy nurse-care couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Vanuatu motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions. Use respectful secular Vanuatu island outlines, volcanic ridges, caldera contours, rainforest bands, reef arcs, lagoon channels, harbor geometry, black-sand and white-sand sweeps, waterfall ribbons, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 66=possessive tension, performed as possessive tension expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 84=crying with visible tears, performed as crying with visible tears expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 8=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 86=full sobbing with tear-streaked face and shaking posture, performed as full sobbing with tear-streaked face and shaking posture expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 72: Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold. Compound roll 70: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults create a curved affectionate care arc to the right beneath the shelter, every arm separated by sky, lagoon, limestone, rainforest, bridge, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and retains sole ownership; Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, footbridge, tree, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render red-gold dust storm cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1331": {
+      "scene": 1331,
+      "theme": "nurse-care couture",
+      "landmark": "a broad dry covered coastal overlook above Champagne Beach on Espiritu Santo, with the complete pale-sand crescent, turquoise shallows, offshore reef bands, rainforest edge, low headlands, an empty bay, and a distant silver tropical shower beyond the shelter",
+      "motifs": "complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions",
+      "culture": "Espiritu Santo is presented through secular coastal conservation, Champagne Beach, turquoise shallows, reef bands, rainforest, headlands, Pacific weather, and an empty public overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and conservation research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+      "weather": {
+        "key": "batch327-vanuatu-scene1331-weather",
+        "roll": 98,
+        "result": "silent heat lightning on the horizon",
+        "materialized": "silent heat lightning on the horizon"
+      },
+      "paws": {
+        "key": "batch327-vanuatu-scene1331-paws",
+        "roll": 75,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch327-vanuatu-scene1331-poleDanceTheme",
+        "roll": 88,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch327-vanuatu-scene1331-rainbowOnly",
+        "roll": 90,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch327-vanuatu-scene1331-rainbowHosiery",
+        "roll": 13,
+        "active": true,
+        "wearer": {
+          "key": "batch327-vanuatu-scene1331-rainbowHosieryWearer",
+          "roll": 49,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch327-vanuatu-scene1331-rainbowHosieryPaletteMode",
+          "roll": 11,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch327-vanuatu-scene1331-eceMissionProp-poseTargetRoll",
+        "roll": 24
+      },
+      "materializedPropAction": "Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete coral-sand safety backstop on a closed empty observation lane, with no person, animal, vehicle, reef, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied geometric paper route target fixed to a complete coral-sand safety backstop on a closed empty observation lane, with no person, animal, vehicle, reef, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch327-vanuatu-scene1331-romanceBeat",
+        "roll": 71,
+        "dynamicIndex": 11,
+        "contractResult": "The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder."
+      },
+      "compoundLoveBeat": {
+        "key": "batch327-vanuatu-scene1331-compoundLoveBeat",
+        "roll": 35,
+        "index": 11,
+        "contractResult": "ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1331-Radiance-emotion",
+            "roll": 91,
+            "result": "anger",
+            "materializedResult": "anger",
+            "performance": "anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1331-Radiance-visibleMidriff",
+            "roll": 19,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1331-Radiance-straplessDress",
+            "roll": 24,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1331-Radiance-fullyOpenBack",
+            "roll": 37,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1331-Ellie-emotion",
+            "roll": 63,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1331-Ellie-visibleMidriff",
+            "roll": 95,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1331-Ellie-straplessDress",
+            "roll": 12,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1331-Ellie-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1331-Alia-emotion",
+            "roll": 65,
+            "result": "visible jealousy",
+            "materializedResult": "tender affection",
+            "disambiguation": {
+              "key": "batch327-vanuatu-scene1331-Alia-emotion-disambiguation",
+              "roll": 4
+            },
+            "performance": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1331-Alia-visibleMidriff",
+            "roll": 49,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1331-Alia-straplessDress",
+            "roll": 26,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1331-Alia-fullyOpenBack",
+            "roll": 91,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch327-vanuatu-scene1331-AI ECE-emotion",
+            "roll": 19,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch327-vanuatu-scene1331-AI ECE-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch327-vanuatu-scene1331-AI ECE-straplessDress",
+            "roll": 36,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch327-vanuatu-scene1331-AI ECE-fullyOpenBack",
+            "roll": 29,
+            "active": true
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "playful mischief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise nurse-care couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta nurse-care couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald nurse-care couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy nurse-care couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate care crescent to the right beneath the shelter, with every arm separated by sky, bay, reef, beach, rainforest, headland, shelter, or railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered coastal overlook above Champagne Beach on Espiritu Santo, with the complete pale-sand crescent, turquoise shallows, offshore reef bands, rainforest edge, low headlands, an empty bay, and a distant silver tropical shower beyond the shelter. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: nurse-care couture, only as original public-safe fictional fashion. Espiritu Santo is presented through secular coastal conservation, Champagne Beach, turquoise shallows, reef bands, rainforest, headlands, Pacific weather, and an empty public overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and conservation research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care. Stored scene rolls: weather 98=silent heat lightning on the horizon; PAWS 75=inactive; pole 88=inactive; rainbow-only 90=inactive; rainbow hosiery 13=active; wearer 49=Radiance; palette 11=country-palette rainbow-like gradient; romance 71; compound 35; mission-prop pose/target 24. Exact wardrobe rolls: Radiance: midriff 19=visible, strapless 24=active, open back 37=inactive; Ellie: midriff 95=covered, strapless 12=active, open back 13=active; Alia: midriff 49=visible, strapless 26=active, open back 91=inactive; AI ECE: midriff 7=visible, strapless 36=inactive, open back 29=active. Exact outfits: Radiance: Pacific turquoise nurse-care couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels; Ellie: coral magenta nurse-care couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels; Alia: rainforest emerald nurse-care couture sculpted panel dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy nurse-care couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Vanuatu motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions. Use respectful secular Vanuatu island outlines, volcanic ridges, caldera contours, rainforest bands, reef arcs, lagoon channels, harbor geometry, black-sand and white-sand sweeps, waterfall ribbons, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 91=anger, performed as anger expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 63=visible jealousy, performed as visible jealousy expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 65=visible jealousy, collision resolver 4 gives distinct performance tender affection, performed as tender affection expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 19=playful mischief, performed as playful mischief expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 71: The quartet crosses paths in a tight walking weave: one linked-hand pair, one protective back touch, one cheek-to-cheek pass, and one jealous look over a shoulder. Compound roll 35: ECE is helped up from the beacon by Radiance into a close hug; ECE gives Alia a cheek peck over Radiance's shoulder while Ellie wraps both women in a protective side embrace. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate care crescent to the right beneath the shelter, with every arm separated by sky, bay, reef, beach, rainforest, headland, shelter, or railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied geometric paper route target fixed to a complete coral-sand safety backstop on a closed empty observation lane, with no person, animal, vehicle, reef, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly Radiance wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render silent heat lightning on the horizon cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

@@ -1,0 +1,1329 @@
+{
+  "batch": 330,
+  "country": "Samoa",
+  "status": "render-preflight-stored",
+  "sourceCommit": "6ac0ec4e2bbd16b43d167798b3bf40090567d186",
+  "contractSha256": "3EDBDA128DD8F8FA733B6B761ECBFC1E9F56445D091FBBF7DA1495A485BEF210",
+  "rollMethod": "FNV-1a over the recorded batch330-samoa keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "paws": "0-24",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "rainbowHosieryWearer": "0-49 Radiance; 50-99 AI ECE",
+    "rainbowHosieryPaletteMode": "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    "missionPropPoseTarget": "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism"
+  },
+  "themePair": [
+    "adult nightlife dance-performance couture",
+    "Paris runway model couture"
+  ],
+  "nextThemePair": [
+    "Paris runway model couture",
+    "cleaner and service couture"
+  ],
+  "nextQueueCountry": "Saint Lucia",
+  "nextQueueBatch": 331,
+  "nextQueueScenes": [
+    1344,
+    1345,
+    1346,
+    1347
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.samoa.travel/discover/our-islands/upolu/apia/",
+      "usedFor": "Apia Harbour, Upolu waterfront geography, Mount Vaea, and reef context"
+    },
+    {
+      "url": "https://www.samoa.travel/plan-book/activities/to-sua-ocean-trench/",
+      "usedFor": "To Sua sinkhole pool, basalt rim, ladder, vines, and rainforest setting"
+    },
+    {
+      "url": "https://www.samoa.travel/plan-book/activities/alofaaga-blowholes/",
+      "usedFor": "Alofaaga black-lava shelves, ocean blowhole plumes, and Pacific coast"
+    },
+    {
+      "url": "https://www.samoa.travel/plan-book/activities/lalomanu-beach/",
+      "usedFor": "Lalomanu beach crescent, lagoon, Nu'utele silhouette, reefs, and rainforest edge"
+    }
+  ],
+  "faceAnchors": {
+    "primaryQuartet": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "frontalSupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "expressionSupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "eceDetail": "ece-canonical-identity-v1.png",
+    "male": "1136-italy-rome-lenticular-care-male-colosseum-route.png"
+  },
+  "maleModelSelection": {
+    "key": "batch330-samoa-male-model-scene",
+    "fullHash": 498903132,
+    "roll": 32,
+    "selectedScenePosition": 1,
+    "selectedScene": 1340,
+    "maleEmotion": {
+      "key": "batch330-samoa-scene1-male-emotion",
+      "roll": 51,
+      "result": "intense curiosity"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Samoa flag, coat of arms, official emblem, sacred symbol, religious building, tatau, ceremonial pattern, or ceremonial attire is copied. Large researched secular island, harbor, volcanic ridge, sinkhole, lava shelf, blowhole plume, beach, reef, cloud, and route compositions replace them.",
+    "palette": "lagoon turquoise, rainforest green, volcanic black, coral red, ocean cobalt, sunset gold, cloud white, lava gray, hibiscus magenta, and seafoam aqua",
+    "minimumCoverage": "Every image carries large complete secular Samoa compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    "cultureScene": "The scenes foreground Apia Harbour, To Sua Ocean Trench, Alofaaga Blowholes, and Lalomanu Beach.",
+    "prohibitions": "Use respectful secular Samoa island outlines, harbor crescents, volcanic ridges, rainforest bands, lava-stone grids, sinkhole rings, blowhole plumes, beach crescents, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied tatau, ceremonial attire, copied uniform, badge, readable text, brand, alcohol, or political insignia."
+  },
+  "xPublishingRolls": {
+    "heart": {
+      "key": "batch330-samoa-x-heart",
+      "roll": 13,
+      "result": "red heart"
+    },
+    "internalAgency": {
+      "key": "batch330-samoa-x-internalagency",
+      "roll": 1,
+      "active": true
+    },
+    "worldXXXSeries": {
+      "key": "batch330-samoa-x-worldxxxseries",
+      "roll": 14,
+      "active": true
+    }
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two Samoa images plus one accepted São Tomé and Príncipe image",
+    "captionIfEligible": "Samoa ❤️ São Tomé and Príncipe #Samoa #InternalAgency #WorldXXXSeries",
+    "internalAgencyHashtagActive": true,
+    "worldXXXSeriesHashtagActive": true
+  },
+  "anatomyGate": {
+    "fourPersonScenes": "Every scene except 1340 requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.",
+    "fivePersonScene": "Scene 1340 requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.",
+    "rejectionRule": "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    "propRule": "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch330-samoa-male-model-scene",
+        32
+      ],
+      [
+        "batch330-samoa-scene1-male-emotion",
+        51
+      ],
+      [
+        "batch330-samoa-scene1340-weather",
+        21
+      ],
+      [
+        "batch330-samoa-scene1340-paws",
+        46
+      ],
+      [
+        "batch330-samoa-scene1340-poleDanceTheme",
+        45
+      ],
+      [
+        "batch330-samoa-scene1340-rainbowOnly",
+        45
+      ],
+      [
+        "batch330-samoa-scene1340-rainbowHosiery",
+        92
+      ],
+      [
+        "batch330-samoa-scene1340-romanceBeat",
+        20
+      ],
+      [
+        "batch330-samoa-scene1340-compoundLoveBeat",
+        34
+      ],
+      [
+        "batch330-samoa-scene1340-eceMissionProp-poseTargetRoll",
+        79
+      ],
+      [
+        "batch330-samoa-scene1340-Radiance-emotion",
+        78
+      ],
+      [
+        "batch330-samoa-scene1340-Radiance-visibleMidriff",
+        52
+      ],
+      [
+        "batch330-samoa-scene1340-Radiance-straplessDress",
+        51
+      ],
+      [
+        "batch330-samoa-scene1340-Radiance-fullyOpenBack",
+        60
+      ],
+      [
+        "batch330-samoa-scene1340-Ellie-emotion",
+        24
+      ],
+      [
+        "batch330-samoa-scene1340-Ellie-visibleMidriff",
+        58
+      ],
+      [
+        "batch330-samoa-scene1340-Ellie-straplessDress",
+        61
+      ],
+      [
+        "batch330-samoa-scene1340-Ellie-fullyOpenBack",
+        66
+      ],
+      [
+        "batch330-samoa-scene1340-Alia-emotion",
+        8
+      ],
+      [
+        "batch330-samoa-scene1340-Alia-visibleMidriff",
+        82
+      ],
+      [
+        "batch330-samoa-scene1340-Alia-straplessDress",
+        81
+      ],
+      [
+        "batch330-samoa-scene1340-Alia-fullyOpenBack",
+        90
+      ],
+      [
+        "batch330-samoa-scene1340-AI ECE-emotion",
+        18
+      ],
+      [
+        "batch330-samoa-scene1340-AI ECE-visibleMidriff",
+        0
+      ],
+      [
+        "batch330-samoa-scene1340-AI ECE-straplessDress",
+        39
+      ],
+      [
+        "batch330-samoa-scene1340-AI ECE-fullyOpenBack",
+        48
+      ],
+      [
+        "batch330-samoa-scene1341-weather",
+        18
+      ],
+      [
+        "batch330-samoa-scene1341-paws",
+        23
+      ],
+      [
+        "batch330-samoa-scene1341-poleDanceTheme",
+        36
+      ],
+      [
+        "batch330-samoa-scene1341-rainbowOnly",
+        66
+      ],
+      [
+        "batch330-samoa-scene1341-rainbowHosiery",
+        45
+      ],
+      [
+        "batch330-samoa-scene1341-romanceBeat",
+        75
+      ],
+      [
+        "batch330-samoa-scene1341-compoundLoveBeat",
+        39
+      ],
+      [
+        "batch330-samoa-scene1341-eceMissionProp-poseTargetRoll",
+        68
+      ],
+      [
+        "batch330-samoa-scene1341-Radiance-emotion",
+        19
+      ],
+      [
+        "batch330-samoa-scene1341-Radiance-visibleMidriff",
+        63
+      ],
+      [
+        "batch330-samoa-scene1341-Radiance-straplessDress",
+        84
+      ],
+      [
+        "batch330-samoa-scene1341-Radiance-fullyOpenBack",
+        29
+      ],
+      [
+        "batch330-samoa-scene1341-Ellie-emotion",
+        51
+      ],
+      [
+        "batch330-samoa-scene1341-Ellie-visibleMidriff",
+        95
+      ],
+      [
+        "batch330-samoa-scene1341-Ellie-straplessDress",
+        0
+      ],
+      [
+        "batch330-samoa-scene1341-Ellie-fullyOpenBack",
+        13
+      ],
+      [
+        "batch330-samoa-scene1341-Alia-emotion",
+        49
+      ],
+      [
+        "batch330-samoa-scene1341-Alia-visibleMidriff",
+        73
+      ],
+      [
+        "batch330-samoa-scene1341-Alia-straplessDress",
+        90
+      ],
+      [
+        "batch330-samoa-scene1341-Alia-fullyOpenBack",
+        23
+      ],
+      [
+        "batch330-samoa-scene1341-AI ECE-emotion",
+        47
+      ],
+      [
+        "batch330-samoa-scene1341-AI ECE-visibleMidriff",
+        91
+      ],
+      [
+        "batch330-samoa-scene1341-AI ECE-straplessDress",
+        4
+      ],
+      [
+        "batch330-samoa-scene1341-AI ECE-fullyOpenBack",
+        73
+      ],
+      [
+        "batch330-samoa-scene1342-weather",
+        75
+      ],
+      [
+        "batch330-samoa-scene1342-paws",
+        20
+      ],
+      [
+        "batch330-samoa-scene1342-poleDanceTheme",
+        67
+      ],
+      [
+        "batch330-samoa-scene1342-rainbowOnly",
+        63
+      ],
+      [
+        "batch330-samoa-scene1342-rainbowHosiery",
+        6
+      ],
+      [
+        "batch330-samoa-scene1342-romanceBeat",
+        70
+      ],
+      [
+        "batch330-samoa-scene1342-compoundLoveBeat",
+        8
+      ],
+      [
+        "batch330-samoa-scene1342-eceMissionProp-poseTargetRoll",
+        21
+      ],
+      [
+        "batch330-samoa-scene1342-Radiance-emotion",
+        88
+      ],
+      [
+        "batch330-samoa-scene1342-Radiance-visibleMidriff",
+        6
+      ],
+      [
+        "batch330-samoa-scene1342-Radiance-straplessDress",
+        25
+      ],
+      [
+        "batch330-samoa-scene1342-Radiance-fullyOpenBack",
+        54
+      ],
+      [
+        "batch330-samoa-scene1342-Ellie-emotion",
+        34
+      ],
+      [
+        "batch330-samoa-scene1342-Ellie-visibleMidriff",
+        16
+      ],
+      [
+        "batch330-samoa-scene1342-Ellie-straplessDress",
+        59
+      ],
+      [
+        "batch330-samoa-scene1342-Ellie-fullyOpenBack",
+        76
+      ],
+      [
+        "batch330-samoa-scene1342-Alia-emotion",
+        42
+      ],
+      [
+        "batch330-samoa-scene1342-Alia-visibleMidriff",
+        8
+      ],
+      [
+        "batch330-samoa-scene1342-Alia-straplessDress",
+        43
+      ],
+      [
+        "batch330-samoa-scene1342-Alia-fullyOpenBack",
+        92
+      ],
+      [
+        "batch330-samoa-scene1342-AI ECE-emotion",
+        88
+      ],
+      [
+        "batch330-samoa-scene1342-AI ECE-emotion-disambiguation",
+        87
+      ],
+      [
+        "batch330-samoa-scene1342-AI ECE-visibleMidriff",
+        90
+      ],
+      [
+        "batch330-samoa-scene1342-AI ECE-straplessDress",
+        53
+      ],
+      [
+        "batch330-samoa-scene1342-AI ECE-fullyOpenBack",
+        98
+      ],
+      [
+        "batch330-samoa-scene1343-weather",
+        76
+      ],
+      [
+        "batch330-samoa-scene1343-paws",
+        65
+      ],
+      [
+        "batch330-samoa-scene1343-poleDanceTheme",
+        26
+      ],
+      [
+        "batch330-samoa-scene1343-rainbowOnly",
+        36
+      ],
+      [
+        "batch330-samoa-scene1343-rainbowHosiery",
+        75
+      ],
+      [
+        "batch330-samoa-scene1343-romanceBeat",
+        33
+      ],
+      [
+        "batch330-samoa-scene1343-compoundLoveBeat",
+        97
+      ],
+      [
+        "batch330-samoa-scene1343-eceMissionProp-poseTargetRoll",
+        70
+      ],
+      [
+        "batch330-samoa-scene1343-Radiance-emotion",
+        69
+      ],
+      [
+        "batch330-samoa-scene1343-Radiance-visibleMidriff",
+        29
+      ],
+      [
+        "batch330-samoa-scene1343-Radiance-straplessDress",
+        6
+      ],
+      [
+        "batch330-samoa-scene1343-Radiance-fullyOpenBack",
+        31
+      ],
+      [
+        "batch330-samoa-scene1343-Ellie-emotion",
+        97
+      ],
+      [
+        "batch330-samoa-scene1343-Ellie-visibleMidriff",
+        73
+      ],
+      [
+        "batch330-samoa-scene1343-Ellie-straplessDress",
+        22
+      ],
+      [
+        "batch330-samoa-scene1343-Ellie-fullyOpenBack",
+        47
+      ],
+      [
+        "batch330-samoa-scene1343-Alia-emotion",
+        79
+      ],
+      [
+        "batch330-samoa-scene1343-Alia-visibleMidriff",
+        43
+      ],
+      [
+        "batch330-samoa-scene1343-Alia-straplessDress",
+        60
+      ],
+      [
+        "batch330-samoa-scene1343-Alia-fullyOpenBack",
+        81
+      ],
+      [
+        "batch330-samoa-scene1343-AI ECE-emotion",
+        61
+      ],
+      [
+        "batch330-samoa-scene1343-AI ECE-visibleMidriff",
+        97
+      ],
+      [
+        "batch330-samoa-scene1343-AI ECE-straplessDress",
+        38
+      ],
+      [
+        "batch330-samoa-scene1343-AI ECE-fullyOpenBack",
+        31
+      ],
+      [
+        "batch330-samoa-x-heart",
+        13
+      ],
+      [
+        "batch330-samoa-x-internalagency",
+        1
+      ],
+      [
+        "batch330-samoa-x-worldxxxseries",
+        14
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch330-samoa-scene1340-rainbowHosieryWearer",
+        96
+      ],
+      [
+        "batch330-samoa-scene1340-rainbowHosieryPaletteMode",
+        52
+      ],
+      [
+        "batch330-samoa-scene1341-rainbowHosieryWearer",
+        77
+      ],
+      [
+        "batch330-samoa-scene1341-rainbowHosieryPaletteMode",
+        27
+      ],
+      [
+        "batch330-samoa-scene1342-rainbowHosieryWearer",
+        78
+      ],
+      [
+        "batch330-samoa-scene1342-rainbowHosieryPaletteMode",
+        38
+      ],
+      [
+        "batch330-samoa-scene1343-rainbowHosieryWearer",
+        11
+      ],
+      [
+        "batch330-samoa-scene1343-rainbowHosieryPaletteMode",
+        93
+      ]
+    ],
+    "primaryPairCount": 102,
+    "selectorPairCount": 8,
+    "mismatchCount": 0,
+    "primaryPairsSha256": "F4FA46FF1160D665B904519390AB8672CD59D167B3769A0E4878FE18095582DE",
+    "selectorPairsSha256": "981B90D27D234B24C54EFD803EB27F84BD4D39B29104BA85E30A4B2F1421B59A"
+  },
+  "scenePlans": {
+    "1340": {
+      "scene": 1340,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered civic-waterfront overlook above Apia Harbour on Upolu, with the complete bay crescent, Mount Vaea ridgeline, palm-lined shore, empty marina geometry, coral-stone quay lines, reef shelves, and layered Pacific evening clouds",
+      "motifs": "complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions",
+      "culture": "Apia is presented through secular civic waterfront geography, the harbor crescent, Mount Vaea ridgeline, palm-lined shores, marina geometry, reef shelves, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat.",
+      "weather": {
+        "key": "batch330-samoa-scene1340-weather",
+        "roll": 21,
+        "result": "soft dramatic overcast",
+        "materialized": "soft dramatic overcast"
+      },
+      "paws": {
+        "key": "batch330-samoa-scene1340-paws",
+        "roll": 46,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch330-samoa-scene1340-poleDanceTheme",
+        "roll": 45,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch330-samoa-scene1340-rainbowOnly",
+        "roll": 45,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch330-samoa-scene1340-rainbowHosiery",
+        "roll": 92,
+        "active": false,
+        "wearer": {
+          "key": "batch330-samoa-scene1340-rainbowHosieryWearer",
+          "roll": 96,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch330-samoa-scene1340-rainbowHosieryPaletteMode",
+          "roll": 52,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch330-samoa-scene1340-eceMissionProp-poseTargetRoll",
+        "roll": 79
+      },
+      "materializedPropAction": "A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker in an unoccupied Apia Harbour reach, with no boat, swimmer, bird, animal, person, marina, quay, shore, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.",
+      "target": "one distant clearly empty floating navigation marker in an unoccupied Apia Harbour reach, with no boat, swimmer, bird, animal, person, marina, quay, shore, or occupied structure anywhere along or beyond the line",
+      "romanceBeat": {
+        "key": "batch330-samoa-scene1340-romanceBeat",
+        "roll": 20,
+        "dynamicIndex": 8,
+        "contractResult": "Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist."
+      },
+      "compoundLoveBeat": {
+        "key": "batch330-samoa-scene1340-compoundLoveBeat",
+        "roll": 34,
+        "index": 10,
+        "contractResult": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch330-samoa-scene1340-Radiance-emotion",
+            "roll": 78,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1340-Radiance-visibleMidriff",
+            "roll": 52,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1340-Radiance-straplessDress",
+            "roll": 51,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1340-Radiance-fullyOpenBack",
+            "roll": 60,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch330-samoa-scene1340-Ellie-emotion",
+            "roll": 24,
+            "result": "calm contentment",
+            "materializedResult": "calm contentment",
+            "performance": "calm contentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1340-Ellie-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1340-Ellie-straplessDress",
+            "roll": 61,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1340-Ellie-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch330-samoa-scene1340-Alia-emotion",
+            "roll": 8,
+            "result": "romantic joy",
+            "materializedResult": "romantic joy",
+            "performance": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1340-Alia-visibleMidriff",
+            "roll": 82,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1340-Alia-straplessDress",
+            "roll": 81,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1340-Alia-fullyOpenBack",
+            "roll": 90,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch330-samoa-scene1340-AI ECE-emotion",
+            "roll": 18,
+            "result": "extreme happiness, radiant laughing delight",
+            "materializedResult": "extreme happiness, radiant laughing delight",
+            "performance": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1340-AI ECE-visibleMidriff",
+            "roll": 0,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1340-AI ECE-straplessDress",
+            "roll": 39,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1340-AI ECE-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "calm contentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels",
+        "Male": "the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, fitted black jeans, and practical black boots"
+      },
+      "composition": "AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate evening-performance arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, bay, hill, palm, quay, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and touches nobody else",
+        "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder",
+        "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+        "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": true,
+        "emotion": {
+          "key": "batch330-samoa-scene1-male-emotion",
+          "roll": 51,
+          "result": "intense curiosity"
+        },
+        "identity": "established adult male from Scene 1136",
+        "relationship": "adult infidelity drama; at least two clear contacts; strongest eye line to ECE"
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman at a broad dry covered civic-waterfront overlook above Apia Harbour on Upolu, with the complete bay crescent, Mount Vaea ridgeline, palm-lined shore, empty marina geometry, coral-stone quay lines, reef shelves, and layered Pacific evening clouds. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. Apia is presented through secular civic waterfront geography, the harbor crescent, Mount Vaea ridgeline, palm-lined shores, marina geometry, reef shelves, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat. Stored scene rolls: weather 21=soft dramatic overcast; PAWS 46=inactive; pole 45=inactive; rainbow-only 45=inactive; rainbow hosiery 92=inactive; wearer 96=AI ECE; palette 52=original independent rainbow gradient; romance 20; compound 34; mission-prop pose/target 79. Exact wardrobe rolls: Radiance: midriff 52=covered, strapless 51=inactive, open back 60=inactive; Ellie: midriff 58=covered, strapless 61=inactive, open back 66=inactive; Alia: midriff 82=covered, strapless 81=inactive, open back 90=inactive; AI ECE: midriff 0=visible, strapless 39=inactive, open back 48=inactive. Exact outfits: Radiance: Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels; Ellie: coral magenta adult nightlife dance-performance couture tailored asymmetric romper with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels; Alia: rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, and secure contrasting high heels; Male: the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions field, fitted black jeans, and practical black boots. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Samoa motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Upolu island outline, Apia Harbour crescent, Mount Vaea ridge, palm-shore rhythm, coral-stone quay grid, reef shelf, Pacific current arc, and evening route-light compositions. Use respectful secular Samoa island outlines, harbor crescents, volcanic ridges, rainforest bands, lava-stone grids, sinkhole rings, blowhole plumes, beach crescents, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied tatau, ceremonial attire, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 78=deep sadness, performed as deep sadness expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 24=calm contentment, performed as calm contentment expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 8=romantic joy, performed as romantic joy expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 18=extreme happiness, radiant laughing delight, performed as extreme happiness, radiant laughing delight expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Male: roll 51=intense curiosity, performed as intense curiosity expressed distinctly through the male's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 20: Radiance and Ellie share a face-to-face laugh mid-turn; ECE catches Ellie's wrist before she moves away and Alia places a steadying hand at Radiance's waist. Compound roll 34: The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate evening-performance arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, bay, hill, palm, quay, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and touches nobody else; the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder; Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm; Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A controlled handoff has finished with AI ECE establishing a stable two-hand sight picture at one distant clearly empty floating navigation marker in an unoccupied Apia Harbour reach, with no boat, swimmer, bird, animal, person, marina, quay, shore, or occupied structure anywhere along or beyond the line. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render soft dramatic overcast cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly ten arms and ten hands, two per adult. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1341": {
+      "scene": 1341,
+      "theme": "adult nightlife dance-performance couture",
+      "landmark": "a broad dry covered conservation overlook beside To Sua Ocean Trench on Upolu, with the complete circular turquoise sinkhole pool, basalt rim, descending ladder geometry, lush vine bands, coastal rainforest canopy, lava-tube contours, and an empty protected observation path",
+      "motifs": "complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions",
+      "culture": "To Sua is presented through secular volcanic geology, a circular sinkhole pool, basalt ledges, vines, coastal rainforest, lava-tube contours, and an empty protected public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat.",
+      "weather": {
+        "key": "batch330-samoa-scene1341-weather",
+        "roll": 18,
+        "result": "crisp blue hour",
+        "materialized": "crisp blue hour"
+      },
+      "paws": {
+        "key": "batch330-samoa-scene1341-paws",
+        "roll": 23,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch330-samoa-scene1341-poleDanceTheme",
+        "roll": 36,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch330-samoa-scene1341-rainbowOnly",
+        "roll": 66,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch330-samoa-scene1341-rainbowHosiery",
+        "roll": 45,
+        "active": false,
+        "wearer": {
+          "key": "batch330-samoa-scene1341-rainbowHosieryWearer",
+          "roll": 77,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch330-samoa-scene1341-rainbowHosieryPaletteMode",
+          "roll": 27,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch330-samoa-scene1341-eceMissionProp-poseTargetRoll",
+        "roll": 68
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick basalt-and-sand safety backstop on a closed empty observation lane away from the pool and vegetation, with no person, animal, ladder, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly unoccupied abstract geometric paper route marker fixed to a complete thick basalt-and-sand safety backstop on a closed empty observation lane away from the pool and vegetation, with no person, animal, ladder, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch330-samoa-scene1341-romanceBeat",
+        "roll": 75,
+        "dynamicIndex": 3,
+        "contractResult": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLoveBeat": {
+        "key": "batch330-samoa-scene1341-compoundLoveBeat",
+        "roll": 39,
+        "index": 3,
+        "contractResult": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch330-samoa-scene1341-Radiance-emotion",
+            "roll": 19,
+            "result": "playful mischief",
+            "materializedResult": "playful mischief",
+            "performance": "playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1341-Radiance-visibleMidriff",
+            "roll": 63,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1341-Radiance-straplessDress",
+            "roll": 84,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1341-Radiance-fullyOpenBack",
+            "roll": 29,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch330-samoa-scene1341-Ellie-emotion",
+            "roll": 51,
+            "result": "intense curiosity",
+            "materializedResult": "intense curiosity",
+            "performance": "intense curiosity expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1341-Ellie-visibleMidriff",
+            "roll": 95,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1341-Ellie-straplessDress",
+            "roll": 0,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1341-Ellie-fullyOpenBack",
+            "roll": 13,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch330-samoa-scene1341-Alia-emotion",
+            "roll": 49,
+            "result": "startled surprise",
+            "materializedResult": "startled surprise",
+            "performance": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1341-Alia-visibleMidriff",
+            "roll": 73,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1341-Alia-straplessDress",
+            "roll": 90,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1341-Alia-fullyOpenBack",
+            "roll": 23,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch330-samoa-scene1341-AI ECE-emotion",
+            "roll": 47,
+            "result": "awe",
+            "materializedResult": "awe",
+            "performance": "awe expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1341-AI ECE-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1341-AI ECE-straplessDress",
+            "roll": 4,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1341-AI ECE-fullyOpenBack",
+            "roll": 73,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "intense curiosity expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "awe expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta adult nightlife dance-performance couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, pool, basalt, vine, rainforest, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and retains sole ownership",
+        "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder",
+        "Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Ellie's near shoulder"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered conservation overlook beside To Sua Ocean Trench on Upolu, with the complete circular turquoise sinkhole pool, basalt rim, descending ladder geometry, lush vine bands, coastal rainforest canopy, lava-tube contours, and an empty protected observation path. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: adult nightlife dance-performance couture, only as original public-safe fictional fashion. To Sua is presented through secular volcanic geology, a circular sinkhole pool, basalt ledges, vines, coastal rainforest, lava-tube contours, and an empty protected public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat. Stored scene rolls: weather 18=crisp blue hour; PAWS 23=active; pole 36=inactive; rainbow-only 66=inactive; rainbow hosiery 45=inactive; wearer 77=AI ECE; palette 27=country-palette rainbow-like gradient; romance 75; compound 39; mission-prop pose/target 68. Exact wardrobe rolls: Radiance: midriff 63=covered, strapless 84=inactive, open back 29=active; Ellie: midriff 95=covered, strapless 0=active, open back 13=active; Alia: midriff 73=covered, strapless 90=inactive, open back 23=active; AI ECE: midriff 91=covered, strapless 4=active, open back 73=inactive. Exact outfits: Radiance: Pacific turquoise adult nightlife dance-performance couture architectural A-line skort dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta adult nightlife dance-performance couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald adult nightlife dance-performance couture sculpted panel dress with secure opaque sleeved bodice, a fully covered waist, a completely open back from shoulder blades to the separate waistline with secure side structure, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy adult nightlife dance-performance couture precision pleated skort ensemble with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Samoa motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Upolu island outline, To Sua circular sinkhole, turquoise-pool ring, basalt ledges, ladder-line rhythm, vine bands, lava-tube arcs, and conservation route-grid compositions. Use respectful secular Samoa island outlines, harbor crescents, volcanic ridges, rainforest bands, lava-stone grids, sinkhole rings, blowhole plumes, beach crescents, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied tatau, ceremonial attire, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 19=playful mischief, performed as playful mischief expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 51=intense curiosity, performed as intense curiosity expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 49=startled surprise, performed as startled surprise expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 47=awe, performed as awe expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 75: ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile. Compound roll 39: Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, pool, basalt, vine, rainforest, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and retains sole ownership; Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder; Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Ellie's near shoulder. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick basalt-and-sand safety backstop on a closed empty observation lane away from the pool and vegetation, with no person, animal, ladder, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render crisp blue hour cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1342": {
+      "scene": 1342,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry covered geological overlook above the Alofaaga Blowholes on Savai'i, with complete black-lava shelves, several distant white ocean plumes, rugged Pacific coast, rainforest margin, empty horizon, spray ribbons, and a protected unoccupied observation lane",
+      "motifs": "complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions",
+      "culture": "Alofaaga is presented through secular coastal geology, black-lava shelves, distant ocean blowhole plumes, Pacific swell, rainforest margins, spray, and an empty protected overlook. Paris runway model couture is original public-safe fictional editorial fashion only, with no copied designer look, brand, runway logo, exposed undergarment, nudity, threat, or combat.",
+      "weather": {
+        "key": "batch330-samoa-scene1342-weather",
+        "roll": 75,
+        "result": "dramatic sandstorm wall",
+        "materialized": "the stored dramatic-sandstorm-wall roll appears as a distant ochre wall of windblown coastal mist and pollen haze beyond the sheltered scene, with dry nonslip footing"
+      },
+      "paws": {
+        "key": "batch330-samoa-scene1342-paws",
+        "roll": 20,
+        "active": true
+      },
+      "poleDanceTheme": {
+        "key": "batch330-samoa-scene1342-poleDanceTheme",
+        "roll": 67,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch330-samoa-scene1342-rainbowOnly",
+        "roll": 63,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch330-samoa-scene1342-rainbowHosiery",
+        "roll": 6,
+        "active": true,
+        "wearer": {
+          "key": "batch330-samoa-scene1342-rainbowHosieryWearer",
+          "roll": 78,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch330-samoa-scene1342-rainbowHosieryPaletteMode",
+          "roll": 38,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "resolvedPropHandler": "Alia",
+      "poseTargetRoll": {
+        "key": "batch330-samoa-scene1342-eceMissionProp-poseTargetRoll",
+        "roll": 21
+      },
+      "materializedPropAction": "Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick lava-stone-and-sand safety backstop on a closed empty observation lane away from the blowholes, with no person, animal, plume, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.",
+      "target": "one clearly unoccupied abstract geometric paper route marker fixed to a complete thick lava-stone-and-sand safety backstop on a closed empty observation lane away from the blowholes, with no person, animal, plume, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch330-samoa-scene1342-romanceBeat",
+        "roll": 70,
+        "dynamicIndex": 10,
+        "contractResult": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLoveBeat": {
+        "key": "batch330-samoa-scene1342-compoundLoveBeat",
+        "roll": 8,
+        "index": 8,
+        "contractResult": "ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch330-samoa-scene1342-Radiance-emotion",
+            "roll": 88,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "fear and urgent vulnerability",
+            "performance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1342-Radiance-visibleMidriff",
+            "roll": 6,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1342-Radiance-straplessDress",
+            "roll": 25,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1342-Radiance-fullyOpenBack",
+            "roll": 54,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch330-samoa-scene1342-Ellie-emotion",
+            "roll": 34,
+            "result": "overwhelming relief",
+            "materializedResult": "overwhelming relief",
+            "performance": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1342-Ellie-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1342-Ellie-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1342-Ellie-fullyOpenBack",
+            "roll": 76,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch330-samoa-scene1342-Alia-emotion",
+            "roll": 42,
+            "result": "determination",
+            "materializedResult": "determination",
+            "performance": "determination expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1342-Alia-visibleMidriff",
+            "roll": 8,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1342-Alia-straplessDress",
+            "roll": 43,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1342-Alia-fullyOpenBack",
+            "roll": 92,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch330-samoa-scene1342-AI ECE-emotion",
+            "roll": 88,
+            "result": "fear and urgent vulnerability",
+            "materializedResult": "anger",
+            "disambiguation": {
+              "key": "batch330-samoa-scene1342-AI ECE-emotion-disambiguation",
+              "roll": 87
+            },
+            "performance": "anger expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1342-AI ECE-visibleMidriff",
+            "roll": 90,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1342-AI ECE-straplessDress",
+            "roll": 53,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1342-AI ECE-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "determination expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "anger expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise Paris runway model couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta Paris runway model couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald Paris runway model couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels"
+      },
+      "composition": "Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate runway-turn arc to the right beneath the shelter, with every arm separated by sky, ocean, plume, lava, rainforest, shelter, or railing gaps.",
+      "handInventory": [
+        "Alia uses both hands on the inert prop grip and touches nobody else",
+        "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder",
+        "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+        "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop"
+      ],
+      "pawsPlan": "One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered geological overlook above the Alofaaga Blowholes on Savai'i, with complete black-lava shelves, several distant white ocean plumes, rugged Pacific coast, rainforest margin, empty horizon, spray ribbons, and a protected unoccupied observation lane. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: Paris runway model couture, only as original public-safe fictional fashion. Alofaaga is presented through secular coastal geology, black-lava shelves, distant ocean blowhole plumes, Pacific swell, rainforest margins, spray, and an empty protected overlook. Paris runway model couture is original public-safe fictional editorial fashion only, with no copied designer look, brand, runway logo, exposed undergarment, nudity, threat, or combat. Stored scene rolls: weather 75=dramatic sandstorm wall; PAWS 20=active; pole 67=inactive; rainbow-only 63=inactive; rainbow hosiery 6=active; wearer 78=AI ECE; palette 38=country-palette rainbow-like gradient; romance 70; compound 8; mission-prop pose/target 21. Exact wardrobe rolls: Radiance: midriff 6=visible, strapless 25=active, open back 54=inactive; Ellie: midriff 16=visible, strapless 59=inactive, open back 76=inactive; Alia: midriff 8=visible, strapless 43=inactive, open back 92=inactive; AI ECE: midriff 90=covered, strapless 53=inactive, open back 98=inactive. Exact outfits: Radiance: Pacific turquoise Paris runway model couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels; Ellie: coral magenta Paris runway model couture tailored asymmetric romper with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels; Alia: rainforest emerald Paris runway model couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Samoa motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Savai'i island outline, Alofaaga blowhole plume, black-lava shelf, Pacific swell arc, rainforest margin, spray ribbon, cloud band, and geological route-grid compositions. Use respectful secular Samoa island outlines, harbor crescents, volcanic ridges, rainforest bands, lava-stone grids, sinkhole rings, blowhole plumes, beach crescents, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied tatau, ceremonial attire, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 88=fear and urgent vulnerability, performed as fear and urgent vulnerability expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 34=overwhelming relief, performed as overwhelming relief expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 42=determination, performed as determination expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 88=fear and urgent vulnerability, collision resolver 87 gives distinct performance anger, performed as anger expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 70: Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face. Compound roll 8: ECE and Radiance share a moving side hug as ECE gives Ellie a quick forehead kiss during the pass; Alia catches Radiance's free hand and pulls gently in the opposite direction. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. Alia stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate runway-turn arc to the right beneath the shelter, with every arm separated by sky, ocean, plume, lava, rainforest, shelter, or railing gaps. Exact hand inventory, no others: Alia uses both hands on the inert prop grip and touches nobody else; Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder; Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm; ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop. Alia alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. Alia uses a realistic eye-level two-hand large-frame-pistol stance at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick lava-stone-and-sand safety backstop on a closed empty observation lane away from the blowholes, with no person, animal, plume, occupied structure, or camera in or beyond the line. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is active. Exactly AI ECE wears varied opaque public-safe knee socks in an country-palette rainbow-like gradient; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector. One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render the stored dramatic-sandstorm-wall roll appears as a distant ochre wall of windblown coastal mist and pollen haze beyond the sheltered scene, with dry nonslip footing cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    },
+    "1343": {
+      "scene": 1343,
+      "theme": "Paris runway model couture",
+      "landmark": "a broad dry covered coastal overlook above Lalomanu Beach on Upolu, with the complete pale-sand crescent, turquoise lagoon, Nu'utele island silhouette, reef shelves, rainforest edge, low headlands, empty shore, and a distant tropical rain veil",
+      "motifs": "complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions",
+      "culture": "Lalomanu is presented through secular coastal conservation, its pale beach crescent, turquoise lagoon, Nu'utele island silhouette, reef shelves, rainforest edge, headlands, tropical weather, and an empty public overlook. Paris runway model couture is original public-safe fictional editorial fashion only, with no copied designer look, brand, runway logo, exposed undergarment, nudity, threat, or combat.",
+      "weather": {
+        "key": "batch330-samoa-scene1343-weather",
+        "roll": 76,
+        "result": "powerful windstorm with controlled fabric motion",
+        "materialized": "powerful windstorm with controlled fabric motion"
+      },
+      "paws": {
+        "key": "batch330-samoa-scene1343-paws",
+        "roll": 65,
+        "active": false
+      },
+      "poleDanceTheme": {
+        "key": "batch330-samoa-scene1343-poleDanceTheme",
+        "roll": 26,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch330-samoa-scene1343-rainbowOnly",
+        "roll": 36,
+        "active": false
+      },
+      "rainbowHosiery": {
+        "key": "batch330-samoa-scene1343-rainbowHosiery",
+        "roll": 75,
+        "active": false,
+        "wearer": {
+          "key": "batch330-samoa-scene1343-rainbowHosieryWearer",
+          "roll": 11,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch330-samoa-scene1343-rainbowHosieryPaletteMode",
+          "roll": 93,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "resolvedPropHandler": "AI ECE",
+      "poseTargetRoll": {
+        "key": "batch330-samoa-scene1343-eceMissionProp-poseTargetRoll",
+        "roll": 70
+      },
+      "materializedPropAction": "A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick coral-sand-and-basalt safety backstop on a closed empty observation lane, with no person, animal, island, reef, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard.",
+      "target": "one clearly unoccupied abstract geometric paper route marker fixed to a complete thick coral-sand-and-basalt safety backstop on a closed empty observation lane, with no person, animal, island, reef, occupied structure, or camera in or beyond the line",
+      "romanceBeat": {
+        "key": "batch330-samoa-scene1343-romanceBeat",
+        "roll": 33,
+        "dynamicIndex": 9,
+        "contractResult": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLoveBeat": {
+        "key": "batch330-samoa-scene1343-compoundLoveBeat",
+        "roll": 97,
+        "index": 1,
+        "contractResult": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "characters": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch330-samoa-scene1343-Radiance-emotion",
+            "roll": 69,
+            "result": "suspicion",
+            "materializedResult": "suspicion",
+            "performance": "suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1343-Radiance-visibleMidriff",
+            "roll": 29,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1343-Radiance-straplessDress",
+            "roll": 6,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1343-Radiance-fullyOpenBack",
+            "roll": 31,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch330-samoa-scene1343-Ellie-emotion",
+            "roll": 97,
+            "result": "defiance",
+            "materializedResult": "defiance",
+            "performance": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1343-Ellie-visibleMidriff",
+            "roll": 73,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1343-Ellie-straplessDress",
+            "roll": 22,
+            "active": true
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1343-Ellie-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch330-samoa-scene1343-Alia-emotion",
+            "roll": 79,
+            "result": "deep sadness",
+            "materializedResult": "deep sadness",
+            "performance": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1343-Alia-visibleMidriff",
+            "roll": 43,
+            "active": true
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1343-Alia-straplessDress",
+            "roll": 60,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1343-Alia-fullyOpenBack",
+            "roll": 81,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch330-samoa-scene1343-AI ECE-emotion",
+            "roll": 61,
+            "result": "visible jealousy",
+            "materializedResult": "visible jealousy",
+            "performance": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+          },
+          "visibleMidriff": {
+            "key": "batch330-samoa-scene1343-AI ECE-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "straplessDress": {
+            "key": "batch330-samoa-scene1343-AI ECE-straplessDress",
+            "roll": 38,
+            "active": false
+          },
+          "fullyOpenBack": {
+            "key": "batch330-samoa-scene1343-AI ECE-fullyOpenBack",
+            "roll": 31,
+            "active": false
+          }
+        }
+      },
+      "emotionNuance": {
+        "Radiance": "suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Ellie": "defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "Alia": "deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature",
+        "AI ECE": "visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature"
+      },
+      "outfits": {
+        "Radiance": "Pacific turquoise Paris runway model couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels",
+        "Ellie": "coral magenta Paris runway model couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels",
+        "Alia": "rainforest emerald Paris runway model couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels",
+        "AI ECE": "deep-ocean navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels"
+      },
+      "composition": "AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate runway crescent to the right beneath the shelter, with every arm separated by sky, lagoon, beach, island, reef, rainforest, shelter, or railing gaps.",
+      "handInventory": [
+        "ECE uses both hands on the inert prop grip and retains sole ownership",
+        "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+        "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm",
+        "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist"
+      ],
+      "pawsPlan": null,
+      "maleModel": {
+        "present": false
+      },
+      "renderPrompt": "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene. Images 1 through 4 anchor the adult quartet and ECE. References control identity only. Create one photorealistic 9:16 full-length editorial showing exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE at a broad dry covered coastal overlook above Lalomanu Beach on Upolu, with the complete pale-sand crescent, turquoise lagoon, Nu'utele island silhouette, reef shelves, rainforest edge, low headlands, empty shore, and a distant tropical rain veil. All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift. Profession theme: Paris runway model couture, only as original public-safe fictional fashion. Lalomanu is presented through secular coastal conservation, its pale beach crescent, turquoise lagoon, Nu'utele island silhouette, reef shelves, rainforest edge, headlands, tropical weather, and an empty public overlook. Paris runway model couture is original public-safe fictional editorial fashion only, with no copied designer look, brand, runway logo, exposed undergarment, nudity, threat, or combat. Stored scene rolls: weather 76=powerful windstorm with controlled fabric motion; PAWS 65=inactive; pole 26=inactive; rainbow-only 36=inactive; rainbow hosiery 75=inactive; wearer 11=Radiance; palette 93=original independent rainbow gradient; romance 33; compound 97; mission-prop pose/target 70. Exact wardrobe rolls: Radiance: midriff 29=visible, strapless 6=active, open back 31=inactive; Ellie: midriff 73=covered, strapless 22=active, open back 47=inactive; Alia: midriff 43=visible, strapless 60=inactive, open back 81=inactive; AI ECE: midriff 97=covered, strapless 38=inactive, open back 31=inactive. Exact outfits: Radiance: Pacific turquoise Paris runway model couture architectural A-line skort dress with fully strapless high straight opaque lined bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels; Ellie: coral magenta Paris runway model couture tailored asymmetric romper with fully strapless high straight opaque lined bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels; Alia: rainforest emerald Paris runway model couture sculpted panel dress with secure opaque sleeved bodice, a narrow ordinary visible waist panel between separate bodice and skirt, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels; AI ECE: deep-ocean navy Paris runway model couture precision pleated skort ensemble with secure opaque sleeved bodice, a fully covered waist, a high fully closed back, an opaque lined above-knee hem, a large complete complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions field, and secure contrasting high heels. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes. Place large complete secular Samoa motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: complete Upolu island outline, Lalomanu beach crescent, Nu'utele island silhouette, turquoise-lagoon band, reef shelf, rainforest edge, headland profile, and rain-veil route-arc compositions. Use respectful secular Samoa island outlines, harbor crescents, volcanic ridges, rainforest bands, lava-stone grids, sinkhole rings, blowhole plumes, beach crescents, reef shelves, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied tatau, ceremonial attire, copied uniform, badge, readable text, brand, alcohol, or political insignia. Four visibly distinct coherent emotions: Radiance: roll 69=suspicion, performed as suspicion expressed distinctly through Radiance's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Ellie: roll 97=defiance, performed as defiance expressed distinctly through Ellie's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; Alia: roll 79=deep sadness, performed as deep sadness expressed distinctly through Alia's eyes, brows, mouth, posture, and coherent affectionate response, without caricature; AI ECE: roll 61=visible jealousy, performed as visible jealousy expressed distinctly through AI ECE's eyes, brows, mouth, posture, and coherent affectionate response, without caricature. Romance roll 33: ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss. Compound roll 97: ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE. Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup. AI ECE stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate runway crescent to the right beneath the shelter, with every arm separated by sky, lagoon, beach, island, reef, rainforest, shelter, or railing gaps. Exact hand inventory, no others: ECE uses both hands on the inert prop grip and retains sole ownership; Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop; Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm; Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist. AI ECE alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. A second woman gives behind-the-shoulder wrist and stance guidance while AI ECE retains sole ownership of the prop. The muzzle stays downrange at one clearly unoccupied abstract geometric paper route marker fixed to a complete thick coral-sand-and-basalt safety backstop on a closed empty observation lane, with no person, animal, island, reef, occupied structure, or camera in or beyond the line; every arm is traceable and every trigger finger stays indexed outside the guard. The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting. Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears. PAWS is inactive. No kitten. Pole theme is inactive. No pole. Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling. Render powerful windstorm with controlled fabric motion cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy. Exactly eight arms and eight hands, two per woman. Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster. Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark."
+    }
+  },
+  "renderAttempts": {
+    "raw": {
+      "status": "pending",
+      "requested": 4,
+      "concurrency": "four independent built-in image generation calls launched together"
+    },
+    "recovery": {
+      "status": "not-started",
+      "maximumPerBlockedScene": 1
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "xPost": {
+    "status": "pending-asset-audit",
+    "minimumCurrentCountryAcceptedAssets": 2
+  }
+}

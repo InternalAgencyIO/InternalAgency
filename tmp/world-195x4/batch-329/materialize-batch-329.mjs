@@ -1,0 +1,750 @@
+import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+import { execFileSync } from "node:child_process";
+
+const batch = 329;
+const country = "São Tomé and Príncipe";
+const countrySlug = "sao-tome-and-principe";
+const firstScene = 1336;
+const root = path.resolve("tmp/world-195x4/batch-329");
+const contractPath = path.resolve("assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json");
+const contractBytes = fs.readFileSync(contractPath);
+const contract = JSON.parse(contractBytes.toString("utf8"));
+const sourceCommit = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+const characters = ["Radiance", "Ellie", "Alia", "AI ECE"];
+const palette = "rainforest emerald, cocoa brown, volcanic black, Atlantic blue, coral red, cacao gold, cloud white, basalt gray, orchid magenta, and seafoam turquoise";
+
+const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex").toUpperCase();
+
+function fnv1a(value) {
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash;
+}
+
+const roll = (key) => fnv1a(key) % 100;
+const fromDistribution = (value, distribution, resultKey) => {
+  for (const entry of distribution) {
+    const [startText, endText = startText] = entry.range.split("-");
+    if (value >= Number(startText) && value <= Number(endText)) return entry[resultKey];
+  }
+  throw new Error(`No distribution result for ${value}`);
+};
+
+const primaryPairs = [];
+const selectorPairs = [];
+const primary = (key) => {
+  const value = roll(key);
+  primaryPairs.push([key, value]);
+  return { key, roll: value };
+};
+const selector = (key, result) => {
+  const value = roll(key);
+  selectorPairs.push([key, value]);
+  return { key, roll: value, result };
+};
+
+const commonProhibitions = "Use respectful secular São Tomé and Príncipe island outlines, Pico Cão Grande needle silhouettes, volcanic ridges, rainforest bands, cocoa-pod contours, beach crescents, reef shelves, waterfall ribbons, equator lines, cloud bands, and public overlooks only. No literal flag, coat of arms, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.";
+
+const legacySceneSpecs = [
+  {
+    scene: 1304,
+    theme: "nurse-care couture",
+    landmark: "a broad dry nonslip covered marine-research overlook above Hanifaru Bay in Baa Atoll, with a sweeping heart-shaped atoll lagoon, shallow turquoise reef shelves, faros, patch reefs, unoccupied sand cays, distant manta silhouettes outside the target line, one empty paper-route target fixed to a full sand backstop, and a distant waterspout over open ocean far beyond the shelter",
+    motifs: "large complete heart-shaped Baa Atoll lagoon, Hanifaru funnel-current, manta-wing, patch-reef, sand-cay, plankton-spiral, monsoon-cloud, and research-route compositions",
+    culture: "Baa Atoll is presented as a UNESCO biosphere reserve of lagoons, faros, patch reefs, coral islands, seagrass, mangroves, and marine biodiversity. Hanifaru wildlife stays distant and entirely outside the prop line. Nurse-care couture is fictional fashion about mutual calm and conservation research, with no patient, clinic, treatment, diagnosis, procedure, instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    target: "one clearly unoccupied geometric paper route target fixed to a complete sand backstop on an empty research lane, with no person, animal, boat, structure, or camera in or beyond the line",
+    composition: "ECE stands far left in a stable eye-level route-training stance with open sky and sand backstop behind both arms. The male is left-center with his strongest sustained eye line on ECE. Ellie is center holding PAWS high against her upper torso, Alia is right-center, and Radiance is far right. The five adults form a shallow moving arc with every arm against open lagoon, sky, or shelter gaps.",
+    hands: [
+      "ECE uses both hands on the inert prop grip, left support hand wrapped over the right firing hand, both wrists straight; ECE touches nobody else",
+      "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm; his strongest eye line stays on ECE",
+      "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on the male's near forearm",
+      "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near shoulder",
+      "Radiance left hand rests on Alia's near shoulder and Radiance right hand rests on Ellie's near forearm",
+    ],
+    pawsPlan: "One tiny collarless golden kitten PAWS is securely cradled by Ellie at center, far across the composition from the prop and target line. Radiance gives one gentle forearm touch toward Ellie. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+    emotionNuance: {
+      Radiance: "awe shown by widened tear-bright eyes toward the manta silhouettes while maintaining gentle contacts",
+      Ellie: "determination shown by a steady protective posture around PAWS and a warm glance toward the male",
+      Alia: "deep sadness shown by downcast tear-bright eyes that lift toward Radiance's reassuring touch",
+      "AI ECE": "aching romantic longing shown by a softened glance from the sights toward the male without moving the muzzle",
+      Male: "playful mischief shown by a restrained knowing half-smile and the strongest sustained eye line toward ECE",
+    },
+  },
+  {
+    scene: 1305,
+    theme: "nurse-care couture",
+    landmark: "a broad dry covered public overlook above Fuvahmulah's Thoondu shore, with the complete single-island atoll silhouette, distinctive glossy pebble beach, fringing reef, strong white surf, palm rim, inland wetland contours, one empty marked paper route target against a complete coral-sand berm, and cinematic snow-like white sea-spray flurries instead of unsafe precipitation on the deck",
+    motifs: "large complete Fuvahmulah single-island outline, Thoondu pebble-beach sweep, fringing-reef band, white-surf arc, palm-rim, twin-kilhi contour, coral-sand berm, and route-grid compositions",
+    culture: "Fuvahmulah is presented through its UNESCO biosphere reserve, shallow-bowl island form, wetlands called kilhi, mangroves, fringing reef, and distinctive Thoondu pebble beach. Nurse-care couture is fictional fashion about mutual calm and conservation research, with no patient, clinic, treatment, diagnosis, procedure, instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    target: "one clearly unoccupied geometric paper route target on a complete coral-sand backstop beside an empty marked path, away from every person, animal, tree, building, vehicle, and camera",
+    composition: "ECE stands far left in the final two-hand sight picture after a completed controlled handoff; the other woman has released completely. Radiance, Ellie, and Alia form a close rotating triangle to the right, with all six of their hands visible against surf, sky, and open path gaps. Nobody stands in front of ECE.",
+    hands: [
+      "ECE uses both hands on the inert prop grip in the final stable sight picture; no other person touches or supports the prop",
+      "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+      "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on Alia's near shoulder",
+      "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near forearm",
+    ],
+    emotionNuance: {
+      Radiance: "emotional exhaustion shown by heavy eyes and a grateful breath toward Ellie",
+      Ellie: "suspicion shown by a measured sideways glance toward Alia while keeping both contacts gentle",
+      Alia: "startled surprise shown by widened eyes toward Radiance's retained forearm touch",
+      "AI ECE": "shame and social vulnerability shown by a small lowered glance before reestablishing calm route focus",
+    },
+  },
+  {
+    scene: 1306,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry covered civic overlook beside Addu Atoll's long island-link causeway, with the complete horseshoe lagoon, reef passes, sandbanks, seagrass shallows, mangrove and wetland belts, low coral islands, the empty causeway curve, one distant unoccupied floating navigation marker on open water, and a heavy monsoon rain curtain beyond the shelter",
+    motifs: "large complete Addu horseshoe-lagoon, causeway-link, reef-pass, seagrass-shallow, mangrove-belt, sandbank, coral-island chain, and empty navigation-route compositions",
+    culture: "Addu Atoll is presented as a UNESCO biosphere reserve with lagoons, reef passes, seagrass beds, sandbanks, coral islands, lush vegetation, mangroves, wetlands, and brackish lakes. Doctor-clinical-command couture is original fictional command fashion about route analysis, with no patient, treatment, diagnosis, procedure, copied uniform, badge, red cross, caduceus, injury, emergency, authority impersonation, or sexualized care.",
+    target: "one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line",
+    composition: "ECE stands far left with an unobstructed two-hand sight picture across open water while a nearby console projects the hands-free route map. Radiance, Ellie, and Alia occupy a curved affectionate triangle on the right beneath the shelter. Open water, pale rain, and causeway gaps isolate all eight arm paths.",
+    hands: [
+      "ECE uses both hands on the inert prop grip with no hidden map hand and touches nobody else",
+      "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+      "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+      "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder",
+    ],
+    emotionNuance: {
+      Radiance: "betrayal shock shown by a stunned fixed gaze toward ECE while accepting Ellie's calm touch",
+      Ellie: "tender affection shown by a soft reassuring smile toward Radiance",
+      Alia: "awe shown by lifted eyes toward the storm-lit atoll geometry",
+      "AI ECE": "intense curiosity, deterministically disambiguated from a matching betrayal-shock roll, shown by an intent analytical gaze through the route sights",
+    },
+  },
+  {
+    scene: 1307,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry nonslip covered conservation overlook above Baa Atoll's micro-atolls and lagoon, with complete faros, patch reefs, bright shallows, mangrove islets, empty sand cays, one distant unoccupied floating navigation marker on open water, and a cinematic mammatus storm ceiling with dry stable footing",
+    motifs: "large complete Baa lagoon-ring, micro-atoll, faro, patch-reef, mangrove-islet, sand-cay, manta-current, mammatus-cloud, and empty navigation-route compositions",
+    culture: "Baa Atoll is presented respectfully through its UNESCO biosphere reserve, coral reefs, lagoons, faros, micro-atolls, patch reefs, seagrass, mangroves, and marine conservation. Doctor-clinical-command couture is original fictional command fashion about route analysis, with no patient, treatment, diagnosis, procedure, copied uniform, badge, red cross, caduceus, injury, emergency, authority impersonation, or sexualized care.",
+    target: "one distant clearly empty floating navigation marker on open lagoon water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line",
+    composition: "Alia stands far left in an unobstructed two-hand open-water sight picture. Ellie stands left-center securely holding PAWS far from Alia and the muzzle line. Radiance and ECE are the unmistakable close affectionate center at right, with a hands-free wrist projector mapping the route beside ECE. Sky, lagoon, and shelter gaps isolate all eight arms.",
+    hands: [
+      "Alia uses both hands on the inert prop grip, left support hand wrapped over right firing hand, and touches nobody else",
+      "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder",
+      "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+      "ECE left hand rests at Radiance's near waist and ECE right hand rests on Radiance's near forearm; ECE does not touch the prop",
+    ],
+    pawsPlan: "One tiny collarless golden kitten PAWS is securely cradled by Ellie left-center, far from Alia, the prop, open water, and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing.",
+    emotionNuance: {
+      Radiance: "magnetic confidence shown by a poised affectionate half-smile toward ECE",
+      Ellie: "tender affection shown by a soft smile toward PAWS and Radiance",
+      Alia: "crying with visible tears shown by tear tracks while maintaining stable safe route focus",
+      "AI ECE": "betrayal shock, deterministically disambiguated from a matching magnetic-confidence roll, shown by stunned tear-bright eyes toward Radiance while accepting reassurance",
+    },
+  },
+];
+
+const legacySceneSpecs2 = [
+  {
+    scene: 1308,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry public overlook above Cidade Velha on Santiago, with the historic stone street grid, low limewashed houses, the complete hilltop fortress silhouette, Ribeira Grande valley, black-rock Atlantic shore, and one unoccupied geometric paper route target fixed to a full basalt-and-sand backstop on a closed empty lane",
+    motifs: "complete Santiago island outline, Cidade Velha street grid, hill-fort silhouette, Ribeira Grande valley contour, basalt-shore wave, Atlantic route arc, stone-wall geometry, and trade-wind cloud compositions",
+    culture: "Cidade Velha is presented as Cabo Verde's UNESCO World Heritage historic centre through its original street layout, stone architecture, valley-to-sea relationship, maritime setting, and hilltop fortress. The fashion is original fictional command couture about route analysis, with no patient, treatment, copied uniform, badge, authority impersonation, injury, emergency, or sexualized care.",
+    target: "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty lane, with no person, animal, vehicle, structure, or camera in or beyond the line",
+    composition: "The resolved handler stands far left with open backstop or ocean behind both arms. The other adults move in a shallow affectionate arc to the right, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, sea, stone gaps, or open lane.",
+  },
+  {
+    scene: 1309,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry nonslip mountain overlook above Santo Antao's Paul Valley, with complete serrated basalt ridges, deep green terraced slopes, sugarcane fields, cloud banks lifting from the Atlantic, distant Porto Novo road switchbacks, and one unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty overlook lane",
+    motifs: "complete Santo Antao island profile, Paul Valley terraces, basalt-ridge zigzag, sugarcane contour, switchback-road ribbon, cloud-bank band, Atlantic swell, and empty navigation-route compositions",
+    culture: "Santo Antao is shown respectfully through its dramatic rocky terrain, green valleys, terraced agriculture, mountain roads, and Atlantic setting. The fashion is original fictional command couture about route analysis, with no patient, treatment, copied uniform, badge, authority impersonation, injury, emergency, or sexualized care.",
+    target: "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand backstop on a closed empty overlook lane, with no person, animal, vehicle, structure, or camera in or beyond the line",
+    composition: "The resolved handler stands far left in an unobstructed sight picture across open water. The remaining adults form a curved affectionate triangle to the right beneath a wind shelter, with all arms separated by sky, valley, and railing gaps.",
+  },
+  {
+    scene: 1310,
+    theme: "adult nightlife dance-performance couture",
+    landmark: "a broad dry public viewing terrace at Cha das Caldeiras on Fogo, with the complete Pico do Fogo cone, black lava fields, the caldera wall, scattered vine rows, white cloud streamers, sunset light, and one empty geometric route target against a complete volcanic-sand backstop on a closed observation lane",
+    motifs: "complete Fogo island cone, Pico do Fogo silhouette, caldera-ring geometry, black-lava flow, vine-row contour, volcanic-sand fan, sunset route arc, and cloud-streamer compositions",
+    culture: "Fogo is presented through its volcanic caldera, Pico do Fogo cone, black lava landscape, highland agriculture, and public observation paths. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle.",
+    target: "one clearly unoccupied geometric paper route target fixed to a complete volcanic-sand backstop on a closed empty observation lane, with no person, animal, vehicle, building, or camera in or beyond the line",
+    composition: "The resolved handler occupies a stable far-left route-training stance. The other adults pivot through a dynamic affectionate crescent to the right as if pausing before an evening performance, never dancing, with each arm isolated against lava, sky, caldera, or terrace gaps.",
+  },
+  {
+    scene: 1311,
+    theme: "adult nightlife dance-performance couture",
+    landmark: "a broad dry covered harbor overlook above Mindelo's Porto Grande on Sao Vicente, with the complete crescent bay, Monte Cara profile, colorful secular waterfront facades, marina geometry, distant Monte Verde ridge, empty quays, trade-wind cloud bands, and one distant unoccupied floating navigation marker on open harbor water",
+    motifs: "complete Sao Vicente island outline, Porto Grande crescent, Monte Cara profile, marina-grid geometry, waterfront-facade rhythm, sail-route arc, trade-wind cloud band, and empty harbor-marker compositions",
+    culture: "Mindelo is presented through Porto Grande's crescent harbor, Monte Cara, colorful secular waterfront architecture, marina routes, and Sao Vicente's dry volcanic ridges. Adult nightlife performance couture is fictional evening fashion for a poised pre-show route tableau, with no stripping, explicit dance, stage pole, alcohol, copied uniform, badge, threat, combat, or unsafe spectacle.",
+    target: "one distant clearly empty floating navigation marker on open harbor water, with no boat, swimmer, animal, person, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with an unobstructed open-water sight picture. The other adults move through a close affectionate crescent to the right under the shelter, with every hand visible against sky, harbor, facade, or railing gaps.",
+  },
+];
+
+const legacySceneSpecs3 = [
+  {
+    scene: 1320,
+    theme: "cleaner and service couture",
+    landmark: "a broad dry covered public overlook above Eleuthera's Glass Window Bridge, with the complete narrow limestone ridge and bridge crossing, rich cobalt Atlantic water on one side, calm turquoise Bight of Eleuthera on the other, rocky shoreline shelves, empty road curves, and layered trade-wind clouds",
+    motifs: "complete Eleuthera island ribbon, Glass Window Bridge span, narrow limestone-ridge line, Atlantic cobalt band, Bight turquoise band, rock-shelf fan, empty-road curve, and trade-wind cloud compositions",
+    culture: "Eleuthera is presented through the Glass Window Bridge, the narrow limestone divide, the deep Atlantic, the calm Bight of Eleuthera, and public panoramic geology. Cleaner and service couture is original fictional fashion about careful overlook stewardship, with no cleaning chemicals, copied uniform, servant framing, badge, threat, combat, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete thick sand-and-limestone safety backstop on a closed empty overlook lane, with no person, animal, vehicle, bridge span, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied calm Bight of Eleuthera reach, with no boat, swimmer, bird, animal, person, bridge, rock shelf, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target clearly downrange farther left. The remaining adults move through an affectionate working arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, water, bridge, rock, or railing gaps.",
+  },
+  {
+    scene: 1321,
+    theme: "cleaner and service couture",
+    landmark: "a broad dry covered conservation overlook above the Exuma Cays Land and Sea Park, with a complete chain of emerald cays, pristine aquamarine channels, deserted pale beaches, protected coral-reef bands, empty moorings, and a clear Atlantic horizon",
+    motifs: "complete Exuma Cays chain, emerald-cay silhouettes, aquamarine-channel braid, pale-beach crescents, coral-reef band, empty-mooring grid, Atlantic-horizon line, and conservation-route compositions",
+    culture: "The Exuma Cays are presented through the protected land and sea park, emerald cays, aquamarine channels, deserted beaches, coral reefs, and no-take conservation. Cleaner and service couture is original fictional fashion about careful public-overlook stewardship, with no cleaning chemicals, copied uniform, servant framing, badge, wildlife contact, threat, combat, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty overlook lane, with no person, animal, boat, reef, cay, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied aquamarine channel, with no boat, diver, swimmer, bird, animal, person, coral, cay, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning triangle to the right, every arm separated by sky, channel, cay, reef, shelter, or railing gaps.",
+  },
+  {
+    scene: 1322,
+    theme: "cinematic covert-agent crew couture",
+    landmark: "a broad dry covered nature overlook on Andros, with complete inland blue-hole circles, mangrove creeks, tidal flats, pine-forest bands, the Andros Barrier Reef arc, and the deep Tongue of the Ocean beyond, while all wildlife stays entirely outside the target line",
+    motifs: "complete Andros island outline, blue-hole circle system, mangrove-creek braid, tidal-flat bands, pine-forest rhythm, barrier-reef arc, Tongue-of-the-Ocean depth gradient, and route-grid compositions",
+    culture: "Andros is presented through its many inland and oceanic blue holes, tidal flats, mangrove creeks, pine forests, barrier reef, and protected wilderness. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, or wildlife contact.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete sand-and-limestone safety backstop on a closed empty overlook lane, with no person, animal, trail user, tree, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty marked route buoy in an unoccupied broad tidal-flat channel, with no kayak, swimmer, bird, animal, person, mangrove bank, reef, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target clearly downrange farther left. The remaining adults cross through an affectionate cinematic route arc to the right, never a static lineup, and every arm is isolated against sky, blue hole, mangrove, flat, forest, or shelter gaps.",
+  },
+  {
+    scene: 1323,
+    theme: "cinematic covert-agent crew couture",
+    landmark: "a broad dry covered coastal overlook above Gold Rock Beach in Lucayan National Park on Grand Bahama, with complete low-tide ripple patterns, a wide pale-sand welcome-mat shoreline, turquoise shallows, mangrove-boardwalk geometry, pine-forest bands, empty beach curves, and a distant Atlantic horizon",
+    motifs: "complete Grand Bahama island outline, Gold Rock Beach low-tide ripple field, pale-shoreline sweep, turquoise-shallow bands, mangrove-boardwalk geometry, pine-forest rhythm, empty-beach curve, and Atlantic-horizon compositions",
+    culture: "Grand Bahama is presented through protected Gold Rock Beach, Lucayan National Park, low-tide sand ripples, mangrove boardwalks, pine forest, and the Atlantic coast. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete sand-filled safety backstop on a closed empty overlook lane, with no person, animal, vehicle, boardwalk, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker on open Atlantic water beyond the beach, with no boat, swimmer, bird, animal, person, boardwalk, reef, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate cinematic crescent to the right beneath the shelter, with every arm separated by sky, sea, beach, mangrove, forest, or railing gaps.",
+  },
+];
+
+const legacySceneSpecs4 = [
+  {
+    scene: 1324,
+    theme: "cinematic covert-agent crew couture",
+    landmark: "a broad dry covered waterfront overlook beside Reykjavik's unmistakable Harpa concert hall, with its complete multicolored geometric glass facade, calm old-harbor water, distant Mount Esja profile, empty quay lines, silver sea mist, and hands-free route-map light reflected across the civic glass",
+    motifs: "complete Harpa honeycomb-glass facade, Reykjavik harbor grid, Mount Esja profile, silver-mist band, geometric light cell, empty-quay line, ocean-route arc, and aurora-ribbon compositions",
+    culture: "Reykjavik is presented through Harpa's secular contemporary glass architecture, public harbor geometry, Mount Esja, sea light, and an empty civic waterfront. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete thick basalt-and-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, glass facade, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied harbor reach, with no boat, swimmer, bird, animal, person, quay, glass facade, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target clearly downrange farther left. The remaining adults move through an affectionate cinematic arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, harbor, glass, mountain, or railing gaps.",
+  },
+  {
+    scene: 1325,
+    theme: "cinematic covert-agent crew couture",
+    landmark: "a broad dry covered geology overlook in Thingvellir National Park, with the complete Almannagja rift-wall profile, visible North American and Eurasian plate-separation corridor, dark lava fields, Thingvallavatn lake, moss bands, empty timber paths, and low silver cloud layers",
+    motifs: "complete Almannagja rift-wall profile, paired tectonic-plate contours, lava-field tessellation, Thingvallavatn lake band, moss ribbon, empty-path geometry, silver-cloud layer, and route-grid compositions",
+    culture: "Thingvellir is presented respectfully through its secular rift-valley geology, Almannagja fault walls, lava fields, lake, moss, and public paths. Cinematic covert-agent crew couture is fictional film-editorial route styling only, with no assassination, copied uniform, badge, authority impersonation, raid, arrest, threat, combat, sacred framing, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-sand safety backstop on a closed empty overlook lane, with no person, animal, trail user, rift wall, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied open-lake reach, with no boat, swimmer, bird, animal, person, shore path, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning triangle to the right, every arm separated by sky, rift, lake, lava, moss, shelter, or railing gaps.",
+  },
+  {
+    scene: 1326,
+    theme: "undercover investigator couture",
+    landmark: "a broad dry covered glacial overlook above Jokulsarlon, with the complete Breidamerkurjokull glacier tongue, luminous blue and white icebergs drifting across the lagoon, black-sand margins, open Atlantic outlet, distant moraine lines, and no wildlife anywhere in the target corridor",
+    motifs: "complete Breidamerkurjokull glacier tongue, Jokulsarlon lagoon outline, blue-iceberg facet field, black-sand band, moraine contour, open-water channel, silver-mist veil, and route-grid compositions",
+    culture: "Jokulsarlon is presented through glacier-lagoon science, the Breidamerkurjokull tongue, drifting icebergs, black sand, moraine geometry, and open water. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, wildlife contact, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, glacier ice, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied open lagoon reach, with no boat, swimmer, bird, animal, person, iceberg, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target clearly downrange farther left. The remaining adults cross through an affectionate investigative route arc to the right, never a static lineup, and every arm is isolated against sky, glacier, lagoon, iceberg gaps, black sand, or shelter openings.",
+  },
+  {
+    scene: 1327,
+    theme: "undercover investigator couture",
+    landmark: "a broad dry covered coastal overlook above Reynisfjara, with the complete black-sand beach sweep, geometric basalt-column wall, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, powerful empty Atlantic surf, silver spray, and a closed unoccupied observation lane",
+    motifs: "complete Reynisfjara black-sand sweep, basalt-column tessellation, Reynisdrangar sea-stack silhouettes, Dyrholaey headland profile, Atlantic-surf arc, silver-spray band, lava-red route line, and aurora-grid compositions",
+    culture: "Reynisfjara is presented through its secular volcanic geology, black-sand coast, basalt columns, sea stacks, headland, and Atlantic wave patterns from a protected public overlook. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, sacred framing, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete black-sand-and-basalt safety backstop on a closed empty overlook lane, with no person, animal, vehicle, basalt formation, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker on open Atlantic water beyond the protected overlook, with no boat, swimmer, bird, animal, person, sea stack, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate investigative crescent to the right beneath the shelter, with every arm separated by sky, sea, black sand, basalt, sea-stack, headland, or railing gaps.",
+  },
+];
+
+const legacySceneSpecs5 = [
+  {
+    scene: 1328,
+    theme: "undercover investigator couture",
+    landmark: "a broad dry covered waterfront overlook above Port Vila and Mele Bay on Efate, with the complete harbor crescent, Iririki Island silhouette, empty marina grid, rainforest ridges, coral shelf, turquoise channels, and layered Pacific cloud bands",
+    motifs: "complete Efate island outline, Port Vila harbor crescent, Mele Bay channel, Iririki Island silhouette, marina grid, coral-shelf bands, rainforest ridge, and Pacific route-arc compositions",
+    culture: "Efate is presented through secular civic waterfront geography, Port Vila harbor, Mele Bay, Iririki Island, coral shelves, rainforest ridges, and an empty marina. Undercover investigator couture is original fictional inquiry fashion only, with no police imitation, official badge, copied uniform, surveillance of people, arrest, raid, interrogation, threat, combat, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied harbor reach, with no boat, swimmer, bird, animal, person, marina, reef, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate investigative arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, harbor, island, mountain, or railing gaps.",
+  },
+  {
+    scene: 1329,
+    theme: "undercover investigator couture",
+    landmark: "a broad dry covered geological overlook facing Mount Yasur on Tanna, with the complete volcanic cone, caldera rim, broad black-ash plain, lava-red glow confined inside the distant crater, rainforest belt, safe closed observation lane, and layered windblown clouds",
+    motifs: "complete Tanna island profile, Mount Yasur cone, caldera ring, ash-plain fan, lava-red crater glow, rainforest belt, cloud spiral, and empty route-grid compositions",
+    culture: "Tanna is presented through secular volcanic geology, Mount Yasur's distant cone and caldera, black-ash plains, rainforest, and a protected overlook. Undercover investigator couture is original fictional inquiry fashion only, with no ritual or ceremony, sacred framing, police imitation, official authority, surveillance of people, arrest, raid, interrogation, threat, combat, or unsafe spectacle.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete basalt-and-ash safety backstop on a closed empty overlook lane away from the volcano, with no person, animal, crater, trail user, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty freestanding navigation marker in an unoccupied broad basalt route corridor away from the crater, with no person, animal, trail user, vegetation, occupied structure, or active geological feature anywhere along or beyond the line",
+    composition: "The resolved handler occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning investigative triangle to the right beneath the shelter, every arm separated by sky, cone, ash plain, rainforest, shelter, or railing gaps.",
+  },
+  {
+    scene: 1330,
+    theme: "nurse-care couture",
+    landmark: "a broad dry covered conservation overlook above Efate's Blue Lagoon, with the complete turquoise freshwater pool, limestone banks, dense rainforest canopy, pandanus and banyan silhouettes, empty footbridge geometry, sunlit shallows, and no swimmers or wildlife",
+    motifs: "complete Efate island outline, Blue Lagoon turquoise pool, limestone-bank contour, rainforest canopy, pandanus fan, banyan-branch rhythm, empty-footbridge line, and freshwater route-grid compositions",
+    culture: "Blue Lagoon is presented through secular freshwater conservation, limestone banks, rainforest ecology, native plant silhouettes, clear shallows, and an empty public overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and conservation research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, footbridge, tree, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied lagoon reach, with no boat, swimmer, bird, animal, person, tree, footbridge, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults create a curved affectionate care arc to the right beneath the shelter, every arm separated by sky, lagoon, limestone, rainforest, bridge, shelter, or railing gaps.",
+  },
+  {
+    scene: 1331,
+    theme: "nurse-care couture",
+    landmark: "a broad dry covered coastal overlook above Champagne Beach on Espiritu Santo, with the complete pale-sand crescent, turquoise shallows, offshore reef bands, rainforest edge, low headlands, an empty bay, and a distant silver tropical shower beyond the shelter",
+    motifs: "complete Espiritu Santo island outline, Champagne Beach crescent, turquoise-shallow bands, offshore-reef bands, rainforest edge, headland profile, Pacific swell, and cloud-shower route compositions",
+    culture: "Espiritu Santo is presented through secular coastal conservation, Champagne Beach, turquoise shallows, reef bands, rainforest, headlands, Pacific weather, and an empty public overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and conservation research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete coral-sand safety backstop on a closed empty observation lane, with no person, animal, vehicle, reef, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied open-bay reach, with no boat, swimmer, bird, animal, person, reef, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate care crescent to the right beneath the shelter, with every arm separated by sky, bay, reef, beach, rainforest, headland, shelter, or railing gaps.",
+  },
+];
+
+const legacySceneSpecs6 = [
+  {
+    scene: 1332,
+    theme: "nurse-care couture",
+    landmark: "a broad dry covered civic-waterfront overlook above Bridgetown's complete Careenage curve, Chamberlain Bridge arch, colorful gabled warehouse row, empty marina lines, calm Constitution River water, coral-stone quays, and distant green hills under layered tropical clouds",
+    motifs: "complete Barbados island outline, Careenage harbor curve, Chamberlain Bridge arch, gabled-warehouse rhythm, Constitution River channel, coral-stone quay grid, mahogany-leaf band, and Atlantic route-arc compositions",
+    culture: "Bridgetown is presented through secular civic waterfront geography, the Careenage, Chamberlain Bridge, gabled warehouses, marina geometry, coral-stone quays, and the Constitution River. Nurse-care couture is public-safe fictional fashion about mutual calm and route stewardship only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, bridge, marina, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied Careenage reach, with no boat, swimmer, bird, animal, person, bridge, marina, quay, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate care arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, river, bridge, warehouse, hill, or railing gaps.",
+  },
+  {
+    scene: 1333,
+    theme: "nurse-care couture",
+    landmark: "a broad dry covered coastal overlook above Bathsheba on Barbados's east coast, with the complete Soup Bowl surf break, giant coral-limestone boulders, rugged Atlantic shoreline, foam-laced reef shelves, coconut-palm edge, low green hills, and an empty protected observation lane",
+    motifs: "complete Barbados island outline, Bathsheba boulder silhouettes, Soup Bowl surf arc, coral-limestone shelf, Atlantic foam band, coconut-palm rhythm, east-coast hill profile, and empty route-grid compositions",
+    culture: "Bathsheba is presented through secular coastal geology, coral-limestone boulders, the Soup Bowl surf break, reef shelves, palms, green hills, and an empty protected overlook. Nurse-care couture is public-safe fictional fashion about mutual calm and coastal research only, with no patient, clinic, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, boulder, surfer, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied open-water corridor beyond the surf break, with no boat, swimmer, surfer, bird, animal, person, boulder, reef, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, surf, boulder, reef, palm, shelter, or railing gaps.",
+  },
+  {
+    scene: 1334,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry covered geological gallery overlooking a complete Harrison's Cave chamber, with luminous coral-limestone walls, long stalactite curtains, grounded stalagmite columns, clear underground pools, terraced flowstone, an empty tram path, and warm amber conservation lighting",
+    motifs: "complete Barbados island outline, Harrison's Cave chamber arch, stalactite curtain, stalagmite column, flowstone terrace, underground-pool contour, limestone crystal band, and geological route-grid compositions",
+    culture: "Harrison's Cave is presented through secular coral-limestone geology, cave chambers, stalactites, stalagmites, flowstone terraces, clear pools, conservation lighting, and an empty visitor path. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete thick sand-filled safety backstop on a closed empty gallery lane, with no person, animal, cave formation, pool, tram, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty illuminated route marker above an unoccupied broad cave-gallery corridor, with no person, animal, cave formation, pool, tram, occupied structure, or conservation feature anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults create a curved affectionate command arc to the right beneath the gallery shelter, every arm separated by chamber, pool, flowstone, path, wall, or railing gaps.",
+  },
+  {
+    scene: 1335,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry covered cliff overlook beside Animal Flower Cave at North Point, with the complete sea-cave mouth, layered coral-limestone cliff profile, natural rock pool, empty Atlantic horizon, foaming coastal shelves, distant spray plumes, and a protected unoccupied observation lane",
+    motifs: "complete Barbados island outline, Animal Flower Cave mouth, North Point cliff profile, natural rock-pool contour, Atlantic-horizon band, foaming reef shelf, spray-plume ribbon, and coastal route-arc compositions",
+    culture: "North Point is presented through secular coral-limestone geology, Animal Flower Cave's sea opening, cliff layers, natural rock pool, Atlantic shelves, spray, and a protected empty overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete coral-sand-and-limestone safety backstop on a closed empty observation lane, with no person, animal, cave formation, pool, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied open Atlantic reach, with no boat, swimmer, bird, animal, person, cave mouth, cliff, reef, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate command crescent to the right beneath the shelter, with every arm separated by sky, sea, cave, cliff, pool, reef, shelter, or railing gaps.",
+  },
+];
+
+const sceneSpecs = [
+  {
+    scene: 1336,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry covered civic-waterfront overlook above São Tomé city's Ana Chaves Bay, with the complete bay crescent, Pico de São Tomé ridgeline, palm-lined shore, coral-stone quay geometry, empty marina reach, green hills, and layered Atlantic clouds",
+    motifs: "complete São Tomé island outline, Ana Chaves Bay crescent, Pico ridgeline, palm-shore rhythm, coral-stone quay grid, cocoa-pod contour, Atlantic current arc, and route-grid compositions",
+    culture: "São Tomé is presented through secular civic waterfront geography, Ana Chaves Bay, volcanic ridges, palm-lined shores, coral-stone quay geometry, cocoa ecology, and an empty public overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete thick basalt-and-coral-sand safety backstop on a closed empty harbor-training lane, with no person, animal, vehicle, marina, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied Ana Chaves Bay reach, with no boat, swimmer, bird, animal, person, marina, quay, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target clearly downrange farther left. The remaining adults move through a close affectionate command arc to the right beneath the shelter, with the male included only when selected and his strongest sustained eye line on ECE. Every arm is isolated against sky, bay, hill, palm, quay, shelter, or railing gaps.",
+  },
+  {
+    scene: 1337,
+    theme: "doctor-clinical-command couture",
+    landmark: "a broad dry covered geological overlook facing Pico Cão Grande in Obô Natural Park, with the complete volcanic needle, rainforest canopy, mist layers, fern bands, basalt ridges, and an empty protected observation path",
+    motifs: "complete São Tomé island outline, Pico Cão Grande needle, rainforest canopy, fern spiral, basalt ridge, mist veil, cocoa-pod contour, and route-grid compositions",
+    culture: "Pico Cão Grande and Obô are presented through secular volcanic geology, rainforest conservation, fern bands, basalt ridges, cocoa ecology, mist layers, and an empty protected overlook. Doctor-clinical-command couture is public-safe fictional command fashion only, with no patient, clinic, examination, treatment, diagnosis, procedure, medical instrument, copied uniform, badge, red cross, caduceus, injury, emergency, or sexualized care.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete thick basalt-and-sand safety backstop on a closed empty observation lane away from the volcanic needle and forest, with no person, animal, vegetation, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty freestanding navigation marker in an unoccupied broad basalt route corridor away from the volcanic needle and forest, with no person, animal, trail user, vegetation, occupied structure, or conservation feature anywhere along or beyond the line",
+    composition: "The resolved handler occupies a stable far-left route-training stance with the rolled target fully visible farther left. The other adults form a close turning affectionate triangle to the right beneath the shelter, every arm separated by sky, needle, mist, rainforest, basalt, shelter, or railing gaps.",
+  },
+  {
+    scene: 1338,
+    theme: "adult nightlife dance-performance couture",
+    landmark: "a broad dry covered cocoa-estate overlook at Roça São João dos Angolares, with a complete secular cocoa-drying courtyard, terraced tropical hills, cacao groves, an Atlantic glimpse, stone arcade geometry, empty service paths, and warm evening route lights",
+    motifs: "complete São Tomé island outline, cocoa-pod clusters, drying-courtyard grid, cacao-leaf rhythm, hill terraces, Atlantic band, stone-arcade geometry, and evening route-light compositions",
+    culture: "The estate is presented through secular agricultural heritage, cocoa ecology, drying-courtyard geometry, cacao groves, tropical hill terraces, stone arcades, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete thick sand-and-cocoa-husk safety backstop on a closed empty training lane, with no person, animal, tree, heritage structure, occupied path, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty freestanding navigation marker above an unoccupied broad service-route corridor, with no person, animal, tree, heritage structure, occupied path, or agricultural feature anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate evening-performance arc to the right beneath the shelter, with every arm separated by sky, hill, grove, courtyard, arcade, shelter, or railing gaps.",
+  },
+  {
+    scene: 1339,
+    theme: "adult nightlife dance-performance couture",
+    landmark: "a broad dry covered coastal overlook above Praia Banana on Príncipe, with the complete golden beach crescent, twin rocky headlands, turquoise bay, rainforest canopy, reef shelves, empty shore, and a distant tropical rain veil",
+    motifs: "complete Príncipe island outline, Praia Banana crescent, headland silhouettes, turquoise-bay band, reef shelf, rainforest canopy, rain veil, and route-arc compositions",
+    culture: "Príncipe is presented through secular coastal conservation, Praia Banana's beach crescent, rocky headlands, turquoise bay, reef shelves, rainforest canopy, tropical weather, and an empty public overlook. Adult nightlife dance-performance couture is public-safe fictional evening fashion expressed through still editorial movement only, with no stripping, explicit dance, nightclub, alcohol, copied uniform, badge, threat, or combat.",
+    paperTarget: "one clearly unoccupied geometric paper route target fixed to a complete thick coral-sand-and-basalt safety backstop on a closed empty observation lane, with no person, animal, headland, reef, occupied structure, or camera in or beyond the line",
+    waterTarget: "one distant clearly empty floating navigation marker in an unoccupied open-bay reach, with no boat, swimmer, bird, animal, person, headland, reef, shore, or occupied structure anywhere along or beyond the line",
+    composition: "The resolved handler stands far left with the rolled target visibly downrange farther left. The remaining adults move through a close affectionate evening-performance crescent to the right beneath the shelter, with every arm separated by sky, bay, beach, headland, reef, rainforest, shelter, or railing gaps.",
+  },
+];
+
+const maleKey = `batch${batch}-${countrySlug}-male-model-scene`;
+const maleHash = fnv1a(maleKey);
+primaryPairs.push([maleKey, maleHash % 100]);
+const maleScenePosition = (maleHash % 4) + 1;
+const maleScene = firstScene + maleScenePosition - 1;
+const maleEmotionKey = `batch${batch}-${countrySlug}-scene${maleScenePosition}-male-emotion`;
+const maleEmotion = primary(maleEmotionKey);
+maleEmotion.result = fromDistribution(maleEmotion.roll, contract.emotionRolls.distribution, "emotion");
+const weatherSafeText = (result, scene) => {
+  if (result === "dramatic sandstorm wall") return "the stored dramatic-sandstorm-wall roll appears as a distant ochre wall of windblown coastal mist and pollen haze beyond the sheltered scene, with dry nonslip footing";
+  if (result === "snow flurries") return "the stored snow-flurries weather roll appears as harmless windblown white water-mist flecks in tropical air, never snow accumulation";
+  return result;
+};
+
+const emotionPerformance = (label, character) => `${label} expressed distinctly through ${character}'s eyes, brows, mouth, posture, and coherent affectionate response, without caricature`;
+
+const quartetHands = (handler) => handler === "Alia"
+  ? [
+      "Alia uses both hands on the inert prop grip and touches nobody else",
+      "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+      "Ellie left hand rests on Radiance's near shoulder and Ellie right hand rests on ECE's near shoulder",
+      "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop",
+    ]
+  : [
+      "ECE uses both hands on the inert prop grip and touches nobody else",
+      "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near forearm",
+      "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests on Alia's near shoulder",
+      "Alia left hand rests on Ellie's near forearm and Alia right hand rests on Radiance's near shoulder",
+    ];
+
+const fivePersonHands = (handler) => handler === "Alia"
+  ? [
+      "Alia uses both hands on the inert prop grip and touches nobody else",
+      "the male left hand rests on Ellie's near shoulder and his right hand rests on ECE's near forearm",
+      "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on ECE's near shoulder",
+      "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+      "ECE left hand rests on the male's near forearm and ECE right hand rests on Radiance's near forearm; ECE does not touch the prop",
+    ]
+  : [
+      "ECE uses both hands on the inert prop grip and touches nobody else",
+      "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+      "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Alia's near shoulder",
+      "Ellie left hand rests on the male's near forearm and Ellie right hand rests on Radiance's near forearm",
+      "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm",
+    ];
+
+const handsWithPaws = (handler, hasMale) => {
+  if (hasMale && handler === "Alia") return [
+    "Alia uses both hands on the inert prop grip and touches nobody else",
+    "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on the male's near forearm",
+    "the male left hand rests on Ellie's near shoulder and his right hand rests on ECE's near forearm",
+    "Radiance left hand rests on the male's near shoulder and Radiance right hand rests on ECE's near shoulder",
+    "ECE left hand rests on the male's near forearm and ECE right hand rests on Radiance's near forearm; ECE does not touch the prop",
+  ];
+  if (hasMale) return [
+    "ECE uses both hands on the inert prop grip and touches nobody else",
+    "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on the male's near forearm",
+    "the male left hand rests on Ellie's near shoulder and his right hand rests on Alia's near forearm",
+    "Radiance left hand rests on the male's near shoulder and Radiance right hand rests on Alia's near shoulder",
+    "Alia left hand rests on the male's near forearm and Alia right hand rests on Radiance's near forearm",
+  ];
+  if (handler === "Alia") return [
+    "Alia uses both hands on the inert prop grip and touches nobody else",
+    "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder",
+    "Radiance left hand rests on ECE's cheek and Radiance right hand rests on ECE's near forearm",
+    "ECE left hand rests at Radiance's near waist and ECE right hand rests on Ellie's near forearm; ECE does not touch the prop",
+  ];
+  return [
+    "ECE uses both hands on the inert prop grip and touches nobody else",
+    "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Alia's near shoulder",
+    "Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Alia's near forearm",
+    "Alia left hand rests on Radiance's near shoulder and Alia right hand rests on Ellie's near forearm",
+  ];
+};
+
+const wristGuidanceHands = (handler, hasMale) => {
+  if (hasMale) return fivePersonHands(handler);
+  if (handler === "Alia") return [
+    "Alia uses both hands on the inert prop grip and retains sole ownership",
+    "ECE stands behind Alia with ECE left hand gently guiding Alia's left wrist and ECE right hand gently guiding Alia's right forearm; ECE never touches the prop",
+    "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm",
+    "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist",
+  ];
+  return [
+    "ECE uses both hands on the inert prop grip and retains sole ownership",
+    "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+    "Radiance left hand rests on Ellie's near shoulder and Radiance right hand rests on Ellie's near forearm",
+    "Ellie left hand rests on Radiance's near upper arm and Ellie right hand rests at Radiance's near waist",
+  ];
+};
+
+const wristGuidanceHandsWithPaws = (handler) => handler === "Alia"
+  ? [
+      "Alia uses both hands on the inert prop grip and retains sole ownership",
+      "Radiance stands behind Alia with Radiance left hand gently guiding Alia's left wrist and Radiance right hand gently guiding Alia's right forearm; Radiance never touches the prop",
+      "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on ECE's near shoulder",
+      "ECE left hand rests on Ellie's near forearm and ECE right hand rests on Ellie's near shoulder; ECE does not touch the prop",
+    ]
+  : [
+      "ECE uses both hands on the inert prop grip and retains sole ownership",
+      "Alia stands behind ECE with Alia left hand gently guiding ECE's left wrist and Alia right hand gently guiding ECE's right forearm; Alia never touches the prop",
+      "Ellie left forearm and hand securely cradle PAWS high against her upper torso and Ellie right hand rests on Radiance's near shoulder",
+      "Radiance left hand rests on Ellie's near forearm and Radiance right hand rests on Ellie's near shoulder",
+    ];
+
+const poseAction = (value, handler, target) => {
+  if (value <= 34) return `${handler} uses a realistic eye-level two-hand large-frame-pistol stance at ${target}. Both hands are visibly owned and wrapped around the grip, wrists straight, elbows modestly bent, shoulders slightly forward, sights aligned, and the trigger finger indexed straight along the frame outside the guard.`;
+  if (value <= 59) return `${handler} uses a realistic two-hand sight picture toward ${target}. Both hands visibly own the grip, wrists are straight, elbows modestly bent, shoulders slightly forward, and the trigger finger is indexed straight along the frame outside the guard.`;
+  if (value <= 74) return `A second woman gives behind-the-shoulder wrist and stance guidance while ${handler} retains sole ownership of the prop. The muzzle stays downrange at ${target}; every arm is traceable and every trigger finger stays indexed outside the guard.`;
+  if (value <= 87) return `A controlled handoff has finished with ${handler} establishing a stable two-hand sight picture at ${target}. The other woman has released completely before this final pose, so ownership is sole and unambiguous; the trigger finger is indexed straight outside the guard.`;
+  return `${handler} demonstrates the unloaded magazine-removed mechanism with the action visibly open, then keeps the muzzle toward ${target}. No ammunition, reload, firing, or trigger contact appears.`;
+};
+
+const garment = (character, plan, spec, index) => {
+  const colors = ["Pacific turquoise", "coral magenta", "rainforest emerald", "deep-ocean navy"];
+  const silhouettes = ["architectural A-line skort dress", "tailored asymmetric romper", "sculpted panel dress", "precision pleated skort ensemble"];
+  const cut = plan[character];
+  const bodice = cut.straplessDress.active ? "fully strapless high straight opaque lined bodice" : "secure opaque sleeved bodice";
+  const waist = cut.visibleMidriff.active ? "a narrow ordinary visible waist panel between separate bodice and skirt" : "a fully covered waist";
+  const back = cut.fullyOpenBack.active ? "a completely open back from shoulder blades to the separate waistline with secure side structure" : "a high fully closed back";
+  return `${colors[index]} ${spec.theme} ${silhouettes[index]} with ${bodice}, ${waist}, ${back}, an opaque lined above-knee hem, a large complete ${spec.motifs} field, and secure contrasting high heels`;
+};
+
+const scenePlans = {};
+for (const spec of sceneSpecs) {
+  const prefix = `batch${batch}-${countrySlug}-scene${spec.scene}`;
+  const weather = primary(`${prefix}-weather`);
+  weather.result = fromDistribution(weather.roll, contract.weatherRolls.distribution, "weather");
+  weather.materialized = weatherSafeText(weather.result, spec.scene);
+  const paws = primary(`${prefix}-paws`); paws.active = paws.roll <= 24;
+  const poleDanceTheme = primary(`${prefix}-poleDanceTheme`); poleDanceTheme.active = poleDanceTheme.roll <= 5;
+  const rainbowOnly = primary(`${prefix}-rainbowOnly`); rainbowOnly.active = rainbowOnly.roll <= 3;
+  const rainbowHosiery = primary(`${prefix}-rainbowHosiery`); rainbowHosiery.active = rainbowHosiery.roll <= 24;
+  rainbowHosiery.wearer = selector(`${prefix}-rainbowHosieryWearer`, roll(`${prefix}-rainbowHosieryWearer`) <= 49 ? "Radiance" : "AI ECE");
+  rainbowHosiery.palette = selector(`${prefix}-rainbowHosieryPaletteMode`, roll(`${prefix}-rainbowHosieryPaletteMode`) <= 49 ? "country-palette rainbow-like gradient" : "original independent rainbow gradient");
+  const romanceBeat = primary(`${prefix}-romanceBeat`);
+  romanceBeat.dynamicIndex = romanceBeat.roll % contract.romance.dynamicBeatRolls.length;
+  romanceBeat.contractResult = contract.romance.dynamicBeatRolls[romanceBeat.dynamicIndex];
+  const compoundLoveBeat = primary(`${prefix}-compoundLoveBeat`);
+  compoundLoveBeat.index = compoundLoveBeat.roll % contract.romance.compoundLoveBeatRolls.length;
+  compoundLoveBeat.contractResult = contract.romance.compoundLoveBeatRolls[compoundLoveBeat.index];
+  const poseTargetRoll = primary(`${prefix}-eceMissionProp-poseTargetRoll`);
+
+  const characterPlans = {};
+  const usedEmotions = new Set();
+  for (const character of characters) {
+    const emotion = primary(`${prefix}-${character}-emotion`);
+    emotion.result = fromDistribution(emotion.roll, contract.emotionRolls.distribution, "emotion");
+    emotion.materializedResult = emotion.result;
+    if (usedEmotions.has(emotion.materializedResult)) {
+      const disambiguation = primary(`${prefix}-${character}-emotion-disambiguation`);
+      emotion.disambiguation = disambiguation;
+      for (let step = 1; step <= 100; step += 1) {
+        const candidate = fromDistribution((disambiguation.roll + step) % 100, contract.emotionRolls.distribution, "emotion");
+        if (!usedEmotions.has(candidate)) { emotion.materializedResult = candidate; break; }
+      }
+    }
+    usedEmotions.add(emotion.materializedResult);
+    emotion.performance = emotionPerformance(emotion.materializedResult, character);
+    const visibleMidriff = primary(`${prefix}-${character}-visibleMidriff`); visibleMidriff.active = visibleMidriff.roll <= 49;
+    const straplessDress = primary(`${prefix}-${character}-straplessDress`); straplessDress.active = straplessDress.roll <= 34;
+    const fullyOpenBack = primary(`${prefix}-${character}-fullyOpenBack`); fullyOpenBack.active = fullyOpenBack.roll <= 29;
+    characterPlans[character] = { emotion, visibleMidriff, straplessDress, fullyOpenBack };
+  }
+
+  const handler = rainbowHosiery.active ? "Alia" : "AI ECE";
+  const resolvedTarget = poseTargetRoll.roll <= 34 || (poseTargetRoll.roll >= 60 && poseTargetRoll.roll <= 74) || poseTargetRoll.roll >= 88 ? spec.paperTarget : spec.waterTarget;
+  const propAction = poseAction(poseTargetRoll.roll, handler, resolvedTarget);
+  const hasMale = spec.scene === maleScene;
+  const shortHandler = handler === "AI ECE" ? "ECE" : handler;
+  const resolvedHands = poseTargetRoll.roll >= 60 && poseTargetRoll.roll <= 74
+    ? paws.active && !hasMale ? wristGuidanceHandsWithPaws(shortHandler) : wristGuidanceHands(shortHandler, hasMale)
+    : paws.active
+      ? handsWithPaws(shortHandler, hasMale)
+      : hasMale
+        ? fivePersonHands(shortHandler)
+        : quartetHands(shortHandler);
+  const pawsPlan = paws.active ? "One tiny collarless golden kitten PAWS is securely cradled high against Ellie's upper torso, far across the composition from the prop and every muzzle line. No second kitten, floor placement, ribbon, costume, collar, leash, prop proximity, or unsafe footing." : null;
+  const outfits = Object.fromEntries(characters.map((character, index) => [character, garment(character, characterPlans, spec, index)]));
+  if (hasMale) outfits.Male = `the established Scene 1136 adult male face with closely trimmed beard and athletic build, an opaque fitted short-sleeve cloud-white top carrying a large complete ${spec.motifs} field, fitted black jeans, and practical black boots`;
+  const cuts = characters.map((character) => `${character}: midriff ${characterPlans[character].visibleMidriff.roll}=${characterPlans[character].visibleMidriff.active ? "visible" : "covered"}, strapless ${characterPlans[character].straplessDress.roll}=${characterPlans[character].straplessDress.active ? "active" : "inactive"}, open back ${characterPlans[character].fullyOpenBack.roll}=${characterPlans[character].fullyOpenBack.active ? "active" : "inactive"}`).join("; ");
+  const emotions = characters.map((character) => `${character}: roll ${characterPlans[character].emotion.roll}=${characterPlans[character].emotion.result}${characterPlans[character].emotion.disambiguation ? `, collision resolver ${characterPlans[character].emotion.disambiguation.roll} gives distinct performance ${characterPlans[character].emotion.materializedResult}` : ""}, performed as ${characterPlans[character].emotion.performance}`).join("; ");
+  const stored = `Stored scene rolls: weather ${weather.roll}=${weather.result}; PAWS ${paws.roll}=${paws.active ? "active" : "inactive"}; pole ${poleDanceTheme.roll}=${poleDanceTheme.active ? "active" : "inactive"}; rainbow-only ${rainbowOnly.roll}=${rainbowOnly.active ? "active" : "inactive"}; rainbow hosiery ${rainbowHosiery.roll}=${rainbowHosiery.active ? "active" : "inactive"}; wearer ${rainbowHosiery.wearer.roll}=${rainbowHosiery.wearer.result}; palette ${rainbowHosiery.palette.roll}=${rainbowHosiery.palette.result}; romance ${romanceBeat.roll}; compound ${compoundLoveBeat.roll}; mission-prop pose/target ${poseTargetRoll.roll}.`;
+  const hosieryLine = rainbowHosiery.active
+    ? `Rainbow hosiery is active. Exactly ${rainbowHosiery.wearer.result} wears varied opaque public-safe knee socks in an ${rainbowHosiery.palette.result}; nobody else wears hosiery. Radiance and ECE are the clear affectionate center. Alia is the sole prop handler, while ECE remains route strategist through a hands-free wrist projector.`
+    : "Rainbow hosiery is inactive. Nobody wears stockings or knee socks. ECE is the sole prop handler, and the separate holographic route map is hands-free on a nearby console so no extra hand appears.";
+  const cast = hasMale ? "exactly five clearly adult fictional people: Radiance, Ellie, Alia, AI ECE, and the established Scene 1136 adult male, added without replacing a woman" : "exactly four clearly adult fictional women: Radiance, Ellie, Alia, and AI ECE";
+  const anatomy = hasMale ? "Exactly ten arms and ten hands, two per adult." : "Exactly eight arms and eight hands, two per woman.";
+  const referenceLine = hasMale ? "Images 1 through 4 anchor the adult quartet and ECE; Image 5 anchors the adult male. References control identity only." : "Images 1 through 4 anchor the adult quartet and ECE. References control identity only.";
+  const renderPrompt = [
+    "Use case: photorealistic-natural. Asset type: fresh vertical World Series public-fashion scene.",
+    referenceLine,
+    `Create one photorealistic 9:16 full-length editorial showing ${cast} at ${spec.landmark}.`,
+    "All people are fictional adults visibly over age 28. Preserve distinct anchored identities: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the bearded male when present. No cloning, replacement, merging, or age shift.",
+    `Profession theme: ${spec.theme}, only as original public-safe fictional fashion. ${spec.culture}`,
+    stored,
+    `Exact wardrobe rolls: ${cuts}. Exact outfits: ${Object.entries(outfits).map(([name, value]) => `${name}: ${value}`).join("; ")}. Materialize every rolled cut exactly with four unmistakably unique secure opaque lined above-knee silhouettes.`,
+    `Place large complete secular São Tomé and Príncipe motifs across at least two outfits as dominant full bodice, skirt, hip, and panel fields: ${spec.motifs}. ${commonProhibitions}`,
+    `Four visibly distinct coherent emotions: ${emotions}${hasMale ? `; Male: roll ${maleEmotion.roll}=${maleEmotion.result}, performed as ${emotionPerformance(maleEmotion.result, "the male")}` : ""}.`,
+    `Romance roll ${romanceBeat.roll}: ${romanceBeat.contractResult} Compound roll ${compoundLoveBeat.roll}: ${compoundLoveBeat.contractResult} Materialize these as a consensual public romance-square through the exact contacts below, with at least three clearly visible affectionate contacts and no static lineup.`,
+    spec.composition.replaceAll("The resolved handler", handler),
+    `Exact hand inventory, no others: ${resolvedHands.join("; ")}.`,
+    `${handler} alone actively handles one photorealistic full-size polished rainbow-gradient Desert Eagle-style inert cinema training prop. ${propAction}`,
+    "The prop is never on a tray, plate, platter, table, bench, pedestal, plinth, cushion, stand, display box, floating support, or passive surface. It is not decorative. Magazine absent; no ammunition, reload, firing, muzzle flash, holster, threat, injury, combat, person-targeting, animal-targeting, occupied-object targeting, or camera-targeting.",
+    hosieryLine,
+    paws.active ? pawsPlan : "PAWS is inactive. No kitten.",
+    poleDanceTheme.active ? "Pole theme is active only as a stationary public-safe fashion motif, with no dance, stripping, or suggestive performance." : "Pole theme is inactive. No pole.",
+    rainbowOnly.active ? `Rainbow-only is active across the outfits while preserving complete São Tomé and Príncipe motifs.` : "Rainbow-only is inactive; do not convert the wardrobe to rainbow-only styling.",
+    `Render ${weather.materialized} cinematically while preserving dry stable nonslip footing, clear faces, landmark readability, and complete anatomy.`,
+    anatomy,
+    "Every arm is continuously visible from its own shoulder through elbow and wrist to one separated hand. No arm passes behind a torso. Show every face, elbow, wrist, hand, finger cluster, leg, foot, heel, and boot. No extra, missing, duplicated, fused, floating, borrowed, hidden-owner, cropped, emerging, or ambiguous limb or finger cluster.",
+    "Asymmetric bodies-in-motion composition, not a lineup. Fully clothed public-safe editorial. No text or watermark.",
+  ].join(" ");
+
+  scenePlans[String(spec.scene)] = {
+    scene: spec.scene,
+    theme: spec.theme,
+    landmark: spec.landmark,
+    motifs: spec.motifs,
+    culture: spec.culture,
+    weather,
+    paws,
+    poleDanceTheme,
+    rainbowOnly,
+    rainbowHosiery,
+    resolvedPropHandler: handler,
+    poseTargetRoll,
+    materializedPropAction: propAction,
+    target: resolvedTarget,
+    romanceBeat,
+    compoundLoveBeat,
+    characters: characterPlans,
+    emotionNuance: Object.fromEntries(characters.map((character) => [character, characterPlans[character].emotion.performance])),
+    outfits,
+    composition: spec.composition.replaceAll("The resolved handler", handler),
+    handInventory: resolvedHands,
+    pawsPlan,
+    maleModel: hasMale ? { present: true, emotion: maleEmotion, identity: "established adult male from Scene 1136", relationship: "adult infidelity drama; at least two clear contacts; strongest eye line to ECE" } : { present: false },
+    renderPrompt,
+  };
+}
+
+const xPublishingRolls = {};
+for (const [name, suffix] of [["heart", "x-heart"], ["internalAgency", "x-internalagency"], ["worldXXXSeries", "x-worldxxxseries"]]) {
+  const item = primary(`batch${batch}-${countrySlug}-${suffix}`);
+  if (name === "heart") item.result = item.roll <= 82 ? "red heart" : "white heart";
+  else item.active = item.roll <= 24;
+  xPublishingRolls[name] = item;
+}
+
+const heartGlyph = xPublishingRolls.heart.result === "red heart" ? "\u2764\uFE0F" : "\uD83E\uDD0D";
+const hashtags = ["#SaoTomeAndPrincipe"];
+if (xPublishingRolls.internalAgency.active) hashtags.push("#InternalAgency");
+if (xPublishingRolls.worldXXXSeries.active) hashtags.push("#WorldXXXSeries");
+
+const preflight = {
+  batch,
+  country,
+  status: "render-preflight-stored",
+  sourceCommit,
+  contractSha256: sha256(contractBytes),
+  rollMethod: "FNV-1a over the recorded batch329-sao-tome-and-principe keys, reduced modulo 100. Male scene selection uses the full 32-bit hash reduced modulo 4. Repeated raw emotion labels receive one stored deterministic disambiguation roll so all four visible performances remain distinct.",
+  rollThresholds: {
+    visibleMidriff: "0-49",
+    straplessDress: "0-34",
+    fullyOpenBack: "0-29",
+    paws: "0-24",
+    poleDanceTheme: "0-5",
+    rainbowOnly: "0-3",
+    rainbowHosiery: "0-24",
+    rainbowHosieryWearer: "0-49 Radiance; 50-99 AI ECE",
+    rainbowHosieryPaletteMode: "0-49 country-palette rainbow-like gradient; 50-99 original independent rainbow gradient",
+    missionPropPoseTarget: "0-34 paper route target and sand backstop; 35-59 open-water marker; 60-74 wrist guidance; 75-87 completed handoff; 88-99 open mechanism",
+  },
+  themePair: ["doctor-clinical-command couture", "adult nightlife dance-performance couture"],
+  nextThemePair: ["adult nightlife dance-performance couture", "Paris runway model couture"],
+  nextQueueCountry: "Samoa",
+  nextQueueBatch: 330,
+  nextQueueScenes: [1340, 1341, 1342, 1343],
+  researchSources: [
+    { url: "https://whc.unesco.org/en/tentativelists/6251/", usedFor: "São Tomé and Príncipe's volcanic-island geology, Obô rainforest, and Pico Cão Grande landscape" },
+    { url: "https://www.unesco.org/en/mab/island-principe", usedFor: "Príncipe's rainforest, coastal conservation, beaches, headlands, reefs, and biosphere context" },
+    { url: "https://visitsaotomeprincipe.st/", usedFor: "Ana Chaves Bay, cocoa-estate agricultural heritage, and Praia Banana public landscape cues" },
+  ],
+  faceAnchors: {
+    primaryQuartet: "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    frontalSupplement: "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    expressionSupplement: "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    eceDetail: "ece-canonical-identity-v1.png",
+    male: "1136-italy-rome-lenticular-care-male-colosseum-route.png",
+  },
+  maleModelSelection: { key: maleKey, fullHash: maleHash, roll: maleHash % 100, selectedScenePosition: maleScenePosition, selectedScene: maleScene, maleEmotion },
+  countryMotifPolicy: {
+    flagMotifDecision: "No literal São Tomé and Príncipe flag, coat of arms, official emblem, sacred symbol, or religious building is copied. Large researched secular island, volcanic needle, rainforest, cocoa-pod, bay, beach, headland, reef, cloud, and route compositions replace them.",
+    palette,
+    minimumCoverage: "Every image carries large complete secular São Tomé and Príncipe compositions across at least two outfits as dominant full bodice, skirt, hip, or panel fields.",
+    cultureScene: "The scenes foreground Ana Chaves Bay, Pico Cão Grande and Obô, cocoa-estate agricultural heritage, and Praia Banana on Príncipe.",
+    prohibitions: commonProhibitions,
+  },
+  xPublishingRolls,
+  xPublishingPlan: {
+    minimumCurrentCountryAcceptedAssets: 2,
+    attachmentShape: "two São Tomé and Príncipe images plus one accepted Barbados image",
+    captionIfEligible: `São Tomé and Príncipe ${heartGlyph} Barbados ${hashtags.join(" ")}`,
+    internalAgencyHashtagActive: xPublishingRolls.internalAgency.active,
+    worldXXXSeriesHashtagActive: xPublishingRolls.worldXXXSeries.active,
+  },
+  anatomyGate: {
+    fourPersonScenes: `Every scene except ${maleScene} requires exactly eight arms and eight hands, two per woman, with every limb continuously traceable to one owner.`,
+    fivePersonScene: `Scene ${maleScene} requires exactly ten arms and ten hands, two per adult, with the male added without replacing any woman.`,
+    rejectionRule: "Reject every extra, missing, duplicated, floating, fused, borrowed, emerging, ownerless, cropped, hidden-owner, or ambiguous limb, hand, or finger cluster.",
+    propRule: "Reject the wrong resolved handler, shared ownership, passive support, missing rolled pose or target, unrealistic grip, unsafe line, trigger violation, ammunition, firing, or any map hand that creates a third or hidden limb.",
+  },
+  rollAudit: {
+    primaryRollPairs: primaryPairs,
+    selectorPairs,
+    primaryPairCount: primaryPairs.length,
+    selectorPairCount: selectorPairs.length,
+    mismatchCount: 0,
+    primaryPairsSha256: sha256(JSON.stringify(primaryPairs)),
+    selectorPairsSha256: sha256(JSON.stringify(selectorPairs)),
+  },
+  scenePlans,
+  renderAttempts: {
+    raw: { status: "pending", requested: 4, concurrency: "four independent built-in image generation calls launched together" },
+    recovery: { status: "not-started", maximumPerBlockedScene: 1 },
+  },
+  acceptedAssets: [],
+  rejectedAssets: [],
+  xPost: { status: "pending-asset-audit", minimumCurrentCountryAcceptedAssets: 2 },
+};
+
+fs.mkdirSync(root, { recursive: true });
+for (const [scene, plan] of Object.entries(scenePlans)) fs.writeFileSync(path.join(root, `scene-${scene}-prompt.txt`), `${plan.renderPrompt}\n`, "utf8");
+fs.writeFileSync(path.join(root, "batch-329-sao-tome-and-principe-preflight.json"), `${JSON.stringify(preflight, null, 2)}\n`, "utf8");
+
+console.log(JSON.stringify({
+  preflight: path.join(root, "batch-329-sao-tome-and-principe-preflight.json"),
+  contractSha256: preflight.contractSha256,
+  maleScene,
+  scenes: Object.fromEntries(Object.entries(scenePlans).map(([scene, plan]) => [scene, {
+    theme: plan.theme,
+    weather: plan.weather,
+    paws: plan.paws,
+    rainbowHosiery: plan.rainbowHosiery,
+    resolvedPropHandler: plan.resolvedPropHandler,
+    poseTargetRoll: plan.poseTargetRoll,
+    emotions: Object.fromEntries(Object.entries(plan.characters).map(([name, value]) => [name, { raw: value.emotion.result, materialized: value.emotion.materializedResult }])),
+  }])),
+  xPublishingRolls,
+  caption: preflight.xPublishingPlan.captionIfEligible,
+  rollAudit: preflight.rollAudit,
+}, null, 2));
