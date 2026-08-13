@@ -1,0 +1,402 @@
+{
+  "batch": 388,
+  "country": "Luxembourg",
+  "status": "active-pass-1-ready-not-launched",
+  "sourceCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-316-bhutan-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/162"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7",
+      "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json",
+    "checkpointSha256": "CC5F392522D363A1CBB32C98C93331864B2D8A340E2DD59B2AB86A82832C9427",
+    "observedStatus": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-bhutan-rendering",
+    "observedHardSafeAcceptedCount": 4,
+    "observedMissingSceneNumbers": [],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "remoteRef": "origin/agent/starlight-progress-archive",
+    "remoteCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+    "remoteCheckpointSha256": "CC5F392522D363A1CBB32C98C93331864B2D8A340E2DD59B2AB86A82832C9427",
+    "predecessorRemoteVerified": true,
+    "requiredRemoteCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+    "requiredRemoteCommitMatches": true,
+    "preparationOnly": true,
+    "batch388RenderAuthorized": true,
+    "note": "This materialization records no render, publication, commit, push, or X-ledger change.",
+    "reason": "Batch 387 is closed at four of four and remote-verified at the required commit; exactly four concurrent Batch 388 pass-1 slots are prepared but not launched."
+  },
+  "rollMethod": "FNV-1a over recorded batch388-luxembourg keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "cinematicTheme": "deep-sea submersible couture",
+  "themePairPosition": 2,
+  "sceneNumbers": [
+    1572,
+    1573,
+    1574,
+    1575
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.luxembourg-city.com/en/place/parc/the-petrusse-valley",
+      "usedFor": "Petrousse Valley, Adolphe Bridge, cliffs, stream, paths, and public recreation"
+    },
+    {
+      "url": "https://www.luxembourg-city.com/en/about-luxembourg-city/meng-stad-my-city/details/the-10-must-see-bridges-in-luxembourg-city",
+      "usedFor": "Adolphe Bridge double stone arch, suspended pedestrian deck, tram, and valley setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/blast-furnace-belval",
+      "usedFor": "Belval preserved blast furnaces and modern University of Luxembourg district"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/schiessentumpel-waterfalls",
+      "usedFor": "Schiessentumpel waterfall, sandstone bridge, and Black Ernz setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/fr/attraction/le-lac-de-la-haute-sure",
+      "usedFor": "Upper-Sure Lake, reservoir, drinking water, electricity, solar boat, and recreation"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch388-luxembourg-male-model-scene",
+    "fullHash": 2589491082,
+    "position": 3,
+    "scene": 1574,
+    "emotionRoll": 43,
+    "emotion": "determination"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Luxembourg flag, red lion, coat of arms, crown, or official emblem is copied onto clothing. Large researched secular bridge, valley, steel, science, lake, dam, waterfall, forest, mobility, and infrastructure fields replace them.",
+    "palette": "Grand-Duchy red, ice blue, steel silver, slate charcoal, vineyard green, Moselle teal, sandstone gold, forest emerald, lake cobalt, and clean white",
+    "minimumCoverage": "Scenes 1572 and 1573 each foreground large Luxembourg motif fields on two or three looks and deep-sea construction on at least two. Scenes 1574 and 1575 use four distinct theme-led looks while the Luxembourg landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Luxembourg City's Adolphe Bridge and Petrousse Valley, Belval industrial heritage, Upper-Sure Lake, and the Schiessentumpel waterfall.",
+    "prohibitions": "No literal flag, red lion, coat of arms, crown, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied runway or service uniform, badge, weapon threat, sexualized service, alcohol, political insignia, or branded product."
+  },
+  "rollAudit": {
+    "1572": {
+      "weather": 40,
+      "mascotState": 20,
+      "mascotHolder": 29,
+      "oddProp": 47,
+      "oddHolder": 17,
+      "oddFamily": 83,
+      "pole": 54,
+      "rainbowOnly": 4,
+      "hosiery": 63,
+      "hosieryWearer": 95,
+      "hosieryPalette": 25,
+      "romance": 93,
+      "compound": 37,
+      "hardLove": 1,
+      "missionPoseTarget": 10,
+      "emotions": {
+        "Radiance": 29,
+        "Ellie": 13,
+        "Alia": 19,
+        "AI ECE": 33
+      },
+      "cuts": {
+        "Radiance": [
+          89,
+          22,
+          59
+        ],
+        "Ellie": [
+          9,
+          18,
+          43
+        ],
+        "Alia": [
+          75,
+          64,
+          33
+        ],
+        "AI ECE": [
+          69,
+          6,
+          39
+        ]
+      }
+    },
+    "1573": {
+      "weather": 51,
+      "mascotState": 99,
+      "mascotHolder": 16,
+      "oddProp": 20,
+      "oddHolder": 82,
+      "oddFamily": 48,
+      "pole": 7,
+      "rainbowOnly": 11,
+      "hosiery": 78,
+      "hosieryWearer": 2,
+      "hosieryPalette": 78,
+      "romance": 38,
+      "compound": 68,
+      "hardLove": 40,
+      "missionPoseTarget": 1,
+      "emotions": {
+        "Radiance": 12,
+        "Ellie": 74,
+        "Alia": 98,
+        "AI ECE": 24
+      },
+      "cuts": {
+        "Radiance": [
+          2,
+          89,
+          74
+        ],
+        "Ellie": [
+          68,
+          7,
+          40
+        ],
+        "Alia": [
+          24,
+          23,
+          76
+        ],
+        "AI ECE": [
+          98,
+          21,
+          42
+        ]
+      }
+    },
+    "1574": {
+      "weather": 22,
+      "mascotState": 30,
+      "mascotHolder": 51,
+      "oddProp": 41,
+      "oddHolder": 75,
+      "oddFamily": 33,
+      "pole": 0,
+      "rainbowOnly": 74,
+      "hosiery": 1,
+      "hosieryWearer": 17,
+      "hosieryPalette": 39,
+      "romance": 3,
+      "compound": 59,
+      "hardLove": 91,
+      "missionPoseTarget": 32,
+      "emotions": {
+        "Radiance": 59,
+        "Ellie": 87,
+        "Alia": 81,
+        "AI ECE": 31,
+        "Male": 43
+      },
+      "cuts": {
+        "Radiance": [
+          59,
+          84,
+          93
+        ],
+        "Ellie": [
+          11,
+          12,
+          61
+        ],
+        "Alia": [
+          85,
+          46,
+          87
+        ],
+        "AI ECE": [
+          3,
+          52,
+          1
+        ]
+      }
+    },
+    "1575": {
+      "weather": 9,
+      "mascotState": 61,
+      "mascotHolder": 54,
+      "oddProp": 98,
+      "oddHolder": 28,
+      "oddFamily": 74,
+      "pole": 5,
+      "rainbowOnly": 77,
+      "hosiery": 4,
+      "hosieryWearer": 68,
+      "hosieryPalette": 0,
+      "romance": 32,
+      "compound": 2,
+      "hardLove": 66,
+      "missionPoseTarget": 7,
+      "emotions": {
+        "Radiance": 86,
+        "Ellie": 12,
+        "Alia": 40,
+        "AI ECE": 90
+      },
+      "cuts": {
+        "Radiance": [
+          80,
+          35,
+          28
+        ],
+        "Ellie": [
+          82,
+          65,
+          18
+        ],
+        "Alia": [
+          42,
+          25,
+          6
+        ],
+        "AI ECE": [
+          28,
+          59,
+          32
+        ]
+      }
+    }
+  },
+  "rollAuditHashes": {
+    "primaryPairCount": 109,
+    "primarySha256": "C52624F18C13D365A69407673E7E3D1EE4E44EA86BA080BA92C7F3539BFF40A5",
+    "selectorPairCount": 20,
+    "selectorSha256": "E626B689EC491178C1747B715391FCCD9245DB3C36247FEC83BE3D4E3F7AA02F"
+  },
+  "scenePlans": {
+    "1572": {
+      "location": "Adolphe Bridge and Petrousse Valley",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+      "promptSha256": "94968B89005654D7F09DE9ECC8A0C92D864569D3B0BF910F9F19B4686B9F3C78",
+      "promptBytes": 4480
+    },
+    "1573": {
+      "location": "Belval blast furnaces and university district",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
+      "promptSha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
+      "promptBytes": 4566
+    },
+    "1574": {
+      "location": "Upper-Sure Lake and dam solar-boat pavilion",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1574-initial-prompt.txt",
+      "promptSha256": "CBE8CFDF3F2738F6867F6F2C27066249FEB33927D34D6BBBE6113DE4BA9BDFE4",
+      "promptBytes": 5103
+    },
+    "1575": {
+      "location": "Schiessentumpel waterfall and Black Ernz",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1575-initial-prompt.txt",
+      "promptSha256": "DDD3AF4435175F911C44316E467CA702E6D9E1F3BC648CD95E12DC846E05DF32",
+      "promptBytes": 4774
+    }
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "allocation": {
+        "A": 1572,
+        "B": 1573,
+        "C": 1574,
+        "D": 1575
+      },
+      "candidatesPrepared": 4,
+      "candidatesAuthorized": 4,
+      "candidatesConsumed": 0,
+      "launchWhenUnlocked": "Exactly four concurrent clean candidates, one per scene.",
+      "sourceMode": "original identity anchors only; no prior country render input",
+      "events": []
+    },
+    "pass2": {
+      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "candidatesConsumed": 0,
+      "thirdPassAllowed": false
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "rejectedPromptLedger": {
+    "status": "empty-before-render",
+    "entries": [],
+    "appendBeforeLaterPassPublicationCommitOrPush": true
+  },
+  "hardSafeAcceptedCount": 0,
+  "missingSceneNumbers": [
+    1572,
+    1573,
+    1574,
+    1575
+  ],
+  "xPost": {
+    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "caption": "Luxembourg 🤍 Bhutan #Luxembourg #WorldXXXSeries",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Suriname",
+    "nextBatch": 389,
+    "sceneNumbers": [
+      1576,
+      1577,
+      1578,
+      1579
+    ],
+    "cinematicTheme": "polar airship couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-317-luxembourg-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/163"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8"
+    ],
+    "lockedUntilBatch388Closed": true
+  },
+  "preflight": {
+    "path": "tmp/world-195x4/batch-388/batch-388-luxembourg-preflight.json",
+    "sha256": "B5103000DF42BF0DB7605336DC20ACFEC9123EB890B82179C014CDD4408F3A0C",
+    "bytes": 47960
+  }
+}
