@@ -760,11 +760,21 @@
       "completionGate": "Advancement still requires four accepted current-country scene assets, the narrow checkpoint and generated-media trail committed and explicitly pushed to agent/starlight-progress-archive, and one publicly verified X status URL.",
       "exhaustion": "If fewer than four scenes are accepted after pass two, stop automatic rendering, keep the country active and nonterminal, block X and the next country, and notify the user. A later heartbeat audits state but does not create a third bank.",
       "oneTimeGeorgiaScene1551Reauthorization": {
-        "active": true,
+        "active": false,
         "requestedAt": "2026-08-13T06:33:35.425Z",
         "explicitUserContractChange": true,
         "userDirective": "Locate and upload the public in-progress backlog, then go next renders.",
-        "status": "authorized-prerequisite-satisfied-round-50-pending",
+        "status": "completed-rounds-50-51-all-eight-candidates-rejected-window-exhausted",
+        "completedAt": "2026-08-13T07:25:53.5099327Z",
+        "completionProof": {
+          "round50PublicCommit": "11aa150626ee6f1a4944efa3c7aa791288ad4d09",
+          "round51PublicCommit": "a11eb0e3b4c4bf4ceb1ed463f3cea30bc7af1c68",
+          "acceptedSceneNumbersChanged": false,
+          "scene1551Accepted": false,
+          "automaticRenderAllowed": false,
+          "additionalAutomatedBanksAllowed": 0,
+          "round52Allowed": false
+        },
         "prerequisite": {
           "kind": "generated-media-backlog-committed-pushed-and-remote-verified",
           "status": "satisfied",
