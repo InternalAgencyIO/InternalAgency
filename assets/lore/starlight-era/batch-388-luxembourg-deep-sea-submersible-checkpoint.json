@@ -1,7 +1,7 @@
 {
   "batch": 388,
   "country": "Luxembourg",
-  "status": "active-pass-1-partial-one-failed-three-no-terminal-continuation-authorized",
+  "status": "active-pass-1-partial-two-failed-two-no-terminal-continuation-authorized",
   "sourceCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -9,10 +9,10 @@
     "passCeiling": 2,
     "pass1CandidatesPrepared": 4,
     "pass1CandidatesAuthorized": 4,
-    "pass1CandidatesConsumed": 1,
+    "pass1CandidatesConsumed": 2,
     "pass2CandidatesConsumed": 0,
     "automaticThirdPassAllowed": false,
-    "authorizationCondition": "Scene 1572 consumed one pass-1 slot as a definitive output-moderation no-byte failure; scenes 1573-1575 remain untouched and authorized as exactly three concurrent continuation calls within the same pass. Pass 2 remains locked until that continuation closes and is audited."
+    "authorizationCondition": "Scenes 1572 and 1573 consumed two pass-1 slots as definitive output-moderation no-byte failures; scenes 1574-1575 remain untouched and authorized as exactly two concurrent continuation calls within the same pass. Pass 2 remains locked until that continuation closes and is audited."
   },
   "queueResolution": {
     "countryEvidence": [
@@ -334,7 +334,7 @@
   },
   "renderPasses": {
     "pass1": {
-      "status": "partial-one-failed-three-no-terminal-eligible-continuation",
+      "status": "partial-two-failed-two-no-terminal-eligible-continuation",
       "allocation": {
         "A": 1572,
         "B": 1573,
@@ -343,8 +343,8 @@
       },
       "candidatesPrepared": 4,
       "candidatesAuthorized": 4,
-      "candidatesConsumed": 1,
-      "launchWhenUnlocked": "Exactly three concurrent continuation candidates for untouched scenes 1573-1575; never relaunch scene 1572 in pass 1.",
+      "candidatesConsumed": 2,
+      "launchWhenUnlocked": "Exactly two concurrent continuation candidates for untouched scenes 1574-1575; never relaunch scenes 1572 or 1573 in pass 1.",
       "sourceMode": "original identity anchors only; no prior country render input",
       "events": [
         {
@@ -365,22 +365,28 @@
           "rawSha256": null,
           "rawBytes": 0,
           "pass2EligibleAfterPass1Closure": true
-        }
-      ],
-      "submittedNoTerminal": [
+        },
         {
           "scene": 1573,
-          "status": "submitted-in-original-wrapper-no-terminal-untouched",
-          "callId": null,
-          "result": null,
-          "rawState": "no-bytes",
+          "callId": "exec-df499b1b-e0fc-455e-a2cb-8a33bf0eb5e5",
+          "occurredAt": "2026-08-13T17:50:54.371Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "3874d063-f86a-4065-8955-7804c4847d64",
+          "moderationStage": "output",
+          "moderationCategories": [
+            "sexual"
+          ],
           "promptPath": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
           "promptSha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
           "promptBytes": 4566,
-          "failure": false,
-          "rejection": false,
-          "continuationAuthorized": true
-        },
+          "rawState": "no-bytes",
+          "rawPath": null,
+          "rawSha256": null,
+          "rawBytes": 0,
+          "pass2EligibleAfterPass1Closure": true
+        }
+      ],
+      "submittedNoTerminal": [
         {
           "scene": 1574,
           "status": "submitted-in-original-wrapper-no-terminal-untouched",
@@ -409,23 +415,24 @@
         }
       ],
       "continuationAuthorization": {
-        "status": "authorized-exactly-three-concurrent-untouched-pass-1-slots",
+        "status": "authorized-exactly-two-concurrent-untouched-pass-1-slots",
         "sceneNumbers": [
-          1573,
           1574,
           1575
         ],
-        "candidatesAuthorized": 3,
+        "candidatesAuthorized": 2,
         "candidatesConsumed": 0,
-        "launchMode": "exactly three concurrent fresh candidates from their original identity anchors",
-        "scene1572RelaunchInPass1Allowed": false
+        "launchMode": "exactly two concurrent fresh candidates from their original identity anchors",
+        "scene1572RelaunchInPass1Allowed": false,
+        "scene1573RelaunchInPass1Allowed": false
       }
     },
     "pass2": {
-      "status": "locked-until-three-untouched-pass-1-continuation-slots-complete-and-audited",
+      "status": "locked-until-two-untouched-pass-1-continuation-slots-complete-and-audited",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
       "candidateEligibilityPendingPass1Closure": [
-        1572
+        1572,
+        1573
       ],
       "candidatesConsumed": 0,
       "thirdPassAllowed": false
@@ -443,10 +450,21 @@
       "rawPath": null,
       "sha256": null,
       "bytes": 0
+    },
+    {
+      "scene": 1573,
+      "status": "failed-output-moderation-no-bytes",
+      "callId": "exec-df499b1b-e0fc-455e-a2cb-8a33bf0eb5e5",
+      "requestId": "3874d063-f86a-4065-8955-7804c4847d64",
+      "occurredAt": "2026-08-13T17:50:54.371Z",
+      "rawState": "no-bytes",
+      "rawPath": null,
+      "sha256": null,
+      "bytes": 0
     }
   ],
   "rejectedPromptLedger": {
-    "status": "one-no-byte-failure-exact-text-recorded",
+    "status": "two-no-byte-failures-exact-text-recorded",
     "entries": [
       {
         "entryId": "batch388-scene1572-pass1-exec-7f38554f",
@@ -475,6 +493,37 @@
         "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass1/events/0",
         "source": {
           "promptPath": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+          "rawPath": null
+        },
+        "immutable": true
+      },
+      {
+        "entryId": "batch388-scene1573-pass1-exec-df499b1b",
+        "scene": 1573,
+        "phase": "pass-1",
+        "status": "failed-output-moderation-no-bytes",
+        "callId": "exec-df499b1b-e0fc-455e-a2cb-8a33bf0eb5e5",
+        "requestId": "3874d063-f86a-4065-8955-7804c4847d64",
+        "occurredAt": "2026-08-13T17:50:54.371Z",
+        "moderationStage": "output",
+        "moderationCategories": [
+          "sexual"
+        ],
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered observation terrace in the complete Belval industrial district, with both preserved blast furnaces, rust-red steel gantries, former ore hall, modern university cubes, red-earth landscaping and a pale storm sky recognizable while distant lightning remains beyond the roof. Deep-sea submersible couture is fictional public fashion at this real Luxembourg location: pressure-shell facets, porthole rings, bathymetric lines, cool bioluminescent piping, ballast geometry and manipulator-joint seams. Nobody is underwater or inside a vehicle. Country-led hybrid: two or three looks carry large secular Belval blast-furnace, steel-gantry, ore-cart, red-earth, university-cube, science-grid, rail-line and industrial-light fields; at least two also carry deep-sea construction. No literal Luxembourg flag, red lion, coat of arms, crown, official emblem or sacred symbol, religious architecture, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a steel-silver sleeveless submersible top showing a narrow ordinary midriff over slate-charcoal tailored upper-thigh shorts, closed back, with red-earth bathymetric seams; Ellie wears a secure strapless Grand-Duchy-red upper-thigh mini with covered waist and closed back, carrying blast-furnace and pressure-shell fields; Alia wears a secure strapless ice-blue submersible top showing a narrow ordinary midriff over a vineyard-green upper-thigh skort, closed back, with gantry and porthole geometry; ECE wears a secure strapless clean-white upper-thigh mini with covered waist and closed back, carrying university-grid and steel ballast facets. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nNeither mascot appears. The active odd prop is Ellie's deactivated chainless cinema-chainsaw sculpture with its blade cover locked, fully enclosed inside a fixed sealed transparent display. Ellie touches only the exterior enclosure frame; nobody touches the sculpture. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Ellie stands in a separate bay beside her secured odd-prop enclosure, with one hand on the exterior enclosure frame and her other hand open at her side. Radiance and Alia hold separated finished-turn poses. The stored dip and embrace energy is resolved as noncontact eye lines. There is no human contact and no hidden hand. Emotions: Radiance: romantic joy; Ellie: betrayal shock; Alia: defiance; AI ECE: calm contentment. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick sand backstop behind a transparent safety panel on a closed dry service lane away from the furnaces, rails and public route. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nLightning remains distant beyond the covered terrace; the dry floor, faces, Belval structures, target and complete backstop remain readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
+          "encoding": "utf-8",
+          "bytes": 4566
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass1/events/1",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
           "rawPath": null
         },
         "immutable": true
