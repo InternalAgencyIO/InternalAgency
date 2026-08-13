@@ -1,7 +1,7 @@
 {
   "batch": 382,
   "country": "Georgia",
-  "status": "active-one-time-rounds-50-51-authorized-round-50-prompt-ready",
+  "status": "active-one-time-round-50-rejected-round-51-holistic-correction-pending",
   "countryCompletionGate": {
     "contractSection": "continuousFourSceneCountryGate",
     "active": true,
@@ -617,6 +617,96 @@
     {
       "url": "https://georgia.travel/guide-to-batumi-beach",
       "usedFor": "Black Sea horizon and Batumi Boulevard setting"
+    }
+  ],
+  "round50RejectedAssetsAudit": [
+    {
+      "scene": 1551,
+      "round": 50,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "A",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-A.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-d52eb784-e392-4458-a75f-c7a1ee5bf738.png",
+      "sha256": "1CF86E6A9B622047FA65BD5C440AE8C93335233FFC550C17BDB49A1D8BCA9897",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Ellie's high-back support palm is absent, so only seven hands and two relationship contacts are certifiable; Radiance is upright rather than in the stored supported dip.",
+        "Alia's straight trigger index and empty guard cannot be independently certified.",
+        "Alia's eye, muzzle, and diamond centers are separated by about eighty-nine and thirty-one vertical pixels rather than one horizontal row.",
+        "The complete backstop leaves only about 3.6 percent empty reserve instead of at least eleven percent.",
+        "The affirmative mid-nod, both Radiance hosiery kneecaps, and Alia's uninterrupted open back and midriff are not fully certifiable."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 50,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "B",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-B.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-d59e0617-923e-4c6f-957a-5bba9ffed4f7.png",
+      "sha256": "242CE0954329237BAAFCD16FBCBFB590BD5630FE2E654AF66410717DD8B3ADC3",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Radiance performs a knee crouch rather than the stored backward supported dip, and overlapping contact and hand clusters are not independently certifiable.",
+        "Alia's trigger index is bent or merged at the guard instead of independently straight above and outside an empty guard.",
+        "The eye, muzzle, and diamond centers are separated by about two hundred ten and one hundred thirty-two vertical pixels.",
+        "The backstop is cropped and leaves effectively no empty reserve.",
+        "The all-four affirmative evidence fails because Alia has no willing profile smile or other readable participation cue."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 50,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "C",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-C.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-49c9d1e4-8772-4a62-90c8-84f5e5741bf5.png",
+      "sha256": "3090A73FF05A1D8D8CAB7B7BF2AACA5138C111475478350D82E906C76FFED71F",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Ellie's high-back support hand is absent, leaving only seven readable hands, two relationship contacts, and no controlled dip.",
+        "Alia's indexed finger and empty-guard relationship are not certifiable at native resolution.",
+        "The eye, muzzle, and diamond centers descend by about one hundred fifty and seventy pixels, and the muzzle nearly touches the backstop.",
+        "The complete backstop leaves under one percent empty reserve.",
+        "Alia's braid blocks the active open back and her offered choice is not visibly readable, although Radiance's pause itself passes."
+      ],
+      "recoveryPassConsumedThisRound": false
+    },
+    {
+      "scene": 1551,
+      "round": 50,
+      "phase": "four-slot-parallel-bank",
+      "candidateSlot": "D",
+      "status": "rejected-strict-visual-audit",
+      "rawOutput": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-D.png",
+      "sourceRawOutput": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-db8d0d56-a011-49dc-a35e-9d069093515f.png",
+      "sha256": "6257BBD77E1BE299E1DEA33540C9631C42A6CCC0D4269205CD9AE03A79A98134",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "decisiveRejectionReasons": [
+        "Ellie's high-back support palm is absent, so only seven hands and two contacts are readable and no controlled dip appears.",
+        "ECE holds a compass rim rather than two opposite handles; Alia's trigger index overlaps the guard.",
+        "The eye, muzzle, and diamond centers differ by about one hundred thirty-nine and eighty-eight vertical pixels.",
+        "The target is a hollow compound diamond, the backstop is cropped, and there is zero empty reserve.",
+        "Alia's braid blocks her open back, badge-like hardware appears, and the required Alia jealous counterbeat is absent, although Radiance's pause itself passes."
+      ],
+      "recoveryPassConsumedThisRound": false
     }
   ],
   "faceAnchors": {
@@ -21252,9 +21342,9 @@
     "url": null,
     "acceptedCurrentCountryAssets": 3,
     "requiredCurrentCountryAssets": 4,
-    "note": "Georgia retains accepted scenes 1548-1550. All four round-49 candidates were preserved and rejected under strict audit. The signed-in live @dogramaci profile is verified and the eligible backlog remains empty. Scene 1551, X publication, Fiji, and every later country remain blocked until an exact pass. The explicit public-archive directive now authorizes only rounds 50 and conditional 51; no round 52 may open."
+    "note": "Georgia retains accepted scenes 1548-1550. All four round-50 candidates are preserved and rejected under strict audit. The signed-in live @dogramaci profile is verified and the eligible backlog remains empty. Scene 1551, X publication, Fiji, and every later country remain blocked. Only the final holistic round-51 bank remains authorized; no round 52 may open."
   },
-  "checkpointedAt": "2026-08-13T06:42:30.5429680Z",
+  "checkpointedAt": "2026-08-13T06:58:42.7182219Z",
   "rawOutputs": [
     {
       "scene": 1550,
@@ -22557,13 +22647,69 @@
         "height": 1672
       },
       "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 50,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "A",
+      "path": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-A.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-d52eb784-e392-4458-a75f-c7a1ee5bf738.png",
+      "sha256": "1CF86E6A9B622047FA65BD5C440AE8C93335233FFC550C17BDB49A1D8BCA9897",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 50,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "B",
+      "path": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-B.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-d59e0617-923e-4c6f-957a-5bba9ffed4f7.png",
+      "sha256": "242CE0954329237BAAFCD16FBCBFB590BD5630FE2E654AF66410717DD8B3ADC3",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 50,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "C",
+      "path": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-C.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-49c9d1e4-8772-4a62-90c8-84f5e5741bf5.png",
+      "sha256": "3090A73FF05A1D8D8CAB7B7BF2AACA5138C111475478350D82E906C76FFED71F",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
+    },
+    {
+      "scene": 1551,
+      "round": 50,
+      "kind": "four-slot-clean-candidate-rejected",
+      "candidateSlot": "D",
+      "path": "tmp/world-195x4/batch-382/raw/round-50-four-slot-bank/candidate-D.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/019ff973-4f4e-7c73-89d5-ffae7c69d47c/exec-db8d0d56-a011-49dc-a35e-9d069093515f.png",
+      "sha256": "6257BBD77E1BE299E1DEA33540C9631C42A6CCC0D4269205CD9AE03A79A98134",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "preserved": true
     }
   ],
   "terminal": false,
   "nextWakeAction": {
     "country": "Georgia",
     "batch": 382,
-    "action": "launch-round-50-as-exactly-four-concurrent-clean-scene-1551-candidates-from-original-identity-anchors-then-archive-audit-commit-push-and-remote-verify-all-four-raws",
+    "action": "prepare-round-51-from-one-holistic-round-50-audit-then-after-round-50-bank-is-committed-pushed-and-remote-verified-launch-exactly-four-fresh-concurrent-candidates-from-original-identity-anchors",
     "preserveAcceptedSceneNumbers": [
       1548,
       1549,
@@ -22583,7 +22729,7 @@
     "laterCountryStartAllowed": false,
     "xPublishAllowed": false,
     "automaticRenderAllowed": true,
-    "additionalAutomatedBanksAllowed": 2
+    "additionalAutomatedBanksAllowed": 1
   },
   "xBacklogAudit": {
     "checkedAt": "2026-08-12T15:34:58.201Z",
@@ -22744,7 +22890,7 @@
   "oneTimeGeorgiaScene1551ContinuationWindow": {
     "requestedAt": "2026-08-13T06:33:35.425Z",
     "contractSection": "rapidConsolidatedRenderPolicy.twoBankThroughputPolicy.oneTimeGeorgiaScene1551Reauthorization",
-    "status": "authorized-prerequisite-satisfied-round-50-prompt-ready",
+    "status": "round-50-all-rejected-awaiting-public-push-before-final-round-51",
     "prerequisite": {
       "archiveBackfillCommitted": true,
       "archiveBackfillPushed": true,
@@ -22765,10 +22911,10 @@
       50,
       51
     ],
-    "currentRound": 50,
-    "remainingAutomatedBanks": 2,
+    "currentRound": 51,
+    "remainingAutomatedBanks": 1,
     "round50": {
-      "status": "prompt-ready-pending-four-concurrent-launch",
+      "status": "completed-four-concurrent-candidates-all-rejected",
       "slots": 4,
       "allocation": {
         "A": 1551,
@@ -22910,7 +23056,7 @@
       }
     },
     "round51": {
-      "status": "conditional-not-prepared",
+      "status": "holistic-correction-authorized-pending-round-50-public-push",
       "launchCondition": "round50-all-rejected",
       "slots": 4,
       "sourceMode": "four-fresh-generations-from-original-identity-anchors-only",
@@ -23394,15 +23540,15 @@
     }
   },
   "latestProgressCheckpoint": {
-    "status": "generated-media-backfill-and-round-50-prompt-preparation-ready",
-    "preparedAt": "2026-08-13T06:42:30.5429680Z",
+    "status": "round-50-all-rejected-public-trail-prepared-push-pending",
+    "preparedAt": "2026-08-13T06:58:42.7182219Z",
     "branch": "agent/starlight-progress-archive",
     "remoteCommit": "60a9f7afa6392ce1a34a531e0a9e41a1dca34327",
     "auditRounds": [
       48,
       49
     ],
-    "nextAuthorizedRound": 50,
+    "nextAuthorizedRound": 51,
     "conditionalFinalRound": 51,
     "acceptedSceneCount": 3,
     "missingSceneNumbers": [
