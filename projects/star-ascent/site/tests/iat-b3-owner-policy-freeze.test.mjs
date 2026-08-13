@@ -159,6 +159,7 @@ function fillAllOwnerChoices(manifest) {
     canonicalMint: fixturePublicKey(9),
     clusterIdentityPolicy: "DISTINCT_PROGRAM_AND_MINT_IDS_PER_CLUSTER",
     entropyLagSlots: 150,
+    entropyRiskAcceptance: "ACCEPT_LAGGED_SLOT_HASH_WITH_FINALIZER_TIMING_INFLUENCE_AND_LIMITED_PROBABILITY_CLAIMS",
     metadataPolicy: "NO_MINT_METADATA_EXTENSION_IMMUTABLE_EXTERNAL_RECORD",
     acceptCanonicalSeedTable: true,
   });
@@ -223,6 +224,25 @@ test("all seven owner choices can be structurally complete without proving or au
   for (const state of Object.values(result.nodeChoiceState)) {
     assert.deepEqual(state, { structurallyComplete: true, eligibleInSafeOrder: true });
   }
+  assertTerminalHold(result);
+});
+
+test("an entropy lag cannot complete identity choices without explicit timing-risk acceptance", () => {
+  const manifest = fillAllOwnerChoices(canonicalManifest());
+  manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.ownerChoices.entropyRiskAcceptance = null;
+  const result = validateB3OwnerPolicyFreezeManifest(manifest);
+  assert.equal(result.valid, true, result.violations.join("\n"));
+  assert.equal(result.nodeChoiceState.PRODUCTION_IDENTITY_INPUT_FREEZE.structurallyComplete, false);
+  assert.equal(result.ownerChoicesStructurallyComplete, false);
+  assertTerminalHold(result);
+});
+
+test("entropy timing-risk acceptance is a closed enum and cannot overclaim unbiased probability", () => {
+  const manifest = fillAllOwnerChoices(canonicalManifest());
+  manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.ownerChoices.entropyRiskAcceptance = "ACCEPT_EXACT_UNBIASED_6667_PROBABILITY";
+  const result = validateB3OwnerPolicyFreezeManifest(manifest);
+  assert.equal(result.valid, false);
+  assert.match(result.violations.join("\n"), /entropyRiskAcceptance: expected one of .* or null/iu);
   assertTerminalHold(result);
 });
 

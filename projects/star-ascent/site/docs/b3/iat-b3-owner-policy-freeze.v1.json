@@ -222,6 +222,10 @@
       "frozenConstraints": {
         "lawDomainSeparator": "IAT_B3_SOLANA_DAILY_LAW_V1",
         "canonicalClusterScope": "MAINNET_BETA_ONLY",
+        "entropySelectionReference": "INVOCATION_RELATIVE_CURRENT_SLOT_MINUS_LAG",
+        "fixedLagTimingSelectionDisposition": "FIXED_LAG_DOES_NOT_REMOVE_CALLER_TIMING_SELECTION",
+        "entropyProbabilityClaim": "EXACT_THRESHOLD_FOR_SUPPLIED_HASH_ONLY_NO_UNBIASED_OR_REALIZED_PROBABILITY_CLAIM",
+        "finalizerTimingInfluenceDisposition": "EXPLICIT_OWNER_ACCEPTANCE_REQUIRED_BEFORE_ENTROPY_FREEZE",
         "seedRoles": [
           "lawState", "extraAccountMetas", "economyConfig", "vaultAuthority", "laneState", "laneToken", "stakeToken", "stakeIngress", "coreReward", "agency", "agencyOwnerIndex", "eligibility", "position", "round", "factionConfig", "factionAllegiance", "factionWeek", "factionScore", "factionRewardVault", "factionRewardManifest", "factionFollowerSnapshot", "factionClaim"
         ],
@@ -239,17 +243,20 @@
         "canonicalMint": null,
         "clusterIdentityPolicy": null,
         "entropyLagSlots": null,
+        "entropyRiskAcceptance": null,
         "metadataPolicy": null,
         "acceptCanonicalSeedTable": null
       },
       "evidenceRequirements": {
         "external": [
           "INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS",
-          "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE"
+          "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE",
+          "INDEPENDENT_DAILY_LAW_ENTROPY_RISK_ACCEPTANCE"
         ],
         "engineering": [
           "REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS",
-          "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE"
+          "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE",
+          "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"
         ]
       }
     },

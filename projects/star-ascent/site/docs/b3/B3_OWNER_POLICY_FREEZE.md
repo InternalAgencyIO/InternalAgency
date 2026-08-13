@@ -30,7 +30,11 @@ Choices are consumed only in this order:
    faction carve-out while retaining all V2 amounts, cliffs, and lane order.
 5. `PRODUCTION_IDENTITY_INPUT_FREEZE` supplies three distinct production
    identities plus cluster, entropy, metadata, and canonical seed-table
-   choices.
+   choices. Choosing an entropy lag alone is insufficient: the owner must
+   explicitly accept the lagged-slot-hash construction's finalizer-timing
+   influence and limit probability claims to the exact threshold for a
+   supplied hash. Otherwise the architecture must be redesigned before this
+   node can complete.
 6. `B3_COST_CEREMONY_FUNDING` supplies only public/accountable payer and funding
    policy inputs after final identity-dependent costs can be measured.
 
@@ -58,7 +62,9 @@ The packet repeats only constraints already fixed by V2 or B3 law, including:
   and treasury-to-ecosystem-to-liquidity reward order are retained exactly.
 - Identity inputs retain the Daily Law domain, Mainnet-only canonical scope,
   22 ordered seed roles, Token-2022, nine decimals, the exact two-extension
-  allowlist, and null/absent terminal authorities.
+  allowlist, and null/absent terminal authorities. The entropy construction
+  does not claim an unbiased or exact realized probability and requires
+  independent delayed-finalizer, grinding, and leader-influence measurement.
 - The owner-frozen aggregate fresh-payer peak ceiling is 3,000,000,000
   lamports. Crossing it requires a new exact owner ceiling; it never permits a
   feature cut.

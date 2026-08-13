@@ -213,6 +213,10 @@ const NODE_SPECS = Object.freeze({
     frozenConstraints: Object.freeze({
       lawDomainSeparator: "IAT_B3_SOLANA_DAILY_LAW_V1",
       canonicalClusterScope: "MAINNET_BETA_ONLY",
+      entropySelectionReference: "INVOCATION_RELATIVE_CURRENT_SLOT_MINUS_LAG",
+      fixedLagTimingSelectionDisposition: "FIXED_LAG_DOES_NOT_REMOVE_CALLER_TIMING_SELECTION",
+      entropyProbabilityClaim: "EXACT_THRESHOLD_FOR_SUPPLIED_HASH_ONLY_NO_UNBIASED_OR_REALIZED_PROBABILITY_CLAIM",
+      finalizerTimingInfluenceDisposition: "EXPLICIT_OWNER_ACCEPTANCE_REQUIRED_BEFORE_ENTROPY_FREEZE",
       seedRoles: SEED_ROLES,
       tokenProgramId: TOKEN_2022_PROGRAM_ID,
       decimals: 9,
@@ -222,9 +226,9 @@ const NODE_SPECS = Object.freeze({
       terminalMintFreezeHookAndConfidentialAuthoritiesNull: true,
       auditorPermanentDelegateAndMintCloseAbsent: true,
     }),
-    ownerChoiceKeys: Object.freeze(["lawProgramId", "economyProgramId", "canonicalMint", "clusterIdentityPolicy", "entropyLagSlots", "metadataPolicy", "acceptCanonicalSeedTable"]),
-    external: Object.freeze(["INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE"]),
-    engineering: Object.freeze(["REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE"]),
+    ownerChoiceKeys: Object.freeze(["lawProgramId", "economyProgramId", "canonicalMint", "clusterIdentityPolicy", "entropyLagSlots", "entropyRiskAcceptance", "metadataPolicy", "acceptCanonicalSeedTable"]),
+    external: Object.freeze(["INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE", "INDEPENDENT_DAILY_LAW_ENTROPY_RISK_ACCEPTANCE"]),
+    engineering: Object.freeze(["REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE", "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"]),
   }),
   B3_COST_CEREMONY_FUNDING: Object.freeze({
     dependencies: Object.freeze(["PRODUCTION_IDENTITY_INPUT_FREEZE"]),
@@ -649,6 +653,12 @@ function validateIdentityChoices(choices, liveChoices, violations) {
   else if (!Number.isSafeInteger(choices.entropyLagSlots) || choices.entropyLagSlots < 1 || choices.entropyLagSlots > 512) {
     violations.push(`${path}.entropyLagSlots: expected an integer from 1 through 512 or null`);
   } else entropy = true;
+  const entropyRisk = validateNullableEnum(
+    choices.entropyRiskAcceptance,
+    ["ACCEPT_LAGGED_SLOT_HASH_WITH_FINALIZER_TIMING_INFLUENCE_AND_LIMITED_PROBABILITY_CLAIMS"],
+    `${path}.entropyRiskAcceptance`,
+    violations,
+  );
   const metadata = validateNullableEnum(choices.metadataPolicy, ["NO_MINT_METADATA_EXTENSION_IMMUTABLE_EXTERNAL_RECORD"], `${path}.metadataPolicy`, violations);
   const seeds = validateNullableTrue(choices.acceptCanonicalSeedTable, `${path}.acceptCanonicalSeedTable`, violations);
   if (liveChoices.canonicalMintDecision === "ADOPT_EXISTING_COMPATIBLE_TOKEN_2022"
@@ -663,7 +673,7 @@ function validateIdentityChoices(choices, liveChoices, violations) {
     && choices.canonicalMint === liveChoices.candidateMint) {
     violations.push(`${path}.canonicalMint: migration or replacement requires a distinct Token-2022 mint`);
   }
-  return identitiesComplete && new Set(populated).size === identityKeys.length && cluster && entropy && metadata && seeds;
+  return identitiesComplete && new Set(populated).size === identityKeys.length && cluster && entropy && entropyRisk && metadata && seeds;
 }
 
 function validateCostChoices(choices, violations) {

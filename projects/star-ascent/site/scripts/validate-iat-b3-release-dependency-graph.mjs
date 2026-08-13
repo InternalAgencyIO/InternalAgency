@@ -40,11 +40,11 @@ const DEFAULT_MANIFEST_PATH = resolve(
 );
 const V2_PARITY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-  sha256: "5e783b6826da19e0d31c2e5bbccddb7875d362cc6b4072cc420161c85f69b6d6",
+  sha256: "67c229c98388e573de5efbf9838c066225e4e8eb7a2fc79680c0c01a2de85a04",
 });
 const OWNER_POLICY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-  sha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+  sha256: "04f515105124b7176ac4d4eec0e52539ccd6fab28273170b93797b075f570702",
   bindingScope: "REFERENCE_CONTRACT_ONLY",
 });
 const PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET = Object.freeze({
@@ -106,7 +106,7 @@ const ARTIFACTS = Object.freeze({
   ),
   shielded: artifact(
     "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
-    "a9df9c5c976bba0ebdc5cbcbe9c77fe0de77b4949a3cc72b57c75717517c77df",
+    "d6c521476f7304359837bac545af0a4e68596ac67c74339e8ce7ec2909809b7b",
   ),
   tokenHost: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
@@ -126,7 +126,7 @@ const ARTIFACTS = Object.freeze({
   ),
   identityAuthorityEvidence: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
-    "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+    "d9309dc360530fb80753adce07ba36fecadea6942fed35f441a2056fd0573387",
   ),
   law: artifact(
     "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",

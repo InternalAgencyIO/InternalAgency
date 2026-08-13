@@ -210,7 +210,7 @@ test("canonical production graph is valid, records the completed host root, and 
   assert.equal(RELEASE_DEPENDENCY_GRAPH_MAINNET_STATUS, "HOLD");
   assert.deepEqual(DRAFT.artifactBindingPolicy.ownerPolicyFreezeBinding, {
     path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-    sha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+    sha256: "04f515105124b7176ac4d4eec0e52539ccd6fab28273170b93797b075f570702",
     bindingScope: "REFERENCE_CONTRACT_ONLY",
   });
   assert.deepEqual(DRAFT.artifactBindingPolicy.privacyVaultNativeInstructionPlanBinding, {
@@ -224,7 +224,7 @@ test("canonical production graph is valid, records the completed host root, and 
   );
   const identityArtifact = {
     path: "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
-    sha256: "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+    sha256: "d9309dc360530fb80753adce07ba36fecadea6942fed35f441a2056fd0573387",
     bindingScope: "REFERENCE_CONTRACT_ONLY",
   };
   const costArtifact = {
@@ -357,7 +357,7 @@ test("exact ordered node and edge inventories encode the corrected dependency DA
   assert.deepEqual(RELEASE_DEPENDENCY_EDGES, EXPECTED_EDGES);
   assert.deepEqual(DRAFT.edges, EXPECTED_EDGES);
   assert.equal(RELEASE_DEPENDENCY_EDGES.length, 134);
-  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "f89309a25236a9c0a4b4640b45c5d6b8a850a35c6a40b0774ccd44928532c37e");
+  assert.equal(RELEASE_DEPENDENCY_GRAPH_SHA256, "c63385fafe40bf5b36705e090b6818e1b1852d633fc6cf70b33b2e391f25b3b3");
   assert.equal(DRAFT.graphDefinitionSha256, RELEASE_DEPENDENCY_GRAPH_SHA256);
   assert.deepEqual(
     DRAFT.terminalPredicate.requiredNodeIds,
@@ -679,7 +679,7 @@ test("validator remains host-only, read-only, nonactivating, and free of runtime
     PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze,
     {
       path: "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-      sha256: "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+      sha256: "99bee9984df75f8b1037ad0454924640b7b106285b89a51d5f8d632c55650df5",
       bindingScope: "EXACT_COMMITTED_INPUT_ONLY",
     },
   );

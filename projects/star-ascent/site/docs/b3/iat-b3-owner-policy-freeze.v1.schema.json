@@ -219,6 +219,10 @@
               "const": {
                 "lawDomainSeparator": "IAT_B3_SOLANA_DAILY_LAW_V1",
                 "canonicalClusterScope": "MAINNET_BETA_ONLY",
+                "entropySelectionReference": "INVOCATION_RELATIVE_CURRENT_SLOT_MINUS_LAG",
+                "fixedLagTimingSelectionDisposition": "FIXED_LAG_DOES_NOT_REMOVE_CALLER_TIMING_SELECTION",
+                "entropyProbabilityClaim": "EXACT_THRESHOLD_FOR_SUPPLIED_HASH_ONLY_NO_UNBIASED_OR_REALIZED_PROBABILITY_CLAIM",
+                "finalizerTimingInfluenceDisposition": "EXPLICIT_OWNER_ACCEPTANCE_REQUIRED_BEFORE_ENTROPY_FREEZE",
                 "seedRoles": ["lawState", "extraAccountMetas", "economyConfig", "vaultAuthority", "laneState", "laneToken", "stakeToken", "stakeIngress", "coreReward", "agency", "agencyOwnerIndex", "eligibility", "position", "round", "factionConfig", "factionAllegiance", "factionWeek", "factionScore", "factionRewardVault", "factionRewardManifest", "factionFollowerSnapshot", "factionClaim"],
                 "tokenProgramId": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
                 "decimals": 9,
@@ -232,8 +236,8 @@
             "ownerChoices": { "$ref": "#/$defs/identityChoices" },
             "evidenceRequirements": {
               "const": {
-                "external": ["INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE"],
-                "engineering": ["REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE"]
+                "external": ["INDEPENDENT_MAINNET_GENESIS_HASH_OBSERVATIONS", "PUBLIC_IDENTITY_GENERATION_AND_OWNER_ACCEPTANCE", "INDEPENDENT_DAILY_LAW_ENTROPY_RISK_ACCEPTANCE"],
+                "engineering": ["REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS", "PDA_DERIVATION_EXTENSION_AND_NULL_AUTHORITY_EVIDENCE", "DELAYED_FINALIZER_GRINDING_AND_LEADER_INFLUENCE_MEASUREMENT"]
               }
             }
           }
@@ -411,13 +415,14 @@
     "identityChoices": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["lawProgramId", "economyProgramId", "canonicalMint", "clusterIdentityPolicy", "entropyLagSlots", "metadataPolicy", "acceptCanonicalSeedTable"],
+      "required": ["lawProgramId", "economyProgramId", "canonicalMint", "clusterIdentityPolicy", "entropyLagSlots", "entropyRiskAcceptance", "metadataPolicy", "acceptCanonicalSeedTable"],
       "properties": {
         "lawProgramId": { "$ref": "#/$defs/publicKeyOrNull" },
         "economyProgramId": { "$ref": "#/$defs/publicKeyOrNull" },
         "canonicalMint": { "$ref": "#/$defs/publicKeyOrNull" },
         "clusterIdentityPolicy": { "enum": [null, "SAME_LAW_ECONOMY_AND_MINT_IDS_ACROSS_CLUSTERS", "SAME_PROGRAM_IDS_DISTINCT_MINT_PER_CLUSTER", "DISTINCT_PROGRAM_AND_MINT_IDS_PER_CLUSTER"] },
         "entropyLagSlots": { "type": ["integer", "null"], "minimum": 1, "maximum": 512 },
+        "entropyRiskAcceptance": { "enum": [null, "ACCEPT_LAGGED_SLOT_HASH_WITH_FINALIZER_TIMING_INFLUENCE_AND_LIMITED_PROBABILITY_CLAIMS"] },
         "metadataPolicy": { "enum": [null, "NO_MINT_METADATA_EXTENSION_IMMUTABLE_EXTERNAL_RECORD"] },
         "acceptCanonicalSeedTable": { "enum": [null, true] }
       }
