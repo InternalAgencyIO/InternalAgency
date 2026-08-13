@@ -1,7 +1,7 @@
 {
   "batch": 388,
   "country": "Luxembourg",
-  "status": "active-pass-1-ready-not-launched",
+  "status": "active-pass-1-partial-one-failed-three-no-terminal-continuation-authorized",
   "sourceCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -9,10 +9,10 @@
     "passCeiling": 2,
     "pass1CandidatesPrepared": 4,
     "pass1CandidatesAuthorized": 4,
-    "pass1CandidatesConsumed": 0,
+    "pass1CandidatesConsumed": 1,
     "pass2CandidatesConsumed": 0,
     "automaticThirdPassAllowed": false,
-    "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
+    "authorizationCondition": "Scene 1572 consumed one pass-1 slot as a definitive output-moderation no-byte failure; scenes 1573-1575 remain untouched and authorized as exactly three concurrent continuation calls within the same pass. Pass 2 remains locked until that continuation closes and is audited."
   },
   "queueResolution": {
     "countryEvidence": [
@@ -334,7 +334,7 @@
   },
   "renderPasses": {
     "pass1": {
-      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "status": "partial-one-failed-three-no-terminal-eligible-continuation",
       "allocation": {
         "A": 1572,
         "B": 1573,
@@ -343,23 +343,143 @@
       },
       "candidatesPrepared": 4,
       "candidatesAuthorized": 4,
-      "candidatesConsumed": 0,
-      "launchWhenUnlocked": "Exactly four concurrent clean candidates, one per scene.",
+      "candidatesConsumed": 1,
+      "launchWhenUnlocked": "Exactly three concurrent continuation candidates for untouched scenes 1573-1575; never relaunch scene 1572 in pass 1.",
       "sourceMode": "original identity anchors only; no prior country render input",
-      "events": []
+      "events": [
+        {
+          "scene": 1572,
+          "callId": "exec-7f38554f-42dc-4b5e-8f49-9f998d13a31d",
+          "occurredAt": "2026-08-13T17:31:17.978Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "91d902cb-1e48-40d6-a4ef-a0850eeba891",
+          "moderationStage": "output",
+          "moderationCategories": [
+            "sexual"
+          ],
+          "promptPath": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+          "promptSha256": "94968B89005654D7F09DE9ECC8A0C92D864569D3B0BF910F9F19B4686B9F3C78",
+          "promptBytes": 4480,
+          "rawState": "no-bytes",
+          "rawPath": null,
+          "rawSha256": null,
+          "rawBytes": 0,
+          "pass2EligibleAfterPass1Closure": true
+        }
+      ],
+      "submittedNoTerminal": [
+        {
+          "scene": 1573,
+          "status": "submitted-in-original-wrapper-no-terminal-untouched",
+          "callId": null,
+          "result": null,
+          "rawState": "no-bytes",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
+          "promptSha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
+          "promptBytes": 4566,
+          "failure": false,
+          "rejection": false,
+          "continuationAuthorized": true
+        },
+        {
+          "scene": 1574,
+          "status": "submitted-in-original-wrapper-no-terminal-untouched",
+          "callId": null,
+          "result": null,
+          "rawState": "no-bytes",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1574-initial-prompt.txt",
+          "promptSha256": "CBE8CFDF3F2738F6867F6F2C27066249FEB33927D34D6BBBE6113DE4BA9BDFE4",
+          "promptBytes": 5103,
+          "failure": false,
+          "rejection": false,
+          "continuationAuthorized": true
+        },
+        {
+          "scene": 1575,
+          "status": "submitted-in-original-wrapper-no-terminal-untouched",
+          "callId": null,
+          "result": null,
+          "rawState": "no-bytes",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1575-initial-prompt.txt",
+          "promptSha256": "DDD3AF4435175F911C44316E467CA702E6D9E1F3BC648CD95E12DC846E05DF32",
+          "promptBytes": 4774,
+          "failure": false,
+          "rejection": false,
+          "continuationAuthorized": true
+        }
+      ],
+      "continuationAuthorization": {
+        "status": "authorized-exactly-three-concurrent-untouched-pass-1-slots",
+        "sceneNumbers": [
+          1573,
+          1574,
+          1575
+        ],
+        "candidatesAuthorized": 3,
+        "candidatesConsumed": 0,
+        "launchMode": "exactly three concurrent fresh candidates from their original identity anchors",
+        "scene1572RelaunchInPass1Allowed": false
+      }
     },
     "pass2": {
-      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "status": "locked-until-three-untouched-pass-1-continuation-slots-complete-and-audited",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "candidateEligibilityPendingPass1Closure": [
+        1572
+      ],
       "candidatesConsumed": 0,
       "thirdPassAllowed": false
     }
   },
   "acceptedAssets": [],
-  "rejectedAssets": [],
+  "rejectedAssets": [
+    {
+      "scene": 1572,
+      "status": "failed-output-moderation-no-bytes",
+      "callId": "exec-7f38554f-42dc-4b5e-8f49-9f998d13a31d",
+      "requestId": "91d902cb-1e48-40d6-a4ef-a0850eeba891",
+      "occurredAt": "2026-08-13T17:31:17.978Z",
+      "rawState": "no-bytes",
+      "rawPath": null,
+      "sha256": null,
+      "bytes": 0
+    }
+  ],
   "rejectedPromptLedger": {
-    "status": "empty-before-render",
-    "entries": [],
+    "status": "one-no-byte-failure-exact-text-recorded",
+    "entries": [
+      {
+        "entryId": "batch388-scene1572-pass1-exec-7f38554f",
+        "scene": 1572,
+        "phase": "pass-1",
+        "status": "failed-output-moderation-no-bytes",
+        "callId": "exec-7f38554f-42dc-4b5e-8f49-9f998d13a31d",
+        "requestId": "91d902cb-1e48-40d6-a4ef-a0850eeba891",
+        "occurredAt": "2026-08-13T17:31:17.978Z",
+        "moderationStage": "output",
+        "moderationCategories": [
+          "sexual"
+        ],
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered public overlook beneath the complete double stone arch of Adolphe Bridge above the Petrousse Valley, with the full bridge span, suspended pedestrian deck, green cliffs, winding stream, modern tram and valley paths recognizable through a heavy rain curtain. Deep-sea submersible couture is fictional public fashion at this real Luxembourg location: pressure-shell facets, porthole rings, bathymetric lines, cool bioluminescent piping, ballast geometry and manipulator-joint seams. Nobody is underwater or inside a vehicle. Country-led hybrid: two or three looks carry large secular Adolphe-Bridge double-arch, suspended-walkway, Petrousse-cliff, tram-line, valley-stream, bicycle-path, rose-garden and city-topography fields; at least two also carry deep-sea construction. No literal Luxembourg flag, red lion, coat of arms, crown, official emblem or sacred symbol, religious architecture, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a secure strapless Grand-Duchy-red upper-thigh mini with covered waist and closed back, carrying broad double-arch and steel pressure-shell fields; Ellie wears a secure strapless ice-blue architectural top showing a narrow ordinary midriff over a steel-silver upper-thigh skort, closed back, with tram-line and porthole-ring geometry; Alia wears a vineyard-green sleeveless upper-thigh mini with covered waist and closed back, carrying Petrousse-cliff and bathymetric fields; ECE wears a secure strapless clean-white upper-thigh mini with covered waist and closed back, carrying valley-stream lines and slate ballast facets. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge in Alia's protected bay, outside every prop and mission lane; no adult hand is reassigned. The odd-prop roll is inactive; no odd prop appears. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Alia stands beside the protected mascot lounge with both hands open and visible. Radiance and Ellie remain in separate depth lanes; the stored seated-choice and embrace energy is resolved as eye lines after the movement has ended. There is no human contact and no hidden hand. Emotions: Radiance: hope; Ellie: romantic joy; Alia: playful mischief; AI ECE: overwhelming relief. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the stream and public paths. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nThe heavy rain remains beyond the covered overlook; dry footing, faces, bridge, target and complete backstop stay bright and readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "94968B89005654D7F09DE9ECC8A0C92D864569D3B0BF910F9F19B4686B9F3C78",
+          "encoding": "utf-8",
+          "bytes": 4480
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass1/events/0",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+          "rawPath": null
+        },
+        "immutable": true
+      }
+    ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
   "hardSafeAcceptedCount": 0,
