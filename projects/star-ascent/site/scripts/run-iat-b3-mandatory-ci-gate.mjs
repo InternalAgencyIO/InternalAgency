@@ -32,6 +32,7 @@ export const IAT_B3_MANDATORY_CI_GATES = Object.freeze({
   ]),
   "all-feature-devnet-readiness": Object.freeze([
     "tests/iat-b3-all-feature-devnet-readiness.test.mjs",
+    "tests/iat-b3-devnet-gate-split.test.mjs",
   ]),
 });
 
@@ -43,7 +44,7 @@ export const IAT_B3_MANDATORY_CI_EXPECTED_TEST_COUNTS = Object.freeze({
   "production-transaction-builders": 11,
   "production-local-rehearsal": 29,
   "production-official-local-rehearsal": 18,
-  "all-feature-devnet-readiness": 14,
+  "all-feature-devnet-readiness": 25,
 });
 
 const SITE_ROOT = resolve(fileURLToPath(new URL("../", import.meta.url)));

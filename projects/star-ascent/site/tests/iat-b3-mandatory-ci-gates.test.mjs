@@ -24,7 +24,7 @@ const REQUIRED_STEPS = Object.freeze([
   ["Validate all 15 source-bound production transaction builders", "production-transaction-builders"],
   ["Validate the production loopback driver and nonauthorizing plan", "production-local-rehearsal"],
   ["Validate the official local-rehearsal evidence contract without execution", "production-official-local-rehearsal"],
-  ["Validate the all-feature Devnet readiness assessor without Devnet execution", "all-feature-devnet-readiness"],
+  ["Validate legacy HOLD and non-circular pre/post Devnet gates without execution", "all-feature-devnet-readiness"],
 ]);
 const RUST_ALL_FEATURE_ENVIRONMENT = Object.freeze([
   ["IAT_B3_PRODUCTION_LAW_PROGRAM_ID", "D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY"],
@@ -48,7 +48,10 @@ const EXACT_GATE_FILES = Object.freeze({
   "production-official-local-rehearsal": [
     "tests/iat-b3-production-official-local-rehearsal-evidence.test.mjs",
   ],
-  "all-feature-devnet-readiness": ["tests/iat-b3-all-feature-devnet-readiness.test.mjs"],
+  "all-feature-devnet-readiness": [
+    "tests/iat-b3-all-feature-devnet-readiness.test.mjs",
+    "tests/iat-b3-devnet-gate-split.test.mjs",
+  ],
 });
 const EXACT_TEST_COUNTS = Object.freeze({
   "ci-manifest": 6,
@@ -58,7 +61,7 @@ const EXACT_TEST_COUNTS = Object.freeze({
   "production-transaction-builders": 11,
   "production-local-rehearsal": 29,
   "production-official-local-rehearsal": 18,
-  "all-feature-devnet-readiness": 14,
+  "all-feature-devnet-readiness": 25,
 });
 
 function workflowFailures(workflow) {

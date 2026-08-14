@@ -30,7 +30,15 @@ import {
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const DISPOSABLE_DEVNET_EXECUTION_TRANSCRIPT_SCHEMA =
-  "iat-b3-disposable-devnet-live-build-execution-transcript/v1";
+  "iat-b3-disposable-devnet-live-build-execution-transcript/v3";
+export const DISPOSABLE_DEVNET_HERMETIC_EXECUTION_CONTRACT_SCHEMA =
+  "iat-b3-disposable-devnet-hermetic-same-container-build-contract/v2";
+export const DISPOSABLE_DEVNET_HERMETIC_FRAME_SCHEMA =
+  "iat-b3-disposable-devnet-hermetic-same-container-frame/v1";
+export const DISPOSABLE_DEVNET_RETAINED_FILE_LEDGER_SCHEMA =
+  "iat-b3-disposable-devnet-retained-file-ledger/v1";
+export const DISPOSABLE_DEVNET_OUTPUT_PROMOTION_SCHEMA =
+  "iat-b3-disposable-devnet-output-stage-promotion/v1";
 export const DISPOSABLE_DEVNET_EXECUTION_PROJECTION_SCHEMA =
   "iat-b3-disposable-devnet-build-execution-provenance-projection/v1";
 export const DISPOSABLE_DEVNET_EXECUTION_STATE_SCHEMA =
@@ -175,6 +183,7 @@ const BOOTSTRAP_MODULE_CLOSURE = observePinnedExecutionModuleClosure();
 const combinedLawBuildModule = await import("./run-iat-b3-combined-law-reproducible-build.mjs");
 const economyBuildModule = await import("./run-iat-b3-economy-reproducible-build.mjs");
 const identityFreezeModule = await import("./validate-iat-b3-identity-freeze.mjs");
+const nativeWslBuildModule = await import("./iat-b3-native-wsl-build-backend.mjs");
 const {
   COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA,
   PINNED_COMBINED_LAW_BUILD_CONTAINER,
@@ -202,6 +211,7 @@ const {
   PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
   isCanonicalBase58Key,
 } = identityFreezeModule;
+const { NATIVE_WSL_PINNED_TOOLCHAIN_POLICY } = nativeWslBuildModule;
 const BUILD_ROOT_PREFIX = "iat-b3-disposable-devnet-provenance-sbf-";
 const OUTPUT_ROOT_NAME = /^iat-b3-disposable-devnet-provenance-[a-z0-9][a-z0-9._-]{0,80}$/u;
 const LANE_ID = /^b15-devnet-[0-9]{8}T[0-9]{6}Z-[0-9a-f]{16}$/u;
@@ -221,10 +231,25 @@ const DOCKER_TOOLCHAIN_CLOSURE_TIMEOUT_MILLISECONDS = 10 * 60 * 1000;
 const DOCKER_BUILD_TIMEOUT_MILLISECONDS = 30 * 60 * 1000;
 const DOCKER_TRUSTED_WORKING_DIRECTORY = "/usr/bin";
 const DOCKER_TRUSTED_PATH = "/usr/bin:/bin";
+const HERMETIC_PRIVATE_ROOT = "/iat-private";
+const HERMETIC_PRIVATE_STORE_BYTES = 8 * 1024 * 1024 * 1024;
+const HERMETIC_PRIVATE_TMPFS =
+  `--tmpfs=${HERMETIC_PRIVATE_ROOT}:rw,nosuid,nodev,exec,size=${HERMETIC_PRIVATE_STORE_BYTES},uid=0,gid=0,mode=0755`;
+const HERMETIC_BUILD_ROOT = "/iat-build";
+const HERMETIC_BUILD_STORE_BYTES = 24 * 1024 * 1024 * 1024;
+const HERMETIC_BUILD_TMPFS =
+  `--tmpfs=${HERMETIC_BUILD_ROOT}:rw,nosuid,nodev,exec,size=${HERMETIC_BUILD_STORE_BYTES},uid=65534,gid=65534,mode=0700`;
+const HERMETIC_INITIALIZATION_FRAME_PHASE = "PRIVATE_INPUT_CLOSURE_INITIALIZED";
+const HERMETIC_FRAME_PHASES = Object.freeze([
+  "PRIVATE_INPUT_CLOSURE_PRE_CARGO",
+  "PRIVATE_INPUT_CLOSURE_POST_CARGO",
+  "PRIVATE_ARTIFACT_EXPORTED",
+]);
 const MAX_INPUT_AGE_MILLISECONDS = 15 * 60 * 1000;
 const MAX_FUTURE_SKEW_MILLISECONDS = 30 * 1000;
 const KEY_SCAN_CONTENT_LIMIT = 1024 * 1024;
 const PROCESS_CREATED_STAGES = new Map();
+const PROCESS_CREATED_EXPORT_ROOTS = new Map();
 const CANONICAL_EXECUTION_BRAND = Symbol("iat-b3-disposable-devnet-live-execution");
 const HERMETIC_MOUNT_CAUSALITY_PROVEN = false;
 const LAW_IDENTITY_ENVIRONMENT_NAMES = Object.freeze(
@@ -330,6 +355,9 @@ const OFFICIAL_SAFETY = Object.freeze({
 
 const CURRENT_HOLD_BLOCKERS = Object.freeze([
   "HERMETIC_MOUNT_CAUSALITY_UNPROVEN",
+  "HERMETIC_SAME_CONTAINER_EXECUTION_CONTRACT_NOT_INDEPENDENTLY_ACCEPTED",
+  "PINNED_DOCKER_SOCKET_EXCLUSIVE_PRINCIPAL_NOT_PROVEN",
+  "FINAL_RETAINED_FILE_LEDGER_NOT_INDEPENDENTLY_ACCEPTED",
   "EXACT_COMMITTED_CLEAN_B15_RUNNER_REQUIRED",
   "PINNED_EXECUTABLE_MODULE_CLOSURE_NOT_OBSERVED",
   "EXPLICIT_OFFLINE_BUILD_EXECUTION_GATE_NOT_OBSERVED",
@@ -401,6 +429,1072 @@ function hasExactKeys(value, keys) {
     && typeof value === "object"
     && !Array.isArray(value)
     && Object.keys(value).sort().join("\0") === [...keys].sort().join("\0");
+}
+
+const HERMETIC_LOCAL_BYTE_CLOSURE_CORE = {
+  schema: "iat-b3-disposable-devnet-local-byte-toolchain-closure/v1",
+  manifestEncoding:
+    "TYPE_TAB_UTF8_PATH_BASE64_TAB_POSIX_MODE_TAB_BYTE_LENGTH_TAB_CONTENT_SHA256_OR_SYMLINK_BASE64_LF",
+  manifestSort: "RAW_UTF8_PATH_BYTES_ASCENDING",
+  versions: {
+    rustc: RUSTC_VERSION,
+    cargo: CARGO_VERSION,
+    cargoBuildSbf: CARGO_BUILD_SBF_VERSION,
+    solanaCargoBuildSbf: "3.1.10",
+    platformTools: "1.52",
+  },
+  trees: {
+    rustToolchain: {
+      mountTarget: "/iat-host/rust-toolchain",
+      privateTarget: "/iat-private/home/a/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu",
+      manifestSha256: "5d4b1a80279f8169ff7f7fb2dea8535e9498ab4e5cd5914a9ca0390dfe4a14b9",
+      manifestByteLength: 24_678,
+      entryCount: 188,
+      fileCount: 166,
+      directoryCount: 22,
+      symlinkCount: 0,
+      byteLength: 653_573_351,
+      nativeObservationSha256: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.sha256.rustToolchainTree,
+    },
+    solanaRelease: {
+      mountTarget: "/iat-host/solana-release",
+      privateTarget: "/iat-private/home/a/.local/share/solana/install/releases/3.1.10/solana-release",
+      manifestSha256: "7c60c723f9b74f734ca4f6caf46565b54bf8f65527d3680f5784c14b79903a3f",
+      manifestByteLength: 12_446,
+      entryCount: 104,
+      fileCount: 87,
+      directoryCount: 15,
+      symlinkCount: 2,
+      byteLength: 419_506_102,
+      cargoBuildSbfSha256: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.sha256.cargoBuildSbf,
+    },
+    platformTools: {
+      mountTarget: "/iat-host/platform-tools",
+      privateTarget: "/iat-private/home/a/.cache/solana/v1.52/platform-tools",
+      manifestSha256: "f879ef69841177c086891ed5c4291eddac14580698c4f37d8eae9c556e30bdaf",
+      manifestByteLength: 560_692,
+      entryCount: 3_828,
+      fileCount: 3_198,
+      directoryCount: 618,
+      symlinkCount: 12,
+      byteLength: 1_663_263_438,
+      nativeObservationSha256: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.sha256.platformToolsTree,
+    },
+    criterion: {
+      mountTarget: "/iat-host/criterion",
+      privateTarget: "/iat-private/home/a/.cache/solana/v2.3.3/criterion",
+      manifestSha256: "9c5cc9c7135f8984eef0ffa9725732e292bc446840a6ad6b815d388d208508d9",
+      manifestByteLength: 3_982,
+      entryCount: 38,
+      fileCount: 30,
+      directoryCount: 6,
+      symlinkCount: 2,
+      byteLength: 2_201_370,
+    },
+    registryCache: {
+      mountTarget: "/iat-host/registry-cache",
+      privateTarget: "/iat-private/home/a/.cargo/registry/cache",
+      manifestSha256: "02b7a46d4d16cb4a573fccd96e628dce07ae6e31037fd67964acf44345110b75",
+      manifestByteLength: 326_800,
+      entryCount: 2_092,
+      fileCount: 2_090,
+      directoryCount: 2,
+      symlinkCount: 0,
+      byteLength: 234_988_779,
+    },
+    registryIndex: {
+      mountTarget: "/iat-host/registry-index",
+      privateTarget: "/iat-private/home/a/.cargo/registry/index",
+      manifestSha256: "73f669e18accdd5134e94d6781016ecaab17c152b005e6620b7e7cd0503b5ec6",
+      manifestByteLength: 292_553,
+      entryCount: 2_376,
+      fileCount: 1_460,
+      directoryCount: 916,
+      symlinkCount: 0,
+      byteLength: 179_474_589,
+    },
+  },
+  cargoLockClosure: {
+    lockSha256: "9cdf2e9bb6b618c993dd482e6b5e2558359826e2aff0a80eb1b62957d2578d84",
+    sourcePolicy: "CARGO_LOCK_REGISTRY_CHECKSUMS_AND_FRESH_ARCHIVE_EXTRACTION",
+    packageCount: 229,
+    packagesSha256: "d9c69702259270a6e9a9263ef92f6226d97aff98d997d437b1695640cceb47cf",
+    bindingSha256: "8a447110f4aed5dae2c1c1b592cb441a8270eba97b51284cd76b8912a46a3e3f",
+  },
+};
+
+export const PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE = deepFreeze({
+  ...HERMETIC_LOCAL_BYTE_CLOSURE_CORE,
+  closureSha256: disposableDevnetExecutionCanonicalSha256(HERMETIC_LOCAL_BYTE_CLOSURE_CORE),
+});
+
+const LAW_HERMETIC_RECIPE_SHA256 = disposableDevnetExecutionCanonicalSha256(
+  PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+);
+const ECONOMY_HERMETIC_RECIPE_SHA256 = disposableDevnetExecutionCanonicalSha256(
+  ECONOMY_SBF_BUILD_RECIPE,
+);
+const HERMETIC_LOCAL_BYTE_HOST_ROOTS = Object.freeze({
+  rustToolchain: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.paths.rustToolchainRoot,
+  solanaRelease: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.paths.solanaReleaseRoot,
+  platformTools: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.paths.platformToolsRoot,
+  criterion: join(
+    dirname(dirname(NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.paths.platformToolsRoot)),
+    "v2.3.3",
+    "criterion",
+  ),
+  registryCache: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.paths.registryCacheRoot,
+  registryIndex: NATIVE_WSL_PINNED_TOOLCHAIN_POLICY.paths.registryIndexRoot,
+});
+
+export const DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT = [
+  "set -euo pipefail",
+  "umask 077",
+  "fail() { /usr/bin/printf 'IAT_B3_HERMETIC_INITIALIZER_HOLD:%s\\n' \"$1\" >&2; exit 96; }",
+  "[[ \"$(/usr/bin/id -u):$(/usr/bin/id -g)\" == 0:0 ]] || fail ROOT_IDENTITY",
+  "[[ -d /iat-private && -z \"$(/usr/bin/find /iat-private -mindepth 1 -print -quit)\" ]] || fail PRIVATE_ROOT_NOT_EMPTY",
+  "/usr/bin/mkdir -p -m 0700 /iat-private/home/a/.iat-ledger /iat-private/home/a/iat-source",
+  "copy_tree() {",
+  "  local source=\"$1\" destination=\"$2\"; [[ -d \"$source\" ]] || fail COPY_SOURCE",
+  "  /usr/bin/mkdir -p -m 0700 \"$destination\"",
+  "  [[ -z \"$(/usr/bin/find \"$destination\" -mindepth 1 -print -quit)\" ]] || fail COPY_DESTINATION_NOT_EMPTY",
+  "  /usr/bin/cp -a --no-preserve=ownership --reflink=never -- \"$source/.\" \"$destination/\"",
+  "}",
+  "manifest_tree() {",
+  "  local root=\"$1\" output=\"$2\" scope=\"$3\" list=\"$2.list\" sorted=\"$2.sorted\"",
+  "  [[ -d \"$root\" ]] || fail MANIFEST_ROOT; : > \"$output\"",
+  "  /usr/bin/find \"$root\" -mindepth 1 -printf '%P\\0' > \"$list\"; LC_ALL=C /usr/bin/sort -z \"$list\" > \"$sorted\"",
+  "  while IFS= read -r -d '' relative_path; do",
+  "    local path=\"$root/$relative_path\" type mode size content target resolved links",
+  "    mode=\"$(/usr/bin/stat -c '%a' -- \"$path\")\"",
+  "    if [[ -L \"$path\" ]]; then type=L; target=\"$(/usr/bin/readlink -- \"$path\")\"; size=\"$(/usr/bin/stat -c '%s' -- \"$path\")\"; content=\"$(/usr/bin/printf '%s' \"$target\" | /usr/bin/base64 -w0)\";",
+  "      if [[ \"$scope\" == private ]]; then resolved=\"$(/usr/bin/readlink -f -- \"$path\")\" || fail PRIVATE_SYMLINK; [[ \"$resolved\" == /iat-private/* ]] || fail PRIVATE_SYMLINK_ESCAPE; fi",
+  "    elif [[ -d \"$path\" ]]; then type=D; size=0; content=-",
+  "    elif [[ -f \"$path\" ]]; then type=F; links=\"$(/usr/bin/stat -c '%h' -- \"$path\")\"; [[ \"$links\" == 1 ]] || fail HARDLINK; size=\"$(/usr/bin/stat -c '%s' -- \"$path\")\"; content=\"$(/usr/bin/sha256sum -- \"$path\")\"; content=\"${content%% *}\"",
+  "    else fail NONREGULAR; fi",
+  "    /usr/bin/printf '%s\\t%s\\t%s\\t%s\\t%s\\n' \"$type\" \"$(/usr/bin/printf '%s' \"$relative_path\" | /usr/bin/base64 -w0)\" \"$mode\" \"$size\" \"$content\" >> \"$output\"",
+  "  done < \"$sorted\"; /usr/bin/rm -f -- \"$list\" \"$sorted\"",
+  "}",
+  "copy_tree /iat-host/source /iat-private/home/a/iat-source",
+  ...Object.values(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees).map(
+    (value) => `copy_tree ${value.mountTarget} ${value.privateTarget}`,
+  ),
+  "manifest_tree /iat-host/source /iat-private/home/a/.iat-ledger/source.host host",
+  "manifest_tree /iat-private/home/a/iat-source /iat-private/home/a/.iat-ledger/source.private private",
+  "/usr/bin/cmp -s /iat-private/home/a/.iat-ledger/source.host /iat-private/home/a/.iat-ledger/source.private || fail SOURCE_COPY",
+  "source_sha=\"$(/usr/bin/sha256sum /iat-private/home/a/.iat-ledger/source.private)\"; source_sha=\"${source_sha%% *}\"; [[ \"$source_sha\" == \"$IAT_B3_HERMETIC_SOURCE_MANIFEST_SHA256\" ]] || fail SOURCE_MANIFEST",
+  ...Object.entries(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees).flatMap(
+    ([key, value]) => [
+      `manifest_tree ${value.mountTarget} /iat-private/home/a/.iat-ledger/${key}.host host`,
+      `manifest_tree ${value.privateTarget} /iat-private/home/a/.iat-ledger/${key}.private private`,
+      `/usr/bin/cmp -s /iat-private/home/a/.iat-ledger/${key}.host /iat-private/home/a/.iat-ledger/${key}.private || fail ${key.toUpperCase()}_COPY`,
+      `${key}_sha="$(/usr/bin/sha256sum /iat-private/home/a/.iat-ledger/${key}.private)"; ${key}_sha="\${${key}_sha%% *}"; [[ "$${key}_sha" == '${value.manifestSha256}' ]] || fail ${key.toUpperCase()}_MANIFEST`,
+    ],
+  ),
+  "/usr/bin/chown -R 0:0 /iat-private/home/a",
+  "/usr/bin/chmod -R go-w /iat-private/home/a",
+  "/usr/bin/chmod 0555 /iat-private/home/a /iat-private/home/a/iat-source /iat-private/home/a/.rustup /iat-private/home/a/.rustup/toolchains /iat-private/home/a/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu /iat-private/home/a/.local /iat-private/home/a/.local/share /iat-private/home/a/.local/share/solana /iat-private/home/a/.local/share/solana/install /iat-private/home/a/.local/share/solana/install/releases /iat-private/home/a/.local/share/solana/install/releases/3.1.10 /iat-private/home/a/.local/share/solana/install/releases/3.1.10/solana-release /iat-private/home/a/.cache /iat-private/home/a/.cache/solana /iat-private/home/a/.cache/solana/v1.52 /iat-private/home/a/.cache/solana/v1.52/platform-tools /iat-private/home/a/.cache/solana/v2.3.3 /iat-private/home/a/.cache/solana/v2.3.3/criterion /iat-private/home/a/.cargo /iat-private/home/a/.cargo/registry /iat-private/home/a/.cargo/registry/cache /iat-private/home/a/.cargo/registry/index",
+  "[[ -z \"$(/usr/bin/find /iat-private/home/a -type d \\( ! -user root -o ! -group root -o -perm /0022 \\) -print -quit)\" ]] || fail DIRECTORY_OWNERSHIP_OR_MODE",
+  "[[ -z \"$(/usr/bin/find /iat-private/home/a -type f \\( ! -user root -o ! -group root -o -perm /0022 -o -links +1 \\) -print -quit)\" ]] || fail FILE_OWNERSHIP_MODE_OR_LINK",
+  "while IFS= read -r -d '' link; do resolved=\"$(/usr/bin/readlink -f -- \"$link\")\" || fail PRIVATE_SYMLINK; [[ \"$resolved\" == /iat-private/* ]] || fail PRIVATE_SYMLINK_ESCAPE; done < <(/usr/bin/find /iat-private/home/a -type l -print0)",
+  "/usr/bin/printf '%s\\n' 'IAT_B3_HERMETIC_PRIVATE_INPUTS_READY_V2' > /iat-private/.ready.tmp",
+  "/usr/bin/chown 0:0 /iat-private/.ready.tmp; /usr/bin/chmod 0444 /iat-private/.ready.tmp",
+  "/usr/bin/mv -T /iat-private/.ready.tmp /iat-private/.ready",
+  "/usr/bin/printf '{\"contractSha256\":\"%s\",\"kind\":\"%s\",\"laneId\":\"%s\",\"ordinal\":%s,\"phase\":\"PRIVATE_INPUT_CLOSURE_INITIALIZED\",\"schema\":\"iat-b3-disposable-devnet-hermetic-same-container-frame/v1\"}\\n' \"$IAT_B3_HERMETIC_CONTRACT_SHA256\" \"$IAT_B3_HERMETIC_KIND\" \"$IAT_B3_HERMETIC_LANE_ID\" \"$IAT_B3_HERMETIC_ORDINAL\"",
+  "trap 'exit 0' TERM INT",
+  "/usr/bin/tail -f /dev/null & wait $!",
+].join("\n");
+
+export const DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SHA256 = sha256(
+  Buffer.from(DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT, "utf8"),
+);
+
+export const DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT = [
+  "set -euo pipefail",
+  "umask 077",
+  "fail() { /usr/bin/printf 'IAT_B3_HERMETIC_WRAPPER_HOLD:%s\\n' \"$1\" >&2; exit 97; }",
+  "require_hex() { [[ \"${!1:-}\" =~ ^[0-9a-f]{64}$ ]] || fail \"$1\"; }",
+  "require_hex IAT_B3_HERMETIC_CONTRACT_SHA256",
+  "require_hex IAT_B3_HERMETIC_SOURCE_MANIFEST_SHA256",
+  "require_hex IAT_B3_HERMETIC_SOURCE_MOUNTED_INPUT_SHA256",
+  "require_hex IAT_B3_HERMETIC_RECIPE_SHA256",
+  "require_hex IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256",
+  "[[ \"${IAT_B3_HERMETIC_LANE_ID:-}\" =~ ^b15-devnet-[0-9]{8}T[0-9]{6}Z-[0-9a-f]{16}$ ]] || fail LANE",
+  "[[ \"${IAT_B3_HERMETIC_ORDINAL:-}\" =~ ^[12]$ ]] || fail ORDINAL",
+  "[[ \"${IAT_B3_HERMETIC_KIND:-}\" =~ ^(law|economy)$ ]] || fail KIND",
+  "[[ \"${IAT_B3_EXACT_SOURCE_HEAD_SHA:-}\" =~ ^[0-9a-f]{40}$ ]] || fail HEAD",
+  "[[ \"$IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256\" == "
+    + `'${PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.closureSha256}' ]] || fail TOOLCHAIN_BINDING`,
+  "[[ \"$(/usr/bin/id -u):$(/usr/bin/id -g)\" == 65534:65534 ]] || fail BUILD_IDENTITY",
+  "for ((ready_wait=0; ready_wait<1800; ready_wait+=1)); do [[ -f /iat-private/.ready ]] && break; /usr/bin/sleep 1; done",
+  "[[ \"$(/usr/bin/cat /iat-private/.ready)\" == IAT_B3_HERMETIC_PRIVATE_INPUTS_READY_V2 ]] || fail PRIVATE_INPUTS_NOT_READY",
+  "[[ -d /iat-private/home/a && -d /iat-build ]] || fail PRIVATE_ROOT",
+  "[[ -z \"$(/usr/bin/find /iat-private/home/a -type d \\( ! -user root -o ! -group root -o -perm /0022 \\) -print -quit)\" ]] || fail DIRECTORY_OWNERSHIP_OR_MODE",
+  "[[ -z \"$(/usr/bin/find /iat-private/home/a -type f \\( ! -user root -o ! -group root -o -perm /0022 -o -links +1 \\) -print -quit)\" ]] || fail FILE_OWNERSHIP_MODE_OR_LINK",
+  "/usr/bin/mkdir -m 0700 /iat-build/.iat-ledger /iat-build/target /iat-build/output /iat-build/tmp /iat-build/home /iat-build/cargo-home",
+  "manifest_tree() {",
+  "  local root=\"$1\" output=\"$2\" scope=\"$3\" list=\"$2.list\" sorted=\"$2.sorted\"",
+  "  [[ -d \"$root\" ]] || fail MANIFEST_ROOT",
+  "  : > \"$output\"",
+  "  /usr/bin/find \"$root\" -mindepth 1 -printf '%P\\0' > \"$list\"",
+  "  LC_ALL=C /usr/bin/sort -z \"$list\" > \"$sorted\"",
+  "  while IFS= read -r -d '' relative_path; do",
+  "    local path=\"$root/$relative_path\" type mode size content target resolved links",
+  "    mode=\"$(/usr/bin/stat -c '%a' -- \"$path\")\"",
+  "    if [[ -L \"$path\" ]]; then",
+  "      type=L; target=\"$(/usr/bin/readlink -- \"$path\")\"; size=\"$(/usr/bin/stat -c '%s' -- \"$path\")\"",
+  "      content=\"$(/usr/bin/printf '%s' \"$target\" | /usr/bin/base64 -w0)\"",
+  "      if [[ \"$scope\" == private ]]; then",
+  "        resolved=\"$(/usr/bin/readlink -f -- \"$path\")\" || fail PRIVATE_SYMLINK",
+  "        [[ \"$resolved\" == /iat-private/* ]] || fail PRIVATE_SYMLINK_ESCAPE",
+  "      fi",
+  "    elif [[ -d \"$path\" ]]; then type=D; size=0; content=-",
+  "    elif [[ -f \"$path\" ]]; then",
+  "      type=F; links=\"$(/usr/bin/stat -c '%h' -- \"$path\")\"; [[ \"$links\" == 1 ]] || fail HARDLINK",
+  "      size=\"$(/usr/bin/stat -c '%s' -- \"$path\")\"; content=\"$(/usr/bin/sha256sum -- \"$path\")\"; content=\"${content%% *}\"",
+  "    else fail NONREGULAR; fi",
+  "    /usr/bin/printf '%s\\t%s\\t%s\\t%s\\t%s\\n' \"$type\" \"$(/usr/bin/printf '%s' \"$relative_path\" | /usr/bin/base64 -w0)\" \"$mode\" \"$size\" \"$content\" >> \"$output\"",
+  "  done < \"$sorted\"",
+  "  /usr/bin/rm -f -- \"$list\" \"$sorted\"",
+  "}",
+  "copy_tree() {",
+  "  local source=\"$1\" destination=\"$2\"; [[ -d \"$source\" ]] || fail COPY_SOURCE",
+  "  /usr/bin/mkdir -p -m 0700 \"$destination\"",
+  "  [[ -z \"$(/usr/bin/find \"$destination\" -mindepth 1 -print -quit)\" ]] || fail COPY_DESTINATION_NOT_EMPTY",
+  "  /usr/bin/cp -a --no-preserve=ownership --reflink=never -- \"$source/.\" \"$destination/\"",
+  "}",
+  "manifest_tree /iat-private/home/a/iat-source /iat-build/.iat-ledger/source.private.pre private",
+  "source_pre=\"$(/usr/bin/sha256sum /iat-build/.iat-ledger/source.private.pre)\"; source_pre=\"${source_pre%% *}\"",
+  "[[ \"$source_pre\" == \"$IAT_B3_HERMETIC_SOURCE_MANIFEST_SHA256\" ]] || fail SOURCE_MANIFEST",
+  ...Object.entries(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees).flatMap(
+    ([key, value]) => [
+      `manifest_tree ${value.privateTarget} /iat-build/.iat-ledger/${key}.private.pre private`,
+      `${key}_pre="$(/usr/bin/sha256sum /iat-build/.iat-ledger/${key}.private.pre)"; ${key}_pre="\${${key}_pre%% *}"`,
+      `[[ "$${key}_pre" == '${value.manifestSha256}' ]] || fail ${key.toUpperCase()}_MANIFEST`,
+    ],
+  ),
+  "manifest_tree /iat-private/home/a/iat-source /iat-build/.iat-ledger/source.private.build private",
+  "/usr/bin/cmp -s /iat-build/.iat-ledger/source.private.pre /iat-build/.iat-ledger/source.private.build || fail SOURCE_PERMISSION_DRIFT",
+  ...Object.entries(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees).map(
+    ([key, value]) => `manifest_tree ${value.privateTarget} /iat-build/.iat-ledger/${key}.private.build private`,
+  ),
+  "/usr/bin/mkdir -p -m 0700 /iat-build/home/.cache/solana/v1.52 /iat-build/home/.cache/solana/v2.3.3 /iat-build/cargo-home/registry/src /iat-build/cargo-home/git",
+  "/usr/bin/ln -s /iat-private/home/a/.cache/solana/v1.52/platform-tools /iat-build/home/.cache/solana/v1.52/platform-tools",
+  "/usr/bin/ln -s /iat-private/home/a/.cache/solana/v2.3.3/criterion /iat-build/home/.cache/solana/v2.3.3/criterion",
+  "/usr/bin/ln -s /iat-private/home/a/.cargo/registry/cache /iat-build/cargo-home/registry/cache",
+  "/usr/bin/ln -s /iat-private/home/a/.cargo/registry/index /iat-build/cargo-home/registry/index",
+  "export HOME=/iat-build/home CARGO_HOME=/iat-build/cargo-home RUSTUP_HOME=/iat-private/home/a/.rustup TMPDIR=/iat-build/tmp CARGO_NET_OFFLINE=true CARGO_INCREMENTAL=0 RUSTUP_TOOLCHAIN=1.97.1-x86_64-unknown-linux-gnu LANG=C.UTF-8 LC_ALL=C.UTF-8 TZ=UTC",
+  "export PATH=/iat-private/home/a/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/bin:/iat-private/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin:/usr/bin:/bin",
+  "case \"$IAT_B3_HERMETIC_KIND\" in",
+  `  law) [[ "$IAT_B3_HERMETIC_RECIPE_SHA256" == '${LAW_HERMETIC_RECIPE_SHA256}' ]] || fail LAW_RECIPE; output_name=iat_b3_law.so ;;`,
+  `  economy) [[ "$IAT_B3_HERMETIC_RECIPE_SHA256" == '${ECONOMY_HERMETIC_RECIPE_SHA256}' ]] || fail ECONOMY_RECIPE; output_name=iat_b3_economy.so ;;`,
+  "esac",
+  "/usr/bin/printf '{\"contractSha256\":\"%s\",\"kind\":\"%s\",\"laneId\":\"%s\",\"ordinal\":%s,\"phase\":\"PRIVATE_INPUT_CLOSURE_PRE_CARGO\",\"recipeSha256\":\"%s\",\"schema\":\"iat-b3-disposable-devnet-hermetic-same-container-frame/v1\",\"sourceManifestSha256\":\"%s\",\"toolchainClosureSha256\":\"%s\"}\\n' \"$IAT_B3_HERMETIC_CONTRACT_SHA256\" \"$IAT_B3_HERMETIC_KIND\" \"$IAT_B3_HERMETIC_LANE_ID\" \"$IAT_B3_HERMETIC_ORDINAL\" \"$IAT_B3_HERMETIC_RECIPE_SHA256\" \"$source_pre\" \"$IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256\"",
+  "cd /iat-private/home/a/iat-source",
+  "set +e",
+  "if [[ \"$IAT_B3_HERMETIC_KIND\" == law ]]; then",
+  "  /iat-private/home/a/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/bin/cargo build-sbf --manifest-path projects/star-ascent/site/programs/iat_b3_law/Cargo.toml --sbf-out-dir /iat-build/output --arch v0 --no-default-features --features production-combined-hook --optimize-size --offline --skip-tools-install --tools-version v1.52 -- --locked --target-dir /iat-build/target 1>&2 2>&2",
+  "else",
+  "  /iat-private/home/a/.rustup/toolchains/1.97.1-x86_64-unknown-linux-gnu/bin/cargo build-sbf --manifest-path projects/star-ascent/site/programs/iat_b3_economy/Cargo.toml --sbf-out-dir /iat-build/output --arch v0 --no-default-features --features runtime-production-entrypoint --optimize-size --offline --skip-tools-install --tools-version v1.52 -- --locked --target-dir /iat-build/target 1>&2 2>&2",
+  "fi",
+  "cargo_status=$?; set -e; [[ \"$cargo_status\" == 0 ]] || fail CARGO",
+  "manifest_tree /iat-private/home/a/iat-source /iat-build/.iat-ledger/source.private.post private",
+  "/usr/bin/cmp -s /iat-build/.iat-ledger/source.private.build /iat-build/.iat-ledger/source.private.post || fail SOURCE_POST_CARGO",
+  ...Object.entries(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees).flatMap(
+    ([key, value]) => [
+      `manifest_tree ${value.privateTarget} /iat-build/.iat-ledger/${key}.private.post private`,
+      `/usr/bin/cmp -s /iat-build/.iat-ledger/${key}.private.build /iat-build/.iat-ledger/${key}.private.post || fail ${key.toUpperCase()}_POST_CARGO`,
+    ],
+  ),
+  "/usr/bin/printf '{\"contractSha256\":\"%s\",\"kind\":\"%s\",\"laneId\":\"%s\",\"ordinal\":%s,\"phase\":\"PRIVATE_INPUT_CLOSURE_POST_CARGO\",\"recipeSha256\":\"%s\",\"schema\":\"iat-b3-disposable-devnet-hermetic-same-container-frame/v1\",\"sourceManifestSha256\":\"%s\",\"toolchainClosureSha256\":\"%s\"}\\n' \"$IAT_B3_HERMETIC_CONTRACT_SHA256\" \"$IAT_B3_HERMETIC_KIND\" \"$IAT_B3_HERMETIC_LANE_ID\" \"$IAT_B3_HERMETIC_ORDINAL\" \"$IAT_B3_HERMETIC_RECIPE_SHA256\" \"$source_pre\" \"$IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256\"",
+  "artifact=/iat-build/output/$output_name; [[ -f \"$artifact\" && ! -L \"$artifact\" ]] || fail ARTIFACT",
+  "/usr/bin/chmod 0444 \"$artifact\"",
+  "[[ \"$(/usr/bin/stat -c '%h' -- \"$artifact\")\" == 1 ]] || fail ARTIFACT_HARDLINK",
+  "artifact_sha=\"$(/usr/bin/sha256sum -- \"$artifact\")\"; artifact_sha=\"${artifact_sha%% *}\"; artifact_size=\"$(/usr/bin/stat -c '%s' -- \"$artifact\")\"",
+  "[[ \"$artifact_size\" -ge 1024 ]] || fail ARTIFACT_SIZE",
+  "exported=/iat-host/export/$output_name; [[ ! -e \"$exported\" && ! -L \"$exported\" ]] || fail EXPORT_NOT_EMPTY",
+  "set -o noclobber; exec 3> \"$exported\"; set +o noclobber",
+  "/usr/bin/cat -- \"$artifact\" >&3; exec 3>&-; /usr/bin/chmod 0444 \"$exported\"",
+  "[[ \"$(/usr/bin/stat -c '%h' -- \"$exported\")\" == 1 && \"$(/usr/bin/stat -c '%a' -- \"$exported\")\" == 444 && \"$(/usr/bin/stat -c '%u:%g' -- \"$exported\")\" == 65534:65534 ]] || fail EXPORTED_ARTIFACT_BOUNDARY",
+  "exported_sha=\"$(/usr/bin/sha256sum -- \"$exported\")\"; exported_sha=\"${exported_sha%% *}\"; exported_size=\"$(/usr/bin/stat -c '%s' -- \"$exported\")\"",
+  "artifact_sha_after=\"$(/usr/bin/sha256sum -- \"$artifact\")\"; artifact_sha_after=\"${artifact_sha_after%% *}\"; artifact_size_after=\"$(/usr/bin/stat -c '%s' -- \"$artifact\")\"",
+  "[[ \"$artifact_sha\" == \"$artifact_sha_after\" && \"$artifact_sha\" == \"$exported_sha\" && \"$artifact_size\" == \"$artifact_size_after\" && \"$artifact_size\" == \"$exported_size\" ]] || fail ARTIFACT_EXPORT",
+  "/usr/bin/printf '{\"artifactByteLength\":%s,\"artifactSha256\":\"%s\",\"cargoExitStatus\":0,\"contractSha256\":\"%s\",\"kind\":\"%s\",\"laneId\":\"%s\",\"ordinal\":%s,\"phase\":\"PRIVATE_ARTIFACT_EXPORTED\",\"recipeSha256\":\"%s\",\"schema\":\"iat-b3-disposable-devnet-hermetic-same-container-frame/v1\",\"sourceManifestSha256\":\"%s\",\"toolchainClosureSha256\":\"%s\"}\\n' \"$artifact_size\" \"$artifact_sha\" \"$IAT_B3_HERMETIC_CONTRACT_SHA256\" \"$IAT_B3_HERMETIC_KIND\" \"$IAT_B3_HERMETIC_LANE_ID\" \"$IAT_B3_HERMETIC_ORDINAL\" \"$IAT_B3_HERMETIC_RECIPE_SHA256\" \"$source_pre\" \"$IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256\"",
+].join("\n");
+
+export const DISPOSABLE_DEVNET_HERMETIC_WRAPPER_SHA256 = sha256(
+  Buffer.from(DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT, "utf8"),
+);
+
+function assertCanonicalLinuxAbsolutePath(path, label) {
+  if (typeof path !== "string" || !path.startsWith("/") || path === "/"
+    || /[\r\n\0,]/u.test(path)
+    || path.includes("//")
+    || path.split("/").some((part, index) => index > 0 && ["", ".", ".."].includes(part))) {
+    throw new Error(`${label}_CANONICAL_LINUX_ABSOLUTE_PATH_REQUIRED`);
+  }
+  return path;
+}
+
+function sourceManifestRecords(entries) {
+  if (!Array.isArray(entries) || entries.length === 0) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_SOURCE_ENTRIES_REQUIRED");
+  }
+  const byPath = new Map();
+  const directories = new Set();
+  for (const entry of entries) {
+    if (!hasExactKeys(entry, [
+      "path", "gitMode", "gitObjectSha1", "byteLength", "sha256", "lfsPointer",
+    ])
+      || typeof entry.path !== "string" || entry.path.length === 0
+      || entry.path.startsWith("/") || entry.path.includes("\\")
+      || /[\r\n\0]/u.test(entry.path)
+      || entry.path.split("/").some((part) => ["", ".", ".."].includes(part))
+      || !["100644", "100755"].includes(entry.gitMode)
+      || !HEX_SHA1.test(entry.gitObjectSha1 ?? "")
+      || !/^[0-9a-f]{64}$/u.test(entry.sha256 ?? "")
+      || !Number.isSafeInteger(entry.byteLength) || entry.byteLength < 0
+      || typeof entry.lfsPointer !== "boolean"
+      || byPath.has(entry.path)) {
+      throw new Error("DISPOSABLE_DEVNET_HERMETIC_SOURCE_ENTRY_INVALID");
+    }
+    byPath.set(entry.path, Object.freeze({
+      type: "F",
+      path: entry.path,
+      mode: entry.gitMode === "100755" ? "555" : "444",
+      byteLength: entry.byteLength,
+      content: entry.sha256,
+    }));
+    const parts = entry.path.split("/");
+    for (let index = 1; index < parts.length; index += 1) {
+      directories.add(parts.slice(0, index).join("/"));
+    }
+  }
+  for (const path of directories) {
+    if (byPath.has(path)) throw new Error("DISPOSABLE_DEVNET_HERMETIC_SOURCE_PATH_ALIAS_HOLD");
+    byPath.set(path, Object.freeze({ type: "D", path, mode: "555", byteLength: 0, content: "-" }));
+  }
+  return [...byPath.values()].sort((left, right) => (
+    Buffer.compare(Buffer.from(left.path, "utf8"), Buffer.from(right.path, "utf8"))
+  ));
+}
+
+export function createDisposableDevnetHermeticSourceManifest(entries) {
+  const records = sourceManifestRecords(entries);
+  const bytes = Buffer.from(records.map((record) => [
+    record.type,
+    Buffer.from(record.path, "utf8").toString("base64"),
+    record.mode,
+    record.byteLength,
+    record.content,
+  ].join("\t")).join("\n") + "\n", "utf8");
+  return deepFreeze({
+    schema: "iat-b3-disposable-devnet-hermetic-tree-manifest/v1",
+    sha256: sha256(bytes),
+    byteLength: bytes.length,
+    entryCount: records.length,
+    fileCount: records.filter(({ type }) => type === "F").length,
+    directoryCount: records.filter(({ type }) => type === "D").length,
+    sourceByteLength: records.filter(({ type }) => type === "F")
+      .reduce((total, { byteLength }) => total + byteLength, 0),
+  });
+}
+
+const HERMETIC_LOCAL_BYTE_ROOT_KEYS = Object.freeze(
+  Object.keys(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees),
+);
+const HERMETIC_ENVIRONMENT_NAMES = Object.freeze([
+  "IAT_B3_EXACT_SOURCE_HEAD_SHA",
+  "IAT_B3_HERMETIC_CONTRACT_SHA256",
+  "IAT_B3_HERMETIC_KIND",
+  "IAT_B3_HERMETIC_LANE_ID",
+  "IAT_B3_HERMETIC_ORDINAL",
+  "IAT_B3_HERMETIC_RECIPE_SHA256",
+  "IAT_B3_HERMETIC_SOURCE_MANIFEST_SHA256",
+  "IAT_B3_HERMETIC_SOURCE_MOUNTED_INPUT_SHA256",
+  "IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256",
+  ...REQUIRED_IDENTITY_ENVIRONMENT_NAMES,
+]);
+const HERMETIC_BUILD_ENVIRONMENT_NAMES = HERMETIC_ENVIRONMENT_NAMES;
+
+function validateHermeticLocalByteRoots(localByteRoots) {
+  if (!hasExactKeys(localByteRoots, HERMETIC_LOCAL_BYTE_ROOT_KEYS)) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_LOCAL_BYTE_ROOTS_INVALID");
+  }
+  const roots = Object.fromEntries(HERMETIC_LOCAL_BYTE_ROOT_KEYS.map((key) => [
+    key,
+    assertCanonicalLinuxAbsolutePath(
+      localByteRoots[key],
+      `DISPOSABLE_DEVNET_HERMETIC_${key.toUpperCase()}_ROOT`,
+    ),
+  ]));
+  if (new Set(Object.values(roots)).size !== HERMETIC_LOCAL_BYTE_ROOT_KEYS.length) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_LOCAL_BYTE_ROOT_ALIAS_HOLD");
+  }
+  return Object.freeze(roots);
+}
+
+function hermeticRecipe(kind) {
+  if (kind === "law") {
+    return Object.freeze({
+      value: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE,
+      sha256: LAW_HERMETIC_RECIPE_SHA256,
+      outputFileName: PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE.outputFileName,
+    });
+  }
+  if (kind === "economy") {
+    return Object.freeze({
+      value: ECONOMY_SBF_BUILD_RECIPE,
+      sha256: ECONOMY_HERMETIC_RECIPE_SHA256,
+      outputFileName: ECONOMY_SBF_BUILD_RECIPE.outputFileName,
+    });
+  }
+  throw new Error("DISPOSABLE_DEVNET_HERMETIC_KIND_INVALID");
+}
+
+function hermeticMounts({ sourceSnapshotRoot, localByteRoots, exportRoot }) {
+  const mounts = [
+    { key: "source", source: sourceSnapshotRoot, target: "/iat-host/source", readonly: true },
+    ...HERMETIC_LOCAL_BYTE_ROOT_KEYS.map((key) => ({
+      key,
+      source: localByteRoots[key],
+      target: PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees[key].mountTarget,
+      readonly: true,
+    })),
+    { key: "export", source: exportRoot, target: "/iat-host/export", readonly: false },
+  ];
+  if (new Set(mounts.map(({ source }) => source)).size !== mounts.length
+    || new Set(mounts.map(({ target }) => target)).size !== mounts.length
+    || mounts.some((left, leftIndex) => mounts.some((right, rightIndex) => (
+      leftIndex !== rightIndex
+      && (left.source.startsWith(`${right.source}/`)
+        || right.source.startsWith(`${left.source}/`))
+    )))) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_MOUNT_ALIAS_HOLD");
+  }
+  return deepFreeze(mounts);
+}
+
+function hermeticMountArgument({ source, target, readonly }) {
+  return `--mount=type=bind,source=${source},target=${target}${readonly ? ",readonly" : ""}`;
+}
+
+export function createDisposableDevnetHermeticBuildContract({
+  sourceClosure,
+  sourceSnapshotRoot,
+  localByteRoots,
+  exportRoot,
+  ordinal,
+  kind,
+  laneId,
+  identityEnvironment,
+} = {}) {
+  if (!hasExactKeys(sourceClosure, [
+    "declaredHeadSha", "treeSha", "mountedInputSha256", "entries",
+  ])
+    || !HEX_SHA1.test(sourceClosure.declaredHeadSha ?? "")
+    || !HEX_SHA1.test(sourceClosure.treeSha ?? "")
+    || !/^[0-9a-f]{64}$/u.test(sourceClosure.mountedInputSha256 ?? "")
+    || ![1, 2].includes(ordinal)
+    || !LANE_ID.test(laneId ?? "")) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_CONTRACT_INPUT_INVALID");
+  }
+  const expectedMountedInputSha256 = disposableDevnetExecutionCanonicalSha256({
+    schema: COMBINED_LAW_SOURCE_MATERIALIZATION_SCHEMA,
+    declaredHeadSha: sourceClosure.declaredHeadSha,
+    treeSha: sourceClosure.treeSha,
+    entries: sourceClosure.entries,
+  });
+  if (sourceClosure.mountedInputSha256 !== expectedMountedInputSha256) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_MOUNTED_INPUT_BINDING_HOLD");
+  }
+  const normalizedSourceRoot = assertCanonicalLinuxAbsolutePath(
+    sourceSnapshotRoot,
+    "DISPOSABLE_DEVNET_HERMETIC_SOURCE_ROOT",
+  );
+  const normalizedExportRoot = assertCanonicalLinuxAbsolutePath(
+    exportRoot,
+    "DISPOSABLE_DEVNET_HERMETIC_EXPORT_ROOT",
+  );
+  const normalizedLocalRoots = validateHermeticLocalByteRoots(localByteRoots);
+  const environment = assertExactIdentityEnvironment(identityEnvironment);
+  const sourceManifest = createDisposableDevnetHermeticSourceManifest(sourceClosure.entries);
+  const recipe = hermeticRecipe(kind);
+  const mounts = hermeticMounts({
+    sourceSnapshotRoot: normalizedSourceRoot,
+    localByteRoots: normalizedLocalRoots,
+    exportRoot: normalizedExportRoot,
+  });
+  const nonce = sha256(Buffer.from(`${laneId}\0${ordinal}\0${kind}`, "utf8")).slice(0, 16);
+  const contractCore = {
+    schema: DISPOSABLE_DEVNET_HERMETIC_EXECUTION_CONTRACT_SCHEMA,
+    implementationStatus: "IMPLEMENTED_HARD_DISABLED_PENDING_INDEPENDENT_ACCEPTANCE",
+    enabled: false,
+    laneId,
+    ordinal,
+    kind,
+    attempt: 1,
+    retryPolicy: "NO_RETRY_WITHIN_CONTRACT",
+    containerName: `iat-b3-b24-${nonce}-${kind}`,
+    source: {
+      declaredHeadSha: sourceClosure.declaredHeadSha,
+      treeSha: sourceClosure.treeSha,
+      mountedInputSha256: sourceClosure.mountedInputSha256,
+      manifest: sourceManifest,
+    },
+    localByteToolchain: PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE,
+    recipe,
+    identityEnvironmentSha256: disposableDevnetExecutionCanonicalSha256(environment),
+    wrapper: {
+      initializerSha256: DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SHA256,
+      executable: "/bin/bash",
+      sha256: DISPOSABLE_DEVNET_HERMETIC_WRAPPER_SHA256,
+      initializerIdentity: "UID_GID_0_CAP_DROP_ALL",
+      buildIdentity: "DOCKER_EXEC_UID_GID_65534_CAP_DROP_ALL",
+      stdoutPolicy: "EXACT_INITIALIZER_FRAME_PLUS_THREE_BUILD_FRAMES_CARGO_STDOUT_TO_STDERR",
+    },
+    privateStore: {
+      type: "CONTAINER_PRIVATE_TMPFS",
+      root: HERMETIC_PRIVATE_ROOT,
+      byteLength: HERMETIC_PRIVATE_STORE_BYTES,
+      options: "rw,nosuid,nodev,exec,uid=0,gid=0,mode=0755",
+      owner: "UID_GID_0_BUILD_UID_UNWRITABLE",
+      freshPerContainer: true,
+      removedWithContainer: true,
+    },
+    buildStore: {
+      type: "CONTAINER_PRIVATE_TMPFS",
+      root: HERMETIC_BUILD_ROOT,
+      byteLength: HERMETIC_BUILD_STORE_BYTES,
+      options: "rw,nosuid,nodev,exec,uid=65534,gid=65534,mode=0700",
+      owner: "UID_GID_65534",
+      freshPerContainer: true,
+      removedWithContainer: true,
+    },
+    exportBoundary: {
+      hostDirectoryOpenMode: "703",
+      hostDirectoryClosedMode: "700",
+      hostDirectoryOwner: "EXECUTING_NODE_UID_GID",
+      containerWriter: "UID_GID_65534_CAP_DROP_ALL_USES_OTHER_WRITE_EXECUTE",
+      exportedArtifactMode: "444",
+      creation: "BASH_NOCLOBBER_EXCLUSIVE_DESCRIPTOR_THEN_CAT",
+      exactSingleOutputRequired: true,
+    },
+    mounts,
+    lifecycle: {
+      requirePreexistingContainerAbsence: true,
+      requireCreatedInspect: true,
+      requireRunningInspect: true,
+      requireRootInitializerFrame: true,
+      requireExactUnprivilegedExec: true,
+      requireStopBeforeArtifactRead: true,
+      requireExitedInspect: true,
+      requireContainerRemoval: true,
+      requirePostRemovalAbsence: true,
+      requirePrivateInputPreAndPostEquality: true,
+      requirePrivateAndExportedArtifactEquality: true,
+      requireExportDirectoryOpenCloseIdentity: true,
+      requireFinalRetainedFileLedger: true,
+    },
+    daemonTrust: {
+      pinnedLocalSocketAndDaemonRequired: true,
+      exclusiveDockerSocketPrincipalRequired: true,
+      exclusiveDockerSocketPrincipalObserved: false,
+      status: "HOLD_PINNED_DOCKER_SOCKET_EXCLUSIVE_PRINCIPAL_NOT_PROVEN",
+    },
+    safety: {
+      dockerApiInvoked: false,
+      buildExecuted: false,
+      executionProvenanceObserved: false,
+      signing: false,
+      rpc: false,
+      deployment: false,
+      mainnetExecutionAuthorized: false,
+      mainnetStatus: "HOLD",
+    },
+  };
+  const contract = deepFreeze({
+    ...contractCore,
+    contractSha256: disposableDevnetExecutionCanonicalSha256(contractCore),
+  });
+  const containerEnvironment = Object.freeze({
+    ...environment,
+    IAT_B3_EXACT_SOURCE_HEAD_SHA: contract.source.declaredHeadSha,
+    IAT_B3_HERMETIC_CONTRACT_SHA256: contract.contractSha256,
+    IAT_B3_HERMETIC_KIND: kind,
+    IAT_B3_HERMETIC_LANE_ID: laneId,
+    IAT_B3_HERMETIC_ORDINAL: String(ordinal),
+    IAT_B3_HERMETIC_RECIPE_SHA256: recipe.sha256,
+    IAT_B3_HERMETIC_SOURCE_MANIFEST_SHA256: sourceManifest.sha256,
+    IAT_B3_HERMETIC_SOURCE_MOUNTED_INPUT_SHA256: contract.source.mountedInputSha256,
+    IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256:
+      PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.closureSha256,
+  });
+  const createArguments = Object.freeze([
+    `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+    "create",
+    `--name=${contract.containerName}`,
+    "--read-only",
+    "--tmpfs=/tmp:rw,nosuid,nodev,noexec,size=268435456",
+    HERMETIC_PRIVATE_TMPFS,
+    HERMETIC_BUILD_TMPFS,
+    "--pull=never",
+    "--network=none",
+    "--platform=linux/amd64",
+    "--cap-drop=ALL",
+    "--security-opt=no-new-privileges",
+    "--pids-limit=512",
+    "--workdir=/usr/bin",
+    ...mounts.map(hermeticMountArgument),
+    ...HERMETIC_ENVIRONMENT_NAMES.map((name) => `--env=${name}`),
+    "--entrypoint=/bin/bash",
+    PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference,
+    "--noprofile",
+    "--norc",
+    "-c",
+    DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT,
+  ]);
+  const execArguments = hermeticDockerExecArguments(contract);
+  const planCore = { contract, createArguments, execArguments, environment: containerEnvironment };
+  const plan = deepFreeze({
+    ...planCore,
+    planSha256: disposableDevnetExecutionCanonicalSha256(planCore),
+  });
+  validateDisposableDevnetHermeticBuildContract(plan);
+  return plan;
+}
+
+function assertHermeticDockerCreateArguments(arguments_) {
+  const prefix = [
+    `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+    "create",
+  ];
+  if (!Array.isArray(arguments_)
+    || arguments_.some((value) => typeof value !== "string" || /[\r\0]/u.test(value))
+    || !exactStringArrayEquals(arguments_.slice(0, 2), prefix)
+    || !/^--name=iat-b3-b24-[0-9a-f]{16}-(?:law|economy)$/u.test(arguments_[2] ?? "")
+    || !exactStringArrayEquals(arguments_.slice(3, 14), [
+      "--read-only",
+      "--tmpfs=/tmp:rw,nosuid,nodev,noexec,size=268435456",
+      HERMETIC_PRIVATE_TMPFS,
+      HERMETIC_BUILD_TMPFS,
+      "--pull=never",
+      "--network=none",
+      "--platform=linux/amd64",
+      "--cap-drop=ALL",
+      "--security-opt=no-new-privileges",
+      "--pids-limit=512",
+      "--workdir=/usr/bin",
+    ])) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_DOCKER_PREFIX_HOLD");
+  }
+  const mountTokens = arguments_.slice(14, 14 + HERMETIC_LOCAL_BYTE_ROOT_KEYS.length + 2);
+  const expectedTargets = [
+    "/iat-host/source",
+    ...HERMETIC_LOCAL_BYTE_ROOT_KEYS.map(
+      (key) => PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.trees[key].mountTarget,
+    ),
+    "/iat-host/export",
+  ];
+  const observedSources = [];
+  for (const [index, token] of mountTokens.entries()) {
+    const match = /^--mount=type=bind,source=(?<source>[^,\r\n\0]+),target=(?<target>\/[^,\r\n\0]+)(?<readonly>,readonly)?$/u
+      .exec(token ?? "");
+    if (!match?.groups
+      || match.groups.target !== expectedTargets[index]
+      || (index === mountTokens.length - 1) !== (match.groups.readonly === undefined)) {
+      throw new Error("DISPOSABLE_DEVNET_HERMETIC_DOCKER_MOUNT_GRAMMAR_HOLD");
+    }
+    assertCanonicalLinuxAbsolutePath(
+      match.groups.source,
+      "DISPOSABLE_DEVNET_HERMETIC_DOCKER_MOUNT_SOURCE",
+    );
+    observedSources.push(match.groups.source);
+  }
+  if (mountTokens.length !== expectedTargets.length
+    || new Set(observedSources).size !== observedSources.length) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_DOCKER_MOUNT_CLOSURE_HOLD");
+  }
+  const environmentStart = 14 + expectedTargets.length;
+  const environmentEnd = environmentStart + HERMETIC_ENVIRONMENT_NAMES.length;
+  if (!exactStringArrayEquals(
+    arguments_.slice(environmentStart, environmentEnd),
+    HERMETIC_ENVIRONMENT_NAMES.map((name) => `--env=${name}`),
+  )
+    || !exactStringArrayEquals(arguments_.slice(environmentEnd), [
+      "--entrypoint=/bin/bash",
+      PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference,
+      "--noprofile",
+      "--norc",
+      "-c",
+      DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT,
+    ])) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_DOCKER_COMMAND_GRAMMAR_HOLD");
+  }
+  if (arguments_.filter((value) => value.startsWith("--tmpfs=")).length !== 3
+    || arguments_.filter((value) => value.startsWith("--mount=")).length !== expectedTargets.length
+    || arguments_.filter((value) => value.startsWith("--network=")).length !== 1
+    || arguments_.filter((value) => value.startsWith("--pull=")).length !== 1
+    || arguments_.some((value) => /^(?:--privileged|--cap-add|--device|--pid|--ipc|--uts|--userns|--volume|-v)(?:=|$)/u.test(value))) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_DOCKER_PRIVILEGE_OR_DUPLICATE_HOLD");
+  }
+  return true;
+}
+
+function hermeticDockerExecArguments(contract) {
+  return Object.freeze([
+    `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+    "container",
+    "exec",
+    "--user=65534:65534",
+    "--workdir=/iat-private/home/a/iat-source",
+    ...HERMETIC_BUILD_ENVIRONMENT_NAMES.map((name) => `--env=${name}`),
+    contract.containerName,
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT,
+  ]);
+}
+
+function assertHermeticDockerExecArguments(arguments_) {
+  const nameIndex = 5 + HERMETIC_BUILD_ENVIRONMENT_NAMES.length;
+  if (!Array.isArray(arguments_)
+    || !exactStringArrayEquals(arguments_.slice(0, 5), [
+      `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+      "container",
+      "exec",
+      "--user=65534:65534",
+      "--workdir=/iat-private/home/a/iat-source",
+    ])
+    || !exactStringArrayEquals(
+      arguments_.slice(5, nameIndex),
+      HERMETIC_BUILD_ENVIRONMENT_NAMES.map((name) => `--env=${name}`),
+    )
+    || !/^iat-b3-b24-[0-9a-f]{16}-(?:law|economy)$/u.test(arguments_[nameIndex] ?? "")
+    || !exactStringArrayEquals(arguments_.slice(nameIndex + 1), [
+      "/bin/bash", "--noprofile", "--norc", "-c",
+      DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT,
+    ])
+    || arguments_.some((value) => /^(?:--detach|-d|--interactive|-i|--tty|-t|--privileged)(?:=|$)/u.test(value))) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_DOCKER_EXEC_GRAMMAR_HOLD");
+  }
+  return true;
+}
+
+export function validateDisposableDevnetHermeticDockerExecArguments(arguments_) {
+  return assertHermeticDockerExecArguments(arguments_);
+}
+
+export function validateDisposableDevnetHermeticDockerCreateArguments(arguments_) {
+  return assertHermeticDockerCreateArguments(arguments_);
+}
+
+export function validateDisposableDevnetHermeticBuildContract(plan) {
+  if (!hasExactKeys(plan, [
+    "contract", "createArguments", "execArguments", "environment", "planSha256",
+  ])
+    || !hasExactKeys(plan.contract, [
+      "schema", "implementationStatus", "enabled", "laneId", "ordinal", "kind", "attempt",
+      "retryPolicy", "containerName", "source", "localByteToolchain", "recipe",
+      "identityEnvironmentSha256", "wrapper", "privateStore", "buildStore", "exportBoundary", "mounts",
+      "lifecycle", "daemonTrust", "safety", "contractSha256",
+    ])
+    || plan.contract.schema !== DISPOSABLE_DEVNET_HERMETIC_EXECUTION_CONTRACT_SCHEMA
+    || plan.contract.implementationStatus
+      !== "IMPLEMENTED_HARD_DISABLED_PENDING_INDEPENDENT_ACCEPTANCE"
+    || plan.contract.enabled !== false
+    || plan.contract.attempt !== 1
+    || plan.contract.retryPolicy !== "NO_RETRY_WITHIN_CONTRACT"
+    || plan.contract.wrapper?.sha256 !== DISPOSABLE_DEVNET_HERMETIC_WRAPPER_SHA256
+    || plan.contract.privateStore?.byteLength !== HERMETIC_PRIVATE_STORE_BYTES
+    || plan.contract.privateStore?.root !== HERMETIC_PRIVATE_ROOT
+    || disposableDevnetExecutionCanonicalJson(plan.contract.localByteToolchain)
+      !== disposableDevnetExecutionCanonicalJson(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE)) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_CONTRACT_SHAPE_HOLD");
+  }
+  const contract = plan.contract;
+  const expectedRecipe = hermeticRecipe(contract.kind);
+  const expectedNonce = sha256(
+    Buffer.from(`${contract.laneId}\0${contract.ordinal}\0${contract.kind}`, "utf8"),
+  ).slice(0, 16);
+  const identityEnvironment = Object.fromEntries(
+    REQUIRED_IDENTITY_ENVIRONMENT_NAMES.map((name) => [name, plan.environment?.[name]]),
+  );
+  if (!LANE_ID.test(contract.laneId ?? "")
+    || ![1, 2].includes(contract.ordinal)
+    || !["law", "economy"].includes(contract.kind)
+    || contract.containerName !== `iat-b3-b24-${expectedNonce}-${contract.kind}`
+    || disposableDevnetExecutionCanonicalJson(contract.recipe)
+      !== disposableDevnetExecutionCanonicalJson(expectedRecipe)
+    || !hasExactKeys(contract.source, [
+      "declaredHeadSha", "treeSha", "mountedInputSha256", "manifest",
+    ])
+    || !HEX_SHA1.test(contract.source.declaredHeadSha ?? "")
+    || !HEX_SHA1.test(contract.source.treeSha ?? "")
+    || !/^[0-9a-f]{64}$/u.test(contract.source.mountedInputSha256 ?? "")
+    || !hasExactKeys(contract.source.manifest, [
+      "schema", "sha256", "byteLength", "entryCount", "fileCount", "directoryCount",
+      "sourceByteLength",
+    ])
+    || contract.source.manifest.schema !== "iat-b3-disposable-devnet-hermetic-tree-manifest/v1"
+    || !/^[0-9a-f]{64}$/u.test(contract.source.manifest.sha256 ?? "")
+    || !Number.isSafeInteger(contract.source.manifest.byteLength)
+    || contract.source.manifest.byteLength <= 0
+    || !Number.isSafeInteger(contract.source.manifest.entryCount)
+    || contract.source.manifest.entryCount
+      !== contract.source.manifest.fileCount + contract.source.manifest.directoryCount
+    || contract.source.manifest.fileCount <= 0
+    || contract.source.manifest.directoryCount < 0
+    || contract.source.manifest.sourceByteLength < 0
+    || !hasExactKeys(plan.environment, HERMETIC_ENVIRONMENT_NAMES)
+    || Object.values(plan.environment).some(
+      (value) => typeof value !== "string" || /[\r\n\0]/u.test(value),
+    )
+    || contract.identityEnvironmentSha256
+      !== disposableDevnetExecutionCanonicalSha256(identityEnvironment)
+    || !hasExactKeys(contract.wrapper, [
+      "initializerSha256", "executable", "sha256", "initializerIdentity", "buildIdentity",
+      "stdoutPolicy",
+    ])
+    || contract.wrapper.initializerSha256 !== DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SHA256
+    || contract.wrapper.executable !== "/bin/bash"
+    || contract.wrapper.initializerIdentity !== "UID_GID_0_CAP_DROP_ALL"
+    || contract.wrapper.buildIdentity !== "DOCKER_EXEC_UID_GID_65534_CAP_DROP_ALL"
+    || contract.wrapper.stdoutPolicy
+      !== "EXACT_INITIALIZER_FRAME_PLUS_THREE_BUILD_FRAMES_CARGO_STDOUT_TO_STDERR"
+    || disposableDevnetExecutionCanonicalJson(contract.privateStore)
+      !== disposableDevnetExecutionCanonicalJson({
+        type: "CONTAINER_PRIVATE_TMPFS",
+        root: HERMETIC_PRIVATE_ROOT,
+        byteLength: HERMETIC_PRIVATE_STORE_BYTES,
+        options: "rw,nosuid,nodev,exec,uid=0,gid=0,mode=0755",
+        owner: "UID_GID_0_BUILD_UID_UNWRITABLE",
+        freshPerContainer: true,
+        removedWithContainer: true,
+      })
+    || disposableDevnetExecutionCanonicalJson(contract.buildStore)
+      !== disposableDevnetExecutionCanonicalJson({
+        type: "CONTAINER_PRIVATE_TMPFS",
+        root: HERMETIC_BUILD_ROOT,
+        byteLength: HERMETIC_BUILD_STORE_BYTES,
+        options: "rw,nosuid,nodev,exec,uid=65534,gid=65534,mode=0700",
+        owner: "UID_GID_65534",
+        freshPerContainer: true,
+        removedWithContainer: true,
+      })
+    || disposableDevnetExecutionCanonicalJson(contract.exportBoundary)
+      !== disposableDevnetExecutionCanonicalJson({
+        hostDirectoryOpenMode: "703",
+        hostDirectoryClosedMode: "700",
+        hostDirectoryOwner: "EXECUTING_NODE_UID_GID",
+        containerWriter: "UID_GID_65534_CAP_DROP_ALL_USES_OTHER_WRITE_EXECUTE",
+        exportedArtifactMode: "444",
+        creation: "BASH_NOCLOBBER_EXCLUSIVE_DESCRIPTOR_THEN_CAT",
+        exactSingleOutputRequired: true,
+      })
+    || disposableDevnetExecutionCanonicalJson(contract.lifecycle)
+      !== disposableDevnetExecutionCanonicalJson({
+        requirePreexistingContainerAbsence: true,
+        requireCreatedInspect: true,
+        requireRunningInspect: true,
+        requireRootInitializerFrame: true,
+        requireExactUnprivilegedExec: true,
+        requireStopBeforeArtifactRead: true,
+        requireExitedInspect: true,
+        requireContainerRemoval: true,
+        requirePostRemovalAbsence: true,
+        requirePrivateInputPreAndPostEquality: true,
+        requirePrivateAndExportedArtifactEquality: true,
+        requireExportDirectoryOpenCloseIdentity: true,
+        requireFinalRetainedFileLedger: true,
+      })
+    || disposableDevnetExecutionCanonicalJson(contract.daemonTrust)
+      !== disposableDevnetExecutionCanonicalJson({
+        pinnedLocalSocketAndDaemonRequired: true,
+        exclusiveDockerSocketPrincipalRequired: true,
+        exclusiveDockerSocketPrincipalObserved: false,
+        status: "HOLD_PINNED_DOCKER_SOCKET_EXCLUSIVE_PRINCIPAL_NOT_PROVEN",
+      })
+    || disposableDevnetExecutionCanonicalJson(contract.safety)
+      !== disposableDevnetExecutionCanonicalJson({
+        dockerApiInvoked: false,
+        buildExecuted: false,
+        executionProvenanceObserved: false,
+        signing: false,
+        rpc: false,
+        deployment: false,
+        mainnetExecutionAuthorized: false,
+        mainnetStatus: "HOLD",
+      })
+    || !Array.isArray(contract.mounts) || contract.mounts.length !== 8
+    || !exactStringArrayEquals(
+      contract.mounts.map(({ key }) => key),
+      ["source", ...HERMETIC_LOCAL_BYTE_ROOT_KEYS, "export"],
+    )
+    || contract.mounts.some((mount) => !hasExactKeys(
+      mount,
+      ["key", "source", "target", "readonly"],
+    ))
+    || new Set(contract.mounts.map(({ key }) => key)).size !== contract.mounts.length
+    || new Set(contract.mounts.map(({ source }) => source)).size !== contract.mounts.length
+    || new Set(contract.mounts.map(({ target }) => target)).size !== contract.mounts.length
+    || contract.mounts.some((left, leftIndex) => contract.mounts.some((right, rightIndex) => (
+      leftIndex !== rightIndex
+      && (left.source.startsWith(`${right.source}/`)
+        || right.source.startsWith(`${left.source}/`))
+    )))
+    || contract.mounts.some(({ source }) => {
+      try {
+        assertCanonicalLinuxAbsolutePath(source, "DISPOSABLE_DEVNET_HERMETIC_CONTRACT_MOUNT");
+        return false;
+      } catch {
+        return true;
+      }
+    })
+    || !exactStringArrayEquals(
+      plan.createArguments.slice(14, 22),
+      contract.mounts.map(hermeticMountArgument),
+    )
+    || !assertHermeticDockerExecArguments(plan.execArguments)) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_CONTRACT_SHAPE_HOLD");
+  }
+  const { contractSha256, ...contractCore } = contract;
+  if (contractSha256 !== disposableDevnetExecutionCanonicalSha256(contractCore)
+    || plan.planSha256 !== disposableDevnetExecutionCanonicalSha256({
+      contract: plan.contract,
+      createArguments: plan.createArguments,
+      execArguments: plan.execArguments,
+      environment: plan.environment,
+    })
+    || plan.environment?.IAT_B3_HERMETIC_CONTRACT_SHA256 !== contractSha256
+    || plan.environment?.IAT_B3_HERMETIC_SOURCE_MANIFEST_SHA256
+      !== plan.contract.source?.manifest?.sha256
+    || plan.environment?.IAT_B3_HERMETIC_SOURCE_MOUNTED_INPUT_SHA256
+      !== plan.contract.source?.mountedInputSha256
+    || plan.environment?.IAT_B3_HERMETIC_TOOLCHAIN_CLOSURE_SHA256
+      !== PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.closureSha256
+    || plan.environment?.IAT_B3_HERMETIC_RECIPE_SHA256 !== plan.contract.recipe?.sha256
+    || plan.contract.safety?.dockerApiInvoked !== false
+    || plan.contract.safety?.buildExecuted !== false
+    || plan.contract.safety?.executionProvenanceObserved !== false
+    || plan.contract.safety?.mainnetStatus !== "HOLD") {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_CONTRACT_BINDING_HOLD");
+  }
+  assertHermeticDockerCreateArguments(plan.createArguments);
+  assertHermeticDockerExecArguments(plan.execArguments);
+  return plan;
+}
+
+function exactHermeticCommonFrame(contract, phase) {
+  return {
+    contractSha256: contract.contractSha256,
+    kind: contract.kind,
+    laneId: contract.laneId,
+    ordinal: contract.ordinal,
+    phase,
+    recipeSha256: contract.recipe.sha256,
+    schema: DISPOSABLE_DEVNET_HERMETIC_FRAME_SCHEMA,
+    sourceManifestSha256: contract.source.manifest.sha256,
+    toolchainClosureSha256: PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.closureSha256,
+  };
+}
+
+function exactHermeticInitializerFrame(contract) {
+  return {
+    contractSha256: contract.contractSha256,
+    kind: contract.kind,
+    laneId: contract.laneId,
+    ordinal: contract.ordinal,
+    phase: HERMETIC_INITIALIZATION_FRAME_PHASE,
+    schema: DISPOSABLE_DEVNET_HERMETIC_FRAME_SCHEMA,
+  };
+}
+
+export function validateDisposableDevnetHermeticInitializerFrame(bytes, plan) {
+  validateDisposableDevnetHermeticBuildContract(plan);
+  const { contract } = plan;
+  const expected = Buffer.from(
+    `${disposableDevnetExecutionCanonicalJson(exactHermeticInitializerFrame(contract))}\n`,
+    "utf8",
+  );
+  if (!Buffer.isBuffer(bytes) || !bytes.equals(expected)) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_FRAME_BINDING_HOLD");
+  }
+  return true;
+}
+
+export function validateDisposableDevnetHermeticFrameSequence(stdoutBytes, {
+  contract,
+  exportedArtifactBytes,
+} = {}) {
+  if (!Buffer.isBuffer(stdoutBytes) || !Buffer.isBuffer(exportedArtifactBytes)
+    || exportedArtifactBytes.length < 1_024
+    || exportedArtifactBytes[0] !== 0x7f || exportedArtifactBytes[1] !== 0x45
+    || exportedArtifactBytes[2] !== 0x4c || exportedArtifactBytes[3] !== 0x46
+    || exportedArtifactBytes[4] !== 2 || exportedArtifactBytes[5] !== 1
+    || exportedArtifactBytes[6] !== 1
+    || exportedArtifactBytes.readUInt16LE(16) !== 3
+    || exportedArtifactBytes.readUInt16LE(18) !== 247) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_FRAME_OR_ARTIFACT_BYTES_REQUIRED");
+  }
+  let text;
+  try {
+    text = new TextDecoder("utf-8", { fatal: true }).decode(stdoutBytes);
+  } catch {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_FRAME_UTF8_HOLD");
+  }
+  if (!Buffer.from(text, "utf8").equals(stdoutBytes) || text.includes("\r")) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_FRAME_ENCODING_HOLD");
+  }
+  const lines = text.split("\n");
+  if (lines.length !== 4 || lines[3] !== "" || lines.slice(0, 3).some((line) => line === "")) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_EXACT_THREE_FRAMES_REQUIRED");
+  }
+  const frames = lines.slice(0, 3).map((line) => {
+    let frame;
+    try {
+      frame = JSON.parse(line);
+    } catch {
+      throw new Error("DISPOSABLE_DEVNET_HERMETIC_FRAME_JSON_HOLD");
+    }
+    if (disposableDevnetExecutionCanonicalJson(frame) !== line) {
+      throw new Error("DISPOSABLE_DEVNET_HERMETIC_FRAME_CANONICAL_JSON_HOLD");
+    }
+    return frame;
+  });
+  const expectedPre = exactHermeticCommonFrame(contract, HERMETIC_FRAME_PHASES[0]);
+  const expectedPost = exactHermeticCommonFrame(contract, HERMETIC_FRAME_PHASES[1]);
+  const artifactSha256 = sha256(exportedArtifactBytes);
+  const expectedArtifact = {
+    artifactByteLength: exportedArtifactBytes.length,
+    artifactSha256,
+    cargoExitStatus: 0,
+    ...exactHermeticCommonFrame(contract, HERMETIC_FRAME_PHASES[2]),
+  };
+  if (disposableDevnetExecutionCanonicalJson(frames[0])
+      !== disposableDevnetExecutionCanonicalJson(expectedPre)
+    || disposableDevnetExecutionCanonicalJson(frames[1])
+      !== disposableDevnetExecutionCanonicalJson(expectedPost)
+    || disposableDevnetExecutionCanonicalJson(frames[2])
+      !== disposableDevnetExecutionCanonicalJson(expectedArtifact)) {
+    throw new Error("DISPOSABLE_DEVNET_HERMETIC_FRAME_BINDING_HOLD");
+  }
+  return deepFreeze({
+    status: "HOLD_HERMETIC_CONTRACT_STRUCTURAL_VALIDATION_ONLY",
+    valid: true,
+    ready: false,
+    structuralContractValidated: true,
+    exactSourceReceiptValidated: false,
+    executionProvenanceObserved: false,
+    buildExecutionObserved: false,
+    artifactSha256,
+    artifactByteLength: exportedArtifactBytes.length,
+    frameSequenceSha256: sha256(stdoutBytes),
+    blocker: "HERMETIC_MOUNT_CAUSALITY_UNPROVEN",
+    mainnetStatus: "HOLD",
+  });
 }
 
 function parseExactUtc(value, label, now = Date.now()) {
@@ -1444,6 +2538,73 @@ function ensureDirectory(path) {
   return path;
 }
 
+function exportDirectoryObjectFingerprint(stat) {
+  return [stat.dev, stat.ino, stat.uid, stat.gid, stat.nlink].join(":");
+}
+
+function ensureContainerWritableExportDirectory(path) {
+  mkdirSync(path, { recursive: false, mode: 0o703 });
+  chmodSync(path, 0o703);
+  const absolutePath = realpathSync(path);
+  const stat = lstatSync(absolutePath, { bigint: true });
+  const processUid = process.getuid?.();
+  const processGid = process.getgid?.();
+  if (normalizedRealPath(absolutePath) !== normalizedRealPath(path)
+    || !stat.isDirectory() || stat.isSymbolicLink()
+    || (stat.mode & 0o777n) !== 0o703n
+    || !Number.isSafeInteger(processUid) || !Number.isSafeInteger(processGid)
+    || stat.uid !== BigInt(processUid) || stat.gid !== BigInt(processGid)
+    || stat.nlink < 2n
+    || readdirSync(absolutePath).length !== 0) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_EXPORT_DIRECTORY_OPEN_BOUNDARY_HOLD");
+  }
+  PROCESS_CREATED_EXPORT_ROOTS.set(absolutePath, Object.freeze({
+    objectFingerprint: exportDirectoryObjectFingerprint(stat),
+    parentChain: observeDirectoryIdentityChain(
+      dirname(absolutePath),
+      "DISPOSABLE_DEVNET_EXECUTION_EXPORT_DIRECTORY",
+    ),
+  }));
+  return absolutePath;
+}
+
+function assertContainerExportDirectoryStable(path, { mode, entries }) {
+  const absolutePath = resolve(path);
+  const observation = PROCESS_CREATED_EXPORT_ROOTS.get(absolutePath);
+  if (!observation || ![0o703, 0o700].includes(mode)
+    || !Array.isArray(entries)
+    || entries.some((entry) => typeof entry !== "string" || /[\\/\r\n\0]/u.test(entry))) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_EXPORT_DIRECTORY_CONTRACT_INVALID");
+  }
+  assertDirectoryIdentityChainStable(
+    observation.parentChain,
+    "DISPOSABLE_DEVNET_EXECUTION_EXPORT_DIRECTORY",
+  );
+  const stat = lstatSync(absolutePath, { bigint: true });
+  const observedEntries = readdirSync(absolutePath)
+    .sort((left, right) => Buffer.compare(Buffer.from(left), Buffer.from(right)));
+  const expectedEntries = [...entries]
+    .sort((left, right) => Buffer.compare(Buffer.from(left), Buffer.from(right)));
+  if (!stat.isDirectory() || stat.isSymbolicLink()
+    || normalizedRealPath(realpathSync(absolutePath)) !== normalizedRealPath(absolutePath)
+    || exportDirectoryObjectFingerprint(stat) !== observation.objectFingerprint
+    || (stat.mode & 0o777n) !== BigInt(mode)
+    || !exactStringArrayEquals(observedEntries, expectedEntries)) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_EXPORT_DIRECTORY_CHANGED_HOLD");
+  }
+}
+
+function closeContainerWritableExportDirectory(path, expectedFileName) {
+  assertContainerExportDirectoryStable(path, { mode: 0o703, entries: [expectedFileName] });
+  chmodSync(path, 0o700);
+  assertContainerExportDirectoryStable(path, { mode: 0o700, entries: [expectedFileName] });
+}
+
+function releaseContainerExportDirectory(path, expectedFileName) {
+  assertContainerExportDirectoryStable(path, { mode: 0o700, entries: [expectedFileName] });
+  PROCESS_CREATED_EXPORT_ROOTS.delete(resolve(path));
+}
+
 function writeExclusiveFile(path, bytes, mode = 0o600) {
   const descriptor = openSync(
     path,
@@ -1485,6 +2646,249 @@ function relativeFileDescriptor(file, stageRoot) {
     device: file.device,
     inode: file.inode,
   });
+}
+
+function retainedPathCompare(left, right) {
+  return Buffer.compare(Buffer.from(left.relativePath, "utf8"), Buffer.from(right.relativePath, "utf8"));
+}
+
+function normalizeRetainedDescriptors(descriptors) {
+  if (!Array.isArray(descriptors) || descriptors.length === 0) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_RETAINED_DESCRIPTORS_REQUIRED");
+  }
+  const normalized = descriptors.map((descriptor) => {
+    if (!hasExactKeys(descriptor, ["relativePath", "sha256", "byteLength", "device", "inode"])
+      || typeof descriptor.relativePath !== "string" || descriptor.relativePath.length === 0
+      || descriptor.relativePath.startsWith("/") || descriptor.relativePath.includes("\\")
+      || descriptor.relativePath.split("/").some((part) => ["", ".", ".."].includes(part))
+      || !/^[0-9a-f]{64}$/u.test(descriptor.sha256 ?? "")
+      || !Number.isSafeInteger(descriptor.byteLength) || descriptor.byteLength < 0
+      || !/^\d+$/u.test(descriptor.device ?? "") || !/^\d+$/u.test(descriptor.inode ?? "")) {
+      throw new Error("DISPOSABLE_DEVNET_EXECUTION_RETAINED_DESCRIPTOR_INVALID");
+    }
+    return Object.freeze({ ...descriptor });
+  }).sort(retainedPathCompare);
+  if (new Set(normalized.map(({ relativePath }) => relativePath)).size !== normalized.length
+    || new Set(normalized.map(({ device, inode }) => `${device}:${inode}`)).size !== normalized.length) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_RETAINED_DESCRIPTOR_ALIAS_HOLD");
+  }
+  return Object.freeze(normalized);
+}
+
+function observeRetainedFileTree(root, label) {
+  const absoluteRoot = resolve(root);
+  const realRoot = realpathSync(absoluteRoot);
+  if (normalizedRealPath(realRoot) !== normalizedRealPath(absoluteRoot)) {
+    throw new Error(`${label}_ROOT_REPARSE_HOLD`);
+  }
+  const directories = [];
+  const files = [];
+  const visit = (directory, relativeDirectory) => {
+    const before = lstatSync(directory, { bigint: true });
+    if (!before.isDirectory() || before.isSymbolicLink()
+      || normalizedRealPath(realpathSync(directory)) !== normalizedRealPath(directory)) {
+      throw new Error(`${label}_DIRECTORY_BOUNDARY_HOLD`);
+    }
+    const names = readdirSync(directory)
+      .sort((left, right) => Buffer.compare(Buffer.from(left), Buffer.from(right)));
+    directories.push(Object.freeze({
+      relativePath: relativeDirectory === "" ? "." : relativeDirectory,
+      device: before.dev.toString(),
+      inode: before.ino.toString(),
+      mode: Number(before.mode & 0o777n).toString(8).padStart(3, "0"),
+      uid: before.uid.toString(),
+      gid: before.gid.toString(),
+      linkCount: before.nlink.toString(),
+      modifiedNanoseconds: before.mtimeNs.toString(),
+      changedNanoseconds: before.ctimeNs.toString(),
+    }));
+    for (const name of names) {
+      if (name.includes("/") || name.includes("\\") || /[\r\n\0]/u.test(name)) {
+        throw new Error(`${label}_ENTRY_NAME_HOLD`);
+      }
+      const path = join(directory, name);
+      const relativePath = relativeDirectory === "" ? name : `${relativeDirectory}/${name}`;
+      const stat = lstatSync(path, { bigint: true });
+      if (stat.isSymbolicLink()) throw new Error(`${label}_SYMLINK_OR_REPARSE_HOLD`);
+      if (stat.isDirectory()) {
+        visit(path, relativePath);
+      } else if (stat.isFile()) {
+        if (stat.nlink !== 1n) throw new Error(`${label}_HARDLINK_HOLD`);
+        const observed = hashFileAndReadPrefix(Object.freeze({ path, relativePath, stat }), 0);
+        files.push(Object.freeze({
+          relativePath,
+          sha256: observed.sha256,
+          byteLength: observed.byteLength,
+          device: stat.dev.toString(),
+          inode: stat.ino.toString(),
+          mode: Number(stat.mode & 0o777n).toString(8).padStart(3, "0"),
+          uid: stat.uid.toString(),
+          gid: stat.gid.toString(),
+          linkCount: stat.nlink.toString(),
+          modifiedNanoseconds: stat.mtimeNs.toString(),
+          changedNanoseconds: stat.ctimeNs.toString(),
+        }));
+      } else {
+        throw new Error(`${label}_NONREGULAR_ENTRY_HOLD`);
+      }
+    }
+    const after = lstatSync(directory, { bigint: true });
+    const namesAfter = readdirSync(directory)
+      .sort((left, right) => Buffer.compare(Buffer.from(left), Buffer.from(right)));
+    if (statFingerprint(before) !== statFingerprint(after)
+      || !exactStringArrayEquals(namesAfter, names)
+      || normalizedRealPath(realpathSync(directory)) !== normalizedRealPath(directory)) {
+      throw new Error(`${label}_DIRECTORY_CHANGED_DURING_SCAN_HOLD`);
+    }
+  };
+  visit(realRoot, "");
+  directories.sort(retainedPathCompare);
+  files.sort(retainedPathCompare);
+  return Object.freeze({ directories: Object.freeze(directories), files: Object.freeze(files) });
+}
+
+function projectRetainedFileDescriptor(record) {
+  return Object.freeze(Object.fromEntries(
+    ["relativePath", "sha256", "byteLength", "device", "inode"]
+      .map((name) => [name, record[name]]),
+  ));
+}
+
+export function createDisposableDevnetRetainedFileLedger(root, expectedDescriptors) {
+  const expected = normalizeRetainedDescriptors(expectedDescriptors);
+  const observed = observeRetainedFileTree(
+    root,
+    "DISPOSABLE_DEVNET_EXECUTION_RETAINED_FILE_LEDGER",
+  );
+  const observedDescriptors = observed.files.map(projectRetainedFileDescriptor);
+  if (disposableDevnetExecutionCanonicalJson(observedDescriptors)
+    !== disposableDevnetExecutionCanonicalJson(expected)) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_RETAINED_FILE_SET_OR_IDENTITY_HOLD");
+  }
+  const core = {
+    schema: DISPOSABLE_DEVNET_RETAINED_FILE_LEDGER_SCHEMA,
+    status: "HOLD_RETAINED_FILE_LEDGER_STRUCTURAL_VALIDATION_ONLY",
+    valid: true,
+    ready: false,
+    directories: observed.directories,
+    files: observed.files,
+    expectedDescriptorClosureSha256: disposableDevnetExecutionCanonicalSha256(expected),
+    executionProvenanceObserved: false,
+    buildExecutionObserved: false,
+    outputStagePromotionAuthorized: false,
+    releaseAuthorized: false,
+    mainnetStatus: "HOLD",
+  };
+  return deepFreeze({ ...core, ledgerSha256: disposableDevnetExecutionCanonicalSha256(core) });
+}
+
+function assertDisposableDevnetRetainedFileLedgerShape(ledger) {
+  if (!hasExactKeys(ledger, [
+    "schema", "status", "valid", "ready", "directories", "files",
+    "expectedDescriptorClosureSha256", "executionProvenanceObserved",
+    "buildExecutionObserved", "outputStagePromotionAuthorized", "releaseAuthorized",
+    "mainnetStatus", "ledgerSha256",
+  ])
+    || ledger.schema !== DISPOSABLE_DEVNET_RETAINED_FILE_LEDGER_SCHEMA
+    || ledger.status !== "HOLD_RETAINED_FILE_LEDGER_STRUCTURAL_VALIDATION_ONLY"
+    || ledger.valid !== true || ledger.ready !== false
+    || ledger.executionProvenanceObserved !== false
+    || ledger.buildExecutionObserved !== false
+    || ledger.outputStagePromotionAuthorized !== false
+    || ledger.releaseAuthorized !== false || ledger.mainnetStatus !== "HOLD"
+    || !Array.isArray(ledger.directories) || !Array.isArray(ledger.files)) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_RETAINED_FILE_LEDGER_SHAPE_HOLD");
+  }
+  const { ledgerSha256, ...core } = ledger;
+  if (!/^[0-9a-f]{64}$/u.test(ledgerSha256 ?? "")
+    || ledgerSha256 !== disposableDevnetExecutionCanonicalSha256(core)) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_RETAINED_FILE_LEDGER_DIGEST_HOLD");
+  }
+  return ledger;
+}
+
+export function validateDisposableDevnetRetainedFileLedger(root, ledger) {
+  assertDisposableDevnetRetainedFileLedgerShape(ledger);
+  const recomputed = createDisposableDevnetRetainedFileLedger(
+    root,
+    ledger.files.map(projectRetainedFileDescriptor),
+  );
+  if (disposableDevnetExecutionCanonicalJson(recomputed)
+    !== disposableDevnetExecutionCanonicalJson(ledger)) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_RETAINED_FILE_LEDGER_REVALIDATION_HOLD");
+  }
+  return ledger;
+}
+
+export function createDisposableDevnetFinalOutputStagePromotion({
+  stageRoot,
+  retainedEvidenceLedger,
+  retainedEvidenceDescriptors,
+  transcriptDescriptor,
+}) {
+  const absoluteStageRoot = resolve(stageRoot);
+  const evidenceRoot = join(absoluteStageRoot, "evidence");
+  if (normalizedRealPath(realpathSync(evidenceRoot)) !== normalizedRealPath(evidenceRoot)
+    || transcriptDescriptor?.relativePath !== "transcript.json") {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_FINAL_OUTPUT_PROMOTION_ROOT_HOLD");
+  }
+  validateDisposableDevnetRetainedFileLedger(evidenceRoot, retainedEvidenceLedger);
+  const finalEvidenceDescriptors = normalizeRetainedDescriptors(retainedEvidenceDescriptors)
+    .map((descriptor) => Object.freeze({
+      ...descriptor,
+      relativePath: `evidence/${descriptor.relativePath}`,
+    }));
+  const finalLedger = createDisposableDevnetRetainedFileLedger(
+    absoluteStageRoot,
+    [...finalEvidenceDescriptors, transcriptDescriptor],
+  );
+  validateDisposableDevnetRetainedFileLedger(absoluteStageRoot, finalLedger);
+  const finalEvidenceFiles = finalLedger.files.filter(
+    ({ relativePath }) => relativePath !== transcriptDescriptor.relativePath,
+  );
+  const expectedFinalEvidenceFiles = retainedEvidenceLedger.files.map((file) => Object.freeze({
+    ...file,
+    relativePath: `evidence/${file.relativePath}`,
+  }));
+  const expectedFinalEvidenceDirectories = retainedEvidenceLedger.directories.map(
+    (directory) => Object.freeze({
+      ...directory,
+      relativePath: directory.relativePath === "."
+        ? "evidence"
+        : `evidence/${directory.relativePath}`,
+    }),
+  );
+  const observedFinalEvidenceDirectories = finalLedger.directories.filter(
+    ({ relativePath }) => relativePath !== ".",
+  );
+  if (disposableDevnetExecutionCanonicalJson(finalEvidenceFiles)
+      !== disposableDevnetExecutionCanonicalJson(expectedFinalEvidenceFiles)
+    || disposableDevnetExecutionCanonicalJson(observedFinalEvidenceDirectories)
+      !== disposableDevnetExecutionCanonicalJson(expectedFinalEvidenceDirectories)
+    || !finalLedger.files.some(({ relativePath, sha256, byteLength, device, inode }) => (
+      relativePath === transcriptDescriptor.relativePath
+      && sha256 === transcriptDescriptor.sha256
+      && byteLength === transcriptDescriptor.byteLength
+      && device === transcriptDescriptor.device
+      && inode === transcriptDescriptor.inode
+    ))) {
+    throw new Error("DISPOSABLE_DEVNET_EXECUTION_FINAL_OUTPUT_PROMOTION_LEDGER_HOLD");
+  }
+  const core = {
+    schema: DISPOSABLE_DEVNET_OUTPUT_PROMOTION_SCHEMA,
+    status: "HOLD_OUTPUT_STAGE_PROMOTION_STRUCTURALLY_VALIDATED_ONLY",
+    valid: true,
+    ready: false,
+    retainedEvidenceLedgerSha256: retainedEvidenceLedger.ledgerSha256,
+    finalLedger,
+    transcript: transcriptDescriptor,
+    outputStageFilesystemPromotionValidated: true,
+    executionProvenanceObserved: false,
+    buildExecutionObserved: false,
+    releaseAuthorized: false,
+    mainnetStatus: "HOLD",
+  };
+  return deepFreeze({ ...core, promotionSha256: disposableDevnetExecutionCanonicalSha256(core) });
 }
 
 function safeDockerEnvironment({
@@ -1533,7 +2937,7 @@ function spawnPinnedDocker({ purpose, arguments_, environment, allowFailure = fa
   const socketBefore = observePinnedDockerSocket();
   const configBefore = observeDockerConfigRoot(environment);
   const actualArguments = [`--config=${configBefore.absolutePath}`, ...arguments_];
-  const timeoutMilliseconds = /^run-[12]-(?:law|economy)-build-start$/u.test(purpose)
+  const timeoutMilliseconds = /^run-[12]-(?:law|economy)-build-exec$/u.test(purpose)
     ? DOCKER_BUILD_TIMEOUT_MILLISECONDS
     : /^platform-tools-v1\.52-closure-start$/u.test(purpose)
       ? DOCKER_TOOLCHAIN_CLOSURE_TIMEOUT_MILLISECONDS
@@ -1582,7 +2986,12 @@ function spawnPinnedDocker({ purpose, arguments_, environment, allowFailure = fa
 
 function assertOfflineOrInspectArguments(arguments_) {
   if (!Array.isArray(arguments_)
-    || arguments_.some((value) => typeof value !== "string" || /[\r\n\0]/u.test(value))) {
+    || arguments_.some((value) => typeof value !== "string" || /[\r\0]/u.test(value)
+      || (value.includes("\n")
+        && ![
+          DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT,
+          DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT,
+        ].includes(value)))) {
     throw new Error("DISPOSABLE_DEVNET_EXECUTION_DOCKER_ARGUMENTS_INVALID");
   }
   if (exactStringArrayEquals(arguments_, ["--version"])) return;
@@ -1594,7 +3003,11 @@ function assertOfflineOrInspectArguments(arguments_) {
     return;
   }
   if (arguments_[1] === "create") {
-    assertOfflineDockerCreateArguments(arguments_);
+    if ((arguments_[2] ?? "").startsWith("--name=iat-b3-b24-")) {
+      assertHermeticDockerCreateArguments(arguments_);
+    } else {
+      assertOfflineDockerCreateArguments(arguments_);
+    }
   } else if (arguments_[1] === "image") {
     if (arguments_.length !== 4
       || arguments_[2] !== "inspect"
@@ -1605,15 +3018,25 @@ function assertOfflineOrInspectArguments(arguments_) {
     const subcommand = arguments_[2];
     const valid = (subcommand === "inspect"
         && arguments_.length === 4
-        && /^iat-b3-b15-[a-z0-9-]{1,80}$/u.test(arguments_[3]))
+        && /^iat-b3-(?:b15-[a-z0-9-]{1,80}|b24-[0-9a-f]{16}-(?:law|economy))$/u.test(arguments_[3]))
       || (subcommand === "start"
-        && arguments_.length === 5
-        && arguments_[3] === "--attach"
-        && /^iat-b3-b15-[a-z0-9-]{1,80}$/u.test(arguments_[4]))
+        && ((arguments_.length === 4
+          && /^iat-b3-b24-[0-9a-f]{16}-(?:law|economy)$/u.test(arguments_[3]))
+          || (arguments_.length === 5
+            && arguments_[3] === "--attach"
+            && /^iat-b3-b15-[a-z0-9-]{1,80}$/u.test(arguments_[4]))))
+      || (subcommand === "logs" && arguments_.length === 4
+        && /^iat-b3-b24-[0-9a-f]{16}-(?:law|economy)$/u.test(arguments_[3]))
+      || (subcommand === "stop" && arguments_.length === 5
+        && arguments_[3] === "--time=10"
+        && /^iat-b3-b24-[0-9a-f]{16}-(?:law|economy)$/u.test(arguments_[4]))
       || (subcommand === "rm"
         && arguments_.length === 5
         && arguments_[3] === "--force"
-        && /^iat-b3-b15-[a-z0-9-]{1,80}$/u.test(arguments_[4]));
+        && /^iat-b3-(?:b15-[a-z0-9-]{1,80}|b24-[0-9a-f]{16}-(?:law|economy))$/u.test(arguments_[4]))
+      || (subcommand === "exec" && (() => {
+        try { return assertHermeticDockerExecArguments(arguments_); } catch { return false; }
+      })());
     if (!valid) {
       throw new Error("DISPOSABLE_DEVNET_EXECUTION_DOCKER_CONTAINER_COMMAND_FORBIDDEN");
     }
@@ -1626,10 +3049,14 @@ function assertOfflineOrInspectArguments(arguments_) {
 }
 
 function containerNameFromCreateArguments(arguments_) {
-  assertOfflineDockerCreateArguments(arguments_);
+  if ((arguments_?.[2] ?? "").startsWith("--name=iat-b3-b24-")) {
+    assertHermeticDockerCreateArguments(arguments_);
+  } else {
+    assertOfflineDockerCreateArguments(arguments_);
+  }
   const nameArgument = arguments_.find((value) => value.startsWith("--name="));
   const name = nameArgument?.slice("--name=".length);
-  if (!name || !/^iat-b3-b15-[a-z0-9-]{1,80}$/u.test(name)) {
+  if (!name || !/^iat-b3-(?:b15-[a-z0-9-]{1,80}|b24-[0-9a-f]{16}-(?:law|economy))$/u.test(name)) {
     throw new Error("DISPOSABLE_DEVNET_EXECUTION_CONTAINER_NAME_INVALID");
   }
   return name;
@@ -1758,6 +3185,15 @@ function parseContainerInspect(bytes, {
     .filter((argument) => argument.startsWith("--env="))
     .map((argument) => argument.slice("--env=".length));
   const observedEnvironment = record?.Config?.Env;
+  const expectedTmpfs = name.startsWith("iat-b3-b24-")
+    ? {
+        "/tmp": "rw,nosuid,nodev,noexec,size=268435456",
+        [HERMETIC_PRIVATE_ROOT]:
+          `rw,nosuid,nodev,exec,size=${HERMETIC_PRIVATE_STORE_BYTES},uid=0,gid=0,mode=0755`,
+        [HERMETIC_BUILD_ROOT]:
+          `rw,nosuid,nodev,exec,size=${HERMETIC_BUILD_STORE_BYTES},uid=65534,gid=65534,mode=0700`,
+      }
+    : { "/tmp": "rw,nosuid,nodev,noexec,size=268435456" };
   const exactCreateBinding = imageIndex > 0
     && Array.isArray(record?.Config?.Entrypoint)
     && exactStringArrayEquals(record.Config.Entrypoint, [entrypoint])
@@ -1782,9 +3218,12 @@ function parseContainerInspect(bytes, {
     || record.Name !== `/${name}`
     || record.Config?.Image !== PINNED_COMBINED_LAW_BUILD_CONTAINER.executionReference
     || (expectedImageId !== null && record.Image !== expectedImageId)
+    || (name.startsWith("iat-b3-b24-") && !["", "0", "0:0"].includes(record.Config?.User))
     || record.HostConfig?.NetworkMode !== "none"
     || record.HostConfig?.ReadonlyRootfs !== true
-    || record.HostConfig?.Tmpfs?.["/tmp"] !== "rw,nosuid,nodev,noexec,size=268435456"
+    || disposableDevnetExecutionCanonicalJson(record.HostConfig?.Tmpfs)
+      !== disposableDevnetExecutionCanonicalJson(expectedTmpfs)
+    || (name.startsWith("iat-b3-b24-") && record.HostConfig?.PidsLimit !== 512)
     || !Array.isArray(securityOptions)
     || securityOptions.length !== 1
     || !securityOptions.some((value) => value === "no-new-privileges"
@@ -1846,11 +3285,15 @@ function persistInvocation(stageRoot, ordinal, invocation) {
 function executePinnedContainer({
   purpose,
   createArguments,
+  execArguments,
+  hermeticPlan,
   environment,
   expectedImageId,
   stageRoot,
   invocationRecords,
   nextOrdinal,
+  exportRoot,
+  expectedOutputFileName,
 }) {
   const name = containerNameFromCreateArguments(createArguments);
   const invocationStartIndex = invocationRecords.length;
@@ -1897,17 +3340,20 @@ function executePinnedContainer({
     absenceProven = true;
   };
   try {
+    assertContainerExportDirectoryStable(exportRoot, { mode: 0o703, entries: [] });
     const preexisting = invoke("preexisting-absence-proof", [
       `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
       "container", "inspect", name,
     ], true);
     assertAbsent(preexisting);
+    assertContainerExportDirectoryStable(exportRoot, { mode: 0o703, entries: [] });
     creationAttempted = true;
     const creation = invoke("create", createArguments);
     const containerId = creation.stdout.toString("utf8").trim();
     if (!/^[0-9a-f]{64}$/u.test(containerId)) {
       throw new Error("DISPOSABLE_DEVNET_EXECUTION_CONTAINER_ID_INVALID");
     }
+    assertContainerExportDirectoryStable(exportRoot, { mode: 0o703, entries: [] });
     const before = invoke("inspect-before", [
       `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
       "container", "inspect", name,
@@ -1920,10 +3366,49 @@ function executePinnedContainer({
       createArguments,
       environment,
     });
-    commandOutput = invoke("start", [
+    assertContainerExportDirectoryStable(exportRoot, { mode: 0o703, entries: [] });
+    const start = invoke("start", [
       `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
-      "container", "start", "--attach", name,
+      "container", "start", name,
     ]);
+    if (start.stderr.length !== 0 || start.stdout.toString("utf8") !== `${name}\n`) {
+      throw new Error("DISPOSABLE_DEVNET_EXECUTION_CONTAINER_START_OUTPUT_HOLD");
+    }
+    const running = invoke("inspect-running", [
+      `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+      "container", "inspect", name,
+    ]);
+    parseContainerInspect(running.stdout, {
+      name,
+      expectedState: "running",
+      expectedImageId,
+      expectedContainerId: containerId,
+      createArguments,
+      environment,
+    });
+    commandOutput = invoke("exec", execArguments);
+    assertContainerExportDirectoryStable(
+      exportRoot,
+      { mode: 0o703, entries: [expectedOutputFileName] },
+    );
+    const initializerLogs = invoke("initializer-logs", [
+      `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+      "container", "logs", name,
+    ]);
+    if (initializerLogs.stderr.length !== 0
+      || !validateDisposableDevnetHermeticInitializerFrame(
+        initializerLogs.stdout,
+        hermeticPlan,
+      )) {
+      throw new Error("DISPOSABLE_DEVNET_EXECUTION_INITIALIZER_LOG_BINDING_HOLD");
+    }
+    const stop = invoke("stop", [
+      `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
+      "container", "stop", "--time=10", name,
+    ]);
+    if (stop.stderr.length !== 0 || stop.stdout.toString("utf8") !== `${name}\n`) {
+      throw new Error("DISPOSABLE_DEVNET_EXECUTION_CONTAINER_STOP_OUTPUT_HOLD");
+    }
     const after = invoke("inspect-after", [
       `--host=${PINNED_COMBINED_LAW_BUILD_CONTAINER.dockerEndpoint}`,
       "container", "inspect", name,
@@ -1936,7 +3421,15 @@ function executePinnedContainer({
       createArguments,
       environment,
     });
+    assertContainerExportDirectoryStable(
+      exportRoot,
+      { mode: 0o703, entries: [expectedOutputFileName] },
+    );
     cleanupAndProveAbsence("normal-cleanup");
+    assertContainerExportDirectoryStable(
+      exportRoot,
+      { mode: 0o703, entries: [expectedOutputFileName] },
+    );
     const selectedRecords = invocationRecords.slice(invocationStartIndex);
     const observation = deepFreeze({
       containerId,
@@ -1944,6 +3437,8 @@ function executePinnedContainer({
       invocationOrdinals: selectedRecords.map(({ ordinal }) => ordinal),
       invocationClosureSha256: disposableDevnetExecutionCanonicalSha256(selectedRecords),
       imageId: expectedImageId,
+      initializationFrameValidated: true,
+      buildExecIdentity: "65534:65534",
       networkMode: "none",
       pullPolicy: "never",
       preexistingContainerAbsenceProven: true,
@@ -1992,47 +3487,13 @@ function inspectPinnedContainer({ dockerEnvironment, stageRoot, invocationRecord
   });
 }
 
-function observePinnedToolchain({
-  laneId,
-  dockerEnvironment,
-  stageRoot,
-  invocationRecords,
-  nextOrdinal,
-  expectedImageId,
-}) {
-  const outputs = {};
-  const containerObservations = [];
-  for (const planned of createDisposableDevnetToolchainInvocationPlan(laneId)) {
-    const container = executePinnedContainer({
-      purpose: planned.purpose,
-      createArguments: planned.createArguments,
-      environment: dockerEnvironment,
-      expectedImageId,
-      stageRoot,
-      invocationRecords,
-      nextOrdinal,
-    });
-    outputs[planned.purpose] = container.commandOutput.stdout.toString("utf8").trim();
-    containerObservations.push(container.observation);
-  }
-  if (outputs["rustc-version"] !== RUSTC_VERSION
-    || outputs["cargo-version"] !== CARGO_VERSION
-    || outputs["cargo-build-sbf-version"] !== CARGO_BUILD_SBF_VERSION
-    || outputs["platform-tools-v1.52-closure"].length === 0
-    || !outputs["platform-tools-v1.52-closure"].includes("/v1.52/platform-tools/")) {
-    throw new Error("DISPOSABLE_DEVNET_EXECUTION_PINNED_TOOLCHAIN_DRIFT_HOLD");
-  }
-  return deepFreeze({
-    rustc: outputs["rustc-version"],
-    cargo: outputs["cargo-version"],
-    cargoBuildSbf: outputs["cargo-build-sbf-version"],
-    platformToolsVersion: "1.52",
-    platformToolsClosureSha256: sha256(Buffer.from(outputs["platform-tools-v1.52-closure"], "utf8")),
-    containers: containerObservations,
-  });
-}
-
 function readBuildArtifact(path, label) {
+  const boundary = lstatSync(path, { bigint: true });
+  if (!boundary.isFile() || boundary.isSymbolicLink() || boundary.nlink !== 1n
+    || boundary.uid !== 65_534n || boundary.gid !== 65_534n
+    || (boundary.mode & 0o777n) !== 0o444n) {
+    throw new Error(`${label}_EXPORT_MODE_OR_LINK_HOLD`);
+  }
   const artifact = readStableRegularFile(path, { label, maximumBytes: MAX_ARTIFACT_BYTES });
   if (artifact.byteLength < 1_024
     || artifact.bytes[0] !== 0x7f || artifact.bytes[1] !== 0x45
@@ -2067,35 +3528,56 @@ function executeBuildPair({
   expectedImageId,
 }) {
   const runRoot = ensureDirectory(join(buildRoot, `run-${ordinal}`));
-  const plan = createDisposableDevnetDockerBuildInvocationPlan({
-    sourceSnapshotRoot: sourceSnapshot.root,
-    runRoot,
-    ordinal,
-    laneId,
-    identityEnvironment,
-  });
-  ensureDirectory(plan.roots.law);
-  ensureDirectory(plan.roots.economy);
+  const roots = {
+    law: ensureContainerWritableExportDirectory(join(runRoot, "law")),
+    economy: ensureContainerWritableExportDirectory(join(runRoot, "economy")),
+  };
   const observations = {};
   for (const kind of ["law", "economy"]) {
+    const recipe = kind === "law"
+      ? PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE
+      : ECONOMY_SBF_BUILD_RECIPE;
+    const plan = createDisposableDevnetHermeticBuildContract({
+      sourceClosure: {
+        declaredHeadSha: sourceSnapshot.declaredHeadSha,
+        treeSha: sourceSnapshot.treeSha,
+        mountedInputSha256: sourceSnapshot.mountedInputSha256,
+        entries: sourceSnapshot.entries,
+      },
+      sourceSnapshotRoot: sourceSnapshot.root,
+      localByteRoots: HERMETIC_LOCAL_BYTE_HOST_ROOTS,
+      exportRoot: roots[kind],
+      ordinal,
+      kind,
+      laneId,
+      identityEnvironment,
+    });
     const container = executePinnedContainer({
       purpose: `run-${ordinal}-${kind}-build`,
-      createArguments: plan[kind].createArguments,
-      environment: Object.freeze({ ...dockerEnvironment, ...plan[kind].environment }),
+      createArguments: plan.createArguments,
+      execArguments: plan.execArguments,
+      hermeticPlan: plan,
+      environment: Object.freeze({ ...dockerEnvironment, ...plan.environment }),
       expectedImageId,
       stageRoot,
       invocationRecords,
       nextOrdinal,
+      exportRoot: roots[kind],
+      expectedOutputFileName: recipe.outputFileName,
     });
-    const recipe = kind === "law"
-      ? PRODUCTION_COMBINED_ARTIFACT_SBF_BUILD_RECIPE
-      : ECONOMY_SBF_BUILD_RECIPE;
+    closeContainerWritableExportDirectory(roots[kind], recipe.outputFileName);
     const artifact = readBuildArtifact(
-      join(plan.roots[kind], "output", recipe.outputFileName),
+      join(roots[kind], recipe.outputFileName),
       `DISPOSABLE_DEVNET_EXECUTION_RUN_${ordinal}_${kind.toUpperCase()}_ARTIFACT`,
+    );
+    const hermeticFrameValidation = validateDisposableDevnetHermeticFrameSequence(
+      container.commandOutput.stdout,
+      { contract: plan.contract, exportedArtifactBytes: artifact.bytes },
     );
     observations[kind] = deepFreeze({
       container: container.observation,
+      hermeticContract: plan.contract,
+      hermeticFrameValidation,
       sourceArtifact: {
         sha256: artifact.sha256,
         byteLength: artifact.byteLength,
@@ -2104,6 +3586,7 @@ function executeBuildPair({
       },
       preservedArtifact: persistArtifact(stageRoot, ordinal, kind, artifact),
     });
+    releaseContainerExportDirectory(roots[kind], recipe.outputFileName);
   }
   const keyScan = scanDisposableDevnetBuildTreeForKeyMaterial(runRoot);
   return deepFreeze({ ordinal, law: observations.law, economy: observations.economy, keyScan });
@@ -2163,11 +3646,14 @@ function assertInvocationAndContainerClosure({ invocationRecords, toolchain, bui
   if (new Set(logPaths).size !== logPaths.length) {
     throw new Error("DISPOSABLE_DEVNET_EXECUTION_INVOCATION_LOG_ALIAS_HOLD");
   }
-  const containers = [
-    ...toolchain.containers,
-    ...builds.flatMap((build) => [build.law.container, build.economy.container]),
-  ];
-  if (containers.length !== 8
+  const containers = builds.flatMap((build) => [build.law.container, build.economy.container]);
+  if (toolchain.verificationAuthority !== "SAME_BUILD_CONTAINER_PRIVATE_COPY_PRE_POST_FRAMES"
+    || disposableDevnetExecutionCanonicalJson(toolchain.localByteClosure)
+      !== disposableDevnetExecutionCanonicalJson(PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE)
+    || toolchain.requiredBuildFrameCount !== 12
+    || toolchain.validatedBuildFrameCount !== 12
+    || toolchain.executionObserved !== true
+    || containers.length !== 4
     || new Set(containers.map(({ containerId }) => containerId)).size !== containers.length
     || new Set(containers.map(({ name }) => name)).size !== containers.length
     || containers.some((container) => (
@@ -2196,6 +3682,23 @@ function createOutputInputDescriptor(file) {
   });
 }
 
+function collectRetainedEvidenceDescriptors({
+  preservedSourceClosure,
+  preservedIdentityInput,
+  preservedGenesisInput,
+  invocationRecords,
+  builds,
+}) {
+  const descriptors = [
+    preservedSourceClosure,
+    preservedIdentityInput,
+    preservedGenesisInput,
+    ...invocationRecords.flatMap(({ stdout, stderr }) => [stdout, stderr]),
+    ...builds.flatMap(({ law, economy }) => [law.preservedArtifact, economy.preservedArtifact]),
+  ];
+  return normalizeRetainedDescriptors(descriptors);
+}
+
 function createCanonicalTranscript({
   brand,
   generatedAtUtc,
@@ -2215,6 +3718,7 @@ function createCanonicalTranscript({
   equality,
   keyScan,
   cleanup,
+  retainedFileLedger,
 }) {
   throw new Error("HERMETIC_MOUNT_CAUSALITY_UNPROVEN");
   /* c8 ignore start -- unreachable while the categorical B19 hold is active */
@@ -2244,6 +3748,7 @@ function createCanonicalTranscript({
     equality,
     keyScan,
     cleanup,
+    retainedFileLedger,
     ready: false,
     blockers: [
       "DISPOSABLE_DEVNET_BEHAVIORAL_REHEARSAL_NOT_EXECUTED",
@@ -2295,10 +3800,12 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
     throw new Error("DISPOSABLE_DEVNET_EXECUTION_EXACT_SOURCE_HEAD_REQUIRED");
   }
   // B19 categorical safety boundary. Host-side pathname observations cannot
-  // prove which inode the Docker daemon mounted across start/attach. Do not
+  // prove which inode the Docker daemon mounted across initializer start and
+  // the later unprivileged exec. Do not
   // inspect paths, read inputs, create output/build roots, invoke a process, or
-  // create a live-branded record until a same-container private-copy executor
-  // and exact retained-file ledger are implemented and reviewed.
+  // create a live-branded record until the same-container private-copy and
+  // retained-file-ledger contracts are independently accepted and a later,
+  // explicit source change replaces this categorical guard.
   if (HERMETIC_MOUNT_CAUSALITY_PROVEN !== true) {
     throw new Error("HERMETIC_MOUNT_CAUSALITY_UNPROVEN");
   }
@@ -2381,9 +3888,10 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
     const identityEnvironment = createIdentityEnvironment(identityRecord, genesisRecord);
 
     stageRoot = createOutputStage(output);
-    ensureDirectory(join(stageRoot, "logs"));
-    ensureDirectory(join(stageRoot, "artifacts"));
-    ensureDirectory(join(stageRoot, "inputs"));
+    const evidenceRoot = ensureDirectory(join(stageRoot, "evidence"));
+    ensureDirectory(join(evidenceRoot, "logs"));
+    ensureDirectory(join(evidenceRoot, "artifacts"));
+    ensureDirectory(join(evidenceRoot, "inputs"));
     const sourceClosureCore = {
       schema: "iat-b3-disposable-devnet-materialized-source-closure/v1",
       declaredHeadSha,
@@ -2394,43 +3902,43 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
     const sourceClosureSha256 = disposableDevnetExecutionCanonicalSha256(sourceClosureCore);
     const preservedSourceClosure = relativeFileDescriptor(
       writeExclusiveFile(
-        join(stageRoot, "inputs", "materialized-source-closure.cjson"),
+        join(evidenceRoot, "inputs", "materialized-source-closure.cjson"),
         Buffer.from(`${disposableDevnetExecutionCanonicalJson({
           ...sourceClosureCore,
           closureSha256: sourceClosureSha256,
         })}\n`, "utf8"),
       ),
-      stageRoot,
+      evidenceRoot,
     );
     const preservedIdentityInput = relativeFileDescriptor(
-      writeExclusiveFile(join(stageRoot, "inputs", "disposable-identities.json"), identityFile.bytes),
-      stageRoot,
+      writeExclusiveFile(join(evidenceRoot, "inputs", "disposable-identities.json"), identityFile.bytes),
+      evidenceRoot,
     );
     const preservedGenesisInput = relativeFileDescriptor(
-      writeExclusiveFile(join(stageRoot, "inputs", "devnet-genesis.json"), genesisFile.bytes),
-      stageRoot,
+      writeExclusiveFile(join(evidenceRoot, "inputs", "devnet-genesis.json"), genesisFile.bytes),
+      evidenceRoot,
     );
     const dockerConfigRoot = ensureDirectory(join(buildRoot, "docker-client-home"));
     const dockerEnvironment = safeDockerEnvironment({ dockerConfigRoot, declaredHeadSha });
     const dockerRuntimeObservations = [observePinnedDockerRuntime({
       dockerEnvironment,
-      stageRoot,
+      stageRoot: evidenceRoot,
       invocationRecords,
       nextOrdinal,
     })];
     const imageObservations = [inspectPinnedContainer({
       dockerEnvironment,
-      stageRoot,
+      stageRoot: evidenceRoot,
       invocationRecords,
       nextOrdinal,
     })];
-    const toolchain = observePinnedToolchain({
-      laneId,
-      dockerEnvironment,
-      stageRoot,
-      invocationRecords,
-      nextOrdinal,
-      expectedImageId: imageObservations[0].localImageId,
+    const toolchainContract = deepFreeze({
+      verificationAuthority: "SAME_BUILD_CONTAINER_PRIVATE_COPY_PRE_POST_FRAMES",
+      localByteClosure: PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE,
+      requiredBuildFrameCount: 12,
+      rustc: RUSTC_VERSION,
+      cargo: CARGO_VERSION,
+      cargoBuildSbf: CARGO_BUILD_SBF_VERSION,
     });
     sourceObservations.push(observeExactSource(REPOSITORY_ROOT));
     materializedSourceObservations.push(observeMaterializedSourceSnapshot(sourceSnapshot));
@@ -2444,7 +3952,7 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
         laneId,
         identityEnvironment,
         dockerEnvironment,
-        stageRoot,
+        stageRoot: evidenceRoot,
         invocationRecords,
         nextOrdinal,
         expectedImageId: imageObservations[0].localImageId,
@@ -2454,13 +3962,13 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
     }
     dockerRuntimeObservations.push(observePinnedDockerRuntime({
       dockerEnvironment,
-      stageRoot,
+      stageRoot: evidenceRoot,
       invocationRecords,
       nextOrdinal,
     }));
     imageObservations.push(inspectPinnedContainer({
       dockerEnvironment,
-      stageRoot,
+      stageRoot: evidenceRoot,
       invocationRecords,
       nextOrdinal,
     }));
@@ -2479,13 +3987,30 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
     if (finalModuleClosure.closureSha256 !== moduleClosure.closureSha256) {
       throw new Error("DISPOSABLE_DEVNET_EXECUTION_MODULE_CLOSURE_CHANGED_DURING_BUILDS_HOLD");
     }
+    const toolchain = deepFreeze({
+      ...toolchainContract,
+      validatedBuildFrameCount: builds.length * 2 * HERMETIC_FRAME_PHASES.length,
+      executionObserved: true,
+    });
     const equality = assertDualBuildEquality(builds);
     const executionClosure = assertInvocationAndContainerClosure({
       invocationRecords,
       toolchain,
       builds,
     });
-    const preservedKeyScan = scanDisposableDevnetBuildTreeForKeyMaterial(stageRoot);
+    const preservedKeyScan = scanDisposableDevnetBuildTreeForKeyMaterial(evidenceRoot);
+    const retainedEvidenceDescriptors = collectRetainedEvidenceDescriptors({
+      preservedSourceClosure,
+      preservedIdentityInput,
+      preservedGenesisInput,
+      invocationRecords,
+      builds,
+    });
+    const retainedEvidenceLedger = createDisposableDevnetRetainedFileLedger(
+      evidenceRoot,
+      retainedEvidenceDescriptors,
+    );
+    validateDisposableDevnetRetainedFileLedger(evidenceRoot, retainedEvidenceLedger);
 
     removeExactSourceBuildRoot(buildRoot);
     buildRoot = null;
@@ -2545,13 +4070,17 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
         preservedOutput: preservedKeyScan,
       },
       cleanup,
+      retainedFileLedger: retainedEvidenceLedger,
     });
     const transcriptBytes = Buffer.from(
       `${disposableDevnetExecutionCanonicalJson(transcript)}\n`,
       "utf8",
     );
     assertOutputStageStable(stageRoot);
-    writeExclusiveFile(join(stageRoot, "transcript.json"), transcriptBytes);
+    const transcriptDescriptor = relativeFileDescriptor(
+      writeExclusiveFile(join(stageRoot, "transcript.json"), transcriptBytes),
+      stageRoot,
+    );
     assertOutputStageStable(stageRoot);
     const transcriptReadback = readStableRegularFile(join(output.target, "transcript.json"), {
       label: "DISPOSABLE_DEVNET_EXECUTION_FINAL_TRANSCRIPT",
@@ -2560,10 +4089,24 @@ function runCanonicalDisposableDevnetExecution({ brand, request, environment = p
     if (!transcriptReadback.bytes.equals(transcriptBytes)) {
       throw new Error("DISPOSABLE_DEVNET_EXECUTION_FINAL_TRANSCRIPT_READBACK_HOLD");
     }
+    const outputPromotion = createDisposableDevnetFinalOutputStagePromotion({
+      stageRoot,
+      retainedEvidenceLedger,
+      retainedEvidenceDescriptors,
+      transcriptDescriptor,
+    });
+    if (outputPromotion.outputStageFilesystemPromotionValidated !== true
+      || outputPromotion.executionProvenanceObserved !== false
+      || outputPromotion.buildExecutionObserved !== false
+      || outputPromotion.releaseAuthorized !== false
+      || outputPromotion.mainnetStatus !== "HOLD") {
+      throw new Error("DISPOSABLE_DEVNET_EXECUTION_OUTPUT_PROMOTION_TRUTH_HOLD");
+    }
     assertOutputStageStable(stageRoot);
+    validateDisposableDevnetRetainedFileLedger(stageRoot, outputPromotion.finalLedger);
     PROCESS_CREATED_STAGES.delete(stageRoot);
     stagePromoted = true;
-    return transcript;
+    return deepFreeze({ transcript, outputPromotion });
   } finally {
     if (buildRoot !== null) removeExactSourceBuildRoot(buildRoot);
     if (stageRoot !== null && !stagePromoted) removeOutputStage(stageRoot);

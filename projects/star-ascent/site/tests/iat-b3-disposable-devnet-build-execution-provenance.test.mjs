@@ -3,9 +3,11 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   linkSync,
+  lstatSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  renameSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -23,20 +25,40 @@ import {
   DISPOSABLE_DEVNET_EXECUTION_STATUS,
   DISPOSABLE_DEVNET_EXECUTION_TEST_STATUS,
   DISPOSABLE_DEVNET_EXECUTION_TRANSCRIPT_SCHEMA,
+  DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT,
+  DISPOSABLE_DEVNET_HERMETIC_EXECUTION_CONTRACT_SCHEMA,
+  DISPOSABLE_DEVNET_HERMETIC_FRAME_SCHEMA,
+  DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT,
+  DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SHA256,
+  DISPOSABLE_DEVNET_HERMETIC_WRAPPER_SHA256,
+  DISPOSABLE_DEVNET_OUTPUT_PROMOTION_SCHEMA,
+  DISPOSABLE_DEVNET_RETAINED_FILE_LEDGER_SCHEMA,
   DISPOSABLE_DEVNET_GENESIS_HASH,
   DISPOSABLE_DEVNET_GENESIS_INPUT_SCHEMA,
   DISPOSABLE_DEVNET_IDENTITY_INPUT_SCHEMA,
   DISPOSABLE_DEVNET_NETWORK,
   DISPOSABLE_DEVNET_RPC_URL,
   PINNED_DISPOSABLE_DEVNET_DOCKER_CLI,
+  PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE,
   assessDisposableDevnetExecutionProvenance,
   createDisposableDevnetDockerBuildInvocationPlan,
+  createDisposableDevnetHermeticBuildContract,
+  createDisposableDevnetHermeticSourceManifest,
+  createDisposableDevnetFinalOutputStagePromotion,
+  createDisposableDevnetRetainedFileLedger,
   createDisposableDevnetToolchainInvocationPlan,
+  disposableDevnetExecutionCanonicalJson,
   disposableDevnetExecutionCanonicalSha256,
   runDisposableDevnetBuildExecutionWithInjectedExecutor,
   scanDisposableDevnetBuildTreeForKeyMaterial,
   validateDisposableDevnetExecutionState,
   validateDisposableDevnetDockerCreateArguments,
+  validateDisposableDevnetHermeticBuildContract,
+  validateDisposableDevnetHermeticDockerCreateArguments,
+  validateDisposableDevnetHermeticDockerExecArguments,
+  validateDisposableDevnetHermeticInitializerFrame,
+  validateDisposableDevnetHermeticFrameSequence,
+  validateDisposableDevnetRetainedFileLedger,
   validateDisposableDevnetGenesisInput,
   validateDisposableDevnetIdentityInput,
 } from "../scripts/run-iat-b3-disposable-devnet-build-execution-provenance.mjs";
@@ -67,9 +89,24 @@ const PINNED_MODULE_PATHS = Object.freeze([
   "scripts/validate-iat-b3-owner-policy-freeze.mjs",
   "scripts/iat-b3-native-wsl-build-backend.mjs",
 ]);
+const SOURCE_MATERIALIZATION_SCHEMA =
+  "iat-b3-combined-law-exact-git-object-materialization/v1";
 
 function sha256(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
+}
+
+function retainedDescriptor(root, relativePath) {
+  const path = resolve(root, ...relativePath.split("/"));
+  const bytes = readFileSync(path);
+  const stat = lstatSync(path, { bigint: true });
+  return {
+    relativePath,
+    sha256: sha256(bytes),
+    byteLength: bytes.length,
+    device: stat.dev.toString(),
+    inode: stat.ino.toString(),
+  };
 }
 
 function makeTemporaryRoot(t, prefix) {
@@ -109,6 +146,104 @@ function genesisInput() {
   };
 }
 
+function hermeticSourceEntries() {
+  return [
+    {
+      path: "Cargo.lock",
+      gitMode: "100644",
+      gitObjectSha1: "1".repeat(40),
+      byteLength: 11,
+      sha256: "2".repeat(64),
+      lfsPointer: false,
+    },
+    {
+      path: "projects/star-ascent/site/build.sh",
+      gitMode: "100755",
+      gitObjectSha1: "3".repeat(40),
+      byteLength: 17,
+      sha256: "4".repeat(64),
+      lfsPointer: false,
+    },
+  ];
+}
+
+function hermeticSourceClosure(entries = hermeticSourceEntries()) {
+  const core = {
+    schema: SOURCE_MATERIALIZATION_SCHEMA,
+    declaredHeadSha: "5".repeat(40),
+    treeSha: "6".repeat(40),
+    entries,
+  };
+  return {
+    declaredHeadSha: core.declaredHeadSha,
+    treeSha: core.treeSha,
+    mountedInputSha256: disposableDevnetExecutionCanonicalSha256(core),
+    entries,
+  };
+}
+
+function hermeticLocalByteRoots() {
+  return {
+    rustToolchain: "/host/rust-toolchain",
+    solanaRelease: "/host/solana-release",
+    platformTools: "/host/platform-tools",
+    criterion: "/host/criterion",
+    registryCache: "/host/registry-cache",
+    registryIndex: "/host/registry-index",
+  };
+}
+
+function hermeticPlan(kind = "law", ordinal = 1) {
+  return createDisposableDevnetHermeticBuildContract({
+    sourceClosure: hermeticSourceClosure(),
+    sourceSnapshotRoot: "/host/source",
+    localByteRoots: hermeticLocalByteRoots(),
+    exportRoot: `/host/export-${kind}-${ordinal}`,
+    ordinal,
+    kind,
+    laneId: LANE_ID,
+    identityEnvironment: identityEnvironment(),
+  });
+}
+
+function hermeticArtifact() {
+  const bytes = Buffer.alloc(1_024, 0);
+  bytes.set([0x7f, 0x45, 0x4c, 0x46, 2, 1, 1]);
+  bytes.writeUInt16LE(3, 16);
+  bytes.writeUInt16LE(247, 18);
+  return bytes;
+}
+
+function hermeticFrameBytes(contract, artifactBytes = hermeticArtifact(), mutate = (frames) => frames) {
+  const common = (phase) => ({
+    contractSha256: contract.contractSha256,
+    kind: contract.kind,
+    laneId: contract.laneId,
+    ordinal: contract.ordinal,
+    phase,
+    recipeSha256: contract.recipe.sha256,
+    schema: DISPOSABLE_DEVNET_HERMETIC_FRAME_SCHEMA,
+    sourceManifestSha256: contract.source.manifest.sha256,
+    toolchainClosureSha256: PINNED_DISPOSABLE_DEVNET_LOCAL_BYTE_CLOSURE.closureSha256,
+  });
+  const frames = [
+    common("PRIVATE_INPUT_CLOSURE_PRE_CARGO"),
+    common("PRIVATE_INPUT_CLOSURE_POST_CARGO"),
+    {
+      artifactByteLength: artifactBytes.length,
+      artifactSha256: sha256(artifactBytes),
+      cargoExitStatus: 0,
+      ...common("PRIVATE_ARTIFACT_EXPORTED"),
+    },
+  ];
+  return Buffer.from(
+    `${mutate(structuredClone(frames)).map(
+      (frame) => disposableDevnetExecutionCanonicalJson(frame),
+    ).join("\n")}\n`,
+    "utf8",
+  );
+}
+
 test("B15 canonical state is a machine-readable nonauthorizing HOLD", () => {
   const state = JSON.parse(readFileSync(STATE_PATH, "utf8"));
   assert.equal(state.schema, DISPOSABLE_DEVNET_EXECUTION_STATE_SCHEMA);
@@ -117,6 +252,10 @@ test("B15 canonical state is a machine-readable nonauthorizing HOLD", () => {
   assert.equal(state.evidence.transcript, null);
   assert.ok(Object.values(state.truth).every((value) => value === false || value === "HOLD"));
   assert.ok(state.blockers.includes("HERMETIC_MOUNT_CAUSALITY_UNPROVEN"));
+  assert.ok(state.blockers.includes(
+    "HERMETIC_SAME_CONTAINER_EXECUTION_CONTRACT_NOT_INDEPENDENTLY_ACCEPTED",
+  ));
+  assert.ok(state.blockers.includes("FINAL_RETAINED_FILE_LEDGER_NOT_INDEPENDENTLY_ACCEPTED"));
   assert.ok(state.blockers.includes("LIVE_PROCESS_BRAND_UNAVAILABLE"));
   assert.ok(state.blockers.includes("MAINNET_HOLD"));
 });
@@ -298,6 +437,473 @@ test("B15 Docker create grammar rejects every contradictory or privilege-expandi
       /DOCKER_(?:OFFLINE_CONFINEMENT|EXACT_BUILD_GRAMMAR|BUILD_MOUNT_GRAMMAR)_HOLD/u,
     );
   }
+});
+
+test("B24 hermetic source manifest binds complete path mode byte and directory closure", () => {
+  const entries = hermeticSourceEntries();
+  const manifest = createDisposableDevnetHermeticSourceManifest(entries);
+  assert.equal(manifest.schema, "iat-b3-disposable-devnet-hermetic-tree-manifest/v1");
+  assert.equal(manifest.fileCount, 2);
+  assert.equal(manifest.directoryCount, 3);
+  assert.equal(manifest.entryCount, 5);
+  assert.equal(manifest.sourceByteLength, 28);
+  assert.match(manifest.sha256, /^[0-9a-f]{64}$/u);
+  for (const mutation of [
+    (copy) => { copy[0].path = "Cargo2.lock"; },
+    (copy) => { copy[0].gitMode = "100755"; },
+    (copy) => { copy[0].sha256 = "9".repeat(64); },
+    (copy) => { copy[0].byteLength += 1; },
+  ]) {
+    const copy = structuredClone(entries);
+    mutation(copy);
+    assert.notEqual(createDisposableDevnetHermeticSourceManifest(copy).sha256, manifest.sha256);
+  }
+  assert.throws(
+    () => createDisposableDevnetHermeticSourceManifest([...entries, entries[0]]),
+    /SOURCE_ENTRY_INVALID/u,
+  );
+  assert.throws(
+    () => createDisposableDevnetHermeticSourceManifest([
+      ...entries,
+      { ...entries[0], path: "projects" },
+    ]),
+    /SOURCE_PATH_ALIAS_HOLD/u,
+  );
+});
+
+test("B24 hermetic contract is exact offline private-copy grammar and remains hard-disabled", () => {
+  for (const [kind, ordinal] of [["law", 1], ["economy", 2]]) {
+    const plan = hermeticPlan(kind, ordinal);
+    assert.equal(validateDisposableDevnetHermeticBuildContract(plan), plan);
+    assert.equal(
+      validateDisposableDevnetHermeticDockerCreateArguments(plan.createArguments),
+      true,
+    );
+    assert.equal(plan.contract.schema, DISPOSABLE_DEVNET_HERMETIC_EXECUTION_CONTRACT_SCHEMA);
+    assert.equal(plan.contract.enabled, false);
+    assert.equal(
+      plan.contract.implementationStatus,
+      "IMPLEMENTED_HARD_DISABLED_PENDING_INDEPENDENT_ACCEPTANCE",
+    );
+    assert.equal(plan.contract.retryPolicy, "NO_RETRY_WITHIN_CONTRACT");
+    assert.equal(plan.contract.privateStore.byteLength, 8 * 1024 * 1024 * 1024);
+    assert.equal(
+      plan.contract.privateStore.options,
+      "rw,nosuid,nodev,exec,uid=0,gid=0,mode=0755",
+    );
+    assert.equal(plan.contract.privateStore.owner, "UID_GID_0_BUILD_UID_UNWRITABLE");
+    assert.equal(plan.contract.buildStore.byteLength, 24 * 1024 * 1024 * 1024);
+    assert.equal(plan.contract.buildStore.owner, "UID_GID_65534");
+    assert.equal(plan.contract.exportBoundary.hostDirectoryOpenMode, "703");
+    assert.equal(plan.contract.exportBoundary.hostDirectoryClosedMode, "700");
+    assert.equal(plan.contract.exportBoundary.hostDirectoryOwner, "EXECUTING_NODE_UID_GID");
+    assert.equal(plan.contract.exportBoundary.exportedArtifactMode, "444");
+    assert.equal(
+      plan.contract.exportBoundary.containerWriter,
+      "UID_GID_65534_CAP_DROP_ALL_USES_OTHER_WRITE_EXECUTE",
+    );
+    assert.equal(plan.contract.wrapper.sha256, DISPOSABLE_DEVNET_HERMETIC_WRAPPER_SHA256);
+    assert.equal(plan.contract.safety.dockerApiInvoked, false);
+    assert.equal(plan.contract.safety.buildExecuted, false);
+    assert.equal(plan.contract.safety.executionProvenanceObserved, false);
+    assert.equal(plan.contract.safety.mainnetStatus, "HOLD");
+    assert.ok(plan.createArguments.includes("--network=none"));
+    assert.ok(plan.createArguments.includes("--pull=never"));
+    assert.ok(plan.createArguments.includes("--read-only"));
+    assert.ok(plan.createArguments.includes("--cap-drop=ALL"));
+    assert.ok(plan.createArguments.includes("--security-opt=no-new-privileges"));
+    assert.ok(plan.createArguments.includes("--pids-limit=512"));
+    assert.ok(!plan.createArguments.includes("--user=65534:65534"));
+    assert.ok(plan.execArguments.includes("--user=65534:65534"));
+    assert.equal(validateDisposableDevnetHermeticDockerExecArguments(plan.execArguments), true);
+    assert.ok(plan.createArguments.includes("--workdir=/usr/bin"));
+    assert.ok(!plan.createArguments.includes("--workdir=/home/a/iat-source"));
+    assert.ok(plan.createArguments.includes(
+      "--tmpfs=/iat-private:rw,nosuid,nodev,exec,size=8589934592,uid=0,gid=0,mode=0755",
+    ));
+    assert.ok(plan.createArguments.includes(
+      "--tmpfs=/iat-build:rw,nosuid,nodev,exec,size=25769803776,uid=65534,gid=65534,mode=0700",
+    ));
+    assert.ok(plan.createArguments.includes("--entrypoint=/bin/bash"));
+    assert.ok(plan.createArguments.includes(DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT));
+    assert.ok(plan.execArguments.includes(DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT));
+    const initializerFrame = Buffer.from(`${disposableDevnetExecutionCanonicalJson({
+      contractSha256: plan.contract.contractSha256,
+      kind: plan.contract.kind,
+      laneId: plan.contract.laneId,
+      ordinal: plan.contract.ordinal,
+      phase: "PRIVATE_INPUT_CLOSURE_INITIALIZED",
+      schema: DISPOSABLE_DEVNET_HERMETIC_FRAME_SCHEMA,
+    })}\n`);
+    assert.equal(
+      validateDisposableDevnetHermeticInitializerFrame(initializerFrame, plan),
+      true,
+    );
+    assert.equal(
+      plan.createArguments.filter((value) => value.startsWith("--mount=")).length,
+      8,
+    );
+    assert.equal(Object.isFrozen(plan), true);
+  }
+});
+
+test("B24 hermetic contract rejects self-digested source recipe safety and enablement forgeries", () => {
+  const original = hermeticPlan();
+  const rehash = (mutate) => {
+    const plan = structuredClone(original);
+    mutate(plan);
+    const contractCore = structuredClone(plan.contract);
+    delete contractCore.contractSha256;
+    plan.contract.contractSha256 = disposableDevnetExecutionCanonicalSha256(contractCore);
+    plan.environment.IAT_B3_HERMETIC_CONTRACT_SHA256 = plan.contract.contractSha256;
+    plan.planSha256 = disposableDevnetExecutionCanonicalSha256({
+      contract: plan.contract,
+      createArguments: plan.createArguments,
+      execArguments: plan.execArguments,
+      environment: plan.environment,
+    });
+    return plan;
+  };
+  for (const [label, mutation] of [
+    ["enabled", (plan) => { plan.contract.enabled = true; }],
+    ["status", (plan) => { plan.contract.implementationStatus = "READY"; }],
+    ["execution", (plan) => { plan.contract.safety.executionProvenanceObserved = true; }],
+    ["docker", (plan) => { plan.contract.safety.dockerApiInvoked = true; }],
+    ["mainnet", (plan) => { plan.contract.safety.mainnetStatus = "GO"; }],
+    ["toolchain", (plan) => { plan.contract.localByteToolchain.trees.rustToolchain.byteLength += 1; }],
+    ["private-owner", (plan) => { plan.contract.privateStore.owner = "ROOT"; }],
+    ["private-options", (plan) => { plan.contract.privateStore.options = "rw,exec,mode=0777"; }],
+    ["export-mode", (plan) => { plan.contract.exportBoundary.hostDirectoryOpenMode = "777"; }],
+    ["ledger", (plan) => { plan.contract.lifecycle.requireFinalRetainedFileLedger = false; }],
+  ]) {
+    assert.throws(
+      () => validateDisposableDevnetHermeticBuildContract(rehash(mutation)),
+      /HERMETIC_CONTRACT_(?:SHAPE|BINDING)_HOLD/u,
+      label,
+    );
+  }
+  const badSource = hermeticSourceClosure();
+  badSource.mountedInputSha256 = "0".repeat(64);
+  assert.throws(
+    () => createDisposableDevnetHermeticBuildContract({
+      sourceClosure: badSource,
+      sourceSnapshotRoot: "/host/source",
+      localByteRoots: hermeticLocalByteRoots(),
+      exportRoot: "/host/export",
+      ordinal: 1,
+      kind: "law",
+      laneId: LANE_ID,
+      identityEnvironment: identityEnvironment(),
+    }),
+    /MOUNTED_INPUT_BINDING_HOLD/u,
+  );
+});
+
+test("B24 hermetic Docker grammar rejects mounts duplicates privileges wrapper and retry drift", () => {
+  const plan = hermeticPlan();
+  const mountIndex = plan.createArguments.findIndex(
+    (value) => value.includes("target=/iat-host/source"),
+  );
+  const wrapperIndex = plan.createArguments.indexOf(DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT);
+  const mutations = [
+    (args) => args.with(args.indexOf("--network=none"), "--network=host"),
+    (args) => [...args, "--network=none"],
+    (args) => [...args, "--tmpfs=/evil:rw,exec,size=1"],
+    (args) => args.with(
+      args.findIndex((value) => value.startsWith("--tmpfs=/iat-private:")),
+      "--tmpfs=/iat-private:rw,nosuid,nodev,exec,size=8589934592,uid=65534,gid=65534,mode=0755",
+    ),
+    (args) => [...args.slice(0, 10), "--privileged=true", ...args.slice(10)],
+    (args) => args.with(mountIndex, args[mountIndex].replace("/iat-host/source", "/iat-host/export")),
+    (args) => args.with(mountIndex, args[mountIndex].replace(",readonly", "")),
+    (args) => args.with(wrapperIndex, `${args[wrapperIndex]}\ntrue`),
+    (args) => args.with(2, args[2].replace("-law", "-law-retry")),
+    (args) => args.with(args.indexOf("--workdir=/usr/bin"), "--workdir=/home/a/iat-source"),
+  ];
+  for (const mutate of mutations) {
+    assert.throws(
+      () => validateDisposableDevnetHermeticDockerCreateArguments(mutate([...plan.createArguments])),
+      /DISPOSABLE_DEVNET_HERMETIC_DOCKER_/u,
+    );
+  }
+  for (const mutate of [
+    (args) => args.with(args.indexOf("--user=65534:65534"), "--user=0:0"),
+    (args) => [...args, "--detach"],
+    (args) => args.with(args.indexOf("--workdir=/iat-private/home/a/iat-source"), "--workdir=/iat-build"),
+  ]) {
+    assert.throws(
+      () => validateDisposableDevnetHermeticDockerExecArguments(mutate([...plan.execArguments])),
+      /HERMETIC_DOCKER_EXEC_GRAMMAR_HOLD/u,
+    );
+  }
+});
+
+test("B24 exact frame parser binds same-container pre post and exported ELF bytes", () => {
+  const plan = hermeticPlan("economy", 2);
+  const artifact = hermeticArtifact();
+  const result = validateDisposableDevnetHermeticFrameSequence(
+    hermeticFrameBytes(plan.contract, artifact),
+    { contract: plan.contract, exportedArtifactBytes: artifact },
+  );
+  assert.equal(result.status, "HOLD_HERMETIC_CONTRACT_STRUCTURAL_VALIDATION_ONLY");
+  assert.equal(result.ready, false);
+  assert.equal(result.structuralContractValidated, true);
+  assert.equal(result.exactSourceReceiptValidated, false);
+  assert.equal(result.executionProvenanceObserved, false);
+  assert.equal(result.buildExecutionObserved, false);
+  assert.equal(result.blocker, "HERMETIC_MOUNT_CAUSALITY_UNPROVEN");
+  assert.equal(result.mainnetStatus, "HOLD");
+});
+
+test("B24 frame parser rejects prefix suffix duplicate reorder and every binding mutation", () => {
+  const plan = hermeticPlan();
+  const artifact = hermeticArtifact();
+  const validate = (bytes, candidateArtifact = artifact) => (
+    validateDisposableDevnetHermeticFrameSequence(bytes, {
+      contract: plan.contract,
+      exportedArtifactBytes: candidateArtifact,
+    })
+  );
+  const canonical = hermeticFrameBytes(plan.contract, artifact);
+  for (const bytes of [
+    Buffer.concat([Buffer.from("prefix"), canonical]),
+    Buffer.concat([canonical, Buffer.from("suffix")]),
+    Buffer.concat([canonical, canonical]),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => [frames[1], frames[0], frames[2]]),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[0].kind = "economy";
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[1].ordinal = 2;
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[2].contractSha256 = "0".repeat(64);
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[2].recipeSha256 = "0".repeat(64);
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[1].sourceManifestSha256 = "0".repeat(64);
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[0].toolchainClosureSha256 = "0".repeat(64);
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[2].artifactSha256 = "0".repeat(64);
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[2].artifactByteLength += 1;
+      return frames;
+    }),
+    hermeticFrameBytes(plan.contract, artifact, (frames) => {
+      frames[2].cargoExitStatus = 1;
+      return frames;
+    }),
+  ]) {
+    assert.throws(validate.bind(null, bytes), /DISPOSABLE_DEVNET_HERMETIC_/u);
+  }
+  const changedArtifact = Buffer.from(artifact);
+  changedArtifact[100] ^= 1;
+  assert.throws(
+    () => validate(canonical, changedArtifact),
+    /FRAME_BINDING_HOLD/u,
+  );
+});
+
+test("B24 fixed wrapper is frame-only private-copy offline build design", () => {
+  const script = DISPOSABLE_DEVNET_HERMETIC_CONTAINER_WRAPPER_SCRIPT;
+  const initializer = DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SCRIPT;
+  assert.equal(sha256(Buffer.from(script, "utf8")), DISPOSABLE_DEVNET_HERMETIC_WRAPPER_SHA256);
+  assert.equal(
+    sha256(Buffer.from(initializer, "utf8")),
+    DISPOSABLE_DEVNET_HERMETIC_INITIALIZER_SHA256,
+  );
+  assert.match(script, /^set -euo pipefail/mu);
+  assert.match(initializer, /PRIVATE_ROOT_NOT_EMPTY/u);
+  assert.match(initializer, /ROOT_IDENTITY/u);
+  assert.match(initializer, /PRIVATE_INPUT_CLOSURE_INITIALIZED/u);
+  assert.match(initializer, /\/usr\/bin\/chown -R 0:0/u);
+  assert.match(script, /BUILD_IDENTITY/u);
+  assert.match(script, /PRIVATE_INPUTS_NOT_READY/u);
+  assert.match(script, /exported=\/iat-host\/export\/\$output_name/u);
+  assert.match(script, /set -o noclobber; exec 3>/u);
+  assert.match(script, /== 65534:65534/u);
+  assert.match(script, /EXPORTED_ARTIFACT_BOUNDARY/u);
+  assert.match(initializer, /\/usr\/bin\/cp -a --no-preserve=ownership --reflink=never/u);
+  assert.match(script, /source\.private\.pre/u);
+  assert.match(script, /source\.private\.post/u);
+  assert.match(script, /SOURCE_POST_CARGO/u);
+  assert.doesNotMatch(script, /\bsetpriv\b|\bchown\b/u);
+  assert.match(script, /TMPDIR=\/iat-build\/tmp/u);
+  assert.match(script, /1>&2 2>&2/u);
+  assert.match(script, /CARGO_NET_OFFLINE=true/u);
+  assert.match(script, /--offline --skip-tools-install/u);
+  assert.match(script, /PRIVATE_ARTIFACT_EXPORTED/u);
+  assert.match(script, /ARTIFACT_EXPORT/u);
+  assert.doesNotMatch(script, /\bdocker\b/iu);
+  assert.doesNotMatch(initializer, /\bdocker\b/iu);
+  assert.doesNotMatch(script, /\bcurl\b|\bwget\b|\bfetch\b/iu);
+});
+
+test("B26 retained-file ledger reopens and binds every exact same file", (t) => {
+  const root = makeTemporaryRoot(t, "iat-b3-b26-ledger-");
+  for (const name of ["inputs", "logs", "artifacts"]) mkdirSync(join(root, name));
+  writeFileSync(join(root, "inputs", "source.cjson"), "source\n");
+  writeFileSync(join(root, "logs", "01.stdout.bin"), "stdout\n");
+  writeFileSync(join(root, "artifacts", "run-1-law.so"), hermeticArtifact());
+  const descriptors = [
+    retainedDescriptor(root, "inputs/source.cjson"),
+    retainedDescriptor(root, "logs/01.stdout.bin"),
+    retainedDescriptor(root, "artifacts/run-1-law.so"),
+  ];
+  const ledger = createDisposableDevnetRetainedFileLedger(root, descriptors);
+  assert.equal(ledger.schema, DISPOSABLE_DEVNET_RETAINED_FILE_LEDGER_SCHEMA);
+  assert.equal(ledger.status, "HOLD_RETAINED_FILE_LEDGER_STRUCTURAL_VALIDATION_ONLY");
+  assert.equal(ledger.ready, false);
+  assert.equal(ledger.executionProvenanceObserved, false);
+  assert.equal(ledger.outputStagePromotionAuthorized, false);
+  assert.equal(validateDisposableDevnetRetainedFileLedger(root, ledger), ledger);
+
+  const forged = structuredClone(ledger);
+  forged.executionProvenanceObserved = true;
+  assert.throws(
+    () => validateDisposableDevnetRetainedFileLedger(root, forged),
+    /RETAINED_FILE_LEDGER_SHAPE_HOLD/u,
+  );
+  writeFileSync(join(root, "logs", "01.stdout.bin"), "changed\n");
+  assert.throws(
+    () => validateDisposableDevnetRetainedFileLedger(root, ledger),
+    /RETAINED_FILE_(?:SET_OR_IDENTITY|LEDGER_REVALIDATION)_HOLD/u,
+  );
+});
+
+test("B26 retained-file ledger rejects inode directory replacement hardlink and extra file", (t) => {
+  for (const attack of ["replacement", "directory", "hardlink", "missing", "extra"]) {
+    const root = makeTemporaryRoot(t, `iat-b3-b26-ledger-${attack}-`);
+    mkdirSync(join(root, "logs"));
+    const path = join(root, "logs", "01.stdout.bin");
+    writeFileSync(path, "original\n");
+    const ledger = createDisposableDevnetRetainedFileLedger(
+      root,
+      [retainedDescriptor(root, "logs/01.stdout.bin")],
+    );
+    if (attack === "replacement") {
+      const replacement = join(root, "replacement.bin");
+      const displaced = join(root, "displaced.bin");
+      writeFileSync(replacement, "original\n");
+      renameSync(path, displaced);
+      renameSync(replacement, path);
+      rmSync(displaced);
+    } else if (attack === "directory") {
+      const replacement = join(root, "replacement-logs");
+      const displaced = join(root, "displaced-logs");
+      mkdirSync(replacement);
+      writeFileSync(join(replacement, "01.stdout.bin"), "original\n");
+      renameSync(join(root, "logs"), displaced);
+      renameSync(replacement, join(root, "logs"));
+      rmSync(displaced, { recursive: true });
+    } else if (attack === "hardlink") {
+      linkSync(path, join(root, "logs", "alias.bin"));
+    } else if (attack === "missing") {
+      rmSync(path);
+    } else {
+      writeFileSync(join(root, "logs", "extra.bin"), "extra\n");
+    }
+    assert.throws(
+      () => validateDisposableDevnetRetainedFileLedger(root, ledger),
+      /RETAINED_FILE_(?:LEDGER|HARDLINK|SET_OR_IDENTITY)/u,
+      attack,
+    );
+  }
+});
+
+test("B26 final output promotion binds the transcript as one additional same file", (t) => {
+  const root = makeTemporaryRoot(t, "iat-b3-b26-promotion-");
+  const evidenceRoot = join(root, "evidence");
+  mkdirSync(evidenceRoot);
+  mkdirSync(join(evidenceRoot, "inputs"));
+  const evidencePath = join(evidenceRoot, "inputs", "evidence.cjson");
+  writeFileSync(evidencePath, "evidence\n");
+  const evidenceDescriptors = [retainedDescriptor(evidenceRoot, "inputs/evidence.cjson")];
+  const evidenceLedger = createDisposableDevnetRetainedFileLedger(
+    evidenceRoot,
+    evidenceDescriptors,
+  );
+  const transcriptPath = join(root, "transcript.json");
+  writeFileSync(transcriptPath, "{\"ready\":false}\n");
+  const transcriptDescriptor = retainedDescriptor(root, "transcript.json");
+  const promotion = createDisposableDevnetFinalOutputStagePromotion({
+    stageRoot: root,
+    retainedEvidenceLedger: evidenceLedger,
+    retainedEvidenceDescriptors: evidenceDescriptors,
+    transcriptDescriptor,
+  });
+  assert.equal(promotion.schema, DISPOSABLE_DEVNET_OUTPUT_PROMOTION_SCHEMA);
+  assert.equal(promotion.status, "HOLD_OUTPUT_STAGE_PROMOTION_STRUCTURALLY_VALIDATED_ONLY");
+  assert.equal(promotion.outputStageFilesystemPromotionValidated, true);
+  assert.equal(promotion.executionProvenanceObserved, false);
+  assert.equal(promotion.buildExecutionObserved, false);
+  assert.equal(promotion.releaseAuthorized, false);
+  assert.equal(promotion.mainnetStatus, "HOLD");
+  assert.equal(promotion.finalLedger.files.length, 2);
+  assert.equal(
+    validateDisposableDevnetRetainedFileLedger(root, promotion.finalLedger),
+    promotion.finalLedger,
+  );
+  assert.throws(
+    () => createDisposableDevnetFinalOutputStagePromotion({
+      stageRoot: root,
+      retainedEvidenceLedger: evidenceLedger,
+      retainedEvidenceDescriptors: evidenceDescriptors,
+      transcriptDescriptor: { ...transcriptDescriptor, sha256: "0".repeat(64) },
+    }),
+    /RETAINED_FILE_SET_OR_IDENTITY_HOLD/u,
+  );
+  const promotedEvidenceForgery = structuredClone(evidenceLedger);
+  promotedEvidenceForgery.outputStagePromotionAuthorized = true;
+  const { ledgerSha256: discardedLedgerSha256, ...forgedCore } = promotedEvidenceForgery;
+  assert.match(discardedLedgerSha256, /^[0-9a-f]{64}$/u);
+  promotedEvidenceForgery.ledgerSha256 = disposableDevnetExecutionCanonicalSha256(forgedCore);
+  assert.throws(
+    () => createDisposableDevnetFinalOutputStagePromotion({
+      stageRoot: root,
+      retainedEvidenceLedger: promotedEvidenceForgery,
+      retainedEvidenceDescriptors: evidenceDescriptors,
+      transcriptDescriptor,
+    }),
+    /RETAINED_FILE_LEDGER_SHAPE_HOLD/u,
+  );
+  for (const mutate of [
+    (ledger) => { ledger.expectedDescriptorClosureSha256 = "0".repeat(64); },
+    (ledger) => { ledger.directories[0].modifiedNanoseconds = "0"; },
+  ]) {
+    const forgedLedger = structuredClone(evidenceLedger);
+    mutate(forgedLedger);
+    const { ledgerSha256: ignored, ...forgedLedgerCore } = forgedLedger;
+    assert.match(ignored, /^[0-9a-f]{64}$/u);
+    forgedLedger.ledgerSha256 = disposableDevnetExecutionCanonicalSha256(forgedLedgerCore);
+    assert.throws(
+      () => createDisposableDevnetFinalOutputStagePromotion({
+        stageRoot: root,
+        retainedEvidenceLedger: forgedLedger,
+        retainedEvidenceDescriptors: evidenceDescriptors,
+        transcriptDescriptor,
+      }),
+      /RETAINED_FILE_LEDGER_REVALIDATION_HOLD/u,
+    );
+  }
+  writeFileSync(evidencePath, "tampered\n");
+  assert.throws(
+    () => validateDisposableDevnetRetainedFileLedger(root, promotion.finalLedger),
+    /RETAINED_FILE_(?:SET_OR_IDENTITY|LEDGER_REVALIDATION)_HOLD/u,
+  );
 });
 
 test("B15 executable module closure is exact-byte pinned before dynamic evaluation", () => {
@@ -580,6 +1186,12 @@ test("B15 source and docs retain private-brand offline nondeployment boundary", 
     runStart,
   );
   assert.ok(runStart >= 0 && runGuard > runStart);
+  const preGuardRunSource = source.slice(runStart, runGuard);
+  assert.match(preGuardRunSource, /assertDirectInvocation\(\)/u);
+  assert.doesNotMatch(
+    preGuardRunSource,
+    /(?:spawnSync|spawnPinnedDocker|executePinnedContainer|validateOutputRoot|validateHostRuntime|validateDockerExecutable|observePinnedDocker|readStableRegularFile|mkdirSync|openSync|writeExclusiveFile|loadExactDeclaredHeadSource)\s*\(/u,
+  );
   for (const boundary of [
     "validateOutputRoot(request.outputRoot)",
     "validateHostRuntime(environment)",
@@ -602,13 +1214,35 @@ test("B15 source and docs retain private-brand offline nondeployment boundary", 
   assert.doesNotMatch(source, /@solana\/web3\.js/u);
   assert.match(source, /"--pull=never"/u);
   assert.match(source, /"--network=none"/u);
+  assert.match(source, /"--user=65534:65534"/u);
+  assert.match(source, /record\.Config\?\.User/u);
+  assert.match(source, /uid=0,gid=0,mode=0755/u);
+  assert.match(source, /uid=65534,gid=65534,mode=0700/u);
+  assert.match(source, /PRIVATE_INPUT_CLOSURE_INITIALIZED/u);
+  assert.match(source, /requireStopBeforeArtifactRead: true/u);
   assert.match(source, /"container", "inspect"/u);
-  assert.match(source, /"container", "start", "--attach"/u);
+  assert.match(source, /"container", "start", name/u);
+  assert.match(source, /"container",\s+"exec"/u);
+  assert.match(source, /"container", "stop", "--time=10"/u);
   assert.match(source, /"container", "rm", "--force"/u);
+  assert.match(source, /IMPLEMENTED_HARD_DISABLED_PENDING_INDEPENDENT_ACCEPTANCE/u);
+  assert.match(source, /CONTAINER_PRIVATE_TMPFS/u);
+  assert.match(source, /PRIVATE_INPUT_CLOSURE_PRE_CARGO/u);
+  assert.match(source, /PRIVATE_INPUT_CLOSURE_POST_CARGO/u);
+  assert.match(source, /PRIVATE_ARTIFACT_EXPORTED/u);
+  assert.match(source, /SAME_BUILD_CONTAINER_PRIVATE_COPY_PRE_POST_FRAMES/u);
   assert.match(documentation, /does not generate identities/u);
   assert.match(documentation, /no RPC, signing, deployment/u);
   assert.match(documentation, /never promote a transcript read back from disk/u);
   assert.match(documentation, /HERMETIC_MOUNT_CAUSALITY_UNPROVEN/u);
+  assert.match(
+    documentation,
+    /HERMETIC_SAME_CONTAINER_EXECUTION_CONTRACT_NOT_INDEPENDENTLY_ACCEPTED/u,
+  );
+  assert.match(documentation, /FINAL_RETAINED_FILE_LEDGER_NOT_INDEPENDENTLY_ACCEPTED/u);
+  assert.match(documentation, /No Docker API, image creation, container, or build was invoked/u);
+  assert.match(documentation, /uid\/gid 65534/u);
+  assert.match(documentation, /exactly\s+three\s+canonical JSON frames/u);
   assert.match(documentation, new RegExp(DISPOSABLE_DEVNET_EXECUTION_GATE_ENVIRONMENT_VARIABLE, "u"));
   assert.match(documentation, new RegExp(DISPOSABLE_DEVNET_EXECUTION_GATE_VALUE, "u"));
 });

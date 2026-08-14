@@ -981,6 +981,7 @@ test("current exact source exits 2/HOLD with enumerated blockers, never ASSESSME
   assert.equal(assessment.status, "HOLD");
   const codes = new Set(assessment.blockers.map(({ code }) => code));
   assert(codes.has("READINESS_INPUT_REQUIRED"));
+  assert(codes.has("LEGACY_COMBINED_GATE_DEPRECATED"));
   assert(!codes.has("ASSESSMENT_ERROR"));
   assert.equal(assessment.safety.networkAccess, false);
   assert.equal(assessment.safety.signing, false);
@@ -1002,6 +1003,7 @@ test("orchestrator source and docs freeze two lanes and remain observation-only"
   assert.doesNotMatch(source, /\.(?:sendRawTransaction|sendTransaction|requestAirdrop|confirmTransaction)\s*\(/u);
   assert.doesNotMatch(source, /\b(?:Keypair|TransactionInstruction|SystemProgram)\b/u);
   assert.doesNotMatch(source, /api\.mainnet-beta\.solana\.com/iu);
+  assert.doesNotMatch(source, /orderedBlockers\.length === 0 \? "GO"/u);
   assert.doesNotMatch(source, /\b(?:writeFile|writeFileSync|appendFile|appendFileSync|createWriteStream)\b/u);
   assert.equal(
     packageManifest.scripts["check:iat-b3-all-feature-devnet-readiness"],

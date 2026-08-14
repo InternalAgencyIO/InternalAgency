@@ -1948,13 +1948,17 @@ export function assessAllFeatureDevnetReadiness({
       failurePolicyReady: failure.ready,
     });
   }
+  addBlocker(
+    blockers,
+    "LEGACY_COMBINED_GATE_DEPRECATED",
+    "the legacy combined assessor is observation-only; use the non-circular pre/post-Devnet split and an independent pre-verdict before requesting authorization",
+    "split-gate-contract",
+  );
   const orderedBlockers = Object.freeze(
     [...blockers.values()].sort((left, right) =>
       left.code.localeCompare(right.code) || left.detail.localeCompare(right.detail)),
   );
-  const status = testOnly
-    ? "HOLD_TEST"
-    : orderedBlockers.length === 0 ? "GO" : "HOLD";
+  const status = testOnly ? "HOLD_TEST" : "HOLD";
   const withoutDigest = {
     schema: ALL_FEATURE_DEVNET_ASSESSMENT_SCHEMA,
     status,
@@ -2065,7 +2069,7 @@ if (invokedPath === import.meta.url) {
   try {
     const assessment = runAllFeatureDevnetReadinessAssessment(parseCli(process.argv.slice(2)));
     process.stdout.write(`${JSON.stringify(assessment, null, 2)}\n`);
-    if (assessment.status !== "GO") process.exitCode = 2;
+    process.exitCode = 2;
   } catch (error) {
     const failure = {
       schema: ALL_FEATURE_DEVNET_ASSESSMENT_SCHEMA,
