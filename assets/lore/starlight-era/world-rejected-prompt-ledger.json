@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "appendOnly": true,
-  "updatedAt": "2026-08-13T09:50:00.000Z",
-  "coverageStatus": "runtime-complete-for-locally-available-active-and-archived-codex-sessions-plus-deduplicated-pre-batch-220-repository-corpus-plus-bound-active-checkpoint-and-reconciled-campaign-visual-rejects",
+  "updatedAt": "2026-08-20T05:20:39.347Z",
+  "coverageStatus": "runtime-complete-for-locally-available-active-and-archived-codex-sessions-plus-deduplicated-pre-batch-220-repository-corpus-plus-bound-active-and-recent-checkpoints-and-reconciled-campaign-visual-rejects",
   "policy": {
     "oneEntryPerFailedRuntimeOccurrence": true,
     "occurrenceKey": "The observation fingerprint is image_generation_end.call_id plus exact prompt SHA-256. Cross-thread fork copies sharing that pair are collapsed into one runtime occurrence; the earliest observation supplies canonical time/thread fields and every observed thread remains in observedIn.",
@@ -28,7 +28,7 @@
     "physicalFailedEventsScanned": 1896,
     "activeCheckpointBoundOccurrenceCount": 139,
     "activeCheckpointEntriesWithoutNormalizedFailedRuntimePromptMatchCount": 135,
-    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1471,
+    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1476,
     "historicalExactPromptOccurrenceCount": 249,
     "historicalCanonicalSourceAliasCount": 4,
     "knownTextMissingHistoricalEvidenceCount": 0,
@@ -41,9 +41,10 @@
     "recoveredLaunchAliasCount": 3,
     "campaignAmbiguousAliasCount": 2,
     "campaignRecoveredCompletedAmbiguousCount": 3,
-    "mediaManifestRejectedExactPromptCount": 7,
+    "mediaManifestRejectedExactPromptCount": 8,
     "mediaManifestRejectedPromptUnrecoverableCount": 0,
-    "mediaManifestCampaignAliasCount": 15
+    "mediaManifestCampaignAliasCount": 15,
+    "recentCheckpointRejectedPromptCount": 4
   },
   "activeCheckpointBinding": {
     "path": "assets/lore/starlight-era/batch-382-georgia-mars-surface-expedition-checkpoint.json",
@@ -61433,6 +61434,44 @@
           "jsonlLine": 27113,
           "outputSha256Matched": "2BEA1F7B946EE5CB29DF1AE064A9EA87D4930BB72F19FFBB8C2424D3B199DF90"
         }
+      },
+      {
+        "entryId": "media-manifest-rejected-a8fb6beecfc626a4e26df7b1c70e250bfa0b437a9cb8ebeca4cfc6419c4ce488",
+        "batch": 389,
+        "scene": 1576,
+        "observedAt": "2026-08-20T05:19:37.584Z",
+        "rawOutput": {
+          "path": "progress-reports/codex-generated-media/blobs/11/11721cc0a26f0579949b7cce95b73f964784846156b2bf4e151b6a02b6d252ce.png",
+          "sha256": "11721CC0A26F0579949B7CCE95B73F964784846156B2BF4E151B6A02B6D252CE",
+          "bytes": 2602783,
+          "state": "preserved"
+        },
+        "sourceAudit": {
+          "sourceKind": "generated-media-manifest-rejected-occurrence",
+          "path": "progress-reports/codex-generated-media/manifest.jsonl",
+          "line": 4079,
+          "occurrenceId": "a8fb6beecfc626a4e26df7b1c70e250bfa0b437a9cb8ebeca4cfc6419c4ce488",
+          "sourceRecordSha256": "0877FB4CDA51520086C41D80D0B54B9FCA4D1421F3CED3F6AF4407A01D9D6EFD"
+        },
+        "immutable": true,
+        "status": "completed-output-rejected-exact-runtime-prompt-recovered",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered riverfront pavilion on Paramaribo's Waterkant, with the complete high arc of the Jules Wijdenbosch Bridge over the Suriname River, secular wooden waterfront facades, a broad quay, rain trees, and riverboats secured far away while silent heat lightning remains on the horizon. Polar airship couture is fictional public fashion at this real Suriname location: pressure-envelope ribs, gondola panels, brass navigation rings, mooring geometry, cloud-silver surfaces and aurora piping. Nobody is flying or inside a vehicle. Country-led hybrid: two or three looks carry large secular Jules-Wijdenbosch-Bridge arc, Suriname-River current, Waterkant-quay, wooden-shutter, riverboat, rain-tree, cassava-leaf and market-fruit fields; at least two also carry polar-airship construction. No literal Suriname flag, central star, coat of arms, official emblem or sacred symbol, religious architecture, copied Indigenous or Maroon ceremonial pattern, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a clay-red sleeveless cropped airship bodice showing a narrow ordinary midriff with a complete open back to the secure waist over a rice-white upper-thigh skort carrying bridge-arch and gondola geometry; Ellie wears a rainforest-emerald short-sleeve upper-thigh airship mini with covered waist and closed back, carrying Waterkant shutters and pressure-envelope ribbing; Alia wears a Suriname-river-blue high-neck sleeveless upper-thigh tailored romper with covered waist and closed back, carrying quay and brass-navigation-ring fields; ECE wears a sea-turtle-teal one-shoulder cropped airship top showing a narrow ordinary midriff with a complete open back to the secure waist over a granite-silver upper-thigh skort with aurora piping, plus the scene's only opaque original-rainbow knee socks ending below both kneecaps. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny collarless golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge in Radiance's protected bay, outside every odd-prop and mission lane; no adult hand is reassigned. The active odd prop is AI ECE's giant tuning fork instrument, fully enclosed inside a fixed sealed transparent display. AI ECE touches only the exterior enclosure frame with one hand; nobody touches the prop and every mascot remains in a separate protected bay. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is active: AI ECE alone wears the specified original independent rainbow gradient; nobody else wears hosiery.\n\nAnatomy-first relationship: Alia stands fully isolated at far right and uses both hands only on the inert mission prop. Radiance stands beside the protected mascot lounge with both hands open and visible. ECE occupies a separate bay beside the secured odd-prop enclosure, with one hand on its exterior frame and her other hand open. Ellie holds a separated finished-turn pose. There is no human contact and no hidden hand. Emotions: Radiance: awe; Ellie: tender affection; Alia: magnetic confidence; AI ECE: romantic joy. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAlia alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated two-hand inspection stance. One hand supports the grip from below; the other stabilizes the upper frame with its index straight outside the empty guard. The inert mechanism is visibly locked open. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the river, bridge traffic and public quay. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nSilent heat lightning stays beyond the pavilion; dry footing, faces, bridge, target and complete backstop remain bright and readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "5CBF25B02E097F269D6F27DEB4D0D6E3F29156518561C5EDC7C632BAD254BF68",
+          "normalizedSha256": "A8F294E1093A808740C5EBA0031EDBBF886938D65CD0E91DCA5D07427B919736",
+          "encoding": "utf-8",
+          "bytes": 5126,
+          "chars": 5126,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "terminalSourceAudit": {
+          "sourceKind": "codex-session-completed-image-generation-end",
+          "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+          "callId": "exec-800c9518-feed-4cdc-9ab6-eed50129adaa",
+          "timestamp": "2026-08-20T05:19:37.587Z",
+          "jsonlLine": 416,
+          "outputSha256Matched": "11721CC0A26F0579949B7CCE95B73F964784846156B2BF4E151B6A02B6D252CE"
+        }
       }
     ],
     "unrecoverablePromptEvidence": [],
@@ -61646,6 +61685,192 @@
           "sourceRecordSha256": "0529A52B10CC616DEED7E0D0C542912B38C63BADED1AA38B8FF28C951ED960CF"
         },
         "immutable": true
+      }
+    ]
+  },
+  "recentCheckpointRejectedEvidence": {
+    "status": "recent-checkpoint-exact-prompt-and-raw-provenance-bound",
+    "note": "These immutable checkpoint entries retain exact launch text for completed, rejected, interrupted, and explicit no-byte occurrences. Cross-source appearances are evidence aliases and do not imply acceptance.",
+    "bindings": [
+      {
+        "path": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+        "batch": 389,
+        "country": "Suriname",
+        "checkpointSha256": "525705C4B4D15E3657AE9B7F1FCE1AB50E26F6CD7481FC14470651CEFD8BD775",
+        "ledgerSha256": "19BDE455629564357F0D23643CB2ECB8CF6F90614E019AC28CBAEC007F2EF4C2",
+        "entryCount": 4,
+        "exactPromptShaPasses": 4
+      }
+    ],
+    "entryCount": 4,
+    "entries": [
+      {
+        "entryId": "batch389-scene1576-pass1-provider-switch",
+        "scene": 1576,
+        "phase": "pass-1",
+        "status": "completed-rejected-hard-safety-and-provider-superseded",
+        "bankExecCallId": "call_1LgWqkSkPieEqDoRZWFpuZ2w",
+        "callId": "exec-800c9518-feed-4cdc-9ab6-eed50129adaa",
+        "callIdProvenance": null,
+        "subcallIndex": 0,
+        "launchedAt": "2026-08-20T05:18:33.556Z",
+        "occurredAt": "2026-08-20T05:19:37.587Z",
+        "provider": "built-in-imagegen",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-389/scene-1576-initial-prompt.txt",
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered riverfront pavilion on Paramaribo's Waterkant, with the complete high arc of the Jules Wijdenbosch Bridge over the Suriname River, secular wooden waterfront facades, a broad quay, rain trees, and riverboats secured far away while silent heat lightning remains on the horizon. Polar airship couture is fictional public fashion at this real Suriname location: pressure-envelope ribs, gondola panels, brass navigation rings, mooring geometry, cloud-silver surfaces and aurora piping. Nobody is flying or inside a vehicle. Country-led hybrid: two or three looks carry large secular Jules-Wijdenbosch-Bridge arc, Suriname-River current, Waterkant-quay, wooden-shutter, riverboat, rain-tree, cassava-leaf and market-fruit fields; at least two also carry polar-airship construction. No literal Suriname flag, central star, coat of arms, official emblem or sacred symbol, religious architecture, copied Indigenous or Maroon ceremonial pattern, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a clay-red sleeveless cropped airship bodice showing a narrow ordinary midriff with a complete open back to the secure waist over a rice-white upper-thigh skort carrying bridge-arch and gondola geometry; Ellie wears a rainforest-emerald short-sleeve upper-thigh airship mini with covered waist and closed back, carrying Waterkant shutters and pressure-envelope ribbing; Alia wears a Suriname-river-blue high-neck sleeveless upper-thigh tailored romper with covered waist and closed back, carrying quay and brass-navigation-ring fields; ECE wears a sea-turtle-teal one-shoulder cropped airship top showing a narrow ordinary midriff with a complete open back to the secure waist over a granite-silver upper-thigh skort with aurora piping, plus the scene's only opaque original-rainbow knee socks ending below both kneecaps. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny collarless golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge in Radiance's protected bay, outside every odd-prop and mission lane; no adult hand is reassigned. The active odd prop is AI ECE's giant tuning fork instrument, fully enclosed inside a fixed sealed transparent display. AI ECE touches only the exterior enclosure frame with one hand; nobody touches the prop and every mascot remains in a separate protected bay. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is active: AI ECE alone wears the specified original independent rainbow gradient; nobody else wears hosiery.\n\nAnatomy-first relationship: Alia stands fully isolated at far right and uses both hands only on the inert mission prop. Radiance stands beside the protected mascot lounge with both hands open and visible. ECE occupies a separate bay beside the secured odd-prop enclosure, with one hand on its exterior frame and her other hand open. Ellie holds a separated finished-turn pose. There is no human contact and no hidden hand. Emotions: Radiance: awe; Ellie: tender affection; Alia: magnetic confidence; AI ECE: romantic joy. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAlia alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated two-hand inspection stance. One hand supports the grip from below; the other stabilizes the upper frame with its index straight outside the empty guard. The inert mechanism is visibly locked open. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the river, bridge traffic and public quay. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nSilent heat lightning stays beyond the pavilion; dry footing, faces, bridge, target and complete backstop remain bright and readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "5CBF25B02E097F269D6F27DEB4D0D6E3F29156518561C5EDC7C632BAD254BF68",
+          "encoding": "utf-8",
+          "bytes": 5126,
+          "chars": 5126,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-389/raw/pass-1/scene-1576-built-in-provider-superseded-rejected.png",
+          "sha256": "11721CC0A26F0579949B7CCE95B73F964784846156B2BF4E151B6A02B6D252CE",
+          "bytes": 2602783
+        },
+        "auditRef": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json#/renderPasses/pass1/events/0",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-389/scene-1576-initial-prompt.txt",
+          "rawPath": "tmp/world-195x4/batch-389/raw/pass-1/scene-1576-built-in-provider-superseded-rejected.png",
+          "sessionLog": "Codex session 01a01d88-38a1-7763-b74d-470bc7bfe70e; local absolute session path intentionally omitted"
+        },
+        "immutable": true,
+        "sourceAudit": {
+          "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
+          "path": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+          "checkpointSha256": "525705C4B4D15E3657AE9B7F1FCE1AB50E26F6CD7481FC14470651CEFD8BD775",
+          "ledgerSha256": "19BDE455629564357F0D23643CB2ECB8CF6F90614E019AC28CBAEC007F2EF4C2",
+          "entryId": "batch389-scene1576-pass1-provider-switch"
+        }
+      },
+      {
+        "entryId": "batch389-scene1577-pass1-provider-switch",
+        "scene": 1577,
+        "phase": "pass-1",
+        "status": "client-terminated-for-provider-switch-no-terminal-no-bytes",
+        "bankExecCallId": "call_1LgWqkSkPieEqDoRZWFpuZ2w",
+        "callId": null,
+        "callIdProvenance": "nested-call-id-not-surfaced-before-parent-exec-termination",
+        "subcallIndex": 1,
+        "launchedAt": "2026-08-20T05:18:33.556Z",
+        "occurredAt": "2026-08-20T05:20:39.347Z",
+        "provider": "built-in-imagegen",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-389/scene-1577-initial-prompt.txt",
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered panoramic platform on Brownsberg overlooking the complete Brokopondo Reservoir at clear golden hour, with the vast reservoir, rainforest islands, red-earth ridge, layered Guiana Shield hills, distant treetops and one clearly empty marked water route. Polar airship couture is fictional public fashion at this real Suriname location: pressure-envelope ribs, gondola panels, brass navigation rings, mooring geometry, cloud-silver surfaces and aurora piping. Nobody is flying or inside a vehicle. Country-led hybrid: two or three looks carry large secular Brokopondo-reservoir, Brownsberg-ridge, rainforest-island, red-earth-road, howler-monkey silhouette, tropical-bird wing and water-route fields; at least two also carry polar-airship construction. No literal Suriname flag, central star, coat of arms, official emblem or sacred symbol, religious architecture, copied Indigenous or Maroon ceremonial pattern, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a golden-yellow cap-sleeve cropped airship jacket showing a narrow ordinary midriff over rainforest-emerald upper-thigh shorts, closed back, with reservoir and gondola-panel fields; Ellie wears a secure strapless Suriname-river-blue cropped airship bodice showing a narrow ordinary midriff with a complete open back to the secure waist over a rice-white upper-thigh skort with brass navigation rings; Alia wears a bromeliad-magenta sleeveless upper-thigh airship mini with covered waist and closed back, carrying rainforest-island and pressure-envelope fields; ECE wears a secure strapless granite-silver upper-thigh airship mini with covered waist and closed back, carrying red-earth ridge and aurora-piping fields. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny collarless golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge in Ellie's protected bay, outside every odd-prop and mission lane; no adult hand is reassigned. The odd-prop roll is inactive; no odd prop appears. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Ellie stands beside the protected mascot lounge with both hands open and visible. Radiance and Alia remain in separate depth lanes with open visible hands. The stored relationship motion is resolved as noncontact eye lines after the movement has ended. There is no human contact and no hidden hand. Emotions: Radiance: romantic joy; Ellie: intense curiosity; Alia: fear and urgent vulnerability; AI ECE: awe. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the reservoir, wildlife and public trail. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nGolden-hour light keeps the dry platform, faces, reservoir, target and complete backstop evenly readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "19B6501D7CC304E345D6D3E336676010C8DDEB2CECB3157D01DDBA1F87B47096",
+          "encoding": "utf-8",
+          "bytes": 4624,
+          "chars": 4624,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json#/renderPasses/pass1/events/1",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-389/scene-1577-initial-prompt.txt",
+          "rawPath": null,
+          "sessionLog": "Codex session 01a01d88-38a1-7763-b74d-470bc7bfe70e; local absolute session path intentionally omitted"
+        },
+        "immutable": true,
+        "sourceAudit": {
+          "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
+          "path": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+          "checkpointSha256": "525705C4B4D15E3657AE9B7F1FCE1AB50E26F6CD7481FC14470651CEFD8BD775",
+          "ledgerSha256": "19BDE455629564357F0D23643CB2ECB8CF6F90614E019AC28CBAEC007F2EF4C2",
+          "entryId": "batch389-scene1577-pass1-provider-switch"
+        }
+      },
+      {
+        "entryId": "batch389-scene1578-pass1-provider-switch",
+        "scene": 1578,
+        "phase": "pass-1",
+        "status": "client-terminated-for-provider-switch-no-terminal-no-bytes",
+        "bankExecCallId": "call_1LgWqkSkPieEqDoRZWFpuZ2w",
+        "callId": null,
+        "callIdProvenance": "nested-call-id-not-surfaced-before-parent-exec-termination",
+        "subcallIndex": 2,
+        "launchedAt": "2026-08-20T05:18:33.556Z",
+        "occurredAt": "2026-08-20T05:20:39.347Z",
+        "provider": "built-in-imagegen",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-389/scene-1578-initial-prompt.txt",
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered conservation overlook in the Central Suriname Nature Reserve during coastal sea mist, with the complete rounded granite Voltzberg dome above primary rainforest, Raleigh Falls on the Coppename River, layered canopy, distant macaws and one empty river route. Polar airship couture is fictional public fashion at this real Suriname location: pressure-envelope ribs, gondola panels, brass navigation rings, mooring geometry, cloud-silver surfaces and aurora piping. Nobody is flying or inside a vehicle. Theme-led original: the landmark remains the Suriname read while all four women's looks use distinct polar-airship pressure-envelope ribs, gondola panels, brass navigation rings, mooring geometry, cloud-silver surfaces and aurora piping. No literal Suriname flag, central star, coat of arms, official emblem or sacred symbol, religious architecture, copied Indigenous or Maroon ceremonial pattern, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a night-charcoal high-neck sleeveless upper-thigh airship mini with covered waist and closed back, carrying granite-dome and pressure-envelope fields; Ellie wears a secure strapless rainforest-emerald upper-thigh airship mini with covered waist and closed back, carrying Coppename-water and brass-navigation-ring fields; Alia wears a secure strapless golden-yellow upper-thigh tailored romper with covered waist and closed back, carrying Raleigh-Falls and gondola-panel fields; ECE wears a secure strapless sea-turtle-teal upper-thigh airship mini with covered waist and a complete open back to the secure waist, carrying cloud-silver mooring geometry and aurora piping. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny collarless golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge in Alia's protected bay, outside every odd-prop and mission lane; no adult hand is reassigned. The active odd prop is Alia's chromatic brass telescope with folding legs, fully enclosed inside a fixed sealed transparent display. Alia touches only the exterior enclosure frame with one hand; nobody touches the prop and every mascot remains in a separate protected bay. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Alia stands beside the protected mascot lounge and secured odd-prop enclosure, with one hand on the enclosure exterior and her other hand open. Radiance and Ellie remain in separate depth lanes with open visible hands. There is no human contact and no hidden hand. Emotions: Radiance: betrayal shock; Ellie: aching romantic longing; Alia: visible jealousy; AI ECE: awe. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated two-hand inspection stance. One hand supports the grip from below; the other stabilizes the upper frame with its index straight outside the empty guard. The inert mechanism is visibly locked open. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the river, wildlife and conservation route. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nSea mist remains beyond the covered overlook; dry footing, faces, Voltzberg, Raleigh Falls, target and complete backstop remain clear. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "23E945DCC01B6E4A8D7C60FE60EBF079A1419702C1D8BFB1BE4AABA6A566BEF3",
+          "encoding": "utf-8",
+          "bytes": 4856,
+          "chars": 4856,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json#/renderPasses/pass1/events/2",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-389/scene-1578-initial-prompt.txt",
+          "rawPath": null,
+          "sessionLog": "Codex session 01a01d88-38a1-7763-b74d-470bc7bfe70e; local absolute session path intentionally omitted"
+        },
+        "immutable": true,
+        "sourceAudit": {
+          "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
+          "path": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+          "checkpointSha256": "525705C4B4D15E3657AE9B7F1FCE1AB50E26F6CD7481FC14470651CEFD8BD775",
+          "ledgerSha256": "19BDE455629564357F0D23643CB2ECB8CF6F90614E019AC28CBAEC007F2EF4C2",
+          "entryId": "batch389-scene1578-pass1-provider-switch"
+        }
+      },
+      {
+        "entryId": "batch389-scene1579-pass1-provider-switch",
+        "scene": 1579,
+        "phase": "pass-1",
+        "status": "client-terminated-for-provider-switch-no-terminal-no-bytes",
+        "bankExecCallId": "call_1LgWqkSkPieEqDoRZWFpuZ2w",
+        "callId": null,
+        "callIdProvenance": "nested-call-id-not-surfaced-before-parent-exec-termination",
+        "subcallIndex": 3,
+        "launchedAt": "2026-08-20T05:18:33.556Z",
+        "occurredAt": "2026-08-20T05:20:39.347Z",
+        "provider": "built-in-imagegen",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-389/scene-1579-initial-prompt.txt",
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women, Image 4 anchors ECE, and Image 5 anchors the man. Use these original identity references only, never an earlier country render. Exactly five fictional adults visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, brunette AI ECE, and the established athletic bearded man from Image 5. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered conservation boardwalk at Galibi while distant lightning stays over the Atlantic, with the complete shoreline, Marowijne River mouth, mangrove fringe, beach-morning-glory vines, protected leatherback tracks, faraway sea turtles and one clearly empty marked ocean route. Polar airship couture is fictional public fashion at this real Suriname location: pressure-envelope ribs, gondola panels, brass navigation rings, mooring geometry, cloud-silver surfaces and aurora piping. Nobody is flying or inside a vehicle. Theme-led original: the landmark remains the Suriname read while all four looks use distinct polar-airship pressure-envelope ribs, gondola panels, brass navigation rings, mooring geometry, cloud-silver surfaces and aurora piping. No literal Suriname flag, central star, coat of arms, official emblem or sacred symbol, religious architecture, copied Indigenous or Maroon ceremonial pattern, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a clay-red short-sleeve upper-thigh airship mini with covered waist and closed back, carrying Atlantic-wave and cloud-silver envelope fields; Ellie wears a rainforest-emerald high-neck sleeveless upper-thigh skort look with covered waist and closed back, carrying Marowijne-current and brass-navigation-ring fields; Alia wears a bromeliad-magenta one-shoulder cropped airship bodice showing a narrow ordinary midriff with a complete open back to the secure waist over night-charcoal upper-thigh shorts carrying turtle-track and gondola geometry; ECE wears a Suriname-river-blue sleeveless cropped airship top showing a narrow ordinary midriff over a granite-silver upper-thigh skort, closed back, with mangrove-root and aurora-piping fields; the established bearded adult man wears an opaque rice-white short-sleeve airship-panel top, tailored above-knee night-charcoal shorts and complete black shoes. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly MAX the young golden-retriever pup rests on one dry padded lounge in Alia's protected bay, outside every odd-prop and mission lane; no adult hand is reassigned and no kitten appears. The active odd prop is Radiance's mirrored megaphone sculpture, fully enclosed inside a fixed sealed transparent display. Radiance touches only the exterior enclosure frame with one hand; nobody touches the prop and every mascot remains in a separate protected bay. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Alia stands beside MAX's protected lounge with both hands open and visible. Radiance occupies a separate bay beside the secured odd-prop enclosure, with one hand on its exterior frame and her other hand open. Ellie and the man hold separate finished-turn poses with open visible hands. There is no human contact and no hidden hand. Emotions: Radiance: awe; Ellie: aching romantic longing; Alia: anger; AI ECE: tender affection. The man's stored emotion is tender affection. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the ocean, turtles, tracks, nests and public boardwalk. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nDistant lightning stays beyond the covered boardwalk; dry footing, faces, coast, target and complete backstop remain clear while wildlife and public paths stay outside the lane. Eye-level 50 mm full-body editorial. Render exactly ten arms, ten hands, ten legs and ten complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "F9EE08142B751C1DA268A614D3EE357BB05A80BF1221A20828FF42B024EE8260",
+          "encoding": "utf-8",
+          "bytes": 5209,
+          "chars": 5209,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json#/renderPasses/pass1/events/3",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-389/scene-1579-initial-prompt.txt",
+          "rawPath": null,
+          "sessionLog": "Codex session 01a01d88-38a1-7763-b74d-470bc7bfe70e; local absolute session path intentionally omitted"
+        },
+        "immutable": true,
+        "sourceAudit": {
+          "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
+          "path": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+          "checkpointSha256": "525705C4B4D15E3657AE9B7F1FCE1AB50E26F6CD7481FC14470651CEFD8BD775",
+          "ledgerSha256": "19BDE455629564357F0D23643CB2ECB8CF6F90614E019AC28CBAEC007F2EF4C2",
+          "entryId": "batch389-scene1579-pass1-provider-switch"
+        }
       }
     ]
   },

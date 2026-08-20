@@ -8,6 +8,9 @@ import { runInNewContext } from "node:vm";
 
 const PROJECT_LEDGER = "assets/lore/starlight-era/world-rejected-prompt-ledger.json";
 const ACTIVE_CHECKPOINT = "assets/lore/starlight-era/batch-382-georgia-mars-surface-expedition-checkpoint.json";
+const RECENT_CHECKPOINTS = [
+  "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+];
 const CONTRACT = "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json";
 const CAMPAIGN = "assets/lore/starlight-era/world-195x4-campaign.json";
 const LEGACY_BLOCKLIST = "tmp/world-195x4/batch-219/preflight/blocklist-transform-26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e.json";
@@ -974,6 +977,64 @@ function activeCheckpointCompletedRejects(runtimeEntries) {
     }));
 }
 
+function collectRecentCheckpointRejectedEvidence() {
+  const bindings = [];
+  const entries = [];
+  for (const checkpointRelativePath of RECENT_CHECKPOINTS) {
+    const checkpointPath = path.join(root, checkpointRelativePath);
+    const checkpointBuffer = readFileSync(checkpointPath);
+    const checkpoint = JSON.parse(checkpointBuffer);
+    const rejectedLedger = checkpoint.rejectedPromptLedger;
+    if (!rejectedLedger?.entries?.length) throw new Error(`Recent checkpoint rejectedPromptLedger is missing: ${checkpointRelativePath}`);
+    const checkpointSha256 = sha256(checkpointBuffer);
+    const ledgerSha256 = sha256(JSON.stringify(rejectedLedger));
+    let exactPromptShaPasses = 0;
+    for (const entry of rejectedLedger.entries) {
+      if (!entry.prompt?.text || sha256(entry.prompt.text) !== entry.prompt.sha256) {
+        throw new Error(`Recent checkpoint prompt SHA mismatch: ${checkpointRelativePath} ${entry.entryId}`);
+      }
+      exactPromptShaPasses += 1;
+      const raw = entry.rawOutput ?? {};
+      if (raw.state === "preserved") {
+        const rawPath = path.join(root, raw.path);
+        if (!existsSync(rawPath)) throw new Error(`Recent checkpoint raw is missing: ${entry.entryId}`);
+        const rawBuffer = readFileSync(rawPath);
+        if (sha256(rawBuffer) !== raw.sha256 || rawBuffer.length !== raw.bytes) {
+          throw new Error(`Recent checkpoint raw provenance mismatch: ${entry.entryId}`);
+        }
+      } else if (raw.state === "no-bytes" && (raw.bytes !== 0 || raw.path !== null || raw.sha256 !== null)) {
+        throw new Error(`Recent checkpoint no-byte provenance mismatch: ${entry.entryId}`);
+      }
+      entries.push({
+        ...entry,
+        sourceAudit: {
+          sourceKind: "recent-checkpoint-rejected-prompt-ledger",
+          path: checkpointRelativePath,
+          checkpointSha256,
+          ledgerSha256,
+          entryId: entry.entryId,
+        },
+      });
+    }
+    bindings.push({
+      path: checkpointRelativePath,
+      batch: checkpoint.batch,
+      country: checkpoint.country,
+      checkpointSha256,
+      ledgerSha256,
+      entryCount: rejectedLedger.entries.length,
+      exactPromptShaPasses,
+    });
+  }
+  return {
+    status: "recent-checkpoint-exact-prompt-and-raw-provenance-bound",
+    note: "These immutable checkpoint entries retain exact launch text for completed, rejected, interrupted, and explicit no-byte occurrences. Cross-source appearances are evidence aliases and do not imply acceptance.",
+    bindings,
+    entryCount: entries.length,
+    entries,
+  };
+}
+
 function validateIntrinsic(ledger) {
   const errors = [];
   if (ledger?.schemaVersion !== 1 || ledger?.appendOnly !== true) errors.push("invalid ledger header");
@@ -1018,6 +1079,26 @@ function validateIntrinsic(ledger) {
     if (!entry.prompt?.text || sha256(entry.prompt.text) !== entry.prompt.sha256) errors.push(`manifest reject prompt SHA mismatch ${entry.entryId}`);
     if (entry.terminalSourceAudit?.outputSha256Matched !== entry.rawOutput?.sha256) errors.push(`manifest reject terminal/output mismatch ${entry.entryId}`);
   }
+  if (ledger?.recentCheckpointRejectedEvidence?.entryCount !== ledger?.recentCheckpointRejectedEvidence?.entries?.length) errors.push("recent checkpoint section count mismatch");
+  for (const entry of ledger?.recentCheckpointRejectedEvidence?.entries ?? []) {
+    if (!entry.prompt?.text || sha256(entry.prompt.text) !== entry.prompt.sha256) errors.push(`recent checkpoint prompt SHA mismatch ${entry.entryId}`);
+    if (entry.rawOutput?.state === "preserved") {
+      const rawPath = path.join(root, entry.rawOutput.path);
+      if (!existsSync(rawPath)) errors.push(`recent checkpoint raw missing ${entry.entryId}`);
+      else {
+        const rawBuffer = readFileSync(rawPath);
+        if (sha256(rawBuffer) !== entry.rawOutput.sha256 || rawBuffer.length !== entry.rawOutput.bytes) errors.push(`recent checkpoint raw mismatch ${entry.entryId}`);
+      }
+    }
+    if (entry.rawOutput?.state === "no-bytes" && (entry.rawOutput.bytes !== 0 || entry.rawOutput.path !== null || entry.rawOutput.sha256 !== null)) errors.push(`recent checkpoint invalid no-byte state ${entry.entryId}`);
+  }
+  for (const binding of ledger?.recentCheckpointRejectedEvidence?.bindings ?? []) {
+    const buffer = readFileSync(path.join(root, binding.path));
+    const checkpoint = JSON.parse(buffer);
+    if (sha256(buffer) !== binding.checkpointSha256) errors.push(`recent checkpoint binding hash mismatch ${binding.path}`);
+    if (sha256(JSON.stringify(checkpoint.rejectedPromptLedger)) !== binding.ledgerSha256) errors.push(`recent checkpoint ledger binding mismatch ${binding.path}`);
+    if (binding.entryCount !== binding.exactPromptShaPasses) errors.push(`recent checkpoint prompt count mismatch ${binding.path}`);
+  }
   if (ledger?.activeCheckpointBinding?.entryCount !== ledger?.activeCheckpointBinding?.exactPromptShaPasses) errors.push("active checkpoint prompt SHA failure");
   return errors;
 }
@@ -1050,6 +1131,7 @@ const recoveredArchivedLaunchEvidence = collectRecoveredNoTerminalPrompts(runtim
 const recoveredHistoricalMissingText = reconcileHistoricalMissingText(historicalRepositoryEvidence, runtimeFailures, recoveredArchivedLaunchEvidence);
 const campaignRepositoryEvidence = collectCampaignVisualAndAmbiguousEvidence(runtimeFailures, recoveredArchivedLaunchEvidence);
 const mediaManifestRejectedEvidence = collectMediaManifestRejectedEvidence(runtimeFailures, campaignRepositoryEvidence);
+const recentCheckpointRejectedEvidence = collectRecentCheckpointRejectedEvidence();
 if (!runtimeFailures.preflightPromptEvidence) throw new Error("Missing exact Batch 223 preflight prompt evidence");
 const preflightPrompt = promptRecord(runtimeFailures.preflightPromptEvidence.prompt);
 if (preflightPrompt.sha256 !== PREFLIGHT_FAILURES[0].promptSha256) throw new Error("Batch 223 preflight prompt SHA mismatch");
@@ -1063,8 +1145,8 @@ const contractSha256 = sha256(readFileSync(path.join(root, CONTRACT)));
 const expected = {
   schemaVersion: 1,
   appendOnly: true,
-  updatedAt: "2026-08-13T09:50:00.000Z",
-  coverageStatus: "runtime-complete-for-locally-available-active-and-archived-codex-sessions-plus-deduplicated-pre-batch-220-repository-corpus-plus-bound-active-checkpoint-and-reconciled-campaign-visual-rejects",
+  updatedAt: "2026-08-20T05:20:39.347Z",
+  coverageStatus: "runtime-complete-for-locally-available-active-and-archived-codex-sessions-plus-deduplicated-pre-batch-220-repository-corpus-plus-bound-active-and-recent-checkpoints-and-reconciled-campaign-visual-rejects",
   policy: {
     oneEntryPerFailedRuntimeOccurrence: true,
     occurrenceKey: "The observation fingerprint is image_generation_end.call_id plus exact prompt SHA-256. Cross-thread fork copies sharing that pair are collapsed into one runtime occurrence; the earliest observation supplies canonical time/thread fields and every observed thread remains in observedIn.",
@@ -1100,7 +1182,8 @@ const expected = {
       + campaignRepositoryEvidence.completedVisualRejects.length
       + campaignRepositoryEvidence.recoveredCompletedAmbiguous.length
       + mediaManifestRejectedEvidence.exactPromptEntries.length
-      + preflightFailuresWithoutTerminalEvent.length,
+      + preflightFailuresWithoutTerminalEvent.length
+      + recentCheckpointRejectedEvidence.entries.length,
     historicalExactPromptOccurrenceCount: historicalRepositoryEvidence.exactPromptEntries.length,
     historicalCanonicalSourceAliasCount: historicalRepositoryEvidence.canonicalSourceAliases.length,
     knownTextMissingHistoricalEvidenceCount: historicalRepositoryEvidence.unrecoverablePromptEvidence.length,
@@ -1116,6 +1199,7 @@ const expected = {
     mediaManifestRejectedExactPromptCount: mediaManifestRejectedEvidence.exactPromptEntries.length,
     mediaManifestRejectedPromptUnrecoverableCount: mediaManifestRejectedEvidence.unrecoverablePromptEvidence.length,
     mediaManifestCampaignAliasCount: mediaManifestRejectedEvidence.campaignAliases.length,
+    recentCheckpointRejectedPromptCount: recentCheckpointRejectedEvidence.entries.length,
   },
   activeCheckpointBinding: activeCheckpoint,
   activeCheckpointCompletedRejects: {
@@ -1139,6 +1223,7 @@ const expected = {
   recoveredHistoricalMissingText,
   campaignRepositoryEvidence,
   mediaManifestRejectedEvidence,
+  recentCheckpointRejectedEvidence,
   contractSha256AtScan: contractSha256,
 };
 
@@ -1149,6 +1234,10 @@ if (apply && existsSync(ledgerPath)) {
   const nextIds = new Set((expected.runtimeFailures?.entries ?? []).map((entry) => entry.entryId));
   const missingIds = [...priorIds].filter((entryId) => !nextIds.has(entryId));
   if (missingIds.length) throw new Error(`Refusing to remove ${missingIds.length} append-only runtime entries`);
+  const priorRecentIds = new Set((previous.recentCheckpointRejectedEvidence?.entries ?? []).map((entry) => entry.entryId));
+  const nextRecentIds = new Set((expected.recentCheckpointRejectedEvidence?.entries ?? []).map((entry) => entry.entryId));
+  const missingRecentIds = [...priorRecentIds].filter((entryId) => !nextRecentIds.has(entryId));
+  if (missingRecentIds.length) throw new Error(`Refusing to remove ${missingRecentIds.length} append-only recent-checkpoint entries`);
 }
 if (apply) writeFileSync(ledgerPath, `${JSON.stringify(expected, null, 2)}\n`, "utf8");
 const actual = JSON.parse(readFileSync(ledgerPath, "utf8"));
@@ -1177,6 +1266,7 @@ console.log(JSON.stringify({
   mediaManifestRejectedExactPrompts: mediaManifestRejectedEvidence.exactPromptEntries.length,
   mediaManifestRejectedUnrecoverablePrompts: mediaManifestRejectedEvidence.unrecoverablePromptEvidence.length,
   mediaManifestCampaignAliases: mediaManifestRejectedEvidence.campaignAliases.length,
+  recentCheckpointRejectedPrompts: recentCheckpointRejectedEvidence.entries.length,
   promptShaPasses: actual.runtimeFailures?.entries?.filter((entry) => sha256(entry.prompt?.text ?? "") === entry.prompt?.sha256).length ?? 0,
   errors,
 }, null, 2));
