@@ -10,6 +10,7 @@ const PROJECT_LEDGER = "assets/lore/starlight-era/world-rejected-prompt-ledger.j
 const ACTIVE_CHECKPOINT = "assets/lore/starlight-era/batch-382-georgia-mars-surface-expedition-checkpoint.json";
 const RECENT_CHECKPOINTS = [
   "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+  "assets/lore/starlight-era/batch-390-montenegro-polar-airship-checkpoint.json",
 ];
 const CONTRACT = "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json";
 const CAMPAIGN = "assets/lore/starlight-era/world-195x4-campaign.json";
