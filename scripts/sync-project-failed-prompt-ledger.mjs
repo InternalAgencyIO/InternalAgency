@@ -11,6 +11,7 @@ const ACTIVE_CHECKPOINT = "assets/lore/starlight-era/batch-382-georgia-mars-surf
 const RECENT_CHECKPOINTS = [
   "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
   "assets/lore/starlight-era/batch-390-montenegro-polar-airship-checkpoint.json",
+  "assets/lore/starlight-era/batch-391-malta-orbital-research-station-checkpoint.json",
 ];
 const CONTRACT = "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json";
 const CAMPAIGN = "assets/lore/starlight-era/world-195x4-campaign.json";
@@ -21,6 +22,20 @@ const SESSION_ROOTS = process.env.CODEX_SESSION_ROOT
       path.join(process.env.USERPROFILE ?? "", ".codex", "sessions"),
       path.join(process.env.USERPROFILE ?? "", ".codex", "archived_sessions"),
     ];
+const SESSION_LINE_LIMITS = new Map(
+  (process.env.CODEX_SESSION_LINE_LIMITS ?? "")
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean)
+    .map((entry) => {
+      const separator = entry.lastIndexOf(":");
+      if (separator < 1) throw new Error(`Invalid CODEX_SESSION_LINE_LIMITS entry: ${entry}`);
+      const threadId = entry.slice(0, separator);
+      const limit = Number(entry.slice(separator + 1));
+      if (!Number.isSafeInteger(limit) || limit < 1) throw new Error(`Invalid session line limit: ${entry}`);
+      return [threadId, limit];
+    }),
+);
 const PROJECT_THREAD_MARKERS = [
   /InternalAgency/i,
   /Internal Agency/i,
@@ -285,10 +300,12 @@ async function collectRuntimeFailures() {
   const files = SESSION_ROOTS.flatMap((sessionRoot) => walk(sessionRoot)).sort();
   for (const file of files) {
     const threadId = threadIdFromPath(file);
+    const lineLimit = SESSION_LINE_LIMITS.get(threadId) ?? null;
     const reader = createInterface({ input: createReadStream(file), crlfDelay: Infinity });
     let lineNumber = 0;
     for await (const line of reader) {
       lineNumber += 1;
+      if (lineLimit !== null && lineNumber > lineLimit) break;
       const isFailedEnd = line.includes('"image_generation_end"') && line.includes('"failed"');
       const isPreflightCall = line.includes(PREFLIGHT_FAILURES[0].callId);
       const auxiliaryExecCallId = line.includes('"custom_tool_call"') ? [...AUXILIARY_EXEC_CALL_IDS].find((callId) => line.includes(callId)) : null;
@@ -1159,6 +1176,8 @@ const expected = {
   },
   sourceScan: {
     sessionRootPolicy: "Read every locally available Codex session JSONL below USERPROFILE/.codex/sessions and USERPROFILE/.codex/archived_sessions (or CODEX_SESSION_ROOT) and retain failed image_generation_end events.",
+    sessionLineLimits: Object.fromEntries(SESSION_LINE_LIMITS),
+    sessionLineLimitPolicy: "An optional per-thread limit may stop before later browser/image payload lines only when the retained prefix already covers that thread's Codex image-generation terminal events and later provider output is preserved through checked-in Meta checkpoints and the generated-media manifest.",
     physicalFailedEventsScanned: runtimeFailures.physicalFailedEvents,
     uniqueRuntimeFailureOccurrences: runtimeFailures.entries.length,
     projectMarkerMatchedOccurrences: projectRuntimeEntries.length,
