@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 392,
   "country": "Maldives",
-  "status": "active-continuous-meta-initial-bank-prepared-not-launched",
+  "status": "active-continuous-meta-successor-b-three-hard-rejected-one-refused-c-bank-prepared",
   "sourceCommit": "ba16b3839299ec182037eea54f0315335d462f52",
   "contractSha256": "C0CAF3ED848ACFBF8CE1E404578939E96C16B480CC1F8E54458FC06FA830361B",
   "providerRestriction": "Meta AI country generation; bounded built-in ChatGPT clothing finalization",
@@ -39,15 +39,24 @@
   ],
   "policy": {
     "initialCandidatesAuthorized": 4,
-    "initialCandidatesConsumed": 0,
-    "promptDispatchesConsumed": 0,
+    "initialCandidatesConsumed": 4,
+    "promptDispatchesConsumed": 8,
     "projectAttemptCeiling": "none-user-imposed",
     "concurrentTabsRequired": 4,
     "perLaneInFlightMaximum": 1,
     "evidenceRule": "candidate N+1 may overlap inspection of N after raw/no-bytes capture; N+2 waits for N classification and append-only verification",
     "noFillerAfterResolution": true,
     "chatgptFinalPrimaryMaximum": 1,
-    "chatgptFinalConditionalRetryMaximum": 1
+    "chatgptFinalConditionalRetryMaximum": 1,
+    "initialDispatchAt": "2026-08-20T09:41:10.102Z",
+    "successorBDispatchAt": "2026-08-20T09:47:03.013Z",
+    "successorBOutcomesObservedAt": "2026-08-20T09:57:51.091Z",
+    "successorCPreparedScenes": [
+      1588,
+      1589,
+      1591
+    ],
+    "scene1590SuccessorBFallbackPrepared": true
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
@@ -685,13 +694,556 @@
       }
     }
   ],
-  "events": [],
+  "events": [
+    {
+      "eventId": "batch-392-scene-1588-initial-primary-completed-rejected",
+      "eventType": "meta-ai-candidate-completed",
+      "occurredAt": "2026-08-20T09:45:28.7991306Z",
+      "scene": 1588,
+      "attempt": "initial-primary",
+      "promptSha256": "6EF189B91C95A13BA1B7B7104E729AABB97EBE4F76E6137B405CA5117199CDC0",
+      "rawSha256": "50922084C92D598E2870A0D04024E9DC65C997940B8653E727E63D1B56C42A64",
+      "rawBytes": 637888,
+      "responseClassification": "emitted",
+      "qaDisposition": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop's open end crosses the seated cast and no complete downrange target/backstop is visible. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "conversationRefSha256": "0DB93EAEBC6581DFAE4742DC222BAE33697F4027F9ECDE45D2050C123876EC19"
+    },
+    {
+      "eventId": "batch-392-scene-1588-successor-b-dispatched",
+      "eventType": "meta-ai-candidate-dispatched",
+      "occurredAt": "2026-08-20T09:47:03.013Z",
+      "scene": 1588,
+      "attempt": "successor-b",
+      "prompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-successor-b.txt",
+        "text": "Render a second independent candidate for Maldives Scene 1588 from the same requested cast, location, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces.\n\nStrengthen the fourteen-degree Dutch tilt and near-face depth while keeping every adult head-to-shoe. Radiance sits sideways across Ellie's stable lap; Alia gives Radiance a brief cheek peck; Ellie supports Radiance and watches Alia with calm visible jealousy; ECE leans close through eye-line while both equipment hands stay isolated at far right. Show complete heels, complete legs, secure opaque upper-thigh cocktail garments, and visible uncovered skin above every knee-high.\n\nExactly Radiance and Alia wear paired opaque rainbow-gradient RAZE knee-highs. Radiance is Split-Star left and angular RAZE wordmark right; Alia reverses. Both wordmarks run vertically up the outer calf. Ellie and ECE have bare lower legs. Keep Hanifaru Bay's heart-shaped lagoon, faro rings and manta-current motifs large. ECE's harmless inert rainbow calibration prop points toward a complete coral-sand backstop behind a transparent safety screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+        "sha256": "B2545C9E3B2EA4FB05CCD4533F67401DEB4C79EE41DF5A40E0DD26739138EA57",
+        "encoding": "utf8",
+        "bytes": 1542,
+        "fidelity": "runtime-launch-byte-exact"
+      },
+      "responseClassification": "in-flight-no-immediate-refusal",
+      "refusalText": null,
+      "faceReferenceTransfer": "text-only",
+      "conversationRefSha256": "0DB93EAEBC6581DFAE4742DC222BAE33697F4027F9ECDE45D2050C123876EC19"
+    },
+    {
+      "eventId": "batch-392-scene-1589-initial-primary-completed-rejected",
+      "eventType": "meta-ai-candidate-completed",
+      "occurredAt": "2026-08-20T09:44:19.0525128Z",
+      "scene": 1589,
+      "attempt": "initial-primary",
+      "promptSha256": "B4214DD45609FDA365C54DB720898FAB574B5717D5743FBB3FBE960DF830734F",
+      "rawSha256": "14C7920A3BF8DF8A6AFC63A6415004751185394EABFD8796BA4D7C5011314B64",
+      "rawBytes": 740608,
+      "responseClassification": "emitted",
+      "qaDisposition": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop faces inward without a complete visible target/backstop lane. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "conversationRefSha256": "A5C07CCFCF108C26277E0989AAD03D6DBF8461D81F8ABF299045B5D14FA9DB0C"
+    },
+    {
+      "eventId": "batch-392-scene-1589-successor-b-dispatched",
+      "eventType": "meta-ai-candidate-dispatched",
+      "occurredAt": "2026-08-20T09:47:03.013Z",
+      "scene": 1589,
+      "attempt": "successor-b",
+      "prompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-successor-b.txt",
+        "text": "Render a second independent candidate for Maldives Scene 1589 from the same requested cast, Fuvahmulah setting, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces.\n\nPush the safe floor-adjacent front-quarter fashion angle toward complete heels, uncovered legs, opaque skort side seams, torsos and faces; keep the lens outside garment volume and away from the space between legs. Ellie turns inside Radiance's behind hug and gives Radiance a brief cheek peck; Alia catches Ellie's free hand with a calm jealous raised brow; ECE closes through a side-hug eye-line while both equipment hands remain isolated. Keep motion diagonal, faces large, feet complete and zero static lineup.\n\nExactly Radiance and Ellie wear paired opaque rainbow-gradient RAZE knee-highs directly on uncovered legs. Radiance is Split-Star left and RAZE right; Ellie reverses. Both wordmarks sit compact and horizontal at the outer upper calf. Alia and ECE have bare lower legs. Keep Thoondu pebble fields, fringing reef, kilhi wetlands and mangrove-fan motifs large. ECE's harmless inert rainbow calibration prop points toward a thick sand backstop behind a clear safety screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+        "sha256": "D6C4789B39828C143F08767E4A045EC02F7F21C33D29A43E0C124F28B22B0A8A",
+        "encoding": "utf8",
+        "bytes": 1605,
+        "fidelity": "runtime-launch-byte-exact"
+      },
+      "responseClassification": "in-flight-no-immediate-refusal",
+      "refusalText": null,
+      "faceReferenceTransfer": "text-only",
+      "conversationRefSha256": "A5C07CCFCF108C26277E0989AAD03D6DBF8461D81F8ABF299045B5D14FA9DB0C"
+    },
+    {
+      "eventId": "batch-392-scene-1590-initial-primary-completed-rejected",
+      "eventType": "meta-ai-candidate-completed",
+      "occurredAt": "2026-08-20T09:44:18.9971910Z",
+      "scene": 1590,
+      "attempt": "initial-primary",
+      "promptSha256": "7BCA64039B891D9DCCBB83B58C0A7F1E35817CB23F9AF6BF91152AFD6D235DFB",
+      "rawSha256": "5A8E2CA749389334560CEB545D50400B864BABCFE5108A93BDE178D27DC12B44",
+      "rawBytes": 627262,
+      "responseClassification": "emitted",
+      "qaDisposition": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop lacks the required visible empty-water marker and complete catch screen/backstop, and the outside trigger-index geometry is absent. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "conversationRefSha256": "DB7922A47FDD81C6945FD89FD5E8C77878A684E803CB01CDB700E5E7DFFCECF3"
+    },
+    {
+      "eventId": "batch-392-scene-1590-successor-b-dispatched",
+      "eventType": "meta-ai-candidate-dispatched",
+      "occurredAt": "2026-08-20T09:47:03.013Z",
+      "scene": 1590,
+      "attempt": "successor-b",
+      "prompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1590-meta-successor-b.txt",
+        "text": "Render a second independent candidate for Maldives Scene 1590 from the same requested five-person cast, Addu Atoll setting, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces. The established clearly adult bearded man appears behind ECE without replacing any woman.\n\nStrengthen the high oblique close view and mild Dutch roll over the stable lap action. Alia sits sideways across Radiance's lap while Ellie gives Alia a brief temple peck; ECE supplies the calm jealous eye-line from the isolated calibration edge and the man returns his strongest gaze to ECE. Keep all five faces distinct, complete legs and footwear readable through diagonal foreshortening, secure opaque upper-thigh cocktail clothing, and zero static lineup.\n\nExactly Radiance and ECE wear paired opaque rainbow-gradient RAZE knee-highs directly on uncovered legs. Radiance is Split-Star left and RAZE right; ECE reverses. Both wordmarks run vertically up the outer calf. Ellie and Alia have bare lower legs. Keep Addu horseshoe geometry, causeway arcs, reef passes and seagrass motifs large. ECE's harmless inert rainbow calibration prop points toward the marked empty-water disk and complete transparent catch screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+        "sha256": "71E81DF4E384D51F4468D0AEE600257081C198121D7C8624B5391CB4EBB6C1FB",
+        "encoding": "utf8",
+        "bytes": 1644,
+        "fidelity": "runtime-launch-byte-exact"
+      },
+      "responseClassification": "in-flight-no-immediate-refusal",
+      "refusalText": null,
+      "faceReferenceTransfer": "text-only",
+      "conversationRefSha256": "DB7922A47FDD81C6945FD89FD5E8C77878A684E803CB01CDB700E5E7DFFCECF3"
+    },
+    {
+      "eventId": "batch-392-scene-1591-initial-primary-completed-rejected",
+      "eventType": "meta-ai-candidate-completed",
+      "occurredAt": "2026-08-20T09:44:19.1101055Z",
+      "scene": 1591,
+      "attempt": "initial-primary",
+      "promptSha256": "6351700307BDAC333F7B3D235D1C4A3E5E592D186E58F811F3AD60BFB7F01FB9",
+      "rawSha256": "612565D9D6C128FE7D069C1A0E208EB37277FA39BE97E7FBAA36821644E54F38",
+      "rawBytes": 607878,
+      "responseClassification": "emitted",
+      "qaDisposition": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop presents toward the camera without the complete separate empty-water marker and catch screen/backstop. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "conversationRefSha256": "CA3F38DF2CF5E517D5AD2EA36AFD16E198E54EE1C6B8A6568125D075FF50F1E1"
+    },
+    {
+      "eventId": "batch-392-scene-1591-successor-b-dispatched",
+      "eventType": "meta-ai-candidate-dispatched",
+      "occurredAt": "2026-08-20T09:47:03.013Z",
+      "scene": 1591,
+      "attempt": "successor-b",
+      "prompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-successor-b.txt",
+        "text": "Render a second independent candidate for Maldives Scene 1591 from the same requested cast, Baa micro-atoll setting, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces.\n\nStrengthen the canted moving portrait with Radiance's exact face and blonde hair near the foreground edge plus a foreground heel and opaque skirt-side seam. Ellie steps through Alia's behind hug while Alia gives Ellie a brief cheek peck; Radiance catches Alia's free hand and watches the pair with calm visible jealousy; ECE answers through a close inviting gaze while both equipment hands remain isolated. Keep diagonal movement, faces large, complete feet, secure opaque upper-thigh cocktail clothing, and zero static lineup.\n\nExactly Ellie and Alia wear paired opaque rainbow-gradient RAZE knee-highs directly on uncovered legs. Ellie is Split-Star left and RAZE right; Alia reverses. Both wordmarks sit compact and horizontal at the outer upper calf. Radiance and ECE have bare lower legs. Keep micro-atoll rings, lagoon shelves, reef chains and mangrove-islet motifs large. ECE's harmless inert rainbow calibration prop points toward the marked empty-water disk and complete transparent catch screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+        "sha256": "EF77E89D582FA74799E2042372F86E48FB36D7584EEA5A3B6F417A7929E4510E",
+        "encoding": "utf8",
+        "bytes": 1631,
+        "fidelity": "runtime-launch-byte-exact"
+      },
+      "responseClassification": "in-flight-no-immediate-refusal",
+      "refusalText": null,
+      "faceReferenceTransfer": "text-only",
+      "conversationRefSha256": "CA3F38DF2CF5E517D5AD2EA36AFD16E198E54EE1C6B8A6568125D075FF50F1E1"
+    },
+    {
+      "eventId": "batch-392-scene-1588-successor-b-completed-rejected",
+      "eventType": "meta-ai-candidate-completed",
+      "occurredAt": "2026-08-20T09:57:51.091Z",
+      "scene": 1588,
+      "attempt": "successor-b",
+      "promptSha256": "B2545C9E3B2EA4FB05CCD4533F67401DEB4C79EE41DF5A40E0DD26739138EA57",
+      "rawSha256": "D915C63C6F0C7D5D17703FCD005DE0B61453527FA3AA40D4AFDF6179E3A14FA6",
+      "rawBytes": 533354,
+      "responseClassification": "emitted",
+      "qaDisposition": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the text-only candidate does not preserve the exact scene-938/936/937 age-21 faces, and the open rainbow frame has no complete separately readable downrange target and backstop lane.",
+      "conversationRefSha256": "0DB93EAEBC6581DFAE4742DC222BAE33697F4027F9ECDE45D2050C123876EC19"
+    },
+    {
+      "eventId": "batch-392-scene-1589-successor-b-completed-rejected",
+      "eventType": "meta-ai-candidate-completed",
+      "occurredAt": "2026-08-20T09:57:51.091Z",
+      "scene": 1589,
+      "attempt": "successor-b",
+      "promptSha256": "D6C4789B39828C143F08767E4A045EC02F7F21C33D29A43E0C124F28B22B0A8A",
+      "rawSha256": "F5AFCF42FEB0266FF22CDC5F586A7A4BA00BCE22C6ACA7AF62F2C06249BC4AC2",
+      "rawBytes": 522858,
+      "responseClassification": "emitted",
+      "qaDisposition": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the text-only candidate does not preserve the exact scene-938/936/937 age-21 faces, and the rainbow frame overlaps the cast without a complete separately readable downrange target and backstop lane.",
+      "conversationRefSha256": "A5C07CCFCF108C26277E0989AAD03D6DBF8461D81F8ABF299045B5D14FA9DB0C"
+    },
+    {
+      "eventId": "batch-392-scene-1591-successor-b-completed-rejected",
+      "eventType": "meta-ai-candidate-completed",
+      "occurredAt": "2026-08-20T09:57:51.091Z",
+      "scene": 1591,
+      "attempt": "successor-b",
+      "promptSha256": "EF77E89D582FA74799E2042372F86E48FB36D7584EEA5A3B6F417A7929E4510E",
+      "rawSha256": "B088B02243492B4747C53819E894AED38A08BD5697F937B0914E4820250637A7",
+      "rawBytes": 563048,
+      "responseClassification": "emitted",
+      "qaDisposition": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: an extra fifth woman appears, the exact scene-938/936/937 age-21 faces are not preserved, and the barrel-like rainbow object points out of frame without a complete visible safe target and backstop.",
+      "conversationRefSha256": "CA3F38DF2CF5E517D5AD2EA36AFD16E198E54EE1C6B8A6568125D075FF50F1E1"
+    },
+    {
+      "eventId": "batch-392-scene-1590-successor-b-refused-no-bytes",
+      "eventType": "meta-ai-refusal",
+      "occurredAt": "2026-08-20T09:57:51.091Z",
+      "scene": 1590,
+      "attempt": "successor-b",
+      "promptSha256": "71E81DF4E384D51F4468D0AEE600257081C198121D7C8624B5391CB4EBB6C1FB",
+      "fallbackPromptSha256": "BE833DE5EC133F3BD8663F6957CFA51B2D41F28C6C1B7B1BF7442F449F30BBB6",
+      "responseClassification": "blocked-in-progress-fallback-pending",
+      "refusalText": "I wasn't able to generate that exact second variation for Scene 1590 with the same lap and calibration setup.",
+      "rawState": "no-bytes",
+      "conversationRefSha256": "DB7922A47FDD81C6945FD89FD5E8C77878A684E803CB01CDB700E5E7DFFCECF3"
+    }
+  ],
   "rejectedPromptLedger": {
     "appendOnly": true,
-    "entries": []
+    "entries": [
+      {
+        "entryId": "batch-392-scene-1588-meta-ai-initial-primary-visually-rejected",
+        "batch": 392,
+        "scene": 1588,
+        "phase": "initial-primary",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:45:28.7991306Z",
+        "prompt": {
+          "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph for Maldives Scene 1588. The close camera sits inside an active affectionate moment at Hanifaru Bay, Baa Atoll; large faces, complete legs and complete shoes remain readable.\n\nRadiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly 21 years old. Keep unmistakably adult young-adult presentation. Face continuity comes from three historical photographs in this upload order: scene 938, scene 936, then scene 937. Scene 938 maps far-left Alia with voluminous natural curls, second-from-left blonde Radiance, third-from-left dark-haired Ellie, and far-right dark-haired AI ECE holding the gold route light. Scene 936 maps left-to-right Alia, Radiance, Ellie, ECE. Scene 937 maps far-left Alia, seated blonde Radiance, center-right Ellie, far-right ECE with the lantern. The photographs govern facial geometry, skin tone and name ownership; clothing, pose, props and setting come from this request. No male figure appears.\n\nLocation and theme: a close orbital research lounge above Hanifaru Bay in Baa Atoll, with the heart-shaped turquoise lagoon, faros, patch reefs, empty sand cays and distant manta silhouettes outside the calibration line. Peaceful orbital research-station couture adds cupola glass, docking rings, solar facets, navigation light and silver ribs while Maldives remains unmistakable through Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs. No literal flag, crescent, coat of arms, sacred mark, religious building, uniform, badge, copied logo, politics or unrelated brand.\n\nCamera and action: A fourteen-degree Dutch tilt places Ellie's exact face and hair near the left frame edge while the quartet remains head-to-shoe in staggered depth; complete heels and socks stay readable. Radiance settles sideways across Ellie's lap on a stable low banquette while Alia gives Radiance a brief cheek peck. Ellie supports Radiance with a clear waist hand and watches Alia with a tightened jealous smile; ECE leans close from the side through a warm eye-line without touching the calibration equipment group. The designated jealous woman is Ellie; show her direct eye-line toward the affectionate pair plus the stated calm nonviolent signal. The peck stays brief, reciprocal, closed-mouth and affectionate. Lap seating is sideways with stable support, planted feet and complete opaque seat and pelvic coverage. Keep zero static lineup and zero equal spacing.\n\nRAZE nonprofit 1/1 hosiery: exactly Radiance and Alia wear paired opaque rainbow-gradient knee-high socks directly on visible uncovered skin. Exactly Ellie and AI ECE have bare lower legs with no socks, stockings, leggings or tights. Radiance has the text-free sixteen-point Split-Star on her left sock and the exact angular RAZE wordmark on her right sock. Alia reverses that side assignment. Both wordmarks read vertical up the outer calf. Each sock carries a single restrained outer upper-calf mark; branding stays on socks and nowhere else.\n\nSecure opaque cocktail wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: lagoon turquoise with sunset gold secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark vertical up the outer calf, low-vamp gold pumps\nEllie: reef cobalt with sand white secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front sand-white slingbacks\nAlia: coral pink with manta charcoal secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark vertical up the outer calf, low-vamp cobalt pumps\nAI ECE: mangrove jade with monsoon silver secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front turquoise heels\n\nAI ECE alone handles a polished rainbow-gradient large-frame inert cinema-training prop at the separated outer calibration edge. Both of ECE's hands stay on that prop with straight wrists and a straight index outside the empty guard; no human contact shares those equipment hands. The prop points strictly toward a complete thick coral-sand backstop behind a transparent safety screen in a dry empty calibration lane at far right. No ammunition, firing, flash, threat, injury, combat, or person, animal, occupied-object or camera aim. PAWS the tiny collarless golden kitten and MAX the golden-retriever pup rest together inside a protected padded nook behind the relationship group, far from the calibration lane.\n\nShow every adult face, two traceable arms and hands per person, two complete legs and feet per person, separated silhouettes, visible joints, single clear role per hand and plausible complete footwear. Natural overlap is welcome without gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, under-garment angle, coercion or sexual activity. Visible text is restricted to exact RAZE sock wordmarks; no watermark.\n",
+          "sha256": "6EF189B91C95A13BA1B7B7104E729AABB97EBE4F76E6137B405CA5117199CDC0",
+          "encoding": "utf8",
+          "bytes": 6033,
+          "fidelity": "runtime-launch-byte-exact",
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-initial-primary.txt"
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred in this browser dispatch; the exact age/name/position map and source hashes were preserved in the committed preflight and prompt text."
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-392/raw/initial/scene-1588-meta-ai-primary.webp",
+          "sha256": "50922084C92D598E2870A0D04024E9DC65C997940B8653E727E63D1B56C42A64",
+          "bytes": 637888,
+          "width": 1152,
+          "height": 2048
+        },
+        "rejectionReason": "Hard-unusable: the inert prop's open end crosses the seated cast and no complete downrange target/backstop is visible. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+        "conversationRefSha256": "0DB93EAEBC6581DFAE4742DC222BAE33697F4027F9ECDE45D2050C123876EC19",
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1589-meta-ai-initial-primary-visually-rejected",
+        "batch": 392,
+        "scene": 1589,
+        "phase": "initial-primary",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:44:19.0525128Z",
+        "prompt": {
+          "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph for Maldives Scene 1589. The close camera sits inside an active affectionate moment at Fuvahmulah and Thoondu; large faces, complete legs and complete shoes remain readable.\n\nRadiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly 21 years old. Keep unmistakably adult young-adult presentation. Face continuity comes from three historical photographs in this upload order: scene 938, scene 936, then scene 937. Scene 938 maps far-left Alia with voluminous natural curls, second-from-left blonde Radiance, third-from-left dark-haired Ellie, and far-right dark-haired AI ECE holding the gold route light. Scene 936 maps left-to-right Alia, Radiance, Ellie, ECE. Scene 937 maps far-left Alia, seated blonde Radiance, center-right Ellie, far-right ECE with the lantern. The photographs govern facial geometry, skin tone and name ownership; clothing, pose, props and setting come from this request. No male figure appears.\n\nLocation and theme: a close orbital observation deck above Fuvahmulah, with the single-island atoll silhouette, Thoondu pebble beach, white surf, palm rim and inland kilhi wetland contours clearly readable. Peaceful orbital research-station couture adds cupola glass, docking rings, solar facets, navigation light and silver ribs while Maldives remains unmistakable through Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings. No literal flag, crescent, coat of arms, sacred mark, religious building, uniform, badge, copied logo, politics or unrelated brand.\n\nCamera and action: A floor-adjacent front-quarter fashion view looks toward complete heels, uncovered legs, opaque skort side seams, torsos and faces; the lens stays outside garment volume and away from the space between legs. Ellie turns through Radiance's behind hug and gives Radiance a brief cheek peck. ECE closes into a shoulder-level side hug through eye-line and torso direction; Alia catches Ellie's free hand and answers the pair with a raised-brow jealous look. The designated jealous woman is Alia; show her direct eye-line toward the affectionate pair plus the stated calm nonviolent signal. The peck stays brief, reciprocal, closed-mouth and affectionate. Lap seating is sideways with stable support, planted feet and complete opaque seat and pelvic coverage. Keep zero static lineup and zero equal spacing.\n\nRAZE nonprofit 1/1 hosiery: exactly Radiance and Ellie wear paired opaque rainbow-gradient knee-high socks directly on visible uncovered skin. Exactly Alia and AI ECE have bare lower legs with no socks, stockings, leggings or tights. Radiance has the text-free sixteen-point Split-Star on her left sock and the exact angular RAZE wordmark on her right sock. Ellie reverses that side assignment. Both wordmarks read compact horizontal at the outer upper calf. Each sock carries a single restrained outer upper-calf mark; branding stays on socks and nowhere else.\n\nSecure opaque cocktail wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: sand white with coral pink secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark compact horizontal at the outer upper calf, low-vamp gold pumps\nEllie: deep-ocean navy with lagoon turquoise secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark compact horizontal at the outer upper calf, open-front sand-white slingbacks\nAlia: sunset gold with reef cobalt secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, uncovered legs from the concise garment edge to complete footwear, with no hosiery, low-vamp cobalt pumps\nAI ECE: mangrove jade with pebble silver secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front turquoise heels\n\nAI ECE alone handles a polished rainbow-gradient large-frame inert cinema-training prop at the separated outer calibration edge. Both of ECE's hands stay on that prop with straight wrists and a straight index outside the empty guard; no human contact shares those equipment hands. The prop points strictly toward a complete thick inert sand backstop behind a clear safety screen in a dry empty calibration lane at far right. No ammunition, firing, flash, threat, injury, combat, or person, animal, occupied-object or camera aim. PAWS and MAX are absent.\n\nShow every adult face, two traceable arms and hands per person, two complete legs and feet per person, separated silhouettes, visible joints, single clear role per hand and plausible complete footwear. Natural overlap is welcome without gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, under-garment angle, coercion or sexual activity. Visible text is restricted to exact RAZE sock wordmarks; no watermark.\n",
+          "sha256": "B4214DD45609FDA365C54DB720898FAB574B5717D5743FBB3FBE960DF830734F",
+          "encoding": "utf8",
+          "bytes": 5889,
+          "fidelity": "runtime-launch-byte-exact",
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-initial-primary.txt"
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred in this browser dispatch; the exact age/name/position map and source hashes were preserved in the committed preflight and prompt text."
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-392/raw/initial/scene-1589-meta-ai-primary.webp",
+          "sha256": "14C7920A3BF8DF8A6AFC63A6415004751185394EABFD8796BA4D7C5011314B64",
+          "bytes": 740608,
+          "width": 1152,
+          "height": 2048
+        },
+        "rejectionReason": "Hard-unusable: the inert prop faces inward without a complete visible target/backstop lane. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+        "conversationRefSha256": "A5C07CCFCF108C26277E0989AAD03D6DBF8461D81F8ABF299045B5D14FA9DB0C",
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1590-meta-ai-initial-primary-visually-rejected",
+        "batch": 392,
+        "scene": 1590,
+        "phase": "initial-primary",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:44:18.9971910Z",
+        "prompt": {
+          "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph for Maldives Scene 1590. The close camera sits inside an active affectionate moment at Addu Atoll causeway; large faces, complete legs and complete shoes remain readable.\n\nRadiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly 21 years old. Keep unmistakably adult young-adult presentation. Face continuity comes from three historical photographs in this upload order: scene 938, scene 936, then scene 937. Scene 938 maps far-left Alia with voluminous natural curls, second-from-left blonde Radiance, third-from-left dark-haired Ellie, and far-right dark-haired AI ECE holding the gold route light. Scene 936 maps left-to-right Alia, Radiance, Ellie, ECE. Scene 937 maps far-left Alia, seated blonde Radiance, center-right Ellie, far-right ECE with the lantern. The photographs govern facial geometry, skin tone and name ownership; clothing, pose, props and setting come from this request. Add the established clearly adult athletic bearded man as a fifth figure behind ECE. He wears a fitted sand-white orbital shirt, tailored dark above-knee shorts and complete black shoes; he stays outside the quartet sock count.\n\nLocation and theme: a close research-station lounge beside Addu Atoll's linked-island causeway, with the horseshoe lagoon, reef passes, seagrass shallows, mangrove belts, low coral islands and empty causeway curve clearly visible. Peaceful orbital research-station couture adds cupola glass, docking rings, solar facets, navigation light and silver ribs while Maldives remains unmistakable through Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets. No literal flag, crescent, coat of arms, sacred mark, religious building, uniform, badge, copied logo, politics or unrelated brand.\n\nCamera and action: A high oblique close view with a mild Dutch roll looks down over the stable lap composition; diagonal foreshortening keeps faces, hands, socks or bare legs and complete heels readable. Alia settles sideways across Radiance's lap on a stable station bench while Ellie gives Alia a brief temple peck. The established adult man stands behind ECE with his strongest gaze returning to her; ECE keeps the visibly jealous counter-beat from the isolated calibration edge. The designated jealous woman is AI ECE; show her direct eye-line toward the affectionate pair plus the stated calm nonviolent signal. The peck stays brief, reciprocal, closed-mouth and affectionate. Lap seating is sideways with stable support, planted feet and complete opaque seat and pelvic coverage. Keep zero static lineup and zero equal spacing.\n\nRAZE nonprofit 1/1 hosiery: exactly Radiance and AI ECE wear paired opaque rainbow-gradient knee-high socks directly on visible uncovered skin. Exactly Ellie and Alia have bare lower legs with no socks, stockings, leggings or tights. Radiance has the text-free sixteen-point Split-Star on her left sock and the exact angular RAZE wordmark on her right sock. AI ECE reverses that side assignment. Both wordmarks read vertical up the outer calf. Each sock carries a single restrained outer upper-calf mark; branding stays on socks and nowhere else.\n\nSecure opaque cocktail wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: reef cobalt with seagrass green secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark vertical up the outer calf, low-vamp gold pumps\nEllie: coral pink with sand white secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front sand-white slingbacks\nAlia: lagoon turquoise with sunset gold secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, uncovered legs from the concise garment edge to complete footwear, with no hosiery, low-vamp cobalt pumps\nAI ECE: manta charcoal with monsoon silver secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark vertical up the outer calf, open-front turquoise heels\n\nAI ECE alone handles a polished rainbow-gradient large-frame inert cinema-training prop at the separated outer calibration edge. Both of ECE's hands stay on that prop with straight wrists and a straight index outside the empty guard; no human contact shares those equipment hands. The prop points strictly toward a marked empty-water calibration disk with a complete transparent catch screen behind it in a cordoned lagoon lane far from people, boats and wildlife. No ammunition, firing, flash, threat, injury, combat, or person, animal, occupied-object or camera aim. MAX the golden-retriever pup rests inside a protected padded nook behind the relationship group, far from the calibration lane.\n\nShow every adult face, two traceable arms and hands per person, two complete legs and feet per person, separated silhouettes, visible joints, single clear role per hand and plausible complete footwear. Natural overlap is welcome without gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, under-garment angle, coercion or sexual activity. Visible text is restricted to exact RAZE sock wordmarks; no watermark.\n",
+          "sha256": "7BCA64039B891D9DCCBB83B58C0A7F1E35817CB23F9AF6BF91152AFD6D235DFB",
+          "encoding": "utf8",
+          "bytes": 6198,
+          "fidelity": "runtime-launch-byte-exact",
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1590-meta-initial-primary.txt"
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred in this browser dispatch; the exact age/name/position map and source hashes were preserved in the committed preflight and prompt text."
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-392/raw/initial/scene-1590-meta-ai-primary.webp",
+          "sha256": "5A8E2CA749389334560CEB545D50400B864BABCFE5108A93BDE178D27DC12B44",
+          "bytes": 627262,
+          "width": 1152,
+          "height": 2048
+        },
+        "rejectionReason": "Hard-unusable: the inert prop lacks the required visible empty-water marker and complete catch screen/backstop, and the outside trigger-index geometry is absent. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+        "conversationRefSha256": "DB7922A47FDD81C6945FD89FD5E8C77878A684E803CB01CDB700E5E7DFFCECF3",
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1591-meta-ai-initial-primary-visually-rejected",
+        "batch": 392,
+        "scene": 1591,
+        "phase": "initial-primary",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:44:19.1101055Z",
+        "prompt": {
+          "text": "Render a vertical 1152 by 2048 realistic cinematic fashion photograph for Maldives Scene 1591. The close camera sits inside an active affectionate moment at Baa Atoll micro-atolls; large faces, complete legs and complete shoes remain readable.\n\nRadiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly 21 years old. Keep unmistakably adult young-adult presentation. Face continuity comes from three historical photographs in this upload order: scene 938, scene 936, then scene 937. Scene 938 maps far-left Alia with voluminous natural curls, second-from-left blonde Radiance, third-from-left dark-haired Ellie, and far-right dark-haired AI ECE holding the gold route light. Scene 936 maps left-to-right Alia, Radiance, Ellie, ECE. Scene 937 maps far-left Alia, seated blonde Radiance, center-right Ellie, far-right ECE with the lantern. The photographs govern facial geometry, skin tone and name ownership; clothing, pose, props and setting come from this request. No male figure appears.\n\nLocation and theme: a close orbital research banquette above Baa Atoll's micro-atolls, with complete faros, bright shallows, patch reefs, mangrove islets and empty sand cays clearly readable through the cupola. Peaceful orbital research-station couture adds cupola glass, docking rings, solar facets, navigation light and silver ribs while Maldives remains unmistakable through micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs. No literal flag, crescent, coat of arms, sacred mark, religious building, uniform, badge, copied logo, politics or unrelated brand.\n\nCamera and action: A strong canted moving portrait places Radiance's exact face and blonde hair near the foreground edge with a foreground heel and opaque skirt-side seam; the other adults close through diagonal depth. Ellie steps through Alia's behind hug while Alia gives Ellie a brief cheek peck. Radiance catches Alia's free hand and looks toward the affectionate pair with visible jealousy; ECE answers from inches away through a close inviting gaze while her equipment hands remain isolated. The designated jealous woman is Radiance; show her direct eye-line toward the affectionate pair plus the stated calm nonviolent signal. The peck stays brief, reciprocal, closed-mouth and affectionate. Lap seating is sideways with stable support, planted feet and complete opaque seat and pelvic coverage. Keep zero static lineup and zero equal spacing.\n\nRAZE nonprofit 1/1 hosiery: exactly Ellie and Alia wear paired opaque rainbow-gradient knee-high socks directly on visible uncovered skin. Exactly Radiance and AI ECE have bare lower legs with no socks, stockings, leggings or tights. Ellie has the text-free sixteen-point Split-Star on her left sock and the exact angular RAZE wordmark on her right sock. Alia reverses that side assignment. Both wordmarks read compact horizontal at the outer upper calf. Each sock carries a single restrained outer upper-calf mark; branding stays on socks and nowhere else.\n\nSecure opaque cocktail wardrobe with complete bust, seat, pelvic and intimate coverage:\nRadiance: mangrove jade with lagoon turquoise secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, low-vamp gold pumps\nEllie: deep-ocean navy with coral pink secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark compact horizontal at the outer upper calf, open-front sand-white slingbacks\nAlia: sunset gold with sand white secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark compact horizontal at the outer upper calf, low-vamp cobalt pumps\nAI ECE: reef cobalt with monsoon silver secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front turquoise heels\n\nAI ECE alone handles a polished rainbow-gradient large-frame inert cinema-training prop at the separated outer calibration edge. Both of ECE's hands stay on that prop with straight wrists and a straight index outside the empty guard; no human contact shares those equipment hands. The prop points strictly toward a marked empty-water calibration disk with a complete transparent catch screen behind it in a cordoned open-water lane away from people, boats, animals and reefs. No ammunition, firing, flash, threat, injury, combat, or person, animal, occupied-object or camera aim. PAWS and MAX are absent.\n\nShow every adult face, two traceable arms and hands per person, two complete legs and feet per person, separated silhouettes, visible joints, single clear role per hand and plausible complete footwear. Natural overlap is welcome without gross extra, missing, fused, floating, borrowed or impossible anatomy. No exposed underwear, accidental exposure, under-garment angle, coercion or sexual activity. Visible text is restricted to exact RAZE sock wordmarks; no watermark.\n",
+          "sha256": "6351700307BDAC333F7B3D235D1C4A3E5E592D186E58F811F3AD60BFB7F01FB9",
+          "encoding": "utf8",
+          "bytes": 5925,
+          "fidelity": "runtime-launch-byte-exact",
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-initial-primary.txt"
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred in this browser dispatch; the exact age/name/position map and source hashes were preserved in the committed preflight and prompt text."
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-392/raw/initial/scene-1591-meta-ai-primary.webp",
+          "sha256": "612565D9D6C128FE7D069C1A0E208EB37277FA39BE97E7FBAA36821644E54F38",
+          "bytes": 607878,
+          "width": 1152,
+          "height": 2048
+        },
+        "rejectionReason": "Hard-unusable: the inert prop presents toward the camera without the complete separate empty-water marker and catch screen/backstop. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+        "conversationRefSha256": "CA3F38DF2CF5E517D5AD2EA36AFD16E198E54EE1C6B8A6568125D075FF50F1E1",
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1588-meta-ai-successor-b-visually-rejected",
+        "batch": 392,
+        "scene": 1588,
+        "phase": "successor-b",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:57:51.091Z",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-successor-b.txt",
+          "text": "Render a second independent candidate for Maldives Scene 1588 from the same requested cast, location, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces.\n\nStrengthen the fourteen-degree Dutch tilt and near-face depth while keeping every adult head-to-shoe. Radiance sits sideways across Ellie's stable lap; Alia gives Radiance a brief cheek peck; Ellie supports Radiance and watches Alia with calm visible jealousy; ECE leans close through eye-line while both equipment hands stay isolated at far right. Show complete heels, complete legs, secure opaque upper-thigh cocktail garments, and visible uncovered skin above every knee-high.\n\nExactly Radiance and Alia wear paired opaque rainbow-gradient RAZE knee-highs. Radiance is Split-Star left and angular RAZE wordmark right; Alia reverses. Both wordmarks run vertically up the outer calf. Ellie and ECE have bare lower legs. Keep Hanifaru Bay's heart-shaped lagoon, faro rings and manta-current motifs large. ECE's harmless inert rainbow calibration prop points toward a complete coral-sand backstop behind a transparent safety screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+          "sha256": "B2545C9E3B2EA4FB05CCD4533F67401DEB4C79EE41DF5A40E0DD26739138EA57",
+          "encoding": "utf8",
+          "bytes": 1542,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred for successor B."
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-392/raw/successor-b/scene-1588-meta-successor-b.webp",
+          "sha256": "D915C63C6F0C7D5D17703FCD005DE0B61453527FA3AA40D4AFDF6179E3A14FA6",
+          "bytes": 533354,
+          "width": 1152,
+          "height": 2048
+        },
+        "rejectionReason": "Hard-unusable: the text-only candidate does not preserve the exact scene-938/936/937 age-21 faces, and the open rainbow frame has no complete separately readable downrange target and backstop lane.",
+        "conversationRefSha256": "0DB93EAEBC6581DFAE4742DC222BAE33697F4027F9ECDE45D2050C123876EC19",
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1589-meta-ai-successor-b-visually-rejected",
+        "batch": 392,
+        "scene": 1589,
+        "phase": "successor-b",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:57:51.091Z",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-successor-b.txt",
+          "text": "Render a second independent candidate for Maldives Scene 1589 from the same requested cast, Fuvahmulah setting, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces.\n\nPush the safe floor-adjacent front-quarter fashion angle toward complete heels, uncovered legs, opaque skort side seams, torsos and faces; keep the lens outside garment volume and away from the space between legs. Ellie turns inside Radiance's behind hug and gives Radiance a brief cheek peck; Alia catches Ellie's free hand with a calm jealous raised brow; ECE closes through a side-hug eye-line while both equipment hands remain isolated. Keep motion diagonal, faces large, feet complete and zero static lineup.\n\nExactly Radiance and Ellie wear paired opaque rainbow-gradient RAZE knee-highs directly on uncovered legs. Radiance is Split-Star left and RAZE right; Ellie reverses. Both wordmarks sit compact and horizontal at the outer upper calf. Alia and ECE have bare lower legs. Keep Thoondu pebble fields, fringing reef, kilhi wetlands and mangrove-fan motifs large. ECE's harmless inert rainbow calibration prop points toward a thick sand backstop behind a clear safety screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+          "sha256": "D6C4789B39828C143F08767E4A045EC02F7F21C33D29A43E0C124F28B22B0A8A",
+          "encoding": "utf8",
+          "bytes": 1605,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred for successor B."
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-392/raw/successor-b/scene-1589-meta-successor-b.webp",
+          "sha256": "F5AFCF42FEB0266FF22CDC5F586A7A4BA00BCE22C6ACA7AF62F2C06249BC4AC2",
+          "bytes": 522858,
+          "width": 1152,
+          "height": 2048
+        },
+        "rejectionReason": "Hard-unusable: the text-only candidate does not preserve the exact scene-938/936/937 age-21 faces, and the rainbow frame overlaps the cast without a complete separately readable downrange target and backstop lane.",
+        "conversationRefSha256": "A5C07CCFCF108C26277E0989AAD03D6DBF8461D81F8ABF299045B5D14FA9DB0C",
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1591-meta-ai-successor-b-visually-rejected",
+        "batch": 392,
+        "scene": 1591,
+        "phase": "successor-b",
+        "status": "completed-output-visually-rejected-hard-unusable",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:57:51.091Z",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-successor-b.txt",
+          "text": "Render a second independent candidate for Maldives Scene 1591 from the same requested cast, Baa micro-atoll setting, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces.\n\nStrengthen the canted moving portrait with Radiance's exact face and blonde hair near the foreground edge plus a foreground heel and opaque skirt-side seam. Ellie steps through Alia's behind hug while Alia gives Ellie a brief cheek peck; Radiance catches Alia's free hand and watches the pair with calm visible jealousy; ECE answers through a close inviting gaze while both equipment hands remain isolated. Keep diagonal movement, faces large, complete feet, secure opaque upper-thigh cocktail clothing, and zero static lineup.\n\nExactly Ellie and Alia wear paired opaque rainbow-gradient RAZE knee-highs directly on uncovered legs. Ellie is Split-Star left and RAZE right; Alia reverses. Both wordmarks sit compact and horizontal at the outer upper calf. Radiance and ECE have bare lower legs. Keep micro-atoll rings, lagoon shelves, reef chains and mangrove-islet motifs large. ECE's harmless inert rainbow calibration prop points toward the marked empty-water disk and complete transparent catch screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+          "sha256": "EF77E89D582FA74799E2042372F86E48FB36D7584EEA5A3B6F417A7929E4510E",
+          "encoding": "utf8",
+          "bytes": 1631,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred for successor B."
+        },
+        "refusalText": null,
+        "rawOutput": {
+          "state": "preserved",
+          "path": "tmp/world-195x4/batch-392/raw/successor-b/scene-1591-meta-successor-b.webp",
+          "sha256": "B088B02243492B4747C53819E894AED38A08BD5697F937B0914E4820250637A7",
+          "bytes": 563048,
+          "width": 1152,
+          "height": 2048
+        },
+        "rejectionReason": "Hard-unusable: an extra fifth woman appears, the exact scene-938/936/937 age-21 faces are not preserved, and the barrel-like rainbow object points out of frame without a complete visible safe target and backstop.",
+        "conversationRefSha256": "CA3F38DF2CF5E517D5AD2EA36AFD16E198E54EE1C6B8A6568125D075FF50F1E1",
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1590-meta-ai-successor-b-refused-no-bytes",
+        "batch": 392,
+        "scene": 1590,
+        "phase": "successor-b",
+        "status": "moderation-blocked-fallback-pending-no-bytes",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T09:57:51.091Z",
+        "prompt": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1590-meta-successor-b.txt",
+          "text": "Render a second independent candidate for Maldives Scene 1590 from the same requested five-person cast, Addu Atoll setting, wardrobe and relationship event. Keep Radiance, Ellie, Alia and AI ECE as four distinct fictional adult women, each exactly 21, with scene-938 face mapping: Alia far left with voluminous curls, blonde Radiance second, dark-haired Ellie third, dark-haired ECE far right; scenes 936 and 937 supplement those same faces. The established clearly adult bearded man appears behind ECE without replacing any woman.\n\nStrengthen the high oblique close view and mild Dutch roll over the stable lap action. Alia sits sideways across Radiance's lap while Ellie gives Alia a brief temple peck; ECE supplies the calm jealous eye-line from the isolated calibration edge and the man returns his strongest gaze to ECE. Keep all five faces distinct, complete legs and footwear readable through diagonal foreshortening, secure opaque upper-thigh cocktail clothing, and zero static lineup.\n\nExactly Radiance and ECE wear paired opaque rainbow-gradient RAZE knee-highs directly on uncovered legs. Radiance is Split-Star left and RAZE right; ECE reverses. Both wordmarks run vertically up the outer calf. Ellie and Alia have bare lower legs. Keep Addu horseshoe geometry, causeway arcs, reef passes and seagrass motifs large. ECE's harmless inert rainbow calibration prop points toward the marked empty-water disk and complete transparent catch screen, never toward any person, animal or camera. No ammunition, firing, threat, injury, combat, accidental exposure, sexual activity, broken anatomy, extra limbs, text beyond RAZE, or watermark.\n",
+          "sha256": "71E81DF4E384D51F4468D0AEE600257081C198121D7C8624B5391CB4EBB6C1FB",
+          "encoding": "utf8",
+          "bytes": 1644,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "fallbackPrompt": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1590-meta-successor-b-fallback.txt",
+          "text": "Render candidate B fallback for Maldives Scene 1590 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nShow a close standing group portrait with a strengthened high oblique view and mild Dutch roll in the orbital research lounge above Addu Atoll. Keep Addu's horseshoe lagoon, linked-island causeway, reef passes, seagrass channels and solar facets large. Ellie gives Alia a brief closed-mouth temple peck while Radiance supports Alia through a warm side hug. ECE shows the calm jealous eye-line toward them; the established bearded adult man stands behind ECE and returns his strongest gaze to her. ECE holds a small gold route lantern with both hands; omit calibration equipment.\n\nRadiance and ECE wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Radiance has the text-free sixteen-point Split-Star on the left sock and angular RAZE wordmark vertically on the right outer calf; ECE reverses those sides. Ellie and Alia have bare lower legs. Keep secure sequined strapless, cropped and open-back cocktail looks with complete coverage, concise tailored hems and large Addu motifs.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "BE833DE5EC133F3BD8663F6957CFA51B2D41F28C6C1B7B1BF7442F449F30BBB6",
+          "encoding": "utf8",
+          "bytes": 1937,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "refusalText": "I wasn't able to generate that exact second variation for Scene 1590 with the same lap and calibration setup.",
+        "rawOutput": {
+          "state": "no-bytes",
+          "provenance": "Meta AI returned refusal text and emitted no successor-B media element; the prior initial candidate remains separately preserved."
+        },
+        "faceReferenceTransfer": {
+          "state": "text-only",
+          "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+          "referencesTransferred": false,
+          "provenance": "No reference files were transferred for successor B."
+        },
+        "conversationRefSha256": "DB7922A47FDD81C6945FD89FD5E8C77878A684E803CB01CDB700E5E7DFFCECF3",
+        "immutable": true
+      }
+    ]
   },
   "acceptedAssets": [],
-  "rejectedAssets": [],
+  "rejectedAssets": [
+    {
+      "scene": 1588,
+      "attempt": "initial-primary",
+      "path": "tmp/world-195x4/batch-392/raw/initial/scene-1588-meta-ai-primary.webp",
+      "sha256": "50922084C92D598E2870A0D04024E9DC65C997940B8653E727E63D1B56C42A64",
+      "bytes": 637888,
+      "status": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop's open end crosses the seated cast and no complete downrange target/backstop is visible. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "immutable": true
+    },
+    {
+      "scene": 1589,
+      "attempt": "initial-primary",
+      "path": "tmp/world-195x4/batch-392/raw/initial/scene-1589-meta-ai-primary.webp",
+      "sha256": "14C7920A3BF8DF8A6AFC63A6415004751185394EABFD8796BA4D7C5011314B64",
+      "bytes": 740608,
+      "status": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop faces inward without a complete visible target/backstop lane. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "immutable": true
+    },
+    {
+      "scene": 1590,
+      "attempt": "initial-primary",
+      "path": "tmp/world-195x4/batch-392/raw/initial/scene-1590-meta-ai-primary.webp",
+      "sha256": "5A8E2CA749389334560CEB545D50400B864BABCFE5108A93BDE178D27DC12B44",
+      "bytes": 627262,
+      "status": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop lacks the required visible empty-water marker and complete catch screen/backstop, and the outside trigger-index geometry is absent. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "immutable": true
+    },
+    {
+      "scene": 1591,
+      "attempt": "initial-primary",
+      "path": "tmp/world-195x4/batch-392/raw/initial/scene-1591-meta-ai-primary.webp",
+      "sha256": "612565D9D6C128FE7D069C1A0E208EB37277FA39BE97E7FBAA36821644E54F38",
+      "bytes": 607878,
+      "status": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the inert prop presents toward the camera without the complete separate empty-water marker and catch screen/backstop. The text-only result does not preserve the exact scene-938/936/937 age-21 faces.",
+      "immutable": true
+    },
+    {
+      "scene": 1588,
+      "attempt": "successor-b",
+      "path": "tmp/world-195x4/batch-392/raw/successor-b/scene-1588-meta-successor-b.webp",
+      "sha256": "D915C63C6F0C7D5D17703FCD005DE0B61453527FA3AA40D4AFDF6179E3A14FA6",
+      "bytes": 533354,
+      "status": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the text-only candidate does not preserve the exact scene-938/936/937 age-21 faces, and the open rainbow frame has no complete separately readable downrange target and backstop lane.",
+      "immutable": true
+    },
+    {
+      "scene": 1589,
+      "attempt": "successor-b",
+      "path": "tmp/world-195x4/batch-392/raw/successor-b/scene-1589-meta-successor-b.webp",
+      "sha256": "F5AFCF42FEB0266FF22CDC5F586A7A4BA00BCE22C6ACA7AF62F2C06249BC4AC2",
+      "bytes": 522858,
+      "status": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: the text-only candidate does not preserve the exact scene-938/936/937 age-21 faces, and the rainbow frame overlaps the cast without a complete separately readable downrange target and backstop lane.",
+      "immutable": true
+    },
+    {
+      "scene": 1591,
+      "attempt": "successor-b",
+      "path": "tmp/world-195x4/batch-392/raw/successor-b/scene-1591-meta-successor-b.webp",
+      "sha256": "B088B02243492B4747C53819E894AED38A08BD5697F937B0914E4820250637A7",
+      "bytes": 563048,
+      "status": "visually-rejected-hard-unusable",
+      "rejectionReason": "Hard-unusable: an extra fifth woman appears, the exact scene-938/936/937 age-21 faces are not preserved, and the barrel-like rainbow object points out of frame without a complete visible safe target and backstop.",
+      "immutable": true
+    }
+  ],
   "xPost": {
     "status": "ineligible-active-country",
     "caption": "Maldives ❤️ Malta #Maldives",
@@ -715,5 +1267,119 @@
     "themeEvidence": [
       "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/0"
     ]
+  },
+  "rollingState": {
+    "recordedAt": "2026-08-20T09:57:51.091Z",
+    "candidateUnderInspection": "successor B classified hard-unusable for scenes 1588, 1589 and 1591; scene 1590 refused with no bytes",
+    "nextCandidateInFlight": "none pending evidence commit and remote verification",
+    "candidateNPlus2Gate": "closed until successor-B raw/refusal evidence is archived, verified, committed, pushed and remote-verified",
+    "preparedNextDispatch": "successor C for scenes 1588, 1589 and 1591 plus the single successor-B fallback retry for scene 1590"
+  },
+  "rollingLexiconSnapshot": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+    "sha256": "C21966B13D0C2D42D8BCFBE528187ECA308485E44599FB195918D0369DEB3B88",
+    "bytes": 125194,
+    "observedAt": "2026-08-20T09:57:51.091Z",
+    "blacklist": [
+      "16",
+      "16 full-length",
+      "9",
+      "9 16",
+      "anchors",
+      "anchors only",
+      "create",
+      "create one",
+      "editorial",
+      "editorial use",
+      "fresh",
+      "fresh photorealistic",
+      "full-length",
+      "full-length starlight",
+      "identity",
+      "identity anchors",
+      "one",
+      "one fresh",
+      "only",
+      "original",
+      "original identity",
+      "photorealistic",
+      "photorealistic 9",
+      "public-fashion",
+      "public-fashion editorial",
+      "series",
+      "series public-fashion",
+      "starlight",
+      "starlight world",
+      "use",
+      "use original",
+      "world",
+      "world series"
+    ]
+  },
+  "preparedRollingPrompts": {
+    "successorC": {
+      "1588": {
+        "primary": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-successor-c-primary.txt",
+          "text": "Render candidate C for Maldives Scene 1588 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nChoose a fourteen-degree Dutch tilt and close diagonal depth in an orbital lounge above Hanifaru Bay. Radiance sits sideways across Ellie's stable lap while Alia gives Radiance a brief closed-mouth cheek peck. Ellie supports Radiance and watches Alia with a calm jealous smile. ECE leans into the shared eye-line from the far edge. Show the heart-shaped lagoon, faro rings, manta-current arcs, cupola ribs, PAWS and MAX resting in a protected nook.\n\nRadiance and Alia wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Radiance has the text-free sixteen-point Split-Star on the left sock and angular RAZE wordmark vertically on the right outer calf; Alia reverses those sides. Ellie and ECE have bare lower legs. Their sequined strapless, cropped, open-back cocktail looks carry large Maldives lagoon and reef motifs with complete coverage and concise tailored hems. At the separated outer calibration edge, ECE alone holds a large open rectangular rainbow calibration frame with no barrel, muzzle, grip or trigger. It is visibly inert and points toward a complete thick sand backstop behind a clear safety screen, away from every person, animal and lens. No ammunition, firing, flash, threat, injury or combat.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "D7B7C39392E3B22D2F6197BE40DF80A2AB5830577E07658CB821A564BD8D847A",
+          "encoding": "utf8",
+          "bytes": 2160,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "fallback": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-successor-c-fallback.txt",
+          "text": "Render a simplified Maldives Scene 1588 fashion photograph with the supplied scene-938, 936 and 937 faces for Alia, Radiance, Ellie and ECE, all fictional adults exactly 21. Keep the Dutch tilt, Radiance sitting safely across Ellie's lap, Alia's brief cheek peck, Ellie's jealous eye-line, Hanifaru lagoon and complete bodies. Radiance and Alia wear paired rainbow RAZE knee-highs on uncovered legs; Ellie and ECE have bare lower legs. Keep opaque cocktail coverage. Omit calibration equipment.\n",
+          "sha256": "EADBD6E0F81E00827D930D517CB034D7BF4A0DB25BF2C46045EC556E056BF94A",
+          "encoding": "utf8",
+          "bytes": 495,
+          "fidelity": "runtime-launch-byte-exact"
+        }
+      },
+      "1589": {
+        "primary": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-successor-c-primary.txt",
+          "text": "Render candidate C for Maldives Scene 1589 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nFrame a safe floor-adjacent front-quarter fashion angle in an orbital observation deck above Fuvahmulah. Keep the lens outside garment volume and away from the space between legs. Ellie turns inside Radiance's behind hug and gives Radiance a brief closed-mouth cheek peck. Alia catches Ellie's free hand and shows a calm jealous raised brow; ECE joins through a shoulder-level side hug. Show Thoondu pebble beach, white surf, palm rim, kilhi wetland contours and station cupola ribs.\n\nRadiance and Ellie wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Radiance has the text-free sixteen-point Split-Star on the left sock and compact angular RAZE wordmark on the right outer calf; Ellie reverses those sides. Alia and ECE have bare lower legs. Their sequined strapless, cropped, open-back cocktail looks carry large Thoondu, reef, kilhi and mangrove motifs with complete coverage and concise tailored hems. At the separated outer calibration edge, ECE alone holds a large open rectangular rainbow calibration frame with no barrel, muzzle, grip or trigger. It is visibly inert and points toward a complete thick sand backstop behind a clear safety screen, away from every person, animal and lens. No ammunition, firing, flash, threat, injury or combat.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "E8FDCE41557653CC04E4EE1BB0A378A0FDAD16BE291E49AC9FA61EF0181A230A",
+          "encoding": "utf8",
+          "bytes": 2202,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "fallback": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-successor-c-fallback.txt",
+          "text": "Render a simplified Maldives Scene 1589 fashion photograph with the supplied scene-938, 936 and 937 faces for Alia, Radiance, Ellie and ECE, all fictional adults exactly 21. Keep a safe low front-quarter angle, Radiance's behind hug, Ellie's brief cheek peck, Alia's jealous eye-line, Fuvahmulah landmarks and complete bodies. Radiance and Ellie wear paired rainbow RAZE knee-highs on uncovered legs; Alia and ECE have bare lower legs. Keep opaque cocktail coverage. Omit calibration equipment.\n",
+          "sha256": "A648066FA82A3E07939C580432041B40CDE8B27A20C69D3759A52C79EA7DDE1E",
+          "encoding": "utf8",
+          "bytes": 495,
+          "fidelity": "runtime-launch-byte-exact"
+        }
+      },
+      "1591": {
+        "primary": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-successor-c-primary.txt",
+          "text": "Render candidate C for Maldives Scene 1591 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nMake a strong canted moving portrait in an orbital research banquette above Baa Atoll. Radiance's blonde face and hair fill the near foreground while a complete heel and opaque skirt side seam remain visible. Ellie steps through Alia's behind hug as Alia gives Ellie a brief closed-mouth cheek peck. Radiance catches Alia's free hand and looks toward the pair with calm jealousy; ECE answers from close diagonal depth. Show micro-atoll rings, lagoon shelves, reef chains, mangrove islets and cupola ribs.\n\nEllie and Alia wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Ellie has the text-free sixteen-point Split-Star on the left sock and compact angular RAZE wordmark on the right outer calf; Alia reverses those sides. Radiance and ECE have bare lower legs. Their sequined strapless, cropped, open-back cocktail looks carry large micro-atoll and reef motifs with complete coverage and concise tailored hems. At the separated outer calibration edge, ECE alone holds a large open rectangular rainbow calibration frame with no barrel, muzzle, grip or trigger. It is visibly inert and points toward a complete thick sand backstop behind a clear safety screen, away from every person, animal and lens. No ammunition, firing, flash, threat, injury or combat.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "48026B2A68899C27E3331B5F5124EB4D94E7A03C64FEB0C8920AD366220E0E6D",
+          "encoding": "utf8",
+          "bytes": 2206,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "fallback": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-successor-c-fallback.txt",
+          "text": "Render a simplified Maldives Scene 1591 fashion photograph with the supplied scene-938, 936 and 937 faces for Alia, Radiance, Ellie and ECE, all fictional adults exactly 21. Keep the canted close view, Alia's behind hug and brief cheek peck to Ellie, Radiance's jealous eye-line, Baa micro-atolls and complete bodies. Ellie and Alia wear paired rainbow RAZE knee-highs on uncovered legs; Radiance and ECE have bare lower legs. Keep opaque cocktail coverage. Omit calibration equipment.\n",
+          "sha256": "0EDB3C2DB0C516DE8D91AC21D8005563DB2FEAD80430B4763C23B4BD86EDC717",
+          "encoding": "utf8",
+          "bytes": 486,
+          "fidelity": "runtime-launch-byte-exact"
+        }
+      }
+    },
+    "scene1590SuccessorBFallback": {
+      "sourcePath": "tmp/world-195x4/batch-392/scene-1590-meta-successor-b-fallback.txt",
+      "text": "Render candidate B fallback for Maldives Scene 1590 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nShow a close standing group portrait with a strengthened high oblique view and mild Dutch roll in the orbital research lounge above Addu Atoll. Keep Addu's horseshoe lagoon, linked-island causeway, reef passes, seagrass channels and solar facets large. Ellie gives Alia a brief closed-mouth temple peck while Radiance supports Alia through a warm side hug. ECE shows the calm jealous eye-line toward them; the established bearded adult man stands behind ECE and returns his strongest gaze to her. ECE holds a small gold route lantern with both hands; omit calibration equipment.\n\nRadiance and ECE wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Radiance has the text-free sixteen-point Split-Star on the left sock and angular RAZE wordmark vertically on the right outer calf; ECE reverses those sides. Ellie and Alia have bare lower legs. Keep secure sequined strapless, cropped and open-back cocktail looks with complete coverage, concise tailored hems and large Addu motifs.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+      "sha256": "BE833DE5EC133F3BD8663F6957CFA51B2D41F28C6C1B7B1BF7442F449F30BBB6",
+      "encoding": "utf8",
+      "bytes": 1937,
+      "fidelity": "runtime-launch-byte-exact"
+    }
   }
 }
