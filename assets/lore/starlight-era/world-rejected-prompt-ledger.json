@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "appendOnly": true,
-  "updatedAt": "2026-08-20T08:23:45.898Z",
+  "updatedAt": "2026-08-20T08:48:58.159Z",
   "coverageStatus": "runtime-complete-for-locally-available-active-and-archived-codex-sessions-plus-deduplicated-pre-batch-220-repository-corpus-plus-bound-active-and-recent-checkpoints-and-reconciled-campaign-visual-rejects",
   "policy": {
     "oneEntryPerFailedRuntimeOccurrence": true,
@@ -52,8 +52,8 @@
   },
   "activeCheckpointBinding": {
     "path": "assets/lore/starlight-era/batch-382-georgia-mars-surface-expedition-checkpoint.json",
-    "fileSha256": "7E02932AF02F07B6B83E53714AE169F684D386FF69335F41B989070F743F974B",
-    "ledgerSha256": "763E9154BE6291F34C0FBD11F60BBA36CF0FF6D36E4A45E29563617EDAE13CA0",
+    "fileSha256": "0AE45094AB8C364799468B398181BE7E94000FF1CD0CDE8FE66106733944892F",
+    "ledgerSha256": "FF07F6AF77B6EB90A66F08BD62A41FEFC04832CBFF49EB570E82CEECBC3D38D0",
     "entryCount": 139,
     "exactPromptShaPasses": 139,
     "coverage": "All Batch 382 rejected, failed, and zero-byte occurrences remain canonical in the active checkpoint; this binding avoids duplicating their full text while retaining global audit coverage."
@@ -62090,5 +62090,5 @@
       }
     ]
   },
-  "contractSha256AtScan": "3D620A8FB7252E1056ACF732A3B20699CFC58920EC6592101F17E1E2EAEF9821"
+  "contractSha256AtScan": "AAA313FB417A8AD7C069D587E84628FE3C45A22D67501477045E79A3ECD56589"
 }
