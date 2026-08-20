@@ -743,7 +743,7 @@
   },
   "cinematicThemeRotation": {
     "activeFromBatch": 333,
-    "locationRule": "From Batch 392 onward, every scene literally occurs in a protected habitat, sealed research structure, or safe orbital facility associated with the stored named real exoplanet. Keep four distinct current-country cultural and landmark-derived reads through large couture motifs, archive projections, research installations and terrain geometry; never claim the Earth landmark physically exists on the exoplanet. Earlier batches retain their historical Earth-location rule.",
+    "locationRule": "From Batch 392 onward, the separately stored planetarySurfaceOrHabitatThirdPolicy chooses a protected exterior planet-surface location for two modulo buckets and a habitat interior for the remaining bucket. Keep the current country unmistakable through large couture motifs, cultural research installations and landmark-derived geometry; never claim an Earth landmark physically exists on the exoplanet. Earlier batches retain their historical Earth-location rule.",
     "batchLayout": {
       "scenesOneAndTwo": "Country-led hybrid. Across each image, two or three characters must wear hard, large, unmistakable country-motif couture. At least two characters must visibly carry the active thematic construction language. One or more hybrid looks may satisfy both requirements. Country motif and theme must both be foreground reads, not tiny trim or background-only cues.",
       "scenesThreeAndFour": "Theme-led original. All four characters wear structurally distinct outfits driven by the active unrelated cinematic theme, staged at two additional original locations in the current country. Do not force map-print country outfits onto these two scenes, but keep the recognizable country landmark equally foregrounded with the thematic fashion.",
@@ -763,12 +763,12 @@
       "polar airship couture",
       "orbital research-station couture"
     ],
-    "themeLocationFusion": "Compose the active theme, stored real exoplanet, rolled environment and country cultural identity as a single authored scene. Planet and environment are literal setting and lighting; country identity stays unmistakable through large couture motifs, archive projections, research installations and landmark-derived geometry. Preserve scientific-honesty language for speculative surfaces, weather and habitation.",
+    "themeLocationFusion": "Compose the active theme, stored real exoplanet, locked exterior-or-interior setting, rolled environment and country identity as a single authored scene. Planet and environment are literal speculative setting and lighting; country identity stays unmistakable through large couture motifs, cultural research installations and landmark-derived geometry. Preserve scientific-honesty language for speculative surfaces, weather and habitation.",
     "themeExamples": {
       "privateJet": "Use wing-sweep tailoring, turbine-pleat structures, oval-window geometry, cabin-light piping, polished composite panels, and runway-line footwear without copied airline branding or uniforms.",
       "helicopter": "Use rotor-radial pleats, aerodynamic wrap structures, landing-skid heel architecture, cockpit-glass color blocking, and civilian flight-design cues without pilot impersonation or copied uniforms.",
       "coastGuardVessel": "Use fictional civilian rescue and conservation-vessel design language, wave-cut panels, flotation-inspired sculpting, deck-line tailoring, and marine visibility accents without official insignia, badges, copied uniforms, raids, rescue emergencies, or threats.",
-      "spaceAndPlanetary": "Use fictional couture inspired by pressure-shell geometry, regolith texture, orbital arcs, solar shielding, rover joints and mission-light systems inside safe infrastructure associated with the stored NASA-catalog planet. The named planet is real; surface, weather and habitation are speculative cinematic art. Never depict unprotected people in hostile conditions or imply measured habitability."
+      "spaceAndPlanetary": "Apply fictional couture inspired by pressure-shell geometry, regolith texture, orbital arcs, solar shielding, rover joints and mission-light systems at the locked protected exterior surface or habitat interior associated with the stored NASA-catalog planet. The named planet is real; surface, weather and habitation are speculative cinematic art. Never depict unprotected people in hostile conditions or imply measured habitability."
     },
     "publicSafety": "Use fictional public-safe fashion references only. No copied airline, military, police, coast-guard, space-agency, or emergency-service uniforms or insignia. No combat, raids, arrests, threats, injury, emergency peril, fetish framing, or explicit content."
   },
@@ -1225,9 +1225,72 @@
       ],
       "rule": "Select from this fixed verified bank with the separate equal-fifth selector. Never invent, rename, blend or silently substitute a planet."
     },
-    "literalSettingRule": "The named real exoplanet is the literal distant setting, shown through a protected surface habitat, sealed research structure, or safe orbital facility physically associated with that planet. The current country remains the cultural and couture identity through large motifs, archive projections, research installations and landmark-derived geometry; never falsely claim the Earth landmark physically exists on the exoplanet.",
+    "literalSettingRule": "The named real exoplanet is the literal distant setting. The separately stored planetarySurfaceOrHabitatThirdPolicy chooses a protected exterior surface location with two-thirds probability or a habitat interior with one-third probability. The current country remains the cultural and couture identity through large motifs, research installations and landmark-derived geometry; never falsely claim an Earth landmark physically exists on the exoplanet.",
     "scientificHonestyRule": "Planet names and catalog status are factual. Surface appearance, human habitation, weather and atmospheric lighting are explicitly speculative cinematic art, not claims about measured conditions or habitability.",
-    "extremeWeatherSafety": "The extreme-weather bucket always reads as rain, wind and storm atmosphere outside sealed protection. Preserve dry stable footing, clear adult faces, complete anatomy, landmark-inspired country reads, mascot safety, and inert-prop isolation. No disaster victims, flooding peril, strikes near people, injury or emergency framing.",
-    "persistenceRule": "Materialize and store the environment roll, planet roll, keys, counters, accepted bytes, digest hashes, names and prompt language before every provider dispatch. Carry the result through Meta generation, comparison, final ChatGPT clothing edit, archive and publication without rerolling."
+    "extremeWeatherSafety": "The extreme-weather bucket reads as rain, wind and storm atmosphere outside the locked protection system. Exterior scenes remain outdoors beneath a transparent pressure field or open shield perimeter with dry stable footing; interiors retain sealed protection. Preserve clear adult faces, complete anatomy, country reads, mascot safety and inert-prop isolation. No disaster victims, flooding peril, strikes near people, injury or emergency framing.",
+    "persistenceRule": "Materialize and store environment, planet and exterior-or-interior setting rolls with keys, counters, accepted bytes, digest hashes, names and prompt language before every provider dispatch. Carry every result through Meta generation, comparison, final ChatGPT clothing edit, archive and publication without rerolling."
+  },
+  "planetarySurfaceOrHabitatThirdPolicy": {
+    "active": true,
+    "requestedAt": "2026-08-20T11:40:57.6967568Z",
+    "activeFromBatch": 392,
+    "supersedes": [
+      "cinematicThemeRotation.locationRule requiring every scene inside protected infrastructure",
+      "planetaryEnvironmentEqualFifthPolicy.literalSettingRule requiring habitat or sealed structure"
+    ],
+    "userDirective": "Place scenes on exterior planet surfaces with a two-thirds probability and inside a habitat with a one-third probability. Interior habitat scenes add a fluffy bed and closer affectionate fashion beats.",
+    "selectionAlgorithm": {
+      "name": "sha256-first-byte-rejection-sampling-equal-thirds",
+      "settingKey": "starlight|setting|batch-{batch}|scene-{scene}",
+      "method": "Hash key plus |counter-{counter}, beginning at counter 0. Reject first byte 255 and increment. Accepted bytes 0 through 254 divide evenly into three modulo buckets with 85 values each.",
+      "bucketMap": {
+        "0": "habitat-interior",
+        "1": "protected-exterior-surface",
+        "2": "protected-exterior-surface"
+      },
+      "probability": {
+        "habitatInterior": "1/3",
+        "protectedExteriorSurface": "2/3"
+      },
+      "rerollAllowed": false
+    },
+    "exteriorRule": "The scene is literally outdoors on the speculative surface of the locked real catalog planet. Planet terrain, sky and horizon dominate. A transparent pressure field, open-sided shield canopy or visibly protective research perimeter keeps the adults safe without making the image read as an interior. Footing stays dry and stable. The country remains unmistakable through large couture motifs, landmark-derived research geometry and cultural installations. Never claim measured habitability or that an Earth landmark physically exists there.",
+    "interiorRule": "A habitat interior includes a broad fluffy couture lounge bed or deep padded daybed integrated into the research habitat. Choose supported head-on-lap rest, face framed above a lap, hand catch, side cuddle, behind embrace, closed-mouth cheek or temple peck, or a playful complete-heel lift. Every adult remains fully clothed in secure opaque fashion. A raised heel or skirt-side reveal shows the complete shoe, uncovered leg and opaque garment side seam without lifting a hem, revealing underwear or intimate areas, aiming beneath a skirt, centering the pelvis, implying undressing or staging sexual activity.",
+    "sharedSafety": "Keep unmistakably adult age-21 presentation, calm nonviolent jealousy, stable support, complete anatomy, a clear task for every hand, complete footwear, secure bust/seat/pelvic coverage, mascot safety and harmless isolated mission handling.",
+    "persistenceRule": "Store setting key, counter, accepted byte, digest, bucket, setting language and UTC before dispatch. Carry the locked setting through every provider comparison, final clothing refinement, archive and publication.",
+    "lockedBatch392Bindings": {
+      "1588": {
+        "key": "starlight|setting|batch-392|scene-1588",
+        "counter": 0,
+        "acceptedFirstByte": 47,
+        "digestSha256": "2F5E9A7C960E968930A23FA3E7F3137D1DFF6618CAD352B9A4AED28E5A2C329A",
+        "bucketIndex": 2,
+        "setting": "protected-exterior-surface"
+      },
+      "1589": {
+        "key": "starlight|setting|batch-392|scene-1589",
+        "counter": 0,
+        "acceptedFirstByte": 137,
+        "digestSha256": "895EB1BC6DD4D612067B5383C1F4FAB864CC51AF9D35364E0347D336FFC3E26C",
+        "bucketIndex": 2,
+        "setting": "protected-exterior-surface"
+      },
+      "1590": {
+        "key": "starlight|setting|batch-392|scene-1590",
+        "counter": 0,
+        "acceptedFirstByte": 173,
+        "digestSha256": "ADC6318CFD820B65F6494BF5CE405A34352CF4D2715F010C8868EB85B1137264",
+        "bucketIndex": 2,
+        "setting": "protected-exterior-surface"
+      },
+      "1591": {
+        "key": "starlight|setting|batch-392|scene-1591",
+        "counter": 0,
+        "acceptedFirstByte": 179,
+        "digestSha256": "B34AB10F7C1914C63D1A90441D577B146394AC26D88BA48BDCEE72E82DD2A972",
+        "bucketIndex": 2,
+        "setting": "protected-exterior-surface"
+      }
+    }
   }
 }
