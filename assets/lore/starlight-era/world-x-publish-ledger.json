@@ -5173,8 +5173,8 @@
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   },
   "latestGuardianWakeAudit": {
-    "status": "six-eligible-country-posts-live-reconciled-no-exact-caption-matches-no-publication-attempted",
-    "checkedAt": "2026-08-20T05:04:18.408Z",
+    "status": "seven-eligible-country-posts-six-live-reconciled-one-freshly-eligible-no-publication-attempted",
+    "checkedAt": "2026-08-20T06:05:30.5755216Z",
     "account": "@dogramaci",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
@@ -5193,13 +5193,13 @@
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 6,
+    "eligibleBacklogRemaining": 7,
     "checkpointAudit": {
       "batchRange": [
         382,
-        387
+        389
       ],
-      "eligibleWithNoRecordedUrlCount": 6,
+      "eligibleWithNoRecordedUrlCount": 7,
       "eligibleWithNoRecordedUrl": [
         {
           "batch": 382,
@@ -5266,12 +5266,23 @@
           "caption": "Bhutan ❤️ Solomon Islands #Bhutan",
           "recordedUrl": null,
           "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
+        },
+        {
+          "batch": 389,
+          "country": "Suriname",
+          "checkpoint": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+          "acceptedCurrentCountryAssets": 4,
+          "required": 4,
+          "eligible": true,
+          "caption": "Suriname ❤️ Luxembourg #Suriname",
+          "recordedUrl": null,
+          "liveState": "freshly-eligible-not-published-this-wake"
         }
       ]
     },
     "activeCountryAudit": {
-      "batch": 387,
-      "country": "Bhutan",
+      "batch": 389,
+      "country": "Suriname",
       "acceptedCurrentCountryAssets": 4,
       "required": 4,
       "eligible": true
@@ -5284,7 +5295,7 @@
         "classification": "unrelated-search-result"
       }
     ],
-    "action": "Signed-in @dogramaci reconciliation completed with a focused Latest search covering all six eligible countries and the full post-eligibility date range. No exact campaign caption matched. No composer opened, no media uploaded, and no Post click occurred; all six countries remain eligible with no recorded URL.",
-    "duplicatePrevention": "The focused full-date live search is stronger than a latest-four profile view and found no exact campaign caption, but publication still requires a fresh action-time confirmation before any upload or Post click."
+    "action": "Signed-in @dogramaci reconciliation completed with a focused Latest search covering the six previously eligible countries and the full post-eligibility date range. No exact campaign caption matched. Suriname became freshly eligible after that reconciliation. No composer opened, no media uploaded, and no Post click occurred; all seven countries remain eligible with no recorded URL.",
+    "duplicatePrevention": "The focused full-date live search is stronger than a latest-four profile view and found no exact campaign caption for the six previously eligible countries. Suriname was not yet eligible during that search, so all seven publications require a fresh action-time confirmation before any upload or Post click."
   }
 }

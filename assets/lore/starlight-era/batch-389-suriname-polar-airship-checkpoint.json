@@ -1,7 +1,7 @@
 {
   "batch": 389,
   "country": "Suriname",
-  "status": "active-pass-2-meta-ai-only-prepared-not-launched",
+  "status": "complete-four-of-four-hard-safe-meta-ai-pass-2-accepted-no-more-suriname-rendering",
   "sourceCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -10,7 +10,7 @@
     "pass1CandidatesPrepared": 4,
     "pass1CandidatesAuthorized": 4,
     "pass1CandidatesConsumed": 4,
-    "pass2CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 4,
     "automaticThirdPassAllowed": false,
     "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
   },
@@ -441,9 +441,9 @@
       ]
     },
     "pass2": {
-      "status": "prepared-exactly-four-concurrent-meta-ai-candidates-not-launched",
+      "status": "completed-four-hard-safe-meta-ai-primary-no-fallbacks",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
-      "candidatesConsumed": 0,
+      "candidatesConsumed": 4,
       "thirdPassAllowed": false,
       "sceneNumbers": [
         1576,
@@ -548,10 +548,179 @@
         },
         "noBypassTactics": true,
         "externalLexiconPublicPathOmitted": true
+      },
+      "events": [
+        {
+          "scene": 1576,
+          "provider": "Meta AI",
+          "providerConversationUrl": "https://www.meta.ai/prompt/26738af4-298e-4aff-9b23-27ffb9c784f5",
+          "submittedAt": "2026-08-20T05:48:39.789Z",
+          "terminalObservedBy": "2026-08-20T06:01:13.0289304Z",
+          "status": "completed-hard-safe-accepted",
+          "dispatchMode": "text-only-primary-after-upload-failure",
+          "fallbackUsed": false,
+          "refusalObserved": false,
+          "promptPath": "tmp/world-195x4/batch-389/scene-1576-meta-pass-2-primary.txt",
+          "promptSha256": "A4264AC88731EB7782216E84E15A3F6056C7B44E66DE1599BA1C49274CDF3956",
+          "promptBytes": 2943,
+          "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1576-meta-ai-primary.webp",
+          "rawSha256": "C8AD0FC4954366FFED1BF37F64028A076FE8101D5CA6F4D506F9CF909E459C5E",
+          "rawBytes": 573584,
+          "dimensions": [
+            1152,
+            2048
+          ],
+          "identityAnchorMode": "text-only role anchors; upload failed before dispatch and no reference file was transmitted",
+          "hardGateAudit": "four clearly adult role-anchored women; secure opaque public-safe fashion; complete plausible gross anatomy and footwear; PAWS and MAX protected on the lounge; the rainbow object is visibly a harmless non-weapon cinema viewfinder frame held by the isolated handler with a complete target/backstop lane and no person, animal, camera, threat, firing, or combat in its path; valid media",
+          "acceptedAsset": "assets/lore/starlight-era/1576-suriname-waterkant-polar-airship-meta-ai-bounded-pass-2.webp"
+        },
+        {
+          "scene": 1577,
+          "provider": "Meta AI",
+          "providerConversationUrl": "https://www.meta.ai/prompt/f6dfd910-5d73-4428-bdbd-fa6a5bd4c6fc",
+          "submittedAt": "2026-08-20T05:48:39.789Z",
+          "terminalObservedBy": "2026-08-20T06:01:13.0289304Z",
+          "status": "completed-hard-safe-accepted",
+          "dispatchMode": "text-only-primary-after-upload-failure",
+          "fallbackUsed": false,
+          "refusalObserved": false,
+          "promptPath": "tmp/world-195x4/batch-389/scene-1577-meta-pass-2-primary.txt",
+          "promptSha256": "8076E4A68B1F09FA47CA9A7647A3CCFB1412EAA86596AD7217AE4B2EF98C7283",
+          "promptBytes": 2789,
+          "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1577-meta-ai-primary.webp",
+          "rawSha256": "9EFCC0AE31B34F8ED949F0E496E813E92D91A07532A2B881BEDD87952E3CC80D",
+          "rawBytes": 506098,
+          "dimensions": [
+            1152,
+            2048
+          ],
+          "identityAnchorMode": "text-only role anchors; upload failed before dispatch and no reference file was transmitted",
+          "hardGateAudit": "four clearly adult role-anchored women; secure opaque public-safe fashion; complete plausible gross anatomy and footwear; mascots protected on the lounge; the rainbow object is visibly a harmless non-weapon cinema viewfinder frame isolated beside a complete target/backstop lane with no unsafe aim, threat, firing, or combat; valid media",
+          "acceptedAsset": "assets/lore/starlight-era/1577-suriname-brownsberg-brokopondo-polar-airship-meta-ai-bounded-pass-2.webp"
+        },
+        {
+          "scene": 1578,
+          "provider": "Meta AI",
+          "providerConversationUrl": "https://www.meta.ai/prompt/7bc52723-52b5-4856-8cab-09df15705a67",
+          "submittedAt": "2026-08-20T05:48:39.789Z",
+          "terminalObservedBy": "2026-08-20T06:01:13.0289304Z",
+          "status": "completed-hard-safe-accepted",
+          "dispatchMode": "text-only-primary-after-upload-failure",
+          "fallbackUsed": false,
+          "refusalObserved": false,
+          "promptPath": "tmp/world-195x4/batch-389/scene-1578-meta-pass-2-primary.txt",
+          "promptSha256": "2A5296DB5AF8AE478EF38E5C9C4E53AD84001262414A8E5AEC46F3465AD60D92",
+          "promptBytes": 2851,
+          "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1578-meta-ai-primary.webp",
+          "rawSha256": "E6DE05F4A27466A8541442ED26727093BE12CB9EFF959C37BFCDF404D04EDF96",
+          "rawBytes": 610368,
+          "dimensions": [
+            1152,
+            2048
+          ],
+          "identityAnchorMode": "text-only role anchors; upload failed before dispatch and no reference file was transmitted",
+          "hardGateAudit": "four clearly adult role-anchored women; secure opaque public-safe fashion; complete plausible gross anatomy and footwear; mascots remain safely outside the lane; the rainbow object is visibly a harmless non-weapon cinema viewfinder/calibration frame, the complete target/backstop lane is present, and there is no unsafe aim, threat, firing, or combat; valid media",
+          "acceptedAsset": "assets/lore/starlight-era/1578-suriname-voltzberg-raleigh-falls-polar-airship-meta-ai-bounded-pass-2.webp"
+        },
+        {
+          "scene": 1579,
+          "provider": "Meta AI",
+          "providerConversationUrl": "https://www.meta.ai/prompt/2a9ffddd-8fcd-41d0-a506-12f0ceba35cd",
+          "submittedAt": "2026-08-20T05:48:39.789Z",
+          "terminalObservedBy": "2026-08-20T06:01:13.0289304Z",
+          "status": "completed-hard-safe-accepted",
+          "dispatchMode": "text-only-primary-after-upload-failure",
+          "fallbackUsed": false,
+          "refusalObserved": false,
+          "promptPath": "tmp/world-195x4/batch-389/scene-1579-meta-pass-2-primary.txt",
+          "promptSha256": "644A78B36E06946CD779B94EC4395E02AD435AEFE7C7A9436272968474579E00",
+          "promptBytes": 3056,
+          "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1579-meta-ai-primary.webp",
+          "rawSha256": "37E14265B5209AE9F8FCF6DCD738072D04F3B801624F38029F9E36B580DA4757",
+          "rawBytes": 649630,
+          "dimensions": [
+            1152,
+            2048
+          ],
+          "identityAnchorMode": "text-only role anchors; upload failed before dispatch and no reference file was transmitted",
+          "hardGateAudit": "four clearly adult role-anchored women plus the clearly adult bearded man; secure opaque public-safe fashion; complete plausible gross anatomy and footwear; MAX protected on the lounge; the rainbow object is visibly a harmless non-weapon calibration panel isolated beside a complete target/backstop lane with no unsafe aim, threat, firing, or combat; valid media",
+          "acceptedAsset": "assets/lore/starlight-era/1579-suriname-galibi-polar-airship-male-meta-ai-bounded-pass-2.webp"
+        }
+      ],
+      "holisticAudit": {
+        "status": "complete-once-after-all-four-terminal",
+        "hardSafeAcceptedScenes": [
+          1576,
+          1577,
+          1578,
+          1579
+        ],
+        "hardUnusableScenes": [],
+        "preliminaryIntakeNote": "Scene 1578 received a preliminary per-output safety flag before the bank completed. The single authoritative holistic audit determined that its object is visibly a harmless non-weapon cinema viewfinder/calibration frame with a complete safety lane; the preliminary flag remains in the local staging trail but is superseded and did not trigger a render.",
+        "qualityVariancesNotRenderTriggers": [
+          "text-only role anchoring after upload failure",
+          "viewfinder/frame geometry differs from the exact prop target",
+          "mascot species or styling varies in some scenes",
+          "fine garment and Suriname motif fidelity varies"
+        ],
+        "thirdPassAllowed": false
       }
     }
   },
-  "acceptedAssets": [],
+  "acceptedAssets": [
+    {
+      "scene": 1576,
+      "file": "assets/lore/starlight-era/1576-suriname-waterkant-polar-airship-meta-ai-bounded-pass-2.webp",
+      "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1576-meta-ai-primary.webp",
+      "sha256": "C8AD0FC4954366FFED1BF37F64028A076FE8101D5CA6F4D506F9CF909E459C5E",
+      "bytes": 573584,
+      "dimensions": [
+        1152,
+        2048
+      ],
+      "provider": "Meta AI",
+      "acceptance": "bounded-hard-safe-meta-ai-pass-2"
+    },
+    {
+      "scene": 1577,
+      "file": "assets/lore/starlight-era/1577-suriname-brownsberg-brokopondo-polar-airship-meta-ai-bounded-pass-2.webp",
+      "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1577-meta-ai-primary.webp",
+      "sha256": "9EFCC0AE31B34F8ED949F0E496E813E92D91A07532A2B881BEDD87952E3CC80D",
+      "bytes": 506098,
+      "dimensions": [
+        1152,
+        2048
+      ],
+      "provider": "Meta AI",
+      "acceptance": "bounded-hard-safe-meta-ai-pass-2"
+    },
+    {
+      "scene": 1578,
+      "file": "assets/lore/starlight-era/1578-suriname-voltzberg-raleigh-falls-polar-airship-meta-ai-bounded-pass-2.webp",
+      "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1578-meta-ai-primary.webp",
+      "sha256": "E6DE05F4A27466A8541442ED26727093BE12CB9EFF959C37BFCDF404D04EDF96",
+      "bytes": 610368,
+      "dimensions": [
+        1152,
+        2048
+      ],
+      "provider": "Meta AI",
+      "acceptance": "bounded-hard-safe-meta-ai-pass-2"
+    },
+    {
+      "scene": 1579,
+      "file": "assets/lore/starlight-era/1579-suriname-galibi-polar-airship-male-meta-ai-bounded-pass-2.webp",
+      "rawPath": "tmp/world-195x4/batch-389/raw/pass-2/scene-1579-meta-ai-primary.webp",
+      "sha256": "37E14265B5209AE9F8FCF6DCD738072D04F3B801624F38029F9E36B580DA4757",
+      "bytes": 649630,
+      "dimensions": [
+        1152,
+        2048
+      ],
+      "provider": "Meta AI",
+      "acceptance": "bounded-hard-safe-meta-ai-pass-2"
+    }
+  ],
   "rejectedAssets": [
     {
       "scene": 1576,
@@ -760,15 +929,10 @@
     ],
     "appendBeforeLaterPassPublicationCommitOrPush": true
   },
-  "hardSafeAcceptedCount": 0,
-  "missingSceneNumbers": [
-    1576,
-    1577,
-    1578,
-    1579
-  ],
+  "hardSafeAcceptedCount": 4,
+  "missingSceneNumbers": [],
   "xPost": {
-    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "status": "eligible-pending-live-duplicate-reconciliation-and-publication",
     "caption": "Suriname ❤️ Luxembourg #Suriname",
     "url": null
   },
@@ -790,7 +954,8 @@
     "themeEvidence": [
       "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8"
     ],
-    "lockedUntilBatch389Closed": true
+    "lockedUntilBatch389Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch389Closure": true
   },
   "preflight": {
     "path": "tmp/world-195x4/batch-389/batch-389-suriname-preflight.json",
@@ -804,5 +969,23 @@
     "builtInGenerationAllowed": false,
     "completedBuiltInOutputAccepted": false,
     "futureGenerationProvider": "Meta AI"
+  },
+  "closureParentCommit": "ae1e0b79ff8aaccadf874c204a4528812093b918",
+  "metaAiBrowserAudit": {
+    "provider": "Meta AI only",
+    "primaryBankSubmittedAt": "2026-08-20T05:48:39.789Z",
+    "exactConcurrentScenes": [
+      1576,
+      1577,
+      1578,
+      1579
+    ],
+    "primaryNonRefusalCount": 4,
+    "fallbackRetryCount": 0,
+    "refusalCount": 0,
+    "currentBlacklistedTokens": [],
+    "uploadState": "multi-file attachment attempt failed before dispatch; all four scenes continued text-only",
+    "sensitiveUnrelatedAssetHandling": "One stale unrelated page asset was exported during media acquisition, recognized as containing personal receipt details, excluded from public raw preservation, and recorded only through sanitized manifest provenance. No personal text, local path, or remote asset URL is published.",
+    "noBypassTactics": true
   }
 }
