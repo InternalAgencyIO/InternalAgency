@@ -1,7 +1,7 @@
 {
   "batch": 389,
   "country": "Suriname",
-  "status": "active-pass-2-meta-ai-only-ready-after-interrupted-pass-1",
+  "status": "active-pass-2-meta-ai-only-prepared-not-launched",
   "sourceCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
   "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
   "policy": {
@@ -441,7 +441,7 @@
       ]
     },
     "pass2": {
-      "status": "ready-exactly-four-concurrent-meta-ai-only-holistic-corrections",
+      "status": "prepared-exactly-four-concurrent-meta-ai-candidates-not-launched",
       "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
       "candidatesConsumed": 0,
       "thirdPassAllowed": false,
@@ -458,7 +458,97 @@
         "preserve secure opaque clearly adult public-fashion coverage and complete plausible anatomy",
         "keep separated silhouettes and isolate the sole inert-prop handler from every person and mascot",
         "show a straight index outside an unmistakably empty guard and a complete safe target/backstop or empty-water marker"
-      ]
+      ],
+      "prompts": {
+        "1576": {
+          "primary": {
+            "path": "tmp/world-195x4/batch-389/scene-1576-meta-pass-2-primary.txt",
+            "sha256": "A4264AC88731EB7782216E84E15A3F6056C7B44E66DE1599BA1C49274CDF3956",
+            "bytes": 2943,
+            "chars": 2943,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          },
+          "fallback": {
+            "path": "tmp/world-195x4/batch-389/scene-1576-meta-pass-2-fallback.txt",
+            "sha256": "A67D26C6C932E4A66110468BA61A767281206DF5B009FC85D1495AF08C573891",
+            "bytes": 1682,
+            "chars": 1682,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          }
+        },
+        "1577": {
+          "primary": {
+            "path": "tmp/world-195x4/batch-389/scene-1577-meta-pass-2-primary.txt",
+            "sha256": "8076E4A68B1F09FA47CA9A7647A3CCFB1412EAA86596AD7217AE4B2EF98C7283",
+            "bytes": 2789,
+            "chars": 2789,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          },
+          "fallback": {
+            "path": "tmp/world-195x4/batch-389/scene-1577-meta-pass-2-fallback.txt",
+            "sha256": "177317405241B847BA51AAE3732CB3578D8C2D93A2858AE0ADA31FD4ED30D90A",
+            "bytes": 1528,
+            "chars": 1528,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          }
+        },
+        "1578": {
+          "primary": {
+            "path": "tmp/world-195x4/batch-389/scene-1578-meta-pass-2-primary.txt",
+            "sha256": "2A5296DB5AF8AE478EF38E5C9C4E53AD84001262414A8E5AEC46F3465AD60D92",
+            "bytes": 2851,
+            "chars": 2851,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          },
+          "fallback": {
+            "path": "tmp/world-195x4/batch-389/scene-1578-meta-pass-2-fallback.txt",
+            "sha256": "AC6DC8E335DFD048D5174098C0A531158DD419BE55FB371C4328858A16E8F92B",
+            "bytes": 1590,
+            "chars": 1590,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          }
+        },
+        "1579": {
+          "primary": {
+            "path": "tmp/world-195x4/batch-389/scene-1579-meta-pass-2-primary.txt",
+            "sha256": "644A78B36E06946CD779B94EC4395E02AD435AEFE7C7A9436272968474579E00",
+            "bytes": 3056,
+            "chars": 3056,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          },
+          "fallback": {
+            "path": "tmp/world-195x4/batch-389/scene-1579-meta-pass-2-fallback.txt",
+            "sha256": "F0D44D3E5E1736765EF2275C5E529B47F882072E23B07EF1D25C6F14F5E7CB99",
+            "bytes": 1750,
+            "chars": 1750,
+            "encoding": "utf-8",
+            "fidelity": "prepared-runtime-exact"
+          }
+        }
+      },
+      "hardBlockPolicy": {
+        "provider": "Meta AI only",
+        "initialDispatch": "one primary prompt per scene in one four-scene concurrent bank",
+        "refusalDetection": "read immediate page response and classify refusal phrases as blocked",
+        "retryLimit": "one fallback retry per blocked scene only",
+        "blacklistedTokenThreshold": 3,
+        "currentBlacklistedTokens": [],
+        "suppressionReplacements": {
+          "aggressive": "decisive",
+          "bold": "confidently-styled",
+          "short-hem": "tailored hemline",
+          "explicit": "clear-style"
+        },
+        "noBypassTactics": true,
+        "externalLexiconPublicPathOmitted": true
+      }
     }
   },
   "acceptedAssets": [],
