@@ -1,0 +1,405 @@
+{
+  "batch": 389,
+  "country": "Suriname",
+  "status": "active-pass-1-ready-not-launched",
+  "sourceCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "Exactly four concurrent pass-1 candidates, one per scene, may be launched in a separate later action."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-317-luxembourg-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/163"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8",
+      "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json",
+    "checkpointSha256": "7C66AFC0F9616332EFEA9E47170FEFD958976584E042BA4DDA3AE7C7EBBE1D7F",
+    "observedStatus": "closed-three-of-four-after-cap-no-more-luxembourg-rendering",
+    "observedHardSafeAcceptedCount": 3,
+    "observedMissingSceneNumbers": [
+      1575
+    ],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "remoteRef": "origin/agent/starlight-progress-archive",
+    "remoteCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
+    "remoteCheckpointSha256": "7C66AFC0F9616332EFEA9E47170FEFD958976584E042BA4DDA3AE7C7EBBE1D7F",
+    "predecessorRemoteVerified": true,
+    "requiredRemoteCommit": "51019e0a68150287ce0b2d0e943eeb5de83551d1",
+    "requiredRemoteCommitMatches": true,
+    "preparationOnly": true,
+    "batch389RenderAuthorized": true,
+    "note": "This materialization records no render, publication, commit, push, or X-ledger change.",
+    "reason": "Batch 388 is closed at three of four after the two-pass cap and remote-verified at the required commit; exactly four concurrent Batch 389 pass-1 slots are prepared but not launched."
+  },
+  "rollMethod": "FNV-1a over recorded batch389-suriname keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "cinematicTheme": "polar airship couture",
+  "themePairPosition": 1,
+  "sceneNumbers": [
+    1576,
+    1577,
+    1578,
+    1579
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.suriname-tourism.org/en/",
+      "usedFor": "Suriname rivers, rainforest, waterfalls, canoes, biodiversity, Galibi turtles, food, and Paramaribo wooden architecture"
+    },
+    {
+      "url": "https://gov.sr/wp-content/uploads/2025/05/%40-Magazine-Vision-MIN-OW-SIDPS-2025-2050.pdf",
+      "usedFor": "Jules Wijdenbosch Bridge over the Suriname River and national transport infrastructure"
+    },
+    {
+      "url": "https://whc.unesco.org/fr/list/1017",
+      "usedFor": "Central Suriname Nature Reserve, Coppename watershed, granite inselbergs, primary rainforest, and Guiana Shield topography"
+    },
+    {
+      "url": "https://whc.unesco.org/uploads/nominations/1017.pdf",
+      "usedFor": "Raleigh Falls, Voltzberg dome, rainforest species, and conservation landscape"
+    },
+    {
+      "url": "https://suriname.travel/marowijne/",
+      "usedFor": "Galibi protected coast, Marowijne River, mangroves, and sea-turtle nesting habitat"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch389-suriname-male-model-scene",
+    "fullHash": 1887499403,
+    "position": 4,
+    "scene": 1579,
+    "emotionRoll": 3,
+    "emotion": "tender affection"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Suriname flag, central star, coat of arms, or official emblem is copied onto clothing. Large researched secular bridge, river, reservoir, rainforest, waterfall, granite, coast, wildlife, agriculture, food, and conservation fields replace them.",
+    "palette": "rainforest emerald, Suriname-river blue, clay red, rice white, bromeliad magenta, golden yellow, mahogany brown, sea-turtle teal, granite silver, and night charcoal",
+    "minimumCoverage": "Scenes 1576 and 1577 each foreground large Suriname motif fields on two or three looks and polar-airship construction on at least two. Scenes 1578 and 1579 use four distinct theme-led looks while the Suriname landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Paramaribo's riverfront and bridge, Brownsberg and Brokopondo Reservoir, Voltzberg and Raleigh Falls, and Galibi's protected coast.",
+    "prohibitions": "No literal flag, central star, coat of arms, official seal, sacred symbol, religious architecture, copied Indigenous or Maroon ceremonial pattern, copied service or covert uniform, badge, weapon threat, sexualized service, assassination, combat, political insignia, or branded product."
+  },
+  "rollAudit": {
+    "1576": {
+      "weather": 99,
+      "mascotState": 3,
+      "mascotHolder": 60,
+      "oddProp": 16,
+      "oddHolder": 50,
+      "oddFamily": 4,
+      "pole": 99,
+      "rainbowOnly": 43,
+      "hosiery": 22,
+      "hosieryWearer": 78,
+      "hosieryPalette": 98,
+      "romance": 42,
+      "compound": 40,
+      "hardLove": 8,
+      "missionPoseTarget": 97,
+      "emotions": {
+        "Radiance": 44,
+        "Ellie": 2,
+        "Alia": 38,
+        "AI ECE": 8
+      },
+      "cuts": {
+        "Radiance": [
+          34,
+          57,
+          22
+        ],
+        "Ellie": [
+          52,
+          43,
+          84
+        ],
+        "Alia": [
+          84,
+          87,
+          80
+        ],
+        "AI ECE": [
+          14,
+          61,
+          10
+        ]
+      }
+    },
+    "1577": {
+      "weather": 4,
+      "mascotState": 8,
+      "mascotHolder": 13,
+      "oddProp": 59,
+      "oddHolder": 1,
+      "oddFamily": 71,
+      "pole": 54,
+      "rainbowOnly": 92,
+      "hosiery": 67,
+      "hosieryWearer": 55,
+      "hosieryPalette": 25,
+      "romance": 33,
+      "compound": 97,
+      "hardLove": 77,
+      "missionPoseTarget": 18,
+      "emotions": {
+        "Radiance": 13,
+        "Ellie": 53,
+        "Alia": 87,
+        "AI ECE": 45
+      },
+      "cuts": {
+        "Radiance": [
+          45,
+          58,
+          87
+        ],
+        "Ellie": [
+          45,
+          10,
+          27
+        ],
+        "Alia": [
+          75,
+          84,
+          45
+        ],
+        "AI ECE": [
+          73,
+          30,
+          83
+        ]
+      }
+    },
+    "1578": {
+      "weather": 69,
+      "mascotState": 21,
+      "mascotHolder": 86,
+      "oddProp": 10,
+      "oddHolder": 32,
+      "oddFamily": 66,
+      "pole": 29,
+      "rainbowOnly": 33,
+      "hosiery": 56,
+      "hosieryWearer": 52,
+      "hosieryPalette": 92,
+      "romance": 76,
+      "compound": 38,
+      "hardLove": 22,
+      "missionPoseTarget": 99,
+      "emotions": {
+        "Radiance": 74,
+        "Ellie": 72,
+        "Alia": 60,
+        "AI ECE": 46,
+        "Ellie disambiguation": 55
+      },
+      "cuts": {
+        "Radiance": [
+          52,
+          87,
+          56
+        ],
+        "Ellie": [
+          70,
+          21,
+          34
+        ],
+        "Alia": [
+          70,
+          17,
+          34
+        ],
+        "AI ECE": [
+          76,
+          19,
+          8
+        ]
+      }
+    },
+    "1579": {
+      "weather": 50,
+      "mascotState": 38,
+      "mascotHolder": 71,
+      "oddProp": 17,
+      "oddHolder": 87,
+      "oddFamily": 45,
+      "pole": 52,
+      "rainbowOnly": 42,
+      "hosiery": 45,
+      "hosieryWearer": 73,
+      "hosieryPalette": 71,
+      "romance": 11,
+      "compound": 63,
+      "hardLove": 35,
+      "missionPoseTarget": 28,
+      "emotions": {
+        "Radiance": 47,
+        "Ellie": 55,
+        "Alia": 89,
+        "AI ECE": 7,
+        "Male": 3
+      },
+      "cuts": {
+        "Radiance": [
+          83,
+          60,
+          41
+        ],
+        "Ellie": [
+          51,
+          56,
+          41
+        ],
+        "Alia": [
+          13,
+          50,
+          19
+        ],
+        "AI ECE": [
+          19,
+          60,
+          81
+        ]
+      }
+    }
+  },
+  "rollAuditHashes": {
+    "primaryPairCount": 110,
+    "primarySha256": "3F639FEC72774DAB16E26CBEABD3C279C8986396413579CBA31A74F95EE980AE",
+    "selectorPairCount": 20,
+    "selectorSha256": "2C90D1F7A03A4C17CAF6A8437CFD8EC9D2D1BB17B1155E30818446163676FAB3"
+  },
+  "scenePlans": {
+    "1576": {
+      "location": "Paramaribo Waterkant and Jules Wijdenbosch Bridge",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-389/scene-1576-initial-prompt.txt",
+      "promptSha256": "5CBF25B02E097F269D6F27DEB4D0D6E3F29156518561C5EDC7C632BAD254BF68",
+      "promptBytes": 5126
+    },
+    "1577": {
+      "location": "Brownsberg and Brokopondo Reservoir",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-389/scene-1577-initial-prompt.txt",
+      "promptSha256": "19B6501D7CC304E345D6D3E336676010C8DDEB2CECB3157D01DDBA1F87B47096",
+      "promptBytes": 4624
+    },
+    "1578": {
+      "location": "Voltzberg and Raleigh Falls",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-389/scene-1578-initial-prompt.txt",
+      "promptSha256": "23E945DCC01B6E4A8D7C60FE60EBF079A1419702C1D8BFB1BE4AABA6A566BEF3",
+      "promptBytes": 4856
+    },
+    "1579": {
+      "location": "Galibi coast and Marowijne River mouth",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-389/scene-1579-initial-prompt.txt",
+      "promptSha256": "F9EE08142B751C1DA268A614D3EE357BB05A80BF1221A20828FF42B024EE8260",
+      "promptBytes": 5209
+    }
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "ready-exactly-four-concurrent-clean-candidates",
+      "allocation": {
+        "A": 1576,
+        "B": 1577,
+        "C": 1578,
+        "D": 1579
+      },
+      "candidatesPrepared": 4,
+      "candidatesAuthorized": 4,
+      "candidatesConsumed": 0,
+      "launchWhenUnlocked": "Exactly four concurrent clean candidates, one per scene.",
+      "sourceMode": "original identity anchors only; no prior country render input",
+      "events": []
+    },
+    "pass2": {
+      "status": "locked-until-single-pass-1-hard-gate-audit",
+      "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "candidatesConsumed": 0,
+      "thirdPassAllowed": false
+    }
+  },
+  "acceptedAssets": [],
+  "rejectedAssets": [],
+  "rejectedPromptLedger": {
+    "status": "empty-before-render",
+    "entries": [],
+    "appendBeforeLaterPassPublicationCommitOrPush": true
+  },
+  "hardSafeAcceptedCount": 0,
+  "missingSceneNumbers": [
+    1576,
+    1577,
+    1578,
+    1579
+  ],
+  "xPost": {
+    "status": "ineligible-until-four-of-four-and-git-remote-verification",
+    "caption": "Suriname ❤️ Luxembourg #Suriname",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Montenegro",
+    "nextBatch": 390,
+    "sceneNumbers": [
+      1580,
+      1581,
+      1582,
+      1583
+    ],
+    "cinematicTheme": "polar airship couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-318-suriname-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/164"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8"
+    ],
+    "lockedUntilBatch389Closed": true
+  },
+  "preflight": {
+    "path": "tmp/world-195x4/batch-389/batch-389-suriname-preflight.json",
+    "sha256": "15020A6DE32303520A1DC6F62B4A4A7F5867940FC1D52F13F8E374B549E61392",
+    "bytes": 47707
+  }
+}

@@ -5173,11 +5173,23 @@
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   },
   "latestGuardianWakeAudit": {
-    "status": "six-eligible-country-posts-live-unverified-browser-unavailable",
-    "checkedAt": "2026-08-13T17:17:32.505Z",
+    "status": "six-eligible-country-posts-live-reconciled-no-exact-caption-matches-no-publication-attempted",
+    "checkedAt": "2026-08-20T05:04:18.408Z",
     "account": "@dogramaci",
-    "liveProfileVerified": false,
-    "signedInAccount": null,
+    "liveProfileVerified": true,
+    "signedInAccount": "@dogramaci",
+    "searchEvidence": {
+      "query": "from:dogramaci (Georgia OR Fiji OR Comoros OR Guyana OR \"Solomon Islands\" OR Bhutan) since:2026-08-12",
+      "surface": "signed-in-in-app-browser-latest-search",
+      "resultCount": 1,
+      "exactCampaignCaptionMatches": 0,
+      "visibleResult": {
+        "postUrl": "https://x.com/dogramaci/status/2087914657004556646",
+        "postedAtLabel": "Aug 13",
+        "caption": "Morocco, Greece, Colombia, Fiji",
+        "classification": "unrelated-existing-post-not-a-campaign-caption-match"
+      }
+    },
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
@@ -5198,7 +5210,7 @@
           "eligible": true,
           "caption": "Georgia ❤️ Honduras #Georgia #InternalAgency",
           "recordedUrl": null,
-          "liveState": "unverified-no-fresh-duplicate-proof"
+          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
         },
         {
           "batch": 383,
@@ -5209,7 +5221,7 @@
           "eligible": true,
           "caption": "Fiji ❤️ Georgia #Fiji #InternalAgency",
           "recordedUrl": null,
-          "liveState": "unverified-no-fresh-duplicate-proof"
+          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
         },
         {
           "batch": 384,
@@ -5220,7 +5232,7 @@
           "eligible": true,
           "caption": "Comoros ❤️ Fiji #Comoros",
           "recordedUrl": null,
-          "liveState": "unverified-no-fresh-duplicate-proof"
+          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
         },
         {
           "batch": 385,
@@ -5231,7 +5243,7 @@
           "eligible": true,
           "caption": "Guyana ❤️ Comoros #Guyana #WorldXXXSeries",
           "recordedUrl": null,
-          "liveState": "unverified-no-fresh-duplicate-proof"
+          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
         },
         {
           "batch": 386,
@@ -5242,7 +5254,7 @@
           "eligible": true,
           "caption": "Solomon Islands 🤍 Guyana #SolomonIslands",
           "recordedUrl": null,
-          "liveState": "unverified-no-fresh-duplicate-proof"
+          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
         },
         {
           "batch": 387,
@@ -5253,7 +5265,7 @@
           "eligible": true,
           "caption": "Bhutan ❤️ Solomon Islands #Bhutan",
           "recordedUrl": null,
-          "liveState": "unverified-no-fresh-duplicate-proof"
+          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
         }
       ]
     },
@@ -5264,8 +5276,15 @@
       "required": 4,
       "eligible": true
     },
-    "latestVisibleAccountStatuses": [],
-    "action": "Browser access was unavailable. No composer opened, no media uploaded, and no Post click occurred; all six locally eligible countries remain live-unreconciled.",
-    "duplicatePrevention": "Do not reserve, upload, append a posts entry, or write a checkpoint URL until signed-in @dogramaci reconciliation proves absence or returns the existing public status URL. The latest-four window is insufficient evidence for older posts."
+    "latestVisibleAccountStatuses": [
+      {
+        "postUrl": "https://x.com/dogramaci/status/2087914657004556646",
+        "postedAtLabel": "Aug 13",
+        "caption": "Morocco, Greece, Colombia, Fiji",
+        "classification": "unrelated-search-result"
+      }
+    ],
+    "action": "Signed-in @dogramaci reconciliation completed with a focused Latest search covering all six eligible countries and the full post-eligibility date range. No exact campaign caption matched. No composer opened, no media uploaded, and no Post click occurred; all six countries remain eligible with no recorded URL.",
+    "duplicatePrevention": "The focused full-date live search is stronger than a latest-four profile view and found no exact campaign caption, but publication still requires a fresh action-time confirmation before any upload or Post click."
   }
 }
