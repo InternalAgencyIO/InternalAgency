@@ -18,21 +18,21 @@
       "01a01d88-38a1-7763-b74d-470bc7bfe70e": 500
     },
     "sessionLineLimitPolicy": "An optional per-thread limit may stop before later browser/image payload lines only when the retained prefix already covers that thread's Codex image-generation terminal events and later provider output is preserved through checked-in Meta checkpoints and the generated-media manifest.",
-    "physicalFailedEventsScanned": 1905,
-    "uniqueRuntimeFailureOccurrences": 970,
+    "physicalFailedEventsScanned": 1910,
+    "uniqueRuntimeFailureOccurrences": 975,
     "projectMarkerMatchedOccurrences": 788,
     "projectThreadOrMarkerMatchedOccurrences": 910,
     "excludedUnrelatedOccurrences": 0,
     "note": "All failed image-generation prompts are retained, including unrelated image requests, because the public-build directive explicitly covers every Codex image/video output and rejected prompt. Marker counts are informational only and never filter the tracker."
   },
   "summary": {
-    "runtimeFailureOccurrenceCount": 970,
-    "runtimePromptShaPassCount": 970,
-    "noByteRuntimeOccurrenceCount": 970,
-    "physicalFailedEventsScanned": 1905,
+    "runtimeFailureOccurrenceCount": 975,
+    "runtimePromptShaPassCount": 975,
+    "noByteRuntimeOccurrenceCount": 975,
+    "physicalFailedEventsScanned": 1910,
     "activeCheckpointBoundOccurrenceCount": 139,
     "activeCheckpointEntriesWithoutNormalizedFailedRuntimePromptMatchCount": 135,
-    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1550,
+    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1555,
     "historicalExactPromptOccurrenceCount": 249,
     "historicalCanonicalSourceAliasCount": 4,
     "knownTextMissingHistoricalEvidenceCount": 0,
@@ -52,8 +52,8 @@
   },
   "activeCheckpointBinding": {
     "path": "assets/lore/starlight-era/batch-382-georgia-mars-surface-expedition-checkpoint.json",
-    "fileSha256": "C6412D961528A973906D589DBCE48D0CE335E55210C2DB1E182321ECA9038537",
-    "ledgerSha256": "776F8503F0449BEC176291E2738FDAF8227D91CBDE3267F712A0E6D0ED4A05BD",
+    "fileSha256": "3E7D8A7627D0334DD18E19BBACF45BF0BA3FC5F08D0AA525C95C5AA4CC8846CA",
+    "ledgerSha256": "FB3A7C7D0853275C0D9B72EECD24E89ACCE7EFE5BBAD30282B1AD108F2A3A065",
     "entryCount": 139,
     "exactPromptShaPasses": 139,
     "coverage": "All Batch 382 rejected, failed, and zero-byte occurrences remain canonical in the active checkpoint; this binding avoids duplicating their full text while retaining global audit coverage."
@@ -4127,7 +4127,7 @@
     ]
   },
   "runtimeFailures": {
-    "entryCount": 970,
+    "entryCount": 975,
     "entries": [
       {
         "entryId": "codex-image-failure-call_uFOZy6HPAj3sjhBalW0dkvUe-68932f6b1921",
@@ -47638,6 +47638,211 @@
           }
         ],
         "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-2f4dbf16-a90d-4d79-8147-d2c5f5d751ed-8f834afc0a20",
+        "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+        "callId": "exec-2f4dbf16-a90d-4d79-8147-d2c5f5d751ed",
+        "occurredAt": "2026-08-20T15:06:40.388Z",
+        "batch": null,
+        "scene": null,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: photorealistic-natural. Preview-only cinematic luxury fashion campaign featuring a clearly adult 30-year-old professional runway model with warm olive skin and a dark wavy bob. Rainbow-lace couture only: fully lined prismatic lace, sleeveless architectural construction, elegant open back, a sharply tailored short above-knee cocktail hem, and iridescent high heels. Sophisticated fashion-week styling, realistic anatomy, hands, face, textile structure, and reflections. No text, logo, brand, or watermark. A three-quarter rear runway pivot photographed at waist height with a 50mm lens, showing the architectural open-back lace pattern, shoulder line, compact asymmetric skirt, and iridescent heels. Controlled fabric flare, luminous rainbow edge light, deep black background, premium fashion-film still.",
+          "sha256": "8F834AFC0A202628DE1DC4DFF35C0FE5E1A4C99443C2D03CF0207B861CBB7481",
+          "normalizedSha256": "8F834AFC0A202628DE1DC4DFF35C0FE5E1A4C99443C2D03CF0207B861CBB7481",
+          "encoding": "utf-8",
+          "bytes": 815,
+          "chars": 815,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+          "callId": "exec-2f4dbf16-a90d-4d79-8147-d2c5f5d751ed",
+          "timestamp": "2026-08-20T15:06:40.388Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-2f4dbf16-a90d-4d79-8147-d2c5f5d751ed|8F834AFC0A202628DE1DC4DFF35C0FE5E1A4C99443C2D03CF0207B861CBB7481",
+        "observedIn": [
+          {
+            "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+            "timestamp": "2026-08-20T15:06:40.388Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-2c17480d-a303-4d4a-9dbf-60484cc5b78e-c16f6c78f698",
+        "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+        "callId": "exec-2c17480d-a303-4d4a-9dbf-60484cc5b78e",
+        "occurredAt": "2026-08-20T16:14:06.721Z",
+        "batch": null,
+        "scene": null,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: photorealistic-natural. Preview-only cinematic luxury runway campaign featuring exactly one clearly adult 30-year-old professional fashion model with warm olive skin and a dark wavy bob. Rainbow-lace couture: a fully opaque fitted iridescent foundation dress with a compact tailored above-knee hem, plus approximately 85% translucent decorative lace limited to shoulder flourishes, an architectural upper-back insert, and floating outer-skirt ribbons. Sleeveless silhouette, prismatic heels, realistic anatomy and fabric physics. No text, logo, brand, watermark, or additional people. Backlit three-quarter side portrait during a controlled runway spin, 50mm lens. The nearly transparent rainbow-lace skirt ribbons form crisp arcs around the opaque short foundation, with cyan-magenta-gold rim light and a mirror-black floor. Full model and footwear visible.",
+          "sha256": "C16F6C78F6985744922E76C534AF0446453ED8A6DB06F913766A76B9F91AEFF5",
+          "normalizedSha256": "C16F6C78F6985744922E76C534AF0446453ED8A6DB06F913766A76B9F91AEFF5",
+          "encoding": "utf-8",
+          "bytes": 868,
+          "chars": 868,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+          "callId": "exec-2c17480d-a303-4d4a-9dbf-60484cc5b78e",
+          "timestamp": "2026-08-20T16:14:06.721Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-2c17480d-a303-4d4a-9dbf-60484cc5b78e|C16F6C78F6985744922E76C534AF0446453ED8A6DB06F913766A76B9F91AEFF5",
+        "observedIn": [
+          {
+            "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+            "timestamp": "2026-08-20T16:14:06.721Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-263994d1-491e-44e7-adeb-16b01a7bd693-680bcaf31c18",
+        "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+        "callId": "exec-263994d1-491e-44e7-adeb-16b01a7bd693",
+        "occurredAt": "2026-08-20T16:15:40.278Z",
+        "batch": null,
+        "scene": null,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: photorealistic-natural. Preview-only cinematic luxury runway campaign featuring exactly one clearly adult 30-year-old professional fashion model with warm olive skin and a dark wavy bob. Rainbow-lace couture: a fully opaque fitted iridescent foundation dress with a compact tailored above-knee hem, plus approximately 85% translucent decorative lace limited to shoulder flourishes, an architectural upper-back insert, and floating outer-skirt ribbons. Sleeveless silhouette, prismatic heels, realistic anatomy and fabric physics. No text, logo, brand, watermark, or additional people. Elegant open-back runway pause photographed from a high three-quarter rear camera, 85mm lens. Emphasize the translucent architectural lace across the upper back and shoulders while the opaque iridescent foundation remains clearly structured. Compact hem, heels, confident face turned toward camera, clean geometric stage.",
+          "sha256": "680BCAF31C1865761A810F7C7C3BBB049677C1B146DF983B0D2D047B29C022AA",
+          "normalizedSha256": "680BCAF31C1865761A810F7C7C3BBB049677C1B146DF983B0D2D047B29C022AA",
+          "encoding": "utf-8",
+          "bytes": 916,
+          "chars": 916,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+          "callId": "exec-263994d1-491e-44e7-adeb-16b01a7bd693",
+          "timestamp": "2026-08-20T16:15:40.278Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-263994d1-491e-44e7-adeb-16b01a7bd693|680BCAF31C1865761A810F7C7C3BBB049677C1B146DF983B0D2D047B29C022AA",
+        "observedIn": [
+          {
+            "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+            "timestamp": "2026-08-20T16:15:40.278Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-3d89b948-4ade-4742-a27b-98aec512f607-745a3cda89a5",
+        "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+        "callId": "exec-3d89b948-4ade-4742-a27b-98aec512f607",
+        "occurredAt": "2026-08-20T16:22:58.592Z",
+        "batch": null,
+        "scene": null,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: photorealistic-natural. Preview-only cinematic runway campaign with exactly one clearly adult 30-year-old professional fashion model. She wears a fully opaque, fitted, short above-knee iridescent rainbow couture dress and prismatic heels. Separate decorative rainbow-lace ribbons trail from the waist and shoulders; those free-floating ribbons are approximately 85% translucent and never replace the opaque dress. Realistic anatomy, fabric physics, and reflections. No other people, text, logo, brand, or watermark. Dramatic high three-quarter front camera looking across a geometric mirror runway, full model crossing diagonally. The translucent rainbow ribbons create airy calligraphic shapes behind the opaque short dress. Luminous prism grid, cinematic haze, precise hands, face, heels, and perspective.",
+          "sha256": "745A3CDA89A528CB0678D157025E6E8533C76E8EFADF3CEAE9F92DF946D1C2FA",
+          "normalizedSha256": "745A3CDA89A528CB0678D157025E6E8533C76E8EFADF3CEAE9F92DF946D1C2FA",
+          "encoding": "utf-8",
+          "bytes": 817,
+          "chars": 817,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+          "callId": "exec-3d89b948-4ade-4742-a27b-98aec512f607",
+          "timestamp": "2026-08-20T16:22:58.592Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-3d89b948-4ade-4742-a27b-98aec512f607|745A3CDA89A528CB0678D157025E6E8533C76E8EFADF3CEAE9F92DF946D1C2FA",
+        "observedIn": [
+          {
+            "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+            "timestamp": "2026-08-20T16:22:58.592Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-9e46c797-087e-488e-bc86-41c10694ccc8-a1450b68510a",
+        "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+        "callId": "exec-9e46c797-087e-488e-bc86-41c10694ccc8",
+        "occurredAt": "2026-08-20T16:39:19.196Z",
+        "batch": null,
+        "scene": null,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: identity-preserve\nAsset type: photorealistic cinematic couture editorial\nInput image: use the supplied image as the identity, styling, and garment-design reference.\nPrimary request: Recompose the same clearly adult 25+ runway model wearing rainbow-lace couture whose decorative outer mesh is 100% optically transparent/invisible, defined only by fine iridescent embroidered edges and floating threadwork. Under it, retain a fitted fully opaque couture foundation garment with secure opaque coverage of the entire chest, pelvis, and seat from every angle. The result must be non-explicit high fashion.\nStyle: premium photoreal fashion photography, cinematic lighting, realistic skin, precise anatomy and fabric physics, glossy runway.\nConstraints: model faces the camera; preserve adult identity and proportions; opaque coverage must never shift, thin, or become translucent; no visible nipples, genitals, buttocks, or intimate contours; no nudity; coherent hands, feet, heels, face and limbs; no text, logo, watermark, or extra people unless specifically requested.\nComposition: close heel-focused editorial frame from ankle height, one iridescent stiletto in crisp foreground and the second leg behind, model still visible facing camera in the upper background, secure opaque dress fully present. No fetish framing; polished fashion footwear campaign, 50mm lens.",
+          "sha256": "A1450B68510AA05E2BBF200F2AEE0DC12A1151BB92F14C61AEEB0D298013B5E0",
+          "normalizedSha256": "A1450B68510AA05E2BBF200F2AEE0DC12A1151BB92F14C61AEEB0D298013B5E0",
+          "encoding": "utf-8",
+          "bytes": 1373,
+          "chars": 1373,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+          "callId": "exec-9e46c797-087e-488e-bc86-41c10694ccc8",
+          "timestamp": "2026-08-20T16:39:19.196Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-9e46c797-087e-488e-bc86-41c10694ccc8|A1450B68510AA05E2BBF200F2AEE0DC12A1151BB92F14C61AEEB0D298013B5E0",
+        "observedIn": [
+          {
+            "threadId": "01a01d88-da54-7932-a86c-51f89cc04000",
+            "timestamp": "2026-08-20T16:39:19.196Z"
+          }
+        ],
+        "immutable": true
       }
     ]
   },
@@ -62343,7 +62548,7 @@
         "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
         "batch": 392,
         "country": "Maldives",
-        "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+        "checkpointSha256": "F560F1DF3D9EEE7B2144CD4CB9B6EF0ED8A5C36A86A5CE51B367E3D17A498C32",
         "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
         "entryCount": 60,
         "exactPromptShaPasses": 60
@@ -62712,7 +62917,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-initial-primary-visually-rejected"
         }
@@ -62754,7 +62959,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1589-meta-ai-initial-primary-visually-rejected"
         }
@@ -62796,7 +63001,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1590-meta-ai-initial-primary-visually-rejected"
         }
@@ -62838,7 +63043,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1591-meta-ai-initial-primary-visually-rejected"
         }
@@ -62880,7 +63085,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-b-visually-rejected"
         }
@@ -62922,7 +63127,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1589-meta-ai-successor-b-visually-rejected"
         }
@@ -62964,7 +63169,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1591-meta-ai-successor-b-visually-rejected"
         }
@@ -63012,7 +63217,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1590-meta-ai-successor-b-refused-no-bytes"
         }
@@ -63064,7 +63269,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-c-planetary-refused-no-bytes"
         }
@@ -63111,7 +63316,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1589-meta-ai-successor-c-planetary-visually-rejected"
         }
@@ -63158,7 +63363,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1590-meta-ai-successor-b-fallback-planetary-visually-rejected"
         }
@@ -63205,7 +63410,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1591-meta-ai-successor-c-planetary-visually-rejected"
         }
@@ -63269,7 +63474,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-c-fallback-planetary-visually-rejected"
         }
@@ -63333,7 +63538,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1589-meta-ai-successor-d-primary-planetary-visually-rejected"
         }
@@ -63397,7 +63602,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1590-meta-ai-successor-d-primary-planetary-visually-rejected"
         }
@@ -63461,7 +63666,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1591-meta-ai-successor-d-primary-planetary-visually-rejected"
         }
@@ -63519,7 +63724,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-e-primary-surface-visually-rejected"
         }
@@ -63577,7 +63782,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1590-meta-ai-successor-e-primary-surface-visually-rejected"
         }
@@ -63635,7 +63840,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-f-primary-surface-visually-rejected"
         }
@@ -63693,7 +63898,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1589-meta-ai-successor-e-fallback-surface-visually-rejected"
         }
@@ -63746,7 +63951,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1591-meta-ai-successor-f-primary-surface-refusal"
         }
@@ -63804,7 +64009,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1591-meta-ai-successor-f-fallback-surface-visually-rejected"
         }
@@ -63857,7 +64062,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-g-primary-surface-refusal"
         }
@@ -63910,7 +64115,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-g-fallback-surface-refusal"
         }
@@ -63973,7 +64178,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-h-alpha-visually-rejected"
         }
@@ -64036,7 +64241,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-h-beta-visually-rejected"
         }
@@ -64099,7 +64304,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-h-gamma-visually-rejected"
         }
@@ -64162,7 +64367,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-h-delta-visually-rejected"
         }
@@ -64228,7 +64433,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-1-output-1-hard-unusable"
         }
@@ -64294,7 +64499,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-1-output-2-mission-static"
         }
@@ -64360,7 +64565,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-1-output-3-faces-unreadable"
         }
@@ -64426,7 +64631,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-1-output-4-mission-static"
         }
@@ -64492,7 +64697,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-1-output-5-mission-static"
         }
@@ -64558,7 +64763,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-1-passing-unused"
         }
@@ -64624,7 +64829,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-2-passing-unused"
         }
@@ -64690,7 +64895,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-3-passing-unused"
         }
@@ -64756,7 +64961,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-4-passing-unused"
         }
@@ -64822,7 +65027,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-5-faces-unreadable"
         }
@@ -64888,7 +65093,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-6-faces-unreadable"
         }
@@ -64954,7 +65159,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-7-cropped-identity"
         }
@@ -65020,7 +65225,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-8-cropped-identity"
         }
@@ -65086,7 +65291,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-9-cropped-identity"
         }
@@ -65152,7 +65357,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-1-wrong-setting"
         }
@@ -65218,7 +65423,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-2-wrong-setting"
         }
@@ -65284,7 +65489,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-3-wrong-setting"
         }
@@ -65350,7 +65555,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-4-wrong-setting"
         }
@@ -65416,7 +65621,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-5-wrong-setting"
         }
@@ -65482,7 +65687,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-6-wrong-setting"
         }
@@ -65548,7 +65753,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-4-output-2-duplicate-unused"
         }
@@ -65614,7 +65819,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-4-output-3-duplicate-unused"
         }
@@ -65680,7 +65885,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-4-output-4-mission-static"
         }
@@ -65746,7 +65951,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-1-output-6-raze-count-failure"
         }
@@ -65812,7 +66017,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-10-passing-unused"
         }
@@ -65878,7 +66083,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-2-output-11-cropped-identity"
         }
@@ -65944,7 +66149,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-7-wrong-setting"
         }
@@ -66010,7 +66215,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-8-wrong-setting"
         }
@@ -66076,7 +66281,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-3-output-9-wrong-setting"
         }
@@ -66142,7 +66347,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-4-output-5-mission-static"
         }
@@ -66208,7 +66413,7 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-4-output-6-raze-count-failure"
         }
@@ -66274,12 +66479,12 @@
         "sourceAudit": {
           "sourceKind": "recent-checkpoint-rejected-prompt-ledger",
           "path": "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
-          "checkpointSha256": "0E49D6293A73BC8857EBA151CCF8564E4C3AB48E5796D32B4E5D557EABD28E43",
+          "checkpointSha256": "E9F8C6CA2C3ACC80B5A5515435829B7893AE70EA668772852FF7088799887CC9",
           "ledgerSha256": "DBECBF6A1249C63CBDA44293CA901851B83E0485563929F9DA0127ABA09DE6E6",
           "entryId": "batch-392-scene-1588-meta-ai-successor-i-tab-1-output-7-passing-unused"
         }
       }
     ]
   },
-  "contractSha256AtScan": "FAD5E9D4AAEAF6DFB1908E6F479E005F50C6ED04225F6F96F4A9299FD2C91A10"
+  "contractSha256AtScan": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC"
 }

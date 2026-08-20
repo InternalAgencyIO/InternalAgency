@@ -1176,10 +1176,10 @@
         "maximumInFlightPerLane": 1,
         "rule": "Maintain both states whenever Meta is available. Never dispatch N+2 until candidate N has a final QA classification and every rejection, failure, block, zero-byte, unused, or superseded occurrence is appended."
       },
-      "dispatchRule": "Keep one persistent Meta tab assigned to each unresolved scene. When candidate N completes, first preserve exact prompt text, UTC time, prompt hash, source hashes, and raw bytes or explicit no-bytes provenance; immediately dispatch candidate N+1 while visually inspecting N. Before dispatching N+2 in that lane, finalize N's QA classification and run the rejection evidence catch-up gate. Do not wait for unrelated lanes.",
+      "dispatchRule": "Use exactly four persistent Meta tabs. Run twenty banks per pipeline cycle. After each arrival, download, hash and append the minimum evidence envelope before lane reuse. Launch banks 11 through 20 before deep analysis of banks 1 through 10.",
       "identityAnchorRule": "Before every clean Meta scene request, use the three unique historical references and exact name-to-position mapping from quartet-21-face-anchor-manifest.json. State that Radiance, Ellie, Alia, and AI ECE are distinct fictional adult women, each exactly 21 years old, and that the references control faces only. When uploads work, attach scenes 938, 936, and 937 once each in that order. When uploads fail, record the failure and continue text-only with the exact mapping. Never use ece-canonical-identity-v1.png, a recent country output, rejected candidate, or blended face as a prospective identity anchor.",
-      "evidenceFirstDispatchGate": "A completed Meta response may be overtaken by one immediate successor only after exact prompt, UTC timestamp, prompt hash, source-image hashes, response classification as completed-unclassified, and raw candidate bytes or explicit no-bytes provenance are present in local append-only staging.",
-      "rejectionCatchUpGate": "Before dispatching the subsequent candidate after that immediate successor, finish the prior candidate's hard-gate and mission QA. Append and verify exact rejection, refusal, upload failure, moderation block, zero-byte, corruption, unused, or superseded provenance with hashes. Never allow an unclassified result to be overtaken by more than one candidate in its lane.",
+      "evidenceFirstDispatchGate": "During the twenty bank pipeline, exact prompt, response, UTC, reference hashes, raw bytes or no-bytes provenance and technical validity must exist before lane reuse. Deep comparative QA waits until banks 11 through 20 are in flight.",
+      "rejectionCatchUpGate": "Before any selection, acceptance, publication, queue advance, commit or push, fully classify every sprint occurrence and append every rejection, refusal, upload failure, block, zero-byte, corrupt, unused and superseded outcome. Never leave evidence behind.",
       "rollingCheckpointRule": "After each four completed lane outputs, after any scene source selection, and before country acceptance, publication, queue advance, commit, or push: run the archive collector and both ledger verifiers; write the checkpoint; commit only intended project/archive/ledger changes; push explicitly; and remote-verify Git and LFS parity. Local Meta lane overlap may continue only within the evidence-first and rejection-catch-up gates; canonical acceptance and queue advancement always wait for full parity.",
       "promptRule": "Prepare one primary and one moderation-compatible fallback prompt before every dispatch. Read the immediate Meta response text. On a refusal, append the refusal and candidate tokens to meta5_blocked_prompt_lexicon.jsonl, update the run suppression counts, replace run-blacklisted terms with neutral alternatives, and retry that candidate only once with the fallback. Never use bypass tactics or reintroduce a run-blacklisted token without explicit reset.",
       "editRule": "A rolling candidate may be a clean text-only generation from the original identity anchors or a targeted reference-image refinement from the best viable prior candidate. Preserve style and pose continuity when useful. Never upload a hard-unsafe, corrupt, blocked, or identity-abandoned source. If upload fails, append the failure and continue through text-only flow.",
@@ -1193,7 +1193,26 @@
         "the authoritative render queue is complete",
         "a safety or external-choice blocker requires user direction"
       ],
-      "singleGuardianRule": "This policy belongs only to starlight-internalagency-24-7-guardian. Never create another automation, worker, or duplicate guardian."
+      "singleGuardianRule": "This policy belongs only to starlight-internalagency-24-7-guardian. Never create another automation, worker, or duplicate guardian.",
+      "twentyBankContinuousPipelinePolicy": {
+        "active": true,
+        "requestedAt": "2026-08-20T15:56:17.818Z",
+        "userDirective": "After ten banks, dispatch ten more four prompt banks before deep analysis. Keep new image output first and assign later.",
+        "banksPerPipelineCycle": 20,
+        "firstAnalysisStartsAfterBank": 10,
+        "secondBlockDispatchStartsAtBank": 11,
+        "persistentTabs": 4,
+        "promptsPerBank": 4,
+        "imagesRequestedPerPrompt": 1,
+        "maximumRequestedImagesPerCycle": 80,
+        "renderPriority": "Capture, download, hash and append the minimum occurrence envelope, then reuse the lane immediately. Bank 11 starts after bank 10 capture and before deep analysis of banks 1 through 10.",
+        "analysisOverlap": "Analyze banks 1 through 10 while banks 11 through 20 render. Analyze banks 11 through 20 after capture while preparing the next authoritative sprint.",
+        "evidenceGate": "Before lane reuse preserve exact prompt, UTC, source hashes, provider response, raw bytes and SHA-256 or explicit no-bytes provenance, dimensions and technical validity. Never overwrite or omit an output.",
+        "selectionBarrier": "No canonical selection, publication or queue advance until the complete selection pool is classified and archive, ledger, Git and LFS parity pass.",
+        "publicationPipeline": "Commit and explicitly push the last fully analyzed batch to the authorized GitHub branch while new Meta banks remain in flight. Prepare the X media and caption, then request action time confirmation immediately before the final X post click.",
+        "safetyRule": "Never select unsafe, cloned, corrupt or grossly malformed media. Never bypass moderation, sign-in, rate or provider limits.",
+        "noFillerRule": "Do not reopen resolved countries and do not create filler after a scene resolves."
+      }
     },
     "chatgptFinalHemRefinementPolicy": {
       "active": true,

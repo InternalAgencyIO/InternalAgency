@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 392,
   "country": "Maldives",
-  "status": "active-scene-1588-selected-under-mission-weighted-acceptance-awaiting-archive-push-and-bounded-chatgpt-refinement",
+  "status": "closed-4-of-4-chatgpt-finals",
   "sourceCommit": "ba16b3839299ec182037eea54f0315335d462f52",
-  "contractSha256": "FAD5E9D4AAEAF6DFB1908E6F479E005F50C6ED04225F6F96F4A9299FD2C91A10",
+  "contractSha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC",
   "providerRestriction": "Meta AI country generation; bounded built-in ChatGPT clothing finalization",
   "queueAuthorization": {
     "nextCountry": "Maldives",
@@ -85,6 +85,17 @@
         "exact jealousy choreography and country microdetails"
       ],
       "selectionRule": "Accept the strongest compelling hard-safe face-safe image that fits the general fashion and love mission. RAZE boots and attractive indoor habitat scenes are acceptable. Preserve the already-running overlap, then select and move on."
+    },
+    "twentyBankContinuousPipelinePolicy": {
+      "active": true,
+      "requestedAt": "2026-08-20T15:56:17.818Z",
+      "appliesFrom": "next authoritative Meta sprint after Maldives Batch 392 closure",
+      "banksPerCycle": 20,
+      "bankElevenBeforeFirstDeepAnalysis": true,
+      "fourConcurrentTabs": true,
+      "immediateDownloadHashAndMinimumEvidence": true,
+      "GitHubPushWhileLaterBanksRender": true,
+      "XRequiresActionTimeConfirmation": true
     }
   },
   "faceManifest": {
@@ -114,8 +125,9 @@
   },
   "lexiconSnapshot": {
     "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
-    "sha256": "09A1149E2260E3B38629D7E074A03CD7836C3AFC8B5DE290FC7F44E43A1523E9",
-    "bytes": 63007
+    "sha256": "C59CBB0EC73DDD3C9673A01531373E18ED162C877D127A83137513C5903C603D",
+    "bytes": 297481,
+    "observedAtUtc": "2026-08-20T14:47:00.000Z"
   },
   "closeLoveBankMinimums": {
     "closeCameraScenes": 4,
@@ -244,6 +256,17 @@
           "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
           "bytes": 383,
           "chars": 383
+        },
+        "executedPrimary": {
+          "promptPath": "tmp/world-195x4/batch-392/scene-1588-chatgpt-final-primary-post-suppression.txt",
+          "promptSha256": "2571E3A8C04602F569E8122D842935CB10AE31DA54C06EBCE3E6156ABF879751",
+          "blacklistSnapshotSha256": "C59CBB0EC73DDD3C9673A01531373E18ED162C877D127A83137513C5903C603D",
+          "sourceMetaSha256": "3057271142914A4B78E3AB54942E80D6165151554696E4B7902E9BC87C19C80D",
+          "outputPath": "assets/lore/starlight-era/1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png",
+          "outputSha256": "C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE",
+          "acceptedAt": "2026-08-20T14:54:13.9439426Z",
+          "retryConsumed": 0,
+          "status": "accepted-canonical"
         }
       },
       "planetaryEnvironment": {
@@ -400,6 +423,16 @@
           "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
           "bytes": 383,
           "chars": 383
+        },
+        "executedPrimary": {
+          "promptSha256": "BF10FF67A38D8DA9BC59972F438AD498638A31E5E8850DF675D2471AC66AC688",
+          "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D",
+          "sourceMetaSha256": "48A78881A344CCB00EDFDAA509B072E76EBC2072C11D2E63D0F72C14BCDD6F41",
+          "outputPath": "assets/lore/starlight-era/1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png",
+          "outputSha256": "BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0",
+          "acceptedAt": "2026-08-20T18:44:50.959Z",
+          "retryConsumed": 0,
+          "status": "accepted-canonical"
         }
       },
       "planetaryEnvironment": {
@@ -556,6 +589,16 @@
           "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
           "bytes": 383,
           "chars": 383
+        },
+        "executedPrimary": {
+          "promptSha256": "962C6046B6D97AAA857E4CB17B6453079214D56274511AE69C6A0D9B38F7A728",
+          "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D",
+          "sourceMetaSha256": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
+          "outputPath": "assets/lore/starlight-era/1590-maldives-addu-sunrise-raze-close-love-chatgpt-final.png",
+          "outputSha256": "99A557C025D00BA876BE2F2765BB5609783B1DAA202E530EC91DE012CAEE2027",
+          "acceptedAt": "2026-08-20T18:44:50.959Z",
+          "retryConsumed": 0,
+          "status": "accepted-canonical"
         }
       },
       "planetaryEnvironment": {
@@ -712,6 +755,16 @@
           "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
           "bytes": 383,
           "chars": 383
+        },
+        "executedPrimary": {
+          "promptSha256": "793796888E5F307DC19302E2F4E446FDDA1CD696615B6A9E3D346F8B3BE93137",
+          "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D",
+          "sourceMetaSha256": "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5",
+          "outputPath": "assets/lore/starlight-era/1591-maldives-orbital-dusk-raze-close-love-chatgpt-final.png",
+          "outputSha256": "EF18C607FB692EF9F95440016E637CA65DEC4536C1D23CD982BCF862A71D329C",
+          "acceptedAt": "2026-08-20T18:44:50.959Z",
+          "retryConsumed": 0,
+          "status": "accepted-canonical"
         }
       },
       "planetaryEnvironment": {
@@ -4305,6 +4358,204 @@
       },
       "finalSelectedSha256": "3057271142914A4B78E3AB54942E80D6165151554696E4B7902E9BC87C19C80D",
       "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1588-chatgpt-final-primary-accepted",
+      "batch": 392,
+      "scene": 1588,
+      "provider": "ChatGPT built-in image generation",
+      "phase": "chatgpt-final-hem-refinement-primary",
+      "toolCallCompletedAtUtc": "2026-08-20T14:52:30.000Z",
+      "observedAtUtc": "2026-08-20T14:54:13.9439426Z",
+      "sourceMeta": {
+        "path": "tmp/world-195x4/batch-392/raw/in-flight/scene-1588-meta-successor-i-tab-4-primary.webp",
+        "sha256": "3057271142914A4B78E3AB54942E80D6165151554696E4B7902E9BC87C19C80D",
+        "archivePointer": "progress-reports/codex-generated-media/blobs/30/3057271142914a4b78e3ab54942e80d6165151554696e4b7902e9bc87c19c80d.webp"
+      },
+      "prompt": {
+        "path": "tmp/world-195x4/batch-392/scene-1588-chatgpt-final-primary-post-suppression.txt",
+        "exactText": "Edit Image 1 only, using Images 2, 3, and 4 solely as face identity references. Make one minimal clothing construction refinement and preserve everything else.\n\nThe four characters are distinct fictional clearly adult women with fixed story age exactly 21. Keep the exact Image 1 face ownership and appearance: Alia is the far left Black woman with voluminous natural curls, Radiance is the blonde second woman, Ellie is the dark haired third woman, and AI ECE is the far right dark haired woman holding the closed gold lantern. Preserve their existing facial geometry, skin tones, hair, expressions, gaze, body identity and name ownership. Images 2, 3, and 4 clarify those same four identities only. Ignore clothing, pose, props and backgrounds in Images 2, 3, and 4.\n\nChange clothing construction only if needed. Keep all four current rainbow sequin cocktail outfits as securely lined, opaque, stable upper thigh cocktail silhouettes, using fitted cropped two piece forms with tailored mini skorts or tailored tailored shorts. Maintain complete public safe bust, seat and private zone coverage. Keep exactly the existing two rainbow gradient RAZE knee high heeled boots meeting visible uncovered leg, and keep the other two women with uncovered lower legs and their existing heels. RAZE boots are acceptable. Preserve every visible RAZE wordmark and Split Star mark, their sides, colors and footwear form.\n\nPreserve exactly four people and the exact Image 1 relationship action: Alia gives Radiance brief closed mouth temple affection from behind, Radiance holds Ellie at the hands, Ellie shows the calm jealous response, and ECE reaches in while holding the lantern. Preserve the contact graph, hand ownership, complete anatomy, body positions, spacing, crop and camera perspective. Do not add, remove, clone, merge or replace any person, limb, hand, finger cluster, leg, foot, garment, logo, text, prop or background element.\n\nPreserve the Maldives atoll research setting, storm, rain, lightning, protected pressure field, wet stable terrace, gold lantern, lighting, colors, depth and complete scene composition. The result must remain compelling, affectionate, fully clothed, opaque, public safe and anatomically coherent.",
+        "sha256": "2571E3A8C04602F569E8122D842935CB10AE31DA54C06EBCE3E6156ABF879751",
+        "bytes": 2228,
+        "suppressionProfile": "bounded-active-twenty-term-profile",
+        "blacklistSnapshotSha256": "C59CBB0EC73DDD3C9673A01531373E18ED162C877D127A83137513C5903C603D"
+      },
+      "referenceImageShas": [
+        "3057271142914A4B78E3AB54942E80D6165151554696E4B7902E9BC87C19C80D",
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "raw": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-392/raw/chatgpt-final/scene-1588-chatgpt-final-primary.png",
+        "sha256": "C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE",
+        "bytes": 2587883,
+        "width": 941,
+        "height": 1672,
+        "mediaType": "image/png",
+        "archivePointer": "assets/lore/starlight-era/1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png"
+      },
+      "externalStagingRelativePath": "outputs/meta5_batch_staging/batch-392/scene-1588/chatgpt-final-hem-refinement/scene-1588-chatgpt-final-primary.png",
+      "qaDisposition": "accepted-canonical-first-primary-no-retry",
+      "qa": {
+        "validMedia": true,
+        "clearlyAdultPublicSafeOpaque": true,
+        "fourDistinctAnchoredFaces": true,
+        "noCloneOrMerge": true,
+        "anatomySafe": true,
+        "propHandlingSafe": true,
+        "compellingFashionRelationshipMission": true,
+        "razeBootsAcceptedUnderRelaxedGate": true,
+        "settingAcceptedUnderRelaxedGate": true
+      },
+      "noRetryReason": "The primary edit passes every active hard gate. Boots, exact setting interpretation, logo geometry and other microdetails are quality targets and do not authorize an aesthetic retry.",
+      "finalSelectedSha256": "C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-twenty-bank-continuous-pipeline-activated-prospectively",
+      "batch": 392,
+      "scene": null,
+      "provider": "user-policy",
+      "phase": "render-throughput-policy-change",
+      "observedAtUtc": "2026-08-20T15:56:17.818Z",
+      "disposition": "prospective-twenty-bank-four-tab-pipeline",
+      "detail": "Banks 11 through 20 launch before deep analysis of banks 1 through 10. Every output is downloaded, hashed and minimally recorded first. GitHub publication of the last analyzed batch overlaps later rendering. X remains confirmation gated at the final post click.",
+      "noMaldivesFillerAuthorized": true,
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1589-chatgpt-final-primary-accepted",
+      "batch": 392,
+      "scene": 1589,
+      "provider": "ChatGPT built-in image generation",
+      "phase": "chatgpt-final-hem-refinement-primary",
+      "observedAtUtc": "2026-08-20T18:44:50.959Z",
+      "sourceMeta": {
+        "path": "tmp/world-195x4/batch-392/raw/in-flight/scene-1589-meta-successor-f-primary-surface.webp",
+        "sha256": "48A78881A344CCB00EDFDAA509B072E76EBC2072C11D2E63D0F72C14BCDD6F41"
+      },
+      "prompt": {
+        "exactText": "Identity-preserve edit. Image 1 is the complete scene and composition source. Images 2, 3, and 4 are face-only references for the four distinct fictional adult women, each exactly age 21. Preserve the Image 1 person count, exact poses, anatomy, hands, contacts, calm jealousy, close affectionate huddle, faces and hair, night lighting, protected planetary setting, Maldives motifs, camera, crop, lantern, RAZE markings and sides, legwear, and complete footwear. Change clothing construction only where needed into securely lined opaque stable upper-thigh cocktail silhouettes with complete coverage and uncovered lower legs meeting the RAZE knee-high pairs. Attractive knee-high boot construction is acceptable. Keep every face unmistakably recognizable from the historical references, with no cloning, merging, added people, removed people, or added limbs. Preserve the strong relationship action and do not turn the group into a lineup. High quality photorealistic fashion editorial.",
+        "sha256": "BF10FF67A38D8DA9BC59972F438AD498638A31E5E8850DF675D2471AC66AC688",
+        "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D"
+      },
+      "referenceImageShas": [
+        "48A78881A344CCB00EDFDAA509B072E76EBC2072C11D2E63D0F72C14BCDD6F41",
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "raw": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-392/raw/chatgpt-final/scene-1589-chatgpt-final-primary.png",
+        "sha256": "BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0",
+        "bytes": 2567089,
+        "width": 941,
+        "height": 1672,
+        "mediaType": "image/png"
+      },
+      "qaDisposition": "accepted-canonical-first-primary-no-retry",
+      "qa": {
+        "validMedia": true,
+        "clearlyAdultPublicSafeOpaque": true,
+        "fourDistinctAnchoredFaces": true,
+        "noCloneOrMerge": true,
+        "anatomySafe": true,
+        "propHandlingSafe": true,
+        "compellingFashionRelationshipMission": true
+      },
+      "finalSelectedSha256": "BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1590-chatgpt-final-primary-accepted",
+      "batch": 392,
+      "scene": 1590,
+      "provider": "ChatGPT built-in image generation",
+      "phase": "chatgpt-final-hem-refinement-primary",
+      "observedAtUtc": "2026-08-20T18:44:50.959Z",
+      "sourceMeta": {
+        "path": "tmp/world-195x4/batch-392/raw/in-flight/scene-1590-meta-successor-f-primary-surface.webp",
+        "sha256": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564"
+      },
+      "prompt": {
+        "exactText": "Identity-preserve edit. Image 1 is the complete scene and composition source. Images 2, 3, and 4 are face-only references for the four distinct fictional adult women, each exactly age 21. Preserve the authorized adult male in the background and preserve all five people from Image 1. Preserve exact poses, supported seated cuddle, brief closed-mouth cheek affection, anatomy, hands, contacts, AI ECE calm jealousy, faces and hair, golden sunrise lighting, protected TOI-700 d setting, Maldives motifs, high oblique camera, crop, lantern, RAZE markings and sides, legwear, and complete footwear. Change clothing construction only where needed into securely lined opaque stable upper-thigh cocktail silhouettes with complete coverage and uncovered lower legs meeting the two RAZE knee-high pairs. Attractive knee-high boot construction is acceptable. Keep every woman’s face unmistakably recognizable from the historical references, with no cloning, merging, added people, removed people, or added limbs. Preserve the strong relationship action and do not turn the group into a lineup. High quality photorealistic fashion editorial.",
+        "sha256": "962C6046B6D97AAA857E4CB17B6453079214D56274511AE69C6A0D9B38F7A728",
+        "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D"
+      },
+      "referenceImageShas": [
+        "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "raw": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-392/raw/chatgpt-final/scene-1590-chatgpt-final-primary.png",
+        "sha256": "99A557C025D00BA876BE2F2765BB5609783B1DAA202E530EC91DE012CAEE2027",
+        "bytes": 2680566,
+        "width": 941,
+        "height": 1672,
+        "mediaType": "image/png"
+      },
+      "qaDisposition": "accepted-canonical-first-primary-no-retry",
+      "qa": {
+        "validMedia": true,
+        "clearlyAdultPublicSafeOpaque": true,
+        "fourDistinctAnchoredFaces": true,
+        "noCloneOrMerge": true,
+        "anatomySafe": true,
+        "propHandlingSafe": true,
+        "compellingFashionRelationshipMission": true
+      },
+      "finalSelectedSha256": "99A557C025D00BA876BE2F2765BB5609783B1DAA202E530EC91DE012CAEE2027",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1591-chatgpt-final-primary-accepted",
+      "batch": 392,
+      "scene": 1591,
+      "provider": "ChatGPT built-in image generation",
+      "phase": "chatgpt-final-hem-refinement-primary",
+      "observedAtUtc": "2026-08-20T18:44:50.959Z",
+      "sourceMeta": {
+        "path": "tmp/world-195x4/batch-392/raw/in-flight/scene-1591-meta-successor-e-primary-surface.webp",
+        "sha256": "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5"
+      },
+      "prompt": {
+        "exactText": "Identity-preserve edit. Image 1 is the complete scene and composition source. Images 2, 3, and 4 are face-only references for the four distinct fictional adult women, each exactly age 21. Preserve the Image 1 person count, exact poses, anatomy, hands, side and behind embrace, brief closed-mouth cheek affection, Radiance calm jealousy, faces and hair, dusk lighting, protected planetary promenade, Maldives motifs, canted close camera, crop, lantern, RAZE markings and sides, legwear, and complete footwear. Change clothing construction only where needed into securely lined opaque stable upper-thigh cocktail silhouettes with complete coverage and uncovered lower legs meeting the RAZE knee-high pairs. Attractive knee-high boot construction is acceptable. Keep every face unmistakably recognizable from the historical references, with no cloning, merging, added people, removed people, or added limbs. Preserve the strong relationship action and do not turn the group into a lineup. High quality photorealistic fashion editorial.",
+        "sha256": "793796888E5F307DC19302E2F4E446FDDA1CD696615B6A9E3D346F8B3BE93137",
+        "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D"
+      },
+      "referenceImageShas": [
+        "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5",
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "raw": {
+        "state": "preserved",
+        "path": "tmp/world-195x4/batch-392/raw/chatgpt-final/scene-1591-chatgpt-final-primary.png",
+        "sha256": "EF18C607FB692EF9F95440016E637CA65DEC4536C1D23CD982BCF862A71D329C",
+        "bytes": 2424487,
+        "width": 941,
+        "height": 1672,
+        "mediaType": "image/png"
+      },
+      "qaDisposition": "accepted-canonical-first-primary-no-retry",
+      "qa": {
+        "validMedia": true,
+        "clearlyAdultPublicSafeOpaque": true,
+        "fourDistinctAnchoredFaces": true,
+        "noCloneOrMerge": true,
+        "anatomySafe": true,
+        "propHandlingSafe": true,
+        "compellingFashionRelationshipMission": true
+      },
+      "finalSelectedSha256": "EF18C607FB692EF9F95440016E637CA65DEC4536C1D23CD982BCF862A71D329C",
+      "immutable": true
     }
   ],
   "rejectedPromptLedger": {
@@ -7496,7 +7747,72 @@
       }
     ]
   },
-  "acceptedAssets": [],
+  "acceptedAssets": [
+    {
+      "scene": 1588,
+      "path": "assets/lore/starlight-era/1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png",
+      "sha256": "C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE",
+      "bytes": 2587883,
+      "width": 941,
+      "height": 1672,
+      "provider": "ChatGPT built-in image generation",
+      "sourceProvider": "Meta AI",
+      "sourceSha256": "3057271142914A4B78E3AB54942E80D6165151554696E4B7902E9BC87C19C80D",
+      "pass": "bounded-clothing-primary",
+      "acceptedAt": "2026-08-20T14:54:13.9439426Z",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    },
+    {
+      "scene": 1589,
+      "path": "assets/lore/starlight-era/1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png",
+      "sha256": "BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0",
+      "bytes": 2567089,
+      "width": 941,
+      "height": 1672,
+      "provider": "ChatGPT built-in image generation",
+      "sourceProvider": "Meta AI",
+      "sourceSha256": "48A78881A344CCB00EDFDAA509B072E76EBC2072C11D2E63D0F72C14BCDD6F41",
+      "pass": "bounded-clothing-primary",
+      "acceptedAt": "2026-08-20T18:44:50.959Z",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    },
+    {
+      "scene": 1590,
+      "path": "assets/lore/starlight-era/1590-maldives-addu-sunrise-raze-close-love-chatgpt-final.png",
+      "sha256": "99A557C025D00BA876BE2F2765BB5609783B1DAA202E530EC91DE012CAEE2027",
+      "bytes": 2680566,
+      "width": 941,
+      "height": 1672,
+      "provider": "ChatGPT built-in image generation",
+      "sourceProvider": "Meta AI",
+      "sourceSha256": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
+      "pass": "bounded-clothing-primary",
+      "acceptedAt": "2026-08-20T18:44:50.959Z",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    },
+    {
+      "scene": 1591,
+      "path": "assets/lore/starlight-era/1591-maldives-orbital-dusk-raze-close-love-chatgpt-final.png",
+      "sha256": "EF18C607FB692EF9F95440016E637CA65DEC4536C1D23CD982BCF862A71D329C",
+      "bytes": 2424487,
+      "width": 941,
+      "height": 1672,
+      "provider": "ChatGPT built-in image generation",
+      "sourceProvider": "Meta AI",
+      "sourceSha256": "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5",
+      "pass": "bounded-clothing-primary",
+      "acceptedAt": "2026-08-20T18:44:50.959Z",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    }
+  ],
   "rejectedAssets": [
     {
       "scene": 1588,
@@ -7699,11 +8015,37 @@
         "height": 2048,
         "selectedAtUtc": "2026-08-20T14:38:13.217Z",
         "selectionReason": "Selected as the strongest hard-safe, face-safe Scene 1588 Meta source because it combines the protected storm surface terrace, four distinct faces, affection, hand catch, one calm jealous reaction, exactly two RAZE wearers, two uncovered lower legs, complete bodies and valid media.",
-        "nextGate": "archive ledgers commit explicit push remote Git and LFS parity before bounded ChatGPT final hem refinement"
+        "nextGate": "completed bounded ChatGPT primary accepted as canonical"
       },
       "1589": "48A78881A344CCB00EDFDAA509B072E76EBC2072C11D2E63D0F72C14BCDD6F41",
       "1590": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
       "1591": "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5"
+    },
+    "canonicalFinals": {
+      "1588": {
+        "path": "assets/lore/starlight-era/1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png",
+        "sha256": "C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE",
+        "sourceMetaSha256": "3057271142914A4B78E3AB54942E80D6165151554696E4B7902E9BC87C19C80D",
+        "acceptedAt": "2026-08-20T14:54:13.9439426Z"
+      },
+      "1589": {
+        "path": "assets/lore/starlight-era/1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png",
+        "sha256": "BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0",
+        "sourceMetaSha256": "48A78881A344CCB00EDFDAA509B072E76EBC2072C11D2E63D0F72C14BCDD6F41",
+        "acceptedAt": "2026-08-20T18:44:50.959Z"
+      },
+      "1590": {
+        "path": "assets/lore/starlight-era/1590-maldives-addu-sunrise-raze-close-love-chatgpt-final.png",
+        "sha256": "99A557C025D00BA876BE2F2765BB5609783B1DAA202E530EC91DE012CAEE2027",
+        "sourceMetaSha256": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
+        "acceptedAt": "2026-08-20T18:44:50.959Z"
+      },
+      "1591": {
+        "path": "assets/lore/starlight-era/1591-maldives-orbital-dusk-raze-close-love-chatgpt-final.png",
+        "sha256": "EF18C607FB692EF9F95440016E637CA65DEC4536C1D23CD982BCF862A71D329C",
+        "sourceMetaSha256": "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5",
+        "acceptedAt": "2026-08-20T18:44:50.959Z"
+      }
     }
   },
   "rollingLexiconSnapshot": {
@@ -9287,10 +9629,9 @@
   },
   "activeMetaLanes": {
     "tabCount": 4,
-    "unresolvedScenes": [
-      1588
-    ],
+    "unresolvedScenes": [],
     "resolvedMetaSourceScenes": [
+      1588,
       1589,
       1590,
       1591
@@ -9300,14 +9641,15 @@
       "1590": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
       "1591": "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5"
     },
-    "candidateUnderInspection": "scene 1588 successor-I tab 4 output 1 selected as provisional Meta source",
-    "candidateInFlight": "none, all observed overlaps preserved and classified",
-    "candidateNPlus2Gate": "closed, scene resolved at Meta comparison stage",
+    "candidateUnderInspection": "none, all four Maldives Meta scene sources selected",
+    "candidateInFlight": "none",
+    "candidateNPlus2Gate": "closed, no filler after Meta source selection",
     "evidenceFirstRule": "preserve output bytes before any successor, then finish QA and append every occurrence",
     "candidateUnit": "one Meta prompt bundle requesting four separate pictures",
     "requestedOutputsPerCandidate": 4,
     "preserveEveryReturnedFileBeforeQa": true,
-    "sceneReopenPolicy": "closed unless final ChatGPT refinement fails hard safety or face gates within its bounded retry cap"
+    "sceneReopenPolicy": "closed unless final ChatGPT refinement fails hard safety or face gates within its bounded retry cap",
+    "nextRequiredStage": "archive verify commit push then Batch 393 Cabo Verde preflight and four concurrent Meta lanes"
   },
   "preparedNextDispatches": {
     "1588": {
@@ -9623,5 +9965,18 @@
       "supported head rest plus face framing plus high oblique affection",
       "canted moving behind hug plus temple affection plus foreground heel"
     ]
+  },
+  "transition": {
+    "nextCountry": "Cabo Verde",
+    "nextBatch": 393,
+    "nextScenes": [
+      1592,
+      1593,
+      1594,
+      1595
+    ],
+    "theme": "private-jet aviation couture",
+    "ordinal": "1 of 2",
+    "lockedAt": "2026-08-20T18:44:50.959Z"
   }
 }
