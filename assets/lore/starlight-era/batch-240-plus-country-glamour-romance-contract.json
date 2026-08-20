@@ -1083,6 +1083,18 @@
       "provider": "Meta AI is the exclusive country-generation and scene-correction provider. Meta's native account, availability, moderation, session, and rate limits remain authoritative and must never be bypassed. The only provider exception is the post-selection built-in ChatGPT image edit defined by chatgptFinalHemRefinementPolicy.",
       "tabCount": 4,
       "sceneLaneCount": 4,
+      "fourSeparatePictureBundlePolicy": {
+        "active": true,
+        "requestedAt": "2026-08-20T13:16:30.000Z",
+        "requestedOutputsPerPrompt": 4,
+        "outputForm": "Request exactly four separate image files from every Meta prompt. Never request or accept a collage, grid, contact sheet, or mosaic as a substitute for four separate files.",
+        "variantInstructions": "Every prompt must contain four numbered, fully detailed variant instructions. All four variants preserve the locked country, planet, environment, setting, identity anchors, safety, wardrobe, RAZE mapping, mission, and scene facts. Variants may differ only in approved camera angle, relationship staging, foreground emphasis, and composition.",
+        "bundleLaneRule": "Treat each four-output prompt as one lane candidate bundle. The existing candidate N under inspection plus candidate N+1 in flight rule applies at bundle level. Every returned file in N must be preserved and classified before N+2 is authorized.",
+        "downloadFirstRule": "Immediately download and content-address every returned provider file before visual QA or source selection. Preserve accepted, rejected, unused, superseded, unrelated, corrupt, partial, and failed occurrences. Never discard, overwrite, or omit an output because another variant is stronger.",
+        "perFileEvidenceRule": "Create one append-only occurrence record per returned file with exact prompt, prompt hash, source-image hashes, provider response, UTC, raw bytes or explicit no-bytes provenance, SHA-256, dimensions when valid, and final QA disposition.",
+        "selectionRule": "If one or two variants pass, retain the strongest passing source. If all four pass, retain the strongest result or strongest set required by the country. Keep every nonselected output locally accessible through the archive and manifest.",
+        "providerShortfallRule": "If Meta returns fewer than four separate files or returns a combined grid, preserve exactly what arrived, record the output shortfall or combined-media form, and continue within provider limits. Never claim that missing separate files existed and never bypass provider controls to force a count."
+      },
       "projectAttemptCeiling": "none-user-imposed",
       "projectCountrySendCeiling": "none-user-imposed",
       "laneStateModel": {

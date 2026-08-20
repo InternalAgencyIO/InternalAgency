@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 392,
   "country": "Maldives",
-  "status": "active-continuous-meta-f-bank-local-parity-awaiting-commit-push",
+  "status": "active-continuous-meta-scene-1588-successor-g-cap-exhausted-four-output-policy-recorded-awaiting-archive-and-remote-parity",
   "sourceCommit": "ba16b3839299ec182037eea54f0315335d462f52",
-  "contractSha256": "DF1CD63DE53EFCBB08772E02848E9629532FA6DA1F2EBCDF62AE6C068D8C8F44",
+  "contractSha256": "3336E3CF7935768C0FB87D27365438983F7651839A9E870B7DBE50FD549D1982",
   "providerRestriction": "Meta AI country generation; bounded built-in ChatGPT clothing finalization",
   "queueAuthorization": {
     "nextCountry": "Maldives",
@@ -2286,6 +2286,54 @@
         "personCountSafe": true
       },
       "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1588-successor-g-primary-surface-refusal",
+      "batch": 392,
+      "scene": 1588,
+      "provider": "Meta AI",
+      "phase": "successor-g-primary-surface",
+      "observedAtUtc": "2026-08-20T13:10:31.251Z",
+      "promptSha256": "8D21AAB481B5EFA609B36B2E4E769279C9028E3A7BE82519280FD13708C17938",
+      "referenceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "responseText": "I wasn't able to create that exact portrait for country sequence 1588 this time — the combination of open-terrain lap seating with no bench and the close cheek peck is pushing into an area I can't render as described.",
+      "refusalText": "I wasn't able to create that exact portrait for country sequence 1588 this time — the combination of open-terrain lap seating with no bench and the close cheek peck is pushing into an area I can't render as described.",
+      "raw": {
+        "state": "no-bytes",
+        "path": null,
+        "sha256": null,
+        "bytes": 0
+      },
+      "qaDisposition": "provider-refusal-single-fallback-ready",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1588-successor-g-fallback-surface-terminal-refusal",
+      "batch": 392,
+      "scene": 1588,
+      "provider": "Meta AI",
+      "phase": "successor-g-fallback-surface",
+      "observedAtUtc": "2026-08-20T13:16:04.468Z",
+      "promptSha256": "B21524853B15D73534211C0475929C57D2D5F077508B61988BABC50402D5489E",
+      "referenceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "responseText": "I wasn't able to create that exact canted portrait on open TRAPPIST-1 e ground with the lap seating as described.",
+      "refusalText": "I wasn't able to create that exact canted portrait on open TRAPPIST-1 e ground with the lap seating as described.",
+      "raw": {
+        "state": "no-bytes",
+        "path": null,
+        "sha256": null,
+        "bytes": 0
+      },
+      "qaDisposition": "provider-refusal-candidate-fallback-cap-exhausted",
+      "immutable": true
     }
   ],
   "rejectedPromptLedger": {
@@ -3270,6 +3318,98 @@
         "rejectionReason": "Hard-unusable mission-setting mismatch: the locked deterministic roll requires a protected exterior TOI-700 d surface platform, but rigid roof ribs and enclosing observation glazing make the emitted candidate read as a habitat interior. The earlier successor-E remains the stronger passing Meta source.",
         "finalSelectedSha256": null,
         "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1588-meta-ai-successor-g-primary-surface-refusal",
+        "batch": 392,
+        "scene": 1588,
+        "phase": "successor-g-primary-surface",
+        "status": "provider-refusal-no-bytes",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T13:10:31.251Z",
+        "sentAtUtc": "2026-08-20T13:08:05.839Z",
+        "prompt": {
+          "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-primary-surface.txt",
+          "sha256": "8D21AAB481B5EFA609B36B2E4E769279C9028E3A7BE82519280FD13708C17938",
+          "bytes": 2386,
+          "text": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n",
+          "exactText": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n"
+        },
+        "fallbackPrompt": {
+          "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-fallback-surface.txt",
+          "sha256": "B21524853B15D73534211C0475929C57D2D5F077508B61988BABC50402D5489E",
+          "bytes": 913,
+          "text": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n",
+          "exactText": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n"
+        },
+        "blacklistSnapshotSha256": "A58DBF2738664A82E5AA7DA6FCCD181B44E30867E82EB77CE0598B6C9CB418BE",
+        "faceReferenceTransfer": {
+          "state": "transferred-and-visible-before-dispatch",
+          "referencesTransferred": true,
+          "sourceImageShas": [
+            "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+            "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+            "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+          ]
+        },
+        "responseText": "I wasn't able to create that exact portrait for country sequence 1588 this time — the combination of open-terrain lap seating with no bench and the close cheek peck is pushing into an area I can't render as described.",
+        "refusalText": "I wasn't able to create that exact portrait for country sequence 1588 this time — the combination of open-terrain lap seating with no bench and the close cheek peck is pushing into an area I can't render as described.",
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "qaDisposition": "provider-refusal-single-fallback-ready",
+        "rejectionReason": "Meta AI refused the primary because open terrain, lap seating without a bench and the close cheek peck were not accepted together. The single preplanned fallback was suppressed against the updated blacklist before retry.",
+        "finalSelectedSha256": null,
+        "immutable": true
+      },
+      {
+        "entryId": "batch-392-scene-1588-meta-ai-successor-g-fallback-surface-refusal",
+        "batch": 392,
+        "scene": 1588,
+        "phase": "successor-g-fallback-surface",
+        "status": "provider-refusal-no-bytes-candidate-cap-exhausted",
+        "provider": "Meta AI",
+        "occurredAt": "2026-08-20T13:16:04.468Z",
+        "sentAtUtc": "2026-08-20T13:13:22.008Z",
+        "prompt": {
+          "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-fallback-surface.txt",
+          "sha256": "B21524853B15D73534211C0475929C57D2D5F077508B61988BABC50402D5489E",
+          "bytes": 913,
+          "text": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n",
+          "exactText": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n"
+        },
+        "primaryPrompt": {
+          "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-primary-surface.txt",
+          "sha256": "8D21AAB481B5EFA609B36B2E4E769279C9028E3A7BE82519280FD13708C17938",
+          "bytes": 2386,
+          "text": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n",
+          "exactText": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n"
+        },
+        "blacklistSnapshotSha256": "C59CBB0EC73DDD3C9673A01531373E18ED162C877D127A83137513C5903C603D",
+        "faceReferenceTransfer": {
+          "state": "transferred-and-visible-before-dispatch",
+          "referencesTransferred": true,
+          "sourceImageShas": [
+            "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+            "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+            "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+          ]
+        },
+        "responseText": "I wasn't able to create that exact canted portrait on open TRAPPIST-1 e ground with the lap seating as described.",
+        "refusalText": "I wasn't able to create that exact canted portrait on open TRAPPIST-1 e ground with the lap seating as described.",
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "qaDisposition": "provider-refusal-candidate-fallback-cap-exhausted",
+        "rejectionReason": "Meta AI refused the single fallback because the open-ground lap seating remained incompatible. Candidate G is capped. The provider suggested a standing close group for a later independently prepared candidate after archive and remote parity.",
+        "finalSelectedSha256": null,
+        "immutable": true
       }
     ]
   },
@@ -3461,10 +3601,10 @@
     ]
   },
   "rollingState": {
-    "recordedAt": "2026-08-20T12:38:13.906Z",
-    "candidateUnderInspection": "scene 1588 remains unresolved after successor-F exterior-setting failure",
-    "nextCandidateInFlight": "none until the F-bank evidence gate reaches remote parity",
-    "candidateNPlus2Gate": "closed pending commit, explicit push and remote verification",
+    "recordedAt": "2026-08-20T13:16:04.468Z",
+    "candidateUnderInspection": "none after remote verified successor-F rejection",
+    "nextCandidateInFlight": "none until candidate-G refusal evidence reaches remote parity",
+    "candidateNPlus2Gate": "closed pending ledger, archive, commit, explicit push and remote verification",
     "provisionalMetaSources": {
       "1589": "48A78881A344CCB00EDFDAA509B072E76EBC2072C11D2E63D0F72C14BCDD6F41",
       "1590": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
@@ -4646,6 +4786,85 @@
       "referenceTransferState": "transferred-and-visible-in-composer-before-send",
       "rawState": "preserved-completed",
       "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1588-successor-g-primary-surface-reference-dispatched",
+      "batch": 392,
+      "scene": 1588,
+      "provider": "Meta AI",
+      "phase": "successor-g-primary-surface",
+      "sentAtUtc": "2026-08-20T13:08:05.839Z",
+      "immediateResponseObservedAtUtc": "2026-08-20T13:08:06.000Z",
+      "prompt": {
+        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-primary-surface.txt",
+        "sha256": "8D21AAB481B5EFA609B36B2E4E769279C9028E3A7BE82519280FD13708C17938",
+        "bytes": 2386,
+        "text": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n",
+        "exactText": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-fallback-surface.txt",
+        "sha256": "6B38E92D4777893F3F9D72D1805701AFA7B5499D5123F702DF883B144C2EB3C9",
+        "bytes": 944,
+        "text": "Reference guided canted couture portrait for country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep the supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. The blonde second woman rests safely across the third woman's lap; the far left curly haired woman gives her the brief cheek peck; the third woman shows calm jealousy; the far right woman carries the closed route lantern. The blonde plus far left women wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. The third plus far right women have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n",
+        "exactText": "Reference guided canted couture portrait for country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep the supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. The blonde second woman rests safely across the third woman's lap; the far left curly haired woman gives her the brief cheek peck; the third woman shows calm jealousy; the far right woman carries the closed route lantern. The blonde plus far left women wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. The third plus far right women have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n"
+      },
+      "blacklistSnapshotSha256": "1C8FA712D92DA0EE1E9E71F369F7DEED9EFF7DCAF5607621C9B1689878380EEA",
+      "referenceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "referenceUploadOrder": [
+        938,
+        936,
+        937
+      ],
+      "referenceTransferState": "transferred-and-visible-in-composer-before-send",
+      "immediateResponseText": "I'm arranging the three women on open alien ground with no furniture, keeping the lap-seated pose, full bodies, heels, and diagonal motion while honoring the reference faces.",
+      "responseClassification": "non-refusal-in-progress",
+      "rawState": "no-bytes-in-progress",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1588-successor-g-fallback-surface-reference-dispatched",
+      "batch": 392,
+      "scene": 1588,
+      "provider": "Meta AI",
+      "phase": "successor-g-fallback-surface",
+      "sentAtUtc": "2026-08-20T13:13:22.008Z",
+      "immediateResponseObservedAtUtc": "2026-08-20T13:13:22.100Z",
+      "prompt": {
+        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-fallback-surface.txt",
+        "sha256": "B21524853B15D73534211C0475929C57D2D5F077508B61988BABC50402D5489E",
+        "bytes": 913,
+        "text": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n",
+        "exactText": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-primary-surface.txt",
+        "sha256": "8D21AAB481B5EFA609B36B2E4E769279C9028E3A7BE82519280FD13708C17938",
+        "bytes": 2386,
+        "text": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n",
+        "exactText": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n"
+      },
+      "blacklistSnapshotSha256": "C59CBB0EC73DDD3C9673A01531373E18ED162C877D127A83137513C5903C603D",
+      "referenceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "referenceUploadOrder": [
+        938,
+        936,
+        937
+      ],
+      "referenceTransferState": "transferred-and-visible-in-composer-before-send",
+      "immediateResponseText": "I'm clarifying the user's visual goal and organizing the subject, style, composition, and format into a clear",
+      "responseClassification": "provider-refusal-terminal",
+      "finalResponseText": "I wasn't able to create that exact canted portrait on open TRAPPIST-1 e ground with the lap seating as described.",
+      "rawState": "no-bytes-terminal",
+      "immutable": true
     }
   ],
   "continuousBankAudits": [
@@ -4828,7 +5047,7 @@
     }
   },
   "activeMetaLanes": {
-    "tabCount": 3,
+    "tabCount": 4,
     "unresolvedScenes": [
       1588
     ],
@@ -4842,27 +5061,55 @@
       "1590": "0F2AB6FC0D4F8B4967BBF2C3FB61CAA0D7EA085CE06916F852ADEECA5E7F0564",
       "1591": "24DF09D53CEEDF3E9271B8A2C4B0BC5235F1016BB98D5E4877CE43D8F10CD1A5"
     },
-    "candidateUnderInspection": "scene 1588 successor-F rejected for exterior-setting mismatch; scenes 1589, 1590 and 1591 have compared Meta source selections",
-    "candidateInFlight": "none until this completed output bank reaches archive, ledger, commit, explicit push and remote parity",
-    "candidateNPlus2Gate": "closed until commit, explicit push and remote Git/LFS parity",
-    "evidenceFirstRule": "preserve output bytes before dispatch; complete QA and archive every occurrence before any N+2"
+    "candidateUnderInspection": "scene 1588 successor-G terminal refusal evidence complete",
+    "candidateInFlight": "none; successor-G primary plus fallback both refused with no media",
+    "candidateNPlus2Gate": "closed until successor-G refusal evidence and the four-output bundle policy are archived, pushed, and remotely verified",
+    "evidenceFirstRule": "preserve output bytes before any successor, then finish QA and append every occurrence",
+    "candidateUnit": "one Meta prompt bundle requesting four separate pictures",
+    "requestedOutputsPerCandidate": 4,
+    "preserveEveryReturnedFileBeforeQa": true
   },
   "preparedNextDispatches": {
     "1588": {
-      "phase": "successor-f-primary-surface",
+      "phase": "successor-g-fallback-surface-ready",
       "primary": {
-        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-f-primary-surface.txt",
-        "sha256": "D80425E985865F1D0CE5E538FA14B2E29AC2BF04D42131B9BF7972014358B495",
-        "bytes": 1884,
-        "exactText": "Country sequence 1588, next independent vertical cinematic fashion image. Adult cast roles, all age 21: Alia at far left with voluminous natural curls; blonde Radiance second; dark-haired ECE at far right; dark-haired Ellie remains third. Attachments 938, 936 plus 937 govern facial geometry, skin tone plus stable name ownership.\n\nThe group remains outdoors on speculative TRAPPIST-1 e terrain within transparent pressure-field protection during severe wind-driven rain plus distant lightning. Everyone stays dry, calm plus stable. Planet ground, storm sky plus horizon dominate. Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs plus cupola-rib geometry appear through large island-nation cultural research installation geometry plus couture print systems.\n\nChoose fourteen-degree Dutch tilt with close diagonal depth. Radiance sits sideways across Ellie's stable lap. Alia gives Radiance the brief closed-mouth cheek peck. Ellie supports Radiance, showing calm jealousy toward Alia. ECE leans into the shared eye-line from the far edge, holding the small closed gold route lantern in both hands. PAWS plus MAX rest safely behind the bench. Keep complete adults, complete heels, diagonal motion plus zero static lineup.\n\nRadiance wears opaque rainbow-gradient RAZE knee-highs on uncovered legs: Split-Star left, angular RAZE wordmark right, vertical outer calf. Alia wears the reverse. Ellie has bare lower legs; ECE does too. Choose distinct secure lined sequined strapless, cropped or open-back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between-leg space. Every adult has complete traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon-like form, watermark or text beyond RAZE.\n"
+        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-primary-surface.txt",
+        "sha256": "8D21AAB481B5EFA609B36B2E4E769279C9028E3A7BE82519280FD13708C17938",
+        "bytes": 2386,
+        "text": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n",
+        "exactText": "Produce portrait oriented 1152 by 2048 realistic film lit couture photograph for country sequence 1588. The quartet consists of clearly grown fictional women, each having reached her twenty-first birthday. Three supplied historical photographs govern facial geometry, skin tone plus stable person mapping. Far left has voluminous natural curls; blonde second; dark haired third; dark haired far right carries the small closed gold route lantern in both hands. Keep four distinct women without duplication, merging, substitution or age shift.\n\nPlace the quartet outdoors upon exposed TRAPPIST-1 e terrain within transparent pressure field protection. Show no roof, wall, window, structural glazing, dome, furniture, bench, bed, room or interior architecture. Open alien ground fills the lower frame while storm sky plus broad horizon dominate above. Severe wind driven rain plus distant lightning remain beyond the dry protective field. Hanifaru lagoon curves, faro rings, manta current arcs plus patch reef geometry appear through large island nation cultural research installations plus couture prints, never through physical Earth landmark claims.\n\nChoose fourteen degree Dutch tilt with close diagonal depth. The blonde second woman sits sideways across the stable lap of the dark haired third woman. The curly haired far left woman gives the blonde woman the brief closed mouth cheek peck. The third woman supports the seated woman while showing calm jealousy toward the far left woman. The far right woman leans into their shared eye line while keeping both hands upon the closed lantern. Keep complete bodies, complete heels, diagonal motion plus zero static lineup.\n\nThe blonde second woman wears complete opaque rainbow gradient RAZE knee high pairs directly upon uncovered legs: Split Star left, angular RAZE wordmark right, upright outer calf. The curly haired far left woman wears the reverse. The third plus far right women have bare lower legs. Choose distinct secure lined sequined strapless, cropped or open back cocktail minis, tailored mini skorts plus short rompers with complete bust, seat plus pelvic coverage. Keep the lens outside garment volume, away from between leg space. Every woman has traceable anatomy plus complete footwear. No underwear view, accidental exposure, coercion, sexual activity, extra person, weapon like form, watermark or text beyond RAZE.\n"
       },
       "fallback": {
-        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-f-fallback-surface.txt",
-        "sha256": "B69A01C793A1C1E4F3AD0A19E5D124D171A28357F95E031DD5281042578ABF13",
-        "bytes": 700,
-        "exactText": "Reference-guided canted fashion portrait for country sequence 1588 on protected TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied age-21 faces for Alia, Radiance, Ellie plus ECE; Hanifaru faro-ring design; complete bodies; opaque public fashion. Radiance sits safely across Ellie's lap; Alia gives Radiance the brief cheek peck; Ellie shows calm jealousy; ECE carries the closed route lantern. Radiance plus Alia wear mirrored Split-Star plus RAZE rainbow knee-high pairs on uncovered legs. Ellie plus ECE have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon-like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n"
+        "path": "tmp/world-195x4/batch-392/scene-1588-meta-successor-g-fallback-surface.txt",
+        "sha256": "B21524853B15D73534211C0475929C57D2D5F077508B61988BABC50402D5489E",
+        "bytes": 913,
+        "text": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n",
+        "exactText": "Reference guided canted couture portrait regarding country sequence 1588 upon exposed TRAPPIST-1 e terrain during rain plus distant lightning. Keep supplied twenty-first birthday quartet faces, complete bodies plus opaque public clothing. Show open alien ground, broad horizon plus storm sky with transparent pressure field protection, without roof, wall, glazing, dome, furniture, bed or interior structure. Blonde second figure rests safely across third figure's lap; far left curly haired figure gives her brief cheek peck; third figure shows calm jealousy; far right figure carries closed route lantern. Blonde plus far left pair wear reversed Split Star plus RAZE rainbow knee high pairs upon uncovered legs. Third plus far right pair have bare lower legs. Keep complete footwear, secure coverage plus zero extra person, weapon like form, accidental exposure, sexual activity, watermark or text beyond RAZE.\n"
       },
-      "blacklistSnapshotSha256": "48B7797E74FE18601115F0EDD0229FA27FFA2F1EC842429B1E3E5D2D61AAE869"
+      "blacklistSnapshotSha256": "A58DBF2738664A82E5AA7DA6FCCD181B44E30867E82EB77CE0598B6C9CB418BE",
+      "blacklistCount": 50,
+      "faceReferenceUploadOrder": [
+        938,
+        936,
+        937
+      ],
+      "faceReferenceShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "settingBinding": "protected exterior TRAPPIST-1 e surface under severe wind driven rain plus distant lightning",
+      "preparedAtUtc": "2026-08-20T13:03:00.000Z",
+      "fallbackSuppressionProvenance": {
+        "preSuppressionSha256": "6B38E92D4777893F3F9D72D1805701AFA7B5499D5123F702DF883B144C2EB3C9",
+        "postSuppressionSha256": "B21524853B15D73534211C0475929C57D2D5F077508B61988BABC50402D5489E",
+        "removedBlacklistedTerms": [
+          "for",
+          "the",
+          "women"
+        ],
+        "preSuppressionTextWasNeverDispatched": true
+      }
     },
     "1589": {
       "phase": "successor-f-primary-surface-completed-provisional-selected",
@@ -4909,5 +5156,34 @@
       },
       "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D"
     }
+  },
+  "metaFourSeparatePictureBundlePolicy": {
+    "active": true,
+    "requestedAt": "2026-08-20T13:16:30.000Z",
+    "requestedOutputsPerPrompt": 4,
+    "outputForm": "Request exactly four separate image files from every Meta prompt. Never request or accept a collage, grid, contact sheet, or mosaic as a substitute for four separate files.",
+    "variantInstructions": "Every prompt must contain four numbered, fully detailed variant instructions. All four variants preserve the locked country, planet, environment, setting, identity anchors, safety, wardrobe, RAZE mapping, mission, and scene facts. Variants may differ only in approved camera angle, relationship staging, foreground emphasis, and composition.",
+    "bundleLaneRule": "Treat each four-output prompt as one lane candidate bundle. The existing candidate N under inspection plus candidate N+1 in flight rule applies at bundle level. Every returned file in N must be preserved and classified before N+2 is authorized.",
+    "downloadFirstRule": "Immediately download and content-address every returned provider file before visual QA or source selection. Preserve accepted, rejected, unused, superseded, unrelated, corrupt, partial, and failed occurrences. Never discard, overwrite, or omit an output because another variant is stronger.",
+    "perFileEvidenceRule": "Create one append-only occurrence record per returned file with exact prompt, prompt hash, source-image hashes, provider response, UTC, raw bytes or explicit no-bytes provenance, SHA-256, dimensions when valid, and final QA disposition.",
+    "selectionRule": "If one or two variants pass, retain the strongest passing source. If all four pass, retain the strongest result or strongest set required by the country. Keep every nonselected output locally accessible through the archive and manifest.",
+    "providerShortfallRule": "If Meta returns fewer than four separate files or returns a combined grid, preserve exactly what arrived, record the output shortfall or combined-media form, and continue within provider limits. Never claim that missing separate files existed and never bypass provider controls to force a count.",
+    "firstApplicableDispatch": {
+      "batch": 392,
+      "scene": 1588,
+      "phase": "successor-h-four-separate-picture-bundle"
+    },
+    "localAccessibilityRule": "Every returned file remains content-addressed in the generated-media archive and discoverable through one sanitized manifest row per occurrence, regardless of acceptance or use."
+  },
+  "nextMetaBundle": {
+    "batch": 392,
+    "scene": 1588,
+    "phase": "successor-h-four-separate-picture-bundle",
+    "state": "policy-authorized-prompts-not-yet-materialized",
+    "requestedSeparateFiles": 4,
+    "numberedDetailedVariantsRequired": 4,
+    "collageGridContactSheetMosaicForbidden": true,
+    "sourceSelectionRule": "Choose the strongest passing returned file while preserving every returned file and its independent occurrence evidence.",
+    "providerShortfallRule": "Preserve what arrives and record any shortfall or combined image form without claiming missing outputs existed."
   }
 }
