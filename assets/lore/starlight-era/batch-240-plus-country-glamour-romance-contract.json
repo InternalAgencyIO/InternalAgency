@@ -76,6 +76,40 @@
       "throughputTreatment": "Hem length and exact couture microdetails are high-priority quality targets folded into the single holistic correction pass; they never authorize a third pass."
     }
   },
+  "razeFashionLine": {
+    "active": true,
+    "requestedAt": "2026-08-20T06:18:04.9031896Z",
+    "activeFromBatch": 390,
+    "userProvidedIdentity": {
+      "name": "RAZE",
+      "description": "a nonprofit AI fashion line built around unique 1/1 print editions",
+      "firstPhysicalItem": "opaque rainbow-gradient knee-high socks"
+    },
+    "requiredEveryFutureImage": true,
+    "coreQuartetRule": "Among Radiance, Ellie, Alia, and AI ECE, exactly two women wear matching-pair RAZE opaque rainbow-gradient knee-high socks on both legs and exactly two women wear no hosiery with visibly bare lower legs. A fifth adult male, when present, is outside this two-and-two count and wears no hosiery unless a later explicit directive changes it.",
+    "wearerSelection": {
+      "method": "deterministic pseudo-random selection keyed by batch and scene so each image is reproducible while the wearer pair changes across photos",
+      "keyFormat": "RAZE|batch-{batch}|scene-{scene}|knee-high-wearers",
+      "allowedPairs": [
+        ["Radiance", "Ellie"],
+        ["Radiance", "Alia"],
+        ["Radiance", "AI ECE"],
+        ["Ellie", "Alia"],
+        ["Ellie", "AI ECE"],
+        ["Alia", "AI ECE"]
+      ],
+      "recordingRule": "Materialize and store the exact key, roll, selected pair, and bare-leg pair before each render dispatch; never choose ad hoc after seeing an output."
+    },
+    "sockConstruction": "Each selected wearer has two complete opaque knee-high socks ending in a clean band immediately below both kneecaps. Use one continuous vivid red-orange-yellow-green-cyan-blue-violet gradient with smooth transitions, secure public-fashion fit, no sheer fabric, no holes, no garters, no thigh-high extension, and no mismatched single sock.",
+    "prominence": "Compose full-body fashion shots so all four women's complete legs and footwear remain visible. The two RAZE sock pairs must read immediately through separated front or three-quarter leg lanes, bright even lighting, unobstructed below-knee silhouettes, and low-vamp pumps, slingbacks, sandals, or other footwear that does not hide the gradient or branding. The two bare-leg women must be equally unambiguous and wear no stockings, socks, or leggings.",
+    "branding": "Render the exact readable word RAZE as a clean original fashion wordmark near the outer upper band of all four visible socks and optionally as one small woven label or integrated print signature on at most two garments. This is the only authorized brand exception to scene-level no-text/no-logo rules. Never imitate another brand, charity, trademark system, or existing logo.",
+    "oneOfOnePrintRule": "Every RAZE garment integration is a visibly unique 1/1 AI-print composition for that character and scene. Do not duplicate a print layout across two people, scenes, countries, or later physical editions.",
+    "countryMotifCompatibility": "RAZE styling is a secondary fashion capsule and never replaces, recolors away, or obscures the current country's required secular motifs, palette leadership, landmark identity, or distinct outfit structures. Keep large country motifs dominant on at least two looks; place the RAZE wordmark only in clean negative space or small label zones.",
+    "loveBeatCompatibility": "Preserve every stored consensual adult romance, jealousy, affection, and love-beat roll. Sock prominence must come from stance, camera composition, and separated leg lanes rather than deleting the relationship choreography.",
+    "missionPropCompatibility": "Preserve the established polished rainbow-gradient large-frame inert cinema-training prop as a separate nonfunctional safety object. RAZE styling never turns it into merchandise, never changes its isolated handler, and never weakens the complete safe target/backstop or empty-water lane, empty-guard, outside-trigger-finger, no-ammunition, no-firing, no-threat, no-injury, no-person/animal/camera-aim, and no-combat requirements.",
+    "precedence": "This capsule prospectively supersedes older zero-or-one rainbow-hosiery rolls for the core quartet from Batch 390 onward. It does not change the short-hem foundation, country motif minimums, identity anchors, anatomy gates, bounded two-pass ceiling, mascot safety, or publication gates.",
+    "throughputTreatment": "The exact two-wearer/two-bare-leg split, wordmark fidelity, gradient precision, and prominence must be solved in the clean prompt foundation and recorded during QA. When all hard safety gates pass, a hosiery or branding variance is a quality deviation and cannot authorize a third pass or automatic country reopening."
+  },
   "romance": {
     "requiredEveryImage": true,
     "forwardPoseAndTouchReference": "989-monaco-port-hercule-signal-cipher.png",
