@@ -114,12 +114,30 @@
       "method": "deterministic pseudo-random selection keyed by batch and scene so each image is reproducible while the wearer pair changes across photos",
       "keyFormat": "RAZE|batch-{batch}|scene-{scene}|knee-high-wearers",
       "allowedPairs": [
-        ["Radiance", "Ellie"],
-        ["Radiance", "Alia"],
-        ["Radiance", "AI ECE"],
-        ["Ellie", "Alia"],
-        ["Ellie", "AI ECE"],
-        ["Alia", "AI ECE"]
+        [
+          "Radiance",
+          "Ellie"
+        ],
+        [
+          "Radiance",
+          "Alia"
+        ],
+        [
+          "Radiance",
+          "AI ECE"
+        ],
+        [
+          "Ellie",
+          "Alia"
+        ],
+        [
+          "Ellie",
+          "AI ECE"
+        ],
+        [
+          "Alia",
+          "AI ECE"
+        ]
       ],
       "recordingRule": "Materialize and store the exact key, roll, selected pair, and bare-leg pair before each render dispatch; never choose ad hoc after seeing an output."
     },
@@ -646,7 +664,11 @@
         "weather": "silent heat lightning on the horizon"
       }
     ],
-    "safetyRule": "Rare weather is cinematic background and atmosphere only. Preserve clear faces, complete anatomy, stable footing, landmark readability, and no injury, disaster victim framing, or unsafe weapon handling."
+    "safetyRule": "Rare weather is cinematic background and atmosphere only. Preserve clear faces, complete anatomy, stable footing, landmark readability, and no injury, disaster victim framing, or unsafe weapon handling.",
+    "active": false,
+    "supersededProspectivelyAt": "2026-08-20T10:05:02.254Z",
+    "supersededFromBatch": 392,
+    "supersededBy": "planetaryEnvironmentEqualFifthPolicy"
   },
   "sceneRolls": {
     "romanceBeat": "deterministic rotation across kiss, hug, rivalry, choice, reconciliation, and beacon-control beats",
@@ -721,7 +743,7 @@
   },
   "cinematicThemeRotation": {
     "activeFromBatch": 333,
-    "locationRule": "All four scenes remain at four different recognizable locations in the current country. Never replace a country location with a jet, helicopter, vessel, spacecraft, or planetary setting. The rolled theme is a fashion and cinematic-design language staged at that country location.",
+    "locationRule": "From Batch 392 onward, every scene literally occurs in a protected habitat, sealed research structure, or safe orbital facility associated with the stored named real exoplanet. Keep four distinct current-country cultural and landmark-derived reads through large couture motifs, archive projections, research installations and terrain geometry; never claim the Earth landmark physically exists on the exoplanet. Earlier batches retain their historical Earth-location rule.",
     "batchLayout": {
       "scenesOneAndTwo": "Country-led hybrid. Across each image, two or three characters must wear hard, large, unmistakable country-motif couture. At least two characters must visibly carry the active thematic construction language. One or more hybrid looks may satisfy both requirements. Country motif and theme must both be foreground reads, not tiny trim or background-only cues.",
       "scenesThreeAndFour": "Theme-led original. All four characters wear structurally distinct outfits driven by the active unrelated cinematic theme, staged at two additional original locations in the current country. Do not force map-print country outfits onto these two scenes, but keep the recognizable country landmark equally foregrounded with the thematic fashion.",
@@ -741,12 +763,12 @@
       "polar airship couture",
       "orbital research-station couture"
     ],
-    "themeLocationFusion": "Compose the active theme and country location as one authored scene. Use theme-specific silhouette engineering, materials, accessories, lighting language, route-map design, and movement while keeping the landmark large and recognizable. From Batch 336 onward, weak fusion or partial landmark visibility is a logged quality tolerance rather than a rejection when the country and active theme are still identifiable.",
+    "themeLocationFusion": "Compose the active theme, stored real exoplanet, rolled environment and country cultural identity as a single authored scene. Planet and environment are literal setting and lighting; country identity stays unmistakable through large couture motifs, archive projections, research installations and landmark-derived geometry. Preserve scientific-honesty language for speculative surfaces, weather and habitation.",
     "themeExamples": {
       "privateJet": "Use wing-sweep tailoring, turbine-pleat structures, oval-window geometry, cabin-light piping, polished composite panels, and runway-line footwear without copied airline branding or uniforms.",
       "helicopter": "Use rotor-radial pleats, aerodynamic wrap structures, landing-skid heel architecture, cockpit-glass color blocking, and civilian flight-design cues without pilot impersonation or copied uniforms.",
       "coastGuardVessel": "Use fictional civilian rescue and conservation-vessel design language, wave-cut panels, flotation-inspired sculpting, deck-line tailoring, and marine visibility accents without official insignia, badges, copied uniforms, raids, rescue emergencies, or threats.",
-      "spaceAndPlanetary": "Use fictional couture inspired by pressure-shell geometry, regolith texture, orbital arcs, solar shielding, rover joints, and mission-light systems. Keep all scenes public-safe fashion at the current country landmark. Near-Sun means a fictional shielded solar-observation design language, never a literal person standing on the Sun."
+      "spaceAndPlanetary": "Use fictional couture inspired by pressure-shell geometry, regolith texture, orbital arcs, solar shielding, rover joints and mission-light systems inside safe infrastructure associated with the stored NASA-catalog planet. The named planet is real; surface, weather and habitation are speculative cinematic art. Never depict unprotected people in hostile conditions or imply measured habitability."
     },
     "publicSafety": "Use fictional public-safe fashion references only. No copied airline, military, police, coast-guard, space-agency, or emergency-service uniforms or insignia. No combat, raids, arrests, threats, injury, emergency peril, fetish framing, or explicit content."
   },
@@ -1126,5 +1148,86 @@
     "acceptanceGate": "Hard-reject extra, duplicated, fused, impossible, grossly malformed, or ownerless limbs, hands, faces, legs, or feet. Natural occlusion or minor finger ambiguity is a quality deviation, not a blocker, when the owner, limb count, pose, and public-safe action remain anatomically plausible and readable.",
     "foundationCompositionRule": "Before launch, pre-assign exactly two arms, two hands, two legs, and two feet to every person. Give each hand exactly one role; isolate any mission-prop hand from human contact; use one clean close-love relationship graph with up to four simple human-to-human contacts, including one supported lap or peck beat where selected; stage shoulder-to-elbow-to-wrist-to-hand chains through staggered depth, negative-space windows, and natural occlusion with no crossed wrist clusters. Do not separate the cast into a lineup solely for limb counting. Audit each completed candidate once and fold every limb, contact, face, and footwear correction into the next rolling candidate while the scene remains unresolved."
   },
-  "frame": "9:16 close-camera dynamic editorial fashion portrait using Dutch roll, safe low heel-and-hem perspective, high oblique looking-down perspective, or near face-and-hair foreground depth. Preserve readable adult love action, one designated jealous woman, complete attributable hands and legs, RAZE socks or bare lower legs, plausible heels or boots, opaque public-safe hem geometry, a recognizable country anchor, and a subordinate safe mission-prop lane; never use upskirt, between-leg, pelvis-centered, or intimate-angle framing."
+  "frame": "9:16 close-camera dynamic editorial fashion portrait using Dutch roll, safe low heel-and-hem perspective, high oblique looking-down perspective, or near face-and-hair foreground depth. Preserve readable adult love action, one designated jealous woman, complete attributable hands and legs, RAZE socks or bare lower legs, plausible heels or boots, opaque public-safe hem geometry, a recognizable country anchor, and a subordinate safe mission-prop lane; never use upskirt, between-leg, pelvis-centered, or intimate-angle framing.",
+  "planetaryEnvironmentEqualFifthPolicy": {
+    "active": true,
+    "requestedAt": "2026-08-20T10:05:02.254Z",
+    "activeFromBatch": 392,
+    "userDirective": "Use an exact equal fifth chance of dusk, golden-hour sunrise, sunset, night, or severe rain/storm weather, and stage every scene on a distant real planet.",
+    "exactDistribution": [
+      {
+        "index": 0,
+        "percent": 20,
+        "id": "dusk",
+        "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+      },
+      {
+        "index": 1,
+        "percent": 20,
+        "id": "golden-hour-sunrise",
+        "promptLanguage": "golden-hour sunrise with long warm rays and readable faces"
+      },
+      {
+        "index": 2,
+        "percent": 20,
+        "id": "sunset",
+        "promptLanguage": "saturated sunset with a coral-gold horizon and readable faces"
+      },
+      {
+        "index": 3,
+        "percent": 20,
+        "id": "night",
+        "promptLanguage": "clear night with stars, habitat practical lights and readable faces"
+      },
+      {
+        "index": 4,
+        "percent": 20,
+        "id": "extreme-weather-rain-storm",
+        "promptLanguage": "severe wind-driven rain and a distant thunderstorm beyond sealed habitat glass, with everyone dry, protected and calm"
+      }
+    ],
+    "selectionAlgorithm": {
+      "name": "sha256-first-byte-rejection-sampling-equal-fifth",
+      "environmentKey": "starlight|environment|batch-{batch}|scene-{scene}",
+      "planetKey": "starlight|planet|batch-{batch}|scene-{scene}",
+      "method": "Hash key plus a zero-based counter with SHA-256. Reject first byte 255 and rehash with the next counter. For accepted bytes 0 through 254, take byte modulo 5. Each bucket receives exactly 51 accepted byte values, so every listed outcome has exactly 20 percent probability."
+    },
+    "realPlanetBank": {
+      "source": "NASA Exoplanet Catalog",
+      "verifiedAt": "2026-08-20",
+      "catalogUrl": "https://science.nasa.gov/exoplanets/exoplanet-catalog/",
+      "orderedPlanets": [
+        {
+          "index": 0,
+          "name": "TRAPPIST-1 e",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/trappist-1-e/"
+        },
+        {
+          "index": 1,
+          "name": "Proxima Centauri b",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/proxima-centauri-b/"
+        },
+        {
+          "index": 2,
+          "name": "Kepler-186 f",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/kepler-186-f/"
+        },
+        {
+          "index": 3,
+          "name": "LHS 1140 b",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/lhs-1140-b/"
+        },
+        {
+          "index": 4,
+          "name": "TOI-700 d",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+        }
+      ],
+      "rule": "Select from this fixed verified bank with the separate equal-fifth selector. Never invent, rename, blend or silently substitute a planet."
+    },
+    "literalSettingRule": "The named real exoplanet is the literal distant setting, shown through a protected surface habitat, sealed research structure, or safe orbital facility physically associated with that planet. The current country remains the cultural and couture identity through large motifs, archive projections, research installations and landmark-derived geometry; never falsely claim the Earth landmark physically exists on the exoplanet.",
+    "scientificHonestyRule": "Planet names and catalog status are factual. Surface appearance, human habitation, weather and atmospheric lighting are explicitly speculative cinematic art, not claims about measured conditions or habitability.",
+    "extremeWeatherSafety": "The extreme-weather bucket always reads as rain, wind and storm atmosphere outside sealed protection. Preserve dry stable footing, clear adult faces, complete anatomy, landmark-inspired country reads, mascot safety, and inert-prop isolation. No disaster victims, flooding peril, strikes near people, injury or emergency framing.",
+    "persistenceRule": "Materialize and store the environment roll, planet roll, keys, counters, accepted bytes, digest hashes, names and prompt language before every provider dispatch. Carry the result through Meta generation, comparison, final ChatGPT clothing edit, archive and publication without rerolling."
+  }
 }
