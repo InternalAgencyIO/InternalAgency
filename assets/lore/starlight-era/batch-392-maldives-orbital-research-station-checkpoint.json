@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 392,
   "country": "Maldives",
-  "status": "active-continuous-meta-planetary-environment-hard-coded-awaiting-authorized-browser-dispatch",
+  "status": "active-continuous-meta-planetary-upload-failed-text-only-bank-ready",
   "sourceCommit": "ba16b3839299ec182037eea54f0315335d462f52",
   "contractSha256": "F718BA803030E6B4DFD7976F5EE7F472E1E16C4629D43826FC0C259C77274048",
   "providerRestriction": "Meta AI country generation; bounded built-in ChatGPT clothing finalization",
@@ -1179,6 +1179,70 @@
           "fallback": "BBF795666337EB4E1CB215E9FB966B2390D17EC47BDB90C887007DB7D60B6C3B"
         }
       }
+    },
+    {
+      "eventId": "batch-392-scene-1588-planetary-face-reference-upload-failed",
+      "eventType": "meta-ai-reference-upload-failure",
+      "occurredAt": "2026-08-20T10:29:52.682Z",
+      "scene": 1588,
+      "attempt": "successor-c-planetary",
+      "promptSha256": "71991C6E261BA05225DCE2DC986C632A71267846C229D0579AF13D8890E267B6",
+      "sourceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "responseClassification": "upload-failed-before-prompt-send",
+      "rawState": "no-media-generation-attempted",
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank."
+    },
+    {
+      "eventId": "batch-392-scene-1589-planetary-face-reference-upload-failed",
+      "eventType": "meta-ai-reference-upload-failure",
+      "occurredAt": "2026-08-20T10:29:52.682Z",
+      "scene": 1589,
+      "attempt": "successor-c-planetary",
+      "promptSha256": "4EE864093DA71EA7F597766FDC1C9A5040CC55070930998A2ED9E46B23B46C33",
+      "sourceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "responseClassification": "upload-failed-before-prompt-send",
+      "rawState": "no-media-generation-attempted",
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank."
+    },
+    {
+      "eventId": "batch-392-scene-1590-planetary-face-reference-upload-failed",
+      "eventType": "meta-ai-reference-upload-failure",
+      "occurredAt": "2026-08-20T10:29:52.682Z",
+      "scene": 1590,
+      "attempt": "successor-b-fallback-planetary",
+      "promptSha256": "B2C510BD60D2D8388F33011F4BF656AE42BB7922B4D50ECA91B39DD0E33A268D",
+      "sourceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "responseClassification": "upload-failed-before-prompt-send",
+      "rawState": "no-media-generation-attempted",
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank."
+    },
+    {
+      "eventId": "batch-392-scene-1591-planetary-face-reference-upload-failed",
+      "eventType": "meta-ai-reference-upload-failure",
+      "occurredAt": "2026-08-20T10:29:52.682Z",
+      "scene": 1591,
+      "attempt": "successor-c-planetary",
+      "promptSha256": "8B5BD2CB39488826F4031C6D2245D1DA28A71C303E161E87694A5B9F8510D1F9",
+      "sourceImageShas": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "responseClassification": "upload-failed-before-prompt-send",
+      "rawState": "no-media-generation-attempted",
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank."
     }
   ],
   "rejectedPromptLedger": {
@@ -1567,17 +1631,17 @@
     ]
   },
   "rollingState": {
-    "recordedAt": "2026-08-20T10:05:02.254Z",
+    "recordedAt": "2026-08-20T10:29:52.682Z",
     "candidateUnderInspection": "successor B already classified for all four scenes",
-    "nextCandidateInFlight": "none while the new planetary environment contract is archived, committed, pushed and remote-verified",
-    "candidateNPlus2Gate": "closed until planetary environment contract/checkpoint/prompt bank reaches remote parity",
-    "preparedNextDispatch": "planetary successor C for scenes 1588, 1589 and 1591 plus planetary successor-B fallback retry for scene 1590"
+    "nextCandidateInFlight": "none pending upload-failure evidence commit and remote verification",
+    "candidateNPlus2Gate": "closed until four upload-failure records are verified, committed, pushed and remote-verified",
+    "preparedNextDispatch": "text-only planetary successor C for scenes 1588, 1589 and 1591 plus text-only planetary successor-B fallback for scene 1590"
   },
   "rollingLexiconSnapshot": {
     "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
-    "sha256": "C21966B13D0C2D42D8BCFBE528187ECA308485E44599FB195918D0369DEB3B88",
-    "bytes": 125194,
-    "observedAt": "2026-08-20T09:57:51.091Z",
+    "sha256": "4DDAF641D354C380E1543684028779F76BEF256429E0BC2EFC48E5745373A44D",
+    "bytes": 128775,
+    "observedAt": "2026-08-20T10:29:52.682Z",
     "blacklist": [
       "16",
       "16 full-length",
@@ -2168,6 +2232,160 @@
       "fidelity": "runtime-launch-byte-exact",
       "disposition": "prepared-undispatched-superseded-by-user-planetary-environment-directive",
       "supersededAt": "2026-08-20T10:05:02.254Z"
+    }
+  ],
+  "referenceUploadAttempts": [
+    {
+      "eventId": "batch-392-scene-1588-planetary-face-reference-upload-failed",
+      "batch": 392,
+      "scene": 1588,
+      "phase": "successor-c-planetary",
+      "provider": "Meta AI",
+      "observedAtUtc": "2026-08-20T10:29:52.682Z",
+      "state": "upload-failed-text-only-continuation",
+      "sourceFiles": [
+        {
+          "order": 1,
+          "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+          "bytes": 2575103
+        },
+        {
+          "order": 2,
+          "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+          "bytes": 2495143
+        },
+        {
+          "order": 3,
+          "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+          "bytes": 2373808
+        }
+      ],
+      "plannedPrompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-successor-c-primary-planetary.txt",
+        "sha256": "71991C6E261BA05225DCE2DC986C632A71267846C229D0579AF13D8890E267B6",
+        "bytes": 2739
+      },
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank.",
+      "transferState": "no-confirmed-transfer",
+      "retryDisposition": "no further upload attempt for this bank; proceed text-only",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1589-planetary-face-reference-upload-failed",
+      "batch": 392,
+      "scene": 1589,
+      "phase": "successor-c-planetary",
+      "provider": "Meta AI",
+      "observedAtUtc": "2026-08-20T10:29:52.682Z",
+      "state": "upload-failed-text-only-continuation",
+      "sourceFiles": [
+        {
+          "order": 1,
+          "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+          "bytes": 2575103
+        },
+        {
+          "order": 2,
+          "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+          "bytes": 2495143
+        },
+        {
+          "order": 3,
+          "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+          "bytes": 2373808
+        }
+      ],
+      "plannedPrompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-successor-c-primary-planetary.txt",
+        "sha256": "4EE864093DA71EA7F597766FDC1C9A5040CC55070930998A2ED9E46B23B46C33",
+        "bytes": 2726
+      },
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank.",
+      "transferState": "no-confirmed-transfer",
+      "retryDisposition": "no further upload attempt for this bank; proceed text-only",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1590-planetary-face-reference-upload-failed",
+      "batch": 392,
+      "scene": 1590,
+      "phase": "successor-b-fallback-planetary",
+      "provider": "Meta AI",
+      "observedAtUtc": "2026-08-20T10:29:52.682Z",
+      "state": "upload-failed-text-only-continuation",
+      "sourceFiles": [
+        {
+          "order": 1,
+          "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+          "bytes": 2575103
+        },
+        {
+          "order": 2,
+          "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+          "bytes": 2495143
+        },
+        {
+          "order": 3,
+          "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+          "bytes": 2373808
+        }
+      ],
+      "plannedPrompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1590-meta-successor-b-fallback-planetary.txt",
+        "sha256": "B2C510BD60D2D8388F33011F4BF656AE42BB7922B4D50ECA91B39DD0E33A268D",
+        "bytes": 2451
+      },
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank.",
+      "transferState": "no-confirmed-transfer",
+      "retryDisposition": "no further upload attempt for this bank; proceed text-only",
+      "immutable": true
+    },
+    {
+      "eventId": "batch-392-scene-1591-planetary-face-reference-upload-failed",
+      "batch": 392,
+      "scene": 1591,
+      "phase": "successor-c-planetary",
+      "provider": "Meta AI",
+      "observedAtUtc": "2026-08-20T10:29:52.682Z",
+      "state": "upload-failed-text-only-continuation",
+      "sourceFiles": [
+        {
+          "order": 1,
+          "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+          "bytes": 2575103
+        },
+        {
+          "order": 2,
+          "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+          "bytes": 2495143
+        },
+        {
+          "order": 3,
+          "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+          "bytes": 2373808
+        }
+      ],
+      "plannedPrompt": {
+        "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-successor-c-primary-planetary.txt",
+        "sha256": "8B5BD2CB39488826F4031C6D2245D1DA28A71C303E161E87694A5B9F8510D1F9",
+        "bytes": 2724
+      },
+      "failureReason": "Meta attachment control did not produce a controllable file chooser; no reference-file transfer was confirmed. Continue through the committed text-only prompt path without another upload attempt for this bank.",
+      "transferState": "no-confirmed-transfer",
+      "retryDisposition": "no further upload attempt for this bank; proceed text-only",
+      "immutable": true
     }
   ]
 }
