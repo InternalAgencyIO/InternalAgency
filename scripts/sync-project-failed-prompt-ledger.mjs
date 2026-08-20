@@ -12,6 +12,7 @@ const RECENT_CHECKPOINTS = [
   "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
   "assets/lore/starlight-era/batch-390-montenegro-polar-airship-checkpoint.json",
   "assets/lore/starlight-era/batch-391-malta-orbital-research-station-checkpoint.json",
+  "assets/lore/starlight-era/batch-392-maldives-orbital-research-station-checkpoint.json",
 ];
 const CONTRACT = "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json";
 const CAMPAIGN = "assets/lore/starlight-era/world-195x4-campaign.json";
