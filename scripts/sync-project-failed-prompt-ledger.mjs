@@ -1163,7 +1163,7 @@ const contractSha256 = sha256(readFileSync(path.join(root, CONTRACT)));
 const expected = {
   schemaVersion: 1,
   appendOnly: true,
-  updatedAt: "2026-08-20T09:10:11.072Z",
+  updatedAt: "2026-08-20T09:20:01.723Z",
   coverageStatus: "runtime-complete-for-locally-available-active-and-archived-codex-sessions-plus-deduplicated-pre-batch-220-repository-corpus-plus-bound-active-and-recent-checkpoints-and-reconciled-campaign-visual-rejects",
   policy: {
     oneEntryPerFailedRuntimeOccurrence: true,

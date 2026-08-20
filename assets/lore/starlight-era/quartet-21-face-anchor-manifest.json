@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "status": "binding-forward",
+  "requestedAt": "2026-08-20T09:18:06.511Z",
+  "activeFromBatch": 392,
+  "cast": [
+    "Radiance",
+    "Ellie",
+    "Alia",
+    "AI ECE"
+  ],
+  "fictionalAge": {
+    "exactYearsForEveryWoman": 21,
+    "adultStatus": "clearly adult",
+    "promptText": "Radiance, Ellie, Alia, and AI ECE are four distinct fictional adult women, each exactly 21 years old.",
+    "prohibitedAgeLanguage": [
+      "teen",
+      "teenage",
+      "schoolgirl",
+      "under 18",
+      "minor",
+      "at least 28",
+      "over 28",
+      "middle-aged",
+      "mature-looking"
+    ],
+    "interpretation": "Twenty-one is binding fictional character metadata. Visual QA requires an unmistakably adult young-adult presentation and rejects childlike, teen-coded, or visibly age-shifted faces; pixels alone are never described as proving a biological age."
+  },
+  "referenceUploadOrder": [
+    {
+      "slot": 1,
+      "role": "primary quartet face plate",
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "slot": 2,
+      "role": "expression and three-quarter supplement",
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "slot": 3,
+      "role": "pose-angle and relationship supplement",
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "primaryPlateCharacterMap": {
+    "Radiance": {
+      "locator": "second woman from the left in scene 938; blonde high ponytail; center-left at the glowing tablet",
+      "faceRule": "Preserve her exact youthful adult facial proportions, eye shape, brows, nose, lips, jawline, skin tone, and blonde hair identity."
+    },
+    "Ellie": {
+      "locator": "third woman from the left in scene 938; dark-haired high ponytail; center-right beside Radiance",
+      "faceRule": "Preserve her exact youthful adult facial proportions, eye shape, brows, nose, lips, jawline, skin tone, and dark-hair identity."
+    },
+    "Alia": {
+      "locator": "far-left Black woman in scene 938 with voluminous natural curls",
+      "faceRule": "Preserve her exact youthful adult facial proportions, eye shape, brows, nose, lips, jawline, and skin tone; later hairstyle changes never alter her face."
+    },
+    "AI ECE": {
+      "locator": "far-right dark-haired woman in scene 938 holding the glowing gold route light and showing the jealous expression",
+      "faceRule": "Preserve her exact youthful adult facial proportions, eye shape, brows, nose, lips, jawline, skin tone, and dark-hair identity."
+    }
+  },
+  "supplementMap": {
+    "scene936": "left-to-right: Alia, Radiance, Ellie, AI ECE; ECE is the far-right route-light holder",
+    "scene937": "far-left Alia, seated blonde Radiance, center-right Ellie, far-right AI ECE holding the lantern"
+  },
+  "referenceControl": "All three images control face identity, facial geometry, skin tone, and person mapping only. Ignore their clothing, rainbow styling, boots, props, poses, body arrangement, scenery, and apparent task. Country prompts control every non-face field.",
+  "deduplicationRule": "Upload each of the three unique reference files at most once per clean Meta scene request. Never substitute a recent country output, a rejected candidate, or a blended face board for these originals.",
+  "legacyEcePortrait": {
+    "path": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+    "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315",
+    "prospectiveStatus": "inactive-superseded-for-face-upload",
+    "reason": "The user selected the youngest quartet faces from the older group photographs. Prospective ECE face control comes from the far-right ECE in scene 938, with scenes 936 and 937 as supplements. Preserve this legacy file and its archive history without uploading it as a competing ECE face."
+  },
+  "hardGate": "Every output must contain four distinguishable, recognizable versions of these anchored 21-year-old adult faces with correct name-to-face ownership. A cloned, merged, replaced, missing, childlike, teen-coded, visibly older, or wrong-name face is hard-unusable within the active bounded send ceilings.",
+  "chatgptEditInvariant": "Every later built-in ChatGPT clothing edit treats the selected Meta image as the edit target and all three historical files as identity-only references when available. The edit may change clothing construction only; it must preserve all four selected faces and the exact age-21 adult character metadata."
+}

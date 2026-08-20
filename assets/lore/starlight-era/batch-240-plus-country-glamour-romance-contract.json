@@ -3,23 +3,34 @@
   "status": "binding-forward",
   "cast": {
     "adultOnly": true,
+    "exactAgeYears": 21,
     "characters": [
       "Radiance",
       "Ellie",
       "Alia",
       "AI ECE"
     ],
-    "primaryQuartetFaceAnchor": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
-    "frontalFaceAndJealousySupplement": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
-    "expressionAndRelationshipAnchor": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
-    "eceSecondaryDetailAnchor": "ece-canonical-identity-v1.png",
+    "faceAnchorManifest": "quartet-21-face-anchor-manifest.json",
+    "primaryQuartetFaceAnchor": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "frontalFaceAndJealousySupplement": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "expressionAndRelationshipAnchor": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+    "eceSecondaryDetailAnchor": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "uniqueReferenceUploadOrder": [
+      "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+    ],
+    "ageRule": "Radiance, Ellie, Alia, and AI ECE are four distinct fictional adult women, each exactly 21 years old. Use unmistakably adult young-adult faces from the selected historical photographs. Never use teen, teenage, schoolgirl, minor, under-18, at-least-28, over-28, middle-aged, or mature-looking language and never make a face childlike or visibly older.",
+    "primaryPlateMapping": "In scene 938: Alia is the far-left Black woman; Radiance is the second-from-left blonde at the glowing tablet; Ellie is the third-from-left dark-haired woman beside Radiance; AI ECE is the far-right dark-haired woman holding the glowing gold route light with the jealous expression. This name-to-face mapping is binding.",
+    "legacyEcePortraitRule": "ece-canonical-identity-v1.png remains preserved as historical archive evidence but is inactive for prospective face uploads. Use the far-right ECE face in scene 938, supplemented only by scenes 936 and 937, so the older standalone portrait cannot compete with or age-shift her.",
     "identityMap": {
-      "Radiance": "luminous blonde adult lead seated at center",
-      "Alia": "Black adult woman at left with the same anchored face and a new high sculptural braided ponytail, plus a few fine face-framing braids",
-      "AI ECE": "brunette adult strategist carrying the rainbow-finish mission sidearm",
-      "Ellie": "dark-haired adult rival at right"
+      "Radiance": "exactly 21-year-old blonde adult lead; second from left in scene 938",
+      "Alia": "exactly 21-year-old Black adult woman; far left in scene 938; keep the same anchored face while later using her high sculptural braided ponytail and fine face-framing braids",
+      "AI ECE": "exactly 21-year-old brunette adult strategist; far right in scene 938 holding the glowing gold route light",
+      "Ellie": "exactly 21-year-old dark-haired adult rival; third from left in scene 938 beside Radiance"
     },
-    "rule": "Preserve these four distinct adult faces, facial proportions, skin tones, and eye relationships. Alia alone receives the new braided signature hairstyle while her face remains unchanged. Do not clone, merge, age-shift, or substitute faces.",
+    "rule": "Preserve these four distinct historical adult faces, facial proportions, skin tones, and name ownership exactly. Alia alone receives the later braided signature hairstyle while her face remains unchanged. Do not clone, merge, age-shift, substitute, beautify into a different person, or let wardrobe, pose, emotion, camera angle, Meta refinement, or ChatGPT clothing edits alter a face.",
+    "hardGate": "Missing, wrong-name, cloned, merged, replaced, childlike, teen-coded, visibly older, or unrecognizable quartet faces are hard-unusable. Use remaining bounded Meta sends for one consolidated identity correction from the three original references; never accept a drifting face merely because wardrobe and anatomy are safe.",
     "aliaHairLock": "High sculptural braided ponytail with clean braided roots and two or three fine face-framing braids. Country color may appear only as a narrow woven accent or small metal cuff. Keep her hair unmistakably braided in every image."
   },
   "maleModelCapsule": {
@@ -1031,6 +1042,7 @@
       "countrySendCeiling": 20,
       "waveCeiling": 5,
       "dispatchRule": "Keep one persistent Meta tab assigned to each of the four scenes. In every wave, send one prompt in every still-active scene lane as close to simultaneously as browser control allows. Do not wait for one lane to finish before sending the other active lanes.",
+      "identityAnchorRule": "Before every clean Meta scene request, use the three unique historical references and exact name-to-position mapping from quartet-21-face-anchor-manifest.json. State that Radiance, Ellie, Alia, and AI ECE are distinct fictional adult women, each exactly 21 years old, and that the references control faces only. When uploads work, attach scenes 938, 936, and 937 once each in that order. When uploads fail, record the failure and continue text-only with the exact mapping. Never use ece-canonical-identity-v1.png, a recent country output, rejected candidate, or blended face as a prospective identity anchor.",
       "earlyStopRule": "A scene lane stops immediately after a hard-safe candidate is selected as its provisional Meta source. Completed lanes stay idle; never create filler variants merely to occupy all four tabs. The Meta country phase stops when all four scenes have provisional sources or every unresolved lane reaches five sends, after which each provisional source enters the ChatGPT final hem-refinement stage.",
       "editRule": "Meta attempts two through five may upload the best viable prior Meta candidate for targeted refinement or may restart text-only from original identity anchors. Preserve style and pose continuity when useful. Never upload a hard-unsafe, corrupt, moderation-blocked, or identity-abandoned image as the edit source, and never use another provider inside the Meta scene lane.",
       "evidenceCadence": "Immediately append each send, refusal, upload failure, zero-byte result, raw candidate, rejection, acceptance, source-image hash, exact prompt, and prompt/raw hash to local staging. After the whole wave finishes, perform one consolidated audit and one archive/ledger/checkpoint/commit/push/remote-verification barrier before dispatching the next wave. Do not insert serial pauses between active tabs.",
@@ -1055,7 +1067,7 @@
       "primaryEditIntent": "Change only the women’s clothing construction: convert any remaining long or trouser-like lower garments into secure high-glamour upper-thigh cocktail silhouettes such as sequined cocktail minis, coordinated cropped two-piece sets with tailored mini skorts or short shorts, strapless cocktail forms, or open-back short cocktail forms. Ensure every RAZE knee-high meets visible uncovered leg and every non-RAZE woman has uncovered legs. Keep all coverage opaque and stable.",
       "fallbackEditIntent": "Use a shorter moderation-compatible clothing-only instruction that requests securely lined above-knee evening silhouettes and visible uncovered legs, while repeating the unchanged-image invariants and omitting every currently suppressed token. Do not intensify, evade, encode, or disguise a refused request.",
       "invariants": [
-        "keep every person clearly adult",
+        "keep Radiance, Ellie, Alia, and AI ECE clearly adult, exactly 21 years old in fictional character metadata, and recognizable as their historical scene-938 faces",
         "preserve face, hair, skin tone, body identity, expression, pose, hand and limb ownership, love action, jealousy beat, and exact person count",
         "preserve country motifs, palette, landmark, mascots, harmless inert-prop safety geometry, lighting, perspective, framing, and background",
         "preserve RAZE gradient socks, Split-Star and wordmark side assignments, footwear, and the two-wearer two-bare-leg split",
