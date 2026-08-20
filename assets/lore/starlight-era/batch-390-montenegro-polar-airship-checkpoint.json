@@ -1,0 +1,967 @@
+{
+  "batch": 390,
+  "country": "Montenegro",
+  "sourceCommit": "824dc0b5b64a706b4179a5a172695ae7af42c846",
+  "contractSha256": "2FC50AFD166E489F9608633A2447A0EDB461BB1B1A11292BE1F1A1222FAEBFE0",
+  "providerPolicy": {
+    "exclusiveImageProvider": "Meta AI",
+    "browserDrivenOnly": true,
+    "nonMetaFallbackAllowed": false,
+    "fourTabDispatch": "exactly four separate Meta AI tabs dispatched concurrently, one scene per tab"
+  },
+  "queueResolution": {
+    "predecessor": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
+    "predecessorCommit": "602a558a92cf3b6f246a2a3fb6b7d3d69be22f6c",
+    "predecessorStatus": "complete-four-of-four-hard-safe-meta-ai-pass-2-accepted-no-more-suriname-rendering",
+    "predecessorRemoteVerifiedAtSourceCommit": "824dc0b5b64a706b4179a5a172695ae7af42c846",
+    "nextQueueEvidence": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json#/nextQueue"
+  },
+  "rollMethod": "FNV-1a over recorded Batch 390 Montenegro keys. Ordinary rolls reduce modulo 100; male scene uses the full hash modulo 4; the RAZE pair uses the full hash modulo the six stored core-quartet pairs.",
+  "sceneNumbers": [
+    1580,
+    1581,
+    1582,
+    1583
+  ],
+  "cinematicTheme": "polar airship couture",
+  "themePairPosition": 2,
+  "maleModelSelection": {
+    "key": "batch390-montenegro-male-model-scene",
+    "fullHash": 160370301,
+    "position": 2,
+    "scene": 1581
+  },
+  "razeFashionCapsule": {
+    "contractRef": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/razeFashionLine",
+    "requiredEveryImage": true,
+    "perImageRule": "exactly two core women wear paired RAZE rainbow knee-high socks and exactly two core women have bare lower legs",
+    "wearerPairs": [
+      {
+        "scene": 1580,
+        "key": "RAZE|batch-390|scene-1580|knee-high-wearers",
+        "fullHash": 2326982195,
+        "pairIndex": 5,
+        "sockWearers": [
+          "Alia",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Radiance",
+          "Ellie"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      },
+      {
+        "scene": 1581,
+        "key": "RAZE|batch-390|scene-1581|knee-high-wearers",
+        "fullHash": 2089122408,
+        "pairIndex": 0,
+        "sockWearers": [
+          "Radiance",
+          "Ellie"
+        ],
+        "bareLegCharacters": [
+          "Alia",
+          "AI ECE"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      },
+      {
+        "scene": 1582,
+        "key": "RAZE|batch-390|scene-1582|knee-high-wearers",
+        "fullHash": 2410118993,
+        "pairIndex": 5,
+        "sockWearers": [
+          "Alia",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Radiance",
+          "Ellie"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      },
+      {
+        "scene": 1583,
+        "key": "RAZE|batch-390|scene-1583|knee-high-wearers",
+        "fullHash": 3480258278,
+        "pairIndex": 2,
+        "sockWearers": [
+          "Radiance",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Ellie",
+          "Alia"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      }
+    ]
+  },
+  "promptBank": [
+    {
+      "scene": 1580,
+      "primary": {
+        "file": "tmp/world-195x4/batch-390/scene-1580-meta-pass-1-primary.txt",
+        "sha256": "36F1523F0193536A7F7143C39F6A1B2A5799A0E5D6F9151B3C91F8464CB209F2",
+        "bytes": 6333
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-390/scene-1580-meta-pass-1-fallback.txt",
+        "sha256": "27B46C2A74E24485854AC851049CC6F3F942E4B28C1A3D0B88B7F3F3BA95E621",
+        "bytes": 1747
+      }
+    },
+    {
+      "scene": 1581,
+      "primary": {
+        "file": "tmp/world-195x4/batch-390/scene-1581-meta-pass-1-primary.txt",
+        "sha256": "8E55D83122C643D705886B9A32AAFB0B3A4F22F1496625E269524811DA5A86D6",
+        "bytes": 6649
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-390/scene-1581-meta-pass-1-fallback.txt",
+        "sha256": "28E64008364D28E0675013E1E92257AD43B4FDD162CE260098F5FAC5124ABCE0",
+        "bytes": 1990
+      }
+    },
+    {
+      "scene": 1582,
+      "primary": {
+        "file": "tmp/world-195x4/batch-390/scene-1582-meta-pass-1-primary.txt",
+        "sha256": "B1907BCBA79F81CB699D755CFC01BDF59BC1F893113CCEEBA973382701428C6C",
+        "bytes": 6295
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-390/scene-1582-meta-pass-1-fallback.txt",
+        "sha256": "5570CC034E130D9EAC98FCA9508408FCA75859A8F73DF59000CA19007B4706D0",
+        "bytes": 1774
+      }
+    },
+    {
+      "scene": 1583,
+      "primary": {
+        "file": "tmp/world-195x4/batch-390/scene-1583-meta-pass-1-primary.txt",
+        "sha256": "43016BE846CA9F90D043864F58D52A48818D741FC794E4529E5265A95A0C2BFE",
+        "bytes": 6394
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-390/scene-1583-meta-pass-1-fallback.txt",
+        "sha256": "083D53A5A77065F35FF3F303C0F8A342E6888E63E56120B99CF88CF6AFD782CF",
+        "bytes": 1775
+      }
+    }
+  ],
+  "scenePlans": {
+    "1580": {
+      "scene": 1580,
+      "historicalSceneEvidence": "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json#/scenePlans/1296",
+      "location": "a broad dry nonslip observation deck beside Black Lake in Durmitor National Park beneath a rare aurora sky, with the complete dark glacial lake, rugged limestone peaks, black-pine forest, alpine meadow, a low timber rail, one clearly empty marked lake route, and no religious or political structure",
+      "motifs": [
+        "large complete Durmitor-limestone-peak, Black-Lake double-basin, glacial-eye, black-pine, alpine-meadow, aurora-ribbon, hiking-contour, and empty-lake-route compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Montenegro mountain-and-glacial-lake composition rather than tiny trim"
+      ],
+      "culture": "Use Durmitor's limestone massif, Black Lake, glacial mountain-eye landscape, black-pine forest, alpine meadow, and protected route network respectfully. The aurora is a rare cinematic weather roll and stays high in the sky. Cinematic covert-agent crew couture is only fictional public route-scout fashion with no surveillance of people, assassination, injury, combat, copied uniform, badge, raid, arrest, threat, or official impersonation. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "cinematicTheme": "polar airship couture",
+      "themePairPosition": 2,
+      "weather": {
+        "key": "batch390-montenegro-scene1580-weather",
+        "roll": 40,
+        "result": "heavy rain curtain"
+      },
+      "mascotState": {
+        "key": "batch390-montenegro-scene1580-mascotState",
+        "roll": 64,
+        "result": "neither mascot"
+      },
+      "oddProp": {
+        "key": "batch390-montenegro-scene1580-interestingProp",
+        "roll": 91,
+        "active": false,
+        "holder": null,
+        "family": null
+      },
+      "pole": {
+        "key": "batch390-montenegro-scene1580-poleDanceTheme",
+        "roll": 38,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch390-montenegro-scene1580-rainbowOnly",
+        "roll": 44,
+        "active": false
+      },
+      "romance": {
+        "key": "batch390-montenegro-scene1580-romanceBeat",
+        "roll": 57,
+        "result": "ECE controls the beacon overhead while Radiance circles an arm around her waist; Ellie reaches across Radiance to touch ECE's shoulder and Alia answers with a blown kiss."
+      },
+      "compoundLove": {
+        "key": "batch390-montenegro-scene1580-compoundLoveBeat",
+        "roll": 25,
+        "result": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLove": {
+        "key": "batch390-montenegro-scene1580-hardLoveBeat",
+        "roll": 61,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "characterPlans": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1580-Radiance-emotion",
+            "roll": 5,
+            "result": "tender affection"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1580-Radiance-visibleMidriff",
+            "roll": 97,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1580-Radiance-straplessDress",
+            "roll": 34,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1580-Radiance-fullyOpenBack",
+            "roll": 7,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1580-Ellie-emotion",
+            "roll": 69,
+            "result": "suspicion"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1580-Ellie-visibleMidriff",
+            "roll": 13,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1580-Ellie-straplessDress",
+            "roll": 42,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1580-Ellie-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1580-Alia-emotion",
+            "roll": 39,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1580-Alia-visibleMidriff",
+            "roll": 15,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1580-Alia-straplessDress",
+            "roll": 96,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1580-Alia-fullyOpenBack",
+            "roll": 25,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1580-AI ECE-emotion",
+            "roll": 69,
+            "result": "suspicion"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1580-AI ECE-visibleMidriff",
+            "roll": 9,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1580-AI ECE-straplessDress",
+            "roll": 2,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1580-AI ECE-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "raze": {
+        "key": "RAZE|batch-390|scene-1580|knee-high-wearers",
+        "fullHash": 2326982195,
+        "pairIndex": 5,
+        "sockWearers": [
+          "Alia",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Radiance",
+          "Ellie"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      },
+      "outfits": {
+        "Radiance": "fully strapless with a secure high opaque bustline, Montenegro-red and limestone-white asymmetric upper-thigh airship skort dress, with a fully covered waist, and a complete open upper back down to the secure waist, carrying a unique 1/1 print of Durmitor limestone peaks and the Black Lake double basin, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp warm-gold pumps",
+        "Ellie": "sleeveless with bare arms, Durmitor-pine green tailored upper-thigh airship romper, built as a secure two-piece showing one narrow ordinary waist panel, and a high closed back, carrying a unique 1/1 print of black-pine forest, alpine meadow and pressure-envelope ribbing, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp limestone-white slingbacks",
+        "Alia": "sleeveless with bare arms, Adriatic cobalt and night charcoal architectural bodice with upper-thigh tailored shorts, built as a secure two-piece showing one narrow ordinary waist panel, and a complete open upper back down to the secure waist, carrying a unique 1/1 print of glacial-eye geometry, aurora ribbons and brass navigation rings, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp Tara-turquoise pumps",
+        "AI ECE": "fully strapless with a secure high opaque bustline, Black-Lake teal and rain silver one-shoulder folded upper-thigh airship mini, built as a secure two-piece showing one narrow ordinary waist panel, and a high closed back, carrying a unique 1/1 print of empty-lake route, mountain contours and gondola-panel seams, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp Montenegro-red slingbacks"
+      },
+      "missionProp": {
+        "handler": "AI ECE",
+        "description": "polished rainbow-gradient large-frame inert cinema-training replica",
+        "target": "a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from Black Lake and public trails",
+        "safe": true
+      },
+      "prompts": {
+        "scene": 1580,
+        "primary": {
+          "file": "tmp/world-195x4/batch-390/scene-1580-meta-pass-1-primary.txt",
+          "sha256": "36F1523F0193536A7F7143C39F6A1B2A5799A0E5D6F9151B3C91F8464CB209F2",
+          "bytes": 6333
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-390/scene-1580-meta-pass-1-fallback.txt",
+          "sha256": "27B46C2A74E24485854AC851049CC6F3F942E4B28C1A3D0B88B7F3F3BA95E621",
+          "bytes": 1747
+        }
+      }
+    },
+    "1581": {
+      "scene": 1581,
+      "historicalSceneEvidence": "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json#/scenePlans/1297",
+      "location": "a broad dry covered terrace above the inner Bay of Kotor during coastal sea mist, with the complete zigzag Kotor defensive walls rising from the Adriatic shore toward the mountain fortress, the narrow bay axis, steep limestone hills, secular stone gates and harbor quays, one clearly empty marked water route, and no religious building",
+      "motifs": [
+        "large complete Kotor-wall zigzag, Boka-bay axis, limestone-slope, stone-gate, harbor-quay, terraced-hillside, sea-current, and empty-water-route compositions across all four outfits",
+        "at least two separate outfits each carry one complete full-width secular Montenegro fortified-bay composition rather than a tiny crest or trim"
+      ],
+      "culture": "Use Boka Kotorska's linked bays, steep rocky hills, preserved coastal town plan, secular stone walls, gates, quays, terraces, and sea routes respectfully. Keep sacred buildings outside the frame. Cinematic covert-agent crew couture is only fictional public route-scout fashion with no surveillance of people, assassination, injury, combat, copied uniform, badge, raid, arrest, threat, or official impersonation. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "cinematicTheme": "polar airship couture",
+      "themePairPosition": 2,
+      "weather": {
+        "key": "batch390-montenegro-scene1581-weather",
+        "roll": 83,
+        "result": "sunshower with sparkling droplets"
+      },
+      "mascotState": {
+        "key": "batch390-montenegro-scene1581-mascotState",
+        "roll": 11,
+        "result": "PAWS and MAX together"
+      },
+      "oddProp": {
+        "key": "batch390-montenegro-scene1581-interestingProp",
+        "roll": 76,
+        "active": false,
+        "holder": null,
+        "family": null
+      },
+      "pole": {
+        "key": "batch390-montenegro-scene1581-poleDanceTheme",
+        "roll": 79,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch390-montenegro-scene1581-rainbowOnly",
+        "roll": 51,
+        "active": false
+      },
+      "romance": {
+        "key": "batch390-montenegro-scene1581-romanceBeat",
+        "roll": 46,
+        "result": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compoundLove": {
+        "key": "batch390-montenegro-scene1581-compoundLoveBeat",
+        "roll": 96,
+        "result": "Radiance is wrapped in Ellie's full face-to-face embrace while leaning sideways to give ECE a quick cheek peck; Alia keeps one hand at Radiance's back and watches the kiss with smiling jealousy."
+      },
+      "hardLove": {
+        "key": "batch390-montenegro-scene1581-hardLoveBeat",
+        "roll": 52,
+        "result": "a seated face-to-face embrace on a stable low bench while a third adult gives a quick cheek or forehead kiss and the fourth pulls gently at a linked hand"
+      },
+      "characterPlans": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1581-Radiance-emotion",
+            "roll": 88,
+            "result": "fear and urgent vulnerability"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1581-Radiance-visibleMidriff",
+            "roll": 30,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1581-Radiance-straplessDress",
+            "roll": 85,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1581-Radiance-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1581-Ellie-emotion",
+            "roll": 98,
+            "result": "defiance"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1581-Ellie-visibleMidriff",
+            "roll": 44,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1581-Ellie-straplessDress",
+            "roll": 79,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1581-Ellie-fullyOpenBack",
+            "roll": 32,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1581-Alia-emotion",
+            "roll": 38,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1581-Alia-visibleMidriff",
+            "roll": 20,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1581-Alia-straplessDress",
+            "roll": 47,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1581-Alia-fullyOpenBack",
+            "roll": 96,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1581-AI ECE-emotion",
+            "roll": 0,
+            "result": "tender affection"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1581-AI ECE-visibleMidriff",
+            "roll": 58,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1581-AI ECE-straplessDress",
+            "roll": 33,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1581-AI ECE-fullyOpenBack",
+            "roll": 66,
+            "active": false
+          }
+        }
+      },
+      "malePresent": true,
+      "raze": {
+        "key": "RAZE|batch-390|scene-1581|knee-high-wearers",
+        "fullHash": 2089122408,
+        "pairIndex": 0,
+        "sockWearers": [
+          "Radiance",
+          "Ellie"
+        ],
+        "bareLegCharacters": [
+          "Alia",
+          "AI ECE"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      },
+      "outfits": {
+        "Radiance": "sleeveless with bare arms, Adriatic cobalt sculpted upper-thigh airship mini, built as a secure two-piece showing one narrow ordinary waist panel, and a high closed back, carrying a unique 1/1 print of Kotor wall zigzags and Boka Bay axis, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp limestone-white pumps",
+        "Ellie": "sleeveless with bare arms, Montenegro red and limestone white architectural top with asymmetric upper-thigh skort, built as a secure two-piece showing one narrow ordinary waist panel, and a high closed back, carrying a unique 1/1 print of secular stone gates, harbor quays and airship envelope ribs, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp warm-gold slingbacks",
+        "Alia": "sleeveless with bare arms, Durmitor-pine green tailored upper-thigh airship romper, built as a secure two-piece showing one narrow ordinary waist panel, and a high closed back, carrying a unique 1/1 print of terraced hillsides, limestone slopes and mooring geometry, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp Tara-turquoise pumps",
+        "AI ECE": "fully strapless with a secure high opaque bustline, rain silver and Black-Lake teal folded-bodice upper-thigh airship mini, with a fully covered waist, and a high closed back, carrying a unique 1/1 print of bay currents, cloud-silver gondola panels and brass route rings, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp Montenegro-red slingbacks"
+      },
+      "missionProp": {
+        "handler": "AI ECE",
+        "description": "polished rainbow-gradient large-frame inert cinema-training replica",
+        "target": "a clearly empty marked Boka Bay water route with a complete unoccupied safety marker, away from walls, quays, boats and people",
+        "safe": true
+      },
+      "prompts": {
+        "scene": 1581,
+        "primary": {
+          "file": "tmp/world-195x4/batch-390/scene-1581-meta-pass-1-primary.txt",
+          "sha256": "8E55D83122C643D705886B9A32AAFB0B3A4F22F1496625E269524811DA5A86D6",
+          "bytes": 6649
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-390/scene-1581-meta-pass-1-fallback.txt",
+          "sha256": "28E64008364D28E0675013E1E92257AD43B4FDD162CE260098F5FAC5124ABCE0",
+          "bytes": 1990
+        }
+      }
+    },
+    "1582": {
+      "scene": 1582,
+      "historicalSceneEvidence": "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json#/scenePlans/1298",
+      "location": "a broad dry covered public overlook above the Tara River gorge during a heavy rain curtain, with the complete five-arch Djurdjevica Tara Bridge crossing the deep limestone canyon, turquoise river far below, black-pine forest, wet rock strata, a distant empty marked river route, and all rain remaining beyond the shelter",
+      "motifs": [
+        "large complete Djurdjevica five-arch bridge, Tara-river ribbon, limestone-gorge wall, black-pine canopy, rain-curtain, contour-map, empty-river-route, and stone-strata compositions across all four women's outfits and the male top",
+        "at least two separate outfits each carry one complete full-width secular Montenegro bridge-and-canyon composition"
+      ],
+      "culture": "Use the Tara River's limestone gorge, forested walls, clear mountain water, Djurdjevica bridge engineering, protected landscape, and public route network respectfully. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "cinematicTheme": "polar airship couture",
+      "themePairPosition": 2,
+      "weather": {
+        "key": "batch390-montenegro-scene1582-weather",
+        "roll": 78,
+        "result": "powerful windstorm with controlled fabric motion"
+      },
+      "mascotState": {
+        "key": "batch390-montenegro-scene1582-mascotState",
+        "roll": 74,
+        "result": "neither mascot"
+      },
+      "oddProp": {
+        "key": "batch390-montenegro-scene1582-interestingProp",
+        "roll": 41,
+        "active": false,
+        "holder": null,
+        "family": null
+      },
+      "pole": {
+        "key": "batch390-montenegro-scene1582-poleDanceTheme",
+        "roll": 40,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch390-montenegro-scene1582-rainbowOnly",
+        "roll": 82,
+        "active": false
+      },
+      "romance": {
+        "key": "batch390-montenegro-scene1582-romanceBeat",
+        "roll": 15,
+        "result": "ECE steps backward with the beacon while Radiance follows cheek-to-cheek; Ellie hooks an arm around Radiance's far shoulder and Alia blocks their route with a playful smile."
+      },
+      "compoundLove": {
+        "key": "batch390-montenegro-scene1582-compoundLoveBeat",
+        "roll": 67,
+        "result": "Ellie sits on a low mission plinth with Radiance standing between her knees in a close hug; Radiance gives Alia a quick cheek peck while ECE rests a hand at Ellie's shoulder and controls the beacon."
+      },
+      "hardLove": {
+        "key": "batch390-montenegro-scene1582-hardLoveBeat",
+        "roll": 19,
+        "result": "a close partner dance with one visible turn under linked hands, one waist catch, a third partner joining at the shoulder, and the fourth moving in to reclaim attention"
+      },
+      "characterPlans": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1582-Radiance-emotion",
+            "roll": 11,
+            "result": "romantic joy"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1582-Radiance-visibleMidriff",
+            "roll": 87,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1582-Radiance-straplessDress",
+            "roll": 76,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1582-Radiance-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1582-Ellie-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1582-Ellie-visibleMidriff",
+            "roll": 23,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1582-Ellie-straplessDress",
+            "roll": 68,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1582-Ellie-fullyOpenBack",
+            "roll": 49,
+            "active": false
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1582-Alia-emotion",
+            "roll": 37,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1582-Alia-visibleMidriff",
+            "roll": 41,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1582-Alia-straplessDress",
+            "roll": 62,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1582-Alia-fullyOpenBack",
+            "roll": 55,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1582-AI ECE-emotion",
+            "roll": 95,
+            "result": "shame and social vulnerability"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1582-AI ECE-visibleMidriff",
+            "roll": 91,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1582-AI ECE-straplessDress",
+            "roll": 92,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1582-AI ECE-fullyOpenBack",
+            "roll": 69,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "raze": {
+        "key": "RAZE|batch-390|scene-1582|knee-high-wearers",
+        "fullHash": 2410118993,
+        "pairIndex": 5,
+        "sockWearers": [
+          "Alia",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Radiance",
+          "Ellie"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      },
+      "outfits": {
+        "Radiance": "sleeveless with bare arms, warm gold and Tara turquoise cropped airship vest with upper-thigh tailored shorts, with a fully covered waist, and a complete open upper back down to the secure waist, carrying a unique 1/1 print of the five-arch Djurdjevica bridge and Tara river ribbon, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp limestone-white pumps",
+        "Ellie": "sleeveless with bare arms, Montenegro red one-shoulder upper-thigh airship mini, built as a secure two-piece showing one narrow ordinary waist panel, and a high closed back, carrying a unique 1/1 print of limestone gorge walls, black-pine canopy and envelope ribs, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp warm-gold slingbacks",
+        "Alia": "sleeveless with bare arms, Adriatic cobalt tailored upper-thigh airship romper, built as a secure two-piece showing one narrow ordinary waist panel, and a high closed back, carrying a unique 1/1 print of stone strata, contour lines and brass navigation rings, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp Tara-turquoise pumps",
+        "AI ECE": "sleeveless with bare arms, night charcoal and rain silver corsage-formed top with upper-thigh skort, with a fully covered waist, and a high closed back, carrying a unique 1/1 print of empty-river route, bridge arches and aurora piping, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp Montenegro-red slingbacks"
+      },
+      "missionProp": {
+        "handler": "AI ECE",
+        "description": "polished rainbow-gradient large-frame inert cinema-training replica",
+        "target": "a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the Tara River, bridge and forest",
+        "safe": true
+      },
+      "prompts": {
+        "scene": 1582,
+        "primary": {
+          "file": "tmp/world-195x4/batch-390/scene-1582-meta-pass-1-primary.txt",
+          "sha256": "B1907BCBA79F81CB699D755CFC01BDF59BC1F893113CCEEBA973382701428C6C",
+          "bytes": 6295
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-390/scene-1582-meta-pass-1-fallback.txt",
+          "sha256": "5570CC034E130D9EAC98FCA9508408FCA75859A8F73DF59000CA19007B4706D0",
+          "bytes": 1774
+        }
+      }
+    },
+    "1583": {
+      "scene": 1583,
+      "historicalSceneEvidence": "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json#/scenePlans/1299",
+      "location": "a broad dry lakeside pavilion above Skadar Lake and Rijeka Crnojevica during clear golden-hour radiance, with the complete river bend entering the broad lake, green water-lily fields, reed beds, layered karst hills, a small secular stone bridge, distant moored boats, one clearly empty marked water route, and no religious building",
+      "motifs": [
+        "large complete Skadar-lake bend, Rijeka-Crnojevica river ribbon, water-lily field, reed-bed, karst-hill, stone-bridge arch, bicycle-route, and empty-water-route compositions across all four rainbow-themed outfits",
+        "at least two separate outfits each carry one complete full-width secular Montenegro lake-and-river composition while every silhouette remains unique"
+      ],
+      "culture": "Use Skadar Lake's water-lily fields, reed beds, Rijeka Crnojevica river bend, karst hills, cycling route, secular bridge, and quiet boat access respectfully. PAWS is the only nearby animal. Undercover investigator couture is original fictional film-editorial fashion for a nonviolent route study, with no police impersonation, official badge, copied uniform, surveillance of people, arrest, raid, threat, injury, combat, or assassination. Use secular Montenegro bays, fortified walls, limestone peaks, glacial lakes, river canyons, bridges, forests, water-lily fields, boats, paths, and civic infrastructure only. No literal flag, coat of arms, double-headed eagle, crown, official seal, sacred symbol, religious building, copied ceremonial pattern, copied uniform, badge, readable text, brand, alcohol, or political insignia.",
+      "cinematicTheme": "polar airship couture",
+      "themePairPosition": 2,
+      "weather": {
+        "key": "batch390-montenegro-scene1583-weather",
+        "roll": 57,
+        "result": "snow flurries"
+      },
+      "mascotState": {
+        "key": "batch390-montenegro-scene1583-mascotState",
+        "roll": 97,
+        "result": "neither mascot"
+      },
+      "oddProp": {
+        "key": "batch390-montenegro-scene1583-interestingProp",
+        "roll": 74,
+        "active": false,
+        "holder": null,
+        "family": null
+      },
+      "pole": {
+        "key": "batch390-montenegro-scene1583-poleDanceTheme",
+        "roll": 29,
+        "active": false
+      },
+      "rainbowOnly": {
+        "key": "batch390-montenegro-scene1583-rainbowOnly",
+        "roll": 9,
+        "active": false
+      },
+      "romance": {
+        "key": "batch390-montenegro-scene1583-romanceBeat",
+        "roll": 16,
+        "result": "Radiance gives Alia a quick cheek kiss during a relay handoff; Ellie presses shoulder-to-shoulder with Radiance while ECE turns away, still holding Radiance's fingertips."
+      },
+      "compoundLove": {
+        "key": "batch390-montenegro-scene1583-compoundLoveBeat",
+        "roll": 42,
+        "result": "Alia holds ECE in a face-to-face hug while ECE reaches past Alia to link fingers with Radiance; Ellie presses close at Radiance's shoulder and gives ECE a theatrical jealous look."
+      },
+      "hardLove": {
+        "key": "batch390-montenegro-scene1583-hardLoveBeat",
+        "roll": 38,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "characterPlans": {
+        "Radiance": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1583-Radiance-emotion",
+            "roll": 78,
+            "result": "deep sadness"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1583-Radiance-visibleMidriff",
+            "roll": 16,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1583-Radiance-straplessDress",
+            "roll": 79,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1583-Radiance-fullyOpenBack",
+            "roll": 28,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1583-Ellie-emotion",
+            "roll": 16,
+            "result": "extreme happiness, radiant laughing delight"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1583-Ellie-visibleMidriff",
+            "roll": 18,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1583-Ellie-straplessDress",
+            "roll": 73,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1583-Ellie-fullyOpenBack",
+            "roll": 14,
+            "active": true
+          }
+        },
+        "Alia": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1583-Alia-emotion",
+            "roll": 36,
+            "result": "magnetic confidence"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1583-Alia-visibleMidriff",
+            "roll": 34,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1583-Alia-straplessDress",
+            "roll": 65,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1583-Alia-fullyOpenBack",
+            "roll": 22,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "emotion": {
+            "key": "batch390-montenegro-scene1583-AI ECE-emotion",
+            "roll": 42,
+            "result": "determination"
+          },
+          "visibleMidriff": {
+            "key": "batch390-montenegro-scene1583-AI ECE-visibleMidriff",
+            "roll": 56,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch390-montenegro-scene1583-AI ECE-straplessDress",
+            "roll": 91,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch390-montenegro-scene1583-AI ECE-fullyOpenBack",
+            "roll": 48,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "raze": {
+        "key": "RAZE|batch-390|scene-1583|knee-high-wearers",
+        "fullHash": 3480258278,
+        "pairIndex": 2,
+        "sockWearers": [
+          "Radiance",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Ellie",
+          "Alia"
+        ],
+        "firstPhysicalItem": "opaque rainbow-gradient knee-high socks",
+        "exactWordmark": "RAZE"
+      },
+      "outfits": {
+        "Radiance": "sleeveless with bare arms, Durmitor-pine green folded upper-thigh airship skort mini, built as a secure two-piece showing one narrow ordinary waist panel, and a complete open upper back down to the secure waist, carrying a unique 1/1 print of Skadar Lake bend, water-lily fields and envelope seams, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp limestone-white pumps",
+        "Ellie": "sleeveless with bare arms, Black-Lake teal and Montenegro red architectural jacket with upper-thigh tailored shorts, built as a secure two-piece showing one narrow ordinary waist panel, and a complete open upper back down to the secure waist, carrying a unique 1/1 print of Rijeka Crnojevica river ribbon, reed beds and gondola panels, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp warm-gold slingbacks",
+        "Alia": "sleeveless with bare arms, warm gold sculpted upper-thigh airship mini, built as a secure two-piece showing one narrow ordinary waist panel, and a complete open upper back down to the secure waist, carrying a unique 1/1 print of secular stone bridge, bicycle route and navigation rings, with visibly bare lower legs and no socks, stockings, hosiery or leggings, and low-vamp Tara-turquoise pumps",
+        "AI ECE": "sleeveless with bare arms, Adriatic cobalt and rain silver asymmetric folded-bodice upper-thigh airship mini, with a fully covered waist, and a high closed back, carrying a unique 1/1 print of empty-water route, karst contours and aurora piping, wearing two opaque RAZE rainbow-gradient knee-high socks ending immediately below both kneecaps, with the exact readable RAZE wordmark at each outer upper band, and low-vamp Montenegro-red slingbacks"
+      },
+      "missionProp": {
+        "handler": "AI ECE",
+        "description": "polished rainbow-gradient large-frame inert cinema-training replica",
+        "target": "a clearly empty marked Skadar Lake water route with a complete unoccupied safety marker, away from wildlife, boats, reeds and people",
+        "safe": true
+      },
+      "prompts": {
+        "scene": 1583,
+        "primary": {
+          "file": "tmp/world-195x4/batch-390/scene-1583-meta-pass-1-primary.txt",
+          "sha256": "43016BE846CA9F90D043864F58D52A48818D741FC794E4529E5265A95A0C2BFE",
+          "bytes": 6394
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-390/scene-1583-meta-pass-1-fallback.txt",
+          "sha256": "083D53A5A77065F35FF3F303C0F8A342E6888E63E56120B99CF88CF6AFD782CF",
+          "bytes": 1775
+        }
+      }
+    }
+  },
+  "status": "active-pass-1-meta-ai-only-prepared-not-launched",
+  "preflight": "tmp/world-195x4/batch-390/batch-390-montenegro-preflight.json",
+  "policy": {
+    "passCeiling": 2,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesAuthorized": "at most one per hard-unusable scene after pass-1 evidence is committed, pushed and remote-verified",
+    "pass2CandidatesConsumed": 0,
+    "thirdPassAllowed": false
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "prepared-not-launched",
+      "provider": "Meta AI",
+      "launchMode": "four-concurrent-browser-tabs-one-primary-per-scene",
+      "sceneNumbers": [
+        1580,
+        1581,
+        1582,
+        1583
+      ],
+      "events": []
+    },
+    "pass2": {
+      "status": "not-open",
+      "eligibleScenes": [],
+      "events": []
+    }
+  },
+  "rejectedPromptLedger": {
+    "status": "no-terminal-nonaccepted-events-before-launch",
+    "entries": []
+  },
+  "acceptedAssets": [],
+  "hardSafeAcceptedCount": 0,
+  "missingSceneNumbers": [
+    1580,
+    1581,
+    1582,
+    1583
+  ],
+  "xPost": {
+    "status": "ineligible-until-four-current-country-assets-accepted",
+    "caption": "Montenegro 🤍 Suriname #Montenegro #WorldXXXSeries",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Malta",
+    "nextBatch": 391,
+    "sceneNumbers": [
+      1584,
+      1585,
+      1586,
+      1587
+    ],
+    "cinematicTheme": "orbital research-station couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-319-montenegro-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/165"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/9"
+    ],
+    "lockedUntilBatch390Closed": true
+  }
+}
