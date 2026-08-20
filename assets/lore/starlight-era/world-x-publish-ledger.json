@@ -5173,8 +5173,8 @@
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   },
   "latestGuardianWakeAudit": {
-    "status": "eight-eligible-country-posts-six-live-reconciled-two-freshly-eligible-no-publication-attempted",
-    "checkedAt": "2026-08-20T06:44:44.6622529Z",
+    "status": "nine-eligible-country-posts-six-live-reconciled-three-freshly-eligible-no-publication-attempted",
+    "checkedAt": "2026-08-20T07:49:16.754Z",
     "account": "@dogramaci",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
@@ -5193,13 +5193,13 @@
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 8,
+    "eligibleBacklogRemaining": 9,
     "checkpointAudit": {
       "batchRange": [
         382,
-        390
+        391
       ],
-      "eligibleWithNoRecordedUrlCount": 8,
+      "eligibleWithNoRecordedUrlCount": 9,
       "eligibleWithNoRecordedUrl": [
         {
           "batch": 382,
@@ -5288,12 +5288,23 @@
           "caption": "Montenegro 🤍 Suriname #Montenegro #WorldXXXSeries",
           "recordedUrl": null,
           "liveState": "freshly-eligible-not-published-this-wake"
+        },
+        {
+          "batch": 391,
+          "country": "Malta",
+          "checkpoint": "assets/lore/starlight-era/batch-391-malta-orbital-research-station-checkpoint.json",
+          "acceptedCurrentCountryAssets": 4,
+          "required": 4,
+          "eligible": true,
+          "caption": "Malta ❤️ Montenegro #Malta #WorldXXXSeries",
+          "recordedUrl": null,
+          "liveState": "freshly-eligible-not-published-this-wake"
         }
       ]
     },
     "activeCountryAudit": {
-      "batch": 390,
-      "country": "Montenegro",
+      "batch": 391,
+      "country": "Malta",
       "acceptedCurrentCountryAssets": 4,
       "required": 4,
       "eligible": true
@@ -5306,7 +5317,7 @@
         "classification": "unrelated-search-result"
       }
     ],
-    "action": "Signed-in @dogramaci reconciliation completed earlier this wake with a focused Latest search covering the six previously eligible countries and the full post-eligibility date range. No exact campaign caption matched. Suriname and Montenegro became freshly eligible after that reconciliation. No composer opened, no media uploaded, and no Post click occurred; all eight countries remain eligible with no recorded URL.",
-    "duplicatePrevention": "The focused full-date live search is stronger than a latest-four profile view and found no exact campaign caption for the six previously eligible countries. Suriname and Montenegro were not yet eligible during that search, so all eight publications require a fresh action-time confirmation before any upload or Post click."
+    "action": "Signed-in @dogramaci reconciliation completed earlier this wake with a focused Latest search covering the six previously eligible countries and the full post-eligibility date range. No exact campaign caption matched. Suriname, Montenegro, and Malta became freshly eligible after that reconciliation. No composer opened, no media uploaded, and no Post click occurred; all nine countries remain eligible with no recorded URL.",
+    "duplicatePrevention": "The focused full-date live search is stronger than a latest-four profile view and found no exact campaign caption for the six previously eligible countries. Suriname, Montenegro, and Malta were not yet eligible during that search, so all nine publications require a fresh action-time confirmation before any upload or Post click."
   }
 }
