@@ -1,5 +1,58 @@
 # B3 non-circular pre/post-Devnet readiness gates
 
+## Mandatory CI process containment remains HOLD
+
+The accepted BP00–BP09 source wave and X16 review do not make mandatory native
+containment live. They establish exact nonoperative authority/prerequisite
+packets, a native protocol core, inert hostile-fixture plans, reviewed Linux
+and Windows state-machine sources, a deterministic-build contract, a strict
+runtime-receipt contract, the B27 canonical all-false orchestrator, and hosted
+smoke-only wiring. B27 is the reused BP08 scope; no duplicate BP08 orchestrator
+exists. X16 independently accepted the exact B27/BP07 source integration after
+its 90-case hostile matrix, but X16 observed source bytes only.
+
+The fixed boundary remains 10-second startup, 120/180-second execution,
+5-second finalization, 15-second observation-only teardown, and 155/215-second
+immutable outer ceilings, with 64 MiB per stream. The Linux source models
+held-object `execveat`, `clone3` user/mount/PID namespaces, pidfd lifetime,
+namespace PID 1, complete clone-class reap, timer-first/write-once arbitration,
+exact status EOF, and namespace destruction. The Windows source models a
+write/delete-denying executable handle, atomic `JOB_LIST` plus `HANDLE_LIST`,
+`CREATE_SUSPENDED`, pre-resume Job proof, no breakaway, bounded overlapped I/O,
+timer-first/write-once arbitration, and completion-port
+`ACTIVE_PROCESS_ZERO`. Its unsupported pathname-launch route fails before
+`CreateProcessW`, so it does not claim a usable same-object launch capability.
+Neither platform source has been compiled or exercised.
+
+BP06 now specifies the exact seven-source Zig `cc` recipe, authenticated
+compiler/sysroot closures, four disjoint A/B lanes, PE/ELF policy, direct
+artifact/log causation, continuous 2 GiB/no-outside-write observation, and
+identity-bound cleanup. BP07 specifies separate compile and same-object runtime
+receipts. Those are structural validators, not observations: the toolchain
+policy remains `HOLD_UNMEASURED`, no admitted build or helper object exists,
+and no external runtime-receipt source, platform event, TAP stream, teardown,
+or absence proof has been observed.
+
+Consequently the canonical mandatory runner returns machine-readable
+`HOLD`/exit `2` with readiness, completeness, validity, authorization,
+checkpoint, build receipt, runtime receipt, execution provenance, runtime
+evidence, containment, process, helper, network, RPC, key, signature,
+transaction, Devnet, Mainnet, and release fields false. Caller, injected,
+synthetic, and self-authored records cannot promote those fields.
+
+Local direct observation and hosted smoke are deliberately disjoint. The local
+exact-digest container/Git observer is still blocked: the authorized Docker
+Hub pull timed out before the image or either observer run existed, so no local
+Git, toolchain, build, or runtime identity was admitted. K89's exact Windows
+job remains `HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)`. BP09 adds one
+isolated Ubuntu job ordered after K89; it consumes no predecessor output or
+receipt and runs only the BP00/BP01 structure suites followed by the canonical
+all-false gate suite. Pinned checkout/setup-node, static Node tests, and
+expected HOLD results cannot be promoted into local provenance, a compile or
+runtime receipt, release authority, or public execution. This HOLD authorizes
+no download, compiler, build, helper, RPC, key, Devnet, deployment, or Mainnet
+action.
+
 The legacy `scripts/assess-iat-b3-all-feature-devnet-readiness.mjs` remains a
 fail-closed, machine-readable two-lane evidence observer. It never signs, broadcasts, deploys,
 funds, activates, or queries RPC. It does not build
@@ -165,6 +218,69 @@ are invalid. The full disposition matrix remains 6 active, 5 initialization-
 policy HOLD, 3 CCC-disabled, and 1 core-custody HOLD. Legacy or injected map
 objects can produce only `HOLD_TEST`.
 
+## Mandatory CI process boundary
+
+`scripts/run-iat-b3-mandatory-ci-gate.mjs` freezes the original ordered 25
+all-feature cases and models only `all-feature-devnet-readiness` with a
+180,000-millisecond execution cutoff. Every other mandatory gate retains its
+120,000-millisecond cutoff. Startup, finalization, teardown, and immutable outer
+ceilings are 10,000, 5,000, 15,000, and 155,000/215,000 milliseconds. Neither
+arguments, environment, test seams, retries, nor fallbacks may override them.
+The per-stream ceiling is 64 MiB. The mandatory-manifest suite has an exact
+fixed total of 14 cases.
+
+The accepted source ladder does not arm those timers or launch a child. BP00
+and BP01 keep authority, checkpoint, capability, toolchain, artifact,
+invocation, K44, daemon/storage, build, and runtime observations absent or
+false. BP02 keeps the native entry point hard-disabled. BP03 fixtures remain
+inert byte-inspected modules. BP04 and BP05 contain reviewed platform state
+machines, but source tokens do not establish host capability. BP06 exposes
+assessment-only build preflight and no compiler callback or execute grammar.
+BP07 classifies even a structurally valid candidate receipt as
+nonauthoritative HOLD. B27, the reused BP08 canonical orchestrator, exposes no
+process or helper execution API. X16 accepted that exact source-only
+integration with no P0/P1; it did not observe runtime.
+
+The Linux source requires descriptor-bound same-object execution, a pidfd-held
+private namespace with a validated status-zero namespace PID1, complete
+clone-class reap, exact status EOF, timer-first write-once outcomes, and
+namespace destruction. The Windows source requires atomic-at-birth Job Object
+and exact handle inheritance, suspended pre-resume membership, no breakaway,
+bounded overlapped streams, immutable timer priority, natural zero terminal,
+both EOFs, and `ACTIVE_PROCESS_ZERO`. Unsupported Windows pathname launch fails
+before creation rather than claiming same-object identity. `unshare`,
+`spawnSync`, process groups, assign-after-start, `taskkill`, WMI/CIM, pathname
+hashes, numeric-PID enumeration, and injected executors are not fallbacks.
+
+The strict structural oracle requires natural root termination, exact READY and
+FINAL schemas, exact ordered TAP through EOF, bounded streams, direct-root reap,
+empty containment, zero leaks/zombies, absence proof, and no intervention.
+Forced teardown and the immutable outer deadline have higher failure precedence
+than child-authored status. Synthetic frames and injected runners remain
+`HOLD_TEST`; no control record can promote execution provenance.
+
+Local and hosted observations cannot be combined. The local immutable-image
+observer has not run because its exact image pull timed out; no local Git,
+toolchain, build, helper, or runtime identity exists. The K89 Windows job runs
+the 30-case source suite before its expected preflight HOLD and is explicitly
+`HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)`. BP09's isolated Ubuntu job
+is ordered after K89, consumes no output/receipt, persists no checkout
+credentials, uses no cache, and runs only the 41-case BP00/BP01 structure pair
+then the 14-case canonical all-false suite. Hosted setup/checkout and Node
+tests are not native, offline same-object, containment, release, or
+authorization evidence and cannot populate any local receipt.
+
+The current mandatory source-only inventory is 180 named cases across ten
+suites: containment 30, native core 14, fixtures 10, Linux 17, Windows 22,
+native build 15, runtime receipt 17, canonical gates 14, BP00 authority 13,
+and BP01 prerequisites 28. X16's affected five-suite matrix passed 90/90.
+BP09/BP09R's hosted-source matrix passed 85/85 plus 123 fail-closed workflow
+mutation probes. These counts demonstrate source consistency only; no C source
+was compiled and no helper, fixture, Job, namespace, or workload ran.
+The separate all-feature readiness and non-circular pre/post split suites have
+14 and 11 source-only cases respectively (25 total); they likewise observe no
+public execution and cannot clear a direct-evidence blocker.
+
 ## Command and exit contract
 
 From `projects/star-ascent/site`:
@@ -284,14 +400,31 @@ partial state is reconciled.
 
 ## Current result
 
-The truthful result remains `HOLD`. `PROVIDE_LATER` production identities,
-`WAIT_FOR_MEASUREMENT` entropy policy, unexecuted local rehearsal evidence, and
-the unstarted 24-hour observation prevent an independent pre-verdict from
-permitting an authorization request. Exact Law and Economy
-receipts/artifacts/logs and accepted same-container provenance must be produced
-and observed. A checked-in structural contract or self-authored bundle is not
-execution evidence. In addition, the pre and post direct-evidence observers are
-not implemented; exact byte binding and deterministic assessor re-execution do
-not substitute for them. Public Devnet authorization is not currently
-requestable, no current evidence can start the authoritative 24-hour clock,
-and Mainnet remains `HOLD` in every assessment output.
+The truthful result remains `HOLD`. Mandatory containment still has no accepted
+local image/Git observation, measured toolchain closure, live build receipt,
+admitted helper, same-object runtime receipt, platform-capability observation,
+or K44 direct observer. B27 therefore remains `HOLD`/exit `2` with every
+execution, evidence, readiness, authorization, Devnet, Mainnet, and release
+field false. Accepted source reviews, X16, and hosted BP09 smoke do not change
+that result.
+
+Separately, `PROVIDE_LATER` production identities, `WAIT_FOR_MEASUREMENT`
+entropy policy, unexecuted local rehearsal evidence, and the unstarted 24-hour
+observation prevent an independent pre-verdict from permitting an
+authorization request. Exact Law and Economy receipts/artifacts/logs and
+accepted same-container provenance must be produced and observed. A checked-in
+structural contract or self-authored bundle is not execution evidence. The pre
+and post direct-evidence observers are also not implemented; exact byte binding
+and deterministic assessor re-execution do not substitute for them. Public
+Devnet authorization is not currently requestable, no current evidence can
+start the authoritative 24-hour clock, and Mainnet remains `HOLD` in every
+assessment output.
+
+The next mandatory-CI work is local and nonpublic: resolve the exact immutable
+image/Git observer without substitution; directly measure the pinned
+toolchain/sysroots and source checkpoint; obtain fresh exact authority for any
+bounded compile/helper operation; generate externally observed A/B build
+receipts; then independently admit compile provenance before any hostile
+fixture or runtime attempt. Only external same-object runtime receipts for both
+platforms could change B27. None of those future steps is authorized by this
+document, and none may be treated as Devnet or Mainnet authority.

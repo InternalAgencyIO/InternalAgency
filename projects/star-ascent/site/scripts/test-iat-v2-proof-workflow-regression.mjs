@@ -2,13 +2,16 @@
 
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { TextDecoder } from "node:util";
 
 const workflowPath = resolve(
   process.cwd(),
   "../../..",
   ".github/workflows/iat-v2-proof.yml",
 );
-const workflow = readFileSync(workflowPath, "utf8").replaceAll("\r\n", "\n");
+const workflowBytes = readFileSync(workflowPath);
+const workflow = decodeExactWorkflowBytes(workflowBytes);
+if (workflow === null) throw new Error("WORKFLOW_RAW_BYTES_INVALID");
 const sbfProofScriptPath = resolve(process.cwd(), "scripts/verify-iat-v2-sbf.sh");
 const sbfProofScript = readFileSync(sbfProofScriptPath, "utf8").replaceAll("\r\n", "\n");
 const currentB3LawEvidence = JSON.parse(readFileSync(
@@ -76,10 +79,104 @@ const exactSignoffCommand =
 const exactArchitectureWorkCommand =
   "node scripts/test-iat-architecture-source-lineage-regression.mjs && node scripts/validate-iat-v2-architecture-work.mjs";
 const requiredActionPins = new Map([
-  ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 3],
-  ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 2],
+  ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 5],
+  ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 4],
   ["actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02", 1],
 ]);
+const EXACT_TOP_LEVEL_WORKFLOW_LINES = Object.freeze([
+  "name: IAT V2 release proof",
+  "on:",
+  "permissions:",
+  "concurrency:",
+  "jobs:",
+]);
+const exactSiteWorkingDirectory = "projects/star-ascent/site";
+const exactSiteJobRunDefaults = [
+  "    defaults:",
+  "      run:",
+  `        working-directory: ${exactSiteWorkingDirectory}`,
+].join("\n");
+const exactNonWindowsJobDefaultAnchors = [
+  [
+    "  web-and-policy:",
+    "    name: Web, policy, and launch gates",
+    "    runs-on: ubuntu-latest",
+    "    timeout-minutes: 45",
+    exactSiteJobRunDefaults,
+    "    steps:",
+  ].join("\n"),
+  [
+    "  rust-host:",
+    "    name: Rust host tests",
+    "    runs-on: ubuntu-latest",
+    "    timeout-minutes: 30",
+    exactSiteJobRunDefaults,
+    "    steps:",
+  ].join("\n"),
+  [
+    "  verifiable-sbf:",
+    "    name: Verifiable Solana SBF build",
+    "    runs-on: ubuntu-latest",
+    "    timeout-minutes: 90",
+    exactSiteJobRunDefaults,
+    "    env:",
+  ].join("\n"),
+];
+const exactNativeWindowsJob = [
+  "  native-containment-windows:",
+  "    name: HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)",
+  "    runs-on: windows-2025",
+  "    timeout-minutes: 15",
+  "    steps:",
+  "      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0",
+  "        with:",
+  "          fetch-depth: 0",
+  "      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0",
+  "        with:",
+  "          node-version: 24",
+  "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
+  "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
+  `        working-directory: ${exactSiteWorkingDirectory}`,
+  "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
+  "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+  `        working-directory: ${exactSiteWorkingDirectory}`,
+  "",
+].join("\n");
+const exactPhaseBStructurePackageCommand =
+  "node --test tests/iat-b3-mandatory-ci-phase-b-authority-state.test.mjs tests/iat-b3-mandatory-ci-phase-b-prerequisite.test.mjs";
+const exactPhaseBHostedSmokePackageCommand =
+  "node --test tests/iat-b3-mandatory-ci-gates.test.mjs";
+const exactPhaseBStructureWorkflowCommand =
+  "npm --prefix projects/star-ascent/site run check:iat-b3-mandatory-ci-phase-b-structure";
+const exactPhaseBHostedSmokeWorkflowCommand =
+  "npm --prefix projects/star-ascent/site run check:iat-b3-mandatory-ci-phase-b-hosted-smoke";
+const exactPhaseBHostedSmokeJob = [
+  "  phase-b-hosted-smoke:",
+  "    name: PHASE_B_HOSTED_SMOKE_ONLY_ALL_FALSE_HOLD (non-evidence)",
+  "    # Ordering only: no output or receipt from hosted Phase-A is consumed.",
+  "    needs: native-containment-windows",
+  "    runs-on: ubuntu-latest",
+  "    timeout-minutes: 15",
+  "    steps:",
+  "      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0",
+  "        with:",
+  "          fetch-depth: 1",
+  "          persist-credentials: false",
+  "      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0",
+  "        with:",
+  "          node-version: 24",
+  "      # Source-only Phase-B smoke: no cache/artifact download, helper/runtime",
+  "      # execution, hosted-to-local provenance promotion, or release claim is admitted.",
+  "      - name: Validate Phase-B source contracts (hosted smoke only; all-false HOLD; non-evidence)",
+  `        run: ${exactPhaseBStructureWorkflowCommand}`,
+  "        shell: bash",
+  "        timeout-minutes: 5",
+  "      - name: Confirm Phase-B canonical all-false HOLD (hosted smoke only; non-evidence)",
+  `        run: ${exactPhaseBHostedSmokeWorkflowCommand}`,
+  "        shell: bash",
+  "        timeout-minutes: 5",
+  "",
+].join("\n");
 const agaveInstallerUrl =
   "https://release.anza.xyz/v3.1.10/agave-install-init-x86_64-unknown-linux-gnu";
 const agaveInstallerSha256 = "ffb25b5f2c9649a13b566b26e48d441a1eaf6d3c50d2198a70e19a5e1dfae96b";
@@ -103,9 +200,34 @@ const requiredSbfArtifactPaths = [
   "projects/star-ascent/site/target/iat-v2-sbf-build.log",
 ];
 
-function validateConfiguration(workflowText, scripts) {
+function topLevelWorkflowGrammarIsExact(workflowText) {
+  const observed = workflowText
+    .split("\n")
+    .filter((line) => line.length > 0 && line.charCodeAt(0) !== 0x20);
+  return observed.length === EXACT_TOP_LEVEL_WORKFLOW_LINES.length
+    && observed.every((line, index) => line === EXACT_TOP_LEVEL_WORKFLOW_LINES[index]);
+}
+
+function decodeExactWorkflowBytes(bytes) {
+  if (!Buffer.isBuffer(bytes) || bytes.length === 0 || bytes.at(-1) !== 0x0a) return null;
+  for (const byte of bytes) {
+    if (byte !== 0x0a && (byte < 0x20 || byte > 0x7e)) return null;
+  }
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    return null;
+  }
+}
+
+function validateConfiguration(workflowInput, scripts) {
   const failures = [];
   const fail = (message) => failures.push(message);
+  const workflowText = decodeExactWorkflowBytes(workflowInput);
+  if (workflowText === null) {
+    fail("workflow raw bytes must be final-LF ASCII with no control or non-ASCII bytes");
+    return failures;
+  }
   const commandLines = workflowText
     .split("\n")
     .map((line) => line.match(/^\s*- run:\s+(.+?)\s*$/)?.[1] ?? null)
@@ -115,6 +237,71 @@ function validateConfiguration(workflowText, scripts) {
     .map((line) => line.match(/^\s*- uses:\s+([^\s#]+)(?:\s+#.*)?$/)?.[1] ?? null)
     .filter(Boolean);
   const orderedPositions = requiredOrderedCommands.map((command) => commandLines.indexOf(command));
+  const nativePreflightCommand = "node scripts/build-iat-b3-mandatory-ci-containment.mjs";
+  const nativeStructuralCommand =
+    "node --test tests/iat-b3-mandatory-ci-containment.test.mjs";
+  const exactRunCount = (command) => (
+    workflowText.match(new RegExp(`^\\s+run: ${command.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&")}$`, "gmu"))
+      ?? []
+  ).length;
+  if (exactRunCount(nativePreflightCommand) !== 2
+    || exactRunCount(nativeStructuralCommand) !== 2) {
+    fail("Linux and Windows jobs must each run the exact Phase-A structural test and preflight");
+  }
+  const nativeWindowsStart = workflowText.indexOf("  native-containment-windows:\n");
+  const nativeWindowsEnd = workflowText.indexOf("\n  rust-host:\n", nativeWindowsStart);
+  const nativeWindowsJob = nativeWindowsStart >= 0 && nativeWindowsEnd > nativeWindowsStart
+    ? workflowText.slice(nativeWindowsStart, nativeWindowsEnd)
+    : "";
+  const nativeWindowsJobCount = (
+    workflowText.match(/^  native-containment-windows:$/gmu) ?? []
+  ).length;
+  const topLevelDefaultsCount = (
+    workflowText.match(/^(?:defaults|["']defaults["'])\s*:/gmu) ?? []
+  ).length;
+  const jobDefaultsCount = (workflowText.match(/^    defaults\s*:/gmu) ?? []).length;
+  const exactSiteJobDefaultsCount = workflowText.split(exactSiteJobRunDefaults).length - 1;
+  const workingDirectoryLines = workflowText
+    .split("\n")
+    .filter((line) => /^\s+working-directory\s*:/u.test(line));
+  if (!topLevelWorkflowGrammarIsExact(workflowText)
+    || nativeWindowsJobCount !== 1
+    || nativeWindowsJob !== exactNativeWindowsJob
+    || topLevelDefaultsCount !== 0
+    || jobDefaultsCount !== 3
+    || exactSiteJobDefaultsCount !== 3
+    || exactNonWindowsJobDefaultAnchors.some((anchor) => !workflowText.includes(anchor))
+    || workingDirectoryLines.length !== 5
+    || workingDirectoryLines.some(
+      (line) => line !== `        working-directory: ${exactSiteWorkingDirectory}`,
+    )) {
+    fail("workflow cwd policy and Windows hosted smoke job must match the exact non-evidence blocks");
+  }
+  const nativeWebPreflight = workflowText.indexOf(`        run: ${nativePreflightCommand}\n`);
+  const nativeWebStructural = workflowText.indexOf(`        run: ${nativeStructuralCommand}\n`);
+  const npmCiPosition = workflowText.indexOf("      - run: npm ci\n");
+  if (!(npmCiPosition >= 0 && nativeWebStructural > npmCiPosition
+    && nativeWebPreflight > nativeWebStructural)) {
+    fail("Linux structural validation must precede the expected HOLD preflight");
+  }
+  const phaseBJobStart = workflowText.indexOf("  phase-b-hosted-smoke:\n");
+  const phaseBJobEnd = workflowText.indexOf("\n  verifiable-sbf:\n", phaseBJobStart);
+  const observedPhaseBJob = phaseBJobStart >= 0 && phaseBJobEnd > phaseBJobStart
+    ? workflowText.slice(phaseBJobStart, phaseBJobEnd)
+    : "";
+  if (observedPhaseBJob !== exactPhaseBHostedSmokeJob
+    || (workflowText.match(/^  phase-b-hosted-smoke:$/gmu) ?? []).length !== 1
+    || exactRunCount(exactPhaseBStructureWorkflowCommand) !== 1
+    || exactRunCount(exactPhaseBHostedSmokeWorkflowCommand) !== 1) {
+    fail(
+      "Phase-B hosted smoke must be the exact isolated source-only all-false HOLD job after K89 structural checks",
+    );
+  }
+  if (/(?:setup-zig|ziglang|apt-get\s+install\s+zig|curl[^\n]*zig|npm\s+install[^\n]*zig)/iu.test(
+    `${nativeWindowsJob}\n${workflowText.slice(npmCiPosition, nativeWebPreflight)}`,
+  )) {
+    fail("native containment workflow must not download or install a compiler");
+  }
 
   const combinedBuildStart = workflowText.indexOf(
     "      - name: Build the B3 native law adapter without deploying it\n",
@@ -208,8 +395,8 @@ function validateConfiguration(workflowText, scripts) {
   if (!/node-version:\s+24(?:\.x)?\s*$/m.test(workflowText)) {
     fail("release-proof workflow must retain the reviewed Node 24 runtime");
   }
-  if ((workflowText.match(/fetch-depth:\s+0\s*$/gm) ?? []).length !== 2) {
-    fail("web audit and verifiable SBF jobs must both retain full source history");
+  if ((workflowText.match(/fetch-depth:\s+0\s*$/gm) ?? []).length !== 3) {
+    fail("web audit, native Windows, and verifiable SBF jobs must retain full source history");
   }
   if (
     !workflowText.includes("IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}")
@@ -289,6 +476,20 @@ function validateConfiguration(workflowText, scripts) {
   if (scripts["check:iat-v2-proof-workflow"] !== "node scripts/test-iat-v2-proof-workflow-regression.mjs") {
     fail("workflow regression package script must remain bound to the canonical validator");
   }
+  if (scripts["preflight:iat-b3-mandatory-ci-containment"] !== nativePreflightCommand
+    || scripts["build:iat-b3-mandatory-ci-containment"] !== `${nativePreflightCommand} --execute`
+    || scripts["check:iat-b3-mandatory-ci-containment"] !==
+      "node --test tests/iat-b3-mandatory-ci-containment.test.mjs") {
+    fail("native containment package scripts must retain exact preflight/build/check bindings");
+  }
+  if (scripts["check:iat-b3-mandatory-ci-phase-b-structure"] !==
+      exactPhaseBStructurePackageCommand
+    || scripts["check:iat-b3-mandatory-ci-phase-b-hosted-smoke"] !==
+      exactPhaseBHostedSmokePackageCommand) {
+    fail(
+      "Phase-B hosted smoke package scripts must remain exact source-only structural/all-false tests",
+    );
+  }
   if (scripts["check:iat-v2-ci-sbf-evidence"] !== "node scripts/test-iat-v2-ci-sbf-evidence-regression.mjs") {
     fail("SBF evidence regression package script must remain bound to the canonical validator");
   }
@@ -319,6 +520,8 @@ function validateConfiguration(workflowText, scripts) {
 
   for (const scriptName of [
     "check:iat-v2-proof-workflow",
+    "check:iat-b3-mandatory-ci-phase-b-structure",
+    "check:iat-b3-mandatory-ci-phase-b-hosted-smoke",
     "check:iat-v2",
     "check:launch-gates",
     "check:iat-v2-signoff",
@@ -553,7 +756,7 @@ function validateCombinedLawStakeRunner(runnerText) {
 }
 
 const failures = [
-  ...validateConfiguration(workflow, packageJson.scripts ?? {}),
+  ...validateConfiguration(workflowBytes, packageJson.scripts ?? {}),
   ...validateSbfProofScript(sbfProofScript),
   ...validateCombinedLawStakeRunner(combinedLawStakeRunner),
   ...validateB3LawArtifactBindings({
@@ -563,7 +766,362 @@ const failures = [
     evidence: currentB3LawEvidence,
   }),
 ];
+const nativeWindowsMutationProbes = [
+  ["Windows hosted job conditional", exactNativeWindowsJob.replace(
+    "    runs-on: windows-2025\n",
+    "    if: false\n    runs-on: windows-2025\n",
+  )],
+  ["Windows structural step conditional", exactNativeWindowsJob.replace(
+    "      - name: Validate native containment structure (hosted smoke only; non-evidence)\n",
+    "      - name: Validate native containment structure (hosted smoke only; non-evidence)\n        if: false\n",
+  )],
+  ["Windows preflight step conditional", exactNativeWindowsJob.replace(
+    "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)\n",
+    "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)\n        if: false\n",
+  )],
+  ["Windows injected shell", exactNativeWindowsJob.replace(
+    "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs\n",
+    "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs\n        shell: cmd\n",
+  )],
+  ["Windows injected step environment", exactNativeWindowsJob.replace(
+    "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs\n",
+    "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs\n        env:\n          NODE_OPTIONS: --require attacker\n",
+  )],
+  ["Windows injected job environment", exactNativeWindowsJob.replace(
+    "    steps:\n",
+    "    env:\n      IAT_B3_OVERRIDE: attacker\n    steps:\n",
+  )],
+  ["Windows injected job defaults", exactNativeWindowsJob.replace(
+    "    steps:\n",
+    "    defaults:\n      run:\n        shell: cmd\n    steps:\n",
+  )],
+  ["Windows injected job working-directory defaults", exactNativeWindowsJob.replace(
+    "    steps:\n",
+    `    defaults:\n      run:\n        working-directory: ${exactSiteWorkingDirectory}\n    steps:\n`,
+  )],
+  ["Windows missing structural working directory", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    "",
+  )],
+  ["Windows wrong structural working directory", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    "        working-directory: projects/star-ascent/other\n",
+  )],
+  ["Windows duplicate structural working directory", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    `        working-directory: ${exactSiteWorkingDirectory}\n        working-directory: ${exactSiteWorkingDirectory}\n`,
+  )],
+  ["Windows case-drifted structural working directory", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    "        working-directory: Projects/star-ascent/site\n",
+  )],
+  ["Windows backslash structural working directory", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    "        working-directory: projects\\star-ascent\\site\n",
+  )],
+  ["Windows dot structural working directory", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    "        working-directory: .\n",
+  )],
+  ["Windows expression structural working directory", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    "        working-directory: ${{ github.workspace }}/projects/star-ascent/site\n",
+  )],
+  ["Windows step working-directory override", exactNativeWindowsJob.replace(
+    `        working-directory: ${exactSiteWorkingDirectory}\n`,
+    `        working-directory: ${exactSiteWorkingDirectory}\n        working-directory: .\n`,
+  )],
+  ["Windows reordered structural and preflight steps", exactNativeWindowsJob.replace(
+    [
+      "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
+      "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
+      `        working-directory: ${exactSiteWorkingDirectory}`,
+      "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
+      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+      `        working-directory: ${exactSiteWorkingDirectory}`,
+    ].join("\n"),
+    [
+      "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
+      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+      `        working-directory: ${exactSiteWorkingDirectory}`,
+      "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
+      "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
+      `        working-directory: ${exactSiteWorkingDirectory}`,
+    ].join("\n"),
+  )],
+  ["Windows folded preflight command", exactNativeWindowsJob.replace(
+    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+    "        run: |\n          node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+  )],
+  ["Windows chained preflight bypass", exactNativeWindowsJob.replace(
+    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs || exit 0",
+  )],
+  ["Windows preflight continue-on-error", `${exactNativeWindowsJob}\n        continue-on-error: true`],
+  ["Windows extra trailing step", `${exactNativeWindowsJob}\n      - run: node -e \"process.exit(0)\"`],
+  ["Windows action working directory", exactNativeWindowsJob.replace(
+    "          fetch-depth: 0\n",
+    "          fetch-depth: 0\n        working-directory: projects/star-ascent/site\n",
+  )],
+  ["Windows checkout path", exactNativeWindowsJob.replace(
+    "          fetch-depth: 0\n",
+    "          fetch-depth: 0\n          path: projects/star-ascent/site\n",
+  )],
+  ["Windows renamed structural step", exactNativeWindowsJob.replace(
+    "Validate native containment structure (hosted smoke only; non-evidence)",
+    "Validate native containment release evidence",
+  )],
+].map(([name, mutatedJob]) => ({
+  name,
+  workflow: workflow.replace(exactNativeWindowsJob, mutatedJob),
+  scripts: packageJson.scripts,
+}));
+
+nativeWindowsMutationProbes.push(
+  {
+    name: "duplicate Windows hosted job",
+    workflow: workflow.replace("\n  rust-host:\n", `\n${exactNativeWindowsJob}\n\n  rust-host:\n`),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\nenv:\n  NODE_OPTIONS: --require attacker\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "inline workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\nenv: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "single-quoted workflow-level environment block injection",
+    workflow: workflow.replace("\npermissions:\n", "\n'env':\n  NODE_OPTIONS: --require attacker\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "single-quoted inline workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\n'env': { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "double-quoted workflow-level environment block injection",
+    workflow: workflow.replace("\npermissions:\n", "\n\"env\":\n  NODE_OPTIONS: --require attacker\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "double-quoted inline workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\n\"env\": { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "explicit mapping workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\n? env\n: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "quoted explicit mapping workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\n? \"env\"\n: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "Unicode-escaped workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\n\"\\u0065nv\": { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "tagged workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\n!!str env: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "anchored workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\nenv: &hostile { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "aliased workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\nx-env: &hostile { NODE_OPTIONS: attacker }\nenv: *hostile\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "merged workflow-level environment injection",
+    workflow: workflow.replace("\npermissions:\n", "\nx-template: &hostile { env: { NODE_OPTIONS: attacker } }\n<<: *hostile\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "unknown column-zero workflow key injection",
+    workflow: workflow.replace("\npermissions:\n", "\nunexpected: true\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "top-level defaults block injection",
+    workflow: workflow.replace(
+      "\njobs:\n",
+      `\ndefaults:\n  run:\n    working-directory: ${exactSiteWorkingDirectory}\n\njobs:\n`,
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "top-level inline defaults injection",
+    workflow: workflow.replace(
+      "\njobs:\n",
+      `\ndefaults: { run: { working-directory: ${exactSiteWorkingDirectory} } }\n\njobs:\n`,
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "duplicate top-level defaults injection",
+    workflow: workflow.replace(
+      "\njobs:\n",
+      `\ndefaults:\n  run:\n    working-directory: ${exactSiteWorkingDirectory}\ndefaults: { run: { shell: cmd } }\n\njobs:\n`,
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "missing web job cwd defaults",
+    workflow: workflow.replace(
+      exactNonWindowsJobDefaultAnchors[0],
+      exactNonWindowsJobDefaultAnchors[0].replace(`${exactSiteJobRunDefaults}\n`, ""),
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "wrong rust job cwd defaults",
+    workflow: workflow.replace(
+      exactNonWindowsJobDefaultAnchors[1],
+      exactNonWindowsJobDefaultAnchors[1].replace(
+        exactSiteWorkingDirectory,
+        "projects/star-ascent/other",
+      ),
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "non-Windows run-step cwd override",
+    workflow: workflow.replace(
+      "      - run: npm ci\n",
+      "      - run: npm ci\n        working-directory: .\n",
+    ),
+    scripts: packageJson.scripts,
+  },
+);
+
+const phaseBWorkflowMutationProbes = [
+  [
+    "missing Phase-B structural command",
+    exactPhaseBHostedSmokeJob.replace(
+      `        run: ${exactPhaseBStructureWorkflowCommand}\n`,
+      "",
+    ),
+  ],
+  [
+    "reordered Phase-B structural and all-false commands",
+    exactPhaseBHostedSmokeJob
+      .replace(
+        exactPhaseBStructureWorkflowCommand,
+        "BP09_COMMAND_SWAP",
+      )
+      .replace(
+        exactPhaseBHostedSmokeWorkflowCommand,
+        exactPhaseBStructureWorkflowCommand,
+      )
+      .replace("BP09_COMMAND_SWAP", exactPhaseBHostedSmokeWorkflowCommand),
+  ],
+  [
+    "Phase-B shell drift",
+    exactPhaseBHostedSmokeJob.replace("        shell: bash\n", "        shell: sh\n"),
+  ],
+  [
+    "Phase-B timeout drift",
+    exactPhaseBHostedSmokeJob.replace("        timeout-minutes: 5\n", "        timeout-minutes: 6\n"),
+  ],
+  [
+    "Phase-B working-directory override",
+    exactPhaseBHostedSmokeJob.replace(
+      "        shell: bash\n",
+      "        working-directory: .\n        shell: bash\n",
+    ),
+  ],
+  [
+    "Phase-B environment injection",
+    exactPhaseBHostedSmokeJob.replace(
+      "        shell: bash\n",
+      "        env:\n          NODE_OPTIONS: --require attacker\n        shell: bash\n",
+    ),
+  ],
+  [
+    "Phase-B fail-open continuation",
+    exactPhaseBHostedSmokeJob.replace(
+      "        timeout-minutes: 5\n",
+      "        timeout-minutes: 5\n        continue-on-error: true\n",
+    ),
+  ],
+  [
+    "Phase-B helper execution promotion",
+    exactPhaseBHostedSmokeJob.replace(
+      exactPhaseBHostedSmokeWorkflowCommand,
+      "node scripts/build-iat-b3-mandatory-ci-containment.mjs --execute",
+    ),
+  ],
+  [
+    "Phase-B hosted provenance output promotion",
+    exactPhaseBHostedSmokeJob.replace(
+      "        timeout-minutes: 5\n",
+      "        timeout-minutes: 5\n        id: publish-runtime-evidence\n",
+    ),
+  ],
+  [
+    "Phase-B cache or artifact download step",
+    `${exactPhaseBHostedSmokeJob}      - uses: actions/download-artifact@0000000000000000000000000000000000000000\n`,
+  ],
+  [
+    "Phase-B release-claim label",
+    exactPhaseBHostedSmokeJob.replace(
+      "Confirm Phase-B canonical all-false HOLD (hosted smoke only; non-evidence)",
+      "Publish Phase-B release evidence",
+    ),
+  ],
+  [
+    "Phase-B local provenance dependency removed",
+    exactPhaseBHostedSmokeJob.replace("    needs: native-containment-windows\n", ""),
+  ],
+  [
+    "Phase-B checkout credential persistence",
+    exactPhaseBHostedSmokeJob.replace("          persist-credentials: false\n", ""),
+  ],
+  [
+    "Phase-B setup-node cache injection",
+    exactPhaseBHostedSmokeJob.replace(
+      "          node-version: 24\n",
+      "          node-version: 24\n          cache: npm\n",
+    ),
+  ],
+].map(([name, mutatedBlock]) => ({
+  name,
+  workflow: workflow.replace(exactPhaseBHostedSmokeJob, mutatedBlock),
+  scripts: packageJson.scripts,
+}));
+
 const mutationProbes = [
+  ...nativeWindowsMutationProbes,
+  ...phaseBWorkflowMutationProbes,
+  {
+    name: "diluted Phase-B structure package script",
+    workflow,
+    scripts: {
+      ...packageJson.scripts,
+      "check:iat-b3-mandatory-ci-phase-b-structure": "node -e \"process.exit(0)\"",
+    },
+  },
+  {
+    name: "runtime-promoted Phase-B hosted smoke package script",
+    workflow,
+    scripts: {
+      ...packageJson.scripts,
+      "check:iat-b3-mandatory-ci-phase-b-hosted-smoke":
+        "node scripts/run-iat-b3-mandatory-ci-gate.mjs native-process-containment",
+    },
+  },
   {
     name: "missing workflow signoff step",
     workflow: workflow.replace("      - run: npm run check:iat-v2-signoff\n", ""),
@@ -708,8 +1266,58 @@ const mutationProbes = [
 ];
 
 for (const probe of mutationProbes) {
-  if (validateConfiguration(probe.workflow, probe.scripts).length === 0) {
+  if (validateConfiguration(Buffer.from(probe.workflow, "utf8"), probe.scripts).length === 0) {
     failures.push(`mutation probe did not fail closed: ${probe.name}`);
+  }
+}
+
+const rawWorkflowMutationProbes = [
+  {
+    name: "CRLF workflow bytes",
+    bytes: Buffer.from(workflow.replaceAll("\n", "\r\n"), "ascii"),
+  },
+  {
+    name: "lone CR workflow byte",
+    bytes: Buffer.from(workflow.replace("\n", "\r"), "ascii"),
+  },
+  {
+    name: "tab indentation workflow byte",
+    bytes: Buffer.from(workflow.replace("  push:", "\tpush:"), "ascii"),
+  },
+  {
+    name: "NUL workflow byte",
+    bytes: Buffer.concat([Buffer.from([0x00]), workflowBytes]),
+  },
+  {
+    name: "UTF-8 BOM workflow bytes",
+    bytes: Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), workflowBytes]),
+  },
+  {
+    name: "missing final LF workflow bytes",
+    bytes: workflowBytes.subarray(0, -1),
+  },
+  ...[
+    ["NBSP", "\u00a0"],
+    ["OGHAM SPACE MARK", "\u1680"],
+    ["EN QUAD", "\u2000"],
+    ["EM SPACE", "\u2003"],
+    ["LINE SEPARATOR", "\u2028"],
+    ["PARAGRAPH SEPARATOR", "\u2029"],
+    ["NARROW NO-BREAK SPACE", "\u202f"],
+    ["MEDIUM MATHEMATICAL SPACE", "\u205f"],
+    ["IDEOGRAPHIC SPACE", "\u3000"],
+    ["ZERO WIDTH NO-BREAK SPACE", "\ufeff"],
+  ].map(([name, prefix]) => ({
+    name: `${name}-prefixed column-zero workflow line`,
+    bytes: Buffer.from(`${prefix}env: { NODE_OPTIONS: attacker }\n${workflow}`, "utf8"),
+  })),
+];
+
+for (const probe of rawWorkflowMutationProbes) {
+  if (probe.bytes.equals(workflowBytes)) {
+    failures.push(`raw mutation probe did not alter bytes: ${probe.name}`);
+  } else if (validateConfiguration(probe.bytes, packageJson.scripts ?? {}).length === 0) {
+    failures.push(`raw mutation probe did not fail closed: ${probe.name}`);
   }
 }
 
@@ -904,5 +1512,5 @@ if (failures.length) {
 }
 
 console.log(
-  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, 6 immutable action uses, checksum-pinned Agave, revision-pinned Anchor, iat_v2-only Anchor discovery/build, exact head/checkout/public-run/container-bound binary/IDL evidence, fixture-combined B3 workflow and canonical-evidence Devnet SBF pins, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and ${mutationProbes.length + combinedLawStakeRunnerMutationProbes.length + sbfProofMutationProbes.length + b3CandidateBindingMutationProbes.length} fail-closed mutation probes remain bound.`,
+  `IAT V2/B3 public release-proof workflow regression passed: ${requiredLaunchGateScripts.length} ordered launch gates, both signoff validators, ${[...requiredActionPins.values()].reduce((sum, count) => sum + count, 0)} immutable action uses, isolated Phase-B all-false HOLD smoke, checksum-pinned Agave, revision-pinned Anchor, iat_v2-only Anchor discovery/build, exact head/checkout/public-run/container-bound binary/IDL evidence, fixture-combined B3 workflow and canonical-evidence Devnet SBF pins, V2-to-B3 successor-lineage validation, canonical manifest validation, exact-source-head concurrency, read-only permissions, and ${mutationProbes.length + rawWorkflowMutationProbes.length + combinedLawStakeRunnerMutationProbes.length + sbfProofMutationProbes.length + b3CandidateBindingMutationProbes.length} fail-closed mutation probes remain bound.`,
 );

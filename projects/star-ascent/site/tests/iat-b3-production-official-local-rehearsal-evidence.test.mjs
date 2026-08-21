@@ -1311,7 +1311,22 @@ test("source contract binds the exact 15+6+5 map, dual receipt schemas, and 17-s
   assert.equal(contract.ordinalCases.length, 15);
   assert.equal(contract.opcode9ConditionalCases.length, 6);
   assert.deepEqual(contract.rollbackRows.map(({ activeOpcode }) => activeOpcode), [5, 6, 7, 9, 10]);
+  assert.equal(
+    contract.authorityEvidence.sha256,
+    "e1459096637d99adcb38d43a91f0950a7cd288036d3ecb35abf88cb00e0996c7",
+  );
+  assert.equal(contract.authorityEvidence.byteLength, 9_633);
   assert.equal(contract.authorityEvidence.journalStageCount, 17);
+  assert.equal(
+    contract.authorityEvidence.ceremonyStagesSha256,
+    "cbee6085861e858be61036c45cec74e90c782b537365e1c780447370a06dfb0f",
+  );
+  assert.equal(
+    contract.authorityEvidence.policySelectionMode,
+    "REPOSITORY_POLICY_SELECTION_NONCRYPTOGRAPHIC",
+  );
+  assert.equal(contract.authorityEvidence.modelTTransactionSignatureEvidenceStatus, "PENDING");
+  assert.equal(contract.authorityEvidence.finalCeremonyFloorLamports, null);
   assert.equal(contract.authorityEvidence.activationStatus, "PENDING");
   assert.equal(contract.safety.officialCompleteAccepted, false);
   assert.equal(contract.safety.mainnetStatus, "HOLD");

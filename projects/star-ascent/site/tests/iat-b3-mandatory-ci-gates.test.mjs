@@ -1,40 +1,95 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { TextDecoder } from "node:util";
 
 import {
   IAT_B3_MANDATORY_CI_EXPECTED_TEST_COUNTS,
   IAT_B3_MANDATORY_CI_GATES,
+  IAT_B3_MANDATORY_CI_ORDERED_CASE_NAMES_SHA256,
+  IAT_B3_MANDATORY_CI_PHASE_B_INTERFACE_SCHEMA,
+  IAT_B3_MANDATORY_CI_PHASE_B_INTERFACE_SOURCES,
+  IAT_B3_MANDATORY_CI_TEST_SOURCE_SHA256,
+  createIatB3MandatoryCiHoldDiagnostic,
+  evaluateIatB3MandatoryCiContainmentOracle,
+  iatB3MandatoryCiOrderedCaseNamesSha256,
   parseIatB3MandatoryCiGateArguments,
-  runIatB3MandatoryCiGate,
+  runIatB3MandatoryCiGateCanonical,
+  runIatB3MandatoryCiGateInjected,
+  sanitizeIatB3MandatoryCiEnvironment,
   validateIatB3MandatoryCiTap,
+  validateIatB3MandatoryCiPhaseBInterfaceSources,
 } from "../scripts/run-iat-b3-mandatory-ci-gate.mjs";
 
 const SITE_ROOT = resolve(fileURLToPath(new URL("../", import.meta.url)));
-const WORKFLOW_PATH = resolve(SITE_ROOT, "../../..", ".github/workflows/iat-v2-proof.yml");
+const REPOSITORY_ROOT = resolve(SITE_ROOT, "../../..");
+const WORKFLOW_PATH = resolve(REPOSITORY_ROOT, ".github/workflows/iat-v2-proof.yml");
 const RUNNER_PATH = resolve(SITE_ROOT, "scripts/run-iat-b3-mandatory-ci-gate.mjs");
-
-const REQUIRED_STEPS = Object.freeze([
-  ["Enforce the mandatory B3 CI gate manifest", "ci-manifest"],
-  ["Validate the Economy reproducible-build contract without building", "economy-reproducible-build"],
-  ["Prove the native WSL build path remains hard-disabled", "native-wsl-hard-disable"],
-  ["Validate the exact local-rehearsal readiness contract without execution", "local-rehearsal-readiness"],
-  ["Validate all 15 source-bound production transaction builders", "production-transaction-builders"],
-  ["Validate the production loopback driver and nonauthorizing plan", "production-local-rehearsal"],
-  ["Validate the official local-rehearsal evidence contract without execution", "production-official-local-rehearsal"],
-  ["Validate legacy HOLD and non-circular pre/post Devnet gates without execution", "all-feature-devnet-readiness"],
+const EXACT_TOP_LEVEL_WORKFLOW_LINES = Object.freeze([
+  "name: IAT V2 release proof",
+  "on:",
+  "permissions:",
+  "concurrency:",
+  "jobs:",
 ]);
-const RUST_ALL_FEATURE_ENVIRONMENT = Object.freeze([
-  ["IAT_B3_PRODUCTION_LAW_PROGRAM_ID", "D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY"],
-  ["IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID", "GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU"],
-  ["IAT_B3_PRODUCTION_CANONICAL_MINT", "3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3"],
-  ["IAT_B3_PRODUCTION_MAINNET_GENESIS_HASH", "4zEL9HZwTFoanu5RbmGspF5a6uqVGP99xkJxToZoq3Pw"],
-]);
-const RUST_ALL_FEATURE_COMMAND = "cargo test --workspace --all-targets --all-features --locked";
+const EXACT_SITE_WORKING_DIRECTORY = "projects/star-ascent/site";
+const EXACT_SITE_JOB_RUN_DEFAULTS = [
+  "    defaults:",
+  "      run:",
+  `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+].join("\n");
+const EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS = [
+  [
+    "  web-and-policy:",
+    "    name: Web, policy, and launch gates",
+    "    runs-on: ubuntu-latest",
+    "    timeout-minutes: 45",
+    EXACT_SITE_JOB_RUN_DEFAULTS,
+    "    steps:",
+  ].join("\n"),
+  [
+    "  rust-host:",
+    "    name: Rust host tests",
+    "    runs-on: ubuntu-latest",
+    "    timeout-minutes: 30",
+    EXACT_SITE_JOB_RUN_DEFAULTS,
+    "    steps:",
+  ].join("\n"),
+  [
+    "  verifiable-sbf:",
+    "    name: Verifiable Solana SBF build",
+    "    runs-on: ubuntu-latest",
+    "    timeout-minutes: 90",
+    EXACT_SITE_JOB_RUN_DEFAULTS,
+    "    env:",
+  ].join("\n"),
+];
+const EXACT_NATIVE_WINDOWS_JOB = [
+  "  native-containment-windows:",
+  "    name: HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)",
+  "    runs-on: windows-2025",
+  "    timeout-minutes: 15",
+  "    steps:",
+  "      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0",
+  "        with:",
+  "          fetch-depth: 0",
+  "      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0",
+  "        with:",
+  "          node-version: 24",
+  "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
+  "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
+  `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+  "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
+  "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+  `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+  "",
+].join("\n");
 
 const EXACT_GATE_FILES = Object.freeze({
+  "native-process-containment": ["tests/iat-b3-mandatory-ci-containment.test.mjs"],
   "ci-manifest": ["tests/iat-b3-mandatory-ci-gates.test.mjs"],
   "economy-reproducible-build": ["tests/iat-b3-economy-reproducible-build.test.mjs"],
   "native-wsl-hard-disable": ["tests/iat-b3-native-wsl-hard-disable-ci.test.mjs"],
@@ -45,16 +100,16 @@ const EXACT_GATE_FILES = Object.freeze({
     "tests/iat-b3-production-local-rehearsal-driver.test.mjs",
     "tests/iat-b3-production-local-rehearsal-plan.test.mjs",
   ],
-  "production-official-local-rehearsal": [
-    "tests/iat-b3-production-official-local-rehearsal-evidence.test.mjs",
-  ],
+  "production-official-local-rehearsal": ["tests/iat-b3-production-official-local-rehearsal-evidence.test.mjs"],
   "all-feature-devnet-readiness": [
     "tests/iat-b3-all-feature-devnet-readiness.test.mjs",
     "tests/iat-b3-devnet-gate-split.test.mjs",
   ],
 });
-const EXACT_TEST_COUNTS = Object.freeze({
-  "ci-manifest": 6,
+
+const EXACT_COUNTS = Object.freeze({
+  "native-process-containment": 30,
+  "ci-manifest": 14,
   "economy-reproducible-build": 9,
   "native-wsl-hard-disable": 2,
   "local-rehearsal-readiness": 9,
@@ -64,328 +119,475 @@ const EXACT_TEST_COUNTS = Object.freeze({
   "all-feature-devnet-readiness": 25,
 });
 
-function workflowFailures(workflow) {
-  const failures = [];
-  const normalized = workflow.replaceAll("\r\n", "\n");
-  const npmCi = normalized.indexOf("      - run: npm ci\n");
-  const playwright = normalized.indexOf("      - run: npx playwright install --with-deps chromium firefox webkit\n");
-  let previous = npmCi;
-  if (npmCi < 0 || playwright < 0 || npmCi >= playwright) {
-    failures.push("mandatory gates must be between npm ci and Playwright installation");
-  }
-  for (const [name, gate] of REQUIRED_STEPS) {
-    const exact = `      - name: ${name}\n        run: node scripts/run-iat-b3-mandatory-ci-gate.mjs ${gate}\n`;
-    const position = normalized.indexOf(exact);
-    if (position < 0) failures.push(`missing exact mandatory step ${gate}`);
-    if (position <= previous || position >= playwright) failures.push(`mandatory step order drifted for ${gate}`);
-    previous = position;
-    const command = `node scripts/run-iat-b3-mandatory-ci-gate.mjs ${gate}`;
-    if (normalized.split(command).length !== 2) failures.push(`mandatory command count drifted for ${gate}`);
-  }
-  const mandatoryRegion = normalized.slice(npmCi, playwright);
-  if (/\n\s+(?:if|continue-on-error):/u.test(mandatoryRegion)
-    || /--test-name-pattern|--test-only|--test-skip-pattern|\|\|\s*true|;\s*exit\s+0/u.test(mandatoryRegion)) {
-    failures.push("mandatory gate region contains a conditional, skip selector, or fail-open fragment");
-  }
-  const webJobStart = normalized.indexOf("  web-and-policy:\n");
-  const nextJobStart = normalized.indexOf("\n  rust-host:\n", webJobStart + 1);
-  const webJob = webJobStart < 0
-    ? ""
-    : normalized.slice(webJobStart, nextJobStart < 0 ? normalized.length : nextJobStart);
-  const workflowPreamble = webJobStart < 0 ? normalized : normalized.slice(0, webJobStart);
-  const exactDefaultRun = "defaults:\n  run:\n    working-directory: projects/star-ascent/site\n\n";
-  if ((normalized.match(/^defaults:$/gmu) ?? []).length !== 1
-    || !workflowPreamble.includes(exactDefaultRun)
-    || /^(?: {0}| {2}| {4})(?:env|shell|if):/gmu.test(workflowPreamble)
-    || /^ {2}working-directory:/gmu.test(workflowPreamble)) {
-    failures.push("workflow defaults or environment can alter mandatory gate execution");
-  }
-  if (webJobStart < 0
-    || /^ {4}(?:if|env|defaults):/mu.test(webJob)
-    || /^ {6}(?:env|defaults):/mu.test(webJob)) {
-    failures.push("mandatory web job is missing, conditional, or execution-overridden");
-  }
-  for (const [name, gate] of REQUIRED_STEPS) {
-    const exactBlock = `      - name: ${name}\n        run: node scripts/run-iat-b3-mandatory-ci-gate.mjs ${gate}\n`;
-    const position = webJob.indexOf(exactBlock);
-    const nextStep = position < 0 ? -1 : webJob.indexOf("      - ", position + exactBlock.length);
-    const actualBlock = position < 0
-      ? ""
-      : webJob.slice(position, nextStep < 0 ? webJob.length : nextStep);
-    if (actualBlock !== exactBlock) {
-      failures.push(`mandatory step shape drifted for ${gate}`);
-    }
-  }
-  const setupNode = normalized.lastIndexOf("      - uses: actions/setup-node@", npmCi);
-  const setupNodeBlock = setupNode >= 0 && npmCi > setupNode
-    ? normalized.slice(setupNode, npmCi)
-    : "";
-  if (!/^\s*- uses: actions\/setup-node@[0-9a-f]{40}(?:\s+#.*)?$[\s\S]*?^\s+node-version:\s+24\s*$/mu
-    .test(setupNodeBlock)) {
-    failures.push("mandatory gates are not preceded by immutable setup-node on Node 24");
-  }
-  if (/continue-on-error:\s+true/u.test(normalized)) {
-    failures.push("workflow contains continue-on-error");
-  }
-  const rustStep = normalized.indexOf("      - name: Test feature-gated runtime bridges\n");
-  const rustStepEnd = rustStep < 0 ? -1 : normalized.indexOf("\n      - ", rustStep + 1);
-  const rustBlock = rustStep < 0
-    ? ""
-    : normalized.slice(rustStep, rustStepEnd < 0 ? normalized.length : rustStepEnd);
-  const observedRustEnvironment = [...rustBlock.matchAll(
-    /^ {10}(IAT_B3_[A-Z0-9_]+): ([^\n]+)$/gmu,
-  )].map((match) => [match[1], match[2]]);
-  if (rustStep < 0
-    || !rustBlock.includes("fixtures forbidden for production, deployment, Devnet, or Mainnet")
-    || !rustBlock.includes(`        run: ${RUST_ALL_FEATURE_COMMAND}\n`)
-    || JSON.stringify(observedRustEnvironment) !== JSON.stringify(RUST_ALL_FEATURE_ENVIRONMENT)) {
-    failures.push("all-feature Rust gate lacks the exact four forbidden fixture bindings");
-  }
-  return failures;
-}
-
-function tap({ tests = 2, pass = tests, fail = 0, cancelled = 0, skipped = 0, todo = 0 } = {}) {
-  const resultLines = Array.from({ length: tests }, (_, index) => {
-    const ordinal = index + 1;
-    if (ordinal <= fail) return `not ok ${ordinal} - failed`;
-    if (ordinal <= fail + skipped) return `ok ${ordinal} - skipped # SKIP`;
-    if (ordinal <= fail + skipped + todo) return `not ok ${ordinal} - todo # TODO`;
-    return `ok ${ordinal} - passed`;
-  });
+function tap(caseNames) {
+  const count = caseNames.length;
   return [
     "TAP version 13",
-    ...resultLines,
-    `1..${tests}`,
-    `# tests ${tests}`,
+    ...caseNames.flatMap((name, index) => [
+      `# Subtest: ${name}`,
+      `ok ${index + 1} - ${name}`,
+    ]),
+    `1..${count}`,
+    `# tests ${count}`,
     "# suites 0",
-    `# pass ${pass}`,
-    `# fail ${fail}`,
-    `# cancelled ${cancelled}`,
-    `# skipped ${skipped}`,
-    `# todo ${todo}`,
-    "# duration_ms 1",
+    `# pass ${count}`,
+    "# fail 0",
+    "# cancelled 0",
+    "# skipped 0",
+    "# todo 0",
+    "# duration_ms 1.25",
     "",
   ].join("\n");
 }
 
-test("workflow runs every exact Node 24 B3 gate mandatorily and in fail-closed order", () => {
-  const workflow = readFileSync(WORKFLOW_PATH, "utf8");
-  assert.deepEqual(workflowFailures(workflow), []);
-  assert.deepEqual(Object.keys(IAT_B3_MANDATORY_CI_GATES), REQUIRED_STEPS.map(([, gate]) => gate));
+function extractLiteralTestNames(sourcePath) {
+  const source = readFileSync(resolve(SITE_ROOT, sourcePath), "utf8");
+  return [...source.matchAll(/^\s*test\("((?:[^"\\]|\\.)+)"/gmu)]
+    .map((match) => JSON.parse(`"${match[1]}"`));
+}
+
+function decodeExactWorkflowBytes(bytes) {
+  if (!Buffer.isBuffer(bytes) || bytes.length === 0 || bytes.at(-1) !== 0x0a) return null;
+  for (const byte of bytes) {
+    if (byte !== 0x0a && (byte < 0x20 || byte > 0x7e)) return null;
+  }
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    return null;
+  }
+}
+
+function topLevelWorkflowGrammarIsExact(workflowText) {
+  const observed = workflowText
+    .split("\n")
+    .filter((line) => line.length > 0 && line.charCodeAt(0) !== 0x20);
+  return observed.length === EXACT_TOP_LEVEL_WORKFLOW_LINES.length
+    && observed.every((line, index) => line === EXACT_TOP_LEVEL_WORKFLOW_LINES[index]);
+}
+
+function nativeWindowsJob(workflow) {
+  const start = workflow.indexOf("  native-containment-windows:\n");
+  const end = workflow.indexOf("\n  rust-host:\n", start);
+  return start >= 0 && end > start ? workflow.slice(start, end) : "";
+}
+
+function windowsHostedSmokeIsExact(workflowInput) {
+  const workflow = decodeExactWorkflowBytes(workflowInput);
+  if (workflow === null) return false;
+  const topLevelDefaultsCount = (
+    workflow.match(/^(?:defaults|["']defaults["'])\s*:/gmu) ?? []
+  ).length;
+  const jobDefaultsCount = (workflow.match(/^    defaults\s*:/gmu) ?? []).length;
+  const exactSiteJobDefaultsCount = workflow.split(EXACT_SITE_JOB_RUN_DEFAULTS).length - 1;
+  const workingDirectoryLines = workflow
+    .split("\n")
+    .filter((line) => /^\s+working-directory\s*:/u.test(line));
+  return topLevelWorkflowGrammarIsExact(workflow)
+    && nativeWindowsJob(workflow) === EXACT_NATIVE_WINDOWS_JOB
+    && (workflow.match(/^  native-containment-windows:$/gmu) ?? []).length === 1
+    && topLevelDefaultsCount === 0
+    && jobDefaultsCount === 3
+    && exactSiteJobDefaultsCount === 3
+    && EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS.every((anchor) => workflow.includes(anchor))
+    && workingDirectoryLines.length === 5
+    && workingDirectoryLines.every(
+      (line) => line === `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+    );
+}
+
+function passingOracle(overrides = {}) {
+  return {
+    helperIdentityValid: true,
+    helperSpawnFailed: false,
+    helperAbnormalTermination: false,
+    protocolValid: true,
+    containmentSetupProven: true,
+    workloadResumed: true,
+    workloadSpawnFailed: false,
+    startupDeadlineExpired: false,
+    executionDeadlineExpired: false,
+    outputLimitExceeded: false,
+    rootTerminalObserved: true,
+    rootExitCode: 0,
+    rootSignal: null,
+    tapValid: true,
+    stderrEmpty: true,
+    descendantLeakObserved: false,
+    zombieDescendantCount: 0,
+    absenceProofObserved: true,
+    finalizationDeadlineExpired: false,
+    forcedTeardownTimeout: false,
+    outerDeadlineExpired: false,
+    interventionUsed: false,
+    streamsClosed: true,
+    ...overrides,
+  };
+}
+
+test("mandatory manifest retains exact files and fixed counts", () => {
   assert.deepEqual(IAT_B3_MANDATORY_CI_GATES, EXACT_GATE_FILES);
-  assert.deepEqual(IAT_B3_MANDATORY_CI_EXPECTED_TEST_COUNTS, EXACT_TEST_COUNTS);
-  const runnerSource = readFileSync(RUNNER_PATH, "utf8");
-  assert.doesNotMatch(runnerSource, /--test-name-pattern|--test-only|--test-skip-pattern/u);
-  assert.doesNotMatch(runnerSource, /\b(?:cargo|solana-test-validator|fetch|Connection|Keypair)\b/u);
-  assert.match(runnerSource, /skipped !== 0/u);
-  assert.match(runnerSource, /todo !== 0/u);
-  assert.match(runnerSource, /pass !== tests/u);
-  assert.match(runnerSource, /tests !== expectedTestCount/u);
-  assert.match(runnerSource, /Number\(plans\[0\]\[1\]\) !== tests/u);
-  assert.match(runnerSource, /FORBIDDEN_ENVIRONMENT/u);
-  for (const gate of Object.keys(EXACT_GATE_FILES)) {
-    assert.equal((runnerSource.match(new RegExp(`"${gate}":`, "gu")) ?? []).length, 2);
-  }
-});
-
-test("workflow mutation probes reject removed, conditional, reordered, bypassed, or non-Node24 gates", () => {
-  const workflow = readFileSync(WORKFLOW_PATH, "utf8").replaceAll("\r\n", "\n");
-  const stepBlocks = REQUIRED_STEPS.map(([name, gate]) =>
-    `      - name: ${name}\n        run: node scripts/run-iat-b3-mandatory-ci-gate.mjs ${gate}\n`);
-  const rustEnvironmentLines = RUST_ALL_FEATURE_ENVIRONMENT.map(([name, value]) =>
-    `          ${name}: ${value}\n`);
-  const mutations = [
-    ...stepBlocks.map((block) => workflow.replace(block, "")),
-    ...stepBlocks.slice(0, -1).map((block, index) =>
-      workflow.replace(block + stepBlocks[index + 1], stepBlocks[index + 1] + block)),
-    ...stepBlocks.map((block) => workflow.replace(block, `${block}        continue-on-error: true\n`)),
-    ...stepBlocks.map((block) => workflow.replace(block, `${block}        if: false\n`)),
-    ...REQUIRED_STEPS.map(([, gate]) => workflow.replace(
-      `node scripts/run-iat-b3-mandatory-ci-gate.mjs ${gate}`,
-      "true",
-    )),
-    ...REQUIRED_STEPS.map(([name, gate]) => workflow.replace(
-      `      - name: ${name}\n        run: node scripts/run-iat-b3-mandatory-ci-gate.mjs ${gate}\n`,
-      `      - name: ${name}\n        run: node --test --test-name-pattern selected ${EXACT_GATE_FILES[gate][0]}\n`,
-    )),
-    ...stepBlocks.flatMap((block) => [
-      workflow.replace(block, `${block.trimEnd()}\n        shell: bash {0}; /bin/true\n`),
-      workflow.replace(block, `${block.trimEnd()}\n        working-directory: ../shadow-site\n`),
-      workflow.replace(block, `${block.trimEnd()}\n        env:\n          NODE_OPTIONS: --import=./scripts/test-fixture.mjs\n`),
-    ]),
-    workflow.replace("  web-and-policy:\n", "  web-and-policy:\n    if: false\n"),
-    workflow.replace("  web-and-policy:\n", "  web-and-policy:\n    env:\n      NODE_OPTIONS: --import=./scripts/test-fixture.mjs\n"),
-    workflow.replace("  web-and-policy:\n", "  web-and-policy:\n    defaults:\n      run:\n        shell: bash {0}; /bin/true\n"),
-    workflow.replace("defaults:\n  run:\n", "defaults:\n  run:\n    shell: bash {0}; /bin/true\n"),
-    workflow.replace("defaults:\n", "env:\n  NODE_OPTIONS: --import=./scripts/test-fixture.mjs\n\ndefaults:\n"),
-    workflow.replace("    working-directory: projects/star-ascent/site\n", "    working-directory: ../shadow-site\n"),
-    workflow.replace("node-version: 24", "node-version: 22"),
-    ...rustEnvironmentLines.map((line) => workflow.replace(line, "")),
-    ...rustEnvironmentLines.map((line, index) => workflow.replace(
-      line,
-      `          ${RUST_ALL_FEATURE_ENVIRONMENT[index][0]}: 11111111111111111111111111111111\n`,
-    )),
-    workflow.replace(RUST_ALL_FEATURE_COMMAND, "cargo test --workspace --all-targets --locked"),
-  ];
-  mutations.forEach((mutated, index) => {
-    assert.notDeepEqual(workflowFailures(mutated), [], `mutation ${index} passed open`);
-  });
-});
-
-test("TAP enforcement rejects every skip, todo, cancellation, failure, and partial pass", () => {
-  assert.deepEqual(validateIatB3MandatoryCiTap(tap(), "fixture", 2), {
-    gate: "fixture",
-    tests: 2,
-    pass: 2,
-    fail: 0,
-    cancelled: 0,
-    skipped: 0,
-    todo: 0,
-  });
-  for (const output of [
-    tap({ pass: 1, fail: 1 }),
-    tap({ pass: 1, skipped: 1 }),
-    tap({ pass: 1, todo: 1 }),
-    tap({ pass: 1, cancelled: 1 }),
-    tap().replace("# pass 2", "# pass 1"),
-    tap().replace("TAP version 13", "not TAP"),
-    tap().replace("# skipped 0", "# skipped 0\nok 3 - hidden # SKIP"),
-    tap().replace("1..2\n", ""),
-    tap().replace("ok 2 - passed\n", ""),
-    tap().replace("# todo 0\n", ""),
-    tap().replace("ok 1 - passed\nok 2 - passed\n", ""),
-  ]) assert.throws(() => validateIatB3MandatoryCiTap(output, "fixture", 2), /HOLD/u);
-  assert.throws(() => validateIatB3MandatoryCiTap(tap(), "fixture", 3), /HOLD/u);
-  for (const gate of [
-    "all-feature-devnet-readiness",
-    "production-official-local-rehearsal",
-  ]) {
-    const expected = EXACT_TEST_COUNTS[gate];
-    assert.equal(validateIatB3MandatoryCiTap(tap({ tests: expected }), gate, expected).pass, expected);
-    assert.throws(
-      () => validateIatB3MandatoryCiTap(tap({ tests: expected - 1 }), gate, expected),
-      /INCOMPLETE_HOLD/u,
+  assert.deepEqual(IAT_B3_MANDATORY_CI_EXPECTED_TEST_COUNTS, EXACT_COUNTS);
+  assert.deepEqual(Object.keys(IAT_B3_MANDATORY_CI_ORDERED_CASE_NAMES_SHA256), Object.keys(EXACT_GATE_FILES));
+  assert.deepEqual(
+    Object.keys(IAT_B3_MANDATORY_CI_TEST_SOURCE_SHA256).sort(),
+    [...new Set(Object.values(EXACT_GATE_FILES).flat())].sort(),
+  );
+  for (const digest of [
+    ...Object.values(IAT_B3_MANDATORY_CI_ORDERED_CASE_NAMES_SHA256),
+    ...Object.values(IAT_B3_MANDATORY_CI_TEST_SOURCE_SHA256),
+  ]) assert.match(digest, /^[0-9a-f]{64}$/u);
+  for (const [gate, sourcePaths] of Object.entries(EXACT_GATE_FILES)) {
+    const caseNames = sourcePaths.flatMap(extractLiteralTestNames);
+    assert.equal(caseNames.length, EXACT_COUNTS[gate], gate);
+    assert.equal(
+      iatB3MandatoryCiOrderedCaseNamesSha256(caseNames),
+      IAT_B3_MANDATORY_CI_ORDERED_CASE_NAMES_SHA256[gate],
+      `${gate}:ordered-case-names`,
     );
-    assert.throws(
-      () => validateIatB3MandatoryCiTap(tap({ tests: expected }), gate, expected - 1),
-      /INCOMPLETE_HOLD/u,
-    );
+    for (const sourcePath of sourcePaths) {
+      const bytes = readFileSync(resolve(SITE_ROOT, sourcePath));
+      assert.equal(
+        createHash("sha256").update(bytes).digest("hex"),
+        IAT_B3_MANDATORY_CI_TEST_SOURCE_SHA256[sourcePath],
+        sourcePath,
+      );
+    }
   }
-});
-
-test("gate runner uses exact registered files and strips every test-injection environment", () => {
-  for (const gate of [
-    "production-local-rehearsal",
-    "production-official-local-rehearsal",
-  ]) {
-    let invocation = null;
-    let standardOutput = "";
-    let standardError = "";
-    const expected = EXACT_TEST_COUNTS[gate];
-    const result = runIatB3MandatoryCiGate(gate, {
-      environment: {
-        PATH: "safe-path",
-        SAFE_VALUE: "retained",
-        NODE_OPTIONS: "--test-name-pattern=fake",
-        NODE_TEST_CONTEXT: "child-v8",
-        NODE_V8_COVERAGE: "coverage-output",
-        IAT_B3_EXACT_SOURCE_HEAD_SHA: "1".repeat(40),
-        IAT_B3_TEST_OVERRIDE: "true",
-        TEST_ONLY_OVERRIDE: "true",
-        MOCK_RECEIPT: "accepted",
-        FIXTURE_STATUS: "READY",
-        SKIP_VALIDATION: "true",
-        FORCE_SUCCESS: "true",
-      },
-      runner(command, arguments_, options) {
-        invocation = { command, arguments_, options };
-        return {
-          status: 0,
-          signal: null,
-          error: undefined,
-          stdout: tap({ tests: expected }),
-          stderr: "",
-        };
-      },
-      stdout: { write: (value) => { standardOutput += value; } },
-      stderr: { write: (value) => { standardError += value; } },
-    });
-    assert.equal(result.pass, expected);
-    assert.equal(invocation.command, process.execPath);
-    assert.deepEqual(invocation.arguments_, [
-      "--test",
-      "--test-reporter=tap",
-      ...EXACT_GATE_FILES[gate],
-    ]);
-    assert.equal(invocation.options.cwd, SITE_ROOT);
-    assert.deepEqual(invocation.options.env, { PATH: "safe-path", SAFE_VALUE: "retained" });
-    assert.equal(standardOutput, tap({ tests: expected }));
-    assert.equal(standardError, "");
-  }
-  assert.throws(() => runIatB3MandatoryCiGate("unknown"), /UNKNOWN_HOLD/u);
   assert.equal(parseIatB3MandatoryCiGateArguments(["ci-manifest"]), "ci-manifest");
-  for (const arguments_ of [
-    [],
-    ["unknown"],
-    ["ci-manifest", "ci-manifest"],
-    ["ci-manifest", "native-wsl-hard-disable"],
-  ]) assert.throws(() => parseIatB3MandatoryCiGateArguments(arguments_), /EXACT_ARGUMENT_REQUIRED_HOLD/u);
+  for (const arguments_ of [[], ["unknown"], ["ci-manifest", "ci-manifest"]]) {
+    assert.throws(() => parseIatB3MandatoryCiGateArguments(arguments_), /EXACT_ARGUMENT_REQUIRED_HOLD/u);
+  }
 });
 
-test("nonzero, signalled, errored, omitted-test, and truncated child results cannot pass", () => {
-  const quiet = { write() {} };
-  const invoke = (result) => runIatB3MandatoryCiGate("ci-manifest", {
-    runner: () => result,
-    environment: { PATH: "safe" },
-    stdout: quiet,
-    stderr: quiet,
+test("workflow validates structure before expected HOLD and labels hosted smoke as non-evidence", () => {
+  const workflowBytes = readFileSync(WORKFLOW_PATH);
+  const workflow = decodeExactWorkflowBytes(workflowBytes);
+  assert.notEqual(workflow, null);
+  const structural = "run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs";
+  const preflight = "run: node scripts/build-iat-b3-mandatory-ci-containment.mjs";
+  assert.equal(workflow.split(structural).length - 1, 2);
+  assert.equal(workflow.split(preflight).length - 1, 2);
+  assert(workflow.indexOf(structural) < workflow.indexOf(preflight));
+  assert.equal(windowsHostedSmokeIsExact(workflowBytes), true);
+  assert.doesNotMatch(workflow, /setup-zig|ziglang|choco install zig|winget install zig/iu);
+  assert.doesNotMatch(workflow, /run-iat-b3-mandatory-ci-gate\.mjs native-process-containment/u);
+});
+
+test("workflow mutation probes reject missing order, smoke label, and fail-open fragments", () => {
+  const workflowBytes = readFileSync(WORKFLOW_PATH);
+  const workflow = decodeExactWorkflowBytes(workflowBytes);
+  assert.notEqual(workflow, null);
+  const workingDirectory = `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`;
+  const structural = [
+    "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
+    "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
+    workingDirectory,
+    "",
+  ].join("\n");
+  const preflight = [
+    "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
+    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+    workingDirectory,
+  ].join("\n");
+  const topLevelDefaults = [
+    "defaults:",
+    "  run:",
+    `    working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+  ].join("\n");
+  const semanticMutations = [
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(structural, "")),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${structural}${preflight}`, `${preflight}\n${structural.trimEnd()}`)),
+    workflow.replace("HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)", "Native release evidence"),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, `${EXACT_NATIVE_WINDOWS_JOB}\n        continue-on-error: true`),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace("    steps:\n", "    if: false\n    steps:\n")),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace("    steps:\n", "    env:\n      NODE_OPTIONS: attacker\n    steps:\n")),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace("    steps:\n", "    defaults:\n      run:\n        shell: cmd\n    steps:\n")),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace("    steps:\n", `    defaults:\n      run:\n        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}\n    steps:\n`)),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${preflight}`, `${preflight}\n        shell: cmd`)),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${preflight}`, `${preflight}\n        working-directory: .`)),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs || exit 0",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${workingDirectory}\n`, "")),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      `${workingDirectory}\n`,
+      "        working-directory: projects/star-ascent/other\n",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      `${workingDirectory}\n`,
+      `${workingDirectory}\n${workingDirectory}\n`,
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      `${workingDirectory}\n`,
+      "        working-directory: Projects/star-ascent/site\n",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      `${workingDirectory}\n`,
+      "        working-directory: projects\\star-ascent\\site\n",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      `${workingDirectory}\n`,
+      "        working-directory: .\n",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      `${workingDirectory}\n`,
+      "        working-directory: ${{ github.workspace }}/projects/star-ascent/site\n",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      "          fetch-depth: 0\n",
+      "          fetch-depth: 0\n          path: projects/star-ascent/site\n",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      "          fetch-depth: 0\n",
+      `          fetch-depth: 0\n        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}\n`,
+    )),
+    workflow.replace("\njobs:\n", `\n${topLevelDefaults}\n\njobs:\n`),
+    workflow.replace(
+      "\njobs:\n",
+      `\ndefaults: { run: { working-directory: ${EXACT_SITE_WORKING_DIRECTORY} } }\n\njobs:\n`,
+    ),
+    workflow.replace(
+      "\njobs:\n",
+      `\n${topLevelDefaults}\ndefaults: { run: { shell: cmd } }\n\njobs:\n`,
+    ),
+    workflow.replace(
+      EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS[0],
+      EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS[0].replace(`${EXACT_SITE_JOB_RUN_DEFAULTS}\n`, ""),
+    ),
+    workflow.replace(
+      EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS[1],
+      EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS[1].replace(
+        EXACT_SITE_WORKING_DIRECTORY,
+        "projects/star-ascent/other",
+      ),
+    ),
+    workflow.replace("      - run: npm ci\n", "      - run: npm ci\n        working-directory: .\n"),
+    workflow.replace("\npermissions:\n", "\nenv:\n  NODE_OPTIONS: attacker\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\nenv: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n'env':\n  NODE_OPTIONS: attacker\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n'env': { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n\"env\":\n  NODE_OPTIONS: attacker\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n\"env\": { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n? env\n: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n? \"env\"\n: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n\"\\u0065nv\": { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\n!!str env: { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\nenv: &hostile { NODE_OPTIONS: attacker }\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\nx-env: &hostile { NODE_OPTIONS: attacker }\nenv: *hostile\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\nx-template: &hostile { env: { NODE_OPTIONS: attacker } }\n<<: *hostile\n\npermissions:\n"),
+    workflow.replace("\npermissions:\n", "\nunexpected: true\n\npermissions:\n"),
+    workflow.replace("\n  rust-host:\n", `\n${EXACT_NATIVE_WINDOWS_JOB}\n\n  rust-host:\n`),
+  ];
+  for (const mutated of semanticMutations) {
+    assert.notEqual(mutated, workflow, "mutation fixture must alter the workflow");
+    assert.equal(windowsHostedSmokeIsExact(Buffer.from(mutated, "utf8")), false);
+  }
+  const rawMutations = [
+    Buffer.from(workflow.replaceAll("\n", "\r\n"), "ascii"),
+    Buffer.from(workflow.replace("\n", "\r"), "ascii"),
+    Buffer.from(workflow.replace("  push:", "\tpush:"), "ascii"),
+    Buffer.concat([Buffer.from([0x00]), workflowBytes]),
+    Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), workflowBytes]),
+    workflowBytes.subarray(0, -1),
+    ...[
+      "\u00a0",
+      "\u1680",
+      "\u2000",
+      "\u2003",
+      "\u2028",
+      "\u2029",
+      "\u202f",
+      "\u205f",
+      "\u3000",
+      "\ufeff",
+    ].map((prefix) => Buffer.from(
+      `${prefix}env: { NODE_OPTIONS: attacker }\n${workflow}`,
+      "utf8",
+    )),
+  ];
+  assert.equal(rawMutations.length, 16);
+  for (const mutated of rawMutations) {
+    assert.equal(mutated.equals(workflowBytes), false, "raw mutation fixture must alter bytes");
+    assert.equal(windowsHostedSmokeIsExact(mutated), false);
+  }
+});
+
+test("strict TAP accepts one exact EOF-bound complete stream", () => {
+  const names = ["case 1", "case 2", "case 3"];
+  assert.deepEqual(validateIatB3MandatoryCiTap(tap(names), "fixture", 3, names), {
+    gate: "fixture", tests: 3, pass: 3, fail: 0, cancelled: 0,
+    skipped: 0, todo: 0, exactEofObserved: true, bailoutObserved: false,
+    orderedCaseNamesSha256: iatB3MandatoryCiOrderedCaseNamesSha256(names),
   });
-  const complete = tap({ tests: 6 });
-  for (const result of [
-    { status: 1, signal: null, error: undefined, stdout: complete, stderr: "hidden failure" },
-    { status: 0, signal: "SIGTERM", error: undefined, stdout: complete, stderr: "" },
-    { status: 0, signal: null, error: new Error("child error"), stdout: complete, stderr: "" },
-  ]) assert.throws(() => invoke(result), /PROCESS_HOLD/u);
-  assert.throws(() => invoke({
-    status: 0,
-    signal: null,
-    error: undefined,
-    stdout: tap({ tests: 5 }),
-    stderr: "",
-  }), /INCOMPLETE_HOLD/u);
-  assert.throws(() => invoke({
-    status: 0,
-    signal: null,
-    error: undefined,
-    stdout: complete.slice(0, complete.indexOf("# pass")),
-    stderr: "",
-  }), /SUMMARY_HOLD/u);
 });
 
-test("contract gates cannot be mistaken for artifact, RPC, Devnet, or Mainnet evidence", () => {
-  const contract = readFileSync(
-    resolve(SITE_ROOT, "scripts/lib/iat-b3-production-local-rehearsal-contract.mjs"),
-    "utf8",
+test("strict TAP rejects bailout, trailing junk, plan, duration, summary, and result drift", () => {
+  const names = ["case 1", "case 2"];
+  const valid = tap(names);
+  for (const mutated of [
+    `${valid}Bail out! late\n`,
+    valid.replace("# duration_ms 1.25\n", "# duration_ms 1.25\ntrailing\n"),
+    valid.replace("1..2\n", "1..2\n1..2\n"),
+    valid.replace("# duration_ms 1.25", "# duration_ms NaN"),
+    valid.replace("# pass 2", "# pass 1"),
+    valid.replace("ok 2 - case 2", "not ok 2 - case 2"),
+    valid.replace("# Subtest: case 2", "# Subtest: substituted case"),
+    valid.replace("ok 2 - case 2", "ok 2 - substituted case"),
+    valid.replace("ok 1 - case 1\n# Subtest: case 2", "# Subtest: case 2\nok 1 - case 1"),
+    valid.replace("# skipped 0", "# skipped 1"),
+    valid.slice(0, -1),
+  ]) assert.throws(() => validateIatB3MandatoryCiTap(mutated, "fixture", 2, names), /HOLD/u);
+});
+
+test("environment scrub removes every evidence and test injection namespace", () => {
+  assert.deepEqual(sanitizeIatB3MandatoryCiEnvironment({
+    PATH: "safe", SAFE: "yes", NODE_OPTIONS: "bad", NODE_TEST_CONTEXT: "bad",
+    IAT_B3_OVERRIDE: "bad", TEST_X: "bad", MOCK_X: "bad", FIXTURE_X: "bad",
+    SKIP_X: "bad", FORCE_X: "bad",
+  }), { PATH: "safe", SAFE: "yes" });
+});
+
+test("injected runner callbacks are never invoked and remain all-false HOLD", () => {
+  let calls = 0;
+  const report = runIatB3MandatoryCiGateInjected("native-process-containment", {
+    runner() {
+      calls += 1;
+      return { status: 0, signal: null, stdout: "PASS", stderr: "" };
+    },
+    ready: true,
+    complete: true,
+    runtimeEvidenceObserved: true,
+  });
+  assert.equal(calls, 0);
+  assert.equal(report.status, "HOLD");
+  assert.equal(report.exitCode, 2);
+  assert.equal(report.ready, false);
+  assert.equal(report.complete, false);
+  assert.equal(report.valid, false);
+  assert.equal(report.runnerInvoked, false);
+  assert.equal(report.processStarted, false);
+  assert.equal(report.executionProvenanceObserved, false);
+  assert.equal(report.runtimeEvidenceObserved, false);
+  assert.equal(report.callerInputAccepted, false);
+  assert(report.blockers.includes("CALLER_INJECTED_RUNNER_FORBIDDEN_HOLD"));
+});
+
+test("HOLD diagnostics bind bounded stream edges without becoming evidence", () => {
+  const diagnostic = createIatB3MandatoryCiHoldDiagnostic({
+    gate: "ci-manifest",
+    reason: "CALLER_INJECTION_REJECTED",
+    stdout: "x".repeat(5_000),
+    stderr: "bad",
+  });
+  assert.equal(diagnostic.status, "HOLD");
+  assert.equal(diagnostic.exitCode, 2);
+  assert.equal(diagnostic.reason, "CALLER_INJECTION_REJECTED");
+  assert.equal(diagnostic.ready, false);
+  assert.equal(diagnostic.complete, false);
+  assert.equal(diagnostic.runtimeEvidenceObserved, false);
+  assert.equal(diagnostic.stdout.rawBytesObserved, 5_000);
+  assert.equal(diagnostic.stdout.truncated, true);
+  assert.match(diagnostic.stdout.rawSha256, /^[0-9a-f]{64}$/u);
+  assert.equal(Buffer.from(diagnostic.stdout.prefixBase64, "base64").length, 2_048);
+  assert.equal(Buffer.from(diagnostic.stdout.tailBase64, "base64").length, 2_048);
+});
+
+test("Phase-A exported oracle cannot admit caller-derived clean completion", () => {
+  const result = evaluateIatB3MandatoryCiContainmentOracle(passingOracle());
+  assert.equal(result.status, "HOLD_TEST");
+  assert.equal(result.exitCode, 2);
+  assert.equal(result.reason, "PHASE_A_EXPORTED_ORACLE_NON_EVIDENCE");
+  assert.equal(result.observedReason, "STRUCTURAL_PASS_NOT_EVIDENCE");
+  assert.equal(result.ready, false);
+  assert.equal(result.complete, false);
+  assert.equal(result.executionProvenanceObserved, false);
+});
+
+test("K69 forced teardown and outer deadline override cached pass", () => {
+  assert.equal(evaluateIatB3MandatoryCiContainmentOracle(passingOracle({ forcedTeardownTimeout: true })).observedReason, "FORCED_TEARDOWN_TIMEOUT");
+  assert.equal(evaluateIatB3MandatoryCiContainmentOracle(passingOracle({ outerDeadlineExpired: true })).observedReason, "OUTER_DEADLINE");
+  assert.equal(evaluateIatB3MandatoryCiContainmentOracle(passingOracle({ protocolValid: false })).observedReason, "PROTOCOL_CORRUPTION");
+});
+
+test("K69 identity, helper, setup, and workload failures remain distinct", () => {
+  const cases = [
+    ["helperIdentityValid", false, "HELPER_IDENTITY_UNPROVEN"],
+    ["helperSpawnFailed", true, "HELPER_SPAWN_FAILED"],
+    ["helperAbnormalTermination", true, "HELPER_ABNORMAL_TERMINATION"],
+    ["containmentSetupProven", false, "CONTAINMENT_SETUP_UNPROVEN"],
+    ["startupDeadlineExpired", true, "STARTUP_TIMEOUT"],
+    ["workloadSpawnFailed", true, "WORKLOAD_SPAWN_FAILED"],
+    ["workloadResumed", false, "WORKLOAD_NOT_RESUMED"],
+  ];
+  for (const [key, value, reason] of cases) {
+    const result = evaluateIatB3MandatoryCiContainmentOracle(passingOracle({ [key]: value }));
+    assert.equal(result.status, "HOLD_TEST");
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.observedReason, reason);
+  }
+});
+
+test("K69 timeout, output, terminal, TAP, leak, absence, and kill remain HOLD", () => {
+  const cases = [
+    [{ outputLimitExceeded: true }, "OUTPUT_LIMIT"],
+    [{ executionDeadlineExpired: true }, "TIMEOUT"],
+    [{ rootSignal: "SIGABRT" }, "SIGNAL"],
+    [{ rootExitCode: 9 }, "NONZERO"],
+    [{ streamsClosed: false }, "FINALIZATION_TIMEOUT"],
+    [{ tapValid: false }, "INCOMPLETE_TAP"],
+    [{ stderrEmpty: false }, "STDERR_NOT_EMPTY"],
+    [{ descendantLeakObserved: true }, "DESCENDANT_LEAK"],
+    [{ zombieDescendantCount: 1 }, "DESCENDANT_LEAK"],
+    [{ absenceProofObserved: false }, "ABSENCE_UNPROVEN"],
+    [{ interventionUsed: true }, "KILL_ASSISTED_PASS_FORBIDDEN"],
+  ];
+  for (const [mutation, reason] of cases) {
+    const result = evaluateIatB3MandatoryCiContainmentOracle(passingOracle(mutation));
+    assert.equal(result.status, "HOLD_TEST");
+    assert.equal(result.exitCode, 2);
+    assert.equal(result.reason, "PHASE_A_EXPORTED_ORACLE_NON_EVIDENCE");
+    assert.equal(result.observedReason, reason);
+  }
+});
+
+test("canonical orchestrator consumes frozen interfaces and remains machine HOLD", async () => {
+  const interfaces = validateIatB3MandatoryCiPhaseBInterfaceSources();
+  assert.equal(interfaces.schema, IAT_B3_MANDATORY_CI_PHASE_B_INTERFACE_SCHEMA);
+  assert.equal(interfaces.status, "STATIC_SOURCE_BOUND_HOLD");
+  assert.equal(interfaces.runtimeEvidenceObserved, false);
+  assert.equal(interfaces.sources.length, 4);
+  assert.deepEqual(
+    interfaces.sources.map((source) => source.label),
+    Object.keys(IAT_B3_MANDATORY_CI_PHASE_B_INTERFACE_SOURCES),
   );
-  const plan = JSON.parse(readFileSync(
-    resolve(SITE_ROOT, "docs/b3/iat-b3-production-local-rehearsal-plan.v1.json"),
-    "utf8",
-  ));
-  const nativeHardDisable = readFileSync(
-    resolve(SITE_ROOT, "tests/iat-b3-native-wsl-hard-disable-ci.test.mjs"),
-    "utf8",
-  );
-  assert.match(contract, /!\["HOLD", "HOLD_TEST_EXECUTION_ONLY"\]\.includes\(receipt\.status\)/u);
-  assert.match(contract, /receipt\.complete !== false/u);
-  assert.match(contract, /receipt\.safety\.executionEvidenceAccepted !== false/u);
-  assert.equal(plan.status, "HOLD");
-  assert.equal(plan.scope.authorizesRpc, false);
-  assert.equal(plan.scope.authorizesKeyRead, false);
-  assert.equal(plan.scope.authorizesBuild, false);
-  assert.equal(plan.scope.authorizesDeploy, false);
-  assert.equal(plan.scope.authorizesSigning, false);
-  assert.equal(plan.scope.authorizesSend, false);
-  assert.equal(plan.truth.devnetExecuted, false);
-  assert.equal(plan.truth.mainnetExecutionAuthorized, false);
-  assert.doesNotMatch(nativeHardDisable, /\bskip\s*:|\.skip\s*\(|context\.skip/u);
+  const report = await runIatB3MandatoryCiGateCanonical("ci-manifest");
+  assert.equal(report.status, "HOLD");
+  assert.equal(report.exitCode, 2);
+  assert.equal(report.ready, false);
+  assert.equal(report.complete, false);
+  assert.equal(report.valid, false);
+  assert.equal(report.processStarted, false);
+  assert.equal(report.nativeHelperExecuted, false);
+  assert.equal(report.runtimeReceiptAssessment.runtimeEvidenceObserved, false);
+  assert.equal(report.publicBuildInputAuthorized, false);
+  assert.equal(report.automaticRetryAuthorized, false);
+  assert.equal(report.releaseAuthorized, false);
+  assert(report.blockers.includes("SOURCE_BOUND_LIVE_RUNTIME_RECEIPT_UNAVAILABLE"));
+});
+
+test("shipped runner exposes no process callback, helper, retry, or legacy cleanup path", () => {
+  const source = readFileSync(RUNNER_PATH, "utf8");
+  for (const forbidden of [
+    "node:child_process", "spawnSync", "execFile", "runner(process.execPath",
+    "unshare", "process.kill(", "killpg", "taskkill", "Stop-Process", "WMIC",
+    "automaticRetryAuthorized: true", "runtimeEvidenceObserved: true",
+  ]) {
+    assert.equal(source.includes(forbidden), false, forbidden);
+  }
+  assert.match(source, /SOURCE_BOUND_LIVE_RUNTIME_RECEIPT_UNAVAILABLE/u);
+  assert.match(source, /B27_NO_EXECUTION_API/u);
+  assert.match(source, /status:\s*"HOLD"/u);
+  assert.match(source, /exitCode:\s*2/u);
 });

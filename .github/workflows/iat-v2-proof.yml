@@ -24,15 +24,14 @@ concurrency:
   group: iat-v2-proof-${{ github.event.pull_request.head.sha || github.sha }}
   cancel-in-progress: true
 
-defaults:
-  run:
-    working-directory: projects/star-ascent/site
-
 jobs:
   web-and-policy:
     name: Web, policy, and launch gates
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: projects/star-ascent/site
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -46,6 +45,10 @@ jobs:
           cache: npm
           cache-dependency-path: projects/star-ascent/site/package-lock.json
       - run: npm ci
+      - name: Validate the Phase-A native containment source contract without execution
+        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs
+      - name: Preflight the offline native containment build from pinned local bytes
+        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs
       - name: Enforce the mandatory B3 CI gate manifest
         run: node scripts/run-iat-b3-mandatory-ci-gate.mjs ci-manifest
       - name: Validate the Economy reproducible-build contract without building
@@ -74,10 +77,31 @@ jobs:
       - run: npm test
       - run: npm run lint
 
+  native-containment-windows:
+    name: HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - name: Validate native containment structure (hosted smoke only; non-evidence)
+        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs
+        working-directory: projects/star-ascent/site
+      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)
+        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs
+        working-directory: projects/star-ascent/site
+
   rust-host:
     name: Rust host tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: projects/star-ascent/site
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Test default feature isolation
@@ -93,10 +117,38 @@ jobs:
           IAT_B3_PRODUCTION_MAINNET_GENESIS_HASH: 4zEL9HZwTFoanu5RbmGspF5a6uqVGP99xkJxToZoq3Pw
         run: cargo test --workspace --all-targets --all-features --locked
 
+  phase-b-hosted-smoke:
+    name: PHASE_B_HOSTED_SMOKE_ONLY_ALL_FALSE_HOLD (non-evidence)
+    # Ordering only: no output or receipt from hosted Phase-A is consumed.
+    needs: native-containment-windows
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      # Source-only Phase-B smoke: no cache/artifact download, helper/runtime
+      # execution, hosted-to-local provenance promotion, or release claim is admitted.
+      - name: Validate Phase-B source contracts (hosted smoke only; all-false HOLD; non-evidence)
+        run: npm --prefix projects/star-ascent/site run check:iat-b3-mandatory-ci-phase-b-structure
+        shell: bash
+        timeout-minutes: 5
+      - name: Confirm Phase-B canonical all-false HOLD (hosted smoke only; non-evidence)
+        run: npm --prefix projects/star-ascent/site run check:iat-b3-mandatory-ci-phase-b-hosted-smoke
+        shell: bash
+        timeout-minutes: 5
+
   verifiable-sbf:
     name: Verifiable Solana SBF build
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: projects/star-ascent/site
     env:
       IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}
