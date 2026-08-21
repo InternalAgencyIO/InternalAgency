@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 395,
   "country": "Belize",
-  "status": "chatgpt-final-clothing-complete-pending-remote-parity",
+  "status": "closed-4-of-4-remote-verified",
   "preparedAtUtc": "2026-08-21T22:18:27.1323170Z",
   "sourceCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
   "contract": {
@@ -488,7 +488,16 @@
         "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe"
       }
     ],
-    "acceptanceState": "canonical-final-pending-remote-parity"
+    "acceptanceState": "canonical-final-remote-verified",
+    "remoteParity": {
+      "verifiedAtUtc": "2026-08-21T23:47:36.5107340Z",
+      "evidenceCommit": "bd4f938d073e80724a8a3fb9b89b80b6726b3570",
+      "localHead": "bd4f938d073e80724a8a3fb9b89b80b6726b3570",
+      "remoteBranchHead": "bd4f938d073e80724a8a3fb9b89b80b6726b3570",
+      "draftPr13Head": "bd4f938d073e80724a8a3fb9b89b80b6726b3570",
+      "lfsDryRunPendingObjects": 0,
+      "worktreeClean": true
+    }
   },
   "browserEvidence": {
     "persistentMetaTabsRequired": 4,
@@ -544,5 +553,5 @@
       ]
     }
   },
-  "nextAction": "Archive, commit, push, and remote verify the four accepted ChatGPT final clothing edits without reopening the resolved Meta lanes."
+  "nextAction": "Keep Belize closed and compute the next authoritative country checkpoint before any new four-tab Meta dispatch."
 }
