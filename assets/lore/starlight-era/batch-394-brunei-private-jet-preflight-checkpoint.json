@@ -397,8 +397,8 @@
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "lfs-progress-reported-branch-push-https-failed",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T11:17:13.9463317Z",
-        "localHead": "1caae959fc94ce111a58ef1142be3816aee45068",
+        "attemptedAtUtc": "2026-08-21T11:45:13.0039241Z",
+        "localHead": "2f66e1e237f38e58de794109b008a272c56321f6",
         "pendingLfsObjects": 37,
         "outcome": "github-https-connect-failure",
         "remoteBranchShaAfterFailure": "85cc40024db027a44c60a9d4a25faa3da9c62640"
@@ -418,7 +418,10 @@
         "At 2026-08-21T10:44Z a dry run confirmed all 37 LFS objects still require upload. A single object upload probe for 15d9d01acc189d18b834f38355659c4ec4da8415eb5d7422f427e11e8135c8df made no progress for 60 seconds and was stopped without claiming success.",
         "The exact authorized push from local head 2d88058b then failed after 21141 ms with the same GitHub port 443 connection error.",
         "At 2026-08-21T11:14Z a single object upload for 15d9d01acc189d18b834f38355659c4ec4da8415eb5d7422f427e11e8135c8df remained at zero bytes for 50 seconds even with one transfer, HTTP/1.1, and 15 second LFS activity, dial, and TLS timeouts. The run was stopped without claiming success.",
-        "The exact authorized push from local head 1caae959 then failed after 21133 ms with the same GitHub port 443 connection error."
+        "The exact authorized push from local head 1caae959 then failed after 21133 ms with the same GitHub port 443 connection error.",
+        "At 2026-08-21T11:43Z the GitHub connector independently verified draft PR 13 is open with head branch agent/starlight-progress-archive at 85cc40024db027a44c60a9d4a25faa3da9c62640.",
+        "The exact authorized push from local head 2f66e1e2 failed after 21142 ms with the same GitHub port 443 connection error.",
+        "A direct transport diagnostic resolved github.com to 140.82.121.4 but could not establish TCP port 443. No Git http proxy, Git https proxy, GitHub-specific proxy, LFS URL override, remote LFS URL override, HTTP version override, or HTTP_PROXY, HTTPS_PROXY, or ALL_PROXY environment setting is active."
       ],
       "gate": "Do not dispatch Bank 3 until Git branch SHA, LFS objects, and draft PR 13 head parity are remote verified."
     },
@@ -434,12 +437,22 @@
       "postApplyDryRunNewBlobs": 0
     },
     "latestGateAudit": {
-      "verifiedAtUtc": "2026-08-21T11:17:13.9463317Z",
+      "verifiedAtUtc": "2026-08-21T11:45:13.0039241Z",
       "rejectedPromptLedgerErrors": 0,
       "failedPromptLedgerErrors": 0,
       "archiveDryRunNewManifestRows": 0,
       "archiveDryRunNewBlobs": 0,
       "pendingLfsObjects": 37
+    },
+    "latestRemoteDiagnostic": {
+      "observedAtUtc": "2026-08-21T11:45:13.0039241Z",
+      "prNumber": 13,
+      "prState": "open-draft",
+      "prHeadBranch": "agent/starlight-progress-archive",
+      "prHeadSha": "85cc40024db027a44c60a9d4a25faa3da9c62640",
+      "githubResolvedAddress": "140.82.121.4",
+      "githubTcp443Succeeded": false,
+      "configuredProxyOrLfsUrlOverride": false
     }
   },
   "nextAction": "Retry the exact authorized branch push when GitHub HTTPS and Git LFS are available. Remote verify branch SHA, LFS objects, and draft PR 13 head parity, then dispatch the four Bank 3 primary prompts concurrently."
