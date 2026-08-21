@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "batch": 395,
+  "country": "Belize",
+  "status": "prepared-not-dispatched",
+  "preparedAtUtc": "2026-08-21T22:18:27.1323170Z",
+  "sourceCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
+  "contract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC"
+  },
+  "queueAuthorization": {
+    "priorCountry": "Brunei",
+    "priorBatch": 394,
+    "priorStatus": "closed-4-of-4-remote-verified",
+    "priorCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
+    "authoritativeOrderEvidence": "assets/lore/starlight-era/world-195x4-campaign.json",
+    "historicalBelizeEvidence": {
+      "path": "assets/lore/starlight-era/batch-324-belize-relaxed-audit-checkpoint.json",
+      "sha256": "19F09DEDA32A573DE4286C122F168C25E59FBB3C389439238B0E88942580E60A"
+    },
+    "nextCountry": "Belize",
+    "nextBatch": 395,
+    "scenes": [1600, 1601, 1602, 1603],
+    "cinematicTheme": "civilian helicopter flight couture",
+    "themePairPosition": "1 of 2",
+    "provider": "Meta AI"
+  },
+  "countryResearch": {
+    "policy": "Belize identity appears through large secular archive projections, research installations, and landmark-derived geometry. No literal flag, coat of arms, official emblem, sacred symbol, religious building, or copied archaeological glyph.",
+    "sources": [
+      {
+        "url": "https://www.travelbelize.org/attraction/belize-city-swing-bridge/",
+        "use": "Belize City Swing Bridge, Haulover Creek, Caribbean outlet, sailboat routes, and waterfront geometry"
+      },
+      {
+        "url": "https://www.travelbelize.org/attraction/blue-hole/",
+        "use": "Great Blue Hole circular sinkhole, coral ring, Lighthouse Reef Atoll, and aerial reef geometry"
+      },
+      {
+        "url": "https://www.travelbelize.org/attraction/cockscomb-basin-wildlife-sanctuary/",
+        "use": "Cockscomb Range rainforest, Maya Mountains, Victoria Peak, creek routes, and conservation geometry"
+      },
+      {
+        "url": "https://www.travelbelize.org/blog/belize-destination-year-2013-2014/",
+        "use": "Placencia Peninsula, beach, village boardwalk, mangrove lagoon, reef line, and Caribbean coast geometry"
+      }
+    ],
+    "palette": ["Caribbean turquoise", "reef cobalt", "rainforest emerald", "orchid magenta", "coral red", "mahogany bronze", "limestone ivory", "cloud white", "sunset gold", "deep-water navy"]
+  },
+  "evidenceSnapshots": {
+    "generatedMediaManifest": {
+      "path": "progress-reports/codex-generated-media/manifest.jsonl",
+      "sha256": "F793662ADDFAEC1F64670B2C158E584C1C5FE07710CCC75EB30569BCE4893ABD",
+      "rows": 4681
+    },
+    "rejectedPromptLedger": {
+      "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
+      "sha256": "F35144FF7EF2145ECB2F9C284789C3E25B9A6D46D4606CAEAD2CB723698106FD"
+    },
+    "xLedger": {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "sha256": "9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064",
+      "eligibleBacklogRemaining": 0,
+      "completedRenderRunsSinceLastX": 0,
+      "mode": "render-first-after-backlog-clearance"
+    }
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "exactAge": 21,
+    "verifiedAtUtc": "2026-08-21T22:18:27.1323170Z",
+    "uploadOrder": [
+      {
+        "slot": 1,
+        "scene": 938,
+        "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "verified": true
+      },
+      {
+        "slot": 2,
+        "scene": 936,
+        "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "verified": true
+      },
+      {
+        "slot": 3,
+        "scene": 937,
+        "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+        "verified": true
+      }
+    ],
+    "binding": {
+      "Alia": "Black woman with voluminous natural curls, far left in scene 938",
+      "Radiance": "blonde, second from left in scene 938",
+      "Ellie": "dark-haired, third from left in scene 938",
+      "AI ECE": "dark-haired, far right in scene 938"
+    }
+  },
+  "activeSuppressionProfile": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_active_suppression_profile.json",
+    "sha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+    "termLimit": 20,
+    "postSuppressionPromptMatches": 0
+  },
+  "blockedLexiconSnapshot": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+    "sha256": "8462B31B0B0002693953F506ECB928C114ECA010937DE56516F57C8BAAD01E71",
+    "bytes": 317181
+  },
+  "fourTabBank": {
+    "bank": 1,
+    "requestedImagesPerPrompt": 1,
+    "concurrentTabs": 4,
+    "bolderPublicSafeScenes": [1600, 1602],
+    "dispatchState": "prepared-not-yet-sent",
+    "capturedOutputs": 0,
+    "completedRenderRunsSinceLastX": 0
+  },
+  "scenePlans": {
+    "1600": {
+      "scene": 1600,
+      "countryResearchGeometry": "Belize City Swing Bridge span, Haulover Creek bend, Caribbean outlet, sailboat route, waterfront, bridge cable, and timber walk geometry",
+      "environment": {
+        "key": "starlight|environment|batch-395|scene-1600",
+        "counter": 0,
+        "acceptedByte": 174,
+        "digestSha256": "AE2908E4DDFAEA56D5DF1B731C0C13F9018E398420E612DF9EDF6AA0C96B6F62",
+        "bucket": 4,
+        "name": "severe rain-and-storm weather",
+        "promptLanguage": "severe wind-driven rain and a distant thunderstorm fully outside the sealed protection"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-395|scene-1600",
+        "counter": 0,
+        "acceptedByte": 88,
+        "digestSha256": "58780908C422F208887F148B18F1D09503A57973E04182ABCAE1DE7C3FA8B9BD",
+        "bucket": 3,
+        "name": "LHS 1140 b"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-395|scene-1600",
+        "counter": 0,
+        "acceptedByte": 206,
+        "digestSha256": "CE24DD555873787587703BBE0A37598F64F406A28C0AB9E36DE0CE72D0B01893",
+        "bucket": 2,
+        "name": "protected exterior surface",
+        "promptLanguage": "on the speculative LHS 1140 b surface beneath a transparent pressure field and open-sided research shield with dry stable footing"
+      },
+      "rollStoredAtUtc": "2026-08-21T22:18:27.1323170Z",
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Alia",
+      "raze": {
+        "key": "RAZE|batch-395|scene-1600|knee-high-wearers",
+        "fnv1a32": 3760970979,
+        "pairIndex": 3,
+        "wearers": ["Ellie", "Alia"],
+        "uncoveredLowerLegCharacters": ["Radiance", "AI ECE"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1600-meta-bank-1-primary.txt",
+        "sha256": "36E0F950DB6EEE795D1FFA19298524B5276DD23F030D9BFDBC6F9DFEF2035632",
+        "bytes": 3958
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1600-meta-bank-1-fallback.txt",
+        "sha256": "7325876BC49537F7DDDB89EA2F379AE0963A726A445C44205DC0CFA2F6486C98",
+        "bytes": 1880
+      }
+    },
+    "1601": {
+      "scene": 1601,
+      "countryResearchGeometry": "Great Blue Hole circle, coral ring, Lighthouse Reef Atoll contours, aerial reef routes, cobalt depth bands, and Caribbean turquoise geometry",
+      "environment": {
+        "key": "starlight|environment|batch-395|scene-1601",
+        "counter": 0,
+        "acceptedByte": 99,
+        "digestSha256": "634BAA340E2C56E81A197C9D45944A7611102F365ADFAD32E9EAEFBE3864D64F",
+        "bucket": 4,
+        "name": "severe rain-and-storm weather",
+        "promptLanguage": "severe wind-driven rain and a distant thunderstorm fully outside the sealed protection"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-395|scene-1601",
+        "counter": 0,
+        "acceptedByte": 39,
+        "digestSha256": "276C0B0E0D7F7EDB77EE89B2D37279B93ED4D393B4610C54A48494E2683B7102",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-395|scene-1601",
+        "counter": 0,
+        "acceptedByte": 7,
+        "digestSha256": "071CB36F39896023B8FEC351B71BA52B0471880719DE7B529527298325D3E16E",
+        "bucket": 1,
+        "name": "protected exterior surface",
+        "promptLanguage": "on the speculative TOI-700 d surface beneath a transparent pressure field and open-sided research shield with dry stable footing"
+      },
+      "rollStoredAtUtc": "2026-08-21T22:18:27.1323170Z",
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "AI ECE",
+      "raze": {
+        "key": "RAZE|batch-395|scene-1601|knee-high-wearers",
+        "fnv1a32": 742537752,
+        "pairIndex": 0,
+        "wearers": ["Radiance", "Ellie"],
+        "uncoveredLowerLegCharacters": ["Alia", "AI ECE"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1601-meta-bank-1-primary.txt",
+        "sha256": "D5064D41D205A2CB7134A34304CF278C6B772A3B0EDE34706AC040DBF634E6FF",
+        "bytes": 3874
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1601-meta-bank-1-fallback.txt",
+        "sha256": "74ABEEFA30A9B5F645EB2CF8D3BCD385CF9714A72AFB6F823029221AB4C6EE0D",
+        "bytes": 1889
+      }
+    },
+    "1602": {
+      "scene": 1602,
+      "countryResearchGeometry": "Cockscomb Range, Maya Mountains, Victoria Peak, rainforest canopy, buttress roots, creek routes, waterfall bands, and conservation geometry",
+      "environment": {
+        "key": "starlight|environment|batch-395|scene-1602",
+        "counter": 0,
+        "acceptedByte": 72,
+        "digestSha256": "48A79898C93CF17A18DC0841A877ACE9FDC3DD5A4B2C2FCEF70B621ACD194E78",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light across the open alien sky"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-395|scene-1602",
+        "counter": 0,
+        "acceptedByte": 171,
+        "digestSha256": "ABE6A58784A3AC1BB66D120EBFD57EB8B29DD82ECAB13FCD0FD2C615ABBD6880",
+        "bucket": 1,
+        "name": "Proxima Centauri b"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-395|scene-1602",
+        "counter": 0,
+        "acceptedByte": 209,
+        "digestSha256": "D1387D1198BDA06606F26213E38375BD07F340F0985268BC04830583F4905D1B",
+        "bucket": 2,
+        "name": "protected exterior surface",
+        "promptLanguage": "on the speculative Proxima Centauri b surface beneath a transparent pressure field and open-sided research shield with dry stable footing"
+      },
+      "rollStoredAtUtc": "2026-08-21T22:18:27.1323170Z",
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Ellie",
+      "raze": {
+        "key": "RAZE|batch-395|scene-1602|knee-high-wearers",
+        "fnv1a32": 3695480769,
+        "pairIndex": 3,
+        "wearers": ["Ellie", "Alia"],
+        "uncoveredLowerLegCharacters": ["Radiance", "AI ECE"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1602-meta-bank-1-primary.txt",
+        "sha256": "176BB74F3D5EB02E96E387F59B7311D3FF1DB8717BDBA75A4C656470AEEC1FB2",
+        "bytes": 3898
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1602-meta-bank-1-fallback.txt",
+        "sha256": "F0C7D883A36AFEAD19C98D41F0356A8BC1E3EAE20BD4A7DF6D0DFCAF4F004AC4",
+        "bytes": 1897
+      }
+    },
+    "1603": {
+      "scene": 1603,
+      "countryResearchGeometry": "Placencia Peninsula outline, golden beach sweep, Caribbean wave bands, mangrove lagoon contours, boardwalk rhythms, empty docks, reef-line arcs, and palm-shadow geometry",
+      "environment": {
+        "key": "starlight|environment|batch-395|scene-1603",
+        "counter": 0,
+        "acceptedByte": 182,
+        "digestSha256": "B6F53DC40C1F5D1AA1725715FD7963846A23F05896DFC9E113F15B93D925D64A",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light beyond the broad habitat window"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-395|scene-1603",
+        "counter": 0,
+        "acceptedByte": 234,
+        "digestSha256": "EAD803BCADC3D7E9F734FCD04CF1E8811F0A658B90312659B059BBE81B5B1C10",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-395|scene-1603",
+        "counter": 0,
+        "acceptedByte": 192,
+        "digestSha256": "C0B2F698BB8E5FCDDC4D7F6CB1BF9719490F0E4DE9978AECDF9B7D4363EDBA7B",
+        "bucket": 0,
+        "name": "habitat interior",
+        "promptLanguage": "inside a speculative TOI-700 d research habitat with one broad fluffy couture lounge bed and a broad window to the sunset alien horizon"
+      },
+      "rollStoredAtUtc": "2026-08-21T22:18:27.1323170Z",
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Radiance",
+      "raze": {
+        "key": "RAZE|batch-395|scene-1603|knee-high-wearers",
+        "fnv1a32": 1261618774,
+        "pairIndex": 4,
+        "wearers": ["Ellie", "AI ECE"],
+        "uncoveredLowerLegCharacters": ["Radiance", "Alia"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1603-meta-bank-1-primary.txt",
+        "sha256": "37A567AF94611511E03DFD36D3AB09C1FD45D106758F677B5C3DC3427E1630EC",
+        "bytes": 3836
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-395/scene-1603-meta-bank-1-fallback.txt",
+        "sha256": "67F2A29B0C99216C5E2D9F0F9F87713DE7EB7E55AE33506556C622B8A6D30D71",
+        "bytes": 1905
+      }
+    }
+  },
+  "browserEvidence": {
+    "persistentMetaTabsRequired": 4,
+    "referenceUploadOrder": [938, 936, 937],
+    "uploadOutcome": "not-yet-attempted",
+    "dispatchOutcome": "not-yet-attempted"
+  },
+  "nextAction": "Verify archive and ledger parity, commit and push this preflight, remote verify Git and LFS, then reuse exactly four persistent Meta tabs to dispatch Belize Bank 1 scenes 1600 through 1603 concurrently."
+}
