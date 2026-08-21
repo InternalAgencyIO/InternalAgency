@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 395,
   "country": "Belize",
-  "status": "prepared-text-only-after-reference-upload-failure",
+  "status": "bank-1-nine-files-captured-unclassified",
   "preparedAtUtc": "2026-08-21T22:18:27.1323170Z",
   "sourceCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
   "contract": {
@@ -51,8 +51,8 @@
   "evidenceSnapshots": {
     "generatedMediaManifest": {
       "path": "progress-reports/codex-generated-media/manifest.jsonl",
-      "sha256": "F793662ADDFAEC1F64670B2C158E584C1C5FE07710CCC75EB30569BCE4893ABD",
-      "rows": 4681
+      "sha256": "44BA7091ABDB43E4C490766CE9B59610C9BF52C01331E5420F81F54E6CCB4E6C",
+      "rows": 4702
     },
     "rejectedPromptLedger": {
       "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
@@ -109,16 +109,18 @@
   },
   "blockedLexiconSnapshot": {
     "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
-    "sha256": "8462B31B0B0002693953F506ECB928C114ECA010937DE56516F57C8BAAD01E71",
-    "bytes": 317181
+    "sha256": "0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F",
+    "bytes": 324156,
+    "rows": 565
   },
   "fourTabBank": {
     "bank": 1,
     "requestedImagesPerPrompt": 1,
     "concurrentTabs": 4,
     "bolderPublicSafeScenes": [1600, 1602],
-    "dispatchState": "prepared-not-yet-sent",
-    "capturedOutputs": 0,
+    "dispatchState": "four-lane-provider-complete-capture-audited",
+    "capturedOutputs": 9,
+    "uniqueCapturedContents": 7,
     "completedRenderRunsSinceLastX": 0
   },
   "scenePlans": {
@@ -335,6 +337,49 @@
       }
     }
   },
+  "renderPipeline": {
+    "projectOccurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-395-belize-meta-bank-01.jsonl",
+    "externalStagingRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging/batch-395/bank-01",
+    "bank1": {
+      "dispatchStartedUtc": "2026-08-21T22:28:23.946Z",
+      "dispatchCompletedUtc": "2026-08-21T22:28:27.595Z",
+      "captureStartedUtc": "2026-08-21T22:32:26.0362030Z",
+      "captureCompletedUtc": "2026-08-21T22:32:31.1899914Z",
+      "requested": 4,
+      "returnedFiles": 9,
+      "uniqueContents": 7,
+      "providerShortfall": 0,
+      "completedOutputs": [
+        {"scene":1600,"lane":1,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-1/batch-395-bank-01-lane-1-scene-1600-output-1.webp","sha256":"995411F544B10F777D2A6A285C366590F679CD6479F15494A5E6F480C2A09347","bytes":530784,"width":1152,"height":2048,"disposition":"completed-unclassified"},
+        {"scene":1600,"lane":1,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-1/batch-395-bank-01-lane-1-scene-1600-output-2.webp","sha256":"6AB0F7325EC5CB1269A29AEE12769A91F3C45C0194EE063133587A02972DE59C","bytes":631838,"width":1152,"height":2048,"disposition":"completed-unclassified"},
+        {"scene":1601,"lane":2,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-2/batch-395-bank-01-lane-2-scene-1601-output-1.webp","sha256":"B9D2CD8F9D90ACC247BC7899A89F900BA4CD5BDC93CF244D3664E5755655089B","bytes":605202,"width":1152,"height":2048,"disposition":"completed-unclassified-provider-terminal-refusal"},
+        {"scene":1602,"lane":3,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-3/batch-395-bank-01-lane-3-scene-1602-output-1.webp","sha256":"CD18F9939ADDC6AE3C8804396549E343A2BE0C45E96187DFA020092688144613","bytes":686216,"width":1152,"height":2048,"disposition":"completed-unclassified"},
+        {"scene":1602,"lane":3,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-3/batch-395-bank-01-lane-3-scene-1602-output-2.webp","sha256":"CD18F9939ADDC6AE3C8804396549E343A2BE0C45E96187DFA020092688144613","bytes":686216,"width":1152,"height":2048,"duplicateContentOf":"lane-3-output-1","disposition":"completed-unclassified"},
+        {"scene":1603,"lane":4,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-1.webp","sha256":"5E49CDF4F6588F7C1515B40706B9AE8B44C55DE41E5E84909971A3A03C4C138A","bytes":564670,"width":1152,"height":2048,"disposition":"completed-unclassified"},
+        {"scene":1603,"lane":4,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-2.webp","sha256":"CDCEB11B87F469C13DD80541731DC8360E2EFE1C00BAE5E1A84439391FB8F3DB","bytes":530342,"width":1152,"height":2048,"disposition":"completed-unclassified"},
+        {"scene":1603,"lane":4,"output":3,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-3.webp","sha256":"03169F163AF2DD8DFDAF6260FDAA79D12F9244DA461631E1B0B4E6ECE57D00C8","bytes":531920,"width":1152,"height":2048,"disposition":"completed-unclassified"},
+        {"scene":1603,"lane":4,"output":4,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-4.webp","sha256":"5E49CDF4F6588F7C1515B40706B9AE8B44C55DE41E5E84909971A3A03C4C138A","bytes":564670,"width":1152,"height":2048,"duplicateContentOf":"lane-4-output-1","disposition":"completed-unclassified"}
+      ],
+      "terminalRefusals": [
+        {
+          "scene": 1601,
+          "promptSha256": "D5064D41D205A2CB7134A34304CF278C6B772A3B0EDE34706AC040DBF634E6FF",
+          "observedAtUtc": "2026-08-21T22:33:39.238Z",
+          "lexiconEventId": "d8861bbcca69b5b0e781a212243772321cd66ef10ac26763097d5a64badb6deb",
+          "fallbackPath": "tmp/world-195x4/batch-395/scene-1601-meta-bank-1-fallback.txt",
+          "fallbackDispatchState": "eligible-once-after-archive-and-parity-gate"
+        }
+      ],
+      "archiveCollector": {
+        "mode": "apply",
+        "occurrencesScanned": 4300,
+        "newManifestRows": 21,
+        "newBlobs": 7,
+        "newBlobBytes": 4080972
+      },
+      "classificationState": "nine-files-completed-unclassified"
+    }
+  },
   "browserEvidence": {
     "persistentMetaTabsRequired": 4,
     "referenceUploadOrder": [938, 936, 937],
@@ -350,7 +395,44 @@
       }
     ],
     "uploadOutcome": "technical-failure-no-upload-confirmed-text-only-required",
-    "dispatchOutcome": "not-yet-attempted"
+    "dispatchOutcome": "four-concurrent-primary-prompts-sent-no-immediate-refusal",
+    "bank1": {
+      "dispatchStartedUtc": "2026-08-21T22:28:23.946Z",
+      "dispatchCompletedUtc": "2026-08-21T22:28:27.595Z",
+      "immediateResponseCapturedAtUtc": "2026-08-21T22:29:10.279Z",
+      "mode": "four concurrent text-only Meta prompts after reference upload technical failure",
+      "providerOccurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-395-belize-meta-bank-01.jsonl",
+      "lanes": [
+        {
+          "lane": 1,
+          "scene": 1600,
+          "providerUrl": "https://www.meta.ai/prompt/62ff64a6-1ba6-425c-8316-43246b328524",
+          "immediateStatus": "Thinking, no refusal detected",
+          "rawMediaBytes": null
+        },
+        {
+          "lane": 2,
+          "scene": 1601,
+          "providerUrl": "https://www.meta.ai/prompt/4d99af9b-e893-4dcc-aaa9-bb0062142f2e",
+          "immediateStatus": "Thinking, no refusal detected",
+          "rawMediaBytes": null
+        },
+        {
+          "lane": 3,
+          "scene": 1602,
+          "providerUrl": "https://www.meta.ai/prompt/3542a295-50d7-4b39-80a9-bd2b62c1bcbc",
+          "immediateStatus": "Thinking, no refusal detected",
+          "rawMediaBytes": null
+        },
+        {
+          "lane": 4,
+          "scene": 1603,
+          "providerUrl": "https://www.meta.ai/prompt/a5af1a17-74b5-4c04-b680-d395e30907d2",
+          "immediateStatus": "Thinking, no refusal detected",
+          "rawMediaBytes": null
+        }
+      ]
+    }
   },
-  "nextAction": "Verify archive and ledger parity, commit and push this preflight, remote verify Git and LFS, then reuse exactly four persistent Meta tabs to dispatch Belize Bank 1 scenes 1600 through 1603 concurrently."
+  "nextAction": "Capture each Belize Bank 1 output immediately when Meta emits media, preserve raw bytes and hashes before QA, classify every occurrence, and keep each unresolved lane moving within the evidence gates."
 }
