@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 395,
   "country": "Belize",
-  "status": "bank-1-ten-files-captured-unclassified",
+  "status": "bank-1-classified-provisional-ready-4-of-4",
   "preparedAtUtc": "2026-08-21T22:18:27.1323170Z",
   "sourceCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
   "contract": {
@@ -400,7 +400,39 @@
         "newBlobs": 1,
         "newBlobBytes": 635678
       },
-      "classificationState": "ten-files-completed-unclassified"
+      "classificationState": "all-ten-files-classified",
+      "qaLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-395-belize-meta-bank-01-qa.jsonl",
+      "qaSummary": {
+        "classifiedOccurrences": 10,
+        "passingOccurrences": 6,
+        "hardUnusableOccurrences": 4,
+        "exactDuplicateOccurrences": 2,
+        "selectedScenes": 4,
+        "selectedSources": [
+          {
+            "scene": 1600,
+            "sha256": "6AB0F7325EC5CB1269A29AEE12769A91F3C45C0194EE063133587A02972DE59C",
+            "source": "primary-output-2"
+          },
+          {
+            "scene": 1601,
+            "sha256": "F75DF4905120696CD29DDDC10B93F02545A61503F81362AE8B4351E7DEF8D686",
+            "source": "single-authorized-fallback-output-1"
+          },
+          {
+            "scene": 1602,
+            "sha256": "CD18F9939ADDC6AE3C8804396549E343A2BE0C45E96187DFA020092688144613",
+            "source": "primary-output-1"
+          },
+          {
+            "scene": 1603,
+            "sha256": "CDCEB11B87F469C13DD80541731DC8360E2EFE1C00BAE5E1A84439391FB8F3DB",
+            "source": "primary-output-2"
+          }
+        ],
+        "selectedMetaState": "provisional-ready-after-full-pool-comparison",
+        "canonicalState": "not-canonical-before-final-edit-and-parity"
+      }
     }
   },
   "browserEvidence": {
@@ -457,5 +489,5 @@
       ]
     }
   },
-  "nextAction": "Classify all ten Belize Bank 1 files before any later successor, keep the strongest hard-gate passing source per scene, and do not send a second Scene 1601 fallback."
+  "nextAction": "Archive and remote verify the four provisional Meta sources, then apply the authorized clothing-only final edit workflow without reopening the resolved Meta lanes."
 }
