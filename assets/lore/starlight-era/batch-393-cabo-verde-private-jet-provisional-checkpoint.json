@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "batch": 393,
+  "country": "Cabo Verde",
+  "mission": "private jet aviation couture",
+  "ordinal": "1/2",
+  "status": "meta-provisional-sources-selected-pending-chatgpt-final-hem-refinement",
+  "providerPolicy": "Meta AI exclusive for country generation and scene correction",
+  "faceAnchorManifest": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+  "faceAnchorSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D",
+  "sceneSelections": [
+    {
+      "scene": 1592,
+      "environment": "sunset",
+      "planet": "TRAPPIST-1 e",
+      "setting": "habitat interior",
+      "selectedMetaBank": 4,
+      "selectedMetaSha256": "F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-04/batch393-bank04-lane1-scene1592-asset-783508016-actual.webp",
+      "promptSha256": "4FB198092095C5BA400AB4F68EFE57B6B6FCB13B633496BFFEA49405724282C3",
+      "disposition": "provisional-ready"
+    },
+    {
+      "scene": 1593,
+      "environment": "sunset",
+      "planet": "TRAPPIST-1 e",
+      "setting": "protected exterior surface",
+      "selectedMetaBank": 3,
+      "selectedMetaSha256": "9D19FF1B52B0D17845FC5DF4C33D002D7F3DEDAD5402DA6E25E6B08966060232",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-03/lane-2/batch-393-bank-03-lane-2-scene-1593-output-1.webp",
+      "promptSha256": "81F8356EC98257F03067ACCC5621BB6AF112D894343231C81F08A33D4965FE69",
+      "disposition": "provisional-ready"
+    },
+    {
+      "scene": 1594,
+      "environment": "sunset",
+      "planet": "Kepler-186 f",
+      "setting": "habitat interior",
+      "selectedMetaBank": 4,
+      "selectedMetaSha256": "FF0246007055F4DF4C9E0E49BC47CABE0D77742005A7DDF5E5B1352CB7BE8925",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-04/batch393-bank04-lane3-scene1594-asset-783012263-actual.webp",
+      "promptSha256": "F22E848919EBCD25F0B4BE7E144691DA61DA25C963A78BB29263FAA74C1FDB4C",
+      "disposition": "provisional-ready"
+    },
+    {
+      "scene": 1595,
+      "environment": "golden-hour sunrise",
+      "planet": "Kepler-186 f",
+      "setting": "protected exterior surface",
+      "selectedMetaBank": 4,
+      "selectedMetaSha256": "5ED8934315B50E385691B68B8DCB1653D500FED5D1FD7F158193D3FC63F84608",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-04/batch393-bank04-lane4-scene1595-asset-782905651-actual.webp",
+      "promptSha256": "7863EA60B3840EF28E6A14029BF3514E4AEBD8F31E701A16B89BE542C819571A",
+      "disposition": "provisional-ready"
+    }
+  ],
+  "evidence": {
+    "archiveManifest": "progress-reports/codex-generated-media/manifest.jsonl",
+    "qaFiles": [
+      "tmp/world-195x4/batch-393/raw/bank-01/preliminary-qa.jsonl",
+      "tmp/world-195x4/batch-393/raw/bank-02/preliminary-qa.jsonl",
+      "tmp/world-195x4/batch-393/raw/bank-03/preliminary-qa.jsonl",
+      "tmp/world-195x4/batch-393/raw/bank-04/preliminary-qa.jsonl"
+    ],
+    "noBytesProvenance": "tmp/world-195x4/batch-393/raw/no-bytes-provenance.jsonl",
+    "checksumInventory": "tmp/world-195x4/batch-393/raw/capture-checksums.tsv",
+    "rejectedPromptLedgerVerify": "pass",
+    "projectFailedPromptLedgerVerify": "pass"
+  },
+  "nextRequiredStage": "commit push and remote verify this provisional checkpoint, then run one clothing-only ChatGPT refinement per selected scene with at most one conditional retry per scene"
+}
