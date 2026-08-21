@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "batch": 394,
+  "country": "Brunei",
+  "status": "bank-2-eight-media-captured-classified-rejected-bank-3-prepared",
+  "preparedAtUtc": "2026-08-21T08:24:29.9145105Z",
+  "sourceCommit": "85cc40024db027a44c60a9d4a25faa3da9c62640",
+  "contract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC"
+  },
+  "queueAuthorization": {
+    "priorCountry": "Cabo Verde",
+    "priorBatch": 393,
+    "priorStatus": "closed-4-of-4",
+    "nextCountry": "Brunei",
+    "nextBatch": 394,
+    "scenes": [1596, 1597, 1598, 1599],
+    "cinematicTheme": "private-jet aviation couture",
+    "themePairPosition": "2 of 2",
+    "provider": "Meta AI"
+  },
+  "evidenceSnapshots": {
+    "generatedMediaManifest": {
+      "path": "progress-reports/codex-generated-media/manifest.jsonl",
+      "sha256": "F8C51D6DC9F807A517CB08D2D6182CF50008AE5220054A90027731918935639F",
+      "rows": 4470
+    },
+    "rejectedPromptLedger": {
+      "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
+      "sha256": "F35144FF7EF2145ECB2F9C284789C3E25B9A6D46D4606CAEAD2CB723698106FD"
+    },
+    "xLedger": {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "sha256": "9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064",
+      "eligibleBacklogRemaining": 0,
+      "completedRenderRunsSinceLastX": 0
+    }
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "exactAge": 21,
+    "verifiedAtUtc": "2026-08-21T08:24:29.9145105Z",
+    "uploadOrder": [
+      {
+        "slot": 1,
+        "scene": 938,
+        "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "verified": true
+      },
+      {
+        "slot": 2,
+        "scene": 936,
+        "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "verified": true
+      },
+      {
+        "slot": 3,
+        "scene": 937,
+        "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+        "verified": true
+      }
+    ],
+    "binding": {
+      "Alia": "voluminous natural curls, Black woman, far left in scene 938",
+      "Radiance": "blonde, second from left in scene 938",
+      "Ellie": "dark-haired, third from left in scene 938",
+      "AI ECE": "dark-haired, far right in scene 938"
+    }
+  },
+  "activeSuppressionProfile": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_active_suppression_profile.json",
+    "sha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+    "termLimit": 20,
+    "postSuppressionPromptMatches": 0
+  },
+  "blockedLexiconSnapshot": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+    "sha256": "C59CBB0EC73DDD3C9673A01531373E18ED162C877D127A83137513C5903C603D",
+    "bytes": 297481
+  },
+  "fourTabBank": {
+    "bank": 1,
+    "requestedImagesPerPrompt": 1,
+    "concurrentTabs": 4,
+    "bolderPublicSafeScenes": [1596, 1598],
+    "dispatchState": "prepared-not-yet-sent",
+    "capturedOutputs": 0,
+    "completedRenderRunsSinceLastX": 0
+  },
+  "scenePlans": {
+    "1596": {
+      "scene": 1596,
+      "countryResearchGeometry": "Kampong Ayer stilt-grid, Brunei River bend, timber walkway, water route, mangrove roots, and footbridge geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1596",
+        "counter": 0,
+        "acceptedByte": 147,
+        "digestSha256": "935F5C7DED846B6186766478963552B35402934AC32E8E4B9CB4D79A6D088236",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light beyond the broad habitat window"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1596",
+        "counter": 0,
+        "acceptedByte": 114,
+        "digestSha256": "72926227B79E3F6760EC48037155A4620AFF01B4099A14DF7EDFEE4BC9E4980F",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1596",
+        "counter": 0,
+        "acceptedByte": 183,
+        "digestSha256": "B7A037865827407E54F581CB6A3DD034D55A1AC77495FA74D2F7F866F5B90E39",
+        "bucket": 0,
+        "name": "habitat interior",
+        "promptLanguage": "inside a speculative TOI-700 d research habitat with one broad fluffy couture daybed and a broad window to the sunset alien horizon"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Alia",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1596|knee-high-wearers",
+        "fnv1a32": 4215732640,
+        "pairIndex": 4,
+        "wearers": ["Ellie", "AI ECE"],
+        "uncoveredLowerLegCharacters": ["Radiance", "Alia"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1596-meta-bank-1-primary.txt",
+        "sha256": "CA086E2ACC76F0A1F8DFED998B894C15856D9DE2191B89AC67DB968BF4083B3B",
+        "bytes": 3902,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1596-meta-bank-1-fallback.txt",
+        "sha256": "9D4592203D13BE9D52FBE7B6A40C3DB65EF087F212E79BA120A11EC17FCF6CB1",
+        "bytes": 1811
+      }
+    },
+    "1597": {
+      "scene": 1597,
+      "countryResearchGeometry": "Ulu Temburong canopy, river bend, canopy-tower lattice, leaf-vein route, buttress roots, mist bands, and longboat-wake geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1597",
+        "counter": 0,
+        "acceptedByte": 132,
+        "digestSha256": "84126A15036A1383E5CD0126AD28850399B20F316D97D9A0084FEE5EC0A97846",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light beyond the broad habitat window"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1597",
+        "counter": 0,
+        "acceptedByte": 67,
+        "digestSha256": "43903FF806B6AEC35C7F77E46EAFCBD1BDB9219B5F6BB473634621F0BC23533E",
+        "bucket": 2,
+        "name": "Kepler-186 f"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1597",
+        "counter": 0,
+        "acceptedByte": 30,
+        "digestSha256": "1E7829A3C1BF4F278B790095435727B3DAFA21E2425239551D0CAD8959253659",
+        "bucket": 0,
+        "name": "habitat interior",
+        "promptLanguage": "inside a speculative Kepler-186 f research habitat with one deep padded couture daybed and a broad window to the sunset alien horizon"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "AI ECE",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1597|knee-high-wearers",
+        "fnv1a32": 4000783051,
+        "pairIndex": 1,
+        "wearers": ["Radiance", "Alia"],
+        "uncoveredLowerLegCharacters": ["Ellie", "AI ECE"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1597-meta-bank-1-primary.txt",
+        "sha256": "3C7F782D77658D81F30F095E99D45CD5EE28A7C102EC545308E51096BC534AFC",
+        "bytes": 3703,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1597-meta-bank-1-fallback.txt",
+        "sha256": "805F76DF8E9EC08F764405549257A53736D69983DBDE8523DA5ACC3545EB56FB",
+        "bytes": 1761
+      }
+    },
+    "1598": {
+      "scene": 1598,
+      "countryResearchGeometry": "Temburong Bridge span, Brunei Bay curve, mangrove-island, tidal-channel, structural-cable, and water-route geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1598",
+        "counter": 0,
+        "acceptedByte": 56,
+        "digestSha256": "383A4532458E1890D02736106972B1FF0CC82705F789E6F59FF0774423D40E65",
+        "bucket": 1,
+        "name": "golden-hour sunrise",
+        "promptLanguage": "golden-hour sunrise across the open alien sky"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1598",
+        "counter": 0,
+        "acceptedByte": 224,
+        "digestSha256": "E067E2BE8908257A629733D8786C0C9BE4A1BA18A9FF358C1467509D2B5867DD",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1598",
+        "counter": 0,
+        "acceptedByte": 172,
+        "digestSha256": "ACBDAB6D33BD1C478531EEAF395287C76FC2502B102E574A79589E148BC58D14",
+        "bucket": 1,
+        "name": "protected exterior surface",
+        "promptLanguage": "outdoors on the speculative TOI-700 d surface beneath a transparent pressure field and open-sided research shield, with dominant terrain, sky and horizon plus dry stable footing"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Ellie",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1598|knee-high-wearers",
+        "fnv1a32": 4000880642,
+        "pairIndex": 2,
+        "wearers": ["Radiance", "AI ECE"],
+        "uncoveredLowerLegCharacters": ["Ellie", "Alia"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1598-meta-bank-1-primary.txt",
+        "sha256": "A7575A69DF06C5E67EA865EE5FFDB2F3C3CFAA0E81FE76D2A373000CE7A96316",
+        "bytes": 3985,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1598-meta-bank-1-fallback.txt",
+        "sha256": "000B8A1BF9BB6907C38795A467331ECFEE283B217D0BD1A0881BD1EC7AC1C80D",
+        "bytes": 1919
+      }
+    },
+    "1599": {
+      "scene": 1599,
+      "countryResearchGeometry": "Tanjung Batu coastline, Muara wave bands, black-rock fan, mangrove edge, empty jetty, sunset cloud, and Brunei Bay geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1599",
+        "counter": 0,
+        "acceptedByte": 222,
+        "digestSha256": "DE8CD5B3171231F9B15A03AD7D279B1744A51E602FE769CDE3EB57B0F137796E",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light beyond the broad habitat window"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1599",
+        "counter": 0,
+        "acceptedByte": 159,
+        "digestSha256": "9F4C1AFB2045478E271AF7371D2452A2B504126BD5DA8C328493B1AAAA52A7B9",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1599",
+        "counter": 0,
+        "acceptedByte": 237,
+        "digestSha256": "ED671F83D35870DE36260F98BA3C8B3269EB3A32301A83F733736575EC6D8287",
+        "bucket": 0,
+        "name": "habitat interior",
+        "promptLanguage": "inside a speculative TOI-700 d research habitat with one broad fluffy couture lounge bed and a broad window to the sunset alien horizon"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Radiance",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1599|knee-high-wearers",
+        "fnv1a32": 3403318541,
+        "pairIndex": 5,
+        "wearers": ["Alia", "AI ECE"],
+        "uncoveredLowerLegCharacters": ["Radiance", "Ellie"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1599-meta-bank-1-primary.txt",
+        "sha256": "953C29E0E93329AB15610E1F3DFFC139415B6EA737D182F6E1B2CB167DC27B1F",
+        "bytes": 3776,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1599-meta-bank-1-fallback.txt",
+        "sha256": "ADBDDAFFAC66E99F208083126740092071CAB2EF9B08B5F97E867E88E40DEB46",
+        "bytes": 1870
+      }
+    }
+  },
+  "browserEvidence": {
+    "referenceUploadAttempts": [
+      {
+        "utc": "2026-08-21T08:33:40.9298467Z",
+        "scope": "four persistent Meta tabs for scenes 1596 through 1599",
+        "orderedReferenceScenes": [938, 936, 937],
+        "outcome": "technical-failure-no-upload-confirmed",
+        "exactFailure": "Timed out after 3000ms waiting for file chooser.",
+        "rawMediaBytes": null,
+        "provenance": "The hidden file input did not emit a supported file chooser event during the first concurrent upload attempt. No reference upload is claimed. The browser runtime reset after the unhandled timeout."
+      },
+      {
+        "utc": "2026-08-21T08:39:36.5601154Z",
+        "scope": "four replacement Meta tabs for scenes 1596 through 1599",
+        "orderedReferenceScenes": [938, 936, 937],
+        "outcome": "upload-previews-cleared-before-dispatch-text-only-required",
+        "exactFailure": "All four tabs initially displayed three ordered local preview images, then all four cleared the filenames and blob previews before dispatch without a visible provider error.",
+        "rawMediaBytes": null,
+        "provenance": "The visible Meta attachment dropzone accepted the three ordered files in every lane and briefly exposed their exact filenames. A pre-dispatch DOM check then found no 938, 936, 937 filename and no Meta blob preview in any lane. No persisted upload is claimed. The dispatch must use the exact textual face and position map."
+      }
+    ]
+  },
+  "renderPipeline": {
+    "projectOccurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-394-brunei-meta-bank-01-02.jsonl",
+    "bank1": {
+      "dispatchStartedUtc": "2026-08-21T08:41:05.717Z",
+      "dispatchCompletedUtc": "2026-08-21T08:41:08.814Z",
+      "mode": "four concurrent text-only Meta prompts after upload previews cleared",
+      "externalOccurrenceManifest": "outputs/meta5_batch_staging/brunei_batch394_manifest.jsonl",
+      "completedOutputs": [
+        {"scene":1596,"lane":1,"providerUrl":"https://www.meta.ai/prompt/a8ecd510-852c-437f-a816-94911b387da5","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-1/batch-394-bank-01-lane-1-scene-1596-output-1.webp","sha256":"974DD99545FBC9997164520D21E06FA8AB2B91B26565A95537A75C27627C6F82","bytes":560296,"width":1152,"height":2048,"qaDisposition":"rejected-hard-prop-safety-and-provider-primary-refusal","qaReason":"The four adult identities are distinct, but the rainbow large-frame object crosses the group without an unoccupied backstop and Meta's terminal response refused the exact requested combination."},
+        {"scene":1597,"lane":2,"providerUrl":"https://www.meta.ai/prompt/9f6c2e1e-248f-44f8-a68d-73701389da90","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-2/batch-394-bank-01-lane-2-scene-1597-output-1.webp","sha256":"6A8601CC5CC64A025FC6E8A43181D782389D074809E12503C676EA70B8B42C06","bytes":461062,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure","qaReason":"The intended Alia identity is replaced by a light-skinned blonde-curled face rather than the scene-938 Black face with voluminous natural curls."},
+        {"scene":1598,"lane":3,"providerUrl":"https://www.meta.ai/prompt/d67641fa-1565-4d65-b087-cf2e9f942a61","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-3/batch-394-bank-01-lane-3-scene-1598-output-1.webp","sha256":"AB5355A838260C3B3F83976C981E13DE21A2082C28E702342A73F27BE6BAD6BB","bytes":622890,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure","qaReason":"The intended Alia identity is replaced by a light-skinned blonde-curled face rather than the scene-938 Black face with voluminous natural curls."},
+        {"scene":1599,"lane":4,"providerUrl":"https://www.meta.ai/prompt/14d16731-fb10-41d9-8470-8d52570f2d3e","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-4/batch-394-bank-01-lane-4-scene-1599-output-1.webp","sha256":"6EF71BE6A7022A1FB2BC2107937D478C1626D4C4BBF3D181D2CD540A494B1C27","bytes":550820,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-and-prop-safety-failure","qaReason":"The intended Alia identity is replaced by a light-skinned blonde-curled face, and the large-frame object crosses the group without a clearly unoccupied backstop."}
+      ],
+      "transientNoBytesOccurrences": 4,
+      "status": "four-outputs-captured-and-classified-rejected"
+    },
+    "bank2": {
+      "dispatchStartedUtc": "2026-08-21T08:54:09.709Z",
+      "dispatchCompletedUtc": "2026-08-21T08:54:10.001Z",
+      "prompts": [
+        {"scene":1596,"path":"tmp/world-195x4/batch-394/scene-1596-meta-bank-2-fallback-retry.txt","sha256":"6018556D2C069E1AE159F5452F6C5EC8111499D436C6EEE53A00F9166E8AD69F","role":"single allowed fallback after exact primary refusal"},
+        {"scene":1597,"path":"tmp/world-195x4/batch-394/scene-1597-meta-bank-1-fallback.txt","sha256":"805F76DF8E9EC08F764405549257A53736D69983DBDE8523DA5ACC3545EB56FB","role":"alternate candidate"},
+        {"scene":1598,"path":"tmp/world-195x4/batch-394/scene-1598-meta-bank-1-fallback.txt","sha256":"000B8A1BF9BB6907C38795A467331ECFEE283B217D0BD1A0881BD1EC7AC1C80D","role":"alternate candidate"},
+        {"scene":1599,"path":"tmp/world-195x4/batch-394/scene-1599-meta-bank-1-fallback.txt","sha256":"ADBDDAFFAC66E99F208083126740092071CAB2EF9B08B5F97E867E88E40DEB46","role":"alternate candidate"}
+      ],
+      "completedOutputs": [
+        {"scene":1596,"lane":1,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-1/batch-394-bank-02-lane-1-scene-1596-visible-1-778710499_3668885029934437_2103418159079199258_n.webp","sha256":"E4C39E993292A0810848F0BFECBB2F9E9DB524E1B491007E9AB5ABB1FEEB6693","bytes":573672,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1596,"lane":1,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-1/batch-394-bank-02-lane-1-scene-1596-visible-2-535156144_1813601490014943_7524014703653997513_n.webp","sha256":"15D9D01ACC189D18B834F38355659C4EC4DA8415EB5D7422F427E11E8135C8DF","bytes":573026,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1597,"lane":2,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-2/batch-394-bank-02-lane-2-scene-1597-visible-1-778793612_907293965336332_5264533491334445590_n.webp","sha256":"FEF98A54E2AD29432172FCCAB4BB7958721A9F5D60B1D30ABB623A4CB429DDA2","bytes":486846,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1597,"lane":2,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-2/batch-394-bank-02-lane-2-scene-1597-visible-2-780031735_2675762906152257_4143646534841604754_n.webp","sha256":"DA828906E3503EE01F3CDD326DFEE3111B8DD321A0661AEC9A6848BE9D10C321","bytes":560606,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1597,"lane":2,"output":3,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-2/batch-394-bank-02-lane-2-scene-1597-visible-3-586187793_1355750550053035_4691166618339656218_n.webp","sha256":"83DE59F6C88E21BA129D349279DCFA0E9A8CB5CD6799431E5DCDAFD2DAEB3057","bytes":473074,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-and-prop-isolation-failure"},
+        {"scene":1598,"lane":3,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-3/batch-394-bank-02-lane-3-scene-1598-visible-1-779975274_2006498513193070_2359518938282678271_n.webp","sha256":"48622DECB9C7ACE53FF3F71E7B51A4F85DDF844DF1EEA78DEB267DCB52970E0B","bytes":567960,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1598,"lane":3,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-3/batch-394-bank-02-lane-3-scene-1598-visible-2-589947714_1375949728006076_8686384559870134722_n.webp","sha256":"A4B2315471D97637EB896771FB741CC023E12FA30905D24586573708166702AF","bytes":533094,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-and-prop-isolation-failure"},
+        {"scene":1599,"lane":4,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-4/batch-394-bank-02-lane-4-scene-1599-visible-1-589510126_1417304233796378_3957773488176428834_n.webp","sha256":"D8BEC6D7808AE758638C3B428D2F3BD1DD11E5F11DE629A00199F18AFB43D051","bytes":560778,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"}
+      ],
+      "exactProviderResponseCapturedUtc": "2026-08-21T09:10:41.745Z",
+      "status": "eight-visible-media-files-captured-and-classified-rejected"
+    },
+    "bank3Prepared": {
+      "activeSuppressionProfileMatches": 0,
+      "forbiddenDashMatches": 0,
+      "prompts": [
+        {"scene":1596,"primaryPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-3-primary.txt","primarySha256":"1A67EAA590C14D6834D7F6F25C7557A1FE02A01D176F6994974408D99987997C","fallbackPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-3-fallback.txt","fallbackSha256":"3B307F36C5CF9F87DA790530657F6129C918FCBBAA58B50A6B3B5775136257C1"},
+        {"scene":1597,"primaryPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-3-primary.txt","primarySha256":"CD598D775495CC518139D5D2496A908166E2982550BA7821A6934350AB22FCE9","fallbackPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-3-fallback.txt","fallbackSha256":"D36F71BE6878D5E9F02C0F4EBCD9D9614682EA4EB3CF011EE60BA28CC28535C4"},
+        {"scene":1598,"primaryPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-3-primary.txt","primarySha256":"32C62FD5730649D0F38B1854BE62E852806FD98C745F0D24DB75F7623EBDF61A","fallbackPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-3-fallback.txt","fallbackSha256":"967DFED416E67F7A3E54FEEDA4C286BF859876848995C0349412ADBCEB736356"},
+        {"scene":1599,"primaryPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-3-primary.txt","primarySha256":"D3FCE7BDFEED81402C0E8AE5F09F98E43E6C8E0C98F2B00B646C3571197F1B63","fallbackPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-3-fallback.txt","fallbackSha256":"4F7948B29C7F383AE26FCEE598004A0824AA889CE60B6D6AFA8FBB605AF860EC"}
+      ],
+      "status": "four-identity-first-primary-and-fallback-pairs-ready"
+    }
+  },
+  "nextAction": "Dispatch the four Bank 3 primary prompts concurrently, preserve every terminal media file or explicit no-bytes occurrence, then classify Bank 3 before any Bank 4 dispatch."
+}
