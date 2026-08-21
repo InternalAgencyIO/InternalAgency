@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 395,
   "country": "Belize",
-  "status": "bank-1-classified-provisional-ready-4-of-4",
+  "status": "chatgpt-final-clothing-complete-pending-remote-parity",
   "preparedAtUtc": "2026-08-21T22:18:27.1323170Z",
   "sourceCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
   "contract": {
@@ -435,6 +435,61 @@
       }
     }
   },
+  "chatgptFinalClothingEdit": {
+    "completedAtUtc": "2026-08-21T23:40:46.096Z",
+    "provider": "built-in ChatGPT image generation",
+    "useCase": "identity-preserve clothing-only edit",
+    "blockedLexiconSnapshotSha256": "0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F",
+    "activeSuppressionProfileSha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+    "historicalFaceReferenceHashesVerified": 3,
+    "primaryCallsUsed": 4,
+    "conditionalRetriesUsed": 0,
+    "hardSafetyFailures": 0,
+    "faceAnchorFailures": 0,
+    "invalidMedia": 0,
+    "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-395-belize-chatgpt-final-clothing.jsonl",
+    "archiveCollector": {
+      "mode": "apply",
+      "occurrencesScanned": 4204,
+      "newManifestRows": 8,
+      "newBlobs": 0,
+      "newBlobBytes": 0,
+      "postApplyDryRunNewManifestRows": 0,
+      "postApplyDryRunNewBlobs": 0,
+      "manifestSha256": "9EE3C53CDD503B20647885E597580049C746DC330325AD63A8A95AEF5664158D"
+    },
+    "finalSelections": [
+      {
+        "scene": 1600,
+        "sourceMetaSha256": "6AB0F7325EC5CB1269A29AEE12769A91F3C45C0194EE063133587A02972DE59C",
+        "finalSha256": "FA1FD0F2F3618EF2B1D221DBBB2E321FFBA2A29D7A6B16C1535027C8DF581339",
+        "canonicalPath": "assets/lore/starlight-era/1600-belize-city-swing-bridge-storm-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe"
+      },
+      {
+        "scene": 1601,
+        "sourceMetaSha256": "F75DF4905120696CD29DDDC10B93F02545A61503F81362AE8B4351E7DEF8D686",
+        "finalSha256": "6384FC6BB6A7A398D92644776E1048FF783D3C47563361AC5C6094494B19839F",
+        "canonicalPath": "assets/lore/starlight-era/1601-belize-great-blue-hole-storm-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe"
+      },
+      {
+        "scene": 1602,
+        "sourceMetaSha256": "CD18F9939ADDC6AE3C8804396549E343A2BE0C45E96187DFA020092688144613",
+        "finalSha256": "DD4CC56E13D5334D637CB34BDF59CB722037AC76B3745075457ECE4401F295D9",
+        "canonicalPath": "assets/lore/starlight-era/1602-belize-cockscomb-sunset-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe"
+      },
+      {
+        "scene": 1603,
+        "sourceMetaSha256": "CDCEB11B87F469C13DD80541731DC8360E2EFE1C00BAE5E1A84439391FB8F3DB",
+        "finalSha256": "C6FCF8F1D89431E5342B3660CA732CD30349B9E8E3A1D12E5047CCAE119DC280",
+        "canonicalPath": "assets/lore/starlight-era/1603-belize-placencia-sunset-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe"
+      }
+    ],
+    "acceptanceState": "canonical-final-pending-remote-parity"
+  },
   "browserEvidence": {
     "persistentMetaTabsRequired": 4,
     "referenceUploadOrder": [938, 936, 937],
@@ -489,5 +544,5 @@
       ]
     }
   },
-  "nextAction": "Archive and remote verify the four provisional Meta sources, then apply the authorized clothing-only final edit workflow without reopening the resolved Meta lanes."
+  "nextAction": "Archive, commit, push, and remote verify the four accepted ChatGPT final clothing edits without reopening the resolved Meta lanes."
 }
