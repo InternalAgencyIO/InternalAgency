@@ -206,6 +206,16 @@
   ],
   "pendingPost": null,
   "preparedPostQueue": [],
+  "publicationCadenceState": {
+    "mode": "render-first-after-backlog-clearance",
+    "currentBacklogClearedAt": "2026-08-21T08:06:54.2581795Z",
+    "completedRenderRunsSinceLastX": 0,
+    "requiredRenderRunsBeforeNextXWindow": 5,
+    "banksPerRenderRun": 10,
+    "promptsPerBank": 4,
+    "provider": "Meta AI",
+    "counterRule": "Increment only after all ten four-tab banks and their evidence gates complete. After five completed runs, reconcile the ledger and prepare at most one eligible three-asset two-country X post. Reset only after its public URL and full archive, Git, LFS, remote SHA and PR parity are recorded."
+  },
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
     "status": "paused-by-user",
@@ -5076,6 +5086,266 @@
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Exact approved caption, exactly 3 attachments, signed-in @dogramaci account, public status URL, and three photo endpoints verified live.",
       "transmission": "action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 384,
+      "postedAt": "2026-08-21T08:01:13.9140000Z",
+      "verifiedAt": "2026-08-21T08:06:54.2581795Z",
+      "postUrl": "https://x.com/dogramaci/status/2090710804232351899",
+      "caption": "Comoros ❤️ Guyana: jewel-bright couture, stormlit coastlines, and a close-held island gaze. #WorldXXXSeries #RAZE",
+      "imageNumbers": [
+        1556,
+        1557,
+        1560
+      ],
+      "countries": [
+        "Comoros",
+        "Guyana"
+      ],
+      "assets": [
+        {
+          "file": "1556-comoros-mutsamudu-moon-surface-expedition-bounded-pass-2.png",
+          "sha256": "92125e35bd86772a626d7b288218aa3d5eec7f74144ca832409135bf315cf618"
+        },
+        {
+          "file": "1557-comoros-coelacanth-coast-moon-surface-expedition-bounded-pass-2.png",
+          "sha256": "4f5aa4b51ab541cfd253cd8d7b1909c31f34d3b969f190994b5846696cc94ca1"
+        },
+        {
+          "file": "1560-guyana-orinduik-falls-near-sun-solar-observation-bounded-pass-1.png",
+          "sha256": "2291bfd0e46b4781ea4719bc2d81740388a3b23af0bc5b03256c60c979482898"
+        }
+      ],
+      "hashtagRollAudit": [
+        {
+          "hashtag": "#InternalAgency",
+          "key": "starlight|social-hashtag|x|batches-384-385|InternalAgency|counter-0",
+          "counter": 0,
+          "acceptedByte": 52,
+          "digestSha256": "34E85E1FE97ADC27BBA6D55F94C4864AC58EC5710C52A208449FFC12496759A6",
+          "roll": 52,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#WorldXXXSeries",
+          "key": "starlight|social-hashtag|x|batches-384-385|WorldXXXSeries|counter-0",
+          "counter": 0,
+          "acceptedByte": 0,
+          "digestSha256": "0041A6AB8043473A357BAA29F2609DD495374EA5C508FD43B96CADB777AEAF94",
+          "roll": 0,
+          "threshold": 25,
+          "included": true
+        },
+        {
+          "hashtag": "#RAZE",
+          "key": "starlight|social-hashtag|x|batches-384-385|RAZE|counter-0",
+          "counter": 0,
+          "acceptedByte": 105,
+          "digestSha256": "6913E94DEC64E9DC357AD6C830410F0A295C3A247CC9DD23D8283C9849B05BA7",
+          "roll": 5,
+          "threshold": 31,
+          "included": true
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, exactly 3 attachments, signed-in @dogramaci account, sent notice, public status URL, and three photo endpoints verified live.",
+      "transmission": "grouped-action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 386,
+      "postedAt": "2026-08-21T08:03:30.9970000Z",
+      "verifiedAt": "2026-08-21T08:06:54.2581795Z",
+      "postUrl": "https://x.com/dogramaci/status/2090711379200073927",
+      "caption": "Solomon Islands ❤️ Bhutan: waterfall mist, luminous couture, and a close embrace at the rainforest edge.",
+      "imageNumbers": [
+        1564,
+        1565,
+        1568
+      ],
+      "countries": [
+        "Solomon Islands",
+        "Bhutan"
+      ],
+      "assets": [
+        {
+          "file": "1564-solomon-islands-matanikau-cascade-near-sun-solar-observation-bounded-pass-1.png",
+          "sha256": "2db0e266d2cd6567075488f5351cf1ec982cc8dd4c0f7311f3db2fcc8e47af87"
+        },
+        {
+          "file": "1565-solomon-islands-marovo-lagoon-near-sun-solar-observation-bounded-pass-2.png",
+          "sha256": "9f4b5defec5aa756ad688d3daf035d79ff567053b3ac6814147c12fa56078dbe"
+        },
+        {
+          "file": "1568-bhutan-thimphu-clock-tower-deep-sea-submersible-bounded-pass-1.png",
+          "sha256": "4c76c95cf0a592ad53e55814efae866aa4c3ac4d591516a8144174604ab812c0"
+        }
+      ],
+      "hashtagRollAudit": [
+        {
+          "hashtag": "#InternalAgency",
+          "key": "starlight|social-hashtag|x|batches-386-387|InternalAgency|counter-0",
+          "counter": 0,
+          "acceptedByte": 46,
+          "digestSha256": "2E34E1E1DAC11C874D29BE7CE54E7996A6A2A4ABE02BC616269EC753DA073A7E",
+          "roll": 46,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#WorldXXXSeries",
+          "key": "starlight|social-hashtag|x|batches-386-387|WorldXXXSeries|counter-0",
+          "counter": 0,
+          "acceptedByte": 135,
+          "digestSha256": "8758FD19DA559197B369172B19DC12BC124FCE19DFF99D6976CC130D11D84E28",
+          "roll": 35,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#RAZE",
+          "key": "starlight|social-hashtag|x|batches-386-387|RAZE|counter-0",
+          "counter": 0,
+          "acceptedByte": 39,
+          "digestSha256": "27E32839F267B1723642541DF95EF215EF281AACA129F49F8E6F1F56209C2468",
+          "roll": 39,
+          "threshold": 31,
+          "included": false
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, exactly 3 attachments, signed-in @dogramaci account, sent notice, public status URL, and three photo endpoints verified live.",
+      "transmission": "grouped-action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 389,
+      "postedAt": "2026-08-21T08:04:41.6620000Z",
+      "verifiedAt": "2026-08-21T08:06:54.2581795Z",
+      "postUrl": "https://x.com/dogramaci/status/2090711675590607183",
+      "caption": "Suriname ❤️ Montenegro: riverlit couture, rainforest air, and a close-held spark beneath the airship glow. #InternalAgency",
+      "imageNumbers": [
+        1576,
+        1577,
+        1580
+      ],
+      "countries": [
+        "Suriname",
+        "Montenegro"
+      ],
+      "assets": [
+        {
+          "file": "1576-suriname-waterkant-polar-airship-meta-ai-bounded-pass-2.webp",
+          "sha256": "c8ad0fc4954366ffed1bf37f64028a076fe8101d5ca6f4d506f9cf909e459c5e"
+        },
+        {
+          "file": "1577-suriname-brownsberg-brokopondo-polar-airship-meta-ai-bounded-pass-2.webp",
+          "sha256": "9efcc0ae31b34f8ed949f0e496e813e92d91a07532a2b881bedd87952e3cc80d"
+        },
+        {
+          "file": "1580-montenegro-black-lake-polar-airship-raze-meta-ai-bounded-pass-1.webp",
+          "sha256": "5ce5e2d873be0cf0a47971a69c8fcd369b6e1f0c4596c4e966555993e787871c"
+        }
+      ],
+      "hashtagRollAudit": [
+        {
+          "hashtag": "#InternalAgency",
+          "key": "starlight|social-hashtag|x|batches-389-390|InternalAgency|counter-0",
+          "counter": 0,
+          "acceptedByte": 1,
+          "digestSha256": "012BC8D92D2FFD361228C955A63295ABC5B5EAC544049EA2FD003E77A643B5E4",
+          "roll": 1,
+          "threshold": 25,
+          "included": true
+        },
+        {
+          "hashtag": "#WorldXXXSeries",
+          "key": "starlight|social-hashtag|x|batches-389-390|WorldXXXSeries|counter-0",
+          "counter": 0,
+          "acceptedByte": 136,
+          "digestSha256": "8848E1B4547E7230506ADD3B243182DE495A2672251FD54B8750F572D298F549",
+          "roll": 36,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#RAZE",
+          "key": "starlight|social-hashtag|x|batches-389-390|RAZE|counter-1",
+          "counter": 1,
+          "acceptedByte": 196,
+          "digestSha256": "C487B58F662599A95EE50A910A071EF154A84FE315EECA1506FB5111E8EB137D",
+          "roll": 96,
+          "threshold": 31,
+          "included": false
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, exactly 3 attachments, signed-in @dogramaci account, sent notice, public status URL, and three photo endpoints verified live.",
+      "transmission": "grouped-action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 391,
+      "postedAt": "2026-08-21T08:05:55.8430000Z",
+      "verifiedAt": "2026-08-21T08:06:54.2581795Z",
+      "postUrl": "https://x.com/dogramaci/status/2090711986728239557",
+      "caption": "Malta ❤️ Montenegro: golden harbor light, rainbow RAZE, and a close-held moment above the Mediterranean.",
+      "imageNumbers": [
+        1584,
+        1586,
+        1582
+      ],
+      "countries": [
+        "Malta",
+        "Montenegro"
+      ],
+      "assets": [
+        {
+          "file": "1584-malta-valletta-grand-harbour-orbital-raze-close-love-meta-ai-bounded-pass-1.webp",
+          "sha256": "4089b44c9d2884c72c91b99d08c8a81306d85fc3b8140b8380a1d158b4bebd18"
+        },
+        {
+          "file": "1586-malta-blue-grotto-orbital-raze-close-love-meta-ai-bounded-pass-1.webp",
+          "sha256": "f374e3b54dff00d8ea58c8fad79475a0d5613b04a6721f35faa9ad2530def5a9"
+        },
+        {
+          "file": "1582-montenegro-tara-bridge-polar-airship-raze-meta-ai-bounded-pass-1.webp",
+          "sha256": "90a12a9afb45ea1113ddf62b387a7debbdf49964adeb24c2054307c18ba9f525"
+        }
+      ],
+      "hashtagRollAudit": [
+        {
+          "hashtag": "#InternalAgency",
+          "key": "starlight|social-hashtag|x|batches-391-390|InternalAgency|counter-0",
+          "counter": 0,
+          "acceptedByte": 147,
+          "digestSha256": "936B76A5B85D331656076B6202BF167E95CE65DD27D2133E79CC858023A6315C",
+          "roll": 47,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#WorldXXXSeries",
+          "key": "starlight|social-hashtag|x|batches-391-390|WorldXXXSeries|counter-2",
+          "counter": 2,
+          "acceptedByte": 80,
+          "digestSha256": "5057779E2074C4F2ADA8D80B4EEBAF415E8B5062A0DD6901B76D8CE8886C1AA7",
+          "roll": 80,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#RAZE",
+          "key": "starlight|social-hashtag|x|batches-391-390|RAZE|counter-0",
+          "counter": 0,
+          "acceptedByte": 79,
+          "digestSha256": "4F07C321CF7AF6F86F4673DDE800EADC0831862233D2941CDE2924C7819EE99A",
+          "roll": 79,
+          "threshold": 31,
+          "included": false
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, exactly 3 attachments, signed-in @dogramaci account, sent notice, public status URL, and three photo endpoints verified live.",
+      "transmission": "grouped-action-time-confirmed-three-asset-two-country-backlog-clearance"
     }
   ],
   "latestAssistedDrain": {
@@ -5244,7 +5514,7 @@
     "action": "No upload was submitted because the explicit queue is empty and no unpublished country meets its authoritative publication gate.",
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   },
-  "latestGuardianWakeAudit": {
+  "previousGuardianWakeAudit": {
     "status": "georgia-fiji-canonical-campaign-post-live-seven-country-backlog-remains",
     "checkedAt": "2026-08-21T07:28:10.1321001Z",
     "account": "@dogramaci",
@@ -5397,5 +5667,59 @@
     ],
     "action": "After action-time confirmation, posted the exact approved Georgia and Fiji caption with canonical assets 1548, 1549, and 1552 to signed-in @dogramaci. X returned a successful sent notice and the public status was opened and verified with the exact caption and three image endpoints.",
     "duplicatePrevention": "The Aug 20 caption-free guardian-instruction post is preserved as a user-classified test post and does not consume backlog. Only the exact approved campaign caption at status 2090701764785778887 clears Georgia Batch 382 and Fiji Batch 383. Seven eligible countries remain."
+  },
+  "latestGuardianWakeAudit": {
+    "status": "current-x-backlog-zero-render-first-five-run-cadence-active",
+    "checkedAt": "2026-08-21T08:06:54.2581795Z",
+    "account": "@dogramaci",
+    "liveProfileVerified": true,
+    "signedInAccount": "@dogramaci",
+    "pendingPost": null,
+    "preparedPostQueueCount": 0,
+    "deferredPostCheckpoint": null,
+    "eligibleBacklogRemaining": 0,
+    "newlyPublished": [
+      {
+        "countries": ["Comoros", "Guyana"],
+        "postUrl": "https://x.com/dogramaci/status/2090710804232351899",
+        "caption": "Comoros ❤️ Guyana: jewel-bright couture, stormlit coastlines, and a close-held island gaze. #WorldXXXSeries #RAZE",
+        "imageNumbers": [1556, 1557, 1560]
+      },
+      {
+        "countries": ["Solomon Islands", "Bhutan"],
+        "postUrl": "https://x.com/dogramaci/status/2090711379200073927",
+        "caption": "Solomon Islands ❤️ Bhutan: waterfall mist, luminous couture, and a close embrace at the rainforest edge.",
+        "imageNumbers": [1564, 1565, 1568]
+      },
+      {
+        "countries": ["Suriname", "Montenegro"],
+        "postUrl": "https://x.com/dogramaci/status/2090711675590607183",
+        "caption": "Suriname ❤️ Montenegro: riverlit couture, rainforest air, and a close-held spark beneath the airship glow. #InternalAgency",
+        "imageNumbers": [1576, 1577, 1580]
+      },
+      {
+        "countries": ["Malta", "Montenegro"],
+        "postUrl": "https://x.com/dogramaci/status/2090711986728239557",
+        "caption": "Malta ❤️ Montenegro: golden harbor light, rainbow RAZE, and a close-held moment above the Mediterranean.",
+        "imageNumbers": [1584, 1586, 1582]
+      }
+    ],
+    "verification": "Each post produced an X sent notice and a live signed-in home-timeline article with the exact approved caption and exactly three image endpoints.",
+    "duplicatePrevention": "The user test post remains audit evidence and consumes no backlog. The five exact canonical campaign URLs now clear Batches 382 through 387 and 389 through 391. The current eligible X backlog is zero.",
+    "nextCadence": {
+      "mode": "render-first",
+      "completedRenderRunsSinceLastX": 0,
+      "requiredRenderRunsBeforeNextXWindow": 5,
+      "runDefinition": "Ten four-tab Meta banks, forty prompt dispatches, and complete output or shortfall evidence plus parity gates."
+    },
+    "remoteParity": {
+      "status": "blocked-github-connectivity-after-two-explicit-push-attempts",
+      "observedAt": "2026-08-21T08:13:52.1625127Z",
+      "initialUnpushedLocalCommit": "42b52d48526cdeee92c2ca83e125bebf7a097b29",
+      "lastVerifiedRemotePrHead": "b8308b48228ab4488e62bf6736272de5c1ddf78a",
+      "errorClass": "github.com port 443 connection timeout",
+      "localWorktreeCleanBeforeBlockerRecord": true,
+      "requiredNextAction": "Retry the exact authorized branch push, then verify remote SHA, PR 13 head, LFS, ledger, archive and clean worktree parity."
+    }
   }
 }
