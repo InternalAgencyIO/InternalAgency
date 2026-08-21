@@ -390,15 +390,15 @@
     },
     "remoteParityBlocker": {
       "observedAtUtc": "2026-08-21T09:40:39.232Z",
-      "lastRetryAtUtc": "2026-08-21T16:17:12.7063868Z",
+      "lastRetryAtUtc": "2026-08-21T16:45:37.7080043Z",
       "localEvidenceCommit": "8f1e8c57",
-      "localHeadAtLastRetry": "26098ca4b51bd8414a5cb1417098c3667234e062",
+      "localHeadAtLastRetry": "983b387a9ad10bb3e560e4f6cc3983c6d31114b8",
       "requiredPush": "git push origin HEAD:refs/heads/agent/starlight-progress-archive",
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "github-https-connect-failure-remote-unreachable",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T16:17:12.7063868Z",
-        "localHead": "26098ca4b51bd8414a5cb1417098c3667234e062",
+        "attemptedAtUtc": "2026-08-21T16:45:37.7080043Z",
+        "localHead": "983b387a9ad10bb3e560e4f6cc3983c6d31114b8",
         "pendingLfsObjects": 37,
         "outcome": "github-https-connect-failure",
         "remoteBranchShaAfterFailure": null,
@@ -434,7 +434,8 @@
         "At 2026-08-21T15:14Z the exact authorized push from local head ffce5df2 reached Git LFS, then remained at zero of 37 objects and zero bytes for the full 60 second bounded attempt. The run was stopped without claiming success.",
         "A full Git object database fsck completed successfully with only informational unreachable objects, and Git LFS pointer fsck reported OK.",
         "The exact authorized push from local head 0d558757 then failed after 21137 ms with the GitHub port 443 connection error.",
-        "At 2026-08-21T16:17Z the exact authorized push from local head 26098ca4 failed after 21115 ms because github.com port 443 could not connect. A preceding remote read failed for the same reason, so no new remote SHA is claimed."
+        "At 2026-08-21T16:17Z the exact authorized push from local head 26098ca4 failed after 21115 ms because github.com port 443 could not connect. A preceding remote read failed for the same reason, so no new remote SHA is claimed.",
+        "At 2026-08-21T16:45Z the exact authorized push from local head 983b387a failed after 21101 ms because github.com port 443 could not connect. A preceding remote read also failed after 21137 ms, so no new remote SHA or PR parity is claimed."
       ],
       "gate": "Do not dispatch Bank 3 until Git branch SHA, LFS objects, and draft PR 13 head parity are remote verified."
     },
@@ -450,7 +451,7 @@
       "postApplyDryRunNewBlobs": 0
     },
     "latestGateAudit": {
-      "verifiedAtUtc": "2026-08-21T16:17:12.7063868Z",
+      "verifiedAtUtc": "2026-08-21T16:45:37.7080043Z",
       "rejectedPromptLedgerErrors": 0,
       "failedPromptLedgerErrors": 0,
       "archiveDryRunNewManifestRows": 0,
@@ -458,7 +459,7 @@
       "pendingLfsObjects": 37
     },
     "latestBrowserLaneAudit": {
-      "verifiedAtUtc": "2026-08-21T16:17:12.7063868Z",
+      "verifiedAtUtc": "2026-08-21T16:45:37.7080043Z",
       "provider": "Meta AI",
       "persistentSceneTabs": 4,
       "sceneTabs": [
@@ -480,6 +481,26 @@
         }
       ],
       "dispatchHeldForRemoteParity": true
+    },
+    "latestAuthoritativeSnapshotAudit": {
+      "verifiedAtUtc": "2026-08-21T16:45:37.7080043Z",
+      "contractSha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC",
+      "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+      "faceReferenceSha256": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "generatedMediaManifestSha256": "428AECCDE394285800E718597CFF77C4CDCF2FA6C899E3AF566E3B2F73EC12A3",
+      "rejectedPromptLedgerSha256": "F35144FF7EF2145ECB2F9C284789C3E25B9A6D46D4606CAEAD2CB723698106FD",
+      "xLedgerSha256": "9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064",
+      "xLedgerRootAccount": "@RaymondRR777",
+      "xLedgerLatestSignedInAccount": "@dogramaci",
+      "eligibleXBacklogRemaining": 0,
+      "completedRenderRunsSinceLastX": 0,
+      "bank3PromptFiles": 8,
+      "bank3PromptHashMismatches": 0,
+      "bank3PromptForbiddenDashMatches": 0
     },
     "latestRemoteDiagnostic": {
       "observedAtUtc": "2026-08-21T14:15:31.3926866Z",
