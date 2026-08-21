@@ -397,8 +397,8 @@
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "lfs-progress-reported-branch-push-https-failed",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T14:15:31.3926866Z",
-        "localHead": "f89985275eb2570d7f0b88ef92445bd0d7c345de",
+        "attemptedAtUtc": "2026-08-21T14:44:50.8546600Z",
+        "localHead": "08927de5175d62ede12e96a1e58501bcbad4ce4a",
         "pendingLfsObjects": 37,
         "outcome": "github-https-connect-failure",
         "remoteBranchShaAfterFailure": "85cc40024db027a44c60a9d4a25faa3da9c62640"
@@ -427,7 +427,9 @@
         "At 2026-08-21T13:44Z the exact authorized push from local head 34c9f16c reached the Git LFS pre-push hook, then remained at zero of one object and zero bytes for the rest of a 60 second bounded attempt. The run was stopped without claiming success.",
         "Windows WinHTTP reports direct access with no proxy. Current-user Internet Settings have proxy disabled, no proxy server, and no automatic configuration URL.",
         "At 2026-08-21T14:13Z an unauthenticated GET probe and an empty unauthenticated LFS batch POST probe both timed out before TCP connection after 10 seconds, with HTTP code 000 and no remote IP.",
-        "The exact authorized push from local head f8998527 then failed after 21124 ms with the GitHub port 443 connection error."
+        "The exact authorized push from local head f8998527 then failed after 21124 ms with the GitHub port 443 connection error.",
+        "A complete local integrity audit verified all 37 pending LFS files against the SHA-256 OID and byte size in each committed pointer: 37 OID matches, 37 size matches, zero failures, 55,802,339 total bytes.",
+        "The exact authorized push from local head 08927de5 then failed after 21122 ms with the GitHub port 443 connection error."
       ],
       "gate": "Do not dispatch Bank 3 until Git branch SHA, LFS objects, and draft PR 13 head parity are remote verified."
     },
@@ -443,7 +445,7 @@
       "postApplyDryRunNewBlobs": 0
     },
     "latestGateAudit": {
-      "verifiedAtUtc": "2026-08-21T14:15:31.3926866Z",
+      "verifiedAtUtc": "2026-08-21T14:44:50.8546600Z",
       "rejectedPromptLedgerErrors": 0,
       "failedPromptLedgerErrors": 0,
       "archiveDryRunNewManifestRows": 0,
@@ -467,6 +469,14 @@
       "unauthenticatedGetHttpCode": 0,
       "emptyLfsBatchPostHttpCode": 0,
       "endpointTcpConnectSucceeded": false
+    },
+    "latestLocalLfsIntegrityAudit": {
+      "verifiedAtUtc": "2026-08-21T14:44:50.8546600Z",
+      "objects": 37,
+      "oidMatches": 37,
+      "sizeMatches": 37,
+      "failures": 0,
+      "totalBytes": 55802339
     }
   },
   "nextAction": "Retry the exact authorized branch push when GitHub HTTPS and Git LFS are available. Remote verify branch SHA, LFS objects, and draft PR 13 head parity, then dispatch the four Bank 3 primary prompts concurrently."
