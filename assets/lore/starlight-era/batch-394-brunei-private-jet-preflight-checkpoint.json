@@ -390,15 +390,15 @@
     },
     "remoteParityBlocker": {
       "observedAtUtc": "2026-08-21T09:40:39.232Z",
-      "lastRetryAtUtc": "2026-08-21T19:16:32.4571811Z",
+      "lastRetryAtUtc": "2026-08-21T19:45:47.5009489Z",
       "localEvidenceCommit": "8f1e8c57",
-      "localHeadAtLastRetry": "b591a6e1f6d1da5f25cb906aaf925025cfcb2371",
+      "localHeadAtLastRetry": "94cbc6580b0d5270874267966961a6666dd48de1",
       "requiredPush": "git push origin HEAD:refs/heads/agent/starlight-progress-archive",
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "lfs-zero-byte-stall-github-connector-remote-verified",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T19:16:32.4571811Z",
-        "localHead": "b591a6e1f6d1da5f25cb906aaf925025cfcb2371",
+        "attemptedAtUtc": "2026-08-21T19:45:47.5009489Z",
+        "localHead": "94cbc6580b0d5270874267966961a6666dd48de1",
         "pendingLfsObjects": 37,
         "outcome": "lfs-zero-byte-stall-interrupted-after-sixty-seconds",
         "remoteBranchShaAfterFailure": "85cc40024db027a44c60a9d4a25faa3da9c62640",
@@ -440,7 +440,8 @@
         "At 2026-08-21T17:45Z the exact authorized push from local head be534118 first reached GitHub but reset the connection, then a bounded retry failed to connect to port 443 after 21276 ms. The GitHub connector subsequently verified draft PR 13 remains at remote head 85cc4002.",
         "At 2026-08-21T18:14Z the exact authorized push from local head f4190722 failed after 21138 ms because github.com port 443 could not connect. The GitHub connector independently verified draft PR 13 still remains open at remote head 85cc4002.",
         "At 2026-08-21T18:45Z the exact authorized push from local head f49f0685 failed after 21267 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
-        "At 2026-08-21T19:16Z the exact authorized push from local head b591a6e1 reached the Git LFS hook but remained at zero of 37 objects and zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity."
+        "At 2026-08-21T19:16Z the exact authorized push from local head b591a6e1 reached the Git LFS hook but remained at zero of 37 objects and zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity.",
+        "At 2026-08-21T19:45Z the exact authorized push from local head 94cbc658 reached the Git LFS hook but remained at zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity."
       ],
       "gate": "Do not dispatch Bank 3 until Git branch SHA, LFS objects, and draft PR 13 head parity are remote verified."
     },
@@ -456,7 +457,7 @@
       "postApplyDryRunNewBlobs": 0
     },
     "latestGateAudit": {
-      "verifiedAtUtc": "2026-08-21T19:16:32.4571811Z",
+      "verifiedAtUtc": "2026-08-21T19:45:47.5009489Z",
       "rejectedPromptLedgerErrors": 0,
       "failedPromptLedgerErrors": 0,
       "archiveDryRunNewManifestRows": 0,
@@ -464,7 +465,7 @@
       "pendingLfsObjects": 37
     },
     "latestBrowserLaneAudit": {
-      "verifiedAtUtc": "2026-08-21T19:16:32.4571811Z",
+      "verifiedAtUtc": "2026-08-21T19:45:47.5009489Z",
       "provider": "Meta AI",
       "persistentSceneTabs": 4,
       "signedInAccount": "leesha007",
@@ -494,6 +495,7 @@
       },
       "currentTerminalStateMatchesArchivedBanksOneAndTwo": true,
       "newUnpreservedMediaDetected": false,
+      "tabsRestoredAfterCleanup": true,
       "dispatchHeldForRemoteParity": true
     },
     "latestAuthoritativeSnapshotAudit": {
@@ -528,7 +530,7 @@
       "activeSuppressionMatches": 0
     },
     "latestRemoteDiagnostic": {
-      "observedAtUtc": "2026-08-21T19:16:32.4571811Z",
+      "observedAtUtc": "2026-08-21T19:45:47.5009489Z",
       "prNumber": 13,
       "prState": "open-draft",
       "prHeadBranch": "agent/starlight-progress-archive",
@@ -548,7 +550,7 @@
       "endpointTcpConnectSucceeded": false
     },
     "latestLocalLfsIntegrityAudit": {
-      "verifiedAtUtc": "2026-08-21T19:16:32.4571811Z",
+      "verifiedAtUtc": "2026-08-21T19:45:47.5009489Z",
       "objects": 37,
       "oidMatches": 37,
       "sizeMatches": 37,
@@ -558,9 +560,9 @@
     "latestCommitDeltaAudit": {
       "verifiedAtUtc": "2026-08-21T18:14:46.6682333Z",
       "remoteBaseSha": "85cc40024db027a44c60a9d4a25faa3da9c62640",
-      "localHeadSha": "b591a6e1f6d1da5f25cb906aaf925025cfcb2371",
+      "localHeadSha": "94cbc6580b0d5270874267966961a6666dd48de1",
       "fastForward": true,
-      "aheadCommits": 20,
+      "aheadCommits": 21,
       "changedFiles": 57,
       "unexpectedPaths": 0
     },
