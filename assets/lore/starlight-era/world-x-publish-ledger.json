@@ -195,6 +195,13 @@
         "Sweden"
       ],
       "reason": "The signed-in @dogramaci profile already exposed a 51-status reverse-order raw-media burst spanning Batch 299 through Batch 285. Several statuses are captionless or use nonconforming attachment counts, and the batch checkpoints classify these source renders as rejected, so they are retained as audit exceptions rather than conforming logical publications. Their public presence is nevertheless authoritative for duplicate prevention."
+    },
+    {
+      "observedAt": "2026-08-21T07:09:18.287Z",
+      "postUrl": "https://x.com/dogramaci/status/2090309398891532453",
+      "imageNumbers": [],
+      "countries": [],
+      "reason": "User-classified test post with four images and no guardian-prepared approved campaign caption. It is preserved as public audit evidence and does not consume or clear any World Series publication backlog entry."
     }
   ],
   "pendingPost": null,
@@ -5004,6 +5011,71 @@
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Exact caption, 3 attachments, public status URL, and photo endpoints verified.",
       "transmission": "continuous-backlog-drain-user-authorized"
+    },
+    {
+      "batch": 382,
+      "postedAt": "2026-08-21T07:25:00Z",
+      "verifiedAt": "2026-08-21T07:28:10.1321001Z",
+      "postUrl": "https://x.com/dogramaci/status/2090701764785778887",
+      "caption": "Georgia ❤️ Fiji: rainlit couture, linked hands, and a close-held dance above the Caucasus.",
+      "imageNumbers": [
+        1548,
+        1549,
+        1552
+      ],
+      "countries": [
+        "Georgia",
+        "Fiji"
+      ],
+      "assets": [
+        {
+          "file": "1548-georgia-tbilisi-mars-surface-expedition-round-11-recovery.png",
+          "sha256": "e134a6bf66004c33fbd862ecd8b4ef58b15c0ccafb5011c426461ddc11747738"
+        },
+        {
+          "file": "1549-georgia-stepantsminda-mars-surface-expedition-round-2-recovery.png",
+          "sha256": "a3c1e18f6fdc393a36aaaba56394ca4c12ebd83f3646fd58bf227438ec251c99"
+        },
+        {
+          "file": "1552-fiji-suva-moon-surface-expedition-bounded-pass-1.png",
+          "sha256": "115dec52fc28e3dc4667d19f9ea1c8ceedc0159ace87ecf10e6b8389340ab68c"
+        }
+      ],
+      "hashtagRollAudit": [
+        {
+          "hashtag": "#InternalAgency",
+          "key": "starlight|social-hashtag|x|batches-382-383|InternalAgency|counter-0",
+          "counter": 0,
+          "acceptedByte": 165,
+          "digestSha256": "A5F6A2662588297BAF404BD123CE7CA4CF984216663CDEEEBC4BAF99C7FD921B",
+          "roll": 65,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#WorldXXXSeries",
+          "key": "starlight|social-hashtag|x|batches-382-383|WorldXXXSeries|counter-1",
+          "counter": 1,
+          "acceptedByte": 144,
+          "digestSha256": "90CA24B3052BB8F91D450DC207B6EAB6142505C61AE604261E604AACCEAAE4DE",
+          "roll": 44,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#RAZE",
+          "key": "starlight|social-hashtag|x|batches-382-383|RAZE|counter-1",
+          "counter": 1,
+          "acceptedByte": 140,
+          "digestSha256": "8CB4BE18917DBBBD55442EDA9ED1935863A3F06D94BCD877761CC4E2F46F9663",
+          "roll": 40,
+          "threshold": 31,
+          "included": false
+        }
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, exactly 3 attachments, signed-in @dogramaci account, public status URL, and three photo endpoints verified live.",
+      "transmission": "action-time-confirmed-three-asset-two-country-backlog-clearance"
     }
   ],
   "latestAssistedDrain": {
@@ -5173,8 +5245,8 @@
     "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
   },
   "latestGuardianWakeAudit": {
-    "status": "nine-eligible-country-posts-six-live-reconciled-three-freshly-eligible-no-publication-attempted",
-    "checkedAt": "2026-08-20T07:49:16.754Z",
+    "status": "georgia-fiji-canonical-campaign-post-live-seven-country-backlog-remains",
+    "checkedAt": "2026-08-21T07:28:10.1321001Z",
     "account": "@dogramaci",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
@@ -5193,13 +5265,13 @@
     "pendingPost": null,
     "preparedPostQueueCount": 0,
     "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 9,
+    "eligibleBacklogRemaining": 7,
     "checkpointAudit": {
       "batchRange": [
         382,
         391
       ],
-      "eligibleWithNoRecordedUrlCount": 9,
+      "eligibleWithNoRecordedUrlCount": 7,
       "eligibleWithNoRecordedUrl": [
         {
           "batch": 382,
@@ -5207,10 +5279,10 @@
           "checkpoint": "assets/lore/starlight-era/batch-382-georgia-mars-surface-expedition-checkpoint.json",
           "acceptedCurrentCountryAssets": 4,
           "required": 4,
-          "eligible": true,
-          "caption": "Georgia ❤️ Honduras #Georgia #InternalAgency",
-          "recordedUrl": null,
-          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
+          "eligible": false,
+          "caption": "Georgia ❤️ Fiji: rainlit couture, linked hands, and a close-held dance above the Caucasus.",
+          "recordedUrl": "https://x.com/dogramaci/status/2090701764785778887",
+          "liveState": "published-as-canonical-three-asset-two-country-campaign-post"
         },
         {
           "batch": 383,
@@ -5218,10 +5290,10 @@
           "checkpoint": "assets/lore/starlight-era/batch-383-fiji-moon-surface-expedition-checkpoint.json",
           "acceptedCurrentCountryAssets": 4,
           "required": 4,
-          "eligible": true,
-          "caption": "Fiji ❤️ Georgia #Fiji #InternalAgency",
-          "recordedUrl": null,
-          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
+          "eligible": false,
+          "caption": "Georgia ❤️ Fiji: rainlit couture, linked hands, and a close-held dance above the Caucasus.",
+          "recordedUrl": "https://x.com/dogramaci/status/2090701764785778887",
+          "liveState": "published-as-supporting-country-in-canonical-three-asset-two-country-campaign-post"
         },
         {
           "batch": 384,
@@ -5311,13 +5383,19 @@
     },
     "latestVisibleAccountStatuses": [
       {
+        "postUrl": "https://x.com/dogramaci/status/2090701764785778887",
+        "postedAtLabel": "10:25 AM Aug 21, 2026",
+        "caption": "Georgia ❤️ Fiji: rainlit couture, linked hands, and a close-held dance above the Caucasus.",
+        "classification": "canonical-campaign-post-three-media-live-verified"
+      },
+      {
         "postUrl": "https://x.com/dogramaci/status/2087914657004556646",
         "postedAtLabel": "Aug 13",
         "caption": "Morocco, Greece, Colombia, Fiji",
         "classification": "unrelated-search-result"
       }
     ],
-    "action": "Signed-in @dogramaci reconciliation completed earlier this wake with a focused Latest search covering the six previously eligible countries and the full post-eligibility date range. No exact campaign caption matched. Suriname, Montenegro, and Malta became freshly eligible after that reconciliation. No composer opened, no media uploaded, and no Post click occurred; all nine countries remain eligible with no recorded URL.",
-    "duplicatePrevention": "The focused full-date live search is stronger than a latest-four profile view and found no exact campaign caption for the six previously eligible countries. Suriname, Montenegro, and Malta were not yet eligible during that search, so all nine publications require a fresh action-time confirmation before any upload or Post click."
+    "action": "After action-time confirmation, posted the exact approved Georgia and Fiji caption with canonical assets 1548, 1549, and 1552 to signed-in @dogramaci. X returned a successful sent notice and the public status was opened and verified with the exact caption and three image endpoints.",
+    "duplicatePrevention": "The Aug 20 caption-free guardian-instruction post is preserved as a user-classified test post and does not consume backlog. Only the exact approved campaign caption at status 2090701764785778887 clears Georgia Batch 382 and Fiji Batch 383. Seven eligible countries remain."
   }
 }
