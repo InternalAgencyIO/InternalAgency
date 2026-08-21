@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 394,
   "country": "Brunei",
-  "status": "bank-3-four-media-captured-archived-completed-unclassified",
+  "status": "bank-3-archived-unclassified-bank-4-successor-prepared",
   "preparedAtUtc": "2026-08-21T08:24:29.9145105Z",
   "sourceCommit": "85cc40024db027a44c60a9d4a25faa3da9c62640",
   "contract": {
@@ -418,21 +418,44 @@
       "fallbackMedia": 1,
       "unclassifiedMedia": 4
     },
+    "bank4Prepared": {
+      "preparedAtUtc": "2026-08-21T21:30:06.777Z",
+      "mode": "four-distinct-successor-prompts-four-persistent-tabs-one-image-each",
+      "prompts": [
+        {"scene":1596,"primaryPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-4-primary.txt","primarySha256":"86A9FF521A4114479839FC8E8E90991EAC38B787FB66B0E0089706161B878051","fallbackPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-4-fallback.txt","fallbackSha256":"F23B2A978F1A7B8B5FA307D2D8407DFB5CE3FFEDBDD423931C6AED414E338FCE"},
+        {"scene":1597,"primaryPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-4-primary.txt","primarySha256":"631E8BD7B88DBDAA0236723CB79FC0FC5DCFC0541D3A374C4108E8A7FFC2F14A","fallbackPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-4-fallback.txt","fallbackSha256":"DA8F65E7FEF17643DC0EB5F5611A187621B91333D124E22130460AF51F33559A"},
+        {"scene":1598,"primaryPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-4-primary.txt","primarySha256":"0698E99979F30FECB2411A7A3AF74D806F09003967CED1378009FB045223F7A8","fallbackPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-4-fallback.txt","fallbackSha256":"B5715F909D8957F9B14B520E78B3F4FDD06A2FC4B0CFEB36DC2B51581FD51AF9"},
+        {"scene":1599,"primaryPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-4-primary.txt","primarySha256":"49C85C4B2970AAFEAE3E350B3EF18095DB572CCC942E03FB5DF5B09372C03E29","fallbackPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-4-fallback.txt","fallbackSha256":"741B5492EE7109E2C345BA879DC66BE01ABA84AC51C0EF16F8852F1E5763F1A0"}
+      ]
+    },
+    "bank4PreflightAudit": {
+      "auditedAtUtc": "2026-08-21T21:31:02.939Z",
+      "promptFiles": 8,
+      "promptHashMismatches": 0,
+      "activeSuppressionTermLimit": 20,
+      "activeSuppressionMatches": 0,
+      "forbiddenDashMatches": 0,
+      "deterministicRollRecords": 12,
+      "deterministicDigestMismatches": 0,
+      "acceptedByteMismatches": 0,
+      "bucketMismatches": 0,
+      "authorityHashMismatches": 0
+    },
     "remoteParityBlocker": {
       "observedAtUtc": "2026-08-21T09:40:39.232Z",
       "lastRetryAtUtc": "2026-08-21T21:14:39.8530830Z",
       "localEvidenceCommit": "8f1e8c57",
-      "localHeadAtLastRetry": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
+      "localHeadAtLastRetry": "657298ff381dde1401e472b99606faeb4f261f35",
       "requiredPush": "git push origin HEAD:refs/heads/agent/starlight-progress-archive",
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "remote-git-lfs-pr-parity-cleared",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T21:14:19.000Z",
-        "localHead": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
+        "attemptedAtUtc": "2026-08-21T21:27:57.000Z",
+        "localHead": "657298ff381dde1401e472b99606faeb4f261f35",
         "pendingLfsObjects": 0,
         "outcome": "success",
-        "remoteBranchShaAfterSuccess": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
-        "lastIndependentlyVerifiedRemoteBranchSha": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1"
+        "remoteBranchShaAfterSuccess": "657298ff381dde1401e472b99606faeb4f261f35",
+        "lastIndependentlyVerifiedRemoteBranchSha": "657298ff381dde1401e472b99606faeb4f261f35"
       },
       "evidence": [
         "The first push reached Git LFS lock verification, but the remote does not support the locking API and the HTTPS connection failed.",
@@ -474,7 +497,8 @@
         "At 2026-08-21T19:45Z the exact authorized push from local head 94cbc658 reached the Git LFS hook but remained at zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity.",
         "At 2026-08-21T20:15Z the exact authorized push from local head f199fb0c failed after 21106 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
         "At 2026-08-21T20:44Z the exact authorized push from local head cdd5f17c failed after 21130 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
-        "At 2026-08-21T21:14Z the exact authorized push uploaded all 37 pending LFS objects totaling 56 MB and advanced agent/starlight-progress-archive from 85cc4002 to 878d6ad7. Git ls-remote, the GitHub connector, a zero-object LFS dry run, and a clean worktree independently verified parity."
+        "At 2026-08-21T21:14Z the exact authorized push uploaded all 37 pending LFS objects totaling 56 MB and advanced agent/starlight-progress-archive from 85cc4002 to 878d6ad7. Git ls-remote, the GitHub connector, a zero-object LFS dry run, and a clean worktree independently verified parity.",
+        "At 2026-08-21T21:27Z the exact authorized push uploaded four Bank 3 LFS objects totaling 2.1 MB and advanced agent/starlight-progress-archive to 657298ff. Git ls-remote, the GitHub connector, a zero-object LFS dry run, and a clean worktree independently verified parity."
       ],
       "gate": "Cleared for Bank 3 dispatch after Git branch SHA, LFS objects, and draft PR 13 head parity were remote verified."
     },
@@ -588,7 +612,7 @@
       "prNumber": 13,
       "prState": "open-draft",
       "prHeadBranch": "agent/starlight-progress-archive",
-      "prHeadSha": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
+      "prHeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
       "githubConnectorAvailable": true,
       "gitHttpsPushSucceeded": true,
       "githubResolvedAddress": "140.82.121.4",
@@ -613,18 +637,18 @@
     },
     "latestCommitDeltaAudit": {
       "verifiedAtUtc": "2026-08-21T21:14:39.8530830Z",
-      "remoteBaseSha": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
-      "localHeadSha": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
+      "remoteBaseSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "localHeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
       "fastForward": true,
       "aheadCommits": 0,
       "changedFiles": 0,
       "unexpectedPaths": 0
     },
     "latestRemoteParityVerification": {
-      "verifiedAtUtc": "2026-08-21T21:14:39.8530830Z",
-      "localHeadSha": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
-      "remoteBranchSha": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
-      "draftPr13HeadSha": "878d6ad737c99a3b1c202942cb86bc3810b6a1d1",
+      "verifiedAtUtc": "2026-08-21T21:28:18.000Z",
+      "localHeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "remoteBranchSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "draftPr13HeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
       "pendingLfsObjects": 0,
       "rejectedPromptLedgerErrors": 0,
       "failedPromptLedgerErrors": 0,
@@ -639,5 +663,5 @@
       "lfsPointerFsck": "ok"
     }
   },
-  "nextAction": "Commit and push the archived Bank 3 evidence, remote verify Git and LFS parity, then prepare and dispatch one distinct Bank 4 successor prompt in each of the four persistent Meta lanes before completing Bank 3 deep QA and before any Bank 5 dispatch."
+  "nextAction": "Commit and push the eight prepared Bank 4 prompt files and checkpoint, remote verify Git and PR parity, then dispatch the four Bank 4 primary prompts concurrently before completing Bank 3 deep QA and before any Bank 5 dispatch."
 }
