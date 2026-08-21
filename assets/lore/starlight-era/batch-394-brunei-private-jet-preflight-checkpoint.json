@@ -386,8 +386,8 @@
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "lfs-progress-reported-branch-push-https-failed",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T10:20:43.8311816Z",
-        "localHead": "07c04875a5b97a4c9bf4a41ca6be9bc64c9006cb",
+        "attemptedAtUtc": "2026-08-21T10:46:06.0231742Z",
+        "localHead": "2d88058be8b8192a85894549432e8659b59ce1e0",
         "pendingLfsObjects": 37,
         "outcome": "github-https-connect-failure",
         "remoteBranchShaAfterFailure": "85cc40024db027a44c60a9d4a25faa3da9c62640"
@@ -403,7 +403,9 @@
         "At 2026-08-21T10:14Z the Git LFS client reported 11 of 12 objects and 5.9 MB transferred before the connection stopped advancing and the run was interrupted without claiming parity.",
         "A second Git LFS retry made no visible progress for 60 seconds and was stopped without claiming success.",
         "The exact authorized branch push then failed with: fatal: unable to access 'https://github.com/InternalAgencyIO/InternalAgency.git/': Failed to connect to github.com:443 after 21152 ms: Could not connect to server",
-        "After archive commit 07c04875, the exact authorized branch push failed again after 21141 ms with the same GitHub port 443 connection error, and a later git ls-remote confirmed the remote branch remained at 85cc40024db027a44c60a9d4a25faa3da9c62640."
+        "After archive commit 07c04875, the exact authorized branch push failed again after 21141 ms with the same GitHub port 443 connection error, and a later git ls-remote confirmed the remote branch remained at 85cc40024db027a44c60a9d4a25faa3da9c62640.",
+        "At 2026-08-21T10:44Z a dry run confirmed all 37 LFS objects still require upload. A single object upload probe for 15d9d01acc189d18b834f38355659c4ec4da8415eb5d7422f427e11e8135c8df made no progress for 60 seconds and was stopped without claiming success.",
+        "The exact authorized push from local head 2d88058b then failed after 21141 ms with the same GitHub port 443 connection error."
       ],
       "gate": "Do not dispatch Bank 3 until Git branch SHA, LFS objects, and draft PR 13 head parity are remote verified."
     },
@@ -417,6 +419,14 @@
       "newBlobBytes": 49278215,
       "postApplyDryRunNewManifestRows": 0,
       "postApplyDryRunNewBlobs": 0
+    },
+    "latestGateAudit": {
+      "verifiedAtUtc": "2026-08-21T10:46:06.0231742Z",
+      "rejectedPromptLedgerErrors": 0,
+      "failedPromptLedgerErrors": 0,
+      "archiveDryRunNewManifestRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "pendingLfsObjects": 37
     }
   },
   "nextAction": "Retry the exact authorized branch push when GitHub HTTPS and Git LFS are available. Remote verify branch SHA, LFS objects, and draft PR 13 head parity, then dispatch the four Bank 3 primary prompts concurrently."
