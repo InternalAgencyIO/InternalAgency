@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 395,
   "country": "Belize",
-  "status": "prepared-not-dispatched",
+  "status": "prepared-text-only-after-reference-upload-failure",
   "preparedAtUtc": "2026-08-21T22:18:27.1323170Z",
   "sourceCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
   "contract": {
@@ -338,7 +338,18 @@
   "browserEvidence": {
     "persistentMetaTabsRequired": 4,
     "referenceUploadOrder": [938, 936, 937],
-    "uploadOutcome": "not-yet-attempted",
+    "referenceUploadAttempts": [
+      {
+        "utc": "2026-08-21T22:26:45.6137504Z",
+        "scope": "four persistent Meta tabs for Belize scenes 1600 through 1603",
+        "orderedReferenceScenes": [938, 936, 937],
+        "outcome": "technical-failure-no-upload-confirmed",
+        "exactFailure": "Timed out after 3000ms waiting for file chooser.",
+        "rawMediaBytes": null,
+        "provenance": "The existing hidden file controls did not emit a supported file chooser event during the concurrent ordered upload attempt. The browser runtime reset after the unhandled provider timeout. No reference upload is claimed. Dispatch must use the exact textual face and position map from the verified original photographs."
+      }
+    ],
+    "uploadOutcome": "technical-failure-no-upload-confirmed-text-only-required",
     "dispatchOutcome": "not-yet-attempted"
   },
   "nextAction": "Verify archive and ledger parity, commit and push this preflight, remote verify Git and LFS, then reuse exactly four persistent Meta tabs to dispatch Belize Bank 1 scenes 1600 through 1603 concurrently."
