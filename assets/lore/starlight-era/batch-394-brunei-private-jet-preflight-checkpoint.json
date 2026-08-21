@@ -390,15 +390,15 @@
     },
     "remoteParityBlocker": {
       "observedAtUtc": "2026-08-21T09:40:39.232Z",
-      "lastRetryAtUtc": "2026-08-21T20:15:22.1484127Z",
+      "lastRetryAtUtc": "2026-08-21T20:45:56.4386417Z",
       "localEvidenceCommit": "8f1e8c57",
-      "localHeadAtLastRetry": "f199fb0c69170fde5678ba3a120d03f17908aa03",
+      "localHeadAtLastRetry": "cdd5f17cdf8d92aa5196dd3f4b0a29d629c176cc",
       "requiredPush": "git push origin HEAD:refs/heads/agent/starlight-progress-archive",
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "git-https-connect-failure-github-connector-remote-verified",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T20:15:22.1484127Z",
-        "localHead": "f199fb0c69170fde5678ba3a120d03f17908aa03",
+        "attemptedAtUtc": "2026-08-21T20:45:56.4386417Z",
+        "localHead": "cdd5f17cdf8d92aa5196dd3f4b0a29d629c176cc",
         "pendingLfsObjects": 37,
         "outcome": "github-https-connect-failure",
         "remoteBranchShaAfterFailure": "85cc40024db027a44c60a9d4a25faa3da9c62640",
@@ -442,7 +442,8 @@
         "At 2026-08-21T18:45Z the exact authorized push from local head f49f0685 failed after 21267 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
         "At 2026-08-21T19:16Z the exact authorized push from local head b591a6e1 reached the Git LFS hook but remained at zero of 37 objects and zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity.",
         "At 2026-08-21T19:45Z the exact authorized push from local head 94cbc658 reached the Git LFS hook but remained at zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity.",
-        "At 2026-08-21T20:15Z the exact authorized push from local head f199fb0c failed after 21106 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt."
+        "At 2026-08-21T20:15Z the exact authorized push from local head f199fb0c failed after 21106 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
+        "At 2026-08-21T20:44Z the exact authorized push from local head cdd5f17c failed after 21130 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt."
       ],
       "gate": "Do not dispatch Bank 3 until Git branch SHA, LFS objects, and draft PR 13 head parity are remote verified."
     },
@@ -458,7 +459,7 @@
       "postApplyDryRunNewBlobs": 0
     },
     "latestGateAudit": {
-      "verifiedAtUtc": "2026-08-21T20:15:22.1484127Z",
+      "verifiedAtUtc": "2026-08-21T20:45:56.4386417Z",
       "rejectedPromptLedgerErrors": 0,
       "failedPromptLedgerErrors": 0,
       "archiveDryRunNewManifestRows": 0,
@@ -466,7 +467,7 @@
       "pendingLfsObjects": 37
     },
     "latestBrowserLaneAudit": {
-      "verifiedAtUtc": "2026-08-21T20:15:22.1484127Z",
+      "verifiedAtUtc": "2026-08-21T20:45:56.4386417Z",
       "provider": "Meta AI",
       "persistentSceneTabs": 4,
       "signedInAccount": "leesha007",
@@ -543,8 +544,16 @@
       "promptHashMismatches": 0,
       "referenceSetMismatches": 0
     },
+    "latestCapturedMediaDecodeAudit": {
+      "verifiedAtUtc": "2026-08-21T20:45:56.4386417Z",
+      "capturedMedia": 12,
+      "decodedMedia": 12,
+      "decodeFailures": 0,
+      "dimensionMismatches": 0,
+      "mediaTypeMismatches": 0
+    },
     "latestRemoteDiagnostic": {
-      "observedAtUtc": "2026-08-21T20:15:22.1484127Z",
+      "observedAtUtc": "2026-08-21T20:45:56.4386417Z",
       "prNumber": 13,
       "prState": "open-draft",
       "prHeadBranch": "agent/starlight-progress-archive",
@@ -572,11 +581,11 @@
       "totalBytes": 55802339
     },
     "latestCommitDeltaAudit": {
-      "verifiedAtUtc": "2026-08-21T18:14:46.6682333Z",
+      "verifiedAtUtc": "2026-08-21T20:45:56.4386417Z",
       "remoteBaseSha": "85cc40024db027a44c60a9d4a25faa3da9c62640",
-      "localHeadSha": "f199fb0c69170fde5678ba3a120d03f17908aa03",
+      "localHeadSha": "cdd5f17cdf8d92aa5196dd3f4b0a29d629c176cc",
       "fastForward": true,
-      "aheadCommits": 22,
+      "aheadCommits": 23,
       "changedFiles": 57,
       "unexpectedPaths": 0
     },
