@@ -397,10 +397,10 @@
       "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
       "state": "lfs-progress-reported-branch-push-https-failed",
       "lastCommittedPushAttempt": {
-        "attemptedAtUtc": "2026-08-21T13:45:28.7336702Z",
-        "localHead": "34c9f16ca394024c10851a114d72809888cd993d",
+        "attemptedAtUtc": "2026-08-21T14:15:31.3926866Z",
+        "localHead": "f89985275eb2570d7f0b88ef92445bd0d7c345de",
         "pendingLfsObjects": 37,
-        "outcome": "lfs-batch-zero-byte-stall",
+        "outcome": "github-https-connect-failure",
         "remoteBranchShaAfterFailure": "85cc40024db027a44c60a9d4a25faa3da9c62640"
       },
       "evidence": [
@@ -425,7 +425,9 @@
         "At 2026-08-21T13:39Z Git LFS trace reached credential fill and issued POST https://github.com/InternalAgencyIO/InternalAgency.git/info/lfs/objects/batch for one object. No HTTP response arrived during the next 36 seconds, so the trace was stopped without claiming upload success.",
         "The exact authorized push from local head 3eb563d9 then failed after 21110 ms with the GitHub port 443 connection error.",
         "At 2026-08-21T13:44Z the exact authorized push from local head 34c9f16c reached the Git LFS pre-push hook, then remained at zero of one object and zero bytes for the rest of a 60 second bounded attempt. The run was stopped without claiming success.",
-        "Windows WinHTTP reports direct access with no proxy. Current-user Internet Settings have proxy disabled, no proxy server, and no automatic configuration URL."
+        "Windows WinHTTP reports direct access with no proxy. Current-user Internet Settings have proxy disabled, no proxy server, and no automatic configuration URL.",
+        "At 2026-08-21T14:13Z an unauthenticated GET probe and an empty unauthenticated LFS batch POST probe both timed out before TCP connection after 10 seconds, with HTTP code 000 and no remote IP.",
+        "The exact authorized push from local head f8998527 then failed after 21124 ms with the GitHub port 443 connection error."
       ],
       "gate": "Do not dispatch Bank 3 until Git branch SHA, LFS objects, and draft PR 13 head parity are remote verified."
     },
@@ -441,7 +443,7 @@
       "postApplyDryRunNewBlobs": 0
     },
     "latestGateAudit": {
-      "verifiedAtUtc": "2026-08-21T13:45:28.7336702Z",
+      "verifiedAtUtc": "2026-08-21T14:15:31.3926866Z",
       "rejectedPromptLedgerErrors": 0,
       "failedPromptLedgerErrors": 0,
       "archiveDryRunNewManifestRows": 0,
@@ -449,7 +451,7 @@
       "pendingLfsObjects": 37
     },
     "latestRemoteDiagnostic": {
-      "observedAtUtc": "2026-08-21T13:45:28.7336702Z",
+      "observedAtUtc": "2026-08-21T14:15:31.3926866Z",
       "prNumber": 13,
       "prState": "open-draft",
       "prHeadBranch": "agent/starlight-progress-archive",
@@ -461,7 +463,10 @@
       "lfsBatchPostResponseReceived": false,
       "winHttpProxy": "direct-no-proxy",
       "internetSettingsProxyEnabled": false,
-      "internetSettingsAutoConfigUrl": null
+      "internetSettingsAutoConfigUrl": null,
+      "unauthenticatedGetHttpCode": 0,
+      "emptyLfsBatchPostHttpCode": 0,
+      "endpointTcpConnectSucceeded": false
     }
   },
   "nextAction": "Retry the exact authorized branch push when GitHub HTTPS and Git LFS are available. Remote verify branch SHA, LFS objects, and draft PR 13 head parity, then dispatch the four Bank 3 primary prompts concurrently."
