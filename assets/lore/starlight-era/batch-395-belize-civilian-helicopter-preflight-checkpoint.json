@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 395,
   "country": "Belize",
-  "status": "bank-1-nine-files-captured-unclassified",
+  "status": "bank-1-ten-files-captured-unclassified",
   "preparedAtUtc": "2026-08-21T22:18:27.1323170Z",
   "sourceCommit": "d78616865c4a3ffaf86fb1b2d5d7ee412d601a36",
   "contract": {
@@ -51,8 +51,8 @@
   "evidenceSnapshots": {
     "generatedMediaManifest": {
       "path": "progress-reports/codex-generated-media/manifest.jsonl",
-      "sha256": "44BA7091ABDB43E4C490766CE9B59610C9BF52C01331E5420F81F54E6CCB4E6C",
-      "rows": 4702
+      "sha256": "D1FF8E8AD61540BF35F7D7E5FECCBAD2814188D8A4D9EE2E837660B3102B1086",
+      "rows": 4712
     },
     "rejectedPromptLedger": {
       "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
@@ -344,10 +344,11 @@
       "dispatchStartedUtc": "2026-08-21T22:28:23.946Z",
       "dispatchCompletedUtc": "2026-08-21T22:28:27.595Z",
       "captureStartedUtc": "2026-08-21T22:32:26.0362030Z",
-      "captureCompletedUtc": "2026-08-21T22:32:31.1899914Z",
+      "captureCompletedUtc": "2026-08-21T22:51:19.673Z",
       "requested": 4,
-      "returnedFiles": 9,
-      "uniqueContents": 7,
+      "fallbackAttempts": 1,
+      "returnedFiles": 10,
+      "uniqueContents": 8,
       "providerShortfall": 0,
       "completedOutputs": [
         {"scene":1600,"lane":1,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-1/batch-395-bank-01-lane-1-scene-1600-output-1.webp","sha256":"995411F544B10F777D2A6A285C366590F679CD6479F15494A5E6F480C2A09347","bytes":530784,"width":1152,"height":2048,"disposition":"completed-unclassified"},
@@ -358,7 +359,8 @@
         {"scene":1603,"lane":4,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-1.webp","sha256":"5E49CDF4F6588F7C1515B40706B9AE8B44C55DE41E5E84909971A3A03C4C138A","bytes":564670,"width":1152,"height":2048,"disposition":"completed-unclassified"},
         {"scene":1603,"lane":4,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-2.webp","sha256":"CDCEB11B87F469C13DD80541731DC8360E2EFE1C00BAE5E1A84439391FB8F3DB","bytes":530342,"width":1152,"height":2048,"disposition":"completed-unclassified"},
         {"scene":1603,"lane":4,"output":3,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-3.webp","sha256":"03169F163AF2DD8DFDAF6260FDAA79D12F9244DA461631E1B0B4E6ECE57D00C8","bytes":531920,"width":1152,"height":2048,"disposition":"completed-unclassified"},
-        {"scene":1603,"lane":4,"output":4,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-4.webp","sha256":"5E49CDF4F6588F7C1515B40706B9AE8B44C55DE41E5E84909971A3A03C4C138A","bytes":564670,"width":1152,"height":2048,"duplicateContentOf":"lane-4-output-1","disposition":"completed-unclassified"}
+        {"scene":1603,"lane":4,"output":4,"rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-4/batch-395-bank-01-lane-4-scene-1603-output-4.webp","sha256":"5E49CDF4F6588F7C1515B40706B9AE8B44C55DE41E5E84909971A3A03C4C138A","bytes":564670,"width":1152,"height":2048,"duplicateContentOf":"lane-4-output-1","disposition":"completed-unclassified"},
+        {"scene":1601,"lane":2,"output":1,"attempt":"single-authorized-fallback","rawPath":"outputs/meta5_batch_staging/batch-395/bank-01/lane-2/batch-395-bank-01-lane-2-scene-1601-fallback-output-1.webp","sha256":"F75DF4905120696CD29DDDC10B93F02545A61503F81362AE8B4351E7DEF8D686","bytes":635678,"width":1152,"height":2048,"disposition":"completed-unclassified"}
       ],
       "terminalRefusals": [
         {
@@ -367,7 +369,20 @@
           "observedAtUtc": "2026-08-21T22:33:39.238Z",
           "lexiconEventId": "d8861bbcca69b5b0e781a212243772321cd66ef10ac26763097d5a64badb6deb",
           "fallbackPath": "tmp/world-195x4/batch-395/scene-1601-meta-bank-1-fallback.txt",
-          "fallbackDispatchState": "eligible-once-after-archive-and-parity-gate"
+          "fallbackDispatchState": "single-authorized-fallback-completed-unclassified",
+          "fallbackDispatchStartedUtc": "2026-08-21T22:47:18.143Z",
+          "fallbackDispatchCompletedUtc": "2026-08-21T22:47:18.458Z",
+          "fallbackPromptSha256": "74ABEEFA30A9B5F645EB2CF8D3BCD385CF9714A72AFB6F823029221AB4C6EE0D",
+          "fallbackImmediateResponseCapturedAtUtc": "2026-08-21T22:47:24.000Z",
+          "fallbackImmediateResponseText": "Reworking the prop description",
+          "fallbackProviderUrl": "https://www.meta.ai/prompt/4d99af9b-e893-4dcc-aaa9-bb0062142f2e",
+          "fallbackRefusalDetected": false,
+          "fallbackCapturedAtUtc": "2026-08-21T22:51:19.673Z",
+          "fallbackRawPath": "outputs/meta5_batch_staging/batch-395/bank-01/lane-2/batch-395-bank-01-lane-2-scene-1601-fallback-output-1.webp",
+          "fallbackRawMediaSha256": "F75DF4905120696CD29DDDC10B93F02545A61503F81362AE8B4351E7DEF8D686",
+          "fallbackRawMediaBytes": 635678,
+          "fallbackDimensions": [1152, 2048],
+          "secondFallbackAuthorized": false
         }
       ],
       "archiveCollector": {
@@ -377,7 +392,15 @@
         "newBlobs": 7,
         "newBlobBytes": 4080972
       },
-      "classificationState": "nine-files-completed-unclassified"
+      "fallbackArchiveCollector": {
+        "mode": "apply",
+        "legacyRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging/batch-395/bank-01",
+        "occurrencesScanned": 4206,
+        "newManifestRows": 10,
+        "newBlobs": 1,
+        "newBlobBytes": 635678
+      },
+      "classificationState": "ten-files-completed-unclassified"
     }
   },
   "browserEvidence": {
@@ -434,5 +457,5 @@
       ]
     }
   },
-  "nextAction": "Capture each Belize Bank 1 output immediately when Meta emits media, preserve raw bytes and hashes before QA, classify every occurrence, and keep each unresolved lane moving within the evidence gates."
+  "nextAction": "Classify all ten Belize Bank 1 files before any later successor, keep the strongest hard-gate passing source per scene, and do not send a second Scene 1601 fallback."
 }
