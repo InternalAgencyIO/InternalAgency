@@ -4,7 +4,7 @@
   "country": "Vanuatu",
   "status": "bank-03-n-n-plus-1-n-plus-2-exhausted-archived-blocked-on-face-upload",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-22T04:51:29.3174810Z",
+  "lastWakeAuditAtUtc": "2026-08-22T05:49:23.7653089Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -35,17 +35,17 @@
     "palette": ["lagoon turquoise","rainforest emerald","volcanic black","lava red","coral magenta","cloud white","pandanus gold","reef violet","deep-ocean navy"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"58ACAD4430BFB5A329CEA8C0DC02A2F8745806BF2F0FC83DBD5405B2979EEBBC","rows":4825,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"33C3001D09DACA72143CAF74B7A0170A495D2F4F3F3725E894563A4C2F97ED02","rows":4829,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"},
-    "remoteParity": {"localHead":"647dec44021cb660cb88ac4678b410bf4bf37f59","remoteBranchHead":"647dec44021cb660cb88ac4678b410bf4bf37f59","draftPr13Head":"647dec44021cb660cb88ac4678b410bf4bf37f59","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeClean":true}
+    "remoteParity": {"localHead":"bfeaedfff6ffd35da42e5485cda9512b44521bb1","remoteBranchHead":"bfeaedfff6ffd35da42e5485cda9512b44521bb1","draftPr13Head":"bfeaedfff6ffd35da42e5485cda9512b44521bb1","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeClean":true}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T05:39:12.5667362Z",
+    "verifiedAtUtc": "2026-08-22T05:49:23.7653089Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -120,9 +120,21 @@
     "tabIds": ["17", "18", "19", "20"],
     "requestedImagesPerPrompt": 1,
     "referenceUploadOrder": [938, 936, 937],
-    "preflightState": "four-distinct-evidence-authorized-prompts-ready",
-    "referenceUploadOutcome": "technical-failure-no-upload-confirmed-text-only-dispatch",
-    "referenceUploadExactFailure": "Timed out after 3000ms waiting for file chooser; browser control reset before any reference file was committed and before any prompt was sent.",
+    "preflightState": "four-persistent-tabs-restored-no-new-dispatch-evidence-gate-exhausted",
+    "referenceUploadOutcome": "technical-failure-reconfirmed-no-upload-no-prompt-dispatch",
+    "referenceUploadExactFailure": "Both the visible Add attachment control and the underlying input[type=file] path timed out after 3000ms waiting for a file chooser. Browser control was reconnected; no reference file was committed and no prompt was sent.",
+    "uploadRecoveryAudit": {
+      "attemptedAtUtc": "2026-08-22T05:49:23.7653089Z",
+      "signedInAccount": "leesha007",
+      "cleanRequestTabId": "17",
+      "cleanRequestUrl": "https://www.meta.ai/",
+      "attemptedFirstReference": {"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"},
+      "pathsTested": ["visible Add attachment button","underlying input[type=file]"],
+      "exactOutcome": "Timed out after 3000ms waiting for file chooser on both supported file-chooser triggers.",
+      "filesTransmitted": 0,
+      "promptsSent": 0,
+      "tabsRestored": ["17","18","19","20"]
+    },
     "dispatchStartedUtc": "2026-08-22T04:54:38.990Z",
     "dispatchState": "bank-03-four-n-plus-2-results-preserved-four-hard-unusable",
     "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl",
@@ -134,11 +146,11 @@
     ]
   },
   "authoritativeBlocker": {
-    "recordedAtUtc": "2026-08-22T05:39:12.5667362Z",
+    "recordedAtUtc": "2026-08-22T05:49:23.7653089Z",
     "type": "face-reference-upload-technical-failure-and-evidence-gate-exhaustion",
-    "exactFailure": "Timed out after 3000ms waiting for file chooser; browser control reset before any reference file was committed and before any prompt was sent.",
+    "exactFailure": "Both supported Meta file-chooser triggers timed out after 3000ms. Browser control was reconnected and the exact four persistent tabs were restored; no reference file was transmitted and no prompt was sent.",
     "impact": "The exact three historical face anchors could not be attached. All four scenes consumed the authorized N, N+1, and N+2 generation gates and remain hard-unusable; additional filler dispatch is not authorized.",
-    "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","archive dry-run zero","both ledger verifiers pass","Git and LFS evidence prepared for parity"]
+    "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","four repo-tracked Bank 3 occurrence rows appended to the generated-media manifest","archive dry-run zero","both ledger verifiers pass","exact face-anchor hashes reverified","visible and underlying Meta upload triggers tested without transmitting files","four persistent Meta tabs restored","Git and LFS evidence prepared for parity"]
   },
   "nextAction": "Restore exact ordered face uploads 938, 936, 937 in a clean Meta request or obtain a contract-authorized new evidence gate. Do not dispatch filler beyond the exhausted N, N+1, N+2 gates."
 }
