@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 396,
   "country": "Bahamas",
-  "status": "bank-2-captured-scene-1607-source-candidate-scenes-1604-1605-1606-unresolved",
+  "status": "meta-source-selected-4-of-4-pending-chatgpt-clothing-edits-after-remote-parity",
   "preparedAtUtc": "2026-08-22T00:04:40.5446589Z",
   "sourceCommit": "5fa57453757dda12b963253331e08c5582cbf5ac",
   "contract": {
@@ -51,7 +51,7 @@
   "evidenceSnapshots": {
     "generatedMediaManifest": {
       "path": "progress-reports/codex-generated-media/manifest.jsonl",
-      "sha256": "7D88AA7670EAFDDD6D7C81455FACA1F2B899DB7CC202744E83F1863DF990EE8A"
+      "sha256": "527B9D307292ADBE07B987B9A3FA278652D45ABB7D7024DAE3069A0E3C935B6B"
     },
     "rejectedPromptLedger": {
       "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
@@ -69,7 +69,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T00:04:40.5446589Z",
+    "verifiedAtUtc": "2026-08-22T01:11:01.9372031Z",
     "uploadOrder": [
       {"slot": 1, "scene": 938, "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png", "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6", "verified": true},
       {"slot": 2, "scene": 936, "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png", "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB", "verified": true},
@@ -87,11 +87,11 @@
     "sha256": "0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F"
   },
   "fourTabBank": {
-    "bank": 2,
+    "bank": 3,
     "requestedImagesPerPrompt": 1,
     "concurrentTabs": 4,
     "bolderPublicSafeScenes": [1604, 1606],
-    "dispatchState": "two-text-only-banks-captured-six-media-two-terminal-refusals",
+    "dispatchState": "three-eligible-text-only-requests-captured-eight-media-occurrences-one-resolved-lane-idle-no-filler",
     "completedRenderRunsSinceLastX": 0
   },
   "scenePlans": {
@@ -149,17 +149,28 @@
       "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01.jsonl",
       "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01-retry.jsonl",
       "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-02.jsonl",
-      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01-02-qa.jsonl"
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01-02-qa.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-03.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-03-qa.jsonl"
     ],
     "externalStagingRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging/batch-396",
     "initialBrowserBlocker": {"requested":4,"sent":0,"returnedFiles":0,"explicitNoBytesOccurrences":4,"providerShortfall":4,"classificationState":"browser-blocked-before-send-no-provider-request"},
     "bank1TextOnlyRetry": {"requested":4,"sent":4,"returnedFiles":3,"terminalRefusals":1,"hardUnusable":3,"sourceCandidates":0},
     "bank2": {"requested":4,"sent":4,"returnedFiles":3,"terminalRefusals":1,"hardUnusable":2,"sourceCandidates":1},
-    "capturedRawFiles": 6,
-    "capturedRawBytes": 3126588,
-    "sourceCandidate": {"scene":1607,"bank":2,"sha256":"F3699A9554E19A76ECC88C808389F3A229FED1EA19BD242DA0F171720F39E1DE","state":"pending-archive-ledger-git-lfs-remote-pr-gates-before-clothing-only-edit"},
-    "unresolvedScenes": [1604,1605,1606],
+    "bank3": {"eligibleLanes":3,"requested":3,"sent":3,"returnedMediaOccurrences":8,"providerOverproductionOccurrences":5,"resolvedNoFillerLanes":1,"hardUnusable":5,"sourceCandidates":3,"cadenceCredit":0},
+    "capturedRawFiles": 14,
+    "capturedRawBytes": 8503793,
+    "sourceCandidates": [
+      {"scene":1604,"bank":3,"rawPath":"outputs/meta5_batch_staging/batch-396/bank-03/lane-1/batch-396-bank-03-lane-1-scene-1604-provider-gallery-preview-1.png","sha256":"E2985AC5427CB42BF950C511B2209DCA44FE370011080DB9CF46A2A550E7D473","state":"selected-meta-source-pending-remote-parity-before-clothing-only-edit"},
+      {"scene":1605,"bank":3,"rawPath":"outputs/meta5_batch_staging/batch-396/bank-03/lane-2/batch-396-bank-03-lane-2-scene-1605-output-1.webp","sha256":"DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6","state":"selected-meta-source-pending-remote-parity-before-clothing-only-edit"},
+      {"scene":1606,"bank":3,"rawPath":"outputs/meta5_batch_staging/batch-396/bank-03/lane-3/batch-396-bank-03-lane-3-scene-1606-output-5.webp","sha256":"E34B7D668B21E2FAF358ED75BC39E733FFD790A54F6A1234316909C8715D344A","state":"selected-meta-source-pending-remote-parity-before-clothing-only-edit"},
+      {"scene":1607,"bank":2,"rawPath":"outputs/meta5_batch_staging/batch-396/bank-02/lane-4/batch-396-bank-02-lane-4-scene-1607-output-1.webp","sha256":"F3699A9554E19A76ECC88C808389F3A229FED1EA19BD242DA0F171720F39E1DE","state":"selected-meta-source-pending-remote-parity-before-clothing-only-edit"}
+    ],
+    "unresolvedScenes": [],
+    "pendingFinalClothingEdits": [1604,1605,1606,1607],
     "completedBanksInCurrentRenderRun": 2,
+    "providerBanksCapturedInCurrentRenderRun": 3,
+    "bank3CadenceNote": "Bank 3 had only three eligible unresolved scenes. Scene 1607 was already source-ready and the no-filler rule prohibited a fourth request, so this bank records evidence but does not receive exact four-prompt render-run cadence credit.",
     "completedRenderRunsSinceLastX": 0
   },
   "browserEvidence": {
@@ -184,10 +195,10 @@
       }
     ],
     "uploadOutcome": "technical-failure-no-upload-confirmed-text-only-required-on-retry",
-    "dispatchOutcome": "bank-1-text-only-retry-and-bank-2-corrections-captured",
+    "dispatchOutcome": "bank-3-captured-three-eligible-requests-eight-media-occurrences-one-resolved-lane-idle-no-filler",
     "blockerObservedAtUtc": "2026-08-22T00:12:14.7042914Z",
-    "providerRequestsSent": 8,
-    "rawMediaBytes": 3126588,
+    "providerRequestsSent": 11,
+    "rawMediaBytes": 8503793,
     "providerUrls": {
       "1604": "https://www.meta.ai/prompt/3b48a7c0-0572-4d99-8635-2e4201683c66",
       "1605": "https://www.meta.ai/prompt/e4c25339-13b8-4fe6-90a1-bc58161b6d22",
@@ -196,7 +207,10 @@
     },
     "bank2DispatchStartedUtc": "2026-08-22T00:39:15.278Z",
     "bank2DispatchCompletedUtc": "2026-08-22T00:39:15.611Z",
-    "lastCaptureUtc": "2026-08-22T00:43:21.0871685Z"
+    "bank3DispatchStartedUtc": "2026-08-22T01:00:15.326Z",
+    "bank3DispatchCompletedUtc": "2026-08-22T01:00:15.731Z",
+    "bank3ResolvedLane": {"lane":4,"scene":1607,"outcome":"no-dispatch-resolved-no-filler"},
+    "lastCaptureUtc": "2026-08-22T01:03:49.173Z"
   },
   "refusalLexiconUpdate": {
     "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
@@ -206,15 +220,17 @@
     "activeSuppressionProfileChanged": false
   },
   "archiveCapture": {
-    "appliedAtUtc": "2026-08-22T00:49:53.137Z",
+    "appliedAtUtc": "2026-08-22T01:08:24.815Z",
     "legacyRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging",
-    "newManifestRows": 7,
-    "newBahamasManifestRows": 6,
-    "newHistoricalBelizeManifestRows": 1,
-    "newBlobs": 6,
-    "newBlobBytes": 3126588,
-    "bahamasBlobHashesVerified": 6,
-    "manifestSha256": "7D88AA7670EAFDDD6D7C81455FACA1F2B899DB7CC202744E83F1863DF990EE8A"
+    "newManifestRows": 8,
+    "newBahamasManifestRows": 8,
+    "newHistoricalBelizeManifestRows": 0,
+    "newBlobs": 8,
+    "newBlobBytes": 5377205,
+    "bahamasBlobHashesVerified": 8,
+    "cumulativeBahamasRawFiles": 14,
+    "cumulativeBahamasRawBytes": 8503793,
+    "manifestSha256": "527B9D307292ADBE07B987B9A3FA278652D45ABB7D7024DAE3069A0E3C935B6B"
   },
-  "nextAction": "Reuse the same four persistent Meta chats for bank 3. Scene 1604 should use Meta's offered cinema-light fallback, scene 1605 needs both complete RAZE pairs and footwear visible, scene 1606 needs Alia-to-Ellie cheek affection instead of Alia-to-Radiance, and scene 1607 must not be regenerated after its source candidate clears all evidence gates."
+  "nextAction": "Commit and push the four selected Meta sources and every Bank 3 occurrence, then remote-verify Git, LFS, archive and ledger parity. Only after that source archive barrier passes, run one built-in ChatGPT clothing-only final edit for each selected scene, with at most one conditional retry per scene under the authoritative ceiling."
 }
