@@ -4,6 +4,7 @@
   "country": "Iceland",
   "status": "bank-01-terminal-4-of-4-raw-export-parity-blocked",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
+  "lastWakeAuditAtUtc": "2026-08-22T02:27:23.3352425Z",
   "sourceCommit": "37bba06a00996897b427445dad8df472e7a95c47",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -119,7 +120,28 @@
       {"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/ff9add6c-8eac-4d36-88a5-68519b10bf24","primaryPromptSha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","fallbackPromptSha256":"5402CE007AAE10670BCA6D531D6DC6B13B82978FD049C9FA37A00A2259D7C735","referenceUploadOrder":[938,936,937],"state":"fallback-media-completed-raw-export-blocked","browserPreviewSha256":"0D4B50B7F6AE98E48D7B5CAC4BB23B20735CF50C11E8AA5CC717EAB29136DAB5"},
       {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/fb3025b6-6358-4e06-b1e0-16b5b857dd74","primaryPromptSha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","fallbackPromptSha256":"A4C21EA27733AF4F3811776F035FC525E9EF3F206D25178B134FB51E473B16F7","referenceUploadOrder":[938,936,937],"state":"fallback-media-completed-raw-export-blocked","browserPreviewSha256":"AF95788D26914DE4CCB2733C9FA848A1F65CF63213E8204A8918E1AE2452E4F8"}
     ],
-    "terminalEvidence":{"primaryRefusalsNoBytes":3,"completedMediaResults":4,"providerOfferedFallbacksUsed":3,"rawExportsPreserved":0,"browserPreviewsPreserved":4,"rawExportBlocker":"The in-app Download control emitted no download event. locator.downloadMedia navigated each tab to the direct source URL, tab.content.export is unsupported, and no raw source file materialized. Provider URLs, source URLs, exact response text, prompt hashes, reference hashes and noncanonical browser previews are preserved."}
+    "terminalEvidence":{"primaryRefusalsNoBytes":3,"completedMediaResults":4,"providerOfferedFallbacksUsed":3,"rawExportsPreserved":0,"browserPreviewsPreserved":4,"rawExportBlocker":"The in-app Download control emitted no download event. locator.downloadMedia navigated each tab to the direct source URL, tab.content.export is unsupported, and no raw source file materialized. Provider URLs, source URLs, exact response text, prompt hashes, reference hashes and noncanonical browser previews are preserved."},
+    "rawExportRecoveryAudit": {
+      "auditedAtUtc":"2026-08-22T02:27:23.3352425Z",
+      "scene":1611,
+      "viewer":"Meta full-screen media viewer for gallery/trappist_sunrise_group.webp",
+      "attempts":[
+        {"method":"visible Download button plus download-event wait","timeoutMs":15000,"result":"timed out; no browser download event and no file materialized"},
+        {"method":"viewer development-log inspection","result":"empty log; no surfaced network or console error"},
+        {"method":"viewer image right-click","result":"no browser context menu or save-image path appeared"},
+        {"method":"viewer image focus plus Ctrl+C and browser clipboard read","result":"clipboard remained empty"},
+        {"method":"viewer More options","result":"only Good result and Bad result controls; no alternate export path"}
+      ],
+      "result":"raw-source export parity remains blocked; no prompt was dispatched while the parity gate is closed"
+    },
+    "previewQa": {
+      "ledger":"progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-meta-bank-01-preview-qa.jsonl",
+      "sha256":"CE27C42BEAC66D48975A8FEA8B5ED39E51C7925E6DB6200E75838AF035EA0754",
+      "auditedAtUtc":"2026-08-22T02:27:23.3352425Z",
+      "classifications":{"1608":"hard-unusable-preview","1609":"preview-pass-raw-required","1610":"preview-inconclusive-render-surface-occluded","1611":"hard-unusable-preview"},
+      "canonicalMediaCreated":0,
+      "bankCountIncremented":false
+    }
   },
   "nextAction": "Do not classify any Iceland media as canonical or advance the completed-bank counter. First restore raw-source export parity for all four terminal results through the signed-in Meta UI, then preserve exact raw bytes, SHA-256 and dimensions and resume occurrence QA."
 }
