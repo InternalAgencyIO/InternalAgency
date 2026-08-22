@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 397,
   "country": "Iceland",
-  "status": "bank-02-terminal-4-of-4-raw-parity-restored-qa-complete-remote-verified",
+  "status": "bank-03-terminal-three-eligible-lanes-raw-parity-restored-qa-complete-selected-sources-awaiting-remote-barrier",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
-  "lastWakeAuditAtUtc": "2026-08-22T03:35:04.9820103Z",
+  "lastWakeAuditAtUtc": "2026-08-22T03:56:44.1563606Z",
   "sourceCommit": "6daa89c493cfa29f404de5d7fa0597a2827c564a",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -46,7 +46,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T03:35:04.9820103Z",
+    "verifiedAtUtc": "2026-08-22T03:56:44.1563606Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -62,9 +62,9 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 0,
-    "completedBanksInCurrentRenderRun": 4,
-    "nextRenderRunBank": 5,
-    "countryBank": 2,
+    "completedBanksInCurrentRenderRun": 5,
+    "nextRenderRunBank": 6,
+    "countryBank": 3,
     "requestedImagesPerPrompt": 1,
     "concurrentTabs": 4
   },
@@ -77,7 +77,10 @@
       "setting":{"key":"starlight|setting|batch-397|scene-1608","counter":0,"acceptedByte":4,"digestSha256":"04F2330155E3F0DCE21DE99DF57BDF763A3E6F05EAB421C77142D07CF9996237","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1608|knee-high-wearers","fnv1a32":4262359969,"pairIndex":1,"wearers":["Radiance","Alia"],"uncoveredLowerLegCharacters":["Ellie","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
       "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-01-primary.txt","sha256":"B18F126599FB5AE03C0561935A9145C220F3A70524322707B36FA21F0E314E7B","bytes":3361},
-      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-02-correction.txt","sha256":"D7277AB73A662A36433117B8E8F7D19A782C7EB7B64E5CC8C672E7A433931DEE","bytes":2540,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0}
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-02-correction.txt","sha256":"D7277AB73A662A36433117B8E8F7D19A782C7EB7B64E5CC8C672E7A433931DEE","bytes":2540,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0},
+      "bank3Prompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-03-comparison.txt","sha256":"BCE45D453EBEAB89218B0E611A70247CACA429FDF844008637ABB885ECE1ACA2","bytes":2599,"gate":"single N+1 comparison after provisional-ready Bank 2 occurrence","activeSuppressionMatches":0},
+      "bank3FallbackPrompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-03-fallback.txt","sha256":"140B580D8237CE9197304A034603743E69051C72306E6AE1FC96299E7A316527","bytes":2167,"gate":"moderation-compatible fallback prepared but not dispatched unless primary refuses","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":3,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-03/lane-1/batch-397-bank-03-lane-1-scene-1608-output-1-raw.webp","sha256":"C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48","bytes":681710,"dimensions":"1152x2048","classification":"provisional-ready-stronger-source-selected","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
     },
     "1609": {
       "scene":1609,
@@ -87,7 +90,9 @@
       "setting":{"key":"starlight|setting|batch-397|scene-1609","counter":0,"acceptedByte":209,"digestSha256":"D18E87CAB479A95700782C41AED2651585B0C305C3EB6220DE79F841525878C7","bucket":2,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1609|knee-high-wearers","fnv1a32":2476649142,"pairIndex":0,"wearers":["Radiance","Ellie"],"uncoveredLowerLegCharacters":["Alia","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
       "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-01-primary.txt","sha256":"0806B52E63E4F50D179DD3D777E6D32C3E114D73FF05E2ED2F10A1D9361353DC","bytes":3348},
-      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-02-comparison.txt","sha256":"78C9080A4B641615E4B436B740EE80AF053022B3901B86086ECF93DDE75FA02D","bytes":2399,"gate":"single N+1 comparison after provisional-ready Bank 1 occurrence","activeSuppressionMatches":0}
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-02-comparison.txt","sha256":"78C9080A4B641615E4B436B740EE80AF053022B3901B86086ECF93DDE75FA02D","bytes":2399,"gate":"single N+1 comparison after provisional-ready Bank 1 occurrence","activeSuppressionMatches":0},
+      "bank3Prompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-03-provider-fallback.txt","sha256":"01C3134152D8D594924759E618B0A5E72133798B70CC405AAC3C37FA3709EFC7","bytes":2308,"gate":"single moderation-compatible provider-shortfall fallback after Bank 2 N+1 refusal","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":1,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-01/lane-2/batch-397-bank-01-lane-2-scene-1609-output-1-raw.png","sha256":"A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7","bytes":1933312,"dimensions":"768x1360","classification":"provisional-ready-selected-after-N+1-refusal-and-provider-shortfall-fallback-failure","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
     },
     "1610": {
       "scene":1610,
@@ -97,7 +102,8 @@
       "setting":{"key":"starlight|setting|batch-397|scene-1610","counter":0,"acceptedByte":53,"digestSha256":"35BD41F50B8809272487673D8D8F34649D5159F5F832441012AE109808D6EACA","bucket":2,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1610|knee-high-wearers","fnv1a32":4203582084,"pairIndex":0,"wearers":["Radiance","Ellie"],"uncoveredLowerLegCharacters":["Alia","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
       "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-01-primary.txt","sha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","bytes":3404},
-      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-02-correction.txt","sha256":"D0F5082B06A179499C39A1EDC0997A33EBE3AF147036BE0535E8644F3A44A67C","bytes":2537,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0}
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-02-correction.txt","sha256":"D0F5082B06A179499C39A1EDC0997A33EBE3AF147036BE0535E8644F3A44A67C","bytes":2537,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":2,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-02/lane-3/batch-397-bank-02-lane-3-scene-1610-output-1-raw.webp","sha256":"011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083","bytes":620370,"dimensions":"1152x2048","classification":"provisional-ready-strongest-source-selected","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
     },
     "1611": {
       "scene":1611,
@@ -107,7 +113,10 @@
       "setting":{"key":"starlight|setting|batch-397|scene-1611","counter":0,"acceptedByte":1,"digestSha256":"01CF126E0580860C4AAE03D2685BDBF5031C891EC317C40EDA82CD4502C14631","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1611|knee-high-wearers","fnv1a32":1667746703,"pairIndex":5,"wearers":["Alia","AI ECE"],"uncoveredLowerLegCharacters":["Radiance","Ellie"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
       "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-01-primary.txt","sha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","bytes":3405},
-      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-02-correction.txt","sha256":"D1D97A82B8F067914938E26BD9DF68C6283BB3A4ED688F90367B944C3EE40077","bytes":2541,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0}
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-02-correction.txt","sha256":"D1D97A82B8F067914938E26BD9DF68C6283BB3A4ED688F90367B944C3EE40077","bytes":2541,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0},
+      "bank3Prompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-03-correction.txt","sha256":"2193095EAD176166B675F83C27CBB7616722FE8C23CFD356CD9B1DA651161670","bytes":2745,"gate":"fresh correction after hard-unusable Bank 2 occurrence; remove forbidden readable text","activeSuppressionMatches":0},
+      "bank3FallbackPrompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-03-fallback.txt","sha256":"1A9322DF0D5D824B1C9250277124EC15390066491ED51C64EB9A7B14EF64255F","bytes":2338,"gate":"moderation-compatible fallback prepared but not dispatched unless primary refuses","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":3,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-03/lane-4/batch-397-bank-03-lane-4-scene-1611-output-2-inline-regenerated-raw.webp","sha256":"48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45","bytes":523874,"dimensions":"1152x2048","classification":"provisional-ready-stronger-source-selected","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
     }
   },
   "browserEvidence": {
@@ -139,6 +148,53 @@
         {"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/2f578ed2-ee5f-497e-b4bf-1a2f6ef17abe","promptSha256":"D0F5082B06A179499C39A1EDC0997A33EBE3AF147036BE0535E8644F3A44A67C","gate":"correction","state":"media-provisional-ready-raw-export-preserved","rawMediaSha256":"011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083","rawMediaBytes":620370,"dimensions":"1152x2048"},
         {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/95693ff6-971b-4015-afb9-9cf6ea0081de","promptSha256":"D1D97A82B8F067914938E26BD9DF68C6283BB3A4ED688F90367B944C3EE40077","gate":"correction","state":"media-hard-unusable-raw-export-preserved","rawMediaSha256":"BA995C3E46ECDB12B62727190AAC7CB54F572CDBD46412EC22A531B23918C6A6","rawMediaBytes":621162,"dimensions":"1152x2048"}
       ]
+    },
+    "bank3Preflight": {
+      "preparedAtUtc":"2026-08-22T03:44:54.0502165Z",
+      "provider":"Meta AI",
+      "persistentTabsObserved":4,
+      "requestedImagesPerPrompt":1,
+      "eligibleScenes":[1608,1609,1611],
+      "idleResolvedScenes":[1610],
+      "referenceUploadOrder":[938,936,937],
+      "referenceSha256":["4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"],
+      "activeSuppressionMatches":0,
+      "state":"evidence-authorized-prompts-dispatched-three-eligible-lanes"
+    },
+    "bank3Dispatch": {
+      "dispatchedAtUtc":"2026-08-22T03:46:43.828Z",
+      "provider":"Meta AI",
+      "persistentTabsObserved":4,
+      "requestedImagesPerPrompt":1,
+      "referenceUploadOrder":[938,936,937],
+      "resolvedIdleLane":{"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/2f578ed2-ee5f-497e-b4bf-1a2f6ef17abe","state":"resolved-idle-no-filler"},
+      "lanes":[
+        {"lane":1,"scene":1608,"providerUrl":"https://www.meta.ai/prompt/f76238df-dfa7-43cd-8d44-c17068d669f1","promptSha256":"BCE45D453EBEAB89218B0E611A70247CACA429FDF844008637ABB885ECE1ACA2","gate":"N+1 comparison","state":"selected-provisional-source-stop-meta-lane","rawMediaSha256":"C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48"},
+        {"lane":2,"scene":1609,"providerUrl":"https://www.meta.ai/prompt/fdcb669d-45be-452f-9738-73fff63128e8","promptSha256":"01C3134152D8D594924759E618B0A5E72133798B70CC405AAC3C37FA3709EFC7","gate":"single provider-shortfall fallback after N+1 refusal","state":"hard-unusable-stop-meta-lane-selected-bank-1-source","rawMediaSha256":"E9CA2A937FFC945666E21BF46AA0027F834A5164C0AC287FB0D29E9A9788DBB1"},
+        {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/a3475cea-5f52-47af-b587-1e2207d6552b","promptSha256":"2193095EAD176166B675F83C27CBB7616722FE8C23CFD356CD9B1DA651161670","gate":"fresh correction after hard-unusable Bank 2 occurrence","state":"selected-provider-auto-regenerated-source-stop-meta-lane","rawMediaSha256":"48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45"}
+      ],
+      "occurrenceLedger":"progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-meta-bank-03.jsonl"
+    },
+    "terminalEvidenceBank3": {
+      "completedAtUtc":"2026-08-22T03:54:54.601Z",
+      "completedEligibleLanes":3,
+      "resolvedIdleLanes":1,
+      "completedMediaOccurrences":5,
+      "uniqueRawMedia":4,
+      "duplicateProviderExports":1,
+      "rawExportsPreserved":5,
+      "rawExportsRemaining":0,
+      "rawParity":"restored",
+      "rawQaClassified":4,
+      "rawQaRemaining":0,
+      "selectedMetaSourceScenes":[1608,1609,1610,1611],
+      "selectedMetaSourceSha256":["C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48","A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7","011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083","48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45"],
+      "archiveManifest":{"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"97C63A9A9F0094A1F5A9BC54CC6206A07007C744C27E768DCC054D33214067D6","rows":4780,"occurrenceIds":["774040f6fc174b27e6d98a948eaa99230395d0c48e0108d5cbd0418e6244bb11","400c69c916e42b89c6b190da1ade1f34a87815e93f3b38a9ff0793397fd8c74f","3e8ff5000ca0108fcfae2b7547f60081d4b91a2ce6c96d612a9f2165f03f9417","4231debc1cdca21e67a6a40496ad6ceefbcbf2e8df581fe433a98e2096d2c967","9b9ab97d1ae2269e20757fe7b7dfa16a359d211e0b2c5ea3eb73b4cf4eb1f92c"]},
+      "rejectedPromptLedgerVerified":true,
+      "projectFailedPromptLedgerVerified":true,
+      "canonicalMediaCreated":0,
+      "bankCountIncremented":true,
+      "remoteBarrier":"pending commit, push, branch SHA and draft PR 13 head parity"
     },
     "terminalEvidenceBank2": {
       "completedMediaResults":3,
@@ -179,5 +235,5 @@
       "bankCountIncremented":false
     }
   },
-  "nextAction": "Prepare Iceland Bank 3 only for unresolved scenes 1608, 1609 and 1611. Preserve scene 1610 as the strongest provisional source and do not generate filler there. Scene 1609 remains closed at its N+1 refusal gate unless an evidence-authorized retry is prepared under the provider-shortfall rule."
+  "nextAction": "Commit and push the complete Iceland Bank 3 evidence package, verify remote branch and draft PR 13 head parity, LFS parity, ledger parity, archive parity and a clean worktree. Only after that remote barrier passes, run one built-in ChatGPT clothing-only final refinement on each of the four selected Meta sources, with at most one conditional retry under the authoritative contract. Do not dispatch more Meta filler for scenes 1608 through 1611."
 }
