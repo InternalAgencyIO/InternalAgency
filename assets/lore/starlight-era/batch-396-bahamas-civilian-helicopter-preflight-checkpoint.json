@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 396,
   "country": "Bahamas",
-  "status": "meta-source-selected-4-of-4-pending-chatgpt-clothing-edits-after-remote-parity",
+  "status": "closed-4-of-4-pending-final-evidence-parity",
   "preparedAtUtc": "2026-08-22T00:04:40.5446589Z",
   "sourceCommit": "5fa57453757dda12b963253331e08c5582cbf5ac",
   "contract": {
@@ -51,11 +51,11 @@
   "evidenceSnapshots": {
     "generatedMediaManifest": {
       "path": "progress-reports/codex-generated-media/manifest.jsonl",
-      "sha256": "527B9D307292ADBE07B987B9A3FA278652D45ABB7D7024DAE3069A0E3C935B6B"
+      "sha256": "AAC6CBB7109670E928AA9A199FB100BED9E9A83147D7E663E8B01AE5BA5C7A17"
     },
     "rejectedPromptLedger": {
       "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
-      "sha256": "F35144FF7EF2145ECB2F9C284789C3E25B9A6D46D4606CAEAD2CB723698106FD"
+      "sha256": "9BC062F62BFAB8012832AB5A1E2B97D646121DC04A33C66E1E23E2E41173901E"
     },
     "xLedger": {
       "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
@@ -151,7 +151,9 @@
       "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-02.jsonl",
       "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01-02-qa.jsonl",
       "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-03.jsonl",
-      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-03-qa.jsonl"
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-03-qa.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-chatgpt-final-clothing.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-chatgpt-final-clothing-qa.jsonl"
     ],
     "externalStagingRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging/batch-396",
     "initialBrowserBlocker": {"requested":4,"sent":0,"returnedFiles":0,"explicitNoBytesOccurrences":4,"providerShortfall":4,"classificationState":"browser-blocked-before-send-no-provider-request"},
@@ -167,11 +169,71 @@
       {"scene":1607,"bank":2,"rawPath":"outputs/meta5_batch_staging/batch-396/bank-02/lane-4/batch-396-bank-02-lane-4-scene-1607-output-1.webp","sha256":"F3699A9554E19A76ECC88C808389F3A229FED1EA19BD242DA0F171720F39E1DE","state":"selected-meta-source-pending-remote-parity-before-clothing-only-edit"}
     ],
     "unresolvedScenes": [],
-    "pendingFinalClothingEdits": [1604,1605,1606,1607],
+    "pendingFinalClothingEdits": [],
     "completedBanksInCurrentRenderRun": 2,
     "providerBanksCapturedInCurrentRenderRun": 3,
     "bank3CadenceNote": "Bank 3 had only three eligible unresolved scenes. Scene 1607 was already source-ready and the no-filler rule prohibited a fourth request, so this bank records evidence but does not receive exact four-prompt render-run cadence credit.",
     "completedRenderRunsSinceLastX": 0
+  },
+  "chatgptFinalClothingEdit": {
+    "completedAtUtc": "2026-08-22T01:29:12.000Z",
+    "provider": "built-in ChatGPT image generation",
+    "useCase": "identity-preserve clothing-only edit",
+    "sourceArchiveBarrierCommit": "78cb2b01771171dc9f58bd9e4bdf76c04088b810",
+    "blockedLexiconSnapshotSha256": "0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F",
+    "activeSuppressionProfileSha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+    "historicalFaceReferenceHashesVerified": 3,
+    "primaryCallsUsed": 4,
+    "conditionalRetriesUsed": 3,
+    "moderationFailures": 2,
+    "technicalNoTerminalPrimaryOccurrences": 2,
+    "hardSafetyFailures": 0,
+    "faceAnchorFailures": 0,
+    "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-chatgpt-final-clothing.jsonl",
+    "qaPath": "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-chatgpt-final-clothing-qa.jsonl",
+    "occurrenceRows": 7,
+    "qaRows": 4,
+    "archiveCollector": {
+      "mode": "apply",
+      "occurrencesScanned": 4333,
+      "newManifestRows": 10,
+      "newBlobs": 0,
+      "newBlobBytes": 0,
+      "postApplyDryRunNewManifestRows": 0,
+      "postApplyDryRunNewBlobs": 0,
+      "manifestSha256": "AAC6CBB7109670E928AA9A199FB100BED9E9A83147D7E663E8B01AE5BA5C7A17"
+    },
+    "finalSelections": [
+      {
+        "scene": 1604,
+        "sourceMetaSha256": "E2985AC5427CB42BF950C511B2209DCA44FE370011080DB9CF46A2A550E7D473",
+        "finalSha256": "F2E57C544280EBD99DDF017397E40FF9084FF3CE984474779CAD4C5F8DF7B7AD",
+        "canonicalPath": "assets/lore/starlight-era/1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe"
+      },
+      {
+        "scene": 1605,
+        "sourceMetaSha256": "DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6",
+        "finalSha256": "DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6",
+        "canonicalPath": "assets/lore/starlight-era/1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp",
+        "qaDisposition": "selected-remote-verified-meta-fallback-after-primary-and-retry-output-stage-moderation-failures"
+      },
+      {
+        "scene": 1606,
+        "sourceMetaSha256": "E34B7D668B21E2FAF358ED75BC39E733FFD790A54F6A1234316909C8715D344A",
+        "finalSha256": "F5B2F589AB0903CB8F3CA89A89E5B08E4ADD3FF15DA7731D28D7F01A1FDA7A00",
+        "canonicalPath": "assets/lore/starlight-era/1606-bahamas-andros-blue-hole-night-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-conditional-retry-face-safe-hard-safe"
+      },
+      {
+        "scene": 1607,
+        "sourceMetaSha256": "F3699A9554E19A76ECC88C808389F3A229FED1EA19BD242DA0F171720F39E1DE",
+        "finalSha256": "0952CC34D6BD02A72D96339CB02F97726563E83B7DBC62697D7935B1FFF69978",
+        "canonicalPath": "assets/lore/starlight-era/1607-bahamas-gold-rock-beach-dusk-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-conditional-retry-face-safe-hard-safe"
+      }
+    ],
+    "acceptanceState": "selected-final-pending-archive-ledger-git-lfs-remote-pr-parity"
   },
   "browserEvidence": {
     "persistentMetaTabsRequired": 4,
@@ -232,5 +294,5 @@
     "cumulativeBahamasRawBytes": 8503793,
     "manifestSha256": "527B9D307292ADBE07B987B9A3FA278652D45ABB7D7024DAE3069A0E3C935B6B"
   },
-  "nextAction": "Commit and push the four selected Meta sources and every Bank 3 occurrence, then remote-verify Git, LFS, archive and ledger parity. Only after that source archive barrier passes, run one built-in ChatGPT clothing-only final edit for each selected scene, with at most one conditional retry per scene under the authoritative ceiling."
+  "nextAction": "Stage only the Bahamas final media, exact prompt evidence, occurrence and QA ledgers, archive manifest and blobs, checkpoint, and synchronized rejection ledger. Commit, push with the exact authoritative refspec, then verify Git, LFS, archive, both ledgers, remote SHA, and draft PR 13 head parity before marking Bahamas canonical and advancing the country queue."
 }
