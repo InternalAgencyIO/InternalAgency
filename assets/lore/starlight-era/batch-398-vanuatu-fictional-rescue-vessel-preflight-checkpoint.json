@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "user-resume-ten-bank-run-bank-6-closed-scene-1615-source-selected-awaiting-remote-verification",
+  "status": "user-resume-ten-bank-render-run-complete-scenes-1612-and-1614-remain-unresolved",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-22T09:38:05.1542216Z",
+  "lastWakeAuditAtUtc": "2026-08-22T10:49:45.4770410Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -35,17 +35,17 @@
     "palette": ["lagoon turquoise","rainforest emerald","volcanic black","lava red","coral magenta","cloud white","pandanus gold","reef violet","deep-ocean navy"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"24AD0CAE6D7849B30E426957672BAA8D552A57FD51A1DA6D5A43E68FFA6C1DAE","rows":5322,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"userResumeBank4ArchiveNewRows":19,"userResumeBank4ArchiveNewBlobs":18,"userResumeBank5ArchiveNewRows":36,"userResumeBank5ArchiveNewBlobs":36,"userResumeBank6ArchiveNewRows":19,"userResumeBank6ArchiveNewBlobs":19,"userResumeBank7ArchiveNewRows":27,"userResumeBank7ArchiveNewBlobs":27,"userResumeBanks4Through7NewRows":101,"userResumeBanks4Through7NewBlobs":100,"userResumeBank8ArchiveNewRows":276,"userResumeBank8ArchiveNewBlobs":22,"userResumeBank8ArchiveNewBlobBytes":12471108,"userResumeBank9ArchiveNewRows":116,"userResumeBank9ArchiveNewBlobs":56,"userResumeBank9ArchiveNewBlobBytes":33304885,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"D2A94340DBC4653BE8EB1F0079FC322F08A6A97EE3368253319985289C805B4A","rows":5458,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"userResumeBank4ArchiveNewRows":19,"userResumeBank4ArchiveNewBlobs":18,"userResumeBank5ArchiveNewRows":36,"userResumeBank5ArchiveNewBlobs":36,"userResumeBank6ArchiveNewRows":19,"userResumeBank6ArchiveNewBlobs":19,"userResumeBank7ArchiveNewRows":27,"userResumeBank7ArchiveNewBlobs":27,"userResumeBanks4Through7NewRows":101,"userResumeBanks4Through7NewBlobs":100,"userResumeBank8ArchiveNewRows":276,"userResumeBank8ArchiveNewBlobs":22,"userResumeBank8ArchiveNewBlobBytes":12471108,"userResumeBank9ArchiveNewRows":116,"userResumeBank9ArchiveNewBlobs":56,"userResumeBank9ArchiveNewBlobBytes":33304885,"userResumeBank10ArchiveNewRows":92,"userResumeBank10ArchiveNewBlobs":6,"userResumeBank10ArchiveNewBlobBytes":3010142,"userResumeBank11ArchiveNewRows":14,"userResumeBank11ArchiveNewBlobs":14,"userResumeBank11ArchiveNewBlobBytes":7497780,"userResumeBank12ArchiveNewRows":14,"userResumeBank12ArchiveNewBlobs":14,"userResumeBank12ArchiveNewBlobBytes":7157434,"userResumeBank13ArchiveNewRows":16,"userResumeBank13ArchiveNewBlobs":16,"userResumeBank13ArchiveNewBlobBytes":8986831,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
-    "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"},
-    "remoteParity": {"evidenceCommit":"146f376c76bba11d00103c326874948be9b75b94","localHead":"146f376c76bba11d00103c326874948be9b75b94","remoteBranchHead":"146f376c76bba11d00103c326874948be9b75b94","draftPr13Head":"146f376c76bba11d00103c326874948be9b75b94","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeCleanAtEvidenceCommit":true,"scope":"Banks 4 through 7 evidence including the selected scene 1613 Meta source"}
+    "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"8B58648597F02FBC162265D240F71CDC5230C51AF8BBB1A781EE01F3ABBEB19B","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":1,"mode":"render-first-after-backlog-clearance"},
+    "remoteParity": {"evidenceCommit":"8925ec1640baf158fb85b9cce98d3f3a54ed8ec4","localHead":"8925ec1640baf158fb85b9cce98d3f3a54ed8ec4","remoteBranchHead":"8925ec1640baf158fb85b9cce98d3f3a54ed8ec4","draftPr13Head":"8925ec1640baf158fb85b9cce98d3f3a54ed8ec4","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeCleanAtEvidenceCommit":true,"scope":"Banks 4 through 9 evidence including selected scene 1613 and scene 1615 Meta sources"}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T08:41:31.0804153Z",
+    "verifiedAtUtc": "2026-08-22T10:49:45.4770410Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -60,11 +60,11 @@
   },
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
-    "completedRenderRunsSinceLastX": 0,
-    "completedBanksInCurrentRenderRun": 6,
+    "completedRenderRunsSinceLastX": 1,
+    "completedBanksInCurrentRenderRun": 10,
     "inFlightRenderRunBank": null,
-    "nextRenderRunBankAfterInFlight": 7,
-    "countryBank": 9,
+    "nextRenderRunBankAfterInFlight": null,
+    "countryBank": 13,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 2,
@@ -121,7 +121,7 @@
     "provider": "Meta AI",
     "persistentMetaTabsRequired": 4,
     "persistentMetaTabsObserved": 4,
-    "tabIds": ["17", "18", "19", "20"],
+    "tabIds": ["1", "2", "3", "4"],
     "requestedImagesPerPrompt": 1,
     "referenceUploadOrder": [938, 936, 937],
     "preflightState": "clean-request-tab-17-holds-exact-ordered-face-anchors-no-prompt-sent",
@@ -177,11 +177,11 @@
     "userResumeTenBankRun": {
       "authorizedByExplicitUserRequest": true,
       "requestedMethod": "ten Meta banks as one run, with all eligible scene prompts dispatched concurrently rather than lane-by-lane",
-      "completedCountryBanks": [4, 5, 6, 7, 8, 9],
+      "completedCountryBanks": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
       "inFlightCountryBank": null,
-      "completedRenderRunBankOrdinals": [1, 2, 3, 4, 5, 6],
+      "completedRenderRunBankOrdinals": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       "inFlightRenderRunBankOrdinal": null,
-      "mediaOccurrencesInspected": 181,
+      "mediaOccurrencesInspected": 231,
       "providerNoByteOccurrences": 3,
       "provisionalSourcesSelected": [
         {
@@ -200,14 +200,14 @@
           "rawPath": "outputs/meta5_batch_staging/batch-398/bank-09/lane-4/batch-398-bank-09-lane-4-scene-1615-output-33.jpg",
           "rawSha256": "465B56787E8D7985076021B296D4FAE7559196B86B5B9CA809DCA7AAB4C9D8FB",
           "canonicalEligible": false,
-          "nextGate": "archive, commit, push, and remote verify this selected Meta source, then use the single allowed built-in ChatGPT clothing-only final edit for visible secure cocktail mini-skorts"
+          "nextGate": "selected Meta source remote verified at 8925ec1640baf158fb85b9cce98d3f3a54ed8ec4; eligible for the single allowed built-in ChatGPT clothing-only final edit for visible secure cocktail mini-skorts"
         }
       ],
       "remainingEligibleScenes": [1612, 1614],
       "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl",
-      "occurrenceLedgerSha256": "7B42524A946B651AEEB1470FD8DC3C453122555D7E0015CC9C735D895162617E",
-      "lastClosedAtUtc": "2026-08-22T09:34:57.7442924Z",
-      "latestDispatch": {"countryBank":9,"renderRunBankOrdinal":6,"dispatchedAtUtc":"2026-08-22T09:14:29.723Z","eligibleScenes":[1612,1614,1615],"stoppedScene":1613,"providerUrls":["https://www.meta.ai/prompt/e97d00f1-b5bf-48cf-b3a0-3fd86d3f0e53","https://www.meta.ai/prompt/21e02ffe-ff0b-4c7b-b9f5-6d7f1e34ebc6","https://www.meta.ai/prompt/efba136b-d57d-4fa4-b9eb-a67f8df3b552"]}
+      "occurrenceLedgerSha256": "41FD6900AACF31610DB43A9624236281555533A27DBEBBF9DD42ABF58F3A3ADB",
+      "lastClosedAtUtc": "2026-08-22T10:49:45.4770410Z",
+      "latestDispatch": {"countryBank":13,"renderRunBankOrdinal":10,"dispatchedAtUtc":"2026-08-22T10:40:32.677Z","eligibleScenes":[1612,1614],"stoppedScenes":[1613,1615],"providerUrls":["https://www.meta.ai/prompt/2e3a626d-59dd-4b3a-9aee-6c2622ce01d5","https://www.meta.ai/prompt/7e7a0f6e-bc6c-46e5-8e2b-1c4bc9c2689f"]}
     },
     "dispatchStartedUtc": "2026-08-22T04:54:38.990Z",
     "dispatchState": "bank-03-four-n-plus-2-results-preserved-four-hard-unusable",
@@ -227,5 +227,5 @@
     "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","four repo-tracked Bank 3 occurrence rows appended to the generated-media manifest","archive dry-run zero","both ledger verifiers pass","exact face-anchor hashes reverified before every upload","Meta attachment modal control path identified","scene 938 then 936 then 937 attached once each in required order","zero prompt sends and zero result bytes recorded","reference-upload recovery occurrence appended","four persistent Meta tabs preserved for handoff","fresh remote, PR, Git, LFS, archive, ledger, face-anchor, X-cadence, and preserved-draft audits completed at 2026-08-22T06:46:16.2678686Z","Git and LFS evidence prepared for parity"]
   },
   "authoritativeBlocker": null,
-  "nextAction": "Capture every Bank 9 media occurrence or explicit provider no-byte terminal result before inspecting another lane, classify all outputs, archive and verify both ledgers, then continue the ten-bank run with Bank 10 across every still-eligible scene concurrently while preserving exactly four persistent Meta tabs and sending no filler in stopped scene 1613."
+  "nextAction": "Maintain scenes 1612 and 1614 as unresolved for the next render run, preserve stopped scenes 1613 and 1615 without filler, and keep the X publication window closed until completedRenderRunsSinceLastX reaches 5."
 }
