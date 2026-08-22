@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "user-resume-ten-bank-render-run-complete-scenes-1612-and-1614-remain-unresolved",
+  "status": "second-ten-bank-render-run-banks-01-through-10-local-evidence-gates-pass-remote-parity-pending-scene-1612-source-selected-scene-1614-unresolved",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-22T11:02:51.8797842Z",
+  "lastWakeAuditAtUtc": "2026-08-22T12:56:48.0637138Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -35,17 +35,17 @@
     "palette": ["lagoon turquoise","rainforest emerald","volcanic black","lava red","coral magenta","cloud white","pandanus gold","reef violet","deep-ocean navy"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"E52E8D73EAE9A06D113C7F5D03E01D1760C7A4C85FC29AC49489494B9E1D3089","rows":5508,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"userResumeBank4ArchiveNewRows":19,"userResumeBank4ArchiveNewBlobs":18,"userResumeBank5ArchiveNewRows":36,"userResumeBank5ArchiveNewBlobs":36,"userResumeBank6ArchiveNewRows":19,"userResumeBank6ArchiveNewBlobs":19,"userResumeBank7ArchiveNewRows":27,"userResumeBank7ArchiveNewBlobs":27,"userResumeBanks4Through7NewRows":101,"userResumeBanks4Through7NewBlobs":100,"userResumeBank8ArchiveNewRows":276,"userResumeBank8ArchiveNewBlobs":22,"userResumeBank8ArchiveNewBlobBytes":12471108,"userResumeBank9ArchiveNewRows":116,"userResumeBank9ArchiveNewBlobs":56,"userResumeBank9ArchiveNewBlobBytes":33304885,"userResumeBank10ArchiveNewRows":92,"userResumeBank10ArchiveNewBlobs":6,"userResumeBank10ArchiveNewBlobBytes":3010142,"userResumeBank11ArchiveNewRows":14,"userResumeBank11ArchiveNewBlobs":14,"userResumeBank11ArchiveNewBlobBytes":7497780,"userResumeBank12ArchiveNewRows":14,"userResumeBank12ArchiveNewBlobs":14,"userResumeBank12ArchiveNewBlobBytes":7157434,"userResumeBank13ArchiveNewRows":16,"userResumeBank13ArchiveNewBlobs":16,"userResumeBank13ArchiveNewBlobBytes":8986831,"postCommitTrackedOccurrenceRows":50,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"AD3B3D486AE8CF6CCC4CB9E4180A20AA8C6DAA36C054CD295BD432F36AC30445","rows":5573,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"userResumeBank4ArchiveNewRows":19,"userResumeBank4ArchiveNewBlobs":18,"userResumeBank5ArchiveNewRows":36,"userResumeBank5ArchiveNewBlobs":36,"userResumeBank6ArchiveNewRows":19,"userResumeBank6ArchiveNewBlobs":19,"userResumeBank7ArchiveNewRows":27,"userResumeBank7ArchiveNewBlobs":27,"userResumeBanks4Through7NewRows":101,"userResumeBanks4Through7NewBlobs":100,"userResumeBank8ArchiveNewRows":276,"userResumeBank8ArchiveNewBlobs":22,"userResumeBank8ArchiveNewBlobBytes":12471108,"userResumeBank9ArchiveNewRows":116,"userResumeBank9ArchiveNewBlobs":56,"userResumeBank9ArchiveNewBlobBytes":33304885,"userResumeBank10ArchiveNewRows":92,"userResumeBank10ArchiveNewBlobs":6,"userResumeBank10ArchiveNewBlobBytes":3010142,"userResumeBank11ArchiveNewRows":14,"userResumeBank11ArchiveNewBlobs":14,"userResumeBank11ArchiveNewBlobBytes":7497780,"userResumeBank12ArchiveNewRows":14,"userResumeBank12ArchiveNewBlobs":14,"userResumeBank12ArchiveNewBlobBytes":7157434,"userResumeBank13ArchiveNewRows":16,"userResumeBank13ArchiveNewBlobs":16,"userResumeBank13ArchiveNewBlobBytes":8986831,"postCommitTrackedOccurrenceRows":50,"secondRenderRunBanks14Through23ArchiveNewRows":65,"secondRenderRunBanks14Through23ArchiveNewBlobs":59,"secondRenderRunBanks14Through23ArchiveNewBlobBytes":34597037,"providerOccurrenceRows":367,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"8B58648597F02FBC162265D240F71CDC5230C51AF8BBB1A781EE01F3ABBEB19B","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":1,"mode":"render-first-after-backlog-clearance"},
-    "remoteParity": {"evidenceCommit":"fa65655793e71e82ddc2558db8d3508226f8dae7","localHead":"fa65655793e71e82ddc2558db8d3508226f8dae7","remoteBranchHead":"fa65655793e71e82ddc2558db8d3508226f8dae7","draftPr13Head":"fa65655793e71e82ddc2558db8d3508226f8dae7","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeCleanAtEvidenceCommit":true,"scope":"Vanuatu ten-bank Meta render run evidence, all 231 inspected media occurrences, three explicit provider no-byte occurrences, tracked-occurrence archive parity, completed render-run counter 1 of 5, and zero X backlog"}
+    "remoteParity": {"previousVerifiedHead":"5a586cbed854d0c721d4c3ceb11405348c61362f","evidenceCommit":null,"localHead":"5a586cbed854d0c721d4c3ceb11405348c61362f","remoteBranchHead":"5a586cbed854d0c721d4c3ceb11405348c61362f","draftPr13Head":"5a586cbed854d0c721d4c3ceb11405348c61362f","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeCleanAtEvidenceCommit":false,"pending":"second ten-bank render run Banks 14 through 23 archive, Git, LFS, remote branch SHA, and draft PR 13 head parity"}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T11:02:51.8797842Z",
+    "verifiedAtUtc": "2026-08-22T12:56:48.0637138Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -64,11 +64,11 @@
     "completedBanksInCurrentRenderRun": 10,
     "inFlightRenderRunBank": null,
     "nextRenderRunBankAfterInFlight": null,
-    "countryBank": 13,
+    "countryBank": 23,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
-    "eligibleMetaLanes": 2,
-    "stoppedMetaLanes": [{"lane":2,"scene":1613,"reason":"provisional-ready Meta source selected and remote verified at evidence commit 146f376c76bba11d00103c326874948be9b75b94; eligible for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD"},{"lane":4,"scene":1615,"reason":"Bank 9 output 33 selected as the Meta source after the face, pose, safety, setting, anatomy, prop, kitten, and exact sock-map gates passed; only secure cocktail mini-skort construction remains for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"465B56787E8D7985076021B296D4FAE7559196B86B5B9CA809DCA7AAB4C9D8FB"}],
+    "eligibleMetaLanes": 1,
+    "stoppedMetaLanes": [{"lane":1,"scene":1612,"reason":"Bank 14 terminal-final output 6 selected after the face, pose, kitten, eight-leg, eight-pump, exact four-sock/two-RAZE/two-Split-Star own-side map, prop, setting, safety, and secure cocktail mini-skort gates passed; no Meta filler pending evidence parity","selectedRawSha256":"10E768CE6F1D8BF8174FAA3C52FE6975A753C02234C5471F7913D755F1DEC2A9"},{"lane":2,"scene":1613,"reason":"provisional-ready Meta source selected and remote verified at evidence commit 146f376c76bba11d00103c326874948be9b75b94; eligible for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD"},{"lane":4,"scene":1615,"reason":"Bank 9 output 33 selected as the Meta source after the face, pose, safety, setting, anatomy, prop, kitten, and exact sock-map gates passed; only secure cocktail mini-skort construction remains for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"465B56787E8D7985076021B296D4FAE7559196B86B5B9CA809DCA7AAB4C9D8FB"}],
     "dispatchPolicy": "concurrent across every eligible scene lane; keep exactly four persistent Meta tabs; never send filler in a resolved or stopped lane"
   },
   "scenePlans": {
@@ -124,8 +124,8 @@
     "tabIds": ["1", "2", "3", "4"],
     "requestedImagesPerPrompt": 1,
     "referenceUploadOrder": [938, 936, 937],
-    "preflightState": "clean-request-tab-17-holds-exact-ordered-face-anchors-no-prompt-sent",
-    "referenceUploadOutcome": "recovered-through-meta-add-media-dialog-clean-draft-preserved",
+    "preflightState": "bank-23-complete-second-ten-bank-run-provider-complete-evidence-parity-pending-three-stopped-scenes-one-eligible-scene-four-persistent-tabs",
+    "referenceUploadOutcome": "bank-23-scene-1614-request-used exact ordered 938, 936, and 937 anchors with three visible Remove image controls before direct Send",
     "referenceUploadExactFailure": "Both the visible Add attachment control and the underlying input[type=file] path timed out after 3000ms waiting for a file chooser. Browser control was reconnected; no reference file was committed and no prompt was sent.",
     "uploadRecoveryAudit": {
       "attemptedAtUtc": "2026-08-22T05:49:23.7653089Z",
@@ -219,6 +219,273 @@
       {"lane":4,"scene":1615,"providerUrl":"https://www.meta.ai/prompt/252919bf-61ef-45aa-b9f0-5c802202ff76","state":"bank-03-n-plus-2-hard-unusable-byte-duplicate-preserved","bank2RawMediaSha256":"EA684D5CE18D4C0D3ECE5BB07A03A60487504DC6090FB4976904BB449DCCA8C4","bank3RawMediaSha256":"EA684D5CE18D4C0D3ECE5BB07A03A60487504DC6090FB4976904BB449DCCA8C4","bank3RawMediaBytes":457566,"dimensions":"1152x2048","classification":"hard-unusable","duplicateOfBank2":true}
     ]
   },
+  "latestBankEvidence": {
+    "countryBank": 14,
+    "renderRunBankOrdinal": 1,
+    "classifiedAtUtc": "2026-08-22T11:30:42.7727554Z",
+    "persistentMetaTabs": 4,
+    "requestedImagesPerPrompt": 1,
+    "validDispatches": [
+      {
+        "lane": 1,
+        "scene": 1612,
+        "dispatchedAtUtc": "2026-08-22T11:22:14.706Z",
+        "providerUrl": "https://www.meta.ai/prompt/9d31a558-9e8b-41bb-a541-62e4e00ff19f",
+        "terminalMediaOccurrences": 6,
+        "classification": "provisional-ready-selected-meta-source",
+        "selectedOutput": 6,
+        "selectedRawPath": "outputs/meta5_batch_staging/batch-398/bank-14/lane-1/batch-398-bank-14-lane-1-scene-1612-output-06.webp",
+        "selectedRawSha256": "10E768CE6F1D8BF8174FAA3C52FE6975A753C02234C5471F7913D755F1DEC2A9"
+      },
+      {
+        "lane": 3,
+        "scene": 1614,
+        "dispatchedAtUtc": "2026-08-22T11:17:07.933Z",
+        "capturedAtUtc": "2026-08-22T11:22:42.131Z",
+        "providerUrl": "https://www.meta.ai/prompt/a45d0dc9-45b8-48d5-8182-6a42cfcdc39d",
+        "terminalMediaOccurrences": 0,
+        "classification": "provider-refusal-no-bytes"
+      }
+    ],
+    "invalidPreflightIncident": {
+      "lane": 1,
+      "scene": 1612,
+      "providerUrl": "https://www.meta.ai/prompt/339a8465-8ca0-4220-a72a-dd4ebc950846",
+      "dispatchedAtUtc": null,
+      "dispatchTimeEvidenceGap": "Exact Enter-key dispatch UTC was not captured; browser sequence proves it preceded 2026-08-22T11:17:07.933Z.",
+      "referenceSha256": [],
+      "rawPath": "outputs/meta5_batch_staging/batch-398/bank-14/scene-1612-accidental-no-anchors/meta-scene-1612-bank-14-no-anchors-2026-08-22T11-17-54Z.webp",
+      "rawSha256": "1B10BE89C77D87EC4EFB781082B81684B6C8998937DE1DCBF0216418EBE64296",
+      "classification": "hard-unusable-invalid-preflight",
+      "canonicalEligible": false
+    },
+    "remainingEligibleScenes": [
+      1614
+    ],
+    "stoppedScenes": [
+      1612,
+      1613,
+      1615
+    ],
+    "completedBanksInCurrentRenderRun": 1,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false,
+    "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl"
+  },
+  "latestBank15Evidence": {
+    "countryBank": 15,
+    "renderRunBankOrdinal": 2,
+    "dispatchedAtUtc": "2026-08-22T11:38:56.258Z",
+    "classifiedAtUtc": "2026-08-22T11:44:45.517Z",
+    "providerUrl": "https://www.meta.ai/prompt/3e7e03c6-b552-4f1f-9c7a-4fc0b99de5f3",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 7,
+    "classification": "hard-unusable",
+    "terminalProviderResponseText": "I'm choosing the sixth image as the final pick because it matches the required order, sock markings, pump count, kitten, and setting, even though it misses the forehead-to-temple contact and Radiance's hand placement.",
+    "remainingEligibleScenes": [
+      1614
+    ],
+    "stoppedScenes": [
+      1612,
+      1613,
+      1615
+    ],
+    "completedBanksInCurrentRenderRun": 2,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false,
+    "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl"
+  },
+  "latestBank16Evidence": {
+    "countryBank": 16,
+    "renderRunBankOrdinal": 3,
+    "dispatchedAtUtc": "2026-08-22T11:48:49.057Z",
+    "classifiedAtUtc": "2026-08-22T11:52:21.361Z",
+    "providerUrl": "https://www.meta.ai/prompt/81359541-1b57-4eeb-a541-46b27d492fb0",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 4,
+    "classification": "hard-unusable",
+    "closestOutput": 4,
+    "closestOutputGap": "Radiance's two complete legs and two separate pumps are hidden behind Ellie and the transparent stool",
+    "remainingEligibleScenes": [
+      1614
+    ],
+    "stoppedScenes": [
+      1612,
+      1613,
+      1615
+    ],
+    "completedBanksInCurrentRenderRun": 3,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false
+  },
+  "latestBank17Evidence": {
+    "countryBank": 17,
+    "renderRunBankOrdinal": 4,
+    "dispatchedAtUtc": "2026-08-22T11:54:53.640Z",
+    "classifiedAtUtc": "2026-08-22T12:02:50.3209068Z",
+    "providerUrl": "https://www.meta.ai/prompt/03d027ad-0d45-4d9d-a573-77ca72134947",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 8,
+    "classification": "hard-unusable",
+    "terminalFinalOutput": 8,
+    "terminalFinalRawSha256": "FC2F04C2D5C17450C11DFC174C5C6192D69744AE2FB93750B9DA30CF980F8F4C",
+    "terminalFinalDuplicateBytesOfOutput": 7,
+    "closestOutputGap": "The final pose clears the exact four-sock, eight-pump, kitten, prop, Vanuatu setting, Radiance-leg, and forehead-contact geometry, but Alia's face is turned down and away rather than looking toward camera.",
+    "remainingEligibleScenes": [
+      1614
+    ],
+    "stoppedScenes": [
+      1612,
+      1613,
+      1615
+    ],
+    "completedBanksInCurrentRenderRun": 4,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false
+  },
+  "latestBank18Evidence": {
+    "countryBank": 18,
+    "renderRunBankOrdinal": 5,
+    "dispatchedAtUtc": "2026-08-22T12:07:51.038Z",
+    "classifiedAtUtc": "2026-08-22T12:10:15.302Z",
+    "providerUrl": "https://www.meta.ai/prompt/5b84b40e-5583-42bc-933c-5ca93c3ee839",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 2,
+    "classification": "hard-unusable",
+    "closestOutput": 1,
+    "closestOutputGap": "All four faces look toward camera and every leg and pump is visible, but the required Alia-forehead-to-Ellie-temple contact is absent and both sock wearers have excess RAZE marks on their Split-Star socks.",
+    "remainingEligibleScenes": [1614],
+    "stoppedScenes": [1612, 1613, 1615],
+    "completedBanksInCurrentRenderRun": 5,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false
+  },
+  "latestBank19Evidence": {
+    "countryBank": 19,
+    "renderRunBankOrdinal": 6,
+    "dispatchedAtUtc": "2026-08-22T12:12:36.012Z",
+    "capturedAtUtc": "2026-08-22T12:14:06.129Z",
+    "providerUrl": "https://www.meta.ai/prompt/4346f66e-236c-4905-9346-e392373c828e",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 0,
+    "classification": "provider-safety-shortfall-no-bytes",
+    "providerState": "terminal Done; No sources; explicit safer-concept reframe without generated bytes",
+    "remainingEligibleScenes": [1614],
+    "stoppedScenes": [1612, 1613, 1615],
+    "completedBanksInCurrentRenderRun": 6,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false
+  },
+  "latestBank20Evidence": {
+    "countryBank": 20,
+    "renderRunBankOrdinal": 7,
+    "dispatchedAtUtc": "2026-08-22T12:15:56.945Z",
+    "classifiedAtUtc": "2026-08-22T12:23:14.656Z",
+    "providerUrl": "https://www.meta.ai/prompt/c383260c-5498-4430-8814-819bab06384d",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 20,
+    "classification": "hard-unusable",
+    "terminalFinalOutput": 20,
+    "terminalFinalRawSha256": "93DC8B42D209F83916391ABF5AC95A756402835534930077D7934D74DFEEA2E3",
+    "terminalFinalDuplicateBytesOfOutput": 19,
+    "closestOutputGap": "The provider-local corrected final clears the exact sock map, all-four camera gaze, forehead contact, eight-leg/eight-pump framing, kitten, beacon, marker, setting, and wardrobe gates, but Radiance's required visible hand on Ellie's rear shoulder is absent and Alia supplies an extra shoulder hand instead.",
+    "remainingEligibleScenes": [1614],
+    "stoppedScenes": [1612, 1613, 1615],
+    "completedBanksInCurrentRenderRun": 7,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false
+  },
+  "latestBank21Evidence": {
+    "countryBank": 21,
+    "renderRunBankOrdinal": 8,
+    "userAuthorizedAdditionalBankOrdinal": 1,
+    "dispatchedAtUtc": "2026-08-22T12:30:00.994Z",
+    "classifiedAtUtc": "2026-08-22T12:33:29.747Z",
+    "providerUrl": "https://www.meta.ai/prompt/d9a10c55-fa2b-4c60-a62f-304bc8093ca8",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 5,
+    "classification": "hard-unusable",
+    "terminalFinalOutput": 5,
+    "terminalFinalRawSha256": "3EEC90E5D656AFEA539BE3314710EF9283F0CF8D86C8396CBDDC49E1C0DDEB12",
+    "terminalFinalDuplicateBytesOfOutput": 3,
+    "closestOutput": 3,
+    "closestOutputGap": "The closest image restores the exact sock map, all-four camera gaze, forehead contact, Radiance and AI ECE shoulder-hand ownership, kitten, beacon, marker, and safe setting, but one of Radiance's two separate pumps remains hidden behind Ellie and the stool and Alia's raised hand violates the requested low-hand separation.",
+    "remainingEligibleScenes": [1614],
+    "stoppedScenes": [1612, 1613, 1615],
+    "completedBanksInCurrentRenderRun": 8,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false
+  },
+  "latestBank22Evidence": {
+    "countryBank": 22,
+    "renderRunBankOrdinal": 9,
+    "userAuthorizedAdditionalBankOrdinal": 2,
+    "dispatchedAtUtc": "2026-08-22T12:38:24.636Z",
+    "classifiedAtUtc": "2026-08-22T12:41:58.730Z",
+    "providerUrl": "https://www.meta.ai/prompt/43c4d592-83dd-474f-8802-bae413a6aff5",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 5,
+    "classification": "hard-unusable",
+    "terminalFinalOutput": 5,
+    "terminalFinalRawSha256": "37E0A22300F9973A3CB2C5E99621EB9576AAF3A1D44D4A91EBD0828DA85D2C4E",
+    "terminalFinalDuplicateBytesOfOutput": 4,
+    "closestOutput": 4,
+    "closestOutputGap": "The corrected output shows eight legs and pumps, kitten, held beacon, shoulder hands, safe setting, and one mark per sock, but it replaces dark-haired Ellie with a second blonde Radiance-like face and omits Alia's forehead-to-Ellie-temple contact.",
+    "referenceRehydrationExcludedFromGeneratedCount": {
+      "path": "outputs/meta5_batch_staging/batch-398/bank-22/reference-rehydration/scene-938-reference-rehydration-not-generated.jpg",
+      "rawSha256": "0DB561BF0F881E379F6527D569949AD7104B533FDBE19DDCAF78AB8228562765"
+    },
+    "remainingEligibleScenes": [1614],
+    "stoppedScenes": [1612, 1613, 1615],
+    "completedBanksInCurrentRenderRun": 9,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false
+  },
+  "latestBank23Evidence": {
+    "countryBank": 23,
+    "renderRunBankOrdinal": 10,
+    "userAuthorizedAdditionalBankOrdinal": 3,
+    "dispatchedAtUtc": "2026-08-22T12:46:07.319Z",
+    "classifiedAtUtc": "2026-08-22T12:50:00.820Z",
+    "providerUrl": "https://www.meta.ai/prompt/a46fade0-9ea4-4188-b419-a8cd016b87f7",
+    "eligibleScene": 1614,
+    "terminalMediaOccurrences": 5,
+    "classification": "hard-unusable",
+    "terminalFinalOutput": 5,
+    "terminalFinalRawSha256": "58B3A9A33328222490DDEE96F0A93739B27210F3F605F752B98DFD05A8E7338C",
+    "terminalFinalDuplicateBytesOfOutput": 4,
+    "closestOutput": 3,
+    "closestOutputRawSha256": "735D4D1FB8238CCC1B7A85BA4B5EEE7851A43703038DA74DB47B53A9B9BC0A8B",
+    "closestOutputGap": "The closest image preserves four distinct adult identities, eight legs and pumps, the held beacon, the two correct shoulder-hand owners, two RAZE marks, and at least one Split-Star, but Alia leans against Radiance instead of touching Ellie's temple, looks down, and the second Split-Star is missing.",
+    "referenceRehydrationExcludedFromGeneratedCount": {
+      "path": "outputs/meta5_batch_staging/batch-398/bank-23/reference-rehydration/reference-rehydration-not-generated-01.jpg",
+      "rawSha256": "7F604B1D981726BE269F4EC3E6D64FE4CD792693790E7058BDB732258921329F"
+    },
+    "remainingEligibleScenes": [1614],
+    "stoppedScenes": [1612, 1613, 1615],
+    "completedBanksInCurrentRenderRun": 10,
+    "banksRequiredForCompletedRun": 10,
+    "completedRenderRunsSinceLastX": 1,
+    "counterIncremented": false,
+    "pendingEvidenceGates": ["archive", "generated-media manifest", "both ledger verifiers", "Git", "LFS", "remote branch SHA", "draft PR 13 head parity"]
+  },
+  "latestUserSchedulingAuthorization": {
+    "receivedAtUtc": "2026-08-22T12:24:00Z",
+    "instruction": "authorized for 15 more batches before uploading entire backlog to x with 1 min delay between posts",
+    "operationalInterpretation": "run 15 additional Meta banks from the instruction point before opening the next X preparation window; retain exact per-post action-time confirmation after showing signed-in account, three canonical files, and caption; use at least sixty seconds between confirmed posts",
+    "additionalMetaBanksAuthorized": 15,
+    "additionalMetaBanksCompletedAfterAuthorization": 3,
+    "xPublicationExecuted": false
+  },
   "resolvedPriorBlocker": {
     "recordedAtUtc": "2026-08-22T06:46:16.2678686Z",
     "type": "evidence-gate-exhaustion-after-face-upload-recovery",
@@ -227,5 +494,5 @@
     "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","four repo-tracked Bank 3 occurrence rows appended to the generated-media manifest","archive dry-run zero","both ledger verifiers pass","exact face-anchor hashes reverified before every upload","Meta attachment modal control path identified","scene 938 then 936 then 937 attached once each in required order","zero prompt sends and zero result bytes recorded","reference-upload recovery occurrence appended","four persistent Meta tabs preserved for handoff","fresh remote, PR, Git, LFS, archive, ledger, face-anchor, X-cadence, and preserved-draft audits completed at 2026-08-22T06:46:16.2678686Z","Git and LFS evidence prepared for parity"]
   },
   "authoritativeBlocker": null,
-  "nextAction": "Maintain scenes 1612 and 1614 as unresolved for the next render run, preserve stopped scenes 1613 and 1615 without filler, and keep the X publication window closed until completedRenderRunsSinceLastX reaches 5."
+  "nextAction": "Archive and verify country Banks 14 through 23, pass both ledgers, Git, LFS, remote branch SHA, and draft PR 13 head parity, then increment completedRenderRunsSinceLastX from 1 to 2 in a separately remote-verified parity commit. After that, run country Bank 24 as render-run bank ordinal 1 and the fourth of the 15 additional user-authorized Meta banks only in scene 1614; keep scenes 1612, 1613, and 1615 stopped without filler and keep the X publication window closed."
 }
