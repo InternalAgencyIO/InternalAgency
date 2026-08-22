@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 397,
   "country": "Iceland",
-  "status": "bank-01-terminal-4-of-4-raw-export-parity-blocked",
+  "status": "bank-01-terminal-4-of-4-raw-export-parity-restored-qa-complete",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
-  "lastWakeAuditAtUtc": "2026-08-22T02:27:23.3352425Z",
+  "lastWakeAuditAtUtc": "2026-08-22T03:07:56.4367510Z",
   "sourceCommit": "37bba06a00996897b427445dad8df472e7a95c47",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -38,7 +38,7 @@
     "palette": ["glacier blue","basalt black","geothermal turquoise","moss green","lava red","aurora violet","snow white","silver mist","midnight navy","warm geothermal gold"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"F4705412B4A81FBBDA22BDF91F4DC9A8665DE11CF4808481F1A59226B218F3AC","rows":4757},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"E6BDC2CF8B9113C949433A74E349EE440DD2334892DE55410C90ADEC08ECE5BF","rows":4763},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC"},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"}
   },
@@ -110,17 +110,17 @@
     "persistentMetaTabsRequired":4,
     "persistentMetaTabsObserved":4,
     "referenceUploadOrder":[938,936,937],
-    "dispatchState":"terminal-results-preserved-raw-export-parity-blocked",
+    "dispatchState":"terminal-results-preserved-raw-export-parity-restored-pending-qa",
     "providerRequestsSent":7,
     "dispatchStartedUtc":"2026-08-22T02:01:30.879Z",
     "occurrenceLedger":"progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-meta-bank-01.jsonl",
     "lanes":[
-      {"lane":1,"scene":1608,"providerUrl":"https://www.meta.ai/prompt/270fe41b-e893-4fe6-a1e2-9a907086f566","primaryPromptSha256":"B18F126599FB5AE03C0561935A9145C220F3A70524322707B36FA21F0E314E7B","fallbackPromptSha256":"2BBAFAA5D5C67B9B341F42E4CF8BDA488C2D20DEDF9E6CD93E616405CD46AAB3","referenceUploadOrder":[938,936,937],"state":"fallback-media-completed-raw-export-blocked","browserPreviewSha256":"0037AC350C673F4EC3574A7CC58141CF9252E446C35509CDD5127D43881C1A6E"},
-      {"lane":2,"scene":1609,"providerUrl":"https://www.meta.ai/prompt/050ab99d-9e0e-443b-8027-2fa94f7459d6","primaryPromptSha256":"0806B52E63E4F50D179DD3D777E6D32C3E114D73FF05E2ED2F10A1D9361353DC","referenceUploadOrder":[938,936,937],"state":"primary-media-completed-raw-export-blocked","browserPreviewSha256":"23FA1C642947AD83105DC889D43DB2D86013A7E690DBA69CD883FDA55C3AE7D7"},
-      {"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/ff9add6c-8eac-4d36-88a5-68519b10bf24","primaryPromptSha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","fallbackPromptSha256":"5402CE007AAE10670BCA6D531D6DC6B13B82978FD049C9FA37A00A2259D7C735","referenceUploadOrder":[938,936,937],"state":"fallback-media-completed-raw-export-blocked","browserPreviewSha256":"0D4B50B7F6AE98E48D7B5CAC4BB23B20735CF50C11E8AA5CC717EAB29136DAB5"},
-      {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/fb3025b6-6358-4e06-b1e0-16b5b857dd74","primaryPromptSha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","fallbackPromptSha256":"A4C21EA27733AF4F3811776F035FC525E9EF3F206D25178B134FB51E473B16F7","referenceUploadOrder":[938,936,937],"state":"fallback-media-completed-raw-export-blocked","browserPreviewSha256":"AF95788D26914DE4CCB2733C9FA848A1F65CF63213E8204A8918E1AE2452E4F8"}
+      {"lane":1,"scene":1608,"providerUrl":"https://www.meta.ai/prompt/270fe41b-e893-4fe6-a1e2-9a907086f566","primaryPromptSha256":"B18F126599FB5AE03C0561935A9145C220F3A70524322707B36FA21F0E314E7B","fallbackPromptSha256":"2BBAFAA5D5C67B9B341F42E4CF8BDA488C2D20DEDF9E6CD93E616405CD46AAB3","referenceUploadOrder":[938,936,937],"state":"fallback-media-hard-unusable-raw-export-recovered","rawMediaSha256":"8EF702F89A258C15159DEDDF2E0B47C1B0D09756E3812F775E09C9A8D561E26F","rawMediaBytes":730770,"dimensions":"1152x2048","rawClassification":"hard-unusable","browserPreviewSha256":"0037AC350C673F4EC3574A7CC58141CF9252E446C35509CDD5127D43881C1A6E"},
+      {"lane":2,"scene":1609,"providerUrl":"https://www.meta.ai/prompt/050ab99d-9e0e-443b-8027-2fa94f7459d6","primaryPromptSha256":"0806B52E63E4F50D179DD3D777E6D32C3E114D73FF05E2ED2F10A1D9361353DC","referenceUploadOrder":[938,936,937],"state":"primary-media-provisional-ready-raw-export-recovered","rawMediaSha256":"A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7","rawMediaBytes":1933312,"dimensions":"768x1360","rawClassification":"provisional-ready","browserPreviewSha256":"23FA1C642947AD83105DC889D43DB2D86013A7E690DBA69CD883FDA55C3AE7D7"},
+      {"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/ff9add6c-8eac-4d36-88a5-68519b10bf24","primaryPromptSha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","fallbackPromptSha256":"5402CE007AAE10670BCA6D531D6DC6B13B82978FD049C9FA37A00A2259D7C735","referenceUploadOrder":[938,936,937],"state":"fallback-media-hard-unusable-raw-export-recovered","rawMediaSha256":"A3FB5BCCFBC9CC8036B59083B84CFBDAA59D22C36E3A60664DA92E88031BCE1E","rawMediaBytes":645258,"dimensions":"1152x2048","rawClassification":"hard-unusable","browserPreviewSha256":"0D4B50B7F6AE98E48D7B5CAC4BB23B20735CF50C11E8AA5CC717EAB29136DAB5"},
+      {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/fb3025b6-6358-4e06-b1e0-16b5b857dd74","primaryPromptSha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","fallbackPromptSha256":"A4C21EA27733AF4F3811776F035FC525E9EF3F206D25178B134FB51E473B16F7","referenceUploadOrder":[938,936,937],"state":"fallback-media-hard-unusable-raw-export-recovered","rawMediaSha256":"E4479979D958F894DC8A7A1D33C092C81C5B80E6DFD7FF7109064EE9829F3952","rawMediaBytes":539792,"dimensions":"1152x2048","rawClassification":"hard-unusable","browserPreviewSha256":"AF95788D26914DE4CCB2733C9FA848A1F65CF63213E8204A8918E1AE2452E4F8"}
     ],
-    "terminalEvidence":{"primaryRefusalsNoBytes":3,"completedMediaResults":4,"providerOfferedFallbacksUsed":3,"rawExportsPreserved":0,"browserPreviewsPreserved":4,"rawExportBlocker":"The in-app Download control emitted no download event. locator.downloadMedia navigated each tab to the direct source URL, tab.content.export is unsupported, and no raw source file materialized. Provider URLs, source URLs, exact response text, prompt hashes, reference hashes and noncanonical browser previews are preserved."},
+    "terminalEvidence":{"primaryRefusalsNoBytes":3,"completedMediaResults":4,"providerOfferedFallbacksUsed":3,"rawExportsPreserved":4,"rawExportsRemaining":0,"delayedDownloadsPreserved":5,"duplicateDelayedDownloads":1,"browserPreviewsPreserved":4,"rawExportBlocker":null,"rawExportParity":"restored","rawQaClassified":4,"rawQaRemaining":0,"provisionalReadyScenes":[1609],"hardUnusableScenes":[1608,1610,1611],"archiveManifestOccurrences":["96f9885de8f043e1c827a567f30530a90c9ff01d195f9669ce3bd8bfdcb1e402","c29cde46248b5aa2bad1706e30c71c3e3c65d6c7b3eb562c12f47b337efe0083","5454062df54b2f43c41926a14181e5501e9a6e0559300b9fbea290e567f5e6aa","8b79339f28f5894170b5661d5ae4b61990e03e947a3a2cf6760f5f345ec9e188","7f999870b4824883c1f47317ca639ca5e6edf1c2d8b96e9c581b4644f9806f4a","2e385da67738f92f75636bf5ee37d51c3f80b62fef1860b68ae9955cce9b5926"]},
     "rawExportRecoveryAudit": {
       "auditedAtUtc":"2026-08-22T02:27:23.3352425Z",
       "scene":1611,
@@ -144,5 +144,5 @@
       "bankCountIncremented":false
     }
   },
-  "nextAction": "Do not classify any Iceland media as canonical or advance the completed-bank counter. First restore raw-source export parity for all four terminal results through the signed-in Meta UI, then preserve exact raw bytes, SHA-256 and dimensions and resume occurrence QA."
+  "nextAction": "Do not advance the completed-bank counter yet. Run archive and both ledger verifiers, commit and remote-verify full parity, then launch Bank 2 with one N+1 comparison for provisional-ready scene 1609 and fresh correction prompts for hard-unusable scenes 1608, 1610 and 1611."
 }
