@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "user-resume-ten-bank-run-bank-4-closed-scene-1613-meta-source-selected-awaiting-remote-parity",
+  "status": "user-resume-ten-bank-run-bank-6-closed-scene-1615-source-selected-awaiting-remote-verification",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-22T08:41:31.0804153Z",
+  "lastWakeAuditAtUtc": "2026-08-22T09:38:05.1542216Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -35,11 +35,11 @@
     "palette": ["lagoon turquoise","rainforest emerald","volcanic black","lava red","coral magenta","cloud white","pandanus gold","reef violet","deep-ocean navy"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"CE5854166397A232CF1AAB14BA80DCE81DC3D5C3D3DFF5403BCBD6B2287051C8","rows":4930,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"userResumeBank4ArchiveNewRows":19,"userResumeBank4ArchiveNewBlobs":18,"userResumeBank5ArchiveNewRows":36,"userResumeBank5ArchiveNewBlobs":36,"userResumeBank6ArchiveNewRows":19,"userResumeBank6ArchiveNewBlobs":19,"userResumeBank7ArchiveNewRows":27,"userResumeBank7ArchiveNewBlobs":27,"userResumeBanks4Through7NewRows":101,"userResumeBanks4Through7NewBlobs":100,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"24AD0CAE6D7849B30E426957672BAA8D552A57FD51A1DA6D5A43E68FFA6C1DAE","rows":5322,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"userResumeBank4ArchiveNewRows":19,"userResumeBank4ArchiveNewBlobs":18,"userResumeBank5ArchiveNewRows":36,"userResumeBank5ArchiveNewBlobs":36,"userResumeBank6ArchiveNewRows":19,"userResumeBank6ArchiveNewBlobs":19,"userResumeBank7ArchiveNewRows":27,"userResumeBank7ArchiveNewBlobs":27,"userResumeBanks4Through7NewRows":101,"userResumeBanks4Through7NewBlobs":100,"userResumeBank8ArchiveNewRows":276,"userResumeBank8ArchiveNewBlobs":22,"userResumeBank8ArchiveNewBlobBytes":12471108,"userResumeBank9ArchiveNewRows":116,"userResumeBank9ArchiveNewBlobs":56,"userResumeBank9ArchiveNewBlobBytes":33304885,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"},
-    "remoteParity": {"localHead":"ee3899ebd2eeac3f5cd75f84579766c702d53f8b","remoteBranchHead":"ee3899ebd2eeac3f5cd75f84579766c702d53f8b","draftPr13Head":"ee3899ebd2eeac3f5cd75f84579766c702d53f8b","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeClean":true}
+    "remoteParity": {"evidenceCommit":"146f376c76bba11d00103c326874948be9b75b94","localHead":"146f376c76bba11d00103c326874948be9b75b94","remoteBranchHead":"146f376c76bba11d00103c326874948be9b75b94","draftPr13Head":"146f376c76bba11d00103c326874948be9b75b94","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeCleanAtEvidenceCommit":true,"scope":"Banks 4 through 7 evidence including the selected scene 1613 Meta source"}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
@@ -61,13 +61,14 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 0,
-    "completedBanksInCurrentRenderRun": 4,
-    "nextRenderRunBank": 5,
-    "countryBank": 7,
+    "completedBanksInCurrentRenderRun": 6,
+    "inFlightRenderRunBank": null,
+    "nextRenderRunBankAfterInFlight": 7,
+    "countryBank": 9,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
-    "eligibleMetaLanes": 3,
-    "stoppedMetaLanes": [{"lane":2,"scene":1613,"reason":"provisional-ready Meta source selected; awaiting archive Git and remote parity before the single allowed built-in ChatGPT clothing-only final edit","selectedRawSha256":"DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD"}],
+    "eligibleMetaLanes": 2,
+    "stoppedMetaLanes": [{"lane":2,"scene":1613,"reason":"provisional-ready Meta source selected and remote verified at evidence commit 146f376c76bba11d00103c326874948be9b75b94; eligible for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD"},{"lane":4,"scene":1615,"reason":"Bank 9 output 33 selected as the Meta source after the face, pose, safety, setting, anatomy, prop, kitten, and exact sock-map gates passed; only secure cocktail mini-skort construction remains for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"465B56787E8D7985076021B296D4FAE7559196B86B5B9CA809DCA7AAB4C9D8FB"}],
     "dispatchPolicy": "concurrent across every eligible scene lane; keep exactly four persistent Meta tabs; never send filler in a resolved or stopped lane"
   },
   "scenePlans": {
@@ -176,10 +177,12 @@
     "userResumeTenBankRun": {
       "authorizedByExplicitUserRequest": true,
       "requestedMethod": "ten Meta banks as one run, with all eligible scene prompts dispatched concurrently rather than lane-by-lane",
-      "completedCountryBanks": [4, 5, 6, 7],
-      "completedRenderRunBankOrdinals": [1, 2, 3, 4],
-      "mediaOccurrencesInspected": 101,
-      "providerNoByteOccurrences": 2,
+      "completedCountryBanks": [4, 5, 6, 7, 8, 9],
+      "inFlightCountryBank": null,
+      "completedRenderRunBankOrdinals": [1, 2, 3, 4, 5, 6],
+      "inFlightRenderRunBankOrdinal": null,
+      "mediaOccurrencesInspected": 181,
+      "providerNoByteOccurrences": 3,
       "provisionalSourcesSelected": [
         {
           "scene": 1613,
@@ -188,13 +191,23 @@
           "rawPath": "outputs/meta5_batch_staging/batch-398/bank-07/lane-2/batch-398-bank-07-lane-2-scene-1613-output-03.webp",
           "rawSha256": "DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD",
           "canonicalEligible": false,
-          "nextGate": "commit, push and remote parity, then one built-in ChatGPT clothing-only final edit"
+          "nextGate": "single allowed built-in ChatGPT clothing-only final edit after remote-verified evidence commit 146f376c76bba11d00103c326874948be9b75b94"
+        },
+        {
+          "scene": 1615,
+          "countryBank": 9,
+          "output": 33,
+          "rawPath": "outputs/meta5_batch_staging/batch-398/bank-09/lane-4/batch-398-bank-09-lane-4-scene-1615-output-33.jpg",
+          "rawSha256": "465B56787E8D7985076021B296D4FAE7559196B86B5B9CA809DCA7AAB4C9D8FB",
+          "canonicalEligible": false,
+          "nextGate": "archive, commit, push, and remote verify this selected Meta source, then use the single allowed built-in ChatGPT clothing-only final edit for visible secure cocktail mini-skorts"
         }
       ],
-      "remainingEligibleScenes": [1612, 1614, 1615],
+      "remainingEligibleScenes": [1612, 1614],
       "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl",
-      "occurrenceLedgerSha256": "CF1FEF82699C6AC0D3AD9FEC84A67A7B5915FFFAAB766E095CDDA2FD28BBF77D",
-      "lastClosedAtUtc": "2026-08-22T08:41:31.0804153Z"
+      "occurrenceLedgerSha256": "7B42524A946B651AEEB1470FD8DC3C453122555D7E0015CC9C735D895162617E",
+      "lastClosedAtUtc": "2026-08-22T09:34:57.7442924Z",
+      "latestDispatch": {"countryBank":9,"renderRunBankOrdinal":6,"dispatchedAtUtc":"2026-08-22T09:14:29.723Z","eligibleScenes":[1612,1614,1615],"stoppedScene":1613,"providerUrls":["https://www.meta.ai/prompt/e97d00f1-b5bf-48cf-b3a0-3fd86d3f0e53","https://www.meta.ai/prompt/21e02ffe-ff0b-4c7b-b9f5-6d7f1e34ebc6","https://www.meta.ai/prompt/efba136b-d57d-4fa4-b9eb-a67f8df3b552"]}
     },
     "dispatchStartedUtc": "2026-08-22T04:54:38.990Z",
     "dispatchState": "bank-03-four-n-plus-2-results-preserved-four-hard-unusable",
@@ -214,5 +227,5 @@
     "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","four repo-tracked Bank 3 occurrence rows appended to the generated-media manifest","archive dry-run zero","both ledger verifiers pass","exact face-anchor hashes reverified before every upload","Meta attachment modal control path identified","scene 938 then 936 then 937 attached once each in required order","zero prompt sends and zero result bytes recorded","reference-upload recovery occurrence appended","four persistent Meta tabs preserved for handoff","fresh remote, PR, Git, LFS, archive, ledger, face-anchor, X-cadence, and preserved-draft audits completed at 2026-08-22T06:46:16.2678686Z","Git and LFS evidence prepared for parity"]
   },
   "authoritativeBlocker": null,
-  "nextAction": "Stage only the intended Banks 4-7 evidence, archive manifest and blobs, prompt files, occurrence ledger, and this checkpoint; commit and push with the exact authoritative refspec; remote-verify branch and draft PR 13 parity. Then keep four persistent Meta tabs, stop scene 1613 Meta generation, and dispatch the next bank concurrently across eligible scenes 1612, 1614, and 1615 without filler."
+  "nextAction": "Capture every Bank 9 media occurrence or explicit provider no-byte terminal result before inspecting another lane, classify all outputs, archive and verify both ledgers, then continue the ten-bank run with Bank 10 across every still-eligible scene concurrently while preserving exactly four persistent Meta tabs and sending no filler in stopped scene 1613."
 }
