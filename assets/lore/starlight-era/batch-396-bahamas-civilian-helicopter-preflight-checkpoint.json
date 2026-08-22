@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 396,
   "country": "Bahamas",
-  "status": "closed-4-of-4-pending-final-evidence-parity",
+  "status": "closed-4-of-4-remote-verified",
   "preparedAtUtc": "2026-08-22T00:04:40.5446589Z",
   "sourceCommit": "5fa57453757dda12b963253331e08c5582cbf5ac",
   "contract": {
@@ -51,11 +51,11 @@
   "evidenceSnapshots": {
     "generatedMediaManifest": {
       "path": "progress-reports/codex-generated-media/manifest.jsonl",
-      "sha256": "AAC6CBB7109670E928AA9A199FB100BED9E9A83147D7E663E8B01AE5BA5C7A17"
+      "sha256": "FD15292FF860C0FF99AAC6BB11E7AD9056AB206111FF561118A1DEAA44B803F3"
     },
     "rejectedPromptLedger": {
       "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
-      "sha256": "9BC062F62BFAB8012832AB5A1E2B97D646121DC04A33C66E1E23E2E41173901E"
+      "sha256": "C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC"
     },
     "xLedger": {
       "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
@@ -197,11 +197,13 @@
       "mode": "apply",
       "occurrencesScanned": 4333,
       "newManifestRows": 10,
+      "postLfsTrackingNewManifestRows": 4,
+      "totalNewManifestRows": 14,
       "newBlobs": 0,
       "newBlobBytes": 0,
       "postApplyDryRunNewManifestRows": 0,
       "postApplyDryRunNewBlobs": 0,
-      "manifestSha256": "AAC6CBB7109670E928AA9A199FB100BED9E9A83147D7E663E8B01AE5BA5C7A17"
+      "manifestSha256": "FD15292FF860C0FF99AAC6BB11E7AD9056AB206111FF561118A1DEAA44B803F3"
     },
     "finalSelections": [
       {
@@ -233,7 +235,16 @@
         "qaDisposition": "accepted-chatgpt-final-conditional-retry-face-safe-hard-safe"
       }
     ],
-    "acceptanceState": "selected-final-pending-archive-ledger-git-lfs-remote-pr-parity"
+    "acceptanceState": "canonical-final-remote-verified",
+    "remoteParity": {
+      "verifiedAtUtc": "2026-08-22T01:49:26.2947247Z",
+      "evidenceCommit": "61ee85f81312289ba9287a364b8eaf3769d99c32",
+      "localHead": "61ee85f81312289ba9287a364b8eaf3769d99c32",
+      "remoteBranchHead": "61ee85f81312289ba9287a364b8eaf3769d99c32",
+      "draftPr13Head": "61ee85f81312289ba9287a364b8eaf3769d99c32",
+      "lfsDryRunPendingObjects": 0,
+      "worktreeClean": true
+    }
   },
   "browserEvidence": {
     "persistentMetaTabsRequired": 4,
@@ -294,5 +305,5 @@
     "cumulativeBahamasRawBytes": 8503793,
     "manifestSha256": "527B9D307292ADBE07B987B9A3FA278652D45ABB7D7024DAE3069A0E3C935B6B"
   },
-  "nextAction": "Stage only the Bahamas final media, exact prompt evidence, occurrence and QA ledgers, archive manifest and blobs, checkpoint, and synchronized rejection ledger. Commit, push with the exact authoritative refspec, then verify Git, LFS, archive, both ledgers, remote SHA, and draft PR 13 head parity before marking Bahamas canonical and advancing the country queue."
+  "nextAction": "Keep Bahamas closed. Advance to Iceland Batch 397, scenes 1608 through 1611, fictional coast-guard rescue-vessel couture ordinal 1 of 2. Preserve completedRenderRunsSinceLastX at 0 and completedBanksInCurrentRenderRun at 2 until the next exact four-prompt bank completes."
 }

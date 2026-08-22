@@ -16,21 +16,21 @@
     "sessionRootPolicy": "Read every locally available Codex session JSONL below USERPROFILE/.codex/sessions and USERPROFILE/.codex/archived_sessions (or CODEX_SESSION_ROOT) and retain failed image_generation_end events.",
     "sessionLineLimits": {},
     "sessionLineLimitPolicy": "An optional per-thread limit may stop before later browser/image payload lines only when the retained prefix already covers that thread's Codex image-generation terminal events and later provider output is preserved through checked-in Meta checkpoints and the generated-media manifest.",
-    "physicalFailedEventsScanned": 1920,
-    "uniqueRuntimeFailureOccurrences": 985,
-    "projectMarkerMatchedOccurrences": 789,
-    "projectThreadOrMarkerMatchedOccurrences": 911,
+    "physicalFailedEventsScanned": 1922,
+    "uniqueRuntimeFailureOccurrences": 987,
+    "projectMarkerMatchedOccurrences": 791,
+    "projectThreadOrMarkerMatchedOccurrences": 913,
     "excludedUnrelatedOccurrences": 0,
     "note": "All failed image-generation prompts are retained, including unrelated image requests, because the public-build directive explicitly covers every Codex image/video output and rejected prompt. Marker counts are informational only and never filter the tracker."
   },
   "summary": {
-    "runtimeFailureOccurrenceCount": 985,
-    "runtimePromptShaPassCount": 985,
-    "noByteRuntimeOccurrenceCount": 985,
-    "physicalFailedEventsScanned": 1920,
+    "runtimeFailureOccurrenceCount": 987,
+    "runtimePromptShaPassCount": 987,
+    "noByteRuntimeOccurrenceCount": 987,
+    "physicalFailedEventsScanned": 1922,
     "activeCheckpointBoundOccurrenceCount": 139,
     "activeCheckpointEntriesWithoutNormalizedFailedRuntimePromptMatchCount": 135,
-    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1565,
+    "exactPromptRecordCountAcrossSectionsBeforeCrossSourceOccurrenceReconciliation": 1567,
     "historicalExactPromptOccurrenceCount": 249,
     "historicalCanonicalSourceAliasCount": 4,
     "knownTextMissingHistoricalEvidenceCount": 0,
@@ -4125,7 +4125,7 @@
     ]
   },
   "runtimeFailures": {
-    "entryCount": 985,
+    "entryCount": 987,
     "entries": [
       {
         "entryId": "codex-image-failure-call_uFOZy6HPAj3sjhBalW0dkvUe-68932f6b1921",
@@ -48248,6 +48248,88 @@
           {
             "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
             "timestamp": "2026-08-21T05:00:15.261Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-79f4746f-7783-42f5-9e42-8b0639d3992c-ae3c2c252ae4",
+        "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+        "callId": "exec-79f4746f-7783-42f5-9e42-8b0639d3992c",
+        "occurredAt": "2026-08-22T01:19:07.374Z",
+        "batch": null,
+        "scene": 1605,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: identity-preserve\nAsset type: canonical Starlight World Series scene\nInput images: Image 1 is the sole edit target. Images 2, 3, and 4 are historical identity-only references for Radiance, Ellie, Alia, and AI ECE.\nPrimary request: Change clothing construction only. Convert every remaining long, trouser-like, or extended lower garment component into a secure opaque upper-thigh cocktail silhouette with stable lining and complete coverage. Keep two complete rainbow-gradient RAZE knee-high pairs directly on uncovered legs and keep the other two women’s lower legs uncovered.\nIdentity invariants: Preserve the exact four distinct adult faces from Image 1 and the historical references, their hair, skin tones, expressions, body identities, pose, hand and limb ownership, person count, and fictional age metadata of exactly 21 years.\nScene invariants: Preserve every relationship action, jealousy expression, kitten, harmless mission tool, country installation, planet setting, weather, lighting, perspective, framing, furniture, and background.\nSafety and quality: Exactly four women. Complete anatomy. No added people, limbs, garments, props, text, logos, or background elements. Keep secure opaque bust, seat, midsection, and private-zone coverage. No watermark.\nScene 1605 clothing details: Preserve the four existing upper-thigh helicopter-couture silhouettes while refining them into securely lined cocktail dresses with no long lower panels. Exactly Ellie and Alia wear the two complete RAZE pairs. Ellie has Split-Star only on the left and exact RAZE wordmark only on the right. Alia has exact RAZE wordmark only on the left and Split-Star only on the right. Keep each compact mark only at the outer upper calf. Preserve the temple or cheek affection, storm protection, kitten, transparent panel, and harmless rainbow cinema tool exactly.",
+          "sha256": "AE3C2C252AE4182E84706783CC6DA0E7BFC65BF570D7DA039BA2755A4C54F852",
+          "normalizedSha256": "AE3C2C252AE4182E84706783CC6DA0E7BFC65BF570D7DA039BA2755A4C54F852",
+          "encoding": "utf-8",
+          "bytes": 1858,
+          "chars": 1856,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+          "callId": "exec-79f4746f-7783-42f5-9e42-8b0639d3992c",
+          "timestamp": "2026-08-22T01:19:07.374Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-79f4746f-7783-42f5-9e42-8b0639d3992c|AE3C2C252AE4182E84706783CC6DA0E7BFC65BF570D7DA039BA2755A4C54F852",
+        "observedIn": [
+          {
+            "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+            "timestamp": "2026-08-22T01:19:07.374Z"
+          }
+        ],
+        "immutable": true
+      },
+      {
+        "entryId": "codex-image-failure-exec-ef9118d7-1192-4b85-95e6-e51ca3a161b2-5219d679d5c9",
+        "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+        "callId": "exec-ef9118d7-1192-4b85-95e6-e51ca3a161b2",
+        "occurredAt": "2026-08-22T01:24:58.842Z",
+        "batch": null,
+        "scene": 1605,
+        "status": "failed-no-image-bytes",
+        "failureCause": "not-exposed-by-image-generation-end-event",
+        "prompt": {
+          "text": "Use case: identity-preserve\nAsset type: mainstream luxury fashion editorial edit\nInput images: Image 1 is the only image to edit. Images 2, 3, and 4 are identity references only.\nEdit only the clothing construction. Keep the same four clearly adult fictional women, their distinct faces, hair, expressions, body identities, pose, hand ownership, person count, and scene composition. Keep the existing affectionate gesture, jealous reaction, kitten, harmless cinematic device, location display, planet setting, weather, lighting, camera, furniture, and background unchanged.\nWardrobe edit: refine each outfit into a securely lined opaque short cocktail-dress silhouette ending above the knee, with conventional full coverage. Keep exactly two existing rainbow RAZE knee-high footwear pairs on the designated wearers and keep the other two women’s footwear and bare lower legs unchanged.\nQuality: exactly four adults; coherent complete anatomy; no added people, limbs, clothing layers, props, text, logos, scenery, or watermark.\nScene 1605: retain the four current short helicopter-couture dresses. Exactly Ellie and Alia keep the rainbow knee-high pairs. Ellie keeps one Split-Star on the left and one RAZE wordmark on the right; Alia keeps one RAZE wordmark on the left and one Split-Star on the right. Keep the marks compact at the outer upper calf. Preserve the existing cheek or temple gesture, sealed storm view, kitten, clear panel, and rainbow cinema device.",
+          "sha256": "5219D679D5C9C4F2B277A4C61B9641E4D74CF11B9F555BF77A82BA27433CEB6C",
+          "normalizedSha256": "5219D679D5C9C4F2B277A4C61B9641E4D74CF11B9F555BF77A82BA27433CEB6C",
+          "encoding": "utf-8",
+          "bytes": 1466,
+          "chars": 1464,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "rawOutput": {
+          "path": null,
+          "sha256": null,
+          "bytes": 0,
+          "state": "no-bytes"
+        },
+        "sourceAudit": {
+          "sourceKind": "codex-session-image-generation-end",
+          "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+          "callId": "exec-ef9118d7-1192-4b85-95e6-e51ca3a161b2",
+          "timestamp": "2026-08-22T01:24:58.842Z",
+          "terminalStatus": "failed",
+          "resultWasEmpty": true
+        },
+        "observationFingerprint": "exec-ef9118d7-1192-4b85-95e6-e51ca3a161b2|5219D679D5C9C4F2B277A4C61B9641E4D74CF11B9F555BF77A82BA27433CEB6C",
+        "observedIn": [
+          {
+            "threadId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+            "timestamp": "2026-08-22T01:24:58.842Z"
           }
         ],
         "immutable": true
