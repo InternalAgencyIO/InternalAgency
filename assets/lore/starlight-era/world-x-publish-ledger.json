@@ -18,7 +18,7 @@
   "videoActivationBatch": 199,
   "videoActivationImageNumber": 816,
   "maxPostsPerRun": 50,
-  "publishingMode": "guardian-autonomous-cadence-after-overdrive-drain",
+  "publishingMode": "render-first-user-authorized-fifteen-bank-extension-before-confirmed-x-window",
   "backlogDrainPolicy": {
     "status": "drained-clear",
     "requestedAt": "2026-08-03T18:02:10.035Z",
@@ -39,7 +39,7 @@
   "preRenderBacklogExhaustedAt": "2026-08-02T12:07:18.721Z",
   "preRenderBacklogResidualImageNumbers": [],
   "renderInterruptPolicy": "Drain images through 807 during the current assisted dump. Once that pre-render backlog is exhausted, do not interrupt autonomous rendering for new X eligibility. Images 808 onward accumulate for a later user-requested assisted dump.",
-  "postThroughput": "After the completed explicit overdrive drain, publish one exactly verified logical group at the established 45-50 minute cadence. Safe independent preparation and validation may use up to three concurrent lanes, but final Post clicks and ledger reconciliation remain serialized.",
+  "postThroughput": "Complete the user-authorized fifteen additional Meta banks before opening the next X preparation window. Then reconcile the exact eligible backlog, show the signed-in account, exact three canonical files, and exact caption, obtain action-time confirmation for each post, serialize final Post clicks, and wait at least sixty seconds between confirmed posts.",
   "ordering": "Starting after the already published images 380 through 385, every new image set must mix exactly two images from one country with one image from a different country. Choose the primary country deterministically as the earliest country in countryPriorityOrder with at least two eligible unposted images. Choose the secondary as the earliest different country with at least one eligible unposted image, preferring any older one-image leftover. Preserve ascending numeric order within each country selection and never duplicate or permanently strand an eligible asset. Images through 815 retain legacy four-still eligibility. Beginning with Batch 199/image 816, only the first three stills in each country batch are X-eligible; the fourth is represented exclusively by its verified 15-second video. With three stills per media-enabled country, paired countries naturally produce reciprocal 2+1 sets, and each country's video accompanies the set where that country is primary.",
   "postComposition": "2+1 country image mix plus the primary country's 15-second video",
   "countryMediaContract": {
@@ -209,12 +209,21 @@
   "publicationCadenceState": {
     "mode": "render-first-after-backlog-clearance",
     "currentBacklogClearedAt": "2026-08-21T08:06:54.2581795Z",
-    "completedRenderRunsSinceLastX": 1,
+    "completedRenderRunsSinceLastX": 2,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "Increment only after all ten four-tab banks and their evidence gates complete. After five completed runs, reconcile the ledger and prepare at most one eligible three-asset two-country X post. Reset only after its public URL and full archive, Git, LFS, remote SHA and PR parity are recorded."
+    "counterRule": "Increment only after all ten four-tab banks and their evidence gates complete. The user's later fifteen-additional-bank scheduling authorization controls the next X window: no X preparation before all fifteen are complete. At that window, reconcile the exact eligible backlog, require action-time confirmation per post, and wait at least sixty seconds between confirmed posts. Reset only after public URLs and full archive, Git, LFS, remote SHA and PR parity are recorded."
+  },
+  "latestUserSchedulingAuthorization": {
+    "receivedAtUtc": "2026-08-22T12:24:00Z",
+    "instruction": "authorized for 15 more batches before uploading entire backlog to x with 1 min delay between posts",
+    "operationalInterpretation": "Complete fifteen additional Meta banks from the instruction point before opening the next X preparation window. Preserve exact per-post action-time confirmation after showing signed-in account, exact three canonical files, and caption; wait at least sixty seconds between confirmed posts.",
+    "additionalMetaBanksAuthorized": 15,
+    "additionalMetaBanksCompleted": 3,
+    "additionalMetaBanksRemaining": 12,
+    "xPublicationExecuted": false
   },
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
@@ -5669,8 +5678,8 @@
     "duplicatePrevention": "The Aug 20 caption-free guardian-instruction post is preserved as a user-classified test post and does not consume backlog. Only the exact approved campaign caption at status 2090701764785778887 clears Georgia Batch 382 and Fiji Batch 383. Seven eligible countries remain."
   },
   "latestGuardianWakeAudit": {
-    "status": "current-x-backlog-zero-render-first-five-run-cadence-active",
-    "checkedAt": "2026-08-21T08:06:54.2581795Z",
+    "status": "current-x-backlog-zero-user-authorized-fifteen-bank-extension-active-counter-two",
+    "checkedAt": "2026-08-22T13:05:31.4556131Z",
     "account": "@dogramaci",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
@@ -5708,20 +5717,25 @@
     "duplicatePrevention": "The user test post remains audit evidence and consumes no backlog. The five exact canonical campaign URLs now clear Batches 382 through 387 and 389 through 391. The current eligible X backlog is zero.",
     "nextCadence": {
       "mode": "render-first",
-      "completedRenderRunsSinceLastX": 1,
+      "completedRenderRunsSinceLastX": 2,
       "requiredRenderRunsBeforeNextXWindow": 5,
       "runDefinition": "Ten four-tab Meta banks, forty prompt dispatches, and complete output or shortfall evidence plus parity gates."
     },
     "remoteParity": {
-      "status": "recovered-on-third-explicit-push-attempt",
-      "observedAt": "2026-08-21T08:13:52.1625127Z",
-      "initialUnpushedLocalCommit": "42b52d48526cdeee92c2ca83e125bebf7a097b29",
-      "lastVerifiedRemotePrHead": "b8308b48228ab4488e62bf6736272de5c1ddf78a",
-      "errorClass": "github.com port 443 connection timeout",
-      "localWorktreeCleanBeforeBlockerRecord": true,
-      "recoveredAt": "2026-08-21T08:14:44.8484435Z",
-      "recoveredPushHead": "b23c7cdf72ef865a0c98cfbcf84ac9a1bc5b2ee9",
-      "requiredNextAction": "Verify remote SHA, PR 13 head, LFS, ledger, archive and clean worktree parity after the recovery audit commit."
+      "status": "second-render-run-evidence-remote-verified-counter-increment-local-parity-pending",
+      "observedAt": "2026-08-22T13:05:31.4556131Z",
+      "runEvidenceCommit": "8b5b67d55c0ee0d9a1e3730b2ff048f000bd087b",
+      "localHead": "8b5b67d55c0ee0d9a1e3730b2ff048f000bd087b",
+      "remoteBranchHead": "8b5b67d55c0ee0d9a1e3730b2ff048f000bd087b",
+      "draftPr13Head": "8b5b67d55c0ee0d9a1e3730b2ff048f000bd087b",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "lfsPendingObjects": 0,
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "ledgerVerifierErrors": 0,
+      "worktreeCleanAtRunEvidenceCommit": true,
+      "requiredNextAction": "Commit, push, and remote-verify this counter increment before dispatching country Bank 24."
     }
   }
 }
