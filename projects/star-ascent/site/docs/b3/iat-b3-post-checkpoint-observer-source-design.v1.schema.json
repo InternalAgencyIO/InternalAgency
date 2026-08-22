@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internalagency.io/schemas/iat-b3-post-checkpoint-observer-source-design.v1.schema.json",
+  "title": "IAT B3 post-checkpoint toolchain and K44 live-observer source design",
+  "description": "Exact source-only design contract. It defines no observer runner or capability and leaves every live observation, runtime, build, authorization, Devnet, release and Mainnet predicate false or HOLD.",
+  "type": "object",
+  "const": {
+    "$schema": "./iat-b3-post-checkpoint-observer-source-design.v1.schema.json",
+    "schema": "iat-b3-post-checkpoint-observer-source-design/v1",
+    "status": "HOLD_SOURCE_DESIGN_ONLY",
+    "purpose": "POST_G8C_TOOLCHAIN_AND_K44_LIVE_OBSERVER_SOURCE_DESIGN",
+    "ready": false,
+    "complete": false,
+    "operative": false,
+    "exitCode": 2,
+    "sourceScope": {
+      "paths": [
+        "projects/star-ascent/site/docs/b3/iat-b3-post-checkpoint-observer-source-design.v1.schema.json",
+        "projects/star-ascent/site/scripts/lib/iat-b3-post-checkpoint-observer-source-design-contract.mjs",
+        "projects/star-ascent/site/tests/iat-b3-post-checkpoint-observer-source-design-contract.test.mjs"
+      ],
+      "newRegularMode100644FilesOnly": true,
+      "existingSourceMutationPermitted": false,
+      "observerRunnerPermitted": false,
+      "cliActionPermitted": false,
+      "processSpawnPermitted": false,
+      "probePermitted": false,
+      "evidenceWritePermitted": false,
+      "compilerOrBuildExecutionPermitted": false,
+      "networkOrRpcPermitted": false
+    },
+    "bindings": {
+      "k45SourceCheckpoint": {
+        "headSha": "c73d01092c58152ac396dc580055d93511bf0644",
+        "treeSha": "fcfd4337cfa4ba35a10e4b65849b42d1f5659d3e",
+        "cleanCommittedSourceRequired": true
+      },
+      "g8cObserverPackage": {
+        "commitSha": "b1c65482aebb31395a763707b02224c38aa2da96",
+        "parentCommitSha": "c73d01092c58152ac396dc580055d93511bf0644",
+        "treeSha": "da099d9bc7c38c1d8c1aa14bf8c7e49dbd55352f",
+        "manifestSha256": "4942e2b5c83b44df86da975b07b96b967df02a7f89244d7ec3a316c1c6502647",
+        "manifestByteLength": 946,
+        "sourcePathCount": 6,
+        "sourcePayloadByteLength": 93844,
+        "cleanCommittedObserverPackageRequired": true
+      },
+      "g8oSourceManifest": [
+        {
+          "path": "projects/star-ascent/site/scripts/lib/iat-b3-devnet-direct-evidence-observer-contract.mjs",
+          "sha256": "c0141cdb79c5f1810e21abe06690a72f649401e99789e6a988b9c059cb40f368",
+          "byteLength": 55916
+        },
+        {
+          "path": "projects/star-ascent/site/scripts/observe-iat-b3-pre-devnet-direct-evidence.mjs",
+          "sha256": "f1a41e21bd5d4d4b09d7d5cef38db0455ab35019667450435a5011c0140091f4",
+          "byteLength": 1490
+        },
+        {
+          "path": "projects/star-ascent/site/scripts/observe-iat-b3-post-devnet-direct-evidence.mjs",
+          "sha256": "2efea102cf0a1714a71fbbb8c3d27cbcd9af2854cd817ba319e2a88a16434795",
+          "byteLength": 1499
+        },
+        {
+          "path": "projects/star-ascent/site/scripts/assess-iat-b3-pre-devnet-direct-evidence.mjs",
+          "sha256": "98d0f903a9530c0ff286bd6758f6d6692eb79a9fd38d63f7bc6cf441fb68ad62",
+          "byteLength": 5778
+        },
+        {
+          "path": "projects/star-ascent/site/scripts/assess-iat-b3-post-devnet-direct-evidence.mjs",
+          "sha256": "ca0f248c19d929f3dc8b7bd49d0b4ba76967f44c34b720cc1bb4d603fe2323e5",
+          "byteLength": 5857
+        },
+        {
+          "path": "projects/star-ascent/site/tests/iat-b3-devnet-direct-evidence-observer.test.mjs",
+          "sha256": "625b5d2810ac5243834a6f1521bfda842d157f764aca1bf79402684b95d2cfd8",
+          "byteLength": 23304
+        }
+      ],
+      "bp11ToolchainPolicy": {
+        "policy": {
+          "path": "projects/star-ascent/site/docs/b3/iat-b3-mandatory-ci-containment-toolchains.v1.json",
+          "sha256": "2b1a6778049db9a42eab5131f69cded03587af61b054e66b890f56e4753d3518",
+          "byteLength": 4792
+        },
+        "policyTest": {
+          "path": "projects/star-ascent/site/tests/iat-b3-mandatory-ci-containment-toolchain-policy.test.mjs",
+          "sha256": "d5d2a9b03b2b9e4d5dabe61ef4d6a0a23b89553d8038dbda6ac958e471b21490",
+          "byteLength": 19911
+        },
+        "expectedStatus": "HOLD_UNMEASURED",
+        "allToolchainIdentitiesExpectedNull": true
+      },
+      "k44StructuralContract": {
+        "library": {
+          "path": "projects/star-ascent/site/scripts/lib/iat-b3-key-free-public-build-input.mjs",
+          "sha256": "296ba945f1842e9e0ede0158c38da3997061b465a51a4a67578216e40a2c80d0",
+          "byteLength": 23017
+        },
+        "test": {
+          "path": "projects/star-ascent/site/tests/iat-b3-key-free-public-build-input.test.mjs",
+          "sha256": "ca7aee8197c9a918413f6fb35c518ed4df2a5a04cdecbcccb843d1c689467d3b",
+          "byteLength": 17333
+        },
+        "documentation": {
+          "path": "projects/star-ascent/site/docs/b3/KEY_FREE_PUBLIC_BUILD_INPUT.md",
+          "sha256": "f9e65e024d2e26c1923d810fc7feba80a4b75788cf213670edcf6b2aa6689b65",
+          "byteLength": 4201
+        },
+        "template": {
+          "path": "projects/star-ascent/site/docs/b3/iat-b3-key-free-public-build-input.template.v1.json",
+          "sha256": "176a855e8c53e8a9c5f6c555758e641e98e6eb1f7198220442a6531ab47b8884",
+          "byteLength": 1998
+        },
+        "directObservationFlags": [
+          "checkpointDirectlyObservedByThisModule",
+          "wallClockDirectlyObservedByThisModule",
+          "inputFilesDirectlyObservedByThisModule",
+          "productionIdentityInventoryDirectlyObservedByThisModule",
+          "priorLaneIdentityInventoryDirectlyObservedByThisModule"
+        ]
+      }
+    },
+    "observationDesign": {
+      "implementationPresent": false,
+      "observerSessionId": null,
+      "toolchainPolicyObserved": false,
+      "toolchainFactsObserved": false,
+      "toolchainReceipt": null,
+      "k44DirectObservation": {
+        "checkpointDirectlyObservedByThisModule": false,
+        "wallClockDirectlyObservedByThisModule": false,
+        "inputFilesDirectlyObservedByThisModule": false,
+        "productionIdentityInventoryDirectlyObservedByThisModule": false,
+        "priorLaneIdentityInventoryDirectlyObservedByThisModule": false
+      },
+      "samePrincipalSelfAttestationAccepted": false,
+      "observerOwnedReceiptRequired": true,
+      "sourceDesignMayCloseObservationBlockers": false
+    },
+    "blockers": [
+      "SOURCE_DESIGN_ONLY_NO_OBSERVER_IMPLEMENTATION",
+      "TOOLCHAIN_POLICY_DIRECT_OBSERVATION_ABSENT",
+      "DIRECT_CHECKPOINT_OBSERVER_REQUIRED_BY_CONSUMER",
+      "DIRECT_WALL_CLOCK_OBSERVER_REQUIRED_BY_CONSUMER",
+      "DIRECT_INPUT_FILE_OBSERVER_REQUIRED_BY_CONSUMER",
+      "DIRECT_PRODUCTION_IDENTITY_INVENTORY_OBSERVER_REQUIRED_BY_CONSUMER",
+      "DIRECT_PRIOR_LANE_IDENTITY_INVENTORY_OBSERVER_REQUIRED_BY_CONSUMER",
+      "OBSERVER_PRINCIPAL_SEPARATION_UNPROVEN",
+      "OBSERVER_OWNED_RECEIPT_UNAVAILABLE",
+      "RUNTIME_AND_GATE8_HOLD"
+    ],
+    "truthBoundary": {
+      "structuralSourceDesignDefined": true,
+      "toolchainObserved": false,
+      "k44LiveObserved": false,
+      "runtimeObserved": false,
+      "buildExecuted": false,
+      "networkContacted": false,
+      "rpcObserved": false,
+      "keyAccessed": false,
+      "signingObserved": false,
+      "fundingObserved": false,
+      "publicDevnetWriteObserved": false,
+      "gate8Go": false,
+      "releaseAuthorized": false,
+      "mainnetExecutionAuthorized": false,
+      "mainnetStatus": "HOLD"
+    },
+    "authorization": {
+      "sourceDesignMayAuthorizeObserverImplementation": false,
+      "sourceDesignMayAuthorizeRuntime": false,
+      "sourceDesignMayAuthorizeBuild": false,
+      "sourceDesignMayAuthorizeNetwork": false,
+      "sourceDesignMayAuthorizeRpc": false,
+      "sourceDesignMayAuthorizeSigning": false,
+      "sourceDesignMayAuthorizeFunding": false,
+      "sourceDesignMayAuthorizePublicDevnet": false,
+      "sourceDesignMayAuthorizeRelease": false,
+      "sourceDesignMayAuthorizeMainnet": false
+    }
+  }
+}
