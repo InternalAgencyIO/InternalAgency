@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-03-n-n-plus-1-n-plus-2-exhausted-archived-blocked-on-face-upload",
+  "status": "face-upload-recovered-awaiting-contract-authorized-new-evidence-gate",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-22T05:49:23.7653089Z",
+  "lastWakeAuditAtUtc": "2026-08-22T06:15:50.8722667Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -39,13 +39,13 @@
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"},
-    "remoteParity": {"localHead":"bfeaedfff6ffd35da42e5485cda9512b44521bb1","remoteBranchHead":"bfeaedfff6ffd35da42e5485cda9512b44521bb1","draftPr13Head":"bfeaedfff6ffd35da42e5485cda9512b44521bb1","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeClean":true}
+    "remoteParity": {"localHead":"cece8b049375039fc51747a77333343f37eef2e1","remoteBranchHead":"cece8b049375039fc51747a77333343f37eef2e1","draftPr13Head":"cece8b049375039fc51747a77333343f37eef2e1","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeClean":true}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T05:49:23.7653089Z",
+    "verifiedAtUtc": "2026-08-22T06:15:50.8722667Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -120,8 +120,8 @@
     "tabIds": ["17", "18", "19", "20"],
     "requestedImagesPerPrompt": 1,
     "referenceUploadOrder": [938, 936, 937],
-    "preflightState": "four-persistent-tabs-restored-no-new-dispatch-evidence-gate-exhausted",
-    "referenceUploadOutcome": "technical-failure-reconfirmed-no-upload-no-prompt-dispatch",
+    "preflightState": "clean-request-tab-17-holds-exact-ordered-face-anchors-no-prompt-sent",
+    "referenceUploadOutcome": "recovered-through-meta-add-media-dialog-clean-draft-preserved",
     "referenceUploadExactFailure": "Both the visible Add attachment control and the underlying input[type=file] path timed out after 3000ms waiting for a file chooser. Browser control was reconnected; no reference file was committed and no prompt was sent.",
     "uploadRecoveryAudit": {
       "attemptedAtUtc": "2026-08-22T05:49:23.7653089Z",
@@ -135,6 +135,23 @@
       "promptsSent": 0,
       "tabsRestored": ["17","18","19","20"]
     },
+    "uploadRecoverySuccess": {
+      "observedAtUtc": "2026-08-22T06:15:50.8722667Z",
+      "signedInAccount": "leesha007",
+      "cleanRequestTabId": "17",
+      "cleanRequestUrl": "https://www.meta.ai/",
+      "successfulControlPath": ["Add attachment","Add media and files dialog","Click to browse, or drag & drop here","file chooser"],
+      "orderedFiles": [
+        {"scene":938,"fileName":"938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"},
+        {"scene":936,"fileName":"936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"},
+        {"scene":937,"fileName":"937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png","sha256":"BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"}
+      ],
+      "uiEvidence": "All three exact filenames were visibly attached in the clean composer, each with its own Remove image control.",
+      "promptsSent": 0,
+      "resultBytesObserved": 0,
+      "occurrenceLedgerSha256": "CAEF08F102923711BF4D5F348D3F80D5E475365B762EA99946602BA58D3DCAB5",
+      "tabDisposition": "marked handoff with clean ordered reference draft preserved"
+    },
     "dispatchStartedUtc": "2026-08-22T04:54:38.990Z",
     "dispatchState": "bank-03-four-n-plus-2-results-preserved-four-hard-unusable",
     "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl",
@@ -146,11 +163,11 @@
     ]
   },
   "authoritativeBlocker": {
-    "recordedAtUtc": "2026-08-22T05:49:23.7653089Z",
-    "type": "face-reference-upload-technical-failure-and-evidence-gate-exhaustion",
-    "exactFailure": "Both supported Meta file-chooser triggers timed out after 3000ms. Browser control was reconnected and the exact four persistent tabs were restored; no reference file was transmitted and no prompt was sent.",
-    "impact": "The exact three historical face anchors could not be attached. All four scenes consumed the authorized N, N+1, and N+2 generation gates and remain hard-unusable; additional filler dispatch is not authorized.",
-    "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","four repo-tracked Bank 3 occurrence rows appended to the generated-media manifest","archive dry-run zero","both ledger verifiers pass","exact face-anchor hashes reverified","visible and underlying Meta upload triggers tested without transmitting files","four persistent Meta tabs restored","Git and LFS evidence prepared for parity"]
+    "recordedAtUtc": "2026-08-22T06:15:50.8722667Z",
+    "type": "evidence-gate-exhaustion-after-face-upload-recovery",
+    "exactFailure": "The ordered face-upload path is recovered, but the authoritative checkpoint contains no contract-authorized prompt beyond the already consumed N, N+1, and N+2 gates. A fourth render would be unauthorized filler.",
+    "impact": "All four Vanuatu scenes remain hard-unusable. The clean Tab 17 reference draft is preserved, but no new prompt may be sent until a new evidence gate is authorized; the other three persistent lanes remain unchanged.",
+    "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","four repo-tracked Bank 3 occurrence rows appended to the generated-media manifest","archive dry-run zero","both ledger verifiers pass","exact face-anchor hashes reverified before every upload","Meta attachment modal control path identified","scene 938 then 936 then 937 attached once each in required order","zero prompt sends and zero result bytes recorded","reference-upload recovery occurrence appended","four persistent Meta tabs preserved for handoff","Git and LFS evidence prepared for parity"]
   },
-  "nextAction": "Restore exact ordered face uploads 938, 936, 937 in a clean Meta request or obtain a contract-authorized new evidence gate. Do not dispatch filler beyond the exhausted N, N+1, N+2 gates."
+  "nextAction": "Obtain a contract-authorized new Vanuatu evidence gate. Keep Tab 17's clean ordered reference draft preserved; only after authorization attach the same 938, 936, 937 sequence once each to the other eligible clean lane requests and dispatch four scene-distinct prompts concurrently. Do not send filler beyond the exhausted N, N+1, N+2 gates."
 }
