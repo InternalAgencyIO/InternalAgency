@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "face-upload-recovered-awaiting-contract-authorized-new-evidence-gate",
+  "status": "user-resume-ten-bank-run-bank-4-closed-scene-1613-meta-source-selected-awaiting-remote-parity",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-22T06:46:16.2678686Z",
+  "lastWakeAuditAtUtc": "2026-08-22T08:41:31.0804153Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -35,7 +35,7 @@
     "palette": ["lagoon turquoise","rainforest emerald","volcanic black","lava red","coral magenta","cloud white","pandanus gold","reef violet","deep-ocean navy"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"33C3001D09DACA72143CAF74B7A0170A495D2F4F3F3725E894563A4C2F97ED02","rows":4829,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"CE5854166397A232CF1AAB14BA80DCE81DC3D5C3D3DFF5403BCBD6B2287051C8","rows":4930,"bank1ArchiveNewRows":4,"bank1ArchiveNewBlobs":4,"bank1ArchiveNewBlobBytes":2177520,"bank2ArchiveNewRows":8,"bank2ArchiveNewBlobs":4,"bank2ArchiveNewBlobBytes":2189990,"bank3ArchiveNewRows":8,"bank3ArchiveNewBlobs":3,"bank3ArchiveNewBlobBytes":1642606,"wakeRecoveryArchiveNewRows":4,"wakeRecoveryArchiveNewBlobs":0,"wakeRecoveryArchiveNewBlobBytes":0,"userResumeBank4ArchiveNewRows":19,"userResumeBank4ArchiveNewBlobs":18,"userResumeBank5ArchiveNewRows":36,"userResumeBank5ArchiveNewBlobs":36,"userResumeBank6ArchiveNewRows":19,"userResumeBank6ArchiveNewBlobs":19,"userResumeBank7ArchiveNewRows":27,"userResumeBank7ArchiveNewBlobs":27,"userResumeBanks4Through7NewRows":101,"userResumeBanks4Through7NewBlobs":100,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"},
@@ -45,7 +45,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T06:46:16.2678686Z",
+    "verifiedAtUtc": "2026-08-22T08:41:31.0804153Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -61,11 +61,14 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 0,
-    "completedBanksInCurrentRenderRun": 8,
-    "nextRenderRunBank": 9,
-    "countryBank": 4,
+    "completedBanksInCurrentRenderRun": 4,
+    "nextRenderRunBank": 5,
+    "countryBank": 7,
     "requestedImagesPerPrompt": 1,
-    "concurrentTabs": 4
+    "persistentMetaTabs": 4,
+    "eligibleMetaLanes": 3,
+    "stoppedMetaLanes": [{"lane":2,"scene":1613,"reason":"provisional-ready Meta source selected; awaiting archive Git and remote parity before the single allowed built-in ChatGPT clothing-only final edit","selectedRawSha256":"DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD"}],
+    "dispatchPolicy": "concurrent across every eligible scene lane; keep exactly four persistent Meta tabs; never send filler in a resolved or stopped lane"
   },
   "scenePlans": {
     "1612": {
@@ -170,6 +173,29 @@
       "resultBytesObserved": 0,
       "authorizationAudit": "No newer authoritative branch, checkpoint, contract, or ledger state authorizes a post-N-plus-2 Vanuatu prompt; the preserved draft remains unsent."
     },
+    "userResumeTenBankRun": {
+      "authorizedByExplicitUserRequest": true,
+      "requestedMethod": "ten Meta banks as one run, with all eligible scene prompts dispatched concurrently rather than lane-by-lane",
+      "completedCountryBanks": [4, 5, 6, 7],
+      "completedRenderRunBankOrdinals": [1, 2, 3, 4],
+      "mediaOccurrencesInspected": 101,
+      "providerNoByteOccurrences": 2,
+      "provisionalSourcesSelected": [
+        {
+          "scene": 1613,
+          "countryBank": 7,
+          "output": 3,
+          "rawPath": "outputs/meta5_batch_staging/batch-398/bank-07/lane-2/batch-398-bank-07-lane-2-scene-1613-output-03.webp",
+          "rawSha256": "DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD",
+          "canonicalEligible": false,
+          "nextGate": "commit, push and remote parity, then one built-in ChatGPT clothing-only final edit"
+        }
+      ],
+      "remainingEligibleScenes": [1612, 1614, 1615],
+      "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl",
+      "occurrenceLedgerSha256": "CF1FEF82699C6AC0D3AD9FEC84A67A7B5915FFFAAB766E095CDDA2FD28BBF77D",
+      "lastClosedAtUtc": "2026-08-22T08:41:31.0804153Z"
+    },
     "dispatchStartedUtc": "2026-08-22T04:54:38.990Z",
     "dispatchState": "bank-03-four-n-plus-2-results-preserved-four-hard-unusable",
     "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl",
@@ -180,12 +206,13 @@
       {"lane":4,"scene":1615,"providerUrl":"https://www.meta.ai/prompt/252919bf-61ef-45aa-b9f0-5c802202ff76","state":"bank-03-n-plus-2-hard-unusable-byte-duplicate-preserved","bank2RawMediaSha256":"EA684D5CE18D4C0D3ECE5BB07A03A60487504DC6090FB4976904BB449DCCA8C4","bank3RawMediaSha256":"EA684D5CE18D4C0D3ECE5BB07A03A60487504DC6090FB4976904BB449DCCA8C4","bank3RawMediaBytes":457566,"dimensions":"1152x2048","classification":"hard-unusable","duplicateOfBank2":true}
     ]
   },
-  "authoritativeBlocker": {
+  "resolvedPriorBlocker": {
     "recordedAtUtc": "2026-08-22T06:46:16.2678686Z",
     "type": "evidence-gate-exhaustion-after-face-upload-recovery",
     "exactFailure": "The ordered face-upload path is recovered, but the authoritative checkpoint contains no contract-authorized prompt beyond the already consumed N, N+1, and N+2 gates. A fourth render would be unauthorized filler.",
     "impact": "All four Vanuatu scenes remain hard-unusable. The clean Tab 17 reference draft is preserved, but no new prompt may be sent until a new evidence gate is authorized; the other three persistent lanes remain unchanged.",
     "safeLocalActionsCompleted": ["deterministic rolls preserved","twelve scene-distinct prompt files and hashes preserved","twelve provider occurrences captured or explicitly related","all raw bytes and one duplicate recurrence preserved","four repo-tracked Bank 3 occurrence rows appended to the generated-media manifest","archive dry-run zero","both ledger verifiers pass","exact face-anchor hashes reverified before every upload","Meta attachment modal control path identified","scene 938 then 936 then 937 attached once each in required order","zero prompt sends and zero result bytes recorded","reference-upload recovery occurrence appended","four persistent Meta tabs preserved for handoff","fresh remote, PR, Git, LFS, archive, ledger, face-anchor, X-cadence, and preserved-draft audits completed at 2026-08-22T06:46:16.2678686Z","Git and LFS evidence prepared for parity"]
   },
-  "nextAction": "Obtain a contract-authorized new Vanuatu evidence gate. Keep Tab 17's clean ordered reference draft preserved; only after authorization attach the same 938, 936, 937 sequence once each to the other eligible clean lane requests and dispatch four scene-distinct prompts concurrently. Do not send filler beyond the exhausted N, N+1, N+2 gates."
+  "authoritativeBlocker": null,
+  "nextAction": "Stage only the intended Banks 4-7 evidence, archive manifest and blobs, prompt files, occurrence ledger, and this checkpoint; commit and push with the exact authoritative refspec; remote-verify branch and draft PR 13 parity. Then keep four persistent Meta tabs, stop scene 1613 Meta generation, and dispatch the next bank concurrently across eligible scenes 1612, 1614, and 1615 without filler."
 }
