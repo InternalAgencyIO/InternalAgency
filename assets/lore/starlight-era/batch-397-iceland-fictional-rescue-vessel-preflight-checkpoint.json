@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "batch": 397,
   "country": "Iceland",
-  "status": "bank-02-terminal-4-of-4-raw-parity-restored-qa-complete",
+  "status": "bank-02-terminal-4-of-4-raw-parity-restored-qa-complete-remote-verified",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
   "lastWakeAuditAtUtc": "2026-08-22T03:35:04.9820103Z",
-  "sourceCommit": "37bba06a00996897b427445dad8df472e7a95c47",
+  "sourceCommit": "6daa89c493cfa29f404de5d7fa0597a2827c564a",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
     "sha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC"
@@ -62,9 +62,9 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 0,
-    "completedBanksInCurrentRenderRun": 2,
-    "nextRenderRunBank": 3,
-    "countryBank": 1,
+    "completedBanksInCurrentRenderRun": 4,
+    "nextRenderRunBank": 5,
+    "countryBank": 2,
     "requestedImagesPerPrompt": 1,
     "concurrentTabs": 4
   },
@@ -152,8 +152,9 @@
       "hardUnusableScenes":[1611],
       "refusedScenes":[1609],
       "canonicalMediaCreated":0,
-      "bankCountIncremented":false,
-      "archiveManifestOccurrences":["116529481d0f1ff3c97182723f36f641859e4b5f872700e34d98d423dca492cd","b639bec60337c819904cf56b737eb946078618d7e6d4c7a3111ed65a770afae1","177431143123d9b885d26bb30e7127e7d03b353338e80811c053951a0e5b8e7d"]
+      "bankCountIncremented":true,
+      "archiveManifestOccurrences":["116529481d0f1ff3c97182723f36f641859e4b5f872700e34d98d423dca492cd","b639bec60337c819904cf56b737eb946078618d7e6d4c7a3111ed65a770afae1","177431143123d9b885d26bb30e7127e7d03b353338e80811c053951a0e5b8e7d"],
+      "remoteParity":{"evidenceCommit":"6daa89c493cfa29f404de5d7fa0597a2827c564a","branchHeadVerified":true,"draftPr13HeadVerified":true,"lfsDryRunEmpty":true,"worktreeClean":true}
     },
     "rawExportRecoveryAudit": {
       "auditedAtUtc":"2026-08-22T02:27:23.3352425Z",
@@ -178,5 +179,5 @@
       "bankCountIncremented":false
     }
   },
-  "nextAction": "Run the archive collector and both ledger verifiers, then commit, push, and remote-verify Bank 2 occurrence parity. Only after remote parity may the completed-bank counter advance; scene 1609 remains closed at the N+1 refusal gate and must not dispatch N+2."
+  "nextAction": "Prepare Iceland Bank 3 only for unresolved scenes 1608, 1609 and 1611. Preserve scene 1610 as the strongest provisional source and do not generate filler there. Scene 1609 remains closed at its N+1 refusal gate unless an evidence-authorized retry is prepared under the provider-shortfall rule."
 }
