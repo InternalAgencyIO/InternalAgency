@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 397,
   "country": "Iceland",
-  "status": "chatgpt-final-4-of-4-qa-complete-archive-parity-awaiting-remote-verification",
+  "status": "closed-4-of-4-remote-verified",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
-  "lastWakeAuditAtUtc": "2026-08-22T04:35:57.5368873Z",
+  "lastWakeAuditAtUtc": "2026-08-22T04:42:16.4592950Z",
   "sourceCommit": "6daa89c493cfa29f404de5d7fa0597a2827c564a",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -38,7 +38,7 @@
     "palette": ["glacier blue","basalt black","geothermal turquoise","moss green","lava red","aurora violet","snow white","silver mist","midnight navy","warm geothermal gold"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"B91B51E87E1563437B6CAD45A66F0C81B7778F8F0E6981164791A922B11F3542","rows":4797},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"85C29ADE0B172E70FE42BB9ED7A97D067835008DD59D79A99F2DE69E57EFE7AA","rows":4805},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC"},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"}
   },
@@ -250,8 +250,11 @@
     },
     "archiveManifest": {
       "path": "progress-reports/codex-generated-media/manifest.jsonl",
-      "rows": 4797,
-      "sha256": "B91B51E87E1563437B6CAD45A66F0C81B7778F8F0E6981164791A922B11F3542"
+      "rows": 4805,
+      "sha256": "85C29ADE0B172E70FE42BB9ED7A97D067835008DD59D79A99F2DE69E57EFE7AA",
+      "postCommitSourceStateRowsAdded": 8,
+      "postApplyDryRunNewRows": 0,
+      "postApplyDryRunNewBlobs": 0
     },
     "finalSelections": [
       {
@@ -287,7 +290,21 @@
         "archiveOccurrenceId": "ace20b9877f9cfd8701fae3493d9ed2458cae3a60d01bf1a4b2a261860410e46"
       }
     ],
-    "acceptanceState": "canonical-final-awaiting-remote-verification"
+    "acceptanceState": "canonical-final-remote-verified",
+    "remoteParity": {
+      "verifiedAtUtc": "2026-08-22T04:42:16.4592950Z",
+      "evidenceCommit": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "localHead": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "remoteBranchHead": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "draftPr13Head": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "lfsDryRunPendingObjects": 0,
+      "rejectedPromptLedgerVerified": true,
+      "projectFailedPromptLedgerVerified": true,
+      "archiveParityVerified": true,
+      "worktreeCleanBeforeAuditSeal": true
+    }
   },
-  "nextAction": "Commit and push the four accepted ChatGPT clothing-only finals and their exact prompts, output occurrences, archive blobs, manifest rows, and checkpoint. Then verify branch head, draft PR 13 head, Git LFS dry-run, both ledger verifiers, archive parity, and a clean worktree before closing Iceland 4 of 4. Do not dispatch more Meta filler for these resolved scenes."
+  "nextAction": "Keep Iceland closed. Advance to Vanuatu Batch 398, scenes 1612 through 1615, fictional coast-guard rescue-vessel couture ordinal 2 of 2. Preserve completedRenderRunsSinceLastX at 0 and completedBanksInCurrentRenderRun at 5; the next completed four-tab Meta bank is render-run bank 6. Never reopen Iceland, Bahamas, Belize, Brunei, Cabo Verde, Maldives, or Malta."
 }
