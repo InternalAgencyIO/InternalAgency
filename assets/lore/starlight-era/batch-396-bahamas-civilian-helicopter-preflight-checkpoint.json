@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 396,
   "country": "Bahamas",
-  "status": "bank-1-dispatch-blocked-browser-control-reset-four-lanes-no-bytes",
+  "status": "bank-2-captured-scene-1607-source-candidate-scenes-1604-1605-1606-unresolved",
   "preparedAtUtc": "2026-08-22T00:04:40.5446589Z",
   "sourceCommit": "5fa57453757dda12b963253331e08c5582cbf5ac",
   "contract": {
@@ -51,7 +51,7 @@
   "evidenceSnapshots": {
     "generatedMediaManifest": {
       "path": "progress-reports/codex-generated-media/manifest.jsonl",
-      "sha256": "F22BFDD89DC8D0963865D7949746EAE160E558BEDABA9B50D999BB7689331CB1"
+      "sha256": "7D88AA7670EAFDDD6D7C81455FACA1F2B899DB7CC202744E83F1863DF990EE8A"
     },
     "rejectedPromptLedger": {
       "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
@@ -87,11 +87,11 @@
     "sha256": "0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F"
   },
   "fourTabBank": {
-    "bank": 1,
+    "bank": 2,
     "requestedImagesPerPrompt": 1,
     "concurrentTabs": 4,
     "bolderPublicSafeScenes": [1604, 1606],
-    "dispatchState": "browser-control-reset-before-send-four-lanes-no-bytes",
+    "dispatchState": "two-text-only-banks-captured-six-media-two-terminal-refusals",
     "completedRenderRunsSinceLastX": 0
   },
   "scenePlans": {
@@ -145,9 +145,22 @@
     }
   },
   "renderPipeline": {
-    "projectOccurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01.jsonl",
-    "externalStagingRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging/batch-396/bank-01",
-    "bank1": {"requested":4,"sent":0,"returnedFiles":0,"explicitNoBytesOccurrences":4,"providerShortfall":4,"classificationState":"browser-blocked-before-send-no-provider-request"}
+    "projectOccurrenceLedgers": [
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01-retry.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-02.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-396-bahamas-meta-bank-01-02-qa.jsonl"
+    ],
+    "externalStagingRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging/batch-396",
+    "initialBrowserBlocker": {"requested":4,"sent":0,"returnedFiles":0,"explicitNoBytesOccurrences":4,"providerShortfall":4,"classificationState":"browser-blocked-before-send-no-provider-request"},
+    "bank1TextOnlyRetry": {"requested":4,"sent":4,"returnedFiles":3,"terminalRefusals":1,"hardUnusable":3,"sourceCandidates":0},
+    "bank2": {"requested":4,"sent":4,"returnedFiles":3,"terminalRefusals":1,"hardUnusable":2,"sourceCandidates":1},
+    "capturedRawFiles": 6,
+    "capturedRawBytes": 3126588,
+    "sourceCandidate": {"scene":1607,"bank":2,"sha256":"F3699A9554E19A76ECC88C808389F3A229FED1EA19BD242DA0F171720F39E1DE","state":"pending-archive-ledger-git-lfs-remote-pr-gates-before-clothing-only-edit"},
+    "unresolvedScenes": [1604,1605,1606],
+    "completedBanksInCurrentRenderRun": 2,
+    "completedRenderRunsSinceLastX": 0
   },
   "browserEvidence": {
     "persistentMetaTabsRequired": 4,
@@ -171,10 +184,37 @@
       }
     ],
     "uploadOutcome": "technical-failure-no-upload-confirmed-text-only-required-on-retry",
-    "dispatchOutcome": "browser-control-reset-before-any-prompt-send",
+    "dispatchOutcome": "bank-1-text-only-retry-and-bank-2-corrections-captured",
     "blockerObservedAtUtc": "2026-08-22T00:12:14.7042914Z",
-    "providerRequestsSent": 0,
-    "rawMediaBytes": null
+    "providerRequestsSent": 8,
+    "rawMediaBytes": 3126588,
+    "providerUrls": {
+      "1604": "https://www.meta.ai/prompt/3b48a7c0-0572-4d99-8635-2e4201683c66",
+      "1605": "https://www.meta.ai/prompt/e4c25339-13b8-4fe6-90a1-bc58161b6d22",
+      "1606": "https://www.meta.ai/prompt/f6b2fc76-1cab-485e-beb5-acd5fc445685",
+      "1607": "https://www.meta.ai/prompt/5c52454a-fca7-40a6-a18d-e50522e616d9"
+    },
+    "bank2DispatchStartedUtc": "2026-08-22T00:39:15.278Z",
+    "bank2DispatchCompletedUtc": "2026-08-22T00:39:15.611Z",
+    "lastCaptureUtc": "2026-08-22T00:43:21.0871685Z"
   },
-  "nextAction": "On the next wake, reuse exactly four persistent Meta tabs, reverify the stored face hashes and non-rerollable bindings, then retry one text-only Bahamas prompt per lane unless the ordered upload flow is working."
+  "refusalLexiconUpdate": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+    "sha256": "28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A",
+    "newImmutableRefusalEvents": 2,
+    "newCandidateRows": 5,
+    "activeSuppressionProfileChanged": false
+  },
+  "archiveCapture": {
+    "appliedAtUtc": "2026-08-22T00:49:53.137Z",
+    "legacyRoot": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_batch_staging",
+    "newManifestRows": 7,
+    "newBahamasManifestRows": 6,
+    "newHistoricalBelizeManifestRows": 1,
+    "newBlobs": 6,
+    "newBlobBytes": 3126588,
+    "bahamasBlobHashesVerified": 6,
+    "manifestSha256": "7D88AA7670EAFDDD6D7C81455FACA1F2B899DB7CC202744E83F1863DF990EE8A"
+  },
+  "nextAction": "Reuse the same four persistent Meta chats for bank 3. Scene 1604 should use Meta's offered cinema-light fallback, scene 1605 needs both complete RAZE pairs and footwear visible, scene 1606 needs Alia-to-Ellie cheek affection instead of Alia-to-Radiance, and scene 1607 must not be regenerated after its source candidate clears all evidence gates."
 }
