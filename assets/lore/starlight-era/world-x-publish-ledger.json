@@ -268,12 +268,12 @@
   "publicationCadenceState": {
     "mode": "render-first-user-authorized-eighty-meta-banks",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
-    "completedRenderRunsSinceLastX": 3,
+    "completedRenderRunsSinceLastX": 4,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "The user's explicit 2026-08-22 backlog-clearance request opens the X window now. Publish only after exact action-time confirmation for each prepared three-asset post, verify its public URL and evidence parity, wait at least sixty seconds, and continue until the newly eligible backlog is zero. Then execute the newly authorized twenty Meta banks."
+    "counterRule": "Complete five evidence-gated render runs before the next X publication window. The fourth run is complete and remote-verified; retain the cumulative eighty-bank Meta authorization and continue with the fifth run."
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-22T20:35:00Z",
