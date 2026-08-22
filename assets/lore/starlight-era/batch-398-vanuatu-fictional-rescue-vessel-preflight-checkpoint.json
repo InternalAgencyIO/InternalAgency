@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "batch": 398,
+  "country": "Vanuatu",
+  "status": "bank-01-four-results-archived-four-hard-unusable-corrections-required",
+  "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
+  "lastWakeAuditAtUtc": "2026-08-22T04:51:29.3174810Z",
+  "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
+  "contract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC"
+  },
+  "queueAuthorization": {
+    "priorCountry": "Iceland",
+    "priorBatch": 397,
+    "priorStatus": "closed-4-of-4-remote-verified",
+    "priorCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
+    "authoritativeOrderEvidence": "assets/lore/starlight-era/world-195x4-campaign.json",
+    "historicalVanuatuEvidence": "assets/lore/starlight-era/batch-327-vanuatu-relaxed-audit-checkpoint.json",
+    "nextCountry": "Vanuatu",
+    "nextBatch": 398,
+    "scenes": [1612, 1613, 1614, 1615],
+    "cinematicTheme": "fictional coast-guard rescue-vessel couture",
+    "themePairPosition": "2 of 2",
+    "provider": "Meta AI"
+  },
+  "countryResearch": {
+    "policy": "Vanuatu identity appears through large secular research installations and landmark-derived geography. No literal flag, coat of arms, official emblem, sacred symbol, religious building, copied ceremonial pattern, official uniform, badge, or political insignia.",
+    "sources": [
+      {"url":"https://www.vanuatu.travel/en/provinces/efate/port-vila","use":"Port Vila waterfront, Mele Bay, harbor geometry, and island ridgelines"},
+      {"url":"https://www.vanuatu.travel/en/provinces/tanna/mount-yasur-volcano","use":"Mount Yasur volcanic cone, ash plain, caldera contours, and rainforest edge"},
+      {"url":"https://www.vanuatu.travel/en/provinces/efate/blue-lagoon","use":"Efate Blue Lagoon turquoise channels, rainforest canopy, and limestone banks"},
+      {"url":"https://www.vanuatu.travel/en/provinces/espiritu-santo/champagne-beach","use":"Champagne Beach pale sand, turquoise shallows, rainforest edge, and empty bay"}
+    ],
+    "palette": ["lagoon turquoise","rainforest emerald","volcanic black","lava red","coral magenta","cloud white","pandanus gold","reef violet","deep-ocean navy"]
+  },
+  "evidenceSnapshots": {
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"9D4C38693C1D277C4D92CC89A49635F34085BBABEA3EE16D78AC3D5C7C177AEC","rows":4809,"archiveApplyNewRows":4,"archiveApplyNewBlobs":4,"archiveApplyNewBlobBytes":2177520,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0},
+    "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
+    "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
+    "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"},
+    "remoteParity": {"localHead":"647dec44021cb660cb88ac4678b410bf4bf37f59","remoteBranchHead":"647dec44021cb660cb88ac4678b410bf4bf37f59","draftPr13Head":"647dec44021cb660cb88ac4678b410bf4bf37f59","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeClean":true}
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "exactAge": 21,
+    "verifiedAtUtc": "2026-08-22T05:09:07.5938818Z",
+    "uploadOrder": [
+      {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
+      {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
+      {"slot":3,"scene":937,"path":"assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png","sha256":"BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1","verified":true}
+    ]
+  },
+  "activeSuppressionProfile": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_active_suppression_profile.json",
+    "sha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+    "termLimit": 20,
+    "postSuppressionPromptMatches": 0
+  },
+  "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
+  "renderRunCadence": {
+    "completedRenderRunsSinceLastX": 0,
+    "completedBanksInCurrentRenderRun": 5,
+    "nextRenderRunBank": 6,
+    "countryBank": 1,
+    "requestedImagesPerPrompt": 1,
+    "concurrentTabs": 4
+  },
+  "scenePlans": {
+    "1612": {
+      "scene": 1612,
+      "countryResearchGeometry": "Port Vila waterfront, Mele Bay harbor grid and island ridgelines",
+      "environment": {"key":"starlight|environment|batch-398|scene-1612","counter":0,"acceptedByte":203,"digestSha256":"CB66637C60DEC812E2589A6222BF7D402213AF064D2A30573197762222458375","bucket":3,"name":"night","promptLanguage":"clear night with stars, habitat practical lights and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1612","counter":0,"acceptedByte":94,"digestSha256":"5EC767AF59FA3A527731B99A9C2F569EBCAEDD064CFAF93ED123B6520639D257","bucket":4,"name":"TOI-700 d"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1612","counter":0,"acceptedByte":189,"digestSha256":"BD7E457E1D63583DFC465A00245D8F7684B63FF07070A04ED5DC05DF5454AE0A","bucket":0,"name":"habitat interior","promptLanguage":"inside a sealed research habitat with a broad fluffy couture lounge bed and readable faces"},
+      "raze": {"key":"RAZE|batch-398|scene-1612|knee-high-wearers","fnv1a32":2152466489,"pairIndex":5,"wearers":["Alia","AI ECE"],"uncoveredLowerLegCharacters":["Radiance","Ellie"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
+      "primaryPrompt": {"path":"tmp/world-195x4/batch-398/scene-1612-meta-bank-01-primary.txt","sha256":"D3F49B92F214E91278599189788DB68674F1956DC6861267F6BD34D99647E0AA","bytes":3805,"activeSuppressionMatches":0}
+    },
+    "1613": {
+      "scene": 1613,
+      "countryResearchGeometry": "Mount Yasur volcanic cone, caldera contours, ash plain and rainforest edge",
+      "environment": {"key":"starlight|environment|batch-398|scene-1613","counter":0,"acceptedByte":243,"digestSha256":"F379A29E4EC9B6F49FB697D4AEAB332CF0CCD42ABA78604D4A87E2DEADA503D8","bucket":3,"name":"night","promptLanguage":"clear night with stars, habitat practical lights and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1613","counter":0,"acceptedByte":240,"digestSha256":"F0BCE2415EE04A55E3D509B87D884A2848CE2A0FE0B4CB3CB27C27207745C245","bucket":0,"name":"TRAPPIST-1 e"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1613","counter":0,"acceptedByte":214,"digestSha256":"D64368A2CA6919CD8135EEA36D76671388CD290C8CE48CB3657C8B2324A6E82A","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
+      "raze": {"key":"RAZE|batch-398|scene-1613|knee-high-wearers","fnv1a32":3155009134,"pairIndex":4,"wearers":["Ellie","AI ECE"],"uncoveredLowerLegCharacters":["Radiance","Alia"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
+      "primaryPrompt": {"path":"tmp/world-195x4/batch-398/scene-1613-meta-bank-01-primary.txt","sha256":"5369A6EC9E5A500253905C237155045E582888F93DFE37A03E14BCE959CBDCAD","bytes":3789,"activeSuppressionMatches":0}
+    },
+    "1614": {
+      "scene": 1614,
+      "countryResearchGeometry": "Efate Blue Lagoon channels, limestone banks and rainforest canopy",
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"name":"dusk","promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"name":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
+      "raze": {"key":"RAZE|batch-398|scene-1614|knee-high-wearers","fnv1a32":3642453431,"pairIndex":5,"wearers":["Alia","AI ECE"],"uncoveredLowerLegCharacters":["Radiance","Ellie"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
+      "primaryPrompt": {"path":"tmp/world-195x4/batch-398/scene-1614-meta-bank-01-primary.txt","sha256":"09D0CDAC3ED108E961159DDFA6C062B7F53A3CFCFAE640AD80C432D290AFAD30","bytes":3677,"activeSuppressionMatches":0}
+    },
+    "1615": {
+      "scene": 1615,
+      "countryResearchGeometry": "Champagne Beach pale-sand crescent, turquoise shallows and rainforest edge",
+      "environment": {"key":"starlight|environment|batch-398|scene-1615","counter":0,"acceptedByte":50,"digestSha256":"321B5F7D01E0A98F86960C0A53E51FF283122709A84D808CD422026E21CBE395","bucket":0,"name":"dusk","promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1615","counter":0,"acceptedByte":215,"digestSha256":"D7AEA4C45CE459D3C3F03CC91891BB3D785068E2FB7461A449C447750B4AD0FF","bucket":0,"name":"TRAPPIST-1 e"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1615","counter":0,"acceptedByte":118,"digestSha256":"76FE72469A4B416D8B74FAA1D4EA3B0E54E62986BBD8E473EB8E86ED2C78E5E9","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
+      "raze": {"key":"RAZE|batch-398|scene-1615|knee-high-wearers","fnv1a32":2566868844,"pairIndex":0,"wearers":["Radiance","Ellie"],"uncoveredLowerLegCharacters":["Alia","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
+      "primaryPrompt": {"path":"tmp/world-195x4/batch-398/scene-1615-meta-bank-01-primary.txt","sha256":"9028A5B1E8E12D416BFAA67F1DE7FAED2ECE9C3551B6FBABDC2D7E6CC777B51D","bytes":3767,"activeSuppressionMatches":0}
+    }
+  },
+  "browserEvidence": {
+    "provider": "Meta AI",
+    "persistentMetaTabsRequired": 4,
+    "persistentMetaTabsObserved": 4,
+    "tabIds": ["17", "18", "19", "20"],
+    "requestedImagesPerPrompt": 1,
+    "referenceUploadOrder": [938, 936, 937],
+    "preflightState": "four-distinct-evidence-authorized-prompts-ready",
+    "referenceUploadOutcome": "technical-failure-no-upload-confirmed-text-only-dispatch",
+    "referenceUploadExactFailure": "Timed out after 3000ms waiting for file chooser; browser control reset before any reference file was committed and before any prompt was sent.",
+    "dispatchStartedUtc": "2026-08-22T04:54:38.990Z",
+    "dispatchState": "bank-01-four-results-preserved-four-hard-unusable",
+    "occurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-01.jsonl",
+    "lanes": [
+      {"lane":1,"scene":1612,"providerUrl":"https://www.meta.ai/prompt/27de7dd0-736e-496c-862d-724f571ab121","state":"media-hard-unusable-raw-export-preserved","rawMediaSha256":"140EB55075310A2AA67A062523218B2A5244B31129EE360A9DA3E15111711EB0","rawMediaBytes":518592,"dimensions":"1152x2048","nextGate":"fresh consolidated correction after remaining Bank 1 occurrence preservation"},
+      {"lane":2,"scene":1613,"providerUrl":"https://www.meta.ai/prompt/dd02ed3e-f515-4fce-8246-4c0556bd87f4","state":"media-hard-unusable-raw-export-preserved","rawMediaSha256":"003E401F823A905067E84078EB40F629E6D41342BF190C4048C9579E93626C8A","rawMediaBytes":591502,"dimensions":"1152x2048","nextGate":"fresh consolidated correction after remaining Bank 1 occurrence preservation"},
+      {"lane":3,"scene":1614,"providerUrl":"https://www.meta.ai/prompt/ef0f53ed-dbf0-4060-aeec-63f00a050d7a","state":"media-hard-unusable-raw-export-preserved","rawMediaSha256":"577307E5E51833D9377A40829ADA9A61EF225B5E80F8A04EF8CCF81F43B944D3","rawMediaBytes":523306,"dimensions":"1152x2048","nextGate":"fresh consolidated correction after remaining Bank 1 occurrence preservation"},
+      {"lane":4,"scene":1615,"providerUrl":"https://www.meta.ai/prompt/252919bf-61ef-45aa-b9f0-5c802202ff76","state":"media-hard-unusable-raw-export-preserved","rawMediaSha256":"6573F30FF06C7F7F3A26179997A12612F252567EF05B0007D03318CFD3ABB864","rawMediaBytes":544120,"dimensions":"1152x2048","nextGate":"fresh consolidated correction after Bank 1 archive and parity"}
+    ]
+  },
+  "nextAction": "Archive all four immutable Bank 1 raw occurrences, verify both ledgers, Git/LFS/remote/PR parity, then reuse the same four persistent Meta tabs for one fresh evidence-authorized consolidated correction prompt per unresolved scene."
+}
