@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 397,
   "country": "Iceland",
-  "status": "bank-03-terminal-three-eligible-lanes-raw-parity-restored-qa-complete-selected-sources-awaiting-remote-barrier",
+  "status": "bank-03-terminal-three-eligible-lanes-selected-sources-remote-verified-final-refinement-authorized",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
-  "lastWakeAuditAtUtc": "2026-08-22T03:56:44.1563606Z",
+  "lastWakeAuditAtUtc": "2026-08-22T03:59:12.3966701Z",
   "sourceCommit": "6daa89c493cfa29f404de5d7fa0597a2827c564a",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -46,7 +46,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T03:56:44.1563606Z",
+    "verifiedAtUtc": "2026-08-22T03:59:12.3966701Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -194,7 +194,8 @@
       "projectFailedPromptLedgerVerified":true,
       "canonicalMediaCreated":0,
       "bankCountIncremented":true,
-      "remoteBarrier":"pending commit, push, branch SHA and draft PR 13 head parity"
+      "remoteBarrier":"passed at evidence commit 00aafc482805fd987af874f856ec2231732338a3",
+      "remoteParity":{"evidenceCommit":"00aafc482805fd987af874f856ec2231732338a3","branchHeadVerified":true,"draftPr13HeadVerified":true,"draftPr13Open":true,"lfsDryRunEmpty":true,"worktreeClean":true,"ledgerParityVerified":true,"archiveParityVerified":true}
     },
     "terminalEvidenceBank2": {
       "completedMediaResults":3,
@@ -235,5 +236,5 @@
       "bankCountIncremented":false
     }
   },
-  "nextAction": "Commit and push the complete Iceland Bank 3 evidence package, verify remote branch and draft PR 13 head parity, LFS parity, ledger parity, archive parity and a clean worktree. Only after that remote barrier passes, run one built-in ChatGPT clothing-only final refinement on each of the four selected Meta sources, with at most one conditional retry under the authoritative contract. Do not dispatch more Meta filler for scenes 1608 through 1611."
+  "nextAction": "The selected Meta sources are archived and remote verified. Run one built-in ChatGPT clothing-only final refinement on each of scenes 1608 through 1611, with at most one conditional retry per scene only for refusal, technical failure, invalid media, hard-safety failure, or anchored-face failure. Preserve all non-clothing pixels and identities, capture every output occurrence, and do not dispatch more Meta filler for these scenes."
 }
