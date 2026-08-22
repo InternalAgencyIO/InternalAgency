@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "fifth-ten-bank-render-run-bank-46-terminal-hard-unusable-scene-1614",
+  "status": "fifth-ten-bank-render-run-bank-46-remote-verified-scene-1614",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-22T23:43:21.267Z",
+  "lastWakeAuditAtUtc": "2026-08-22T23:52:04.1368937Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -39,7 +39,7 @@
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"ADA5835D81A28F19601AB8533BBBD4C5410C67A1F261E752F641026617A736AA","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":4,"completedBanksInCurrentRenderRun":3,"cumulativeMetaBanksAuthorized":110,"cumulativeMetaBanksCompleted":17,"cumulativeMetaBanksRemaining":93,"mode":"render-first-user-authorized-one-hundred-ten-bank-allowance"},
-    "remoteParity": {"previousVerifiedHead":"6ba80a66ac85579d735a853e523811baae443947","firstEvidenceCommit":"573b1197fcf0c6a8a9d7d428fd5e5a8342ca9de8","evidenceCommit":"573b1197fcf0c6a8a9d7d428fd5e5a8342ca9de8","trackedSourceCommit":"7f27c5fb91b6cafc2b9cfddb50df6e14204688fe","counterParityCommit":"f68608de4f8dba9b85a3764bf02724871d978c41","localHead":"7f27c5fb91b6cafc2b9cfddb50df6e14204688fe","remoteBranchHead":"7f27c5fb91b6cafc2b9cfddb50df6e14204688fe","draftPr13Head":"7f27c5fb91b6cafc2b9cfddb50df6e14204688fe","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtTrackedSourceParityCommit":true,"scope":"Vanuatu fifth render run Bank 45, ten captured Meta outputs totaling 6,712,339 bytes, exact prompt and response envelopes, ten initial archive rows and LFS blobs, ten tracked-source archive rows, per-occurrence hard-unusable classifications, both ledger verifiers, archive dry-run zero, and render-run progress at two of ten banks","verifiedAtUtc":"2026-08-22T23:17:58.2877020Z","pending":null}
+    "remoteParity": {"previousVerifiedHead":"650f047fa20c6d16e222945cfa7b38083c29d667","firstEvidenceCommit":"7cd4fc0a26e88c7660182fe2bd88b19bb937454b","evidenceCommit":"7cd4fc0a26e88c7660182fe2bd88b19bb937454b","trackedSourceCommit":"97ff56b5b564db293f381216884438ed401eeb4a","priorCompletedRenderRunCounterParityCommit":"f68608de4f8dba9b85a3764bf02724871d978c41","localHead":"97ff56b5b564db293f381216884438ed401eeb4a","remoteBranchHead":"97ff56b5b564db293f381216884438ed401eeb4a","draftPr13Head":"97ff56b5b564db293f381216884438ed401eeb4a","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtTrackedSourceParityCommit":true,"scope":"Vanuatu fifth render run Bank 46, five captured Meta occurrences totaling 2,216,456 bytes with four unique hashes and 1,831,454 unique bytes, exact prompt and response envelopes, five initial archive rows, four LFS blobs, five tracked-source archive rows, per-occurrence hard-unusable classifications, both ledger verifiers, archive dry-run zero, and render-run progress at three of ten banks","verifiedAtUtc":"2026-08-22T23:52:04.1368937Z","pending":null}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
@@ -1407,12 +1407,20 @@
     "archiveDryRunNewBlobs": 0,
     "faceAnchorsVerifiedAtUtc": "2026-08-22T23:46:47.1727115Z",
     "evidenceCommit": "7cd4fc0a26e88c7660182fe2bd88b19bb937454b",
-    "archiveParityCommit": null,
-    "remoteParityState": "pending-commit-push-and-draft-pr13-head-verification"
+    "archiveParityCommit": "97ff56b5b564db293f381216884438ed401eeb4a",
+    "localHead": "97ff56b5b564db293f381216884438ed401eeb4a",
+    "remoteBranchHead": "97ff56b5b564db293f381216884438ed401eeb4a",
+    "draftPr13Head": "97ff56b5b564db293f381216884438ed401eeb4a",
+    "draftPr13Open": true,
+    "draftPr13Draft": true,
+    "lfsPendingObjects": 0,
+    "worktreeCleanAtArchiveParityCommit": true,
+    "verifiedAtUtc": "2026-08-22T23:52:04.1368937Z",
+    "remoteParityState": "remote-verified"
   },
   "resolvedAuthoritativeBlocker": {"recordedAtUtc":"2026-08-22T14:16:05.000Z","resolvedAtUtc":"2026-08-22T19:43:33.865Z","type":"meta-prompt-route-technical-shortfall","resolution":"A fresh authorized Bank 30 dispatch produced a durable Meta prompt URL and visible Finalizing image prompt state after a client-chunk recovery reload."},
   "resolvedBank36Blocker": {"recordedAtUtc":"2026-08-22T21:25:22.995Z","resolvedAtUtc":"2026-08-22T21:27:21.158Z","type":"provider-render-stall","resolution":"Meta rendered an explicit terminal technical-failure response with zero generated bytes; the terminal occurrence was preserved and Bank 37 became dispatch-eligible."},
   "resolvedBank38Blocker": {"recordedAtUtc":"2026-08-22T21:41:48.833Z","resolvedAtUtc":"2026-08-22T21:43:38.432Z","type":"meta-render-stall","resolution":"Meta returned one durable PNG and an explicit pose-deviation response. Raw bytes, exact response, hash, dimensions, visual classification, and the additional uncapturable resource shortfall were preserved; Bank 39 became dispatch-eligible."},
   "authoritativeBlocker": null,
-  "nextAction": "Archive and remote-verify the five Bank 46 raw occurrences, exact response and prompt, both ledger verifiers, Git LFS objects, remote branch SHA, and draft PR 13 head parity; only then prepare Bank 47 for unresolved scene 1614 and never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Prepare Bank 47 as fifth-render-run bank ordinal 4 for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
