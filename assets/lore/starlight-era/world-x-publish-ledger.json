@@ -204,26 +204,88 @@
       "reason": "User-classified test post with four images and no guardian-prepared approved campaign caption. It is preserved as public audit evidence and does not consume or clear any World Series publication backlog entry."
     }
   ],
-  "pendingPost": null,
-  "preparedPostQueue": [],
+  "pendingPost": {
+    "status": "published-live-verified-awaiting-archive-parity",
+    "preparedAtUtc": "2026-08-22T18:55:45.2809505Z",
+    "account": "@dogramaci",
+    "batches": [392, 393],
+    "countries": ["Maldives", "Cabo Verde"],
+    "caption": "Maldives ❤️ Cabo Verde: stormlit lagoons, orbital couture, and a close-held island moment. #InternalAgency #RAZE",
+    "imageNumbers": [1588, 1589, 1592],
+    "assets": [
+      {"file":"1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png","sha256":"C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE","bytes":2587883},
+      {"file":"1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png","sha256":"BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0","bytes":2567089},
+      {"file":"1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp","path":"assets/lore/starlight-era/1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp","sha256":"F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328","bytes":628410}
+    ],
+    "hashtagRollAudit": [
+      {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-392-393|InternalAgency|counter-1","counter":1,"acceptedByte":12,"digestSha256":"0CCCE1B2D163B50DAB711D5CAE617F504C21B8D09006D518C96236FCA048B626","roll":12,"threshold":25,"included":true},
+      {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-392-393|WorldXXXSeries|counter-0","counter":0,"acceptedByte":40,"digestSha256":"2866F8854D321F87766423E972DA606F23989F971BB38C5F53277D78C8F0B193","roll":40,"threshold":25,"included":false},
+      {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-392-393|RAZE|counter-0","counter":0,"acceptedByte":124,"digestSha256":"7CD9A503FC5589FF48FDAD5B7EAF9699D57B2A2C5249F1D2EFEC055086F54133","roll":24,"threshold":31,"included":true}
+    ],
+    "liveDuplicateAudit": {"checkedAtUtc":"2026-08-22T18:54:00Z","query":"from:dogramaci (\"Maldives\" OR \"Cabo Verde\")","result":"no-results"},
+    "signedInAccountVerified": "@dogramaci",
+    "stagedAtUtc": "2026-08-22T18:57:30Z",
+    "stagedAttachmentCount": 3,
+    "finalClickConfirmed": true,
+    "confirmedClickAtUtc": "2026-08-22T18:58:37.579Z",
+    "verifiedAtUtc": "2026-08-22T19:00:00Z",
+    "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
+    "verification": "Exact approved caption, signed-in @dogramaci account, successful route to home, live public status URL, and exactly three photo endpoints (/photo/1, /photo/2, /photo/3) verified.",
+    "transmission": "user-action-time-confirmed-three-asset-two-country-backlog-clearance"
+  },
+  "preparedPostQueue": [
+    {
+      "status": "published-live-verified",
+      "preparedAtUtc": "2026-08-22T19:18:26.442Z",
+      "account": "@dogramaci",
+      "batches": [396, 397],
+      "countries": ["Bahamas", "Iceland"],
+      "caption": "Bahamas ❤️ Iceland: stormlit cays, volcanic horizons, and a close-held spark beneath northern light. #InternalAgency #RAZE",
+      "imageNumbers": [1604, 1605, 1608],
+      "assets": [
+        {"file":"1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png","sha256":"F2E57C544280EBD99DDF017397E40FF9084FF3CE984474779CAD4C5F8DF7B7AD","bytes":2262185},
+        {"file":"1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp","path":"assets/lore/starlight-era/1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp","sha256":"DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6","bytes":491092},
+        {"file":"1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png","sha256":"C45E4636A5CF1E80AE98D15A32744945D696DE0C442F82B65673B276251810CE","bytes":2468624}
+      ],
+      "hashtagRollAudit": [
+        {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-396-397|InternalAgency|counter-0","counter":0,"acceptedByte":7,"digestSha256":"07BBFB995EEE8AE0144BC71732B79BF83AE4E439834D1675D96C789CC775E1C0","roll":7,"threshold":25,"included":true},
+        {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-396-397|WorldXXXSeries|counter-1","counter":1,"acceptedByte":48,"digestSha256":"302D0A0CCDD33692AACC574733935D59A20B53A3B04C9FB4E30B6D3898148830","roll":48,"threshold":25,"included":false},
+        {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-396-397|RAZE|counter-0","counter":0,"acceptedByte":25,"digestSha256":"19DA1FDCEA7B2B48D126D2A629F49F274F9403A9E9730560D65B9E98D4595F91","roll":25,"threshold":31,"included":true}
+      ],
+      "liveDuplicateAudit": {
+        "checkedAtUtc": "2026-08-22T19:17:00Z",
+        "query": "from:dogramaci (\"Bahamas\" OR \"Iceland\")",
+        "result": "older Iceland statuses found; neither has the exact prepared caption or canonical three-asset set, so both remain non-consuming historical publications"
+      },
+      "stagedAttachmentCount": 3,
+      "finalClickConfirmed": true,
+      "postedAtUtc": "2026-08-22T19:20:34.160Z",
+      "verifiedAtUtc": "2026-08-22T19:21:00Z",
+      "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
+      "verification": "Exact approved caption, signed-in @dogramaci account, and exactly three public photo endpoints verified live."
+    }
+  ],
   "publicationCadenceState": {
-    "mode": "render-first-after-backlog-clearance",
-    "currentBacklogClearedAt": "2026-08-21T08:06:54.2581795Z",
+    "mode": "render-first-user-authorized-twenty-meta-banks",
+    "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 2,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "Increment only after all ten four-tab banks and their evidence gates complete. The user's later fifteen-additional-bank scheduling authorization controls the next X window: no X preparation before all fifteen are complete. At that window, reconcile the exact eligible backlog, require action-time confirmation per post, and wait at least sixty seconds between confirmed posts. Reset only after public URLs and full archive, Git, LFS, remote SHA and PR parity are recorded."
+    "counterRule": "The user's explicit 2026-08-22 backlog-clearance request opens the X window now. Publish only after exact action-time confirmation for each prepared three-asset post, verify its public URL and evidence parity, wait at least sixty seconds, and continue until the newly eligible backlog is zero. Then execute the newly authorized twenty Meta banks."
   },
   "latestUserSchedulingAuthorization": {
-    "receivedAtUtc": "2026-08-22T12:24:00Z",
-    "instruction": "authorized for 15 more batches before uploading entire backlog to x with 1 min delay between posts",
-    "operationalInterpretation": "Complete fifteen additional Meta banks from the instruction point before opening the next X preparation window. Preserve exact per-post action-time confirmation after showing signed-in account, exact three canonical files, and caption; wait at least sixty seconds between confirmed posts.",
-    "additionalMetaBanksAuthorized": 15,
-    "additionalMetaBanksCompleted": 3,
-    "additionalMetaBanksRemaining": 12,
-    "xPublicationExecuted": false
+    "receivedAtUtc": "2026-08-22T20:35:00Z",
+    "instruction": "faster 30 more batches after this",
+    "operationalInterpretation": "Add thirty Meta banks after the existing cumulative fifty-bank allowance for a cumulative eighty-bank Meta rendering allowance, while preserving the evidence-gated one-request-per-eligible-lane pipeline.",
+    "newlyAddedMetaBanks": 30,
+    "additionalMetaBanksAuthorized": 80,
+    "additionalMetaBanksCompleted": 4,
+    "additionalMetaBanksRemaining": 76,
+    "latestThirtyBankExtensionCompleted": 0,
+    "latestThirtyBankExtensionRemaining": 30,
+    "xPublicationExecuted": true
   },
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
@@ -5355,6 +5417,70 @@
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Exact approved caption, exactly 3 attachments, signed-in @dogramaci account, sent notice, public status URL, and three photo endpoints verified live.",
       "transmission": "grouped-action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 392,
+      "batches": [392, 393],
+      "postedAt": "2026-08-22T18:58:37.579Z",
+      "verifiedAt": "2026-08-22T19:00:00Z",
+      "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
+      "caption": "Maldives ❤️ Cabo Verde: stormlit lagoons, orbital couture, and a close-held island moment. #InternalAgency #RAZE",
+      "imageNumbers": [1588, 1589, 1592],
+      "countries": ["Maldives", "Cabo Verde"],
+      "assets": [
+        {"file":"1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png","sha256":"C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE"},
+        {"file":"1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png","sha256":"BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0"},
+        {"file":"1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp","sha256":"F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328"}
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, signed-in @dogramaci account, public status URL, and exactly three photo endpoints verified live.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 394,
+      "batches": [394, 395],
+      "postedAt": "2026-08-22T19:12:04.271Z",
+      "verifiedAt": "2026-08-22T19:14:00Z",
+      "postUrl": "https://x.com/dogramaci/status/2091242014331298017",
+      "caption": "Brunei ❤️ Belize: sunset waterways, rainforest couture, and a close-held spark above the Caribbean. #InternalAgency",
+      "imageNumbers": [1596, 1597, 1600],
+      "countries": ["Brunei", "Belize"],
+      "assets": [
+        {"file":"1596-brunei-kampong-ayer-sunset-raze-close-love-chatgpt-final.png","sha256":"2C3A0898808E807FF9CF44C91628D27EF8AEA6F409DBDE08CA55416E63838204"},
+        {"file":"1597-brunei-ulu-temburong-sunset-raze-close-love-chatgpt-final.png","sha256":"F7C973829B9E24D2644714DE7C7D54380D717584A6556178EE5FAA79D25B56A5"},
+        {"file":"1600-belize-city-swing-bridge-storm-raze-close-love-chatgpt-final.png","sha256":"FA1FD0F2F3618EF2B1D221DBBB2E321FFBA2A29D7A6B16C1535027C8DF581339"}
+      ],
+      "hashtagRollAudit": [
+        {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-394-395|InternalAgency|counter-1","counter":1,"acceptedByte":8,"digestSha256":"0876D2489FCD23B9C3EEF86BF20A1ED639CAF985B332B607D18E08EF4A4AF1F1","roll":8,"threshold":25,"included":true},
+        {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-394-395|WorldXXXSeries|counter-0","counter":0,"acceptedByte":73,"digestSha256":"49625E6F8093761ED51DEE4507EAC7B94DD3E1E2F2B72A14B237ACE17F7EAE7A","roll":73,"threshold":25,"included":false},
+        {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-394-395|RAZE|counter-1","counter":1,"acceptedByte":195,"digestSha256":"C3912DEA5CF321E57EE1C9E9F20FC52D3C2B049CC336DB1FD9183EB8A61416C8","roll":95,"threshold":31,"included":false}
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, signed-in @dogramaci account, public status URL, and exactly three photo endpoints verified live after X initially displayed a transient composer error.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 396,
+      "batches": [396, 397],
+      "postedAt": "2026-08-22T19:20:34.160Z",
+      "verifiedAt": "2026-08-22T19:21:00Z",
+      "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
+      "caption": "Bahamas ❤️ Iceland: stormlit cays, volcanic horizons, and a close-held spark beneath northern light. #InternalAgency #RAZE",
+      "imageNumbers": [1604, 1605, 1608],
+      "countries": ["Bahamas", "Iceland"],
+      "assets": [
+        {"file":"1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png","sha256":"F2E57C544280EBD99DDF017397E40FF9084FF3CE984474779CAD4C5F8DF7B7AD"},
+        {"file":"1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp","sha256":"DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6"},
+        {"file":"1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png","sha256":"C45E4636A5CF1E80AE98D15A32744945D696DE0C442F82B65673B276251810CE"}
+      ],
+      "hashtagRollAudit": [
+        {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-396-397|InternalAgency|counter-0","counter":0,"acceptedByte":7,"digestSha256":"07BBFB995EEE8AE0144BC71732B79BF83AE4E439834D1675D96C789CC775E1C0","roll":7,"threshold":25,"included":true},
+        {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-396-397|WorldXXXSeries|counter-1","counter":1,"acceptedByte":48,"digestSha256":"302D0A0CCDD33692AACC574733935D59A20B53A3B04C9FB4E30B6D3898148830","roll":48,"threshold":25,"included":false},
+        {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-396-397|RAZE|counter-0","counter":0,"acceptedByte":25,"digestSha256":"19DA1FDCEA7B2B48D126D2A629F49F274F9403A9E9730560D65B9E98D4595F91","roll":25,"threshold":31,"included":true}
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Exact approved caption, signed-in @dogramaci account, public status URL, and exactly three photo endpoints verified live.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-backlog-clearance"
     }
   ],
   "latestAssistedDrain": {
@@ -5679,7 +5805,7 @@
   },
   "latestGuardianWakeAudit": {
     "status": "current-x-backlog-zero-user-authorized-fifteen-bank-extension-active-counter-two",
-    "checkedAt": "2026-08-22T13:05:31.4556131Z",
+    "checkedAt": "2026-08-22T13:19:26.7622540Z",
     "account": "@dogramaci",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
