@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 397,
   "country": "Iceland",
-  "status": "bank-01-terminal-4-of-4-raw-export-parity-restored-qa-complete",
+  "status": "bank-02-terminal-4-of-4-raw-parity-restored-qa-complete",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
-  "lastWakeAuditAtUtc": "2026-08-22T03:07:56.4367510Z",
+  "lastWakeAuditAtUtc": "2026-08-22T03:35:04.9820103Z",
   "sourceCommit": "37bba06a00996897b427445dad8df472e7a95c47",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -38,7 +38,7 @@
     "palette": ["glacier blue","basalt black","geothermal turquoise","moss green","lava red","aurora violet","snow white","silver mist","midnight navy","warm geothermal gold"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"E6BDC2CF8B9113C949433A74E349EE440DD2334892DE55410C90ADEC08ECE5BF","rows":4763},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"657E86FF8A9E6C0EA605187DFA52DCDEB8FCFE3A0B1BC600651FCBE02326B5C2","rows":4772},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC"},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"}
   },
@@ -46,7 +46,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T02:01:30.879Z",
+    "verifiedAtUtc": "2026-08-22T03:35:04.9820103Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -76,7 +76,8 @@
       "planet":{"key":"starlight|planet|batch-397|scene-1608","counter":0,"acceptedByte":78,"digestSha256":"4E51B6842C5A771A13A56592E14C00DF6440717D64134C58EDB1C58D50CAF44B","bucket":3,"name":"LHS 1140 b"},
       "setting":{"key":"starlight|setting|batch-397|scene-1608","counter":0,"acceptedByte":4,"digestSha256":"04F2330155E3F0DCE21DE99DF57BDF763A3E6F05EAB421C77142D07CF9996237","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1608|knee-high-wearers","fnv1a32":4262359969,"pairIndex":1,"wearers":["Radiance","Alia"],"uncoveredLowerLegCharacters":["Ellie","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
-      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-01-primary.txt","sha256":"B18F126599FB5AE03C0561935A9145C220F3A70524322707B36FA21F0E314E7B","bytes":3361}
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-01-primary.txt","sha256":"B18F126599FB5AE03C0561935A9145C220F3A70524322707B36FA21F0E314E7B","bytes":3361},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-02-correction.txt","sha256":"D7277AB73A662A36433117B8E8F7D19A782C7EB7B64E5CC8C672E7A433931DEE","bytes":2540,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0}
     },
     "1609": {
       "scene":1609,
@@ -85,7 +86,8 @@
       "planet":{"key":"starlight|planet|batch-397|scene-1609","counter":0,"acceptedByte":55,"digestSha256":"37548C9688FB475320D07A964B3DA134A234F661B4CF1ECD02AA2328C3D50C32","bucket":0,"name":"TRAPPIST-1 e"},
       "setting":{"key":"starlight|setting|batch-397|scene-1609","counter":0,"acceptedByte":209,"digestSha256":"D18E87CAB479A95700782C41AED2651585B0C305C3EB6220DE79F841525878C7","bucket":2,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1609|knee-high-wearers","fnv1a32":2476649142,"pairIndex":0,"wearers":["Radiance","Ellie"],"uncoveredLowerLegCharacters":["Alia","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
-      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-01-primary.txt","sha256":"0806B52E63E4F50D179DD3D777E6D32C3E114D73FF05E2ED2F10A1D9361353DC","bytes":3348}
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-01-primary.txt","sha256":"0806B52E63E4F50D179DD3D777E6D32C3E114D73FF05E2ED2F10A1D9361353DC","bytes":3348},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-02-comparison.txt","sha256":"78C9080A4B641615E4B436B740EE80AF053022B3901B86086ECF93DDE75FA02D","bytes":2399,"gate":"single N+1 comparison after provisional-ready Bank 1 occurrence","activeSuppressionMatches":0}
     },
     "1610": {
       "scene":1610,
@@ -94,7 +96,8 @@
       "planet":{"key":"starlight|planet|batch-397|scene-1610","counter":0,"acceptedByte":136,"digestSha256":"8813D53D8110FAD26C47E7D5EED0A9B3CDD70ADFE30B86C0650986163B6722B3","bucket":1,"name":"Proxima Centauri b"},
       "setting":{"key":"starlight|setting|batch-397|scene-1610","counter":0,"acceptedByte":53,"digestSha256":"35BD41F50B8809272487673D8D8F34649D5159F5F832441012AE109808D6EACA","bucket":2,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1610|knee-high-wearers","fnv1a32":4203582084,"pairIndex":0,"wearers":["Radiance","Ellie"],"uncoveredLowerLegCharacters":["Alia","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
-      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-01-primary.txt","sha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","bytes":3404}
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-01-primary.txt","sha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","bytes":3404},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-02-correction.txt","sha256":"D0F5082B06A179499C39A1EDC0997A33EBE3AF147036BE0535E8644F3A44A67C","bytes":2537,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0}
     },
     "1611": {
       "scene":1611,
@@ -103,15 +106,16 @@
       "planet":{"key":"starlight|planet|batch-397|scene-1611","counter":0,"acceptedByte":10,"digestSha256":"0A6F451397DA5AE591057FA1890444C6A63080F133370112C7414E1120E1416A","bucket":0,"name":"TRAPPIST-1 e"},
       "setting":{"key":"starlight|setting|batch-397|scene-1611","counter":0,"acceptedByte":1,"digestSha256":"01CF126E0580860C4AAE03D2685BDBF5031C891EC317C40EDA82CD4502C14631","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
       "raze":{"key":"RAZE|batch-397|scene-1611|knee-high-wearers","fnv1a32":1667746703,"pairIndex":5,"wearers":["Alia","AI ECE"],"uncoveredLowerLegCharacters":["Radiance","Ellie"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
-      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-01-primary.txt","sha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","bytes":3405}
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-01-primary.txt","sha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","bytes":3405},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-02-correction.txt","sha256":"D1D97A82B8F067914938E26BD9DF68C6283BB3A4ED688F90367B944C3EE40077","bytes":2541,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0}
     }
   },
   "browserEvidence": {
     "persistentMetaTabsRequired":4,
     "persistentMetaTabsObserved":4,
     "referenceUploadOrder":[938,936,937],
-    "dispatchState":"terminal-results-preserved-raw-export-parity-restored-pending-qa",
-    "providerRequestsSent":7,
+    "dispatchState":"bank-02-terminal-results-preserved-raw-parity-restored-qa-complete",
+    "providerRequestsSent":11,
     "dispatchStartedUtc":"2026-08-22T02:01:30.879Z",
     "occurrenceLedger":"progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-meta-bank-01.jsonl",
     "lanes":[
@@ -121,6 +125,36 @@
       {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/fb3025b6-6358-4e06-b1e0-16b5b857dd74","primaryPromptSha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","fallbackPromptSha256":"A4C21EA27733AF4F3811776F035FC525E9EF3F206D25178B134FB51E473B16F7","referenceUploadOrder":[938,936,937],"state":"fallback-media-hard-unusable-raw-export-recovered","rawMediaSha256":"E4479979D958F894DC8A7A1D33C092C81C5B80E6DFD7FF7109064EE9829F3952","rawMediaBytes":539792,"dimensions":"1152x2048","rawClassification":"hard-unusable","browserPreviewSha256":"AF95788D26914DE4CCB2733C9FA848A1F65CF63213E8204A8918E1AE2452E4F8"}
     ],
     "terminalEvidence":{"primaryRefusalsNoBytes":3,"completedMediaResults":4,"providerOfferedFallbacksUsed":3,"rawExportsPreserved":4,"rawExportsRemaining":0,"delayedDownloadsPreserved":5,"duplicateDelayedDownloads":1,"browserPreviewsPreserved":4,"rawExportBlocker":null,"rawExportParity":"restored","rawQaClassified":4,"rawQaRemaining":0,"provisionalReadyScenes":[1609],"hardUnusableScenes":[1608,1610,1611],"archiveManifestOccurrences":["96f9885de8f043e1c827a567f30530a90c9ff01d195f9669ce3bd8bfdcb1e402","c29cde46248b5aa2bad1706e30c71c3e3c65d6c7b3eb562c12f47b337efe0083","5454062df54b2f43c41926a14181e5501e9a6e0559300b9fbea290e567f5e6aa","8b79339f28f5894170b5661d5ae4b61990e03e947a3a2cf6760f5f345ec9e188","7f999870b4824883c1f47317ca639ca5e6edf1c2d8b96e9c581b4644f9806f4a","2e385da67738f92f75636bf5ee37d51c3f80b62fef1860b68ae9955cce9b5926"]},
+    "bank2Dispatch": {
+      "preflightAtUtc":"2026-08-22T03:16:11.341Z",
+      "observedAtUtc":"2026-08-22T03:16:17.001Z",
+      "provider":"Meta AI",
+      "persistentTabsObserved":4,
+      "requestedImagesPerPrompt":1,
+      "referenceUploadOrder":[938,936,937],
+      "referenceSha256":["4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"],
+      "lanes":[
+        {"lane":1,"scene":1608,"providerUrl":"https://www.meta.ai/prompt/09748f75-d3d8-4f46-8ba5-50d3373d760a","promptSha256":"D7277AB73A662A36433117B8E8F7D19A782C7EB7B64E5CC8C672E7A433931DEE","gate":"correction","state":"media-provisional-ready-raw-export-preserved","rawMediaSha256":"579B927A507CCA7C769B0E052AB81C7D07379ED5D92B0B659AF607F44100F721","rawMediaBytes":721304,"dimensions":"1152x2048"},
+        {"lane":2,"scene":1609,"providerUrl":"https://www.meta.ai/prompt/2e3bd35d-6dcd-436a-bb02-8fd0fda25605","promptSha256":"78C9080A4B641615E4B436B740EE80AF053022B3901B86086ECF93DDE75FA02D","gate":"N+1 comparison","state":"explicit-refusal-no-bytes-preserved"},
+        {"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/2f578ed2-ee5f-497e-b4bf-1a2f6ef17abe","promptSha256":"D0F5082B06A179499C39A1EDC0997A33EBE3AF147036BE0535E8644F3A44A67C","gate":"correction","state":"media-provisional-ready-raw-export-preserved","rawMediaSha256":"011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083","rawMediaBytes":620370,"dimensions":"1152x2048"},
+        {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/95693ff6-971b-4015-afb9-9cf6ea0081de","promptSha256":"D1D97A82B8F067914938E26BD9DF68C6283BB3A4ED688F90367B944C3EE40077","gate":"correction","state":"media-hard-unusable-raw-export-preserved","rawMediaSha256":"BA995C3E46ECDB12B62727190AAC7CB54F572CDBD46412EC22A531B23918C6A6","rawMediaBytes":621162,"dimensions":"1152x2048"}
+      ]
+    },
+    "terminalEvidenceBank2": {
+      "completedMediaResults":3,
+      "explicitRefusalsNoBytes":1,
+      "rawExportsPreserved":3,
+      "rawExportsRemaining":0,
+      "rawParity":"restored",
+      "rawQaClassified":3,
+      "rawQaRemaining":0,
+      "provisionalReadyScenes":[1608,1610],
+      "hardUnusableScenes":[1611],
+      "refusedScenes":[1609],
+      "canonicalMediaCreated":0,
+      "bankCountIncremented":false,
+      "archiveManifestOccurrences":["116529481d0f1ff3c97182723f36f641859e4b5f872700e34d98d423dca492cd","b639bec60337c819904cf56b737eb946078618d7e6d4c7a3111ed65a770afae1","177431143123d9b885d26bb30e7127e7d03b353338e80811c053951a0e5b8e7d"]
+    },
     "rawExportRecoveryAudit": {
       "auditedAtUtc":"2026-08-22T02:27:23.3352425Z",
       "scene":1611,
@@ -144,5 +178,5 @@
       "bankCountIncremented":false
     }
   },
-  "nextAction": "Do not advance the completed-bank counter yet. Run archive and both ledger verifiers, commit and remote-verify full parity, then launch Bank 2 with one N+1 comparison for provisional-ready scene 1609 and fresh correction prompts for hard-unusable scenes 1608, 1610 and 1611."
+  "nextAction": "Run the archive collector and both ledger verifiers, then commit, push, and remote-verify Bank 2 occurrence parity. Only after remote parity may the completed-bank counter advance; scene 1609 remains closed at the N+1 refusal gate and must not dispatch N+2."
 }
