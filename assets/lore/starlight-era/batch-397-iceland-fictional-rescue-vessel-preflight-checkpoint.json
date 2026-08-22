@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 397,
   "country": "Iceland",
-  "status": "bank-03-terminal-three-eligible-lanes-selected-sources-remote-verified-final-refinement-authorized",
+  "status": "chatgpt-final-4-of-4-qa-complete-archive-parity-awaiting-remote-verification",
   "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
-  "lastWakeAuditAtUtc": "2026-08-22T03:59:12.3966701Z",
+  "lastWakeAuditAtUtc": "2026-08-22T04:35:57.5368873Z",
   "sourceCommit": "6daa89c493cfa29f404de5d7fa0597a2827c564a",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -38,7 +38,7 @@
     "palette": ["glacier blue","basalt black","geothermal turquoise","moss green","lava red","aurora violet","snow white","silver mist","midnight navy","warm geothermal gold"]
   },
   "evidenceSnapshots": {
-    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"657E86FF8A9E6C0EA605187DFA52DCDEB8FCFE3A0B1BC600651FCBE02326B5C2","rows":4772},
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"B91B51E87E1563437B6CAD45A66F0C81B7778F8F0E6981164791A922B11F3542","rows":4797},
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC"},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"}
   },
@@ -46,7 +46,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-22T03:59:12.3966701Z",
+    "verifiedAtUtc": "2026-08-22T04:35:57.5368873Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -236,5 +236,58 @@
       "bankCountIncremented":false
     }
   },
-  "nextAction": "The selected Meta sources are archived and remote verified. Run one built-in ChatGPT clothing-only final refinement on each of scenes 1608 through 1611, with at most one conditional retry per scene only for refusal, technical failure, invalid media, hard-safety failure, or anchored-face failure. Preserve all non-clothing pixels and identities, capture every output occurrence, and do not dispatch more Meta filler for these scenes."
+  "chatgptFinalization": {
+    "useCase": "identity-preserving clothing-only final edit",
+    "sourceArchiveBarrierCommit": "15f3811ef01534ed3c717670961652852b73932f",
+    "primaryCallsUsed": 4,
+    "conditionalRetriesUsed": 0,
+    "hardSafetyFailures": 0,
+    "faceAnchorFailures": 0,
+    "occurrenceLedger": {
+      "path": "progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-chatgpt-clothing-final.jsonl",
+      "rows": 8,
+      "sha256": "11DD1E20C0768253E43F3A166DA0BDD046C7CA95451E79D3960F417AA15FBCBF"
+    },
+    "archiveManifest": {
+      "path": "progress-reports/codex-generated-media/manifest.jsonl",
+      "rows": 4797,
+      "sha256": "B91B51E87E1563437B6CAD45A66F0C81B7778F8F0E6981164791A922B11F3542"
+    },
+    "finalSelections": [
+      {
+        "scene": 1608,
+        "sourceMetaSha256": "C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48",
+        "finalSha256": "C45E4636A5CF1E80AE98D15A32744945D696DE0C442F82B65673B276251810CE",
+        "canonicalPath": "assets/lore/starlight-era/1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "160c0bfe7921208c4838549025f7d1dd9bcd351f82794a430b943f22b39db0f3"
+      },
+      {
+        "scene": 1609,
+        "sourceMetaSha256": "A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7",
+        "finalSha256": "D9293F8F64BBED531B303D6AC8BDD3FEB465CF75C852754A8F8844614807288B",
+        "canonicalPath": "assets/lore/starlight-era/1609-iceland-thingvellir-sunrise-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "c31d26678312e5904ab9777ceeead4bda6cd6c62c2dceff7d4e51e629fed50ab"
+      },
+      {
+        "scene": 1610,
+        "sourceMetaSha256": "011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083",
+        "finalSha256": "8091970F0E4EB14320A016EBD2F224DC8D9E0A0D17234FCDC1390D0FD490BA87",
+        "canonicalPath": "assets/lore/starlight-era/1610-iceland-jokulsarlon-sunset-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "21c76d260ecc2eae15ea086b7100643c9a5360c4860b470e869279eacc6fdbb9"
+      },
+      {
+        "scene": 1611,
+        "sourceMetaSha256": "48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45",
+        "finalSha256": "138243E98873562C6558C749DE28767849B287CFD3A7AFBC905216E17AFB46C9",
+        "canonicalPath": "assets/lore/starlight-era/1611-iceland-reynisfjara-sunrise-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "ace20b9877f9cfd8701fae3493d9ed2458cae3a60d01bf1a4b2a261860410e46"
+      }
+    ],
+    "acceptanceState": "canonical-final-awaiting-remote-verification"
+  },
+  "nextAction": "Commit and push the four accepted ChatGPT clothing-only finals and their exact prompts, output occurrences, archive blobs, manifest rows, and checkpoint. Then verify branch head, draft PR 13 head, Git LFS dry-run, both ledger verifiers, archive parity, and a clean worktree before closing Iceland 4 of 4. Do not dispatch more Meta filler for these resolved scenes."
 }
