@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "fifth-ten-bank-render-run-bank-51-hard-unusable-evidence-pending-scene-1614-unresolved",
+  "status": "fifth-ten-bank-render-run-bank-51-remote-verified-scene-1614-unresolved",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T02:08:29.5329285Z",
+  "lastWakeAuditAtUtc": "2026-08-23T02:19:35.8073451Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -39,7 +39,7 @@
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"39BCDF8E6E5967D53255F17C76CCF8D1B3C5AC316F707CD5236214DEBDA5F9EB","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":4,"completedBanksInCurrentRenderRun":8,"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompleted":22,"cumulativeMetaBanksRemaining":148,"mode":"render-first-user-authorized-one-hundred-seventy-bank-allowance"},
-    "remoteParity": {"previousVerifiedHead":"4f6d0d796d8f983f946eba86463feec28abc5671","firstEvidenceCommit":"ca48f40d1149b4ad8c9462522da88b624107f09d","evidenceCommit":"ca48f40d1149b4ad8c9462522da88b624107f09d","trackedSourceCommit":"9392b37c15d64ec400f41b16549bcbcbd32ebe50","priorCompletedRenderRunCounterParityCommit":"f68608de4f8dba9b85a3764bf02724871d978c41","localHead":"9392b37c15d64ec400f41b16549bcbcbd32ebe50","remoteBranchHead":"9392b37c15d64ec400f41b16549bcbcbd32ebe50","draftPr13Head":"9392b37c15d64ec400f41b16549bcbcbd32ebe50","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtTrackedSourceParityCommit":true,"scope":"Vanuatu fifth render run Bank 50, eleven captured Meta occurrences totaling 6,623,660 observed bytes with ten unique SHA-256 contents totaling 5,957,736 bytes, exact prompt and response envelopes, eleven initial archive rows, ten LFS blobs, eleven tracked-source archive rows, per-occurrence hard-unusable classifications, both ledger verifiers, archive dry-run zero, and render-run progress at seven of ten banks","verifiedAtUtc":"2026-08-23T01:51:41.7623764Z","pending":null}
+    "remoteParity": {"previousVerifiedHead":"ef89a823c45cba47d5ac4df96c94112ffb73c2a6","dispatchEvidenceCommit":"ef89a823c45cba47d5ac4df96c94112ffb73c2a6","firstEvidenceCommit":"2b80af6b8a5490775ec15289eb52a47874fb0a47","evidenceCommit":"2b80af6b8a5490775ec15289eb52a47874fb0a47","trackedSourceCommit":"aa37f4809ad0fdf31799633b1aa11c22e819cc76","localHead":"aa37f4809ad0fdf31799633b1aa11c22e819cc76","remoteBranchHead":"aa37f4809ad0fdf31799633b1aa11c22e819cc76","draftPr13Head":"aa37f4809ad0fdf31799633b1aa11c22e819cc76","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtTrackedSourceParityCommit":true,"scope":"Vanuatu fifth render run Bank 51, two captured Meta occurrences totaling 1,074,436 observed bytes with one unique SHA-256 content totaling 537,218 bytes, exact prompt and response envelopes, two initial archive rows, one LFS blob, two tracked-source archive rows, per-occurrence hard-unusable classifications, both ledger verifiers, archive dry-run zero, and render-run progress at eight of ten banks","verifiedAtUtc":"2026-08-23T02:19:35.8073451Z","pending":null}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
@@ -2071,7 +2071,7 @@
     "renderRunBankOrdinal": 8,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "terminal-hard-unusable-evidence-pending",
+    "dispatchState": "terminal-hard-unusable-remote-verified",
     "dispatchedAtUtc": "2026-08-23T02:01:22.568Z",
     "dispatchObservedAtUtc": "2026-08-23T02:01:28.196Z",
     "providerUrl": "https://www.meta.ai/prompt/044c655a-1c63-41f4-9b87-14dcfa3a829b",
@@ -2151,11 +2151,21 @@
       "projectFailedPromptPromptRecords": 1567,
       "projectFailedPromptVerifierErrors": 0,
       "archiveDryRunNewRows": 0,
-      "archiveDryRunNewBlobs": 0
+      "archiveDryRunNewBlobs": 0,
+      "evidenceCommit": "2b80af6b8a5490775ec15289eb52a47874fb0a47",
+      "trackedSourceCommit": "aa37f4809ad0fdf31799633b1aa11c22e819cc76",
+      "localHead": "aa37f4809ad0fdf31799633b1aa11c22e819cc76",
+      "remoteBranchHead": "aa37f4809ad0fdf31799633b1aa11c22e819cc76",
+      "draftPr13Head": "aa37f4809ad0fdf31799633b1aa11c22e819cc76",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T02:19:35.8073451Z"
     },
-    "disposition": "Select and publish neither occurrence; scene 1614 remains unresolved; Bank 51 becomes completed ordinal 8 only after archive, ledger, Git, LFS, remote SHA, and draft PR 13 parity.",
-    "pending": "Commit and remote-verify initial evidence, record tracked-source archive rows, then pass Git, LFS, remote SHA, draft PR 13 head, and clean-worktree parity before Bank 52 dispatch."
+    "disposition": "Select and publish neither occurrence; scene 1614 remains unresolved; Bank 51 is remote-verified and counts as fifth-render-run bank ordinal 8.",
+    "pending": null
   },
   "authoritativeBlocker": null,
-  "nextAction": "Seal Vanuatu Bank 51 archive and remote parity, then prepare Bank 52 ordinal 9 of 10 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Prepare and dispatch evidence-authorized Vanuatu Bank 52, fifth-render-run ordinal 9 of 10, only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
