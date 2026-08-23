@@ -266,22 +266,22 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-bank-62-in-flight-backlog-zero-counter-five-retained",
+    "mode": "render-first-bank-62-closed-hard-unusable-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 8,
+    "completedBanksInCurrentRenderRun": 9,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "Five evidence-gated render runs are complete. The X window is open, but no eligible unpublished two-country three-asset campaign item exists because Batch 398 remains unresolved. Retain the counter at five while Bank 62 targets the only unresolved scene 1614.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-bank-62-in-flight",
+    "counterRule": "Five evidence-gated render runs are complete. The X window is open, but no eligible unpublished two-country three-asset campaign item exists because Batch 398 remains unresolved. Retain the counter at five after Bank 62 closed hard-unusable and while Bank 63 targets the only unresolved scene 1614.",
+    "currentPublicationWindowStatus": "open-no-eligible-post-bank-62-closed-scene-1614-unresolved",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
-    "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61],
-    "latestCompletedCountryBankAtUtc": "2026-08-23T06:21:18.2227103Z",
-    "nextRenderRunBankOrdinal": 9,
-    "nextCountryBank": 62
+    "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62],
+    "latestCompletedCountryBankAtUtc": "2026-08-23T06:46:57.3245114Z",
+    "nextRenderRunBankOrdinal": 10,
+    "nextCountryBank": 63
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -289,8 +289,8 @@
     "operationalInterpretation": "Add thirty Meta banks after the existing cumulative one-hundred-forty-bank allowance for a cumulative one-hundred-seventy-bank Meta rendering allowance, while preserving the evidence-gated one-request-per-eligible-lane pipeline.",
     "newlyAddedMetaBanks": 30,
     "additionalMetaBanksAuthorized": 170,
-    "additionalMetaBanksCompleted": 32,
-    "additionalMetaBanksRemaining": 138,
+    "additionalMetaBanksCompleted": 33,
+    "additionalMetaBanksRemaining": 137,
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
