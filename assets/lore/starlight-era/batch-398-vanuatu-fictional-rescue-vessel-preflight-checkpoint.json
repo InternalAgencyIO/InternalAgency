@@ -5221,7 +5221,7 @@
       "previousRemoteVerifiedHead": "ef304548e6476a8af9bd0e7861388551643aec97",
       "dispatchEvidenceCommit": "c5e10d4fa31896a1209c77e580d6ccf18ebb8a31",
       "providerCompletionCaptured": true,
-      "initialEvidenceCommit": null,
+      "initialEvidenceCommit": "14ac80808554641404850a81f3beb9f0b0714ed2",
       "trackedSourceArchiveCommit": null,
       "remoteParityCheckpointCommit": null,
       "archiveInitialNewRows": 1,
@@ -5229,9 +5229,11 @@
       "archiveInitialNewBlobBytes": 510274,
       "archiveManifestRowsAfterInitialImport": 6007,
       "archiveManifestSha256AfterInitialImport": "EE10A5D924248C3D84922F160F40505807D75233685B2642B4F46EAFA2D21A10",
-      "archiveTrackedSourceNewRows": null,
-      "archiveTrackedSourceNewBlobs": null,
-      "archiveTrackedSourceNewBlobBytes": null,
+      "archiveTrackedSourceNewRows": 1,
+      "archiveTrackedSourceNewBlobs": 0,
+      "archiveTrackedSourceNewBlobBytes": 0,
+      "archiveManifestRowsAfterTrackedSourceImport": 6008,
+      "archiveManifestSha256AfterTrackedSourceImport": "30318BF0E94B67B15ED3F2D4BA12029794491764BF1BF60827C7512919E855E6",
       "rejectedPromptLedgerVerifierEntries": 139,
       "rejectedPromptLedgerVerifierErrors": 0,
       "projectFailedPromptLedgerRuntimeFailures": 987,
@@ -5240,7 +5242,7 @@
       "archiveDryRunNewRows": 0,
       "archiveDryRunNewBlobs": 0,
       "lfsPendingObjects": 0,
-      "pending": "commit and push initial evidence, run the post-commit tracked-source archive pass, then verify remote branch, draft PR 13, LFS, archive, ledgers, and clean-worktree parity"
+      "pending": "commit and push the tracked-source archive row, then verify remote branch, draft PR 13, LFS, archive, ledgers, and clean-worktree parity"
     },
     "disposition": "Select and publish none; Bank 75 closes hard-unusable after one preserved terminal-gallery occurrence; scene 1614 remains unresolved; Bank 76 becomes eighth-render-run ordinal 3 only after full evidence parity."
   },
