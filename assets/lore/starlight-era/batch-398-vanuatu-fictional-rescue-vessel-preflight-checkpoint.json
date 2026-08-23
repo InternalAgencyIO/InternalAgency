@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-73-text-only-in-flight-upload-blocker-recorded-scene-1614-only",
+  "status": "bank-73-closed-hard-unusable-evidence-parity-pending-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T11:33:32.875Z",
+  "lastWakeAuditAtUtc": "2026-08-23T11:43:24.5640019Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -61,8 +61,8 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 9,
-    "inFlightRenderRunBank": 10,
+    "completedBanksInCurrentRenderRun": 0,
+    "inFlightRenderRunBank": null,
     "nextRenderRunBankAfterInFlight": 1,
     "countryBank": 73,
     "nextCountryBank": 74,
@@ -4813,7 +4813,7 @@
     "renderRunBankOrdinal": 10,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "text-only-in-flight-after-evidenced-browser-reference-upload-failure",
+    "dispatchState": "terminal-hard-unusable-evidence-parity-pending-after-text-only-result",
     "dispatchedAtUtc": "2026-08-23T11:33:16.688Z",
     "providerUrl": "https://www.meta.ai/prompt/f6541617-0b6a-4a76-90f3-20983f045466",
     "initialReferencePromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-73-render-run-07-correction.txt",
@@ -4867,7 +4867,7 @@
       "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
     },
     "completedBanksInCurrentRenderRunBeforeDispatch": 9,
-    "completedBanksInCurrentRenderRun": 9,
+    "completedBanksInCurrentRenderRun": 0,
     "completedRenderRunsSinceLastX": 5,
     "initialProviderAudit": {
       "checkedAtUtc": "2026-08-23T11:33:32.875Z",
@@ -4875,16 +4875,78 @@
       "generatedMediaOccurrenceCount": 0,
       "generatedMediaBytesObserved": 0
     },
-    "minimumOccurrenceEnvelope": "exact initial and text-only prompt hashes, every exact upload failure with UTC and intended reference hash, zero actual submitted references, exact historical mapping, face-verification and dispatch UTCs, provider URL, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
+    "terminalOccurrence": {
+      "terminalObservedAtUtc": "2026-08-23T11:37:32.711Z",
+      "capturedAtUtc": "2026-08-23T11:38:00.393Z",
+      "providerState": "terminal-gallery",
+      "label": "gallery/terrace_fashion_group.webp",
+      "rawPath": "outputs/meta5_batch_staging/batch-398/bank-73/lane-3/scene-1614-meta-bank-73-occurrence-output-01.webp",
+      "rawBytes": 329072,
+      "rawSha256": "C89BB1B55D97359C227EC3BE0503EE79F0ECE1C11E947113E7211B2B08EEFEF8",
+      "dimensions": "1152x2048 RGB",
+      "providerResponsePath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-73-provider-response.txt",
+      "providerResponseBytes": 717,
+      "providerResponseSha256": "4C485C51E57478D4DEEC998E9643706FDCD597C64B2430676743566DFA6E623D",
+      "exactProviderDomResponseBytes": 716,
+      "exactProviderDomResponseSha256": "0BDDF619C77E306981C64A677045B4544FFDC8F8E5DEF46B5A2B84E1BF5F8F96",
+      "capturedOccurrenceCount": 1,
+      "uniqueOutputSha256Count": 1,
+      "duplicateRelationships": "single terminal-gallery occurrence; no inline occurrence preceded it"
+    },
+    "visualQa": {
+      "classifiedAtUtc": "2026-08-23T11:43:24.5640019Z",
+      "classification": "hard-unusable",
+      "historicalQuartetFaceGatePassed": false,
+      "correctNameToFaceOwnership": false,
+      "completeReadableLegCount": 8,
+      "whitePumpCount": 8,
+      "rainbowSockCount": 4,
+      "razeWordCount": 2,
+      "splitStarCount": 2,
+      "kittenCount": 1,
+      "timingLightCount": 1,
+      "markerCount": 1,
+      "dryStableFooting": true,
+      "hardFailures": [
+        "historical quartet face and name-to-face ownership gate fails, most clearly because Ellie is not the anchored scene-938 Ellie identity",
+        "sock fronts read Split-Star, RAZE, Split-Star, RAZE instead of RAZE, Split-Star, Split-Star, RAZE",
+        "AI ECE touches Alia instead of Ellie's right shoulder",
+        "the capsule is near the floor instead of kneecap height and lacks the mandated long clear vertical gap to the floor target",
+        "secure centered inverted-V two-panel divided wrap-skort construction is not established on all four outfits"
+      ]
+    },
+    "renderRunCompletion": {
+      "seventhRenderRunCompleted": true,
+      "countryBanks": "64 through 73",
+      "completedBanks": 10,
+      "completedRenderRunsSinceLastX": 5,
+      "counterRetainedAtFivePendingEligibleConfirmedXPublication": true,
+      "nextCountryBank": 74,
+      "nextRenderRunOrdinal": 1
+    },
+    "minimumOccurrenceEnvelope": "exact initial and text-only prompt hashes, every exact upload failure with UTC and intended reference hash, zero actual submitted references, exact historical mapping, face-verification, dispatch, terminal and capture UTCs, provider URL, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, exact terminal response hashes, one raw terminal occurrence with source URL, bytes, SHA-256, dimensions and uniqueness relationship, and visual classification",
     "evidenceGate": {
       "previousRemoteVerifiedHead": "d8ab1f1fc4d4f77c880647e967ee88054d0f71f4",
       "uploadFailuresCaptured": true,
-      "providerCompletionCaptured": false,
-      "dispatchEvidenceCommit": null,
-      "pending": "dispatch evidence commit, exact push, provider completion, occurrence capture and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "providerCompletionCaptured": true,
+      "dispatchEvidenceCommit": "6243b2b18aab0ec102777a28c4eeb07de09ae389",
+      "initialEvidenceCommit": null,
+      "trackedSourceArchiveCommit": null,
+      "remoteParityCheckpointCommit": null,
+      "archiveInitialNewRows": 1,
+      "archiveInitialNewBlobs": 1,
+      "archiveInitialNewBlobBytes": 329072,
+      "archiveManifestRowsAfterInitialImport": 6003,
+      "archiveManifestSha256AfterInitialImport": "1E21E2CBE3D67184B916AB891F1EBF9D425D7169874C2D5D914AF7B7D51FC661",
+      "rejectedPromptLedgerVerifierEntries": 139,
+      "rejectedPromptLedgerVerifierErrors": 0,
+      "projectFailedPromptLedgerRuntimeFailures": 987,
+      "projectFailedPromptLedgerPromptRecords": 1567,
+      "projectFailedPromptLedgerVerifierErrors": 0,
+      "pending": "archive import, both ledger verifiers, initial evidence commit and exact push, tracked-source archive row, Git, LFS, remote branch and draft PR 13 parity"
     },
-    "disposition": "Bank 73 is seventh-render-run ordinal 10 and is now rendering only unresolved scene 1614 through the contract-authorized text-only flow after the exact browser upload blocker was preserved; no filler and no second dispatch.",
-    "pending": "provider completion and immediate occurrence capture"
+    "disposition": "Select and publish none; Bank 73 text-only terminal occurrence is hard-unusable; scene 1614 remains unresolved; Bank 73 completes seventh-render-run ordinal 10 and Bank 74 becomes eighth-render-run ordinal 1 only after full evidence parity.",
+    "pending": "archive, ledger, Git, LFS, remote branch and draft PR 13 parity"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4912,5 +4974,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Preserve every Bank 73 text-only Meta occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Complete Bank 73 archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity, then dispatch Vanuatu Bank 74 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
