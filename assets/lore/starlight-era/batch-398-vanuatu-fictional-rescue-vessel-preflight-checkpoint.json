@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-67-in-flight-provider-processing-scene-1614-only",
+  "status": "bank-67-in-flight-first-occurrence-preserved-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T08:43:01.038Z",
+  "lastWakeAuditAtUtc": "2026-08-23T08:46:14.416Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3873,21 +3873,55 @@
     "completedRenderRunsSinceLastX": 5,
     "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, exactly three ordered submitted reference hashes, face-manifest verification before every upload and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
     "latestProviderAudit": {
-      "checkedAtUtc": "2026-08-23T08:43:01.038Z",
+      "checkedAtUtc": "2026-08-23T08:46:14.416Z",
       "providerState": "thinking-in-flight",
-      "generatedMediaOccurrenceCount": 0,
-      "generatedMediaBytesCaptured": 0,
-      "exactVisibleProgressText": "Finalizing the sock graphic\n\nI'm repainting the third sock's upper band to remove the leftover text, then drawing a clean star so the sequence reads RAZE, STAR, STAR, RAZE.",
+      "generatedMediaOccurrenceCount": 1,
+      "generatedMediaBytesCaptured": 384388,
+      "generatedMediaSha256InOccurrenceOrder": ["0C44469669515B61CFA73EE9B5CCE5B10D23571F1DDB11167627337D254F52C8"],
+      "generatedMediaDimensions": ["1152x2048 RGB"],
+      "providerResponsePath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-67-provider-response-progress-01.txt",
+      "providerResponseBytes": 1286,
+      "providerResponseSha256": "5B3C45F43C52D417D81ADE50F6C108E1EAA61C2A0A3E8CC2EFD1B068CE03A745",
+      "exactProviderDomResponseBytes": 1285,
+      "exactProviderDomResponseSha256": "B96D70B1981A1C5AC7210ECB3B41DB52948616997C1C0180CC3503572575B217",
+      "rawOccurrencePath": "outputs/meta5_batch_staging/batch-398/bank-67/lane-3/scene-1614-meta-bank-67-occurrence-output-01.webp",
+      "providerOccurrenceLedgerPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-67.jsonl",
+      "providerOccurrenceLedgerSha256": "1ACBD8DED53A4F3E5F5190C69978EF0602AA725910263BE883CAF9F370751A3C",
+      "providerOccurrenceQaPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-67-qa.jsonl",
+      "providerOccurrenceQaSha256": "9B689C140DEAD1D81DF9A540A2E98215ED0DF892E20AEE234E4D7C120C042A3D",
+      "occurrenceOneClassifiedAtUtc": "2026-08-23T08:47:45.674Z",
+      "occurrenceOneClassification": "hard-unusable",
+      "occurrenceOneHardFailures": [
+        "historical quartet face identities are not preserved closely enough",
+        "Alia touches Ellie's shoulder while AI ECE does not make the required contact",
+        "sock graphics are stacked and misassigned",
+        "beacon is vertical with an insufficient marker gap",
+        "Alia forehead placement, Radiance kitten-arm ownership, and seated-Ellie divided-mini-skort construction fail"
+      ],
       "fourPersistentMetaTabsVerified": true,
       "eligibleSceneLaneActive": true,
       "stoppedScenesUntouched": [1612, 1613, 1615],
-      "classificationDeferred": "No terminal media or explicit no-bytes result exists yet; occurrence preservation and visual inspection remain correctly blocked."
+      "classificationDeferred": "The first in-progress gallery occurrence is byte-preserved before visual inspection; provider terminal state and every additional occurrence remain pending."
     },
     "evidenceGate": {
       "previousRemoteVerifiedHead": "f5da89764e2bfc79ff08c7cfeba049d5c66752dd",
-      "dispatchEvidenceCommit": null,
+      "dispatchEvidenceCommit": "075c3244ea6dbdac8efaf42faecda473c2f74ef2",
+      "providerBlockerCheckpointCommit": "c7da9669342bc6e749f334dea766e9ba4dca7d45",
+      "inProgressOccurrencePreserved": true,
+      "initialArchiveNewRows": 1,
+      "initialArchiveNewBlobs": 1,
+      "initialArchiveNewBlobBytes": 384388,
+      "generatedMediaManifestRows": 5983,
+      "generatedMediaManifestSha256": "B964253E8F1B37B7FF38EB80BEC3FA5ECF19857EE3897BA2A70B04B4A046C7DB",
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "rejectedPromptLedgerVerifierEntries": 139,
+      "rejectedPromptLedgerVerifierErrors": 0,
+      "projectFailedPromptRuntimeFailures": 987,
+      "projectFailedPromptPromptRecords": 1567,
+      "projectFailedPromptVerifierErrors": 0,
       "providerCompletionCaptured": false,
-      "pending": "provider completion, immediate occurrence preservation and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "pending": "provider terminal completion and every additional occurrence, then visual classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
     },
     "disposition": "Bank 67 is rendering only unresolved scene 1614; do not select, publish, or advance until every occurrence and evidence gate is complete.",
     "pending": "provider completion and occurrence capture"
@@ -3918,10 +3952,10 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": {
-    "recordedAtUtc": "2026-08-23T08:43:01.038Z",
+    "recordedAtUtc": "2026-08-23T08:46:14.416Z",
     "type": "provider-render-in-flight",
     "scope": "Vanuatu Batch 398 Bank 67 scene 1614 lane 3",
-    "evidence": "Meta remains in Thinking state and reports that it is finalizing the sock graphic; zero generated-media occurrences are present after repeated audits through 2026-08-23T08:43:01.038Z.",
+    "evidence": "Meta remains in Thinking state after emitting one 384,388-byte 1152x2048 RGB gallery occurrence at 2026-08-23T08:46:14.416Z; its raw bytes, SHA-256, source URL, exact in-progress response text and minimum occurrence envelope are preserved before visual inspection.",
     "safeLocalActionsCompleted": [
       "fetched and remote-verified authoritative branch",
       "verified local, remote, draft PR 13, Git and LFS parity",
@@ -3930,12 +3964,14 @@
       "reclaimed exactly four persistent signed-in Meta tabs",
       "reopened the authoritative Bank 67 provider URL",
       "performed repeated nonvisual occurrence audits",
-      "confirmed zero result bytes and preserved exact live provider progress text",
+      "preserved the first in-progress gallery occurrence before visual inspection with SHA-256 0C44469669515B61CFA73EE9B5CCE5B10D23571F1DDB11167627337D254F52C8",
+      "preserved the exact in-progress provider response text and provider-occurrence ledger row",
+      "archived the preserved occurrence as one new manifest row and one new content-addressed blob totaling 384,388 bytes",
       "archive dry-run verified zero new rows and zero new blobs across 4,721 occurrences",
       "rejected-prompt ledger verified 139 entries with zero errors and project failed-prompt ledger verified 987 runtime failures plus 1,567 prompt records with zero errors",
       "kept the sole eligible scene lane actively rendering and left all stopped lanes untouched"
     ],
-    "dispatchSuppressed": "Do not dispatch Bank 68 concurrently; preserve the first Bank 67 terminal occurrence or explicit no-bytes state before any retry."
+    "dispatchSuppressed": "Do not dispatch Bank 68 concurrently; wait for Bank 67 terminal state and preserve every additional occurrence before classification or retry."
   },
   "nextAction": "Preserve every Bank 67 occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
 }
