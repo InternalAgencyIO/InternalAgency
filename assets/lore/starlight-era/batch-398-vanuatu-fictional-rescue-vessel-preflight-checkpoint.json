@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-62-closed-hard-unusable-scene-1614-unresolved-evidence-pending",
+  "status": "bank-62-closed-hard-unusable-scene-1614-unresolved-tracked-source-archive-pending-commit",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
   "lastWakeAuditAtUtc": "2026-08-23T06:46:57.3245114Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
@@ -3311,13 +3311,18 @@
       "projectFailedPromptPromptRecords": 1567,
       "projectFailedPromptVerifierErrors": 0,
       "xLedgerSha256": "4E4E03D4C512F5265CE296763F125DD77CF33F92D1729C990EEB9C1A8BABEE4D",
-      "initialEvidenceCommit": null,
+      "initialEvidenceCommit": "5b2760140a737dc94153a029fe1454945862f6ae",
+      "trackedSourceArchiveRows": 12,
+      "trackedSourceArchiveBlobs": 0,
+      "trackedSourceManifestRows": 5944,
+      "trackedSourceManifestSha256": "540F0DF05D243AD8069653E9B582AED1FBC1ABBD66B8C9296F7185F4D83F3FD7",
+      "trackedSourceArchiveCommit": null,
       "archiveDryRunNewRows": 0,
       "archiveDryRunNewBlobs": 0,
-      "pending": "initial evidence commit, tracked-source archive pass, Git/LFS/remote/PR parity, and final checkpoint"
+      "pending": "tracked-source archive commit, Git/LFS/remote/PR parity, and final checkpoint"
     },
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 62 counts as sixth-render-run ordinal 9 after full parity, and Bank 63 is next ordinal 10.",
-    "pending": "initial evidence commit and full remote parity"
+    "pending": "tracked-source archive commit and full remote parity"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -3345,5 +3350,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Complete Bank 62 archive and remote parity, then dispatch Bank 63 only for scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and remote-verify Bank 62 tracked-source archive parity, then dispatch Bank 63 only for scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
