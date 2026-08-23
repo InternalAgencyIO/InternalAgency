@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-75-closed-hard-unusable-evidence-parity-pending-bank-76-blocked-scene-1614-only",
+  "status": "bank-75-closed-hard-unusable-all-evidence-gates-pass-remote-parity-checkpoint-pending-bank-76-blocked-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T12:34:20.1624554Z",
+  "lastWakeAuditAtUtc": "2026-08-23T12:46:33.0974631Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -5222,7 +5222,7 @@
       "dispatchEvidenceCommit": "c5e10d4fa31896a1209c77e580d6ccf18ebb8a31",
       "providerCompletionCaptured": true,
       "initialEvidenceCommit": "14ac80808554641404850a81f3beb9f0b0714ed2",
-      "trackedSourceArchiveCommit": null,
+      "trackedSourceArchiveCommit": "07625968ce64119e675fc001320e919bc0edfe5a",
       "remoteParityCheckpointCommit": null,
       "archiveInitialNewRows": 1,
       "archiveInitialNewBlobs": 1,
@@ -5242,7 +5242,14 @@
       "archiveDryRunNewRows": 0,
       "archiveDryRunNewBlobs": 0,
       "lfsPendingObjects": 0,
-      "pending": "commit and push the tracked-source archive row, then verify remote branch, draft PR 13, LFS, archive, ledgers, and clean-worktree parity"
+      "bank75LfsObjectPresent": true,
+      "remoteBranchHeadBeforeParityCheckpoint": "07625968ce64119e675fc001320e919bc0edfe5a",
+      "draftPr13HeadBeforeParityCheckpoint": "07625968ce64119e675fc001320e919bc0edfe5a",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "worktreeCleanBeforeParityCheckpoint": true,
+      "verifiedAtUtc": "2026-08-23T12:46:33.0974631Z",
+      "pending": "commit and exact-push the Bank 75 remote-parity checkpoint, verify branch and draft PR 13 head equality, then mark Bank 76 ready"
     },
     "disposition": "Select and publish none; Bank 75 closes hard-unusable after one preserved terminal-gallery occurrence; scene 1614 remains unresolved; Bank 76 becomes eighth-render-run ordinal 3 only after full evidence parity."
   },
