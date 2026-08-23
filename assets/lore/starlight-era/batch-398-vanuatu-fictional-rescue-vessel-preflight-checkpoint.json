@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "fifth-render-run-complete-bank-53-remote-verified-counter-five-retained-no-x-post-eligible",
+  "status": "bank-54-dispatched-meta-pending-counter-five-retained",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T03:15:59.9388998Z",
+  "lastWakeAuditAtUtc": "2026-08-23T03:30:26.015Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -2358,6 +2358,54 @@
     "dispatchEvidenceCommit": "866bc183934f7b19acf6a041ba048c6424952b6d",
     "pending": null
   },
+  "bank54Dispatch": {
+    "countryBank": 54,
+    "renderRunBankOrdinal": 1,
+    "scene": 1614,
+    "lane": 3,
+    "dispatchState": "meta-in-flight",
+    "dispatchedAtUtc": "2026-08-23T03:30:26.015Z",
+    "providerUrl": "https://www.meta.ai/prompt/8868e74e-a14c-4b67-a239-ff656ae4ac9e",
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-54-render-run-06-correction.txt",
+    "promptFileBytes": 7696,
+    "promptFileSha256": "78464275523FFF38CD6367C3A1A65DBC67FE5FF2E5516D1E201AC0EEB945CEFE",
+    "exactDispatchedPromptBytes": 7695,
+    "exactDispatchedPromptSha256": "FA4B065F480FDA2675A51513D6863C0563253ADAE955AA32E29CA5606D9D8B64",
+    "exactDispatchedPromptRule": "prompt file minus its single terminal LF byte",
+    "fallbackPromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-54-render-run-06-fallback.txt",
+    "fallbackPromptBytes": 4116,
+    "fallbackPromptSha256": "EDDE3BA622C36D038B7574635321943D578AAC02B0A574BD3A37CB3B98180DBE",
+    "activeSuppressionMatchesPrimary": 0,
+    "activeSuppressionMatchesFallback": 0,
+    "privacySafeFictionalCharacterRequest": true,
+    "orderedReferenceUploadScenes": [938, 936, 937],
+    "orderedReferenceSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedImmediatelyBeforeUploadAndDispatch": true,
+    "persistentMetaTabs": 4,
+    "eligibleScenes": [1614],
+    "stoppedScenesUntouched": [1612, 1613, 1615],
+    "requestedImageCount": 1,
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
+    },
+    "completedBanksInCurrentRenderRunBeforeDispatch": 0,
+    "completedRenderRunsSinceLastX": 5,
+    "minimumOccurrenceEnvelope": "exact primary and fallback prompt file bytes and hashes, exact dispatched-prompt normalization, dispatch UTC, provider URL, ordered reference hashes, face-manifest hash and verification timing, deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and pending terminal response/media occurrence evidence",
+    "evidenceGate": {
+      "previousRemoteVerifiedHead": "56eb0f2cace91ab30e0b7f3ee602dddab0f36cd1",
+      "dispatchEvidenceCommit": null,
+      "terminalOccurrenceEvidenceCommit": null,
+      "pending": "Meta terminal response and every media or explicit no-byte occurrence must be captured and classified before Bank 54 can close."
+    },
+    "pending": "Meta terminal response and every media or explicit no-byte occurrence must be captured and classified before Bank 54 can close."
+  },
   "authoritativeBlocker": null,
-  "nextAction": "After final X-cadence checkpoint parity, prepare and dispatch Vanuatu Bank 54, sixth-render-run ordinal 1, only for unresolved scene 1614; retain completedRenderRunsSinceLastX at five until an eligible confirmed X publication exists, and never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Capture and classify every terminal Bank 54 occurrence for sole unresolved scene 1614, preserve raw bytes or explicit no-byte evidence before visual inspection, and retain completedRenderRunsSinceLastX at five while Vanuatu remains unresolved."
 }
