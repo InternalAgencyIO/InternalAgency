@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-68-terminal-hard-unusable-local-archive-parity-prepared-scene-1614-only",
+  "status": "bank-68-terminal-hard-unusable-remote-verified-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
   "lastWakeAuditAtUtc": "2026-08-23T09:18:16.1351748Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
@@ -3954,7 +3954,7 @@
     "renderRunBankOrdinal": 5,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "closed-terminal-hard-unusable-four-unique-occurrences-local-archive-parity-prepared",
+    "dispatchState": "closed-terminal-hard-unusable-four-unique-occurrences-remote-verified",
     "dispatchedAtUtc": "2026-08-23T09:02:32.609Z",
     "providerUrl": "https://www.meta.ai/prompt/ba69493d-46c6-45dd-a269-d8c77a618db5",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-68-render-run-07-correction.txt",
@@ -3991,7 +3991,7 @@
       "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
     },
     "completedBanksInCurrentRenderRunBeforeDispatch": 4,
-    "completedBanksInCurrentRenderRun": 4,
+    "completedBanksInCurrentRenderRun": 5,
     "completedRenderRunsSinceLastX": 5,
     "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, exactly three ordered submitted reference hashes, face-manifest verification before preflight, prompt, every upload, and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
     "latestProviderAudit": {
@@ -4073,10 +4073,25 @@
       "trackedSourceGeneratedMediaManifestSha256": "1B4B270457770C9BE5E2F0D3B75C0A926D48D617A26C9B2FF4BAA38AA08F0232",
       "trackedSourceArchivePreparedAtUtc": "2026-08-23T09:24:04.5638510Z",
       "preTrackedSourceCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:25:04.6687016Z",
-      "pending": "tracked-source archive parity commit, exact Git LFS push, remote branch and draft PR 13 parity"
+      "trackedSourceArchiveCommit": "31c2af37ca5cb5cb284cc7c84255ccbca231c51a",
+      "prePushFaceAnchorsVerifiedAtUtc": "2026-08-23T09:25:27.9476257Z",
+      "remoteBranchHead": "31c2af37ca5cb5cb284cc7c84255ccbca231c51a",
+      "draftPr13Head": "31c2af37ca5cb5cb284cc7c84255ccbca231c51a",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+      "currentBankLfsObjectCount": 4,
+      "currentBankLfsObjectsRemoteFetchedAndShaVerified": true,
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T09:26:23.5047687Z",
+      "remoteParityCheckpointPreCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:27:05.6385252Z",
+      "legacyLfsFsckNote": "Repository-wide git lfs fsck reports pre-existing missing historical worktree objects outside Bank 68; the four Bank 68 LFS objects were explicitly fetched from the remote branch and SHA-256 verified, with zero pending current-branch LFS objects.",
+      "remoteParityState": "remote-verified",
+      "pending": null
     },
-    "disposition": "Select and publish none; Bank 68 has four preserved hard-unusable occurrences and will count as seventh-render-run ordinal 5 only after remote evidence parity; scene 1614 remains unresolved and Bank 69 will be ordinal 6.",
-    "pending": "Git, LFS, remote branch and draft PR 13 parity"
+    "disposition": "Select and publish none; Bank 68 is remote-verified hard-unusable with all four unique occurrences preserved and classified, scene 1614 remains unresolved, and Bank 69 is seventh-render-run ordinal 6.",
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4104,5 +4119,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Complete Bank 68 initial and tracked-source evidence parity, then dispatch one clean Bank 69 request for only scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch one clean Bank 69 request for only scene 1614 using the fixed bindings and ordered 938, 936, 937 face anchors; never reopen scenes 1612, 1613, or 1615."
 }
