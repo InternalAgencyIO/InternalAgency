@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-72-fallback-in-flight-clean-anchored-scene-1614-only",
+  "status": "bank-72-closed-hard-unusable-evidence-gates-passed-awaiting-commit-push-remote-parity",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T10:39:11.292Z",
+  "lastWakeAuditAtUtc": "2026-08-23T10:48:51.9087103Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -61,17 +61,43 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 3,
-    "inFlightRenderRunBank": 4,
-    "nextRenderRunBankAfterInFlight": 5,
-    "countryBank": 67,
-    "nextCountryBank": 68,
+    "completedBanksInCurrentRenderRun": 9,
+    "inFlightRenderRunBank": null,
+    "nextRenderRunBankAfterInFlight": 10,
+    "countryBank": 72,
+    "nextCountryBank": 73,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 1,
-    "stoppedMetaLanes": [{"lane":1,"scene":1612,"reason":"Bank 14 terminal-final output 6 selected after the face, pose, kitten, eight-leg, eight-pump, exact four-sock/two-RAZE/two-Split-Star own-side map, prop, setting, safety, and secure cocktail mini-skort gates passed; no Meta filler pending evidence parity","selectedRawSha256":"10E768CE6F1D8BF8174FAA3C52FE6975A753C02234C5471F7913D755F1DEC2A9"},{"lane":2,"scene":1613,"reason":"provisional-ready Meta source selected and remote verified at evidence commit 146f376c76bba11d00103c326874948be9b75b94; eligible for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD"},{"lane":4,"scene":1615,"reason":"Bank 9 output 33 selected as the Meta source after the face, pose, safety, setting, anatomy, prop, kitten, and exact sock-map gates passed; only secure cocktail mini-skort construction remains for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler","selectedRawSha256":"465B56787E8D7985076021B296D4FAE7559196B86B5B9CA809DCA7AAB4C9D8FB"}],
+    "stoppedMetaLanes": [
+      {
+        "lane": 1,
+        "scene": 1612,
+        "reason": "Bank 14 terminal-final output 6 selected after the face, pose, kitten, eight-leg, eight-pump, exact four-sock/two-RAZE/two-Split-Star own-side map, prop, setting, safety, and secure cocktail mini-skort gates passed; no Meta filler pending evidence parity",
+        "selectedRawSha256": "10E768CE6F1D8BF8174FAA3C52FE6975A753C02234C5471F7913D755F1DEC2A9"
+      },
+      {
+        "lane": 2,
+        "scene": 1613,
+        "reason": "provisional-ready Meta source selected and remote verified at evidence commit 146f376c76bba11d00103c326874948be9b75b94; eligible for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler",
+        "selectedRawSha256": "DA53D916CD1F89A1CA7436EF7CB2B1C3C9C42CB4BCCDAD03E33326A1D417B7FD"
+      },
+      {
+        "lane": 4,
+        "scene": 1615,
+        "reason": "Bank 9 output 33 selected as the Meta source after the face, pose, safety, setting, anatomy, prop, kitten, and exact sock-map gates passed; only secure cocktail mini-skort construction remains for the single allowed built-in ChatGPT clothing-only final edit; no Meta filler",
+        "selectedRawSha256": "465B56787E8D7985076021B296D4FAE7559196B86B5B9CA809DCA7AAB4C9D8FB"
+      }
+    ],
     "dispatchPolicy": "concurrent across every eligible scene lane; keep exactly four persistent Meta tabs; never send filler in a resolved or stopped lane",
-    "userQueuePriority": {"receivedAtUtc":"2026-08-23T04:31:23.4260846Z","instruction":"get unresolved scenes done and complete posts fast","xBacklogStatus":"cleared-zero","renderingDeferredByUser":false,"activeBank":67,"activeOrdinal":4}
+    "userQueuePriority": {
+      "receivedAtUtc": "2026-08-23T04:31:23.4260846Z",
+      "instruction": "get unresolved scenes done and complete posts fast",
+      "xBacklogStatus": "cleared-zero",
+      "renderingDeferredByUser": false,
+      "activeBank": 72,
+      "activeOrdinal": 9
+    }
   },
   "scenePlans": {
     "1612": {
@@ -639,8 +665,8 @@
     "operationalInterpretation": "add thirty Meta banks after the existing cumulative one-hundred-forty-bank allowance for a cumulative one-hundred-seventy-bank evidence-gated Meta rendering allowance",
     "newlyAddedMetaBanks": 30,
     "additionalMetaBanksAuthorized": 170,
-    "additionalMetaBanksCompletedAfterAuthorization": 37,
-    "additionalMetaBanksRemaining": 133,
+    "additionalMetaBanksCompletedAfterAuthorization": 43,
+    "additionalMetaBanksRemaining": 127,
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
@@ -4525,7 +4551,7 @@
     "renderRunBankOrdinal": 9,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "primary-refusal-preserved-single-fallback-in-flight-clean-anchored",
+    "dispatchState": "closed-primary-refusal-plus-single-fallback-terminal-hard-unusable-evidence-gates-passed-awaiting-remote-parity",
     "dispatchedAtUtc": "2026-08-23T10:26:59.444Z",
     "providerUrl": "https://www.meta.ai/prompt/c9b337a9-6c25-42c6-a1ba-0ab670919236",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-72-render-run-07-correction.txt",
@@ -4541,33 +4567,72 @@
     "exactFallbackPromptSha256": "D8F951A22AA0FFCEECA16E240FEC89FA382CE5BD081B8257A10EBC548B3FBD2B",
     "activeSuppressionMatchesPrimary": 0,
     "privacySafeFictionalCharacterRequest": true,
-    "orderedReferenceUploadScenes": [938, 936, 937],
+    "orderedReferenceUploadScenes": [
+      938,
+      936,
+      937
+    ],
     "orderedReferenceSha256": [
       "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
       "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
       "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
     ],
-    "actualSubmittedReferenceUploadScenes": [938, 936, 937],
+    "actualSubmittedReferenceUploadScenes": [
+      938,
+      936,
+      937
+    ],
     "actualSubmittedReferenceUploadCount": 3,
     "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-23T10:21:38.9376798Z",
     "faceAnchorsVerifiedBeforePromptAtUtc": "2026-08-23T10:21:38.9376798Z",
-    "faceAnchorsVerifiedBeforeEachUploadAtUtc": ["2026-08-23T10:23:14.3042707Z", "2026-08-23T10:24:45.6021287Z", "2026-08-23T10:25:43.8712609Z"],
+    "faceAnchorsVerifiedBeforeEachUploadAtUtc": [
+      "2026-08-23T10:23:14.3042707Z",
+      "2026-08-23T10:24:45.6021287Z",
+      "2026-08-23T10:25:43.8712609Z"
+    ],
     "faceAnchorsVerifiedAtUtc": "2026-08-23T10:26:50.8578153Z",
     "faceAnchorsVerifiedImmediatelyBeforeRender": true,
     "persistentMetaTabs": 4,
     "dispatchTabId": "6",
-    "eligibleScenes": [1614],
-    "stoppedScenesUntouched": [1612, 1613, 1615],
+    "eligibleScenes": [
+      1614
+    ],
+    "stoppedScenesUntouched": [
+      1612,
+      1613,
+      1615
+    ],
     "requestedImageCount": 1,
     "preflightDraftState": "The exact prompt was inserted first. An initial chooser connection timeout selected and uploaded nothing and sent nothing. Scenes 938, 936, and 937 were then attached exactly once each in order through Meta's visible Add media and files dialog. Final DOM parity showed three ordered image nodes with those exact filenames, the exact normalized prompt hash, exactly four Meta tabs, enabled Send, and only one final Send click.",
     "deterministicBindingsReusedWithoutReroll": {
-      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
-      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
-      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
+      "environment": {
+        "key": "starlight|environment|batch-398|scene-1614",
+        "counter": 0,
+        "acceptedByte": 65,
+        "digestSha256": "41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D",
+        "bucket": 0,
+        "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-398|scene-1614",
+        "counter": 0,
+        "acceptedByte": 171,
+        "digestSha256": "AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7",
+        "bucket": 1,
+        "promptLanguage": "Proxima Centauri b"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-398|scene-1614",
+        "counter": 0,
+        "acceptedByte": 224,
+        "digestSha256": "E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC",
+        "bucket": 2,
+        "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"
+      }
     },
     "completedBanksInCurrentRenderRunBeforeDispatch": 8,
-    "completedBanksInCurrentRenderRun": 8,
+    "completedBanksInCurrentRenderRun": 9,
     "completedRenderRunsSinceLastX": 5,
     "renderRetryAuthorization": {
       "instruction": "RETRY AUTHORIZED FOR ALL POSTS GO FASTER",
@@ -4603,23 +4668,75 @@
       "exactDispatchedPromptBytes": 3556,
       "exactDispatchedPromptSha256": "D8F951A22AA0FFCEECA16E240FEC89FA382CE5BD081B8257A10EBC548B3FBD2B",
       "activeSuppressionMatches": 0,
-      "orderedReferenceUploadScenes": [938, 936, 937],
+      "orderedReferenceUploadScenes": [
+        938,
+        936,
+        937
+      ],
       "actualSubmittedReferenceUploadCount": 3,
       "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-23T10:34:38.5287357Z",
       "faceAnchorsVerifiedBeforePromptAtUtc": "2026-08-23T10:34:38.5287357Z",
-      "faceAnchorsVerifiedBeforeEachUploadAtUtc": ["2026-08-23T10:35:18.6449490Z", "2026-08-23T10:36:46.0256640Z", "2026-08-23T10:37:41.1567765Z"],
+      "faceAnchorsVerifiedBeforeEachUploadAtUtc": [
+        "2026-08-23T10:35:18.6449490Z",
+        "2026-08-23T10:36:46.0256640Z",
+        "2026-08-23T10:37:41.1567765Z"
+      ],
       "faceAnchorsVerifiedImmediatelyBeforeRenderAtUtc": "2026-08-23T10:38:41.2794423Z",
       "persistentMetaTabs": 4,
       "dispatchTabId": "6",
       "requestedImageCount": 1,
-      "eligibleScenes": [1614],
-      "stoppedScenesUntouched": [1612, 1613, 1615],
+      "eligibleScenes": [
+        1614
+      ],
+      "stoppedScenesUntouched": [
+        1612,
+        1613,
+        1615
+      ],
       "preflightDraftState": "The exact fallback prompt was inserted first. One initial chooser timeout uploaded nothing and sent nothing. Scenes 938, 936, and 937 were then attached exactly once each in order. Final normalized prompt hash, ordered filename alts, exactly four tabs, enabled Send, and one final Send click all passed.",
       "initialProviderAudit": {
         "checkedAtUtc": "2026-08-23T10:39:11.292Z",
         "providerState": "thinking-in-flight-finalizing-visual-brief",
         "generatedMediaOccurrenceCount": 0,
         "generatedMediaBytesObserved": 0
+      },
+      "latestProviderAudit": {
+        "checkedAtUtc": "2026-08-23T10:45:35.706Z",
+        "providerState": "terminal-gallery",
+        "terminalObservedAtUtc": "2026-08-23T10:42:41.442Z",
+        "capturedAtUtc": "2026-08-23T10:42:53.311Z",
+        "capturedOccurrenceCount": 1,
+        "rawFileCount": 1,
+        "uniqueOutputSha256Count": 1,
+        "totalGeneratedMediaBytesObserved": 471370,
+        "uniqueGeneratedMediaBytesObserved": 471370,
+        "rawOutputSha256InOccurrenceOrder": [
+          "2F39133F316E7ACA02E0233544F18E1F72EEDEDE026A8FC5F1CDA2CAF1CC8025"
+        ],
+        "generatedMediaDimensionsInOccurrenceOrder": [
+          "1152x2048 RGB"
+        ],
+        "providerOccurrencePreservationPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-72-fallback.jsonl",
+        "providerOccurrenceQaPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-72-qa.jsonl",
+        "providerOccurrenceTerminalPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-72-terminal.jsonl",
+        "providerResponsePath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-72-provider-response-fallback.txt",
+        "providerResponseBytes": 268,
+        "providerResponseSha256": "2C110170F21A19152B4C31F6024B455E75D661CC80403EA0DD540B31BBAFEAB6",
+        "exactProviderDomResponseBytes": 267,
+        "exactProviderDomResponseSha256": "2C890F5F852F9EF7CBB69CC8E9DD15E26AC824395A95BCAF8FFAD194EFD51E2F",
+        "occurrenceClassifications": [
+          "hard-unusable"
+        ],
+        "terminalHardFailures": [
+          "the historical quartet face identities are not preserved closely enough",
+          "the sock-front marks are Split-Star, Split-Star, RAZE, RAZE instead of RAZE, Split-Star, Split-Star, RAZE",
+          "AI ECE touches Alia instead of reaching Ellie's right shoulder through the required clear-air arm route",
+          "the floating object is a large camera-like device above head height rather than a tiny inert timing light at Ellie's kneecap level",
+          "the secure centered inverted-V divided wrap-skort construction is not clear on every garment"
+        ],
+        "duplicateRelationships": "the sole fallback terminal gallery occurrence is one unique content; no inline occurrence preceded it",
+        "classification": "hard-unusable",
+        "terminalStateCaptured": true
       }
     },
     "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, three ordered submitted reference hashes, face-manifest verification before preflight, prompt, every successful upload, and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
@@ -4627,13 +4744,43 @@
       "previousRemoteVerifiedHead": "6bf6203d1ce0a3a67d2d7d929100024d3c640fe9",
       "dispatchEvidenceCommit": "af59099cde470c5965f93d92b22f7fedcc474895",
       "primaryRefusalAndFallbackPreparationCommit": "eb0b52c4da1a4925bee65712a87517e8dd25bcd0",
-      "fallbackDispatchEvidenceCommit": null,
+      "fallbackDispatchEvidenceCommit": "78c07895ca603535abb12b26b84fe4b80e3b96ae",
       "primaryRefusalCaptured": true,
-      "providerCompletionCaptured": false,
-      "pending": "fallback completion, immediate occurrence preservation and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "providerCompletionCaptured": true,
+      "pending": "initial evidence commit, exact push, remote branch and draft PR 13 parity, tracked-source archive row, LFS verification, and final clean-worktree checkpoint",
+      "initialArchiveNewRows": 1,
+      "initialArchiveNewBlobs": 1,
+      "initialArchiveNewBlobBytes": 471370,
+      "generatedMediaManifestRows": 6001,
+      "generatedMediaManifestSha256": "D1C98269878BB0E252A0A81EE5820F5111DE4BB3384D9A7FE7405B357ED10BA6",
+      "primaryProviderOccurrenceRows": 1,
+      "primaryProviderOccurrenceSha256": "28CF42763BA3391AEDCA501D0A02F628B6ACD2941B3A3A24E92AEA041C40147B",
+      "fallbackProviderOccurrenceRows": 1,
+      "fallbackProviderOccurrenceSha256": "A298F9D23B299BA22882F257F58F247A7DD0671B49BF489E0DC20AF62C21312A",
+      "providerOccurrenceTerminalRows": 1,
+      "providerOccurrenceTerminalSha256": "CB6D20E1EF4D98B11C69750AC271E2667860EEF05039C37150496F2DE56114FD",
+      "providerOccurrenceQaRows": 1,
+      "providerOccurrenceQaSha256": "BB0B7FB8C04EDA66AD5D82B80277C8093C93A187D76EC223A281779988705C85",
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "rejectedPromptLedgerVerifierEntries": 139,
+      "rejectedPromptLedgerVerifierErrors": 0,
+      "projectFailedPromptRuntimeFailures": 987,
+      "projectFailedPromptPromptRecords": 1567,
+      "projectFailedPromptVerifierErrors": 0,
+      "progressEvidencePreparedAtUtc": "2026-08-23T10:48:30.5651078Z",
+      "preCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T10:48:51.9087103Z",
+      "terminalClassificationCaptured": true,
+      "completedBanksInCurrentRenderRunBeforeBank72Parity": 8,
+      "completedBanksInCurrentRenderRunAfterBank72Parity": 9,
+      "cumulativeMetaBanksCompletedBeforeBank72Parity": 42,
+      "cumulativeMetaBanksRemainingBeforeBank72Parity": 128,
+      "cumulativeMetaBanksCompletedAfterBank72Parity": 43,
+      "cumulativeMetaBanksRemainingAfterBank72Parity": 127,
+      "initialEvidenceCommit": null
     },
-    "disposition": "Bank 72 primary refusal is preserved and its single contract-authorized moderation-compatible fallback is now rendering only unresolved scene 1614; do not dispatch another fallback or advance until every fallback occurrence and evidence gate is complete.",
-    "pending": "fallback provider completion and occurrence capture"
+    "disposition": "Select and publish none; Bank 72 primary ended in an explicit no-bytes refusal and its single permitted fallback is terminal hard-unusable; scene 1614 remains unresolved; Bank 73 is seventh-render-run ordinal 10.",
+    "pending": "initial evidence commit, push, remote parity, tracked-source archive row, and final checkpoint"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4661,5 +4808,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Preserve every Bank 72 fallback occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and remote-verify Bank 72 evidence, collect the tracked-source archive row, pass LFS and draft PR 13 parity, then dispatch Bank 73 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
