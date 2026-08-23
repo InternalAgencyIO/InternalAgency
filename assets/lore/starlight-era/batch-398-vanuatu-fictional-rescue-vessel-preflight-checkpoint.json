@@ -3434,8 +3434,13 @@
       "projectFailedPromptRuntimeFailures": 987,
       "projectFailedPromptPromptRecords": 1567,
       "projectFailedPromptVerifierErrors": 0,
-      "initialEvidenceCommit": null,
-      "pending": "commit and remote-verify the initial Bank 63 evidence, then collect tracked-source archive rows"
+      "initialEvidenceCommit": "e0258970a6634e92d778ea4988ee86f3b26df999",
+      "trackedSourceArchiveRows": 8,
+      "trackedSourceArchiveBlobs": 0,
+      "trackedSourceManifestRows": 5960,
+      "trackedSourceManifestSha256": "91CAB33F9773FA92CC8301DB3DCB5FA878BD7FD30D3E311BE653CB9E59402EA7",
+      "trackedSourceArchiveCommit": null,
+      "pending": "commit and remote-verify the eight tracked-source archive rows, then run the final archive dry-run"
     },
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 63 completes sixth-render-run ordinal 10, the saturated X counter remains five, and Bank 64 is seventh-render-run ordinal 1.",
     "pending": "initial evidence parity"
