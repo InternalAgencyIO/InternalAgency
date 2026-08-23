@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-54-closed-hard-unusable-remote-verified-counter-five-retained",
+  "status": "bank-55-dispatched-meta-pending-counter-five-retained",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T03:44:53.5507429Z",
+  "lastWakeAuditAtUtc": "2026-08-23T04:05:33.891Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -2472,6 +2472,56 @@
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 54 is remote-verified and counts as sixth-render-run ordinal 1.",
     "pending": null
   },
+  "bank55Dispatch": {
+    "countryBank": 55,
+    "renderRunBankOrdinal": 2,
+    "scene": 1614,
+    "lane": 3,
+    "dispatchState": "meta-in-flight",
+    "dispatchedAtUtc": "2026-08-23T04:05:33.891Z",
+    "providerUrl": "https://www.meta.ai/prompt/63936b69-3751-41b7-9932-33bdbaec2767",
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-55-render-run-06-correction.txt",
+    "promptFileBytes": 7595,
+    "promptFileSha256": "9D5A87F0DD7ED446E5F3BBFCD41482C4CA1213E1D7EEBE2E03DD8783C8632536",
+    "exactDispatchedPromptBytes": 7594,
+    "exactDispatchedPromptSha256": "F4BC4159B085632405E378009D4687AEB20896F97CB5633556407AC27351C607",
+    "exactDispatchedPromptRule": "prompt file minus its single terminal LF byte",
+    "fallbackPromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-55-render-run-06-fallback.txt",
+    "fallbackPromptBytes": 3698,
+    "fallbackPromptSha256": "34CA7E0087679562BE84801A92501B48EA84823F2A6B5F94E9DD437406380021",
+    "activeSuppressionMatchesPrimary": 0,
+    "activeSuppressionMatchesFallback": 0,
+    "privacySafeFictionalCharacterRequest": true,
+    "orderedReferenceUploadScenes": [938, 936, 937],
+    "orderedReferenceSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedImmediatelyBeforeUploadAndDispatch": true,
+    "persistentMetaTabs": 4,
+    "dispatchTabId": "19",
+    "eligibleScenes": [1614],
+    "stoppedScenesUntouched": [1612, 1613, 1615],
+    "requestedImageCount": 1,
+    "preflightDraftRemediation": "An unsent draft in tab 18 was discarded after the Meta editor removed its three attachment chips when text was inserted after upload. No provider request was dispatched from that draft. The authoritative clean request was rebuilt in tab 19 by inserting the exact prompt first and then uploading scenes 938, 936, and 937 once each in order before dispatch.",
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
+    },
+    "completedBanksInCurrentRenderRunBeforeDispatch": 1,
+    "completedRenderRunsSinceLastX": 5,
+    "minimumOccurrenceEnvelope": "exact primary and fallback prompt file bytes and hashes, exact dispatched-prompt normalization, dispatch UTC, provider URL, ordered reference hashes, face-manifest hash and verification timing, deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, unsent-draft remediation, and pending terminal response/media occurrence evidence",
+    "evidenceGate": {
+      "previousRemoteVerifiedHead": "baebd16de6696232222ececb104273a062a2b96b",
+      "dispatchEvidenceCommit": null,
+      "terminalOccurrenceEvidenceCommit": null,
+      "pending": "Meta terminal response and every media or explicit no-byte occurrence must be captured and classified before Bank 55 can close."
+    },
+    "pending": "Meta terminal response and every media or explicit no-byte occurrence must be captured and classified before Bank 55 can close."
+  },
   "authoritativeBlocker": null,
-  "nextAction": "Prepare and dispatch Bank 55, sixth-render-run ordinal 2, only for unresolved scene 1614 while retaining completedRenderRunsSinceLastX at five; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Capture and classify every terminal Bank 55 occurrence for sole unresolved scene 1614, preserve raw bytes or explicit no-byte evidence before visual inspection, and retain completedRenderRunsSinceLastX at five while Vanuatu remains unresolved."
 }
