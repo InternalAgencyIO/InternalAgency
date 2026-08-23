@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-74-reference-anchored-in-flight-scene-1614-only",
+  "status": "bank-74-closed-hard-unusable-evidence-parity-pending-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T12:11:10.007Z",
+  "lastWakeAuditAtUtc": "2026-08-23T12:14:05.581Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -61,8 +61,8 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 0,
-    "inFlightRenderRunBank": 1,
+    "completedBanksInCurrentRenderRun": 1,
+    "inFlightRenderRunBank": null,
     "nextRenderRunBankAfterInFlight": 2,
     "countryBank": 74,
     "nextCountryBank": 75,
@@ -665,8 +665,8 @@
     "operationalInterpretation": "add thirty Meta banks after the existing cumulative one-hundred-forty-bank allowance for a cumulative one-hundred-seventy-bank evidence-gated Meta rendering allowance",
     "newlyAddedMetaBanks": 30,
     "additionalMetaBanksAuthorized": 170,
-  "additionalMetaBanksCompletedAfterAuthorization": 44,
-  "additionalMetaBanksRemaining": 126,
+  "additionalMetaBanksCompletedAfterAuthorization": 45,
+  "additionalMetaBanksRemaining": 125,
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
@@ -4968,7 +4968,7 @@
     "renderRunBankOrdinal": 1,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "reference-anchored-in-flight",
+    "dispatchState": "terminal-refusal-after-inline-hard-unusable-evidence-parity-pending",
     "dispatchedAtUtc": "2026-08-23T12:06:57.528Z",
     "providerUrl": "https://www.meta.ai/prompt/223af611-faf5-4916-a57f-92931ef1446e",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-74-render-run-08-correction.txt",
@@ -5016,7 +5016,7 @@
       "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
     },
     "completedBanksInCurrentRenderRunBeforeDispatch": 0,
-    "completedBanksInCurrentRenderRun": 0,
+    "completedBanksInCurrentRenderRun": 1,
     "completedRenderRunsSinceLastX": 5,
     "initialProviderAudit": {
       "checkedAtUtc": "2026-08-23T12:11:10.007Z",
@@ -5024,15 +5024,68 @@
       "generatedMediaOccurrenceCount": 0,
       "generatedMediaBytesObserved": 0
     },
-    "minimumOccurrenceEnvelope": "exact prompt file, base and dispatched hashes including Meta attachment placeholder whitespace, ordered upload UTCs and reference hashes, face-verification and dispatch UTCs, provider URL, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
+    "terminalOccurrence": {
+      "inlineObservedAtUtc": "2026-08-23T12:12:12.376Z",
+      "capturedAtUtc": "2026-08-23T12:12:30.550Z",
+      "terminalObservedAtUtc": "2026-08-23T12:14:05.581Z",
+      "providerState": "terminal-explicit-refusal-after-inline-occurrence-no-terminal-gallery-source",
+      "rawPath": "outputs/meta5_batch_staging/batch-398/bank-74/lane-3/scene-1614-meta-bank-74-occurrence-output-01.webp",
+      "rawBytes": 481824,
+      "rawSha256": "72D2FBCFEFA92A8E3ABE658692E5EDC1D62818562076F4611C2C8AFF061B7902",
+      "dimensions": "1152x2048 RGB",
+      "providerResponsePath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-74-provider-response-inline-01.txt",
+      "providerResponseBytes": 1010,
+      "providerResponseSha256": "16DB0F6694E8B08C1ACDE40E315711F6066AF72992D2277F67381FDAE171D215",
+      "exactProviderDomResponseBytes": 1009,
+      "exactProviderDomResponseSha256": "96D65BB1F3D8A1CFF7EFD4B9A1E0BEC7D58023D391B5D2CC17F0C0A2D1330F03",
+      "capturedOccurrenceCount": 1,
+      "uniqueOutputSha256Count": 1,
+      "duplicateRelationships": "one inline occurrence preserved; provider then removed all generated-media sources and ended on explicit refusal text without terminal-gallery media"
+    },
+    "visualQa": {
+      "classifiedAtUtc": "2026-08-23T12:14:05.581Z",
+      "classification": "hard-unusable",
+      "historicalQuartetFaceGatePassed": true,
+      "correctNameToFaceOwnership": true,
+      "completeReadableLegCount": 8,
+      "whitePumpCount": 8,
+      "rainbowSockCount": 4,
+      "razeWordCount": 2,
+      "splitStarCount": 2,
+      "kittenCount": 1,
+      "timingLightCount": 1,
+      "markerCount": 1,
+      "dryStableFooting": true,
+      "secureDividedWrapSkortConstructionAcrossAllFour": true,
+      "hardFailures": [
+        "sock marks are not one per front in the required RAZE, Split-Star, Split-Star, RAZE order",
+        "AI ECE's raised right hand does not reach Ellie's right shoulder",
+        "the capsule fails the required tiny size, kneecap height, and long gap to the floor target"
+      ]
+    },
+    "minimumOccurrenceEnvelope": "exact prompt file, base and dispatched hashes including Meta attachment placeholder whitespace, ordered upload UTCs and reference hashes, face-verification, dispatch, inline, capture and terminal UTCs, provider URL, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, exact terminal response hashes, one raw inline occurrence with source URL, bytes, SHA-256, dimensions and uniqueness relationship, and visual classification",
     "evidenceGate": {
       "previousRemoteVerifiedHead": "e1ea697a2faff26b2451ba7f0ffc0f9c8df943af",
-      "providerCompletionCaptured": false,
+      "providerCompletionCaptured": true,
       "dispatchEvidenceCommit": "2a768aa42d10977f8ea05bde76abdf43333ce529",
-      "pending": "provider completion, occurrence capture and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "inFlightCheckpointCommit": "b1bf15c1871e5e3c7659a432fdac236f78bf44e3",
+      "initialEvidenceCommit": null,
+      "trackedSourceArchiveCommit": null,
+      "remoteParityCheckpointCommit": null,
+      "archiveInitialNewRows": 1,
+      "archiveInitialNewBlobs": 1,
+      "archiveInitialNewBlobBytes": 481824,
+      "archiveManifestRowsAfterInitialImport": 6005,
+      "archiveManifestSha256AfterInitialImport": "077E81DF0FE865792723257BCF7B25262FBA2557669E2C416490903851EB9348",
+      "rejectedPromptLedgerVerifierEntries": 139,
+      "rejectedPromptLedgerVerifierErrors": 0,
+      "projectFailedPromptLedgerRuntimeFailures": 987,
+      "projectFailedPromptLedgerPromptRecords": 1567,
+      "projectFailedPromptLedgerVerifierErrors": 0,
+      "pending": "archive import, both ledger verifiers, initial evidence commit and exact push, tracked-source archive row, Git, LFS, remote branch and draft PR 13 parity"
     },
-    "disposition": "Bank 74 is eighth-render-run ordinal 1 and is rendering only unresolved scene 1614 through one reference-anchored Meta request; no filler and no second dispatch.",
-    "pending": "provider completion and immediate occurrence capture"
+    "disposition": "Select and publish none; Bank 74 terminal explicit refusal followed one preserved inline hard-unusable occurrence; scene 1614 remains unresolved; Bank 74 completes eighth-render-run ordinal 1 and Bank 75 becomes ordinal 2 only after full evidence parity.",
+    "pending": "archive, ledger, Git, LFS, remote branch and draft PR 13 parity"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -5060,5 +5113,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Preserve every Bank 74 reference-anchored Meta occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Complete Bank 74 archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity, then dispatch Vanuatu Bank 75 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
