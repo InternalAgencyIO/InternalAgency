@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-72-closed-hard-unusable-evidence-gates-passed-awaiting-commit-push-remote-parity",
+  "status": "bank-72-tracked-source-archive-ready-awaiting-commit-push-remote-parity",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T10:48:51.9087103Z",
+  "lastWakeAuditAtUtc": "2026-08-23T10:52:51.7636327Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -4747,7 +4747,7 @@
       "fallbackDispatchEvidenceCommit": "78c07895ca603535abb12b26b84fe4b80e3b96ae",
       "primaryRefusalCaptured": true,
       "providerCompletionCaptured": true,
-      "pending": "initial evidence commit, exact push, remote branch and draft PR 13 parity, tracked-source archive row, LFS verification, and final clean-worktree checkpoint",
+      "pending": "tracked-source archive commit, exact push, remote branch and draft PR 13 parity, LFS verification, and final clean-worktree checkpoint",
       "initialArchiveNewRows": 1,
       "initialArchiveNewBlobs": 1,
       "initialArchiveNewBlobBytes": 471370,
@@ -4777,10 +4777,22 @@
       "cumulativeMetaBanksRemainingBeforeBank72Parity": 128,
       "cumulativeMetaBanksCompletedAfterBank72Parity": 43,
       "cumulativeMetaBanksRemainingAfterBank72Parity": 127,
-      "initialEvidenceCommit": null
+      "initialEvidenceCommit": "eab11c5fd458bad63d03b4bdac8d4d2b3f1c4ce3",
+      "initialEvidenceRemoteBranchHead": "eab11c5fd458bad63d03b4bdac8d4d2b3f1c4ce3",
+      "initialEvidenceLfsObjectsUploaded": 1,
+      "trackedSourceArchiveRows": 1,
+      "trackedSourceArchiveBlobs": 0,
+      "trackedSourceGeneratedMediaManifestRows": 6002,
+      "trackedSourceGeneratedMediaManifestSha256": "50ADAD9DD484C4AB5BD3D4EB0CB85799034CF03DCB91A06700E220D19325EE34",
+      "trackedSourceArchivePreparedAtUtc": "2026-08-23T10:52:51.7636327Z",
+      "trackedSourceArchiveDryRunNewRows": 0,
+      "trackedSourceArchiveDryRunNewBlobs": 0,
+      "trackedSourceRejectedPromptVerifierErrors": 0,
+      "trackedSourceFailedPromptVerifierErrors": 0,
+      "trackedSourceArchiveCommit": null
     },
     "disposition": "Select and publish none; Bank 72 primary ended in an explicit no-bytes refusal and its single permitted fallback is terminal hard-unusable; scene 1614 remains unresolved; Bank 73 is seventh-render-run ordinal 10.",
-    "pending": "initial evidence commit, push, remote parity, tracked-source archive row, and final checkpoint"
+    "pending": "tracked-source archive commit, exact push, remote parity, LFS verification, and final checkpoint"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4808,5 +4820,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Commit and remote-verify Bank 72 evidence, collect the tracked-source archive row, pass LFS and draft PR 13 parity, then dispatch Bank 73 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and remote-verify Bank 72 tracked-source archive parity, pass LFS and draft PR 13 parity, then dispatch Bank 73 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
