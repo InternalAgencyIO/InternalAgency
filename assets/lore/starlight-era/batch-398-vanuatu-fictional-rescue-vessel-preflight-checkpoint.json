@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-73-closed-hard-unusable-evidence-parity-pending-scene-1614-only",
+  "status": "bank-73-closed-hard-unusable-tracked-archive-parity-pending-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T11:43:24.5640019Z",
+  "lastWakeAuditAtUtc": "2026-08-23T11:50:39.4442712Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -4930,7 +4930,7 @@
       "uploadFailuresCaptured": true,
       "providerCompletionCaptured": true,
       "dispatchEvidenceCommit": "6243b2b18aab0ec102777a28c4eeb07de09ae389",
-      "initialEvidenceCommit": null,
+      "initialEvidenceCommit": "e35e34338d5da4826435ba62e38ddf370df2b55c",
       "trackedSourceArchiveCommit": null,
       "remoteParityCheckpointCommit": null,
       "archiveInitialNewRows": 1,
@@ -4938,15 +4938,20 @@
       "archiveInitialNewBlobBytes": 329072,
       "archiveManifestRowsAfterInitialImport": 6003,
       "archiveManifestSha256AfterInitialImport": "1E21E2CBE3D67184B916AB891F1EBF9D425D7169874C2D5D914AF7B7D51FC661",
+      "archiveTrackedSourceNewRows": 1,
+      "archiveTrackedSourceNewBlobs": 0,
+      "archiveTrackedSourceNewBlobBytes": 0,
+      "archiveManifestRowsAfterTrackedSourceImport": 6004,
+      "archiveManifestSha256AfterTrackedSourceImport": "6D64DE9744639DBE6A248BFBCAB880E3696263038B3A8F432211C40FE8E96653",
       "rejectedPromptLedgerVerifierEntries": 139,
       "rejectedPromptLedgerVerifierErrors": 0,
       "projectFailedPromptLedgerRuntimeFailures": 987,
       "projectFailedPromptLedgerPromptRecords": 1567,
       "projectFailedPromptLedgerVerifierErrors": 0,
-      "pending": "archive import, both ledger verifiers, initial evidence commit and exact push, tracked-source archive row, Git, LFS, remote branch and draft PR 13 parity"
+      "pending": "tracked-source archive commit and exact push, archive dry-run zero, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
     },
     "disposition": "Select and publish none; Bank 73 text-only terminal occurrence is hard-unusable; scene 1614 remains unresolved; Bank 73 completes seventh-render-run ordinal 10 and Bank 74 becomes eighth-render-run ordinal 1 only after full evidence parity.",
-    "pending": "archive, ledger, Git, LFS, remote branch and draft PR 13 parity"
+    "pending": "tracked-source archive commit, archive dry-run, ledger, Git, LFS, remote branch and draft PR 13 parity"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
