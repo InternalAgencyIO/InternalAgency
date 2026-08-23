@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-71-closed-hard-unusable-initial-evidence-ready-scene-1614-only",
+  "status": "bank-71-closed-hard-unusable-tracked-source-archive-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T10:14:29.1128312Z",
+  "lastWakeAuditAtUtc": "2026-08-23T10:17:57.2165714Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -4494,11 +4494,18 @@
       "cumulativeMetaBanksRemainingBeforeBank71Parity": 129,
       "cumulativeMetaBanksCompletedAfterBank71Parity": 42,
       "cumulativeMetaBanksRemainingAfterBank71Parity": 128,
-      "initialEvidenceCommit": null,
-      "pending": "initial evidence commit, tracked-source archive pass, Git, LFS, remote branch and draft PR 13 parity"
+      "initialEvidenceCommit": "4de6eae1125edf9e7ff693879a0fb391c2d1a517",
+      "trackedSourceArchiveRows": 1,
+      "trackedSourceArchiveBlobs": 0,
+      "trackedSourceGeneratedMediaManifestRows": 6000,
+      "trackedSourceGeneratedMediaManifestSha256": "805C078F0ED5FD1B35FB4D6A8A5CC02F08C4CA01F9D08113E190A729882A24FE",
+      "trackedSourceArchivePreparedAtUtc": "2026-08-23T10:16:01.048Z",
+      "preTrackedSourceCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T10:17:57.2165714Z",
+      "trackedSourceArchiveCommit": null,
+      "pending": "tracked-source archive commit, Git, LFS, remote branch and draft PR 13 parity"
     },
     "disposition": "Select and publish none; Bank 71 is terminal hard-unusable with its sole occurrence preserved and classified, scene 1614 remains unresolved, and Bank 72 is seventh-render-run ordinal 9.",
-    "pending": "initial evidence commit, tracked-source archive pass, Git, LFS, remote branch and draft PR 13 parity"
+    "pending": "tracked-source archive commit, Git, LFS, remote branch and draft PR 13 parity"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4526,5 +4533,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Complete Bank 71 initial evidence and tracked-source archive commits, remote-verify branch, LFS and draft PR 13 parity, then dispatch Bank 72 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit Bank 71 tracked-source archive parity, remote-verify branch, LFS and draft PR 13 parity, then dispatch Bank 72 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
