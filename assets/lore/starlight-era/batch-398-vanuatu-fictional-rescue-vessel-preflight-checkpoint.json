@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-67-in-flight-clean-anchored-scene-1614-only",
+  "status": "bank-67-in-flight-provider-processing-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T08:33:17.987Z",
+  "lastWakeAuditAtUtc": "2026-08-23T08:43:01.038Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3872,6 +3872,17 @@
     "completedBanksInCurrentRenderRun": 3,
     "completedRenderRunsSinceLastX": 5,
     "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, exactly three ordered submitted reference hashes, face-manifest verification before every upload and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
+    "latestProviderAudit": {
+      "checkedAtUtc": "2026-08-23T08:43:01.038Z",
+      "providerState": "thinking-in-flight",
+      "generatedMediaOccurrenceCount": 0,
+      "generatedMediaBytesCaptured": 0,
+      "exactVisibleProgressText": "Finalizing the sock graphic\n\nI'm repainting the third sock's upper band to remove the leftover text, then drawing a clean star so the sequence reads RAZE, STAR, STAR, RAZE.",
+      "fourPersistentMetaTabsVerified": true,
+      "eligibleSceneLaneActive": true,
+      "stoppedScenesUntouched": [1612, 1613, 1615],
+      "classificationDeferred": "No terminal media or explicit no-bytes result exists yet; occurrence preservation and visual inspection remain correctly blocked."
+    },
     "evidenceGate": {
       "previousRemoteVerifiedHead": "f5da89764e2bfc79ff08c7cfeba049d5c66752dd",
       "dispatchEvidenceCommit": null,
@@ -3906,6 +3917,25 @@
     "remoteParityPending": false,
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
-  "authoritativeBlocker": null,
+  "authoritativeBlocker": {
+    "recordedAtUtc": "2026-08-23T08:43:01.038Z",
+    "type": "provider-render-in-flight",
+    "scope": "Vanuatu Batch 398 Bank 67 scene 1614 lane 3",
+    "evidence": "Meta remains in Thinking state and reports that it is finalizing the sock graphic; zero generated-media occurrences are present after repeated audits through 2026-08-23T08:43:01.038Z.",
+    "safeLocalActionsCompleted": [
+      "fetched and remote-verified authoritative branch",
+      "verified local, remote, draft PR 13, Git and LFS parity",
+      "verified authoritative contract, quartet face manifest and three historical face-anchor hashes",
+      "verified generated-media manifest, rejection ledger and X ledger hashes",
+      "reclaimed exactly four persistent signed-in Meta tabs",
+      "reopened the authoritative Bank 67 provider URL",
+      "performed repeated nonvisual occurrence audits",
+      "confirmed zero result bytes and preserved exact live provider progress text",
+      "archive dry-run verified zero new rows and zero new blobs across 4,721 occurrences",
+      "rejected-prompt ledger verified 139 entries with zero errors and project failed-prompt ledger verified 987 runtime failures plus 1,567 prompt records with zero errors",
+      "kept the sole eligible scene lane actively rendering and left all stopped lanes untouched"
+    ],
+    "dispatchSuppressed": "Do not dispatch Bank 68 concurrently; preserve the first Bank 67 terminal occurrence or explicit no-bytes state before any retry."
+  },
   "nextAction": "Preserve every Bank 67 occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
 }
