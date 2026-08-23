@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-65-terminal-hard-unusable-browser-upload-failure-tracked-source-parity-in-progress-scene-1614-only",
+  "status": "bank-65-closed-hard-unusable-browser-upload-failure-remote-verified-bank-66-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T08:07:20.543Z",
+  "lastWakeAuditAtUtc": "2026-08-23T08:10:00.4224912Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3583,7 +3583,7 @@
     "renderRunBankOrdinal": 2,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "terminal-hard-unusable-browser-upload-failure-tracked-source-parity-in-progress",
+    "dispatchState": "closed-hard-unusable-browser-upload-failure-remote-verified",
     "dispatchedAtUtc": "2026-08-23T07:54:59.345Z",
     "dispatchedAtUtcEvidence": "focused in-app browser history entry for the exact provider prompt URL",
     "providerUrl": "https://www.meta.ai/prompt/5d4eb532-64d3-452f-ac30-c294f41a7ac6",
@@ -3690,20 +3690,20 @@
       "trackedSourceArchiveBlobs": 0,
       "trackedSourceManifestRows": 5978,
       "trackedSourceManifestSha256": "B1AD6C932BF0019D1AEB656B732A94F06610CBCA24EBDE88AA73435409DE2438",
-      "trackedSourceArchiveCommit": null,
-      "archiveDryRunNewRows": null,
-      "archiveDryRunNewBlobs": null,
-      "remoteBranchHead": null,
-      "draftPr13Head": null,
+      "trackedSourceArchiveCommit": "b0251b7c05bcbe9851b48dc9e8ee50dbda6b22b8",
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "remoteBranchHead": "b0251b7c05bcbe9851b48dc9e8ee50dbda6b22b8",
+      "draftPr13Head": "b0251b7c05bcbe9851b48dc9e8ee50dbda6b22b8",
       "draftPr13Open": true,
       "draftPr13Draft": true,
-      "lfsPendingObjects": null,
-      "worktreeCleanAtTrackedSourceParityCommit": null,
-      "verifiedAtUtc": null,
-      "pending": "tracked-source archive commit, dry-run zero, LFS, remote branch, draft PR 13 and clean-worktree parity"
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T08:10:00.4224912Z",
+      "pending": null
     },
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 65 completes seventh-render-run ordinal 2 as a browser-control/file-upload failure, the saturated X counter remains five, and Bank 66 is ordinal 3.",
-    "pending": "evidence parity before Bank 66 dispatch"
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -3731,5 +3731,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Finish Bank 65 evidence parity, then dispatch Bank 66 only for unresolved scene 1614 after visibly confirming ordered 938, 936, 937 identity attachments; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch Bank 66 only for unresolved scene 1614 after visibly confirming ordered 938, 936, 937 identity attachments; never reopen scenes 1612, 1613, or 1615."
 }
