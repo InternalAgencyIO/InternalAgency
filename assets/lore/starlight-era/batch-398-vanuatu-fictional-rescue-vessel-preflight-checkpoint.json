@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-66-terminal-hard-unusable-tracked-source-parity-in-progress-scene-1614-only",
+  "status": "bank-66-closed-hard-unusable-remote-verified-bank-67-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T08:27:56.701Z",
+  "lastWakeAuditAtUtc": "2026-08-23T08:29:53.3224897Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3710,7 +3710,7 @@
     "renderRunBankOrdinal": 3,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "terminal-agentic-two-media-hard-unusable-tracked-source-parity-in-progress",
+    "dispatchState": "closed-hard-unusable-remote-verified",
     "dispatchedAtUtc": "2026-08-23T08:14:32.589Z",
     "providerUrl": "https://www.meta.ai/prompt/0983ccba-f8ec-445e-a135-3494ffec74ad",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-66-render-run-07-correction.txt",
@@ -3814,20 +3814,20 @@
       "trackedSourceArchiveBlobs": 0,
       "trackedSourceManifestRows": 5982,
       "trackedSourceManifestSha256": "1E8EF81D27F632FD15475006B8533A306A7A5EEA746452133E91CC88668E99ED",
-      "trackedSourceArchiveCommit": null,
-      "archiveDryRunNewRows": null,
-      "archiveDryRunNewBlobs": null,
-      "remoteBranchHead": null,
-      "draftPr13Head": null,
+      "trackedSourceArchiveCommit": "8de104f8f33b820187b07cc5478e98d0d81cf6c6",
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "remoteBranchHead": "8de104f8f33b820187b07cc5478e98d0d81cf6c6",
+      "draftPr13Head": "8de104f8f33b820187b07cc5478e98d0d81cf6c6",
       "draftPr13Open": true,
       "draftPr13Draft": true,
-      "lfsPendingObjects": null,
-      "worktreeCleanAtTrackedSourceParityCommit": null,
-      "verifiedAtUtc": null,
-      "pending": "tracked-source archive commit, dry-run zero, LFS, remote branch, draft PR 13 and clean-worktree parity"
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T08:29:53.3224897Z",
+      "pending": null
     },
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 66 completes seventh-render-run ordinal 3, the saturated X counter remains five, and Bank 67 is ordinal 4.",
-    "pending": "evidence parity before Bank 67 dispatch"
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -3855,5 +3855,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Finish Bank 66 evidence parity, then dispatch Bank 67 only for unresolved scene 1614 using the fixed bindings and ordered identity references; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch Bank 67 only for unresolved scene 1614 using the fixed bindings and ordered 938, 936, 937 identity references; never reopen scenes 1612, 1613, or 1615."
 }
