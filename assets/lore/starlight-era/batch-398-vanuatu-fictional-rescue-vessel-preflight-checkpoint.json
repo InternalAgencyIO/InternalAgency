@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-71-closed-hard-unusable-tracked-source-archive-ready-scene-1614-only",
+  "status": "bank-71-closed-hard-unusable-remote-verified-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T10:17:57.2165714Z",
+  "lastWakeAuditAtUtc": "2026-08-23T10:19:18.5617996Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -4385,7 +4385,7 @@
     "renderRunBankOrdinal": 8,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "closed-terminal-hard-unusable-single-occurrence-initial-evidence-ready",
+    "dispatchState": "closed-terminal-hard-unusable-single-occurrence-remote-verified",
     "dispatchedAtUtc": "2026-08-23T10:05:49.601Z",
     "providerUrl": "https://www.meta.ai/prompt/9c47c14a-1ca7-4cee-b966-ba7d6181544b",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-71-render-run-07-correction.txt",
@@ -4501,11 +4501,24 @@
       "trackedSourceGeneratedMediaManifestSha256": "805C078F0ED5FD1B35FB4D6A8A5CC02F08C4CA01F9D08113E190A729882A24FE",
       "trackedSourceArchivePreparedAtUtc": "2026-08-23T10:16:01.048Z",
       "preTrackedSourceCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T10:17:57.2165714Z",
-      "trackedSourceArchiveCommit": null,
-      "pending": "tracked-source archive commit, Git, LFS, remote branch and draft PR 13 parity"
+      "trackedSourceArchiveCommit": "128bab7149e24f317d1487555bd76eee90089ca8",
+      "prePushFaceAnchorsVerifiedAtUtc": "2026-08-23T10:18:28.8960349Z",
+      "remoteBranchHead": "128bab7149e24f317d1487555bd76eee90089ca8",
+      "draftPr13Head": "128bab7149e24f317d1487555bd76eee90089ca8",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+      "currentBankLfsObjectCount": 1,
+      "currentBankLfsObjectsRemoteFetchedAndShaVerified": true,
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T10:19:10.5336847Z",
+      "remoteParityCheckpointPreCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T10:19:18.5617996Z",
+      "remoteParityState": "remote-verified",
+      "pending": null
     },
     "disposition": "Select and publish none; Bank 71 is terminal hard-unusable with its sole occurrence preserved and classified, scene 1614 remains unresolved, and Bank 72 is seventh-render-run ordinal 9.",
-    "pending": "tracked-source archive commit, Git, LFS, remote branch and draft PR 13 parity"
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4533,5 +4546,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Commit Bank 71 tracked-source archive parity, remote-verify branch, LFS and draft PR 13 parity, then dispatch Bank 72 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch Bank 72, seventh-render-run ordinal 9 of 10, only for unresolved scene 1614 after fresh face-anchor verification; never reopen scenes 1612, 1613, or 1615."
 }
