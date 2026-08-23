@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-73-closed-hard-unusable-tracked-archive-parity-pending-scene-1614-only",
+  "status": "bank-73-closed-hard-unusable-remote-parity-verified-bank-74-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T11:50:39.4442712Z",
+  "lastWakeAuditAtUtc": "2026-08-23T11:53:03.7211017Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -64,8 +64,8 @@
     "completedBanksInCurrentRenderRun": 0,
     "inFlightRenderRunBank": null,
     "nextRenderRunBankAfterInFlight": 1,
-    "countryBank": 73,
-    "nextCountryBank": 74,
+    "countryBank": 74,
+    "nextCountryBank": 75,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 1,
@@ -95,8 +95,8 @@
       "instruction": "get unresolved scenes done and complete posts fast",
       "xBacklogStatus": "cleared-zero",
       "renderingDeferredByUser": false,
-      "activeBank": 73,
-      "activeOrdinal": 10
+      "activeBank": 74,
+      "activeOrdinal": 1
     }
   },
   "scenePlans": {
@@ -665,8 +665,8 @@
     "operationalInterpretation": "add thirty Meta banks after the existing cumulative one-hundred-forty-bank allowance for a cumulative one-hundred-seventy-bank evidence-gated Meta rendering allowance",
     "newlyAddedMetaBanks": 30,
     "additionalMetaBanksAuthorized": 170,
-    "additionalMetaBanksCompletedAfterAuthorization": 43,
-    "additionalMetaBanksRemaining": 127,
+  "additionalMetaBanksCompletedAfterAuthorization": 44,
+  "additionalMetaBanksRemaining": 126,
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
@@ -4931,7 +4931,7 @@
       "providerCompletionCaptured": true,
       "dispatchEvidenceCommit": "6243b2b18aab0ec102777a28c4eeb07de09ae389",
       "initialEvidenceCommit": "e35e34338d5da4826435ba62e38ddf370df2b55c",
-      "trackedSourceArchiveCommit": null,
+      "trackedSourceArchiveCommit": "236a32ba56175d4672933f8c228fb5bf3e3df5be",
       "remoteParityCheckpointCommit": null,
       "archiveInitialNewRows": 1,
       "archiveInitialNewBlobs": 1,
@@ -4948,10 +4948,20 @@
       "projectFailedPromptLedgerRuntimeFailures": 987,
       "projectFailedPromptLedgerPromptRecords": 1567,
       "projectFailedPromptLedgerVerifierErrors": 0,
-      "pending": "tracked-source archive commit and exact push, archive dry-run zero, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "lfsPendingObjects": 0,
+      "bank73LfsObjectPresent": true,
+      "remoteBranchHeadBeforeParityCheckpoint": "236a32ba56175d4672933f8c228fb5bf3e3df5be",
+      "draftPr13HeadBeforeParityCheckpoint": "236a32ba56175d4672933f8c228fb5bf3e3df5be",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "worktreeCleanBeforeParityCheckpoint": true,
+      "verifiedAtUtc": "2026-08-23T11:53:03.7211017Z",
+      "pending": "remote-parity checkpoint commit and exact push, then Bank 74 dispatch"
     },
     "disposition": "Select and publish none; Bank 73 text-only terminal occurrence is hard-unusable; scene 1614 remains unresolved; Bank 73 completes seventh-render-run ordinal 10 and Bank 74 becomes eighth-render-run ordinal 1 only after full evidence parity.",
-    "pending": "tracked-source archive commit, archive dry-run, ledger, Git, LFS, remote branch and draft PR 13 parity"
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4979,5 +4989,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Complete Bank 73 archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity, then dispatch Vanuatu Bank 74 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch Vanuatu Bank 74, eighth-render-run ordinal 1, only for unresolved scene 1614 after verifying the face manifest and historical hashes; keep exactly four persistent Meta tabs and never reopen scenes 1612, 1613, or 1615."
 }
