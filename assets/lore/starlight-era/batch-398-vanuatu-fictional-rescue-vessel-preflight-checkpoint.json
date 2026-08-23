@@ -4098,7 +4098,7 @@
     "renderRunBankOrdinal": 6,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "in-flight-clean-anchored-request",
+    "dispatchState": "closed-terminal-hard-unusable-single-occurrence-evidence-prepared",
     "dispatchedAtUtc": "2026-08-23T09:32:09.330Z",
     "providerUrl": "https://www.meta.ai/prompt/a866ab75-06ad-4aac-b598-ac6b1a17ad27",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-69-render-run-07-correction.txt",
@@ -4135,7 +4135,7 @@
       "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
     },
     "completedBanksInCurrentRenderRunBeforeDispatch": 5,
-    "completedBanksInCurrentRenderRun": 5,
+    "completedBanksInCurrentRenderRun": 6,
     "completedRenderRunsSinceLastX": 5,
     "renderRetryAuthorization": {
       "instruction": "RETRY AUTHORIZED FOR ALL POSTS GO FASTER",
@@ -4147,16 +4147,73 @@
       "generatedMediaOccurrenceCount": 0,
       "generatedMediaBytesObserved": 0
     },
+    "latestProviderAudit": {
+      "checkedAtUtc": "2026-08-23T09:37:42.0146207Z",
+      "providerState": "terminal-gallery",
+      "terminalObservedAtUtc": "2026-08-23T09:35:23.055Z",
+      "capturedOccurrenceCount": 1,
+      "rawFileCount": 1,
+      "uniqueOutputSha256Count": 1,
+      "totalGeneratedMediaBytesObserved": 497204,
+      "uniqueGeneratedMediaBytesObserved": 497204,
+      "rawOutputSha256InOccurrenceOrder": ["A64177C369452851DE5AED9CA922385E1CFADF55670F383B231016E34D0CC141"],
+      "generatedMediaDimensionsInOccurrenceOrder": ["1152x2048 RGB"],
+      "providerOccurrenceLedgerPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-69.jsonl",
+      "providerOccurrenceQaPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-69-qa.jsonl",
+      "providerOccurrenceTerminalPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-69-terminal.jsonl",
+      "providerResponsePath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-69-provider-response.txt",
+      "exactProviderDomResponseBytes": 310,
+      "exactProviderDomResponseSha256": "33B0BB60C5AF87E32BB604ADE8C5C2EB2945DA945B0E8D0E97BD0281077B89D1",
+      "occurrenceClassifications": ["hard-unusable"],
+      "terminalHardFailures": [
+        "historical quartet face identities are not preserved closely enough",
+        "Alia's forehead placement and AI ECE's required shoulder-contact topology fail",
+        "Radiance's kitten-arm and free-hand ownership are reversed",
+        "the beacon is at ankle height and the marker gap is below four beacon body lengths"
+      ],
+      "terminalStateCaptured": true,
+      "classification": "hard-unusable",
+      "duplicateRelationships": "the sole terminal gallery occurrence is one unique content; no inline occurrence preceded it",
+      "stoppedScenesUntouched": [1612, 1613, 1615]
+    },
     "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, three ordered submitted reference hashes, face-manifest verification before preflight, prompt, every upload, and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
     "evidenceGate": {
       "previousRemoteVerifiedHead": "98e23d90e4897cd6184564bf3551991282f8c449",
-      "dispatchEvidenceCommit": null,
+      "dispatchEvidenceCommit": "d447a828ec4979ea58f755bdda962693b25d5ee0",
       "preDispatchEvidenceCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:33:32.2840761Z",
-      "providerCompletionCaptured": false,
-      "pending": "provider completion, immediate occurrence preservation and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "initialArchiveNewRows": 1,
+      "initialArchiveNewBlobs": 1,
+      "initialArchiveNewBlobBytes": 497204,
+      "generatedMediaManifestRows": 5993,
+      "generatedMediaManifestSha256": "A4B236962D9E47C2C4CEAED471338CC773BBCEADF7C87A9BE280C7DF2D10306D",
+      "providerOccurrenceLedgerRows": 1,
+      "providerOccurrenceLedgerSha256": "57B534EB6B8E6B4FE652A631823AA72FFE464144B71FDBF1FFA07138CFA9545D",
+      "providerOccurrenceQaRows": 1,
+      "providerOccurrenceQaSha256": "852D98F1FF45F28DC5F0D6F1996CF780EA4F8D423B26691722CAE3DF5D48BDC5",
+      "providerOccurrenceTerminalRows": 1,
+      "providerOccurrenceTerminalSha256": "F47A89ED1BD2CA3EB911D8678F2E289F5B0D938C9DBDA3130B018F2F4106E1AF",
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "rejectedPromptLedgerVerifierEntries": 139,
+      "rejectedPromptLedgerVerifierErrors": 0,
+      "projectFailedPromptRuntimeFailures": 987,
+      "projectFailedPromptPromptRecords": 1567,
+      "projectFailedPromptVerifierErrors": 0,
+      "progressEvidencePreparedAtUtc": "2026-08-23T09:40:15.1763378Z",
+      "preCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:40:15.1763378Z",
+      "providerCompletionCaptured": true,
+      "terminalClassificationCaptured": true,
+      "completedBanksInCurrentRenderRunBeforeBank69Parity": 5,
+      "completedBanksInCurrentRenderRunAfterBank69Parity": 6,
+      "cumulativeMetaBanksCompletedBeforeBank69Parity": 39,
+      "cumulativeMetaBanksRemainingBeforeBank69Parity": 131,
+      "cumulativeMetaBanksCompletedAfterBank69Parity": 40,
+      "cumulativeMetaBanksRemainingAfterBank69Parity": 130,
+      "initialEvidenceCommit": null,
+      "pending": "initial evidence commit, tracked-source archive parity, push, current-bank LFS verification, remote branch and draft PR 13 parity"
     },
-    "disposition": "Bank 69 is rendering only unresolved scene 1614; do not select, publish, or advance until every occurrence and evidence gate is complete.",
-    "pending": "provider completion and occurrence capture"
+    "disposition": "Select and publish none; Bank 69 is terminal hard-unusable with its sole occurrence preserved and classified, scene 1614 remains unresolved, and Bank 70 is seventh-render-run ordinal 7.",
+    "pending": "Git, tracked-source archive, LFS, remote branch and draft PR 13 parity"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4184,5 +4241,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Preserve every Bank 69 occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Complete Bank 69 Git, tracked-source archive, LFS, remote SHA and draft PR 13 parity, then dispatch Bank 70 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
