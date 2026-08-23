@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-81-final-remote-parity-verified-bank-82-in-flight-scene-1614-only",
+  "status": "bank-81-final-remote-parity-verified-bank-82-dispatch-remote-verified-in-flight-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T15:06:02.246Z",
+  "lastWakeAuditAtUtc": "2026-08-23T15:08:19.6405667Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -5857,7 +5857,7 @@
     },
     "capturedOccurrenceCount": 0,
     "uniqueOutputSha256Count": 0,
-    "evidenceGate": {"previousRemoteVerifiedHead":"ae8de3ef3f3ec36bead9f1618d6db15fbc4d6278","dispatchEvidenceCommit":null,"remoteParityPending":true,"pending":"commit and exact-push Bank 82 dispatch evidence while Meta remains in flight; immediately preserve every new inline or terminal media occurrence before visual inspection"}
+    "evidenceGate": {"previousRemoteVerifiedHead":"ae8de3ef3f3ec36bead9f1618d6db15fbc4d6278","dispatchEvidenceCommit":"19a4722f92936badb3578e317e52da616401dd3d","dispatchRemoteBranchHead":"19a4722f92936badb3578e317e52da616401dd3d","dispatchDraftPr13Head":"19a4722f92936badb3578e317e52da616401dd3d","dispatchDraftPr13Open":true,"dispatchDraftPr13Draft":true,"dispatchLfsPendingObjects":0,"dispatchWorktreeClean":true,"dispatchVerifiedAtUtc":"2026-08-23T15:08:19.6405667Z","remoteParityPending":true,"pending":"Bank 82 remains in flight; immediately preserve every new inline or terminal media occurrence before visual inspection"}
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
