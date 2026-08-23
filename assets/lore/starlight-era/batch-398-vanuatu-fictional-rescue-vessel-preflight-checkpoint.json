@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-74-closed-hard-unusable-tracked-archive-parity-pending-scene-1614-only",
+  "status": "bank-74-closed-hard-unusable-remote-parity-verified-bank-75-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T12:19:45.8686968Z",
+  "lastWakeAuditAtUtc": "2026-08-23T12:21:39.5354196Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -64,8 +64,8 @@
     "completedBanksInCurrentRenderRun": 1,
     "inFlightRenderRunBank": null,
     "nextRenderRunBankAfterInFlight": 2,
-    "countryBank": 74,
-    "nextCountryBank": 75,
+    "countryBank": 75,
+    "nextCountryBank": 76,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 1,
@@ -95,8 +95,8 @@
       "instruction": "get unresolved scenes done and complete posts fast",
       "xBacklogStatus": "cleared-zero",
       "renderingDeferredByUser": false,
-      "activeBank": 74,
-      "activeOrdinal": 1
+      "activeBank": 75,
+      "activeOrdinal": 2
     }
   },
   "scenePlans": {
@@ -5070,7 +5070,7 @@
       "dispatchEvidenceCommit": "2a768aa42d10977f8ea05bde76abdf43333ce529",
       "inFlightCheckpointCommit": "b1bf15c1871e5e3c7659a432fdac236f78bf44e3",
       "initialEvidenceCommit": "f95556b3f3b235a3db335cf94e2db4aab7d88d29",
-      "trackedSourceArchiveCommit": null,
+      "trackedSourceArchiveCommit": "777a67653ddeac7795b81ead85e50a7ed63d3cd2",
       "remoteParityCheckpointCommit": null,
       "archiveInitialNewRows": 1,
       "archiveInitialNewBlobs": 1,
@@ -5087,10 +5087,20 @@
       "projectFailedPromptLedgerRuntimeFailures": 987,
       "projectFailedPromptLedgerPromptRecords": 1567,
       "projectFailedPromptLedgerVerifierErrors": 0,
-      "pending": "tracked-source archive commit and exact push, archive dry-run zero, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "lfsPendingObjects": 0,
+      "bank74LfsObjectPresent": true,
+      "remoteBranchHeadBeforeParityCheckpoint": "777a67653ddeac7795b81ead85e50a7ed63d3cd2",
+      "draftPr13HeadBeforeParityCheckpoint": "777a67653ddeac7795b81ead85e50a7ed63d3cd2",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "worktreeCleanBeforeParityCheckpoint": true,
+      "verifiedAtUtc": "2026-08-23T12:21:39.5354196Z",
+      "pending": "remote-parity checkpoint commit and exact push, then Bank 75 dispatch"
     },
     "disposition": "Select and publish none; Bank 74 terminal explicit refusal followed one preserved inline hard-unusable occurrence; scene 1614 remains unresolved; Bank 74 completes eighth-render-run ordinal 1 and Bank 75 becomes ordinal 2 only after full evidence parity.",
-    "pending": "tracked-source archive commit, archive dry-run, ledger, Git, LFS, remote branch and draft PR 13 parity"
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -5118,5 +5128,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Complete Bank 74 archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity, then dispatch Vanuatu Bank 75 only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch Vanuatu Bank 75, eighth-render-run ordinal 2, only for unresolved scene 1614 after verifying the face manifest and historical hashes; keep exactly four persistent Meta tabs and never reopen scenes 1612, 1613, or 1615."
 }
