@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-68-terminal-hard-unusable-remote-verified-scene-1614-only",
+  "status": "bank-69-in-flight-clean-anchored-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T09:18:16.1351748Z",
+  "lastWakeAuditAtUtc": "2026-08-23T09:32:14.330Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -4093,6 +4093,71 @@
     "disposition": "Select and publish none; Bank 68 is remote-verified hard-unusable with all four unique occurrences preserved and classified, scene 1614 remains unresolved, and Bank 69 is seventh-render-run ordinal 6.",
     "pending": null
   },
+  "bank69Dispatch": {
+    "countryBank": 69,
+    "renderRunBankOrdinal": 6,
+    "scene": 1614,
+    "lane": 3,
+    "dispatchState": "in-flight-clean-anchored-request",
+    "dispatchedAtUtc": "2026-08-23T09:32:09.330Z",
+    "providerUrl": "https://www.meta.ai/prompt/a866ab75-06ad-4aac-b598-ac6b1a17ad27",
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-69-render-run-07-correction.txt",
+    "promptFileBytes": 4014,
+    "promptFileSha256": "35FE50306E715F3233CCD87EAB23F8F3B756C900935C252EFAEF64C697C254B2",
+    "exactDispatchedPromptBytes": 4013,
+    "exactDispatchedPromptSha256": "FF84CE32191555F4B04895770EEE28B9A27345E3B9453BAF4E4C8527423A2974",
+    "exactDispatchedPromptRule": "prompt file minus its single terminal LF byte; final composer parity removed only the three ordered attachment-node placeholder suffixes represented as newline-space pairs",
+    "activeSuppressionMatchesPrimary": 0,
+    "privacySafeFictionalCharacterRequest": true,
+    "orderedReferenceUploadScenes": [938, 936, 937],
+    "orderedReferenceSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "actualSubmittedReferenceUploadScenes": [938, 936, 937],
+    "actualSubmittedReferenceUploadCount": 3,
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-23T09:29:10.9816123Z",
+    "faceAnchorsVerifiedBeforePromptAtUtc": "2026-08-23T09:29:26.9536021Z",
+    "faceAnchorsVerifiedBeforeEachUploadAtUtc": ["2026-08-23T09:30:20.1353355Z", "2026-08-23T09:30:53.8514142Z", "2026-08-23T09:31:17.3840783Z"],
+    "faceAnchorsVerifiedAtUtc": "2026-08-23T09:32:04.4539709Z",
+    "faceAnchorsVerifiedImmediatelyBeforeRender": true,
+    "persistentMetaTabs": 4,
+    "dispatchTabId": "10",
+    "eligibleScenes": [1614],
+    "stoppedScenesUntouched": [1612, 1613, 1615],
+    "requestedImageCount": 1,
+    "preflightDraftState": "The exact prompt was inserted first. Scenes 938, 936, and 937 were then attached exactly once each in order through Meta's visible Add media and files dialog. Final DOM parity showed three ordered image nodes with those exact filenames, the normalized exact prompt hash, exactly four Meta tabs, an enabled Send control, and only one final Send click.",
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
+    },
+    "completedBanksInCurrentRenderRunBeforeDispatch": 5,
+    "completedBanksInCurrentRenderRun": 5,
+    "completedRenderRunsSinceLastX": 5,
+    "renderRetryAuthorization": {
+      "instruction": "RETRY AUTHORIZED FOR ALL POSTS GO FASTER",
+      "interpretation": "Authorizes continued Meta render retries within the existing cumulative allowance; does not replace the exact staged action-time confirmation required for a future X final click."
+    },
+    "initialProviderAudit": {
+      "checkedAtUtc": "2026-08-23T09:33:12.949Z",
+      "providerState": "thinking-in-flight-verifying-hand-placements",
+      "generatedMediaOccurrenceCount": 0,
+      "generatedMediaBytesObserved": 0
+    },
+    "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, three ordered submitted reference hashes, face-manifest verification before preflight, prompt, every upload, and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
+    "evidenceGate": {
+      "previousRemoteVerifiedHead": "98e23d90e4897cd6184564bf3551991282f8c449",
+      "dispatchEvidenceCommit": null,
+      "preDispatchEvidenceCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:33:32.2840761Z",
+      "providerCompletionCaptured": false,
+      "pending": "provider completion, immediate occurrence preservation and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+    },
+    "disposition": "Bank 69 is rendering only unresolved scene 1614; do not select, publish, or advance until every occurrence and evidence gate is complete.",
+    "pending": "provider completion and occurrence capture"
+  },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
     "checkedAtUtc": "2026-08-23T04:27:32.8223362Z",
@@ -4119,5 +4184,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Dispatch one clean Bank 69 request for only scene 1614 using the fixed bindings and ordered 938, 936, 937 face anchors; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Preserve every Bank 69 occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
 }
