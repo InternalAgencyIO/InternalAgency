@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "fifth-ten-bank-render-run-bank-52-remote-verified-scene-1614-unresolved",
+  "status": "fifth-ten-bank-render-run-bank-53-in-flight-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T02:45:43.3485972Z",
+  "lastWakeAuditAtUtc": "2026-08-23T03:02:35.925Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -62,10 +62,10 @@
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 4,
     "completedBanksInCurrentRenderRun": 9,
-    "inFlightRenderRunBank": null,
-    "nextRenderRunBankAfterInFlight": 10,
-    "countryBank": 52,
-    "nextCountryBank": 53,
+    "inFlightRenderRunBank": 10,
+    "nextRenderRunBankAfterInFlight": null,
+    "countryBank": 53,
+    "nextCountryBank": null,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 1,
@@ -2277,6 +2277,49 @@
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 52 is remote-verified and counts as completed fifth-render-run ordinal 9.",
     "pending": null
   },
+  "bank53Dispatch": {
+    "countryBank": 53,
+    "renderRunBankOrdinal": 10,
+    "scene": 1614,
+    "lane": 3,
+    "dispatchState": "in-flight-awaiting-complete-occurrence-preservation",
+    "dispatchedAtUtc": "2026-08-23T03:02:35.925Z",
+    "providerUrl": "https://www.meta.ai/prompt/f877271e-1233-45b0-b0ca-a2db25f6ee33",
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-53-render-run-05-correction.txt",
+    "promptFileBytes": 7196,
+    "promptFileSha256": "976D818281CE2C448CA6918CC5EB4DC76922323ACA20F8EBC4972A947C26A184",
+    "exactDispatchedPromptBytes": 7195,
+    "exactDispatchedPromptSha256": "D9675E2C710065848A32D39348DB7D3A8BA3BB3435C63DC321445C5F4463118A",
+    "exactDispatchedPromptRule": "prompt file minus its single terminal LF byte",
+    "fallbackPromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-53-render-run-05-fallback.txt",
+    "fallbackPromptBytes": 3524,
+    "fallbackPromptSha256": "66D362EFACE2B0103B19F1044BCE26741B805794D5CDD7310D11A4680848FF49",
+    "activeSuppressionMatchesPrimary": 0,
+    "activeSuppressionMatchesFallback": 0,
+    "orderedReferenceUploadScenes": [938, 936, 937],
+    "orderedReferenceSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedImmediatelyBeforeUploadAndDispatch": true,
+    "persistentMetaTabs": 4,
+    "eligibleScenes": [1614],
+    "stoppedScenesUntouched": [1612, 1613, 1615],
+    "requestedImageCount": 1,
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
+    },
+    "completedBanksInCurrentRenderRunBeforeDispatch": 9,
+    "completedBanksInCurrentRenderRun": 9,
+    "completedRenderRunsSinceLastX": 4,
+    "minimumOccurrenceEnvelope": "exact primary and fallback prompt file bytes and hashes, exact dispatched-prompt normalization, dispatch UTC, provider URL, ordered reference hashes, face-manifest hash and verification timing, deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and pending terminal occurrence capture",
+    "dispatchEvidenceCommit": null,
+    "pending": "capture and preserve every inline and terminal occurrence or explicit no-bytes result before visual inspection"
+  },
   "authoritativeBlocker": null,
-  "nextAction": "Prepare and dispatch evidence-authorized Vanuatu Bank 53, fifth-render-run ordinal 10 of 10, only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Preserve every completed Bank 53 scene-1614 occurrence or explicit no-bytes result before visual inspection; keep scenes 1612, 1613, and 1615 stopped."
 }
