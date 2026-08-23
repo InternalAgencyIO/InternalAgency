@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "fifth-ten-bank-render-run-bank-51-remote-verified-scene-1614-unresolved",
+  "status": "fifth-ten-bank-render-run-bank-52-dispatched-scene-1614-generation-pending",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T02:19:35.8073451Z",
+  "lastWakeAuditAtUtc": "2026-08-23T02:30:51.594Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -62,10 +62,10 @@
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 4,
     "completedBanksInCurrentRenderRun": 8,
-    "inFlightRenderRunBank": null,
-    "nextRenderRunBankAfterInFlight": 9,
-    "countryBank": 51,
-    "nextCountryBank": 52,
+    "inFlightRenderRunBank": 9,
+    "nextRenderRunBankAfterInFlight": 10,
+    "countryBank": 52,
+    "nextCountryBank": 53,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 1,
@@ -2166,6 +2166,48 @@
     "disposition": "Select and publish neither occurrence; scene 1614 remains unresolved; Bank 51 is remote-verified and counts as fifth-render-run bank ordinal 8.",
     "pending": null
   },
+  "bank52Dispatch": {
+    "countryBank": 52,
+    "renderRunBankOrdinal": 9,
+    "scene": 1614,
+    "lane": 3,
+    "dispatchState": "generation-pending",
+    "dispatchedAtUtc": "2026-08-23T02:30:44.989Z",
+    "dispatchObservedAtUtc": "2026-08-23T02:30:51.594Z",
+    "providerUrl": "https://www.meta.ai/prompt/b0405925-797e-4db9-a08b-15939485afdc",
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-52-render-run-05-correction.txt",
+    "promptFileBytes": 6434,
+    "promptFileSha256": "6925BA52960E15D82D5FCC94A288257CDE674DBD32F5453D2BB4993D98C10209",
+    "exactDispatchedPromptBytes": 6433,
+    "exactDispatchedPromptSha256": "F9F0CEB8BB9854844CA31FA2A304A34EE053AF93DBD4D0C3A7201D8F75ECD8D5",
+    "exactDispatchedPromptRule": "prompt file minus its single terminal LF byte",
+    "fallbackPromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-52-render-run-05-fallback.txt",
+    "fallbackPromptBytes": 3010,
+    "fallbackPromptSha256": "8DCC33D9C66658704CADD2FC9C67C24D967EADC57FD1262BD34008A2D6F3E1CD",
+    "activeSuppressionMatchesPrimary": 0,
+    "activeSuppressionMatchesFallback": 0,
+    "orderedReferenceUploadScenes": [938, 936, 937],
+    "orderedReferenceSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedImmediatelyBeforeUploadAndDispatch": true,
+    "persistentMetaTabs": 4,
+    "eligibleScenes": [1614],
+    "stoppedScenesUntouched": [1612, 1613, 1615],
+    "requestedImageCount": 1,
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
+    },
+    "completedBanksInCurrentRenderRunBeforeDispatch": 8,
+    "completedRenderRunsSinceLastX": 4,
+    "providerStateEvidence": "Exactly three ordered anchor thumbnails were visible before send; the prompt route became durable while only scene 1614 was dispatched.",
+    "pending": "Capture every inline and terminal occurrence or explicit no-bytes response before visual inspection, then classify and pass archive, both ledgers, Git, LFS, remote branch, and draft PR 13 parity."
+  },
   "authoritativeBlocker": null,
-  "nextAction": "Prepare and dispatch evidence-authorized Vanuatu Bank 52, fifth-render-run ordinal 9 of 10, only for unresolved scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Monitor Vanuatu Bank 52 only for unresolved scene 1614 and preserve every completed occurrence or explicit no-bytes result before visual inspection; never reopen scenes 1612, 1613, or 1615."
 }
