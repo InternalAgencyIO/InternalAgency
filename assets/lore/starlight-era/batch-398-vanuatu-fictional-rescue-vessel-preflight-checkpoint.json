@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "fifth-render-run-complete-bank-53-remote-verified-counter-five-no-x-post-eligible-local-x-parity-pending",
+  "status": "fifth-render-run-complete-bank-53-remote-verified-counter-five-retained-no-x-post-eligible",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T03:11:37.2559026Z",
+  "lastWakeAuditAtUtc": "2026-08-23T03:15:59.9388998Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -39,7 +39,7 @@
     "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC","verifierEntries":139,"verifierErrors":0},
     "projectFailedPromptLedger": {"runtimeFailures":987,"promptRecords":1567,"verifierErrors":0},
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"63709C855552578422BBB31C194E15A5883B9F4A8879F8451647D21D5E7FB1E3","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":5,"completedBanksInCurrentRenderRun":0,"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompleted":24,"cumulativeMetaBanksRemaining":146,"mode":"render-first-user-authorized-one-hundred-seventy-bank-allowance-counter-five-retained-no-eligible-post"},
-    "remoteParity": {"previousVerifiedHead":"87dd1fb0bd6b01d4e9fae3668bcd0fb8d969279a","dispatchEvidenceCommit":"866bc183934f7b19acf6a041ba048c6424952b6d","firstEvidenceCommit":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","evidenceCommit":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","trackedSourceCommit":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","localHead":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","remoteBranchHead":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","draftPr13Head":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtEvidenceCommit":true,"scope":"Vanuatu fifth render run Bank 53, one exact Meta privacy-refusal no-byte occurrence with exact primary, fallback, dispatched, response, reference, deterministic-binding and terminal-state envelopes; provider-occurrence row 525; both ledger verifiers; archive apply zero; remote and PR parity; fifth render-run completion at ten of ten; signed-in X current-interval verification and full 177-row structural ledger reconciliation; no eligible two-country post, so counter five is retained","verifiedAtUtc":"2026-08-23T03:11:37.2559026Z","pending":"commit and remote-verify X-cadence and final checkpoint parity"}
+    "remoteParity": {"previousVerifiedHead":"87dd1fb0bd6b01d4e9fae3668bcd0fb8d969279a","dispatchEvidenceCommit":"866bc183934f7b19acf6a041ba048c6424952b6d","firstEvidenceCommit":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","evidenceCommit":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","trackedSourceCommit":"4afad4a926c6b5dfd52a26833c94671c4bc49d59","xCadenceCommit":"79150cbc17d1b48059fd3340a591d8b9d0acf369","localHead":"79150cbc17d1b48059fd3340a591d8b9d0acf369","remoteBranchHead":"79150cbc17d1b48059fd3340a591d8b9d0acf369","draftPr13Head":"79150cbc17d1b48059fd3340a591d8b9d0acf369","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtXCadenceCommit":true,"scope":"Vanuatu fifth render run Bank 53, one exact Meta privacy-refusal no-byte occurrence with exact primary, fallback, dispatched, response, reference, deterministic-binding and terminal-state envelopes; provider-occurrence row 525; both ledger verifiers; archive apply and final dry-run zero; remote and PR parity; fifth render-run completion at ten of ten; signed-in X current-interval verification and full 177-row structural ledger reconciliation; no eligible two-country post, so counter five is retained","verifiedAtUtc":"2026-08-23T03:15:59.9388998Z","pending":null}
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
@@ -2343,19 +2343,20 @@
       "archiveDryRunNewBlobs": 0,
       "dispatchEvidenceCommit": "866bc183934f7b19acf6a041ba048c6424952b6d",
       "evidenceCommit": "4afad4a926c6b5dfd52a26833c94671c4bc49d59",
-      "remoteBranchHead": "4afad4a926c6b5dfd52a26833c94671c4bc49d59",
-      "draftPr13Head": "4afad4a926c6b5dfd52a26833c94671c4bc49d59",
+      "xCadenceCommit": "79150cbc17d1b48059fd3340a591d8b9d0acf369",
+      "remoteBranchHead": "79150cbc17d1b48059fd3340a591d8b9d0acf369",
+      "draftPr13Head": "79150cbc17d1b48059fd3340a591d8b9d0acf369",
       "draftPr13Open": true,
       "draftPr13Draft": true,
       "lfsPendingObjects": 0,
       "worktreeCleanAtEvidenceCommit": true,
-      "verifiedAtUtc": "2026-08-23T03:11:37.2559026Z",
-      "pending": "commit and remote-verify X-cadence and final checkpoint parity"
+      "verifiedAtUtc": "2026-08-23T03:15:59.9388998Z",
+      "pending": null
     },
     "disposition": "The exact provider refusal and zero-byte occurrence are remote-verified; scene 1614 remains unresolved; Bank 53 completes ordinal 10 and increments the fifth render-run counter to five. No eligible two-country X post exists, so retain counter five and continue with Bank 54.",
     "minimumOccurrenceEnvelope": "exact primary and fallback prompt file bytes and hashes, exact dispatched-prompt normalization, dispatch and terminal UTCs, provider URL, ordered reference hashes, face-manifest hash and verification timing, deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, exact refusal file and DOM hashes, verbatim refusal, zero generated-media sources and bytes, provider-occurrence ledger row, and pending evidence parity",
     "dispatchEvidenceCommit": "866bc183934f7b19acf6a041ba048c6424952b6d",
-    "pending": "commit and remote-verify X-cadence and final checkpoint parity"
+    "pending": null
   },
   "authoritativeBlocker": null,
   "nextAction": "After final X-cadence checkpoint parity, prepare and dispatch Vanuatu Bank 54, sixth-render-run ordinal 1, only for unresolved scene 1614; retain completedRenderRunsSinceLastX at five until an eligible confirmed X publication exists, and never reopen scenes 1612, 1613, or 1615."
