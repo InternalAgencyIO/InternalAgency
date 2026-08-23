@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-68-in-flight-clean-anchored-scene-1614-only",
+  "status": "bank-68-terminal-hard-unusable-evidence-pending-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T09:02:44.574Z",
+  "lastWakeAuditAtUtc": "2026-08-23T09:18:16.1351748Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3954,7 +3954,7 @@
     "renderRunBankOrdinal": 5,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "in-flight-clean-anchored-request",
+    "dispatchState": "closed-terminal-hard-unusable-four-unique-occurrences-evidence-pending",
     "dispatchedAtUtc": "2026-08-23T09:02:32.609Z",
     "providerUrl": "https://www.meta.ai/prompt/ba69493d-46c6-45dd-a269-d8c77a618db5",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-68-render-run-07-correction.txt",
@@ -3994,14 +3994,82 @@
     "completedBanksInCurrentRenderRun": 4,
     "completedRenderRunsSinceLastX": 5,
     "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, exactly three ordered submitted reference hashes, face-manifest verification before preflight, prompt, every upload, and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
+    "latestProviderAudit": {
+      "checkedAtUtc": "2026-08-23T09:17:09.724Z",
+      "providerState": "terminal-gallery",
+      "terminalObservedAtUtc": "2026-08-23T09:17:09.724Z",
+      "capturedOccurrenceCount": 4,
+      "rawFileCount": 4,
+      "uniqueOutputSha256Count": 4,
+      "totalGeneratedMediaBytesObserved": 1938902,
+      "uniqueGeneratedMediaBytesObserved": 1938902,
+      "rawOutputSha256InOccurrenceOrder": [
+        "2A2F51E18154B9DFEBA8D8D74BE2928B6CC3BA87CA57E02A65EEADF98F5E9E56",
+        "D83F22C74C556FF0395F11356C2E917CDC0494741C830B6F7B2279A8073A0339",
+        "3FA1E51586D26BCF0F70E6FB2C1E61B90C7BA489C9BC0DB378F64C4516EF8237",
+        "F88B5D12D77B7FB27FBC3C9CF597AE231918E55B43BD0FBD5EF1CC2987359CF2"
+      ],
+      "generatedMediaDimensionsInOccurrenceOrder": ["1152x2048 RGB", "1184x2096 RGB", "1184x2096 RGB", "1152x2048 RGB"],
+      "providerOccurrenceLedgerPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-68.jsonl",
+      "providerOccurrenceQaPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-68-qa.jsonl",
+      "providerOccurrenceTerminalPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-68-terminal.jsonl",
+      "providerResponsePath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-68-provider-response.txt",
+      "exactProviderDomResponseBytes": 400,
+      "exactProviderDomResponseSha256": "4C538C03CE4C15C8E07DD96ABB24256DCDB8DBF38D51E5A01A4922E1FA998090",
+      "providerProgressResponsePaths": [
+        "tmp/world-195x4/batch-398/scene-1614-meta-bank-68-provider-response-progress-01.txt",
+        "tmp/world-195x4/batch-398/scene-1614-meta-bank-68-provider-response-progress-02.txt",
+        "tmp/world-195x4/batch-398/scene-1614-meta-bank-68-provider-response-progress-03.txt"
+      ],
+      "occurrenceClassifications": ["hard-unusable", "hard-unusable", "hard-unusable", "hard-unusable"],
+      "terminalHardFailures": [
+        "historical quartet face identities fail on all four occurrences",
+        "required contact ownership fails on all four occurrences",
+        "the sock assignment, exact graphic order, or fully white pump gate fails on every occurrence",
+        "beacon orientation, height, support, or required four-body-length marker gap fails on all four occurrences",
+        "secure divided mini-skort construction is not unmistakable on all four women"
+      ],
+      "terminalStateCaptured": true,
+      "classification": "hard-unusable",
+      "duplicateRelationships": "all four occurrences are byte-distinct; the terminal gallery is unique against the three inline occurrences",
+      "stoppedScenesUntouched": [1612, 1613, 1615]
+    },
     "evidenceGate": {
       "previousRemoteVerifiedHead": "14bca8e664c8d5657e51e68ac65f4f632650ccb1",
       "dispatchEvidenceCommit": null,
-      "providerCompletionCaptured": false,
-      "pending": "provider completion, immediate occurrence preservation and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "inProgressOccurrencesPreserved": true,
+      "initialArchiveNewRows": 4,
+      "initialArchiveNewBlobs": 4,
+      "initialArchiveNewBlobBytes": 1938902,
+      "generatedMediaManifestRows": 5988,
+      "generatedMediaManifestSha256": "8542B14903A2DDD980B54BA4C95AFD973438ABF4BA5589DC2B8F709BC59864E3",
+      "providerOccurrenceLedgerRows": 4,
+      "providerOccurrenceLedgerSha256": "743A33A6730B3F862E256D71A82E530FC2BB9E129DF88429CCAB9673C65DAEFB",
+      "providerOccurrenceQaRows": 4,
+      "providerOccurrenceQaSha256": "3DF49B654D372C47CACB3E0DC7E47EEA8522D5F78AFDB7B88223C0DB777B12D9",
+      "providerOccurrenceTerminalRows": 1,
+      "providerOccurrenceTerminalSha256": "579D53F57A76A6700030F9C660FD2788BF69F1DFF97212DF112AD9B202092616",
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "rejectedPromptLedgerVerifierEntries": 139,
+      "rejectedPromptLedgerVerifierErrors": 0,
+      "projectFailedPromptRuntimeFailures": 987,
+      "projectFailedPromptPromptRecords": 1567,
+      "projectFailedPromptVerifierErrors": 0,
+      "progressEvidencePreparedAtUtc": "2026-08-23T09:16:03.3354452Z",
+      "preCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:22:40.0827795Z",
+      "providerCompletionCaptured": true,
+      "terminalClassificationCaptured": true,
+      "completedBanksInCurrentRenderRunBeforeBank68Parity": 4,
+      "completedBanksInCurrentRenderRunAfterBank68Parity": 5,
+      "cumulativeMetaBanksCompletedBeforeBank68Parity": 38,
+      "cumulativeMetaBanksRemainingBeforeBank68Parity": 132,
+      "cumulativeMetaBanksCompletedAfterBank68Parity": 39,
+      "cumulativeMetaBanksRemainingAfterBank68Parity": 131,
+      "pending": "initial evidence commit, tracked-source archive parity commit, Git LFS push, remote branch and draft PR 13 parity"
     },
-    "disposition": "Bank 68 is rendering only unresolved scene 1614; do not select, publish, or advance until every occurrence and evidence gate is complete.",
-    "pending": "provider completion and occurrence capture"
+    "disposition": "Select and publish none; Bank 68 has four preserved hard-unusable occurrences and will count as seventh-render-run ordinal 5 only after remote evidence parity; scene 1614 remains unresolved and Bank 69 will be ordinal 6.",
+    "pending": "Git, LFS, remote branch and draft PR 13 parity"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4029,5 +4097,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Preserve every Bank 68 occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Complete Bank 68 initial and tracked-source evidence parity, then dispatch one clean Bank 69 request for only scene 1614; never reopen scenes 1612, 1613, or 1615."
 }
