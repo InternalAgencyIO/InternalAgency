@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-user-authorized-one-hundred-seventy-meta-banks",
+    "mode": "x-backlog-clearance-user-prioritized-rendering-deferred-backlog-zero",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 2,
@@ -274,8 +274,8 @@
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "Five evidence-gated render runs are complete. The X window opened after Vanuatu Bank 53 reached ordinal ten of ten with an archived provider privacy refusal and remote parity; no eligible two-country three-asset post exists because Batch 398 remains unresolved, so retain the counter at five and continue rendering until a publication becomes eligible.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-counter-retained",
+    "counterRule": "Five evidence-gated render runs are complete. The X window is open, but the signed-in history and authoritative ledger contain no eligible unpublished two-country three-asset campaign item because Batch 398 remains unresolved. Retain the counter at five; the user has explicitly deferred Meta rendering until returning to renders.",
+    "currentPublicationWindowStatus": "open-no-eligible-post-user-prioritized-rendering-deferred",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55],
@@ -294,6 +294,16 @@
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
+  },
+  "latestUserQueuePriority": {
+    "receivedAtUtc": "2026-08-23T04:27:32.8223362Z",
+    "instruction": "lets clear all X post backlog and goBACK TO renders later",
+    "operationalInterpretation": "Reconcile and clear every exact eligible X campaign entry first. The authoritative eligible backlog is zero, so make no post and defer Bank 56 and later Meta rendering until the user returns to renders.",
+    "xPriority": "complete",
+    "eligibleBacklogRemaining": 0,
+    "renderingDeferredByUser": true,
+    "nextRenderBankWhenResumed": 56,
+    "nextRenderRunOrdinalWhenResumed": 3
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
@@ -318,7 +328,37 @@
     "nextEligibleCountryState": {"batch":398,"country":"Vanuatu","resolvedScenes":[1612,1613,1615],"unresolvedScenes":[1614],"eligibleForX":false},
     "publicationAction": "none; no exact eligible three-asset two-country post exists, so no action-time confirmation was requested and no final post click occurred",
     "counterRetention": {"completedRenderRunsSinceLastX":5,"resetAllowed":false,"reason":"Reset only after an eligible X publication is confirmed, live-verified, archived, committed, pushed, and remote-verified."},
-    "nextAction": "Continue Vanuatu scene 1614 rendering with country Bank 56, sixth-render-run ordinal 3, while retaining the completed-render-run counter at five."
+    "nextAction": "The current X backlog is zero. Preserve the counter at five and defer Vanuatu Bank 56, sixth-render-run ordinal 3, until the user returns to renders."
+  },
+  "latestXBacklogClearanceAudit": {
+    "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
+    "requestedAtUtc": "2026-08-23T04:27:32.8223362Z",
+    "completedAtUtc": "2026-08-23T04:27:32.8223362Z",
+    "instruction": "lets clear all X post backlog and goBACK TO renders later",
+    "account": "@dogramaci",
+    "signedInAccountVerified": true,
+    "liveProfileVerified": true,
+    "signedInProfilePostCount": 6186,
+    "authoritativeLedgerPostCount": 177,
+    "authoritativeLedgerPostUrlCount": 177,
+    "authoritativeLedgerUniquePostUrlCount": 177,
+    "currentIntervalVerification": [
+      {"batches":[392,393],"countries":["Maldives","Cabo Verde"],"postUrl":"https://x.com/dogramaci/status/2091238638478598301","exactCaption":true,"photoEndpoints":[1,2,3]},
+      {"batches":[394,395],"countries":["Brunei","Belize"],"postUrl":"https://x.com/dogramaci/status/2091242014331298017","exactCaption":true,"photoEndpoints":[1,2,3]},
+      {"batches":[396,397],"countries":["Bahamas","Iceland"],"postUrl":"https://x.com/dogramaci/status/2091244152960729223","exactCaption":true,"photoEndpoints":[1,2,3]}
+    ],
+    "latestVisibleNonCampaignStatuses": [
+      {"postUrl":"https://x.com/dogramaci/status/2091291806163968087","classification":"spotify-link-four-image-user-post-without-exact-guardian-campaign-caption-does-not-consume-backlog"},
+      {"postUrl":"https://x.com/dogramaci/status/2091289979645296775","classification":"unrelated-political-text-one-image-post-does-not-consume-backlog"}
+    ],
+    "eligibleBacklogRemaining": 0,
+    "activePendingPost": null,
+    "preparedPost": null,
+    "publicationAction": "none; no exact eligible campaign item exists, so no action-time confirmation was requested and no final post click occurred",
+    "nextEligibleCountryState": {"batch":398,"country":"Vanuatu","resolvedScenes":[1612,1613,1615],"unresolvedScenes":[1614],"eligibleForX":false},
+    "counterRetention": {"completedRenderRunsSinceLastX":5,"resetAllowed":false},
+    "renderingDeferredByUser": true,
+    "nextAction": "Wait for the user to return to renders, then resume only Vanuatu scene 1614 at Bank 56, sixth-render-run ordinal 3."
   },
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
