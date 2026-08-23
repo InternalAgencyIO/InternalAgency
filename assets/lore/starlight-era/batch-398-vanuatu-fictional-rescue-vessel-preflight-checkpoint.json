@@ -4,7 +4,7 @@
   "country": "Vanuatu",
   "status": "bank-64-terminal-hard-unusable-evidence-parity-in-progress-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T07:40:37.1472280Z",
+  "lastWakeAuditAtUtc": "2026-08-23T07:49:19.6385369Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3558,8 +3558,13 @@
       "projectFailedPromptRuntimeFailures": 987,
       "projectFailedPromptPromptRecords": 1567,
       "projectFailedPromptVerifierErrors": 0,
-      "initialEvidenceCommit": null,
-      "pending": "commit and remote-verify the initial Bank 64 evidence, then collect tracked-source archive rows"
+      "initialEvidenceCommit": "090285eaf31c629641ed7c45048f4dbd6c6f3d83",
+      "trackedSourceArchiveRows": 8,
+      "trackedSourceArchiveBlobs": 0,
+      "trackedSourceManifestRows": 5976,
+      "trackedSourceManifestSha256": "2FE695A16194DABB4D6F34FDE59EC9C6FE8529E8CBCC0BF544A8A42C2E13CAE9",
+      "trackedSourceArchiveCommit": null,
+      "pending": "commit and remote-verify the eight tracked-source archive rows, then run the final archive dry-run"
     },
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 64 completes seventh-render-run ordinal 1, the saturated X counter remains five, and Bank 65 is ordinal 2.",
     "pending": "initial evidence parity"
