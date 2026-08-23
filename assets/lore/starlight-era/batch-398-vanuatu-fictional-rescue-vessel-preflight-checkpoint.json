@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-62-closed-hard-unusable-scene-1614-unresolved-tracked-source-archive-pending-commit",
+  "status": "bank-62-closed-hard-unusable-remote-verified-bank-63-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T06:46:57.3245114Z",
+  "lastWakeAuditAtUtc": "2026-08-23T06:59:22.3543866Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3207,7 +3207,7 @@
     "renderRunBankOrdinal": 9,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "terminal-agentic-multi-media-hard-unusable-evidence-pending",
+    "dispatchState": "terminal-agentic-multi-media-hard-unusable-remote-verified",
     "dispatchedAtUtc": "2026-08-23T06:32:37.376Z",
     "providerUrl": "https://www.meta.ai/prompt/50e56a0a-2ec1-492e-adbc-c28509b52783",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-62-render-run-06-correction.txt",
@@ -3316,13 +3316,20 @@
       "trackedSourceArchiveBlobs": 0,
       "trackedSourceManifestRows": 5944,
       "trackedSourceManifestSha256": "540F0DF05D243AD8069653E9B582AED1FBC1ABBD66B8C9296F7185F4D83F3FD7",
-      "trackedSourceArchiveCommit": null,
+      "trackedSourceArchiveCommit": "f10a4a4db1acea41026577110e07b471b628f1c9",
       "archiveDryRunNewRows": 0,
       "archiveDryRunNewBlobs": 0,
-      "pending": "tracked-source archive commit, Git/LFS/remote/PR parity, and final checkpoint"
+      "remoteBranchHead": "f10a4a4db1acea41026577110e07b471b628f1c9",
+      "draftPr13Head": "f10a4a4db1acea41026577110e07b471b628f1c9",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T06:59:22.3543866Z",
+      "pending": null
     },
-    "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 62 counts as sixth-render-run ordinal 9 after full parity, and Bank 63 is next ordinal 10.",
-    "pending": "tracked-source archive commit and full remote parity"
+    "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 62 is remote verified and counts as sixth-render-run ordinal 9, and Bank 63 is next ordinal 10.",
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -3350,5 +3357,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Commit and remote-verify Bank 62 tracked-source archive parity, then dispatch Bank 63 only for scene 1614; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch Bank 63 only for scene 1614 using the exact deterministic bindings and ordered 938, 936, 937 identity references; never reopen scenes 1612, 1613, or 1615."
 }
