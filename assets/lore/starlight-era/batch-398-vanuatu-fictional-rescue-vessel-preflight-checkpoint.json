@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-76-closed-hard-unusable-initial-evidence-parity-pending-bank-77-scene-1614-only",
+  "status": "bank-76-closed-hard-unusable-tracked-source-archive-parity-pending-bank-77-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T13:19:23.3558966Z",
+  "lastWakeAuditAtUtc": "2026-08-23T13:27:05.759Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -5260,7 +5260,7 @@
     "renderRunBankOrdinal": 3,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "terminal-two-gallery-occurrences-hard-unusable-initial-evidence-parity-pending",
+    "dispatchState": "terminal-two-gallery-occurrences-hard-unusable-tracked-source-archive-parity-pending",
     "dispatchedAtUtc": "2026-08-23T13:11:55.410Z",
     "providerUrl": "https://www.meta.ai/prompt/9c47c14a-1ca7-4cee-b966-ba7d6181544b",
     "initialReferencePromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-76-render-run-08-correction.txt",
@@ -5358,7 +5358,12 @@
       "projectFailedPromptLedgerRuntimeFailures": 987,
       "projectFailedPromptLedgerPromptRecords": 1567,
       "projectFailedPromptLedgerVerifierErrors": 0,
-      "initialEvidenceCommit": null,
+      "initialEvidenceCommit": "e538ae57f27e27632a4ff6dc21ed5da7682f1262",
+      "archiveTrackedSourceNewRows": 2,
+      "archiveTrackedSourceNewBlobs": 0,
+      "archiveTrackedSourceNewBlobBytes": 0,
+      "archiveManifestRowsAfterTrackedSourceImport": 6012,
+      "archiveManifestSha256AfterTrackedSourceImport": "3D6DDF3EC11E3172A0E037E3E71DFC094A17C0C15C93093C8B4991CDEB505E06",
       "trackedSourceArchiveCommit": null,
       "remoteParityCheckpointCommit": null,
       "archiveDryRunNewRows": null,
@@ -5366,7 +5371,7 @@
       "lfsPendingObjects": null,
       "draftPr13Open": true,
       "draftPr13Draft": true,
-      "pending": "initial commit, exact push, tracked-source archive row, dry-run, LFS, remote branch SHA, draft PR 13 head and clean-worktree parity"
+      "pending": "tracked-source archive commit and exact push, then archive dry-run, LFS, remote branch SHA, draft PR 13 head and clean-worktree parity"
     },
     "disposition": "Select and publish none; Bank 76 closes hard-unusable after two preserved distinct terminal-gallery occurrences; scene 1614 remains unresolved; Bank 77 becomes eighth-render-run ordinal 4 only after full evidence parity."
   },
