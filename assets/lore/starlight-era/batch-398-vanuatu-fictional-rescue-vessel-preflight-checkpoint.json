@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "fifth-ten-bank-render-run-bank-49-remote-verified-scene-1614-unresolved",
+  "status": "fifth-ten-bank-render-run-bank-50-classified-evidence-pending-scene-1614-unresolved",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T00:41:24.0297628Z",
+  "lastWakeAuditAtUtc": "2026-08-23T01:42:08.3586895Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -61,11 +61,11 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 4,
-    "completedBanksInCurrentRenderRun": 6,
+    "completedBanksInCurrentRenderRun": 7,
     "inFlightRenderRunBank": null,
-    "nextRenderRunBankAfterInFlight": 7,
-    "countryBank": 49,
-    "nextCountryBank": 50,
+    "nextRenderRunBankAfterInFlight": 8,
+    "countryBank": 50,
+    "nextCountryBank": 51,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 1,
@@ -1743,9 +1743,287 @@
     "archiveParityPreparedAtUtc": "2026-08-23T01:05:58.1886290Z",
     "remoteParityState": "remote-verified"
   },
+  "latestBank50Prepared": {
+    "preparedAtUtc": "2026-08-23T01:42:08.3586895Z",
+    "countryBank": 50,
+    "renderRunBankOrdinal": 7,
+    "scene": 1614,
+    "lane": 3,
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-50-render-run-05-correction.txt",
+    "promptBytes": 5651,
+    "promptSha256": "07DF3A64460183F5E685635F6578092F81C9C911BFBFB4F5794A538C58D87985",
+    "exactDispatchedPromptBytes": 5650,
+    "exactDispatchedPromptSha256": "C9F1F456AAB562F278A87274416639E2402A08E69E7C6F2D0B3EFD6CFBC223E8",
+    "exactDispatchedPromptRelation": "prompt file minus its single terminal LF byte",
+    "fallbackPromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-50-render-run-05-fallback.txt",
+    "fallbackPromptBytes": 3107,
+    "fallbackPromptSha256": "BB1FC823EB353A91B5D33BFD0B4C7938EB2C179E22E88A313D3542B671A3BAE7",
+    "activeSuppressionMatchesPrimary": 0,
+    "activeSuppressionMatchesFallback": 0,
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedAtUtc": "2026-08-23T01:26:52.725Z",
+    "faceAnchorVerificationTiming": "immediately before dispatch; dispatch timestamp is the preserved upper bound",
+    "referenceUploadOrder": [
+      938,
+      936,
+      937
+    ],
+    "referenceSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {
+        "key": "starlight|environment|batch-398|scene-1614",
+        "counter": 0,
+        "acceptedByte": 65,
+        "digestSha256": "41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D",
+        "bucket": 0,
+        "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-398|scene-1614",
+        "counter": 0,
+        "acceptedByte": 171,
+        "digestSha256": "AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7",
+        "bucket": 1,
+        "name": "Proxima Centauri b"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-398|scene-1614",
+        "counter": 0,
+        "acceptedByte": 224,
+        "digestSha256": "E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC",
+        "bucket": 2,
+        "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"
+      }
+    },
+    "persistentMetaTabs": 4,
+    "requestedImagesPerPrompt": 1,
+    "completedBanksInCurrentRenderRunBeforeDispatch": 6,
+    "latestUserSchedulingAuthorization": {
+      "instruction": "faster 30 more batches after this",
+      "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
+      "newlyAddedMetaBanks": 30,
+      "cumulativeMetaBanksAuthorized": 170,
+      "cumulativeMetaBanksCompleted": 20,
+      "cumulativeMetaBanksRemainingBeforeBank50": 150,
+      "latestThirtyBankExtensionCompleted": 0,
+      "latestThirtyBankExtensionRemaining": 30
+    },
+    "dispatchedAtUtc": "2026-08-23T01:26:52.725Z",
+    "terminalObservedAtUtc": "2026-08-23T01:37:39.317Z",
+    "providerUrl": "https://www.meta.ai/prompt/a85d2fb2-cae8-4b07-9815-178796a087d5",
+    "providerResponsePath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-50-provider-response.txt",
+    "providerResponseBytes": 3720,
+    "providerResponseSha256": "D9A5A5151D87AA2D12E0827308B4B4D3E19B704E585A95618F7F68F4B59D8EB6",
+    "exactProviderDomResponseBytes": 3719,
+    "exactProviderDomResponseSha256": "AD87C93187275C492C77D7BF7621E935D771685163CC7A1C8757D6C4E625812D",
+    "capturedOutputs": [
+      {
+        "iteration": 1,
+        "providerAssetBasename": "784902923_2067492337241918_7393115445203824805_n.webp",
+        "capturedAtUtc": "2026-08-23T01:30:23.5964195Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-01.webp",
+        "rawBytes": 523160,
+        "rawSha256": "D25B89FDD0669DA9C6481F7B0DE25EAC6983BFDA99D8F37DB662DC158EC35165",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-no-alia-ellie-forehead-contact-radiance-left-hand-stays-on-kitten-ece-shoulder-contact-missing-incomplete-sock-glyph-map-and-mini-skort-gates"
+      },
+      {
+        "iteration": 2,
+        "providerAssetBasename": "585147877_4656201401367181_4477005108740577753_n.webp",
+        "capturedAtUtc": "2026-08-23T01:32:36.323Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-02.webp",
+        "rawBytes": 543376,
+        "rawSha256": "9F6532B60A75DCFA7E379BBED79D0BB5CCAF002C4B3652EAA116872AACAA6F00",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-no-alia-ellie-forehead-contact-extra-or-unowned-shoulder-hands-wrong-sock-glyph-map-grounded-beacon-detached-marker-and-garment-gates"
+      },
+      {
+        "iteration": 3,
+        "providerAssetBasename": "581683833_1285220073591186_8116133662245576904_n.webp",
+        "capturedAtUtc": "2026-08-23T01:33:48.278Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-03.webp",
+        "rawBytes": 630414,
+        "rawSha256": "CE0CCFF55047DC8905EF056690B9385551363B8B9065D3E08F60964559A4C699",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-no-alia-ellie-forehead-contact-wrong-hand-ownership-seven-readable-pumps-rail-crosses-bodies-grounded-beacon-detached-marker-and-garment-gates"
+      },
+      {
+        "iteration": 4,
+        "providerAssetBasename": "782876498_4513349192234998_4426937177858755587_n.webp",
+        "capturedAtUtc": "2026-08-23T01:33:49.174Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-04.webp",
+        "rawBytes": 646704,
+        "rawSha256": "02B764586F92DEC2FB071107C34C0AFA08EF080B8EA7DCF27563C521960679E9",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-alia-seated-no-forehead-contact-radiance-left-hand-stays-on-kitten-wrong-shoulder-hand-ownership-log-bench-grounded-beacon-detached-marker-and-garment-gates"
+      },
+      {
+        "iteration": 5,
+        "providerAssetBasename": "586862507_1436495195045267_7159134461748991413_n.webp",
+        "capturedAtUtc": "2026-08-23T01:33:50.022Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-05.webp",
+        "rawBytes": 659784,
+        "rawSha256": "A5A504E7D6304A821ADAFDF8080AAC9AE5F3E18342DDF1B0D1E3CE093501DA5B",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-alia-seated-no-forehead-contact-wrong-shoulder-hand-ownership-log-bench-extra-sock-glyph-grounded-beacon-detached-marker-and-garment-gates"
+      },
+      {
+        "iteration": 6,
+        "providerAssetBasename": "577583573_981844331582203_2425453553197109294_n.webp",
+        "capturedAtUtc": "2026-08-23T01:34:08.404Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-06.webp",
+        "rawBytes": 595278,
+        "rawSha256": "95E3BEB98441334B383FDE9D6A4F84A533A34F25637AE9A48E039DDEFBF3F0B9",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-alia-seated-no-forehead-contact-wrong-shoulder-hand-ownership-log-bench-extra-sock-glyph-grounded-beacon-detached-marker-and-garment-gates"
+      },
+      {
+        "iteration": 7,
+        "providerAssetBasename": "783285797_1784924992864781_6805684462280795447_n.webp",
+        "capturedAtUtc": "2026-08-23T01:34:09.222Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-07.webp",
+        "rawBytes": 589218,
+        "rawSha256": "4299AA664826B60EEB7178148C69ECBE1798CE0FE00B377DD48D5CBAF9D9AF36",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-alia-seated-no-forehead-contact-wrong-shoulder-hand-ownership-log-bench-many-extra-split-stars-grounded-beacon-detached-marker-and-garment-gates"
+      },
+      {
+        "iteration": 8,
+        "providerAssetBasename": "784249985_1367003095121093_3659134286308095450_n.webp",
+        "capturedAtUtc": "2026-08-23T01:34:10.223Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-08.webp",
+        "rawBytes": 665924,
+        "rawSha256": "A93703BEE208AC6A112614CA21E9BB91995B67EB441EE89E7A72CD2F4BB55956",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-alia-seated-no-forehead-contact-wrong-shoulder-hand-ownership-log-bench-grounded-beacon-detached-marker-and-garment-gates"
+      },
+      {
+        "iteration": 9,
+        "providerAssetBasename": "543372001_2545294159234004_2205689473953768793_n.webp",
+        "capturedAtUtc": "2026-08-23T01:34:26.666Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-09.webp",
+        "rawBytes": 542954,
+        "rawSha256": "BED470D5504CB84D0DC1EEE6BBEF94A148A632583AC5B8C02D225F012A9E016A",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-no-alia-ellie-forehead-contact-radiance-left-hand-stays-on-kitten-ece-contact-misses-ellie-seven-readable-pumps-grounded-beacon-and-garment-gates"
+      },
+      {
+        "iteration": 10,
+        "providerAssetBasename": "783286590_1346149790840022_8533530471486665718_n.webp",
+        "providerImageLabel": "gallery/rainbow_socks_star_razed.webp",
+        "capturedAtUtc": "2026-08-23T01:33:20.077Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-10.webp",
+        "rawBytes": 665924,
+        "rawSha256": "A93703BEE208AC6A112614CA21E9BB91995B67EB441EE89E7A72CD2F4BB55956",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "duplicateOfIteration": 8,
+        "classification": "byte-duplicate-of-output-08-same-hard-unusable-face-pose-hand-bench-beacon-marker-and-garment-gates"
+      },
+      {
+        "iteration": 11,
+        "providerAssetBasename": "579902239_1082316084212213_4102960800972362099_n.webp",
+        "capturedAtUtc": "2026-08-23T01:37:39.317Z",
+        "rawPath": "outputs/meta5_batch_staging/batch-398/bank-50/lane-3/batch-398-bank-50-lane-3-scene-1614-output-11.webp",
+        "rawBytes": 560924,
+        "rawSha256": "B0A7FEC9827006456913C2C67355C1189782E44D183125D08A6E034865A415D8",
+        "contentType": "image/webp",
+        "width": 1152,
+        "height": 2048,
+        "pixelFormat": "RGB",
+        "classification": "hard-unusable-no-alia-ellie-forehead-contact-radiance-left-hand-stays-on-kitten-ece-wrong-hand-on-ellie-head-alia-one-leg-trouser-three-sock-map-grounded-beacon-and-garment-gates"
+      }
+    ],
+    "capturedOutputCount": 11,
+    "uniqueOutputSha256Count": 10,
+    "totalGeneratedMediaBytesObserved": 6623660,
+    "uniqueGeneratedMediaBytesObserved": 5957736,
+    "terminalVisualQa": {
+      "distinctAdultWomen": 4,
+      "kittenCount": 1,
+      "completeReadableLegCountRange": [
+        7,
+        8
+      ],
+      "whitePumpCountRange": [
+        7,
+        8
+      ],
+      "rainbowSockCountRange": [
+        3,
+        4
+      ],
+      "razeCountRange": [
+        2,
+        2
+      ],
+      "splitStarGlyphCountRange": [
+        1,
+        6
+      ],
+      "beaconCount": 1,
+      "markerCount": 1,
+      "hardFailures": [
+        "none of the ten unique images shows Alia's exposed anatomical-right forehead joined to Ellie's exposed anatomical-left temple; outputs 4 through 8 seat Alia instead of standing her screen-left",
+        "Radiance keeps both arms around the kitten or otherwise misses Ellie's rear-left emerald shoulder; AI ECE's required anatomical-right shoulder contact is absent, wrong-handed, mis-targeted, or paired with an extra unowned hand",
+        "output 3 leaves only seven clearly separated white pumps, while multiple other images partially obscure a Radiance pump or lower-body column",
+        "outputs 4 through 8 introduce a broad log or rock bench behind and beneath the lower bodies, contrary to the required open lower-body lanes",
+        "the beacon is grounded or lacks the required full-beacon-height open-air gap, and its marker is detached or displaced in every unique image",
+        "the sock glyph map is incomplete or has extra Split-Stars in outputs 1 through 7; output 11 turns one Alia leg into a trouser panel and therefore does not contain four valid rainbow knee-high socks",
+        "one or more garments in every unique image reads as a dress, romper, bodysuit, or asymmetric trouser rather than four unmistakable secure divided cocktail mini-skorts"
+      ]
+    },
+    "classifiedAtUtc": "2026-08-23T01:42:08.3586895Z",
+    "classification": "hard-unusable",
+    "latestUserSchedulingAuthorizationAfterBank50": {
+      "newlyAddedMetaBanks": 30,
+      "cumulativeMetaBanksAuthorized": 170,
+      "cumulativeMetaBanksCompleted": 21,
+      "cumulativeMetaBanksRemaining": 149,
+      "latestThirtyBankExtensionCompleted": 0,
+      "latestThirtyBankExtensionRemaining": 30
+    },
+    "remainingEligibleScenes": [
+      1614
+    ],
+    "state": "terminal-classified-hard-unusable-evidence-pending"
+  },
   "resolvedAuthoritativeBlocker": {"recordedAtUtc":"2026-08-22T14:16:05.000Z","resolvedAtUtc":"2026-08-22T19:43:33.865Z","type":"meta-prompt-route-technical-shortfall","resolution":"A fresh authorized Bank 30 dispatch produced a durable Meta prompt URL and visible Finalizing image prompt state after a client-chunk recovery reload."},
   "resolvedBank36Blocker": {"recordedAtUtc":"2026-08-22T21:25:22.995Z","resolvedAtUtc":"2026-08-22T21:27:21.158Z","type":"provider-render-stall","resolution":"Meta rendered an explicit terminal technical-failure response with zero generated bytes; the terminal occurrence was preserved and Bank 37 became dispatch-eligible."},
   "resolvedBank38Blocker": {"recordedAtUtc":"2026-08-22T21:41:48.833Z","resolvedAtUtc":"2026-08-22T21:43:38.432Z","type":"meta-render-stall","resolution":"Meta returned one durable PNG and an explicit pose-deviation response. Raw bytes, exact response, hash, dimensions, visual classification, and the additional uncapturable resource shortfall were preserved; Bank 39 became dispatch-eligible."},
   "authoritativeBlocker": null,
-  "nextAction": "Prepare and dispatch evidence-authorized Vanuatu Bank 50 only for unresolved scene 1614, using the existing deterministic bindings and exactly one clean Meta request; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Complete archive, both ledger verifiers, Git, LFS, remote SHA, draft PR 13, and clean-worktree parity for Vanuatu Bank 50; then prepare Bank 51 only for unresolved scene 1614 without reopening stopped scenes 1612, 1613, or 1615."
 }
