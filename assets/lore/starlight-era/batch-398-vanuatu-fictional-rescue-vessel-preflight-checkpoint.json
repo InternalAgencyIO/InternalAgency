@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-72-primary-refusal-no-bytes-preserved-fallback-ready-scene-1614-only",
+  "status": "bank-72-fallback-in-flight-clean-anchored-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T10:33:08.4221837Z",
+  "lastWakeAuditAtUtc": "2026-08-23T10:39:11.292Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -4525,7 +4525,7 @@
     "renderRunBankOrdinal": 9,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "primary-refusal-no-bytes-preserved-single-fallback-ready",
+    "dispatchState": "primary-refusal-preserved-single-fallback-in-flight-clean-anchored",
     "dispatchedAtUtc": "2026-08-23T10:26:59.444Z",
     "providerUrl": "https://www.meta.ai/prompt/c9b337a9-6c25-42c6-a1ba-0ab670919236",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-72-render-run-07-correction.txt",
@@ -4594,16 +4594,46 @@
       "candidateTokenEventsAppended": 3,
       "activeSuppressionMatchesFallback": 0
     },
+    "fallbackDispatch": {
+      "dispatchedAtUtc": "2026-08-23T10:38:50.433Z",
+      "providerUrl": "https://www.meta.ai/prompt/b61dc2b3-3ae8-4e4f-a933-afe2e492275f",
+      "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-72-render-run-07-fallback.txt",
+      "promptFileBytes": 3557,
+      "promptFileSha256": "86580D1BB4472EF1325188D9C7270FC40DC06D674C6B6D007939E40AF75CF79E",
+      "exactDispatchedPromptBytes": 3556,
+      "exactDispatchedPromptSha256": "D8F951A22AA0FFCEECA16E240FEC89FA382CE5BD081B8257A10EBC548B3FBD2B",
+      "activeSuppressionMatches": 0,
+      "orderedReferenceUploadScenes": [938, 936, 937],
+      "actualSubmittedReferenceUploadCount": 3,
+      "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-23T10:34:38.5287357Z",
+      "faceAnchorsVerifiedBeforePromptAtUtc": "2026-08-23T10:34:38.5287357Z",
+      "faceAnchorsVerifiedBeforeEachUploadAtUtc": ["2026-08-23T10:35:18.6449490Z", "2026-08-23T10:36:46.0256640Z", "2026-08-23T10:37:41.1567765Z"],
+      "faceAnchorsVerifiedImmediatelyBeforeRenderAtUtc": "2026-08-23T10:38:41.2794423Z",
+      "persistentMetaTabs": 4,
+      "dispatchTabId": "6",
+      "requestedImageCount": 1,
+      "eligibleScenes": [1614],
+      "stoppedScenesUntouched": [1612, 1613, 1615],
+      "preflightDraftState": "The exact fallback prompt was inserted first. One initial chooser timeout uploaded nothing and sent nothing. Scenes 938, 936, and 937 were then attached exactly once each in order. Final normalized prompt hash, ordered filename alts, exactly four tabs, enabled Send, and one final Send click all passed.",
+      "initialProviderAudit": {
+        "checkedAtUtc": "2026-08-23T10:39:11.292Z",
+        "providerState": "thinking-in-flight-finalizing-visual-brief",
+        "generatedMediaOccurrenceCount": 0,
+        "generatedMediaBytesObserved": 0
+      }
+    },
     "minimumOccurrenceEnvelope": "exact prompt and dispatched normalization hashes, dispatch UTC, provider URL, three ordered submitted reference hashes, face-manifest verification before preflight, prompt, every successful upload, and immediately before render, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
     "evidenceGate": {
       "previousRemoteVerifiedHead": "6bf6203d1ce0a3a67d2d7d929100024d3c640fe9",
       "dispatchEvidenceCommit": "af59099cde470c5965f93d92b22f7fedcc474895",
+      "primaryRefusalAndFallbackPreparationCommit": "eb0b52c4da1a4925bee65712a87517e8dd25bcd0",
+      "fallbackDispatchEvidenceCommit": null,
       "primaryRefusalCaptured": true,
       "providerCompletionCaptured": false,
-      "pending": "single moderation-compatible fallback dispatch and completion, immediate occurrence preservation and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+      "pending": "fallback completion, immediate occurrence preservation and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
     },
-    "disposition": "Bank 72 primary request is an explicit privacy-and-complexity refusal with zero generated-media bytes; its exact refusal and prompt are preserved, and only the one contract-authorized moderation-compatible fallback remains eligible for scene 1614.",
-    "pending": "single fallback dispatch and provider completion"
+    "disposition": "Bank 72 primary refusal is preserved and its single contract-authorized moderation-compatible fallback is now rendering only unresolved scene 1614; do not dispatch another fallback or advance until every fallback occurrence and evidence gate is complete.",
+    "pending": "fallback provider completion and occurrence capture"
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -4631,5 +4661,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Dispatch the single Bank 72 moderation-compatible fallback only for unresolved scene 1614 after fresh ordered face-anchor verification, preserve every fallback occurrence or explicit no-bytes result, and never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Preserve every Bank 72 fallback occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
 }
