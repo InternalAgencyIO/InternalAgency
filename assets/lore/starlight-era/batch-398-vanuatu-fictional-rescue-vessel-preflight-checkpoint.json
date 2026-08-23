@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-63-terminal-hard-unusable-evidence-parity-in-progress-scene-1614-only",
+  "status": "bank-63-closed-hard-unusable-remote-verified-bank-64-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T07:13:59.6513746Z",
+  "lastWakeAuditAtUtc": "2026-08-23T07:27:56.1252182Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -3439,11 +3439,20 @@
       "trackedSourceArchiveBlobs": 0,
       "trackedSourceManifestRows": 5960,
       "trackedSourceManifestSha256": "91CAB33F9773FA92CC8301DB3DCB5FA878BD7FD30D3E311BE653CB9E59402EA7",
-      "trackedSourceArchiveCommit": null,
-      "pending": "commit and remote-verify the eight tracked-source archive rows, then run the final archive dry-run"
+      "trackedSourceArchiveCommit": "b8bb71c4c112eb0d57b2514f17aa3a82b9d3502a",
+      "archiveDryRunNewRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "remoteBranchHead": "b8bb71c4c112eb0d57b2514f17aa3a82b9d3502a",
+      "draftPr13Head": "b8bb71c4c112eb0d57b2514f17aa3a82b9d3502a",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T07:27:56.1252182Z",
+      "pending": null
     },
     "disposition": "Select and publish none; scene 1614 remains unresolved; Bank 63 completes sixth-render-run ordinal 10, the saturated X counter remains five, and Bank 64 is seventh-render-run ordinal 1.",
-    "pending": "initial evidence parity"
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -3471,5 +3480,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Complete Bank 63 archive, ledger, Git, LFS, remote, and PR parity; then dispatch Bank 64 only for unresolved scene 1614 and never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Dispatch Bank 64 only for unresolved scene 1614 using the fixed deterministic bindings and ordered 938, 936, 937 identity references; never reopen scenes 1612, 1613, or 1615."
 }
