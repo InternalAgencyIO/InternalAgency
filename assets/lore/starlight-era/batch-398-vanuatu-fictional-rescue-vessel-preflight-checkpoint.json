@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-82-closed-hard-unusable-single-occurrence-local-evidence-gates-pending-scene-1614-only",
+  "status": "bank-82-initial-evidence-remote-verified-tracked-source-archive-pending-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T15:14:32.5766155Z",
+  "lastWakeAuditAtUtc": "2026-08-23T15:23:08.5883941Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -5872,7 +5872,7 @@
     "disposition": "Select and publish none; the only Bank 82 occurrence is hard-unusable and scene 1614 remains unresolved.",
     "renderRunProgress": {"completedBanksInCurrentRenderRunAfterBank82Parity":9,"nextRenderRunBankOrdinal":10,"nextCountryBank":83,"completedRenderRunsSinceLastX":5,"counterRetainedAtFivePendingEligibleConfirmedXPublication":true},
     "schedulingProgress": {"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompletedAfterBank82Parity":53,"cumulativeMetaBanksRemainingAfterBank82Parity":117},
-    "evidenceGate": {"previousRemoteVerifiedHead":"ae8de3ef3f3ec36bead9f1618d6db15fbc4d6278","dispatchEvidenceCommit":"19a4722f92936badb3578e317e52da616401dd3d","dispatchRemoteBranchHead":"19a4722f92936badb3578e317e52da616401dd3d","dispatchDraftPr13Head":"19a4722f92936badb3578e317e52da616401dd3d","dispatchDraftPr13Open":true,"dispatchDraftPr13Draft":true,"dispatchLfsPendingObjects":0,"dispatchWorktreeClean":true,"dispatchVerifiedAtUtc":"2026-08-23T15:08:19.6405667Z","providerCompletionCaptured":true,"archiveInitialNewRows":1,"archiveInitialNewBlobs":1,"archiveInitialNewBlobBytes":402542,"archiveManifestRowsAfterInitialImport":6047,"archiveManifestSha256AfterInitialImport":"30D71CD95065E6A1E540826F33AAB8C4D4C04D697776C5D2767A3E8BC1C3C7B2","archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"rejectedPromptLedgerVerifierEntries":139,"rejectedPromptLedgerVerifierErrors":0,"projectFailedPromptLedgerRuntimeFailures":987,"projectFailedPromptLedgerPromptRecords":1567,"projectFailedPromptLedgerVerifierErrors":0,"initialEvidenceCommit":null,"remoteParityPending":true,"pending":"commit and exact-push initial Bank 82 evidence, add tracked-source archive row, then remote-verify branch, PR 13, LFS, archive, ledger and clean-worktree parity before Bank 83 dispatch"}
+    "evidenceGate": {"previousRemoteVerifiedHead":"ae8de3ef3f3ec36bead9f1618d6db15fbc4d6278","dispatchEvidenceCommit":"19a4722f92936badb3578e317e52da616401dd3d","dispatchRemoteBranchHead":"19a4722f92936badb3578e317e52da616401dd3d","dispatchDraftPr13Head":"19a4722f92936badb3578e317e52da616401dd3d","dispatchDraftPr13Open":true,"dispatchDraftPr13Draft":true,"dispatchLfsPendingObjects":0,"dispatchWorktreeClean":true,"dispatchVerifiedAtUtc":"2026-08-23T15:08:19.6405667Z","providerCompletionCaptured":true,"archiveInitialNewRows":1,"archiveInitialNewBlobs":1,"archiveInitialNewBlobBytes":402542,"archiveManifestRowsAfterInitialImport":6047,"archiveManifestSha256AfterInitialImport":"30D71CD95065E6A1E540826F33AAB8C4D4C04D697776C5D2767A3E8BC1C3C7B2","archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"rejectedPromptLedgerVerifierEntries":139,"rejectedPromptLedgerVerifierErrors":0,"projectFailedPromptLedgerRuntimeFailures":987,"projectFailedPromptLedgerPromptRecords":1567,"projectFailedPromptLedgerVerifierErrors":0,"initialEvidenceCommit":"f458fdeea9f7f1141329b54c7ab6af23cfd2f731","initialEvidenceRemoteBranchHead":"f458fdeea9f7f1141329b54c7ab6af23cfd2f731","initialEvidenceDraftPr13Head":"f458fdeea9f7f1141329b54c7ab6af23cfd2f731","archiveTrackedSourceNewRows":1,"archiveTrackedSourceNewBlobs":0,"archiveTrackedSourceNewBlobBytes":0,"archiveManifestRowsAfterTrackedSourceImport":6048,"archiveManifestSha256AfterTrackedSourceImport":"F04215FFDB594053DE00A98659459311E21A4602F710E8035CFF9ABD636E4786","trackedSourceArchiveCommit":null,"remoteParityPending":true,"pending":"commit and exact-push the Bank 82 tracked-source archive row, then remote-verify branch, PR 13, LFS, archive, ledger and clean-worktree parity before Bank 83 dispatch"}
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -5900,5 +5900,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Close Bank 82 through Git, tracked-source archive, both ledger verifiers, LFS, remote branch and draft PR 13 parity; only then dispatch Bank 83 for scene 1614. Never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and exact-push Bank 82 tracked-source archive parity, then finish the remote-parity checkpoint before dispatching Bank 83 for scene 1614. Never reopen scenes 1612, 1613, or 1615."
 }
