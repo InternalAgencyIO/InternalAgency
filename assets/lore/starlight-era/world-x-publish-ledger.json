@@ -268,13 +268,18 @@
   "publicationCadenceState": {
     "mode": "render-first-user-authorized-one-hundred-seventy-meta-banks",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
-    "completedRenderRunsSinceLastX": 4,
-    "completedBanksInCurrentRenderRun": 9,
+    "completedRenderRunsSinceLastX": 5,
+    "completedBanksInCurrentRenderRun": 0,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "Complete five evidence-gated render runs before the next X publication window. The fourth run is complete and remote-verified; the fifth run is nine of ten banks complete pending Bank 52 evidence parity."
+    "counterRule": "Five evidence-gated render runs are complete. The X window opened after Vanuatu Bank 53 reached ordinal ten of ten with an archived provider privacy refusal and remote parity; no eligible two-country three-asset post exists because Batch 398 remains unresolved, so retain the counter at five and continue rendering until a publication becomes eligible.",
+    "currentPublicationWindowStatus": "open-no-eligible-post-counter-retained",
+    "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
+    "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
+    "nextRenderRunBankOrdinal": 1,
+    "nextCountryBank": 54
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -282,11 +287,36 @@
     "operationalInterpretation": "Add thirty Meta banks after the existing cumulative one-hundred-forty-bank allowance for a cumulative one-hundred-seventy-bank Meta rendering allowance, while preserving the evidence-gated one-request-per-eligible-lane pipeline.",
     "newlyAddedMetaBanks": 30,
     "additionalMetaBanksAuthorized": 170,
-    "additionalMetaBanksCompleted": 23,
-    "additionalMetaBanksRemaining": 147,
+    "additionalMetaBanksCompleted": 24,
+    "additionalMetaBanksRemaining": 146,
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
+  },
+  "latestFifthRenderRunXWindowAudit": {
+    "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
+    "checkedAtUtc": "2026-08-23T03:11:37.2559026Z",
+    "account": "@dogramaci",
+    "signedInAccountVerified": true,
+    "signedInProfilePostCount": 6188,
+    "authoritativeLedgerPostCount": 177,
+    "authoritativeLedgerPostUrlCount": 177,
+    "authoritativeLedgerUniquePostUrlCount": 177,
+    "authoritativeLedgerMissingPostUrlCount": 0,
+    "authoritativeLedgerCaptionCount": 81,
+    "authoritativeLedgerUniqueCaptionCount": 81,
+    "fullLedgerStructuralReconciliation": "All 177 authoritative campaign and audit-history post rows were checked, every row has one unique @dogramaci X status URL, and all 81 recorded campaign captions are unique.",
+    "liveCurrentIntervalVerification": [
+      {"batches":[392,393],"countries":["Maldives","Cabo Verde"],"postUrl":"https://x.com/dogramaci/status/2091238638478598301","exactCaption":true,"photoEndpoints":[1,2,3]},
+      {"batches":[394,395],"countries":["Brunei","Belize"],"postUrl":"https://x.com/dogramaci/status/2091242014331298017","exactCaption":true,"photoEndpoints":[1,2,3]},
+      {"batches":[396,397],"countries":["Bahamas","Iceland"],"postUrl":"https://x.com/dogramaci/status/2091244152960729223","exactCaption":true,"photoEndpoints":[1,2,3]}
+    ],
+    "eligibleBacklogRemaining": 0,
+    "activePendingPost": null,
+    "nextEligibleCountryState": {"batch":398,"country":"Vanuatu","resolvedScenes":[1612,1613,1615],"unresolvedScenes":[1614],"eligibleForX":false},
+    "publicationAction": "none; no exact eligible three-asset two-country post exists, so no action-time confirmation was requested and no final post click occurred",
+    "counterRetention": {"completedRenderRunsSinceLastX":5,"resetAllowed":false,"reason":"Reset only after an eligible X publication is confirmed, live-verified, archived, committed, pushed, and remote-verified."},
+    "nextAction": "Continue Vanuatu scene 1614 rendering with country Bank 54, sixth-render-run ordinal 1, while retaining the completed-render-run counter at five."
   },
   "pendingCoverUpdate": null,
   "coverUpdatePolicy": {
