@@ -4098,7 +4098,7 @@
     "renderRunBankOrdinal": 6,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "closed-terminal-hard-unusable-single-occurrence-evidence-prepared",
+    "dispatchState": "closed-terminal-hard-unusable-single-occurrence-remote-verified",
     "dispatchedAtUtc": "2026-08-23T09:32:09.330Z",
     "providerUrl": "https://www.meta.ai/prompt/a866ab75-06ad-4aac-b598-ac6b1a17ad27",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-69-render-run-07-correction.txt",
@@ -4216,11 +4216,24 @@
       "trackedSourceGeneratedMediaManifestSha256": "750A1F49C097794D17EEF94261033A9B82A635AECC93D7E3BA9A3B6849CC9FAF",
       "trackedSourceArchivePreparedAtUtc": "2026-08-23T09:42:13.7469786Z",
       "preTrackedSourceCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:42:33.3230186Z",
-      "trackedSourceArchiveCommit": null,
-      "pending": "tracked-source archive commit, push, current-bank LFS verification, remote branch and draft PR 13 parity"
+      "trackedSourceArchiveCommit": "fe7491c00b25731ca8d2f303d0e7f561124882c8",
+      "prePushFaceAnchorsVerifiedAtUtc": "2026-08-23T09:42:57.0226735Z",
+      "remoteBranchHead": "fe7491c00b25731ca8d2f303d0e7f561124882c8",
+      "draftPr13Head": "fe7491c00b25731ca8d2f303d0e7f561124882c8",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+      "currentBankLfsObjectCount": 1,
+      "currentBankLfsObjectsRemoteFetchedAndShaVerified": true,
+      "lfsPendingObjects": 0,
+      "worktreeCleanAtTrackedSourceParityCommit": true,
+      "verifiedAtUtc": "2026-08-23T09:43:36.6029523Z",
+      "remoteParityCheckpointPreCommitFaceAnchorsVerifiedAtUtc": "2026-08-23T09:43:46.5163806Z",
+      "remoteParityState": "remote-verified",
+      "pending": null
     },
     "disposition": "Select and publish none; Bank 69 is terminal hard-unusable with its sole occurrence preserved and classified, scene 1614 remains unresolved, and Bank 70 is seventh-render-run ordinal 7.",
-    "pending": "Git, tracked-source archive, LFS, remote branch and draft PR 13 parity"
+    "pending": null
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
