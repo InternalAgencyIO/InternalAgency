@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-72-closed-hard-unusable-remote-verified-scene-1614-only",
+  "status": "bank-73-text-only-in-flight-upload-blocker-recorded-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T10:54:21.6914739Z",
+  "lastWakeAuditAtUtc": "2026-08-23T11:33:32.875Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -62,10 +62,10 @@
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 9,
-    "inFlightRenderRunBank": null,
-    "nextRenderRunBankAfterInFlight": 10,
-    "countryBank": 72,
-    "nextCountryBank": 73,
+    "inFlightRenderRunBank": 10,
+    "nextRenderRunBankAfterInFlight": 1,
+    "countryBank": 73,
+    "nextCountryBank": 74,
     "requestedImagesPerPrompt": 1,
     "persistentMetaTabs": 4,
     "eligibleMetaLanes": 1,
@@ -95,8 +95,8 @@
       "instruction": "get unresolved scenes done and complete posts fast",
       "xBacklogStatus": "cleared-zero",
       "renderingDeferredByUser": false,
-      "activeBank": 72,
-      "activeOrdinal": 9
+      "activeBank": 73,
+      "activeOrdinal": 10
     }
   },
   "scenePlans": {
@@ -4808,6 +4808,84 @@
     "disposition": "Select and publish none; Bank 72 primary ended in an explicit no-bytes refusal and its single permitted fallback is terminal hard-unusable; scene 1614 remains unresolved; Bank 73 is seventh-render-run ordinal 10.",
     "pending": null
   },
+  "bank73Dispatch": {
+    "countryBank": 73,
+    "renderRunBankOrdinal": 10,
+    "scene": 1614,
+    "lane": 3,
+    "dispatchState": "text-only-in-flight-after-evidenced-browser-reference-upload-failure",
+    "dispatchedAtUtc": "2026-08-23T11:33:16.688Z",
+    "providerUrl": "https://www.meta.ai/prompt/f6541617-0b6a-4a76-90f3-20983f045466",
+    "initialReferencePromptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-73-render-run-07-correction.txt",
+    "initialReferencePromptBytes": 3818,
+    "initialReferencePromptSha256": "F3D4A214BB387FBA91422AD60B4A7126B43A93CF1E80F555DD8C2D1B63958452",
+    "initialExactReferencePromptBytes": 3817,
+    "initialExactReferencePromptSha256": "D265CE035743588F36221B1CC7ED5F02B31BF8EA971E7B9CDBA7888F1F509BEF",
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-73-render-run-07-text-only.txt",
+    "promptFileBytes": 3898,
+    "promptFileSha256": "3BF3B8A316697DE0FD8FFBE90BB46A0B1D0EAB9806CE3506AF85B8F74CAEA994",
+    "exactDispatchedPromptBytes": 3897,
+    "exactDispatchedPromptSha256": "9CE57581162AE2E27B6AD30A4AA7B9DBC34B571E73810DBD3EBFD4BAFDECCBD0",
+    "exactDispatchedPromptRule": "text-only prompt file minus its single terminal LF byte",
+    "activeSuppressionMatchesInitial": 0,
+    "activeSuppressionMatchesTextOnly": 0,
+    "privacySafeFictionalCharacterRequest": true,
+    "orderedReferenceUploadScenesAttempted": [938, 936, 937],
+    "actualSubmittedReferenceUploadScenes": [],
+    "actualSubmittedReferenceUploadCount": 0,
+    "orderedReferenceSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-23T10:56:46.4240112Z",
+    "faceAnchorsVerifiedBeforeInitialPromptAtUtc": "2026-08-23T11:20:48.4117473Z",
+    "faceAnchorsVerifiedBeforeUploadAttemptsAtUtc": [
+      "2026-08-23T11:21:36.9692342Z",
+      "2026-08-23T11:22:05.5078975Z",
+      "2026-08-23T11:22:34.6906745Z",
+      "2026-08-23T11:27:23.9055732Z",
+      "2026-08-23T11:29:08.5680734Z"
+    ],
+    "faceAnchorsVerifiedBeforeTextOnlyPromptAtUtc": "2026-08-23T11:32:36.3506294Z",
+    "faceAnchorsVerifiedImmediatelyBeforeRenderAtUtc": "2026-08-23T11:33:00.0952869Z",
+    "uploadFailureLedgerPath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-73-upload-failures.jsonl",
+    "uploadFailureLedgerRows": 5,
+    "uploadFailureLedgerSha256": "43E4C3C59D9722360AC0AF43940B94D0AC96C1978241E1918B7C6136CB2F38DF",
+    "uploadBlocker": "TypeError: URL.createObjectURL is not a function",
+    "uploadBlockerClassification": "browser-control-file-preview-construction-failure-before-any-attachment-or-send",
+    "textOnlyContinuationAuthority": "the authoritative identityAnchorRule and editRule require exact failure evidence and text-only continuation with the historical name mapping when uploads fail",
+    "persistentMetaTabs": 4,
+    "dispatchTabId": "6",
+    "eligibleScenes": [1614],
+    "stoppedScenesUntouched": [1612, 1613, 1615],
+    "requestedImageCount": 1,
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep violet dusk with a bright horizon band and readable faces"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"}
+    },
+    "completedBanksInCurrentRenderRunBeforeDispatch": 9,
+    "completedBanksInCurrentRenderRun": 9,
+    "completedRenderRunsSinceLastX": 5,
+    "initialProviderAudit": {
+      "checkedAtUtc": "2026-08-23T11:33:32.875Z",
+      "providerState": "thinking-in-flight-designing-editorial-layout-and-finalizing-image-prompt",
+      "generatedMediaOccurrenceCount": 0,
+      "generatedMediaBytesObserved": 0
+    },
+    "minimumOccurrenceEnvelope": "exact initial and text-only prompt hashes, every exact upload failure with UTC and intended reference hash, zero actual submitted references, exact historical mapping, face-verification and dispatch UTCs, provider URL, fixed deterministic bindings, exactly four persistent Meta tabs, one requested image, one eligible scene, three untouched stopped scenes, and every eventual terminal media occurrence or explicit no-bytes result before visual inspection",
+    "evidenceGate": {
+      "previousRemoteVerifiedHead": "d8ab1f1fc4d4f77c880647e967ee88054d0f71f4",
+      "uploadFailuresCaptured": true,
+      "providerCompletionCaptured": false,
+      "dispatchEvidenceCommit": null,
+      "pending": "dispatch evidence commit, exact push, provider completion, occurrence capture and classification, archive, both ledger verifiers, Git, LFS, remote branch and draft PR 13 parity"
+    },
+    "disposition": "Bank 73 is seventh-render-run ordinal 10 and is now rendering only unresolved scene 1614 through the contract-authorized text-only flow after the exact browser upload blocker was preserved; no filler and no second dispatch.",
+    "pending": "provider completion and immediate occurrence capture"
+  },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
     "checkedAtUtc": "2026-08-23T04:27:32.8223362Z",
@@ -4834,5 +4912,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Prepare and dispatch Bank 73, seventh-render-run ordinal 10, only for unresolved scene 1614 after verifying the face manifest and fixed deterministic bindings; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Preserve every Bank 73 text-only Meta occurrence or explicit no-bytes result before visual inspection, then classify and complete archive, ledger, Git, LFS, remote SHA and draft PR 13 parity; never reopen scenes 1612, 1613, or 1615."
 }
