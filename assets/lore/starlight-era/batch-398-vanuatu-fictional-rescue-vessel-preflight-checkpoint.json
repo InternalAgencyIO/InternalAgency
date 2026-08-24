@@ -4,7 +4,7 @@
   "country": "Vanuatu",
   "status": "bank-85-final-parity-verified-bank-86-preflight-ready-browser-control-binding-blocked-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T07:12:44.3537505Z",
+  "lastWakeAuditAtUtc": "2026-08-24T07:20:47.2476369Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -95,7 +95,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-24T07:12:44.3537505Z",
+    "verifiedAtUtc": "2026-08-24T07:20:47.2476369Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -141,13 +141,13 @@
     ],
     "dispatchPolicy": "concurrent across every eligible scene lane; keep exactly four persistent Meta tabs; never send filler in a resolved or stopped lane",
     "userQueuePriority": {
-      "receivedAtUtc": "2026-08-24T07:12:44.3537505Z",
+      "receivedAtUtc": "2026-08-24T07:20:47.2476369Z",
       "instruction": "RETRY AUTHORIZED FOR ALL POSTS GO FASTER",
       "xBacklogStatus": "cleared-zero",
       "renderingDeferredByUser": false,
       "activeBank": 86,
       "activeOrdinal": 3,
-      "evidenceGateState": "Bank 85 final archive, verifier, Git, LFS, remote SHA, PR 13 and clean-worktree parity verified; Bank 86 has a distinct zero-suppression scene-1614-only prompt and exact blocker envelope prepared but awaits browser-control restoration"
+      "evidenceGateState": "Bank 85 final archive, verifier, Git, LFS, remote SHA, PR 13 and clean-worktree parity verified; Bank 86 has a distinct zero-suppression scene-1614-only prompt, exact 5,045-byte normalized dispatch hash, and complete dispatch envelope prepared but awaits browser-control restoration"
     }
   },
   "scenePlans": {
@@ -6094,6 +6094,9 @@
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-86-render-run-09-text-only.txt",
     "promptBytes": 5046,
     "promptSha256": "C5E2AECD6BF82CFFB81C76D1933FBFBCE468F494026DA8F74F8B722657FEC2E5",
+    "exactIntendedDispatchedPromptBytes": 5045,
+    "exactIntendedDispatchedPromptSha256": "4B20ADBD1CFB96E130EC4812852E2CA77449E507D0991A9DBE1C23E40A79FDFA",
+    "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-dispatch-envelope.jsonl",
     "activeSuppressionMatches": 0,
     "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-24T07:12:44.3537505Z",
@@ -6111,7 +6114,8 @@
       "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"protected exterior beneath a transparent pressure field with dry stable footing"}
     },
     "blockerEvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-browser-control-blocker.jsonl",
-    "blockerObservedAtUtc": "2026-08-24T07:12:44.3537505Z",
+    "blockerObservedAtUtc": "2026-08-24T07:20:47.2476369Z",
+    "lastBrowserControlRetryAtUtc": "2026-08-24T07:20:47.2476369Z",
     "dispatchAttempted": false,
     "providerUrl": null,
     "renderRunProgress": {"completedBanksInCurrentRenderRun":2,"nextRenderRunBankOrdinal":3,"completedRenderRunsSinceLastX":5},
@@ -6149,9 +6153,9 @@
   },
   "authoritativeBlocker": {
     "type": "browser-control-binding-unavailable-bank-86-preflight-ready",
-    "observedAtUtc": "2026-08-24T07:12:44.3537505Z",
+    "observedAtUtc": "2026-08-24T07:20:47.2476369Z",
     "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-browser-control-blocker.jsonl",
-    "impact": "Bank 85 remains fully evidence-gated and counted. Bank 86 has an exact distinct zero-suppression prompt and fixed bindings prepared, but cannot be dispatched until the exactly-four-tab signed-in Meta browser audit is callable. No resolved lane is reopened and no filler is generated."
+    "impact": "Bank 85 remains fully evidence-gated and counted. Bank 86 now has an exact distinct zero-suppression prompt, fixed bindings, exact 5,045-byte intended dispatch hash, and complete dispatch envelope prepared, but cannot be dispatched until the exactly-four-tab signed-in Meta browser audit is callable. No resolved lane is reopened and no filler is generated."
   },
   "nextAction": "Restore browser-control availability and dispatch the prepared Bank 86 prompt for scene 1614 only with exactly four persistent signed-in Meta tabs and ordered 938, 936, 937 attachments. Preserve every completed occurrence or explicit no-bytes outcome before inspection. Never reopen scenes 1612, 1613, or 1615."
 }
