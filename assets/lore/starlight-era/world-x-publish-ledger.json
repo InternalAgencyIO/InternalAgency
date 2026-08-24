@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-batch-399-bank-93-closed-hard-unusable-remote-parity-complete-bank-94-preflight-pending-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-399-bank-94-attempt-4-preflight-ready-pending-remote-parity-not-dispatched-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 0,
@@ -275,7 +275,7 @@
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-93-closed-bank-94-preflight-pending",
+    "currentPublicationWindowStatus": "open-no-eligible-post-bank-94-attempt-4-preflight-ready-pending-remote-parity-not-dispatched",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -303,7 +303,7 @@
     "latestClosedRawFileCount": 8,
     "latestClosedUniqueOccurrenceCount": 8,
     "latestClosedClassification": "hard-unusable-all-four-lanes-eight-raw-files-eight-unique-contents",
-    "latestClosedRemoteVerifiedHead": "78a860d16dcc3643cd00880c89e4b12667ef3904",
+    "latestClosedRemoteVerifiedHead": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
     "inFlightCountryBank": null,
     "inFlightRenderRunBankOrdinal": null,
     "inFlightProviderUrl": null,
@@ -843,6 +843,68 @@
       "publicationAction": "none"
     },
     "noFalseDispatchClaim": "Technical retry 2 reached four Meta prompt URLs after the authorized one-time Discard navigation handoff. The exact terminal audit preserved eight unique media occurrences, all exact CDN source URLs and four exact DOM response snapshots; all eight are hard-unusable. Bank 93 is counted only after evidence commit 78a860d16dcc3643cd00880c89e4b12667ef3904 matched local/origin/draft PR 13 and LFS gates."
+  },
+  "latestBatch399Bank94PreflightAudit": {
+    "status": "four-lane-attempt-4-preflight-ready-pending-commit-remote-parity-not-dispatched",
+    "checkedAtUtc": "2026-08-24T12:42:41.1789287Z",
+    "batch": 399,
+    "country": "Barbados",
+    "bank": 94,
+    "attempt": 4,
+    "renderRun": 10,
+    "renderRunOrdinal": 1,
+    "dispatchAuthorizedNow": false,
+    "providerDispatchConfirmed": false,
+    "providerUrls": [],
+    "eligibleScenes": [1616,1617,1618,1619],
+    "eligibleLanes": [1,2,3,4],
+    "promptRecords": [
+      {"scene":1616,"lane":1,"path":"tmp/world-195x4/batch-399/scene-1616-meta-bank-04-attempt-04.txt","bytes":4716,"sha256":"4FFA747D384203E086B25F9B67E295FA6D32622F63E9B17AB6FF96A8763C5A0B","exactIntendedDispatchedBytes":4715,"exactIntendedDispatchedSha256":"441A6103229E9092BB845C3E20660F374FA1709C021EB4E6C44B26A0050AC192","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":1},
+      {"scene":1617,"lane":2,"path":"tmp/world-195x4/batch-399/scene-1617-meta-bank-04-attempt-04.txt","bytes":5355,"sha256":"C7E4ACC1134D994F56DACFBFDB2589760AD1CAF3C13B0B321C39CB2D01835EFC","exactIntendedDispatchedBytes":5354,"exactIntendedDispatchedSha256":"AD3816D83416BA7D27C209698345D25EC151A97439DFB53847FD614CC655530C","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":null},
+      {"scene":1618,"lane":3,"path":"tmp/world-195x4/batch-399/scene-1618-meta-bank-04-attempt-04.txt","bytes":5118,"sha256":"3C29D7F8A34FBF4F95AF82EE6CD973126525A83E0F7782AB132BC47C2E5D77F9","exactIntendedDispatchedBytes":5117,"exactIntendedDispatchedSha256":"94E5DF3F43ACDC44FD22D7B26C3DF361893A570D8209676905E1A79B1473AE86","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937,1136],"bolderMissionLane":null},
+      {"scene":1619,"lane":4,"path":"tmp/world-195x4/batch-399/scene-1619-meta-bank-04-attempt-04.txt","bytes":5356,"sha256":"438C545A86E3F97CD8FA43EAFBDD3B7A3E73604586B182CC0F77601E8B1146B9","exactIntendedDispatchedBytes":5355,"exactIntendedDispatchedSha256":"A8A8A23E7C87FD7AB18312542582460DA5E16FA7724D82458A6C99C0F69D8A62","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":2}
+    ],
+    "bolderMissionMapping": {
+      "requiredCount": 2,
+      "actualCount": 2,
+      "selectedScenes": [1616,1619],
+      "selectedLanes": [1,4],
+      "scene1616": "supported seated side-hug with accepted closed-mouth cheek affection",
+      "scene1619": "moving consensual behind-hug with complete-heel fashion lift",
+      "standardRelationshipScenes": [1617,1618]
+    },
+    "independentPromptAudit": {
+      "status": "pass-no-discrepancies",
+      "allFourFileAndNormalizedHashesMatchDisk": true,
+      "strictUtf8": true,
+      "exactlyOneTerminalLfPerPrompt": true,
+      "allFourActiveSuppressionMatches": 0,
+      "bolderMissionMappingExactTwoOfFour": true,
+      "fixedBindingsRazeReferencesCountrySafetyAndCameraGatesMatch": true
+    },
+    "preflightBarrier": {
+      "requiredPriorRemoteHead": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
+      "localHeadBeforePreflightCommit": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
+      "archiveDryRun": {"occurrences":4783,"uniqueContents":3552,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+      "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
+      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
+      "gitLfsPendingObjectCount": 0,
+      "preflightCommit": null,
+      "remoteParityPending": true
+    },
+    "renderCadence": {
+      "completedRenderRunsSinceLastX": 5,
+      "currentRenderRun": 10,
+      "completedBanksInCurrentRenderRun": 0,
+      "currentPreflightBank": 94,
+      "currentPreflightAttempt": 4,
+      "currentPreflightRenderRunOrdinal": 1
+    },
+    "cumulativeMetaBankAllowance": {"authorized":170,"completed":64,"remaining":106},
+    "completedBank": false,
+    "countedTowardRenderRun": false,
+    "xState": {"eligibleBacklogRemaining":0,"eligibleTwoCountryPostExists":false,"publicationAction":"none"},
+    "nextAction": "Commit and push the exact checkpoint/X mirror and four Bank 94 Attempt 4 prompts; remote-verify local/origin/draft-PR/LFS parity before dispatch authorization."
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
