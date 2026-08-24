@@ -458,15 +458,15 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "bank-96-closure-remote-parity-complete-bank-97-attempt-2-prompt-qa-passed-pending-preflight-commit-not-dispatched",
-    "checkedAtUtc": "2026-08-24T15:37:42.1148658Z",
+    "status": "bank-97-attempt-2-ready-for-exact-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
+    "checkedAtUtc": "2026-08-24T15:46:54.7424394Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 97,
     "attempt": 2,
     "renderRun": 10,
     "renderRunOrdinal": 4,
-    "dispatchAuthorizedNow": false,
+    "dispatchAuthorizedNow": true,
     "providerDispatchConfirmed": false,
     "eligibleScenes": [1620,1621,1622,1623],
     "eligibleLanes": [1,2,3,4],
@@ -662,8 +662,8 @@
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
     "bank97Attempt2Preflight": {
-      "state": "four-frozen-prompts-independent-qa-pass-pending-commit-remote-parity-not-dispatched",
-      "dispatchAuthorizedNow": false,
+      "state": "ready-for-exactly-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
+      "dispatchAuthorizedNow": true,
       "providerDispatchConfirmed": false,
       "promptRecordsVerified": 4,
       "activeSuppressionMatches": 0,
@@ -671,7 +671,20 @@
       "independentPromptQaComplete": true,
       "lateArchiveParityCommit": "ddaa1f5f4ea2f6d50e6c7c132efe400112c20d0b",
       "archiveDryRun": {"occurrences":4811,"uniqueContents":3578,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "preflightRemoteParityComplete": false,
+      "preflightRemoteParityComplete": true,
+      "preflightParity": {
+        "verifiedAtUtc": "2026-08-24T15:46:54.7424394Z",
+        "preflightCommit": "f44de4d9891b4e4ca280ed01de20d0a4279afb9c",
+        "localHead": "f44de4d9891b4e4ca280ed01de20d0a4279afb9c",
+        "remoteBranchHead": "f44de4d9891b4e4ca280ed01de20d0a4279afb9c",
+        "draftPr13Head": "f44de4d9891b4e4ca280ed01de20d0a4279afb9c",
+        "draftPr13State": "OPEN",
+        "draftPr13IsDraft": true,
+        "draftPr13MergeState": "CLEAN",
+        "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+        "gitLfsPendingObjects": 0,
+        "worktreeClean": true
+      },
       "notDispatched": true
     },
     "renderCadence": {
@@ -691,8 +704,8 @@
       "attempt": 2,
       "renderRun": 10,
       "renderRunOrdinal": 4,
-      "state": "four-prompt-independent-qa-pass-pending-commit-remote-parity-not-dispatched",
-      "dispatchAuthorizedNow": false,
+      "state": "ready-for-exactly-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
+      "dispatchAuthorizedNow": true,
       "providerDispatchConfirmed": false
     },
     "xState": {
@@ -701,7 +714,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Commit and remote-verify the exact Bank 97 Attempt 2 prompt/checkpoint/X preflight set. Then keep exactly four eligible Meta tabs active and dispatch one contract-complete request per lane; use no untracked yes-loop or simplified suggestion. X backlog remains zero and no publication action is available."
+    "nextAction": "Bank 97 Attempt 2 is ready for exactly four signed-in Meta lanes after a fresh face/hash/tab audit. Dispatch one exact contract-complete request per lane, preserve every occurrence before visual inspection, and use no untracked yes-loop or simplified suggestion. X backlog remains zero and no publication action is available."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
