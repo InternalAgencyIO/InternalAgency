@@ -407,8 +407,8 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "four-lane-bank-96-attempt-1-terminal-client-side-technical-no-dispatch-no-bytes-evidence-parity-pending",
-    "checkedAtUtc": "2026-08-24T14:39:17.174Z",
+    "status": "four-lane-bank-96-attempt-1-technical-retry-1-preflight-prepared-pending-remote-parity",
+    "checkedAtUtc": "2026-08-24T14:46:56.8806040Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 96,
@@ -488,6 +488,24 @@
       "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
+    "terminalEvidenceAndArchiveParity": {
+      "status": "complete",
+      "verifiedAtUtc": "2026-08-24T14:46:56.8806040Z",
+      "terminalHandoffEvidenceCommit": "52a9396eb81483edb8bc0303d85bededf3c04cfa",
+      "lateArchiveParityCommit": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+      "localHead": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+      "remoteBranchHead": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+      "draftPr13Head": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+      "draftPr13State": "OPEN",
+      "draftPr13IsDraft": true,
+      "draftPr13MergeState": "CLEAN",
+      "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+      "gitLfsPendingObjects": 0,
+      "worktreeClean": true,
+      "archiveDryRun": {"occurrences":4805,"uniqueContents":3572,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+      "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
+      "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+    },
     "initialUploadSubmitHandoff": {
       "state": "terminal-client-side-technical-no-dispatch-no-bytes",
       "uiSendClickAtUtc": "2026-08-24T14:35:09.751Z",
@@ -510,7 +528,29 @@
       "cumulativeMetaBanksRemaining": 104,
       "currentRenderRunCompletedBanks": 2,
       "xEligibleBacklogRemaining": 0,
-      "evidenceRemoteParityPending": true
+      "evidenceRemoteParityPending": false,
+      "evidenceRemoteParityCommit": "52a9396eb81483edb8bc0303d85bededf3c04cfa"
+    },
+    "technicalRetry1": {
+      "retryOrdinal": 1,
+      "state": "preflight-prepared-pending-commit-remote-parity",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": false,
+      "reuseExactPromptFilesAndHashes": true,
+      "reuseDeterministicBindingsWithoutReroll": true,
+      "orderedReferenceScenesByLane": {
+        "1": [938, 936, 937],
+        "2": [938, 936, 937],
+        "3": [938, 936, 937],
+        "4": [938, 936, 937, 1136]
+      },
+      "sendPolicy": "Fresh ordered uploads; wait for all attachments to finish, Loading absent, exact prompts present and all four Send controls enabled; then one concurrent click per lane with no duplicate Send.",
+      "providerDispatchProofRequired": "A unique Meta prompt URL or Stop state is required before any provider-dispatch claim.",
+      "evidenceParityCommit": "52a9396eb81483edb8bc0303d85bededf3c04cfa",
+      "lateArchiveParityCommit": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+      "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
+      "completedBank": false,
+      "countedTowardRenderRun": false
     },
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
@@ -530,7 +570,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Commit and remote-verify the terminal technical no-dispatch/no-bytes evidence. Then prepare and separately remote-verify bounded technical retry 1 before any further browser action."
+    "nextAction": "Commit and remote-verify bounded technical retry 1 preflight, then issue a narrow parity-backed dispatch authorization before any browser action. X backlog and all social actions remain zero."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",

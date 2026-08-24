@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-96-attempt-1-terminal-client-side-technical-no-dispatch-no-bytes-evidence-parity-pending",
+  "status": "bank-96-attempt-1-technical-retry-1-preflight-prepared-pending-remote-parity",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T14:19:31.3972361Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -616,19 +616,49 @@
       "duplicateSendAuthorized": false,
       "completedBank": false,
       "countedTowardRenderRun": false,
-      "evidenceRemoteParityPending": true
+      "evidenceRemoteParityPending": false,
+      "evidenceRemoteParityCommit": "52a9396eb81483edb8bc0303d85bededf3c04cfa"
+    },
+    "technicalRetry1": {
+      "retryOrdinal": 1,
+      "reason": "The initial Send group terminated entirely in the client-side upload/submit handoff with no Meta provider URL, Stop state, provider text, refusal, or media; it is not a provider dispatch and does not count the bank.",
+      "state": "preflight-prepared-pending-commit-remote-parity",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": false,
+      "reuseExactPromptFilesAndHashes": true,
+      "reuseDeterministicBindingsWithoutReroll": true,
+      "orderedReferenceScenesByLane": {
+        "1": [938, 936, 937],
+        "2": [938, 936, 937],
+        "3": [938, 936, 937],
+        "4": [938, 936, 937, 1136]
+      },
+      "procedure": [
+        "Audit exactly four clean persistent signed-in Meta tabs and confirm no Stop or provider request remains.",
+        "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
+        "Wait until every attachment finishes processing, Loading is absent, the exact normalized prompt remains present, and Send is enabled in all four lanes.",
+        "Click Send exactly once per lane in one concurrent four-lane group; do not duplicate a Send click.",
+        "Claim provider dispatch only after a unique Meta prompt URL or Stop state appears, then preserve every occurrence before visual inspection."
+      ],
+      "evidenceParityCommit": "52a9396eb81483edb8bc0303d85bededf3c04cfa",
+      "lateArchiveParityCommit": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+      "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
+      "completedBank": false,
+      "countedTowardRenderRun": false
     },
     "notDispatched": true
   },
   "remoteParity": {
     "status": "preflight-commit-local-remote-pr13-lfs-archive-ledger-clean-worktree-parity-verified",
-    "verifiedAtUtc": "2026-08-24T14:24:10.8707934Z",
+    "verifiedAtUtc": "2026-08-24T14:46:56.8806040Z",
     "sourceClosureCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
     "preflightCommit": "81870158db900e75d11713eb6124f244fda5a93e",
     "remoteBranch": "agent/starlight-progress-archive",
     "remoteBranchHeadAtPreparationStart": "6a9cefe076f4887137e2158b196712de3caf5492",
-    "localHeadAtVerifiedBarrier": "81870158db900e75d11713eb6124f244fda5a93e",
-    "remoteBranchHeadAtVerifiedBarrier": "81870158db900e75d11713eb6124f244fda5a93e",
+    "terminalHandoffEvidenceCommit": "52a9396eb81483edb8bc0303d85bededf3c04cfa",
+    "lateArchiveParityCommit": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+    "localHeadAtVerifiedBarrier": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+    "remoteBranchHeadAtVerifiedBarrier": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
     "draftPr13": {
       "number": 13,
       "stateAtPreparationStart": "OPEN",
@@ -637,19 +667,19 @@
       "stateAtVerifiedBarrier": "OPEN",
       "draftAtVerifiedBarrier": true,
       "mergeStateAtVerifiedBarrier": "CLEAN",
-      "headOidAtVerifiedBarrier": "81870158db900e75d11713eb6124f244fda5a93e",
+      "headOidAtVerifiedBarrier": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
       "head": "agent/starlight-progress-archive",
       "base": "agent/iat-launch-window-recovery-batch-220"
     },
     "gitLfsPendingObjectsAtPreparationStart": 0,
     "gitLfsPendingObjectsAtVerifiedBarrier": 0,
     "worktreeCleanAtVerifiedBarrier": true,
-    "currentTerminalHandoffEvidenceRemoteParityPending": true,
+    "currentTerminalHandoffEvidenceRemoteParityPending": false,
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
-    "status": "preflight-parity-complete-terminal-client-technical-no-dispatch-evidence-parity-pending",
-    "verifiedAtUtc": "2026-08-24T14:24:10.8707934Z",
+    "status": "terminal-evidence-and-late-archive-parity-complete-retry-1-preflight-pending-remote-parity",
+    "verifiedAtUtc": "2026-08-24T14:46:56.8806040Z",
     "archiveDryRunAtSourceClosure": {
       "occurrences": 4802,
       "uniqueContents": 3569,
@@ -665,9 +695,9 @@
       "newBlobBytes": 2241091
     },
     "archiveDryRunAtVerifiedBarrier": {
-      "verifiedAtUtc": "2026-08-24T14:29:13.0385718Z",
-      "occurrences": 4803,
-      "uniqueContents": 3570,
+      "verifiedAtUtc": "2026-08-24T14:46:22.000Z",
+      "occurrences": 4805,
+      "uniqueContents": 3572,
       "newManifestRows": 0,
       "newBlobs": 0,
       "newBlobBytes": 0
@@ -684,7 +714,7 @@
     },
     "promptRecordsVerified": 4,
     "activeSuppressionMatches": 0,
-    "remainingGate": "Commit and remote-verify the terminal technical no-dispatch/no-bytes evidence. Only after parity may bounded technical retry 1 receive a separate preflight authorization."
+    "remainingGate": "Commit and remote-verify the bounded technical retry 1 preflight record, then issue a narrow authorization record before browser action."
   },
   "laneState": {
     "eligibleScenes": [1620, 1621, 1622, 1623],
@@ -695,7 +725,7 @@
     "pendingLiveClientHandoffScenes": [],
     "terminalTechnicalNoDispatchScenes": [1620, 1621, 1622, 1623],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "terminal-client-technical-no-dispatch-no-bytes-evidence-parity-pending",
+    "preflightState": "technical-retry-1-prepared-pending-commit-remote-parity",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
@@ -723,5 +753,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Commit and remote-verify the terminal four-lane client-side technical no-dispatch/no-bytes evidence. Then prepare a separately parity-gated bounded technical retry 1 using the same exact prompts and references; do not act in the browser before retry preflight parity."
+  "nextAction": "Commit and remote-verify the bounded technical retry 1 preflight record. After a narrow authorization record reaches local/remote/PR parity, audit exactly four clean signed-in Meta tabs, perform fresh ordered uploads, wait for all attachments and Send-ready state, then click Send once per lane concurrently."
 }
