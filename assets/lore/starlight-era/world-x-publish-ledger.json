@@ -407,16 +407,16 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "four-lane-bank-96-attempt-1-technical-retry-1-ready-for-meta-dispatch-after-authorization-record-parity",
-    "checkedAtUtc": "2026-08-24T14:48:54.5204326Z",
+    "status": "four-lane-bank-96-attempt-1-technical-retry-1-provider-dispatch-confirmed-evidence-capture-in-progress",
+    "checkedAtUtc": "2026-08-24T14:54:49.631Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 96,
     "attempt": 1,
     "renderRun": 10,
     "renderRunOrdinal": 3,
-    "dispatchAuthorizedNow": true,
-    "providerDispatchConfirmed": false,
+    "dispatchAuthorizedNow": false,
+    "providerDispatchConfirmed": true,
     "eligibleScenes": [1620,1621,1622,1623],
     "eligibleLanes": [1,2,3,4],
     "theme": "orbital spaceship couture",
@@ -533,9 +533,9 @@
     },
     "technicalRetry1": {
       "retryOrdinal": 1,
-      "state": "ready-for-four-lane-meta-technical-retry-1-dispatch-after-authorization-record-remote-parity",
-      "dispatchAuthorizedNow": true,
-      "providerDispatchConfirmed": false,
+      "state": "provider-dispatch-confirmed-evidence-capture-in-progress",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": true,
       "reuseExactPromptFilesAndHashes": true,
       "reuseDeterministicBindingsWithoutReroll": true,
       "orderedReferenceScenesByLane": {
@@ -551,6 +551,25 @@
       "preflightParityCommit": "07ca58b1595e7ec34912f1a150fc183513c88d16",
       "preflightParityVerifiedAtUtc": "2026-08-24T14:48:54.5204326Z",
       "authorizationCondition": "Effective only after the commit containing this record equals local HEAD, remote agent/starlight-progress-archive and draft PR 13 head with Git LFS and archive/ledger parity clean.",
+      "authorizationConsumed": true,
+      "originalUiSendClickAtUtc": null,
+      "originalUiSendClickUtcKnown": false,
+      "originalUiSendClickUtcShortfall": "The authorized concurrent Send tool timed out and the browser kernel reset before an exact click UTC or click-return value could be recovered; no time is inferred or fabricated.",
+      "firstRecoveredModalAuditUtc": "2026-08-24T14:53:21.619Z",
+      "oneTimeDiscardClickGroupAtUtc": "2026-08-24T14:54:42.611Z",
+      "discardClickCountPerLane": 1,
+      "duplicateSendClickAttempted": false,
+      "postDiscardAuditUtc": "2026-08-24T14:54:49.631Z",
+      "providerUrlsByScene": {
+        "1620": "https://www.meta.ai/prompt/9b325198-07f1-4a01-bed2-e66e2e997a34",
+        "1621": "https://www.meta.ai/prompt/9f2b8051-90bc-4465-9811-ee12ad70b6e7",
+        "1622": "https://www.meta.ai/prompt/51638f69-efc3-4358-8b1d-bbb6e2cdb48b",
+        "1623": "https://www.meta.ai/prompt/f7883752-119d-447e-a923-1907cf1e8ac8"
+      },
+      "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-attempt-01-technical-retry-01-dispatch-envelope.jsonl",
+      "dispatchEnvelopeBytes": 11200,
+      "dispatchEnvelopeSha256": "159EB952738019FA738948F29B7C964A302A6B6C3EB7DF78D0A035C64C5DAA95",
+      "dispatchEnvelopeRows": 4,
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
       "completedBank": false,
       "countedTowardRenderRun": false
@@ -573,7 +592,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "After narrow authorization-record parity, run the exact clean four-tab retry 1 procedure once. X backlog and all social actions remain zero."
+    "nextAction": "Preserve every Bank 96 provider occurrence before visual inspection and close all evidence gates; do not count the bank yet. X backlog and all social actions remain zero."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",

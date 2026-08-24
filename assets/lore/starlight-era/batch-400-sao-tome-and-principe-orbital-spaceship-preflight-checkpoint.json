@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-96-attempt-1-technical-retry-1-ready-for-four-lane-meta-dispatch",
+  "status": "bank-96-attempt-1-technical-retry-1-provider-dispatch-confirmed-evidence-capture-in-progress",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T14:19:31.3972361Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -564,9 +564,9 @@
     "renderRunNumberSinceLastX": 10,
     "renderRunBankOrdinal": 3,
     "provider": "Meta AI",
-    "state": "technical-retry-1-ready-for-four-lane-meta-dispatch-after-authorization-record-parity",
-    "dispatchAuthorizedNow": true,
-    "providerDispatchConfirmed": false,
+    "state": "technical-retry-1-provider-dispatch-confirmed-partial-terminal-results-raw-evidence-capture-pending",
+    "dispatchAuthorizedNow": false,
+    "providerDispatchConfirmed": true,
     "dispatchedAtUtc": null,
     "eligibleScenes": [1620, 1621, 1622, 1623],
     "eligibleLanes": [1, 2, 3, 4],
@@ -622,9 +622,9 @@
     "technicalRetry1": {
       "retryOrdinal": 1,
       "reason": "The initial Send group terminated entirely in the client-side upload/submit handoff with no Meta provider URL, Stop state, provider text, refusal, or media; it is not a provider dispatch and does not count the bank.",
-      "state": "ready-for-four-lane-meta-technical-retry-1-dispatch-after-authorization-record-remote-parity",
-      "dispatchAuthorizedNow": true,
-      "providerDispatchConfirmed": false,
+      "state": "provider-dispatch-confirmed-evidence-capture-in-progress",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": true,
       "reuseExactPromptFilesAndHashes": true,
       "reuseDeterministicBindingsWithoutReroll": true,
       "orderedReferenceScenesByLane": {
@@ -645,6 +645,33 @@
       "preflightParityCommit": "07ca58b1595e7ec34912f1a150fc183513c88d16",
       "preflightParityVerifiedAtUtc": "2026-08-24T14:48:54.5204326Z",
       "authorizationCondition": "Authorization is effective only after the commit containing this record equals local HEAD, remote agent/starlight-progress-archive and draft PR 13 head with Git LFS clean and no archive or ledger delta.",
+      "authorizationConsumed": true,
+      "originalUiSendClickAtUtc": null,
+      "originalUiSendClickUtcKnown": false,
+      "originalUiSendClickUtcShortfall": "The authorized concurrent Send tool timed out and the browser kernel reset before an exact click UTC or click-return value could be recovered; no time is inferred or fabricated.",
+      "firstRecoveredModalAuditUtc": "2026-08-24T14:53:21.619Z",
+      "conditionalDiscardGateMatchedAllFourLanes": true,
+      "oneTimeDiscardClickGroupAtUtc": "2026-08-24T14:54:42.611Z",
+      "discardClickCountPerLane": 1,
+      "duplicateSendClickAttempted": false,
+      "postDiscardAuditUtc": "2026-08-24T14:54:49.631Z",
+      "providerDispatchConfirmedAtUtc": "2026-08-24T14:54:49.631Z",
+      "providerUrlsByScene": {
+        "1620": "https://www.meta.ai/prompt/9b325198-07f1-4a01-bed2-e66e2e997a34",
+        "1621": "https://www.meta.ai/prompt/9f2b8051-90bc-4465-9811-ee12ad70b6e7",
+        "1622": "https://www.meta.ai/prompt/51638f69-efc3-4358-8b1d-bbb6e2cdb48b",
+        "1623": "https://www.meta.ai/prompt/f7883752-119d-447e-a923-1907cf1e8ac8"
+      },
+      "providerStateBySceneAtPostAudit": {
+        "1620": "terminal-explicit-refusal-no-media",
+        "1621": "in-flight-stop-active-one-inline-media-visible-raw-capture-pending",
+        "1622": "terminal-gallery-media-visible-raw-capture-pending",
+        "1623": "in-flight-stop-active-no-media-visible"
+      },
+      "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-attempt-01-technical-retry-01-dispatch-envelope.jsonl",
+      "dispatchEnvelopeBytes": 11200,
+      "dispatchEnvelopeSha256": "159EB952738019FA738948F29B7C964A302A6B6C3EB7DF78D0A035C64C5DAA95",
+      "dispatchEnvelopeRows": 4,
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
       "completedBank": false,
       "countedTowardRenderRun": false
@@ -724,11 +751,12 @@
     "eligibleLanes": [1, 2, 3, 4],
     "stoppedScenes": [],
     "resolvedScenes": [],
-    "inFlightScenes": [],
+    "inFlightScenes": [1621, 1623],
     "pendingLiveClientHandoffScenes": [],
-    "terminalTechnicalNoDispatchScenes": [1620, 1621, 1622, 1623],
+    "terminalTechnicalNoDispatchScenes": [],
+    "terminalProviderScenes": [1620, 1622],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "technical-retry-1-ready-after-authorization-record-remote-parity",
+    "preflightState": "technical-retry-1-provider-dispatch-confirmed-evidence-capture-in-progress",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
@@ -756,5 +784,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "After this narrow authorization record reaches local/remote/PR parity, audit exactly four clean signed-in Meta tabs, perform fresh ordered uploads, wait for all attachments and Send-ready state, then click Send once per lane concurrently; claim dispatch only from a unique provider URL or Stop state."
+  "nextAction": "Before visual inspection, preserve raw bytes and exact source/response evidence for every visible inline and terminal occurrence; continue auditing only the two in-flight provider lanes, append all later occurrences or explicit no-bytes outcomes, and do not advance or count Bank 96 until every evidence gate passes."
 }
