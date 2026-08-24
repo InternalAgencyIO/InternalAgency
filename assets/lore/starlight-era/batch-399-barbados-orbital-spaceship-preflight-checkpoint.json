@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "bank-91-remote-parity-complete-bank-92-attempt-2-ready-not-dispatched",
+  "status": "bank-92-attempt-2-nine-occurrences-preserved-all-four-lanes-hard-unusable-local-verifiers-passed-awaiting-git-remote-pr-parity",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T10:18:41.5765215Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -241,7 +241,7 @@
       "attempt": 2,
       "scene": 1616,
       "lane": 1,
-      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
+      "status": "dispatched-in-flight-result-not-yet-recorded",
       "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-02-attempt-02.txt",
       "bytes": 5851,
       "sha256": "E477FB27AE8DF3B5895CD74F73228BFED34A325CB6CFD598E4390CDAD81D3A3A",
@@ -257,7 +257,7 @@
       "attempt": 2,
       "scene": 1617,
       "lane": 2,
-      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
+      "status": "dispatched-in-flight-result-not-yet-recorded",
       "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-02-attempt-02.txt",
       "bytes": 6101,
       "sha256": "98BB91A584B667CD894FE9CC719C9140B96988BC3A6E51C0AA57C3AE4B8FEA03",
@@ -273,7 +273,7 @@
       "attempt": 2,
       "scene": 1618,
       "lane": 3,
-      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
+      "status": "dispatched-in-flight-result-not-yet-recorded",
       "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-02-attempt-02.txt",
       "bytes": 6762,
       "sha256": "3217994137BC4944F378A05F336560E0028F73D94E3A0FF62609F704AF520910",
@@ -289,7 +289,7 @@
       "attempt": 2,
       "scene": 1619,
       "lane": 4,
-      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
+      "status": "dispatched-in-flight-result-not-yet-recorded",
       "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-02-attempt-02.txt",
       "bytes": 6150,
       "sha256": "DDDAD883A7617A85321F57877623F2E34B1C77CF9CF68C38EBFF38B7E0EA6949",
@@ -349,11 +349,75 @@
     "renderRunBankOrdinal": 9,
     "preparedAtUtc": "2026-08-24T10:43:54.9555020Z",
     "provider": "Meta AI",
-    "state": "ready-for-four-lane-meta-dispatch-not-dispatched",
+    "state": "four-lane-terminal-nine-occurrences-preserved-five-unique-raw-all-hard-unusable-awaiting-archive-ledger-git-remote-pr-parity",
     "stateAfterBank91EvidenceParity": "ready-for-four-lane-meta-dispatch-not-dispatched",
     "readyAtUtc": "2026-08-24T10:48:43.7741172Z",
-    "dispatchAuthorizedNow": true,
-    "dispatchedAtUtc": null,
+    "dispatchAuthorizedNow": false,
+    "dispatchedAtUtc": "2026-08-24T10:53:04.951Z",
+    "dispatchEvidence": {
+      "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-92-dispatch-envelope.jsonl",
+      "bytes": 9797,
+      "sha256": "2E8AC92DB111D09313664D5D5DB6DA4D6054C783D55992AA511887A5F25FD6AF",
+      "jsonlRecords": 4
+    },
+    "occurrenceEvidence": [
+      {"scene": 1616, "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-92-scene-1616.jsonl", "bytes": 6290, "sha256": "33DA7093BB1918F4E6C1184CBB28E43083FE3716F4B550F1E24F23377DCD9804", "capturedOccurrences": 2, "rawFiles": 1, "uniqueRawContents": 1, "classification": "hard-unusable"},
+      {"scene": 1617, "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-92-scene-1617-no-bytes.jsonl", "bytes": 3860, "sha256": "1202FAAB44B073AB8605DECA1094E8CB568A5A3B61DEB76950C71D8B9EED7049", "capturedOccurrences": 1, "rawFiles": 0, "uniqueRawContents": 0, "classification": "explicit-provider-refusal-no-bytes"},
+      {"scene": 1618, "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-92-scene-1618.jsonl", "bytes": 7803, "sha256": "D5577E20580775D19F0F5020016A8D3777A6134A55CFE9312FEF5A19BF1ADFBE", "capturedOccurrences": 3, "rawFiles": 3, "uniqueRawContents": 2, "classification": "hard-unusable-all-unique-outputs", "duplicateRelationship": "occurrence 03 is byte-identical to occurrence 02"},
+      {"scene": 1619, "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-92-scene-1619.jsonl", "bytes": 7297, "sha256": "0C41FA60B2EDB5EE8A44D56EBBDAF766F1721F501CAFACED371DE3A8B77917AB", "capturedOccurrences": 3, "rawFiles": 2, "uniqueRawContents": 2, "classification": "hard-unusable-all-occurrences"}
+    ],
+    "terminalEvidenceSummary": {
+      "firstMediaCapturedAtUtc": "2026-08-24T10:55:38.573Z",
+      "terminalAuditUtcRange": {"startedAtUtc": "2026-08-24T10:56:58.460Z", "endedAtUtc": "2026-08-24T10:56:58.462Z"},
+      "capturedOccurrenceCount": 9,
+      "rawFileCount": 6,
+      "uniqueRawOutputSha256Count": 5,
+      "duplicateRawOccurrenceCount": 1,
+      "explicitTerminalRefusalNoBytesCount": 3,
+      "hardUnusableScenes": [1616, 1617, 1618, 1619],
+      "acceptedScenes": []
+    },
+    "generatedMediaArchiveApply": {
+      "appliedAtUtc": "2026-08-24T11:09:31.233Z",
+      "manifestPath": "progress-reports/codex-generated-media/manifest.jsonl",
+      "manifestBytesAfterApply": 3781451,
+      "manifestSha256AfterApply": "5976E89CFA7BB9B658B09948881F6BFF71AF263758E7D1E77FF18B3517249787",
+      "manifestRowsAfterApply": 6084,
+      "scannedOccurrences": 4775,
+      "uniqueContents": 3544,
+      "newManifestRows": 9,
+      "newBlobs": 5,
+      "newBlobBytes": 3214996,
+      "rowAccounting": "six Bank 92 raw-path occurrences plus three Bank 91 source-kind transitions from repo-untracked to repo-tracked; five Bank 92 unique content blobs were copied exactly once"
+    },
+    "localEvidenceValidation": {
+      "verifiedAtUtc": "2026-08-24T11:11:53.2843017Z",
+      "occurrenceJsonlRecordsParsed": 4,
+      "capturedOccurrenceCountReconciled": 9,
+      "rawFileCountReconciled": 6,
+      "uniqueRawSha256CountReconciled": 5,
+      "rawBytesAndSha256MatchedEvidence": true,
+      "responseFileBytesAndSha256MatchedEvidence": true,
+      "pageAssetsManifestBytesAndSha256MatchedEvidence": true,
+      "duplicateRelationshipVerified": "scene 1618 occurrence 03 is byte-identical to occurrence 02",
+      "archiveDryRun": {"occurrences": 4775, "uniqueContents": 3544, "newManifestRows": 0, "newBlobs": 0, "newBlobBytes": 0},
+      "rejectedPromptLedgerVerifier": {"entries": 139, "expectedEntries": 139, "exactPromptShaPasses": 139, "errors": 0},
+      "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
+      "remainingParity": "intended-file stage and commit; Git LFS pending-object check; exact push to agent/starlight-progress-archive; remote branch SHA and draft PR 13 head verification; clean-worktree parity"
+    },
+    "allDispatchClicksSucceeded": true,
+    "allLanesStopActiveAfterDispatch": true,
+    "allLanesTerminalStopAbsentAtAudit": true,
+    "fourConcurrentMetaLanes": true,
+    "lanes": [
+      {"lane": 1, "scene": 1616, "providerUrl": "https://www.meta.ai/prompt/e83201d7-2dc4-4c07-aa46-b48e4baa28c4", "orderedReferenceScenes": [938, 936, 937], "submittedReferenceCount": 3, "terminalState": "one raw inline occurrence followed by explicit provider refusal with zero terminal bytes; Stop absent", "classification": "hard-unusable"},
+      {"lane": 2, "scene": 1617, "providerUrl": "https://www.meta.ai/prompt/9d876b3c-5b07-4e1a-bb19-e55c752dd8f6", "orderedReferenceScenes": [938, 936, 937], "submittedReferenceCount": 3, "terminalState": "explicit provider refusal with zero raw bytes; Stop absent", "classification": "explicit-provider-refusal-no-bytes"},
+      {"lane": 3, "scene": 1618, "providerUrl": "https://www.meta.ai/prompt/7c9f76fa-6446-4379-bdd3-cb6082904de8", "orderedReferenceScenes": [938, 936, 937, 1136], "submittedReferenceCount": 4, "terminalState": "three raw occurrences, two unique contents, terminal occurrence byte-identical to inline occurrence 02; Stop absent", "classification": "hard-unusable-all-unique-outputs"},
+      {"lane": 4, "scene": 1619, "providerUrl": "https://www.meta.ai/prompt/d0fb9285-7b7c-4021-bce4-a92eafcce24e", "orderedReferenceScenes": [938, 936, 937], "submittedReferenceCount": 3, "terminalState": "two unique raw inline occurrences followed by explicit provider refusal with zero terminal bytes; Stop absent", "classification": "hard-unusable"}
+    ],
+    "resultState": "All four lanes are terminal and classified. Nine occurrences were preserved: six raw files representing five unique contents, one byte-identical duplicate, and three explicit terminal refusal/no-bytes occurrences. Every scene is hard-unusable and select-none; no scene is accepted.",
+    "remoteParityPending": true,
+    "nextEvidenceGate": "Archive dry-run and both ledger verifiers pass with zero errors and zero new rows or blobs. Stage only intended Bank 92 evidence/media/checkpoint/archive files, commit and push to agent/starlight-progress-archive, then verify Git LFS, remote branch SHA, draft PR 13 head and clean-worktree parity before authorizing another bank.",
     "requiredPriorGate": "Satisfied at commit 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201: Bank 91 archive dry-run, both ledger verifiers, intended evidence commit, Git LFS parity, remote agent/starlight-progress-archive SHA parity and draft PR 13 head parity all passed.",
     "bank91EvidenceParityObserved": true,
     "bank91EvidenceParityCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
@@ -399,7 +463,7 @@
     "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-91-evidence-parity-passed-bank-92-attempt-2-ready",
+    "status": "bank-91-evidence-parity-passed-bank-92-terminal-evidence-awaiting-local-and-remote-parity",
     "verifiedAtUtc": "2026-08-24T10:48:43.7741172Z",
     "archiveDryRun": {"occurrences": 4769, "uniqueContents": 3539, "newRows": 0, "newBlobs": 0},
     "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
@@ -414,7 +478,7 @@
     "promptRecordsVerified": 8,
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
-    "remainingGate": "Immediate face-manifest and reference-hash verification plus an audit of exactly four persistent signed-in Meta tabs remains before the already-authorized Bank 92 Attempt 2 four-lane dispatch."
+    "remainingGate": "Bank 92 Attempt 2 has nine preserved and classified occurrences and no accepted scene. Run both ledger verifiers, intended-file Git/LFS commit and push, remote branch and draft-PR head verification, archive dry-run zero and clean-worktree parity before another bank."
   },
   "laneState": {
     "eligibleScenes": [1616, 1617, 1618, 1619],
@@ -424,8 +488,8 @@
     "inFlightScenes": [],
     "terminalHardUnusableScenes": [1616, 1617, 1618, 1619],
     "unresolvedScenes": [1616, 1617, 1618, 1619],
-    "preflightState": "Bank 91 is remote-parity complete at 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201; all four Bank 92 Attempt 2 prompt records are byte-verified, suppression-clean, ready and authorized, but not yet dispatched",
-    "dispatchPolicy": "Audit exactly four persistent signed-in Meta tabs; verify the face manifest and ordered reference hashes; upload scenes 938, 936 and 937 once per clean request plus scene 1136 only for scene 1618; then dispatch exactly one image request per unresolved scene across four lanes."
+    "preflightState": "Bank 91 is remote-parity complete at 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201; Bank 92 Attempt 2 is terminal with nine preserved occurrences, five unique raw contents, four hard-unusable unresolved scenes and no accepted source; Bank 92 parity is pending",
+    "dispatchPolicy": "Do not dispatch filler or another correction until Bank 92 archive, both ledger verifiers, intended-file Git/LFS commit, remote branch SHA, draft PR 13 head and clean-worktree parity all pass."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
@@ -435,11 +499,17 @@
     "nextBank": 92,
     "nextAttempt": 2,
     "nextRenderRunBankOrdinal": 9,
+    "currentInFlightBank": null,
+    "currentInFlightAttempt": null,
+    "currentInFlightRenderRunBankOrdinal": null,
+    "currentEvidencePendingBank": 92,
+    "currentEvidencePendingAttempt": 2,
+    "currentEvidencePendingRenderRunBankOrdinal": 9,
     "cumulativeMetaBanksAuthorized": 170,
     "cumulativeMetaBanksCompleted": 62,
     "cumulativeMetaBanksRemaining": 108,
     "xEligibleBacklogRemaining": 0,
-    "source": "Bank 91 evidence commit 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201 is local/remote/draft-PR-parity verified; render run 9 is 8/10 complete and world-x-publish-ledger.json remains intentionally unmodified."
+    "source": "Bank 91 evidence commit 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201 is local/remote/draft-PR-parity verified. Bank 92 Attempt 2 is terminal hard-unusable and awaiting parity, so render run 9 remains 8/10 complete, cumulative completion remains 62/170, and world-x-publish-ledger.json remains intentionally unmodified."
   },
   "dispatchPrerequisites": [
     "Verify the face manifest and all three historical hashes immediately before prompt preparation, upload and render.",
@@ -449,5 +519,5 @@
     "Upload scene 938, then 936, then 937 exactly once per clean Meta request.",
     "Capture every inline and terminal occurrence or explicit no-bytes result with exact prompt, UTC, hashes, response text, raw bytes, dimensions and minimum occurrence envelope before visual inspection."
   ],
-  "nextAction": "Immediately verify the face manifest and the scene 938, 936, 937 and 1136 hashes; audit exactly four persistent signed-in Meta tabs, opening only enough to reach four and closing only verified duplicates; upload 938, then 936, then 937 once in each clean lane and add 1136 only for scene 1618; dispatch the four byte-verified Bank 92 Attempt 2 prompts concurrently with exactly one image request per tab; preserve every completed inline or terminal occurrence or explicit no-bytes outcome before visual inspection."
+  "nextAction": "Stage only the intended Bank 92 evidence/media/checkpoint/archive changes; commit and push exactly to agent/starlight-progress-archive; verify Git LFS, remote branch SHA, draft PR 13 head and clean worktree; only then authorize the next evidence-bounded bank for unresolved scenes 1616 through 1619."
 }
