@@ -266,16 +266,16 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-batch-399-bank-93-attempt-3-closed-hard-unusable-evidence-complete-awaiting-remote-parity-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-399-bank-93-closed-hard-unusable-remote-parity-complete-bank-94-preflight-pending-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 9,
+    "completedBanksInCurrentRenderRun": 0,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-93-result-evidence-complete-awaiting-remote-parity",
+    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-93-closed-bank-94-preflight-pending",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -284,25 +284,26 @@
     "seventhRenderRunCompletedAtUtc": "2026-08-23T11:43:24.5640019Z",
     "eighthRenderRunCountryBanks": [74,75,76,77,78,79,80,81,82,83],
     "eighthRenderRunCompletedAtUtc": "2026-08-23T15:35:32.3028394Z",
-    "ninthRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92],
-    "latestCompletedCountryBankAtUtc": "2026-08-24T11:15:14.9762593Z",
-    "nextRenderRunBankOrdinal": 10,
-    "nextCountryBank": 93,
-    "latestClosedCountryBank": 92,
+    "ninthRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
+    "ninthRenderRunCompletedAtUtc": "2026-08-24T12:25:36.8403376Z",
+    "latestCompletedCountryBankAtUtc": "2026-08-24T12:25:36.8403376Z",
+    "nextRenderRunBankOrdinal": 1,
+    "nextCountryBank": 94,
+    "latestClosedCountryBank": 93,
     "latestClosedProviderUrl": null,
     "latestClosedProviderUrls": [
-      "https://www.meta.ai/prompt/e83201d7-2dc4-4c07-aa46-b48e4baa28c4",
-      "https://www.meta.ai/prompt/9d876b3c-5b07-4e1a-bb19-e55c752dd8f6",
-      "https://www.meta.ai/prompt/7c9f76fa-6446-4379-bdd3-cb6082904de8",
-      "https://www.meta.ai/prompt/d0fb9285-7b7c-4021-bce4-a92eafcce24e"
+      "https://www.meta.ai/prompt/4f16c2e2-8ffb-472a-a5c7-62307e9eeb09",
+      "https://www.meta.ai/prompt/f713f4e4-5cf9-44d3-8c37-c8f6a23fca2f",
+      "https://www.meta.ai/prompt/dd932c32-e894-499f-b92c-2cfc074eb9fb",
+      "https://www.meta.ai/prompt/b74bda1c-493b-49fc-a2ae-2032ea639749"
     ],
-    "latestClosedDispatchedAtUtc": "2026-08-24T10:53:04.951Z",
-    "latestClosedTerminalObservedAtUtc": "2026-08-24T10:56:58.462Z",
-    "latestClosedCapturedOccurrenceCount": 9,
-    "latestClosedRawFileCount": 6,
-    "latestClosedUniqueOccurrenceCount": 5,
-    "latestClosedClassification": "hard-unusable-all-four-lanes-nine-occurrences-six-raw-files-five-unique-contents",
-    "latestClosedRemoteVerifiedHead": "54023145c0c673c85b60ad32e5fbe48d63c22492",
+    "latestClosedDispatchedAtUtc": "2026-08-24T12:07:54.014Z",
+    "latestClosedTerminalObservedAtUtc": "2026-08-24T12:15:37.225Z",
+    "latestClosedCapturedOccurrenceCount": 8,
+    "latestClosedRawFileCount": 8,
+    "latestClosedUniqueOccurrenceCount": 8,
+    "latestClosedClassification": "hard-unusable-all-four-lanes-eight-raw-files-eight-unique-contents",
+    "latestClosedRemoteVerifiedHead": "78a860d16dcc3643cd00880c89e4b12667ef3904",
     "inFlightCountryBank": null,
     "inFlightRenderRunBankOrdinal": null,
     "inFlightProviderUrl": null,
@@ -311,20 +312,15 @@
     "inFlightDispatchedAtUtc": null,
     "inFlightCapturedOccurrenceCount": 0,
     "inFlightUniqueOccurrenceCount": 0,
-    "pendingEvidenceCountryBank": 93,
+    "pendingEvidenceCountryBank": null,
     "pendingEvidenceProviderUrl": null,
-    "pendingEvidenceProviderUrls": [
-      "https://www.meta.ai/prompt/4f16c2e2-8ffb-472a-a5c7-62307e9eeb09",
-      "https://www.meta.ai/prompt/f713f4e4-5cf9-44d3-8c37-c8f6a23fca2f",
-      "https://www.meta.ai/prompt/dd932c32-e894-499f-b92c-2cfc074eb9fb",
-      "https://www.meta.ai/prompt/b74bda1c-493b-49fc-a2ae-2032ea639749"
-    ],
-    "pendingEvidenceDispatchedAtUtc": "2026-08-24T12:07:54.014Z",
-    "pendingEvidenceTerminalObservedAtUtc": "2026-08-24T12:15:37.225Z",
-    "pendingEvidenceCapturedOccurrenceCount": 8,
-    "pendingEvidenceUniqueOccurrenceCount": 8,
-    "pendingEvidenceClassification": "hard-unusable-all-four-lanes-eight-unique-occurrences",
-    "pendingEvidenceLastRemoteVerifiedHead": "dada4bcfa1ef73c8e9addb613bf3ff9aed7b4d97"
+    "pendingEvidenceProviderUrls": [],
+    "pendingEvidenceDispatchedAtUtc": null,
+    "pendingEvidenceTerminalObservedAtUtc": null,
+    "pendingEvidenceCapturedOccurrenceCount": 0,
+    "pendingEvidenceUniqueOccurrenceCount": 0,
+    "pendingEvidenceClassification": null,
+    "pendingEvidenceLastRemoteVerifiedHead": null
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -332,8 +328,8 @@
     "operationalInterpretation": "Add thirty Meta banks after the existing cumulative one-hundred-forty-bank allowance for a cumulative one-hundred-seventy-bank Meta rendering allowance, while preserving the evidence-gated one-request-per-eligible-lane pipeline.",
     "newlyAddedMetaBanks": 30,
     "additionalMetaBanksAuthorized": 170,
-    "additionalMetaBanksCompleted": 63,
-    "additionalMetaBanksRemaining": 107,
+    "additionalMetaBanksCompleted": 64,
+    "additionalMetaBanksRemaining": 106,
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
@@ -346,14 +342,14 @@
     "xPriority": "wait-for-eligibility-after-scene-resolution",
     "eligibleBacklogRemaining": 0,
     "renderingDeferredByUser": false,
-    "activeRenderBank": 93,
-    "activeRenderRunOrdinal": 10,
-    "activeEvidenceState": "Barbados Batch 399 Bank 93 terminal audit at 2026-08-24T12:15:37.225Z preserved eight raw files, eight unique contents and four exact DOM response snapshots before visual inspection. QA classifies all eight hard-unusable; select none and keep all four scenes unresolved. Archive apply/dry-run and both ledger verifiers pass locally. Bank 93 remains 63/170 overall and render run 9 remains 9/10 until the evidence commit, origin and draft-PR parity gates pass.",
+    "activeRenderBank": 94,
+    "activeRenderRunOrdinal": 1,
+    "activeEvidenceState": "Barbados Batch 399 Bank 93 terminal audit at 2026-08-24T12:15:37.225Z preserved eight raw files, eight unique contents, eight exact CDN sources and four exact DOM response snapshots. QA classifies all eight hard-unusable; select none and keep all four scenes unresolved. Evidence commit 78a860d16dcc3643cd00880c89e4b12667ef3904 matches local/origin/draft PR 13 with LFS clean. Bank 93 advances cumulative completion to 64/170, completes render run 9 at 10/10, and Bank 94 is render run 10 ordinal 1 pending exact preflight.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
-    "status": "batch-398-closed-unresolved-never-accepted-batch-399-bank-93-closed-hard-unusable-evidence-complete-awaiting-remote-parity",
-    "checkedAtUtc": "2026-08-24T12:22:50.0621214Z",
+    "status": "batch-398-closed-unresolved-never-accepted-batch-399-bank-93-closed-hard-unusable-remote-parity-complete-bank-94-preflight-pending",
+    "checkedAtUtc": "2026-08-24T12:25:36.8403376Z",
     "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
     "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the user's completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. This does not authorize an unspecified follow, connect, like, publication, or other representational click; those actions remain disabled or ineligible until an exact target queue exists and the applicable action-time confirmation gate is satisfied.",
     "closedCountry": {
@@ -371,21 +367,22 @@
       "scenes": [1616,1617,1618,1619],
       "resolvedScenes": [],
       "unresolvedScenes": [1616,1617,1618,1619],
-      "renderState": "bank-93-attempt-3-eight-unique-occurrences-all-hard-unusable-evidence-complete-locally-awaiting-commit-remote-parity",
+      "renderState": "bank-93-attempt-3-eight-unique-occurrences-all-hard-unusable-remote-parity-complete-bank-94-attempt-4-preflight-pending",
       "eligibleForX": false
     },
     "renderCadence": {
-      "nextGlobalCountryBank": 93,
-      "renderRun": 9,
-      "nextRenderRunOrdinal": 10,
-      "completedBanksInCurrentRenderRun": 9,
-      "completedCountryBanks": [84,85,86,87,88,89,90,91,92],
+      "nextGlobalCountryBank": 94,
+      "renderRun": 10,
+      "nextRenderRunOrdinal": 1,
+      "completedBanksInCurrentRenderRun": 0,
+      "lastCompletedRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
+      "completedCountryBanks": [],
       "completedRenderRunsSinceLastX": 5
     },
     "cumulativeMetaBankAllowance": {
       "authorized": 170,
-      "completed": 63,
-      "remaining": 107
+      "completed": 64,
+      "remaining": 106
     },
     "xState": {
       "eligibleBacklogRemaining": 0,
@@ -550,8 +547,8 @@
     }
   },
   "latestBatch399Bank93PreflightAudit": {
-    "status": "closed-hard-unusable-all-four-lanes-eight-unique-occurrences-evidence-complete-awaiting-remote-parity",
-    "checkedAtUtc": "2026-08-24T12:22:50.0621214Z",
+    "status": "closed-hard-unusable-all-four-lanes-eight-unique-occurrences-remote-parity-complete-bank-94-preflight-pending",
+    "checkedAtUtc": "2026-08-24T12:25:36.8403376Z",
     "batch": 399,
     "country": "Barbados",
     "bank": 93,
@@ -559,7 +556,7 @@
     "renderRun": 9,
     "renderRunOrdinal": 10,
     "dispatchAuthorizedNow": false,
-    "providerDispatchState": "terminal-results-preserved-and-hard-unusable-evidence-complete-awaiting-remote-parity",
+    "providerDispatchState": "terminal-results-preserved-hard-unusable-and-remote-parity-complete",
     "eligibleScenes": [1616,1617,1618,1619],
     "eligibleLanes": [1,2,3,4],
     "parityVerification": {
@@ -570,30 +567,35 @@
       "technicalRetry1FailureEvidenceParityCommit": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
       "technicalRetry2PreflightParityCommit": "38677be6a8748bb25876e418b2d61011545aa3b3",
       "technicalRetry2LiveHandoffEvidenceParityCommit": "dada4bcfa1ef73c8e9addb613bf3ff9aed7b4d97",
-      "localHead": "dada4bcfa1ef73c8e9addb613bf3ff9aed7b4d97",
+      "bank93Attempt3ResultEvidenceCommit": "78a860d16dcc3643cd00880c89e4b12667ef3904",
+      "verifiedAtUtc": "2026-08-24T12:25:36.8403376Z",
+      "localHead": "78a860d16dcc3643cd00880c89e4b12667ef3904",
       "remoteBranch": "agent/starlight-progress-archive",
-      "remoteBranchHead": "dada4bcfa1ef73c8e9addb613bf3ff9aed7b4d97",
+      "remoteBranchHead": "78a860d16dcc3643cd00880c89e4b12667ef3904",
       "draftPr13": {
         "number": 13,
         "state": "OPEN",
         "draft": true,
         "mergeStateStatus": "CLEAN",
         "headRef": "agent/starlight-progress-archive",
-        "headCommit": "dada4bcfa1ef73c8e9addb613bf3ff9aed7b4d97",
+        "headCommit": "78a860d16dcc3643cd00880c89e4b12667ef3904",
         "baseRef": "agent/iat-launch-window-recovery-batch-220"
       },
       "gitLfsPendingObjectCount": 0,
       "worktreeCleanAfterCommit": true,
-      "archiveDryRun": {"occurrences":4775,"uniqueContents":3544,"newManifestRows":0,"newBlobs":0},
+      "archiveDryRun": {"occurrences":4783,"uniqueContents":3552,"newManifestRows":0,"newBlobs":0},
       "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
       "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
     "renderCadence": {
-      "completedBanksInCurrentRenderRun": 9,
+      "lastCompletedRenderRun": 9,
+      "lastCompletedRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
+      "currentRenderRun": 10,
+      "completedBanksInCurrentRenderRun": 0,
       "banksPerRenderRun": 10,
       "completedRenderRunsSinceLastX": 5
     },
-    "cumulativeMetaBankAllowance": {"authorized":170,"completed":63,"remaining":107},
+    "cumulativeMetaBankAllowance": {"authorized":170,"completed":64,"remaining":106},
     "uploadHandoffAttempt": {
       "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-upload-handoff-blocker.jsonl",
       "evidenceBytes": 11540,
@@ -787,9 +789,23 @@
       "providerRefusalObserved": false,
       "explicitProviderNoBytesObserved": false,
       "generatedMediaOccurrenceCount": 0,
-      "completedBank": false,
-      "countedTowardRenderRun": false,
-      "remoteParityPending": true
+      "evidenceCommit": "78a860d16dcc3643cd00880c89e4b12667ef3904",
+      "remoteParityVerifiedAtUtc": "2026-08-24T12:25:36.8403376Z",
+      "completedBank": true,
+      "countedTowardRenderRun": true,
+      "remoteParityPending": false
+    },
+    "bankCompletionState": {
+      "completed": true,
+      "completedBankCountersAdvanced": true,
+      "remainingGates": []
+    },
+    "nextAttempt": {
+      "bank": 94,
+      "attempt": 4,
+      "renderRun": 10,
+      "renderRunOrdinal": 1,
+      "status": "preflight-pending-not-dispatched"
     },
     "resultEvidence": {
       "terminalAuditAtUtc": "2026-08-24T12:15:37.225Z",
@@ -803,10 +819,10 @@
       "totalRawBytes": 6205954,
       "duplicateRelationships": [],
       "sceneEvidence": [
-        {"scene":1616,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1616.jsonl","bytes":7799,"sha256":"741D000580FEB618B0B8F79A04025CEAEEED3391EE289FE7E5D58863E5CAB07C","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
-        {"scene":1617,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1617.jsonl","bytes":7745,"sha256":"81D5AE3FE67D8B926CC1117A2FD00D97500EA24AB00F567EE5E46E42BE5740CC","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
-        {"scene":1618,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1618.jsonl","bytes":8064,"sha256":"3E7A56F9C6364B24F74808E0E48C5E487203692F78E3C8F655DCDEFE1BB1A9B4","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
-        {"scene":1619,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1619.jsonl","bytes":7731,"sha256":"49EC517416EC5DE0A2F18BF2EB1B5B400747757F84D113C5CAEE7566943F07FB","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null}
+        {"scene":1616,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1616.jsonl","bytes":8071,"sha256":"A57434D4BEA5A41EE405A24C0B7FB0259BC7C6FFDFF6E71B3B440D98DAAA997B","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
+        {"scene":1617,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1617.jsonl","bytes":8017,"sha256":"1D44829FD3E961C8C9A0361207DE52CADD1A8DD59D92C285E55321F75BB9A0AE","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
+        {"scene":1618,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1618.jsonl","bytes":8336,"sha256":"D1D8AAEBBD82CE26749B1A221FB8EDDDF8476131965217BBBBF9169E6B1CE232","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
+        {"scene":1619,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1619.jsonl","bytes":8001,"sha256":"4B2F5A0BF4D3E73EC11A5BABAE73D34B455F2BBE3E5B9DB29511D679016A0E64","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null}
       ],
       "domSnapshotCount": 4,
       "archiveApply": {"occurrences":4783,"uniqueContents":3552,"newManifestRows":8,"newBlobs":0,"newBlobBytes":0},
@@ -817,16 +833,16 @@
       "classification": "hard-unusable-all-four-lanes-eight-unique-occurrences",
       "unresolvedScenes": [1616,1617,1618,1619],
       "acceptedOutputSha256": [],
-      "completedBank": false,
-      "countedTowardRenderRun": false,
-      "remoteParityPending": true
+      "completedBank": true,
+      "countedTowardRenderRun": true,
+      "remoteParityPending": false
     },
     "xState": {
       "eligibleBacklogRemaining": 0,
       "eligibleTwoCountryPostExists": false,
       "publicationAction": "none"
     },
-    "noFalseDispatchClaim": "Technical retry 2 is confirmed provider-dispatched from four distinct Meta prompt URLs after the authorized one-time Discard navigation handoff. The exact terminal audit later preserved eight unique media occurrences and four exact DOM response snapshots; all eight are hard-unusable. Bank 93 remains incomplete and uncounted until remote parity."
+    "noFalseDispatchClaim": "Technical retry 2 reached four Meta prompt URLs after the authorized one-time Discard navigation handoff. The exact terminal audit preserved eight unique media occurrences, all exact CDN source URLs and four exact DOM response snapshots; all eight are hard-unusable. Bank 93 is counted only after evidence commit 78a860d16dcc3643cd00880c89e4b12667ef3904 matched local/origin/draft PR 13 and LFS gates."
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
