@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-96-attempt-1-technical-retry-1-provider-dispatch-confirmed-evidence-capture-in-progress",
+  "status": "bank-96-attempt-1-technical-retry-1-all-lanes-terminal-raw-response-evidence-preserved-pending-visual-qa",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T14:19:31.3972361Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -564,7 +564,7 @@
     "renderRunNumberSinceLastX": 10,
     "renderRunBankOrdinal": 3,
     "provider": "Meta AI",
-    "state": "technical-retry-1-provider-dispatch-confirmed-partial-terminal-results-raw-evidence-capture-pending",
+    "state": "technical-retry-1-all-lanes-terminal-four-raw-contents-plus-one-refusal-no-bytes-pending-visual-qa",
     "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": true,
     "dispatchedAtUtc": null,
@@ -624,7 +624,7 @@
     "technicalRetry1": {
       "retryOrdinal": 1,
       "reason": "The initial Send group terminated entirely in the client-side upload/submit handoff with no Meta provider URL, Stop state, provider text, refusal, or media; it is not a provider dispatch and does not count the bank.",
-      "state": "provider-dispatch-confirmed-evidence-capture-in-progress",
+      "state": "all-lanes-terminal-raw-and-response-evidence-preserved-pending-visual-qa",
       "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": true,
       "reuseExactPromptFilesAndHashes": true,
@@ -666,22 +666,26 @@
       },
       "providerStateBySceneAtPostAudit": {
         "1620": "terminal-explicit-refusal-no-media",
-        "1621": "in-flight-stop-active-one-inline-media-raw-preserved-pending-terminal-audit-and-visual-qa",
-        "1622": "terminal-gallery-media-raw-preserved-pending-response-snapshot-and-visual-qa",
-        "1623": "in-flight-stop-active-no-media-visible"
+        "1621": "terminal-two-media-raws-and-exact-response-preserved-pending-visual-qa",
+        "1622": "terminal-one-gallery-media-raw-and-exact-response-preserved-pending-visual-qa",
+        "1623": "terminal-one-gallery-media-raw-and-exact-response-preserved-pending-visual-qa"
       },
       "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-attempt-01-technical-retry-01-dispatch-envelope.jsonl",
       "dispatchEnvelopeBytes": 11200,
       "dispatchEnvelopeSha256": "159EB952738019FA738948F29B7C964A302A6B6C3EB7DF78D0A035C64C5DAA95",
       "dispatchEnvelopeRows": 4,
       "evidenceCaptureProgress": {
-        "capturedOccurrenceCount": 2,
-        "rawFileCount": 2,
-        "uniqueRawSha256Count": 2,
+        "capturedOccurrenceCount": 5,
+        "explicitNoBytesOccurrenceCount": 1,
+        "rawFileCount": 4,
+        "uniqueRawSha256Count": 4,
         "visualInspectionPerformed": false,
-        "scene1621OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1621.jsonl","bytes":1963,"sha256":"83CEADBB5B477E408AC70A179066BEACCC6B8766ADB64F7B6AACDBB7960EB60B","rows":1},
-        "scene1622OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl","bytes":2019,"sha256":"7928682DFAA533F0EEF486E6CE604ADC5E9C4E68B34D940450D48B1FCDAB1D93","rows":1},
-        "remainingEvidence": "Full Scene 1620 refusal/offer text or exact DOM snapshot; every later Scene 1621 occurrence and terminal audit; exact Scene 1622 terminal response or DOM snapshot; every Scene 1623 occurrence or explicit terminal no-bytes outcome; then visual QA, archive, ledgers and parity."
+        "scene1620OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1620.jsonl","bytes":2933,"sha256":"1C2E837F77A1C2A37D270682C65CC0A7EE7087240B69E282E27817DF058AE140","rows":1},
+        "scene1621OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1621.jsonl","bytes":8416,"sha256":"9A9FE1CCCB3C48177596D20E27572FD8C12AE5D4B0DEEC5FBE7683F0CE6D9335","rows":3},
+        "scene1622OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl","bytes":5386,"sha256":"358594221300F15F039EAA8B48EEA5F996ED8F8E83C1D6929E04592ABB457271","rows":2},
+        "scene1623OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1623.jsonl","bytes":6441,"sha256":"85A1140629524376F6A6AEDD088BC3D2F2890E5AF3A1E14A374CC1C2CA2AFDEF","rows":2},
+        "duplicateRelationships": [],
+        "remainingEvidence": "Independent visual QA of all four unique raw contents, then archive apply/dry-run, both ledgers, Git/LFS, remote branch and draft PR parity."
       },
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
       "completedBank": false,
@@ -762,12 +766,12 @@
     "eligibleLanes": [1, 2, 3, 4],
     "stoppedScenes": [],
     "resolvedScenes": [],
-    "inFlightScenes": [1621, 1623],
+    "inFlightScenes": [],
     "pendingLiveClientHandoffScenes": [],
     "terminalTechnicalNoDispatchScenes": [],
-    "terminalProviderScenes": [1620, 1622],
+    "terminalProviderScenes": [1620, 1621, 1622, 1623],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "technical-retry-1-provider-dispatch-confirmed-evidence-capture-in-progress",
+    "preflightState": "technical-retry-1-all-lanes-terminal-evidence-preserved-pending-visual-qa",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
@@ -795,5 +799,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Before visual inspection, preserve raw bytes and exact source/response evidence for every visible inline and terminal occurrence; continue auditing only the two in-flight provider lanes, append all later occurrences or explicit no-bytes outcomes, and do not advance or count Bank 96 until every evidence gate passes."
+  "nextAction": "Perform independent visual QA on the four preserved unique raw contents, append classifications without overwriting occurrence rows, then run archive, ledgers, Git/LFS, remote and PR parity before counting or advancing Bank 96."
 }

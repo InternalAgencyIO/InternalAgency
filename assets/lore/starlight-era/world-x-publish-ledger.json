@@ -407,8 +407,8 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "four-lane-bank-96-attempt-1-technical-retry-1-provider-dispatch-confirmed-evidence-capture-in-progress",
-    "checkedAtUtc": "2026-08-24T14:54:49.631Z",
+    "status": "four-lane-bank-96-attempt-1-technical-retry-1-all-lanes-terminal-evidence-preserved-pending-visual-qa",
+    "checkedAtUtc": "2026-08-24T15:02:45.147Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 96,
@@ -533,7 +533,7 @@
     },
     "technicalRetry1": {
       "retryOrdinal": 1,
-      "state": "provider-dispatch-confirmed-evidence-capture-in-progress",
+      "state": "all-lanes-terminal-four-raw-contents-plus-one-refusal-no-bytes-pending-visual-qa",
       "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": true,
       "reuseExactPromptFilesAndHashes": true,
@@ -571,12 +571,16 @@
       "dispatchEnvelopeSha256": "159EB952738019FA738948F29B7C964A302A6B6C3EB7DF78D0A035C64C5DAA95",
       "dispatchEnvelopeRows": 4,
       "evidenceCaptureProgress": {
-        "capturedOccurrenceCount": 2,
-        "rawFileCount": 2,
-        "uniqueRawSha256Count": 2,
+        "capturedOccurrenceCount": 5,
+        "explicitNoBytesOccurrenceCount": 1,
+        "rawFileCount": 4,
+        "uniqueRawSha256Count": 4,
         "visualInspectionPerformed": false,
+        "scene1620EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1620.jsonl",
         "scene1621EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1621.jsonl",
-        "scene1622EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl"
+        "scene1622EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl",
+        "scene1623EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1623.jsonl",
+        "duplicateRelationships": []
       },
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
       "completedBank": false,
@@ -600,7 +604,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Preserve every Bank 96 provider occurrence before visual inspection and close all evidence gates; do not count the bank yet. X backlog and all social actions remain zero."
+    "nextAction": "Run independent visual QA on the four preserved unique raw contents, then close archive/ledger/Git/LFS/remote/PR gates; do not count Bank 96 yet. X backlog and all social actions remain zero."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
