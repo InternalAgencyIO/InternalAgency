@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-batch-399-bank-92-hard-unusable-parity-verified-bank-93-attempt-3-preflight-pending-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-399-bank-93-attempt-3-preflight-remote-parity-complete-ready-not-dispatched-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 9,
@@ -275,7 +275,7 @@
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-92-parity-verified-bank-93-attempt-3-preflight-pending",
+    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-93-attempt-3-preflight-remote-parity-complete-ready-not-dispatched",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -333,20 +333,20 @@
   },
   "latestUserQueuePriority": {
     "receivedAtUtc": "2026-08-24T10:19:53.2564967Z",
-    "checkedAtUtc": "2026-08-24T11:15:14.9762593Z",
+    "checkedAtUtc": "2026-08-24T11:34:12.7866628Z",
     "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
-    "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. Batch 399 is preflight-and-prompt-ready pending commit, remote verification, and browser dispatch. The directive does not authorize unspecified follow, connect, like, publication, or other representational clicks.",
+    "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. Batch 399 Bank 93 Attempt 3 is prompt/preflight-ready and remote verified at 65e2c19abdb4708a14ac95588592ba4158220be5, but remains not dispatched pending the exactly-four-tab browser audit and ordered uploads. The directive does not authorize unspecified follow, connect, like, publication, or other representational clicks.",
     "xPriority": "wait-for-eligibility-after-scene-resolution",
     "eligibleBacklogRemaining": 0,
     "renderingDeferredByUser": false,
     "activeRenderBank": 93,
     "activeRenderRunOrdinal": 10,
-    "activeEvidenceState": "Barbados Batch 399 Bank 92 is completed hard-unusable across all four lanes and remote parity verified at exact local, origin branch, and draft PR 13 head 54023145c0c673c85b60ad32e5fbe48d63c22492. Draft PR 13 is OPEN/DRAFT/CLEAN against the correct base and head; Git LFS has no pending objects. Bank 92 preserves 9 occurrences, 6 raw files, and 5 unique raw contents. Archive verification is 4775 occurrences / 3544 unique with post-dry-run 0 missing / 0 mismatched; rejected-prompt verification is 139 entries / 139 unique / 0 errors; failed-prompt verification is 987 runtime failures / 1567 prompt records / 0 errors. Bank 93 Attempt 3, ninth-render-run ordinal 10, is next and prepared pending exact checkpoint/prompt preflight before four-lane dispatch readiness.",
+    "activeEvidenceState": "Barbados Batch 399 Bank 92 remains completed hard-unusable across all four lanes and remote verified at 54023145c0c673c85b60ad32e5fbe48d63c22492. Bank 93 Attempt 3 prompt/checkpoint preflight is now verified at exact local, origin branch and draft PR 13 head 65e2c19abdb4708a14ac95588592ba4158220be5; PR 13 is OPEN/DRAFT/CLEAN with head agent/starlight-progress-archive and base agent/iat-launch-window-recovery-batch-220; Git LFS has zero pending objects and the post-commit worktree is clean. Archive dry-run is 4775 occurrences / 3544 unique / 0 new rows / 0 blobs; rejected-prompt verification is 139 / 139 / 0 errors; failed-prompt verification is 987 runtime failures / 1567 prompt records / 0 errors. Bank 93 remains not dispatched and is authorized now for exactly four signed-in Meta lanes.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
-    "status": "batch-398-closed-unresolved-never-accepted-batch-399-next-preflight-prompt-ready-pending-commit-remote-browser",
-    "checkedAtUtc": "2026-08-24T10:19:53.2564967Z",
+    "status": "batch-398-closed-unresolved-never-accepted-batch-399-bank-93-attempt-3-preflight-remote-parity-complete-ready-not-dispatched",
+    "checkedAtUtc": "2026-08-24T11:34:12.7866628Z",
     "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
     "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the user's completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. This does not authorize an unspecified follow, connect, like, publication, or other representational click; those actions remain disabled or ineligible until an exact target queue exists and the applicable action-time confirmation gate is satisfied.",
     "closedCountry": {
@@ -364,7 +364,7 @@
       "scenes": [1616,1617,1618,1619],
       "resolvedScenes": [],
       "unresolvedScenes": [1616,1617,1618,1619],
-      "renderState": "bank-92-completed-hard-unusable-parity-verified-at-54023145c0c673c85b60ad32e5fbe48d63c22492-bank-93-attempt-3-prepared-pending-exact-checkpoint-prompt-preflight",
+      "renderState": "bank-92-completed-hard-unusable-parity-verified-at-54023145c0c673c85b60ad32e5fbe48d63c22492-bank-93-attempt-3-preflight-remote-parity-complete-at-65e2c19abdb4708a14ac95588592ba4158220be5-ready-not-dispatched",
       "eligibleForX": false
     },
     "renderCadence": {
@@ -522,7 +522,7 @@
       "bank": 93,
       "attempt": 3,
       "renderRunOrdinal": 10,
-      "status": "prepared-pending-exact-checkpoint-and-prompt-preflight-before-four-lane-dispatch-readiness"
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched-preflight-remote-parity-complete"
     },
     "renderCadence": {
       "completedBanksInCurrentRenderRun": 9,
@@ -541,6 +541,52 @@
       "actionsExecuted": [],
       "count": 0
     }
+  },
+  "latestBatch399Bank93PreflightAudit": {
+    "status": "ready-for-four-lane-meta-dispatch-not-dispatched-preflight-remote-parity-complete",
+    "checkedAtUtc": "2026-08-24T11:34:12.7866628Z",
+    "batch": 399,
+    "country": "Barbados",
+    "bank": 93,
+    "attempt": 3,
+    "renderRun": 9,
+    "renderRunOrdinal": 10,
+    "dispatchAuthorizedNow": true,
+    "providerDispatchState": "not-dispatched",
+    "eligibleScenes": [1616,1617,1618,1619],
+    "eligibleLanes": [1,2,3,4],
+    "parityVerification": {
+      "preflightCommit": "65e2c19abdb4708a14ac95588592ba4158220be5",
+      "localHead": "65e2c19abdb4708a14ac95588592ba4158220be5",
+      "remoteBranch": "agent/starlight-progress-archive",
+      "remoteBranchHead": "65e2c19abdb4708a14ac95588592ba4158220be5",
+      "draftPr13": {
+        "number": 13,
+        "state": "OPEN",
+        "draft": true,
+        "mergeStateStatus": "CLEAN",
+        "headRef": "agent/starlight-progress-archive",
+        "headCommit": "65e2c19abdb4708a14ac95588592ba4158220be5",
+        "baseRef": "agent/iat-launch-window-recovery-batch-220"
+      },
+      "gitLfsPendingObjectCount": 0,
+      "worktreeCleanAfterCommit": true,
+      "archiveDryRun": {"occurrences":4775,"uniqueContents":3544,"newManifestRows":0,"newBlobs":0},
+      "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
+      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+    },
+    "renderCadence": {
+      "completedBanksInCurrentRenderRun": 9,
+      "banksPerRenderRun": 10,
+      "completedRenderRunsSinceLastX": 5
+    },
+    "cumulativeMetaBankAllowance": {"authorized":170,"completed":63,"remaining":107},
+    "xState": {
+      "eligibleBacklogRemaining": 0,
+      "eligibleTwoCountryPostExists": false,
+      "publicationAction": "none"
+    },
+    "noFalseDispatchClaim": "No Bank 93 provider URL, upload, prompt submission, generated-media occurrence, refusal or no-bytes result is asserted by this preflight audit."
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
