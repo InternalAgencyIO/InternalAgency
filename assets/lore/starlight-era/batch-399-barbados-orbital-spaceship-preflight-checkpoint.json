@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "prompt-and-preflight-ready-four-lanes-pending-commit-remote-and-browser-audit",
+  "status": "ready-for-four-lane-browser-dispatch-remote-parity-verified",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T10:18:41.5765215Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -237,13 +237,50 @@
       "exactIntendedDispatchedSha256": "64A9CBE2C45F28238F33FED24E6878BC4539D822C17C3FC720911C65AE1B98CE"
     }
   ],
+  "remoteParity": {
+    "status": "passed-remote-and-draft-pr-parity",
+    "verifiedAtUtc": "2026-08-24T10:23:56.9426773Z",
+    "preflightEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "localHeadAtBarrier": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "remoteBranch": "agent/starlight-progress-archive",
+    "remoteBranchHead": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "draftPr13": {
+      "number": 13,
+      "open": true,
+      "draft": true,
+      "headRef": "agent/starlight-progress-archive",
+      "headCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+      "baseRef": "agent/iat-launch-window-recovery-batch-220"
+    },
+    "gitLfsPendingObjects": 0,
+    "worktreeCleanAfterCommit": true,
+    "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
+  },
+  "preflightBarrier": {
+    "status": "passed-awaiting-browser-audit-and-dispatch",
+    "verifiedAtUtc": "2026-08-24T10:23:56.9426773Z",
+    "archiveDryRun": {"occurrences": 4766, "uniqueContents": 3536, "newRows": 0, "newBlobs": 0},
+    "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
+    "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
+    "git": {
+      "commit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+      "remoteBranchHead": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+      "draftPr13Head": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+      "lfsPendingObjects": 0,
+      "worktreeCleanAfterCommit": true
+    },
+    "promptRecordsVerified": 4,
+    "eligibleScenes": [1616, 1617, 1618, 1619],
+    "eligibleLanes": [1, 2, 3, 4],
+    "remainingGate": "Reverify the face manifest and historical reference hashes, then audit exactly four persistent signed-in Meta tabs immediately before ordered uploads and concurrent dispatch."
+  },
   "laneState": {
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
     "stoppedScenes": [],
     "resolvedScenes": [],
     "inFlightScenes": [],
-    "preflightState": "all four prompt and deterministic-authority records are byte-verified and suppression-clean; commit, remote and browser audits remain pending",
+    "preflightState": "all four prompt and deterministic-authority records are byte-verified, suppression-clean, committed, pushed and remote/PR-parity verified; only the immediate face and four-tab browser audit remains before dispatch",
     "dispatchPolicy": "Prompt byte and suppression preflight is complete. After the immediate face-manifest and signed-in browser-tab audit, use exactly four persistent signed-in Meta tabs and dispatch one distinct scene prompt per lane concurrently, one requested image per prompt. Never generate filler after a scene resolves."
   },
   "renderCadenceSnapshot": {
@@ -264,5 +301,5 @@
     "Upload scene 938, then 936, then 937 exactly once per clean Meta request.",
     "Capture every inline and terminal occurrence or explicit no-bytes result with exact prompt, UTC, hashes, response text, raw bytes, dimensions and minimum occurrence envelope before visual inspection."
   ],
-  "nextAction": "Stage and commit the intended transition, checkpoint and four prompt files, push and remote-verify branch and draft PR 13 parity, then reverify the face anchors, audit exactly four signed-in Meta tabs and dispatch the four byte-verified prompts concurrently."
+  "nextAction": "Reverify the face manifest and scenes 938, 936 and 937 hashes; audit exactly four persistent signed-in Meta tabs, opening only enough to reach four and closing only verified duplicate Meta tabs; in each clean lane upload scene 938, then 936, then 937 exactly once; dispatch the byte-verified prompts for scenes 1616, 1617, 1618 and 1619 concurrently with one image request per tab; preserve every inline or terminal occurrence or explicit no-bytes result before visual inspection."
 }

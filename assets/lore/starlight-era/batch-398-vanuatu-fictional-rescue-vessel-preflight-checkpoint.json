@@ -6438,6 +6438,29 @@
     },
     "externalActionBoundary": "This queue transition does not fabricate acceptance for scene 1614 and does not by itself identify or execute any X like, follow, connect or publication target."
   },
+  "closureRemoteParity": {
+    "status": "passed-remote-and-draft-pr-parity",
+    "verifiedAtUtc": "2026-08-24T10:23:56.9426773Z",
+    "closureEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "localHeadAtBarrier": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "remoteBranch": "agent/starlight-progress-archive",
+    "remoteBranchHead": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "draftPr13": {
+      "number": 13,
+      "open": true,
+      "draft": true,
+      "headRef": "agent/starlight-progress-archive",
+      "headCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+      "baseRef": "agent/iat-launch-window-recovery-batch-220"
+    },
+    "gitLfsPendingObjects": 0,
+    "archiveDryRun": {"occurrences": 4766, "uniqueContents": 3536, "newRows": 0, "newBlobs": 0},
+    "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
+    "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
+    "worktreeCleanAfterCommit": true,
+    "scope": "Authoritative close of Vanuatu Batch 398 with scene 1614 unresolved and never accepted, preservation of the exhausted five-attempt evidence, and queue advance to Barbados Batch 399.",
+    "sourceCommitRule": "The checkpoint sourceCommit remains its historical construction source and is not rewritten to the commit that contains this closure barrier."
+  },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
     "checkedAtUtc": "2026-08-23T04:27:32.8223362Z",
