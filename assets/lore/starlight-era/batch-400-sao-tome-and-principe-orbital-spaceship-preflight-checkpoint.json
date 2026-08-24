@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-97-attempt-2-complete-counted-qa-and-provisional-selection-remote-parity-complete-scene-1623-pending-required-chatgpt-finalization",
+  "status": "bank-97-attempt-2-counted-scene-1623-chatgpt-final-canonical-accepted-awaiting-archive-git-remote-parity",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T15:37:42.1148658Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -416,7 +416,7 @@
     "1623": {
       "scene": 1623,
       "lane": 4,
-      "eligible": true,
+      "eligible": false,
       "sceneMode": "theme-led original five-adult standard mission",
       "jealousyAssignment": "AI ECE",
       "countryLocale": "Príncipe biosphere observation causeway",
@@ -489,6 +489,17 @@
         "exactIntendedDispatchedBytes": 5819,
         "exactIntendedDispatchedSha256": "982905863639E1CCD67321BC8AF4704F71FBEBD0742FAD75CBEBECF169DAA4A2",
         "bolderMissionMapping": null
+      },
+      "resolution": {
+        "sceneResolved": true,
+        "accepted": true,
+        "metaLaneStopped": true,
+        "sourceMetaSha256": "B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22",
+        "canonicalFinalPath": "assets/lore/starlight-era/1623-sao-tome-and-principe-principe-biosphere-storm-raze-close-love-chatgpt-final.png",
+        "canonicalFinalSha256": "8B1CAB6CBD766AAFF98D1DE3815D788C26CA258BB113F657E37C2B52000CCDFE",
+        "canonicalFinalBytes": 2348312,
+        "finalizationPolicyPath": "rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy",
+        "canonicalArchiveAndRemoteParityPending": true
       }
     }
   },
@@ -706,7 +717,7 @@
     "renderRunNumberSinceLastX": 10,
     "renderRunBankOrdinal": 4,
     "provider": "Meta AI",
-    "state": "complete-counted-all-occurrences-classified-one-hard-unusable-one-hard-safe-provisional-source-two-refusals-remote-parity-complete",
+    "state": "complete-counted-all-occurrences-classified-one-hard-unusable-one-chatgpt-final-canonical-accepted-two-refusals-canonical-parity-pending",
     "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": true,
     "eligibleScenes": [1620,1621,1622,1623],
@@ -777,7 +788,7 @@
       "remoteParityVerifiedAtUtc": "2026-08-24T15:55:51.6146813Z"
     },
     "resultEvidence": {
-      "state": "all-occurrences-classified-scene-1623-hard-safe-provisional-meta-source-selected-pending-required-chatgpt-clothing-only-final-edit-and-classification-remote-parity",
+      "state": "all-meta-occurrences-classified-scene-1623-chatgpt-final-primary-hard-safe-canonical-accepted-awaiting-canonical-archive-remote-parity",
       "terminalAuditUtc": "2026-08-24T16:01:37.141Z",
       "capturedOccurrenceCount": 5,
       "rawByteShortfallOccurrenceCount": 1,
@@ -786,16 +797,47 @@
       "uniqueRawSha256Count": 2,
       "duplicateRelationships": [],
       "visualInspectionPerformed": true,
-      "classification": "scene-1620-and-1622-terminal-refusal-no-bytes-scene-1621-hard-unusable-scene-1623-hard-safe-provisional-meta-source-selected-pending-chatgpt-finalization",
+      "classification": "scene-1620-and-1622-terminal-refusal-no-bytes-scene-1621-hard-unusable-scene-1623-chatgpt-final-primary-hard-safe-canonical-accepted",
       "selectedOutputSha256": "B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22",
+      "finalSelectedOutputSha256": "8B1CAB6CBD766AAFF98D1DE3815D788C26CA258BB113F657E37C2B52000CCDFE",
       "sceneEvidence": {
         "1620": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1620.jsonl","bytes":2620,"sha256":"863ADC10FEB2BA39F6CFB1E719A6AA70E4697CDFFC60ACAF44AC33FC382FF96E","rows":1,"terminal":true,"classification":"terminal-provider-refusal-no-bytes","rawFileCount":0},
         "1621": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1621.jsonl","bytes":11455,"sha256":"A59C9B32EC1B5C7B4B7CA9EF00842651FA0B0033D375FF44ADA875B0B7FB4C8F","rows":4,"terminal":true,"capturedOccurrenceCount":2,"rawByteShortfallOccurrenceCount":1,"rawFileCount":1,"uniqueRawSha256Count":1,"terminalRawSha256":"068D383E35DD1BAE58CDED024FC90BB3B209886D221CD8600360B7B496E99D77","classification":"hard-unusable-identity-anchor-role-swap-select-none"},
         "1622": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1622.jsonl","bytes":2588,"sha256":"99F5D25F3FF3D260BF9C0E1085AA55703FFD696E33591E17D0F86F38137355E4","rows":1,"terminal":true,"classification":"terminal-provider-refusal-no-bytes","rawFileCount":0},
-        "1623": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1623.jsonl","bytes":8165,"sha256":"423AB3EBCE14CCFEBB02D5C396F176A1B25EB3F1ED7F8A875CB7338EA06CD005","rows":2,"terminal":true,"rawFileCount":1,"uniqueRawSha256Count":1,"terminalRawSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22","classification":"hard-safe-provisional-meta-source-selected-pending-required-chatgpt-clothing-only-final-edit"}
+        "1623": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1623.jsonl","bytes":8165,"sha256":"423AB3EBCE14CCFEBB02D5C396F176A1B25EB3F1ED7F8A875CB7338EA06CD005","rows":2,"terminal":true,"rawFileCount":1,"uniqueRawSha256Count":1,"terminalRawSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22","classification":"hard-safe-provisional-meta-source-preserved-as-canonical-provenance-parent"}
       },
       "authorityAdjudication": {"contractPath":"rapidConsolidatedRenderPolicy.metaAiContinuousRollingRenderPolicy.missionWeightedAcceptanceRelaxation","active":true,"decision":"Scene 1623 passes the narrowed hard gates. Its RAZE, divided-garment, camera, gaze and beacon-corridor misses are quality deviations and do not reject the hard-safe source. Scene 1621 fails the still-hard anchored-identity gate and is unusable."},
-      "provisionalMetaSelection": {"scene":1623,"lane":4,"providerUrl":"https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0","rawPath":"tmp/world-195x4/batch-400/raw/meta-bank-97-attempt-02/scene-1623-output-01-terminal-gallery.webp","rawBytes":567048,"rawSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22","archiveBlobPath":"progress-reports/codex-generated-media/blobs/b8/b8e80f0f7e5297707c0b2f2cb7b2ce1d7a8e32228335b2a15444971375a86f22.webp","classification":"hard-safe-provisional-meta-source","canonicalAccepted":false,"sceneResolved":false,"metaLaneStopped":true,"requiresChatgptFinalHemRefinement":true,"finalizationContractPath":"rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy","chatgptPrimaryEditDispatched":false},
+      "provisionalMetaSelection": {"scene":1623,"lane":4,"providerUrl":"https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0","rawPath":"tmp/world-195x4/batch-400/raw/meta-bank-97-attempt-02/scene-1623-output-01-terminal-gallery.webp","rawBytes":567048,"rawSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22","archiveBlobPath":"progress-reports/codex-generated-media/blobs/b8/b8e80f0f7e5297707c0b2f2cb7b2ce1d7a8e32228335b2a15444971375a86f22.webp","classification":"hard-safe-provisional-meta-source-preserved-as-canonical-provenance-parent","canonicalAccepted":false,"sceneResolved":false,"metaLaneStopped":true,"requiresChatgptFinalHemRefinement":true,"finalizationContractPath":"rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy","chatgptPrimaryEditDispatched":true,"chatgptPrimaryEditCompleted":true},
+      "chatgptFinalHemRefinement": {
+        "policyPath": "rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy",
+        "primaryCallsUsed": 1,
+        "conditionalRetriesUsed": 0,
+        "dispatchStartUtc": null,
+        "dispatchStartUtcShortfall": "The built-in ChatGPT edit start UTC was not separately captured; no start time is inferred.",
+        "completedObservedAtUtc": "2026-08-24T16:22:18.5503801Z",
+        "promptBytes": 944,
+        "promptSha256": "C04E87B5C5790AEA07B229993EFC4DAC9C9208F811976C0A64D54FDC93DFB06C",
+        "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","bytes":335826,"sha256":"3D4EC36C57C8DA6434BDA58CAB21387EE2628340D1B96AD156473CAC7C8D8F17"},
+        "activeSuppressionProfileSha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+        "candidateTokenOrPairHitsAtSuppressionCounterGte3": 0,
+        "active20Hits": 0,
+        "occurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-chatgpt-final-hem-refinement.jsonl","bytes":6859,"sha256":"650D9E4C6EE67A94FF93B6F6362A349CC2A02FC198D5244C81FB1CB3D6EC46EF","rows":2},
+        "sourceMeta": {"selectionHead":"ddaa5446df6490d758fea9da45b9a917de9147d7","countParityHead":"2769bbc2597229f529f3ab13d7f280c8b56bd0db","path":"tmp/world-195x4/batch-400/raw/meta-bank-97-attempt-02/scene-1623-output-01-terminal-gallery.webp","bytes":567048,"sha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22"},
+        "primaryOutput": {"rawPath":"tmp/world-195x4/batch-400/raw/chatgpt-final-hem-refinement/scene-1623-primary-edit.png","canonicalPath":"assets/lore/starlight-era/1623-sao-tome-and-principe-principe-biosphere-storm-raze-close-love-chatgpt-final.png","bytes":2348312,"sha256":"8B1CAB6CBD766AAFF98D1DE3815D788C26CA258BB113F657E37C2B52000CCDFE","width":941,"height":1672,"mode":"RGB","mime":"image/png","frameCount":1},
+        "qaDisposition": "accepted-chatgpt-final-primary-hard-safe-no-retry",
+        "hardGatesPass": true,
+        "identityPreserved": true,
+        "clothingRefinementMateriallySucceeded": true,
+        "qualityDeviations": ["AI ECE gained RAZE hosiery, producing three visible wearers","exact sock mapping including Alia remains approximate","some refined lowers remain skirt-like","male eye line, camera and beacon-to-marker path remain approximate"],
+        "noAestheticRetryContractPath": "rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy.perImageCeiling.noAestheticRetry",
+        "retryConditionMet": false,
+        "canonicalAccepted": true,
+        "sceneResolved": true,
+        "archiveApply": {"appliedAtUtc":"2026-08-24T16:30:20.3487937Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":3,"newBlobs":0,"newBlobBytes":0},
+        "archiveDryRun": {"verifiedAtUtc":"2026-08-24T16:30:20.3487937Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+        "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","rows":6151,"bytes":3824509,"sha256":"600EDDCA856078BF59E78C3A06CDE14C31751EACE27F4427C6B4C103C94CBB0A"},
+        "archiveAndRemoteParityPending": true
+      },
       "historicalCacheExclusion": {"excludedFileCount":6,"recoveryDirectory":"C:/Users/A/AppData/Local/Temp/InternalAgency-bank97-scene1621-historical-cache-20260824T1556Z","archiveAndStageExclusionVerified":true},
       "archiveApply": {"verifiedAfterApplyAtUtc":"2026-08-24T16:07:32.9407055Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":2,"newBlobs":2,"newBlobBytes":1154950},
       "archiveDryRun": {"verifiedAtUtc":"2026-08-24T16:07:32.9407055Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
@@ -859,6 +901,7 @@
     "bank97Attempt2QaClassificationRemoteParityPending": false,
     "bank97Attempt2QaClassificationCommit": "ddaa5446df6490d758fea9da45b9a917de9147d7",
     "bank97Attempt2QaClassificationRemoteParityVerifiedAtUtc": "2026-08-24T16:20:08.8660456Z",
+    "scene1623ChatgptCanonicalEvidenceRemoteParityPending": true,
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
@@ -909,19 +952,19 @@
       "sourcePath": ".codex/generated_images/01a01d88-da54-7932-a86c-51f89cc04000/exec-df756fcc-1322-4eac-b6ea-96c0600a4306.png",
       "contentSha256": "577B5A650F7E59F24F0486C4F7D8EF43D6C361CD657444C70C0DF51552DF7336"
     },
-    "remainingGate": "All occurrences are classified. Commit and remote-verify the provisional Meta source selection and QA adjudication, then run the required built-in ChatGPT clothing-only final edit for scene 1623 before canonical acceptance. Never render Meta filler for scene 1623."
+    "remainingGate": "Archive, commit and remote-verify the completed hard-safe ChatGPT primary as scene 1623 canonical final. Never render Meta filler for scene 1623. Bank 98 may target only unresolved scenes 1620, 1621 and 1622 after its own preflight parity."
   },
   "laneState": {
     "eligibleScenes": [1620, 1621, 1622],
     "eligibleLanes": [1, 2, 3],
     "stoppedScenes": [1623],
-    "resolvedScenes": [],
+    "resolvedScenes": [1623],
     "inFlightScenes": [],
     "pendingLiveClientHandoffScenes": [],
     "terminalTechnicalNoDispatchScenes": [],
     "terminalProviderScenes": [1620, 1621, 1622, 1623],
-    "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "bank-97-attempt-2-complete-counted-qa-classification-and-provisional-selection-remote-parity-complete-scene-1623-meta-lane-stopped-pending-chatgpt-finalization",
+    "unresolvedScenes": [1620, 1621, 1622],
+    "preflightState": "bank-97-attempt-2-complete-counted-scene-1623-chatgpt-final-canonical-accepted-awaiting-canonical-archive-remote-parity",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
@@ -939,7 +982,7 @@
     "cumulativeMetaBanksCompleted": 68,
     "cumulativeMetaBanksRemaining": 102,
     "xEligibleBacklogRemaining": 0,
-    "source": "Bank 97 Attempt 2 is fully classified, archive and ledger gated, and remote verified at ddaa5446df6490d758fea9da45b9a917de9147d7. It is counted as render-run-10 ordinal 4. Scene 1623 is a hard-safe provisional Meta source with its Meta lane stopped pending the required ChatGPT clothing-only final edit; Bank 98 Attempt 3 is ordinal 5 and may later target only scenes 1620, 1621 and 1622 after its own preflight parity."
+    "source": "Bank 97 Attempt 2 is fully classified and counted as render-run-10 ordinal 4. Its archived scene 1623 hard-safe Meta source was finalized by one valid built-in ChatGPT clothing-only primary into canonical accepted output 8B1CAB6CBD766AAFF98D1DE3815D788C26CA258BB113F657E37C2B52000CCDFE; canonical archive and remote parity are pending. Bank 98 Attempt 3 is ordinal 5 and may target only scenes 1620, 1621 and 1622 after its own preflight parity."
   },
   "dispatchPrerequisites": [
     "Verify this preflight commit equals local HEAD, remote agent/starlight-progress-archive and draft PR 13 head.",
@@ -949,5 +992,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Run exactly one built-in ChatGPT clothing-only final edit on the remote-verified archived scene-1623 provisional source under the active finalization policy; do not mark it canonical or accepted yet and never render scene-1623 Meta filler. In parallel, prepare Bank 98 Attempt 3 for only unresolved Meta lanes 1620, 1621 and 1622, but do not dispatch until its exact prompt/checkpoint/X preflight reaches remote parity."
+  "nextAction": "Archive, commit, push and remote-verify the scene-1623 ChatGPT canonical final evidence without touching the concurrent Bank 98 drafts. After that parity barrier, Bank 98 Attempt 3 may target only unresolved Meta lanes 1620, 1621 and 1622 following its own independently verified prompt/checkpoint/X preflight; never render scene-1623 filler."
 }
