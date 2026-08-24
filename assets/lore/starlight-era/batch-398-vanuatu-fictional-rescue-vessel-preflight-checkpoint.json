@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-89-creative-attempt-4-hard-unusable-initial-evidence-remote-verified-tracked-source-parity-pending-scene-1614-only",
+  "status": "bank-89-creative-attempt-4-hard-unusable-remote-verified-bank-90-attempt-5-ready-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
   "lastWakeAuditAtUtc": "2026-08-24T09:38:34.6599005Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
@@ -6269,7 +6269,7 @@
     "creativeRecoveryAttempt": 4,
     "scene": 1614,
     "lane": 3,
-    "state": "creative-recovery-attempt-4-hard-unusable-initial-evidence-remote-verified-tracked-source-parity-pending",
+    "state": "creative-recovery-attempt-4-classified-hard-unusable-remote-parity-verified",
     "preparedAtUtc": "2026-08-24T09:10:32.7100811Z",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-89-render-run-09-text-only.txt",
     "promptBytes": 6664,
@@ -6322,22 +6322,54 @@
     "ledgerEvidence": {"rejectedPromptEntries":139,"rejectedPromptVerifierErrors":0,"failedRuntimeEvents":987,"failedPromptRecords":1567,"failedPromptVerifierErrors":0,"failedPromptSourceVerifierErrors":0},
     "renderRunProgressAfterParity": {"completedBanksInCurrentRenderRun":6,"nextRenderRunBankOrdinal":7,"nextCountryBank":90,"completedRenderRunsSinceLastX":5,"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompleted":60,"cumulativeMetaBanksRemaining":110},
     "xLedgerSha256": "3D28DB4E2B7AEB4859B064FCC2542DFFB9E0A057FB9B75A4486EEFEA1713987B",
-    "gitEvidence": {"dispatchCommit":"7b81fa45be1c5ccdaa4445969371b949fc4eb4c2","transientOccurrenceCommit":"818bb4b4","initialEvidenceCommit":"0e7bf42a1360a94c2139f4ba0bfae3b1b6591c05","initialEvidenceRemoteBranchHead":"0e7bf42a1360a94c2139f4ba0bfae3b1b6591c05","bank89LfsObjectsPushed":1,"bank89LfsBytes":479790,"pending":"tracked-source archive and X cadence parity commit; final LFS, remote branch and PR 13 parity"},
-    "nextAction": "Commit and push the one tracked-source archive row and X cadence advance, then remote-verify branch, LFS and PR 13 parity before preparing Attempt 5."
+    "gitEvidence": {"dispatchCommit":"7b81fa45be1c5ccdaa4445969371b949fc4eb4c2","transientOccurrenceCommit":"818bb4b4","initialEvidenceCommit":"0e7bf42a1360a94c2139f4ba0bfae3b1b6591c05","archiveSourceParityCommit":"1ebfb5db1c53d126df06d89ae93c6a3cca263c79","remoteBranchHead":"1ebfb5db1c53d126df06d89ae93c6a3cca263c79","draftPr13Head":"1ebfb5db1c53d126df06d89ae93c6a3cca263c79","draftPr13Open":true,"draftPr13Draft":true,"draftPr13Base":"agent/iat-launch-window-recovery-batch-220","lfsPendingObjects":0,"bank89LfsObjectsPushed":1,"bank89LfsBytes":479790,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"worktreeCleanAtRemoteVerification":true,"remoteParityRecordedAtUtc":"2026-08-24T09:41:07.6115286Z","pending":null},
+    "nextAction": "Use the prepared Bank 90 close eye-level Espiritu Santo Attempt 5 prompt for scene 1614 only; upload 938, 936, 937 once each, dispatch one Meta image request, and preserve every occurrence before visual inspection."
+  },
+  "bank90Preflight": {
+    "countryBank": 90,
+    "renderRunBankOrdinal": 7,
+    "renderRunNumberSinceLastX": 9,
+    "creativeRecoveryAttempt": 5,
+    "scene": 1614,
+    "lane": 3,
+    "state": "creative-recovery-attempt-5-ready-awaiting-clean-meta-request",
+    "preparedAtUtc": "2026-08-24T09:43:05.7678765Z",
+    "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-90-render-run-09-text-only.txt",
+    "promptBytes": 6702,
+    "promptSha256": "55B10FC3A542BFEDD12D30E16878427DE7550024F326D53A00540C9408EE22A5",
+    "exactIntendedDispatchedPromptBytes": 6701,
+    "exactIntendedDispatchedPromptSha256": "B02DC726478B24AE9329F773E6580EAC0FE48D78A63A3788FFAF6E1A84BD05B7",
+    "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-90-dispatch-envelope.jsonl",
+    "activeSuppressionMatches": 0,
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-24T09:43:05.7678765Z",
+    "orderedReferenceUploadScenesRequired": [938,936,937],
+    "orderedReferenceSha256": ["4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"],
+    "deterministicBindingsReusedWithoutReroll": {
+      "environment": {"key":"starlight|environment|batch-398|scene-1614","counter":0,"acceptedByte":65,"digestSha256":"41550DEE29A19AB91B2625E2833682C5AAA327660BD511AF7CF4F0B80EBF2C8D","bucket":0,"promptLanguage":"deep-violet dusk"},
+      "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1,"promptLanguage":"Proxima Centauri b"},
+      "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"protected exterior beneath a transparent pressure field with dry stable footing"}
+    },
+    "creativeAxes": {"camera":"close eye-level camera-left 85 mm with luminous blonde-hair foreground and level horizon","locale":"protected Espiritu Santo overwater storm lounge above an empty turquoise bay","formation":"deep layered embrace composition with clear isolated jealous counterline","motifs":"pale-sand coral satin, deep-ocean navy framework, pandanus-gold weaving, Santo-blue glass and reef-violet sculptural drape","noveltyRule":"Do not repeat Banks 86 through 89 camera, locale, formation, or dominant motif placement."},
+    "persistentMetaTabsRequired": 4,
+    "eligibleScenes": [1614],
+    "stoppedScenesUntouched": [1612,1613,1615],
+    "requestedImageCount": 1,
+    "nextAction": "Verify the exact four signed-in Meta tabs, upload 938, 936 and 937 once each in order, dispatch exactly one Bank 90 request in scene 1614 lane 3, and preserve every output or no-byte result before visual inspection."
   },
   "creativeRecoveryDirective": {
     "requestedAtUtc": "2026-08-24T07:45:00Z",
     "userDirective": "new countries the fashion became boring you need to insta reword and try new prompts up to 5 times on every fail too much STOPPING TOO MUCH SAME IMAGE FOR DAYS FIX THESE GET US BACK ON MISSION HOT GIRLS NEW ANGLES HOT LOCALES AND COUNTRY MOTIFS.",
     "interpretation": "Use glamorous magnetic adult high-fashion energy for the four fictional women, each exactly age 21, while preserving opaque public-safe wardrobe, identity, anatomy, prop, mascot, setting, and evidence hard gates. Finish unresolved scene 1614 before advancing to the next authoritative country.",
     "failureRecoveryCeiling": 5,
-    "currentAttempt": 4,
+    "currentAttempt": 5,
     "instantRewordRule": "After each fully captured and classified hard failure, author the next distinct prompt immediately from the next unused creative slot. Never reuse the same camera geometry, Vanuatu locale, formation, or dominant motif placement within these five attempts. Preserve N, N+1, and N+2 evidence gates and never bypass provider controls.",
     "attempts": [
       {"attempt":1,"bank":86,"camera":"floor-height front-quarter from camera-left with restrained Dutch roll","locale":"Port Vila and Mele Bay fashion pier","formation":"layered diagonal runway tableau","motifs":"sculpted reef branch, pandanus weave, limestone-water beadwork, volcanic-glass panels","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/67c98808-01a6-4852-9a7e-7b79aeb8dbfa","dispatchedAtUtc":"2026-08-24T07:54:41.128Z","classifiedAtUtc":"2026-08-24T08:03:47.2429847Z","remoteVerifiedCommit":"0c7decb6c880895adbfc7f6b6742ec54e92fbe2c"},
       {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/6ceff695-cbbe-4d69-bc5f-0d1dd711180f","dispatchedAtUtc":"2026-08-24T08:26:40.839Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T08:36:03.9956171Z","initialEvidenceCommit":"85398b230335fe490b5313f9a889fa028e20286d","remoteVerifiedCommit":"5f8647d3ebe9b34ae5c08ef918d9543a6ca08ac5"},
       {"attempt":3,"bank":88,"camera":"long-lens side-front compression with complete heel emphasis","locale":"Champagne Beach orbital seawall","formation":"staggered triangular formation with ECE isolated in depth","motifs":"champagne-sand satin, turquoise shallows, foam-scallop applique, woven shoreline geometry","state":"remote-verified-hard-unusable","preparedAtUtc":"2026-08-24T08:52:46.7420855Z","promptSha256":"245F3E204DEDDB1CDF83670B4BB85F14F77959697A7794F43228B800575FBF32","providerUrl":"https://www.meta.ai/prompt/bfdc3f25-c771-428c-a4a0-61ecc5b5274f","dispatchedAtUtc":"2026-08-24T08:57:08.885Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:01:48.3024319Z","initialEvidenceCommit":"faae5c8038e09d95b49e2183f58c690b637f317f","remoteVerifiedCommit":"e215035c86139be8346cfc170c403a4e42e8175e"},
-      {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"hard-unusable-initial-evidence-remote-verified-tracked-source-parity-pending","preparedAtUtc":"2026-08-24T09:10:32.7100811Z","promptSha256":"75C495545D29FCA6966F02D05B1FE7BC4A84EDA9CCBA5EA3BA3D4352D4280C11","providerUrl":"https://www.meta.ai/prompt/af0fd073-3c1b-40db-ac4b-5fd9a1bae19f","dispatchedAtUtc":"2026-08-24T09:13:20.800Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:23:21.1753118Z","initialEvidenceCommit":"0e7bf42a1360a94c2139f4ba0bfae3b1b6591c05"},
-      {"attempt":5,"bank":90,"camera":"intimate eye-level 85mm full-body editorial with close face and hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"reserved-if-needed"}
+      {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"remote-verified-hard-unusable","preparedAtUtc":"2026-08-24T09:10:32.7100811Z","promptSha256":"75C495545D29FCA6966F02D05B1FE7BC4A84EDA9CCBA5EA3BA3D4352D4280C11","providerUrl":"https://www.meta.ai/prompt/af0fd073-3c1b-40db-ac4b-5fd9a1bae19f","dispatchedAtUtc":"2026-08-24T09:13:20.800Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:23:21.1753118Z","initialEvidenceCommit":"0e7bf42a1360a94c2139f4ba0bfae3b1b6591c05","remoteVerifiedCommit":"1ebfb5db1c53d126df06d89ae93c6a3cca263c79"},
+      {"attempt":5,"bank":90,"camera":"close eye-level 85mm full-body editorial with luminous face-and-hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"prepared-awaiting-clean-meta-request","preparedAtUtc":"2026-08-24T09:43:05.7678765Z","promptSha256":"55B10FC3A542BFEDD12D30E16878427DE7550024F326D53A00540C9408EE22A5"}
     ]
   },
   "latestXBacklogClearanceAudit": {
@@ -6366,5 +6398,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Commit and remote-verify Bank 89 tracked-source archive and X cadence parity, then immediately prepare the reserved intimate Espiritu Santo Attempt 5. Never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and remote-verify the prepared Bank 90 Attempt 5 preflight, then dispatch one clean Meta request for only scene 1614 and preserve every occurrence before visual inspection. Never reopen scenes 1612, 1613, or 1615."
 }
