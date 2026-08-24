@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "bank-94-attempt-4-closed-hard-unusable-result-evidence-remote-parity-complete-tracked-source-archive-reconciled-bank-95-attempt-5-preflight-pending-commit-remote-parity",
+  "status": "bank-94-attempt-4-closed-hard-unusable-bank-95-attempt-5-four-lane-preflight-remote-parity-complete-ready-not-dispatched",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T12:41:51.7627939Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -141,7 +141,7 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1616", "counter": 0, "acceptedByte": 141, "digestSha256": "8D32AF0619B9B449C52E85201B094941256B6F1AC8756FC1168EDC7231A4C1D3", "bucket": 1, "name": "Proxima Centauri b", "promptLanguage": "Proxima Centauri b", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1616", "counter": 0, "acceptedByte": 198, "digestSha256": "C69294C11CEEA0F37CA55EDDDC41F66AA30D7D4969AB225137B6165C7217FC74", "bucket": 0, "name": "habitat-interior", "promptLanguage": "inside a sealed research habitat with a broad fluffy couture lounge bed and readable faces", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1616|knee-high-wearers", "fnv1a32": 3702888256, "pairIndex": 4, "wearers": ["Ellie", "AI ECE"], "uncoveredLowerLegCharacters": ["Radiance", "Alia"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "vertical up the outer calf"},
-      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "preflight-ready-not-dispatched-pending-commit-remote-parity", "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-05-attempt-05.txt", "bytes": 4918, "sha256": "3B445F9872754820DF0788556811A31F01D1E45194B64902A605AF0DFD26789A", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 4917, "exactIntendedDispatchedSha256": "6ECAEEE994F48A5C0D47CF87D1748A6BFD29A4482A28347BDE192D11E77F75C7", "bolderMissionMapping": null}
+      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "ready-for-four-lane-meta-dispatch-not-dispatched", "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-05-attempt-05.txt", "bytes": 4918, "sha256": "3B445F9872754820DF0788556811A31F01D1E45194B64902A605AF0DFD26789A", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 4917, "exactIntendedDispatchedSha256": "6ECAEEE994F48A5C0D47CF87D1748A6BFD29A4482A28347BDE192D11E77F75C7", "bolderMissionMapping": null}
     },
     "1617": {
       "scene": 1617,
@@ -154,7 +154,7 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1617", "counter": 0, "acceptedByte": 64, "digestSha256": "40C5A4CC5C39E29310EA6D23958BF71D76284C0F4FB137871032927ADCC37E73", "bucket": 4, "name": "TOI-700 d", "promptLanguage": "TOI-700 d", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1617", "counter": 0, "acceptedByte": 98, "digestSha256": "62B7FCC9B97D95F0C5A4DA0566ED955BAE989D1FF7747695878264F7549EA5DB", "bucket": 2, "name": "protected-exterior-surface", "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1617|knee-high-wearers", "fnv1a32": 1158883179, "pairIndex": 3, "wearers": ["Ellie", "Alia"], "uncoveredLowerLegCharacters": ["Radiance", "AI ECE"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "compact horizontal at the outer upper calf"},
-      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "preflight-ready-not-dispatched-pending-commit-remote-parity", "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-05-attempt-05.txt", "bytes": 5688, "sha256": "64F46E9A118AA4855F83671F881F893E17DE6F5D6717312F44FC524F249D92CB", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5687, "exactIntendedDispatchedSha256": "B2A5F08CC12E3B2014A6AFCE7BDE914DD97153EBA7B61C3C0B9F06AF7573F839", "bolderMissionMapping": "lane 1 of exactly 2: seated ECE-to-Radiance temple-affection"}
+      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "ready-for-four-lane-meta-dispatch-not-dispatched", "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-05-attempt-05.txt", "bytes": 5688, "sha256": "64F46E9A118AA4855F83671F881F893E17DE6F5D6717312F44FC524F249D92CB", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5687, "exactIntendedDispatchedSha256": "B2A5F08CC12E3B2014A6AFCE7BDE914DD97153EBA7B61C3C0B9F06AF7573F839", "bolderMissionMapping": "lane 1 of exactly 2: seated ECE-to-Radiance temple-affection"}
     },
     "1618": {
       "scene": 1618,
@@ -167,7 +167,7 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1618", "counter": 0, "acceptedByte": 191, "digestSha256": "BF6E3E8DDFF40B636E7DF62BC01B27A3939E383921ECFACA6489E42B052DCC9B", "bucket": 1, "name": "Proxima Centauri b", "promptLanguage": "Proxima Centauri b", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1618", "counter": 0, "acceptedByte": 214, "digestSha256": "D6CDB7E10026EDA17EFDA4C6BABD99FEA287256C6A0DB5D18AD3BC112A176259", "bucket": 1, "name": "protected-exterior-surface", "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1618|knee-high-wearers", "fnv1a32": 2917386914, "pairIndex": 2, "wearers": ["Radiance", "AI ECE"], "uncoveredLowerLegCharacters": ["Ellie", "Alia"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "vertical up the outer calf"},
-      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "preflight-ready-not-dispatched-pending-commit-remote-parity", "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-05-attempt-05.txt", "bytes": 5695, "sha256": "CFF65B67CDF2A37E06AC12D7DC0683EBDD37ADE9C51EC93E1F37E0C032348FC4", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5694, "exactIntendedDispatchedSha256": "03CCE91E892E536185B3EE0CDC34B2E14F2AFB3C4CC4067DEE2C59EA5926CBAB", "bolderMissionMapping": "lane 2 of exactly 2: Alia-to-male side-embrace and cheek-affection"}
+      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "ready-for-four-lane-meta-dispatch-not-dispatched", "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-05-attempt-05.txt", "bytes": 5695, "sha256": "CFF65B67CDF2A37E06AC12D7DC0683EBDD37ADE9C51EC93E1F37E0C032348FC4", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5694, "exactIntendedDispatchedSha256": "03CCE91E892E536185B3EE0CDC34B2E14F2AFB3C4CC4067DEE2C59EA5926CBAB", "bolderMissionMapping": "lane 2 of exactly 2: Alia-to-male side-embrace and cheek-affection"}
     },
     "1619": {
       "scene": 1619,
@@ -180,7 +180,7 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1619", "counter": 0, "acceptedByte": 240, "digestSha256": "F0924D9904F9908B56395EAF043B61F972FEDE104B8151A67B0F21188E14276A", "bucket": 0, "name": "TRAPPIST-1 e", "promptLanguage": "TRAPPIST-1 e", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1619", "counter": 0, "acceptedByte": 50, "digestSha256": "3226F00DB62C3B760A78B30499C4C730FEA0C4EAE4A069DF7CE84650A9E61C5C", "bucket": 2, "name": "protected-exterior-surface", "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1619|knee-high-wearers", "fnv1a32": 2825264301, "pairIndex": 3, "wearers": ["Ellie", "Alia"], "uncoveredLowerLegCharacters": ["Radiance", "AI ECE"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "compact horizontal at the outer upper calf"},
-      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "preflight-ready-not-dispatched-pending-commit-remote-parity", "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-05-attempt-05.txt", "bytes": 5354, "sha256": "117C83AE6D0BBE311BD97A2C5C48276422AB620C3A1B8AAC557B0E53D6CF3504", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5353, "exactIntendedDispatchedSha256": "5AFBEAE01DDF39E83F5109296358E04E7289F9403E56E6359C7C3C614A8F56C0", "bolderMissionMapping": null}
+      "primaryPrompt": {"bank": 95, "attempt": 5, "renderRunNumberSinceLastX": 10, "renderRunBankOrdinal": 2, "status": "ready-for-four-lane-meta-dispatch-not-dispatched", "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-05-attempt-05.txt", "bytes": 5354, "sha256": "117C83AE6D0BBE311BD97A2C5C48276422AB620C3A1B8AAC557B0E53D6CF3504", "activeSuppressionMatches": 0, "terminalLfPresent": true, "terminalLfCount": 1, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5353, "exactIntendedDispatchedSha256": "5AFBEAE01DDF39E83F5109296358E04E7289F9403E56E6359C7C3C614A8F56C0", "bolderMissionMapping": null}
     }
   },
   "promptBank": [
@@ -455,7 +455,7 @@
       "renderRunBankOrdinal": 2,
       "scene": 1616,
       "lane": 1,
-      "status": "preflight-ready-not-dispatched-pending-commit-remote-parity",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-05-attempt-05.txt",
       "bytes": 4918,
       "sha256": "3B445F9872754820DF0788556811A31F01D1E45194B64902A605AF0DFD26789A",
@@ -475,7 +475,7 @@
       "renderRunBankOrdinal": 2,
       "scene": 1617,
       "lane": 2,
-      "status": "preflight-ready-not-dispatched-pending-commit-remote-parity",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-05-attempt-05.txt",
       "bytes": 5688,
       "sha256": "64F46E9A118AA4855F83671F881F893E17DE6F5D6717312F44FC524F249D92CB",
@@ -495,7 +495,7 @@
       "renderRunBankOrdinal": 2,
       "scene": 1618,
       "lane": 3,
-      "status": "preflight-ready-not-dispatched-pending-commit-remote-parity",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-05-attempt-05.txt",
       "bytes": 5695,
       "sha256": "CFF65B67CDF2A37E06AC12D7DC0683EBDD37ADE9C51EC93E1F37E0C032348FC4",
@@ -515,7 +515,7 @@
       "renderRunBankOrdinal": 2,
       "scene": 1619,
       "lane": 4,
-      "status": "preflight-ready-not-dispatched-pending-commit-remote-parity",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-05-attempt-05.txt",
       "bytes": 5354,
       "sha256": "117C83AE6D0BBE311BD97A2C5C48276422AB620C3A1B8AAC557B0E53D6CF3504",
@@ -1227,8 +1227,8 @@
     "renderRunBankOrdinal": 2,
     "preparedAtUtc": "2026-08-24T13:16:55.5161343Z",
     "provider": "Meta AI",
-    "state": "preflight-ready-not-dispatched-pending-commit-remote-parity",
-    "dispatchAuthorizedNow": false,
+    "state": "ready-for-four-lane-meta-dispatch-not-dispatched",
+    "dispatchAuthorizedNow": true,
     "providerDispatchConfirmed": false,
     "finalAttemptWithinCurrentFiveAttemptCeiling": true,
     "requestedImageCountPerLane": 1,
@@ -1307,11 +1307,14 @@
     "cumulativeMetaBankAllowance": {"authorized":170,"completed":65,"remaining":105},
     "completedBank": false,
     "countedTowardRenderRun": false,
-    "nextEvidenceGate": "After independent prompt audit, commit and push this checkpoint plus the four exact prompt files; remote-verify branch SHA, draft PR 13 head/base/state, Git LFS and clean worktree before setting dispatchAuthorizedNow true."
+    "preflightCommit": "474303f048382f50b9f0641b210a429bb00a67a9",
+    "remoteParityVerifiedAtUtc": "2026-08-24T13:21:06.1915785Z",
+    "remoteParityPending": false,
+    "nextEvidenceGate": "Audit exactly four persistent signed-in Meta tabs, navigate clean lanes as needed, upload 938 then 936 then 937 once per lane plus 1136 only for scene 1618, verify exact normalized prompts and attachment counts 3/3/4/3 with Send enabled, then click Send exactly once concurrently and preserve every occurrence before visual inspection."
   },
   "remoteParity": {
-    "status": "bank-94-attempt-4-result-and-tracked-source-archive-remote-parity-complete-bank-95-attempt-5-preflight-local-pending-commit-remote-parity",
-    "verifiedAtUtc": "2026-08-24T13:16:55.5161343Z",
+    "status": "bank-95-attempt-5-four-lane-preflight-remote-parity-complete-ready-not-dispatched",
+    "verifiedAtUtc": "2026-08-24T13:21:06.1915785Z",
     "preflightEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
     "bank91EvidenceCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "bank92EvidenceCommit": "54023145c0c673c85b60ad32e5fbe48d63c22492",
@@ -1329,17 +1332,18 @@
     "bank94Attempt4DispatchEvidenceCommit": "c28e08c7633cabf70c227761e14fd080f8099ffc",
     "bank94Attempt4ResultEvidenceCommit": "a9b9a18027cd246b8f053fa5b55a67ee5e15c51c",
     "bank94Attempt4TrackedSourceArchiveCommit": "15966aaa72a3c0cc360f44be9238b577742eead0",
-    "localHeadAtBarrier": "15966aaa72a3c0cc360f44be9238b577742eead0",
+    "bank95Attempt5PromptPreflightCommit": "474303f048382f50b9f0641b210a429bb00a67a9",
+    "localHeadAtBarrier": "474303f048382f50b9f0641b210a429bb00a67a9",
     "remoteBranch": "agent/starlight-progress-archive",
-    "remoteBranchHead": "15966aaa72a3c0cc360f44be9238b577742eead0",
+    "remoteBranchHead": "474303f048382f50b9f0641b210a429bb00a67a9",
     "draftPr13": {
       "number": 13,
       "open": true,
       "draft": true,
       "headRef": "agent/starlight-progress-archive",
-      "headCommit": "15966aaa72a3c0cc360f44be9238b577742eead0",
+      "headCommit": "474303f048382f50b9f0641b210a429bb00a67a9",
       "baseRef": "agent/iat-launch-window-recovery-batch-220",
-      "mergeStateStatus": "UNKNOWN-observed-immediately-after-push"
+      "mergeStateStatus": "CLEAN"
     },
     "gitLfsPendingObjects": 0,
     "worktreeCleanAfterCommit": true,
@@ -1370,27 +1374,27 @@
     "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-95-attempt-5-four-lane-preflight-pending-commit-remote-parity-not-dispatched",
-    "verifiedAtUtc": null,
+    "status": "bank-95-attempt-5-four-lane-preflight-remote-parity-complete-ready-not-dispatched",
+    "verifiedAtUtc": "2026-08-24T13:21:06.1915785Z",
     "archiveApply": {"occurrences":4792,"uniqueContents":3560,"newRows":8,"newBlobs":0,"newBlobBytes":0},
     "archiveDryRun": {"occurrences":4792,"uniqueContents":3560,"newRows":0,"newBlobs":0,"newBlobBytes":0},
     "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
     "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
     "git": {
-      "commit": null,
+      "commit": "474303f048382f50b9f0641b210a429bb00a67a9",
       "requiredPriorRemoteBranchHead": "15966aaa72a3c0cc360f44be9238b577742eead0",
-      "remoteBranchHead": "15966aaa72a3c0cc360f44be9238b577742eead0",
-      "draftPr13Head": "15966aaa72a3c0cc360f44be9238b577742eead0",
-      "draftPr13State": "OPEN/DRAFT/UNKNOWN-observed-immediately-after-push",
+      "remoteBranchHead": "474303f048382f50b9f0641b210a429bb00a67a9",
+      "draftPr13Head": "474303f048382f50b9f0641b210a429bb00a67a9",
+      "draftPr13State": "OPEN/DRAFT/CLEAN",
       "draftPr13HeadRef": "agent/starlight-progress-archive",
       "draftPr13BaseRef": "agent/iat-launch-window-recovery-batch-220",
       "lfsPendingObjects": 0,
-      "worktreeCleanAfterCommit": false
+      "worktreeCleanAfterCommit": true
     },
     "promptRecordsVerified": 20,
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
-    "remainingGate": "Commit and push the exact Bank 95 checkpoint, X ledger and four prompts; remote-verify branch/PR/LFS and clean worktree before setting dispatchAuthorizedNow true. No browser dispatch is authorized yet."
+    "remainingGate": "Browser dispatch only: audit exactly four persistent signed-in Meta tabs, perform ordered uploads once per lane, verify exact normalized prompts and Send-ready state, then one concurrent image request per lane. Preserve each occurrence before visual inspection."
   },
   "laneState": {
     "eligibleScenes": [1616, 1617, 1618, 1619],
