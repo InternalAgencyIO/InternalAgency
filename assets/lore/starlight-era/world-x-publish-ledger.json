@@ -327,7 +327,7 @@
     "pendingEvidenceRawFileCount": 2,
     "pendingEvidenceUniqueOccurrenceCount": 2,
     "pendingEvidenceClassification": "two-terminal-refusals-no-bytes-two-terminal-media-pending-visual-qa-plus-one-transient-raw-byte-shortfall",
-    "pendingEvidenceLastRemoteVerifiedHead": "64a2bd1644bf0a09e7250ffa4980a1f2cb59c5ff"
+    "pendingEvidenceLastRemoteVerifiedHead": "1a346782c39f234be6762d15f17789c5e3dcd7e1"
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -719,7 +719,10 @@
         "archiveDryRun": {"verifiedAtUtc":"2026-08-24T16:07:32.9407055Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
         "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"exactPromptShaPasses":139,"errors":0},
         "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
-        "resultEvidenceRemoteParityPending": true
+        "resultEvidenceCommit": "1a346782c39f234be6762d15f17789c5e3dcd7e1",
+        "resultEvidenceRemoteParityPending": false,
+        "resultEvidenceRemoteParityVerifiedAtUtc": "2026-08-24T16:09:07.9326884Z",
+        "resultEvidenceRemoteParity": {"localHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","remoteBranchHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13Head":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13State":"OPEN","draftPr13IsDraft":true,"draftPr13MergeState":"CLEAN","draftPr13Base":"agent/iat-launch-window-recovery-batch-220","gitLfsPendingObjects":0,"worktreeCleanExcludingConcurrentBank98PromptDrafts":true}
       },
       "generatedMediaAuditPerformed": true,
       "completedBank": false,
@@ -754,7 +757,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "All four Bank 97 lanes are terminal and their minimum evidence is preserved. Complete visual QA for the two unique terminal raws and every archive/ledger/Git/LFS/remote/PR result gate before counting Bank 97. X backlog remains zero and no publication action is available."
+    "nextAction": "All four Bank 97 lanes are terminal and their result evidence has archive/ledger/Git/LFS/remote/PR parity. Complete visual QA for the two unique terminal raws and final closure parity before counting Bank 97. X backlog remains zero and no publication action is available."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
