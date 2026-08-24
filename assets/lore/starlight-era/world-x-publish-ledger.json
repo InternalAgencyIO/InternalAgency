@@ -458,8 +458,8 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "bank-97-attempt-2-counted-scene-1623-chatgpt-final-canonical-archive-ledger-git-lfs-remote-pr13-parity-complete",
-    "checkedAtUtc": "2026-08-24T16:22:18.5503801Z",
+    "status": "bank-98-attempt-3-exact-three-lane-preflight-ready-pending-commit-remote-parity-not-dispatched-scene-1623-resolved-excluded",
+    "checkedAtUtc": "2026-08-24T16:38:39.1493761Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 97,
@@ -734,6 +734,34 @@
       "inFlight": false,
       "notDispatched": false
     },
+    "bank98Attempt3Preflight": {
+      "bank": 98,
+      "attempt": 3,
+      "renderRun": 10,
+      "renderRunOrdinal": 5,
+      "state": "preflight-ready-pending-commit-remote-parity-not-dispatched",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": false,
+      "eligibleScenes": [1620,1621,1622],
+      "eligibleLanes": [1,2,3],
+      "resolvedStoppedScenes": [1623],
+      "persistentSignedInMetaTabCountRequired": 4,
+      "requestedImageCountTotal": 3,
+      "orderedReferenceScenesByLane": {"1":[938,936,937],"2":[938,936,937],"3":[938,936,937]},
+      "promptRecords": [
+        {"scene":1620,"lane":1,"path":"tmp/world-195x4/batch-400/scene-1620-meta-bank-98-attempt-03.txt","bytes":4610,"sha256":"B6EECF8DCD26F736D989EF32641AEA6F838AF8D0080703B9136CA2FA6A51B466","exactIntendedDispatchedBytes":4609,"exactIntendedDispatchedSha256":"96164F33E2AF97156D9E970AD77DEB0F506A71291A113865C7E954ED5DA136DA","activeSuppressionMatches":0,"bolderMissionMapping":"bolder lane 1 of exactly 2"},
+        {"scene":1621,"lane":2,"path":"tmp/world-195x4/batch-400/scene-1621-meta-bank-98-attempt-03.txt","bytes":4933,"sha256":"9D4B4526190B39A548F965D536DD49533D3F0F46B43A8545CEDBEDFC98622C40","exactIntendedDispatchedBytes":4932,"exactIntendedDispatchedSha256":"E263CF45A57429C8724215B27B41FEFBE9DEDB3E7260E9F6C860D5D931E2FB41","activeSuppressionMatches":0,"bolderMissionMapping":null},
+        {"scene":1622,"lane":3,"path":"tmp/world-195x4/batch-400/scene-1622-meta-bank-98-attempt-03.txt","bytes":4622,"sha256":"C2959D5F58BFE1175DE6691F7B7D41B75FCB60FF144FFDE7C62CA3E9D6A5A396","exactIntendedDispatchedBytes":4621,"exactIntendedDispatchedSha256":"0BDE1C787489B17450E8DEC1CAB5D9082E26F526B8B993313D29E02958248399","activeSuppressionMatches":0,"bolderMissionMapping":"bolder lane 2 of exactly 2"}
+      ],
+      "bolderMissionMapping": {"requiredCount":2,"actualCount":2,"scenes":[1620,1622]},
+      "independentPromptQa": {"status":"PASS","verifiedAtUtc":"2026-08-24T16:38:39.1493761Z","promptCount":3,"activeSuppressionMatches":0},
+      "scene1623DraftExclusion": {"included":false,"formerPath":"tmp/world-195x4/batch-400/scene-1623-meta-bank-98-attempt-03.txt","sha256":"C2FC2FBF5FCB9BF5B40E572BFB54DD17A2DD6FD3EE5E26D3F2ED9F302E31B17E","recoveryPath":"C:/Users/A/AppData/Local/Temp/InternalAgency-bank98-scene1623-conditional-unused-20260824T1637Z/scene-1623-meta-bank-98-attempt-03.txt"},
+      "sourceCanonicalParityHead": "de93d0d9c08a542855493eb84246a590a6709a97",
+      "archiveDryRun": {"occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+      "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"exactPromptShaPasses":139,"errors":0},
+      "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
+      "notDispatched": true
+    },
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
       "currentRenderRun": 10,
@@ -751,7 +779,7 @@
       "attempt": 3,
       "renderRun": 10,
       "renderRunOrdinal": 5,
-      "state": "not-yet-preflight-authorized-three-unresolved-meta-lanes-only-scene-1623-resolved-stopped-canonical-parity-complete",
+      "state": "exact-three-lane-preflight-ready-pending-commit-remote-parity-not-dispatched-scene-1623-resolved-excluded",
       "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": false
     },
@@ -761,7 +789,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Prepare Bank 98 Attempt 3 for exactly unresolved scenes 1620, 1621 and 1622 using the independently audited frozen prompts and three ordered identity references per lane. Exclude the conditional scene-1623 draft, retain four persistent signed-in Meta tabs, and do not dispatch until Bank 98 prompt/checkpoint/X preflight reaches remote parity. X backlog remains zero."
+    "nextAction": "Commit and remote-verify the exact Bank 98 Attempt 3 three-lane prompt/checkpoint/X preflight. Only after that barrier, retain four persistent signed-in Meta tabs, dispatch one request each for scenes 1620, 1621 and 1622, leave the fourth tab idle, and never render scene 1623 filler. X backlog remains zero."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
