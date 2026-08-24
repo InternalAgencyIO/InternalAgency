@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-86-creative-attempt-1-hard-unusable-remote-verified-bank-87-attempt-2-ready-scene-1614-only",
+  "status": "bank-86-creative-attempt-1-hard-unusable-remote-verified-bank-87-attempt-2-in-flight-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T08:14:20.0366817Z",
+  "lastWakeAuditAtUtc": "2026-08-24T08:26:40.839Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -6149,7 +6149,7 @@
     "creativeRecoveryAttempt": 2,
     "scene": 1614,
     "lane": 3,
-    "state": "creative-recovery-attempt-2-prompt-ready-not-dispatched",
+    "state": "creative-recovery-attempt-2-provider-in-flight",
     "preparedAtUtc": "2026-08-24T08:14:20.0366817Z",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-87-render-run-09-text-only.txt",
     "promptBytes": 6617,
@@ -6162,6 +6162,11 @@
     "faceAnchorsVerifiedBeforePreflightAtUtc": "2026-08-24T08:14:20.0366817Z",
     "orderedReferenceUploadScenesRequired": [938,936,937],
     "orderedReferenceSha256": ["4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"],
+    "orderedReferenceUploadScenesActuallySubmitted": [938,936,937],
+    "actualSubmittedReferenceCount": 3,
+    "faceAnchorsVerifiedBeforePromptAtUtc": "2026-08-24T08:26:13.856Z",
+    "faceAnchorsVerifiedBeforeUploadAtUtc": "2026-08-24T08:26:24.219Z",
+    "faceAnchorsVerifiedBeforeRenderAtUtc": "2026-08-24T08:26:40.807Z",
     "persistentMetaTabsRequired": 4,
     "eligibleScenes": [1614],
     "stoppedScenesUntouched": [1612,1613,1615],
@@ -6172,9 +6177,13 @@
       "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2,"promptLanguage":"protected exterior beneath a transparent pressure field with dry stable footing"}
     },
     "creativeAxes": {"camera":"high-oblique camera-right at 24 degrees above eye line with a 55mm editorial lens","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","noveltyRule":"Do not repeat Bank 86 camera geometry, Port Vila/Mele Bay locale, diagonal runway formation, or coral-pandanus-lagoon dominant motif placement."},
-    "dispatchAttempted": false,
-    "providerUrl": null,
-    "nextAction": "Verify exactly four signed-in persistent Meta tabs and the face hashes, attempt ordered 938/936/937 uploads once each when supported, then dispatch this exact normalized prompt as the sole scene-1614 image request."
+    "dispatchAttempted": true,
+    "actualDispatchedAtUtc": "2026-08-24T08:26:40.839Z",
+    "providerUrl": "https://www.meta.ai/prompt/6ceff695-cbbe-4d69-bc5f-0d1dd711180f",
+    "signedInAccount": "leesha007",
+    "persistentMetaTabIds": ["8","9","10","11"],
+    "dispatchTabId": "11",
+    "nextAction": "Preserve every inline and terminal media occurrence or explicit no-bytes outcome from the in-flight Bank 87 request before visual inspection; then classify all occurrences and complete archive, ledger, Git, LFS, remote and PR parity."
   },
   "creativeRecoveryDirective": {
     "requestedAtUtc": "2026-08-24T07:45:00Z",
@@ -6185,7 +6194,7 @@
     "instantRewordRule": "After each fully captured and classified hard failure, author the next distinct prompt immediately from the next unused creative slot. Never reuse the same camera geometry, Vanuatu locale, formation, or dominant motif placement within these five attempts. Preserve N, N+1, and N+2 evidence gates and never bypass provider controls.",
     "attempts": [
       {"attempt":1,"bank":86,"camera":"floor-height front-quarter from camera-left with restrained Dutch roll","locale":"Port Vila and Mele Bay fashion pier","formation":"layered diagonal runway tableau","motifs":"sculpted reef branch, pandanus weave, limestone-water beadwork, volcanic-glass panels","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/67c98808-01a6-4852-9a7e-7b79aeb8dbfa","dispatchedAtUtc":"2026-08-24T07:54:41.128Z","classifiedAtUtc":"2026-08-24T08:03:47.2429847Z","remoteVerifiedCommit":"0c7decb6c880895adbfc7f6b6742ec54e92fbe2c"},
-      {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"prompt-ready-not-dispatched"},
+      {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"provider-in-flight","providerUrl":"https://www.meta.ai/prompt/6ceff695-cbbe-4d69-bc5f-0d1dd711180f","dispatchedAtUtc":"2026-08-24T08:26:40.839Z","submittedReferences":[938,936,937]},
       {"attempt":3,"bank":88,"camera":"long-lens side-front compression with complete heel emphasis","locale":"Champagne Beach orbital seawall","formation":"staggered triangular formation with ECE isolated in depth","motifs":"champagne-sand satin, turquoise shallows, foam-scallop applique, woven shoreline geometry","state":"reserved-if-needed"},
       {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"reserved-if-needed"},
       {"attempt":5,"bank":90,"camera":"intimate eye-level 85mm full-body editorial with close face and hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"reserved-if-needed"}
@@ -6217,5 +6226,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Dispatch the exact Bank 87 high-oblique Mount Yasur Attempt 2 prompt for scene 1614 only through one of exactly four signed-in persistent Meta tabs, preserving every occurrence before visual inspection. Never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Preserve every Bank 87 inline and terminal occurrence or explicit no-bytes outcome before visual inspection, then classify and evidence-gate it. Never reopen scenes 1612, 1613, or 1615."
 }
