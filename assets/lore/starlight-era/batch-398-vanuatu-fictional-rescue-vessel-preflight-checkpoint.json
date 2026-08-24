@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-90-attempt-5-terminal-refusal-no-bytes-initial-evidence-remote-verified-x-cadence-parity-pending-recovery-ceiling-reached",
+  "status": "bank-90-attempt-5-terminal-refusal-no-bytes-remote-parity-verified-recovery-ceiling-reached-scene-1614-unresolved",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T09:52:46.3075548Z",
+  "lastWakeAuditAtUtc": "2026-08-24T09:54:49.9216444Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -6332,7 +6332,7 @@
     "creativeRecoveryAttempt": 5,
     "scene": 1614,
     "lane": 3,
-    "state": "creative-recovery-attempt-5-terminal-refusal-no-bytes-initial-evidence-remote-verified-x-cadence-parity-pending",
+    "state": "creative-recovery-attempt-5-terminal-refusal-no-bytes-remote-parity-verified-recovery-ceiling-reached",
     "preparedAtUtc": "2026-08-24T09:43:05.7678765Z",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-90-render-run-09-text-only.txt",
     "promptBytes": 6702,
@@ -6384,9 +6384,9 @@
     "ledgerEvidence": {"rejectedPromptEntries":139,"rejectedPromptVerifierErrors":0,"failedRuntimeEvents":987,"failedPromptRecords":1567,"failedPromptVerifierErrors":0,"failedPromptSourceVerifierErrors":0},
     "renderRunProgressAfterParity": {"completedBanksInCurrentRenderRun":7,"nextRenderRunBankOrdinal":null,"nextCountryBank":null,"completedRenderRunsSinceLastX":5,"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompleted":61,"cumulativeMetaBanksRemaining":109},
     "xLedgerSha256": "758DE35044CBDE1F2586B934841BCFA070CB5BCFA543F6FB62D22D5E297C0DA7",
-    "gitEvidence": {"preflightCommit":"dffa0432bb9e4070dcbf65d2dd16ddb5a2d55cc1","dispatchCommit":"c4e0c27bb987e84a6ae6f31b6a068f3e7a16b56f","initialEvidenceCommit":"bd8a08ceb2b17e1c28dc1def2bda664128bd8715","initialEvidenceRemoteBranchHead":"bd8a08ceb2b17e1c28dc1def2bda664128bd8715","draftPr13HeadAtInitialEvidence":"bd8a08ceb2b17e1c28dc1def2bda664128bd8715","draftPr13Open":true,"draftPr13Draft":true,"draftPr13Base":"agent/iat-launch-window-recovery-batch-220","lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtInitialEvidence":true,"pending":"X cadence and final blocker parity commit; final remote branch and PR 13 verification"},
+    "gitEvidence": {"preflightCommit":"dffa0432bb9e4070dcbf65d2dd16ddb5a2d55cc1","dispatchCommit":"c4e0c27bb987e84a6ae6f31b6a068f3e7a16b56f","initialEvidenceCommit":"bd8a08ceb2b17e1c28dc1def2bda664128bd8715","xCadenceParityCommit":"8b0902d528a6913261b8064d318029550d008719","remoteBranchHead":"8b0902d528a6913261b8064d318029550d008719","draftPr13Head":"8b0902d528a6913261b8064d318029550d008719","draftPr13Open":true,"draftPr13Draft":true,"draftPr13Base":"agent/iat-launch-window-recovery-batch-220","lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtRemoteVerification":true,"remoteParityRecordedAtUtc":"2026-08-24T09:54:49.9216444Z","pending":null},
     "recoveryCeiling": {"authorizedAttempts":5,"completedAttempts":5,"state":"exhausted","attempt6Authorized":false,"rule":"Do not dispatch a sixth recovery prompt without a new authoritative instruction changing the bounded ceiling."},
-    "nextAction": "Commit and push the X cadence and final blocker record, remote-verify branch and PR 13 parity, then retain scene 1614 unresolved at the bounded five-attempt ceiling."
+    "nextAction": "Retain scene 1614 unresolved at the bounded five-attempt ceiling. Do not dispatch Attempt 6 without a new authoritative instruction changing the ceiling."
   },
   "creativeRecoveryDirective": {
     "requestedAtUtc": "2026-08-24T07:45:00Z",
@@ -6400,7 +6400,7 @@
       {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/6ceff695-cbbe-4d69-bc5f-0d1dd711180f","dispatchedAtUtc":"2026-08-24T08:26:40.839Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T08:36:03.9956171Z","initialEvidenceCommit":"85398b230335fe490b5313f9a889fa028e20286d","remoteVerifiedCommit":"5f8647d3ebe9b34ae5c08ef918d9543a6ca08ac5"},
       {"attempt":3,"bank":88,"camera":"long-lens side-front compression with complete heel emphasis","locale":"Champagne Beach orbital seawall","formation":"staggered triangular formation with ECE isolated in depth","motifs":"champagne-sand satin, turquoise shallows, foam-scallop applique, woven shoreline geometry","state":"remote-verified-hard-unusable","preparedAtUtc":"2026-08-24T08:52:46.7420855Z","promptSha256":"245F3E204DEDDB1CDF83670B4BB85F14F77959697A7794F43228B800575FBF32","providerUrl":"https://www.meta.ai/prompt/bfdc3f25-c771-428c-a4a0-61ecc5b5274f","dispatchedAtUtc":"2026-08-24T08:57:08.885Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:01:48.3024319Z","initialEvidenceCommit":"faae5c8038e09d95b49e2183f58c690b637f317f","remoteVerifiedCommit":"e215035c86139be8346cfc170c403a4e42e8175e"},
       {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"remote-verified-hard-unusable","preparedAtUtc":"2026-08-24T09:10:32.7100811Z","promptSha256":"75C495545D29FCA6966F02D05B1FE7BC4A84EDA9CCBA5EA3BA3D4352D4280C11","providerUrl":"https://www.meta.ai/prompt/af0fd073-3c1b-40db-ac4b-5fd9a1bae19f","dispatchedAtUtc":"2026-08-24T09:13:20.800Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:23:21.1753118Z","initialEvidenceCommit":"0e7bf42a1360a94c2139f4ba0bfae3b1b6591c05","remoteVerifiedCommit":"1ebfb5db1c53d126df06d89ae93c6a3cca263c79"},
-      {"attempt":5,"bank":90,"camera":"close eye-level 85mm full-body editorial with luminous face-and-hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"terminal-refusal-no-bytes-initial-evidence-remote-verified-x-cadence-parity-pending","preparedAtUtc":"2026-08-24T09:43:05.7678765Z","promptSha256":"55B10FC3A542BFEDD12D30E16878427DE7550024F326D53A00540C9408EE22A5","providerUrl":"https://www.meta.ai/prompt/594c58f4-f730-4c68-ad11-8ecd9c71efc1","dispatchedAtUtc":"2026-08-24T09:47:03.189Z","submittedReferences":[938,936,937],"terminalObservedAtUtc":"2026-08-24T09:48:42.382Z","classification":"explicit-provider-refusal-no-bytes","initialEvidenceCommit":"bd8a08ceb2b17e1c28dc1def2bda664128bd8715"}
+      {"attempt":5,"bank":90,"camera":"close eye-level 85mm full-body editorial with luminous face-and-hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"remote-verified-terminal-refusal-no-bytes-recovery-ceiling-reached","preparedAtUtc":"2026-08-24T09:43:05.7678765Z","promptSha256":"55B10FC3A542BFEDD12D30E16878427DE7550024F326D53A00540C9408EE22A5","providerUrl":"https://www.meta.ai/prompt/594c58f4-f730-4c68-ad11-8ecd9c71efc1","dispatchedAtUtc":"2026-08-24T09:47:03.189Z","submittedReferences":[938,936,937],"terminalObservedAtUtc":"2026-08-24T09:48:42.382Z","classification":"explicit-provider-refusal-no-bytes","initialEvidenceCommit":"bd8a08ceb2b17e1c28dc1def2bda664128bd8715","remoteVerifiedCommit":"8b0902d528a6913261b8064d318029550d008719"}
     ]
   },
   "latestXBacklogClearanceAudit": {
@@ -6429,5 +6429,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": {"state":"active-after-evidence-parity","recordedAtUtc":"2026-08-24T09:48:42.382Z","scope":"Vanuatu Batch 398 scene 1614 lane 3 only","reason":"Meta returned a terminal refusal with zero generated-media sources on creative Attempt 5, exhausting the user-authorized bounded five-attempt recovery ceiling.","evidencePath":"progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-90-refusal-no-bytes.jsonl","safeLocalWorkCompleted":["verbatim refusal and exact hashes preserved","zero-byte occurrence classified","archive dry-run zero","rejected-prompt ledger verifier zero errors","project failed-prompt ledger verifier zero errors","provider source verifier zero errors at the latest source gate"],"prohibitedAction":"Do not dispatch Attempt 6 or bypass Meta provider controls without a new authoritative ceiling change."},
-  "nextAction": "Commit and remote-verify Bank 90 X cadence and final blocker parity. Then retain scene 1614 unresolved at the five-attempt ceiling; never reopen scenes 1612, 1613, or 1615 and never dispatch Attempt 6 without new authority."
+  "nextAction": "Retain scene 1614 unresolved at the five-attempt ceiling; never reopen scenes 1612, 1613, or 1615 and never dispatch Attempt 6 without a new authoritative ceiling change."
 }
