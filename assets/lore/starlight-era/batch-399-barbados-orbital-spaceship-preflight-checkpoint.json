@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "bank-93-attempt-3-technical-retry-1-terminal-navigation-modal-no-dispatch-no-bytes-not-completed",
+  "status": "bank-93-attempt-3-technical-retry-2-preflight-ready-pending-commit-remote-parity-not-dispatched",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T10:18:41.5765215Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -517,17 +517,18 @@
     "renderRunNumberSinceLastX": 9,
     "renderRunBankOrdinal": 10,
     "preparedAtUtc": "2026-08-24T11:21:47.0679302Z",
-    "verifiedAtUtc": "2026-08-24T11:46:19.6820573Z",
+    "verifiedAtUtc": "2026-08-24T11:54:26.9945499Z",
     "provider": "Meta AI",
-    "state": "technical-retry-1-terminal-client-side-navigation-modal-no-dispatch-no-bytes-not-completed",
+    "state": "technical-retry-2-preflight-ready-pending-commit-remote-parity-not-dispatched",
     "dispatchAuthorizedNow": false,
-    "dispatchAuthorizationCondition": "Technical retry 1 terminated in the browser navigation modal without a provider request. Commit and remote-verify this exact evidence before preparing another bounded retry; do not duplicate-click or count Bank 93.",
+    "dispatchAuthorizationCondition": "Technical retry 2 becomes dispatch-authorized only after this staged preflight is committed, pushed and verified at local HEAD, origin/agent/starlight-progress-archive and draft PR 13 head with Git LFS clear. Until then, perform no browser upload or Send click.",
     "requiredPriorGate": "Bank 92 evidence remains remote verified at 54023145c0c673c85b60ad32e5fbe48d63c22492; the six tracked-source rows, this checkpoint and all four Bank 93 Attempt 3 prompt files are committed and remote verified at 65e2c19abdb4708a14ac95588592ba4158220be5.",
     "promptAndTrackedSourcePreflightCommit": "65e2c19abdb4708a14ac95588592ba4158220be5",
     "initialPreflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
     "technicalHandoffEvidenceParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
-    "preflightParityCommit": "e6aba90153247c14290eda584ebf7a88fce4f352",
-    "remoteParityVerifiedAtUtc": "2026-08-24T11:49:51.103Z",
+    "technicalRetry1PreflightParityCommit": "e6aba90153247c14290eda584ebf7a88fce4f352",
+    "technicalRetry1FailureEvidenceParityCommit": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
+    "remoteParityVerifiedAtUtc": "2026-08-24T11:54:26.9945499Z",
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
     "persistentMetaTabCountRequired": 4,
@@ -645,12 +646,48 @@
       "countedTowardRenderRun": false,
       "classification": "client-side-navigation-modal-technical-no-dispatch-no-bytes"
     },
+    "technicalRetry2Preflight": {
+      "retryOrdinal": 2,
+      "preparedAtUtc": "2026-08-24T11:54:26.9945499Z",
+      "requiredPriorEvidenceParityCommit": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
+      "reuseExactAttempt3PromptFilesAndHashes": true,
+      "promptRecordsRef": "#/bank93Attempt3Preflight/promptRecords",
+      "freshCleanSignedInMetaTabCount": 4,
+      "freshOrderedUploadsRequired": true,
+      "orderedReferenceScenesByLane": {
+        "1": [938, 936, 937],
+        "2": [938, 936, 937],
+        "3": [938, 936, 937, 1136],
+        "4": [938, 936, 937]
+      },
+      "attachmentAndComposerReadinessGate": "Wait until every fresh ordered attachment finishes processing, the exact normalized prompt is verified in every composer and all four Send controls are visibly enabled before any Send click.",
+      "sendClickPolicy": "After all four lanes simultaneously pass readiness, perform exactly one concurrent Send click per lane. No duplicate Send click is allowed.",
+      "conditionalDiscardDialogGate": {
+        "applyOnlyIfAllFourLanesMatch": true,
+        "requiredDialogTitle": "Discard prompt?",
+        "requiredDialogBody": "Your message will be lost if you leave this page.",
+        "requiredComposerState": "already cleared",
+        "requiredProviderUrlState": "absent",
+        "requiredStopControlState": "absent",
+        "action": "Click Discard exactly once in each lane to allow the pending navigation.",
+        "otherwise": "Do not click Discard and preserve the exact divergent state."
+      },
+      "providerDispatchConfirmationGate": "After the conditional Discard step, claim dispatch only if a provider prompt URL or Stop control appears; otherwise record another technical no-dispatch state without advancing Bank 93.",
+      "dispatchAuthorizedNow": false,
+      "dispatchAuthorizedAfterPreflightCommitPushRemoteParity": true,
+      "remoteParityPending": true,
+      "providerDispatchConfirmed": false,
+      "providerUrls": [],
+      "generatedMediaOccurrenceCount": 0,
+      "completedBank": false,
+      "countedTowardRenderRun": false
+    },
     "remoteParityPending": false,
-    "nextEvidenceGate": "Commit and remote-verify the four-row technical-retry-1 navigation-modal failure without advancing Bank 93 or render counters; only then prepare the next bounded clean retry and confirm provider dispatch solely from a provider prompt URL or Stop control."
+    "nextEvidenceGate": "Commit and push this technical-retry-2 preflight, verify local/origin/draft-PR head parity and Git LFS, then set dispatchAuthorizedNow true and execute the exact clean four-tab readiness, single-Send and conditional one-Discard-per-lane procedure."
   },
   "remoteParity": {
-    "status": "bank-93-attempt-3-technical-retry-1-preflight-parity-complete-at-e6aba901-terminal-navigation-modal-no-dispatch-no-bytes",
-    "verifiedAtUtc": "2026-08-24T11:50:07.874Z",
+    "status": "bank-93-attempt-3-technical-retry-1-failure-evidence-parity-complete-at-67fc1f46-technical-retry-2-preflight-pending-commit-remote-parity",
+    "verifiedAtUtc": "2026-08-24T11:54:26.9945499Z",
     "preflightEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
     "bank91EvidenceCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "bank92EvidenceCommit": "54023145c0c673c85b60ad32e5fbe48d63c22492",
@@ -658,15 +695,16 @@
     "bank93Attempt3InitialPreflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
     "bank93Attempt3InitialTechnicalEvidenceParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
     "bank93Attempt3TechnicalRetry1PreflightParityCommit": "e6aba90153247c14290eda584ebf7a88fce4f352",
-    "localHeadAtBarrier": "e6aba90153247c14290eda584ebf7a88fce4f352",
+    "bank93Attempt3TechnicalRetry1FailureEvidenceParityCommit": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
+    "localHeadAtBarrier": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
     "remoteBranch": "agent/starlight-progress-archive",
-    "remoteBranchHead": "e6aba90153247c14290eda584ebf7a88fce4f352",
+    "remoteBranchHead": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
     "draftPr13": {
       "number": 13,
       "open": true,
       "draft": true,
       "headRef": "agent/starlight-progress-archive",
-      "headCommit": "e6aba90153247c14290eda584ebf7a88fce4f352",
+      "headCommit": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
       "baseRef": "agent/iat-launch-window-recovery-batch-220",
       "mergeStateStatus": "CLEAN"
     },
@@ -687,16 +725,16 @@
     "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-93-attempt-3-technical-retry-1-preflight-remote-parity-complete-terminal-navigation-modal-no-dispatch-no-bytes-not-completed",
-    "verifiedAtUtc": "2026-08-24T11:50:07.874Z",
+    "status": "bank-93-attempt-3-technical-retry-1-failure-remote-parity-complete-technical-retry-2-preflight-pending-commit-remote-parity-not-dispatched",
+    "verifiedAtUtc": "2026-08-24T11:54:26.9945499Z",
     "archiveApply": {"occurrences": 4775, "uniqueContents": 3544, "newRows": 6, "newBlobs": 0, "newBlobBytes": 0},
     "archiveDryRun": {"occurrences": 4775, "uniqueContents": 3544, "newRows": 0, "newBlobs": 0, "newBlobBytes": 0},
     "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
     "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
     "git": {
-      "commit": "e6aba90153247c14290eda584ebf7a88fce4f352",
-      "remoteBranchHead": "e6aba90153247c14290eda584ebf7a88fce4f352",
-      "draftPr13Head": "e6aba90153247c14290eda584ebf7a88fce4f352",
+      "commit": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
+      "remoteBranchHead": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
+      "draftPr13Head": "67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd",
       "draftPr13State": "OPEN/DRAFT/CLEAN",
       "draftPr13HeadRef": "agent/starlight-progress-archive",
       "draftPr13BaseRef": "agent/iat-launch-window-recovery-batch-220",
@@ -706,7 +744,7 @@
     "promptRecordsVerified": 12,
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
-    "remainingGate": "Commit and remote-verify technical retry 1 navigation-modal failure evidence without advancing Bank 93 or render counters; Bank 93 remains not provider-dispatched and uncounted."
+    "remainingGate": "Commit and remote-verify this technical-retry-2 preflight before any browser action; Bank 93 remains not provider-dispatched and uncounted."
   },
   "laneState": {
     "eligibleScenes": [1616, 1617, 1618, 1619],
@@ -718,10 +756,11 @@
     "terminalTechnicalNoDispatchScenes": [1616, 1617, 1618, 1619],
     "activeTechnicalRetryScenes": [],
     "technicalRetry1NavigationModalFailureScenes": [1616, 1617, 1618, 1619],
+    "technicalRetry2PreflightScenes": [1616, 1617, 1618, 1619],
     "terminalHardUnusableScenes": [1616, 1617, 1618, 1619],
     "unresolvedScenes": [1616, 1617, 1618, 1619],
-    "preflightState": "Technical retry 1 preflight parity remains preserved at e6aba90153247c14290eda584ebf7a88fce4f352, but its four send clicks terminated in the client-side Discard prompt? navigation modal and then empty composers after Stay. No provider URL, Stop state, response, refusal or media appeared.",
-    "dispatchPolicy": "Do not count Bank 93, advance render cadence or treat the dialog as a provider refusal. Commit and remote-verify the exact technical retry 1 failure before a new bounded retry, and confirm any future provider dispatch only from a prompt URL or Stop control."
+    "preflightState": "Technical retry 1 failure evidence is local/remote/draft-PR parity verified at 67fc1f469030ccf7b4d6aa1e8dcc7c0b6037dcdd. Technical retry 2 exact four-lane procedure is prepared and staged but remains unauthorized and not dispatched until its own commit/push/remote parity gate passes.",
+    "dispatchPolicy": "After retry-2 preflight parity only: use four clean tabs, fresh ordered uploads, verify attachments fully ready plus exact prompts and Send enabled, click Send once concurrently, and only if all four exact Discard prompt? dialogs appear with cleared composers and no provider URL/Stop, click Discard once per lane. Never duplicate Send; claim provider dispatch only from a prompt URL or Stop."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
@@ -754,5 +793,5 @@
     "Upload scene 938, then 936, then 937 exactly once per clean Meta request.",
     "Capture every inline and terminal occurrence or explicit no-bytes result with exact prompt, UTC, hashes, response text, raw bytes, dimensions and minimum occurrence envelope before visual inspection."
   ],
-  "nextAction": "Commit and remote-verify the four-row Bank 93 technical-retry-1 navigation-modal evidence together with this checkpoint and the X ledger without advancing any counters; then prepare the next bounded clean retry."
+  "nextAction": "Commit and push this checkpoint and X ledger; verify local HEAD, origin/agent/starlight-progress-archive, draft PR 13 head and Git LFS parity; then explicitly activate technical retry 2 before any four-tab browser action."
 }
