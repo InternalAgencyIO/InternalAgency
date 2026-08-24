@@ -346,7 +346,7 @@
     "renderingDeferredByUser": false,
     "activeRenderBank": 96,
     "activeRenderRunOrdinal": 3,
-    "activeEvidenceState": "Barbados Batch 399 Bank 95 Attempt 5 is fully remote/PR/LFS verified: result evidence at da8f12a43ddeb443a5b32ac09d2f57039bbfbeac and ten tracked-source rows at 4bb101eef0698e1f934935100afbaaeb651cf182. All ten raw occurrences are hard-unusable/select-none, scene 1618 is an explicit refusal/no-bytes outcome and no scene is accepted. Bank 95 is counted as 66 of 170; Batch 399 closes unresolved at the exhausted five-attempt ceiling. São Tomé and Príncipe Batch 400 is next; never dispatch Barbados Attempt 6.",
+    "activeEvidenceState": "Barbados Batch 399 is remote-verified closed unresolved at the exhausted five-attempt ceiling. São Tomé and Príncipe Batch 400 Scenes 1620-1623 have a four-lane Bank 96 Attempt 1 deterministic prompt preflight locally complete with four zero-suppression prompt envelopes; it remains not dispatched pending an intended-only commit, remote branch/PR13/LFS parity and clean-worktree gate.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
@@ -405,6 +405,90 @@
       "actionsExecuted": []
     },
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
+  },
+  "latestBatch400PreflightAudit": {
+    "status": "four-lane-bank-96-attempt-1-local-preflight-complete-not-dispatched-pending-commit-remote-parity",
+    "checkedAtUtc": "2026-08-24T14:19:31.3972361Z",
+    "batch": 400,
+    "country": "São Tomé and Príncipe",
+    "bank": 96,
+    "attempt": 1,
+    "renderRun": 10,
+    "renderRunOrdinal": 3,
+    "dispatchAuthorizedNow": false,
+    "providerDispatchConfirmed": false,
+    "eligibleScenes": [1620,1621,1622,1623],
+    "eligibleLanes": [1,2,3,4],
+    "theme": "orbital spaceship couture",
+    "themePairPosition": "2 of 2",
+    "orderedReferenceScenesByLane": {
+      "1": [938,936,937],
+      "2": [938,936,937],
+      "3": [938,936,937],
+      "4": [938,936,937,1136]
+    },
+    "promptRecords": [
+      {
+        "scene": 1620,
+        "path": "tmp/world-195x4/batch-400/scene-1620-meta-bank-96-attempt-01.txt",
+        "bytes": 4649,
+        "sha256": "C8B3B978E3D80C424724DE0085A0F5A6C199706E3D341D12FAF0E4E81695AD3F",
+        "exactIntendedDispatchedBytes": 4648,
+        "exactIntendedDispatchedSha256": "1532A3EF094C55E962FF551281B05FCD5F180AC039F7613CF2BFCE2F92705043",
+        "activeSuppressionMatches": 0
+      },
+      {
+        "scene": 1621,
+        "path": "tmp/world-195x4/batch-400/scene-1621-meta-bank-96-attempt-01.txt",
+        "bytes": 5109,
+        "sha256": "9BB6D474895B96517EB9765B8B3F12033EB8346B3FCC2E19FEBDD76A1096B7FC",
+        "exactIntendedDispatchedBytes": 5108,
+        "exactIntendedDispatchedSha256": "EAC685E7F5B6D9DB0D9583A2EA9D3A35E18C301CC801696F65A6F9452312EFF4",
+        "activeSuppressionMatches": 0
+      },
+      {
+        "scene": 1622,
+        "path": "tmp/world-195x4/batch-400/scene-1622-meta-bank-96-attempt-01.txt",
+        "bytes": 4536,
+        "sha256": "076DAE6638BE2383520983C51C41190713D5514767C7F5A24F6E253AF4274C7C",
+        "exactIntendedDispatchedBytes": 4535,
+        "exactIntendedDispatchedSha256": "B0A24AB178D799BD42893A3F13ABD776BB8D7B5A46B527A24BE0489310204149",
+        "activeSuppressionMatches": 0
+      },
+      {
+        "scene": 1623,
+        "path": "tmp/world-195x4/batch-400/scene-1623-meta-bank-96-attempt-01.txt",
+        "bytes": 5431,
+        "sha256": "C287E714923838B6B573F021D6E273134C2965C7867E97A7F6A54862B26978A3",
+        "exactIntendedDispatchedBytes": 5430,
+        "exactIntendedDispatchedSha256": "2F5F73C3A1EE08A0FC87233DB9991FACF3B02B75CB1FE995B3C038121E580D6F",
+        "activeSuppressionMatches": 0
+      }
+    ],
+    "bolderMissionMapping": {
+      "requiredCount": 2,
+      "actualCount": 2,
+      "scenes": [1620,1622]
+    },
+    "renderCadence": {
+      "completedRenderRunsSinceLastX": 5,
+      "currentRenderRun": 10,
+      "completedBanksInCurrentRenderRun": 2,
+      "nextBank": 96,
+      "nextOrdinal": 3
+    },
+    "cumulativeMetaBankAllowance": {
+      "authorized": 170,
+      "completed": 66,
+      "remaining": 104
+    },
+    "xState": {
+      "eligibleBacklogRemaining": 0,
+      "eligiblePostExists": false,
+      "publicationAction": "none-no-eligible-post-and-no-final-click"
+    },
+    "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
+    "nextAction": "Commit and remote-verify the Batch 400 preflight barrier; only after parity, audit exactly four signed-in Meta tabs and dispatch one distinct one-image request per eligible lane."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
