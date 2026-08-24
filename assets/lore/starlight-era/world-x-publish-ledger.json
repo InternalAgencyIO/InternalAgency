@@ -700,7 +700,7 @@
         "1622": "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
         "1623": "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
       },
-      "dispatchEnvelope": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-attempt-02-dispatch-envelope.jsonl","bytes":8522,"sha256":"D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227","rows":4,"remoteParityPending":true},
+      "dispatchEnvelope": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-attempt-02-dispatch-envelope.jsonl","bytes":8522,"sha256":"D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227","rows":4,"remoteParityPending":false,"remoteParityCommit":"e2a2fbff1dbaf5586c8f49fbd98d4348130bef7e","remoteParityVerifiedAtUtc":"2026-08-24T15:55:51.6146813Z"},
       "generatedMediaAuditPerformed": false,
       "completedBank": false,
       "countedTowardRenderRun": false,
@@ -734,7 +734,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Commit and remote-verify the exact dispatch envelope and in-flight state, then preserve every provider occurrence before visual inspection. Bank 97 remains uncounted; X backlog remains zero and no publication action is available."
+    "nextAction": "Dispatch evidence is remote verified. Preserve every provider occurrence before visual inspection; Bank 97 remains uncounted until result parity. X backlog remains zero and no publication action is available."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",

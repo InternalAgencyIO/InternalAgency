@@ -772,7 +772,9 @@
       "bytes": 8522,
       "sha256": "D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227",
       "rows": 4,
-      "remoteParityPending": true
+      "remoteParityPending": false,
+      "remoteParityCommit": "e2a2fbff1dbaf5586c8f49fbd98d4348130bef7e",
+      "remoteParityVerifiedAtUtc": "2026-08-24T15:55:51.6146813Z"
     },
     "generatedMediaAuditPerformed": false,
     "completedBank": false,
@@ -812,11 +814,12 @@
     "currentTerminalHandoffEvidenceRemoteParityPending": false,
     "currentBank96ClosureEvidenceRemoteParityPending": false,
     "bank97Attempt2PreflightRemoteParityComplete": true,
-    "bank97Attempt2DispatchEvidenceRemoteParityPending": true,
+    "bank97Attempt2DispatchEvidenceRemoteParityPending": false,
+    "bank97Attempt2DispatchEvidenceCommit": "e2a2fbff1dbaf5586c8f49fbd98d4348130bef7e",
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-97-attempt-2-preflight-parity-complete-dispatch-confirmed-evidence-pending-remote-parity",
+    "status": "bank-97-attempt-2-preflight-and-dispatch-evidence-remote-parity-complete-results-in-flight",
     "verifiedAtUtc": "2026-08-24T15:46:54.7424394Z",
     "archiveDryRunAtSourceClosure": {
       "occurrences": 4802,
@@ -863,7 +866,7 @@
       "sourcePath": ".codex/generated_images/01a01d88-da54-7932-a86c-51f89cc04000/exec-df756fcc-1322-4eac-b6ea-96c0600a4306.png",
       "contentSha256": "577B5A650F7E59F24F0486C4F7D8EF43D6C361CD657444C70C0DF51552DF7336"
     },
-    "remainingGate": "Commit and remote-verify the exact dispatch envelope and in-flight checkpoint/X state, then preserve every media occurrence or explicit no-bytes result before visual inspection."
+    "remainingGate": "Preserve every media occurrence or explicit no-bytes result from the four existing provider URLs before visual inspection; Bank 97 remains uncounted until result evidence and every archive/ledger/Git/LFS/remote/PR gate completes."
   },
   "laneState": {
     "eligibleScenes": [1620, 1621, 1622, 1623],
@@ -875,7 +878,7 @@
     "terminalTechnicalNoDispatchScenes": [],
     "terminalProviderScenes": [],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "bank-97-attempt-2-four-lanes-in-flight-dispatch-evidence-pending-remote-parity",
+    "preflightState": "bank-97-attempt-2-four-lanes-in-flight-dispatch-evidence-remote-parity-complete",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
@@ -903,5 +906,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Commit and remote-verify the dispatch-only evidence. Then audit the four existing provider URLs and preserve every inline and terminal media occurrence or explicit no-bytes result before any visual inspection; never duplicate Send."
+  "nextAction": "Audit the four existing provider URLs and preserve every inline and terminal media occurrence or explicit no-bytes result before any visual inspection; never duplicate Send and do not count Bank 97 before result parity."
 }
