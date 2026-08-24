@@ -6089,7 +6089,7 @@
     "renderRunNumberSinceLastX": 9,
     "scene": 1614,
     "lane": 3,
-    "state": "creative-recovery-text-only-ready-browser-restored-upload-failure-recorded-not-dispatched",
+    "state": "creative-recovery-attempt-1-classified-hard-unusable-evidence-parity-pending",
     "preparedAtUtc": "2026-08-24T07:47:30.2895892Z",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-86-render-run-09-text-only.txt",
     "promptBytes": 6348,
@@ -6119,15 +6119,28 @@
     "browserControlRestoredAtUtc": "2026-08-24T07:42:26.847Z",
     "attachmentUploadFailureEvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-upload-failures.jsonl",
     "textOnlyDispatchAuthorizedByContract": true,
-    "dispatchAttempted": false,
-    "providerUrl": null,
+    "dispatchAttempted": true,
+    "actualDispatchedAtUtc": "2026-08-24T07:54:41.128Z",
+    "providerUrl": "https://www.meta.ai/prompt/67c98808-01a6-4852-9a7e-7b79aeb8dbfa",
+    "providerTerminalAtUtc": "2026-08-24T07:56:28.055Z",
+    "capturedOccurrenceCount": 2,
+    "uniqueOutputSha256Count": 1,
+    "rawOutputSha256": "463EE4E99A292DD719A6149B35DD6FF9F72F509601440B3F4DED51523E26FD03",
+    "rawOutputDimensions": "1152x2048 RGB",
+    "occurrenceEvidencePaths": ["progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-inline-capture.jsonl","progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-terminal-capture.jsonl"],
+    "archiveEvidence": {"applyOccurrences":4762,"applyUniqueContents":3532,"newManifestRows":2,"newBlobs":1,"newBlobBytes":392368,"postApplyDryRunNewManifestRows":0,"postApplyDryRunNewBlobs":0},
+    "ledgerEvidence": {"rejectedPromptEntries":139,"rejectedPromptVerifierErrors":0,"failedRuntimeEvents":987,"failedPromptRecords":1567,"failedPromptVerifierErrors":0},
+    "gitEvidence": {"initialEvidenceCommit":null,"archiveSourceParityCommit":null,"remoteBranchHead":null,"draftPr13Head":null,"lfsPendingObjects":null,"worktreeClean":false,"pending":"commit, push, remote branch, PR 13, LFS and clean-worktree parity"},
     "renderRunProgress": {"completedBanksInCurrentRenderRun":2,"nextRenderRunBankOrdinal":3,"completedRenderRunsSinceLastX":5},
     "schedulingProgress": {"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompleted":56,"cumulativeMetaBanksRemaining":114},
     "xBacklogRemaining": 0,
     "xPublicationEligible": false,
     "xLedgerSha256": "8C248DD6AC0865193AA305C572250AC9B73AAC21BDDA6A390B77C36463566990",
     "actionTimeConfirmationRequested": false,
-    "nextAction": "Use the restored exactly-four-tab signed-in Meta session to dispatch this exact one-image scene-1614 creative-recovery request text-only because the ordered 938 upload chooser failed and was recorded. Preserve every occurrence before visual inspection."
+    "classification": "hard-unusable-all-occurrences",
+    "hardFailureSummary": ["historical quartet faces replaced","ECE touches Alia instead of Ellie","capsule oversized and above quartet instead of at Ellie knee height","requested floor-height front-quarter Dutch-roll camera not achieved","Alia garment lacks the required crossed-panel divided wrap-skort construction"],
+    "creativeImprovementSummary": "The Port Vila/Mele Bay depth, diagonal interaction, coral/pandanus/lagoon/volcanic fashion languages, and country setting materially fix the prior repetitive lineup problem; those axes will not be reused in the next four attempts.",
+    "nextAction": "Complete Bank 86 archive, both ledger verifiers, Git, LFS, remote branch and PR 13 parity; then prepare and dispatch creative Attempt 2 with the reserved high-oblique Mount Yasur composition."
   },
   "creativeRecoveryDirective": {
     "requestedAtUtc": "2026-08-24T07:45:00Z",
@@ -6137,7 +6150,7 @@
     "currentAttempt": 1,
     "instantRewordRule": "After each fully captured and classified hard failure, author the next distinct prompt immediately from the next unused creative slot. Never reuse the same camera geometry, Vanuatu locale, formation, or dominant motif placement within these five attempts. Preserve N, N+1, and N+2 evidence gates and never bypass provider controls.",
     "attempts": [
-      {"attempt":1,"bank":86,"camera":"floor-height front-quarter from camera-left with restrained Dutch roll","locale":"Port Vila and Mele Bay fashion pier","formation":"layered diagonal runway tableau","motifs":"sculpted reef branch, pandanus weave, limestone-water beadwork, volcanic-glass panels","state":"prompt-ready"},
+      {"attempt":1,"bank":86,"camera":"floor-height front-quarter from camera-left with restrained Dutch roll","locale":"Port Vila and Mele Bay fashion pier","formation":"layered diagonal runway tableau","motifs":"sculpted reef branch, pandanus weave, limestone-water beadwork, volcanic-glass panels","state":"classified-hard-unusable-evidence-parity-pending","providerUrl":"https://www.meta.ai/prompt/67c98808-01a6-4852-9a7e-7b79aeb8dbfa","dispatchedAtUtc":"2026-08-24T07:54:41.128Z","classifiedAtUtc":"2026-08-24T08:03:47.2429847Z"},
       {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"reserved-if-needed"},
       {"attempt":3,"bank":88,"camera":"long-lens side-front compression with complete heel emphasis","locale":"Champagne Beach orbital seawall","formation":"staggered triangular formation with ECE isolated in depth","motifs":"champagne-sand satin, turquoise shallows, foam-scallop applique, woven shoreline geometry","state":"reserved-if-needed"},
       {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"reserved-if-needed"},
@@ -6170,5 +6183,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Dispatch the reworded Bank 86 creative-recovery prompt text-only in the restored exactly-four-tab Meta session, preserve every occurrence before inspection, and move immediately to the next unused creative attempt after a fully evidenced hard failure. Never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Finish Bank 86 archive, ledger, Git, LFS, remote and PR parity, then move immediately to the reserved high-oblique Mount Yasur creative Attempt 2. Never reopen scenes 1612, 1613, or 1615."
 }
