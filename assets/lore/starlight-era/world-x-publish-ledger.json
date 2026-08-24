@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-batch-399-bank-94-attempt-4-preflight-ready-pending-remote-parity-not-dispatched-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-399-bank-94-attempt-4-preflight-remote-parity-complete-ready-not-dispatched-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 0,
@@ -275,7 +275,7 @@
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-bank-94-attempt-4-preflight-ready-pending-remote-parity-not-dispatched",
+    "currentPublicationWindowStatus": "open-no-eligible-post-bank-94-attempt-4-ready-not-dispatched",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -845,15 +845,15 @@
     "noFalseDispatchClaim": "Technical retry 2 reached four Meta prompt URLs after the authorized one-time Discard navigation handoff. The exact terminal audit preserved eight unique media occurrences, all exact CDN source URLs and four exact DOM response snapshots; all eight are hard-unusable. Bank 93 is counted only after evidence commit 78a860d16dcc3643cd00880c89e4b12667ef3904 matched local/origin/draft PR 13 and LFS gates."
   },
   "latestBatch399Bank94PreflightAudit": {
-    "status": "four-lane-attempt-4-preflight-ready-pending-commit-remote-parity-not-dispatched",
-    "checkedAtUtc": "2026-08-24T12:42:41.1789287Z",
+    "status": "four-lane-attempt-4-preflight-remote-parity-complete-ready-not-dispatched",
+    "checkedAtUtc": "2026-08-24T12:45:55.3777462Z",
     "batch": 399,
     "country": "Barbados",
     "bank": 94,
     "attempt": 4,
     "renderRun": 10,
     "renderRunOrdinal": 1,
-    "dispatchAuthorizedNow": false,
+    "dispatchAuthorizedNow": true,
     "providerDispatchConfirmed": false,
     "providerUrls": [],
     "eligibleScenes": [1616,1617,1618,1619],
@@ -889,8 +889,13 @@
       "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
       "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
       "gitLfsPendingObjectCount": 0,
-      "preflightCommit": null,
-      "remoteParityPending": true
+      "preflightCommit": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+      "localHead": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+      "remoteBranchHead": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+      "draftPr13Head": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+      "draftPr13State": "OPEN/DRAFT/CLEAN",
+      "remoteParityVerifiedAtUtc": "2026-08-24T12:45:55.3777462Z",
+      "remoteParityPending": false
     },
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
@@ -904,7 +909,7 @@
     "completedBank": false,
     "countedTowardRenderRun": false,
     "xState": {"eligibleBacklogRemaining":0,"eligibleTwoCountryPostExists":false,"publicationAction":"none"},
-    "nextAction": "Commit and push the exact checkpoint/X mirror and four Bank 94 Attempt 4 prompts; remote-verify local/origin/draft-PR/LFS parity before dispatch authorization."
+    "nextAction": "Audit exactly four persistent signed-in Meta tabs, perform the ordered uploads once per lane, verify exact normalized prompts and Send-ready state, then dispatch one concurrent image request per lane."
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",

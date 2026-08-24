@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "bank-94-attempt-4-four-lane-preflight-ready-pending-commit-remote-parity-not-dispatched",
+  "status": "bank-94-attempt-4-ready-for-four-lane-meta-dispatch-not-dispatched-remote-parity-complete",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T12:41:51.7627939Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -891,8 +891,9 @@
     "preparedAtUtc": "2026-08-24T12:41:51.7627939Z",
     "independentlyVerifiedAtUtc": "2026-08-24T12:42:41.1789287Z",
     "provider": "Meta AI",
-    "state": "four-lane-preflight-ready-not-dispatched-pending-commit-remote-parity",
-    "dispatchAuthorizedNow": false,
+    "state": "ready-for-four-lane-meta-dispatch-not-dispatched-remote-parity-complete",
+    "readyAtUtc": "2026-08-24T12:45:55.3777462Z",
+    "dispatchAuthorizedNow": true,
     "providerDispatchConfirmed": false,
     "providerUrls": [],
     "requestedImageCountPerLane": 1,
@@ -954,12 +955,14 @@
     "cumulativeMetaBankAllowance": {"authorized":170,"completed":64,"remaining":106},
     "completedBank": false,
     "countedTowardRenderRun": false,
-    "remoteParityPending": true,
-    "nextEvidenceGate": "Stage only this checkpoint, the X cadence mirror and the four exact Bank 94 Attempt 4 prompts; commit, push the exact branch ref and verify local/origin/draft-PR/LFS parity before dispatch authorization."
+    "preflightCommit": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+    "remoteParityVerifiedAtUtc": "2026-08-24T12:45:55.3777462Z",
+    "remoteParityPending": false,
+    "nextEvidenceGate": "Audit exactly four persistent signed-in Meta tabs, upload ordered references 938/936/937 once per lane plus 1136 only for scene 1618, verify each normalized prompt and Send-ready state, then dispatch one concurrent image request per lane."
   },
   "remoteParity": {
-    "status": "bank-93-correction-remote-parity-complete-bank-94-attempt-4-preflight-local-ready-pending-commit-remote-parity",
-    "verifiedAtUtc": "2026-08-24T12:42:41.1789287Z",
+    "status": "bank-94-attempt-4-four-prompt-preflight-remote-parity-complete-ready-not-dispatched",
+    "verifiedAtUtc": "2026-08-24T12:45:55.3777462Z",
     "preflightEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
     "bank91EvidenceCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "bank92EvidenceCommit": "54023145c0c673c85b60ad32e5fbe48d63c22492",
@@ -972,16 +975,16 @@
     "bank93Attempt3TechnicalRetry2LiveHandoffEvidenceParityCommit": "dada4bcfa1ef73c8e9addb613bf3ff9aed7b4d97",
     "bank93Attempt3ResultEvidenceCommit": "78a860d16dcc3643cd00880c89e4b12667ef3904",
     "bank93SourceEvidenceCorrectionCommit": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
-    "bank94Attempt4PromptPreflightCommit": null,
-    "localHeadAtBarrier": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
+    "bank94Attempt4PromptPreflightCommit": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+    "localHeadAtBarrier": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
     "remoteBranch": "agent/starlight-progress-archive",
-    "remoteBranchHead": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
+    "remoteBranchHead": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
     "draftPr13": {
       "number": 13,
       "open": true,
       "draft": true,
       "headRef": "agent/starlight-progress-archive",
-      "headCommit": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
+      "headCommit": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
       "baseRef": "agent/iat-launch-window-recovery-batch-220",
       "mergeStateStatus": "CLEAN"
     },
@@ -1002,16 +1005,16 @@
     "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-94-attempt-4-four-lane-preflight-ready-pending-commit-remote-parity-not-dispatched",
-    "verifiedAtUtc": "2026-08-24T12:42:41.1789287Z",
+    "status": "bank-94-attempt-4-four-lane-preflight-remote-parity-complete-ready-not-dispatched",
+    "verifiedAtUtc": "2026-08-24T12:45:55.3777462Z",
     "archiveApply": {"occurrences": 4783, "uniqueContents": 3552, "newRows": 8, "newBlobs": 0, "newBlobBytes": 0},
     "archiveDryRun": {"occurrences": 4783, "uniqueContents": 3552, "newRows": 0, "newBlobs": 0, "newBlobBytes": 0},
     "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
     "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
     "git": {
-      "commit": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
-      "remoteBranchHead": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
-      "draftPr13Head": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
+      "commit": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+      "remoteBranchHead": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
+      "draftPr13Head": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
       "draftPr13State": "OPEN/DRAFT/CLEAN",
       "draftPr13HeadRef": "agent/starlight-progress-archive",
       "draftPr13BaseRef": "agent/iat-launch-window-recovery-batch-220",
@@ -1021,7 +1024,7 @@
     "promptRecordsVerified": 16,
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
-    "remainingGate": "Commit and push the four exact Bank 94 Attempt 4 prompts plus checkpoint and X cadence mirror, then remote-verify local/origin/draft-PR/LFS parity before dispatch."
+    "remainingGate": "Browser dispatch only: audit exactly four signed-in Meta tabs, perform ordered uploads once per lane, verify exact normalized prompts and Send-ready state, then one concurrent image request per lane."
   },
   "laneState": {
     "eligibleScenes": [1616, 1617, 1618, 1619],
@@ -1038,8 +1041,8 @@
     "technicalRetry2ProviderDispatchedScenes": [1616, 1617, 1618, 1619],
     "terminalHardUnusableScenes": [1616, 1617, 1618, 1619],
     "unresolvedScenes": [1616, 1617, 1618, 1619],
-    "preflightState": "Bank 94 Attempt 4 has four exact prompt files, four scene-plan records, zero active-suppression matches and an independent no-discrepancy audit with bolder mission lanes exactly 2/4. It is not dispatched and remains pending commit/origin/draft-PR parity.",
-    "dispatchPolicy": "Do not dispatch Bank 94 until its exact prompts, checkpoint, Git, LFS, origin and draft-PR parity gates pass."
+    "preflightState": "Bank 94 Attempt 4 has four exact prompt files, four scene-plan records, zero active-suppression matches and an independent no-discrepancy audit with bolder mission lanes exactly 2/4. Preflight commit 5a232b953d2de7f3a2f831f1e9383b158149dc8d matches local/origin/draft PR 13 with LFS and tracked-worktree parity. It is ready and not dispatched.",
+    "dispatchPolicy": "Use exactly four persistent signed-in Meta tabs; upload 938, 936, 937 once per lane and 1136 only for scene 1618; verify each exact normalized prompt and Send-ready state; then dispatch exactly one concurrent image request per lane."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
@@ -1074,5 +1077,5 @@
     "Upload scene 938, then 936, then 937 exactly once per clean Meta request.",
     "Capture every inline and terminal occurrence or explicit no-bytes result with exact prompt, UTC, hashes, response text, raw bytes, dimensions and minimum occurrence envelope before visual inspection."
   ],
-  "nextAction": "Commit and push the exact Bank 94 Attempt 4 four-prompt preflight, then verify local/origin/draft PR 13/LFS parity before authorizing exactly four signed-in Meta lanes; do not browser-dispatch from this preflight task."
+  "nextAction": "Bank 94 Attempt 4 is authorized and not dispatched: audit exactly four persistent signed-in Meta tabs, upload the ordered references once per lane, verify exact normalized prompts and Send-ready state, then dispatch one concurrent image request in each of the four lanes."
 }
