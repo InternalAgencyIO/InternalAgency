@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-88-creative-attempt-3-hard-unusable-remote-verified-bank-89-attempt-4-prepared-scene-1614-only",
+  "status": "bank-88-creative-attempt-3-hard-unusable-remote-verified-bank-89-attempt-4-provider-in-flight-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T09:10:40.8145581Z",
+  "lastWakeAuditAtUtc": "2026-08-24T09:13:20.800Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -6269,7 +6269,7 @@
     "creativeRecoveryAttempt": 4,
     "scene": 1614,
     "lane": 3,
-    "state": "creative-recovery-attempt-4-prepared-awaiting-clean-meta-request",
+    "state": "creative-recovery-attempt-4-provider-in-flight",
     "preparedAtUtc": "2026-08-24T09:10:32.7100811Z",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-89-render-run-09-text-only.txt",
     "promptBytes": 6664,
@@ -6292,8 +6292,19 @@
     "eligibleScenes": [1614],
     "stoppedScenesUntouched": [1612,1613,1615],
     "requestedImageCount": 1,
-    "dispatchAttempted": false,
-    "nextAction": "Use a clean existing Meta tab, upload 938 then 936 then 937 once each, dispatch exactly one Bank 89 image request for scene 1614, and preserve every occurrence before visual inspection."
+    "orderedReferenceUploadScenesActuallySubmitted": [938,936,937],
+    "actualSubmittedReferenceCount": 3,
+    "faceAnchorsVerifiedBeforeUploadAtUtc": "2026-08-24T09:12:56.9523286Z",
+    "faceAnchorsVerifiedBeforeRenderAtUtc": "2026-08-24T09:13:15.6351158Z",
+    "promptPrefixVerifiedExactBeforeDispatch": true,
+    "actualDispatchedAtUtc": "2026-08-24T09:13:20.800Z",
+    "providerUrl": "https://www.meta.ai/prompt/af0fd073-3c1b-40db-ac4b-5fd9a1bae19f",
+    "signedInAccount": "leesha007",
+    "persistentMetaTabIds": ["8","9","10","11"],
+    "dispatchTabId": "8",
+    "dispatchAttempted": true,
+    "providerStateAtFirstAudit": "Refining the tableau layout; Stop active",
+    "nextAction": "Preserve every Bank 89 inline and terminal media occurrence or explicit no-bytes result before visual inspection, then classify and evidence-gate the result."
   },
   "creativeRecoveryDirective": {
     "requestedAtUtc": "2026-08-24T07:45:00Z",
@@ -6306,7 +6317,7 @@
       {"attempt":1,"bank":86,"camera":"floor-height front-quarter from camera-left with restrained Dutch roll","locale":"Port Vila and Mele Bay fashion pier","formation":"layered diagonal runway tableau","motifs":"sculpted reef branch, pandanus weave, limestone-water beadwork, volcanic-glass panels","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/67c98808-01a6-4852-9a7e-7b79aeb8dbfa","dispatchedAtUtc":"2026-08-24T07:54:41.128Z","classifiedAtUtc":"2026-08-24T08:03:47.2429847Z","remoteVerifiedCommit":"0c7decb6c880895adbfc7f6b6742ec54e92fbe2c"},
       {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/6ceff695-cbbe-4d69-bc5f-0d1dd711180f","dispatchedAtUtc":"2026-08-24T08:26:40.839Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T08:36:03.9956171Z","initialEvidenceCommit":"85398b230335fe490b5313f9a889fa028e20286d","remoteVerifiedCommit":"5f8647d3ebe9b34ae5c08ef918d9543a6ca08ac5"},
       {"attempt":3,"bank":88,"camera":"long-lens side-front compression with complete heel emphasis","locale":"Champagne Beach orbital seawall","formation":"staggered triangular formation with ECE isolated in depth","motifs":"champagne-sand satin, turquoise shallows, foam-scallop applique, woven shoreline geometry","state":"remote-verified-hard-unusable","preparedAtUtc":"2026-08-24T08:52:46.7420855Z","promptSha256":"245F3E204DEDDB1CDF83670B4BB85F14F77959697A7794F43228B800575FBF32","providerUrl":"https://www.meta.ai/prompt/bfdc3f25-c771-428c-a4a0-61ecc5b5274f","dispatchedAtUtc":"2026-08-24T08:57:08.885Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:01:48.3024319Z","initialEvidenceCommit":"faae5c8038e09d95b49e2183f58c690b637f317f","remoteVerifiedCommit":"e215035c86139be8346cfc170c403a4e42e8175e"},
-      {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"prepared-awaiting-clean-meta-request","preparedAtUtc":"2026-08-24T09:10:32.7100811Z","promptSha256":"75C495545D29FCA6966F02D05B1FE7BC4A84EDA9CCBA5EA3BA3D4352D4280C11"},
+      {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"provider-in-flight","preparedAtUtc":"2026-08-24T09:10:32.7100811Z","promptSha256":"75C495545D29FCA6966F02D05B1FE7BC4A84EDA9CCBA5EA3BA3D4352D4280C11","providerUrl":"https://www.meta.ai/prompt/af0fd073-3c1b-40db-ac4b-5fd9a1bae19f","dispatchedAtUtc":"2026-08-24T09:13:20.800Z","submittedReferences":[938,936,937]},
       {"attempt":5,"bank":90,"camera":"intimate eye-level 85mm full-body editorial with close face and hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"reserved-if-needed"}
     ]
   },
@@ -6336,5 +6347,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Dispatch the prepared Bank 89 wide Dutch-roll Blue Lagoon Attempt 4 for only scene 1614 through one clean Meta request after ordered 938, 936, 937 uploads; preserve every occurrence before visual inspection. Never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Preserve every Bank 89 inline and terminal media occurrence or explicit no-bytes result before visual inspection, then classify and evidence-gate the result. Never reopen scenes 1612, 1613, or 1615."
 }
