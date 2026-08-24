@@ -346,7 +346,7 @@
     "renderingDeferredByUser": false,
     "activeRenderBank": 96,
     "activeRenderRunOrdinal": 3,
-    "activeEvidenceState": "Barbados Batch 399 is remote-verified closed unresolved at the exhausted five-attempt ceiling. São Tomé and Príncipe Batch 400 Scenes 1620-1623 have a four-lane Bank 96 Attempt 1 deterministic prompt preflight locally complete with four zero-suppression prompt envelopes; it remains not dispatched pending an intended-only commit, remote branch/PR13/LFS parity and clean-worktree gate.",
+    "activeEvidenceState": "Barbados Batch 399 is remote-verified closed unresolved at the exhausted five-attempt ceiling. São Tomé and Príncipe Batch 400 Bank 96 Attempt 1 four-lane preflight is remote/PR13/LFS/archive/ledger/clean-worktree verified at 81870158db900e75d11713eb6124f244fda5a93e. It is dispatch-authorized and not yet dispatched.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
@@ -407,15 +407,15 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "four-lane-bank-96-attempt-1-local-preflight-complete-not-dispatched-pending-commit-remote-parity",
-    "checkedAtUtc": "2026-08-24T14:19:31.3972361Z",
+    "status": "four-lane-bank-96-attempt-1-preflight-remote-parity-complete-dispatch-authorized-not-dispatched",
+    "checkedAtUtc": "2026-08-24T14:24:10.8707934Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 96,
     "attempt": 1,
     "renderRun": 10,
     "renderRunOrdinal": 3,
-    "dispatchAuthorizedNow": false,
+    "dispatchAuthorizedNow": true,
     "providerDispatchConfirmed": false,
     "eligibleScenes": [1620,1621,1622,1623],
     "eligibleLanes": [1,2,3,4],
@@ -470,6 +470,23 @@
       "actualCount": 2,
       "scenes": [1620,1622]
     },
+    "preflightBarrier": {
+      "status": "complete",
+      "verifiedAtUtc": "2026-08-24T14:24:10.8707934Z",
+      "commit": "81870158db900e75d11713eb6124f244fda5a93e",
+      "localHead": "81870158db900e75d11713eb6124f244fda5a93e",
+      "remoteBranchHead": "81870158db900e75d11713eb6124f244fda5a93e",
+      "draftPr13Head": "81870158db900e75d11713eb6124f244fda5a93e",
+      "draftPr13State": "OPEN",
+      "draftPr13IsDraft": true,
+      "draftPr13MergeState": "CLEAN",
+      "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+      "gitLfsPendingObjects": 0,
+      "worktreeClean": true,
+      "archiveDryRun": {"occurrences":4802,"uniqueContents":3569,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+      "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
+      "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+    },
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
       "currentRenderRun": 10,
@@ -488,7 +505,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Commit and remote-verify the Batch 400 preflight barrier; only after parity, audit exactly four signed-in Meta tabs and dispatch one distinct one-image request per eligible lane."
+    "nextAction": "Audit exactly four persistent signed-in Meta tabs with no Stop state, upload ordered identity references once per lane, verify exact normalized prompts and one-image requests, then dispatch Bank 96 Attempt 1 concurrently across Scenes 1620-1623."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
