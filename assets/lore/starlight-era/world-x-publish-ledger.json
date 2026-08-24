@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-batch-399-bank-93-attempt-3-technical-retry-1-ready-not-dispatched-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-399-bank-93-attempt-3-technical-retry-1-terminal-navigation-modal-no-dispatch-no-bytes-not-completed-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 9,
@@ -275,7 +275,7 @@
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-93-attempt-3-technical-retry-1-ready-not-dispatched",
+    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-93-attempt-3-technical-retry-1-navigation-modal-no-dispatch-no-bytes",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -333,20 +333,20 @@
   },
   "latestUserQueuePriority": {
     "receivedAtUtc": "2026-08-24T10:19:53.2564967Z",
-    "checkedAtUtc": "2026-08-24T11:46:19.6820573Z",
+    "checkedAtUtc": "2026-08-24T11:50:07.874Z",
     "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
-    "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. The prior Bank 93 Attempt 3 click group remains a verified client-side technical no-dispatch/no-bytes event and its evidence is remote verified at 7167327b01dcdbbf6cdaaa79028c6a2912d6e01e. One bounded technical retry is ready from exactly four clean Meta tabs, with fresh ordered uploads and a mandatory wait for all attachments and Send controls before one concurrent click per lane. The directive does not authorize unspecified follow, connect, like, publication, or other representational clicks.",
+    "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. Bank 93 Attempt 3 technical retry 1 was preflight-parity verified at e6aba90153247c14290eda584ebf7a88fce4f352, but all four sends terminated in the exact client-side Discard prompt? navigation modal; Stay preserved the page yet left every composer empty with no provider URL, Stop state, response, refusal or media. This is technical no-dispatch/no-bytes and does not complete or count the bank. The directive does not authorize unspecified follow, connect, like, publication, or other representational clicks.",
     "xPriority": "wait-for-eligibility-after-scene-resolution",
     "eligibleBacklogRemaining": 0,
     "renderingDeferredByUser": false,
     "activeRenderBank": 93,
     "activeRenderRunOrdinal": 10,
-    "activeEvidenceState": "Barbados Batch 399 Bank 92 remains completed and remote verified. The Bank 93 Attempt 3 technical handoff evidence is exact local/origin/draft-PR parity verified at 7167327b01dcdbbf6cdaaa79028c6a2912d6e01e; PR 13 is OPEN/DRAFT/CLEAN with the correct head and base, Git LFS has zero pending objects and the post-commit worktree was clean. Bank 93 remains 63/170 completed overall and render run 9 remains 9/10. Technical retry 1 is authorized but not dispatched and requires four clean tabs, fresh ordered uploads, all attachment processing complete and all Send controls enabled before one concurrent click per lane.",
+    "activeEvidenceState": "Barbados Batch 399 Bank 92 remains completed and remote verified. Bank 93 Attempt 3 technical retry 1 preflight was exact local/origin/draft-PR parity verified at e6aba90153247c14290eda584ebf7a88fce4f352. Its clicks at 2026-08-24T11:49:51.103Z produced the client-side Discard prompt? dialog in all four lanes; after Stay, by 2026-08-24T11:50:07.874Z each composer and attachment set was empty while tabs remained Meta home with no Stop, provider URL, text or media. Bank 93 remains 63/170 completed overall, render run 9 remains 9/10, and retry 1 is not counted.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
-    "status": "batch-398-closed-unresolved-never-accepted-batch-399-bank-93-attempt-3-technical-retry-1-ready-not-dispatched",
-    "checkedAtUtc": "2026-08-24T11:46:19.6820573Z",
+    "status": "batch-398-closed-unresolved-never-accepted-batch-399-bank-93-attempt-3-technical-retry-1-terminal-navigation-modal-no-dispatch-no-bytes",
+    "checkedAtUtc": "2026-08-24T11:50:07.874Z",
     "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
     "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the user's completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. This does not authorize an unspecified follow, connect, like, publication, or other representational click; those actions remain disabled or ineligible until an exact target queue exists and the applicable action-time confirmation gate is satisfied.",
     "closedCountry": {
@@ -364,7 +364,7 @@
       "scenes": [1616,1617,1618,1619],
       "resolvedScenes": [],
       "unresolvedScenes": [1616,1617,1618,1619],
-      "renderState": "bank-92-completed-hard-unusable-parity-verified-bank-93-attempt-3-technical-evidence-parity-at-7167327b01dcdbbf6cdaaa79028c6a2912d6e01e-technical-retry-1-ready-not-dispatched",
+      "renderState": "bank-92-completed-hard-unusable-parity-verified-bank-93-attempt-3-technical-retry-1-preflight-parity-at-e6aba90153247c14290eda584ebf7a88fce4f352-terminal-navigation-modal-no-dispatch-no-bytes-not-completed",
       "eligibleForX": false
     },
     "renderCadence": {
@@ -522,7 +522,7 @@
       "bank": 93,
       "attempt": 3,
       "renderRunOrdinal": 10,
-      "status": "technical-retry-1-ready-for-four-lane-meta-dispatch-not-dispatched"
+      "status": "technical-retry-1-terminal-navigation-modal-no-dispatch-no-bytes-not-completed"
     },
     "renderCadence": {
       "completedBanksInCurrentRenderRun": 9,
@@ -543,32 +543,33 @@
     }
   },
   "latestBatch399Bank93PreflightAudit": {
-    "status": "technical-retry-1-ready-for-four-lane-meta-dispatch-not-dispatched",
-    "checkedAtUtc": "2026-08-24T11:46:19.6820573Z",
+    "status": "technical-retry-1-terminal-client-side-navigation-modal-no-dispatch-no-bytes-not-completed",
+    "checkedAtUtc": "2026-08-24T11:50:07.874Z",
     "batch": 399,
     "country": "Barbados",
     "bank": 93,
     "attempt": 3,
     "renderRun": 9,
     "renderRunOrdinal": 10,
-    "dispatchAuthorizedNow": true,
-    "providerDispatchState": "technical-retry-1-not-dispatched",
+    "dispatchAuthorizedNow": false,
+    "providerDispatchState": "technical-retry-1-terminal-client-side-navigation-modal-no-dispatch-no-bytes",
     "eligibleScenes": [1616,1617,1618,1619],
     "eligibleLanes": [1,2,3,4],
     "parityVerification": {
       "promptAndTrackedSourcePreflightCommit": "65e2c19abdb4708a14ac95588592ba4158220be5",
       "initialPreflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
-      "technicalEvidenceParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
-      "localHead": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+      "initialTechnicalEvidenceParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+      "technicalRetry1PreflightParityCommit": "e6aba90153247c14290eda584ebf7a88fce4f352",
+      "localHead": "e6aba90153247c14290eda584ebf7a88fce4f352",
       "remoteBranch": "agent/starlight-progress-archive",
-      "remoteBranchHead": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+      "remoteBranchHead": "e6aba90153247c14290eda584ebf7a88fce4f352",
       "draftPr13": {
         "number": 13,
         "state": "OPEN",
         "draft": true,
         "mergeStateStatus": "CLEAN",
         "headRef": "agent/starlight-progress-archive",
-        "headCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+        "headCommit": "e6aba90153247c14290eda584ebf7a88fce4f352",
         "baseRef": "agent/iat-launch-window-recovery-batch-220"
       },
       "gitLfsPendingObjectCount": 0,
@@ -630,19 +631,48 @@
       "waitForAllAttachmentsToFinish": true,
       "requireAllSendControlsEnabledBeforeClick": true,
       "oneConcurrentClickPerLane": true,
-      "dispatchAuthorizedNow": true,
+      "wasDispatchAuthorizedAtClick": true,
+      "preflightAuthorizationConsumedByClickGroup": true,
+      "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": false,
       "providerUrls": [],
       "generatedMediaOccurrenceCount": 0,
       "completedBank": false,
       "countedTowardRenderRun": false
     },
+    "technicalRetry1TerminalFailure": {
+      "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-technical-retry-01-navigation-modal-failure.jsonl",
+      "evidenceBytes": 7792,
+      "evidenceSha256": "DD61D6EF03A21052B383CC6857948835B3052C403E313EE4151EBE307A466AA6",
+      "evidenceRecordCount": 4,
+      "uiSendClickAtUtc": "2026-08-24T11:49:51.103Z",
+      "terminalObservedAtUtc": "2026-08-24T11:50:07.874Z",
+      "allExactPromptsAttachmentsAndSendEnabledBeforeClick": true,
+      "allUiClicksReturnedTrue": true,
+      "dialogTitle": "Discard prompt?",
+      "dialogBody": "Your message will be lost if you leave this page.",
+      "stayClickedInAllFourLanes": true,
+      "allDialogsClosedAfterStay": true,
+      "allComposersAndAttachmentsEmptyAfterStay": true,
+      "allSendControlsDisabledAfterStay": true,
+      "providerUrlCount": 0,
+      "stopControlCount": 0,
+      "providerResponseObserved": false,
+      "providerRefusalObserved": false,
+      "generatedMediaOccurrenceCount": 0,
+      "explicitProviderNoBytesObserved": false,
+      "technicalNoDispatchNoBytes": true,
+      "providerDispatchConfirmed": false,
+      "completedBank": false,
+      "countedTowardRenderRun": false,
+      "classification": "client-side-navigation-modal-technical-no-dispatch-no-bytes"
+    },
     "xState": {
       "eligibleBacklogRemaining": 0,
       "eligibleTwoCountryPostExists": false,
       "publicationAction": "none"
     },
-    "noFalseDispatchClaim": "Technical retry 1 is preflight-ready only. No retry upload, click, provider URL, accepted dispatch, provider occurrence, generated media, refusal or no-bytes result is asserted, and Bank 93 remains incomplete and uncounted."
+    "noFalseDispatchClaim": "Technical retry 1 is recorded only as a client-side navigation-modal technical no-dispatch/no-bytes event. No provider URL, accepted dispatch, provider occurrence, generated media, provider refusal or explicit provider no-bytes result is asserted, and Bank 93 remains incomplete and uncounted."
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
