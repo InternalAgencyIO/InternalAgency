@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-85-final-parity-verified-bank-86-preflight-ready-browser-control-binding-blocked-scene-1614-only",
+  "status": "bank-85-final-parity-verified-bank-86-creative-recovery-text-only-ready-browser-restored-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T07:36:03.3493329Z",
+  "lastWakeAuditAtUtc": "2026-08-24T07:47:30.2895892Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -6089,13 +6089,13 @@
     "renderRunNumberSinceLastX": 9,
     "scene": 1614,
     "lane": 3,
-    "state": "preflight-ready-browser-control-binding-blocked-not-dispatched",
-    "preparedAtUtc": "2026-08-24T07:12:44.3537505Z",
+    "state": "creative-recovery-text-only-ready-browser-restored-upload-failure-recorded-not-dispatched",
+    "preparedAtUtc": "2026-08-24T07:47:30.2895892Z",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-86-render-run-09-text-only.txt",
-    "promptBytes": 5046,
-    "promptSha256": "C5E2AECD6BF82CFFB81C76D1933FBFBCE468F494026DA8F74F8B722657FEC2E5",
-    "exactIntendedDispatchedPromptBytes": 5045,
-    "exactIntendedDispatchedPromptSha256": "4B20ADBD1CFB96E130EC4812852E2CA77449E507D0991A9DBE1C23E40A79FDFA",
+    "promptBytes": 6348,
+    "promptSha256": "F71A5EB67C7F67086FD73BD0D603FD1A4A9CCE80A1F16EDC6DBC238F9C685518",
+    "exactIntendedDispatchedPromptBytes": 6347,
+    "exactIntendedDispatchedPromptSha256": "D7E8B7F2EBB0DF2019B2F5DD620531B3E8B3368DF164B2428EB100D9AAC123EA",
     "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-dispatch-envelope.jsonl",
     "activeSuppressionMatches": 0,
     "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
@@ -6115,7 +6115,10 @@
     },
     "blockerEvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-browser-control-blocker.jsonl",
     "blockerObservedAtUtc": "2026-08-24T07:36:03.3493329Z",
-    "lastBrowserControlRetryAtUtc": "2026-08-24T07:36:03.3493329Z",
+    "lastBrowserControlRetryAtUtc": "2026-08-24T07:42:26.847Z",
+    "browserControlRestoredAtUtc": "2026-08-24T07:42:26.847Z",
+    "attachmentUploadFailureEvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-upload-failures.jsonl",
+    "textOnlyDispatchAuthorizedByContract": true,
     "dispatchAttempted": false,
     "providerUrl": null,
     "renderRunProgress": {"completedBanksInCurrentRenderRun":2,"nextRenderRunBankOrdinal":3,"completedRenderRunsSinceLastX":5},
@@ -6124,7 +6127,22 @@
     "xPublicationEligible": false,
     "xLedgerSha256": "8C248DD6AC0865193AA305C572250AC9B73AAC21BDDA6A390B77C36463566990",
     "actionTimeConfirmationRequested": false,
-    "nextAction": "Restore the signed-in browser-control binding, audit exactly four persistent Meta tabs, upload 938 then 936 then 937 once each, dispatch this exact one-image scene-1614 request, and preserve every occurrence before visual inspection."
+    "nextAction": "Use the restored exactly-four-tab signed-in Meta session to dispatch this exact one-image scene-1614 creative-recovery request text-only because the ordered 938 upload chooser failed and was recorded. Preserve every occurrence before visual inspection."
+  },
+  "creativeRecoveryDirective": {
+    "requestedAtUtc": "2026-08-24T07:45:00Z",
+    "userDirective": "new countries the fashion became boring you need to insta reword and try new prompts up to 5 times on every fail too much STOPPING TOO MUCH SAME IMAGE FOR DAYS FIX THESE GET US BACK ON MISSION HOT GIRLS NEW ANGLES HOT LOCALES AND COUNTRY MOTIFS.",
+    "interpretation": "Use glamorous magnetic adult high-fashion energy for the four fictional women, each exactly age 21, while preserving opaque public-safe wardrobe, identity, anatomy, prop, mascot, setting, and evidence hard gates. Finish unresolved scene 1614 before advancing to the next authoritative country.",
+    "failureRecoveryCeiling": 5,
+    "currentAttempt": 1,
+    "instantRewordRule": "After each fully captured and classified hard failure, author the next distinct prompt immediately from the next unused creative slot. Never reuse the same camera geometry, Vanuatu locale, formation, or dominant motif placement within these five attempts. Preserve N, N+1, and N+2 evidence gates and never bypass provider controls.",
+    "attempts": [
+      {"attempt":1,"bank":86,"camera":"floor-height front-quarter from camera-left with restrained Dutch roll","locale":"Port Vila and Mele Bay fashion pier","formation":"layered diagonal runway tableau","motifs":"sculpted reef branch, pandanus weave, limestone-water beadwork, volcanic-glass panels","state":"prompt-ready"},
+      {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"reserved-if-needed"},
+      {"attempt":3,"bank":88,"camera":"long-lens side-front compression with complete heel emphasis","locale":"Champagne Beach orbital seawall","formation":"staggered triangular formation with ECE isolated in depth","motifs":"champagne-sand satin, turquoise shallows, foam-scallop applique, woven shoreline geometry","state":"reserved-if-needed"},
+      {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"reserved-if-needed"},
+      {"attempt":5,"bank":90,"camera":"intimate eye-level 85mm full-body editorial with close face and hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"reserved-if-needed"}
+    ]
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -6151,11 +6169,6 @@
     "remoteParityPending": false,
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
-  "authoritativeBlocker": {
-    "type": "browser-control-binding-unavailable-bank-86-preflight-ready",
-    "observedAtUtc": "2026-08-24T07:36:03.3493329Z",
-    "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-86-browser-control-blocker.jsonl",
-    "impact": "Bank 85 remains fully evidence-gated and counted. Bank 86 now has an exact distinct zero-suppression prompt, fixed bindings, exact 5,045-byte intended dispatch hash, and complete dispatch envelope prepared, but cannot be dispatched until the exactly-four-tab signed-in Meta browser audit is callable. No resolved lane is reopened and no filler is generated."
-  },
-  "nextAction": "Restore browser-control availability and dispatch the prepared Bank 86 prompt for scene 1614 only with exactly four persistent signed-in Meta tabs and ordered 938, 936, 937 attachments. Preserve every completed occurrence or explicit no-bytes outcome before inspection. Never reopen scenes 1612, 1613, or 1615."
+  "authoritativeBlocker": null,
+  "nextAction": "Dispatch the reworded Bank 86 creative-recovery prompt text-only in the restored exactly-four-tab Meta session, preserve every occurrence before inspection, and move immediately to the next unused creative attempt after a fully evidenced hard failure. Never reopen scenes 1612, 1613, or 1615."
 }
