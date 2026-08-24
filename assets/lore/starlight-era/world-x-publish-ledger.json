@@ -327,7 +327,7 @@
     "pendingEvidenceRawFileCount": 10,
     "pendingEvidenceUniqueOccurrenceCount": 9,
     "pendingEvidenceClassification": "all-ten-raw-occurrences-hard-unusable-select-none-plus-one-explicit-refusal-no-bytes-no-accepted-scenes",
-    "pendingEvidenceLastRemoteVerifiedHead": "a46d39feb502bf5634553b3e258edad705e71d98"
+    "pendingEvidenceLastRemoteVerifiedHead": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac"
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -351,7 +351,7 @@
     "renderingDeferredByUser": false,
     "activeRenderBank": 95,
     "activeRenderRunOrdinal": 2,
-    "activeEvidenceState": "Barbados Batch 399 Bank 95 Attempt 5 dispatched once across four exact remote-verified lanes at 2026-08-24T13:34:59.707Z. All lanes are terminal: eleven occurrences comprise ten raw files, nine unique contents and one explicit refusal/no-bytes outcome. All raw media is hard-unusable/select-none, no scene is accepted, archive dry-run and both ledger verifiers pass locally, and Git/remote/PR parity is pending. Never dispatch Attempt 6.",
+    "activeEvidenceState": "Barbados Batch 399 Bank 95 Attempt 5 result evidence is remote/PR/LFS verified at da8f12a43ddeb443a5b32ac09d2f57039bbfbeac. All lanes are terminal: eleven occurrences comprise ten raw files, nine unique contents and one explicit refusal/no-bytes outcome. All raw media is hard-unusable/select-none and no scene is accepted. Ten post-commit tracked-source manifest rows are locally applied with dry-run zero and await remote parity. Never dispatch Attempt 6.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
@@ -1041,8 +1041,8 @@
     "nextAction": "Bank 94 is closed and counted. Commit and remote-verify the exact Bank 95 Attempt 5 four-lane prompt preflight before any browser dispatch."
   },
   "latestBatch399Bank95PreflightAudit": {
-    "status": "four-lane-attempt-5-all-terminal-all-media-hard-unusable-or-refusal-local-evidence-gates-pass-remote-parity-pending",
-    "checkedAtUtc": "2026-08-24T13:49:32.8337726Z",
+    "status": "four-lane-attempt-5-result-evidence-remote-parity-complete-post-commit-tracked-source-rows-local-pending-remote-parity",
+    "checkedAtUtc": "2026-08-24T13:57:10.3835226Z",
     "batch": 399,
     "country": "Barbados",
     "bank": 95,
@@ -1067,13 +1067,13 @@
     "bolderMissionMapping": {"requiredCount":2,"actualCount":2,"selectedScenes":[1617,1618],"selectedLanes":[2,3],"standardRelationshipScenes":[1616,1619]},
     "independentPromptAudit": {"status":"pass-no-blockers","allFourFileAndNormalizedHashesMatchDisk":true,"strictUtf8":true,"exactlyOneTerminalLfPerPrompt":true,"allFourActiveSuppressionMatches":0,"bolderMissionMappingExactTwoOfFour":true,"allBindingsReferencesRazeMapsOrientationsLocalesCoutureActionsCamerasSafetyMascotAndPropGatesPass":true,"allHumanContactCountsWithinCap":true,"scene1618ExactContactCount":4,"scene1618OwnerTraceableHandCount":10},
     "preflightBarrier": {"requiredPriorRemoteHead":"15966aaa72a3c0cc360f44be9238b577742eead0","archiveDryRun":{"occurrences":4792,"uniqueContents":3560,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"rejectedPromptVerifier":{"entries":139,"verifiedEntries":139,"errors":0},"failedPromptVerifier":{"runtimeFailures":987,"promptRecords":1567,"errors":0},"gitLfsPendingObjectCount":0,"preflightCommit":"474303f048382f50b9f0641b210a429bb00a67a9","localHead":"474303f048382f50b9f0641b210a429bb00a67a9","remoteBranchHead":"474303f048382f50b9f0641b210a429bb00a67a9","draftPr13Head":"474303f048382f50b9f0641b210a429bb00a67a9","draftPr13State":"OPEN/DRAFT/CLEAN","remoteParityVerifiedAtUtc":"2026-08-24T13:21:06.1915785Z","worktreeCleanAfterCommit":true,"remoteParityPending":false},
-    "resultEvidence": {"capturedOccurrenceCount":11,"rawFileCount":10,"uniqueOutputSha256Count":9,"hardUnusableRawMediaCount":10,"uniqueHardUnusableRawContentCount":9,"explicitRefusalNoBytesCount":1,"acceptedRawMediaCount":0,"allRawMediaClassified":true,"rawFetchShortfallsRecovered":2,"archiveApply":{"occurrences":4802,"uniqueContents":3569,"newManifestRows":10,"newBlobs":9,"newBlobBytes":5778842},"archiveDryRun":{"occurrences":4802,"uniqueContents":3569,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"rejectedPromptVerifier":{"entries":139,"verifiedEntries":139,"errors":0},"failedPromptVerifier":{"runtimeFailures":987,"promptRecords":1567,"errors":0},"remoteParityPending":true},
+    "resultEvidence": {"capturedOccurrenceCount":11,"rawFileCount":10,"uniqueOutputSha256Count":9,"hardUnusableRawMediaCount":10,"uniqueHardUnusableRawContentCount":9,"explicitRefusalNoBytesCount":1,"acceptedRawMediaCount":0,"allRawMediaClassified":true,"rawFetchShortfallsRecovered":2,"archiveApply":{"occurrences":4802,"uniqueContents":3569,"newManifestRows":10,"newBlobs":9,"newBlobBytes":5778842},"archiveDryRun":{"occurrences":4802,"uniqueContents":3569,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"rejectedPromptVerifier":{"entries":139,"verifiedEntries":139,"errors":0},"failedPromptVerifier":{"runtimeFailures":987,"promptRecords":1567,"errors":0},"resultEvidenceCommit":"da8f12a43ddeb443a5b32ac09d2f57039bbfbeac","resultEvidenceRemoteParityPending":false,"trackedSourceArchive":{"newManifestRows":10,"newBlobs":0,"dryRunNewRows":0,"remoteParityPending":true}},
     "renderCadence": {"completedRenderRunsSinceLastX":5,"currentRenderRun":10,"completedBanksInCurrentRenderRun":1,"currentPreflightBank":null,"currentPreflightAttempt":null,"currentPreflightRenderRunOrdinal":null,"currentInFlightBank":null,"currentEvidencePendingBank":95},
     "cumulativeMetaBankAllowance": {"authorized":170,"completed":65,"remaining":105},
     "completedBank": false,
     "countedTowardRenderRun": false,
     "xState": {"eligibleBacklogRemaining":0,"eligibleTwoCountryPostExists":false,"publicationAction":"none"},
-    "nextAction": "Commit and remote-verify Bank 95 result evidence, apply and remote-verify any post-commit tracked-source archive rows, then count Bank 95 as 66 of 170 and close Barbados unresolved at the exhausted five-attempt ceiling. Never dispatch Attempt 6; keep X and all social action queues at zero pending exact future eligibility and action-time confirmation."
+    "nextAction": "Commit and remote-verify the ten Bank 95 tracked-source archive rows, then count Bank 95 as 66 of 170 and close Barbados unresolved at the exhausted five-attempt ceiling. Never dispatch Attempt 6; keep X and all social action queues at zero pending exact future eligibility and action-time confirmation."
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
