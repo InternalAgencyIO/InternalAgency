@@ -304,12 +304,17 @@
     "latestClosedUniqueOccurrenceCount": 4,
     "latestClosedClassification": "hard-unusable-four-unique-media-contents-plus-one-provider-refusal-no-bytes-no-accepted-scenes",
     "latestClosedRemoteVerifiedHead": "f05a7309a8a402cc1b87110f1bf9436080acfc5f",
-    "inFlightCountryBank": null,
-    "inFlightRenderRunBankOrdinal": null,
+    "inFlightCountryBank": 97,
+    "inFlightRenderRunBankOrdinal": 4,
     "inFlightProviderUrl": null,
-    "inFlightProviderUrls": [],
-    "inFlightOriginalSendClickAtUtc": null,
-    "inFlightDispatchedAtUtc": null,
+    "inFlightProviderUrls": [
+      "https://www.meta.ai/prompt/da9e9c4a-dfa1-4fe1-bb81-899094f6d703",
+      "https://www.meta.ai/prompt/f5791a25-9793-461b-b52f-34cf414a34bb",
+      "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
+      "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
+    ],
+    "inFlightOriginalSendClickAtUtc": "2026-08-24T15:52:21.097Z",
+    "inFlightDispatchedAtUtc": "2026-08-24T15:52:21.097Z",
     "inFlightCapturedOccurrenceCount": 0,
     "inFlightRawFileCount": 0,
     "inFlightUniqueOccurrenceCount": 0,
@@ -458,16 +463,16 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "bank-97-attempt-2-ready-for-exact-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
-    "checkedAtUtc": "2026-08-24T15:46:54.7424394Z",
+    "status": "bank-97-attempt-2-provider-dispatch-confirmed-four-lanes-in-flight-uncounted",
+    "checkedAtUtc": "2026-08-24T15:52:29.133Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 97,
     "attempt": 2,
     "renderRun": 10,
     "renderRunOrdinal": 4,
-    "dispatchAuthorizedNow": true,
-    "providerDispatchConfirmed": false,
+    "dispatchAuthorizedNow": false,
+    "providerDispatchConfirmed": true,
     "eligibleScenes": [1620,1621,1622,1623],
     "eligibleLanes": [1,2,3,4],
     "theme": "orbital spaceship couture",
@@ -662,9 +667,9 @@
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
     "bank97Attempt2Preflight": {
-      "state": "ready-for-exactly-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
-      "dispatchAuthorizedNow": true,
-      "providerDispatchConfirmed": false,
+      "state": "provider-dispatch-confirmed-four-lanes-in-flight-results-not-yet-audited",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": true,
       "promptRecordsVerified": 4,
       "activeSuppressionMatches": 0,
       "exactOrderedReferenceCountsByLane": [3,3,3,4],
@@ -685,7 +690,22 @@
         "gitLfsPendingObjects": 0,
         "worktreeClean": true
       },
-      "notDispatched": true
+      "priorSyntheticClickAtUtc": "2026-08-24T15:51:49.698Z",
+      "priorSyntheticClickOutcome": "no-op-not-Send-not-dispatch-drafts-and-attachments-remained-intact",
+      "trustedSendClickGroupAtUtc": "2026-08-24T15:52:21.097Z",
+      "providerAuditUtc": "2026-08-24T15:52:29.133Z",
+      "providerUrlsByScene": {
+        "1620": "https://www.meta.ai/prompt/da9e9c4a-dfa1-4fe1-bb81-899094f6d703",
+        "1621": "https://www.meta.ai/prompt/f5791a25-9793-461b-b52f-34cf414a34bb",
+        "1622": "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
+        "1623": "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
+      },
+      "dispatchEnvelope": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-attempt-02-dispatch-envelope.jsonl","bytes":8522,"sha256":"D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227","rows":4,"remoteParityPending":true},
+      "generatedMediaAuditPerformed": false,
+      "completedBank": false,
+      "countedTowardRenderRun": false,
+      "inFlight": true,
+      "notDispatched": false
     },
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
@@ -704,9 +724,9 @@
       "attempt": 2,
       "renderRun": 10,
       "renderRunOrdinal": 4,
-      "state": "ready-for-exactly-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
-      "dispatchAuthorizedNow": true,
-      "providerDispatchConfirmed": false
+      "state": "provider-dispatch-confirmed-four-lanes-in-flight-uncounted",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": true
     },
     "xState": {
       "eligibleBacklogRemaining": 0,
@@ -714,7 +734,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Bank 97 Attempt 2 is ready for exactly four signed-in Meta lanes after a fresh face/hash/tab audit. Dispatch one exact contract-complete request per lane, preserve every occurrence before visual inspection, and use no untracked yes-loop or simplified suggestion. X backlog remains zero and no publication action is available."
+    "nextAction": "Commit and remote-verify the exact dispatch envelope and in-flight state, then preserve every provider occurrence before visual inspection. Bank 97 remains uncounted; X backlog remains zero and no publication action is available."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",

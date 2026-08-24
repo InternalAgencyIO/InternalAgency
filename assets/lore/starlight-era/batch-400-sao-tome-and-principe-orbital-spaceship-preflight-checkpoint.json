@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-97-attempt-2-ready-for-exact-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
+  "status": "bank-97-attempt-2-provider-dispatch-confirmed-four-lanes-in-flight-uncounted",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T15:37:42.1148658Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -706,9 +706,9 @@
     "renderRunNumberSinceLastX": 10,
     "renderRunBankOrdinal": 4,
     "provider": "Meta AI",
-    "state": "ready-for-exactly-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
-    "dispatchAuthorizedNow": true,
-    "providerDispatchConfirmed": false,
+    "state": "provider-dispatch-confirmed-four-lanes-in-flight-results-not-yet-audited",
+    "dispatchAuthorizedNow": false,
+    "providerDispatchConfirmed": true,
     "eligibleScenes": [1620,1621,1622,1623],
     "eligibleLanes": [1,2,3,4],
     "reuseDeterministicBindingsWithoutReroll": true,
@@ -744,7 +744,41 @@
       "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
-    "notDispatched": true
+    "authorizationConsumed": true,
+    "priorSyntheticClick": {
+      "atUtc": "2026-08-24T15:51:49.698Z",
+      "method": "locator.evaluate",
+      "outcome": "no-op-drafts-and-attachments-remained-intact",
+      "classifiedAsSend": false,
+      "classifiedAsDispatch": false
+    },
+    "trustedSendClickGroupAtUtc": "2026-08-24T15:52:21.097Z",
+    "providerAuditUtc": "2026-08-24T15:52:29.133Z",
+    "trustedSendClickCountPerLane": 1,
+    "providerUrlsByScene": {
+      "1620": "https://www.meta.ai/prompt/da9e9c4a-dfa1-4fe1-bb81-899094f6d703",
+      "1621": "https://www.meta.ai/prompt/f5791a25-9793-461b-b52f-34cf414a34bb",
+      "1622": "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
+      "1623": "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
+    },
+    "providerStateBySceneAtAudit": {
+      "1620": {"state":"in-flight-stop-active","statusText":["Clarifying the visual brief"]},
+      "1621": {"state":"in-flight-stop-active","statusText":["Locking world and roles","Finalizing character placement"]},
+      "1622": {"state":"in-flight-stop-active","statusText":["Preparing fashion editorial","Styling orbital cocktail looks"]},
+      "1623": {"state":"in-flight-stop-active","statusText":["Planning editorial composition","Designing orbital fashion"]}
+    },
+    "dispatchEnvelope": {
+      "path": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-attempt-02-dispatch-envelope.jsonl",
+      "bytes": 8522,
+      "sha256": "D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227",
+      "rows": 4,
+      "remoteParityPending": true
+    },
+    "generatedMediaAuditPerformed": false,
+    "completedBank": false,
+    "countedTowardRenderRun": false,
+    "inFlight": true,
+    "notDispatched": false
   },
   "remoteParity": {
     "status": "bank-97-attempt-2-preflight-local-remote-pr13-lfs-archive-ledger-clean-worktree-parity-complete",
@@ -778,10 +812,11 @@
     "currentTerminalHandoffEvidenceRemoteParityPending": false,
     "currentBank96ClosureEvidenceRemoteParityPending": false,
     "bank97Attempt2PreflightRemoteParityComplete": true,
+    "bank97Attempt2DispatchEvidenceRemoteParityPending": true,
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-97-attempt-2-preflight-remote-parity-complete-dispatch-authorization-effective",
+    "status": "bank-97-attempt-2-preflight-parity-complete-dispatch-confirmed-evidence-pending-remote-parity",
     "verifiedAtUtc": "2026-08-24T15:46:54.7424394Z",
     "archiveDryRunAtSourceClosure": {
       "occurrences": 4802,
@@ -828,19 +863,19 @@
       "sourcePath": ".codex/generated_images/01a01d88-da54-7932-a86c-51f89cc04000/exec-df756fcc-1322-4eac-b6ea-96c0600a4306.png",
       "contentSha256": "577B5A650F7E59F24F0486C4F7D8EF43D6C361CD657444C70C0DF51552DF7336"
     },
-    "remainingGate": "Before browser action, verify face hashes again, audit exactly four signed-in Meta tabs with no Stop state, upload ordered references 3/3/3/4 and verify exact normalized prompts; then one concurrent Send click per lane is authorized."
+    "remainingGate": "Commit and remote-verify the exact dispatch envelope and in-flight checkpoint/X state, then preserve every media occurrence or explicit no-bytes result before visual inspection."
   },
   "laneState": {
     "eligibleScenes": [1620, 1621, 1622, 1623],
     "eligibleLanes": [1, 2, 3, 4],
     "stoppedScenes": [],
     "resolvedScenes": [],
-    "inFlightScenes": [],
+    "inFlightScenes": [1620, 1621, 1622, 1623],
     "pendingLiveClientHandoffScenes": [],
     "terminalTechnicalNoDispatchScenes": [],
-    "terminalProviderScenes": [1620, 1621, 1622, 1623],
+    "terminalProviderScenes": [],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "bank-97-attempt-2-ready-for-exact-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
+    "preflightState": "bank-97-attempt-2-four-lanes-in-flight-dispatch-evidence-pending-remote-parity",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
@@ -868,5 +903,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Verify face hashes, audit exactly four persistent signed-in Meta tabs with no Stop state, upload 938/936/937 once to lanes 1-3 and 938/936/937/1136 once to lane 4, verify the exact normalized prompt hashes, then dispatch one concurrent request per lane and preserve every occurrence before visual inspection."
+  "nextAction": "Commit and remote-verify the dispatch-only evidence. Then audit the four existing provider URLs and preserve every inline and terminal media occurrence or explicit no-bytes result before any visual inspection; never duplicate Send."
 }
