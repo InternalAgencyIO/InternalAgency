@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-85-tracked-source-archive-remote-pr-lfs-clean-worktree-parity-verified-parity-checkpoint-commit-pending",
+  "status": "bank-85-final-parity-verified-bank-86-ready-browser-control-binding-blocked-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T07:01:51.693Z",
+  "lastWakeAuditAtUtc": "2026-08-24T07:03:51.6142025Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -77,14 +77,25 @@
     "lfsPendingObjects": 0,
     "worktreeCleanBeforeParityCheckpoint": true,
     "trackedSourceParityVerifiedAtUtc": "2026-08-24T07:01:46.3398601Z",
-    "remoteParityCheckpointCommit": null,
-    "remoteParityPending": true
+    "remoteParityCheckpointCommit": "2667ece350d1e30b2a8122526afb575a435be2aa",
+    "remoteBranchHeadAfterParityCheckpoint": "2667ece350d1e30b2a8122526afb575a435be2aa",
+    "draftPr13HeadAfterParityCheckpoint": "2667ece350d1e30b2a8122526afb575a435be2aa",
+    "remoteParityVerifiedAtUtc": "2026-08-24T07:03:19.5785829Z",
+    "xLedgerSha256AfterBank85CadenceAdvance": "5A62D531AD76C6CC8DBE3B56C4985DFB4A9AAC2CE10C542496131E7FDB8CCDCA",
+    "completedBanksInCurrentRenderRunAfterBank85Parity": 2,
+    "nextRenderRunBankOrdinal": 3,
+    "nextCountryBank": 86,
+    "cumulativeMetaBanksAuthorized": 170,
+    "cumulativeMetaBanksCompletedAfterBank85Parity": 56,
+    "cumulativeMetaBanksRemainingAfterBank85Parity": 114,
+    "finalRecordCommit": null,
+    "remoteParityPending": false
   },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-24T07:01:51.693Z",
+    "verifiedAtUtc": "2026-08-24T07:03:51.6142025Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -100,9 +111,9 @@
   "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"28C4B8A89764F5679D2521F3155CF254ADDF9260B4ACB68E59AF179871472D6A"},
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 1,
+    "completedBanksInCurrentRenderRun": 2,
     "inFlightRenderRunBank": null,
-    "nextRenderRunBankAfterInFlight": 2,
+    "nextRenderRunBankAfterInFlight": 3,
     "countryBank": 85,
     "nextCountryBank": 86,
     "requestedImagesPerPrompt": 1,
@@ -134,9 +145,9 @@
       "instruction": "RETRY AUTHORIZED FOR ALL POSTS GO FASTER",
       "xBacklogStatus": "cleared-zero",
       "renderingDeferredByUser": false,
-      "activeBank": 85,
-      "activeOrdinal": 2,
-      "evidenceGateState": "provider-closed-local-evidence-pending-process-launch-blocker; Bank 85 remains uncounted and Bank 86 undispatched"
+      "activeBank": 86,
+      "activeOrdinal": 3,
+      "evidenceGateState": "Bank 85 final archive, verifier, Git, LFS, remote SHA, PR 13 and clean-worktree parity verified; Bank 86 awaits browser-control restoration"
     }
   },
   "scenePlans": {
@@ -6068,7 +6079,9 @@
     ],
     "classification": "hard-unusable-all-occurrences-local-evidence-pending",
     "disposition": "Select and publish none; all four occurrences and all three unique contents fail one or more historical-face, hand/contact, sock-map, secure divided cocktail wrap-skort, or capsule-placement hard gates. Scene 1614 remains unresolved; Bank 85 is not evidence-gated complete and Bank 86 is not dispatched.",
-    "evidenceGate": {"previousRemoteVerifiedHead":"361eb2612fc85f5e90cbae5bcf887e093db0c1ef","dispatchEvidenceCommit":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchRemoteBranchHead":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchDraftPr13Head":"8e869d7ad97701c0991e732db7adf1b6d8e05985","providerCompletionCaptured":true,"archiveInitialNewRows":4,"archiveInitialNewBlobs":3,"archiveInitialNewBlobBytes":1420304,"archiveManifestRowsAfterInitialImport":6056,"archiveManifestSha256AfterInitialImport":"251C622BE3E8530C759267B53781EA1B5878A87957192139CB89E2A37DCFFDDC","archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"rejectedPromptLedgerVerifierEntries":139,"rejectedPromptLedgerVerifierErrors":0,"projectFailedPromptLedgerRuntimeFailures":987,"projectFailedPromptLedgerPromptRecords":1567,"projectFailedPromptLedgerVerifierErrors":0,"initialEvidenceCommit":"4160c74ac17ef913c03955ab69de6d6c809daf39","initialEvidenceRemoteBranchHead":"4160c74ac17ef913c03955ab69de6d6c809daf39","initialEvidenceDraftPr13Head":"4160c74ac17ef913c03955ab69de6d6c809daf39","archiveTrackedSourceNewRows":4,"archiveTrackedSourceNewBlobs":0,"archiveTrackedSourceNewBlobBytes":0,"archiveManifestRowsAfterTrackedSourceImport":6060,"archiveManifestSha256AfterTrackedSourceImport":"3A08A2211DB10D08B5CAF0AC76C9162F03B6744D5D7C14F45FBAB6696F40D4AE","trackedSourceArchiveCommit":"6b92a0c2a5f1c13547e0546fd940e1ede3b8a9de","remoteBranchHeadBeforeParityCheckpoint":"6b92a0c2a5f1c13547e0546fd940e1ede3b8a9de","draftPr13HeadBeforeParityCheckpoint":"6b92a0c2a5f1c13547e0546fd940e1ede3b8a9de","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"worktreeCleanBeforeParityCheckpoint":true,"verifiedAtUtc":"2026-08-24T07:01:46.3398601Z","remoteParityCheckpointCommit":null,"remoteParityPending":true,"pending":"Commit and remote-verify this parity checkpoint, then write the final Bank 85 cadence record before counting the bank or dispatching Bank 86"}
+    "renderRunProgress": {"completedBanksInCurrentRenderRunAfterBank85Parity":2,"nextRenderRunBankOrdinal":3,"nextCountryBank":86,"completedRenderRunsSinceLastX":5,"counterRetainedAtFivePendingEligibleConfirmedXPublication":true},
+    "schedulingProgress": {"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompletedAfterBank85Parity":56,"cumulativeMetaBanksRemainingAfterBank85Parity":114},
+    "evidenceGate": {"previousRemoteVerifiedHead":"361eb2612fc85f5e90cbae5bcf887e093db0c1ef","dispatchEvidenceCommit":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchRemoteBranchHead":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchDraftPr13Head":"8e869d7ad97701c0991e732db7adf1b6d8e05985","providerCompletionCaptured":true,"archiveInitialNewRows":4,"archiveInitialNewBlobs":3,"archiveInitialNewBlobBytes":1420304,"archiveManifestRowsAfterInitialImport":6056,"archiveManifestSha256AfterInitialImport":"251C622BE3E8530C759267B53781EA1B5878A87957192139CB89E2A37DCFFDDC","archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"rejectedPromptLedgerVerifierEntries":139,"rejectedPromptLedgerVerifierErrors":0,"projectFailedPromptLedgerRuntimeFailures":987,"projectFailedPromptLedgerPromptRecords":1567,"projectFailedPromptLedgerVerifierErrors":0,"initialEvidenceCommit":"4160c74ac17ef913c03955ab69de6d6c809daf39","initialEvidenceRemoteBranchHead":"4160c74ac17ef913c03955ab69de6d6c809daf39","initialEvidenceDraftPr13Head":"4160c74ac17ef913c03955ab69de6d6c809daf39","archiveTrackedSourceNewRows":4,"archiveTrackedSourceNewBlobs":0,"archiveTrackedSourceNewBlobBytes":0,"archiveManifestRowsAfterTrackedSourceImport":6060,"archiveManifestSha256AfterTrackedSourceImport":"3A08A2211DB10D08B5CAF0AC76C9162F03B6744D5D7C14F45FBAB6696F40D4AE","trackedSourceArchiveCommit":"6b92a0c2a5f1c13547e0546fd940e1ede3b8a9de","remoteBranchHeadBeforeParityCheckpoint":"6b92a0c2a5f1c13547e0546fd940e1ede3b8a9de","draftPr13HeadBeforeParityCheckpoint":"6b92a0c2a5f1c13547e0546fd940e1ede3b8a9de","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"worktreeCleanBeforeParityCheckpoint":true,"verifiedAtUtc":"2026-08-24T07:01:46.3398601Z","remoteParityCheckpointCommit":"2667ece350d1e30b2a8122526afb575a435be2aa","remoteBranchHeadAfterParityCheckpoint":"2667ece350d1e30b2a8122526afb575a435be2aa","draftPr13HeadAfterParityCheckpoint":"2667ece350d1e30b2a8122526afb575a435be2aa","remoteParityVerifiedAtUtc":"2026-08-24T07:03:19.5785829Z","remoteParityPending":false,"pending":null}
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -6096,10 +6109,10 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": {
-    "type": "browser-control-binding-unavailable-after-local-process-recovery",
-    "observedAtUtc": "2026-08-24T06:56:29.0035898Z",
+    "type": "browser-control-binding-unavailable-after-bank-85-final-parity",
+    "observedAtUtc": "2026-08-24T07:03:51.6142025Z",
     "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-85-evidence-gate-blocker.jsonl",
-    "impact": "Local archive and ledger gates are restored, but Bank 86 cannot be dispatched until the exactly-four-tab signed-in Meta browser audit is callable. Finish Bank 85 Git/LFS/remote/PR parity first."
+    "impact": "Bank 85 is fully evidence-gated and may be counted, but Bank 86 cannot be dispatched until the exactly-four-tab signed-in Meta browser audit is callable. No resolved lane is reopened and no filler is generated."
   },
-  "nextAction": "Commit and remote-verify the Bank 85 parity checkpoint, then write the final cadence record that counts Bank 85 as ninth-run ordinal 2. Retry browser-control availability and dispatch Bank 86 scene 1614 only after that final record; never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and remote-verify this Bank 85 final cadence record, then retry browser-control availability and dispatch Bank 86 for scene 1614 only with exactly four persistent signed-in Meta tabs and ordered 938, 936, 937 attachments. Never reopen scenes 1612, 1613, or 1615."
 }
