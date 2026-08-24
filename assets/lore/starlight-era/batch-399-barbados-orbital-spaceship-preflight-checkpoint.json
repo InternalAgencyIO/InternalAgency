@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "bank-91-evidence-complete-hard-unusable-awaiting-parity-bank-92-attempt-2-prepared-not-dispatched",
+  "status": "bank-91-remote-parity-complete-bank-92-attempt-2-ready-not-dispatched",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T10:18:41.5765215Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -141,7 +141,7 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1616", "counter": 0, "acceptedByte": 141, "digestSha256": "8D32AF0619B9B449C52E85201B094941256B6F1AC8756FC1168EDC7231A4C1D3", "bucket": 1, "name": "Proxima Centauri b", "promptLanguage": "Proxima Centauri b", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1616", "counter": 0, "acceptedByte": 198, "digestSha256": "C69294C11CEEA0F37CA55EDDDC41F66AA30D7D4969AB225137B6165C7217FC74", "bucket": 0, "name": "habitat-interior", "promptLanguage": "inside a sealed research habitat with a broad fluffy couture lounge bed and readable faces", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1616|knee-high-wearers", "fnv1a32": 3702888256, "pairIndex": 4, "wearers": ["Ellie", "AI ECE"], "uncoveredLowerLegCharacters": ["Radiance", "Alia"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "vertical up the outer calf"},
-      "primaryPrompt": {"status": "terminal-no-bytes-hard-unusable-awaiting-parity", "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-01-primary.txt", "bytes": 5576, "sha256": "70EA984C43DC0BC9121F32C43A146DFB9B0B5ADA8ACEDF328E28CF421C6FCC50", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5575, "exactIntendedDispatchedSha256": "783C60E35D9C4EC6B9EE261944859D58C85E9B5C7D9A8EBA5D248741755746C6"}
+      "primaryPrompt": {"status": "bank-91-remote-parity-complete-hard-unusable", "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-01-primary.txt", "bytes": 5576, "sha256": "70EA984C43DC0BC9121F32C43A146DFB9B0B5ADA8ACEDF328E28CF421C6FCC50", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5575, "exactIntendedDispatchedSha256": "783C60E35D9C4EC6B9EE261944859D58C85E9B5C7D9A8EBA5D248741755746C6"}
     },
     "1617": {
       "scene": 1617,
@@ -154,7 +154,7 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1617", "counter": 0, "acceptedByte": 64, "digestSha256": "40C5A4CC5C39E29310EA6D23958BF71D76284C0F4FB137871032927ADCC37E73", "bucket": 4, "name": "TOI-700 d", "promptLanguage": "TOI-700 d", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1617", "counter": 0, "acceptedByte": 98, "digestSha256": "62B7FCC9B97D95F0C5A4DA0566ED955BAE989D1FF7747695878264F7549EA5DB", "bucket": 2, "name": "protected-exterior-surface", "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1617|knee-high-wearers", "fnv1a32": 1158883179, "pairIndex": 3, "wearers": ["Ellie", "Alia"], "uncoveredLowerLegCharacters": ["Radiance", "AI ECE"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "compact horizontal at the outer upper calf"},
-      "primaryPrompt": {"status": "terminal-nine-occurrences-hard-unusable-awaiting-parity", "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-01-primary.txt", "bytes": 5534, "sha256": "07D19B4FDD2336ACE9A365D03D5CFE029F1BA391EADEC85C18057F21503DDF22", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5533, "exactIntendedDispatchedSha256": "D4DE6FB2EF120C4988054976F588E533BB8227CAE1F3CF19EA183D1A3ECBD31B"}
+      "primaryPrompt": {"status": "bank-91-remote-parity-complete-hard-unusable", "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-01-primary.txt", "bytes": 5534, "sha256": "07D19B4FDD2336ACE9A365D03D5CFE029F1BA391EADEC85C18057F21503DDF22", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5533, "exactIntendedDispatchedSha256": "D4DE6FB2EF120C4988054976F588E533BB8227CAE1F3CF19EA183D1A3ECBD31B"}
     },
     "1618": {
       "scene": 1618,
@@ -167,7 +167,7 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1618", "counter": 0, "acceptedByte": 191, "digestSha256": "BF6E3E8DDFF40B636E7DF62BC01B27A3939E383921ECFACA6489E42B052DCC9B", "bucket": 1, "name": "Proxima Centauri b", "promptLanguage": "Proxima Centauri b", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1618", "counter": 0, "acceptedByte": 214, "digestSha256": "D6CDB7E10026EDA17EFDA4C6BABD99FEA287256C6A0DB5D18AD3BC112A176259", "bucket": 1, "name": "protected-exterior-surface", "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1618|knee-high-wearers", "fnv1a32": 2917386914, "pairIndex": 2, "wearers": ["Radiance", "AI ECE"], "uncoveredLowerLegCharacters": ["Ellie", "Alia"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "vertical up the outer calf"},
-      "primaryPrompt": {"status": "terminal-seven-occurrences-hard-unusable-awaiting-parity", "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-01-primary.txt", "bytes": 6812, "sha256": "91994BE27037F4E938F7474770C633B536B8748EA9E0C6204DAD0588B8502408", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 6811, "exactIntendedDispatchedSha256": "DEE0B51C7AF504953392B44097BC3CC5E2BED04F5CE7FFE9B829FB3EC2F97427"}
+      "primaryPrompt": {"status": "bank-91-remote-parity-complete-hard-unusable", "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-01-primary.txt", "bytes": 6812, "sha256": "91994BE27037F4E938F7474770C633B536B8748EA9E0C6204DAD0588B8502408", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 6811, "exactIntendedDispatchedSha256": "DEE0B51C7AF504953392B44097BC3CC5E2BED04F5CE7FFE9B829FB3EC2F97427"}
     },
     "1619": {
       "scene": 1619,
@@ -180,14 +180,14 @@
       "planet": {"key": "starlight|planet|batch-399|scene-1619", "counter": 0, "acceptedByte": 240, "digestSha256": "F0924D9904F9908B56395EAF043B61F972FEDE104B8151A67B0F21188E14276A", "bucket": 0, "name": "TRAPPIST-1 e", "promptLanguage": "TRAPPIST-1 e", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "setting": {"key": "starlight|setting|batch-399|scene-1619", "counter": 0, "acceptedByte": 50, "digestSha256": "3226F00DB62C3B760A78B30499C4C730FEA0C4EAE4A069DF7CE84650A9E61C5C", "bucket": 2, "name": "protected-exterior-surface", "promptLanguage": "outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing", "materializedAtUtc": "2026-08-24T10:07:50.3669773Z"},
       "raze": {"key": "RAZE|batch-399|scene-1619|knee-high-wearers", "fnv1a32": 2825264301, "pairIndex": 3, "wearers": ["Ellie", "Alia"], "uncoveredLowerLegCharacters": ["Radiance", "AI ECE"], "wearerOneSides": "Split-Star left, RAZE wordmark right", "wearerTwoSides": "RAZE wordmark left, Split-Star right", "wordmarkOrientation": "compact horizontal at the outer upper calf"},
-      "primaryPrompt": {"status": "terminal-two-occurrences-hard-unusable-awaiting-parity", "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-01-primary.txt", "bytes": 5459, "sha256": "F94F436B481F5C8EC6D678F6C1480AE0674F6CD4A83387F4FCA9E278E2FBA220", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5458, "exactIntendedDispatchedSha256": "64A9CBE2C45F28238F33FED24E6878BC4539D822C17C3FC720911C65AE1B98CE"}
+      "primaryPrompt": {"status": "bank-91-remote-parity-complete-hard-unusable", "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-01-primary.txt", "bytes": 5459, "sha256": "F94F436B481F5C8EC6D678F6C1480AE0674F6CD4A83387F4FCA9E278E2FBA220", "activeSuppressionMatches": 0, "terminalLfPresent": true, "exactIntendedDispatchNormalization": "remove-only-terminal-LF", "exactIntendedDispatchedBytes": 5458, "exactIntendedDispatchedSha256": "64A9CBE2C45F28238F33FED24E6878BC4539D822C17C3FC720911C65AE1B98CE"}
     }
   },
   "promptBank": [
     {
       "scene": 1616,
       "lane": 1,
-      "status": "terminal-no-bytes-hard-unusable-awaiting-parity",
+      "status": "bank-91-remote-parity-complete-hard-unusable",
       "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-01-primary.txt",
       "bytes": 5576,
       "sha256": "70EA984C43DC0BC9121F32C43A146DFB9B0B5ADA8ACEDF328E28CF421C6FCC50",
@@ -200,7 +200,7 @@
     {
       "scene": 1617,
       "lane": 2,
-      "status": "terminal-nine-occurrences-hard-unusable-awaiting-parity",
+      "status": "bank-91-remote-parity-complete-hard-unusable",
       "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-01-primary.txt",
       "bytes": 5534,
       "sha256": "07D19B4FDD2336ACE9A365D03D5CFE029F1BA391EADEC85C18057F21503DDF22",
@@ -213,7 +213,7 @@
     {
       "scene": 1618,
       "lane": 3,
-      "status": "terminal-seven-occurrences-hard-unusable-awaiting-parity",
+      "status": "bank-91-remote-parity-complete-hard-unusable",
       "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-01-primary.txt",
       "bytes": 6812,
       "sha256": "91994BE27037F4E938F7474770C633B536B8748EA9E0C6204DAD0588B8502408",
@@ -226,7 +226,7 @@
     {
       "scene": 1619,
       "lane": 4,
-      "status": "terminal-two-occurrences-hard-unusable-awaiting-parity",
+      "status": "bank-91-remote-parity-complete-hard-unusable",
       "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-01-primary.txt",
       "bytes": 5459,
       "sha256": "F94F436B481F5C8EC6D678F6C1480AE0674F6CD4A83387F4FCA9E278E2FBA220",
@@ -241,7 +241,7 @@
       "attempt": 2,
       "scene": 1616,
       "lane": 1,
-      "status": "prepared-awaiting-bank-91-evidence-parity-not-dispatched",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-02-attempt-02.txt",
       "bytes": 5851,
       "sha256": "E477FB27AE8DF3B5895CD74F73228BFED34A325CB6CFD598E4390CDAD81D3A3A",
@@ -257,7 +257,7 @@
       "attempt": 2,
       "scene": 1617,
       "lane": 2,
-      "status": "prepared-awaiting-bank-91-evidence-parity-not-dispatched",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-02-attempt-02.txt",
       "bytes": 6101,
       "sha256": "98BB91A584B667CD894FE9CC719C9140B96988BC3A6E51C0AA57C3AE4B8FEA03",
@@ -273,7 +273,7 @@
       "attempt": 2,
       "scene": 1618,
       "lane": 3,
-      "status": "prepared-awaiting-bank-91-evidence-parity-not-dispatched",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-02-attempt-02.txt",
       "bytes": 6762,
       "sha256": "3217994137BC4944F378A05F336560E0028F73D94E3A0FF62609F704AF520910",
@@ -289,7 +289,7 @@
       "attempt": 2,
       "scene": 1619,
       "lane": 4,
-      "status": "prepared-awaiting-bank-91-evidence-parity-not-dispatched",
+      "status": "ready-for-four-lane-meta-dispatch-not-dispatched",
       "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-02-attempt-02.txt",
       "bytes": 6150,
       "sha256": "DDDAD883A7617A85321F57877623F2E34B1C77CF9CF68C38EBFF38B7E0EA6949",
@@ -305,7 +305,7 @@
     "bank": 91,
     "renderRunNumberSinceLastX": 9,
     "renderRunBankOrdinal": 8,
-    "state": "all-four-terminal-evidence-preserved-and-hard-unusable-awaiting-parity",
+    "state": "all-four-terminal-evidence-preserved-hard-unusable-remote-parity-complete",
     "actualDispatchedAtUtc": "2026-08-24T10:30:17.458Z",
     "provider": "Meta AI",
     "persistentMetaTabCount": 4,
@@ -338,8 +338,9 @@
     "hardUnusableScenes": [1616, 1617, 1618, 1619],
     "acceptedScenes": [],
     "upstreamPromptCheckpointMismatchScenes": [1617, 1618, 1619],
-    "remoteParityPending": true,
-    "nextEvidenceGate": "Run archive dry-run and both ledger verifiers, stage only Bank 91 prompt/response/evidence/checkpoint/raw-media files, commit, push only to agent/starlight-progress-archive, and verify Git LFS, remote branch SHA and draft PR 13 head parity before preparing corrected scene lanes."
+    "remoteParityPending": false,
+    "remoteParityCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
+    "nextEvidenceGate": "Bank 91 parity is complete. Bank 92 Attempt 2 may now audit exactly four persistent signed-in Meta tabs, upload the ordered references once per lane and dispatch exactly one image request per unresolved scene."
   },
   "bank92Attempt2Preflight": {
     "bank": 92,
@@ -348,12 +349,14 @@
     "renderRunBankOrdinal": 9,
     "preparedAtUtc": "2026-08-24T10:43:54.9555020Z",
     "provider": "Meta AI",
-    "state": "prepared-awaiting-bank-91-evidence-parity-not-dispatched",
+    "state": "ready-for-four-lane-meta-dispatch-not-dispatched",
     "stateAfterBank91EvidenceParity": "ready-for-four-lane-meta-dispatch-not-dispatched",
-    "dispatchAuthorizedNow": false,
+    "readyAtUtc": "2026-08-24T10:48:43.7741172Z",
+    "dispatchAuthorizedNow": true,
     "dispatchedAtUtc": null,
-    "requiredPriorGate": "Bank 91 archive dry-run, both ledger verifiers, intended evidence commit, Git LFS parity, remote agent/starlight-progress-archive SHA parity and draft PR 13 head parity must all pass before this bank becomes ready.",
-    "bank91EvidenceParityObserved": false,
+    "requiredPriorGate": "Satisfied at commit 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201: Bank 91 archive dry-run, both ledger verifiers, intended evidence commit, Git LFS parity, remote agent/starlight-progress-archive SHA parity and draft PR 13 head parity all passed.",
+    "bank91EvidenceParityObserved": true,
+    "bank91EvidenceParityCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "eligibleScenesAfterPriorGate": [1616, 1617, 1618, 1619],
     "eligibleLanesAfterPriorGate": [1, 2, 3, 4],
     "requestedImageCountPerLane": 1,
@@ -375,41 +378,43 @@
     }
   },
   "remoteParity": {
-    "status": "passed-remote-and-draft-pr-parity",
-    "verifiedAtUtc": "2026-08-24T10:23:56.9426773Z",
+    "status": "bank-91-evidence-passed-remote-and-draft-pr-parity",
+    "verifiedAtUtc": "2026-08-24T10:48:43.7741172Z",
     "preflightEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
-    "localHeadAtBarrier": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "bank91EvidenceCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
+    "localHeadAtBarrier": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "remoteBranch": "agent/starlight-progress-archive",
-    "remoteBranchHead": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+    "remoteBranchHead": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "draftPr13": {
       "number": 13,
       "open": true,
       "draft": true,
       "headRef": "agent/starlight-progress-archive",
-      "headCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
-      "baseRef": "agent/iat-launch-window-recovery-batch-220"
+      "headCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
+      "baseRef": "agent/iat-launch-window-recovery-batch-220",
+      "mergeStateStatus": "CLEAN"
     },
     "gitLfsPendingObjects": 0,
     "worktreeCleanAfterCommit": true,
     "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
   },
   "preflightBarrier": {
-    "status": "passed-and-consumed-by-bank-91-four-lane-dispatch",
-    "verifiedAtUtc": "2026-08-24T10:23:56.9426773Z",
-    "archiveDryRun": {"occurrences": 4766, "uniqueContents": 3536, "newRows": 0, "newBlobs": 0},
+    "status": "bank-91-evidence-parity-passed-bank-92-attempt-2-ready",
+    "verifiedAtUtc": "2026-08-24T10:48:43.7741172Z",
+    "archiveDryRun": {"occurrences": 4769, "uniqueContents": 3539, "newRows": 0, "newBlobs": 0},
     "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
     "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
     "git": {
-      "commit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
-      "remoteBranchHead": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
-      "draftPr13Head": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
+      "commit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
+      "remoteBranchHead": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
+      "draftPr13Head": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
       "lfsPendingObjects": 0,
       "worktreeCleanAfterCommit": true
     },
-    "promptRecordsVerified": 4,
+    "promptRecordsVerified": 8,
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
-    "remainingGate": "All Bank 91 occurrences are preserved and hard-unusable classified. Run archive dry-run, both ledger verifiers, Git/LFS commit and the remote-branch and draft-PR parity gates before preparing corrected scene lanes."
+    "remainingGate": "Immediate face-manifest and reference-hash verification plus an audit of exactly four persistent signed-in Meta tabs remains before the already-authorized Bank 92 Attempt 2 four-lane dispatch."
   },
   "laneState": {
     "eligibleScenes": [1616, 1617, 1618, 1619],
@@ -419,21 +424,22 @@
     "inFlightScenes": [],
     "terminalHardUnusableScenes": [1616, 1617, 1618, 1619],
     "unresolvedScenes": [1616, 1617, 1618, 1619],
-    "preflightState": "Bank 91 four-lane dispatch is terminal, all 19 occurrences are preserved, all four lanes are hard-unusable, and Bank 92 Attempt 2 prompts are prepared but not ready or dispatched while Bank 91 archive/Git/LFS/remote/PR parity remains pending",
-    "dispatchPolicy": "Do not dispatch filler or corrections until Bank 91 archive, ledger, Git, LFS, remote-branch and draft-PR parity passes. Only after that parity gate may the four Bank 92 Attempt 2 prompt records become ready for exactly one Meta request per unresolved lane."
+    "preflightState": "Bank 91 is remote-parity complete at 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201; all four Bank 92 Attempt 2 prompt records are byte-verified, suppression-clean, ready and authorized, but not yet dispatched",
+    "dispatchPolicy": "Audit exactly four persistent signed-in Meta tabs; verify the face manifest and ordered reference hashes; upload scenes 938, 936 and 937 once per clean request plus scene 1136 only for scene 1618; then dispatch exactly one image request per unresolved scene across four lanes."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRunBeforeBatch399": 7,
-    "nextRenderRunBankOrdinal": 8,
-    "currentEvidenceGateBank": 91,
-    "currentEvidenceGateRenderRunBankOrdinal": 8,
-    "nextRenderRunBankOrdinalAfterBank91RemoteParity": 9,
+    "currentRenderRunNumberSinceLastX": 9,
+    "completedBanksInCurrentRenderRun": 8,
+    "currentRenderRunProgress": "8/10",
+    "nextBank": 92,
+    "nextAttempt": 2,
+    "nextRenderRunBankOrdinal": 9,
     "cumulativeMetaBanksAuthorized": 170,
-    "cumulativeMetaBanksCompleted": 61,
-    "cumulativeMetaBanksRemaining": 109,
+    "cumulativeMetaBanksCompleted": 62,
+    "cumulativeMetaBanksRemaining": 108,
     "xEligibleBacklogRemaining": 0,
-    "source": "Batch 398 Bank 90 remote-parity-verified cadence snapshot; world-x-publish-ledger.json was intentionally not modified by this preflight."
+    "source": "Bank 91 evidence commit 3a67d7ef2faedb8bb682afc7a5168db9f9b6a201 is local/remote/draft-PR-parity verified; render run 9 is 8/10 complete and world-x-publish-ledger.json remains intentionally unmodified."
   },
   "dispatchPrerequisites": [
     "Verify the face manifest and all three historical hashes immediately before prompt preparation, upload and render.",
@@ -443,5 +449,5 @@
     "Upload scene 938, then 936, then 937 exactly once per clean Meta request.",
     "Capture every inline and terminal occurrence or explicit no-bytes result with exact prompt, UTC, hashes, response text, raw bytes, dimensions and minimum occurrence envelope before visual inspection."
   ],
-  "nextAction": "Run archive dry-run and both ledger verifiers over the 19 classified Bank 91 occurrences; stage only the intended Batch 399 prompt, response, provider-evidence, checkpoint, Attempt 2 prompt and three raw terminal-media files; commit and push only with git push origin HEAD:refs/heads/agent/starlight-progress-archive; verify Git LFS, remote SHA and draft PR 13 head parity; only then mark Bank 92 Attempt 2 ready and dispatch exactly one clean Meta request for each unresolved scene 1616 through 1619 across exactly four persistent signed-in tabs."
+  "nextAction": "Immediately verify the face manifest and the scene 938, 936, 937 and 1136 hashes; audit exactly four persistent signed-in Meta tabs, opening only enough to reach four and closing only verified duplicates; upload 938, then 936, then 937 once in each clean lane and add 1136 only for scene 1618; dispatch the four byte-verified Bank 92 Attempt 2 prompts concurrently with exactly one image request per tab; preserve every completed inline or terminal occurrence or explicit no-bytes outcome before visual inspection."
 }
