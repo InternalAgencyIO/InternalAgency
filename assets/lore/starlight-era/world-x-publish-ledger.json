@@ -346,7 +346,7 @@
     "renderingDeferredByUser": false,
     "activeRenderBank": 96,
     "activeRenderRunOrdinal": 3,
-    "activeEvidenceState": "Barbados Batch 399 is remote-verified closed unresolved at the exhausted five-attempt ceiling. São Tomé and Príncipe Batch 400 Bank 96 Attempt 1 four-lane preflight is remote/PR13/LFS/archive/ledger/clean-worktree verified at 81870158db900e75d11713eb6124f244fda5a93e. It is dispatch-authorized and not yet dispatched.",
+    "activeEvidenceState": "São Tomé and Príncipe Batch 400 Bank 96 Attempt 1 ended as a terminal client-side upload-submit handoff technical failure: by 2026-08-24T14:39:08.077Z all four Meta-home tabs had Loading0, Remove0, Stop0, empty composers, no provider URL/text/media or dialog. It is a no-dispatch/no-bytes event, not a provider refusal; Bank 96 remains uncounted at 66/170 and bounded technical retry 1 requires its own remote-verified preflight.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
@@ -407,15 +407,15 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "four-lane-bank-96-attempt-1-preflight-remote-parity-complete-dispatch-authorized-not-dispatched",
-    "checkedAtUtc": "2026-08-24T14:24:10.8707934Z",
+    "status": "four-lane-bank-96-attempt-1-terminal-client-side-technical-no-dispatch-no-bytes-evidence-parity-pending",
+    "checkedAtUtc": "2026-08-24T14:39:17.174Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 96,
     "attempt": 1,
     "renderRun": 10,
     "renderRunOrdinal": 3,
-    "dispatchAuthorizedNow": true,
+    "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": false,
     "eligibleScenes": [1620,1621,1622,1623],
     "eligibleLanes": [1,2,3,4],
@@ -488,6 +488,30 @@
       "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
+    "initialUploadSubmitHandoff": {
+      "state": "terminal-client-side-technical-no-dispatch-no-bytes",
+      "uiSendClickAtUtc": "2026-08-24T14:35:09.751Z",
+      "finalLiveAuditAtUtc": "2026-08-24T14:37:43.164Z",
+      "terminalStateObservedAtUtc": "2026-08-24T14:39:08.077Z",
+      "terminalStateConfirmedAtUtc": "2026-08-24T14:39:17.174Z",
+      "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-attempt-01-live-upload-submit-handoff-blocker.jsonl",
+      "evidenceBytes": 13465,
+      "evidenceSha256": "1E4278EFC356D86C8F29941103A8EDD6CEA75918C4004AB74D1CF90103AF5179",
+      "evidenceRows": 8,
+      "attachmentCountsByLane": [3,3,3,4],
+      "providerDispatchConfirmed": false,
+      "livePendingHandoff": false,
+      "terminal": true,
+      "explicitNoBytesOccurrenceCount": 4,
+      "duplicateSendAuthorized": false,
+      "completedBank": false,
+      "countedTowardRenderRun": false,
+      "cumulativeMetaBanksCompleted": 66,
+      "cumulativeMetaBanksRemaining": 104,
+      "currentRenderRunCompletedBanks": 2,
+      "xEligibleBacklogRemaining": 0,
+      "evidenceRemoteParityPending": true
+    },
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
       "currentRenderRun": 10,
@@ -506,7 +530,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Audit exactly four persistent signed-in Meta tabs with no Stop state, upload ordered identity references once per lane, verify exact normalized prompts and one-image requests, then dispatch Bank 96 Attempt 1 concurrently across Scenes 1620-1623."
+    "nextAction": "Commit and remote-verify the terminal technical no-dispatch/no-bytes evidence. Then prepare and separately remote-verify bounded technical retry 1 before any further browser action."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",

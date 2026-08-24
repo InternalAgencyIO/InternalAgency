@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "ready-for-four-lane-browser-dispatch-remote-parity-complete-not-dispatched",
+  "status": "bank-96-attempt-1-terminal-client-side-technical-no-dispatch-no-bytes-evidence-parity-pending",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T14:19:31.3972361Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -564,8 +564,8 @@
     "renderRunNumberSinceLastX": 10,
     "renderRunBankOrdinal": 3,
     "provider": "Meta AI",
-    "state": "ready-for-four-lane-meta-dispatch-remote-parity-complete-not-dispatched",
-    "dispatchAuthorizedNow": true,
+    "state": "terminal-client-side-upload-submit-handoff-technical-no-dispatch-no-bytes",
+    "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": false,
     "dispatchedAtUtc": null,
     "eligibleScenes": [1620, 1621, 1622, 1623],
@@ -590,6 +590,34 @@
     "promptRecordCount": 4,
     "promptHashesVerifiedFromDisk": true,
     "allPromptActiveSuppressionMatches": 0,
+    "initialUploadSubmitHandoff": {
+      "state": "terminal-client-side-technical-no-dispatch-no-bytes",
+      "uiSendClickAtUtc": "2026-08-24T14:35:09.751Z",
+      "finalLiveAuditAtUtc": "2026-08-24T14:37:43.164Z",
+      "terminalStateObservedAtUtc": "2026-08-24T14:39:08.077Z",
+      "terminalStateConfirmedAtUtc": "2026-08-24T14:39:17.174Z",
+      "auditUtc": ["2026-08-24T14:35:10.919Z","2026-08-24T14:35:19.357Z","2026-08-24T14:35:34.234Z","2026-08-24T14:36:02.051Z","2026-08-24T14:36:34.767Z","2026-08-24T14:37:06.955Z","2026-08-24T14:37:43.164Z"],
+      "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-attempt-01-live-upload-submit-handoff-blocker.jsonl",
+      "evidenceBytes": 13465,
+      "evidenceSha256": "1E4278EFC356D86C8F29941103A8EDD6CEA75918C4004AB74D1CF90103AF5179",
+      "evidenceRows": 8,
+      "browserUrlAtEveryAudit": "https://www.meta.ai/",
+      "attachmentCountsByLane": [3,3,3,4],
+      "allFourLoadingAtEveryAudit": true,
+      "allFourStopAbsentAtEveryAudit": true,
+      "allFourSendDisabledAtEveryAudit": true,
+      "dialogOrToastObserved": false,
+      "providerTextOrMediaObserved": false,
+      "terminalAudit": {"loadingCount":0,"removeButtonCount":0,"stopButtonCount":0,"sendDisabled":true,"composerInnerText":"\n","composerInnerTextUtf8Bytes":1,"providerTextOrMediaObserved":false},
+      "providerDispatchConfirmed": false,
+      "livePendingHandoff": false,
+      "terminal": true,
+      "explicitNoBytesOccurrenceCount": 4,
+      "duplicateSendAuthorized": false,
+      "completedBank": false,
+      "countedTowardRenderRun": false,
+      "evidenceRemoteParityPending": true
+    },
     "notDispatched": true
   },
   "remoteParity": {
@@ -616,10 +644,11 @@
     "gitLfsPendingObjectsAtPreparationStart": 0,
     "gitLfsPendingObjectsAtVerifiedBarrier": 0,
     "worktreeCleanAtVerifiedBarrier": true,
+    "currentTerminalHandoffEvidenceRemoteParityPending": true,
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
-    "status": "remote-parity-complete-ready-for-four-lane-browser-dispatch",
+    "status": "preflight-parity-complete-terminal-client-technical-no-dispatch-evidence-parity-pending",
     "verifiedAtUtc": "2026-08-24T14:24:10.8707934Z",
     "archiveDryRunAtSourceClosure": {
       "occurrences": 4802,
@@ -655,7 +684,7 @@
     },
     "promptRecordsVerified": 4,
     "activeSuppressionMatches": 0,
-    "remainingGate": "Browser-only dispatch gate: audit exactly four persistent signed-in Meta tabs, verify no Stop state, upload ordered identity references once per lane, verify each exact normalized prompt and Send readiness, then issue one concurrent four-lane Send group."
+    "remainingGate": "Commit and remote-verify the terminal technical no-dispatch/no-bytes evidence. Only after parity may bounded technical retry 1 receive a separate preflight authorization."
   },
   "laneState": {
     "eligibleScenes": [1620, 1621, 1622, 1623],
@@ -663,8 +692,10 @@
     "stoppedScenes": [],
     "resolvedScenes": [],
     "inFlightScenes": [],
+    "pendingLiveClientHandoffScenes": [],
+    "terminalTechnicalNoDispatchScenes": [1620, 1621, 1622, 1623],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "remote-parity-complete-dispatch-authorized-not-dispatched",
+    "preflightState": "terminal-client-technical-no-dispatch-no-bytes-evidence-parity-pending",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
@@ -692,5 +723,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Audit exactly four persistent signed-in Meta tabs with no Stop state, upload 938, 936 and 937 once in order per lane plus 1136 only for Scene 1623, verify each exact normalized prompt and one image request, then dispatch Bank 96 Attempt 1 concurrently across Scenes 1620-1623."
+  "nextAction": "Commit and remote-verify the terminal four-lane client-side technical no-dispatch/no-bytes evidence. Then prepare a separately parity-gated bounded technical retry 1 using the same exact prompts and references; do not act in the browser before retry preflight parity."
 }
