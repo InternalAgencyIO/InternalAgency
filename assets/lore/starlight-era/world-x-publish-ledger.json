@@ -407,15 +407,15 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "four-lane-bank-96-attempt-1-technical-retry-1-preflight-prepared-pending-remote-parity",
-    "checkedAtUtc": "2026-08-24T14:46:56.8806040Z",
+    "status": "four-lane-bank-96-attempt-1-technical-retry-1-ready-for-meta-dispatch-after-authorization-record-parity",
+    "checkedAtUtc": "2026-08-24T14:48:54.5204326Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 96,
     "attempt": 1,
     "renderRun": 10,
     "renderRunOrdinal": 3,
-    "dispatchAuthorizedNow": false,
+    "dispatchAuthorizedNow": true,
     "providerDispatchConfirmed": false,
     "eligibleScenes": [1620,1621,1622,1623],
     "eligibleLanes": [1,2,3,4],
@@ -533,8 +533,8 @@
     },
     "technicalRetry1": {
       "retryOrdinal": 1,
-      "state": "preflight-prepared-pending-commit-remote-parity",
-      "dispatchAuthorizedNow": false,
+      "state": "ready-for-four-lane-meta-technical-retry-1-dispatch-after-authorization-record-remote-parity",
+      "dispatchAuthorizedNow": true,
       "providerDispatchConfirmed": false,
       "reuseExactPromptFilesAndHashes": true,
       "reuseDeterministicBindingsWithoutReroll": true,
@@ -548,6 +548,9 @@
       "providerDispatchProofRequired": "A unique Meta prompt URL or Stop state is required before any provider-dispatch claim.",
       "evidenceParityCommit": "52a9396eb81483edb8bc0303d85bededf3c04cfa",
       "lateArchiveParityCommit": "ad22c4c9e9327a65ce3076eae72535dadd21502f",
+      "preflightParityCommit": "07ca58b1595e7ec34912f1a150fc183513c88d16",
+      "preflightParityVerifiedAtUtc": "2026-08-24T14:48:54.5204326Z",
+      "authorizationCondition": "Effective only after the commit containing this record equals local HEAD, remote agent/starlight-progress-archive and draft PR 13 head with Git LFS and archive/ledger parity clean.",
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
       "completedBank": false,
       "countedTowardRenderRun": false
@@ -570,7 +573,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Commit and remote-verify bounded technical retry 1 preflight, then issue a narrow parity-backed dispatch authorization before any browser action. X backlog and all social actions remain zero."
+    "nextAction": "After narrow authorization-record parity, run the exact clean four-tab retry 1 procedure once. X backlog and all social actions remain zero."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
