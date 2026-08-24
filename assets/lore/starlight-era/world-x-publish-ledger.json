@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-bank-85-in-flight-ninth-run-ordinal-two-backlog-zero-counter-five-retained",
+    "mode": "render-first-bank-85-closed-local-evidence-pending-ninth-run-ordinal-two-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 1,
@@ -275,7 +275,7 @@
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and a sixth ten-bank run has also completed. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists because Batch 398 scene 1614 remains unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-bank-85-in-flight-scene-1614-unresolved",
+    "currentPublicationWindowStatus": "open-no-eligible-post-bank-85-local-evidence-pending-scene-1614-unresolved",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -296,13 +296,20 @@
     "latestClosedUniqueOccurrenceCount": 1,
     "latestClosedClassification": "hard-unusable-single-terminal-gallery-occurrence",
     "latestClosedRemoteVerifiedHead": "cd670938c20d786c0b2670bdceab9907f5ffa413",
-    "inFlightCountryBank": 85,
-    "inFlightRenderRunBankOrdinal": 2,
-    "inFlightProviderUrl": "https://www.meta.ai/prompt/955210da-270e-4db2-9be4-9c0133da6935",
-    "inFlightDispatchedAtUtc": "2026-08-23T16:05:26.452Z",
+    "inFlightCountryBank": null,
+    "inFlightRenderRunBankOrdinal": null,
+    "inFlightProviderUrl": null,
+    "inFlightDispatchedAtUtc": null,
     "inFlightCapturedOccurrenceCount": 0,
     "inFlightUniqueOccurrenceCount": 0,
-    "pendingEvidenceCountryBank": null
+    "pendingEvidenceCountryBank": 85,
+    "pendingEvidenceProviderUrl": "https://www.meta.ai/prompt/955210da-270e-4db2-9be4-9c0133da6935",
+    "pendingEvidenceDispatchedAtUtc": "2026-08-23T16:05:26.452Z",
+    "pendingEvidenceTerminalObservedAtUtc": "2026-08-23T16:11:26.191Z",
+    "pendingEvidenceCapturedOccurrenceCount": 4,
+    "pendingEvidenceUniqueOccurrenceCount": 3,
+    "pendingEvidenceClassification": "hard-unusable-all-occurrences",
+    "pendingEvidenceLastRemoteVerifiedHead": "8e869d7ad97701c0991e732db7adf1b6d8e05985"
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -324,7 +331,8 @@
     "eligibleBacklogRemaining": 0,
     "renderingDeferredByUser": false,
     "activeRenderBank": 85,
-    "activeRenderRunOrdinal": 2
+    "activeRenderRunOrdinal": 2,
+    "activeEvidenceState": "provider-closed-four-occurrences-three-unique-hard-unusable; archive dry-run and both verifiers pass; initial evidence commit and full remote parity pending"
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",

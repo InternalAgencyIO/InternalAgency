@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-84-final-remote-parity-verified-bank-85-reference-anchored-dispatch-in-flight-scene-1614-only",
+  "status": "bank-84-final-remote-parity-verified-bank-85-provider-closed-hard-unusable-four-occurrences-three-unique-archive-and-ledger-verifiers-passed-initial-evidence-commit-pending",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-23T16:06:07.5171059Z",
+  "lastWakeAuditAtUtc": "2026-08-24T06:56:29.0035898Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -41,11 +41,34 @@
     "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"F4658DCCD134AF3AE35D8116428B1E8260FA42984AD993EF38E479CC71855BB4","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":5,"completedBanksInCurrentRenderRun":1,"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompleted":55,"cumulativeMetaBanksRemaining":115,"mode":"render-first-bank-85-in-flight-ninth-run-ordinal-two-backlog-zero-counter-five-retained"},
     "remoteParity": {"previousVerifiedHead":"6a4f3efd8886d8f925a709b0983de1075f225e0e","dispatchEvidenceCommit":"a47bda7857fc2559cdc3c9d1aac4c7d3216e941d","initialEvidenceCommit":"d540e16b3570be056a3c5380d95fef5a714cc285","evidenceCommit":"c05b9b7402192ac101e2934541f7b54a98649b77","localHead":"c05b9b7402192ac101e2934541f7b54a98649b77","remoteBranchHead":"c05b9b7402192ac101e2934541f7b54a98649b77","draftPr13Head":"c05b9b7402192ac101e2934541f7b54a98649b77","draftPr13Open":true,"draftPr13Draft":true,"lfsPendingObjects":0,"archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"ledgerVerifierErrors":0,"worktreeCleanAtEvidenceCommit":true,"scope":"Vanuatu sixth render run Bank 61, ten exact provider occurrence events with nine raw files, eight unique contents, one explicit transient no-source occurrence, and one terminal duplicate relationship; all classified hard-unusable; exact prompt, response, reference, deterministic-binding and terminal-state envelopes; provider-occurrence rows 538-539; archive initial nine rows/eight blobs plus nine tracked-source rows; both ledger verifiers; X cadence retained at five completed runs with sixth-run ordinal eight; remote branch, PR 13, LFS and clean-worktree parity","verifiedAtUtc":"2026-08-23T06:30:07.0525676Z","pending":null}
   },
+  "latestBank85EvidenceSnapshot": {
+    "capturedOccurrenceCount": 4,
+    "uniqueOutputSha256Count": 3,
+    "totalGeneratedMediaBytesObserved": 1902478,
+    "archiveInitialNewRows": 4,
+    "archiveInitialNewBlobs": 3,
+    "archiveInitialNewBlobBytes": 1420304,
+    "archiveManifestRowsAfterInitialImport": 6056,
+    "archiveManifestSha256AfterInitialImport": "251C622BE3E8530C759267B53781EA1B5878A87957192139CB89E2A37DCFFDDC",
+    "archiveDryRunNewRows": 0,
+    "archiveDryRunNewBlobs": 0,
+    "rejectedPromptLedgerVerifierEntries": 139,
+    "rejectedPromptLedgerVerifierErrors": 0,
+    "projectFailedPromptLedgerRuntimeFailures": 987,
+    "projectFailedPromptLedgerPromptRecords": 1567,
+    "projectFailedPromptLedgerVerifierErrors": 0,
+    "xLedgerSha256BeforeInitialEvidenceCommit": "75259D52ABD6F4122946CB3BA3C287B84603984FB1E172E3ECB50B1C79AE637F",
+    "faceAnchorsVerifiedBeforeInitialEvidenceCommitAtUtc": "2026-08-24T06:57:33.933Z",
+    "initialEvidenceCommit": null,
+    "trackedSourceArchiveCommit": null,
+    "remoteParityCheckpointCommit": null,
+    "remoteParityPending": true
+  },
   "faceManifest": {
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-23T16:05:09.9507528Z",
+    "verifiedAtUtc": "2026-08-24T06:57:33.933Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -62,8 +85,8 @@
   "renderRunCadence": {
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 1,
-    "inFlightRenderRunBank": 2,
-    "nextRenderRunBankAfterInFlight": 3,
+    "inFlightRenderRunBank": null,
+    "nextRenderRunBankAfterInFlight": 2,
     "countryBank": 85,
     "nextCountryBank": 86,
     "requestedImagesPerPrompt": 1,
@@ -96,7 +119,8 @@
       "xBacklogStatus": "cleared-zero",
       "renderingDeferredByUser": false,
       "activeBank": 85,
-      "activeOrdinal": 2
+      "activeOrdinal": 2,
+      "evidenceGateState": "provider-closed-local-evidence-pending-process-launch-blocker; Bank 85 remains uncounted and Bank 86 undispatched"
     }
   },
   "scenePlans": {
@@ -5983,7 +6007,7 @@
     "renderRunNumberSinceLastX": 9,
     "scene": 1614,
     "lane": 3,
-    "dispatchState": "in-flight-no-generated-media-occurrence-at-dispatch-audit",
+    "dispatchState": "closed-hard-unusable-four-occurrences-three-unique-local-evidence-pending-process-launch-blocker",
     "providerUrl": "https://www.meta.ai/prompt/955210da-270e-4db2-9be4-9c0133da6935",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-85-render-run-09-text-only.txt",
     "promptFileBytes": 4783,
@@ -6014,9 +6038,21 @@
       "planet": {"key":"starlight|planet|batch-398|scene-1614","counter":0,"acceptedByte":171,"digestSha256":"AB4CA5A466CF90D045ECC7408BD8D75A5E46A8C40747990609F5CCA27290B4C7","bucket":1},
       "setting": {"key":"starlight|setting|batch-398|scene-1614","counter":0,"acceptedByte":224,"digestSha256":"E0DAE0A38DB4E2E3DD953AE6767F791622CC540B973FCEDBC3DEEE2B2DF1A0FC","bucket":2}
     },
-    "capturedOccurrenceCount": 0,
-    "uniqueOutputSha256Count": 0,
-    "evidenceGate": {"previousRemoteVerifiedHead":"361eb2612fc85f5e90cbae5bcf887e093db0c1ef","remoteParityPending":true,"pending":"Commit and remote-verify the exact Bank 85 anchored dispatch; immediately preserve every new inline or terminal media occurrence before visual inspection"}
+    "terminalObservedAtUtc": "2026-08-23T16:11:26.191Z",
+    "classificationVerifiedAtUtc": "2026-08-23T16:15:06.8781649Z",
+    "capturedOccurrenceCount": 4,
+    "uniqueOutputSha256Count": 3,
+    "totalGeneratedMediaBytesObserved": 1902478,
+    "duplicateRelationships": [
+      {
+        "occurrence": 4,
+        "duplicateOfOccurrence": 3,
+        "rawSha256": "4C428A595D3C3224F90C259F686959D63D663607B7A00C6B4AC5ADE7F89DF416"
+      }
+    ],
+    "classification": "hard-unusable-all-occurrences-local-evidence-pending",
+    "disposition": "Select and publish none; all four occurrences and all three unique contents fail one or more historical-face, hand/contact, sock-map, secure divided cocktail wrap-skort, or capsule-placement hard gates. Scene 1614 remains unresolved; Bank 85 is not evidence-gated complete and Bank 86 is not dispatched.",
+    "evidenceGate": {"previousRemoteVerifiedHead":"361eb2612fc85f5e90cbae5bcf887e093db0c1ef","dispatchEvidenceCommit":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchRemoteBranchHead":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchDraftPr13Head":"8e869d7ad97701c0991e732db7adf1b6d8e05985","providerCompletionCaptured":true,"archiveInitialNewRows":4,"archiveInitialNewBlobs":3,"archiveInitialNewBlobBytes":1420304,"archiveManifestRowsAfterInitialImport":6056,"archiveManifestSha256AfterInitialImport":"251C622BE3E8530C759267B53781EA1B5878A87957192139CB89E2A37DCFFDDC","archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"rejectedPromptLedgerVerifierEntries":139,"rejectedPromptLedgerVerifierErrors":0,"projectFailedPromptLedgerRuntimeFailures":987,"projectFailedPromptLedgerPromptRecords":1567,"projectFailedPromptLedgerVerifierErrors":0,"initialEvidenceCommit":null,"remoteParityPending":true,"pending":"Commit and remote-verify the complete Bank 85 raw occurrence, response, classification, archive and cadence evidence; then import tracked-source rows and finish parity before counting Bank 85 or dispatching Bank 86"}
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -6043,6 +6079,11 @@
     "remoteParityPending": false,
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
-  "authoritativeBlocker": null,
-  "nextAction": "Bank 85 is in flight only for scene 1614 with exact ordered 938, 936, 937 submitted identity attachments. Immediately preserve every new inline or terminal occurrence before visual inspection; never reopen scenes 1612, 1613, or 1615."
+  "authoritativeBlocker": {
+    "type": "browser-control-binding-unavailable-after-local-process-recovery",
+    "observedAtUtc": "2026-08-24T06:56:29.0035898Z",
+    "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-85-evidence-gate-blocker.jsonl",
+    "impact": "Local archive and ledger gates are restored, but Bank 86 cannot be dispatched until the exactly-four-tab signed-in Meta browser audit is callable. Finish Bank 85 Git/LFS/remote/PR parity first."
+  },
+  "nextAction": "Commit, push and remote-verify complete Bank 85 initial evidence; import and commit tracked-source archive rows; finish remote/PR/LFS/clean-worktree parity; then count Bank 85 and retry browser-control availability for Bank 86 scene 1614 only. Never reopen scenes 1612, 1613, or 1615."
 }
