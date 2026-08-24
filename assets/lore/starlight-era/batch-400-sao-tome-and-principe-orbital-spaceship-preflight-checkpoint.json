@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-97-attempt-2-counted-scene-1623-chatgpt-final-canonical-accepted-awaiting-archive-git-remote-parity",
+  "status": "bank-97-attempt-2-counted-scene-1623-chatgpt-final-canonical-initial-evidence-remote-verified-tracked-source-archive-parity-pending",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T15:37:42.1148658Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -835,7 +835,11 @@
         "sceneResolved": true,
         "archiveApply": {"appliedAtUtc":"2026-08-24T16:30:20.3487937Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":3,"newBlobs":0,"newBlobBytes":0},
         "archiveDryRun": {"verifiedAtUtc":"2026-08-24T16:30:20.3487937Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-        "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","rows":6151,"bytes":3824509,"sha256":"600EDDCA856078BF59E78C3A06CDE14C31751EACE27F4427C6B4C103C94CBB0A"},
+        "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","rows":6153,"bytes":3825791,"sha256":"C9FA23AE2CC3904A470883730258F4B5BAF2E2B9FB7624193CE7EAC2C3771DD7"},
+        "initialEvidenceCommit": "5ebcd9133a5edeba1b183a134e0bad85f06266a6",
+        "initialEvidenceRemoteParityVerifiedAtUtc": "2026-08-24T16:34:35.0204295Z",
+        "trackedSourceArchiveApply": {"appliedAtUtc":"2026-08-24T16:34:35.0204295Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":2,"newBlobs":0,"newBlobBytes":0},
+        "trackedSourceArchiveDryRun": {"verifiedAtUtc":"2026-08-24T16:34:35.0204295Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
         "archiveAndRemoteParityPending": true
       },
       "historicalCacheExclusion": {"excludedFileCount":6,"recoveryDirectory":"C:/Users/A/AppData/Local/Temp/InternalAgency-bank97-scene1621-historical-cache-20260824T1556Z","archiveAndStageExclusionVerified":true},
@@ -902,6 +906,8 @@
     "bank97Attempt2QaClassificationCommit": "ddaa5446df6490d758fea9da45b9a917de9147d7",
     "bank97Attempt2QaClassificationRemoteParityVerifiedAtUtc": "2026-08-24T16:20:08.8660456Z",
     "scene1623ChatgptCanonicalEvidenceRemoteParityPending": true,
+    "scene1623ChatgptCanonicalInitialEvidenceCommit": "5ebcd9133a5edeba1b183a134e0bad85f06266a6",
+    "scene1623ChatgptCanonicalTrackedSourceArchiveParityPending": true,
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
