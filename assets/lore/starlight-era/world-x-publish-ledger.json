@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-bank-90-refusal-no-bytes-evidence-gated-five-attempt-ceiling-reached-scene-1614-unresolved-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-398-closed-unresolved-batch-399-preflight-prompt-ready-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 7,
@@ -274,8 +274,8 @@
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "Five evidence-gated render runs are complete and a sixth ten-bank run has also completed. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists because Batch 398 scene 1614 remains unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-bank-90-refusal-no-bytes-five-attempt-ceiling-reached-scene-1614-unresolved",
+    "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
+    "currentPublicationWindowStatus": "open-no-eligible-post-batch-398-closed-unresolved-batch-399-all-scenes-unresolved",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -286,8 +286,8 @@
     "eighthRenderRunCompletedAtUtc": "2026-08-23T15:35:32.3028394Z",
     "ninthRenderRunCountryBanks": [84,85,86,87,88,89,90],
     "latestCompletedCountryBankAtUtc": "2026-08-24T09:52:46.3075548Z",
-    "nextRenderRunBankOrdinal": null,
-    "nextCountryBank": null,
+    "nextRenderRunBankOrdinal": 8,
+    "nextCountryBank": 91,
     "latestClosedCountryBank": 90,
     "latestClosedProviderUrl": "https://www.meta.ai/prompt/594c58f4-f730-4c68-ad11-8ecd9c71efc1",
     "latestClosedDispatchedAtUtc": "2026-08-24T09:47:03.189Z",
@@ -317,22 +317,74 @@
     "operationalInterpretation": "Add thirty Meta banks after the existing cumulative one-hundred-forty-bank allowance for a cumulative one-hundred-seventy-bank Meta rendering allowance, while preserving the evidence-gated one-request-per-eligible-lane pipeline.",
     "newlyAddedMetaBanks": 30,
     "additionalMetaBanksAuthorized": 170,
-    "additionalMetaBanksCompleted": 56,
-    "additionalMetaBanksRemaining": 114,
+    "additionalMetaBanksCompleted": 61,
+    "additionalMetaBanksRemaining": 109,
     "latestThirtyBankExtensionCompleted": 0,
     "latestThirtyBankExtensionRemaining": 30,
     "xPublicationExecuted": true
   },
   "latestUserQueuePriority": {
-    "receivedAtUtc": "2026-08-24T07:12:44.3537505Z",
-    "instruction": "RETRY AUTHORIZED FOR ALL POSTS GO FASTER",
-    "operationalInterpretation": "Continue the evidence-gated Meta pipeline immediately for the only unresolved authoritative scene 1614. The blanket authorization does not replace the contract's immediate action-time confirmation for a final X click; no eligible X post exists until Vanuatu resolves and an exact three-asset two-country campaign item can be staged.",
+    "receivedAtUtc": "2026-08-24T10:19:53.2564967Z",
+    "checkedAtUtc": "2026-08-24T10:19:53.2564967Z",
+    "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
+    "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. Batch 399 is preflight-and-prompt-ready pending commit, remote verification, and browser dispatch. The directive does not authorize unspecified follow, connect, like, publication, or other representational clicks.",
     "xPriority": "wait-for-eligibility-after-scene-resolution",
     "eligibleBacklogRemaining": 0,
     "renderingDeferredByUser": false,
-    "activeRenderBank": 86,
-    "activeRenderRunOrdinal": 3,
-    "activeEvidenceState": "Bank 85 final archive, both verifiers, Git, LFS, remote SHA, draft PR 13 and clean-worktree parity verified; Bank 86 has a distinct scene-1614-only prompt at zero active-suppression matches and awaits restoration of the exactly-four-tab browser-control binding"
+    "activeRenderBank": 91,
+    "activeRenderRunOrdinal": 8,
+    "activeEvidenceState": "Vanuatu Batch 398 is closed with scene 1614 unresolved and never accepted. Barbados Batch 399 scenes 1616 through 1619 are preflight-and-prompt-ready for global country Bank 91, ninth-render-run ordinal 8, pending commit, remote verification, and browser dispatch.",
+    "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
+  },
+  "latestBatch399TransitionAudit": {
+    "status": "batch-398-closed-unresolved-never-accepted-batch-399-next-preflight-prompt-ready-pending-commit-remote-browser",
+    "checkedAtUtc": "2026-08-24T10:19:53.2564967Z",
+    "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
+    "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the user's completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. This does not authorize an unspecified follow, connect, like, publication, or other representational click; those actions remain disabled or ineligible until an exact target queue exists and the applicable action-time confirmation gate is satisfied.",
+    "closedCountry": {
+      "batch": 398,
+      "country": "Vanuatu",
+      "resolvedScenes": [1612,1613,1615],
+      "unresolvedScenes": [1614],
+      "scene1614Accepted": false,
+      "closureState": "closed-unresolved-after-bank-90-never-accepted",
+      "eligibleForX": false
+    },
+    "nextCountry": {
+      "batch": 399,
+      "country": "Barbados",
+      "scenes": [1616,1617,1618,1619],
+      "resolvedScenes": [],
+      "unresolvedScenes": [1616,1617,1618,1619],
+      "renderState": "preflight-and-prompts-ready-pending-commit-remote-verification-and-browser-dispatch",
+      "eligibleForX": false
+    },
+    "renderCadence": {
+      "nextGlobalCountryBank": 91,
+      "renderRun": 9,
+      "nextRenderRunOrdinal": 8,
+      "completedBanksInCurrentRenderRun": 7,
+      "completedCountryBanks": [84,85,86,87,88,89,90],
+      "completedRenderRunsSinceLastX": 5
+    },
+    "cumulativeMetaBankAllowance": {
+      "authorized": 170,
+      "completed": 61,
+      "remaining": 109
+    },
+    "xState": {
+      "eligibleBacklogRemaining": 0,
+      "eligiblePostExists": false,
+      "batch398Eligible": false,
+      "batch399Eligible": false,
+      "publicationAction": "none-no-eligible-post-and-no-final-click"
+    },
+    "socialActionState": {
+      "followAndConnect": "disabled-by-followBackPolicy-no-action-taken",
+      "likes": "no-target-queue-no-action-taken",
+      "actionsExecuted": []
+    },
+    "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",

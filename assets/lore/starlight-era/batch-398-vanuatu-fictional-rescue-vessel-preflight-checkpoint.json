@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-90-attempt-5-terminal-refusal-no-bytes-remote-parity-verified-recovery-ceiling-reached-scene-1614-unresolved",
+  "status": "closed-with-scene-1614-unresolved-never-accepted-authoritative-advance-to-batch-399-barbados",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T09:54:49.9216444Z",
+  "lastWakeAuditAtUtc": "2026-08-24T10:07:50.3669773Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -6403,6 +6403,41 @@
       {"attempt":5,"bank":90,"camera":"close eye-level 85mm full-body editorial with luminous face-and-hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"remote-verified-terminal-refusal-no-bytes-recovery-ceiling-reached","preparedAtUtc":"2026-08-24T09:43:05.7678765Z","promptSha256":"55B10FC3A542BFEDD12D30E16878427DE7550024F326D53A00540C9408EE22A5","providerUrl":"https://www.meta.ai/prompt/594c58f4-f730-4c68-ad11-8ecd9c71efc1","dispatchedAtUtc":"2026-08-24T09:47:03.189Z","submittedReferences":[938,936,937],"terminalObservedAtUtc":"2026-08-24T09:48:42.382Z","classification":"explicit-provider-refusal-no-bytes","initialEvidenceCommit":"bd8a08ceb2b17e1c28dc1def2bda664128bd8715","remoteVerifiedCommit":"8b0902d528a6913261b8064d318029550d008719"}
     ]
   },
+  "authoritativeTransition": {
+    "recordedAtUtc": "2026-08-24T10:07:50.3669773Z",
+    "exactUserDirective": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
+    "interpretationAuthorizedByCurrentTurn": "Close Vanuatu Batch 398 after the bounded five-attempt recovery ceiling with scene 1614 unresolved and never accepted, preserve every prior occurrence and refusal record, and advance the authoritative country queue to Barbados Batch 399 scenes 1616 through 1619.",
+    "batch398Closure": {
+      "country": "Vanuatu",
+      "batch": 398,
+      "state": "closed-with-unresolved-scene",
+      "resolvedOrStoppedScenes": [1612, 1613, 1615],
+      "unresolvedScenes": [1614],
+      "scene1614Accepted": false,
+      "scene1614CanonicalMedia": null,
+      "attemptsAuthorized": 5,
+      "attemptsCompleted": 5,
+      "terminalAttempt": {
+        "bank": 90,
+        "classification": "explicit-provider-refusal-no-bytes",
+        "rawFileCount": 0,
+        "generatedMediaSourceCount": 0,
+        "remoteParityVerified": true
+      },
+      "evidencePreservationRule": "All Batch 398 prompts, provider occurrences, refusals, raw bytes, hashes, classifications, archive rows, ledger rows and Git/LFS/PR parity records remain authoritative historical evidence. Closing unresolved must never be represented as acceptance."
+    },
+    "queueAdvance": {
+      "nextCountry": "Barbados",
+      "nextBatch": 399,
+      "scenes": [1616, 1617, 1618, 1619],
+      "cinematicTheme": "orbital spaceship couture",
+      "themePairPosition": "1 of 2",
+      "provider": "Meta AI",
+      "eligibleLanes": [1, 2, 3, 4],
+      "preflightCheckpoint": "assets/lore/starlight-era/batch-399-barbados-orbital-spaceship-preflight-checkpoint.json"
+    },
+    "externalActionBoundary": "This queue transition does not fabricate acceptance for scene 1614 and does not by itself identify or execute any X like, follow, connect or publication target."
+  },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
     "checkedAtUtc": "2026-08-23T04:27:32.8223362Z",
@@ -6428,6 +6463,6 @@
     "remoteParityPending": false,
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
-  "authoritativeBlocker": {"state":"active-after-evidence-parity","recordedAtUtc":"2026-08-24T09:48:42.382Z","scope":"Vanuatu Batch 398 scene 1614 lane 3 only","reason":"Meta returned a terminal refusal with zero generated-media sources on creative Attempt 5, exhausting the user-authorized bounded five-attempt recovery ceiling.","evidencePath":"progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-90-refusal-no-bytes.jsonl","safeLocalWorkCompleted":["verbatim refusal and exact hashes preserved","zero-byte occurrence classified","archive dry-run zero","rejected-prompt ledger verifier zero errors","project failed-prompt ledger verifier zero errors","provider source verifier zero errors at the latest source gate"],"prohibitedAction":"Do not dispatch Attempt 6 or bypass Meta provider controls without a new authoritative ceiling change."},
-  "nextAction": "Retain scene 1614 unresolved at the five-attempt ceiling; never reopen scenes 1612, 1613, or 1615 and never dispatch Attempt 6 without a new authoritative ceiling change."
+  "authoritativeBlocker": {"state":"superseded-by-authoritative-close-unresolved-and-advance","recordedAtUtc":"2026-08-24T09:48:42.382Z","supersededAtUtc":"2026-08-24T10:07:50.3669773Z","scope":"Vanuatu Batch 398 scene 1614 lane 3 only","reason":"Meta returned a terminal refusal with zero generated-media sources on creative Attempt 5, exhausting the user-authorized bounded five-attempt recovery ceiling.","evidencePath":"progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-90-refusal-no-bytes.jsonl","safeLocalWorkCompleted":["verbatim refusal and exact hashes preserved","zero-byte occurrence classified","archive dry-run zero","rejected-prompt ledger verifier zero errors","project failed-prompt ledger verifier zero errors","provider source verifier zero errors at the latest source gate"],"historicalProhibitedAction":"Do not dispatch Attempt 6 or bypass Meta provider controls without a new authoritative ceiling change.","supersedingAction":"Close scene 1614 unresolved and never accepted; do not dispatch Attempt 6; advance to Barbados Batch 399."},
+  "nextAction": "Use the remote-parity-verified Batch 398 closure as historical authority, keep scene 1614 unresolved and never accepted, and begin Barbados Batch 399 preflight for four eligible lanes 1616 through 1619 without reopening any Vanuatu scene."
 }
