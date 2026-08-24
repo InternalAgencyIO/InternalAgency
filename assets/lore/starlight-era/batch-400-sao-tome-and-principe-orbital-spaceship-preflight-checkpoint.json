@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-97-attempt-2-all-occurrences-classified-scene-1623-hard-safe-provisional-meta-source-selected-pending-chatgpt-edit-and-classification-remote-parity",
+  "status": "bank-97-attempt-2-complete-counted-qa-and-provisional-selection-remote-parity-complete-scene-1623-pending-required-chatgpt-finalization",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T15:37:42.1148658Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -706,7 +706,7 @@
     "renderRunNumberSinceLastX": 10,
     "renderRunBankOrdinal": 4,
     "provider": "Meta AI",
-    "state": "all-four-provider-scenes-terminal-all-occurrences-classified-one-hard-unusable-one-hard-safe-provisional-source-two-refusals-pending-classification-remote-parity",
+    "state": "complete-counted-all-occurrences-classified-one-hard-unusable-one-hard-safe-provisional-source-two-refusals-remote-parity-complete",
     "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": true,
     "eligibleScenes": [1620,1621,1622,1623],
@@ -805,13 +805,16 @@
       "resultEvidenceRemoteParityPending": false,
       "resultEvidenceRemoteParityVerifiedAtUtc": "2026-08-24T16:09:07.9326884Z",
       "resultEvidenceRemoteParity": {"localHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","remoteBranchHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13Head":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13State":"OPEN","draftPr13IsDraft":true,"draftPr13MergeState":"CLEAN","draftPr13Base":"agent/iat-launch-window-recovery-batch-220","gitLfsPendingObjects":0,"worktreeCleanExcludingConcurrentBank98PromptDrafts":true,"concurrentUntrackedExcludedFiles":["tmp/world-195x4/batch-400/scene-1620-meta-bank-98-attempt-03.txt","tmp/world-195x4/batch-400/scene-1621-meta-bank-98-attempt-03.txt","tmp/world-195x4/batch-400/scene-1622-meta-bank-98-attempt-03.txt","tmp/world-195x4/batch-400/scene-1623-meta-bank-98-attempt-03.txt"]},
-      "qaClassificationRemoteParityPending": true
+      "qaClassificationRemoteParityPending": false
       ,"qaTrackedSourceArchiveApply": {"verifiedAfterApplyAtUtc":"2026-08-24T16:18:56.3650817Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":2,"newBlobs":0,"newBlobBytes":0}
       ,"qaArchiveDryRun": {"verifiedAtUtc":"2026-08-24T16:18:56.3650817Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0}
+      ,"qaClassificationCommit": "ddaa5446df6490d758fea9da45b9a917de9147d7"
+      ,"qaClassificationRemoteParityVerifiedAtUtc": "2026-08-24T16:20:08.8660456Z"
+      ,"qaClassificationRemoteParity": {"localHead":"ddaa5446df6490d758fea9da45b9a917de9147d7","remoteBranchHead":"ddaa5446df6490d758fea9da45b9a917de9147d7","draftPr13Head":"ddaa5446df6490d758fea9da45b9a917de9147d7","draftPr13State":"OPEN","draftPr13IsDraft":true,"draftPr13MergeState":"CLEAN","draftPr13Base":"agent/iat-launch-window-recovery-batch-220","gitLfsPendingObjects":0}
     },
     "generatedMediaAuditPerformed": true,
     "completedBank": true,
-    "countedTowardRenderRun": false,
+    "countedTowardRenderRun": true,
     "countEffectiveAfterRemoteParity": true,
     "inFlight": false,
     "notDispatched": false
@@ -853,7 +856,9 @@
     "bank97Attempt2ResultEvidenceRemoteParityPending": false,
     "bank97Attempt2ResultEvidenceCommit": "1a346782c39f234be6762d15f17789c5e3dcd7e1",
     "bank97Attempt2ResultEvidenceRemoteParityVerifiedAtUtc": "2026-08-24T16:09:07.9326884Z",
-    "bank97Attempt2QaClassificationRemoteParityPending": true,
+    "bank97Attempt2QaClassificationRemoteParityPending": false,
+    "bank97Attempt2QaClassificationCommit": "ddaa5446df6490d758fea9da45b9a917de9147d7",
+    "bank97Attempt2QaClassificationRemoteParityVerifiedAtUtc": "2026-08-24T16:20:08.8660456Z",
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
@@ -916,25 +921,25 @@
     "terminalTechnicalNoDispatchScenes": [],
     "terminalProviderScenes": [1620, 1621, 1622, 1623],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "bank-97-attempt-2-all-occurrences-classified-scene-1623-provisional-meta-selected-and-stopped-pending-qa-classification-remote-parity-and-chatgpt-finalization",
+    "preflightState": "bank-97-attempt-2-complete-counted-qa-classification-and-provisional-selection-remote-parity-complete-scene-1623-meta-lane-stopped-pending-chatgpt-finalization",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
     "currentRenderRunNumberSinceLastX": 10,
-    "completedBanksInCurrentRenderRun": 3,
-    "currentRenderRunProgress": "3/10",
-    "nextBank": 97,
-    "nextAttempt": 2,
-    "nextRenderRunBankOrdinal": 4,
-    "currentPreflightBank": 97,
-    "currentPreflightAttempt": 2,
-    "currentPreflightRenderRunBankOrdinal": 4,
+    "completedBanksInCurrentRenderRun": 4,
+    "currentRenderRunProgress": "4/10",
+    "nextBank": 98,
+    "nextAttempt": 3,
+    "nextRenderRunBankOrdinal": 5,
+    "currentPreflightBank": null,
+    "currentPreflightAttempt": null,
+    "currentPreflightRenderRunBankOrdinal": null,
     "cumulativeMetaBanksAuthorized": 170,
-    "cumulativeMetaBanksCompleted": 67,
-    "cumulativeMetaBanksRemaining": 103,
+    "cumulativeMetaBanksCompleted": 68,
+    "cumulativeMetaBanksRemaining": 102,
     "xEligibleBacklogRemaining": 0,
-    "source": "Bank 96 is evidence-gated, remote verified at f05a7309a8a402cc1b87110f1bf9436080acfc5f and counted. Bank 97 Attempt 2 is ordinal 4 and remains not dispatched until its exact prompt/checkpoint/X preflight commit reaches remote and draft-PR-13 parity."
+    "source": "Bank 97 Attempt 2 is fully classified, archive and ledger gated, and remote verified at ddaa5446df6490d758fea9da45b9a917de9147d7. It is counted as render-run-10 ordinal 4. Scene 1623 is a hard-safe provisional Meta source with its Meta lane stopped pending the required ChatGPT clothing-only final edit; Bank 98 Attempt 3 is ordinal 5 and may later target only scenes 1620, 1621 and 1622 after its own preflight parity."
   },
   "dispatchPrerequisites": [
     "Verify this preflight commit equals local HEAD, remote agent/starlight-progress-archive and draft PR 13 head.",
@@ -944,5 +949,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Commit and remote-verify the Bank 97 QA adjudication and provisional scene-1623 Meta selection. Then run exactly one built-in ChatGPT clothing-only final edit on the archived scene-1623 source under the active finalization policy; do not mark it canonical or accepted yet and never render scene-1623 Meta filler. Bank 98 may later target only unresolved Meta lanes 1620, 1621 and 1622 after the required parity gates."
+  "nextAction": "Run exactly one built-in ChatGPT clothing-only final edit on the remote-verified archived scene-1623 provisional source under the active finalization policy; do not mark it canonical or accepted yet and never render scene-1623 Meta filler. In parallel, prepare Bank 98 Attempt 3 for only unresolved Meta lanes 1620, 1621 and 1622, but do not dispatch until its exact prompt/checkpoint/X preflight reaches remote parity."
 }

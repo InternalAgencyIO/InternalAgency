@@ -266,16 +266,16 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-batch-400-bank-96-closed-hard-unusable-bank-97-attempt-2-preflight-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-400-bank-97-complete-counted-scene-1623-provisional-meta-selected-pending-chatgpt-finalization-bank-98-next-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 3,
+    "completedBanksInCurrentRenderRun": 4,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-batch-398-and-399-closed-unresolved-batch-400-zero-accepted-scenes-bank-97-preflight-next",
+    "currentPublicationWindowStatus": "open-no-eligible-post-batch-398-and-399-closed-unresolved-batch-400-zero-canonical-accepted-scenes-scene-1623-provisional-meta-pending-chatgpt-finalization-bank-98-next",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -286,24 +286,24 @@
     "eighthRenderRunCompletedAtUtc": "2026-08-23T15:35:32.3028394Z",
     "ninthRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
     "ninthRenderRunCompletedAtUtc": "2026-08-24T12:25:36.8403376Z",
-    "latestCompletedCountryBankAtUtc": "2026-08-24T15:13:50.1092721Z",
-    "nextRenderRunBankOrdinal": 4,
-    "nextCountryBank": 97,
-    "latestClosedCountryBank": 96,
+    "latestCompletedCountryBankAtUtc": "2026-08-24T16:20:08.8660456Z",
+    "nextRenderRunBankOrdinal": 5,
+    "nextCountryBank": 98,
+    "latestClosedCountryBank": 97,
     "latestClosedProviderUrl": null,
     "latestClosedProviderUrls": [
-      "https://www.meta.ai/prompt/9b325198-07f1-4a01-bed2-e66e2e997a34",
-      "https://www.meta.ai/prompt/9f2b8051-90bc-4465-9811-ee12ad70b6e7",
-      "https://www.meta.ai/prompt/51638f69-efc3-4358-8b1d-bbb6e2cdb48b",
-      "https://www.meta.ai/prompt/f7883752-119d-447e-a923-1907cf1e8ac8"
+      "https://www.meta.ai/prompt/da9e9c4a-dfa1-4fe1-bb81-899094f6d703",
+      "https://www.meta.ai/prompt/f5791a25-9793-461b-b52f-34cf414a34bb",
+      "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
+      "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
     ],
-    "latestClosedDispatchedAtUtc": null,
-    "latestClosedTerminalObservedAtUtc": "2026-08-24T15:02:45.147Z",
+    "latestClosedDispatchedAtUtc": "2026-08-24T15:52:21.097Z",
+    "latestClosedTerminalObservedAtUtc": "2026-08-24T16:01:41.806Z",
     "latestClosedCapturedOccurrenceCount": 5,
-    "latestClosedRawFileCount": 4,
-    "latestClosedUniqueOccurrenceCount": 4,
-    "latestClosedClassification": "hard-unusable-four-unique-media-contents-plus-one-provider-refusal-no-bytes-no-accepted-scenes",
-    "latestClosedRemoteVerifiedHead": "f05a7309a8a402cc1b87110f1bf9436080acfc5f",
+    "latestClosedRawFileCount": 2,
+    "latestClosedUniqueOccurrenceCount": 2,
+    "latestClosedClassification": "two-terminal-refusals-no-bytes-one-hard-unusable-one-hard-safe-provisional-meta-source-selected-pending-chatgpt-finalization",
+    "latestClosedRemoteVerifiedHead": "ddaa5446df6490d758fea9da45b9a917de9147d7",
     "inFlightCountryBank": null,
     "inFlightRenderRunBankOrdinal": null,
     "inFlightProviderUrl": null,
@@ -313,21 +313,16 @@
     "inFlightCapturedOccurrenceCount": 0,
     "inFlightRawFileCount": 0,
     "inFlightUniqueOccurrenceCount": 0,
-    "pendingEvidenceCountryBank": 97,
+    "pendingEvidenceCountryBank": null,
     "pendingEvidenceProviderUrl": null,
-    "pendingEvidenceProviderUrls": [
-      "https://www.meta.ai/prompt/da9e9c4a-dfa1-4fe1-bb81-899094f6d703",
-      "https://www.meta.ai/prompt/f5791a25-9793-461b-b52f-34cf414a34bb",
-      "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
-      "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
-    ],
-    "pendingEvidenceDispatchedAtUtc": "2026-08-24T15:52:21.097Z",
-    "pendingEvidenceTerminalObservedAtUtc": "2026-08-24T16:01:41.806Z",
-    "pendingEvidenceCapturedOccurrenceCount": 5,
-    "pendingEvidenceRawFileCount": 2,
-    "pendingEvidenceUniqueOccurrenceCount": 2,
-    "pendingEvidenceClassification": "two-terminal-refusals-no-bytes-one-hard-unusable-one-hard-safe-provisional-meta-source-selected-pending-chatgpt-finalization",
-    "pendingEvidenceLastRemoteVerifiedHead": "1a346782c39f234be6762d15f17789c5e3dcd7e1"
+    "pendingEvidenceProviderUrls": [],
+    "pendingEvidenceDispatchedAtUtc": null,
+    "pendingEvidenceTerminalObservedAtUtc": null,
+    "pendingEvidenceCapturedOccurrenceCount": 0,
+    "pendingEvidenceRawFileCount": 0,
+    "pendingEvidenceUniqueOccurrenceCount": 0,
+    "pendingEvidenceClassification": null,
+    "pendingEvidenceLastRemoteVerifiedHead": null
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -346,12 +341,12 @@
     "checkedAtUtc": "2026-08-24T15:37:42.1148658Z",
     "instruction": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
     "operationalInterpretation": "Resume and reconnect the evidence-gated render queues, accept the completed manual review as authority to close Vanuatu Batch 398 with scene 1614 unresolved and never accepted, and advance preparation to Barbados Batch 399 with specialized workers. Technical retry 2 live-handoff evidence is remote verified at dada4bcfa1ef73c8e9addb613bf3ff9aed7b4d97. After the exact all-four Discard prompt dialog appeared, the contract-authorized one-time Discard group at 2026-08-24T12:07:54.014Z produced four provider prompt URLs with exact prompts and ordered references, confirming provider dispatch. Do not duplicate Send or Discard. The directive does not authorize unspecified follow, connect, like, publication, or other representational clicks.",
-    "xPriority": "live-reconciled-no-eligible-post-continue-bank-97-preflight",
+    "xPriority": "live-reconciled-no-eligible-post-finalize-scene-1623-chatgpt-edit-then-continue-bank-98-preflight",
     "eligibleBacklogRemaining": 0,
     "renderingDeferredByUser": false,
     "activeRenderBank": 97,
-    "activeRenderRunOrdinal": 4,
-    "activeEvidenceState": "São Tomé and Príncipe Batch 400 Bank 96 is closed and counted at remote-verified evidence head f05a7309a8a402cc1b87110f1bf9436080acfc5f. Bank 97 Attempt 2 has four independently QA-passed frozen prompts and remains not dispatched pending its own exact checkpoint/X/prompt commit and remote parity.",
+    "activeRenderRunOrdinal": 5,
+    "activeEvidenceState": "São Tomé and Príncipe Batch 400 Bank 97 is complete and counted at remote-verified provisional-selection head ddaa5446df6490d758fea9da45b9a917de9147d7. Scene 1623 is a hard-safe provisional Meta source with its Meta lane stopped and canonical acceptance blocked pending one required ChatGPT clothing-only final edit; scenes 1620, 1621 and 1622 remain Meta-eligible for later Bank 98 after preflight parity.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestUserXAndRenderContinuationDirective": {
@@ -396,7 +391,7 @@
     "countryEligibility": [
       {"batch":398,"country":"Vanuatu","acceptedScenes":[1612,1613,1615],"unresolvedScenes":[1614],"xEligible":false,"reason":"country is not 4/4 accepted and is closed unresolved"},
       {"batch":399,"country":"Barbados","acceptedScenes":[],"unresolvedScenes":[1616,1617,1618,1619],"xEligible":false,"reason":"five-attempt ceiling exhausted with no accepted scene"},
-      {"batch":400,"country":"São Tomé and Príncipe","acceptedScenes":[],"unresolvedScenes":[1620,1621,1622,1623],"xEligible":false,"reason":"Bank 96 selected no output; Bank 97 Attempt 2 is preflight-only and not dispatched"}
+      {"batch":400,"country":"São Tomé and Príncipe","acceptedScenes":[],"unresolvedScenes":[1620,1621,1622,1623],"xEligible":false,"reason":"Bank 97 selected scene 1623 only as a hard-safe provisional Meta source; canonical acceptance is blocked pending its required ChatGPT clothing-only final edit, while scenes 1620 through 1622 remain unresolved"}
     ],
     "eligibleBacklogRemaining": 0,
     "eligibleThreeAssetTwoCountryPostExists": false,
@@ -463,7 +458,7 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "bank-97-attempt-2-all-occurrences-classified-scene-1623-hard-safe-provisional-meta-source-selected-pending-chatgpt-edit-and-classification-remote-parity",
+    "status": "bank-97-attempt-2-complete-counted-qa-and-provisional-selection-remote-parity-complete-scene-1623-pending-required-chatgpt-finalization",
     "checkedAtUtc": "2026-08-24T16:01:41.806Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
@@ -667,7 +662,7 @@
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
     "bank97Attempt2Preflight": {
-      "state": "all-four-provider-scenes-terminal-all-occurrences-classified-one-hard-unusable-one-hard-safe-provisional-source-two-refusals-pending-classification-remote-parity",
+      "state": "complete-counted-all-occurrences-classified-one-hard-unusable-one-hard-safe-provisional-source-two-refusals-remote-parity-complete",
       "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": true,
       "promptRecordsVerified": 4,
@@ -725,13 +720,15 @@
         "resultEvidenceRemoteParityPending": false,
         "resultEvidenceRemoteParityVerifiedAtUtc": "2026-08-24T16:09:07.9326884Z",
         "resultEvidenceRemoteParity": {"localHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","remoteBranchHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13Head":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13State":"OPEN","draftPr13IsDraft":true,"draftPr13MergeState":"CLEAN","draftPr13Base":"agent/iat-launch-window-recovery-batch-220","gitLfsPendingObjects":0,"worktreeCleanExcludingConcurrentBank98PromptDrafts":true},
-        "qaClassificationRemoteParityPending": true
+        "qaClassificationRemoteParityPending": false
         ,"qaTrackedSourceArchiveApply": {"verifiedAfterApplyAtUtc":"2026-08-24T16:18:56.3650817Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":2,"newBlobs":0,"newBlobBytes":0}
         ,"qaArchiveDryRun": {"verifiedAtUtc":"2026-08-24T16:18:56.3650817Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0}
+        ,"qaClassificationCommit": "ddaa5446df6490d758fea9da45b9a917de9147d7"
+        ,"qaClassificationRemoteParityVerifiedAtUtc": "2026-08-24T16:20:08.8660456Z"
       },
       "generatedMediaAuditPerformed": true,
       "completedBank": true,
-      "countedTowardRenderRun": false,
+      "countedTowardRenderRun": true,
       "countEffectiveAfterRemoteParity": true,
       "inFlight": false,
       "notDispatched": false
@@ -739,23 +736,23 @@
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
       "currentRenderRun": 10,
-      "completedBanksInCurrentRenderRun": 3,
-      "nextBank": 97,
-      "nextOrdinal": 4
+      "completedBanksInCurrentRenderRun": 4,
+      "nextBank": 98,
+      "nextOrdinal": 5
     },
     "cumulativeMetaBankAllowance": {
       "authorized": 170,
-      "completed": 67,
-      "remaining": 103
+      "completed": 68,
+      "remaining": 102
     },
     "nextPreflight": {
-      "bank": 97,
-      "attempt": 2,
+      "bank": 98,
+      "attempt": 3,
       "renderRun": 10,
-      "renderRunOrdinal": 4,
-      "state": "provider-dispatch-confirmed-four-lanes-in-flight-uncounted",
+      "renderRunOrdinal": 5,
+      "state": "not-yet-preflight-authorized-three-unresolved-meta-lanes-only-scene-1623-stopped-pending-chatgpt-finalization",
       "dispatchAuthorizedNow": false,
-      "providerDispatchConfirmed": true
+      "providerDispatchConfirmed": false
     },
     "xState": {
       "eligibleBacklogRemaining": 0,
@@ -763,7 +760,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Commit and remote-verify the Bank 97 QA adjudication and provisional scene-1623 Meta selection, then run the required built-in ChatGPT clothing-only final edit before canonical acceptance. Never render scene-1623 Meta filler. X backlog remains zero and no publication action is available."
+    "nextAction": "Run the required built-in ChatGPT clothing-only final edit on the remote-verified scene-1623 provisional source before canonical acceptance. Never render scene-1623 Meta filler. Bank 98 may later target only unresolved scenes 1620, 1621 and 1622 after its own preflight parity. X backlog remains zero and no publication action is available."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
