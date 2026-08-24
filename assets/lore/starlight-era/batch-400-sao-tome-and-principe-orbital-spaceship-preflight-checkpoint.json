@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 400,
   "country": "São Tomé and Príncipe",
-  "status": "bank-96-attempt-1-technical-retry-1-all-lanes-terminal-raw-response-evidence-preserved-pending-visual-qa",
+  "status": "bank-96-attempt-1-closed-hard-unusable-local-evidence-gates-complete-remote-parity-pending-bank-97-attempt-2-next",
   "preparedAtUtc": "2026-08-24T14:06:36.9410871Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T14:19:31.3972361Z",
   "sourceCommit": "6a9cefe076f4887137e2158b196712de3caf5492",
@@ -564,7 +564,7 @@
     "renderRunNumberSinceLastX": 10,
     "renderRunBankOrdinal": 3,
     "provider": "Meta AI",
-    "state": "technical-retry-1-all-lanes-terminal-four-raw-contents-plus-one-refusal-no-bytes-pending-visual-qa",
+    "state": "closed-hard-unusable-four-unique-raw-contents-plus-one-refusal-no-bytes-remote-parity-pending",
     "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": true,
     "dispatchedAtUtc": null,
@@ -624,7 +624,7 @@
     "technicalRetry1": {
       "retryOrdinal": 1,
       "reason": "The initial Send group terminated entirely in the client-side upload/submit handoff with no Meta provider URL, Stop state, provider text, refusal, or media; it is not a provider dispatch and does not count the bank.",
-      "state": "all-lanes-terminal-raw-and-response-evidence-preserved-pending-visual-qa",
+      "state": "closed-hard-unusable-all-occurrences-classified-local-gates-complete-remote-parity-pending",
       "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": true,
       "reuseExactPromptFilesAndHashes": true,
@@ -666,9 +666,9 @@
       },
       "providerStateBySceneAtPostAudit": {
         "1620": "terminal-explicit-refusal-no-media",
-        "1621": "terminal-two-media-raws-and-exact-response-preserved-pending-visual-qa",
-        "1622": "terminal-one-gallery-media-raw-and-exact-response-preserved-pending-visual-qa",
-        "1623": "terminal-one-gallery-media-raw-and-exact-response-preserved-pending-visual-qa"
+        "1621": "terminal-two-media-raws-hard-unusable-select-none",
+        "1622": "terminal-one-gallery-media-hard-unusable-select-none",
+        "1623": "terminal-one-gallery-media-hard-unusable-select-none"
       },
       "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-attempt-01-technical-retry-01-dispatch-envelope.jsonl",
       "dispatchEnvelopeBytes": 11200,
@@ -679,19 +679,43 @@
         "explicitNoBytesOccurrenceCount": 1,
         "rawFileCount": 4,
         "uniqueRawSha256Count": 4,
-        "visualInspectionPerformed": false,
-        "scene1620OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1620.jsonl","bytes":2933,"sha256":"1C2E837F77A1C2A37D270682C65CC0A7EE7087240B69E282E27817DF058AE140","rows":1},
-        "scene1621OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1621.jsonl","bytes":8416,"sha256":"9A9FE1CCCB3C48177596D20E27572FD8C12AE5D4B0DEEC5FBE7683F0CE6D9335","rows":3},
-        "scene1622OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl","bytes":5386,"sha256":"358594221300F15F039EAA8B48EEA5F996ED8F8E83C1D6929E04592ABB457271","rows":2},
-        "scene1623OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1623.jsonl","bytes":6441,"sha256":"85A1140629524376F6A6AEDD088BC3D2F2890E5AF3A1E14A374CC1C2CA2AFDEF","rows":2},
+        "visualInspectionPerformed": true,
+        "scene1620OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1620.jsonl","bytes":3857,"sha256":"B7997BD23C4B1DCD856B0CA63ECC979B037E5ED70027C054279A9A98ACB6468F","rows":2},
+        "scene1621OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1621.jsonl","bytes":10597,"sha256":"E39DEC738DA41453E5DE3CB3352813607D0C35EC2E4734361549DFFE3F0B01F9","rows":4},
+        "scene1622OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl","bytes":6938,"sha256":"653EACC7A3803E035623758AE4F75E91B240B3B64A3920B51C1AE12EB1D524F9","rows":3},
+        "scene1623OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1623.jsonl","bytes":8087,"sha256":"F8E94CB35C8230878EE241EA9ADBCAB8F118C05BAC5120A7BF22E72065E7CB58","rows":3},
         "duplicateRelationships": [],
-        "remainingEvidence": "Independent visual QA of all four unique raw contents, then archive apply/dry-run, both ledgers, Git/LFS, remote branch and draft PR parity."
+        "classification": "hard-unusable-all-four-media-contents-plus-one-provider-refusal-no-bytes-select-none",
+        "selectedOutputSha256": null,
+        "archiveApply": {"appliedAtUtc":"2026-08-24T15:12:45.412Z","occurrences":4810,"uniqueContents":3577,"newManifestRows":5,"newBlobs":1,"newBlobBytes":2328738},
+        "archiveDryRun": {"occurrences":4810,"uniqueContents":3577,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+        "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
+        "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
+        "remainingEvidence": "Commit and remote-verify the Bank 96 closure evidence, archive delta, ledgers, Git LFS and draft PR 13 parity before Bank 97 Attempt 2 preflight may be authorized."
       },
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
-      "completedBank": false,
-      "countedTowardRenderRun": false
+      "completedBank": true,
+      "countedTowardRenderRun": true,
+      "countEffectiveAfterRemoteParity": true
     },
     "notDispatched": false
+  },
+  "bank97Attempt2Preflight": {
+    "bank": 97,
+    "attempt": 2,
+    "renderRunNumberSinceLastX": 10,
+    "renderRunBankOrdinal": 4,
+    "provider": "Meta AI",
+    "state": "next-prompt-and-checkpoint-preflight-pending-independent-qa-and-remote-parity-not-dispatched",
+    "dispatchAuthorizedNow": false,
+    "providerDispatchConfirmed": false,
+    "eligibleScenes": [1620,1621,1622,1623],
+    "eligibleLanes": [1,2,3,4],
+    "reuseDeterministicBindingsWithoutReroll": true,
+    "promptRecords": [],
+    "independentPromptQaComplete": false,
+    "preflightRemoteParityComplete": false,
+    "notDispatched": true
   },
   "remoteParity": {
     "status": "preflight-commit-local-remote-pr13-lfs-archive-ledger-clean-worktree-parity-verified",
@@ -720,6 +744,7 @@
     "gitLfsPendingObjectsAtVerifiedBarrier": 0,
     "worktreeCleanAtVerifiedBarrier": true,
     "currentTerminalHandoffEvidenceRemoteParityPending": false,
+    "currentBank96ClosureEvidenceRemoteParityPending": true,
     "sourceCommitRule": "sourceCommit identifies the already remote-verified Batch 399 closure and is intentionally not self-referential."
   },
   "preflightBarrier": {
@@ -771,23 +796,23 @@
     "terminalTechnicalNoDispatchScenes": [],
     "terminalProviderScenes": [1620, 1621, 1622, 1623],
     "unresolvedScenes": [1620, 1621, 1622, 1623],
-    "preflightState": "technical-retry-1-all-lanes-terminal-evidence-preserved-pending-visual-qa",
+    "preflightState": "bank-96-closed-local-gates-complete-remote-parity-pending-bank-97-attempt-2-preflight-not-authorized",
     "dispatchPolicy": "After remote parity, reuse exactly four persistent signed-in Meta tabs, upload ordered references once per clean lane, dispatch one image request concurrently in each distinct scene lane, and preserve every occurrence before visual inspection."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
     "currentRenderRunNumberSinceLastX": 10,
-    "completedBanksInCurrentRenderRun": 2,
-    "currentRenderRunProgress": "2/10",
-    "nextBank": 96,
-    "nextAttempt": 1,
-    "nextRenderRunBankOrdinal": 3,
-    "currentPreflightBank": 96,
-    "currentPreflightAttempt": 1,
-    "currentPreflightRenderRunBankOrdinal": 3,
+    "completedBanksInCurrentRenderRun": 3,
+    "currentRenderRunProgress": "3/10",
+    "nextBank": 97,
+    "nextAttempt": 2,
+    "nextRenderRunBankOrdinal": 4,
+    "currentPreflightBank": 97,
+    "currentPreflightAttempt": 2,
+    "currentPreflightRenderRunBankOrdinal": 4,
     "cumulativeMetaBanksAuthorized": 170,
-    "cumulativeMetaBanksCompleted": 66,
-    "cumulativeMetaBanksRemaining": 104,
+    "cumulativeMetaBanksCompleted": 67,
+    "cumulativeMetaBanksRemaining": 103,
     "xEligibleBacklogRemaining": 0,
     "source": "Bank 95 is evidence-gated and counted; Barbados is closed unresolved at the five-attempt ceiling. Bank 96 is the first São Tomé and Príncipe attempt and does not count until every provider occurrence and archive/ledger/Git/LFS/remote/PR gate completes."
   },
@@ -799,5 +824,5 @@
     "Upload 938, 936, 937 once in order for lanes 1, 2 and 3; upload 938, 936, 937, 1136 once in order for lane 4.",
     "Verify each exact normalized prompt hash and one image request per lane before one concurrent four-lane send group."
   ],
-  "nextAction": "Perform independent visual QA on the four preserved unique raw contents, append classifications without overwriting occurrence rows, then run archive, ledgers, Git/LFS, remote and PR parity before counting or advancing Bank 96."
+  "nextAction": "Commit and remote-verify Bank 96 closure evidence and archive parity. Then independently QA and remote-parity gate the four exact Bank 97 Attempt 2 prompts/checkpoint before any browser dispatch."
 }

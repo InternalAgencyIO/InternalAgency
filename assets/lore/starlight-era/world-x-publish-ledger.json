@@ -407,8 +407,8 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "four-lane-bank-96-attempt-1-technical-retry-1-all-lanes-terminal-evidence-preserved-pending-visual-qa",
-    "checkedAtUtc": "2026-08-24T15:02:45.147Z",
+    "status": "four-lane-bank-96-attempt-1-closed-hard-unusable-local-gates-complete-remote-parity-pending-bank-97-attempt-2-next",
+    "checkedAtUtc": "2026-08-24T15:13:50.1092721Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 96,
@@ -533,7 +533,7 @@
     },
     "technicalRetry1": {
       "retryOrdinal": 1,
-      "state": "all-lanes-terminal-four-raw-contents-plus-one-refusal-no-bytes-pending-visual-qa",
+      "state": "closed-hard-unusable-four-unique-raw-contents-plus-one-refusal-no-bytes-remote-parity-pending",
       "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": true,
       "reuseExactPromptFilesAndHashes": true,
@@ -575,28 +575,44 @@
         "explicitNoBytesOccurrenceCount": 1,
         "rawFileCount": 4,
         "uniqueRawSha256Count": 4,
-        "visualInspectionPerformed": false,
+        "visualInspectionPerformed": true,
         "scene1620EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1620.jsonl",
         "scene1621EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1621.jsonl",
         "scene1622EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl",
         "scene1623EvidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1623.jsonl",
-        "duplicateRelationships": []
+        "duplicateRelationships": [],
+        "classification": "hard-unusable-all-four-media-contents-plus-one-provider-refusal-no-bytes-select-none",
+        "selectedOutputSha256": null,
+        "archiveApply": {"appliedAtUtc":"2026-08-24T15:12:45.412Z","occurrences":4810,"uniqueContents":3577,"newManifestRows":5,"newBlobs":1,"newBlobBytes":2328738},
+        "archiveDryRun": {"occurrences":4810,"uniqueContents":3577,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+        "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
+        "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
       },
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
-      "completedBank": false,
-      "countedTowardRenderRun": false
+      "completedBank": true,
+      "countedTowardRenderRun": true,
+      "countEffectiveAfterRemoteParity": true
     },
     "renderCadence": {
       "completedRenderRunsSinceLastX": 5,
       "currentRenderRun": 10,
-      "completedBanksInCurrentRenderRun": 2,
-      "nextBank": 96,
-      "nextOrdinal": 3
+      "completedBanksInCurrentRenderRun": 3,
+      "nextBank": 97,
+      "nextOrdinal": 4
     },
     "cumulativeMetaBankAllowance": {
       "authorized": 170,
-      "completed": 66,
-      "remaining": 104
+      "completed": 67,
+      "remaining": 103
+    },
+    "nextPreflight": {
+      "bank": 97,
+      "attempt": 2,
+      "renderRun": 10,
+      "renderRunOrdinal": 4,
+      "state": "prompt-and-checkpoint-preflight-pending-independent-qa-and-remote-parity-not-dispatched",
+      "dispatchAuthorizedNow": false,
+      "providerDispatchConfirmed": false
     },
     "xState": {
       "eligibleBacklogRemaining": 0,
@@ -604,7 +620,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Run independent visual QA on the four preserved unique raw contents, then close archive/ledger/Git/LFS/remote/PR gates; do not count Bank 96 yet. X backlog and all social actions remain zero."
+    "nextAction": "Commit and remote-verify Bank 96 closure evidence and archive parity, then independently QA and remote-parity gate Bank 97 Attempt 2 before browser dispatch. X backlog and all social actions remain zero."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
