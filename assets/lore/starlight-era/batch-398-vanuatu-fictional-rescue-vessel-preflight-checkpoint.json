@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-84-final-remote-parity-verified-bank-85-provider-closed-hard-unusable-four-occurrences-three-unique-archive-and-ledger-verifiers-passed-initial-evidence-commit-pending",
+  "status": "bank-85-initial-evidence-remote-and-pr-verified-tracked-source-archive-four-rows-ready-commit-pending",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T06:56:29.0035898Z",
+  "lastWakeAuditAtUtc": "2026-08-24T06:59:45.3386761Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -59,7 +59,16 @@
     "projectFailedPromptLedgerVerifierErrors": 0,
     "xLedgerSha256BeforeInitialEvidenceCommit": "75259D52ABD6F4122946CB3BA3C287B84603984FB1E172E3ECB50B1C79AE637F",
     "faceAnchorsVerifiedBeforeInitialEvidenceCommitAtUtc": "2026-08-24T06:57:33.933Z",
-    "initialEvidenceCommit": null,
+    "initialEvidenceCommit": "4160c74ac17ef913c03955ab69de6d6c809daf39",
+    "initialEvidenceRemoteBranchHead": "4160c74ac17ef913c03955ab69de6d6c809daf39",
+    "initialEvidenceDraftPr13Head": "4160c74ac17ef913c03955ab69de6d6c809daf39",
+    "initialEvidenceDraftPr13Open": true,
+    "initialEvidenceDraftPr13Draft": true,
+    "archiveTrackedSourceNewRows": 4,
+    "archiveTrackedSourceNewBlobs": 0,
+    "archiveTrackedSourceNewBlobBytes": 0,
+    "archiveManifestRowsAfterTrackedSourceImport": 6060,
+    "archiveManifestSha256AfterTrackedSourceImport": "3A08A2211DB10D08B5CAF0AC76C9162F03B6744D5D7C14F45FBAB6696F40D4AE",
     "trackedSourceArchiveCommit": null,
     "remoteParityCheckpointCommit": null,
     "remoteParityPending": true
@@ -68,7 +77,7 @@
     "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
     "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
     "exactAge": 21,
-    "verifiedAtUtc": "2026-08-24T06:57:33.933Z",
+    "verifiedAtUtc": "2026-08-24T07:00:22.395Z",
     "uploadOrder": [
       {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
       {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
@@ -6052,7 +6061,7 @@
     ],
     "classification": "hard-unusable-all-occurrences-local-evidence-pending",
     "disposition": "Select and publish none; all four occurrences and all three unique contents fail one or more historical-face, hand/contact, sock-map, secure divided cocktail wrap-skort, or capsule-placement hard gates. Scene 1614 remains unresolved; Bank 85 is not evidence-gated complete and Bank 86 is not dispatched.",
-    "evidenceGate": {"previousRemoteVerifiedHead":"361eb2612fc85f5e90cbae5bcf887e093db0c1ef","dispatchEvidenceCommit":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchRemoteBranchHead":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchDraftPr13Head":"8e869d7ad97701c0991e732db7adf1b6d8e05985","providerCompletionCaptured":true,"archiveInitialNewRows":4,"archiveInitialNewBlobs":3,"archiveInitialNewBlobBytes":1420304,"archiveManifestRowsAfterInitialImport":6056,"archiveManifestSha256AfterInitialImport":"251C622BE3E8530C759267B53781EA1B5878A87957192139CB89E2A37DCFFDDC","archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"rejectedPromptLedgerVerifierEntries":139,"rejectedPromptLedgerVerifierErrors":0,"projectFailedPromptLedgerRuntimeFailures":987,"projectFailedPromptLedgerPromptRecords":1567,"projectFailedPromptLedgerVerifierErrors":0,"initialEvidenceCommit":null,"remoteParityPending":true,"pending":"Commit and remote-verify the complete Bank 85 raw occurrence, response, classification, archive and cadence evidence; then import tracked-source rows and finish parity before counting Bank 85 or dispatching Bank 86"}
+    "evidenceGate": {"previousRemoteVerifiedHead":"361eb2612fc85f5e90cbae5bcf887e093db0c1ef","dispatchEvidenceCommit":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchRemoteBranchHead":"8e869d7ad97701c0991e732db7adf1b6d8e05985","dispatchDraftPr13Head":"8e869d7ad97701c0991e732db7adf1b6d8e05985","providerCompletionCaptured":true,"archiveInitialNewRows":4,"archiveInitialNewBlobs":3,"archiveInitialNewBlobBytes":1420304,"archiveManifestRowsAfterInitialImport":6056,"archiveManifestSha256AfterInitialImport":"251C622BE3E8530C759267B53781EA1B5878A87957192139CB89E2A37DCFFDDC","archiveDryRunNewRows":0,"archiveDryRunNewBlobs":0,"rejectedPromptLedgerVerifierEntries":139,"rejectedPromptLedgerVerifierErrors":0,"projectFailedPromptLedgerRuntimeFailures":987,"projectFailedPromptLedgerPromptRecords":1567,"projectFailedPromptLedgerVerifierErrors":0,"initialEvidenceCommit":"4160c74ac17ef913c03955ab69de6d6c809daf39","initialEvidenceRemoteBranchHead":"4160c74ac17ef913c03955ab69de6d6c809daf39","initialEvidenceDraftPr13Head":"4160c74ac17ef913c03955ab69de6d6c809daf39","archiveTrackedSourceNewRows":4,"archiveTrackedSourceNewBlobs":0,"archiveTrackedSourceNewBlobBytes":0,"archiveManifestRowsAfterTrackedSourceImport":6060,"archiveManifestSha256AfterTrackedSourceImport":"3A08A2211DB10D08B5CAF0AC76C9162F03B6744D5D7C14F45FBAB6696F40D4AE","trackedSourceArchiveCommit":null,"remoteParityPending":true,"pending":"Commit and remote-verify the four tracked-source archive rows, then record full Git/LFS/remote/PR/clean-worktree parity before counting Bank 85 or dispatching Bank 86"}
   },
   "latestXBacklogClearanceAudit": {
     "status": "cleared-no-eligible-backlog-rendering-deferred-by-user",
@@ -6085,5 +6094,5 @@
     "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-85-evidence-gate-blocker.jsonl",
     "impact": "Local archive and ledger gates are restored, but Bank 86 cannot be dispatched until the exactly-four-tab signed-in Meta browser audit is callable. Finish Bank 85 Git/LFS/remote/PR parity first."
   },
-  "nextAction": "Commit, push and remote-verify complete Bank 85 initial evidence; import and commit tracked-source archive rows; finish remote/PR/LFS/clean-worktree parity; then count Bank 85 and retry browser-control availability for Bank 86 scene 1614 only. Never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and remote-verify the four Bank 85 tracked-source archive rows; finish remote/PR/LFS/clean-worktree parity; then count Bank 85 and retry browser-control availability for Bank 86 scene 1614 only. Never reopen scenes 1612, 1613, or 1615."
 }
