@@ -304,30 +304,30 @@
     "latestClosedUniqueOccurrenceCount": 4,
     "latestClosedClassification": "hard-unusable-four-unique-media-contents-plus-one-provider-refusal-no-bytes-no-accepted-scenes",
     "latestClosedRemoteVerifiedHead": "f05a7309a8a402cc1b87110f1bf9436080acfc5f",
-    "inFlightCountryBank": 97,
-    "inFlightRenderRunBankOrdinal": 4,
+    "inFlightCountryBank": null,
+    "inFlightRenderRunBankOrdinal": null,
     "inFlightProviderUrl": null,
-    "inFlightProviderUrls": [
+    "inFlightProviderUrls": [],
+    "inFlightOriginalSendClickAtUtc": null,
+    "inFlightDispatchedAtUtc": null,
+    "inFlightCapturedOccurrenceCount": 0,
+    "inFlightRawFileCount": 0,
+    "inFlightUniqueOccurrenceCount": 0,
+    "pendingEvidenceCountryBank": 97,
+    "pendingEvidenceProviderUrl": null,
+    "pendingEvidenceProviderUrls": [
       "https://www.meta.ai/prompt/da9e9c4a-dfa1-4fe1-bb81-899094f6d703",
       "https://www.meta.ai/prompt/f5791a25-9793-461b-b52f-34cf414a34bb",
       "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
       "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
     ],
-    "inFlightOriginalSendClickAtUtc": "2026-08-24T15:52:21.097Z",
-    "inFlightDispatchedAtUtc": "2026-08-24T15:52:21.097Z",
-    "inFlightCapturedOccurrenceCount": 0,
-    "inFlightRawFileCount": 0,
-    "inFlightUniqueOccurrenceCount": 0,
-    "pendingEvidenceCountryBank": null,
-    "pendingEvidenceProviderUrl": null,
-    "pendingEvidenceProviderUrls": [],
-    "pendingEvidenceDispatchedAtUtc": null,
-    "pendingEvidenceTerminalObservedAtUtc": null,
-    "pendingEvidenceCapturedOccurrenceCount": 0,
-    "pendingEvidenceRawFileCount": 0,
-    "pendingEvidenceUniqueOccurrenceCount": 0,
-    "pendingEvidenceClassification": null,
-    "pendingEvidenceLastRemoteVerifiedHead": null
+    "pendingEvidenceDispatchedAtUtc": "2026-08-24T15:52:21.097Z",
+    "pendingEvidenceTerminalObservedAtUtc": "2026-08-24T16:01:41.806Z",
+    "pendingEvidenceCapturedOccurrenceCount": 5,
+    "pendingEvidenceRawFileCount": 2,
+    "pendingEvidenceUniqueOccurrenceCount": 2,
+    "pendingEvidenceClassification": "two-terminal-refusals-no-bytes-two-terminal-media-pending-visual-qa-plus-one-transient-raw-byte-shortfall",
+    "pendingEvidenceLastRemoteVerifiedHead": "64a2bd1644bf0a09e7250ffa4980a1f2cb59c5ff"
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -463,8 +463,8 @@
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
   },
   "latestBatch400PreflightAudit": {
-    "status": "bank-97-attempt-2-provider-dispatch-confirmed-four-lanes-in-flight-uncounted",
-    "checkedAtUtc": "2026-08-24T15:52:29.133Z",
+    "status": "bank-97-attempt-2-all-four-scenes-terminal-evidence-preserved-pending-visual-qa-archive-and-result-parity-uncounted",
+    "checkedAtUtc": "2026-08-24T16:01:41.806Z",
     "batch": 400,
     "country": "São Tomé and Príncipe",
     "bank": 97,
@@ -667,7 +667,7 @@
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
     "bank97Attempt2Preflight": {
-      "state": "provider-dispatch-confirmed-four-lanes-in-flight-results-not-yet-audited",
+      "state": "all-four-provider-scenes-terminal-two-refusals-two-terminal-media-pending-visual-qa-archive-and-result-parity-uncounted",
       "dispatchAuthorizedNow": false,
       "providerDispatchConfirmed": true,
       "promptRecordsVerified": 4,
@@ -701,10 +701,30 @@
         "1623": "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
       },
       "dispatchEnvelope": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-attempt-02-dispatch-envelope.jsonl","bytes":8522,"sha256":"D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227","rows":4,"remoteParityPending":false,"remoteParityCommit":"e2a2fbff1dbaf5586c8f49fbd98d4348130bef7e","remoteParityVerifiedAtUtc":"2026-08-24T15:55:51.6146813Z"},
-      "generatedMediaAuditPerformed": false,
+      "resultEvidence": {
+        "terminalAuditUtc": "2026-08-24T16:01:37.141Z",
+        "capturedOccurrenceCount": 5,
+        "rawByteShortfallOccurrenceCount": 1,
+        "explicitTerminalRefusalNoBytesCount": 2,
+        "rawFileCount": 2,
+        "uniqueRawSha256Count": 2,
+        "duplicateRelationships": [],
+        "visualInspectionPerformed": false,
+        "classification": "pending-visual-qa-for-two-unique-terminal-media-two-terminal-refusals-no-bytes-and-one-transient-raw-byte-shortfall-preserved",
+        "scene1620Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1620.jsonl","bytes":2620,"sha256":"863ADC10FEB2BA39F6CFB1E719A6AA70E4697CDFFC60ACAF44AC33FC382FF96E","rows":1},
+        "scene1621Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1621.jsonl","bytes":9569,"sha256":"C0B8ACA3B0CCD5507BFE8EC1880862C93F8191D1E7A2D3EDEFE6CBF93BF66CF1","rows":3,"terminalRawSha256":"068D383E35DD1BAE58CDED024FC90BB3B209886D221CD8600360B7B496E99D77"},
+        "scene1622Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1622.jsonl","bytes":2588,"sha256":"99F5D25F3FF3D260BF9C0E1085AA55703FFD696E33591E17D0F86F38137355E4","rows":1},
+        "scene1623Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1623.jsonl","bytes":5756,"sha256":"EE75FBAE2B4642727C7F7F63A1448ABA24A874ED5B4D8EE588457BD754A16FE8","rows":1,"terminalRawSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22"},
+        "archiveApply": {"verifiedAfterApplyAtUtc":"2026-08-24T16:07:32.9407055Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":2,"newBlobs":2,"newBlobBytes":1154950},
+        "archiveDryRun": {"verifiedAtUtc":"2026-08-24T16:07:32.9407055Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+        "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"exactPromptShaPasses":139,"errors":0},
+        "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
+        "resultEvidenceRemoteParityPending": true
+      },
+      "generatedMediaAuditPerformed": true,
       "completedBank": false,
       "countedTowardRenderRun": false,
-      "inFlight": true,
+      "inFlight": false,
       "notDispatched": false
     },
     "renderCadence": {
@@ -734,7 +754,7 @@
       "publicationAction": "none-no-eligible-post-and-no-final-click"
     },
     "socialActionState": "none-no-follow-connect-like-or-publication-target-authorized-or-executed",
-    "nextAction": "Dispatch evidence is remote verified. Preserve every provider occurrence before visual inspection; Bank 97 remains uncounted until result parity. X backlog remains zero and no publication action is available."
+    "nextAction": "All four Bank 97 lanes are terminal and their minimum evidence is preserved. Complete visual QA for the two unique terminal raws and every archive/ledger/Git/LFS/remote/PR result gate before counting Bank 97. X backlog remains zero and no publication action is available."
   },
   "latestBatch399Bank91ResultAudit": {
     "status": "completed-hard-unusable-all-evidence-gates-remote-parity-verified",
