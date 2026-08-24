@@ -266,7 +266,7 @@
     }
   ],
   "publicationCadenceState": {
-    "mode": "render-first-batch-398-closed-unresolved-batch-399-preflight-prompt-ready-backlog-zero-counter-five-retained",
+    "mode": "render-first-batch-399-bank-91-result-stage-one-refusal-three-hard-unusable-parity-pending-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 5,
     "completedBanksInCurrentRenderRun": 7,
@@ -275,7 +275,7 @@
     "promptsPerBank": 4,
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-batch-398-closed-unresolved-batch-399-all-scenes-unresolved",
+    "currentPublicationWindowStatus": "open-no-eligible-post-batch-399-bank-91-one-refusal-three-hard-unusable-parity-pending",
     "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
     "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
@@ -302,14 +302,20 @@
     "inFlightDispatchedAtUtc": null,
     "inFlightCapturedOccurrenceCount": 0,
     "inFlightUniqueOccurrenceCount": 0,
-    "pendingEvidenceCountryBank": null,
+    "pendingEvidenceCountryBank": 91,
     "pendingEvidenceProviderUrl": null,
-    "pendingEvidenceDispatchedAtUtc": null,
-    "pendingEvidenceTerminalObservedAtUtc": null,
-    "pendingEvidenceCapturedOccurrenceCount": 0,
-    "pendingEvidenceUniqueOccurrenceCount": 0,
-    "pendingEvidenceClassification": null,
-    "pendingEvidenceLastRemoteVerifiedHead": null
+    "pendingEvidenceProviderUrls": [
+      "https://www.meta.ai/prompt/73bb5fa9-4e21-4d76-945e-f515d5094a85",
+      "https://www.meta.ai/prompt/9d024551-8d0f-4adb-97ee-78d9ff2429b1",
+      "https://www.meta.ai/prompt/9ea0d308-0541-464f-8e0b-94c4ba152801",
+      "https://www.meta.ai/prompt/2c08d5f8-314b-491e-afe9-3f1759139660"
+    ],
+    "pendingEvidenceDispatchedAtUtc": "2026-08-24T10:30:17.458Z",
+    "pendingEvidenceTerminalObservedAtUtc": "2026-08-24T10:35:33.449Z",
+    "pendingEvidenceCapturedOccurrenceCount": 19,
+    "pendingEvidenceUniqueOccurrenceCount": 3,
+    "pendingEvidenceClassification": "one-terminal-refusal-no-bytes-three-hard-unusable-terminal-media-with-transient-no-byte-occurrences-and-deterministic-prompt-binding-bugs",
+    "pendingEvidenceLastRemoteVerifiedHead": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff"
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -333,7 +339,7 @@
     "renderingDeferredByUser": false,
     "activeRenderBank": 91,
     "activeRenderRunOrdinal": 8,
-    "activeEvidenceState": "Vanuatu Batch 398 is closed with scene 1614 unresolved and never accepted. Barbados Batch 399 global country Bank 91, ninth-render-run ordinal 8, is ready for exactly-four-tab dispatch after remote-verified preflight commit dc1f9d77db6de43a11a8d0de8faa7661c5c29bff. Draft PR 13 is OPEN/DRAFT against the correct agent/iat-launch-window-recovery-batch-220 base; Git LFS, archive dry-run, both ledger verifiers, and the worktree are clean.",
+    "activeEvidenceState": "Barbados Batch 399 Bank 91 was dispatched across four Meta lanes at 2026-08-24T10:30:17.458Z. Scene 1616 ended in a terminal refusal with no bytes; scenes 1617, 1618, and 1619 ended hard-unusable with their raw terminal media and all transient no-byte occurrences preserved. Root QA identified deterministic prompt bugs in scenes 1617 through 1619 setting language and scenes 1617 and 1619 RAZE wordmark orientation. Bank 91 remains incomplete until archive, both ledger verifiers, Git, LFS, remote branch, and draft PR 13 parity pass. Bank 92 Attempt 2 corrective prompt preparation is authorized and underway.",
     "socialActionState": "none-follow-and-connect-remain-disabled-likes-have-no-target-queue-no-clicks-executed"
   },
   "latestBatch399TransitionAudit": {
@@ -356,7 +362,7 @@
       "scenes": [1616,1617,1618,1619],
       "resolvedScenes": [],
       "unresolvedScenes": [1616,1617,1618,1619],
-      "renderState": "preflight-remote-verified-at-dc1f9d77db6de43a11a8d0de8faa7661c5c29bff-pr13-open-draft-correct-base-lfs-archive-ledgers-worktree-clean-ready-for-exactly-four-tab-dispatch",
+      "renderState": "bank-91-results-preserved-one-terminal-refusal-no-bytes-three-hard-unusable-terminal-media-parity-pending-bank-92-attempt-2-prompt-preparation-underway",
       "eligibleForX": false
     },
     "renderCadence": {
@@ -385,6 +391,81 @@
       "actionsExecuted": []
     },
     "historicalAuditPreservation": "All historical X audits, URLs, captions, asset reservations, duplicate-prevention evidence, and publication records remain unchanged."
+  },
+  "latestBatch399Bank91ResultAudit": {
+    "status": "result-stage-preserved-and-classified-parity-pending-bank-not-completed",
+    "checkedAtUtc": "2026-08-24T10:38:57.8836989Z",
+    "batch": 399,
+    "country": "Barbados",
+    "bank": 91,
+    "renderRun": 9,
+    "renderRunOrdinal": 8,
+    "dispatchedAtUtc": "2026-08-24T10:30:17.458Z",
+    "lanes": [
+      {
+        "lane": 1,
+        "scene": 1616,
+        "providerUrl": "https://www.meta.ai/prompt/73bb5fa9-4e21-4d76-945e-f515d5094a85",
+        "classification": "terminal-refusal-no-bytes",
+        "transientNoByteOccurrenceCount": 0,
+        "terminalRawSha256": null
+      },
+      {
+        "lane": 2,
+        "scene": 1617,
+        "providerUrl": "https://www.meta.ai/prompt/9d024551-8d0f-4adb-97ee-78d9ff2429b1",
+        "classification": "hard-unusable-terminal-media",
+        "transientNoByteOccurrenceCount": 8,
+        "terminalRawSha256": "3AE061C6279D7C2D59295C994C47A8D006D177FA7B4AAEF2EB84831F0C4506D3"
+      },
+      {
+        "lane": 3,
+        "scene": 1618,
+        "providerUrl": "https://www.meta.ai/prompt/9ea0d308-0541-464f-8e0b-94c4ba152801",
+        "classification": "hard-unusable-terminal-media",
+        "transientNoByteOccurrenceCount": 6,
+        "terminalRawSha256": "EF6CE7438F006C0C9ABC9016811ACBDBB010868EE27CD49B066A161F84BD8C5B"
+      },
+      {
+        "lane": 4,
+        "scene": 1619,
+        "providerUrl": "https://www.meta.ai/prompt/2c08d5f8-314b-491e-afe9-3f1759139660",
+        "classification": "hard-unusable-terminal-media",
+        "transientNoByteOccurrenceCount": 1,
+        "terminalRawSha256": "F033DF0AE63A723D61247B2B2478F193A83ECA9D8904507C2D1E3D74E7BD62D4"
+      }
+    ],
+    "capturedOccurrenceCount": 19,
+    "uniqueTerminalMediaCount": 3,
+    "promptBindingBugAudit": {
+      "settingConflicts": {
+        "scenes": [1617,1618,1619],
+        "bug": "Primary prompt said interior while the deterministic setting binding requires protected exterior beneath a transparent pressure field."
+      },
+      "razeWordmarkOrientationConflicts": {
+        "scenes": [1617,1619],
+        "bug": "Primary prompt said vertical wordmark while the deterministic RAZE binding requires compact horizontal at the outer upper calf."
+      }
+    },
+    "bankCompletionState": {
+      "completed": false,
+      "completedBankCountersAdvanced": false,
+      "remainingGates": ["archive","provider-occurrence-ledger","generated-media-ledger","Git","LFS","remote-branch","draft-PR-13"]
+    },
+    "nextAttempt": {
+      "bank": 92,
+      "attempt": 2,
+      "status": "corrective-prompt-preparation-authorized-and-underway"
+    },
+    "xState": {
+      "eligibleBacklogRemaining": 0,
+      "eligibleTwoCountryPostExists": false,
+      "publicationAction": "none"
+    },
+    "socialActionState": {
+      "actionsExecuted": [],
+      "count": 0
+    }
   },
   "latestFifthRenderRunXWindowAudit": {
     "status": "fifth-render-run-complete-window-open-no-eligible-two-country-post-counter-retained",
