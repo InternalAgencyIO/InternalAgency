@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "bank-93-attempt-3-terminal-client-side-handoff-technical-no-dispatch-no-bytes-not-completed",
+  "status": "bank-93-attempt-3-technical-retry-1-ready-for-four-lane-meta-dispatch-not-dispatched",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T10:18:41.5765215Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -517,15 +517,16 @@
     "renderRunNumberSinceLastX": 9,
     "renderRunBankOrdinal": 10,
     "preparedAtUtc": "2026-08-24T11:21:47.0679302Z",
-    "verifiedAtUtc": "2026-08-24T11:34:12.7866628Z",
+    "verifiedAtUtc": "2026-08-24T11:46:19.6820573Z",
     "provider": "Meta AI",
-    "state": "terminal-client-side-upload-submit-handoff-technical-no-dispatch-no-bytes-not-completed",
-    "dispatchAuthorizedNow": false,
-    "dispatchAuthorizationCondition": "The 2026-08-24T11:38:17.672Z click group terminated client-side without provider handoff. Preserve and parity-verify this technical evidence before preparing a clean retry; the failed click group itself does not authorize duplicate clicking or count as a completed bank.",
+    "state": "technical-retry-1-ready-for-four-lane-meta-dispatch-not-dispatched",
+    "dispatchAuthorizedNow": true,
+    "dispatchAuthorizationCondition": "Technical retry 1 is authorized only from exactly four clean signed-in Meta tabs after fresh ordered uploads finish processing in every lane and each Send control is visibly enabled. Then perform one concurrent click per lane; do not click while any attachment is Loading or any Send control is disabled.",
     "requiredPriorGate": "Bank 92 evidence remains remote verified at 54023145c0c673c85b60ad32e5fbe48d63c22492; the six tracked-source rows, this checkpoint and all four Bank 93 Attempt 3 prompt files are committed and remote verified at 65e2c19abdb4708a14ac95588592ba4158220be5.",
     "promptAndTrackedSourcePreflightCommit": "65e2c19abdb4708a14ac95588592ba4158220be5",
-    "preflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
-    "remoteParityVerifiedAtUtc": "2026-08-24T11:34:12.7866628Z",
+    "initialPreflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
+    "preflightParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+    "remoteParityVerifiedAtUtc": "2026-08-24T11:46:19.6820573Z",
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
     "persistentMetaTabCountRequired": 4,
@@ -588,26 +589,51 @@
       "duplicateClickAttempted": false,
       "classification": "terminal-client-side-upload-submit-handoff-technical-no-dispatch-no-bytes"
     },
+    "technicalRetry1Preflight": {
+      "retryOrdinal": 1,
+      "reason": "The prior click group is verified as a terminal client-side upload/submit handoff technical no-dispatch/no-bytes event, with no provider URL, Stop state, response, refusal or media and no completed-bank credit.",
+      "preparedAtUtc": "2026-08-24T11:46:19.6820573Z",
+      "evidenceParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+      "reuseExactAttempt3PromptFilesAndHashes": true,
+      "freshCleanMetaTabsRequired": 4,
+      "freshOrderedUploadsRequired": true,
+      "orderedReferenceScenesByLane": {
+        "1": [938, 936, 937],
+        "2": [938, 936, 937],
+        "3": [938, 936, 937, 1136],
+        "4": [938, 936, 937]
+      },
+      "attachmentProcessingGate": "Wait until every ordered attachment finishes processing in all four lanes and every Send control is visibly enabled before any click.",
+      "clickPolicy": "After all four lanes simultaneously pass the attachment-processing gate, perform exactly one concurrent Send click in each lane.",
+      "providerDispatchConfirmationGate": "Claim provider dispatch only after the lane navigates to a provider prompt URL or shows the Stop control; otherwise preserve the exact technical state without counting the bank.",
+      "dispatchAuthorizedNow": true,
+      "providerDispatchState": "not-dispatched",
+      "providerUrls": [],
+      "generatedMediaOccurrenceCount": 0,
+      "completedBank": false,
+      "countedTowardRenderRun": false
+    },
     "remoteParityPending": false,
-    "nextEvidenceGate": "Commit and remote-verify the exact terminal technical blocker evidence without advancing Bank 93 or render counters; then prepare a clean contract-bounded retry with fresh ordered uploads and prompts, claiming dispatch only after a provider URL or Stop state appears."
+    "nextEvidenceGate": "Open exactly four clean signed-in Meta tabs; upload 938/936/937 freshly in lanes 1, 2 and 4 plus 938/936/937/1136 freshly in lane 3; wait until every attachment finishes and all four Send controls are enabled; then perform exactly one concurrent click per lane and confirm dispatch only from a provider URL or Stop state."
   },
   "remoteParity": {
-    "status": "bank-93-attempt-3-preflight-parity-complete-at-2ac9afea-terminal-client-side-handoff-technical-no-dispatch-no-bytes-not-completed",
-    "verifiedAtUtc": "2026-08-24T11:34:12.7866628Z",
+    "status": "bank-93-attempt-3-technical-retry-1-evidence-parity-complete-at-7167327b-ready-not-dispatched",
+    "verifiedAtUtc": "2026-08-24T11:46:19.6820573Z",
     "preflightEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
     "bank91EvidenceCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "bank92EvidenceCommit": "54023145c0c673c85b60ad32e5fbe48d63c22492",
     "bank93Attempt3PromptPreflightCommit": "65e2c19abdb4708a14ac95588592ba4158220be5",
-    "bank93Attempt3PreflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
-    "localHeadAtBarrier": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
+    "bank93Attempt3InitialPreflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
+    "bank93Attempt3TechnicalEvidenceParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+    "localHeadAtBarrier": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
     "remoteBranch": "agent/starlight-progress-archive",
-    "remoteBranchHead": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
+    "remoteBranchHead": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
     "draftPr13": {
       "number": 13,
       "open": true,
       "draft": true,
       "headRef": "agent/starlight-progress-archive",
-      "headCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
+      "headCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
       "baseRef": "agent/iat-launch-window-recovery-batch-220",
       "mergeStateStatus": "CLEAN"
     },
@@ -628,16 +654,16 @@
     "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-93-attempt-3-preflight-remote-parity-complete-terminal-client-side-handoff-technical-no-dispatch-no-bytes-not-completed",
-    "verifiedAtUtc": "2026-08-24T11:34:12.7866628Z",
+    "status": "bank-93-attempt-3-technical-retry-1-remote-parity-complete-ready-for-four-lane-meta-dispatch-not-dispatched",
+    "verifiedAtUtc": "2026-08-24T11:46:19.6820573Z",
     "archiveApply": {"occurrences": 4775, "uniqueContents": 3544, "newRows": 6, "newBlobs": 0, "newBlobBytes": 0},
     "archiveDryRun": {"occurrences": 4775, "uniqueContents": 3544, "newRows": 0, "newBlobs": 0, "newBlobBytes": 0},
     "rejectedPromptLedgerVerifier": {"entries": 139, "verifiedEntries": 139, "errors": 0},
     "projectFailedPromptLedgerVerifier": {"runtimeFailures": 987, "promptRecords": 1567, "errors": 0},
     "git": {
-      "commit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
-      "remoteBranchHead": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
-      "draftPr13Head": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
+      "commit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+      "remoteBranchHead": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
+      "draftPr13Head": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
       "draftPr13State": "OPEN/DRAFT/CLEAN",
       "draftPr13HeadRef": "agent/starlight-progress-archive",
       "draftPr13BaseRef": "agent/iat-launch-window-recovery-batch-220",
@@ -647,7 +673,7 @@
     "promptRecordsVerified": 12,
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
-    "remainingGate": "Commit and remote-verify the terminal technical blocker without advancing Bank 93 or render counters, then prepare a clean contract-bounded retry; Bank 93 Attempt 3 was not provider-dispatched."
+    "remainingGate": "Execute technical retry 1 from exactly four clean Meta tabs only after fresh ordered attachments finish and every Send control is enabled; Bank 93 remains not dispatched and uncounted."
   },
   "laneState": {
     "eligibleScenes": [1616, 1617, 1618, 1619],
@@ -657,10 +683,11 @@
     "inFlightScenes": [],
     "pendingUploadHandoffScenes": [],
     "terminalTechnicalNoDispatchScenes": [1616, 1617, 1618, 1619],
+    "activeTechnicalRetryScenes": [1616, 1617, 1618, 1619],
     "terminalHardUnusableScenes": [1616, 1617, 1618, 1619],
     "unresolvedScenes": [1616, 1617, 1618, 1619],
-    "preflightState": "Bank 93 Attempt 3 preflight parity remains preserved at 2ac9afea791376d3e1d2d41fac03edb91be530d3. The four click attempts terminated client-side at 2026-08-24T11:40:34.228Z with empty composers, no Stop state, no provider URL, no provider text and no media; this is technical no-dispatch/no-bytes and not a provider refusal.",
-    "dispatchPolicy": "Do not count Bank 93, advance render cadence or claim a provider occurrence. Commit and remote-verify the technical evidence before a clean retry, and confirm any future dispatch only from a provider URL or Stop state."
+    "preflightState": "The prior Bank 93 Attempt 3 click group remains terminal client-side technical no-dispatch/no-bytes and uncounted. Its evidence is local/remote/draft-PR parity verified at 7167327b01dcdbbf6cdaaa79028c6a2912d6e01e, so one bounded clean technical retry is ready but not dispatched.",
+    "dispatchPolicy": "Use exactly four clean signed-in Meta tabs and fresh ordered uploads. Wait for all attachments to finish and all four Send controls to enable before one concurrent click per lane. Do not count Bank 93 or claim dispatch until a provider prompt URL or Stop control confirms acceptance."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
@@ -693,5 +720,5 @@
     "Upload scene 938, then 936, then 937 exactly once per clean Meta request.",
     "Capture every inline and terminal occurrence or explicit no-bytes result with exact prompt, UTC, hashes, response text, raw bytes, dimensions and minimum occurrence envelope before visual inspection."
   ],
-  "nextAction": "Commit and remote-verify the eight-row Bank 93 technical handoff evidence together with this checkpoint and the X ledger without advancing the bank or render counters; then prepare a clean contract-bounded retry using fresh ordered uploads and exact scene-distinct prompts."
+  "nextAction": "Open exactly four clean signed-in Meta tabs, freshly upload 938/936/937 in lanes 1, 2 and 4 plus 938/936/937/1136 in lane 3, restore the exact recorded Attempt 3 prompts, wait until all attachments finish processing and all four Send controls are enabled, then click each lane once concurrently and confirm dispatch only from a provider URL or Stop state."
 }
