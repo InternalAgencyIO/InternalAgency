@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 399,
   "country": "Barbados",
-  "status": "bank-95-attempt-5-result-evidence-remote-parity-complete-post-commit-tracked-source-rows-local-pending-remote-parity",
+  "status": "closed-unresolved-never-accepted-five-attempt-ceiling-exhausted-bank-95-counted-remote-parity-complete",
   "preparedAtUtc": "2026-08-24T10:07:50.3669773Z",
   "promptPreflightVerifiedAtUtc": "2026-08-24T12:41:51.7627939Z",
   "sourceCommit": "c3e720878146b41038388b7c5a1a5f952212588f",
@@ -22,6 +22,24 @@
     "priorUnresolvedScenes": [1614],
     "priorScene1614Accepted": false,
     "priorScene1614CanonicalMedia": null
+  },
+  "batch399ClosureAuthority": {
+    "appliedAtUtc": "2026-08-24T13:58:22.2439012Z",
+    "exactUserDirective": "new countries the fashion became boring  you need to insta reword and try new prompts up to 5 times on every fail too much STOPPING TOO MUCH SAME IMAGE FOR DAYS FIX THESE GET US BACK ON MISSION HOT GIRLS NEW ANGLES HOT LOCALES AND COUNTRY MOTIFS.",
+    "manualReviewAuthority": "authorized for all queues reconnect new connect likes lets speed this up manual review is complete, spawn specialized workers",
+    "attemptCeiling": 5,
+    "attemptsCompleted": [1,2,3,4,5],
+    "ceilingExhausted": true,
+    "attempt6Authorized": false,
+    "closureState": "scenes-1616-through-1619-unresolved-never-accepted",
+    "acceptedScenes": [],
+    "canonicalMedia": [],
+    "xEligible": false,
+    "nextAuthoritativeCountry": "São Tomé and Príncipe",
+    "nextAuthoritativeBatch": 400,
+    "nextSceneRange": {"first":1620,"last":1623},
+    "nextTheme": "orbital spaceship couture",
+    "nextThemePairPosition": "2 of 2"
   },
   "queueAuthorization": {
     "authoritativeOrderEvidence": "assets/lore/starlight-era/world-195x4-campaign.json",
@@ -1312,9 +1330,9 @@
       "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"exactPromptShaPasses":139,"errors":0},
       "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
     },
-    "cumulativeMetaBankAllowance": {"authorized":170,"completed":65,"remaining":105},
-    "completedBank": false,
-    "countedTowardRenderRun": false,
+    "cumulativeMetaBankAllowance": {"authorized":170,"completed":66,"remaining":104},
+    "completedBank": true,
+    "countedTowardRenderRun": true,
     "preflightCommit": "474303f048382f50b9f0641b210a429bb00a67a9",
     "remoteParityVerifiedAtUtc": "2026-08-24T13:21:06.1915785Z",
     "remoteParityPending": false,
@@ -1350,12 +1368,14 @@
     "dispatchEvidenceCommit": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac",
     "occurrenceEvidenceRemoteParityPending": false,
     "occurrenceEvidenceCommit": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac",
-    "trackedSourceArchiveRemoteParityPending": true,
-    "nextEvidenceGate": "Commit and remote-verify the ten post-commit tracked-source manifest rows. Do not count Bank 95 or advance the country until that final archive parity passes; never dispatch Attempt 6 because the five-attempt ceiling is exhausted."
+    "trackedSourceArchiveRemoteParityPending": false,
+    "trackedSourceArchiveCommit": "4bb101eef0698e1f934935100afbaaeb651cf182",
+    "remoteParityPending": false,
+    "nextEvidenceGate": "Bank 95 is closed and counted after result-evidence and tracked-source archive parity. Barbados Batch 399 is closed unresolved and never accepted at the exhausted five-attempt ceiling. Never dispatch Attempt 6; prepare São Tomé and Príncipe Batch 400 through a fresh deterministic four-lane preflight barrier."
   },
   "remoteParity": {
-    "status": "bank-95-attempt-5-result-evidence-remote-parity-complete-post-commit-tracked-source-rows-local-pending-remote-parity",
-    "verifiedAtUtc": "2026-08-24T13:57:10.3835226Z",
+    "status": "bank-95-attempt-5-result-and-tracked-source-remote-parity-complete-batch-399-closed-unresolved",
+    "verifiedAtUtc": "2026-08-24T13:58:22.2439012Z",
     "preflightEvidenceCommit": "dc1f9d77db6de43a11a8d0de8faa7661c5c29bff",
     "bank91EvidenceCommit": "3a67d7ef2faedb8bb682afc7a5168db9f9b6a201",
     "bank92EvidenceCommit": "54023145c0c673c85b60ad32e5fbe48d63c22492",
@@ -1377,16 +1397,17 @@
     "bank95Attempt5PreflightParityRecordCommit": "a46d39feb502bf5634553b3e258edad705e71d98",
     "bank95Attempt5DispatchEvidenceCommitPending": false,
     "bank95Attempt5ResultEvidenceCommit": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac",
-    "bank95Attempt5TrackedSourceArchiveCommitPending": true,
-    "localHeadAtBarrier": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac",
+    "bank95Attempt5TrackedSourceArchiveCommitPending": false,
+    "bank95Attempt5TrackedSourceArchiveCommit": "4bb101eef0698e1f934935100afbaaeb651cf182",
+    "localHeadAtBarrier": "4bb101eef0698e1f934935100afbaaeb651cf182",
     "remoteBranch": "agent/starlight-progress-archive",
-    "remoteBranchHead": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac",
+    "remoteBranchHead": "4bb101eef0698e1f934935100afbaaeb651cf182",
     "draftPr13": {
       "number": 13,
       "open": true,
       "draft": true,
       "headRef": "agent/starlight-progress-archive",
-      "headCommit": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac",
+      "headCommit": "4bb101eef0698e1f934935100afbaaeb651cf182",
       "baseRef": "agent/iat-launch-window-recovery-batch-220",
       "mergeStateStatus": "CLEAN"
     },
@@ -1425,13 +1446,13 @@
       "apply": {"occurrences":4802,"uniqueContents":3569,"newManifestRows":10,"newBlobs":0,"newBlobBytes":0},
       "dryRunAfterApply": {"occurrences":4802,"uniqueContents":3569,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
       "rowAccounting": "the ten committed Bank 95 raw occurrence paths transitioned from untracked source-kind rows to tracked source-kind rows; the two scene 1619 paths share one content hash and no new content blob was required",
-      "localChangesPendingCommitAndRemoteParity": true,
-      "committedAndRemoteVerifiedAtCommit": null
+      "localChangesPendingCommitAndRemoteParity": false,
+      "committedAndRemoteVerifiedAtCommit": "4bb101eef0698e1f934935100afbaaeb651cf182"
     },
     "sourceCommitRule": "sourceCommit remains c3e720878146b41038388b7c5a1a5f952212588f as the historical pre-transition source; it is intentionally not made self-referential."
   },
   "preflightBarrier": {
-    "status": "bank-95-attempt-5-result-evidence-remote-parity-complete-tracked-source-archive-local-gate-pass-remote-parity-pending",
+    "status": "bank-95-attempt-5-result-and-tracked-source-remote-parity-complete-batch-399-closed-unresolved",
     "verifiedAtUtc": "2026-08-24T13:21:06.1915785Z",
     "archiveApply": {"occurrences":4792,"uniqueContents":3560,"newRows":8,"newBlobs":0,"newBlobBytes":0},
     "archiveDryRun": {"occurrences":4792,"uniqueContents":3560,"newRows":0,"newBlobs":0,"newBlobBytes":0},
@@ -1452,12 +1473,12 @@
     "eligibleScenes": [1616, 1617, 1618, 1619],
     "eligibleLanes": [1, 2, 3, 4],
     "bank95ResultEvidenceLocalGate": {"checkedAtUtc":"2026-08-24T13:49:32.8337726Z","archiveDryRun":{"occurrences":4802,"uniqueContents":3569,"newRows":0,"newBlobs":0,"newBlobBytes":0},"rejectedPromptVerifier":{"entries":139,"verifiedEntries":139,"errors":0},"failedPromptVerifier":{"runtimeFailures":987,"promptRecords":1567,"errors":0},"rawOccurrenceFiles":10,"uniqueRawContents":9,"allRawMediaClassified":true,"acceptedRawMedia":0},
-    "remainingGate": "Commit and remote-verify the ten Bank 95 tracked-source archive rows, then close Barbados unresolved at the five-attempt ceiling. No Attempt 6."
+    "remainingGate": "Fresh São Tomé and Príncipe Batch 400 deterministic preflight only; no Barbados Attempt 6."
   },
   "laneState": {
-    "eligibleScenes": [1616, 1617, 1618, 1619],
-    "eligibleLanes": [1, 2, 3, 4],
-    "stoppedScenes": [],
+    "eligibleScenes": [],
+    "eligibleLanes": [],
+    "stoppedScenes": [1616,1617,1618,1619],
     "resolvedScenes": [],
     "inFlightScenes": [],
     "pendingUploadHandoffScenes": [],
@@ -1477,33 +1498,33 @@
     "bank95Attempt5PendingVisualQaScenes": [],
     "bank95Attempt5PartiallyClassifiedScenes": [],
     "bank95Attempt5ExplicitNoBytesScenes": [1618],
-    "preflightState": "Bank 95 Attempt 5 dispatched once across exactly four remote-verified lanes at 2026-08-24T13:34:59.707Z. All four lanes are terminal; eleven occurrence envelopes preserve ten raw files representing nine unique contents plus one provider refusal/no-bytes outcome. Both original raw-fetch failures were recovered from their exact provider URLs. All ten raw occurrences are classified hard-unusable/select-none; scene 1618 is an explicit refusal/no-bytes outcome; no scene is accepted.",
-    "dispatchPolicy": "Do not duplicate Send and never dispatch Attempt 6. Complete Git, LFS, remote and PR parity, count Bank 95 only after those gates pass, then close Barbados unresolved and advance to the next authoritative country."
+    "preflightState": "Bank 95 Attempt 5 is fully evidence-gated at result commit da8f12a43ddeb443a5b32ac09d2f57039bbfbeac and tracked-source archive commit 4bb101eef0698e1f934935100afbaaeb651cf182. Eleven occurrences preserve ten hard-unusable raw files representing nine unique contents plus one explicit refusal/no-bytes outcome. No Barbados scene was ever accepted; scenes 1616-1619 are stopped unresolved at the exhausted five-attempt ceiling.",
+    "dispatchPolicy": "Never duplicate Bank 95 and never dispatch Barbados Attempt 6. Advance only through a fresh remote-verified São Tomé and Príncipe Batch 400 deterministic preflight barrier."
   },
   "renderCadenceSnapshot": {
     "completedRenderRunsSinceLastX": 5,
     "lastCompletedRenderRunNumberSinceLastX": 9,
     "lastCompletedRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
     "currentRenderRunNumberSinceLastX": 10,
-    "completedBanksInCurrentRenderRun": 1,
-    "currentRenderRunProgress": "1/10",
-    "nextBank": 95,
-    "nextAttempt": 5,
-    "nextRenderRunBankOrdinal": 2,
+    "completedBanksInCurrentRenderRun": 2,
+    "currentRenderRunProgress": "2/10",
+    "nextBank": 96,
+    "nextAttempt": 1,
+    "nextRenderRunBankOrdinal": 3,
     "currentInFlightBank": null,
     "currentInFlightAttempt": null,
     "currentInFlightRenderRunBankOrdinal": null,
-    "currentEvidencePendingBank": 95,
-    "currentEvidencePendingAttempt": 5,
-    "currentEvidencePendingRenderRunBankOrdinal": 2,
+    "currentEvidencePendingBank": null,
+    "currentEvidencePendingAttempt": null,
+    "currentEvidencePendingRenderRunBankOrdinal": null,
     "currentPreflightBank": null,
     "currentPreflightAttempt": null,
     "currentPreflightRenderRunBankOrdinal": null,
     "cumulativeMetaBanksAuthorized": 170,
-    "cumulativeMetaBanksCompleted": 65,
-    "cumulativeMetaBanksRemaining": 105,
+    "cumulativeMetaBanksCompleted": 66,
+    "cumulativeMetaBanksRemaining": 104,
     "xEligibleBacklogRemaining": 0,
-    "source": "Bank 94 Attempt 4 produced ten occurrence envelopes: nine raw media files representing eight unique contents plus one explicit refusal/no-bytes outcome. All raw media is hard-unusable/select-none. Result evidence is remote verified at a9b9a18027cd246b8f053fa5b55a67ee5e15c51c and its tracked-source archive rows at 15966aaa72a3c0cc360f44be9238b577742eead0. Render run 10 is 1/10, cumulative completion is 65/170, and Bank 95 Attempt 5 is ordinal 2 pending preflight parity."
+    "source": "Bank 95 Attempt 5 produced eleven occurrence envelopes: ten hard-unusable raw files representing nine unique contents plus one explicit refusal/no-bytes outcome. Result evidence is remote verified at da8f12a43ddeb443a5b32ac09d2f57039bbfbeac and ten tracked-source archive rows at 4bb101eef0698e1f934935100afbaaeb651cf182. The bank is counted; render run 10 is 2/10, cumulative completion is 66/170, and Barbados Batch 399 is closed unresolved and never accepted at the exhausted five-attempt ceiling."
   },
   "dispatchPrerequisites": [
     "Verify the face manifest and all three historical hashes immediately before prompt preparation, upload and render.",
@@ -1513,5 +1534,5 @@
     "Upload scene 938, then 936, then 937 exactly once per clean Meta request.",
     "Capture every inline and terminal occurrence or explicit no-bytes result with exact prompt, UTC, hashes, response text, raw bytes, dimensions and minimum occurrence envelope before visual inspection."
   ],
-  "nextAction": "Commit and remote-verify the ten Bank 95 post-commit tracked-source archive rows, then count Bank 95 as 66 of 170 and close Barbados Batch 399 scenes 1616-1619 unresolved and never accepted at the exhausted five-attempt ceiling. Never dispatch Attempt 6; advance only through a fresh São Tomé and Príncipe Batch 400 preflight parity barrier."
+  "nextAction": "Prepare São Tomé and Príncipe Batch 400 scenes 1620-1623, orbital spaceship couture 2 of 2, with fresh deterministic bindings, official country research, four distinct prompt lanes and a remote-verified preflight barrier. Never reopen Barbados or dispatch Attempt 6."
 }
