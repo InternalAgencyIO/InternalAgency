@@ -568,6 +568,8 @@
     "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": true,
     "dispatchedAtUtc": null,
+    "dispatchUtcShortfall": "The original Send click UTC is unknown after tool timeout and browser-kernel reset; provider navigation was confirmed at the exact post-Discard audit UTC instead.",
+    "providerDispatchConfirmedAtUtc": "2026-08-24T14:54:49.631Z",
     "eligibleScenes": [1620, 1621, 1622, 1623],
     "eligibleLanes": [1, 2, 3, 4],
     "persistentSignedInMetaTabCountRequired": 4,
@@ -664,19 +666,28 @@
       },
       "providerStateBySceneAtPostAudit": {
         "1620": "terminal-explicit-refusal-no-media",
-        "1621": "in-flight-stop-active-one-inline-media-visible-raw-capture-pending",
-        "1622": "terminal-gallery-media-visible-raw-capture-pending",
+        "1621": "in-flight-stop-active-one-inline-media-raw-preserved-pending-terminal-audit-and-visual-qa",
+        "1622": "terminal-gallery-media-raw-preserved-pending-response-snapshot-and-visual-qa",
         "1623": "in-flight-stop-active-no-media-visible"
       },
       "dispatchEnvelopePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-attempt-01-technical-retry-01-dispatch-envelope.jsonl",
       "dispatchEnvelopeBytes": 11200,
       "dispatchEnvelopeSha256": "159EB952738019FA738948F29B7C964A302A6B6C3EB7DF78D0A035C64C5DAA95",
       "dispatchEnvelopeRows": 4,
+      "evidenceCaptureProgress": {
+        "capturedOccurrenceCount": 2,
+        "rawFileCount": 2,
+        "uniqueRawSha256Count": 2,
+        "visualInspectionPerformed": false,
+        "scene1621OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1621.jsonl","bytes":1963,"sha256":"83CEADBB5B477E408AC70A179066BEACCC6B8766ADB64F7B6AACDBB7960EB60B","rows":1},
+        "scene1622OccurrenceEvidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-96-scene-1622.jsonl","bytes":2019,"sha256":"7928682DFAA533F0EEF486E6CE604ADC5E9C4E68B34D940450D48B1FCDAB1D93","rows":1},
+        "remainingEvidence": "Full Scene 1620 refusal/offer text or exact DOM snapshot; every later Scene 1621 occurrence and terminal audit; exact Scene 1622 terminal response or DOM snapshot; every Scene 1623 occurrence or explicit terminal no-bytes outcome; then visual QA, archive, ledgers and parity."
+      },
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
       "completedBank": false,
       "countedTowardRenderRun": false
     },
-    "notDispatched": true
+    "notDispatched": false
   },
   "remoteParity": {
     "status": "preflight-commit-local-remote-pr13-lfs-archive-ledger-clean-worktree-parity-verified",
