@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "batch": 398,
   "country": "Vanuatu",
-  "status": "bank-88-creative-attempt-3-hard-unusable-remote-verified-bank-89-attempt-4-provider-in-flight-scene-1614-only",
+  "status": "bank-89-creative-attempt-4-hard-unusable-evidence-parity-pending-scene-1614-only",
   "preparedAtUtc": "2026-08-22T04:51:29.3174810Z",
-  "lastWakeAuditAtUtc": "2026-08-24T09:13:20.800Z",
+  "lastWakeAuditAtUtc": "2026-08-24T09:23:21.1753118Z",
   "sourceCommit": "647dec44021cb660cb88ac4678b410bf4bf37f59",
   "contract": {
     "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
@@ -6269,7 +6269,7 @@
     "creativeRecoveryAttempt": 4,
     "scene": 1614,
     "lane": 3,
-    "state": "creative-recovery-attempt-4-provider-in-flight",
+    "state": "creative-recovery-attempt-4-classified-hard-unusable-evidence-parity-pending",
     "preparedAtUtc": "2026-08-24T09:10:32.7100811Z",
     "promptPath": "tmp/world-195x4/batch-398/scene-1614-meta-bank-89-render-run-09-text-only.txt",
     "promptBytes": 6664,
@@ -6305,7 +6305,24 @@
     "dispatchAttempted": true,
     "providerStateAtFirstAudit": "Refining the tableau layout; Stop active",
     "transientInlineOccurrence": {"observedAtUtc":null,"observedAtUtcShortfall":"Exact DOM snapshot observation UTC was not persisted and is not fabricated.","responsePath":"tmp/world-195x4/batch-398/scene-1614-meta-bank-89-provider-response-inline-transient.txt","exactResponseBytes":182,"exactResponseSha256":"C9236010489F6E89981F5A0F92FC13664BB87F642F73CDD93430D639BB280CE7","occurrencePath":"progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-89-inline-transient-no-bytes.jsonl","rawBytes":0,"sourceExtractionResult":"Inline image transitioned away before its signed source URL could be extracted; 2026-08-24T09:16:29.228Z inventory contained only the three reference blob URLs.","providerStillInFlightAtUtc":"2026-08-24T09:17:00.887Z"},
-    "nextAction": "Preserve every Bank 89 inline and terminal media occurrence or explicit no-bytes result before visual inspection, then classify and evidence-gate the result."
+    "terminalObservedAtUtc": "2026-08-24T09:20:45.765Z",
+    "capturedAtUtc": "2026-08-24T09:20:45.765Z",
+    "classifiedAtUtc": "2026-08-24T09:23:21.1753118Z",
+    "faceAnchorsVerifiedBeforeClassificationAtUtc": "2026-08-24T09:23:16.3811591Z",
+    "capturedOccurrenceCount": 2,
+    "rawFileCount": 1,
+    "uniqueOutputSha256Count": 1,
+    "rawOutputSha256InOccurrenceOrder": [null,"26B1CDE2F7683339191435AF6009DEF2A379166D8C57F06AAD541B08DD0372E6"],
+    "rawOutputDimensionsInOccurrenceOrder": [null,"1152x2048 RGB"],
+    "occurrenceEvidencePaths": ["progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-89-inline-transient-no-bytes.jsonl","progress-reports/codex-generated-media/provider-occurrences/batch-398-vanuatu-meta-bank-89-terminal-capture.jsonl"],
+    "classification": "hard-unusable-all-occurrences",
+    "hardFailureSummary": ["historical quartet faces remain insufficiently exact","Alia touches her own hair instead of Ellie's left temple and her hands are not both at her own waist","sock map has two RAZE words but only one visible Split-Star","secure crossed-panel divided wrap-skorts are not clearly readable on all four women","a correct knee-height capsule is duplicated by a second black dash on the floor, breaking the single-capsule and empty-gap gates"],
+    "creativeImprovementSummary": "Fresh protected Efate Blue Lagoon bridge, limestone channels, rainforest canopy, wide Dutch-roll viewpoint, storm outside the field, couture palette, correct ECE-to-Ellie touch, complete anatomy, eight white pumps and one kitten materially restore country-specific glamour and angle variety, but hard gates still prevent selection.",
+    "archiveEvidence": {"applyOccurrences":4766,"applyUniqueContents":3536,"newManifestRows":1,"newBlobs":1,"newBlobBytes":479790,"manifestRows":6071,"manifestSha256":"5DA19B9D9501BB17481AF8CF5D5DB97BCC7BC413F7829C9FD38D177448C573C3","postApplyDryRunNewManifestRows":0,"postApplyDryRunNewBlobs":0},
+    "ledgerEvidence": {"rejectedPromptEntries":139,"rejectedPromptVerifierErrors":0,"failedRuntimeEvents":987,"failedPromptRecords":1567,"failedPromptVerifierErrors":0,"failedPromptSourceVerifierErrors":"verification-in-progress"},
+    "renderRunProgressAfterParity": {"completedBanksInCurrentRenderRun":6,"nextRenderRunBankOrdinal":7,"nextCountryBank":90,"completedRenderRunsSinceLastX":5,"cumulativeMetaBanksAuthorized":170,"cumulativeMetaBanksCompleted":60,"cumulativeMetaBanksRemaining":110},
+    "gitEvidence": {"dispatchCommit":"7b81fa45be1c5ccdaa4445969371b949fc4eb4c2","transientOccurrenceCommit":"818bb4b4","pending":"initial evidence commit; tracked-source archive parity; LFS; remote branch and PR 13 parity"},
+    "nextAction": "Commit and push the archived Bank 89 occurrences, complete tracked-source archive parity, and remote-verify branch, LFS and PR 13 parity before preparing Attempt 5."
   },
   "creativeRecoveryDirective": {
     "requestedAtUtc": "2026-08-24T07:45:00Z",
@@ -6318,7 +6335,7 @@
       {"attempt":1,"bank":86,"camera":"floor-height front-quarter from camera-left with restrained Dutch roll","locale":"Port Vila and Mele Bay fashion pier","formation":"layered diagonal runway tableau","motifs":"sculpted reef branch, pandanus weave, limestone-water beadwork, volcanic-glass panels","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/67c98808-01a6-4852-9a7e-7b79aeb8dbfa","dispatchedAtUtc":"2026-08-24T07:54:41.128Z","classifiedAtUtc":"2026-08-24T08:03:47.2429847Z","remoteVerifiedCommit":"0c7decb6c880895adbfc7f6b6742ec54e92fbe2c"},
       {"attempt":2,"bank":87,"camera":"high oblique three-quarter view with sweeping circular deck geometry","locale":"protected Mount Yasur caldera observation terrace","formation":"curved affection arc around seated Ellie","motifs":"lava-channel pleats, ash-black metallic framework, rainforest embroidery, crater-glow beadwork","state":"remote-verified-hard-unusable","providerUrl":"https://www.meta.ai/prompt/6ceff695-cbbe-4d69-bc5f-0d1dd711180f","dispatchedAtUtc":"2026-08-24T08:26:40.839Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T08:36:03.9956171Z","initialEvidenceCommit":"85398b230335fe490b5313f9a889fa028e20286d","remoteVerifiedCommit":"5f8647d3ebe9b34ae5c08ef918d9543a6ca08ac5"},
       {"attempt":3,"bank":88,"camera":"long-lens side-front compression with complete heel emphasis","locale":"Champagne Beach orbital seawall","formation":"staggered triangular formation with ECE isolated in depth","motifs":"champagne-sand satin, turquoise shallows, foam-scallop applique, woven shoreline geometry","state":"remote-verified-hard-unusable","preparedAtUtc":"2026-08-24T08:52:46.7420855Z","promptSha256":"245F3E204DEDDB1CDF83670B4BB85F14F77959697A7794F43228B800575FBF32","providerUrl":"https://www.meta.ai/prompt/bfdc3f25-c771-428c-a4a0-61ecc5b5274f","dispatchedAtUtc":"2026-08-24T08:57:08.885Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:01:48.3024319Z","initialEvidenceCommit":"faae5c8038e09d95b49e2183f58c690b637f317f","remoteVerifiedCommit":"e215035c86139be8346cfc170c403a4e42e8175e"},
-      {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"provider-in-flight","preparedAtUtc":"2026-08-24T09:10:32.7100811Z","promptSha256":"75C495545D29FCA6966F02D05B1FE7BC4A84EDA9CCBA5EA3BA3D4352D4280C11","providerUrl":"https://www.meta.ai/prompt/af0fd073-3c1b-40db-ac4b-5fd9a1bae19f","dispatchedAtUtc":"2026-08-24T09:13:20.800Z","submittedReferences":[938,936,937]},
+      {"attempt":4,"bank":89,"camera":"wide Dutch-roll runway crossing with strong foreground motion lines","locale":"Efate Blue Lagoon pressure-field bridge","formation":"kinetic crossing tableau with Ellie safely supported","motifs":"limestone channel cut-panels, lagoon glass beadwork, rainforest leaf corsage forms, coral-metal inlay","state":"classified-hard-unusable-evidence-parity-pending","preparedAtUtc":"2026-08-24T09:10:32.7100811Z","promptSha256":"75C495545D29FCA6966F02D05B1FE7BC4A84EDA9CCBA5EA3BA3D4352D4280C11","providerUrl":"https://www.meta.ai/prompt/af0fd073-3c1b-40db-ac4b-5fd9a1bae19f","dispatchedAtUtc":"2026-08-24T09:13:20.800Z","submittedReferences":[938,936,937],"classifiedAtUtc":"2026-08-24T09:23:21.1753118Z"},
       {"attempt":5,"bank":90,"camera":"intimate eye-level 85mm full-body editorial with close face and hair foreground","locale":"Espiritu Santo storm lounge above an empty bay","formation":"deep layered embrace composition with clear jealous counterline","motifs":"pale-sand satin, deep-ocean navy framework, pandanus-gold weaving, reef-violet sculptural drape","state":"reserved-if-needed"}
     ]
   },
@@ -6348,5 +6365,5 @@
     "remoteVerifiedHead": "9ee0ca56cac70f6763ace5f47a201c041c6b7c36"
   },
   "authoritativeBlocker": null,
-  "nextAction": "Preserve every Bank 89 inline and terminal media occurrence or explicit no-bytes result before visual inspection, then classify and evidence-gate the result. Never reopen scenes 1612, 1613, or 1615."
+  "nextAction": "Commit and remote-verify Bank 89 evidence and tracked-source archive parity, then immediately prepare the reserved intimate Espiritu Santo Attempt 5. Never reopen scenes 1612, 1613, or 1615."
 }
