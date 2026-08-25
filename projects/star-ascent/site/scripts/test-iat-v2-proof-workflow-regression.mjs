@@ -91,6 +91,59 @@ const EXACT_TOP_LEVEL_WORKFLOW_LINES = Object.freeze([
   "jobs:",
 ]);
 const exactSiteWorkingDirectory = "projects/star-ascent/site";
+const nativePreflightCommand = "node scripts/build-iat-b3-mandatory-ci-containment.mjs";
+const exactLinuxPreflightStep = [
+  "      - name: Confirm the offline native containment preflight remains exact HOLD",
+  "        shell: bash",
+  "        run: |",
+  "          set +e",
+  `          output="$(node scripts/build-iat-b3-mandatory-ci-containment.mjs)"`,
+  "          status=$?",
+  "          set -e",
+  "          printf '%s\\n' \"$output\"",
+  "          if [[ \"$status\" -ne 2 ]]; then",
+  "            echo \"Expected containment preflight exit 2/HOLD, got $status\" >&2",
+  "            exit 1",
+  "          fi",
+  "          node -e '",
+  "            const value = JSON.parse(process.argv[1]);",
+  "            if (value.status !== \"HOLD\" || value.ready !== false || value.complete !== false ||",
+  "                value.buildAuthorized !== false || value.buildExecuted !== false ||",
+  "                value.outputRootTouched !== false || !Array.isArray(value.blockers) ||",
+  "                !value.blockers.includes(\"PHASE_B_NATIVE_BUILD_HARD_DISABLED\")) {",
+  "              throw new Error(\"containment preflight did not return the exact fail-closed HOLD projection\");",
+  "            }",
+  "          ' \"$output\"",
+].join("\n");
+const exactWindowsLongPathsStep = [
+  "      - name: Enable repository long paths before checkout",
+  "        shell: pwsh",
+  "        run: git config --global core.longpaths true",
+].join("\n");
+const exactWindowsStructuralStep = [
+  "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
+  "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
+  `        working-directory: ${exactSiteWorkingDirectory}`,
+].join("\n");
+const exactWindowsPreflightStep = [
+  "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
+  "        shell: pwsh",
+  "        run: |",
+  "          $output = (& node scripts/build-iat-b3-mandatory-ci-containment.mjs 2>&1 | Out-String).Trim()",
+  "          $status = $LASTEXITCODE",
+  "          Write-Host $output",
+  "          if ($status -ne 2) {",
+  "            throw \"Expected containment preflight exit 2/HOLD, got $status\"",
+  "          }",
+  "          $value = $output | ConvertFrom-Json",
+  "          if ($value.status -ne 'HOLD' -or $value.ready -ne $false -or",
+  "              $value.complete -ne $false -or $value.buildAuthorized -ne $false -or",
+  "              $value.buildExecuted -ne $false -or $value.outputRootTouched -ne $false -or",
+  "              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {",
+  "            throw 'containment preflight did not return the exact fail-closed HOLD projection'",
+  "          }",
+  `        working-directory: ${exactSiteWorkingDirectory}`,
+].join("\n");
 const exactSiteJobRunDefaults = [
   "    defaults:",
   "      run:",
@@ -128,18 +181,15 @@ const exactNativeWindowsJob = [
   "    runs-on: windows-2025",
   "    timeout-minutes: 15",
   "    steps:",
+  exactWindowsLongPathsStep,
   "      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0",
   "        with:",
   "          fetch-depth: 0",
   "      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0",
   "        with:",
   "          node-version: 24",
-  "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
-  "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
-  `        working-directory: ${exactSiteWorkingDirectory}`,
-  "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
-  "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-  `        working-directory: ${exactSiteWorkingDirectory}`,
+  exactWindowsStructuralStep,
+  exactWindowsPreflightStep,
   "",
 ].join("\n");
 const exactPhaseBStructurePackageCommand =
@@ -237,16 +287,17 @@ function validateConfiguration(workflowInput, scripts) {
     .map((line) => line.match(/^\s*- uses:\s+([^\s#]+)(?:\s+#.*)?$/)?.[1] ?? null)
     .filter(Boolean);
   const orderedPositions = requiredOrderedCommands.map((command) => commandLines.indexOf(command));
-  const nativePreflightCommand = "node scripts/build-iat-b3-mandatory-ci-containment.mjs";
   const nativeStructuralCommand =
     "node --test tests/iat-b3-mandatory-ci-containment.test.mjs";
   const exactRunCount = (command) => (
     workflowText.match(new RegExp(`^\\s+run: ${command.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&")}$`, "gmu"))
       ?? []
   ).length;
-  if (exactRunCount(nativePreflightCommand) !== 2
-    || exactRunCount(nativeStructuralCommand) !== 2) {
-    fail("Linux and Windows jobs must each run the exact Phase-A structural test and preflight");
+  if (workflowText.split(nativePreflightCommand).length - 1 !== 2
+    || exactRunCount(nativeStructuralCommand) !== 2
+    || !workflowText.includes(exactLinuxPreflightStep)
+    || !workflowText.includes(exactWindowsPreflightStep)) {
+    fail("Linux and Windows jobs must each structurally test and assert the exact Phase-A HOLD preflight");
   }
   const nativeWindowsStart = workflowText.indexOf("  native-containment-windows:\n");
   const nativeWindowsEnd = workflowText.indexOf("\n  rust-host:\n", nativeWindowsStart);
@@ -277,7 +328,7 @@ function validateConfiguration(workflowInput, scripts) {
     )) {
     fail("workflow cwd policy and Windows hosted smoke job must match the exact non-evidence blocks");
   }
-  const nativeWebPreflight = workflowText.indexOf(`        run: ${nativePreflightCommand}\n`);
+  const nativeWebPreflight = workflowText.indexOf(exactLinuxPreflightStep);
   const nativeWebStructural = workflowText.indexOf(`        run: ${nativeStructuralCommand}\n`);
   const npmCiPosition = workflowText.indexOf("      - run: npm ci\n");
   if (!(npmCiPosition >= 0 && nativeWebStructural > npmCiPosition
@@ -771,6 +822,14 @@ const nativeWindowsMutationProbes = [
     "    runs-on: windows-2025\n",
     "    if: false\n    runs-on: windows-2025\n",
   )],
+  ["Windows missing pre-checkout long-path guard", exactNativeWindowsJob.replace(
+    `${exactWindowsLongPathsStep}\n`,
+    "",
+  )],
+  ["Windows late long-path guard", exactNativeWindowsJob.replace(
+    `${exactWindowsLongPathsStep}\n      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0`,
+    `      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0\n${exactWindowsLongPathsStep}`,
+  )],
   ["Windows structural step conditional", exactNativeWindowsJob.replace(
     "      - name: Validate native containment structure (hosted smoke only; non-evidence)\n",
     "      - name: Validate native containment structure (hosted smoke only; non-evidence)\n        if: false\n",
@@ -832,30 +891,16 @@ const nativeWindowsMutationProbes = [
     `        working-directory: ${exactSiteWorkingDirectory}\n        working-directory: .\n`,
   )],
   ["Windows reordered structural and preflight steps", exactNativeWindowsJob.replace(
-    [
-      "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
-      "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
-      `        working-directory: ${exactSiteWorkingDirectory}`,
-      "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
-      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-      `        working-directory: ${exactSiteWorkingDirectory}`,
-    ].join("\n"),
-    [
-      "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
-      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-      `        working-directory: ${exactSiteWorkingDirectory}`,
-      "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
-      "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
-      `        working-directory: ${exactSiteWorkingDirectory}`,
-    ].join("\n"),
+    `${exactWindowsStructuralStep}\n${exactWindowsPreflightStep}`,
+    `${exactWindowsPreflightStep}\n${exactWindowsStructuralStep}`,
   )],
-  ["Windows folded preflight command", exactNativeWindowsJob.replace(
-    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-    "        run: |\n          node scripts/build-iat-b3-mandatory-ci-containment.mjs",
+  ["Windows expected-HOLD exit-code drift", exactNativeWindowsJob.replace(
+    "          if ($status -ne 2) {",
+    "          if ($status -ne 0) {",
   )],
-  ["Windows chained preflight bypass", exactNativeWindowsJob.replace(
-    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs || exit 0",
+  ["Windows missing hard-disable assertion", exactNativeWindowsJob.replace(
+    "              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {",
+    "              $false) {",
   )],
   ["Windows preflight continue-on-error", `${exactNativeWindowsJob}\n        continue-on-error: true`],
   ["Windows extra trailing step", `${exactNativeWindowsJob}\n      - run: node -e \"process.exit(0)\"`],

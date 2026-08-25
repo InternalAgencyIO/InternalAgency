@@ -47,8 +47,27 @@ jobs:
       - run: npm ci
       - name: Validate the Phase-A native containment source contract without execution
         run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs
-      - name: Preflight the offline native containment build from pinned local bytes
-        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs
+      - name: Confirm the offline native containment preflight remains exact HOLD
+        shell: bash
+        run: |
+          set +e
+          output="$(node scripts/build-iat-b3-mandatory-ci-containment.mjs)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [[ "$status" -ne 2 ]]; then
+            echo "Expected containment preflight exit 2/HOLD, got $status" >&2
+            exit 1
+          fi
+          node -e '
+            const value = JSON.parse(process.argv[1]);
+            if (value.status !== "HOLD" || value.ready !== false || value.complete !== false ||
+                value.buildAuthorized !== false || value.buildExecuted !== false ||
+                value.outputRootTouched !== false || !Array.isArray(value.blockers) ||
+                !value.blockers.includes("PHASE_B_NATIVE_BUILD_HARD_DISABLED")) {
+              throw new Error("containment preflight did not return the exact fail-closed HOLD projection");
+            }
+          ' "$output"
       - name: Enforce the mandatory B3 CI gate manifest
         run: node scripts/run-iat-b3-mandatory-ci-gate.mjs ci-manifest
       - name: Validate the Economy reproducible-build contract without building
@@ -82,6 +101,9 @@ jobs:
     runs-on: windows-2025
     timeout-minutes: 15
     steps:
+      - name: Enable repository long paths before checkout
+        shell: pwsh
+        run: git config --global core.longpaths true
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
@@ -92,7 +114,21 @@ jobs:
         run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs
         working-directory: projects/star-ascent/site
       - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)
-        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs
+        shell: pwsh
+        run: |
+          $output = (& node scripts/build-iat-b3-mandatory-ci-containment.mjs 2>&1 | Out-String).Trim()
+          $status = $LASTEXITCODE
+          Write-Host $output
+          if ($status -ne 2) {
+            throw "Expected containment preflight exit 2/HOLD, got $status"
+          }
+          $value = $output | ConvertFrom-Json
+          if ($value.status -ne 'HOLD' -or $value.ready -ne $false -or
+              $value.complete -ne $false -or $value.buildAuthorized -ne $false -or
+              $value.buildExecuted -ne $false -or $value.outputRootTouched -ne $false -or
+              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {
+            throw 'containment preflight did not return the exact fail-closed HOLD projection'
+          }
         working-directory: projects/star-ascent/site
 
   rust-host:
