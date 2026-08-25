@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "createdAtUtc": "2026-08-25T15:32:36.697Z",
+  "batch": 401,
+  "country": "Samoa",
+  "status": "local-candidate-prompts-inventoried-provider-occurrences-unavailable",
+  "authorityWarning": "These files are candidate local prompts only. They must not be asserted as the exact prompts dispatched to Meta because the historical provider chats are unavailable and later same-chat refinements may have superseded them.",
+  "candidatePrompts": [
+    {"scene":1624,"path":"tmp/world-195x4/batch-401/scene-1624-prompt.txt","bytes":2185,"sha256":"64E6ECA248E7794288092BC570E00EA0A7DE23A91B54DD33DE37F9FE05DA2C5F"},
+    {"scene":1625,"path":"tmp/world-195x4/batch-401/scene-1625-prompt.txt","bytes":2022,"sha256":"31A76B9AF43699CC60738CAA7AEB5332D9467D788756F45F9E16A784C370E724"},
+    {"scene":1626,"path":"tmp/world-195x4/batch-401/scene-1626-prompt.txt","bytes":2036,"sha256":"C4924B05DF0593AB195451EEFE8513CCEE1A902A54582F33092072C746AEBFC7"},
+    {"scene":1627,"path":"tmp/world-195x4/batch-401/scene-1627-prompt.txt","bytes":2053,"sha256":"AAF2F9549AF16AA9FBE9A2A39B22408DBE812F3087C1178A0A127D09E8B8E7AD"}
+  ],
+  "faceReferenceAuthority": {
+    "manifestPath": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "orderedScenes": [938,936,937],
+    "orderedSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ]
+  },
+  "providerRecoveryEvidence": [
+    "progress-reports/codex-generated-media/provider-occurrences/batch-401-samoa-read-only-recovery-blocker.jsonl",
+    "progress-reports/codex-generated-media/provider-occurrences/batch-401-samoa-provider-chat-unavailable.jsonl"
+  ],
+  "dispatchAuthorized": false,
+  "queueAdvanceAuthorized": false,
+  "xCadenceEffect": 0,
+  "requiredNextAction": "Recover exact provider occurrences or close Batch 401 as evidence-incomplete under a new authoritative checkpoint; never re-dispatch these candidate prompts merely to fill the evidence gap."
+}
