@@ -152,7 +152,7 @@ const exactSiteJobRunDefaults = [
 const exactNonWindowsJobDefaultAnchors = [
   [
     "  web-and-policy:",
-    "    name: Web, policy, and launch gates",
+    "    name: Web/policy checks (launch remains HOLD)",
     "    runs-on: ubuntu-latest",
     "    timeout-minutes: 45",
     exactSiteJobRunDefaults,

@@ -48,15 +48,23 @@ import {
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
   DEVNET_FEATURE_MINT_SEED,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
   IAT_V2_PROGRAM_ADMIN,
   IAT_V2_PROGRAM_ID,
 } from "../../programs/iat_v2/instructions.mjs";
 import {
   SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
 } from "../../programs/iat_v2/client.mjs";
+import {
+  buildCompleteAttendedBundle,
+  loadAttendedReceiptSet,
+  parseAttendedReceiptSet,
+} from "./attended-evidence.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
-const connection = new Connection(DEVNET_RPC, "confirmed");
+const FINALIZED_COMMITMENT = "finalized";
+const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
 const COMMUNITY_CUSTODY = new PublicKey("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
 
 function signerRole(signer) {
@@ -662,6 +670,7 @@ export default function FeatureRehearsal({
 }) {
   const [state, setState] = useState(null);
   const [evidence, setEvidence] = useState(loadEvidence);
+  const [operatorReceiptSets, setOperatorReceiptSets] = useState([]);
   const [pending, setPending] = useState(null);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("LOADING FEATURE STATE");
@@ -715,7 +724,7 @@ export default function FeatureRehearsal({
       const { provider, publicKey } = await getHardwareProvider(action.signer);
       const built = await buildActionTransaction(action, current, baseSnapshot, provider);
       ephemeralKeypair = built.ephemeralKeypair;
-      const latest = await connection.getLatestBlockhash("confirmed");
+      const latest = await connection.getLatestBlockhash(FINALIZED_COMMITMENT);
       built.transaction.feePayer = publicKey;
       built.transaction.recentBlockhash = latest.blockhash;
       if (ephemeralKeypair) built.transaction.partialSign(ephemeralKeypair);
@@ -749,6 +758,7 @@ export default function FeatureRehearsal({
         latest,
         wireSize,
         randomnessAddress: built.randomnessAddress,
+        week: Number.isSafeInteger(action.week) ? action.week : null,
       });
       setStatus("SIGNED // NOT BROADCAST — REVIEW THEN PRESS BROADCAST");
     } catch (caught) {
@@ -768,14 +778,14 @@ export default function FeatureRehearsal({
     try {
       const signature = await connection.sendRawTransaction(pending.signed.serialize(), {
         skipPreflight: false,
-        preflightCommitment: "confirmed",
+        preflightCommitment: FINALIZED_COMMITMENT,
         maxRetries: 3,
       });
       const confirmation = await connection.confirmTransaction({
         signature,
         blockhash: pending.latest.blockhash,
         lastValidBlockHeight: pending.latest.lastValidBlockHeight,
-      }, "confirmed");
+      }, FINALIZED_COMMITMENT);
       if (confirmation.value.err) {
         throw new Error(`Confirmation failed: ${json(confirmation.value.err)}`);
       }
@@ -788,7 +798,8 @@ export default function FeatureRehearsal({
         signature,
         messageSha256: pending.messageSha256,
         explorerUrl: explorer("tx", signature),
-        confirmedAtUtc: new Date().toISOString(),
+        finalizedAtUtc: new Date().toISOString(),
+        week: pending.week,
       };
       setEvidence((current) => [
         ...current.filter((entry) => entry.action !== record.action),
@@ -812,21 +823,21 @@ export default function FeatureRehearsal({
     setStatus("SIGNED TRANSACTION DISCARDED // NOTHING BROADCAST");
   }
 
-  function downloadEvidence() {
+  function featureEvidencePayload() {
     if (!state) return;
-    const payload = {
+    return {
       schema: "iat-v2-devnet-on-chain-feature-rehearsal-evidence/v1",
       status: "PARTIAL_PENDING_ALL_TIME_GATES_AND_AUTOMATED_DIRECT_EVIDENCE",
       network: "devnet",
       rpc: DEVNET_RPC,
-      programId: IAT_V2_PROGRAM_ID,
-      mint: baseSnapshot.mint,
+      programId: IAT_V2_PROGRAM_ID.toBase58(),
+      mint: baseSnapshot.mint.toBase58(),
       config: baseSnapshot.plan.config,
       genesisTimestamp: state.genesisTimestamp,
       currentWeek: state.currentWeek,
       currentCccRound: state.currentCccRound,
       agencies: FEATURE_AGENCY_OWNERS.map((owner, index) => ({ index, owner })),
-      participant: COMMUNITY_CUSTODY,
+      participant: COMMUNITY_CUSTODY.toBase58(),
       participantBalanceLamports: state.participantBalanceLamports,
       positions: state.positions,
       coreReward: state.coreReward,
@@ -841,13 +852,76 @@ export default function FeatureRehearsal({
       noSelfAttestation: true,
       secretMaterialIncluded: false,
     };
+  }
+
+  function downloadJson(payload, filename) {
     const blob = new Blob([`${json(payload)}\n`], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = "iat-v2-devnet-on-chain-feature-rehearsal-evidence.json";
+    anchor.download = filename;
     anchor.click();
     URL.revokeObjectURL(url);
+  }
+
+  function downloadEvidence() {
+    const payload = featureEvidencePayload();
+    if (!payload) return;
+    downloadJson(payload, "iat-v2-devnet-on-chain-feature-rehearsal-evidence.json");
+  }
+
+  function evidenceBinding() {
+    return {
+      sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+      programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+      mint: baseSnapshot.mint.toBase58(),
+    };
+  }
+
+  async function importReceiptSets(event) {
+    setError("");
+    try {
+      const files = [...(event.target.files ?? [])];
+      const imported = await Promise.all(files.map(async (file) => (
+        parseAttendedReceiptSet(await file.text(), evidenceBinding())
+      )));
+      setOperatorReceiptSets(imported);
+      setStatus(`IMPORTED ${imported.length} SOURCE-BOUND RECEIPT SET${imported.length === 1 ? "" : "S"}`);
+    } catch (caught) {
+      setOperatorReceiptSets([]);
+      setStatus("HOLD // RECEIPT IMPORT REJECTED");
+      setError(caught instanceof Error ? caught.message : String(caught));
+    } finally {
+      event.target.value = "";
+    }
+  }
+
+  function downloadAggregateEvidence() {
+    if (!state) return;
+    setError("");
+    try {
+      const exactBinding = evidenceBinding();
+      const localReceiptSet = loadAttendedReceiptSet(localStorage, exactBinding);
+      const payload = buildCompleteAttendedBundle({
+        receiptSets: [localReceiptSet, ...operatorReceiptSets],
+        featureExport: featureEvidencePayload(),
+        expectedBinding: exactBinding,
+        programId: IAT_V2_PROGRAM_ID.toBase58(),
+        participant: COMMUNITY_CUSTODY.toBase58(),
+      });
+      downloadJson(payload, "iat-v2-current-source-attended-devnet-console-bundle.json");
+      setStatus("COMPLETE ATTENDED BUNDLE EXPORTED // AUTOMATED DIRECT EVIDENCE STILL REQUIRED");
+    } catch (caught) {
+      setStatus("HOLD // COMPLETE BUNDLE NOT AVAILABLE");
+      setError(caught instanceof Error ? caught.message : String(caught));
+    }
+  }
+
+  function clearFeatureReceipts() {
+    localStorage.removeItem(FEATURE_EVIDENCE_KEY);
+    localStorage.removeItem(LEGACY_FEATURE_EVIDENCE_KEY);
+    setEvidence([]);
+    setStatus("LOCAL FEATURE RECEIPTS CLEARED // ON-CHAIN STATE UNCHANGED");
   }
 
   return (
@@ -946,6 +1020,19 @@ export default function FeatureRehearsal({
         <p>Evidence contains public accounts, state, message hashes, signatures, and Explorer links. No secrets.</p>
         <button onClick={downloadEvidence} disabled={!state || evidence.length === 0}>
           DOWNLOAD FEATURE EVIDENCE
+        </button>
+        <label className="action-link">
+          IMPORT SOURCE-BOUND PROGRAM / MIGRATION RECEIPTS
+          <input type="file" accept="application/json" multiple onChange={importReceiptSets} hidden />
+        </label>
+        <button onClick={downloadAggregateEvidence} disabled={!state || evidence.length === 0}>
+          EXPORT COMPLETE ATTENDED BUNDLE
+        </button>
+        <button className="discard" onClick={() => setOperatorReceiptSets([])} disabled={operatorReceiptSets.length === 0}>
+          DISCARD IMPORTED RECEIPTS ({operatorReceiptSets.length})
+        </button>
+        <button className="discard" onClick={clearFeatureReceipts} disabled={evidence.length === 0 || busy || Boolean(pending)}>
+          CLEAR LOCAL FEATURE RECEIPTS
         </button>
       </div>
     </section>

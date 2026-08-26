@@ -21,6 +21,7 @@ import {
   DEVNET_FEATURE_MINT_SEED,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
   IAT_V2_PROGRAM_ADMIN,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
@@ -30,6 +31,12 @@ import {
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
 } from "../../programs/iat_v2/instructions.mjs";
+import {
+  canonicalReceiptSet,
+  clearAttendedReceipts,
+  loadAttendedReceiptSet,
+  persistAttendedReceipt,
+} from "./attended-evidence.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
@@ -74,6 +81,7 @@ async function loadMigrationSnapshot(sha256Hex) {
     !Number.isSafeInteger(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES)
     || IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES <= 0
     || !/^[0-9a-f]{64}$/u.test(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 ?? "")
+    || !/^[0-9a-f]{40}$/u.test(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD ?? "")
   ) {
     throw new Error("Migration-capable program artifact is not yet bound to an exact public CI build");
   }
@@ -284,6 +292,11 @@ async function loadMigrationSnapshot(sha256Hex) {
     legacy,
     hardened,
     recoveries,
+    evidenceBinding: {
+      sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+      programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+      mint: mint.toBase58(),
+    },
   };
 }
 
@@ -296,7 +309,7 @@ export default function LegacyRoundMigration({
   const local = isLocalOperatorHost(window.location.hostname);
   const [snapshot, setSnapshot] = useState(null);
   const [pending, setPending] = useState(null);
-  const [receipts, setReceipts] = useState([]);
+  const [receiptSet, setReceiptSet] = useState(null);
   const [logs, setLogs] = useState([]);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("VERIFYING SETTLED LEGACY ROUNDS // NO SIGNING");
@@ -307,6 +320,7 @@ export default function LegacyRoundMigration({
     setError("");
     const next = await loadMigrationSnapshot(sha256Hex);
     setSnapshot(next);
+    setReceiptSet(loadAttendedReceiptSet(localStorage, next.evidenceBinding));
     setStatus(snapshotStatus(next));
     return next;
   }
@@ -358,7 +372,14 @@ export default function LegacyRoundMigration({
       const hardwareSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
       if (!hardwareSignature?.signature) throw new Error("Reviewed Model T signature is missing");
       if (!signed.verifySignatures()) throw new Error("Hardware-signed migration failed local verification");
-      setPending({ signed, latest, messageSha256, round, kind: "migration" });
+      setPending({
+        signed,
+        latest,
+        messageSha256,
+        round,
+        kind: "migration",
+        evidenceBinding: current.evidenceBinding,
+      });
       setStatus(`SIGNED WEEK ${round.week} // NOT BROADCAST — USE THE SEPARATE BUTTON`);
     } catch (caught) {
       setStatus("HOLD // MIGRATION PREPARATION STOPPED");
@@ -414,7 +435,14 @@ export default function LegacyRoundMigration({
       const hardwareSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
       if (!hardwareSignature?.signature) throw new Error("Reviewed Model T signature is missing");
       if (!signed.verifySignatures()) throw new Error("Hardware-signed recovery failed local verification");
-      setPending({ signed, latest, messageSha256, round, kind: "neutral-backfill" });
+      setPending({
+        signed,
+        latest,
+        messageSha256,
+        round,
+        kind: "neutral-backfill",
+        evidenceBinding: current.evidenceBinding,
+      });
       setStatus(`SIGNED NEUTRAL WEEK ${round.week} // NOT BROADCAST — USE THE SEPARATE BUTTON`);
     } catch (caught) {
       setStatus("HOLD // HISTORICAL NEUTRAL RECOVERY PREPARATION STOPPED");
@@ -444,12 +472,24 @@ export default function LegacyRoundMigration({
       if (confirmation.value.err) {
         throw new Error(`Migration confirmation failed: ${JSON.stringify(confirmation.value.err)}`);
       }
-      setReceipts((current) => [...current, {
+      const week = Number(pending.round.week);
+      const canonicalAction = pending.kind === "migration"
+        ? `MIGRATE_LEGACY_ROUND_WEEK_${week}`
+        : `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_${week}`;
+      const canonicalTitle = pending.kind === "migration"
+        ? `Migrate settled legacy CCC round week ${week}`
+        : `Backfill terminal-neutral historical CCC round week ${week}`;
+      const nextReceiptSet = persistAttendedReceipt(localStorage, pending.evidenceBinding, {
+        action: canonicalAction,
+        title: canonicalTitle,
         signature,
-        week: pending.round.week.toString(),
         messageSha256: pending.messageSha256,
+        explorerUrl: explorer("tx", signature),
+        finalizedAtUtc: new Date().toISOString(),
         kind: pending.kind,
-      }]);
+        week,
+      });
+      setReceiptSet(nextReceiptSet);
       setPending(null);
       const next = await loadMigrationSnapshot(sha256Hex);
       setSnapshot(next);
@@ -460,6 +500,24 @@ export default function LegacyRoundMigration({
     } finally {
       setBusy(false);
     }
+  }
+
+  function downloadReceiptSet() {
+    if (!receiptSet || receiptSet.receipts.length === 0) return;
+    const blob = new Blob([`${JSON.stringify(receiptSet, null, 2)}\n`], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "iat-v2-current-source-migration-backfill-receipts.json";
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearReceiptSet() {
+    if (!snapshot?.evidenceBinding) return;
+    clearAttendedReceipts(localStorage, snapshot.evidenceBinding);
+    setReceiptSet(canonicalReceiptSet({ ...snapshot.evidenceBinding, receipts: [] }));
+    setStatus("ALL LOCAL SOURCE-BOUND ATTENDED RECEIPTS CLEARED // ON-CHAIN STATE UNCHANGED");
   }
 
   return (
@@ -565,12 +623,23 @@ export default function LegacyRoundMigration({
           )}
         </section>
 
-        {receipts.map((receipt) => (
+        {receiptSet?.receipts
+          .filter((receipt) => ["migration", "neutral-backfill"].includes(receipt.kind))
+          .map((receipt) => (
           <section className="evidence" key={receipt.signature}>
             <div><small>FINALIZED DEVNET {receipt.kind === "migration" ? "MIGRATION" : "NEUTRAL RECOVERY"} // WEEK {receipt.week}</small><strong>{short(receipt.signature, 12)}</strong></div>
             <a href={explorer("tx", receipt.signature)} target="_blank" rel="noreferrer">OPEN EXPLORER ↗</a>
           </section>
         ))}
+        {receiptSet?.receipts.length > 0 && (
+          <section className="command">
+            <div className="command-status"><small>CANONICAL RECEIPTS</small><strong>{receiptSet.receipts.length} SOURCE-BOUND RECORD(S)</strong></div>
+            <div className="command-actions">
+              <button onClick={downloadReceiptSet} disabled={busy || Boolean(pending)}>EXPORT MIGRATION RECEIPTS</button>
+              <button className="discard" onClick={clearReceiptSet} disabled={busy || Boolean(pending)}>CLEAR ALL LOCAL ATTENDED RECEIPTS</button>
+            </div>
+          </section>
+        )}
         {snapshot?.legacy.length === 0 && snapshot.recoveries.every((round) => round.complete) && (
           <section className="command">
             <div className="command-status"><small>NEXT</small><strong>RUN THE FEATURE REHEARSAL</strong></div>

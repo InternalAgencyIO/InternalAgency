@@ -2,7 +2,7 @@ const EVIDENCE_ROOT = "/evidence/iat-v2";
 const PUBLICATION_COMMIT = "eb2e59c2d41f9f716227887e54a5300d9b463dd0";
 const PUBLICATION_ROOT =
   `https://github.com/InternalAgencyIO/InternalAgency/blob/${PUBLICATION_COMMIT}/projects/star-ascent/site/docs/b3/evidence`;
-const CI_RUN = "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/32812616041";
+const CI_RUN = "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/32937913614";
 const GITHUB_EVIDENCE =
   `https://github.com/InternalAgencyIO/InternalAgency/tree/${PUBLICATION_COMMIT}/projects/star-ascent/site/public/evidence/iat-v2`;
 
@@ -18,7 +18,7 @@ const evidenceRecords: EvidenceRecord[] = [
   {
     file: "IAT-B3-DEVNET-HW-PROOF-20260825.json",
     sha256: "175759dce910b3b2a4e346267608aae2942eec02260fbf4e8340ff59169ce290",
-    en: ["TREZOR-BACKED DEVNET PROOF", "Verified Ed25519 hardware signature, frozen request binding, signer public key, and independent verification result."],
+    en: ["OFF-CHAIN SIGNATURE PROOF", "Verified Ed25519 signature, frozen request binding, signer public key, and independent verification result. This artifact does not prove hardware provenance or a Devnet transaction."],
     href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-PROOF-20260825.json`,
     action: "OPEN VERIFIED PROOF",
   },
@@ -71,33 +71,33 @@ const evidenceRecords: EvidenceRecord[] = [
 const progressRecords = [
   {
     state: "PASS",
-    label: "HARDWARE PROOF",
-    detail: "The Trezor-backed Ed25519 Devnet proof verifies independently and its frozen public artifacts are available at exact commit hashes.",
+    label: "OFF-CHAIN SIGNATURE PROOF",
+    detail: "The historical Ed25519 signature and frozen request binding verify independently at exact commit hashes. They are not a transaction receipt and do not independently prove the signing device.",
     href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-PROOF-20260825.json`,
   },
   {
-    state: "PASS",
+    state: "HOLD",
     label: "RUST HOST TESTS",
-    detail: "Default feature isolation and feature-gated runtime bridge tests passed on the public PR head.",
-    href: `${CI_RUN}/job/97694761630`,
+    detail: "Reference run 32937913614 failed 3 retained-v2 parity assertions after 50 tests passed. This board stays HOLD until a newer exact public run is bound.",
+    href: `${CI_RUN}/job/98082727542`,
   },
   {
-    state: "PASS",
+    state: "HOLD",
     label: "VERIFIABLE SBF BUILD",
-    detail: "Deterministic evidence, native adapter build, three isolated-validator rehearsals, and artifact upload passed in 18m17s without deployment.",
-    href: `${CI_RUN}/job/97694761970`,
+    detail: "No passing current-source artifact is bound on this board. In reference run 32937913614, the deterministic build stopped on the same 3 Rust assertions and upload was skipped.",
+    href: `${CI_RUN}/job/98082727557`,
   },
   {
     state: "HOLD",
     label: "MANDATORY LIVE-EVIDENCE GATE",
-    detail: "Source-bound live build and runtime receipts plus required direct observers are still absent. The gate exits 2 and remains blocking by design.",
-    href: `${CI_RUN}/job/97694761706`,
+    detail: "Source-bound live build and runtime receipts plus required direct observers are still absent. The canonical gate remains nonexecuting and nonauthorizing HOLD.",
+    href: `${CI_RUN}/job/98082727615`,
   },
   {
     state: "HOLD",
     label: "WINDOWS NON-EVIDENCE SMOKE",
-    detail: "Long-path checkout succeeds, but the hosted filesystem cannot prove the required same-descriptor identity and fails closed.",
-    href: `${CI_RUN}/job/97694761414`,
+    detail: "Reference run 32937913614 failed closed on a hash-pinned authority-file newline mismatch. The local LF pin still requires fresh public CI verification.",
+    href: `${CI_RUN}/job/98082727399`,
   },
   {
     state: "BLOCKED",
@@ -112,7 +112,7 @@ const copy = {
     launch: "LAUNCH CONTROL",
     eyebrow: "STAR ASCENT // PUBLIC PROOF BOARD",
     title: <>NO CLAIM<br />WITHOUT PROOF.</>,
-    lede: "The Trezor-backed Devnet hardware proof, its frozen unsigned request, and an independent verifier are public at exact hashes. Rust and the full verifiable SBF rehearsal are green. Missing live receipts still hold the Mainnet gate closed.",
+    lede: "Historical off-chain signature proof remains independently verifiable at exact hashes. No passing current-source Rust run or verifiable SBF artifact is bound on this board. Mainnet is UNSCHEDULED HOLD until funding and every canonical gate clear.",
     fields: [
       ["Mainnet mint", "HOLD", "No mainnet IAT mint is represented by these Devnet records, and no Mainnet action was performed."],
       ["V2 program", "Devnet live", "Program 62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj is named in both V2 rehearsal records."],
@@ -124,16 +124,16 @@ const copy = {
     ],
     evidence: "CC0 PUBLIC EVIDENCE",
     evidenceTitle: "RAW BYTES. PUBLIC HASHES. NO SECRETS.",
-    evidenceLede: "The newest hardware proof artifacts are frozen at the public PR head. The earlier initialization and feature exports describe separate Devnet rehearsal instances, so their mint and configuration addresses differ. None is a Mainnet mint.",
+    evidenceLede: "The historical off-chain signature artifacts are frozen at publication commit eb2e59c. The earlier initialization and feature exports describe separate Devnet rehearsal instances, so their mint and configuration addresses differ. None is a Mainnet mint or current-source CI artifact.",
     download: "OPEN JSON",
     hash: "SHA-256",
     github: "OPEN THE GITHUB EVIDENCE DIRECTORY",
     cc0: "CC0 1.0 PUBLIC-DOMAIN DEDICATION",
     scope: "WHAT THIS DOES NOT PROVE",
     scopeTitle: "Publication is not launch approval.",
-    scopeBody: "The published signature proves control of the bound Devnet signing identity for the frozen request; it is not a transaction signature or launch authorization. Source-bound live build and runtime receipts, required direct observers, final Mainnet preflight, and ceremony scheduling are not complete. Mainnet remains HOLD.",
+    scopeBody: "The published signature verifies against the bound public key and frozen request; it does not independently prove hardware provenance, a Devnet transaction, or launch authorization. Current-source Rust/SBF evidence, source-bound live receipts, required direct observers, final Mainnet preflight, funding, and ceremony scheduling are not complete. Mainnet remains UNSCHEDULED HOLD.",
     progress: "CURRENT PUBLIC CHECKPOINT",
-    progressTitle: "PROOF GREEN. GATES HONEST.",
+    progressTitle: "HISTORICAL PROOF VALID. CURRENT SOURCE HOLD.",
     progressLede: "This board separates completed verification from fail-closed HOLD conditions. A red gate is not relabeled as success.",
     inspect: "INSPECT RECEIPT",
     order: "PUBLICATION ORDER",
@@ -157,7 +157,7 @@ export default function ProofPage() {
           <span className="proof-portrait-scan" aria-hidden="true" />
           <span className="proof-portrait-reticle" aria-hidden="true" />
         </div>
-        <figcaption><span>RADIANCE // SIGNAL OPERATOR</span><b>DEVNET PROOF ONLINE</b></figcaption>
+        <figcaption><span>RADIANCE // SIGNAL OPERATOR</span><b>CURRENT SOURCE // HOLD</b></figcaption>
       </figure>
     </section>
     <section className="proof-progress">

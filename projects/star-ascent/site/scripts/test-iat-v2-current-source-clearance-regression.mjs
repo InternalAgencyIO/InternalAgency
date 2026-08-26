@@ -125,6 +125,16 @@ try {
   for (const field of Object.keys(clear.clearance)) clear.clearance[field] = true;
   clear.observedAtUtc = now;
   expectFail("self-authored evidence cannot clear without CI provenance", clear, "canonical public-GitHub CI SBF provenance");
+  expectFail(
+    "self-authored identity integration cannot clear",
+    clear,
+    "predicate-specific externally authenticated X/D1 receipt validator",
+  );
+  expectFail(
+    "self-authored security closure cannot clear",
+    clear,
+    "predicate-specific independently completed CI security artifact validator",
+  );
 
   const digestDrift = structuredClone(clear);
   digestDrift.evidence.currentSourceSbf.sha256 = "f".repeat(64);
@@ -138,7 +148,7 @@ try {
   unsignedDevnet.evidence.signedDevnetRehearsal.sha256 = sha256(readFileSync(join(sandbox, devnetPath)));
   expectFail("unsigned Devnet evidence", unsignedDevnet, "requires finalized Solana transaction signatures");
 
-  console.log("IAT V2 current-source clearance regression passed: historical HOLD remains valid, status-only and self-authored evidence cannot clear without canonical public-GitHub CI provenance and exact artifacts, while digest or signed-Devnet drift fails closed.");
+  console.log("IAT V2 current-source clearance regression passed: historical HOLD remains valid; status-only, generic X/D1, generic security, digest-drifted, and unsigned evidence all fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

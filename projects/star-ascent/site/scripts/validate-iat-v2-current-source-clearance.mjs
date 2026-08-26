@@ -59,6 +59,18 @@ const predicates = {
   productionIdentityIntegration: { predicate: "PRODUCTION_IDENTITY_INTEGRATION_REHEARSAL", network: "production-integration", signatures: false },
   automatedSecurityClosure: { predicate: "AUTOMATED_SECURITY_CLOSURE", network: "source", signatures: false },
 };
+// V1's generic URL plus source-authored check-receipt envelope is sufficient for
+// byte binding, but it cannot authenticate either an X/Cloudflare integration
+// observation or an independently completed security run. Keep those predicates
+// non-clearing until each has a predicate-specific validator for its external
+// receipt/artifact. This prevents a repository author from manufacturing the two
+// remaining assertions after obtaining an otherwise valid public CI SBF artifact.
+const externalPredicateBlockers = Object.freeze({
+  productionIdentityIntegration:
+    "production identity integration cannot clear under v1 without a predicate-specific externally authenticated X/D1 receipt validator",
+  automatedSecurityClosure:
+    "automated security closure cannot clear under v1 without a predicate-specific independently completed CI security artifact validator",
+});
 
 check(exactKeys(record, topKeys), "record must contain only the canonical top-level fields");
 check(record.schema === "iat-v2-current-source-clearance/v1", "unexpected current-source clearance schema");
@@ -172,6 +184,9 @@ if (record.status === "CLEAR") {
       }
     } else {
       check(Array.isArray(evidence.transactionSignatures) && evidence.transactionSignatures.length === 0, `evidence.${field} must not imply transaction signatures`);
+    }
+    if (Object.hasOwn(externalPredicateBlockers, field)) {
+      check(false, externalPredicateBlockers[field]);
     }
   }
 }

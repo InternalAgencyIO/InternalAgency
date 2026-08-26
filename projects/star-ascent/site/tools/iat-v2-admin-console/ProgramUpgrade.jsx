@@ -12,12 +12,15 @@ import {
   BPF_UPGRADEABLE_LOADER_ID,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
   IAT_V2_PROGRAM_ADMIN,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
   inspectReviewedUpgradeableProgramArtifact,
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
+  deriveDeterministicDevnetMint,
+  DEVNET_FEATURE_MINT_SEED,
 } from "../../programs/iat_v2/instructions.mjs";
 import {
   EXTEND_PROGRAM_CHECKED_FEATURE_ID,
@@ -25,6 +28,12 @@ import {
   computeProgramDataExtension,
   inspectExtendProgramCheckedFeature,
 } from "./program-extension.mjs";
+import {
+  canonicalReceiptSet,
+  clearAttendedReceipts,
+  loadAttendedReceiptSet,
+  persistAttendedReceipt,
+} from "./attended-evidence.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
@@ -123,6 +132,7 @@ export default function ProgramUpgrade({
   const [snapshot, setSnapshot] = useState(null);
   const [pending, setPending] = useState(null);
   const [receipt, setReceipt] = useState(null);
+  const [receiptSet, setReceiptSet] = useState(null);
   const [logs, setLogs] = useState([]);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("WAITING FOR VERIFIED BUFFER ADDRESS");
@@ -135,10 +145,17 @@ export default function ProgramUpgrade({
       !Number.isSafeInteger(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES)
       || IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES <= 0
       || !/^[0-9a-f]{64}$/u.test(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 ?? "")
+      || !/^[0-9a-f]{40}$/u.test(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD ?? "")
     ) {
       throw new Error("Migration-capable program artifact is not yet bound to an exact public CI build");
     }
     const buffer = bufferInput.trim() ? new PublicKey(bufferInput.trim()) : null;
+    const evidenceMint = await deriveDeterministicDevnetMint({ seed: DEVNET_FEATURE_MINT_SEED });
+    const evidenceBinding = {
+      sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+      programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+      mint: evidenceMint.toBase58(),
+    };
     const addresses = [
       IAT_V2_PROGRAM_ID,
       IAT_V2_PROGRAM_DATA_ADDRESS,
@@ -199,6 +216,7 @@ export default function ProgramUpgrade({
       rentTopUpLamports: extension.rentTopUpLamports,
       extendProgramChecked: extendFeature.active,
       extendProgramCheckedActivationSlot: extendFeature.activationSlot,
+      evidenceBinding,
     };
     if (extension.extensionRequired) {
       return {
@@ -283,6 +301,7 @@ export default function ProgramUpgrade({
     try {
       const next = await loadBufferSnapshot();
       setSnapshot(next);
+      setReceiptSet(loadAttendedReceiptSet(localStorage, next.evidenceBinding));
       setStatus(statusForSnapshot(next));
       return next;
     } catch (caught) {
@@ -365,6 +384,8 @@ export default function ProgramUpgrade({
         action: current.action,
         additionalProgramDataBytes: current.additionalProgramDataBytes,
         rentTopUpLamports: current.rentTopUpLamports,
+        evidenceBinding: current.evidenceBinding,
+        preUpgradeProgramDataCapacityBytes: current.programDataCapacityBytes,
       });
       setStatus("SIGNED // NOT BROADCAST — PRESS THE SEPARATE BROADCAST BUTTON");
     } catch (caught) {
@@ -402,7 +423,34 @@ export default function ProgramUpgrade({
         throw new Error(`Upgrade confirmation failed: ${JSON.stringify(confirmation.value.err)}`);
       }
       const completedAction = pending.action;
-      setReceipt({ signature: nextSignature, action: completedAction });
+      const canonicalAction = completedAction === "extend-program"
+        ? "EXTEND_PROGRAM_DATA"
+        : completedAction === "upgrade"
+          ? "UPGRADE_PROGRAM"
+          : "RETURN_BUFFER_AUTHORITY_TO_DEPLOYER";
+      const canonicalTitle = completedAction === "extend-program"
+        ? "Extend IAT V2 ProgramData capacity"
+        : completedAction === "upgrade"
+          ? "Upgrade IAT V2 to the CI-bound migration artifact"
+          : "Return incomplete buffer authority to the Devnet deployer";
+      const canonicalReceipt = {
+        action: canonicalAction,
+        title: canonicalTitle,
+        signature: nextSignature,
+        messageSha256: pending.messageSha256,
+        explorerUrl: explorer("tx", nextSignature),
+        finalizedAtUtc: new Date().toISOString(),
+        kind: "program",
+        week: null,
+      };
+      const nextReceiptSet = persistAttendedReceipt(
+        localStorage,
+        pending.evidenceBinding,
+        canonicalReceipt,
+        { preUpgradeProgramDataCapacityBytes: pending.preUpgradeProgramDataCapacityBytes },
+      );
+      setReceipt(canonicalReceipt);
+      setReceiptSet(nextReceiptSet);
       setPending(null);
       const next = await loadBufferSnapshot();
       setSnapshot(next);
@@ -417,6 +465,25 @@ export default function ProgramUpgrade({
     } finally {
       setBusy(false);
     }
+  }
+
+  function downloadReceiptSet() {
+    if (!receiptSet || receiptSet.receipts.length === 0) return;
+    const blob = new Blob([`${JSON.stringify(receiptSet, null, 2)}\n`], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "iat-v2-current-source-program-receipts.json";
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearReceiptSet() {
+    if (!snapshot?.evidenceBinding) return;
+    clearAttendedReceipts(localStorage, snapshot.evidenceBinding);
+    setReceiptSet(canonicalReceiptSet({ ...snapshot.evidenceBinding, receipts: [] }));
+    setReceipt(null);
+    setStatus("ALL LOCAL SOURCE-BOUND ATTENDED RECEIPTS CLEARED // ON-CHAIN STATE UNCHANGED");
   }
 
   return (
@@ -539,10 +606,20 @@ export default function ProgramUpgrade({
         {receipt && (
           <section className="evidence">
             <div>
-              <small>FINALIZED DEVNET {receipt.action.replaceAll("-", " ").toUpperCase()}</small>
+              <small>FINALIZED DEVNET {receipt.action.replaceAll("_", " ")}</small>
               <strong>{short(receipt.signature, 12)}</strong>
+              <code>MESSAGE {receipt.messageSha256}</code>
             </div>
             <a href={explorer("tx", receipt.signature)} target="_blank" rel="noreferrer">OPEN EXPLORER ↗</a>
+          </section>
+        )}
+        {receiptSet?.receipts.length > 0 && (
+          <section className="command">
+            <div className="command-status"><small>CANONICAL RECEIPTS</small><strong>{receiptSet.receipts.length} SOURCE-BOUND RECORD(S)</strong></div>
+            <div className="command-actions">
+              <button onClick={downloadReceiptSet} disabled={busy || Boolean(pending)}>EXPORT PROGRAM RECEIPTS</button>
+              <button className="discard" onClick={clearReceiptSet} disabled={busy || Boolean(pending)}>CLEAR ALL LOCAL ATTENDED RECEIPTS</button>
+            </div>
           </section>
         )}
 

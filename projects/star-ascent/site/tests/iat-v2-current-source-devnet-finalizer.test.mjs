@@ -6,19 +6,48 @@ import { join } from "node:path";
 import test from "node:test";
 import {
   Keypair,
+  PublicKey,
   Transaction,
   TransactionInstruction,
 } from "@solana/web3.js";
 import {
   CANONICAL_DEVNET_GENESIS_HASH,
   CurrentSourceEvidenceError,
+  createJsonRpcCaller,
   finalizeCurrentSourceDevnetEvidence,
+  observeCompleteRehearsalLedgerProof,
   writeCurrentSourceEvidenceStage,
 } from "../scripts/finalize-iat-v2-current-source-devnet-evidence.mjs";
 
 const LOADER = "BPFLoaderUpgradeab1e11111111111111111111111";
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const blockhash = Keypair.generate().publicKey.toBase58();
+
+function base58Bytes(bytes) {
+  const alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+  let number = BigInt(`0x${Buffer.from(bytes).toString("hex")}`);
+  let value = "";
+  while (number > 0n) { value = `${alphabet[Number(number % 58n)]}${value}`; number /= 58n; }
+  for (const byte of bytes) { if (byte !== 0) break; value = `1${value}`; }
+  return value;
+}
+
+const transactionSignature = (transaction) => base58Bytes(transaction.signature);
+
+function signedInstructionTransaction({ signer, programId, keys = [], data }) {
+  const transaction = new Transaction({ feePayer: signer.publicKey, recentBlockhash: blockhash }).add(
+    new TransactionInstruction({ programId, keys, data }),
+  );
+  transaction.sign(signer);
+  return transaction;
+}
+
+function blockEntry(transaction, err = null, meta = {}) {
+  return {
+    transaction: [transaction.serialize().toString("base64"), "base64"],
+    meta: { err, loadedAddresses: { writable: [], readonly: [] }, ...meta },
+  };
+}
 
 function fixture() {
   const signer = Keypair.generate();
@@ -82,6 +111,7 @@ function fixture() {
   };
   const responses = {
     getGenesisHash: CANONICAL_DEVNET_GENESIS_HASH,
+    getSlot: 650,
     getSignatureStatuses: {
       context: { slot: 700 },
       value: [{ slot: 600, confirmations: null, err: null, confirmationStatus: "finalized" }],
@@ -96,8 +126,9 @@ function fixture() {
   };
   const rpcCall = async (method, params) => {
     if (method === "getAccountInfo") {
-      if (params[0] === programId.toBase58()) return { value: { owner: LOADER, executable: true, data: [programAccount.toString("base64"), "base64"] } };
-      if (params[0] === programDataAddress.toBase58()) return { value: { owner: LOADER, executable: false, data: [programData.toString("base64"), "base64"] } };
+      assert.equal(params[1].minContextSlot, 650);
+      if (params[0] === programId.toBase58()) return { context: { slot: 700 }, value: { owner: LOADER, executable: true, data: [programAccount.toString("base64"), "base64"] } };
+      if (params[0] === programDataAddress.toBase58()) return { context: { slot: 700 }, value: { owner: LOADER, executable: false, data: [programData.toString("base64"), "base64"] } };
       throw new Error(`unexpected account: ${params[0]}`);
     }
     return responses[method];
@@ -120,9 +151,9 @@ test("partial finalizer observes canonical Devnet but cannot clear from one succ
   assert.equal(result.clearingEligible, false);
   assert.equal(
     result.clearingBlocker,
-    "EXACT_ROSTER_INSTRUCTION_DECODING_AND_COMPLETE_POST_STATE_VERIFICATION_NOT_IMPLEMENTED",
+    "PARTIAL_CONSOLE_EXPORT",
   );
-  assert.equal(result.directEvidence.observationMode, "AUTOMATED_SOURCE_BOUND_DIRECT_OBSERVATION");
+  assert.equal(result.directEvidence.observationMode, "INJECTED_LIBRARY_TRANSPORT_NON_CLEARING_OBSERVATION");
   assert.equal(result.directEvidence.observedAtUtc, "2026-08-26T12:02:03Z");
   assert.deepEqual(result.directEvidence.transactionSignatures, [value.txid]);
   assert.deepEqual(result.directEvidence.receipts, [`https://explorer.solana.com/tx/${value.txid}?cluster=devnet`]);
@@ -155,7 +186,7 @@ test("finalizer polls until every selected status is finalized", async () => {
   const rpcCall = async (method, params) => {
     if (method !== "getSignatureStatuses") return value.rpcCall(method, params);
     statusCalls += 1;
-    if (statusCalls === 1) return { context: { slot: 601 }, value: [{ slot: 600, confirmations: 1, err: null, confirmationStatus: "confirmed" }] };
+    if (statusCalls === 1) return { context: { slot: 700 }, value: [{ slot: 600, confirmations: 1, err: null, confirmationStatus: "confirmed" }] };
     return value.responses.getSignatureStatuses;
   };
   await finalizeCurrentSourceDevnetEvidence({
@@ -186,28 +217,61 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
   assert.equal(subset.directEvidence.predicate, "CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL_PARTIAL");
 
   const incompleteClaim = {
-    ...value.consoleExport,
     schema: "iat-v2-current-source-attended-devnet-console-bundle/v1",
     status: "COMPLETE_PENDING_AUTOMATED_DIRECT_EVIDENCE",
     rosterVersion: "IAT_V2_MIGRATION_BACKFILL_WEEK11_V1",
     sourceCommit: value.binding.sourceCommit,
     programArtifactSha256: value.binding.programArtifactSha256,
+    network: "devnet",
+    rpc: "https://api.devnet.solana.com",
+    programId: value.programId.toBase58(),
+    mint: Keypair.generate().publicKey.toBase58(),
+    participant: value.signer.publicKey.toBase58(),
     conditions: {
       programDataExtensionRequired: false,
       preUpgradeProgramDataCapacityBytes: value.binding.programArtifactBytes,
       switchboardRandomnessCreationRequired: false,
       cccRound11TerminalAction: "REVEAL_CCC_ROUND_11",
     },
+    transactions: value.consoleExport.transactions.map((item) => ({
+      action: item.action,
+      title: item.title,
+      signature: item.signature,
+      messageSha256: item.messageSha256,
+      explorerUrl: item.explorerUrl,
+      finalizedAtUtc: item.confirmedAtUtc,
+      kind: "feature",
+      week: 11,
+    })),
+    exportedAtUtc: value.consoleExport.exportedAtUtc,
+    mainnetStatus: "HOLD",
+    automatedDirectEvidenceRequired: true,
+    humanReviewerRequired: false,
+    noSelfAttestation: true,
+    secretMaterialIncluded: false,
   };
+  const incomplete = await finalizeCurrentSourceDevnetEvidence({
+    consoleExport: incompleteClaim,
+    binding: value.binding,
+    rpcCall: value.rpcCall,
+    expectedProgramId: value.programId.toBase58(),
+    expectedSigner: value.signer.publicKey.toBase58(),
+  });
+  assert.equal(incomplete.clearingEligible, false);
+  assert.equal(incomplete.directEvidence.predicate, "CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL_PARTIAL");
+  assert.equal(incomplete.clearingBlocker, "COMPLETE_REHEARSAL_ACTION_ROSTER_OR_ORDER_MISMATCH");
+
+  const contradictoryReceipt = structuredClone(incompleteClaim);
+  contradictoryReceipt.transactions[0].kind = "program";
   await assert.rejects(
     finalizeCurrentSourceDevnetEvidence({
-      consoleExport: incompleteClaim,
+      consoleExport: contradictoryReceipt,
       binding: value.binding,
       rpcCall: value.rpcCall,
       expectedProgramId: value.programId.toBase58(),
       expectedSigner: value.signer.publicKey.toBase58(),
     }),
-    (error) => error instanceof CurrentSourceEvidenceError && error.code === "COMPLETE_ROSTER_HOLD",
+    (error) => error instanceof CurrentSourceEvidenceError && error.code === "CONSOLE_EXPORT_HOLD",
   );
 });
 
@@ -232,7 +296,7 @@ test("finalizer fails closed on wrong network, timeout, failed transaction, mess
         consoleExport: value.consoleExport,
         binding: value.binding,
         rpcCall: async (method, params) => method === "getSignatureStatuses"
-          ? { context: { slot: 600 }, value: [{ slot: 600, confirmations: 1, err: null, confirmationStatus: "confirmed" }] }
+          ? { context: { slot: 700 }, value: [{ slot: 600, confirmations: 1, err: null, confirmationStatus: "confirmed" }] }
           : value.rpcCall(method, params),
         expectedProgramId: value.programId.toBase58(),
         expectedSigner: value.signer.publicKey.toBase58(),
@@ -283,13 +347,238 @@ test("finalizer fails closed on wrong network, timeout, failed transaction, mess
       (error) => error instanceof CurrentSourceEvidenceError && error.code === "DEPLOYED_ARTIFACT_MISMATCH_HOLD",
     );
   });
+  await t.test("ProgramData context below minContextSlot", async () => {
+    const value = fixture();
+    await assert.rejects(
+      finalizeCurrentSourceDevnetEvidence({
+        consoleExport: value.consoleExport,
+        binding: value.binding,
+        rpcCall: async (method, params) => {
+          const result = await value.rpcCall(method, params);
+          return method === "getAccountInfo" && params[0] !== value.programId.toBase58()
+            ? { ...result, context: { slot: 649 } }
+            : result;
+        },
+        expectedProgramId: value.programId.toBase58(),
+        expectedSigner: value.signer.publicKey.toBase58(),
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === "RPC_CONTEXT_HOLD",
+    );
+  });
+  await t.test("signature status context below minContextSlot", async () => {
+    const value = fixture();
+    await assert.rejects(
+      finalizeCurrentSourceDevnetEvidence({
+        consoleExport: value.consoleExport,
+        binding: value.binding,
+        rpcCall: async (method, params) => method === "getSignatureStatuses"
+          ? { ...value.responses.getSignatureStatuses, context: { slot: 649 } }
+          : value.rpcCall(method, params),
+        expectedProgramId: value.programId.toBase58(),
+        expectedSigner: value.signer.publicKey.toBase58(),
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === "RPC_CONTEXT_HOLD",
+    );
+  });
+});
+
+test("read-only RPC caller rejects redirects, endpoint drift, content-type drift, and write methods", async (t) => {
+  const response = (overrides = {}) => ({
+    ok: true,
+    status: 200,
+    redirected: false,
+    url: "https://api.devnet.solana.com/",
+    headers: { get: () => "application/json; charset=utf-8" },
+    json: async () => ({ jsonrpc: "2.0", id: 1, result: CANONICAL_DEVNET_GENESIS_HASH }),
+    ...overrides,
+  });
+  await t.test("exact no-redirect request", async () => {
+    let options;
+    const caller = createJsonRpcCaller({ fetchImpl: async (_url, value) => { options = value; return response(); } });
+    assert.equal(await caller("getGenesisHash", []), CANONICAL_DEVNET_GENESIS_HASH);
+    assert.equal(options.redirect, "error");
+    assert.equal(options.cache, "no-store");
+  });
+  for (const [name, mutation] of [
+    ["redirect flag", { redirected: true }],
+    ["response endpoint", { url: "https://evil.invalid/" }],
+    ["content type", { headers: { get: () => "text/html" } }],
+  ]) {
+    await t.test(name, async () => {
+      const caller = createJsonRpcCaller({ fetchImpl: async () => response(mutation) });
+      await assert.rejects(caller("getGenesisHash", []), (error) => error instanceof CurrentSourceEvidenceError && error.code === "RPC_TRANSPORT_HOLD");
+    });
+  }
+  await t.test("write method", async () => {
+    let called = false;
+    const caller = createJsonRpcCaller({ fetchImpl: async () => { called = true; return response(); } });
+    await assert.rejects(caller("sendTransaction", []), (error) => error instanceof CurrentSourceEvidenceError && error.code === "RPC_METHOD_HOLD");
+    assert.equal(called, false);
+  });
+});
+
+test("ledger proof binds same-slot order, last ProgramData upgrade, and conditional capacity", async (t) => {
+  const signer = Keypair.generate();
+  const loader = new PublicKey(LOADER);
+  const programData = Keypair.generate().publicKey;
+  const program = Keypair.generate().publicKey;
+  const buffer = Keypair.generate().publicKey;
+  const featureProgram = Keypair.generate().publicKey;
+  const upgrade = signedInstructionTransaction({
+    signer,
+    programId: loader,
+    data: Buffer.from([3, 0, 0, 0]),
+    keys: [
+      { pubkey: programData, isSigner: false, isWritable: true },
+      { pubkey: program, isSigner: false, isWritable: true },
+      { pubkey: buffer, isSigner: false, isWritable: true },
+      { pubkey: signer.publicKey, isSigner: true, isWritable: true },
+    ],
+  });
+  const feature = signedInstructionTransaction({
+    signer,
+    programId: featureProgram,
+    data: Buffer.from([1]),
+  });
+  const laterUpgrade = signedInstructionTransaction({
+    signer,
+    programId: loader,
+    data: Buffer.from([3, 0, 0, 0]),
+    keys: [
+      { pubkey: programData, isSigner: false, isWritable: true },
+      { pubkey: program, isSigner: false, isWritable: true },
+      { pubkey: Keypair.generate().publicKey, isSigner: false, isWritable: true },
+      { pubkey: signer.publicKey, isSigner: true, isWritable: true },
+    ],
+  });
+  const innerUpgradeCarrier = signedInstructionTransaction({
+    signer,
+    programId: featureProgram,
+    data: Buffer.from([2]),
+    keys: [
+      { pubkey: programData, isSigner: false, isWritable: true },
+      { pubkey: loader, isSigner: false, isWritable: false },
+    ],
+  });
+  const carrierKeys = innerUpgradeCarrier.compileMessage().accountKeys;
+  const innerUpgradeCarrierEntry = blockEntry(innerUpgradeCarrier, null, {
+    innerInstructions: [{
+      index: 0,
+      instructions: [{
+        programIdIndex: carrierKeys.findIndex((item) => item.equals(loader)),
+        accounts: [carrierKeys.findIndex((item) => item.equals(programData))],
+        data: base58Bytes(Buffer.from([3, 0, 0, 0])),
+      }],
+    }],
+  });
+  const observations = [
+    { action: "UPGRADE_PROGRAM", signature: transactionSignature(upgrade), slot: 500 },
+    { action: "MIGRATE_LEGACY_ROUND_WEEK_7", signature: transactionSignature(feature), slot: 500 },
+  ];
+  const deployedProgram = {
+    deploymentSlot: 500,
+    programDataAddress: programData.toBase58(),
+    programDataCapacityBytes: 500,
+  };
+  const binding = { programArtifactBytes: 400 };
+  const conditions = {
+    programDataExtensionRequired: false,
+    preUpgradeProgramDataCapacityBytes: 500,
+  };
+  const invoke = (transactions, overrides = {}) => observeCompleteRehearsalLedgerProof({
+    rpcCall: async (method, params) => {
+      assert.equal(method, "getBlock");
+      assert.equal(params[0], 500);
+      assert.equal(params[1].commitment, "finalized");
+      return {
+        blockTime: 1_777_000_000,
+        blockhash: Keypair.generate().publicKey.toBase58(),
+        previousBlockhash: Keypair.generate().publicKey.toBase58(),
+        transactions: transactions.map((item) => Array.isArray(item?.transaction) ? item : blockEntry(item)),
+      };
+    },
+    transactionObservations: overrides.transactionObservations ?? observations,
+    decodedEntries: overrides.decodedEntries ?? [{ action: "UPGRADE_PROGRAM", transaction: upgrade }],
+    deployedProgram: { ...deployedProgram, ...overrides.deployedProgram },
+    conditions: { ...conditions, ...overrides.conditions },
+    binding: { ...binding, ...overrides.binding },
+  });
+
+  const exact = await invoke([upgrade, feature]);
+  assert.equal(exact.checkedSameSlotAndDeploymentBlocks[0].recordedUpgradeTransactionIndex, 0);
+  assert.equal(exact.finalProgramDataCapacityBytes, 500);
+
+  await t.test("same-slot roster reversal", async () => {
+    await assert.rejects(invoke([feature, upgrade]), (error) => error instanceof CurrentSourceEvidenceError && error.code === "TRANSACTION_ORDER_HOLD");
+  });
+  await t.test("later ProgramData upgrade in deployment slot", async () => {
+    await assert.rejects(invoke([upgrade, feature, laterUpgrade]), (error) => error instanceof CurrentSourceEvidenceError && error.code === "DEPLOYMENT_ORDER_HOLD");
+  });
+  await t.test("later inner ProgramData upgrade in deployment slot", async () => {
+    await assert.rejects(invoke([upgrade, feature, innerUpgradeCarrierEntry]), (error) => error instanceof CurrentSourceEvidenceError && error.code === "DEPLOYMENT_ORDER_HOLD");
+  });
+  await t.test("unchanged capacity mismatch", async () => {
+    await assert.rejects(
+      invoke([upgrade, feature], { deployedProgram: { programDataCapacityBytes: 501 } }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === "PROGRAM_CAPACITY_HOLD",
+    );
+  });
+  await t.test("exact extension delta", async () => {
+    const extensionData = Buffer.alloc(8);
+    extensionData.writeUInt32LE(6, 0);
+    extensionData.writeUInt32LE(100, 4);
+    const extension = signedInstructionTransaction({
+      signer,
+      programId: loader,
+      data: extensionData,
+      keys: [{ pubkey: programData, isSigner: false, isWritable: true }],
+    });
+    const result = await invoke([upgrade], {
+      transactionObservations: [
+        { action: "EXTEND_PROGRAM_DATA", signature: transactionSignature(extension), slot: 499 },
+        observations[0],
+      ],
+      decodedEntries: [
+        { action: "EXTEND_PROGRAM_DATA", transaction: extension },
+        { action: "UPGRADE_PROGRAM", transaction: upgrade },
+      ],
+      deployedProgram: { programDataCapacityBytes: 600 },
+      conditions: { programDataExtensionRequired: true, preUpgradeProgramDataCapacityBytes: 500 },
+      binding: { programArtifactBytes: 600 },
+    });
+    assert.equal(result.extensionDeltaBytes, 100);
+    extensionData.writeUInt32LE(99, 4);
+    const wrongExtension = signedInstructionTransaction({
+      signer,
+      programId: loader,
+      data: extensionData,
+      keys: [{ pubkey: programData, isSigner: false, isWritable: true }],
+    });
+    await assert.rejects(
+      invoke([upgrade], {
+        transactionObservations: [
+          { action: "EXTEND_PROGRAM_DATA", signature: transactionSignature(wrongExtension), slot: 499 },
+          observations[0],
+        ],
+        decodedEntries: [
+          { action: "EXTEND_PROGRAM_DATA", transaction: wrongExtension },
+          { action: "UPGRADE_PROGRAM", transaction: upgrade },
+        ],
+        deployedProgram: { programDataCapacityBytes: 600 },
+        conditions: { programDataExtensionRequired: true, preUpgradeProgramDataCapacityBytes: 500 },
+        binding: { programArtifactBytes: 600 },
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === "PROGRAM_CAPACITY_HOLD",
+    );
+  });
 });
 
 test("source finalizer exposes no signing or broadcast operation and CLI is dry unless --write is explicit", () => {
   const source = readFileSync("scripts/finalize-iat-v2-current-source-devnet-evidence.mjs", "utf8");
   assert.doesNotMatch(source, /sendRawTransaction|sendTransaction|signTransaction|partialSign|\.sign\(/u);
   assert.match(source, /if \(options\.write\) stagedAt = writeCurrentSourceEvidenceStage/u);
-  assert.doesNotMatch(source, /predicate:\s*"CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL"/u);
-  assert.match(source, /status: options\.write \? "STAGED_PARTIAL_NON_CLEARING" : "DRY_RUN_PARTIAL_NON_CLEARING"/u);
+  assert.match(source, /const clearingEligible = canonicalCliTransport/u);
   assert.match(source, /commitment: "finalized"/u);
+  assert.match(source, /redirect: "error"/u);
+  assert.match(source, /canonicalCliRpcCallers\.has\(rpcCall\)/u);
 });

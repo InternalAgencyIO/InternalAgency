@@ -93,7 +93,7 @@ export const IAT_B3_MANDATORY_CI_ORDERED_CASE_NAMES_SHA256 = Object.freeze({
 
 export const IAT_B3_MANDATORY_CI_TEST_SOURCE_SHA256 = Object.freeze({
   "tests/iat-b3-mandatory-ci-containment.test.mjs": "437571821a14eb60de550bac204b2f8e3885766760a30f32296db57076df2813",
-  "tests/iat-b3-mandatory-ci-gates.test.mjs": "cdd6baf22f27225353ade452db0fffe8e4d321f2dbf0bbf87b496c76bdd8028d",
+  "tests/iat-b3-mandatory-ci-gates.test.mjs": "b63d724d80978d5d0c412e307e62351bfd4e6d1b0c887921a3412d6189efc6a2",
   "tests/iat-b3-economy-reproducible-build.test.mjs": "d828b230480c4748b77d499e6e063098fe7c63b08d17945572fed46360d1980d",
   "tests/iat-b3-native-wsl-hard-disable-ci.test.mjs": "a008f18fcf9661a59517bbefc6b9745bec5e6c9a7d39cdc9891ff6653456f943",
   "tests/iat-b3-local-rehearsal-readiness.test.mjs": "a7d524acc4db736ff3fbf2ff4ad94bea31a076a6f24693203f074988fa96f0b3",

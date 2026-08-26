@@ -32,6 +32,10 @@ test("public launch copy stays conditional and HOLD-safe", async () => {
   assert.doesNotMatch(verify, /MOVE ONLY ON THE LIVE ROUTE|THE LIVE ORDER/);
   assert.match(proof, /OPEN JSON/);
   assert.doesNotMatch(proof, /DOWNLOAD JSON/);
+  assert.match(proof, /Reference run 32937913614 failed 3 retained-v2 parity assertions/);
+  assert.match(proof, /No passing current-source artifact is bound on this board/);
+  assert.match(proof, /Mainnet is UNSCHEDULED HOLD/);
+  assert.doesNotMatch(proof, /passed on the public PR head|full verifiable SBF rehearsal are green|DEVNET PROOF ONLINE|AUG(?:UST)?\s+27/i);
 
   assert.match(reader, /fee payer must be signed/);
   assert.match(reader, /must be published together/);

@@ -44,7 +44,7 @@ const EXACT_SITE_JOB_RUN_DEFAULTS = [
 const EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS = [
   [
     "  web-and-policy:",
-    "    name: Web, policy, and launch gates",
+    "    name: Web/policy checks (launch remains HOLD)",
     "    runs-on: ubuntu-latest",
     "    timeout-minutes: 45",
     EXACT_SITE_JOB_RUN_DEFAULTS,
@@ -67,24 +67,50 @@ const EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS = [
     "    env:",
   ].join("\n"),
 ];
+const EXACT_WINDOWS_LONG_PATHS_STEP = [
+  "      - name: Enable repository long paths before checkout",
+  "        shell: pwsh",
+  "        run: git config --global core.longpaths true",
+].join("\n");
+const EXACT_WINDOWS_STRUCTURAL_STEP = [
+  "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
+  "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
+  `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+].join("\n");
+const EXACT_WINDOWS_PREFLIGHT_STEP = [
+  "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
+  "        shell: pwsh",
+  "        run: |",
+  "          $output = (& node scripts/build-iat-b3-mandatory-ci-containment.mjs 2>&1 | Out-String).Trim()",
+  "          $status = $LASTEXITCODE",
+  "          Write-Host $output",
+  "          if ($status -ne 2) {",
+  "            throw \"Expected containment preflight exit 2/HOLD, got $status\"",
+  "          }",
+  "          $value = $output | ConvertFrom-Json",
+  "          if ($value.status -ne 'HOLD' -or $value.ready -ne $false -or",
+  "              $value.complete -ne $false -or $value.buildAuthorized -ne $false -or",
+  "              $value.buildExecuted -ne $false -or $value.outputRootTouched -ne $false -or",
+  "              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {",
+  "            throw 'containment preflight did not return the exact fail-closed HOLD projection'",
+  "          }",
+  `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+].join("\n");
 const EXACT_NATIVE_WINDOWS_JOB = [
   "  native-containment-windows:",
   "    name: HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)",
   "    runs-on: windows-2025",
   "    timeout-minutes: 15",
   "    steps:",
+  EXACT_WINDOWS_LONG_PATHS_STEP,
   "      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0",
   "        with:",
   "          fetch-depth: 0",
   "      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0",
   "        with:",
   "          node-version: 24",
-  "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
-  "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
-  `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
-  "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
-  "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-  `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
+  EXACT_WINDOWS_STRUCTURAL_STEP,
+  EXACT_WINDOWS_PREFLIGHT_STEP,
   "",
 ].join("\n");
 
@@ -265,7 +291,7 @@ test("workflow validates structure before expected HOLD and labels hosted smoke 
   const workflow = decodeExactWorkflowBytes(workflowBytes);
   assert.notEqual(workflow, null);
   const structural = "run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs";
-  const preflight = "run: node scripts/build-iat-b3-mandatory-ci-containment.mjs";
+  const preflight = "node scripts/build-iat-b3-mandatory-ci-containment.mjs";
   assert.equal(workflow.split(structural).length - 1, 2);
   assert.equal(workflow.split(preflight).length - 1, 2);
   assert(workflow.indexOf(structural) < workflow.indexOf(preflight));
@@ -279,17 +305,8 @@ test("workflow mutation probes reject missing order, smoke label, and fail-open 
   const workflow = decodeExactWorkflowBytes(workflowBytes);
   assert.notEqual(workflow, null);
   const workingDirectory = `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`;
-  const structural = [
-    "      - name: Validate native containment structure (hosted smoke only; non-evidence)",
-    "        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs",
-    workingDirectory,
-    "",
-  ].join("\n");
-  const preflight = [
-    "      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)",
-    "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-    workingDirectory,
-  ].join("\n");
+  const structural = EXACT_WINDOWS_STRUCTURAL_STEP;
+  const preflight = EXACT_WINDOWS_PREFLIGHT_STEP;
   const topLevelDefaults = [
     "defaults:",
     "  run:",
@@ -297,7 +314,7 @@ test("workflow mutation probes reject missing order, smoke label, and fail-open 
   ].join("\n");
   const semanticMutations = [
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(structural, "")),
-    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${structural}${preflight}`, `${preflight}\n${structural.trimEnd()}`)),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${structural}\n${preflight}`, `${preflight}\n${structural}`)),
     workflow.replace("HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)", "Native release evidence"),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, `${EXACT_NATIVE_WINDOWS_JOB}\n        continue-on-error: true`),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace("    steps:\n", "    if: false\n    steps:\n")),
@@ -307,8 +324,8 @@ test("workflow mutation probes reject missing order, smoke label, and fail-open 
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${preflight}`, `${preflight}\n        shell: cmd`)),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${preflight}`, `${preflight}\n        working-directory: .`)),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
-      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs",
-      "        run: node scripts/build-iat-b3-mandatory-ci-containment.mjs || exit 0",
+      "          $status = $LASTEXITCODE",
+      "          $status = 2",
     )),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${workingDirectory}\n`, "")),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
