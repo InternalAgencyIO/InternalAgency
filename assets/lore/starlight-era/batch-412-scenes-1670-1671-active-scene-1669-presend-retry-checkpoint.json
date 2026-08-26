@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "batch": 412,
+  "country": "Saint Kitts and Nevis",
+  "recorded_utc": "2026-08-26T06:47:44.2199418Z",
+  "state": "split_active_with_presend_retry_available",
+  "authority": {
+    "scene_1668": "accepted_canonical_at_9154a39b984dab536e41c0724d233640d418cb6e",
+    "scene_1669": "retry_not_consumed",
+    "scene_1670": "provider_dispatch_confirmed_active",
+    "scene_1671": "provider_dispatch_confirmed_active"
+  },
+  "scenes": [
+    {
+      "scene": 1669,
+      "prompt_sha256": "714068A04B5F3F6C4D2C630B5F27B7001101A39C9FDC900267C5D5761100FEBE",
+      "ordered_references": [
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+        },
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+        },
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+        }
+      ],
+      "provider_occurrence": false,
+      "raw_bytes": false,
+      "attempt_consumed": false,
+      "retry_eligible": true,
+      "browser_error": "Browser Use encountered an error interacting with this webpage's clipboard: Active element is no longer the expected input target"
+    },
+    {
+      "scene": 1670,
+      "prompt_sha256": "F9D96CE95E460A38F47E9E44C81CE485E7B9779BB44373A732415D37B3B33289",
+      "ordered_references": [
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+        },
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+        },
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+        }
+      ],
+      "provider_occurrence": true,
+      "provider_chat_url": "https://www.meta.ai/prompt/de9b5308-2ac5-4e77-9d18-5c602748cc7a",
+      "state": "active",
+      "resend_forbidden": true
+    },
+    {
+      "scene": 1671,
+      "prompt_sha256": "79105582DB6052518F841B54347E3FBD4951C3034ADB6D6829A7BE09A3DA3964",
+      "ordered_references": [
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+        },
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+        },
+        {
+          "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+        }
+      ],
+      "provider_occurrence": true,
+      "provider_chat_url": "https://www.meta.ai/prompt/d7a0e08c-6553-461e-8295-9ceb694acc6c",
+      "state": "active",
+      "resend_forbidden": true
+    }
+  ],
+  "recovery_next_action": "Full in-app-browser reset only after preserving active URLs; restore scenes 1670 and 1671 by URL; dispatch only scene 1669 once with ordered anchors 938, 936, 937."
+}
