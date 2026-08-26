@@ -62,6 +62,8 @@ try {
   const manifestPath = "tools/iat-v2-admin-console/dist/.vite/manifest.json";
   const policyPath = "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json";
   const sourcePath = "tools/iat-v2-admin-console/ProgramUpgrade.jsx";
+  const aggregateMaximum = readJson(fixtureRoot, policyPath)
+    .byteBudgets.programUpgradeIncrementalClosureMaximum;
   const locate = (manifest) => ({
     entryKey: Object.keys(manifest).find((key) => manifest[key].isEntry === true),
     upgradeKey: Object.keys(manifest).find((key) => manifest[key].src === "ProgramUpgrade.jsx"),
@@ -120,8 +122,11 @@ try {
   mutate("aggregate-overflow", (root) => {
     const manifest = readJson(root, manifestPath);
     const { evidenceKey } = locate(manifest);
-    appendFileSync(resolve(root, "tools/iat-v2-admin-console/dist", manifest[evidenceKey].file), "x".repeat(2_000));
-  }, /programUpgradeIncrementalClosure is \d+ bytes; budget is 32000/u);
+    appendFileSync(
+      resolve(root, "tools/iat-v2-admin-console/dist", manifest[evidenceKey].file),
+      "x".repeat(aggregateMaximum + 1),
+    );
+  }, new RegExp(`programUpgradeIncrementalClosure is \\d+ bytes; budget is ${aggregateMaximum}`, "u"));
 
   mutate("activation-bypass", (root) => {
     const path = resolve(root, sourcePath);

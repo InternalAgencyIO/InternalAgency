@@ -5,9 +5,12 @@ import { execFileSync, spawnSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
+import { INDEPENDENT_SECURITY_SOURCE_PATHS } from "./lib/iat-v2-independent-security-evidence.mjs";
 
 const root = resolve(".");
+const repositoryRoot = resolve(root, "../../..");
 const validator = resolve("scripts/validate-iat-v2-current-source-clearance.mjs");
+const validatorSource = readFileSync(validator, "utf8");
 const baseline = JSON.parse(readFileSync(resolve("launch/iat-v2-current-source-clearance.json"), "utf8"));
 const sandbox = mkdtempSync(join(tmpdir(), "iat-v2-current-source-clearance-"));
 const recordPath = "launch/iat-v2-current-source-clearance.json";
@@ -49,6 +52,9 @@ function base58(bytes) {
 }
 
 try {
+  if (!/const evaluationUnixSeconds = BigInt\(Math\.floor\(Date\.now\(\) \/ 1_000\)\);/u.test(validatorSource)) {
+    throw new Error("predicate freshness must use the current evaluation time, not a self-authored record time");
+  }
   expectPass("canonical HOLD", structuredClone(baseline));
 
   const statusOnly = structuredClone(baseline);
@@ -59,7 +65,14 @@ try {
   execFileSync("git", ["config", "user.email", "clearance-test@internalagency.invalid"], { cwd: sandbox });
   execFileSync("git", ["config", "user.name", "Clearance Regression"], { cwd: sandbox });
   write("projects/star-ascent/site/programs/iat_v2/lib.rs", "pub fn current_source() {}\n");
-  execFileSync("git", ["add", "projects/star-ascent/site/programs/iat_v2/lib.rs"], { cwd: sandbox });
+  for (const path of INDEPENDENT_SECURITY_SOURCE_PATHS) {
+    write(path, execFileSync("git", ["show", `HEAD:${path}`], { cwd: repositoryRoot, encoding: "buffer" }));
+  }
+  write(
+    "projects/star-ascent/site/docs/b3/iat-v2-production-identity-integration-trust.v1.json",
+    readFileSync(resolve(root, "docs/b3/iat-v2-production-identity-integration-trust.v1.json")),
+  );
+  execFileSync("git", ["add", "."], { cwd: sandbox });
   execFileSync("git", ["commit", "-q", "-m", "current source fixture"], { cwd: sandbox });
   const git = (...args) => execFileSync("git", args, { cwd: sandbox, encoding: "utf8" }).trim();
   const commit = git("rev-parse", "HEAD");
@@ -68,14 +81,25 @@ try {
   const artifact = Buffer.from("reviewed current-source SBF fixture", "utf8");
   const programArtifactSha256 = sha256(artifact);
   const txSignature = base58(Buffer.from(Array.from({ length: 64 }, (_, index) => index + 1)));
+  const productionIdentityPredicateBytes = Buffer.from("{}\n");
+  const independentSecurityPredicateBytes = Buffer.from("{}\n");
+  write(
+    "target/identity-integration/iat-v2-production-identity-integration-evidence.json",
+    productionIdentityPredicateBytes,
+  );
+  write("target/security/iat-v2-independent-security-evidence-v2.json", independentSecurityPredicateBytes);
+  write("target/security/github-run-receipt.json", "{}\n");
+  write("target/security/github-jobs-receipt.json", "{}\n");
+  write("target/security/github-artifact-receipt.json", "{}\n");
+  write("target/security/iat-v2-independent-security-evidence-v2.zip", Buffer.from("invalid archive"));
   const definitions = {
-    currentSourceSbf: ["CURRENT_SOURCE_REPRODUCIBLE_SBF", "build", [], "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/1"],
-    signedDevnetRehearsal: ["CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL", "devnet", [txSignature], `https://explorer.solana.com/tx/${txSignature}?cluster=devnet`],
-    productionIdentityIntegration: ["PRODUCTION_IDENTITY_INTEGRATION_REHEARSAL", "production-integration", [], "https://internalagency.io/evidence/identity-integration"],
-    automatedSecurityClosure: ["AUTOMATED_SECURITY_CLOSURE", "source", [], "https://internalagency.io/evidence/security-closure"],
+    currentSourceSbf: ["CURRENT_SOURCE_REPRODUCIBLE_SBF", "build", [], "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/1", "DIRECT_EVIDENCE", sha256(Buffer.from("currentSourceSbf"))],
+    signedDevnetRehearsal: ["CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL", "devnet", [txSignature], `https://explorer.solana.com/tx/${txSignature}?cluster=devnet`, "DIRECT_EVIDENCE", sha256(Buffer.from("signedDevnetRehearsal"))],
+    productionIdentityIntegration: ["PRODUCTION_IDENTITY_INTEGRATION_REHEARSAL", "production-integration", [], "https://internalagency.io/evidence/identity-integration", "PRODUCTION_IDENTITY_STRUCTURE_CHECKED_HOLD", sha256(productionIdentityPredicateBytes)],
+    automatedSecurityClosure: ["AUTOMATED_SECURITY_CLOSURE", "source", [], "https://internalagency.io/evidence/security-closure", "INDEPENDENT_SECURITY_STRUCTURE_CHECKED_HOLD", sha256(independentSecurityPredicateBytes)],
   };
   const evidenceRefs = {};
-  for (const [field, [predicate, network, transactionSignatures, receipt]] of Object.entries(definitions)) {
+  for (const [field, [predicate, network, transactionSignatures, receipt, checkId, detailsSha256]] of Object.entries(definitions)) {
     const evidence = {
       schema: "iat-v2-current-source-direct-evidence/v1",
       predicate,
@@ -93,15 +117,15 @@ try {
     write(checkPath, {
       schema: "iat-v2-current-source-check-receipt/v1",
       predicate,
-      checkId: "DIRECT_EVIDENCE",
+      checkId,
       result: "PASS",
       sourceCommit: commit,
       programArtifactSha256,
       observedAtUtc: now,
-      detailsSha256: sha256(Buffer.from(field)),
+      detailsSha256,
     });
     evidence.checks.push({
-      id: "DIRECT_EVIDENCE",
+      id: checkId,
       result: "PASS",
       evidencePath: checkPath,
       evidenceSha256: sha256(readFileSync(join(sandbox, checkPath))),
@@ -128,13 +152,52 @@ try {
   expectFail(
     "self-authored identity integration cannot clear",
     clear,
-    "predicate-specific externally authenticated X/D1 receipt validator",
+    "production identity integration cannot clear until evidence freshness is anchored by an externally authenticated evaluation time",
   );
   expectFail(
-    "self-authored security closure cannot clear",
+    "caller-supplied security closure cannot clear",
     clear,
-    "predicate-specific independently completed CI security artifact validator",
+    "automated security closure cannot clear from caller-supplied GitHub JSON and archive bytes without direct authenticated hosted-state verification",
   );
+  const sourceBoundTrustResult = validate(clear);
+  write("docs/b3/iat-v2-production-identity-integration-trust.v1.json", "{}\n");
+  const substitutedWorkingTrustResult = validate(clear);
+  if (`${substitutedWorkingTrustResult.stderr}${substitutedWorkingTrustResult.stdout}`
+    !== `${sourceBoundTrustResult.stderr}${sourceBoundTrustResult.stdout}`) {
+    throw new Error("working-tree production trust substitution changed source-bound validation");
+  }
+
+  const identityEvidencePath = clear.evidence.productionIdentityIntegration.path;
+  const identityEvidence = JSON.parse(readFileSync(join(sandbox, identityEvidencePath), "utf8"));
+  const identityCheckPath = identityEvidence.checks[0].evidencePath;
+  const originalIdentityCheckBytes = readFileSync(join(sandbox, identityCheckPath));
+  const originalIdentityEvidenceBytes = readFileSync(join(sandbox, identityEvidencePath));
+  identityEvidence.checks[0].evidencePath = "public/evidence/iat-v2/current-source/checks/../../../../../outside.json";
+  write(identityEvidencePath, identityEvidence);
+  const checkPathTraversal = structuredClone(clear);
+  checkPathTraversal.evidence.productionIdentityIntegration.sha256 = sha256(readFileSync(join(sandbox, identityEvidencePath)));
+  expectFail(
+    "check receipt path traversal",
+    checkPathTraversal,
+    "check path escapes the current-source checks directory",
+  );
+  identityEvidence.checks[0].evidencePath = identityCheckPath;
+  write(identityEvidencePath, originalIdentityEvidenceBytes);
+
+  const identityCheck = JSON.parse(originalIdentityCheckBytes);
+  identityCheck.detailsSha256 = "e".repeat(64);
+  write(identityCheckPath, identityCheck);
+  identityEvidence.checks[0].evidenceSha256 = sha256(readFileSync(join(sandbox, identityCheckPath)));
+  write(identityEvidencePath, identityEvidence);
+  const identityDigestDrift = structuredClone(clear);
+  identityDigestDrift.evidence.productionIdentityIntegration.sha256 = sha256(readFileSync(join(sandbox, identityEvidencePath)));
+  expectFail(
+    "production identity predicate digest drift",
+    identityDigestDrift,
+    "the exact predicate-specific evidence digest must be bound once",
+  );
+  write(identityCheckPath, originalIdentityCheckBytes);
+  write(identityEvidencePath, originalIdentityEvidenceBytes);
 
   const digestDrift = structuredClone(clear);
   digestDrift.evidence.currentSourceSbf.sha256 = "f".repeat(64);
@@ -148,7 +211,7 @@ try {
   unsignedDevnet.evidence.signedDevnetRehearsal.sha256 = sha256(readFileSync(join(sandbox, devnetPath)));
   expectFail("unsigned Devnet evidence", unsignedDevnet, "requires finalized Solana transaction signatures");
 
-  console.log("IAT V2 current-source clearance regression passed: historical HOLD remains valid; status-only, generic X/D1, generic security, digest-drifted, and unsigned evidence all fail closed.");
+  console.log("IAT V2 current-source clearance regression passed: historical HOLD remains valid; status-only, stale/unanchored X/D1, caller-supplied GitHub evidence, working-trust substitution, path traversal, digest drift, and unsigned evidence all fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

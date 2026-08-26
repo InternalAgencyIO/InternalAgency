@@ -83,8 +83,11 @@ export default function ProgramUpgrade({
   const [error, setError] = useState("");
   const local = isLocalOperatorHost(window.location.hostname);
 
-  async function loadBufferSnapshot() {
+  async function loadBufferSnapshot(minContextSlot = 0) {
     if (!local) throw new Error("Program upgrade console is localhost-only");
+    if (!Number.isSafeInteger(minContextSlot) || minContextSlot < 0) {
+      throw new Error("Program upgrade inspection requires a valid finalized minContextSlot");
+    }
     if (
       !Number.isSafeInteger(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES)
       || IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES <= 0
@@ -106,11 +109,19 @@ export default function ProgramUpgrade({
       EXTEND_PROGRAM_CHECKED_FEATURE_ID,
       ...(buffer ? [buffer] : []),
     ];
-    const [programInfo, programDataInfo, extendFeatureInfo, bufferInfo = null] =
-      await connection.getMultipleAccountsInfo(
+    const accountResult = await connection.getMultipleAccountsInfoAndContext(
       addresses,
-      FINALIZED_COMMITMENT,
+      { commitment: FINALIZED_COMMITMENT, minContextSlot },
     );
+    const finalizedContextSlot = accountResult.context?.slot;
+    if (
+      !Number.isSafeInteger(finalizedContextSlot)
+      || finalizedContextSlot <= 0
+      || finalizedContextSlot < minContextSlot
+    ) {
+      throw new Error("Program/buffer inspection did not return a monotonic finalized context slot");
+    }
+    const [programInfo, programDataInfo, extendFeatureInfo, bufferInfo = null] = accountResult.value;
     if (!programInfo || !programDataInfo) throw new Error("Program or ProgramData is missing on Devnet");
     if (!programInfo.executable) throw new Error("IAT V2 program is not executable");
     if (!programInfo.owner.equals(BPF_UPGRADEABLE_LOADER_ID)) {
@@ -161,6 +172,7 @@ export default function ProgramUpgrade({
       extendProgramChecked: extendFeature.active,
       extendProgramCheckedActivationSlot: extendFeature.activationSlot,
       evidenceBinding,
+      finalizedContextSlot,
     };
     if (extension.extensionRequired) {
       return {

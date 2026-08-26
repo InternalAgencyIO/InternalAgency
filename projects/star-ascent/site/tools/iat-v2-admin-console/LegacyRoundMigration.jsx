@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Buffer } from "buffer";
 import {
   Connection,
   SystemProgram,
@@ -37,6 +38,13 @@ import {
   loadAttendedReceiptSet,
   persistAttendedReceipt,
 } from "./attended-evidence.mjs";
+import {
+  assertExactTransactionMessage,
+  assertFreshFinalizedBlockhash,
+  assertSignedLegacyTransaction,
+  finalizedContextSlot,
+  simulateExactLegacyTransaction,
+} from "./attended-transaction-boundary.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
@@ -76,7 +84,112 @@ function explorer(kind, value) {
   return `https://explorer.solana.com/${kind}/${value}?cluster=devnet`;
 }
 
-async function loadMigrationSnapshot(sha256Hex) {
+function publicKeyText(value) {
+  return value?.toBase58?.() ?? null;
+}
+
+function scalarText(value) {
+  return value === null || value === undefined ? null : String(value);
+}
+
+function bytesHex(value) {
+  return value === null || value === undefined ? null : Buffer.from(value).toString("hex");
+}
+
+function roundStateBinding(round) {
+  return {
+    address: publicKeyText(round.address),
+    layoutVersion: scalarText(round.layoutVersion),
+    accountBytes: scalarText(round.accountBytes),
+    config: publicKeyText(round.config),
+    randomnessAccount: publicKeyText(round.randomnessAccount),
+    week: scalarText(round.week),
+    commitSlot: scalarText(round.commitSlot),
+    commitTimestamp: scalarText(round.commitTimestamp),
+    randomness: bytesHex(round.randomness),
+    agencyRegistryHashSnapshot: bytesHex(round.agencyRegistryHashSnapshot),
+    decisionContext: bytesHex(round.decisionContext),
+    agencyCountSnapshot: scalarText(round.agencyCountSnapshot),
+    selectedAgencyIndex: scalarText(round.selectedAgencyIndex),
+    derivationCounter: scalarText(round.derivationCounter),
+    status: scalarText(round.status),
+    bump: scalarText(round.bump),
+    canonicalSelectionTimestamp: scalarText(round.canonicalSelectionTimestamp),
+    neutralRecoveryTimestamp: scalarText(round.neutralRecoveryTimestamp),
+    previousRoundAddress: publicKeyText(round.previousRoundAddress),
+    previousRoundBinding: round.previousRoundBinding ?? null,
+    previousProofReady: round.previousProofReady ?? null,
+    historical: round.historical ?? null,
+    timeoutElapsed: round.timeoutElapsed ?? null,
+    complete: round.complete ?? null,
+    eligible: round.eligible ?? null,
+  };
+}
+
+function attendedRoundBinding(kind, snapshot, round) {
+  const config = snapshot.configState;
+  return JSON.stringify({
+    kind,
+    programId: IAT_V2_PROGRAM_ID.toBase58(),
+    programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS.toBase58(),
+    programAdmin: IAT_V2_PROGRAM_ADMIN.toBase58(),
+    migrationArtifactBytes: scalarText(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES),
+    artifactSha256: snapshot.artifactSha256,
+    deployment: snapshot.deploymentBinding,
+    sourceCommit: snapshot.evidenceBinding.sourceCommit,
+    programArtifactSha256: snapshot.evidenceBinding.programArtifactSha256,
+    evidenceMint: snapshot.evidenceBinding.mint,
+    mint: snapshot.mint.toBase58(),
+    configAddress: snapshot.config.toBase58(),
+    config: {
+      admin: config.admin.toBase58(),
+      mint: config.mint.toBase58(),
+      tokenProgram: config.tokenProgram.toBase58(),
+      randomnessProgram: config.randomnessProgram.toBase58(),
+      stakeTokenAccount: config.stakeTokenAccount.toBase58(),
+      agencyRegistryHash: bytesHex(config.agencyRegistryHash),
+      genesisTimestamp: scalarText(config.genesisTimestamp),
+      expectedSupply: scalarText(config.expectedSupply),
+      stakedPrincipal: scalarText(config.stakedPrincipal),
+      agencyCount: scalarText(config.agencyCount),
+      rehearsalMode: config.rehearsalMode,
+      active: config.active,
+      laneMask: scalarText(config.laneMask),
+      stakeVaultInitialized: config.stakeVaultInitialized,
+      bump: scalarText(config.bump),
+      vaultAuthorityBump: scalarText(config.vaultAuthorityBump),
+    },
+    legacyCount: snapshot.legacy.length,
+    round: roundStateBinding(round),
+  });
+}
+
+function buildAttendedRoundTransaction({ blockhash, current, feePayer, kind, round }) {
+  if (!["migration", "neutral-backfill"].includes(kind)) {
+    throw new Error("Finalized round state has no reviewed attended action");
+  }
+  const instruction = kind === "migration"
+    ? buildMigrateLegacyRoundInstruction({
+        admin: feePayer,
+        mint: current.mint,
+        week: round.week,
+      })
+    : buildBackfillHistoricalNeutralRoundInstruction({
+        admin: feePayer,
+        mint: current.mint,
+        week: round.week,
+      });
+  const transaction = new Transaction({ feePayer, recentBlockhash: blockhash }).add(instruction);
+  if (transaction.instructions.length !== 1) {
+    throw new Error("Attended round transaction must contain exactly one instruction");
+  }
+  return transaction;
+}
+
+async function loadMigrationSnapshot(sha256Hex, minContextSlot = 0) {
+  if (!Number.isSafeInteger(minContextSlot) || minContextSlot < 0) {
+    throw new Error("Migration inspection requires a valid finalized minContextSlot");
+  }
   if (
     !Number.isSafeInteger(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES)
     || IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES <= 0
@@ -98,33 +211,74 @@ async function loadMigrationSnapshot(sha256Hex) {
     programId: IAT_V2_PROGRAM_ID,
     week: Number(week),
   }));
-  const [programRows, configInfo, recoveryInfos, legacyAccounts, hardenedAccounts, chainSlot] = await Promise.all([
-    connection.getMultipleAccountsInfo(
-      [IAT_V2_PROGRAM_ID, IAT_V2_PROGRAM_DATA_ADDRESS],
-      FINALIZED_COMMITMENT,
-    ),
-    connection.getAccountInfo(plan.config, FINALIZED_COMMITMENT),
-    connection.getMultipleAccountsInfo(recoveryAddresses, FINALIZED_COMMITMENT),
-    connection.getProgramAccounts(IAT_V2_PROGRAM_ID, {
-      commitment: FINALIZED_COMMITMENT,
-      filters: [
-        { dataSize: IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES },
-        { memcmp: { offset: 8, bytes: plan.config.toBase58() } },
-      ],
-    }),
-    connection.getProgramAccounts(IAT_V2_PROGRAM_ID, {
-      commitment: FINALIZED_COMMITMENT,
-      filters: [
-        { dataSize: IAT_V2_ROUND_LAYOUT.HARDENED_V2_BYTES },
-        { memcmp: { offset: 8, bytes: plan.config.toBase58() } },
-      ],
-    }),
-    connection.getSlot(FINALIZED_COMMITMENT),
-  ]);
+  const programResult = await connection.getMultipleAccountsInfoAndContext(
+    [IAT_V2_PROGRAM_ID, IAT_V2_PROGRAM_DATA_ADDRESS],
+    { commitment: FINALIZED_COMMITMENT, minContextSlot },
+  );
+  const programSlot = finalizedContextSlot(programResult, "Migration program inspection", minContextSlot);
+  const configResult = await connection.getAccountInfoAndContext(plan.config, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: programSlot,
+  });
+  const configSlot = finalizedContextSlot(configResult, "Migration config inspection", programSlot);
+  const recoveryResult = await connection.getMultipleAccountsInfoAndContext(recoveryAddresses, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: configSlot,
+  });
+  const recoverySlot = finalizedContextSlot(
+    recoveryResult,
+    "Historical recovery inspection",
+    configSlot,
+  );
+  const legacyResult = await connection.getProgramAccounts(IAT_V2_PROGRAM_ID, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: recoverySlot,
+    withContext: true,
+    filters: [
+      { dataSize: IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES },
+      { memcmp: { offset: 8, bytes: plan.config.toBase58() } },
+    ],
+  });
+  const legacySlot = finalizedContextSlot(legacyResult, "Legacy round inventory", recoverySlot);
+  const hardenedResult = await connection.getProgramAccounts(IAT_V2_PROGRAM_ID, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: legacySlot,
+    withContext: true,
+    filters: [
+      { dataSize: IAT_V2_ROUND_LAYOUT.HARDENED_V2_BYTES },
+      { memcmp: { offset: 8, bytes: plan.config.toBase58() } },
+    ],
+  });
+  const hardenedSlot = finalizedContextSlot(
+    hardenedResult,
+    "Hardened round inventory",
+    legacySlot,
+  );
+  const chainSlot = await connection.getSlot({
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: hardenedSlot,
+  });
+  if (!Number.isSafeInteger(chainSlot) || chainSlot <= 0 || chainSlot < hardenedSlot) {
+    throw new Error("Finalized Devnet clock did not preserve the migration observation boundary");
+  }
   const chainTimestampValue = await connection.getBlockTime(chainSlot);
   if (!Number.isSafeInteger(chainTimestampValue)) {
     throw new Error("Finalized Devnet clock timestamp is unavailable");
   }
+  const finalProgramResult = await connection.getMultipleAccountsInfoAndContext(
+    [IAT_V2_PROGRAM_ID, IAT_V2_PROGRAM_DATA_ADDRESS],
+    { commitment: FINALIZED_COMMITMENT, minContextSlot: chainSlot },
+  );
+  const finalProgramSlot = finalizedContextSlot(
+    finalProgramResult,
+    "Final migration deployment re-attestation",
+    chainSlot,
+  );
+  const programRows = finalProgramResult.value;
+  const configInfo = configResult.value;
+  const recoveryInfos = recoveryResult.value;
+  const legacyAccounts = legacyResult.value;
+  const hardenedAccounts = hardenedResult.value;
   const chainTimestamp = BigInt(chainTimestampValue);
   const [programInfo, programDataInfo] = programRows;
   if (!programInfo || !programDataInfo) {
@@ -154,6 +308,17 @@ async function loadMigrationSnapshot(sha256Hex) {
   if (!artifact.matchesReviewedArtifact) {
     throw new Error("The reviewed migration-capable program artifact is not deployed on Devnet");
   }
+  const deploymentBinding = {
+    programId: IAT_V2_PROGRAM_ID.toBase58(),
+    programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS.toBase58(),
+    upgradeAuthority: deployed.upgradeAuthority.toBase58(),
+    deploymentSlot: String(deployed.slot),
+    artifactBytes: artifact.artifactBytes,
+    artifactSha256: artifact.artifactSha256,
+    loaderPaddingBytes: artifact.loaderPaddingBytes,
+    loaderPaddingIsZero: artifact.loaderPaddingIsZero,
+    loaderRegionBytes: artifact.loaderRegionBytes,
+  };
   if (!configInfo || !configInfo.owner.equals(IAT_V2_PROGRAM_ID)) {
     throw new Error("The exact rehearsal config is missing or has an unexpected owner");
   }
@@ -232,6 +397,9 @@ async function loadMigrationSnapshot(sha256Hex) {
       previousTerminal
       && previousRound.layoutVersion === IAT_V2_ROUND_LAYOUT.HARDENED_V2,
     );
+    const previousRoundBinding = previousRound
+      ? JSON.stringify(roundStateBinding(previousRound))
+      : null;
     const canonicalSelectionTimestamp = canonicalCccSelectionTimestamp(
       configState.genesisTimestamp,
       week,
@@ -246,6 +414,7 @@ async function loadMigrationSnapshot(sha256Hex) {
         canonicalSelectionTimestamp,
         neutralRecoveryTimestamp,
         previousRoundAddress,
+        previousRoundBinding,
         previousProofReady,
         historical,
         timeoutElapsed,
@@ -275,6 +444,7 @@ async function loadMigrationSnapshot(sha256Hex) {
       canonicalSelectionTimestamp,
       neutralRecoveryTimestamp,
       previousRoundAddress,
+      previousRoundBinding,
       previousProofReady,
       historical,
       timeoutElapsed,
@@ -288,6 +458,8 @@ async function loadMigrationSnapshot(sha256Hex) {
     artifactSha256: artifact.artifactSha256,
     chainTimestamp,
     currentRound: liveRound,
+    deploymentBinding,
+    finalizedContextSlot: finalProgramSlot,
     configState,
     legacy,
     hardened,
@@ -341,46 +513,89 @@ export default function LegacyRoundMigration({
     setLogs([]);
     setStatus("REFRESHING EXACT ROUND + PROGRAM STATE // NOTHING BROADCAST");
     try {
-      const current = await loadMigrationSnapshot(sha256Hex);
+      const current = await loadMigrationSnapshot(sha256Hex, snapshot?.finalizedContextSlot ?? 0);
       setSnapshot(current);
       const round = current.legacy.find((candidate) => candidate.address.equals(roundAddress));
       if (!round) throw new Error("Selected legacy round is no longer pending migration");
+      const actionBinding = attendedRoundBinding("migration", current, round);
       const { provider, publicKey } = await getHardwareProvider(IAT_V2_PROGRAM_ADMIN);
       if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
         throw new Error("Connected hardware account is not the reviewed administrator");
       }
-      const latest = await connection.getLatestBlockhash(FINALIZED_COMMITMENT);
-      const transaction = new Transaction({
+      const latestResult = await connection.getLatestBlockhashAndContext({
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: current.finalizedContextSlot,
+      });
+      const latestContextSlot = finalizedContextSlot(
+        latestResult,
+        "Migration blockhash",
+        current.finalizedContextSlot,
+      );
+      const latest = latestResult.value;
+      const transaction = buildAttendedRoundTransaction({
+        blockhash: latest.blockhash,
+        current,
         feePayer: publicKey,
-        recentBlockhash: latest.blockhash,
-      }).add(buildMigrateLegacyRoundInstruction({
-        admin: publicKey,
-        mint: current.mint,
-        week: round.week,
-      }));
-      const messageSha256 = await sha256Hex(transaction.serializeMessage());
-      const simulation = await connection.simulateTransaction(transaction);
+        kind: "migration",
+        round,
+      });
+      const {
+        messageBytes,
+        messageSha256,
+        simulation,
+        simulationSlot,
+      } = await simulateExactLegacyTransaction({
+        commitment: FINALIZED_COMMITMENT,
+        connection,
+        minContextSlot: latestContextSlot,
+        sha256Hex,
+        transaction,
+      });
       setLogs(simulation.value.logs ?? []);
       if (simulation.value.err) {
         throw new Error(`Migration simulation failed: ${JSON.stringify(simulation.value.err)}`);
       }
-      setStatus(`MODEL T // REVIEW WEEK ${round.week} MIGRATION AND SIGN; STILL NOT BROADCAST`);
-      const signed = await provider.signTransaction(transaction);
-      if (await sha256Hex(signed.serializeMessage()) !== messageSha256) {
-        throw new Error("Model T changed the simulated migration message");
+      const promptSnapshot = await loadMigrationSnapshot(sha256Hex, simulationSlot);
+      const promptRound = promptSnapshot.legacy.find((candidate) => candidate.address.equals(roundAddress));
+      if (
+        !promptRound
+        || attendedRoundBinding("migration", promptSnapshot, promptRound) !== actionBinding
+      ) {
+        setSnapshot(promptSnapshot);
+        throw new Error("Finalized migration evidence or selected round changed before the hardware prompt");
       }
-      const hardwareSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
-      if (!hardwareSignature?.signature) throw new Error("Reviewed Model T signature is missing");
-      if (!signed.verifySignatures()) throw new Error("Hardware-signed migration failed local verification");
+      const promptTransaction = buildAttendedRoundTransaction({
+        blockhash: latest.blockhash,
+        current: promptSnapshot,
+        feePayer: publicKey,
+        kind: "migration",
+        round: promptRound,
+      });
+      assertExactTransactionMessage(promptTransaction, messageBytes, "Freshly rebuilt migration");
+      setSnapshot(promptSnapshot);
+      setStatus(`MODEL T // REVIEW WEEK ${promptRound.week} MIGRATION AND SIGN; STILL NOT BROADCAST`);
+      const signed = await provider.signTransaction(transaction);
+      await assertSignedLegacyTransaction({
+        expectedBlockhash: latest.blockhash,
+        expectedMessageBytes: messageBytes,
+        expectedMessageSha256: messageSha256,
+        expectedSigner: publicKey,
+        sha256Hex,
+        signed,
+      });
       setPending({
         signed,
         latest,
+        signer: publicKey,
+        messageBytes,
         messageSha256,
-        round,
+        round: promptRound,
         kind: "migration",
-        evidenceBinding: current.evidenceBinding,
+        actionBinding,
+        evidenceBinding: promptSnapshot.evidenceBinding,
+        finalizedContextSlot: promptSnapshot.finalizedContextSlot,
       });
-      setStatus(`SIGNED WEEK ${round.week} // NOT BROADCAST — USE THE SEPARATE BUTTON`);
+      setStatus(`SIGNED WEEK ${promptRound.week} // NOT BROADCAST — USE THE SEPARATE BUTTON`);
     } catch (caught) {
       setStatus("HOLD // MIGRATION PREPARATION STOPPED");
       setError(errorText(caught));
@@ -396,7 +611,7 @@ export default function LegacyRoundMigration({
     setLogs([]);
     setStatus("REFRESHING EXACT ABSENT PDA + CANONICAL TIMEOUT // NOTHING BROADCAST");
     try {
-      const current = await loadMigrationSnapshot(sha256Hex);
+      const current = await loadMigrationSnapshot(sha256Hex, snapshot?.finalizedContextSlot ?? 0);
       setSnapshot(current);
       if (current.legacy.length !== 0) {
         throw new Error("Every settled legacy round must be migrated before historical recovery");
@@ -405,45 +620,94 @@ export default function LegacyRoundMigration({
       if (!round || round.complete || !round.eligible) {
         throw new Error("Selected historical round is not absent and eligible for neutral recovery");
       }
+      const actionBinding = attendedRoundBinding("neutral-backfill", current, round);
       const { provider, publicKey } = await getHardwareProvider(IAT_V2_PROGRAM_ADMIN);
       if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
         throw new Error("Connected hardware account is not the reviewed administrator");
       }
-      const latest = await connection.getLatestBlockhash(FINALIZED_COMMITMENT);
-      const transaction = new Transaction({
+      const latestResult = await connection.getLatestBlockhashAndContext({
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: current.finalizedContextSlot,
+      });
+      const latestContextSlot = finalizedContextSlot(
+        latestResult,
+        "Historical neutral recovery blockhash",
+        current.finalizedContextSlot,
+      );
+      const latest = latestResult.value;
+      const transaction = buildAttendedRoundTransaction({
+        blockhash: latest.blockhash,
+        current,
         feePayer: publicKey,
-        recentBlockhash: latest.blockhash,
-      }).add(buildBackfillHistoricalNeutralRoundInstruction({
-        admin: publicKey,
-        mint: current.mint,
-        week: round.week,
-      }));
-      if (transaction.instructions.length !== 1) {
-        throw new Error("Historical neutral recovery transaction must contain exactly one instruction");
-      }
-      const messageSha256 = await sha256Hex(transaction.serializeMessage());
-      const simulation = await connection.simulateTransaction(transaction);
+        kind: "neutral-backfill",
+        round,
+      });
+      const {
+        messageBytes,
+        messageSha256,
+        simulation,
+        simulationSlot,
+      } = await simulateExactLegacyTransaction({
+        commitment: FINALIZED_COMMITMENT,
+        connection,
+        minContextSlot: latestContextSlot,
+        sha256Hex,
+        transaction,
+      });
       setLogs(simulation.value.logs ?? []);
       if (simulation.value.err) {
         throw new Error(`Historical neutral recovery simulation failed: ${JSON.stringify(simulation.value.err)}`);
       }
-      setStatus(`MODEL T // REVIEW TERMINAL-NEUTRAL WEEK ${round.week}; NO RANDOMNESS OR WINNER`);
-      const signed = await provider.signTransaction(transaction);
-      if (await sha256Hex(signed.serializeMessage()) !== messageSha256) {
-        throw new Error("Model T changed the simulated historical neutral recovery message");
+      const promptSnapshot = await loadMigrationSnapshot(sha256Hex, simulationSlot);
+      const promptRound = promptSnapshot.recoveries.find((candidate) => (
+        candidate.address.equals(roundAddress)
+      ));
+      if (
+        promptSnapshot.legacy.length !== 0
+        || !promptRound
+        || promptRound.complete
+        || !promptRound.eligible
+        || attendedRoundBinding("neutral-backfill", promptSnapshot, promptRound) !== actionBinding
+      ) {
+        setSnapshot(promptSnapshot);
+        throw new Error("Finalized recovery evidence or selected round changed before the hardware prompt");
       }
-      const hardwareSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
-      if (!hardwareSignature?.signature) throw new Error("Reviewed Model T signature is missing");
-      if (!signed.verifySignatures()) throw new Error("Hardware-signed recovery failed local verification");
+      const promptTransaction = buildAttendedRoundTransaction({
+        blockhash: latest.blockhash,
+        current: promptSnapshot,
+        feePayer: publicKey,
+        kind: "neutral-backfill",
+        round: promptRound,
+      });
+      assertExactTransactionMessage(
+        promptTransaction,
+        messageBytes,
+        "Freshly rebuilt historical neutral recovery",
+      );
+      setSnapshot(promptSnapshot);
+      setStatus(`MODEL T // REVIEW TERMINAL-NEUTRAL WEEK ${promptRound.week}; NO RANDOMNESS OR WINNER`);
+      const signed = await provider.signTransaction(transaction);
+      await assertSignedLegacyTransaction({
+        expectedBlockhash: latest.blockhash,
+        expectedMessageBytes: messageBytes,
+        expectedMessageSha256: messageSha256,
+        expectedSigner: publicKey,
+        sha256Hex,
+        signed,
+      });
       setPending({
         signed,
         latest,
+        signer: publicKey,
+        messageBytes,
         messageSha256,
-        round,
+        round: promptRound,
         kind: "neutral-backfill",
-        evidenceBinding: current.evidenceBinding,
+        actionBinding,
+        evidenceBinding: promptSnapshot.evidenceBinding,
+        finalizedContextSlot: promptSnapshot.finalizedContextSlot,
       });
-      setStatus(`SIGNED NEUTRAL WEEK ${round.week} // NOT BROADCAST — USE THE SEPARATE BUTTON`);
+      setStatus(`SIGNED NEUTRAL WEEK ${promptRound.week} // NOT BROADCAST — USE THE SEPARATE BUTTON`);
     } catch (caught) {
       setStatus("HOLD // HISTORICAL NEUTRAL RECOVERY PREPARATION STOPPED");
       setError(errorText(caught));
@@ -457,8 +721,53 @@ export default function LegacyRoundMigration({
     setBusy(true);
     setError("");
     const action = pending.kind === "migration" ? "MIGRATION" : "TERMINAL-NEUTRAL RECOVERY";
-    setStatus(`BROADCASTING USER-APPROVED DEVNET WEEK ${pending.round.week} ${action}`);
+    setStatus(`REVERIFYING FINALIZED WEEK ${pending.round.week} ${action} // NOTHING BROADCAST`);
+    let broadcastBoundaryValidated = false;
     try {
+      const current = await loadMigrationSnapshot(sha256Hex, pending.finalizedContextSlot);
+      setSnapshot(current);
+      const round = pending.kind === "migration"
+        ? current.legacy.find((candidate) => candidate.address.equals(pending.round.address))
+        : current.recoveries.find((candidate) => candidate.address.equals(pending.round.address));
+      if (
+        !round
+        || (pending.kind === "neutral-backfill" && (
+          current.legacy.length !== 0
+          || round.complete
+          || !round.eligible
+        ))
+        || attendedRoundBinding(pending.kind, current, round) !== pending.actionBinding
+      ) {
+        throw new Error("Finalized migration evidence, action, or selected round no longer matches the signature");
+      }
+      const rebuilt = buildAttendedRoundTransaction({
+        blockhash: pending.latest.blockhash,
+        current,
+        feePayer: pending.signer,
+        kind: pending.kind,
+        round,
+      });
+      assertExactTransactionMessage(
+        rebuilt,
+        pending.messageBytes,
+        "Freshly rebuilt attended round action",
+      );
+      await assertSignedLegacyTransaction({
+        expectedBlockhash: pending.latest.blockhash,
+        expectedMessageBytes: pending.messageBytes,
+        expectedMessageSha256: pending.messageSha256,
+        expectedSigner: pending.signer,
+        sha256Hex,
+        signed: pending.signed,
+      });
+      await assertFreshFinalizedBlockhash({
+        blockhash: pending.latest.blockhash,
+        commitment: FINALIZED_COMMITMENT,
+        connection,
+        minContextSlot: current.finalizedContextSlot,
+      });
+      broadcastBoundaryValidated = true;
+      setStatus(`BROADCASTING USER-APPROVED DEVNET WEEK ${pending.round.week} ${action}`);
       const signature = await connection.sendRawTransaction(pending.signed.serialize(), {
         skipPreflight: false,
         preflightCommitment: FINALIZED_COMMITMENT,
@@ -472,6 +781,11 @@ export default function LegacyRoundMigration({
       if (confirmation.value.err) {
         throw new Error(`Migration confirmation failed: ${JSON.stringify(confirmation.value.err)}`);
       }
+      const confirmationSlot = finalizedContextSlot(
+        confirmation,
+        "Migration confirmation",
+        current.finalizedContextSlot,
+      );
       const week = Number(pending.round.week);
       const canonicalAction = pending.kind === "migration"
         ? `MIGRATE_LEGACY_ROUND_WEEK_${week}`
@@ -491,11 +805,16 @@ export default function LegacyRoundMigration({
       });
       setReceiptSet(nextReceiptSet);
       setPending(null);
-      const next = await loadMigrationSnapshot(sha256Hex);
+      const next = await loadMigrationSnapshot(sha256Hex, confirmationSlot);
       setSnapshot(next);
       setStatus(snapshotStatus(next));
     } catch (caught) {
-      setStatus("HOLD // MIGRATION BROADCAST FAILED");
+      if (!broadcastBoundaryValidated) {
+        setPending(null);
+        setStatus("HOLD // SIGNED ROUND TRANSACTION DISCARDED BEFORE BROADCAST");
+      } else {
+        setStatus("HOLD // MIGRATION BROADCAST FAILED");
+      }
       setError(errorText(caught));
     } finally {
       setBusy(false);

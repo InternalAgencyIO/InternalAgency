@@ -1,0 +1,108 @@
+import { Buffer } from "buffer";
+import { VersionedTransaction } from "@solana/web3.js";
+
+export function sameBytes(left, right) {
+  return Buffer.from(left).equals(Buffer.from(right));
+}
+
+export function finalizedContextSlot(result, label, minContextSlot = 0) {
+  const slot = result?.context?.slot;
+  if (!Number.isSafeInteger(slot) || slot <= 0 || slot < minContextSlot) {
+    throw new Error(`${label} did not return a valid monotonic finalized context slot`);
+  }
+  return slot;
+}
+
+export function exactVersionedSimulation(transaction) {
+  const messageBytes = Buffer.from(transaction.serializeMessage());
+  const simulationTransaction = new VersionedTransaction(transaction.compileMessage());
+  if (!sameBytes(simulationTransaction.message.serialize(), messageBytes)) {
+    throw new Error("Exact reviewed legacy message changed while preparing versioned simulation");
+  }
+  return { messageBytes, simulationTransaction };
+}
+
+export function assertExactTransactionMessage(transaction, expectedMessageBytes, label) {
+  if (!sameBytes(transaction.serializeMessage(), expectedMessageBytes)) {
+    throw new Error(`${label} no longer matches the exact reviewed transaction message`);
+  }
+}
+
+export async function simulateExactLegacyTransaction({
+  commitment = "finalized",
+  connection,
+  minContextSlot,
+  sha256Hex,
+  transaction,
+}) {
+  if (!Number.isSafeInteger(minContextSlot) || minContextSlot <= 0) {
+    throw new Error("Exact transaction simulation requires a positive finalized minContextSlot");
+  }
+  const { messageBytes, simulationTransaction } = exactVersionedSimulation(transaction);
+  const messageSha256 = await sha256Hex(messageBytes);
+  const simulation = await connection.simulateTransaction(simulationTransaction, {
+    commitment,
+    minContextSlot,
+    replaceRecentBlockhash: false,
+    sigVerify: false,
+  });
+  const simulationSlot = finalizedContextSlot(
+    simulation,
+    "Exact transaction simulation",
+    minContextSlot,
+  );
+  if (
+    !sameBytes(simulationTransaction.message.serialize(), messageBytes)
+    || !sameBytes(transaction.serializeMessage(), messageBytes)
+    || await sha256Hex(transaction.serializeMessage()) !== messageSha256
+  ) {
+    throw new Error("Simulation changed the exact hardware-reviewed transaction message");
+  }
+  return {
+    messageBytes,
+    messageSha256,
+    simulation,
+    simulationSlot,
+  };
+}
+
+export async function assertSignedLegacyTransaction({
+  expectedBlockhash,
+  expectedMessageBytes,
+  expectedMessageSha256,
+  expectedSigner,
+  sha256Hex,
+  signed,
+}) {
+  assertExactTransactionMessage(signed, expectedMessageBytes, "Signed transaction");
+  if (await sha256Hex(signed.serializeMessage()) !== expectedMessageSha256) {
+    throw new Error("Signed transaction message hash no longer matches hardware review");
+  }
+  if (signed.recentBlockhash !== expectedBlockhash) {
+    throw new Error("Signed transaction blockhash no longer matches hardware review");
+  }
+  const signer = signed.signatures.find(({ publicKey }) => publicKey.equals(expectedSigner));
+  if (!signer?.signature) throw new Error("Required hardware signature is missing");
+  if (!signed.verifySignatures()) {
+    throw new Error("Hardware-signed transaction failed local signature verification");
+  }
+}
+
+export async function assertFreshFinalizedBlockhash({
+  blockhash,
+  commitment = "finalized",
+  connection,
+  minContextSlot,
+}) {
+  const result = await connection.isBlockhashValid(blockhash, {
+    commitment,
+    minContextSlot,
+  });
+  const contextSlot = finalizedContextSlot(
+    result,
+    "Signed transaction blockhash",
+    minContextSlot,
+  );
+  if (!result.value) throw new Error("Signed transaction blockhash is no longer valid");
+  return contextSlot;
+}

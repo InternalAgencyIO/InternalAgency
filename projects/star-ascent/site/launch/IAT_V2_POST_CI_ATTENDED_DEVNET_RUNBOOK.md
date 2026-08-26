@@ -13,6 +13,8 @@ Start the local console from `projects/star-ascent/site` with `npm run iat:v2-ad
 
 Never use a public host for these consoles. The reviewed Devnet program is `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`; the attended Model T administrator is `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`.
 
+The feature-mode shell must require the exact migration artifact before it exposes feature actions; the separate seven-stage initialization shell remains pinned to its exact pre-upgrade artifact. Any seven-stage action selection must use finalized account contexts, monotonic `minContextSlot` reads, and finalized block time. Mode switching must never turn “either reviewed artifact” into an acceptable deployment check.
+
 ## 1. Bind and inspect the CI artifact
 
 Run the read-only artifact check:
@@ -101,7 +103,11 @@ The receipt actions must be `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9` and `BACK
 
 ## 6. Finish the week-11 feature roster
 
-Open `http://127.0.0.1:4175/?mode=features`. For every offered action, use the first button to build, simulate, and request the physical signature. Review the message hash, then use the separate broadcast button. Never approve the next action until the prior transaction is finalized and the console has refreshed chain state.
+Open `http://127.0.0.1:4175/?mode=features`. The selector must refresh its config and action accounts at finalized commitment, retain monotonic finalized context slots, and derive cadence only from finalized block time. After balance and linked-round reads, the greatest returned observation slot must still resolve to the same week and CCC round; a confirmed-only read, local workstation time, missing block time, regressing context, or boundary change during the observation is a stop. For every offered action, use the first button to build, simulate, and request the physical signature. Review the message hash, then use the separate broadcast button. Never approve the next action until the prior transaction is finalized and the console has refreshed chain state.
+
+Immediately before transaction construction, the feature console must load a fresh finalized parent snapshot, use that snapshot's final slot as the minimum for every child config/state/balance/linked-round read, and then re-inspect the deployment at or after the child's greatest observation slot. The exact Program ID, ProgramData address, `771c…8a01` program hash, 649,680-byte artifact length, and `7XZj…fzPH` upgrade authority must all match. It repeats the finalized deployment-and-action check after simulation immediately before the Model T prompt.
+
+The separate broadcast click must repeat the same parent → child → deployment observation chain from the signed pending record's final slot. The freshly selected action and exact parent/deployment bindings must match the signed record, the hardware-reviewed message hash and signatures must remain intact, and the signed blockhash must still be valid at or after the fresh final slot. Any pre-broadcast mismatch discards the pending signed transaction and broadcasts nothing. A failure after a send attempt remains an explicit HOLD because submission may be uncertain.
 
 The remaining reviewed order is exact:
 
@@ -126,6 +132,8 @@ The consoles persist canonical records under a versioned local-storage key bound
 `action,title,signature,messageSha256,explorerUrl,finalizedAtUtc,kind,week`
 
 In the feature console, import any separately exported source-bound receipt sets only if the shared local browser storage does not already contain them. Press **EXPORT COMPLETE ATTENDED BUNDLE**. The exporter rejects missing actions, conflicting duplicates, a missing ProgramData capacity observation, and anything other than exactly one round-11 terminal action. It never creates a placeholder receipt.
+
+The legacy seven-stage evidence export is disabled in feature/post-upgrade mode. Its historical initialization receipts must remain separate and must never be rebound to, or combined with, the `bb09`/`771c` migration snapshot. The pre-upgrade initialization shell retains its own legacy export. In the feature shell, **DOWNLOAD FEATURE EVIDENCE** is only a partial checkpoint; **EXPORT COMPLETE ATTENDED BUNDLE** is the canonical complete-roster export.
 
 Use a new empty staging directory and run the finalizer first without `--write`:
 

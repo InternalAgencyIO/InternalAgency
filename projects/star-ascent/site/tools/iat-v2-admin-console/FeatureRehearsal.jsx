@@ -6,6 +6,7 @@ import {
   PublicKey,
   SystemProgram,
   Transaction,
+  VersionedTransaction,
 } from "@solana/web3.js";
 import {
   createAssociatedTokenAccountIdempotentInstruction,
@@ -48,10 +49,13 @@ import {
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
   DEVNET_FEATURE_MINT_SEED,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
   IAT_V2_PROGRAM_ADMIN,
+  IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
+  parseV2ConfigAccount,
 } from "../../programs/iat_v2/instructions.mjs";
 import {
   SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
@@ -133,15 +137,134 @@ function roleMatches(eligibility, role, agencyIndex = null) {
   return eligibility.agencyIndex === agencyIndex;
 }
 
-async function loadFeatureState(baseSnapshot) {
-  const { mint, plan, config } = baseSnapshot;
+function finalizedContextSlot(result, label, minContextSlot = 0) {
+  const slot = result?.context?.slot;
+  if (!Number.isSafeInteger(slot) || slot < minContextSlot) {
+    throw new Error(`${label} did not return a valid finalized context slot`);
+  }
+  return slot;
+}
+
+async function finalizedBlockTimestamp(slot, label) {
+  const timestamp = await connection.getBlockTime(slot);
+  if (!Number.isSafeInteger(timestamp) || timestamp <= 0) {
+    throw new Error(`${label} did not return a valid finalized block time`);
+  }
+  return timestamp;
+}
+
+function finalizedParentSnapshotSlot(snapshot, label, minContextSlot = 0) {
+  const slot = snapshot?.finalizedContextSlot;
+  if (!Number.isSafeInteger(slot) || slot <= 0 || slot < minContextSlot) {
+    throw new Error(`${label} does not carry a monotonic finalized context slot`);
+  }
+  return slot;
+}
+
+function featureParentBinding(snapshot) {
+  return {
+    mint: snapshot.mint.toBase58(),
+    config: snapshot.plan.config.toBase58(),
+    communityTokenAccount: snapshot.plan.allocationDestinations.community.tokenAccount.toBase58(),
+    supply: String(snapshot.supply),
+    active: snapshot.active,
+    complete: snapshot.complete,
+  };
+}
+
+function migrationDeploymentObservation(deployment, minContextSlot) {
+  if (
+    !deployment?.programId?.equals(IAT_V2_PROGRAM_ID)
+    || !deployment?.programDataAddress?.equals(IAT_V2_PROGRAM_DATA_ADDRESS)
+    || !deployment?.upgradeAuthority?.equals(IAT_V2_PROGRAM_ADMIN)
+    || deployment?.artifactSha256 !== IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256
+    || deployment?.programBytes !== IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES
+    || !Number.isSafeInteger(deployment?.contextSlot)
+    || deployment.contextSlot < minContextSlot
+  ) {
+    throw new Error("Finalized deployment is not the exact reviewed migration Program/ProgramData artifact and authority");
+  }
+  return {
+    contextSlot: deployment.contextSlot,
+    binding: {
+      programId: deployment.programId.toBase58(),
+      programDataAddress: deployment.programDataAddress.toBase58(),
+      artifactSha256: deployment.artifactSha256,
+      programBytes: deployment.programBytes,
+      upgradeAuthority: deployment.upgradeAuthority.toBase58(),
+    },
+  };
+}
+
+function featureActionBinding(action, state) {
+  return {
+    id: action.id,
+    signer: action.signer.toBase58(),
+    lamports: action.lamports ?? null,
+    week: action.week ?? null,
+    positionIndex: action.positionIndex ?? null,
+    ordinal: action.ordinal ?? null,
+    roundAddress: action.roundAddress?.toBase58() ?? null,
+    createsEphemeralProtocolSigner: action.createsEphemeralProtocolSigner === true,
+    transactionState: {
+      coreDestination: state.coreDestination.toBase58(),
+      liquidityDestination: state.liquidityDestination.toBase58(),
+      randomnessAddress: state.randomnessAddress?.toBase58() ?? null,
+      currentRoundAddress: state.currentRoundAddress?.toBase58() ?? null,
+      currentRoundLayoutVersion: state.currentRound?.layoutVersion ?? null,
+      currentRoundRandomnessAccount: state.currentRound?.randomnessAccount?.toBase58() ?? null,
+      currentRoundStatus: state.currentRound?.status ?? null,
+    },
+  };
+}
+
+function sameBinding(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function sameBytes(left, right) {
+  return left.length === right.length && left.every((byte, index) => byte === right[index]);
+}
+
+async function loadFeatureState(baseSnapshot, minimumFinalizedSlot = 0) {
+  if (!Number.isSafeInteger(minimumFinalizedSlot) || minimumFinalizedSlot < 0) {
+    throw new Error("Feature state minimum finalized slot is invalid");
+  }
+  const parentSlot = finalizedParentSnapshotSlot(
+    baseSnapshot,
+    "Parent initialization snapshot",
+  );
+  const configReadFloor = Math.max(parentSlot, minimumFinalizedSlot);
+  const { mint, plan } = baseSnapshot;
+  const configResult = await connection.getAccountInfoAndContext(
+    plan.config,
+    {
+      commitment: FINALIZED_COMMITMENT,
+      minContextSlot: configReadFloor,
+    },
+  );
+  const configSlot = finalizedContextSlot(configResult, "Feature config", configReadFloor);
+  const configInfo = configResult.value;
+  if (!configInfo || !configInfo.owner.equals(IAT_V2_PROGRAM_ID)) {
+    throw new Error("Feature config is missing from finalized Devnet state or has the wrong owner");
+  }
+  const config = parseV2ConfigAccount(configInfo.data);
+  if (
+    !config.admin.equals(IAT_V2_PROGRAM_ADMIN)
+    || !config.mint.equals(mint)
+    || !config.randomnessProgram.equals(SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID)
+    || !config.rehearsalMode
+    || !config.active
+  ) {
+    throw new Error("Finalized feature config is not the reviewed active Devnet rehearsal");
+  }
   const genesisTimestamp = Number(config.genesisTimestamp);
   if (!Number.isSafeInteger(genesisTimestamp)) {
     throw new Error("Feature Genesis timestamp is outside the browser's safe range");
   }
-  const nowTimestamp = Math.floor(Date.now() / 1_000);
-  const currentWeek = currentIatV2Week(genesisTimestamp, nowTimestamp);
-  const currentCccRound = currentIatV2CccRound(genesisTimestamp, nowTimestamp);
+  const configTimestamp = await finalizedBlockTimestamp(configSlot, "Feature config");
+  const configWeek = currentIatV2Week(genesisTimestamp, configTimestamp);
+  const configCccRound = currentIatV2CccRound(genesisTimestamp, configTimestamp);
   const eligibilityAddress = deriveEligibilityAddress({
     config: plan.config,
     wallet: COMMUNITY_CUSTODY,
@@ -159,15 +282,14 @@ async function loadFeatureState(baseSnapshot) {
   }));
   const coreDestination = getAssociatedTokenAddressSync(mint, CORE_BENEFICIARY);
   const liquidityDestination = getAssociatedTokenAddressSync(mint, LIQUIDITY_BENEFICIARY);
-  const currentRoundAddress = currentCccRound === null
+  const currentRoundAddress = configCccRound === null
     ? null
     : deriveRoundAddress({
-      config: plan.config,
-      programId: IAT_V2_PROGRAM_ID,
-      week: currentCccRound,
-    });
+        config: plan.config,
+        programId: IAT_V2_PROGRAM_ID,
+        week: configCccRound,
+      });
   const randomnessAddress = storedRandomnessAddress();
-  const participantBalanceLamports = await connection.getBalance(COMMUNITY_CUSTODY, "confirmed");
   const addresses = [
     ...agencyAddresses,
     eligibilityAddress,
@@ -179,7 +301,28 @@ async function loadFeatureState(baseSnapshot) {
     ...(currentRoundAddress ? [currentRoundAddress] : []),
     ...(randomnessAddress ? [randomnessAddress] : []),
   ];
-  const infos = await connection.getMultipleAccountsInfo(addresses, "confirmed");
+  const stateResult = await connection.getMultipleAccountsInfoAndContext(addresses, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: configSlot,
+  });
+  const stateSlot = finalizedContextSlot(stateResult, "Feature state", configSlot);
+  const stateTimestamp = await finalizedBlockTimestamp(stateSlot, "Feature state");
+  const currentWeek = currentIatV2Week(genesisTimestamp, stateTimestamp);
+  const currentCccRound = currentIatV2CccRound(genesisTimestamp, stateTimestamp);
+  if (currentWeek !== configWeek || currentCccRound !== configCccRound) {
+    throw new Error("Finalized Devnet time crossed a feature boundary; refresh before signing");
+  }
+  const infos = stateResult.value;
+  const participantBalanceResult = await connection.getBalanceAndContext(COMMUNITY_CUSTODY, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: stateSlot,
+  });
+  const participantBalanceSlot = finalizedContextSlot(
+    participantBalanceResult,
+    "Participant balance",
+    stateSlot,
+  );
+  const participantBalanceLamports = participantBalanceResult.value;
   let cursor = 0;
   const agencyInfos = infos.slice(cursor, cursor += agencyAddresses.length);
   const eligibilityInfo = infos[cursor++];
@@ -225,17 +368,32 @@ async function loadFeatureState(baseSnapshot) {
     programId: IAT_V2_PROGRAM_ID,
     week,
   }));
-  const linkedRoundInfos = linkedRoundAddresses.length
-    ? await connection.getMultipleAccountsInfo(linkedRoundAddresses, "confirmed")
-    : [];
+  const linkedRoundResult = linkedRoundAddresses.length
+    ? await connection.getMultipleAccountsInfoAndContext(linkedRoundAddresses, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: participantBalanceSlot,
+      })
+    : null;
+  const finalObservationSlot = linkedRoundResult
+    ? finalizedContextSlot(linkedRoundResult, "Linked rounds", participantBalanceSlot)
+    : participantBalanceSlot;
+  const linkedRoundInfos = linkedRoundResult?.value ?? [];
   const linkedRounds = Object.fromEntries(linkedRoundWeeks.map((week, index) => {
     const info = linkedRoundInfos[index];
     if (!info) return [week, null];
     if (!info.owner.equals(IAT_V2_PROGRAM_ID)) throw new Error("CCC round has the wrong owner");
     return [week, parseRoundAccount(info.data)];
   }));
+  const nowTimestamp = await finalizedBlockTimestamp(finalObservationSlot, "Final feature observation");
+  if (
+    currentIatV2Week(genesisTimestamp, nowTimestamp) !== currentWeek
+    || currentIatV2CccRound(genesisTimestamp, nowTimestamp) !== currentCccRound
+  ) {
+    throw new Error("Finalized Devnet time crossed a feature boundary; refresh before signing");
+  }
 
   return {
+    finalObservationSlot,
     nowTimestamp,
     genesisTimestamp,
     currentWeek,
@@ -665,8 +823,10 @@ export default function FeatureRehearsal({
   explorer,
   getHardwareProvider,
   json,
+  loadFeatureParentSnapshot,
   sha256Hex,
   short,
+  verifyMigrationDeployment,
 }) {
   const [state, setState] = useState(null);
   const [evidence, setEvidence] = useState(loadEvidence);
@@ -678,6 +838,45 @@ export default function FeatureRehearsal({
   const [logs, setLogs] = useState([]);
 
   const action = useMemo(() => state ? nextFeatureAction(state) : null, [state]);
+
+  async function loadFreshAttendedBoundary(minimumFinalizedSlot = 0) {
+    if (!Number.isSafeInteger(minimumFinalizedSlot) || minimumFinalizedSlot < 0) {
+      throw new Error("Attended boundary minimum finalized slot is invalid");
+    }
+    const baseSlot = finalizedParentSnapshotSlot(
+      baseSnapshot,
+      "Parent initialization snapshot",
+    );
+    const readFloor = Math.max(baseSlot, minimumFinalizedSlot);
+    const reviewedParentBinding = featureParentBinding(baseSnapshot);
+    const parentSnapshot = await loadFeatureParentSnapshot(readFloor);
+    const parentSlot = finalizedParentSnapshotSlot(
+      parentSnapshot,
+      "Fresh parent initialization snapshot",
+      readFloor,
+    );
+    const parentBinding = featureParentBinding(parentSnapshot);
+    if (
+      !parentSnapshot.complete
+      || !parentSnapshot.active
+      || !sameBinding(parentBinding, reviewedParentBinding)
+    ) {
+      throw new Error("Fresh finalized parent snapshot no longer matches the reviewed active deployment");
+    }
+    const childState = await loadFeatureState(parentSnapshot, parentSlot);
+    const deployment = await verifyMigrationDeployment(childState.finalObservationSlot);
+    const deploymentObservation = migrationDeploymentObservation(
+      deployment,
+      childState.finalObservationSlot,
+    );
+    return {
+      parentSnapshot,
+      parentBinding,
+      state: childState,
+      deploymentBinding: deploymentObservation.binding,
+      finalObservationSlot: deploymentObservation.contextSlot,
+    };
+  }
 
   const refresh = useCallback(async () => {
     setBusy(true);
@@ -714,17 +913,37 @@ export default function FeatureRehearsal({
     setStatus("BUILDING + SIMULATING // NOTHING WILL BE BROADCAST");
     let ephemeralKeypair = null;
     try {
-      const current = await loadFeatureState(baseSnapshot);
+      const buildBoundary = await loadFreshAttendedBoundary(
+        finalizedParentSnapshotSlot(baseSnapshot, "Parent initialization snapshot"),
+      );
+      const current = buildBoundary.state;
       const currentAction = nextFeatureAction(current);
-      if (!currentAction || currentAction.id !== action.id) {
+      const reviewedActionBinding = featureActionBinding(action, state);
+      const currentActionBinding = currentAction ? featureActionBinding(currentAction, current) : null;
+      if (!currentAction || !sameBinding(currentActionBinding, reviewedActionBinding)) {
         setState(current);
         throw new Error("Chain state advanced; review the newly computed action");
       }
-      setStatus(`CONNECTING ${signerRole(action.signer)} // ${short(action.signer.toBase58(), 9)}`);
-      const { provider, publicKey } = await getHardwareProvider(action.signer);
-      const built = await buildActionTransaction(action, current, baseSnapshot, provider);
+      setState(current);
+      setStatus(`CONNECTING ${signerRole(currentAction.signer)} // ${short(currentAction.signer.toBase58(), 9)}`);
+      const { provider, publicKey } = await getHardwareProvider(currentAction.signer);
+      const built = await buildActionTransaction(
+        currentAction,
+        current,
+        buildBoundary.parentSnapshot,
+        provider,
+      );
       ephemeralKeypair = built.ephemeralKeypair;
-      const latest = await connection.getLatestBlockhash(FINALIZED_COMMITMENT);
+      const latestResult = await connection.getLatestBlockhashAndContext({
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: buildBoundary.finalObservationSlot,
+      });
+      const latestContextSlot = finalizedContextSlot(
+        latestResult,
+        "Transaction blockhash",
+        buildBoundary.finalObservationSlot,
+      );
+      const latest = latestResult.value;
       built.transaction.feePayer = publicKey;
       built.transaction.recentBlockhash = latest.blockhash;
       if (ephemeralKeypair) built.transaction.partialSign(ephemeralKeypair);
@@ -733,14 +952,49 @@ export default function FeatureRehearsal({
         verifySignatures: false,
       }).length;
       if (wireSize > 1232) throw new Error(`Transaction is ${wireSize} bytes, above Solana's limit`);
-      const messageSha256 = await sha256Hex(built.transaction.serializeMessage());
-      // Legacy Transaction uses the signer-array overload in web3.js 1.x.
-      // Passing a VersionedTransaction-style config object throws "Invalid arguments".
-      const simulation = await connection.simulateTransaction(built.transaction);
+      const reviewedMessageBytes = built.transaction.serializeMessage();
+      const simulationTransaction = new VersionedTransaction(built.transaction.compileMessage());
+      if (!sameBytes(simulationTransaction.message.serialize(), reviewedMessageBytes)) {
+        throw new Error("Exact reviewed legacy message changed while preparing simulation");
+      }
+      const messageSha256 = await sha256Hex(reviewedMessageBytes);
+      const simulation = await connection.simulateTransaction(simulationTransaction, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: latestContextSlot,
+        replaceRecentBlockhash: false,
+        sigVerify: false,
+      });
+      const simulationSlot = finalizedContextSlot(
+        simulation,
+        "Transaction simulation",
+        latestContextSlot,
+      );
       setLogs(simulation.value.logs ?? []);
       if (simulation.value.err) {
         throw new Error(`Simulation failed: ${json(simulation.value.err)}`);
       }
+      const postSimulationMessageBytes = built.transaction.serializeMessage();
+      if (
+        !sameBytes(postSimulationMessageBytes, reviewedMessageBytes)
+        || await sha256Hex(postSimulationMessageBytes) !== messageSha256
+      ) {
+        throw new Error("Simulation changed the exact hardware-reviewed transaction message");
+      }
+      const promptBoundary = await loadFreshAttendedBoundary(simulationSlot);
+      const promptAction = nextFeatureAction(promptBoundary.state);
+      const promptActionBinding = promptAction
+        ? featureActionBinding(promptAction, promptBoundary.state)
+        : null;
+      if (
+        !promptAction
+        || !sameBinding(promptActionBinding, currentActionBinding)
+        || !sameBinding(promptBoundary.parentBinding, buildBoundary.parentBinding)
+        || !sameBinding(promptBoundary.deploymentBinding, buildBoundary.deploymentBinding)
+      ) {
+        setState(promptBoundary.state);
+        throw new Error("Finalized deployment or action changed before the hardware prompt");
+      }
+      setState(promptBoundary.state);
       setStatus("HARDWARE // REVIEW + SIGN; STILL NOT BROADCAST");
       const signed = await provider.signTransaction(built.transaction);
       const signedMessageSha256 = await sha256Hex(signed.serializeMessage());
@@ -751,14 +1005,18 @@ export default function FeatureRehearsal({
       if (!walletSignature?.signature) throw new Error("Required hardware signature is missing");
       if (!signed.verifySignatures()) throw new Error("Signed transaction failed local signature verification");
       setPending({
-        action: action.id,
-        title: action.title,
+        action: currentAction.id,
+        actionBinding: promptActionBinding,
+        title: currentAction.title,
         signed,
         messageSha256,
         latest,
         wireSize,
+        parentBinding: promptBoundary.parentBinding,
+        deploymentBinding: promptBoundary.deploymentBinding,
+        finalObservationSlot: promptBoundary.finalObservationSlot,
         randomnessAddress: built.randomnessAddress,
-        week: Number.isSafeInteger(action.week) ? action.week : null,
+        week: Number.isSafeInteger(currentAction.week) ? currentAction.week : null,
       });
       setStatus("SIGNED // NOT BROADCAST — REVIEW THEN PRESS BROADCAST");
     } catch (caught) {
@@ -774,8 +1032,52 @@ export default function FeatureRehearsal({
     if (!pending || busy) return;
     setBusy(true);
     setError("");
-    setStatus("BROADCASTING USER-APPROVED DEVNET TRANSACTION");
+    setStatus("REVERIFYING FINALIZED DEPLOYMENT + ACTION // NOTHING BROADCAST");
+    let broadcastBoundaryValidated = false;
     try {
+      const boundary = await loadFreshAttendedBoundary(pending.finalObservationSlot);
+      const currentAction = nextFeatureAction(boundary.state);
+      const currentActionBinding = currentAction
+        ? featureActionBinding(currentAction, boundary.state)
+        : null;
+      if (
+        !currentAction
+        || currentAction.id !== pending.action
+        || !sameBinding(currentActionBinding, pending.actionBinding)
+      ) {
+        throw new Error("Finalized feature action no longer matches the signed transaction");
+      }
+      if (
+        !sameBinding(boundary.parentBinding, pending.parentBinding)
+        || !sameBinding(boundary.deploymentBinding, pending.deploymentBinding)
+      ) {
+        throw new Error("Finalized deployment binding changed after the hardware signature");
+      }
+      const signedMessageSha256 = await sha256Hex(pending.signed.serializeMessage());
+      if (signedMessageSha256 !== pending.messageSha256) {
+        throw new Error("Signed transaction message changed after hardware review");
+      }
+      if (
+        pending.signed.recentBlockhash !== pending.latest.blockhash
+        || !pending.signed.verifySignatures()
+      ) {
+        throw new Error("Signed transaction or blockhash no longer matches the reviewed payload");
+      }
+      const blockhashValidity = await connection.isBlockhashValid(pending.latest.blockhash, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: boundary.finalObservationSlot,
+      });
+      finalizedContextSlot(
+        blockhashValidity,
+        "Signed transaction blockhash",
+        boundary.finalObservationSlot,
+      );
+      if (!blockhashValidity.value) {
+        throw new Error("Signed transaction blockhash is no longer valid");
+      }
+      setState(boundary.state);
+      broadcastBoundaryValidated = true;
+      setStatus("BROADCASTING USER-APPROVED DEVNET TRANSACTION");
       const signature = await connection.sendRawTransaction(pending.signed.serialize(), {
         skipPreflight: false,
         preflightCommitment: FINALIZED_COMMITMENT,
@@ -789,6 +1091,11 @@ export default function FeatureRehearsal({
       if (confirmation.value.err) {
         throw new Error(`Confirmation failed: ${json(confirmation.value.err)}`);
       }
+      const confirmationSlot = finalizedContextSlot(
+        confirmation,
+        "Finalized transaction confirmation",
+        boundary.finalObservationSlot,
+      );
       if (pending.randomnessAddress) {
         localStorage.setItem(FEATURE_RANDOMNESS_KEY, pending.randomnessAddress.toBase58());
       }
@@ -806,12 +1113,17 @@ export default function FeatureRehearsal({
         record,
       ]);
       setPending(null);
-      const next = await loadFeatureState(baseSnapshot);
-      setState(next);
-      const nextAction = nextFeatureAction(next);
+      const refreshedBoundary = await loadFreshAttendedBoundary(confirmationSlot);
+      setState(refreshedBoundary.state);
+      const nextAction = nextFeatureAction(refreshedBoundary.state);
       setStatus(nextAction ? `CONFIRMED // NEXT ${nextAction.id}` : "CONFIRMED // WAIT GATE");
     } catch (caught) {
-      setStatus("HOLD // BROADCAST OR CONFIRMATION FAILED");
+      if (!broadcastBoundaryValidated) {
+        setPending(null);
+        setStatus("HOLD // SIGNED TRANSACTION DISCARDED BEFORE BROADCAST");
+      } else {
+        setStatus("HOLD // BROADCAST OR CONFIRMATION FAILED");
+      }
       setError(caught instanceof Error ? caught.message : String(caught));
     } finally {
       setBusy(false);

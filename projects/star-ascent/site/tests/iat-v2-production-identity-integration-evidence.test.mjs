@@ -20,6 +20,11 @@ import {
 } from "../programs/iat_b3_reference/provider-authenticated-envelope.mjs";
 import { canonicalizeRfc8785 } from "../scripts/iat-v2-canonical-json.mjs";
 import {
+  CURRENT_SOURCE_PREDICATE_CHECK_IDS,
+  CURRENT_SOURCE_PREDICATE_HOLD_STATUS,
+  validateProductionIdentityClearancePredicate,
+} from "../scripts/lib/iat-v2-current-source-predicate-wiring.mjs";
+import {
   PRODUCTION_IDENTITY_INTEGRATION_ENVIRONMENT,
   PRODUCTION_IDENTITY_INTEGRATION_EVIDENCE_SCHEMA,
   PRODUCTION_IDENTITY_INTEGRATION_PREDICATE,
@@ -351,7 +356,7 @@ test("canonical trust is an explicit empty HOLD without source identities or key
   assert.equal(result.mainnetStatus, "HOLD");
 });
 
-test("canonical-trust-pinned X and D1 observer envelopes validate while Mainnet remains HOLD", () => {
+test("caller evidence and evaluation time remain structural-only HOLD at the clearance boundary", () => {
   const value = fixture();
   const trustResult = validateProductionIdentityIntegrationTrust(value.trust);
   assert.equal(trustResult.valid, true);
@@ -370,6 +375,34 @@ test("canonical-trust-pinned X and D1 observer envelopes validate while Mainnet 
   assert.equal(result.programArtifactSha256, value.programArtifactSha256);
   assert.deepEqual(result.checkIds, PRODUCTION_IDENTITY_INTEGRATION_SCENARIO_IDS);
   assert.equal(result.mainnetStatus, "HOLD");
+
+  const predicateBytes = evidenceBytes(value.evidence);
+  const wired = validateProductionIdentityClearancePredicate({
+    directEvidence: {
+      observedAtUtc: value.evidence.observedAtUtc,
+      receipts: [...value.evidence.receiptUrls],
+    },
+    checkReceipts: [{
+      checkId: CURRENT_SOURCE_PREDICATE_CHECK_IDS.productionIdentityIntegration,
+      detailsSha256: sha256(predicateBytes),
+    }],
+    predicateBytes,
+    trust: value.trust,
+    binding: {
+      commit: SOURCE_COMMIT,
+      tree: SOURCE_TREE,
+      programArtifactSha256: value.programArtifactSha256,
+    },
+    evaluationUnixSeconds: NOW,
+  });
+  assert.equal(wired.status, CURRENT_SOURCE_PREDICATE_HOLD_STATUS);
+  assert.equal(wired.structurallyValid, true, wired.violations.join("\n"));
+  assert.equal(wired.valid, false);
+  assert.equal(wired.authenticated, false);
+  assert.equal(wired.clearanceValid, false);
+  assert.equal(wired.mainnetStatus, "HOLD");
+  assert.equal(wired.blocker, "EXTERNALLY_AUTHENTICATED_EVALUATION_TIME_REQUIRED");
+  assert.equal(Object.hasOwn(wired, "result"), false, "raw validator authentication claims must not escape");
 
   const produced = produceProductionIdentityIntegrationEvidence({
     candidateBytes: evidenceBytes(value.evidence),

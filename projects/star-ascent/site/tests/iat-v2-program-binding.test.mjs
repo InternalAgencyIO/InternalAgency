@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { Keypair } from "@solana/web3.js";
 import {
   IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID,
@@ -25,6 +27,8 @@ import {
 } from "../programs/iat_v2/program-id-binding.mjs";
 
 const deployable = Keypair.generate().publicKey.toBase58();
+const siteRoot = fileURLToPath(new URL("..", import.meta.url));
+const readSiteSource = (relativePath) => readFileSync(resolve(siteRoot, relativePath), "utf8");
 
 test("binding accepts only a deployable public program ID", () => {
   assert.equal(validateDeployableProgramId(deployable), deployable);
@@ -96,7 +100,7 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
     "scripts/rebuild-iat-v2-devnet-buffer-fresh.sh",
     "scripts/handoff-iat-v2-devnet-buffer.sh",
   ]) {
-    const source = readFileSync(path, "utf8");
+    const source = readSiteSource(path);
     assert.match(source, /iat-v2-devnet-buffer-preflight\.mjs verify/u, `${path} lost CI evidence verification`);
     assert.match(source, /read -r EXPECTED_HASH EXPECTED_BYTES/u, `${path} lost verified dynamic binding`);
     assert.doesNotMatch(source, /EXPECTED_HASH="[0-9a-f]{64}"/u, `${path} must not pin an obsolete artifact`);
@@ -110,32 +114,40 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
     "tools/iat-v2-admin-console/main.jsx",
     "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
   ]) {
-    const source = readFileSync(path, "utf8");
+    const source = readSiteSource(path);
     assert.match(source, /inspectReviewedUpgradeableProgramArtifact/u, `${path} must inspect Loader padding`);
     assert.match(source, /matchesReviewedArtifact/u, `${path} must reject artifact or padding drift`);
   }
 
-  const mainConsoleSource = readFileSync("tools/iat-v2-admin-console/main.jsx", "utf8");
+  const mainConsoleSource = readSiteSource("tools/iat-v2-admin-console/main.jsx");
   assert.match(mainConsoleSource, /IAT_V2_PROGRAM_ARTIFACT_SHA256/u, "main console must retain the live artifact pin");
+  assert.match(mainConsoleSource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u, "feature mode must retain the migration artifact pin");
+  assert.match(
+    mainConsoleSource,
+    /ACTIVE_PROGRAM_ARTIFACT_BYTES = FEATURE_MODE[\s\S]*IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES[\s\S]*IAT_V2_PROGRAM_ARTIFACT_BYTES/u,
+    "main console must select one exact artifact by mode",
+  );
+  assert.match(mainConsoleSource, /expectedArtifactBytes: ACTIVE_PROGRAM_ARTIFACT_BYTES/u);
+  assert.match(mainConsoleSource, /expectedArtifactSha256: ACTIVE_PROGRAM_ARTIFACT_SHA256/u);
   assert.doesNotMatch(
     mainConsoleSource,
-    /IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT|expectedArtifactBytes|expectedArtifactSha256/u,
-    "main console must not switch to the incompatible artifact",
+    /IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT/u,
+    "main console must not switch to the incompatible current-reviewed artifact",
   );
   assert.doesNotMatch(mainConsoleSource, new RegExp(currentSha256, "u"), "main console embedded incompatible bytes");
 
-  const upgradeConsoleSource = readFileSync("tools/iat-v2-admin-console/ProgramUpgrade.jsx", "utf8");
+  const upgradeConsoleSource = readSiteSource("tools/iat-v2-admin-console/ProgramUpgrade.jsx");
   assert.match(upgradeConsoleSource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
   assert.match(upgradeConsoleSource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES/u);
   assert.doesNotMatch(upgradeConsoleSource, /\bIAT_V2_PROGRAM_ARTIFACT_(?:SHA256|BYTES)\b/u);
   assert.doesNotMatch(upgradeConsoleSource, new RegExp(currentSha256, "u"), "upgrade console embedded incompatible bytes");
 
-  const consoleSource = readFileSync("tools/iat-v2-admin-console/main.jsx", "utf8");
+  const consoleSource = readSiteSource("tools/iat-v2-admin-console/main.jsx");
   assert.match(consoleSource, /const SOURCE_COMMIT = "ba88535036da3f3871b65100fc18b655ccfa1d57"/u);
   assert.match(consoleSource, /programDataRegionBytes: snapshot\.deployment\.loaderRegionBytes/u);
   assert.match(consoleSource, /loaderZeroPaddingBytes: snapshot\.deployment\.loaderZeroPaddingBytes/u);
 
-  const preflight = readFileSync("scripts/iat-v2-feature-preflight.mjs", "utf8");
+  const preflight = readSiteSource("scripts/iat-v2-feature-preflight.mjs");
   assert.match(preflight, /HOLD_LEGACY_ROUND_MIGRATION_REQUIRED/u);
   assert.match(preflight, /SOURCE_PRESERVES_FEATURES_WITH_SETTLED_ROUND_MIGRATION/u);
   assert.match(preflight, /publicUpgradeAuthorized: false/u);
@@ -150,7 +162,7 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
   assert.match(preflight, /expectedArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
   assert.doesNotMatch(preflight, /IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT/u);
 
-  const currentProgram = readFileSync("programs/iat_v2/src/lib.rs", "utf8");
+  const currentProgram = readSiteSource("programs/iat_v2/src/lib.rs");
   assert.match(currentProgram, /pub const CCC_DLC_GENESIS_ENABLED: bool = true;/u);
   assert.match(currentProgram, /pub fn migrate_legacy_round/u);
   assert.match(currentProgram, /pub struct Round \{[\s\S]*pub commit_slot: u64,[\s\S]*pub commit_timestamp: i64,/u);

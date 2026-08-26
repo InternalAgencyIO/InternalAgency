@@ -21,6 +21,13 @@ import {
   loadAttendedReceiptSet,
   persistAttendedReceipt,
 } from "./attended-evidence.mjs";
+import {
+  assertExactTransactionMessage,
+  assertFreshFinalizedBlockhash,
+  assertSignedLegacyTransaction,
+  finalizedContextSlot,
+  simulateExactLegacyTransaction,
+} from "./attended-transaction-boundary.mjs";
 
 const UPGRADE_INSTRUCTION_DATA = Uint8Array.from([3, 0, 0, 0]);
 const SET_AUTHORITY_INSTRUCTION_DATA = Uint8Array.from([4, 0, 0, 0]);
@@ -63,6 +70,65 @@ function buildReturnBufferTransaction({ buffer, feePayer, blockhash }) {
     data: Buffer.from(SET_AUTHORITY_INSTRUCTION_DATA),
   });
   return new Transaction({ feePayer, recentBlockhash: blockhash }).add(instruction);
+}
+
+function publicKeyText(value) {
+  return value?.toBase58?.() ?? null;
+}
+
+function scalarText(value) {
+  return value === null || value === undefined ? null : String(value);
+}
+
+function upgradeActionBinding(snapshot) {
+  return JSON.stringify({
+    action: snapshot.action,
+    programId: IAT_V2_PROGRAM_ID.toBase58(),
+    programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS.toBase58(),
+    programAdmin: IAT_V2_PROGRAM_ADMIN.toBase58(),
+    buffer: publicKeyText(snapshot.buffer),
+    bufferAuthority: publicKeyText(snapshot.bufferAuthority),
+    bufferHash: snapshot.bufferHash ?? null,
+    deployedHash: snapshot.deployedHash ?? null,
+    deployedRegionHash: snapshot.deployedRegionHash ?? null,
+    loaderZeroPaddingBytes: scalarText(snapshot.loaderZeroPaddingBytes),
+    loaderZeroPaddingVerified: snapshot.loaderZeroPaddingVerified === true,
+    alreadyUpgraded: snapshot.alreadyUpgraded === true,
+    programDataCapacityBytes: scalarText(snapshot.programDataCapacityBytes),
+    targetProgramDataCapacityBytes: scalarText(snapshot.targetProgramDataCapacityBytes),
+    additionalProgramDataBytes: scalarText(snapshot.additionalProgramDataBytes),
+    targetProgramDataAccountBytes: scalarText(snapshot.targetProgramDataAccountBytes),
+    currentProgramDataLamports: scalarText(snapshot.currentProgramDataLamports),
+    targetProgramDataRentLamports: scalarText(snapshot.targetProgramDataRentLamports),
+    rentTopUpLamports: scalarText(snapshot.rentTopUpLamports),
+    extendProgramChecked: snapshot.extendProgramChecked === true,
+    extendProgramCheckedActivationSlot: scalarText(snapshot.extendProgramCheckedActivationSlot),
+    sourceCommit: snapshot.evidenceBinding?.sourceCommit ?? null,
+    programArtifactSha256: snapshot.evidenceBinding?.programArtifactSha256 ?? null,
+    mint: snapshot.evidenceBinding?.mint ?? null,
+  });
+}
+
+function buildAttendedProgramTransaction({ blockhash, current, feePayer }) {
+  if (current.action === "extend-program") {
+    return buildProgramDataExtensionTransaction({
+      additionalBytes: current.additionalProgramDataBytes,
+      authority: feePayer,
+      blockhash,
+      checked: current.extendProgramChecked,
+      feePayer,
+      loaderProgramId: BPF_UPGRADEABLE_LOADER_ID,
+      programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
+      programId: IAT_V2_PROGRAM_ID,
+    });
+  }
+  if (current.action === "upgrade") {
+    return buildUpgradeTransaction({ buffer: current.buffer, feePayer, blockhash });
+  }
+  if (current.action === "return-for-repair") {
+    return buildReturnBufferTransaction({ buffer: current.buffer, feePayer, blockhash });
+  }
+  throw new Error("Finalized program state has no signable attended action");
 }
 
 export default function ProgramUpgradeAttendedActions({
@@ -109,55 +175,92 @@ export default function ProgramUpgradeAttendedActions({
     setLogs([]);
     setStatus("CONNECTING 7XZ MODEL T // NOTHING BROADCAST");
     try {
-      const current = await loadBufferSnapshot();
+      const current = await loadBufferSnapshot(snapshot.finalizedContextSlot ?? 0);
       setSnapshot(current);
-      if (!SIGNABLE_ACTIONS.includes(current.action)) return;
+      if (!SIGNABLE_ACTIONS.includes(current.action)) {
+        throw new Error("Finalized program state no longer has the reviewed signable action");
+      }
+      const actionBinding = upgradeActionBinding(current);
       const { provider, publicKey } = await getHardwareProvider(IAT_V2_PROGRAM_ADMIN);
       if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
         throw new Error("Connected hardware account is not the reviewed Model T payer");
       }
-      const latest = await connection.getLatestBlockhash(finalizedCommitment);
-      const transaction = current.action === "extend-program"
-        ? buildProgramDataExtensionTransaction({
-            additionalBytes: current.additionalProgramDataBytes,
-            authority: publicKey,
-            blockhash: latest.blockhash,
-            checked: current.extendProgramChecked,
-            feePayer: publicKey,
-            loaderProgramId: BPF_UPGRADEABLE_LOADER_ID,
-            programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
-            programId: IAT_V2_PROGRAM_ID,
-          })
-        : (current.action === "upgrade" ? buildUpgradeTransaction : buildReturnBufferTransaction)({
-            buffer: current.buffer,
-            feePayer: publicKey,
-            blockhash: latest.blockhash,
-          });
-      const messageSha256 = await sha256Hex(transaction.serializeMessage());
-      const simulation = await connection.simulateTransaction(transaction);
+      const latestResult = await connection.getLatestBlockhashAndContext({
+        commitment: finalizedCommitment,
+        minContextSlot: current.finalizedContextSlot,
+      });
+      const latestContextSlot = finalizedContextSlot(
+        latestResult,
+        "Program action blockhash",
+        current.finalizedContextSlot,
+      );
+      const latest = latestResult.value;
+      const transaction = buildAttendedProgramTransaction({
+        blockhash: latest.blockhash,
+        current,
+        feePayer: publicKey,
+      });
+      const {
+        messageBytes,
+        messageSha256,
+        simulation,
+        simulationSlot,
+      } = await simulateExactLegacyTransaction({
+        commitment: finalizedCommitment,
+        connection,
+        minContextSlot: latestContextSlot,
+        sha256Hex,
+        transaction,
+      });
       setLogs(simulation.value.logs ?? []);
       if (simulation.value.err) {
         throw new Error(`Transaction simulation failed: ${JSON.stringify(simulation.value.err)}`);
       }
-      setStatus(current.action === "extend-program"
-        ? `MODEL T // REVIEW ${current.additionalProgramDataBytes} BYTE CAPACITY EXTENSION + ${current.rentTopUpLamports} LAMPORT RENT TOP-UP; STILL NOT BROADCAST`
-        : current.action === "upgrade"
+      const promptSnapshot = await loadBufferSnapshot(simulationSlot);
+      const promptBinding = upgradeActionBinding(promptSnapshot);
+      if (
+        !SIGNABLE_ACTIONS.includes(promptSnapshot.action)
+        || promptBinding !== actionBinding
+      ) {
+        setSnapshot(promptSnapshot);
+        throw new Error("Finalized artifact, buffer, or program action changed before the hardware prompt");
+      }
+      const promptTransaction = buildAttendedProgramTransaction({
+        blockhash: latest.blockhash,
+        current: promptSnapshot,
+        feePayer: publicKey,
+      });
+      assertExactTransactionMessage(
+        promptTransaction,
+        messageBytes,
+        "Freshly rebuilt program action",
+      );
+      setSnapshot(promptSnapshot);
+      setStatus(promptSnapshot.action === "extend-program"
+        ? `MODEL T // REVIEW ${promptSnapshot.additionalProgramDataBytes} BYTE CAPACITY EXTENSION + ${promptSnapshot.rentTopUpLamports} LAMPORT RENT TOP-UP; STILL NOT BROADCAST`
+        : promptSnapshot.action === "upgrade"
           ? "MODEL T // REVIEW PROGRAM UPGRADE AND SIGN; STILL NOT BROADCAST"
           : "MODEL T // REVIEW BUFFER-ONLY AUTHORITY RETURN; STILL NOT BROADCAST");
       const signed = await provider.signTransaction(transaction);
-      if (await sha256Hex(signed.serializeMessage()) !== messageSha256) {
-        throw new Error("Wallet changed the reviewed upgrade transaction");
-      }
-      const walletSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
-      if (!walletSignature?.signature) throw new Error("7XZ hardware signature is missing");
-      if (!signed.verifySignatures()) throw new Error("Hardware-signed transaction failed local verification");
+      await assertSignedLegacyTransaction({
+        expectedBlockhash: latest.blockhash,
+        expectedMessageBytes: messageBytes,
+        expectedMessageSha256: messageSha256,
+        expectedSigner: publicKey,
+        sha256Hex,
+        signed,
+      });
       setPending({
         signed,
         latest,
+        signer: publicKey,
+        messageBytes,
         messageSha256,
-        action: current.action,
-        evidenceBinding: current.evidenceBinding,
-        preUpgradeProgramDataCapacityBytes: current.programDataCapacityBytes,
+        action: promptSnapshot.action,
+        actionBinding: promptBinding,
+        evidenceBinding: promptSnapshot.evidenceBinding,
+        finalizedContextSlot: promptSnapshot.finalizedContextSlot,
+        preUpgradeProgramDataCapacityBytes: promptSnapshot.programDataCapacityBytes,
       });
       setStatus("SIGNED // NOT BROADCAST — PRESS THE SEPARATE BROADCAST BUTTON");
     } catch (caught) {
@@ -172,12 +275,47 @@ export default function ProgramUpgradeAttendedActions({
     if (!pending || busy || inspectionBusy) return;
     setBusy(true);
     setError("");
-    setStatus(pending.action === "extend-program"
-      ? "BROADCASTING USER-APPROVED DEVNET CAPACITY EXTENSION"
-      : pending.action === "upgrade"
-        ? "BROADCASTING USER-APPROVED DEVNET UPGRADE"
-        : "BROADCASTING USER-APPROVED BUFFER RECOVERY");
+    setStatus("REVERIFYING FINALIZED ARTIFACT + BUFFER + ACTION // NOTHING BROADCAST");
+    let broadcastBoundaryValidated = false;
     try {
+      const current = await loadBufferSnapshot(pending.finalizedContextSlot);
+      setSnapshot(current);
+      if (
+        current.action !== pending.action
+        || upgradeActionBinding(current) !== pending.actionBinding
+      ) {
+        throw new Error("Finalized artifact, buffer, or program action no longer matches the signature");
+      }
+      const rebuilt = buildAttendedProgramTransaction({
+        blockhash: pending.latest.blockhash,
+        current,
+        feePayer: pending.signer,
+      });
+      assertExactTransactionMessage(
+        rebuilt,
+        pending.messageBytes,
+        "Freshly rebuilt program action",
+      );
+      await assertSignedLegacyTransaction({
+        expectedBlockhash: pending.latest.blockhash,
+        expectedMessageBytes: pending.messageBytes,
+        expectedMessageSha256: pending.messageSha256,
+        expectedSigner: pending.signer,
+        sha256Hex,
+        signed: pending.signed,
+      });
+      await assertFreshFinalizedBlockhash({
+        blockhash: pending.latest.blockhash,
+        commitment: finalizedCommitment,
+        connection,
+        minContextSlot: current.finalizedContextSlot,
+      });
+      broadcastBoundaryValidated = true;
+      setStatus(pending.action === "extend-program"
+        ? "BROADCASTING USER-APPROVED DEVNET CAPACITY EXTENSION"
+        : pending.action === "upgrade"
+          ? "BROADCASTING USER-APPROVED DEVNET UPGRADE"
+          : "BROADCASTING USER-APPROVED BUFFER RECOVERY");
       const nextSignature = await connection.sendRawTransaction(pending.signed.serialize(), {
         skipPreflight: false,
         preflightCommitment: finalizedCommitment,
@@ -194,6 +332,11 @@ export default function ProgramUpgradeAttendedActions({
       if (confirmation.value.err) {
         throw new Error(`Upgrade confirmation failed: ${JSON.stringify(confirmation.value.err)}`);
       }
+      const confirmationSlot = finalizedContextSlot(
+        confirmation,
+        "Program action confirmation",
+        current.finalizedContextSlot,
+      );
       const completedAction = pending.action;
       const canonicalReceipt = {
         action: completedAction === "extend-program"
@@ -222,7 +365,7 @@ export default function ProgramUpgradeAttendedActions({
       setReceipt(canonicalReceipt);
       setReceiptSet(nextReceiptSet);
       setPending(null);
-      const next = await loadBufferSnapshot();
+      const next = await loadBufferSnapshot(confirmationSlot);
       setSnapshot(next);
       setStatus(completedAction === "extend-program"
         ? "CAPACITY EXTENSION FINALIZED // BUFFER UPLOAD REMAINS A SEPARATE STEP"
@@ -230,7 +373,12 @@ export default function ProgramUpgradeAttendedActions({
           ? "UPGRADE FINALIZED // CORRECTED 7XZ PROGRAM IS LIVE ON DEVNET"
           : "BUFFER RETURNED TO DEPLOYER // READY FOR IN-PLACE REPAIR");
     } catch (caught) {
-      setStatus("HOLD // ATTENDED PROGRAM BROADCAST FAILED");
+      if (!broadcastBoundaryValidated) {
+        setPending(null);
+        setStatus("HOLD // SIGNED PROGRAM TRANSACTION DISCARDED BEFORE BROADCAST");
+      } else {
+        setStatus("HOLD // ATTENDED PROGRAM BROADCAST FAILED");
+      }
       setError(errorText(caught));
     } finally {
       setBusy(false);

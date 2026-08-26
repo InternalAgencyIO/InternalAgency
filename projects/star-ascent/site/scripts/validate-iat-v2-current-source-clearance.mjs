@@ -4,6 +4,19 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve, sep } from "node:path";
+import {
+  INDEPENDENT_SECURITY_SOURCE_PATHS,
+} from "./lib/iat-v2-independent-security-evidence.mjs";
+import {
+  parseProductionIdentityIntegrationEvidenceJson,
+} from "./lib/iat-v2-production-identity-integration-evidence.mjs";
+import {
+  INDEPENDENT_SECURITY_CLEARANCE_PATHS,
+  PRODUCTION_IDENTITY_CLEARANCE_EVIDENCE_PATH,
+  PRODUCTION_IDENTITY_CLEARANCE_TRUST_PATH,
+  validateIndependentSecurityClearancePredicate,
+  validateProductionIdentityClearancePredicate,
+} from "./lib/iat-v2-current-source-predicate-wiring.mjs";
 import { validateSbfEvidence } from "./validate-iat-v2-ci-sbf-evidence.mjs";
 
 const canonicalPath = "launch/iat-v2-current-source-clearance.json";
@@ -59,19 +72,12 @@ const predicates = {
   productionIdentityIntegration: { predicate: "PRODUCTION_IDENTITY_INTEGRATION_REHEARSAL", network: "production-integration", signatures: false },
   automatedSecurityClosure: { predicate: "AUTOMATED_SECURITY_CLOSURE", network: "source", signatures: false },
 };
-// V1's generic URL plus source-authored check-receipt envelope is sufficient for
-// byte binding, but it cannot authenticate either an X/Cloudflare integration
-// observation or an independently completed security run. Keep those predicates
-// non-clearing until each has a predicate-specific validator for its external
-// receipt/artifact. This prevents a repository author from manufacturing the two
-// remaining assertions after obtaining an otherwise valid public CI SBF artifact.
 const externalPredicateBlockers = Object.freeze({
   productionIdentityIntegration:
-    "production identity integration cannot clear under v1 without a predicate-specific externally authenticated X/D1 receipt validator",
+    "production identity integration cannot clear until evidence freshness is anchored by an externally authenticated evaluation time",
   automatedSecurityClosure:
-    "automated security closure cannot clear under v1 without a predicate-specific independently completed CI security artifact validator",
+    "automated security closure cannot clear from caller-supplied GitHub JSON and archive bytes without direct authenticated hosted-state verification",
 });
-
 check(exactKeys(record, topKeys), "record must contain only the canonical top-level fields");
 check(record.schema === "iat-v2-current-source-clearance/v1", "unexpected current-source clearance schema");
 check(["HOLD", "CLEAR"].includes(record.status), "status must be HOLD or CLEAR");
@@ -101,6 +107,8 @@ if (record.status === "CLEAR") {
   for (const [field, value] of Object.entries(record.clearance ?? {})) check(value === true, `CLEAR requires clearance.${field} to be true`);
 
   const git = (...args) => execFileSync("git", args, { encoding: "utf8", maxBuffer: 50_000_000 }).trim();
+  const gitBytes = (...args) => execFileSync("git", args, { encoding: "buffer", maxBuffer: 50_000_000 });
+  const evaluationUnixSeconds = BigInt(Math.floor(Date.now() / 1_000));
   try {
     check(git("rev-parse", `${binding.commit}^{tree}`) === binding.tree, "source tree does not match the bound commit");
     check(git("rev-parse", `${binding.commit}:projects/star-ascent/site/programs/iat_v2`) === binding.programTree, "program tree does not match the bound commit");
@@ -137,7 +145,10 @@ if (record.status === "CLEAR") {
     check(digest(ref.sha256), `evidence.${field}.sha256 must be lowercase SHA-256`);
     const absolute = resolve(ref.path ?? "");
     const allowedRoot = `${resolve("public/evidence/iat-v2/current-source")}${sep}`;
-    check(absolute.startsWith(allowedRoot), `evidence.${field}.path escapes the current-source evidence directory`);
+    if (!absolute.startsWith(allowedRoot)) {
+      check(false, `evidence.${field}.path escapes the current-source evidence directory`);
+      continue;
+    }
     let bytes;
     try { bytes = readFileSync(absolute); } catch { check(false, `evidence.${field} file is missing`); continue; }
     check(sha256(bytes) === ref.sha256, `evidence.${field} digest does not match its exact bytes`);
@@ -151,17 +162,26 @@ if (record.status === "CLEAR") {
     check(evidence.programArtifactSha256 === binding.programArtifactSha256, `evidence.${field} program artifact mismatch`);
     check(evidence.network === expected.network, `evidence.${field} network is incorrect`);
     check(utc(evidence.observedAtUtc) && Date.parse(evidence.observedAtUtc) <= Date.now() + 60_000, `evidence.${field} requires a non-future UTC observation`);
+    check(utc(evidence.observedAtUtc) && Date.parse(evidence.observedAtUtc) <= Date.parse(record.observedAtUtc), `evidence.${field} observation must not be later than the clearance observation`);
     check(Array.isArray(evidence.receipts) && evidence.receipts.length > 0 && evidence.receipts.every(receiptUrl), `evidence.${field} requires public HTTPS receipts`);
     check(Array.isArray(evidence.checks) && evidence.checks.length > 0, `evidence.${field} requires direct-evidence checks`);
+    const checkReceipts = [];
     for (const item of evidence.checks ?? []) {
       check(exactKeys(item, ["id", "result", "evidencePath", "evidenceSha256"]), `evidence.${field} check fields are not exact`);
       check(/^[A-Z][A-Z0-9_]{2,63}$/u.test(item.id ?? "") && item.result === "PASS" && digest(item.evidenceSha256), `evidence.${field} requires exact passing direct-evidence checks`);
       check(typeof item.evidencePath === "string" && item.evidencePath.startsWith("public/evidence/iat-v2/current-source/checks/") && item.evidencePath.endsWith(".json"), `evidence.${field} check path is not canonical`);
+      const checkAbsolute = resolve(item.evidencePath ?? "");
+      const allowedChecksRoot = `${resolve("public/evidence/iat-v2/current-source/checks")}${sep}`;
+      if (!checkAbsolute.startsWith(allowedChecksRoot)) {
+        check(false, `evidence.${field} check path escapes the current-source checks directory`);
+        continue;
+      }
       let checkBytes;
-      try { checkBytes = readFileSync(resolve(item.evidencePath ?? "")); } catch { check(false, `evidence.${field} check evidence is missing`); continue; }
+      try { checkBytes = readFileSync(checkAbsolute); } catch { check(false, `evidence.${field} check evidence is missing`); continue; }
       check(sha256(checkBytes) === item.evidenceSha256, `evidence.${field} check digest does not match exact bytes`);
       let checkReceipt;
       try { checkReceipt = JSON.parse(checkBytes); } catch { check(false, `evidence.${field} check evidence must be JSON`); continue; }
+      checkReceipts.push(checkReceipt);
       check(exactKeys(checkReceipt, checkReceiptKeys), `evidence.${field} check receipt fields are not exact`);
       check(checkReceipt.schema === "iat-v2-current-source-check-receipt/v1"
         && checkReceipt.predicate === expected.predicate
@@ -171,6 +191,7 @@ if (record.status === "CLEAR") {
         && checkReceipt.programArtifactSha256 === binding.programArtifactSha256
         && utc(checkReceipt.observedAtUtc)
         && Date.parse(checkReceipt.observedAtUtc) <= Date.now() + 60_000
+        && Date.parse(checkReceipt.observedAtUtc) <= Date.parse(record.observedAtUtc)
         && digest(checkReceipt.detailsSha256), `evidence.${field} check receipt is not source-bound passing evidence`);
     }
     if (field === "currentSourceSbf" && ciEvidence) {
@@ -184,6 +205,52 @@ if (record.status === "CLEAR") {
       }
     } else {
       check(Array.isArray(evidence.transactionSignatures) && evidence.transactionSignatures.length === 0, `evidence.${field} must not imply transaction signatures`);
+    }
+
+    if (field === "productionIdentityIntegration") {
+      try {
+        const result = validateProductionIdentityClearancePredicate({
+          directEvidence: evidence,
+          checkReceipts,
+          predicateBytes: readFileSync(resolve(PRODUCTION_IDENTITY_CLEARANCE_EVIDENCE_PATH)),
+          trust: parseProductionIdentityIntegrationEvidenceJson(
+            gitBytes(
+              "show",
+              `${binding.commit}:projects/star-ascent/site/${PRODUCTION_IDENTITY_CLEARANCE_TRUST_PATH}`,
+            ).toString("utf8"),
+            "source-bound production identity trust",
+          ),
+          binding,
+          evaluationUnixSeconds,
+        });
+        for (const violation of result.violations) check(false, `evidence.${field} ${violation}`);
+      } catch (error) {
+        check(false, `evidence.${field} predicate-specific production-identity evidence is missing or unreadable: ${error.message}`);
+      }
+    }
+
+    if (field === "automatedSecurityClosure") {
+      try {
+        const sourceFiles = new Map(INDEPENDENT_SECURITY_SOURCE_PATHS.map((path) => [
+          path,
+          gitBytes("show", `${binding.commit}:${path}`),
+        ]));
+        const result = validateIndependentSecurityClearancePredicate({
+          directEvidence: evidence,
+          checkReceipts,
+          predicateBytes: readFileSync(resolve(INDEPENDENT_SECURITY_CLEARANCE_PATHS.evidence)),
+          githubRunBytes: readFileSync(resolve(INDEPENDENT_SECURITY_CLEARANCE_PATHS.githubRun)),
+          githubJobsBytes: readFileSync(resolve(INDEPENDENT_SECURITY_CLEARANCE_PATHS.githubJobs)),
+          githubArtifactBytes: readFileSync(resolve(INDEPENDENT_SECURITY_CLEARANCE_PATHS.githubArtifact)),
+          artifactArchiveBytes: readFileSync(resolve(INDEPENDENT_SECURITY_CLEARANCE_PATHS.artifactArchive)),
+          sourceFiles,
+          binding,
+          evaluationUnixSeconds,
+        });
+        for (const violation of result.violations) check(false, `evidence.${field} ${violation}`);
+      } catch (error) {
+        check(false, `evidence.${field} predicate-specific independent-security evidence is missing or unreadable: ${error.message}`);
+      }
     }
     if (Object.hasOwn(externalPredicateBlockers, field)) {
       check(false, externalPredicateBlockers[field]);

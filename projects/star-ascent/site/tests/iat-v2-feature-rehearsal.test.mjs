@@ -49,6 +49,10 @@ const upgradeAttendedSource = readFileSync(
   "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx",
   "utf8",
 );
+const attendedTransactionBoundarySource = readFileSync(
+  "tools/iat-v2-admin-console/attended-transaction-boundary.mjs",
+  "utf8",
+);
 const upgradeBoundarySource = `${upgradeConsoleSource}\n${upgradeAttendedSource}`;
 const adminConsoleSource = readFileSync(
   "tools/iat-v2-admin-console/main.jsx",
@@ -295,6 +299,226 @@ test("the browser loads only exact due linked-round PDAs", () => {
   assert.doesNotMatch(linkedSelectionSource, /firstAccrualWeek/u);
 });
 
+test("feature action selection uses finalized account contexts and finalized chain time", () => {
+  const loaderSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("async function loadFeatureState"),
+    featureConsoleSource.indexOf("function nextFeatureAction"),
+  );
+  assert.match(loaderSource, /finalizedParentSnapshotSlot\([\s\S]*const configReadFloor = Math\.max\(parentSlot, minimumFinalizedSlot\)[\s\S]*getAccountInfoAndContext\([\s\S]*commitment: FINALIZED_COMMITMENT,[\s\S]*minContextSlot: configReadFloor/u);
+  assert.match(
+    loaderSource,
+    /parseV2ConfigAccount\(configInfo\.data\)[\s\S]*config\.admin\.equals\(IAT_V2_PROGRAM_ADMIN\)[\s\S]*config\.mint\.equals\(mint\)[\s\S]*config\.randomnessProgram\.equals\(SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID\)[\s\S]*config\.rehearsalMode[\s\S]*config\.active/u,
+  );
+  assert.match(loaderSource, /getMultipleAccountsInfoAndContext\(addresses,[\s\S]*minContextSlot: configSlot[\s\S]*getBalanceAndContext\(COMMUNITY_CUSTODY,[\s\S]*minContextSlot: stateSlot[\s\S]*getMultipleAccountsInfoAndContext\(linkedRoundAddresses,[\s\S]*minContextSlot: participantBalanceSlot/u);
+  assert.match(loaderSource, /finalObservationSlot = linkedRoundResult[\s\S]*finalizedBlockTimestamp\(finalObservationSlot, "Final feature observation"\)[\s\S]*currentIatV2Week\(genesisTimestamp, nowTimestamp\) !== currentWeek[\s\S]*return \{[\s\S]*finalObservationSlot/u);
+  assert.match(loaderSource, /Finalized Devnet time crossed a feature boundary; refresh before signing/u);
+  assert.doesNotMatch(loaderSource, /Date\.now\(|["']confirmed["']/u);
+});
+
+test("attended feature signing and broadcast reattest exact finalized deployment and action truth", () => {
+  const deploymentBindingSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("function migrationDeploymentObservation"),
+    featureConsoleSource.indexOf("function featureActionBinding"),
+  );
+  assert.match(
+    deploymentBindingSource,
+    /programId\?\.equals\(IAT_V2_PROGRAM_ID\)[\s\S]*programDataAddress\?\.equals\(IAT_V2_PROGRAM_DATA_ADDRESS\)[\s\S]*upgradeAuthority\?\.equals\(IAT_V2_PROGRAM_ADMIN\)[\s\S]*artifactSha256 !== IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256[\s\S]*programBytes !== IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES[\s\S]*contextSlot < minContextSlot/u,
+  );
+  const actionBindingSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("function featureActionBinding"),
+    featureConsoleSource.indexOf("function sameBinding"),
+  );
+  assert.match(actionBindingSource, /coreDestination: state\.coreDestination[\s\S]*liquidityDestination: state\.liquidityDestination[\s\S]*randomnessAddress: state\.randomnessAddress[\s\S]*currentRoundRandomnessAccount: state\.currentRound\?\.randomnessAccount/u);
+
+  const boundarySource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("async function loadFreshAttendedBoundary"),
+    featureConsoleSource.indexOf("const refresh = useCallback"),
+  );
+  const parentRefresh = boundarySource.indexOf("await loadFeatureParentSnapshot(readFloor)");
+  const childRefresh = boundarySource.indexOf("await loadFeatureState(parentSnapshot, parentSlot)");
+  const deploymentRefresh = boundarySource.indexOf(
+    "await verifyMigrationDeployment(childState.finalObservationSlot)",
+  );
+  assert.ok(parentRefresh >= 0, "fresh parent snapshot is missing");
+  assert.ok(childRefresh > parentRefresh, "child state was read before the fresh parent snapshot");
+  assert.ok(deploymentRefresh > childRefresh, "deployment was not the final boundary observation");
+  assert.match(boundarySource, /finalizedParentSnapshotSlot\([\s\S]*readFloor[\s\S]*!parentSnapshot\.complete[\s\S]*!parentSnapshot\.active[\s\S]*sameBinding\(parentBinding, reviewedParentBinding\)/u);
+  assert.match(boundarySource, /migrationDeploymentObservation\([\s\S]*childState\.finalObservationSlot/u);
+
+  const signerSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("async function simulateAndRequestSignature"),
+    featureConsoleSource.indexOf("async function broadcastSigned"),
+  );
+  const buildBoundary = signerSource.indexOf("await loadFreshAttendedBoundary(");
+  const hardwareConnection = signerSource.indexOf("await getHardwareProvider(currentAction.signer)");
+  const transactionBuild = signerSource.indexOf("await buildActionTransaction");
+  const simulationRpc = signerSource.indexOf(
+    "await connection.simulateTransaction(simulationTransaction",
+  );
+  const promptBoundary = signerSource.indexOf("await loadFreshAttendedBoundary(simulationSlot)");
+  const hardwarePrompt = signerSource.indexOf("await provider.signTransaction(built.transaction)");
+  assert.ok(buildBoundary >= 0, "signing path lacks a fresh attended boundary");
+  assert.ok(hardwareConnection > buildBoundary, "hardware was loaded before deployment re-attestation");
+  assert.ok(transactionBuild > hardwareConnection, "transaction construction order drifted");
+  assert.ok(simulationRpc > transactionBuild, "exact-message simulation is missing");
+  assert.ok(promptBoundary > simulationRpc, "simulation slot did not feed the prompt boundary");
+  assert.ok(hardwarePrompt > promptBoundary, "hardware prompt preceded the final deployment re-attestation");
+  assert.match(signerSource, /sameBinding\(currentActionBinding, reviewedActionBinding\)/u);
+  assert.match(signerSource, /featureActionBinding\(action, state\)[\s\S]*featureActionBinding\(currentAction, current\)/u);
+  assert.match(signerSource, /buildActionTransaction\([\s\S]*buildBoundary\.parentSnapshot,[\s\S]*provider/u);
+  assert.match(signerSource, /getLatestBlockhashAndContext\(\{[\s\S]*minContextSlot: buildBoundary\.finalObservationSlot/u);
+  assert.match(signerSource, /new VersionedTransaction\(built\.transaction\.compileMessage\(\)\)[\s\S]*sameBytes\(simulationTransaction\.message\.serialize\(\), reviewedMessageBytes\)[\s\S]*simulateTransaction\(simulationTransaction, \{[\s\S]*commitment: FINALIZED_COMMITMENT,[\s\S]*minContextSlot: latestContextSlot,[\s\S]*replaceRecentBlockhash: false,[\s\S]*sigVerify: false/u);
+  assert.match(signerSource, /const simulationSlot = finalizedContextSlot\([\s\S]*latestContextSlot[\s\S]*sameBytes\(postSimulationMessageBytes, reviewedMessageBytes\)[\s\S]*sha256Hex\(postSimulationMessageBytes\) !== messageSha256[\s\S]*loadFreshAttendedBoundary\(simulationSlot\)/u);
+  assert.doesNotMatch(signerSource, /simulateTransaction\(built\.transaction/u);
+  assert.match(signerSource, /sameBinding\(promptBoundary\.deploymentBinding, buildBoundary\.deploymentBinding\)/u);
+  assert.match(signerSource, /actionBinding: promptActionBinding[\s\S]*parentBinding: promptBoundary\.parentBinding[\s\S]*deploymentBinding: promptBoundary\.deploymentBinding[\s\S]*finalObservationSlot: promptBoundary\.finalObservationSlot/u);
+
+  const broadcastSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("async function broadcastSigned"),
+    featureConsoleSource.indexOf("function discardPending"),
+  );
+  const broadcastBoundary = broadcastSource.indexOf(
+    "await loadFreshAttendedBoundary(pending.finalObservationSlot)",
+  );
+  const actionMatch = broadcastSource.indexOf("currentAction.id !== pending.action");
+  const deploymentMatch = broadcastSource.indexOf(
+    "sameBinding(boundary.deploymentBinding, pending.deploymentBinding)",
+  );
+  const messageMatch = broadcastSource.indexOf(
+    "await sha256Hex(pending.signed.serializeMessage())",
+  );
+  const blockhashCheck = broadcastSource.indexOf("await connection.isBlockhashValid");
+  const send = broadcastSource.indexOf("await connection.sendRawTransaction");
+  assert.ok(broadcastBoundary >= 0, "broadcast path lacks a fresh attended boundary");
+  assert.ok(actionMatch > broadcastBoundary, "signed action is not reselected from fresh state");
+  assert.ok(deploymentMatch > actionMatch, "deployment binding is not compared after action selection");
+  assert.ok(messageMatch > deploymentMatch, "signed message is not rehashed after deployment checks");
+  assert.ok(blockhashCheck > messageMatch, "blockhash freshness is not checked after message validation");
+  assert.ok(send > blockhashCheck, "broadcast occurs before all fail-closed checks finish");
+  assert.match(broadcastSource, /sameBinding\(currentActionBinding, pending\.actionBinding\)[\s\S]*sameBinding\(boundary\.parentBinding, pending\.parentBinding\)[\s\S]*sameBinding\(boundary\.deploymentBinding, pending\.deploymentBinding\)/u);
+  assert.match(broadcastSource, /featureActionBinding\(currentAction, boundary\.state\)/u);
+  assert.match(broadcastSource, /pending\.signed\.recentBlockhash !== pending\.latest\.blockhash[\s\S]*isBlockhashValid\([\s\S]*minContextSlot: boundary\.finalObservationSlot/u);
+  assert.match(broadcastSource, /!broadcastBoundaryValidated[\s\S]*setPending\(null\)[\s\S]*SIGNED TRANSACTION DISCARDED BEFORE BROADCAST/u);
+
+  assert.match(adminConsoleSource, /async function loadChainSnapshot\(minContextSlot = 0\)[\s\S]*verifyProgramDeployment\(minContextSlot\)/u);
+  assert.match(adminConsoleSource, /programId: IAT_V2_PROGRAM_ID,[\s\S]*programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS/u);
+  assert.match(adminConsoleSource, /loadFeatureParentSnapshot=\{loadChainSnapshot\}[\s\S]*verifyMigrationDeployment=\{verifyProgramDeployment\}/u);
+});
+
+test("seven-stage initialization is mode-exact and selected only from finalized truth", () => {
+  assert.match(adminConsoleSource, /const FINALIZED_COMMITMENT = "finalized"/u);
+  assert.match(
+    adminConsoleSource,
+    /const ACTIVE_PROGRAM_ARTIFACT_BYTES = FEATURE_MODE[\s\S]*IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES[\s\S]*IAT_V2_PROGRAM_ARTIFACT_BYTES/u,
+  );
+  assert.match(
+    adminConsoleSource,
+    /const ACTIVE_PROGRAM_ARTIFACT_SHA256 = FEATURE_MODE[\s\S]*IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256[\s\S]*IAT_V2_PROGRAM_ARTIFACT_SHA256/u,
+  );
+  const deploymentSource = adminConsoleSource.slice(
+    adminConsoleSource.indexOf("async function verifyProgramDeployment"),
+    adminConsoleSource.indexOf("function assertKey"),
+  );
+  assert.match(deploymentSource, /getMultipleAccountsInfoAndContext/u);
+  assert.match(deploymentSource, /commitment: FINALIZED_COMMITMENT/u);
+  assert.match(deploymentSource, /minContextSlot/u);
+  assert.match(deploymentSource, /expectedArtifactBytes: ACTIVE_PROGRAM_ARTIFACT_BYTES/u);
+  assert.match(deploymentSource, /expectedArtifactSha256: ACTIVE_PROGRAM_ARTIFACT_SHA256/u);
+  assert.match(deploymentSource, /exact migration artifact required by feature mode/u);
+  assert.match(deploymentSource, /exact pre-upgrade artifact required by initialization mode/u);
+
+  const snapshotSource = adminConsoleSource.slice(
+    adminConsoleSource.indexOf("async function loadChainSnapshot"),
+    adminConsoleSource.indexOf("async function buildStageTransaction"),
+  );
+  assert.match(snapshotSource, /getMultipleAccountsInfoAndContext\(trackedAddresses, \{[\s\S]*minContextSlot: deployment\.contextSlot/u);
+  assert.match(snapshotSource, /getBalanceAndContext\(IAT_V2_PROGRAM_ADMIN, \{[\s\S]*minContextSlot: trackedSlot/u);
+  assert.match(snapshotSource, /getMultipleAccountsInfoAndContext\(\[[\s\S]*allocationEntries[\s\S]*minContextSlot: finalObservationSlot/u);
+  assert.match(snapshotSource, /const freshDeployment = await verifyProgramDeployment\(finalObservationSlot\);[\s\S]*finalObservationSlot = freshDeployment\.contextSlot/u);
+  assert.match(snapshotSource, /deployment: freshDeployment,[\s\S]*finalizedContextSlot: finalObservationSlot/u);
+  assert.match(snapshotSource, /finalizedBlockTimestamp\([\s\S]*finalObservationSlot,[\s\S]*"Final initialization observation"/u);
+  assert.match(snapshotSource, /finalizedContextSlot: finalObservationSlot[\s\S]*finalizedTimestamp/u);
+  assert.doesNotMatch(snapshotSource, /Date\.now\(|["']confirmed["']/u);
+
+  const stageSource = adminConsoleSource.slice(
+    adminConsoleSource.indexOf("async function buildStageTransaction"),
+    adminConsoleSource.indexOf("function loadEvidence"),
+  );
+  assert.match(stageSource, /Stage construction requires a finalized context slot and block time/u);
+  assert.match(stageSource, /getFeatureGenesisTimestamp\(snapshot\.finalizedTimestamp\)/u);
+  assert.match(stageSource, /BigInt\(snapshot\.finalizedTimestamp - 2\)/u);
+  assert.match(stageSource, /getMinimumBalanceForRentExemption\([\s\S]*FINALIZED_COMMITMENT/u);
+  assert.doesNotMatch(stageSource, /Date\.now\(|["']confirmed["']/u);
+
+  const signerSource = adminConsoleSource.slice(
+    adminConsoleSource.indexOf("async function simulateAndSign"),
+    adminConsoleSource.indexOf("async function broadcastSigned"),
+  );
+  assert.match(signerSource, /pending \|\| busy \|\| signingInFlight\.current/u);
+  assert.match(signerSource, /signingInFlight\.current = true;[\s\S]*finally \{[\s\S]*signingInFlight\.current = false;/u);
+  const finalizedRefresh = signerSource.indexOf("await loadChainSnapshot()");
+  const hardwareRequest = signerSource.indexOf("await getHardwareProvider()");
+  const transactionBuild = signerSource.indexOf("await buildStageTransaction");
+  assert.ok(finalizedRefresh >= 0, "initialization signer lacks a fresh finalized snapshot");
+  assert.ok(hardwareRequest > finalizedRefresh, "initialization hardware loaded before finalized selection");
+  assert.ok(transactionBuild > hardwareRequest, "initialization transaction order drifted");
+  assert.match(signerSource, /getLatestBlockhashAndContext\(\{[\s\S]*minContextSlot: current\.finalizedContextSlot/u);
+  assert.match(signerSource, /simulateExactLegacyTransaction\(\{[\s\S]*minContextSlot: latestContextSlot,[\s\S]*transaction,/u);
+  assert.doesNotMatch(signerSource, /simulateTransaction\(transaction/u);
+  const exactSimulation = signerSource.indexOf("await simulateExactLegacyTransaction");
+  const promptBoundary = signerSource.indexOf("await loadChainSnapshot(simulationSlot)");
+  const hardwarePrompt = signerSource.indexOf("await provider.signTransaction(transaction)");
+  assert.ok(exactSimulation >= 0, "initialization signer lacks exact-message simulation");
+  assert.ok(promptBoundary > exactSimulation, "initialization prompt boundary precedes simulation");
+  assert.ok(hardwarePrompt > promptBoundary, "initialization hardware prompt precedes its fresh finalized boundary");
+  assert.match(signerSource, /initializationSnapshotBinding\(promptSnapshot\) !== snapshotBinding/u);
+  assert.match(signerSource, /assertSignedLegacyTransaction\(\{[\s\S]*expectedMessageBytes: messageBytes,[\s\S]*expectedMessageSha256: messageSha256/u);
+
+  const broadcastSource = adminConsoleSource.slice(
+    adminConsoleSource.indexOf("async function broadcastSigned"),
+    adminConsoleSource.indexOf("function discardSigned"),
+  );
+  const preSendRefresh = broadcastSource.indexOf("await loadChainSnapshot(pending.finalObservationSlot)");
+  const preSendMessageCheck = broadcastSource.indexOf("await assertSignedLegacyTransaction");
+  const preSendBlockhashCheck = broadcastSource.indexOf("await assertFreshFinalizedBlockhash");
+  const rawSend = broadcastSource.indexOf("await connection.sendRawTransaction");
+  assert.ok(preSendRefresh >= 0, "initialization broadcast lacks a fresh finalized state boundary");
+  assert.ok(preSendMessageCheck > preSendRefresh, "initialization signed-message check precedes state refresh");
+  assert.ok(preSendBlockhashCheck > preSendMessageCheck, "initialization blockhash check precedes message check");
+  assert.ok(rawSend > preSendBlockhashCheck, "initialization raw send precedes its pre-send checks");
+  assert.match(broadcastSource, /initializationSnapshotBinding\(current\) !== pending\.snapshotBinding/u);
+  assert.match(broadcastSource, /if \(!broadcastBoundaryValidated\) \{[\s\S]*setPending\(null\);/u);
+  assert.match(broadcastSource, /await loadChainSnapshot\(confirmationSlot\)/u);
+  assert.doesNotMatch(adminConsoleSource, /Date\.now\(|["']confirmed["']/u);
+});
+
+test("feature mode fail-closes the legacy seven-stage evidence export", () => {
+  const exportSource = adminConsoleSource.slice(
+    adminConsoleSource.indexOf("function downloadEvidence"),
+    adminConsoleSource.indexOf("const nextStage"),
+  );
+  const modeGuard = exportSource.indexOf("if (FEATURE_MODE)");
+  const guardReturn = exportSource.indexOf("return;", modeGuard);
+  const payloadBuild = exportSource.indexOf("const payload =");
+  assert.ok(modeGuard >= 0, "legacy export lacks a feature-mode guard");
+  assert.ok(guardReturn > modeGuard, "feature-mode guard does not stop export");
+  assert.ok(payloadBuild > guardReturn, "feature-mode guard runs after payload construction");
+  assert.match(exportSource, /LEGACY SEVEN-STAGE EXPORT DISABLED IN POST-UPGRADE MODE/u);
+  assert.match(exportSource, /Historical initialization receipts cannot be rebound to the migration artifact/u);
+  assert.match(exportSource, /rehearsalScope: "PRIMARY_INITIALIZATION"/u);
+  assert.match(exportSource, /anchor\.download = "iat-v2-devnet-rehearsal-evidence\.json"/u);
+  assert.doesNotMatch(exportSource, /BACKDATED_FEATURE_INSTANCE_INITIALIZATION|iat-v2-devnet-feature-initialization-evidence\.json/u);
+
+  const evidenceUi = adminConsoleSource.slice(
+    adminConsoleSource.indexOf('<section className="evidence">'),
+    adminConsoleSource.indexOf("<footer>"),
+  );
+  assert.match(evidenceUi, /FEATURE_MODE \? \([\s\S]*LEGACY SEVEN-STAGE EXPORT DISABLED[\s\S]*\) : \([\s\S]*onClick=\{downloadEvidence\}/u);
+  assert.match(featureConsoleSource, /function downloadAggregateEvidence\(\)[\s\S]*EXPORT COMPLETE ATTENDED BUNDLE/u);
+  assert.match(adminConsoleSource, /DEVNET V2 ACTIVE \/\/ EXPORT ATTENDED RECEIPTS; AUTOMATED EVIDENCE STILL REQUIRED/u);
+  assert.doesNotMatch(adminConsoleSource, /EXPORT SOURCE-BOUND AUTOMATED EVIDENCE/u);
+});
+
 test("the UI exposes exactly one action through separate user clicks", () => {
   assert.match(featureConsoleSource, /ONE VERIFIED ACTION \/\/ EXPLICIT USER STEPS ONLY/u);
   assert.match(featureConsoleSource, /<button onClick=\{simulateAndRequestSignature\}/u);
@@ -350,11 +574,46 @@ test("legacy-round migration is localhost-only, CI-pinned, and requires separate
     migrationConsoleSource.indexOf("async function simulateAndSign"),
   );
   assert.doesNotMatch(effectSource, /(?:simulateAndSign|broadcastSigned)\s*\(/u);
-  assert.match(migrationConsoleSource, /simulateTransaction\(transaction\)[\s\S]*provider\.signTransaction/u);
-  assert.match(migrationConsoleSource, /signed\.serializeMessage\(\)[\s\S]*messageSha256/u);
-  assert.match(migrationConsoleSource, /signed\.verifySignatures\(\)/u);
+  assert.match(migrationConsoleSource, /simulateExactLegacyTransaction\([\s\S]*provider\.signTransaction/u);
+  assert.match(migrationConsoleSource, /assertSignedLegacyTransaction\([\s\S]*messageSha256/u);
+  assert.match(attendedTransactionBoundarySource, /new VersionedTransaction\(transaction\.compileMessage\(\)\)/u);
+  assert.match(
+    attendedTransactionBoundarySource,
+    /simulateTransaction\(simulationTransaction, \{[\s\S]*minContextSlot,[\s\S]*replaceRecentBlockhash: false,[\s\S]*sigVerify: false/u,
+  );
+  assert.match(attendedTransactionBoundarySource, /signed\.verifySignatures\(\)/u);
   assert.match(migrationConsoleSource, /const FINALIZED_COMMITMENT = "finalized"/u);
   assert.match(migrationConsoleSource, /confirmTransaction\([\s\S]*FINALIZED_COMMITMENT\)/u);
+  const loaderSource = migrationConsoleSource.slice(
+    migrationConsoleSource.indexOf("async function loadMigrationSnapshot"),
+    migrationConsoleSource.indexOf("export default function LegacyRoundMigration"),
+  );
+  const roundInventory = loaderSource.indexOf("const hardenedResult = await connection.getProgramAccounts");
+  const clockObservation = loaderSource.indexOf("const chainTimestampValue = await connection.getBlockTime");
+  const finalDeployment = loaderSource.indexOf("const finalProgramResult = await connection.getMultipleAccountsInfoAndContext");
+  assert.ok(roundInventory >= 0, "migration snapshot lacks the hardened round inventory");
+  assert.ok(clockObservation > roundInventory, "migration clock was observed before the round inventory");
+  assert.ok(finalDeployment > clockObservation, "deployment was not re-attested after rounds and clock");
+  assert.match(
+    loaderSource,
+    /finalProgramResult = await connection\.getMultipleAccountsInfoAndContext\([\s\S]*?minContextSlot: chainSlot/u,
+  );
+  assert.match(loaderSource, /finalProgramSlot = finalizedContextSlot\([\s\S]*?finalProgramResult[\s\S]*?chainSlot/u);
+  assert.match(loaderSource, /const programRows = finalProgramResult\.value/u);
+  assert.match(loaderSource, /const deploymentBinding = \{[\s\S]*artifactSha256: artifact\.artifactSha256/u);
+  assert.match(loaderSource, /deploymentBinding,[\s\S]*finalizedContextSlot: finalProgramSlot/u);
+  assert.match(migrationConsoleSource, /deployment: snapshot\.deploymentBinding/u);
+  const broadcastSource = migrationConsoleSource.slice(
+    migrationConsoleSource.indexOf("async function broadcastSigned"),
+  );
+  assert.match(
+    broadcastSource,
+    /loadMigrationSnapshot\(sha256Hex, pending\.finalizedContextSlot\)[\s\S]*attendedRoundBinding\(pending\.kind, current, round\)[\s\S]*assertExactTransactionMessage\([\s\S]*assertSignedLegacyTransaction\([\s\S]*assertFreshFinalizedBlockhash\([\s\S]*sendRawTransaction/u,
+  );
+  assert.match(
+    broadcastSource,
+    /if \(!broadcastBoundaryValidated\) \{[\s\S]*setPending\(null\)[\s\S]*DISCARDED BEFORE BROADCAST/u,
+  );
 });
 
 test("historical weeks 9 and 10 use a fail-closed rehearsal-only neutral recovery", () => {
@@ -525,5 +784,20 @@ test("program upgrade serializes read-only inspection with attended sign and bro
   assert.match(
     upgradeAttendedSource,
     /onClick=\{broadcastSigned\} disabled=\{busy \|\| inspectionBusy\}/u,
+  );
+  assert.match(
+    upgradeConsoleSource,
+    /loadBufferSnapshot\(minContextSlot = 0\)[\s\S]*getMultipleAccountsInfoAndContext\([\s\S]*minContextSlot[\s\S]*finalizedContextSlot/u,
+  );
+  const broadcastSource = upgradeAttendedSource.slice(
+    upgradeAttendedSource.indexOf("async function broadcastSigned"),
+  );
+  assert.match(
+    broadcastSource,
+    /loadBufferSnapshot\(pending\.finalizedContextSlot\)[\s\S]*upgradeActionBinding\(current\)[\s\S]*buildAttendedProgramTransaction\([\s\S]*assertExactTransactionMessage\([\s\S]*assertSignedLegacyTransaction\([\s\S]*assertFreshFinalizedBlockhash\([\s\S]*sendRawTransaction/u,
+  );
+  assert.match(
+    broadcastSource,
+    /if \(!broadcastBoundaryValidated\) \{[\s\S]*setPending\(null\)[\s\S]*DISCARDED BEFORE BROADCAST/u,
   );
 });

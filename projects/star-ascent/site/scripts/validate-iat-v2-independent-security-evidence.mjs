@@ -77,7 +77,7 @@ try {
     evaluationUnixSeconds: options.evaluationUnixSeconds,
   });
   process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
-  if (!result.valid) process.exitCode = 1;
+  if (!result.structurallyValid) process.exitCode = 1;
 } catch (error) {
   console.error(error.message);
   process.exitCode = 1;

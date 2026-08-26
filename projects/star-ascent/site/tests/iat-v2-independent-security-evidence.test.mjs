@@ -7,6 +7,11 @@ import {
   assembleIndependentSecurityEvidence,
 } from "../scripts/build-iat-v2-independent-security-evidence.mjs";
 import {
+  CURRENT_SOURCE_PREDICATE_CHECK_IDS,
+  CURRENT_SOURCE_PREDICATE_HOLD_STATUS,
+  validateIndependentSecurityClearancePredicate,
+} from "../scripts/lib/iat-v2-current-source-predicate-wiring.mjs";
+import {
   INDEPENDENT_SECURITY_ARTIFACT_NAME,
   INDEPENDENT_SECURITY_CHECK_SPECS,
   INDEPENDENT_SECURITY_EVIDENCE_SCHEMA,
@@ -325,16 +330,52 @@ test("assembler derives zero Critical/High and preserves unresolved RUSTSEC-2025
   assert.equal(value.evidence.mainnetStatus, "HOLD");
 });
 
-test("exact public GitHub run/job/artifact and raw bytes validate without authorizing Mainnet", () => {
-  const result = validate(fixture());
-  assert.equal(result.valid, true, result.violations.join("\n"));
+test("caller GitHub JSON, ZIP, and evaluation time remain structural-only HOLD", () => {
+  const value = fixture();
+  const result = validate(value);
+  assert.equal(result.status, CURRENT_SOURCE_PREDICATE_HOLD_STATUS);
+  assert.equal(result.structurallyValid, true, result.violations.join("\n"));
+  assert.equal(result.valid, false);
+  assert.equal(result.authenticated, false);
+  assert.equal(result.clearanceValid, false);
   assert.equal(result.sourceBound, true);
-  assert.equal(result.ciRunAuthenticated, true);
+  assert.equal(result.ciReceiptStructureBound, true);
   assert.equal(result.artifactBytesBound, true);
   assert.equal(result.allRequiredChecksPassed, true);
   assert.equal(result.zeroUnacceptedCriticalOrHigh, true);
   assert.match(result.evidenceSha256, /^[0-9a-f]{64}$/u);
   assert.equal(result.mainnetStatus, "HOLD");
+
+  const wired = validateIndependentSecurityClearancePredicate({
+    directEvidence: {
+      observedAtUtc: value.evidence.observedAtUtc,
+      receipts: [result.runUrl, result.jobUrl],
+    },
+    checkReceipts: [{
+      checkId: CURRENT_SOURCE_PREDICATE_CHECK_IDS.automatedSecurityClosure,
+      detailsSha256: result.evidenceSha256,
+    }],
+    predicateBytes: value.evidenceBytes,
+    githubRunBytes: value.run,
+    githubJobsBytes: value.jobs,
+    githubArtifactBytes: value.artifact,
+    artifactArchiveBytes: value.archive,
+    sourceFiles: value.sources,
+    binding: {
+      commit: SOURCE_COMMIT,
+      tree: SOURCE_TREE,
+      programArtifactSha256: PROGRAM_ARTIFACT,
+    },
+    evaluationUnixSeconds: EVALUATION,
+  });
+  assert.equal(wired.status, CURRENT_SOURCE_PREDICATE_HOLD_STATUS);
+  assert.equal(wired.structurallyValid, true, wired.violations.join("\n"));
+  assert.equal(wired.valid, false);
+  assert.equal(wired.authenticated, false);
+  assert.equal(wired.clearanceValid, false);
+  assert.equal(wired.mainnetStatus, "HOLD");
+  assert.equal(wired.blocker, "LIVE_GITHUB_RUN_JOB_ARTIFACT_ARCHIVE_AUTHENTICATION_REQUIRED");
+  assert.equal(Object.hasOwn(wired, "result"), false, "caller-provided CI authentication claims must not escape");
 });
 
 test("assembler rejects observed Critical or High npm findings instead of accepting a PASS flag", () => {
@@ -398,7 +439,7 @@ test("successor v2 rejects repository-root lock and audit bytes as out-of-scope 
 
   const sources = new Map(value.sources);
   sources.set("package-lock.json", Buffer.from("{}\n"));
-  assert.equal(validate(value, { sourceFiles: sources }).valid, false);
+  assert.equal(validate(value, { sourceFiles: sources }).structurallyValid, false);
   assert.match(validate(value, { sourceFiles: sources }).violations.join("\n"), /exact committed byte map/u);
   assert.throws(
     () => assembleIndependentSecurityEvidence({
@@ -488,21 +529,21 @@ test("assembler and validator require exact zero tool exit-code receipt bytes", 
   drift.raw = new Map(drift.raw);
   drift.raw.set(checkSpec("NPM_SITE_AUDIT").exitCodePath, Buffer.from("1\n"));
   const repackaged = packageEvidence({ evidence: drift.evidence, raw: drift.raw, sources: drift.sources });
-  assert.equal(validate(repackaged).valid, false);
+  assert.equal(validate(repackaged).structurallyValid, false);
   assert.match(validate(repackaged).violations.join("\n"), /exit code|raw artifact bytes/iu);
 });
 
 test("run or job failure cannot authenticate independently completed CI", () => {
   const runFailure = fixture();
   runFailure.run = mutateJsonBytes(runFailure.run, (run) => { run.conclusion = "failure"; });
-  assert.equal(validate(runFailure).valid, false);
+  assert.equal(validate(runFailure).structurallyValid, false);
   assert.match(validate(runFailure).violations.join("\n"), /GitHub run receipt/u);
 
   const jobFailure = fixture();
   jobFailure.jobs = mutateJsonBytes(jobFailure.jobs, (jobs) => {
     jobs.jobs[0].steps[3].conclusion = "failure";
   });
-  assert.equal(validate(jobFailure).valid, false);
+  assert.equal(validate(jobFailure).structurallyValid, false);
   assert.match(validate(jobFailure).violations.join("\n"), /GitHub jobs receipt/u);
 });
 
@@ -517,7 +558,7 @@ test("malformed GitHub run, job, and artifact dates return invalid results witho
       value.artifact = mutateJsonBytes(value.artifact, (artifact) => { artifact.created_at = "not-a-date"; });
     }
     assert.doesNotThrow(() => validate(value));
-    assert.equal(validate(value).valid, false);
+    assert.equal(validate(value).structurallyValid, false);
   }
 });
 
@@ -526,38 +567,38 @@ test("artifact digest, size, expiration, and exact archive bytes fail closed", (
   digestDrift.artifact = mutateJsonBytes(digestDrift.artifact, (artifact) => {
     artifact.digest = `sha256:${"0".repeat(64)}`;
   });
-  assert.equal(validate(digestDrift).valid, false);
+  assert.equal(validate(digestDrift).structurallyValid, false);
 
   const expired = fixture();
   expired.artifact = mutateJsonBytes(expired.artifact, (artifact) => { artifact.expired = true; });
-  assert.equal(validate(expired).valid, false);
+  assert.equal(validate(expired).structurallyValid, false);
 
   const archiveDrift = fixture();
   archiveDrift.archive = Buffer.from(archiveDrift.archive);
   archiveDrift.archive[40] ^= 1;
-  assert.equal(validate(archiveDrift).valid, false);
+  assert.equal(validate(archiveDrift).structurallyValid, false);
 });
 
 test("source, program artifact, workflow bytes, and evidence header tampering fail closed", () => {
   const value = fixture();
-  assert.equal(validate(value, { expectedSourceTree: "e".repeat(40) }).valid, false);
-  assert.equal(validate(value, { expectedProgramArtifactSha256: "f".repeat(64) }).valid, false);
+  assert.equal(validate(value, { expectedSourceTree: "e".repeat(40) }).structurallyValid, false);
+  assert.equal(validate(value, { expectedProgramArtifactSha256: "f".repeat(64) }).structurallyValid, false);
 
   const workflowDrift = fixture();
   workflowDrift.sources = new Map(workflowDrift.sources);
   workflowDrift.sources.set(INDEPENDENT_SECURITY_WORKFLOW_PATH, Buffer.from("changed workflow\n"));
-  assert.equal(validate(workflowDrift).valid, false);
+  assert.equal(validate(workflowDrift).structurallyValid, false);
 
   const changed = structuredClone(value.evidence);
   changed.mainnetStatus = "GO";
   const repackaged = packageEvidence({ evidence: changed, raw: value.raw, sources: value.sources });
-  assert.equal(validate(repackaged).valid, false);
+  assert.equal(validate(repackaged).structurallyValid, false);
   assert.match(validate(repackaged).violations.join("\n"), /Mainnet HOLD/u);
 });
 
 test("expired evidence and noncanonical evidence encoding fail closed", () => {
   const value = fixture();
-  assert.equal(validate(value, { evaluationUnixSeconds: "1787728800" }).valid, false);
+  assert.equal(validate(value, { evaluationUnixSeconds: "1787728800" }).structurallyValid, false);
 
   const noncanonical = fixture();
   noncanonical.evidenceBytes = Buffer.from(`${JSON.stringify(noncanonical.evidence, null, 2)}\n`);
@@ -568,7 +609,7 @@ test("expired evidence and noncanonical evidence encoding fail closed", () => {
   ]);
   noncanonical.archive = storeZip(archiveEntries);
   Object.assign(noncanonical, receipts(noncanonical.archive));
-  assert.equal(validate(noncanonical).valid, false);
+  assert.equal(validate(noncanonical).structurallyValid, false);
   assert.match(validate(noncanonical).violations.join("\n"), /RFC8785 canonical JSON/u);
 });
 

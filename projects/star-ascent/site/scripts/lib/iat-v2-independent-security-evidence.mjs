@@ -856,10 +856,14 @@ function validateGithubArtifact(receipt, archiveBytes, evidence, job, violations
 
 function invalidResult(violations, evidence = null, extra = {}) {
   return Object.freeze({
+    status: "LIVE_AUTH_REQUIRED_HOLD",
     valid: false,
+    structurallyValid: false,
+    authenticated: false,
+    clearanceValid: false,
     predicate: evidence?.predicate ?? null,
     sourceBound: false,
-    ciRunAuthenticated: false,
+    ciReceiptStructureBound: false,
     artifactBytesBound: false,
     allRequiredChecksPassed: false,
     zeroUnacceptedCriticalOrHigh: false,
@@ -870,6 +874,7 @@ function invalidResult(violations, evidence = null, extra = {}) {
     runUrl: null,
     jobUrl: null,
     mainnetStatus: "HOLD",
+    blocker: "LIVE_GITHUB_RUN_JOB_ARTIFACT_ARCHIVE_AUTHENTICATION_REQUIRED",
     ...extra,
     violations: Object.freeze([...violations]),
   });
@@ -968,28 +973,33 @@ export function validateIndependentSecurityEvidence({
       || artifact.created < observed || artifact.created > job.completed + 60n)) {
     violations.push("evidence/GitHub timing: observation and artifact must occur inside the bound job");
   }
-  const ciRunAuthenticated = ciManifestBound && run !== null && job !== null && artifact !== null;
+  const ciReceiptStructureBound = ciManifestBound && run !== null && job !== null && artifact !== null;
   const artifactBytesBound = artifactContractBound && artifact !== null;
   const allRequiredChecksPassed = checksResult.valid && toolchainBound && findingsValid;
   const zeroUnacceptedCriticalOrHigh = findingsValid
     && evidence.findingSummary.zeroUnacceptedCriticalOrHigh === true;
-  const valid = violations.length === 0 && sourceBound && inputsBound && ciRunAuthenticated
+  const structurallyValid = violations.length === 0 && sourceBound && inputsBound && ciReceiptStructureBound
     && artifactBytesBound && allRequiredChecksPassed && zeroUnacceptedCriticalOrHigh;
   return Object.freeze({
-    valid,
+    status: "LIVE_AUTH_REQUIRED_HOLD",
+    valid: false,
+    structurallyValid,
+    authenticated: false,
+    clearanceValid: false,
     predicate: evidence.predicate,
     sourceBound,
-    ciRunAuthenticated,
+    ciReceiptStructureBound,
     artifactBytesBound,
     allRequiredChecksPassed,
     zeroUnacceptedCriticalOrHigh,
-    evidenceSha256: valid ? sha256(normalizedEvidenceBytes) : null,
+    evidenceSha256: structurallyValid ? sha256(normalizedEvidenceBytes) : null,
     sourceCommit: evidence.sourceBinding.commit,
     sourceTree: evidence.sourceBinding.tree,
     programArtifactSha256: evidence.sourceBinding.programArtifactSha256,
-    runUrl: valid ? run.url : null,
-    jobUrl: valid ? job.url : null,
+    runUrl: structurallyValid ? run.url : null,
+    jobUrl: structurallyValid ? job.url : null,
     mainnetStatus: "HOLD",
+    blocker: "LIVE_GITHUB_RUN_JOB_ARTIFACT_ARCHIVE_AUTHENTICATION_REQUIRED",
     violations: Object.freeze([...violations]),
   });
 }
