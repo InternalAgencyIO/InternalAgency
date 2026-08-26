@@ -55,7 +55,7 @@ jobs:
           mkdir -p projects/star-ascent/site/target/security/raw
           node --version > projects/star-ascent/site/target/security/raw/node-version.txt
           npm --version > projects/star-ascent/site/target/security/raw/npm-version.txt
-          cargo audit --version > projects/star-ascent/site/target/security/raw/cargo-audit-version.txt
+          cargo-audit --version > projects/star-ascent/site/target/security/raw/cargo-audit-version.txt
 
       - name: Run site npm advisory audit
         shell: bash

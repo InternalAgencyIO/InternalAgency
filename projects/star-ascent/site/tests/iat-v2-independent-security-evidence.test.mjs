@@ -36,6 +36,10 @@ const JOB_ID = 98_200_000_001;
 const ARTIFACT_ID = 5_300_000_001;
 const OBSERVED_AT = "2026-08-26T07:04:00Z";
 const EVALUATION = "1787727900";
+const workflowSource = readFileSync(
+  new URL("../../../../.github/workflows/iat-v2-independent-security-evidence.yml", import.meta.url),
+  "utf8",
+);
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const checkSpec = (id) => {
@@ -124,6 +128,14 @@ function rawOutputs(overrides = {}) {
   for (const [path, bytes] of Object.entries(overrides)) values.set(path, bytes);
   return values;
 }
+
+test("workflow captures the pinned cargo-audit binary version in canonical form", () => {
+  assert.match(
+    workflowSource,
+    /cargo-audit --version > projects\/star-ascent\/site\/target\/security\/raw\/cargo-audit-version\.txt/u,
+  );
+  assert.doesNotMatch(workflowSource, /cargo audit --version/u);
+});
 
 function sourceFiles() {
   return new Map(INDEPENDENT_SECURITY_SOURCE_PATHS.map((path, index) => [
