@@ -29,8 +29,8 @@
     "ciProvenance": { "$ref": "#/$defs/ciProvenance" },
     "inputBindings": {
       "type": "array",
-      "minItems": 14,
-      "maxItems": 14,
+      "minItems": 15,
+      "maxItems": 15,
       "items": { "$ref": "#/$defs/inputBinding" }
     },
     "toolchain": { "$ref": "#/$defs/toolchain" },

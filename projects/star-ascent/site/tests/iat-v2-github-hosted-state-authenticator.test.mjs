@@ -376,11 +376,15 @@ function buildFixture({ mutateManifest = () => {}, mutate = () => {} } = {}) {
   };
 }
 
-async function withAuthenticator(mockFetch, callback) {
+async function withAuthenticator(mockFetch, callback, options = {}) {
   const priorFetch = globalThis.fetch;
   const priorToken = process.env.IAT_V2_GITHUB_READ_TOKEN;
+  const priorHrtimeBigint = process.hrtime.bigint;
   globalThis.fetch = mockFetch;
   process.env.IAT_V2_GITHUB_READ_TOKEN = TOKEN;
+  if (options.monotonicNowNanoseconds !== undefined) {
+    process.hrtime.bigint = options.monotonicNowNanoseconds;
+  }
   const url = new URL(MODULE_URL);
   url.searchParams.set("fixture", String(moduleCounter));
   moduleCounter += 1;
@@ -389,6 +393,7 @@ async function withAuthenticator(mockFetch, callback) {
     return await callback(authenticator);
   } finally {
     globalThis.fetch = priorFetch;
+    process.hrtime.bigint = priorHrtimeBigint;
     if (priorToken === undefined) delete process.env.IAT_V2_GITHUB_READ_TOKEN;
     else process.env.IAT_V2_GITHUB_READ_TOKEN = priorToken;
   }
@@ -517,6 +522,69 @@ test("GitHub hosted-state authentication is direct, opaque, one-use, and fail-cl
       assert.equal(call.options.redirect, "error");
       assert.equal(Object.hasOwn(call.options.headers, "authorization"), false);
     }
+  });
+
+  await t.test("first consumption has a short monotonic lifetime and always burns", async () => {
+    const fixture = buildFixture();
+    let monotonicNowNanoseconds = 1_000_000_000n;
+    let monotonicFailure = null;
+    await withAuthenticator(fixture.mockFetch, async ({
+      authenticateGitHubHostedState,
+      consumeGitHubHostedStateAuthenticationCapability,
+      isGitHubHostedStateAuthenticationCapability,
+    }) => {
+      const expired = await authenticateGitHubHostedState(input());
+      monotonicNowNanoseconds += 30_000_000_000n;
+      assert.equal(
+        consumeGitHubHostedStateAuthenticationCapability(expired, fixture.expectedBinding),
+        null,
+      );
+      assert.equal(isGitHubHostedStateAuthenticationCapability(expired), false);
+      assert.equal(
+        consumeGitHubHostedStateAuthenticationCapability(expired, fixture.expectedBinding),
+        null,
+      );
+
+      const boundary = await authenticateGitHubHostedState(input());
+      monotonicNowNanoseconds += 29_999_999_999n;
+      assert.equal(
+        consumeGitHubHostedStateAuthenticationCapability(boundary, fixture.expectedBinding)?.authenticated,
+        true,
+      );
+
+      const rollback = await authenticateGitHubHostedState(input());
+      monotonicNowNanoseconds -= 1n;
+      assert.equal(
+        consumeGitHubHostedStateAuthenticationCapability(rollback, fixture.expectedBinding),
+        null,
+      );
+      assert.equal(isGitHubHostedStateAuthenticationCapability(rollback), false);
+
+      monotonicNowNanoseconds += 1n;
+      const throwing = await authenticateGitHubHostedState(input());
+      monotonicFailure = "throw";
+      assert.equal(
+        consumeGitHubHostedStateAuthenticationCapability(throwing, fixture.expectedBinding),
+        null,
+      );
+      assert.equal(isGitHubHostedStateAuthenticationCapability(throwing), false);
+
+      monotonicFailure = null;
+      const wrongType = await authenticateGitHubHostedState(input());
+      monotonicFailure = "wrong-type";
+      assert.equal(
+        consumeGitHubHostedStateAuthenticationCapability(wrongType, fixture.expectedBinding),
+        null,
+      );
+      assert.equal(isGitHubHostedStateAuthenticationCapability(wrongType), false);
+    }, {
+      monotonicNowNanoseconds: () => {
+        if (monotonicFailure === "throw") throw new Error("fixture monotonic clock failure");
+        if (monotonicFailure === "wrong-type") return 1;
+        return monotonicNowNanoseconds;
+      },
+    });
+    assert.equal(fixture.calls.length, 30);
   });
 
   await t.test("caller mutation after invocation cannot change the synchronous bound snapshot", async () => {

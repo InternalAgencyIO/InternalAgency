@@ -40,6 +40,7 @@ export const INDEPENDENT_SECURITY_REGRESSION_PATHS = Object.freeze([
   "projects/star-ascent/site/tests/iat-v2-program-binding.test.mjs",
   "projects/star-ascent/site/tests/iat-v2-github-hosted-state-authenticator.test.mjs",
   "projects/star-ascent/site/tests/iat-v2-production-identity-external-observer-capability.test.mjs",
+  "projects/star-ascent/site/tests/iat-v2-jit-automated-security-predicate.test.mjs",
 ]);
 
 export const INDEPENDENT_SECURITY_SOURCE_PATHS = Object.freeze([

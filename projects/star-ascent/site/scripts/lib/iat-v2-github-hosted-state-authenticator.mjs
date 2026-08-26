@@ -34,6 +34,7 @@ const MAX_ARCHIVE_BYTES = 32 * 1024 * 1024;
 const MAX_PROVIDER_TIME_SPREAD_SECONDS = 60n;
 const MAX_FUTURE_SKEW_SECONDS = 30n;
 const REQUEST_TIMEOUT_MILLISECONDS = 30_000;
+const CAPABILITY_MAX_MONOTONIC_AGE_NANOSECONDS = 30_000_000_000n;
 const HEX_40 = /^[0-9a-f]{40}$/u;
 const HEX_64 = /^[0-9a-f]{64}$/u;
 const REQUEST_ID = /^[!-~]{8,128}$/u;
@@ -99,6 +100,7 @@ const ARTIFACT_CONTRACT_KEYS = Object.freeze(["name", "manifestPath", "entries"]
 const ALLOWED_EVENTS = Object.freeze(["pull_request", "push", "workflow_dispatch"]);
 
 const capabilityClaims = new WeakMap();
+const monotonicNowNanoseconds = process.hrtime.bigint.bind(process.hrtime);
 
 class HostedStateAuthenticationFailure extends Error {
   constructor(code) {
@@ -661,8 +663,7 @@ export async function authenticateGitHubHostedState(options = {}) {
     const evidence = validateCanonicalManifest(archive, input);
     if (evidence.eventName !== run.eventName) fail("EVIDENCE_RUN_EVENT_MISMATCH");
     validateTiming({ run, job, artifact, evidence, provider });
-    const capability = Object.freeze({});
-    capabilityClaims.set(capability, authenticationClaims({
+    const claims = authenticationClaims({
       input,
       run,
       job,
@@ -670,6 +671,16 @@ export async function authenticateGitHubHostedState(options = {}) {
       archive,
       evidence,
       provider,
+    });
+    const issuedAtMonotonicNanoseconds = monotonicNowNanoseconds();
+    if (typeof issuedAtMonotonicNanoseconds !== "bigint"
+      || issuedAtMonotonicNanoseconds < 0n) {
+      fail("MONOTONIC_CLOCK_INVALID");
+    }
+    const capability = Object.freeze({});
+    capabilityClaims.set(capability, Object.freeze({
+      claims,
+      issuedAtMonotonicNanoseconds,
     }));
     return capability;
   } catch (error) {
@@ -686,14 +697,27 @@ export function isGitHubHostedStateAuthenticationCapability(value) {
 }
 
 export function consumeGitHubHostedStateAuthenticationCapability(capability, expectedBinding) {
-  const claims = (typeof capability === "object" && capability !== null)
+  const record = (typeof capability === "object" && capability !== null)
     || typeof capability === "function"
     ? capabilityClaims.get(capability)
     : undefined;
-  if (claims === undefined) return null;
+  if (record === undefined) return null;
   capabilityClaims.delete(capability);
+  let consumedAtMonotonicNanoseconds;
+  try {
+    consumedAtMonotonicNanoseconds = monotonicNowNanoseconds();
+  } catch {
+    return null;
+  }
+  if (typeof consumedAtMonotonicNanoseconds !== "bigint"
+    || consumedAtMonotonicNanoseconds < record.issuedAtMonotonicNanoseconds
+    || consumedAtMonotonicNanoseconds - record.issuedAtMonotonicNanoseconds
+      >= CAPABILITY_MAX_MONOTONIC_AGE_NANOSECONDS) {
+    return null;
+  }
   const expected = consumeBindingSnapshot(expectedBinding);
   if (expected === null) return null;
+  const { claims } = record;
   const matches = CONSUME_KEYS.every((key) => claims[key] === expected[key]);
   return matches ? claims : null;
 }
