@@ -47,6 +47,8 @@ const EXACT_NON_WINDOWS_JOB_DEFAULT_ANCHORS = [
     "    name: Web/policy checks (launch remains HOLD)",
     "    runs-on: ubuntu-latest",
     "    timeout-minutes: 45",
+    "    env:",
+    "      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}",
     EXACT_SITE_JOB_RUN_DEFAULTS,
     "    steps:",
   ].join("\n"),
