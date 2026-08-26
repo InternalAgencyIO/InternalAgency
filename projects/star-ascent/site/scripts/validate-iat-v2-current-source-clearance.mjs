@@ -17,6 +17,7 @@ import {
   validateIndependentSecurityClearancePredicate,
   validateProductionIdentityClearancePredicate,
 } from "./lib/iat-v2-current-source-predicate-wiring.mjs";
+import { parseB3OwnerPolicyFreezeJson } from "./validate-iat-b3-owner-policy-freeze.mjs";
 import { validateSbfEvidence } from "./validate-iat-v2-ci-sbf-evidence.mjs";
 
 const canonicalPath = "launch/iat-v2-current-source-clearance.json";
@@ -26,7 +27,17 @@ if (inputPath !== canonicalPath) {
   process.exit(1);
 }
 
-const record = JSON.parse(readFileSync(resolve(inputPath), "utf8"));
+const parseStrictJson = (bytes, label) => parseB3OwnerPolicyFreezeJson(
+  typeof bytes === "string" ? bytes : Buffer.from(bytes).toString("utf8"),
+  label,
+);
+let record;
+try {
+  record = parseStrictJson(readFileSync(resolve(inputPath), "utf8"), "current-source clearance");
+} catch (error) {
+  console.error(`FAIL: current-source clearance must be strict JSON: ${error.message}`);
+  process.exit(1);
+}
 const failures = [];
 const check = (condition, message) => { if (!condition) failures.push(message); };
 const exactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value)
@@ -122,7 +133,7 @@ if (record.status === "CLEAR") {
     const ciManifestPath = resolve("target/verifiable/iat-v2-build-evidence.json");
     const ciManifestBytes = readFileSync(ciManifestPath);
     check(sha256(ciManifestBytes) === binding.ciBuildEvidenceSha256, "CI build-evidence manifest digest mismatch");
-    ciManifest = JSON.parse(ciManifestBytes);
+    ciManifest = parseStrictJson(ciManifestBytes, "CI build-evidence manifest");
     ciEvidence = validateSbfEvidence({
       projectRoot: resolve("."),
       manifestPath: ciManifestPath,
@@ -153,7 +164,12 @@ if (record.status === "CLEAR") {
     try { bytes = readFileSync(absolute); } catch { check(false, `evidence.${field} file is missing`); continue; }
     check(sha256(bytes) === ref.sha256, `evidence.${field} digest does not match its exact bytes`);
     let evidence;
-    try { evidence = JSON.parse(bytes); } catch { check(false, `evidence.${field} must be valid JSON`); continue; }
+    try {
+      evidence = parseStrictJson(bytes, `evidence.${field}`);
+    } catch (error) {
+      check(false, `evidence.${field} must be strict JSON: ${error.message}`);
+      continue;
+    }
     check(exactKeys(evidence, directEvidenceKeys), `evidence.${field} must contain only canonical direct-evidence fields`);
     check(evidence.schema === "iat-v2-current-source-direct-evidence/v1", `evidence.${field} schema is incorrect`);
     check(evidence.predicate === expected.predicate && evidence.predicate === ref.predicate, `evidence.${field} predicate mismatch`);
@@ -180,7 +196,12 @@ if (record.status === "CLEAR") {
       try { checkBytes = readFileSync(checkAbsolute); } catch { check(false, `evidence.${field} check evidence is missing`); continue; }
       check(sha256(checkBytes) === item.evidenceSha256, `evidence.${field} check digest does not match exact bytes`);
       let checkReceipt;
-      try { checkReceipt = JSON.parse(checkBytes); } catch { check(false, `evidence.${field} check evidence must be JSON`); continue; }
+      try {
+        checkReceipt = parseStrictJson(checkBytes, `evidence.${field} check evidence`);
+      } catch (error) {
+        check(false, `evidence.${field} check evidence must be strict JSON: ${error.message}`);
+        continue;
+      }
       checkReceipts.push(checkReceipt);
       check(exactKeys(checkReceipt, checkReceiptKeys), `evidence.${field} check receipt fields are not exact`);
       check(checkReceipt.schema === "iat-v2-current-source-check-receipt/v1"

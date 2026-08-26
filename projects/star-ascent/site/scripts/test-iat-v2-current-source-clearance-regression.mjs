@@ -11,7 +11,8 @@ const root = resolve(".");
 const repositoryRoot = resolve(root, "../../..");
 const validator = resolve("scripts/validate-iat-v2-current-source-clearance.mjs");
 const validatorSource = readFileSync(validator, "utf8");
-const baseline = JSON.parse(readFileSync(resolve("launch/iat-v2-current-source-clearance.json"), "utf8"));
+const baselineBytes = readFileSync(resolve("launch/iat-v2-current-source-clearance.json"));
+const baseline = JSON.parse(baselineBytes);
 const sandbox = mkdtempSync(join(tmpdir(), "iat-v2-current-source-clearance-"));
 const recordPath = "launch/iat-v2-current-source-clearance.json";
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -28,12 +29,22 @@ function validate(record) {
   write(recordPath, record);
   return spawnSync(process.execPath, [validator], { cwd: sandbox, encoding: "utf8" });
 }
+function validateBytes(bytes) {
+  write(recordPath, bytes);
+  return spawnSync(process.execPath, [validator], { cwd: sandbox, encoding: "utf8" });
+}
 function expectPass(name, record) {
   const result = validate(record);
   if (result.status !== 0) throw new Error(`${name} should pass:\n${result.stderr}${result.stdout}`);
 }
 function expectFail(name, record, needle) {
   const result = validate(record);
+  if (result.status === 0 || !`${result.stderr}${result.stdout}`.includes(needle)) {
+    throw new Error(`${name} should fail with ${JSON.stringify(needle)}:\n${result.stderr}${result.stdout}`);
+  }
+}
+function expectRawFail(name, bytes, needle) {
+  const result = validateBytes(bytes);
   if (result.status === 0 || !`${result.stderr}${result.stdout}`.includes(needle)) {
     throw new Error(`${name} should fail with ${JSON.stringify(needle)}:\n${result.stderr}${result.stdout}`);
   }
@@ -56,6 +67,14 @@ try {
     throw new Error("predicate freshness must use the current evaluation time, not a self-authored record time");
   }
   expectPass("canonical HOLD", structuredClone(baseline));
+  expectRawFail(
+    "duplicate canonical record member",
+    Buffer.from(baselineBytes.toString("utf8").replace(
+      '  "schema": "iat-v2-current-source-clearance/v1",',
+      '  "schema": "iat-v2-current-source-clearance/v1",\n  "schema": "iat-v2-current-source-clearance/v1",',
+    )),
+    "duplicate JSON member $root.schema",
+  );
 
   const statusOnly = structuredClone(baseline);
   statusOnly.status = "CLEAR";
@@ -148,6 +167,18 @@ try {
   clear.evidence = evidenceRefs;
   for (const field of Object.keys(clear.clearance)) clear.clearance[field] = true;
   clear.observedAtUtc = now;
+
+  const duplicateCiManifestBytes = Buffer.from('{"schema":"one","schema":"two"}\n');
+  write("target/verifiable/iat-v2-build-evidence.json", duplicateCiManifestBytes);
+  const duplicateCiManifest = structuredClone(clear);
+  duplicateCiManifest.sourceBinding.ciBuildEvidenceSha256 = sha256(duplicateCiManifestBytes);
+  expectFail(
+    "duplicate CI manifest member",
+    duplicateCiManifest,
+    "CI build-evidence manifest: duplicate JSON member $root.schema",
+  );
+  rmSync(join(sandbox, "target/verifiable/iat-v2-build-evidence.json"));
+
   expectFail("self-authored evidence cannot clear without CI provenance", clear, "canonical public-GitHub CI SBF provenance");
   expectFail(
     "self-authored identity integration cannot clear",
@@ -172,6 +203,39 @@ try {
   const identityCheckPath = identityEvidence.checks[0].evidencePath;
   const originalIdentityCheckBytes = readFileSync(join(sandbox, identityCheckPath));
   const originalIdentityEvidenceBytes = readFileSync(join(sandbox, identityEvidencePath));
+
+  const duplicateIdentityEvidenceBytes = Buffer.from(originalIdentityEvidenceBytes.toString("utf8").replace(
+    '  "schema": "iat-v2-current-source-direct-evidence/v1",',
+    '  "schema": "iat-v2-current-source-direct-evidence/v1",\n  "schema": "iat-v2-current-source-direct-evidence/v1",',
+  ));
+  write(identityEvidencePath, duplicateIdentityEvidenceBytes);
+  const duplicateIdentityEvidence = structuredClone(clear);
+  duplicateIdentityEvidence.evidence.productionIdentityIntegration.sha256 = sha256(duplicateIdentityEvidenceBytes);
+  expectFail(
+    "duplicate direct-evidence member",
+    duplicateIdentityEvidence,
+    "evidence.productionIdentityIntegration must be strict JSON",
+  );
+  write(identityEvidencePath, originalIdentityEvidenceBytes);
+
+  const duplicateIdentityCheckBytes = Buffer.from(originalIdentityCheckBytes.toString("utf8").replace(
+    '  "schema": "iat-v2-current-source-check-receipt/v1",',
+    '  "schema": "iat-v2-current-source-check-receipt/v1",\n  "schema": "iat-v2-current-source-check-receipt/v1",',
+  ));
+  write(identityCheckPath, duplicateIdentityCheckBytes);
+  const duplicateCheckEvidence = structuredClone(identityEvidence);
+  duplicateCheckEvidence.checks[0].evidenceSha256 = sha256(duplicateIdentityCheckBytes);
+  write(identityEvidencePath, duplicateCheckEvidence);
+  const duplicateIdentityCheck = structuredClone(clear);
+  duplicateIdentityCheck.evidence.productionIdentityIntegration.sha256 = sha256(readFileSync(join(sandbox, identityEvidencePath)));
+  expectFail(
+    "duplicate check-receipt member",
+    duplicateIdentityCheck,
+    "evidence.productionIdentityIntegration check evidence must be strict JSON",
+  );
+  write(identityCheckPath, originalIdentityCheckBytes);
+  write(identityEvidencePath, originalIdentityEvidenceBytes);
+
   identityEvidence.checks[0].evidencePath = "public/evidence/iat-v2/current-source/checks/../../../../../outside.json";
   write(identityEvidencePath, identityEvidence);
   const checkPathTraversal = structuredClone(clear);
@@ -211,7 +275,7 @@ try {
   unsignedDevnet.evidence.signedDevnetRehearsal.sha256 = sha256(readFileSync(join(sandbox, devnetPath)));
   expectFail("unsigned Devnet evidence", unsignedDevnet, "requires finalized Solana transaction signatures");
 
-  console.log("IAT V2 current-source clearance regression passed: historical HOLD remains valid; status-only, stale/unanchored X/D1, caller-supplied GitHub evidence, working-trust substitution, path traversal, digest drift, and unsigned evidence all fail closed.");
+  console.log("IAT V2 current-source clearance regression passed: historical HOLD remains valid; status-only, duplicate-member JSON, stale/unanchored X/D1, caller-supplied GitHub evidence, working-trust substitution, path traversal, digest drift, and unsigned evidence all fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }
