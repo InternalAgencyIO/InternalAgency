@@ -198,6 +198,15 @@ const exactWebSourceHistoryStep = [
   "            exit 1",
   "          fi",
 ].join("\n");
+const exactPreLineageWebSourceHistoryStep = exactWebSourceHistoryStep.replace(
+  "Normalize and verify exact web source history",
+  "Re-normalize and verify exact web source history before lineage gate",
+);
+const exactPreLineageHistoryPlacement = [
+  "      - run: npm run check:ui-regression",
+  exactPreLineageWebSourceHistoryStep,
+  "      - run: npm run check:iat-v2",
+].join("\n");
 const exactNonWindowsJobDefaultAnchors = [
   [
     "  web-and-policy:",
@@ -504,7 +513,13 @@ function validateConfiguration(workflowInput, scripts) {
     fail("web audit must check out the exact declared source head with credentials disabled and full history");
   }
   if ((workflowText.split(exactWebSourceHistoryStep).length - 1) !== 1) {
-    fail("web audit must normalize shallow checkout state once, then bind full history to the exact head and pinned B3 source");
+    fail("web audit must initially normalize shallow checkout state, then bind full history to the exact head and pinned B3 source");
+  }
+  if ((workflowText.split(exactPreLineageWebSourceHistoryStep).length - 1) !== 1) {
+    fail("web audit must re-normalize full source history immediately before the lineage-dependent gate");
+  }
+  if (!workflowText.includes(exactPreLineageHistoryPlacement)) {
+    fail("web audit must place the second exact source-history normalization between UI regression and the lineage-dependent gate");
   }
   if (
     (workflowText.match(/^\s+IAT_V2_SOURCE_HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}\s*$/gm) ?? []).length !== 2
@@ -1350,6 +1365,11 @@ const mutationProbes = [
   {
     name: "web audit omits exact full-history normalization",
     workflow: workflow.replace(`${exactWebSourceHistoryStep}\n`, ""),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "web audit omits pre-lineage full-history normalization",
+    workflow: workflow.replace(`${exactPreLineageWebSourceHistoryStep}\n`, ""),
     scripts: packageJson.scripts,
   },
   {
