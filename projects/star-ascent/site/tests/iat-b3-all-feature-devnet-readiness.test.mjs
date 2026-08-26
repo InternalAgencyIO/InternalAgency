@@ -980,7 +980,10 @@ test("current exact source exits 2/HOLD with enumerated blockers, never ASSESSME
   assert.equal(assessment.schema, ALL_FEATURE_DEVNET_ASSESSMENT_SCHEMA);
   assert.equal(assessment.status, "HOLD");
   const codes = new Set(assessment.blockers.map(({ code }) => code));
-  assert(codes.has("READINESS_INPUT_REQUIRED"));
+  assert(
+    codes.has("READINESS_INPUT_REQUIRED"),
+    `current-source assessment omitted READINESS_INPUT_REQUIRED: ${JSON.stringify(assessment)}`,
+  );
   assert(codes.has("LEGACY_COMBINED_GATE_DEPRECATED"));
   assert(!codes.has("ASSESSMENT_ERROR"));
   assert.equal(assessment.safety.networkAccess, false);
