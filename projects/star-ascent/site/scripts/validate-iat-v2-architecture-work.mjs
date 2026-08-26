@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  createArchitectureGitEnvironment,
   inspectArchitectureSourceAncestry,
   validateArchitectureSourceLineage,
 } from "./iat-architecture-source-lineage.mjs";
@@ -20,6 +21,7 @@ const successorManifest = JSON.parse(readFileSync(join(successorAuditDir, "manif
 const reviewedLocalizationPolicy = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "reviewed-localization-policy.json"), "utf8"));
 const currentPayloadContract = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "payload-contract.json"), "utf8"));
 const EXACT_COMMIT = /^[0-9a-f]{40}$/u;
+const architectureGitEnvironment = createArchitectureGitEnvironment();
 
 function fail(message) {
   throw new Error(`IAT V2 architecture work validation failed: ${message}`);
@@ -35,6 +37,7 @@ function git(args) {
     encoding: "utf8",
     maxBuffer: 32 * 1024 * 1024,
     windowsHide: true,
+    env: architectureGitEnvironment,
   }).trim();
 }
 
@@ -58,6 +61,7 @@ function commitExists(commit) {
     cwd: repositoryRoot,
     encoding: "utf8",
     windowsHide: true,
+    env: architectureGitEnvironment,
   }).status === 0;
 }
 
@@ -66,6 +70,7 @@ function isAncestor(ancestor, descendant) {
     cwd: repositoryRoot,
     encoding: "utf8",
     windowsHide: true,
+    env: architectureGitEnvironment,
   }).status === 0;
 }
 

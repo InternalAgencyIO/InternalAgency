@@ -2,6 +2,31 @@ import { spawnSync } from "node:child_process";
 
 const EXPECTED_REPOSITORY = "InternalAgencyIO/InternalAgency";
 const EXPECTED_HISTORICAL_AUDIT_PATH = "public/audits/iat-v2-architecture-work-20260805/manifest.json";
+const LOCAL_GIT_ENVIRONMENT = new Set([
+  "GIT_ALTERNATE_OBJECT_DIRECTORIES",
+  "GIT_COMMON_DIR",
+  "GIT_CONFIG",
+  "GIT_CONFIG_COUNT",
+  "GIT_CONFIG_PARAMETERS",
+  "GIT_DIR",
+  "GIT_GRAFT_FILE",
+  "GIT_IMPLICIT_WORK_TREE",
+  "GIT_INDEX_FILE",
+  "GIT_NO_REPLACE_OBJECTS",
+  "GIT_OBJECT_DIRECTORY",
+  "GIT_PREFIX",
+  "GIT_REPLACE_REF_BASE",
+  "GIT_SHALLOW_FILE",
+  "GIT_WORK_TREE",
+]);
+
+export function createArchitectureGitEnvironment(environment = process.env) {
+  return Object.fromEntries([
+    ...Object.entries(environment)
+      .filter(([name]) => !LOCAL_GIT_ENVIRONMENT.has(name.toUpperCase())),
+    ["GIT_NO_REPLACE_OBJECTS", "1"],
+  ]);
+}
 
 function fail(message) {
   throw new Error(`IAT architecture source lineage validation failed: ${message}`);
@@ -32,6 +57,7 @@ function runGit(repositoryRoot, args) {
     cwd: repositoryRoot,
     encoding: "utf8",
     windowsHide: true,
+    env: createArchitectureGitEnvironment(),
   });
 }
 

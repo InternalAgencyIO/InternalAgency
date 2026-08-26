@@ -8,6 +8,7 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import {
+  createArchitectureGitEnvironment,
   inspectArchitectureSourceAncestry,
   validateArchitectureSourceLineage,
 } from "./iat-architecture-source-lineage.mjs";
@@ -18,12 +19,14 @@ const gitAt = (cwd, ...args) => execFileSync("git", args, {
   cwd,
   encoding: "utf8",
   stdio: ["ignore", "pipe", "pipe"],
+  env: createArchitectureGitEnvironment(),
 }).trim();
 const git = (...args) => gitAt(sandbox, ...args);
 const gitResultAt = (cwd, ...args) => spawnSync("git", args, {
   cwd,
   encoding: "utf8",
   stdio: ["ignore", "pipe", "pipe"],
+  env: createArchitectureGitEnvironment(),
 });
 const gitStatus = (...args) => gitResultAt(sandbox, ...args).status;
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
@@ -39,7 +42,22 @@ function runArchitectureRunner(environment) {
   });
 }
 
+function assertCurrentRepositoryRemainsFull(expectedHead, label) {
+  assert.equal(
+    gitAt(siteRoot, "rev-parse", "--verify", "HEAD^{commit}"),
+    expectedHead,
+    `${label}: current repository HEAD changed`,
+  );
+  assert.equal(
+    gitAt(siteRoot, "rev-parse", "--is-shallow-repository"),
+    "false",
+    `${label}: current repository became shallow`,
+  );
+}
+
 try {
+  const currentRepositoryHead = gitAt(siteRoot, "rev-parse", "--verify", "HEAD^{commit}");
+  assertCurrentRepositoryRemainsFull(currentRepositoryHead, "before temporary lineage fixtures");
   git("init", "-b", "historical-v2");
   git("config", "user.email", "lineage-fixture@example.invalid");
   git("config", "user.name", "Lineage fixture");
@@ -195,6 +213,7 @@ try {
     () => validateAt(shallowSandbox, successorManifest),
     new RegExp(`ancestry requires a complete Git history .*observedHead=${JSON.stringify(prMerge)}.*shallowState=shallow.*mergeBaseStatus=1`, "u"),
   );
+  assertCurrentRepositoryRemainsFull(currentRepositoryHead, "after temporary shallow-lineage fixture");
 
   const missingObject = inspectArchitectureSourceAncestry({
     repositoryRoot: sandbox,
@@ -227,7 +246,6 @@ try {
     new RegExp(`ancestry command failed .*observedHead=${JSON.stringify(prMerge)}.*shallowState=full.*mergeBaseStatus=<none>.*mergeBaseError="spawn EACCES"`, "u"),
   );
 
-  const currentRepositoryHead = gitAt(siteRoot, "rev-parse", "--verify", "HEAD^{commit}");
   const baseEnvironment = { ...process.env };
   delete baseEnvironment.IAT_V2_SOURCE_HEAD_SHA;
   const hostedMissing = runArchitectureRunner({ ...baseEnvironment, GITHUB_ACTIONS: "true" });
@@ -258,6 +276,12 @@ try {
     ...baseEnvironment,
     GITHUB_ACTIONS: "true",
     IAT_V2_SOURCE_HEAD_SHA: currentRepositoryHead,
+    GIT_DIR: join(shallowSandbox, ".git"),
+    GIT_WORK_TREE: shallowSandbox,
+    GIT_SHALLOW_FILE: resolve(
+      shallowSandbox,
+      gitAt(shallowSandbox, "rev-parse", "--git-path", "shallow"),
+    ),
   });
   assert.equal(hostedExact.status, 0, hostedExact.stderr);
   assert.match(hostedExact.stdout, /IAT V2 architecture work ledger valid/u);
@@ -270,8 +294,9 @@ try {
   });
   assert.notEqual(localMalformed.status, 0);
   assert.match(localMalformed.stderr, /IAT_V2_SOURCE_HEAD_SHA must be an exact lowercase 40-character commit/u);
+  assertCurrentRepositoryRemainsFull(currentRepositoryHead, "after nested architecture validators");
 
-  console.log("IAT V2-to-B3 source-lineage regression passed: exact PR-source ancestry and hosted source-SHA binding succeed; merge-base-only lineage, hosted missing/empty/HEAD/malformed/mismatched source, genuine non-ancestry, shallow split history, missing objects, and Git execution errors fail closed with exact diagnostics; local absent source derives exact HEAD; release authority stays false.");
+  console.log("IAT V2-to-B3 source-lineage regression passed: exact PR-source ancestry and hosted source-SHA binding survive hostile local-repository Git overrides; merge-base-only lineage, hosted missing/empty/HEAD/malformed/mismatched source, genuine non-ancestry, shallow split history, missing objects, and Git execution errors fail closed with exact diagnostics; local absent source derives exact HEAD; release authority stays false.");
 } finally {
   rmSync(shallowSandbox, { recursive: true, force: true });
   rmSync(sandbox, { recursive: true, force: true });

@@ -160,6 +160,44 @@ const exactWebSourceCheckout = [
   "          # cannot provide that source-bound assurance.",
   "          fetch-depth: 0",
 ].join("\n");
+const exactWebSourceHistoryStep = [
+  "      - name: Normalize and verify exact web source history",
+  "        shell: bash",
+  "        run: |",
+  "          set -euo pipefail",
+  "          unset GIT_ALTERNATE_OBJECT_DIRECTORIES GIT_COMMON_DIR GIT_CONFIG GIT_CONFIG_COUNT",
+  "          unset GIT_CONFIG_PARAMETERS GIT_DIR GIT_GRAFT_FILE GIT_IMPLICIT_WORK_TREE GIT_INDEX_FILE",
+  "          unset GIT_NO_REPLACE_OBJECTS GIT_OBJECT_DIRECTORY GIT_PREFIX GIT_REPLACE_REF_BASE",
+  "          unset GIT_SHALLOW_FILE GIT_WORK_TREE",
+  "          export GIT_NO_REPLACE_OBJECTS=1",
+  '          source_head="$IAT_V2_SOURCE_HEAD_SHA"',
+  '          b3_source="d8c11aa852cfd678ce63816125214cd0db85e54e"',
+  '          if [[ ! "$source_head" =~ ^[0-9a-f]{40}$ ]]; then',
+  '            echo "IAT_V2_SOURCE_HEAD_SHA is not an exact lowercase commit" >&2',
+  "            exit 1",
+  "          fi",
+  '          if [[ "$(git rev-parse --verify \'HEAD^{commit}\')" != "$source_head" ]]; then',
+  '            echo "Checkout HEAD does not match IAT_V2_SOURCE_HEAD_SHA" >&2',
+  "            exit 1",
+  "          fi",
+  '          shallow_state="$(git rev-parse --is-shallow-repository)"',
+  '          if [[ "$shallow_state" == "true" ]]; then',
+  "            git fetch --unshallow --no-tags origin",
+  '            shallow_state="$(git rev-parse --is-shallow-repository)"',
+  "          fi",
+  '          if [[ "$shallow_state" != "false" ]]; then',
+  '            echo "Web source checkout does not have complete Git history" >&2',
+  "            exit 1",
+  "          fi",
+  '          if [[ "$(git rev-parse --verify \'HEAD^{commit}\')" != "$source_head" ]]; then',
+  '            echo "Checkout HEAD changed while completing source history" >&2',
+  "            exit 1",
+  "          fi",
+  '          if ! git merge-base --is-ancestor "$b3_source" "$source_head"; then',
+  '            echo "Pinned B3 source is not an ancestor of the exact web source head" >&2',
+  "            exit 1",
+  "          fi",
+].join("\n");
 const exactNonWindowsJobDefaultAnchors = [
   [
     "  web-and-policy:",
@@ -464,6 +502,9 @@ function validateConfiguration(workflowInput, scripts) {
   }
   if ((workflowText.split(exactWebSourceCheckout).length - 1) !== 1) {
     fail("web audit must check out the exact declared source head with credentials disabled and full history");
+  }
+  if ((workflowText.split(exactWebSourceHistoryStep).length - 1) !== 1) {
+    fail("web audit must normalize shallow checkout state once, then bind full history to the exact head and pinned B3 source");
   }
   if (
     (workflowText.match(/^\s+IAT_V2_SOURCE_HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}\s*$/gm) ?? []).length !== 2
@@ -1304,6 +1345,11 @@ const mutationProbes = [
       exactWebSourceCheckout,
       exactWebSourceCheckout.replace("          persist-credentials: false", "          persist-credentials: true"),
     ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "web audit omits exact full-history normalization",
+    workflow: workflow.replace(`${exactWebSourceHistoryStep}\n`, ""),
     scripts: packageJson.scripts,
   },
   {
