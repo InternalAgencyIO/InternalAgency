@@ -1,0 +1,72 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T08:02:39.953Z",
+  "authoritative_parent_commit": "c7e5b24e56cc60373c631e1528bcf55711d9f188",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 416,
+  "country": "San Marino",
+  "scene_range": [
+    1684,
+    1685,
+    1686,
+    1687
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-416-scene-1685-accepted-scenes-1686-1687-held-checkpoint.json",
+  "face_anchor_manifest_verified": true,
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "completed_country_cycles_since_last_x_cycle": 5,
+  "accepted_canonical_count_for_country": 1,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "incomplete",
+  "scene_states": {
+    "1684": {
+      "status": "no-confirmed-provider-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-416-scene-1684-initial-dispatch-no-confirmed-occurrence.jsonl"
+    },
+    "1685": {
+      "status": "accepted-canonical",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "sha256": "076CA6D33F830A55A0995A7C50796EA18475031FB6C4B9854365FC02EA740E15",
+      "asset_path": "assets/lore/starlight-era/1685-san-marino-cesta-second-tower-meta-raw.webp",
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-416-scene-1685-initial-dispatch-accepted-canonical.jsonl"
+    },
+    "1686": {
+      "status": "no-confirmed-provider-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "9EB683AA8AF32825DA541662DEF32DDA8C2E6745240A3F85215744C2F4C8B8A8",
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-416-scene-1686-initial-dispatch-no-confirmed-occurrence.jsonl"
+    },
+    "1687": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "C13FFB76ECABF24861C1F6F4A104A830E19D11317E845FCEFF729FDC11461E90"
+    }
+  },
+  "next_action": "On the next user-confirmed wake, dispatch untouched scene 1687 once only. Never resend scenes 1684, 1685, or 1686."
+}
