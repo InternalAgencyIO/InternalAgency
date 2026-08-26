@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "batch": 415,
+  "country": "Marshall Islands",
+  "recorded_utc": "2026-08-26T07:40:09.128Z",
+  "status": "scene_1680_initial_consumed_no_occurrence_scenes_1681_1683_held",
+  "authority": {
+    "prepared_checkpoint": "assets/lore/starlight-era/batch-415-marshall-islands-prompts-prepared-provider-blocked-checkpoint.json",
+    "prior_country_checkpoint": "assets/lore/starlight-era/batch-414-monaco-closed-unresolved-no-provider-occurrences-checkpoint.json",
+    "remote_head_before_dispatch": "e1950da9738a35cab75b7be8102c00f8c2e18faf"
+  },
+  "scene_states": [
+    {
+      "scene": 1680,
+      "prompt_sha256": "0E504ACB588436249CB749641625DAC790ECAB60CE49A48C5F6441031BCAA2E1",
+      "camera_roll": 23,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "resend_forbidden": true
+    },
+    {
+      "scene": 1681,
+      "prompt_sha256": "18182DAFDD0D9FFE3AE01AF20E4CC341DCE7A036F1F0BA895D41EB266BDEE004",
+      "camera_roll": 62,
+      "initial_dispatch_consumed": false,
+      "held": true
+    },
+    {
+      "scene": 1682,
+      "prompt_sha256": "901AA4B0245700586FA6E68E6BE6D42863EABD50B22780C0A2E002A817F81290",
+      "camera_roll": 76,
+      "initial_dispatch_consumed": false,
+      "held": true
+    },
+    {
+      "scene": 1683,
+      "prompt_sha256": "53F820242E85B6727CC809845F98AAEE6539FD45328A9FDBBFEBCC037618C5CA",
+      "camera_roll": 94,
+      "initial_dispatch_consumed": false,
+      "held": true
+    }
+  ],
+  "provider_blocker": {
+    "evidence": "Fresh Marshall Islands scene 1680 submission cleared the exact prompt and three anchors but produced no provider URL, response, media control, or bytes.",
+    "effect": "Hold scenes 1681-1683. Never resend scene 1680 without newer checkpoint authority."
+  },
+  "cycle_accounting": {
+    "formal_country_cycle_completed": false,
+    "completed_cycles_since_last_x": 4,
+    "x_post_due": false
+  },
+  "next_action": "On a later user-confirmed wake, fetch newest remote authority. If the next health lane is explicitly continued, dispatch untouched scene 1681 once; never resend scene 1680."
+}
