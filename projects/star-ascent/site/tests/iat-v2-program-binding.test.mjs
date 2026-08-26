@@ -81,10 +81,16 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
     "dd3cb28f6b985c84fddcb971beaa9f00126f5d99",
   );
   assert.equal(IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID, 31_372_599_971);
-  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256, null);
-  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES, null);
-  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD, null);
-  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID, null);
+  assert.equal(
+    IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+    "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
+  );
+  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES, 649_680);
+  assert.equal(
+    IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+    "bb09bd292bab546b3585806fc475c3747dbb8011",
+  );
+  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID, 32_943_011_981);
 
   for (const path of [
     "scripts/rebuild-iat-v2-devnet-buffer-fresh.sh",

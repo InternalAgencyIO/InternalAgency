@@ -32,6 +32,19 @@ const expectedLimitations = [
 const sha256Pattern = /^[0-9a-f]{64}$/;
 const commitPattern = /^[0-9a-f]{40}$/;
 
+// Exact tracked inputs capable of changing the IAT V2 SBF or generated IDL.
+// Runtime JavaScript bindings and workflow orchestration are intentionally not
+// part of this closure because neither is consumed by the verifiable build.
+export const IAT_V2_SBF_ARTIFACT_INPUT_PATHS = Object.freeze([
+  "Anchor.toml",
+  "Cargo.lock",
+  "Cargo.toml",
+  "rust-toolchain.toml",
+  "programs/iat_v2/Cargo.toml",
+  "programs/iat_v2/src",
+  "scripts/verify-iat-v2-sbf.sh",
+]);
+
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const git = (projectRoot, args) => execFileSync("git", args, {
   cwd: projectRoot,
@@ -116,25 +129,42 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath,
   check(git(root, ["rev-parse", `${binding.sourceHeadCommit}^{tree}`]) === binding.sourceHeadTree, "source-head tree does not match Git");
   if (allowDescendantCheckout) {
     try {
-      git(root, ["merge-base", "--is-ancestor", binding.checkoutCommit, "HEAD"]);
+      git(root, ["merge-base", "--is-ancestor", binding.sourceHeadCommit, "HEAD"]);
     } catch {
-      check(false, "current checkout is not a descendant of the validated CI checkout");
+      check(false, "current checkout is not a descendant of the validated CI source head");
     }
-    const programPath = "projects/star-ascent/site/programs/iat_v2";
-    check(
-      git(root, ["rev-parse", `HEAD:${programPath}`]) === git(root, ["rev-parse", `${binding.sourceHeadCommit}:${programPath}`]),
-      "current successor checkout changed the CI-bound program tree",
-    );
+    try {
+      git(root, [
+        "diff",
+        "--quiet",
+        binding.sourceHeadCommit,
+        "HEAD",
+        "--",
+        ...IAT_V2_SBF_ARTIFACT_INPUT_PATHS,
+      ]);
+    } catch {
+      check(false, "current successor checkout changed a CI-bound SBF artifact input");
+    }
   } else {
     check(git(root, ["rev-parse", "HEAD"]) === binding.checkoutCommit, "checkout commit does not match Git HEAD");
     check(git(root, ["rev-parse", "HEAD^{tree}"]) === binding.checkoutTree, "checkout tree does not match Git HEAD");
   }
 
   if (binding.workflowEvent === "pull_request") {
-    const parents = git(root, ["rev-list", "--parents", "-n", "1", binding.checkoutCommit]).split(/\s+/);
     check(binding.checkoutRelation === "PR_MERGE_SECOND_PARENT", "pull-request relation is not fail closed");
-    check(parents.length === 3, "pull-request checkout is not an exact two-parent merge");
-    check(parents[2] === binding.sourceHeadCommit, "pull-request source head is not merge parent 2");
+    let checkoutObjectAvailable = true;
+    try {
+      git(root, ["cat-file", "-e", `${binding.checkoutCommit}^{commit}`]);
+    } catch {
+      checkoutObjectAvailable = false;
+    }
+    if (!allowDescendantCheckout || checkoutObjectAvailable) {
+      check(checkoutObjectAvailable, "pull-request checkout commit is unavailable");
+      check(git(root, ["rev-parse", `${binding.checkoutCommit}^{tree}`]) === binding.checkoutTree, "pull-request checkout tree does not match Git");
+      const parents = git(root, ["rev-list", "--parents", "-n", "1", binding.checkoutCommit]).split(/\s+/);
+      check(parents.length === 3, "pull-request checkout is not an exact two-parent merge");
+      check(parents[2] === binding.sourceHeadCommit, "pull-request source head is not merge parent 2");
+    }
   } else {
     check(["push", "workflow_dispatch"].includes(binding.workflowEvent), "unsupported workflow event");
     check(binding.checkoutRelation === "IDENTICAL", "branch checkout relation is not IDENTICAL");

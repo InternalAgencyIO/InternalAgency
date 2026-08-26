@@ -39,6 +39,7 @@ import {
   assertExactMaterializedSourceSequence,
   assertPinnedContainerObservation,
   assertPinnedDockerCommandArguments,
+  assertPinnedExactSourceGitObservation,
   assertPinnedToolchainObservation,
   createExactSourceGitEnvironment,
   createPinnedDockerEnvironment,
@@ -108,6 +109,47 @@ const EXACT_TEST_GIT_ENVIRONMENT = createExactSourceGitEnvironment(process.env);
 const TRUSTED_TEST_GIT_EXECUTABLE = process.platform === "win32"
   ? "C:\\Program Files\\Git\\bin\\git.exe"
   : "/usr/bin/git";
+
+test("mismatched pinned Git observations report exact diagnostics but never pass", () => {
+  const expected = Object.freeze({
+    resolvedExecutablePath: "/usr/bin/git",
+    version: "git version 2.43.0",
+    sha256: "a".repeat(64),
+    byteLength: 4_066_232,
+    linkCount: 1,
+  });
+  const observed = Object.freeze({
+    resolvedExecutablePath: "/usr/bin/git",
+    version: "git version 2.55.0",
+    sha256: "b".repeat(64),
+    byteLength: 4_200_000,
+    linkCount: 2,
+  });
+  assert.throws(
+    () => assertPinnedExactSourceGitObservation({
+      label: "EXECUTABLE",
+      expected,
+      observed,
+    }),
+    (error) => {
+      assert.equal(error.code, "IAT_B3_COMBINED_LAW_PINNED_GIT_EXECUTABLE_BOUNDARY_HOLD");
+      assert.deepEqual(error.diagnostic, {
+        schema: "iat-b3-pinned-exact-source-git-hold-diagnostic/v1",
+        status: "HOLD",
+        accepted: false,
+        code: "IAT_B3_COMBINED_LAW_PINNED_GIT_EXECUTABLE_BOUNDARY_HOLD",
+        label: "EXECUTABLE",
+        expected,
+        observed,
+      });
+      assert.match(error.message, /"version":"git version 2\.55\.0"/u);
+      assert.match(error.message, /"sha256":"b{64}"/u);
+      assert.match(error.message, /"byteLength":4200000/u);
+      assert.match(error.message, /"linkCount":2/u);
+      return true;
+    },
+  );
+});
 
 function sourceObservations() {
   return Array.from({ length: 4 }, () => ({

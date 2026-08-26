@@ -66,6 +66,8 @@ export const COMBINED_LAW_BUILD_PREFLIGHT_SCHEMA =
   "iat-b3-combined-law-exact-source-build-preflight/v2";
 export const COMBINED_LAW_BUILD_PREFLIGHT_READY = "READY_TO_EXECUTE_DUAL_BUILD";
 export const COMBINED_LAW_BUILD_PREFLIGHT_HOLD = "HOLD";
+export const PINNED_EXACT_SOURCE_GIT_HOLD_DIAGNOSTIC_SCHEMA =
+  "iat-b3-pinned-exact-source-git-hold-diagnostic/v1";
 
 const GIBIBYTE = 1024 ** 3;
 export const COMBINED_LAW_BUILD_DISK_BUDGET = Object.freeze({
@@ -1475,6 +1477,7 @@ function observePinnedExactSourceGitFile({
   expectedSha256,
   expectedByteLength,
   expectedLinkCount,
+  expectedVersion = null,
   label,
 }) {
   if (!isAbsolute(path) || /[\r\n\0]/u.test(path)) {
@@ -1483,8 +1486,6 @@ function observePinnedExactSourceGitFile({
   const absolutePath = resolve(path);
   const before = lstatSync(absolutePath, { bigint: true });
   if (!before.isFile() || before.isSymbolicLink()
-    || before.nlink !== BigInt(expectedLinkCount)
-    || before.size !== BigInt(expectedByteLength)
     || normalizedRealPath(realpathSync(absolutePath)) !== normalizedRealPath(absolutePath)) {
     throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_BOUNDARY_HOLD`);
   }
@@ -1501,15 +1502,84 @@ function observePinnedExactSourceGitFile({
     const afterDescriptor = fstatSync(descriptor, { bigint: true });
     const afterPath = lstatSync(absolutePath, { bigint: true });
     if (statFingerprint(opened) !== statFingerprint(afterDescriptor)
-      || statFingerprint(opened) !== statFingerprint(afterPath)
-      || bytes.length !== expectedByteLength
-      || sha256(bytes) !== expectedSha256) {
-      throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_BYTES_DRIFT_HOLD`);
+      || statFingerprint(opened) !== statFingerprint(afterPath)) {
+      throw new Error(`IAT_B3_COMBINED_LAW_PINNED_GIT_${label}_DESCRIPTOR_HOLD`);
     }
-    return Object.freeze({ absolutePath, fingerprint: statFingerprint(afterPath) });
+    let observedVersion = null;
+    if (expectedVersion !== null) {
+      const version = spawnSync(absolutePath, ["--version"], {
+        cwd: realpathSync(dirname(absolutePath)),
+        env: createExactSourceGitEnvironment(process.env),
+        encoding: "utf8",
+        maxBuffer: 1024 * 1024,
+        windowsHide: true,
+      });
+      observedVersion = version.error || version.status !== 0 || version.signal !== null
+        || version.stderr !== ""
+        ? null
+        : version.stdout.trim();
+    }
+    const expected = Object.freeze({
+      resolvedExecutablePath: normalizedRealPath(absolutePath),
+      version: expectedVersion,
+      sha256: expectedSha256,
+      byteLength: expectedByteLength,
+      linkCount: expectedLinkCount,
+    });
+    const observed = Object.freeze({
+      resolvedExecutablePath: normalizedRealPath(realpathSync(absolutePath)),
+      version: observedVersion,
+      sha256: sha256(bytes),
+      byteLength: bytes.length,
+      linkCount: Number(afterPath.nlink),
+    });
+    assertPinnedExactSourceGitObservation({ label, expected, observed });
+    return Object.freeze({
+      absolutePath,
+      fingerprint: statFingerprint(afterPath),
+      observed,
+    });
   } finally {
     closeSync(descriptor);
   }
+}
+
+function throwPinnedExactSourceGitObservationHold(code, label, expected, observed) {
+  const diagnostic = Object.freeze({
+    schema: PINNED_EXACT_SOURCE_GIT_HOLD_DIAGNOSTIC_SCHEMA,
+    status: "HOLD",
+    accepted: false,
+    code,
+    label,
+    expected: Object.freeze({ ...expected }),
+    observed: Object.freeze({ ...observed }),
+  });
+  const error = new Error(`${code} ${JSON.stringify(diagnostic)}`);
+  error.code = code;
+  error.diagnostic = diagnostic;
+  throw error;
+}
+
+export function assertPinnedExactSourceGitObservation({ label, expected, observed }) {
+  const prefix = `IAT_B3_COMBINED_LAW_PINNED_GIT_${label}`;
+  if (observed.resolvedExecutablePath !== expected.resolvedExecutablePath
+    || observed.byteLength !== expected.byteLength
+    || observed.linkCount !== expected.linkCount) {
+    throwPinnedExactSourceGitObservationHold(
+      `${prefix}_BOUNDARY_HOLD`, label, expected, observed,
+    );
+  }
+  if (observed.sha256 !== expected.sha256) {
+    throwPinnedExactSourceGitObservationHold(
+      `${prefix}_BYTES_DRIFT_HOLD`, label, expected, observed,
+    );
+  }
+  if (expected.version !== null && observed.version !== expected.version) {
+    throwPinnedExactSourceGitObservationHold(
+      `${prefix}_VERSION_DRIFT_HOLD`, label, expected, observed,
+    );
+  }
+  return true;
 }
 
 function assertPinnedExactSourceGitFileStable(observation, label) {
@@ -1530,6 +1600,7 @@ function observePinnedExactSourceGit() {
     expectedSha256: policy.executableSha256,
     expectedByteLength: policy.executableByteLength,
     expectedLinkCount: policy.executableLinkCount,
+    expectedVersion: policy.version,
     label: "EXECUTABLE",
   });
   const implementation = policy.implementationPath === policy.executablePath

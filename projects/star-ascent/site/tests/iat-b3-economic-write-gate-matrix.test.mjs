@@ -153,8 +153,15 @@ const economyPureKernelCode = `${economyCodecSource}\n${economyStakeIngressSourc
   .replace(/\/\*[\s\S]*?\*\//gu, "");
 const workspaceManifest = readFileSync(new URL("Cargo.toml", siteRoot), "utf8");
 
-const sourceHandlers = [...v2Source.matchAll(/^    pub fn ([a-z0-9_]+)\(/gmu)].map(
+const allV2SourceHandlers = [...v2Source.matchAll(/^    pub fn ([a-z0-9_]+)\(/gmu)].map(
   (match) => match[1],
+);
+const MIGRATION_ONLY_V2_HANDLERS = Object.freeze([
+  "backfill_historical_neutral_round",
+  "migrate_legacy_round",
+]);
+const sourceHandlers = allV2SourceHandlers.filter(
+  (handler) => !MIGRATION_ONLY_V2_HANDLERS.includes(handler),
 );
 
 const TOKEN_TRANSFER_HANDLERS = Object.freeze([
@@ -204,6 +211,11 @@ function functionBody(source, name) {
 test("the B3 port matrix covers the exact retained V2 public write inventory", () => {
   assert.equal(matrix.schema, "iat-b3-economic-write-gate-matrix/v1");
   assert.equal(matrix.expectedHandlerCount, 15);
+  assert.equal(MIGRATION_ONLY_V2_HANDLERS.length, 2);
+  assert.deepEqual(
+    allV2SourceHandlers,
+    [...matrix.handlers.map((handler) => handler.name), ...MIGRATION_ONLY_V2_HANDLERS],
+  );
   assert.equal(sourceHandlers.length, matrix.expectedHandlerCount);
   assert.deepEqual(
     matrix.handlers.map((handler) => handler.name),

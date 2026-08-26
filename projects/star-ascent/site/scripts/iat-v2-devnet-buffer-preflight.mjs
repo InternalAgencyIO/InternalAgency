@@ -12,7 +12,10 @@ import {
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
 } from "../programs/iat_v2/instructions.mjs";
-import { validateSbfEvidence } from "./validate-iat-v2-ci-sbf-evidence.mjs";
+import {
+  IAT_V2_SBF_ARTIFACT_INPUT_PATHS,
+  validateSbfEvidence,
+} from "./validate-iat-v2-ci-sbf-evidence.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const PROGRAM_ID = new PublicKey("62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj");
@@ -23,32 +26,26 @@ const UPGRADEABLE_LOADER = new PublicKey("BPFLoaderUpgradeab1e111111111111111111
 const PROGRAM_DATA_METADATA_BYTES = 45;
 const BUFFER_METADATA_BYTES = 37;
 
-// These fields must be replaced only from a successful public-GitHub
-// iat-v2-proof run for the committed migration source. Keeping the state
-// explicitly UNBOUND prevents either buffer helper from reusing the currently
-// deployed 634d... artifact pin or accepting caller-supplied replacement pins.
+// Exact first-run migration binding from the successful public-GitHub
+// iat-v2-proof run for the committed migration source. The binary and evidence
+// manifest remain untracked, operator-supplied inputs and must independently
+// match every pin before either buffer helper may proceed.
 export const IAT_V2_MIGRATION_ARTIFACT_BINDING = Object.freeze({
   schema: "iat-v2-migration-artifact-binding/v1",
-  status: "UNBOUND",
+  status: "BOUND",
   artifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   artifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   sourceHeadCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-  sourceHeadTree: null,
+  sourceHeadTree: "d533dae2994a7464412fa2ffd36fd99f4cc4db07",
   ciRunId: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
-  ciRunAttempt: null,
-  workflowRef: null,
-  evidenceManifestSha256: null,
+  ciRunAttempt: 1,
+  workflowRef:
+    "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge",
+  evidenceManifestSha256:
+    "1458fb1d736230bbd6aba9edbc7629538ec11babb9c75b3d8ee03af075f905b5",
 });
 
-export const IAT_V2_ARTIFACT_INPUT_PATHS = Object.freeze([
-  "Anchor.toml",
-  "Cargo.lock",
-  "Cargo.toml",
-  "rust-toolchain.toml",
-  "programs/iat_v2",
-  "scripts/verify-iat-v2-sbf.sh",
-  "../../../.github/workflows/iat-v2-proof.yml",
-]);
+export const IAT_V2_ARTIFACT_INPUT_PATHS = IAT_V2_SBF_ARTIFACT_INPUT_PATHS;
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const sha256Pattern = /^[0-9a-f]{64}$/u;
@@ -86,7 +83,12 @@ function sortJson(value) {
 
 function canonicalRegularFile(projectRoot, candidate, label) {
   const absolute = isAbsolute(candidate) ? candidate : resolve(projectRoot, candidate);
-  const entry = lstatSync(absolute);
+  let entry;
+  try {
+    entry = lstatSync(absolute);
+  } catch {
+    fail("ARTIFACT_INPUT_MISSING_HOLD", `${label} is missing`);
+  }
   check(entry.isFile() && !entry.isSymbolicLink(), "NONCANONICAL_ARTIFACT_HOLD", `${label} must be a regular non-symlink file`);
   const root = realpathSync(projectRoot);
   const relativePath = normalize(relative(root, realpathSync(absolute)));
@@ -196,7 +198,11 @@ export function verifyMigrationArtifactBinding({
   check(manifest.artifacts?.programBinary?.path === "target/verifiable/iat_v2.so", "EVIDENCE_ARTIFACT_RECORD_HOLD", "CI artifact path drifted");
   check(manifest.artifacts.programBinary.sha256 === binding.artifactSha256 && manifest.artifacts.programBinary.bytes === binding.artifactBytes, "EVIDENCE_ARTIFACT_RECORD_HOLD", "CI artifact record does not match the checked-in binding");
 
-  git(projectRoot, ["cat-file", "-e", `${binding.sourceHeadCommit}^{commit}`]);
+  try {
+    git(projectRoot, ["cat-file", "-e", `${binding.sourceHeadCommit}^{commit}`]);
+  } catch {
+    fail("SOURCE_HEAD_MISSING_HOLD", "bound migration source head is unavailable in Git");
+  }
   check(git(projectRoot, ["rev-parse", `${binding.sourceHeadCommit}^{tree}`]) === binding.sourceHeadTree, "SOURCE_TREE_MISMATCH_HOLD", "bound source-head tree does not match Git");
   try {
     git(projectRoot, ["merge-base", "--is-ancestor", binding.sourceHeadCommit, "HEAD"]);
@@ -303,17 +309,17 @@ function parseProgramDataAccount(info) {
 
 export async function observeDevnetUpgradeCapacity({
   artifactBytes,
-  connection = new Connection(DEVNET_RPC, "confirmed"),
+  connection = new Connection(DEVNET_RPC, "finalized"),
 } = {}) {
   integer(artifactBytes, "artifactBytes");
   check(artifactBytes > 0, "CAPACITY_INPUT_HOLD", "artifactBytes must be positive");
-  const startSlot = await connection.getSlot("confirmed");
+  const startSlot = await connection.getSlot("finalized");
   const accounts = await connection.getMultipleAccountsInfo([
     PROGRAM_ID,
     PROGRAM_DATA_ADDRESS,
     DEVNET_DEPLOYER,
     PROGRAM_ADMIN,
-  ], "confirmed");
+  ], { commitment: "finalized", minContextSlot: startSlot });
   check(Array.isArray(accounts) && accounts.length === 4, "RPC_OBSERVATION_HOLD", "Devnet account observation is incomplete");
   const [program, programData, deployer, admin] = accounts;
   parseProgramAccount(program);
@@ -325,9 +331,9 @@ export async function observeDevnetUpgradeCapacity({
   const targetProgramDataBytes = programData.data.length + extensionBytes;
   const bufferAccountBytes = artifactBytes + BUFFER_METADATA_BYTES;
   const [targetProgramDataRentLamports, bufferRentLamports, endSlot] = await Promise.all([
-    connection.getMinimumBalanceForRentExemption(targetProgramDataBytes, "confirmed"),
-    connection.getMinimumBalanceForRentExemption(bufferAccountBytes, "confirmed"),
-    connection.getSlot("confirmed"),
+    connection.getMinimumBalanceForRentExemption(targetProgramDataBytes, "finalized"),
+    connection.getMinimumBalanceForRentExemption(bufferAccountBytes, "finalized"),
+    connection.getSlot("finalized"),
   ]);
   const plan = calculateUpgradeCapacityPlan({
     artifactBytes,
@@ -344,7 +350,7 @@ export async function observeDevnetUpgradeCapacity({
     schema: "iat-v2-devnet-upgrade-capacity/v1",
     status: "READ_ONLY_CALCULATION",
     rpc: DEVNET_RPC,
-    commitment: "confirmed",
+    commitment: "finalized",
     startSlot,
     endSlot,
     programId: PROGRAM_ID.toBase58(),

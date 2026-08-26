@@ -61,7 +61,7 @@
     "check:seo:i18n": "npm run build && node --import ./tests/register-cloudflare-workers-loader.mjs --test tests/i18n-routing.test.mjs",
     "check:public": "node scripts/check-public-launch-routes.mjs",
     "check:iat-v2-proof-workflow": "node scripts/test-iat-v2-proof-workflow-regression.mjs",
-    "check:iat-v2-ci-sbf-evidence": "node scripts/test-iat-v2-ci-sbf-evidence-regression.mjs",
+    "check:iat-v2-ci-sbf-evidence": "node scripts/test-iat-v2-ci-sbf-evidence-regression.mjs && node --test tests/iat-v2-ci-sbf-evidence-successor.test.mjs",
     "check:ui-regression": "playwright test",
     "check:manifest-gate": "node scripts/test-manifest-gate-regression.mjs",
     "check:publication-payload": "node scripts/test-publication-payload-regression.mjs",

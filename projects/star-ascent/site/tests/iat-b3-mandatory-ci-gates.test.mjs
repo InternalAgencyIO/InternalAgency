@@ -94,6 +94,7 @@ const EXACT_WINDOWS_PREFLIGHT_STEP = [
   "              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {",
   "            throw 'containment preflight did not return the exact fail-closed HOLD projection'",
   "          }",
+  "          exit 0",
   `        working-directory: ${EXACT_SITE_WORKING_DIRECTORY}`,
 ].join("\n");
 const EXACT_NATIVE_WINDOWS_JOB = [
@@ -326,6 +327,22 @@ test("workflow mutation probes reject missing order, smoke label, and fail-open 
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
       "          $status = $LASTEXITCODE",
       "          $status = 2",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      "          exit 0\n",
+      "",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      "          $value = $output | ConvertFrom-Json",
+      "          exit 0\n          $value = $output | ConvertFrom-Json",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      "          if ($status -ne 2) {",
+      "          if ($status -ne 0) {",
+    )),
+    workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(
+      "              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {",
+      "              $false) {",
     )),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(`${workingDirectory}\n`, "")),
     workflow.replace(EXACT_NATIVE_WINDOWS_JOB, EXACT_NATIVE_WINDOWS_JOB.replace(

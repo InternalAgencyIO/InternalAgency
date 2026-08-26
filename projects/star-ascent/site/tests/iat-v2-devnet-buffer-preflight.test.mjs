@@ -8,6 +8,7 @@ import test from "node:test";
 import { PublicKey } from "@solana/web3.js";
 import {
   BufferPreflightError,
+  IAT_V2_ARTIFACT_INPUT_PATHS,
   IAT_V2_MIGRATION_ARTIFACT_BINDING,
   calculateUpgradeCapacityPlan,
   observeDevnetUpgradeCapacity,
@@ -24,23 +25,23 @@ const sortJson = (value) => {
   return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortJson(value[key])]));
 };
 
-test("migration buffer helpers remain fail-closed until the CI artifact is bound", () => {
+test("migration buffer helpers use the exact first-run public-CI binding", () => {
   assert.deepEqual(IAT_V2_MIGRATION_ARTIFACT_BINDING, {
     schema: "iat-v2-migration-artifact-binding/v1",
-    status: "UNBOUND",
-    artifactSha256: null,
-    artifactBytes: null,
-    sourceHeadCommit: null,
-    sourceHeadTree: null,
-    ciRunId: null,
-    ciRunAttempt: null,
-    workflowRef: null,
-    evidenceManifestSha256: null,
+    status: "BOUND",
+    artifactSha256: "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
+    artifactBytes: 649_680,
+    sourceHeadCommit: "bb09bd292bab546b3585806fc475c3747dbb8011",
+    sourceHeadTree: "d533dae2994a7464412fa2ffd36fd99f4cc4db07",
+    ciRunId: 32_943_011_981,
+    ciRunAttempt: 1,
+    workflowRef: "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge",
+    evidenceManifestSha256: "1458fb1d736230bbd6aba9edbc7629538ec11babb9c75b3d8ee03af075f905b5",
   });
   assert.throws(
     () => verifyMigrationArtifactBinding({ artifactPath: "missing.so", evidencePath: "missing.json" }),
     (error) => error instanceof BufferPreflightError
-      && error.code === "MIGRATION_ARTIFACT_UNBOUND_HOLD"
+      && error.code === "ARTIFACT_INPUT_MISSING_HOLD"
       && error.hold === true,
   );
 
@@ -55,7 +56,7 @@ test("migration buffer helpers remain fail-closed until the CI artifact is bound
   assert.equal(cli.status, 2);
   const error = JSON.parse(cli.stderr.trim());
   assert.equal(error.status, "HOLD");
-  assert.equal(error.code, "MIGRATION_ARTIFACT_UNBOUND_HOLD");
+  assert.equal(error.code, "ARTIFACT_INPUT_MISSING_HOLD");
   assert.equal(error.signing, false);
   assert.equal(error.broadcast, false);
 });
@@ -122,9 +123,31 @@ test("bound migration bytes must match the exact public-CI evidence and Git sour
       workflowRef,
       evidenceManifestSha256: sha256(evidence),
     };
+    let driftedArtifactInput = null;
+    let sourceHeadMissing = false;
+    let sourceHeadUnrelated = false;
+    let sourceTree = sourceHeadTree;
     const git = (_projectRoot, args) => {
+      if (args[0] === "cat-file") {
+        if (sourceHeadMissing) throw new Error("missing source head");
+        return "";
+      }
       if (args[0] === "rev-parse") return sourceHeadTree;
-      if (["cat-file", "merge-base", "diff"].includes(args[0])) return "";
+      if (args[0] === "merge-base") {
+        if (sourceHeadUnrelated) throw new Error("unrelated source head");
+        return "";
+      }
+      if (args[0] === "diff") {
+        assert.deepEqual(args, [
+          "diff",
+          "--quiet",
+          sourceHeadCommit,
+          "--",
+          ...IAT_V2_ARTIFACT_INPUT_PATHS,
+        ]);
+        if (driftedArtifactInput !== null) throw new Error(`drifted ${driftedArtifactInput}`);
+        return "";
+      }
       throw new Error(`unexpected Git call: ${args.join(" ")}`);
     };
 
@@ -148,6 +171,52 @@ test("bound migration bytes must match the exact public-CI evidence and Git sour
     assert.equal(result.broadcast, false);
     assert.equal(canonicalValidationCalls, 1);
 
+    assert.deepEqual(IAT_V2_ARTIFACT_INPUT_PATHS, [
+      "Anchor.toml",
+      "Cargo.lock",
+      "Cargo.toml",
+      "rust-toolchain.toml",
+      "programs/iat_v2/Cargo.toml",
+      "programs/iat_v2/src",
+      "scripts/verify-iat-v2-sbf.sh",
+    ]);
+    assert.equal(IAT_V2_ARTIFACT_INPUT_PATHS.includes("programs/iat_v2/instructions.mjs"), false);
+    assert.equal(IAT_V2_ARTIFACT_INPUT_PATHS.includes("../../../.github/workflows/iat-v2-proof.yml"), false);
+
+    for (const path of IAT_V2_ARTIFACT_INPUT_PATHS) {
+      driftedArtifactInput = path;
+      assert.throws(
+        () => verifyMigrationArtifactBinding({ projectRoot: sandbox, binding, git, validateCiEvidence }),
+        (error) => error instanceof BufferPreflightError
+          && error.code === "ARTIFACT_INPUT_DRIFT_HOLD",
+        `${path} drift must hold`,
+      );
+    }
+    driftedArtifactInput = null;
+
+    sourceHeadMissing = true;
+    assert.throws(
+      () => verifyMigrationArtifactBinding({ projectRoot: sandbox, binding, git, validateCiEvidence }),
+      (error) => error instanceof BufferPreflightError && error.code === "SOURCE_HEAD_MISSING_HOLD",
+    );
+    sourceHeadMissing = false;
+
+    sourceTree = "d".repeat(40);
+    assert.throws(
+      () => verifyMigrationArtifactBinding({ projectRoot: sandbox, binding, git: (_root, args) => (
+        args[0] === "rev-parse" ? sourceTree : git(_root, args)
+      ), validateCiEvidence }),
+      (error) => error instanceof BufferPreflightError && error.code === "SOURCE_TREE_MISMATCH_HOLD",
+    );
+    sourceTree = sourceHeadTree;
+
+    sourceHeadUnrelated = true;
+    assert.throws(
+      () => verifyMigrationArtifactBinding({ projectRoot: sandbox, binding, git, validateCiEvidence }),
+      (error) => error instanceof BufferPreflightError && error.code === "SOURCE_HEAD_NOT_ANCESTOR_HOLD",
+    );
+    sourceHeadUnrelated = false;
+
     assert.throws(
       () => verifyMigrationArtifactBinding({
         projectRoot: sandbox,
@@ -170,26 +239,26 @@ test("bound migration bytes must match the exact public-CI evidence and Git sour
   }
 });
 
-test("capacity math separates exact rent from unmeasured transaction fees", () => {
+test("capacity math pins the exact first-run artifact rent and excludes transaction fees", () => {
   const plan = calculateUpgradeCapacityPlan({
-    artifactBytes: 621_136,
+    artifactBytes: 649_680,
     currentProgramCapacityBytes: 597_336,
     currentProgramDataBytes: 597_381,
     currentProgramDataLamports: 4_158_662_640,
-    targetProgramDataRentLamports: 4_324_310_640,
-    bufferRentLamports: 4_324_254_960,
+    targetProgramDataRentLamports: 4_522_976_880,
+    bufferRentLamports: 4_522_921_200,
     deployerLamports: 1_910_332_608,
     adminLamports: 4_201_193_718,
   });
 
   assert.equal(plan.extensionRequired, true);
-  assert.equal(plan.extensionBytes, 23_800);
-  assert.equal(plan.targetProgramDataBytes, 621_181);
-  assert.equal(plan.bufferAccountBytes, 621_173);
-  assert.equal(plan.programDataRentTopUpLamports, 165_648_000);
-  assert.equal(plan.deployerRequiredIfPayingAllLamports, 4_489_902_960);
-  assert.equal(plan.deployerShortfallIfPayingAllLamports, 2_579_570_352);
-  assert.equal(plan.deployerBufferOnlyShortfallLamports, 2_413_922_352);
+  assert.equal(plan.extensionBytes, 52_344);
+  assert.equal(plan.targetProgramDataBytes, 649_725);
+  assert.equal(plan.bufferAccountBytes, 649_717);
+  assert.equal(plan.programDataRentTopUpLamports, 364_314_240);
+  assert.equal(plan.deployerRequiredIfPayingAllLamports, 4_887_235_440);
+  assert.equal(plan.deployerShortfallIfPayingAllLamports, 2_976_902_832);
+  assert.equal(plan.deployerBufferOnlyShortfallLamports, 2_612_588_592);
   assert.equal(plan.transactionFeesIncluded, false);
 });
 
@@ -248,7 +317,8 @@ test("read-only observer validates the reviewed Devnet layout and returns exact 
   const result = await observeDevnetUpgradeCapacity({ artifactBytes: 621_136, connection });
   assert.equal(result.status, "READ_ONLY_CALCULATION");
   assert.equal(result.rpc, "https://api.devnet.solana.com");
-  assert.equal(result.artifactBindingStatus, "UNBOUND");
+  assert.equal(result.commitment, "finalized");
+  assert.equal(result.artifactBindingStatus, "BOUND");
   assert.equal(result.artifactBytesSource, "CALLER_SUPPLIED_CALCULATION_ONLY");
   assert.equal(result.extensionBytes, 23_800);
   assert.deepEqual(requestedRentBytes.sort((left, right) => left - right), [621_173, 621_181]);

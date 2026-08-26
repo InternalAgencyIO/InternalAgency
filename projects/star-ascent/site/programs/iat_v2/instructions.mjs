@@ -42,13 +42,15 @@ export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES = 579_480;
 export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD =
   "dd3cb28f6b985c84fddcb971beaa9f00126f5d99";
 export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID = 31_372_599_971;
-// Bound only after the migration-capable source has an exact public CI build.
-// Null deliberately prevents the migration console from accepting the older
-// live artifact or a local, non-provenanced candidate.
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 = null;
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES = null;
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD = null;
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID = null;
+// Exact migration-capable artifact from the successful public CI build. The
+// target binary and evidence manifest remain operator-supplied, untracked
+// inputs; these constants are pins, not embedded deployment material.
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 =
+  "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01";
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES = 649_680;
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD =
+  "bb09bd292bab546b3585806fc475c3747dbb8011";
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID = 32_943_011_981;
 export const BPF_UPGRADEABLE_LOADER_ID = new PublicKey(
   "BPFLoaderUpgradeab1e11111111111111111111111",
 );

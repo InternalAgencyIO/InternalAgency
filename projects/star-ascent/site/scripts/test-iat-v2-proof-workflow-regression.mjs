@@ -142,6 +142,7 @@ const exactWindowsPreflightStep = [
   "              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {",
   "            throw 'containment preflight did not return the exact fail-closed HOLD projection'",
   "          }",
+  "          exit 0",
   `        working-directory: ${exactSiteWorkingDirectory}`,
 ].join("\n");
 const exactSiteJobRunDefaults = [
@@ -541,7 +542,8 @@ function validateConfiguration(workflowInput, scripts) {
       "Phase-B hosted smoke package scripts must remain exact source-only structural/all-false tests",
     );
   }
-  if (scripts["check:iat-v2-ci-sbf-evidence"] !== "node scripts/test-iat-v2-ci-sbf-evidence-regression.mjs") {
+  if (scripts["check:iat-v2-ci-sbf-evidence"] !==
+      "node scripts/test-iat-v2-ci-sbf-evidence-regression.mjs && node --test tests/iat-v2-ci-sbf-evidence-successor.test.mjs") {
     fail("SBF evidence regression package script must remain bound to the canonical validator");
   }
   if (!scripts["check:iat-v2"]?.includes("npm run check:iat-v2-ci-sbf-evidence")) {
@@ -897,6 +899,14 @@ const nativeWindowsMutationProbes = [
   ["Windows expected-HOLD exit-code drift", exactNativeWindowsJob.replace(
     "          if ($status -ne 2) {",
     "          if ($status -ne 0) {",
+  )],
+  ["Windows missing successful HOLD exit reset", exactNativeWindowsJob.replace(
+    "          exit 0\n",
+    "",
+  )],
+  ["Windows fail-open exit before projection validation", exactNativeWindowsJob.replace(
+    "          $value = $output | ConvertFrom-Json",
+    "          exit 0\n          $value = $output | ConvertFrom-Json",
   )],
   ["Windows missing hard-disable assertion", exactNativeWindowsJob.replace(
     "              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {",
@@ -1298,6 +1308,14 @@ const mutationProbes = [
       ...packageJson.scripts,
       "check:iat-v2": packageJson.scripts["check:iat-v2"]
         .replace(" && npm run check:iat-v2-ci-sbf-evidence", ""),
+    },
+  },
+  {
+    name: "SBF evidence check omits successor input-closure regression",
+    workflow,
+    scripts: {
+      ...packageJson.scripts,
+      "check:iat-v2-ci-sbf-evidence": "node scripts/test-iat-v2-ci-sbf-evidence-regression.mjs",
     },
   },
   {

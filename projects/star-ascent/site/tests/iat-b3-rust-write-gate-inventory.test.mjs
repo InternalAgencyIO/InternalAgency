@@ -140,6 +140,10 @@ const EXPECTED_V2_HANDLERS = [
   "settle_round",
   "expire_round",
 ];
+const MIGRATION_ONLY_V2_HANDLERS = Object.freeze([
+  "backfill_historical_neutral_round",
+  "migrate_legacy_round",
+]);
 
 function anchorProgramBody(source) {
   const start = source.indexOf("#[program]");
@@ -192,7 +196,8 @@ function assertTokensInOrder(body, tokens, label) {
 test("the audit inventories every retained V2 Rust write handler", () => {
   const handlers = [...anchorProgramBody(v2Source).matchAll(/^\s+pub fn ([a-z0-9_]+)\s*\(/gmu)]
     .map((match) => match[1]);
-  assert.deepEqual(handlers, EXPECTED_V2_HANDLERS);
+  assert.equal(MIGRATION_ONLY_V2_HANDLERS.length, 2);
+  assert.deepEqual(handlers, [...EXPECTED_V2_HANDLERS, ...MIGRATION_ONLY_V2_HANDLERS]);
 
   for (const handler of EXPECTED_V2_HANDLERS) {
     const row = new RegExp(`\\| ${"`"}${handler}${"`"} \\|`, "u");

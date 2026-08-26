@@ -131,6 +131,7 @@ jobs:
               $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {
             throw 'containment preflight did not return the exact fail-closed HOLD projection'
           }
+          exit 0
         working-directory: projects/star-ascent/site
 
   rust-host:
