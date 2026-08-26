@@ -29,12 +29,16 @@ jobs:
     name: Web/policy checks (launch remains HOLD)
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     defaults:
       run:
         working-directory: projects/star-ascent/site
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
           # The public pre-launch audit validator recomputes its historical
           # source commit, tree, and tracked-file inventory. A shallow checkout
           # cannot provide that source-bound assurance.

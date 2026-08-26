@@ -150,12 +150,24 @@ const exactSiteJobRunDefaults = [
   "      run:",
   `        working-directory: ${exactSiteWorkingDirectory}`,
 ].join("\n");
+const exactWebSourceCheckout = [
+  "      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0",
+  "        with:",
+  "          ref: ${{ github.event.pull_request.head.sha || github.sha }}",
+  "          persist-credentials: false",
+  "          # The public pre-launch audit validator recomputes its historical",
+  "          # source commit, tree, and tracked-file inventory. A shallow checkout",
+  "          # cannot provide that source-bound assurance.",
+  "          fetch-depth: 0",
+].join("\n");
 const exactNonWindowsJobDefaultAnchors = [
   [
     "  web-and-policy:",
     "    name: Web/policy checks (launch remains HOLD)",
     "    runs-on: ubuntu-latest",
     "    timeout-minutes: 45",
+    "    env:",
+    "      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}",
     exactSiteJobRunDefaults,
     "    steps:",
   ].join("\n"),
@@ -450,11 +462,14 @@ function validateConfiguration(workflowInput, scripts) {
   if ((workflowText.match(/fetch-depth:\s+0\s*$/gm) ?? []).length !== 3) {
     fail("web audit, native Windows, and verifiable SBF jobs must retain full source history");
   }
+  if ((workflowText.split(exactWebSourceCheckout).length - 1) !== 1) {
+    fail("web audit must check out the exact declared source head with credentials disabled and full history");
+  }
   if (
-    !workflowText.includes("IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}")
+    (workflowText.match(/^\s+IAT_V2_SOURCE_HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}\s*$/gm) ?? []).length !== 2
     || !workflowText.includes("IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}")
   ) {
-    fail("verifiable SBF job must receive the exact source-head SHA and workflow event");
+    fail("web audit and verifiable SBF jobs must receive the exact source-head SHA, and SBF must receive the workflow event");
   }
   if (actionUses.some((action) => !/^[a-z0-9_.-]+\/[a-z0-9_.-]+@[0-9a-f]{40}$/.test(action))) {
     fail("every third-party action must be pinned to an immutable 40-character commit SHA");
@@ -1273,6 +1288,33 @@ const mutationProbes = [
     scripts: packageJson.scripts,
   },
   {
+    name: "web audit falls back to the synthetic merge checkout",
+    workflow: workflow.replace(
+      exactWebSourceCheckout,
+      exactWebSourceCheckout.replace(
+        "          ref: ${{ github.event.pull_request.head.sha || github.sha }}\n",
+        "",
+      ),
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "web audit persists checkout credentials",
+    workflow: workflow.replace(
+      exactWebSourceCheckout,
+      exactWebSourceCheckout.replace("          persist-credentials: false", "          persist-credentials: true"),
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "web audit source-head environment omitted",
+    workflow: workflow.replace(
+      "    env:\n      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}\n    defaults:\n",
+      "    defaults:\n",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
     name: "missing published SBF build log",
     workflow: workflow.replace(
       "            projects/star-ascent/site/target/iat-v2-sbf-build.log\n",
@@ -1288,8 +1330,8 @@ const mutationProbes = [
   {
     name: "missing exact SBF source-head environment",
     workflow: workflow.replace(
-      "      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}\n",
-      "",
+      "      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}\n      IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}\n",
+      "      IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}\n",
     ),
     scripts: packageJson.scripts,
   },
