@@ -39,6 +39,11 @@ const HEX_40 = /^[0-9a-f]{40}$/u;
 const HEX_64 = /^[0-9a-f]{64}$/u;
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const checkSpec = (id) => {
+  const specification = INDEPENDENT_SECURITY_CHECK_SPECS.find((candidate) => candidate.id === id);
+  if (!specification) throw new Error(`missing independent security check specification: ${id}`);
+  return specification;
+};
 
 function exactMapKeys(map, keys, label) {
   if (!(map instanceof Map)
@@ -244,18 +249,16 @@ const CLI_OPTIONS = Object.freeze({
   "--node-version": INDEPENDENT_SECURITY_TOOL_OUTPUT_PATHS[0],
   "--npm-version": INDEPENDENT_SECURITY_TOOL_OUTPUT_PATHS[1],
   "--cargo-audit-version": INDEPENDENT_SECURITY_TOOL_OUTPUT_PATHS[2],
-  "--npm-root-audit": INDEPENDENT_SECURITY_CHECK_SPECS[0].rawPath,
-  "--npm-root-exit-code": INDEPENDENT_SECURITY_CHECK_SPECS[0].exitCodePath,
-  "--npm-site-audit": INDEPENDENT_SECURITY_CHECK_SPECS[1].rawPath,
-  "--npm-site-exit-code": INDEPENDENT_SECURITY_CHECK_SPECS[1].exitCodePath,
-  "--cargo-site-audit": INDEPENDENT_SECURITY_CHECK_SPECS[2].rawPath,
-  "--cargo-site-exit-code": INDEPENDENT_SECURITY_CHECK_SPECS[2].exitCodePath,
-  "--cargo-account-lifecycle-audit": INDEPENDENT_SECURITY_CHECK_SPECS[3].rawPath,
-  "--cargo-account-lifecycle-exit-code": INDEPENDENT_SECURITY_CHECK_SPECS[3].exitCodePath,
-  "--cargo-stake-ingress-audit": INDEPENDENT_SECURITY_CHECK_SPECS[4].rawPath,
-  "--cargo-stake-ingress-exit-code": INDEPENDENT_SECURITY_CHECK_SPECS[4].exitCodePath,
-  "--security-regression-tap": INDEPENDENT_SECURITY_CHECK_SPECS[5].rawPath,
-  "--security-regression-exit-code": INDEPENDENT_SECURITY_CHECK_SPECS[5].exitCodePath,
+  "--npm-site-audit": checkSpec("NPM_SITE_AUDIT").rawPath,
+  "--npm-site-exit-code": checkSpec("NPM_SITE_AUDIT").exitCodePath,
+  "--cargo-site-audit": checkSpec("CARGO_SITE_AUDIT").rawPath,
+  "--cargo-site-exit-code": checkSpec("CARGO_SITE_AUDIT").exitCodePath,
+  "--cargo-account-lifecycle-audit": checkSpec("CARGO_ACCOUNT_LIFECYCLE_AUDIT").rawPath,
+  "--cargo-account-lifecycle-exit-code": checkSpec("CARGO_ACCOUNT_LIFECYCLE_AUDIT").exitCodePath,
+  "--cargo-stake-ingress-audit": checkSpec("CARGO_STAKE_INGRESS_AUDIT").rawPath,
+  "--cargo-stake-ingress-exit-code": checkSpec("CARGO_STAKE_INGRESS_AUDIT").exitCodePath,
+  "--security-regression-tap": checkSpec("SECURITY_REGRESSION_SUITE").rawPath,
+  "--security-regression-exit-code": checkSpec("SECURITY_REGRESSION_SUITE").exitCodePath,
 });
 
 function parseCli(argv) {

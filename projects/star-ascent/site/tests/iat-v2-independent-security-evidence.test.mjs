@@ -9,6 +9,8 @@ import {
 import {
   INDEPENDENT_SECURITY_ARTIFACT_NAME,
   INDEPENDENT_SECURITY_CHECK_SPECS,
+  INDEPENDENT_SECURITY_EVIDENCE_SCHEMA,
+  INDEPENDENT_SECURITY_LOCKFILE_PATHS,
   INDEPENDENT_SECURITY_MANIFEST_PATH,
   INDEPENDENT_SECURITY_REQUIRED_JOB_STEPS,
   INDEPENDENT_SECURITY_SOURCE_PATHS,
@@ -31,6 +33,11 @@ const OBSERVED_AT = "2026-08-26T07:04:00Z";
 const EVALUATION = "1787727900";
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const checkSpec = (id) => {
+  const specification = INDEPENDENT_SECURITY_CHECK_SPECS.find((candidate) => candidate.id === id);
+  assert(specification, `missing check specification ${id}`);
+  return specification;
+};
 
 function jsonBytes(value) {
   return Buffer.from(`${JSON.stringify(value)}\n`, "utf8");
@@ -100,12 +107,11 @@ function rawOutputs(overrides = {}) {
     [INDEPENDENT_SECURITY_TOOL_OUTPUT_PATHS[0], Buffer.from("v24.7.0\n")],
     [INDEPENDENT_SECURITY_TOOL_OUTPUT_PATHS[1], Buffer.from("11.6.0\n")],
     [INDEPENDENT_SECURITY_TOOL_OUTPUT_PATHS[2], Buffer.from("cargo-audit 0.22.2\n")],
-    [INDEPENDENT_SECURITY_CHECK_SPECS[0].rawPath, npmAudit({ low: 1 })],
-    [INDEPENDENT_SECURITY_CHECK_SPECS[1].rawPath, npmAudit()],
-    [INDEPENDENT_SECURITY_CHECK_SPECS[2].rawPath, cargoAudit()],
-    [INDEPENDENT_SECURITY_CHECK_SPECS[3].rawPath, cargoAudit()],
-    [INDEPENDENT_SECURITY_CHECK_SPECS[4].rawPath, cargoAudit()],
-    [INDEPENDENT_SECURITY_CHECK_SPECS[5].rawPath, tapResult()],
+    [checkSpec("NPM_SITE_AUDIT").rawPath, npmAudit({ low: 1 })],
+    [checkSpec("CARGO_SITE_AUDIT").rawPath, cargoAudit()],
+    [checkSpec("CARGO_ACCOUNT_LIFECYCLE_AUDIT").rawPath, cargoAudit()],
+    [checkSpec("CARGO_STAKE_INGRESS_AUDIT").rawPath, cargoAudit()],
+    [checkSpec("SECURITY_REGRESSION_SUITE").rawPath, tapResult()],
   ]);
   for (const { exitCodePath } of INDEPENDENT_SECURITY_CHECK_SPECS) {
     values.set(exitCodePath, Buffer.from("0\n"));
@@ -295,6 +301,16 @@ function mutateJsonBytes(bytes, mutate) {
 
 test("assembler derives zero Critical/High and preserves unresolved RUSTSEC-2025-0141", () => {
   const value = fixture();
+  assert.equal(value.evidence.schema, INDEPENDENT_SECURITY_EVIDENCE_SCHEMA);
+  assert.equal(INDEPENDENT_SECURITY_EVIDENCE_SCHEMA, "iat-v2-independent-security-evidence/v2");
+  assert.deepEqual(INDEPENDENT_SECURITY_LOCKFILE_PATHS, [
+    "projects/star-ascent/site/package-lock.json",
+    "projects/star-ascent/site/Cargo.lock",
+    "projects/star-ascent/site/tests/fixtures/iat-b3-account-lifecycle/Cargo.lock",
+    "projects/star-ascent/site/tests/fixtures/iat-b3-stake-ingress/Cargo.lock",
+  ]);
+  assert.equal(INDEPENDENT_SECURITY_SOURCE_PATHS.includes("package-lock.json"), false);
+  assert.equal(INDEPENDENT_SECURITY_CHECK_SPECS.some(({ id }) => id === "NPM_ROOT_AUDIT"), false);
   assert.equal(value.evidence.findingSummary.critical, 0);
   assert.equal(value.evidence.findingSummary.high, 0);
   assert.equal(value.evidence.findingSummary.zeroUnacceptedCriticalOrHigh, true);
@@ -324,7 +340,7 @@ test("exact public GitHub run/job/artifact and raw bytes validate without author
 test("assembler rejects observed Critical or High npm findings instead of accepting a PASS flag", () => {
   const baseline = fixture();
   const raw = rawOutputs({
-    [INDEPENDENT_SECURITY_CHECK_SPECS[0].rawPath]: npmAudit({ high: 1 }),
+    [checkSpec("NPM_SITE_AUDIT").rawPath]: npmAudit({ high: 1 }),
   });
   assert.throws(
     () => assembleIndependentSecurityEvidence({
@@ -351,10 +367,68 @@ test("assembler rejects observed Critical or High npm findings instead of accept
   );
 });
 
+test("successor v2 rejects repository-root lock and audit bytes as out-of-scope extras", () => {
+  const value = fixture();
+  const raw = rawOutputs();
+  raw.set("raw/npm-root-audit.json", npmAudit());
+  raw.set("raw/npm-root-audit.exit-code.txt", Buffer.from("0\n"));
+  assert.throws(
+    () => assembleIndependentSecurityEvidence({
+      rawOutputs: raw,
+      sourceFiles: value.sources,
+      sourceBinding: { commit: SOURCE_COMMIT, tree: SOURCE_TREE, programArtifactSha256: PROGRAM_ARTIFACT },
+      ciContext: {
+        serverUrl: "https://github.com",
+        repository: "InternalAgencyIO/InternalAgency",
+        repositoryId: 1_313_660_798,
+        workflowRef: value.evidence.ciProvenance.workflowRef,
+        runId: RUN_ID,
+        runAttempt: RUN_ATTEMPT,
+        eventName: "pull_request",
+        sourceHeadSha: SOURCE_COMMIT,
+        checkoutSha: SOURCE_COMMIT,
+        jobKey: INDEPENDENT_SECURITY_WORKFLOW_JOB_KEY,
+        runnerOs: "Linux",
+        runnerArch: "X64",
+      },
+      observedAtUtc: OBSERVED_AT,
+    }),
+    /exact caller-supplied byte inventory/u,
+  );
+
+  const sources = new Map(value.sources);
+  sources.set("package-lock.json", Buffer.from("{}\n"));
+  assert.equal(validate(value, { sourceFiles: sources }).valid, false);
+  assert.match(validate(value, { sourceFiles: sources }).violations.join("\n"), /exact committed byte map/u);
+  assert.throws(
+    () => assembleIndependentSecurityEvidence({
+      rawOutputs: rawOutputs(),
+      sourceFiles: sources,
+      sourceBinding: { commit: SOURCE_COMMIT, tree: SOURCE_TREE, programArtifactSha256: PROGRAM_ARTIFACT },
+      ciContext: {
+        serverUrl: "https://github.com",
+        repository: "InternalAgencyIO/InternalAgency",
+        repositoryId: 1_313_660_798,
+        workflowRef: value.evidence.ciProvenance.workflowRef,
+        runId: RUN_ID,
+        runAttempt: RUN_ATTEMPT,
+        eventName: "pull_request",
+        sourceHeadSha: SOURCE_COMMIT,
+        checkoutSha: SOURCE_COMMIT,
+        jobKey: INDEPENDENT_SECURITY_WORKFLOW_JOB_KEY,
+        runnerOs: "Linux",
+        runnerArch: "X64",
+      },
+      observedAtUtc: OBSERVED_AT,
+    }),
+    /exact caller-supplied byte inventory/u,
+  );
+});
+
 test("assembler rejects omission of the unresolved informational finding", () => {
   const value = fixture();
   const raw = rawOutputs({
-    [INDEPENDENT_SECURITY_CHECK_SPECS[2].rawPath]: cargoAudit({ includeInformational: false }),
+    [checkSpec("CARGO_SITE_AUDIT").rawPath]: cargoAudit({ includeInformational: false }),
   });
   assert.throws(
     () => assembleIndependentSecurityEvidence({
@@ -384,7 +458,7 @@ test("assembler rejects omission of the unresolved informational finding", () =>
 test("assembler and validator require exact zero tool exit-code receipt bytes", () => {
   const value = fixture();
   const raw = rawOutputs({
-    [INDEPENDENT_SECURITY_CHECK_SPECS[0].exitCodePath]: Buffer.from("1\n"),
+    [checkSpec("NPM_SITE_AUDIT").exitCodePath]: Buffer.from("1\n"),
   });
   assert.throws(
     () => assembleIndependentSecurityEvidence({
@@ -412,7 +486,7 @@ test("assembler and validator require exact zero tool exit-code receipt bytes", 
 
   const drift = fixture();
   drift.raw = new Map(drift.raw);
-  drift.raw.set(INDEPENDENT_SECURITY_CHECK_SPECS[0].exitCodePath, Buffer.from("1\n"));
+  drift.raw.set(checkSpec("NPM_SITE_AUDIT").exitCodePath, Buffer.from("1\n"));
   const repackaged = packageEvidence({ evidence: drift.evidence, raw: drift.raw, sources: drift.sources });
   assert.equal(validate(repackaged).valid, false);
   assert.match(validate(repackaged).violations.join("\n"), /exit code|raw artifact bytes/iu);
@@ -499,11 +573,25 @@ test("expired evidence and noncanonical evidence encoding fail closed", () => {
 });
 
 test("schema keeps the evidence and safety surfaces strict and Mainnet HOLD", () => {
-  const schema = JSON.parse(readFileSync(
+  const historicalSchema = JSON.parse(readFileSync(
     new URL("../docs/b3/iat-v2-independent-security-evidence.v1.schema.json", import.meta.url),
     "utf8",
   ));
+  const schema = JSON.parse(readFileSync(
+    new URL("../docs/b3/iat-v2-independent-security-evidence.v2.schema.json", import.meta.url),
+    "utf8",
+  ));
   assert.equal(schema.additionalProperties, false);
+  assert.equal(historicalSchema.properties.schema.const, "iat-v2-independent-security-evidence/v1");
+  assert.equal(historicalSchema.properties.checks.minItems, 6);
+  assert.equal(historicalSchema.$defs.check.properties.id.enum.includes("NPM_ROOT_AUDIT"), true);
+  assert.equal(historicalSchema.$defs.artifactContract.properties.name.const, "iat-v2-independent-security-evidence");
+  assert.equal(schema.properties.schema.const, INDEPENDENT_SECURITY_EVIDENCE_SCHEMA);
+  assert.equal(schema.properties.inputBindings.minItems, INDEPENDENT_SECURITY_SOURCE_PATHS.length);
+  assert.equal(schema.properties.checks.minItems, INDEPENDENT_SECURITY_CHECK_SPECS.length);
+  assert.equal(schema.$defs.artifactContract.properties.name.const, INDEPENDENT_SECURITY_ARTIFACT_NAME);
+  assert.equal(schema.$defs.artifactContract.properties.manifestPath.const, INDEPENDENT_SECURITY_MANIFEST_PATH);
+  assert.equal(schema.$defs.check.properties.id.enum.includes("NPM_ROOT_AUDIT"), false);
   assert.equal(schema.properties.mainnetStatus.const, "HOLD");
   assert.equal(schema.properties.status.const, "SECURITY_SUITE_COMPLETE_HOLD");
   assert.equal(schema.$defs.findingSummary.properties.critical.const, 0);

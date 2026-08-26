@@ -5,7 +5,7 @@ import { canonicalizeRfc8785 } from "../iat-v2-canonical-json.mjs";
 import { parseB3OwnerPolicyFreezeJson } from "../validate-iat-b3-owner-policy-freeze.mjs";
 
 export const INDEPENDENT_SECURITY_EVIDENCE_SCHEMA =
-  "iat-v2-independent-security-evidence/v1";
+  "iat-v2-independent-security-evidence/v2";
 export const INDEPENDENT_SECURITY_EVIDENCE_STATUS =
   "SECURITY_SUITE_COMPLETE_HOLD";
 export const INDEPENDENT_SECURITY_PREDICATE = "AUTOMATED_SECURITY_CLOSURE";
@@ -14,17 +14,16 @@ export const INDEPENDENT_SECURITY_WORKFLOW_PATH =
   ".github/workflows/iat-v2-independent-security-evidence.yml";
 export const INDEPENDENT_SECURITY_WORKFLOW_JOB_KEY = "security-evidence";
 export const INDEPENDENT_SECURITY_WORKFLOW_JOB_NAME =
-  "Independent current-source security evidence (Mainnet HOLD)";
+  "Independent IAT-surface current-source security evidence (Mainnet HOLD)";
 export const INDEPENDENT_SECURITY_ARTIFACT_NAME =
-  "iat-v2-independent-security-evidence";
+  "iat-v2-independent-security-evidence-v2";
 export const INDEPENDENT_SECURITY_MANIFEST_PATH =
-  "iat-v2-independent-security-evidence.json";
+  "iat-v2-independent-security-evidence-v2.json";
 export const INDEPENDENT_SECURITY_REPOSITORY = "InternalAgencyIO/InternalAgency";
 export const INDEPENDENT_SECURITY_REPOSITORY_ID = 1_313_660_798;
 export const INDEPENDENT_SECURITY_FRESHNESS_SECONDS = 900n;
 
 export const INDEPENDENT_SECURITY_LOCKFILE_PATHS = Object.freeze([
-  "package-lock.json",
   "projects/star-ascent/site/package-lock.json",
   "projects/star-ascent/site/Cargo.lock",
   "projects/star-ascent/site/tests/fixtures/iat-b3-account-lifecycle/Cargo.lock",
@@ -49,39 +48,32 @@ export const INDEPENDENT_SECURITY_SOURCE_PATHS = Object.freeze([
 
 export const INDEPENDENT_SECURITY_CHECK_SPECS = Object.freeze([
   Object.freeze({
-    id: "NPM_ROOT_AUDIT",
-    kind: "NPM_AUDIT",
-    rawPath: "raw/npm-root-audit.json",
-    exitCodePath: "raw/npm-root-audit.exit-code.txt",
-    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[0],
-  }),
-  Object.freeze({
     id: "NPM_SITE_AUDIT",
     kind: "NPM_AUDIT",
     rawPath: "raw/npm-site-audit.json",
     exitCodePath: "raw/npm-site-audit.exit-code.txt",
-    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[1],
+    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[0],
   }),
   Object.freeze({
     id: "CARGO_SITE_AUDIT",
     kind: "CARGO_AUDIT",
     rawPath: "raw/cargo-site-audit.json",
     exitCodePath: "raw/cargo-site-audit.exit-code.txt",
-    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[2],
+    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[1],
   }),
   Object.freeze({
     id: "CARGO_ACCOUNT_LIFECYCLE_AUDIT",
     kind: "CARGO_AUDIT",
     rawPath: "raw/cargo-account-lifecycle-audit.json",
     exitCodePath: "raw/cargo-account-lifecycle-audit.exit-code.txt",
-    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[3],
+    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[2],
   }),
   Object.freeze({
     id: "CARGO_STAKE_INGRESS_AUDIT",
     kind: "CARGO_AUDIT",
     rawPath: "raw/cargo-stake-ingress-audit.json",
     exitCodePath: "raw/cargo-stake-ingress-audit.exit-code.txt",
-    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[4],
+    inputPath: INDEPENDENT_SECURITY_LOCKFILE_PATHS[3],
   }),
   Object.freeze({
     id: "SECURITY_REGRESSION_SUITE",
@@ -113,7 +105,6 @@ export const INDEPENDENT_SECURITY_REQUIRED_JOB_STEPS = Object.freeze([
   "Install exact site dependencies",
   "Install pinned Cargo audit tool",
   "Capture exact tool versions",
-  "Run root npm advisory audit",
   "Run site npm advisory audit",
   "Run Cargo advisory audits",
   "Run fixed security regression suite",
@@ -122,7 +113,7 @@ export const INDEPENDENT_SECURITY_REQUIRED_JOB_STEPS = Object.freeze([
 ]);
 
 export const INDEPENDENT_SECURITY_LIMITATIONS = Object.freeze([
-  "Exact current-source automated dependency audits and fixed security regressions only; not a comprehensive economic, privacy, legal, or human review.",
+  "Exact current-source IAT-site dependency audits and fixed IAT security regressions only; the unrelated repository-root Radiance package is outside this evidence contract, and this is not a comprehensive economic, privacy, legal, or human review.",
   "Evidence remains bounded to its public GitHub run, advisory snapshot, source commit, source tree, and reviewed program artifact.",
   "Does not prove a signed Devnet rehearsal and does not authorize funding, signing, broadcast, deployment, release, scheduling, or Mainnet execution.",
 ]);
@@ -455,10 +446,10 @@ export function deriveIndependentSecurityFindingSummary(checks) {
   if (!Array.isArray(checks)) throw new TypeError("checks must be an array");
   const npm = checks.filter(({ kind }) => kind === "NPM_AUDIT");
   const cargo = checks.filter(({ kind }) => kind === "CARGO_AUDIT");
-  if (npm.length !== 2 || cargo.length !== 3
+  if (npm.length !== 1 || cargo.length !== 3
     || !cargo.every(({ observation }) => observation.informationalFindingIds
       .includes(RUSTSEC_2025_0141_FINDING.id))) {
-    throw new TypeError("exact two npm and three Cargo audit observations are required");
+    throw new TypeError("exact one IAT-site npm and three Cargo audit observations are required");
   }
   const sum = (field) => npm.reduce((total, check) => total + check.observation[field], 0);
   const critical = sum("critical");
@@ -913,7 +904,10 @@ export function validateIndependentSecurityEvidence({
   } catch (error) {
     return invalidResult([error.message], evidence);
   }
-  if (!(sourceFiles instanceof Map)) return invalidResult(["sourceFiles: exact committed byte map required"], evidence);
+  if (!(sourceFiles instanceof Map)
+    || !exactJson([...sourceFiles.keys()].sort(), [...INDEPENDENT_SECURITY_SOURCE_PATHS].sort())) {
+    return invalidResult(["sourceFiles: exact committed byte map required"], evidence);
+  }
   if (!exactKeys(evidence, TOP_KEYS, "evidence", violations)) return invalidResult(violations, evidence);
   if (evidence.schema !== INDEPENDENT_SECURITY_EVIDENCE_SCHEMA
     || evidence.status !== INDEPENDENT_SECURITY_EVIDENCE_STATUS

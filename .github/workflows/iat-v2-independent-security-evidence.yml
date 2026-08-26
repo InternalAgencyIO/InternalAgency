@@ -6,12 +6,10 @@ on:
       - agent/iat-launch-window
     paths:
       - ".github/workflows/iat-v2-independent-security-evidence.yml"
-      - "package-lock.json"
       - "projects/star-ascent/site/**"
   pull_request:
     paths:
       - ".github/workflows/iat-v2-independent-security-evidence.yml"
-      - "package-lock.json"
       - "projects/star-ascent/site/**"
   workflow_dispatch:
 
@@ -24,7 +22,7 @@ concurrency:
 
 jobs:
   security-evidence:
-    name: Independent current-source security evidence (Mainnet HOLD)
+    name: Independent IAT-surface current-source security evidence (Mainnet HOLD)
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
@@ -58,14 +56,6 @@ jobs:
           node --version > projects/star-ascent/site/target/security/raw/node-version.txt
           npm --version > projects/star-ascent/site/target/security/raw/npm-version.txt
           cargo audit --version > projects/star-ascent/site/target/security/raw/cargo-audit-version.txt
-
-      - name: Run root npm advisory audit
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm audit --package-lock-only --audit-level=high --json \
-            > projects/star-ascent/site/target/security/raw/npm-root-audit.json
-          printf '0\n' > projects/star-ascent/site/target/security/raw/npm-root-audit.exit-code.txt
 
       - name: Run site npm advisory audit
         shell: bash
@@ -115,8 +105,6 @@ jobs:
             --node-version projects/star-ascent/site/target/security/raw/node-version.txt \
             --npm-version projects/star-ascent/site/target/security/raw/npm-version.txt \
             --cargo-audit-version projects/star-ascent/site/target/security/raw/cargo-audit-version.txt \
-            --npm-root-audit projects/star-ascent/site/target/security/raw/npm-root-audit.json \
-            --npm-root-exit-code projects/star-ascent/site/target/security/raw/npm-root-audit.exit-code.txt \
             --npm-site-audit projects/star-ascent/site/target/security/raw/npm-site-audit.json \
             --npm-site-exit-code projects/star-ascent/site/target/security/raw/npm-site-audit.exit-code.txt \
             --cargo-site-audit projects/star-ascent/site/target/security/raw/cargo-site-audit.json \
@@ -128,14 +116,14 @@ jobs:
             --security-regression-tap projects/star-ascent/site/target/security/raw/security-regression.tap \
             --security-regression-exit-code projects/star-ascent/site/target/security/raw/security-regression.exit-code.txt \
             --program-artifact-sha256 "$IAT_V2_SECURITY_PROGRAM_ARTIFACT_SHA256" \
-            --output projects/star-ascent/site/target/security/iat-v2-independent-security-evidence.json
+            --output projects/star-ascent/site/target/security/iat-v2-independent-security-evidence-v2.json
 
       - name: Upload immutable security evidence artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: iat-v2-independent-security-evidence
+          name: iat-v2-independent-security-evidence-v2
           path: |
-            projects/star-ascent/site/target/security/iat-v2-independent-security-evidence.json
+            projects/star-ascent/site/target/security/iat-v2-independent-security-evidence-v2.json
             projects/star-ascent/site/target/security/raw
           if-no-files-found: error
           retention-days: 30

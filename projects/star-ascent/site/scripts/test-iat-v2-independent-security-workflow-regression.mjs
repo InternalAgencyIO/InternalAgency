@@ -8,6 +8,9 @@ import { parse } from "yaml";
 
 import {
   INDEPENDENT_SECURITY_ARTIFACT_NAME,
+  INDEPENDENT_SECURITY_CHECK_SPECS,
+  INDEPENDENT_SECURITY_LOCKFILE_PATHS,
+  INDEPENDENT_SECURITY_MANIFEST_PATH,
   INDEPENDENT_SECURITY_REGRESSION_PATHS,
   INDEPENDENT_SECURITY_REQUIRED_JOB_STEPS,
   INDEPENDENT_SECURITY_WORKFLOW_JOB_KEY,
@@ -25,6 +28,12 @@ const job = workflow.jobs?.[INDEPENDENT_SECURITY_WORKFLOW_JOB_KEY];
 assert.deepEqual(Object.keys(workflow.jobs ?? {}), [INDEPENDENT_SECURITY_WORKFLOW_JOB_KEY]);
 assert.equal(workflow.permissions?.contents, "read");
 assert.deepEqual(Object.keys(workflow.on ?? {}).sort(), ["pull_request", "push", "workflow_dispatch"]);
+for (const eventName of ["push", "pull_request"]) {
+  assert.deepEqual(workflow.on[eventName].paths, [
+    ".github/workflows/iat-v2-independent-security-evidence.yml",
+    "projects/star-ascent/site/**",
+  ]);
+}
 assert.equal("pull_request_target" in (workflow.on ?? {}), false);
 assert.equal("workflow_run" in (workflow.on ?? {}), false);
 assert.equal(workflow.concurrency?.["cancel-in-progress"], false);
@@ -43,6 +52,7 @@ assert.equal(
 
 const stepsByName = new Map(job.steps.map((step) => [step.name, step]));
 assert.equal(stepsByName.size, job.steps.length, "workflow step names must be unique");
+assert.deepEqual(job.steps.map(({ name }) => name), INDEPENDENT_SECURITY_REQUIRED_JOB_STEPS);
 for (const name of INDEPENDENT_SECURITY_REQUIRED_JOB_STEPS) {
   assert(stepsByName.has(name), `missing exact security workflow step ${name}`);
 }
@@ -64,10 +74,22 @@ assert.equal(installDependencies.run, "npm ci --ignore-scripts --no-audit --no-f
 const cargoInstall = stepsByName.get("Install pinned Cargo audit tool");
 assert.equal(cargoInstall.run, "cargo install cargo-audit --version 0.22.2 --locked");
 
-const npmRoot = stepsByName.get("Run root npm advisory audit").run;
 const npmSite = stepsByName.get("Run site npm advisory audit").run;
-assert.match(npmRoot, /npm audit --package-lock-only --audit-level=high --json/u);
 assert.match(npmSite, /npm audit --package-lock-only --audit-level=high --json/u);
+assert.equal(stepsByName.has("Run root npm advisory audit"), false);
+assert.deepEqual(INDEPENDENT_SECURITY_LOCKFILE_PATHS, [
+  "projects/star-ascent/site/package-lock.json",
+  "projects/star-ascent/site/Cargo.lock",
+  "projects/star-ascent/site/tests/fixtures/iat-b3-account-lifecycle/Cargo.lock",
+  "projects/star-ascent/site/tests/fixtures/iat-b3-stake-ingress/Cargo.lock",
+]);
+assert.deepEqual(INDEPENDENT_SECURITY_CHECK_SPECS.map(({ id }) => id), [
+  "NPM_SITE_AUDIT",
+  "CARGO_SITE_AUDIT",
+  "CARGO_ACCOUNT_LIFECYCLE_AUDIT",
+  "CARGO_STAKE_INGRESS_AUDIT",
+  "SECURITY_REGRESSION_SUITE",
+]);
 
 const cargoAudits = stepsByName.get("Run Cargo advisory audits").run;
 for (const path of [
@@ -91,8 +113,6 @@ for (const option of [
   "--node-version",
   "--npm-version",
   "--cargo-audit-version",
-  "--npm-root-audit",
-  "--npm-root-exit-code",
   "--npm-site-audit",
   "--npm-site-exit-code",
   "--cargo-site-audit",
@@ -108,7 +128,6 @@ for (const option of [
 ]) assert(assembler.includes(option), `assembler invocation omitted ${option}`);
 assert.doesNotMatch(assembler, /--(?:pass|approved|verified|ready|go)\b/iu);
 for (const stepName of [
-  "Run root npm advisory audit",
   "Run site npm advisory audit",
   "Run Cargo advisory audits",
   "Run fixed security regression suite",
@@ -123,12 +142,14 @@ assert.equal(upload.uses, "actions/upload-artifact@ea165f8d65b6e75b540449e92b488
 assert.equal(upload.with.name, INDEPENDENT_SECURITY_ARTIFACT_NAME);
 assert.equal(upload.with["if-no-files-found"], "error");
 assert.equal(upload.with["retention-days"], 30);
-assert.match(upload.with.path, /target\/security\/iat-v2-independent-security-evidence\.json/u);
+assert.match(upload.with.path, new RegExp(`target/security/${INDEPENDENT_SECURITY_MANIFEST_PATH.replaceAll(".", "\\.")}`, "u"));
 assert.match(upload.with.path, /target\/security\/raw/u);
 
 assert.doesNotMatch(workflowSource, /\b(?:pull_request_target|workflow_run)\b/u);
 assert.doesNotMatch(workflowSource, /\$\{\{\s*secrets\./u);
 assert.doesNotMatch(workflowSource, /actions\/download-artifact|\b(?:trezor|solana|rpc|broadcast|deploy|mainnet-beta)\b/iu);
+assert.doesNotMatch(workflowSource, /npm-root-audit|Run root npm advisory audit/u);
+assert.doesNotMatch(workflowSource, /^\s*-\s+"package-lock\.json"\s*$/mu);
 
 const builderSource = readFileSync(
   resolve(siteRoot, "scripts/build-iat-v2-independent-security-evidence.mjs"),
@@ -139,6 +160,7 @@ const validatorSource = readFileSync(
   "utf8",
 );
 assert.doesNotMatch(builderSource, /--(?:pass|approved|verified|ready|go)\b/iu);
+assert.doesNotMatch(builderSource, /--npm-root-(?:audit|exit-code)/u);
 assert.match(builderSource, /summarizeNpmAuditBytes/u);
 assert.match(builderSource, /summarizeCargoAuditBytes/u);
 assert.match(builderSource, /summarizeTapBytes/u);
@@ -147,7 +169,8 @@ assert.match(validatorSource, /GitHub jobs receipt/u);
 assert.match(validatorSource, /GitHub artifact receipt/u);
 assert.match(validatorSource, /RUSTSEC-2025-0141/u);
 assert.match(validatorSource, /mainnetStatus:\s*"HOLD"/u);
+assert.doesNotMatch(validatorSource, /NPM_ROOT_AUDIT|raw\/npm-root-audit/u);
 
 console.log(
-  "IAT V2 independent-security workflow regression passed: one isolated public GitHub job, pinned actions/tools, five advisory inputs, fixed TAP suite, raw-byte assembler, immutable artifact, no caller PASS switch, and Mainnet HOLD remain exact.",
+  "IAT V2 independent-security workflow regression passed: successor v2 scopes one site npm and three Cargo advisory inputs, fixed TAP suite, raw-byte assembler, immutable artifact, no caller PASS switch, and Mainnet HOLD remain exact.",
 );
