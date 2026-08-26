@@ -1,0 +1,97 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T08:08:47.630Z",
+  "authoritative_parent_commit": "92bfedf57b6136107141ef847760c3ad989bc5fc",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "status": "prompts-prepared-provider-eligible",
+  "source_precedent": {
+    "batch": 346,
+    "country": "Palau",
+    "checkpoint": "assets/lore/starlight-era/batch-346-palau-solar-observation-checkpoint.json"
+  },
+  "face_anchor_manifest_verified": true,
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "camera_roll_policy": {
+    "1-20": "extreme close",
+    "21-40": "close",
+    "41-60": "medium close",
+    "61-80": "medium wide",
+    "81-100": "extreme wide"
+  },
+  "camera_rolls": {
+    "1688": 37,
+    "1689": 80,
+    "1690": 52,
+    "1691": 11
+  },
+  "prompt_sha256": {
+    "1688": "58424C1919E931F14D5909575D78DB18794B792F25D68AA080DD40DF388307E8",
+    "1689": "89429EC9A1A42F1F6A5A5A442E151C7F951CFAAED5496C03A3E17D6689F2906E",
+    "1690": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+    "1691": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F"
+  },
+  "scene_states": {
+    "1688": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-417/scene-1688-prompt.txt",
+      "prompt_sha256": "58424C1919E931F14D5909575D78DB18794B792F25D68AA080DD40DF388307E8",
+      "camera_roll": 37
+    },
+    "1689": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-417/scene-1689-prompt.txt",
+      "prompt_sha256": "89429EC9A1A42F1F6A5A5A442E151C7F951CFAAED5496C03A3E17D6689F2906E",
+      "camera_roll": 80
+    },
+    "1690": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-417/scene-1690-prompt.txt",
+      "prompt_sha256": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+      "camera_roll": 52
+    },
+    "1691": {
+      "status": "untouched-prepared",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "prompt_path": "tmp/world-195x4/batch-417/scene-1691-prompt.txt",
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11
+    }
+  },
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "x_backlog_cycle_due": false,
+  "accepted_canonical_count_for_country": 0,
+  "target_accepted_count_for_country": 4,
+  "next_action": "On the next user-confirmed wake, dispatch untouched Palau scene 1688 once with the exact prepared prompt and all three ordered face anchors."
+}
