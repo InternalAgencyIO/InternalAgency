@@ -2,7 +2,7 @@ const EVIDENCE_ROOT = "/evidence/iat-v2";
 const PUBLICATION_COMMIT = "eb2e59c2d41f9f716227887e54a5300d9b463dd0";
 const PUBLICATION_ROOT =
   `https://github.com/InternalAgencyIO/InternalAgency/blob/${PUBLICATION_COMMIT}/projects/star-ascent/site/docs/b3/evidence`;
-const CI_RUN = "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/32937913614";
+const CI_RUN = "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/32946810318";
 const GITHUB_EVIDENCE =
   `https://github.com/InternalAgencyIO/InternalAgency/tree/${PUBLICATION_COMMIT}/projects/star-ascent/site/public/evidence/iat-v2`;
 
@@ -76,28 +76,28 @@ const progressRecords = [
     href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-PROOF-20260825.json`,
   },
   {
-    state: "HOLD",
+    state: "PASS",
     label: "RUST HOST TESTS",
-    detail: "Reference run 32937913614 failed 3 retained-v2 parity assertions after 50 tests passed. This board stays HOLD until a newer exact public run is bound.",
-    href: `${CI_RUN}/job/98082727542`,
+    detail: "Run 32946810318 passed both the default and feature-gated Rust host suites at exact source ebf225ff.",
+    href: `${CI_RUN}/job/98109188373`,
   },
   {
-    state: "HOLD",
+    state: "PASS",
     label: "VERIFIABLE SBF BUILD",
-    detail: "No passing current-source artifact is bound on this board. In reference run 32937913614, the deterministic build stopped on the same 3 Rust assertions and upload was skipped.",
-    href: `${CI_RUN}/job/98082727557`,
+    detail: "Run 32946810318 reproduced the 649,680-byte IAT V2 binary at SHA-256 771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01 and uploaded artifact 9599245993. This is build evidence only, not a Devnet signature or transaction.",
+    href: `${CI_RUN}/job/98109188370`,
   },
   {
     state: "HOLD",
     label: "MANDATORY LIVE-EVIDENCE GATE",
-    detail: "Source-bound live build and runtime receipts plus required direct observers are still absent. The canonical gate remains nonexecuting and nonauthorizing HOLD.",
-    href: `${CI_RUN}/job/98082727615`,
+    detail: "Source-bound live runtime receipts plus required direct observers are still absent. The canonical gate remains nonexecuting and nonauthorizing HOLD.",
+    href: `${CI_RUN}/job/98109188405`,
   },
   {
-    state: "HOLD",
+    state: "PASS",
     label: "WINDOWS NON-EVIDENCE SMOKE",
-    detail: "Reference run 32937913614 failed closed on a hash-pinned authority-file newline mismatch. The local LF pin still requires fresh public CI verification.",
-    href: `${CI_RUN}/job/98082727399`,
+    detail: "Run 32946810318 passed the hosted Windows source-contract checks and confirmed the exact nonauthorizing HOLD projection. This job is smoke coverage, not release evidence.",
+    href: `${CI_RUN}/job/98109188109`,
   },
   {
     state: "BLOCKED",
@@ -112,7 +112,7 @@ const copy = {
     launch: "LAUNCH CONTROL",
     eyebrow: "STAR ASCENT // PUBLIC PROOF BOARD",
     title: <>NO CLAIM<br />WITHOUT PROOF.</>,
-    lede: "Historical off-chain signature proof remains independently verifiable at exact hashes. No passing current-source Rust run or verifiable SBF artifact is bound on this board. Mainnet is UNSCHEDULED HOLD until funding and every canonical gate clear.",
+    lede: "Historical off-chain signature proof remains independently verifiable at exact hashes. Current-source Rust and verifiable SBF build evidence are now public at an exact artifact hash; no current-source physical Devnet signature or transaction receipt is published. Mainnet is UNSCHEDULED HOLD until funding and every canonical gate clear.",
     fields: [
       ["Mainnet mint", "HOLD", "No mainnet IAT mint is represented by these Devnet records, and no Mainnet action was performed."],
       ["V2 program", "Devnet live", "Program 62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj is named in both V2 rehearsal records."],
@@ -124,16 +124,16 @@ const copy = {
     ],
     evidence: "CC0 PUBLIC EVIDENCE",
     evidenceTitle: "RAW BYTES. PUBLIC HASHES. NO SECRETS.",
-    evidenceLede: "The historical off-chain signature artifacts are frozen at publication commit eb2e59c. The earlier initialization and feature exports describe separate Devnet rehearsal instances, so their mint and configuration addresses differ. None is a Mainnet mint or current-source CI artifact.",
+    evidenceLede: "The historical off-chain signature artifacts are frozen at publication commit eb2e59c. The earlier initialization and feature exports describe separate Devnet rehearsal instances, so their mint and configuration addresses differ. None is a Mainnet mint or the current CI build artifact linked above.",
     download: "OPEN JSON",
     hash: "SHA-256",
     github: "OPEN THE GITHUB EVIDENCE DIRECTORY",
     cc0: "CC0 1.0 PUBLIC-DOMAIN DEDICATION",
     scope: "WHAT THIS DOES NOT PROVE",
     scopeTitle: "Publication is not launch approval.",
-    scopeBody: "The published signature verifies against the bound public key and frozen request; it does not independently prove hardware provenance, a Devnet transaction, or launch authorization. Current-source Rust/SBF evidence, source-bound live receipts, required direct observers, final Mainnet preflight, funding, and ceremony scheduling are not complete. Mainnet remains UNSCHEDULED HOLD.",
+    scopeBody: "The published signature verifies against the bound public key and frozen request; it does not independently prove hardware provenance, a Devnet transaction, or launch authorization. Current-source Rust/SBF build evidence is public, but source-bound live receipts, required direct observers, final Mainnet preflight, funding, and ceremony scheduling are not complete. Mainnet remains UNSCHEDULED HOLD.",
     progress: "CURRENT PUBLIC CHECKPOINT",
-    progressTitle: "HISTORICAL PROOF VALID. CURRENT SOURCE HOLD.",
+    progressTitle: "CURRENT BUILD VERIFIED. LIVE DEVNET PROOF HOLD.",
     progressLede: "This board separates completed verification from fail-closed HOLD conditions. A red gate is not relabeled as success.",
     inspect: "INSPECT RECEIPT",
     order: "PUBLICATION ORDER",
@@ -157,7 +157,7 @@ export default function ProofPage() {
           <span className="proof-portrait-scan" aria-hidden="true" />
           <span className="proof-portrait-reticle" aria-hidden="true" />
         </div>
-        <figcaption><span>RADIANCE // SIGNAL OPERATOR</span><b>CURRENT SOURCE // HOLD</b></figcaption>
+        <figcaption><span>RADIANCE // SIGNAL OPERATOR</span><b>BUILD VERIFIED // LIVE HOLD</b></figcaption>
       </figure>
     </section>
     <section className="proof-progress">

@@ -32,8 +32,9 @@ test("public launch copy stays conditional and HOLD-safe", async () => {
   assert.doesNotMatch(verify, /MOVE ONLY ON THE LIVE ROUTE|THE LIVE ORDER/);
   assert.match(proof, /OPEN JSON/);
   assert.doesNotMatch(proof, /DOWNLOAD JSON/);
-  assert.match(proof, /Reference run 32937913614 failed 3 retained-v2 parity assertions/);
-  assert.match(proof, /No passing current-source artifact is bound on this board/);
+  assert.match(proof, /Run 32946810318 reproduced the 649,680-byte IAT V2 binary/);
+  assert.match(proof, /This is build evidence only, not a Devnet signature or transaction/);
+  assert.match(proof, /no current-source physical Devnet signature or transaction receipt is published/);
   assert.match(proof, /Mainnet is UNSCHEDULED HOLD/);
   assert.doesNotMatch(proof, /passed on the public PR head|full verifiable SBF rehearsal are green|DEVNET PROOF ONLINE|AUG(?:UST)?\s+27/i);
 
