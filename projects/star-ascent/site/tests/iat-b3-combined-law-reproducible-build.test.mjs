@@ -113,14 +113,14 @@ const TRUSTED_TEST_GIT_EXECUTABLE = process.platform === "win32"
 test("mismatched pinned Git observations report exact diagnostics but never pass", () => {
   const expected = Object.freeze({
     resolvedExecutablePath: "/usr/bin/git",
-    version: "git version 2.43.0",
-    sha256: "a".repeat(64),
-    byteLength: 4_066_232,
+    version: "git version 2.55.0",
+    sha256: "d4d2ba562243015206d4248edfec871a74786499292d00ed072dbca2f5ae8073",
+    byteLength: 4_576_040,
     linkCount: 1,
   });
   const observed = Object.freeze({
     resolvedExecutablePath: "/usr/bin/git",
-    version: "git version 2.55.0",
+    version: "git version 2.56.0",
     sha256: "b".repeat(64),
     byteLength: 4_200_000,
     linkCount: 2,
@@ -142,7 +142,7 @@ test("mismatched pinned Git observations report exact diagnostics but never pass
         expected,
         observed,
       });
-      assert.match(error.message, /"version":"git version 2\.55\.0"/u);
+      assert.match(error.message, /"version":"git version 2\.56\.0"/u);
       assert.match(error.message, /"sha256":"b{64}"/u);
       assert.match(error.message, /"byteLength":4200000/u);
       assert.match(error.message, /"linkCount":2/u);

@@ -117,9 +117,9 @@ export const PINNED_DISPOSABLE_DEVNET_NODE_RUNTIME = Object.freeze({
 export const PINNED_DISPOSABLE_DEVNET_GIT_CLIENT = Object.freeze({
   platform: "linux/amd64",
   absolutePath: "/usr/bin/git",
-  version: "git version 2.43.0",
-  sha256: "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668",
-  byteLength: 4_066_232,
+  version: "git version 2.55.0",
+  sha256: "d4d2ba562243015206d4248edfec871a74786499292d00ed072dbca2f5ae8073",
+  byteLength: 4_576_040,
 });
 
 const REPOSITORY_ROOT = resolve(fileURLToPath(new URL("../../../../", import.meta.url)));
@@ -128,8 +128,8 @@ const PINNED_EXECUTION_MODULE_CLOSURE = Object.freeze([
   Object.freeze({
     repositoryPath: "projects/star-ascent/site/scripts/run-iat-b3-combined-law-reproducible-build.mjs",
     url: new URL("./run-iat-b3-combined-law-reproducible-build.mjs", import.meta.url),
-    sha256: "68cdcc31fac0f9e8880ca6f51f0ae8ea9c36255a8675febbce2d7345e6fc302b",
-    byteLength: 158_934,
+    sha256: "315eb1e11cc198c57f07439ddf6241ae133afac7caa4e9af3a1676ea8b450a39",
+    byteLength: 161_351,
   }),
   Object.freeze({
     repositoryPath: "projects/star-ascent/site/scripts/run-iat-b3-economy-reproducible-build.mjs",
