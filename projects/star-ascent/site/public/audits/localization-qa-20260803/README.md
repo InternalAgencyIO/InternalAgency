@@ -4,13 +4,13 @@
 
 Generated: 2026-08-05T13:44:35.843Z
 
-Active-artifact refresh: 2026-08-08T09:15:18Z
+Active-artifact refresh: 2026-08-26T19:16:46Z
 
 ## Outcome
 
 - Catalog completeness: **PASS** across 50 locales and 985 canonical strings.
 - Reviewed-runtime policy gate: **PASS** with 0 reviewed cells and 48265 canonical-English fallback cells.
-- Pending visible-source ledger: **48 strings across 13 routes** remain runtime-inactive until translation and accountable native review.
+- Pending visible-source ledger: **87 strings across 15 routes** remain runtime-inactive until translation and accountable native review.
 - Native-language signoff: **HOLD**. Every non-English locale still requires an accountable native review before it can be described as native-quality.
 - Mainnet decision: **HOLD, unchanged**. This package is not launch approval.
 
@@ -21,7 +21,7 @@ Unreviewed target-language drafts are not served. Safety-critical copy remains c
 - Exact scorecard: **4700 PASS / 0 FAIL / 300 HOLD / 0 NOT_RUN** across 5000 results.
 - HOLD remediation ledger: [`hold-remediation-ledger.json`](./hold-remediation-ledger.json) separates **300 external-evidence gates** from **0 heuristic editorial reviews** without closing or downgrading any result.
 - Source-bound browser/render evidence: **PASS** for 1250/1250 recorded checks.
-- Pending visible-source ledger: **48 strings across 13 routes**, all runtime-inactive and held for translation plus accountable native review.
+- Pending visible-source ledger: **87 strings across 15 routes**, all runtime-inactive and held for translation plus accountable native review.
 - Public process: [`TRANSLATION-PROCESS.md`](./TRANSLATION-PROCESS.md) records the model revision, runtime, generation parameters, deterministic repair stages, public commit chain, and future append-only update protocol.
 - Machine-readable provenance: [`translation-provenance.v1.json`](./translation-provenance.v1.json) is append-only and is validated separately against exact tracked bytes and commit ancestry.
 - Data license: [`CC0-DATA-DEDICATION.md`](./CC0-DATA-DEDICATION.md) dedicates the project-owned, non-secret localization data and QA evidence under CC0 1.0 while explicitly excluding software, third-party model weights and runtimes, trademarks, secrets, and material the project does not own.
@@ -94,7 +94,7 @@ Historical command record from 2026-08-03; regenerating this summary does not cl
 - Automated completeness proves that a static value exists; it does not prove idiomatic or culturally fluent language.
 - Legacy editorial and critical-copy drafts are AI-assisted evidence only and are not active runtime translations.
 - Canonical English fallback is an intentional safety state, not native-language approval.
-- 48 newly captured English source strings remain outside the active catalog and require translation plus accountable native review before any non-English activation.
+- 87 newly captured English source strings remain outside the active catalog and require translation plus accountable native review before any non-English activation.
 - Exact source-match counts inspect reviewed cells only and remain a triage heuristic, not a standalone defect count.
 - Rendered browser checks are representative, not an exhaustive physical-device or assistive-technology certification.
 - This package does not authorize deployment, signing, broadcasting, funding, or mainnet launch.
