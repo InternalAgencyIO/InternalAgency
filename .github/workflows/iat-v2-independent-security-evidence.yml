@@ -94,6 +94,8 @@ jobs:
             projects/star-ascent/site/tests/node-binding-security.test.mjs \
             projects/star-ascent/site/tests/daily-budget-security.test.mjs \
             projects/star-ascent/site/tests/iat-v2-program-binding.test.mjs \
+            projects/star-ascent/site/tests/iat-v2-github-hosted-state-authenticator.test.mjs \
+            projects/star-ascent/site/tests/iat-v2-production-identity-external-observer-capability.test.mjs \
             | tee projects/star-ascent/site/target/security/raw/security-regression.tap
           printf '0\n' > projects/star-ascent/site/target/security/raw/security-regression.exit-code.txt
 
