@@ -45,6 +45,7 @@ const INVENTORIED_SOURCE_PATHS = Object.freeze([
   "programs/iat_b3_reference/reward-persistence-checkpoint.mjs",
   "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs",
   "programs/iat_b3_reference/reward-waterfall-audit-sqlite.mjs",
+  "scripts/lib/iat-v2-production-identity-integration-evidence.mjs",
   "scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs",
   "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs",
   "scripts/validate-iat-b3-x-social-evidence-provider-readiness.mjs",

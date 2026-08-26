@@ -138,8 +138,18 @@ test("repository source inventory binds every current reward adapter edge and st
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 1,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
+    "scripts/lib/iat-v2-production-identity-integration-evidence.mjs": 1,
     "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs": 1,
   });
+  const providerVerifierMarker = result.markerInventory.find(({ markerSha256 }) => (
+    markerSha256 === createHash("sha256")
+      .update("verifyProviderSignedEnvelope")
+      .digest("hex")
+  ));
+  assert.equal(
+    providerVerifierMarker?.locations["scripts/lib/iat-v2-production-identity-integration-evidence.mjs"],
+    2,
+  );
 
   assert.equal(result.runtimeDirectStoreBypassPreventionVerified, false);
   assert.equal(result.providerAuthenticationVerified, false);
