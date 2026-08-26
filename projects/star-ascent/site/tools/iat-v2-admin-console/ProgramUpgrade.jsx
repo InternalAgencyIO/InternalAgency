@@ -10,18 +10,25 @@ import {
 } from "@solana/web3.js";
 import {
   BPF_UPGRADEABLE_LOADER_ID,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_PROGRAM_ADMIN,
-  IAT_V2_PROGRAM_ARTIFACT_BYTES,
-  IAT_V2_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
   inspectReviewedUpgradeableProgramArtifact,
   parseUpgradeableProgramAccounts,
   parseUpgradeableProgramData,
 } from "../../programs/iat_v2/instructions.mjs";
+import {
+  EXTEND_PROGRAM_CHECKED_FEATURE_ID,
+  buildProgramDataExtensionTransaction,
+  computeProgramDataExtension,
+  inspectExtendProgramCheckedFeature,
+} from "./program-extension.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
-const connection = new Connection(DEVNET_RPC, "confirmed");
+const FINALIZED_COMMITMENT = "finalized";
+const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
 const BUFFER_METADATA_BYTES = 37;
 const UPGRADE_INSTRUCTION_DATA = Uint8Array.from([3, 0, 0, 0]);
 const SET_AUTHORITY_INSTRUCTION_DATA = Uint8Array.from([4, 0, 0, 0]);
@@ -90,6 +97,10 @@ function statusForSnapshot(snapshot) {
   switch (snapshot.action) {
     case "complete":
       return "VERIFIED // CORRECTED PROGRAM ALREADY DEPLOYED";
+    case "extend-program":
+      return "CAPACITY EXTENSION REQUIRED // SEPARATE MODEL T SIGNATURE";
+    case "buffer-required":
+      return "CAPACITY READY // VERIFIED BUFFER ADDRESS REQUIRED";
     case "return-for-repair":
       return "RECOVERY READY // RETURN INCOMPLETE BUFFER TO DEVNET DEPLOYER";
     case "repair-required":
@@ -111,7 +122,7 @@ export default function ProgramUpgrade({
   const [bufferInput, setBufferInput] = useState(params.get("buffer") ?? "");
   const [snapshot, setSnapshot] = useState(null);
   const [pending, setPending] = useState(null);
-  const [signature, setSignature] = useState("");
+  const [receipt, setReceipt] = useState(null);
   const [logs, setLogs] = useState([]);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("WAITING FOR VERIFIED BUFFER ADDRESS");
@@ -120,10 +131,24 @@ export default function ProgramUpgrade({
 
   async function loadBufferSnapshot() {
     if (!local) throw new Error("Program upgrade console is localhost-only");
-    const buffer = new PublicKey(bufferInput.trim());
-    const [programInfo, programDataInfo, bufferInfo] = await connection.getMultipleAccountsInfo(
-      [IAT_V2_PROGRAM_ID, IAT_V2_PROGRAM_DATA_ADDRESS, buffer],
-      "confirmed",
+    if (
+      !Number.isSafeInteger(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES)
+      || IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES <= 0
+      || !/^[0-9a-f]{64}$/u.test(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 ?? "")
+    ) {
+      throw new Error("Migration-capable program artifact is not yet bound to an exact public CI build");
+    }
+    const buffer = bufferInput.trim() ? new PublicKey(bufferInput.trim()) : null;
+    const addresses = [
+      IAT_V2_PROGRAM_ID,
+      IAT_V2_PROGRAM_DATA_ADDRESS,
+      EXTEND_PROGRAM_CHECKED_FEATURE_ID,
+      ...(buffer ? [buffer] : []),
+    ];
+    const [programInfo, programDataInfo, extendFeatureInfo, bufferInfo = null] =
+      await connection.getMultipleAccountsInfo(
+      addresses,
+      FINALIZED_COMMITMENT,
     );
     if (!programInfo || !programDataInfo) throw new Error("Program or ProgramData is missing on Devnet");
     if (!programInfo.executable) throw new Error("IAT V2 program is not executable");
@@ -141,16 +166,63 @@ export default function ProgramUpgrade({
     if (!deployed.upgradeAuthority.equals(IAT_V2_PROGRAM_ADMIN)) {
       throw new Error(`Program upgrade authority is ${deployed.upgradeAuthority.toBase58()}`);
     }
+    const extendFeature = inspectExtendProgramCheckedFeature(extendFeatureInfo);
+    const currentCapacityBytes = deployed.programBytes.length;
+    const preliminaryExtension = computeProgramDataExtension({
+      artifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+      currentCapacityBytes,
+      currentAccountBytes: programDataInfo.data.length,
+      currentLamports: programDataInfo.lamports,
+      targetRentLamports: 0,
+    });
+    const targetRentLamports = await connection.getMinimumBalanceForRentExemption(
+      preliminaryExtension.targetAccountBytes,
+      FINALIZED_COMMITMENT,
+    );
+    const extension = computeProgramDataExtension({
+      artifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+      currentCapacityBytes,
+      currentAccountBytes: programDataInfo.data.length,
+      currentLamports: programDataInfo.lamports,
+      targetRentLamports,
+    });
     const deployedRegionHash = await sha256Hex(deployed.programBytes);
+    const common = {
+      buffer,
+      deployedRegionHash,
+      programDataCapacityBytes: extension.currentCapacityBytes,
+      targetProgramDataCapacityBytes: extension.artifactBytes,
+      additionalProgramDataBytes: extension.additionalBytes,
+      targetProgramDataAccountBytes: extension.targetAccountBytes,
+      currentProgramDataLamports: extension.currentLamports,
+      targetProgramDataRentLamports: extension.targetRentLamports,
+      rentTopUpLamports: extension.rentTopUpLamports,
+      extendProgramChecked: extendFeature.active,
+      extendProgramCheckedActivationSlot: extendFeature.activationSlot,
+    };
+    if (extension.extensionRequired) {
+      return {
+        ...common,
+        bufferAuthority: null,
+        bufferHash: null,
+        deployedHash: null,
+        loaderZeroPaddingBytes: null,
+        loaderZeroPaddingVerified: false,
+        alreadyUpgraded: false,
+        action: "extend-program",
+      };
+    }
     const deployedArtifact = await inspectReviewedUpgradeableProgramArtifact({
       programBytes: deployed.programBytes,
       sha256Hex,
+      expectedArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+      expectedArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
     });
     const deployedHash = deployedArtifact.artifactSha256;
     if (deployedArtifact.matchesReviewedArtifact) {
       return {
-        buffer,
-        bufferHash: IAT_V2_PROGRAM_ARTIFACT_SHA256,
+        ...common,
+        bufferHash: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
         deployedHash,
         deployedRegionHash,
         loaderZeroPaddingBytes: deployedArtifact.loaderPaddingBytes,
@@ -158,6 +230,18 @@ export default function ProgramUpgrade({
         alreadyUpgraded: true,
         bufferAuthority: IAT_V2_PROGRAM_ADMIN,
         action: "complete",
+      };
+    }
+    if (!buffer) {
+      return {
+        ...common,
+        bufferAuthority: null,
+        bufferHash: null,
+        deployedHash,
+        loaderZeroPaddingBytes: deployedArtifact.loaderPaddingBytes,
+        loaderZeroPaddingVerified: deployedArtifact.loaderPaddingIsZero,
+        alreadyUpgraded: false,
+        action: "buffer-required",
       };
     }
     if (!bufferInfo) throw new Error("Upgrade buffer is missing on Devnet");
@@ -169,15 +253,15 @@ export default function ProgramUpgrade({
         `Buffer authority ${parsedBuffer.authority.toBase58()} is neither reviewed recovery party`,
       );
     }
-    if (parsedBuffer.programBytes.length !== IAT_V2_PROGRAM_ARTIFACT_BYTES) {
+    if (parsedBuffer.programBytes.length !== IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES) {
       throw new Error(
-        `Buffer contains ${parsedBuffer.programBytes.length} bytes, expected ${IAT_V2_PROGRAM_ARTIFACT_BYTES}`,
+        `Buffer contains ${parsedBuffer.programBytes.length} bytes, expected ${IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}`,
       );
     }
     const bufferHash = await sha256Hex(parsedBuffer.programBytes);
-    const bufferMatches = bufferHash === IAT_V2_PROGRAM_ARTIFACT_SHA256;
+    const bufferMatches = bufferHash === IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256;
     return {
-      buffer,
+      ...common,
       bufferHash,
       bufferAuthority: parsedBuffer.authority,
       deployedHash,
@@ -195,7 +279,7 @@ export default function ProgramUpgrade({
     setBusy(true);
     setPending(null);
     setError("");
-    setStatus("VERIFYING PROGRAM + BUFFER // NO SIGNING");
+    setStatus("VERIFYING PROGRAM CAPACITY + OPTIONAL BUFFER // NO SIGNING");
     try {
       const next = await loadBufferSnapshot();
       setSnapshot(next);
@@ -203,7 +287,7 @@ export default function ProgramUpgrade({
       return next;
     } catch (caught) {
       setSnapshot(null);
-      setStatus("HOLD // BUFFER VERIFICATION FAILED");
+      setStatus("HOLD // PROGRAM OR BUFFER VERIFICATION FAILED");
       setError(errorText(caught));
       throw caught;
     } finally {
@@ -212,17 +296,18 @@ export default function ProgramUpgrade({
   }
 
   useEffect(() => {
-    if (!local || !bufferInput) return;
+    if (!local) return;
     inspectBuffer().catch(() => {});
-    // The URL-supplied buffer is inspected once on mount; later edits require
-    // the explicit VERIFY BUFFER click.
+    // Capacity is inspected once on mount even before a buffer exists. Later
+    // input edits require the explicit read-only verification click.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function simulateAndSign() {
+    const signableActions = ["extend-program", "upgrade", "return-for-repair"];
     if (
       !snapshot
-      || !["upgrade", "return-for-repair"].includes(snapshot.action)
+      || !signableActions.includes(snapshot.action)
       || pending
       || busy
     ) return;
@@ -233,26 +318,39 @@ export default function ProgramUpgrade({
     try {
       const current = await loadBufferSnapshot();
       setSnapshot(current);
-      if (!["upgrade", "return-for-repair"].includes(current.action)) return;
+      if (!signableActions.includes(current.action)) return;
       const { provider, publicKey } = await getHardwareProvider(IAT_V2_PROGRAM_ADMIN);
-      const latest = await connection.getLatestBlockhash("confirmed");
-      const buildTransaction = current.action === "upgrade"
-        ? buildUpgradeTransaction
-        : buildReturnBufferTransaction;
-      const transaction = buildTransaction({
-        buffer: current.buffer,
-        feePayer: publicKey,
-        blockhash: latest.blockhash,
-      });
+      if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
+        throw new Error("Connected hardware account is not the reviewed Model T payer");
+      }
+      const latest = await connection.getLatestBlockhash(FINALIZED_COMMITMENT);
+      const transaction = current.action === "extend-program"
+        ? buildProgramDataExtensionTransaction({
+            additionalBytes: current.additionalProgramDataBytes,
+            authority: publicKey,
+            blockhash: latest.blockhash,
+            checked: current.extendProgramChecked,
+            feePayer: publicKey,
+            loaderProgramId: BPF_UPGRADEABLE_LOADER_ID,
+            programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
+            programId: IAT_V2_PROGRAM_ID,
+          })
+        : (current.action === "upgrade" ? buildUpgradeTransaction : buildReturnBufferTransaction)({
+            buffer: current.buffer,
+            feePayer: publicKey,
+            blockhash: latest.blockhash,
+          });
       const messageSha256 = await sha256Hex(transaction.serializeMessage());
       const simulation = await connection.simulateTransaction(transaction);
       setLogs(simulation.value.logs ?? []);
       if (simulation.value.err) {
         throw new Error(`Transaction simulation failed: ${JSON.stringify(simulation.value.err)}`);
       }
-      setStatus(current.action === "upgrade"
-        ? "MODEL T // REVIEW PROGRAM UPGRADE AND SIGN; STILL NOT BROADCAST"
-        : "MODEL T // REVIEW BUFFER-ONLY AUTHORITY RETURN; STILL NOT BROADCAST");
+      setStatus(current.action === "extend-program"
+        ? `MODEL T // REVIEW ${current.additionalProgramDataBytes} BYTE CAPACITY EXTENSION + ${current.rentTopUpLamports} LAMPORT RENT TOP-UP; STILL NOT BROADCAST`
+        : current.action === "upgrade"
+          ? "MODEL T // REVIEW PROGRAM UPGRADE AND SIGN; STILL NOT BROADCAST"
+          : "MODEL T // REVIEW BUFFER-ONLY AUTHORITY RETURN; STILL NOT BROADCAST");
       const signed = await provider.signTransaction(transaction);
       if (await sha256Hex(signed.serializeMessage()) !== messageSha256) {
         throw new Error("Wallet changed the reviewed upgrade transaction");
@@ -260,10 +358,17 @@ export default function ProgramUpgrade({
       const walletSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
       if (!walletSignature?.signature) throw new Error("7XZ hardware signature is missing");
       if (!signed.verifySignatures()) throw new Error("Hardware-signed transaction failed local verification");
-      setPending({ signed, latest, messageSha256, action: current.action });
+      setPending({
+        signed,
+        latest,
+        messageSha256,
+        action: current.action,
+        additionalProgramDataBytes: current.additionalProgramDataBytes,
+        rentTopUpLamports: current.rentTopUpLamports,
+      });
       setStatus("SIGNED // NOT BROADCAST — PRESS THE SEPARATE BROADCAST BUTTON");
     } catch (caught) {
-      setStatus("HOLD // UPGRADE PREPARATION STOPPED");
+      setStatus("HOLD // ATTENDED PROGRAM STEP STOPPED");
       setError(errorText(caught));
     } finally {
       setBusy(false);
@@ -274,13 +379,15 @@ export default function ProgramUpgrade({
     if (!pending || busy) return;
     setBusy(true);
     setError("");
-    setStatus(pending.action === "upgrade"
-      ? "BROADCASTING USER-APPROVED DEVNET UPGRADE"
-      : "BROADCASTING USER-APPROVED BUFFER RECOVERY");
+    setStatus(pending.action === "extend-program"
+      ? "BROADCASTING USER-APPROVED DEVNET CAPACITY EXTENSION"
+      : pending.action === "upgrade"
+        ? "BROADCASTING USER-APPROVED DEVNET UPGRADE"
+        : "BROADCASTING USER-APPROVED BUFFER RECOVERY");
     try {
       const nextSignature = await connection.sendRawTransaction(pending.signed.serialize(), {
         skipPreflight: false,
-        preflightCommitment: "confirmed",
+        preflightCommitment: FINALIZED_COMMITMENT,
         maxRetries: 3,
       });
       const confirmation = await connection.confirmTransaction(
@@ -289,21 +396,23 @@ export default function ProgramUpgrade({
           blockhash: pending.latest.blockhash,
           lastValidBlockHeight: pending.latest.lastValidBlockHeight,
         },
-        "confirmed",
+        FINALIZED_COMMITMENT,
       );
       if (confirmation.value.err) {
         throw new Error(`Upgrade confirmation failed: ${JSON.stringify(confirmation.value.err)}`);
       }
-      setSignature(nextSignature);
       const completedAction = pending.action;
+      setReceipt({ signature: nextSignature, action: completedAction });
       setPending(null);
       const next = await loadBufferSnapshot();
       setSnapshot(next);
-      setStatus(completedAction === "upgrade"
-        ? "UPGRADE FINALIZED // CORRECTED 7XZ PROGRAM IS LIVE ON DEVNET"
-        : "BUFFER RETURNED TO DEPLOYER // READY FOR IN-PLACE REPAIR");
+      setStatus(completedAction === "extend-program"
+        ? "CAPACITY EXTENSION FINALIZED // BUFFER UPLOAD REMAINS A SEPARATE STEP"
+        : completedAction === "upgrade"
+          ? "UPGRADE FINALIZED // CORRECTED 7XZ PROGRAM IS LIVE ON DEVNET"
+          : "BUFFER RETURNED TO DEPLOYER // READY FOR IN-PLACE REPAIR");
     } catch (caught) {
-      setStatus("HOLD // UPGRADE BROADCAST FAILED");
+      setStatus("HOLD // ATTENDED PROGRAM BROADCAST FAILED");
       setError(errorText(caught));
     } finally {
       setBusy(false);
@@ -327,7 +436,7 @@ export default function ProgramUpgrade({
           </div>
           <div className="hero-state">
             <span>MAINNET</span><strong>HOLD</strong>
-            <small>Only `7XZ…fzPH` can authorize this upgrade.</small>
+            <small>`7XZ…fzPH` is the reviewed attended authority and rent payer.</small>
           </div>
         </header>
 
@@ -346,8 +455,8 @@ export default function ProgramUpgrade({
               placeholder="PASTE DEVNET BUFFER ADDRESS"
               disabled={busy || Boolean(pending)}
             />
-            <button className="quiet" onClick={() => inspectBuffer().catch(() => {})} disabled={busy || !bufferInput}>
-              VERIFY BUFFER
+            <button className="quiet" onClick={() => inspectBuffer().catch(() => {})} disabled={busy || Boolean(pending)}>
+              VERIFY CAPACITY + BUFFER
             </button>
           </div>
         </section>
@@ -363,7 +472,7 @@ export default function ProgramUpgrade({
           <div className="address-grid">
             <div><span>PROGRAM</span><code>{IAT_V2_PROGRAM_ID.toBase58()}</code></div>
             <div><span>UPGRADE AUTHORITY</span><code>{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
-            <div><span>BUFFER</span><code>{snapshot?.buffer.toBase58() ?? "NOT VERIFIED"}</code></div>
+            <div><span>BUFFER</span><code>{snapshot?.buffer?.toBase58() ?? "NOT PROVIDED"}</code></div>
             <div><span>BUFFER AUTHORITY</span><code>{snapshot?.bufferAuthority?.toBase58() ?? "NOT VERIFIED"}</code></div>
             <div><span>BUFFER HASH</span><code>{snapshot?.bufferHash ?? "NOT VERIFIED"}</code></div>
             <div><span>CURRENT HASH</span><code>{snapshot?.deployedHash ?? "NOT VERIFIED"}</code></div>
@@ -374,8 +483,12 @@ export default function ProgramUpgrade({
                 ? `${snapshot.loaderZeroPaddingBytes} BYTES // ${snapshot.loaderZeroPaddingVerified ? "VERIFIED" : "NOT ZERO"}`
                 : "NOT VERIFIED"}</code>
             </div>
-            <div><span>NEW REVIEWED HASH</span><code>{IAT_V2_PROGRAM_ARTIFACT_SHA256}</code></div>
-            <div><span>PROGRAM BYTES</span><code>{IAT_V2_PROGRAM_ARTIFACT_BYTES}</code></div>
+            <div><span>NEW REVIEWED HASH</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 ?? "NOT CI-BOUND"}</code></div>
+            <div><span>PROGRAM BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES ?? "NOT CI-BOUND"}</code></div>
+            <div><span>CURRENT PROGRAMDATA CAPACITY</span><code>{snapshot?.programDataCapacityBytes ?? "NOT VERIFIED"}</code></div>
+            <div><span>ADDED CAPACITY</span><code>{snapshot?.additionalProgramDataBytes ?? "NOT VERIFIED"} BYTES</code></div>
+            <div><span>EXACT RENT TOP-UP</span><code>{snapshot?.rentTopUpLamports ?? "NOT VERIFIED"} LAMPORTS</code></div>
+            <div><span>EXTEND ABI</span><code>{snapshot ? (snapshot.extendProgramChecked ? "EXTEND_PROGRAM_CHECKED" : "EXTEND_PROGRAM") : "NOT VERIFIED"}</code></div>
           </div>
           <div className="sign-panel">
             <div>
@@ -389,10 +502,12 @@ export default function ProgramUpgrade({
                 disabled={
                   busy
                   || !snapshot
-                  || !["upgrade", "return-for-repair"].includes(snapshot.action)
+                  || !["extend-program", "upgrade", "return-for-repair"].includes(snapshot.action)
                 }
               >
-                {snapshot?.action === "return-for-repair"
+                {snapshot?.action === "extend-program"
+                  ? "SIMULATE + SIGN SEPARATE CAPACITY EXTENSION"
+                  : snapshot?.action === "return-for-repair"
                   ? "CONNECT 7XZ + RETURN BUFFER FOR REPAIR"
                   : "CONNECT 7XZ MODEL T DIRECTLY + SIMULATE + SIGN"}
               </button>
@@ -400,34 +515,44 @@ export default function ProgramUpgrade({
               <div className="broadcast-panel">
                 <code>MESSAGE {pending.messageSha256}</code>
                 <button onClick={broadcastSigned} disabled={busy}>
-                  {pending.action === "upgrade"
-                    ? "BROADCAST SIGNED DEVNET UPGRADE"
-                    : "BROADCAST SIGNED BUFFER RECOVERY"}
+                  {pending.action === "extend-program"
+                    ? "BROADCAST SIGNED CAPACITY EXTENSION"
+                    : pending.action === "upgrade"
+                      ? "BROADCAST SIGNED DEVNET UPGRADE"
+                      : "BROADCAST SIGNED BUFFER RECOVERY"}
                 </button>
-                {pending.action === "upgrade" && (
-                  <button
-                    className="discard"
-                    onClick={() => {
-                      setPending(null);
-                      setStatus("SIGNED TRANSACTION DISCARDED // NOTHING BROADCAST");
-                    }}
-                    disabled={busy}
-                  >
-                    DISCARD SIGNED TRANSACTION
-                  </button>
-                )}
+                <button
+                  className="discard"
+                  onClick={() => {
+                    setPending(null);
+                    setStatus("SIGNED TRANSACTION DISCARDED // NOTHING BROADCAST");
+                  }}
+                  disabled={busy}
+                >
+                  DISCARD SIGNED TRANSACTION
+                </button>
               </div>
             )}
           </div>
         </section>
 
-        {signature && (
+        {receipt && (
           <section className="evidence">
             <div>
-              <small>FINALIZED DEVNET TRANSACTION</small>
-              <strong>{short(signature, 12)}</strong>
+              <small>FINALIZED DEVNET {receipt.action.replaceAll("-", " ").toUpperCase()}</small>
+              <strong>{short(receipt.signature, 12)}</strong>
             </div>
-            <a href={explorer("tx", signature)} target="_blank" rel="noreferrer">OPEN EXPLORER ↗</a>
+            <a href={explorer("tx", receipt.signature)} target="_blank" rel="noreferrer">OPEN EXPLORER ↗</a>
+          </section>
+        )}
+
+        {snapshot?.action === "buffer-required" && (
+          <section className="command">
+            <div className="command-status">
+              <small>NEXT // SEPARATE OPERATION</small>
+              <strong>UPLOAD AND VERIFY THE CI-BOUND DEVNET BUFFER</strong>
+              <p>The capacity transaction is complete. No buffer upload or upgrade was auto-started.</p>
+            </div>
           </section>
         )}
 
@@ -435,10 +560,10 @@ export default function ProgramUpgrade({
           <section className="command">
             <div className="command-status">
               <small>NEXT</small>
-              <strong>START THE FRESH 7XZ FEATURE REHEARSAL</strong>
+              <strong>MIGRATE SETTLED LEGACY ROUNDS</strong>
             </div>
             <div className="command-actions">
-              <a className="action-link" href="/?mode=features">OPEN FEATURE REHEARSAL</a>
+              <a className="action-link" href="/?mode=migrate-rounds">OPEN ROUND MIGRATION</a>
             </div>
           </section>
         )}

@@ -3,10 +3,32 @@ set -euo pipefail
 
 SOLANA_BIN="${SOLANA_BIN:-$HOME/.local/share/solana/install/active_release/bin/solana}"
 PAYER_KEYPAIR="${PAYER_KEYPAIR:-$HOME/.config/solana/iat-v2-devnet-deployer.json}"
-BUFFER_ADDRESS="${BUFFER_ADDRESS:-Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6}"
+NODE_BIN="${NODE_BIN:-node}"
+ARTIFACT="${ARTIFACT:-target/verifiable/iat_v2.so}"
+EVIDENCE="${EVIDENCE:-target/verifiable/iat-v2-build-evidence.json}"
+BUFFER_ADDRESS="${BUFFER_ADDRESS:-}"
 EXPECTED_PAYER="DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4"
 NEW_AUTHORITY="7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH"
-EXPECTED_HASH="634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7"
+
+set +e
+binding_record="$("$NODE_BIN" scripts/iat-v2-devnet-buffer-preflight.mjs verify \
+  --artifact "$ARTIFACT" \
+  --evidence "$EVIDENCE" 2>&1)"
+binding_status=$?
+set -e
+printf '%s\n' "$binding_record"
+if (( binding_status != 0 )); then
+  echo "HOLD: migration artifact/evidence binding did not pass; no authority handoff was attempted." >&2
+  exit "$binding_status"
+fi
+read -r EXPECTED_HASH EXPECTED_BYTES < <(
+  printf '%s' "$binding_record" \
+    | "$NODE_BIN" -e 'const chunks=[]; process.stdin.on("data", (chunk) => chunks.push(chunk)); process.stdin.on("end", () => { const value=JSON.parse(Buffer.concat(chunks)); process.stdout.write(`${value.artifactSha256} ${value.artifactBytes}\n`); });'
+)
+if [[ -z "$BUFFER_ADDRESS" ]]; then
+  echo "HOLD: BUFFER_ADDRESS is required; no default or historical buffer is admitted." >&2
+  exit 1
+fi
 
 is_retryable_rpc_error() {
   local status="$1"
@@ -82,11 +104,9 @@ echo "BUFFER: $BUFFER_ADDRESS"
 echo "FROM:   $EXPECTED_PAYER"
 echo "TO:     $NEW_AUTHORITY"
 echo "HASH:   $EXPECTED_HASH"
+echo "BYTES:  $EXPECTED_BYTES"
 echo "This cannot upload a second buffer and cannot touch mainnet."
-confirmation="${IAT_HANDOFF_CONFIRM:-}"
-if [[ -z "$confirmation" ]]; then
-  read -r -p "Type TRANSFER-7XZ exactly to continue: " confirmation
-fi
+read -r -p "Type TRANSFER-7XZ exactly to continue: " confirmation
 if [[ "$confirmation" != "TRANSFER-7XZ" ]]; then
   echo "Cancelled. Nothing was broadcast."
   exit 1

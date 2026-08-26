@@ -16,6 +16,7 @@ const sourcePaths = [
   "engagement/iat-economic-policy.v2.json",
   "launch/iat-v2-allocation-plan.template.json",
   "public/audits/iat-v2-remediation-20260802/manifest.json",
+  "launch/iat-v2-current-source-clearance.json",
   "launch/iat-v2-local-time-gate-proof.json",
 ];
 const clone = (value) => structuredClone(value);
@@ -62,11 +63,11 @@ function readyFixture() {
   const journal = JSON.parse(readFileSync(join(sandbox, journalPath), "utf8"));
   journal.status = "ARMED";
   writeJson(journalPath, journal);
-  const remediationPath = "public/audits/iat-v2-remediation-20260802/manifest.json";
-  const remediation = JSON.parse(readFileSync(join(sandbox, remediationPath), "utf8"));
-  remediation.clearance.freshCurrentSourceSbfComplete = true;
-  remediation.clearance.freshSignedDevnetComplete = true;
-  writeJson(remediationPath, remediation);
+  const clearancePath = "launch/iat-v2-current-source-clearance.json";
+  const clearance = JSON.parse(readFileSync(join(sandbox, clearancePath), "utf8"));
+  clearance.status = "CLEAR";
+  for (const field of Object.keys(clearance.clearance)) clearance.clearance[field] = true;
+  writeJson(clearancePath, clearance);
 
   const review = clone(baseline);
   review.status = "READY";
@@ -76,6 +77,7 @@ function readyFixture() {
     policySha256: "engagement/iat-economic-policy.v2.json",
     allocationPlanSha256: "launch/iat-v2-allocation-plan.template.json",
     remediationAuditSha256: "public/audits/iat-v2-remediation-20260802/manifest.json",
+    currentSourceClearanceSha256: "launch/iat-v2-current-source-clearance.json",
     localTimeGateProofSha256: "launch/iat-v2-local-time-gate-proof.json",
   };
   for (const [field, sourcePath] of Object.entries(digestSources)) review.artifactDigests[field] = sha256(sourcePath);
@@ -131,14 +133,14 @@ try {
   expectFail("missing signed Devnet receipt observation", missingSignedDevnetObservation, "signed Devnet receipt observation");
 
   const assertionOnlySbf = clone(ready);
-  const remediationPath = "public/audits/iat-v2-remediation-20260802/manifest.json";
-  const remediation = JSON.parse(readFileSync(join(sandbox, remediationPath), "utf8"));
-  remediation.clearance.freshCurrentSourceSbfComplete = false;
-  writeJson(remediationPath, remediation);
-  assertionOnlySbf.artifactDigests.remediationAuditSha256 = sha256(remediationPath);
+  const clearancePath = "launch/iat-v2-current-source-clearance.json";
+  const clearance = JSON.parse(readFileSync(join(sandbox, clearancePath), "utf8"));
+  clearance.clearance.currentSourceSbfComplete = false;
+  writeJson(clearancePath, clearance);
+  assertionOnlySbf.artifactDigests.currentSourceClearanceSha256 = sha256(clearancePath);
   expectFail("assertion-only SBF observation", assertionOnlySbf, "source-bound SBF observation");
-  remediation.clearance.freshCurrentSourceSbfComplete = true;
-  writeJson(remediationPath, remediation);
+  clearance.clearance.currentSourceSbfComplete = true;
+  writeJson(clearancePath, clearance);
 
   const holdJournal = JSON.parse(readFileSync(join(sandbox, "launch/iat-v2-mainnet-stage-journal.template.json"), "utf8"));
   holdJournal.status = "HOLD";

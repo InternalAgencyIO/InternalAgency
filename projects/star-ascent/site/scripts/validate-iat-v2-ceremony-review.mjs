@@ -67,6 +67,7 @@ const sourcePaths = {
   policyPath: "engagement/iat-economic-policy.v2.json",
   allocationPlanPath: "launch/iat-v2-allocation-plan.template.json",
   remediationAuditPath: "public/audits/iat-v2-remediation-20260802/manifest.json",
+  currentSourceClearancePath: "launch/iat-v2-current-source-clearance.json",
   localTimeGateProofPath: "launch/iat-v2-local-time-gate-proof.json",
 };
 const digestFields = {
@@ -75,6 +76,7 @@ const digestFields = {
   policySha256: sourcePaths.policyPath,
   allocationPlanSha256: sourcePaths.allocationPlanPath,
   remediationAuditSha256: sourcePaths.remediationAuditPath,
+  currentSourceClearanceSha256: sourcePaths.currentSourceClearancePath,
   localTimeGateProofSha256: sourcePaths.localTimeGateProofPath,
 };
 check(exactKeys(review.sourceArtifacts, Object.keys(sourcePaths)), "sourceArtifacts must contain only canonical V2 paths");
@@ -122,6 +124,7 @@ if (review.status === "READY") {
   const gate = JSON.parse(readFileSync(sourcePaths.readinessGatePath, "utf8"));
   const journal = JSON.parse(readFileSync(sourcePaths.stageJournalPath, "utf8"));
   const remediationAudit = JSON.parse(readFileSync(sourcePaths.remediationAuditPath, "utf8"));
+  const currentSourceClearance = JSON.parse(readFileSync(sourcePaths.currentSourceClearancePath, "utf8"));
   for (const [field, filePath] of Object.entries(digestFields)) {
     check(canonicalDigest(review.artifactDigests?.[field]), `READY requires ${field}`);
     check(review.artifactDigests?.[field] === sha256(filePath), `READY ${field} must match the canonical V2 artifact`);
@@ -145,8 +148,10 @@ if (review.status === "READY") {
   check(gate.gates?.automatedSourceReceiptStateObservationComplete === true, "READY requires the readiness ledger automated-observation gate");
   check(review.observation?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true, "READY requires regenerated-artifact state observation");
   check(review.observation?.replacementUtcWindowObserved === true, "READY requires exact replacement-window observation");
-  check(review.observation?.currentSbfDigestObserved === true && remediationAudit.clearance?.freshCurrentSourceSbfComplete === true, "READY requires current source-bound SBF observation");
-  check(review.observation?.currentSignedDevnetReceiptObserved === true && remediationAudit.clearance?.freshSignedDevnetComplete === true, "READY requires current signed Devnet receipt observation");
+  check(remediationAudit.status === "DRAFT_MAINNET_HOLD" && remediationAudit.launchDecision === "HOLD", "READY must preserve the historical remediation audit as immutable HOLD evidence");
+  check(currentSourceClearance.status === "CLEAR" && currentSourceClearance.mainnetStatus === "HOLD", "READY requires the versioned current-source successor clearance");
+  check(review.observation?.currentSbfDigestObserved === true && currentSourceClearance.clearance?.currentSourceSbfComplete === true, "READY requires current source-bound SBF observation");
+  check(review.observation?.currentSignedDevnetReceiptObserved === true && currentSourceClearance.clearance?.freshSignedDevnetComplete === true, "READY requires current signed Devnet receipt observation");
   check(review.observation?.stagePlanStateObserved === true && journal.status === "ARMED", "READY requires ARMED stage-plan state observation");
   check(utc(review.observation?.observedAtUtc), "READY requires a canonical UTC observedAtUtc timestamp");
   const age = Date.now() - Date.parse(review.observation?.observedAtUtc ?? "");

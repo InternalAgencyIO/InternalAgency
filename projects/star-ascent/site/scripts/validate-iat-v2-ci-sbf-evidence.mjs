@@ -63,7 +63,7 @@ function assertCanonicalRegularFile(root, candidate, expectedPath, label) {
   check(resolvedRelativePath === normalize(expectedPath), `${label} does not resolve to its canonical evidence path`);
 }
 
-export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath } = {}) {
+export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath, allowDescendantCheckout = false } = {}) {
   const root = resolve(projectRoot);
   const requestedManifest = manifestPath ?? expectedManifest;
   const resolvedManifest = isAbsolute(requestedManifest) ? requestedManifest : resolve(root, requestedManifest);
@@ -114,11 +114,24 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
   check(git(root, ["status", "--porcelain=v1", "--untracked-files=no"]) === "", "tracked worktree is not clean");
   git(root, ["cat-file", "-e", `${binding.sourceHeadCommit}^{commit}`]);
   check(git(root, ["rev-parse", `${binding.sourceHeadCommit}^{tree}`]) === binding.sourceHeadTree, "source-head tree does not match Git");
-  check(git(root, ["rev-parse", "HEAD"]) === binding.checkoutCommit, "checkout commit does not match Git HEAD");
-  check(git(root, ["rev-parse", "HEAD^{tree}"]) === binding.checkoutTree, "checkout tree does not match Git HEAD");
+  if (allowDescendantCheckout) {
+    try {
+      git(root, ["merge-base", "--is-ancestor", binding.checkoutCommit, "HEAD"]);
+    } catch {
+      check(false, "current checkout is not a descendant of the validated CI checkout");
+    }
+    const programPath = "projects/star-ascent/site/programs/iat_v2";
+    check(
+      git(root, ["rev-parse", `HEAD:${programPath}`]) === git(root, ["rev-parse", `${binding.sourceHeadCommit}:${programPath}`]),
+      "current successor checkout changed the CI-bound program tree",
+    );
+  } else {
+    check(git(root, ["rev-parse", "HEAD"]) === binding.checkoutCommit, "checkout commit does not match Git HEAD");
+    check(git(root, ["rev-parse", "HEAD^{tree}"]) === binding.checkoutTree, "checkout tree does not match Git HEAD");
+  }
 
   if (binding.workflowEvent === "pull_request") {
-    const parents = git(root, ["rev-list", "--parents", "-n", "1", "HEAD"]).split(/\s+/);
+    const parents = git(root, ["rev-list", "--parents", "-n", "1", binding.checkoutCommit]).split(/\s+/);
     check(binding.checkoutRelation === "PR_MERGE_SECOND_PARENT", "pull-request relation is not fail closed");
     check(parents.length === 3, "pull-request checkout is not an exact two-parent merge");
     check(parents[2] === binding.sourceHeadCommit, "pull-request source head is not merge parent 2");

@@ -7,12 +7,17 @@ import {
   createIatV2DeploymentPlan,
 } from "../programs/iat_v2/client.mjs";
 import {
+  IAT_V2_ROUND_LAYOUT,
+  IAT_V2_ROUND_STATUS,
+  parseRoundAccount,
+} from "../programs/iat_v2/feature-instructions.mjs";
+import {
   DEVNET_FEATURE_MINT_SEED,
   IAT_V2_PROGRAM_ADMIN,
-  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID,
-  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES,
-  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256,
-  IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
   deriveDeterministicDevnetMint,
@@ -89,12 +94,28 @@ if (!programData.upgradeAuthority.equals(IAT_V2_PROGRAM_ADMIN)) {
 }
 const hashBytes = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const deployedRegionSha256 = hashBytes(programData.programBytes);
-const deployedArtifact = await inspectReviewedUpgradeableProgramArtifact({
-  programBytes: programData.programBytes,
-  sha256Hex: async (bytes) => hashBytes(bytes),
-  expectedArtifactBytes: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES,
-  expectedArtifactSha256: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256,
-});
+const migrationArtifactBound =
+  Number.isSafeInteger(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES)
+  && IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES > 0
+  && /^[0-9a-f]{64}$/u.test(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 ?? "")
+  && /^[0-9a-f]{40}$/u.test(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD ?? "")
+  && Number.isSafeInteger(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID)
+  && IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID > 0;
+const deployedArtifact = migrationArtifactBound
+  ? await inspectReviewedUpgradeableProgramArtifact({
+      programBytes: programData.programBytes,
+      sha256Hex: async (bytes) => hashBytes(bytes),
+      expectedArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+      expectedArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+    })
+  : {
+      artifactBytes: null,
+      artifactSha256: null,
+      loaderPaddingBytes: null,
+      loaderPaddingIsZero: false,
+      loaderRegionBytes: programData.programBytes.length,
+      matchesReviewedArtifact: false,
+    };
 
 const adminLamports = await connection.getBalance(IAT_V2_PROGRAM_ADMIN, "confirmed");
 const participantLamports = await connection.getBalance(
@@ -111,29 +132,62 @@ const featureInstanceStatus = config?.active
   : mintInfo
     ? "FEATURE_INSTANCE_PARTIAL"
     : "READY_TO_INITIALIZE";
+const [legacyRoundRows, hardenedRoundRows] = await Promise.all([
+  connection.getProgramAccounts(IAT_V2_PROGRAM_ID, {
+    commitment: "confirmed",
+    filters: [{ dataSize: IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES }],
+  }),
+  connection.getProgramAccounts(IAT_V2_PROGRAM_ID, {
+    commitment: "confirmed",
+    filters: [{ dataSize: IAT_V2_ROUND_LAYOUT.HARDENED_V2_BYTES }],
+  }),
+]);
+const inspectRoundRows = (rows) => rows.map(({ pubkey, account }) => {
+  const parsed = parseRoundAccount(account.data);
+  return {
+    address: pubkey,
+    layoutVersion: parsed.layoutVersion,
+    accountBytes: parsed.accountBytes,
+    config: parsed.config,
+    week: parsed.week,
+    status: parsed.status,
+    migrationSafe:
+      parsed.config.equals(plan.config)
+      && parsed.status === IAT_V2_ROUND_STATUS.SETTLED,
+  };
+});
+const legacyRounds = inspectRoundRows(legacyRoundRows);
+const hardenedRounds = inspectRoundRows(hardenedRoundRows);
+const everyLegacyRoundMigrationSafe = legacyRounds.every((round) => round.migrationSafe);
 const currentSourceUpgradeCompatibility = {
-  status: "BLOCKED_CCC_DISABLED_AND_ROUND_MIGRATION_ABSENT",
+  status: everyLegacyRoundMigrationSafe
+    ? "SOURCE_PRESERVES_FEATURES_WITH_SETTLED_ROUND_MIGRATION"
+    : "BLOCKED_UNSAFE_LEGACY_ROUND_STATE",
   publicUpgradeAuthorized: false,
-  preservesActiveV2Features: false,
-  cccDlcGenesisEnabled: false,
-  deployedRoundAccountBytes: 198,
-  reviewedRoundAccountBytes: 206,
-  roundAccountMigrationAvailable: false,
+  preservesActiveV2Features: everyLegacyRoundMigrationSafe,
+  cccDlcGenesisEnabled: true,
+  deployedRoundAccountBytes: IAT_V2_ROUND_LAYOUT.LEGACY_V1_BYTES,
+  reviewedRoundAccountBytes: IAT_V2_ROUND_LAYOUT.HARDENED_V2_BYTES,
+  roundAccountMigrationAvailable: true,
+  legacyRoundMigrationComplete: legacyRounds.length === 0,
+  legacyRounds,
+  hardenedRounds,
 };
-const activeInstanceIncompatibleWithReviewedArtifact =
-  featureInstanceStatus === "FEATURE_INSTANCE_ACTIVE"
-  && !deployedArtifact.matchesReviewedArtifact;
 const report = {
   schema: "iat-v2-feature-rehearsal-preflight/v1",
-  status: activeInstanceIncompatibleWithReviewedArtifact
-    ? "HOLD_CURRENT_SOURCE_INCOMPATIBLE_WITH_ACTIVE_V2_STATE"
-    : deployedArtifact.matchesReviewedArtifact
-      ? featureInstanceStatus
-      : "HOLD_REVIEWED_ARTIFACT_NOT_DEPLOYED",
+  status: !migrationArtifactBound
+    ? "HOLD_MIGRATION_ARTIFACT_NOT_CI_BOUND"
+    : !deployedArtifact.matchesReviewedArtifact
+      ? "HOLD_MIGRATION_ARTIFACT_NOT_DEPLOYED"
+    : legacyRounds.length > 0
+      ? "HOLD_LEGACY_ROUND_MIGRATION_REQUIRED"
+      : featureInstanceStatus,
   featureInstanceStatus,
   readyForSignedFeatureRehearsal:
-    deployedArtifact.matchesReviewedArtifact
-    && currentSourceUpgradeCompatibility.preservesActiveV2Features,
+    migrationArtifactBound
+    && deployedArtifact.matchesReviewedArtifact
+    && currentSourceUpgradeCompatibility.preservesActiveV2Features
+    && currentSourceUpgradeCompatibility.legacyRoundMigrationComplete,
   network: "devnet",
   rpc: DEVNET_RPC,
   mainnetStatus: "HOLD",
@@ -148,10 +202,11 @@ const report = {
     deployedRegionSha256,
     loaderZeroPaddingBytes: deployedArtifact.loaderPaddingBytes,
     loaderZeroPaddingVerified: deployedArtifact.loaderPaddingIsZero,
-    reviewedArtifactBytes: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES,
-    reviewedArtifactSha256: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256,
-    reviewedArtifactSourceHead: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD,
-    reviewedArtifactBuildRunId: IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID,
+    migrationArtifactBound,
+    reviewedArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+    reviewedArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+    reviewedArtifactSourceHead: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+    reviewedArtifactBuildRunId: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   },
   currentSourceUpgradeCompatibility,
   hardwareOperator: {

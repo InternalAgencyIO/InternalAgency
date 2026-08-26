@@ -4,13 +4,13 @@ set -euo pipefail
 SOLANA_BIN="${SOLANA_BIN:-$HOME/.local/share/solana/install/active_release/bin/solana}"
 SOLANA_KEYGEN_BIN="${SOLANA_KEYGEN_BIN:-$HOME/.local/share/solana/install/active_release/bin/solana-keygen}"
 PAYER_KEYPAIR="${PAYER_KEYPAIR:-$HOME/.config/solana/iat-v2-devnet-deployer.json}"
+NODE_BIN="${NODE_BIN:-node}"
 ARTIFACT="${ARTIFACT:-target/verifiable/iat_v2.so}"
+EVIDENCE="${EVIDENCE:-target/verifiable/iat-v2-build-evidence.json}"
 OLD_BUFFER="Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6"
 EXPECTED_PAYER="DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4"
 NEW_AUTHORITY="7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH"
-EXPECTED_HASH="634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7"
 STATE_FILE="launch/iat-v2-devnet-fresh-buffer.txt"
-MINIMUM_FRESH_BALANCE_LAMPORTS=4200000000
 
 is_retryable_rpc_error() {
   local message="$1"
@@ -30,6 +30,35 @@ is_retryable_rpc_failure() {
   (( status == 124 )) || is_retryable_rpc_error "$message"
 }
 
+set +e
+binding_record="$("$NODE_BIN" scripts/iat-v2-devnet-buffer-preflight.mjs verify \
+  --artifact "$ARTIFACT" \
+  --evidence "$EVIDENCE" 2>&1)"
+binding_status=$?
+set -e
+printf '%s\n' "$binding_record"
+if (( binding_status != 0 )); then
+  echo "HOLD: migration artifact/evidence binding did not pass; no buffer action was attempted." >&2
+  exit "$binding_status"
+fi
+read -r EXPECTED_HASH EXPECTED_BYTES < <(
+  printf '%s' "$binding_record" \
+    | "$NODE_BIN" -e 'const chunks=[]; process.stdin.on("data", (chunk) => chunks.push(chunk)); process.stdin.on("end", () => { const value=JSON.parse(Buffer.concat(chunks)); process.stdout.write(`${value.artifactSha256} ${value.artifactBytes}\n`); });'
+)
+
+capacity_record="$("$NODE_BIN" scripts/iat-v2-devnet-buffer-preflight.mjs capacity \
+  --artifact-bytes "$EXPECTED_BYTES")"
+printf '%s\n' "$capacity_record"
+read -r EXTENSION_REQUIRED BUFFER_RENT_LAMPORTS < <(
+  printf '%s' "$capacity_record" \
+    | "$NODE_BIN" -e 'const chunks=[]; process.stdin.on("data", (chunk) => chunks.push(chunk)); process.stdin.on("end", () => { const value=JSON.parse(Buffer.concat(chunks)); process.stdout.write(`${value.extensionRequired} ${value.bufferRentLamports}\n`); });'
+)
+if [[ "$EXTENSION_REQUIRED" != "false" ]]; then
+  echo "HOLD: ProgramData capacity must be extended in a separate attended step before buffer upload." >&2
+  echo "Run the read-only capacity command above again after the extension is confirmed." >&2
+  exit 1
+fi
+
 actual_payer="$("$SOLANA_BIN" address -k "$PAYER_KEYPAIR")"
 actual_hash="$(sha256sum "$ARTIFACT" | awk '{print $1}')"
 if [[ "$actual_payer" != "$EXPECTED_PAYER" ]]; then
@@ -41,10 +70,7 @@ if [[ "$actual_hash" != "$EXPECTED_HASH" ]]; then
   exit 1
 fi
 
-confirmation="${IAT_FRESH_REBUILD_CONFIRM:-}"
-if [[ -z "$confirmation" ]]; then
-  read -r -p "Type REBUILD-DEVNET-FRESH exactly to continue: " confirmation
-fi
+read -r -p "Type REBUILD-DEVNET-FRESH exactly to continue: " confirmation
 if [[ "$confirmation" != "REBUILD-DEVNET-FRESH" ]]; then
   echo "Cancelled. Nothing was broadcast."
   exit 1
@@ -53,6 +79,8 @@ fi
 echo "NETWORK: DEVNET ONLY"
 echo "OLD INCOMPLETE BUFFER: $OLD_BUFFER"
 echo "FRESH ARTIFACT HASH:  $EXPECTED_HASH"
+echo "FRESH ARTIFACT BYTES: $EXPECTED_BYTES"
+echo "EXACT BUFFER RENT:    $BUFFER_RENT_LAMPORTS lamports (transaction fees excluded)"
 echo "FINAL AUTHORITY:      $NEW_AUTHORITY"
 echo
 
@@ -148,10 +176,11 @@ if [[ ! "$balance_lamports" =~ ^[0-9]+$ ]]; then
   exit 1
 fi
 echo "DEVNET PAYER BALANCE AFTER RECLAIM: $balance_lamports lamports"
-if (( balance_lamports < MINIMUM_FRESH_BALANCE_LAMPORTS )); then
-  echo "HOLD: reclaimed Devnet balance is below the fresh-buffer rent requirement." >&2
+if (( balance_lamports <= BUFFER_RENT_LAMPORTS )); then
+  echo "HOLD: reclaimed Devnet balance does not exceed the exact fresh-buffer rent; transaction-fee headroom is required." >&2
   exit 1
 fi
+echo "DEVNET UPLOAD FEE HEADROOM: $((balance_lamports - BUFFER_RENT_LAMPORTS)) lamports"
 
 buffer_keypair="$(mktemp /tmp/iat-v2-fresh-buffer-XXXXXX.json)"
 dump_path="$(mktemp /tmp/iat-v2-fresh-dump-XXXXXX.so)"
@@ -236,15 +265,12 @@ fi
 
 echo "VERIFIED FRESH BUFFER HASH: $EXPECTED_HASH"
 
-BUFFER_ADDRESS="$new_buffer" \
-  IAT_HANDOFF_CONFIRM=TRANSFER-7XZ \
-  SOLANA_BIN="$SOLANA_BIN" \
-  PAYER_KEYPAIR="$PAYER_KEYPAIR" \
-  bash scripts/handoff-iat-v2-devnet-buffer.sh
-
 echo
-echo "FRESH REBUILD COMPLETE"
+echo "FRESH BUFFER UPLOAD AND HASH VERIFICATION COMPLETE"
 echo "BUFFER:    $new_buffer"
 echo "HASH:      $EXPECTED_HASH"
-echo "AUTHORITY: $NEW_AUTHORITY"
-echo "NEXT URL:  http://127.0.0.1:4175/?mode=upgrade&buffer=$new_buffer"
+echo "AUTHORITY: $EXPECTED_PAYER (handoff has NOT run)"
+echo "NEXT STEP: explicitly review and run the separate authority-handoff helper."
+echo "BUFFER_ADDRESS=$new_buffer ARTIFACT=$ARTIFACT EVIDENCE=$EVIDENCE bash scripts/handoff-iat-v2-devnet-buffer.sh"
+echo "Only after that separate handoff is confirmed:"
+echo "http://127.0.0.1:4175/?mode=upgrade&buffer=$new_buffer"

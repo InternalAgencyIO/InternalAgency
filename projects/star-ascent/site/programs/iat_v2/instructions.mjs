@@ -42,6 +42,13 @@ export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES = 579_480;
 export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD =
   "dd3cb28f6b985c84fddcb971beaa9f00126f5d99";
 export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID = 31_372_599_971;
+// Bound only after the migration-capable source has an exact public CI build.
+// Null deliberately prevents the migration console from accepting the older
+// live artifact or a local, non-provenanced candidate.
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 = null;
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES = null;
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD = null;
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID = null;
 export const BPF_UPGRADEABLE_LOADER_ID = new PublicKey(
   "BPFLoaderUpgradeab1e11111111111111111111111",
 );

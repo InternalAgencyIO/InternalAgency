@@ -59,6 +59,7 @@ const FEATURE_MODE = CONSOLE_PARAMS.get("mode") === "features";
 const UPGRADE_MODE = CONSOLE_PARAMS.get("mode") === "upgrade";
 const INSPECTION_MODE = CONSOLE_PARAMS.get("mode") === "inspect";
 const ATTENDED_WEEK9_MODE = CONSOLE_PARAMS.get("mode") === "settle-week9";
+const MIGRATE_ROUNDS_MODE = CONSOLE_PARAMS.get("mode") === "migrate-rounds";
 const FEATURE_GENESIS_OVERRIDE = CONSOLE_PARAMS.get("genesis");
 const ACTIVE_MINT_SEED = FEATURE_MODE ? DEVNET_FEATURE_MINT_SEED : DEVNET_MINT_SEED;
 const STORAGE_KEY = FEATURE_MODE
@@ -71,10 +72,13 @@ const connection = new Connection(DEVNET_RPC, "confirmed");
 const FeatureRehearsal = lazy(() => import("./FeatureRehearsal.jsx"));
 const ProgramUpgrade = lazy(() => import("./ProgramUpgrade.jsx"));
 const AttendedWeek9Settlement = lazy(() => import("./AttendedWeek9Settlement.jsx"));
+const LegacyRoundMigration = lazy(() => import("./LegacyRoundMigration.jsx"));
 document.documentElement.dataset.iatAdminMode = INSPECTION_MODE
   ? "inspection"
   : UPGRADE_MODE
     ? "upgrade"
+    : MIGRATE_ROUNDS_MODE
+      ? "migrate-rounds"
     : ATTENDED_WEEK9_MODE
       ? "settle-week9"
       : FEATURE_MODE
@@ -1045,6 +1049,15 @@ createRoot(document.getElementById("root")).render(
             short={short}
           />
         )
+      : MIGRATE_ROUNDS_MODE
+        ? (
+            <LegacyRoundMigration
+              getHardwareProvider={getHardwareProvider}
+              isLocalOperatorHost={isLocalOperatorHost}
+              sha256Hex={sha256Hex}
+              short={short}
+            />
+          )
       : ATTENDED_WEEK9_MODE
         ? (
             <AttendedWeek9Settlement
