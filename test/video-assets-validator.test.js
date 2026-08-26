@@ -83,6 +83,26 @@ function namedWorkflowStep(jobSource, stepName) {
   return jobSource.slice(start, next === -1 ? jobSource.length : next);
 }
 
+function multilineWorkflowInput(stepSource, inputName) {
+  const lines = stepSource.split(/\r?\n/);
+  const declarationIndex = lines.findIndex((line) => line.trim() === `${inputName}: |`);
+  assert.notEqual(declarationIndex, -1, `workflow input ${inputName} is missing`);
+  const declarationIndent = lines[declarationIndex].match(/^\s*/u)[0].length;
+  const values = [];
+
+  for (const line of lines.slice(declarationIndex + 1)) {
+    if (line.trim() === "") {
+      continue;
+    }
+    if (line.match(/^\s*/u)[0].length <= declarationIndent) {
+      break;
+    }
+    values.push(line.trim());
+  }
+
+  return values;
+}
+
 function fakeLockedEnvelope({ toolPath, argumentsList, mediaPath = null, stdout = "" }) {
   const toolEvidence = hashAndMeasureFile(toolPath);
   const mediaEvidence = mediaPath ? hashAndMeasureFile(mediaPath) : null;
@@ -108,8 +128,14 @@ test("frozen inventory bytes bind exactly sixteen ordered masters, 420 seconds, 
 test("Radiance CI runs source checks without claiming media and preserves a fail-closed LFS HOLD for artifacts", () => {
   const sourceJob = workflowJob(radianceWorkflow, "source");
   const artifactJobs = [
-    workflowJob(radianceWorkflow, "preview"),
-    workflowJob(radianceWorkflow, "standalone")
+    {
+      job: workflowJob(radianceWorkflow, "preview"),
+      sparsePaths: ["assets", "build", "src"]
+    },
+    {
+      job: workflowJob(radianceWorkflow, "standalone"),
+      sparsePaths: [".github/workflows", "assets", "build", "scripts", "src", "test"]
+    }
   ];
 
   assert.doesNotMatch(radianceWorkflow, /lfs:\s*true/);
@@ -118,13 +144,24 @@ test("Radiance CI runs source checks without claiming media and preserves a fail
   assert.match(sourceJob, /Source and contract tests \(media evidence not claimed\)/);
   assert.match(sourceJob, /Run source and contract tests \(media bytes not claimed\)/);
   assert.doesNotMatch(sourceJob, /git lfs pull|upload-artifact|RADIANCE_LFS_MEDIA_EVIDENCE_HOLD/);
+  assert.doesNotMatch(sourceJob, /sparse-checkout/);
 
-  for (const job of artifactJobs) {
+  for (const { job, sparsePaths } of artifactJobs) {
+    const checkoutIndex = job.indexOf("Checkout source without Git LFS media");
     const acquireIndex = job.indexOf("Acquire required Git LFS media or preserve HOLD");
     const buildIndex = job.indexOf("npm run dist");
     const uploadIndex = job.indexOf("actions/upload-artifact@v4");
+    const checkoutStep = namedWorkflowStep(job, "Checkout source without Git LFS media");
     const acquireStep = namedWorkflowStep(job, "Acquire required Git LFS media or preserve HOLD");
+    const actualSparsePaths = multilineWorkflowInput(checkoutStep, "sparse-checkout");
+    assert.match(checkoutStep, /lfs:\s*false/);
+    assert.match(checkoutStep, /sparse-checkout-cone-mode:\s*true/);
+    assert.deepEqual(actualSparsePaths, sparsePaths);
+    assert.ok(!actualSparsePaths.includes("."), "artifact checkout must not expand to the repository root");
+    assert.ok(!actualSparsePaths.some((entry) => /^projects(?:\/|$)/u.test(entry)), "artifact checkout must exclude unrelated projects");
+    assert.doesNotMatch(checkoutStep, /^\s+(?:filter|path|ref):/m);
     assert.ok(acquireIndex >= 0, "artifact job must acquire LFS media explicitly");
+    assert.ok(acquireIndex > checkoutIndex, "LFS acquisition must follow the sparse checkout");
     assert.equal((job.match(/Acquire required Git LFS media or preserve HOLD/g) ?? []).length, 1);
     assert.ok(buildIndex > acquireIndex, "artifact build must follow successful LFS acquisition");
     assert.ok(uploadIndex > buildIndex, "artifact upload must follow the build");
