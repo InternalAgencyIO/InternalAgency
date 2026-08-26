@@ -276,6 +276,7 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 1,
     "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
+    "scripts/lib/iat-v2-production-identity-external-observer-capability.mjs": 1,
     "scripts/lib/iat-v2-production-identity-integration-evidence.mjs": 1,
     "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs": 1,
   }),
@@ -380,6 +381,7 @@ const EXPECTED_MARKER_LOCATIONS = Object.freeze({
     "programs/iat_b3_reference/provider-authenticated-envelope.mjs": 1,
     "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 2,
     "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 2,
+    "scripts/lib/iat-v2-production-identity-external-observer-capability.mjs": 2,
     "scripts/lib/iat-v2-production-identity-integration-evidence.mjs": 2,
   }),
   verifyPrivacyVaultExternalRollbackAnchor: Object.freeze({
