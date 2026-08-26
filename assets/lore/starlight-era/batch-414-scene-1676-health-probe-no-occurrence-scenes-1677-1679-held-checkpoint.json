@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "batch": 414,
+  "country": "Monaco",
+  "recorded_utc": "2026-08-26T07:30:18.974Z",
+  "status": "scene_1676_initial_consumed_no_occurrence_scenes_1677_1679_held",
+  "authority": {
+    "prepared_checkpoint": "assets/lore/starlight-era/batch-414-monaco-prompts-prepared-provider-blocked-checkpoint.json",
+    "prior_stall_probe": "assets/lore/starlight-era/batch-414-monaco-provider-stall-probe-20260826T072700Z.json",
+    "remote_head_before_dispatch": "8832f77ac96f95e8030194b1ae06364f8495abb5"
+  },
+  "scene_states": [
+    {
+      "scene": 1676,
+      "prompt_sha256": "70BD5E69D830765BD00FE9CBBE5E3AF409F075C171906F51C8254726875038B6",
+      "camera_roll": 19,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "bounded_retry_authorized": false,
+      "resend_forbidden_until_new_checkpoint": true
+    },
+    {
+      "scene": 1677,
+      "prompt_sha256": "12AFB8954CBD5715652F670B2C29F6F697867830F5D7C21BF01E0CD96626D0A7",
+      "camera_roll": 42,
+      "initial_dispatch_consumed": false,
+      "held": true
+    },
+    {
+      "scene": 1678,
+      "prompt_sha256": "D73EBA3A661DB5D88F6258DD6748D8CB95C6C101468B85C0B0B4793D0F2E1575",
+      "camera_roll": 57,
+      "initial_dispatch_consumed": false,
+      "held": true
+    },
+    {
+      "scene": 1679,
+      "prompt_sha256": "E41F61A770E70492E57AB8276A28B127B1B4F602BE8D1191823A3B80BA26D05C",
+      "camera_roll": 92,
+      "initial_dispatch_consumed": false,
+      "held": true
+    }
+  ],
+  "provider_blocker": {
+    "evidence": "Fresh-page scene 1676 submission cleared the exact prompt and anchors but produced no provider URL, response, media control, or bytes.",
+    "effect": "Do not consume scenes 1677-1679 into the same provider failure. Do not resend scene 1676 without a later checkpoint explicitly authorizing one bounded retry."
+  },
+  "cycle_accounting": {
+    "formal_country_cycle_completed": false,
+    "completed_cycles_since_last_x": 3,
+    "x_post_due": false
+  },
+  "next_action": "At a later safe wake, fetch newest remote authority and probe visible Meta state without sending. If provider recovery is evidenced, prepare a new checkpoint authorizing at most one bounded retry for scene 1676, or dispatch untouched scene 1677 as the next health lane according to repository authority."
+}
