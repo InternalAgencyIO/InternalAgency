@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "batch": 413,
+  "country": "Liechtenstein",
+  "status": "prompts_prepared_authorized_for_dispatch",
+  "prepared_utc": "2026-08-26T06:59:38.799Z",
+  "authority": {
+    "campaign": "assets/lore/starlight-era/world-195x4-campaign.json",
+    "prior_country_checkpoint": "assets/lore/starlight-era/batch-412-saint-kitts-and-nevis-closed-unresolved-checkpoint.json",
+    "prior_liechtenstein_reference": "assets/lore/starlight-era/batch-342-liechtenstein-mars-expedition-checkpoint.json",
+    "next_country_after_completion": "Monaco",
+    "scenes": [
+      1672,
+      1673,
+      1674,
+      1675
+    ]
+  },
+  "camera_policy": {
+    "roll_range": "1-100 independently per image",
+    "thresholds": {
+      "1-20": "extreme close",
+      "21-50": "medium close",
+      "51-80": "medium wide",
+      "81-100": "extreme wide"
+    },
+    "rolls": [
+      {
+        "scene": 1672,
+        "roll": 91,
+        "mode": "extreme-wide environmental frame, all four full bodies and shoes visible while the landmark and Alpine landscape dominate"
+      },
+      {
+        "scene": 1673,
+        "roll": 30,
+        "mode": "intimate medium-close from knees upward, preserving all four faces, relationship action, outfit construction and a readable landmark"
+      },
+      {
+        "scene": 1674,
+        "roll": 47,
+        "mode": "intimate medium-close from knees upward, preserving all four faces, relationship action, outfit construction and a readable landmark"
+      },
+      {
+        "scene": 1675,
+        "roll": 38,
+        "mode": "intimate medium-close from knees upward, preserving all four faces, relationship action, outfit construction and a readable landmark"
+      }
+    ]
+  },
+  "face_anchors": {
+    "order": [
+      "938",
+      "936",
+      "937"
+    ],
+    "references": [
+      {
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+      },
+      {
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+      },
+      {
+        "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      }
+    ]
+  },
+  "prompt_files": [
+    {
+      "scene": 1672,
+      "path": "tmp/world-195x4/batch-413/scene-1672-prompt.txt",
+      "sha256": "61F03434411BBB2D1C5FCC5DBCD2304675510D2C28C907360AF66D840434C0C6"
+    },
+    {
+      "scene": 1673,
+      "path": "tmp/world-195x4/batch-413/scene-1673-prompt.txt",
+      "sha256": "D81CFF555CEA1F3D5F7EC464A06AFB98638B6C2145C0B15DD7AB0C3E8492995F"
+    },
+    {
+      "scene": 1674,
+      "path": "tmp/world-195x4/batch-413/scene-1674-prompt.txt",
+      "sha256": "3840C99880325C0A52B753D67CA77C21D10A37A32FAA4CA797E27B20E732A349"
+    },
+    {
+      "scene": 1675,
+      "path": "tmp/world-195x4/batch-413/scene-1675-prompt.txt",
+      "sha256": "1BB24F81889DAFC25B3B809B7D9709371AD7E1FFFF4F2E993B6BA6DF8619E9CC"
+    }
+  ],
+  "production_rules": {
+    "formal_cycle": "one dispatch per scene; no same-chat correction loops",
+    "provider": "Meta AI exclusive",
+    "outfit_rule": "exactly two two-piece looks per image; varied lace, satin, velvet, metallic and liquid-latex-look materials; secure opaque public-safe coverage",
+    "relationship_rule": "different romance/protection beat per scene; AI ECE jealousy visible; AI ECE alone handles inert beacon",
+    "country_rule": "four different secular Liechtenstein landmarks; no literal official or sacred symbols"
+  },
+  "authorization": "User said go in this turn for the next authorized render cycle, including uploads of the three fictional face anchors."
+}
