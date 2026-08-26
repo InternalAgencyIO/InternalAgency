@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "batch": 415,
+  "country": "Marshall Islands",
+  "recorded_utc": "2026-08-26T07:44:05.374Z",
+  "status": "scenes_1680_1682_consumed_no_occurrence_scene_1683_held",
+  "authority": {
+    "prepared_checkpoint": "assets/lore/starlight-era/batch-415-marshall-islands-prompts-prepared-provider-blocked-checkpoint.json",
+    "prior_checkpoint": "assets/lore/starlight-era/batch-415-scenes-1680-1681-no-occurrence-scenes-1682-1683-held-checkpoint.json",
+    "remote_head_before_dispatch": "7d084f84a9a9114e1c8890a5f9c27110f6df6982"
+  },
+  "scene_states": [
+    {
+      "scene": 1680,
+      "prompt_sha256": "0E504ACB588436249CB749641625DAC790ECAB60CE49A48C5F6441031BCAA2E1",
+      "camera_roll": 23,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "resend_forbidden": true
+    },
+    {
+      "scene": 1681,
+      "prompt_sha256": "18182DAFDD0D9FFE3AE01AF20E4CC341DCE7A036F1F0BA895D41EB266BDEE004",
+      "camera_roll": 62,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "resend_forbidden": true
+    },
+    {
+      "scene": 1682,
+      "prompt_sha256": "901AA4B0245700586FA6E68E6BE6D42863EABD50B22780C0A2E002A817F81290",
+      "camera_roll": 76,
+      "initial_dispatch_consumed": true,
+      "provider_occurrence_confirmed": false,
+      "resend_forbidden": true
+    },
+    {
+      "scene": 1683,
+      "prompt_sha256": "53F820242E85B6727CC809845F98AAEE6539FD45328A9FDBBFEBCC037618C5CA",
+      "camera_roll": 94,
+      "initial_dispatch_consumed": false,
+      "held": true
+    }
+  ],
+  "provider_blocker": {
+    "evidence": "Scenes 1680-1682 each cleared an exact prompt plus three anchors but produced no provider URL, response, media control, or bytes.",
+    "effect": "Preserve scene 1683 as the final untouched lane. Never resend scenes 1680-1682 without newer checkpoint authority."
+  },
+  "cycle_accounting": {
+    "formal_country_cycle_completed": false,
+    "completed_cycles_since_last_x": 4,
+    "x_post_due": false
+  },
+  "next_action": "On a later user-confirmed wake, fetch newest remote authority. If continued, dispatch untouched scene 1683 once; never resend scenes 1680-1682."
+}
