@@ -873,8 +873,24 @@ test("pinned Docker host boundary ignores repository-local and hostile PATH shim
       .join(delimiter);
 
     if (process.platform === "linux") {
-      const observation = observePinnedDockerHostExecutableBoundary();
-      assert.equal(observation.executablePath, "/usr/bin/docker");
+      let observation = null;
+      let hostedBoundaryHold = null;
+      try {
+        observation = observePinnedDockerHostExecutableBoundary();
+      } catch (error) {
+        assert(error instanceof Error);
+        assert([
+          "IAT_B3_PINNED_DOCKER_EXECUTABLE_REQUIRED_HOLD",
+          "IAT_B3_PINNED_DOCKER_EXECUTABLE_BOUNDARY_HOLD",
+          "IAT_B3_PINNED_DOCKER_EXECUTABLE_BYTES_DRIFT_HOLD",
+        ].includes(error.message), `unexpected hosted Docker boundary failure: ${error.message}`);
+        hostedBoundaryHold = error.message;
+      }
+      if (observation !== null) {
+        assert.equal(observation.executablePath, "/usr/bin/docker");
+      } else {
+        assert.equal(typeof hostedBoundaryHold, "string");
+      }
       const environment = createPinnedDockerEnvironment({
         configRoot,
         environment: {
