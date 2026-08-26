@@ -345,6 +345,9 @@ test("canonical trust is an explicit empty HOLD without source identities or key
   const result = validate(configuredFixture, { trust });
   assert.equal(result.valid, false);
   assert.ok(result.violations.includes("TRUST_UNCONFIGURED_HOLD"));
+  assert.equal(result.sourceCommit, SOURCE_COMMIT);
+  assert.equal(result.sourceTree, SOURCE_TREE);
+  assert.equal(result.programArtifactSha256, configuredFixture.programArtifactSha256);
   assert.equal(result.mainnetStatus, "HOLD");
 });
 
@@ -362,6 +365,9 @@ test("canonical-trust-pinned X and D1 observer envelopes validate while Mainnet 
   assert.equal(result.xOAuthObserved, true);
   assert.equal(result.d1MutationObserved, true);
   assert.equal(result.allScenariosPassed, true);
+  assert.equal(result.sourceCommit, SOURCE_COMMIT);
+  assert.equal(result.sourceTree, SOURCE_TREE);
+  assert.equal(result.programArtifactSha256, value.programArtifactSha256);
   assert.deepEqual(result.checkIds, PRODUCTION_IDENTITY_INTEGRATION_SCENARIO_IDS);
   assert.equal(result.mainnetStatus, "HOLD");
 
@@ -374,6 +380,18 @@ test("canonical-trust-pinned X and D1 observer envelopes validate while Mainnet 
     evaluationUnixSeconds: NOW,
   });
   assert.equal(produced, `${JSON.stringify(value.evidence, null, 2)}\n`);
+});
+
+test("malformed source binding returns a structured HOLD instead of throwing", () => {
+  const value = fixture();
+  value.evidence.sourceBinding = null;
+  const result = validate(value);
+  assert.equal(result.valid, false);
+  assert.equal(result.sourceCommit, null);
+  assert.equal(result.sourceTree, null);
+  assert.equal(result.programArtifactSha256, null);
+  assert.equal(result.mainnetStatus, "HOLD");
+  assert.match(result.violations.join("\n"), /evidence\.sourceBinding/u);
 });
 
 test("duplicate JSON fields are rejected before any observer-evidence decision", () => {

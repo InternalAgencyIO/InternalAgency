@@ -571,8 +571,8 @@ function validateXObservation(value, evidence, trustResult, evaluationUnixSecond
     || request.endpoint !== PROVIDER_ENDPOINT
     || request.method !== "GET"
     || request.correlationNonceSha256 !== evidence.correlationNonceSha256
-    || request.sourceCommit !== evidence.sourceBinding.commit
-    || request.programArtifactSha256 !== evidence.sourceBinding.programArtifactSha256) {
+    || request.sourceCommit !== evidence.sourceBinding?.commit
+    || request.programArtifactSha256 !== evidence.sourceBinding?.programArtifactSha256) {
     violations.push("x request observation: exact nonproduction source-bound request is required");
   }
   if (!exactKeys(response, X_RESPONSE_KEYS, "x response observation", violations)
@@ -633,8 +633,8 @@ function validateD1Observation(value, evidence, trustResult, evaluationUnixSecon
     || request.environment !== PRODUCTION_IDENTITY_INTEGRATION_ENVIRONMENT
     || request.operation !== "INTEGRATION_REHEARSAL_ATOMIC_MUTATION"
     || request.correlationNonceSha256 !== evidence.correlationNonceSha256
-    || request.sourceCommit !== evidence.sourceBinding.commit
-    || request.programArtifactSha256 !== evidence.sourceBinding.programArtifactSha256) {
+    || request.sourceCommit !== evidence.sourceBinding?.commit
+    || request.programArtifactSha256 !== evidence.sourceBinding?.programArtifactSha256) {
     violations.push("D1 request observation: exact nonproduction source-bound request is required");
   }
   if (!exactKeys(response, D1_RESPONSE_KEYS, "D1 response observation", violations)
@@ -680,6 +680,9 @@ function invalidResult(violations, evidence = null, extra = {}) {
     xOAuthObserved: false,
     d1MutationObserved: false,
     allScenariosPassed: false,
+    sourceCommit: evidence?.sourceBinding?.commit ?? null,
+    sourceTree: evidence?.sourceBinding?.tree ?? null,
+    programArtifactSha256: evidence?.sourceBinding?.programArtifactSha256 ?? null,
     observedAtUtc: evidence?.observedAtUtc ?? null,
     expiresAtUtc: evidence?.expiresAtUtc ?? null,
     receiptUrls: Object.freeze([]),
@@ -835,6 +838,9 @@ export function validateProductionIdentityIntegrationEvidence({
     xOAuthObserved,
     d1MutationObserved,
     allScenariosPassed,
+    sourceCommit: evidence.sourceBinding?.commit ?? null,
+    sourceTree: evidence.sourceBinding?.tree ?? null,
+    programArtifactSha256: evidence.sourceBinding?.programArtifactSha256 ?? null,
     observedAtUtc: evidence.observedAtUtc,
     expiresAtUtc: evidence.expiresAtUtc,
     receiptUrls: Object.freeze(valid ? [...evidence.receiptUrls] : []),
