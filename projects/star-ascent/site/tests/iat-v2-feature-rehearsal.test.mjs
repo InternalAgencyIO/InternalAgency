@@ -24,9 +24,11 @@ import {
   IAT_V2_PROGRAM_ID,
 } from "../programs/iat_v2/instructions.mjs";
 import {
+  buildProgramDataExtensionTransaction,
+} from "../tools/iat-v2-admin-console/program-extension-attended.mjs";
+import {
   EXTEND_PROGRAM_CHECKED_FEATURE_ID,
   FEATURE_PROGRAM_ID,
-  buildProgramDataExtensionTransaction,
   computeProgramDataExtension,
   inspectExtendProgramCheckedFeature,
 } from "../tools/iat-v2-admin-console/program-extension.mjs";
@@ -43,6 +45,11 @@ const upgradeConsoleSource = readFileSync(
   "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
   "utf8",
 );
+const upgradeAttendedSource = readFileSync(
+  "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx",
+  "utf8",
+);
+const upgradeBoundarySource = `${upgradeConsoleSource}\n${upgradeAttendedSource}`;
 const adminConsoleSource = readFileSync(
   "tools/iat-v2-admin-console/main.jsx",
   "utf8",
@@ -394,13 +401,13 @@ test("historical weeks 9 and 10 use a fail-closed rehearsal-only neutral recover
 });
 
 test("program upgrade and legacy migration share one CI artifact and finalized handoff", () => {
-  assert.match(upgradeConsoleSource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES/u);
-  assert.match(upgradeConsoleSource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
-  assert.doesNotMatch(upgradeConsoleSource, /\bIAT_V2_PROGRAM_ARTIFACT_(?:BYTES|SHA256)\b/u);
-  assert.match(upgradeConsoleSource, /expectedArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES/u);
-  assert.match(upgradeConsoleSource, /expectedArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
-  assert.match(upgradeConsoleSource, /const FINALIZED_COMMITMENT = "finalized"/u);
-  assert.match(upgradeConsoleSource, /confirmTransaction\([\s\S]*FINALIZED_COMMITMENT/u);
+  assert.match(upgradeBoundarySource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES/u);
+  assert.match(upgradeBoundarySource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
+  assert.doesNotMatch(upgradeBoundarySource, /\bIAT_V2_PROGRAM_ARTIFACT_(?:BYTES|SHA256)\b/u);
+  assert.match(upgradeBoundarySource, /expectedArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES/u);
+  assert.match(upgradeBoundarySource, /expectedArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
+  assert.match(upgradeBoundarySource, /const FINALIZED_COMMITMENT = "finalized"/u);
+  assert.match(upgradeBoundarySource, /confirmTransaction\([\s\S]*finalizedCommitment/u);
   assert.match(upgradeConsoleSource, /href="\/\?mode=migrate-rounds"/u);
   assert.doesNotMatch(
     upgradeConsoleSource.slice(upgradeConsoleSource.indexOf("snapshot?.alreadyUpgraded")),
@@ -488,17 +495,35 @@ test("ProgramData capacity extension matches the installed loader ABI and exact 
 });
 
 test("capacity extension is an attended step and never auto-chains into upgrade", () => {
-  assert.match(upgradeConsoleSource, /action: "extend-program"/u);
-  assert.match(upgradeConsoleSource, /getMinimumBalanceForRentExemption/u);
-  assert.match(upgradeConsoleSource, /SIMULATE \+ SIGN SEPARATE CAPACITY EXTENSION/u);
-  assert.match(upgradeConsoleSource, /BROADCAST SIGNED CAPACITY EXTENSION/u);
-  assert.match(upgradeConsoleSource, /EXACT RENT TOP-UP/u);
-  assert.match(upgradeConsoleSource, /CAPACITY EXTENSION FINALIZED \/\/ BUFFER UPLOAD REMAINS A SEPARATE STEP/u);
-  assert.match(upgradeConsoleSource, /No buffer upload or upgrade was auto-started/u);
-  assert.match(upgradeConsoleSource, /preflightCommitment: FINALIZED_COMMITMENT/u);
+  assert.match(upgradeBoundarySource, /action: "extend-program"/u);
+  assert.match(upgradeBoundarySource, /getMinimumBalanceForRentExemption/u);
+  assert.match(upgradeBoundarySource, /SIMULATE \+ SIGN SEPARATE CAPACITY EXTENSION/u);
+  assert.match(upgradeBoundarySource, /BROADCAST SIGNED CAPACITY EXTENSION/u);
+  assert.match(upgradeBoundarySource, /EXACT RENT TOP-UP/u);
+  assert.match(upgradeBoundarySource, /CAPACITY EXTENSION FINALIZED \/\/ BUFFER UPLOAD REMAINS A SEPARATE STEP/u);
+  assert.match(upgradeBoundarySource, /No buffer upload or upgrade was auto-started/u);
+  assert.match(upgradeBoundarySource, /preflightCommitment: finalizedCommitment/u);
   const mountEffect = upgradeConsoleSource.slice(
     upgradeConsoleSource.indexOf("useEffect(() =>"),
-    upgradeConsoleSource.indexOf("async function simulateAndSign"),
+    upgradeConsoleSource.indexOf("return ("),
   );
-  assert.doesNotMatch(mountEffect, /(?:simulateAndSign|broadcastSigned)\s*\(/u);
+  assert.doesNotMatch(mountEffect, /(?:simulateAndSign|broadcastSigned|setAttendedLoaded)\s*\(/u);
+});
+
+test("program upgrade serializes read-only inspection with attended sign and broadcast actions", () => {
+  assert.match(upgradeConsoleSource, /inspectionBusy=\{busy\}/u);
+  assert.match(upgradeAttendedSource, /\binspectionBusy\b/u);
+  assert.match(
+    upgradeAttendedSource,
+    /!snapshot[\s\S]*?\|\| busy[\s\S]*?\|\| inspectionBusy[\s\S]*?\) return;/u,
+  );
+  assert.match(upgradeAttendedSource, /if \(!pending \|\| busy \|\| inspectionBusy\) return;/u);
+  assert.match(
+    upgradeAttendedSource,
+    /onClick=\{simulateAndSign\}[\s\S]*?disabled=\{busy \|\| inspectionBusy/u,
+  );
+  assert.match(
+    upgradeAttendedSource,
+    /onClick=\{broadcastSigned\} disabled=\{busy \|\| inspectionBusy\}/u,
+  );
 });

@@ -1,0 +1,62 @@
+{
+  "schema": "iat-v2-admin-lazy-boundary-policy/v2",
+  "status": "DRAFT_PARTIAL_REMEDIATION_QA_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "predecessor": {
+    "path": "public/audits/iat-v2-admin-lazy-boundary-20260805/policy.json",
+    "sha256": "ef4a17a9454311febf1fc73eccdd26459fbb76bec1bc21c5ab4956cc7d6b3b50"
+  },
+  "buildManifestRequired": true,
+  "userActivationRequired": true,
+  "baseline": {
+    "priorCombinedFeatureChunkBytes": 912348
+  },
+  "boundaries": {
+    "inspectionEntryStaticClosureExcludes": [
+      "FEATURE_REHEARSAL",
+      "PROGRAM_UPGRADE",
+      "PROGRAM_UPGRADE_ATTENDED_ACTIONS",
+      "TREZOR_CONNECT",
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellStaticClosureExcludes": [
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellDynamicImports": [
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "programUpgradeShellDynamicImports": [
+      "PROGRAM_UPGRADE_ATTENDED_ACTIONS"
+    ],
+    "programUpgradeShellStaticClosureExcludes": [
+      "PROGRAM_EXTENSION_ATTENDED"
+    ],
+    "programUpgradeAttendedStaticClosureIncludes": [
+      "ATTENDED_EVIDENCE",
+      "PROGRAM_EXTENSION_ATTENDED"
+    ]
+  },
+  "byteBudgets": {
+    "initialEntryMaximum": 1100000,
+    "featureShellMaximum": 150000,
+    "switchboardOnDemandMaximum": 1000000,
+    "trezorConnectMaximum": 180000,
+    "programUpgradeMaximum": 15000,
+    "programUpgradeAttendedMaximum": 9000,
+    "programUpgradeIncrementalClosureMaximum": 32000
+  },
+  "assurance": {
+    "independentHardwareReviewComplete": false,
+    "signingApproved": false,
+    "broadcastApproved": false,
+    "deploymentApproved": false,
+    "mainnetApproved": false
+  },
+  "limitations": [
+    "The generated Vite manifest and browser checks prove local build and request boundaries only.",
+    "The attended-actions payload is loaded only after an explicit operator click, but that source boundary is not independent hardware or runtime evidence.",
+    "The aggregate Program Upgrade budget counts the read-only shell, attended-actions entry, and all static dependencies not already present in the inspection entry closure.",
+    "The Switchboard and Trezor packages remain present as lazy operator surfaces and require independent review before use.",
+    "No hardware, wallet, RPC, simulation, signing, broadcast, deployment, Devnet, or Mainnet action is authorized by this policy."
+  ]
+}

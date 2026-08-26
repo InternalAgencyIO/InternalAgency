@@ -4,7 +4,10 @@ import test from "node:test";
 import { IAT_V2_PROGRAM_ID } from "../programs/iat_v2/instructions.mjs";
 
 const runbook = readFileSync("launch/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md", "utf8");
-const upgrade = readFileSync("tools/iat-v2-admin-console/ProgramUpgrade.jsx", "utf8");
+const upgrade = [
+  "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
+  "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx",
+].map((path) => readFileSync(path, "utf8")).join("\n");
 const migration = readFileSync("tools/iat-v2-admin-console/LegacyRoundMigration.jsx", "utf8");
 const feature = readFileSync("tools/iat-v2-admin-console/FeatureRehearsal.jsx", "utf8");
 
