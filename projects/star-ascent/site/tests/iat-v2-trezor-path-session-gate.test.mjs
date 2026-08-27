@@ -174,6 +174,8 @@ test("action routes are render-gated behind an explicit nonpersistent verificati
   const provider = fs.readFileSync(PROVIDER, "utf8");
 
   assert.match(component, /DISPLAY \+ VERIFY MODEL T ADDRESS/u);
+  assert.match(component, /reviewed account-zero path once with on-device display/u);
+  assert.doesNotMatch(component, /discover the matching path/u);
   assert.match(component, /onClick=\{displayAndVerify\}/u);
   assert.match(
     component,
@@ -184,6 +186,12 @@ test("action routes are render-gated behind an explicit nonpersistent verificati
   assert.doesNotMatch(component, /indexedDB\./u);
   assert.match(main, /<TrezorPathSessionGate[\s\S]*renderActionUi=\{renderActionConsole\}/u);
   assert.match(main, /assertTrezorPathSession\(session, expectedAddress\)/u);
+  assert.match(main, /const REVIEWED_MODEL_T_SOLANA_PATH = "m\/44'\/501'\/0'\/0'";/u);
+  assert.match(
+    main,
+    /verifyTrezorSolanaAccountOnDevice\(\{[\s\S]*path: REVIEWED_MODEL_T_SOLANA_PATH,[\s\S]*publicKey: expectedAddress,[\s\S]*expectedAddress,/u,
+  );
+  assert.doesNotMatch(main, /findTrezorSolanaAccount/u);
   assert.match(provider, /trezorVerificationCapabilities\.has\(capability\)/u);
   assert.equal((provider.match(/showOnTrezor: true/gu) ?? []).length, 1);
 });

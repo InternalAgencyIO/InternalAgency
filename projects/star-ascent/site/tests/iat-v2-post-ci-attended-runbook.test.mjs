@@ -4,6 +4,10 @@ import test from "node:test";
 import { IAT_V2_PROGRAM_ID } from "../programs/iat_v2/instructions.mjs";
 
 const runbook = readFileSync("launch/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md", "utf8");
+const attendedIncident = readFileSync(
+  "launch/IAT_V2_ATTENDED_DEVNET_INCIDENT_20260827.md",
+  "utf8",
+);
 const upgrade = [
   "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
   "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx",
@@ -22,13 +26,51 @@ test("post-CI runbook fixes localhost consoles and keeps Mainnet on hold", () =>
   assert.match(runbook, /Only the three canonical signing modes—`upgrade`, `migrate-rounds`, and `features`—may request transaction signatures/u);
   assert.match(runbook, /default\/no-mode and `settle-week9` pages are archived non-signing surfaces/u);
   assert.match(runbook, /legacy seven-stage signing is permanently disabled/u);
-  assert.match(runbook, /transaction-prompt latch is permanent for this ceremony/u);
-  assert.match(runbook, /rejected, failed, or discarded signed action ends the ceremony/u);
-  assert.match(runbook, /Do not retry that action, clear browser storage, or attempt another transaction signature/u);
+  assert.match(runbook, /transaction-prompt latch is permanent for its exact source\/artifact\/mint\/action binding/u);
+  assert.match(runbook, /rejected, failed, expired, or explicitly discarded signed action ends that ceremony/u);
+  assert.match(runbook, /Do not retry that action, clear browser storage, change origin\/profile, or attempt another transaction signature/u);
+  assert.match(runbook, /Preserve the consumed old latch and stop on HOLD/u);
+  assert.match(runbook, /fresh exact-head CI and a genuinely new source binding/u);
   assert.match(runbook, /Mainnet remains \*\*HOLD\*\*/u);
   assert.match(runbook, /does not authorize a Mainnet transaction/u);
   assert.match(runbook, new RegExp(IAT_V2_PROGRAM_ID.toBase58(), "u"));
   assert.doesNotMatch(runbook, /IATv2jRuKKmT41NKsb1iYwWba4wtviisFTcKMcpVR7X/u);
+});
+
+test("the incident preserves the consumed ceremony and requires a fresh source-bound replacement", () => {
+  assert.match(attendedIncident, /SIGNED \/\/ NOT BROADCAST/u);
+  assert.match(attendedIncident, /signed wire existed only in\s+React memory and was lost/u);
+  assert.match(attendedIncident, /Canonical action EXTEND_PROGRAM_DATA already consumed its transaction-prompt latch/u);
+  assert.match(attendedIncident, /consumed v1 latch must remain preserved/u);
+  assert.match(attendedIncident, /old ceremony cannot be continued/u);
+  assert.match(attendedIncident, /genuinely new source\s+binding, and fresh exact-head CI/u);
+  assert.match(attendedIncident, /distinct key without deleting the prior incident latch/u);
+  assert.match(attendedIncident, /`m\/44'\/501'\/0'\/0'`/u);
+  assert.match(attendedIncident, /preserve, rather than replace or bypass, the consumed\s+v1 incident latch/u);
+  assert.match(attendedIncident, /not a transaction receipt, signature receipt, release,\s+deployment, or Mainnet authorization/u);
+});
+
+test("only program actions gain durable signed recovery and permanent reconcile-only broadcast", () => {
+  assert.match(runbook, /program-capacity\/upgrade surface alone adds an exact source\/artifact\/mint\/action-bound signed-pending record/u);
+  assert.match(runbook, /persisted while the prompt latch is still entered and before the broadcast control is shown/u);
+  assert.match(runbook, /never auto-broadcast/u);
+  assert.match(runbook, /derives the exact Solana signature locally/u);
+  assert.match(runbook, /persists a permanent source\/artifact\/mint\/action-bound broadcast-attempt reservation before the sole send/u);
+  assert.match(runbook, /Only creation of that new reservation may reach the send method/u);
+  assert.match(runbook, /action is permanently reconcile-only and no send method may ever be reached for it again/u);
+  assert.match(runbook, /exact finalized wire, message, and signature/u);
+  assert.match(runbook, /exact action-specific finalized post-state/u);
+  assert.match(runbook, /Never delete or reset the permanent attempt/u);
+  assert.match(runbook, /null, timeout, ambiguous result, or incomplete evidence remains HOLD and poll-only; never resend/u);
+  assert.match(runbook, /Signed-pending state on migration and feature surfaces remains memory-only/u);
+  assert.match(runbook, /do not gain durable reload or reconcile-only recovery/u);
+  assert.match(runbook, /never reload or navigate away while one of their signed transactions is pending/u);
+  assert.match(runbook, /POLL FINALIZED SIGNATURE \+ COMPLETE EVIDENCE \(NO SEND\)/u);
+
+  assert.match(attendedIncident, /permanent\s+source\/artifact\/mint\/action-bound broadcast-attempt reservation before the sole\s+send/u);
+  assert.match(attendedIncident, /action is permanently reconcile-only/u);
+  assert.match(attendedIncident, /never send again or delete\/reset the attempt/u);
+  assert.match(attendedIncident, /keeps migration and feature signed-pending state memory-only/u);
 });
 
 test("attended runbook gates the runtime, shell, browser storage, and finalized buffer handoff", () => {

@@ -122,6 +122,21 @@ function readExistingLatch(storage, key) {
   }
 }
 
+function assertLatchMatchesStorageBinding(latch, binding, action) {
+  if (latch === null) return null;
+  check(latch.sourceCommit === binding.sourceCommit, "Prompt latch source commit drifted from its storage key");
+  check(
+    latch.programArtifactSha256 === binding.programArtifactSha256,
+    "Prompt latch artifact SHA-256 drifted from its storage key",
+  );
+  check(latch.mint === binding.mint, "Prompt latch mint drifted from its storage key");
+  check(
+    permanentLatchSlot(latch.action) === permanentLatchSlot(action),
+    "Prompt latch action drifted from its permanent storage slot",
+  );
+  return latch;
+}
+
 function persistExactLatch(storage, key, latch) {
   const exact = exactLatch(latch);
   const serialized = JSON.stringify(exact);
@@ -173,6 +188,18 @@ export function attendedPromptLatchKey({ binding, action } = {}) {
   return `${LATCH_PREFIX}/${exact.sourceCommit}/${exact.programArtifactSha256}/${exact.mint}/${permanentLatchSlot(canonicalAction)}/v1`;
 }
 
+export function loadAttendedModelTPromptLatch(storage, { binding, action } = {}) {
+  const latchStorage = resolvedStorage(storage);
+  const exact = exactBinding(binding);
+  const canonicalAction = exactAction(action);
+  const key = attendedPromptLatchKey({ binding: exact, action: canonicalAction });
+  return assertLatchMatchesStorageBinding(
+    readExistingLatch(latchStorage, key),
+    exact,
+    canonicalAction,
+  );
+}
+
 export function createAttendedModelTPromptCoordinator({
   locks,
   storage,
@@ -202,7 +229,11 @@ export function createAttendedModelTPromptCoordinator({
         { mode: "exclusive", ifAvailable: true },
         async (lock) => {
           check(lock, "Another attended transaction prompt owns the global Web Lock");
-          const existing = readExistingLatch(latchStorage, key);
+          const existing = assertLatchMatchesStorageBinding(
+            readExistingLatch(latchStorage, key),
+            exact,
+            canonicalAction,
+          );
           check(!existing, `Canonical action ${canonicalAction} already consumed its transaction-prompt latch`);
 
           const entered = persistExactLatch(latchStorage, key, {

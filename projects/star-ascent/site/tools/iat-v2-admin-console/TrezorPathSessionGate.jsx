@@ -57,8 +57,8 @@ export default function TrezorPathSessionGate({
             <small>EXPECTED SOLANA SIGNER</small>
             <strong>{expectedAddress}</strong>
             <p>
-              The console will discover the matching path without display, then make one exact
-              on-device re-fetch for that path. Match the address on the Model T before approving.
+              The console will request the reviewed account-zero path once with on-device display.
+              Match the full address on the Model T before approving.
             </p>
             {error && <p role="alert">{error}</p>}
           </div>

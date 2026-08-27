@@ -158,6 +158,25 @@ test("source-bound receipt persistence fails closed when storage is not durable"
   );
 });
 
+test("source-bound receipt clearing requires removal capability and exact readback", () => {
+  const key = attendedReceiptStorageKey(expectedBinding);
+  const missingRemove = {
+    getItem: () => "retained",
+  };
+  assert.throws(
+    () => clearAttendedReceipts(missingRemove, expectedBinding),
+    /storage is unavailable for clearing/u,
+  );
+  const silentNoOp = {
+    getItem: (candidate) => candidate === key ? "retained" : null,
+    removeItem: () => {},
+  };
+  assert.throws(
+    () => clearAttendedReceipts(silentNoOp, expectedBinding),
+    /storage is unavailable for clearing/u,
+  );
+});
+
 test("canonical receipts reject misleading week and confirmation labels", () => {
   assert.throws(() => canonicalAttendedReceipt({
     ...receipt("MIGRATE_LEGACY_ROUND_WEEK_7", "migration", 7),

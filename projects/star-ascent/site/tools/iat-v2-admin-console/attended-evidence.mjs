@@ -232,7 +232,14 @@ export function persistAttendedReceipt(storage, expectedBinding, receipt, {
 }
 
 export function clearAttendedReceipts(storage, expectedBinding) {
-  storage.removeItem(attendedReceiptStorageKey(expectedBinding));
+  const key = attendedReceiptStorageKey(expectedBinding);
+  try {
+    check(typeof storage?.removeItem === "function", "Attended receipt-set storage cannot remove records");
+    storage.removeItem(key);
+    check(storage.getItem(key) === null, "Attended receipt-set storage readback disagrees with clearing");
+  } catch (error) {
+    throw new Error("Attended receipt-set storage is unavailable for clearing", { cause: error });
+  }
 }
 
 export function completeAttendedRoster({

@@ -7,20 +7,26 @@ const siteRoot = resolve(process.env.IAT_V2_ADMIN_BUNDLE_SITE_ROOT ?? process.cw
 const distRoot = resolve(siteRoot, "tools/iat-v2-admin-console/dist");
 const assetsRoot = resolve(distRoot, "assets");
 const manifest = JSON.parse(readFileSync(resolve(distRoot, ".vite/manifest.json"), "utf8"));
-const predecessorPolicyPath = resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260805/policy.json");
-const policy = JSON.parse(readFileSync(resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json"), "utf8"));
+const predecessorPolicyPath = resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json");
+const predecessorPolicySha256 = "aaaed4a6d5fe47a1ed97592f201ca36b2f7482234f3f9c8363120c1750bf7ed8";
+const policy = JSON.parse(readFileSync(resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json"), "utf8"));
 const assetNames = readdirSync(assetsRoot);
 const normalize = (value) => value.replaceAll("\\", "/");
 const size = (file) => statSync(resolve(distRoot, file)).size;
 
-assert.equal(policy.schema, "iat-v2-admin-lazy-boundary-policy/v2", "unexpected admin lazy-boundary policy schema");
+assert.equal(policy.schema, "iat-v2-admin-lazy-boundary-policy/v3", "unexpected admin lazy-boundary policy schema");
 assert.equal(policy.status, "DRAFT_PARTIAL_REMEDIATION_QA_HOLD", "admin lazy-boundary policy must remain QA HOLD");
 assert.equal(policy.mainnetStatus, "UNSCHEDULED_HOLD", "admin lazy-boundary policy must keep Mainnet unscheduled HOLD");
 assert.equal(policy.buildManifestRequired, true, "admin build manifest cannot be optional");
 assert.equal(policy.userActivationRequired, true, "attended actions must require explicit user activation");
+assert.equal(
+  createHash("sha256").update(readFileSync(predecessorPolicyPath)).digest("hex"),
+  predecessorPolicySha256,
+  "immutable 20260826 predecessor policy bytes drifted",
+);
 assert.deepEqual(policy.predecessor, {
-  path: "public/audits/iat-v2-admin-lazy-boundary-20260805/policy.json",
-  sha256: createHash("sha256").update(readFileSync(predecessorPolicyPath)).digest("hex"),
+  path: "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json",
+  sha256: predecessorPolicySha256,
 }, "successor policy must bind the immutable predecessor bytes");
 assert.deepEqual(policy.boundaries.inspectionEntryStaticClosureExcludes, [
   "FEATURE_REHEARSAL",
@@ -36,6 +42,8 @@ assert.deepEqual(policy.boundaries.programUpgradeShellStaticClosureExcludes, ["P
 assert.deepEqual(policy.boundaries.programUpgradeAttendedStaticClosureIncludes, [
   "ATTENDED_EVIDENCE",
   "ATTENDED_PROMPT_COORDINATOR",
+  "ATTENDED_PROGRAM_SIGNED_PENDING",
+  "ATTENDED_PROGRAM_BROADCAST_ONCE",
   "PROGRAM_EXTENSION_ATTENDED",
 ], "attended static-closure policy drifted");
 assert.equal(policy.baseline.priorCombinedFeatureChunkBytes, 912_348, "feature baseline drifted");
@@ -111,6 +119,16 @@ assert.match(
   /import \{ buildProgramDataExtensionTransaction \} from "\.\/program-extension-attended\.mjs";/u,
   "attended actions must retain the reviewed capacity-extension builder source edge",
 );
+assert.match(
+  attendedSource,
+  /from "\.\/attended-program-signed-pending\.mjs";/u,
+  "attended actions must retain the reviewed durable signed-pending source edge",
+);
+assert.match(
+  attendedSource,
+  /from "\.\/attended-program-broadcast-once\.mjs";/u,
+  "attended actions must retain the reviewed permanent broadcast-attempt source edge",
+);
 assert.ok(
   upgradeSource.indexOf("setAttendedLoaded(true)") < upgradeSource.indexOf("<ProgramUpgradeAttendedActions"),
   "attended actions must remain behind the explicit load control",
@@ -120,6 +138,16 @@ const attendedBundle = readFileSync(resolve(distRoot, attended.file), "utf8");
 const attendedSecurityBundle = readFileSync(resolve(distRoot, attendedSecurity.file), "utf8");
 assert.doesNotMatch(upgradeBundle, /ProgramData additional bytes/u, "read-only shell bundle contains attended transaction construction");
 assert.match(attendedBundle, /ProgramData additional bytes/u, "attended bundle must contain capacity-extension construction");
+assert.match(
+  attendedBundle,
+  /iat-v2-current-source-program-signed-pending\/v2/u,
+  "attended bundle lacks the durable signed-pending schema",
+);
+assert.match(
+  attendedBundle,
+  /iat-v2-current-source-program-broadcast-attempt\/v2/u,
+  "attended bundle lacks the permanent broadcast-attempt schema",
+);
 assert.match(
   attendedSecurityBundle,
   /iat-v2-current-source-attended-receipt-set\/v1/u,
@@ -157,6 +185,8 @@ for (const [name, bytes] of Object.entries(measured)) {
   assert.ok(Number.isSafeInteger(maximum), `missing byte budget for ${name}`);
   assert.ok(bytes <= maximum, `${name} is ${bytes} bytes; budget is ${maximum}`);
 }
+assert.equal(budgets.programUpgradeAttendedMaximum, 40_000, "attended-actions ceiling drifted");
+assert.equal(budgets.programUpgradeIncrementalClosureMaximum, 72_000, "upgrade incremental-closure ceiling drifted");
 
 const javascript = assetNames
   .filter((name) => name.endsWith(".js"))

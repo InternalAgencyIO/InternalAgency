@@ -5,6 +5,7 @@ import {
   IAT_V2_ATTENDED_PROMPT_LATCH_SCHEMA,
   attendedPromptLatchKey,
   createAttendedModelTPromptCoordinator,
+  loadAttendedModelTPromptLatch,
 } from "../tools/iat-v2-admin-console/attended-prompt-coordinator.mjs";
 
 const binding = Object.freeze({
@@ -189,6 +190,35 @@ test("round 11 reveal and expire share one permanent terminal-slot latch", async
   }
 });
 
+test("a separately source-bound ceremony preserves the prior latch and uses a distinct key", async () => {
+  const targetStorage = storage();
+  const prior = coordinator({ targetStorage });
+  await request(prior.value);
+  const priorKey = attendedPromptLatchKey({ binding, action: "UPGRADE_PROGRAM" });
+  const priorSerialized = targetStorage.value(priorKey);
+  const successorBinding = { ...binding, sourceCommit: "e".repeat(40) };
+  const successorKey = attendedPromptLatchKey({
+    binding: successorBinding,
+    action: "UPGRADE_PROGRAM",
+  });
+  const successor = coordinator({
+    targetStorage,
+    times: ["2026-08-27T11:00:00.000Z", "2026-08-27T11:01:00.000Z"],
+  });
+  await request(successor.value, { binding: successorBinding });
+  assert.notEqual(successorKey, priorKey);
+  assert.equal(targetStorage.value(priorKey), priorSerialized);
+  assert.equal(JSON.parse(targetStorage.value(successorKey)).status, "PROMPT_VERIFIED");
+  assert.deepEqual(
+    loadAttendedModelTPromptLatch(targetStorage, {
+      binding: successorBinding,
+      action: "UPGRADE_PROGRAM",
+    }),
+    JSON.parse(targetStorage.value(successorKey)),
+  );
+  assert.equal(targetStorage.calls.some(([method]) => method === "removeItem"), false);
+});
+
 test("one global ifAvailable lock blocks concurrent prompts even for different actions", async () => {
   const sharedLocks = lockManager();
   const first = coordinator({ locks: sharedLocks });
@@ -244,6 +274,44 @@ test("valid existing and malformed latches fail closed before callback", async (
     await assert.rejects(request(value, {
       prompt: async () => { calls += 1; },
     }), expectation);
+    assert.equal(calls, 0);
+  }
+});
+
+test("stored latch identity must match its source-bound key", async () => {
+  for (const mutation of [
+    { sourceCommit: "e".repeat(40) },
+    { programArtifactSha256: "f".repeat(64) },
+    { mint: "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4" },
+    { action: "MIGRATE_LEGACY_ROUND_WEEK_7" },
+  ]) {
+    const targetStorage = storage();
+    const key = attendedPromptLatchKey({ binding, action: "UPGRADE_PROGRAM" });
+    targetStorage.setItem(key, JSON.stringify({
+      schema: IAT_V2_ATTENDED_PROMPT_LATCH_SCHEMA,
+      status: "PROMPT_ENTERED",
+      ...binding,
+      action: "UPGRADE_PROGRAM",
+      messageSha256,
+      signer,
+      tabId,
+      enteredAtUtc: "2026-08-27T10:00:00.000Z",
+      finishedAtUtc: null,
+      ...mutation,
+    }));
+    assert.throws(
+      () => loadAttendedModelTPromptLatch(targetStorage, {
+        binding,
+        action: "UPGRADE_PROGRAM",
+      }),
+      /drifted from its/u,
+    );
+    const { value } = coordinator({ targetStorage });
+    let calls = 0;
+    await assert.rejects(
+      request(value, { prompt: async () => { calls += 1; } }),
+      /drifted from its/u,
+    );
     assert.equal(calls, 0);
   }
 });

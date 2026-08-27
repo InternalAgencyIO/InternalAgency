@@ -27,7 +27,10 @@ const ProgramUpgradeAttendedActions = lazy(() => import("./ProgramUpgradeAttende
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
-const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
+const connection = new Connection(DEVNET_RPC, {
+  commitment: FINALIZED_COMMITMENT,
+  disableRetryOnRateLimit: true,
+});
 const BUFFER_METADATA_BYTES = 37;
 const DEVNET_DEPLOYER = new PublicKey("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4");
 
@@ -138,6 +141,14 @@ export default function ProgramUpgrade({
       programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
     });
     const deployed = parseUpgradeableProgramData(programDataInfo.data);
+    const programDataDeploymentSlot = Number(deployed.slot);
+    if (
+      !Number.isSafeInteger(programDataDeploymentSlot)
+      || programDataDeploymentSlot <= 0
+      || BigInt(programDataDeploymentSlot) !== deployed.slot
+    ) {
+      throw new Error("ProgramData deployment slot is outside the reviewed safe integer range");
+    }
     if (!deployed.upgradeAuthority.equals(IAT_V2_PROGRAM_ADMIN)) {
       throw new Error(`Program upgrade authority is ${deployed.upgradeAuthority.toBase58()}`);
     }
@@ -167,6 +178,7 @@ export default function ProgramUpgrade({
       bufferOwner: null,
       bufferProgramBytes: null,
       deployedRegionHash,
+      programDataDeploymentSlot,
       programDataCapacityBytes: extension.currentCapacityBytes,
       targetProgramDataCapacityBytes: extension.artifactBytes,
       additionalProgramDataBytes: extension.additionalBytes,

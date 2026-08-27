@@ -36,7 +36,13 @@ Never use a public host for these consoles. The reviewed Devnet program is `62Gt
 
 Every newly loaded or reloaded attended page must first use its memory-only on-device address-display gate and match the complete displayed address to `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`. This is a non-transaction device confirmation and is not one of the 17 Model T transaction-signature prompts. Navigation or reload may require another address-display confirmation, but it must never add or replay a transaction signature. If any action UI appears before the full on-device address match succeeds, stop without signing or broadcasting.
 
-The transaction-prompt latch is permanent for this ceremony: a rejected, failed, or discarded signed action ends the ceremony. Do not retry that action, clear browser storage, or attempt another transaction signature; stop on HOLD and begin only a separately reviewed new ceremony.
+The transaction-prompt latch is permanent for its exact source/artifact/mint/action binding: a rejected, failed, expired, or explicitly discarded signed action ends that ceremony. Do not retry that action, clear browser storage, change origin/profile, or attempt another transaction signature. Preserve the consumed old latch and stop on HOLD. Only a separately reviewed ceremony with fresh exact-head CI and a genuinely new source binding may expose another action; its distinct source-bound namespaces do not delete, reset, or continue the old ceremony.
+
+The program-capacity/upgrade surface alone adds an exact source/artifact/mint/action-bound signed-pending record. The verified signed wire is persisted while the prompt latch is still entered and before the broadcast control is shown, but it is never auto-broadcast. Before a broadcast attempt exists, a reload may restore only a record that matches the retained entered/verified prompt latch and must still perform complete finalized-state, message, signature, and blockhash revalidation before the separate broadcast boundary. Immediately before reserving the sole send, blockhash validity must be true at both finalized and processed commitment against the fresh finalized minimum context slot. A consumed latch with missing, malformed, mismatched, or stale pending state remains HOLD and must never trigger another prompt.
+
+After all pre-send checks pass, the program broadcast boundary derives the exact Solana signature locally from the verified signed wire and atomically persists a permanent source/artifact/mint/action-bound broadcast-attempt reservation before the sole send. Only creation of that new reservation may reach the send method, and this program-only connection disables the client library's implicit HTTP-429 request retry as well as validator forwarding retries. Once the reservation exists—whether the RPC returns, throws, times out, or the page reloads—the action is permanently reconcile-only and no send method may ever be reached for it again. Poll only the retained local signature at finalized commitment; retrieve and compare the exact finalized wire, message, and signature; verify the exact action-specific finalized post-state; and only then persist the receipt and remove the signed-pending record under the same exclusive lock. Every retained program receipt must have its exact permanent attempt; attempt-without-signed-wire-and-receipt or receipt-without-attempt is HOLD. Never delete or reset the permanent attempt. A null, timeout, ambiguous result, or incomplete evidence remains HOLD and poll-only; never resend.
+
+Signed-pending state on migration and feature surfaces remains memory-only. Those surfaces do not gain durable reload or reconcile-only recovery from the program amendment: never reload or navigate away while one of their signed transactions is pending. Loss or ambiguity is HOLD and must never cause another prompt or resend.
 
 The feature-mode shell must require the exact migration artifact before it exposes feature actions. The archived seven-stage initialization shell remains pinned to its exact pre-upgrade artifact and may only inspect chain state or export already-existing historical receipts; it cannot select, sign, or broadcast an initialization action. Mode switching must never turn “either reviewed artifact” into an acceptable deployment check.
 
@@ -61,8 +67,9 @@ If no extension is required, continue to buffer upload. If extension is required
 1. In `?mode=upgrade`, press **SIMULATE + SIGN SEPARATE CAPACITY EXTENSION**.
 2. Review the exact added bytes and rent top-up on the Model T and approve physically.
 3. Confirm the console shows **SIGNED // NOT BROADCAST** and the reviewed message SHA-256.
-4. Press the separate **BROADCAST SIGNED CAPACITY EXTENSION** button.
-5. Wait for **FINALIZED**, export the source-bound program receipt set, then refresh the read-only capacity command.
+   The amended console must also report that the exact signed-pending record is durably recoverable; do not reload unless recovery is necessary.
+4. Press the separate **BROADCAST SIGNED CAPACITY EXTENSION** button once. The console must persist the exact locally derived signature in a permanent broadcast-attempt reservation before its sole send.
+5. After that reservation exists, use only **POLL FINALIZED SIGNATURE + COMPLETE EVIDENCE (NO SEND)**. Wait for **FINALIZED**, export the source-bound program receipt set, then refresh the read-only capacity command. A null, timeout, RPC error, reload, or ambiguous result never authorizes another send.
 
 The capacity transaction must never auto-start buffer upload or program upgrade.
 
@@ -127,15 +134,17 @@ Open `http://127.0.0.1:4175/?mode=upgrade&buffer=<BUFFER_ADDRESS>` and verify th
 
 1. Press **CONNECT 7XZ MODEL T DIRECTLY + SIMULATE + SIGN**.
 2. Approve the exact upgrade on the Model T.
-3. Review the signed-but-not-broadcast message SHA-256.
-4. Press the separate **BROADCAST SIGNED DEVNET UPGRADE** button.
-5. Wait for finalized confirmation and export the source-bound receipt set containing `UPGRADE_PROGRAM`.
+3. Review the signed-but-not-broadcast message SHA-256 and confirm the exact signed-pending record is durably recoverable.
+4. Press the separate **BROADCAST SIGNED DEVNET UPGRADE** button once. The console must persist the exact locally derived signature in a permanent broadcast-attempt reservation before its sole send.
+5. Once that reservation exists, continue only with **POLL FINALIZED SIGNATURE + COMPLETE EVIDENCE (NO SEND)**. Do not resend after any timeout, RPC error, reload, or ambiguous result. Export the source-bound receipt set containing `UPGRADE_PROGRAM` only after the retained signature, exact finalized transaction, and upgrade post-state all verify.
 
 Do not auto-chain into migration.
 
 ## 4. Migrate weeks 7 and 8, one transaction each
 
 Open `http://127.0.0.1:4175/?mode=migrate-rounds`. The console must show the exact CI artifact deployed and only settled 198-byte legacy rounds.
+
+Migration signed-pending state is memory-only. Do not reload, navigate, close the page, or treat the program surface's durable recovery and reconcile-only controls as available here while a migration or backfill transaction is pending.
 
 For week 7, then separately for week 8:
 
@@ -164,6 +173,8 @@ The receipt actions must be `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9` and `BACK
 ## 6. Finish the week-11 feature roster
 
 Open `http://127.0.0.1:4175/?mode=features`. The selector must refresh its config and action accounts at finalized commitment, retain monotonic finalized context slots, and derive cadence only from finalized block time. After balance and linked-round reads, the greatest returned observation slot must still resolve to the same week and CCC round; a confirmed-only read, local workstation time, missing block time, regressing context, or boundary change during the observation is a stop. For every offered action, use the first button to build, simulate, and request the physical signature. Review the message hash, then use the separate broadcast button. Never approve the next action until the prior transaction is finalized and the console has refreshed chain state.
+
+Feature signed-pending state is memory-only. Do not reload, navigate, close the page, or treat the program surface's durable recovery and reconcile-only controls as available here while a feature transaction is pending.
 
 Immediately before transaction construction, the feature console must load a fresh finalized parent snapshot, use that snapshot's final slot as the minimum for every child config/state/balance/linked-round read, and then re-inspect the deployment at or after the child's greatest observation slot. The exact Program ID, ProgramData address, `771c…8a01` program hash, 649,680-byte artifact length, and `7XZj…fzPH` upgrade authority must all match. It repeats the finalized deployment-and-action check after simulation immediately before the Model T prompt.
 

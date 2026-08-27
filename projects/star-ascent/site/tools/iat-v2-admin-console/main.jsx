@@ -48,7 +48,6 @@ import {
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
   createTrezorTransactionProvider,
-  findTrezorSolanaAccount,
   verifyTrezorSolanaAccountOnDevice,
 } from "./trezor-provider.mjs";
 import { assertTrezorPathSession } from "./trezor-path-session.mjs";
@@ -66,6 +65,7 @@ import {
 import "./style.css";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
+const REVIEWED_MODEL_T_SOLANA_PATH = "m/44'/501'/0'/0'";
 const SOURCE_COMMIT = "ba88535036da3f3871b65100fc18b655ccfa1d57";
 const CONSOLE_PARAMS = new URLSearchParams(window.location.search);
 const FEATURE_MODE = CONSOLE_PARAMS.get("mode") === "features";
@@ -238,13 +238,12 @@ async function initializeTrezorConnect() {
 
 async function openVerifiedTrezorPathSession(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
   const connect = await initializeTrezorConnect();
-  const discoveredAccount = await findTrezorSolanaAccount({
-    connect,
-    expectedAddress,
-  });
   const verifiedAccount = await verifyTrezorSolanaAccountOnDevice({
     connect,
-    account: discoveredAccount,
+    account: {
+      path: REVIEWED_MODEL_T_SOLANA_PATH,
+      publicKey: expectedAddress,
+    },
     expectedAddress,
   });
   if (!verifiedAccount.publicKey.equals(expectedAddress)) {
