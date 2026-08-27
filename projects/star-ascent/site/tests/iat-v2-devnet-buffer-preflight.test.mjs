@@ -782,9 +782,30 @@ exit 91
           rmSync(join(sandbox, name), { force: true });
         }
       }
-      rmSync(join(sandbox, "payer.json"), { force: true });
-      writeFileSync(join(sandbox, "payer.json"), "ORIGINAL-PAYER-FIXTURE\n");
-      chmodSync(join(sandbox, "payer.json"), 0o600);
+      const payerPath = join(sandbox, "payer.json");
+      try {
+        rmSync(payerPath, { force: true });
+      } catch (error) {
+        if (process.platform !== "win32" || error?.code !== "EACCES") throw error;
+        const cleanup = spawnSync(bashCommand, [
+          "--exec",
+          "/usr/bin/rm",
+          "-f",
+          "--",
+          bashPath(payerPath),
+        ], {
+          cwd: process.cwd(),
+          encoding: "utf8",
+          env: process.env,
+        });
+        assert.equal(
+          cleanup.status,
+          0,
+          `WSL-created payer symlink cleanup failed: ${cleanup.stderr || cleanup.stdout}`,
+        );
+      }
+      writeFileSync(payerPath, "ORIGINAL-PAYER-FIXTURE\n");
+      chmodSync(payerPath, 0o600);
       writeFileSync(join(sandbox, "scenario"), `${scenario}\n`);
       const command = `
 export IAT_V2_CLEAN_ENVIRONMENT="iat-v2-devnet-buffer-v1"
