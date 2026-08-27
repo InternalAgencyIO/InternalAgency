@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "status": "completed-one-eligible-backlog-no-qualified-pair-no-post-x-profile-error",
+  "completedAtUtc": "2026-08-27T17:41:14.349Z",
+  "account": "@dogramaci",
+  "browserSurface": "in-app-browser",
+  "liveProfileVerified": false,
+  "signedInAccountVerified": false,
+  "ownerControlVerified": null,
+  "profileVerificationAttempt": {
+    "url": "https://x.com/dogramaci",
+    "observedAtUtc": "2026-08-27T17:39:15.001Z",
+    "outcome": "site_error",
+    "visibleText": "Something went wrong, but don’t fret — let’s give it another shot. Some privacy related extensions may cause issues on x.com. Please disable them and try again."
+  },
+  "cadenceCountryBatches": [
+    431,
+    432,
+    433,
+    434,
+    435,
+    436,
+    437,
+    438,
+    439,
+    440
+  ],
+  "completedCountryCycles": 10,
+  "batchEligibility": [
+    {
+      "batch": 431,
+      "country": "Benin",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 432,
+      "country": "Rwanda",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 433,
+      "country": "Burundi",
+      "accepted_current_country_assets": 1,
+      "required": 4,
+      "eligible": false,
+      "eligible_unpublished_scene_ids": [
+        1753
+      ]
+    },
+    {
+      "batch": 434,
+      "country": "Bolivia",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 435,
+      "country": "Tunisia",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 436,
+      "country": "South Sudan",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 437,
+      "country": "Belgium",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 438,
+      "country": "Haiti",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 439,
+      "country": "Jordan",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    },
+    {
+      "batch": 440,
+      "country": "Dominican Republic",
+      "accepted_current_country_assets": 0,
+      "required": 4,
+      "eligible": false
+    }
+  ],
+  "eligibleBacklogRemaining": 1,
+  "eligibleUnpublishedSceneIds": [
+    1753
+  ],
+  "pairReady": false,
+  "newlyPublished": [],
+  "pendingQualifiedPost": null,
+  "queueState": {
+    "pendingPost": null,
+    "preparedPostQueueCount": 0,
+    "deferredPostCheckpoint": null
+  },
+  "reconciliation": "Only Burundi scene 1753 is accepted, byte-backed, unpublished, and non-duplicate. No second country has two eligible assets, so the binding 2+1 country-post composition cannot be formed.",
+  "action": "No X composer upload or Post was submitted. Live profile verification was blocked by X's site error, but the authoritative ledger state independently proves no qualified post exists.",
+  "counterResetAfterOutcomeRecorded": true,
+  "nextRenderBatch": 441,
+  "nextCountry": "United Arab Emirates",
+  "browserBlockers": [
+    {
+      "surface": "Meta AI",
+      "tabId": "43",
+      "title": "This site can't be reached",
+      "closeBlockedByBrowserUrlPolicy": true
+    },
+    {
+      "surface": "X",
+      "url": "https://x.com/dogramaci",
+      "error": "Something went wrong / privacy extensions"
+    }
+  ]
+}
