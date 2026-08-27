@@ -1,0 +1,69 @@
+{
+  "schema": "internalagency.starlight.scene-terminal-checkpoint.v1",
+  "batchId": 435,
+  "country": "Tunisia",
+  "sceneId": 1763,
+  "status": "closed_hard_unusable",
+  "recordedAtUtc": "2026-08-27T16:14:07.281Z",
+  "providerUrl": "https://www.meta.ai/prompt/d72091aa-26d6-4ddf-9b67-85ca2fc2f655",
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-435-scene-1763-meta-response.txt",
+  "providerOccurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-435-scene-1763-output-hard-unusable.jsonl",
+  "rawBytesAvailable": true,
+  "rawByteLength": 609214,
+  "rawSha256": "753fd01d9c50d55c36a32e169e281b6e658575345de1bdeb63680468bbe482f2",
+  "blobPath": "progress-reports/codex-generated-media/blobs/75/753fd01d9c50d55c36a32e169e281b6e658575345de1bdeb63680468bbe482f2.webp",
+  "mimeType": "image/webp",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "duplicateRelationships": [],
+  "visualQa": {
+    "sceneId": 1763,
+    "status": "hard_unusable",
+    "accepted": false,
+    "cameraRoll": 96,
+    "framing": "extreme_wide",
+    "summary": "Hard-unusable raw evidence: the Chott el Jerid/Tozeur location and quartet are strong, but the strict roll-96 framing and no-hosiery lock are materially violated.",
+    "failures": [
+      "Strict extreme-wide roll 96 missed: the quartet dominates the frame instead of appearing as small full figures in a dominant environment.",
+      "AI ECE wears conspicuous knee socks even though the prompt explicitly forbids stockings and knee socks."
+    ],
+    "softDeviations": [],
+    "positives": [
+      "Vertical 9:16 output at 1152x2048.",
+      "Strong salt-lake, causeway, oasis, thunderstorm, and civilian lunar-station read.",
+      "Exactly four distinct public-safe adult women.",
+      "Single visible gold beacon with four cyan rings."
+    ]
+  },
+  "acceptedCanonical": false,
+  "canonicalAssetPath": null,
+  "rawArchiveAssetPath": "assets/lore/starlight-era/1763-tunisia-chott-el-jerid-meta-raw.webp",
+  "retryAuthorized": false,
+  "promptPath": "tmp/world-195x4/batch-435/scene-1763-prompt.txt",
+  "preparedPromptSha256": "F2B782AFE6A70F9C0F5D39137E96E62975A0F1074B1B9C6E79C5E2C83D0C0160",
+  "browserCanonicalPromptSha256": "F2B782AFE6A70F9C0F5D39137E96E62975A0F1074B1B9C6E79C5E2C83D0C0160",
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "initialSendAtUtc": "2026-08-27T15:44:19.247Z",
+  "recoverySendAtUtc": "2026-08-27T15:57:20.511Z"
+}
