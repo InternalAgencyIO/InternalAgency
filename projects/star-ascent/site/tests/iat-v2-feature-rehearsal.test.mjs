@@ -746,7 +746,11 @@ test("program upgrade and legacy migration share one CI artifact and finalized h
   assert.match(upgradeBoundarySource, /expectedArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES/u);
   assert.match(upgradeBoundarySource, /expectedArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
   assert.match(upgradeBoundarySource, /const FINALIZED_COMMITMENT = "finalized"/u);
-  assert.match(upgradeBoundarySource, /confirmTransaction\([\s\S]*finalizedCommitment/u);
+  assert.doesNotMatch(upgradeBoundarySource, /confirmTransaction\(/u);
+  assert.match(
+    upgradeAttendedSource,
+    /getSignatureStatuses\([\s\S]*searchTransactionHistory: true[\s\S]*getTransaction\([\s\S]*commitment: finalizedCommitment/u,
+  );
   assert.match(upgradeConsoleSource, /href="\/\?mode=migrate-rounds"/u);
   assert.doesNotMatch(
     upgradeConsoleSource.slice(upgradeConsoleSource.indexOf("snapshot?.alreadyUpgraded")),
@@ -856,14 +860,17 @@ test("program upgrade serializes read-only inspection with attended sign and bro
     upgradeAttendedSource,
     /!snapshot[\s\S]*?\|\| busy[\s\S]*?\|\| inspectionBusy[\s\S]*?\) return;/u,
   );
-  assert.match(upgradeAttendedSource, /if \(!pending \|\| busy \|\| inspectionBusy\) return;/u);
+  assert.match(
+    upgradeAttendedSource,
+    /if \(!pending \|\| broadcastAttempt \|\| broadcastBlocked \|\| busy \|\| inspectionBusy\) return;/u,
+  );
   assert.match(
     upgradeAttendedSource,
     /onClick=\{simulateAndSign\}[\s\S]*?disabled=\{busy \|\| inspectionBusy/u,
   );
   assert.match(
     upgradeAttendedSource,
-    /onClick=\{broadcastSigned\} disabled=\{busy \|\| inspectionBusy\}/u,
+    /onClick=\{broadcastSigned\} disabled=\{busy \|\| inspectionBusy \|\| broadcastBlocked\}/u,
   );
   assert.match(
     upgradeConsoleSource,
@@ -878,6 +885,6 @@ test("program upgrade serializes read-only inspection with attended sign and bro
   );
   assert.match(
     broadcastSource,
-    /if \(!broadcastBoundaryValidated\) \{[\s\S]*setPending\(null\)[\s\S]*DISCARDED BEFORE BROADCAST/u,
+    /preSendEntered && storageError === null[\s\S]*withNoAttendedProgramBroadcastAttempts\(\{[\s\S]*"PRE_SEND_FAILURE"[\s\S]*setPending\(null\)[\s\S]*DISCARDED BEFORE BROADCAST/u,
   );
 });
