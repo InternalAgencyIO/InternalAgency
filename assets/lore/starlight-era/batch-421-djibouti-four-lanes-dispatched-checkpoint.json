@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-lanes-dispatched-terminal-captured",
+  "createdAtUtc": "2026-08-27T04:21:00.6866541Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 421,
+  "country": "Djibouti",
+  "scenes": [
+    1704,
+    1705,
+    1706,
+    1707
+  ],
+  "orderedReferences": [
+    {
+      "anchor": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "anchor": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "anchor": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "uploadAuthorization": {
+    "standingAuthorizedAtUtc": "2026-08-27T04:05:01.0694990Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.0694990Z"
+  },
+  "sendAuthorization": {
+    "actionTimeUserText": "good authorized go",
+    "granted": true
+  },
+  "lanes": [
+    {
+      "scene": 1704,
+      "promptSha256": "63769D6B00A244ABB3CB753ECA14988EFB9879DD29E21ED5BD7A2CA6DAF1DB37",
+      "providerUrl": "https://www.meta.ai/prompt/a9108779-2c4d-4f66-b0f5-2f5248f760f9",
+      "terminalOutcome": "explicit-no-bytes",
+      "sendClickCount": 1,
+      "retrySent": false
+    },
+    {
+      "scene": 1705,
+      "promptSha256": "63A237007B3F143338120E24EBEB5AA672779FB6C2267B97D82489DF56B640A1",
+      "providerUrl": "https://www.meta.ai/prompt/34078a26-668e-47b7-8bc2-ce307ed96a3c",
+      "terminalOutcome": "output-hard-unusable",
+      "sendClickCount": 1,
+      "retrySent": false
+    },
+    {
+      "scene": 1706,
+      "promptSha256": "34043C46ECD1646DB2FBEC7E7505ABF82B576E8F4EB271FDC1E6B03D07BAD198",
+      "providerUrl": "https://www.meta.ai/prompt/d98749c7-8347-40fe-a3db-ee83884c396f",
+      "terminalOutcome": "output-hard-unusable",
+      "sendClickCount": 1,
+      "retrySent": false
+    },
+    {
+      "scene": 1707,
+      "promptSha256": "992CE63D6B4D7188E90FF9A026D687C0EC9A7FACA0B3038337E33A1B0638F137",
+      "providerUrl": "https://www.meta.ai/prompt/bc0d115c-f9f5-4057-bae0-838aaed082f9",
+      "terminalOutcome": "explicit-no-bytes-refusal",
+      "sendClickCount": 1,
+      "retrySent": false
+    }
+  ],
+  "confirmedProviderChatCount": 4,
+  "duplicateDispatchCount": 0,
+  "boundedRetryAuthorized": false,
+  "boundedRetryCount": 0
+}
