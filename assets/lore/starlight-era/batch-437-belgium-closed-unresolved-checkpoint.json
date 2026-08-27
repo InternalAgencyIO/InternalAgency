@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "batch_closed_unresolved",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 437,
+  "country": "Belgium",
+  "sourceBatchId": 366,
+  "sceneIds": [
+    1768,
+    1769,
+    1770,
+    1771
+  ],
+  "acceptedSceneIds": [],
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "status": "closed_unresolved",
+  "outcomes": [
+    {
+      "sceneId": 1768,
+      "status": "hard_unusable",
+      "reason": "Camera-roll failure: roll 15 required a strict shoulder-up extreme close with no hands, beacon, or footwear; the render extends through substantial torso toward the waist/lower torso.",
+      "providerUrl": "https://www.meta.ai/prompt/a6c9a1aa-a2de-45a9-b114-f84cceff9d08",
+      "sha256": "0b1595eb810b154cdf67766bb736d4c173ab0c5313932bc744efdc949c1709c9",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-437-scene-1768-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-437-belgium-scene-1768-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1769,
+      "status": "hard_unusable",
+      "reason": "Camera-roll failure: roll 47 required strict head-to-mid-shin framing; the render widens to complete head-to-toe figures with footwear.",
+      "providerUrl": "https://www.meta.ai/prompt/d0312a0c-5caa-4824-b268-857581c4d7b7",
+      "sha256": "548e763aca6449c0e203c1aa86cfabb605c0a40a2ac9119549e82550e840b6d8",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-437-scene-1769-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-437-belgium-scene-1769-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1770,
+      "status": "hard_unusable",
+      "reason": "Camera-roll failure: roll 91 required an environment-dominant extreme wide with comparatively small figures in the lower quarter; the quartet occupies roughly the lower two-fifths and reads as a medium-wide editorial group.",
+      "providerUrl": "https://www.meta.ai/prompt/e92d23a6-df5d-4a17-a23d-4276d7f2799d",
+      "sha256": "6e6c0fa29cc92d6c672d3ea6aac8608aadd918ec1d1dc612606c6a4fa510e5a5",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-437-scene-1770-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-437-belgium-scene-1770-terminal-captured-checkpoint.json"
+    },
+    {
+      "sceneId": 1771,
+      "status": "hard_unusable",
+      "reason": "Camera-roll failure: roll 1 required a strict shoulder-up extreme close; the render extends through substantial torso toward the waist/lower torso.",
+      "providerUrl": "https://www.meta.ai/prompt/35abd1bc-968d-4836-8fa9-58b675bfa4b9",
+      "sha256": "3cd343780f13391ebb62e37e0b3bbebd350911a6e8249eb255d552eb8c3ab454",
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-437-scene-1771-output-hard-unusable.jsonl",
+      "checkpointPath": "assets/lore/starlight-era/batch-437-belgium-scene-1771-terminal-captured-checkpoint.json"
+    }
+  ],
+  "duplicateRelationships": [],
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 7,
+    "due": false
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "newEligibleSceneIds": [],
+    "pairReady": false,
+    "reason": "Belgium produced no accepted images; Burundi scene 1753 remains the only eligible unpublished image, so no valid 2+1 country pair exists."
+  },
+  "nextAction": "Prepare the next checkpoint-authorized country in authoritative campaign order; do not reopen Belgium scenes 1768-1771.",
+  "closedAtUtc": "2026-08-27T16:52:22.090Z"
+}
