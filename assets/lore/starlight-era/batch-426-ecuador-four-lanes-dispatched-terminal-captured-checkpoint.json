@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-lane-provider-terminal-capture",
+  "createdAtUtc": "2026-08-27T06:55:11.937Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 426,
+  "country": "Ecuador",
+  "status": "terminal-one-hard-unusable-scene-three-no-byte-refusals-zero-accepted",
+  "dispatchCheckpoint": "assets/lore/starlight-era/batch-426-ecuador-four-lanes-dispatched-checkpoint.json",
+  "eligibleScenes": [
+    1724,
+    1725,
+    1726,
+    1727
+  ],
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "terminalSceneOutcomes": [
+    {
+      "scene": 1724,
+      "providerUrl": "https://www.meta.ai/prompt/b5a7965d-a3c6-4732-bfd5-0785f3fa9546",
+      "outcome": "output-hard-unusable",
+      "rawOutputCount": 2,
+      "accepted": 0,
+      "sha256": [
+        "8bfbcb2bd027c4b5c37e7f449e499eb5d054c1d85bf81413ac506d938b11e9b4",
+        "79888b0af38facfe1a1f6b86b81139eb54e86fbc2aa010f2283e973cf9638589"
+      ],
+      "retryAuthorized": false
+    },
+    {
+      "scene": 1725,
+      "providerUrl": "https://www.meta.ai/prompt/acc4efa3-899e-46d4-9ccd-987dd8e38ea9",
+      "outcome": "explicit-no-bytes-refusal",
+      "rawOutputCount": 0,
+      "accepted": 0,
+      "retryAuthorized": false
+    },
+    {
+      "scene": 1726,
+      "providerUrl": "https://www.meta.ai/prompt/c46c315a-596c-4e02-81f3-82da68fed7c7",
+      "outcome": "explicit-no-bytes-refusal",
+      "rawOutputCount": 0,
+      "accepted": 0,
+      "retryAuthorized": false
+    },
+    {
+      "scene": 1727,
+      "providerUrl": "https://www.meta.ai/prompt/6d6b7a89-f590-4d54-ba87-33cb9841f14d",
+      "outcome": "explicit-no-bytes-refusal",
+      "rawOutputCount": 0,
+      "accepted": 0,
+      "retryAuthorized": false
+    }
+  ],
+  "counts": {
+    "formalScenes": 4,
+    "confirmedProviderOccurrences": 4,
+    "rawImagesArchived": 2,
+    "hardUnusableImages": 2,
+    "hardUnusableScenes": 1,
+    "explicitNoByteRefusalScenes": 3,
+    "accepted": 0
+  },
+  "boundedRetryAuthorized": false,
+  "boundedRetryDispatched": false
+}
