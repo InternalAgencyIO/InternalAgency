@@ -1,0 +1,64 @@
+{
+  "schema": "internalagency.starlight.country-cycle-closure.v1",
+  "batchId": 434,
+  "country": "Bolivia",
+  "status": "closed_unresolved_no_accepted",
+  "recordedAtUtc": "2026-08-27T15:27:54.654Z",
+  "preparedCheckpoint": "assets/lore/starlight-era/batch-434-bolivia-prompts-prepared-checkpoint.json",
+  "uploadedCheckpoint": "assets/lore/starlight-era/batch-434-bolivia-four-lanes-uploaded-awaiting-send-checkpoint.json",
+  "fullResetDispatchCheckpoint": "assets/lore/starlight-era/batch-434-bolivia-full-tab-reset-dispatched-no-occurrence-checkpoint.json",
+  "formalCycleCompleted": true,
+  "canonicalRequirementPerCountry": 4,
+  "acceptedCanonicalCount": 0,
+  "acceptedCanonicalScenes": [],
+  "terminalScenes": [
+    {
+      "sceneId": 1756,
+      "result": "no_confirmed_provider_occurrence",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-434-bolivia-scene-1756-terminal-no-occurrence-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-434-scene-1756-no-confirmed-provider-occurrence.jsonl",
+      "rawSha256": null
+    },
+    {
+      "sceneId": 1757,
+      "result": "no_confirmed_provider_occurrence",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-434-bolivia-scene-1757-terminal-no-occurrence-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-434-scene-1757-no-confirmed-provider-occurrence.jsonl",
+      "rawSha256": null
+    },
+    {
+      "sceneId": 1758,
+      "result": "no_confirmed_provider_occurrence",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-434-bolivia-scene-1758-terminal-no-occurrence-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-434-scene-1758-no-confirmed-provider-occurrence.jsonl",
+      "rawSha256": null
+    },
+    {
+      "sceneId": 1759,
+      "result": "no_confirmed_provider_occurrence",
+      "acceptedCanonical": false,
+      "checkpoint": "assets/lore/starlight-era/batch-434-bolivia-scene-1759-terminal-no-occurrence-checkpoint.json",
+      "occurrence": "progress-reports/codex-generated-media/provider-occurrences/batch-434-scene-1759-no-confirmed-provider-occurrence.jsonl",
+      "rawSha256": null
+    }
+  ],
+  "unresolvedReason": "Meta AI produced no confirmed provider chat, response, refusal, or bytes for any scene after the authorized initial dispatch and one complete fresh-tab recovery. No scene may be resent without a newly prepared authoritative bounded-retry checkpoint.",
+  "retriesAuthorized": [],
+  "closedSceneIds": [
+    1756,
+    1757,
+    1758,
+    1759
+  ],
+  "browserTabsRemaining": 0,
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 4,
+    "threshold": 10,
+    "due": false,
+    "cyclesRemaining": 6,
+    "outcome": "not_due_no_publish"
+  }
+}

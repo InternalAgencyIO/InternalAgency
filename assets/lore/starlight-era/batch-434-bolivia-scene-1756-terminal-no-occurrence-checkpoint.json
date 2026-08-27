@@ -1,0 +1,54 @@
+{
+  "schema": "internalagency.starlight.scene-terminal-checkpoint.v1",
+  "batchId": 434,
+  "country": "Bolivia",
+  "sceneId": 1756,
+  "status": "closed_no_confirmed_provider_occurrence",
+  "recordedAtUtc": "2026-08-27T15:27:54.654Z",
+  "providerUrl": null,
+  "observedUrl": "https://www.meta.ai/",
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-434-scene-1756-meta-no-response-evidence.txt",
+  "providerOccurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-434-scene-1756-no-confirmed-provider-occurrence.jsonl",
+  "rawBytesAvailable": false,
+  "acceptedCanonical": false,
+  "retryAuthorized": false,
+  "promptPath": "tmp/world-195x4/batch-434/scene-1756-prompt.txt",
+  "preparedPromptSha256": "1505A806EB4B621BEF72FFFFBECEF177617A409876825A5CE756CE8018B70321",
+  "browserCanonicalPromptSha256": "3393A91103A29A2E463C0FF6BAF13F4758592B5DBC3212A5C0AF81FDF32E0A9F",
+  "cameraRoll": {
+    "roll": 54,
+    "framing": "INTERMEDIATE"
+  },
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "attempts": [
+    {
+      "kind": "authorized_initial_send",
+      "sendClickConfirmedAtUtc": "2026-08-27T15:18:49.846Z",
+      "providerOccurrenceConfirmed": false
+    },
+    {
+      "kind": "initial_after_full_tab_reset_no_occurrence",
+      "sendClickConfirmedAtUtc": "2026-08-27T15:22:09.229Z",
+      "providerOccurrenceConfirmed": false
+    }
+  ]
+}
