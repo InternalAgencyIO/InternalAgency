@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "scene_terminal_capture",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 438,
+  "country": "Haiti",
+  "sceneId": 1772,
+  "status": "closed_hard_unusable",
+  "accepted": false,
+  "providerUrl": "https://www.meta.ai/prompt/a91be848-7077-48cd-b507-ce6be4eea685",
+  "promptSha256": "0CCBB20928148D32A59C93E199657EAD0C81DA7B38C9E1B6A82939C9BAE12194",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRoll": 20,
+  "requiredFraming": "EXTREME CLOSE",
+  "mediaSha256": "0bf07361b75349a1aff2604624b432f458ad664c398813a7214774b3758a3b7d",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-438-scene-1772-output-hard-unusable.jsonl",
+  "rawPath": "assets/lore/starlight-era/1772-haiti-port-au-prince-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/0b/0bf07361b75349a1aff2604624b432f458ad664c398813a7214774b3758a3b7d.webp",
+  "responsePath": "progress-reports/codex-generated-media/provider-responses/batch-438-scene-1772-meta-response.txt",
+  "visualQa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "reason": "Camera-roll failure: roll 20 required a true shoulder-up extreme close cropped at shoulders or uppermost chest; the render extends through substantial bodice and mid-torso.",
+    "passes": [
+      "vertical 9:16",
+      "exactly four distinct adult women",
+      "Port-au-Prince bay context is legible",
+      "no hands, beacon, or footwear visible",
+      "public-safe opaque couture"
+    ],
+    "fails": [
+      "strict shoulder-up extreme-close framing"
+    ]
+  },
+  "terminalObservedAtUtc": "2026-08-27T17:03:09.391Z",
+  "checkpointedAtUtc": "2026-08-27T17:05:33.961Z",
+  "noRetryAuthorized": true
+}

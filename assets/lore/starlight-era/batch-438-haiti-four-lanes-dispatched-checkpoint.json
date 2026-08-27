@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four_lanes_dispatched",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 438,
+  "country": "Haiti",
+  "sourceBatchId": 367,
+  "status": "dispatched_in_flight",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "sceneId": 1772,
+      "sourceSceneId": 1488,
+      "location": "Port-au-Prince Bay overlook",
+      "cameraRoll": 20,
+      "framing": "EXTREME CLOSE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1772-prompt.txt",
+      "promptSha256": "0CCBB20928148D32A59C93E199657EAD0C81DA7B38C9E1B6A82939C9BAE12194",
+      "promptBytes": 6164,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "31",
+      "promptHashVerifiedBeforeSend": true,
+      "sendClickedAtUtc": "2026-08-27T16:59:48.455Z",
+      "providerUrl": "https://www.meta.ai/prompt/a91be848-7077-48cd-b507-ce6be4eea685",
+      "attempt": "initial"
+    },
+    {
+      "sceneId": 1773,
+      "sourceSceneId": 1489,
+      "location": "Citadelle Laferriere mountain terrace",
+      "cameraRoll": 29,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1773-prompt.txt",
+      "promptSha256": "F1EDF76D1341292251CFCF78305169416AEBFCE6CD54240CFE6C959FA3327534",
+      "promptBytes": 6463,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "32",
+      "promptHashVerifiedBeforeSend": true,
+      "sendClickedAtUtc": "2026-08-27T16:59:48.455Z",
+      "providerUrl": "https://www.meta.ai/prompt/0bc02961-c83b-4090-9598-7fde3b06d491",
+      "attempt": "initial"
+    },
+    {
+      "sceneId": 1774,
+      "sourceSceneId": 1490,
+      "location": "Jacmel and Bassin Bleu overlook",
+      "cameraRoll": 56,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1774-prompt.txt",
+      "promptSha256": "39F61284555C213FA4CE3D444D39ED4E23B297BEFD7894CBB0EA3A5817D7B212",
+      "promptBytes": 6873,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "33",
+      "promptHashVerifiedBeforeSend": true,
+      "sendClickedAtUtc": "2026-08-27T16:59:48.455Z",
+      "providerUrl": "https://www.meta.ai/prompt/797705a1-6131-4c11-9756-fa767578f313",
+      "attempt": "initial"
+    },
+    {
+      "sceneId": 1775,
+      "sourceSceneId": 1491,
+      "location": "Ile-a-Vache overlook",
+      "cameraRoll": 89,
+      "framing": "EXTREME WIDE",
+      "promptPath": "tmp/world-195x4/batch-438/scene-1775-prompt.txt",
+      "promptSha256": "F429AF2BF7FA5F53E4C3A543CB8F73D8F78CDF1C808F380F37DE15967871E328",
+      "promptBytes": 6322,
+      "uploadComplete": true,
+      "sendClicked": true,
+      "tabId": "34",
+      "promptHashVerifiedBeforeSend": true,
+      "sendClickedAtUtc": "2026-08-27T16:59:48.455Z",
+      "providerUrl": "https://www.meta.ai/prompt/8c75b06c-2df9-481c-a51f-59f2a6233a17",
+      "attempt": "initial"
+    }
+  ],
+  "confirmation": {
+    "userConfirmedAtActionTime": true,
+    "userMessage": "confirmed go"
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 7,
+    "due": false
+  },
+  "checkpointedAtUtc": "2026-08-27T17:00:11.834Z"
+}
