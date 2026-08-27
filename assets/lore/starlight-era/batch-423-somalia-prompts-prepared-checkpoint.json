@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "prompts-prepared-awaiting-authorized-upload-and-send",
+  "createdAtUtc": "2026-08-27T04:53:17.623Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 423,
+  "country": "Somalia",
+  "scenes": [
+    1712,
+    1713,
+    1714,
+    1715
+  ],
+  "source": {
+    "batch": 352,
+    "scenes": [
+      1428,
+      1429,
+      1430,
+      1431
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-352-somalia-orbital-research-station-checkpoint.json",
+    "cinematicTheme": "orbital research-station couture"
+  },
+  "orderedReferences": [
+    {
+      "anchor": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "anchor": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "anchor": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraPolicy": {
+    "extremeClose": "1-20",
+    "intermediate": "21-80",
+    "extremeWide": "81-100"
+  },
+  "maleSelection": {
+    "key": "batch423-somalia-male-model-scene",
+    "fnv1a32": 152537944,
+    "modulo4": 0,
+    "selectedScene": 1712
+  },
+  "prompts": [
+    {
+      "scene": 1712,
+      "sourceScene": 1428,
+      "promptFile": "tmp/world-195x4/batch-423/scene-1712-prompt.txt",
+      "promptSha256": "5A66170ACE8E32F3787D0C326CECFCF49CC487CA6D98313D8F2824B9EEEE4917",
+      "promptLength": 4501,
+      "camera": {
+        "key": "batch423-somalia-scene1712-camera-closeness",
+        "fnv1a32": 2125250239,
+        "roll": 40,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-423|scene-1712|knee-high-wearers",
+        "fnv1a32": 3298089179,
+        "modulo6": 5,
+        "wearers": [
+          "Alia",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch423-somalia-scene1712-jealous-adult",
+        "fnv1a32": 3946627774,
+        "adult": "Alia"
+      },
+      "malePresent": true,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    },
+    {
+      "scene": 1713,
+      "sourceScene": 1429,
+      "promptFile": "tmp/world-195x4/batch-423/scene-1713-prompt.txt",
+      "promptSha256": "60B5C9A72935134CDE5AED6E322DBE6E5723F8DA6452B50FCFB564856E018428",
+      "promptLength": 4075,
+      "camera": {
+        "key": "batch423-somalia-scene1713-camera-closeness",
+        "fnv1a32": 4245125678,
+        "roll": 79,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-423|scene-1713|knee-high-wearers",
+        "fnv1a32": 4262731504,
+        "modulo6": 4,
+        "wearers": [
+          "Ellie",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch423-somalia-scene1713-jealous-adult",
+        "fnv1a32": 370265049,
+        "adult": "Ellie"
+      },
+      "malePresent": false,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    },
+    {
+      "scene": 1714,
+      "sourceScene": 1430,
+      "promptFile": "tmp/world-195x4/batch-423/scene-1714-prompt.txt",
+      "promptSha256": "81757D2A10074A09F883C87D06642CD5ECB4D8F0849F658D8974CE66EFE8B1BF",
+      "promptLength": 4004,
+      "camera": {
+        "key": "batch423-somalia-scene1714-camera-closeness",
+        "fnv1a32": 3343042541,
+        "roll": 42,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-423|scene-1714|knee-high-wearers",
+        "fnv1a32": 1920790357,
+        "modulo6": 1,
+        "wearers": [
+          "Radiance",
+          "Alia"
+        ]
+      },
+      "jealousy": {
+        "key": "batch423-somalia-scene1714-jealous-adult",
+        "fnv1a32": 3977628836,
+        "adult": "Radiance"
+      },
+      "malePresent": false,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    },
+    {
+      "scene": 1715,
+      "sourceScene": 1431,
+      "promptFile": "tmp/world-195x4/batch-423/scene-1715-prompt.txt",
+      "promptSha256": "0D609E93CF2AA749F6C3679C41AEFBEA894D12F6C8CBF821310F2021B6CE30EA",
+      "promptLength": 4054,
+      "camera": {
+        "key": "batch423-somalia-scene1715-camera-closeness",
+        "fnv1a32": 796659692,
+        "roll": 93,
+        "framing": "extreme-wide"
+      },
+      "raze": {
+        "key": "RAZE|batch-423|scene-1715|knee-high-wearers",
+        "fnv1a32": 699912618,
+        "modulo6": 0,
+        "wearers": [
+          "Radiance",
+          "Ellie"
+        ]
+      },
+      "jealousy": {
+        "key": "batch423-somalia-scene1715-jealous-adult",
+        "fnv1a32": 1052329127,
+        "adult": "AI ECE"
+      },
+      "malePresent": false,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    }
+  ],
+  "laneCount": 4,
+  "acceptedCount": 0,
+  "confirmedProviderChatCount": 0,
+  "duplicateDispatchCount": 0,
+  "initialDispatchAuthorized": true,
+  "boundedRetryAuthorized": false,
+  "retryCount": 0,
+  "standingUploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.0694990Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.0694990Z",
+    "activeAtPreparation": true
+  },
+  "send": {
+    "status": "awaiting-action-time-confirmation",
+    "typingStatus": "not-started",
+    "clickCount": 0
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 2,
+    "publishDue": false
+  }
+}
