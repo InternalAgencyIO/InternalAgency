@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "meta-prompts-prepared",
+  "checkpointedAtUtc": "2026-08-27T04:05:01.069Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPr": 13,
+  "batch": 421,
+  "country": "Djibouti",
+  "sceneNumbers": [
+    1704,
+    1705,
+    1706,
+    1707
+  ],
+  "sourcePrecedent": {
+    "batch": 350,
+    "checkpoint": "assets/lore/starlight-era/batch-350-djibouti-polar-airship-checkpoint.json",
+    "sourceScenes": [
+      1420,
+      1421,
+      1422,
+      1423
+    ]
+  },
+  "authority": {
+    "precedingCheckpoint": "assets/lore/starlight-era/batch-420-vatican-city-closed-unresolved-no-accepted-checkpoint.json",
+    "neverReopenScenes": [
+      1700,
+      1701,
+      1702,
+      1703
+    ],
+    "initialFourLaneBankOnly": true
+  },
+  "orderedFaceReferences": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "maleSelection": {
+    "key": "batch421-djibouti-male-model-scene",
+    "fnv1a32": 2934368056,
+    "modulo4": 0,
+    "selectedScene": 1704
+  },
+  "scenes": [
+    {
+      "scene": 1704,
+      "sourceScene": 1420,
+      "camera": {
+        "key": "batch421-djibouti-scene1704-camera-closeness",
+        "fnv1a32": 713444738,
+        "roll": 39,
+        "band": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-421|scene-1704|knee-high-wearers",
+        "fnv1a32": 1944091870,
+        "modulo6": 4,
+        "wearers": [
+          "Ellie",
+          "AI ECE"
+        ],
+        "hosieryFree": [
+          "Radiance",
+          "Alia"
+        ]
+      },
+      "jealousWoman": "AI ECE",
+      "maleModel": true,
+      "promptFile": "tmp/world-195x4/batch-421/scene-1704-prompt.txt",
+      "promptSha256": "63769D6B00A244ABB3CB753ECA14988EFB9879DD29E21ED5BD7A2CA6DAF1DB37",
+      "fallbackPromptFile": "tmp/world-195x4/batch-421/scene-1704-fallback-prompt.txt",
+      "fallbackPromptSha256": "0F68E6836DD4560BA8B9B4C48A09002123D6C66D955CFED072C8A813C2889753",
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false
+    },
+    {
+      "scene": 1705,
+      "sourceScene": 1421,
+      "camera": {
+        "key": "batch421-djibouti-scene1705-camera-closeness",
+        "fnv1a32": 4178634291,
+        "roll": 92,
+        "band": "extreme-wide"
+      },
+      "raze": {
+        "key": "RAZE|batch-421|scene-1705|knee-high-wearers",
+        "fnv1a32": 1014993385,
+        "modulo6": 1,
+        "wearers": [
+          "Radiance",
+          "Alia"
+        ],
+        "hosieryFree": [
+          "Ellie",
+          "AI ECE"
+        ]
+      },
+      "jealousWoman": "Ellie",
+      "maleModel": false,
+      "promptFile": "tmp/world-195x4/batch-421/scene-1705-prompt.txt",
+      "promptSha256": "63A237007B3F143338120E24EBEB5AA672779FB6C2267B97D82489DF56B640A1",
+      "fallbackPromptFile": "tmp/world-195x4/batch-421/scene-1705-fallback-prompt.txt",
+      "fallbackPromptSha256": "D9AA9B6E9FAEF580AB61DA127E9FC6E18AD2BE84F138F1077C058A4EFA00D378",
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false
+    },
+    {
+      "scene": 1706,
+      "sourceScene": 1422,
+      "camera": {
+        "key": "batch421-djibouti-scene1706-camera-closeness",
+        "fnv1a32": 3082776924,
+        "roll": 25,
+        "band": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-421|scene-1706|knee-high-wearers",
+        "fnv1a32": 1629540672,
+        "modulo6": 0,
+        "wearers": [
+          "Radiance",
+          "Ellie"
+        ],
+        "hosieryFree": [
+          "Alia",
+          "AI ECE"
+        ]
+      },
+      "jealousWoman": "Alia",
+      "maleModel": false,
+      "promptFile": "tmp/world-195x4/batch-421/scene-1706-prompt.txt",
+      "promptSha256": "34043C46ECD1646DB2FBEC7E7505ABF82B576E8F4EB271FDC1E6B03D07BAD198",
+      "fallbackPromptFile": "tmp/world-195x4/batch-421/scene-1706-fallback-prompt.txt",
+      "fallbackPromptSha256": "710499ABF998087DA1EA9D89A6331012431675239C0E2C872064CD16BDC9E9BA",
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false
+    },
+    {
+      "scene": 1707,
+      "sourceScene": 1423,
+      "camera": {
+        "key": "batch421-djibouti-scene1707-camera-closeness",
+        "fnv1a32": 606286877,
+        "roll": 78,
+        "band": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-421|scene-1707|knee-high-wearers",
+        "fnv1a32": 3380502891,
+        "modulo6": 3,
+        "wearers": [
+          "Ellie",
+          "Alia"
+        ],
+        "hosieryFree": [
+          "Radiance",
+          "AI ECE"
+        ]
+      },
+      "jealousWoman": "Radiance",
+      "maleModel": false,
+      "promptFile": "tmp/world-195x4/batch-421/scene-1707-prompt.txt",
+      "promptSha256": "992CE63D6B4D7188E90FF9A026D687C0EC9A7FACA0B3038337E33A1B0638F137",
+      "fallbackPromptFile": "tmp/world-195x4/batch-421/scene-1707-fallback-prompt.txt",
+      "fallbackPromptSha256": "0B64E251E364C4368A45D8AD9025A954BD676D39CCC3CC8A3A2BE965F4AE2376",
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false
+    }
+  ],
+  "safety": {
+    "clearlyAdultFictionalCast": true,
+    "publicSafeOpaque": true,
+    "weaponsForbidden": true,
+    "minorsForbidden": true,
+    "realPersonIdentityForbidden": true
+  },
+  "dispatchGuard": {
+    "uploadsAtPreparedSnapshot": 4,
+    "sendsAtPreparedSnapshot": 0,
+    "confirmedProviderChats": 0,
+    "promptTypingAwaitingSeparateActionTimeConfirmation": true,
+    "sendRequiresSeparateActionTimeConfirmation": true
+  }
+}
