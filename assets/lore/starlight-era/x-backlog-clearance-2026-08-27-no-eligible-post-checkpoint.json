@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "status": "terminal-no-eligible-post",
+  "requestedAtUtc": "2026-08-27T15:38:02.0819742Z",
+  "instruction": "go X uploads clear backlog authorized for all posts",
+  "browser": {
+    "browser": "Codex in-app browser",
+    "url": "https://x.com/dogramaci",
+    "title": "Raymond R. (@dogramaci) / X",
+    "signedInAccount": "@dogramaci",
+    "evidence": [
+      "Account menu displays @dogramaci",
+      "Profile navigation targets /dogramaci",
+      "Edit profile control visible"
+    ]
+  },
+  "authoritativeLedgers": [
+    "assets/lore/starlight-era/world-x-publish-ledger.json",
+    "assets/lore/starlight-era/x-draft-ledger.json",
+    "assets/lore/starlight-era/x-publish-ledger.json",
+    "progress-reports/codex-generated-media/manifest.jsonl"
+  ],
+  "reconciliation": {
+    "pendingPost": null,
+    "preparedPostQueueCount": 0,
+    "ledgerEligibleBacklogRemaining": 0,
+    "unpublishedAcceptedCanonicalCount": 1,
+    "unpublishedAcceptedCanonical": [
+      {
+        "batch": 433,
+        "country": "Burundi",
+        "sceneId": 1753,
+        "result": "accepted_soft_deviation",
+        "canonicalAssetPath": "assets/lore/starlight-era/1753-burundi-gitega-hill-terrace-meta-raw.png",
+        "sha256": "0c6035c910ae01617c9334c87b461a9b6f95b30cd363858f3c906f224769434c",
+        "width": 1080,
+        "height": 1920
+      }
+    ],
+    "bindingPostContract": "Exactly two accepted unposted images from one country plus one accepted unposted image from a different country",
+    "eligibilityResult": "No compliant 2+1 country pair exists"
+  },
+  "actions": {
+    "mediaUploads": 0,
+    "postClicks": 0,
+    "publicPostUrls": [],
+    "reason": "Publishing the lone Burundi image would violate the binding 2+1 country-pair contract and duplicate-prevention gate"
+  },
+  "cadence": {
+    "completedCountryCyclesSinceLastX": 4,
+    "requiredCountryCycles": 10,
+    "resetPerformed": false
+  },
+  "nextAllowedAction": "Accumulate at least one additional accepted Burundi image and one accepted image from a different country, or another complete eligible 2+1 combination, then reconcile again before any upload."
+}
