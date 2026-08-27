@@ -3251,6 +3251,126 @@
         "No translation model ran and no native-language approval is claimed.",
         "This record grants no deployment, funding, signing, broadcast, Devnet, or Mainnet authority."
       ]
+    },
+    {
+      "id": "2026-08-27-radiance-proof-claim-refresh-v1",
+      "status": "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD",
+      "recordedAt": "2026-08-27T00:18:21Z",
+      "timeBasis": "EVIDENCE_MANIFEST_RECORDED_AT_UTC_BEFORE_PUBLICATION_COMMIT",
+      "evidenceMode": "APPEND_ONLY_ACTIVE_CONTENT_V1",
+      "baselineCommit": "9132443dc04c37a8ce1aa3eab15086b0d53ccb7f",
+      "outputCommit": "9132443dc04c37a8ce1aa3eab15086b0d53ccb7f",
+      "model": {
+        "used": false,
+        "provider": "none",
+        "identifier": "none",
+        "revision": null,
+        "weightsPublishedInRepository": false,
+        "scope": "No translation model ran. This run records the corrected Radiance proof-page English status as inactive pending work and refreshes only fail-closed localization evidence."
+      },
+      "runtime": {
+        "operatingSystem": "Windows local workstation",
+        "node": "24.19.0",
+        "absolutePathsPublished": false
+      },
+      "generation": {
+        "entrypoint": "No catalog generation; pending visible-source and active-report evidence refresh only",
+        "refreshSourceMatches": false,
+        "translationAlgorithmVersion": 2,
+        "sourceMatchRefreshAlgorithmVersion": 1,
+        "staticCommittedOutput": true,
+        "deterministicStages": [
+          "scripts/capture-pending-i18n-source.mjs",
+          "scripts/validate-pending-i18n-source.mjs",
+          "scripts/generate-localization-qa-report.mjs",
+          "scripts/check-localization-active-artifact-drift.mjs",
+          "scripts/validate-localization-provenance.mjs"
+        ],
+        "protectedClasses": [
+          "URLs",
+          "handles",
+          "token tickers",
+          "canonical 64-character hashes",
+          "time-gate tokens",
+          "numeric and unit tokens",
+          "protocol terms",
+          "markup and interpolation tokens"
+        ]
+      },
+      "scope": {
+        "localeCount": 50,
+        "canonicalStrings": 985,
+        "canonicalRoutes": 25,
+        "sourceEqualCandidatesRefreshed": 0
+      },
+      "commitChain": [
+        {
+          "role": "radiance-proof-claim-pending-capture-source-baseline",
+          "commit": "9132443dc04c37a8ce1aa3eab15086b0d53ccb7f"
+        }
+      ],
+      "artifacts": [
+        { "path": "app/i18n/messages.json", "sha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f", "bytes": 5917932 },
+        { "path": "app/i18n/pending-visible-source.json", "sha256": "a8a29e4d41803e8df1fb4970d918386ca5848104f043c8277770a2e85301212b", "bytes": 19928 },
+        { "path": "app/i18n/reviewed-localization-policy.json", "sha256": "66662977cf8867f6a7aba1dfe6e5126e6fd55b22a43aae226850bf5fbbeca358", "bytes": 1507 },
+        { "path": "app/i18n/language-render-evidence.v1.json", "sha256": "e943ba3ef561bff028d13f983730b28c0352fc679b1e1821903783afe26c23b6", "bytes": 187556 },
+        { "path": "public/audits/localization-qa-20260803/language-qa-scorecard.json", "sha256": "40533bb68f0c7de430730a9fddb7bc32e35b7d9c02152c41eadf366b39e69cd2", "bytes": 1572071 },
+        { "path": "public/audits/localization-qa-20260803/hold-remediation-ledger.json", "sha256": "75339c3e7b00eb41d2d54aad3bd04a83bbc6273e59fbc54acbab3892ecddbadd", "bytes": 3407 },
+        { "path": "public/audits/localization-qa-20260803/report.json", "sha256": "ca705d6961ccde93995b2bfd6fcc5db4faa67df52347f3396eb9600d4e09f1bc", "bytes": 36918 },
+        { "path": "public/audits/localization-qa-20260803/README.md", "sha256": "9d78304dbc9f47d84fa0b847cc235ba49595167ed0d86701bf28170d449f67ab", "bytes": 6324 },
+        { "path": "public/audits/localization-qa-20260803/TRANSLATION-PROCESS.md", "sha256": "4d9200642eb504fe569e0fe07813839b6cfa1b90eff5babbdc87242426758586", "bytes": 15582 },
+        { "path": "public/audits/localization-qa-20260808/README.md", "sha256": "3891a6fb9b0d6ad191d23724bd6101dfe293b0c5ea08ca7884f1fcb77b9ef013", "bytes": 1343 },
+        { "path": "scripts/check-localization-active-artifact-drift.mjs", "sha256": "db47c6a6c0c24cb1041ec773866a2d0dd5b13f1e0ff67ec615d30e6b3c0a0f01", "bytes": 2295 },
+        { "path": "scripts/test-localization-active-artifact-drift-regression.mjs", "sha256": "8563a18821b573fea990de424b2fbae289d971f34248444181d0b2607a28b45d", "bytes": 1692 },
+        { "path": "scripts/generate-localization-qa-report.mjs", "sha256": "c27a530840b7a594001fcc04a47317ea527fba03557a97a8be18d8cbe2d57d78", "bytes": 18695 },
+        { "path": "scripts/validate-localization-provenance.mjs", "sha256": "74819b22cd7c51cad2eda52b2597558e3314104f9cb6889207bec5830bd923b6", "bytes": 21892 },
+        { "path": "scripts/test-localization-provenance-regression.mjs", "sha256": "36cc4a7489322d4bd41f9862a4cb70ea24690ed3749419052ce0fea9d35f2ed3", "bytes": 6484 },
+        { "path": "public/audits/localization-qa-20260808/manifest.json", "sha256": "bbcf33a0e60a9d8762c41b59ef98336f6d8de30511422e51894ec7f2ed535085", "bytes": 4059 }
+      ],
+      "outcomes": {
+        "changedLocaleEntries": 0,
+        "sourceEqualDraftReplacements": 0,
+        "literalOnlyRestorations": 0,
+        "otherDeterministicPipelineChanges": 0,
+        "removedCanonicalSourceKeys": 0,
+        "addedCanonicalSourceKeys": 0,
+        "removedLocaleEntries": 0,
+        "addedLocaleEntries": 0,
+        "corruptedSha256ValuesBefore": 0,
+        "corruptedSha256ValuesAfter": 0,
+        "unexplainedMutations": 0,
+        "missingOrEmptyEntries": 0,
+        "pendingVisibleSourceStrings": 87,
+        "reviewedRuntimeCells": 0,
+        "canonicalFallbackCells": 48265,
+        "renderChecks": {
+          "PASS": 1250,
+          "FAIL": 0
+        },
+        "scorecard": {
+          "PASS": 4700,
+          "FAIL": 0,
+          "HOLD": 300,
+          "NOT_RUN": 0,
+          "externalEvidenceHold": 300,
+          "heuristicEditorialHold": 0
+        }
+      },
+      "validation": {
+        "activeArtifactPreflight": "PASS_EXACT_REPORT_BOUND_BYTES",
+        "pendingVisibleSource": "PASS_87_STRINGS_15_ROUTES_RUNTIME_INACTIVE",
+        "catalogQa": "PASS_GLOBAL_FAIL_CLOSED_50_LOCALES_NO_CATALOG_CHANGE",
+        "runtimeLocalization": "ONE_SOURCE_49_HOLD_ZERO_ACTIVATED_TRANSLATIONS",
+        "nativeLanguageReview": "HOLD",
+        "mainnetLaunch": "UNSCHEDULED_HOLD"
+      },
+      "limitations": [
+        "The 87 pending English source strings are not active non-English translations and require accountable review before activation.",
+        "All 49 non-English locales remain canonical English fallback with zero reviewed runtime cells.",
+        "The 300 language QA HOLD results still require external evidence and accountable native review.",
+        "No translation model ran and no native-language approval is claimed.",
+        "This record grants no deployment, funding, signing, broadcast, Devnet, or Mainnet authority."
+      ]
     }
   ]
 }

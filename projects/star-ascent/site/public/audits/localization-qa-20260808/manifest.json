@@ -1,11 +1,11 @@
 {
   "schema": "iat-localization-active-artifact-evidence/v1",
-  "runId": "2026-08-26-proof-verify-pending-visible-source-refresh-v1",
-  "recordedAt": "2026-08-26T19:16:46Z",
+  "runId": "2026-08-27-radiance-proof-claim-refresh-v1",
+  "recordedAt": "2026-08-27T00:18:21Z",
   "status": "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD",
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "sourceBinding": {
-    "captureCommit": "7836e925096d56ab2541aa2c106c287d4a99f082",
+    "captureCommit": "9132443dc04c37a8ce1aa3eab15086b0d53ccb7f",
     "evidenceMode": "APPEND_ONLY_ACTIVE_CONTENT_V1"
   },
   "localizationState": {
@@ -27,8 +27,8 @@
     },
     {
       "path": "app/i18n/pending-visible-source.json",
-      "sha256": "c2acea578714a7f737d74f54c25dc1f768b4a04b33349d5713ddf1f73ae1cc8e",
-      "bytes": 19915
+      "sha256": "a8a29e4d41803e8df1fb4970d918386ca5848104f043c8277770a2e85301212b",
+      "bytes": 19928
     },
     {
       "path": "app/i18n/reviewed-localization-policy.json",
@@ -52,12 +52,12 @@
     },
     {
       "path": "public/audits/localization-qa-20260803/report.json",
-      "sha256": "f0668a00ce5f79decaef2311ba74828ff1012c90c737c615a2d07f915c19ca4b",
-      "bytes": 36933
+      "sha256": "ca705d6961ccde93995b2bfd6fcc5db4faa67df52347f3396eb9600d4e09f1bc",
+      "bytes": 36918
     },
     {
       "path": "public/audits/localization-qa-20260803/README.md",
-      "sha256": "0e2f3dad815462d873d58fc6475aa31e76b6157b9c5e1351a8643692655a7ffa",
+      "sha256": "9d78304dbc9f47d84fa0b847cc235ba49595167ed0d86701bf28170d449f67ab",
       "bytes": 6324
     },
     {
@@ -67,8 +67,8 @@
     },
     {
       "path": "public/audits/localization-qa-20260808/README.md",
-      "sha256": "b4bc78b8e224f0f53c111c939910f1254321d1bedaf1d43d2029d078edb3d88c",
-      "bytes": 1349
+      "sha256": "3891a6fb9b0d6ad191d23724bd6101dfe293b0c5ea08ca7884f1fcb77b9ef013",
+      "bytes": 1343
     },
     {
       "path": "scripts/check-localization-active-artifact-drift.mjs",
@@ -82,8 +82,8 @@
     },
     {
       "path": "scripts/generate-localization-qa-report.mjs",
-      "sha256": "33f9809c8b042ddd25f83ef58bb6abcaac78595694db1a3ab7a65975b5f00f4f",
-      "bytes": 18710
+      "sha256": "c27a530840b7a594001fcc04a47317ea527fba03557a97a8be18d8cbe2d57d78",
+      "bytes": 18695
     },
     {
       "path": "scripts/validate-localization-provenance.mjs",
