@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "batchId": 436,
+  "country": "South Sudan",
+  "state": "four_lanes_dispatched_monitor_only",
+  "recordedAtUtc": "2026-08-27T16:25:00.991Z",
+  "provider": "Meta AI",
+  "dispatchPolicy": {
+    "initialDispatchOnly": true,
+    "duplicateDispatches": 0,
+    "resendAuthorized": false,
+    "monitorOnly": true
+  },
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "sceneId": 1764,
+      "sourceSceneId": 1480,
+      "cameraRoll": 64,
+      "framing": "INTERMEDIATE",
+      "promptSha256": "606D834919D0AA6EC163508049127E8A926FFBD60DB646632CA71DCD0AC5E3AC",
+      "tabId": 23,
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:23:15.651Z",
+      "providerUrl": "https://www.meta.ai/prompt/a4427eac-6c1d-4798-ae25-bd54479c46e7"
+    },
+    {
+      "sceneId": 1765,
+      "sourceSceneId": 1481,
+      "cameraRoll": 42,
+      "framing": "INTERMEDIATE",
+      "promptSha256": "BBECB925B031D8E15DC1A0512B68E9D987CAAC310CAC044582D75A709A0C6488",
+      "tabId": 24,
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:23:15.651Z",
+      "providerUrl": "https://www.meta.ai/prompt/c5a662e1-2a77-41c3-b3a4-58ae64640dca"
+    },
+    {
+      "sceneId": 1766,
+      "sourceSceneId": 1482,
+      "cameraRoll": 3,
+      "framing": "EXTREME CLOSE",
+      "promptSha256": "6FD9A80CCD19265E751CE5D3C99A77DC335B08E30E9E6AF0723B2F3C123A3794",
+      "tabId": 25,
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:23:15.651Z",
+      "providerUrl": "https://www.meta.ai/prompt/d5a67ff8-aa12-43f3-8cd7-1dc728792e0e"
+    },
+    {
+      "sceneId": 1767,
+      "sourceSceneId": 1483,
+      "cameraRoll": 83,
+      "framing": "EXTREME WIDE",
+      "promptSha256": "CF3F16E3DBAEF72A025385BEC976B09C94E802B25F0D5CA4703EFAD3437D879C",
+      "tabId": 26,
+      "sendClicked": true,
+      "sendClickedAtUtc": "2026-08-27T16:23:15.651Z",
+      "providerUrl": "https://www.meta.ai/prompt/ee0ad541-059e-4665-9976-3b0ca1e0d367"
+    }
+  ]
+}
