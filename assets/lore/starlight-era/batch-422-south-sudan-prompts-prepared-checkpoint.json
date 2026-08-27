@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "prompts-prepared-awaiting-authorized-upload-and-send",
+  "createdAtUtc": "2026-08-27T04:26:59.8184441Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 422,
+  "country": "South Sudan",
+  "scenes": [
+    1708,
+    1709,
+    1710,
+    1711
+  ],
+  "source": {
+    "batch": 351,
+    "scenes": [
+      1424,
+      1425,
+      1426,
+      1427
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-351-south-sudan-orbital-research-station-checkpoint.json",
+    "cinematicTheme": "orbital research-station couture"
+  },
+  "orderedReferences": [
+    {
+      "anchor": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "anchor": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "anchor": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraPolicy": {
+    "extremeClose": "1-20",
+    "intermediate": "21-80",
+    "extremeWide": "81-100"
+  },
+  "maleSelection": {
+    "key": "batch422-south-sudan-male-model-scene",
+    "fnv1a32": 1333059762,
+    "modulo4": 2,
+    "selectedScene": 1710
+  },
+  "prompts": [
+    {
+      "scene": 1708,
+      "sourceScene": 1424,
+      "promptFile": "tmp/world-195x4/batch-422/scene-1708-prompt.txt",
+      "promptSha256": "49023104FA7694B299F8A87E4DCB27381208A5A4DB91B3C636005ECBC8F20EA9",
+      "camera": {
+        "key": "batch422-south-sudan-scene1708-camera-closeness",
+        "fnv1a32": 532928848,
+        "roll": 49,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-422|scene-1708|knee-high-wearers",
+        "fnv1a32": 2314579401,
+        "modulo6": 3,
+        "wearers": [
+          "Ellie",
+          "Alia"
+        ]
+      },
+      "jealousy": {
+        "key": "batch422-south-sudan-scene1708-jealous-adult",
+        "fnv1a32": 4117488123,
+        "adult": "AI ECE"
+      },
+      "malePresent": false,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    },
+    {
+      "scene": 1709,
+      "sourceScene": 1425,
+      "promptFile": "tmp/world-195x4/batch-422/scene-1709-prompt.txt",
+      "promptSha256": "89960C1A17AD37D6C9ABA7F6EB07EA11B3CB8362D82AB87EB09754F3B3CBFB3B",
+      "camera": {
+        "key": "batch422-south-sudan-scene1709-camera-closeness",
+        "fnv1a32": 1620756001,
+        "roll": 2,
+        "framing": "extreme-close"
+      },
+      "raze": {
+        "key": "RAZE|batch-422|scene-1709|knee-high-wearers",
+        "fnv1a32": 2490686,
+        "modulo6": 2,
+        "wearers": [
+          "Radiance",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch422-south-sudan-scene1709-jealous-adult",
+        "fnv1a32": 1033326072,
+        "adult": "Radiance"
+      },
+      "malePresent": false,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    },
+    {
+      "scene": 1710,
+      "sourceScene": 1426,
+      "promptFile": "tmp/world-195x4/batch-422/scene-1710-prompt.txt",
+      "promptSha256": "97068C0474D346440D3B662AFDF24D98D1BA4E78869E1C21709257DD6E56B99F",
+      "camera": {
+        "key": "batch422-south-sudan-scene1710-camera-closeness",
+        "fnv1a32": 2526085979,
+        "roll": 80,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-422|scene-1710|knee-high-wearers",
+        "fnv1a32": 566718428,
+        "modulo6": 2,
+        "wearers": [
+          "Radiance",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch422-south-sudan-scene1710-jealous-adult",
+        "fnv1a32": 1562330986,
+        "adult": "Alia"
+      },
+      "malePresent": true,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    },
+    {
+      "scene": 1711,
+      "sourceScene": 1427,
+      "promptFile": "tmp/world-195x4/batch-422/scene-1711-prompt.txt",
+      "promptSha256": "5C0767547CAC0CF650D3BBE7EEF0961D1E9CC1A5704AC4254E735693BE7CFDBE",
+      "camera": {
+        "key": "batch422-south-sudan-scene1711-camera-closeness",
+        "fnv1a32": 2873633546,
+        "roll": 47,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-422|scene-1711|knee-high-wearers",
+        "fnv1a32": 4013408359,
+        "modulo6": 1,
+        "wearers": [
+          "Radiance",
+          "Alia"
+        ]
+      },
+      "jealousy": {
+        "key": "batch422-south-sudan-scene1711-jealous-adult",
+        "fnv1a32": 96109941,
+        "adult": "Ellie"
+      },
+      "malePresent": false,
+      "initialDispatchAuthorized": true,
+      "boundedRetryAuthorized": false,
+      "providerChat": null
+    }
+  ],
+  "laneCount": 4,
+  "acceptedCount": 0,
+  "confirmedProviderChatCount": 0,
+  "duplicateDispatchCount": 0,
+  "initialDispatchAuthorized": true,
+  "boundedRetryAuthorized": false,
+  "retryCount": 0,
+  "standingUploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.0694990Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.0694990Z",
+    "activeAtPreparation": true
+  },
+  "send": {
+    "status": "awaiting-action-time-confirmation",
+    "typingStatus": "not-started",
+    "clickCount": 0
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 1,
+    "publishDue": false
+  }
+}
