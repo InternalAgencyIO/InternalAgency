@@ -2,7 +2,7 @@
   "schema": "iat-pending-visible-i18n-source/v1",
   "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
   "sourceBinding": {
-    "commit": "7836e925096d56ab2541aa2c106c287d4a99f082",
+    "commit": "9132443dc04c37a8ce1aa3eab15086b0d53ccb7f",
     "activeCatalogSha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f"
   },
   "capture": {
@@ -517,13 +517,13 @@
       ]
     },
     {
-      "source": "Source-bound live runtime receipts plus required direct observers are still absent. The canonical gate remains nonexecuting and nonauthorizing HOLD.",
+      "source": "Source checks are separate from artifact proof. Preview and standalone media evidence remain blocked; no verified Radiance artifact is claimed.",
       "routes": [
         "/proof"
       ]
     },
     {
-      "source": "Source, preview, and standalone jobs stop at checkout because the repository Git LFS budget is exhausted; their tests never start.",
+      "source": "Source-bound live runtime receipts plus required direct observers are still absent. The canonical gate remains nonexecuting and nonauthorizing HOLD.",
       "routes": [
         "/proof"
       ]

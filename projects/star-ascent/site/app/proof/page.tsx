@@ -102,7 +102,7 @@ const progressRecords = [
   {
     state: "BLOCKED",
     label: "RADIANCE VISUAL CI",
-    detail: "Source, preview, and standalone jobs stop at checkout because the repository Git LFS budget is exhausted; their tests never start.",
+    detail: "Source checks are separate from artifact proof. Preview and standalone media evidence remain blocked; no verified Radiance artifact is claimed.",
     href: "https://github.com/InternalAgencyIO/InternalAgency/pull/14/checks",
   },
 ];
