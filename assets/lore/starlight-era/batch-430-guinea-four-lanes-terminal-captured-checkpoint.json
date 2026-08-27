@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "batch": 430,
+  "country": "Guinea",
+  "status": "four-lanes-terminal-captured",
+  "checkpointAtUtc": "2026-08-27T08:34:27.928Z",
+  "acceptedCount": 0,
+  "terminalCount": 4,
+  "rawOutputCount": 3,
+  "explicitNoByteCount": 1,
+  "scenes": [
+    {
+      "sceneId": 1740,
+      "status": "explicit-no-byte-refusal",
+      "sha256": null,
+      "disposition": "explicit-no-byte-refusal"
+    },
+    {
+      "sceneId": 1741,
+      "status": "hard-unusable",
+      "sha256": "751066bf50c0676cc633cb49df554a2c1fd66eefaf9ff6414ae84613afb4cc4b",
+      "disposition": "hard-unusable-camera-roll-and-beacon-ring-count-lock-fail"
+    },
+    {
+      "sceneId": 1742,
+      "status": "hard-unusable",
+      "sha256": "16f286d22be682f351d8dc69ffecddbab07411e65b753a04a37ed5705e70647c",
+      "disposition": "hard-unusable-camera-beacon-and-hand-inventory-lock-fail"
+    },
+    {
+      "sceneId": 1743,
+      "status": "hard-unusable",
+      "sha256": "1e4f80152ed011a6491c9b332971bb0d43593a764f3c3f09f9f9bdb48c6d441c",
+      "disposition": "hard-unusable-aspect-camera-beacon-and-hand-inventory-lock-fail"
+    }
+  ],
+  "providerChatUrls": {},
+  "duplicateDispatchCount": 0,
+  "retryAuthorized": false
+}

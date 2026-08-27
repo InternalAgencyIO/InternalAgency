@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "batch": 431,
+  "country": "Benin",
+  "status": "prompts-prepared-awaiting-fresh-browser-confirmation",
+  "preparedAtUtc": "2026-08-27T08:34:27.928Z",
+  "sourceBatch": 360,
+  "sourceCheckpoint": "assets/lore/starlight-era/batch-360-benin-orbital-spaceship-checkpoint.json",
+  "sourceSceneIds": [
+    1460,
+    1461,
+    1462,
+    1463
+  ],
+  "newSceneIds": [
+    1744,
+    1745,
+    1746,
+    1747
+  ],
+  "cameraRollMethod": "FNV-1a over the recorded batch431-benin scene camera-roll key, reduced modulo 100 and stored as 1-100; 1-20 extreme close, 21-80 intermediate, 81-100 extreme wide.",
+  "orderedIdentityReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "scenes": [
+    {
+      "sceneId": 1744,
+      "sourceSceneId": 1460,
+      "promptPath": "tmp/world-195x4/batch-431/scene-1744-prompt.txt",
+      "promptSha256": "07C2B20D0AB344C298C0AB23CC9779A2A14877D59FDD6327B7CC0CC98DC35C06",
+      "promptCharacterLength": 7473,
+      "cameraRollKey": "batch431-benin-scene1744-camera-roll",
+      "cameraRoll": 60,
+      "cameraClass": "INTERMEDIATE",
+      "landmark": "Cotonou lagoon, modern skyline, red-earth waterfront, palm-lined channel, and Atlantic horizon",
+      "razeKneeHighPair": [
+        "Radiance",
+        "Alia"
+      ],
+      "maleModelIncluded": true
+    },
+    {
+      "sceneId": 1745,
+      "sourceSceneId": 1461,
+      "promptPath": "tmp/world-195x4/batch-431/scene-1745-prompt.txt",
+      "promptSha256": "772ADB081D0B6565BD99C61028920201C0105E440AA5D16D3ADBB7F139E35678",
+      "promptCharacterLength": 7092,
+      "cameraRollKey": "batch431-benin-scene1745-camera-roll",
+      "cameraRoll": 77,
+      "cameraClass": "INTERMEDIATE",
+      "landmark": "Ganvie on Lake Nokoue, stilt houses, raised wooden walkways, open lagoon channels, and distant palms",
+      "razeKneeHighPair": [
+        "Ellie",
+        "AI ECE"
+      ],
+      "maleModelIncluded": false
+    },
+    {
+      "sceneId": 1746,
+      "sourceSceneId": 1462,
+      "promptPath": "tmp/world-195x4/batch-431/scene-1746-prompt.txt",
+      "promptSha256": "2D4C1939AEB60971D8E426DDC2BC053B6FF7F3FFFD37F63089B7A1A4D7AE8CCA",
+      "promptCharacterLength": 7021,
+      "cameraRollKey": "batch431-benin-scene1746-camera-roll",
+      "cameraRoll": 42,
+      "cameraClass": "INTERMEDIATE",
+      "landmark": "Tanougou Falls, layered sandstone, gallery forest, plunge pool, and Atacora savanna ridges",
+      "razeKneeHighPair": [
+        "Radiance",
+        "AI ECE"
+      ],
+      "maleModelIncluded": false
+    },
+    {
+      "sceneId": 1747,
+      "sourceSceneId": 1463,
+      "promptPath": "tmp/world-195x4/batch-431/scene-1747-prompt.txt",
+      "promptSha256": "085E0BD59E63CF8AC3029CB351C83B91326E52CD4C324BB9C3D6012E5E05B4BF",
+      "promptCharacterLength": 7023,
+      "cameraRollKey": "batch431-benin-scene1747-camera-roll",
+      "cameraRoll": 91,
+      "cameraClass": "EXTREME WIDE",
+      "landmark": "Grand-Popo Mono River estuary, Atlantic surf, sandbars, coconut palms, and broad lagoon channels",
+      "razeKneeHighPair": [
+        "Ellie",
+        "Alia"
+      ],
+      "maleModelIncluded": false
+    }
+  ],
+  "eligibleLaneCount": 4,
+  "provider": "Meta AI exclusive",
+  "dispatchGate": {
+    "standingUploadAuthorizationGrantedAtUtc": "2026-08-27T04:05:01.069499Z",
+    "standingUploadAuthorizationExpiresAtUtc": "2026-08-28T04:05:01.069499Z",
+    "freshImmediateBrowserConfirmationRequired": true,
+    "previousImmediateConfirmationConsumedByBatch430Guinea": true,
+    "uploadsAuthorizedNow": false,
+    "sendsAuthorizedNow": false,
+    "dispatchAuthorized": false
+  },
+  "noRetryAuthorized": true,
+  "duplicateDispatchCount": 0,
+  "nextCampaignPreparation": {
+    "batch": 432,
+    "country": "Rwanda",
+    "sourceBatch": 361,
+    "sourceSceneIds": [
+      1464,
+      1465,
+      1466,
+      1467
+    ],
+    "newSceneIds": [
+      1748,
+      1749,
+      1750,
+      1751
+    ]
+  }
+}
