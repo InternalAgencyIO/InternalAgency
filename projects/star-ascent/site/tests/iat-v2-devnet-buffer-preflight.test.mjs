@@ -748,6 +748,18 @@ exit 91
       '[[ "$(/usr/bin/id -u)" == "1000" ]] || hold "attended POSIX user identity drifted"',
       ":",
     );
+    if (process.platform !== "win32") {
+      const productionFdUidComparison = '"$fd_uid" != "1000"';
+      assert.equal(
+        fixtureHandoff.split(productionFdUidComparison).length - 1,
+        2,
+        "generated handoff fixture must retain exactly the two reviewed FD UID comparisons",
+      );
+      fixtureHandoff = fixtureHandoff.replaceAll(
+        productionFdUidComparison,
+        `"$fd_uid" != "${process.getuid()}"`,
+      );
+    }
     fixtureHandoff = fixtureHandoff.replaceAll("/usr/bin/sleep 10", ":");
     if (process.platform === "win32") {
       fixtureHandoff = fixtureHandoff.replaceAll('"$fd_mode" != "600"', '"$fd_mode" != "777"');

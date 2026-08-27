@@ -11,7 +11,7 @@ import {
   unlinkSync,
   writeFileSync,
 } from "node:fs";
-import { tmpdir } from "node:os";
+import { homedir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
 import {
@@ -24,7 +24,7 @@ import {
 const sentinelText = `${JSON.stringify(IAT_V2_HANDOFF_CAS_ROOT_SENTINEL, null, 2)}\n`;
 
 function provision() {
-  const parent = mkdtempSync(join(tmpdir(), "iat-v2-cas-parent-"));
+  const parent = mkdtempSync(join(homedir(), ".iat-v2-cas-parent-"));
   const root = join(parent, "devnet-buffer-handoff-v1");
   const attempts = join(root, "attempts");
   chmodSync(parent, 0o700);
