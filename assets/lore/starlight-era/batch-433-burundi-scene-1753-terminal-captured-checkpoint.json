@@ -1,0 +1,64 @@
+{
+  "schema": "internalagency.starlight.scene-terminal-checkpoint.v1",
+  "batchId": 433,
+  "country": "Burundi",
+  "sceneId": 1753,
+  "status": "closed_accepted_soft_deviation",
+  "recordedAtUtc": "2026-08-27T09:38:30.782Z",
+  "providerUrl": "https://www.meta.ai/prompt/bae99b88-7570-4788-b2c1-812807552648",
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-433-scene-1753-meta-response.txt",
+  "providerOccurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-433-scene-1753-output-accepted-soft-deviation.jsonl",
+  "rawBytesAvailable": true,
+  "rawByteLength": 2863620,
+  "rawSha256": "0c6035c910ae01617c9334c87b461a9b6f95b30cd363858f3c906f224769434c",
+  "blobPath": "progress-reports/codex-generated-media/blobs/0c/0c6035c910ae01617c9334c87b461a9b6f95b30cd363858f3c906f224769434c.png",
+  "mimeType": "image/png",
+  "dimensions": {
+    "width": 1080,
+    "height": 1920
+  },
+  "duplicateRelationships": [],
+  "visualQa": {
+    "sceneId": 1753,
+    "status": "accepted_soft_deviation",
+    "accepted": true,
+    "cameraRoll": 59,
+    "framing": "intermediate",
+    "summary": "Accepted canonical: exact four-adult quartet, strong Gitega highland-city geography, vertical head-to-mid-shin composition, differentiated couture, coherent eight-hand staging, and a single four-ring beacon. Soft deviation: the intermediate crop prevents full visual confirmation of every low footwear endpoint, with no visible contradiction.",
+    "failures": [],
+    "softDeviations": [
+      "Not every low footwear endpoint is fully visible because the authorized intermediate crop ends above the feet."
+    ],
+    "positives": [
+      "Vertical 9:16 output at 1080x1920.",
+      "Strong Gitega hill-terrace, highland city, red-clay roofs, green ridges, and storm geography.",
+      "Exactly four distinct public-safe adult women.",
+      "All eight hands are visibly attributable and poses are coherent.",
+      "Single polished-gold beacon with four countable cyan rings.",
+      "Camera framing matches roll 59 intermediate."
+    ]
+  },
+  "acceptedCanonical": true,
+  "canonicalAssetPath": "assets/lore/starlight-era/1753-burundi-gitega-hill-terrace-meta-raw.png",
+  "retryAuthorized": false,
+  "promptPath": "../../../../ChatGPT/RENDERS/tmp/world-195x4/batch-433/scene-1753-prompt.txt",
+  "preparedPromptSha256": "1A53817CAFB7A1E4626BAE5D4E2B9DAA9B485394FEE7B84AFB9FC5452B46142D",
+  "browserCanonicalPromptSha256": "D7879EE16CC57EEAC0E2D97E0A416A8768AA4CCEB505760667436AD70FEA38AD",
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+    }
+  ]
+}
