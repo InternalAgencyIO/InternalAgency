@@ -4,29 +4,54 @@ Status: source-only operator procedure. Mainnet remains **HOLD**. Do not begin u
 
 ## Fixed surfaces
 
-Start the local console from `projects/star-ascent/site` with `npm run iat:v2-admin`. Use only these localhost URLs:
+Use PowerShell for the attended Node commands. Before any attended command, set both variables to operator-reviewed absolute files; do not copy the placeholders literally:
+
+```powershell
+$NodeExe = 'C:\ABSOLUTE\PATH\TO\REVIEWED\node.exe'
+$NpmCli = 'C:\ABSOLUTE\PATH\TO\REVIEWED\npm-cli.js'
+(Get-Item -LiteralPath $NodeExe).FullName
+(Get-Item -LiteralPath $NpmCli).FullName
+& $NodeExe --version
+```
+
+The reviewed runtime must be Node.js `>=22.13.0`. An older, malformed, unavailable, or changed path/version is a stop. Do not invoke `npm.cmd`: on Windows it can silently select the adjacent Node executable instead of `$NodeExe`. Prepend the reviewed Node directory for npm lifecycle subprocesses, then start the console from `projects/star-ascent/site` through the reviewed Node and npm CLI:
+
+```powershell
+$env:Path = "$(Split-Path -Parent $NodeExe);$env:Path"
+& $NodeExe $NpmCli run iat:v2-admin
+```
+
+The `preiat:v2-admin` lifecycle gate repeats the version check before Vite or any console dependency can load. Use only these localhost URLs:
 
 1. Program capacity and upgrade: `http://127.0.0.1:4175/?mode=upgrade`
 2. Program capacity and upgrade with a verified buffer: `http://127.0.0.1:4175/?mode=upgrade&buffer=<BUFFER_ADDRESS>`
 3. Legacy migration and historical neutral backfill: `http://127.0.0.1:4175/?mode=migrate-rounds`
 4. Feature rehearsal and aggregate export: `http://127.0.0.1:4175/?mode=features`
 
+Only the three canonical signing modes—`upgrade`, `migrate-rounds`, and `features`—may request transaction signatures. The default/no-mode and `settle-week9` pages are archived non-signing surfaces; legacy seven-stage signing is permanently disabled.
+
+Use the same non-private browser profile, the same `127.0.0.1:4175` origin, and the same local-storage state for the entire attended sequence. Do not clear site data, switch browser profiles, change the host or port, or discard a source-bound receipt set between program, migration, feature, and aggregate export steps.
+
 Never use a public host for these consoles. The reviewed Devnet program is `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`; the attended Model T administrator is `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`.
 
-The feature-mode shell must require the exact migration artifact before it exposes feature actions; the separate seven-stage initialization shell remains pinned to its exact pre-upgrade artifact. Any seven-stage action selection must use finalized account contexts, monotonic `minContextSlot` reads, and finalized block time. Mode switching must never turn “either reviewed artifact” into an acceptable deployment check.
+Every newly loaded or reloaded attended page must first use its memory-only on-device address-display gate and match the complete displayed address to `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`. This is a non-transaction device confirmation and is not one of the 17 Model T transaction-signature prompts. Navigation or reload may require another address-display confirmation, but it must never add or replay a transaction signature. If any action UI appears before the full on-device address match succeeds, stop without signing or broadcasting.
+
+The transaction-prompt latch is permanent for this ceremony: a rejected, failed, or discarded signed action ends the ceremony. Do not retry that action, clear browser storage, or attempt another transaction signature; stop on HOLD and begin only a separately reviewed new ceremony.
+
+The feature-mode shell must require the exact migration artifact before it exposes feature actions. The archived seven-stage initialization shell remains pinned to its exact pre-upgrade artifact and may only inspect chain state or export already-existing historical receipts; it cannot select, sign, or broadcast an initialization action. Mode switching must never turn “either reviewed artifact” into an acceptable deployment check.
 
 ## 1. Bind and inspect the CI artifact
 
 Run the read-only artifact check:
 
-```sh
-node scripts/iat-v2-devnet-buffer-preflight.mjs verify --artifact target/verifiable/iat_v2.so --evidence target/verifiable/iat-v2-build-evidence.json
+```powershell
+& $NodeExe scripts/iat-v2-devnet-buffer-preflight.mjs verify --artifact target/verifiable/iat_v2.so --evidence target/verifiable/iat-v2-build-evidence.json
 ```
 
 Copy the returned exact artifact byte count into this read-only capacity check:
 
-```sh
-node scripts/iat-v2-devnet-buffer-preflight.mjs capacity --artifact-bytes <CI_ARTIFACT_BYTES>
+```powershell
+& $NodeExe scripts/iat-v2-devnet-buffer-preflight.mjs capacity --artifact-bytes <CI_ARTIFACT_BYTES>
 ```
 
 Compare the command result with the upgrade console. Both must show the same current ProgramData capacity, added bytes, extension-required decision, and rent figures. The console derives and displays the exact ProgramData rent top-up. Any disagreement is a stop.
@@ -45,21 +70,56 @@ The capacity transaction must never auto-start buffer upload or program upgrade.
 
 The buffer operations use the reviewed Devnet deployer keypair, not the Model T. They are staging operations outside the attended action roster and therefore do not produce canonical aggregate transaction records. Each helper first verifies the CI binding and requires its own exact typed confirmation; stop before typing if any displayed address, hash, byte count, payer, or network differs.
 
-Upload one fresh buffer:
+The buffer boundary is pinned to the installed `Ubuntu-24.04` WSL2 distribution, POSIX user `a` (UID 1000), and the one exact checkout below. Git Bash, another WSL distribution or user, a Windows executable substituted into WSL, an inherited shell profile, or a different checkout is a stop.
 
-```sh
-ARTIFACT=target/verifiable/iat_v2.so EVIDENCE=target/verifiable/iat-v2-build-evidence.json bash scripts/rebuild-iat-v2-devnet-buffer-fresh.sh
+Exact helper checkout:
+
+`/mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site`
+
+The helper scripts independently verify every pinned executable before sensitive access and again at mutation boundaries:
+
+| Tool | Exact path | Exact version | SHA-256 | Bytes |
+| --- | --- | --- | --- | ---: |
+| Node.js | `/home/a/.local/share/internal-agency/toolchains/node-v24.19.0-linux-x64/bin/node` | `v24.19.0` | `bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12` | 125,989,464 |
+| Git | `/mnt/c/Program Files/Git/mingw64/bin/git.exe` | `git version 2.55.0.windows.3` | `1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9` | 4,383,048 |
+| Solana CLI | `/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana` | `solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)` | `aacc6871e8ff199608987f0364f2ed9e239a32e1e0548f1ae4477e0e533e1dea` | 28,546,968 |
+| Solana keygen | `/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana-keygen` | `solana-keygen 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)` | `bf66aa11a13dd15503f40ab2b1160f06c7505bca692dfb20800682615d4ec952` | 2,828,816 |
+
+The only admitted network is Devnet with exact genesis hash `EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG`. Any path, version, digest, byte count, ownership, permission, checkout, distribution, UID, or genesis drift is a HOLD before mutation.
+
+The authority handoff has one permanent CAS namespace:
+
+- Root: `/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1`, exact mode `0700`, owned by UID 1000.
+- Sentinel: `/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1/.iat-v2-devnet-buffer-authority-cas-root.json`, exact mode `0600`, owned by UID 1000.
+- Schema: `iat-v2-devnet-buffer-authority-cas-root/v1`; network: `devnet`; ceremony ID: `9e691e59-35c8-4861-86a0-7a219885b1c0`.
+- Exact sentinel SHA-256: `11893575f111807621fcbc8c77ea73fae03390404507202146dde9e69d5818da`.
+
+That namespace is initialized exactly once. If and only if the root has never existed, the separately reviewed one-time provisioning action is the same command below with the final word changed from `verify` to `initialize`. For the present ceremony run `verify` only:
+
+```powershell
+wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 /home/a/.local/share/internal-agency/toolchains/node-v24.19.0-linux-x64/bin/node /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/initialize-iat-v2-devnet-buffer-handoff-cas.mjs verify
 ```
 
-Review the output, then type `REBUILD-DEVNET-FRESH` only when the exact CI artifact is shown. Record the new `BUFFER_ADDRESS` printed by the helper.
+The result must be `status: "VERIFIED"` with the exact root, sentinel, ceremony ID, and `network: "devnet"`. Never delete, rename, recreate, edit, reset, relocate, or reuse this root, sentinel, `attempts` directory, or any reservation—even after HOLD or an uncertain command result. A reservation is target-bound and permanently prevents a restarted or concurrent helper from repeating an ambiguous authority mutation.
 
-Hand only that buffer authority to the attended Model T administrator:
+Run the fresh-buffer helper from an attached PowerShell console using this literal clean-environment WSL2 launcher and exact helper path. Do not pipe or redirect stdin: both attended confirmations are read directly from readable/writable `/dev/tty`.
 
-```sh
-BUFFER_ADDRESS=<BUFFER_ADDRESS> ARTIFACT=target/verifiable/iat_v2.so EVIDENCE=target/verifiable/iat-v2-build-evidence.json bash scripts/handoff-iat-v2-devnet-buffer.sh
+```powershell
+wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/rebuild-iat-v2-devnet-buffer-fresh.sh
 ```
 
-Review `FROM`, `TO`, `HASH`, and `BYTES`; then type `TRANSFER-7XZ`. Do not proceed until the helper reads the authority back as `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`.
+The rebuild has exactly two attended `/dev/tty` gates. First, after reviewing Devnet, artifact/evidence/source bindings, exact rent, the fixed 100,000,000-lamport upload-fee-headroom policy, balance, all exact tool identities, and the retained-old-buffer policy, type `REBUILD-DEVNET-FRESH`. The helper then atomically creates the fixed persistent `devnet-buffer-rebuild-v1/attempt-one-use` reservation; any existing or unexpected recovery entry is a permanent read-only recovery HOLD. It snapshots the exact reviewed artifact into that private namespace, binds the snapshot to an `O_NOFOLLOW` descriptor, durably records source/tool/target policy, and never uploads the mutable checkout pathname. After the helper creates and displays one fresh target address, review it and type the target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>` value exactly. Only the second gate admits the sole fresh-buffer write CLI invocation. That invocation uses `--max-sign-attempts 5`, which may re-sign or resend unconfirmed upload chunks across as many as five blockhash iterations; it is not a claim of one Solana transaction or one signature. The exact rent-plus-headroom floor is freshly reobserved immediately before upload. Record the finalized `BUFFER` printed by the helper. If either gate fails or final reconciliation is ambiguous, stop; do not rerun, and preserve the protected one-use recovery directory for separately reviewed read-only diagnosis.
+
+The historical buffer `Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6` is retained. The rebuild helper never closes or mutates it, and it does not reclaim its lamports.
+
+Set only the fresh address printed by the completed rebuild as the dynamic handoff input, then run the exact handoff helper. `BUFFER_ADDRESS` is admitted only on this handoff command; it has no default, and no historical address is admitted:
+
+```powershell
+$BufferAddress = '<EXACT_FRESH_BUFFER_ADDRESS_PRINTED_BY_REBUILD>'
+wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 IAT_V2_HANDOFF_CAS_ROOT=/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1 "BUFFER_ADDRESS=$BufferAddress" /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/handoff-iat-v2-devnet-buffer.sh
+```
+
+Review exact `BUFFER`, `FROM`, `TO`, artifact SHA-256 and bytes, Node/Git/Solana identity, Devnet genesis, and the 10,000,000-lamport single-handoff fee floor; then type the exact target-bound `TRANSFER-<BUFFER_ADDRESS>-<FIRST_12_ARTIFACT_SHA256_HEX>` challenge shown on `/dev/tty`. Public buffer reads occur before the payer keypair is inspected. After confirmation, the helper verifies the payer identity, freshly reobserves the finalized fee floor, exact buffer address, bytes, hash, and authority after the attended pause, and completes every fallible tool/genesis check before it atomically creates the durable target-keyed reservation. No further tool, genesis, balance, or buffer check occurs between a newly created reservation and the sole authority mutation. The helper submits the authority mutation exactly once and then follows it only with read-only finalized reconciliation. A pre-existing exact reservation skips keypair access and mutation and performs reconciliation only; a malformed or mismatched reservation is a HOLD. Its successful finalized authority readback is necessary but not sufficient; if it reports HOLD or ambiguity, **DO NOT RESUBMIT**, never remove the reservation, and stop for read-only reconciliation. Even after helper success, do not request the upgrade signature until the upgrade console independently re-observes the same exact buffer at finalized commitment and shows authority `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`, the reviewed loader owner, 649,680 bytes, and `771c…8a01`.
 
 ## 3. Upgrade as one attended transaction
 
@@ -117,11 +177,13 @@ The remaining reviewed order is exact:
 4. `SETTLE_LINKED_POSITION_2_WEEK_10`
 5. `SETTLE_LINKED_POSITION_3_WEEK_9`
 6. `SETTLE_LINKED_POSITION_3_WEEK_10`
-7. `CREATE_SWITCHBOARD_RANDOMNESS` only if no verified reusable rehearsal randomness account exists
+7. `CREATE_SWITCHBOARD_RANDOMNESS` using a freshly generated ephemeral protocol signer
 8. `COMMIT_CCC_ROUND_11`
 9. exactly one terminal action: `REVEAL_CCC_ROUND_11` or, only after its on-chain timeout, `EXPIRE_CCC_ROUND_11`
 10. `SETTLE_LINKED_POSITION_2_WEEK_11`
 11. `SETTLE_LINKED_POSITION_3_WEEK_11`
+
+Plan for exactly **17** Model T transaction prompts while the reviewed capacity extension remains required: 15 fixed transaction prompts, one required capacity-extension prompt, and one required `CREATE_SWITCHBOARD_RANDOMNESS` prompt. A retained randomness address never reduces the roster to 16. Before the first feature receipt or signed pending feature transaction exists, if the console reports a retained source-bound randomness record, press **DISCARD RETAINED ADDRESS + REQUIRE FRESH CREATE**. That deliberate local control removes only the versioned address/CREATE-signature/message-hash record stored under the key bound to the exact source commit, migration artifact SHA-256, and mint; it preserves every receipt and performs no RPC read, signature request, broadcast, or chain mutation. Then press **REFRESH FEATURE STATE** and complete the freshly offered `CREATE_SWITCHBOARD_RANDOMNESS` when the roster reaches item 7. Reload continuity is allowed only for the same source-bound CREATE receipt and record after the console independently reconstructs the exact successful finalized two-signer legacy message, verifies its ComputeBudget-then-pinned-Switchboard instruction roster and message hash, and observes the retained account at finalized commitment under the pinned Switchboard owner. The discard control remains disabled after any feature evidence or signed pending feature work exists. If that reconstruction or account observation fails, or any retained state is ambiguous, stop on HOLD; this runbook supports no 16-prompt shortcut.
 
 Do not warp Genesis or time, reroll randomness, fabricate a winner, or execute two attended actions in one transaction.
 
@@ -131,14 +193,16 @@ The consoles persist canonical records under a versioned local-storage key bound
 
 `action,title,signature,messageSha256,explorerUrl,finalizedAtUtc,kind,week`
 
+`finalizedAtUtc` is the observer-local UTC capture made after finalized confirmation; it is not claimed as the transaction's on-chain block time. The canonical finalizer independently re-observes and verifies finalized chain data. Keep the receipt field and schema unchanged.
+
 In the feature console, import any separately exported source-bound receipt sets only if the shared local browser storage does not already contain them. Press **EXPORT COMPLETE ATTENDED BUNDLE**. The exporter rejects missing actions, conflicting duplicates, a missing ProgramData capacity observation, and anything other than exactly one round-11 terminal action. It never creates a placeholder receipt.
 
-The legacy seven-stage evidence export is disabled in feature/post-upgrade mode. Its historical initialization receipts must remain separate and must never be rebound to, or combined with, the `bb09`/`771c` migration snapshot. The pre-upgrade initialization shell retains its own legacy export. In the feature shell, **DOWNLOAD FEATURE EVIDENCE** is only a partial checkpoint; **EXPORT COMPLETE ATTENDED BUNDLE** is the canonical complete-roster export.
+The legacy seven-stage evidence export is disabled in feature/post-upgrade mode. Its historical initialization receipts must remain separate and must never be rebound to, or combined with, the checked-in successor migration snapshot (`2b68cebe…` / `771c…8a01`). The pre-upgrade initialization shell retains its own legacy export. In the feature shell, **DOWNLOAD FEATURE EVIDENCE** is only a partial checkpoint; **EXPORT COMPLETE ATTENDED BUNDLE** is the canonical complete-roster export.
 
 Use a new empty staging directory and run the finalizer first without `--write`:
 
-```sh
-node scripts/finalize-iat-v2-current-source-devnet-evidence.mjs --console-export <ATTENDED_BUNDLE_JSON> --ci-manifest target/verifiable/iat-v2-build-evidence.json --staging-dir <NEW_EMPTY_STAGING_DIRECTORY>
+```powershell
+& $NodeExe scripts/finalize-iat-v2-current-source-devnet-evidence.mjs --console-export <ATTENDED_BUNDLE_JSON> --ci-manifest target/verifiable/iat-v2-build-evidence.json --staging-dir <NEW_EMPTY_STAGING_DIRECTORY>
 ```
 
 Only after the dry run reports complete wire decoding, finalized transactions, exact post-state, and `clearingEligible: true`, rerun the same command with `--write`. A partial/non-clearing result is not a release artifact.

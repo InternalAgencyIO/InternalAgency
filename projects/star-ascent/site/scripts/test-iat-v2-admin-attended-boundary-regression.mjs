@@ -69,7 +69,7 @@ try {
     upgradeKey: Object.keys(manifest).find((key) => manifest[key].src === "ProgramUpgrade.jsx"),
     attendedKey: Object.keys(manifest).find((key) => manifest[key].src === "ProgramUpgradeAttendedActions.jsx"),
     featureKey: Object.keys(manifest).find((key) => manifest[key].src === "FeatureRehearsal.jsx"),
-    evidenceKey: Object.keys(manifest).find((key) => key.startsWith("_attended-evidence-")),
+    evidenceKey: Object.keys(manifest).find((key) => key.startsWith("_attended-prompt-coordinator-")),
   });
 
   mutate("missing-attended-entry", (root) => {

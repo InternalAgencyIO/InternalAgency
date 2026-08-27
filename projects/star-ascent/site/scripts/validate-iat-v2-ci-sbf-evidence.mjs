@@ -46,7 +46,7 @@ export const IAT_V2_SBF_ARTIFACT_INPUT_PATHS = Object.freeze([
 ]);
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const git = (projectRoot, args) => execFileSync("git", args, {
+const defaultGit = (projectRoot, args) => execFileSync("git", args, {
   cwd: projectRoot,
   encoding: "utf8",
   stdio: ["ignore", "pipe", "pipe"],
@@ -76,7 +76,13 @@ function assertCanonicalRegularFile(root, candidate, expectedPath, label) {
   check(resolvedRelativePath === normalize(expectedPath), `${label} does not resolve to its canonical evidence path`);
 }
 
-export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath, allowDescendantCheckout = false } = {}) {
+export function validateSbfEvidence({
+  projectRoot = process.cwd(),
+  manifestPath,
+  allowDescendantCheckout = false,
+  git: gitRunner = defaultGit,
+} = {}) {
+  const git = gitRunner;
   const root = resolve(projectRoot);
   const requestedManifest = manifestPath ?? expectedManifest;
   const resolvedManifest = isAbsolute(requestedManifest) ? requestedManifest : resolve(root, requestedManifest);
@@ -136,6 +142,8 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath,
     try {
       git(root, [
         "diff",
+        "--no-ext-diff",
+        "--no-textconv",
         "--quiet",
         binding.sourceHeadCommit,
         "HEAD",

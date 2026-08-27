@@ -20,9 +20,11 @@ import {
 import {
   BPF_UPGRADEABLE_LOADER_ID,
   DEVNET_FEATURE_MINT_SEED,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
   IAT_V2_PROGRAM_ADMIN,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
@@ -33,6 +35,7 @@ import {
   parseUpgradeableProgramData,
 } from "../../programs/iat_v2/instructions.mjs";
 import {
+  assertCanonicalAttendedNextActionFromReceiptSet,
   canonicalReceiptSet,
   clearAttendedReceipts,
   loadAttendedReceiptSet,
@@ -45,6 +48,10 @@ import {
   finalizedContextSlot,
   simulateExactLegacyTransaction,
 } from "./attended-transaction-boundary.mjs";
+import {
+  attendedPromptLatchKey,
+  createAttendedModelTPromptCoordinator,
+} from "./attended-prompt-coordinator.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
@@ -53,6 +60,63 @@ const CCC_FIRST_SELECTION_DELAY_SECONDS = 86_400n;
 const CCC_REVEAL_TIMEOUT_SECONDS = 86_400n;
 const SECONDS_PER_WEEK = 604_800n;
 const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
+
+function roundPromptAction(kind, week) {
+  const suffix = typeof week === "bigint" ? week.toString() : String(week);
+  if (!/^(0|[1-9][0-9]*)$/u.test(suffix)) {
+    throw new Error("Attended round prompt week is not an exact nonnegative integer");
+  }
+  if (kind === "migration") return `MIGRATE_LEGACY_ROUND_WEEK_${suffix}`;
+  if (kind === "neutral-backfill") {
+    return `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_${suffix}`;
+  }
+  throw new Error("Attended round prompt kind is not reviewed");
+}
+
+function assertRoundPromptOrder(snapshot, nextAction) {
+  const receiptSet = loadAttendedReceiptSet(localStorage, snapshot.evidenceBinding);
+  const preUpgradeCapacity = receiptSet.preUpgradeProgramDataCapacityBytes;
+  const extensionReceiptPresent = receiptSet.receipts.some(
+    ({ action }) => action === "EXTEND_PROGRAM_DATA",
+  );
+  if (!Number.isSafeInteger(preUpgradeCapacity) || preUpgradeCapacity <= 0) {
+    throw new Error("Canonical round prompting requires the finalized pre-upgrade ProgramData capacity");
+  }
+  const programDataExtensionRequired = preUpgradeCapacity < IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES;
+  if (extensionReceiptPresent !== programDataExtensionRequired) {
+    throw new Error("Canonical extension receipt disagrees with the frozen pre-upgrade capacity");
+  }
+  return assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet,
+    expectedBinding: snapshot.evidenceBinding,
+    programDataExtensionRequired,
+    nextAction,
+  });
+}
+
+async function requestRoundModelTSignature({
+  coordinator,
+  binding,
+  action,
+  messageSha256,
+  provider,
+  signer,
+  transaction,
+  verifySigned,
+}) {
+  const result = await coordinator.request({
+    binding,
+    action,
+    messageSha256,
+    signer: signer.toBase58(),
+    prompt: async () => {
+      const signed = await provider.signTransaction(transaction);
+      await verifySigned(signed);
+      return signed;
+    },
+  });
+  return result.value;
+}
 
 export function canonicalCccSelectionTimestamp(genesisTimestamp, week) {
   return BigInt(genesisTimestamp)
@@ -479,6 +543,7 @@ export default function LegacyRoundMigration({
   short,
 }) {
   const local = isLocalOperatorHost(window.location.hostname);
+  const [promptCoordinator] = useState(createAttendedModelTPromptCoordinator);
   const [snapshot, setSnapshot] = useState(null);
   const [pending, setPending] = useState(null);
   const [receiptSet, setReceiptSet] = useState(null);
@@ -517,6 +582,9 @@ export default function LegacyRoundMigration({
       setSnapshot(current);
       const round = current.legacy.find((candidate) => candidate.address.equals(roundAddress));
       if (!round) throw new Error("Selected legacy round is no longer pending migration");
+      const promptAction = roundPromptAction("migration", round.week);
+      attendedPromptLatchKey({ binding: current.evidenceBinding, action: promptAction });
+      assertRoundPromptOrder(current, promptAction);
       const actionBinding = attendedRoundBinding("migration", current, round);
       const { provider, publicKey } = await getHardwareProvider(IAT_V2_PROGRAM_ADMIN);
       if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
@@ -574,14 +642,23 @@ export default function LegacyRoundMigration({
       assertExactTransactionMessage(promptTransaction, messageBytes, "Freshly rebuilt migration");
       setSnapshot(promptSnapshot);
       setStatus(`MODEL T // REVIEW WEEK ${promptRound.week} MIGRATION AND SIGN; STILL NOT BROADCAST`);
-      const signed = await provider.signTransaction(transaction);
-      await assertSignedLegacyTransaction({
-        expectedBlockhash: latest.blockhash,
-        expectedMessageBytes: messageBytes,
-        expectedMessageSha256: messageSha256,
-        expectedSigner: publicKey,
-        sha256Hex,
-        signed,
+      assertRoundPromptOrder(promptSnapshot, promptAction);
+      const signed = await requestRoundModelTSignature({
+        coordinator: promptCoordinator,
+        binding: promptSnapshot.evidenceBinding,
+        action: promptAction,
+        messageSha256,
+        provider,
+        signer: publicKey,
+        transaction,
+        verifySigned: (candidate) => assertSignedLegacyTransaction({
+          expectedBlockhash: latest.blockhash,
+          expectedMessageBytes: messageBytes,
+          expectedMessageSha256: messageSha256,
+          expectedSigner: publicKey,
+          sha256Hex,
+          signed: candidate,
+        }),
       });
       setPending({
         signed,
@@ -620,6 +697,9 @@ export default function LegacyRoundMigration({
       if (!round || round.complete || !round.eligible) {
         throw new Error("Selected historical round is not absent and eligible for neutral recovery");
       }
+      const promptAction = roundPromptAction("neutral-backfill", round.week);
+      attendedPromptLatchKey({ binding: current.evidenceBinding, action: promptAction });
+      assertRoundPromptOrder(current, promptAction);
       const actionBinding = attendedRoundBinding("neutral-backfill", current, round);
       const { provider, publicKey } = await getHardwareProvider(IAT_V2_PROGRAM_ADMIN);
       if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
@@ -686,14 +766,23 @@ export default function LegacyRoundMigration({
       );
       setSnapshot(promptSnapshot);
       setStatus(`MODEL T // REVIEW TERMINAL-NEUTRAL WEEK ${promptRound.week}; NO RANDOMNESS OR WINNER`);
-      const signed = await provider.signTransaction(transaction);
-      await assertSignedLegacyTransaction({
-        expectedBlockhash: latest.blockhash,
-        expectedMessageBytes: messageBytes,
-        expectedMessageSha256: messageSha256,
-        expectedSigner: publicKey,
-        sha256Hex,
-        signed,
+      assertRoundPromptOrder(promptSnapshot, promptAction);
+      const signed = await requestRoundModelTSignature({
+        coordinator: promptCoordinator,
+        binding: promptSnapshot.evidenceBinding,
+        action: promptAction,
+        messageSha256,
+        provider,
+        signer: publicKey,
+        transaction,
+        verifySigned: (candidate) => assertSignedLegacyTransaction({
+          expectedBlockhash: latest.blockhash,
+          expectedMessageBytes: messageBytes,
+          expectedMessageSha256: messageSha256,
+          expectedSigner: publicKey,
+          sha256Hex,
+          signed: candidate,
+        }),
       });
       setPending({
         signed,
@@ -880,7 +969,13 @@ export default function LegacyRoundMigration({
           </div>
           <div className="address-grid">
             <div><span>PROGRAM</span><code>{IAT_V2_PROGRAM_ID.toBase58()}</code></div>
-            <div><span>ADMIN</span><code>{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
+            <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
+            <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
+            <div><span>SOURCE COMMIT</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
+            <div><span>CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
+            <div><span>EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
+            <div><span>CI-BOUND ARTIFACT SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256}</code></div>
+            <div><span>CI-BOUND ARTIFACT BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}</code></div>
             <div><span>CONFIG</span><code>{snapshot?.config.toBase58() ?? "NOT VERIFIED"}</code></div>
             <div><span>DEPLOYED ARTIFACT</span><code>{snapshot?.artifactSha256 ?? "NOT VERIFIED"}</code></div>
             <div><span>CURRENT CCC ROUND</span><code>{snapshot?.currentRound.toString() ?? "NOT VERIFIED"}</code></div>

@@ -49,7 +49,10 @@ import {
 import {
   createTrezorTransactionProvider,
   findTrezorSolanaAccount,
+  verifyTrezorSolanaAccountOnDevice,
 } from "./trezor-provider.mjs";
+import { assertTrezorPathSession } from "./trezor-path-session.mjs";
+import TrezorPathSessionGate from "./TrezorPathSessionGate.jsx";
 import {
   decodeOriginalTokenAccountInfo,
   decodeOriginalTokenMintInfo,
@@ -70,6 +73,8 @@ const UPGRADE_MODE = CONSOLE_PARAMS.get("mode") === "upgrade";
 const INSPECTION_MODE = CONSOLE_PARAMS.get("mode") === "inspect";
 const ATTENDED_WEEK9_MODE = CONSOLE_PARAMS.get("mode") === "settle-week9";
 const MIGRATE_ROUNDS_MODE = CONSOLE_PARAMS.get("mode") === "migrate-rounds";
+const CANONICAL_ACTION_MODE = FEATURE_MODE || UPGRADE_MODE || MIGRATE_ROUNDS_MODE;
+const LEGACY_INITIALIZATION_SIGNING_DISABLED = true;
 const FOOTER_SOURCE_COMMIT = FEATURE_MODE
   ? IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD
   : SOURCE_COMMIT;
@@ -107,7 +112,6 @@ document.documentElement.dataset.iatAdminMode = INSPECTION_MODE
 document.documentElement.dataset.iatTrezorConnect = "unloaded";
 let trezorConnect;
 let trezorConnectReady;
-const trezorAccounts = new Map();
 
 const STAGE_COPY = [
   {
@@ -232,26 +236,33 @@ async function initializeTrezorConnect() {
   return trezorConnect;
 }
 
-async function getHardwareProvider(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
+async function openVerifiedTrezorPathSession(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
   const connect = await initializeTrezorConnect();
-  const cacheKey = expectedAddress.toBase58();
-  let account = trezorAccounts.get(cacheKey);
-  if (!account) {
-    account = await findTrezorSolanaAccount({
-      connect,
-      expectedAddress,
-    });
-    trezorAccounts.set(cacheKey, account);
+  const discoveredAccount = await findTrezorSolanaAccount({
+    connect,
+    expectedAddress,
+  });
+  const verifiedAccount = await verifyTrezorSolanaAccountOnDevice({
+    connect,
+    account: discoveredAccount,
+    expectedAddress,
+  });
+  if (!verifiedAccount.publicKey.equals(expectedAddress)) {
+    throw new Error("Model T displayed an address other than the required Solana signer");
   }
-  const publicKey = account.publicKey;
+  return verifiedAccount;
+}
+
+async function getSessionHardwareProvider(session, expectedAddress = IAT_V2_PROGRAM_ADMIN) {
+  const verifiedSession = assertTrezorPathSession(session, expectedAddress);
+  const connect = await initializeTrezorConnect();
   const provider = createTrezorTransactionProvider({
     connect,
-    path: account.path,
-    publicKey,
+    verification: verifiedSession.verification,
     network: "devnet",
     readGenesisHash: () => connection.getGenesisHash(),
   });
-  return { provider, publicKey };
+  return { provider, publicKey: provider.publicKey };
 }
 
 function finalizedContextSlot(result, label, minContextSlot = 0) {
@@ -747,7 +758,7 @@ function loadEvidence() {
   }
 }
 
-function App() {
+function App({ getHardwareProvider }) {
   const local = isLocalOperatorHost(window.location.hostname);
   const [snapshot, setSnapshot] = useState(null);
   const [connected, setConnected] = useState("");
@@ -795,16 +806,16 @@ function App() {
   }, [evidence]);
 
   async function connect() {
-    if (INSPECTION_MODE) return;
+    if (INSPECTION_MODE || LEGACY_INITIALIZATION_SIGNING_DISABLED) return;
     setBusy(true);
     setError("");
-    setStatus("CONNECTING // CONFIRM THE MODEL T ADDRESS");
+    setStatus("OPENING VERIFIED MODEL T SESSION");
     try {
       const { publicKey } = await getHardwareProvider();
       setConnected(publicKey.toBase58());
       const next = await loadChainSnapshot();
       setSnapshot(next);
-      setStatus("HARDWARE MATCH // REVIEW THE NEXT STAGE");
+      setStatus("VERIFIED HARDWARE SESSION // REVIEW THE NEXT STAGE");
     } catch (caught) {
       setStatus("HOLD // WALLET CHECK FAILED");
       setError(errorText(caught));
@@ -814,7 +825,15 @@ function App() {
   }
 
   async function simulateAndSign() {
-    if (INSPECTION_MODE || !local || !connected || pending || busy || signingInFlight.current) return;
+    if (
+      INSPECTION_MODE
+      || LEGACY_INITIALIZATION_SIGNING_DISABLED
+      || !local
+      || !connected
+      || pending
+      || busy
+      || signingInFlight.current
+    ) return;
     signingInFlight.current = true;
     setBusy(true);
     setError("");
@@ -1126,8 +1145,12 @@ function App() {
                 <button className="quiet" onClick={() => refresh().catch(() => {})} disabled={busy || !local || INSPECTION_MODE}>
                   REFRESH CHAIN
                 </button>
-                <button className="connect" onClick={connect} disabled={busy || !local || INSPECTION_MODE}>
-                  {connected ? `MODEL T ${short(connected)}` : "CONNECT MODEL T DIRECTLY"}
+                <button
+                  className="connect"
+                  onClick={connect}
+                  disabled={busy || !local || INSPECTION_MODE || LEGACY_INITIALIZATION_SIGNING_DISABLED}
+                >
+                  {connected ? `MODEL T ${short(connected)}` : "USE VERIFIED MODEL T SESSION"}
                 </button>
               </>
             )}
@@ -1176,9 +1199,20 @@ function App() {
               {!pending ? (
                 <button
                   onClick={simulateAndSign}
-                  disabled={busy || !local || !connected || !snapshot || INSPECTION_MODE}
+                  disabled={
+                    busy
+                    || !local
+                    || !connected
+                    || !snapshot
+                    || INSPECTION_MODE
+                    || LEGACY_INITIALIZATION_SIGNING_DISABLED
+                  }
                 >
-                  {busy ? "VERIFYING…" : "SIMULATE + REQUEST MODEL T SIGNATURE"}
+                  {LEGACY_INITIALIZATION_SIGNING_DISABLED
+                    ? "ARCHIVED INITIALIZATION SIGNING DISABLED"
+                    : busy
+                      ? "VERIFYING…"
+                      : "SIMULATE + REQUEST MODEL T SIGNATURE"}
                 </button>
               ) : (
                 <div className="broadcast-panel">
@@ -1259,35 +1293,55 @@ function App() {
   );
 }
 
-createRoot(document.getElementById("root")).render(
-  <Suspense fallback={<main className="console-shell"><strong>LOADING LOCAL CONSOLE...</strong></main>}>
-    {UPGRADE_MODE
+function renderActionConsole(session) {
+  const getHardwareProvider = (expectedAddress = IAT_V2_PROGRAM_ADMIN) => (
+    getSessionHardwareProvider(session, expectedAddress)
+  );
+  return UPGRADE_MODE
+    ? (
+        <ProgramUpgrade
+          getHardwareProvider={getHardwareProvider}
+          isLocalOperatorHost={isLocalOperatorHost}
+          sha256Hex={sha256Hex}
+          short={short}
+        />
+      )
+    : MIGRATE_ROUNDS_MODE
       ? (
-          <ProgramUpgrade
+          <LegacyRoundMigration
             getHardwareProvider={getHardwareProvider}
             isLocalOperatorHost={isLocalOperatorHost}
             sha256Hex={sha256Hex}
             short={short}
           />
         )
-      : MIGRATE_ROUNDS_MODE
-        ? (
-            <LegacyRoundMigration
-              getHardwareProvider={getHardwareProvider}
-              isLocalOperatorHost={isLocalOperatorHost}
-              sha256Hex={sha256Hex}
-              short={short}
-            />
-          )
-      : ATTENDED_WEEK9_MODE
-        ? (
-            <AttendedWeek9Settlement
-              explorer={explorer}
-              getHardwareProvider={getHardwareProvider}
-              localOperator={isLocalOperatorHost(window.location.hostname)}
-              sha256Hex={sha256Hex}
-            />
-          )
-      : <App />}
+    : ATTENDED_WEEK9_MODE
+      ? (
+          <AttendedWeek9Settlement
+            explorer={explorer}
+            getHardwareProvider={getHardwareProvider}
+            localOperator={isLocalOperatorHost(window.location.hostname)}
+            sha256Hex={sha256Hex}
+          />
+        )
+    : <App getHardwareProvider={getHardwareProvider} />;
+}
+
+async function rejectInspectionHardwareProvider() {
+  throw new Error("Hardware loading is disabled in non-signing inspection mode");
+}
+
+createRoot(document.getElementById("root")).render(
+  <Suspense fallback={<main className="console-shell"><strong>LOADING LOCAL CONSOLE...</strong></main>}>
+    {INSPECTION_MODE || !CANONICAL_ACTION_MODE
+      ? <App getHardwareProvider={rejectInspectionHardwareProvider} />
+      : (
+          <TrezorPathSessionGate
+            expectedAddress={IAT_V2_PROGRAM_ADMIN.toBase58()}
+            localOperator={isLocalOperatorHost(window.location.hostname)}
+            openSession={() => openVerifiedTrezorPathSession(IAT_V2_PROGRAM_ADMIN)}
+            renderActionUi={renderActionConsole}
+          />
+        )}
   </Suspense>,
 );

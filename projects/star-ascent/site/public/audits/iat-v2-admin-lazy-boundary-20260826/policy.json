@@ -33,6 +33,7 @@
     ],
     "programUpgradeAttendedStaticClosureIncludes": [
       "ATTENDED_EVIDENCE",
+      "ATTENDED_PROMPT_COORDINATOR",
       "PROGRAM_EXTENSION_ATTENDED"
     ]
   },
@@ -43,7 +44,7 @@
     "trezorConnectMaximum": 180000,
     "programUpgradeMaximum": 15000,
     "programUpgradeAttendedMaximum": 13000,
-    "programUpgradeIncrementalClosureMaximum": 36000
+    "programUpgradeIncrementalClosureMaximum": 45000
   },
   "assurance": {
     "independentHardwareReviewComplete": false,
@@ -55,7 +56,7 @@
   "limitations": [
     "The generated Vite manifest and browser checks prove local build and request boundaries only.",
     "The attended-actions payload is loaded only after an explicit operator click, but that source boundary is not independent hardware or runtime evidence.",
-    "The aggregate Program Upgrade budget counts the read-only shell, attended-actions entry, and all static dependencies not already present in the inspection entry closure.",
+    "The aggregate Program Upgrade budget counts the read-only shell, attended-actions entry, source-bound receipt evidence, permanent prompt coordination, and all static dependencies not already present in the inspection entry closure.",
     "The Switchboard and Trezor packages remain present as lazy operator surfaces and require independent review before use.",
     "No hardware, wallet, RPC, simulation, signing, broadcast, deployment, Devnet, or Mainnet action is authorized by this policy."
   ]

@@ -230,7 +230,7 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
     conditions: {
       programDataExtensionRequired: false,
       preUpgradeProgramDataCapacityBytes: value.binding.programArtifactBytes,
-      switchboardRandomnessCreationRequired: false,
+      switchboardRandomnessCreationRequired: true,
       cccRound11TerminalAction: "REVEAL_CCC_ROUND_11",
     },
     transactions: value.consoleExport.transactions.map((item) => ({
@@ -260,6 +260,19 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
   assert.equal(incomplete.clearingEligible, false);
   assert.equal(incomplete.directEvidence.predicate, "CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL_PARTIAL");
   assert.equal(incomplete.clearingBlocker, "COMPLETE_REHEARSAL_ACTION_ROSTER_OR_ORDER_MISMATCH");
+
+  const noCreateShortcut = structuredClone(incompleteClaim);
+  noCreateShortcut.conditions.switchboardRandomnessCreationRequired = false;
+  await assert.rejects(
+    finalizeCurrentSourceDevnetEvidence({
+      consoleExport: noCreateShortcut,
+      binding: value.binding,
+      rpcCall: value.rpcCall,
+      expectedProgramId: value.programId.toBase58(),
+      expectedSigner: value.signer.publicKey.toBase58(),
+    }),
+    (error) => error instanceof CurrentSourceEvidenceError && error.code === "COMPLETE_ROSTER_HOLD",
+  );
 
   const contradictoryReceipt = structuredClone(incompleteClaim);
   contradictoryReceipt.transactions[0].kind = "program";

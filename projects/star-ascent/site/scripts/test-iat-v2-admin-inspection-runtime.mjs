@@ -87,7 +87,9 @@ try {
       await assert.doesNotReject(() => page.getByText("NON-SIGNING INSPECTION MODE").waitFor(), `${engineName}: inspection banner missing`);
       assert.match(await page.locator("body").innerText(), /NETWORK, HARDWARE, SIGNING, BROADCAST DISABLED/u, `${engineName}: safety boundary copy missing`);
 
-      const actionButtons = page.getByRole("button", { name: /REFRESH CHAIN|CONNECT MODEL T|SIMULATE|BROADCAST/u });
+      const actionButtons = page.getByRole("button", {
+        name: /REFRESH CHAIN|USE VERIFIED MODEL T SESSION|ARCHIVED INITIALIZATION SIGNING DISABLED|SIMULATE|BROADCAST/u,
+      });
       assert.ok(await actionButtons.count() >= 3, `${engineName}: expected disabled operator controls were not rendered`);
       for (let index = 0; index < await actionButtons.count(); index += 1) {
         assert.equal(await actionButtons.nth(index).isDisabled(), true, `${engineName}: operator control ${index + 1} is enabled in inspection mode`);

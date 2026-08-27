@@ -49,9 +49,11 @@ import {
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
   DEVNET_FEATURE_MINT_SEED,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
   IAT_V2_PROGRAM_ADMIN,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
@@ -61,10 +63,30 @@ import {
   SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
 } from "../../programs/iat_v2/client.mjs";
 import {
+  assertCanonicalAttendedNextActionFromReceiptSet,
   buildCompleteAttendedBundle,
   loadAttendedReceiptSet,
   parseAttendedReceiptSet,
+  persistAttendedReceipt,
 } from "./attended-evidence.mjs";
+import {
+  IAT_V2_RANDOMNESS_CREATE_TITLE,
+  canonicalRandomnessCreateJournal,
+  encodeSolanaSignature,
+  inspectCanonicalRandomnessDiscardEligibility,
+  loadRandomnessCreateJournal,
+  parseRandomnessContinuityRecord,
+  persistRandomnessCreateJournal,
+  randomnessCreateJournalStorageKey,
+  randomnessJournalContinuityRecord,
+  randomnessJournalReceiptStub,
+  reconcileVerifiedRandomnessCreateJournal,
+  verifyFinalizedRandomnessContinuity,
+} from "./feature-randomness-continuity.mjs";
+import {
+  attendedPromptLatchKey,
+  createAttendedModelTPromptCoordinator,
+} from "./attended-prompt-coordinator.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
@@ -92,17 +114,47 @@ const FEATURE_AGENCY_OWNERS = Object.freeze([
 const FEATURE_POSITION_IDS = Object.freeze([1, 2, 3]);
 const FEATURE_POSITION_PRINCIPAL = 10_000_000_000n;
 const PARTICIPANT_RENT_TARGET_LAMPORTS = 30_000_000;
-const FEATURE_EVIDENCE_KEY =
+const LEGACY_FEATURE_EVIDENCE_KEY_V2 =
   `iat-v2-devnet-feature-action-evidence/${DEVNET_FEATURE_MINT_SEED}/v2`;
 const LEGACY_FEATURE_EVIDENCE_KEY = "iat-v2-devnet-feature-action-evidence/v1";
-const FEATURE_RANDOMNESS_KEY =
-  `iat-v2-devnet-switchboard-randomness-account/${DEVNET_FEATURE_MINT_SEED}/v2`;
 
-function loadEvidence() {
+function exactFeatureStorageBinding(mint) {
+  return {
+    sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+    programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+    mint: mint.toBase58(),
+  };
+}
+
+function featureSourceBoundStorageKey(namespace, mint, version) {
+  return [
+    namespace,
+    IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+    IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+    mint.toBase58(),
+    version,
+  ].join("/");
+}
+
+function featureEvidenceStorageKey(mint) {
+  return featureSourceBoundStorageKey(
+    "iat-v2-devnet-feature-action-evidence",
+    mint,
+    "v3",
+  );
+}
+
+function featureRandomnessStorageKey(mint) {
+  return featureSourceBoundStorageKey(
+    "iat-v2-devnet-switchboard-randomness-account",
+    mint,
+    "v4",
+  );
+}
+
+function loadEvidence(mint) {
   try {
-    const serialized = localStorage.getItem(FEATURE_EVIDENCE_KEY)
-      ?? localStorage.getItem(LEGACY_FEATURE_EVIDENCE_KEY)
-      ?? "[]";
+    const serialized = localStorage.getItem(featureEvidenceStorageKey(mint)) ?? "[]";
     const value = JSON.parse(serialized);
     return Array.isArray(value)
       ? value.filter((entry) => (
@@ -116,15 +168,58 @@ function loadEvidence() {
   }
 }
 
-function storedRandomnessAddress() {
-  const value = localStorage.getItem(FEATURE_RANDOMNESS_KEY);
-  if (!value) return null;
-  try {
-    return new PublicKey(value);
-  } catch {
-    localStorage.removeItem(FEATURE_RANDOMNESS_KEY);
-    return null;
+function storedRandomnessContinuity(mint) {
+  const binding = exactFeatureStorageBinding(mint);
+  const value = localStorage.getItem(featureRandomnessStorageKey(mint));
+  const retained = value ? parseRandomnessContinuityRecord(value, binding) : null;
+  const journal = loadRandomnessCreateJournal(localStorage, binding);
+  const journalContinuity = journal ? randomnessJournalContinuityRecord(journal) : null;
+  if (retained && journalContinuity && !sameBinding(retained, journalContinuity)) {
+    throw new Error("Retained randomness continuity conflicts with its CREATE recovery journal");
   }
+  return retained ?? journalContinuity;
+}
+
+function retainedRandomnessCreateInputs(mint, evidence) {
+  const binding = exactFeatureStorageBinding(mint);
+  const retained = storedRandomnessContinuity(mint);
+  const journal = loadRandomnessCreateJournal(localStorage, binding);
+  const evidenceReceipt = evidence.find(
+    ({ action }) => action === "CREATE_SWITCHBOARD_RANDOMNESS",
+  ) ?? null;
+  const retainedStub = journal
+    ? randomnessJournalReceiptStub(journal)
+    : retained
+      ? {
+          action: "CREATE_SWITCHBOARD_RANDOMNESS",
+          signature: retained.createSignature,
+          messageSha256: retained.createMessageSha256,
+        }
+      : null;
+  if (
+    evidenceReceipt
+    && retainedStub
+    && (
+      evidenceReceipt.signature !== retainedStub.signature
+      || evidenceReceipt.messageSha256 !== retainedStub.messageSha256
+    )
+  ) {
+    throw new Error("Source-bound feature CREATE receipt conflicts with retained randomness continuity");
+  }
+  if (!retained) {
+    return { retainedCreateReceipt: null, retainedCreatePredecessorReceipt: null };
+  }
+  const receiptSet = loadAttendedReceiptSet(localStorage, binding);
+  const createIndex = receiptSet.receipts.findIndex(
+    ({ action }) => action === "CREATE_SWITCHBOARD_RANDOMNESS",
+  );
+  const predecessorIndex = createIndex === -1
+    ? receiptSet.receipts.length - 1
+    : createIndex - 1;
+  return {
+    retainedCreateReceipt: evidenceReceipt ?? retainedStub,
+    retainedCreatePredecessorReceipt: receiptSet.receipts[predecessorIndex] ?? null,
+  };
 }
 
 function bitIsSet(value, ordinal) {
@@ -226,7 +321,15 @@ function sameBytes(left, right) {
   return left.length === right.length && left.every((byte, index) => byte === right[index]);
 }
 
-async function loadFeatureState(baseSnapshot, minimumFinalizedSlot = 0) {
+async function loadFeatureState(
+  baseSnapshot,
+  minimumFinalizedSlot = 0,
+  {
+    retainedCreateReceipt = null,
+    retainedCreatePredecessorReceipt = null,
+    sha256Hex = null,
+  } = {},
+) {
   if (!Number.isSafeInteger(minimumFinalizedSlot) || minimumFinalizedSlot < 0) {
     throw new Error("Feature state minimum finalized slot is invalid");
   }
@@ -289,7 +392,63 @@ async function loadFeatureState(baseSnapshot, minimumFinalizedSlot = 0) {
         programId: IAT_V2_PROGRAM_ID,
         week: configCccRound,
       });
-  const randomnessAddress = storedRandomnessAddress();
+  const retainedRandomness = storedRandomnessContinuity(mint);
+  let randomnessAddress = null;
+  let randomnessContinuity = null;
+  if (retainedRandomness) {
+    if (!retainedCreateReceipt) {
+      throw new Error(
+        "A retained source-bound randomness record has no exact CREATE receipt; use the pre-ceremony discard control",
+      );
+    }
+    const observedAddress = new PublicKey(retainedRandomness.address);
+    if (!retainedCreatePredecessorReceipt) {
+      throw new Error("A retained source-bound randomness record has no canonical predecessor receipt");
+    }
+    const [createTransaction, predecessorTransaction, randomnessAccountResult] = await Promise.all([
+      connection.getTransaction(retainedRandomness.createSignature, {
+        commitment: FINALIZED_COMMITMENT,
+        maxSupportedTransactionVersion: 0,
+      }),
+      connection.getTransaction(retainedCreatePredecessorReceipt.signature, {
+        commitment: FINALIZED_COMMITMENT,
+        maxSupportedTransactionVersion: 0,
+      }),
+      connection.getAccountInfoAndContext(observedAddress, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: configSlot,
+      }),
+    ]);
+    const randomnessAccountSlot = finalizedContextSlot(
+      randomnessAccountResult,
+      "Retained randomness account",
+      configSlot,
+    );
+    const sourceDeploymentSlot = baseSnapshot?.deployment?.slot;
+    const sourceDeploymentSlotIsExact = typeof sourceDeploymentSlot === "bigint"
+      ? sourceDeploymentSlot > 0n
+      : Number.isSafeInteger(sourceDeploymentSlot) && sourceDeploymentSlot > 0;
+    if (!sourceDeploymentSlotIsExact) {
+      throw new Error("Reviewed source deployment slot is unavailable for randomness continuity");
+    }
+    const continuity = await verifyFinalizedRandomnessContinuity({
+      record: retainedRandomness,
+      createReceipt: retainedCreateReceipt,
+      predecessorReceipt: retainedCreatePredecessorReceipt,
+      predecessorTransactionResponse: predecessorTransaction,
+      transactionResponse: createTransaction,
+      observedAddress,
+      accountInfo: randomnessAccountResult.value,
+      accountContextSlot: randomnessAccountSlot,
+      expectedAdmin: IAT_V2_PROGRAM_ADMIN,
+      expectedParticipant: COMMUNITY_CUSTODY,
+      expectedDestinationTokens: plan.allocationDestinations.community.tokenAccount,
+      minimumCreationSlot: sourceDeploymentSlot,
+      sha256Hex,
+    });
+    randomnessAddress = continuity.address;
+    randomnessContinuity = continuity;
+  }
   const addresses = [
     ...agencyAddresses,
     eligibilityAddress,
@@ -301,11 +460,15 @@ async function loadFeatureState(baseSnapshot, minimumFinalizedSlot = 0) {
     ...(currentRoundAddress ? [currentRoundAddress] : []),
     ...(randomnessAddress ? [randomnessAddress] : []),
   ];
+  const continuityReadFloor = Math.max(
+    configSlot,
+    randomnessContinuity?.accountContextSlot ?? 0,
+  );
   const stateResult = await connection.getMultipleAccountsInfoAndContext(addresses, {
     commitment: FINALIZED_COMMITMENT,
-    minContextSlot: configSlot,
+    minContextSlot: continuityReadFloor,
   });
-  const stateSlot = finalizedContextSlot(stateResult, "Feature state", configSlot);
+  const stateSlot = finalizedContextSlot(stateResult, "Feature state", continuityReadFloor);
   const stateTimestamp = await finalizedBlockTimestamp(stateSlot, "Feature state");
   const currentWeek = currentIatV2Week(genesisTimestamp, stateTimestamp);
   const currentCccRound = currentIatV2CccRound(genesisTimestamp, stateTimestamp);
@@ -333,11 +496,29 @@ async function loadFeatureState(baseSnapshot, minimumFinalizedSlot = 0) {
   const liquidityDestinationInfo = infos[cursor++];
   const currentRoundInfo = currentRoundAddress ? infos[cursor++] : null;
   const randomnessInfo = randomnessAddress ? infos[cursor++] : null;
+  if (currentRoundInfo && !currentRoundInfo.owner.equals(IAT_V2_PROGRAM_ID)) {
+    throw new Error("Current CCC round has the wrong owner");
+  }
+  const currentRound = currentRoundInfo ? parseRoundAccount(currentRoundInfo.data) : null;
+  if (currentRound && !randomnessAddress) {
+    throw new Error(
+      "An existing finalized CCC round has no verified source-bound randomness continuity",
+    );
+  }
   if (randomnessInfo && !randomnessInfo.owner.equals(SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID)) {
     throw new Error("Stored randomness account is not owned by the pinned Switchboard devnet program");
   }
   if (randomnessAddress && !randomnessInfo) {
-    localStorage.removeItem(FEATURE_RANDOMNESS_KEY);
+    throw new Error(
+      "The retained source-bound randomness account is absent; stop and use the pre-ceremony discard control",
+    );
+  }
+  if (
+    currentRound
+    && randomnessAddress
+    && !currentRound.randomnessAccount.equals(randomnessAddress)
+  ) {
+    throw new Error("Current CCC round randomness disagrees with verified source-bound continuity");
   }
   const positions = positionInfos.map((info) => {
     if (!info) return null;
@@ -412,8 +593,9 @@ async function loadFeatureState(baseSnapshot, minimumFinalizedSlot = 0) {
     liquidityDestination,
     liquidityDestinationExists: Boolean(liquidityDestinationInfo),
     randomnessAddress: randomnessInfo ? randomnessAddress : null,
+    randomnessContinuity,
     currentRoundAddress,
-    currentRound: currentRoundInfo ? parseRoundAccount(currentRoundInfo.data) : null,
+    currentRound,
     linkedRounds,
   };
 }
@@ -619,18 +801,14 @@ function waitDescription(state) {
   return `CCC-linked settlement needs real round ${week}, opening in ${formatRehearsalWait(seconds)}.`;
 }
 
-function switchboardWallet(provider, publicKey) {
+function switchboardBuildOnlyWallet(publicKey) {
+  const rejectDirectSigning = async () => {
+    throw new Error("Switchboard transaction builders cannot invoke the Model T signing provider");
+  };
   return {
     publicKey,
-    signTransaction: (transaction) => provider.signTransaction(transaction),
-    signAllTransactions: async (transactions) => {
-      if (typeof provider.signAllTransactions === "function") {
-        return provider.signAllTransactions(transactions);
-      }
-      const signed = [];
-      for (const transaction of transactions) signed.push(await provider.signTransaction(transaction));
-      return signed;
-    },
+    signTransaction: rejectDirectSigning,
+    signAllTransactions: rejectDirectSigning,
   };
 }
 
@@ -641,17 +819,17 @@ function loadSwitchboardModule() {
   return switchboardModulePromise;
 }
 
-async function switchboardProgram(provider, publicKey) {
+async function switchboardProgram(publicKey) {
   const switchboard = await loadSwitchboardModule();
   const program = await switchboard.AnchorUtils.loadProgramFromConnection(
     connection,
-    switchboardWallet(provider, publicKey),
+    switchboardBuildOnlyWallet(publicKey),
     SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
   );
   return { program, switchboard };
 }
 
-async function buildActionTransaction(action, state, baseSnapshot, provider) {
+async function buildActionTransaction(action, state, baseSnapshot) {
   const { mint, plan } = baseSnapshot;
   const transaction = new Transaction();
   let ephemeralKeypair = null;
@@ -749,7 +927,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
     case "CREATE_SWITCHBOARD_RANDOMNESS": {
       ephemeralKeypair = Keypair.generate();
       randomnessAddress = ephemeralKeypair.publicKey;
-      const { program, switchboard } = await switchboardProgram(provider, action.signer);
+      const { program, switchboard } = await switchboardProgram(action.signer);
       const [, initializeIx] = await switchboard.Randomness.create(
         program,
         ephemeralKeypair,
@@ -761,7 +939,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
     }
     default:
       if (action.id.startsWith("COMMIT_CCC_ROUND_")) {
-        const { program, switchboard } = await switchboardProgram(provider, action.signer);
+        const { program, switchboard } = await switchboardProgram(action.signer);
         const randomness = new switchboard.Randomness(program, state.randomnessAddress);
         const commitIx = await randomness.commitIx(
           switchboard.ON_DEMAND_DEVNET_QUEUE,
@@ -778,7 +956,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
           }),
         );
       } else if (action.id.startsWith("REVEAL_CCC_ROUND_")) {
-        const { program, switchboard } = await switchboardProgram(provider, action.signer);
+        const { program, switchboard } = await switchboardProgram(action.signer);
         const randomness = new switchboard.Randomness(program, state.randomnessAddress);
         const revealIx = await randomness.revealIx(action.signer);
         transaction.add(
@@ -818,6 +996,58 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
   return { transaction, ephemeralKeypair, randomnessAddress };
 }
 
+async function requestFeatureModelTSignature({
+  coordinator,
+  binding,
+  action,
+  messageSha256,
+  provider,
+  signer,
+  transaction,
+  verifySigned,
+}) {
+  const result = await coordinator.request({
+    binding,
+    action,
+    messageSha256,
+    signer: signer.toBase58(),
+    prompt: async () => {
+      const signed = await provider.signTransaction(transaction);
+      await verifySigned(signed);
+      return signed;
+    },
+  });
+  return result.value;
+}
+
+function assertFeaturePromptOrder(binding, nextAction) {
+  const receiptSet = loadAttendedReceiptSet(localStorage, binding);
+  const preUpgradeCapacity = receiptSet.preUpgradeProgramDataCapacityBytes;
+  if (
+    receiptSet.receipts.length === 0
+    || !Number.isSafeInteger(preUpgradeCapacity)
+    || preUpgradeCapacity <= 0
+  ) {
+    throw new Error(
+      "Canonical feature prompting requires prior receipts and the frozen pre-upgrade ProgramData capacity",
+    );
+  }
+  const programDataExtensionRequired =
+    preUpgradeCapacity < IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES;
+  const extensionReceiptPresent = receiptSet.receipts.some(
+    ({ action }) => action === "EXTEND_PROGRAM_DATA",
+  );
+  if (extensionReceiptPresent !== programDataExtensionRequired) {
+    throw new Error("Canonical extension receipt disagrees with the frozen pre-upgrade capacity");
+  }
+  return assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet,
+    expectedBinding: binding,
+    programDataExtensionRequired,
+    nextAction,
+  });
+}
+
 export default function FeatureRehearsal({
   baseSnapshot,
   explorer,
@@ -828,16 +1058,125 @@ export default function FeatureRehearsal({
   short,
   verifyMigrationDeployment,
 }) {
+  const exactStorageBinding = exactFeatureStorageBinding(baseSnapshot.mint);
+  const evidenceStorageKey = featureEvidenceStorageKey(baseSnapshot.mint);
+  const randomnessStorageKey = featureRandomnessStorageKey(baseSnapshot.mint);
+  const randomnessJournalKey = randomnessCreateJournalStorageKey(
+    exactStorageBinding,
+  );
+  const [promptCoordinator] = useState(createAttendedModelTPromptCoordinator);
   const [state, setState] = useState(null);
-  const [evidence, setEvidence] = useState(loadEvidence);
+  const [evidence, setEvidence] = useState(() => loadEvidence(baseSnapshot.mint));
   const [operatorReceiptSets, setOperatorReceiptSets] = useState([]);
   const [pending, setPending] = useState(null);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("LOADING FEATURE STATE");
   const [error, setError] = useState("");
   const [logs, setLogs] = useState([]);
+  const [retainedRandomnessSerialized, setRetainedRandomnessSerialized] = useState(
+    () => localStorage.getItem(randomnessStorageKey),
+  );
+  const [retainedRandomnessJournalSerialized, setRetainedRandomnessJournalSerialized] = useState(
+    () => localStorage.getItem(randomnessJournalKey),
+  );
+  const randomnessCreationReceipt = evidence.find(
+    (record) => record.action === "CREATE_SWITCHBOARD_RANDOMNESS",
+  ) ?? null;
+  const retainedRandomnessExists = Boolean(
+    retainedRandomnessSerialized || retainedRandomnessJournalSerialized,
+  );
+  let canonicalRandomnessDiscardInspection = Object.freeze({
+    canonicalCreateRecorded: null,
+    discardEligible: false,
+  });
+  try {
+    canonicalRandomnessDiscardInspection = inspectCanonicalRandomnessDiscardEligibility({
+      storage: localStorage,
+      expectedBinding: exactStorageBinding,
+      programArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+    });
+  } catch {
+    // Malformed, incomplete, or unavailable strict receipt storage keeps discard fail-closed.
+  }
+  const randomnessDiscardEligible = Boolean(
+    retainedRandomnessSerialized
+      && !retainedRandomnessJournalSerialized
+      && state?.randomnessContinuity
+      && evidence.length === 0
+      && !busy
+      && !pending
+      && canonicalRandomnessDiscardInspection.discardEligible,
+  );
+  let retainedRandomnessSource = retainedRandomnessSerialized;
+  let retainedRandomnessDisplay = null;
+  try {
+    if (!retainedRandomnessSource && retainedRandomnessJournalSerialized) {
+      retainedRandomnessSource = JSON.stringify(randomnessJournalContinuityRecord(
+        loadRandomnessCreateJournal(
+          localStorage,
+          exactFeatureStorageBinding(baseSnapshot.mint),
+        ),
+      ));
+    }
+    if (retainedRandomnessSource) {
+      retainedRandomnessDisplay = parseRandomnessContinuityRecord(
+        retainedRandomnessSource,
+        exactFeatureStorageBinding(baseSnapshot.mint),
+      ).address;
+    }
+  } catch {
+    retainedRandomnessDisplay = "MALFORMED SOURCE-BOUND CONTINUITY OR RECOVERY JOURNAL";
+  }
 
   const action = useMemo(() => state ? nextFeatureAction(state) : null, [state]);
+
+  const recoverVerifiedRandomness = useCallback((verifiedState) => {
+    const verified = verifiedState.randomnessContinuity;
+    if (!verified) return null;
+    const exactBinding = exactFeatureStorageBinding(baseSnapshot.mint);
+    const receiptSet = loadAttendedReceiptSet(localStorage, exactBinding);
+    const canonicalCreate = receiptSet.receipts.find(
+      ({ action: receiptAction }) => receiptAction === "CREATE_SWITCHBOARD_RANDOMNESS",
+    ) ?? null;
+    const featureCreate = evidence.find(
+      ({ action: receiptAction }) => receiptAction === "CREATE_SWITCHBOARD_RANDOMNESS",
+    ) ?? null;
+    const retained = localStorage.getItem(randomnessStorageKey);
+    let journal = loadRandomnessCreateJournal(localStorage, exactBinding);
+    const complete = !journal
+      && retained !== null
+      && canonicalCreate?.signature === verified.record.createSignature
+      && canonicalCreate?.messageSha256 === verified.record.createMessageSha256
+      && featureCreate?.signature === verified.record.createSignature
+      && featureCreate?.messageSha256 === verified.record.createMessageSha256;
+    if (complete) return null;
+    if (!journal) {
+      journal = canonicalRandomnessCreateJournal({
+        sourceCommit: verified.record.sourceCommit,
+        programArtifactSha256: verified.record.programArtifactSha256,
+        mint: verified.record.mint,
+        address: verified.record.address,
+        createSignature: verified.record.createSignature,
+        createMessageSha256: verified.record.createMessageSha256,
+        title: IAT_V2_RANDOMNESS_CREATE_TITLE,
+      });
+      persistRandomnessCreateJournal(localStorage, journal);
+      setRetainedRandomnessJournalSerialized(JSON.stringify(journal));
+    }
+    const recovered = reconcileVerifiedRandomnessCreateJournal({
+      storage: localStorage,
+      expectedBinding: exactBinding,
+      journal,
+      verifiedContinuity: verified,
+      continuityStorageKey: randomnessStorageKey,
+      featureEvidenceKey: evidenceStorageKey,
+      programArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+    });
+    setRetainedRandomnessSerialized(JSON.stringify(recovered.continuity));
+    setRetainedRandomnessJournalSerialized(null);
+    setEvidence(recovered.featureEvidence);
+    return recovered;
+  }, [baseSnapshot.mint, evidence, evidenceStorageKey, randomnessStorageKey]);
 
   async function loadFreshAttendedBoundary(minimumFinalizedSlot = 0) {
     if (!Number.isSafeInteger(minimumFinalizedSlot) || minimumFinalizedSlot < 0) {
@@ -863,7 +1202,12 @@ export default function FeatureRehearsal({
     ) {
       throw new Error("Fresh finalized parent snapshot no longer matches the reviewed active deployment");
     }
-    const childState = await loadFeatureState(parentSnapshot, parentSlot);
+    const retainedInputs = retainedRandomnessCreateInputs(baseSnapshot.mint, evidence);
+    const childState = await loadFeatureState(parentSnapshot, parentSlot, {
+      ...retainedInputs,
+      sha256Hex,
+    });
+    recoverVerifiedRandomness(childState);
     const deployment = await verifyMigrationDeployment(childState.finalObservationSlot);
     const deploymentObservation = migrationDeploymentObservation(
       deployment,
@@ -883,27 +1227,33 @@ export default function FeatureRehearsal({
     setError("");
     setStatus("VERIFYING FEATURE ACCOUNTS");
     try {
-      const next = await loadFeatureState(baseSnapshot);
+      const retainedInputs = retainedRandomnessCreateInputs(baseSnapshot.mint, evidence);
+      const next = await loadFeatureState(baseSnapshot, 0, {
+        ...retainedInputs,
+        sha256Hex,
+      });
+      recoverVerifiedRandomness(next);
       setState(next);
       const nextAction = nextFeatureAction(next);
       setStatus(nextAction ? `READY // ${nextAction.id}` : "WAIT GATE // NO SAFE ACTION YET");
       return next;
     } catch (caught) {
+      setState(null);
       setStatus("HOLD // FEATURE VERIFICATION FAILED");
       setError(caught instanceof Error ? caught.message : String(caught));
       throw caught;
     } finally {
       setBusy(false);
     }
-  }, [baseSnapshot]);
+  }, [baseSnapshot, evidence, recoverVerifiedRandomness, sha256Hex]);
 
   useEffect(() => {
     refresh().catch(() => {});
   }, [refresh]);
 
   useEffect(() => {
-    localStorage.setItem(FEATURE_EVIDENCE_KEY, JSON.stringify(evidence));
-  }, [evidence]);
+    localStorage.setItem(evidenceStorageKey, JSON.stringify(evidence));
+  }, [evidence, evidenceStorageKey]);
 
   async function simulateAndRequestSignature() {
     if (!action || pending || busy) return;
@@ -924,14 +1274,24 @@ export default function FeatureRehearsal({
         setState(current);
         throw new Error("Chain state advanced; review the newly computed action");
       }
+      if (currentAction.id === "CREATE_SWITCHBOARD_RANDOMNESS" && current.currentRound) {
+        throw new Error(
+          "An existing finalized CCC round has no source-bound randomness continuity; fresh randomness creation is blocked",
+        );
+      }
+      const promptBinding = evidenceBinding();
+      attendedPromptLatchKey({ binding: promptBinding, action: currentAction.id });
+      assertFeaturePromptOrder(promptBinding, currentAction.id);
       setState(current);
       setStatus(`CONNECTING ${signerRole(currentAction.signer)} // ${short(currentAction.signer.toBase58(), 9)}`);
       const { provider, publicKey } = await getHardwareProvider(currentAction.signer);
+      if (!publicKey.equals(currentAction.signer)) {
+        throw new Error("Connected hardware account is not the exact reviewed feature signer");
+      }
       const built = await buildActionTransaction(
         currentAction,
         current,
         buildBoundary.parentSnapshot,
-        provider,
       );
       ephemeralKeypair = built.ephemeralKeypair;
       const latestResult = await connection.getLatestBlockhashAndContext({
@@ -996,14 +1356,31 @@ export default function FeatureRehearsal({
       }
       setState(promptBoundary.state);
       setStatus("HARDWARE // REVIEW + SIGN; STILL NOT BROADCAST");
-      const signed = await provider.signTransaction(built.transaction);
-      const signedMessageSha256 = await sha256Hex(signed.serializeMessage());
-      if (signedMessageSha256 !== messageSha256) {
-        throw new Error("Wallet changed the reviewed transaction message");
-      }
-      const walletSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
-      if (!walletSignature?.signature) throw new Error("Required hardware signature is missing");
-      if (!signed.verifySignatures()) throw new Error("Signed transaction failed local signature verification");
+      assertFeaturePromptOrder(promptBinding, promptAction.id);
+      const signed = await requestFeatureModelTSignature({
+        coordinator: promptCoordinator,
+        binding: promptBinding,
+        action: promptAction.id,
+        messageSha256,
+        provider,
+        signer: publicKey,
+        transaction: built.transaction,
+        verifySigned: async (candidate) => {
+          const signedMessageSha256 = await sha256Hex(candidate.serializeMessage());
+          if (signedMessageSha256 !== messageSha256) {
+            throw new Error("Wallet changed the reviewed transaction message");
+          }
+          const walletSignature = candidate.signatures.find(
+            ({ publicKey: signer }) => signer.equals(publicKey),
+          );
+          if (!walletSignature?.signature) {
+            throw new Error("Required hardware signature is missing");
+          }
+          if (!candidate.verifySignatures()) {
+            throw new Error("Signed transaction failed local signature verification");
+          }
+        },
+      });
       setPending({
         action: currentAction.id,
         actionBinding: promptActionBinding,
@@ -1075,6 +1452,21 @@ export default function FeatureRehearsal({
       if (!blockhashValidity.value) {
         throw new Error("Signed transaction blockhash is no longer valid");
       }
+      let stagedCreateJournal = null;
+      if (pending.randomnessAddress) {
+        if (pending.action !== "CREATE_SWITCHBOARD_RANDOMNESS") {
+          throw new Error("Randomness signer material is attached to a non-CREATE action");
+        }
+        stagedCreateJournal = canonicalRandomnessCreateJournal({
+          ...exactFeatureStorageBinding(baseSnapshot.mint),
+          address: pending.randomnessAddress.toBase58(),
+          createSignature: encodeSolanaSignature(pending.signed.signature),
+          createMessageSha256: pending.messageSha256,
+          title: IAT_V2_RANDOMNESS_CREATE_TITLE,
+        });
+        persistRandomnessCreateJournal(localStorage, stagedCreateJournal);
+        setRetainedRandomnessJournalSerialized(JSON.stringify(stagedCreateJournal));
+      }
       setState(boundary.state);
       broadcastBoundaryValidated = true;
       setStatus("BROADCASTING USER-APPROVED DEVNET TRANSACTION");
@@ -1083,6 +1475,9 @@ export default function FeatureRehearsal({
         preflightCommitment: FINALIZED_COMMITMENT,
         maxRetries: 3,
       });
+      if (stagedCreateJournal && signature !== stagedCreateJournal.createSignature) {
+        throw new Error("Broadcast randomness CREATE signature disagrees with the durable recovery journal");
+      }
       const confirmation = await connection.confirmTransaction({
         signature,
         blockhash: pending.latest.blockhash,
@@ -1096,24 +1491,27 @@ export default function FeatureRehearsal({
         "Finalized transaction confirmation",
         boundary.finalObservationSlot,
       );
-      if (pending.randomnessAddress) {
-        localStorage.setItem(FEATURE_RANDOMNESS_KEY, pending.randomnessAddress.toBase58());
+      if (!stagedCreateJournal) {
+        const record = {
+          action: pending.action,
+          title: pending.title,
+          signature,
+          messageSha256: pending.messageSha256,
+          explorerUrl: explorer("tx", signature),
+          finalizedAtUtc: new Date().toISOString(),
+          week: pending.week,
+        };
+        persistAttendedReceipt(localStorage, evidenceBinding(), {
+          ...record,
+          kind: "feature",
+        });
+        setEvidence((current) => [
+          ...current.filter((entry) => entry.action !== record.action),
+          record,
+        ]);
       }
-      const record = {
-        action: pending.action,
-        title: pending.title,
-        signature,
-        messageSha256: pending.messageSha256,
-        explorerUrl: explorer("tx", signature),
-        finalizedAtUtc: new Date().toISOString(),
-        week: pending.week,
-      };
-      setEvidence((current) => [
-        ...current.filter((entry) => entry.action !== record.action),
-        record,
-      ]);
-      setPending(null);
       const refreshedBoundary = await loadFreshAttendedBoundary(confirmationSlot);
+      setPending(null);
       setState(refreshedBoundary.state);
       const nextAction = nextFeatureAction(refreshedBoundary.state);
       setStatus(nextAction ? `CONFIRMED // NEXT ${nextAction.id}` : "CONFIRMED // WAIT GATE");
@@ -1230,10 +1628,50 @@ export default function FeatureRehearsal({
   }
 
   function clearFeatureReceipts() {
-    localStorage.removeItem(FEATURE_EVIDENCE_KEY);
+    if (retainedRandomnessExists) {
+      setStatus("HOLD // RETAINED RANDOMNESS CONTINUITY REQUIRES ITS CREATE RECEIPT");
+      return;
+    }
+    localStorage.removeItem(evidenceStorageKey);
+    localStorage.removeItem(LEGACY_FEATURE_EVIDENCE_KEY_V2);
     localStorage.removeItem(LEGACY_FEATURE_EVIDENCE_KEY);
     setEvidence([]);
     setStatus("LOCAL FEATURE RECEIPTS CLEARED // ON-CHAIN STATE UNCHANGED");
+  }
+
+  function discardRetainedRandomnessAddress() {
+    let freshInspection;
+    try {
+      freshInspection = inspectCanonicalRandomnessDiscardEligibility({
+        storage: localStorage,
+        expectedBinding: exactStorageBinding,
+        programArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+      });
+    } catch (caught) {
+      setStatus("HOLD // STRICT CANONICAL RECEIPTS COULD NOT AUTHORIZE RANDOMNESS DISCARD");
+      setError(caught instanceof Error ? caught.message : String(caught));
+      return;
+    }
+    if (!randomnessDiscardEligible || !freshInspection.discardEligible) {
+      setStatus("HOLD // RANDOMNESS DISCARD IS NOT VERIFIED AS PRE-CEREMONY ELIGIBLE");
+      return;
+    }
+    try {
+      localStorage.removeItem(randomnessStorageKey);
+      if (localStorage.getItem(randomnessStorageKey) !== null) {
+        throw new Error("Retained randomness continuity remained after discard");
+      }
+    } catch (caught) {
+      setStatus("HOLD // RETAINED RANDOMNESS CONTINUITY COULD NOT BE DISCARDED");
+      setError(caught instanceof Error ? caught.message : String(caught));
+      return;
+    }
+    setRetainedRandomnessSerialized(null);
+    setState(null);
+    setError("");
+    setStatus(
+      "RETAINED RANDOMNESS ADDRESS DISCARDED // RECEIPTS PRESERVED // REFRESH TO REQUIRE FRESH CREATE_SWITCHBOARD_RANDOMNESS",
+    );
   }
 
   return (
@@ -1254,6 +1692,42 @@ export default function FeatureRehearsal({
         <div><small>PARTICIPANT SOL</small><strong>{state ? (state.participantBalanceLamports / 1e9).toFixed(3) : "—"}</strong></div>
         <div><small>SWITCHBOARD</small><strong>{state?.randomnessAddress ? "BOUND" : "PENDING"}</strong></div>
       </div>
+
+      <div className="address-grid">
+        <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
+        <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
+        <div><span>SOURCE COMMIT</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
+        <div><span>CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
+        <div><span>EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
+        <div><span>CI-BOUND ARTIFACT SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256}</code></div>
+        <div><span>CI-BOUND ARTIFACT BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}</code></div>
+      </div>
+
+      {retainedRandomnessExists && (
+        <div className="feature-command">
+          <div>
+            <small>PRE-CEREMONY RANDOMNESS CONTROL // LOCAL STORAGE ONLY</small>
+            <strong>{canonicalRandomnessDiscardInspection.canonicalCreateRecorded || randomnessCreationReceipt
+              ? "CURRENT CEREMONY RANDOMNESS LOCKED"
+              : randomnessDiscardEligible
+                ? "VERIFIED PRE-CEREMONY RETAINED ADDRESS MAY BE DISCARDED"
+                : "RANDOMNESS DISCARD LOCKED UNTIL STRICT PRE-CEREMONY VERIFICATION"}</strong>
+            <code className="full-code">{retainedRandomnessDisplay}</code>
+            <p>
+              The control removes only this source-bound continuity record, preserves receipts, and performs
+              no RPC, signature, broadcast, or chain action. After discard, refresh and complete a fresh
+              CREATE_SWITCHBOARD_RANDOMNESS action.
+            </p>
+          </div>
+          <button
+            className="discard"
+            onClick={discardRetainedRandomnessAddress}
+            disabled={!randomnessDiscardEligible}
+          >
+            DISCARD RETAINED ADDRESS + REQUIRE FRESH CREATE
+          </button>
+        </div>
+      )}
 
       <div className="feature-command">
         <div>
@@ -1297,7 +1771,7 @@ export default function FeatureRehearsal({
             </button>
           ) : (
             <div className="broadcast-panel">
-              <code>MESSAGE {short(pending.messageSha256, 10)}</code>
+              <code className="full-code">MESSAGE {pending.messageSha256}</code>
               <code>{pending.wireSize} BYTES // SIGNATURES VERIFIED</code>
               <button onClick={broadcastSigned} disabled={busy}>BROADCAST SIGNED DEVNET TRANSACTION</button>
               <button className="discard" onClick={discardPending} disabled={busy}>DISCARD WITHOUT BROADCAST</button>
@@ -1343,7 +1817,11 @@ export default function FeatureRehearsal({
         <button className="discard" onClick={() => setOperatorReceiptSets([])} disabled={operatorReceiptSets.length === 0}>
           DISCARD IMPORTED RECEIPTS ({operatorReceiptSets.length})
         </button>
-        <button className="discard" onClick={clearFeatureReceipts} disabled={evidence.length === 0 || busy || Boolean(pending)}>
+        <button
+          className="discard"
+          onClick={clearFeatureReceipts}
+          disabled={evidence.length === 0 || busy || Boolean(pending) || retainedRandomnessExists}
+        >
           CLEAR LOCAL FEATURE RECEIPTS
         </button>
       </div>

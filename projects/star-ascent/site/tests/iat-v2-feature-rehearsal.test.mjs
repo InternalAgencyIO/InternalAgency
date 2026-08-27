@@ -59,6 +59,82 @@ const adminConsoleSource = readFileSync(
   "utf8",
 );
 
+test("retained randomness cannot shorten the source-bound attended roster", () => {
+  const keySource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("function exactFeatureStorageBinding"),
+    featureConsoleSource.indexOf("function loadEvidence"),
+  );
+  assert.match(keySource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD/u);
+  assert.match(keySource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
+  assert.match(keySource, /mint\.toBase58\(\)/u);
+
+  const evidenceLoadSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("function loadEvidence"),
+    featureConsoleSource.indexOf("function storedRandomnessContinuity"),
+  );
+  assert.match(evidenceLoadSource, /featureEvidenceStorageKey\(mint\)/u);
+  assert.doesNotMatch(evidenceLoadSource, /LEGACY_FEATURE_EVIDENCE_KEY/u);
+
+  const retainedRecordSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("function storedRandomnessContinuity"),
+    featureConsoleSource.indexOf("function bitIsSet"),
+  );
+  assert.match(retainedRecordSource, /parseRandomnessContinuityRecord/u);
+  assert.match(retainedRecordSource, /exactFeatureStorageBinding\(mint\)/u);
+  assert.doesNotMatch(retainedRecordSource, /new PublicKey\(value\)|removeItem/u);
+
+  const continuitySource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("const retainedRandomness = storedRandomnessContinuity"),
+    featureConsoleSource.indexOf("const addresses = ["),
+  );
+  assert.match(continuitySource, /connection\.getTransaction\(retainedRandomness\.createSignature/u);
+  assert.match(continuitySource, /commitment: FINALIZED_COMMITMENT/u);
+  assert.match(continuitySource, /verifyFinalizedRandomnessContinuity/u);
+  assert.match(continuitySource, /retainedCreateReceipt/u);
+  assert.match(continuitySource, /predecessorTransactionResponse: predecessorTransaction/u);
+  assert.match(continuitySource, /expectedParticipant: COMMUNITY_CUSTODY/u);
+  assert.match(continuitySource, /expectedDestinationTokens: plan\.allocationDestinations\.community\.tokenAccount/u);
+  assert.match(continuitySource, /minimumCreationSlot: sourceDeploymentSlot/u);
+
+  const discardSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("function discardRetainedRandomnessAddress"),
+    featureConsoleSource.indexOf("return (", featureConsoleSource.indexOf("function discardRetainedRandomnessAddress")),
+  );
+  assert.match(discardSource, /inspectCanonicalRandomnessDiscardEligibility/u);
+  assert.match(discardSource, /!randomnessDiscardEligible \|\| !freshInspection\.discardEligible/u);
+  assert.match(discardSource, /localStorage\.removeItem\(randomnessStorageKey\)/u);
+  assert.match(discardSource, /localStorage\.getItem\(randomnessStorageKey\) !== null/u);
+  assert.match(discardSource, /setRetainedRandomnessSerialized\(null\)/u);
+  assert.doesNotMatch(discardSource, /FEATURE_EVIDENCE_KEY|setEvidence|refresh\(|sendRawTransaction|signTransaction/u);
+
+  const firstRenderGateSource = featureConsoleSource.slice(
+    featureConsoleSource.indexOf("let canonicalRandomnessDiscardInspection"),
+    featureConsoleSource.indexOf("let retainedRandomnessSource"),
+  );
+  assert.match(firstRenderGateSource, /canonicalCreateRecorded: null,[\s\S]*discardEligible: false/u);
+  assert.match(firstRenderGateSource, /inspectCanonicalRandomnessDiscardEligibility\(\{[\s\S]*storage: localStorage,[\s\S]*expectedBinding: exactStorageBinding/u);
+  assert.match(firstRenderGateSource, /state\?\.randomnessContinuity[\s\S]*evidence\.length === 0[\s\S]*canonicalRandomnessDiscardInspection\.discardEligible/u);
+
+  assert.match(
+    featureConsoleSource,
+    /onClick=\{discardRetainedRandomnessAddress\}[\s\S]*disabled=\{!randomnessDiscardEligible\}/u,
+  );
+  assert.match(
+    featureConsoleSource,
+    /disabled=\{evidence\.length === 0 \|\| busy \|\| Boolean\(pending\) \|\| retainedRandomnessExists\}/u,
+  );
+  assert.match(
+    featureConsoleSource,
+    /canonicalRandomnessCreateJournal\(\{[\s\S]*createSignature: encodeSolanaSignature\(pending\.signed\.signature\),[\s\S]*createMessageSha256: pending\.messageSha256/u,
+  );
+  assert.match(featureConsoleSource, /persistRandomnessCreateJournal\(localStorage, stagedCreateJournal\)/u);
+  assert.doesNotMatch(
+    featureConsoleSource,
+    /localStorage\.setItem\(randomnessStorageKey,\s*pending\.randomnessAddress/u,
+  );
+  assert.doesNotMatch(featureConsoleSource, /FEATURE_RANDOMNESS_KEY/u);
+});
+
 const allocations = {
   community: { amount: 500n },
   treasury: { amount: 200n },
@@ -309,7 +385,7 @@ test("feature action selection uses finalized account contexts and finalized cha
     loaderSource,
     /parseV2ConfigAccount\(configInfo\.data\)[\s\S]*config\.admin\.equals\(IAT_V2_PROGRAM_ADMIN\)[\s\S]*config\.mint\.equals\(mint\)[\s\S]*config\.randomnessProgram\.equals\(SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID\)[\s\S]*config\.rehearsalMode[\s\S]*config\.active/u,
   );
-  assert.match(loaderSource, /getMultipleAccountsInfoAndContext\(addresses,[\s\S]*minContextSlot: configSlot[\s\S]*getBalanceAndContext\(COMMUNITY_CUSTODY,[\s\S]*minContextSlot: stateSlot[\s\S]*getMultipleAccountsInfoAndContext\(linkedRoundAddresses,[\s\S]*minContextSlot: participantBalanceSlot/u);
+  assert.match(loaderSource, /const continuityReadFloor = Math\.max\([\s\S]*configSlot,[\s\S]*randomnessContinuity\?\.accountContextSlot \?\? 0[\s\S]*getMultipleAccountsInfoAndContext\(addresses,[\s\S]*minContextSlot: continuityReadFloor[\s\S]*getBalanceAndContext\(COMMUNITY_CUSTODY,[\s\S]*minContextSlot: stateSlot[\s\S]*getMultipleAccountsInfoAndContext\(linkedRoundAddresses,[\s\S]*minContextSlot: participantBalanceSlot/u);
   assert.match(loaderSource, /finalObservationSlot = linkedRoundResult[\s\S]*finalizedBlockTimestamp\(finalObservationSlot, "Final feature observation"\)[\s\S]*currentIatV2Week\(genesisTimestamp, nowTimestamp\) !== currentWeek[\s\S]*return \{[\s\S]*finalObservationSlot/u);
   assert.match(loaderSource, /Finalized Devnet time crossed a feature boundary; refresh before signing/u);
   assert.doesNotMatch(loaderSource, /Date\.now\(|["']confirmed["']/u);
@@ -335,7 +411,7 @@ test("attended feature signing and broadcast reattest exact finalized deployment
     featureConsoleSource.indexOf("const refresh = useCallback"),
   );
   const parentRefresh = boundarySource.indexOf("await loadFeatureParentSnapshot(readFloor)");
-  const childRefresh = boundarySource.indexOf("await loadFeatureState(parentSnapshot, parentSlot)");
+  const childRefresh = boundarySource.indexOf("await loadFeatureState(parentSnapshot, parentSlot, {");
   const deploymentRefresh = boundarySource.indexOf(
     "await verifyMigrationDeployment(childState.finalObservationSlot)",
   );
@@ -356,7 +432,7 @@ test("attended feature signing and broadcast reattest exact finalized deployment
     "await connection.simulateTransaction(simulationTransaction",
   );
   const promptBoundary = signerSource.indexOf("await loadFreshAttendedBoundary(simulationSlot)");
-  const hardwarePrompt = signerSource.indexOf("await provider.signTransaction(built.transaction)");
+  const hardwarePrompt = signerSource.indexOf("await requestFeatureModelTSignature({");
   assert.ok(buildBoundary >= 0, "signing path lacks a fresh attended boundary");
   assert.ok(hardwareConnection > buildBoundary, "hardware was loaded before deployment re-attestation");
   assert.ok(transactionBuild > hardwareConnection, "transaction construction order drifted");
@@ -365,7 +441,11 @@ test("attended feature signing and broadcast reattest exact finalized deployment
   assert.ok(hardwarePrompt > promptBoundary, "hardware prompt preceded the final deployment re-attestation");
   assert.match(signerSource, /sameBinding\(currentActionBinding, reviewedActionBinding\)/u);
   assert.match(signerSource, /featureActionBinding\(action, state\)[\s\S]*featureActionBinding\(currentAction, current\)/u);
-  assert.match(signerSource, /buildActionTransaction\([\s\S]*buildBoundary\.parentSnapshot,[\s\S]*provider/u);
+  assert.match(signerSource, /buildActionTransaction\([\s\S]*buildBoundary\.parentSnapshot,[\s\S]*\);/u);
+  assert.doesNotMatch(
+    signerSource,
+    /buildActionTransaction\(\s*currentAction,\s*current,\s*buildBoundary\.parentSnapshot,\s*provider/u,
+  );
   assert.match(signerSource, /getLatestBlockhashAndContext\(\{[\s\S]*minContextSlot: buildBoundary\.finalObservationSlot/u);
   assert.match(signerSource, /new VersionedTransaction\(built\.transaction\.compileMessage\(\)\)[\s\S]*sameBytes\(simulationTransaction\.message\.serialize\(\), reviewedMessageBytes\)[\s\S]*simulateTransaction\(simulationTransaction, \{[\s\S]*commitment: FINALIZED_COMMITMENT,[\s\S]*minContextSlot: latestContextSlot,[\s\S]*replaceRecentBlockhash: false,[\s\S]*sigVerify: false/u);
   assert.match(signerSource, /const simulationSlot = finalizedContextSlot\([\s\S]*latestContextSlot[\s\S]*sameBytes\(postSimulationMessageBytes, reviewedMessageBytes\)[\s\S]*sha256Hex\(postSimulationMessageBytes\) !== messageSha256[\s\S]*loadFreshAttendedBoundary\(simulationSlot\)/u);
@@ -454,7 +534,7 @@ test("seven-stage initialization is mode-exact and selected only from finalized 
     adminConsoleSource.indexOf("async function simulateAndSign"),
     adminConsoleSource.indexOf("async function broadcastSigned"),
   );
-  assert.match(signerSource, /pending \|\| busy \|\| signingInFlight\.current/u);
+  assert.match(signerSource, /\|\| pending\s*\|\| busy\s*\|\| signingInFlight\.current/u);
   assert.match(signerSource, /signingInFlight\.current = true;[\s\S]*finally \{[\s\S]*signingInFlight\.current = false;/u);
   const finalizedRefresh = signerSource.indexOf("await loadChainSnapshot()");
   const hardwareRequest = signerSource.indexOf("await getHardwareProvider()");
@@ -574,7 +654,7 @@ test("legacy-round migration is localhost-only, CI-pinned, and requires separate
     migrationConsoleSource.indexOf("async function simulateAndSign"),
   );
   assert.doesNotMatch(effectSource, /(?:simulateAndSign|broadcastSigned)\s*\(/u);
-  assert.match(migrationConsoleSource, /simulateExactLegacyTransaction\([\s\S]*provider\.signTransaction/u);
+  assert.match(migrationConsoleSource, /simulateExactLegacyTransaction\([\s\S]*requestRoundModelTSignature/u);
   assert.match(migrationConsoleSource, /assertSignedLegacyTransaction\([\s\S]*messageSha256/u);
   assert.match(attendedTransactionBoundarySource, /new VersionedTransaction\(transaction\.compileMessage\(\)\)/u);
   assert.match(

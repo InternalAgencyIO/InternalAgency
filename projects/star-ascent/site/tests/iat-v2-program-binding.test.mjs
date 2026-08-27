@@ -13,6 +13,7 @@ import {
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
   IAT_V2_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_PROGRAM_ARTIFACT_SHA256,
 } from "../programs/iat_v2/instructions.mjs";
@@ -92,9 +93,13 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
   assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES, 649_680);
   assert.equal(
     IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-    "d5f96a65fc46752facbd2263a8e2f3d650390066",
+    "2b68cebecff756655d140277c67f8f46ac832d88",
   );
-  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID, 33_027_585_009);
+  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID, 33_029_576_920);
+  assert.equal(
+    IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
+    "31ac038476e72c964f79a29bae5090aa7172f7013cc5454a0b96f9b343d0186b",
+  );
 
   for (const path of [
     "scripts/rebuild-iat-v2-devnet-buffer-fresh.sh",
@@ -102,7 +107,8 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
   ]) {
     const source = readSiteSource(path);
     assert.match(source, /iat-v2-devnet-buffer-preflight\.mjs verify/u, `${path} lost CI evidence verification`);
-    assert.match(source, /read -r EXPECTED_HASH EXPECTED_BYTES/u, `${path} lost verified dynamic binding`);
+    assert.match(source, /EXPECTED_HASH="\$\{binding_fields\[0\]\}"/u, `${path} lost verified dynamic hash binding`);
+    assert.match(source, /EXPECTED_BYTES="\$\{binding_fields\[1\]\}"/u, `${path} lost verified dynamic byte binding`);
     assert.doesNotMatch(source, /EXPECTED_HASH="[0-9a-f]{64}"/u, `${path} must not pin an obsolete artifact`);
     assert.doesNotMatch(source, new RegExp(currentSha256, "u"), `${path} must not stage the incompatible artifact`);
     assert.match(source, /--url devnet/u, `${path} must stay Devnet-only`);
@@ -166,4 +172,66 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
   assert.match(currentProgram, /pub const CCC_DLC_GENESIS_ENABLED: bool = true;/u);
   assert.match(currentProgram, /pub fn migrate_legacy_round/u);
   assert.match(currentProgram, /pub struct Round \{[\s\S]*pub commit_slot: u64,[\s\S]*pub commit_timestamp: i64,/u);
+});
+
+test("attended consoles render complete exact migration evidence bindings", () => {
+  const bufferPreflight = readSiteSource("scripts/iat-v2-devnet-buffer-preflight.mjs");
+  assert.match(
+    bufferPreflight,
+    /evidenceManifestSha256: IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256/u,
+  );
+  assert.doesNotMatch(bufferPreflight, /evidenceManifestSha256:\s*["'][0-9a-f]{64}["']/u);
+
+  const consolePaths = [
+    "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
+    "tools/iat-v2-admin-console/LegacyRoundMigration.jsx",
+    "tools/iat-v2-admin-console/FeatureRehearsal.jsx",
+  ];
+  const exactVisibleValues = [
+    '<code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code>',
+    '<code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code>',
+    '<code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code>',
+    "<code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code>",
+    '<code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code>',
+    '<code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256}</code>',
+    "<code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}</code>",
+  ];
+
+  for (const path of consolePaths) {
+    const source = readSiteSource(path);
+    for (const value of exactVisibleValues) {
+      assert.ok(source.includes(value), `${path} must render ${value}`);
+    }
+  }
+
+  const featureConsole = readSiteSource("tools/iat-v2-admin-console/FeatureRehearsal.jsx");
+  assert.match(featureConsole, /MESSAGE \{pending\.messageSha256\}/u);
+  assert.doesNotMatch(featureConsole, /short\(pending\.messageSha256/u);
+
+  const upgradeConsole = readSiteSource("tools/iat-v2-admin-console/ProgramUpgrade.jsx");
+  assert.match(upgradeConsole, /owner: info\.owner,[\s\S]*programBytes: data\.subarray\(BUFFER_METADATA_BYTES\)/u);
+  assert.match(upgradeConsole, /bufferOwner: parsedBuffer\.owner/u);
+  assert.match(upgradeConsole, /bufferProgramBytes: parsedBuffer\.programBytes\.length/u);
+  assert.match(upgradeConsole, /FINALIZED BUFFER OWNER \(OBSERVED\)[\s\S]*snapshot\?\.bufferOwner\?\.toBase58\(\)/u);
+  assert.match(upgradeConsole, /FINALIZED BUFFER PROGRAM BYTES \(OBSERVED\)[\s\S]*snapshot\?\.bufferProgramBytes/u);
+});
+
+test("current-source action routes cannot fall back to archived signing surfaces", () => {
+  const mainConsole = readSiteSource("tools/iat-v2-admin-console/main.jsx");
+  assert.match(
+    mainConsole,
+    /const LEGACY_INITIALIZATION_SIGNING_DISABLED = true;/u,
+  );
+  assert.match(
+    mainConsole,
+    /async function simulateAndSign\(\) \{[\s\S]*INSPECTION_MODE[\s\S]*\|\| LEGACY_INITIALIZATION_SIGNING_DISABLED[\s\S]*signingInFlight\.current[\s\S]*\) return;/u,
+  );
+  assert.match(
+    mainConsole,
+    /ARCHIVED INITIALIZATION SIGNING DISABLED/u,
+  );
+  assert.match(
+    mainConsole,
+    /INSPECTION_MODE \|\| !CANONICAL_ACTION_MODE[\s\S]*<App getHardwareProvider=\{rejectInspectionHardwareProvider\}/u,
+  );
 });

@@ -10,10 +10,60 @@ import {
   createTrezorTransactionProvider,
   findTrezorSolanaAccount,
   TREZOR_SOLANA_NETWORK_GENESIS_HASHES,
+  verifyTrezorSolanaAccountOnDevice,
 } from "../tools/iat-v2-admin-console/trezor-provider.mjs";
 
 const devnetGenesis = () => TREZOR_SOLANA_NETWORK_GENESIS_HASHES.devnet;
 const mainnetGenesis = () => TREZOR_SOLANA_NETWORK_GENESIS_HASHES["mainnet-beta"];
+const DEFAULT_PATH = "m/44'/501'/0'/0'";
+
+function solanaEntry(publicKey, path = DEFAULT_PATH) {
+  const accountIndex = Number.parseInt(path.split("/")[3], 10);
+  return {
+    publicKey: Buffer.from(publicKey.toBytes()).toString("hex"),
+    publicKeyBase58: publicKey.toBase58(),
+    displayablePublicKey: publicKey.toBase58(),
+    path: [
+      0x8000002c,
+      0x800001f5,
+      (0x80000000 + accountIndex) >>> 0,
+      0x80000000,
+    ],
+    serializedPath: path,
+  };
+}
+
+async function createMockVerification({
+  connect,
+  publicKey,
+  path = DEFAULT_PATH,
+}) {
+  connect.solanaGetPublicKey = async (request) => {
+    assert.deepEqual(request, { path, showOnTrezor: true });
+    return { success: true, payload: solanaEntry(publicKey, path) };
+  };
+  return verifyTrezorSolanaAccountOnDevice({
+    connect,
+    account: { path, publicKey },
+    expectedAddress: publicKey,
+  });
+}
+
+async function createMockVerifiedProvider({
+  connect,
+  publicKey,
+  path = DEFAULT_PATH,
+  network,
+  readGenesisHash,
+}) {
+  const verification = await createMockVerification({ connect, publicKey, path });
+  return createTrezorTransactionProvider({
+    connect,
+    verification,
+    network,
+    readGenesisHash,
+  });
+}
 
 test("direct Trezor adapter finds the exact account and returns a verified Devnet signature", async () => {
 const signer = Keypair.generate();
@@ -22,7 +72,12 @@ const signer = Keypair.generate();
   const path = "m/44'/501'/3'/0'";
   let signRequest;
   const connect = {
-    async solanaGetPublicKey({ bundle }) {
+    async solanaGetPublicKey(request) {
+      if (request.showOnTrezor === true) {
+        assert.deepEqual(request, { path, showOnTrezor: true });
+        return { success: true, payload: solanaEntry(signer.publicKey, path) };
+      }
+      const { bundle } = request;
       assert.equal(bundle.length, 2);
       return {
         success: true,
@@ -64,10 +119,14 @@ const signer = Keypair.generate();
     paths: ["m/44'/501'/0'/0'", path],
   });
   assert.equal(account.path, path);
+  const verification = await verifyTrezorSolanaAccountOnDevice({
+    connect,
+    account,
+    expectedAddress: signer.publicKey,
+  });
   const provider = createTrezorTransactionProvider({
     connect,
-    path: account.path,
-    publicKey: account.publicKey,
+    verification,
     network: "devnet",
     readGenesisHash: devnetGenesis,
   });
@@ -220,9 +279,8 @@ test("direct Trezor adapter rejects a valid expected-key signature over a substi
       };
     },
   };
-  const provider = createTrezorTransactionProvider({
+  const provider = await createMockVerifiedProvider({
     connect,
-    path: "m/44'/501'/0'/0'",
     publicKey: signer.publicKey,
     network: "devnet",
     readGenesisHash: devnetGenesis,
@@ -262,9 +320,8 @@ test("direct Trezor adapter rejects forged bytes in the expected signer slot", a
       };
     },
   };
-  const provider = createTrezorTransactionProvider({
+  const provider = await createMockVerifiedProvider({
     connect,
-    path: "m/44'/501'/0'/0'",
     publicKey: signer.publicKey,
     network: "devnet",
     readGenesisHash: devnetGenesis,
@@ -299,22 +356,22 @@ test("direct Trezor adapter preserves every pre-existing non-Trezor cosigner slo
   const originalFeePayerSignature = Buffer.from(
     transaction.signatures.find(({ publicKey }) => publicKey.equals(feePayer.publicKey)).signature,
   );
-  const provider = createTrezorTransactionProvider({
-    connect: {
-      async solanaSignTransaction(request) {
-        const signed = Transaction.from(Buffer.from(request.serializedTx, "hex"));
-        signed.partialSign(signer);
-        const signature = signed.signatures.find(({ publicKey }) => publicKey.equals(signer.publicKey));
-        return {
-          success: true,
-          payload: {
-            signature: Buffer.from(signature.signature).toString("hex"),
-            serializedTx: Buffer.from(signed.serialize()).toString("hex"),
-          },
-        };
-      },
+  const connect = {
+    async solanaSignTransaction(request) {
+      const signed = Transaction.from(Buffer.from(request.serializedTx, "hex"));
+      signed.partialSign(signer);
+      const signature = signed.signatures.find(({ publicKey }) => publicKey.equals(signer.publicKey));
+      return {
+        success: true,
+        payload: {
+          signature: Buffer.from(signature.signature).toString("hex"),
+          serializedTx: Buffer.from(signed.serialize()).toString("hex"),
+        },
+      };
     },
-    path: "m/44'/501'/0'/0'",
+  };
+  const provider = await createMockVerifiedProvider({
+    connect,
     publicKey: signer.publicKey,
     network: "devnet",
     readGenesisHash: devnetGenesis,
@@ -343,8 +400,8 @@ test("direct Trezor adapter rejects dropped or injected non-Trezor cosigner sign
     if (signFeePayer) transaction.partialSign(feePayer);
     return transaction;
   };
-  const providerForMutation = (mutate) => createTrezorTransactionProvider({
-    connect: {
+  const providerForMutation = async (mutate) => {
+    const connect = {
       async solanaSignTransaction(request) {
         const signed = Transaction.from(Buffer.from(request.serializedTx, "hex"));
         signed.partialSign(signer);
@@ -361,42 +418,44 @@ test("direct Trezor adapter rejects dropped or injected non-Trezor cosigner sign
           },
         };
       },
-    },
-    path: "m/44'/501'/0'/0'",
-    publicKey: signer.publicKey,
-    network: "devnet",
-    readGenesisHash: devnetGenesis,
-  });
-  const dropProvider = providerForMutation((signed) => {
+    };
+    return createMockVerifiedProvider({
+      connect,
+      publicKey: signer.publicKey,
+      network: "devnet",
+      readGenesisHash: devnetGenesis,
+    });
+  };
+  const dropProvider = await providerForMutation((signed) => {
     signed.signatures.find(({ publicKey }) => publicKey.equals(feePayer.publicKey)).signature = null;
   });
   await assert.rejects(
     dropProvider.signTransaction(makeTransaction(true)),
     /changed a non-Trezor cosigner signature slot/,
   );
-  const injectProvider = providerForMutation((signed) => signed.partialSign(feePayer));
+  const injectProvider = await providerForMutation((signed) => signed.partialSign(feePayer));
   await assert.rejects(
     injectProvider.signTransaction(makeTransaction(false)),
     /changed a non-Trezor cosigner signature slot/,
   );
 });
 
-test("direct Trezor adapter requires an explicit supported network", () => {
+test("direct Trezor adapter requires an explicit supported network", async () => {
   const signer = Keypair.generate().publicKey;
+  const connect = {};
+  const verification = await createMockVerification({ connect, publicKey: signer });
   assert.throws(
     () => createTrezorTransactionProvider({
-      connect: {},
-      path: "m/44'/501'/0'/0'",
-      publicKey: signer,
+      connect,
+      verification,
       readGenesisHash: devnetGenesis,
     }),
     /explicit devnet or mainnet-beta network/,
   );
   assert.throws(
     () => createTrezorTransactionProvider({
-      connect: {},
-      path: "m/44'/501'/0'/0'",
-      publicKey: signer,
+      connect,
+      verification,
       network: "testnet",
       readGenesisHash: devnetGenesis,
     }),
@@ -404,26 +463,53 @@ test("direct Trezor adapter requires an explicit supported network", () => {
   );
 });
 
+test("direct Trezor adapter rejects unbranded evidence and cross-Connect capability reuse", async () => {
+  const signer = Keypair.generate().publicKey;
+  const connect = {};
+  const verification = await createMockVerification({ connect, publicKey: signer });
+  assert.throws(
+    () => createTrezorTransactionProvider({
+      connect,
+      verification: Object.freeze({
+        ...verification,
+        verifiedOnDevice: true,
+      }),
+      network: "devnet",
+      readGenesisHash: devnetGenesis,
+    }),
+    /genuine on-device verification capability/u,
+  );
+  assert.throws(
+    () => createTrezorTransactionProvider({
+      connect: { ...connect },
+      verification,
+      network: "devnet",
+      readGenesisHash: devnetGenesis,
+    }),
+    /bound to a different Connect session/u,
+  );
+});
+
 test("direct Trezor adapter labels mainnet-beta explicitly to the device", async () => {
   const signer = Keypair.generate();
   let signRequest;
-  const provider = createTrezorTransactionProvider({
-    connect: {
-      async solanaSignTransaction(request) {
-        signRequest = request;
-        const transaction = Transaction.from(Buffer.from(request.serializedTx, "hex"));
-        transaction.partialSign(signer);
-        const signature = transaction.signatures.find(({ publicKey }) => publicKey.equals(signer.publicKey));
-        return {
-          success: true,
-          payload: {
-            signature: Buffer.from(signature.signature).toString("hex"),
-            serializedTx: Buffer.from(transaction.serialize()).toString("hex"),
-          },
-        };
-      },
+  const connect = {
+    async solanaSignTransaction(request) {
+      signRequest = request;
+      const transaction = Transaction.from(Buffer.from(request.serializedTx, "hex"));
+      transaction.partialSign(signer);
+      const signature = transaction.signatures.find(({ publicKey }) => publicKey.equals(signer.publicKey));
+      return {
+        success: true,
+        payload: {
+          signature: Buffer.from(signature.signature).toString("hex"),
+          serializedTx: Buffer.from(transaction.serialize()).toString("hex"),
+        },
+      };
     },
-    path: "m/44'/501'/0'/0'",
+  };
+  const provider = await createMockVerifiedProvider({
+    connect,
     publicKey: signer.publicKey,
     network: "mainnet-beta",
     readGenesisHash: mainnetGenesis,
@@ -444,14 +530,14 @@ test("direct Trezor adapter labels mainnet-beta explicitly to the device", async
 test("direct Trezor adapter rejects an RPC Genesis mismatch before the device prompt", async () => {
   const signer = Keypair.generate();
   let promptCount = 0;
-  const provider = createTrezorTransactionProvider({
-    connect: {
-      async solanaSignTransaction() {
-        promptCount += 1;
-        throw new Error("must not prompt");
-      },
+  const connect = {
+    async solanaSignTransaction() {
+      promptCount += 1;
+      throw new Error("must not prompt");
     },
-    path: "m/44'/501'/0'/0'",
+  };
+  const provider = await createMockVerifiedProvider({
+    connect,
     publicKey: signer.publicKey,
     network: "mainnet-beta",
     readGenesisHash: devnetGenesis,

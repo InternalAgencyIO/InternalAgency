@@ -33,7 +33,11 @@ assert.deepEqual(policy.boundaries.featureShellStaticClosureExcludes, ["SWITCHBO
 assert.deepEqual(policy.boundaries.featureShellDynamicImports, ["SWITCHBOARD_ON_DEMAND"], "feature-shell dynamic policy drifted");
 assert.deepEqual(policy.boundaries.programUpgradeShellDynamicImports, ["PROGRAM_UPGRADE_ATTENDED_ACTIONS"], "program upgrade dynamic policy drifted");
 assert.deepEqual(policy.boundaries.programUpgradeShellStaticClosureExcludes, ["PROGRAM_EXTENSION_ATTENDED"], "program upgrade static-exclusion policy drifted");
-assert.deepEqual(policy.boundaries.programUpgradeAttendedStaticClosureIncludes, ["ATTENDED_EVIDENCE", "PROGRAM_EXTENSION_ATTENDED"], "attended static-closure policy drifted");
+assert.deepEqual(policy.boundaries.programUpgradeAttendedStaticClosureIncludes, [
+  "ATTENDED_EVIDENCE",
+  "ATTENDED_PROMPT_COORDINATOR",
+  "PROGRAM_EXTENSION_ATTENDED",
+], "attended static-closure policy drifted");
 assert.equal(policy.baseline.priorCombinedFeatureChunkBytes, 912_348, "feature baseline drifted");
 for (const value of Object.values(policy.assurance)) {
   assert.equal(value, false, "admin lazy-boundary policy cannot grant operational clearance");
@@ -50,7 +54,12 @@ const [entryKey, entry] = exactlyOneEntry((_key, value) => value.isEntry === tru
 const [featureKey, feature] = exactlyOneEntry((key) => key === "FeatureRehearsal.jsx", "feature shell");
 const [upgradeKey, upgrade] = exactlyOneEntry((key) => key === "ProgramUpgrade.jsx", "program upgrade");
 const [attendedKey, attended] = exactlyOneEntry((_key, value) => value.src === "ProgramUpgradeAttendedActions.jsx", "program upgrade attended actions");
-const [attendedEvidenceKey] = exactlyOneEntry((key) => key.startsWith("_attended-evidence-") && key.endsWith(".js"), "attended evidence chunk");
+const [attendedSecurityKey, attendedSecurity] = exactlyOneEntry(
+  (key, value) => key.startsWith("_attended-prompt-coordinator-")
+    && key.endsWith(".js")
+    && value.name === "attended-prompt-coordinator",
+  "shared attended evidence/prompt-security chunk",
+);
 const [trezorKey, trezor] = exactlyOneEntry((key) => key.endsWith("/node_modules/@trezor/connect-web/lib/index.js"), "Trezor Connect");
 const [switchboardKey, switchboard] = exactlyOneEntry((key) => key.endsWith("/node_modules/@switchboard-xyz/on-demand/dist/esm/index.js"), "Switchboard on-demand");
 
@@ -90,7 +99,7 @@ const upgradeStaticClosure = staticClosure(upgradeKey);
 assert.equal(upgradeStaticClosure.has(attendedKey), false, "program upgrade shell statically imports attended actions");
 assert.deepEqual(upgrade.dynamicImports, [attendedKey], "program upgrade shell must have exactly one attended-actions dynamic edge");
 const attendedStaticClosure = staticClosure(attendedKey);
-assert.equal(attendedStaticClosure.has(attendedEvidenceKey), true, "attended actions must retain source-bound receipt evidence");
+assert.equal(attendedStaticClosure.has(attendedSecurityKey), true, "attended actions must retain source-bound receipt and prompt security");
 const upgradeSource = readFileSync(resolve(siteRoot, "tools/iat-v2-admin-console/ProgramUpgrade.jsx"), "utf8");
 const attendedSource = readFileSync(resolve(siteRoot, "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx"), "utf8");
 assert.match(upgradeSource, /lazy\(\(\) => import\("\.\/ProgramUpgradeAttendedActions\.jsx"\)\)/u);
@@ -108,8 +117,19 @@ assert.ok(
 );
 const upgradeBundle = readFileSync(resolve(distRoot, upgrade.file), "utf8");
 const attendedBundle = readFileSync(resolve(distRoot, attended.file), "utf8");
+const attendedSecurityBundle = readFileSync(resolve(distRoot, attendedSecurity.file), "utf8");
 assert.doesNotMatch(upgradeBundle, /ProgramData additional bytes/u, "read-only shell bundle contains attended transaction construction");
 assert.match(attendedBundle, /ProgramData additional bytes/u, "attended bundle must contain capacity-extension construction");
+assert.match(
+  attendedSecurityBundle,
+  /iat-v2-current-source-attended-receipt-set\/v1/u,
+  "shared attended security chunk lacks exact receipt evidence",
+);
+assert.match(
+  attendedSecurityBundle,
+  /iat-v2-current-source-model-t-transaction-prompt-latch\/v1/u,
+  "shared attended security chunk lacks the permanent prompt latch",
+);
 
 const entryBaseline = new Set([entryKey, ...entryStaticClosure]);
 const upgradeIncrementalClosure = new Set([

@@ -16,6 +16,7 @@ import {
 } from "../../programs/iat_v2/instructions.mjs";
 import { buildProgramDataExtensionTransaction } from "./program-extension-attended.mjs";
 import {
+  assertCanonicalAttendedNextActionFromReceiptSet,
   canonicalReceiptSet,
   clearAttendedReceipts,
   loadAttendedReceiptSet,
@@ -28,11 +29,79 @@ import {
   finalizedContextSlot,
   simulateExactLegacyTransaction,
 } from "./attended-transaction-boundary.mjs";
+import {
+  attendedPromptLatchKey,
+  createAttendedModelTPromptCoordinator,
+} from "./attended-prompt-coordinator.mjs";
 
 const UPGRADE_INSTRUCTION_DATA = Uint8Array.from([3, 0, 0, 0]);
 const SET_AUTHORITY_INSTRUCTION_DATA = Uint8Array.from([4, 0, 0, 0]);
 const DEVNET_DEPLOYER = new PublicKey("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4");
-const SIGNABLE_ACTIONS = ["extend-program", "upgrade", "return-for-repair"];
+const SIGNABLE_ACTIONS = ["extend-program", "upgrade"];
+
+function programPromptAction(action) {
+  if (action === "extend-program") return "EXTEND_PROGRAM_DATA";
+  if (action === "upgrade") return "UPGRADE_PROGRAM";
+  throw new Error("Finalized program action is outside the canonical attended prompt roster");
+}
+
+function assertProgramPromptOrder(snapshot, nextAction) {
+  const receiptSet = loadAttendedReceiptSet(localStorage, snapshot.evidenceBinding);
+  if (
+    !Number.isSafeInteger(snapshot.programDataCapacityBytes)
+    || !Number.isSafeInteger(snapshot.targetProgramDataCapacityBytes)
+    || snapshot.programDataCapacityBytes <= 0
+    || snapshot.targetProgramDataCapacityBytes <= 0
+  ) {
+    throw new Error("Finalized ProgramData capacity cannot establish canonical attended order");
+  }
+  const extensionReceiptPresent = receiptSet.receipts.some(
+    ({ action }) => action === "EXTEND_PROGRAM_DATA",
+  );
+  const frozenPreUpgradeCapacity = receiptSet.preUpgradeProgramDataCapacityBytes;
+  if (
+    receiptSet.receipts.length > 0
+    && (!Number.isSafeInteger(frozenPreUpgradeCapacity) || frozenPreUpgradeCapacity <= 0)
+  ) {
+    throw new Error("Canonical program prompting cannot recover the frozen pre-upgrade capacity");
+  }
+  const programDataExtensionRequired = receiptSet.receipts.length === 0
+    ? snapshot.programDataCapacityBytes < snapshot.targetProgramDataCapacityBytes
+    : frozenPreUpgradeCapacity < snapshot.targetProgramDataCapacityBytes;
+  if (receiptSet.receipts.length > 0 && extensionReceiptPresent !== programDataExtensionRequired) {
+    throw new Error("Canonical extension receipt disagrees with the frozen pre-upgrade capacity");
+  }
+  return assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet,
+    expectedBinding: snapshot.evidenceBinding,
+    programDataExtensionRequired,
+    nextAction,
+  });
+}
+
+async function requestProgramModelTSignature({
+  coordinator,
+  binding,
+  action,
+  messageSha256,
+  provider,
+  signer,
+  transaction,
+  verifySigned,
+}) {
+  const result = await coordinator.request({
+    binding,
+    action,
+    messageSha256,
+    signer: signer.toBase58(),
+    prompt: async () => {
+      const signed = await provider.signTransaction(transaction);
+      await verifySigned(signed);
+      return signed;
+    },
+  });
+  return result.value;
+}
 
 function errorText(error) {
   return error instanceof Error ? error.message : String(error);
@@ -145,6 +214,7 @@ export default function ProgramUpgradeAttendedActions({
   short,
   snapshot,
 }) {
+  const [promptCoordinator] = useState(createAttendedModelTPromptCoordinator);
   const [pending, setPending] = useState(null);
   const [receipt, setReceipt] = useState(null);
   const [receiptSet, setReceiptSet] = useState(null);
@@ -180,6 +250,9 @@ export default function ProgramUpgradeAttendedActions({
       if (!SIGNABLE_ACTIONS.includes(current.action)) {
         throw new Error("Finalized program state no longer has the reviewed signable action");
       }
+      const promptAction = programPromptAction(current.action);
+      attendedPromptLatchKey({ binding: current.evidenceBinding, action: promptAction });
+      assertProgramPromptOrder(current, promptAction);
       const actionBinding = upgradeActionBinding(current);
       const { provider, publicKey } = await getHardwareProvider(IAT_V2_PROGRAM_ADMIN);
       if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
@@ -238,17 +311,24 @@ export default function ProgramUpgradeAttendedActions({
       setSnapshot(promptSnapshot);
       setStatus(promptSnapshot.action === "extend-program"
         ? `MODEL T // REVIEW ${promptSnapshot.additionalProgramDataBytes} BYTE CAPACITY EXTENSION + ${promptSnapshot.rentTopUpLamports} LAMPORT RENT TOP-UP; STILL NOT BROADCAST`
-        : promptSnapshot.action === "upgrade"
-          ? "MODEL T // REVIEW PROGRAM UPGRADE AND SIGN; STILL NOT BROADCAST"
-          : "MODEL T // REVIEW BUFFER-ONLY AUTHORITY RETURN; STILL NOT BROADCAST");
-      const signed = await provider.signTransaction(transaction);
-      await assertSignedLegacyTransaction({
-        expectedBlockhash: latest.blockhash,
-        expectedMessageBytes: messageBytes,
-        expectedMessageSha256: messageSha256,
-        expectedSigner: publicKey,
-        sha256Hex,
-        signed,
+        : "MODEL T // REVIEW PROGRAM UPGRADE AND SIGN; STILL NOT BROADCAST");
+      assertProgramPromptOrder(promptSnapshot, promptAction);
+      const signed = await requestProgramModelTSignature({
+        coordinator: promptCoordinator,
+        binding: promptSnapshot.evidenceBinding,
+        action: promptAction,
+        messageSha256,
+        provider,
+        signer: publicKey,
+        transaction,
+        verifySigned: (candidate) => assertSignedLegacyTransaction({
+          expectedBlockhash: latest.blockhash,
+          expectedMessageBytes: messageBytes,
+          expectedMessageSha256: messageSha256,
+          expectedSigner: publicKey,
+          sha256Hex,
+          signed: candidate,
+        }),
       });
       setPending({
         signed,
@@ -341,14 +421,10 @@ export default function ProgramUpgradeAttendedActions({
       const canonicalReceipt = {
         action: completedAction === "extend-program"
           ? "EXTEND_PROGRAM_DATA"
-          : completedAction === "upgrade"
-            ? "UPGRADE_PROGRAM"
-            : "RETURN_BUFFER_AUTHORITY_TO_DEPLOYER",
+          : "UPGRADE_PROGRAM",
         title: completedAction === "extend-program"
           ? "Extend IAT V2 ProgramData capacity"
-          : completedAction === "upgrade"
-            ? "Upgrade IAT V2 to the CI-bound migration artifact"
-            : "Return incomplete buffer authority to the Devnet deployer",
+          : "Upgrade IAT V2 to the CI-bound migration artifact",
         signature: nextSignature,
         messageSha256: pending.messageSha256,
         explorerUrl: explorer("tx", nextSignature),
@@ -369,9 +445,7 @@ export default function ProgramUpgradeAttendedActions({
       setSnapshot(next);
       setStatus(completedAction === "extend-program"
         ? "CAPACITY EXTENSION FINALIZED // BUFFER UPLOAD REMAINS A SEPARATE STEP"
-        : completedAction === "upgrade"
-          ? "UPGRADE FINALIZED // CORRECTED 7XZ PROGRAM IS LIVE ON DEVNET"
-          : "BUFFER RETURNED TO DEPLOYER // READY FOR IN-PLACE REPAIR");
+        : "UPGRADE FINALIZED // CORRECTED 7XZ PROGRAM IS LIVE ON DEVNET");
     } catch (caught) {
       if (!broadcastBoundaryValidated) {
         setPending(null);

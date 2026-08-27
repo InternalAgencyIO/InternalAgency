@@ -19,10 +19,93 @@ test("post-CI runbook fixes localhost consoles and keeps Mainnet on hold", () =>
   for (const mode of ["upgrade", "migrate-rounds", "features"]) {
     assert.match(runbook, new RegExp(`http://127\\.0\\.0\\.1:4175/\\?mode=${mode}`, "u"));
   }
+  assert.match(runbook, /Only the three canonical signing modes—`upgrade`, `migrate-rounds`, and `features`—may request transaction signatures/u);
+  assert.match(runbook, /default\/no-mode and `settle-week9` pages are archived non-signing surfaces/u);
+  assert.match(runbook, /legacy seven-stage signing is permanently disabled/u);
+  assert.match(runbook, /transaction-prompt latch is permanent for this ceremony/u);
+  assert.match(runbook, /rejected, failed, or discarded signed action ends the ceremony/u);
+  assert.match(runbook, /Do not retry that action, clear browser storage, or attempt another transaction signature/u);
   assert.match(runbook, /Mainnet remains \*\*HOLD\*\*/u);
   assert.match(runbook, /does not authorize a Mainnet transaction/u);
   assert.match(runbook, new RegExp(IAT_V2_PROGRAM_ID.toBase58(), "u"));
   assert.doesNotMatch(runbook, /IATv2jRuKKmT41NKsb1iYwWba4wtviisFTcKMcpVR7X/u);
+});
+
+test("attended runbook gates the runtime, shell, browser storage, and finalized buffer handoff", () => {
+  assert.match(runbook, /\$NodeExe = 'C:\\ABSOLUTE\\PATH\\TO\\REVIEWED\\node\.exe'/u);
+  assert.match(runbook, /\$NpmCli = 'C:\\ABSOLUTE\\PATH\\TO\\REVIEWED\\npm-cli\.js'/u);
+  assert.match(runbook, /Node\.js `>=22\.13\.0`/u);
+  assert.match(runbook, /older, malformed, unavailable, or changed path\/version is a stop/u);
+  assert.match(runbook, /Do not invoke `npm\.cmd`/u);
+  assert.match(runbook, /& \$NodeExe \$NpmCli run iat:v2-admin/u);
+  assert.doesNotMatch(runbook, /^node scripts\/(?:iat-v2-devnet-buffer-preflight|finalize-iat-v2-current-source-devnet-evidence)\.mjs/mu);
+  assert.doesNotMatch(runbook, /^npm(?:\.cmd)? run iat:v2-admin/mu);
+  assert.match(runbook, /same non-private browser profile/u);
+  assert.match(runbook, /Do not clear site data, switch browser profiles, change the host or port/u);
+  assert.match(runbook, /pinned to the installed `Ubuntu-24\.04` WSL2 distribution, POSIX user `a` \(UID 1000\)/u);
+  assert.match(runbook, /Git Bash, another WSL distribution or user[\s\S]*is a stop/u);
+  assert.match(runbook, /readable\/writable `\/dev\/tty`/u);
+  assert.match(runbook, /helper submits the authority mutation exactly once/u);
+  assert.match(runbook, /successful finalized authority readback is necessary but not sufficient/u);
+  assert.match(runbook, /\*\*DO NOT RESUBMIT\*\*/u);
+  assert.match(runbook, /upgrade console independently re-observes the same exact buffer at finalized commitment/u);
+});
+
+test("buffer lane pins the exact WSL2 toolchain, Devnet genesis, and clean launchers", () => {
+  const exactCheckout = "/mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site";
+  const cleanPrefix = "wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1";
+  assert.match(runbook, new RegExp(exactCheckout.replaceAll("/", "\\/"), "u"));
+  assert.ok(runbook.split(cleanPrefix).length >= 4, "CAS verify and both helpers must use the exact clean WSL launcher");
+  for (const exact of [
+    "/home/a/.local/share/internal-agency/toolchains/node-v24.19.0-linux-x64/bin/node",
+    "v24.19.0",
+    "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+    "125,989,464",
+    "/mnt/c/Program Files/Git/mingw64/bin/git.exe",
+    "git version 2.55.0.windows.3",
+    "1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9",
+    "4,383,048",
+    "/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana",
+    "solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)",
+    "aacc6871e8ff199608987f0364f2ed9e239a32e1e0548f1ae4477e0e533e1dea",
+    "28,546,968",
+    "/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana-keygen",
+    "solana-keygen 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)",
+    "bf66aa11a13dd15503f40ab2b1160f06c7505bca692dfb20800682615d4ec952",
+    "2,828,816",
+    "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  ]) {
+    assert.ok(runbook.includes(exact), `runbook must include exact pin: ${exact}`);
+  }
+  assert.match(runbook, /\/usr\/bin\/bash --noprofile --norc [^\n]*\/scripts\/rebuild-iat-v2-devnet-buffer-fresh\.sh/u);
+  assert.match(runbook, /"BUFFER_ADDRESS=\$BufferAddress" \/usr\/bin\/bash --noprofile --norc [^\n]*\/scripts\/handoff-iat-v2-devnet-buffer\.sh/u);
+  assert.match(runbook, /`BUFFER_ADDRESS` is admitted only on this handoff command/u);
+});
+
+test("runbook freezes the one-use CAS and the two fresh-buffer terminal gates", () => {
+  assert.match(runbook, /Root: `\/home\/a\/\.local\/state\/internal-agency\/iat-v2\/devnet-buffer-handoff-v1`/u);
+  assert.match(runbook, /\.iat-v2-devnet-buffer-authority-cas-root\.json/u);
+  assert.match(runbook, /ceremony ID: `9e691e59-35c8-4861-86a0-7a219885b1c0`/u);
+  assert.match(runbook, /11893575f111807621fcbc8c77ea73fae03390404507202146dde9e69d5818da/u);
+  assert.match(runbook, /initialized exactly once/u);
+  assert.match(runbook, /with the final word changed from `verify` to `initialize`/u);
+  assert.match(runbook, /initialize-iat-v2-devnet-buffer-handoff-cas\.mjs verify/u);
+  assert.match(runbook, /Never delete, rename, recreate, edit, reset, relocate, or reuse this root/u);
+  assert.match(runbook, /exactly two attended `\/dev\/tty` gates/u);
+  assert.match(runbook, /type `REBUILD-DEVNET-FRESH`/u);
+  assert.match(runbook, /target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>`/u);
+  assert.match(runbook, /Only the second gate admits the sole fresh-buffer write CLI invocation/u);
+  assert.match(runbook, /100,000,000-lamport upload-fee-headroom policy/u);
+  assert.match(runbook, /attempt-one-use/u);
+  assert.match(runbook, /`O_NOFOLLOW` descriptor/u);
+  assert.match(runbook, /`--max-sign-attempts 5`[^.]*re-sign or resend/u);
+  assert.match(runbook, /10,000,000-lamport single-handoff fee floor/u);
+  assert.match(runbook, /`TRANSFER-<BUFFER_ADDRESS>-<FIRST_12_ARTIFACT_SHA256_HEX>`/u);
+  assert.doesNotMatch(runbook, /`TRANSFER-7XZ`/u);
+  assert.match(runbook, /every fallible tool\/genesis check before it atomically creates/u);
+  assert.match(runbook, /historical buffer `Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6` is retained/u);
+  assert.match(runbook, /never closes or mutates it/u);
+  assert.doesNotMatch(runbook, /program close|close the old buffer|reclaim its lamports[^.]*\b(?:may|will|does)\b/iu);
 });
 
 test("operator sequence preserves conditional capacity, buffer, migration, backfill, and feature order", () => {
@@ -71,6 +154,10 @@ test("each attended console separates simulation/signing from finalized broadcas
   assert.match(feature, /EXPORT COMPLETE ATTENDED BUNDLE/u);
   assert.match(feature, /CLEAR LOCAL FEATURE RECEIPTS/u);
   assert.match(runbook, /never creates a placeholder receipt/u);
+  assert.match(runbook, /`finalizedAtUtc` is the observer-local UTC capture made after finalized confirmation/u);
+  assert.match(runbook, /not claimed as the transaction's on-chain block time/u);
+  assert.match(runbook, /canonical finalizer independently re-observes and verifies finalized chain data/u);
+  assert.match(runbook, /Keep the receipt field and schema unchanged/u);
 });
 
 test("feature selection is documented as finalized chain truth before any prompt", () => {
@@ -125,7 +212,7 @@ test("the base admin shell keeps artifact modes exact and initialization finaliz
 test("post-upgrade feature evidence cannot reuse the legacy initialization export", () => {
   const admin = readFileSync("tools/iat-v2-admin-console/main.jsx", "utf8");
   assert.match(runbook, /legacy seven-stage evidence export is disabled in feature\/post-upgrade mode/u);
-  assert.match(runbook, /must never be rebound to, or combined with, the `bb09`\/`771c` migration snapshot/u);
+  assert.match(runbook, /checked-in successor migration snapshot \(`2b68cebe…` \/ `771c…8a01`\)/u);
   assert.match(runbook, /pre-upgrade initialization shell retains its own legacy export/u);
   assert.match(runbook, /DOWNLOAD FEATURE EVIDENCE[^\n]+only a partial checkpoint/u);
   assert.match(runbook, /EXPORT COMPLETE ATTENDED BUNDLE[^\n]+canonical complete-roster export/u);
@@ -135,4 +222,21 @@ test("post-upgrade feature evidence cannot reuse the legacy initialization expor
   assert.match(feature, /DOWNLOAD FEATURE EVIDENCE/u);
   assert.match(feature, /buildCompleteAttendedBundle/u);
   assert.match(feature, /EXPORT COMPLETE ATTENDED BUNDLE/u);
+});
+
+test("17 prompts always include a fresh source-bound randomness creation", () => {
+  assert.match(runbook, /Plan for exactly \*\*17\*\* Model T transaction prompts/u);
+  assert.match(runbook, /15 fixed transaction prompts, one required capacity-extension prompt, and one required `CREATE_SWITCHBOARD_RANDOMNESS` prompt/u);
+  assert.match(runbook, /DISCARD RETAINED ADDRESS \+ REQUIRE FRESH CREATE/u);
+  assert.match(runbook, /versioned address\/CREATE-signature\/message-hash record stored under the key bound to the exact source commit, migration artifact SHA-256, and mint/u);
+  assert.match(runbook, /preserves every receipt and performs no RPC read, signature request, broadcast, or chain mutation/u);
+  assert.match(runbook, /independently reconstructs the exact successful finalized two-signer legacy message/u);
+  assert.match(runbook, /ComputeBudget-then-pinned-Switchboard instruction roster and message hash/u);
+  assert.match(runbook, /retained account at finalized commitment under the pinned Switchboard owner/u);
+  assert.match(runbook, /discard control remains disabled after any feature evidence or signed pending feature work exists/u);
+  assert.match(runbook, /supports no 16-prompt shortcut/u);
+  assert.match(runbook, /memory-only on-device address-display gate/u);
+  assert.match(runbook, /non-transaction device confirmation and is not one of the 17 Model T transaction-signature prompts/u);
+  assert.match(runbook, /action UI appears before the full on-device address match succeeds, stop without signing or broadcasting/u);
+  assert.doesNotMatch(runbook, /may be \*\*16\*\*|verified reusable rehearsal randomness/u);
 });

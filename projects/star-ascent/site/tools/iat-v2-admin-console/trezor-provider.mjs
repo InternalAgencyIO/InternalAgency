@@ -12,6 +12,8 @@ const SOLANA_NETWORK_GENESIS_HASHES = Object.freeze({
   devnet: "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
   "mainnet-beta": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
 });
+const trezorVerificationCapabilities = new WeakSet();
+const trezorVerificationBindings = new WeakMap();
 
 function numericDerivationPath(serializedPath) {
   if (typeof serializedPath !== "string" || !/^m(?:\/[0-9]+'?)+$/.test(serializedPath)) {
@@ -46,6 +48,119 @@ function publicKeyForEntry(entry) {
   if (base58Key) return base58Key;
   if (hexKey) return hexKey;
   throw new Error("Trezor returned an invalid Solana public key");
+}
+
+function exactPublicKeyEncodingsForEntry(entry) {
+  if (
+    typeof entry?.publicKeyBase58 !== "string"
+    || typeof entry?.publicKey !== "string"
+    || !/^[0-9a-f]{64}$/i.test(entry.publicKey)
+  ) {
+    throw new Error("Trezor did not return both exact Solana public-key encodings");
+  }
+  const publicKey = publicKeyForEntry(entry);
+  return {
+    publicKey,
+    publicKeyBase58: publicKey.toBase58(),
+    publicKeyHex: Buffer.from(publicKey.toBytes()).toString("hex"),
+  };
+}
+
+function createTrezorVerificationCapability({
+  connect,
+  expectedAddress,
+  serializedPath,
+  numericPath,
+  publicKeyBase58,
+  publicKeyHex,
+  displayablePublicKey,
+}) {
+  const binding = Object.freeze({
+    connect,
+    expectedAddress,
+    serializedPath,
+    numericPath: Object.freeze([...numericPath]),
+    publicKeyBase58,
+    publicKeyHex,
+    displayablePublicKey,
+  });
+  const capability = Object.freeze({
+    expectedAddress: binding.expectedAddress,
+    path: binding.serializedPath,
+    serializedPath: binding.serializedPath,
+    numericPath: binding.numericPath,
+    publicKey: new PublicKey(binding.publicKeyBase58),
+    publicKeyBase58: binding.publicKeyBase58,
+    publicKeyHex: binding.publicKeyHex,
+    displayablePublicKey: binding.displayablePublicKey,
+    verifiedOnDevice: true,
+  });
+  trezorVerificationCapabilities.add(capability);
+  trezorVerificationBindings.set(capability, binding);
+  return capability;
+}
+
+export function assertTrezorSolanaVerificationCapability({
+  capability,
+  expectedAddress,
+  connect,
+}) {
+  if (!capability || !trezorVerificationCapabilities.has(capability)) {
+    throw new Error("Direct Model T signing requires a genuine on-device verification capability");
+  }
+  const binding = trezorVerificationBindings.get(capability);
+  if (!binding) {
+    throw new Error("Direct Model T signing verification capability is unavailable");
+  }
+  const expected = expectedAddress === undefined
+    ? binding.expectedAddress
+    : (expectedAddress instanceof PublicKey ? expectedAddress : new PublicKey(expectedAddress)).toBase58();
+  if (expected !== binding.expectedAddress) {
+    throw new Error("Model T verification capability is bound to a different Solana address");
+  }
+  if (connect !== undefined && connect !== binding.connect) {
+    throw new Error("Model T verification capability is bound to a different Connect session");
+  }
+  const expectedNumericPath = numericDerivationPath(binding.serializedPath);
+  if (
+    capability.verifiedOnDevice !== true
+    || capability.expectedAddress !== binding.expectedAddress
+    || capability.path !== binding.serializedPath
+    || capability.serializedPath !== binding.serializedPath
+    || capability.publicKeyBase58 !== binding.publicKeyBase58
+    || capability.publicKeyHex !== binding.publicKeyHex
+    || capability.displayablePublicKey !== binding.displayablePublicKey
+    || !Array.isArray(capability.numericPath)
+    || capability.numericPath.length !== expectedNumericPath.length
+    || capability.numericPath.some((value, index) => value !== expectedNumericPath[index])
+    || binding.numericPath.length !== expectedNumericPath.length
+    || binding.numericPath.some((value, index) => value !== expectedNumericPath[index])
+  ) {
+    throw new Error("Model T verification capability binding is inconsistent");
+  }
+  const publicKey = capability.publicKey instanceof PublicKey
+    ? capability.publicKey
+    : new PublicKey(capability.publicKey);
+  const normalizedBase58 = publicKey.toBase58();
+  const normalizedHex = Buffer.from(publicKey.toBytes()).toString("hex");
+  if (
+    normalizedBase58 !== binding.expectedAddress
+    || normalizedBase58 !== binding.publicKeyBase58
+    || normalizedHex !== binding.publicKeyHex
+    || binding.displayablePublicKey !== binding.expectedAddress
+  ) {
+    throw new Error("Model T verification capability public-key binding is inconsistent");
+  }
+  return Object.freeze({
+    expectedAddress: binding.expectedAddress,
+    path: binding.serializedPath,
+    numericPath: binding.numericPath,
+    publicKey: new PublicKey(binding.publicKeyBase58),
+    publicKeyBase58: binding.publicKeyBase58,
+    publicKeyHex: binding.publicKeyHex,
+    displayablePublicKey: binding.displayablePublicKey,
+    capability,
+  });
 }
 
 export async function findTrezorSolanaAccount({
@@ -96,10 +211,72 @@ export async function findTrezorSolanaAccount({
   };
 }
 
+export async function verifyTrezorSolanaAccountOnDevice({
+  connect,
+  account,
+  expectedAddress,
+}) {
+  if (typeof connect?.solanaGetPublicKey !== "function") {
+    throw new Error("Trezor Solana address display is unavailable");
+  }
+  if (typeof account?.path !== "string") {
+    throw new Error("Trezor Solana address display requires a matched derivation path");
+  }
+  const expectedPath = account.path;
+  const expectedNumericPath = numericDerivationPath(expectedPath);
+  const matchedPublicKey = account.publicKey instanceof PublicKey
+    ? account.publicKey
+    : new PublicKey(account.publicKey);
+  const expectedPublicKey = expectedAddress instanceof PublicKey
+    ? expectedAddress
+    : new PublicKey(expectedAddress);
+  if (!matchedPublicKey.equals(expectedPublicKey)) {
+    throw new Error("Matched Model T account does not equal the required Solana signer");
+  }
+  const result = await connect.solanaGetPublicKey({
+    path: expectedPath,
+    showOnTrezor: true,
+  });
+  if (!result?.success) throw resultError(result, "Trezor Solana address display");
+  const entry = result.payload;
+  if (!entry || Array.isArray(entry)) {
+    throw new Error("Trezor did not return the displayed Solana account");
+  }
+  if (entry.serializedPath !== expectedPath) {
+    throw new Error("Trezor displayed a different Solana derivation path");
+  }
+  if (
+    !Array.isArray(entry.path)
+    || entry.path.length !== expectedNumericPath.length
+    || entry.path.some((value, offset) => value !== expectedNumericPath[offset])
+  ) {
+    throw new Error("Trezor displayed inconsistent numeric and serialized Solana derivation paths");
+  }
+  const {
+    publicKey: displayedPublicKey,
+    publicKeyBase58,
+    publicKeyHex,
+  } = exactPublicKeyEncodingsForEntry(entry);
+  if (!displayedPublicKey.equals(expectedPublicKey)) {
+    throw new Error("Trezor displayed a different Solana public key");
+  }
+  if (entry.displayablePublicKey !== expectedPublicKey.toBase58()) {
+    throw new Error("Trezor returned an inconsistent displayed Solana address");
+  }
+  return createTrezorVerificationCapability({
+    connect,
+    expectedAddress: expectedPublicKey.toBase58(),
+    serializedPath: expectedPath,
+    numericPath: expectedNumericPath,
+    publicKeyBase58,
+    publicKeyHex,
+    displayablePublicKey: entry.displayablePublicKey,
+  });
+}
+
 export function createTrezorTransactionProvider({
   connect,
-  path,
-  publicKey,
+  verification,
   network,
   readGenesisHash,
 }) {
@@ -109,7 +286,12 @@ export function createTrezorTransactionProvider({
   if (typeof readGenesisHash !== "function") {
     throw new Error("Direct Model T signing requires a canonical network Genesis-hash reader");
   }
-  const signer = publicKey instanceof PublicKey ? publicKey : new PublicKey(publicKey);
+  const verified = assertTrezorSolanaVerificationCapability({
+    capability: verification,
+    connect,
+  });
+  const path = verified.path;
+  const signer = verified.publicKey;
   return {
     publicKey: signer,
     isTrezor: true,

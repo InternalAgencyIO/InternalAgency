@@ -3,9 +3,11 @@ import { Buffer } from "buffer";
 import { Connection, PublicKey } from "@solana/web3.js";
 import {
   BPF_UPGRADEABLE_LOADER_ID,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
   IAT_V2_PROGRAM_ADMIN,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
@@ -43,6 +45,7 @@ function parseBufferAccount(info) {
   }
   if (data[4] !== 1) throw new Error("Upgrade buffer has no authority");
   return {
+    owner: info.owner,
     authority: new PublicKey(data.subarray(5, 37)),
     programBytes: data.subarray(BUFFER_METADATA_BYTES),
   };
@@ -161,6 +164,8 @@ export default function ProgramUpgrade({
     const deployedRegionHash = await sha256Hex(deployed.programBytes);
     const common = {
       buffer,
+      bufferOwner: null,
+      bufferProgramBytes: null,
       deployedRegionHash,
       programDataCapacityBytes: extension.currentCapacityBytes,
       targetProgramDataCapacityBytes: extension.artifactBytes,
@@ -237,6 +242,8 @@ export default function ProgramUpgrade({
     return {
       ...common,
       bufferHash,
+      bufferOwner: parsedBuffer.owner,
+      bufferProgramBytes: parsedBuffer.programBytes.length,
       bufferAuthority: parsedBuffer.authority,
       deployedHash,
       deployedRegionHash,
@@ -328,8 +335,14 @@ export default function ProgramUpgrade({
           </div>
           <div className="address-grid">
             <div><span>PROGRAM</span><code>{IAT_V2_PROGRAM_ID.toBase58()}</code></div>
-            <div><span>UPGRADE AUTHORITY</span><code>{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
+            <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
+            <div><span>UPGRADE AUTHORITY / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
+            <div><span>SOURCE COMMIT</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
+            <div><span>CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
+            <div><span>EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
             <div><span>BUFFER</span><code>{snapshot?.buffer?.toBase58() ?? "NOT PROVIDED"}</code></div>
+            <div><span>FINALIZED BUFFER OWNER (OBSERVED)</span><code className="full-code">{snapshot?.bufferOwner?.toBase58() ?? "NOT VERIFIED"}</code></div>
+            <div><span>FINALIZED BUFFER PROGRAM BYTES (OBSERVED)</span><code>{snapshot?.bufferProgramBytes ?? "NOT VERIFIED"}</code></div>
             <div><span>BUFFER AUTHORITY</span><code>{snapshot?.bufferAuthority?.toBase58() ?? "NOT VERIFIED"}</code></div>
             <div><span>BUFFER HASH</span><code>{snapshot?.bufferHash ?? "NOT VERIFIED"}</code></div>
             <div><span>CURRENT HASH</span><code>{snapshot?.deployedHash ?? "NOT VERIFIED"}</code></div>
@@ -340,8 +353,8 @@ export default function ProgramUpgrade({
                 ? `${snapshot.loaderZeroPaddingBytes} BYTES // ${snapshot.loaderZeroPaddingVerified ? "VERIFIED" : "NOT ZERO"}`
                 : "NOT VERIFIED"}</code>
             </div>
-            <div><span>NEW REVIEWED HASH</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 ?? "NOT CI-BOUND"}</code></div>
-            <div><span>PROGRAM BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES ?? "NOT CI-BOUND"}</code></div>
+            <div><span>CI-BOUND ARTIFACT SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256}</code></div>
+            <div><span>CI-BOUND ARTIFACT BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}</code></div>
             <div><span>CURRENT PROGRAMDATA CAPACITY</span><code>{snapshot?.programDataCapacityBytes ?? "NOT VERIFIED"}</code></div>
             <div><span>ADDED CAPACITY</span><code>{snapshot?.additionalProgramDataBytes ?? "NOT VERIFIED"} BYTES</code></div>
             <div><span>EXACT RENT TOP-UP</span><code>{snapshot?.rentTopUpLamports ?? "NOT VERIFIED"} LAMPORTS</code></div>

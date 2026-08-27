@@ -27,6 +27,13 @@ import {
   createIatV2DeploymentPlan,
   deriveIatV2Addresses,
 } from "./client.mjs";
+export {
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
+} from "./artifact-binding.mjs";
 
 export const IAT_V2_PROGRAM_ID = new PublicKey("62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj");
 export const IAT_V2_PROGRAM_DATA_ADDRESS = new PublicKey(
@@ -42,15 +49,6 @@ export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES = 579_480;
 export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SOURCE_HEAD =
   "dd3cb28f6b985c84fddcb971beaa9f00126f5d99";
 export const IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID = 31_372_599_971;
-// Exact migration-capable artifact from the successful public CI build. The
-// target binary and evidence manifest remain operator-supplied, untracked
-// inputs; these constants are pins, not embedded deployment material.
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 =
-  "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01";
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES = 649_680;
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD =
-  "d5f96a65fc46752facbd2263a8e2f3d650390066";
-export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID = 33_027_585_009;
 export const BPF_UPGRADEABLE_LOADER_ID = new PublicKey(
   "BPFLoaderUpgradeab1e11111111111111111111111",
 );

@@ -3,12 +3,16 @@ import test from "node:test";
 import {
   IAT_V2_ATTENDED_RECEIPT_SET_SCHEMA,
   IAT_V2_COMPLETE_BUNDLE_SCHEMA,
+  assertCanonicalAttendedNextAction,
+  assertCanonicalAttendedNextActionFromReceiptSet,
   attendedReceiptStorageKey,
   buildCompleteAttendedBundle,
   canonicalAttendedActionClassification,
+  canonicalAttendedNextActionPolicy,
   canonicalAttendedReceipt,
   canonicalReceiptSet,
   clearAttendedReceipts,
+  completeAttendedRoster,
   loadAttendedReceiptSet,
   persistAttendedReceipt,
 } from "../tools/iat-v2-admin-console/attended-evidence.mjs";
@@ -94,6 +98,10 @@ function completeFixture() {
 test("source/artifact/mint-bound receipt sets persist and clear exact canonical records", () => {
   const target = storage();
   assert.match(attendedReceiptStorageKey(expectedBinding), /\/v1$/u);
+  assert.throws(
+    () => attendedReceiptStorageKey({ ...expectedBinding, mint: "1" }),
+    /exact 32-byte Devnet mint/u,
+  );
   const next = persistAttendedReceipt(
     target,
     expectedBinding,
@@ -112,8 +120,42 @@ test("source/artifact/mint-bound receipt sets persist and clear exact canonical 
     { preUpgradeProgramDataCapacityBytes: 500_000 },
   );
   assert.equal(preserved.preUpgradeProgramDataCapacityBytes, 400_000);
+  const idempotent = persistAttendedReceipt(
+    target,
+    expectedBinding,
+    receipt("EXTEND_PROGRAM_DATA", "program", null, 2),
+  );
+  assert.deepEqual(idempotent, preserved);
+  assert.throws(
+    () => persistAttendedReceipt(
+      target,
+      expectedBinding,
+      receipt("EXTEND_PROGRAM_DATA", "program", null, 3),
+    ),
+    /already recorded with different evidence/u,
+  );
+  assert.deepEqual(
+    loadAttendedReceiptSet(target, expectedBinding).receipts.map(({ action }) => action),
+    ["UPGRADE_PROGRAM", "EXTEND_PROGRAM_DATA"],
+  );
   clearAttendedReceipts(target, expectedBinding);
   assert.equal(loadAttendedReceiptSet(target, expectedBinding).receipts.length, 0);
+});
+
+test("source-bound receipt persistence fails closed when storage is not durable", () => {
+  const target = {
+    getItem: () => null,
+    setItem: () => {},
+  };
+  assert.throws(
+    () => persistAttendedReceipt(
+      target,
+      expectedBinding,
+      receipt("UPGRADE_PROGRAM", "program"),
+      { preUpgradeProgramDataCapacityBytes: 400_000 },
+    ),
+    /storage is unavailable or non-durable/u,
+  );
 });
 
 test("canonical receipts reject misleading week and confirmation labels", () => {
@@ -174,6 +216,16 @@ test("complete aggregate is exact, ordered, and never fabricates a missing recei
     programId,
     participant,
   }), /missing receipt SETTLE_STANDARD_POSITION_WEEK_11/u);
+
+  const noFreshRandomness = completeFixture();
+  noFreshRandomness.featureExport.transactions = noFreshRandomness.featureExport.transactions
+    .filter((entry) => entry.action !== "CREATE_SWITCHBOARD_RANDOMNESS");
+  assert.throws(() => buildCompleteAttendedBundle({
+    ...noFreshRandomness,
+    expectedBinding,
+    programId,
+    participant,
+  }), /missing mandatory receipt CREATE_SWITCHBOARD_RANDOMNESS/u);
 });
 
 test("aggregate collapses identical imported/local records but rejects conflicts", () => {
@@ -212,4 +264,212 @@ test("aggregate collapses identical imported/local records but rejects conflicts
     programId,
     participant,
   }), /reuse one transaction signature for multiple actions/u);
+});
+
+test("complete aggregate rejects every extra receipt instead of silently dropping it", () => {
+  const hostile = [
+    ["RETURN_BUFFER_AUTHORITY_TO_DEPLOYER", "program", null, "receipt-set"],
+    ["MIGRATE_LEGACY_ROUND_WEEK_6", "migration", 6, "receipt-set"],
+    ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11", "neutral-backfill", 11, "receipt-set"],
+    ["REGISTER_AGENCY_0", "feature", null, "feature-export"],
+    ["SETTLE_STANDARD_POSITION_WEEK_9", "feature", 9, "feature-export"],
+    ["COMMIT_CCC_ROUND_10", "feature", 10, "feature-export"],
+  ];
+  hostile.forEach(([action, kind, week, location], index) => {
+    const fixture = completeFixture();
+    const extra = receipt(action, kind, week, 30 + index);
+    if (location === "receipt-set") {
+      const [current] = fixture.receiptSets;
+      fixture.receiptSets = [canonicalReceiptSet({
+        ...expectedBinding,
+        preUpgradeProgramDataCapacityBytes: current.preUpgradeProgramDataCapacityBytes,
+        receipts: [...current.receipts, extra],
+      })];
+    } else {
+      fixture.featureExport = {
+        ...fixture.featureExport,
+        transactions: [...fixture.featureExport.transactions, extra],
+      };
+    }
+    assert.throws(() => buildCompleteAttendedBundle({
+      ...fixture,
+      expectedBinding,
+      programId,
+      participant,
+    }), new RegExp(`out-of-roster receipt ${action}`, "u"));
+  });
+});
+
+test("canonical next-action policy follows the mandatory fresh-randomness 17-prompt roster exactly", () => {
+  const roster = completeAttendedRoster({
+    programDataExtensionRequired: true,
+    cccRound11TerminalAction: "EXPIRE_CCC_ROUND_11",
+  });
+  assert.equal(roster.length, 17);
+  for (let index = 0; index < roster.length; index += 1) {
+    const policy = assertCanonicalAttendedNextAction({
+      completedActions: roster.slice(0, index),
+      programDataExtensionRequired: true,
+      nextAction: roster[index],
+    });
+    assert.equal(policy.completedActionCount, index);
+    assert.equal(policy.totalActionCount, 17);
+    assert.equal(policy.switchboardRandomnessCreationRequired, true);
+  }
+  const complete = canonicalAttendedNextActionPolicy({
+    completedActions: roster,
+    programDataExtensionRequired: true,
+  });
+  assert.equal(complete.complete, true);
+  assert.equal(complete.totalActionCount, 17);
+  assert.deepEqual(complete.allowedNextActions, []);
+});
+
+test("canonical next-action policy requires fresh randomness and resolves only the terminal choice", () => {
+  assert.throws(() => completeAttendedRoster({
+    programDataExtensionRequired: true,
+    switchboardRandomnessCreationRequired: false,
+    cccRound11TerminalAction: "REVEAL_CCC_ROUND_11",
+  }), /Fresh Switchboard randomness creation is mandatory/u);
+  assert.throws(() => canonicalAttendedNextActionPolicy({
+    completedActions: [],
+    programDataExtensionRequired: true,
+    switchboardRandomnessCreationRequired: false,
+  }), /Fresh Switchboard randomness creation is mandatory/u);
+
+  const roster = completeAttendedRoster({
+    programDataExtensionRequired: true,
+    cccRound11TerminalAction: "REVEAL_CCC_ROUND_11",
+  });
+  const createIndex = roster.indexOf("CREATE_SWITCHBOARD_RANDOMNESS");
+  const beforeRandomness = roster.slice(0, createIndex);
+  const randomness = canonicalAttendedNextActionPolicy({
+    completedActions: beforeRandomness,
+    programDataExtensionRequired: true,
+  });
+  assert.equal(randomness.expectedAction, "CREATE_SWITCHBOARD_RANDOMNESS");
+  assert.deepEqual(randomness.allowedNextActions, ["CREATE_SWITCHBOARD_RANDOMNESS"]);
+  assert.doesNotThrow(() => assertCanonicalAttendedNextAction({
+    completedActions: beforeRandomness,
+    programDataExtensionRequired: true,
+    nextAction: "CREATE_SWITCHBOARD_RANDOMNESS",
+  }));
+  assert.throws(() => assertCanonicalAttendedNextAction({
+    completedActions: beforeRandomness,
+    programDataExtensionRequired: true,
+    nextAction: "COMMIT_CCC_ROUND_11",
+  }), /expected CREATE_SWITCHBOARD_RANDOMNESS/u);
+
+  const commitIndex = roster.indexOf("COMMIT_CCC_ROUND_11");
+  const throughCommit = roster.slice(0, commitIndex + 1);
+  const terminal = canonicalAttendedNextActionPolicy({
+    completedActions: throughCommit,
+    programDataExtensionRequired: true,
+  });
+  assert.deepEqual(terminal.allowedNextActions, [
+    "REVEAL_CCC_ROUND_11",
+    "EXPIRE_CCC_ROUND_11",
+  ]);
+  assert.doesNotThrow(() => assertCanonicalAttendedNextAction({
+    completedActions: throughCommit,
+    programDataExtensionRequired: true,
+    nextAction: "EXPIRE_CCC_ROUND_11",
+  }));
+});
+
+test("canonical next-action receipt-set bridge preserves exact bound order and rejects hostile progress", () => {
+  const receiptSet = (actions, nonceFloor = 1, bindingOverride = expectedBinding) => canonicalReceiptSet({
+    ...bindingOverride,
+    preUpgradeProgramDataCapacityBytes: 400_000,
+    receipts: actions.map((action, index) => {
+      const { kind, week } = canonicalAttendedActionClassification(action);
+      return receipt(action, kind, week, nonceFloor + index);
+    }),
+  });
+  const validPrefix = [
+    "EXTEND_PROGRAM_DATA",
+    "UPGRADE_PROGRAM",
+    "MIGRATE_LEGACY_ROUND_WEEK_7",
+  ];
+  const bridged = assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet: receiptSet(validPrefix),
+    expectedBinding,
+    programDataExtensionRequired: true,
+    nextAction: "MIGRATE_LEGACY_ROUND_WEEK_8",
+  });
+  assert.deepEqual(bridged.completedActions, validPrefix);
+  assert.equal(bridged.policy.expectedAction, "MIGRATE_LEGACY_ROUND_WEEK_8");
+
+  assert.throws(() => assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet: receiptSet([
+      "EXTEND_PROGRAM_DATA",
+      "MIGRATE_LEGACY_ROUND_WEEK_7",
+      "UPGRADE_PROGRAM",
+    ], 10),
+    expectedBinding,
+    programDataExtensionRequired: true,
+    nextAction: "MIGRATE_LEGACY_ROUND_WEEK_8",
+  }), /expected UPGRADE_PROGRAM at index 1/u);
+
+  assert.throws(() => assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet: receiptSet([
+      "EXTEND_PROGRAM_DATA",
+      "UPGRADE_PROGRAM",
+      "RETURN_BUFFER_AUTHORITY_TO_DEPLOYER",
+    ], 20),
+    expectedBinding,
+    programDataExtensionRequired: true,
+    nextAction: "MIGRATE_LEGACY_ROUND_WEEK_7",
+  }), /out-of-roster receipt RETURN_BUFFER_AUTHORITY_TO_DEPLOYER/u);
+
+  assert.throws(() => assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet: receiptSet(validPrefix, 30, { ...expectedBinding, sourceCommit: "c".repeat(40) }),
+    expectedBinding,
+    programDataExtensionRequired: true,
+    nextAction: "MIGRATE_LEGACY_ROUND_WEEK_8",
+  }), /source commit drifted/u);
+});
+
+test("canonical next-action policy rejects recovery, arbitrary weeks, skips, repeats, and post-completion actions", () => {
+  const prefix = ["EXTEND_PROGRAM_DATA", "UPGRADE_PROGRAM"];
+  for (const nextAction of [
+    "RETURN_BUFFER_AUTHORITY_TO_DEPLOYER",
+    "MIGRATE_LEGACY_ROUND_WEEK_6",
+    "REGISTER_AGENCY_0",
+    "SETTLE_STANDARD_POSITION_WEEK_9",
+  ]) {
+    assert.throws(() => assertCanonicalAttendedNextAction({
+      completedActions: prefix,
+      programDataExtensionRequired: true,
+      nextAction,
+    }), /Canonical attended roster expected MIGRATE_LEGACY_ROUND_WEEK_7/u);
+  }
+  assert.throws(() => canonicalAttendedNextActionPolicy({
+    completedActions: ["UPGRADE_PROGRAM"],
+    programDataExtensionRequired: true,
+  }), /expected EXTEND_PROGRAM_DATA at index 0/u);
+  assert.throws(() => canonicalAttendedNextActionPolicy({
+    completedActions: ["EXTEND_PROGRAM_DATA", "EXTEND_PROGRAM_DATA"],
+    programDataExtensionRequired: true,
+  }), /repeats an action/u);
+
+  const roster = completeAttendedRoster({
+    programDataExtensionRequired: true,
+    switchboardRandomnessCreationRequired: true,
+    cccRound11TerminalAction: "REVEAL_CCC_ROUND_11",
+  });
+  assert.throws(() => assertCanonicalAttendedNextAction({
+    completedActions: roster,
+    programDataExtensionRequired: true,
+    switchboardRandomnessCreationRequired: true,
+    nextAction: "SETTLE_LINKED_POSITION_3_WEEK_11",
+  }), /roster is already complete/u);
+  assert.throws(() => canonicalAttendedNextActionPolicy({
+    completedActions: [
+      ...roster.slice(0, roster.indexOf("REVEAL_CCC_ROUND_11") + 1),
+      "EXPIRE_CCC_ROUND_11",
+    ],
+    programDataExtensionRequired: true,
+    switchboardRandomnessCreationRequired: true,
+  }), /expected SETTLE_LINKED_POSITION_2_WEEK_11/u);
 });

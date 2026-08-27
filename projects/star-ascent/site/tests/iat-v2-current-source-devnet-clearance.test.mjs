@@ -73,7 +73,7 @@ function parsedTransaction(instructions, extraSigners = []) {
   return Transaction.from(transaction.serialize({ requireAllSignatures: false, verifySignatures: false }));
 }
 
-async function exactRoster({ createRandomness = false, reveal = false } = {}) {
+async function exactRoster({ createRandomness = true, reveal = false } = {}) {
   const mint = await deriveDeterministicDevnetMint({ seed: DEVNET_FEATURE_MINT_SEED });
   const plan = createIatV2DeploymentPlan({
     network: "devnet",
@@ -366,10 +366,12 @@ async function exactPostState(decoded) {
   ];
 }
 
-test("complete decoder admits the exact reviewed expiry roster wire semantics", async () => {
+test("complete decoder admits the exact reviewed fresh-randomness expiry roster wire semantics", async () => {
   const value = await exactRoster();
   const decoded = await decodeCompleteRehearsalRoster(value);
-  assert.equal(decoded.transactionCount, 15);
+  assert.equal(decoded.transactionCount, 16);
+  assert.ok(decoded.oracle);
+  assert.ok(decoded.randomness);
   assert.equal(decoded.wireSemantics, "EXACT_DISCRIMINATOR_DATA_ACCOUNT_METAS_AND_CANONICAL_IDENTITIES");
 });
 
@@ -379,6 +381,14 @@ test("complete decoder admits exact Switchboard creation and reveal wire semanti
   assert.equal(decoded.transactionCount, 16);
   assert.ok(decoded.oracle);
   assert.ok(decoded.randomness);
+});
+
+test("complete decoder rejects the old no-create randomness shortcut", async () => {
+  const value = await exactRoster({ createRandomness: false });
+  await assert.rejects(
+    decodeCompleteRehearsalRoster(value),
+    (error) => error instanceof CurrentSourceClearanceError && error.code === "COMPLETE_ROSTER_HOLD",
+  );
 });
 
 test("wire decoder rejects mislabeled actions and mutated discriminators/account identities", async (t) => {
@@ -399,7 +409,8 @@ test("wire decoder rejects mislabeled actions and mutated discriminators/account
   });
   await t.test("Switchboard commit discriminator", async () => {
     const value = await exactRoster();
-    value.entries[11].transaction.instructions[1].data[0] ^= 0xff;
+    const commit = value.entries.find((entry) => entry.action === "COMMIT_CCC_ROUND_11");
+    commit.transaction.instructions[1].data[0] ^= 0xff;
     await assert.rejects(decodeCompleteRehearsalRoster(value), (error) => error instanceof CurrentSourceClearanceError && error.code === "WIRE_DATA_HOLD");
   });
 });

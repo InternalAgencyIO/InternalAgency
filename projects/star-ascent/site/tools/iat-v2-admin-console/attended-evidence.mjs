@@ -6,6 +6,38 @@ const hex40 = /^[0-9a-f]{40}$/u;
 const hex64 = /^[0-9a-f]{64}$/u;
 const base58 = /^[1-9A-HJ-NP-Za-km-z]+$/u;
 const base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const ROUND_11_TERMINAL_ACTIONS = Object.freeze([
+  "REVEAL_CCC_ROUND_11",
+  "EXPIRE_CCC_ROUND_11",
+]);
+const ROSTER_BEFORE_RANDOMNESS = Object.freeze([
+  "UPGRADE_PROGRAM",
+  "MIGRATE_LEGACY_ROUND_WEEK_7",
+  "MIGRATE_LEGACY_ROUND_WEEK_8",
+  "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
+  "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
+  "SETTLE_STANDARD_POSITION_WEEK_10",
+  "SETTLE_STANDARD_POSITION_WEEK_11",
+  "SETTLE_LINKED_POSITION_2_WEEK_9",
+  "SETTLE_LINKED_POSITION_2_WEEK_10",
+  "SETTLE_LINKED_POSITION_3_WEEK_9",
+  "SETTLE_LINKED_POSITION_3_WEEK_10",
+]);
+const ROSTER_AFTER_RANDOMNESS = Object.freeze([
+  "COMMIT_CCC_ROUND_11",
+  ROUND_11_TERMINAL_ACTIONS,
+  "SETTLE_LINKED_POSITION_2_WEEK_11",
+  "SETTLE_LINKED_POSITION_3_WEEK_11",
+]);
+const CANONICAL_ATTENDED_ACTIONS = new Set([
+  "EXTEND_PROGRAM_DATA",
+  ...ROSTER_BEFORE_RANDOMNESS,
+  "CREATE_SWITCHBOARD_RANDOMNESS",
+  "COMMIT_CCC_ROUND_11",
+  ...ROUND_11_TERMINAL_ACTIONS,
+  "SETTLE_LINKED_POSITION_2_WEEK_11",
+  "SETTLE_LINKED_POSITION_3_WEEK_11",
+]);
 
 function check(condition, message) {
   if (!condition) throw new Error(message);
@@ -33,7 +65,7 @@ function base58ByteLength(value) {
 function binding({ sourceCommit, programArtifactSha256, mint }) {
   check(hex40.test(sourceCommit ?? ""), "Attended evidence requires the exact CI source commit");
   check(hex64.test(programArtifactSha256 ?? ""), "Attended evidence requires the exact CI artifact SHA-256");
-  check(base58.test(mint ?? ""), "Attended evidence requires the exact Devnet mint");
+  check(base58ByteLength(mint) === 32, "Attended evidence requires the exact 32-byte Devnet mint");
   return { sourceCommit, programArtifactSha256, mint };
 }
 
@@ -174,17 +206,29 @@ export function persistAttendedReceipt(storage, expectedBinding, receipt, {
 } = {}) {
   const current = loadAttendedReceiptSet(storage, expectedBinding);
   const nextReceipt = canonicalAttendedReceipt(receipt);
+  const existing = current.receipts.find((item) => item.action === nextReceipt.action);
+  if (existing) {
+    check(
+      JSON.stringify(existing) === JSON.stringify(nextReceipt),
+      `Attended receipt action ${nextReceipt.action} is already recorded with different evidence`,
+    );
+    return current;
+  }
   const next = canonicalReceiptSet({
     ...expectedBinding,
     preUpgradeProgramDataCapacityBytes:
       current.preUpgradeProgramDataCapacityBytes ?? preUpgradeProgramDataCapacityBytes,
-    receipts: [
-      ...current.receipts.filter((item) => item.action !== nextReceipt.action),
-      nextReceipt,
-    ],
+    receipts: [...current.receipts, nextReceipt],
   });
-  storage.setItem(attendedReceiptStorageKey(expectedBinding), JSON.stringify(next));
-  return next;
+  const key = attendedReceiptStorageKey(expectedBinding);
+  const serialized = JSON.stringify(next);
+  try {
+    storage.setItem(key, serialized);
+    check(storage.getItem(key) === serialized, "Attended receipt-set storage readback disagrees with the write");
+  } catch (error) {
+    throw new Error("Attended receipt-set storage is unavailable or non-durable", { cause: error });
+  }
+  return parseAttendedReceiptSet(serialized, expectedBinding);
 }
 
 export function clearAttendedReceipts(storage, expectedBinding) {
@@ -193,34 +237,158 @@ export function clearAttendedReceipts(storage, expectedBinding) {
 
 export function completeAttendedRoster({
   programDataExtensionRequired,
-  switchboardRandomnessCreationRequired,
+  switchboardRandomnessCreationRequired = true,
   cccRound11TerminalAction,
 } = {}) {
   check(typeof programDataExtensionRequired === "boolean", "Extension condition is required");
-  check(typeof switchboardRandomnessCreationRequired === "boolean", "Switchboard creation condition is required");
   check(
-    ["REVEAL_CCC_ROUND_11", "EXPIRE_CCC_ROUND_11"].includes(cccRound11TerminalAction),
+    switchboardRandomnessCreationRequired === true,
+    "Fresh Switchboard randomness creation is mandatory for the canonical attended roster",
+  );
+  check(
+    ROUND_11_TERMINAL_ACTIONS.includes(cccRound11TerminalAction),
     "Round 11 terminal action is not reviewed",
   );
   return Object.freeze([
     ...(programDataExtensionRequired ? ["EXTEND_PROGRAM_DATA"] : []),
-    "UPGRADE_PROGRAM",
-    "MIGRATE_LEGACY_ROUND_WEEK_7",
-    "MIGRATE_LEGACY_ROUND_WEEK_8",
-    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
-    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
-    "SETTLE_STANDARD_POSITION_WEEK_10",
-    "SETTLE_STANDARD_POSITION_WEEK_11",
-    "SETTLE_LINKED_POSITION_2_WEEK_9",
-    "SETTLE_LINKED_POSITION_2_WEEK_10",
-    "SETTLE_LINKED_POSITION_3_WEEK_9",
-    "SETTLE_LINKED_POSITION_3_WEEK_10",
-    ...(switchboardRandomnessCreationRequired ? ["CREATE_SWITCHBOARD_RANDOMNESS"] : []),
+    ...ROSTER_BEFORE_RANDOMNESS,
+    "CREATE_SWITCHBOARD_RANDOMNESS",
     "COMMIT_CCC_ROUND_11",
     cccRound11TerminalAction,
     "SETTLE_LINKED_POSITION_2_WEEK_11",
     "SETTLE_LINKED_POSITION_3_WEEK_11",
   ]);
+}
+
+function exactCompletedActions(completedActions) {
+  check(Array.isArray(completedActions), "Canonical attended progress must be an action array");
+  check(
+    completedActions.every((action) => typeof action === "string" && action.length > 0),
+    "Canonical attended progress contains an invalid action",
+  );
+  check(
+    new Set(completedActions).size === completedActions.length,
+    "Canonical attended progress repeats an action",
+  );
+  return completedActions;
+}
+
+function expectedLabel(actions) {
+  return actions.join(" or ");
+}
+
+/**
+ * Derive the only action(s) that a canonical current-source ceremony may expose
+ * next. This is intentionally independent of legacy/recovery tooling: callers
+ * opt into it only for the canonical aggregate path, immediately before loading
+ * a signer.
+ */
+export function canonicalAttendedNextActionPolicy({
+  completedActions = [],
+  programDataExtensionRequired,
+  switchboardRandomnessCreationRequired = true,
+} = {}) {
+  const completed = exactCompletedActions(completedActions);
+  check(typeof programDataExtensionRequired === "boolean", "Canonical extension condition is required");
+  check(
+    switchboardRandomnessCreationRequired === true,
+    "Fresh Switchboard randomness creation is mandatory for canonical attended progress",
+  );
+
+  const beforeRandomness = [
+    ...(programDataExtensionRequired ? ["EXTEND_PROGRAM_DATA"] : []),
+    ...ROSTER_BEFORE_RANDOMNESS,
+  ];
+  const totalActionCount = beforeRandomness.length + 1 + ROSTER_AFTER_RANDOMNESS.length;
+  const firstMismatch = completed
+    .slice(0, Math.min(completed.length, beforeRandomness.length))
+    .findIndex((action, index) => action !== beforeRandomness[index]);
+  if (firstMismatch >= 0) {
+    throw new Error(
+      `Canonical attended progress expected ${beforeRandomness[firstMismatch]} at index ${firstMismatch}, received ${completed[firstMismatch]}`,
+    );
+  }
+  if (completed.length < beforeRandomness.length) {
+    const next = Object.freeze([beforeRandomness[completed.length]]);
+    return Object.freeze({
+      complete: false,
+      completedActionCount: completed.length,
+      totalActionCount,
+      switchboardRandomnessCreationRequired: true,
+      allowedNextActions: next,
+      expectedAction: next[0],
+    });
+  }
+
+  const steps = [
+    ...beforeRandomness.map((action) => Object.freeze([action])),
+    Object.freeze(["CREATE_SWITCHBOARD_RANDOMNESS"]),
+    ...ROSTER_AFTER_RANDOMNESS.map((step) => (
+      Array.isArray(step) ? step : Object.freeze([step])
+    )),
+  ];
+  check(completed.length <= steps.length, "Canonical attended progress continues after the roster is complete");
+  for (let index = beforeRandomness.length; index < completed.length; index += 1) {
+    const allowed = steps[index];
+    check(
+      allowed.includes(completed[index]),
+      `Canonical attended progress expected ${expectedLabel(allowed)} at index ${index}, received ${completed[index]}`,
+    );
+  }
+  if (completed.length === steps.length) {
+    return Object.freeze({
+      complete: true,
+      completedActionCount: completed.length,
+      totalActionCount: steps.length,
+      switchboardRandomnessCreationRequired: true,
+      allowedNextActions: Object.freeze([]),
+      expectedAction: null,
+    });
+  }
+  const allowedNextActions = Object.freeze([...steps[completed.length]]);
+  return Object.freeze({
+    complete: false,
+    completedActionCount: completed.length,
+    totalActionCount: steps.length,
+    switchboardRandomnessCreationRequired: true,
+    allowedNextActions,
+    expectedAction: allowedNextActions.length === 1 ? allowedNextActions[0] : null,
+  });
+}
+
+export function assertCanonicalAttendedNextAction({ nextAction, ...progress } = {}) {
+  const policy = canonicalAttendedNextActionPolicy(progress);
+  check(!policy.complete, "Canonical attended roster is already complete");
+  check(typeof nextAction === "string" && nextAction.length > 0, "Canonical next action is required");
+  check(
+    policy.allowedNextActions.includes(nextAction),
+    `Canonical attended roster expected ${expectedLabel(policy.allowedNextActions)}, received ${nextAction}`,
+  );
+  return policy;
+}
+
+/**
+ * Bind canonical progress to finalized public receipts, preserving their
+ * recorded order. Callers must supply the exact reviewed source/artifact/mint
+ * binding and a ceremony-stable extension condition.
+ */
+export function assertCanonicalAttendedNextActionFromReceiptSet({
+  receiptSet,
+  expectedBinding,
+  programDataExtensionRequired,
+  nextAction,
+} = {}) {
+  const exact = binding(expectedBinding ?? {});
+  const normalized = parseAttendedReceiptSet(receiptSet, exact);
+  const extra = normalized.receipts.find(({ action }) => !CANONICAL_ATTENDED_ACTIONS.has(action));
+  check(!extra, `Canonical attended progress includes out-of-roster receipt ${extra?.action}`);
+  const completedActions = Object.freeze(normalized.receipts.map(({ action }) => action));
+  const policy = assertCanonicalAttendedNextAction({
+    completedActions,
+    programDataExtensionRequired,
+    nextAction,
+  });
+  return Object.freeze({ completedActions, policy });
 }
 
 function featureReceipts(featureExport) {
@@ -273,7 +441,11 @@ export function buildCompleteAttendedBundle({
   );
   const programDataExtensionRequired = byAction.has("EXTEND_PROGRAM_DATA");
   const switchboardRandomnessCreationRequired = byAction.has("CREATE_SWITCHBOARD_RANDOMNESS");
-  const terminalActions = ["REVEAL_CCC_ROUND_11", "EXPIRE_CCC_ROUND_11"]
+  check(
+    switchboardRandomnessCreationRequired,
+    "Aggregate evidence is missing mandatory receipt CREATE_SWITCHBOARD_RANDOMNESS",
+  );
+  const terminalActions = ROUND_11_TERMINAL_ACTIONS
     .filter((action) => byAction.has(action));
   check(terminalActions.length === 1, "Aggregate receipts require exactly one round 11 terminal action");
   const capacities = [...new Set(sets
@@ -287,6 +459,8 @@ export function buildCompleteAttendedBundle({
     cccRound11TerminalAction: terminalActions[0],
   });
   const roster = completeAttendedRoster(conditions);
+  const extra = uniqueReceipts.find((receipt) => !roster.includes(receipt.action));
+  check(!extra, `Aggregate evidence includes out-of-roster receipt ${extra?.action}`);
   const missing = roster.filter((action) => !byAction.has(action));
   check(missing.length === 0, `Aggregate evidence is missing receipt ${missing[0]}`);
   const transactions = roster.map((action) => byAction.get(action));

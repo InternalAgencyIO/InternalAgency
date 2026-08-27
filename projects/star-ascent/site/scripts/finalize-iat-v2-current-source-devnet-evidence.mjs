@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import "./lib/iat-v2-attended-node-runtime.mjs";
 import { createHash } from "node:crypto";
 import {
   existsSync,
@@ -10,13 +11,13 @@ import {
 } from "node:fs";
 import { isAbsolute, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { PublicKey, Transaction, VersionedTransaction } from "@solana/web3.js";
-import {
+const { PublicKey, Transaction, VersionedTransaction } = await import("@solana/web3.js");
+const {
   CurrentSourceClearanceError,
   decodeCompleteRehearsalRoster,
   observeCompleteRehearsalPostState,
-} from "./lib/iat-v2-current-source-devnet-clearance.mjs";
-import { validateSbfEvidence } from "./validate-iat-v2-ci-sbf-evidence.mjs";
+} = await import("./lib/iat-v2-current-source-devnet-clearance.mjs");
+const { validateSbfEvidence } = await import("./validate-iat-v2-ci-sbf-evidence.mjs");
 
 export const CANONICAL_DEVNET_RPC = "https://api.devnet.solana.com";
 export const CANONICAL_DEVNET_GENESIS_HASH =
@@ -157,7 +158,7 @@ function completeRoster(conditions) {
   ], "complete rehearsal conditions");
   check(typeof conditions.programDataExtensionRequired === "boolean", "COMPLETE_ROSTER_HOLD", "programDataExtensionRequired must be boolean");
   check(Number.isSafeInteger(conditions.preUpgradeProgramDataCapacityBytes) && conditions.preUpgradeProgramDataCapacityBytes > 0, "COMPLETE_ROSTER_HOLD", "pre-upgrade ProgramData capacity is invalid");
-  check(typeof conditions.switchboardRandomnessCreationRequired === "boolean", "COMPLETE_ROSTER_HOLD", "switchboardRandomnessCreationRequired must be boolean");
+  check(conditions.switchboardRandomnessCreationRequired === true, "COMPLETE_ROSTER_HOLD", "the canonical rehearsal requires a fresh source-bound Switchboard randomness creation receipt");
   check(["REVEAL_CCC_ROUND_11", "EXPIRE_CCC_ROUND_11"].includes(conditions.cccRound11TerminalAction), "COMPLETE_ROSTER_HOLD", "CCC round 11 terminal action is invalid");
   return [
     ...(conditions.programDataExtensionRequired ? ["EXTEND_PROGRAM_DATA"] : []),
@@ -172,7 +173,7 @@ function completeRoster(conditions) {
     "SETTLE_LINKED_POSITION_2_WEEK_10",
     "SETTLE_LINKED_POSITION_3_WEEK_9",
     "SETTLE_LINKED_POSITION_3_WEEK_10",
-    ...(conditions.switchboardRandomnessCreationRequired ? ["CREATE_SWITCHBOARD_RANDOMNESS"] : []),
+    "CREATE_SWITCHBOARD_RANDOMNESS",
     "COMMIT_CCC_ROUND_11",
     conditions.cccRound11TerminalAction,
     "SETTLE_LINKED_POSITION_2_WEEK_11",

@@ -334,6 +334,11 @@ function assertOneIatInstruction(transaction, expected, label, context, options 
 }
 
 export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, conditions }) {
+  check(
+    conditions?.switchboardRandomnessCreationRequired === true,
+    "COMPLETE_ROSTER_HOLD",
+    "the canonical rehearsal requires a fresh source-bound Switchboard randomness creation receipt",
+  );
   const signer = IAT_V2_PROGRAM_ADMIN;
   const mint = await deriveDeterministicDevnetMint({ seed: DEVNET_FEATURE_MINT_SEED });
   const plan = createIatV2DeploymentPlan({
@@ -343,7 +348,16 @@ export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, co
     randomnessProgramId: SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
     rehearsal: true,
   });
-  const context = { signer, mint, plan, artifactBytes, randomness: null, oracle: null, buffer: null };
+  const context = {
+    signer,
+    mint,
+    plan,
+    artifactBytes,
+    randomness: null,
+    randomnessCreated: false,
+    oracle: null,
+    buffer: null,
+  };
 
   for (const entry of entries) {
     const { action, transaction } = entry;
@@ -385,6 +399,7 @@ export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, co
       assertOneIatInstruction(transaction, expected, action, context);
     } else if (action === "CREATE_SWITCHBOARD_RANDOMNESS") {
       assertCreateRandomness(transaction, context);
+      context.randomnessCreated = true;
     } else if (action === "COMMIT_CCC_ROUND_11") {
       assertInstructionCount(transaction, 3, action);
       assertSignerSet(transaction, [context.signer], action);
@@ -414,6 +429,7 @@ export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, co
       fail("ROSTER_ACTION_HOLD", `unreviewed complete-roster action: ${action}`);
     }
   }
+  check(context.randomnessCreated === true, "COMPLETE_ROSTER_HOLD", "complete roster omitted the mandatory fresh randomness creation");
   check(context.randomness instanceof PublicKey, "WIRE_ACCOUNTS_HOLD", "complete roster did not bind a randomness account");
   return Object.freeze({
     mint: mint.toBase58(),

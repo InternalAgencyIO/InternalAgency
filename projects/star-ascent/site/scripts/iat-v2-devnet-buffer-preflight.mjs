@@ -1,28 +1,30 @@
 #!/usr/bin/env node
 
+import "./lib/iat-v2-attended-node-runtime.mjs";
 import { createHash } from "node:crypto";
-import { execFileSync } from "node:child_process";
 import { lstatSync, readFileSync, realpathSync } from "node:fs";
 import { dirname, isAbsolute, normalize, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { Connection, PublicKey } from "@solana/web3.js";
-import {
+const {
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-} from "../programs/iat_v2/instructions.mjs";
-import {
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
+} = await import("../programs/iat_v2/artifact-binding.mjs");
+const {
   IAT_V2_SBF_ARTIFACT_INPUT_PATHS,
   validateSbfEvidence,
-} from "./validate-iat-v2-ci-sbf-evidence.mjs";
+} = await import("./validate-iat-v2-ci-sbf-evidence.mjs");
+const { createIatV2AttendedGitRunner } = await import("./lib/iat-v2-attended-git-runtime.mjs");
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
-const PROGRAM_ID = new PublicKey("62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj");
-const PROGRAM_DATA_ADDRESS = new PublicKey("6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP");
-const PROGRAM_ADMIN = new PublicKey("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
-const DEVNET_DEPLOYER = new PublicKey("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4");
-const UPGRADEABLE_LOADER = new PublicKey("BPFLoaderUpgradeab1e11111111111111111111111");
+const DEVNET_GENESIS_HASH = "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG";
+const PROGRAM_ID = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
+const PROGRAM_DATA_ADDRESS = "6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP";
+const PROGRAM_ADMIN = "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH";
+const DEVNET_DEPLOYER = "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4";
+const UPGRADEABLE_LOADER = "BPFLoaderUpgradeab1e11111111111111111111111";
 const PROGRAM_DATA_METADATA_BYTES = 45;
 const BUFFER_METADATA_BYTES = 37;
 
@@ -36,13 +38,12 @@ export const IAT_V2_MIGRATION_ARTIFACT_BINDING = Object.freeze({
   artifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   artifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   sourceHeadCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-  sourceHeadTree: "6af1a8c6ba3fc75b2a887f7e881fce11e6a37253",
+  sourceHeadTree: "d574530655579e925fdc61b921b4013a322f9a85",
   ciRunId: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   ciRunAttempt: 1,
   workflowRef:
     "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge",
-  evidenceManifestSha256:
-    "40ba450b1136401ef4bfe984bf7a64c9cc0a9e7f35f64eb554e49f90e5bbe6b6",
+  evidenceManifestSha256: IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
 });
 
 export const IAT_V2_ARTIFACT_INPUT_PATHS = IAT_V2_SBF_ARTIFACT_INPUT_PATHS;
@@ -96,13 +97,16 @@ function canonicalRegularFile(projectRoot, candidate, label) {
   return absolute;
 }
 
+const reviewedGitRunners = new Map();
+
+function reviewedGitRunner(projectRoot) {
+  const root = realpathSync(projectRoot);
+  if (!reviewedGitRunners.has(root)) reviewedGitRunners.set(root, createIatV2AttendedGitRunner(root));
+  return reviewedGitRunners.get(root);
+}
+
 function defaultGit(projectRoot, args, options = {}) {
-  return execFileSync("git", args, {
-    cwd: projectRoot,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
-    ...options,
-  }).trim();
+  return reviewedGitRunner(projectRoot).run(projectRoot, args, options);
 }
 
 function assertBoundShape(binding) {
@@ -138,6 +142,7 @@ export function verifyMigrationArtifactBinding({
   evidencePath = "target/verifiable/iat-v2-build-evidence.json",
   binding = IAT_V2_MIGRATION_ARTIFACT_BINDING,
   git = defaultGit,
+  gitIdentity = null,
   validateCiEvidence = validateSbfEvidence,
 } = {}) {
   assertBoundShape(binding);
@@ -150,11 +155,14 @@ export function verifyMigrationArtifactBinding({
   const manifest = JSON.parse(evidenceText);
 
   let canonicalCi;
+  let reviewedGitIdentity = gitIdentity;
   try {
+    if (git === defaultGit) reviewedGitIdentity = reviewedGitRunner(projectRoot).identity;
     canonicalCi = validateCiEvidence({
       projectRoot,
       manifestPath: evidencePath,
       allowDescendantCheckout: true,
+      git,
     });
   } catch (error) {
     fail(
@@ -178,7 +186,7 @@ export function verifyMigrationArtifactBinding({
   exactKeys(manifest, ["schema", "status", "ciProvenance", "buildContainer", "sourceBinding", "programId", "toolchain", "artifacts", "limitations"], "CI evidence manifest");
   check(manifest.schema === "iat-v2-ci-verifiable-sbf-evidence/v5", "EVIDENCE_SCHEMA_HOLD", "CI evidence schema drifted");
   check(manifest.status === "BUILD_ONLY_HOLD", "EVIDENCE_STATUS_HOLD", "CI evidence must remain BUILD_ONLY_HOLD");
-  check(manifest.programId === PROGRAM_ID.toBase58(), "EVIDENCE_PROGRAM_ID_HOLD", "CI evidence program ID drifted");
+  check(manifest.programId === PROGRAM_ID, "EVIDENCE_PROGRAM_ID_HOLD", "CI evidence program ID drifted");
   check(JSON.stringify(manifest.limitations) === JSON.stringify([
     "Build evidence only; not signed Devnet evidence.",
     "Does not authorize deployment, signing, broadcast, funding, or Mainnet launch.",
@@ -210,7 +218,7 @@ export function verifyMigrationArtifactBinding({
     fail("SOURCE_HEAD_NOT_ANCESTOR_HOLD", "bound migration source is not an ancestor of the current checkout");
   }
   try {
-    git(projectRoot, ["diff", "--quiet", binding.sourceHeadCommit, "--", ...IAT_V2_ARTIFACT_INPUT_PATHS]);
+    git(projectRoot, ["diff", "--no-ext-diff", "--no-textconv", "--quiet", binding.sourceHeadCommit, "--", ...IAT_V2_ARTIFACT_INPUT_PATHS]);
   } catch {
     fail("ARTIFACT_INPUT_DRIFT_HOLD", "artifact-producing inputs drifted after the bound CI source head");
   }
@@ -219,10 +227,15 @@ export function verifyMigrationArtifactBinding({
     schema: "iat-v2-migration-artifact-preflight/v1",
     status: "PASS",
     network: "devnet",
-    programId: PROGRAM_ID.toBase58(),
+    programId: PROGRAM_ID,
     artifactSha256: binding.artifactSha256,
     artifactBytes: binding.artifactBytes,
     sourceHeadCommit: binding.sourceHeadCommit,
+    sourceHeadTree: binding.sourceHeadTree,
+    gitPath: reviewedGitIdentity?.path ?? null,
+    gitVersion: reviewedGitIdentity?.version ?? null,
+    gitSha256: reviewedGitIdentity?.sha256 ?? null,
+    gitBytes: reviewedGitIdentity?.bytes ?? null,
     ciRunId: binding.ciRunId,
     ciRunAttempt: binding.ciRunAttempt,
     evidenceManifestSha256: binding.evidenceManifestSha256,
@@ -289,41 +302,50 @@ export function calculateUpgradeCapacityPlan({
   });
 }
 
-function parseProgramAccount(info) {
+function parseProgramAccount(info, { PublicKey, loader, programDataAddress }) {
   check(info, "PROGRAM_ACCOUNT_MISSING_HOLD", "reviewed Devnet program account is missing");
-  check(info.owner.equals(UPGRADEABLE_LOADER), "PROGRAM_OWNER_HOLD", "reviewed Devnet program is not owned by the upgradeable loader");
+  check(info.owner.equals(loader), "PROGRAM_OWNER_HOLD", "reviewed Devnet program is not owned by the upgradeable loader");
   check(info.data.length === 36 && info.data.readUInt32LE(0) === 2, "PROGRAM_LAYOUT_HOLD", "reviewed Devnet program account layout drifted");
   const observedProgramData = new PublicKey(info.data.subarray(4, 36));
-  check(observedProgramData.equals(PROGRAM_DATA_ADDRESS), "PROGRAM_DATA_ADDRESS_HOLD", "reviewed ProgramData address drifted");
+  check(observedProgramData.equals(programDataAddress), "PROGRAM_DATA_ADDRESS_HOLD", "reviewed ProgramData address drifted");
 }
 
-function parseProgramDataAccount(info) {
+function parseProgramDataAccount(info, { PublicKey, loader, programAdmin }) {
   check(info, "PROGRAM_DATA_MISSING_HOLD", "reviewed Devnet ProgramData account is missing");
-  check(info.owner.equals(UPGRADEABLE_LOADER), "PROGRAM_DATA_OWNER_HOLD", "reviewed Devnet ProgramData is not owned by the upgradeable loader");
+  check(info.owner.equals(loader), "PROGRAM_DATA_OWNER_HOLD", "reviewed Devnet ProgramData is not owned by the upgradeable loader");
   check(info.data.length >= PROGRAM_DATA_METADATA_BYTES && info.data.readUInt32LE(0) === 3, "PROGRAM_DATA_LAYOUT_HOLD", "reviewed Devnet ProgramData layout drifted");
   check(info.data[12] === 1, "PROGRAM_AUTHORITY_HOLD", "reviewed Devnet ProgramData has no upgrade authority");
   const authority = new PublicKey(info.data.subarray(13, 45));
-  check(authority.equals(PROGRAM_ADMIN), "PROGRAM_AUTHORITY_HOLD", `reviewed Devnet upgrade authority is ${authority.toBase58()}`);
+  check(authority.equals(programAdmin), "PROGRAM_AUTHORITY_HOLD", `reviewed Devnet upgrade authority is ${authority.toBase58()}`);
   return info.data.length - PROGRAM_DATA_METADATA_BYTES;
 }
 
 export async function observeDevnetUpgradeCapacity({
   artifactBytes,
-  connection = new Connection(DEVNET_RPC, "finalized"),
+  connection,
 } = {}) {
+  const { Connection, PublicKey } = await import("@solana/web3.js");
+  const programId = new PublicKey(PROGRAM_ID);
+  const programDataAddress = new PublicKey(PROGRAM_DATA_ADDRESS);
+  const programAdmin = new PublicKey(PROGRAM_ADMIN);
+  const devnetDeployer = new PublicKey(DEVNET_DEPLOYER);
+  const loader = new PublicKey(UPGRADEABLE_LOADER);
+  const rpc = connection ?? new Connection(DEVNET_RPC, "finalized");
   integer(artifactBytes, "artifactBytes");
   check(artifactBytes > 0, "CAPACITY_INPUT_HOLD", "artifactBytes must be positive");
-  const startSlot = await connection.getSlot("finalized");
-  const accounts = await connection.getMultipleAccountsInfo([
-    PROGRAM_ID,
-    PROGRAM_DATA_ADDRESS,
-    DEVNET_DEPLOYER,
-    PROGRAM_ADMIN,
+  const genesisHash = await rpc.getGenesisHash();
+  check(genesisHash === DEVNET_GENESIS_HASH, "NETWORK_IDENTITY_HOLD", "RPC endpoint is not the exact reviewed Solana Devnet");
+  const startSlot = await rpc.getSlot("finalized");
+  const accounts = await rpc.getMultipleAccountsInfo([
+    programId,
+    programDataAddress,
+    devnetDeployer,
+    programAdmin,
   ], { commitment: "finalized", minContextSlot: startSlot });
   check(Array.isArray(accounts) && accounts.length === 4, "RPC_OBSERVATION_HOLD", "Devnet account observation is incomplete");
   const [program, programData, deployer, admin] = accounts;
-  parseProgramAccount(program);
-  const currentProgramCapacityBytes = parseProgramDataAccount(programData);
+  parseProgramAccount(program, { PublicKey, loader, programDataAddress });
+  const currentProgramCapacityBytes = parseProgramDataAccount(programData, { PublicKey, loader, programAdmin });
   check(deployer, "DEPLOYER_ACCOUNT_MISSING_HOLD", "Devnet deployer account is missing");
   check(admin, "ADMIN_ACCOUNT_MISSING_HOLD", "Devnet administrator account is missing");
 
@@ -331,9 +353,9 @@ export async function observeDevnetUpgradeCapacity({
   const targetProgramDataBytes = programData.data.length + extensionBytes;
   const bufferAccountBytes = artifactBytes + BUFFER_METADATA_BYTES;
   const [targetProgramDataRentLamports, bufferRentLamports, endSlot] = await Promise.all([
-    connection.getMinimumBalanceForRentExemption(targetProgramDataBytes, "finalized"),
-    connection.getMinimumBalanceForRentExemption(bufferAccountBytes, "finalized"),
-    connection.getSlot("finalized"),
+    rpc.getMinimumBalanceForRentExemption(targetProgramDataBytes, "finalized"),
+    rpc.getMinimumBalanceForRentExemption(bufferAccountBytes, "finalized"),
+    rpc.getSlot("finalized"),
   ]);
   const plan = calculateUpgradeCapacityPlan({
     artifactBytes,
@@ -350,20 +372,23 @@ export async function observeDevnetUpgradeCapacity({
     schema: "iat-v2-devnet-upgrade-capacity/v1",
     status: "READ_ONLY_CALCULATION",
     rpc: DEVNET_RPC,
+    genesisHash,
     commitment: "finalized",
     startSlot,
     endSlot,
-    programId: PROGRAM_ID.toBase58(),
-    programDataAddress: PROGRAM_DATA_ADDRESS.toBase58(),
-    upgradeAuthority: PROGRAM_ADMIN.toBase58(),
-    devnetDeployer: DEVNET_DEPLOYER.toBase58(),
+    programId: PROGRAM_ID,
+    programDataAddress: PROGRAM_DATA_ADDRESS,
+    upgradeAuthority: PROGRAM_ADMIN,
+    devnetDeployer: DEVNET_DEPLOYER,
     artifactBindingStatus: IAT_V2_MIGRATION_ARTIFACT_BINDING.status,
     artifactBytesSource: IAT_V2_MIGRATION_ARTIFACT_BINDING.status === "BOUND"
       && IAT_V2_MIGRATION_ARTIFACT_BINDING.artifactBytes === artifactBytes
       ? "CHECKED_IN_CI_BINDING"
       : "CALLER_SUPPLIED_CALCULATION_ONLY",
     ...plan,
-    networkExecution: false,
+    rpcReadExecuted: true,
+    networkMutation: false,
+    transactionExecution: false,
     signing: false,
     broadcast: false,
   });
