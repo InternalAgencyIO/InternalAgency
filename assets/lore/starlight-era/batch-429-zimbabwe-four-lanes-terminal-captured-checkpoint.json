@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "batch": 429,
+  "country": "Zimbabwe",
+  "status": "four-lanes-terminal-captured",
+  "checkpointAtUtc": "2026-08-27T08:08:49.991Z",
+  "acceptedCount": 0,
+  "terminalCount": 4,
+  "rawOutputCount": 3,
+  "explicitNoByteCount": 1,
+  "scenes": [
+    {
+      "sceneId": 1736,
+      "status": "hard-unusable",
+      "sha256": "e9801218198182d0574ac89f0dfa304f3895b9ce9c63969302e622cbbe5279bb",
+      "disposition": "hard-unusable-camera-roll-framing-lock-fail"
+    },
+    {
+      "sceneId": 1737,
+      "status": "hard-unusable",
+      "sha256": "8598cd4c3a30b7e0ef316027c7a35ec361cf1a3c9cc1c51801028651bfb87392",
+      "disposition": "hard-unusable-camera-beacon-and-hand-inventory-lock-fail"
+    },
+    {
+      "sceneId": 1738,
+      "status": "explicit-no-byte-refusal",
+      "sha256": null,
+      "disposition": "explicit-no-byte-refusal"
+    },
+    {
+      "sceneId": 1739,
+      "status": "hard-unusable",
+      "sha256": "925c49bdd8cded6eeb4248f86cb916d12f487a3399215be20f51fe0d400b3c92",
+      "disposition": "hard-unusable-camera-roll-and-hand-inventory-lock-fail"
+    }
+  ],
+  "providerChatUrls": {
+    "1736": "https://www.meta.ai/prompt/0a806e13-fa82-49d7-bb1e-53eccb97f3e8",
+    "1737": "https://www.meta.ai/prompt/a09004d1-8c72-469f-a3a3-f9f89ff4f2a8",
+    "1738": "https://www.meta.ai/prompt/94a71894-8adc-4def-82dd-14546613cf7a",
+    "1739": "https://www.meta.ai/prompt/12fd805b-8782-4d85-bee3-f245db67b3bc"
+  },
+  "duplicateDispatchCount": 0,
+  "retryAuthorized": false
+}
