@@ -204,67 +204,8 @@
       "reason": "User-classified test post with four images and no guardian-prepared approved campaign caption. It is preserved as public audit evidence and does not consume or clear any World Series publication backlog entry."
     }
   ],
-  "pendingPost": {
-    "status": "published-live-verified-awaiting-archive-parity",
-    "preparedAtUtc": "2026-08-22T18:55:45.2809505Z",
-    "account": "@dogramaci",
-    "batches": [392, 393],
-    "countries": ["Maldives", "Cabo Verde"],
-    "caption": "Maldives ❤️ Cabo Verde: stormlit lagoons, orbital couture, and a close-held island moment. #InternalAgency #RAZE",
-    "imageNumbers": [1588, 1589, 1592],
-    "assets": [
-      {"file":"1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png","sha256":"C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE","bytes":2587883},
-      {"file":"1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png","sha256":"BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0","bytes":2567089},
-      {"file":"1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp","path":"assets/lore/starlight-era/1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp","sha256":"F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328","bytes":628410}
-    ],
-    "hashtagRollAudit": [
-      {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-392-393|InternalAgency|counter-1","counter":1,"acceptedByte":12,"digestSha256":"0CCCE1B2D163B50DAB711D5CAE617F504C21B8D09006D518C96236FCA048B626","roll":12,"threshold":25,"included":true},
-      {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-392-393|WorldXXXSeries|counter-0","counter":0,"acceptedByte":40,"digestSha256":"2866F8854D321F87766423E972DA606F23989F971BB38C5F53277D78C8F0B193","roll":40,"threshold":25,"included":false},
-      {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-392-393|RAZE|counter-0","counter":0,"acceptedByte":124,"digestSha256":"7CD9A503FC5589FF48FDAD5B7EAF9699D57B2A2C5249F1D2EFEC055086F54133","roll":24,"threshold":31,"included":true}
-    ],
-    "liveDuplicateAudit": {"checkedAtUtc":"2026-08-22T18:54:00Z","query":"from:dogramaci (\"Maldives\" OR \"Cabo Verde\")","result":"no-results"},
-    "signedInAccountVerified": "@dogramaci",
-    "stagedAtUtc": "2026-08-22T18:57:30Z",
-    "stagedAttachmentCount": 3,
-    "finalClickConfirmed": true,
-    "confirmedClickAtUtc": "2026-08-22T18:58:37.579Z",
-    "verifiedAtUtc": "2026-08-22T19:00:00Z",
-    "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
-    "verification": "Exact approved caption, signed-in @dogramaci account, successful route to home, live public status URL, and exactly three photo endpoints (/photo/1, /photo/2, /photo/3) verified.",
-    "transmission": "user-action-time-confirmed-three-asset-two-country-backlog-clearance"
-  },
-  "preparedPostQueue": [
-    {
-      "status": "published-live-verified",
-      "preparedAtUtc": "2026-08-22T19:18:26.442Z",
-      "account": "@dogramaci",
-      "batches": [396, 397],
-      "countries": ["Bahamas", "Iceland"],
-      "caption": "Bahamas ❤️ Iceland: stormlit cays, volcanic horizons, and a close-held spark beneath northern light. #InternalAgency #RAZE",
-      "imageNumbers": [1604, 1605, 1608],
-      "assets": [
-        {"file":"1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png","sha256":"F2E57C544280EBD99DDF017397E40FF9084FF3CE984474779CAD4C5F8DF7B7AD","bytes":2262185},
-        {"file":"1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp","path":"assets/lore/starlight-era/1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp","sha256":"DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6","bytes":491092},
-        {"file":"1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png","path":"assets/lore/starlight-era/1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png","sha256":"C45E4636A5CF1E80AE98D15A32744945D696DE0C442F82B65673B276251810CE","bytes":2468624}
-      ],
-      "hashtagRollAudit": [
-        {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-396-397|InternalAgency|counter-0","counter":0,"acceptedByte":7,"digestSha256":"07BBFB995EEE8AE0144BC71732B79BF83AE4E439834D1675D96C789CC775E1C0","roll":7,"threshold":25,"included":true},
-        {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-396-397|WorldXXXSeries|counter-1","counter":1,"acceptedByte":48,"digestSha256":"302D0A0CCDD33692AACC574733935D59A20B53A3B04C9FB4E30B6D3898148830","roll":48,"threshold":25,"included":false},
-        {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-396-397|RAZE|counter-0","counter":0,"acceptedByte":25,"digestSha256":"19DA1FDCEA7B2B48D126D2A629F49F274F9403A9E9730560D65B9E98D4595F91","roll":25,"threshold":31,"included":true}
-      ],
-      "liveDuplicateAudit": {
-        "checkedAtUtc": "2026-08-22T19:17:00Z",
-        "query": "from:dogramaci (\"Bahamas\" OR \"Iceland\")",
-        "result": "older Iceland statuses found; neither has the exact prepared caption or canonical three-asset set, so both remain non-consuming historical publications"
-      },
-      "stagedAttachmentCount": 3,
-      "finalClickConfirmed": true,
-      "postedAtUtc": "2026-08-22T19:20:34.160Z",
-      "verifiedAtUtc": "2026-08-22T19:21:00Z",
-      "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
-      "verification": "Exact approved caption, signed-in @dogramaci account, and exactly three public photo endpoints verified live."
-    }
-  ],
+  "pendingPost": null,
+  "preparedPostQueue": [],
   "publicationCadenceState": {
     "mode": "render-first-batch-400-bank-97-complete-counted-scene-1623-provisional-meta-selected-pending-chatgpt-finalization-bank-98-next-backlog-zero-counter-five-retained",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
@@ -276,15 +217,70 @@
     "provider": "Meta AI",
     "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
     "currentPublicationWindowStatus": "open-no-eligible-post-batch-398-and-399-closed-unresolved-batch-400-zero-canonical-accepted-scenes-scene-1623-provisional-meta-pending-chatgpt-finalization-bank-98-next",
-    "fifthRenderRunCountryBanks": [44,45,46,47,48,49,50,51,52,53],
+    "fifthRenderRunCountryBanks": [
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
     "fifthRenderRunCompletedAtUtc": "2026-08-23T03:11:37.2559026Z",
-    "sixthRenderRunCountryBanks": [54,55,56,57,58,59,60,61,62,63],
+    "sixthRenderRunCountryBanks": [
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
     "sixthRenderRunCompletedAtUtc": "2026-08-23T07:13:59.6513746Z",
-    "seventhRenderRunCountryBanks": [64,65,66,67,68,69,70,71,72,73],
+    "seventhRenderRunCountryBanks": [
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73
+    ],
     "seventhRenderRunCompletedAtUtc": "2026-08-23T11:43:24.5640019Z",
-    "eighthRenderRunCountryBanks": [74,75,76,77,78,79,80,81,82,83],
+    "eighthRenderRunCountryBanks": [
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83
+    ],
     "eighthRenderRunCompletedAtUtc": "2026-08-23T15:35:32.3028394Z",
-    "ninthRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
+    "ninthRenderRunCountryBanks": [
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93
+    ],
     "ninthRenderRunCompletedAtUtc": "2026-08-24T12:25:36.8403376Z",
     "latestCompletedCountryBankAtUtc": "2026-08-24T16:20:08.8660456Z",
     "nextRenderRunBankOrdinal": 5,
@@ -389,9 +385,47 @@
       "preparedPostQueueUrlAlreadyInPosts": true
     },
     "countryEligibility": [
-      {"batch":398,"country":"Vanuatu","acceptedScenes":[1612,1613,1615],"unresolvedScenes":[1614],"xEligible":false,"reason":"country is not 4/4 accepted and is closed unresolved"},
-      {"batch":399,"country":"Barbados","acceptedScenes":[],"unresolvedScenes":[1616,1617,1618,1619],"xEligible":false,"reason":"five-attempt ceiling exhausted with no accepted scene"},
-      {"batch":400,"country":"São Tomé and Príncipe","acceptedScenes":[1623],"unresolvedScenes":[1620,1621,1622],"xEligible":false,"reason":"Scene 1623 has a hard-safe canonical ChatGPT clothing-only final remote verified at commit 4166a21afc41c0617026f61f43b0d35260014bd5; scenes 1620 through 1622 remain unresolved"}
+      {
+        "batch": 398,
+        "country": "Vanuatu",
+        "acceptedScenes": [
+          1612,
+          1613,
+          1615
+        ],
+        "unresolvedScenes": [
+          1614
+        ],
+        "xEligible": false,
+        "reason": "country is not 4/4 accepted and is closed unresolved"
+      },
+      {
+        "batch": 399,
+        "country": "Barbados",
+        "acceptedScenes": [],
+        "unresolvedScenes": [
+          1616,
+          1617,
+          1618,
+          1619
+        ],
+        "xEligible": false,
+        "reason": "five-attempt ceiling exhausted with no accepted scene"
+      },
+      {
+        "batch": 400,
+        "country": "São Tomé and Príncipe",
+        "acceptedScenes": [
+          1623
+        ],
+        "unresolvedScenes": [
+          1620,
+          1621,
+          1622
+        ],
+        "xEligible": false,
+        "reason": "Scene 1623 has a hard-safe canonical ChatGPT clothing-only final remote verified at commit 4166a21afc41c0617026f61f43b0d35260014bd5; scenes 1620 through 1622 remain unresolved"
+      }
     ],
     "eligibleBacklogRemaining": 0,
     "eligibleThreeAssetTwoCountryPostExists": false,
@@ -409,7 +443,12 @@
       "batch": 399,
       "country": "Barbados",
       "resolvedScenes": [],
-      "unresolvedScenes": [1616,1617,1618,1619],
+      "unresolvedScenes": [
+        1616,
+        1617,
+        1618,
+        1619
+      ],
       "acceptedScenes": [],
       "closureState": "closed-unresolved-after-bank-95-attempt-5-never-accepted",
       "attemptCeiling": 5,
@@ -421,9 +460,19 @@
     "nextCountry": {
       "batch": 400,
       "country": "São Tomé and Príncipe",
-      "scenes": [1620,1621,1622,1623],
+      "scenes": [
+        1620,
+        1621,
+        1622,
+        1623
+      ],
       "resolvedScenes": [],
-      "unresolvedScenes": [1620,1621,1622,1623],
+      "unresolvedScenes": [
+        1620,
+        1621,
+        1622,
+        1623
+      ],
       "renderState": "deterministic-four-lane-preflight-required-not-dispatched",
       "theme": "orbital spaceship couture",
       "themePairPosition": "2 of 2",
@@ -434,8 +483,22 @@
       "renderRun": 10,
       "nextRenderRunOrdinal": 3,
       "completedBanksInCurrentRenderRun": 2,
-      "lastCompletedRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
-      "completedCountryBanks": [94,95],
+      "lastCompletedRenderRunCountryBanks": [
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93
+      ],
+      "completedCountryBanks": [
+        94,
+        95
+      ],
       "completedRenderRunsSinceLastX": 5
     },
     "cumulativeMetaBankAllowance": {
@@ -468,15 +531,40 @@
     "renderRunOrdinal": 4,
     "dispatchAuthorizedNow": false,
     "providerDispatchConfirmed": true,
-    "eligibleScenes": [1620,1621,1622],
-    "eligibleLanes": [1,2,3],
+    "eligibleScenes": [
+      1620,
+      1621,
+      1622
+    ],
+    "eligibleLanes": [
+      1,
+      2,
+      3
+    ],
     "theme": "orbital spaceship couture",
     "themePairPosition": "2 of 2",
     "orderedReferenceScenesByLane": {
-      "1": [938,936,937],
-      "2": [938,936,937],
-      "3": [938,936,937],
-      "4": [938,936,937,1136]
+      "1": [
+        938,
+        936,
+        937
+      ],
+      "2": [
+        938,
+        936,
+        937
+      ],
+      "3": [
+        938,
+        936,
+        937
+      ],
+      "4": [
+        938,
+        936,
+        937,
+        1136
+      ]
     },
     "promptRecords": [
       {
@@ -519,7 +607,10 @@
     "bolderMissionMapping": {
       "requiredCount": 2,
       "actualCount": 2,
-      "scenes": [1620,1622]
+      "scenes": [
+        1620,
+        1622
+      ]
     },
     "preflightBarrier": {
       "status": "complete",
@@ -534,10 +625,32 @@
       "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
       "gitLfsPendingObjects": 0,
       "worktreeClean": true,
-      "lateArchiveApply": {"appliedAtUtc":"2026-08-24T14:28:01.575Z","occurrences":4803,"uniqueContents":3570,"newManifestRows":1,"newBlobs":1,"newBlobBytes":2241091},
-      "archiveDryRun": {"verifiedAtUtc":"2026-08-24T14:29:13.0385718Z","occurrences":4803,"uniqueContents":3570,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
-      "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+      "lateArchiveApply": {
+        "appliedAtUtc": "2026-08-24T14:28:01.575Z",
+        "occurrences": 4803,
+        "uniqueContents": 3570,
+        "newManifestRows": 1,
+        "newBlobs": 1,
+        "newBlobBytes": 2241091
+      },
+      "archiveDryRun": {
+        "verifiedAtUtc": "2026-08-24T14:29:13.0385718Z",
+        "occurrences": 4803,
+        "uniqueContents": 3570,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "rejectedPromptLedgerVerifier": {
+        "entries": 139,
+        "expectedEntries": 139,
+        "errors": 0
+      },
+      "projectFailedPromptLedgerVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      }
     },
     "terminalEvidenceAndArchiveParity": {
       "status": "complete",
@@ -553,9 +666,23 @@
       "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
       "gitLfsPendingObjects": 0,
       "worktreeClean": true,
-      "archiveDryRun": {"occurrences":4805,"uniqueContents":3572,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
-      "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+      "archiveDryRun": {
+        "occurrences": 4805,
+        "uniqueContents": 3572,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "rejectedPromptLedgerVerifier": {
+        "entries": 139,
+        "expectedEntries": 139,
+        "errors": 0
+      },
+      "projectFailedPromptLedgerVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      }
     },
     "initialUploadSubmitHandoff": {
       "state": "terminal-client-side-technical-no-dispatch-no-bytes",
@@ -567,7 +694,12 @@
       "evidenceBytes": 13465,
       "evidenceSha256": "1E4278EFC356D86C8F29941103A8EDD6CEA75918C4004AB74D1CF90103AF5179",
       "evidenceRows": 8,
-      "attachmentCountsByLane": [3,3,3,4],
+      "attachmentCountsByLane": [
+        3,
+        3,
+        3,
+        4
+      ],
       "providerDispatchConfirmed": false,
       "livePendingHandoff": false,
       "terminal": true,
@@ -590,10 +722,27 @@
       "reuseExactPromptFilesAndHashes": true,
       "reuseDeterministicBindingsWithoutReroll": true,
       "orderedReferenceScenesByLane": {
-        "1": [938, 936, 937],
-        "2": [938, 936, 937],
-        "3": [938, 936, 937],
-        "4": [938, 936, 937, 1136]
+        "1": [
+          938,
+          936,
+          937
+        ],
+        "2": [
+          938,
+          936,
+          937
+        ],
+        "3": [
+          938,
+          936,
+          937
+        ],
+        "4": [
+          938,
+          936,
+          937,
+          1136
+        ]
       },
       "sendPolicy": "Fresh ordered uploads; wait for all attachments to finish, Loading absent, exact prompts present and all four Send controls enabled; then one concurrent click per lane with no duplicate Send.",
       "providerDispatchProofRequired": "A unique Meta prompt URL or Stop state is required before any provider-dispatch claim.",
@@ -634,10 +783,31 @@
         "duplicateRelationships": [],
         "classification": "hard-unusable-all-four-media-contents-plus-one-provider-refusal-no-bytes-select-none",
         "selectedOutputSha256": null,
-        "archiveApply": {"appliedAtUtc":"2026-08-24T15:12:45.412Z","occurrences":4810,"uniqueContents":3577,"newManifestRows":5,"newBlobs":1,"newBlobBytes":2328738},
-        "archiveDryRun": {"occurrences":4810,"uniqueContents":3577,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-        "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
-        "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+        "archiveApply": {
+          "appliedAtUtc": "2026-08-24T15:12:45.412Z",
+          "occurrences": 4810,
+          "uniqueContents": 3577,
+          "newManifestRows": 5,
+          "newBlobs": 1,
+          "newBlobBytes": 2328738
+        },
+        "archiveDryRun": {
+          "occurrences": 4810,
+          "uniqueContents": 3577,
+          "newManifestRows": 0,
+          "newBlobs": 0,
+          "newBlobBytes": 0
+        },
+        "rejectedPromptLedgerVerifier": {
+          "entries": 139,
+          "expectedEntries": 139,
+          "errors": 0
+        },
+        "projectFailedPromptLedgerVerifier": {
+          "runtimeFailures": 987,
+          "promptRecords": 1567,
+          "errors": 0
+        }
       },
       "preparedAtUtc": "2026-08-24T14:46:56.8806040Z",
       "completedBank": true,
@@ -657,9 +827,23 @@
       "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
       "gitLfsPendingObjects": 0,
       "worktreeCleanAtClosureCommit": true,
-      "archiveDryRun": {"occurrences":4810,"uniqueContents":3577,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"errors":0},
-      "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+      "archiveDryRun": {
+        "occurrences": 4810,
+        "uniqueContents": 3577,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "rejectedPromptLedgerVerifier": {
+        "entries": 139,
+        "expectedEntries": 139,
+        "errors": 0
+      },
+      "projectFailedPromptLedgerVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      }
     },
     "bank97Attempt2Preflight": {
       "state": "complete-counted-all-meta-occurrences-classified-one-hard-unusable-one-chatgpt-final-canonical-accepted-two-refusals-canonical-parity-pending",
@@ -667,10 +851,21 @@
       "providerDispatchConfirmed": true,
       "promptRecordsVerified": 4,
       "activeSuppressionMatches": 0,
-      "exactOrderedReferenceCountsByLane": [3,3,3,4],
+      "exactOrderedReferenceCountsByLane": [
+        3,
+        3,
+        3,
+        4
+      ],
       "independentPromptQaComplete": true,
       "lateArchiveParityCommit": "ddaa1f5f4ea2f6d50e6c7c132efe400112c20d0b",
-      "archiveDryRun": {"occurrences":4811,"uniqueContents":3578,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
+      "archiveDryRun": {
+        "occurrences": 4811,
+        "uniqueContents": 3578,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
       "preflightRemoteParityComplete": true,
       "preflightParity": {
         "verifiedAtUtc": "2026-08-24T15:46:54.7424394Z",
@@ -695,7 +890,15 @@
         "1622": "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
         "1623": "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
       },
-      "dispatchEnvelope": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-attempt-02-dispatch-envelope.jsonl","bytes":8522,"sha256":"D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227","rows":4,"remoteParityPending":false,"remoteParityCommit":"e2a2fbff1dbaf5586c8f49fbd98d4348130bef7e","remoteParityVerifiedAtUtc":"2026-08-24T15:55:51.6146813Z"},
+      "dispatchEnvelope": {
+        "path": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-attempt-02-dispatch-envelope.jsonl",
+        "bytes": 8522,
+        "sha256": "D691BF8166A6F180588DCBD115379836FB94FF0F373BC07A787D74B2555E5227",
+        "rows": 4,
+        "remoteParityPending": false,
+        "remoteParityCommit": "e2a2fbff1dbaf5586c8f49fbd98d4348130bef7e",
+        "remoteParityVerifiedAtUtc": "2026-08-24T15:55:51.6146813Z"
+      },
       "resultEvidence": {
         "terminalAuditUtc": "2026-08-24T16:01:37.141Z",
         "capturedOccurrenceCount": 5,
@@ -706,26 +909,187 @@
         "duplicateRelationships": [],
         "visualInspectionPerformed": true,
         "classification": "scene-1620-and-1622-terminal-refusal-no-bytes-scene-1621-hard-unusable-scene-1623-chatgpt-final-primary-hard-safe-canonical-accepted",
-        "scene1620Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1620.jsonl","bytes":2620,"sha256":"863ADC10FEB2BA39F6CFB1E719A6AA70E4697CDFFC60ACAF44AC33FC382FF96E","rows":1},
-        "scene1621Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1621.jsonl","bytes":11455,"sha256":"A59C9B32EC1B5C7B4B7CA9EF00842651FA0B0033D375FF44ADA875B0B7FB4C8F","rows":4,"terminalRawSha256":"068D383E35DD1BAE58CDED024FC90BB3B209886D221CD8600360B7B496E99D77","classification":"hard-unusable-identity-anchor-role-swap-select-none"},
-        "scene1622Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1622.jsonl","bytes":2588,"sha256":"99F5D25F3FF3D260BF9C0E1085AA55703FFD696E33591E17D0F86F38137355E4","rows":1},
-        "scene1623Evidence": {"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1623.jsonl","bytes":8165,"sha256":"423AB3EBCE14CCFEBB02D5C396F176A1B25EB3F1ED7F8A875CB7338EA06CD005","rows":2,"terminalRawSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22","classification":"hard-safe-provisional-meta-source-preserved-as-canonical-provenance-parent"},
-        "authorityAdjudication": {"contractPath":"rapidConsolidatedRenderPolicy.metaAiContinuousRollingRenderPolicy.missionWeightedAcceptanceRelaxation","active":true,"scene1621Decision":"hard-unusable because the anchored face-role identity swap remains a hard gate","scene1623Decision":"hard-safe provisional Meta source; RAZE, divided-garment, camera, gaze and beacon-corridor misses are quality targets under the active relaxation"},
-        "provisionalMetaSelection": {"scene":1623,"lane":4,"rawSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22","archiveBlobPath":"progress-reports/codex-generated-media/blobs/b8/b8e80f0f7e5297707c0b2f2cb7b2ce1d7a8e32228335b2a15444971375a86f22.webp","canonicalAccepted":false,"sceneResolved":false,"metaLaneStopped":true,"requiresChatgptFinalHemRefinement":true,"chatgptFinalizationContractPath":"rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy","chatgptPrimaryEditCompleted":true},
-        "chatgptFinalHemRefinement": {"policyPath":"rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy","completedObservedAtUtc":"2026-08-24T16:22:18.5503801Z","dispatchStartUtc":null,"dispatchStartUtcShortfall":"The built-in ChatGPT edit start UTC was not separately captured; no start time is inferred.","sourceMetaSha256":"B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22","sourceSelectionHead":"ddaa5446df6490d758fea9da45b9a917de9147d7","promptBytes":944,"promptSha256":"C04E87B5C5790AEA07B229993EFC4DAC9C9208F811976C0A64D54FDC93DFB06C","activeSuppressionProfileSha256":"15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150","activeSuppressionHits":0,"blockedLexiconSnapshot":{"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","bytes":335826,"sha256":"3D4EC36C57C8DA6434BDA58CAB21387EE2628340D1B96AD156473CAC7C8D8F17"},"occurrenceEvidence":{"path":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-chatgpt-final-hem-refinement.jsonl","bytes":6859,"sha256":"650D9E4C6EE67A94FF93B6F6362A349CC2A02FC198D5244C81FB1CB3D6EC46EF","rows":2},"canonicalFinal":{"path":"assets/lore/starlight-era/1623-sao-tome-and-principe-principe-biosphere-storm-raze-close-love-chatgpt-final.png","bytes":2348312,"sha256":"8B1CAB6CBD766AAFF98D1DE3815D788C26CA258BB113F657E37C2B52000CCDFE","width":941,"height":1672,"mode":"RGB","mime":"image/png"},"qaDisposition":"accepted-chatgpt-final-primary-hard-safe-no-retry","qualityDeviationsAreNonHard":true,"noAestheticRetry":true,"retryConditionMet":false,"sceneResolved":true,"accepted":true,"archiveApply":{"appliedAtUtc":"2026-08-24T16:30:20.3487937Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":3,"newBlobs":0,"newBlobBytes":0},"archiveDryRun":{"verifiedAtUtc":"2026-08-24T16:30:20.3487937Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"initialEvidenceCommit":"5ebcd9133a5edeba1b183a134e0bad85f06266a6","initialEvidenceRemoteParityVerifiedAtUtc":"2026-08-24T16:34:35.0204295Z","trackedSourceArchiveApply":{"appliedAtUtc":"2026-08-24T16:34:35.0204295Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":2,"newBlobs":0,"newBlobBytes":0},"trackedSourceArchiveDryRun":{"verifiedAtUtc":"2026-08-24T16:34:35.0204295Z","occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"canonicalEvidenceCommit":"4166a21afc41c0617026f61f43b0d35260014bd5","canonicalRemoteParityVerifiedAtUtc":"2026-08-24T16:36:50.3341341Z","archiveAndRemoteParityPending":false},
-        "archiveApply": {"verifiedAfterApplyAtUtc":"2026-08-24T16:07:32.9407055Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":2,"newBlobs":2,"newBlobBytes":1154950},
-        "archiveDryRun": {"verifiedAtUtc":"2026-08-24T16:07:32.9407055Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-        "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"exactPromptShaPasses":139,"errors":0},
-        "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
+        "scene1620Evidence": {
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1620.jsonl",
+          "bytes": 2620,
+          "sha256": "863ADC10FEB2BA39F6CFB1E719A6AA70E4697CDFFC60ACAF44AC33FC382FF96E",
+          "rows": 1
+        },
+        "scene1621Evidence": {
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1621.jsonl",
+          "bytes": 11455,
+          "sha256": "A59C9B32EC1B5C7B4B7CA9EF00842651FA0B0033D375FF44ADA875B0B7FB4C8F",
+          "rows": 4,
+          "terminalRawSha256": "068D383E35DD1BAE58CDED024FC90BB3B209886D221CD8600360B7B496E99D77",
+          "classification": "hard-unusable-identity-anchor-role-swap-select-none"
+        },
+        "scene1622Evidence": {
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1622.jsonl",
+          "bytes": 2588,
+          "sha256": "99F5D25F3FF3D260BF9C0E1085AA55703FFD696E33591E17D0F86F38137355E4",
+          "rows": 1
+        },
+        "scene1623Evidence": {
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-97-scene-1623.jsonl",
+          "bytes": 8165,
+          "sha256": "423AB3EBCE14CCFEBB02D5C396F176A1B25EB3F1ED7F8A875CB7338EA06CD005",
+          "rows": 2,
+          "terminalRawSha256": "B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22",
+          "classification": "hard-safe-provisional-meta-source-preserved-as-canonical-provenance-parent"
+        },
+        "authorityAdjudication": {
+          "contractPath": "rapidConsolidatedRenderPolicy.metaAiContinuousRollingRenderPolicy.missionWeightedAcceptanceRelaxation",
+          "active": true,
+          "scene1621Decision": "hard-unusable because the anchored face-role identity swap remains a hard gate",
+          "scene1623Decision": "hard-safe provisional Meta source; RAZE, divided-garment, camera, gaze and beacon-corridor misses are quality targets under the active relaxation"
+        },
+        "provisionalMetaSelection": {
+          "scene": 1623,
+          "lane": 4,
+          "rawSha256": "B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22",
+          "archiveBlobPath": "progress-reports/codex-generated-media/blobs/b8/b8e80f0f7e5297707c0b2f2cb7b2ce1d7a8e32228335b2a15444971375a86f22.webp",
+          "canonicalAccepted": false,
+          "sceneResolved": false,
+          "metaLaneStopped": true,
+          "requiresChatgptFinalHemRefinement": true,
+          "chatgptFinalizationContractPath": "rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy",
+          "chatgptPrimaryEditCompleted": true
+        },
+        "chatgptFinalHemRefinement": {
+          "policyPath": "rapidConsolidatedRenderPolicy.chatgptFinalHemRefinementPolicy",
+          "completedObservedAtUtc": "2026-08-24T16:22:18.5503801Z",
+          "dispatchStartUtc": null,
+          "dispatchStartUtcShortfall": "The built-in ChatGPT edit start UTC was not separately captured; no start time is inferred.",
+          "sourceMetaSha256": "B8E80F0F7E5297707C0B2F2CB7B2CE1D7A8E32228335B2A15444971375A86F22",
+          "sourceSelectionHead": "ddaa5446df6490d758fea9da45b9a917de9147d7",
+          "promptBytes": 944,
+          "promptSha256": "C04E87B5C5790AEA07B229993EFC4DAC9C9208F811976C0A64D54FDC93DFB06C",
+          "activeSuppressionProfileSha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+          "activeSuppressionHits": 0,
+          "blockedLexiconSnapshot": {
+            "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+            "bytes": 335826,
+            "sha256": "3D4EC36C57C8DA6434BDA58CAB21387EE2628340D1B96AD156473CAC7C8D8F17"
+          },
+          "occurrenceEvidence": {
+            "path": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-chatgpt-final-hem-refinement.jsonl",
+            "bytes": 6859,
+            "sha256": "650D9E4C6EE67A94FF93B6F6362A349CC2A02FC198D5244C81FB1CB3D6EC46EF",
+            "rows": 2
+          },
+          "canonicalFinal": {
+            "path": "assets/lore/starlight-era/1623-sao-tome-and-principe-principe-biosphere-storm-raze-close-love-chatgpt-final.png",
+            "bytes": 2348312,
+            "sha256": "8B1CAB6CBD766AAFF98D1DE3815D788C26CA258BB113F657E37C2B52000CCDFE",
+            "width": 941,
+            "height": 1672,
+            "mode": "RGB",
+            "mime": "image/png"
+          },
+          "qaDisposition": "accepted-chatgpt-final-primary-hard-safe-no-retry",
+          "qualityDeviationsAreNonHard": true,
+          "noAestheticRetry": true,
+          "retryConditionMet": false,
+          "sceneResolved": true,
+          "accepted": true,
+          "archiveApply": {
+            "appliedAtUtc": "2026-08-24T16:30:20.3487937Z",
+            "occurrences": 4816,
+            "uniqueContents": 3581,
+            "newManifestRows": 3,
+            "newBlobs": 0,
+            "newBlobBytes": 0
+          },
+          "archiveDryRun": {
+            "verifiedAtUtc": "2026-08-24T16:30:20.3487937Z",
+            "occurrences": 4816,
+            "uniqueContents": 3581,
+            "newManifestRows": 0,
+            "newBlobs": 0,
+            "newBlobBytes": 0
+          },
+          "initialEvidenceCommit": "5ebcd9133a5edeba1b183a134e0bad85f06266a6",
+          "initialEvidenceRemoteParityVerifiedAtUtc": "2026-08-24T16:34:35.0204295Z",
+          "trackedSourceArchiveApply": {
+            "appliedAtUtc": "2026-08-24T16:34:35.0204295Z",
+            "occurrences": 4816,
+            "uniqueContents": 3581,
+            "newManifestRows": 2,
+            "newBlobs": 0,
+            "newBlobBytes": 0
+          },
+          "trackedSourceArchiveDryRun": {
+            "verifiedAtUtc": "2026-08-24T16:34:35.0204295Z",
+            "occurrences": 4816,
+            "uniqueContents": 3581,
+            "newManifestRows": 0,
+            "newBlobs": 0,
+            "newBlobBytes": 0
+          },
+          "canonicalEvidenceCommit": "4166a21afc41c0617026f61f43b0d35260014bd5",
+          "canonicalRemoteParityVerifiedAtUtc": "2026-08-24T16:36:50.3341341Z",
+          "archiveAndRemoteParityPending": false
+        },
+        "archiveApply": {
+          "verifiedAfterApplyAtUtc": "2026-08-24T16:07:32.9407055Z",
+          "occurrences": 4813,
+          "uniqueContents": 3580,
+          "newManifestRows": 2,
+          "newBlobs": 2,
+          "newBlobBytes": 1154950
+        },
+        "archiveDryRun": {
+          "verifiedAtUtc": "2026-08-24T16:07:32.9407055Z",
+          "occurrences": 4813,
+          "uniqueContents": 3580,
+          "newManifestRows": 0,
+          "newBlobs": 0,
+          "newBlobBytes": 0
+        },
+        "rejectedPromptLedgerVerifier": {
+          "entries": 139,
+          "expectedEntries": 139,
+          "exactPromptShaPasses": 139,
+          "errors": 0
+        },
+        "projectFailedPromptLedgerVerifier": {
+          "runtimeFailures": 987,
+          "promptRecords": 1567,
+          "errors": 0
+        },
         "resultEvidenceCommit": "1a346782c39f234be6762d15f17789c5e3dcd7e1",
         "resultEvidenceRemoteParityPending": false,
         "resultEvidenceRemoteParityVerifiedAtUtc": "2026-08-24T16:09:07.9326884Z",
-        "resultEvidenceRemoteParity": {"localHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","remoteBranchHead":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13Head":"1a346782c39f234be6762d15f17789c5e3dcd7e1","draftPr13State":"OPEN","draftPr13IsDraft":true,"draftPr13MergeState":"CLEAN","draftPr13Base":"agent/iat-launch-window-recovery-batch-220","gitLfsPendingObjects":0,"worktreeCleanExcludingConcurrentBank98PromptDrafts":true},
-        "qaClassificationRemoteParityPending": false
-        ,"qaTrackedSourceArchiveApply": {"verifiedAfterApplyAtUtc":"2026-08-24T16:18:56.3650817Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":2,"newBlobs":0,"newBlobBytes":0}
-        ,"qaArchiveDryRun": {"verifiedAtUtc":"2026-08-24T16:18:56.3650817Z","occurrences":4813,"uniqueContents":3580,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0}
-        ,"qaClassificationCommit": "ddaa5446df6490d758fea9da45b9a917de9147d7"
-        ,"qaClassificationRemoteParityVerifiedAtUtc": "2026-08-24T16:20:08.8660456Z"
+        "resultEvidenceRemoteParity": {
+          "localHead": "1a346782c39f234be6762d15f17789c5e3dcd7e1",
+          "remoteBranchHead": "1a346782c39f234be6762d15f17789c5e3dcd7e1",
+          "draftPr13Head": "1a346782c39f234be6762d15f17789c5e3dcd7e1",
+          "draftPr13State": "OPEN",
+          "draftPr13IsDraft": true,
+          "draftPr13MergeState": "CLEAN",
+          "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+          "gitLfsPendingObjects": 0,
+          "worktreeCleanExcludingConcurrentBank98PromptDrafts": true
+        },
+        "qaClassificationRemoteParityPending": false,
+        "qaTrackedSourceArchiveApply": {
+          "verifiedAfterApplyAtUtc": "2026-08-24T16:18:56.3650817Z",
+          "occurrences": 4813,
+          "uniqueContents": 3580,
+          "newManifestRows": 2,
+          "newBlobs": 0,
+          "newBlobBytes": 0
+        },
+        "qaArchiveDryRun": {
+          "verifiedAtUtc": "2026-08-24T16:18:56.3650817Z",
+          "occurrences": 4813,
+          "uniqueContents": 3580,
+          "newManifestRows": 0,
+          "newBlobs": 0,
+          "newBlobBytes": 0
+        },
+        "qaClassificationCommit": "ddaa5446df6490d758fea9da45b9a917de9147d7",
+        "qaClassificationRemoteParityVerifiedAtUtc": "2026-08-24T16:20:08.8660456Z"
       },
       "generatedMediaAuditPerformed": true,
       "completedBank": true,
@@ -746,26 +1110,180 @@
       "actionTimeConfirmationRequired": true,
       "actionTimeConfirmationObtained": false,
       "providerDispatchConfirmed": false,
-      "eligibleScenes": [1620,1621,1622],
-      "eligibleLanes": [1,2,3],
-      "resolvedStoppedScenes": [1623],
+      "eligibleScenes": [
+        1620,
+        1621,
+        1622
+      ],
+      "eligibleLanes": [
+        1,
+        2,
+        3
+      ],
+      "resolvedStoppedScenes": [
+        1623
+      ],
       "persistentSignedInMetaTabCountRequired": 4,
       "requestedImageCountTotal": 3,
-      "orderedReferenceScenesByLane": {"1":[938,936,937],"2":[938,936,937],"3":[938,936,937]},
+      "orderedReferenceScenesByLane": {
+        "1": [
+          938,
+          936,
+          937
+        ],
+        "2": [
+          938,
+          936,
+          937
+        ],
+        "3": [
+          938,
+          936,
+          937
+        ]
+      },
       "promptRecords": [
-        {"scene":1620,"lane":1,"path":"tmp/world-195x4/batch-400/scene-1620-meta-bank-98-attempt-03.txt","bytes":4610,"sha256":"B6EECF8DCD26F736D989EF32641AEA6F838AF8D0080703B9136CA2FA6A51B466","exactIntendedDispatchedBytes":4609,"exactIntendedDispatchedSha256":"96164F33E2AF97156D9E970AD77DEB0F506A71291A113865C7E954ED5DA136DA","activeSuppressionMatches":0,"bolderMissionMapping":"bolder lane 1 of exactly 2"},
-        {"scene":1621,"lane":2,"path":"tmp/world-195x4/batch-400/scene-1621-meta-bank-98-attempt-03.txt","bytes":4933,"sha256":"9D4B4526190B39A548F965D536DD49533D3F0F46B43A8545CEDBEDFC98622C40","exactIntendedDispatchedBytes":4932,"exactIntendedDispatchedSha256":"E263CF45A57429C8724215B27B41FEFBE9DEDB3E7260E9F6C860D5D931E2FB41","activeSuppressionMatches":0,"bolderMissionMapping":null},
-        {"scene":1622,"lane":3,"path":"tmp/world-195x4/batch-400/scene-1622-meta-bank-98-attempt-03.txt","bytes":4622,"sha256":"C2959D5F58BFE1175DE6691F7B7D41B75FCB60FF144FFDE7C62CA3E9D6A5A396","exactIntendedDispatchedBytes":4621,"exactIntendedDispatchedSha256":"0BDE1C787489B17450E8DEC1CAB5D9082E26F526B8B993313D29E02958248399","activeSuppressionMatches":0,"bolderMissionMapping":"bolder lane 2 of exactly 2"}
+        {
+          "scene": 1620,
+          "lane": 1,
+          "path": "tmp/world-195x4/batch-400/scene-1620-meta-bank-98-attempt-03.txt",
+          "bytes": 4610,
+          "sha256": "B6EECF8DCD26F736D989EF32641AEA6F838AF8D0080703B9136CA2FA6A51B466",
+          "exactIntendedDispatchedBytes": 4609,
+          "exactIntendedDispatchedSha256": "96164F33E2AF97156D9E970AD77DEB0F506A71291A113865C7E954ED5DA136DA",
+          "activeSuppressionMatches": 0,
+          "bolderMissionMapping": "bolder lane 1 of exactly 2"
+        },
+        {
+          "scene": 1621,
+          "lane": 2,
+          "path": "tmp/world-195x4/batch-400/scene-1621-meta-bank-98-attempt-03.txt",
+          "bytes": 4933,
+          "sha256": "9D4B4526190B39A548F965D536DD49533D3F0F46B43A8545CEDBEDFC98622C40",
+          "exactIntendedDispatchedBytes": 4932,
+          "exactIntendedDispatchedSha256": "E263CF45A57429C8724215B27B41FEFBE9DEDB3E7260E9F6C860D5D931E2FB41",
+          "activeSuppressionMatches": 0,
+          "bolderMissionMapping": null
+        },
+        {
+          "scene": 1622,
+          "lane": 3,
+          "path": "tmp/world-195x4/batch-400/scene-1622-meta-bank-98-attempt-03.txt",
+          "bytes": 4622,
+          "sha256": "C2959D5F58BFE1175DE6691F7B7D41B75FCB60FF144FFDE7C62CA3E9D6A5A396",
+          "exactIntendedDispatchedBytes": 4621,
+          "exactIntendedDispatchedSha256": "0BDE1C787489B17450E8DEC1CAB5D9082E26F526B8B993313D29E02958248399",
+          "activeSuppressionMatches": 0,
+          "bolderMissionMapping": "bolder lane 2 of exactly 2"
+        }
       ],
-      "bolderMissionMapping": {"requiredCount":2,"actualCount":2,"scenes":[1620,1622]},
-      "independentPromptQa": {"status":"PASS","verifiedAtUtc":"2026-08-24T16:38:39.1493761Z","promptCount":3,"activeSuppressionMatches":0},
-      "scene1623DraftExclusion": {"included":false,"formerPath":"tmp/world-195x4/batch-400/scene-1623-meta-bank-98-attempt-03.txt","sha256":"C2FC2FBF5FCB9BF5B40E572BFB54DD17A2DD6FD3EE5E26D3F2ED9F302E31B17E","recoveryPath":"C:/Users/A/AppData/Local/Temp/InternalAgency-bank98-scene1623-conditional-unused-20260824T1637Z/scene-1623-meta-bank-98-attempt-03.txt"},
+      "bolderMissionMapping": {
+        "requiredCount": 2,
+        "actualCount": 2,
+        "scenes": [
+          1620,
+          1622
+        ]
+      },
+      "independentPromptQa": {
+        "status": "PASS",
+        "verifiedAtUtc": "2026-08-24T16:38:39.1493761Z",
+        "promptCount": 3,
+        "activeSuppressionMatches": 0
+      },
+      "scene1623DraftExclusion": {
+        "included": false,
+        "formerPath": "tmp/world-195x4/batch-400/scene-1623-meta-bank-98-attempt-03.txt",
+        "sha256": "C2FC2FBF5FCB9BF5B40E572BFB54DD17A2DD6FD3EE5E26D3F2ED9F302E31B17E",
+        "recoveryPath": "C:/Users/A/AppData/Local/Temp/InternalAgency-bank98-scene1623-conditional-unused-20260824T1637Z/scene-1623-meta-bank-98-attempt-03.txt"
+      },
       "sourceCanonicalParityHead": "de93d0d9c08a542855493eb84246a590a6709a97",
-      "archiveDryRun": {"occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "rejectedPromptLedgerVerifier": {"entries":139,"expectedEntries":139,"exactPromptShaPasses":139,"errors":0},
-      "projectFailedPromptLedgerVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
-      "preflightParity": {"verifiedAtUtc":"2026-08-24T16:42:18.3507109Z","preflightCommit":"ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f","localHead":"ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f","remoteBranchHead":"ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f","draftPr13Head":"ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f","draftPr13State":"OPEN","draftPr13IsDraft":true,"draftPr13MergeState":"CLEAN","draftPr13Base":"agent/iat-launch-window-recovery-batch-220","gitLfsPendingObjects":0,"worktreeClean":true,"archiveDryRun":{"occurrences":4816,"uniqueContents":3581,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0}},
-      "actionTimeConfirmationBlocker": {"observedAtUtc":"2026-08-24T16:48:25.612Z","policy":"browser representational-communication action-time confirmation","persistentSignedInMetaTabCount":4,"preparedDraftScenes":[1620,1621,1622],"attachmentCountsByLane":{"1":3,"2":3,"3":3},"loadingByLane":{"1":false,"2":false,"3":false},"sendEnabledByLane":{"1":true,"2":true,"3":true},"scene1623TabUntouched":true,"scene1623MetaLaneStopped":true,"sendClickCount":0,"providerDispatchConfirmed":false,"providerUrls":[],"evidencePath":"progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-98-attempt-03-action-time-confirmation-blocker.jsonl","evidenceBytes":3404,"evidenceSha256":"2590D6D1849C25EF4B39CF8F509C983497CE01A8C9FDF75C91F6C2A02A79F235","evidenceRows":1,"draftsMustRemainUndisturbed":true,"evidenceCommit":"bae938fa9d922d2b165172411c28b753937106a8","remoteParityVerifiedAtUtc":"2026-08-24T16:52:28.9828253Z","remoteParity":{"localHead":"bae938fa9d922d2b165172411c28b753937106a8","remoteBranchHead":"bae938fa9d922d2b165172411c28b753937106a8","draftPr13Head":"bae938fa9d922d2b165172411c28b753937106a8","draftPr13State":"OPEN","draftPr13IsDraft":true,"draftPr13MergeState":"CLEAN","draftPr13Base":"agent/iat-launch-window-recovery-batch-220","gitLfsPendingObjects":0,"worktreeClean":true}},
+      "archiveDryRun": {
+        "occurrences": 4816,
+        "uniqueContents": 3581,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "rejectedPromptLedgerVerifier": {
+        "entries": 139,
+        "expectedEntries": 139,
+        "exactPromptShaPasses": 139,
+        "errors": 0
+      },
+      "projectFailedPromptLedgerVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      },
+      "preflightParity": {
+        "verifiedAtUtc": "2026-08-24T16:42:18.3507109Z",
+        "preflightCommit": "ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f",
+        "localHead": "ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f",
+        "remoteBranchHead": "ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f",
+        "draftPr13Head": "ad3a1dbab9bd4cf17f441c2da741d699c4e7bd5f",
+        "draftPr13State": "OPEN",
+        "draftPr13IsDraft": true,
+        "draftPr13MergeState": "CLEAN",
+        "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+        "gitLfsPendingObjects": 0,
+        "worktreeClean": true,
+        "archiveDryRun": {
+          "occurrences": 4816,
+          "uniqueContents": 3581,
+          "newManifestRows": 0,
+          "newBlobs": 0,
+          "newBlobBytes": 0
+        }
+      },
+      "actionTimeConfirmationBlocker": {
+        "observedAtUtc": "2026-08-24T16:48:25.612Z",
+        "policy": "browser representational-communication action-time confirmation",
+        "persistentSignedInMetaTabCount": 4,
+        "preparedDraftScenes": [
+          1620,
+          1621,
+          1622
+        ],
+        "attachmentCountsByLane": {
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "loadingByLane": {
+          "1": false,
+          "2": false,
+          "3": false
+        },
+        "sendEnabledByLane": {
+          "1": true,
+          "2": true,
+          "3": true
+        },
+        "scene1623TabUntouched": true,
+        "scene1623MetaLaneStopped": true,
+        "sendClickCount": 0,
+        "providerDispatchConfirmed": false,
+        "providerUrls": [],
+        "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-400-sao-tome-and-principe-meta-bank-98-attempt-03-action-time-confirmation-blocker.jsonl",
+        "evidenceBytes": 3404,
+        "evidenceSha256": "2590D6D1849C25EF4B39CF8F509C983497CE01A8C9FDF75C91F6C2A02A79F235",
+        "evidenceRows": 1,
+        "draftsMustRemainUndisturbed": true,
+        "evidenceCommit": "bae938fa9d922d2b165172411c28b753937106a8",
+        "remoteParityVerifiedAtUtc": "2026-08-24T16:52:28.9828253Z",
+        "remoteParity": {
+          "localHead": "bae938fa9d922d2b165172411c28b753937106a8",
+          "remoteBranchHead": "bae938fa9d922d2b165172411c28b753937106a8",
+          "draftPr13Head": "bae938fa9d922d2b165172411c28b753937106a8",
+          "draftPr13State": "OPEN",
+          "draftPr13IsDraft": true,
+          "draftPr13MergeState": "CLEAN",
+          "draftPr13Base": "agent/iat-launch-window-recovery-batch-220",
+          "gitLfsPendingObjects": 0,
+          "worktreeClean": true
+        }
+      },
       "notDispatched": true
     },
     "renderCadence": {
@@ -847,11 +1365,18 @@
     "uniqueTerminalMediaCount": 3,
     "promptBindingBugAudit": {
       "settingConflicts": {
-        "scenes": [1617,1618,1619],
+        "scenes": [
+          1617,
+          1618,
+          1619
+        ],
         "bug": "Primary prompt said interior while the deterministic setting binding requires protected exterior beneath a transparent pressure field."
       },
       "razeWordmarkOrientationConflicts": {
-        "scenes": [1617,1619],
+        "scenes": [
+          1617,
+          1619
+        ],
         "bug": "Primary prompt said vertical wordmark while the deterministic RAZE binding requires compact horizontal at the outer upper calf."
       }
     },
@@ -867,9 +1392,22 @@
       "draftPr13State": "OPEN/DRAFT-correct-base-CLEAN",
       "gitLfsPendingObjectCount": 0,
       "worktreeClean": true,
-      "archiveDryRun": {"scanned":4769,"eligible":3539,"missing":0,"mismatched":0},
-      "rejectedPromptVerifier": {"entries":139,"unique":139,"errors":0},
-      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+      "archiveDryRun": {
+        "scanned": 4769,
+        "eligible": 3539,
+        "missing": 0,
+        "mismatched": 0
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "unique": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      }
     },
     "nextAttempt": {
       "bank": 92,
@@ -896,7 +1434,10 @@
     "renderRun": 9,
     "renderRunOrdinal": 9,
     "dispatchedAtUtc": "2026-08-24T10:53:04.951Z",
-    "terminalAuditUtcRange": {"startedAtUtc":"2026-08-24T10:56:58.460Z","endedAtUtc":"2026-08-24T10:56:58.462Z"},
+    "terminalAuditUtcRange": {
+      "startedAtUtc": "2026-08-24T10:56:58.460Z",
+      "endedAtUtc": "2026-08-24T10:56:58.462Z"
+    },
     "providerUrls": [
       "https://www.meta.ai/prompt/e83201d7-2dc4-4c07-aa46-b48e4baa28c4",
       "https://www.meta.ai/prompt/9d876b3c-5b07-4e1a-bb19-e55c752dd8f6",
@@ -915,9 +1456,22 @@
       "draftPr13Head": "54023145c0c673c85b60ad32e5fbe48d63c22492",
       "draftPr13State": "OPEN/DRAFT/CLEAN-correct-base-and-head",
       "gitLfsPendingObjectCount": 0,
-      "archiveVerification": {"occurrences":4775,"uniqueContents":3544,"postDryRunMissing":0,"postDryRunMismatched":0},
-      "rejectedPromptVerifier": {"entries":139,"unique":139,"errors":0},
-      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+      "archiveVerification": {
+        "occurrences": 4775,
+        "uniqueContents": 3544,
+        "postDryRunMissing": 0,
+        "postDryRunMismatched": 0
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "unique": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      }
     },
     "bankCompletionState": {
       "completed": true,
@@ -935,7 +1489,11 @@
       "banksPerRenderRun": 10,
       "completedRenderRunsSinceLastX": 5
     },
-    "cumulativeMetaBankAllowance": {"authorized":170,"completed":63,"remaining":107},
+    "cumulativeMetaBankAllowance": {
+      "authorized": 170,
+      "completed": 63,
+      "remaining": 107
+    },
     "xState": {
       "eligibleBacklogRemaining": 0,
       "eligibleTwoCountryPostExists": false,
@@ -959,8 +1517,18 @@
     "renderRunOrdinal": 10,
     "dispatchAuthorizedNow": false,
     "providerDispatchState": "terminal-results-preserved-hard-unusable-and-remote-parity-complete",
-    "eligibleScenes": [1616,1617,1618,1619],
-    "eligibleLanes": [1,2,3,4],
+    "eligibleScenes": [
+      1616,
+      1617,
+      1618,
+      1619
+    ],
+    "eligibleLanes": [
+      1,
+      2,
+      3,
+      4
+    ],
     "parityVerification": {
       "promptAndTrackedSourcePreflightCommit": "65e2c19abdb4708a14ac95588592ba4158220be5",
       "initialPreflightParityCommit": "2ac9afea791376d3e1d2d41fac03edb91be530d3",
@@ -985,19 +1553,47 @@
       },
       "gitLfsPendingObjectCount": 0,
       "worktreeCleanAfterCommit": true,
-      "archiveDryRun": {"occurrences":4783,"uniqueContents":3552,"newManifestRows":0,"newBlobs":0},
-      "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
-      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0}
+      "archiveDryRun": {
+        "occurrences": 4783,
+        "uniqueContents": 3552,
+        "newManifestRows": 0,
+        "newBlobs": 0
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "verifiedEntries": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      }
     },
     "renderCadence": {
       "lastCompletedRenderRun": 9,
-      "lastCompletedRenderRunCountryBanks": [84,85,86,87,88,89,90,91,92,93],
+      "lastCompletedRenderRunCountryBanks": [
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93
+      ],
       "currentRenderRun": 10,
       "completedBanksInCurrentRenderRun": 0,
       "banksPerRenderRun": 10,
       "completedRenderRunsSinceLastX": 5
     },
-    "cumulativeMetaBankAllowance": {"authorized":170,"completed":64,"remaining":106},
+    "cumulativeMetaBankAllowance": {
+      "authorized": 170,
+      "completed": 64,
+      "remaining": 106
+    },
     "uploadHandoffAttempt": {
       "evidencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-upload-handoff-blocker.jsonl",
       "evidenceBytes": 11540,
@@ -1006,8 +1602,18 @@
       "uiSendClickAtUtc": "2026-08-24T11:38:17.672Z",
       "lastPendingObservedAtUtc": "2026-08-24T11:39:49.920Z",
       "terminalObservedAtUtc": "2026-08-24T11:40:34.228Z",
-      "tabIds": [8,9,10,11],
-      "attachmentCounts": [3,3,4,3],
+      "tabIds": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "attachmentCounts": [
+        3,
+        3,
+        4,
+        3
+      ],
       "allUiClicksReturnedTrue": true,
       "allTabsRemainedAtMetaHome": true,
       "allLoadingStatesCleared": true,
@@ -1035,12 +1641,34 @@
       "evidenceParityCommit": "7167327b01dcdbbf6cdaaa79028c6a2912d6e01e",
       "reuseExactAttempt3PromptFilesAndHashes": true,
       "freshCleanMetaTabCount": 4,
-      "freshOrderedAttachmentCounts": [3,3,4,3],
+      "freshOrderedAttachmentCounts": [
+        3,
+        3,
+        4,
+        3
+      ],
       "orderedReferenceScenesByLane": {
-        "1": [938,936,937],
-        "2": [938,936,937],
-        "3": [938,936,937,1136],
-        "4": [938,936,937]
+        "1": [
+          938,
+          936,
+          937
+        ],
+        "2": [
+          938,
+          936,
+          937
+        ],
+        "3": [
+          938,
+          936,
+          937,
+          1136
+        ],
+        "4": [
+          938,
+          936,
+          937
+        ]
       },
       "waitForAllAttachmentsToFinish": true,
       "requireAllSendControlsEnabledBeforeClick": true,
@@ -1093,10 +1721,27 @@
       "reuseExactAttempt3PromptFilesAndHashes": true,
       "freshCleanSignedInMetaTabCount": 4,
       "orderedReferenceScenesByLane": {
-        "1": [938,936,937],
-        "2": [938,936,937],
-        "3": [938,936,937,1136],
-        "4": [938,936,937]
+        "1": [
+          938,
+          936,
+          937
+        ],
+        "2": [
+          938,
+          936,
+          937
+        ],
+        "3": [
+          938,
+          936,
+          937,
+          1136
+        ],
+        "4": [
+          938,
+          936,
+          937
+        ]
       },
       "waitForAllFreshAttachmentsToFinish": true,
       "verifyExactPromptsBeforeClick": true,
@@ -1130,16 +1775,37 @@
       "evidenceSha256": "8DE33AB9EE69089D92C55AB44020DD59C5D3A1DBC55259B44578F904D2CB7444",
       "evidenceRecordCount": 4,
       "uiSendClickAtUtc": "2026-08-24T11:59:22.743Z",
-      "auditUtc": ["2026-08-24T11:59:35.505Z", "2026-08-24T12:00:01.619Z", "2026-08-24T12:00:37.245Z", "2026-08-24T12:01:14.049Z", "2026-08-24T12:01:50.276Z"],
+      "auditUtc": [
+        "2026-08-24T11:59:35.505Z",
+        "2026-08-24T12:00:01.619Z",
+        "2026-08-24T12:00:37.245Z",
+        "2026-08-24T12:01:14.049Z",
+        "2026-08-24T12:01:50.276Z"
+      ],
       "finalAuditAtUtc": "2026-08-24T12:01:50.276Z",
-      "orderedAttachmentCounts": [3,3,4,3],
+      "orderedAttachmentCounts": [
+        3,
+        3,
+        4,
+        3
+      ],
       "allExactPromptsAndReferencesVerifiedBeforeClick": true,
       "allSendControlsEnabledBeforeClick": true,
       "allUiClicksReturnedTrue": true,
       "allTabsRemainedAtMetaHome": true,
-      "observedPromptByteEnvelopes": [3649,3925,4011,3905],
+      "observedPromptByteEnvelopes": [
+        3649,
+        3925,
+        4011,
+        3905
+      ],
       "exactPromptSuffixVerifiedAtEveryAudit": true,
-      "removeButtonCountsAtEveryAudit": [3,3,4,3],
+      "removeButtonCountsAtEveryAudit": [
+        3,
+        3,
+        4,
+        3
+      ],
       "allLoadingStatesTrueAtEveryAudit": true,
       "allSendControlsDisabledAtEveryAudit": true,
       "dialogObserved": false,
@@ -1183,7 +1849,12 @@
         "https://www.meta.ai/prompt/b74bda1c-493b-49fc-a2ae-2032ea639749"
       ],
       "providerPageExactPromptsVerified": true,
-      "orderedReferenceCounts": [3,3,4,3],
+      "orderedReferenceCounts": [
+        3,
+        3,
+        4,
+        3
+      ],
       "providerDispatchConfirmed": true,
       "state": "provider-dispatch-confirmed-in-flight-results-not-yet-audited",
       "stopStateAsserted": false,
@@ -1221,19 +1892,81 @@
       "totalRawBytes": 6205954,
       "duplicateRelationships": [],
       "sceneEvidence": [
-        {"scene":1616,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1616.jsonl","bytes":8071,"sha256":"A57434D4BEA5A41EE405A24C0B7FB0259BC7C6FFDFF6E71B3B440D98DAAA997B","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
-        {"scene":1617,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1617.jsonl","bytes":8017,"sha256":"1D44829FD3E961C8C9A0361207DE52CADD1A8DD59D92C285E55321F75BB9A0AE","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
-        {"scene":1618,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1618.jsonl","bytes":8336,"sha256":"D1D8AAEBBD82CE26749B1A221FB8EDDDF8476131965217BBBBF9169E6B1CE232","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null},
-        {"scene":1619,"path":"progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1619.jsonl","bytes":8001,"sha256":"4B2F5A0BF4D3E73EC11A5BABAE73D34B455F2BBE3E5B9DB29511D679016A0E64","records":3,"classification":"hard-unusable-all-unique-outputs","acceptedOutputSha256":null}
+        {
+          "scene": 1616,
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1616.jsonl",
+          "bytes": 8071,
+          "sha256": "A57434D4BEA5A41EE405A24C0B7FB0259BC7C6FFDFF6E71B3B440D98DAAA997B",
+          "records": 3,
+          "classification": "hard-unusable-all-unique-outputs",
+          "acceptedOutputSha256": null
+        },
+        {
+          "scene": 1617,
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1617.jsonl",
+          "bytes": 8017,
+          "sha256": "1D44829FD3E961C8C9A0361207DE52CADD1A8DD59D92C285E55321F75BB9A0AE",
+          "records": 3,
+          "classification": "hard-unusable-all-unique-outputs",
+          "acceptedOutputSha256": null
+        },
+        {
+          "scene": 1618,
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1618.jsonl",
+          "bytes": 8336,
+          "sha256": "D1D8AAEBBD82CE26749B1A221FB8EDDDF8476131965217BBBBF9169E6B1CE232",
+          "records": 3,
+          "classification": "hard-unusable-all-unique-outputs",
+          "acceptedOutputSha256": null
+        },
+        {
+          "scene": 1619,
+          "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-93-scene-1619.jsonl",
+          "bytes": 8001,
+          "sha256": "4B2F5A0BF4D3E73EC11A5BABAE73D34B455F2BBE3E5B9DB29511D679016A0E64",
+          "records": 3,
+          "classification": "hard-unusable-all-unique-outputs",
+          "acceptedOutputSha256": null
+        }
       ],
       "domSnapshotCount": 4,
-      "archiveApply": {"occurrences":4783,"uniqueContents":3552,"newManifestRows":8,"newBlobs":0,"newBlobBytes":0},
-      "archiveDryRunAfterApply": {"occurrences":4783,"uniqueContents":3552,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","bytes":3790388,"sha256":"17F06CF38F3D75D96757E5FF8354ADDDB93B9F03697C119A7B6FD0736F9BF40A","rows":6098},
-      "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
-      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
+      "archiveApply": {
+        "occurrences": 4783,
+        "uniqueContents": 3552,
+        "newManifestRows": 8,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "archiveDryRunAfterApply": {
+        "occurrences": 4783,
+        "uniqueContents": 3552,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "generatedMediaManifest": {
+        "path": "progress-reports/codex-generated-media/manifest.jsonl",
+        "bytes": 3790388,
+        "sha256": "17F06CF38F3D75D96757E5FF8354ADDDB93B9F03697C119A7B6FD0736F9BF40A",
+        "rows": 6098
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "verifiedEntries": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      },
       "classification": "hard-unusable-all-four-lanes-eight-unique-occurrences",
-      "unresolvedScenes": [1616,1617,1618,1619],
+      "unresolvedScenes": [
+        1616,
+        1617,
+        1618,
+        1619
+      ],
       "acceptedOutputSha256": [],
       "completedBank": true,
       "countedTowardRenderRun": true,
@@ -1265,22 +1998,106 @@
       "https://www.meta.ai/prompt/5037eb8f-fe46-429d-9fa7-401aad14b139",
       "https://www.meta.ai/prompt/539a28f4-74f2-4824-9723-c7282e62d61b"
     ],
-    "eligibleScenes": [1616,1617,1618,1619],
-    "eligibleLanes": [1,2,3,4],
+    "eligibleScenes": [
+      1616,
+      1617,
+      1618,
+      1619
+    ],
+    "eligibleLanes": [
+      1,
+      2,
+      3,
+      4
+    ],
     "promptRecords": [
-      {"scene":1616,"lane":1,"path":"tmp/world-195x4/batch-399/scene-1616-meta-bank-04-attempt-04.txt","bytes":4716,"sha256":"4FFA747D384203E086B25F9B67E295FA6D32622F63E9B17AB6FF96A8763C5A0B","exactIntendedDispatchedBytes":4715,"exactIntendedDispatchedSha256":"441A6103229E9092BB845C3E20660F374FA1709C021EB4E6C44B26A0050AC192","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":1},
-      {"scene":1617,"lane":2,"path":"tmp/world-195x4/batch-399/scene-1617-meta-bank-04-attempt-04.txt","bytes":5355,"sha256":"C7E4ACC1134D994F56DACFBFDB2589760AD1CAF3C13B0B321C39CB2D01835EFC","exactIntendedDispatchedBytes":5354,"exactIntendedDispatchedSha256":"AD3816D83416BA7D27C209698345D25EC151A97439DFB53847FD614CC655530C","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":null},
-      {"scene":1618,"lane":3,"path":"tmp/world-195x4/batch-399/scene-1618-meta-bank-04-attempt-04.txt","bytes":5118,"sha256":"3C29D7F8A34FBF4F95AF82EE6CD973126525A83E0F7782AB132BC47C2E5D77F9","exactIntendedDispatchedBytes":5117,"exactIntendedDispatchedSha256":"94E5DF3F43ACDC44FD22D7B26C3DF361893A570D8209676905E1A79B1473AE86","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937,1136],"bolderMissionLane":null},
-      {"scene":1619,"lane":4,"path":"tmp/world-195x4/batch-399/scene-1619-meta-bank-04-attempt-04.txt","bytes":5356,"sha256":"438C545A86E3F97CD8FA43EAFBDD3B7A3E73604586B182CC0F77601E8B1146B9","exactIntendedDispatchedBytes":5355,"exactIntendedDispatchedSha256":"A8A8A23E7C87FD7AB18312542582460DA5E16FA7724D82458A6C99C0F69D8A62","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":2}
+      {
+        "scene": 1616,
+        "lane": 1,
+        "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-04-attempt-04.txt",
+        "bytes": 4716,
+        "sha256": "4FFA747D384203E086B25F9B67E295FA6D32622F63E9B17AB6FF96A8763C5A0B",
+        "exactIntendedDispatchedBytes": 4715,
+        "exactIntendedDispatchedSha256": "441A6103229E9092BB845C3E20660F374FA1709C021EB4E6C44B26A0050AC192",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937
+        ],
+        "bolderMissionLane": 1
+      },
+      {
+        "scene": 1617,
+        "lane": 2,
+        "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-04-attempt-04.txt",
+        "bytes": 5355,
+        "sha256": "C7E4ACC1134D994F56DACFBFDB2589760AD1CAF3C13B0B321C39CB2D01835EFC",
+        "exactIntendedDispatchedBytes": 5354,
+        "exactIntendedDispatchedSha256": "AD3816D83416BA7D27C209698345D25EC151A97439DFB53847FD614CC655530C",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937
+        ],
+        "bolderMissionLane": null
+      },
+      {
+        "scene": 1618,
+        "lane": 3,
+        "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-04-attempt-04.txt",
+        "bytes": 5118,
+        "sha256": "3C29D7F8A34FBF4F95AF82EE6CD973126525A83E0F7782AB132BC47C2E5D77F9",
+        "exactIntendedDispatchedBytes": 5117,
+        "exactIntendedDispatchedSha256": "94E5DF3F43ACDC44FD22D7B26C3DF361893A570D8209676905E1A79B1473AE86",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937,
+          1136
+        ],
+        "bolderMissionLane": null
+      },
+      {
+        "scene": 1619,
+        "lane": 4,
+        "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-04-attempt-04.txt",
+        "bytes": 5356,
+        "sha256": "438C545A86E3F97CD8FA43EAFBDD3B7A3E73604586B182CC0F77601E8B1146B9",
+        "exactIntendedDispatchedBytes": 5355,
+        "exactIntendedDispatchedSha256": "A8A8A23E7C87FD7AB18312542582460DA5E16FA7724D82458A6C99C0F69D8A62",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937
+        ],
+        "bolderMissionLane": 2
+      }
     ],
     "bolderMissionMapping": {
       "requiredCount": 2,
       "actualCount": 2,
-      "selectedScenes": [1616,1619],
-      "selectedLanes": [1,4],
+      "selectedScenes": [
+        1616,
+        1619
+      ],
+      "selectedLanes": [
+        1,
+        4
+      ],
       "scene1616": "supported seated side-hug with accepted closed-mouth cheek affection",
       "scene1619": "moving consensual behind-hug with complete-heel fashion lift",
-      "standardRelationshipScenes": [1617,1618]
+      "standardRelationshipScenes": [
+        1617,
+        1618
+      ]
     },
     "independentPromptAudit": {
       "status": "pass-no-discrepancies",
@@ -1294,9 +2111,23 @@
     "preflightBarrier": {
       "requiredPriorRemoteHead": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
       "localHeadBeforePreflightCommit": "489c525c8ca00d21ddaf99c53dc9a6fb753edd57",
-      "archiveDryRun": {"occurrences":4783,"uniqueContents":3552,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
-      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
+      "archiveDryRun": {
+        "occurrences": 4783,
+        "uniqueContents": 3552,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "verifiedEntries": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      },
       "gitLfsPendingObjectCount": 0,
       "preflightCommit": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
       "localHead": "5a232b953d2de7f3a2f831f1e9383b158149dc8d",
@@ -1317,7 +2148,11 @@
       "currentInFlightAttempt": 4,
       "currentInFlightRenderRunOrdinal": 1
     },
-    "cumulativeMetaBankAllowance": {"authorized":170,"completed":64,"remaining":106},
+    "cumulativeMetaBankAllowance": {
+      "authorized": 170,
+      "completed": 64,
+      "remaining": 106
+    },
     "dispatchEvidence": {
       "path": "progress-reports/codex-generated-media/provider-occurrences/batch-399-barbados-meta-bank-94-dispatch-envelope.jsonl",
       "bytes": 9950,
@@ -1351,7 +2186,10 @@
         "evidenceRecords": 3,
         "rawFileCount": 2,
         "uniqueOutputSha256Count": 2,
-        "rawSha256": ["DAB553D197A27C53682C456E5AD1379274A5B397AA3C993EE5A5365148B11904","0D58FCC00C8A98735383C9C73367759A6FA1EA97227E554F1673FF4A7ED3CCD9"],
+        "rawSha256": [
+          "DAB553D197A27C53682C456E5AD1379274A5B397AA3C993EE5A5365148B11904",
+          "0D58FCC00C8A98735383C9C73367759A6FA1EA97227E554F1673FF4A7ED3CCD9"
+        ],
         "terminal": true,
         "classification": "hard-unusable-both-preserved-outputs",
         "visualInspectionPerformed": true
@@ -1365,7 +2203,11 @@
         "evidenceRecords": 5,
         "rawFileCount": 3,
         "uniqueOutputSha256Count": 3,
-        "rawSha256": ["4F402FE16D0D85A21901E9E6A7ECCE69FE5CB57ECE655857ADBEE1E558FA5479","FD6E82CC714EA9533D4DB2E2F7BAAA2C08A81112046E77039E2E2415776099A4","F9547F31ABC24548BA45BE2615508A38F7C4B6611629F68F143BF58C35ABDB41"],
+        "rawSha256": [
+          "4F402FE16D0D85A21901E9E6A7ECCE69FE5CB57ECE655857ADBEE1E558FA5479",
+          "FD6E82CC714EA9533D4DB2E2F7BAAA2C08A81112046E77039E2E2415776099A4",
+          "F9547F31ABC24548BA45BE2615508A38F7C4B6611629F68F143BF58C35ABDB41"
+        ],
         "terminal": true,
         "terminalNoBytesOccurrenceCount": 1,
         "classification": "terminal-provider-refusal-no-terminal-bytes-prior-inline-hard-unusable-all-three",
@@ -1380,7 +2222,9 @@
         "evidenceRecords": 2,
         "rawFileCount": 1,
         "uniqueOutputSha256Count": 1,
-        "rawSha256": ["771BAB00A58D86695766986992179173384CAF7B2CADE839BFDE876E632F7AB7"],
+        "rawSha256": [
+          "771BAB00A58D86695766986992179173384CAF7B2CADE839BFDE876E632F7AB7"
+        ],
         "terminal": true,
         "classification": "hard-unusable-terminal-output",
         "visualInspectionPerformed": true
@@ -1394,7 +2238,11 @@
         "evidenceRecords": 7,
         "rawFileCount": 3,
         "uniqueOutputSha256Count": 2,
-        "rawSha256": ["B06D523162D04FC95DE6D02797ACBD269316203F29598CB02E8F9979126D7EEF","F151B6A1D2FCB162840683F2D33DB80D5A0B4F1539A65ECE6D54396C07295217","F151B6A1D2FCB162840683F2D33DB80D5A0B4F1539A65ECE6D54396C07295217"],
+        "rawSha256": [
+          "B06D523162D04FC95DE6D02797ACBD269316203F29598CB02E8F9979126D7EEF",
+          "F151B6A1D2FCB162840683F2D33DB80D5A0B4F1539A65ECE6D54396C07295217",
+          "F151B6A1D2FCB162840683F2D33DB80D5A0B4F1539A65ECE6D54396C07295217"
+        ],
         "terminal": true,
         "classification": "hard-unusable-all-three-raw-occurrences-two-unique-contents-terminal-output-duplicates-inline-output-2",
         "visualInspectionPerformed": true
@@ -1404,9 +2252,21 @@
     "rawFileCount": 9,
     "uniqueOutputSha256Count": 8,
     "totalGeneratedMediaBytesPreserved": 12304382,
-    "duplicateRelationships": [{"scene":1619,"iteration":3,"byteIdenticalToIteration":2,"sha256":"F151B6A1D2FCB162840683F2D33DB80D5A0B4F1539A65ECE6D54396C07295217"}],
+    "duplicateRelationships": [
+      {
+        "scene": 1619,
+        "iteration": 3,
+        "byteIdenticalToIteration": 2,
+        "sha256": "F151B6A1D2FCB162840683F2D33DB80D5A0B4F1539A65ECE6D54396C07295217"
+      }
+    ],
     "explicitTerminalNoBytesOccurrenceCount": 1,
-    "terminalScenes": [1616,1617,1618,1619],
+    "terminalScenes": [
+      1616,
+      1617,
+      1618,
+      1619
+    ],
     "inFlightScenes": [],
     "exactProviderDomSnapshotCount": 9,
     "hardUnusableRawMediaCount": 9,
@@ -1416,18 +2276,66 @@
     "allCurrentlyPreservedRawMediaVisuallyClassified": true,
     "visualInspectionPerformed": true,
     "evidenceReconciliation": {
-      "archiveApply": {"occurrences":4792,"uniqueContents":3560,"newManifestRows":9,"newBlobs":7,"newBlobBytes":8219650},
-      "archiveDryRunAfterApply": {"occurrences":4792,"uniqueContents":3560,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},
-      "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","bytes":3801139,"sha256":"66BF8C7B7DB11263F75FE9F31830A47F063C46F1C0B2ADF8CC3DEC174732B38D","rows":6115},
-      "rejectedPromptVerifier": {"entries":139,"verifiedEntries":139,"errors":0},
-      "failedPromptVerifier": {"runtimeFailures":987,"promptRecords":1567,"errors":0},
-      "trackedSourceSecondPass": {"apply":{"occurrences":4792,"uniqueContents":3560,"newManifestRows":8,"newBlobs":0,"newBlobBytes":0},"dryRunAfterApply":{"occurrences":4792,"uniqueContents":3560,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"manifestBytes":3801139,"manifestSha256":"66BF8C7B7DB11263F75FE9F31830A47F063C46F1C0B2ADF8CC3DEC174732B38D","manifestRows":6115,"commit":"15966aaa72a3c0cc360f44be9238b577742eead0"},
+      "archiveApply": {
+        "occurrences": 4792,
+        "uniqueContents": 3560,
+        "newManifestRows": 9,
+        "newBlobs": 7,
+        "newBlobBytes": 8219650
+      },
+      "archiveDryRunAfterApply": {
+        "occurrences": 4792,
+        "uniqueContents": 3560,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "generatedMediaManifest": {
+        "path": "progress-reports/codex-generated-media/manifest.jsonl",
+        "bytes": 3801139,
+        "sha256": "66BF8C7B7DB11263F75FE9F31830A47F063C46F1C0B2ADF8CC3DEC174732B38D",
+        "rows": 6115
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "verifiedEntries": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      },
+      "trackedSourceSecondPass": {
+        "apply": {
+          "occurrences": 4792,
+          "uniqueContents": 3560,
+          "newManifestRows": 8,
+          "newBlobs": 0,
+          "newBlobBytes": 0
+        },
+        "dryRunAfterApply": {
+          "occurrences": 4792,
+          "uniqueContents": 3560,
+          "newManifestRows": 0,
+          "newBlobs": 0,
+          "newBlobBytes": 0
+        },
+        "manifestBytes": 3801139,
+        "manifestSha256": "66BF8C7B7DB11263F75FE9F31830A47F063C46F1C0B2ADF8CC3DEC174732B38D",
+        "manifestRows": 6115,
+        "commit": "15966aaa72a3c0cc360f44be9238b577742eead0"
+      },
       "gitEvidenceCommitPending": false,
       "remoteParityPending": false
     },
     "completedBank": true,
     "countedTowardRenderRun": true,
-    "xState": {"eligibleBacklogRemaining":0,"eligibleTwoCountryPostExists":false,"publicationAction":"none"},
+    "xState": {
+      "eligibleBacklogRemaining": 0,
+      "eligibleTwoCountryPostExists": false,
+      "publicationAction": "none"
+    },
     "dispatchEvidenceRemoteParityPending": false,
     "dispatchEvidenceCommit": "c28e08c7633cabf70c227761e14fd080f8099ffc",
     "occurrenceEvidenceCommit": "a9b9a18027cd246b8f053fa5b55a67ee5e15c51c",
@@ -1449,26 +2357,269 @@
     "actualDispatchedAtUtc": "2026-08-24T13:34:59.707Z",
     "firstCompactAuditAtUtc": "2026-08-24T13:35:20.468Z",
     "terminalObservedAtUtc": "2026-08-24T13:41:03.183Z",
-    "providerUrls": ["https://www.meta.ai/prompt/c6248136-c160-46ee-9217-e7a4911c8efc","https://www.meta.ai/prompt/6370ae7d-ef8f-4603-b01f-a9eb183de25b","https://www.meta.ai/prompt/1cb1f8a8-0f05-4295-b569-037db5814949","https://www.meta.ai/prompt/5f060e4f-30b5-4a33-99f1-9c19e974532f"],
-    "eligibleScenes": [1616,1617,1618,1619],
-    "eligibleLanes": [1,2,3,4],
-    "orderedReferenceScenesByLane": {"1":[938,936,937],"2":[938,936,937],"3":[938,936,937,1136],"4":[938,936,937]},
-    "promptRecords": [
-      {"scene":1616,"lane":1,"path":"tmp/world-195x4/batch-399/scene-1616-meta-bank-05-attempt-05.txt","bytes":4918,"sha256":"3B445F9872754820DF0788556811A31F01D1E45194B64902A605AF0DFD26789A","exactIntendedDispatchedBytes":4917,"exactIntendedDispatchedSha256":"6ECAEEE994F48A5C0D47CF87D1748A6BFD29A4482A28347BDE192D11E77F75C7","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":null},
-      {"scene":1617,"lane":2,"path":"tmp/world-195x4/batch-399/scene-1617-meta-bank-05-attempt-05.txt","bytes":5688,"sha256":"64F46E9A118AA4855F83671F881F893E17DE6F5D6717312F44FC524F249D92CB","exactIntendedDispatchedBytes":5687,"exactIntendedDispatchedSha256":"B2A5F08CC12E3B2014A6AFCE7BDE914DD97153EBA7B61C3C0B9F06AF7573F839","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":1},
-      {"scene":1618,"lane":3,"path":"tmp/world-195x4/batch-399/scene-1618-meta-bank-05-attempt-05.txt","bytes":5695,"sha256":"CFF65B67CDF2A37E06AC12D7DC0683EBDD37ADE9C51EC93E1F37E0C032348FC4","exactIntendedDispatchedBytes":5694,"exactIntendedDispatchedSha256":"03CCE91E892E536185B3EE0CDC34B2E14F2AFB3C4CC4067DEE2C59EA5926CBAB","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937,1136],"bolderMissionLane":2,"humanToHumanContactCount":4,"contactCap":4,"ownerTraceableHandCount":10},
-      {"scene":1619,"lane":4,"path":"tmp/world-195x4/batch-399/scene-1619-meta-bank-05-attempt-05.txt","bytes":5354,"sha256":"117C83AE6D0BBE311BD97A2C5C48276422AB620C3A1B8AAC557B0E53D6CF3504","exactIntendedDispatchedBytes":5353,"exactIntendedDispatchedSha256":"5AFBEAE01DDF39E83F5109296358E04E7289F9403E56E6359C7C3C614A8F56C0","terminalLfCount":1,"activeSuppressionMatches":0,"orderedReferenceScenes":[938,936,937],"bolderMissionLane":null}
+    "providerUrls": [
+      "https://www.meta.ai/prompt/c6248136-c160-46ee-9217-e7a4911c8efc",
+      "https://www.meta.ai/prompt/6370ae7d-ef8f-4603-b01f-a9eb183de25b",
+      "https://www.meta.ai/prompt/1cb1f8a8-0f05-4295-b569-037db5814949",
+      "https://www.meta.ai/prompt/5f060e4f-30b5-4a33-99f1-9c19e974532f"
     ],
-    "bolderMissionMapping": {"requiredCount":2,"actualCount":2,"selectedScenes":[1617,1618],"selectedLanes":[2,3],"standardRelationshipScenes":[1616,1619]},
-    "independentPromptAudit": {"status":"pass-no-blockers","allFourFileAndNormalizedHashesMatchDisk":true,"strictUtf8":true,"exactlyOneTerminalLfPerPrompt":true,"allFourActiveSuppressionMatches":0,"bolderMissionMappingExactTwoOfFour":true,"allBindingsReferencesRazeMapsOrientationsLocalesCoutureActionsCamerasSafetyMascotAndPropGatesPass":true,"allHumanContactCountsWithinCap":true,"scene1618ExactContactCount":4,"scene1618OwnerTraceableHandCount":10},
-    "preflightBarrier": {"requiredPriorRemoteHead":"15966aaa72a3c0cc360f44be9238b577742eead0","archiveDryRun":{"occurrences":4792,"uniqueContents":3560,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"rejectedPromptVerifier":{"entries":139,"verifiedEntries":139,"errors":0},"failedPromptVerifier":{"runtimeFailures":987,"promptRecords":1567,"errors":0},"gitLfsPendingObjectCount":0,"preflightCommit":"474303f048382f50b9f0641b210a429bb00a67a9","localHead":"474303f048382f50b9f0641b210a429bb00a67a9","remoteBranchHead":"474303f048382f50b9f0641b210a429bb00a67a9","draftPr13Head":"474303f048382f50b9f0641b210a429bb00a67a9","draftPr13State":"OPEN/DRAFT/CLEAN","remoteParityVerifiedAtUtc":"2026-08-24T13:21:06.1915785Z","worktreeCleanAfterCommit":true,"remoteParityPending":false},
-    "resultEvidence": {"capturedOccurrenceCount":11,"rawFileCount":10,"uniqueOutputSha256Count":9,"hardUnusableRawMediaCount":10,"uniqueHardUnusableRawContentCount":9,"explicitRefusalNoBytesCount":1,"acceptedRawMediaCount":0,"allRawMediaClassified":true,"rawFetchShortfallsRecovered":2,"archiveApply":{"occurrences":4802,"uniqueContents":3569,"newManifestRows":10,"newBlobs":9,"newBlobBytes":5778842},"archiveDryRun":{"occurrences":4802,"uniqueContents":3569,"newManifestRows":0,"newBlobs":0,"newBlobBytes":0},"rejectedPromptVerifier":{"entries":139,"verifiedEntries":139,"errors":0},"failedPromptVerifier":{"runtimeFailures":987,"promptRecords":1567,"errors":0},"resultEvidenceCommit":"da8f12a43ddeb443a5b32ac09d2f57039bbfbeac","resultEvidenceRemoteParityPending":false,"trackedSourceArchive":{"newManifestRows":10,"newBlobs":0,"dryRunNewRows":0,"remoteParityPending":false,"commit":"4bb101eef0698e1f934935100afbaaeb651cf182"}},
-    "renderCadence": {"completedRenderRunsSinceLastX":5,"currentRenderRun":10,"completedBanksInCurrentRenderRun":2,"currentPreflightBank":null,"currentPreflightAttempt":null,"currentPreflightRenderRunOrdinal":null,"currentInFlightBank":null,"currentEvidencePendingBank":null,"nextBank":96,"nextOrdinal":3},
-    "cumulativeMetaBankAllowance": {"authorized":170,"completed":66,"remaining":104},
+    "eligibleScenes": [
+      1616,
+      1617,
+      1618,
+      1619
+    ],
+    "eligibleLanes": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "orderedReferenceScenesByLane": {
+      "1": [
+        938,
+        936,
+        937
+      ],
+      "2": [
+        938,
+        936,
+        937
+      ],
+      "3": [
+        938,
+        936,
+        937,
+        1136
+      ],
+      "4": [
+        938,
+        936,
+        937
+      ]
+    },
+    "promptRecords": [
+      {
+        "scene": 1616,
+        "lane": 1,
+        "path": "tmp/world-195x4/batch-399/scene-1616-meta-bank-05-attempt-05.txt",
+        "bytes": 4918,
+        "sha256": "3B445F9872754820DF0788556811A31F01D1E45194B64902A605AF0DFD26789A",
+        "exactIntendedDispatchedBytes": 4917,
+        "exactIntendedDispatchedSha256": "6ECAEEE994F48A5C0D47CF87D1748A6BFD29A4482A28347BDE192D11E77F75C7",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937
+        ],
+        "bolderMissionLane": null
+      },
+      {
+        "scene": 1617,
+        "lane": 2,
+        "path": "tmp/world-195x4/batch-399/scene-1617-meta-bank-05-attempt-05.txt",
+        "bytes": 5688,
+        "sha256": "64F46E9A118AA4855F83671F881F893E17DE6F5D6717312F44FC524F249D92CB",
+        "exactIntendedDispatchedBytes": 5687,
+        "exactIntendedDispatchedSha256": "B2A5F08CC12E3B2014A6AFCE7BDE914DD97153EBA7B61C3C0B9F06AF7573F839",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937
+        ],
+        "bolderMissionLane": 1
+      },
+      {
+        "scene": 1618,
+        "lane": 3,
+        "path": "tmp/world-195x4/batch-399/scene-1618-meta-bank-05-attempt-05.txt",
+        "bytes": 5695,
+        "sha256": "CFF65B67CDF2A37E06AC12D7DC0683EBDD37ADE9C51EC93E1F37E0C032348FC4",
+        "exactIntendedDispatchedBytes": 5694,
+        "exactIntendedDispatchedSha256": "03CCE91E892E536185B3EE0CDC34B2E14F2AFB3C4CC4067DEE2C59EA5926CBAB",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937,
+          1136
+        ],
+        "bolderMissionLane": 2,
+        "humanToHumanContactCount": 4,
+        "contactCap": 4,
+        "ownerTraceableHandCount": 10
+      },
+      {
+        "scene": 1619,
+        "lane": 4,
+        "path": "tmp/world-195x4/batch-399/scene-1619-meta-bank-05-attempt-05.txt",
+        "bytes": 5354,
+        "sha256": "117C83AE6D0BBE311BD97A2C5C48276422AB620C3A1B8AAC557B0E53D6CF3504",
+        "exactIntendedDispatchedBytes": 5353,
+        "exactIntendedDispatchedSha256": "5AFBEAE01DDF39E83F5109296358E04E7289F9403E56E6359C7C3C614A8F56C0",
+        "terminalLfCount": 1,
+        "activeSuppressionMatches": 0,
+        "orderedReferenceScenes": [
+          938,
+          936,
+          937
+        ],
+        "bolderMissionLane": null
+      }
+    ],
+    "bolderMissionMapping": {
+      "requiredCount": 2,
+      "actualCount": 2,
+      "selectedScenes": [
+        1617,
+        1618
+      ],
+      "selectedLanes": [
+        2,
+        3
+      ],
+      "standardRelationshipScenes": [
+        1616,
+        1619
+      ]
+    },
+    "independentPromptAudit": {
+      "status": "pass-no-blockers",
+      "allFourFileAndNormalizedHashesMatchDisk": true,
+      "strictUtf8": true,
+      "exactlyOneTerminalLfPerPrompt": true,
+      "allFourActiveSuppressionMatches": 0,
+      "bolderMissionMappingExactTwoOfFour": true,
+      "allBindingsReferencesRazeMapsOrientationsLocalesCoutureActionsCamerasSafetyMascotAndPropGatesPass": true,
+      "allHumanContactCountsWithinCap": true,
+      "scene1618ExactContactCount": 4,
+      "scene1618OwnerTraceableHandCount": 10
+    },
+    "preflightBarrier": {
+      "requiredPriorRemoteHead": "15966aaa72a3c0cc360f44be9238b577742eead0",
+      "archiveDryRun": {
+        "occurrences": 4792,
+        "uniqueContents": 3560,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "verifiedEntries": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      },
+      "gitLfsPendingObjectCount": 0,
+      "preflightCommit": "474303f048382f50b9f0641b210a429bb00a67a9",
+      "localHead": "474303f048382f50b9f0641b210a429bb00a67a9",
+      "remoteBranchHead": "474303f048382f50b9f0641b210a429bb00a67a9",
+      "draftPr13Head": "474303f048382f50b9f0641b210a429bb00a67a9",
+      "draftPr13State": "OPEN/DRAFT/CLEAN",
+      "remoteParityVerifiedAtUtc": "2026-08-24T13:21:06.1915785Z",
+      "worktreeCleanAfterCommit": true,
+      "remoteParityPending": false
+    },
+    "resultEvidence": {
+      "capturedOccurrenceCount": 11,
+      "rawFileCount": 10,
+      "uniqueOutputSha256Count": 9,
+      "hardUnusableRawMediaCount": 10,
+      "uniqueHardUnusableRawContentCount": 9,
+      "explicitRefusalNoBytesCount": 1,
+      "acceptedRawMediaCount": 0,
+      "allRawMediaClassified": true,
+      "rawFetchShortfallsRecovered": 2,
+      "archiveApply": {
+        "occurrences": 4802,
+        "uniqueContents": 3569,
+        "newManifestRows": 10,
+        "newBlobs": 9,
+        "newBlobBytes": 5778842
+      },
+      "archiveDryRun": {
+        "occurrences": 4802,
+        "uniqueContents": 3569,
+        "newManifestRows": 0,
+        "newBlobs": 0,
+        "newBlobBytes": 0
+      },
+      "rejectedPromptVerifier": {
+        "entries": 139,
+        "verifiedEntries": 139,
+        "errors": 0
+      },
+      "failedPromptVerifier": {
+        "runtimeFailures": 987,
+        "promptRecords": 1567,
+        "errors": 0
+      },
+      "resultEvidenceCommit": "da8f12a43ddeb443a5b32ac09d2f57039bbfbeac",
+      "resultEvidenceRemoteParityPending": false,
+      "trackedSourceArchive": {
+        "newManifestRows": 10,
+        "newBlobs": 0,
+        "dryRunNewRows": 0,
+        "remoteParityPending": false,
+        "commit": "4bb101eef0698e1f934935100afbaaeb651cf182"
+      }
+    },
+    "renderCadence": {
+      "completedRenderRunsSinceLastX": 5,
+      "currentRenderRun": 10,
+      "completedBanksInCurrentRenderRun": 2,
+      "currentPreflightBank": null,
+      "currentPreflightAttempt": null,
+      "currentPreflightRenderRunOrdinal": null,
+      "currentInFlightBank": null,
+      "currentEvidencePendingBank": null,
+      "nextBank": 96,
+      "nextOrdinal": 3
+    },
+    "cumulativeMetaBankAllowance": {
+      "authorized": 170,
+      "completed": 66,
+      "remaining": 104
+    },
     "completedBank": true,
     "countedTowardRenderRun": true,
-    "xState": {"eligibleBacklogRemaining":0,"eligibleTwoCountryPostExists":false,"publicationAction":"none"},
-    "closure": {"country":"Barbados","batch":399,"unresolvedScenes":[1616,1617,1618,1619],"acceptedScenes":[],"neverAccepted":true,"attemptCeiling":5,"attempt6Authorized":false,"xEligible":false,"nextCountry":"São Tomé and Príncipe","nextBatch":400,"nextScenes":[1620,1621,1622,1623]},
+    "xState": {
+      "eligibleBacklogRemaining": 0,
+      "eligibleTwoCountryPostExists": false,
+      "publicationAction": "none"
+    },
+    "closure": {
+      "country": "Barbados",
+      "batch": 399,
+      "unresolvedScenes": [
+        1616,
+        1617,
+        1618,
+        1619
+      ],
+      "acceptedScenes": [],
+      "neverAccepted": true,
+      "attemptCeiling": 5,
+      "attempt6Authorized": false,
+      "xEligible": false,
+      "nextCountry": "São Tomé and Príncipe",
+      "nextBatch": 400,
+      "nextScenes": [
+        1620,
+        1621,
+        1622,
+        1623
+      ]
+    },
     "nextAction": "Prepare São Tomé and Príncipe Batch 400 through a fresh deterministic four-lane preflight parity barrier. Never dispatch Barbados Attempt 6; keep X and all social action queues at zero pending exact future eligibility and action-time confirmation."
   },
   "latestFifthRenderRunXWindowAudit": {
@@ -1485,15 +2636,79 @@
     "authoritativeLedgerUniqueCaptionCount": 81,
     "fullLedgerStructuralReconciliation": "All 177 authoritative campaign and audit-history post rows were checked, every row has one unique @dogramaci X status URL, and all 81 recorded campaign captions are unique.",
     "liveCurrentIntervalVerification": [
-      {"batches":[392,393],"countries":["Maldives","Cabo Verde"],"postUrl":"https://x.com/dogramaci/status/2091238638478598301","exactCaption":true,"photoEndpoints":[1,2,3]},
-      {"batches":[394,395],"countries":["Brunei","Belize"],"postUrl":"https://x.com/dogramaci/status/2091242014331298017","exactCaption":true,"photoEndpoints":[1,2,3]},
-      {"batches":[396,397],"countries":["Bahamas","Iceland"],"postUrl":"https://x.com/dogramaci/status/2091244152960729223","exactCaption":true,"photoEndpoints":[1,2,3]}
+      {
+        "batches": [
+          392,
+          393
+        ],
+        "countries": [
+          "Maldives",
+          "Cabo Verde"
+        ],
+        "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
+        "exactCaption": true,
+        "photoEndpoints": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "batches": [
+          394,
+          395
+        ],
+        "countries": [
+          "Brunei",
+          "Belize"
+        ],
+        "postUrl": "https://x.com/dogramaci/status/2091242014331298017",
+        "exactCaption": true,
+        "photoEndpoints": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "batches": [
+          396,
+          397
+        ],
+        "countries": [
+          "Bahamas",
+          "Iceland"
+        ],
+        "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
+        "exactCaption": true,
+        "photoEndpoints": [
+          1,
+          2,
+          3
+        ]
+      }
     ],
     "eligibleBacklogRemaining": 0,
     "activePendingPost": null,
-    "nextEligibleCountryState": {"batch":398,"country":"Vanuatu","resolvedScenes":[1612,1613,1615],"unresolvedScenes":[1614],"eligibleForX":false},
+    "nextEligibleCountryState": {
+      "batch": 398,
+      "country": "Vanuatu",
+      "resolvedScenes": [
+        1612,
+        1613,
+        1615
+      ],
+      "unresolvedScenes": [
+        1614
+      ],
+      "eligibleForX": false
+    },
     "publicationAction": "none; no exact eligible three-asset two-country post exists, so no action-time confirmation was requested and no final post click occurred",
-    "counterRetention": {"completedRenderRunsSinceLastX":5,"resetAllowed":false,"reason":"Reset only after an eligible X publication is confirmed, live-verified, archived, committed, pushed, and remote-verified."},
+    "counterRetention": {
+      "completedRenderRunsSinceLastX": 5,
+      "resetAllowed": false,
+      "reason": "Reset only after an eligible X publication is confirmed, live-verified, archived, committed, pushed, and remote-verified."
+    },
     "nextAction": "The current X backlog is zero. Preserve the counter at five and retain Vanuatu scene 1614 unresolved at the bounded five-attempt ceiling. Do not dispatch Attempt 6 without a new authoritative ceiling change; no two-country X post is eligible."
   },
   "latestXBacklogClearanceAudit": {
@@ -1509,20 +2724,89 @@
     "authoritativeLedgerPostUrlCount": 177,
     "authoritativeLedgerUniquePostUrlCount": 177,
     "currentIntervalVerification": [
-      {"batches":[392,393],"countries":["Maldives","Cabo Verde"],"postUrl":"https://x.com/dogramaci/status/2091238638478598301","exactCaption":true,"photoEndpoints":[1,2,3]},
-      {"batches":[394,395],"countries":["Brunei","Belize"],"postUrl":"https://x.com/dogramaci/status/2091242014331298017","exactCaption":true,"photoEndpoints":[1,2,3]},
-      {"batches":[396,397],"countries":["Bahamas","Iceland"],"postUrl":"https://x.com/dogramaci/status/2091244152960729223","exactCaption":true,"photoEndpoints":[1,2,3]}
+      {
+        "batches": [
+          392,
+          393
+        ],
+        "countries": [
+          "Maldives",
+          "Cabo Verde"
+        ],
+        "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
+        "exactCaption": true,
+        "photoEndpoints": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "batches": [
+          394,
+          395
+        ],
+        "countries": [
+          "Brunei",
+          "Belize"
+        ],
+        "postUrl": "https://x.com/dogramaci/status/2091242014331298017",
+        "exactCaption": true,
+        "photoEndpoints": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "batches": [
+          396,
+          397
+        ],
+        "countries": [
+          "Bahamas",
+          "Iceland"
+        ],
+        "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
+        "exactCaption": true,
+        "photoEndpoints": [
+          1,
+          2,
+          3
+        ]
+      }
     ],
     "latestVisibleNonCampaignStatuses": [
-      {"postUrl":"https://x.com/dogramaci/status/2091291806163968087","classification":"spotify-link-four-image-user-post-without-exact-guardian-campaign-caption-does-not-consume-backlog"},
-      {"postUrl":"https://x.com/dogramaci/status/2091289979645296775","classification":"unrelated-political-text-one-image-post-does-not-consume-backlog"}
+      {
+        "postUrl": "https://x.com/dogramaci/status/2091291806163968087",
+        "classification": "spotify-link-four-image-user-post-without-exact-guardian-campaign-caption-does-not-consume-backlog"
+      },
+      {
+        "postUrl": "https://x.com/dogramaci/status/2091289979645296775",
+        "classification": "unrelated-political-text-one-image-post-does-not-consume-backlog"
+      }
     ],
     "eligibleBacklogRemaining": 0,
     "activePendingPost": null,
     "preparedPost": null,
     "publicationAction": "none; no exact eligible campaign item exists, so no action-time confirmation was requested and no final post click occurred",
-    "nextEligibleCountryState": {"batch":398,"country":"Vanuatu","resolvedScenes":[1612,1613,1615],"unresolvedScenes":[1614],"eligibleForX":false},
-    "counterRetention": {"completedRenderRunsSinceLastX":5,"resetAllowed":false},
+    "nextEligibleCountryState": {
+      "batch": 398,
+      "country": "Vanuatu",
+      "resolvedScenes": [
+        1612,
+        1613,
+        1615
+      ],
+      "unresolvedScenes": [
+        1614
+      ],
+      "eligibleForX": false
+    },
+    "counterRetention": {
+      "completedRenderRunsSinceLastX": 5,
+      "resetAllowed": false
+    },
     "renderingDeferredByUser": true,
     "nextAction": "Wait for the user to return to renders, then resume only Vanuatu scene 1614 at Bank 56, sixth-render-run ordinal 3."
   },
@@ -6659,17 +7943,36 @@
     },
     {
       "batch": 392,
-      "batches": [392, 393],
+      "batches": [
+        392,
+        393
+      ],
       "postedAt": "2026-08-22T18:58:37.579Z",
       "verifiedAt": "2026-08-22T19:00:00Z",
       "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
       "caption": "Maldives ❤️ Cabo Verde: stormlit lagoons, orbital couture, and a close-held island moment. #InternalAgency #RAZE",
-      "imageNumbers": [1588, 1589, 1592],
-      "countries": ["Maldives", "Cabo Verde"],
+      "imageNumbers": [
+        1588,
+        1589,
+        1592
+      ],
+      "countries": [
+        "Maldives",
+        "Cabo Verde"
+      ],
       "assets": [
-        {"file":"1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png","sha256":"C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE"},
-        {"file":"1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png","sha256":"BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0"},
-        {"file":"1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp","sha256":"F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328"}
+        {
+          "file": "1588-maldives-hanifaru-storm-raze-close-love-chatgpt-final.png",
+          "sha256": "C0FC508A6920543F08DAA0E0625D0CDECC0F78F708E643048DE42C8AD55C18AE"
+        },
+        {
+          "file": "1589-maldives-orbital-dusk-raze-close-love-chatgpt-final.png",
+          "sha256": "BFEE07C06CA8416A5EA20B6CB630CAE5AF7FAD5632171CDDC49287DD05EF37F0"
+        },
+        {
+          "file": "1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp",
+          "sha256": "F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328"
+        }
       ],
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Exact approved caption, signed-in @dogramaci account, public status URL, and exactly three photo endpoints verified live.",
@@ -6677,22 +7980,68 @@
     },
     {
       "batch": 394,
-      "batches": [394, 395],
+      "batches": [
+        394,
+        395
+      ],
       "postedAt": "2026-08-22T19:12:04.271Z",
       "verifiedAt": "2026-08-22T19:14:00Z",
       "postUrl": "https://x.com/dogramaci/status/2091242014331298017",
       "caption": "Brunei ❤️ Belize: sunset waterways, rainforest couture, and a close-held spark above the Caribbean. #InternalAgency",
-      "imageNumbers": [1596, 1597, 1600],
-      "countries": ["Brunei", "Belize"],
+      "imageNumbers": [
+        1596,
+        1597,
+        1600
+      ],
+      "countries": [
+        "Brunei",
+        "Belize"
+      ],
       "assets": [
-        {"file":"1596-brunei-kampong-ayer-sunset-raze-close-love-chatgpt-final.png","sha256":"2C3A0898808E807FF9CF44C91628D27EF8AEA6F409DBDE08CA55416E63838204"},
-        {"file":"1597-brunei-ulu-temburong-sunset-raze-close-love-chatgpt-final.png","sha256":"F7C973829B9E24D2644714DE7C7D54380D717584A6556178EE5FAA79D25B56A5"},
-        {"file":"1600-belize-city-swing-bridge-storm-raze-close-love-chatgpt-final.png","sha256":"FA1FD0F2F3618EF2B1D221DBBB2E321FFBA2A29D7A6B16C1535027C8DF581339"}
+        {
+          "file": "1596-brunei-kampong-ayer-sunset-raze-close-love-chatgpt-final.png",
+          "sha256": "2C3A0898808E807FF9CF44C91628D27EF8AEA6F409DBDE08CA55416E63838204"
+        },
+        {
+          "file": "1597-brunei-ulu-temburong-sunset-raze-close-love-chatgpt-final.png",
+          "sha256": "F7C973829B9E24D2644714DE7C7D54380D717584A6556178EE5FAA79D25B56A5"
+        },
+        {
+          "file": "1600-belize-city-swing-bridge-storm-raze-close-love-chatgpt-final.png",
+          "sha256": "FA1FD0F2F3618EF2B1D221DBBB2E321FFBA2A29D7A6B16C1535027C8DF581339"
+        }
       ],
       "hashtagRollAudit": [
-        {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-394-395|InternalAgency|counter-1","counter":1,"acceptedByte":8,"digestSha256":"0876D2489FCD23B9C3EEF86BF20A1ED639CAF985B332B607D18E08EF4A4AF1F1","roll":8,"threshold":25,"included":true},
-        {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-394-395|WorldXXXSeries|counter-0","counter":0,"acceptedByte":73,"digestSha256":"49625E6F8093761ED51DEE4507EAC7B94DD3E1E2F2B72A14B237ACE17F7EAE7A","roll":73,"threshold":25,"included":false},
-        {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-394-395|RAZE|counter-1","counter":1,"acceptedByte":195,"digestSha256":"C3912DEA5CF321E57EE1C9E9F20FC52D3C2B049CC336DB1FD9183EB8A61416C8","roll":95,"threshold":31,"included":false}
+        {
+          "hashtag": "#InternalAgency",
+          "key": "starlight|social-hashtag|x|batches-394-395|InternalAgency|counter-1",
+          "counter": 1,
+          "acceptedByte": 8,
+          "digestSha256": "0876D2489FCD23B9C3EEF86BF20A1ED639CAF985B332B607D18E08EF4A4AF1F1",
+          "roll": 8,
+          "threshold": 25,
+          "included": true
+        },
+        {
+          "hashtag": "#WorldXXXSeries",
+          "key": "starlight|social-hashtag|x|batches-394-395|WorldXXXSeries|counter-0",
+          "counter": 0,
+          "acceptedByte": 73,
+          "digestSha256": "49625E6F8093761ED51DEE4507EAC7B94DD3E1E2F2B72A14B237ACE17F7EAE7A",
+          "roll": 73,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#RAZE",
+          "key": "starlight|social-hashtag|x|batches-394-395|RAZE|counter-1",
+          "counter": 1,
+          "acceptedByte": 195,
+          "digestSha256": "C3912DEA5CF321E57EE1C9E9F20FC52D3C2B049CC336DB1FD9183EB8A61416C8",
+          "roll": 95,
+          "threshold": 31,
+          "included": false
+        }
       ],
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Exact approved caption, signed-in @dogramaci account, public status URL, and exactly three photo endpoints verified live after X initially displayed a transient composer error.",
@@ -6700,22 +8049,68 @@
     },
     {
       "batch": 396,
-      "batches": [396, 397],
+      "batches": [
+        396,
+        397
+      ],
       "postedAt": "2026-08-22T19:20:34.160Z",
       "verifiedAt": "2026-08-22T19:21:00Z",
       "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
       "caption": "Bahamas ❤️ Iceland: stormlit cays, volcanic horizons, and a close-held spark beneath northern light. #InternalAgency #RAZE",
-      "imageNumbers": [1604, 1605, 1608],
-      "countries": ["Bahamas", "Iceland"],
+      "imageNumbers": [
+        1604,
+        1605,
+        1608
+      ],
+      "countries": [
+        "Bahamas",
+        "Iceland"
+      ],
       "assets": [
-        {"file":"1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png","sha256":"F2E57C544280EBD99DDF017397E40FF9084FF3CE984474779CAD4C5F8DF7B7AD"},
-        {"file":"1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp","sha256":"DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6"},
-        {"file":"1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png","sha256":"C45E4636A5CF1E80AE98D15A32744945D696DE0C442F82B65673B276251810CE"}
+        {
+          "file": "1604-bahamas-glass-window-bridge-dusk-raze-close-love-chatgpt-final.png",
+          "sha256": "F2E57C544280EBD99DDF017397E40FF9084FF3CE984474779CAD4C5F8DF7B7AD"
+        },
+        {
+          "file": "1605-bahamas-exuma-cays-storm-raze-close-love-meta-source.webp",
+          "sha256": "DA23AA8CAABB5BCCED301F7BC72FED720A77CC2F58AD04F85A3E7035D237E2A6"
+        },
+        {
+          "file": "1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png",
+          "sha256": "C45E4636A5CF1E80AE98D15A32744945D696DE0C442F82B65673B276251810CE"
+        }
       ],
       "hashtagRollAudit": [
-        {"hashtag":"#InternalAgency","key":"starlight|social-hashtag|x|batches-396-397|InternalAgency|counter-0","counter":0,"acceptedByte":7,"digestSha256":"07BBFB995EEE8AE0144BC71732B79BF83AE4E439834D1675D96C789CC775E1C0","roll":7,"threshold":25,"included":true},
-        {"hashtag":"#WorldXXXSeries","key":"starlight|social-hashtag|x|batches-396-397|WorldXXXSeries|counter-1","counter":1,"acceptedByte":48,"digestSha256":"302D0A0CCDD33692AACC574733935D59A20B53A3B04C9FB4E30B6D3898148830","roll":48,"threshold":25,"included":false},
-        {"hashtag":"#RAZE","key":"starlight|social-hashtag|x|batches-396-397|RAZE|counter-0","counter":0,"acceptedByte":25,"digestSha256":"19DA1FDCEA7B2B48D126D2A629F49F274F9403A9E9730560D65B9E98D4595F91","roll":25,"threshold":31,"included":true}
+        {
+          "hashtag": "#InternalAgency",
+          "key": "starlight|social-hashtag|x|batches-396-397|InternalAgency|counter-0",
+          "counter": 0,
+          "acceptedByte": 7,
+          "digestSha256": "07BBFB995EEE8AE0144BC71732B79BF83AE4E439834D1675D96C789CC775E1C0",
+          "roll": 7,
+          "threshold": 25,
+          "included": true
+        },
+        {
+          "hashtag": "#WorldXXXSeries",
+          "key": "starlight|social-hashtag|x|batches-396-397|WorldXXXSeries|counter-1",
+          "counter": 1,
+          "acceptedByte": 48,
+          "digestSha256": "302D0A0CCDD33692AACC574733935D59A20B53A3B04C9FB4E30B6D3898148830",
+          "roll": 48,
+          "threshold": 25,
+          "included": false
+        },
+        {
+          "hashtag": "#RAZE",
+          "key": "starlight|social-hashtag|x|batches-396-397|RAZE|counter-0",
+          "counter": 0,
+          "acceptedByte": 25,
+          "digestSha256": "19DA1FDCEA7B2B48D126D2A629F49F274F9403A9E9730560D65B9E98D4595F91",
+          "roll": 25,
+          "threshold": 31,
+          "included": true
+        }
       ],
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Exact approved caption, signed-in @dogramaci account, public status URL, and exactly three photo endpoints verified live.",
@@ -6803,90 +8198,131 @@
     "verification": "Every exact caption, attachment count, public status URL, and current home-timeline article was verified in the signed-in in-app browser."
   },
   "latestExplicitDrainAudit": {
-    "status": "cleared-no-eligible-backlog",
-    "requestedAt": "2026-08-12T06:00:46.627Z",
-    "completedAt": "2026-08-12T06:02:09.385Z",
+    "schemaVersion": 1,
+    "status": "cleared-stale-published-reservations-zero-eligible-backlog-no-new-post",
+    "completedAtUtc": "2026-08-27T05:36:28.046Z",
     "account": "@dogramaci",
-    "instruction": "clear X post backlog now",
+    "instruction": "clear X post backlog",
+    "browserSurface": "signed-in-in-app-browser",
     "liveProfileVerified": true,
-    "signedInAccount": "@dogramaci",
+    "signedInAccountVerified": true,
+    "ownerControlVerified": "Edit profile",
     "latestVisibleAccountStatus": {
-      "url": "https://x.com/dogramaci/status/2087416716372378042",
-      "classification": "unrelated-account-image-post-not-a-World-Series-ledger-item"
+      "url": "https://x.com/dogramaci/status/2092845948737036424",
+      "classification": "unrelated-account-youtube-link-not-a-World-Series-ledger-item"
     },
-    "pendingPost": null,
-    "preparedPostQueueCount": 0,
-    "deferredPostCheckpoint": null,
-    "ledgerPublicPostCount": 169,
-    "checkpointAudit": {
-      "batchRange": [
-        320,
-        382
-      ],
-      "thresholdQualifiedUnpublishedCount": 0,
-      "publishedCheckpointCount": 25,
-      "insufficientCountriesFromBatch374": [
-        {
-          "batch": 374,
-          "country": "Armenia",
-          "acceptedCurrentCountryAssets": 1,
-          "required": 2
-        },
-        {
-          "batch": 375,
-          "country": "Namibia",
-          "acceptedCurrentCountryAssets": 0,
-          "required": 2
-        },
-        {
-          "batch": 376,
-          "country": "Lithuania",
-          "acceptedCurrentCountryAssets": 0,
-          "required": 2
-        },
-        {
-          "batch": 377,
-          "country": "Qatar",
-          "acceptedCurrentCountryAssets": 1,
-          "required": 2
-        },
-        {
-          "batch": 378,
-          "country": "Jamaica",
-          "acceptedCurrentCountryAssets": 0,
-          "required": 2
-        },
-        {
-          "batch": 379,
-          "country": "Gambia",
-          "acceptedCurrentCountryAssets": 0,
-          "required": 2
-        },
-        {
-          "batch": 380,
-          "country": "Gabon",
-          "acceptedCurrentCountryAssets": 0,
-          "required": 2
-        },
-        {
-          "batch": 381,
-          "country": "Botswana",
-          "acceptedCurrentCountryAssets": 0,
-          "required": 2
-        }
-      ]
+    "queueBefore": {
+      "pendingPostCount": 1,
+      "preparedPostQueueCount": 1,
+      "deferredPostCheckpoint": null
     },
-    "activeCountryAudit": {
-      "batch": 382,
-      "country": "Georgia",
-      "acceptedCurrentCountryAssets": 3,
+    "reconciledPublishedReservations": [
+      {
+        "source": "pendingPost",
+        "batches": [
+          392,
+          393
+        ],
+        "countries": [
+          "Maldives",
+          "Cabo Verde"
+        ],
+        "imageNumbers": [
+          1588,
+          1589,
+          1592
+        ],
+        "caption": "Maldives ❤️ Cabo Verde: stormlit lagoons, orbital couture, and a close-held island moment. #InternalAgency #RAZE",
+        "postUrl": "https://x.com/dogramaci/status/2091238638478598301",
+        "exactCaptionVerified": true,
+        "publicPhotoEndpointsVerified": [
+          "/photo/1",
+          "/photo/2",
+          "/photo/3"
+        ]
+      },
+      {
+        "source": "preparedPostQueue[0]",
+        "batches": [
+          396,
+          397
+        ],
+        "countries": [
+          "Bahamas",
+          "Iceland"
+        ],
+        "imageNumbers": [
+          1604,
+          1605,
+          1608
+        ],
+        "caption": "Bahamas ❤️ Iceland: stormlit cays, volcanic horizons, and a close-held spark beneath northern light. #InternalAgency #RAZE",
+        "postUrl": "https://x.com/dogramaci/status/2091244152960729223",
+        "exactCaptionVerified": true,
+        "publicPhotoEndpointsVerified": [
+          "/photo/1",
+          "/photo/2",
+          "/photo/3"
+        ]
+      }
+    ],
+    "completedCountryEligibilitySinceLastCadence": [
+      {
+        "batch": 421,
+        "country": "Djibouti",
+        "acceptedCurrentCountryAssets": 0,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 422,
+        "country": "South Sudan",
+        "acceptedCurrentCountryAssets": 0,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 423,
+        "country": "Somalia",
+        "acceptedCurrentCountryAssets": 0,
+        "required": 4,
+        "eligible": false
+      }
+    ],
+    "currentCountry": {
+      "batch": 424,
+      "country": "Senegal",
+      "status": "prepared-not-uploaded",
+      "acceptedCurrentCountryAssets": 0,
       "required": 4,
       "eligible": false
     },
+    "queueAfter": {
+      "pendingPost": null,
+      "preparedPostQueueCount": 0,
+      "deferredPostCheckpoint": null
+    },
     "eligibleBacklogRemaining": 0,
     "newlyPublished": [],
-    "action": "No upload was submitted because the explicit queue is empty and no unpublished country meets its authoritative publication gate.",
-    "duplicatePrevention": "The signed-in live @dogramaci profile, all public ledger entries, and every Batch 320 through 382 checkpoint were reconciled before composer use."
+    "action": "No new X composer upload or Post was submitted. Two stale reservations were cleared only after their existing exact-caption public statuses and photo/1 through photo/3 endpoints were reverified live.",
+    "duplicatePrevention": "Never re-upload the Maldives/Cabo Verde or Bahamas/Iceland media: their exact public URLs are authoritative and were live-reverified before ledger clearance.",
+    "xCadence": {
+      "completedCountryCyclesSinceLastReset": 3,
+      "publishThreshold": 10,
+      "publishDue": false,
+      "counterReset": false
+    },
+    "nextEligible": {
+      "batch": 424,
+      "country": "Senegal",
+      "scenes": [
+        1716,
+        1717,
+        1718,
+        1719
+      ],
+      "status": "prompts-prepared"
+    }
   },
   "previousGuardianWakeAudit": {
     "status": "georgia-fiji-canonical-campaign-post-live-seven-country-backlog-remains",
@@ -7054,28 +8490,56 @@
     "eligibleBacklogRemaining": 0,
     "newlyPublished": [
       {
-        "countries": ["Comoros", "Guyana"],
+        "countries": [
+          "Comoros",
+          "Guyana"
+        ],
         "postUrl": "https://x.com/dogramaci/status/2090710804232351899",
         "caption": "Comoros ❤️ Guyana: jewel-bright couture, stormlit coastlines, and a close-held island gaze. #WorldXXXSeries #RAZE",
-        "imageNumbers": [1556, 1557, 1560]
+        "imageNumbers": [
+          1556,
+          1557,
+          1560
+        ]
       },
       {
-        "countries": ["Solomon Islands", "Bhutan"],
+        "countries": [
+          "Solomon Islands",
+          "Bhutan"
+        ],
         "postUrl": "https://x.com/dogramaci/status/2090711379200073927",
         "caption": "Solomon Islands ❤️ Bhutan: waterfall mist, luminous couture, and a close embrace at the rainforest edge.",
-        "imageNumbers": [1564, 1565, 1568]
+        "imageNumbers": [
+          1564,
+          1565,
+          1568
+        ]
       },
       {
-        "countries": ["Suriname", "Montenegro"],
+        "countries": [
+          "Suriname",
+          "Montenegro"
+        ],
         "postUrl": "https://x.com/dogramaci/status/2090711675590607183",
         "caption": "Suriname ❤️ Montenegro: riverlit couture, rainforest air, and a close-held spark beneath the airship glow. #InternalAgency",
-        "imageNumbers": [1576, 1577, 1580]
+        "imageNumbers": [
+          1576,
+          1577,
+          1580
+        ]
       },
       {
-        "countries": ["Malta", "Montenegro"],
+        "countries": [
+          "Malta",
+          "Montenegro"
+        ],
         "postUrl": "https://x.com/dogramaci/status/2090711986728239557",
         "caption": "Malta ❤️ Montenegro: golden harbor light, rainbow RAZE, and a close-held moment above the Mediterranean.",
-        "imageNumbers": [1584, 1586, 1582]
+        "imageNumbers": [
+          1584,
+          1586,
+          1582
+        ]
       }
     ],
     "verification": "Each post produced an X sent notice and a live signed-in home-timeline article with the exact approved caption and exactly three image endpoints.",
@@ -7104,109 +8568,109 @@
     }
   },
   "latestTenCountryCadenceAudit": {
-  "schemaVersion": 1,
-  "status": "completed-zero-eligible-backlog-no-post",
-  "completedAtUtc": "2026-08-27T03:15:37.479Z",
-  "account": "@dogramaci",
-  "liveProfileVerified": true,
-  "signedInAccountVerified": true,
-  "ownerControlVerified": "Edit profile",
-  "cadenceCountryBatches": [
-    411,
-    412,
-    413,
-    414,
-    415,
-    416,
-    417,
-    418,
-    419,
-    420
-  ],
-  "completedCountryCycles": 10,
-  "batchEligibility": [
-    {
-      "batch": 411,
-      "country": "Dominica",
-      "accepted_current_country_assets": 0,
-      "required": 4,
-      "eligible": false
+    "schemaVersion": 1,
+    "status": "completed-zero-eligible-backlog-no-post",
+    "completedAtUtc": "2026-08-27T03:15:37.479Z",
+    "account": "@dogramaci",
+    "liveProfileVerified": true,
+    "signedInAccountVerified": true,
+    "ownerControlVerified": "Edit profile",
+    "cadenceCountryBatches": [
+      411,
+      412,
+      413,
+      414,
+      415,
+      416,
+      417,
+      418,
+      419,
+      420
+    ],
+    "completedCountryCycles": 10,
+    "batchEligibility": [
+      {
+        "batch": 411,
+        "country": "Dominica",
+        "accepted_current_country_assets": 0,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 412,
+        "country": "Saint Kitts and Nevis",
+        "accepted_current_country_assets": 1,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 413,
+        "country": "Liechtenstein",
+        "accepted_current_country_assets": 0,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 414,
+        "country": "Monaco",
+        "accepted_current_country_assets": 0,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 415,
+        "country": "Marshall Islands",
+        "accepted_current_country_assets": 0,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 416,
+        "country": "San Marino",
+        "accepted_current_country_assets": 1,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 417,
+        "country": "Palau",
+        "accepted_current_country_assets": 1,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 418,
+        "country": "Nauru",
+        "accepted_current_country_assets": 0,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 419,
+        "country": "Tuvalu",
+        "accepted_current_country_assets": 2,
+        "required": 4,
+        "eligible": false
+      },
+      {
+        "batch": 420,
+        "country": "Vatican City",
+        "accepted_current_country_assets": 0,
+        "required": 4,
+        "eligible": false
+      }
+    ],
+    "eligibleBacklogRemaining": 0,
+    "newlyPublished": [],
+    "pendingQualifiedPost": null,
+    "latestVisibleAccountStatus": {
+      "url": "https://x.com/dogramaci/status/2092636976549679196",
+      "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
     },
-    {
-      "batch": 412,
-      "country": "Saint Kitts and Nevis",
-      "accepted_current_country_assets": 1,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 413,
-      "country": "Liechtenstein",
-      "accepted_current_country_assets": 0,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 414,
-      "country": "Monaco",
-      "accepted_current_country_assets": 0,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 415,
-      "country": "Marshall Islands",
-      "accepted_current_country_assets": 0,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 416,
-      "country": "San Marino",
-      "accepted_current_country_assets": 1,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 417,
-      "country": "Palau",
-      "accepted_current_country_assets": 1,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 418,
-      "country": "Nauru",
-      "accepted_current_country_assets": 0,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 419,
-      "country": "Tuvalu",
-      "accepted_current_country_assets": 2,
-      "required": 4,
-      "eligible": false
-    },
-    {
-      "batch": 420,
-      "country": "Vatican City",
-      "accepted_current_country_assets": 0,
-      "required": 4,
-      "eligible": false
-    }
-  ],
-  "eligibleBacklogRemaining": 0,
-  "newlyPublished": [],
-  "pendingQualifiedPost": null,
-  "latestVisibleAccountStatus": {
-    "url": "https://x.com/dogramaci/status/2092636976549679196",
-    "classification": "unrelated-account-text-post-not-a-World-Series-ledger-item"
-  },
-  "reconciliation": "No Batch 411-420 country reached the authoritative four-of-four accepted-current-country publication gate: accepted counts were 0,1,0,0,0,1,1,0,2,0 respectively.",
-  "action": "No X composer upload or post was submitted.",
-  "counterResetAfterOutcomeRecorded": true,
-  "nextRenderBatch": 421,
-  "nextCountry": "Djibouti"
-}
+    "reconciliation": "No Batch 411-420 country reached the authoritative four-of-four accepted-current-country publication gate: accepted counts were 0,1,0,0,0,1,1,0,2,0 respectively.",
+    "action": "No X composer upload or post was submitted.",
+    "counterResetAfterOutcomeRecorded": true,
+    "nextRenderBatch": 421,
+    "nextCountry": "Djibouti"
+  }
 }
