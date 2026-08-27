@@ -132,6 +132,11 @@ test("CAS reservation is durable, immutable, and malformed partial records remai
       () => inspectHandoffReservation(exact, { expectedRoot: fixture.root }),
       (error) => error instanceof HandoffCasError && error.code === "CAS_RECORD_HOLD",
     );
+    assert.throws(
+      () => reserveHandoffMutation(exact, { expectedRoot: fixture.root }),
+      (error) => error instanceof HandoffCasError && error.code === "CAS_CREATION_INDETERMINATE_HOLD",
+    );
+    assert.equal(readFileSync(created.recordPath, "utf8"), '{"partial":');
   } finally {
     rmSync(fixture.parent, { recursive: true, force: true });
   }

@@ -57,6 +57,9 @@ const SHA256 = /^[0-9a-f]{64}$/u;
 const COMMIT = /^[0-9a-f]{40}$/u;
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/u;
 const ISO_UTC = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u;
+const RACE_SETTLE_ATTEMPTS = 100;
+const RACE_SETTLE_DELAY_MS = 10;
+const RACE_SETTLE_SIGNAL = new Int32Array(new SharedArrayBuffer(4));
 
 export class HandoffCasError extends Error {
   constructor(code, message) {
@@ -328,6 +331,33 @@ function inspectFile(prepared) {
   return Object.freeze(record);
 }
 
+function inspectRacedFile(prepared, expectedBytes) {
+  for (let attempt = 0; attempt < RACE_SETTLE_ATTEMPTS; attempt += 1) {
+    assertNamespaceIdentity(prepared);
+    let entry;
+    try {
+      entry = lstatSync(prepared.path);
+    } catch {
+      fail("CAS_RECORD_HOLD", "CAS reservation raced but the permanent record disappeared");
+    }
+    check(entry.isFile() && !entry.isSymbolicLink(), "CAS_RECORD_HOLD", "CAS record must be a regular non-symlink file");
+    if (process.platform !== "win32") {
+      check((entry.mode & 0o7777) === 0o600, "CAS_RECORD_HOLD", "CAS record must be exact mode 0600");
+      check(entry.uid === prepared.expectedUid, "CAS_RECORD_HOLD", `CAS record is not owned by exact uid ${prepared.expectedUid}`);
+      check(entry.nlink === 1, "CAS_RECORD_HOLD", "CAS record must be single-linked");
+    }
+    check(entry.size <= expectedBytes, "CAS_RECORD_HOLD", "CAS record byte length exceeds the exact canonical reservation");
+    if (entry.size === expectedBytes) return inspectFile(prepared);
+    if (attempt + 1 < RACE_SETTLE_ATTEMPTS) {
+      Atomics.wait(RACE_SETTLE_SIGNAL, 0, 0, RACE_SETTLE_DELAY_MS);
+    }
+  }
+  fail(
+    "CAS_CREATION_INDETERMINATE_HOLD",
+    "CAS reservation creator did not finish the exact permanent record; mutation remains reserved and must not run",
+  );
+}
+
 function result(status, prepared, record = null) {
   return Object.freeze({
     schema: SCHEMA_RESULT,
@@ -351,9 +381,6 @@ export function reserveHandoffMutation(options, {
   expectedRoot = EXPECTED_CAS_ROOT,
 } = {}) {
   const prepared = prepare(options, { expectedRoot });
-  const existing = inspectFile(prepared);
-  if (existing) return result("RESERVED_EXISTING", prepared, existing);
-
   const record = { ...prepared.identity, reservedAtUtc: now().toISOString() };
   check(ISO_UTC.test(record.reservedAtUtc), "CAS_RECORD_HOLD", "CAS reservation clock did not return canonical UTC");
   const bytes = canonicalJson(record);
@@ -366,8 +393,7 @@ export function reserveHandoffMutation(options, {
     );
   } catch (error) {
     if (error?.code === "EEXIST") {
-      const raced = inspectFile(prepared);
-      check(raced, "CAS_RECORD_HOLD", "CAS reservation raced but no valid record is readable");
+      const raced = inspectRacedFile(prepared, Buffer.byteLength(bytes));
       return result("RESERVED_EXISTING", prepared, raced);
     }
     throw error;
