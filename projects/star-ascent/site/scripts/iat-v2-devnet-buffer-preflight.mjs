@@ -26,8 +26,8 @@ const UPGRADEABLE_LOADER = new PublicKey("BPFLoaderUpgradeab1e111111111111111111
 const PROGRAM_DATA_METADATA_BYTES = 45;
 const BUFFER_METADATA_BYTES = 37;
 
-// Exact first-run migration binding from the successful public-GitHub
-// iat-v2-proof run for the committed migration source. The binary and evidence
+// Reviewed static successor binding from the successful public-GitHub
+// iat-v2-proof run for the exact migration source. The binary and evidence
 // manifest remain untracked, operator-supplied inputs and must independently
 // match every pin before either buffer helper may proceed.
 export const IAT_V2_MIGRATION_ARTIFACT_BINDING = Object.freeze({
@@ -36,13 +36,13 @@ export const IAT_V2_MIGRATION_ARTIFACT_BINDING = Object.freeze({
   artifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   artifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   sourceHeadCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-  sourceHeadTree: "d533dae2994a7464412fa2ffd36fd99f4cc4db07",
+  sourceHeadTree: "6af1a8c6ba3fc75b2a887f7e881fce11e6a37253",
   ciRunId: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   ciRunAttempt: 1,
   workflowRef:
     "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge",
   evidenceManifestSha256:
-    "1458fb1d736230bbd6aba9edbc7629538ec11babb9c75b3d8ee03af075f905b5",
+    "40ba450b1136401ef4bfe984bf7a64c9cc0a9e7f35f64eb554e49f90e5bbe6b6",
 });
 
 export const IAT_V2_ARTIFACT_INPUT_PATHS = IAT_V2_SBF_ARTIFACT_INPUT_PATHS;

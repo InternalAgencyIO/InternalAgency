@@ -25,18 +25,18 @@ const sortJson = (value) => {
   return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortJson(value[key])]));
 };
 
-test("migration buffer helpers use the exact first-run public-CI binding", () => {
+test("migration buffer helpers use the reviewed static successor public-CI binding", () => {
   assert.deepEqual(IAT_V2_MIGRATION_ARTIFACT_BINDING, {
     schema: "iat-v2-migration-artifact-binding/v1",
     status: "BOUND",
     artifactSha256: "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
     artifactBytes: 649_680,
-    sourceHeadCommit: "bb09bd292bab546b3585806fc475c3747dbb8011",
-    sourceHeadTree: "d533dae2994a7464412fa2ffd36fd99f4cc4db07",
-    ciRunId: 32_943_011_981,
+    sourceHeadCommit: "d5f96a65fc46752facbd2263a8e2f3d650390066",
+    sourceHeadTree: "6af1a8c6ba3fc75b2a887f7e881fce11e6a37253",
+    ciRunId: 33_027_585_009,
     ciRunAttempt: 1,
     workflowRef: "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge",
-    evidenceManifestSha256: "1458fb1d736230bbd6aba9edbc7629538ec11babb9c75b3d8ee03af075f905b5",
+    evidenceManifestSha256: "40ba450b1136401ef4bfe984bf7a64c9cc0a9e7f35f64eb554e49f90e5bbe6b6",
   });
   assert.throws(
     () => verifyMigrationArtifactBinding({ artifactPath: "missing.so", evidencePath: "missing.json" }),
@@ -239,7 +239,7 @@ test("bound migration bytes must match the exact public-CI evidence and Git sour
   }
 });
 
-test("capacity math pins the exact first-run artifact rent and excludes transaction fees", () => {
+test("capacity math pins the reviewed successor artifact rent and excludes transaction fees", () => {
   const plan = calculateUpgradeCapacityPlan({
     artifactBytes: 649_680,
     currentProgramCapacityBytes: 597_336,

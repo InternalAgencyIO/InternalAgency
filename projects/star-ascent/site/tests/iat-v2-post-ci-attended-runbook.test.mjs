@@ -109,6 +109,11 @@ test("the base admin shell keeps artifact modes exact and initialization finaliz
   assert.match(runbook, /seven-stage initialization shell remains pinned to its exact pre-upgrade artifact/u);
   assert.match(runbook, /Mode switching must never turn “either reviewed artifact” into an acceptable deployment check/u);
   assert.match(admin, /ACTIVE_PROGRAM_ARTIFACT_BYTES = FEATURE_MODE/u);
+  assert.match(
+    admin,
+    /const FOOTER_SOURCE_COMMIT = FEATURE_MODE\s*\? IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD\s*: SOURCE_COMMIT;/u,
+  );
+  assert.match(admin, /<span>SOURCE \{FOOTER_SOURCE_COMMIT\.slice\(0, 12\)\}<\/span>/u);
   assert.match(admin, /expectedArtifactBytes: ACTIVE_PROGRAM_ARTIFACT_BYTES/u);
   assert.match(admin, /expectedArtifactSha256: ACTIVE_PROGRAM_ARTIFACT_SHA256/u);
   assert.match(admin, /getMultipleAccountsInfoAndContext/u);
