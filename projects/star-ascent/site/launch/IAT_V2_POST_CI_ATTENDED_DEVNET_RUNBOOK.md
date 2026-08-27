@@ -2,6 +2,8 @@
 
 Status: source-only operator procedure. Mainnet remains **HOLD**. Do not begin until the public CI artifact, evidence manifest, source commit, artifact SHA-256, and byte count are bound by the checked-in migration constants and the worktree contains no artifact-input drift.
 
+After fresh exact-head CI succeeds, stop before starting or restarting the console. Review the downloaded artifact and evidence manifest, update every checked-in scalar binding to that exact CI source/run/attempt/tree/manifest, create and verify the binding commit, and rerun the read-only artifact check from a clean artifact-input state. Do not open or reopen any attended page until that binding commit and clean verification both pass.
+
 ## Fixed surfaces
 
 Use PowerShell for the attended Node commands. Before any attended command, set both variables to operator-reviewed absolute files; do not copy the placeholders literally:

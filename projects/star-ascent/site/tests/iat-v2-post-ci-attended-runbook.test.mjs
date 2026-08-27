@@ -31,6 +31,10 @@ test("post-CI runbook fixes localhost consoles and keeps Mainnet on hold", () =>
   assert.match(runbook, /Do not retry that action, clear browser storage, change origin\/profile, or attempt another transaction signature/u);
   assert.match(runbook, /Preserve the consumed old latch and stop on HOLD/u);
   assert.match(runbook, /fresh exact-head CI and a genuinely new source binding/u);
+  assert.match(runbook, /After fresh exact-head CI succeeds, stop before starting or restarting the console/u);
+  assert.match(runbook, /update every checked-in scalar binding to that exact CI source\/run\/attempt\/tree\/manifest/u);
+  assert.match(runbook, /create and verify the binding commit/u);
+  assert.match(runbook, /Do not open or reopen any attended page until that binding commit and clean verification both pass/u);
   assert.match(runbook, /Mainnet remains \*\*HOLD\*\*/u);
   assert.match(runbook, /does not authorize a Mainnet transaction/u);
   assert.match(runbook, new RegExp(IAT_V2_PROGRAM_ID.toBase58(), "u"));
