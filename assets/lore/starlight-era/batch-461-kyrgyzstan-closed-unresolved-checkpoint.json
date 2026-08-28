@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "batch": 461,
+  "country": "Kyrgyzstan",
+  "state": "closed-unresolved",
+  "closedAtUtc": "2026-08-28T15:54:41.644Z",
+  "sceneRange": [
+    1870,
+    1873
+  ],
+  "acceptedSceneIds": [],
+  "acceptedCount": 0,
+  "canonicalAcceptedTotalUnchanged": true,
+  "sceneOutcomes": [
+    {
+      "scene": 1870,
+      "providerUrl": "https://www.meta.ai/prompt/9f72d2f0-5d29-4e91-9a37-ccea78f2c4ea",
+      "classification": "hard-unusable",
+      "accepted": false,
+      "rawArchive": {
+        "captured": true,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1870-kyrgyzstan-bishkek-erkindik-boulevard.jpg",
+        "byteLength": 716266,
+        "sha256": "5893EDCE8921443EDB60E37B2733E37C34916E08CC4A8D087B1C0124C3BCA531",
+        "width": 1013,
+        "height": 1802,
+        "mimeType": "image/jpeg"
+      }
+    },
+    {
+      "scene": 1871,
+      "providerUrl": "https://www.meta.ai/prompt/1016918a-4b5b-411c-ab9e-3a98a688455e",
+      "classification": "hard-unusable",
+      "accepted": false,
+      "rawArchive": {
+        "captured": true,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1871-kyrgyzstan-issyk-kul.jpg",
+        "byteLength": 685561,
+        "sha256": "D9E82C8D4CCE2A50B60A2C596E227456493FA366C605D6A0CB29338B2FA93EDB",
+        "width": 1152,
+        "height": 1740,
+        "mimeType": "image/jpeg"
+      }
+    },
+    {
+      "scene": 1872,
+      "providerUrl": "https://www.meta.ai/prompt/7a0230d4-3653-4bfd-9e99-e1bf615dbba9",
+      "classification": "missing-byte-provider-result",
+      "accepted": false,
+      "rawArchive": {
+        "captured": false,
+        "path": null,
+        "byteLength": null,
+        "sha256": null,
+        "width": null,
+        "height": null,
+        "mimeType": null,
+        "noBytesEvidence": "Visible provider comparison asset remained live, but two Meta Download invocations produced no file and the browser-native media command was unavailable for that node."
+      },
+      "browserRenderedEvidence": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1872-kyrgyzstan-jeti-oguz-browser-rendered-evidence.jpg",
+        "byteLength": 73874,
+        "sha256": "B85BD8C7E64B4F5D3CB2434B6F2A6C536FE31B3ED2C9B4C53A1049B1C3CE22EC",
+        "width": 737,
+        "height": 950,
+        "mimeType": "image/jpeg",
+        "evidenceClass": "browser-rendered-provider-page-screenshot-not-raw-media"
+      }
+    },
+    {
+      "scene": 1873,
+      "providerUrl": "https://www.meta.ai/prompt/cc8ada85-d020-4b51-be71-11c70bd0a321",
+      "classification": "hard-unusable",
+      "accepted": false,
+      "rawArchive": {
+        "captured": true,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1873-kyrgyzstan-song-kul.jpg",
+        "byteLength": 219196,
+        "sha256": "B05A707BE231A883235779AA16D17FD851A264D2BB436177AB8FF7F277AFE60D",
+        "width": 1152,
+        "height": 2048,
+        "mimeType": "image/jpeg"
+      }
+    }
+  ],
+  "xCadenceOutcome": {
+    "completed": true,
+    "counterResetTo": 0,
+    "checkpoint": "batches-451-460-x-cadence-five-captioned-posts-completed-checkpoint.json"
+  },
+  "providerLedger": "provider-evidence/batch-461-kyrgyzstan/provider-ledger.json",
+  "retryPolicy": "Closed scenes 1870-1873 must never be reopened or resent unless a future authoritative checkpoint explicitly authorizes one bounded retry.",
+  "nextBatch": 462,
+  "nextCountry": "authority-required"
+}

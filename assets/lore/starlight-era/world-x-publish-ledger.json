@@ -54,44 +54,54 @@
   },
   "caption": "<primary country> <reserved heart> <secondary country>",
   "captionPolicy": {
-    "status": "active",
-    "format": "<primary country> <reserved heart> <secondary country>",
-    "countryOrder": "Use the primary two-image country first and the secondary one-image country second, matching the countries array and media order in the reservation.",
-    "heartPalette": [
-      "❤️",
-      "🧡",
-      "💛",
-      "💚",
-      "💙",
-      "💜"
-    ],
-    "heartCycle": {
-      "mode": "two-each-shuffled-12-loop",
-      "cycleLength": 12,
-      "cycleNumber": 5,
-      "order": [
-        "💚",
-        "💛",
+    "previousPolicy": {
+      "status": "active",
+      "format": "<primary country> <reserved heart> <secondary country>",
+      "countryOrder": "Use the primary two-image country first and the secondary one-image country second, matching the countries array and media order in the reservation.",
+      "heartPalette": [
+        "❤️",
         "🧡",
         "💛",
-        "💙",
-        "💜",
-        "❤️",
         "💚",
-        "🧡",
         "💙",
-        "❤️",
         "💜"
       ],
-      "nextIndex": 9,
-      "lastReservedImageNumbers": [
-        861,
-        862,
-        859
-      ]
+      "heartCycle": {
+        "mode": "two-each-shuffled-12-loop",
+        "cycleLength": 12,
+        "cycleNumber": 5,
+        "order": [
+          "💚",
+          "💛",
+          "🧡",
+          "💛",
+          "💙",
+          "💜",
+          "❤️",
+          "💚",
+          "🧡",
+          "💙",
+          "❤️",
+          "💜"
+        ],
+        "nextIndex": 9,
+        "lastReservedImageNumbers": [
+          861,
+          862,
+          859
+        ]
+      },
+      "quotes": false,
+      "exactness": "For each 12-post cycle, use exactly two of each palette heart in a shuffled stored order, then materialize a new shuffled 12-heart cycle and repeat. Freeze the selected heart and fully expanded caption in pendingPost or preparedPostQueue before transmission. Retries reuse the frozen reservation without advancing the cycle. Reconcile both the exact three ordered assets and exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
     },
-    "quotes": false,
-    "exactness": "For each 12-post cycle, use exactly two of each palette heart in a shuffled stored order, then materialize a new shuffled 12-heart cycle and repeat. Freeze the selected heart and fully expanded caption in pendingPost or preparedPostQueue before transmission. Retries reuse the frozen reservation without advancing the cycle. Reconcile both the exact three ordered assets and exact caption before deciding whether a retry is safe. Existing confirmed posts are not edited or reposted."
+    "effectiveAtUtc": "2026-08-28T15:55:07.797Z",
+    "scope": "future-two-country-posts-only",
+    "requiredCountryFormat": "Primary Country ❤️ Secondary Country: descriptive caption",
+    "requiredCountryJoiner": " ❤️ ",
+    "captionRequired": true,
+    "hashtags": "Apply the recorded 25%-per-tag rule with maximum two and minimum zero before posting.",
+    "postEditPolicy": "Do not edit after publication. Finalize caption, country heart joiner, hashtags, media order, and alt text before the first Post click.",
+    "existingFivePostPolicy": "Do not edit the five already-published cadence posts from 2026-08-28."
   },
   "followBackPolicy": {
     "status": "disabled",
@@ -205,199 +215,18 @@
     }
   ],
   "pendingPost": null,
-  "preparedPostQueue": [
-    {
-      "id": "thailand-papua-new-guinea-pair-1",
-      "status": "prepared-awaiting-action-time-confirmation",
-      "countries": [
-        "Thailand",
-        "Papua New Guinea"
-      ],
-      "primaryCountry": "Thailand",
-      "secondaryCountry": "Papua New Guinea",
-      "sceneIds": [
-        1810,
-        1811,
-        1814
-      ],
-      "caption": "",
-      "assets": [
-        {
-          "scene": 1810,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1810-thailand-bangkok-chao-phraya.webp",
-          "sha256": "6FC10B0A208FBB011D378BAD22FA10551F22AF3970F95909680B8F89132CE4E0",
-          "alt": "Four fictional women in white-gold, teal, magenta and coral couture share a playful cheek kiss and linked-hands reconciliation on Bangkok's Chao Phraya waterfront, with Rama VIII Bridge and ferries behind them."
-        },
-        {
-          "scene": 1811,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1811-thailand-chiang-mai-tha-phae-gate.webp",
-          "sha256": "64D61DC3FEF90F119EB85AD7621965C166F59E444EAA16D1BB58F87C7FF2B1E6",
-          "alt": "Four fictional women in teal, black-magenta, gold and coral-white couture share an affectionate linked pose beside Chiang Mai's reflective moat, red-brick old-city wall and forested ridge."
-        },
-        {
-          "scene": 1814,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-447-papua-new-guinea/1814-papua-new-guinea-port-moresby-ela-beach.webp",
-          "sha256": "6E52675E7E99BAB4C10C958A6E8413B6ABD07EBCA12673B7F6B348D60201F8C8",
-          "alt": "Four fictional women in coral, white-gold, teal and black couture join hands on Port Moresby's Ela Beach promenade at sunset, with Paga Hill, Fairfax Harbour and ferries behind them."
-        }
-      ]
-    },
-    {
-      "id": "thailand-papua-new-guinea-pair-2",
-      "status": "prepared-awaiting-action-time-confirmation",
-      "countries": [
-        "Thailand",
-        "Papua New Guinea"
-      ],
-      "primaryCountry": "Thailand",
-      "secondaryCountry": "Papua New Guinea",
-      "sceneIds": [
-        1812,
-        1813,
-        1816
-      ],
-      "caption": "",
-      "assets": [
-        {
-          "scene": 1812,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1812-thailand-phang-nga-bay.webp",
-          "sha256": "EC003193BAD2074FC7C9B0028A8AE25FBF620104D6B6448F4F4BAF95D841EF19",
-          "alt": "Four fictional women in teal, white-gold, black-magenta and coral couture share a playful romantic reconciliation above Phang Nga Bay's limestone karsts and emerald water."
-        },
-        {
-          "scene": 1813,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1813-thailand-phuket-old-town.webp",
-          "sha256": "985D7DCF2627A53BA89CB8473E4C0B95CDE2382648E365398F817357372A0263",
-          "alt": "Four fictional women in coral, white, magenta-black and gold couture link hands on a rain-polished Phuket Old Town lane beneath colorful Sino-Portuguese arcades at dusk."
-        },
-        {
-          "scene": 1816,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-447-papua-new-guinea/1816-papua-new-guinea-tufi-fjords.webp",
-          "sha256": "595B7601FD5DC2369F8E88C4473551DE60046903C76B02ED99EF7BEA2F308E20",
-          "alt": "Four fictional women in black-turquoise, white-coral, gold and teal couture share a cheek kiss and linked-hands reconciliation above Tufi's rainforest fjords and turquoise Solomon Sea."
-        }
-      ]
-    },
-    {
-      "id": "sweden-greece-pair-1",
-      "status": "prepared-awaiting-action-time-confirmation",
-      "countries": [
-        "Sweden",
-        "Greece"
-      ],
-      "primaryCountry": "Sweden",
-      "secondaryCountry": "Greece",
-      "sceneIds": [
-        1818,
-        1820,
-        1823
-      ],
-      "caption": "",
-      "assets": [
-        {
-          "scene": 1818,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-448-sweden/1818-sweden-stockholm-riddarfjarden.webp",
-          "sha256": "BDD9DC68F8F64A6F4DBC9EA68B542B39289AC9BE06414E10C16F02C3C9F7560C",
-          "alt": "Four fictional women in navy, white-gold, berry-red and silver couture join hands during a cheek kiss on Stockholm's Riddarfjarden waterfront, with City Hall, bridges and ferries behind them."
-        },
-        {
-          "scene": 1820,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-448-sweden/1820-sweden-gothenburg-harbour-extreme-close.webp",
-          "sha256": "5D08F0FD9CE1328A1E76F72B05BD1D3B57EE44F98061AE3855DEB8342042BBAE",
-          "alt": "Extreme-close portrait of four fictional women in berry, black, gold and silver couture sharing a cheek kiss and linked hands at Gothenburg harbour, with Alvsborg Bridge and the Lipstick building behind them."
-        },
-        {
-          "scene": 1823,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-449-greece/1823-greece-santorini-caldera-oia-extreme-close.webp",
-          "sha256": "F22AD18E26D2E4C72148A781C7008028D9BB785F661B81EAA98EF91DA986ECC0",
-          "alt": "Extreme-close portrait of four fictional women in black, coral, cobalt and white-gold couture sharing a cheek kiss and linked hands above Santorini's caldera and flat-roofed Oia cliff facades."
-        }
-      ]
-    },
-    {
-      "id": "greece-papua-new-guinea-pair-1",
-      "status": "prepared-awaiting-action-time-confirmation",
-      "countries": [
-        "Greece",
-        "Papua New Guinea"
-      ],
-      "primaryCountry": "Greece",
-      "secondaryCountry": "Papua New Guinea",
-      "sceneIds": [
-        1824,
-        1825,
-        1817
-      ],
-      "caption": "",
-      "assets": [
-        {
-          "scene": 1824,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-449-greece/1824-greece-thessaloniki-white-tower.webp",
-          "sha256": "387CD4F0BD2020FBCC379E31AC3D27A6C9D0E8A114DE58C8D1493DB4BFD0EDCF",
-          "alt": "Four fictional women in coral, black, cobalt-white and silver couture laugh through a safe splash on Thessaloniki's rain-polished waterfront, with the White Tower and Thermaic Gulf behind them."
-        },
-        {
-          "scene": 1825,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-449-greece/1825-greece-meteora-final.webp",
-          "sha256": "BDD0DBD6339AF0C797A8D64ED20B307574007E855FC711DF7A634979BD5F1DB0",
-          "alt": "Extreme-close portrait of four fictional women in coral, white-gold, black and amber couture sharing a cheek kiss and linked hands before Meteora's towering rock pillars and valley."
-        },
-        {
-          "scene": 1817,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-447-papua-new-guinea/1817-papua-new-guinea-rabaul-simpson-harbour.webp",
-          "sha256": "CE7581B85D9A0B5B360B93F334F3E5E1D705693FDBE669BA189BA1CF3280E24C",
-          "alt": "Four fictional women in coral, white, gold and teal couture share a linked-hands reconciliation beside Rabaul's Simpson Harbour, with volcanic ridges and tropical water behind them."
-        }
-      ]
-    },
-    {
-      "id": "azerbaijan-sweden-pair-1",
-      "status": "prepared-awaiting-action-time-confirmation",
-      "countries": [
-        "Azerbaijan",
-        "Sweden"
-      ],
-      "primaryCountry": "Azerbaijan",
-      "secondaryCountry": "Sweden",
-      "sceneIds": [
-        1826,
-        1827,
-        1821
-      ],
-      "caption": "",
-      "assets": [
-        {
-          "scene": 1826,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-450-azerbaijan/1826-azerbaijan-baku-boulevard-flame-towers.webp",
-          "sha256": "A517B963D7205EDC04CA3BF2735D6B79F4A717B5DC61B1C248A2A40DD191A93E",
-          "alt": "Four fictional women in pomegranate, cobalt, turquoise and copper couture link hands on Baku's rain-polished Caspian waterfront, with the Flame Towers and marina behind them."
-        },
-        {
-          "scene": 1827,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-450-azerbaijan/1827-azerbaijan-sheki-caravanserai-extreme-close.webp",
-          "sha256": "31E704DCE050020D9F8AC783D5F904D78A250801F969C417459EFF4613B1B328",
-          "alt": "Extreme-close portrait of four fictional women in pomegranate, black, turquoise and amber couture sharing a cheek kiss and linked hands in a secular Sheki caravanserai courtyard with tiled roofs and Caucasus foothills."
-        },
-        {
-          "scene": 1821,
-          "path": "assets/lore/starlight-era/provider-evidence/batch-448-sweden/1821-sweden-visby-gotland-ring-wall.webp",
-          "sha256": "5275C835A64AD429707C3CE1FB2D4263F2B4F8C93FCE777B03140072EA89678A",
-          "alt": "Four fictional women in cobalt, bronze, berry-red and silver couture share a cheek kiss and linked-hands reconciliation on Visby's cobbled lane beside the Gotland ring wall at sunset."
-        }
-      ]
-    }
-  ],
+  "preparedPostQueue": [],
   "publicationCadenceState": {
-    "mode": "render-first-batch-400-bank-97-complete-counted-scene-1623-provisional-meta-selected-pending-chatgpt-finalization-bank-98-next-backlog-zero-counter-five-retained",
+    "mode": "ten-country-cadence-cleared-after-five-live-captioned-x-posts-batch-461-in-flight",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
-    "completedRenderRunsSinceLastX": 5,
-    "completedBanksInCurrentRenderRun": 4,
+    "completedRenderRunsSinceLastX": 0,
+    "completedBanksInCurrentRenderRun": 0,
     "requiredRenderRunsBeforeNextXWindow": 5,
     "banksPerRenderRun": 10,
     "promptsPerBank": 4,
     "provider": "Meta AI",
-    "counterRule": "Five evidence-gated render runs are complete and later render runs continue while the counter remains saturated at five. The X window remains open, but no eligible unpublished two-country three-asset campaign item exists: Batch 398 closed with scene 1614 unresolved and never accepted, and all four Batch 399 scenes remain unresolved. Retain the saturated counter at five until an eligible confirmed X publication is live and fully parity-verified.",
-    "currentPublicationWindowStatus": "open-no-eligible-post-batch-398-and-399-closed-unresolved-batch-400-zero-canonical-accepted-scenes-scene-1623-provisional-meta-pending-chatgpt-finalization-bank-98-next",
+    "counterRule": "The ten completed country cycles 451-460 produced five verified captioned three-image X publications. The cadence counter reset to zero only after all five newest public status URLs were recorded and re-opened without a stale/dead-link state.",
+    "currentPublicationWindowStatus": "completed-five-live-captioned-posts-counter-reset-after-outcome-recorded",
     "fifthRenderRunCountryBanks": [
       44,
       45,
@@ -499,7 +328,9 @@
     "pendingEvidenceRawFileCount": 0,
     "pendingEvidenceUniqueOccurrenceCount": 0,
     "pendingEvidenceClassification": null,
-    "pendingEvidenceLastRemoteVerifiedHead": null
+    "pendingEvidenceLastRemoteVerifiedHead": null,
+    "completedCountryCyclesSinceLastX": 0,
+    "latestXOutcomeRecordedAtUtc": "2026-08-28T15:46:57.639Z"
   },
   "latestUserSchedulingAuthorization": {
     "receivedAtUtc": "2026-08-23T00:15:23.7181719Z",
@@ -536,84 +367,24 @@
     "exactPersistentMetaTabCount": 4
   },
   "latestImmediateXReconciliation": {
-    "status": "signed-in-live-profile-and-authoritative-ledger-reconciled-no-eligible-post",
-    "checkedAtUtc": "2026-08-24T15:34:48.824Z",
-    "userInstructions": [
-      "fill gaps and do x posts now",
-      "confirmed all imgs captions good to dont wait for my conf for click"
+    "status": "completed-five-captioned-three-image-posts-live-verified",
+    "completedAtUtc": "2026-08-28T15:46:57.639Z",
+    "account": "@dogramaci",
+    "browserSurface": "in-app-browser",
+    "finalPostUrls": [
+      "https://x.com/dogramaci/status/2093363239178342701",
+      "https://x.com/dogramaci/status/2093362861187715503",
+      "https://x.com/dogramaci/status/2093363760689741987",
+      "https://x.com/dogramaci/status/2093364039439048882",
+      "https://x.com/dogramaci/status/2093364347196027381"
     ],
-    "signedInAccount": {
-      "displayName": "Raymond R.",
-      "handle": "@dogramaci",
-      "profileUrl": "https://x.com/dogramaci",
-      "profilePostCount": 6297,
-      "liveVerified": true
-    },
-    "browserAudit": {
-      "readOnly": true,
-      "composerOpened": false,
-      "postButtonClicked": false,
-      "recentVisibleImageOnlyStatuses": "test-or-noncampaign-and-do-not-consume-or-create-campaign-backlog"
-    },
-    "authoritativeLedger": {
-      "postRows": 177,
-      "postUrls": 177,
-      "uniquePostUrls": 177,
-      "missingPostUrls": 0,
-      "campaignCaptions": 81,
-      "uniqueCampaignCaptions": 81,
-      "pendingPostUrlAlreadyInPosts": true,
-      "preparedPostQueueUrlAlreadyInPosts": true
-    },
-    "countryEligibility": [
-      {
-        "batch": 398,
-        "country": "Vanuatu",
-        "acceptedScenes": [
-          1612,
-          1613,
-          1615
-        ],
-        "unresolvedScenes": [
-          1614
-        ],
-        "xEligible": false,
-        "reason": "country is not 4/4 accepted and is closed unresolved"
-      },
-      {
-        "batch": 399,
-        "country": "Barbados",
-        "acceptedScenes": [],
-        "unresolvedScenes": [
-          1616,
-          1617,
-          1618,
-          1619
-        ],
-        "xEligible": false,
-        "reason": "five-attempt ceiling exhausted with no accepted scene"
-      },
-      {
-        "batch": 400,
-        "country": "São Tomé and Príncipe",
-        "acceptedScenes": [
-          1623
-        ],
-        "unresolvedScenes": [
-          1620,
-          1621,
-          1622
-        ],
-        "xEligible": false,
-        "reason": "Scene 1623 has a hard-safe canonical ChatGPT clothing-only final remote verified at commit 4166a21afc41c0617026f61f43b0d35260014bd5; scenes 1620 through 1622 remain unresolved"
-      }
+    "supersededEditUrls": [
+      "https://x.com/dogramaci/status/2093360678975275008",
+      "https://x.com/dogramaci/status/2093361406892536177",
+      "https://x.com/dogramaci/status/2093361966781739168"
     ],
-    "eligibleBacklogRemaining": 0,
-    "eligibleThreeAssetTwoCountryPostExists": false,
-    "preparedPost": null,
-    "publicationAction": "none-no-composer-and-no-final-click",
-    "blanketApprovalInterpretation": "The quoted approval does not identify a concrete eligible two-country three-asset reservation with exact caption and files. More importantly, no eligible campaign item exists, so it cannot authorize or trigger a Post click.",
-    "earliestEligibilityPath": "Resolve all four Batch 400 scenes to canonical accepted media and then complete a second later country to 4/4 accepted media; only then can the deterministic 2+1 three-asset two-country reservation, exact caption and hashes be prepared."
+    "staleLinkPolicy": "Only the latest directly opened live edit-version URL is authoritative; superseded URLs are audit-only and must not be shared.",
+    "counterResetAfterOutcomeRecorded": true
   },
   "latestBatch399TransitionAudit": {
     "status": "batch-398-closed-unresolved-batch-399-closed-unresolved-never-accepted-bank-95-counted-batch-400-next",
@@ -8411,6 +8182,380 @@
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Signed-in @dogramaci public status URL verified with exactly three photo attachments and descriptive alt text; caption intentionally blank.",
       "transmission": "user-action-time-confirmed-three-asset-two-country-backlog-clearance"
+    },
+    {
+      "batch": 446,
+      "batches": [
+        446,
+        447
+      ],
+      "sceneIds": [
+        1810,
+        1811,
+        1814
+      ],
+      "postedAt": "2026-08-28T15:30:52.606Z",
+      "verifiedAt": "2026-08-28T15:41:21.091Z",
+      "postUrl": "https://x.com/dogramaci/status/2093363239178342701",
+      "supersededPostUrls": [
+        "https://x.com/dogramaci/status/2093360678975275008"
+      ],
+      "caption": "Bangkok and Chiang Mai meet Port Moresby: four friends turn protection, a playful cheek kiss, and a flash of jealousy into a warm waterfront reconciliation.\n\n#RAZE #WorldXXXSeries",
+      "hashtags": [
+        "#RAZE",
+        "#WorldXXXSeries"
+      ],
+      "hashtagSelection": {
+        "rule": "Each of #RAZE, #WorldXXXSeries, and #InternalAgency independently rolled at 25%; at most two selected; zero permitted.",
+        "rolls": [
+          {
+            "tag": "#RAZE",
+            "roll": 19
+          },
+          {
+            "tag": "#WorldXXXSeries",
+            "roll": 15
+          },
+          {
+            "tag": "#InternalAgency",
+            "roll": 58
+          }
+        ]
+      },
+      "imageNumbers": [
+        1810,
+        1811,
+        1814
+      ],
+      "countries": [
+        "Thailand",
+        "Papua New Guinea"
+      ],
+      "assets": [
+        {
+          "scene": 1810,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1810-thailand-bangkok-chao-phraya.webp",
+          "sha256": "6FC10B0A208FBB011D378BAD22FA10551F22AF3970F95909680B8F89132CE4E0",
+          "alt": "Four fictional women in white-gold, teal, magenta and coral couture share a playful cheek kiss and linked-hands reconciliation on Bangkok's Chao Phraya waterfront, with Rama VIII Bridge and ferries behind them."
+        },
+        {
+          "scene": 1811,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1811-thailand-chiang-mai-tha-phae-gate.webp",
+          "sha256": "64D61DC3FEF90F119EB85AD7621965C166F59E444EAA16D1BB58F87C7FF2B1E6",
+          "alt": "Four fictional women in teal, black-magenta, gold and coral-white couture share an affectionate linked pose beside Chiang Mai's reflective moat, red-brick old-city wall and forested ridge."
+        },
+        {
+          "scene": 1814,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-447-papua-new-guinea/1814-papua-new-guinea-port-moresby-ela-beach.webp",
+          "sha256": "6E52675E7E99BAB4C10C958A6E8413B6ABD07EBCA12673B7F6B348D60201F8C8",
+          "alt": "Four fictional women in coral, white-gold, teal and black couture join hands on Port Moresby's Ela Beach promenade at sunset, with Paga Hill, Fairfax Harbour and ferries behind them."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2093363239178342701/photo/1",
+        "https://x.com/dogramaci/status/2093363239178342701/photo/2",
+        "https://x.com/dogramaci/status/2093363239178342701/photo/3"
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Signed-in @dogramaci latest public status URL re-opened and verified live with exactly three photo endpoints, descriptive alt text on all three images, and no unavailable/dead-link state.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-cadence-publication"
+    },
+    {
+      "batch": 446,
+      "batches": [
+        446,
+        447
+      ],
+      "sceneIds": [
+        1812,
+        1813,
+        1816
+      ],
+      "postedAt": "2026-08-28T15:33:46.285Z",
+      "verifiedAt": "2026-08-28T15:40:26.483Z",
+      "postUrl": "https://x.com/dogramaci/status/2093362861187715503",
+      "supersededPostUrls": [
+        "https://x.com/dogramaci/status/2093361406892536177",
+        "https://x.com/dogramaci/status/2093361966781739168"
+      ],
+      "caption": "From Phang Nga Bay and Phuket Old Town to Tufi's rainforest fjords, the quartet closes a playful jealous beat with linked hands.\n\n#RAZE",
+      "hashtags": [
+        "#RAZE"
+      ],
+      "hashtagSelection": {
+        "rule": "Each of #RAZE, #WorldXXXSeries, and #InternalAgency independently rolled at 25%; at most two selected; zero permitted.",
+        "rolls": [
+          {
+            "tag": "#RAZE",
+            "roll": 16
+          },
+          {
+            "tag": "#WorldXXXSeries",
+            "roll": 81
+          },
+          {
+            "tag": "#InternalAgency",
+            "roll": 92
+          }
+        ]
+      },
+      "imageNumbers": [
+        1812,
+        1813,
+        1816
+      ],
+      "countries": [
+        "Thailand",
+        "Papua New Guinea"
+      ],
+      "assets": [
+        {
+          "scene": 1812,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1812-thailand-phang-nga-bay.webp",
+          "sha256": "EC003193BAD2074FC7C9B0028A8AE25FBF620104D6B6448F4F4BAF95D841EF19",
+          "alt": "Four fictional women in teal, white-gold, black-magenta and coral couture share a playful romantic reconciliation above Phang Nga Bay's limestone karsts and emerald water."
+        },
+        {
+          "scene": 1813,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-446-thailand/1813-thailand-phuket-old-town.webp",
+          "sha256": "985D7DCF2627A53BA89CB8473E4C0B95CDE2382648E365398F817357372A0263",
+          "alt": "Four fictional women in coral, white, magenta-black and gold couture link hands on a rain-polished Phuket Old Town lane beneath colorful Sino-Portuguese arcades at dusk."
+        },
+        {
+          "scene": 1816,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-447-papua-new-guinea/1816-papua-new-guinea-tufi-fjords.webp",
+          "sha256": "595B7601FD5DC2369F8E88C4473551DE60046903C76B02ED99EF7BEA2F308E20",
+          "alt": "Four fictional women in black-turquoise, white-coral, gold and teal couture share a cheek kiss and linked-hands reconciliation above Tufi's rainforest fjords and turquoise Solomon Sea."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2093362861187715503/photo/1",
+        "https://x.com/dogramaci/status/2093362861187715503/photo/2",
+        "https://x.com/dogramaci/status/2093362861187715503/photo/3"
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Signed-in @dogramaci latest public status URL re-opened and verified live with exactly three photo endpoints, descriptive alt text on all three images, and no unavailable/dead-link state.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-cadence-publication"
+    },
+    {
+      "batch": 448,
+      "batches": [
+        448,
+        449
+      ],
+      "sceneIds": [
+        1818,
+        1820,
+        1823
+      ],
+      "postedAt": "2026-08-28T15:43:07.507Z",
+      "verifiedAt": "2026-08-28T15:43:25.275Z",
+      "postUrl": "https://x.com/dogramaci/status/2093363760689741987",
+      "supersededPostUrls": [],
+      "caption": "Stockholm and Gothenburg meet Santorini: cheek kisses, linked hands, and a bright reconciliation across northern harbours and the Aegean.\n\n#InternalAgency",
+      "hashtags": [
+        "#InternalAgency"
+      ],
+      "hashtagSelection": {
+        "rule": "Each of #RAZE, #WorldXXXSeries, and #InternalAgency independently rolled at 25%; at most two selected; zero permitted.",
+        "rolls": [
+          {
+            "tag": "#RAZE",
+            "roll": 59
+          },
+          {
+            "tag": "#WorldXXXSeries",
+            "roll": 61
+          },
+          {
+            "tag": "#InternalAgency",
+            "roll": 13
+          }
+        ]
+      },
+      "imageNumbers": [
+        1818,
+        1820,
+        1823
+      ],
+      "countries": [
+        "Sweden",
+        "Greece"
+      ],
+      "assets": [
+        {
+          "scene": 1818,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-448-sweden/1818-sweden-stockholm-riddarfjarden.webp",
+          "sha256": "BDD9DC68F8F64A6F4DBC9EA68B542B39289AC9BE06414E10C16F02C3C9F7560C",
+          "alt": "Four fictional women in navy, white-gold, berry-red and silver couture join hands during a cheek kiss on Stockholm's Riddarfjarden waterfront, with City Hall, bridges and ferries behind them."
+        },
+        {
+          "scene": 1820,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-448-sweden/1820-sweden-gothenburg-harbour-extreme-close.webp",
+          "sha256": "5D08F0FD9CE1328A1E76F72B05BD1D3B57EE44F98061AE3855DEB8342042BBAE",
+          "alt": "Extreme-close portrait of four fictional women in berry, black, gold and silver couture sharing a cheek kiss and linked hands at Gothenburg harbour, with Alvsborg Bridge and the Lipstick building behind them."
+        },
+        {
+          "scene": 1823,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-449-greece/1823-greece-santorini-caldera-oia-extreme-close.webp",
+          "sha256": "F22AD18E26D2E4C72148A781C7008028D9BB785F661B81EAA98EF91DA986ECC0",
+          "alt": "Extreme-close portrait of four fictional women in black, coral, cobalt and white-gold couture sharing a cheek kiss and linked hands above Santorini's caldera and flat-roofed Oia cliff facades."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2093363760689741987/photo/1",
+        "https://x.com/dogramaci/status/2093363760689741987/photo/2",
+        "https://x.com/dogramaci/status/2093363760689741987/photo/3"
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Signed-in @dogramaci latest public status URL re-opened and verified live with exactly three photo endpoints, descriptive alt text on all three images, and no unavailable/dead-link state.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-cadence-publication"
+    },
+    {
+      "batch": 449,
+      "batches": [
+        449,
+        447
+      ],
+      "sceneIds": [
+        1824,
+        1825,
+        1817
+      ],
+      "postedAt": "2026-08-28T15:44:13.522Z",
+      "verifiedAt": "2026-08-28T15:44:21.879Z",
+      "postUrl": "https://x.com/dogramaci/status/2093364039439048882",
+      "supersededPostUrls": [],
+      "caption": "Thessaloniki and Meteora meet Rabaul: a splash of jealousy gives way to affection and a hand-linked reunion.",
+      "hashtags": [],
+      "hashtagSelection": {
+        "rule": "Each of #RAZE, #WorldXXXSeries, and #InternalAgency independently rolled at 25%; at most two selected; zero permitted.",
+        "rolls": [
+          {
+            "tag": "#RAZE",
+            "roll": 46
+          },
+          {
+            "tag": "#WorldXXXSeries",
+            "roll": 88
+          },
+          {
+            "tag": "#InternalAgency",
+            "roll": 84
+          }
+        ]
+      },
+      "imageNumbers": [
+        1824,
+        1825,
+        1817
+      ],
+      "countries": [
+        "Greece",
+        "Papua New Guinea"
+      ],
+      "assets": [
+        {
+          "scene": 1824,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-449-greece/1824-greece-thessaloniki-white-tower.webp",
+          "sha256": "387CD4F0BD2020FBCC379E31AC3D27A6C9D0E8A114DE58C8D1493DB4BFD0EDCF",
+          "alt": "Four fictional women in coral, black, cobalt-white and silver couture laugh through a safe splash on Thessaloniki's rain-polished waterfront, with the White Tower and Thermaic Gulf behind them."
+        },
+        {
+          "scene": 1825,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-449-greece/1825-greece-meteora-final.webp",
+          "sha256": "BDD0DBD6339AF0C797A8D64ED20B307574007E855FC711DF7A634979BD5F1DB0",
+          "alt": "Extreme-close portrait of four fictional women in coral, white-gold, black and amber couture sharing a cheek kiss and linked hands before Meteora's towering rock pillars and valley."
+        },
+        {
+          "scene": 1817,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-447-papua-new-guinea/1817-papua-new-guinea-rabaul-simpson-harbour.webp",
+          "sha256": "CE7581B85D9A0B5B360B93F334F3E5E1D705693FDBE669BA189BA1CF3280E24C",
+          "alt": "Four fictional women in coral, white, gold and teal couture share a linked-hands reconciliation beside Rabaul's Simpson Harbour, with volcanic ridges and tropical water behind them."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2093364039439048882/photo/1",
+        "https://x.com/dogramaci/status/2093364039439048882/photo/2",
+        "https://x.com/dogramaci/status/2093364039439048882/photo/3"
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Signed-in @dogramaci latest public status URL re-opened and verified live with exactly three photo endpoints, descriptive alt text on all three images, and no unavailable/dead-link state.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-cadence-publication"
+    },
+    {
+      "batch": 450,
+      "batches": [
+        450,
+        448
+      ],
+      "sceneIds": [
+        1826,
+        1827,
+        1821
+      ],
+      "postedAt": "2026-08-28T15:45:27.021Z",
+      "verifiedAt": "2026-08-28T15:45:34.362Z",
+      "postUrl": "https://x.com/dogramaci/status/2093364347196027381",
+      "supersededPostUrls": [],
+      "caption": "Baku and Sheki meet Visby: pomegranate, turquoise, and silver couture frame a playful cheek kiss and a reconciled quartet.\n\n#WorldXXXSeries",
+      "hashtags": [
+        "#WorldXXXSeries"
+      ],
+      "hashtagSelection": {
+        "rule": "Each of #RAZE, #WorldXXXSeries, and #InternalAgency independently rolled at 25%; at most two selected; zero permitted.",
+        "rolls": [
+          {
+            "tag": "#RAZE",
+            "roll": 68
+          },
+          {
+            "tag": "#WorldXXXSeries",
+            "roll": 25
+          },
+          {
+            "tag": "#InternalAgency",
+            "roll": 40
+          }
+        ]
+      },
+      "imageNumbers": [
+        1826,
+        1827,
+        1821
+      ],
+      "countries": [
+        "Azerbaijan",
+        "Sweden"
+      ],
+      "assets": [
+        {
+          "scene": 1826,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-450-azerbaijan/1826-azerbaijan-baku-boulevard-flame-towers.webp",
+          "sha256": "A517B963D7205EDC04CA3BF2735D6B79F4A717B5DC61B1C248A2A40DD191A93E",
+          "alt": "Four fictional women in pomegranate, cobalt, turquoise and copper couture link hands on Baku's rain-polished Caspian waterfront, with the Flame Towers and marina behind them."
+        },
+        {
+          "scene": 1827,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-450-azerbaijan/1827-azerbaijan-sheki-caravanserai-extreme-close.webp",
+          "sha256": "31E704DCE050020D9F8AC783D5F904D78A250801F969C417459EFF4613B1B328",
+          "alt": "Extreme-close portrait of four fictional women in pomegranate, black, turquoise and amber couture sharing a cheek kiss and linked hands in a secular Sheki caravanserai courtyard with tiled roofs and Caucasus foothills."
+        },
+        {
+          "scene": 1821,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-448-sweden/1821-sweden-visby-gotland-ring-wall.webp",
+          "sha256": "5275C835A64AD429707C3CE1FB2D4263F2B4F8C93FCE777B03140072EA89678A",
+          "alt": "Four fictional women in cobalt, bronze, berry-red and silver couture share a cheek kiss and linked-hands reconciliation on Visby's cobbled lane beside the Gotland ring wall at sunset."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2093364347196027381/photo/1",
+        "https://x.com/dogramaci/status/2093364347196027381/photo/2",
+        "https://x.com/dogramaci/status/2093364347196027381/photo/3"
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Signed-in @dogramaci latest public status URL re-opened and verified live with exactly three photo endpoints, descriptive alt text on all three images, and no unavailable/dead-link state.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-cadence-publication"
     }
   ],
   "latestAssistedDrain": {
@@ -8724,9 +8869,9 @@
   },
   "latestTenCountryCadenceAudit": {
     "schemaVersion": 1,
-    "status": "verified-five-qualified-posts-awaiting-fresh-action-time-confirmation",
-    "completedAtUtc": null,
-    "checkedAtUtc": "2026-08-28T12:59:29.501Z",
+    "status": "completed-five-captioned-three-image-posts-live-verified",
+    "completedAtUtc": "2026-08-28T15:46:57.639Z",
+    "checkedAtUtc": "2026-08-28T15:46:57.639Z",
     "account": "@dogramaci",
     "browserSurface": "in-app-browser",
     "liveProfileVerified": true,
@@ -8773,23 +8918,8 @@
       460
     ],
     "completedCountryCycles": 10,
-    "eligibleBacklogRemaining": 21,
+    "eligibleBacklogRemaining": 6,
     "eligibleUnpublishedSceneIds": [
-      1810,
-      1811,
-      1814,
-      1812,
-      1813,
-      1816,
-      1818,
-      1820,
-      1823,
-      1824,
-      1825,
-      1817,
-      1826,
-      1827,
-      1821,
       1828,
       1832,
       1845,
@@ -8798,16 +8928,101 @@
       1866
     ],
     "pairReady": true,
-    "newlyPublished": [],
+    "newlyPublished": [
+      {
+        "postUrl": "https://x.com/dogramaci/status/2093363239178342701",
+        "countries": [
+          "Thailand",
+          "Papua New Guinea"
+        ],
+        "sceneIds": [
+          1810,
+          1811,
+          1814
+        ],
+        "caption": "Bangkok and Chiang Mai meet Port Moresby: four friends turn protection, a playful cheek kiss, and a flash of jealousy into a warm waterfront reconciliation.\n\n#RAZE #WorldXXXSeries",
+        "hashtags": [
+          "#RAZE",
+          "#WorldXXXSeries"
+        ],
+        "verifiedAt": "2026-08-28T15:41:21.091Z"
+      },
+      {
+        "postUrl": "https://x.com/dogramaci/status/2093362861187715503",
+        "countries": [
+          "Thailand",
+          "Papua New Guinea"
+        ],
+        "sceneIds": [
+          1812,
+          1813,
+          1816
+        ],
+        "caption": "From Phang Nga Bay and Phuket Old Town to Tufi's rainforest fjords, the quartet closes a playful jealous beat with linked hands.\n\n#RAZE",
+        "hashtags": [
+          "#RAZE"
+        ],
+        "verifiedAt": "2026-08-28T15:40:26.483Z"
+      },
+      {
+        "postUrl": "https://x.com/dogramaci/status/2093363760689741987",
+        "countries": [
+          "Sweden",
+          "Greece"
+        ],
+        "sceneIds": [
+          1818,
+          1820,
+          1823
+        ],
+        "caption": "Stockholm and Gothenburg meet Santorini: cheek kisses, linked hands, and a bright reconciliation across northern harbours and the Aegean.\n\n#InternalAgency",
+        "hashtags": [
+          "#InternalAgency"
+        ],
+        "verifiedAt": "2026-08-28T15:43:25.275Z"
+      },
+      {
+        "postUrl": "https://x.com/dogramaci/status/2093364039439048882",
+        "countries": [
+          "Greece",
+          "Papua New Guinea"
+        ],
+        "sceneIds": [
+          1824,
+          1825,
+          1817
+        ],
+        "caption": "Thessaloniki and Meteora meet Rabaul: a splash of jealousy gives way to affection and a hand-linked reunion.",
+        "hashtags": [],
+        "verifiedAt": "2026-08-28T15:44:21.879Z"
+      },
+      {
+        "postUrl": "https://x.com/dogramaci/status/2093364347196027381",
+        "countries": [
+          "Azerbaijan",
+          "Sweden"
+        ],
+        "sceneIds": [
+          1826,
+          1827,
+          1821
+        ],
+        "caption": "Baku and Sheki meet Visby: pomegranate, turquoise, and silver couture frame a playful cheek kiss and a reconciled quartet.\n\n#WorldXXXSeries",
+        "hashtags": [
+          "#WorldXXXSeries"
+        ],
+        "verifiedAt": "2026-08-28T15:45:34.362Z"
+      }
+    ],
     "pendingQualifiedPost": null,
     "queueState": {
       "pendingPost": null,
-      "preparedPostQueueCount": 5,
+      "preparedPostQueueCount": 0,
       "deferredPostCheckpoint": null
     },
-    "reconciliation": "Five mutually exclusive captionless 2+1 posts are prepared. Their scene IDs are absent from the publication ledger, and the visible recent live statuses have 1, 4 and 4 photo endpoints rather than any prepared three-asset reservation.",
-    "action": "No X upload or Post submitted. Fresh action-time confirmation is required for the exact five prepared reservations.",
-    "counterResetAfterOutcomeRecorded": false,
+    "reconciliation": "All five mutually exclusive prepared 2+1 sets were published from the signed-in @dogramaci in-app browser. Each newest edit-version URL was opened directly and verified live with exactly three photo endpoints and all three alt descriptions. Superseded edit-version URLs are retained only as audit history.",
+    "action": "Five captioned X posts completed; hashtag rolls recorded; only latest live URLs are authoritative.",
+    "counterResetAfterOutcomeRecorded": true,
     "nextRenderBatch": 461,
     "nextCountry": "Kyrgyzstan",
     "browserBlockers": []
@@ -8961,5 +9176,10 @@
       ],
       "reconciliation": "The three visible recent unpinned statuses expose 1, 4 and 4 photo endpoints; none matches any exact three-asset prepared reservation. No prepared scene ID is present in the authoritative publication ledger."
     }
+  },
+  "latestUserCaptionDirective": {
+    "observedAtUtc": "2026-08-28T15:55:07.797Z",
+    "instruction": "Captions require a red heart emoji between countries; do not edit existing posts; apply from now on.",
+    "normalizedRule": "Future captions begin with Primary Country ❤️ Secondary Country and are final before publication. Existing posts remain unchanged."
   }
 }
