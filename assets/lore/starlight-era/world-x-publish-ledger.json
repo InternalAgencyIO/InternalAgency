@@ -8892,5 +8892,54 @@
     "publishingPerformed": false,
     "destinationAccount": "@dogramaci",
     "nextCountry": "Laos"
+  },
+  "latestBatch458LaosReconciliation": {
+    "schemaVersion": 1,
+    "checkedAtUtc": "2026-08-28T12:08:29.630Z",
+    "batch": 458,
+    "country": "Laos",
+    "acceptedSceneIds": [],
+    "eligibleBacklogRemaining": 19,
+    "preparedPostQueueCount": 5,
+    "preparedAssetCount": 15,
+    "unreservedAcceptedSceneIds": [
+      1828,
+      1832,
+      1845,
+      1849
+    ],
+    "newLegalPairPrepared": false,
+    "publishingPerformed": false,
+    "destinationAccount": "@dogramaci",
+    "nextCountry": "Turkmenistan"
+  },
+  "latestBatch459TurkmenistanReconciliation": {
+    "schemaVersion": 1,
+    "checkedAtUtc": "2026-08-28T12:44:47.948Z",
+    "batch": 459,
+    "country": "Turkmenistan",
+    "acceptedSceneIds": [
+      1865
+    ],
+    "eligibleBacklogRemaining": 20,
+    "preparedPostQueueCount": 5,
+    "preparedAssetCount": 15,
+    "unreservedAcceptedSceneIds": [
+      1828,
+      1832,
+      1845,
+      1849,
+      1865
+    ],
+    "newLegalPairPrepared": false,
+    "publishingPerformed": false,
+    "destinationAccount": "@dogramaci",
+    "xCadence": {
+      "completedCountryCyclesSinceLastReset": 9,
+      "publishThreshold": 10,
+      "publishDue": false,
+      "counterReset": false
+    },
+    "nextCountry": "Libya"
   }
 }
