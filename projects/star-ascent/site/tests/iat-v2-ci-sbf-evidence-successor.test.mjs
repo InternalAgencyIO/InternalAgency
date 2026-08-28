@@ -140,6 +140,39 @@ test("successor validation accepts only source descendants with an unchanged exa
     writeManifest();
     assert.equal(validateSbfEvidence({ projectRoot: root, manifestPath, allowDescendantCheckout: true }).status, "PASS");
 
+    const outsideManifest = `${root}-outside.json`;
+    try {
+      writeFileSync(outsideManifest, "{}\n");
+      assert.throws(
+        () => validateSbfEvidence({
+          projectRoot: root,
+          manifestPath: outsideManifest,
+          allowDescendantCheckout: true,
+          verifyArtifactFiles: false,
+        }),
+        /outside the project root/u,
+      );
+    } finally {
+      rmSync(outsideManifest, { force: true });
+    }
+
+    rmSync(join(root, "target", "verifiable", "iat_v2.so"));
+    rmSync(join(root, "target", "idl", "iat_v2.json"));
+    rmSync(join(root, "target", "iat-v2-sbf-build.log"));
+    assert.equal(validateSbfEvidence({
+      projectRoot: root,
+      manifestPath,
+      allowDescendantCheckout: true,
+      verifyArtifactFiles: false,
+    }).status, "PASS");
+    assert.throws(
+      () => validateSbfEvidence({ projectRoot: root, manifestPath, allowDescendantCheckout: true }),
+      /ENOENT|no such file/u,
+    );
+    write(root, "target/verifiable/iat_v2.so", programBinary);
+    write(root, "target/idl/iat_v2.json", programIdl);
+    write(root, "target/iat-v2-sbf-build.log", buildLog);
+
     const unrelatedCommit = git(root, ["commit-tree", sourceHeadTree, "-m", "unrelated"]);
     writeManifest({ sourceCommit: unrelatedCommit });
     assert.throws(

@@ -17,6 +17,9 @@ const {
   validateSbfEvidence,
 } = await import("./validate-iat-v2-ci-sbf-evidence.mjs");
 const { createIatV2AttendedGitRunner } = await import("./lib/iat-v2-attended-git-runtime.mjs");
+const {
+  verifyIatV2DevnetBufferRuntimeBinding,
+} = await import("./lib/iat-v2-devnet-buffer-runtime-binding.mjs");
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const DEVNET_GENESIS_HASH = "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG";
@@ -244,6 +247,55 @@ export function verifyMigrationArtifactBinding({
   });
 }
 
+export function verifyDevnetBufferRecoveryRuntimeBinding({
+  projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), ".."),
+  binding,
+  runtimeEvidencePath = "target/verifiable/iat-v2-recovery-runtime-build-evidence.json",
+  git = defaultGit,
+  verifyRuntimeBinding = verifyIatV2DevnetBufferRuntimeBinding,
+  validateRuntimeCiEvidence = validateSbfEvidence,
+} = {}) {
+  try {
+    const runtime = verifyRuntimeBinding({ projectRoot, binding, git });
+    const evidence = canonicalRegularFile(projectRoot, runtimeEvidencePath, "recovery runtime CI evidence manifest");
+    const evidenceBytes = readFileSync(evidence);
+    const manifest = JSON.parse(evidenceBytes.toString("utf8"));
+    const canonicalCi = validateRuntimeCiEvidence({
+      projectRoot,
+      manifestPath: runtimeEvidencePath,
+      allowDescendantCheckout: true,
+      verifyArtifactFiles: false,
+      git,
+    });
+    check(sha256(evidenceBytes) === runtime.evidenceManifestSha256, "RUNTIME_CI_EVIDENCE_HOLD", "recovery runtime CI evidence SHA-256 disagrees with the binding anchor");
+    check(canonicalCi?.manifestSha256 === runtime.evidenceManifestSha256, "RUNTIME_CI_EVIDENCE_HOLD", "canonical runtime CI validation returned a different manifest SHA-256");
+    check(canonicalCi?.sourceHeadCommit === runtime.sourceHeadCommit, "RUNTIME_CI_EVIDENCE_HOLD", "runtime CI source commit disagrees with the binding anchor");
+    check(canonicalCi?.runUrl === `https://github.com/InternalAgencyIO/InternalAgency/actions/runs/${runtime.ciRunId}/attempts/${runtime.ciRunAttempt}`, "RUNTIME_CI_EVIDENCE_HOLD", "runtime CI public run disagrees with the binding anchor");
+    check(manifest.sourceBinding?.sourceHeadTree === runtime.sourceHeadTree, "RUNTIME_CI_EVIDENCE_HOLD", "runtime CI source tree disagrees with the binding anchor");
+    check(manifest.sourceBinding?.checkoutCommit === runtime.checkoutCommit
+      && manifest.sourceBinding?.checkoutTree === runtime.checkoutTree
+      && manifest.sourceBinding?.checkoutRelation === runtime.checkoutRelation
+      && manifest.sourceBinding?.workflowEvent === "pull_request", "RUNTIME_CI_EVIDENCE_HOLD", "runtime CI checkout binding disagrees with the binding anchor");
+    check(manifest.ciProvenance?.repository === "InternalAgencyIO/InternalAgency"
+      && manifest.ciProvenance?.repositoryId === 1_313_660_798
+      && manifest.ciProvenance?.workflowRef === runtime.workflowRef
+      && manifest.ciProvenance?.runId === runtime.ciRunId
+      && manifest.ciProvenance?.runAttempt === runtime.ciRunAttempt
+      && manifest.ciProvenance?.runnerOs === "Linux"
+      && manifest.ciProvenance?.runnerArch === "X64", "RUNTIME_CI_EVIDENCE_HOLD", "runtime CI provenance disagrees with the binding anchor");
+    check(manifest.artifacts?.programBinary?.sha256 === runtime.artifactSha256
+      && manifest.artifacts?.programBinary?.bytes === runtime.artifactBytes
+      && runtime.artifactSha256 === IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256
+      && runtime.artifactBytes === IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES, "RUNTIME_CI_EVIDENCE_HOLD", "runtime CI program artifact tuple disagrees with the retained migration artifact binding");
+    return runtime;
+  } catch (error) {
+    fail(
+      error?.code ?? "RECOVERY_RUNTIME_BINDING_HOLD",
+      `Devnet buffer recovery runtime binding failed: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+}
+
 function integer(value, label) {
   if (!Number.isSafeInteger(value) || value < 0) {
     fail("CAPACITY_INPUT_HOLD", `${label} must be a non-negative safe integer`, { hold: false });
@@ -417,6 +469,23 @@ async function main() {
     })));
     return;
   }
+  if (command === "verify-recovery") {
+    const unexpected = Object.keys(options).filter((key) => !["artifact", "evidence", "runtime-evidence"].includes(key));
+    if (unexpected.length > 0) fail("CLI_USAGE", `unexpected verify-recovery option: --${unexpected[0]}`, { hold: false });
+    const runtimeBinding = verifyDevnetBufferRecoveryRuntimeBinding({ runtimeEvidencePath: options["runtime-evidence"] });
+    const artifactBinding = verifyMigrationArtifactBinding({
+      artifactPath: options.artifact,
+      evidencePath: options.evidence,
+    });
+    console.log(JSON.stringify({ ...artifactBinding, runtimeBinding }));
+    return;
+  }
+  if (command === "verify-runtime") {
+    const unexpected = Object.keys(options).filter((key) => key !== "runtime-evidence");
+    if (unexpected.length > 0) fail("CLI_USAGE", `unexpected verify-runtime option: --${unexpected[0]}`, { hold: false });
+    console.log(JSON.stringify(verifyDevnetBufferRecoveryRuntimeBinding({ runtimeEvidencePath: options["runtime-evidence"] })));
+    return;
+  }
   if (command === "capacity") {
     const unexpected = Object.keys(options).filter((key) => key !== "artifact-bytes");
     if (unexpected.length > 0) fail("CLI_USAGE", `unexpected capacity option: --${unexpected[0]}`, { hold: false });
@@ -424,7 +493,7 @@ async function main() {
     console.log(JSON.stringify(await observeDevnetUpgradeCapacity({ artifactBytes: Number(options["artifact-bytes"]) }), null, 2));
     return;
   }
-  fail("CLI_USAGE", "usage: iat-v2-devnet-buffer-preflight.mjs verify [--artifact PATH --evidence PATH] | capacity --artifact-bytes N", { hold: false });
+  fail("CLI_USAGE", "usage: iat-v2-devnet-buffer-preflight.mjs verify [--artifact PATH --evidence PATH] | verify-recovery [--artifact PATH --evidence PATH --runtime-evidence PATH] | verify-runtime [--runtime-evidence PATH] | capacity --artifact-bytes N", { hold: false });
 }
 
 if (resolve(process.argv[1] ?? "") === fileURLToPath(import.meta.url)) {

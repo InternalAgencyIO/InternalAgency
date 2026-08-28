@@ -1,8 +1,11 @@
 # IAT V2 post-CI attended Devnet runbook
 
-Status: source-only operator procedure. Mainnet remains **HOLD**. Do not begin until the public CI artifact, evidence manifest, source commit, artifact SHA-256, and byte count are bound by the checked-in migration constants and the worktree contains no artifact-input drift.
+Status: source-only operator procedure. Mainnet remains **HOLD**. Do not begin until both independent bindings below pass and the binding anchor plus runtime and artifact-input worktrees are clean.
 
-After fresh exact-head CI succeeds, stop before starting or restarting the console. Review the downloaded artifact and evidence manifest, update every checked-in scalar binding to that exact CI source/run/attempt/tree/manifest, create and verify the binding commit, and rerun the read-only artifact check from a clean artifact-input state. Do not open or reopen any attended page until that binding commit and clean verification both pass.
+1. The immutable migration artifact/evidence binding remains exactly the reviewed 649,680-byte artifact `771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01`, source `a03fe71dd66cd1650b8d0353e486786df30b83e9`, source tree `ffe82fcf8fd3d851c09a937ebec945121137e546`, public CI run `33161771816` attempt 1, and evidence-manifest SHA-256 `ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9`. These existing migration constants prove the retained binary/evidence tuple and remain tied to that source; never update or rebind the immutable migration artifact/evidence constants to the recovery source.
+2. The recovery-runtime binding is separate. Implementation commit `S` contains the exact recovery closure and an unbound anchor. Fresh exact-head public PR CI must run for `S`. Direct one-parent successor commit `B` may change only `scripts/data/iat-v2-devnet-buffer-runtime-binding.json`; it binds `S` and its tree, the exact runtime-closure digest, PR-merge checkout commit/tree/relation, CI run/attempt/workflow, runtime evidence-manifest SHA-256, and the same retained artifact tuple. Verification requires the checked-out HEAD to be exactly `B`, the `S` → `B` committed diff to contain only that data anchor, and the anchor plus entire runtime closure to be clean. This source/public-CI lane does not replace the immutable migration artifact/evidence lane and is not evidence of upload, signing, broadcast, authority handoff, deployment, or Mainnet authorization.
+
+After fresh exact-head CI succeeds, stop before starting or restarting the console. Review the downloaded recovery-runtime evidence manifest, leave the immutable migration constants unchanged, populate only the canonical runtime anchor in direct successor `B`, create and verify the binding commit, and rerun the combined read-only recovery preflight from clean runtime and artifact-input states. Do not open or reopen any attended page until that binding commit and clean verification both pass.
 
 ## Fixed surfaces
 
@@ -23,7 +26,9 @@ $env:Path = "$(Split-Path -Parent $NodeExe);$env:Path"
 & $NodeExe $NpmCli run iat:v2-admin
 ```
 
-The `preiat:v2-admin` lifecycle gate repeats the version check before Vite or any console dependency can load. Use only these localhost URLs:
+The `preiat:v2-admin` lifecycle gate repeats the version check before Vite or any console dependency can load. The recovery runtime closure binds the committed `package.json` and `package-lock.json` source bytes. This is a declared-dependency source binding only: it does not bind installed `node_modules` bytes, prove byte-for-byte local dependency integrity, or support a claim of installed dependency provenance. A stronger installed-dependency claim would require a separately reviewed byte-level installation manifest; this ceremony makes no such claim.
+
+Use only these localhost URLs:
 
 1. Program capacity and upgrade: `http://127.0.0.1:4175/?mode=upgrade`
 2. Program capacity and upgrade with a verified buffer: `http://127.0.0.1:4175/?mode=upgrade&buffer=<BUFFER_ADDRESS>`
@@ -48,13 +53,21 @@ Signed-pending state on migration and feature surfaces remains memory-only. Thos
 
 The feature-mode shell must require the exact migration artifact before it exposes feature actions. The archived seven-stage initialization shell remains pinned to its exact pre-upgrade artifact and may only inspect chain state or export already-existing historical receipts; it cannot select, sign, or broadcast an initialization action. Mode switching must never turn “either reviewed artifact” into an acceptable deployment check.
 
-## 1. Bind and inspect the CI artifact
+## 1. Bind and inspect the independent CI surfaces
 
 Run the read-only artifact check:
 
 ```powershell
 & $NodeExe scripts/iat-v2-devnet-buffer-preflight.mjs verify --artifact target/verifiable/iat_v2.so --evidence target/verifiable/iat-v2-build-evidence.json
 ```
+
+This first command verifies only the immutable migration artifact/evidence lane. It must continue to report source `a03fe71dd66cd1650b8d0353e486786df30b83e9`; a report that substitutes the recovery source is a stop. After `S` public CI and the data-only `B` binding commit are complete, run the combined read-only check:
+
+```powershell
+& $NodeExe scripts/iat-v2-devnet-buffer-preflight.mjs verify-recovery --artifact target/verifiable/iat_v2.so --evidence target/verifiable/iat-v2-build-evidence.json --runtime-evidence target/verifiable/iat-v2-recovery-runtime-build-evidence.json
+```
+
+The combined result must independently pass the retained migration artifact/evidence tuple and the recovery-runtime `S`/`B` source, closure, public-CI, and manifest binding. Matching artifact hash and byte count across the lanes does not merge their source provenance.
 
 Copy the returned exact artifact byte count into this read-only capacity check:
 
@@ -117,7 +130,15 @@ Run the fresh-buffer helper from an attached PowerShell console using this liter
 wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/rebuild-iat-v2-devnet-buffer-fresh.sh
 ```
 
-The rebuild has exactly two attended `/dev/tty` gates. First, after reviewing Devnet, artifact/evidence/source bindings, exact rent, the fixed 100,000,000-lamport upload-fee-headroom policy, balance, all exact tool identities, and the retained-old-buffer policy, type `REBUILD-DEVNET-FRESH`. The helper then atomically creates the fixed persistent `devnet-buffer-rebuild-v1/attempt-one-use` reservation; any existing or unexpected recovery entry is a permanent read-only recovery HOLD. It snapshots the exact reviewed artifact into that private namespace, binds the snapshot to an `O_NOFOLLOW` descriptor, durably records source/tool/target policy, and never uploads the mutable checkout pathname. After the helper creates and displays one fresh target address, review it and type the target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>` value exactly. Only the second gate admits the sole fresh-buffer write CLI invocation. That invocation uses `--max-sign-attempts 5`, which may re-sign or resend unconfirmed upload chunks across as many as five blockhash iterations; it is not a claim of one Solana transaction or one signature. The exact rent-plus-headroom floor is freshly reobserved immediately before upload. Record the finalized `BUFFER` printed by the helper. If either gate fails or final reconciliation is ambiguous, stop; do not rerun, and preserve the protected one-use recovery directory for separately reviewed read-only diagnosis.
+The rebuild has exactly two attended `/dev/tty` gates. First, after reviewing Devnet, artifact/evidence/source bindings, exact rent, the fixed 100,000,000-lamport upload-fee-headroom policy, balance, all exact tool identities, and the retained-old-buffer policy, type `REBUILD-DEVNET-FRESH`. The helper then atomically creates the fixed persistent `devnet-buffer-rebuild-v1/attempt-one-use` reservation; any existing reservation makes the original fresh entrypoint fail closed before tooling, network access, payer-key access, or a terminal prompt. It snapshots the exact reviewed artifact into that private namespace, binds the snapshot to an `O_NOFOLLOW` descriptor, durably records source/tool/target policy, and never uploads the mutable checkout pathname. After the helper creates and displays one fresh target address, review it and type the target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>` value exactly. Only the second gate admits the sole fresh-buffer write CLI invocation. That invocation uses `--max-sign-attempts 5`, which may re-sign or resend unconfirmed upload chunks across as many as five blockhash iterations; it is not a claim of one Solana transaction or one signature. The exact rent-plus-headroom floor is freshly reobserved immediately before upload. Record the finalized `BUFFER` printed by the helper. If either gate fails or final reconciliation is ambiguous, stop; do not rerun, and preserve the protected one-use recovery directory for separately reviewed recovery or read-only diagnosis.
+
+The 2026-08-28 descriptor incident consumed the current fresh entrypoint after it created the signer and artifact snapshot but before it derived a buffer address or invoked `program write-buffer`; the exact evidence boundary is recorded in `IAT_V2_DEVNET_BUFFER_FD_INCIDENT_20260828.md`. **Do not run the fresh command above again for the current reservation.** Only after the immutable migration artifact/evidence preflight and the separate recovery-runtime `S`/`B` preflight both pass from the clean binding successor, run this literal recovery entrypoint from an attached PowerShell console:
+
+```powershell
+wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/recover-iat-v2-devnet-buffer-pre-address.sh
+```
+
+The recovery entrypoint accepts no arguments and creates no key, reservation, or artifact snapshot. Never append `recover-pre-address` to the fresh-helper command manually; use only the no-argument wrapper above. It admits only the exact existing pre-address phase: the protected signer and reviewed artifact snapshot must be the only attempt entries, while the address record, reservation manifest, and finalized reconstruction must all be absent. It preserves any unexpected or later-phase state and stops. After reviewing the same exact Devnet/tool/source/artifact/funding boundary plus `RECOVERY MODE: SAME RESERVED SIGNER; PRE-ADDRESS FAILURE ONLY; NO NEW KEY OR RESERVATION`, type `RECOVER-DEVNET-BUFFER-PRE-ADDRESS` only when the attached helper asks on `/dev/tty`, never at a `PS>` prompt. That first phrase authorizes protected continuation and local public-address/manifest creation only; it does not authorize upload. The helper then binds the existing signer and artifact snapshot to their protected descriptors, derives and durably records the fresh public buffer address, and reaches the same separate target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>` gate. Only that second immediate confirmation admits the sole shared `program write-buffer` invocation; `--max-sign-attempts 5` may internally re-sign or resend unconfirmed chunks and is not a one-transaction claim. This helper never prompts the Model T and never performs authority handoff. Never print, copy, digest, delete, rename, reset, replace, or reconstruct the protected signer. If recovery stops after deriving the address, if the target-bound gate is declined, or if the sole write result is ambiguous, do not run either helper again; preserve the entire reservation for read-only reconciliation. Continue to the separate handoff only after the helper prints finalized upload success plus the exact `BUFFER`, hash, bytes, and payer authority. Until independently evidenced, the fresh buffer upload and address, finalized buffer hash and bytes, authority handoff, artifact deployment, migrations, feature actions, aggregate proof, release, and every Mainnet action remain HOLD.
 
 The historical buffer `Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6` is retained. The rebuild helper never closes or mutates it, and it does not reclaim its lamports.
 

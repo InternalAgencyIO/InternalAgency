@@ -8,6 +8,10 @@ const attendedIncident = readFileSync(
   "launch/IAT_V2_ATTENDED_DEVNET_INCIDENT_20260827.md",
   "utf8",
 );
+const bufferDescriptorIncident = readFileSync(
+  "launch/IAT_V2_DEVNET_BUFFER_FD_INCIDENT_20260828.md",
+  "utf8",
+);
 const upgrade = [
   "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
   "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx",
@@ -32,13 +36,35 @@ test("post-CI runbook fixes localhost consoles and keeps Mainnet on hold", () =>
   assert.match(runbook, /Preserve the consumed old latch and stop on HOLD/u);
   assert.match(runbook, /fresh exact-head CI and a genuinely new source binding/u);
   assert.match(runbook, /After fresh exact-head CI succeeds, stop before starting or restarting the console/u);
-  assert.match(runbook, /update every checked-in scalar binding to that exact CI source\/run\/attempt\/tree\/manifest/u);
+  assert.match(runbook, /never update or rebind the immutable migration artifact\/evidence constants to the recovery source/u);
   assert.match(runbook, /create and verify the binding commit/u);
   assert.match(runbook, /Do not open or reopen any attended page until that binding commit and clean verification both pass/u);
   assert.match(runbook, /Mainnet remains \*\*HOLD\*\*/u);
   assert.match(runbook, /does not authorize a Mainnet transaction/u);
   assert.match(runbook, new RegExp(IAT_V2_PROGRAM_ID.toBase58(), "u"));
   assert.doesNotMatch(runbook, /IATv2jRuKKmT41NKsb1iYwWba4wtviisFTcKMcpVR7X/u);
+});
+
+test("runbook keeps the immutable artifact lane independent from the recovery-runtime S/B lane", () => {
+  for (const exact of [
+    "a03fe71dd66cd1650b8d0353e486786df30b83e9",
+    "ffe82fcf8fd3d851c09a937ebec945121137e546",
+    "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
+    "ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9",
+    "33161771816",
+    "scripts/data/iat-v2-devnet-buffer-runtime-binding.json",
+    "target/verifiable/iat-v2-recovery-runtime-build-evidence.json",
+  ]) {
+    assert.ok(runbook.includes(exact), `runbook must include independent binding pin: ${exact}`);
+  }
+  assert.match(runbook, /The immutable migration artifact\/evidence binding remains exactly/u);
+  assert.match(runbook, /The recovery-runtime binding is separate/u);
+  assert.match(runbook, /Implementation commit `S`[\s\S]*Direct one-parent successor commit `B` may change only/u);
+  assert.match(runbook, /`S` → `B` committed diff to contain only that data anchor/u);
+  assert.match(runbook, /does not replace the immutable migration artifact\/evidence lane/u);
+  assert.match(runbook, /verify-recovery --artifact[\s\S]*--runtime-evidence target\/verifiable\/iat-v2-recovery-runtime-build-evidence\.json/u);
+  assert.match(runbook, /does not bind installed `node_modules` bytes/u);
+  assert.match(runbook, /does not merge their source provenance/u);
 });
 
 test("the incident preserves the consumed ceremony and requires a fresh source-bound replacement", () => {
@@ -155,6 +181,30 @@ test("runbook freezes the one-use CAS and the two fresh-buffer terminal gates", 
   assert.match(runbook, /historical buffer `Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6` is retained/u);
   assert.match(runbook, /never closes or mutates it/u);
   assert.doesNotMatch(runbook, /program close|close the old buffer|reclaim its lamports[^.]*\b(?:may|will|does)\b/iu);
+});
+
+test("runbook binds the descriptor incident to one exact pre-address continuation", () => {
+  assert.match(runbook, /recover-iat-v2-devnet-buffer-pre-address\.sh/u);
+  assert.match(runbook, /Fresh exact-head public PR CI/u);
+  assert.match(runbook, /Never append `recover-pre-address`/u);
+  assert.match(runbook, /type `RECOVER-DEVNET-BUFFER-PRE-ADDRESS` only when the attached helper asks on `\/dev\/tty`, never at a `PS>` prompt/u);
+  assert.match(runbook, /first phrase authorizes protected continuation and local public-address\/manifest creation only; it does not authorize upload/u);
+  assert.match(runbook, /same separate target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>` gate/u);
+  assert.match(runbook, /never prompts the Model T and never performs authority handoff/u);
+  assert.match(runbook, /every Mainnet action remain HOLD/u);
+
+  assert.match(bufferDescriptorIncident, /DEVNET HOLD \/ ONE-USE PRE-ADDRESS STATE PRESERVED \/ NO BUFFER WRITE ATTEMPT/u);
+  assert.match(bufferDescriptorIncident, /cannot statx '\/proc\/self\/fd\/10'/u);
+  assert.match(bufferDescriptorIncident, /target-bound\s+`UPLOAD-<FRESH_BUFFER_ADDRESS>` gate was never reached/u);
+  assert.match(bufferDescriptorIncident, /never\s+invoked `solana program write-buffer`/u);
+  assert.match(bufferDescriptorIncident, /historical buffer was untouched/u);
+  assert.match(bufferDescriptorIncident, /No\s+Model T prompt was involved/u);
+  assert.match(bufferDescriptorIncident, /two independent binding lanes/u);
+  assert.match(bufferDescriptorIncident, /must not be rewritten or described as bound\s+to the newer recovery source/u);
+  assert.match(bufferDescriptorIncident, /direct one-parent, data-only\s+successor commit `B`/u);
+  assert.match(bufferDescriptorIncident, /does not bind installed `node_modules` bytes/u);
+  assert.match(bufferDescriptorIncident, /not a general retry path/u);
+  assert.match(bufferDescriptorIncident, /not a transaction receipt,[\s\S]*deployment proof,[\s\S]*Mainnet authorization/u);
 });
 
 test("operator sequence preserves conditional capacity, buffer, migration, backfill, and feature order", () => {

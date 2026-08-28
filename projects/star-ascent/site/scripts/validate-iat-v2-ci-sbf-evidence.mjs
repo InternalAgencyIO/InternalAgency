@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { lstatSync, readFileSync, realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { isAbsolute, normalize, relative, resolve } from "node:path";
+import { isAbsolute, normalize, relative, resolve, sep } from "node:path";
 
 const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
 const expectedRepository = "InternalAgencyIO/InternalAgency";
@@ -73,6 +73,13 @@ function assertCanonicalRegularFile(root, candidate, expectedPath, label) {
   const entry = lstatSync(candidate);
   check(entry.isFile() && !entry.isSymbolicLink(), `${label} must be a regular non-symlink file`);
   const resolvedRelativePath = normalize(relative(realpathSync(root), realpathSync(candidate)));
+  check(
+    resolvedRelativePath !== ""
+      && resolvedRelativePath !== ".."
+      && !resolvedRelativePath.startsWith(`..${sep}`)
+      && !isAbsolute(resolvedRelativePath),
+    `${label} resolves outside the project root`,
+  );
   check(resolvedRelativePath === normalize(expectedPath), `${label} does not resolve to its canonical evidence path`);
 }
 
@@ -80,13 +87,19 @@ export function validateSbfEvidence({
   projectRoot = process.cwd(),
   manifestPath,
   allowDescendantCheckout = false,
+  verifyArtifactFiles = true,
   git: gitRunner = defaultGit,
 } = {}) {
+  check(typeof allowDescendantCheckout === "boolean", "allowDescendantCheckout must be boolean");
+  check(typeof verifyArtifactFiles === "boolean", "verifyArtifactFiles must be boolean");
   const git = gitRunner;
   const root = resolve(projectRoot);
   const requestedManifest = manifestPath ?? expectedManifest;
   const resolvedManifest = isAbsolute(requestedManifest) ? requestedManifest : resolve(root, requestedManifest);
-  assertCanonicalRegularFile(root, resolvedManifest, expectedManifest, "manifest");
+  const expectedRelativeManifest = normalize(isAbsolute(requestedManifest)
+    ? relative(root, requestedManifest)
+    : requestedManifest);
+  assertCanonicalRegularFile(root, resolvedManifest, expectedRelativeManifest, "manifest");
   const manifestText = readFileSync(resolvedManifest, "utf8");
   const manifest = JSON.parse(manifestText);
   check(manifestText === `${JSON.stringify(sortJson(manifest), null, 2)}\n`, "manifest JSON is not canonical sorted-key UTF-8 JSON");
@@ -187,15 +200,19 @@ export function validateSbfEvidence({
     check(record.path === expectedPath, `artifacts.${name}.path drifted`);
     check(sha256Pattern.test(record.sha256), `artifacts.${name}.sha256 is malformed`);
     check(Number.isSafeInteger(record.bytes) && record.bytes > 0, `artifacts.${name}.bytes is invalid`);
-    const artifactPath = resolve(root, expectedPath);
-    assertCanonicalRegularFile(root, artifactPath, expectedPath, `artifacts.${name}`);
-    const bytes = readFileSync(artifactPath);
-    check(bytes.length === record.bytes, `artifacts.${name}.bytes does not match the file`);
-    check(sha256(bytes) === record.sha256, `artifacts.${name}.sha256 does not match the file`);
+    if (verifyArtifactFiles) {
+      const artifactPath = resolve(root, expectedPath);
+      assertCanonicalRegularFile(root, artifactPath, expectedPath, `artifacts.${name}`);
+      const bytes = readFileSync(artifactPath);
+      check(bytes.length === record.bytes, `artifacts.${name}.bytes does not match the file`);
+      check(sha256(bytes) === record.sha256, `artifacts.${name}.sha256 does not match the file`);
+    }
   }
 
-  const idl = JSON.parse(readFileSync(resolve(root, expectedArtifacts.programIdl), "utf8"));
-  check(idl.address === expectedProgramId, "generated IDL address does not match the reviewed program ID");
+  if (verifyArtifactFiles) {
+    const idl = JSON.parse(readFileSync(resolve(root, expectedArtifacts.programIdl), "utf8"));
+    check(idl.address === expectedProgramId, "generated IDL address does not match the reviewed program ID");
+  }
 
   return {
     status: "PASS",

@@ -19,6 +19,7 @@ import {
   IAT_V2_MIGRATION_ARTIFACT_BINDING,
   calculateUpgradeCapacityPlan,
   observeDevnetUpgradeCapacity,
+  verifyDevnetBufferRecoveryRuntimeBinding,
   verifyMigrationArtifactBinding,
 } from "../scripts/iat-v2-devnet-buffer-preflight.mjs";
 
@@ -243,6 +244,151 @@ test("bound migration bytes must match the exact public-CI evidence and Git sour
       () => verifyMigrationArtifactBinding({ projectRoot: sandbox, binding, git, validateCiEvidence }),
       (error) => error instanceof BufferPreflightError && error.code === "ARTIFACT_BYTES_MISMATCH_HOLD",
     );
+  } finally {
+    rmSync(sandbox, { recursive: true, force: true });
+  }
+});
+
+test("recovery runtime binding requires the exact public-CI manifest and retained artifact tuple", () => {
+  const sandbox = mkdtempSync(join(tmpdir(), "iat-v2-recovery-runtime-binding-"));
+  try {
+    const runtimeEvidencePath = "target/verifiable/iat-v2-recovery-runtime-build-evidence.json";
+    const target = join(sandbox, "target", "verifiable");
+    mkdirSync(target, { recursive: true });
+    const sourceHeadCommit = "a".repeat(40);
+    const sourceHeadTree = "b".repeat(40);
+    const checkoutCommit = "c".repeat(40);
+    const checkoutTree = "d".repeat(40);
+    const workflowRef = "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge";
+    const ciRunId = 123_456;
+    const ciRunAttempt = 2;
+    const artifactSha256 = "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01";
+    const artifactBytes = 649_680;
+    const baseManifest = {
+      sourceBinding: {
+        workflowEvent: "pull_request",
+        sourceHeadCommit,
+        sourceHeadTree,
+        checkoutCommit,
+        checkoutTree,
+        checkoutRelation: "PR_MERGE_SECOND_PARENT",
+      },
+      ciProvenance: {
+        repository: "InternalAgencyIO/InternalAgency",
+        repositoryId: 1_313_660_798,
+        workflowRef,
+        runId: ciRunId,
+        runAttempt: ciRunAttempt,
+        runnerOs: "Linux",
+        runnerArch: "X64",
+      },
+      artifacts: {
+        programBinary: { sha256: artifactSha256, bytes: artifactBytes },
+      },
+    };
+    const baseRuntime = {
+      status: "BOUND",
+      sourceHeadCommit,
+      sourceHeadTree,
+      checkoutCommit,
+      checkoutTree,
+      checkoutRelation: "PR_MERGE_SECOND_PARENT",
+      bindingSuccessorCommit: "e".repeat(40),
+      bindingSuccessorTree: "f".repeat(40),
+      bindingAnchorSha256: "1".repeat(64),
+      runtimeClosureSha256: "2".repeat(64),
+      artifactSha256,
+      artifactBytes,
+      ciRunId,
+      ciRunAttempt,
+      workflowRef,
+      signing: false,
+      broadcast: false,
+      mainnetAuthorized: false,
+    };
+    const git = () => "";
+
+    const verify = ({
+      manifest = baseManifest,
+      runtimeOverrides = {},
+      canonicalOverrides = {},
+    } = {}) => {
+      const evidenceBytes = Buffer.from(`${JSON.stringify(sortJson(manifest), null, 2)}\n`, "utf8");
+      writeFileSync(join(sandbox, runtimeEvidencePath), evidenceBytes);
+      const runtime = {
+        ...baseRuntime,
+        evidenceManifestSha256: sha256(evidenceBytes),
+        ...runtimeOverrides,
+      };
+      return verifyDevnetBufferRecoveryRuntimeBinding({
+        projectRoot: sandbox,
+        binding: Object.freeze({ fixture: true }),
+        runtimeEvidencePath,
+        git,
+        verifyRuntimeBinding: (options) => {
+          assert.equal(options.projectRoot, sandbox);
+          assert.equal(options.git, git);
+          assert.deepEqual(options.binding, { fixture: true });
+          return runtime;
+        },
+        validateRuntimeCiEvidence: (options) => {
+          assert.equal(options.projectRoot, sandbox);
+          assert.equal(options.manifestPath, runtimeEvidencePath);
+          assert.equal(options.allowDescendantCheckout, true);
+          assert.equal(options.verifyArtifactFiles, false);
+          assert.equal(options.git, git);
+          return {
+            manifestSha256: sha256(evidenceBytes),
+            sourceHeadCommit,
+            runUrl: `https://github.com/InternalAgencyIO/InternalAgency/actions/runs/${ciRunId}/attempts/${ciRunAttempt}`,
+            ...canonicalOverrides,
+          };
+        },
+      });
+    };
+
+    const result = verify();
+    assert.equal(result.status, "BOUND");
+    assert.equal(result.artifactSha256, artifactSha256);
+    assert.equal(result.signing, false);
+    assert.equal(result.broadcast, false);
+    assert.equal(result.mainnetAuthorized, false);
+
+    const expectCiHold = (operation, pattern) => assert.throws(
+      operation,
+      (error) => error instanceof BufferPreflightError
+        && error.code === "RUNTIME_CI_EVIDENCE_HOLD"
+        && pattern.test(error.message),
+    );
+
+    expectCiHold(
+      () => verify({ runtimeOverrides: { evidenceManifestSha256: "0".repeat(64) } }),
+      /evidence SHA-256/u,
+    );
+    expectCiHold(
+      () => verify({ canonicalOverrides: { sourceHeadCommit: "9".repeat(40) } }),
+      /source commit/u,
+    );
+    expectCiHold(
+      () => verify({ canonicalOverrides: { runUrl: "https://example.invalid/run" } }),
+      /public run/u,
+    );
+
+    const wrongTree = structuredClone(baseManifest);
+    wrongTree.sourceBinding.sourceHeadTree = "9".repeat(40);
+    expectCiHold(() => verify({ manifest: wrongTree }), /source tree/u);
+
+    const wrongCheckout = structuredClone(baseManifest);
+    wrongCheckout.sourceBinding.checkoutCommit = "9".repeat(40);
+    expectCiHold(() => verify({ manifest: wrongCheckout }), /checkout binding/u);
+
+    const wrongProvenance = structuredClone(baseManifest);
+    wrongProvenance.ciProvenance.repositoryId += 1;
+    expectCiHold(() => verify({ manifest: wrongProvenance }), /provenance/u);
+
+    const wrongArtifact = structuredClone(baseManifest);
+    wrongArtifact.artifacts.programBinary.sha256 = "9".repeat(64);
+    expectCiHold(() => verify({ manifest: wrongArtifact }), /artifact tuple/u);
   } finally {
     rmSync(sandbox, { recursive: true, force: true });
   }

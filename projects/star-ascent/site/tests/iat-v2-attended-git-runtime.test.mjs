@@ -18,6 +18,9 @@ test("attended Git runtime is bound to one exact Windows executable visible in U
   assert.doesNotMatch(source, /execFileSync\(["']git["']/u);
   assert.match(source, /GIT_CONFIG_NOSYSTEM: "1"/u);
   assert.match(source, /GIT_CONFIG_GLOBAL:/u);
+  assert.match(source, /GIT_NO_LAZY_FETCH: "1"/u);
+  assert.match(source, /GIT_NO_REPLACE_OBJECTS: "1"/u);
+  assert.match(source, /GIT_TERMINAL_PROMPT: "0"/u);
   assert.match(source, /core\.fsmonitor=false/u);
   assert.match(source, /core\.hooksPath=\/dev\/null/u);
   assert.doesNotMatch(source, /\.\.\.options,\s*\n\s*\}\)/u, "callers must not replace the clean Git child environment");
