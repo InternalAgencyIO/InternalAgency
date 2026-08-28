@@ -18,14 +18,14 @@ const evidenceRecords: EvidenceRecord[] = [
   {
     file: "IAT-B3-DEVNET-HW-PROOF-20260825.json",
     sha256: "175759dce910b3b2a4e346267608aae2942eec02260fbf4e8340ff59169ce290",
-    en: ["OFF-CHAIN SIGNATURE PROOF", "Verified Ed25519 signature, frozen request binding, signer public key, and independent verification result. This artifact does not prove hardware provenance or a Devnet transaction."],
+    en: ["OFF-CHAIN SIGNATURE PROOF", "Verified Ed25519 signature, frozen request binding, signer public key, and publicly reproducible cryptographic verification. Embedded device and prompt fields are operator-reported and are not independently verified. The embedded LOCAL_ONLY_NOT_PUBLISHED value records creation-time state and was later superseded by publication; this artifact does not prove hardware provenance or a Devnet transaction."],
     href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-PROOF-20260825.json`,
-    action: "OPEN VERIFIED PROOF",
+    action: "OPEN CRYPTOGRAPHIC PROOF",
   },
   {
     file: "IAT-B3-DEVNET-HW-UNSIGNED-20260825.json",
     sha256: "62e31b746e57ce9e29ec4fb44bbff6ce94821412f069707772b119b226fdb096",
-    en: ["FROZEN SIGNING REQUEST", "Exact unsigned request reviewed before the physical device confirmation; published separately for byte-level comparison."],
+    en: ["FROZEN SIGNING REQUEST", "Exact unsigned request later paired with an operator-reported physical device confirmation and later published separately for byte-level comparison."],
     href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-UNSIGNED-20260825.json`,
     action: "OPEN FROZEN REQUEST",
   },

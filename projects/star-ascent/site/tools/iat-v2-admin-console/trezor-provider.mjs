@@ -30,8 +30,22 @@ function numericDerivationPath(serializedPath) {
 }
 
 function resultError(result, action) {
-  const message = result?.payload?.error ?? result?.payload?.message ?? "Unknown Trezor error";
-  const code = result?.payload?.code ? ` (${result.payload.code})` : "";
+  const topLevelError = result?.error;
+  const payloadError = result?.payload?.error;
+  const message = (
+    (typeof topLevelError?.message === "string" && topLevelError.message)
+    || (typeof topLevelError === "string" && topLevelError)
+    || (typeof payloadError?.message === "string" && payloadError.message)
+    || (typeof payloadError === "string" && payloadError)
+    || (typeof result?.payload?.message === "string" && result.payload.message)
+    || "Unknown Trezor error"
+  );
+  const errorCode = (
+    (typeof topLevelError?.code === "string" && topLevelError.code)
+    || (typeof payloadError?.code === "string" && payloadError.code)
+    || (typeof result?.payload?.code === "string" && result.payload.code)
+  );
+  const code = errorCode ? ` (${errorCode})` : "";
   return new Error(`${action} failed${code}: ${message}`);
 }
 

@@ -65,8 +65,55 @@ async function createMockVerifiedProvider({
   });
 }
 
-test("direct Trezor adapter finds the exact account and returns a verified Devnet signature", async () => {
-const signer = Keypair.generate();
+test("direct Trezor adapter preserves top-level Connect error details", async () => {
+  const signer = Keypair.generate().publicKey;
+  let requestCount = 0;
+  await assert.rejects(
+    verifyTrezorSolanaAccountOnDevice({
+      connect: {
+        async solanaGetPublicKey(request) {
+          requestCount += 1;
+          assert.deepEqual(request, { path: DEFAULT_PATH, showOnTrezor: true });
+          return {
+            success: false,
+            error: {
+              code: "Transport_Missing",
+              message: "Trezor transport is unavailable",
+            },
+          };
+        },
+      },
+      account: { path: DEFAULT_PATH, publicKey: signer },
+      expectedAddress: signer,
+    }),
+    /Trezor Solana address display failed \(Transport_Missing\): Trezor transport is unavailable/,
+  );
+  assert.equal(requestCount, 1);
+});
+
+test("direct Trezor adapter retains legacy errors and fails closed on malformed errors", async () => {
+  const signer = Keypair.generate().publicKey;
+  const verifyFailure = (result) => verifyTrezorSolanaAccountOnDevice({
+    connect: { async solanaGetPublicKey() { return result; } },
+    account: { path: DEFAULT_PATH, publicKey: signer },
+    expectedAddress: signer,
+  });
+
+  await assert.rejects(
+    verifyFailure({
+      success: false,
+      payload: { code: "Device_NotFound", error: "Device not found" },
+    }),
+    /Trezor Solana address display failed \(Device_NotFound\): Device not found/,
+  );
+  await assert.rejects(
+    verifyFailure({ success: false, error: {} }),
+    /Trezor Solana address display failed: Unknown Trezor error/,
+  );
+});
+
+test("direct Trezor adapter finds the exact account and offline-verifies a mocked Devnet-bound signature", async () => {
+  const signer = Keypair.generate();
   const recipient = Keypair.generate().publicKey;
   const decoy = Keypair.generate().publicKey;
   const path = "m/44'/501'/3'/0'";

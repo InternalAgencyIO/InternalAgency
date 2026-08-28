@@ -2,11 +2,14 @@
 
 Status: **HOLD / NO DEVNET SUBMISSION OBSERVED**. Mainnet was not accessed.
 
-The Model T locally signed the reviewed `EXTEND_PROGRAM_DATA` message with SHA-256
-`ecd8ecbd41b45d7912185e8689f639944876c186b0a53f1bf147a535fb25222c`.
-The console showed `SIGNED // NOT BROADCAST`. The page was then reloaded before
-the separate broadcast boundary completed. The signed wire existed only in
-React memory and was lost; the permanent v1 transaction-prompt latch remained.
+The operator reported that the Model T locally signed the reviewed
+`EXTEND_PROGRAM_DATA` message with SHA-256
+`ecd8ecbd41b45d7912185e8689f639944876c186b0a53f1bf147a535fb25222c`, and that
+the console displayed `SIGNED // NOT BROADCAST`. No signed wire or signature
+receipt was retained, so those device and UI observations are not independently
+verifiable. The page was then reloaded before the separate broadcast boundary
+completed. The signed wire reportedly existed only in React memory and was
+lost; the permanent v1 transaction-prompt latch remained.
 The exact subsequent error was:
 
 `Canonical action EXTEND_PROGRAM_DATA already consumed its transaction-prompt latch`
