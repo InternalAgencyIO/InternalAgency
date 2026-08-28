@@ -217,7 +217,7 @@
   "pendingPost": null,
   "preparedPostQueue": [],
   "publicationCadenceState": {
-    "mode": "three-completed-country-cycles-since-last-x-batch-464-next",
+    "mode": "four-completed-country-cycles-since-last-x-batch-465-next",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 0,
     "completedBanksInCurrentRenderRun": 0,
@@ -294,22 +294,22 @@
     "ninthRenderRunCompletedAtUtc": "2026-08-24T12:25:36.8403376Z",
     "latestCompletedCountryBankAtUtc": "2026-08-24T16:20:08.8660456Z",
     "nextRenderRunBankOrdinal": 6,
-    "nextCountryBank": 99,
-    "latestClosedCountryBank": 98,
+    "nextCountryBank": 100,
+    "latestClosedCountryBank": 99,
     "latestClosedProviderUrl": null,
     "latestClosedProviderUrls": [
-      "https://www.meta.ai/prompt/8deb7226-76bd-4c3f-a386-78b2e0645836",
-      "https://www.meta.ai/prompt/b98d631f-6108-4df8-bf08-08f71d6cb84b",
-      "https://www.meta.ai/prompt/205c0cbd-a2ab-45c9-86ca-4bf66a6ac876",
-      "https://www.meta.ai/prompt/e681942b-0871-45b8-9195-5ffcd2f82f14"
+      "https://www.meta.ai/prompt/8df7d2db-5cd0-43f4-ba83-a68ceb52aad6",
+      "https://www.meta.ai/prompt/30b06e43-5e7a-401d-869f-5704badd422d",
+      "https://www.meta.ai/prompt/00a859df-8942-471b-9c96-78150c757708",
+      "https://www.meta.ai/prompt/a7f4d187-6b15-41ae-b33d-a6235cb91163"
     ],
-    "latestClosedDispatchedAtUtc": "2026-08-28T16:27:37.347Z",
-    "latestClosedTerminalObservedAtUtc": "2026-08-28T16:43:36.380Z",
+    "latestClosedDispatchedAtUtc": "2026-08-28T16:54:02.647Z",
+    "latestClosedTerminalObservedAtUtc": "2026-08-28T17:04:01.352Z",
     "latestClosedCapturedOccurrenceCount": 4,
     "latestClosedRawFileCount": 0,
     "latestClosedUniqueOccurrenceCount": 4,
-    "latestClosedClassification": "batch-463-nicaragua-four-hard-unusable-scenes-four-rendered-assets-zero-accepted",
-    "latestClosedRemoteVerifiedHead": "c98015590431eda4fc988ec403a0c22381de0ff0",
+    "latestClosedClassification": "batch-464-serbia-two-hard-unusable-scenes-two-refused-no-bytes-zero-accepted",
+    "latestClosedRemoteVerifiedHead": "a06a2c8194f363fb81b78479f65450e449d510df",
     "inFlightCountryBank": null,
     "inFlightRenderRunBankOrdinal": null,
     "inFlightProviderUrl": null,
@@ -329,7 +329,7 @@
     "pendingEvidenceUniqueOccurrenceCount": 0,
     "pendingEvidenceClassification": null,
     "pendingEvidenceLastRemoteVerifiedHead": null,
-    "completedCountryCyclesSinceLastX": 3,
+    "completedCountryCyclesSinceLastX": 4,
     "latestXOutcomeRecordedAtUtc": "2026-08-28T15:46:57.639Z"
   },
   "latestUserSchedulingAuthorization": {
@@ -9249,5 +9249,41 @@
     "nextBatch": 464,
     "nextCountry": "Serbia",
     "checkpoint": "assets/lore/starlight-era/batch-463-nicaragua-closed-unresolved-checkpoint.json"
+  },
+  "latestBatch464SerbiaReconciliation": {
+    "schemaVersion": 1,
+    "status": "closed-unresolved-zero-accepted",
+    "closedAtUtc": "2026-08-28T17:04:01.352Z",
+    "batch": 464,
+    "country": "Serbia",
+    "sceneIds": [
+      1882,
+      1883,
+      1884,
+      1885
+    ],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/8df7d2db-5cd0-43f4-ba83-a68ceb52aad6",
+      "https://www.meta.ai/prompt/30b06e43-5e7a-401d-869f-5704badd422d",
+      "https://www.meta.ai/prompt/00a859df-8942-471b-9c96-78150c757708",
+      "https://www.meta.ai/prompt/a7f4d187-6b15-41ae-b33d-a6235cb91163"
+    ],
+    "capturedProviderAssetCount": 2,
+    "rawByteCount": 0,
+    "browserRenderedEvidenceCount": 2,
+    "hardUnusableSceneIds": [
+      1883,
+      1884
+    ],
+    "refusedNoBytesSceneIds": [
+      1882,
+      1885
+    ],
+    "acceptedSceneIds": [],
+    "completedCountryCyclesSinceLastX": 4,
+    "xCadenceDue": false,
+    "nextBatch": 465,
+    "nextCountry": "Bulgaria",
+    "checkpoint": "assets/lore/starlight-era/batch-464-serbia-closed-unresolved-checkpoint.json"
   }
 }
