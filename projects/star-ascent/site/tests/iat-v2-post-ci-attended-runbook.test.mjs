@@ -43,7 +43,10 @@ test("post-CI runbook fixes localhost consoles and keeps Mainnet on hold", () =>
 
 test("the incident preserves the consumed ceremony and requires a fresh source-bound replacement", () => {
   assert.match(attendedIncident, /SIGNED \/\/ NOT BROADCAST/u);
-  assert.match(attendedIncident, /signed wire existed only in\s+React memory and was lost/u);
+  assert.match(attendedIncident, /operator reported that the Model T locally signed/u);
+  assert.match(attendedIncident, /No signed wire or signature\s+receipt was retained/u);
+  assert.match(attendedIncident, /device and UI observations are not independently\s+verifiable/u);
+  assert.match(attendedIncident, /signed wire reportedly existed only in React memory and was\s+lost/u);
   assert.match(attendedIncident, /Canonical action EXTEND_PROGRAM_DATA already consumed its transaction-prompt latch/u);
   assert.match(attendedIncident, /consumed v1 latch must remain preserved/u);
   assert.match(attendedIncident, /old ceremony cannot be continued/u);
