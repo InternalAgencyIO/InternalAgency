@@ -8621,54 +8621,6 @@
     }
   },
   "previousGuardianWakeAudit": {
-    "status": "five-qualified-captionless-two-plus-one-posts-prepared-hungary-closed-zero-accepted-austria-next",
-    "checkedAt": "2026-08-28T10:53:32.526Z",
-    "account": "@dogramaci",
-    "liveProfileVerified": true,
-    "signedInAccount": "@dogramaci",
-    "pendingPost": null,
-    "preparedPostQueueCount": 5,
-    "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 17,
-    "newlyPublished": [],
-    "verification": "Hungary scenes 1834-1837 are closed with zero accepted images: 1834, 1835 and 1836 are archived hard-unusable outputs; 1837 has no confirmed provider occurrence. Five mutually exclusive captionless 2+1 posts remain prepared.",
-    "duplicatePrevention": "Never resend Hungary 1834-1837. Residual accepted scenes 1828 and 1832 remain unreserved.",
-    "nextCadence": "Begin Austria with clean checkpoint-authorized Meta lanes. Request fresh action-time X confirmation before uploading or posting the five prepared sets.",
-    "remoteParity": "Prior commit b6aabd9c is pushed; Israel and Hungary terminal evidence are pending the next targeted commit.",
-    "pairReady": true,
-    "preparedSceneSets": [
-      [
-        1810,
-        1811,
-        1814
-      ],
-      [
-        1812,
-        1813,
-        1816
-      ],
-      [
-        1818,
-        1820,
-        1823
-      ],
-      [
-        1824,
-        1825,
-        1817
-      ],
-      [
-        1826,
-        1827,
-        1821
-      ]
-    ],
-    "residualEligibleSceneIds": [
-      1828,
-      1832
-    ]
-  },
-  "latestGuardianWakeAudit": {
     "status": "five-qualified-captionless-two-plus-one-posts-prepared-austria-closed-zero-accepted-belarus-next",
     "checkedAt": "2026-08-28T11:08:42.849Z",
     "account": "@dogramaci",
@@ -8714,6 +8666,55 @@
     "residualEligibleSceneIds": [
       1828,
       1832
+    ]
+  },
+  "latestGuardianWakeAudit": {
+    "status": "five-qualified-captionless-two-plus-one-posts-prepared-belarus-closed-one-accepted-switzerland-next",
+    "checkedAt": "2026-08-28T11:18:30.426Z",
+    "account": "@dogramaci",
+    "liveProfileVerified": true,
+    "signedInAccount": "@dogramaci",
+    "pendingPost": null,
+    "preparedPostQueueCount": 5,
+    "deferredPostCheckpoint": null,
+    "eligibleBacklogRemaining": 18,
+    "newlyPublished": [],
+    "verification": "Belarus scene 1845 accepted and archived; scenes 1842, 1843 and 1844 are archived hard-unusable roll-mismatch outputs. Five mutually exclusive captionless 2+1 posts remain prepared.",
+    "duplicatePrevention": "Never resend Belarus 1842-1845. Residual accepted scenes 1828, 1832 and 1845 are each from different countries and cannot form a legal 2+1 pair.",
+    "nextCadence": "Begin Switzerland with four clean checkpoint-authorized Meta lanes. Request fresh action-time confirmation before the new DeepSeek request and Meta Sends.",
+    "remoteParity": "Prior commit 1b8c5e2f is pushed; Belarus prompt, provider and terminal evidence are pending the next targeted commit.",
+    "pairReady": true,
+    "preparedSceneSets": [
+      [
+        1810,
+        1811,
+        1814
+      ],
+      [
+        1812,
+        1813,
+        1816
+      ],
+      [
+        1818,
+        1820,
+        1823
+      ],
+      [
+        1824,
+        1825,
+        1817
+      ],
+      [
+        1826,
+        1827,
+        1821
+      ]
+    ],
+    "residualEligibleSceneIds": [
+      1828,
+      1832,
+      1845
     ]
   },
   "latestTenCountryCadenceAudit": {
