@@ -1,12 +1,12 @@
 {
   "artifactBytes": 649680,
   "artifactSha256": "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
-  "checkoutCommit": "12deb348cc8b1b976cab77803bb9a76032b8980c",
+  "checkoutCommit": null,
   "checkoutRelation": "PR_MERGE_SECOND_PARENT",
-  "checkoutTree": "0bff83a1b17e831ace83de627bde55b96405790a",
-  "ciRunAttempt": 1,
-  "ciRunId": 33169648355,
-  "evidenceManifestSha256": "520322d4626809f126c26bd435ad4888e107cd3ad923db9375c16d4bbff02629",
+  "checkoutTree": null,
+  "ciRunAttempt": null,
+  "ciRunId": null,
+  "evidenceManifestSha256": null,
   "limitations": [
     "Source and public-CI binding only; not a Devnet buffer upload, signature, transaction, authority handoff, or deployment result.",
     "Does not authorize signing, broadcast, funding, deployment, release, or Mainnet."
@@ -17,11 +17,11 @@
   "repositoryId": 1313660798,
   "runnerArch": "X64",
   "runnerOs": "Linux",
-  "runtimeClosureSha256": "a3f3e7071cdff89d34a625f45acf098944213a27bab56a4b5864404a2b254d5e",
+  "runtimeClosureSha256": null,
   "schema": "iat-v2-devnet-buffer-runtime-binding/v1",
-  "sourceHeadCommit": "178b782e1325e17dabb2388e4bd20b5846d1c64e",
-  "sourceHeadTree": "0bff83a1b17e831ace83de627bde55b96405790a",
-  "status": "BOUND",
+  "sourceHeadCommit": null,
+  "sourceHeadTree": null,
+  "status": "UNBOUND",
   "workflowEvent": "pull_request",
-  "workflowRef": "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge"
+  "workflowRef": null
 }

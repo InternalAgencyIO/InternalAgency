@@ -14,6 +14,7 @@ export const IAT_V2_DEVNET_BUFFER_RUNTIME_BINDING_PATH =
 
 export const IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS = Object.freeze([
   "launch/IAT_V2_DEVNET_BUFFER_FD_INCIDENT_20260828.md",
+  "launch/IAT_V2_DEVNET_BUFFER_PARTIAL_UPLOAD_INCIDENT_20260828.md",
   "launch/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md",
   "package-lock.json",
   "package.json",
@@ -24,6 +25,8 @@ export const IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS = Object.freeze([
   "scripts/lib/iat-v2-attended-solana-toolchain.sh",
   "scripts/lib/iat-v2-devnet-buffer-runtime-binding.mjs",
   "scripts/rebuild-iat-v2-devnet-buffer-fresh.sh",
+  "scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs",
+  "scripts/recover-iat-v2-devnet-buffer-in-place.sh",
   "scripts/recover-iat-v2-devnet-buffer-pre-address.sh",
   "scripts/validate-iat-v2-ci-sbf-evidence.mjs"
 ]);
