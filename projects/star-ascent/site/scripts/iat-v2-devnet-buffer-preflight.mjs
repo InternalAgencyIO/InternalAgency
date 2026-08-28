@@ -38,7 +38,7 @@ export const IAT_V2_MIGRATION_ARTIFACT_BINDING = Object.freeze({
   artifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   artifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
   sourceHeadCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-  sourceHeadTree: "f1ef925b18bdfc3c004aea0e2dde8d127bcad3cb",
+  sourceHeadTree: "f942306ca5248971b08a11df25bdf91545a4f65c",
   ciRunId: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   ciRunAttempt: 1,
   workflowRef:
