@@ -93,12 +93,12 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
   assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES, 649_680);
   assert.equal(
     IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-    "169c32a040536ade3a22e6255494763e54875f46",
+    "e6f1041abde0d70f0055ef4f7bc333f4271f37aa",
   );
-  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID, 33_137_067_731);
+  assert.equal(IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID, 33_146_434_415);
   assert.equal(
     IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
-    "86c77250987352f1c71c6f0f3b67b087fb434b3be0f498a8c769610c2a7f6189",
+    "9f8fe145af01d7eff1de7ddc27b1dc409f5ffecc6f440bf1d335fc7bd63d71a1",
   );
 
   for (const path of [
