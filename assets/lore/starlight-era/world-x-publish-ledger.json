@@ -217,7 +217,7 @@
   "pendingPost": null,
   "preparedPostQueue": [],
   "publicationCadenceState": {
-    "mode": "five-completed-country-cycles-since-last-x-batch-466-next-provider-blocked",
+    "mode": "six-completed-country-cycles-since-last-x-meta-paused-until-2026-08-29-0800-europe-istanbul",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 0,
     "completedBanksInCurrentRenderRun": 0,
@@ -293,23 +293,23 @@
     ],
     "ninthRenderRunCompletedAtUtc": "2026-08-24T12:25:36.8403376Z",
     "latestCompletedCountryBankAtUtc": "2026-08-24T16:20:08.8660456Z",
-    "nextRenderRunBankOrdinal": 6,
-    "nextCountryBank": 101,
-    "latestClosedCountryBank": 100,
+    "nextRenderRunBankOrdinal": 7,
+    "nextCountryBank": 102,
+    "latestClosedCountryBank": 101,
     "latestClosedProviderUrl": null,
     "latestClosedProviderUrls": [
-      "https://www.meta.ai/prompt/e359a6ef-655e-4822-bee4-cc1177b914d7",
-      "https://www.meta.ai/prompt/11bb86ce-8d96-4620-bd00-97e90ac3ab1a",
-      "https://www.meta.ai/prompt/19b8e649-6d05-4bd7-973f-7bf02e840eee",
-      "https://www.meta.ai/prompt/ba44d007-3af5-476b-b741-895ec6401345"
+      "https://www.meta.ai/prompt/4b8906bb-918e-429e-bed8-a852b49483df",
+      "https://www.meta.ai/prompt/a0846bb0-1328-4f48-b804-ea3f2da1e246",
+      "https://www.meta.ai/prompt/0db489a6-7e2a-46c5-b7bb-367e91bed065",
+      "https://www.meta.ai/prompt/b442295d-776d-4571-b4b2-6044f5ff905d"
     ],
-    "latestClosedDispatchedAtUtc": "2026-08-28T17:15:09.394Z",
-    "latestClosedTerminalObservedAtUtc": "2026-08-28T17:20:35.446Z",
+    "latestClosedDispatchedAtUtc": "2026-08-28T17:32:09.774Z",
+    "latestClosedTerminalObservedAtUtc": "2026-08-28T17:34:24.533Z",
     "latestClosedCapturedOccurrenceCount": 4,
     "latestClosedRawFileCount": 0,
     "latestClosedUniqueOccurrenceCount": 4,
-    "latestClosedClassification": "batch-465-bulgaria-four-hard-unusable-scenes-four-rendered-assets-zero-accepted",
-    "latestClosedRemoteVerifiedHead": "b926a8cb5972a36dccac83ecdbe1e18cf752abce",
+    "latestClosedClassification": "batch-466-el-salvador-four-explicit-no-bytes-provider-limit-zero-accepted",
+    "latestClosedRemoteVerifiedHead": "3eeef85cc56bf735348d5811264bda8004a04050",
     "inFlightCountryBank": null,
     "inFlightRenderRunBankOrdinal": null,
     "inFlightProviderUrl": null,
@@ -329,7 +329,7 @@
     "pendingEvidenceUniqueOccurrenceCount": 0,
     "pendingEvidenceClassification": null,
     "pendingEvidenceLastRemoteVerifiedHead": null,
-    "completedCountryCyclesSinceLastX": 5,
+    "completedCountryCyclesSinceLastX": 6,
     "latestXOutcomeRecordedAtUtc": "2026-08-28T15:46:57.639Z"
   },
   "latestUserSchedulingAuthorization": {
@@ -9337,5 +9337,52 @@
     "sendsClicked": false,
     "providerText": "You reached your limit. Get Meta One Core for more media with AI, or wait until tomorrow.",
     "checkpoint": "assets/lore/starlight-era/batch-466-el-salvador-provider-blocked-pre-dispatch-checkpoint.json"
+  },
+  "latestBatch466ElSalvadorReconciliation": {
+    "schemaVersion": 1,
+    "status": "closed-unresolved-zero-accepted-provider-limit",
+    "closedAtUtc": "2026-08-28T17:34:24.533Z",
+    "batch": 466,
+    "country": "El Salvador",
+    "sceneIds": [
+      1890,
+      1891,
+      1892,
+      1893
+    ],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/4b8906bb-918e-429e-bed8-a852b49483df",
+      "https://www.meta.ai/prompt/a0846bb0-1328-4f48-b804-ea3f2da1e246",
+      "https://www.meta.ai/prompt/0db489a6-7e2a-46c5-b7bb-367e91bed065",
+      "https://www.meta.ai/prompt/b442295d-776d-4571-b4b2-6044f5ff905d"
+    ],
+    "capturedProviderAssetCount": 0,
+    "rawByteCount": 0,
+    "browserRenderedEvidenceCount": 4,
+    "refusedNoBytesSceneIds": [
+      1890,
+      1891,
+      1892,
+      1893
+    ],
+    "acceptedSceneIds": [],
+    "completedCountryCyclesSinceLastX": 6,
+    "xCadenceDue": false,
+    "nextBatch": 467,
+    "nextCountry": "Republic of the Congo",
+    "checkpoint": "assets/lore/starlight-era/batch-466-el-salvador-closed-checkpoint.json"
+  },
+  "latestUserMetaPauseDirective": {
+    "observedAtUtc": "2026-08-28T17:37:13.717Z",
+    "instruction": "pause Meta AI until tomorrow 8 am",
+    "provider": "Meta AI",
+    "status": "active",
+    "localUntil": "2026-08-29T08:00:00+03:00",
+    "utcUntil": "2026-08-29T05:00:00.000Z",
+    "allowedDuringPause": [
+      "DeepSeek DeepThink prompt adaptation",
+      "Grok Imagine still and video production",
+      "authorized X publication"
+    ]
   }
 }
