@@ -217,7 +217,7 @@
   "pendingPost": null,
   "preparedPostQueue": [],
   "publicationCadenceState": {
-    "mode": "two-completed-country-cycles-since-last-x-batch-463-next",
+    "mode": "three-completed-country-cycles-since-last-x-batch-464-next",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 0,
     "completedBanksInCurrentRenderRun": 0,
@@ -293,23 +293,23 @@
     ],
     "ninthRenderRunCompletedAtUtc": "2026-08-24T12:25:36.8403376Z",
     "latestCompletedCountryBankAtUtc": "2026-08-24T16:20:08.8660456Z",
-    "nextRenderRunBankOrdinal": 5,
-    "nextCountryBank": 98,
-    "latestClosedCountryBank": 97,
+    "nextRenderRunBankOrdinal": 6,
+    "nextCountryBank": 99,
+    "latestClosedCountryBank": 98,
     "latestClosedProviderUrl": null,
     "latestClosedProviderUrls": [
-      "https://www.meta.ai/prompt/df481979-188d-4530-96d1-7573325bf9a1",
-      "https://www.meta.ai/prompt/f5843598-beb9-4bbd-8fb3-97a4224efef3",
-      "https://www.meta.ai/prompt/7a11a1e6-78fe-43a8-b5f4-2e7c59662f38",
-      "https://www.meta.ai/prompt/f2be6c92-d947-4176-8edf-2a03209642f4"
+      "https://www.meta.ai/prompt/8deb7226-76bd-4c3f-a386-78b2e0645836",
+      "https://www.meta.ai/prompt/b98d631f-6108-4df8-bf08-08f71d6cb84b",
+      "https://www.meta.ai/prompt/205c0cbd-a2ab-45c9-86ca-4bf66a6ac876",
+      "https://www.meta.ai/prompt/e681942b-0871-45b8-9195-5ffcd2f82f14"
     ],
-    "latestClosedDispatchedAtUtc": "2026-08-28T16:08:56.963Z",
-    "latestClosedTerminalObservedAtUtc": "2026-08-28T16:20:17.609Z",
-    "latestClosedCapturedOccurrenceCount": 5,
+    "latestClosedDispatchedAtUtc": "2026-08-28T16:27:37.347Z",
+    "latestClosedTerminalObservedAtUtc": "2026-08-28T16:43:36.380Z",
+    "latestClosedCapturedOccurrenceCount": 4,
     "latestClosedRawFileCount": 0,
-    "latestClosedUniqueOccurrenceCount": 5,
-    "latestClosedClassification": "batch-462-paraguay-four-hard-unusable-scenes-five-rendered-assets-zero-accepted",
-    "latestClosedRemoteVerifiedHead": "ddaa5446df6490d758fea9da45b9a917de9147d7",
+    "latestClosedUniqueOccurrenceCount": 4,
+    "latestClosedClassification": "batch-463-nicaragua-four-hard-unusable-scenes-four-rendered-assets-zero-accepted",
+    "latestClosedRemoteVerifiedHead": "c98015590431eda4fc988ec403a0c22381de0ff0",
     "inFlightCountryBank": null,
     "inFlightRenderRunBankOrdinal": null,
     "inFlightProviderUrl": null,
@@ -329,7 +329,7 @@
     "pendingEvidenceUniqueOccurrenceCount": 0,
     "pendingEvidenceClassification": null,
     "pendingEvidenceLastRemoteVerifiedHead": null,
-    "completedCountryCyclesSinceLastX": 2,
+    "completedCountryCyclesSinceLastX": 3,
     "latestXOutcomeRecordedAtUtc": "2026-08-28T15:46:57.639Z"
   },
   "latestUserSchedulingAuthorization": {
@@ -9215,5 +9215,39 @@
     "nextBatch": 463,
     "nextCountry": "Nicaragua",
     "checkpoint": "assets/lore/starlight-era/batch-462-paraguay-closed-unresolved-checkpoint.json"
+  },
+  "latestBatch463NicaraguaReconciliation": {
+    "schemaVersion": 1,
+    "status": "closed-unresolved-zero-accepted",
+    "closedAtUtc": "2026-08-28T16:43:36.380Z",
+    "batch": 463,
+    "country": "Nicaragua",
+    "sceneIds": [
+      1878,
+      1879,
+      1880,
+      1881
+    ],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/8deb7226-76bd-4c3f-a386-78b2e0645836",
+      "https://www.meta.ai/prompt/b98d631f-6108-4df8-bf08-08f71d6cb84b",
+      "https://www.meta.ai/prompt/205c0cbd-a2ab-45c9-86ca-4bf66a6ac876",
+      "https://www.meta.ai/prompt/e681942b-0871-45b8-9195-5ffcd2f82f14"
+    ],
+    "capturedProviderAssetCount": 4,
+    "rawByteCount": 0,
+    "browserRenderedEvidenceCount": 4,
+    "hardUnusableSceneIds": [
+      1878,
+      1879,
+      1880,
+      1881
+    ],
+    "acceptedSceneIds": [],
+    "completedCountryCyclesSinceLastX": 3,
+    "xCadenceDue": false,
+    "nextBatch": 464,
+    "nextCountry": "Serbia",
+    "checkpoint": "assets/lore/starlight-era/batch-463-nicaragua-closed-unresolved-checkpoint.json"
   }
 }
