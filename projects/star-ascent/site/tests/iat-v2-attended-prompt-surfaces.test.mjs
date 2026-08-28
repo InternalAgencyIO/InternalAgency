@@ -122,6 +122,27 @@ test("program prompting refreshes the blockhash after read-only preflight and ex
     "await requestProgramModelTSignature({",
     "fresh prompt order gate",
   );
+  assertBefore(
+    handler,
+    "assertExactTransactionMessage(\n        promptTransaction,",
+    "await requestProgramModelTSignature({",
+    "exact simulated transaction prompt binding",
+  );
+  const promptRequest = section(
+    handler,
+    "const signed = await requestProgramModelTSignature({",
+    "const nextPending = pendingForSigned(signed);",
+  );
+  assert.match(
+    promptRequest,
+    /transaction:\s*promptTransaction,/u,
+    "the signing coordinator must receive the exact freshly simulated transaction",
+  );
+  assert.doesNotMatch(
+    promptRequest,
+    /\n\s*transaction,\s*\n/u,
+    "the signing request must not reference an unresolved transaction shorthand",
+  );
   assert.match(
     handler,
     /const pendingForSigned = \(candidate\) => \(\{[\s\S]*latest,[\s\S]*messageBytes,[\s\S]*messageSha256,[\s\S]*finalizedContextSlot: simulationSlot/u,

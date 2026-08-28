@@ -678,7 +678,7 @@ export default function ProgramUpgradeAttendedActions({
         messageSha256,
         provider,
         signer: publicKey,
-        transaction,
+        transaction: promptTransaction,
         verifySigned: (candidate) => assertSignedLegacyTransaction({
           expectedBlockhash: latest.blockhash,
           expectedMessageBytes: messageBytes,
