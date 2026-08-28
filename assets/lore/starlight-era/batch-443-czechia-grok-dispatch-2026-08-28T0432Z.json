@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "batch": 443,
+  "country": "Czechia",
+  "provider": "Grok Imagine",
+  "dispatch_confirmation_utc": "2026-08-28T04:32:31.130Z",
+  "last_inspected_utc": "2026-08-28T04:34:41.920Z",
+  "settings": {
+    "mode": "video",
+    "resolution": "720p",
+    "duration_seconds": 15,
+    "aspect_ratio": "9:16"
+  },
+  "ordered_face_anchors": [
+    {
+      "asset": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "asset": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "asset": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "scenes": [
+    {
+      "scene": 1792,
+      "prompt_file": "assets/lore/starlight-era/batch-443-czechia-scene-1792-grok-video-prompt.txt",
+      "prompt_sha256": "A976B3A1E18FD1FAEEB8A5AE7A2330C5333A320CFA771AEBA9A462E279C592F8",
+      "send_clicks": 1,
+      "provider_occurrence_confirmed": true,
+      "provider_url": "https://grok.com/imagine/post/45a45554-44b3-4a19-9130-fef4371cda7e?conversation=ba7fa789-75c7-4e60-aab2-03dfdd1b97af",
+      "provider_status": "terminal_video",
+      "video_duration_seconds": 15.041667,
+      "video_asset_url": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/45a45554-44b3-4a19-9130-fef4371cda7e/generated_video.mp4?cache=1"
+    },
+    {
+      "scene": 1793,
+      "prompt_file": "assets/lore/starlight-era/batch-443-czechia-scene-1793-grok-video-prompt.txt",
+      "prompt_sha256": "4CE5B7AA5E716D67ABCFF562E26C82FD0D3425CF0B01D28753898A125E3287D1",
+      "send_clicks": 1,
+      "provider_occurrence_confirmed": false,
+      "provider_url": null,
+      "provider_status": "staged_after_unconfirmed_click",
+      "composer_state": {
+        "exact_prompt_present": true,
+        "ordered_anchor_cards_present": 3,
+        "anchor_dimensions": "941x1672",
+        "loading_spinners": 0,
+        "submit_enabled": true
+      },
+      "safety_disposition": "Do not click Submit again without a fresh action-time confirmation because no provider occurrence was confirmed after the first click."
+    }
+  ]
+}
