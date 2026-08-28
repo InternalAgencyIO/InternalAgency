@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
@@ -36,6 +37,105 @@ test("exact partial prestate, finalized slot floor, and target are all pinned", 
   assert.match(source, /HOLD_PARTIAL_EXACT_PREFIX_ZERO_TAIL/u);
   assert.match(source, /PARTIAL_EXACT_PREFIX_ZERO_TAIL/u);
   assert.match(source, /firstMismatchObservedByte===0/u);
+});
+
+test("real Bash evaluation preserves the exact partial-state hold reason string", () => {
+  const start = source.indexOf("validate_partial() {");
+  const end = source.indexOf("\n}\n\nobserve_partial() {", start);
+  assert.ok(start >= 0 && end > start, "validate_partial must be extractable from the reviewed helper");
+  const validatePartial = source.slice(start, end + 2);
+  const record = {
+    schema: "iat-v2-devnet-buffer-finalized-reconciliation/v1",
+    status: "HOLD_PARTIAL_EXACT_PREFIX_ZERO_TAIL",
+    network: "devnet",
+    genesisHash: "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+    commitment: "finalized",
+    minContextSlot: 489440472,
+    accountContextSlot: 489440472,
+    bufferAddress: buffer,
+    expectedAuthority: authority,
+    observedAuthority: authority,
+    account: {
+      owner: "BPFLoaderUpgradeab1e11111111111111111111111",
+      executable: false,
+      lamports: "4522976880",
+      dataBytes: 649717,
+      metadataBytes: 37,
+      stateTag: 1,
+      authorityOption: 1,
+      programBytes: 649680,
+      programSha256: partial,
+    },
+    publicCiArtifact: { bytes: 649680, sha256: target },
+    comparison: {
+      classification: "PARTIAL_EXACT_PREFIX_ZERO_TAIL",
+      exact: false,
+      matchingPrefixBytes: 19200,
+      expectedRemainingBytes: 630480,
+      observedSuffixIsZero: true,
+      firstMismatchOffset: 19200,
+      firstMismatchObservedByte: 0,
+    },
+    validation: {
+      partialExactPrefixZeroTail: true,
+      exact: false,
+      holdReasons: ["PROGRAM_SHA256_MISMATCH"],
+    },
+    boundary: {
+      mutationAuthorized: false,
+      signing: false,
+      broadcast: false,
+      protectedRecoveryStateRead: false,
+    },
+    evidenceBodySha256: "0".repeat(64),
+  };
+  const bashScript = `set -euo pipefail
+${validatePartial}
+NODE_BIN="$2"
+BUFFER_ADDRESS="$3"
+EXPECTED_AUTHORITY="$4"
+EXPECTED_OWNER="$5"
+EXPECTED_GENESIS="$6"
+EXPECTED_BUFFER_LAMPORTS="$7"
+EXPECTED_ACCOUNT_BYTES="$8"
+EXPECTED_METADATA_BYTES="$9"
+EXPECTED_PROGRAM_BYTES="\${10}"
+EXPECTED_PARTIAL_HASH="\${11}"
+EXPECTED_PREFIX_BYTES="\${12}"
+EXPECTED_REMAINING_BYTES="\${13}"
+MIN_FINALIZED_SLOT="\${14}"
+TARGET_ARTIFACT_SHA256="\${15}"
+printf '%s' "$1" | /usr/bin/base64 -d | validate_partial
+`;
+  const node = process.platform === "win32"
+    ? "/home/a/.local/share/internal-agency/toolchains/node-v24.19.0-linux-x64/bin/node"
+    : process.execPath;
+  const command = process.platform === "win32"
+    ? `${process.env.WINDIR ?? "C:\\Windows"}\\System32\\wsl.exe`
+    : "/usr/bin/bash";
+  const prefixArgs = process.platform === "win32"
+    ? ["-d", "Ubuntu-24.04", "-u", "a", "--exec", "/usr/bin/bash", "--noprofile", "--norc", "-s", "--"]
+    : ["--noprofile", "--norc", "-s", "--"];
+  const result = spawnSync(command, [
+    ...prefixArgs,
+    Buffer.from(JSON.stringify(record), "utf8").toString("base64"),
+    node,
+    buffer,
+    authority,
+    "BPFLoaderUpgradeab1e11111111111111111111111",
+    record.genesisHash,
+    "4522976880",
+    "649717",
+    "37",
+    "649680",
+    partial,
+    "19200",
+    "630480",
+    "489440472",
+    target,
+  ], { encoding: "utf8", input: bashScript });
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.equal(result.stdout, `489440472\n489440472\n${"0".repeat(64)}\n`);
 });
 
 test("one target-bound TTY phrase gates one literal-address mutation", () => {
