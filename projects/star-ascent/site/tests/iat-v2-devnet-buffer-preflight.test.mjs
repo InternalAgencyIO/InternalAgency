@@ -38,12 +38,12 @@ test("migration buffer helpers use the reviewed static successor public-CI bindi
     status: "BOUND",
     artifactSha256: "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
     artifactBytes: 649_680,
-    sourceHeadCommit: "e6f1041abde0d70f0055ef4f7bc333f4271f37aa",
-    sourceHeadTree: "d92c532f41dacf04e8d5f1f13b261b963d05f001",
-    ciRunId: 33_146_434_415,
+    sourceHeadCommit: "3b68feb825078738e66eb98007c44214a11a7f0c",
+    sourceHeadTree: "eb21247ba0b74d8e7f89fc436433756679d9920d",
+    ciRunId: 33_156_945_365,
     ciRunAttempt: 1,
     workflowRef: "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/14/merge",
-    evidenceManifestSha256: "9f8fe145af01d7eff1de7ddc27b1dc409f5ffecc6f440bf1d335fc7bd63d71a1",
+    evidenceManifestSha256: "fb51d3a8deecda3aec5c4e0f3e2c8745cd154c972c1ca830e478b57593229750",
   });
   assert.throws(
     () => verifyMigrationArtifactBinding({ artifactPath: "missing.so", evidencePath: "missing.json" }),
@@ -428,10 +428,10 @@ test("authority handoff CAS is target-keyed, canonical, durable, and cannot be r
       "to-authority": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
       "artifact-sha256": "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
       "artifact-bytes": "649680",
-      "evidence-manifest-sha256": "9f8fe145af01d7eff1de7ddc27b1dc409f5ffecc6f440bf1d335fc7bd63d71a1",
-      "source-head-commit": "e6f1041abde0d70f0055ef4f7bc333f4271f37aa",
-      "source-head-tree": "d92c532f41dacf04e8d5f1f13b261b963d05f001",
-      "ci-run-id": "33146434415",
+      "evidence-manifest-sha256": "fb51d3a8deecda3aec5c4e0f3e2c8745cd154c972c1ca830e478b57593229750",
+      "source-head-commit": "3b68feb825078738e66eb98007c44214a11a7f0c",
+      "source-head-tree": "eb21247ba0b74d8e7f89fc436433756679d9920d",
+      "ci-run-id": "33156945365",
       "ci-run-attempt": "1",
       "node-path": "/home/a/.local/share/internal-agency/toolchains/node-v24.19.0-linux-x64/bin/node",
       "node-version": "v24.19.0",
@@ -560,7 +560,7 @@ elif [[ "\${1:-}" == "-e" ]]; then
     *'"status":"AVAILABLE"'*) printf 'AVAILABLE' ;;
     *'"status":"RESERVED_CREATED"'*) printf 'RESERVED_CREATED' ;;
     *'"status":"RESERVED_EXISTING"'*) printf 'RESERVED_EXISTING' ;;
-    *) printf '%s\\n%s\\n%064d\\n%040d\\n%040d\\n33146434415\\n1\\n%s\\n%s\\n%s\\n%s\\n' '${artifactSha256}' '${artifact.length}' 0 2 3 '${fakeGit}' 'git version 2.55.0.windows.3' '${fakeGitSha256}' '${fakeGitBytes.length}' ;;
+    *) printf '%s\\n%s\\n%064d\\n%040d\\n%040d\\n33156945365\\n1\\n%s\\n%s\\n%s\\n%s\\n' '${artifactSha256}' '${artifact.length}' 0 2 3 '${fakeGit}' 'git version 2.55.0.windows.3' '${fakeGitSha256}' '${fakeGitBytes.length}' ;;
   esac
 elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" ]]; then
   if [[ "\${2:-}" == "inspect" ]]; then
@@ -580,7 +580,7 @@ elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" ]]; then
   fi
 else
   printf 'simulated dependency warning on stderr\\n' >&2
-  printf '{"artifactSha256":"${artifactSha256}","artifactBytes":${artifact.length},"evidenceManifestSha256":"%064d","sourceHeadCommit":"%040d","sourceHeadTree":"%040d","ciRunId":33146434415,"ciRunAttempt":1,"gitPath":"${fakeGit}","gitVersion":"git version 2.55.0.windows.3","gitSha256":"${fakeGitSha256}","gitBytes":${fakeGitBytes.length}}\\n' 0 2 3
+  printf '{"artifactSha256":"${artifactSha256}","artifactBytes":${artifact.length},"evidenceManifestSha256":"%064d","sourceHeadCommit":"%040d","sourceHeadTree":"%040d","ciRunId":33156945365,"ciRunAttempt":1,"gitPath":"${fakeGit}","gitVersion":"git version 2.55.0.windows.3","gitSha256":"${fakeGitSha256}","gitBytes":${fakeGitBytes.length}}\\n' 0 2 3
 fi
 `);
     const fakeSolana = executable("solana", `#!/usr/bin/env bash

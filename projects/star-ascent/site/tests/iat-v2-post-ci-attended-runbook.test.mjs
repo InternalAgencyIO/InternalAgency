@@ -261,7 +261,7 @@ test("the base admin shell keeps artifact modes exact and initialization finaliz
 test("post-upgrade feature evidence cannot reuse the legacy initialization export", () => {
   const admin = readFileSync("tools/iat-v2-admin-console/main.jsx", "utf8");
   assert.match(runbook, /legacy seven-stage evidence export is disabled in feature\/post-upgrade mode/u);
-  assert.match(runbook, /checked-in successor migration snapshot \(`e6f1041a…` \/ `771c…8a01`\)/u);
+  assert.match(runbook, /checked-in successor migration snapshot \(`3b68feb8…` \/ `771c…8a01`\)/u);
   assert.match(runbook, /pre-upgrade initialization shell retains its own legacy export/u);
   assert.match(runbook, /DOWNLOAD FEATURE EVIDENCE[^\n]+only a partial checkpoint/u);
   assert.match(runbook, /EXPORT COMPLETE ATTENDED BUNDLE[^\n]+canonical complete-roster export/u);
