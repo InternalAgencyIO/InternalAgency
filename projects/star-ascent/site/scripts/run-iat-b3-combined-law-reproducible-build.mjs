@@ -174,13 +174,13 @@ const EXACT_SOURCE_GIT_PROCESS_CONFIG = Object.freeze([
 const PINNED_EXACT_SOURCE_GIT = Object.freeze({
   win32: Object.freeze({
     executablePath: "C:\\Program Files\\Git\\bin\\git.exe",
-    executableSha256: "7b7971dd13f0c3a284e538601f2f9770b3a87dfaccb5fb52d68141c67ed22364",
-    executableByteLength: 46_920,
+    executableSha256: "78211c7ed73988da93a6d8a33d47ec6187f464d7ea2a9a00c182bbd7a1ecf30f",
+    executableByteLength: 43_352,
     executableLinkCount: 1,
-    version: "git version 2.55.0.windows.3",
+    version: "git version 2.55.0.windows.5",
     implementationPath: "C:\\Program Files\\Git\\mingw64\\bin\\git.exe",
-    implementationSha256: "1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9",
-    implementationByteLength: 4_383_048,
+    implementationSha256: "d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da",
+    implementationByteLength: 4_378_456,
     implementationLinkCount: 4,
     trustedPathDirectories: Object.freeze([
       "C:\\Program Files\\Git\\bin",

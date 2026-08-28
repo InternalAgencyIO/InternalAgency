@@ -2,9 +2,9 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { lstatSync, readFileSync, realpathSync } from "node:fs";
 
-const VERSION = "git version 2.55.0.windows.3";
-const SHA256 = "1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9";
-const BYTES = 4_383_048;
+const VERSION = "git version 2.55.0.windows.5";
+const SHA256 = "d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da";
+const BYTES = 4_378_456;
 const WINDOWS_PATH = "C:\\Program Files\\Git\\mingw64\\bin\\git.exe";
 const WSL_PATH = "/mnt/c/Program Files/Git/mingw64/bin/git.exe";
 

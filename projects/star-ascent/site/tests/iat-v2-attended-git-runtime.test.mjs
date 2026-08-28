@@ -8,9 +8,9 @@ import {
 
 test("attended Git runtime is bound to one exact Windows executable visible in Ubuntu WSL", () => {
   assert.deepEqual(IAT_V2_ATTENDED_GIT_BINDING, {
-    version: "git version 2.55.0.windows.3",
-    sha256: "1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9",
-    bytes: 4_383_048,
+    version: "git version 2.55.0.windows.5",
+    sha256: "d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da",
+    bytes: 4_378_456,
     windowsPath: "C:\\Program Files\\Git\\mingw64\\bin\\git.exe",
     wslPath: "/mnt/c/Program Files/Git/mingw64/bin/git.exe",
   });

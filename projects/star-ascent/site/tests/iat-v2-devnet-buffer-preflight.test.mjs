@@ -584,9 +584,9 @@ test("authority handoff CAS is target-keyed, canonical, durable, and cannot be r
       "node-sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
       "node-bytes": "125989464",
       "git-path": "/mnt/c/Program Files/Git/mingw64/bin/git.exe",
-      "git-version": "git version 2.55.0.windows.3",
-      "git-sha256": "1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9",
-      "git-bytes": "4383048",
+      "git-version": "git version 2.55.0.windows.5",
+      "git-sha256": "d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da",
+      "git-bytes": "4378456",
       "devnet-genesis-hash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
       "solana-cli-path": "/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana",
       "solana-cli-version": "solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)",
@@ -689,7 +689,7 @@ test("buffer authority helper retries reads but never repeats an ambiguous mutat
     const fakeGit = executable("git", `#!/usr/bin/env bash
 set -euo pipefail
 if [[ "\${1:-}" == "--version" ]]; then
-  printf 'git version 2.55.0.windows.3\\n'
+  printf 'git version 2.55.0.windows.5\\n'
   exit 0
 fi
 exit 98
@@ -706,7 +706,7 @@ elif [[ "\${1:-}" == "-e" ]]; then
     *'"status":"AVAILABLE"'*) printf 'AVAILABLE' ;;
     *'"status":"RESERVED_CREATED"'*) printf 'RESERVED_CREATED' ;;
     *'"status":"RESERVED_EXISTING"'*) printf 'RESERVED_EXISTING' ;;
-    *) printf '%s\\n%s\\n%064d\\n%040d\\n%040d\\n33161771816\\n1\\n%s\\n%s\\n%s\\n%s\\n' '${artifactSha256}' '${artifact.length}' 0 2 3 '${fakeGit}' 'git version 2.55.0.windows.3' '${fakeGitSha256}' '${fakeGitBytes.length}' ;;
+    *) printf '%s\\n%s\\n%064d\\n%040d\\n%040d\\n33161771816\\n1\\n%s\\n%s\\n%s\\n%s\\n' '${artifactSha256}' '${artifact.length}' 0 2 3 '${fakeGit}' 'git version 2.55.0.windows.5' '${fakeGitSha256}' '${fakeGitBytes.length}' ;;
   esac
 elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" ]]; then
   if [[ "\${2:-}" == "inspect" ]]; then
@@ -726,7 +726,7 @@ elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" ]]; then
   fi
 else
   printf 'simulated dependency warning on stderr\\n' >&2
-  printf '{"artifactSha256":"${artifactSha256}","artifactBytes":${artifact.length},"evidenceManifestSha256":"%064d","sourceHeadCommit":"%040d","sourceHeadTree":"%040d","ciRunId":33161771816,"ciRunAttempt":1,"gitPath":"${fakeGit}","gitVersion":"git version 2.55.0.windows.3","gitSha256":"${fakeGitSha256}","gitBytes":${fakeGitBytes.length}}\\n' 0 2 3
+  printf '{"artifactSha256":"${artifactSha256}","artifactBytes":${artifact.length},"evidenceManifestSha256":"%064d","sourceHeadCommit":"%040d","sourceHeadTree":"%040d","ciRunId":33161771816,"ciRunAttempt":1,"gitPath":"${fakeGit}","gitVersion":"git version 2.55.0.windows.5","gitSha256":"${fakeGitSha256}","gitBytes":${fakeGitBytes.length}}\\n' 0 2 3
 fi
 `);
     const fakeSolana = executable("solana", `#!/usr/bin/env bash
@@ -841,7 +841,7 @@ exit 91
       ["IAT_V2_EXPECTED_NODE_SHA256", sha256(fakeNodeBytes)],
       ["IAT_V2_EXPECTED_NODE_BYTES", String(fakeNodeBytes.length)],
       ["IAT_V2_EXPECTED_GIT_PATH", fakeGit],
-      ["IAT_V2_EXPECTED_GIT_VERSION", "git version 2.55.0.windows.3"],
+      ["IAT_V2_EXPECTED_GIT_VERSION", "git version 2.55.0.windows.5"],
       ["IAT_V2_EXPECTED_GIT_SHA256", fakeGitSha256],
       ["IAT_V2_EXPECTED_GIT_BYTES", String(fakeGitBytes.length)],
       ["IAT_V2_EXPECTED_SOLANA_CLI_PATH", fakeSolana],

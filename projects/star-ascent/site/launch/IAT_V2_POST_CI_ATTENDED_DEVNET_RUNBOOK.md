@@ -103,7 +103,7 @@ The helper scripts independently verify every pinned executable before sensitive
 | Tool | Exact path | Exact version | SHA-256 | Bytes |
 | --- | --- | --- | --- | ---: |
 | Node.js | `/home/a/.local/share/internal-agency/toolchains/node-v24.19.0-linux-x64/bin/node` | `v24.19.0` | `bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12` | 125,989,464 |
-| Git | `/mnt/c/Program Files/Git/mingw64/bin/git.exe` | `git version 2.55.0.windows.3` | `1a0043555d254618f2d56c936c3d9a1fbfb878bc878416a133c346bc7835eda9` | 4,383,048 |
+| Git | `/mnt/c/Program Files/Git/mingw64/bin/git.exe` | `git version 2.55.0.windows.5` | `d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da` | 4,378,456 |
 | Solana CLI | `/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana` | `solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)` | `aacc6871e8ff199608987f0364f2ed9e239a32e1e0548f1ae4477e0e533e1dea` | 28,546,968 |
 | Solana keygen | `/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana-keygen` | `solana-keygen 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)` | `bf66aa11a13dd15503f40ab2b1160f06c7505bca692dfb20800682615d4ec952` | 2,828,816 |
 

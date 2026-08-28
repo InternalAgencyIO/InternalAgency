@@ -128,7 +128,7 @@ const PINNED_EXECUTION_MODULE_CLOSURE = Object.freeze([
   Object.freeze({
     repositoryPath: "projects/star-ascent/site/scripts/run-iat-b3-combined-law-reproducible-build.mjs",
     url: new URL("./run-iat-b3-combined-law-reproducible-build.mjs", import.meta.url),
-    sha256: "315eb1e11cc198c57f07439ddf6241ae133afac7caa4e9af3a1676ea8b450a39",
+    sha256: "de05316bce5a8d24fbd369c7214d9087517a131f0b977ff030cd973ef38941f3",
     byteLength: 161_351,
   }),
   Object.freeze({
