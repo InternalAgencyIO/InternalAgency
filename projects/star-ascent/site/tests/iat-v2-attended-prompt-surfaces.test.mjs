@@ -128,8 +128,9 @@ test("program prompting refreshes the blockhash after read-only preflight and ex
   );
   assert.match(handler, /finalizedContextSlot: simulationSlot/u);
   assert.match(handler, /VALID TO HEIGHT \$\{latest\.lastValidBlockHeight\}/u);
-  assert.match(programSource, /LAST VALID HEIGHT \{pending\.latest\.lastValidBlockHeight\}/u);
-  assert.match(programSource, /Expiry permanently ends this ceremony\./u);
+  assert.match(handler, /BROADCAST NOW/u);
+  assert.match(programSource, /VALID TO HEIGHT \{pending\.latest\.lastValidBlockHeight\}/u);
+  assert.match(programSource, /EXPIRY ENDS THIS CEREMONY\./u);
 });
 
 test("a consumed or indeterminate program prompt blocks the same mounted recovery binding", () => {

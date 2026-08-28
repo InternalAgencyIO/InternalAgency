@@ -648,9 +648,7 @@ export default function ProgramUpgradeAttendedActions({
         "Freshly rebuilt program action",
       );
       setSnapshot(promptSnapshot);
-      setStatus(promptSnapshot.action === "extend-program"
-        ? `MODEL T // REVIEW ${promptSnapshot.additionalProgramDataBytes} BYTES + ${promptSnapshot.rentTopUpLamports} LAMPORTS; VALID TO HEIGHT ${latest.lastValidBlockHeight}; NOT BROADCAST`
-        : `MODEL T // REVIEW UPGRADE; VALID TO HEIGHT ${latest.lastValidBlockHeight}; NOT BROADCAST`);
+      setStatus(`MODEL T // REVIEW EXACT ACTION; VALID TO HEIGHT ${latest.lastValidBlockHeight}; NOT BROADCAST`);
       assertProgramPromptOrder(promptSnapshot, promptAction);
       const promptRecoveryBindingKey = programRecoveryBindingKey(promptSnapshot);
       if (promptRecoveryBindingKey === null) {
@@ -696,7 +694,7 @@ export default function ProgramUpgradeAttendedActions({
       });
       const nextPending = pendingForSigned(signed);
       setPending(nextPending);
-      setStatus(`SIGNED // NOT BROADCAST — RECOVERABLE; VALID TO HEIGHT ${latest.lastValidBlockHeight}; APPROVE BROADCAST NOW`);
+      setStatus(`SIGNED // NOT BROADCAST — RECOVERABLE; VALID TO HEIGHT ${latest.lastValidBlockHeight}; BROADCAST NOW`);
     } catch (caught) {
       if (promptRecovery !== null && shouldBlockProgramPromptRetry(promptRecovery)) {
         setBlockedPendingBinding(promptRecovery.key);
@@ -1124,8 +1122,8 @@ export default function ProgramUpgradeAttendedActions({
           ) : (
             <div className="broadcast-panel">
               <code>MESSAGE {pending.messageSha256}</code>
-              <code>LAST VALID HEIGHT {pending.latest.lastValidBlockHeight}</code>
-              <p>Approve broadcast now. Expiry permanently ends this ceremony.</p>
+              <code>VALID TO HEIGHT {pending.latest.lastValidBlockHeight}</code>
+              <p>EXPIRY ENDS THIS CEREMONY.</p>
               <button onClick={broadcastSigned} disabled={busy || inspectionBusy || broadcastBlocked}>
                 {pending.action === "extend-program"
                   ? "BROADCAST SIGNED CAPACITY EXTENSION"
