@@ -8670,20 +8670,21 @@
     ]
   },
   "latestGuardianWakeAudit": {
-    "status": "five-qualified-captionless-two-plus-one-posts-prepared-switzerland-closed-one-accepted-sierra-leone-next",
-    "checkedAt": "2026-08-28T11:26:43.900Z",
+    "schemaVersion": 1,
+    "status": "libya-closed-one-accepted-tenth-cycle-x-window-due-five-qualified-posts-awaiting-action-time-confirmation-kyrgyzstan-next",
+    "checkedAt": "2026-08-28T12:57:16.201Z",
     "account": "@dogramaci",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
     "pendingPost": null,
     "preparedPostQueueCount": 5,
     "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 19,
+    "eligibleBacklogRemaining": 21,
     "newlyPublished": [],
-    "verification": "Switzerland scene 1849 accepted and archived; scene 1848 is an archived hard-unusable roll mismatch, and scenes 1846 and 1847 are explicit no-byte alternative offers. Five mutually exclusive captionless 2+1 posts remain prepared.",
-    "duplicatePrevention": "Never resend Switzerland 1846-1849. Residual accepted scenes 1828, 1832, 1845 and 1849 are each from different countries and cannot form a legal 2+1 pair.",
-    "nextCadence": "Begin Sierra Leone with four clean checkpoint-authorized Meta lanes after fresh action-time confirmation.",
-    "remoteParity": "Prior commit e256212a is pushed; Switzerland prompt, provider and terminal evidence are pending the next targeted commit.",
+    "verification": "Libya scene 1866 accepted and archived; scene 1867 is an explicit no-byte refusal; scenes 1868 and 1869 are archived hard-unusable. The tenth formal country cycle is reached. Live profile ownership was verified and no exact prepared three-asset reservation was found among the visible recent statuses or publication ledger.",
+    "duplicatePrevention": "Never resend Libya scenes 1866-1869. Scene 1866 is unique against the pre-append authoritative manifest.",
+    "nextCadence": "Verify signed-in @dogramaci, preserve the five exact prepared posts, request fresh action-time confirmation before any Post, and stage Kyrgyzstan scenes 1870-1873.",
+    "remoteParity": "Pending targeted Git/LFS commit and push.",
     "pairReady": true,
     "preparedSceneSets": [
       [
@@ -8716,142 +8717,100 @@
       1828,
       1832,
       1845,
-      1849
+      1849,
+      1865,
+      1866
     ]
   },
   "latestTenCountryCadenceAudit": {
     "schemaVersion": 1,
-    "status": "completed-one-eligible-backlog-no-qualified-pair-no-post-x-profile-error",
-    "completedAtUtc": "2026-08-27T17:41:14.349Z",
+    "status": "verified-five-qualified-posts-awaiting-fresh-action-time-confirmation",
+    "completedAtUtc": null,
+    "checkedAtUtc": "2026-08-28T12:59:29.501Z",
     "account": "@dogramaci",
     "browserSurface": "in-app-browser",
-    "liveProfileVerified": false,
-    "signedInAccountVerified": false,
-    "ownerControlVerified": null,
-    "profileVerificationAttempt": {
+    "liveProfileVerified": true,
+    "signedInAccountVerified": true,
+    "ownerControlVerified": "Edit profile",
+    "profileVerification": {
       "url": "https://x.com/dogramaci",
-      "observedAtUtc": "2026-08-27T17:39:15.001Z",
-      "outcome": "site_error",
-      "visibleText": "Something went wrong, but don’t fret — let’s give it another shot. Some privacy related extensions may cause issues on x.com. Please disable them and try again."
+      "title": "(2) Raymond R. (@dogramaci) / X",
+      "observedAtUtc": "2026-08-28T12:59:29.501Z",
+      "signedInAccount": "@dogramaci",
+      "ownerControlVerified": "Edit profile",
+      "visibleRecentStatuses": [
+        {
+          "statusUrl": "https://x.com/dogramaci/status/2093289919594557794",
+          "visiblePhotoEndpointCount": 1,
+          "visibleMediaCount": 1,
+          "visibleText": "Raymond R.\n@dogramaci\n·\n2h\n42"
+        },
+        {
+          "statusUrl": "https://x.com/dogramaci/status/2093287922787070092",
+          "visiblePhotoEndpointCount": 4,
+          "visibleMediaCount": 4,
+          "visibleText": "Raymond R.\n@dogramaci\n·\n2h\n39"
+        },
+        {
+          "statusUrl": "https://x.com/dogramaci/status/2093286180074684428",
+          "visiblePhotoEndpointCount": 4,
+          "visibleMediaCount": 4,
+          "visibleText": "Raymond R.\n@dogramaci\n·\n2h\n1\n1\n36"
+        }
+      ],
+      "reconciliation": "The three visible recent unpinned statuses expose 1, 4 and 4 photo endpoints; none matches any exact three-asset prepared reservation. No prepared scene ID is present in the authoritative publication ledger."
     },
     "cadenceCountryBatches": [
-      431,
-      432,
-      433,
-      434,
-      435,
-      436,
-      437,
-      438,
-      439,
-      440
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      460
     ],
     "completedCountryCycles": 10,
-    "batchEligibility": [
-      {
-        "batch": 431,
-        "country": "Benin",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 432,
-        "country": "Rwanda",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 433,
-        "country": "Burundi",
-        "accepted_current_country_assets": 1,
-        "required": 4,
-        "eligible": false,
-        "eligible_unpublished_scene_ids": [
-          1753
-        ]
-      },
-      {
-        "batch": 434,
-        "country": "Bolivia",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 435,
-        "country": "Tunisia",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 436,
-        "country": "South Sudan",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 437,
-        "country": "Belgium",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 438,
-        "country": "Haiti",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 439,
-        "country": "Jordan",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      },
-      {
-        "batch": 440,
-        "country": "Dominican Republic",
-        "accepted_current_country_assets": 0,
-        "required": 4,
-        "eligible": false
-      }
-    ],
-    "eligibleBacklogRemaining": 1,
+    "eligibleBacklogRemaining": 21,
     "eligibleUnpublishedSceneIds": [
-      1753
+      1810,
+      1811,
+      1814,
+      1812,
+      1813,
+      1816,
+      1818,
+      1820,
+      1823,
+      1824,
+      1825,
+      1817,
+      1826,
+      1827,
+      1821,
+      1828,
+      1832,
+      1845,
+      1849,
+      1865,
+      1866
     ],
-    "pairReady": false,
+    "pairReady": true,
     "newlyPublished": [],
     "pendingQualifiedPost": null,
     "queueState": {
       "pendingPost": null,
-      "preparedPostQueueCount": 0,
+      "preparedPostQueueCount": 5,
       "deferredPostCheckpoint": null
     },
-    "reconciliation": "Only Burundi scene 1753 is accepted, byte-backed, unpublished, and non-duplicate. No second country has two eligible assets, so the binding 2+1 country-post composition cannot be formed.",
-    "action": "No X composer upload or Post was submitted. Live profile verification was blocked by X's site error, but the authoritative ledger state independently proves no qualified post exists.",
-    "counterResetAfterOutcomeRecorded": true,
-    "nextRenderBatch": 441,
-    "nextCountry": "United Arab Emirates",
-    "browserBlockers": [
-      {
-        "surface": "Meta AI",
-        "tabId": "43",
-        "title": "This site can't be reached",
-        "closeBlockedByBrowserUrlPolicy": true
-      },
-      {
-        "surface": "X",
-        "url": "https://x.com/dogramaci",
-        "error": "Something went wrong / privacy extensions"
-      }
-    ]
+    "reconciliation": "Five mutually exclusive captionless 2+1 posts are prepared. Their scene IDs are absent from the publication ledger, and the visible recent live statuses have 1, 4 and 4 photo endpoints rather than any prepared three-asset reservation.",
+    "action": "No X upload or Post submitted. Fresh action-time confirmation is required for the exact five prepared reservations.",
+    "counterResetAfterOutcomeRecorded": false,
+    "nextRenderBatch": 461,
+    "nextCountry": "Kyrgyzstan",
+    "browserBlockers": []
   },
   "latestBatch456SierraLeoneReconciliation": {
     "schemaVersion": 1,
@@ -8941,5 +8900,66 @@
       "counterReset": false
     },
     "nextCountry": "Libya"
+  },
+  "latestBatch460LibyaReconciliation": {
+    "schemaVersion": 1,
+    "checkedAtUtc": "2026-08-28T12:57:16.201Z",
+    "batch": 460,
+    "country": "Libya",
+    "acceptedSceneIds": [
+      1866
+    ],
+    "eligibleBacklogRemaining": 21,
+    "preparedPostQueueCount": 5,
+    "preparedAssetCount": 15,
+    "unreservedAcceptedSceneIds": [
+      1828,
+      1832,
+      1845,
+      1849,
+      1865,
+      1866
+    ],
+    "newLegalPairPrepared": false,
+    "publishingPerformed": false,
+    "destinationAccount": "@dogramaci",
+    "xCadence": {
+      "completedCountryCyclesSinceLastReset": 10,
+      "publishThreshold": 10,
+      "publishDue": true,
+      "counterReset": false,
+      "gate": "Await live @dogramaci verification and fresh action-time confirmation for the five exact prepared posts."
+    },
+    "nextCountry": "Kyrgyzstan",
+    "liveProfileVerified": true,
+    "signedInAccountVerified": true,
+    "profileVerification": {
+      "url": "https://x.com/dogramaci",
+      "title": "(2) Raymond R. (@dogramaci) / X",
+      "observedAtUtc": "2026-08-28T12:59:29.501Z",
+      "signedInAccount": "@dogramaci",
+      "ownerControlVerified": "Edit profile",
+      "visibleRecentStatuses": [
+        {
+          "statusUrl": "https://x.com/dogramaci/status/2093289919594557794",
+          "visiblePhotoEndpointCount": 1,
+          "visibleMediaCount": 1,
+          "visibleText": "Raymond R.\n@dogramaci\n·\n2h\n42"
+        },
+        {
+          "statusUrl": "https://x.com/dogramaci/status/2093287922787070092",
+          "visiblePhotoEndpointCount": 4,
+          "visibleMediaCount": 4,
+          "visibleText": "Raymond R.\n@dogramaci\n·\n2h\n39"
+        },
+        {
+          "statusUrl": "https://x.com/dogramaci/status/2093286180074684428",
+          "visiblePhotoEndpointCount": 4,
+          "visibleMediaCount": 4,
+          "visibleText": "Raymond R.\n@dogramaci\n·\n2h\n1\n1\n36"
+        }
+      ],
+      "reconciliation": "The three visible recent unpinned statuses expose 1, 4 and 4 photo endpoints; none matches any exact three-asset prepared reservation. No prepared scene ID is present in the authoritative publication ledger."
+    }
   }
 }
