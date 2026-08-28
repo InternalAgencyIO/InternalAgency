@@ -2,7 +2,7 @@
   "schema": "iat-pending-visible-i18n-source/v1",
   "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
   "sourceBinding": {
-    "commit": "9132443dc04c37a8ce1aa3eab15086b0d53ccb7f",
+    "commit": "bd3b4a6aa70798924e6b196592bda6c83f9b0f1d",
     "activeCatalogSha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f"
   },
   "capture": {
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "source": "Exact unsigned request reviewed before the physical device confirmation; published separately for byte-level comparison.",
+      "source": "Exact unsigned request later paired with an operator-reported physical device confirmation and later published separately for byte-level comparison.",
       "routes": [
         "/proof"
       ]
@@ -335,6 +335,12 @@
       ]
     },
     {
+      "source": "OPEN CRYPTOGRAPHIC PROOF",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "OPEN FROZEN REQUEST",
       "routes": [
         "/proof"
@@ -344,12 +350,6 @@
       "source": "Open retained IAT economic policy (V2)",
       "routes": [
         "/"
-      ]
-    },
-    {
-      "source": "OPEN VERIFIED PROOF",
-      "routes": [
-        "/proof"
       ]
     },
     {
@@ -607,7 +607,7 @@
       ]
     },
     {
-      "source": "Verified Ed25519 signature, frozen request binding, signer public key, and independent verification result. This artifact does not prove hardware provenance or a Devnet transaction.",
+      "source": "Verified Ed25519 signature, frozen request binding, signer public key, and publicly reproducible cryptographic verification. Embedded device and prompt fields are operator-reported and are not independently verified. The embedded LOCAL_ONLY_NOT_PUBLISHED value records creation-time state and was later superseded by publication; this artifact does not prove hardware provenance or a Devnet transaction.",
       "routes": [
         "/proof"
       ]
