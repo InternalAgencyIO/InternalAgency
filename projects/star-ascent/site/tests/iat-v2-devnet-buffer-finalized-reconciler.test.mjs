@@ -18,11 +18,11 @@ import {
   FinalizedBufferReconciliationError,
   REVIEWED_DEVNET_DEPLOYER,
   REVIEWED_MODEL_T_ADMIN,
+  REVIEWED_PUBLIC_CI_ARTIFACT_BINDING,
   UPGRADEABLE_LOADER_ID,
   assertReviewedPublicCiArtifact,
   compareBufferProgramBytes,
   createJsonRpcCaller,
-  loadReviewedPublicCiArtifact,
   reconcileFinalizedDevnetBuffer,
   writeDurableReconciliationEvidence,
 } from "../scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs";
@@ -322,12 +322,28 @@ test("the canonical raw caller transport remains endpoint-pinned and read-only",
 });
 
 test("public CI artifact loader is pinned and durable evidence is exclusive", () => {
-  const artifact = loadReviewedPublicCiArtifact();
+  const source = readFileSync(
+    new URL("../scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs", import.meta.url),
+    "utf8",
+  );
+  const artifact = assertReviewedPublicCiArtifact(TEST_ARTIFACT, TEST_BINDING);
   assert.equal(CANONICAL_PUBLIC_CI_ARTIFACT.endsWith("iat_v2.so"), true);
-  assert.equal(artifact.byteLength, 649_680);
-  assert.equal(artifact.sha256, "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01");
+  assert.equal(REVIEWED_PUBLIC_CI_ARTIFACT_BINDING.expectedBytes, 649_680);
+  assert.equal(
+    REVIEWED_PUBLIC_CI_ARTIFACT_BINDING.expectedSha256,
+    "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
+  );
+  assert.match(
+    source,
+    /export function loadReviewedPublicCiArtifact\(\) \{\s+return assertReviewedPublicCiArtifact\(readFileSync\(CANONICAL_PUBLIC_CI_ARTIFACT\)\);\s+\}/u,
+  );
+  assert.equal(artifact.byteLength, TEST_BINDING.expectedBytes);
+  assert.equal(artifact.sha256, TEST_BINDING.expectedSha256);
   assert.throws(
-    () => assertReviewedPublicCiArtifact(Buffer.from(artifact.bytes).fill(0, 0, 1)),
+    () => assertReviewedPublicCiArtifact(
+      Buffer.from(artifact.bytes).fill(0, 0, 1),
+      TEST_BINDING,
+    ),
     (error) => error instanceof FinalizedBufferReconciliationError
       && error.code === "ARTIFACT_BINDING_HOLD",
   );
