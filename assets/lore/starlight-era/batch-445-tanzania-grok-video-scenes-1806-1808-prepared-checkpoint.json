@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "batch": 445,
+  "country": "Tanzania",
+  "workflow": "DeepSeek rough kernels -> Codex full rewrite -> Grok Imagine x4 still workshop -> selected still to 15s video -> X @dogramaci",
+  "state": "two_grok_composers_staged_awaiting_manual_anchor_attachment",
+  "preparedAtUtc": "2026-08-28T17:58:38.331Z",
+  "metaAiPauseUntil": "2026-08-29T08:00:00+03:00",
+  "provider": "Grok Imagine in-app browser only",
+  "laneLimit": 2,
+  "settings": {
+    "still": {
+      "mode": "Image",
+      "quality": "Quality (v2.0)",
+      "count": 4,
+      "aspectRatio": "9:16"
+    },
+    "video": {
+      "durationSeconds": 15,
+      "resolution": "720p",
+      "aspectRatio": "9:16",
+      "audio": true
+    }
+  },
+  "orderedFaceAnchors": [
+    {
+      "order": 1,
+      "scene": 938,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "scene": 936,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "scene": 937,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "scenes": [
+    {
+      "scene": 1806,
+      "location": "Dar es Salaam Kivukoni waterfront",
+      "cameraRoll": 21,
+      "framing": "INTERMEDIATE",
+      "stillPromptPath": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-445-tanzania-grok-video/scene-1806-still-prompt.txt",
+      "stillPromptSha256": "A5391B981CD1CF3647B71BDB9A6981119E894D6E4BC72379E8B6413F5D9B52B0",
+      "videoPromptPath": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-445-tanzania-grok-video/scene-1806-video-prompt.txt",
+      "videoPromptSha256": "9DAB57ACD4FBA51EE53000E309336F1A61F42AAB06D6F036C2219FE352890C65"
+    },
+    {
+      "scene": 1808,
+      "location": "Serengeti Naabi Hill",
+      "cameraRoll": 44,
+      "framing": "INTERMEDIATE",
+      "stillPromptPath": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-445-tanzania-grok-video/scene-1808-still-prompt.txt",
+      "stillPromptSha256": "14147C865B6B888086CBD5F6D6C369B91B04CF652FFD323DAE23B16A43AEA719",
+      "videoPromptPath": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-445-tanzania-grok-video/scene-1808-video-prompt.txt",
+      "videoPromptSha256": "9D8628AD512A675D2F2728CC25A27EB23270E7E0F5C006802D1EB1F447525E88"
+    }
+  ],
+  "blocker": {
+    "observedAtUtc": "2026-08-28T17:58:38.332Z",
+    "action": "Grok anchor upload",
+    "result": "supported in-app file chooser did not open from Upload, Upload media, or hidden input control",
+    "policy": "No indirect workaround or anchorless dispatch. Await manual in-app anchor attachment."
+  },
+  "dispatch": {
+    "uploadsComplete": false,
+    "promptsSent": false,
+    "providerUrls": []
+  },
+  "composersStagedAtUtc": "2026-08-28T17:59:24.909Z",
+  "lanes": [
+    {
+      "scene": 1806,
+      "tabId": "99",
+      "promptSha256Observed": "A5391B981CD1CF3647B71BDB9A6981119E894D6E4BC72379E8B6413F5D9B52B0",
+      "promptSha256Expected": "A5391B981CD1CF3647B71BDB9A6981119E894D6E4BC72379E8B6413F5D9B52B0",
+      "promptVerified": true,
+      "mode": "Image",
+      "quality": "Quality (v2.0)",
+      "imageCount": 4,
+      "aspectRatio": "9:16",
+      "submitEnabled": true,
+      "anchorsAttached": false,
+      "submitClicked": false,
+      "providerUrl": null
+    },
+    {
+      "scene": 1808,
+      "tabId": "100",
+      "promptSha256Observed": "14147C865B6B888086CBD5F6D6C369B91B04CF652FFD323DAE23B16A43AEA719",
+      "promptSha256Expected": "14147C865B6B888086CBD5F6D6C369B91B04CF652FFD323DAE23B16A43AEA719",
+      "promptVerified": true,
+      "mode": "Image",
+      "quality": "Quality (v2.0)",
+      "imageCount": 4,
+      "aspectRatio": "9:16",
+      "submitEnabled": true,
+      "anchorsAttached": false,
+      "submitClicked": false,
+      "providerUrl": null
+    }
+  ]
+}
