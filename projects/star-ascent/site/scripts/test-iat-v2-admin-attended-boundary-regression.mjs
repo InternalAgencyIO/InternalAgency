@@ -56,12 +56,13 @@ try {
   copy("public/audits/iat-v2-admin-lazy-boundary-20260805/policy.json");
   copy("public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json");
   copy("public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json");
+  copy("public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json");
 
   const baseline = run(fixtureRoot);
   assert.equal(baseline.status, 0, baseline.stderr || baseline.stdout);
 
   const manifestPath = "tools/iat-v2-admin-console/dist/.vite/manifest.json";
-  const policyPath = "public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json";
+  const policyPath = "public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json";
   const sourcePath = "tools/iat-v2-admin-console/ProgramUpgrade.jsx";
   const aggregateMaximum = readJson(fixtureRoot, policyPath)
     .byteBudgets.programUpgradeIncrementalClosureMaximum;
@@ -136,8 +137,8 @@ try {
   }, /setAttendedLoaded/u);
 
   mutate("predecessor-tamper", (root) => {
-    appendFileSync(resolve(root, "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json"), "\n");
-  }, /immutable 20260826 predecessor policy bytes drifted/u);
+    appendFileSync(resolve(root, "public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json"), "\n");
+  }, /immutable 20260827 predecessor policy bytes drifted/u);
 
   console.log("IAT V2 admin attended-boundary regression passed: baseline plus missing, duplicate, eager-action, eager-builder, direct, extra-edge, unbudgeted, aggregate-overflow, activation-bypass, and predecessor-tamper mutations fail closed.");
 } finally {

@@ -68,9 +68,9 @@ If no extension is required, continue to buffer upload. If extension is required
 
 1. In `?mode=upgrade`, press **SIMULATE + SIGN SEPARATE CAPACITY EXTENSION**.
 2. Review the exact added bytes and rent top-up on the Model T and approve physically.
-3. Confirm the console shows **SIGNED // NOT BROADCAST** and the reviewed message SHA-256.
-   The amended console must also report that the exact signed-pending record is durably recoverable; do not reload unless recovery is necessary.
-4. Press the separate **BROADCAST SIGNED CAPACITY EXTENSION** button once. The console must persist the exact locally derived signature in a permanent broadcast-attempt reservation before its sole send.
+3. Confirm the console shows **SIGNED // NOT BROADCAST**, the reviewed message SHA-256, and the exact last-valid block height.
+   The amended console must also report that the exact signed-pending record is durably recoverable; do not reload unless recovery is necessary. Complete the separate attended broadcast approval without delay. If the signature expires, stop: that source-bound ceremony is terminal and a new source-bound ceremony with fresh exact-head CI is required.
+4. After separately confirming that you are ready to submit the reviewed signed wire, press **BROADCAST SIGNED CAPACITY EXTENSION** once. The console must persist the exact locally derived signature in a permanent broadcast-attempt reservation before its sole send.
 5. After that reservation exists, use only **POLL FINALIZED SIGNATURE + COMPLETE EVIDENCE (NO SEND)**. Wait for **FINALIZED**, export the source-bound program receipt set, then refresh the read-only capacity command. A null, timeout, RPC error, reload, or ambiguous result never authorizes another send.
 
 The capacity transaction must never auto-start buffer upload or program upgrade.

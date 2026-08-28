@@ -265,6 +265,43 @@ function buildAttendedProgramTransaction({ blockhash, current, feePayer }) {
   throw new Error("Finalized program state has no signable attended action");
 }
 
+async function buildAndSimulateFreshProgramTransaction({
+  commitment,
+  connection,
+  current,
+  feePayer,
+  label,
+  minContextSlot,
+  sha256Hex,
+}) {
+  const latestResult = await connection.getLatestBlockhashAndContext({
+    commitment,
+    minContextSlot,
+  });
+  const latestContextSlot = finalizedContextSlot(
+    latestResult,
+    `${label} blockhash`,
+    minContextSlot,
+  );
+  const latest = latestResult.value;
+  const transaction = buildAttendedProgramTransaction({
+    blockhash: latest.blockhash,
+    current,
+    feePayer,
+  });
+  const simulated = await simulateExactLegacyTransaction({
+    commitment,
+    connection,
+    minContextSlot: latestContextSlot,
+    sha256Hex,
+    transaction,
+  });
+  if (simulated.simulation.value.err) {
+    throw new Error(`${label} simulation failed: ${JSON.stringify(simulated.simulation.value.err)}`);
+  }
+  return { ...simulated, latest, transaction };
+}
+
 function signedPendingRecord(pending) {
   return {
     schema: IAT_V2_ATTENDED_PROGRAM_SIGNED_PENDING_SCHEMA,
@@ -570,38 +607,16 @@ export default function ProgramUpgradeAttendedActions({
       if (!publicKey.equals(IAT_V2_PROGRAM_ADMIN)) {
         throw new Error("Connected hardware account is not the reviewed Model T payer");
       }
-      const latestResult = await connection.getLatestBlockhashAndContext({
-        commitment: finalizedCommitment,
-        minContextSlot: current.finalizedContextSlot,
-      });
-      const latestContextSlot = finalizedContextSlot(
-        latestResult,
-        "Program action blockhash",
-        current.finalizedContextSlot,
-      );
-      const latest = latestResult.value;
-      const transaction = buildAttendedProgramTransaction({
-        blockhash: latest.blockhash,
-        current,
-        feePayer: publicKey,
-      });
-      const {
-        messageBytes,
-        messageSha256,
-        simulation,
-        simulationSlot,
-      } = await simulateExactLegacyTransaction({
+      const { simulationSlot: preflightSimulationSlot } = await buildAndSimulateFreshProgramTransaction({
         commitment: finalizedCommitment,
         connection,
-        minContextSlot: latestContextSlot,
+        current,
+        feePayer: publicKey,
+        label: "Program action preflight",
+        minContextSlot: current.finalizedContextSlot,
         sha256Hex,
-        transaction,
       });
-      setLogs(simulation.value.logs ?? []);
-      if (simulation.value.err) {
-        throw new Error(`Transaction simulation failed: ${JSON.stringify(simulation.value.err)}`);
-      }
-      const promptSnapshot = await loadBufferSnapshot(simulationSlot);
+      const promptSnapshot = await loadBufferSnapshot(preflightSimulationSlot);
       const promptBinding = upgradeActionBinding(promptSnapshot);
       if (
         !SIGNABLE_ACTIONS.includes(promptSnapshot.action)
@@ -610,11 +625,23 @@ export default function ProgramUpgradeAttendedActions({
         setSnapshot(promptSnapshot);
         throw new Error("Finalized artifact, buffer, or program action changed before the hardware prompt");
       }
-      const promptTransaction = buildAttendedProgramTransaction({
-        blockhash: latest.blockhash,
+      const {
+        latest,
+        messageBytes,
+        messageSha256,
+        simulation,
+        simulationSlot,
+        transaction: promptTransaction,
+      } = await buildAndSimulateFreshProgramTransaction({
+        commitment: finalizedCommitment,
+        connection,
         current: promptSnapshot,
         feePayer: publicKey,
+        label: "Program action prompt",
+        minContextSlot: promptSnapshot.finalizedContextSlot,
+        sha256Hex,
       });
+      setLogs(simulation.value.logs ?? []);
       assertExactTransactionMessage(
         promptTransaction,
         messageBytes,
@@ -622,8 +649,8 @@ export default function ProgramUpgradeAttendedActions({
       );
       setSnapshot(promptSnapshot);
       setStatus(promptSnapshot.action === "extend-program"
-        ? `MODEL T // REVIEW ${promptSnapshot.additionalProgramDataBytes} BYTE CAPACITY EXTENSION + ${promptSnapshot.rentTopUpLamports} LAMPORT RENT TOP-UP; STILL NOT BROADCAST`
-        : "MODEL T // REVIEW PROGRAM UPGRADE AND SIGN; STILL NOT BROADCAST");
+        ? `MODEL T // REVIEW ${promptSnapshot.additionalProgramDataBytes} BYTES + ${promptSnapshot.rentTopUpLamports} LAMPORTS; VALID TO HEIGHT ${latest.lastValidBlockHeight}; NOT BROADCAST`
+        : `MODEL T // REVIEW UPGRADE; VALID TO HEIGHT ${latest.lastValidBlockHeight}; NOT BROADCAST`);
       assertProgramPromptOrder(promptSnapshot, promptAction);
       const promptRecoveryBindingKey = programRecoveryBindingKey(promptSnapshot);
       if (promptRecoveryBindingKey === null) {
@@ -643,7 +670,7 @@ export default function ProgramUpgradeAttendedActions({
         action: promptSnapshot.action,
         actionBinding: promptBinding,
         evidenceBinding: promptSnapshot.evidenceBinding,
-        finalizedContextSlot: promptSnapshot.finalizedContextSlot,
+        finalizedContextSlot: simulationSlot,
         preUpgradeProgramDataCapacityBytes: promptSnapshot.programDataCapacityBytes,
       });
       const signed = await requestProgramModelTSignature({
@@ -669,7 +696,7 @@ export default function ProgramUpgradeAttendedActions({
       });
       const nextPending = pendingForSigned(signed);
       setPending(nextPending);
-      setStatus("SIGNED // NOT BROADCAST — DURABLY RECOVERABLE; PRESS THE SEPARATE BROADCAST BUTTON");
+      setStatus(`SIGNED // NOT BROADCAST — RECOVERABLE; VALID TO HEIGHT ${latest.lastValidBlockHeight}; APPROVE BROADCAST NOW`);
     } catch (caught) {
       if (promptRecovery !== null && shouldBlockProgramPromptRetry(promptRecovery)) {
         setBlockedPendingBinding(promptRecovery.key);
@@ -1097,6 +1124,8 @@ export default function ProgramUpgradeAttendedActions({
           ) : (
             <div className="broadcast-panel">
               <code>MESSAGE {pending.messageSha256}</code>
+              <code>LAST VALID HEIGHT {pending.latest.lastValidBlockHeight}</code>
+              <p>Approve broadcast now. Expiry permanently ends this ceremony.</p>
               <button onClick={broadcastSigned} disabled={busy || inspectionBusy || broadcastBlocked}>
                 {pending.action === "extend-program"
                   ? "BROADCAST SIGNED CAPACITY EXTENSION"

@@ -84,6 +84,54 @@ test("program prompting rejects repair and proves canonical order before provide
   assert.match(order, /assertCanonicalAttendedNextActionFromReceiptSet\(\{[\s\S]*receiptSet,[\s\S]*expectedBinding: snapshot\.evidenceBinding/u);
 });
 
+test("program prompting refreshes the blockhash after read-only preflight and exposes its terminal height", () => {
+  const handler = section(programSource, "async function simulateAndSign()", "async function broadcastSigned()");
+  assert.equal(count(handler, "await buildAndSimulateFreshProgramTransaction({"), 2);
+  assertBefore(
+    handler,
+    "await loadBufferSnapshot(preflightSimulationSlot)",
+    'label: "Program action prompt"',
+    "fresh prompt blockhash",
+  );
+  const helper = section(
+    programSource,
+    "async function buildAndSimulateFreshProgramTransaction",
+    "function signedPendingRecord",
+  );
+  assertBefore(
+    helper,
+    "await connection.getLatestBlockhashAndContext({",
+    "buildAttendedProgramTransaction({",
+    "fresh blockhash transaction",
+  );
+  assertBefore(
+    helper,
+    "buildAttendedProgramTransaction({",
+    "await simulateExactLegacyTransaction({",
+    "fresh transaction simulation",
+  );
+  assertBefore(
+    helper,
+    "if (simulated.simulation.value.err)",
+    "return { ...simulated, latest, transaction }",
+    "fresh simulation failure gate",
+  );
+  assertBefore(
+    handler,
+    'assertProgramPromptOrder(promptSnapshot, promptAction)',
+    "await requestProgramModelTSignature({",
+    "fresh prompt order gate",
+  );
+  assert.match(
+    handler,
+    /const pendingForSigned = \(candidate\) => \(\{[\s\S]*latest,[\s\S]*messageBytes,[\s\S]*messageSha256,[\s\S]*finalizedContextSlot: simulationSlot/u,
+  );
+  assert.match(handler, /finalizedContextSlot: simulationSlot/u);
+  assert.match(handler, /VALID TO HEIGHT \$\{latest\.lastValidBlockHeight\}/u);
+  assert.match(programSource, /LAST VALID HEIGHT \{pending\.latest\.lastValidBlockHeight\}/u);
+  assert.match(programSource, /Expiry permanently ends this ceremony\./u);
+});
+
 test("a consumed or indeterminate program prompt blocks the same mounted recovery binding", () => {
   const handler = section(programSource, "async function simulateAndSign()", "async function broadcastSigned()");
   assert.match(handler, /let promptRecovery = null;/u);

@@ -7,14 +7,14 @@ const siteRoot = resolve(process.env.IAT_V2_ADMIN_BUNDLE_SITE_ROOT ?? process.cw
 const distRoot = resolve(siteRoot, "tools/iat-v2-admin-console/dist");
 const assetsRoot = resolve(distRoot, "assets");
 const manifest = JSON.parse(readFileSync(resolve(distRoot, ".vite/manifest.json"), "utf8"));
-const predecessorPolicyPath = resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json");
-const predecessorPolicySha256 = "aaaed4a6d5fe47a1ed97592f201ca36b2f7482234f3f9c8363120c1750bf7ed8";
-const policy = JSON.parse(readFileSync(resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json"), "utf8"));
+const predecessorPolicyPath = resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json");
+const predecessorPolicySha256 = "4227057382bf32806051299cb778ff007121de13febcc8969c6a790dcef13136";
+const policy = JSON.parse(readFileSync(resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json"), "utf8"));
 const assetNames = readdirSync(assetsRoot);
 const normalize = (value) => value.replaceAll("\\", "/");
 const size = (file) => statSync(resolve(distRoot, file)).size;
 
-assert.equal(policy.schema, "iat-v2-admin-lazy-boundary-policy/v3", "unexpected admin lazy-boundary policy schema");
+assert.equal(policy.schema, "iat-v2-admin-lazy-boundary-policy/v4", "unexpected admin lazy-boundary policy schema");
 assert.equal(policy.status, "DRAFT_PARTIAL_REMEDIATION_QA_HOLD", "admin lazy-boundary policy must remain QA HOLD");
 assert.equal(policy.mainnetStatus, "UNSCHEDULED_HOLD", "admin lazy-boundary policy must keep Mainnet unscheduled HOLD");
 assert.equal(policy.buildManifestRequired, true, "admin build manifest cannot be optional");
@@ -22,10 +22,10 @@ assert.equal(policy.userActivationRequired, true, "attended actions must require
 assert.equal(
   createHash("sha256").update(readFileSync(predecessorPolicyPath)).digest("hex"),
   predecessorPolicySha256,
-  "immutable 20260826 predecessor policy bytes drifted",
+  "immutable 20260827 predecessor policy bytes drifted",
 );
 assert.deepEqual(policy.predecessor, {
-  path: "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json",
+  path: "public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json",
   sha256: predecessorPolicySha256,
 }, "successor policy must bind the immutable predecessor bytes");
 assert.deepEqual(policy.boundaries.inspectionEntryStaticClosureExcludes, [
@@ -186,7 +186,7 @@ for (const [name, bytes] of Object.entries(measured)) {
   assert.ok(bytes <= maximum, `${name} is ${bytes} bytes; budget is ${maximum}`);
 }
 assert.equal(budgets.programUpgradeAttendedMaximum, 40_000, "attended-actions ceiling drifted");
-assert.equal(budgets.programUpgradeIncrementalClosureMaximum, 72_000, "upgrade incremental-closure ceiling drifted");
+assert.equal(budgets.programUpgradeIncrementalClosureMaximum, 72_500, "upgrade incremental-closure ceiling drifted");
 
 const javascript = assetNames
   .filter((name) => name.endsWith(".js"))
