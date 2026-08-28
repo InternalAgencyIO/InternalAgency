@@ -217,7 +217,7 @@
   "pendingPost": null,
   "preparedPostQueue": [],
   "publicationCadenceState": {
-    "mode": "ten-country-cadence-cleared-after-five-live-captioned-x-posts-batch-461-in-flight",
+    "mode": "two-completed-country-cycles-since-last-x-batch-463-next",
     "currentBacklogClearedAt": "2026-08-22T19:21:00Z",
     "completedRenderRunsSinceLastX": 0,
     "completedBanksInCurrentRenderRun": 0,
@@ -298,17 +298,17 @@
     "latestClosedCountryBank": 97,
     "latestClosedProviderUrl": null,
     "latestClosedProviderUrls": [
-      "https://www.meta.ai/prompt/da9e9c4a-dfa1-4fe1-bb81-899094f6d703",
-      "https://www.meta.ai/prompt/f5791a25-9793-461b-b52f-34cf414a34bb",
-      "https://www.meta.ai/prompt/a7176be3-5f30-4d7e-beae-7f72e9d883ba",
-      "https://www.meta.ai/prompt/c7e77585-ae71-47e5-af22-86651cefc9b0"
+      "https://www.meta.ai/prompt/df481979-188d-4530-96d1-7573325bf9a1",
+      "https://www.meta.ai/prompt/f5843598-beb9-4bbd-8fb3-97a4224efef3",
+      "https://www.meta.ai/prompt/7a11a1e6-78fe-43a8-b5f4-2e7c59662f38",
+      "https://www.meta.ai/prompt/f2be6c92-d947-4176-8edf-2a03209642f4"
     ],
-    "latestClosedDispatchedAtUtc": "2026-08-24T15:52:21.097Z",
-    "latestClosedTerminalObservedAtUtc": "2026-08-24T16:01:41.806Z",
+    "latestClosedDispatchedAtUtc": "2026-08-28T16:08:56.963Z",
+    "latestClosedTerminalObservedAtUtc": "2026-08-28T16:20:17.609Z",
     "latestClosedCapturedOccurrenceCount": 5,
-    "latestClosedRawFileCount": 2,
-    "latestClosedUniqueOccurrenceCount": 2,
-    "latestClosedClassification": "two-terminal-refusals-no-bytes-one-hard-unusable-one-hard-safe-provisional-meta-source-selected-pending-chatgpt-finalization",
+    "latestClosedRawFileCount": 0,
+    "latestClosedUniqueOccurrenceCount": 5,
+    "latestClosedClassification": "batch-462-paraguay-four-hard-unusable-scenes-five-rendered-assets-zero-accepted",
     "latestClosedRemoteVerifiedHead": "ddaa5446df6490d758fea9da45b9a917de9147d7",
     "inFlightCountryBank": null,
     "inFlightRenderRunBankOrdinal": null,
@@ -329,7 +329,7 @@
     "pendingEvidenceUniqueOccurrenceCount": 0,
     "pendingEvidenceClassification": null,
     "pendingEvidenceLastRemoteVerifiedHead": null,
-    "completedCountryCyclesSinceLastX": 0,
+    "completedCountryCyclesSinceLastX": 2,
     "latestXOutcomeRecordedAtUtc": "2026-08-28T15:46:57.639Z"
   },
   "latestUserSchedulingAuthorization": {
@@ -9181,5 +9181,39 @@
     "observedAtUtc": "2026-08-28T15:55:07.797Z",
     "instruction": "Captions require a red heart emoji between countries; do not edit existing posts; apply from now on.",
     "normalizedRule": "Future captions begin with Primary Country ❤️ Secondary Country and are final before publication. Existing posts remain unchanged."
+  },
+  "latestBatch462ParaguayReconciliation": {
+    "schemaVersion": 1,
+    "status": "closed-unresolved-zero-accepted",
+    "closedAtUtc": "2026-08-28T16:20:17.609Z",
+    "batch": 462,
+    "country": "Paraguay",
+    "sceneIds": [
+      1874,
+      1875,
+      1876,
+      1877
+    ],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/df481979-188d-4530-96d1-7573325bf9a1",
+      "https://www.meta.ai/prompt/f5843598-beb9-4bbd-8fb3-97a4224efef3",
+      "https://www.meta.ai/prompt/7a11a1e6-78fe-43a8-b5f4-2e7c59662f38",
+      "https://www.meta.ai/prompt/f2be6c92-d947-4176-8edf-2a03209642f4"
+    ],
+    "capturedProviderAssetCount": 5,
+    "rawByteCount": 0,
+    "browserRenderedEvidenceCount": 5,
+    "hardUnusableSceneIds": [
+      1874,
+      1875,
+      1876,
+      1877
+    ],
+    "acceptedSceneIds": [],
+    "completedCountryCyclesSinceLastX": 2,
+    "xCadenceDue": false,
+    "nextBatch": 463,
+    "nextCountry": "Nicaragua",
+    "checkpoint": "assets/lore/starlight-era/batch-462-paraguay-closed-unresolved-checkpoint.json"
   }
 }
