@@ -84,6 +84,49 @@ test("program prompting rejects repair and proves canonical order before provide
   assert.match(order, /assertCanonicalAttendedNextActionFromReceiptSet\(\{[\s\S]*receiptSet,[\s\S]*expectedBinding: snapshot\.evidenceBinding/u);
 });
 
+test("a consumed or indeterminate program prompt blocks the same mounted recovery binding", () => {
+  const handler = section(programSource, "async function simulateAndSign()", "async function broadcastSigned()");
+  assert.match(handler, /let promptRecovery = null;/u);
+  assertBefore(
+    handler,
+    "promptRecovery = {",
+    "await requestProgramModelTSignature({",
+    "program prompt recovery binding",
+  );
+  assert.match(
+    handler,
+    /promptRecovery = \{\s*binding: promptSnapshot\.evidenceBinding,\s*action: promptAction,\s*key: promptRecoveryBindingKey,\s*\};/u,
+  );
+  assert.match(
+    handler,
+    /catch \(caught\) \{\s*if \(promptRecovery !== null && shouldBlockProgramPromptRetry\(promptRecovery\)\) \{\s*setBlockedPendingBinding\(promptRecovery\.key\);\s*\}/u,
+  );
+  const retryGate = section(programSource, "function shouldBlockProgramPromptRetry", "function explorer");
+  assert.match(
+    retryGate,
+    /loadAttendedModelTPromptLatch\(localStorage, \{ binding, action \}\) !== null/u,
+    "only an existing or unreadable durable latch may block the mounted retry",
+  );
+  assert.match(retryGate, /catch \{\s*return true;\s*\}/u, "indeterminate latch storage must fail closed");
+  assert.match(
+    handler,
+    /\|\| pendingRecoveryBlocked[\s\S]*\) return;/u,
+    "the same mounted action must reject another click after the exact binding is blocked",
+  );
+  const promptFailure = section(
+    handler,
+    "} catch (caught) {",
+    "} finally {",
+  );
+  assert.doesNotMatch(
+    promptFailure,
+    /setPending\(|broadcastSigned\(|sendRawTransaction\(/u,
+    "prompt failure must not reopen a pending, broadcast, or send path",
+  );
+  const button = section(programSource, "<button\n              onClick={simulateAndSign}", ">\n              {snapshot?.action");
+  assert.match(button, /\|\| pendingRecoveryBlocked/u);
+});
+
 test("program reload probes permanent attempts and signed-pending state before another prompt", () => {
   assert.match(
     programSource,

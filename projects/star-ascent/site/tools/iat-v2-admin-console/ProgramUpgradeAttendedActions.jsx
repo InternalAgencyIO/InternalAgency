@@ -157,6 +157,20 @@ function errorText(error) {
   return error instanceof Error ? error.message : String(error);
 }
 
+function programRecoveryBindingKey(snapshot) {
+  return snapshot?.evidenceBinding
+    ? JSON.stringify({ ...snapshot.evidenceBinding, snapshotAction: snapshot.action ?? null })
+    : null;
+}
+
+function shouldBlockProgramPromptRetry({ binding, action }) {
+  try {
+    return loadAttendedModelTPromptLatch(localStorage, { binding, action }) !== null;
+  } catch {
+    return true;
+  }
+}
+
 function explorer(kind, value) {
   return `https://explorer.solana.com/${kind}/${value}?cluster=devnet`;
 }
@@ -396,9 +410,7 @@ export default function ProgramUpgradeAttendedActions({
   const recoveryBinding = snapshot && SIGNABLE_ACTIONS.includes(snapshot.action)
     ? signedPendingBinding(snapshot.evidenceBinding, snapshot.action)
     : null;
-  const recoveryBindingKey = snapshot?.evidenceBinding
-    ? JSON.stringify({ ...snapshot.evidenceBinding, snapshotAction: snapshot.action ?? null })
-    : null;
+  const recoveryBindingKey = programRecoveryBindingKey(snapshot);
   const pendingRecoveryReady = recoveryBindingKey !== null && checkedPendingBinding === recoveryBindingKey;
   const pendingRecoveryBlocked = recoveryBindingKey !== null && blockedPendingBinding === recoveryBindingKey;
 
@@ -539,6 +551,7 @@ export default function ProgramUpgradeAttendedActions({
       || !pendingRecoveryReady
       || pendingRecoveryBlocked
     ) return;
+    let promptRecovery = null;
     setBusy(true);
     setError("");
     setLogs([]);
@@ -612,6 +625,15 @@ export default function ProgramUpgradeAttendedActions({
         ? `MODEL T // REVIEW ${promptSnapshot.additionalProgramDataBytes} BYTE CAPACITY EXTENSION + ${promptSnapshot.rentTopUpLamports} LAMPORT RENT TOP-UP; STILL NOT BROADCAST`
         : "MODEL T // REVIEW PROGRAM UPGRADE AND SIGN; STILL NOT BROADCAST");
       assertProgramPromptOrder(promptSnapshot, promptAction);
+      const promptRecoveryBindingKey = programRecoveryBindingKey(promptSnapshot);
+      if (promptRecoveryBindingKey === null) {
+        throw new Error("Attended program prompt has no exact recovery binding");
+      }
+      promptRecovery = {
+        binding: promptSnapshot.evidenceBinding,
+        action: promptAction,
+        key: promptRecoveryBindingKey,
+      };
       const pendingForSigned = (candidate) => ({
         signed: candidate,
         latest,
@@ -649,6 +671,9 @@ export default function ProgramUpgradeAttendedActions({
       setPending(nextPending);
       setStatus("SIGNED // NOT BROADCAST — DURABLY RECOVERABLE; PRESS THE SEPARATE BROADCAST BUTTON");
     } catch (caught) {
+      if (promptRecovery !== null && shouldBlockProgramPromptRetry(promptRecovery)) {
+        setBlockedPendingBinding(promptRecovery.key);
+      }
       setStatus("HOLD // ATTENDED PROGRAM STEP STOPPED");
       setError(errorText(caught));
     } finally {
