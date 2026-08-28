@@ -8621,176 +8621,20 @@
     }
   },
   "previousGuardianWakeAudit": {
-    "status": "georgia-fiji-canonical-campaign-post-live-seven-country-backlog-remains",
-    "checkedAt": "2026-08-21T07:28:10.1321001Z",
-    "account": "@dogramaci",
-    "liveProfileVerified": true,
-    "signedInAccount": "@dogramaci",
-    "searchEvidence": {
-      "query": "from:dogramaci (Georgia OR Fiji OR Comoros OR Guyana OR \"Solomon Islands\" OR Bhutan) since:2026-08-12",
-      "surface": "signed-in-in-app-browser-latest-search",
-      "resultCount": 1,
-      "exactCampaignCaptionMatches": 0,
-      "visibleResult": {
-        "postUrl": "https://x.com/dogramaci/status/2087914657004556646",
-        "postedAtLabel": "Aug 13",
-        "caption": "Morocco, Greece, Colombia, Fiji",
-        "classification": "unrelated-existing-post-not-a-campaign-caption-match"
-      }
-    },
-    "pendingPost": null,
-    "preparedPostQueueCount": 0,
-    "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 7,
-    "checkpointAudit": {
-      "batchRange": [
-        382,
-        391
-      ],
-      "eligibleWithNoRecordedUrlCount": 7,
-      "eligibleWithNoRecordedUrl": [
-        {
-          "batch": 382,
-          "country": "Georgia",
-          "checkpoint": "assets/lore/starlight-era/batch-382-georgia-mars-surface-expedition-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": false,
-          "caption": "Georgia ❤️ Fiji: rainlit couture, linked hands, and a close-held dance above the Caucasus.",
-          "recordedUrl": "https://x.com/dogramaci/status/2090701764785778887",
-          "liveState": "published-as-canonical-three-asset-two-country-campaign-post"
-        },
-        {
-          "batch": 383,
-          "country": "Fiji",
-          "checkpoint": "assets/lore/starlight-era/batch-383-fiji-moon-surface-expedition-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": false,
-          "caption": "Georgia ❤️ Fiji: rainlit couture, linked hands, and a close-held dance above the Caucasus.",
-          "recordedUrl": "https://x.com/dogramaci/status/2090701764785778887",
-          "liveState": "published-as-supporting-country-in-canonical-three-asset-two-country-campaign-post"
-        },
-        {
-          "batch": 384,
-          "country": "Comoros",
-          "checkpoint": "assets/lore/starlight-era/batch-384-comoros-moon-surface-expedition-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": true,
-          "caption": "Comoros ❤️ Fiji #Comoros",
-          "recordedUrl": null,
-          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
-        },
-        {
-          "batch": 385,
-          "country": "Guyana",
-          "checkpoint": "assets/lore/starlight-era/batch-385-guyana-near-sun-solar-observation-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": true,
-          "caption": "Guyana ❤️ Comoros #Guyana #WorldXXXSeries",
-          "recordedUrl": null,
-          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
-        },
-        {
-          "batch": 386,
-          "country": "Solomon Islands",
-          "checkpoint": "assets/lore/starlight-era/batch-386-solomon-islands-near-sun-solar-observation-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": true,
-          "caption": "Solomon Islands 🤍 Guyana #SolomonIslands",
-          "recordedUrl": null,
-          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
-        },
-        {
-          "batch": 387,
-          "country": "Bhutan",
-          "checkpoint": "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": true,
-          "caption": "Bhutan ❤️ Solomon Islands #Bhutan",
-          "recordedUrl": null,
-          "liveState": "live-search-no-exact-caption-match-publication-not-attempted"
-        },
-        {
-          "batch": 389,
-          "country": "Suriname",
-          "checkpoint": "assets/lore/starlight-era/batch-389-suriname-polar-airship-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": true,
-          "caption": "Suriname ❤️ Luxembourg #Suriname",
-          "recordedUrl": null,
-          "liveState": "freshly-eligible-not-published-this-wake"
-        },
-        {
-          "batch": 390,
-          "country": "Montenegro",
-          "checkpoint": "assets/lore/starlight-era/batch-390-montenegro-polar-airship-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": true,
-          "caption": "Montenegro 🤍 Suriname #Montenegro #WorldXXXSeries",
-          "recordedUrl": null,
-          "liveState": "freshly-eligible-not-published-this-wake"
-        },
-        {
-          "batch": 391,
-          "country": "Malta",
-          "checkpoint": "assets/lore/starlight-era/batch-391-malta-orbital-research-station-checkpoint.json",
-          "acceptedCurrentCountryAssets": 4,
-          "required": 4,
-          "eligible": true,
-          "caption": "Malta ❤️ Montenegro #Malta #WorldXXXSeries",
-          "recordedUrl": null,
-          "liveState": "freshly-eligible-not-published-this-wake"
-        }
-      ]
-    },
-    "activeCountryAudit": {
-      "batch": 391,
-      "country": "Malta",
-      "acceptedCurrentCountryAssets": 4,
-      "required": 4,
-      "eligible": true
-    },
-    "latestVisibleAccountStatuses": [
-      {
-        "postUrl": "https://x.com/dogramaci/status/2090701764785778887",
-        "postedAtLabel": "10:25 AM Aug 21, 2026",
-        "caption": "Georgia ❤️ Fiji: rainlit couture, linked hands, and a close-held dance above the Caucasus.",
-        "classification": "canonical-campaign-post-three-media-live-verified"
-      },
-      {
-        "postUrl": "https://x.com/dogramaci/status/2087914657004556646",
-        "postedAtLabel": "Aug 13",
-        "caption": "Morocco, Greece, Colombia, Fiji",
-        "classification": "unrelated-search-result"
-      }
-    ],
-    "action": "After action-time confirmation, posted the exact approved Georgia and Fiji caption with canonical assets 1548, 1549, and 1552 to signed-in @dogramaci. X returned a successful sent notice and the public status was opened and verified with the exact caption and three image endpoints.",
-    "duplicatePrevention": "The Aug 20 caption-free guardian-instruction post is preserved as a user-classified test post and does not consume backlog. Only the exact approved campaign caption at status 2090701764785778887 clears Georgia Batch 382 and Fiji Batch 383. Seven eligible countries remain."
-  },
-  "latestGuardianWakeAudit": {
-    "status": "five-qualified-captionless-two-plus-one-posts-prepared-israel-three-lanes-active",
-    "checkedAt": "2026-08-28T10:44:11.706Z",
+    "status": "five-qualified-captionless-two-plus-one-posts-prepared-hungary-closed-zero-accepted-austria-next",
+    "checkedAt": "2026-08-28T10:53:32.526Z",
     "account": "@dogramaci",
     "liveProfileVerified": true,
     "signedInAccount": "@dogramaci",
     "pendingPost": null,
     "preparedPostQueueCount": 5,
     "deferredPostCheckpoint": null,
-    "eligibleBacklogRemaining": 16,
-    "newlyPublished": [
-      "https://x.com/dogramaci/status/2093275592237953296"
-    ],
-    "verification": "Azerbaijan 1826-1828 accepted and archived; Israel 1830-1832 have unique active provider chats; Israel 1833 is a closed cleared-composer no-confirmed occurrence.",
-    "duplicatePrevention": "Byte-identical Azerbaijan URL rotations count once. Never republish Burundi 1753, resend terminal scenes, or use Azerbaijan 1829.",
-    "nextCadence": "Monitor and archive Israel 1830-1832. Upload and Post the five prepared X entries only after fresh action-time confirmation.",
-    "remoteParity": "pending local commit and push; GitHub email-verification gate may block push",
+    "eligibleBacklogRemaining": 17,
+    "newlyPublished": [],
+    "verification": "Hungary scenes 1834-1837 are closed with zero accepted images: 1834, 1835 and 1836 are archived hard-unusable outputs; 1837 has no confirmed provider occurrence. Five mutually exclusive captionless 2+1 posts remain prepared.",
+    "duplicatePrevention": "Never resend Hungary 1834-1837. Residual accepted scenes 1828 and 1832 remain unreserved.",
+    "nextCadence": "Begin Austria with clean checkpoint-authorized Meta lanes. Request fresh action-time X confirmation before uploading or posting the five prepared sets.",
+    "remoteParity": "Prior commit b6aabd9c is pushed; Israel and Hungary terminal evidence are pending the next targeted commit.",
     "pairReady": true,
     "preparedSceneSets": [
       [
@@ -8820,7 +8664,56 @@
       ]
     ],
     "residualEligibleSceneIds": [
-      1828
+      1828,
+      1832
+    ]
+  },
+  "latestGuardianWakeAudit": {
+    "status": "five-qualified-captionless-two-plus-one-posts-prepared-austria-closed-zero-accepted-belarus-next",
+    "checkedAt": "2026-08-28T11:08:42.849Z",
+    "account": "@dogramaci",
+    "liveProfileVerified": true,
+    "signedInAccount": "@dogramaci",
+    "pendingPost": null,
+    "preparedPostQueueCount": 5,
+    "deferredPostCheckpoint": null,
+    "eligibleBacklogRemaining": 17,
+    "newlyPublished": [],
+    "verification": "Austria scenes 1838-1841 are closed with zero accepted images: 1838, 1839 and 1841 are archived hard-unusable roll-mismatch outputs; 1840 is an explicit no-byte safer-version refusal. Five mutually exclusive captionless 2+1 posts remain prepared.",
+    "duplicatePrevention": "Never resend Austria 1838-1841. Residual accepted scenes 1828 and 1832 remain unreserved.",
+    "nextCadence": "Begin Belarus with four clean checkpoint-authorized Meta lanes. Request fresh action-time X confirmation before uploading or posting the five prepared sets.",
+    "remoteParity": "Prior commit b6aabd9c is pushed; Israel, Hungary and Austria terminal evidence are pending the next targeted commit.",
+    "pairReady": true,
+    "preparedSceneSets": [
+      [
+        1810,
+        1811,
+        1814
+      ],
+      [
+        1812,
+        1813,
+        1816
+      ],
+      [
+        1818,
+        1820,
+        1823
+      ],
+      [
+        1824,
+        1825,
+        1817
+      ],
+      [
+        1826,
+        1827,
+        1821
+      ]
+    ],
+    "residualEligibleSceneIds": [
+      1828,
+      1832
     ]
   },
   "latestTenCountryCadenceAudit": {
