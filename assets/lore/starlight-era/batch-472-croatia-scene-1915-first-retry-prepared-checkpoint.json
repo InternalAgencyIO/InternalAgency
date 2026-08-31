@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "batch": 472,
+  "country": "Croatia",
+  "scene": 1915,
+  "retry": 1,
+  "state": "meta-thinking-retry-1-exactly-staged-authorized-awaiting-remote-verification-before-send",
+  "preparedAtUtc": "2026-08-31T15:34:52.1284354Z",
+  "providerUrl": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3",
+  "tabId": "39",
+  "retryJustification": {
+    "initialOccurrence": 0,
+    "terminalResult": "explicit-no-image-refusal",
+    "hardCondition": "no-image",
+    "providerReason": "tight crop and wardrobe setup",
+    "providerOfferedSafeDirection": "full-length or heads-to-knees public-safe editorial retaining face lock, Dubrovnik location, RAZE details and statement boots",
+    "maximumRetries": 2,
+    "retriesConsumedBeforeThisSend": 0
+  },
+  "prompt": "SCENE 1915 RETRY 1 - CROATIA, DUBROVNIK STRADUN SECULAR LIMESTONE PROMENADE - CAMERA CLOSENESS ROLL 16/100, CLOSE FULL-LENGTH STATEMENT-BOOT EDITORIAL. Create one wholly new original photorealistic cinematic vertical 9:16 adult RAZE high-fashion still, fully public-safe and non-explicit. Use the attached anchors exactly once each in order 938, 936, 937 only for face identity. Show exactly four distinct fictional adult women, each exactly age 21, female-only, no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE or clone, merge, replace or age-shift a face. Place the tightly adjacent quartet on broad dry level pale limestone at secular Dubrovnik Stradun, safely centered away from steps and edges, with warm facades, open Adriatic sky and distant non-sacred roofline broad behind them but no sacred building, flag, official emblem, readable sign, person, vehicle or animal. Use a close head-to-toe full-length composition so complete faces, tailored upper-thigh hems and all statement boots are visible; do not use an extreme hemline crop. Alia wears a turquoise-copper opaque fitted long-sleeve top and a lined gold tailored short skort, Radiance a pearl-crimson lined cocktail mini, Ellie a cobalt-black opaque cropped jacket and ivory divided short skirt, ECE an emerald-plum opaque fitted jacket and tailored upper-thigh shorts. Keep every garment strongly short in a polished runway way but fully opaque, securely lined and complete-coverage. Add small polished sixteen-ray star clasps at collars and cuffs, one subtle exact readable RAZE metal tag per look spelled R-A-Z-E, no repeated type band, no large split-star emblem, and no knee-high hosiery. Give all four stable sculptural knee-high statement boots with broad wearable soles. Radiance adjusts Alia's collar, Ellie gives a playful jealous side glance, ECE gives Ellie one brief cheek-only kiss with clear space and no mouth contact, and all four complete one clean linked-hand chain. No underwear, exposure, nudity, explicit sexuality, minors, real people, flags, sacred or political imagery, animals, bystanders, vehicles, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+  "promptCharacters": 2285,
+  "promptSha256": "AB2D675F3E5767F3E3BF5770A4B1C1B5B75762B8C3E686608D90CC97D43F0C75",
+  "orderedAnchors": [938, 936, 937],
+  "orderedAnchorSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "liveStageGate": {
+    "actualVisibleTabCount": 5,
+    "metaAccount": "leesha007",
+    "xAccount": "@dogramaci",
+    "visibleThinking": true,
+    "exactPromptPrefix": true,
+    "anchorsVisibleInExactOrder": true,
+    "sendEnabled": true,
+    "xComposerBlank": true,
+    "xPostDisabled": true,
+    "sendClicks": 0,
+    "gatePassed": true
+  },
+  "stagingScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1915-meta-thinking-retry-1-staged-authorized-before-send.png", "sha256": "860734210883065DB55E9DDEB9152C2612F57CACA36289FC21EC7851B8A033B3", "bytes": 157937},
+  "xDomEvidence": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-blank-composer-preserved-at-first-terminal-and-retry-stage.txt", "sha256": "C8353F81939F60BF009B9F35D38F041C49C13C14F38F54B82C215BBAB3816FA7", "bytes": 6006},
+  "authorization": {"freshUserActionTimeAuthorizationCurrent": true, "mayClickSendAfterRemoteAndFreshLiveGate": true},
+  "nextSafeAction": "Commit and push this retry staging record and all first-occurrence evidence, verify local, remote and draft PR head parity plus an empty targeted LFS dry-run, then relist all five tabs and recheck the exact retry prompt, ordered anchors, Thinking, accounts, enabled Send and blank X before exactly one retry Send."
+}
