@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "state": "external-to-agent-meta-interactions-visible-all-lanes-thinking",
+  "observedAtUtc": "2026-08-31T10:25:05.6371296Z",
+  "newUserAuthority": {
+    "directive": "USE THINKING Enabled ON META ALWAYS NFOR BETTER RESULTS",
+    "effectiveScope": "Every new Meta occurrence after this instruction, including any agent-managed retry and scene 1910.",
+    "historicalException": "The initial occurrences for scenes 1906-1909 were already submitted in Instant mode under the prior verified authority and must not be reopened or duplicated.",
+    "requiredVisibleControlLabel": "Thinking"
+  },
+  "sourceAttribution": {
+    "agentInitialSendCount": 4,
+    "agentRepeatSendCount": 0,
+    "subsequentMessagesAndVariants": "Visible in the same provider URLs but not initiated by this agent.",
+    "policy": "Preserve these as user-owned browser state. Do not claim them as agent sends, do not overwrite an unsent composer, and archive all visible used or unused variants before reusing a lane."
+  },
+  "tabs": [
+    {
+      "tabId": "28",
+      "scene": 1906,
+      "url": "https://www.meta.ai/prompt/933aa21d-a65a-48aa-b8ab-c8cc9b315202",
+      "visibleMode": "Thinking",
+      "activeGeneration": false,
+      "visibleDownloadControlCount": 4,
+      "visibleRefusalCount": 3,
+      "latestVisibleMediaAlt": "gallery/pyrenean_sunset_portrait.webp",
+      "composer": "blank-disabled"
+    },
+    {
+      "tabId": "29",
+      "scene": 1907,
+      "url": "https://www.meta.ai/prompt/77d2064e-40d3-4db5-ac40-e6070fa034ee",
+      "visibleMode": "Thinking",
+      "activeGeneration": false,
+      "visibleDownloadControlCount": 7,
+      "visibleRefusalCount": 0,
+      "latestVisibleMediaAlt": "gallery/golden_hour_hero.webp",
+      "composer": "blank-disabled"
+    },
+    {
+      "tabId": "30",
+      "scene": 1908,
+      "url": "https://www.meta.ai/prompt/3aac1ad5-cb6f-491d-b7f7-f61bbeedde74",
+      "visibleMode": "Thinking",
+      "activeGeneration": false,
+      "visibleDownloadControlCount": 5,
+      "visibleRefusalCount": 0,
+      "latestVisibleMediaAlt": "gallery/golden_hour_portrait.webp",
+      "composer": "blank-disabled"
+    },
+    {
+      "tabId": "31",
+      "scene": 1909,
+      "url": "https://www.meta.ai/prompt/456929b6-34a9-4cd8-9c61-bfdd6513015e",
+      "visibleMode": "Thinking",
+      "activeGeneration": false,
+      "visibleDownloadControlCount": 3,
+      "visibleRefusalCount": 0,
+      "latestVisibleMediaAlt": "gallery/fashion_editorial_portrait.webp",
+      "composer": "closer and hotter\nyes recommended merge",
+      "composerSendEnabled": true,
+      "composerPreservation": "Do not submit or overwrite without a new action-time instruction addressing this exact draft."
+    }
+  ],
+  "xComposer": {
+    "tabId": "32",
+    "url": "https://x.com/compose/post",
+    "blank": true,
+    "mutated": false,
+    "postAuthorized": false
+  },
+  "evidence": [
+    {
+      "scene": 1906,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1906-meta-thinking-current-visible-user-state.png",
+      "sha256": "73E42CADF5D06CB351F3E93EC2513F4C3A554D4F3919EA08B840BDAA34F637B7",
+      "bytes": 49635,
+      "width": 805,
+      "height": 1040
+    },
+    {
+      "scene": 1907,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1907-meta-thinking-current-visible-user-state.png",
+      "sha256": "5931449AB2F97A3AC4BCE880F0F6C49EE26540E701220D849C532BDD0FABFC6A",
+      "bytes": 66955,
+      "width": 805,
+      "height": 1040
+    },
+    {
+      "scene": 1908,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1908-meta-thinking-current-visible-user-state.png",
+      "sha256": "73138FE21437D879612D0C9EA4764E36A3D2E5D3876CF007B6285989B93A196E",
+      "bytes": 21460,
+      "width": 805,
+      "height": 1040
+    },
+    {
+      "scene": 1909,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1909-meta-thinking-current-visible-user-draft-preserved.png",
+      "sha256": "668BBD501946A6BE2790B33D6EF573BFE464316166916698FE89264826DCCCD4",
+      "bytes": 67299,
+      "width": 804,
+      "height": 1039
+    },
+    {
+      "provider": "X",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-blank-composer-after-meta-thinking-directive.png",
+      "sha256": "B26654E7462288E9111B4B2BC8B30F9C4727909BD9291D46EE33B1B9EB2D0F0C",
+      "bytes": 61782,
+      "width": 805,
+      "height": 1040
+    }
+  ],
+  "nextSafeAction": "Commit and remote-verify this visible state, then archive every visible Meta media variant through supported in-app Browser controls or rendered evidence. Preserve the tab-31 draft. After one lane is fully archived, use Thinking mode for scene 1910."
+}

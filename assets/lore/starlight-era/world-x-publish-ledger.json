@@ -9901,7 +9901,7 @@
   },
   "latestBatch470AndorraRazeFiveStillsPreparation": {
     "schemaVersion": 1,
-    "status": "four-initial-lanes-staged-authorized-awaiting-staged-checkpoint-remote-verification",
+    "status": "four-initial-occurrences-dispatched-later-visible-thinking-state-preserved",
     "preparedAtUtc": "2026-08-31T10:05:35.4405278Z",
     "batch": 470,
     "country": "Andorra",
@@ -9935,13 +9935,28 @@
     "remoteBranchAndPrHeadMatched": true,
     "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
     "signedInMetaAccount": "leesha007",
-    "metaSpeed": "Instant",
+    "initialMetaSpeed": "Instant",
+    "futureRequiredMetaMode": "Thinking",
     "anchorsVisibleInExactOrder": true,
     "exactPromptsVerified": true,
     "sendButtonsEnabled": true,
     "metaTabIds": ["28", "29", "30", "31"],
     "xComposerTabId": "32",
     "xComposerBlank": true,
-    "nextSafeAction": "Remote-verify the staged browser evidence, then dispatch scenes 1906-1909 exactly once while keeping the X composer untouched."
+    "dispatchedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-dispatched-checkpoint.json",
+    "providerUrls": [
+      "https://www.meta.ai/prompt/933aa21d-a65a-48aa-b8ab-c8cc9b315202",
+      "https://www.meta.ai/prompt/77d2064e-40d3-4db5-ac40-e6070fa034ee",
+      "https://www.meta.ai/prompt/3aac1ad5-cb6f-491d-b7f7-f61bbeedde74",
+      "https://www.meta.ai/prompt/456929b6-34a9-4cd8-9c61-bfdd6513015e"
+    ],
+    "sendClicks": 4,
+    "repeatSendClicks": 0,
+    "terminalRefusalSceneIds": [1906],
+    "renderingSceneIds": [1907, 1908, 1909],
+    "visibleThinkingStateCheckpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
+    "subsequentMetaVariantsInitiatedByAgent": false,
+    "tab31UserDraftPreserved": true,
+    "nextSafeAction": "Remote-archive all current visible Thinking state, preserve all used and unused Meta variants plus the tab-31 draft, then use Thinking for scene 1910 after one lane is fully archived."
   }
 }

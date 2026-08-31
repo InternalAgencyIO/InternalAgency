@@ -4,13 +4,51 @@
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "four-initial-lanes-staged-authorized-no-provider-send",
+  "state": "four-initial-occurrences-dispatched-later-visible-thinking-state-preserved",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "accountRequired": "leesha007",
   "authorizedSceneIds": [1906, 1907, 1908, 1909, 1910],
-  "sendCount": 0,
+  "sendCount": 4,
   "repeatSendCount": 0,
-  "occurrences": [],
+  "occurrences": [
+    {
+      "scene": 1906,
+      "occurrence": 0,
+      "promptSha256": "C5C1C734912139EBC40D4D58FA738342D96BF70BA5C86C30921D084E65650E91",
+      "clickedAtUtc": "2026-08-31T10:18:32.995Z",
+      "url": "https://www.meta.ai/prompt/933aa21d-a65a-48aa-b8ab-c8cc9b315202",
+      "status": "terminal-provider-refusal",
+      "retryCount": 0,
+      "neverResendExactPrompt": true
+    },
+    {
+      "scene": 1907,
+      "occurrence": 0,
+      "promptSha256": "EF0FFA7986155E47D428E51092741A3DE71B9C04084121E02AA62FA00F7CBE0E",
+      "clickedAtUtc": "2026-08-31T10:18:37.506Z",
+      "url": "https://www.meta.ai/prompt/77d2064e-40d3-4db5-ac40-e6070fa034ee",
+      "status": "rendering",
+      "retryCount": 0
+    },
+    {
+      "scene": 1908,
+      "occurrence": 0,
+      "promptSha256": "4C721124EF254C0558119D0C678B6E090C33D4D26F858A3C03AC1548EC217EF8",
+      "clickedAtUtc": "2026-08-31T10:18:41.972Z",
+      "url": "https://www.meta.ai/prompt/3aac1ad5-cb6f-491d-b7f7-f61bbeedde74",
+      "status": "rendering",
+      "retryCount": 0
+    },
+    {
+      "scene": 1909,
+      "occurrence": 0,
+      "promptSha256": "EF638473244D206384945EDF6EB71291627C7FB8455B262EA1DA761AA562C42B",
+      "clickedAtUtc": "2026-08-31T10:18:46.432Z",
+      "url": "https://www.meta.ai/prompt/456929b6-34a9-4cd8-9c61-bfdd6513015e",
+      "status": "rendering",
+      "retryCount": 0
+    }
+  ],
   "orderedIdentityAnchors": [938, 936, 937],
   "sceneIds": [1906, 1907, 1908, 1909, 1910],
   "promptSha256": [
@@ -25,9 +63,13 @@
   "fifthSceneQueued": true,
   "maximumMetaRetriesPerScene": 2,
   "chatgptHemlinePassesPerTechnicallyValidMetaImage": 1,
+  "futureRequiredMetaMode": "Thinking",
+  "futureMetaModeDirectiveObservedAtUtc": "2026-08-31T10:25:05.6371296Z",
   "remoteVerifiedCheckpointCommit": "e7855060ce892cabe5ffc76ceac26eb8e40dc5e8",
   "remoteVerifiedAtUtc": "2026-08-31T10:07:59.8998319Z",
   "remoteBranchAndPrHeadMatched": true,
   "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
-  "nextSafeAction": "Remote-verify the staged evidence, then dispatch scenes 1906-1909 exactly once; preserve the blank X composer and queue scene 1910 behind the first archived terminal lane."
+  "dispatchedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-dispatched-checkpoint.json",
+  "visibleThinkingStateCheckpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
+  "nextSafeAction": "Remote-archive all visible variants and the unsent tab-31 draft; use Thinking for every future Meta send."
 }

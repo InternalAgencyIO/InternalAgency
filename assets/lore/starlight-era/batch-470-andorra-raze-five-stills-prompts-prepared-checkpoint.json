@@ -3,7 +3,7 @@
   "batch": 470,
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
-  "state": "four-initial-lanes-staged-authorized-awaiting-staged-checkpoint-remote-verification",
+  "state": "four-initial-occurrences-dispatched-later-visible-thinking-state-preserved",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "authority": {
     "userDirectives": [
@@ -28,7 +28,8 @@
   "sceneRange": [1906, 1910],
   "provider": "Meta AI through the in-app Browser only",
   "providerSettings": {
-    "speed": "Instant",
+    "initialOccurrenceSpeed": "Instant",
+    "futureRequiredModeAfter2026-08-31T10-25ZUserDirective": "Thinking",
     "output": "one image per occurrence",
     "aspectRatio": "9:16 vertical",
     "visibleMetaLaneCount": 4,
@@ -177,5 +178,7 @@
     "mayClickSend": true
   },
   "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
-  "nextSafeAction": "Commit and remote-verify the staged browser evidence, then dispatch scenes 1906-1909 exactly once in the four visible Meta lanes. Keep the X composer untouched and queue scene 1910 behind the first archived terminal lane."
+  "dispatchedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-dispatched-checkpoint.json",
+  "visibleThinkingStateCheckpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
+  "nextSafeAction": "Remote-archive all current visible Thinking state, preserve all used and unused Meta variants plus the tab-31 draft, then use Thinking for scene 1910 after one lane is fully archived. Keep X untouched."
 }
