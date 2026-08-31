@@ -84,5 +84,16 @@
       "remainingMetaRetries": 0
     }
   ],
-  "nextSafeAction": "Prepare and stage scene 1896 second retry in a fresh chat with the primary-anchor left-to-right identity order; stop before Send for fresh confirmation."
+  "stagedSecondRetry": {
+    "scene": 1896,
+    "retryNumber": 2,
+    "occurrence": 3,
+    "tabId": "15",
+    "promptSha256": "D77D2496940908353A8AEA505FEC41BBE101C69DA7ACD64BCA00400E3922B4B1",
+    "orderedIdentityAnchors": [938, 936, 937],
+    "primaryIdentityOrder": ["Alia", "Radiance", "Ellie", "AI ECE"],
+    "sendEnabled": true,
+    "sendClicked": false
+  },
+  "nextSafeAction": "After fresh action-time confirmation, re-inspect staged tab 15 and click Send exactly once for scene 1896 retry 2."
 }
