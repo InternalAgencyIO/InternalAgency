@@ -16,6 +16,10 @@ const partialBufferIncident = readFileSync(
   "launch/IAT_V2_DEVNET_BUFFER_PARTIAL_UPLOAD_INCIDENT_20260828.md",
   "utf8",
 );
+const continuationIncident = readFileSync(
+  "launch/IAT_V2_DEVNET_BUFFER_IN_PLACE_CONTINUATION_INCIDENT_20260831.md",
+  "utf8",
+);
 const upgrade = [
   "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
   "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx",
@@ -211,37 +215,44 @@ test("runbook binds the descriptor incident to one exact pre-address continuatio
   assert.match(bufferDescriptorIncident, /not a transaction receipt,[\s\S]*deployment proof,[\s\S]*Mainnet authorization/u);
 });
 
-test("current partial-buffer override admits only the separately bound in-place lane", () => {
+test("current partial-buffer override admits only the separately bound 35,520 continuation lane", () => {
   const buffer = "564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH";
-  const partial = "b93ff94d13fdd2c2ebe75af8630f70bfa3d59ab1578993a52377283edbf414ef";
+  const partial = "72f835371ef4a29710d3976683c8449c2db5a56a06311ead0d439abae53d4398";
   const target = "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01";
-  const phrase = `AUTHORIZE-DEVNET-IN-PLACE-BUFFER-RECOVERY-${buffer}-FROM-19200-OF-649680-CURRENT-${partial}-TARGET-${target}`;
+  const phrase = `AUTHORIZE-DEVNET-IN-PLACE-BUFFER-CONTINUATION-${buffer}-FROM-35520-OF-649680-CURRENT-${partial}-TARGET-${target}`;
   for (const exact of [
-    "Current partial-buffer override — in-place recovery only",
+    "Current partial-buffer override — 35,520-byte continuation only",
     "IAT_V2_DEVNET_BUFFER_PARTIAL_UPLOAD_INCIDENT_20260828.md",
+    "IAT_V2_DEVNET_BUFFER_IN_PLACE_CONTINUATION_INCIDENT_20260831.md",
     buffer,
     partial,
     target,
     phrase,
-    "IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-in-place-recovery-v1",
+    "490776148",
+    "7b89459c06b3ee6768d7862c8cb14e06730f2a920aa1ac90b68b7b93277f03ee",
+    "IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-in-place-continuation-from-35520-v1",
+    "scripts/continue-iat-v2-devnet-buffer-in-place-from-35520.sh",
+    "/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-in-place-continuation-from-35520-v1/attempt-one-use",
     "scripts/recover-iat-v2-devnet-buffer-in-place.sh",
     "/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-in-place-recovery-v1/attempt-one-use",
-  ]) assert.ok(runbook.includes(exact), `runbook must retain partial-recovery boundary: ${exact}`);
-  assert.match(runbook, /Both `rebuild-iat-v2-devnet-buffer-fresh\.sh` and `recover-iat-v2-devnet-buffer-pre-address\.sh` are permanently consumed[\s\S]*must not run again/iu);
+  ]) assert.ok(runbook.includes(exact), `runbook must retain continuation boundary: ${exact}`);
+  assert.match(runbook, /rebuild-iat-v2-devnet-buffer-fresh\.sh[\s\S]*recover-iat-v2-devnet-buffer-pre-address\.sh[\s\S]*recover-iat-v2-devnet-buffer-in-place\.sh[\s\S]*permanently consumed[\s\S]*must not run again/iu);
   assert.match(runbook, /Do not pass `564X…1GHH` to the handoff helper[\s\S]*full `771c…8a01` artifact/u);
-  assert.match(runbook, /the exact observed differing region and Agave chunk-rewrite semantics/u);
+  assert.match(runbook, /observed\s+differing region and Agave chunk-rewrite semantics/u);
   assert.match(runbook, /7bc9c805218ca06769956e2cb61601329f5a0f6c/u);
   assert.match(runbook, /skips matching chunks,[\s\S]*queues every differing chunk in full/u);
   assert.match(runbook, /pinned-source semantics only[\s\S]*neither prove that this helper executed/u);
-  assert.match(runbook, /may sign and send multiple deployer-key Devnet chunk transactions/u);
+  assert.match(runbook, /may\s+sign and send multiple deployer-key Devnet chunk\s+transactions/u);
   assert.match(runbook, /never reads, copies, digests, or passes the protected buffer signer/u);
   assert.match(runbook, /does not prompt the Model T/u);
   assert.match(runbook, /DO NOT RERUN OR RESEND/u);
   assert.match(runbook, /only safe public claim before exact success[\s\S]*integrity gate kept promotion on HOLD/u);
   assert.match(partialBufferIncident, /partial-state hash[^\n]*incident evidence only/u);
-  assert.doesNotMatch(runbook, /b93ff94d13fdd2c2ebe75af8630f70bfa3d59ab1578993a52377283edbf414ef[^\n]*(?:acceptable artifact|ready for handoff|deployment complete)/iu);
+  assert.match(continuationIncident, /FIRST IN-PLACE LANE CONSUMED/u);
+  assert.match(continuationIncident, /well-formed monotonic `PARTIAL_EXACT_PREFIX_ZERO_TAIL` result[\s\S]*DO NOT\s+RERUN/u);
+  assert.doesNotMatch(runbook, /72f835371ef4a29710d3976683c8449c2db5a56a06311ead0d439abae53d4398[^\n]*(?:acceptable artifact|ready for handoff|deployment complete)/iu);
   const override = runbook.indexOf("Current partial-buffer override");
-  const inPlace = runbook.indexOf("scripts/recover-iat-v2-devnet-buffer-in-place.sh", override);
+  const inPlace = runbook.indexOf("scripts/continue-iat-v2-devnet-buffer-in-place-from-35520.sh", override);
   const handoff = runbook.indexOf("scripts/handoff-iat-v2-devnet-buffer.sh", inPlace);
   assert.ok(override >= 0 && inPlace > override && handoff > inPlace);
 });

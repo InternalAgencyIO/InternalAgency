@@ -140,9 +140,33 @@ wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC
 
 The recovery entrypoint accepts no arguments and creates no key, reservation, or artifact snapshot. Never append `recover-pre-address` to the fresh-helper command manually; use only the no-argument wrapper above. It admits only the exact existing pre-address phase: the protected signer and reviewed artifact snapshot must be the only attempt entries, while the address record, reservation manifest, and finalized reconstruction must all be absent. It preserves any unexpected or later-phase state and stops. After reviewing the same exact Devnet/tool/source/artifact/funding boundary plus `RECOVERY MODE: SAME RESERVED SIGNER; PRE-ADDRESS FAILURE ONLY; NO NEW KEY OR RESERVATION`, type `RECOVER-DEVNET-BUFFER-PRE-ADDRESS` only when the attached helper asks on `/dev/tty`, never at a `PS>` prompt. That first phrase authorizes protected continuation and local public-address/manifest creation only; it does not authorize upload. The helper then binds the existing signer and artifact snapshot to their protected descriptors, derives and durably records the fresh public buffer address, and reaches the same separate target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>` gate. Only that second immediate confirmation admits the sole shared `program write-buffer` invocation; `--max-sign-attempts 5` may internally re-sign or resend unconfirmed chunks and is not a one-transaction claim. This helper never prompts the Model T and never performs authority handoff. Never print, copy, digest, delete, rename, reset, replace, or reconstruct the protected signer. If recovery stops after deriving the address, if the target-bound gate is declined, or if the sole write result is ambiguous, do not run either helper again; preserve the entire reservation for read-only reconciliation. Continue to the separate handoff only after the helper prints finalized upload success plus the exact `BUFFER`, hash, bytes, and payer authority. Until independently evidenced, the fresh buffer upload and address, finalized buffer hash and bytes, authority handoff, artifact deployment, migrations, feature actions, aggregate proof, release, and every Mainnet action remain HOLD.
 
-### Current partial-buffer override — in-place recovery only
+### Current partial-buffer override — 35,520-byte continuation only
 
-`IAT_V2_DEVNET_BUFFER_PARTIAL_UPLOAD_INCIDENT_20260828.md` supersedes the fresh/pre-address entry instructions for the current reservation. Both `rebuild-iat-v2-devnet-buffer-fresh.sh` and `recover-iat-v2-devnet-buffer-pre-address.sh` are permanently consumed for this ceremony and **must not run again**. Finalized signer-free reconciliation observed existing buffer `564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH`, deployer authority `DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4`, exact 649,680-byte payload capacity, partial hash `b93ff94d13fdd2c2ebe75af8630f70bfa3d59ab1578993a52377283edbf414ef`, exact artifact prefix `[0, 19200)`, and zero tail `[19200, 649680)`. This is HOLD evidence, not a ready buffer or transaction/signature receipt. Do not pass `564X…1GHH` to the handoff helper, open the upgrade signing surface for it, or claim handoff/deployment readiness unless a later fresh finalized reconciliation proves the full `771c…8a01` artifact.
+`IAT_V2_DEVNET_BUFFER_PARTIAL_UPLOAD_INCIDENT_20260828.md` and
+`IAT_V2_DEVNET_BUFFER_IN_PLACE_CONTINUATION_INCIDENT_20260831.md` supersede
+every earlier buffer entry instruction for this ceremony.
+`rebuild-iat-v2-devnet-buffer-fresh.sh`,
+`recover-iat-v2-devnet-buffer-pre-address.sh`, and
+`scripts/recover-iat-v2-devnet-buffer-in-place.sh` are permanently consumed and
+**must not run again**. In particular, preserve
+`/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-in-place-recovery-v1/attempt-one-use`
+unchanged; do not copy, reset, remove, rename, or inspect it to authorize a new
+attempt.
+
+Latest signer-free finalized reconciliation observed existing buffer
+`564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH`, deployer authority
+`DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4`, loader owner
+`BPFLoaderUpgradeab1e11111111111111111111111`, `4,522,976,880` lamports,
+exact 649,680-byte payload capacity, partial hash
+`72f835371ef4a29710d3976683c8449c2db5a56a06311ead0d439abae53d4398`,
+exact artifact prefix `[0, 35520)`, and zero tail `[35520, 649680)` at both
+minimum and account context slot `490776148`. The reviewed baseline
+evidence-body SHA-256 is
+`7b89459c06b3ee6768d7862c8cb14e06730f2a920aa1ac90b68b7b93277f03ee`.
+This remains HOLD evidence, not a ready buffer or transaction/signature receipt.
+Do not pass `564X…1GHH` to the handoff helper, open the upgrade signing surface
+for it, or claim handoff/deployment readiness unless a later fresh finalized
+reconciliation proves the full `771c…8a01` artifact.
 
 #### Pinned Agave public-address semantics
 
@@ -150,19 +174,53 @@ The in-place design is source-audited against exact Agave commit `7bc9c805218ca0
 
 For an existing buffer, exact [`do_process_write_buffer`](https://github.com/anza-xyz/agave/blob/7bc9c805218ca06769956e2cb61601329f5a0f6c/cli/src/program.rs#L2620-L2718) emits no create instruction, compares each complete target chunk with the corresponding existing payload chunk, skips matching chunks, and queues every differing chunk in full. The buffer public key is an account address, while the fee payer and buffer authority sign the queued writes; there is no buffer-account signer on this path. These are pinned-source semantics only. They neither prove that this helper executed nor establish submitted/finalized chunk count, upload success, a transaction signature or receipt, a ready buffer, handoff, deployment, release, or any Mainnet authorization. All such claims remain **HOLD** until fresh signer-free finalized reconciliation proves the full 649,680-byte `771c…8a01` payload at `564X…1GHH`.
 
-The source below is a distinct in-place lane. It is non-runnable unless its exact helper, signer-free reconciler, incident record, runbook, package inputs, and transitive runtime source are commit `S`, fresh exact-head public PR CI succeeds for `S`, and checked-out HEAD is the direct data-only runtime-binding successor `B`. After downloading the matching recovery-runtime evidence artifact and completing that binding, run only this literal command from an attached PowerShell console:
+The source below is a distinct continuation lane, not a retry. It is non-runnable
+unless its exact helper, signer-free reconciler, both incident records, runbook,
+package inputs, and transitive runtime source are commit `S`; fresh exact-head
+public PR CI succeeds for `S`; and checked-out HEAD is the direct data-only
+runtime-binding successor `B`. The source commit must contain the canonical
+`UNBOUND` runtime anchor. The direct successor may change only that anchor.
+After downloading the matching recovery-runtime evidence artifact and completing
+the binding, run only this literal command from an attached PowerShell console:
 
 ```powershell
-wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-in-place-recovery-v1 /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/recover-iat-v2-devnet-buffer-in-place.sh
+wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-in-place-continuation-from-35520-v1 /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/continue-iat-v2-devnet-buffer-in-place-from-35520.sh
 ```
 
-The helper re-verifies exact source/public-CI/runtime binding, canonical Devnet genesis, immutable artifact/evidence, the finalized payer fee floor, and the full target-and-prestate tuple before and after its one attended `/dev/tty` gate. Review the literal address, current and target hashes, 19,200/649,680-byte split, the exact observed differing region and Agave chunk-rewrite semantics, toolchain, and disclosure that one Agave `program write-buffer` invocation with `--max-sign-attempts 5` may sign and send multiple deployer-key Devnet chunk transactions. A matching chunk is skipped; a differing chunk is queued in full, so the byte comparison does not itself establish the number of write transactions. The audited CLI path may construct an unused ephemeral object in memory, but this lane never reads, copies, digests, or passes the protected buffer signer and never creates a new buffer. It does not prompt the Model T.
+The helper re-verifies exact source/public-CI/runtime binding, canonical Devnet
+genesis, immutable artifact/evidence, the finalized payer fee floor, and the full
+target-and-prestate tuple before and after its one attended `/dev/tty` gate.
+Review the literal address, current and target hashes, 35,520/649,680-byte split,
+614,160-byte zero tail, exact baseline slots and evidence hash, the observed
+differing region and Agave chunk-rewrite semantics, toolchain, and disclosure
+that one Agave `program write-buffer` invocation with
+`--max-sign-attempts 5` may sign and send multiple deployer-key Devnet chunk
+transactions. A matching chunk is skipped; a differing chunk is queued in full,
+so the byte comparison does not establish the number of write transactions. The
+audited CLI path may construct an unused ephemeral object in memory, but this
+lane never reads, copies, digests, or passes the protected buffer signer and
+never creates a new buffer. It does not prompt the Model T.
 
 Only when all displayed values still match, type this full phrase at the helper's attached prompt—not at `PS>`:
 
-`AUTHORIZE-DEVNET-IN-PLACE-BUFFER-RECOVERY-564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH-FROM-19200-OF-649680-CURRENT-b93ff94d13fdd2c2ebe75af8630f70bfa3d59ab1578993a52377283edbf414ef-TARGET-771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01`
+`AUTHORIZE-DEVNET-IN-PLACE-BUFFER-CONTINUATION-564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH-FROM-35520-OF-649680-CURRENT-72f835371ef4a29710d3976683c8449c2db5a56a06311ead0d439abae53d4398-TARGET-771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01`
 
-Immediately before the sole write boundary, the helper creates the separate permanent CAS root `/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-in-place-recovery-v1/attempt-one-use`, preserves exact binding/prestate/artifact evidence, and records the entered mutation boundary durably. Any timeout, crash, error, malformed record, or unclear result at or after that boundary means **DO NOT RERUN OR RESEND**; use signer-free finalized reconciliation only. Exact success requires the same address, loader owner, deployer authority, 649,680 payload bytes, and full target SHA-256 `771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01` at finalized commitment. This lane never closes an account, hands off authority, upgrades/deploys the program, publishes a release, or accesses Mainnet. The only safe public claim before exact success is: “A finalized partial Devnet buffer was observed; the first 19,200 artifact bytes match and the integrity gate kept promotion on HOLD.”
+Immediately before the sole write boundary, the helper creates the separate
+permanent CAS
+`/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-in-place-continuation-from-35520-v1/attempt-one-use`,
+preserves exact binding/baseline/live-prestate/artifact evidence, and records the
+entered mutation boundary durably. Any timeout, crash, error, malformed record,
+or unclear result at or after that boundary means **DO NOT RERUN OR RESEND**;
+use signer-free finalized reconciliation only. A validated monotonic partial
+poststate is recorded distinctly from a process failure but still permanently
+consumes this continuation. Exact success requires the same address, loader
+owner, deployer authority, 649,680 payload bytes, and full target SHA-256
+`771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01`
+at finalized commitment. This lane never closes an account, hands off authority,
+upgrades or deploys the program, publishes a release, uses a Trezor, or accesses
+Mainnet. The only safe public claim before exact success is: “A finalized
+partial Devnet buffer was observed; the first 35,520 artifact bytes match and
+the integrity gate kept promotion on HOLD.”
 
 The historical buffer `Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6` is retained. The rebuild helper never closes or mutates it, and it does not reclaim its lamports.
 
