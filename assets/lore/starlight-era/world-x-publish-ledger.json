@@ -10777,7 +10777,7 @@
   },
   "latestBatch475EstoniaPreparation": {
     "schemaVersion": 1,
-    "status": "prompts-prepared-awaiting-git-lfs-remote-verification",
+    "status": "preflight-git-lfs-remote-and-pr-parity-verified-awaiting-visible-staging",
     "preparedAtUtc": "2026-08-31T21:13:01.0864145Z",
     "batch": 475,
     "country": "Estonia",
@@ -10809,6 +10809,10 @@
     "checkpoint": "assets/lore/starlight-era/batch-475-estonia-europe-gap-fill-prompts-prepared-checkpoint.json",
     "guardianReconciliationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-authority-and-x-ledger-reconciliation-checkpoint.json",
     "remoteVerifiedBaseHead": "e7ee67acc3ecbc69f6539fd0944a58f09fbff7de",
-    "nextSafeAction": "Validate and commit the exact Estonia preparation, push and prove remote/PR/LFS parity, then open four fresh Meta lanes and stage Thinking, prompts and anchors 938, 936, 937 in exact order beside the one blank X composer."
+    "remoteVerifiedCheckpointCommit": "66220c93e645472c269e5cf6fab6f9e13c237c2d",
+    "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-preflight-git-lfs-remote-verification-checkpoint.json",
+    "remoteBranchAndPrHeadMatched": true,
+    "preflightTargetedLfsDryRunEmpty": true,
+    "nextSafeAction": "Commit and push the preflight verification record, prove parity once more, then open four fresh Meta lanes and stage Thinking, prompts and anchors 938, 936, 937 in exact order beside the one blank X composer."
   }
 }
