@@ -214,7 +214,87 @@
       "reason": "User-classified test post with four images and no guardian-prepared approved campaign caption. It is preserved as public audit evidence and does not consume or clear any World Series publication backlog entry."
     }
   ],
-  "pendingPost": null,
+  "pendingPost": {
+    "status": "reserved-awaiting-visible-composer-staging",
+    "preparedAtUtc": "2026-08-31T08:31:28.9034201Z",
+    "account": "@dogramaci",
+    "batches": [468, 467],
+    "countries": ["Bulgaria", "Serbia"],
+    "caption": "Bulgaria ❤️ Serbia: Varna's Black Sea blue hour, Devetashka Cave daylight, and the Danube at Đerdap frame three warm four-woman reunions in bold metallic couture.\n\n#WorldXXXSeries",
+    "hashtags": ["#WorldXXXSeries"],
+    "imageNumbers": [1898, 1899, 1895],
+    "assets": [
+      {
+        "scene": 1898,
+        "file": "1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png",
+        "sha256": "155CC6057DFF51A74281EFE44341C5C88A9308EAC55759DB249E70CB2FF4D6AE",
+        "bytes": 2038099,
+        "alt": "Four fictional adult women in short opaque turquoise, rose, cobalt and emerald couture link hands on Varna's Sea Garden promenade as the far-right woman kisses the third woman's cheek."
+      },
+      {
+        "scene": 1899,
+        "file": "1899-bulgaria-devetashka-cave-chatgpt-hemline-one-pass.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1899-bulgaria-devetashka-cave-chatgpt-hemline-one-pass.png",
+        "sha256": "A273A966538141F67FA2A712B417A1DE837FD63E7AA94FAB00F6C0D311932577",
+        "bytes": 2330096,
+        "alt": "Full-length view of four fictional adult women in short opaque futuristic couture on a guarded Devetashka Cave terrace beneath the immense limestone arch and daylight openings."
+      },
+      {
+        "scene": 1895,
+        "file": "1895-serbia-djerdap-gorge-chatgpt-hemline-one-pass.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1895-serbia-djerdap-gorge-chatgpt-hemline-one-pass.png",
+        "sha256": "D9A43F780EECC2617A2B18E545AAECAE1F796F7795029827AAFA1E94F1A1E2B4",
+        "bytes": 2511070,
+        "alt": "Four adult women in short, opaque metallic cocktail looks link hands at a guarded overlook above the Danube and Đerdap Gorge while the dark-haired woman on the right kisses the smiling blonde woman's cheek."
+      }
+    ],
+    "hashtagRollAudit": [
+      {
+        "hashtag": "#RAZE",
+        "key": "starlight|x-hashtags|batch-468|scenes-1898-1899-1895|5efa8b3f4f227c245b0fc83240b151d9db122a30|#RAZE",
+        "digestSha256": "C55964F4B548D434D6C6777C2EFF2C2A684193E8901A7FACF36EDAF11CECE808",
+        "acceptedByteIndex": 0,
+        "acceptedByte": 197,
+        "roll": 98,
+        "threshold": 25,
+        "included": false
+      },
+      {
+        "hashtag": "#WorldXXXSeries",
+        "key": "starlight|x-hashtags|batch-468|scenes-1898-1899-1895|5efa8b3f4f227c245b0fc83240b151d9db122a30|#WorldXXXSeries",
+        "digestSha256": "67F832A2F20E2DA60427B934E783F185DB804675CF40AE34E62BCA7ADCDE0E0C",
+        "acceptedByteIndex": 0,
+        "acceptedByte": 103,
+        "roll": 4,
+        "threshold": 25,
+        "included": true
+      },
+      {
+        "hashtag": "#InternalAgency",
+        "key": "starlight|x-hashtags|batch-468|scenes-1898-1899-1895|5efa8b3f4f227c245b0fc83240b151d9db122a30|#InternalAgency",
+        "digestSha256": "87E09CEB8E54DAFB7FCD1C79562B85F848E85CDFC6C820076022692A2C07D16C",
+        "acceptedByteIndex": 0,
+        "acceptedByte": 135,
+        "roll": 36,
+        "threshold": 25,
+        "included": false
+      }
+    ],
+    "duplicateAudit": {
+      "checkedAtUtc": "2026-08-31T08:24:07.7427670Z",
+      "authoritativePostsArrayMatchesPerAsset": [0, 0, 0],
+      "result": "all-three-assets-unposted"
+    },
+    "signedInAccountVerifiedAtPreMutation": "@dogramaci",
+    "visibleAccountEvidence": "The current in-app X composer snapshot exposes signed-in profile links to /dogramaci.",
+    "stagedAtUtc": null,
+    "stagedAttachmentCount": 0,
+    "altTextCompleted": false,
+    "finalClickConfirmed": false,
+    "postUrl": null,
+    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-serbia-x-post-reservation-checkpoint.json"
+  },
   "preparedPostQueue": [],
   "publicationCadenceState": {
     "mode": "six-completed-country-cycles-since-last-x-meta-paused-until-2026-08-29-0800-europe-istanbul",
