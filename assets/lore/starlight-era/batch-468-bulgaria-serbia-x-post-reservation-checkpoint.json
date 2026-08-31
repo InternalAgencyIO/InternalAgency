@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "visible-composer-staged-final-post-authorized-awaiting-click",
+  "status": "published-live-verified",
   "preparedAtUtc": "2026-08-31T08:31:28.9034201Z",
   "accountRequired": "@dogramaci",
   "countryOrder": ["Bulgaria", "Serbia"],
@@ -88,7 +88,31 @@
   },
   "finalPostAuthorized": true,
   "finalPostAuthorization": "User said 'send authorized go' after the exact reserved transmission and next safe action were reported.",
-  "postClicked": false,
-  "xPostUrls": [],
-  "nextSafeAction": "Re-inspect the actual browser tabs, verify the live /dogramaci profile link, exact caption, three ALT-marked media groups in scene order 1898, 1899, 1895, and the unique enabled composer Post button; then click Post exactly once under the fresh authorization and verify the resulting public status URL with three photo endpoints."
+  "postClicked": true,
+  "clickAttempts": [
+    {
+      "clickedAtUtc": "2026-08-31T08:40:49.594Z",
+      "outcome": "confirmed-no-transmission"
+    },
+    {
+      "clickedAtUtc": "2026-08-31T08:45:18.972Z",
+      "outcome": "transmitted-once"
+    }
+  ],
+  "xPostUrls": [
+    "https://x.com/dogramaci/status/2094345779376726102"
+  ],
+  "liveVerification": {
+    "verifiedAtUtc": "2026-08-31T08:46:52.7329289Z",
+    "postUrl": "https://x.com/dogramaci/status/2094345779376726102",
+    "photoEndpoints": [
+      "https://x.com/dogramaci/status/2094345779376726102/photo/1",
+      "https://x.com/dogramaci/status/2094345779376726102/photo/2",
+      "https://x.com/dogramaci/status/2094345779376726102/photo/3"
+    ],
+    "exactCaption": true,
+    "exactAltTexts": [true, true, true],
+    "unavailableState": false
+  },
+  "nextSafeAction": "Maintain the restored blank @dogramaci X composer and prepare the next four-lane European Meta batch after current guardian and repository authority are reconciled."
 }

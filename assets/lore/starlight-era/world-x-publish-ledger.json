@@ -215,7 +215,7 @@
     }
   ],
   "pendingPost": {
-    "status": "visible-composer-staged-final-post-authorized-awaiting-click",
+    "status": "published-live-verified-awaiting-archive-parity",
     "preparedAtUtc": "2026-08-31T08:31:28.9034201Z",
     "account": "@dogramaci",
     "batches": [468, 467],
@@ -299,7 +299,34 @@
     },
     "finalClickConfirmed": true,
     "finalClickAuthorization": "User said 'send authorized go' after the exact reserved transmission and next safe action were reported.",
-    "postUrl": null,
+    "clickAttempts": [
+      {
+        "clickedAtUtc": "2026-08-31T08:40:49.594Z",
+        "outcome": "confirmed-no-transmission",
+        "evidence": "Composer remained intact, no status URL appeared, and a fresh visible @dogramaci profile reload showed no matching caption or media."
+      },
+      {
+        "clickedAtUtc": "2026-08-31T08:45:18.972Z",
+        "outcome": "transmitted-once",
+        "evidence": "Composer closed to X home and the visible success alert linked the new public status."
+      }
+    ],
+    "confirmedClickAtUtc": "2026-08-31T08:45:18.972Z",
+    "verifiedAtUtc": "2026-08-31T08:46:52.7329289Z",
+    "postUrl": "https://x.com/dogramaci/status/2094345779376726102",
+    "photoEndpoints": [
+      "https://x.com/dogramaci/status/2094345779376726102/photo/1",
+      "https://x.com/dogramaci/status/2094345779376726102/photo/2",
+      "https://x.com/dogramaci/status/2094345779376726102/photo/3"
+    ],
+    "liveEvidence": {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/x-bulgaria-serbia-live-status-2094345779376726102.png",
+      "sha256": "A62FC1ADEE6A9CCE401CF0489D77AC5CACCD1822DDC46BCF3656432E6357C6C3",
+      "byteLength": 114171,
+      "dimensions": "726x936"
+    },
+    "verification": "The in-app Browser opened the public @dogramaci status and verified the exact caption, #WorldXXXSeries, three ordered photo endpoints, all three exact descriptive alt texts, Made with AI labeling, and no unavailable or dead-link state.",
+    "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-publication",
     "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-serbia-x-post-reservation-checkpoint.json"
   },
   "preparedPostQueue": [],
@@ -8643,6 +8670,64 @@
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Signed-in @dogramaci latest public status URL re-opened and verified live with exactly three photo endpoints, descriptive alt text on all three images, and no unavailable/dead-link state.",
       "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-cadence-publication"
+    },
+    {
+      "batch": 468,
+      "batches": [468, 467],
+      "sceneIds": [1898, 1899, 1895],
+      "postedAt": "2026-08-31T08:45:18.972Z",
+      "verifiedAt": "2026-08-31T08:46:52.7329289Z",
+      "postUrl": "https://x.com/dogramaci/status/2094345779376726102",
+      "supersededPostUrls": [],
+      "caption": "Bulgaria ❤️ Serbia: Varna's Black Sea blue hour, Devetashka Cave daylight, and the Danube at Đerdap frame three warm four-woman reunions in bold metallic couture.\n\n#WorldXXXSeries",
+      "hashtags": ["#WorldXXXSeries"],
+      "hashtagSelection": {
+        "rule": "Each of #RAZE, #WorldXXXSeries, and #InternalAgency independently rolled at 25%; at most two selected; zero permitted.",
+        "rolls": [
+          {
+            "tag": "#RAZE",
+            "roll": 98
+          },
+          {
+            "tag": "#WorldXXXSeries",
+            "roll": 4
+          },
+          {
+            "tag": "#InternalAgency",
+            "roll": 36
+          }
+        ]
+      },
+      "imageNumbers": [1898, 1899, 1895],
+      "countries": ["Bulgaria", "Serbia"],
+      "assets": [
+        {
+          "scene": 1898,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png",
+          "sha256": "155CC6057DFF51A74281EFE44341C5C88A9308EAC55759DB249E70CB2FF4D6AE",
+          "alt": "Four fictional adult women in short opaque turquoise, rose, cobalt and emerald couture link hands on Varna's Sea Garden promenade as the far-right woman kisses the third woman's cheek."
+        },
+        {
+          "scene": 1899,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1899-bulgaria-devetashka-cave-chatgpt-hemline-one-pass.png",
+          "sha256": "A273A966538141F67FA2A712B417A1DE837FD63E7AA94FAB00F6C0D311932577",
+          "alt": "Full-length view of four fictional adult women in short opaque futuristic couture on a guarded Devetashka Cave terrace beneath the immense limestone arch and daylight openings."
+        },
+        {
+          "scene": 1895,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1895-serbia-djerdap-gorge-chatgpt-hemline-one-pass.png",
+          "sha256": "D9A43F780EECC2617A2B18E545AAECAE1F796F7795029827AAFA1E94F1A1E2B4",
+          "alt": "Four adult women in short, opaque metallic cocktail looks link hands at a guarded overlook above the Danube and Đerdap Gorge while the dark-haired woman on the right kisses the smiling blonde woman's cheek."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2094345779376726102/photo/1",
+        "https://x.com/dogramaci/status/2094345779376726102/photo/2",
+        "https://x.com/dogramaci/status/2094345779376726102/photo/3"
+      ],
+      "mediaMode": "signed-in-in-app-browser",
+      "verification": "Signed-in @dogramaci public status URL opened and verified live with the exact caption, one selected hashtag, exactly three photo endpoints in reserved order, descriptive alt text on all three images, and no unavailable or dead-link state.",
+      "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-publication"
     }
   ],
   "latestAssistedDrain": {
@@ -9735,9 +9820,27 @@
     "retryEligibleSceneIds": [],
     "xPairEligible": true,
     "xCandidateSceneOrder": [1898, 1899, 1895],
-    "xPostUrls": [],
-    "xPostAuthorized": false,
+    "xPostUrls": [
+      "https://x.com/dogramaci/status/2094345779376726102"
+    ],
+    "xPostAuthorized": true,
+    "xPublicationVerifiedAtUtc": "2026-08-31T08:46:52.7329289Z",
     "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-user-relaxed-acceptance-checkpoint.json",
-    "nextSafeAction": "After fresh visible @dogramaci verification, prepare the exact three-image X composer in scene order 1898, 1899, 1895 with descriptive alt text and frozen caption; stop before Post for final confirmation. Prepare the next European four-lane Meta batch separately only after its authority and ordered-anchor preflight passes."
+    "nextSafeAction": "Resolve the next unfilled European country, remote-prepare its four-scene checkpoint, then replace the four terminal Bulgaria tabs with four fresh Meta composers carrying ordered anchors 938, 936, 937 while keeping the restored blank @dogramaci X composer visible."
+  },
+  "latestBatch468BulgariaSerbiaXPublication": {
+    "schemaVersion": 1,
+    "status": "published-live-verified",
+    "account": "@dogramaci",
+    "sceneOrder": [1898, 1899, 1895],
+    "postedAtUtc": "2026-08-31T08:45:18.972Z",
+    "verifiedAtUtc": "2026-08-31T08:46:52.7329289Z",
+    "postUrl": "https://x.com/dogramaci/status/2094345779376726102",
+    "photoEndpointCount": 3,
+    "altTextCount": 3,
+    "publicTransmissionCount": 1,
+    "duplicateMediaTransmission": false,
+    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-serbia-x-post-live-verified-checkpoint.json",
+    "nextSafeAction": "Resolve the next unfilled European country from the current guardian and repository authority, then prepare and remote-verify four wholly new Meta scenes before replacing the four terminal Bulgaria tabs. Preserve one blank visible @dogramaci X composer."
   }
 }
