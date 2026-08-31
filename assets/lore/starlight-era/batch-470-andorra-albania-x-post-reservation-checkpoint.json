@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "state": "recovered-exact-x-composer-final-authorized-awaiting-single-post-click",
+  "state": "authorization-consumed-first-post-click-confirmed-no-transmission-draft-preserved",
   "authorizedAtUtc": "2026-08-31T11:49:12.6897278Z",
   "authorization": {
     "userText": "send authorized go",
@@ -50,7 +50,13 @@
     "preRecoveryVerifiedHead": "b714793cad887707661523b9c8202955b2136e38",
     "localRemotePrHeadMatched": true,
     "targetedLfsDryRunEmpty": true,
-    "reservationCommitPending": true
+    "reservationCommit": "b2cae5b83789e711d65af8abf8fc4396bd7183f9",
+    "reservationCommitRemoteVerified": true
   },
-  "nextSafeAction": "Commit and push this exact recovered authorization state, reverify local/remote/PR head and targeted LFS dry-run, inspect the current actual X tab again, then click the enabled dialog Post button exactly once."
+  "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
+  "postClicks": 1,
+  "publicTransmissionCount": 0,
+  "authorizationConsumed": true,
+  "mayClickPostAgain": false,
+  "nextSafeAction": "Commit and remote-verify the confirmed no-transmission outcome. Leave the exact saved draft visible and require fresh explicit X-specific retry authorization before any second Post click."
 }

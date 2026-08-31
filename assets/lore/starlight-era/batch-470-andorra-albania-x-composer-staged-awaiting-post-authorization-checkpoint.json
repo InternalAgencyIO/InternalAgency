@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "state": "x-composer-recovered-exact-final-authorized-awaiting-post-click",
+  "state": "x-composer-saved-and-reopened-after-confirmed-no-transmission-awaiting-fresh-retry-authorization",
   "stagedAtUtc": "2026-08-31T11:18:26.9570740Z",
   "accountVisible": "@dogramaci",
   "xComposerTabId": "32",
@@ -42,8 +42,10 @@
     "bytes": 99813,
     "dimensions": "804x1039"
   },
-  "postAuthorized": true,
-  "postClicked": false,
+  "postAuthorized": false,
+  "postClicked": true,
+  "postClickAttempts": 1,
+  "publicTransmissionCount": 0,
   "xPostUrls": [],
   "recoveredComposer": {
     "recoveredAtUtc": "2026-08-31T11:49:12.6897278Z",
@@ -64,5 +66,6 @@
     "targetedLfsDryRunEmpty": true,
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json"
   },
-  "nextSafeAction": "Remote-verify the recovered reservation checkpoint, inspect the current actual X tab and exact composer once more, then click the enabled dialog Post button exactly once."
+  "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
+  "nextSafeAction": "Remote-verify the no-transmission outcome and keep the exact saved draft visible. Do not click Post again without fresh explicit X-specific retry authorization."
 }

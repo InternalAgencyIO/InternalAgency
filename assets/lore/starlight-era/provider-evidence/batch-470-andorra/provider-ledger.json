@@ -139,12 +139,17 @@
     "mediaCount": 3,
     "altTextCount": 3,
     "postEnabled": true,
-    "postAuthorized": true,
-    "postClicked": false,
+    "postAuthorized": false,
+    "postClicked": true,
+    "postClickAttempts": 1,
+    "publicTransmissionCount": 0,
     "xPostUrls": [],
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json",
     "reservationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-reservation-checkpoint.json",
-    "browserRecovery": "The app removed all prior tabs; the exact composer was reconstructed in one new X tab after checking Drafts and the live profile. Terminal Meta scenes were not reopened."
+    "browserRecovery": "The app removed all prior tabs; the exact composer was reconstructed in one new X tab after checking Drafts and the live profile. Terminal Meta scenes were not reopened.",
+    "firstClickOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
+    "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
+    "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json"
   },
   "remoteVerification": {
     "status": "closure-commit-lfs-remote-and-pr-parity-verified",
@@ -152,5 +157,5 @@
     "verifiedAtUtc": "2026-08-31T11:38:36.6624493Z",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json"
   },
-  "nextSafeAction": "Commit and push the recovered X reservation, reverify local/remote/PR/LFS parity and the exact visible composer, then click Post exactly once."
+  "nextSafeAction": "Commit and remote-verify the confirmed no-transmission outcome. Preserve the exact reopened draft and require fresh explicit X-specific retry authorization before any second Post click."
 }
