@@ -37,5 +37,13 @@
     "liveCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-post-live-verified-checkpoint.json",
     "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-publication-attempt-evidence-manifest.json"
   },
-  "nextSafeAction": "Commit and remote-verify the live X publication and evidence. Never resend its three media assets; leave one blank X composer and resolve the next country only from newest authority."
+  "remoteVerification": {
+    "status": "live-publication-evidence-commit-lfs-remote-and-pr-parity-verified",
+    "verifiedLivePublicationCommit": "150b16f2ed556956528c1af91b279aa6272d884d",
+    "verifiedAtUtc": "2026-08-31T17:22:29.9531818Z",
+    "checkpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-live-git-lfs-remote-verification-checkpoint.json",
+    "localRemoteAndPrHeadMatched": true,
+    "targetedLfsDryRunEmpty": true
+  },
+  "nextSafeAction": "Never resend the published media. Leave the single blank X composer untouched and resolve the next country only from newest guardian and repository authority."
 }
