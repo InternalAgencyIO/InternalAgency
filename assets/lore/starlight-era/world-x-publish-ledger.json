@@ -10777,7 +10777,7 @@
   },
   "latestBatch475EstoniaPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-thinking-scenes-dispatched-exactly-once-rendering",
+    "status": "four-first-occurrences-terminal-raw-archived-no-meta-retries-chatgpt-one-pass-prepared",
     "preparedAtUtc": "2026-08-31T21:13:01.0864145Z",
     "batch": 475,
     "country": "Estonia",
@@ -10839,6 +10839,17 @@
       "https://www.meta.ai/prompt/aac53b24-30a4-4cd4-bd11-a87826e31d42",
       "https://www.meta.ai/prompt/e271009b-2b2f-4dd4-a59d-7c7aea9fe043"
     ],
-    "nextSafeAction": "Commit and push the exact dispatch record, then monitor these four existing provider URLs only and never click Send again."
+    "terminalFirstOccurrencesCheckpoint": "assets/lore/starlight-era/batch-475-estonia-first-occurrences-terminal-checkpoint.json",
+    "chatgptOnePassPromptsPreparedCheckpoint": "assets/lore/starlight-era/batch-475-estonia-chatgpt-one-pass-prompts-prepared-checkpoint.json",
+    "terminalMediaSceneIds": [1927, 1928, 1929, 1930],
+    "metaRetries": 0,
+    "providerRawAssetCount": 4,
+    "chatgptOnePassPromptSha256": [
+      "0CD8041E1543A9C8D7573F2811E8B78BE59F9E58E89372BB5D8680040A2A5B8F",
+      "56B881E8F35E49A66B6469165F7177FF118554220B549D314834E4D8AE554263",
+      "F75EFB0B00482764E6683401E67D27193E776106C70BD7C1D8548C9EC7BA6F22",
+      "FB689CEDE12CE432210C312E9A200967AE8D4A32954D83D11FDB223DB54D280C"
+    ],
+    "nextSafeAction": "Commit and remote-verify the four raw occurrences, terminal QA and exact one-pass preparation, then issue exactly one built-in ChatGPT shortening edit per occurrence and never retry a blocked or failed pass."
   }
 }

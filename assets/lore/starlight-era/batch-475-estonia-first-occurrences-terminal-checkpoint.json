@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "batch": 475,
+  "country": "Estonia",
+  "state": "four-first-occurrences-terminal-media-raw-bytes-archived-no-meta-retries-one-pass-prepared",
+  "observedAtUtc": "2026-08-31T21:46:36.8887027Z",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "account": "leesha007",
+  "scenes": [
+    {
+      "scene": 1927,
+      "tabId": "17",
+      "providerUrl": "https://www.meta.ai/prompt/0fb43b05-351f-4628-8754-d02944136b68",
+      "terminalMedia": true,
+      "providerRefusal": false,
+      "rawPath": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/1927-estonia-tallinn-rotermann-raze-adjacent-three-quarter-meta-occurrence-1-raw.jpg",
+      "rawSha256": "0FB26DE8BC5545010EDA94CF26C1171DAF90DA47AF26FEB126150914ABFD736A",
+      "bytes": 253794,
+      "width": 1152,
+      "height": 2048,
+      "format": "JPEG",
+      "visualQa": "Exactly four clearly adult women; ordered cast remains distinct; opaque public-safe short fashion; full bodies and restrained heels are visible; readable RAZE tags and geometric star treatments are present; no corruption, duplicate body, explicit content or material cast failure. Choreography and some garment-detail drift are nonblocking under the relaxed acceptance rule.",
+      "metaRetry": 0,
+      "metaRetryJustified": false
+    },
+    {
+      "scene": 1928,
+      "tabId": "18",
+      "providerUrl": "https://www.meta.ai/prompt/9a5cfdfc-ac4b-4597-ab60-c16fc4e29abd",
+      "terminalMedia": true,
+      "providerRefusal": false,
+      "rawPath": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/1928-estonia-tartu-emajogi-raze-adjacent-three-quarter-statement-boots-meta-occurrence-1-raw.jpg",
+      "rawSha256": "FD5C8DAB6A851F95A67CD3563DA1B4779D4D2554EA6BAFB534A03A65F086B6C2",
+      "bytes": 270781,
+      "width": 1152,
+      "height": 2048,
+      "format": "JPEG",
+      "visualQa": "Exactly four clearly adult women; ordered cast remains distinct; opaque public-safe short fashion; full bodies; all four distinct sculptural knee-high statement boots, star hardware and readable RAZE bands are crisp; no corruption, duplicate body, explicit content or material cast failure. Location and choreography drift are nonblocking.",
+      "metaRetry": 0,
+      "metaRetryJustified": false
+    },
+    {
+      "scene": 1929,
+      "tabId": "19",
+      "providerUrl": "https://www.meta.ai/prompt/aac53b24-30a4-4cd4-bd11-a87826e31d42",
+      "terminalMedia": true,
+      "providerRefusal": false,
+      "rawPath": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/1929-estonia-parnu-rannapark-raze-adjacent-three-quarter-knee-high-hosiery-meta-occurrence-1-raw.jpg",
+      "rawSha256": "E23B39FE039F0CF740F3FA4B9D5757B9F9B39DA64C8E020F26C7B489FEF180B5",
+      "bytes": 269615,
+      "width": 1152,
+      "height": 2048,
+      "format": "JPEG",
+      "visualQa": "Exactly four clearly adult women; ordered cast remains distinct; opaque public-safe short fashion; full bodies; all four colored knee-high hosiery treatments and restrained heels are visible; no corruption, duplicate body, explicit content or material cast failure. Minor text and pose drift are nonblocking.",
+      "metaRetry": 0,
+      "metaRetryJustified": false
+    },
+    {
+      "scene": 1930,
+      "tabId": "20",
+      "providerUrl": "https://www.meta.ai/prompt/e271009b-2b2f-4dd4-a59d-7c7aea9fe043",
+      "terminalMedia": true,
+      "providerRefusal": false,
+      "rawPath": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/1930-estonia-lahemaa-viru-bog-raze-tight-full-body-meta-occurrence-1-raw.png",
+      "rawSha256": "406026174525B318938F4397876C89E4AA7FEE2D4E725DDBD85D01910B0FE384",
+      "bytes": 1730773,
+      "width": 768,
+      "height": 1360,
+      "format": "PNG",
+      "visualQa": "Exactly four clearly adult women; ordered cast remains distinct; opaque public-safe short fashion; complete bodies, broad-base heels, readable RAZE tags and divided-star motifs are visible; no corruption, duplicate body, explicit content or material cast failure. The kiss reads closer than cheek-only but remains public-safe and is nonblocking under the relaxed acceptance rule.",
+      "metaRetry": 0,
+      "metaRetryJustified": false
+    }
+  ],
+  "duplicateGate": {
+    "rawHashesDistinctWithinBatch": true,
+    "rawHashesAlreadyRecordedElsewhereInRepository": false,
+    "priorXTransmissionMatches": false,
+    "passed": true
+  },
+  "retryDecision": {
+    "maximumMetaRetriesPerScene": 2,
+    "metaRetriesUsed": 0,
+    "hardFailureSceneIds": [],
+    "reason": "Every first occurrence is a technically valid, public-safe, non-corrupt, distinct four-adult image. Under the current relaxed acceptance rule, nonblocking framing, text, choreography or detail drift cannot justify a Meta retry."
+  },
+  "chatgptOnePass": {
+    "preparedCheckpoint": "assets/lore/starlight-era/batch-475-estonia-chatgpt-one-pass-prompts-prepared-checkpoint.json",
+    "requestsPermitted": 4,
+    "requestsIssued": 0,
+    "passesPerOccurrence": 1,
+    "additionalPassesPermitted": 0
+  },
+  "browser": {
+    "tabCount": 5,
+    "xComposerTabId": "6",
+    "xComposerBlank": true,
+    "metaTabIds": ["17", "18", "19", "20"],
+    "allFourPromptPagesRemainOpen": true,
+    "repeatSendClicks": 0,
+    "xPostClicks": 0
+  },
+  "nextSafeAction": "Commit and remote-verify the archived raw occurrences, terminal QA and exact one-pass prompts. Then issue exactly one built-in ChatGPT image edit per occurrence, never retry a blocked or failed one-pass request, preserve every output or block record, select each ChatGPT result when clean and otherwise retain the Meta raw, and accept nearly every public-safe non-corrupt selected asset."
+}
