@@ -55,6 +55,31 @@
       "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
     }
   ],
+  "oldChatFaceAuthorityRecheck": {
+    "verifiedAtUtc": "2026-08-31T05:55:22.0627552Z",
+    "predecessorTaskId": "01a01d88-38a1-7763-b74d-470bc7bfe70e",
+    "predecessorTaskTitle": "Take over RENDERS workspace",
+    "predecessorInstruction": "Before every preflight, upload, prompt, render, queue advance, commit, and push, verify the binding face manifest and upload scene 938, then 936, then 937 exactly once each.",
+    "manifestPath": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "expectedManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "observedManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "manifestHashMatch": true,
+    "liveComposerRecheck": {
+      "tabIds": ["5", "6", "7", "8"],
+      "sceneIds": [1894, 1895, 1896, 1897],
+      "attachmentCountsPerLane": [
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]
+      ],
+      "attachmentOrderPerLane": [938, 936, 937],
+      "allFourOrdersMatch": true,
+      "allFourPromptsRemainExact": true,
+      "sendButtonsEnabled": true,
+      "sendClicked": false
+    }
+  },
   "lanes": [
     {
       "tabId": "5",

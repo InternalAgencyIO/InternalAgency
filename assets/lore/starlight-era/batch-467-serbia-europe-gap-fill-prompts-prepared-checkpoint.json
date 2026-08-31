@@ -42,6 +42,20 @@
       "81-100": "EXTREME WIDE"
     }
   },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "status": "binding-forward",
+    "primaryPlateCharacterMap": {
+      "Alia": "far-left Black woman in scene 938",
+      "Radiance": "second woman from the left in scene 938; blonde high ponytail",
+      "Ellie": "third woman from the left in scene 938; dark-haired high ponytail",
+      "AI ECE": "far-right dark-haired woman in scene 938 holding the glowing route light"
+    },
+    "referenceControl": "Face identity, facial geometry, skin tone, and name-to-person mapping only; ignore anchor clothing, props, poses, body arrangement, and backgrounds.",
+    "legacyEcePortrait": "inactive-superseded-for-face-upload",
+    "hardGate": "Any cloned, merged, replaced, missing, childlike, teen-coded, visibly age-shifted, or wrong-name face is hard-unusable."
+  },
   "orderedReferenceAnchors": [
     {
       "scene": 938,
