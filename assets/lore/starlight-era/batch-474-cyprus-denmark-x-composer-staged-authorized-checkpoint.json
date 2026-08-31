@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 474,
-  "state": "cyprus-denmark-x-first-post-click-no-transmission-remote-verified-keyboard-retry-ready",
+  "state": "cyprus-denmark-x-publication-transmitted-once-live-verified",
   "stagedAtUtc": "2026-08-31T20:45:35.0989909Z",
   "account": "@dogramaci",
   "accountVerifiedInVisibleProfileUi": true,
@@ -30,8 +30,8 @@
   "postVisible": true,
   "postEnabled": true,
   "postClicks": 1,
-  "keyboardSubmitAttempts": 0,
-  "publicTransmissionCount": 0,
+  "keyboardSubmitAttempts": 1,
+  "publicTransmissionCount": 1,
   "currentAuthorization": "authorized for all go, authorized for all similar commands",
   "postAuthorized": true,
   "mayPost": false,
@@ -55,7 +55,11 @@
   "firstClickRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-first-click-git-lfs-remote-verification-checkpoint.json",
   "firstClickRemoteVerifiedCommit": "44a7b2fd365a9278c79d14ae7b6829caf62abd63",
   "firstClickRemoteVerifiedAtUtc": "2026-08-31T20:54:54.5726938Z",
-  "mayKeyboardSubmit": true,
+  "mayKeyboardSubmit": false,
   "maximumKeyboardSubmitAttempts": 1,
-  "nextSafeAction": "Commit and push the first-click verification record, prove parity once more, then issue exactly one Ctrl+Enter in the unchanged composer and verify transmission before any further submit action."
+  "keyboardSubmittedAtUtc": "2026-08-31T20:57:34.961Z",
+  "livePublicationCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-post-live-verified-checkpoint.json",
+  "liveVerifiedAtUtc": "2026-08-31T20:58:44.0492666Z",
+  "postUrl": "https://x.com/dogramaci/status/2094530060388536630",
+  "nextSafeAction": "Commit and remote-verify the live publication evidence, preserve the URL, never resend these media, then return the single X tab to a blank composer and resolve the next zero-post European country."
 }
