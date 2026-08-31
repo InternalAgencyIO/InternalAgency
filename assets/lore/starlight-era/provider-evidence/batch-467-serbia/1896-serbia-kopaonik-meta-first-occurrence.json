@@ -5,7 +5,7 @@
   "country": "Serbia",
   "provider": "Meta AI",
   "occurrence": 1,
-  "status": "image_bearing_archived_pending_single_chatgpt_refinement_and_retry_decision",
+  "status": "hard_unusable_meta_and_chatgpt_archived_retry_eligible",
   "submittedAtUtc": "2026-08-31T06:02:48.552Z",
   "capturedAtUtc": "2026-08-31T06:35:14.5119082Z",
   "providerChatUrl": "https://www.meta.ai/prompt/5ca1b7d7-b8ff-4014-9cb2-0f42b4115a5d",
@@ -45,6 +45,15 @@
   "chatgptHemlineRefinement": {
     "required": true,
     "maximumPasses": 1,
-    "passesCompleted": 0
+    "passesCompleted": 1,
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1896-serbia-kopaonik-chatgpt-hemline-one-pass.png",
+    "sha256": "DAA04DD16E3F7610D710794F41C76761E40C222A7C84930DF0A1D7E72721B295",
+    "byteLength": 2256738,
+    "dimensions": "1080x1456",
+    "contentType": "image/png"
+  },
+  "selection": {
+    "decision": "reject_both_retry_eligible",
+    "reason": "The ChatGPT edit strengthens the four secure upper-thigh silhouettes and preserves the correct identities, but correctly preserves the source crop; both assets therefore remain materially wider than 9:16, and the ECE-to-Alia clasp beat is still absent."
   }
 }

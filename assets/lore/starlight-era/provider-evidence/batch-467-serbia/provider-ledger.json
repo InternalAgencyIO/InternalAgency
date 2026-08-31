@@ -4,7 +4,7 @@
   "country": "Serbia",
   "provider": "Meta AI through the in-app Browser only",
   "capturedAtUtc": "2026-08-31T06:35:14.5119082Z",
-  "state": "all_first_occurrences_terminal_and_archived_before_retry",
+  "state": "first_occurrences_and_mandated_chatgpt_refinements_archived_qa_complete",
   "accountVisible": "leesha007",
   "sendCount": 4,
   "repeatSendCount": 0,
@@ -18,30 +18,34 @@
     },
     {
       "scene": 1895,
-      "status": "image_bearing_archived_pending_single_chatgpt_refinement",
+      "status": "accepted_selected_chatgpt_hemline_refinement",
       "providerUrl": "https://www.meta.ai/prompt/89807d2c-615c-4ccd-83d2-78f1b366b820",
       "rawAssetCount": 1,
-      "retryPermittedAfterQa": true
+      "retryPermittedAfterQa": false,
+      "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1895-serbia-djerdap-gorge-chatgpt-hemline-one-pass.png"
     },
     {
       "scene": 1896,
-      "status": "image_bearing_archived_wrong_aspect_pending_single_chatgpt_refinement_and_retry",
+      "status": "hard_unusable_wrong_aspect_retry_eligible",
       "providerUrl": "https://www.meta.ai/prompt/5ca1b7d7-b8ff-4014-9cb2-0f42b4115a5d",
       "rawAssetCount": 1,
       "retryPermittedAfterQa": true
     },
     {
       "scene": 1897,
-      "status": "image_bearing_archived_hard_face_mapping_failure_pending_single_chatgpt_refinements_and_retry",
+      "status": "hard_unusable_face_mapping_retry_eligible",
       "providerUrl": "https://www.meta.ai/prompt/0e8881a3-b765-4b50-ad41-50c9e49e2cfa",
       "rawAssetCount": 2,
       "retryPermittedAfterQa": true
     }
   ],
   "rawAssetCount": 4,
+  "chatgptRefinementCount": 4,
   "browserEvidenceCount": 4,
   "explicitNoByteCount": 1,
+  "acceptedSceneIds": [1895],
+  "retryEligibleSceneIds": [1896, 1897],
   "orderedIdentityAnchors": [938, 936, 937],
   "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
-  "nextSafeAction": "Run exactly one built-in ChatGPT hemline-shortening refinement for each of the four technically valid Meta assets, preserve all outputs, then complete comparative QA before any fresh-chat Meta retry."
+  "nextSafeAction": "Prepare fresh-chat, materially revised first-retry prompts for scenes 1896 and 1897 with anchors 938, 936, 937 in exact order; stop before Send for fresh action-time confirmation."
 }

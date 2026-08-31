@@ -9473,5 +9473,18 @@
     "xPostEligibleYet": false,
     "reason": "The required single ChatGPT refinements and comparative QA are not complete.",
     "checkpoint": "assets/lore/starlight-era/batch-467-serbia-four-lanes-dispatched-checkpoint.json"
+  },
+  "latestBatch467SerbiaRefinementQa": {
+    "schemaVersion": 1,
+    "status": "single-chatgpt-passes-complete-one-accepted-two-retry-eligible-one-terminal-refusal",
+    "qaAtUtc": "2026-08-31T06:39:00.000Z",
+    "acceptedSceneIds": [1895],
+    "selectedAssetSha256": [
+      "D9A43F780EECC2617A2B18E545AAECAE1F796F7795029827AAFA1E94F1A1E2B4"
+    ],
+    "retryEligibleSceneIds": [1896, 1897],
+    "terminalNoRetrySceneIds": [1894],
+    "xPairEligible": false,
+    "checkpoint": "assets/lore/starlight-era/batch-467-serbia-first-occurrence-refinements-qa-checkpoint.json"
   }
 }

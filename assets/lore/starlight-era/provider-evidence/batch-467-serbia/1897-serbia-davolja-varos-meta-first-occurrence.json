@@ -5,7 +5,7 @@
   "country": "Serbia",
   "provider": "Meta AI",
   "occurrence": 1,
-  "status": "image_bearing_archived_hard_face_mapping_failure_pending_single_chatgpt_refinements_and_retry",
+  "status": "hard_unusable_all_meta_and_chatgpt_variants_archived_retry_eligible",
   "submittedAtUtc": "2026-08-31T06:02:48.848Z",
   "capturedAtUtc": "2026-08-31T06:35:14.5119082Z",
   "providerChatUrl": "https://www.meta.ai/prompt/0e8881a3-b765-4b50-ad41-50c9e49e2cfa",
@@ -55,7 +55,29 @@
   "chatgptHemlineRefinement": {
     "requiredForEachTechnicallyValidMetaAsset": true,
     "assetsRequiringOnePass": 2,
-    "passesCompleted": 0,
-    "selectionConstraint": "Neither refinement may override the binding face-mapping failure; both remain archive evidence unless visual inspection proves the invariant was unexpectedly corrected without identity drift."
+    "passesCompleted": 2,
+    "outputs": [
+      {
+        "sourceRole": "provider_final",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1897-serbia-davolja-varos-final-chatgpt-hemline-one-pass.png",
+        "sha256": "1ADB3927E6D6D34B2E3085CCB9F706AA153C86BFD40369B7BAA9C7DD62936AD8",
+        "byteLength": 2246887,
+        "dimensions": "940x1672",
+        "contentType": "image/png"
+      },
+      {
+        "sourceRole": "provider_original_full_unused",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1897-serbia-davolja-varos-original-chatgpt-hemline-one-pass.png",
+        "sha256": "F890648059451F930ABEF287200419489CC46F3B3E37FF85F9D4300CCFDC6C65",
+        "byteLength": 2274650,
+        "dimensions": "941x1672",
+        "contentType": "image/png"
+      }
+    ],
+    "selectionConstraint": "Both refinements preserve the source faces as requested, so the Ellie/ECE swap remains. All four assets are rejected and retained as unused evidence."
+  },
+  "selection": {
+    "decision": "reject_all_retry_eligible",
+    "reason": "The binding face-manifest violation persists across the untouched Meta final, Meta original, and both one-pass ChatGPT refinements."
   }
 }
