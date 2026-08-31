@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "batch": 469,
+  "country": "Albania",
+  "state": "four-visible-meta-lanes-staged-awaiting-fresh-action-time-send-confirmation",
+  "stagedAtUtc": "2026-08-31T09:15:26.823Z",
+  "preparationAuthority": {
+    "checkpoint": "assets/lore/starlight-era/batch-469-albania-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "remoteVerifiedCheckpointCommit": "16d7e3cfbb478f7bdfe6d43240895312244e2d4e",
+    "remoteVerifiedAtUtc": "2026-08-31T09:15:59.2921201Z",
+    "remoteBranch": "origin/agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrHeadVerified": "16d7e3cfbb478f7bdfe6d43240895312244e2d4e",
+    "parity": "local=remote=PR-head"
+  },
+  "browser": {
+    "provider": "Meta AI through the in-app Browser only",
+    "observedActualTabs": true,
+    "visibleTabCount": 5,
+    "metaLaneCount": 4,
+    "xComposerCount": 1,
+    "signedInMetaAccount": "leesha007",
+    "signedInMetaAccountVerifiedFromVisibleSidebar": true,
+    "metaSettings": {
+      "createImagesControlVisible": true,
+      "speed": "Instant",
+      "requestedOutputCount": "one image per scene in exact prompt",
+      "aspectRatio": "9:16 portrait in exact prompt; no separate supported ratio selector was exposed before Send"
+    },
+    "x": {
+      "tabId": "26",
+      "url": "https://x.com/compose/post",
+      "composerBlank": true,
+      "postButtonDisabled": true,
+      "visibleDogramaciProfileLinkCount": 2,
+      "mutated": false,
+      "postAuthorized": false
+    }
+  },
+  "lanes": [
+    {
+      "tabId": "22",
+      "scene": 1902,
+      "promptSha256": "7EF9FD8705CA3C780C7E0733E934CC718628D29BB39832010D3592E26F7BAF0C",
+      "exactPromptVerified": true,
+      "orderedAnchorScenes": [938, 936, 937],
+      "anchorCounts": [1, 1, 1],
+      "anchorsVisibleInExactOrder": true,
+      "speed": "Instant",
+      "sendEnabled": true,
+      "sendClicked": false,
+      "evidence": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1902-meta-composer-staged-awaiting-send.png",
+        "sha256": "0F52A2E9ED79157F9EF5A29F5B2B6DDA74E205EEC48FE728AE2A5E2C583D2D80",
+        "byteLength": 87473,
+        "dimensions": "737x950"
+      }
+    },
+    {
+      "tabId": "23",
+      "scene": 1903,
+      "promptSha256": "E4B4C083ACDC7AC11B368C3A7AC83B6524A78A67E84CC0FC97E1567834B8C706",
+      "exactPromptVerified": true,
+      "orderedAnchorScenes": [938, 936, 937],
+      "anchorCounts": [1, 1, 1],
+      "anchorsVisibleInExactOrder": true,
+      "speed": "Instant",
+      "sendEnabled": true,
+      "sendClicked": false,
+      "evidence": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1903-meta-composer-staged-awaiting-send.png",
+        "sha256": "8504D6B789F8E4F1791DDA670ACAE7A35E5D09A0C79830029B79CE2BF083EBA0",
+        "byteLength": 92556,
+        "dimensions": "737x950"
+      }
+    },
+    {
+      "tabId": "24",
+      "scene": 1904,
+      "promptSha256": "C4B3D2858CE1B8FD7C136B8D907D0437FD8500AFD86D8D52FDE632B9F3F55198",
+      "exactPromptVerified": true,
+      "orderedAnchorScenes": [938, 936, 937],
+      "anchorCounts": [1, 1, 1],
+      "anchorsVisibleInExactOrder": true,
+      "speed": "Instant",
+      "sendEnabled": true,
+      "sendClicked": false,
+      "evidence": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1904-meta-composer-staged-awaiting-send.png",
+        "sha256": "4CCC6BB6B69E2164448E22522FD12475B41BD22494F5FAFF101D44E080AB6CE8",
+        "byteLength": 92619,
+        "dimensions": "737x950"
+      }
+    },
+    {
+      "tabId": "25",
+      "scene": 1905,
+      "promptSha256": "4CE8094BC75C3BAEDA502832A13D425525B3B2BD4CC59C429FAA1CC0CCDFFDDB",
+      "exactPromptVerified": true,
+      "orderedAnchorScenes": [938, 936, 937],
+      "anchorCounts": [1, 1, 1],
+      "anchorsVisibleInExactOrder": true,
+      "speed": "Instant",
+      "sendEnabled": true,
+      "sendClicked": false,
+      "evidence": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/scene-1905-meta-composer-staged-awaiting-send.png",
+        "sha256": "A89CFFD4D08C13110F85571AF2F69F0E83890C351401269D2C7F63897D2ED796",
+        "byteLength": 93549,
+        "dimensions": "737x950"
+      }
+    }
+  ],
+  "xBlankComposerEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/x-blank-composer-preserved-during-albania-staging.png",
+    "sha256": "FD170C350AC624758B5F689D6FC706504B7ADF97833131965EAF409E5D98B192",
+    "byteLength": 42572,
+    "dimensions": "737x950"
+  },
+  "composerRebuildObservation": {
+    "event": "Filling each previously empty rich composer removed the first unsent set of attachment chips.",
+    "providerTransmission": false,
+    "duplicateCurrentAttachments": false,
+    "resolution": "After exact prompt fill, anchors 938, 936, and 937 were visibly reattached exactly once each in that order on every lane; final DOM verification passed before Send."
+  },
+  "guardian": {
+    "existingGuardianOnly": true,
+    "scheduleRespected": true,
+    "newAutomationOrWorkerCreated": false,
+    "grokState": "paused until credits return"
+  },
+  "qaAndRetryAuthority": {
+    "chatgptHemlinePassesPerTechnicallyValidMetaImage": 1,
+    "maximumMetaRetriesPerScene": 2,
+    "relaxedAcceptance": "After the required one strong ChatGPT shortening pass, accept almost anything except corrupt, duplicate, unsafe, no-image, or materially wrong-cast results. Preserve deviations in QA instead of retrying them."
+  },
+  "canonicalContradictions": [
+    {
+      "status": "resolved-preserved",
+      "description": "Batch 468 strict visual QA rejected framing deviations, but the later user directive accepts those deviations after one strong ChatGPT shortening pass. The later directive controls acceptance while the strict QA remains archived."
+    },
+    {
+      "status": "action-boundary-current",
+      "description": "The previous 'send authorized go' was consumed by the single verified Bulgaria-Serbia X transmission. It is not reused for Batch 469 Meta Send."
+    }
+  ],
+  "dispatchGate": {
+    "remoteCheckpointVerified": true,
+    "actualBrowserTabsInspected": true,
+    "signedInMetaComposerVerified": true,
+    "anchorsVisibleInExactOrder": true,
+    "exactPromptsVerified": true,
+    "instantModeVerified": true,
+    "freshActionTimeConfirmationReceived": false,
+    "mayClickSend": false,
+    "sendClicks": 0
+  },
+  "nextSafeAction": "Obtain fresh explicit action-time confirmation for these four staged Albania Meta lanes, then re-list the actual tabs, reverify exact prompts, Instant mode, account leesha007, and anchors 938, 936, 937 once each in order, and click each enabled Send exactly once. Do not mutate or post the blank X composer."
+}

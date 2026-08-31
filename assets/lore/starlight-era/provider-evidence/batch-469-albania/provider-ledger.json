@@ -3,7 +3,7 @@
   "batch": 469,
   "country": "Albania",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "prompts_prepared_no_provider_send",
+  "state": "four_visible_meta_lanes_staged_no_provider_send",
   "preparedAtUtc": "2026-08-31T08:59:53.7678221Z",
   "accountRequired": "leesha007",
   "sendCount": 0,
@@ -28,5 +28,20 @@
   "maximumMetaRetriesPerScene": 2,
   "chatgptHemlinePassesPerTechnicallyValidMetaImage": 1,
   "freshActionTimeSendConfirmationReceived": false,
-  "nextSafeAction": "Remote-verify the prepared checkpoint, stage four fresh visible Meta composers with anchors 938, 936, and 937 exactly once in that order and exact prompts, then stop before Send for fresh confirmation."
+  "staging": {
+    "observedAtUtc": "2026-08-31T09:15:26.823Z",
+    "tabIds": ["22", "23", "24", "25"],
+    "sceneIds": [1902, 1903, 1904, 1905],
+    "orderedIdentityAnchors": [938, 936, 937],
+    "anchorCountsPerLane": [1, 1, 1],
+    "exactPromptsVerified": true,
+    "signedInAccountVisible": "leesha007",
+    "speed": "Instant",
+    "sendButtonsEnabled": true,
+    "sendClicked": false,
+    "xComposerTabId": "26",
+    "xComposerBlank": true,
+    "checkpoint": "assets/lore/starlight-era/batch-469-albania-four-lanes-staged-awaiting-send-confirmation-checkpoint.json"
+  },
+  "nextSafeAction": "Obtain fresh explicit action-time confirmation, reverify the visible staged state, then click each Albania Meta Send exactly once."
 }

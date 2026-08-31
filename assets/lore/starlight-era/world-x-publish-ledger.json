@@ -9845,7 +9845,7 @@
   },
   "latestBatch469AlbaniaPreparation": {
     "schemaVersion": 1,
-    "status": "prompts-prepared-awaiting-remote-verification-and-browser-staging",
+    "status": "four-visible-meta-lanes-staged-awaiting-fresh-action-time-send-confirmation",
     "preparedAtUtc": "2026-08-31T08:59:53.7678221Z",
     "batch": 469,
     "country": "Albania",
@@ -9862,6 +9862,19 @@
     "countryPairPostCountBeforeThisRun": 0,
     "priorBatchStatus": "batch-468-closed-and-x-publication-live-verified",
     "checkpoint": "assets/lore/starlight-era/batch-469-albania-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "remoteVerifiedCheckpointCommit": "16d7e3cfbb478f7bdfe6d43240895312244e2d4e",
+    "remoteVerifiedAtUtc": "2026-08-31T09:15:59.2921201Z",
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-469-albania-four-lanes-staged-awaiting-send-confirmation-checkpoint.json",
+    "stagedAtUtc": "2026-08-31T09:15:26.823Z",
+    "metaTabIds": ["22", "23", "24", "25"],
+    "xComposerTabId": "26",
+    "signedInMetaAccount": "leesha007",
+    "metaSpeed": "Instant",
+    "anchorsVisibleInExactOrder": true,
+    "exactPromptsVerified": true,
+    "sendButtonsEnabled": true,
+    "sendClicks": 0,
+    "xComposerBlank": true,
     "browserVisibilityPolicy": "Keep exactly four visible Meta lanes plus one visible blank X composer; replace the four terminal Bulgaria tabs in place only after checkpoint remote verification.",
     "grokState": "paused-until-credits-return",
     "chatgptHemlinePassesPerTechnicallyValidMetaImage": 1,
@@ -9870,6 +9883,6 @@
     "freshMetaSendConfirmationReceived": false,
     "dispatchPermitted": false,
     "xPostAuthorized": false,
-    "nextSafeAction": "Commit and push this preparation checkpoint, verify remote and draft-PR head parity, then stage four fresh Albania Meta composers with anchors 938, 936, and 937 exactly once in order and stop before Send for fresh confirmation."
+    "nextSafeAction": "Obtain fresh explicit action-time confirmation for the four staged Albania Meta lanes, reverify the actual tabs, then click each enabled Send exactly once."
   }
 }
