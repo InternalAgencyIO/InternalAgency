@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 474,
   "country": "Denmark",
-  "state": "four-meta-thinking-lanes-exactly-staged-authorized-awaiting-staging-remote-verification",
+  "state": "four-meta-thinking-lanes-exactly-staged-authorized-staging-remote-verified",
   "stagedAtUtc": "2026-08-31T19:34:18.9392138Z",
   "authorization": "authorized for all go, authorized for all similar commands",
   "authorizationCurrent": true,
@@ -43,5 +43,8 @@
   "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/staging-evidence-manifest.json",
   "preparationCheckpoint": "assets/lore/starlight-era/batch-474-denmark-europe-gap-fill-prompts-prepared-checkpoint.json",
   "preflightCheckpoint": "assets/lore/starlight-era/batch-474-denmark-preflight-git-lfs-remote-verification-checkpoint.json",
+  "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-474-denmark-staging-git-lfs-remote-verification-checkpoint.json",
+  "stagingRemoteVerifiedCommit": "239ac3bc80f087589428a53237973f41c95ff428",
+  "stagingRemoteVerifiedAtUtc": "2026-08-31T19:37:21.6828325Z",
   "nextSafeAction": "Commit and push this exact staging state and evidence, fetch, verify local/remote/PR heads and targeted LFS parity, then re-inspect the same five actual tabs and send each scene exactly once only if every visible gate remains true."
 }

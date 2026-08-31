@@ -10573,7 +10573,7 @@
   },
   "latestBatch474DenmarkPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-thinking-lanes-exactly-staged-authorized-awaiting-staging-remote-verification",
+    "status": "four-meta-thinking-lanes-exactly-staged-authorized-staging-remote-verified",
     "preparedAtUtc": "2026-08-31T19:16:11.4719054Z",
     "batch": 474,
     "country": "Denmark",
@@ -10627,6 +10627,9 @@
     "sendClicks": 0,
     "repeatSendClicks": 0,
     "xPostClicks": 0,
+    "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-474-denmark-staging-git-lfs-remote-verification-checkpoint.json",
+    "stagingRemoteVerifiedCommit": "239ac3bc80f087589428a53237973f41c95ff428",
+    "stagingRemoteVerifiedAtUtc": "2026-08-31T19:37:21.6828325Z",
     "nextSafeAction": "Validate and commit the exact Denmark preparation, push and prove remote/PR/LFS parity, then open four fresh Meta lanes and stage Thinking, prompts and anchors 938, 936, 937 in exact order beside the one blank X composer."
   }
 }
