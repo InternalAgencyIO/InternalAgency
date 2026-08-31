@@ -23,5 +23,8 @@
   "currentAuthorization": "authorized for all go, authorized for all similar commands",
   "keyboardRetryAuthorized": true,
   "mayKeyboardSubmit": false,
-  "nextSafeAction": "Commit and remote-verify this no-transmission checkpoint. Then recheck that the exact draft is unchanged and no public URL exists; if all gates remain true, press Ctrl+Enter exactly once and immediately verify the resulting public URL before any further input."
+  "firstClickRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-first-click-git-lfs-remote-verification-checkpoint.json",
+  "firstClickRemoteVerifiedCommit": "6163fa9926fc20eb2225eaa7ce3be64cefbaf251",
+  "firstClickRemoteVerifiedAtUtc": "2026-08-31T18:59:37.7008039Z",
+  "nextSafeAction": "Commit and push the first-click verification record, prove the new head is again at local, remote and draft PR parity, then recheck that the exact draft is unchanged and press Ctrl+Enter exactly once. Immediately verify the resulting public URL before any further input."
 }
