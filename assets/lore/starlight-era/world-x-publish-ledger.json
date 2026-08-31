@@ -10338,7 +10338,7 @@
   },
   "latestBatch473CyprusPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-thinking-occurrences-terminal-accepted-one-pass-boundary-closed-awaiting-x-pair",
+    "status": "four-meta-thinking-occurrences-closed-lfs-remote-and-pr-parity-verified-awaiting-x-pair",
     "preparedAtUtc": "2026-08-31T17:39:32.0574130Z",
     "batch": 473,
     "country": "Cyprus",
@@ -10419,6 +10419,11 @@
     "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/accessibility-sidecars.json",
     "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/closure-evidence-manifest.json",
     "closureEvidenceInventorySha256": "299865BD73EDE520F571229EC926A2B81BF88FC6FC7157CA7071FACE6E1DDEDC",
-    "nextSafeAction": "Commit every raw, selected, unused and blocked-prompt artifact, then remote-verify Git/LFS and draft PR parity before staging a duplicate-safe Croatia-Cyprus 2+1 X post."
+    "closureRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-git-lfs-remote-verification-checkpoint.json",
+    "closureRemoteVerifiedCommit": "a22d82502509d0306304950045bb0ab77afa1238",
+    "closureRemoteVerifiedAtUtc": "2026-08-31T18:35:39.9825004Z",
+    "closureLocalRemoteAndPrHeadMatched": true,
+    "closureTargetedLfsDryRunEmpty": true,
+    "nextSafeAction": "Commit and push the closure verification record, prove the new head is again at local, remote and draft PR parity, then stage a duplicate-safe Croatia-Cyprus 2+1 X post after visible @dogramaci verification."
   }
 }
