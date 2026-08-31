@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "batch": 474,
+  "country": "Denmark",
+  "state": "pre-dispatch-authority-reconciled-x-ledger-canonical-posts-repaired",
+  "observedAtUtc": "2026-08-31T19:16:11.4719054Z",
+  "authorityBaseHead": "a817b88daaf6d940f072d1b068cd270035a3b1a3",
+  "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+  "canonicalContradiction": {
+    "found": true,
+    "description": "The newer live publication checkpoints and the ledger's latestBatch472CroatiaPreparation and latestBatch473CyprusPreparation records proved two exact live @dogramaci URLs, but the canonical top-level posts array omitted both entries. Country-coverage queries therefore incorrectly returned zero posts for Bosnia and Herzegovina, Croatia, and Cyprus.",
+    "authoritativeLiveUrls": [
+      "https://x.com/dogramaci/status/2094473140004929917",
+      "https://x.com/dogramaci/status/2094500984567279733"
+    ],
+    "resolution": "Added the two already-live, exactly-once publication records to the top-level posts array using their remote-verified checkpoints, exact scene order, assets, hashes, caption, alt text, photo endpoints, account, and transmission audit. This is a ledger repair only; it performs no X action and authorizes no media resend.",
+    "postsBefore": 187,
+    "postsAfter": 189
+  },
+  "coverageAfterRepair": {
+    "Bosnia and Herzegovina": 1,
+    "Croatia": 2,
+    "Cyprus": 1,
+    "Czechia": 5,
+    "Denmark": 0,
+    "Estonia": 0
+  },
+  "nextCountryResolution": {
+    "priority": "current canonical alphabetical Europe zero-post gap fill",
+    "afterCyprus": "Czechia is already covered; Denmark is the next zero-post country.",
+    "nextCountry": "Denmark",
+    "nextBatch": 474,
+    "nextSceneRange": [1923, 1926],
+    "priorDenmarkRenderHistory": "Older Denmark render batches exist, but no Denmark URL exists in the repaired top-level X posts array. The current user directive requires fresh RAZE stills to fill postable country pairs, so those older renders do not close this gap."
+  },
+  "providerAndSafetyAuthority": {
+    "provider": "Meta AI only through the visible in-app Browser until Grok credits return",
+    "metaMode": "Thinking",
+    "visibleMetaLanes": 4,
+    "visibleXComposers": 1,
+    "orderedIdentityAnchors": [938, 936, 937],
+    "maximumMetaRetriesPerScene": 2,
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedOccurrence": 1,
+    "relaxedAcceptance": "After the one strong shortening request, accept nearly every public-safe non-corrupt result; retry Meta only for corrupt, duplicate, unsafe or explicit, no-image, or materially wrong-cast output.",
+    "currentAuthorization": "authorized for all go, authorized for all similar commands"
+  },
+  "guardian": {
+    "existingGuardianPreserved": true,
+    "scheduleMutation": false,
+    "pauseResumeMutation": false,
+    "newAutomationTaskThreadWorkerSubagentOrGuardianCreated": false,
+    "historicalCubaOrTanzaniaDispatchPermitted": false
+  },
+  "browser": {
+    "completedMetaTabsClosed": 4,
+    "currentTabCount": 1,
+    "currentVisibleTab": "https://x.com/compose/post",
+    "blankXComposerPreserved": true
+  },
+  "nextSafeAction": "Validate, commit, push, fetch, and prove remote and PR parity for this repair. Then prepare exact Batch 474 Denmark rolls and prompts, remote-verify them, open four fresh Meta Thinking lanes beside the single blank X composer, attach anchors 938, 936, 937 in that order, and dispatch only after every visible gate passes."
+}
