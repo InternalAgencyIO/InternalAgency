@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "batch": 476,
+  "country": "Finland",
+  "scene": 1934,
+  "retry": 1,
+  "state": "meta-thinking-first-retry-terminal-no-image-credit-gate-final-retry-held",
+  "observedAtUtc": "2026-08-31T23:01:59.7431474Z",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "tabId": "24",
+  "providerUrl": "https://www.meta.ai/prompt/3ebb6bb3-08c3-4e81-82a8-b3ff5a118ba4",
+  "classification": "terminal-no-image-temporary-provider-credit-exhaustion",
+  "rawBytes": 0,
+  "exactProviderStatement": "Media generation is temporarily out of credits for this request, so I couldn't render the new still this turn — but your retry brief is now fully safe and ready to go.",
+  "visibleCreditMessage": "You reached your limit. Get Meta One Core for more media with AI, or wait until 6:08 AM.",
+  "terminalEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/scene-1934-meta-retry-1-terminal-no-credit-visible.png",
+    "sha256": "39BA5E84434C1347AE9ABD634980B65B5C044DD58CC3A2281672BE5A6AA799E2",
+    "bytes": 104535,
+    "container": "JPEG JFIF despite .png extension",
+    "width": 1280,
+    "height": 720
+  },
+  "retryAccounting": {
+    "maximumMetaRetriesPerScene": 2,
+    "initialOccurrence": 1,
+    "retriesDispatched": 1,
+    "remainingMetaRetries": 1,
+    "finalRetryCurrentlyJustified": true,
+    "finalRetryDispatchHeld": true,
+    "reasonHeld": "The provider explicitly reports temporary media-credit exhaustion until 6:08 AM. Dispatching again during the same visible credit gate would predictably waste the final allowed retry and cannot produce a raw image.",
+    "retryButtonClicked": false,
+    "sendClicksAfterTerminal": 0
+  },
+  "browserState": {
+    "actualTabCount": 5,
+    "metaTabs": ["21", "22", "23", "24"],
+    "blankXComposerTab": "6",
+    "scenes1931To1933NeverResent": true,
+    "xPostClicks": 0
+  },
+  "guardianReconciliation": {
+    "existingAutomationCount": 1,
+    "existingAutomationId": "guardian-x-assistant-mission",
+    "starlightAutomationFoundInLocalAutomationRegistry": false,
+    "automationMutation": false,
+    "newAutomationOrTaskOrThreadOrWorkerCreated": false
+  },
+  "nextSafeAction": "Do not click Meta retry or Send while the visible credit gate remains active. Preserve tab 24. Complete exactly one ChatGPT strong public-safe tailoring pass for each technically valid archived raw from scenes 1931-1933, with no pass retry. At or after the visible 6:08 AM replenishment boundary, inspect this same tab and account again; only if the credit gate has cleared, restage the already archived retry prompt with anchors 938, 936, 937 in exact order and dispatch the final permitted Meta retry exactly once after full remote and live gates."
+}
