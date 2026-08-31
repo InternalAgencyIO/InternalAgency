@@ -10338,7 +10338,7 @@
   },
   "latestBatch473CyprusPreparation": {
     "schemaVersion": 1,
-    "status": "prompts-hash-finalized-awaiting-commit-remote-verification-and-browser-staging",
+    "status": "preflight-remote-verified-awaiting-browser-staging",
     "preparedAtUtc": "2026-08-31T17:39:32.0574130Z",
     "batch": 473,
     "country": "Cyprus",
@@ -10370,6 +10370,8 @@
     "checkpoint": "assets/lore/starlight-era/batch-473-cyprus-europe-gap-fill-prompts-prepared-checkpoint.json",
     "guardianReconciliationCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-guardian-authority-reconciliation-checkpoint.json",
     "remoteVerifiedBaseHead": "a7b3f01efe67001a58099e1af1009b53a8d9bf6a",
+    "remoteVerifiedCheckpointCommit": "1506bac0167ed15175034807a6c866a4535b58d6",
+    "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-preflight-git-lfs-remote-verification-checkpoint.json",
     "remoteBranchAndPrHeadMatched": true,
     "currentBrowserTabIds": ["6"],
     "currentBrowserTabCount": 1,

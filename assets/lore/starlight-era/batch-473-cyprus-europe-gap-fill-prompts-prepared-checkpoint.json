@@ -3,7 +3,7 @@
   "batch": 473,
   "country": "Cyprus",
   "runType": "four-lane-RAZE-fashion-europe-gap-fill",
-  "state": "prompts-hash-finalized-awaiting-local-commit-remote-verification-and-browser-staging",
+  "state": "preflight-remote-verified-awaiting-browser-staging",
   "preparedAtUtc": "2026-08-31T17:39:32.0574130Z",
   "authority": {
     "source": "Newest remote-verified Batch 472 and Bosnia-Croatia live-X closure, the active 2026-08-31 Meta guardian override, and the user's fresh all-go/all-similar-commands authorization.",
@@ -143,7 +143,9 @@
   ],
   "dispatchGate": {
     "promptHashesFinalized": true,
-    "remoteCheckpointVerified": false,
+    "remoteCheckpointVerified": true,
+    "remoteVerifiedCheckpointCommit": "1506bac0167ed15175034807a6c866a4535b58d6",
+    "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-preflight-git-lfs-remote-verification-checkpoint.json",
     "actualBrowserTabsInspected": true,
     "currentControlledTabs": ["6"],
     "currentXComposerBlank": true,
