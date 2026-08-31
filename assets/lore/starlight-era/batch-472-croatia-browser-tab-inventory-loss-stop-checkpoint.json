@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "batch": 472,
+  "country": "Croatia",
+  "state": "fail-closed-browser-tab-inventory-empty-stop-before-scene-1915-retry-send",
+  "observedAtUtc": "2026-08-31T15:55:03.5512906Z",
+  "newestRemoteVerifiedAuthorityBeforeStop": {
+    "commit": "41f0e28eebcc4180166045db114c24735eaf395a",
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "localRemoteAndPrHeadMatched": true,
+    "aheadBehind": [0, 0],
+    "targetedLfsDryRun": "empty"
+  },
+  "lastVerifiedVisibleBrowserState": {
+    "beforeConnectionRefresh": true,
+    "tabs": [
+      {"tabId": "39", "role": "Meta scene 1915 retry-1 staged composer", "providerUrl": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3"},
+      {"tabId": "40", "role": "Meta scene 1916 terminal media", "providerUrl": "https://www.meta.ai/prompt/d42e0b2c-7b11-4aec-a7a4-6a7f0edc889f"},
+      {"tabId": "41", "role": "Meta scene 1917 terminal media", "providerUrl": "https://www.meta.ai/prompt/349bcb46-ada9-4e91-b9e5-7d412124c011"},
+      {"tabId": "42", "role": "Meta scene 1918 terminal media", "providerUrl": "https://www.meta.ai/prompt/442b1586-ed00-4342-9023-54e8b9ccd2d6"},
+      {"tabId": "43", "role": "blank @dogramaci X composer", "providerUrl": "https://x.com/compose/post"}
+    ],
+    "scene1915RetryPromptSha256": "AB2D675F3E5767F3E3BF5770A4B1C1B5B75762B8C3E686608D90CC97D43F0C75",
+    "orderedAnchors": [938, 936, 937],
+    "thinkingVisible": true,
+    "metaAccount": "leesha007",
+    "xAccount": "@dogramaci",
+    "xBlank": true,
+    "sendClicks": 0,
+    "xPostClicks": 0
+  },
+  "actualBrowserStateAfterRefresh": {
+    "firstInspection": {"controlledTabs": [], "userOpenTabs": []},
+    "settlingRecheck": {"controlledTabs": [], "userOpenTabs": [], "selectedTab": null},
+    "browserActionsAfterEmptyInventory": 0,
+    "retrySendClicks": 0,
+    "xPostClicks": 0
+  },
+  "canonicalContradiction": "The remote-verified staging evidence proves that the scene 1915 retry composer and four other visible tabs were exact before the browser connection refreshed. The newer actual in-app Browser inventory is empty. Actual live state supersedes staged evidence for dispatch, so the retry Send gate is closed.",
+  "prohibitedRecovery": [
+    "Do not create duplicate tabs.",
+    "Do not reopen any terminal Meta scene.",
+    "Do not trust the old tab IDs as current handles.",
+    "Do not resend scenes 1916, 1917 or 1918.",
+    "Do not click X Post."
+  ],
+  "preservedUserOwnedUntracked": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "exactNextSafeAction": "The user restores the same five visible in-app Browser tabs, preserving the already-staged scene 1915 retry composer if recoverable, and then tells Codex to continue. Codex must relist the actual tabs and recheck the exact retry prompt, Thinking, leesha007, anchors 938, 936, 937 in order, enabled Send, blank @dogramaci composer and current authorization before one retry Send. If the exact staged composer cannot be restored without reopening a terminal scene, stop before Submit and ask for direction."
+}
