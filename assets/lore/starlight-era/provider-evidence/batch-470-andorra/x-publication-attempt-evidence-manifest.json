@@ -4,11 +4,19 @@
   "countryPair": ["Andorra", "Albania"],
   "createdAtUtc": "2026-08-31T11:56:04.3972729Z",
   "root": "assets/lore/starlight-era/provider-evidence/batch-470-andorra",
-  "fileCount": 3,
-  "totalBytes": 314753,
+  "fileCount": 4,
+  "totalBytes": 431154,
   "inventoryDigestAlgorithm": "SHA-256 over UTF-8 lines filename|sha256|bytes sorted by filename with LF separators and no terminal LF",
-  "inventorySha256": "FF1A89E0946C3CE0E44F6A8D17376386591966D39F8060C52C487CC19A355A1D",
+  "inventorySha256": "580BB271C6AA54A86BCF98DF2651892D4511A5A362F62B68594A67E5731D4DC1",
   "files": [
+    {
+      "name": "x-andorra-albania-after-authorized-retry-no-transmission.png",
+      "role": "composer-after-authorized-retry-no-transmission",
+      "sha256": "622A2AF3CAC54B13CBC8A7FE3EA8BA7C10E7040A9039E22CF23A64C1D01C9461",
+      "bytes": 116401,
+      "dimensions": "1280x720",
+      "rawFormat": "JPEG/JFIF"
+    },
     {
       "name": "x-andorra-albania-after-first-post-click-no-transmission.png",
       "role": "composer-after-first-click-no-transmission",
@@ -31,5 +39,5 @@
       "dimensions": "1280x720"
     }
   ],
-  "outcome": "One authorized visible Post click produced no transmission. The exact composer was saved and reopened; no second click occurred."
+  "outcome": "The first authorized click and one separately authorized retry click both produced confirmed no-transmission outcomes. The exact composer was saved and reopened; no third click occurred."
 }

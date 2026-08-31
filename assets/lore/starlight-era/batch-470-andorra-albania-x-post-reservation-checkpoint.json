@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "state": "authorization-consumed-first-post-click-confirmed-no-transmission-draft-preserved",
+  "state": "first-authorization-and-fresh-retry-consumed-both-confirmed-no-transmission-draft-preserved",
   "authorizedAtUtc": "2026-08-31T11:49:12.6897278Z",
   "authorization": {
     "userText": "send authorized go",
@@ -37,8 +37,8 @@
     "altTextCount": 3,
     "madeWithAiLabelVisible": true,
     "dialogPostEnabled": true,
-    "postClicks": 0,
-    "postAuthorized": true
+    "postClicks": 2,
+    "postAuthorized": false
   },
   "evidence": {
     "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-composer-recovered-final-authorized-before-post.png",
@@ -54,9 +54,16 @@
     "reservationCommitRemoteVerified": true
   },
   "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
-  "postClicks": 1,
+  "authorizedRetry": {
+    "userText": "send authorized go",
+    "clickedAtUtc": "2026-08-31T12:08:49.086Z",
+    "currentXTabId": "34",
+    "outcome": "confirmed-no-transmission",
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json"
+  },
+  "postClicks": 2,
   "publicTransmissionCount": 0,
   "authorizationConsumed": true,
   "mayClickPostAgain": false,
-  "nextSafeAction": "Commit and remote-verify the confirmed no-transmission outcome. Leave the exact saved draft visible and require fresh explicit X-specific retry authorization before any second Post click."
+  "nextSafeAction": "Remote-verify the retry checkpoint and leave the exact composer visible for one manual user click. Do not perform another agent Post click."
 }

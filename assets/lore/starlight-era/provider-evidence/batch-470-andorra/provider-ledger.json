@@ -4,7 +4,7 @@
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "closed-five-archive-accepted-two-clean-x-composer-staged-awaiting-post-authorization",
+  "state": "closed-five-archive-accepted-two-clean-x-composer-preserved-after-two-authorized-no-transmission-clicks",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "closedAtUtc": "2026-08-31T11:18:26.9570740Z",
   "accountRequired": "leesha007",
@@ -121,18 +121,16 @@
     "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/accessibility-sidecars.json"
   },
   "browserCurrentAudit": {
-    "actualTabIds": ["28", "29", "30", "31", "32"],
-    "metaTabCount": 4,
+    "actualTabIds": ["34"],
+    "metaTabCount": 0,
     "xComposerCount": 1,
-    "tab28ThinkingControlVisible": true,
-    "tab29ModeControlExposedInCurrentEditorState": false,
-    "tab30ModeControlExposedInCurrentViewportState": false,
-    "tab31ThinkingControlVisible": true,
+    "appClearedPriorTabs": true,
+    "terminalMetaScenesReopened": false,
     "noNewMetaSendPending": true,
     "ruleForNextOccurrence": "Before any new Meta Send, inspect the actual tab and require the visible Thinking control."
   },
   "xComposer": {
-    "tabId": "33",
+    "tabId": "34",
     "account": "@dogramaci",
     "captionStaged": true,
     "sceneOrder": [1906, 1910, 1904],
@@ -141,14 +139,16 @@
     "postEnabled": true,
     "postAuthorized": false,
     "postClicked": true,
-    "postClickAttempts": 1,
+    "postClickAttempts": 2,
     "publicTransmissionCount": 0,
     "xPostUrls": [],
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json",
     "reservationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-reservation-checkpoint.json",
-    "browserRecovery": "The app removed all prior tabs; the exact composer was reconstructed in one new X tab after checking Drafts and the live profile. Terminal Meta scenes were not reopened.",
+    "browserRecovery": "The app removed all prior tabs twice; the exact saved X draft was restored in tab 34 through visible controls. Terminal Meta scenes were not reopened.",
     "firstClickOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
-    "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
+    "authorizedRetryOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
+    "previousClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
+    "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json",
     "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json"
   },
   "remoteVerification": {
@@ -157,5 +157,5 @@
     "verifiedAtUtc": "2026-08-31T11:38:36.6624493Z",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json"
   },
-  "nextSafeAction": "Commit and remote-verify the confirmed no-transmission outcome. Preserve the exact reopened draft and require fresh explicit X-specific retry authorization before any second Post click."
+  "nextSafeAction": "Commit and remote-verify the authorized-retry no-transmission checkpoint. Preserve the exact reopened composer for one manual user click and do not perform another agent Post click."
 }
