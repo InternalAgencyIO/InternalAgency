@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "scene1896_second_and_final_retry_dispatched_once_rendering",
+  "scene": 1896,
+  "retryNumber": 2,
+  "occurrence": 3,
+  "submittedAtUtc": "2026-08-31T07:11:49.548Z",
+  "clickCompletedAtUtc": "2026-08-31T07:11:52.676Z",
+  "actionTimeConfirmation": {
+    "received": true,
+    "userText": "send authorized go"
+  },
+  "recovery": {
+    "previousStagedTabId": "15",
+    "previousTabExpiredBeforeClick": true,
+    "sendClicksOnExpiredTab": 0,
+    "freshReplacementTabId": "16",
+    "freshChatUsed": true
+  },
+  "finalPreflight": {
+    "surface": "in-app Browser only",
+    "signedInAccountVisible": "leesha007",
+    "providerLimitTextVisible": false,
+    "promptSha256": "D77D2496940908353A8AEA505FEC41BBE101C69DA7ACD64BCA00400E3922B4B1",
+    "exactPromptVerified": true,
+    "orderedIdentityAnchors": [938, 936, 937],
+    "attachmentCounts": [1, 1, 1],
+    "attachmentOrderExact": true,
+    "primaryIdentityOrder": ["Alia", "Radiance", "Ellie", "AI ECE"],
+    "hiddenInputOrWorkaroundUsed": false
+  },
+  "providerUrl": "https://www.meta.ai/prompt/e4e17039-8dc9-4b9e-bd44-b26fe1235c41",
+  "sendClicks": 1,
+  "repeatSendClicks": 0,
+  "observedState": "searching_Kopaonik_landscapes",
+  "remainingMetaRetries": 0,
+  "nextSafeAction": "Wait for the visible provider page to reach terminal state, then archive every raw output or explicit no-byte response and complete final comparative QA."
+}
