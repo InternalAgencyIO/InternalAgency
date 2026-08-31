@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 476,
   "country": "Finland",
-  "state": "three-technically-valid-meta-occurrences-one-pass-prompts-prepared-no-requests-issued-scene-1934-held-no-raw",
+  "state": "three-one-pass-requests-issued-one-clean-output-two-output-moderation-blocks-no-retries-scene-1934-held-no-raw",
   "preparedAtUtc": "2026-08-31T23:01:59.7431474Z",
   "policy": {
     "requestsPerTechnicallyValidSelectedOccurrence": 1,
@@ -36,8 +36,25 @@
     }
   ],
   "promptHashesVerified": true,
-  "requestsIssued": 0,
+  "requestsIssued": 3,
+  "cleanOutputsSaved": 1,
+  "outputModerationBlockedSceneIds": [1931, 1932],
+  "outputModerationBlocks": [
+    {"scene": 1931, "category": "sexual", "moderationStage": "output", "requestId": "84de7911-8dca-4409-8285-50c7d87ff4ad"},
+    {"scene": 1932, "category": "sexual", "moderationStage": "output", "requestId": "403608dd-56e4-404e-9e39-67c603404165"}
+  ],
+  "cleanOutput": {
+    "scene": 1933,
+    "generatedOriginal": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-48699721-565d-4ea4-a81a-8d36c34ffcf2.png",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/1933-finland-tampere-finlayson-raze-chatgpt-one-strong-shortening-pass.png",
+    "sha256": "4E6DBE48C30451E2B22695137CB101066ED2A6A5EC4458AB02F5A724B4F7BF49",
+    "bytes": 2278654,
+    "width": 941,
+    "height": 1672,
+    "format": "PNG",
+    "selected": true
+  },
   "additionalPassesPermitted": 0,
   "scene1934CreditGateCheckpoint": "assets/lore/starlight-era/batch-476-finland-scene-1934-first-retry-terminal-no-credit-checkpoint.json",
-  "nextSafeAction": "Compute and record each exact prompt hash, commit and remote-verify the prompt checkpoint and scene-1934 credit-gate evidence, then issue exactly one built-in ChatGPT image edit request for each of scenes 1931-1933. Never retry a blocked or failed request."
+  "nextSafeAction": "Never retry any of the three consumed one-pass requests. Retain the clean ChatGPT output for scene 1933 and the clean Meta raws for scenes 1931 and 1932. Preserve QA, accessibility, provider and duplicate-hash evidence. Hold scene 1934 and X until Meta credits visibly replenish and the final permitted Meta retry can pass the full live and remote gates."
 }
