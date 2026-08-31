@@ -103,7 +103,7 @@ The helper scripts independently verify every pinned executable before sensitive
 | Tool | Exact path | Exact version | SHA-256 | Bytes |
 | --- | --- | --- | --- | ---: |
 | Node.js | `/home/a/.local/share/internal-agency/toolchains/node-v24.19.0-linux-x64/bin/node` | `v24.19.0` | `bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12` | 125,989,464 |
-| Git | `/mnt/c/Program Files/Git/mingw64/bin/git.exe` | `git version 2.55.0.windows.5` | `d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da` | 4,378,456 |
+| Git | `/usr/bin/git` | `git version 2.43.0` | `2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668` | 4,066,232 |
 | Solana CLI | `/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana` | `solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)` | `aacc6871e8ff199608987f0364f2ed9e239a32e1e0548f1ae4477e0e533e1dea` | 28,546,968 |
 | Solana keygen | `/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana-keygen` | `solana-keygen 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)` | `bf66aa11a13dd15503f40ab2b1160f06c7505bca692dfb20800682615d4ec952` | 2,828,816 |
 
@@ -234,10 +234,43 @@ Set only the exact address established by the completed recovery reconciliation 
 
 ```powershell
 $BufferAddress = '564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH'
-wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 IAT_V2_HANDOFF_CAS_ROOT=/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1 "BUFFER_ADDRESS=$BufferAddress" /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/handoff-iat-v2-devnet-buffer.sh
+$HandoffLauncher = @'
+set -euo pipefail
+set +x
+umask 077
+handoff_path='/mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/handoff-iat-v2-devnet-buffer.sh'
+expected_sha256='58bbeb070efecb361ebee5bd27c8525809574956a5a5cdde25578cf282da13ab'
+expected_bytes='61177'
+[[ "$handoff_path" == /* && ! -L "$handoff_path" && -f "$handoff_path" ]] || { echo 'HOLD: handoff source path is not exact' >&2; exit 1; }
+before_identity="$(/usr/bin/stat -Lc '%d:%i' -- "$handoff_path")"
+exec 15< "$handoff_path"
+fd_identity="$(/usr/bin/stat -Lc '%d:%i' -- /proc/$$/fd/15)"
+after_identity="$(/usr/bin/stat -Lc '%d:%i' -- "$handoff_path")"
+[[ -n "$before_identity" && "$before_identity" == "$fd_identity" && "$after_identity" == "$fd_identity" ]] || { echo 'HOLD: handoff source identity changed while opening' >&2; exit 1; }
+observed_sha256="$(/usr/bin/sha256sum -- /proc/$$/fd/15)"; observed_sha256="${observed_sha256%% *}"
+observed_bytes="$(/usr/bin/stat -Lc '%s' -- /proc/$$/fd/15)"
+[[ "$observed_sha256" == "$expected_sha256" && "$observed_bytes" == "$expected_bytes" ]] || { echo 'HOLD: handoff source digest or byte length drifted' >&2; exit 1; }
+handoff_source="$(/usr/bin/cat <&15; printf '\x1f')"
+[[ "${handoff_source: -1}" == $'\x1f' ]] || { echo 'HOLD: handoff source capture was incomplete' >&2; exit 1; }
+handoff_source="${handoff_source%$'\x1f'}"
+captured_sha256="$(printf '%s' "$handoff_source" | /usr/bin/sha256sum)"; captured_sha256="${captured_sha256%% *}"
+captured_bytes="$(printf '%s' "$handoff_source" | /usr/bin/wc -c)"
+[[ "$captured_sha256" == "$expected_sha256" && "$captured_bytes" == "$expected_bytes" ]] || { echo 'HOLD: captured handoff source drifted' >&2; exit 1; }
+exec 15<&-
+export IAT_V2_HANDOFF_CAPTURED_SOURCE='iat-v2-devnet-buffer-handoff-captured-source/v1'
+export IAT_V2_HANDOFF_SOURCE_PATH="$handoff_path"
+export IAT_V2_HANDOFF_CAPTURED_SHA256="$captured_sha256"
+export IAT_V2_HANDOFF_CAPTURED_BYTES="$captured_bytes"
+exec /usr/bin/bash --noprofile --norc -c "$handoff_source" "$handoff_path"
+'@
+wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 IAT_V2_HANDOFF_CAS_ROOT=/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1 "BUFFER_ADDRESS=$BufferAddress" /usr/bin/bash --noprofile --norc -c $HandoffLauncher iat-v2-captured-handoff-launcher
 ```
 
-Review exact `BUFFER`, `FROM`, `TO`, artifact SHA-256 and bytes, Node/Git/Solana identity, Devnet genesis, and the 10,000,000-lamport single-handoff fee floor; then type the exact target-bound `TRANSFER-<BUFFER_ADDRESS>-<FIRST_12_ARTIFACT_SHA256_HEX>` challenge shown on `/dev/tty`. Buffer identity, authority, and bytes are observed only by the signer-free finalized-RPC reconciler (`getGenesisHash`, `getSlot`, and `getAccountInfo`); the handoff does not use CLI `program show` or `program dump`, cannot fall back to a default signer during observation, and is admitted only after the recovery-runtime binding verifies the helper, CAS modules, and reconciler at the exact public-CI source. Public buffer reads occur before the payer keypair is inspected. After confirmation, the helper verifies the payer identity, freshly reobserves the finalized fee floor, exact buffer address, bytes, hash, and authority after the attended pause, and completes every fallible tool/genesis check before it atomically creates the durable target-keyed reservation. No further tool, genesis, balance, or buffer check occurs between a newly created reservation and the sole authority mutation. The helper submits the authority mutation exactly once and then follows it only with read-only finalized reconciliation. A pre-existing exact reservation skips keypair access and mutation and performs reconciliation only; a malformed or mismatched reservation is a HOLD. Its successful finalized authority readback is necessary but not sufficient; if it reports HOLD or ambiguity, **DO NOT RESUBMIT**, never remove the reservation, and stop for read-only reconciliation. Even after helper success, do not request the upgrade signature until the upgrade console independently re-observes the same exact buffer at finalized commitment and shows authority `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`, the reviewed loader owner, 649,680 bytes, and `771c…8a01`.
+The captured-source launcher is mandatory: direct mutable-path execution is rejected. It opens the handoff once, verifies the displayed SHA-256 and byte count, captures the exact bytes with a sentinel, rehashes the capture, and only then asks a clean Bash to parse and run those captured bytes.
+
+Review exact `BUFFER`, `FROM`, `TO`, artifact SHA-256 and bytes, Node/Git/Solana identity, Devnet genesis, and the 10,000,000-lamport single-handoff fee floor; then type the exact target-bound `TRANSFER-<BUFFER_ADDRESS>-<FIRST_12_ARTIFACT_SHA256_HEX>` challenge shown on `/dev/tty`. Buffer identity, authority, and bytes are observed only by the signer-free finalized-RPC reconciler (`getGenesisHash`, `getSlot`, and `getAccountInfo`); the handoff does not use CLI `program show` or `program dump`, cannot fall back to a default signer during observation, and is admitted only after the recovery-runtime binding verifies the helper, CAS modules, and reconciler at the exact public-CI source. Public buffer reads occur before the payer keypair is inspected. After confirmation, the helper verifies and exclusively locks the payer before address or balance use, freshly reobserves the finalized fee floor, exact buffer address, bytes, hash, and authority, then atomically creates the durable target-keyed reservation. The reservation result includes the canonical durable-record digest; the helper re-inspects the record through the pinned CAS directory, opens the exact record on FD11, checks the digest, and repeats the pinned runtime, payer address, finalized balance, buffer, and CAS checks immediately before the sole signer mutation. It submits that mutation once and follows it only with read-only finalized reconciliation. A pre-existing exact reservation skips keypair access and mutation and performs reconciliation only; a malformed or mismatched reservation is a HOLD. Any failure after reservation means **DO NOT RESUBMIT**, never remove the reservation, and stop for read-only reconciliation.
+
+The source closure explicitly trusts, but does not individually SHA-256-bind, the root-owned Ubuntu 24.04 OS runtime (Bash and system utilities, loaders/shared libraries, and Python runtime modules) or the WSL kernel/procfs boundary. Filesystem locks serialize compliant launchers; they are not a protected external broker against a hostile same-UID process. Do not run this ceremony in a concurrently writable or compromised operator session. Even after helper success, do not request the upgrade signature until the upgrade console independently re-observes the same exact buffer at finalized commitment and shows authority `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`, the reviewed loader owner, 649,680 bytes, and `771c…8a01`.
 
 ## 3. Upgrade as one attended transaction
 

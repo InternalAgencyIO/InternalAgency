@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import {
   mkdirSync,
   mkdtempSync,
@@ -10,19 +11,21 @@ import {
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, relative } from "node:path";
 import test from "node:test";
 
 import {
   IAT_V2_DEVNET_BUFFER_RUNTIME_BINDING_PATH,
   IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS,
   observeIatV2DevnetBufferRuntimeClosure,
+  resolveIatV2WslLinkedWorktreeAdministration,
   verifyIatV2DevnetBufferRuntimeBinding,
 } from "../scripts/lib/iat-v2-devnet-buffer-runtime-binding.mjs";
 
 const LIMITATIONS = Object.freeze([
   "Source and public-CI binding only; not a Devnet buffer upload, signature, transaction, authority handoff, or deployment result.",
   "Does not authorize signing, broadcast, funding, deployment, release, or Mainnet.",
+  "Root-owned Ubuntu 24.04 OS runtime, including Bash, system utilities, loaders, shared libraries, and Python standard-library/runtime modules, plus the WSL kernel and procfs, are trusted but not individually SHA-256-bound by this source closure.",
 ]);
 
 const UNBOUND_BINDING = Object.freeze({
@@ -60,6 +63,7 @@ test("runtime closure binds the attended handoff and both durable CAS modules", 
   for (const path of [
     "scripts/handoff-iat-v2-devnet-buffer.sh",
     "scripts/iat-v2-devnet-buffer-handoff-cas.mjs",
+    "scripts/iat-v2-sealed-exec.py",
     "scripts/initialize-iat-v2-devnet-buffer-handoff-cas.mjs",
     "scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs",
   ]) assert.equal(IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS.includes(path), true, `${path} must be runtime-bound`);
@@ -94,6 +98,154 @@ function runGit(cwd, args, { input } = {}) {
 function reviewedGit(projectRoot, args) {
   return runGit(projectRoot, args);
 }
+
+function sha256(bytes) {
+  return createHash("sha256").update(bytes).digest("hex");
+}
+
+function createLinkedWorktreeAdministrationFixture() {
+  const fixtureRoot = mkdtempSync(join(tmpdir(), "iat-v2-linked-worktree-"));
+  const windowsMountRoot = join(fixtureRoot, "mnt");
+  const driveRoot = join(windowsMountRoot, "c");
+  const repositoryRoot = join(driveRoot, "repository");
+  const workTree = join(driveRoot, "reviewed-worktree");
+  mkdirSync(repositoryRoot, { recursive: true });
+  runGit(repositoryRoot, ["init", "--quiet"]);
+  runGit(repositoryRoot, ["config", "user.email", "linked-worktree-test@internalagency.invalid"]);
+  runGit(repositoryRoot, ["config", "user.name", "Linked Worktree Test"]);
+  write(join(repositoryRoot, "fixture.txt"), "linked worktree fixture\n");
+  commitAll(repositoryRoot, "linked worktree base");
+  runGit(repositoryRoot, ["worktree", "add", "--quiet", "-b", "reviewed-linked-worktree", workTree]);
+
+  const originalPointer = readFileSync(join(workTree, ".git"), "utf8");
+  const originalMatch = /^gitdir: (\/[^\r\n]+)\n$/u.exec(originalPointer);
+  assert.ok(originalMatch, "test Git must create one canonical POSIX linked-worktree pointer");
+  const expectedGitDirectory = originalMatch[1];
+  const expectedCommonDirectory = join(repositoryRoot, ".git");
+  const gitDirectoryRelative = relative(driveRoot, expectedGitDirectory).replaceAll("\\", "/");
+  const workTreeRelative = relative(driveRoot, workTree).replaceAll("\\", "/");
+  writeFileSync(join(workTree, ".git"), `gitdir: C:/${gitDirectoryRelative}\n`);
+  writeFileSync(join(expectedGitDirectory, "gitdir"), `C:/${workTreeRelative}/.git\n`);
+  const config = readFileSync(join(expectedCommonDirectory, "config"));
+  const options = Object.freeze({
+    expectedCommonDirectory,
+    expectedGitConfigBytes: config.length,
+    expectedGitConfigSha256: sha256(config),
+    expectedGitDirectory,
+    windowsMountRoot,
+    workTree,
+  });
+  return {
+    driveRoot,
+    fixtureRoot,
+    options,
+    repositoryRoot,
+    workTree,
+  };
+}
+
+function withLinkedWorktreeAdministrationFixture(callback) {
+  const fixture = createLinkedWorktreeAdministrationFixture();
+  try {
+    return callback(fixture);
+  } finally {
+    rmSync(fixture.fixtureRoot, { recursive: true, force: true });
+  }
+}
+
+test("resolves a canonical Windows-form linked-worktree pointer for explicit root Git administration", {
+  skip: process.platform !== "linux",
+}, () => {
+  withLinkedWorktreeAdministrationFixture((fixture) => {
+    const administration = resolveIatV2WslLinkedWorktreeAdministration(fixture.options);
+    assert.deepEqual(administration, {
+      commonDirectory: fixture.options.expectedCommonDirectory,
+      gitDirectory: fixture.options.expectedGitDirectory,
+      objectDirectory: join(fixture.options.expectedCommonDirectory, "objects"),
+      workTree: fixture.workTree,
+    });
+    assert.equal(
+      runGit(fixture.workTree, [
+        `--git-dir=${administration.gitDirectory}`,
+        `--work-tree=${administration.workTree}`,
+        "rev-parse",
+        "HEAD",
+      ]),
+      runGit(fixture.repositoryRoot, ["rev-parse", "reviewed-linked-worktree"]),
+    );
+  });
+});
+
+for (const [label, pointer] of [
+  ["relative", "gitdir: ../repository/.git/worktrees/reviewed-worktree\n"],
+  ["backslash", "gitdir: C:\\repository\\.git\\worktrees\\reviewed-worktree\n"],
+  ["lowercase drive", "gitdir: c:/repository/.git/worktrees/reviewed-worktree\n"],
+  ["dot-segment escape", "gitdir: C:/repository/../outside\n"],
+  ["extra line", "gitdir: C:/repository/.git/worktrees/reviewed-worktree\nsecond line\n"],
+]) {
+  test(`holds a ${label} linked-worktree .git pointer`, { skip: process.platform !== "linux" }, () => {
+    withLinkedWorktreeAdministrationFixture((fixture) => {
+      writeFileSync(join(fixture.workTree, ".git"), pointer);
+      assertHold(
+        () => resolveIatV2WslLinkedWorktreeAdministration(fixture.options),
+        "RUNTIME_BINDING_GIT_HOLD",
+      );
+    });
+  });
+}
+
+test("holds a canonical Windows-form pointer to an outside administration directory", {
+  skip: process.platform !== "linux",
+}, () => {
+  withLinkedWorktreeAdministrationFixture((fixture) => {
+    mkdirSync(join(fixture.driveRoot, "outside"));
+    writeFileSync(join(fixture.workTree, ".git"), "gitdir: C:/outside\n");
+    assertHold(
+      () => resolveIatV2WslLinkedWorktreeAdministration(fixture.options),
+      "RUNTIME_BINDING_GIT_HOLD",
+    );
+  });
+});
+
+test("holds a linked-worktree administration backpointer that is not exact and reciprocal", {
+  skip: process.platform !== "linux",
+}, () => {
+  withLinkedWorktreeAdministrationFixture((fixture) => {
+    writeFileSync(join(fixture.options.expectedGitDirectory, "gitdir"), "../reviewed-worktree/.git\n");
+    assertHold(
+      () => resolveIatV2WslLinkedWorktreeAdministration(fixture.options),
+      "RUNTIME_BINDING_GIT_HOLD",
+    );
+  });
+});
+
+test("holds repository config drift and object alternates before root Git runs", {
+  skip: process.platform !== "linux",
+}, () => {
+  withLinkedWorktreeAdministrationFixture((fixture) => {
+    writeFileSync(join(fixture.options.expectedCommonDirectory, "config"), "[filter \"hostile\"]\n\tprocess = arbitrary-command\n", { flag: "a" });
+    assertHold(
+      () => resolveIatV2WslLinkedWorktreeAdministration(fixture.options),
+      "RUNTIME_BINDING_GIT_HOLD",
+    );
+  });
+  withLinkedWorktreeAdministrationFixture((fixture) => {
+    write(join(fixture.options.expectedCommonDirectory, "objects", "info", "alternates"), "/unreviewed/objects\n");
+    assertHold(
+      () => resolveIatV2WslLinkedWorktreeAdministration(fixture.options),
+      "RUNTIME_BINDING_GIT_HOLD",
+    );
+  });
+  for (const path of ["info/grafts", "shallow"]) {
+    withLinkedWorktreeAdministrationFixture((fixture) => {
+      write(join(fixture.options.expectedCommonDirectory, path), "unreviewed topology override\n");
+      assertHold(
+        () => resolveIatV2WslLinkedWorktreeAdministration(fixture.options),
+        "RUNTIME_BINDING_GIT_HOLD",
+      );
+    });
+  }
+});
 
 function commitAll(repositoryRoot, message) {
   runGit(repositoryRoot, ["add", "--all"]);
@@ -299,6 +451,31 @@ test("holds a source-tree scalar that does not identify the bound source commit 
     assertHold(
       () => verifyIatV2DevnetBufferRuntimeBinding({ projectRoot: fixture.projectRoot, git: reviewedGit }),
       "RUNTIME_BINDING_SOURCE_HOLD",
+    );
+  });
+});
+
+test("holds a CI checkout tree scalar that does not identify the bound checkout commit tree", () => {
+  withFixture((fixture) => {
+    bindFixture(fixture, { bindingOverrides: { checkoutTree: "0".repeat(40) } });
+    assertHold(
+      () => verifyIatV2DevnetBufferRuntimeBinding({ projectRoot: fixture.projectRoot, git: reviewedGit }),
+      "RUNTIME_BINDING_CHECKOUT_HOLD",
+    );
+  });
+});
+
+test("holds a checkout that is not a two-parent PR merge with source S as second parent", () => {
+  withFixture((fixture) => {
+    bindFixture(fixture, {
+      bindingOverrides: {
+        checkoutCommit: fixture.sourceHeadCommit,
+        checkoutTree: fixture.sourceHeadTree,
+      },
+    });
+    assertHold(
+      () => verifyIatV2DevnetBufferRuntimeBinding({ projectRoot: fixture.projectRoot, git: reviewedGit }),
+      "RUNTIME_BINDING_CHECKOUT_HOLD",
     );
   });
 });

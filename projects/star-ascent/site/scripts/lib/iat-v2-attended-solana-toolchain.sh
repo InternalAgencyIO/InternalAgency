@@ -12,10 +12,10 @@ IAT_V2_EXPECTED_NODE_PATH='/home/a/.local/share/internal-agency/toolchains/node-
 IAT_V2_EXPECTED_NODE_VERSION='v24.19.0'
 IAT_V2_EXPECTED_NODE_SHA256='bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12'
 IAT_V2_EXPECTED_NODE_BYTES='125989464'
-IAT_V2_EXPECTED_GIT_PATH='/mnt/c/Program Files/Git/mingw64/bin/git.exe'
-IAT_V2_EXPECTED_GIT_VERSION='git version 2.55.0.windows.5'
-IAT_V2_EXPECTED_GIT_SHA256='d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da'
-IAT_V2_EXPECTED_GIT_BYTES='4378456'
+IAT_V2_EXPECTED_GIT_PATH='/usr/bin/git'
+IAT_V2_EXPECTED_GIT_VERSION='git version 2.43.0'
+IAT_V2_EXPECTED_GIT_SHA256='2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668'
+IAT_V2_EXPECTED_GIT_BYTES='4066232'
 IAT_V2_EXPECTED_DEVNET_GENESIS_HASH='EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG'
 
 iat_v2_verify_exact_tool() {
@@ -32,6 +32,7 @@ iat_v2_verify_exact_tool() {
   local observed_bytes=""
   local observed_uid=""
   local observed_mode=""
+  local expected_uid=""
 
   command_path="$(command -v -- "$requested" 2>/dev/null || true)"
   if [[ -z "$command_path" ]]; then
@@ -51,9 +52,13 @@ iat_v2_verify_exact_tool() {
   fi
   observed_uid="$(/usr/bin/stat -c '%u' -- "$resolved_path" 2>/dev/null || true)"
   observed_mode="$(/usr/bin/stat -c '%a' -- "$resolved_path" 2>/dev/null || true)"
-  if [[ "$observed_uid" != "$(/usr/bin/id -u)" || ! "$observed_mode" =~ ^[0-7]{3,4}$ ]] \
+  expected_uid="$(/usr/bin/id -u)"
+  if [[ "$expected_path" == "/usr/bin/git" ]]; then
+    expected_uid="0"
+  fi
+  if [[ "$observed_uid" != "$expected_uid" || ! "$observed_mode" =~ ^[0-7]{3,4}$ ]] \
     || (( (8#$observed_mode & 8#022) != 0 )); then
-    echo "HOLD: $label ownership or write permissions are not operator-exclusive." >&2
+    echo "HOLD: $label ownership or write permissions differ from the reviewed trust boundary." >&2
     return 1
   fi
   observed_bytes="$(/usr/bin/stat -c '%s' -- "$resolved_path" 2>/dev/null || true)"

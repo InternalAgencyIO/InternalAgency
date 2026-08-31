@@ -9,7 +9,8 @@
   "evidenceManifestSha256": null,
   "limitations": [
     "Source and public-CI binding only; not a Devnet buffer upload, signature, transaction, authority handoff, or deployment result.",
-    "Does not authorize signing, broadcast, funding, deployment, release, or Mainnet."
+    "Does not authorize signing, broadcast, funding, deployment, release, or Mainnet.",
+    "Root-owned Ubuntu 24.04 OS runtime, including Bash, system utilities, loaders, shared libraries, and Python standard-library/runtime modules, plus the WSL kernel and procfs, are trusted but not individually SHA-256-bound by this source closure."
   ],
   "mainnetStatus": "HOLD",
   "network": "devnet",

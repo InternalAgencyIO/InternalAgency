@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   closeSync,
@@ -6,8 +7,9 @@ import {
   lstatSync,
   openSync,
   readFileSync,
+  realpathSync,
 } from "node:fs";
-import { resolve } from "node:path";
+import { posix, resolve } from "node:path";
 
 export const IAT_V2_DEVNET_BUFFER_RUNTIME_BINDING_PATH =
   "scripts/data/iat-v2-devnet-buffer-runtime-binding.json";
@@ -26,6 +28,7 @@ export const IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS = Object.freeze([
   "scripts/handoff-iat-v2-devnet-buffer.sh",
   "scripts/iat-v2-devnet-buffer-handoff-cas.mjs",
   "scripts/iat-v2-devnet-buffer-preflight.mjs",
+  "scripts/iat-v2-sealed-exec.py",
   "scripts/initialize-iat-v2-devnet-buffer-handoff-cas.mjs",
   "scripts/lib/iat-v2-attended-git-runtime.mjs",
   "scripts/lib/iat-v2-attended-node-runtime.mjs",
@@ -41,9 +44,21 @@ export const IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS = Object.freeze([
 const COMMIT = /^[0-9a-f]{40}$/u;
 const SHA256 = /^[0-9a-f]{64}$/u;
 const WORKFLOW = /^InternalAgencyIO\/InternalAgency\/\.github\/workflows\/iat-v2-proof\.yml@refs\/pull\/[1-9][0-9]*\/merge$/u;
+const STDIN_CLI_MARKER = "iat-v2-devnet-buffer-runtime-binding-stdin/v1";
+const EXPECTED_PROJECT_ROOT = "/mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site";
+const EXPECTED_WORK_TREE = "/mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean";
+const EXPECTED_LINKED_GIT_DIRECTORY = "/mnt/c/Users/A/Documents/Codex/2026-07-26/realtime-voice-chat-9/.git/worktrees/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean";
+const EXPECTED_COMMON_GIT_DIRECTORY = "/mnt/c/Users/A/Documents/Codex/2026-07-26/realtime-voice-chat-9/.git";
+const EXPECTED_GIT_CONFIG_SHA256 = "5f0fabfa23f272edd434c297f96bb5982905bd1a7c9bddc4da980ac76c38e592";
+const EXPECTED_GIT_CONFIG_BYTES = 4_335;
+const EXPECTED_GIT_PATH = "/usr/bin/git";
+const EXPECTED_GIT_VERSION = "git version 2.43.0";
+const EXPECTED_GIT_SHA256 = "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668";
+const EXPECTED_GIT_BYTES = 4_066_232;
 const LIMITATIONS = Object.freeze([
   "Source and public-CI binding only; not a Devnet buffer upload, signature, transaction, authority handoff, or deployment result.",
   "Does not authorize signing, broadcast, funding, deployment, release, or Mainnet.",
+  "Root-owned Ubuntu 24.04 OS runtime, including Bash, system utilities, loaders, shared libraries, and Python standard-library/runtime modules, plus the WSL kernel and procfs, are trusted but not individually SHA-256-bound by this source closure.",
 ]);
 
 export class IatV2DevnetBufferRuntimeBindingError extends Error {
@@ -127,12 +142,227 @@ function readAtomicRegularBytes(path, code, label) {
   }
 }
 
+function canonicalDirectory(path, code, label) {
+  let entry;
+  try {
+    entry = lstatSync(path);
+  } catch {
+    fail(code, `${label} is missing`);
+  }
+  check(entry.isDirectory() && !entry.isSymbolicLink(), code, `${label} is not a directory or is a symlink`);
+  let canonical;
+  try {
+    canonical = realpathSync(path);
+  } catch {
+    fail(code, `${label} cannot be resolved`);
+  }
+  check(canonical === path, code, `${label} is not an exact canonical path`);
+  return canonical;
+}
+
+function requireAbsent(path, code, label) {
+  try {
+    lstatSync(path);
+  } catch (error) {
+    if (error?.code === "ENOENT") return;
+    fail(code, `${label} could not be checked`);
+  }
+  fail(code, `${label} must be absent`);
+}
+
+/**
+ * Resolve and validate the one reviewed Windows-form linked-worktree pointer
+ * before root Git sees repository state. Production supplies exact immutable
+ * expectations; the parameters keep the parser independently testable.
+ */
+export function resolveIatV2WslLinkedWorktreeAdministration({
+  workTree,
+  expectedGitDirectory,
+  expectedCommonDirectory,
+  expectedGitConfigBytes,
+  expectedGitConfigSha256,
+  windowsMountRoot = "/mnt",
+} = {}) {
+  const code = "RUNTIME_BINDING_GIT_HOLD";
+  check(process.platform === "linux", code, "linked-worktree translation requires Linux");
+  for (const [label, value] of Object.entries({
+    workTree,
+    expectedGitDirectory,
+    expectedCommonDirectory,
+    windowsMountRoot,
+  })) {
+    check(typeof value === "string" && posix.isAbsolute(value), code, `${label} must be an absolute POSIX path`);
+  }
+  check(
+    Number.isSafeInteger(expectedGitConfigBytes) && expectedGitConfigBytes > 0,
+    code,
+    "reviewed repository config byte length is invalid",
+  );
+  check(SHA256.test(expectedGitConfigSha256 ?? ""), code, "reviewed repository config SHA-256 is invalid");
+
+  const canonicalMountRoot = canonicalDirectory(windowsMountRoot, code, "Windows mount root");
+  const canonicalWorkTree = canonicalDirectory(workTree, code, "reviewed Git worktree");
+  const pointerBytes = readAtomicRegularBytes(posix.join(canonicalWorkTree, ".git"), code, "linked-worktree .git pointer");
+  const pointerText = pointerBytes.toString("utf8");
+  check(Buffer.from(pointerText, "utf8").equals(pointerBytes), code, "linked-worktree .git pointer is not exact UTF-8");
+  const pointer = /^gitdir: ([A-Z]):\/([A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*)\n$/u.exec(pointerText);
+  check(pointer, code, "linked-worktree .git pointer is not one canonical Windows drive-root line");
+  const [, drive, tail] = pointer;
+  const segments = tail.split("/");
+  check(
+    segments.every((segment) => segment !== "." && segment !== ".." && !segment.endsWith(".")),
+    code,
+    "linked-worktree .git pointer contains an unsafe path segment",
+  );
+  const driveRoot = canonicalDirectory(posix.join(canonicalMountRoot, drive.toLowerCase()), code, "reviewed Windows drive mount");
+  const translatedGitDirectory = posix.join(driveRoot, ...segments);
+  check(
+    translatedGitDirectory === expectedGitDirectory,
+    code,
+    "linked-worktree .git pointer does not identify the reviewed administration directory",
+  );
+  const canonicalGitDirectory = canonicalDirectory(expectedGitDirectory, code, "reviewed linked-worktree administration directory");
+  const workTreeRelative = posix.relative(driveRoot, canonicalWorkTree);
+  check(
+    workTreeRelative !== ""
+      && workTreeRelative !== ".."
+      && !workTreeRelative.startsWith("../")
+      && !posix.isAbsolute(workTreeRelative),
+    code,
+    "reviewed Git worktree is outside the translated Windows drive",
+  );
+  const expectedBackpointer = `${drive}:/${workTreeRelative}/.git\n`;
+  const backpointer = readAtomicRegularBytes(posix.join(canonicalGitDirectory, "gitdir"), code, "linked-worktree administration backpointer");
+  check(backpointer.equals(Buffer.from(expectedBackpointer, "utf8")), code, "linked-worktree administration backpointer drifted");
+  const commondir = readAtomicRegularBytes(posix.join(canonicalGitDirectory, "commondir"), code, "linked-worktree commondir pointer");
+  check(commondir.equals(Buffer.from("../..\n", "utf8")), code, "linked-worktree commondir pointer drifted");
+  check(
+    posix.resolve(canonicalGitDirectory, "../..") === expectedCommonDirectory,
+    code,
+    "linked-worktree commondir does not identify the reviewed common Git directory",
+  );
+  const canonicalCommonDirectory = canonicalDirectory(expectedCommonDirectory, code, "reviewed common Git directory");
+
+  const config = readAtomicRegularBytes(posix.join(canonicalCommonDirectory, "config"), code, "reviewed repository config");
+  check(config.length === expectedGitConfigBytes, code, "reviewed repository config byte length drifted");
+  check(sha256(config) === expectedGitConfigSha256, code, "reviewed repository config SHA-256 drifted");
+  requireAbsent(posix.join(canonicalCommonDirectory, "config.worktree"), code, "common worktree config");
+  requireAbsent(posix.join(canonicalGitDirectory, "config.worktree"), code, "linked-worktree config");
+  const commonInfoDirectory = canonicalDirectory(posix.join(canonicalCommonDirectory, "info"), code, "reviewed common Git info directory");
+  requireAbsent(posix.join(commonInfoDirectory, "grafts"), code, "Git grafts file");
+  requireAbsent(posix.join(canonicalCommonDirectory, "shallow"), code, "Git shallow boundary file");
+  const objectDirectory = canonicalDirectory(posix.join(canonicalCommonDirectory, "objects"), code, "reviewed Git object directory");
+  canonicalDirectory(posix.join(objectDirectory, "info"), code, "reviewed Git object info directory");
+  requireAbsent(posix.join(objectDirectory, "info", "alternates"), code, "Git object alternates file");
+  requireAbsent(posix.join(objectDirectory, "info", "http-alternates"), code, "Git HTTP object alternates file");
+
+  return Object.freeze({
+    commonDirectory: canonicalCommonDirectory,
+    gitDirectory: canonicalGitDirectory,
+    objectDirectory,
+    workTree: canonicalWorkTree,
+  });
+}
+
 function gitResult(git, projectRoot, args, code, message) {
   try {
     return git(projectRoot, ["--no-replace-objects", ...args]);
   } catch {
     fail(code, message);
   }
+}
+
+function exactGitEnvironment() {
+  return {
+    HOME: "/home/a",
+    LANG: "C.UTF-8",
+    LC_ALL: "C.UTF-8",
+    PATH: "/usr/bin:/bin",
+    GIT_ATTR_NOSYSTEM: "1",
+    GIT_CONFIG_GLOBAL: "/dev/null",
+    GIT_CONFIG_NOSYSTEM: "1",
+    GIT_CONFIG_SYSTEM: "/dev/null",
+    GIT_CONFIG_COUNT: "0",
+    GIT_LFS_SKIP_SMUDGE: "1",
+    GIT_NO_LAZY_FETCH: "1",
+    GIT_NO_REPLACE_OBJECTS: "1",
+    GIT_OPTIONAL_LOCKS: "0",
+    GIT_PAGER: "cat",
+    GIT_TERMINAL_PROMPT: "0",
+  };
+}
+
+function createSelfContainedGitRunner(projectRoot) {
+  check(
+    process.platform === "linux" && process.getuid?.() === 1000,
+    "RUNTIME_BINDING_GIT_HOLD",
+    "runtime binding stdin verifier requires exact uid 1000 on Linux",
+  );
+  check(realpathSync(projectRoot) === EXPECTED_PROJECT_ROOT, "RUNTIME_BINDING_GIT_HOLD", "runtime binding project root drifted");
+  let entry;
+  try {
+    entry = lstatSync(EXPECTED_GIT_PATH);
+  } catch {
+    fail("RUNTIME_BINDING_GIT_HOLD", "reviewed Git executable is unavailable");
+  }
+  check(entry.isFile() && !entry.isSymbolicLink(), "RUNTIME_BINDING_GIT_HOLD", "reviewed Git executable is not a regular non-symlink file");
+  check(realpathSync(EXPECTED_GIT_PATH) === EXPECTED_GIT_PATH, "RUNTIME_BINDING_GIT_HOLD", "reviewed Git executable resolves through a symlink");
+  check(entry.uid === 0 && (entry.mode & 0o022) === 0, "RUNTIME_BINDING_GIT_HOLD", "reviewed root-owned Git ownership or permissions drifted");
+  check(entry.size === EXPECTED_GIT_BYTES, "RUNTIME_BINDING_GIT_HOLD", "reviewed Git byte length drifted");
+  check(sha256(readFileSync(EXPECTED_GIT_PATH)) === EXPECTED_GIT_SHA256, "RUNTIME_BINDING_GIT_HOLD", "reviewed Git SHA-256 drifted");
+  const cleanEnvironment = exactGitEnvironment();
+  const version = execFileSync(EXPECTED_GIT_PATH, ["--version"], {
+    encoding: "utf8",
+    env: cleanEnvironment,
+    stdio: ["ignore", "pipe", "pipe"],
+  }).trim();
+  check(version === EXPECTED_GIT_VERSION, "RUNTIME_BINDING_GIT_HOLD", "reviewed Git version drifted");
+  const administrationOptions = Object.freeze({
+    expectedCommonDirectory: EXPECTED_COMMON_GIT_DIRECTORY,
+    expectedGitConfigBytes: EXPECTED_GIT_CONFIG_BYTES,
+    expectedGitConfigSha256: EXPECTED_GIT_CONFIG_SHA256,
+    expectedGitDirectory: EXPECTED_LINKED_GIT_DIRECTORY,
+    windowsMountRoot: "/mnt",
+    workTree: EXPECTED_WORK_TREE,
+  });
+  resolveIatV2WslLinkedWorktreeAdministration(administrationOptions);
+  return (root, args, options = {}) => {
+    check(realpathSync(root) === EXPECTED_PROJECT_ROOT, "RUNTIME_BINDING_GIT_HOLD", "runtime Git command root drifted");
+    const administration = resolveIatV2WslLinkedWorktreeAdministration(administrationOptions);
+    const environment = {
+      ...cleanEnvironment,
+      GIT_ALTERNATE_OBJECT_DIRECTORIES: "",
+      GIT_CEILING_DIRECTORIES: administration.workTree,
+      GIT_COMMON_DIR: administration.commonDirectory,
+      GIT_DIR: administration.gitDirectory,
+      GIT_DISCOVERY_ACROSS_FILESYSTEM: "0",
+      GIT_INDEX_FILE: posix.join(administration.gitDirectory, "index"),
+      GIT_OBJECT_DIRECTORY: administration.objectDirectory,
+      GIT_WORK_TREE: administration.workTree,
+    };
+    return execFileSync(EXPECTED_GIT_PATH, [
+      `--git-dir=${administration.gitDirectory}`,
+      `--work-tree=${administration.workTree}`,
+      "--no-pager",
+      "-c",
+      "core.fsmonitor=false",
+      "-c",
+      "core.hooksPath=/dev/null",
+      "-c",
+      "core.attributesFile=/dev/null",
+      "-c",
+      "diff.external=",
+      "-c",
+      "interactive.diffFilter=",
+      ...args,
+    ], {
+      cwd: root,
+      encoding: "utf8",
+      env: environment,
+      maxBuffer: options.maxBuffer ?? 50_000_000,
+      stdio: ["ignore", "pipe", "pipe"],
+    }).trim();
+  };
 }
 
 function readRuntimeBindingAnchor({ projectRoot, git }) {
@@ -191,6 +421,22 @@ export function observeIatV2DevnetBufferRuntimeClosure({
     const line = gitResult(git, projectRoot, ["ls-tree", "--full-tree", sourceHeadCommit, "--", repositoryPath], "RUNTIME_BINDING_CLOSURE_HOLD", `runtime source entry is unavailable: ${path}`);
     const match = /^(100644|100755) blob ([0-9a-f]{40})\t(.+)$/u.exec(line);
     check(match && match[3] === repositoryPath, "RUNTIME_BINDING_CLOSURE_HOLD", `runtime source entry is not one exact regular blob: ${path}`);
+    const indexLine = gitResult(
+      git,
+      projectRoot,
+      ["ls-files", "--stage", "--full-name", "--", `:(top)${repositoryPath}`],
+      "RUNTIME_BINDING_WORKTREE_HOLD",
+      `runtime index entry is unavailable: ${path}`,
+    );
+    const indexMatch = /^(100644|100755) ([0-9a-f]{40}) 0\t(.+)$/u.exec(indexLine);
+    check(
+      indexMatch
+        && indexMatch[1] === match[1]
+        && indexMatch[2] === match[2]
+        && indexMatch[3] === repositoryPath,
+      "RUNTIME_BINDING_WORKTREE_HOLD",
+      `runtime index entry differs from reviewed source S: ${path}`,
+    );
     const bytes = readAtomicRegularBytes(
       resolve(projectRoot, path),
       "RUNTIME_BINDING_CLOSURE_HOLD",
@@ -269,6 +515,17 @@ export function verifyIatV2DevnetBufferRuntimeBinding({
   gitResult(git, projectRoot, ["cat-file", "-e", `${value.sourceHeadCommit}^{commit}`], "RUNTIME_BINDING_SOURCE_HOLD", "bound runtime source commit is unavailable");
   const sourceTree = gitResult(git, projectRoot, ["rev-parse", `${value.sourceHeadCommit}^{tree}`], "RUNTIME_BINDING_SOURCE_HOLD", "bound runtime source tree is unavailable");
   check(sourceTree === value.sourceHeadTree, "RUNTIME_BINDING_SOURCE_HOLD", "bound runtime source tree drifted");
+  gitResult(git, projectRoot, ["cat-file", "-e", `${value.checkoutCommit}^{commit}`], "RUNTIME_BINDING_CHECKOUT_HOLD", "bound CI checkout commit is unavailable");
+  const checkoutTree = gitResult(git, projectRoot, ["rev-parse", `${value.checkoutCommit}^{tree}`], "RUNTIME_BINDING_CHECKOUT_HOLD", "bound CI checkout tree is unavailable");
+  check(checkoutTree === value.checkoutTree, "RUNTIME_BINDING_CHECKOUT_HOLD", "bound CI checkout tree drifted");
+  const checkoutParents = gitResult(git, projectRoot, ["rev-list", "--parents", "-n", "1", value.checkoutCommit], "RUNTIME_BINDING_CHECKOUT_HOLD", "bound CI checkout parents are unavailable").split(" ");
+  check(
+    checkoutParents.length === 3
+      && checkoutParents[0] === value.checkoutCommit
+      && checkoutParents[2] === value.sourceHeadCommit,
+    "RUNTIME_BINDING_CHECKOUT_HOLD",
+    "bound CI checkout is not an exact two-parent PR merge with source S as its second parent",
+  );
   const head = gitResult(git, projectRoot, ["rev-parse", "HEAD"], "RUNTIME_BINDING_SUCCESSOR_HOLD", "current checkout head is unavailable");
   const headTree = gitResult(git, projectRoot, ["rev-parse", "HEAD^{tree}"], "RUNTIME_BINDING_SUCCESSOR_HOLD", "binding successor tree is unavailable");
   const parents = gitResult(git, projectRoot, ["rev-list", "--parents", "-n", "1", "HEAD"], "RUNTIME_BINDING_SUCCESSOR_HOLD", "binding successor parents are unavailable").split(" ");
@@ -276,14 +533,12 @@ export function verifyIatV2DevnetBufferRuntimeBinding({
 
   const prefix = gitResult(git, projectRoot, ["rev-parse", "--show-prefix"], "RUNTIME_BINDING_GIT_HOLD", "runtime checkout prefix is unavailable");
   const expectedBindingDiff = `M\t${prefix}${IAT_V2_DEVNET_BUFFER_RUNTIME_BINDING_PATH}`;
-  const committedDiff = gitResult(git, projectRoot, ["diff", "--name-status", "--no-renames", value.sourceHeadCommit, "HEAD", "--"], "RUNTIME_BINDING_SUCCESSOR_HOLD", "binding successor diff is unavailable");
+  const committedDiff = gitResult(git, projectRoot, ["diff", "--no-ext-diff", "--no-textconv", "--name-status", "--no-renames", value.sourceHeadCommit, "HEAD", "--"], "RUNTIME_BINDING_SUCCESSOR_HOLD", "binding successor diff is unavailable");
   check(committedDiff === expectedBindingDiff, "RUNTIME_BINDING_SUCCESSOR_HOLD", "binding successor changed paths beyond the one canonical runtime anchor");
 
   const closure = observeIatV2DevnetBufferRuntimeClosure({ projectRoot, sourceHeadCommit: value.sourceHeadCommit, git });
   check(closure.runtimeClosureSha256 === value.runtimeClosureSha256, "RUNTIME_BINDING_CLOSURE_HOLD", "bound runtime closure digest drifted");
-  gitResult(git, projectRoot, ["diff", "--quiet", value.sourceHeadCommit, "HEAD", "--", ...IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS], "RUNTIME_BINDING_CLOSURE_HOLD", "runtime closure changed in the binding-only successor");
-  const worktreeStatus = gitResult(git, projectRoot, ["status", "--porcelain=v1", "--untracked-files=all", "--", ...IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS, IAT_V2_DEVNET_BUFFER_RUNTIME_BINDING_PATH], "RUNTIME_BINDING_WORKTREE_HOLD", "runtime closure worktree status is unavailable");
-  check(worktreeStatus === "", "RUNTIME_BINDING_WORKTREE_HOLD", "runtime closure or binding anchor has staged, unstaged, deleted, or untracked drift");
+  gitResult(git, projectRoot, ["diff", "--no-ext-diff", "--no-textconv", "--quiet", value.sourceHeadCommit, "HEAD", "--", ...IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS], "RUNTIME_BINDING_CLOSURE_HOLD", "runtime closure changed in the binding-only successor");
 
   return Object.freeze({
     schema: "iat-v2-devnet-buffer-runtime-verification/v1",
@@ -311,5 +566,41 @@ export function verifyIatV2DevnetBufferRuntimeBinding({
     signing: false,
     broadcast: false,
     mainnetAuthorized: false,
+  });
+}
+
+const stdinCli = process.argv[1] === "-"
+  && process.env.IAT_V2_RUNTIME_BINDING_STDIN_CLI === STDIN_CLI_MARKER;
+if (stdinCli) {
+  Promise.resolve().then(() => {
+    check(
+      process.env.IAT_V2_PROJECT_ROOT === EXPECTED_PROJECT_ROOT,
+      "RUNTIME_BINDING_SCHEMA_HOLD",
+      "runtime binding stdin verifier project root is not exact",
+    );
+    check(
+      JSON.stringify(process.argv.slice(2)) === JSON.stringify(["verify"]),
+      "RUNTIME_BINDING_SCHEMA_HOLD",
+      "runtime binding stdin verifier arguments are not exact",
+    );
+    const git = createSelfContainedGitRunner(EXPECTED_PROJECT_ROOT);
+    return verifyIatV2DevnetBufferRuntimeBinding({
+      projectRoot: EXPECTED_PROJECT_ROOT,
+      git,
+    });
+  }).then((value) => {
+    process.stdout.write(`${JSON.stringify(value)}\n`);
+  }).catch((error) => {
+    process.stderr.write(`${JSON.stringify({
+      schema: "iat-v2-devnet-buffer-runtime-binding-error/v1",
+      status: "HOLD",
+      code: error instanceof IatV2DevnetBufferRuntimeBindingError
+        ? error.code
+        : "UNEXPECTED_RUNTIME_BINDING_FAILURE",
+      message: error instanceof Error ? error.message : String(error),
+      signing: false,
+      broadcast: false,
+    })}\n`);
+    process.exitCode = 2;
   });
 }
