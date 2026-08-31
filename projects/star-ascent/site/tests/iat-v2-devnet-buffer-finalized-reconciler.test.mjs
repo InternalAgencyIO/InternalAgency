@@ -1,14 +1,17 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   mkdtempSync,
   readFileSync,
+  rmSync,
   statSync,
+  writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { PublicKey } from "@solana/web3.js";
+import { fileURLToPath } from "node:url";
 import {
   BUFFER_METADATA_BYTES,
   CANONICAL_DEVNET_GENESIS_HASH,
@@ -16,6 +19,7 @@ import {
   CANONICAL_PUBLIC_CI_ARTIFACT,
   FINALIZED_BUFFER_RECONCILIATION_SCHEMA,
   FinalizedBufferReconciliationError,
+  IAT_V2_RECONCILER_STDIN_CLI_MARKER,
   REVIEWED_DEVNET_DEPLOYER,
   REVIEWED_MODEL_T_ADMIN,
   REVIEWED_PUBLIC_CI_ARTIFACT_BINDING,
@@ -23,6 +27,10 @@ import {
   assertReviewedPublicCiArtifact,
   compareBufferProgramBytes,
   createJsonRpcCaller,
+  decodeCanonicalPublicKey,
+  encodeCanonicalPublicKey,
+  isReconcilerCliInvocation,
+  loadReviewedPublicCiArtifact,
   reconcileFinalizedDevnetBuffer,
   writeDurableReconciliationEvidence,
 } from "../scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs";
@@ -49,7 +57,7 @@ function bufferAccountData(programBytes, {
   const data = Buffer.alloc(BUFFER_METADATA_BYTES + programBytes.length);
   data.writeUInt32LE(stateTag, 0);
   data[4] = authorityOption;
-  new PublicKey(authority).toBuffer().copy(data, 5);
+  decodeCanonicalPublicKey(authority).copy(data, 5);
   programBytes.copy(data, BUFFER_METADATA_BYTES);
   return data;
 }
@@ -101,6 +109,47 @@ async function reconcile(overrides = {}) {
   });
   return { record, calls: transport.calls };
 }
+
+test("dependency-free public-key codec is exact, canonical, and 32-byte bound", () => {
+  for (const [publicKey, expectedHex] of [
+    [BUFFER_ADDRESS, "3cbaa53a8746e462f76334089f4d1f76e9c236df488f168f8dfb82d0e8fb2e4c"],
+    [REVIEWED_DEVNET_DEPLOYER, "ba5c40f03395af9fc646a8dee9042eb2909fded347db9cbd5d2333a668fd5533"],
+    [REVIEWED_MODEL_T_ADMIN, "60fa8f2c48a8bc6d2ad476b094bb2f569f020211bf834deb144d2e2958ac4230"],
+    ["11111111111111111111111111111111", "0".repeat(64)],
+  ]) {
+    const decoded = decodeCanonicalPublicKey(publicKey);
+    assert.equal(decoded.length, 32);
+    assert.equal(decoded.toString("hex"), expectedHex);
+    assert.equal(encodeCanonicalPublicKey(decoded), publicKey);
+  }
+  assert.equal(
+    encodeCanonicalPublicKey(Buffer.alloc(32)),
+    "11111111111111111111111111111111",
+  );
+  for (const [label, publicKey] of [
+    ["empty", ""],
+    ["surrounding whitespace", `${BUFFER_ADDRESS} `],
+    ["forbidden zero character", "0".repeat(32)],
+    ["forbidden capital O character", "O".repeat(32)],
+    ["short decoded key", "1".repeat(31)],
+    ["noncanonical redundant leading zero", "1".repeat(33)],
+    ["oversized base58 integer", "z".repeat(44)],
+  ]) {
+    assert.throws(
+      () => decodeCanonicalPublicKey(publicKey, label),
+      (error) => error instanceof FinalizedBufferReconciliationError
+        && error.code === "PUBLIC_KEY_HOLD",
+      label,
+    );
+  }
+  for (const bytes of [Buffer.alloc(31), Buffer.alloc(33)]) {
+    assert.throws(
+      () => encodeCanonicalPublicKey(bytes),
+      (error) => error instanceof FinalizedBufferReconciliationError
+        && error.code === "PUBLIC_KEY_HOLD",
+    );
+  }
+});
 
 test("exact finalized Buffer reconciliation is signer-free and bound to one monotonic read", async () => {
   const { record, calls } = await reconcile();
@@ -211,6 +260,30 @@ test("network, context, loader metadata, and authority checks fail closed", asyn
       reconcile({ transport, options: { expectedAuthority: BUFFER_ADDRESS } }),
       (error) => error instanceof FinalizedBufferReconciliationError
         && error.code === "BUFFER_AUTHORITY_HOLD",
+    );
+    assert.deepEqual(transport.calls, []);
+  });
+  await t.test("noncanonical buffer address stops before any RPC", async () => {
+    const transport = mockRpc();
+    await assert.rejects(
+      reconcile({
+        transport,
+        options: { bufferAddress: "1".repeat(33) },
+      }),
+      (error) => error instanceof FinalizedBufferReconciliationError
+        && error.code === "PUBLIC_KEY_HOLD",
+    );
+    assert.deepEqual(transport.calls, []);
+  });
+  await t.test("invalid expected authority stops before any RPC", async () => {
+    const transport = mockRpc();
+    await assert.rejects(
+      reconcile({
+        transport,
+        options: { expectedAuthority: "0".repeat(32) },
+      }),
+      (error) => error instanceof FinalizedBufferReconciliationError
+        && error.code === "PUBLIC_KEY_HOLD",
     );
     assert.deepEqual(transport.calls, []);
   });
@@ -333,10 +406,8 @@ test("public CI artifact loader is pinned and durable evidence is exclusive", ()
     REVIEWED_PUBLIC_CI_ARTIFACT_BINDING.expectedSha256,
     "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
   );
-  assert.match(
-    source,
-    /export function loadReviewedPublicCiArtifact\(\) \{\s+return assertReviewedPublicCiArtifact\(readFileSync\(CANONICAL_PUBLIC_CI_ARTIFACT\)\);\s+\}/u,
-  );
+  assert.match(source, /artifactPath = CANONICAL_PUBLIC_CI_ARTIFACT/u);
+  assert.match(source, /readFileSync\(artifactPath\), binding/u);
   assert.equal(artifact.byteLength, TEST_BINDING.expectedBytes);
   assert.equal(artifact.sha256, TEST_BINDING.expectedSha256);
   assert.throws(
@@ -348,12 +419,97 @@ test("public CI artifact loader is pinned and durable evidence is exclusive", ()
       && error.code === "ARTIFACT_BINDING_HOLD",
   );
   const directory = mkdtempSync(join(tmpdir(), "iat-v2-finalized-buffer-evidence-"));
+  const explicitArtifact = join(directory, "explicit-artifact.so");
+  writeFileSync(explicitArtifact, TEST_ARTIFACT);
+  const explicitlyLoaded = loadReviewedPublicCiArtifact(explicitArtifact, TEST_BINDING);
+  assert.equal(explicitlyLoaded.byteLength, TEST_ARTIFACT.length);
+  assert.equal(explicitlyLoaded.sha256, TEST_BINDING.expectedSha256);
+  assert.throws(
+    () => loadReviewedPublicCiArtifact("relative-artifact.so", TEST_BINDING),
+    (error) => error instanceof FinalizedBufferReconciliationError
+      && error.code === "ARTIFACT_PATH_HOLD",
+  );
   const output = join(directory, "observation.json");
   const record = { schema: FINALIZED_BUFFER_RECONCILIATION_SCHEMA, status: "TEST" };
   assert.equal(writeDurableReconciliationEvidence(output, record), output);
   assert.deepEqual(JSON.parse(readFileSync(output, "utf8")), record);
   if (process.platform !== "win32") assert.equal(statSync(output).mode & 0o777, 0o600);
   assert.throws(() => writeDurableReconciliationEvidence(output, record), { code: "EEXIST" });
+  rmSync(directory, { recursive: true, force: true });
+});
+
+test("stdin CLI requires both the exact marker and the dash entrypoint", () => {
+  const modulePath = new URL(
+    "../scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs",
+    import.meta.url,
+  );
+  const absoluteModulePath = fileURLToPath(modulePath);
+  assert.equal(isReconcilerCliInvocation({
+    argv: [process.execPath, absoluteModulePath],
+    env: {},
+    modulePath: absoluteModulePath,
+  }), true, "direct-file CLI behavior remains enabled without the stdin marker");
+  assert.equal(isReconcilerCliInvocation({
+    argv: [process.execPath, "-"],
+    env: { IAT_V2_RECONCILER_STDIN_CLI: IAT_V2_RECONCILER_STDIN_CLI_MARKER },
+    modulePath: absoluteModulePath,
+  }), true);
+  assert.equal(isReconcilerCliInvocation({
+    argv: [process.execPath, "-"],
+    env: {},
+    modulePath: absoluteModulePath,
+  }), false);
+  assert.equal(isReconcilerCliInvocation({
+    argv: [process.execPath, "-"],
+    env: { IAT_V2_RECONCILER_STDIN_CLI: "wrong-marker" },
+    modulePath: absoluteModulePath,
+  }), false);
+  assert.equal(isReconcilerCliInvocation({
+    argv: [process.execPath, "unreviewed-entry.mjs"],
+    env: { IAT_V2_RECONCILER_STDIN_CLI: IAT_V2_RECONCILER_STDIN_CLI_MARKER },
+    modulePath: absoluteModulePath,
+  }), false);
+
+  const source = readFileSync(modulePath, "utf8");
+  const directory = mkdtempSync(join(tmpdir(), "iat-v2-reconciler-stdin-cli-"));
+  try {
+    const explicitArtifact = join(directory, "explicit-artifact.so");
+    writeFileSync(explicitArtifact, TEST_ARTIFACT);
+    const args = [
+      "--input-type=module",
+      "-",
+      "--buffer",
+      BUFFER_ADDRESS,
+      "--expected-authority",
+      "0".repeat(32),
+      "--artifact",
+      explicitArtifact,
+    ];
+    const cleanEnv = { ...process.env };
+    delete cleanEnv.IAT_V2_RECONCILER_STDIN_CLI;
+    const dormant = spawnSync(process.execPath, args, {
+      encoding: "utf8",
+      env: cleanEnv,
+      input: source,
+    });
+    assert.equal(dormant.status, 0, dormant.stderr);
+    assert.equal(dormant.stdout, "");
+    assert.equal(dormant.stderr, "");
+
+    const active = spawnSync(process.execPath, args, {
+      encoding: "utf8",
+      env: {
+        ...cleanEnv,
+        IAT_V2_RECONCILER_STDIN_CLI: IAT_V2_RECONCILER_STDIN_CLI_MARKER,
+      },
+      input: source,
+    });
+    assert.equal(active.status, 2, active.stderr);
+    assert.equal(JSON.parse(active.stderr).code, "ARTIFACT_BINDING_HOLD");
+    assert.equal(active.stdout, "");
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
 });
 
 test("reconciler source has no transaction, keypair, or protected-state capability", () => {
@@ -363,6 +519,12 @@ test("reconciler source has no transaction, keypair, or protected-state capabili
   );
   assert.match(source, /createJsonRpcCaller/u);
   assert.match(source, /commitment: "finalized"[\s\S]*encoding: "base64"[\s\S]*minContextSlot/u);
+  assert.deepEqual(
+    [...source.matchAll(/from "([^"]+)";/gu)].map((match) => match[1]),
+    ["node:crypto", "node:fs", "node:path", "node:url"],
+    "the critical observer may import only immutable Node built-ins",
+  );
+  assert.doesNotMatch(source, /@solana\/web3\.js|artifact-binding\.mjs/u);
   assert.doesNotMatch(source, /sendRawTransaction|sendTransaction|signTransaction|Keypair|write-buffer|set-buffer-authority/u);
   assert.doesNotMatch(source, /attempt-one-use|buffer-keypair\.json|devnet-buffer-rebuild|devnet-buffer-handoff-v1/u);
   const programUpgrade = readFileSync(

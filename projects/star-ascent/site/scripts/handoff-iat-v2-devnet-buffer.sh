@@ -36,12 +36,20 @@ ARTIFACT="$SITE_ROOT/target/verifiable/iat_v2.so"
 EVIDENCE="$SITE_ROOT/target/verifiable/iat-v2-build-evidence.json"
 RUNTIME_EVIDENCE="$SITE_ROOT/target/verifiable/iat-v2-recovery-runtime-build-evidence.json"
 RECONCILER="$SITE_ROOT/scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs"
+CAS_HELPER="$SITE_ROOT/scripts/iat-v2-devnet-buffer-handoff-cas.mjs"
+RECONCILER_RUNTIME_PATH="scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs"
+CAS_HELPER_RUNTIME_PATH="scripts/iat-v2-devnet-buffer-handoff-cas.mjs"
 BUFFER_ADDRESS="${BUFFER_ADDRESS:-}"
 IAT_V2_HANDOFF_CAS_ROOT="${IAT_V2_HANDOFF_CAS_ROOT:-}"
 EXPECTED_CAS_ROOT="/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1"
 EXPECTED_PAYER="DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4"
 NEW_AUTHORITY="7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH"
 DEVNET_HANDOFF_FEE_FLOOR_LAMPORTS="10000000"
+PINNED_NODE_EXEC=""
+PINNED_SOLANA_EXEC=""
+PINNED_ARTIFACT_PATH=""
+PINNED_RECONCILER_SOURCE=""
+PINNED_CAS_SOURCE=""
 
 iat_v2_verify_exact_tool \
   "$NODE_BIN" \
@@ -62,12 +70,16 @@ GIT_SHA256="$IAT_V2_VERIFIED_TOOL_SHA256"
 GIT_BYTES="$IAT_V2_VERIFIED_TOOL_BYTES"
 
 iat_v2_run_clean_node() {
+  local node_exec="${PINNED_NODE_EXEC:-$NODE_BIN}"
+  if [[ -n "$PINNED_NODE_EXEC" ]]; then
+    iat_v2_verify_open_fd "/proc/$$/fd/5" "$NODE_BIN" "$NODE_SHA256" "$NODE_BYTES" "Node.js runtime" true
+  fi
   /usr/bin/env -i \
     HOME=/home/a \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=/usr/bin:/bin \
-    "$NODE_BIN" "$@"
+    "$node_exec" "$@"
 }
 
 binding_diagnostics="$(/usr/bin/mktemp /tmp/iat-v2-binding-diagnostics-XXXXXX.txt)"
@@ -89,10 +101,10 @@ if (( binding_status != 0 )); then
 fi
 mapfile -t binding_fields < <(
   printf '%s' "$binding_record" \
-    | iat_v2_run_clean_node -e 'const chunks=[]; process.stdin.on("data", (chunk) => chunks.push(chunk)); process.stdin.on("end", () => { const value=JSON.parse(Buffer.concat(chunks)); const fields=[value.artifactSha256,value.artifactBytes,value.evidenceManifestSha256,value.sourceHeadCommit,value.sourceHeadTree,value.ciRunId,value.ciRunAttempt,value.gitPath,value.gitVersion,value.gitSha256,value.gitBytes]; process.stdout.write(`${fields.join("\n")}\n`); });'
+    | iat_v2_run_clean_node -e 'const chunks=[]; process.stdin.on("data", (chunk) => chunks.push(chunk)); process.stdin.on("end", () => { const value=JSON.parse(Buffer.concat(chunks)); const entries=value.runtimeBinding?.runtimeClosureEntries; const byPath=new Map(Array.isArray(entries)?entries.map((entry)=>[entry.path,entry]):[]); const reconciler=byPath.get("scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs"); const cas=byPath.get("scripts/iat-v2-devnet-buffer-handoff-cas.mjs"); const fields=[value.artifactSha256,value.artifactBytes,value.evidenceManifestSha256,value.sourceHeadCommit,value.sourceHeadTree,value.ciRunId,value.ciRunAttempt,value.gitPath,value.gitVersion,value.gitSha256,value.gitBytes,value.runtimeBinding?.sourceHeadCommit,reconciler?.sha256,reconciler?.bytes,cas?.sha256,cas?.bytes]; process.stdout.write(`${fields.join("\n")}\n`); });'
 )
-if (( ${#binding_fields[@]} != 11 )); then
-  echo "HOLD: migration binding output did not contain the exact artifact, source, CI, and Git identity fields." >&2
+if (( ${#binding_fields[@]} != 16 )); then
+  echo "HOLD: migration binding output did not contain the exact artifact, source, CI, Git, and recovery-runtime identity fields." >&2
   exit 1
 fi
 EXPECTED_HASH="${binding_fields[0]}"
@@ -106,6 +118,11 @@ BINDING_GIT_PATH="${binding_fields[7]}"
 BINDING_GIT_VERSION="${binding_fields[8]}"
 BINDING_GIT_SHA256="${binding_fields[9]}"
 BINDING_GIT_BYTES="${binding_fields[10]}"
+RUNTIME_SOURCE_HEAD="${binding_fields[11]}"
+RECONCILER_SOURCE_SHA256="${binding_fields[12]}"
+RECONCILER_SOURCE_BYTES="${binding_fields[13]}"
+CAS_HELPER_SOURCE_SHA256="${binding_fields[14]}"
+CAS_HELPER_SOURCE_BYTES="${binding_fields[15]}"
 if [[ "$BINDING_GIT_PATH" != "$GIT_BIN" \
     || "$BINDING_GIT_VERSION" != "$GIT_VERSION" \
     || "$BINDING_GIT_SHA256" != "$GIT_SHA256" \
@@ -113,6 +130,12 @@ if [[ "$BINDING_GIT_PATH" != "$GIT_BIN" \
   echo "HOLD: migration preflight returned a different Git runtime identity." >&2
   exit 1
 fi
+[[ "$RUNTIME_SOURCE_HEAD" =~ ^[0-9a-f]{40}$ ]] \
+  || hold "recovery-runtime source-head commit is invalid"
+[[ "$RECONCILER_SOURCE_SHA256" =~ ^[0-9a-f]{64}$ && "$RECONCILER_SOURCE_BYTES" =~ ^[1-9][0-9]*$ ]] \
+  || hold "bound reconciler descriptor identity is invalid"
+[[ "$CAS_HELPER_SOURCE_SHA256" =~ ^[0-9a-f]{64}$ && "$CAS_HELPER_SOURCE_BYTES" =~ ^[1-9][0-9]*$ ]] \
+  || hold "bound CAS helper descriptor identity is invalid"
 if [[ -z "$BUFFER_ADDRESS" ]]; then
   echo "HOLD: BUFFER_ADDRESS is required; no default or historical buffer is admitted." >&2
   exit 1
@@ -210,15 +233,124 @@ iat_v2_reverify_solana_and_devnet() {
   DEVNET_GENESIS_HASH="$IAT_V2_VERIFIED_DEVNET_GENESIS_HASH"
 }
 
+iat_v2_verify_open_fd() {
+  local fd_path="$1"
+  local configured_path="$2"
+  local expected_sha256="$3"
+  local expected_bytes="$4"
+  local label="$5"
+  local executable="$6"
+  local observed_sha256 observed_bytes
+  [[ "$configured_path" == /* && ! -L "$configured_path" && -f "$fd_path" ]] \
+    || hold "$label did not open from an absolute non-symlink regular file"
+  if [[ "$executable" == "true" ]]; then
+    [[ -x "$fd_path" ]] || hold "$label descriptor is not executable"
+  fi
+  observed_bytes="$(/usr/bin/stat -Lc '%s' -- "$fd_path" 2>/dev/null || true)"
+  observed_sha256="$(/usr/bin/sha256sum -- "$fd_path" 2>/dev/null || true)"
+  observed_sha256="${observed_sha256%% *}"
+  [[ "$observed_bytes" == "$expected_bytes" ]] \
+    || hold "$label descriptor byte length drifted; expected $expected_bytes, observed $observed_bytes"
+  [[ "$observed_sha256" == "$expected_sha256" ]] \
+    || hold "$label descriptor SHA-256 drifted"
+}
+
+iat_v2_open_pinned_post_confirmation_epoch() {
+  [[ ! -L "$ARTIFACT" && -f "$ARTIFACT" ]] || hold "reviewed artifact path is not a regular non-symlink file"
+  [[ ! -L "$CAS_HELPER" && -f "$CAS_HELPER" ]] || hold "CAS helper path is not a regular non-symlink file"
+  [[ ! -L "$NODE_BIN" && -f "$NODE_BIN" && -x "$NODE_BIN" ]] || hold "Node.js path is not an executable non-symlink file"
+  [[ ! -L "$RECONCILER" && -f "$RECONCILER" ]] || hold "reconciler path is not a regular non-symlink file"
+  [[ ! -L "$SOLANA_BIN" && -f "$SOLANA_BIN" && -x "$SOLANA_BIN" ]] || hold "Solana CLI path is not an executable non-symlink file"
+
+  exec 3< "$ARTIFACT" || hold "reviewed artifact descriptor could not be opened"
+  exec 4< "$CAS_HELPER" || hold "CAS helper descriptor could not be opened"
+  exec 5< "$NODE_BIN" || hold "Node.js descriptor could not be opened"
+  exec 6< "$RECONCILER" || hold "reconciler descriptor could not be opened"
+  exec 7< "$SOLANA_BIN" || hold "Solana CLI descriptor could not be opened"
+
+  iat_v2_verify_open_fd "/proc/$$/fd/3" "$ARTIFACT" "$EXPECTED_HASH" "$EXPECTED_BYTES" "reviewed artifact" false
+  iat_v2_verify_open_fd "/proc/$$/fd/4" "$CAS_HELPER" "$CAS_HELPER_SOURCE_SHA256" "$CAS_HELPER_SOURCE_BYTES" "CAS helper" false
+  iat_v2_verify_open_fd "/proc/$$/fd/5" "$NODE_BIN" "$NODE_SHA256" "$NODE_BYTES" "Node.js runtime" true
+  iat_v2_verify_open_fd "/proc/$$/fd/6" "$RECONCILER" "$RECONCILER_SOURCE_SHA256" "$RECONCILER_SOURCE_BYTES" "finalized reconciler" false
+  iat_v2_verify_open_fd "/proc/$$/fd/7" "$SOLANA_BIN" "$SOLANA_CLI_SHA256" "$SOLANA_CLI_BYTES" "Solana CLI" true
+
+  PINNED_ARTIFACT_PATH="/proc/self/fd/3"
+  PINNED_NODE_EXEC="/proc/self/fd/5"
+  PINNED_SOLANA_EXEC="/proc/self/fd/7"
+  [[ "$(/usr/bin/env -i HOME=/nonexistent/iat-v2-keyless-tool-home XDG_CONFIG_HOME=/nonexistent/iat-v2-keyless-tool-config LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin "$PINNED_NODE_EXEC" --version)" == "$NODE_VERSION" ]] \
+    || hold "pinned Node.js descriptor version drifted"
+  [[ "$(/usr/bin/env -i HOME=/nonexistent/iat-v2-keyless-solana-home XDG_CONFIG_HOME=/nonexistent/iat-v2-keyless-solana-config LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin "$PINNED_SOLANA_EXEC" --version --config /dev/null 2>&1)" == "$SOLANA_CLI_VERSION" ]] \
+    || hold "pinned Solana CLI descriptor version drifted"
+  PINNED_RECONCILER_SOURCE="$(/usr/bin/cat <&6)"
+  PINNED_CAS_SOURCE="$(/usr/bin/cat <&4)"
+  exec 4<&-
+  exec 6<&-
+  [[ -n "$PINNED_RECONCILER_SOURCE" ]] || hold "pinned reconciler source is empty"
+  [[ -n "$PINNED_CAS_SOURCE" ]] || hold "pinned CAS helper source is empty"
+}
+
+iat_v2_reverify_runtime_binding_after_confirmation() {
+  local fresh_record diagnostics status
+  diagnostics="$(/usr/bin/mktemp /tmp/iat-v2-binding-diagnostics-XXXXXX.txt)"
+  set +e
+  fresh_record="$(iat_v2_run_clean_node scripts/iat-v2-devnet-buffer-preflight.mjs verify-recovery \
+    --artifact "$ARTIFACT" \
+    --evidence "$EVIDENCE" \
+    --runtime-evidence "$RUNTIME_EVIDENCE" 2>"$diagnostics")"
+  status=$?
+  set -e
+  if [[ -s "$diagnostics" ]]; then /usr/bin/cat -- "$diagnostics" >&2; fi
+  /usr/bin/rm -f -- "$diagnostics"
+  (( status == 0 )) || hold "recovery-runtime binding failed after attended confirmation"
+  [[ "$fresh_record" == "$binding_record" ]] \
+    || hold "recovery-runtime binding changed across the attended confirmation"
+}
+
 iat_v2_run_signer_free_reconciler() {
-  /usr/bin/timeout 90 \
-    /usr/bin/env -i \
-    HOME=/nonexistent/iat-v2-buffer-reconciler-home \
-    XDG_CONFIG_HOME=/nonexistent/iat-v2-buffer-reconciler-config \
-    LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8 \
-    PATH=/usr/bin:/bin \
-    "$NODE_BIN" "$RECONCILER" "$@"
+  if [[ -n "$PINNED_RECONCILER_SOURCE" ]]; then
+    iat_v2_verify_open_fd "/proc/$$/fd/5" "$NODE_BIN" "$NODE_SHA256" "$NODE_BYTES" "Node.js runtime" true
+    iat_v2_verify_open_fd "/proc/$$/fd/3" "$ARTIFACT" "$EXPECTED_HASH" "$EXPECTED_BYTES" "reviewed artifact" false
+    printf '%s\n' "$PINNED_RECONCILER_SOURCE" \
+      | /usr/bin/timeout 90 \
+        /usr/bin/env -i \
+        HOME=/nonexistent/iat-v2-buffer-reconciler-home \
+        XDG_CONFIG_HOME=/nonexistent/iat-v2-buffer-reconciler-config \
+        LANG=C.UTF-8 \
+        LC_ALL=C.UTF-8 \
+        PATH=/usr/bin:/bin \
+        IAT_V2_RECONCILER_STDIN_CLI=iat-v2-devnet-buffer-finalized-reconciler-stdin/v1 \
+        "$PINNED_NODE_EXEC" --input-type=module - "$@" --artifact "$PINNED_ARTIFACT_PATH"
+  else
+    /usr/bin/timeout 90 \
+      /usr/bin/env -i \
+      HOME=/nonexistent/iat-v2-buffer-reconciler-home \
+      XDG_CONFIG_HOME=/nonexistent/iat-v2-buffer-reconciler-config \
+      LANG=C.UTF-8 \
+      LC_ALL=C.UTF-8 \
+      PATH=/usr/bin:/bin \
+      "$NODE_BIN" "$RECONCILER" "$@"
+  fi
+}
+
+iat_v2_run_pinned_cas() {
+  local source_sha256 source_bytes
+  [[ -n "$PINNED_NODE_EXEC" && -n "$PINNED_CAS_SOURCE" ]] \
+    || hold "pinned CAS execution epoch is unavailable"
+  iat_v2_verify_open_fd "/proc/$$/fd/5" "$NODE_BIN" "$NODE_SHA256" "$NODE_BYTES" "Node.js runtime" true
+  source_sha256="$(printf '%s\n' "$PINNED_CAS_SOURCE" | /usr/bin/sha256sum)"
+  source_sha256="${source_sha256%% *}"
+  source_bytes="$(printf '%s\n' "$PINNED_CAS_SOURCE" | /usr/bin/wc -c)"
+  [[ "$source_sha256" == "$CAS_HELPER_SOURCE_SHA256" && "$source_bytes" == "$CAS_HELPER_SOURCE_BYTES" ]] \
+    || hold "captured CAS helper source drifted before reservation"
+  printf '%s\n' "$PINNED_CAS_SOURCE" \
+    | /usr/bin/env -i \
+      HOME=/home/a \
+      LANG=C.UTF-8 \
+      LC_ALL=C.UTF-8 \
+      PATH=/usr/bin:/bin \
+      IAT_V2_HANDOFF_CAS_STDIN_CLI=iat-v2-devnet-buffer-handoff-cas-stdin-v1 \
+      IAT_V2_PROJECT_ROOT="$SITE_ROOT" \
+      "$PINNED_NODE_EXEC" --input-type=module - "$@"
 }
 
 fetch_buffer_record() {
@@ -229,7 +361,9 @@ fetch_buffer_record() {
   observed_authority=""
   [[ "$expected_authority" == "$EXPECTED_PAYER" || "$expected_authority" == "$NEW_AUTHORITY" ]] \
     || { echo "HOLD: signer-free buffer reconciliation received an unreviewed expected authority." >&2; return 1; }
-  iat_v2_reverify_node "Node.js runtime at signer-free finalized buffer observation" || return 1
+  if [[ -z "$PINNED_NODE_EXEC" ]]; then
+    iat_v2_reverify_node "Node.js runtime at signer-free finalized buffer observation" || return 1
+  fi
   for read_attempt in $(/usr/bin/seq 1 12); do
     echo "Signer-free finalized buffer reconciliation $read_attempt of 12 for $expected_authority..."
     if authority_record="$(iat_v2_run_signer_free_reconciler \
@@ -367,8 +501,9 @@ reverify_open_payer_fd() {
 }
 
 observe_handoff_fee_floor() {
-  local balance_output
-  balance_output="$(iat_v2_run_keyless_solana_timeout 45 "$SOLANA_BIN" balance "$EXPECTED_PAYER" \
+  local balance_output solana_exec
+  solana_exec="${PINNED_SOLANA_EXEC:-$SOLANA_BIN}"
+  balance_output="$(iat_v2_run_keyless_solana_timeout 45 "$solana_exec" balance "$EXPECTED_PAYER" \
     --url devnet --commitment finalized --lamports)" \
     || hold "finalized payer balance was unavailable before the one-use handoff"
   read -r handoff_balance_lamports _ <<<"$balance_output"
@@ -378,6 +513,11 @@ observe_handoff_fee_floor() {
 }
 
 cleanup() {
+  exec 3<&- 2>/dev/null || true
+  exec 4<&- 2>/dev/null || true
+  exec 5<&- 2>/dev/null || true
+  exec 6<&- 2>/dev/null || true
+  exec 7<&- 2>/dev/null || true
   exec 9<&- 2>/dev/null || true
 }
 trap cleanup EXIT
@@ -460,30 +600,35 @@ if [[ "$confirmation" != "$confirmation_challenge" ]]; then
   exit 1
 fi
 
-iat_v2_reverify_solana_and_devnet "Solana CLI before payer-keypair inspection"
+iat_v2_reverify_git
+iat_v2_reverify_node "Node.js runtime before the post-confirmation descriptor epoch"
+iat_v2_reverify_solana_and_devnet "Solana CLI before the post-confirmation descriptor epoch"
+iat_v2_open_pinned_post_confirmation_epoch
+iat_v2_reverify_runtime_binding_after_confirmation
+iat_v2_verify_devnet_genesis "$PINNED_SOLANA_EXEC"
+[[ "$IAT_V2_VERIFIED_DEVNET_GENESIS_HASH" == "$DEVNET_GENESIS_HASH" ]] \
+  || hold "pinned Solana CLI observed a different Devnet genesis hash"
 open_verified_payer_fd
-actual_payer="$(iat_v2_run_keyless_solana "$SOLANA_BIN" address -k "$PAYER_FD_PATH")"
+actual_payer="$(iat_v2_run_keyless_solana "$PINNED_SOLANA_EXEC" address -k "$PAYER_FD_PATH")"
 if [[ "$actual_payer" != "$EXPECTED_PAYER" ]]; then
   echo "HOLD: opened payer identity is $actual_payer, expected $EXPECTED_PAYER" >&2
   exec 9<&-
   exit 1
 fi
 
-iat_v2_reverify_solana_and_devnet "Solana CLI before final attended reobservation" 9<&-
 observe_handoff_fee_floor 9<&-
 echo "FINALIZED DEVNET PAYER BALANCE: $handoff_balance_lamports lamports"
 reverify_open_payer_fd
-[[ "$(iat_v2_run_keyless_solana "$SOLANA_BIN" address -k "$PAYER_FD_PATH")" == "$EXPECTED_PAYER" ]] \
+[[ "$(iat_v2_run_keyless_solana "$PINNED_SOLANA_EXEC" address -k "$PAYER_FD_PATH")" == "$EXPECTED_PAYER" ]] \
   || hold "opened payer identity drifted before the one-use reservation"
-iat_v2_reverify_git 9<&-
-iat_v2_reverify_node "Node.js runtime immediately before durable reservation creation" 9<&-
 if ! fetch_buffer_record "$EXPECTED_PAYER" 9<&-; then
   hold "exact finalized buffer identity, bytes, or authority could not be re-established after the attended pause"
 fi
 [[ "$observed_authority" == "$EXPECTED_PAYER" ]] \
   || hold "finalized buffer authority changed after the attended pause; no reservation was created"
+iat_v2_verify_open_fd "/proc/$$/fd/7" "$SOLANA_BIN" "$SOLANA_CLI_SHA256" "$SOLANA_CLI_BYTES" "Solana CLI" true
 set +e
-cas_record="$(iat_v2_run_clean_node scripts/iat-v2-devnet-buffer-handoff-cas.mjs reserve "${CAS_ARGS[@]}" 9<&-)"
+cas_record="$(iat_v2_run_pinned_cas reserve "${CAS_ARGS[@]}" 9<&-)"
 cas_command_status=$?
 set -e
 if (( cas_command_status != 0 )); then
@@ -521,7 +666,7 @@ fi
 
 echo "Submitting the one-use authority mutation exactly once..."
 set +e
-output="$(iat_v2_run_keyless_solana_timeout 90 "$SOLANA_BIN" program set-buffer-authority "$BUFFER_ADDRESS" \
+output="$(iat_v2_run_keyless_solana_timeout 90 "$PINNED_SOLANA_EXEC" program set-buffer-authority "$BUFFER_ADDRESS" \
   --new-buffer-authority "$NEW_AUTHORITY" \
   --buffer-authority "$PAYER_FD_PATH" \
   --url devnet \

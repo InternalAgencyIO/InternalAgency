@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import "./lib/iat-v2-attended-node-runtime.mjs";
 import { createHash } from "node:crypto";
 import {
   closeSync,
@@ -45,6 +44,8 @@ const EXPECTED_SOURCE_HEAD_TREE = "ffe82fcf8fd3d851c09a937ebec945121137e546";
 const EXPECTED_CI_RUN_ID = 33_161_771_816;
 const EXPECTED_CI_RUN_ATTEMPT = 1;
 const EXPECTED_CAS_ROOT = "/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1";
+const EXPECTED_PROJECT_ROOT = "/mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site";
+const STDIN_CLI_MARKER = "iat-v2-devnet-buffer-handoff-cas-stdin-v1";
 const ROOT_SENTINEL_FILE = ".iat-v2-devnet-buffer-authority-cas-root.json";
 const ROOT_SENTINEL = Object.freeze({
   ceremonyId: "9e691e59-35c8-4861-86a0-7a219885b1c0",
@@ -52,7 +53,7 @@ const ROOT_SENTINEL = Object.freeze({
   schema: "iat-v2-devnet-buffer-authority-cas-root/v1",
 });
 const ROOT_SENTINEL_SHA256 = "11893575f111807621fcbc8c77ea73fae03390404507202146dde9e69d5818da";
-const PROJECT_ROOT = realpathSync(resolve(dirname(fileURLToPath(import.meta.url)), ".."));
+const DEFAULT_PROJECT_ROOT = realpathSync(resolve(dirname(fileURLToPath(import.meta.url)), ".."));
 const SHA256 = /^[0-9a-f]{64}$/u;
 const COMMIT = /^[0-9a-f]{40}$/u;
 const BASE58 = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/u;
@@ -75,6 +76,21 @@ function fail(code, message) {
 
 function check(condition, code, message) {
   if (!condition) fail(code, message);
+}
+
+function assertStandaloneCliBoundary() {
+  check(process.version === EXPECTED_NODE_VERSION,
+    "CAS_RUNTIME_HOLD", `CAS CLI requires exact ${EXPECTED_NODE_VERSION}; observed ${process.version}`);
+  const prohibited = Object.keys(process.env).filter((name) => [
+    "BASH_ENV",
+    "ENV",
+    "LD_LIBRARY_PATH",
+    "LD_PRELOAD",
+    "NODE_OPTIONS",
+    "NODE_PATH",
+  ].includes(name) || name.startsWith("GIT_"));
+  check(prohibited.length === 0,
+    "CAS_RUNTIME_HOLD", `CAS CLI inherited prohibited environment names: ${prohibited.sort().join(", ")}`);
 }
 
 function sortJson(value) {
@@ -204,6 +220,7 @@ function assertRootSentinel(root, expectedUid) {
 function prepare(options, {
   expectedRoot = EXPECTED_CAS_ROOT,
   expectedUid = expectedRoot === EXPECTED_CAS_ROOT ? 1000 : process.getuid?.(),
+  projectRoot = DEFAULT_PROJECT_ROOT,
 } = {}) {
   if (process.platform !== "win32") {
     check(Number.isSafeInteger(expectedUid) && process.getuid() === expectedUid, "CAS_ROOT_HOLD", `CAS process is not exact uid ${expectedUid}`);
@@ -217,7 +234,9 @@ function prepare(options, {
   const rootSnapshot = directorySnapshot(resolve(options.root), expectedUid);
   const root = rootSnapshot.path;
   check(root === resolve(options.root), "CAS_ROOT_HOLD", "CAS root or one of its parents resolves through a symlink");
-  const fromProject = relative(PROJECT_ROOT, root);
+  const canonicalProjectRoot = realpathSync(projectRoot);
+  check(canonicalProjectRoot === resolve(projectRoot), "CAS_ROOT_HOLD", "project root resolves through a symlink");
+  const fromProject = relative(canonicalProjectRoot, root);
   check(fromProject === ".." || fromProject.startsWith(`..${process.platform === "win32" ? "\\" : "/"}`), "CAS_ROOT_HOLD", "CAS root must be outside the repository");
   if (process.platform !== "win32") {
     check(root !== "/tmp" && !root.startsWith("/tmp/"), "CAS_ROOT_HOLD", "CAS root must not be under /tmp");
@@ -379,8 +398,10 @@ export function inspectHandoffReservation(options, dependencies) {
 export function reserveHandoffMutation(options, {
   now = () => new Date(),
   expectedRoot = EXPECTED_CAS_ROOT,
+  expectedUid = expectedRoot === EXPECTED_CAS_ROOT ? 1000 : process.getuid?.(),
+  projectRoot = DEFAULT_PROJECT_ROOT,
 } = {}) {
-  const prepared = prepare(options, { expectedRoot });
+  const prepared = prepare(options, { expectedRoot, expectedUid, projectRoot });
   const record = { ...prepared.identity, reservedAtUtc: now().toISOString() };
   check(ISO_UTC.test(record.reservedAtUtc), "CAS_RECORD_HOLD", "CAS reservation clock did not return canonical UTC");
   const bytes = canonicalJson(record);
@@ -420,16 +441,26 @@ export function reserveHandoffMutation(options, {
   return result("RESERVED_CREATED", prepared, record);
 }
 
-async function main() {
+async function main({ projectRoot = DEFAULT_PROJECT_ROOT } = {}) {
+  assertStandaloneCliBoundary();
   const { command, options } = parseOptions(process.argv.slice(2));
   const value = command === "inspect"
-    ? inspectHandoffReservation(options)
-    : reserveHandoffMutation(options);
+    ? inspectHandoffReservation(options, { projectRoot })
+    : reserveHandoffMutation(options, { projectRoot });
   process.stdout.write(`${JSON.stringify(value)}\n`);
 }
 
-if (resolve(process.argv[1] ?? "") === fileURLToPath(import.meta.url)) {
-  main().catch((error) => {
+const stdinCli = process.argv[1] === "-"
+  && process.env.IAT_V2_HANDOFF_CAS_STDIN_CLI === STDIN_CLI_MARKER;
+if (stdinCli || resolve(process.argv[1] ?? "") === fileURLToPath(import.meta.url)) {
+  const projectRoot = stdinCli ? process.env.IAT_V2_PROJECT_ROOT : DEFAULT_PROJECT_ROOT;
+  Promise.resolve().then(() => {
+    if (stdinCli) {
+      check(projectRoot === EXPECTED_PROJECT_ROOT,
+        "CAS_RUNTIME_HOLD", "stdin CAS CLI project root is not the exact reviewed checkout");
+    }
+    return main({ projectRoot });
+  }).catch((error) => {
     process.stderr.write(`${JSON.stringify({
       schema: "iat-v2-devnet-buffer-authority-cas-error/v1",
       status: "HOLD",

@@ -298,6 +298,7 @@ export function verifyIatV2DevnetBufferRuntimeBinding({
     bindingSuccessorCommit: head,
     bindingSuccessorTree: headTree,
     bindingAnchorSha256: anchor.bindingAnchorSha256,
+    runtimeClosureEntries: closure.entries,
     runtimeClosureSha256: closure.runtimeClosureSha256,
     evidenceManifestSha256: value.evidenceManifestSha256,
     artifactSha256: value.artifactSha256,

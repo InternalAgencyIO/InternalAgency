@@ -213,6 +213,7 @@ test("accepts one canonical anchor-only B commit directly after reviewed source 
     assert.equal(observed.mainnetStatus, "HOLD");
     assert.equal(observed.sourceHeadCommit, fixture.sourceHeadCommit);
     assert.equal(observed.runtimeClosureSha256, fixture.closure.runtimeClosureSha256);
+    assert.deepEqual(observed.runtimeClosureEntries, fixture.closure.entries);
     assert.equal(fixture.closure.entries.length, IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS.length);
     assert.equal(fixture.closure.entries.every((entry) => (
       Number.isSafeInteger(entry.bytes)

@@ -4,19 +4,13 @@ import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
 import { isAbsolute, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { PublicKey } from "@solana/web3.js";
-import {
-  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
-  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
-  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
-  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
-} from "../programs/iat_v2/artifact-binding.mjs";
 
 export const FINALIZED_BUFFER_RECONCILIATION_SCHEMA =
   "iat-v2-devnet-buffer-finalized-reconciliation/v1";
 export const FINALIZED_BUFFER_RECONCILIATION_ERROR_SCHEMA =
   "iat-v2-devnet-buffer-finalized-reconciliation-error/v1";
+export const IAT_V2_RECONCILER_STDIN_CLI_MARKER =
+  "iat-v2-devnet-buffer-finalized-reconciler-stdin/v1";
 export const CANONICAL_DEVNET_RPC = "https://api.devnet.solana.com";
 export const CANONICAL_DEVNET_GENESIS_HASH =
   "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG";
@@ -27,6 +21,14 @@ export const REVIEWED_DEVNET_DEPLOYER =
   "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4";
 export const REVIEWED_MODEL_T_ADMIN =
   "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH";
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256 =
+  "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01";
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES = 649_680;
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD =
+  "a03fe71dd66cd1650b8d0353e486786df30b83e9";
+export const IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID = 33_161_771_816;
+export const IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256 =
+  "ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9";
 export const CANONICAL_PUBLIC_CI_ARTIFACT = fileURLToPath(
   new URL("../target/verifiable/iat_v2.so", import.meta.url),
 );
@@ -42,6 +44,10 @@ const REVIEWED_AUTHORITIES = new Set([
   REVIEWED_DEVNET_DEPLOYER,
   REVIEWED_MODEL_T_ADMIN,
 ]);
+const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const PUBLIC_KEY_BYTES = 32;
+const MIN_PUBLIC_KEY_BASE58_LENGTH = 32;
+const MAX_PUBLIC_KEY_BASE58_LENGTH = 44;
 const HEX_SHA256 = /^[0-9a-f]{64}$/u;
 const CANONICAL_BASE64 = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/u;
 const READ_ONLY_RPC_METHODS = new Set([
@@ -119,17 +125,61 @@ function jsonBytes(value) {
   return Buffer.from(`${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
-function exactPublicKey(value, label) {
-  check(typeof value === "string" && value.length > 0 && value.trim() === value,
-    "PUBLIC_KEY_HOLD", `${label} is not an exact public-key string`);
-  let parsed;
-  try {
-    parsed = new PublicKey(value);
-  } catch {
-    fail("PUBLIC_KEY_HOLD", `${label} is not a valid Solana public key`);
+export function encodeCanonicalPublicKey(bytes, label = "public key") {
+  check(Buffer.isBuffer(bytes) || bytes instanceof Uint8Array,
+    "PUBLIC_KEY_HOLD", `${label} bytes are invalid`);
+  const value = Buffer.from(bytes);
+  check(value.length === PUBLIC_KEY_BYTES,
+    "PUBLIC_KEY_HOLD", `${label} must contain exactly ${PUBLIC_KEY_BYTES} bytes`);
+  let leadingZeroBytes = 0;
+  while (leadingZeroBytes < value.length && value[leadingZeroBytes] === 0) {
+    leadingZeroBytes += 1;
   }
-  check(parsed.toBase58() === value, "PUBLIC_KEY_HOLD", `${label} is not canonical base58`);
-  return parsed;
+  let number = 0n;
+  for (const byte of value) number = (number << 8n) + BigInt(byte);
+  let encoded = "";
+  while (number > 0n) {
+    const digit = Number(number % 58n);
+    encoded = `${BASE58_ALPHABET[digit]}${encoded}`;
+    number /= 58n;
+  }
+  return `${"1".repeat(leadingZeroBytes)}${encoded}`;
+}
+
+export function decodeCanonicalPublicKey(value, label = "public key") {
+  check(typeof value === "string" && value.trim() === value
+    && value.length >= MIN_PUBLIC_KEY_BASE58_LENGTH
+    && value.length <= MAX_PUBLIC_KEY_BASE58_LENGTH,
+  "PUBLIC_KEY_HOLD", `${label} is not an exact public-key string`);
+  let number = 0n;
+  for (const character of value) {
+    const digit = BASE58_ALPHABET.indexOf(character);
+    check(digit >= 0, "PUBLIC_KEY_HOLD", `${label} contains a non-base58 character`);
+    number = (number * 58n) + BigInt(digit);
+  }
+  const significant = [];
+  while (number > 0n) {
+    significant.push(Number(number & 0xffn));
+    number >>= 8n;
+  }
+  significant.reverse();
+  let leadingZeroBytes = 0;
+  while (leadingZeroBytes < value.length && value[leadingZeroBytes] === "1") {
+    leadingZeroBytes += 1;
+  }
+  const decoded = Buffer.concat([
+    Buffer.alloc(leadingZeroBytes),
+    Buffer.from(significant),
+  ]);
+  check(decoded.length === PUBLIC_KEY_BYTES,
+    "PUBLIC_KEY_HOLD", `${label} does not decode to exactly ${PUBLIC_KEY_BYTES} bytes`);
+  check(encodeCanonicalPublicKey(decoded, label) === value,
+    "PUBLIC_KEY_HOLD", `${label} is not canonical base58`);
+  return decoded;
+}
+
+function exactPublicKey(value, label) {
+  return decodeCanonicalPublicKey(value, label);
 }
 
 function canonicalUtc(value) {
@@ -172,8 +222,14 @@ export function assertReviewedPublicCiArtifact(
   });
 }
 
-export function loadReviewedPublicCiArtifact() {
-  return assertReviewedPublicCiArtifact(readFileSync(CANONICAL_PUBLIC_CI_ARTIFACT));
+export function loadReviewedPublicCiArtifact(
+  artifactPath = CANONICAL_PUBLIC_CI_ARTIFACT,
+  binding = REVIEWED_PUBLIC_CI_ARTIFACT_BINDING,
+) {
+  check(typeof artifactPath === "string" && artifactPath.length > 0
+    && artifactPath.trim() === artifactPath && isAbsolute(artifactPath),
+  "ARTIFACT_PATH_HOLD", "public CI artifact path must be exact and absolute");
+  return assertReviewedPublicCiArtifact(readFileSync(artifactPath), binding);
 }
 
 function exactArtifactBinding(value) {
@@ -222,7 +278,10 @@ export function parseUpgradeableLoaderBufferAccount(value) {
     "BUFFER_LAYOUT_HOLD", "address is not an upgradeable-loader Buffer account");
   check(data[4] === 1,
     "BUFFER_AUTHORITY_HOLD", "upgradeable-loader Buffer account has no authority");
-  const authority = new PublicKey(data.subarray(5, BUFFER_METADATA_BYTES)).toBase58();
+  const authority = encodeCanonicalPublicKey(
+    data.subarray(5, BUFFER_METADATA_BYTES),
+    "finalized buffer authority",
+  );
   return Object.freeze({
     owner: value.owner,
     executable: value.executable,
@@ -436,13 +495,17 @@ export function writeDurableReconciliationEvidence(outputPath, record) {
 
 function parseCli(argv) {
   const options = {};
+  const seen = new Set();
   for (let index = 0; index < argv.length; index += 2) {
     const flag = argv[index];
     const value = argv[index + 1];
     check(flag?.startsWith("--") && value !== undefined,
       "CLI_USAGE", "options must be exact --name value pairs");
+    check(!seen.has(flag), "CLI_USAGE", `duplicate option: ${flag}`);
+    seen.add(flag);
     if (flag === "--buffer") options.bufferAddress = value;
     else if (flag === "--expected-authority") options.expectedAuthority = value;
+    else if (flag === "--artifact") options.artifactPath = value;
     else if (flag === "--output") options.outputPath = value;
     else fail("CLI_USAGE", `unexpected option: ${flag}`);
   }
@@ -453,7 +516,7 @@ function parseCli(argv) {
 
 async function main() {
   const options = parseCli(process.argv.slice(2));
-  const artifact = loadReviewedPublicCiArtifact();
+  const artifact = loadReviewedPublicCiArtifact(options.artifactPath);
   const record = await reconcileFinalizedDevnetBuffer({
     rpcCall: createJsonRpcCaller({ endpoint: CANONICAL_DEVNET_RPC }),
     bufferAddress: options.bufferAddress,
@@ -467,7 +530,19 @@ async function main() {
   if (record.status !== "EXACT_FINALIZED_BUFFER") process.exitCode = 2;
 }
 
-if (resolve(process.argv[1] ?? "") === fileURLToPath(import.meta.url)) {
+export function isReconcilerCliInvocation({
+  argv = process.argv,
+  env = process.env,
+  modulePath = fileURLToPath(import.meta.url),
+} = {}) {
+  const entry = argv[1] ?? "";
+  const directFileCli = entry.length > 0 && resolve(entry) === resolve(modulePath);
+  const exactStdinCli = entry === "-"
+    && env.IAT_V2_RECONCILER_STDIN_CLI === IAT_V2_RECONCILER_STDIN_CLI_MARKER;
+  return directFileCli || exactStdinCli;
+}
+
+if (isReconcilerCliInvocation()) {
   main().catch((error) => {
     console.error(JSON.stringify({
       schema: FINALIZED_BUFFER_RECONCILIATION_ERROR_SCHEMA,

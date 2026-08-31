@@ -530,7 +530,7 @@ test("upload and handoff scripts have separate explicit gates and no stale artif
   assert.match(handoff, /iat-v2-recovery-runtime-build-evidence\.json/u);
   assert.match(handoff, /reconcile-iat-v2-devnet-buffer-finalized\.mjs/u);
   assert.match(handoff, /iat-v2-devnet-buffer-handoff-cas\.mjs inspect/u);
-  assert.match(handoff, /iat-v2-devnet-buffer-handoff-cas\.mjs reserve/u);
+  assert.match(handoff, /iat_v2_run_pinned_cas reserve/u);
   assert.match(handoff, /PAYER_FD_PATH="\/proc\/self\/fd\/9"/u);
   assert.match(handoff, /--buffer-authority "\$PAYER_FD_PATH"/u);
   assert.match(handoff, /--keypair "\$PAYER_FD_PATH"/u);
@@ -550,6 +550,14 @@ test("upload and handoff scripts have separate explicit gates and no stale artif
   assert.match(handoff, /\/usr\/bin\/env -i/u);
   assert.doesNotMatch(handoff, /program (?:show|dump)/u);
   assert.match(handoff, /HOME=\/nonexistent\/iat-v2-buffer-reconciler-home/u);
+  assert.match(handoff, /exec 3< "\$ARTIFACT"/u);
+  assert.match(handoff, /exec 4< "\$CAS_HELPER"/u);
+  assert.match(handoff, /exec 5< "\$NODE_BIN"/u);
+  assert.match(handoff, /exec 6< "\$RECONCILER"/u);
+  assert.match(handoff, /exec 7< "\$SOLANA_BIN"/u);
+  assert.match(handoff, /"\$PINNED_NODE_EXEC" --input-type=module -/u);
+  assert.match(handoff, /"\$PINNED_SOLANA_EXEC" program set-buffer-authority/u);
+  assert.match(handoff, /--artifact "\$PINNED_ARTIFACT_PATH"/u);
   assert.match(
     toolchain,
     /iat_v2_run_keyless_solana\(\)[\s\S]*?\/usr\/bin\/env -i[\s\S]*?"\$solana_path" "\$@" --config \/dev\/null/u,
@@ -660,12 +668,13 @@ test("buffer authority handoff has one mutation boundary and finalized read-only
   );
   assert.match(handoff, /DO NOT RESUBMIT/gmu);
   assert.doesNotMatch(handoff, /--commitment confirmed/u);
-  const reserve = handoff.indexOf("iat-v2-devnet-buffer-handoff-cas.mjs reserve");
+  const reserve = handoff.indexOf("iat_v2_run_pinned_cas reserve");
   const postPromptReobserve = handoff.indexOf('fetch_buffer_record "$EXPECTED_PAYER" 9<&-');
   const submitting = handoff.indexOf('echo "Submitting the one-use authority mutation exactly once..."');
   const mutation = handoff.indexOf("program set-buffer-authority");
   assert.ok(postPromptReobserve >= 0 && reserve > postPromptReobserve && submitting > reserve && mutation > submitting);
   assert.doesNotMatch(handoff.slice(submitting, mutation), /reverify_(?:solana|git|node)|fetch_buffer_record|observe_handoff_fee_floor/u);
+  assert.doesNotMatch(handoff.slice(reserve), /"\$SOLANA_BIN" program set-buffer-authority/u);
 });
 
 test("buffer authority helper retries reads but never repeats an ambiguous mutation", () => {
@@ -692,16 +701,106 @@ test("buffer authority helper retries reads but never repeats an ambiguous mutat
     writeFileSync(artifactPath, artifact);
     const artifactSha256 = sha256(artifact);
     const fixtureStateDir = bashPath(sandbox);
+    const runtimeSourceHead = "0".repeat(39) + "4";
+    const sourceHead = "0".repeat(39) + "2";
+    const evidenceHash = "0".repeat(64);
+    const exactReconciliationRecord = (authority) => {
+      const body = {
+        schema: "iat-v2-devnet-buffer-finalized-reconciliation/v1",
+        status: "EXACT_FINALIZED_BUFFER",
+        network: "devnet",
+        rpc: "https://api.devnet.solana.com",
+        genesisHash: "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+        commitment: "finalized",
+        minContextSlot: 100,
+        accountContextSlot: 100,
+        bufferAddress: "MockBufferAddress",
+        expectedAuthority: authority,
+        observedAuthority: authority,
+        observedAuthorityRole: authority.startsWith("DYURS") ? "DEVNET_DEPLOYER" : "MODEL_T_ADMIN",
+        account: {
+          owner: "BPFLoaderUpgradeab1e11111111111111111111111",
+          executable: false,
+          lamports: "4522976880",
+          dataBytes: artifact.length + 37,
+          metadataBytes: 37,
+          stateTag: 1,
+          authorityOption: 1,
+          programBytes: artifact.length,
+          programSha256: artifactSha256,
+        },
+        publicCiArtifact: {
+          bytes: artifact.length,
+          sha256: artifactSha256,
+          sourceHeadCommit: sourceHead,
+          ciRunId: 33161771816,
+          evidenceManifestSha256: evidenceHash,
+        },
+        comparison: {
+          classification: "EXACT_ARTIFACT",
+          exact: true,
+          matchingPrefixBytes: artifact.length,
+          expectedRemainingBytes: 0,
+          firstMismatchOffset: null,
+          observedProgramBytes: artifact.length,
+          observedProgramSha256: artifactSha256,
+        },
+        validation: {
+          authorityAdmitted: true,
+          authorityMatchesExpected: true,
+          sizeMatches: true,
+          hashMatches: true,
+          exact: true,
+          partialExactPrefixZeroTail: false,
+          holdReasons: [],
+        },
+        boundary: {
+          mutationAuthorized: false,
+          signing: false,
+          broadcast: false,
+          protectedRecoveryStateRead: false,
+          next: "SEPARATE_ATTENDED_ACTION_REVIEW_REQUIRED",
+        },
+      };
+      return JSON.stringify({
+        ...body,
+        evidenceBodySha256: sha256(Buffer.from(`${JSON.stringify(body, null, 2)}\n`, "utf8")),
+        evidenceFile: null,
+      });
+    };
+    const payerReconciliationRecord = exactReconciliationRecord("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4");
+    const adminReconciliationRecord = exactReconciliationRecord("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
+    const fixtureReconcilerSource = "// authenticated reconciler fixture bytes\n";
+    const fixtureCasSource = "// authenticated CAS fixture bytes\n";
+    const fixtureReconcilerSha256 = sha256(Buffer.from(fixtureReconcilerSource));
+    const fixtureCasSha256 = sha256(Buffer.from(fixtureCasSource));
     const fakeGit = executable("git", `#!/usr/bin/env bash
 set -euo pipefail
 if [[ "\${1:-}" == "--version" ]]; then
   printf 'git version 2.55.0.windows.5\\n'
   exit 0
 fi
+if [[ "\${1:-}" == "show" ]]; then
+  case "\${2:-}" in
+    *reconcile-iat-v2-devnet-buffer-finalized.mjs) /usr/bin/cat -- '${fixtureStateDir}/fixture-site/scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs' ;;
+    *iat-v2-devnet-buffer-handoff-cas.mjs) /usr/bin/cat -- '${fixtureStateDir}/fixture-site/scripts/iat-v2-devnet-buffer-handoff-cas.mjs' ;;
+    *) exit 97 ;;
+  esac
+  exit 0
+fi
+if [[ "\${1:-}" == "cat-file" && "\${2:-}" == "-s" ]]; then
+  case "\${3:-}" in
+    *reconcile-iat-v2-devnet-buffer-finalized.mjs) /usr/bin/stat -c '%s' -- '${fixtureStateDir}/fixture-site/scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs' ;;
+    *iat-v2-devnet-buffer-handoff-cas.mjs) /usr/bin/stat -c '%s' -- '${fixtureStateDir}/fixture-site/scripts/iat-v2-devnet-buffer-handoff-cas.mjs' ;;
+    *) exit 97 ;;
+  esac
+  exit 0
+fi
 exit 98
 `);
     const fakeGitBytes = readFileSync(join(sandbox, "git"));
     const fakeGitSha256 = sha256(fakeGitBytes);
+    const realNode = bashPath(process.execPath);
     const fakeNode = executable("node", `#!/usr/bin/env bash
 set -euo pipefail
 increment() {
@@ -715,27 +814,40 @@ increment() {
 if [[ "\${1:-}" == "--version" ]]; then
   printf 'v24.19.0\n'
 elif [[ "\${1:-}" == "-e" ]]; then
-  input="$(/usr/bin/cat)"
-  case "$input" in
-    *'iat-v2-devnet-buffer-finalized-reconciliation/v1'*)
-      case "$input" in
-        *'7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH'*) printf '%s' '7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH' ;;
-        *'DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4'*) printf '%s' 'DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4' ;;
-        *) exit 87 ;;
-      esac
-      ;;
-    *'"status":"AVAILABLE"'*) printf 'AVAILABLE' ;;
-    *'"status":"RESERVED_CREATED"'*) printf 'RESERVED_CREATED' ;;
-    *'"status":"RESERVED_EXISTING"'*) printf 'RESERVED_EXISTING' ;;
-    *) printf '%s\\n%s\\n%064d\\n%040d\\n%040d\\n33161771816\\n1\\n%s\\n%s\\n%s\\n%s\\n' '${artifactSha256}' '${artifact.length}' 0 2 3 '${fakeGit}' 'git version 2.55.0.windows.5' '${fakeGitSha256}' '${fakeGitBytes.length}' ;;
-  esac
-elif [[ "\${1:-}" == */reconcile-iat-v2-devnet-buffer-finalized.mjs ]]; then
+  exec '${realNode}' "$@"
+elif [[ "\${1:-}" == */reconcile-iat-v2-devnet-buffer-finalized.mjs \
+    || ( "\${1:-}" == "--input-type=module" && "\${2:-}" == "-" \
+      && "\${IAT_V2_RECONCILER_STDIN_CLI:-}" == "iat-v2-devnet-buffer-finalized-reconciler-stdin/v1" ) ]]; then
+  pinned=false
+  if [[ "\${1:-}" == "--input-type=module" ]]; then
+    reconciler_source="$(/usr/bin/cat)"
+    [[ "$reconciler_source" == '// authenticated reconciler fixture bytes' ]] || exit 82
+    pinned=true
+    shift 2
+  fi
   scenario="$(/usr/bin/cat -- '${fixtureStateDir}/scenario')"
   count="$(increment reconcile-count)"
   expected=''
+  artifact_fd=''
   while (( $# > 0 )); do
-    if [[ "$1" == "--expected-authority" ]]; then expected="$2"; shift 2; else shift; fi
+    if [[ "$1" == "--expected-authority" ]]; then expected="$2"; shift 2
+    elif [[ "$1" == "--artifact" ]]; then artifact_fd="$2"; shift 2
+    else shift
+    fi
   done
+  if [[ "$pinned" == true ]]; then
+    [[ "$artifact_fd" == /proc/self/fd/3 ]] || exit 83
+    [[ "$(/usr/bin/cat -- "$artifact_fd")" == 'exact mocked migration artifact' ]] || exit 84
+  fi
+  if [[ "$scenario" == "cas_swap_before_pin" && "$pinned" == false && "$count" == "1" ]]; then
+    printf '%s\n' '// unreviewed replacement CAS bytes' > '${fixtureStateDir}/fixture-site/scripts/iat-v2-devnet-buffer-handoff-cas.mjs'
+  fi
+  if [[ "$scenario" == "runtime_paths_swap_after_pin" && "$pinned" == true && "$count" == "3" ]]; then
+    /usr/bin/mv -- '${fixtureStateDir}/fixture-site/scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs' '${fixtureStateDir}/reconciler.swapped'
+    /usr/bin/mv -- '${fixtureStateDir}/fixture-site/scripts/iat-v2-devnet-buffer-handoff-cas.mjs' '${fixtureStateDir}/cas.swapped'
+    printf '%s\n' '// malicious reconciler replacement' > '${fixtureStateDir}/fixture-site/scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs'
+    printf '%s\n' '// malicious CAS replacement' > '${fixtureStateDir}/fixture-site/scripts/iat-v2-devnet-buffer-handoff-cas.mjs'
+  fi
   mutation_count=0
   if [[ -f '${fixtureStateDir}/mutation-count' ]]; then read -r mutation_count < '${fixtureStateDir}/mutation-count'; fi
   if [[ "$scenario" == "timeout_success" && "$count" == "1" ]]; then
@@ -758,25 +870,40 @@ elif [[ "\${1:-}" == */reconcile-iat-v2-devnet-buffer-finalized.mjs ]]; then
     /usr/bin/rm -f -- '${fixtureStateDir}/payer.json'
     /usr/bin/ln -s -- '${fixtureStateDir}/payer-replacement.json' '${fixtureStateDir}/payer.json'
   fi
-  if [[ "$scenario" == "already" || ( "$scenario" == "timeout_success" && "$mutation_count" != "0" ) ]]; then
+  if [[ "$scenario" == "already" \
+      || ( ( "$scenario" == "timeout_success" || "$scenario" == "runtime_paths_swap_after_pin" ) \
+        && "$mutation_count" != "0" ) ]]; then
     authority='7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH'
   else
     authority='DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4'
   fi
   if [[ "$authority" == "$expected" ]]; then
-    printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation/v1","status":"EXACT_FINALIZED_BUFFER","observedAuthority":"%s"}\\n' "$authority"
+    if [[ "$authority" == DYURS* ]]; then
+      printf '%s\\n' '${payerReconciliationRecord}'
+    else
+      printf '%s\\n' '${adminReconciliationRecord}'
+    fi
     exit 0
   fi
   printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation/v1","status":"HOLD_BUFFER_MISMATCH","observedAuthority":"%s","validation":{"holdReasons":["EXPECTED_AUTHORITY_MISMATCH"]}}\\n' "$authority"
   exit 2
-elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" ]]; then
-  if [[ "\${2:-}" == "inspect" ]]; then
+elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" \
+    || ( "\${1:-}" == "--input-type=module" && "\${2:-}" == "-" \
+      && "\${IAT_V2_HANDOFF_CAS_STDIN_CLI:-}" == "iat-v2-devnet-buffer-handoff-cas-stdin-v1" ) ]]; then
+  if [[ "\${1:-}" == "--input-type=module" ]]; then
+    cas_source="$(/usr/bin/cat)"
+    [[ "$cas_source" == '// authenticated CAS fixture bytes' ]] || exit 85
+    shift 2
+  else
+    shift
+  fi
+  if [[ "\${1:-}" == "inspect" ]]; then
     if [[ -f '${fixtureStateDir}/cas-reserved' ]]; then
       printf '{"status":"RESERVED_EXISTING"}\\n'
     else
       printf '{"status":"AVAILABLE"}\\n'
     fi
-  elif [[ "\${2:-}" == "reserve" ]]; then
+  elif [[ "\${1:-}" == "reserve" ]]; then
     if ( set -o noclobber; printf 'reserved\\n' > '${fixtureStateDir}/cas-reserved' ) 2>/dev/null; then
       printf '{"status":"RESERVED_CREATED"}\\n'
     else
@@ -787,7 +914,7 @@ elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" ]]; then
   fi
 else
   printf 'simulated dependency warning on stderr\\n' >&2
-  printf '{"artifactSha256":"${artifactSha256}","artifactBytes":${artifact.length},"evidenceManifestSha256":"%064d","sourceHeadCommit":"%040d","sourceHeadTree":"%040d","ciRunId":33161771816,"ciRunAttempt":1,"gitPath":"${fakeGit}","gitVersion":"git version 2.55.0.windows.5","gitSha256":"${fakeGitSha256}","gitBytes":${fakeGitBytes.length}}\\n' 0 2 3
+  printf '{"artifactSha256":"${artifactSha256}","artifactBytes":${artifact.length},"evidenceManifestSha256":"%064d","sourceHeadCommit":"%040d","sourceHeadTree":"%040d","ciRunId":33161771816,"ciRunAttempt":1,"gitPath":"${fakeGit}","gitVersion":"git version 2.55.0.windows.5","gitSha256":"${fakeGitSha256}","gitBytes":${fakeGitBytes.length},"runtimeBinding":{"sourceHeadCommit":"${runtimeSourceHead}","runtimeClosureEntries":[{"path":"scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs","sha256":"${fixtureReconcilerSha256}","bytes":${Buffer.byteLength(fixtureReconcilerSource)}},{"path":"scripts/iat-v2-devnet-buffer-handoff-cas.mjs","sha256":"${fixtureCasSha256}","bytes":${Buffer.byteLength(fixtureCasSource)}}]}}\\n' 0 2 3
 fi
 `);
     const fakeSolana = executable("solana", `#!/usr/bin/env bash
@@ -848,6 +975,14 @@ exit 91
     const fixtureScripts = join(fixtureRoot, "scripts");
     const fixtureLib = join(fixtureScripts, "lib");
     mkdirSync(fixtureLib, { recursive: true });
+    writeFileSync(
+      join(fixtureScripts, "reconcile-iat-v2-devnet-buffer-finalized.mjs"),
+      fixtureReconcilerSource,
+    );
+    writeFileSync(
+      join(fixtureScripts, "iat-v2-devnet-buffer-handoff-cas.mjs"),
+      fixtureCasSource,
+    );
     writeFileSync(join(sandbox, "payer.json"), "ORIGINAL-PAYER-FIXTURE\n");
     writeFileSync(join(sandbox, "payer-replacement.json"), "REPLACEMENT-PAYER-FIXTURE\n");
     writeFileSync(join(sandbox, "evidence.json"), "{}\n");
@@ -898,6 +1033,10 @@ exit 91
     fixtureHandoff = fixtureHandoff.replace(
       'PAYER_KEYPAIR="/home/a/.config/solana/iat-v2-devnet-deployer.json"',
       `PAYER_KEYPAIR="${bashPath(join(sandbox, "payer.json"))}"`,
+    );
+    fixtureHandoff = fixtureHandoff.replace(
+      'ARTIFACT="$SITE_ROOT/target/verifiable/iat_v2.so"',
+      `ARTIFACT="${bashPath(artifactPath)}"`,
     );
     fixtureHandoff = fixtureHandoff.replace(
       '[[ -e /proc/sys/fs/binfmt_misc/WSLInterop ]] || hold "WSL interoperability boundary is unavailable"',
@@ -1132,6 +1271,28 @@ exec /usr/bin/setsid -f -w /usr/bin/bash scripts/handoff-iat-v2-devnet-buffer.sh
     assert.equal(secondInvocation.status, 1);
     assert.equal(secondInvocation.counter("mutation-count"), 1, "a second process must never repeat the reserved mutation");
     assert.match(`${secondInvocation.stdout}\n${secondInvocation.stderr}`, /durable one-use mutation reservation already exists|permanently reserved/u);
+
+    const swappedBeforePin = runScenario("cas_swap_before_pin");
+    assert.equal(swappedBeforePin.status, 1);
+    assert.equal(swappedBeforePin.counter("address-count"), 0);
+    assert.equal(swappedBeforePin.counter("mutation-count"), 0);
+    assert.match(`${swappedBeforePin.stdout}\n${swappedBeforePin.stderr}`, /CAS helper descriptor (?:SHA-256|byte length) drifted/u);
+    writeFileSync(
+      join(fixtureScripts, "iat-v2-devnet-buffer-handoff-cas.mjs"),
+      fixtureCasSource,
+    );
+
+    const swappedAfterPin = runScenario("runtime_paths_swap_after_pin");
+    assert.equal(
+      swappedAfterPin.status,
+      0,
+      `${swappedAfterPin.stdout ?? ""}\n${swappedAfterPin.stderr ?? ""}`,
+    );
+    assert.equal(swappedAfterPin.counter("mutation-count"), 1);
+    assert.match(swappedAfterPin.stdout, /AT FINALIZED COMMITMENT/u);
+    assert.equal(readFileSync(join(sandbox, "reconciler.swapped"), "utf8"), fixtureReconcilerSource);
+    assert.equal(readFileSync(join(sandbox, "cas.swapped"), "utf8"), fixtureCasSource);
+    assert.equal(readFileSync(artifactPath, "utf8"), artifact.toString("utf8"));
   } finally {
     rmSync(sandbox, { recursive: true, force: true });
   }
