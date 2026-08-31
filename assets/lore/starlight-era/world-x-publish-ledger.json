@@ -10875,7 +10875,7 @@
   },
   "latestBatch476FinlandPreparation": {
     "schemaVersion": 1,
-    "status": "prompts-and-rolls-prepared-awaiting-git-lfs-remote-preflight",
+    "status": "preflight-git-lfs-remote-and-pr-parity-verified-awaiting-visible-staging",
     "preparedAtUtc": "2026-08-31T22:17:00.6181916Z",
     "batch": 476,
     "country": "Finland",
@@ -10908,12 +10908,16 @@
     "guardianReconciliationCheckpoint": "assets/lore/starlight-era/batch-476-finland-authority-and-x-ledger-reconciliation-checkpoint.json",
     "estoniaLaneClosureCheckpoint": "assets/lore/starlight-era/batch-475-estonia-browser-lanes-closed-checkpoint.json",
     "remoteVerifiedBaseHead": "df6888ec3c1df334d08ebf5cac51e510e5b2a3d8",
+    "remoteVerifiedCheckpointCommit": "22f9c1a37ac116e3ddaa0fd60a88a119cf99c4bc",
+    "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-476-finland-preflight-git-lfs-remote-verification-checkpoint.json",
+    "remoteBranchAndPrHeadMatched": true,
+    "preflightTargetedLfsDryRunEmpty": true,
     "currentBrowserTabIds": ["6"],
     "currentBrowserTabCount": 1,
     "currentXComposerBlank": true,
     "sendClicks": 0,
     "repeatSendClicks": 0,
     "xPostClicks": 0,
-    "nextSafeAction": "Compute and verify exact prompt hashes, commit preparation and authority, push and prove local/remote/PR/LFS parity, then stage four fresh Meta Thinking lanes with anchors 938, 936, 937 in order."
+    "nextSafeAction": "Commit and push the preflight verification record, prove parity once more, then stage four fresh Meta Thinking lanes with anchors 938, 936, 937 in exact order."
   }
 }
