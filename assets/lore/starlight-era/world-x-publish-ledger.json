@@ -10338,7 +10338,7 @@
   },
   "latestBatch473CyprusPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-thinking-lanes-exactly-staged-authorized-awaiting-staging-remote-verification",
+    "status": "four-meta-thinking-lanes-exactly-staged-authorized-staging-remote-verified-awaiting-final-live-gate",
     "preparedAtUtc": "2026-08-31T17:39:32.0574130Z",
     "batch": 473,
     "country": "Cyprus",
@@ -10375,6 +10375,9 @@
     "remoteBranchAndPrHeadMatched": true,
     "stagedCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-four-lanes-staged-authorized-checkpoint.json",
     "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/staging-evidence-manifest.json",
+    "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-staging-git-lfs-remote-verification-checkpoint.json",
+    "stagingRemoteVerifiedCommit": "8cadbc618cc2c770823860b9833ab236f7681db8",
+    "stagingRemoteVerifiedAtUtc": "2026-08-31T18:03:28.1492572Z",
     "currentBrowserTabIds": ["6", "8", "9", "10", "11"],
     "currentBrowserTabCount": 5,
     "currentXComposerBlank": true,
@@ -10389,6 +10392,6 @@
     "sendClicks": 0,
     "repeatSendClicks": 0,
     "xPostClicks": 0,
-    "nextSafeAction": "Commit and remote-verify the exact four-lane staging evidence. Then re-audit all five actual visible tabs and click each visible Meta Send exactly once only if every live gate remains true."
+    "nextSafeAction": "Commit and push the staging verification record, prove the new head is again at local, remote and draft PR parity, then re-audit all five actual visible tabs and click each visible Meta Send exactly once only if every live gate remains true."
   }
 }
