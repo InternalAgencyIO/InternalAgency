@@ -808,6 +808,7 @@ test("buffer authority helper retries reads but never repeats an ambiguous mutat
     const runtimeSourceHead = "0".repeat(39) + "4";
     const sourceHead = "0".repeat(39) + "2";
     const evidenceHash = "0".repeat(64);
+    const runtimeEvidenceHash = "1".repeat(64);
     const casTarget = {
       schema: "iat-v2-devnet-buffer-authority-target/v1",
       network: "devnet",
@@ -1095,7 +1096,7 @@ if (fs.readFileSync(${JSON.stringify(fixtureStateDir + "/scenario")}, "utf8").tr
 process.stdout.write(JSON.stringify({
   artifactSha256: ${JSON.stringify(artifactSha256)},
   artifactBytes: ${artifact.length},
-  evidenceManifestSha256: ${JSON.stringify(evidenceHash)},
+  evidenceManifestSha256: ${JSON.stringify(runtimeEvidenceHash)},
   sourceHeadCommit: ${JSON.stringify(runtimeSourceHead)},
   sourceHeadTree: ${JSON.stringify("0".repeat(39) + "5")},
   checkoutCommit: ${JSON.stringify("0".repeat(39) + "a")},

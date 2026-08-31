@@ -166,8 +166,8 @@ test("buffer lane pins the exact WSL2 toolchain, Devnet genesis, and clean launc
   }
   assert.match(runbook, /\/usr\/bin\/bash --noprofile --norc [^\n]*\/scripts\/rebuild-iat-v2-devnet-buffer-fresh\.sh/u);
   assert.match(runbook, /"BUFFER_ADDRESS=\$BufferAddress" \/usr\/bin\/bash --noprofile --norc -c \$HandoffLauncher iat-v2-captured-handoff-launcher/u);
-  assert.match(runbook, /expected_sha256='58bbeb070efecb361ebee5bd27c8525809574956a5a5cdde25578cf282da13ab'/u);
-  assert.match(runbook, /expected_bytes='61177'/u);
+  assert.match(runbook, /expected_sha256='05ac385c9630231daf0cfb281f43ac475846a8b150a4404e26772192a1e2dada'/u);
+  assert.match(runbook, /expected_bytes='61116'/u);
   assert.match(runbook, /The captured-source launcher is mandatory: direct mutable-path execution is rejected/u);
   assert.match(runbook, /`BUFFER_ADDRESS` is admitted only on this handoff command/u);
 });

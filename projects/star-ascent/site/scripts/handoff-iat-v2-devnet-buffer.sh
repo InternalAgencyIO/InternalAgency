@@ -318,9 +318,8 @@ if (( ${#binding_fields[@]} != 27 )); then
   exit 1
 fi
 [[ "${binding_fields[0]}" == "$EXPECTED_HASH" \
-    && "${binding_fields[1]}" == "$EXPECTED_BYTES" \
-    && "${binding_fields[2]}" == "$EVIDENCE_HASH" ]] \
-  || hold "runtime binding artifact or evidence tuple differs from the hardcoded migration tuple"
+    && "${binding_fields[1]}" == "$EXPECTED_BYTES" ]] \
+  || hold "runtime binding artifact tuple differs from the hardcoded migration artifact"
 RUNTIME_SOURCE_HEAD="${binding_fields[3]}"
 RUNTIME_SOURCE_TREE="${binding_fields[4]}"
 RUNTIME_CHECKOUT_COMMIT="${binding_fields[5]}"

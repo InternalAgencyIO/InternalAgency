@@ -239,8 +239,8 @@ set -euo pipefail
 set +x
 umask 077
 handoff_path='/mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/handoff-iat-v2-devnet-buffer.sh'
-expected_sha256='58bbeb070efecb361ebee5bd27c8525809574956a5a5cdde25578cf282da13ab'
-expected_bytes='61177'
+expected_sha256='05ac385c9630231daf0cfb281f43ac475846a8b150a4404e26772192a1e2dada'
+expected_bytes='61116'
 [[ "$handoff_path" == /* && ! -L "$handoff_path" && -f "$handoff_path" ]] || { echo 'HOLD: handoff source path is not exact' >&2; exit 1; }
 before_identity="$(/usr/bin/stat -Lc '%d:%i' -- "$handoff_path")"
 exec 15< "$handoff_path"

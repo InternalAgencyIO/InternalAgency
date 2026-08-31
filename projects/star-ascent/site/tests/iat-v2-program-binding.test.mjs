@@ -119,7 +119,10 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
   assert.match(handoffSource, /"\$\{binding_fields\[0\]\}" == "\$EXPECTED_HASH"/u, `${handoffPath} lost runtime artifact-hash equality`);
   assert.match(handoffSource, /"\$\{binding_fields\[1\]\}" == "\$EXPECTED_BYTES"/u, `${handoffPath} lost runtime artifact-byte equality`);
   assert.match(handoffSource, /RUNTIME_EVIDENCE_MANIFEST_SHA256="\$\{binding_fields\[2\]\}"/u, `${handoffPath} lost runtime evidence binding`);
-  assert.match(handoffSource, /runtime binding artifact or evidence tuple differs from the hardcoded migration tuple/u, `${handoffPath} lost migration tuple fail-closed behavior`);
+  assert.match(handoffSource, /--evidence-manifest-sha256 "\$EVIDENCE_HASH"/u, `${handoffPath} lost the independent migration evidence CAS field`);
+  assert.match(handoffSource, /--runtime-evidence-manifest-sha256 "\$RUNTIME_EVIDENCE_MANIFEST_SHA256"/u, `${handoffPath} lost the independent runtime evidence CAS field`);
+  assert.doesNotMatch(handoffSource, /"\$\{binding_fields\[2\]\}" == "\$EVIDENCE_HASH"/u, `${handoffPath} must keep runtime and migration evidence manifests independent`);
+  assert.match(handoffSource, /runtime binding artifact tuple differs from the hardcoded migration artifact/u, `${handoffPath} lost migration artifact fail-closed behavior`);
   assert.match(handoffSource, /runtime-bound handoff source differs from the exact bytes parsed by Bash/u, `${handoffPath} lost captured-source identity enforcement`);
 
   for (const path of [rebuildPath, handoffPath]) {
