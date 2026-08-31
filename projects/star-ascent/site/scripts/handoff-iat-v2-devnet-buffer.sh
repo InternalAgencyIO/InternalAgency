@@ -34,6 +34,8 @@ NODE_BIN="$IAT_V2_EXPECTED_NODE_PATH"
 GIT_BIN="$IAT_V2_EXPECTED_GIT_PATH"
 ARTIFACT="$SITE_ROOT/target/verifiable/iat_v2.so"
 EVIDENCE="$SITE_ROOT/target/verifiable/iat-v2-build-evidence.json"
+RUNTIME_EVIDENCE="$SITE_ROOT/target/verifiable/iat-v2-recovery-runtime-build-evidence.json"
+RECONCILER="$SITE_ROOT/scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs"
 BUFFER_ADDRESS="${BUFFER_ADDRESS:-}"
 IAT_V2_HANDOFF_CAS_ROOT="${IAT_V2_HANDOFF_CAS_ROOT:-}"
 EXPECTED_CAS_ROOT="/home/a/.local/state/internal-agency/iat-v2/devnet-buffer-handoff-v1"
@@ -70,9 +72,10 @@ iat_v2_run_clean_node() {
 
 binding_diagnostics="$(/usr/bin/mktemp /tmp/iat-v2-binding-diagnostics-XXXXXX.txt)"
 set +e
-binding_record="$(iat_v2_run_clean_node scripts/iat-v2-devnet-buffer-preflight.mjs verify \
+binding_record="$(iat_v2_run_clean_node scripts/iat-v2-devnet-buffer-preflight.mjs verify-recovery \
   --artifact "$ARTIFACT" \
-  --evidence "$EVIDENCE" 2>"$binding_diagnostics")"
+  --evidence "$EVIDENCE" \
+  --runtime-evidence "$RUNTIME_EVIDENCE" 2>"$binding_diagnostics")"
 binding_status=$?
 set -e
 if [[ -s "$binding_diagnostics" ]]; then
@@ -171,7 +174,9 @@ is_retryable_rpc_error() {
        "$message" == *"block height exceeded"* ||
        "$message" == *"was not confirmed"* ||
        "$message" == *"timed out"* ||
-       "$message" == *"Timeout"* ]]
+       "$message" == *"Timeout"* ||
+       "$message" == *"fetch failed"* ||
+       "$message" == *"RPC_TRANSPORT_HOLD"* ]]
 }
 
 iat_v2_reverify_node() {
@@ -205,110 +210,95 @@ iat_v2_reverify_solana_and_devnet() {
   DEVNET_GENESIS_HASH="$IAT_V2_VERIFIED_DEVNET_GENESIS_HASH"
 }
 
-validate_exact_buffer_address() {
-  local line=""
-  local address_lines=0
-  local exact_address_lines=0
-  while IFS= read -r line; do
-    if [[ "$line" == "Buffer Address: "* ]]; then
-      address_lines=$((address_lines + 1))
-      if [[ "$line" == "Buffer Address: $BUFFER_ADDRESS" ]]; then
-        exact_address_lines=$((exact_address_lines + 1))
-      fi
-    fi
-  done <<< "$authority_record"
-  if (( address_lines != 1 || exact_address_lines != 1 )); then
-    echo "HOLD: finalized program show did not identify exactly the requested Buffer Address: $BUFFER_ADDRESS." >&2
-    return 1
-  fi
-}
-
-extract_exact_buffer_authority() {
-  local line=""
-  local authority_lines=0
-  observed_authority=""
-  while IFS= read -r line; do
-    if [[ "$line" == "Authority: "* ]]; then
-      authority_lines=$((authority_lines + 1))
-      observed_authority="${line#Authority: }"
-    fi
-  done <<< "$authority_record"
-  if (( authority_lines != 1 )) || [[ -z "$observed_authority" ]]; then
-    echo "HOLD: finalized program show did not contain one exact, non-empty Authority line." >&2
-    return 1
-  fi
-}
-
-verify_exact_finalized_buffer_dump() {
-  local dump_complete=false
-  local output=""
-  local status=0
-  local observed_hash=""
-  local observed_bytes=""
-  for read_attempt in $(/usr/bin/seq 1 12); do
-    echo "Finalized exact buffer dump $read_attempt of 12..."
-    if [[ -L "$dump_path" || ! -f "$dump_path" ]]; then
-      echo "HOLD: the private buffer-dump scratch path changed identity." >&2
-      return 1
-    fi
-    : > "$dump_path"
-    if output="$(iat_v2_run_keyless_solana_timeout 90 "$SOLANA_BIN" program dump "$BUFFER_ADDRESS" "$dump_path" \
-      --url devnet \
-      --commitment finalized 2>&1)"; then
-      echo "$output"
-      dump_complete=true
-      break
-    else
-      status=$?
-    fi
-    echo "$output"
-    if ! is_retryable_rpc_error "$status" "$output"; then
-      break
-    fi
-    /usr/bin/sleep 10
-  done
-  if [[ "$dump_complete" != "true" || -L "$dump_path" || ! -f "$dump_path" ]]; then
-    echo "HOLD: exact finalized buffer bytes could not be observed." >&2
-    return 1
-  fi
-  observed_bytes="$(/usr/bin/stat -c '%s' -- "$dump_path")"
-  observed_hash="$(/usr/bin/sha256sum -- "$dump_path")"
-  observed_hash="${observed_hash%% *}"
-  if [[ "$observed_bytes" != "$EXPECTED_BYTES" || "$observed_hash" != "$EXPECTED_HASH" ]]; then
-    echo "HOLD: finalized buffer bytes do not match the exact reviewed artifact." >&2
-    echo "EXPECTED SHA-256/BYTES: $EXPECTED_HASH / $EXPECTED_BYTES" >&2
-    echo "OBSERVED SHA-256/BYTES: $observed_hash / $observed_bytes" >&2
-    return 1
-  fi
+iat_v2_run_signer_free_reconciler() {
+  /usr/bin/timeout 90 \
+    /usr/bin/env -i \
+    HOME=/nonexistent/iat-v2-buffer-reconciler-home \
+    XDG_CONFIG_HOME=/nonexistent/iat-v2-buffer-reconciler-config \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    PATH=/usr/bin:/bin \
+    "$NODE_BIN" "$RECONCILER" "$@"
 }
 
 fetch_buffer_record() {
+  local expected_authority="${1:-}"
+  local emit_failure="${2:-true}"
   local status=0
   authority_record=""
   observed_authority=""
-  iat_v2_reverify_solana_and_devnet "Solana CLI at finalized buffer observation"
+  [[ "$expected_authority" == "$EXPECTED_PAYER" || "$expected_authority" == "$NEW_AUTHORITY" ]] \
+    || { echo "HOLD: signer-free buffer reconciliation received an unreviewed expected authority." >&2; return 1; }
+  iat_v2_reverify_node "Node.js runtime at signer-free finalized buffer observation" || return 1
   for read_attempt in $(/usr/bin/seq 1 12); do
-    echo "Finalized buffer identity read $read_attempt of 12..."
-    if authority_record="$(iat_v2_run_keyless_solana_timeout 45 "$SOLANA_BIN" program show "$BUFFER_ADDRESS" \
-      --url devnet \
-      --commitment finalized 2>&1)"; then
-      echo "$authority_record"
-      break
+    echo "Signer-free finalized buffer reconciliation $read_attempt of 12 for $expected_authority..."
+    if authority_record="$(iat_v2_run_signer_free_reconciler \
+      --buffer "$BUFFER_ADDRESS" \
+      --expected-authority "$expected_authority" 2>&1)"; then
+      status=0
     else
       status=$?
     fi
-    echo "$authority_record"
-    if ! is_retryable_rpc_error "$status" "$authority_record"; then
-      return 1
+    if (( status == 0 )); then
+      if observed_authority="$(printf '%s' "$authority_record" | iat_v2_run_clean_node -e '
+        const {createHash}=require("node:crypto");
+        const chunks=[];
+        process.stdin.on("data",(chunk)=>chunks.push(chunk));
+        process.stdin.on("end",()=>{
+          try {
+            const v=JSON.parse(Buffer.concat(chunks));
+            const [buffer,authority,artifactHash,artifactBytes,sourceHead,ciRun,evidenceHash,genesis]=process.argv.slice(1);
+            const bytes=Number(artifactBytes);
+            const run=Number(ciRun);
+            const role=authority.startsWith("DYURS")?"DEVNET_DEPLOYER":"MODEL_T_ADMIN";
+            const {evidenceFile,evidenceBodySha256,...body}=v;
+            const sealed=createHash("sha256").update(Buffer.from(`${JSON.stringify(body,null,2)}\n`,"utf8")).digest("hex");
+            const exact=v.schema==="iat-v2-devnet-buffer-finalized-reconciliation/v1"
+              && v.status==="EXACT_FINALIZED_BUFFER" && v.network==="devnet"
+              && v.rpc==="https://api.devnet.solana.com" && v.genesisHash===genesis
+              && v.commitment==="finalized" && Number.isSafeInteger(v.minContextSlot) && v.minContextSlot>0
+              && Number.isSafeInteger(v.accountContextSlot) && v.accountContextSlot>=v.minContextSlot
+              && v.bufferAddress===buffer && v.expectedAuthority===authority
+              && v.observedAuthority===authority && v.observedAuthorityRole===role
+              && v.account?.owner==="BPFLoaderUpgradeab1e11111111111111111111111"
+              && v.account?.executable===false && /^[0-9]+$/.test(v.account?.lamports??"")
+              && v.account?.dataBytes===bytes+37 && v.account?.metadataBytes===37
+              && v.account?.stateTag===1 && v.account?.authorityOption===1
+              && v.account?.programBytes===bytes && v.account?.programSha256===artifactHash
+              && v.publicCiArtifact?.bytes===bytes && v.publicCiArtifact?.sha256===artifactHash
+              && v.publicCiArtifact?.sourceHeadCommit===sourceHead && v.publicCiArtifact?.ciRunId===run
+              && v.publicCiArtifact?.evidenceManifestSha256===evidenceHash
+              && v.comparison?.classification==="EXACT_ARTIFACT" && v.comparison?.exact===true
+              && v.comparison?.matchingPrefixBytes===bytes && v.comparison?.expectedRemainingBytes===0
+              && v.comparison?.firstMismatchOffset===null && v.comparison?.observedProgramBytes===bytes
+              && v.comparison?.observedProgramSha256===artifactHash
+              && v.validation?.authorityAdmitted===true && v.validation?.authorityMatchesExpected===true
+              && v.validation?.sizeMatches===true && v.validation?.hashMatches===true
+              && v.validation?.exact===true && v.validation?.partialExactPrefixZeroTail===false
+              && Array.isArray(v.validation?.holdReasons) && v.validation.holdReasons.length===0
+              && v.boundary?.mutationAuthorized===false && v.boundary?.signing===false
+              && v.boundary?.broadcast===false && v.boundary?.protectedRecoveryStateRead===false
+              && v.boundary?.next==="SEPARATE_ATTENDED_ACTION_REVIEW_REQUIRED"
+              && evidenceFile===null && /^[0-9a-f]{64}$/.test(evidenceBodySha256??"")
+              && sealed===evidenceBodySha256;
+            if(!exact) process.exit(2);
+            process.stdout.write(v.observedAuthority);
+          } catch { process.exit(2); }
+        });
+      ' "$BUFFER_ADDRESS" "$expected_authority" "$EXPECTED_HASH" "$EXPECTED_BYTES" "$SOURCE_HEAD" "$CI_RUN_ID" "$EVIDENCE_HASH" "$DEVNET_GENESIS_HASH")"; then
+        printf '%s\n' "$authority_record"
+        return 0
+      else
+        status=$?
+      fi
     fi
-    if (( read_attempt == 12 )); then
+    if ! is_retryable_rpc_error "$status" "$authority_record" || (( read_attempt == 12 )); then
+      [[ "$emit_failure" == "true" ]] && printf '%s\n' "$authority_record" >&2
       return 1
     fi
     /usr/bin/sleep 10
   done
-  validate_exact_buffer_address || return 1
-  verify_exact_finalized_buffer_dump || return 1
-  extract_exact_buffer_authority || return 1
+  return 1
 }
 
 open_verified_payer_fd() {
@@ -387,10 +377,8 @@ observe_handoff_fee_floor() {
     || hold "finalized payer balance is below the reviewed single-handoff fee floor of $DEVNET_HANDOFF_FEE_FLOOR_LAMPORTS lamports"
 }
 
-dump_path="$(/usr/bin/mktemp /tmp/iat-v2-handoff-buffer-XXXXXX.so)"
 cleanup() {
   exec 9<&- 2>/dev/null || true
-  /usr/bin/rm -f -- "$dump_path"
 }
 trap cleanup EXIT
 
@@ -408,7 +396,7 @@ printf '%s\n' "$cas_record"
 cas_status="$(printf '%s' "$cas_record" | iat_v2_run_clean_node -e 'const chunks=[]; process.stdin.on("data", (chunk) => chunks.push(chunk)); process.stdin.on("end", () => process.stdout.write(JSON.parse(Buffer.concat(chunks)).status));')"
 if [[ "$cas_status" == "RESERVED_EXISTING" ]]; then
   echo "A durable one-use mutation reservation already exists. Performing exact read-only finalized reconciliation only."
-  if ! fetch_buffer_record; then
+  if ! fetch_buffer_record "$NEW_AUTHORITY"; then
     echo "HOLD: finalized buffer identity, bytes, or authority remains ambiguous for the permanently reserved mutation." >&2
     echo "DO NOT RESUBMIT. Return to Codex for read-only reconciliation." >&2
     exit 1
@@ -426,16 +414,12 @@ if [[ "$cas_status" != "AVAILABLE" ]]; then
   exit 1
 fi
 
-if ! fetch_buffer_record; then
-  echo "HOLD: exact finalized buffer identity, bytes, and authority could not be established before handoff." >&2
-  exit 1
-fi
-if [[ "$observed_authority" == "$NEW_AUTHORITY" ]]; then
+if fetch_buffer_record "$NEW_AUTHORITY" false; then
   echo "BUFFER AUTHORITY ALREADY HELD BY 7XZ. NO MUTATION IS NEEDED."
   exit 0
 fi
-if [[ "$observed_authority" != "$EXPECTED_PAYER" ]]; then
-  echo "HOLD: exact finalized buffer authority is neither the expected payer nor 7XZ." >&2
+if ! fetch_buffer_record "$EXPECTED_PAYER"; then
+  echo "HOLD: exact finalized buffer identity, bytes, and authority could not be established before handoff." >&2
   exit 1
 fi
 
@@ -493,7 +477,7 @@ reverify_open_payer_fd
   || hold "opened payer identity drifted before the one-use reservation"
 iat_v2_reverify_git 9<&-
 iat_v2_reverify_node "Node.js runtime immediately before durable reservation creation" 9<&-
-if ! fetch_buffer_record 9<&-; then
+if ! fetch_buffer_record "$EXPECTED_PAYER" 9<&-; then
   hold "exact finalized buffer identity, bytes, or authority could not be re-established after the attended pause"
 fi
 [[ "$observed_authority" == "$EXPECTED_PAYER" ]] \
@@ -516,7 +500,7 @@ esac
 if [[ "$cas_status" == "RESERVED_EXISTING" ]]; then
   exec 9<&-
   echo "Another process already reserved this mutation. This process will reconcile read-only and will not submit."
-  if ! fetch_buffer_record; then
+  if ! fetch_buffer_record "$NEW_AUTHORITY"; then
     echo "HOLD: exact finalized state remains ambiguous for the concurrently reserved mutation." >&2
     echo "DO NOT RESUBMIT. Return to Codex for read-only reconciliation." >&2
     exit 1
@@ -549,7 +533,7 @@ exec 9<&-
 echo "$output"
 
 echo "Mutation command status: $mutation_status. Beginning exact read-only finalized reconciliation."
-if ! fetch_buffer_record; then
+if ! fetch_buffer_record "$NEW_AUTHORITY"; then
   echo "HOLD: finalized buffer identity, bytes, or authority is ambiguous after the one-use mutation attempt." >&2
   echo "DO NOT RESUBMIT. Return to Codex for read-only reconciliation." >&2
   exit 1

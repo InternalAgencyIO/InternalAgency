@@ -50,6 +50,21 @@ const UNBOUND_BINDING = Object.freeze({
   workflowRef: null,
 });
 
+test("runtime closure binds the attended handoff and both durable CAS modules", () => {
+  assert.deepEqual(
+    IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS,
+    [...IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS].sort(),
+    "runtime closure paths must remain in exact code-unit order",
+  );
+  assert.equal(new Set(IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS).size, IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS.length);
+  for (const path of [
+    "scripts/handoff-iat-v2-devnet-buffer.sh",
+    "scripts/iat-v2-devnet-buffer-handoff-cas.mjs",
+    "scripts/initialize-iat-v2-devnet-buffer-handoff-cas.mjs",
+    "scripts/reconcile-iat-v2-devnet-buffer-finalized.mjs",
+  ]) assert.equal(IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS.includes(path), true, `${path} must be runtime-bound`);
+});
+
 function sortJson(value) {
   if (Array.isArray(value)) return value.map(sortJson);
   if (!value || typeof value !== "object") return value;

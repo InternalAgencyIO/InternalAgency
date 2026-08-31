@@ -526,6 +526,9 @@ test("upload and handoff scripts have separate explicit gates and no stale artif
   assert.doesNotMatch(combined, /--evidence "\$EVIDENCE" 2>&1/u, "machine JSON stdout must never merge stderr");
   assert.match(combined, /iat-v2-attended-solana-toolchain\.sh/u);
   assert.match(handoff, /IAT_V2_HANDOFF_CAS_ROOT/u);
+  assert.match(handoff, /iat-v2-devnet-buffer-preflight\.mjs verify-recovery/u);
+  assert.match(handoff, /iat-v2-recovery-runtime-build-evidence\.json/u);
+  assert.match(handoff, /reconcile-iat-v2-devnet-buffer-finalized\.mjs/u);
   assert.match(handoff, /iat-v2-devnet-buffer-handoff-cas\.mjs inspect/u);
   assert.match(handoff, /iat-v2-devnet-buffer-handoff-cas\.mjs reserve/u);
   assert.match(handoff, /PAYER_FD_PATH="\/proc\/self\/fd\/9"/u);
@@ -545,7 +548,8 @@ test("upload and handoff scripts have separate explicit gates and no stale artif
   assert.match(handoff, /VERSION_ID=.*24\\\.04/u);
   assert.match(handoff, /iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean\/projects\/star-ascent\/site/u);
   assert.match(handoff, /\/usr\/bin\/env -i/u);
-  assert.doesNotMatch(handoff, /program (?:show|dump)[\s\S]{0,240}?--keypair/u);
+  assert.doesNotMatch(handoff, /program (?:show|dump)/u);
+  assert.match(handoff, /HOME=\/nonexistent\/iat-v2-buffer-reconciler-home/u);
   assert.match(
     toolchain,
     /iat_v2_run_keyless_solana\(\)[\s\S]*?\/usr\/bin\/env -i[\s\S]*?"\$solana_path" "\$@" --config \/dev\/null/u,
@@ -643,11 +647,13 @@ test("buffer authority handoff has one mutation boundary and finalized read-only
   assert.doesNotMatch(handoff, /Authority handoff attempt|retrying verification/u);
   assert.match(handoff, /Submitting the one-use authority mutation exactly once/u);
   assert.match(handoff, /program set-buffer-authority[\s\S]*?--commitment finalized/u);
-  assert.match(handoff, /program show[\s\S]*?--commitment finalized/u);
-  assert.match(handoff, /program dump[\s\S]*?--commitment finalized/u);
-  assert.match(handoff, /Buffer Address: \$BUFFER_ADDRESS/u);
-  assert.match(handoff, /observed_bytes" != "\$EXPECTED_BYTES"/u);
-  assert.match(handoff, /observed_hash" != "\$EXPECTED_HASH"/u);
+  assert.doesNotMatch(handoff, /program (?:show|dump)/u);
+  assert.match(handoff, /iat_v2_run_signer_free_reconciler/u);
+  assert.match(handoff, /--buffer "\$BUFFER_ADDRESS"[\s\S]*?--expected-authority "\$expected_authority"/u);
+  assert.match(handoff, /v\.status==="EXACT_FINALIZED_BUFFER"/u);
+  assert.match(handoff, /v\.account\?\.programBytes===bytes/u);
+  assert.match(handoff, /v\.account\?\.programSha256===artifactHash/u);
+  assert.match(handoff, /sealed===evidenceBodySha256/u);
   assert.match(
     handoff,
     /mutation_status=\$\?[\s\S]*?Beginning exact read-only finalized reconciliation[\s\S]*?fetch_buffer_record/u,
@@ -655,7 +661,7 @@ test("buffer authority handoff has one mutation boundary and finalized read-only
   assert.match(handoff, /DO NOT RESUBMIT/gmu);
   assert.doesNotMatch(handoff, /--commitment confirmed/u);
   const reserve = handoff.indexOf("iat-v2-devnet-buffer-handoff-cas.mjs reserve");
-  const postPromptReobserve = handoff.indexOf("fetch_buffer_record 9<&-");
+  const postPromptReobserve = handoff.indexOf('fetch_buffer_record "$EXPECTED_PAYER" 9<&-');
   const submitting = handoff.indexOf('echo "Submitting the one-use authority mutation exactly once..."');
   const mutation = handoff.indexOf("program set-buffer-authority");
   assert.ok(postPromptReobserve >= 0 && reserve > postPromptReobserve && submitting > reserve && mutation > submitting);
@@ -698,16 +704,71 @@ exit 98
     const fakeGitSha256 = sha256(fakeGitBytes);
     const fakeNode = executable("node", `#!/usr/bin/env bash
 set -euo pipefail
+increment() {
+  local file='${fixtureStateDir}/'"$1"
+  local value=0
+  if [[ -f "$file" ]]; then read -r value < "$file"; fi
+  value=$((value + 1))
+  printf '%s\\n' "$value" > "$file"
+  printf '%s' "$value"
+}
 if [[ "\${1:-}" == "--version" ]]; then
   printf 'v24.19.0\n'
 elif [[ "\${1:-}" == "-e" ]]; then
   input="$(/usr/bin/cat)"
   case "$input" in
+    *'iat-v2-devnet-buffer-finalized-reconciliation/v1'*)
+      case "$input" in
+        *'7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH'*) printf '%s' '7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH' ;;
+        *'DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4'*) printf '%s' 'DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4' ;;
+        *) exit 87 ;;
+      esac
+      ;;
     *'"status":"AVAILABLE"'*) printf 'AVAILABLE' ;;
     *'"status":"RESERVED_CREATED"'*) printf 'RESERVED_CREATED' ;;
     *'"status":"RESERVED_EXISTING"'*) printf 'RESERVED_EXISTING' ;;
     *) printf '%s\\n%s\\n%064d\\n%040d\\n%040d\\n33161771816\\n1\\n%s\\n%s\\n%s\\n%s\\n' '${artifactSha256}' '${artifact.length}' 0 2 3 '${fakeGit}' 'git version 2.55.0.windows.5' '${fakeGitSha256}' '${fakeGitBytes.length}' ;;
   esac
+elif [[ "\${1:-}" == */reconcile-iat-v2-devnet-buffer-finalized.mjs ]]; then
+  scenario="$(/usr/bin/cat -- '${fixtureStateDir}/scenario')"
+  count="$(increment reconcile-count)"
+  expected=''
+  while (( $# > 0 )); do
+    if [[ "$1" == "--expected-authority" ]]; then expected="$2"; shift 2; else shift; fi
+  done
+  mutation_count=0
+  if [[ -f '${fixtureStateDir}/mutation-count' ]]; then read -r mutation_count < '${fixtureStateDir}/mutation-count'; fi
+  if [[ "$scenario" == "timeout_success" && "$count" == "1" ]]; then
+    printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation-error/v1","status":"HOLD","code":"RPC_TRANSPORT_HOLD","message":"Devnet RPC HTTP status 429"}\\n' >&2
+    exit 2
+  fi
+  if [[ "$scenario" == "ambiguous" && "$mutation_count" != "0" ]]; then
+    printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation-error/v1","status":"HOLD","code":"RPC_TRANSPORT_HOLD","message":"Devnet RPC HTTP status 429"}\\n' >&2
+    exit 2
+  fi
+  if [[ "$scenario" == "wrong_account" ]]; then
+    printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation-error/v1","status":"HOLD","code":"BUFFER_ACCOUNT_HOLD","message":"finalized buffer address mismatch"}\\n' >&2
+    exit 2
+  fi
+  if [[ "$scenario" == "wrong_bytes" ]]; then
+    printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation/v1","status":"HOLD_BUFFER_MISMATCH","observedAuthority":"DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4","validation":{"holdReasons":["PROGRAM_SHA256_MISMATCH"]}}\\n'
+    exit 2
+  fi
+  if [[ "$scenario" == "payer_symlink" && "$expected" == "DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4" && ! -L '${fixtureStateDir}/payer.json' ]]; then
+    /usr/bin/rm -f -- '${fixtureStateDir}/payer.json'
+    /usr/bin/ln -s -- '${fixtureStateDir}/payer-replacement.json' '${fixtureStateDir}/payer.json'
+  fi
+  if [[ "$scenario" == "already" || ( "$scenario" == "timeout_success" && "$mutation_count" != "0" ) ]]; then
+    authority='7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH'
+  else
+    authority='DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4'
+  fi
+  if [[ "$authority" == "$expected" ]]; then
+    printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation/v1","status":"EXACT_FINALIZED_BUFFER","observedAuthority":"%s"}\\n' "$authority"
+    exit 0
+  fi
+  printf '{"schema":"iat-v2-devnet-buffer-finalized-reconciliation/v1","status":"HOLD_BUFFER_MISMATCH","observedAuthority":"%s","validation":{"holdReasons":["EXPECTED_AUTHORITY_MISMATCH"]}}\\n' "$authority"
+  exit 2
 elif [[ "\${1:-}" == "scripts/iat-v2-devnet-buffer-handoff-cas.mjs" ]]; then
   if [[ "\${2:-}" == "inspect" ]]; then
     if [[ -f '${fixtureStateDir}/cas-reserved' ]]; then
@@ -764,46 +825,10 @@ if [[ "\${1:-}" == "balance" ]]; then
   printf '1000000000 lamports\\n'
   exit 0
 fi
-if [[ "\${1:-}" == "program" && "\${2:-}" == "dump" ]]; then
-  increment dump-count >/dev/null
-  if [[ " $* " != *" --commitment finalized "* ]]; then exit 94; fi
-  if [[ "$scenario" == "wrong_bytes" ]]; then
-    printf 'wrong finalized bytes' > "$4"
-  else
-    /usr/bin/cp -- '${bashPath(artifactPath)}' "$4"
-  fi
-  if [[ "$scenario" == "payer_symlink" ]]; then
-    /usr/bin/rm -f -- '${fixtureStateDir}/payer.json'
-    /usr/bin/ln -s -- '${fixtureStateDir}/payer-replacement.json' '${fixtureStateDir}/payer.json'
-  fi
-  exit 0
-fi
-if [[ "\${1:-}" == "program" && "\${2:-}" == "show" ]]; then
-  if [[ " $* " != *" --commitment finalized "* ]]; then exit 95; fi
-  count="$(increment show-count)"
-  case "$scenario" in
-    timeout_success)
-      if [[ "$count" == "1" ]]; then exit 124; fi
-      if (( count <= 3 )); then authority='DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4'; else authority='7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH'; fi
-      ;;
-    already) authority='7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH' ;;
-    ambiguous)
-      if (( count <= 2 )); then authority='DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4'; else exit 124; fi
-      ;;
-    old|wrong_bytes|payer_symlink) authority='DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4' ;;
-    payer_swap_after_open)
-      if [[ "$count" == "1" ]]; then authority='DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4'; else authority='7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH'; fi
-      ;;
-    wrong_account)
-      printf 'Buffer Address: OtherMockBufferAddress\\n'
-      printf 'Authority: %s\\n' '7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH'
-      exit 0
-      ;;
-    *) exit 90 ;;
-  esac
-  printf 'Buffer Address: MockBufferAddress\\n'
-  printf 'Authority: %s\\n' "$authority"
-  exit 0
+if [[ "\${1:-}" == "program" && ( "\${2:-}" == "show" || "\${2:-}" == "dump" ) ]]; then
+  increment legacy-read-count >/dev/null
+  printf 'simulated default-signer fallback: legacy program read is forbidden\\n' >&2
+  exit 95
 fi
 if [[ "\${1:-}" == "program" && "\${2:-}" == "set-buffer-authority" ]]; then
   increment mutation-count >/dev/null
@@ -924,7 +949,7 @@ exit 91
       poisonValue = "",
     } = {}) => {
       if (!preserveState) {
-        for (const name of ["show-count", "dump-count", "mutation-count", "address-count", "cas-reserved", "payer.opened"]) {
+        for (const name of ["reconcile-count", "legacy-read-count", "mutation-count", "address-count", "cas-reserved", "payer.opened"]) {
           rmSync(join(sandbox, name), { force: true });
         }
       }
@@ -1017,16 +1042,17 @@ exec /usr/bin/setsid -f -w /usr/bin/bash scripts/handoff-iat-v2-devnet-buffer.sh
       0,
       `${retried.error ?? ""}\n${retried.stdout ?? ""}\n${retried.stderr ?? ""}`,
     );
-    assert.match(retried.stdout, /Finalized buffer identity read 2 of 12/u);
+    assert.match(retried.stdout, /Signer-free finalized buffer reconciliation 2 of 12/u);
     assert.equal(retried.counter("mutation-count"), 1);
-    assert.equal(retried.counter("dump-count"), 3, "pre-prompt, post-prompt, and reconciled authority classifications require exact dumps");
+    assert.equal(retried.counter("reconcile-count"), 5, "every authority phase requires a fresh strict signer-free reconciliation");
+    assert.equal(retried.counter("legacy-read-count"), 0, "legacy CLI reads must never run");
     assert.match(retried.stdout, /AT FINALIZED COMMITMENT/u);
     assert.match(retried.stdout, /NODE PATH:[\s\S]*?GIT PATH:[\s\S]*?SOLANA PATH:[\s\S]*?DEVNET GENESIS:/u);
 
     const already = runScenario("already");
     assert.equal(already.status, 0, already.stderr);
-    assert.equal(already.counter("show-count"), 1);
-    assert.equal(already.counter("dump-count"), 1, "already-held classification still requires exact finalized bytes");
+    assert.equal(already.counter("reconcile-count"), 1);
+    assert.equal(already.counter("legacy-read-count"), 0);
     assert.equal(already.counter("mutation-count"), 0);
     assert.match(already.stdout, /ALREADY HELD BY 7XZ/u);
 
@@ -1034,14 +1060,15 @@ exec /usr/bin/setsid -f -w /usr/bin/bash scripts/handoff-iat-v2-devnet-buffer.sh
     assert.equal(wrongAccount.status, 1);
     assert.equal(wrongAccount.counter("mutation-count"), 0);
     assert.equal(wrongAccount.counter("address-count"), 0);
-    assert.match(`${wrongAccount.stdout}\n${wrongAccount.stderr}`, /did not identify exactly the requested Buffer Address/u);
+    assert.equal(wrongAccount.counter("reconcile-count"), 2);
+    assert.match(`${wrongAccount.stdout}\n${wrongAccount.stderr}`, /finalized buffer address mismatch/u);
 
     const wrongBytes = runScenario("wrong_bytes");
     assert.equal(wrongBytes.status, 1);
-    assert.equal(wrongBytes.counter("dump-count"), 1);
+    assert.equal(wrongBytes.counter("reconcile-count"), 2);
     assert.equal(wrongBytes.counter("mutation-count"), 0);
     assert.equal(wrongBytes.counter("address-count"), 0);
-    assert.match(`${wrongBytes.stdout}\n${wrongBytes.stderr}`, /finalized buffer bytes do not match/u);
+    assert.match(`${wrongBytes.stdout}\n${wrongBytes.stderr}`, /PROGRAM_SHA256_MISMATCH/u);
 
     const nonTty = runScenario("old", { attended: false });
     assert.equal(nonTty.status, 1);
@@ -1055,7 +1082,7 @@ exec /usr/bin/setsid -f -w /usr/bin/bash scripts/handoff-iat-v2-devnet-buffer.sh
       poisonValue: "--require=/tmp/iat-v2-untrusted-loader.cjs",
     });
     assert.equal(poisoned.status, 1);
-    assert.equal(poisoned.counter("show-count"), 0);
+    assert.equal(poisoned.counter("reconcile-count"), 0);
     assert.equal(poisoned.counter("mutation-count"), 0);
     assert.match(`${poisoned.stdout}\n${poisoned.stderr}`, /inherited NODE_OPTIONS is not admitted/u);
 
@@ -1065,7 +1092,7 @@ exec /usr/bin/setsid -f -w /usr/bin/bash scripts/handoff-iat-v2-devnet-buffer.sh
       poisonValue: "/tmp/iat-v2-unreviewed-git-dir",
     });
     assert.equal(gitRedirected.status, 1);
-    assert.equal(gitRedirected.counter("show-count"), 0);
+    assert.equal(gitRedirected.counter("reconcile-count"), 0);
     assert.equal(gitRedirected.counter("mutation-count"), 0);
     assert.match(`${gitRedirected.stdout}\n${gitRedirected.stderr}`, /inherited GIT_DIR is not admitted/u);
 
@@ -1089,14 +1116,14 @@ exec /usr/bin/setsid -f -w /usr/bin/bash scripts/handoff-iat-v2-devnet-buffer.sh
     const ambiguous = runScenario("ambiguous");
     assert.equal(ambiguous.status, 1);
     assert.equal(ambiguous.counter("mutation-count"), 1);
-    assert.equal(ambiguous.counter("show-count"), 14);
+    assert.equal(ambiguous.counter("reconcile-count"), 15);
     assert.match(`${ambiguous.stdout}\n${ambiguous.stderr}`, /DO NOT RESUBMIT/u);
 
     const old = runScenario("old");
     assert.equal(old.status, 1);
     assert.equal(old.counter("mutation-count"), 1);
-    assert.equal(old.counter("show-count"), 3);
-    assert.match(`${old.stdout}\n${old.stderr}`, /finalized state still shows the expected payer/u);
+    assert.equal(old.counter("reconcile-count"), 4);
+    assert.match(`${old.stdout}\n${old.stderr}`, /finalized buffer identity, bytes, or authority is ambiguous/u);
 
     const firstInvocation = runScenario("ambiguous");
     assert.equal(firstInvocation.status, 1);
