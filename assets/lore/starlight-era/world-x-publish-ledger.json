@@ -10396,7 +10396,10 @@
     "sendButtonsEnabledAllFour": true,
     "sendClicks": 4,
     "repeatSendClicks": 0,
-    "xPostClicks": 0,
+    "xPostClicks": 1,
+    "xPostClickTransmissions": 0,
+    "xKeyboardSubmitAttempts": 0,
+    "xPublicTransmissionCount": 0,
     "dispatchedCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-four-lanes-dispatched-checkpoint.json",
     "providerUrls": [
       "https://www.meta.ai/prompt/e3d7f935-04d0-45a7-880f-f2cd6abe53fb",
@@ -10454,6 +10457,8 @@
     "xStagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-staging-git-lfs-remote-verification-checkpoint.json",
     "xStagingRemoteVerifiedCommit": "32225442599bb4bcf72c42a2668ed10637f5676d",
     "xStagingRemoteVerifiedAtUtc": "2026-08-31T18:54:36.5268323Z",
-    "nextSafeAction": "Commit and push the staging verification record, prove the new head is again at local, remote and draft PR parity, then recheck every live X gate and click Post exactly once only if all remain true."
+    "xFirstPostClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-first-post-click-no-transmission-checkpoint.json",
+    "xFirstPostClickOutcome": "confirmed-no-transmission-exact-draft-retained",
+    "nextSafeAction": "Commit and remote-verify the first-click no-transmission evidence, then recheck the unchanged live draft and use one authorized Ctrl+Enter submission without another Post-button click."
   }
 }

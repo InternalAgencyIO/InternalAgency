@@ -63,7 +63,7 @@
   "madeWithAiRequired": true,
   "currentAuthorization": "authorized for all go, authorized for all similar commands",
   "postAuthorized": true,
-  "postClicks": 0,
+  "postClicks": 1,
   "mayPost": false,
   "remoteVerifiedHeadBeforeReservation": "01a36dd4b4384bbd951142c3449dbfe3e905c8b7",
   "reservationRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-reservation-git-lfs-remote-verification-checkpoint.json",
@@ -78,5 +78,7 @@
   "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-staging-git-lfs-remote-verification-checkpoint.json",
   "stagingRemoteVerifiedCommit": "32225442599bb4bcf72c42a2668ed10637f5676d",
   "stagingRemoteVerifiedAtUtc": "2026-08-31T18:54:36.5268323Z",
-  "nextSafeAction": "Commit and push the staging verification record, prove the new head is again at local, remote and draft PR parity, then recheck every live X gate and click Post exactly once only if all remain true."
+  "firstPostClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-first-post-click-no-transmission-checkpoint.json",
+  "firstPostClickOutcome": "confirmed-no-transmission-exact-draft-retained",
+  "nextSafeAction": "Commit and remote-verify the first-click no-transmission evidence, then recheck the unchanged live draft and use one authorized Ctrl+Enter submission without another Post-button click."
 }
