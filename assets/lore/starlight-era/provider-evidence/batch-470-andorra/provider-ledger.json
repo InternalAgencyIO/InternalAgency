@@ -4,7 +4,7 @@
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "four-initial-occurrences-dispatched-later-visible-thinking-state-preserved",
+  "state": "four-initial-occurrences-dispatched-later-visible-thinking-state-and-rendered-variants-archived",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "accountRequired": "leesha007",
   "authorizedSceneIds": [1906, 1907, 1908, 1909, 1910],
@@ -71,5 +71,8 @@
   "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
   "dispatchedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-dispatched-checkpoint.json",
   "visibleThinkingStateCheckpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
-  "nextSafeAction": "Remote-archive all visible variants and the unsent tab-31 draft; use Thinking for every future Meta send."
+  "variantArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/visible-variant-archive-manifest.json",
+  "variantArchiveFileCount": 36,
+  "variantArchiveInventorySha256": "0F6EBAA2EE0E959CFD9D907797697AAF8378B90D834B0F37E7B98F98C7BBDDC4",
+  "nextSafeAction": "Remote-verify the rendered variant archive, then stage scene 1910 in a fully archived lane with Meta Thinking mode and ordered anchors 938, 936, 937."
 }
