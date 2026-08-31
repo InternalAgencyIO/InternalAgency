@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 473,
-  "state": "duplicate-safe-croatia-cyprus-x-post-reserved-awaiting-staging",
+  "state": "duplicate-safe-croatia-cyprus-x-composer-exactly-staged-awaiting-staging-remote-verification",
   "reservedAtUtc": "2026-08-31T18:35:39.9825004Z",
   "accountVerification": {
     "url": "https://x.com/dogramaci",
@@ -70,5 +70,10 @@
   "reservationRemoteVerifiedCommit": "538b46e1339a2e9f4011bd507f390eefe4c9f684",
   "reservationRemoteVerifiedAtUtc": "2026-08-31T18:45:34.3315783Z",
   "preparationManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/x-publication-preparation-manifest.json",
-  "nextSafeAction": "Commit and push the reservation verification record, prove the new head is again at local, remote and draft PR parity, then return the same X tab to one fresh composer, attach the three files in reserved order, set the exact three alt texts and Made with AI disclosure, verify the complete visible draft, archive and remote-verify the staged composer, and post exactly once only if every live gate still passes."
+  "stagedComposerCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-composer-staged-awaiting-post-confirmation-checkpoint.json",
+  "stagedMediaCount": 3,
+  "stagedAltTextCount": 3,
+  "stagedMadeWithAiLabelVisible": true,
+  "stagedPostEnabled": true,
+  "nextSafeAction": "Commit and remote-verify the exact staged composer, then recheck every live X gate and click Post exactly once only if all remain true."
 }
