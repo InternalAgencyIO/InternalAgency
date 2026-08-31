@@ -10110,7 +10110,7 @@
   },
   "latestBatch471BosniaAndHerzegovinaPreparation": {
     "schemaVersion": 1,
-    "status": "four-prompts-prepared-awaiting-remote-parity-and-browser-staging",
+    "status": "four-prompts-prepared-remote-pr-lfs-parity-verified-awaiting-browser-staging",
     "preparedAtUtc": "2026-08-31T13:15:34.0224551Z",
     "batch": 471,
     "country": "Bosnia and Herzegovina",
@@ -10140,6 +10140,10 @@
     "xPostAuthorized": false,
     "checkpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-europe-gap-fill-prompts-prepared-checkpoint.json",
     "remoteVerifiedBaseHead": "7d7cdd3a18b34d5e09bb821a36a373ca29e01eb0",
-    "nextSafeAction": "Commit and remote-verify the prepared checkpoint, then inspect actual tabs and stage exactly four visible Meta Thinking composers plus one blank @dogramaci X composer. Attach anchors 938, 936 and 937 exactly once each in that order before any Send; stop if any gate fails."
+    "remoteVerifiedCheckpointCommit": "7865871cef63dd530dde5443ffc8b5f06954fbe5",
+    "remoteVerifiedAtUtc": "2026-08-31T13:23:45.3047960Z",
+    "remoteBranchAndPrHeadMatched": true,
+    "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-preflight-git-lfs-remote-verification-checkpoint.json",
+    "nextSafeAction": "Commit and remote-verify the preflight verification record, then inspect actual tabs and stage exactly four visible Meta Thinking composers plus one blank @dogramaci X composer. Attach anchors 938, 936 and 937 exactly once each in that order before any Send; stop if any gate fails."
   }
 }
