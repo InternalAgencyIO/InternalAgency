@@ -215,7 +215,7 @@
     }
   ],
   "pendingPost": {
-    "status": "reserved-awaiting-visible-composer-staging",
+    "status": "visible-composer-staged-final-post-authorized-awaiting-click",
     "preparedAtUtc": "2026-08-31T08:31:28.9034201Z",
     "account": "@dogramaci",
     "batches": [468, 467],
@@ -288,10 +288,17 @@
     },
     "signedInAccountVerifiedAtPreMutation": "@dogramaci",
     "visibleAccountEvidence": "The current in-app X composer snapshot exposes signed-in profile links to /dogramaci.",
-    "stagedAtUtc": null,
-    "stagedAttachmentCount": 0,
-    "altTextCompleted": false,
-    "finalClickConfirmed": false,
+    "stagedAtUtc": "2026-08-31T08:36:32.0612488Z",
+    "stagedAttachmentCount": 3,
+    "altTextCompleted": true,
+    "stagedEvidence": {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/x-bulgaria-serbia-composer-staged-before-post.png",
+      "sha256": "6264BE87FD77321C15C19A1C53E19A75DA1183A8E4EDDE5648D7A1EFF217361A",
+      "byteLength": 95043,
+      "dimensions": "737x950"
+    },
+    "finalClickConfirmed": true,
+    "finalClickAuthorization": "User said 'send authorized go' after the exact reserved transmission and next safe action were reported.",
     "postUrl": null,
     "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-serbia-x-post-reservation-checkpoint.json"
   },
