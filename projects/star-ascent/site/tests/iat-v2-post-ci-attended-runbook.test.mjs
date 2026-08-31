@@ -132,8 +132,8 @@ test("attended runbook gates the runtime, shell, browser storage, and finalized 
   assert.match(runbook, /pinned to the installed `Ubuntu-24\.04` WSL2 distribution, POSIX user `a` \(UID 1000\)/u);
   assert.match(runbook, /Git Bash, another WSL distribution or user[\s\S]*is a stop/u);
   assert.match(runbook, /readable\/writable `\/dev\/tty`/u);
-  assert.match(runbook, /helper submits the authority mutation exactly once/u);
-  assert.match(runbook, /successful finalized authority readback is necessary but not sufficient/u);
+  assert.match(runbook, /It submits that mutation once and follows it only with read-only finalized reconciliation/u);
+  assert.match(runbook, /Even after helper success, do not request the upgrade signature until the upgrade console independently re-observes/u);
   assert.match(runbook, /\*\*DO NOT RESUBMIT\*\*/u);
   assert.match(runbook, /upgrade console independently re-observes the same exact buffer at finalized commitment/u);
 });
@@ -148,10 +148,10 @@ test("buffer lane pins the exact WSL2 toolchain, Devnet genesis, and clean launc
     "v24.19.0",
     "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
     "125,989,464",
-    "/mnt/c/Program Files/Git/mingw64/bin/git.exe",
-    "git version 2.55.0.windows.5",
-    "d1b62b94aa15e5c3bbcdd6440d5f716f78daa2736a951b0f1fad11d38c5f16da",
-    "4,378,456",
+    "/usr/bin/git",
+    "git version 2.43.0",
+    "2a8c18fbf43da9f692d75474c72bea9dfd796c260b0f3dfe456376abc3bbd668",
+    "4,066,232",
     "/home/a/.local/share/solana/install/releases/3.1.10/solana-release/bin/solana",
     "solana-cli 3.1.10 (src:7bc9c805; feat:1620780344, client:Agave)",
     "aacc6871e8ff199608987f0364f2ed9e239a32e1e0548f1ae4477e0e533e1dea",
@@ -165,7 +165,10 @@ test("buffer lane pins the exact WSL2 toolchain, Devnet genesis, and clean launc
     assert.ok(runbook.includes(exact), `runbook must include exact pin: ${exact}`);
   }
   assert.match(runbook, /\/usr\/bin\/bash --noprofile --norc [^\n]*\/scripts\/rebuild-iat-v2-devnet-buffer-fresh\.sh/u);
-  assert.match(runbook, /"BUFFER_ADDRESS=\$BufferAddress" \/usr\/bin\/bash --noprofile --norc [^\n]*\/scripts\/handoff-iat-v2-devnet-buffer\.sh/u);
+  assert.match(runbook, /"BUFFER_ADDRESS=\$BufferAddress" \/usr\/bin\/bash --noprofile --norc -c \$HandoffLauncher iat-v2-captured-handoff-launcher/u);
+  assert.match(runbook, /expected_sha256='58bbeb070efecb361ebee5bd27c8525809574956a5a5cdde25578cf282da13ab'/u);
+  assert.match(runbook, /expected_bytes='61177'/u);
+  assert.match(runbook, /The captured-source launcher is mandatory: direct mutable-path execution is rejected/u);
   assert.match(runbook, /`BUFFER_ADDRESS` is admitted only on this handoff command/u);
 });
 
@@ -189,7 +192,10 @@ test("runbook freezes the one-use CAS and the two fresh-buffer terminal gates", 
   assert.match(runbook, /10,000,000-lamport single-handoff fee floor/u);
   assert.match(runbook, /`TRANSFER-<BUFFER_ADDRESS>-<FIRST_12_ARTIFACT_SHA256_HEX>`/u);
   assert.doesNotMatch(runbook, /`TRANSFER-7XZ`/u);
-  assert.match(runbook, /every fallible tool\/genesis check before it atomically creates/u);
+  assert.match(
+    runbook,
+    /atomically creates the durable target-keyed reservation[\s\S]*?re-inspects the record through the pinned CAS directory[\s\S]*?opens the exact record on FD11[\s\S]*?checks the digest[\s\S]*?repeats the pinned runtime, payer address, finalized balance, buffer, and CAS checks immediately before the sole signer mutation/u,
+  );
   assert.match(runbook, /historical buffer `Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6` is retained/u);
   assert.match(runbook, /never closes or mutates it/u);
   assert.doesNotMatch(runbook, /program close|close the old buffer|reclaim its lamports[^.]*\b(?:may|will|does)\b/iu);

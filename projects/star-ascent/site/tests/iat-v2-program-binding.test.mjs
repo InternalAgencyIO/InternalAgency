@@ -101,15 +101,29 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
     "ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9",
   );
 
-  for (const path of [
-    "scripts/rebuild-iat-v2-devnet-buffer-fresh.sh",
-    "scripts/handoff-iat-v2-devnet-buffer.sh",
-  ]) {
+  const rebuildPath = "scripts/rebuild-iat-v2-devnet-buffer-fresh.sh";
+  const rebuildSource = readSiteSource(rebuildPath);
+  assert.match(rebuildSource, /iat-v2-devnet-buffer-preflight\.mjs verify-recovery/u, `${rebuildPath} lost CI evidence verification`);
+  assert.match(rebuildSource, /EXPECTED_HASH="\$\{binding_fields\[0\]\}"/u, `${rebuildPath} lost verified dynamic hash binding`);
+  assert.match(rebuildSource, /EXPECTED_BYTES="\$\{binding_fields\[1\]\}"/u, `${rebuildPath} lost verified dynamic byte binding`);
+  assert.doesNotMatch(rebuildSource, /EXPECTED_HASH="[0-9a-f]{64}"/u, `${rebuildPath} must not pin an obsolete artifact`);
+
+  const handoffPath = "scripts/handoff-iat-v2-devnet-buffer.sh";
+  const handoffSource = readSiteSource(handoffPath);
+  assert.doesNotMatch(handoffSource, /iat-v2-devnet-buffer-preflight\.mjs verify/u, `${handoffPath} must not restore mutable-path preflight execution`);
+  assert.match(handoffSource, /EXPECTED_HASH="771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01"/u, `${handoffPath} lost the immutable migration artifact hash`);
+  assert.match(handoffSource, /EXPECTED_BYTES="649680"/u, `${handoffPath} lost the immutable migration artifact byte count`);
+  assert.match(handoffSource, /iat_v2_run_runtime_binding_verifier/u, `${handoffPath} lost sealed runtime-binding verification`);
+  assert.match(handoffSource, /IAT_V2_RUNTIME_BINDING_STDIN_CLI=iat-v2-devnet-buffer-runtime-binding-stdin\/v1/u, `${handoffPath} lost the captured verifier protocol`);
+  assert.match(handoffSource, /-- node --input-type=module - verify/u, `${handoffPath} lost sealed captured-source verification`);
+  assert.match(handoffSource, /"\$\{binding_fields\[0\]\}" == "\$EXPECTED_HASH"/u, `${handoffPath} lost runtime artifact-hash equality`);
+  assert.match(handoffSource, /"\$\{binding_fields\[1\]\}" == "\$EXPECTED_BYTES"/u, `${handoffPath} lost runtime artifact-byte equality`);
+  assert.match(handoffSource, /RUNTIME_EVIDENCE_MANIFEST_SHA256="\$\{binding_fields\[2\]\}"/u, `${handoffPath} lost runtime evidence binding`);
+  assert.match(handoffSource, /runtime binding artifact or evidence tuple differs from the hardcoded migration tuple/u, `${handoffPath} lost migration tuple fail-closed behavior`);
+  assert.match(handoffSource, /runtime-bound handoff source differs from the exact bytes parsed by Bash/u, `${handoffPath} lost captured-source identity enforcement`);
+
+  for (const path of [rebuildPath, handoffPath]) {
     const source = readSiteSource(path);
-    assert.match(source, /iat-v2-devnet-buffer-preflight\.mjs verify/u, `${path} lost CI evidence verification`);
-    assert.match(source, /EXPECTED_HASH="\$\{binding_fields\[0\]\}"/u, `${path} lost verified dynamic hash binding`);
-    assert.match(source, /EXPECTED_BYTES="\$\{binding_fields\[1\]\}"/u, `${path} lost verified dynamic byte binding`);
-    assert.doesNotMatch(source, /EXPECTED_HASH="[0-9a-f]{64}"/u, `${path} must not pin an obsolete artifact`);
     assert.doesNotMatch(source, new RegExp(currentSha256, "u"), `${path} must not stage the incompatible artifact`);
     assert.match(source, /--url devnet/u, `${path} must stay Devnet-only`);
     assert.doesNotMatch(source, /mainnet-beta|api\.mainnet/u, `${path} must not gain a Mainnet route`);
