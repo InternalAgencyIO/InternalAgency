@@ -4,7 +4,7 @@
   "country": "Croatia",
   "scene": 1915,
   "retry": 1,
-  "state": "meta-thinking-retry-1-restaged-after-explicit-full-tab-reset-awaiting-remote-verification-before-send",
+  "state": "meta-thinking-retry-1-dispatched-once-rendering",
   "preparedAtUtc": "2026-08-31T15:34:52.1284354Z",
   "providerUrl": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3",
   "tabId": "1",
@@ -44,7 +44,11 @@
   "remoteVerifiedStagingCommit": "41f0e28eebcc4180166045db114c24735eaf395a",
   "browserTabInventoryLossStopCheckpoint": "assets/lore/starlight-era/batch-472-croatia-browser-tab-inventory-loss-stop-checkpoint.json",
   "fullTabResetRestagedCheckpoint": "assets/lore/starlight-era/batch-472-croatia-full-tab-reset-restaged-checkpoint.json",
+  "retryDispatchedCheckpoint": "assets/lore/starlight-era/batch-472-croatia-scene-1915-first-retry-dispatched-checkpoint.json",
   "restagingScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1915-meta-thinking-retry-1-restaged-after-full-tab-reset-before-send.png", "sha256": "B81CC4535E8C8A0B0875162A3763FAAEA175B4898162AF7D4BB3284455E5D7C5", "bytes": 163358},
-  "authorization": {"freshUserActionTimeAuthorizationCurrent": true, "explicitFullTabResetAndReopenAuthorized": true, "mayClickSendAfterRemoteAndFreshLiveGate": true},
-  "nextSafeAction": "Commit and remote-verify the full-tab reset restaging evidence, then relist the actual five tabs and recheck exact retry prompt, anchors 938, 936, 937, Thinking, leesha007, enabled Send, blank @dogramaci composer and current authorization before exactly one retry Send."
+  "retry1ClickedAtUtc": "2026-08-31T16:11:46.657Z",
+  "retry1SendClicks": 1,
+  "retry1RepeatSendClicks": 0,
+  "authorization": {"freshUserActionTimeAuthorizationConsumed": true, "explicitFullTabResetAndReopenAuthorized": true, "mayClickSendAfterRemoteAndFreshLiveGate": false},
+  "nextSafeAction": "Archive the scene 1915 retry-1 terminal result without resending. If it is technically valid media, select it and issue the scene's one remaining ChatGPT shortening pass exactly once; if it meets a hard failure condition, evaluate whether the second and final Meta retry is justified."
 }

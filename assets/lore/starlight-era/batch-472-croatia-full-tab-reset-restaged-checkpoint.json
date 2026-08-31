@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 472,
   "country": "Croatia",
-  "state": "explicit-full-tab-reset-complete-scene-1915-retry-1-restaged-before-send",
+  "state": "explicit-full-tab-reset-complete-scene-1915-retry-1-dispatched-once-rendering",
   "recordedAtUtc": "2026-08-31T16:08:27.8984364Z",
   "authority": {
     "userDirective": "fix ur tabs close all reopen when needed",
@@ -37,9 +37,12 @@
     ],
     "thinkingVisible": true,
     "sendEnabled": true,
-    "sendClicks": 0,
+    "sendClicks": 1,
+    "repeatSendClicks": 0,
+    "clickedAtUtc": "2026-08-31T16:11:46.657Z",
     "stagingScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1915-meta-thinking-retry-1-restaged-after-full-tab-reset-before-send.png", "sha256": "B81CC4535E8C8A0B0875162A3763FAAEA175B4898162AF7D4BB3284455E5D7C5", "bytes": 163358}
   },
   "xGate": {"account": "@dogramaci", "composerBlank": true, "postDisabled": true, "postClicks": 0},
-  "nextSafeAction": "Commit and remote-verify this checkpoint and screenshot. Then relist all five tabs and recheck the exact retry prompt, three ordered attachments, Thinking, accounts, enabled Send, blank X and current authorization before exactly one scene 1915 retry Send."
+  "retryDispatchedCheckpoint": "assets/lore/starlight-era/batch-472-croatia-scene-1915-first-retry-dispatched-checkpoint.json",
+  "nextSafeAction": "Archive scene 1915 retry-1 terminal evidence without resending; do not touch scenes 1916-1918 or X."
 }
