@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "batch": 471,
+  "country": "Bosnia and Herzegovina",
+  "scene": 1912,
+  "state": "first-bounded-moderation-compatible-retry-prepared-not-dispatched",
+  "preparedAtUtc": "2026-08-31T13:44:00.0000000Z",
+  "sourceOccurrence": {
+    "attempt": 0,
+    "providerUrl": "https://www.meta.ai/prompt/e4bfe8e2-88cf-4a32-9d94-980a53896814",
+    "promptSha256": "084518AE9AA27E7CC4D81322A8A0540F5676F0D2099FD3DADCAE4883C1B67F63",
+    "classification": "explicit-no-image-refusal",
+    "rawBytes": 0,
+    "exactRefusal": "I can't create that exact image as described — the combination of fetish-adjacent styling, very short upper-thigh hems with an emphasis on leg styling / bare-skin intervals, and the knee-high hosiery focus makes it overly sexualized, which I can't generate even when it's described as opaque and non-explicit.",
+    "terminalScreenshot": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-occurrence-0-terminal-explicit-no-image-refusal.png",
+    "terminalScreenshotSha256": "676B9BE61936685A569F0A757DD041A8846B159F70C7906D620AD5CA356BD8C7",
+    "terminalScreenshotBytes": 106186
+  },
+  "retryPolicy": {
+    "reasonEligible": "explicit refusal produced no image",
+    "maximumMetaRetriesPerScene": 2,
+    "retryOrdinal": 1,
+    "remainingMetaRetriesAfterDispatch": 1,
+    "neutralization": "Remove fetish-adjacent terminology, upper-thigh and bare-skin emphasis, and hosiery focus. Preserve adult cast, identity, location, public-safe fashion, close relationship beat and general RAZE branding without weakening safety.",
+    "providerMode": "Thinking",
+    "orderedAnchors": [938, 936, 937]
+  },
+  "retryPrompt": "SCENE 1912 - RETRY 1 - BOSNIA AND HERZEGOVINA, MOSTAR GUARDED NERETVA TERRACE FACING STARI MOST. Create one wholly new original photorealistic cinematic vertical 9:16 adult high-fashion travel editorial. Use the three attached images exactly once each in order 938, 936, 937 only as face-identity anchors. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE, and never clone, merge, replace or age-shift a face. Place the adjacent quartet well inside a broad dry level fully guarded secular river-view terrace, with emerald Neretva water, pale stone banks and the complete arch of Stari Most clearly behind them. Use a close three-quarter fashion composition showing all four complete faces through lower calves. Dress them in four distinct elegant, securely lined, fully opaque contemporary cocktail looks: Alia in a turquoise-gold fitted top with a tailored above-knee copper skirt, Radiance in a pearl-crimson fitted cocktail dress, Ellie in a cobalt-black cropped jacket with an ivory tailored skort, and ECE in an emerald-plum fitted jacket with tailored short trousers ending above the knee. Use restrained minimalist architectural heels and one subtle exact readable RAZE metal tag on each look, spelled R-A-Z-E, with no other text or logos. Radiance gives Alia one brief affectionate cheek kiss, Ellie answers with a playful rival glance, ECE catches Ellie's hand, and all four share one clean linked-hand chain. Keep the mood warm, consensual, sophisticated and public-safe. No sexualized emphasis, underwear, exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, water entry, edge approach, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+  "retryPromptSha256": "62A0B08F8274CE584F9A70E4553C93375FCF96976C92831DC692BDD9AC9ED7FF",
+  "dispatchGate": {
+    "remoteCheckpointVerified": false,
+    "actualTabInspected": false,
+    "signedInMetaAccountVerified": false,
+    "visibleThinkingVerified": false,
+    "orderedAnchorsVisible": false,
+    "exactPromptVerified": false,
+    "sendEnabled": false,
+    "authorizationCurrent": true,
+    "mayClickSend": false
+  },
+  "nextSafeAction": "Compute and verify the retry prompt hash, commit and push this checkpoint plus the exact first-refusal evidence, verify remote/PR/LFS parity, then use only tab 40. Fill the exact retry prompt, attach 938, 936 and 937 in that order, verify visible Thinking and leesha007, and click Send once. Never resend scenes 1911, 1913 or 1914."
+}
