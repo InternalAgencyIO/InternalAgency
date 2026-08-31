@@ -2,13 +2,15 @@
   "schemaVersion": 1,
   "batch": 467,
   "country": "Serbia",
-  "state": "prompts_prepared_awaiting_action_time_confirmation",
+  "state": "prompts_prepared_remote_verified_awaiting_browser_preflight_and_action_time_confirmation",
   "preparedAtUtc": "2026-08-31T05:41:53.1725047Z",
   "authority": {
     "source": "direct user instruction in the current controlling thread",
     "directive": "European country-pair gap-fill run using four Meta lanes, at most two Meta retries per scene, one strong ChatGPT hemline-shortening edit per technically valid Meta image, archive all used and unused outputs, and keep X pair publication moving",
     "supersedes": "Batch 466 nextAuthorizedCountry Republic of the Congo",
     "remoteVerifiedBaseHead": "a15dbd20b8250dc81febbff8186d3bf1ac36f8f8",
+    "remoteVerifiedCheckpointCommit": "4d17372417922293df53099b17aa72a537a3db4f",
+    "remoteVerifiedAtUtc": "2026-08-31T05:45:48.8563648Z",
     "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
   },
   "gapRationale": {
@@ -167,7 +169,7 @@
     ]
   },
   "dispatchGate": {
-    "remoteCheckpointVerified": false,
+    "remoteCheckpointVerified": true,
     "actualBrowserTabsInspected": false,
     "signedInMetaComposerVerified": false,
     "anchorsVisibleInExactOrder": false,
