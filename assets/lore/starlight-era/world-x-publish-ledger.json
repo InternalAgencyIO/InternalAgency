@@ -10777,7 +10777,7 @@
   },
   "latestBatch475EstoniaPreparation": {
     "schemaVersion": 1,
-    "status": "four-lanes-exactly-staged-git-lfs-remote-and-draft-pr-parity-verified-awaiting-final-visible-dispatch-gate",
+    "status": "four-meta-thinking-scenes-dispatched-exactly-once-rendering",
     "preparedAtUtc": "2026-08-31T21:13:01.0864145Z",
     "batch": 475,
     "country": "Estonia",
@@ -10803,7 +10803,7 @@
     "chatgptStrongShorteningPassesPerTechnicallyValidSelectedMetaOccurrence": 1,
     "relaxedAcceptance": "After one strong ChatGPT shortening request, accept nearly every public-safe non-corrupt result; reject only corrupt, duplicate, unsafe or explicit, no-image, or materially wrong-cast outcomes.",
     "freshMetaSendAuthorizationReceived": true,
-    "metaDispatchPermittedAfterAllGates": false,
+    "metaDispatchPermittedAfterAllGates": true,
     "grokState": "paused-until-credits-return",
     "xComposerBlank": true,
     "checkpoint": "assets/lore/starlight-era/batch-475-estonia-europe-gap-fill-prompts-prepared-checkpoint.json",
@@ -10826,12 +10826,19 @@
     "anchorsVisibleInExactOrderAllFour": true,
     "exactPromptsVerifiedAllFour": true,
     "sendButtonsEnabledAllFour": true,
-    "sendClicks": 0,
+    "sendClicks": 4,
     "repeatSendClicks": 0,
     "xPostClicks": 0,
     "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-staging-git-lfs-remote-verification-checkpoint.json",
     "stagingRemoteVerifiedCommit": "c437aadadb1443063c864d860016c375988e23c3",
     "stagingRemoteVerifiedAtUtc": "2026-08-31T21:32:51.6369419Z",
-    "nextSafeAction": "Commit and remote-verify the staging-parity record, then re-inspect the same five actual tabs and send each Meta lane exactly once only if every visible gate remains true."
+    "dispatchedCheckpoint": "assets/lore/starlight-era/batch-475-estonia-four-lanes-dispatched-checkpoint.json",
+    "providerUrls": [
+      "https://www.meta.ai/prompt/0fb43b05-351f-4628-8754-d02944136b68",
+      "https://www.meta.ai/prompt/9a5cfdfc-ac4b-4597-ab60-c16fc4e29abd",
+      "https://www.meta.ai/prompt/aac53b24-30a4-4cd4-bd11-a87826e31d42",
+      "https://www.meta.ai/prompt/e271009b-2b2f-4dd4-a59d-7c7aea9fe043"
+    ],
+    "nextSafeAction": "Commit and push the exact dispatch record, then monitor these four existing provider URLs only and never click Send again."
   }
 }
