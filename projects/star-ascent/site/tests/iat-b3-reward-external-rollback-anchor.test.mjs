@@ -304,7 +304,7 @@ test("one exact owner-key-signed anchor advances both supplied monotonic states 
     "externalMonotonicityVerified",
     "externalRollbackProtectionVerified",
     "runtimeIntegrationVerified",
-    "independentReviewAccepted",
+    "sourceBoundAutomatedDirectEvidenceVerified",
     "activationReady",
   ]) assert.equal(receipt[flag], false, flag);
   assert.equal(validateRewardRollbackAnchorState(context.anchorState), context.anchorState);

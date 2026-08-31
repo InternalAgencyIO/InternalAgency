@@ -11,12 +11,12 @@ const sandbox = mkdtempSync(join(tmpdir(), "iat-v2-ceremony-review-"));
 const reviewPath = "launch/iat-v2-ceremony-review.template.json";
 const validatorPath = "scripts/validate-iat-v2-ceremony-review.mjs";
 const sourcePaths = [
-  "scripts/normalize-accountability-label.mjs",
   "launch/iat-v2-mainnet-readiness-gate.json",
   "launch/iat-v2-mainnet-stage-journal.template.json",
   "engagement/iat-economic-policy.v2.json",
   "launch/iat-v2-allocation-plan.template.json",
   "public/audits/iat-v2-remediation-20260802/manifest.json",
+  "launch/iat-v2-current-source-clearance.json",
   "launch/iat-v2-local-time-gate-proof.json",
 ];
 const clone = (value) => structuredClone(value);
@@ -58,10 +58,16 @@ function readyFixture() {
   gate.schedule.publishedAtUtc = new Date().toISOString();
   gate.schedule.scheduledAtUtc = new Date(Date.now() + 60 * 60_000).toISOString();
   gate.gates.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
+  gate.gates.automatedSourceReceiptStateObservationComplete = true;
   writeJson(gatePath, gate);
   const journal = JSON.parse(readFileSync(join(sandbox, journalPath), "utf8"));
   journal.status = "ARMED";
   writeJson(journalPath, journal);
+  const clearancePath = "launch/iat-v2-current-source-clearance.json";
+  const clearance = JSON.parse(readFileSync(join(sandbox, clearancePath), "utf8"));
+  clearance.status = "CLEAR";
+  for (const field of Object.keys(clearance.clearance)) clearance.clearance[field] = true;
+  writeJson(clearancePath, clearance);
 
   const review = clone(baseline);
   review.status = "READY";
@@ -71,25 +77,22 @@ function readyFixture() {
     policySha256: "engagement/iat-economic-policy.v2.json",
     allocationPlanSha256: "launch/iat-v2-allocation-plan.template.json",
     remediationAuditSha256: "public/audits/iat-v2-remediation-20260802/manifest.json",
+    currentSourceClearanceSha256: "launch/iat-v2-current-source-clearance.json",
     localTimeGateProofSha256: "launch/iat-v2-local-time-gate-proof.json",
   };
   for (const [field, sourcePath] of Object.entries(digestSources)) review.artifactDigests[field] = sha256(sourcePath);
-  Object.assign(review.participants.soleTrezorOperator, {
+  Object.assign(review.signatureGate.soleTrezorOperator, {
     label: "Attended Model T operator",
     publicAddress: gate.funding.publicAddress,
     devicePathReviewed: true,
   });
-  Object.assign(review.participants.independentVerifier, {
-    label: "Independent evidence verifier",
-    reviewedArtifacts: true,
-    reviewedStagePlan: true,
-  });
-  Object.assign(review.review, {
+  Object.assign(review.observation, {
     releaseArtifactsRegeneratedAfterFundingAndScheduling: true,
-    replacementUtcWindowReviewed: true,
-    currentSbfDigestReviewed: true,
-    currentSignedDevnetEvidenceReviewed: true,
-    readyAtUtc: new Date().toISOString(),
+    replacementUtcWindowObserved: true,
+    currentSbfDigestObserved: true,
+    currentSignedDevnetReceiptObserved: true,
+    stagePlanStateObserved: true,
+    observedAtUtc: new Date().toISOString(),
   });
   return review;
 }
@@ -103,7 +106,7 @@ try {
   expectFail("HOLD retaining a digest", staleHold, "HOLD must clear every artifact digest");
 
   const secretField = clone(baseline);
-  secretField.participants.soleTrezorOperator.derivationPath = "redacted";
+  secretField.signatureGate.soleTrezorOperator.derivationPath = "redacted";
   expectFail("credential-shaped field", secretField, "credential-bearing field");
 
   const falseSeparation = clone(baseline);
@@ -118,24 +121,26 @@ try {
   expectFail("source digest drift", driftedDigest, "policySha256 must match the canonical V2 artifact");
 
   const mismatchedOperator = clone(ready);
-  mismatchedOperator.participants.soleTrezorOperator.publicAddress = "Vote111111111111111111111111111111111111111";
+  mismatchedOperator.signatureGate.soleTrezorOperator.publicAddress = "Vote111111111111111111111111111111111111111";
   expectFail("unbound operator address", mismatchedOperator, "operator address must match the reviewed mainnet funding/administrator address");
 
-  const sameReviewer = clone(ready);
-  sameReviewer.participants.independentVerifier.label = sameReviewer.participants.soleTrezorOperator.label;
-  expectFail("operator reused as verifier", sameReviewer, "verifier distinct from the sole-Trezor operator");
+  const injectedReviewer = clone(ready);
+  injectedReviewer.signatureGate.independentVerifier = { role: "INDEPENDENT_VERIFIER" };
+  expectFail("human reviewer injection", injectedReviewer, "signatureGate must contain only the sole Trezor operator");
 
-  const disguisedSameReviewer = clone(ready);
-  disguisedSameReviewer.participants.independentVerifier.label = "  ATTENDED\u200b   MODEL T OPERATOR  ";
-  expectFail(
-    "operator reused through whitespace and format characters",
-    disguisedSameReviewer,
-    "accountability-label normalization",
-  );
+  const missingSignedDevnetObservation = clone(ready);
+  missingSignedDevnetObservation.observation.currentSignedDevnetReceiptObserved = false;
+  expectFail("missing signed Devnet receipt observation", missingSignedDevnetObservation, "signed Devnet receipt observation");
 
-  const missingSignedDevnetReview = clone(ready);
-  missingSignedDevnetReview.review.currentSignedDevnetEvidenceReviewed = false;
-  expectFail("missing signed Devnet review", missingSignedDevnetReview, "current signed Devnet evidence review");
+  const assertionOnlySbf = clone(ready);
+  const clearancePath = "launch/iat-v2-current-source-clearance.json";
+  const clearance = JSON.parse(readFileSync(join(sandbox, clearancePath), "utf8"));
+  clearance.clearance.currentSourceSbfComplete = false;
+  writeJson(clearancePath, clearance);
+  assertionOnlySbf.artifactDigests.currentSourceClearanceSha256 = sha256(clearancePath);
+  expectFail("assertion-only SBF observation", assertionOnlySbf, "source-bound SBF observation");
+  clearance.clearance.currentSourceSbfComplete = true;
+  writeJson(clearancePath, clearance);
 
   const holdJournal = JSON.parse(readFileSync(join(sandbox, "launch/iat-v2-mainnet-stage-journal.template.json"), "utf8"));
   holdJournal.status = "HOLD";
@@ -151,7 +156,7 @@ try {
   missingCeremonyTime.artifactDigests.readinessGateSha256 = sha256("launch/iat-v2-mainnet-readiness-gate.json");
   expectFail("READY without exact ceremony time", missingCeremonyTime, "exact replacement UTC ceremony time");
 
-  console.log("IAT V2 ceremony-review regression passed: HOLD hygiene, exact UTC ceremony scheduling, V2-only source binding, sole-Trezor truthfulness, independent verifier separation, signed-Devnet review, stage arming, credential rejection, and digest drift all fail closed.");
+  console.log("IAT V2 ceremony-review regression passed: HOLD hygiene, exact UTC scheduling, V2-only source binding, sole-Model-T signature truth, automated source/receipt/state observation, stage arming, credential rejection, and digest drift all fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

@@ -32,10 +32,10 @@ created, signed, or deployed. The public proof page labels the Mainnet mint
 published, and the Mainnet readiness record remains `HOLD` with
 `mainnetExecutionAuthorized: false`. These mutually consistent records support
 creating B3 as Token-2022 from inception instead of migrating an existing mint.
-They do not independently prove the absence of an undisclosed mint, so the
+They do not by themselves prove the absence of an undisclosed mint, so the
 following read-only reconciliation remains mandatory:
 
-- independently query Mainnet for any claimed canonical IAT mint and program;
+- query Mainnet through exact source-bound endpoint evidence for any claimed canonical IAT mint and program;
 - reconcile GitHub, local source, public website, domains, Devnet evidence, and
   any live addresses;
 - publish exact slot, commitment, RPC method, account bytes, and hashes;
@@ -54,7 +54,7 @@ State: **OPEN**
 - prove ordinary and confidential transfers both invoke Transfer Hook;
 - prove the hook cannot read a confidential amount;
 - prove required extensions coexist in the exact deployed version;
-- independently reproduce the source-enforced exact mint-extension allowlist
+- automatically reproduce the source-enforced exact mint-extension allowlist
   in the pinned SBF and public validator evidence; required-extension presence
   alone is insufficient, and Permanent Delegate, permissioned burn, mint-close,
   pausable, or any other unapproved authority-bearing extension is a hard
@@ -65,7 +65,7 @@ State: **OPEN**
 
 State: **IN PROGRESS — SBF + DISPOSABLE LOCAL-VALIDATOR REHEARSED**
 
-- retain and independently reproduce the completed SBF and disposable
+- retain and reproduce from exact bound source the completed SBF and disposable
   local-validator proof for the native Transfer Hook adapter;
 - prove the exact half-open Friday 00:01 to Saturday 00:01 boundary, including
   `00:00:59`/`00:01:00`, negative-time reference vectors, and stale-record
@@ -99,7 +99,7 @@ State: **OPEN**
 - keep every V2 parity row green or record an explicit owner-authorized cut;
 - reconcile supply, allocations, vesting, positions, reservations, agencies,
   eligibility commitments, tiebreaks, and inactive feature gates;
-- if migration is required, implement two independent exporters and importers;
+- if migration is required, implement two separately failing exporters and importers;
 - publish a canonical manifest, Merkle root, and zero-difference reconciliation;
 - prove no duplicate canonical supply can circulate under the chosen model.
 - freeze the exact core-custody definition and prove the daily 10% post-burn
@@ -126,7 +126,7 @@ State: **OPEN**
   Sybil, tie, proportional-conservation, zero-follower, and idempotence tests;
 - publish reproducible binaries, IDLs, addresses, transaction signatures, and logs.
 
-## Gate 6 — independent review
+## Gate 6 — automated multi-domain direct evidence
 
 State: **OPEN**
 
@@ -144,13 +144,14 @@ State: **OPEN**
 State: **HOLD**
 
 - final source commit and reproducible binary hashes frozen;
-- exact mint-extension configuration independently reproduced;
+- exact mint-extension configuration reproducibly observed from bound source and bytes;
 - mint, freeze, hook-update, and program-upgrade authority plan approved;
 - signer, hardware-device, funding, rollback, incident, and abort procedures rehearsed;
 - website and explorer display only verified addresses and claims;
 - public launch packet contains supply, privacy, cost, randomness, lockdown, and
   migration limitations in plain language;
-- independent reviewers sign the source-bound evidence packet.
+- automated security, economic, privacy, and legal evidence receipts bind the
+  exact source, state, and endpoints; no human reviewer signature is required.
 
 ## Gate 8 — Mainnet execution
 
@@ -173,4 +174,5 @@ capture before requesting any signature.
 7. measure the complete law, faction, retained-V2, mint, and state-account peak
    against the accepted 3 SOL ceiling;
 8. determine the live canonical-mint state and migration consequence;
-9. begin independent review only from pinned, reproducible artifacts.
+9. begin automated multi-domain direct-evidence collection only from pinned,
+   reproducible artifacts.

@@ -104,9 +104,9 @@ try {
   );
   writeFileSync(checklistPath, `${JSON.stringify(hold, null, 2)}\n`, "utf8");
   assertRejected(
-    "a HOLD checklist that grants publication signing authority",
-    (fixture) => { fixture.participants.publicationOperator.hasNoSigningAuthority = false; },
-    "publication operator must affirm hasNoSigningAuthority: true",
+    "a HOLD checklist with an injected human reviewer",
+    (fixture) => { fixture.participants.humanReviewer = { role: "VERIFIER" }; },
+    "participants must contain only its canonical reviewed fields",
   );
   writeFileSync(checklistPath, `${JSON.stringify(hold, null, 2)}\n`, "utf8");
   assertRejected(
@@ -139,24 +139,21 @@ try {
 
   const ready = JSON.parse(JSON.stringify(hold));
   ready.status = "READY";
-  const participants = ["mintAuthoritySigner", "feePayerSigner", "independentVerifier", "publicationOperator"];
+  const participants = ["mintAuthoritySigner", "feePayerSigner"];
   for (const [index, participant] of participants.entries()) ready.participants[participant].publicAddress = address(index + 1);
   ready.participants.feePayerSigner.publicAddress = ready.participants.mintAuthoritySigner.publicAddress;
   ready.participants.mintAuthoritySigner.devicePathReviewed = true;
   ready.participants.feePayerSigner.devicePathReviewed = true;
-  ready.participants.independentVerifier.reviewedManifest = true;
-  ready.participants.independentVerifier.reviewedDestinations = true;
-  ready.participants.publicationOperator.reviewedHoldControls = true;
   ready.ceremonyControls.recipientAddressesCheckedAgainstManifest = true;
   ready.ceremonyControls.signerAddressesCheckedAgainstManifest = true;
-  ready.ceremonyControls.holdOwnerConfirmed = true;
+  ready.ceremonyControls.mainnetHoldObserved = true;
   for (const [index, allocation] of Object.keys(ready.ceremonyControls.reviewedRecipientDestinations).entries()) {
     ready.ceremonyControls.reviewedRecipientDestinations[allocation].publicAddress = address(index + 10);
   }
   ready.ceremonyControls.manifestSha256 = sha256File(manifestPath);
   ready.ceremonyControls.readyAtUtc = new Date().toISOString();
   writeFileSync(checklistPath, `${JSON.stringify(ready, null, 2)}\n`, "utf8");
-  assertValid("a fresh READY checklist with one reviewed physical signer and distinct accountability roles");
+  assertValid("a fresh READY checklist with one reviewed physical signer and automated observations");
 
   assertRejected(
     "a fee payer that differs from the reviewed mint-authority signer",
@@ -165,11 +162,22 @@ try {
   );
   writeFileSync(checklistPath, `${JSON.stringify(ready, null, 2)}\n`, "utf8");
   assertRejected(
-    "an independent verifier that reuses the reviewed signer address",
-    (fixture) => { fixture.participants.independentVerifier.publicAddress = fixture.participants.mintAuthoritySigner.publicAddress; },
-    "READY requires the shared signer, independent verifier, and publication operator addresses to be distinct",
+    "a READY checklist that enables a human reviewer gate",
+    (fixture) => { fixture.ceremonyControls.humanReviewerRequired = true; },
+    "checklist must not require a human reviewer",
   );
   writeFileSync(checklistPath, `${JSON.stringify(ready, null, 2)}\n`, "utf8");
+  assertRejected(
+    "a READY checklist that permits self-attestation",
+    (fixture) => { fixture.ceremonyControls.noSelfAttestation = false; },
+    "checklist must reject self-attestation",
+  );
+  writeFileSync(checklistPath, `${JSON.stringify(ready, null, 2)}\n`, "utf8");
+  assertRejected(
+    "a READY checklist that demotes Model T physical confirmation from the sole human gate",
+    (fixture) => { fixture.ceremonyControls.trezorModelTPhysicalConfirmationIsSoleHumanGate = false; },
+    "Model T physical confirmation must be the sole human gate",
+  );
 
   const malformedCanonicalManifest = JSON.parse(canonicalManifest);
   malformedCanonicalManifest.token.fixedSupply = "1000000000";
@@ -201,9 +209,9 @@ try {
   );
   writeFileSync(checklistPath, `${JSON.stringify(ready, null, 2)}\n`, "utf8");
   assertRejected(
-    "a READY checklist that grants publication signing authority",
-    (fixture) => { fixture.participants.publicationOperator.hasNoSigningAuthority = false; },
-    "publication operator must affirm hasNoSigningAuthority: true",
+    "a READY checklist that permits automatic broadcast",
+    (fixture) => { fixture.ceremonyControls.automaticBroadcastPermitted = true; },
+    "checklist must forbid automatic broadcast",
   );
   writeFileSync(checklistPath, `${JSON.stringify(ready, null, 2)}\n`, "utf8");
   const publishedManifest = JSON.parse(canonicalManifest);

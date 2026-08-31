@@ -1,0 +1,268 @@
+{
+  "schema": "iat-b3-mandatory-ci-runtime-containment-receipt-schema-policy/v1",
+  "receiptSchema": "iat-b3-mandatory-ci-runtime-containment-receipt/v1",
+  "assessmentSchema": "iat-b3-mandatory-ci-runtime-containment-assessment/v1",
+  "status": "HOLD",
+  "ready": false,
+  "complete": false,
+  "operative": false,
+  "sourceOnly": true,
+  "executionApi": false,
+  "candidateStatus": "UNTRUSTED_OBSERVER_CANDIDATE_HOLD",
+  "receiptEncoding": {
+    "format": "CANONICAL_JSON_UTF8",
+    "duplicateKeysAccepted": false,
+    "unknownFieldsAccepted": false,
+    "maximumBytes": 2097152,
+    "selfDigestAuthoritative": false,
+    "embeddedAuthorityAccepted": false
+  },
+  "targets": [
+    "linux-x64-musl",
+    "windows-x64-gnu"
+  ],
+  "topLevelFields": [
+    "authorityBoundary",
+    "checkpoint",
+    "cleanup",
+    "compileProvenance",
+    "containment",
+    "control",
+    "deadlines",
+    "invocation",
+    "observerSessionId",
+    "platform",
+    "receiptSequence",
+    "runtimeArtifact",
+    "schema",
+    "semanticSha256",
+    "status",
+    "streams",
+    "tap",
+    "target",
+    "truthEnvelope"
+  ],
+  "evidenceSeparation": {
+    "compileReceiptSchema": "iat-b3-mandatory-ci-containment-build-receipt/v1",
+    "compileReceiptMayContainRuntimeEvidence": false,
+    "runtimeReceiptMayAuthorizeCompileEvidence": false,
+    "sameObjectCompileArtifactRequired": true,
+    "sameObjectOpenedArtifactRequired": true,
+    "sameObjectExecutionArtifactRequired": true,
+    "sameObjectPostExecutionArtifactRequired": true
+  },
+  "checkpointFields": [
+    "buildPlanSha256",
+    "commitSha",
+    "compileReceiptSha256",
+    "containmentContractSha256",
+    "policySha256",
+    "sourceClosureSha256",
+    "target",
+    "toolchainClosureSha256",
+    "treeSha"
+  ],
+  "runtimeBindingMethods": {
+    "linux-x64-musl": "FD_EXECVEAT_AT_EMPTY_PATH",
+    "windows-x64-gnu": "HELD_IMAGE_SECTION_OBJECT"
+  },
+  "platformCapabilityFields": {
+    "linux-x64-musl": [
+      "clone3MountNamespace",
+      "clone3PidNamespace",
+      "clone3UserNamespace",
+      "completeWaitClasses",
+      "namespaceDestructionObserved",
+      "numericPidCleanupUsed",
+      "pdeathsig",
+      "pidNamespaceRootIsPid1",
+      "pidfd",
+      "watchdogArmedBeforeStart"
+    ],
+    "windows-x64-gnu": [
+      "activeProcessZero",
+      "assignedBeforeResume",
+      "breakawayDisabled",
+      "completionPort",
+      "createSuspended",
+      "killOnClose",
+      "numericPidCleanupUsed",
+      "sameObjectImageLaunch",
+      "startupInfoExJobList",
+      "watchdogArmedBeforeStart"
+    ]
+  },
+  "descriptorBindingRoles": {
+    "linux-x64-musl": [
+      "control-channel",
+      "helper-executable",
+      "stderr-channel",
+      "stdout-channel",
+      "workload-executable"
+    ],
+    "windows-x64-gnu": [
+      "completion-port",
+      "control-channel",
+      "helper-executable",
+      "job-object",
+      "stderr-channel",
+      "stdout-channel",
+      "workload-executable"
+    ]
+  },
+  "descriptorOwnershipPolicy": {
+    "completion-port": {
+      "owner": "HELPER",
+      "inheritedByHelper": false,
+      "inheritedByWorkload": false,
+      "closedBeforeStart": false
+    },
+    "control-channel": {
+      "owner": "OBSERVER",
+      "inheritedByHelper": true,
+      "inheritedByWorkload": false,
+      "closedBeforeStart": false
+    },
+    "helper-executable": {
+      "owner": "OBSERVER",
+      "inheritedByHelper": false,
+      "inheritedByWorkload": false,
+      "closedBeforeStart": false
+    },
+    "job-object": {
+      "owner": "HELPER",
+      "inheritedByHelper": false,
+      "inheritedByWorkload": false,
+      "closedBeforeStart": false
+    },
+    "stderr-channel": {
+      "owner": "HELPER",
+      "inheritedByHelper": false,
+      "inheritedByWorkload": true,
+      "closedBeforeStart": false
+    },
+    "stdout-channel": {
+      "owner": "HELPER",
+      "inheritedByHelper": false,
+      "inheritedByWorkload": true,
+      "closedBeforeStart": false
+    },
+    "workload-executable": {
+      "owner": "HELPER",
+      "inheritedByHelper": false,
+      "inheritedByWorkload": false,
+      "closedBeforeStart": false
+    }
+  },
+  "deadlines": {
+    "clock": "MONOTONIC",
+    "startupMs": 10000,
+    "executionMs": [
+      120000,
+      180000
+    ],
+    "finalizationMs": 5000,
+    "teardownObservationMs": 15000,
+    "parentGuardMs": 5000,
+    "outerMs": [
+      155000,
+      215000
+    ],
+    "executionDeadlineImmutable": true,
+    "teardownDeadlineImmutable": true,
+    "teardownMayExtendExecution": false,
+    "watchdogsMustArmBeforeStart": true
+  },
+  "controlProtocol": {
+    "schema": "iat-b3-mandatory-ci-containment/v1",
+    "readyFrame": "IAT_B3_CONTAINMENT_READY_V1",
+    "finalFrame": "IAT_B3_CONTAINMENT_FINAL_V1",
+    "statusChannelNonblocking": true,
+    "maximumReadBytesPerPollTurn": 4096,
+    "timerPriorityBeforeStatus": true,
+    "containmentIdentityRetainedThroughArbitration": true,
+    "firstOutcomeWriteOnce": true,
+    "eofRequiredBeforeCommit": true,
+    "trailingBytesAccepted": false
+  },
+  "tapManifest": {
+    "path": "projects/star-ascent/site/tests/iat-b3-mandatory-ci-containment.test.mjs",
+    "sha256": "437571821a14eb60de550bac204b2f8e3885766760a30f32296db57076df2813",
+    "byteLength": 18044,
+    "orderedNamesSha256": "7262d1251645ce869697b6afc6aa446951c3f72184b14a772a4fa2553c846e33",
+    "orderedNamesJsonBytes": 1855,
+    "caseCount": 30,
+    "version": 13,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "bailout": false,
+    "directives": false,
+    "trailingLines": false
+  },
+  "containmentSuccessRequirements": {
+    "naturalRootExitZero": true,
+    "directChildReaped": true,
+    "completeDescendantReap": true,
+    "containmentEmpty": true,
+    "descendantLeak": false,
+    "zombieDescendants": 0,
+    "numericPidCleanupUsed": false,
+    "teardownKillUsed": false,
+    "linuxPid1Exit": "CLD_EXITED_STATUS_0",
+    "linuxWaitClasses": [
+      "WEXITED",
+      "__WALL",
+      "__WCLONE"
+    ],
+    "linuxNamespaceDestroyed": true,
+    "windowsActiveProcessZero": true,
+    "windowsJobCloseUsedToKill": false
+  },
+  "cleanupRequirements": {
+    "observationOnly": true,
+    "deadlineArmedEvenOnSignalFailure": true,
+    "identityBound": true,
+    "allOwnedDescriptorsClosed": true,
+    "allOwnedHandlesClosed": true,
+    "containmentObjectDestroyed": true,
+    "noLiveDescendants": true,
+    "noZombieDescendants": true,
+    "noLeak": true,
+    "ambiguousIdentity": false
+  },
+  "assessmentTruth": {
+    "valid": false,
+    "receiptSourceObserved": false,
+    "checkpointObserved": false,
+    "compileProvenanceObserved": false,
+    "runtimeEvidenceObserved": false,
+    "sameObjectRuntimeObserved": false,
+    "platformCapabilitiesObserved": false,
+    "invocationObserved": false,
+    "deadlineObserved": false,
+    "tapObserved": false,
+    "containmentEmptyObserved": false,
+    "cleanupObserved": false,
+    "networkUsed": false,
+    "rpcUsed": false,
+    "keyUsed": false,
+    "signed": false,
+    "devnetExecuted": false,
+    "mainnetExecuted": false,
+    "releaseAuthorized": false
+  },
+  "blockers": [
+    "BP07_SOURCE_ONLY_NO_EXECUTION_API",
+    "CALLER_INJECTED_SYNTHETIC_NONAUTHORITATIVE",
+    "DIRECT_CHECKPOINT_OBSERVATION_REQUIRED",
+    "DIRECT_CLEANUP_OBSERVATION_REQUIRED",
+    "DIRECT_COMPILE_RECEIPT_OBSERVATION_REQUIRED",
+    "DIRECT_PLATFORM_CAPABILITY_OBSERVATION_REQUIRED",
+    "DIRECT_RECEIPT_SOURCE_OBSERVATION_REQUIRED",
+    "DIRECT_SAME_OBJECT_RUNTIME_OBSERVATION_REQUIRED",
+    "DIRECT_TAP_TRANSCRIPT_OBSERVATION_REQUIRED",
+    "RUNTIME_EVIDENCE_NOT_OBSERVED"
+  ]
+}

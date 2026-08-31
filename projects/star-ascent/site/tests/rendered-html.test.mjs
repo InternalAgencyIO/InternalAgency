@@ -102,7 +102,7 @@ test("renders English proof fallback on both Turkish public routes before hydrat
     prefixed.text(),
     dedicatedHost.text(),
   ]);
-  const englishCopy = /Every non-secret Devnet export and the separate local time-gate proof/;
+  const englishCopy = /Historical off-chain signature proof remains independently verifiable/;
   const turkishDraft = /Gizli olmayan tüm Devnet dışa aktarımları ve ayrı yerel zaman kapısı kanıtı/;
 
   for (const html of [prefixedHtml, dedicatedHostHtml]) {

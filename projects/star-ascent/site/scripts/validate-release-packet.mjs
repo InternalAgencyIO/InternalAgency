@@ -4,7 +4,6 @@ import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const canonicalPacketPath = "launch/release-packet.template.json";
 const packetPath = process.argv[2] ?? canonicalPacketPath;
@@ -19,12 +18,6 @@ if (packetPath !== canonicalPacketPath) {
 const packet = JSON.parse(readFileSync(packetPath, "utf8"));
 const isDigest = (value) => typeof value === "string" && /^[a-f0-9]{64}$/i.test(value);
 const isCanonicalDigest = (value) => isDigest(value) && value === value.toLowerCase();
-const normalizedRoleLabel = normalizeAccountabilityLabel;
-const isUsableRoleLabel = (value) => typeof value === "string"
-  && value === value.trim()
-  && !/\p{C}/u.test(value)
-  && normalizedRoleLabel(value).length >= 2
-  && !/\b(pending|todo|tbd|example|placeholder|unassigned|none|unknown)\b/i.test(value);
 const hasExactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value)
   && Object.keys(value).length === keys.length
   && keys.every((key) => Object.hasOwn(value, key));
@@ -114,8 +107,8 @@ const isUtcTimestamp = (value) => {
   const parsed = Date.parse(value);
   return !Number.isNaN(parsed) && new Date(parsed).toISOString() === value;
 };
-const approvalMaxAgeMs = 30 * 60 * 1000;
-const approvalMaxFutureSkewMs = 60 * 1000;
+const observationMaxAgeMs = 30 * 60 * 1000;
+const observationMaxFutureSkewMs = 60 * 1000;
 const releaseSnapshotPath = "launch/release-snapshot.generated.json";
 const timestampMs = (value) => Date.parse(value);
 const digestRecord = (record) => sha256Text(Object.entries(record).map(([path, digest]) => `${path}:${digest}`).join("\n"));
@@ -125,10 +118,10 @@ const requireFreshDecisionTimestamp = (value, label) => {
     return null;
   }
   const ageMs = Date.now() - timestampMs(value);
-  if (ageMs < -approvalMaxFutureSkewMs) {
+  if (ageMs < -observationMaxFutureSkewMs) {
     fail(`${label} cannot be more than one minute in the future`);
-  } else if (ageMs > approvalMaxAgeMs) {
-    fail(`${label} is older than 30 minutes; return to HOLD and repeat the review`);
+  } else if (ageMs > observationMaxAgeMs) {
+    fail(`${label} is older than 30 minutes; return to HOLD and repeat the automated observation`);
   } else {
     ok(`${label} is fresh for the release decision window`);
   }
@@ -147,11 +140,11 @@ const signingChecklistValidatorPath = fileURLToPath(new URL("./validate-genesis-
 const devnetRehearsalValidatorPath = fileURLToPath(new URL("./validate-devnet-rehearsal.mjs", import.meta.url));
 const mainnetHandoffValidatorPath = fileURLToPath(new URL("./validate-mainnet-handoff.mjs", import.meta.url));
 const canonicalPacketShapes = [
-  ["release packet", packet, ["status", "packetScope", "sourceArtifacts", "releaseControls", "artifactDigests", "approval"]],
+  ["release packet", packet, ["status", "packetScope", "sourceArtifacts", "releaseControls", "artifactDigests", "automatedClosure"]],
   ["release packet sourceArtifacts", packet.sourceArtifacts, Object.keys(expectedPaths)],
-  ["release packet releaseControls", packet.releaseControls, ["allOperatorsReviewedSameArtifactVersions", "publicEvidenceCheckedAtUtc", "correctionOwnerLabel", "stopOnAnyMismatch", "noPublicationBeforeIndependentEvidence"]],
+  ["release packet releaseControls", packet.releaseControls, ["allArtifactVersionsObservedSame", "publicEvidenceObservedAtUtc", "stopOnAnyMismatch", "noPublicationBeforeAutomatedEvidence", "automatedSourceReceiptStateOnly", "humanReviewerRequired", "noSelfAttestation", "trezorModelTPhysicalConfirmationIsSoleHumanGate"]],
   ["release packet artifactDigests", packet.artifactDigests, ["manifestSha256", "publicationPayloadSha256", "signingChecklistSha256", "devnetRehearsalSha256", "mainnetHandoffSha256"]],
-  ["release packet approval", packet.approval, ["releaseOwnerLabel", "independentVerifierLabel", "packetDigest", "approvedAtUtc"]],
+  ["release packet automatedClosure", packet.automatedClosure, ["observationMode", "packetDigest", "observedAtUtc"]],
 ];
 const malformedPacketShape = canonicalPacketShapes.find(([, value, keys]) => !hasExactKeys(value, keys));
 if (malformedPacketShape) fail(`${malformedPacketShape[0]} must contain only its exact canonical reviewed fields`);
@@ -217,9 +210,11 @@ if (handoffValidation.error || handoffValidation.status !== 0) {
 } else {
   ok("canonical mainnet handoff validator passes before any packet state is accepted");
 }
-for (const field of ["stopOnAnyMismatch", "noPublicationBeforeIndependentEvidence"]) {
+for (const field of ["stopOnAnyMismatch", "noPublicationBeforeAutomatedEvidence", "automatedSourceReceiptStateOnly", "noSelfAttestation", "trezorModelTPhysicalConfirmationIsSoleHumanGate"]) {
   if (packet.releaseControls?.[field] !== true) fail(`releaseControls.${field} must be true`);
 }
+if (packet.releaseControls?.humanReviewerRequired !== false) fail("releaseControls.humanReviewerRequired must be false");
+if (packet.automatedClosure?.observationMode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION") fail("automatedClosure must use exact automated source/receipt/state observation");
 const secretBearingField = findSecretBearingField(packet);
 if (secretBearingField) fail(`release packet must not contain credential-bearing field ${secretBearingField}`); else ok("no credential-bearing fields are present");
 const credentialBearingValuePath = findCredentialBearingValue(packet);
@@ -233,32 +228,18 @@ if (packet.status === "READY") {
   const rehearsal = JSON.parse(readFileSync(packet.sourceArtifacts.devnetRehearsalPath, "utf8"));
   const handoff = JSON.parse(readFileSync(packet.sourceArtifacts.mainnetHandoffPath, "utf8"));
   const payload = readFileSync(packet.sourceArtifacts.publicationPayloadPath, "utf8");
-  if (manifest.status !== "HOLD") fail("READY requires the mainnet manifest to remain HOLD before independent evidence exists"); else ok("manifest remains HOLD");
-  if (!/Status:\s*\*\*HOLD\*\*/.test(payload)) fail("READY requires the publication payload to remain HOLD before independent evidence exists"); else ok("publication payload remains HOLD");
+  if (manifest.status !== "HOLD") fail("READY requires the mainnet manifest to remain HOLD before automated evidence exists"); else ok("manifest remains HOLD");
+  if (!/Status:\s*\*\*HOLD\*\*/.test(payload)) fail("READY requires the publication payload to remain HOLD before automated evidence exists"); else ok("publication payload remains HOLD");
   if (checklist.status !== "READY") fail("READY requires a READY signer checklist"); else ok("signer checklist is READY");
   if (rehearsal.status !== "COMPLETED") fail("READY requires a COMPLETED devnet rehearsal"); else ok("devnet rehearsal is COMPLETED");
-  if (handoff.status !== "APPROVED") fail("READY requires an APPROVED mainnet handoff"); else ok("mainnet handoff is APPROVED");
+  if (handoff.status !== "READY") fail("READY requires an READY mainnet handoff"); else ok("mainnet handoff is READY");
   const approvedHandoffValidation = spawnSync(process.execPath, [mainnetHandoffValidatorPath, packet.sourceArtifacts.mainnetHandoffPath], {
     encoding: "utf8",
   });
   if (approvedHandoffValidation.error || approvedHandoffValidation.status !== 0) {
-    fail("READY requires the canonical mainnet handoff validator to pass before packet approval");
+    fail("READY requires the canonical mainnet handoff validator to pass before packet observation");
   } else {
-    ok("canonical mainnet handoff validator passes before packet approval");
-  }
-  for (const [field, value] of [
-    ["handoff approval.releaseOwnerLabel", handoff.approval?.releaseOwnerLabel],
-    ["handoff approval.independentVerifierLabel", handoff.approval?.independentVerifierLabel],
-    ["handoff holdControls.correctionOwnerLabel", handoff.holdControls?.correctionOwnerLabel],
-  ]) {
-    if (!isUsableRoleLabel(value)) fail(`READY requires a trimmed, printable, non-placeholder ${field}`);
-  }
-  if (normalizedRoleLabel(handoff.approval?.releaseOwnerLabel) === normalizedRoleLabel(handoff.approval?.independentVerifierLabel)) {
-    fail("READY requires the handoff release owner and independent verifier to be separate");
-  }
-  if ([handoff.approval?.releaseOwnerLabel, handoff.approval?.independentVerifierLabel]
-    .map(normalizedRoleLabel).includes(normalizedRoleLabel(handoff.holdControls?.correctionOwnerLabel))) {
-    fail("READY requires the handoff correction owner to be separate from its release owner and independent verifier");
+    ok("canonical mainnet handoff validator passes before packet observation");
   }
   const expectedHandoffSources = {
     manifestPath: packet.sourceArtifacts.manifestPath,
@@ -275,34 +256,34 @@ if (packet.status === "READY") {
     devnetRehearsalSha256: packet.sourceArtifacts.devnetRehearsalPath,
   };
   for (const [field, path] of Object.entries(expectedHandoffDigests)) {
-    if (!isCanonicalDigest(handoff.approval?.[field]) || handoff.approval[field] !== sha256File(path)) {
-      fail(`READY requires handoff.approval.${field} to match ${path}`);
+    if (!isCanonicalDigest(handoff.automatedClosure?.[field]) || handoff.automatedClosure[field] !== sha256File(path)) {
+      fail(`READY requires handoff.automatedClosure.${field} to match ${path}`);
     } else {
-      ok(`handoff.approval.${field} matches ${path}`);
+      ok(`handoff.automatedClosure.${field} matches ${path}`);
     }
   }
   const expectedHandoffDestinationDigest = sha256Text(JSON.stringify({
-    handoffVersion: 1,
+    handoffVersion: 2,
     network: handoff.network,
-    artifactDigests: Object.fromEntries(Object.keys(expectedHandoffDigests).map((field) => [field, handoff.approval?.[field] ?? null])),
+    artifactDigests: Object.fromEntries(Object.keys(expectedHandoffDigests).map((field) => [field, handoff.automatedClosure?.[field] ?? null])),
   }));
-  if (!isCanonicalDigest(handoff.approval?.manifestDigest) || handoff.approval.manifestDigest !== handoff.approval.manifestSha256) {
-    fail("READY requires handoff.approval.manifestDigest to match the canonical manifest digest");
+  if (!isCanonicalDigest(handoff.automatedClosure?.manifestDigest) || handoff.automatedClosure.manifestDigest !== handoff.automatedClosure.manifestSha256) {
+    fail("READY requires handoff.automatedClosure.manifestDigest to match the canonical manifest digest");
   } else {
-    ok("handoff.approval.manifestDigest matches the canonical manifest digest");
+    ok("handoff.automatedClosure.manifestDigest matches the canonical manifest digest");
   }
-  if (!isCanonicalDigest(handoff.approval?.destinationDigest)) {
-    fail("READY requires a lowercase SHA-256 handoff.approval.destinationDigest");
-  } else if (handoff.approval.destinationDigest !== expectedHandoffDestinationDigest) {
-    fail("READY requires handoff.approval.destinationDigest to bind its canonical artifact digests");
+  if (!isCanonicalDigest(handoff.automatedClosure?.destinationDigest)) {
+    fail("READY requires a lowercase SHA-256 handoff.automatedClosure.destinationDigest");
+  } else if (handoff.automatedClosure.destinationDigest !== expectedHandoffDestinationDigest) {
+    fail("READY requires handoff.automatedClosure.destinationDigest to bind its canonical artifact digests");
   } else {
-    ok("handoff.approval.destinationDigest binds its canonical artifact digests");
+    ok("handoff.automatedClosure.destinationDigest binds its canonical artifact digests");
   }
   let snapshotGeneratedAtMs = null;
-  if (handoff.approval?.releaseSnapshotPath !== releaseSnapshotPath) {
-    fail(`READY requires handoff.approval.releaseSnapshotPath to be ${releaseSnapshotPath}`);
-  } else if (!isCanonicalDigest(handoff.approval?.releaseSnapshotDigest)) {
-    fail("READY requires a lowercase SHA-256 handoff.approval.releaseSnapshotDigest");
+  if (handoff.automatedClosure?.releaseSnapshotPath !== releaseSnapshotPath) {
+    fail(`READY requires handoff.automatedClosure.releaseSnapshotPath to be ${releaseSnapshotPath}`);
+  } else if (!isCanonicalDigest(handoff.automatedClosure?.releaseSnapshotDigest)) {
+    fail("READY requires a lowercase SHA-256 handoff.automatedClosure.releaseSnapshotDigest");
   } else {
     try {
       const snapshot = JSON.parse(readFileSync(releaseSnapshotPath, "utf8"));
@@ -313,7 +294,7 @@ if (packet.status === "READY") {
       checkSnapshotInventory(snapshot.artifacts, snapshotArtifactPaths, "release snapshot artifacts");
       for (const path of snapshotPreApprovalPaths) {
         if (snapshot.artifacts?.[path] !== snapshot.preApprovalArtifacts?.[path]) {
-          fail(`READY requires the release snapshot pre-approval digest to match its full artifact inventory for ${path}`);
+          fail(`READY requires the release snapshot pre-closure digest to match its full artifact inventory for ${path}`);
         }
       }
       const expectedSnapshotDigest = digestRecord(snapshot.preApprovalArtifacts ?? {});
@@ -323,58 +304,36 @@ if (packet.status === "READY") {
       if (!isCanonicalDigest(snapshot.packetDigest) || snapshot.packetDigest !== digestRecord(snapshot.artifacts ?? {})) {
         fail("READY requires a release snapshot with a valid full packet digest");
       }
-      if (handoff.approval.releaseSnapshotDigest !== expectedSnapshotDigest) {
-        fail("READY requires handoff.approval.releaseSnapshotDigest to match the release snapshot pre-approval digest");
+      if (handoff.automatedClosure.releaseSnapshotDigest !== expectedSnapshotDigest) {
+        fail("READY requires handoff.automatedClosure.releaseSnapshotDigest to match the release snapshot pre-closure digest");
       }
       for (const [field, path] of Object.entries(expectedHandoffDigests)) {
-        if (snapshot.preApprovalArtifacts?.[path] !== handoff.approval?.[field]) {
-          fail(`READY requires the release snapshot to match handoff.approval.${field}`);
+        if (snapshot.preApprovalArtifacts?.[path] !== handoff.automatedClosure?.[field]) {
+          fail(`READY requires the release snapshot to match handoff.automatedClosure.${field}`);
         }
       }
-      if (snapshotGeneratedAtMs !== null && isUtcTimestamp(handoff.approval?.approvedAtUtc)
-        && snapshotGeneratedAtMs > timestampMs(handoff.approval.approvedAtUtc)) {
-        fail("READY requires the release snapshot to be generated at or before handoff approval");
+      if (snapshotGeneratedAtMs !== null && isUtcTimestamp(handoff.automatedClosure?.observedAtUtc)
+        && snapshotGeneratedAtMs > timestampMs(handoff.automatedClosure.observedAtUtc)) {
+        fail("READY requires the release snapshot to be generated at or before handoff observation");
       }
-      if (!process.exitCode) ok("release snapshot independently binds the approved handoff inputs");
+      if (!process.exitCode) ok("release snapshot source-binds the observed handoff inputs");
     } catch {
       fail("READY requires a readable current release snapshot");
     }
   }
-  if (packet.releaseControls?.allOperatorsReviewedSameArtifactVersions !== true) fail("READY requires same-version operator review");
-  const evidenceCheckedAtMs = requireFreshDecisionTimestamp(packet.releaseControls?.publicEvidenceCheckedAtUtc, "publicEvidenceCheckedAtUtc");
-  const handoffApprovedAtMs = requireFreshDecisionTimestamp(handoff.approval?.approvedAtUtc, "handoff approval.approvedAtUtc");
-  if (snapshotGeneratedAtMs !== null && evidenceCheckedAtMs !== null && evidenceCheckedAtMs <= snapshotGeneratedAtMs) {
-    fail("READY requires publicEvidenceCheckedAtUtc to be strictly after the frozen release snapshot");
+  if (packet.releaseControls?.allArtifactVersionsObservedSame !== true) fail("READY requires same-version automated observation");
+  const evidenceObservedAtMs = requireFreshDecisionTimestamp(packet.releaseControls?.publicEvidenceObservedAtUtc, "publicEvidenceObservedAtUtc");
+  const handoffObservedAtMs = requireFreshDecisionTimestamp(handoff.automatedClosure?.observedAtUtc, "handoff automatedClosure.observedAtUtc");
+  if (snapshotGeneratedAtMs !== null && evidenceObservedAtMs !== null && evidenceObservedAtMs <= snapshotGeneratedAtMs) {
+    fail("READY requires publicEvidenceObservedAtUtc to be strictly after the frozen release snapshot");
   }
-  if (!isUsableRoleLabel(packet.releaseControls?.correctionOwnerLabel)) fail("READY requires a non-placeholder correction owner label");
-  for (const field of ["releaseOwnerLabel", "independentVerifierLabel"]) {
-    if (!isUsableRoleLabel(packet.approval?.[field])) fail(`READY requires a non-placeholder approval.${field}`);
+  if (!isCanonicalDigest(packet.automatedClosure?.packetDigest)) fail("READY requires a lowercase SHA-256 packetDigest");
+  const packetObservedAtMs = requireFreshDecisionTimestamp(packet.automatedClosure?.observedAtUtc, "packet automatedClosure.observedAtUtc");
+  if (handoffObservedAtMs !== null && evidenceObservedAtMs !== null && handoffObservedAtMs <= evidenceObservedAtMs) {
+    fail("READY requires handoff automatedClosure.observedAtUtc to be strictly after the public evidence check");
   }
-  if (normalizedRoleLabel(packet.approval?.releaseOwnerLabel) === normalizedRoleLabel(packet.approval?.independentVerifierLabel)) fail("READY requires separate release owner and independent verifier labels");
-  if ([packet.approval?.releaseOwnerLabel, packet.approval?.independentVerifierLabel]
-    .map(normalizedRoleLabel).includes(normalizedRoleLabel(packet.releaseControls?.correctionOwnerLabel))) fail("READY requires a correction owner separate from the release owner and independent verifier");
-  const roleBindings = {
-    "approval.releaseOwnerLabel": handoff.approval?.releaseOwnerLabel,
-    "approval.independentVerifierLabel": handoff.approval?.independentVerifierLabel,
-    "releaseControls.correctionOwnerLabel": handoff.holdControls?.correctionOwnerLabel,
-  };
-  for (const [field, approvedValue] of Object.entries(roleBindings)) {
-    const packetValue = field === "releaseControls.correctionOwnerLabel"
-      ? packet.releaseControls?.correctionOwnerLabel
-      : packet.approval?.[field.split(".").at(-1)];
-    if (packetValue !== approvedValue) {
-      fail(`READY requires ${field} to exactly match the approved mainnet handoff role`);
-    } else {
-      ok(`${field} matches the approved mainnet handoff role`);
-    }
-  }
-  if (!isCanonicalDigest(packet.approval?.packetDigest)) fail("READY requires a lowercase SHA-256 packetDigest");
-  const packetApprovedAtMs = requireFreshDecisionTimestamp(packet.approval?.approvedAtUtc, "packet approval.approvedAtUtc");
-  if (handoffApprovedAtMs !== null && evidenceCheckedAtMs !== null && handoffApprovedAtMs <= evidenceCheckedAtMs) {
-    fail("READY requires handoff approval.approvedAtUtc to be strictly after the public evidence check");
-  }
-  if (packetApprovedAtMs !== null && handoffApprovedAtMs !== null && packetApprovedAtMs <= handoffApprovedAtMs) {
-    fail("READY requires packet approval.approvedAtUtc to be strictly after the approved handoff");
+  if (packetObservedAtMs !== null && handoffObservedAtMs !== null && packetObservedAtMs <= handoffObservedAtMs) {
+    fail("READY requires packet automatedClosure.observedAtUtc to be strictly after the observed handoff");
   }
   const expectedArtifactDigests = {
     manifestSha256: packet.sourceArtifacts.manifestPath,
@@ -395,27 +354,24 @@ if (packet.status === "READY") {
     packetVersion: 1,
     artifactDigests: Object.fromEntries(Object.keys(expectedArtifactDigests).map((field) => [field, packet.artifactDigests?.[field] ?? null])),
   }));
-  if (packet.approval.packetDigest !== expectedPacketDigest) fail("approval.packetDigest must bind the ordered canonical artifact digest set");
-  else ok("approval.packetDigest binds the ordered canonical artifact digest set");
+  if (packet.automatedClosure.packetDigest !== expectedPacketDigest) fail("automatedClosure.packetDigest must bind the ordered canonical artifact digest set");
+  else ok("automatedClosure.packetDigest binds the ordered canonical artifact digest set");
 }
 
 if (packet.status === "HOLD") {
   for (const [field, value] of [
-    ["releaseControls.allOperatorsReviewedSameArtifactVersions", packet.releaseControls?.allOperatorsReviewedSameArtifactVersions],
-    ["releaseControls.publicEvidenceCheckedAtUtc", packet.releaseControls?.publicEvidenceCheckedAtUtc],
-    ["releaseControls.correctionOwnerLabel", packet.releaseControls?.correctionOwnerLabel],
-    ["approval.releaseOwnerLabel", packet.approval?.releaseOwnerLabel],
-    ["approval.independentVerifierLabel", packet.approval?.independentVerifierLabel],
-    ["approval.packetDigest", packet.approval?.packetDigest],
-    ["approval.approvedAtUtc", packet.approval?.approvedAtUtc],
+    ["releaseControls.allArtifactVersionsObservedSame", packet.releaseControls?.allArtifactVersionsObservedSame],
+    ["releaseControls.publicEvidenceObservedAtUtc", packet.releaseControls?.publicEvidenceObservedAtUtc],
+    ["automatedClosure.packetDigest", packet.automatedClosure?.packetDigest],
+    ["automatedClosure.observedAtUtc", packet.automatedClosure?.observedAtUtc],
   ]) {
-    const expected = field === "releaseControls.allOperatorsReviewedSameArtifactVersions" ? false : null;
-    if (value !== expected) fail(`HOLD requires ${field} to be ${JSON.stringify(expected)} so no prior approval can survive a reset`);
+    const expected = field === "releaseControls.allArtifactVersionsObservedSame" ? false : null;
+    if (value !== expected) fail(`HOLD requires ${field} to be ${JSON.stringify(expected)} so no prior closure can survive a reset`);
   }
   for (const [field, value] of Object.entries(packet.artifactDigests ?? {})) {
-    if (value !== null) fail(`HOLD requires artifactDigests.${field} to be null so no prior approval digest can survive a reset`);
+    if (value !== null) fail(`HOLD requires artifactDigests.${field} to be null so no prior closure digest can survive a reset`);
   }
-  if (!process.exitCode) ok("HOLD contains no stale review, approval, or artifact-digest state");
+  if (!process.exitCode) ok("HOLD contains no stale observation, closure, or artifact-digest state");
 }
 
 if (process.exitCode) console.error("\nRelease packet does not clear the Genesis gate.");

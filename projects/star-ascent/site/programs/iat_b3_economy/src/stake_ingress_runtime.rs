@@ -116,7 +116,7 @@ pub const STAKE_INGRESS_RUNTIME_TRUTH: StakeIngressRuntimeTruth = StakeIngressRu
 
 #[cfg(feature = "runtime-production-open-position")]
 pub const PRODUCTION_OPEN_POSITION_RUNTIME_STATUS: &str =
-    "FEATURE_GATED_OPEN_LAW_TOKEN_2022_POSITION_AND_LEDGER_ATOMIC_NO_ABI_NO_DISPATCH_MAINNET_HOLD";
+    "FEATURE_GATED_OPEN_LAW_TOKEN_2022_POSITION_AND_LEDGER_ATOMIC_HANDLER_COMPLETE_ROUTED_DEVNET_FALSE_MAINNET_HOLD";
 
 #[cfg(feature = "runtime-production-open-position")]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -146,10 +146,10 @@ pub const PRODUCTION_OPEN_POSITION_RUNTIME_TRUTH: ProductionOpenPositionRuntimeT
         completed_ingress_config_and_lanes_cas_executed: true,
         callback_failure_requires_transaction_rollback: true,
         retained_v2_post_cpi_persistence_complete: true,
-        instruction_abi_frozen: false,
-        entrypoint_exposed: false,
-        dispatcher_exposed: false,
-        any_handler_complete: false,
+        instruction_abi_frozen: true,
+        entrypoint_exposed: true,
+        dispatcher_exposed: true,
+        any_handler_complete: true,
         devnet_executed: false,
         mainnet_hold: true,
     };
@@ -1390,7 +1390,7 @@ mod production_open_position_truth_tests {
     use super::*;
 
     #[test]
-    fn combined_runtime_truth_is_persistent_but_nonactivating() {
+    fn combined_runtime_truth_is_source_complete_routed_and_mainnet_held() {
         assert_eq!(
             PRODUCTION_OPEN_POSITION_RUNTIME_TRUTH,
             ProductionOpenPositionRuntimeTruth {
@@ -1401,10 +1401,10 @@ mod production_open_position_truth_tests {
                 completed_ingress_config_and_lanes_cas_executed: true,
                 callback_failure_requires_transaction_rollback: true,
                 retained_v2_post_cpi_persistence_complete: true,
-                instruction_abi_frozen: false,
-                entrypoint_exposed: false,
-                dispatcher_exposed: false,
-                any_handler_complete: false,
+                instruction_abi_frozen: true,
+                entrypoint_exposed: true,
+                dispatcher_exposed: true,
+                any_handler_complete: true,
                 devnet_executed: false,
                 mainnet_hold: true,
             }

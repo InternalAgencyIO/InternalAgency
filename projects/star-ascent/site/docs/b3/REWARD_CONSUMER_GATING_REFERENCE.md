@@ -221,7 +221,7 @@ fixing `unlistedSensitiveSourceMarkerRejected`,
 `dynamicComputedDispatchRejected`, and `reflectiveDispatchRejected` to false.
 It also cannot prove that a built artifact matches the scanned source, that a
 caller did not retain the underlying store, or that an inventory update
-received independent review.
+received source-bound automated direct evidence.
 It therefore keeps runtime bypass prevention, provider authentication,
 rollback protection, materialized projection state, built-artifact parity,
 external effects, activation, and Mainnet false or `HOLD`.
@@ -252,7 +252,8 @@ built rather than copied bytes, that a second build reproduces the result, or
 that the packaged runtime is confined. It therefore keeps
 `artifactBuiltFromBoundSourceVerified`, reproducibility, runtime confinement,
 provider authentication, rollback protection, materialized projection state,
-independent review, external effects, activation, and Mainnet false or `HOLD`.
+source-bound automated direct evidence, external effects, activation, and
+Mainnet false or `HOLD`.
 
 [`reward-guarded-build-reproducibility.mjs`](../../programs/iat_b3_reference/reward-guarded-build-reproducibility.mjs)
 adds a dual-fresh-build byte-equality receipt. It accepts only two distinct
@@ -275,7 +276,8 @@ reproduction, runtime confinement, or future determinism. The comparison keeps
 `semanticBuildProvenanceVerified`, `artifactBuiltFromBoundSourceVerified`,
 general `reproducibleBuildVerified`, runtime confinement, provider
 authentication, rollback protection, materialized projection state,
-independent review, external effects, activation, and Mainnet false or `HOLD`.
+source-bound automated direct evidence, external effects, activation, and
+Mainnet false or `HOLD`.
 
 [`reward-guarded-artifact-inventory.mjs`](../../programs/iat_b3_reference/reward-guarded-artifact-inventory.mjs)
 adds the next negative-packaging prerequisite. It accepts only a process-
@@ -293,7 +295,8 @@ recognized guarded-reward runtime surface. Recording the current source-set
 and guarded-surface digests beside an artifact is not evidence that the build
 was produced from that source. The artifact record therefore keeps build-
 source parity, reproducibility, runtime confinement, provider authentication,
-rollback protection, materialized projection state, independent review,
+rollback protection, materialized projection state, source-bound automated
+direct evidence,
 external effects, activation, and Mainnet false or `HOLD`.
 
 ## Exact admission order

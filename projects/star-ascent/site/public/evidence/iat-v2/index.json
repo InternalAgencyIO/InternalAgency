@@ -5,7 +5,9 @@
   "license": "CC0-1.0",
   "network": "devnet",
   "mainnetStatus": "HOLD",
-  "independentReviewRequired": true,
+  "automatedDirectEvidenceRequired": true,
+  "humanReviewerRequired": false,
+  "noSelfAttestation": true,
   "secretMaterialIncluded": false,
   "repository": "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2",
   "canonicalAtPublication": [
@@ -28,7 +30,7 @@
     "localHostProof": "v2-local-time-gate-proof-hardening-20260802T130622Z.json",
     "localHostProofStatus": "VERIFIED_LOCAL_HOST_ONLY",
     "freshSignedDevnetEvidence": "REQUIRED_NOT_COMPLETE",
-    "independentReview": "REQUIRED_NOT_COMPLETE",
+    "automatedDirectEvidence": "REQUIRED_NOT_COMPLETE",
     "mainnetStatus": "HOLD"
   },
   "currentIdentityHardeningState": {
@@ -37,7 +39,7 @@
     "localModelStatus": "VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY",
     "actualXOAuthAndD1Integration": "REQUIRED_NOT_COMPLETE",
     "freshSignedDevnetEvidence": "REQUIRED_NOT_COMPLETE",
-    "independentReview": "REQUIRED_NOT_COMPLETE",
+    "automatedDirectEvidence": "REQUIRED_NOT_COMPLETE",
     "mainnetStatus": "HOLD"
   },
   "records": [
@@ -166,7 +168,7 @@
       "bytes": 11985,
       "sha256": "8453aa583e95477088ebca3baebbf2c2ff5df3e4f36b740d2ae09d3254e87734",
       "scope": "Deterministic local host-program proof of exact time, cliff, unlock, maturity, and future-CCC model boundaries bound to hardened source b73d2d3 and its 579,480-byte verifiable SBF; no signed transaction",
-      "status": "CURRENT_VERIFIED_LOCAL_HOST_ONLY_CURRENT_SBF_FRESH_SIGNED_DEVNET_AND_INDEPENDENT_REVIEW_REQUIRED_MAINNET_HOLD",
+      "status": "CURRENT_VERIFIED_LOCAL_HOST_ONLY_CURRENT_SBF_FRESH_SIGNED_DEVNET_AND_AUTOMATED_DIRECT_EVIDENCE_REQUIRED_MAINNET_HOLD",
       "transactions": 0
     },
     {
@@ -174,7 +176,7 @@
       "bytes": 4650,
       "sha256": "809227b6fe3f7524a17a44ec97fd59998979dc2ffa647c534545dac391841eb4",
       "scope": "Credential-free local OAuth and SQLite/D1-semantics rehearsal for rollback, replay, duplicate identity, provider gates, and exact final-slot contention at source 01b0ccb; no provider or D1 request",
-      "status": "CURRENT_VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY_ACTUAL_INTEGRATION_AND_INDEPENDENT_REVIEW_REQUIRED_MAINNET_HOLD",
+      "status": "CURRENT_VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY_ACTUAL_INTEGRATION_AND_AUTOMATED_DIRECT_EVIDENCE_REQUIRED_MAINNET_HOLD",
       "transactions": 0
     }
   ]

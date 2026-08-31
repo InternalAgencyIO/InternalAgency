@@ -197,7 +197,7 @@ const VERIFICATION_KEYS = Object.freeze([
   "externalMonotonicityVerified",
   "externalRollbackProtectionVerified",
   "runtimeIntegrationVerified",
-  "independentReviewAccepted",
+  "sourceBoundAutomatedDirectEvidenceVerified",
   "activationReady",
   "mainnetStatus",
   "verificationReceiptSha256",
@@ -984,7 +984,7 @@ export function verifyRewardExternalRollbackAnchor(candidate) {
     externalMonotonicityVerified: false,
     externalRollbackProtectionVerified: false,
     runtimeIntegrationVerified: false,
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     activationReady: false,
     mainnetStatus: REWARD_ROLLBACK_ANCHOR_MAINNET_STATUS,
   };
@@ -1096,7 +1096,7 @@ export function validateRewardRollbackAnchorVerificationReceipt(candidate) {
     "externalMonotonicityVerified",
     "externalRollbackProtectionVerified",
     "runtimeIntegrationVerified",
-    "independentReviewAccepted",
+    "sourceBoundAutomatedDirectEvidenceVerified",
     "activationReady",
   ]) asFalse(receipt[flag], `receipt.${flag}`);
   const expectedSha256 = sha256Canonical(

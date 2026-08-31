@@ -1,0 +1,469 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1",
+  "title": "IAT-B3 BPS09 FD12 trust-anchored compile/install controller documents",
+  "x-iat-b3-runtime-binding": {
+    "schema": "iat-b3-bps08a-runtime-binding-receipt/v1",
+    "requiredBeforeFd3": true,
+    "externalDurableOneUseCasRequired": true,
+    "watchdogObserverCustodianQuorumRequired": true,
+    "independentDeviceAndToolchainObservationRequired": true,
+    "identityAtomicRecoveryRequired": true,
+    "sourceOnly": true,
+    "decision": "HOLD",
+    "authority": "NONE"
+  },
+  "$defs": {
+    "canonicalText": {
+      "type": "string",
+      "pattern": "^[^\\u0000\\r\\n]+$",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "u64": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,18}|1[0-7][0-9]{18}|18[0-3][0-9]{17}|184[0-3][0-9]{16}|1844[0-5][0-9]{15}|18446[0-6][0-9]{14}|184467[0-3][0-9]{13}|1844674[0-3][0-9]{12}|184467440[0-6][0-9]{10}|1844674407[0-2][0-9]{9}|18446744073[0-6][0-9]{8}|1844674407370[0-8][0-9]{6}|18446744073709[0-4][0-9]{5}|184467440737095[0-4][0-9]{4}|18446744073709550[0-9]{3}|18446744073709551[0-5][0-9]{2}|1844674407370955160[0-9]|1844674407370955161[0-4]|18446744073709551615)$",
+      "maxLength": 20
+    },
+    "absolutePath": {
+      "type": "string",
+      "pattern": "^/(?!/)(?!(?:.*\\/)?\\.\\.(?:\\/|$))(?:[^\\u0000\\r\\n/]+/)*[^\\u0000\\r\\n/]+$",
+      "maxLength": 4096
+    },
+    "basename": {
+      "type": "string",
+      "pattern": "^(?!\\.\\.?$)[^\\u0000\\r\\n/\\\\]+$",
+      "maxLength": 191
+    },
+    "fileIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "byteLength",
+        "mode",
+        "uid",
+        "gid",
+        "dev",
+        "ino",
+        "mountId",
+        "nlink",
+        "handleSha256",
+        "openFileDescriptionSha256",
+        "sameHandleReplayRequired"
+      ],
+      "properties": {
+        "path": { "$ref": "#/$defs/absolutePath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "$ref": "#/$defs/u64" },
+        "mode": { "type": "string", "pattern": "^[0-7]{4}$" },
+        "uid": { "$ref": "#/$defs/u64" },
+        "gid": { "$ref": "#/$defs/u64" },
+        "dev": { "$ref": "#/$defs/u64" },
+        "ino": { "$ref": "#/$defs/u64" },
+        "mountId": { "$ref": "#/$defs/u64" },
+        "nlink": { "$ref": "#/$defs/u64" },
+        "handleSha256": { "$ref": "#/$defs/sha256" },
+        "openFileDescriptionSha256": { "$ref": "#/$defs/sha256" },
+        "sameHandleReplayRequired": { "const": true }
+      }
+    },
+    "deadline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["clock", "absoluteNanoseconds", "timerFd", "timerDev", "timerIno", "timerFirst"],
+      "properties": {
+        "clock": { "const": "CLOCK_MONOTONIC" },
+        "absoluteNanoseconds": { "$ref": "#/$defs/u64" },
+        "timerFd": { "$ref": "#/$defs/u64" },
+        "timerDev": { "$ref": "#/$defs/u64" },
+        "timerIno": { "$ref": "#/$defs/u64" },
+        "timerFirst": { "const": true }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "byteLength", "producer", "outcome", "subjectSha256", "attemptId", "runId", "sessionId", "decision", "authority"],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "$ref": "#/$defs/u64" },
+        "producer": { "$ref": "#/$defs/canonicalText" },
+        "outcome": { "$ref": "#/$defs/canonicalText" },
+        "subjectSha256": { "$ref": "#/$defs/sha256" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    },
+    "zeroProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fdLedgerSha256", "processLedgerSha256", "mountLedgerSha256", "entryLedgerSha256", "cacheLedgerSha256", "allZero"],
+      "properties": {
+        "fdLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "processLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "mountLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "entryLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "cacheLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "allZero": { "const": true }
+      }
+    },
+    "artifactSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "installer", "objectMapSha256", "linkMapSha256", "diagnosticsSha256"],
+      "properties": {
+        "target": { "$ref": "#/$defs/fileIdentity" },
+        "installer": { "$ref": "#/$defs/fileIdentity" },
+        "objectMapSha256": { "$ref": "#/$defs/sha256" },
+        "linkMapSha256": { "$ref": "#/$defs/sha256" },
+        "diagnosticsSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bps06ManifestSha256", "bpc03Commit", "bpc03Tree", "bpc03ManifestSha256", "bpk00Commit", "bpk00Tree", "bpk00BlobSha1", "bpk00FileSha256"],
+      "properties": {
+        "bps06ManifestSha256": { "const": "9f36884b53aa4646739b24e9829c69abd9a964a2ebc01934bc9217f78faafd7c" },
+        "bpc03Commit": { "const": "85d72e43869d3de7bab0e27005ba1cb95354c12a" },
+        "bpc03Tree": { "const": "6d4418655aa67d6516d18cff9a78c796f599f11b" },
+        "bpc03ManifestSha256": { "const": "caf0fd1ae601e337e86445497576339400605a817ba769d038605e7cb14c7d9a" },
+        "bpk00Commit": { "const": "512b347ebf4de80bf5a50e0d8491f14eeef0f9f0" },
+        "bpk00Tree": { "const": "c4e8e6ca1c54e9154743dd2fea7b434307d74676" },
+        "bpk00BlobSha1": { "const": "8e38e773ed4f11a4aefd8787c63c535775056c1a" },
+        "bpk00FileSha256": { "const": "7865d0fb44465fbce2100af78d2392b3bc29a2f4a7ff2969b501bc2a0134bb21" }
+      }
+    },
+    "fd12TrustAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fd",
+        "role",
+        "storage",
+        "nlink",
+        "uid",
+        "mode",
+        "sealSet",
+        "checkpointSchema",
+        "checkpointProducer",
+        "checkpointOutcome",
+        "checkpointCommit",
+        "checkpointTree",
+        "checkpointBlobSha1",
+        "checkpointFileSha256",
+        "checkpointByteLength",
+        "rootPublicKeyHex",
+        "rootFingerprintSha256",
+        "ownerProvisioningReceiptSha256",
+        "contentSha256",
+        "byteLength",
+        "dev",
+        "ino",
+        "mountId",
+        "handleSha256",
+        "openFileDescriptionSha256",
+        "sameHandleReplayRequired",
+        "verifiedBeforeFd11",
+        "verifiedBeforeFd3",
+        "verifiedBeforePeerRpc"
+      ],
+      "properties": {
+        "fd": { "const": "12" },
+        "role": { "const": "OWNER_ROOT_KEY_ANCHOR" },
+        "storage": { "const": "SEALED_MEMFD" },
+        "nlink": { "const": "0" },
+        "uid": { "const": "0" },
+        "mode": { "const": "0400" },
+        "sealSet": { "const": "F_SEAL_SEAL|F_SEAL_SHRINK|F_SEAL_GROW|F_SEAL_WRITE|F_SEAL_FUTURE_WRITE" },
+        "checkpointSchema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-fd12-owner-root-public-key-anchor/v1" },
+        "checkpointProducer": { "const": "BPK00" },
+        "checkpointOutcome": { "const": "POST_CHECKPOINT_PRELAUNCH_SUPERVISOR_PACKAGE_BOUND_FD12_OWNER_ROOT_PUBLIC_KEY_ANCHOR_CHECKPOINT_COMMITTED" },
+        "checkpointCommit": { "const": "512b347ebf4de80bf5a50e0d8491f14eeef0f9f0" },
+        "checkpointTree": { "const": "c4e8e6ca1c54e9154743dd2fea7b434307d74676" },
+        "checkpointBlobSha1": { "const": "8e38e773ed4f11a4aefd8787c63c535775056c1a" },
+        "checkpointFileSha256": { "const": "7865d0fb44465fbce2100af78d2392b3bc29a2f4a7ff2969b501bc2a0134bb21" },
+        "checkpointByteLength": { "const": "1001" },
+        "rootPublicKeyHex": { "const": "60fa8f2c48a8bc6d2ad476b094bb2f569f020211bf834deb144d2e2958ac4230" },
+        "rootFingerprintSha256": { "const": "49e4e1637075a367448705ea703628f045cde70c489286b84d1db8f5697557f1" },
+        "ownerProvisioningReceiptSha256": { "const": "3e1aa94f5203e882155d953e77f1036bb418929b5d6ddc5fe80070a4a0898f3a" },
+        "contentSha256": { "const": "49e4e1637075a367448705ea703628f045cde70c489286b84d1db8f5697557f1" },
+        "byteLength": { "const": "32" },
+        "dev": { "$ref": "#/$defs/u64" },
+        "ino": { "$ref": "#/$defs/u64" },
+        "mountId": { "$ref": "#/$defs/u64" },
+        "handleSha256": { "$ref": "#/$defs/sha256" },
+        "openFileDescriptionSha256": { "$ref": "#/$defs/sha256" },
+        "sameHandleReplayRequired": { "const": true },
+        "verifiedBeforeFd11": { "const": true },
+        "verifiedBeforeFd3": { "const": true },
+        "verifiedBeforePeerRpc": { "const": true }
+      }
+    },
+    "verificationOrder": {
+      "type": "array",
+      "prefixItems": [
+        { "const": "REPLAY_FD12_OWNER_ROOT_KEY_ANCHOR_SEALED_SAME_HANDLE_IDENTITY" },
+        { "const": "VERIFY_FD12_AGAINST_BPK00_CORRECTED_COMMIT_TREE_BLOB_AND_FILE_SHA256" },
+        { "const": "PARSE_FD12_EXACT_RAW32_OWNER_ROOT_PUBLIC_KEY_AND_PROVISIONING_IDENTITY" },
+        { "const": "REPLAY_FD11_SEALED_MEMFD_SAME_HANDLE_IDENTITY" },
+        { "const": "PARSE_EXACT_CANONICAL_ANCHOR_RECEIPT" },
+        { "const": "VERIFY_FD11_OWNER_ROOT_AND_FD12_IDENTITY_BINDINGS_BYTE_EQUAL" },
+        { "const": "VERIFY_T2T1_FIRMWARE_2_12_4_OR_LATER_WITH_EXACT_OCMS_V1_CAPABILITY_RECEIPT" },
+        { "const": "REJECT_OCMS_V0_DOWNGRADE_AND_UNOBSERVED_FIRMWARE_CAPABILITY" },
+        { "const": "RECOMPUTE_EXACT_DOMAIN_NUL_CANONICAL_JSON_LF_SUBJECT_SHA256" },
+        { "const": "REBUILD_EXACT_OCMS_V1_MESSAGE_BYTES" },
+        { "const": "VERIFY_FIRMWARE_RETURNED_SIGNED_DATA_BYTE_EQUAL_REBUILT_OCMS_V1_BYTES" },
+        { "const": "VERIFY_OCMS_SIGNER_LIST_CAUSALLY_SELECTS_THE_PINNED_OWNER_ROOT" },
+        { "const": "VERIFY_STRICT_CANONICAL_ED25519_WITH_SEPARATELY_PINNED_ROOT_PUBLIC_KEY" },
+        { "const": "VERIFY_T2T1_DERIVATION_ACCOUNT_AND_PHYSICAL_CONFIRMATION_RECEIPT" },
+        { "const": "VERIFY_BOOT_NONCE_ONE_USE_CAS_AND_MONOTONIC_EXPIRY" },
+        { "const": "BIND_LINEAGE_ATTEMPT_RUN_SESSION_EXECUTOR_SOURCE_TOOLCHAIN_LAUNCH_STARTUP_PEERS_AND_TIMERS" },
+        { "const": "REJECT_KEY_PRINCIPAL_CHANNEL_OR_TIMER_ALIASING" },
+        { "const": "READ_AND_VALIDATE_FD3_COMPILE_BOOTSTRAP" },
+        { "const": "REQUIRE_FD3_PEER_KEYS_BYTE_EQUAL_ANCHOR_KEYS" },
+        { "const": "ALLOW_FIRST_PEER_RPC" }
+      ],
+      "items": false,
+      "minItems": 20,
+      "maxItems": 20
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "kind", "attemptId", "runId", "sessionId", "sourceCommit", "sourceTree", "tools", "sysroot", "launch", "decision", "authority"],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1" },
+        "kind": { "const": "TOOLCHAIN_MANIFEST" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "sourceCommit": { "const": "512b347ebf4de80bf5a50e0d8491f14eeef0f9f0" },
+        "sourceTree": { "const": "c4e8e6ca1c54e9154743dd2fea7b434307d74676" },
+        "tools": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["compiler", "linker", "archiver", "staticNode"],
+          "properties": {
+            "compiler": { "$ref": "#/$defs/fileIdentity" },
+            "linker": { "$ref": "#/$defs/fileIdentity" },
+            "archiver": { "$ref": "#/$defs/fileIdentity" },
+            "staticNode": { "$ref": "#/$defs/fileIdentity" }
+          }
+        },
+        "sysroot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["root", "manifestSha256", "manifestByteLength", "entryCount", "readOnly"],
+          "properties": {
+            "root": { "$ref": "#/$defs/absolutePath" },
+            "manifestSha256": { "$ref": "#/$defs/sha256" },
+            "manifestByteLength": { "$ref": "#/$defs/u64" },
+            "entryCount": { "$ref": "#/$defs/u64" },
+            "readOnly": { "const": true }
+          }
+        },
+        "launch": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["argvSha256", "environmentSha256", "cwd", "cwdIdentitySha256", "sourceDateEpoch", "locale", "timezone", "umask", "targetTriple", "network"],
+          "properties": {
+            "argvSha256": { "$ref": "#/$defs/sha256" },
+            "environmentSha256": { "$ref": "#/$defs/sha256" },
+            "cwd": { "$ref": "#/$defs/absolutePath" },
+            "cwdIdentitySha256": { "$ref": "#/$defs/sha256" },
+            "sourceDateEpoch": { "$ref": "#/$defs/u64" },
+            "locale": { "const": "C" },
+            "timezone": { "const": "UTC" },
+            "umask": { "const": "0022" },
+            "targetTriple": { "$ref": "#/$defs/canonicalText" },
+            "network": { "const": "NONE" }
+          }
+        },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "kind", "attemptId", "runId", "sessionId", "sourceCommit", "sourceTree", "lineage", "fd12TrustAnchor", "verificationOrder", "toolchainManifestSha256", "attemptRoots", "outputNames", "deadline", "capabilityDomain", "installOrRecoverFields", "decision", "authority"],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1" },
+        "kind": { "const": "COMPILE_BOOTSTRAP" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "sourceCommit": { "const": "512b347ebf4de80bf5a50e0d8491f14eeef0f9f0" },
+        "sourceTree": { "const": "c4e8e6ca1c54e9154743dd2fea7b434307d74676" },
+        "lineage": { "$ref": "#/$defs/lineage" },
+        "fd12TrustAnchor": { "$ref": "#/$defs/fd12TrustAnchor" },
+        "verificationOrder": { "$ref": "#/$defs/verificationOrder" },
+        "toolchainManifestSha256": { "$ref": "#/$defs/sha256" },
+        "attemptRoots": {
+          "type": "array",
+          "prefixItems": [{ "$ref": "#/$defs/absolutePath" }, { "$ref": "#/$defs/absolutePath" }],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "outputNames": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["target", "installer"],
+          "properties": {
+            "target": { "$ref": "#/$defs/basename" },
+            "installer": { "$ref": "#/$defs/basename" }
+          }
+        },
+        "deadline": { "$ref": "#/$defs/deadline" },
+        "capabilityDomain": { "const": "COMPILE_ONLY" },
+        "installOrRecoverFields": { "type": "null" },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "kind", "attemptId", "runId", "sessionId", "bootstrapSha256", "attemptA", "attemptB", "artifactsByteEqual", "zeroProof", "independentReviewReceipt", "installed", "launched", "decision", "authority"],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1" },
+        "kind": { "const": "COMPILE_EVIDENCE" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "bootstrapSha256": { "$ref": "#/$defs/sha256" },
+        "attemptA": { "$ref": "#/$defs/artifactSet" },
+        "attemptB": { "$ref": "#/$defs/artifactSet" },
+        "artifactsByteEqual": { "const": true },
+        "zeroProof": { "$ref": "#/$defs/zeroProof" },
+        "independentReviewReceipt": { "type": "null" },
+        "installed": { "const": false },
+        "launched": { "const": false },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "kind", "attemptId", "runId", "sessionId", "compileReviewReceipt", "targetArtifact", "installerArtifact", "destinationParent", "tempName", "finalName", "deadline", "capabilityDomain", "toolchainFields", "decision", "authority"],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1" },
+        "kind": { "const": "INSTALL_BOOTSTRAP" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "compileReviewReceipt": { "$ref": "#/$defs/receipt" },
+        "targetArtifact": { "$ref": "#/$defs/fileIdentity" },
+        "installerArtifact": { "$ref": "#/$defs/fileIdentity" },
+        "destinationParent": { "$ref": "#/$defs/fileIdentity" },
+        "tempName": { "$ref": "#/$defs/basename" },
+        "finalName": { "$ref": "#/$defs/basename" },
+        "deadline": { "$ref": "#/$defs/deadline" },
+        "capabilityDomain": { "const": "INSTALL_OR_RECOVER_ONLY" },
+        "toolchainFields": { "type": "null" },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "kind", "attemptId", "runId", "sessionId", "bootstrapSha256", "sourceArtifact", "installerSelf", "finalArtifact", "publicationReceipt", "custodyReceipt", "zeroProof", "launched", "decision", "authority"],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1" },
+        "kind": { "const": "INSTALL_EVIDENCE" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "bootstrapSha256": { "$ref": "#/$defs/sha256" },
+        "sourceArtifact": { "$ref": "#/$defs/fileIdentity" },
+        "installerSelf": { "$ref": "#/$defs/fileIdentity" },
+        "finalArtifact": { "$ref": "#/$defs/fileIdentity" },
+        "publicationReceipt": { "$ref": "#/$defs/receipt" },
+        "custodyReceipt": { "$ref": "#/$defs/receipt" },
+        "zeroProof": { "$ref": "#/$defs/zeroProof" },
+        "launched": { "const": false },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "kind", "attemptId", "runId", "sessionId", "actualPriorReceipt", "acceptedProducerTypes", "acceptedProducerSetSha256", "identityLedger", "tempName", "finalName", "deadline", "capabilityDomain", "toolchainFields", "decision", "authority"],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1" },
+        "kind": { "const": "RECOVERY_BOOTSTRAP" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "actualPriorReceipt": { "$ref": "#/$defs/receipt" },
+        "acceptedProducerTypes": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "INSTALL_WATCHDOG_PUBLICATION_RECEIPT" },
+            { "const": "EVIDENCE_CUSTODIAN_CUSTODY_RECEIPT" },
+            { "const": "INSTALL_WATCHDOG_ABORT_RECEIPT" },
+            { "const": "EVIDENCE_CUSTODIAN_CLEANUP_RECEIPT" }
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "acceptedProducerSetSha256": { "$ref": "#/$defs/sha256" },
+        "identityLedger": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["parent", "temp", "final", "publicationCasSha256"],
+          "properties": {
+            "parent": { "$ref": "#/$defs/fileIdentity" },
+            "temp": { "oneOf": [{ "$ref": "#/$defs/fileIdentity" }, { "type": "null" }] },
+            "final": { "oneOf": [{ "$ref": "#/$defs/fileIdentity" }, { "type": "null" }] },
+            "publicationCasSha256": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "tempName": { "$ref": "#/$defs/basename" },
+        "finalName": { "$ref": "#/$defs/basename" },
+        "deadline": { "$ref": "#/$defs/deadline" },
+        "capabilityDomain": { "const": "INSTALL_OR_RECOVER_ONLY" },
+        "toolchainFields": { "type": "null" },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "kind", "attemptId", "runId", "sessionId", "bootstrapSha256", "abortCasReceipt", "cleanupReceipt", "parentFsyncReceipt", "zeroProof", "launched", "decision", "authority"],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-checkpoint-compile-install-controller-fd12-trust-anchored/v1" },
+        "kind": { "const": "RECOVERY_EVIDENCE" },
+        "attemptId": { "$ref": "#/$defs/canonicalText" },
+        "runId": { "$ref": "#/$defs/canonicalText" },
+        "sessionId": { "$ref": "#/$defs/canonicalText" },
+        "bootstrapSha256": { "$ref": "#/$defs/sha256" },
+        "abortCasReceipt": { "$ref": "#/$defs/receipt" },
+        "cleanupReceipt": { "$ref": "#/$defs/receipt" },
+        "parentFsyncReceipt": { "$ref": "#/$defs/receipt" },
+        "zeroProof": { "$ref": "#/$defs/zeroProof" },
+        "launched": { "const": false },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    }
+  ]
+}

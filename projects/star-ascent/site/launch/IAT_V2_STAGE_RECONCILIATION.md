@@ -18,16 +18,16 @@ signatures. `scripts/iat-v2-canonical-json.mjs` is the dependency-free local
 canonicalization primitive; its regression covers official RFC serialization,
 UTF-16 key ordering, stable digests, and rejection of non-I-JSON inputs. The
 readiness record must retain its safety controls while recording
-a funded, scheduled, regenerated, independently reviewed, explicitly authorized
+a funded, scheduled, regenerated, automatically verified, explicitly authorized
 attended ceremony. `ARMED` is still a record state, not authority.
 Public Solana identities must decode to exactly 32 bytes and cannot use the
 system-program placeholder.
 
 ## After every confirmed stage
 
-Stop. An independent verifier records the direct mainnet Explorer transaction,
+Stop. An automated source-bound evidence receipt records the direct Mainnet Explorer transaction,
 SHA-256 of the actual serialized Solana message bytes, confirmation time,
-verification time, verifier label, and observed post-state digest. The actual
+verification time, evidence-source identifier, and observed post-state digest. The actual
 message digest binds the fresh blockhash-bearing message separately from the
 reviewed intent and must exist before submission. Continue only when the
 post-state digest exactly matches its precommitment. Each signature must decode

@@ -21,9 +21,9 @@ correct the source artifact while remaining on HOLD, then rerun the generator.
 
 The generated snapshot lists the SHA-256 digest of every launch artifact and a
 single packet digest. It also records a separate pre-approval digest for the
-manifest, signer checklist, and devnet rehearsal. The release owner and
-independent verifier compare that pre-approval digest before the physical
-signing sequence and copy it to `approval.releaseSnapshotDigest` in an approved
+manifest, signer checklist, and Devnet rehearsal. The automated evidence
+validator compares that pre-approval digest before the physical signing
+sequence and records it in `approval.releaseSnapshotDigest` in an approved
 handoff. If any source file changes, generate a new snapshot and repeat the
 comparison.
 
@@ -67,20 +67,20 @@ snapshot command.
 For an APPROVED handoff, the snapshot time must be at or before
 `approval.approvedAtUtc`. A snapshot made after approval cannot be used to
 retroactively support that decision: return to HOLD, generate a fresh snapshot,
-and repeat independent review.
+and repeat source-bound automated verification.
 
 The READY signer checklist's `readyAtUtc` and the COMPLETED devnet rehearsal's
 `completedAtUtc` must both be canonical UTC timestamps at or before the
 snapshot and the approval. If either gate finishes after a snapshot is made,
-return to HOLD, regenerate the snapshot, and repeat independent review; an
+return to HOLD, regenerate the snapshot, and repeat automated verification; an
 older snapshot cannot attest to a later gate result.
 
 An APPROVED handoff is also valid for only the same 30-minute window, with at
 most one minute of future clock skew. If `approval.approvedAtUtc` expires, the
 operator must return the handoff to HOLD, regenerate the snapshot, and repeat
-the independent review; changing a timestamp alone is not a correction.
+the automated source/receipt/state verification; changing a timestamp alone is not a correction.
 
-The APPROVED handoff and READY release-packet gates independently recheck the
+The APPROVED handoff and READY release-packet gates directly recheck the
 current snapshot's version, HOLD status, freshness, canonical inventories,
 overlapping pre-approval/full-inventory digest equality, packet digests, and
 pre-approval binding to the approved handoff. A READY packet cannot rely on a

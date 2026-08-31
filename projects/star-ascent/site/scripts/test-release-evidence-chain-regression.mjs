@@ -27,6 +27,7 @@ const mintAuthorityTransaction = encodeBase58(Buffer.alloc(64, 8));
 const freezeAuthorityTransaction = encodeBase58(Buffer.alloc(64, 9));
 const authorityUrl = (transaction) => `https://explorer.solana.com/tx/${transaction}`;
 const mintExplorerUrl = (address = mint) => `https://explorer.solana.com/address/${address}`;
+const evidencePacketSha256 = "ab".repeat(32);
 
 try {
   cpSync(join(repositoryRoot, "launch"), join(sandboxRoot, "launch"), { recursive: true });
@@ -71,7 +72,10 @@ try {
     `Freeze authority evidence: ${authorityUrl(freezeAuthorityTransaction)}`,
     "Allocation and lock evidence: https://internalagency.io/proof",
     "Checked at (UTC): 2026-07-28 14:00 UTC",
-    "Verified by: Independent launch reviewer",
+    `Evidence packet SHA-256: ${evidencePacketSha256}`,
+    "Evidence observation mode: AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "No self-attestation: true",
+    "Human reviewer required: false",
   ].join("\n");
   const writeFixture = (manifest, payload) => {
     writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
@@ -141,7 +145,7 @@ try {
     "Freeze authority evidence: [FULL EXPLORER URL]",
     "Allocation and lock evidence: [CANONICAL URL]",
     "Checked at (UTC): [YYYY-MM-DD HH:MM UTC]",
-    "Verified by: [ROLE / PUBLIC VERIFIER LABEL]",
+    "Evidence packet SHA-256: [LOWERCASE SHA-256]",
   ].join("\n");
   const assertHoldRejected = (label, mutate, expectedMessage) => {
     const manifest = holdManifest();
@@ -215,9 +219,9 @@ try {
     "verified publication payload Checked at (UTC) must not be in the future",
   );
   assertRejected(
-    "a verified payload with an unaccountable verifier",
-    (_manifest, payload) => payload.replace("Verified by: Independent launch reviewer", "Verified by: Pending"),
-    "verified publication payload requires a non-placeholder accountable Verified by label",
+    "a verified payload with an invalid evidence digest",
+    (_manifest, payload) => payload.replace(evidencePacketSha256, "0".repeat(63)),
+    "verified publication payload requires an exact lowercase evidence-packet SHA-256",
   );
   assertRejected(
     "a manifest with bare 64-byte Base58 credential-shaped metadata",
@@ -227,19 +231,14 @@ try {
     "manifest must not contain credential-bearing value at manifest.publicVerifier",
   );
   assertRejected(
-    "a verified payload with bare 64-byte Base58 credential-shaped verifier metadata",
-    (_manifest, payload) => payload.replace("Verified by: Independent launch reviewer", `Verified by: ${mintAuthorityTransaction}`),
-    "payload must not contain credential-bearing field or value at payload.Verified by",
+    "a verified payload permitting self-attestation",
+    (_manifest, payload) => payload.replace("No self-attestation: true", "No self-attestation: false"),
+    "verified publication payload must require automated source/receipt/state evidence",
   );
   assertRejected(
-    "a verified payload with an invisible control character in the verifier label",
-    (_manifest, payload) => payload.replace("Verified by: Independent launch reviewer", "Verified by: Independent\u200B launch reviewer"),
-    "verified publication payload requires a non-placeholder accountable Verified by label",
-  );
-  assertRejected(
-    "a payload with a duplicate verifier assertion",
-    (_manifest, payload) => `${payload}\nVerified by: Second reviewer`,
-    "verified publication payload must contain exactly one Verified by assertion",
+    "a verified payload requiring a human reviewer",
+    (_manifest, payload) => payload.replace("Human reviewer required: false", "Human reviewer required: true"),
+    "verified publication payload must require automated source/receipt/state evidence",
   );
   assertRejected(
     "a payload that does not explicitly revoke mint authority",

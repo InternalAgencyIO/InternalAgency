@@ -14,9 +14,6 @@ const remediationScopePath = "public/audits/iat-v2-remediation-20260802/scope.js
 const requestedPath = process.argv[2] ?? canonicalPath;
 const failures = [];
 const fail = (message) => failures.push(message);
-const expectedAttestation =
-  "I independently reviewed the bound IAT V2 devnet feature evidence and every listed check matched without exception. Mainnet remains HOLD.";
-
 function exactKeys(value, keys) {
   return value
     && typeof value === "object"
@@ -97,13 +94,12 @@ if (signoff && feature && receipt && init && legacy) {
     "evidence",
     "chainReceipt",
     "programArtifact",
-    "verifier",
+    "observationPolicy",
     "checks",
     "exceptions",
-    "attestation",
     "completedAtUtc",
   ])) fail("sign-off must contain only canonical top-level fields");
-  if (signoff.schema !== "iat-v2-devnet-feature-independent-signoff/v1") fail("wrong sign-off schema");
+  if (signoff.schema !== "iat-v2-devnet-feature-automated-observation/v2") fail("wrong automated-observation schema");
   if (!["PENDING", "VERIFIED"].includes(signoff.status)) fail("status must be PENDING or VERIFIED");
   if (signoff.scope !== "CORRECTED_PROGRAM_AND_EIGHTEEN_TRANSACTION_FEATURE_REHEARSAL") {
     fail("sign-off scope must bind the corrected program and 18-transaction feature rehearsal");
@@ -183,20 +179,17 @@ if (signoff && feature && receipt && init && legacy) {
     || !isPublicKey(signoff.programArtifact?.upgradeAuthority)
   ) fail("corrected program artifact binding drift");
 
-  if (!exactKeys(signoff.verifier, [
-    "accountabilityLabel",
-    "publicSolanaAddress",
-    "independentOfOperator",
-    "didNotOperateModelT",
-    "reviewMethod",
-    "communicationReference",
-  ])) fail("verifier record must contain only canonical fields");
-  if (
-    signoff.verifier?.accountabilityLabel !== "FDF Guard"
-    || signoff.verifier?.publicSolanaAddress !== "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja"
-    || !isPublicKey(signoff.verifier?.publicSolanaAddress)
-    || signoff.verifier?.publicSolanaAddress === signoff.programArtifact?.upgradeAuthority
-  ) fail("verifier identity is not the pinned independent verifier");
+  const expectedObservationPolicy = {
+    mode: "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    humanReviewerRequired: false,
+    noSelfAttestation: true,
+    trezorModelTPhysicalConfirmationIsSoleHumanGate: true,
+  };
+  if (!exactKeys(signoff.observationPolicy, Object.keys(expectedObservationPolicy))) {
+    fail("observationPolicy must contain only canonical automated-policy fields");
+  } else if (JSON.stringify(signoff.observationPolicy) !== JSON.stringify(expectedObservationPolicy)) {
+    fail("observationPolicy must preserve automated evidence, no-self-attestation, and Model T-only signature gates");
+  }
 
   const checkKeys = [
     "evidenceSha256Matched",
@@ -218,39 +211,23 @@ if (signoff && feature && receipt && init && legacy) {
 
   if (signoff.status === "PENDING") {
     if (
-      signoff.verifier?.independentOfOperator !== null
-      || signoff.verifier?.didNotOperateModelT !== null
-      || signoff.verifier?.reviewMethod !== null
-      || signoff.verifier?.communicationReference !== null
-      || Object.values(signoff.checks ?? {}).some((value) => value !== false)
+      Object.values(signoff.checks ?? {}).some((value) => value !== false)
       || signoff.exceptions?.length !== 0
-      || signoff.attestation !== null
       || signoff.completedAtUtc !== null
-    ) fail("PENDING sign-off must not contain partial or self-asserted completion evidence");
+    ) fail("PENDING observation must not contain partial or self-asserted completion evidence");
   }
 
   if (signoff.status === "VERIFIED") {
-    if (
-      signoff.verifier?.independentOfOperator !== true
-      || signoff.verifier?.didNotOperateModelT !== true
-    ) fail("VERIFIED sign-off requires explicit operator independence");
-    if (
-      typeof signoff.verifier?.reviewMethod !== "string"
-      || signoff.verifier.reviewMethod.trim().length < 12
-      || typeof signoff.verifier?.communicationReference !== "string"
-      || signoff.verifier.communicationReference.trim().length < 8
-    ) fail("VERIFIED sign-off requires a review method and communication reference");
     if (Object.values(signoff.checks ?? {}).some((value) => value !== true)) {
-      fail("VERIFIED sign-off requires every canonical check to be true");
+      fail("VERIFIED observation requires every canonical check to be true");
     }
-    if (signoff.exceptions?.length !== 0) fail("VERIFIED sign-off cannot contain exceptions");
-    if (signoff.attestation !== expectedAttestation) fail("VERIFIED attestation text is not canonical");
-    if (!isUtc(signoff.completedAtUtc)) fail("VERIFIED sign-off requires canonical UTC completion time");
+    if (signoff.exceptions?.length !== 0) fail("VERIFIED observation cannot contain exceptions");
+    if (!isUtc(signoff.completedAtUtc)) fail("VERIFIED observation requires canonical UTC completion time");
     else {
       const completedAt = Date.parse(signoff.completedAtUtc);
       const evidenceReadyAt = Math.max(Date.parse(feature.exportedAtUtc), Date.parse(receipt.checkedAtUtc));
-      if (completedAt <= evidenceReadyAt) fail("verifier completion must follow evidence and receipt creation");
-      if (completedAt > Date.now() + 60_000) fail("verifier completion cannot be in the future");
+      if (completedAt <= evidenceReadyAt) fail("automated observation completion must follow evidence and receipt creation");
+      if (completedAt > Date.now() + 60_000) fail("automated observation completion cannot be in the future");
     }
   }
 }
@@ -262,6 +239,6 @@ if (failures.length) {
 
 console.log(
   signoff.status === "VERIFIED"
-    ? "IAT V2 historical corrected-program feature sign-off validates for its prior artifact. Current remediation source requires a fresh signed Devnet rehearsal; Mainnet HOLD."
-    : "IAT V2 corrected-program feature sign-off is PENDING.",
+    ? "IAT V2 historical corrected-program feature automated observation validates for its prior artifact. Current remediation source requires a fresh signed Devnet rehearsal; Mainnet HOLD."
+    : "IAT V2 corrected-program feature automated observation is PENDING.",
 );

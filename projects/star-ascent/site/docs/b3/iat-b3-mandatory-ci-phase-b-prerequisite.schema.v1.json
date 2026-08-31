@@ -1,0 +1,229 @@
+{
+  "schemaState": {
+    "schema": "iat-b3-mandatory-ci-phase-b-prerequisite/v1",
+    "status": "HOLD",
+    "ready": false,
+    "complete": false,
+    "operative": false,
+    "exitCode": 2
+  },
+  "authorityStateBinding": {
+    "packet": {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-mandatory-ci-phase-b-authority-state.v1.json",
+      "sha256": "6b0b50d9bcc4aa1116e33a5e1cda7fe03976e53b22f72529da3ff8c291d89b7c",
+      "byteLength": 5175,
+      "schema": "iat-b3-phase-b-p00-authority-state/v1"
+    },
+    "validator": {
+      "path": "projects/star-ascent/site/scripts/validate-iat-b3-mandatory-ci-phase-b-authority-state.mjs",
+      "sha256": "63a91ce06eceefa4c6fb737ac360d9f71fd7caf42eb34b8978cc9f20601319fd",
+      "byteLength": 13986
+    },
+    "focusedTest": {
+      "path": "projects/star-ascent/site/tests/iat-b3-mandatory-ci-phase-b-authority-state.test.mjs",
+      "sha256": "1248781181051c33cf4587b457e1c2d111f437a97f2c404b48b7f57d9ef1f563",
+      "byteLength": 15831
+    },
+    "structuralSemanticDigestSha256": null,
+    "descriptorBound": true,
+    "physicalBytesObserved": false,
+    "semanticStateObserved": false,
+    "executionEvidence": false
+  },
+  "sourceCheckpointExpectation": {
+    "commitSha": null,
+    "treeSha": null,
+    "sourceClosureSha256": null,
+    "runnerSha256": null,
+    "contractSha256": null,
+    "policySha256": null,
+    "checkpointObserved": false
+  },
+  "windowsLaunchLockExpectation": {
+    "mode": "SOURCE_BOUND_NATIVE_WINDOWS_LAUNCH_AND_LOCK",
+    "selected": true,
+    "implemented": false,
+    "compiled": false,
+    "capabilityObserved": false,
+    "executionAuthorized": false,
+    "requirements": [
+      "COMMITTED_SOURCE_BOUND_NATIVE_IMPLEMENTATION",
+      "SAME_OBJECT_OPEN_HANDLE_DENIES_SHARE_WRITE_AND_SHARE_DELETE",
+      "OPEN_HANDLE_VOLUME_FILE_ID_AND_SHA256_CROSS_BIND",
+      "STARTUPINFOEX_PROC_THREAD_ATTRIBUTE_JOB_LIST",
+      "CREATE_SUSPENDED_BEFORE_ROOT_EXECUTION",
+      "JOB_KILL_ON_CLOSE_AND_BREAKAWAY_DISABLED",
+      "COMPLETION_PORT_ACTIVE_PROCESS_ZERO"
+    ],
+    "forbiddenFallbacks": [
+      "PATH_ONLY_HASH_PLUS_GENERIC_SPAWN",
+      "ASSIGN_JOB_AFTER_PROCESS_START",
+      "PID_ENUMERATION_OR_PID_REUSE_CLEANUP",
+      "TASKKILL_WMI_CIM_PROCESS_NAME_CLEANUP"
+    ]
+  },
+  "toolchainExpectations": {
+    "exactNodeRuntimeLiveIdentity": null,
+    "pinnedZigExecutableIdentity": null,
+    "pinnedZigVersionOutput": null,
+    "linuxMuslCompilerClosure": null,
+    "linuxMuslSysrootIdentity": null,
+    "windowsGnuCompilerClosure": null,
+    "windowsMingwSysrootIdentity": null,
+    "windowsPeImportAllowlist": null,
+    "identitiesObserved": false,
+    "allResolved": false
+  },
+  "platformCapabilityExpectations": {
+    "linux": {
+      "pidNamespaceObserved": false,
+      "pidfdObserved": false,
+      "pdeathsigObserved": false,
+      "pid1ReaperObserved": false,
+      "monotonicWatchdogObserved": false
+    },
+    "windows": {
+      "startupInfoExJobListObserved": false,
+      "createSuspendedObserved": false,
+      "killOnJobCloseObserved": false,
+      "breakawayDisabledObserved": false,
+      "completionPortActiveProcessZeroObserved": false
+    },
+    "allObserved": false
+  },
+  "helperArtifactExpectations": {
+    "sourceClosureSha256": null,
+    "windowsArtifactSha256": null,
+    "linuxArtifactSha256": null,
+    "windowsCompileReceiptSha256": null,
+    "linuxCompileReceiptSha256": null,
+    "runtimeReceiptSha256": null,
+    "helperCompiled": false,
+    "artifactsObserved": false,
+    "compileReceiptsObserved": false,
+    "runtimeReceiptObserved": false
+  },
+  "invocationEnvelopeExpectations": {
+    "argvPolicySha256": null,
+    "environmentPolicySha256": null,
+    "cwdPolicySha256": null,
+    "fdHandlePolicySha256": null,
+    "deadlinePolicySha256": null,
+    "tapPolicySha256": null,
+    "outputCapPolicySha256": null,
+    "observedInvocation": false
+  },
+  "publicInputBinding": {
+    "k44StructuralBinding": {
+      "library": {
+        "path": "projects/star-ascent/site/scripts/lib/iat-b3-key-free-public-build-input.mjs",
+        "sha256": "296ba945f1842e9e0ede0158c38da3997061b465a51a4a67578216e40a2c80d0",
+        "byteLength": 23017
+      },
+      "focusedTest": {
+        "path": "projects/star-ascent/site/tests/iat-b3-key-free-public-build-input.test.mjs",
+        "sha256": "ca7aee8197c9a918413f6fb35c518ed4df2a5a04cdecbcccb843d1c689467d3b",
+        "byteLength": 17333
+      },
+      "documentation": {
+        "path": "projects/star-ascent/site/docs/b3/KEY_FREE_PUBLIC_BUILD_INPUT.md",
+        "sha256": "f9e65e024d2e26c1923d810fc7feba80a4b75788cf213670edcf6b2aa6689b65",
+        "byteLength": 4201
+      },
+      "template": {
+        "path": "projects/star-ascent/site/docs/b3/iat-b3-key-free-public-build-input.template.v1.json",
+        "sha256": "176a855e8c53e8a9c5f6c555758e641e98e6eb1f7198220442a6531ab47b8884",
+        "byteLength": 1998
+      },
+      "descriptorBound": true,
+      "structuralOnly": true
+    },
+    "directObservationTruth": {
+      "checkpointDirectlyObservedByThisModule": false,
+      "wallClockDirectlyObservedByThisModule": false,
+      "inputFilesDirectlyObservedByThisModule": false,
+      "productionIdentityInventoryDirectlyObservedByThisModule": false,
+      "priorLaneIdentityInventoryDirectlyObservedByThisModule": false
+    },
+    "allDirectObserversObserved": false,
+    "callerSuppliedEvidenceAccepted": false
+  },
+  "daemonStorageExpectations": {
+    "a2SystemProvisioningAuthorized": false,
+    "systemProvisioningObserved": false,
+    "daemonAvailable": false,
+    "daemonIdentity": null,
+    "daemonSocketIdentity": null,
+    "exclusivePrincipalObserved": false,
+    "storageRoot": null,
+    "storageRootIdentity": null,
+    "storageCapacityBytes": null,
+    "storageCapabilityObserved": false,
+    "expectedUseCount": 0,
+    "observedUseCount": null,
+    "trustDerived": false
+  },
+  "receiptSourcePolicy": {
+    "authority": "OBSERVER_OWNED_DIRECT_BYTES_ONLY",
+    "observerOwnedReceiptsRequired": true,
+    "callerSuppliedReceiptAccepted": false,
+    "selfDeclaredReceiptAccepted": false,
+    "injectedReceiptAccepted": false,
+    "compileAndRuntimeReceiptsSeparate": true,
+    "receiptSourceObserved": false
+  },
+  "abortPolicy": {
+    "anyGapDisposition": "HOLD",
+    "exitCode": 2,
+    "automaticRetryAuthorized": false,
+    "fallbackAuthorized": false,
+    "resumeAuthorized": false,
+    "deadlineOrCapacityResizeAuthorized": false
+  },
+  "truthEnvelope": {
+    "helperCompiled": false,
+    "buildExecuted": false,
+    "runtimeExecuted": false,
+    "dockerUsed": false,
+    "networkUsed": false,
+    "rpcUsed": false,
+    "keyGenerated": false,
+    "signed": false,
+    "funded": false,
+    "deployed": false,
+    "publicDevnetRequested": false,
+    "publicDevnetAuthorized": false,
+    "mainnetAuthorized": false,
+    "releaseAuthorized": false
+  },
+  "blockers": [
+    "A2_SYSTEM_PROVISIONING_NOT_AUTHORIZED",
+    "BP00_STRUCTURAL_SEMANTIC_DIGEST_UNRESOLVED",
+    "BP01_DAEMON_STORAGE_OBSERVATION_UNAVAILABLE",
+    "BP01_HELPER_ARTIFACT_OBSERVATION_UNAVAILABLE",
+    "BP01_INVOCATION_ENVELOPE_OBSERVATION_UNAVAILABLE",
+    "BP01_PLATFORM_CAPABILITY_OBSERVATION_UNAVAILABLE",
+    "BP01_SOURCE_CHECKPOINT_UNOBSERVED",
+    "B_LOOPBACK_SIGNING_GRANTED_BUT_INOPERATIVE",
+    "COMPILER_EXECUTION_NOT_AUTHORIZED",
+    "DIRECT_CHECKPOINT_OBSERVER_REQUIRED_BY_CONSUMER",
+    "DIRECT_INPUT_FILE_OBSERVER_REQUIRED_BY_CONSUMER",
+    "DIRECT_PRIOR_LANE_IDENTITY_INVENTORY_OBSERVER_REQUIRED_BY_CONSUMER",
+    "DIRECT_PRODUCTION_IDENTITY_INVENTORY_OBSERVER_REQUIRED_BY_CONSUMER",
+    "DIRECT_WALL_CLOCK_OBSERVER_REQUIRED_BY_CONSUMER",
+    "EXACT_NODE_RUNTIME_LIVE_IDENTITY_UNRESOLVED",
+    "LINUX_MUSL_COMPILER_CLOSURE_UNRESOLVED",
+    "LINUX_MUSL_SYSROOT_IDENTITY_UNRESOLVED",
+    "NATIVE_HELPER_EXECUTION_NOT_AUTHORIZED",
+    "OBSERVER_OWNED_DUAL_BUILD_RECEIPT_UNAVAILABLE",
+    "PHASE_B_RUNTIME_CONTAINMENT_EXECUTION_NOT_AUTHORIZED",
+    "PINNED_ZIG_EXECUTABLE_IDENTITY_UNRESOLVED",
+    "PINNED_ZIG_VERSION_OUTPUT_UNRESOLVED",
+    "SAME_OBJECT_RUNTIME_RECEIPT_UNAVAILABLE",
+    "SOURCE_BOUND_WINDOWS_LAUNCH_LOCK_NOT_IMPLEMENTED",
+    "SYSTEM_INSTALL_DOWNLOAD_NETWORK_NOT_AUTHORIZED",
+    "WINDOWS_GNU_COMPILER_CLOSURE_UNRESOLVED",
+    "WINDOWS_MINGW_SYSROOT_IDENTITY_UNRESOLVED",
+    "WINDOWS_PE_IMPORT_ALLOWLIST_UNRESOLVED"
+  ]
+}

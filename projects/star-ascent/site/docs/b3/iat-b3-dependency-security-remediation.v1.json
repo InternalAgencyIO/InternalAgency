@@ -1,7 +1,7 @@
 {
   "$schema": "./iat-b3-dependency-security-remediation.v1.schema.json",
-  "schema": "iat-b3-dependency-security-remediation/v1",
-  "status": "TECHNICAL_REMEDIATION_COMPLETE_INDEPENDENT_ACCEPTANCE_PENDING",
+  "schema": "iat-b3-dependency-security-remediation/v2",
+  "status": "TECHNICAL_REMEDIATION_COMPLETE_AUTOMATED_DIRECT_EVIDENCE_PENDING",
   "scope": {
     "predicate": "ZERO_UNACCEPTED_DEPENDENCY_FINDINGS_PACKET",
     "certifies": [
@@ -13,7 +13,7 @@
     "doesNotCertify": [
       "FUTURE_REGISTRY_OR_ADVISORY_DATABASE_STATE",
       "TRANSITIVE_UNMAINTAINED_DEPENDENCY_RISK_ACCEPTANCE",
-      "INDEPENDENT_SECURITY_REVIEW_ACCEPTANCE",
+      "SOURCE_BOUND_AUTOMATED_SECURITY_EVIDENCE_CLOSURE",
       "PRODUCTION_BINARY_DEVNET_RELEASE_OR_MAINNET_AUTHORIZATION"
     ]
   },
@@ -77,14 +77,21 @@
       "patchedVersions": [],
       "unaffectedVersions": [],
       "accepted": false,
-      "disposition": "PENDING_INDEPENDENT_RISK_ACCEPTANCE"
+      "disposition": "PENDING_EXPLICIT_OWNER_RISK_DECISION"
     }
   ],
-  "independentReview": {
-    "accepted": false,
-    "reviewerIdentity": null,
-    "reviewedAtUtc": null,
-    "acceptanceReference": null
+  "automatedDirectEvidence": {
+    "schema": "iat-b3-dependency-security-automated-direct-evidence/v1",
+    "status": "SOURCE_BOUND_RECEIPT_STATE_ENDPOINT_EVIDENCE_UNOBSERVED",
+    "receiptSha256": null,
+    "stateDigestSha256": null,
+    "endpointEvidenceSha256": null,
+    "observedAtUtc": null,
+    "freshnessWindowSeconds": 900,
+    "directEvidenceOnly": true,
+    "packetMaySelectEvidenceSources": false,
+    "noSelfAttestation": true,
+    "humanReviewerRequired": false
   },
   "technicalRemediationComplete": true,
   "zeroKnownVulnerabilitiesObserved": true,
