@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 475,
   "country": "Estonia",
-  "state": "four-stills-closed-relaxed-acceptance-three-chatgpt-one-meta-raw",
+  "state": "four-stills-closed-git-lfs-remote-and-draft-pr-parity-verified",
   "closedAtUtc": "2026-08-31T22:00:11.2823173Z",
   "acceptedSceneIds": [1927, 1928, 1929, 1930],
   "selectedAssetSha256": [
@@ -41,5 +41,8 @@
   "closureEvidenceFileCount": 15,
   "closureEvidenceTotalBytes": 9865367,
   "closureEvidenceInventorySha256": "8F93073A95988B264BA077DF635FB40050859463025D68F2E6B2AB5C370B4905",
-  "nextSafeAction": "Validate the closure evidence manifest, commit every used and unused artifact through Git/LFS, push and prove remote/PR parity. Then close the four completed Meta lanes, preserve one blank X composer, and prepare Finland as the next zero-post European country so the Estonia-Finland pair can be published without duplicate media."
+  "closureRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-git-lfs-remote-verification-checkpoint.json",
+  "closureRemoteVerifiedCommit": "27a008019d6351c82f4103c7363643c1d3c121a1",
+  "closureRemoteVerifiedAtUtc": "2026-08-31T22:11:03.9527835Z",
+  "nextSafeAction": "Commit and remote-verify the closure-parity record, then close the four completed Meta lanes, preserve one blank X composer, and prepare Finland as the next zero-post European country so the Estonia-Finland pair can be published without duplicate media."
 }

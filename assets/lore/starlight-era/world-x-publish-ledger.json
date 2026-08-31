@@ -10777,7 +10777,7 @@
   },
   "latestBatch475EstoniaPreparation": {
     "schemaVersion": 1,
-    "status": "four-stills-closed-awaiting-git-lfs-remote-verification-and-finland-companion",
+    "status": "four-stills-closed-git-lfs-remote-and-draft-pr-parity-verified-awaiting-finland-companion",
     "preparedAtUtc": "2026-08-31T21:13:01.0864145Z",
     "batch": 475,
     "country": "Estonia",
@@ -10866,6 +10866,11 @@
     "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/accessibility-sidecars.json",
     "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/closure-evidence-manifest.json",
     "closureEvidenceInventorySha256": "8F93073A95988B264BA077DF635FB40050859463025D68F2E6B2AB5C370B4905",
-    "nextSafeAction": "Commit and remote-verify all closure evidence, close the four completed Meta lanes, preserve one blank X composer, and prepare Finland as Estonia's companion country."
+    "closureRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-git-lfs-remote-verification-checkpoint.json",
+    "closureRemoteVerifiedCommit": "27a008019d6351c82f4103c7363643c1d3c121a1",
+    "closureRemoteVerifiedAtUtc": "2026-08-31T22:11:03.9527835Z",
+    "closureLocalRemoteAndPrHeadMatched": true,
+    "closureTargetedLfsDryRunEmpty": true,
+    "nextSafeAction": "Commit and remote-verify the closure-parity record, close the four completed Meta lanes, preserve one blank X composer, and prepare Finland as Estonia's companion country."
   }
 }
