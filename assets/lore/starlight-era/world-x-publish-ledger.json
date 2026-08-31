@@ -10110,7 +10110,7 @@
   },
   "latestBatch471BosniaAndHerzegovinaPreparation": {
     "schemaVersion": 1,
-    "status": "three-terminal-media-occurrences-scene1912-retry1-dispatched-once-rendering",
+    "status": "closed-four-archive-accepted-four-clean-meta-viewer-derived-publication-candidates",
     "preparedAtUtc": "2026-08-31T13:15:34.0224551Z",
     "batch": 471,
     "country": "Bosnia and Herzegovina",
@@ -10169,6 +10169,26 @@
     "scene1912FirstRetryPreparedCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-scene-1912-first-retry-prepared-checkpoint.json",
     "scene1912Retry1DispatchedAtUtc": "2026-08-31T13:53:47.884Z",
     "scene1912Retry1SendClicks": 1,
-    "nextSafeAction": "Archive the terminal scene 1912 retry occurrence. Use the remaining retry only if it is another eligible hard failure and after a separate prepared checkpoint; never resend scenes 1911, 1913 or 1914. Do not click X Post."
+    "scene1912Retry1TerminalMedia": true,
+    "scene1912SecondRetryJustified": false,
+    "closedAtUtc": "2026-08-31T14:13:19.2142754Z",
+    "acceptedSceneIds": [1911, 1912, 1913, 1914],
+    "cleanPublicationCandidateSceneIds": [1911, 1912, 1913, 1914],
+    "selectedMetaViewerDerivedAssetSha256": [
+      "F8A945EFB90D8062E8895940A02B24578A751BB66D9FF5086181718BFCD61653",
+      "78AE68270D45EBDC670E570931534C1578A04A49E284A2EBC41B8FCB88DF0A25",
+      "5DE4E0F2BE54EED32409368C3BA37DBCE801DE8863960AFE0EDD78E02C487CFA",
+      "F7454E14418E0C86AF8FAF91542AB0C0EAA45BBB4993E372B5BBA501AAF6A4CF"
+    ],
+    "providerRawAssetCount": 0,
+    "chatgptPassRequestsIssued": 4,
+    "chatgptOutputsSaved": 0,
+    "additionalChatgptPassesPermitted": 0,
+    "closureCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-four-stills-closed-qa-checkpoint.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/provider-ledger.json",
+    "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/closure-evidence-manifest.json",
+    "xPairEligible": false,
+    "nextCountry": "Croatia",
+    "nextSafeAction": "Remote-verify Batch 471 closure, then prepare wholly new Croatia scenes 1915-1918 and keep X blank until a legitimate non-duplicate Bosnia-Croatia 2+1 pair closes."
   }
 }
