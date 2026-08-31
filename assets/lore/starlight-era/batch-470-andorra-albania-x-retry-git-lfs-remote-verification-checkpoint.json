@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "state": "authorized-retry-evidence-commit-lfs-remote-and-pr-parity-verified",
+  "verifiedAtUtc": "2026-08-31T12:21:55.8561196Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+  "verifiedEvidenceCommit": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
+  "gitParity": {
+    "localHead": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
+    "remoteBranchHead": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
+    "draftPrHead": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
+    "ahead": 0,
+    "behind": 0,
+    "draftPrStillDraft": true
+  },
+  "lfs": {
+    "targetedPushDryRunEmpty": true,
+    "evidencePath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-after-authorized-retry-no-transmission.png",
+    "pointerOidSha256": "622a2af3cac54b13cbc8a7fe3ea8ba7c10e7040a9039e22cf23a64c1d01c9461",
+    "rawBytes": 116401
+  },
+  "browserFinalAudit": {
+    "actualTabIds": ["34"],
+    "actualTabCount": 1,
+    "url": "https://x.com/compose/post",
+    "account": "@dogramaci",
+    "exactCaptionVisible": true,
+    "mediaCount": 3,
+    "altTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "postEnabled": true,
+    "postClickedAgain": false,
+    "terminalMetaScenesReopened": false
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "retryOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json",
+  "nextSafeAction": "The exact @dogramaci composer remains visible for one manual user click. The agent must not click Post again; after the user reports the manual click, verify the live status and record its X URL before any other dispatch."
+}

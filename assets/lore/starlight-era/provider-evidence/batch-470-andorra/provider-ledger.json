@@ -152,10 +152,12 @@
     "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json"
   },
   "remoteVerification": {
-    "status": "closure-commit-lfs-remote-and-pr-parity-verified",
+    "status": "closure-and-authorized-retry-evidence-commits-lfs-remote-and-pr-parity-verified",
     "verifiedClosureCommit": "b956d28e21c451a5613146466582fcfa17c843c8",
-    "verifiedAtUtc": "2026-08-31T11:38:36.6624493Z",
-    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json"
+    "verifiedRetryEvidenceCommit": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
+    "verifiedAtUtc": "2026-08-31T12:21:55.8561196Z",
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json",
+    "retryCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-retry-git-lfs-remote-verification-checkpoint.json"
   },
   "nextSafeAction": "Commit and remote-verify the authorized-retry no-transmission checkpoint. Preserve the exact reopened composer for one manual user click and do not perform another agent Post click."
 }
