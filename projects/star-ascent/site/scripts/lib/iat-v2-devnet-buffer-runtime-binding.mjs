@@ -14,6 +14,7 @@ export const IAT_V2_DEVNET_BUFFER_RUNTIME_BINDING_PATH =
 
 export const IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS = Object.freeze([
   "launch/IAT_V2_DEVNET_BUFFER_FD_INCIDENT_20260828.md",
+  "launch/IAT_V2_DEVNET_BUFFER_IN_PLACE_CONTINUATION_54720_INCIDENT_20260831.md",
   "launch/IAT_V2_DEVNET_BUFFER_IN_PLACE_CONTINUATION_INCIDENT_20260831.md",
   "launch/IAT_V2_DEVNET_BUFFER_PARTIAL_UPLOAD_INCIDENT_20260828.md",
   "launch/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md",
@@ -21,6 +22,7 @@ export const IAT_V2_DEVNET_BUFFER_RUNTIME_PATHS = Object.freeze([
   "package.json",
   "programs/iat_v2/artifact-binding.mjs",
   "scripts/continue-iat-v2-devnet-buffer-in-place-from-35520.sh",
+  "scripts/continue-iat-v2-devnet-buffer-in-place-from-54720.sh",
   "scripts/iat-v2-devnet-buffer-preflight.mjs",
   "scripts/lib/iat-v2-attended-git-runtime.mjs",
   "scripts/lib/iat-v2-attended-node-runtime.mjs",
