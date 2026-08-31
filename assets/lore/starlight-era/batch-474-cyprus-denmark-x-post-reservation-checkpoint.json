@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 474,
-  "state": "duplicate-safe-cyprus-denmark-x-publication-reservation-remote-verified",
+  "state": "duplicate-safe-cyprus-denmark-x-composer-staged-awaiting-git-lfs-remote-verification",
   "reservedAtUtc": "2026-08-31T20:32:56.7287046Z",
   "accountVerification": {
     "url": "https://x.com/dogramaci",
@@ -74,6 +74,12 @@
   "reservationTargetedLfsDryRunEmpty": true,
   "preparationManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/x-publication-preparation-manifest.json",
   "xComposerTabId": "6",
-  "xComposerBlank": true,
-  "nextSafeAction": "Commit and push the reservation verification record, prove parity once more, then stage the exact three media, caption, alt texts and Made with AI disclosure in the single visible X composer."
+  "xComposerBlank": false,
+  "stagedComposerCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-composer-staged-authorized-checkpoint.json",
+  "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/x-publication-attempt-evidence-manifest.json",
+  "stagedMediaCount": 3,
+  "stagedAltTextCount": 3,
+  "stagedMadeWithAiLabelVisible": true,
+  "stagedPostEnabled": true,
+  "nextSafeAction": "Commit and remote-verify the exact staged composer evidence. Then click the visible Post control once under the standing authorization and verify whether a public transmission occurred before any further submit action."
 }
