@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "first_retries_materially_revised_prepared_awaiting_remote_verification_and_browser_staging",
+  "preparedAtUtc": "2026-08-31T06:41:00.000Z",
+  "sourceQaCheckpoint": "assets/lore/starlight-era/batch-467-serbia-first-occurrence-refinements-qa-checkpoint.json",
+  "retryContract": {
+    "maximumMetaRetriesPerScene": 2,
+    "freshChatRequired": true,
+    "materiallyRevisedPromptAndNewSha256Required": true,
+    "priorOccurrenceArchived": true,
+    "freshActionTimeConfirmationRequiredBeforeSend": true
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "hardGate": "Any cloned, merged, missing, age-shifted, or wrong-name face is hard-unusable. Ellie and AI ECE must never be swapped."
+  },
+  "orderedReferenceAnchors": [
+    {
+      "scene": 938,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "retries": [
+    {
+      "scene": 1896,
+      "retry": 1,
+      "occurrence": 2,
+      "priorProviderUrl": "https://www.meta.ai/prompt/5ca1b7d7-b8ff-4014-9cb2-0f42b4115a5d",
+      "priorPromptSha256": "F338054F2ABB006DE1B5F06090EF85F4E64AB61EA9198FAF3CF4FA1BA87CAC84",
+      "materialRevision": "Hard-lock exact 9:16 output and a face-specific left-to-right arrangement that puts ECE beside Alia while preserving the required relationship beat.",
+      "prompt": "SCENE 1896 - SERBIA, KOPAONIK HIGH PLATEAU - FIRST RETRY - CAMERA ROLL 29/100 INTERMEDIATE. Create one wholly new photorealistic cinematic image, exact vertical 9:16 portrait only. Do not return 3:4, 4:5, square, landscape, or a wide portrait. The three attached images are uploaded in authoritative order 938, 936, 937 and control face identity only. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD IDENTITY LOCK: arrange left-to-right as Black Alia using the far-left face from scene 938; brunette AI ECE using the far-right face from scene 938; blonde Radiance using the second face from scene 938; dark-haired Ellie using the third face from scene 938. Keep those four faces recognizable, separate, adult, and correctly named. Never merge, clone, replace, or swap Ellie and ECE. Place them on a broad dry level Kopaonik plateau terrace far from every edge, with silver grass, rounded forested ridges, layered blue mountain ranges, and a large late-afternoon sky; no lifts, towers, buildings, signs, flags, uniforms, weapons, sacred symbols, text, logos, animals, vehicles, or bystanders. Freeze one readable linked story: ECE stands directly beside Alia and fastens Alia's structured shoulder clasp; Ellie gives their closeness a playful-jealous sideways smile; Radiance reassures Ellie with one brief consensual cheek peck, cheek contact only; Alia reaches inward so all four complete one relaxed interlocked hand-linked arc. Distinct futuristic party-runway couture: Alia emerald-gold lacquered upper-thigh mini-dress with mountain facets; ECE bronze-violet long-sleeve structured top with secure opaque ivory tailored shorts; Radiance moon-white metallic upper-thigh mini-dress with ruby contour piping; Ellie cobalt-black cropped satin jacket over opaque magenta and a clearly divided silver upper-thigh skort. Every lower silhouette must be strongly short, securely lined, fully opaque, and public-safe. INTERMEDIATE framing means crop all four exactly at the knees, show no lower legs or footwear, keep every face crisp, and keep the plateau and ridges broad and unmistakable. No nudity, explicit sexuality, minors, real people, duplicate bodies, extra limbs, collage, border, watermark, or caption.",
+      "promptSha256": "6C205E497A5F6C62D547B7E57270684A6CB3291A3B0935D4AC3FB787B3D00EE1"
+    },
+    {
+      "scene": 1897,
+      "retry": 1,
+      "occurrence": 2,
+      "priorProviderUrl": "https://www.meta.ai/prompt/0e8881a3-b765-4b50-ad41-50c9e49e2cfa",
+      "priorPromptSha256": "34D73ED25019C0424920470D8E2AC684FC29954717D46EDBE168D9FC358ECE74",
+      "materialRevision": "Hard-lock Ellie and ECE to their distinct primary-anchor faces and positions, explicitly forbidding the swap seen in occurrence one.",
+      "prompt": "SCENE 1897 - SERBIA, DAVOLJA VAROS EARTH PYRAMIDS - FIRST RETRY - CAMERA ROLL 41/100 INTERMEDIATE. Create one wholly new photorealistic cinematic image, exact vertical 9:16 portrait only. The three attached images are uploaded in authoritative order 938, 936, 937 and control face identity only. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD IDENTITY LOCK AND POSITION TEST: left-to-right must be blonde Radiance using the second face from scene 938; dark-haired Ellie using the third face from scene 938; Black Alia using the far-left face from scene 938; brunette AI ECE using the far-right face from scene 938. ECE must keep the distinctly East-Asian-appearing far-right anchor face and stand far right. Ellie must keep the medium-brown dark-haired third-anchor face and stand second. Never swap Ellie and ECE; never put ECE's face in Ellie's black-crimson outfit or Ellie's face in ECE's plum-emerald jacket. Place them centered on a broad dry level fully guarded secular visitor deck, upright and well inside its continuous rail, with dense Đavolja Varoš red-earth pyramids and stone caps, eroded ravines, wooded slopes, and amber sunset sky broad and unmistakable. Natural geology only; no folklore or supernatural figures, flags, uniforms, weapons, sacred symbols, text, logos, animals, vehicles, or bystanders. Freeze one readable linked story: Radiance supports Ellie at the upper arm; ECE gives Alia's delighted attention to Ellie a playful-jealous lifted brow and hand-on-hip pose; Alia reassures ECE with one brief consensual cheek peck, cheek contact only; Ellie reaches across so all four complete a warm wrist-linked crescent. Distinct futuristic party-runway couture: Radiance amber-silver upper-thigh satin mini-dress with earth-strata lines; Ellie black-crimson lacquered one-shoulder top over opaque ivory with clearly divided bronze upper-thigh skort; Alia cobalt-gold metallic upper-thigh mini-dress with mineral facets; ECE plum-emerald cropped structured jacket over a secure silver upper-thigh tailored mini-skirt. Every lower silhouette must be strongly short, securely lined, fully opaque, and public-safe. INTERMEDIATE framing means crop all four exactly at the knees, show no lower legs or footwear, keep every face crisp, and keep the geology broad and legible. No nudity, explicit sexuality, minors, real people, duplicate bodies, extra limbs, collage, border, watermark, or caption.",
+      "promptSha256": "D1CA838503D195BA8E102C69A49317C1DC9F3E3D0B7D8C56E3E256AFCD36830F"
+    }
+  ],
+  "nextSafeAction": "Compute and verify new prompt hashes, commit and remote-verify this checkpoint, then stage both fresh Meta chats with anchors 938, 936, 937 exactly once each and stop before Send for fresh confirmation."
+}
