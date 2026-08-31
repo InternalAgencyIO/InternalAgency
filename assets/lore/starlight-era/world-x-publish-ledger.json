@@ -10875,7 +10875,7 @@
   },
   "latestBatch476FinlandPreparation": {
     "schemaVersion": 1,
-    "status": "preflight-git-lfs-remote-and-pr-parity-verified-awaiting-visible-staging",
+    "status": "four-lanes-exactly-staged-awaiting-git-lfs-remote-verification",
     "preparedAtUtc": "2026-08-31T22:17:00.6181916Z",
     "batch": 476,
     "country": "Finland",
@@ -10912,12 +10912,22 @@
     "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-476-finland-preflight-git-lfs-remote-verification-checkpoint.json",
     "remoteBranchAndPrHeadMatched": true,
     "preflightTargetedLfsDryRunEmpty": true,
-    "currentBrowserTabIds": ["6"],
-    "currentBrowserTabCount": 1,
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-476-finland-four-lanes-staged-authorized-checkpoint.json",
+    "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-476-finland/staging-evidence-manifest.json",
+    "currentBrowserTabIds": ["6", "21", "22", "23", "24"],
+    "currentBrowserTabCount": 5,
     "currentXComposerBlank": true,
+    "currentMetaTabCount": 4,
+    "metaTabIds": ["21", "22", "23", "24"],
+    "xComposerTabId": "6",
+    "signedInMetaAccount": "leesha007",
+    "visibleThinkingModeAllFour": true,
+    "anchorsVisibleInExactOrderAllFour": true,
+    "exactPromptsVerifiedAllFour": true,
+    "sendButtonsEnabledAllFour": true,
     "sendClicks": 0,
     "repeatSendClicks": 0,
     "xPostClicks": 0,
-    "nextSafeAction": "Commit and push the preflight verification record, prove parity once more, then stage four fresh Meta Thinking lanes with anchors 938, 936, 937 in exact order."
+    "nextSafeAction": "Commit and push the exact staging evidence, prove local/remote/PR/LFS parity, then re-inspect the same five actual tabs and send each scene exactly once only if every visible gate remains true."
   }
 }
