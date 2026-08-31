@@ -3,7 +3,7 @@
   "batch": 471,
   "country": "Bosnia and Herzegovina",
   "scene": 1912,
-  "state": "first-bounded-moderation-compatible-retry-prepared-not-dispatched",
+  "state": "first-bounded-retry-visible-thinking-exactly-staged-authorized-awaiting-final-remote-and-live-recheck",
   "preparedAtUtc": "2026-08-31T13:44:00.0000000Z",
   "sourceOccurrence": {
     "attempt": 0,
@@ -28,15 +28,26 @@
   "retryPrompt": "SCENE 1912 - RETRY 1 - BOSNIA AND HERZEGOVINA, MOSTAR GUARDED NERETVA TERRACE FACING STARI MOST. Create one wholly new original photorealistic cinematic vertical 9:16 adult high-fashion travel editorial. Use the three attached images exactly once each in order 938, 936, 937 only as face-identity anchors. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE, and never clone, merge, replace or age-shift a face. Place the adjacent quartet well inside a broad dry level fully guarded secular river-view terrace, with emerald Neretva water, pale stone banks and the complete arch of Stari Most clearly behind them. Use a close three-quarter fashion composition showing all four complete faces through lower calves. Dress them in four distinct elegant, securely lined, fully opaque contemporary cocktail looks: Alia in a turquoise-gold fitted top with a tailored above-knee copper skirt, Radiance in a pearl-crimson fitted cocktail dress, Ellie in a cobalt-black cropped jacket with an ivory tailored skort, and ECE in an emerald-plum fitted jacket with tailored short trousers ending above the knee. Use restrained minimalist architectural heels and one subtle exact readable RAZE metal tag on each look, spelled R-A-Z-E, with no other text or logos. Radiance gives Alia one brief affectionate cheek kiss, Ellie answers with a playful rival glance, ECE catches Ellie's hand, and all four share one clean linked-hand chain. Keep the mood warm, consensual, sophisticated and public-safe. No sexualized emphasis, underwear, exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, water entry, edge approach, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
   "retryPromptSha256": "62A0B08F8274CE584F9A70E4553C93375FCF96976C92831DC692BDD9AC9ED7FF",
   "dispatchGate": {
-    "remoteCheckpointVerified": false,
-    "actualTabInspected": false,
-    "signedInMetaAccountVerified": false,
-    "visibleThinkingVerified": false,
-    "orderedAnchorsVisible": false,
-    "exactPromptVerified": false,
-    "sendEnabled": false,
+    "remoteCheckpointVerified": true,
+    "remoteVerifiedCheckpointCommit": "8d334082df9420e84a2f166170820af2b5537024",
+    "actualTabInspected": true,
+    "signedInMetaAccountVerified": true,
+    "visibleThinkingVerified": true,
+    "orderedAnchorsVisible": true,
+    "exactPromptVerified": true,
+    "sendEnabled": true,
     "authorizationCurrent": true,
-    "mayClickSend": false
+    "mayClickSend": true
   },
-  "nextSafeAction": "Compute and verify the retry prompt hash, commit and push this checkpoint plus the exact first-refusal evidence, verify remote/PR/LFS parity, then use only tab 40. Fill the exact retry prompt, attach 938, 936 and 937 in that order, verify visible Thinking and leesha007, and click Send once. Never resend scenes 1911, 1913 or 1914."
+  "stagedAtUtc": "2026-08-31T13:51:39.2727219Z",
+  "tabId": "40",
+  "stagedScreenshot": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-retry-1-composer-staged-authorized-before-send.png",
+    "sha256": "B4361D6F1A7951C17AB8DE17DF33F7957FF8F6E0E780CEF1851903A3D7D9F319",
+    "bytes": 126523,
+    "container": "JPEG JFIF despite .png extension",
+    "width": 1280,
+    "height": 720
+  },
+  "nextSafeAction": "Commit and push this staged retry evidence, verify remote/PR/LFS parity, re-list all actual tabs, and re-check only tab 40 for leesha007, visible Thinking, the exact retry prompt, anchors 938, 936 and 937 in order, and enabled Send. If exact, click Send once. Never resend scenes 1911, 1913 or 1914."
 }
