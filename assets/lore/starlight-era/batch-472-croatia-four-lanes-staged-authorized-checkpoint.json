@@ -110,13 +110,15 @@
     }
   ],
   "sendGate": {
-    "stagingEvidenceCommitted": false,
-    "stagingEvidenceRemoteVerified": false,
+    "stagingEvidenceCommitted": true,
+    "stagingEvidenceRemoteVerified": true,
+    "stagingEvidenceCommit": "1675f1b1a866915bb5a2c6547c6adbfcfff0af33",
+    "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-472-croatia-staging-git-lfs-remote-verification-checkpoint.json",
     "actualTabsMustBeRelistedImmediatelyBeforeSend": true,
     "promptAnchorAccountThinkingAndButtonGatesCurrentlyPass": true,
     "sendClicks": 0,
     "repeatSendClicks": 0,
-    "mayClickSend": false
+    "mayClickSend": true
   },
   "nextSafeAction": "Commit and push this checkpoint plus every used and superseded staging screenshot, verify local, remote branch and draft PR head parity and targeted LFS dry-run, then relist the five tabs and recheck the exact prompt prefix, three visible thumbnails, visible Thinking, enabled Send, leesha007, blank @dogramaci composer and current authorization before exactly one Send click per lane."
 }
