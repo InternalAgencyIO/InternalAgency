@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 469,
   "country": "Albania",
-  "state": "four_visible_meta_lanes_staged_awaiting_fresh_action_time_send_confirmation",
+  "state": "closed_four_accepted_after_single_chatgpt_shortening_pass",
   "preparedAtUtc": "2026-08-31T08:59:53.7678221Z",
   "authority": {
     "source": "current sole guardian heartbeat, remote-verified Europe Meta image directive, and user-relaxed acceptance directive",
@@ -198,9 +198,14 @@
     "anchorsVisibleInExactOrder": true,
     "exactPromptsVerified": true,
     "instantModeVerified": true,
-    "freshActionTimeConfirmationReceived": false,
-    "mayClickSend": false
+    "freshActionTimeConfirmationReceived": true,
+    "mayClickSend": false,
+    "sendCompleted": true,
+    "sendClicks": 4,
+    "repeatSendClicks": 0
   },
   "stagedCheckpoint": "assets/lore/starlight-era/batch-469-albania-four-lanes-staged-awaiting-send-confirmation-checkpoint.json",
-  "nextSafeAction": "Obtain fresh explicit action-time confirmation for these four staged Albania Meta lanes, then re-list and reverify the actual tabs and click each enabled Send exactly once."
+  "dispatchedCheckpoint": "assets/lore/starlight-era/batch-469-albania-four-lanes-dispatched-checkpoint.json",
+  "qaCheckpoint": "assets/lore/starlight-era/batch-469-albania-first-occurrence-refinements-qa-checkpoint.json",
+  "nextSafeAction": "Remote-verify the closed Albania archive, then prepare the user's five-still RAZE fashion run with independent deterministic 25 percent styling rolls and the existing camera-roll policy."
 }
