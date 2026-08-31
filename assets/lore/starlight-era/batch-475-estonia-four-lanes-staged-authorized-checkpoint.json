@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 475,
   "country": "Estonia",
-  "state": "four-meta-thinking-lanes-exactly-staged-authorized-awaiting-staging-remote-verification",
+  "state": "four-meta-thinking-lanes-exactly-staged-authorized-staging-remote-verified",
   "stagedAtUtc": "2026-08-31T21:26:48.6852107Z",
   "authorization": "authorized for all go, authorized for all similar commands",
   "authorizationCurrent": true,
@@ -43,5 +43,8 @@
   "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/staging-evidence-manifest.json",
   "preparationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-europe-gap-fill-prompts-prepared-checkpoint.json",
   "preflightCheckpoint": "assets/lore/starlight-era/batch-475-estonia-preflight-git-lfs-remote-verification-checkpoint.json",
-  "nextSafeAction": "Commit and push this exact staging state and evidence, fetch, verify local/remote/PR heads and targeted LFS parity, then re-inspect the same five actual tabs and send each scene exactly once only if every visible gate remains true."
+  "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-staging-git-lfs-remote-verification-checkpoint.json",
+  "stagingRemoteVerifiedCommit": "c437aadadb1443063c864d860016c375988e23c3",
+  "stagingRemoteVerifiedAtUtc": "2026-08-31T21:32:51.6369419Z",
+  "nextSafeAction": "Commit and remote-verify the staging-parity record, then re-inspect the same five actual tabs and send each Meta lane exactly once only if every visible gate remains true."
 }

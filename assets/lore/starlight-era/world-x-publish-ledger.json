@@ -10777,7 +10777,7 @@
   },
   "latestBatch475EstoniaPreparation": {
     "schemaVersion": 1,
-    "status": "four-lanes-exactly-staged-awaiting-git-lfs-remote-verification",
+    "status": "four-lanes-exactly-staged-git-lfs-remote-and-draft-pr-parity-verified-awaiting-final-visible-dispatch-gate",
     "preparedAtUtc": "2026-08-31T21:13:01.0864145Z",
     "batch": 475,
     "country": "Estonia",
@@ -10829,6 +10829,9 @@
     "sendClicks": 0,
     "repeatSendClicks": 0,
     "xPostClicks": 0,
-    "nextSafeAction": "Commit and push the exact staging evidence, prove local/remote/PR/LFS parity, then re-inspect the same five actual tabs and send each scene exactly once only if every visible gate remains true."
+    "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-475-estonia-staging-git-lfs-remote-verification-checkpoint.json",
+    "stagingRemoteVerifiedCommit": "c437aadadb1443063c864d860016c375988e23c3",
+    "stagingRemoteVerifiedAtUtc": "2026-08-31T21:32:51.6369419Z",
+    "nextSafeAction": "Commit and remote-verify the staging-parity record, then re-inspect the same five actual tabs and send each Meta lane exactly once only if every visible gate remains true."
   }
 }
