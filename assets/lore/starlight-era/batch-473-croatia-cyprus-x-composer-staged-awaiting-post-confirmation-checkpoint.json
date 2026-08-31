@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 473,
-  "state": "croatia-cyprus-x-composer-exactly-staged-awaiting-staging-remote-verification",
+  "state": "croatia-cyprus-x-composer-exactly-staged-remote-verified-awaiting-final-live-gate",
   "stagedAtUtc": "2026-08-31T18:51:44.8481790Z",
   "account": "@dogramaci",
   "accountVerifiedInVisibleProfileUi": true,
@@ -43,5 +43,8 @@
   "unexpectedTabs": [],
   "reservationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-post-reservation-checkpoint.json",
   "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/x-publication-attempt-evidence-manifest.json",
-  "nextSafeAction": "Commit and remote-verify this exact staged draft. Then recheck the live composer, @dogramaci account continuity, exact caption, three media, three alt descriptions, Made with AI, duplicate gate, enabled Post and zero prior transmission. Only if every gate remains true, click Post exactly once."
+  "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-staging-git-lfs-remote-verification-checkpoint.json",
+  "stagingRemoteVerifiedCommit": "32225442599bb4bcf72c42a2668ed10637f5676d",
+  "stagingRemoteVerifiedAtUtc": "2026-08-31T18:54:36.5268323Z",
+  "nextSafeAction": "Commit and push the staging verification record, prove the new head is again at local, remote and draft PR parity, then recheck the live composer and click Post exactly once only if every gate remains true."
 }

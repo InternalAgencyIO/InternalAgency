@@ -10451,6 +10451,9 @@
     "xReservationRemoteVerifiedAtUtc": "2026-08-31T18:45:34.3315783Z",
     "xComposerCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-composer-staged-awaiting-post-confirmation-checkpoint.json",
     "xPublicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/x-publication-attempt-evidence-manifest.json",
-    "nextSafeAction": "Commit and remote-verify the exact staged composer, then recheck every live X gate and click Post exactly once only if all remain true."
+    "xStagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-staging-git-lfs-remote-verification-checkpoint.json",
+    "xStagingRemoteVerifiedCommit": "32225442599bb4bcf72c42a2668ed10637f5676d",
+    "xStagingRemoteVerifiedAtUtc": "2026-08-31T18:54:36.5268323Z",
+    "nextSafeAction": "Commit and push the staging verification record, prove the new head is again at local, remote and draft PR parity, then recheck every live X gate and click Post exactly once only if all remain true."
   }
 }
