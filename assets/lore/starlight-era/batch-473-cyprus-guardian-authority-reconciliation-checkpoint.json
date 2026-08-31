@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "batch": 473,
+  "state": "existing-guardian-preserved-stale-cuba-and-tanzania-snapshots-superseded-by-current-meta-europe-authority",
+  "observedAtUtc": "2026-08-31T17:39:32.0574130Z",
+  "observedAtLocal": "2026-08-31T20:39:32.0644257+03:00",
+  "guardian": {
+    "automationId": "starlight-internalagency-24-7-guardian",
+    "viewResult": "The Codex automation surface confirmed the existing automation by rendering its card but did not expose full editable fields in the model-visible response.",
+    "targetThread": "01a0368a-8fb0-7d90-9066-88cbf476d7e6",
+    "targetThreadState": "notLoaded",
+    "handoffScheduledResumeLocal": "2026-08-31T10:04:00+03:00 approximately",
+    "resumeTimeAlreadyPassed": true,
+    "scheduleMutation": false,
+    "pauseResumeMutation": false,
+    "promptMutation": false,
+    "newAutomationCreated": false,
+    "newTaskThreadWorkerSubagentOrGuardianCreated": false,
+    "reasonNoAutomationMutation": "The existing fields and current hidden pause/resume schedule were not exposed. Inventing a full update could overwrite the guardian schedule. The current repository-first rule and newer direct user authority are sufficient for this foreground run."
+  },
+  "newestAuthority": {
+    "localRemoteAndDraftPrHead": "a7b3f01efe67001a58099e1af1009b53a8d9bf6a",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "latestClosedBatch": 472,
+    "latestClosedCountry": "Croatia",
+    "latestLiveXUrl": "https://x.com/dogramaci/status/2094473140004929917",
+    "providerRouting": "Meta AI only through the visible in-app Browser while Grok credits remain paused",
+    "requiredMetaMode": "Thinking",
+    "visibleMetaLaneLimit": 4,
+    "visibleXComposerLimit": 1,
+    "orderedIdentityAnchors": [938, 936, 937],
+    "maximumMetaRetriesPerScene": 2,
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedOccurrence": 1,
+    "currentUserAuthorization": "authorized for all go, authorized for all similar commands"
+  },
+  "canonicalReconciliation": {
+    "cuba": "The guardian's historical Cuba source snapshot is superseded and must not dispatch.",
+    "tanzania": "The handoff's newer Tanzania Grok preparation is also superseded for current routing because the user later paused Grok until credits return and ordered the European Meta image run.",
+    "current": "Batch 472 Croatia and its Bosnia-Croatia X pair are closed and remote verified. The next canonical zero-post European gap after Croatia is Cyprus, prepared as wholly new scenes 1919-1922.",
+    "rule": "Do not reopen Cuba, Tanzania, Bosnia and Herzegovina, or Croatia scenes. Any guardian wake must fetch current remote authority before provider actions."
+  },
+  "nextSafeAction": "Prepare and remote-verify Batch 473 Cyprus prompts and rolls. Then inspect actual browser tabs and accounts, open only the four needed Meta lanes beside one blank X composer, attach anchors 938, 936, 937 in order, verify Thinking and exact prompts, and stop before Send if any gate fails."
+}
