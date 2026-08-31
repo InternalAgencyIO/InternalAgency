@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "prompts_prepared_awaiting_action_time_confirmation",
+  "preparedAtUtc": "2026-08-31T05:41:53.1725047Z",
+  "authority": {
+    "source": "direct user instruction in the current controlling thread",
+    "directive": "European country-pair gap-fill run using four Meta lanes, at most two Meta retries per scene, one strong ChatGPT hemline-shortening edit per technically valid Meta image, archive all used and unused outputs, and keep X pair publication moving",
+    "supersedes": "Batch 466 nextAuthorizedCountry Republic of the Congo",
+    "remoteVerifiedBaseHead": "a15dbd20b8250dc81febbff8186d3bf1ac36f8f8",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+  },
+  "gapRationale": {
+    "countryPairPostCountInWorldXLedger": 0,
+    "previousBatch": 464,
+    "previousSceneRange": [1882, 1885],
+    "previousStatus": "closed-unresolved-zero-accepted",
+    "rule": "Create wholly new scenes and prompt hashes; never reopen, resend, or retry scenes 1882-1885."
+  },
+  "sceneRange": [1894, 1897],
+  "provider": "Meta AI (in-app Browser only)",
+  "providerSettings": {
+    "mode": "Create one image",
+    "aspectRatio": "9:16 portrait",
+    "laneCount": 4,
+    "freshChatPerOccurrence": true,
+    "sendRequiresFreshActionTimeConfirmation": true
+  },
+  "upstreamStorySource": {
+    "mode": "local remote-verified Serbia lineage reuse; no new provider request",
+    "sourceCheckpoint": "assets/lore/starlight-era/batch-464-serbia-prompts-prepared-checkpoint.json",
+    "reuseLimit": "country research and ensemble grammar only; all locations, actions, scene IDs, and prompt hashes below are new"
+  },
+  "rollPolicy": {
+    "algorithm": "SHA-256 seed; scan digest bytes left-to-right for first byte below 200; roll=(byte mod 100)+1",
+    "mapping": {
+      "1-20": "EXTREME CLOSE",
+      "21-80": "INTERMEDIATE",
+      "81-100": "EXTREME WIDE"
+    }
+  },
+  "orderedReferenceAnchors": [
+    {
+      "scene": 938,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "retryPolicy": {
+    "maximumMetaRetriesPerScene": 2,
+    "maximumMetaOccurrencesPerScene": 3,
+    "eligibleOnlyAfter": "archived image-bearing occurrence fails visual QA",
+    "freshChatRequired": true,
+    "materiallyRevisedPromptAndNewSha256Required": true,
+    "neverRetry": [
+      "refusal",
+      "moderation",
+      "safety control",
+      "account control",
+      "rate limit",
+      "provider limit",
+      "login or challenge",
+      "missing supported upload control",
+      "explicit no-byte result"
+    ],
+    "archiveAllPromptsAndOutcomes": true
+  },
+  "chatgptHemlineRefinement": {
+    "tool": "built-in ChatGPT image generator only",
+    "passesPerTechnicallyValidMetaImage": 1,
+    "edit": "Strongly shorten all four adult women's lower silhouettes to securely lined, fully opaque, public-safe upper-thigh cocktail mini-dress, clearly divided skort, or tailored shorts length.",
+    "invariants": "Preserve faces, identity mapping, hair, exactly four women, anatomy, hands, pose, relationship beat, Serbia location, camera roll and crop, lighting, and all other design details. Add no people, limbs, animals, text, logos, props, exposure, or explicit content.",
+    "selection": "Visually compare untouched Meta source and single ChatGPT refinement; choose the stronger compliant candidate and retain both as used or unused."
+  },
+  "scenes": [
+    {
+      "scene": 1894,
+      "cameraRollAudit": {
+        "seed": "starlight|camera-roll|batch-467|scene-1894|counter-0",
+        "digestSha256": "EF20A0BC6A41A558B35AAF9F302C51D6E49DDA2F7BF11600035F7C422D324228",
+        "acceptedByteIndex": 1,
+        "acceptedByte": 32
+      },
+      "cameraRoll": 33,
+      "framing": "INTERMEDIATE",
+      "location": "Palić Lake promenade and Art Nouveau water tower",
+      "prompt": "SCENE 1894 - SERBIA, PALIC LAKE PROMENADE AND ART NOUVEAU WATER TOWER - CAMERA ROLL 33/100, INTERMEDIATE FRAMING. Create one original photorealistic cinematic vertical 9:16 sci-fi travel-editorial still. Use the three attached images, uploaded in exact authoritative order as scenes 938, 936, and 937, only as identity anchors for the same recurring quartet. Show exactly four distinct fictional adult women, every one exactly age 21 and female-only: blonde Radiance, dark-haired Ellie, Black Alia, and brunette AI ECE. Preserve their recognizable faces and correct name mapping while creating a wholly new pose, wardrobe, setting, and composition. Place them on a broad, dry, level, empty secular lakeside promenade at blue hour, with Palić Lake, the ornate secular Art Nouveau water tower, curving promenade rail, reeds, and flat northern horizon large and unmistakable. Freeze a safe affectionate story beat: Ellie protects Radiance by fastening a loose jeweled wrist cuff; Alia answers their closeness with a readable playful-jealous raised brow and hand-on-hip pose; ECE reassures Alia with one brief consensual cheek peck, cheek contact only; Radiance reaches inward so all four finish in a warm reconciled hand-linked crescent. Keep everyone upright and well inside the rail. Bold distinct futuristic party-runway couture: Radiance in raspberry-red structured satin mini-dress with silver river-line facets; Ellie in black lacquered long-sleeve top over an opaque ivory base and clearly divided cobalt skort; Alia in turquoise-gold metallic mini-dress with abstract Pirot geometry; ECE in plum-silver cropped jacket over a secure emerald mini-skirt. Every lower silhouette is short, strongly tailored, securely lined, fully opaque, and public-safe. CAMERA ROLL 33/100 means INTERMEDIATE: crop all four strictly at the knees; do not show lower legs or footwear. Keep all four faces crisp and keep the lake, water tower, promenade, reeds, and horizon broad and legible. No flags, official emblems, government buildings, military or police imagery, uniforms, weapons, tactical props, sacred buildings or symbols, readable text, logos, animals, bystanders, vehicles, boats, nudity, explicit sexuality, minors, real people, duplicate bodies, extra limbs, split panels, collage, border, watermark, or caption.",
+      "promptSha256": "F9711D1A078726A89D02356E9DCDC7ECC7C142A98610AAC83C0F392ED110D70C",
+      "archiveStem": "1894-serbia-palic-lake-art-nouveau-water-tower"
+    },
+    {
+      "scene": 1895,
+      "cameraRollAudit": {
+        "seed": "starlight|camera-roll|batch-467|scene-1895|counter-0",
+        "digestSha256": "7E2E32906D03FE22569B42ABA14218B669C628A0997BB9B6BDD5EDCE3644BB44",
+        "acceptedByteIndex": 0,
+        "acceptedByte": 126
+      },
+      "cameraRoll": 27,
+      "framing": "INTERMEDIATE",
+      "location": "Đerdap Gorge secured Danube overlook",
+      "prompt": "SCENE 1895 - SERBIA, DJERDAP GORGE SECURED DANUBE OVERLOOK - CAMERA ROLL 27/100, INTERMEDIATE FRAMING. Create one original photorealistic cinematic vertical 9:16 sci-fi travel-editorial still. Use the three attached images, uploaded in exact authoritative order as scenes 938, 936, and 937, only as identity anchors for the same recurring quartet. Show exactly four distinct fictional adult women, every one exactly age 21 and female-only: blonde Radiance, dark-haired Ellie, Black Alia, and brunette AI ECE. Preserve their recognizable faces and correct name mapping while creating a wholly new pose, wardrobe, setting, and composition. Place them centered on a broad, dry, level, fully guarded secular viewing terrace, well back from its continuous rail, while the immense Danube curve through Đerdap Gorge, steep forested limestone walls, layered blue ridges, and open sky dominate behind them. Freeze a safe protective story beat: Alia steadies ECE gently at the forearm during a mild river breeze; Radiance gives Ellie's close attention to Alia a readable theatrical playful-jealous crossed-arm look; Ellie reassures Radiance with one brief consensual cheek peck, cheek contact only; ECE links Alia back to them so all four close into a laughing hand-linked diamond. Bold distinct futuristic party-runway couture: Radiance in garnet-black satin mini-dress with abstract river-current lines; Ellie in ice-blue lacquered asymmetric top over an opaque silver base and clearly divided ivory skort; Alia in copper-teal metallic long-sleeve mini-dress with faceted gorge geometry; ECE in violet-gold cropped structured jacket over a secure black mini-skirt. Every lower silhouette is short, strongly tailored, securely lined, fully opaque, and public-safe. CAMERA ROLL 27/100 means INTERMEDIATE: crop all four strictly at the knees; do not show lower legs or footwear. Keep all four faces crisp and keep the continuous rail, Danube bend, limestone walls, ridges, and sky broad and unmistakable. No flags, official emblems, government buildings, military or police imagery, uniforms, weapons, tactical props, dams, sacred buildings or symbols, readable text, logos, animals, bystanders, vehicles, boats, nudity, explicit sexuality, minors, real people, duplicate bodies, extra limbs, split panels, collage, border, watermark, or caption.",
+      "promptSha256": "3479FFDF9D3405E607C5B366EDF57F28FC79766E1BA276BB5883CC2ACD9ED26B",
+      "archiveStem": "1895-serbia-djerdap-gorge-danube-overlook"
+    },
+    {
+      "scene": 1896,
+      "cameraRollAudit": {
+        "seed": "starlight|camera-roll|batch-467|scene-1896|counter-0",
+        "digestSha256": "8083709FB5974B3AD6E0B354427F383AB63F3F01CBF64556E8222CD291EB956D",
+        "acceptedByteIndex": 0,
+        "acceptedByte": 128
+      },
+      "cameraRoll": 29,
+      "framing": "INTERMEDIATE",
+      "location": "Kopaonik high plateau and layered mountain ridges",
+      "prompt": "SCENE 1896 - SERBIA, KOPAONIK HIGH PLATEAU AND LAYERED MOUNTAIN RIDGES - CAMERA ROLL 29/100, INTERMEDIATE FRAMING. Create one original photorealistic cinematic vertical 9:16 sci-fi travel-editorial still. Use the three attached images, uploaded in exact authoritative order as scenes 938, 936, and 937, only as identity anchors for the same recurring quartet. Show exactly four distinct fictional adult women, every one exactly age 21 and female-only: blonde Radiance, dark-haired Ellie, Black Alia, and brunette AI ECE. Preserve their recognizable faces and correct name mapping while creating a wholly new pose, wardrobe, setting, and composition. Place them on a broad, dry, level, empty secular mountain terrace far from any edge, with Kopaonik's open high plateau, silver grass, rounded forested ridges, distant blue ranges, and expansive late-afternoon sky large and unmistakable; show no lifts, towers, buildings, or signs. Freeze a warm protective story beat: ECE secures Alia's structured shoulder clasp; Ellie answers their closeness with a readable playful-jealous sideways smile; Radiance reassures Ellie with one brief consensual cheek peck, cheek contact only; Alia reaches across so all four finish in a relaxed interlocked half-circle. Bold distinct futuristic party-runway couture: Radiance in moon-white metallic mini-dress with ruby contour piping; Ellie in cobalt-black satin cropped jacket over an opaque magenta base and clearly divided silver skort; Alia in emerald-gold lacquered mini-dress with abstract mountain facets; ECE in bronze-violet long-sleeve structured top over a secure ivory mini-skirt. Every lower silhouette is short, strongly tailored, securely lined, fully opaque, and public-safe. CAMERA ROLL 29/100 means INTERMEDIATE: crop all four strictly at the knees; do not show lower legs or footwear. Keep all four faces crisp and keep the plateau, silver grass, forested ridges, distant ranges, and sky broad and legible. No flags, official emblems, government buildings, military or police imagery, uniforms, weapons, tactical props, sacred buildings or symbols, readable text, logos, animals, bystanders, vehicles, nudity, explicit sexuality, minors, real people, duplicate bodies, extra limbs, split panels, collage, border, watermark, or caption.",
+      "promptSha256": "F338054F2ABB006DE1B5F06090EF85F4E64AB61EA9198FAF3CF4FA1BA87CAC84",
+      "archiveStem": "1896-serbia-kopaonik-high-plateau"
+    },
+    {
+      "scene": 1897,
+      "cameraRollAudit": {
+        "seed": "starlight|camera-roll|batch-467|scene-1897|counter-0",
+        "digestSha256": "DAE78C5FF7923B677125C36BB951321F1F7E73C7C69743AA887F8082F06515E6",
+        "acceptedByteIndex": 2,
+        "acceptedByte": 140
+      },
+      "cameraRoll": 41,
+      "framing": "INTERMEDIATE",
+      "location": "Đavolja Varoš earth pyramids secured visitor deck",
+      "prompt": "SCENE 1897 - SERBIA, DAVOLJA VAROS EARTH PYRAMIDS SECURED VISITOR DECK - CAMERA ROLL 41/100, INTERMEDIATE FRAMING. Create one original photorealistic cinematic vertical 9:16 sci-fi travel-editorial still. Use the three attached images, uploaded in exact authoritative order as scenes 938, 936, and 937, only as identity anchors for the same recurring quartet. Show exactly four distinct fictional adult women, every one exactly age 21 and female-only: blonde Radiance, dark-haired Ellie, Black Alia, and brunette AI ECE. Preserve their recognizable faces and correct name mapping while creating a wholly new pose, wardrobe, setting, and composition. Place them centered on a broad, dry, level, fully guarded secular visitor deck, well back from its continuous rail, with the dense field of Đavolja Varoš red-earth pyramids and stone caps, eroded ravines, wooded slopes, and amber sunset sky large and unmistakable. Treat the location strictly as natural geology with no folklore figures or supernatural imagery. Freeze a safe affectionate story beat: Radiance supports Ellie with one secure hand at the upper arm as they turn inward; ECE gives Alia's delighted attention to Ellie a readable playful-jealous hand-on-hip pose and lifted brow; Alia reassures ECE with one brief consensual cheek peck, cheek contact only; Ellie reaches across so all four close into a warm wrist-linked crescent. Bold distinct futuristic party-runway couture: Radiance in amber-silver satin mini-dress with abstract earth-strata lines; Ellie in black-crimson lacquered one-shoulder top over an opaque ivory base and clearly divided bronze skort; Alia in cobalt-gold metallic mini-dress with mineral facets; ECE in plum-emerald cropped structured jacket over a secure silver mini-skirt. Every lower silhouette is short, strongly tailored, securely lined, fully opaque, and public-safe. CAMERA ROLL 41/100 means INTERMEDIATE: crop all four strictly at the knees; do not show lower legs or footwear. Keep all four faces crisp and keep the continuous rail, earth pyramids, ravines, wooded slopes, and sunset sky broad and legible. No flags, official emblems, government buildings, military or police imagery, uniforms, weapons, tactical props, sacred buildings or symbols, folklore beings, supernatural imagery, readable text, logos, animals, bystanders, vehicles, nudity, explicit sexuality, minors, real people, duplicate bodies, extra limbs, split panels, collage, border, watermark, or caption.",
+      "promptSha256": "34D73ED25019C0424920470D8E2AC684FC29954717D46EDBE168D9FC358ECE74",
+      "archiveStem": "1897-serbia-davolja-varos-earth-pyramids"
+    }
+  ],
+  "forbiddenPriorSceneIds": [1882, 1883, 1884, 1885, 1886, 1887, 1888, 1889, 1890, 1891, 1892, 1893],
+  "forbiddenPriorPromptSha256": [
+    "9717C1E4629D8D1622E0BAACCD52CF5AFB92756D41AFC8C474068BB4CBB9680E",
+    "F75913F36A608F8D8B086DFCE9246F37D41950874BAD6F7503BB72B0EC807B3F",
+    "525819DAE11A57AD1CA87FC33F4D68F89EDE9561B44A60DB2C88E7220ECA433B",
+    "E44E391A422A4CE3A5C4CE7CA0BDC483EAB05C99C6DF180380C536FCE85B4699"
+  ],
+  "archivePolicy": {
+    "providerEvidenceDirectory": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/",
+    "preserve": [
+      "every prompt version and SHA-256",
+      "every visible provider response or blocked/no-byte outcome",
+      "untouched raw bytes",
+      "every Meta source and one ChatGPT refinement",
+      "used and unused selection labels",
+      "technical and visual QA",
+      "accessibility sidecars",
+      "provider ledger and occurrence envelope",
+      "manifest, Git/LFS, remote parity, PR head, and every X URL"
+    ]
+  },
+  "dispatchGate": {
+    "remoteCheckpointVerified": false,
+    "actualBrowserTabsInspected": false,
+    "signedInMetaComposerVerified": false,
+    "anchorsVisibleInExactOrder": false,
+    "exactPromptsVerified": false,
+    "freshActionTimeConfirmationReceived": false,
+    "mayClickSend": false
+  },
+  "nextAuthorizedBatch": {
+    "batch": 468,
+    "country": "Bulgaria",
+    "sceneRange": [1898, 1901],
+    "condition": "Only after every Batch 467 occurrence and archive barrier is closed or accepted; never reopen Bulgaria scenes 1886-1889."
+  }
+}
