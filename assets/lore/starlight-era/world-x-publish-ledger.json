@@ -10192,5 +10192,40 @@
     "xPairEligible": false,
     "nextCountry": "Croatia",
     "nextSafeAction": "Remote-verify Batch 471 closure, then prepare wholly new Croatia scenes 1915-1918 and keep X blank until a legitimate non-duplicate Bosnia-Croatia 2+1 pair closes."
+  },
+  "latestBatch472CroatiaPreparation": {
+    "schemaVersion": 1,
+    "status": "prompts-prepared-awaiting-remote-verification",
+    "preparedAtUtc": "2026-08-31T14:35:03.7971502Z",
+    "batch": 472,
+    "country": "Croatia",
+    "sceneIds": [1915, 1916, 1917, 1918],
+    "cameraRolls": [16, 46, 45, 71],
+    "promptSha256": [
+      "ADB3AA4ED199FD5D64549EC443E7C23264A838AC69E3A608139C096ED4FFE615",
+      "3938A1A93EABE2D0D988C17EDB96E68FE6C060279945C4EEFFACAF3CC85E690C",
+      "53A0B2FFFCC76F4A0841AC7CB324E4DAEA4C121023839B418C48AAB1BB6B4141",
+      "743C14F90DC9A1FEEE071575214EA6C5B25D0BFDF886F8DFFD99162F84180958"
+    ],
+    "orderedIdentityAnchors": [938, 936, 937],
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "gapRationale": "First zero-post European country after Bosnia and Herzegovina in the current canonical alphabetical priority order; Bulgaria already has conforming coverage.",
+    "visibleMetaLaneCount": 4,
+    "visibleXComposerCount": 1,
+    "requiredMetaMode": "Thinking",
+    "statementBootScene": 1915,
+    "fictionalBrand": "RAZE",
+    "thirdPartyRazerMarkExcluded": true,
+    "maximumMetaRetriesPerScene": 2,
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedMetaOccurrence": 1,
+    "relaxedAcceptance": "After one strong ChatGPT shortening request, accept nearly every public-safe non-corrupt result; reject only corrupt, duplicate, unsafe or explicit, no-image, or materially wrong-cast outcomes.",
+    "freshMetaSendAuthorizationReceived": true,
+    "metaDispatchPermittedAfterAllGates": false,
+    "grokState": "paused-until-credits-return",
+    "xComposerMustRemainBlank": true,
+    "xPostAuthorized": false,
+    "checkpoint": "assets/lore/starlight-era/batch-472-croatia-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "remoteVerifiedBaseHead": "3b8a0f8e33556d630b76ffd6b4c603aa642584ae",
+    "nextSafeAction": "Commit and remote-verify the Croatia preparation checkpoint, then inspect actual browser tabs and replace the four terminal Meta lanes in place only after every prompt, account, Thinking, anchor-order and Send gate passes."
   }
 }
