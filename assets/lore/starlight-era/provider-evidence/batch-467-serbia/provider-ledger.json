@@ -4,7 +4,7 @@
   "country": "Serbia",
   "provider": "Meta AI through the in-app Browser only",
   "capturedAtUtc": "2026-08-31T06:35:14.5119082Z",
-  "state": "first_retries_terminal_scene1896_second_retry_eligible_scene1897_closed",
+  "state": "closed_one_accepted_no_x_pair",
   "accountVisible": "leesha007",
   "sendCount": 4,
   "repeatSendCount": 0,
@@ -98,5 +98,16 @@
     "submittedAtUtc": "2026-08-31T07:11:49.548Z",
     "providerUrl": "https://www.meta.ai/prompt/e4e17039-8dc9-4b9e-bd44-b26fe1235c41"
   },
-  "nextSafeAction": "Wait for scene 1896 retry 2 to reach terminal state and archive it; no further Meta retry is permitted."
+  "secondRetryOutcome": {
+    "scene": 1896,
+    "status": "explicit-no-byte-refusal-terminal",
+    "rawAssetCount": 0,
+    "remainingMetaRetries": 0
+  },
+  "closure": {
+    "acceptedSceneIds": [1895],
+    "xPairEligible": false,
+    "checkpoint": "assets/lore/starlight-era/batch-467-serbia-closed-one-accepted-checkpoint.json"
+  },
+  "nextSafeAction": "Prepare wholly new Bulgaria Batch 468 scenes 1898-1901 without reopening scenes 1886-1889."
 }
