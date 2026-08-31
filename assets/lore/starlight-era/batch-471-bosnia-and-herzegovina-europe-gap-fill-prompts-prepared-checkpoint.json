@@ -3,7 +3,7 @@
   "batch": 471,
   "country": "Bosnia and Herzegovina",
   "runType": "four-lane-RAZE-fashion-europe-gap-fill",
-  "state": "four-visible-meta-thinking-lanes-exactly-staged-authorized-awaiting-final-remote-and-live-recheck-before-send",
+  "state": "four-meta-thinking-occurrences-dispatched-once-rendering",
   "preparedAtUtc": "2026-08-31T13:15:34.0224551Z",
   "authority": {
     "currentDirectives": [
@@ -171,8 +171,8 @@
     "exactPromptsVerifiedAllFour": true,
     "sendButtonsEnabledAllFour": true,
     "freshAuthorizationCurrent": true,
-    "gateConsumed": false,
-    "mayClickSend": true
+    "gateConsumed": true,
+    "mayClickSend": false
   },
   "xComposer": {
     "requiredVisibleCount": 1,
@@ -182,7 +182,16 @@
   },
   "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-preflight-git-lfs-remote-verification-checkpoint.json",
   "stagedCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-four-lanes-staged-authorized-checkpoint.json",
+  "dispatchedCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-four-lanes-dispatched-checkpoint.json",
   "metaTabIds": ["39", "40", "41", "42"],
   "xComposerTabId": "43",
-  "nextSafeAction": "Commit and push staged evidence, reverify remote branch, Draft PR 13 and targeted Git LFS parity, then re-list and re-inspect all five actual tabs. If every visible gate remains exact, click each Meta Send exactly once under the current fresh authorization. Do not click X Post."
+  "providerUrls": [
+    "https://www.meta.ai/prompt/8cd5179b-cff5-4cd5-939c-8800e2a8a617",
+    "https://www.meta.ai/prompt/e4bfe8e2-88cf-4a32-9d94-980a53896814",
+    "https://www.meta.ai/prompt/28ac9908-7055-47bc-ac74-0875a71c4b8e",
+    "https://www.meta.ai/prompt/17c5b372-c08a-402b-85cb-3752ba9062f3"
+  ],
+  "sendClicks": 4,
+  "repeatSendClicks": 0,
+  "nextSafeAction": "Archive every terminal occurrence without resending. Retry only the five hard conditions within the two-retry ceiling, then issue exactly one strong ChatGPT shortening pass for each technically valid selected Meta occurrence. Do not click X Post."
 }
