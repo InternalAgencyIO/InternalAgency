@@ -47,5 +47,18 @@
   "retryEligibleSceneIds": [1896, 1897],
   "orderedIdentityAnchors": [938, 936, 937],
   "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
-  "nextSafeAction": "Prepare fresh-chat, materially revised first-retry prompts for scenes 1896 and 1897 with anchors 938, 936, 937 in exact order; stop before Send for fresh action-time confirmation."
+  "stagedFirstRetries": {
+    "observedAtUtc": "2026-08-31T06:52:47.3720107Z",
+    "sceneIds": [1896, 1897],
+    "retryNumber": 1,
+    "occurrenceNumber": 2,
+    "tabIds": ["9", "10"],
+    "promptSha256": [
+      "6C205E497A5F6C62D547B7E57270684A6CB3291A3B0935D4AC3FB787B3D00EE1",
+      "D1CA838503D195BA8E102C69A49317C1DC9F3E3D0B7D8C56E3E256AFCD36830F"
+    ],
+    "orderedIdentityAnchors": [938, 936, 937],
+    "sendClicked": false
+  },
+  "nextSafeAction": "After fresh action-time confirmation, re-inspect staged tabs 9 and 10 and click Send exactly once in each; preserve both second occurrences before any further retry."
 }
