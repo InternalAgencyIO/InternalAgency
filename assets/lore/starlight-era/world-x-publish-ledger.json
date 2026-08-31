@@ -9563,7 +9563,7 @@
   },
   "latestBatch468BulgariaPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-lanes-staged-authorized-awaiting-one-send-each",
+    "status": "four-initial-meta-occurrences-dispatched-once-rendering",
     "preparedAtUtc": "2026-08-31T07:27:19.791Z",
     "batch": 468,
     "country": "Bulgaria",
@@ -9588,12 +9588,22 @@
     "browserVisibilityPolicy": "Keep exactly four visible Meta lanes plus one visible X composer; close stale or terminal provider tabs only after evidence capture.",
     "stagedCheckpoint": "assets/lore/starlight-era/batch-468-bulgaria-four-lanes-staged-authorized-checkpoint.json",
     "stagedAtUtc": "2026-08-31T07:37:50.1947938Z",
+    "dispatchedCheckpoint": "assets/lore/starlight-era/batch-468-bulgaria-four-lanes-dispatched-checkpoint.json",
+    "dispatchCompletedAtUtc": "2026-08-31T07:40:11.573Z",
+    "providerUrls": [
+      "https://www.meta.ai/prompt/c00b128b-5104-43c4-a93b-bb736733f3ed",
+      "https://www.meta.ai/prompt/1c9ac269-ee34-46a4-92aa-b0cf43fc3797",
+      "https://www.meta.ai/prompt/fc82eb65-10ae-4a60-bb70-9ef59b074c18",
+      "https://www.meta.ai/prompt/fc6bf306-2419-423b-861f-29c1583f8b0b"
+    ],
+    "totalSendClicks": 4,
+    "repeatSendClicks": 0,
     "metaTabIds": ["17", "18", "19", "20"],
     "xComposerTabId": "21",
     "liveXHandleVisible": "@dogramaci",
     "xComposerMutated": false,
     "xPostAuthorized": false,
-    "dispatchPermitted": true,
+    "dispatchPermitted": false,
     "xPostEligibleYet": false
   }
 }
