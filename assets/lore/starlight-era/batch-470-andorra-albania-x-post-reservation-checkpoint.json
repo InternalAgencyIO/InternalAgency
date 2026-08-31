@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "state": "first-authorization-and-fresh-retry-consumed-both-confirmed-no-transmission-draft-preserved",
+  "state": "three-authorizations-consumed-all-confirmed-no-transmission-draft-preserved",
   "authorizedAtUtc": "2026-08-31T11:49:12.6897278Z",
   "authorization": {
     "userText": "send authorized go",
@@ -37,7 +37,7 @@
     "altTextCount": 3,
     "madeWithAiLabelVisible": true,
     "dialogPostEnabled": true,
-    "postClicks": 2,
+    "postClicks": 3,
     "postAuthorized": false
   },
   "evidence": {
@@ -61,9 +61,16 @@
     "outcome": "confirmed-no-transmission",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json"
   },
-  "postClicks": 2,
+  "explicitUserOverride": {
+    "userText": "send authorized go",
+    "clickedAtUtc": "2026-08-31T12:29:16.459Z",
+    "currentXTabId": "35",
+    "outcome": "confirmed-no-transmission",
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json"
+  },
+  "postClicks": 3,
   "publicTransmissionCount": 0,
   "authorizationConsumed": true,
   "mayClickPostAgain": false,
-  "nextSafeAction": "Remote-verify the retry checkpoint and leave the exact composer visible for one manual user click. Do not perform another agent Post click."
+  "nextSafeAction": "Remote-verify the explicit-override checkpoint and leave the exact composer visible for a manual user click. Do not perform another agent Post click."
 }

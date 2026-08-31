@@ -4,16 +4,24 @@
   "countryPair": ["Andorra", "Albania"],
   "createdAtUtc": "2026-08-31T11:56:04.3972729Z",
   "root": "assets/lore/starlight-era/provider-evidence/batch-470-andorra",
-  "fileCount": 4,
-  "totalBytes": 431154,
+  "fileCount": 5,
+  "totalBytes": 544810,
   "inventoryDigestAlgorithm": "SHA-256 over UTF-8 lines filename|sha256|bytes sorted by filename with LF separators and no terminal LF",
-  "inventorySha256": "580BB271C6AA54A86BCF98DF2651892D4511A5A362F62B68594A67E5731D4DC1",
+  "inventorySha256": "498ED3A6496B2305523908955EDE6FB28DCD548EB4FA1FBDDC886C27FCD983C4",
   "files": [
     {
       "name": "x-andorra-albania-after-authorized-retry-no-transmission.png",
       "role": "composer-after-authorized-retry-no-transmission",
       "sha256": "622A2AF3CAC54B13CBC8A7FE3EA8BA7C10E7040A9039E22CF23A64C1D01C9461",
       "bytes": 116401,
+      "dimensions": "1280x720",
+      "rawFormat": "JPEG/JFIF"
+    },
+    {
+      "name": "x-andorra-albania-after-explicit-override-no-transmission.png",
+      "role": "composer-after-explicit-override-no-transmission",
+      "sha256": "48C37B723C4ECFBEDA29EE2B67F3017641DABA83D587CA525A3AD5148D74CF39",
+      "bytes": 113656,
       "dimensions": "1280x720",
       "rawFormat": "JPEG/JFIF"
     },
@@ -39,5 +47,5 @@
       "dimensions": "1280x720"
     }
   ],
-  "outcome": "The first authorized click and one separately authorized retry click both produced confirmed no-transmission outcomes. The exact composer was saved and reopened; no third click occurred."
+  "outcome": "Three separately authorized visible Post clicks, including the user's explicit override of the manual-only stop, each produced a confirmed no-transmission outcome. The exact composer was saved and reopened; no fourth click occurred."
 }
