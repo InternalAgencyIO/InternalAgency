@@ -10195,7 +10195,7 @@
   },
   "latestBatch472CroatiaPreparation": {
     "schemaVersion": 1,
-    "status": "three-initial-media-one-initial-refusal-scene-1915-retry-1-staged-remote-verified-browser-tab-inventory-empty-stop-before-send",
+    "status": "three-initial-media-one-initial-refusal-scene-1915-retry-1-restaged-after-explicit-full-tab-reset",
     "preparedAtUtc": "2026-08-31T14:35:03.7971502Z",
     "batch": 472,
     "country": "Croatia",
@@ -10256,6 +10256,9 @@
     "scene1915FirstRetryPreparedCheckpoint": "assets/lore/starlight-era/batch-472-croatia-scene-1915-first-retry-prepared-checkpoint.json",
     "scene1915Retry1StagingRemoteVerifiedCommit": "41f0e28eebcc4180166045db114c24735eaf395a",
     "browserTabInventoryLossStopCheckpoint": "assets/lore/starlight-era/batch-472-croatia-browser-tab-inventory-loss-stop-checkpoint.json",
+    "fullTabResetRestagedCheckpoint": "assets/lore/starlight-era/batch-472-croatia-full-tab-reset-restaged-checkpoint.json",
+    "fullTabResetAuthorizationCurrent": true,
+    "resetControlledTabIds": ["1", "2", "3", "4", "5"],
     "browserInventoryAtStop": {"controlledTabs": 0, "userOpenTabs": 0, "selectedTab": null, "retrySendClicks": 0, "xPostClicks": 0},
     "scene1915Retry1PromptSha256": "AB2D675F3E5767F3E3BF5770A4B1C1B5B75762B8C3E686608D90CC97D43F0C75",
     "chatgptPassRequestsIssued": 3,
@@ -10264,6 +10267,6 @@
     "chatgptOnePassProgressCheckpoint": "assets/lore/starlight-era/batch-472-croatia-chatgpt-one-pass-progress-checkpoint.json",
     "providerRawDownloadControlAttempts": 3,
     "providerRawAssetCount": 0,
-    "nextSafeAction": "Stop before Submit. Restore the same five visible in-app Browser tabs without creating duplicates or reopening terminal scenes. Then recheck the staged scene 1915 retry prompt, Thinking, leesha007, ordered anchors 938, 936, 937, enabled Send, blank @dogramaci composer and current authorization before one retry Send. Never resend scenes 1916-1918 and do not click X Post."
+    "nextSafeAction": "Commit and remote-verify the full-tab reset restaging evidence, then relist the actual five tabs and recheck the staged scene 1915 retry prompt, Thinking, leesha007, ordered anchors 938, 936, 937, enabled Send, blank @dogramaci composer and current authorization before one retry Send. Never resend scenes 1916-1918 and do not click X Post."
   }
 }

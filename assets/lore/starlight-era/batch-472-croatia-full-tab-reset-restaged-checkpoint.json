@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "batch": 472,
+  "country": "Croatia",
+  "state": "explicit-full-tab-reset-complete-scene-1915-retry-1-restaged-before-send",
+  "recordedAtUtc": "2026-08-31T16:08:27.8984364Z",
+  "authority": {
+    "userDirective": "fix ur tabs close all reopen when needed",
+    "freshSendAuthorization": "send authorized go",
+    "priorNoReopenConstraintOverriddenForRecovery": true,
+    "providerScope": "Meta AI and X only through the in-app Browser"
+  },
+  "browserRecovery": {
+    "availableBackends": 1,
+    "backendType": "iab",
+    "accessibleTabsBeforeReset": 0,
+    "ambientTabsCouldNotBeClosedThroughSupportedControls": true,
+    "newControlledTabsCreated": 5,
+    "extraControlledTabsCreated": 0
+  },
+  "controlledWorkspace": [
+    {"tabId": "1", "scene": 1915, "url": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3", "state": "initial-refusal-terminal-with-retry-1-restaged"},
+    {"tabId": "2", "scene": 1916, "url": "https://www.meta.ai/prompt/d42e0b2c-7b11-4aec-a7a4-6a7f0edc889f", "state": "terminal-media-do-not-resend"},
+    {"tabId": "3", "scene": 1917, "url": "https://www.meta.ai/prompt/349bcb46-ada9-4e91-b9e5-7d412124c011", "state": "terminal-media-do-not-resend"},
+    {"tabId": "4", "scene": 1918, "url": "https://www.meta.ai/prompt/442b1586-ed00-4342-9023-54e8b9ccd2d6", "state": "terminal-media-do-not-resend"},
+    {"tabId": "5", "role": "X composer", "url": "https://x.com/compose/post", "state": "blank-post-disabled"}
+  ],
+  "liveAccounts": {"meta": "leesha007", "x": "@dogramaci"},
+  "scene1915Retry1": {
+    "promptSha256": "AB2D675F3E5767F3E3BF5770A4B1C1B5B75762B8C3E686608D90CC97D43F0C75",
+    "promptCharacters": 2285,
+    "orderedAnchors": [938, 936, 937],
+    "orderedAnchorSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "thinkingVisible": true,
+    "sendEnabled": true,
+    "sendClicks": 0,
+    "stagingScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1915-meta-thinking-retry-1-restaged-after-full-tab-reset-before-send.png", "sha256": "B81CC4535E8C8A0B0875162A3763FAAEA175B4898162AF7D4BB3284455E5D7C5", "bytes": 163358}
+  },
+  "xGate": {"account": "@dogramaci", "composerBlank": true, "postDisabled": true, "postClicks": 0},
+  "nextSafeAction": "Commit and remote-verify this checkpoint and screenshot. Then relist all five tabs and recheck the exact retry prompt, three ordered attachments, Thinking, accounts, enabled Send, blank X and current authorization before exactly one scene 1915 retry Send."
+}
