@@ -154,12 +154,14 @@
     "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json"
   },
   "remoteVerification": {
-    "status": "closure-and-authorized-retry-evidence-commits-lfs-remote-and-pr-parity-verified",
+    "status": "closure-retry-and-explicit-override-evidence-commits-lfs-remote-and-pr-parity-verified",
     "verifiedClosureCommit": "b956d28e21c451a5613146466582fcfa17c843c8",
     "verifiedRetryEvidenceCommit": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
-    "verifiedAtUtc": "2026-08-31T12:21:55.8561196Z",
+    "verifiedExplicitOverrideEvidenceCommit": "584ae32138210e26c072d27ae3385422a62c4c8d",
+    "verifiedAtUtc": "2026-08-31T12:38:08.6384193Z",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json",
-    "retryCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-retry-git-lfs-remote-verification-checkpoint.json"
+    "retryCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-retry-git-lfs-remote-verification-checkpoint.json",
+    "explicitOverrideCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-git-lfs-remote-verification-checkpoint.json"
   },
   "nextSafeAction": "Commit and remote-verify the explicit-override no-transmission checkpoint. Preserve the exact reopened composer for a manual user click and do not perform another agent Post click."
 }
