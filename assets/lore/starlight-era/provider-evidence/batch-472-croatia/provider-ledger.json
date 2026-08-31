@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "batch": 472,
   "country": "Croatia",
+  "state": "closed-four-archive-accepted-three-clean-publication-candidates-one-archive-only-x-pair-live-verified",
   "provider": "Meta AI visible in-app Browser",
   "account": "leesha007",
   "occurrences": [
@@ -13,10 +14,28 @@
   ],
   "sendClicks": 5,
   "repeatSendClicks": 0,
-  "xPostClicks": 0,
+  "xPostClicks": 1,
+  "xPostClickTransmissions": 0,
+  "xKeyboardSubmitAttempts": 1,
+  "xPublicTransmissionCount": 1,
+  "xPostUrls": ["https://x.com/dogramaci/status/2094473140004929917"],
   "terminalMediaCount": 4,
   "explicitNoImageRefusalCount": 1,
   "providerRawAssetCount": 0,
   "evidencePolicy": "Provider-native downloads were attempted only through supported visible in-app Browser controls. No provider API, direct HTTP, CLI or hidden-state workaround was used. A page-asset surface returned an unrelated user asset instead of the render; that asset was immediately excluded and removed and is not present in the repository, manifests or publication candidates.",
-  "nextSafeAction": "Do not resend any Batch 472 scene. Preserve all selected, unused, blocked and UI-bearing evidence; close QA, accessibility, manifests and Git/LFS before staging X."
+  "xPublication": {
+    "account": "@dogramaci",
+    "countryPair": ["Bosnia and Herzegovina", "Croatia"],
+    "sceneOrder": [1913, 1914, 1915],
+    "postUrl": "https://x.com/dogramaci/status/2094473140004929917",
+    "firstClickOutcome": "confirmed-no-transmission",
+    "keyboardSubmissionOutcome": "transmitted-once-live-verified",
+    "duplicateMediaTransmission": false,
+    "exactAltTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "firstClickCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-first-post-click-no-transmission-checkpoint.json",
+    "liveCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-post-live-verified-checkpoint.json",
+    "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-publication-attempt-evidence-manifest.json"
+  },
+  "nextSafeAction": "Commit and remote-verify the live X publication and evidence. Never resend its three media assets; leave one blank X composer and resolve the next country only from newest authority."
 }

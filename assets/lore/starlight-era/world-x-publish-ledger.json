@@ -10195,7 +10195,7 @@
   },
   "latestBatch472CroatiaPreparation": {
     "schemaVersion": 1,
-    "status": "closed-four-archive-accepted-three-clean-publication-candidates-one-archive-only",
+    "status": "closed-four-archive-accepted-three-clean-publication-candidates-one-archive-only-x-pair-live-verified",
     "preparedAtUtc": "2026-08-31T14:35:03.7971502Z",
     "batch": 472,
     "country": "Croatia",
@@ -10298,7 +10298,7 @@
       "A50B39628755EA37BE9B3314FC61CDA29FE18B202A8813BEA5A85FDA30D8F801"
     ],
     "duplicateHashGatePassed": true,
-    "xComposerStaged": true,
+    "xComposerStaged": false,
     "xComposerCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-composer-staged-awaiting-post-confirmation-checkpoint.json",
     "xStagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-staging-git-lfs-remote-verification-checkpoint.json",
     "xStagingRemoteVerifiedCommit": "6da7f3c4e7af6ee8792780fc4114a163a8a03880",
@@ -10308,8 +10308,23 @@
     "xAltTextCount": 3,
     "xMadeWithAiLabelVisible": true,
     "xPostEnabled": true,
-    "xPostClicked": false,
-    "xPostClicks": 0,
-    "nextSafeAction": "Commit and remote-verify the exact staged-composer evidence. Then, after a fresh explicit action-time confirmation, re-inspect all five tabs and the exact @dogramaci composer state and click Post exactly once."
+    "xPostClicked": true,
+    "xPostClicks": 1,
+    "xPostClickTransmissions": 0,
+    "xKeyboardSubmitAttempts": 1,
+    "xPublicTransmissionCount": 1,
+    "xComposerClosedAfterSuccessfulSubmission": true,
+    "xPostUrl": "https://x.com/dogramaci/status/2094473140004929917",
+    "xPostUrls": ["https://x.com/dogramaci/status/2094473140004929917"],
+    "xPhotoEndpoints": [
+      "https://x.com/dogramaci/status/2094473140004929917/photo/1",
+      "https://x.com/dogramaci/status/2094473140004929917/photo/2",
+      "https://x.com/dogramaci/status/2094473140004929917/photo/3"
+    ],
+    "xDuplicateMediaTransmission": false,
+    "xFirstClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-first-post-click-no-transmission-checkpoint.json",
+    "xLivePublicationCheckpoint": "assets/lore/starlight-era/batch-472-bosnia-and-herzegovina-croatia-x-post-live-verified-checkpoint.json",
+    "xPublicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/x-publication-attempt-evidence-manifest.json",
+    "nextSafeAction": "Commit and remote-verify the live publication and all evidence. Never resend these three media assets; then leave one blank X composer and resolve the next country only from newest authority."
   }
 }
