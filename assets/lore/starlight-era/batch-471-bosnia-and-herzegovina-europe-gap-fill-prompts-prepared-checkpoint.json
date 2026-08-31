@@ -3,7 +3,7 @@
   "batch": 471,
   "country": "Bosnia and Herzegovina",
   "runType": "four-lane-RAZE-fashion-europe-gap-fill",
-  "state": "three-terminal-media-occurrences-scene1912-retry1-exactly-staged-authorized",
+  "state": "three-terminal-media-occurrences-scene1912-retry1-dispatched-once-rendering",
   "preparedAtUtc": "2026-08-31T13:15:34.0224551Z",
   "authority": {
     "currentDirectives": [
@@ -197,5 +197,7 @@
   "initialExplicitNoImageRefusalSceneIds": [1912],
   "firstOccurrencesTerminalCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-first-occurrences-terminal-checkpoint.json",
   "scene1912FirstRetryPreparedCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-scene-1912-first-retry-prepared-checkpoint.json",
-  "nextSafeAction": "Commit and remote-verify the staged scene 1912 retry evidence, then re-check only tab 40 and click its enabled Send once if leesha007, Thinking, exact prompt and anchors 938, 936, 937 remain visible. Never resend scenes 1911, 1913 or 1914. Do not click X Post."
+  "scene1912Retry1DispatchedAtUtc": "2026-08-31T13:53:47.884Z",
+  "scene1912Retry1SendClicks": 1,
+  "nextSafeAction": "Archive the terminal scene 1912 retry occurrence. Use the remaining retry only if it is another eligible hard failure and after a separate prepared checkpoint; never resend scenes 1911, 1913 or 1914. Do not click X Post."
 }

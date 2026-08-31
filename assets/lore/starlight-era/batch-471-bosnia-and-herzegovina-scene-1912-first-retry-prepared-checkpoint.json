@@ -3,7 +3,7 @@
   "batch": 471,
   "country": "Bosnia and Herzegovina",
   "scene": 1912,
-  "state": "first-bounded-retry-visible-thinking-exactly-staged-authorized-awaiting-final-remote-and-live-recheck",
+  "state": "first-bounded-retry-dispatched-once-rendering",
   "preparedAtUtc": "2026-08-31T13:44:00.0000000Z",
   "sourceOccurrence": {
     "attempt": 0,
@@ -37,7 +37,8 @@
     "exactPromptVerified": true,
     "sendEnabled": true,
     "authorizationCurrent": true,
-    "mayClickSend": true
+    "mayClickSend": false,
+    "gateConsumed": true
   },
   "stagedAtUtc": "2026-08-31T13:51:39.2727219Z",
   "tabId": "40",
@@ -49,5 +50,17 @@
     "width": 1280,
     "height": 720
   },
-  "nextSafeAction": "Commit and push this staged retry evidence, verify remote/PR/LFS parity, re-list all actual tabs, and re-check only tab 40 for leesha007, visible Thinking, the exact retry prompt, anchors 938, 936 and 937 in order, and enabled Send. If exact, click Send once. Never resend scenes 1911, 1913 or 1914."
+  "dispatchedAtUtc": "2026-08-31T13:53:47.884Z",
+  "providerUrl": "https://www.meta.ai/prompt/e4bfe8e2-88cf-4a32-9d94-980a53896814",
+  "retrySendClicks": 1,
+  "repeatRetrySendClicks": 0,
+  "renderingScreenshot": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-retry-1-rendering-after-dispatch.png",
+    "sha256": "42F3FECF99EBD00A2E06B89AC731FC3B8845DCB0C0A817852FCDFFA0DB36FEEA",
+    "bytes": 65474,
+    "container": "JPEG JFIF despite .png extension",
+    "width": 1280,
+    "height": 720
+  },
+  "nextSafeAction": "Preserve the terminal retry response and raw bytes or explicit no-byte evidence. Do not click Send again unless this retry is another eligible hard failure and the second retry is separately prepared under the remaining one-retry ceiling. Never resend scenes 1911, 1913 or 1914."
 }
