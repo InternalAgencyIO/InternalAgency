@@ -10573,7 +10573,7 @@
   },
   "latestBatch474DenmarkPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-thinking-scenes-dispatched-exactly-once-rendering",
+    "status": "four-first-occurrences-terminal-media-raw-archived-no-meta-retries-one-pass-prepared",
     "preparedAtUtc": "2026-08-31T19:16:11.4719054Z",
     "batch": 474,
     "country": "Denmark",
@@ -10637,6 +10637,11 @@
       "https://www.meta.ai/prompt/b5f10b70-9300-4364-bac7-5ec12521b39a",
       "https://www.meta.ai/prompt/8b319617-fad8-4f6e-bef2-585582a7c1c9"
     ],
+    "terminalFirstOccurrencesCheckpoint": "assets/lore/starlight-era/batch-474-denmark-first-occurrences-terminal-checkpoint.json",
+    "chatgptOnePassPromptsPreparedCheckpoint": "assets/lore/starlight-era/batch-474-denmark-chatgpt-one-pass-prompts-prepared-checkpoint.json",
+    "terminalMediaSceneIds": [1923, 1924, 1925, 1926],
+    "metaRetries": 0,
+    "providerRawAssetCount": 4,
     "nextSafeAction": "Validate and commit the exact Denmark preparation, push and prove remote/PR/LFS parity, then open four fresh Meta lanes and stage Thinking, prompts and anchors 938, 936, 937 in exact order beside the one blank X composer."
   }
 }
