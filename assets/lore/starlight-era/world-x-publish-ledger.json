@@ -10195,7 +10195,7 @@
   },
   "latestBatch472CroatiaPreparation": {
     "schemaVersion": 1,
-    "status": "prompts-prepared-awaiting-remote-verification",
+    "status": "prompts-remote-verified-awaiting-browser-staging",
     "preparedAtUtc": "2026-08-31T14:35:03.7971502Z",
     "batch": 472,
     "country": "Croatia",
@@ -10226,6 +10226,9 @@
     "xPostAuthorized": false,
     "checkpoint": "assets/lore/starlight-era/batch-472-croatia-europe-gap-fill-prompts-prepared-checkpoint.json",
     "remoteVerifiedBaseHead": "3b8a0f8e33556d630b76ffd6b4c603aa642584ae",
+    "remoteVerifiedCheckpointCommit": "a77df13c03ea25dcdc8caffe061967cc65b9e58e",
+    "remoteBranchAndPrHeadMatched": true,
+    "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-472-croatia-preflight-git-lfs-remote-verification-checkpoint.json",
     "nextSafeAction": "Commit and remote-verify the Croatia preparation checkpoint, then inspect actual browser tabs and replace the four terminal Meta lanes in place only after every prompt, account, Thinking, anchor-order and Send gate passes."
   }
 }
