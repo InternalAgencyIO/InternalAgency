@@ -9901,7 +9901,7 @@
   },
   "latestBatch470AndorraRazeFiveStillsPreparation": {
     "schemaVersion": 1,
-    "status": "five-prompts-hash-and-remote-verified-awaiting-visible-browser-staging",
+    "status": "four-initial-lanes-staged-authorized-awaiting-staged-checkpoint-remote-verification",
     "preparedAtUtc": "2026-08-31T10:05:35.4405278Z",
     "batch": 470,
     "country": "Andorra",
@@ -9933,6 +9933,15 @@
     "remoteVerifiedCheckpointCommit": "e7855060ce892cabe5ffc76ceac26eb8e40dc5e8",
     "remoteVerifiedAtUtc": "2026-08-31T10:07:59.8998319Z",
     "remoteBranchAndPrHeadMatched": true,
-    "nextSafeAction": "Visibly stage scenes 1906-1909 in the existing four Meta tabs, verify account leesha007, exact prompts, Instant settings, and anchors 938, 936, 937 attached in order, then dispatch each lane exactly once while keeping the X composer untouched."
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
+    "signedInMetaAccount": "leesha007",
+    "metaSpeed": "Instant",
+    "anchorsVisibleInExactOrder": true,
+    "exactPromptsVerified": true,
+    "sendButtonsEnabled": true,
+    "metaTabIds": ["28", "29", "30", "31"],
+    "xComposerTabId": "32",
+    "xComposerBlank": true,
+    "nextSafeAction": "Remote-verify the staged browser evidence, then dispatch scenes 1906-1909 exactly once while keeping the X composer untouched."
   }
 }

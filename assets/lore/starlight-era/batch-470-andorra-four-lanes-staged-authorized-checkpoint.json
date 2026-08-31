@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "state": "scenes-1906-through-1909-staged-authorized-before-send",
+  "stagedAtUtc": "2026-08-31T10:14:31.2139857Z",
+  "authority": {
+    "promptCheckpoint": "assets/lore/starlight-era/batch-470-andorra-raze-five-stills-prompts-prepared-checkpoint.json",
+    "remoteVerifiedHeadBeforeStaging": "75e7498a8e575b3ff38c6fbae12e2015855b4b3c",
+    "remoteBranchAndPrHeadMatched": true,
+    "freshActionTimeMetaDispatchAuthorization": "5 stills go",
+    "authorizedSceneIds": [1906, 1907, 1908, 1909, 1910],
+    "xPostAuthorized": false
+  },
+  "browser": {
+    "provider": "Meta AI through the in-app Browser only",
+    "actualTabsInspectedBeforeEveryAction": true,
+    "metaTabIds": ["28", "29", "30", "31"],
+    "metaTabCount": 4,
+    "xComposerTabId": "32",
+    "xComposerTabCount": 1,
+    "signedInMetaAccount": "leesha007",
+    "accountVerificationUrl": "https://www.meta.ai/@leesha007",
+    "metaSpeed": "Instant",
+    "xHandleLinksVisible": 2,
+    "xComposerBlank": true,
+    "xPostButtonDisabled": true,
+    "xMediaPreviewCount": 0,
+    "xComposerMutated": false
+  },
+  "composerVerification": {
+    "sceneIds": [1906, 1907, 1908, 1909],
+    "promptSha256": [
+      "C5C1C734912139EBC40D4D58FA738342D96BF70BA5C86C30921D084E65650E91",
+      "EF0FFA7986155E47D428E51092741A3DE71B9C04084121E02AA62FA00F7CBE0E",
+      "4C721124EF254C0558119D0C678B6E090C33D4D26F858A3C03AC1548EC217EF8",
+      "EF638473244D206384945EDF6EB71291627C7FB8455B262EA1DA761AA562C42B"
+    ],
+    "exactPromptPrefixVerified": true,
+    "composerSuffix": "three attachment placeholder spaces, one per visible image chip",
+    "composerSuffixVerified": true,
+    "orderedIdentityAnchors": [938, 936, 937],
+    "anchorFilenameCountPerLane": [1, 1, 1],
+    "anchorOrderVisiblePerLane": true,
+    "instantModeVisiblePerLane": true,
+    "sendEnabledPerLane": true,
+    "sendCountBeforeDispatch": 0,
+    "repeatSendCountBeforeDispatch": 0
+  },
+  "preSendEvidence": [
+    {
+      "scene": 1906,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1906-meta-composer-staged-authorized-before-send.png",
+      "sha256": "BF3B0A28328702DAEC09A4B80016180B3E48A00AB477D6B4CBA26C2D3221FF37",
+      "bytes": 104337,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "scene": 1907,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1907-meta-composer-staged-authorized-before-send.png",
+      "sha256": "7F7597944905AE5DAB0B9F4739DA24C2560FE0258092B4FFCC5C8E2B37455F91",
+      "bytes": 94342,
+      "width": 737,
+      "height": 950
+    },
+    {
+      "scene": 1908,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1908-meta-composer-staged-authorized-before-send.png",
+      "sha256": "B806C25534113A65289AA626F3A5BF25A9FB8B09D5E0A56AD7619816A97B6181",
+      "bytes": 92498,
+      "width": 737,
+      "height": 950
+    },
+    {
+      "scene": 1909,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1909-meta-composer-staged-authorized-before-send.png",
+      "sha256": "091B6B3B8FA2163E5D1DEDA9890A0C3FD447B265FB5C4BE5F6A2C9EE011B31A3",
+      "bytes": 92359,
+      "width": 737,
+      "height": 950
+    },
+    {
+      "provider": "X",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-blank-composer-preserved-at-andorra-authorized-dispatch.png",
+      "sha256": "22A76872AC115E5B477D5C123ED8FD705C177693EC39A3660EE8CD113A96E8CA",
+      "bytes": 56750,
+      "width": 737,
+      "height": 950
+    }
+  ],
+  "canonicalReconciliation": {
+    "cubaVsTanzania": "The newer remote-verified Tanzania preparation supersedes the old Cuba handoff instruction; neither country is dispatched by this later Europe-run authorization.",
+    "grok": "Paused until credits return; this run uses Meta only.",
+    "fourLaneVsFiveStill": "Four visible Meta lanes are retained. Scene 1910 is queued behind the first terminal lane after its evidence is archived; no fifth Meta tab is opened.",
+    "x": "The continuing pipeline preference to post country pairs does not authorize this occurrence's X Post action. X remains blank and untouched until a fresh X-specific authorization.",
+    "refinement": "Exactly one strong built-in ChatGPT hemline-shortening pass is permitted per technically valid Meta occurrence; no second pass."
+  },
+  "dispatchGate": {
+    "remoteCheckpointVerified": true,
+    "actualBrowserTabsInspected": true,
+    "signedInMetaAccountVerified": true,
+    "anchorsVisibleInExactOrder": true,
+    "exactPromptsVerified": true,
+    "instantModeVerified": true,
+    "freshMetaAuthorizationCurrent": true,
+    "mayClickSend": true
+  },
+  "nextSafeAction": "After this staged evidence is committed and remote branch plus PR head parity are verified, click Send exactly once in tabs 28, 29, 30, and 31 for scenes 1906, 1907, 1908, and 1909. Do not touch X."
+}

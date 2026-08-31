@@ -3,7 +3,7 @@
   "batch": 470,
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
-  "state": "five-prompts-hash-and-remote-verified-awaiting-visible-browser-staging",
+  "state": "four-initial-lanes-staged-authorized-awaiting-staged-checkpoint-remote-verification",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "authority": {
     "userDirectives": [
@@ -168,13 +168,14 @@
     "remoteVerifiedCheckpointCommit": "e7855060ce892cabe5ffc76ceac26eb8e40dc5e8",
     "remoteVerifiedAtUtc": "2026-08-31T10:07:59.8998319Z",
     "remoteBranchAndPrHeadMatched": true,
-    "actualBrowserTabsInspected": false,
-    "signedInMetaAccountVerified": false,
-    "anchorsVisibleInExactOrder": false,
-    "exactPromptsVerified": false,
-    "instantModeVerified": false,
+    "actualBrowserTabsInspected": true,
+    "signedInMetaAccountVerified": true,
+    "anchorsVisibleInExactOrder": true,
+    "exactPromptsVerified": true,
+    "instantModeVerified": true,
     "freshAuthorizationCurrent": true,
-    "mayClickSend": false
+    "mayClickSend": true
   },
-  "nextSafeAction": "Inspect the actual in-app Browser tabs, replace the four terminal Albania tabs in place with scenes 1906-1909, visibly verify account leesha007, exact prompts, Instant mode, and anchors 938, 936, 937 in order, then dispatch exactly once per lane under the current five-still authorization. Keep the X composer untouched and queue scene 1910 behind the first archived terminal lane."
+  "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
+  "nextSafeAction": "Commit and remote-verify the staged browser evidence, then dispatch scenes 1906-1909 exactly once in the four visible Meta lanes. Keep the X composer untouched and queue scene 1910 behind the first archived terminal lane."
 }
