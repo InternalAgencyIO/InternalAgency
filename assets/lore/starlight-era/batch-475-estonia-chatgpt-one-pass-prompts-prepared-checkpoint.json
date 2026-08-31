@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 475,
   "country": "Estonia",
-  "state": "four-technically-valid-occurrences-one-strong-shortening-pass-prompts-prepared-not-yet-issued",
+  "state": "four-one-pass-requests-issued-three-clean-outputs-one-output-moderation-block-no-retries",
   "preparedAtUtc": "2026-08-31T21:46:36.8887027Z",
   "policy": {
     "requestsPerTechnicallyValidSelectedOccurrence": 1,
@@ -42,7 +42,11 @@
     }
   ],
   "promptHashesVerified": true,
-  "requestsIssued": 0,
+  "requestsIssued": 4,
+  "cleanOutputsSaved": 3,
+  "outputModerationBlockedSceneIds": [1930],
+  "outputModerationRequestId": "7766d8c2-ca14-40ab-ba22-1c187bcb7807",
   "additionalPassesPermitted": 0,
-  "nextSafeAction": "Commit and remote-verify this checkpoint with the raw occurrences and terminal QA, then issue each request exactly once."
+  "outcomesLedger": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/chatgpt-one-pass-prompts-and-outcomes.md",
+  "nextSafeAction": "Never retry any one-pass request. Validate and remote-verify the three outputs, the scene 1930 block record, selected assets, accessibility sidecars and closure manifest."
 }
