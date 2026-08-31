@@ -10573,7 +10573,7 @@
   },
   "latestBatch474DenmarkPreparation": {
     "schemaVersion": 1,
-    "status": "four-first-occurrences-terminal-media-raw-archived-no-meta-retries-one-pass-prepared",
+    "status": "four-stills-closed-relaxed-acceptance-closure-manifest-complete-awaiting-git-lfs-remote-verification",
     "preparedAtUtc": "2026-08-31T19:16:11.4719054Z",
     "batch": 474,
     "country": "Denmark",
@@ -10642,6 +10642,22 @@
     "terminalMediaSceneIds": [1923, 1924, 1925, 1926],
     "metaRetries": 0,
     "providerRawAssetCount": 4,
+    "chatgptPassRequestsIssued": 4,
+    "chatgptOutputsSaved": 3,
+    "chatgptOutputModerationBlockedSceneIds": [1923],
+    "additionalChatgptPassesPermitted": 0,
+    "selectedSceneIds": [1923, 1924, 1925, 1926],
+    "selectedAssetSha256": [
+      "8ABE6B7C20781269E7541DC2D85D47466A15E0D716367F3461D638BECD73969E",
+      "8EAF7BB44AD69946D99320ADC44868F9444BE871FD663DEC38592AFCD6015662",
+      "69BB2FD9CF27A614A5F703F17E642C205BF4A2DFF226586270E6A476A802BF1C",
+      "90638F21FA080AA9529C839243483F2423459F6CC11F439C7AC5093CEF4EAB99"
+    ],
+    "closureQaCheckpoint": "assets/lore/starlight-era/batch-474-denmark-four-stills-closed-qa-checkpoint.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/provider-ledger.json",
+    "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/accessibility-sidecars.json",
+    "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/closure-evidence-manifest.json",
+    "closureEvidenceInventorySha256": "7E9239FFF33DB0C9917063B201033B5129A08FE699889461C0F3410BBD551F7A",
     "nextSafeAction": "Validate and commit the exact Denmark preparation, push and prove remote/PR/LFS parity, then open four fresh Meta lanes and stage Thinking, prompts and anchors 938, 936, 937 in exact order beside the one blank X composer."
   }
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 474,
   "country": "Denmark",
-  "state": "exact-one-strong-shortening-pass-prompts-prepared-not-yet-issued",
+  "state": "four-one-pass-requests-issued-three-clean-outputs-one-output-moderation-block-no-retries",
   "preparedAtUtc": "2026-08-31T19:50:30.9534284Z",
   "policy": {
     "requestsPerTechnicallyValidSelectedOccurrence": 1,
@@ -42,5 +42,11 @@
     }
   ],
   "promptHashesVerified": true,
-  "nextSafeAction": "Validate and remote-verify this checkpoint and the archived Meta raws, then issue the four one-pass image edits once each with no retry."
+  "requestsIssued": 4,
+  "cleanOutputsSaved": 3,
+  "outputModerationBlockedSceneIds": [1923],
+  "outputModerationRequestId": "51970b2e-8543-44aa-ad46-8bdfde6c3083",
+  "additionalPassesPermitted": 0,
+  "outcomesLedger": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/chatgpt-one-pass-prompts-and-outcomes.md",
+  "nextSafeAction": "Never retry any one-pass request. Validate and remote-verify the three outputs, the scene 1923 block record, selected assets, accessibility sidecars and closure manifest."
 }

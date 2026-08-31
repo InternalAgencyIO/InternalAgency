@@ -3,7 +3,7 @@
   "batch": 474,
   "country": "Denmark",
   "runType": "four-lane-RAZE-fashion-europe-gap-fill",
-  "state": "four-first-occurrences-terminal-media-raw-archived-no-meta-retries-one-pass-prepared",
+  "state": "four-stills-closed-relaxed-acceptance-closure-manifest-complete-awaiting-git-lfs-remote-verification",
   "preparedAtUtc": "2026-08-31T19:16:11.4719054Z",
   "authority": {
     "source": "Newest remote-verified Batch 473 Croatia-Cyprus live-X closure, repaired canonical top-level X posts ledger, preserved guardian schedule, active Meta-only Europe directive, and the user's all-go/all-similar-commands authorization.",
@@ -182,5 +182,21 @@
   "terminalMediaSceneIds": [1923, 1924, 1925, 1926],
   "metaRetries": 0,
   "providerRawAssetCount": 4,
-  "nextSafeAction": "Commit and remote-verify the archived raw occurrences, terminal QA and exact one-pass prompts, then issue exactly one built-in ChatGPT image edit per occurrence with no retry."
+  "chatgptPassRequestsIssued": 4,
+  "chatgptOutputsSaved": 3,
+  "chatgptOutputModerationBlockedSceneIds": [1923],
+  "additionalChatgptPassesPermitted": 0,
+  "selectedSceneIds": [1923, 1924, 1925, 1926],
+  "selectedAssetSha256": [
+    "8ABE6B7C20781269E7541DC2D85D47466A15E0D716367F3461D638BECD73969E",
+    "8EAF7BB44AD69946D99320ADC44868F9444BE871FD663DEC38592AFCD6015662",
+    "69BB2FD9CF27A614A5F703F17E642C205BF4A2DFF226586270E6A476A802BF1C",
+    "90638F21FA080AA9529C839243483F2423459F6CC11F439C7AC5093CEF4EAB99"
+  ],
+  "closureQaCheckpoint": "assets/lore/starlight-era/batch-474-denmark-four-stills-closed-qa-checkpoint.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/provider-ledger.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/accessibility-sidecars.json",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/closure-evidence-manifest.json",
+  "closureEvidenceInventorySha256": "7E9239FFF33DB0C9917063B201033B5129A08FE699889461C0F3410BBD551F7A",
+  "nextSafeAction": "Create and validate the closure evidence manifest, commit every used and unused artifact through Git/LFS, push and prove remote/PR parity."
 }
