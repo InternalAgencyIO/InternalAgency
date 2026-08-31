@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "batch": 473,
+  "country": "Cyprus",
+  "state": "four-meta-first-occurrences-terminal-accepted-one-pass-boundary-closed",
+  "verifiedAtUtc": "2026-08-31T18:25:48.6385068Z",
+  "terminalSceneIds": [1919, 1920, 1921, 1922],
+  "terminalMediaSceneIds": [1919, 1920, 1921, 1922],
+  "explicitNoImageRefusalSceneIds": [],
+  "metaRetrySceneIds": [],
+  "metaRetriesIssued": 0,
+  "metaSecondRetriesIssued": 0,
+  "providerRawAssetCount": 4,
+  "chatgptPassRequestsIssued": 4,
+  "chatgptOutputsSaved": 1,
+  "additionalChatgptPassesPermitted": 0,
+  "technicalQa": [
+    {"scene": 1919, "metaRaw": "accepted", "castCount": 4, "adults": true, "publicSafe": true, "nonCorrupt": true, "framing": "tight full-body", "selectedVersion": "chatgpt-one-pass", "notes": "Clean four-woman Nicosia scene; strong one-pass result preserves the quartet, shoes, star hardware, tags and cheek-only kiss while shortening the silhouettes."},
+    {"scene": 1920, "metaRaw": "accepted-selected", "castCount": 4, "adults": true, "publicSafe": true, "nonCorrupt": true, "framing": "tight full-body", "selectedVersion": "meta-raw", "notes": "Clean Limassol promenade scene with four distinct women, sculpture, waterfront, short opaque looks and complete footwear. Minor styling drift is nonblocking."},
+    {"scene": 1921, "metaRaw": "accepted-selected", "castCount": 4, "adults": true, "publicSafe": true, "nonCorrupt": true, "framing": "tight full-body", "selectedVersion": "meta-raw", "notes": "Clean Paphos fort scene with all four distinct sculptural knee-high boots, short opaque looks, tags and cheek-only kiss."},
+    {"scene": 1922, "metaRaw": "accepted-selected", "castCount": 4, "adults": true, "publicSafe": true, "nonCorrupt": true, "framing": "tight hemline close", "selectedVersion": "meta-raw", "notes": "Clean close Lefkara lane portrait with four complete faces, short opaque lower silhouettes, readable tags and no footwear introduced into the locked crop."}
+  ],
+  "selectedAssets": [
+    {"scene": 1919, "path": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/1919-cyprus-nicosia-eleftheria-square-raze-chatgpt-one-strong-shortening-pass.png", "sha256": "DDCCEDDD13DCFC1E751328748B18863D799D659C738E60C7EFAFF2B3B7623F63"},
+    {"scene": 1920, "path": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/1920-cyprus-limassol-molos-raze-meta-occurrence-1-raw.webp", "sha256": "86A5738D140839E6EEC775978CFC8E54E07D9AD13E2EE75CEFE5EC7CA355D10E"},
+    {"scene": 1921, "path": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/1921-cyprus-paphos-harbor-raze-meta-occurrence-1-raw.webp", "sha256": "B5135A70CA368E8A31833EF1E09C11A07F83A72318635B40302DADC4775DA725"},
+    {"scene": 1922, "path": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/1922-cyprus-lefkara-raze-meta-occurrence-1-raw.webp", "sha256": "32F7B13A6C9BFF334D81C36260DE9D9C881C0E71267A6CF5C1A3543BA3BC424E"}
+  ],
+  "knownLedgerDuplicateHashMatches": [],
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/provider-ledger.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/accessibility-sidecars.json",
+  "blockedPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/chatgpt-one-pass-prompts-and-outcomes.md",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/closure-evidence-manifest.json",
+  "closureEvidenceInventorySha256": "299865BD73EDE520F571229EC926A2B81BF88FC6FC7157CA7071FACE6E1DDEDC",
+  "nextSafeAction": "Build and verify the complete evidence manifest, commit every raw, selected, unused and blocked-prompt artifact through Git LFS as applicable, and prove local, remote branch and draft PR parity before any X staging."
+}

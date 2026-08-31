@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 473,
   "country": "Cyprus",
-  "state": "four-meta-thinking-occurrences-dispatched-exactly-once-rendering",
+  "state": "four-meta-thinking-occurrences-terminal-accepted-one-pass-boundary-closed",
   "dispatchWindowUtc": {
     "firstClick": "2026-08-31T18:06:13.767Z",
     "lastClick": "2026-08-31T18:06:25.946Z"
@@ -66,8 +66,15 @@
   "totalMetaSendClicks": 4,
   "repeatMetaSendClicks": 0,
   "xPostClicks": 0,
-  "terminalOccurrences": 0,
-  "renderingOccurrences": 4,
+  "terminalOccurrences": 4,
+  "renderingOccurrences": 0,
+  "terminalMediaSceneIds": [1919, 1920, 1921, 1922],
+  "metaRetries": 0,
+  "providerRawAssetCount": 4,
+  "chatgptPassRequestsIssued": 4,
+  "chatgptOutputsSaved": 1,
+  "additionalChatgptPassesPermitted": 0,
+  "terminalQaCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-first-occurrences-terminal-and-one-pass-qa-checkpoint.json",
   "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/dispatch-evidence-manifest.json",
-  "nextSafeAction": "Commit and remote-verify these exact provider URLs and click counts while all four lanes render. Then inspect each terminal visible outcome without resending any confirmed occurrence; retry only an eligible failed scene, at most twice."
+  "nextSafeAction": "Commit every raw, selected, unused and blocked-prompt artifact, then remote-verify Git/LFS and draft PR parity before any X staging."
 }

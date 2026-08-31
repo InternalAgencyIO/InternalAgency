@@ -10338,7 +10338,7 @@
   },
   "latestBatch473CyprusPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-thinking-occurrences-dispatched-exactly-once-rendering",
+    "status": "four-meta-thinking-occurrences-terminal-accepted-one-pass-boundary-closed-awaiting-x-pair",
     "preparedAtUtc": "2026-08-31T17:39:32.0574130Z",
     "batch": 473,
     "country": "Cyprus",
@@ -10399,8 +10399,26 @@
       "https://www.meta.ai/prompt/98884cb7-2ceb-47d5-8d1b-578c07d99550",
       "https://www.meta.ai/prompt/3a3a570e-2f36-427a-9177-6e5180b3e3a2"
     ],
-    "terminalSceneIds": [],
-    "renderingSceneIds": [1919, 1920, 1921, 1922],
-    "nextSafeAction": "Commit and remote-verify the four provider URLs and exact one-click dispatch evidence, then inspect terminal outcomes without resending any confirmed occurrence."
+    "terminalSceneIds": [1919, 1920, 1921, 1922],
+    "terminalMediaSceneIds": [1919, 1920, 1921, 1922],
+    "renderingSceneIds": [],
+    "metaRetries": 0,
+    "providerRawAssetCount": 4,
+    "chatgptPassRequestsIssued": 4,
+    "chatgptOutputsSaved": 1,
+    "additionalChatgptPassesPermitted": 0,
+    "selectedSceneIds": [1919, 1920, 1921, 1922],
+    "selectedAssetSha256": [
+      "DDCCEDDD13DCFC1E751328748B18863D799D659C738E60C7EFAFF2B3B7623F63",
+      "86A5738D140839E6EEC775978CFC8E54E07D9AD13E2EE75CEFE5EC7CA355D10E",
+      "B5135A70CA368E8A31833EF1E09C11A07F83A72318635B40302DADC4775DA725",
+      "32F7B13A6C9BFF334D81C36260DE9D9C881C0E71267A6CF5C1A3543BA3BC424E"
+    ],
+    "terminalQaCheckpoint": "assets/lore/starlight-era/batch-473-cyprus-first-occurrences-terminal-and-one-pass-qa-checkpoint.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/provider-ledger.json",
+    "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/accessibility-sidecars.json",
+    "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-473-cyprus/closure-evidence-manifest.json",
+    "closureEvidenceInventorySha256": "299865BD73EDE520F571229EC926A2B81BF88FC6FC7157CA7071FACE6E1DDEDC",
+    "nextSafeAction": "Commit every raw, selected, unused and blocked-prompt artifact, then remote-verify Git/LFS and draft PR parity before staging a duplicate-safe Croatia-Cyprus 2+1 X post."
   }
 }
