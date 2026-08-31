@@ -4,7 +4,7 @@
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "closed-five-archive-accepted-two-clean-x-composer-preserved-after-three-authorized-no-transmission-clicks",
+  "state": "closed-five-archive-accepted-two-clean-x-publication-live-verified",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "closedAtUtc": "2026-08-31T11:18:26.9570740Z",
   "accountRequired": "leesha007",
@@ -121,36 +121,48 @@
     "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/accessibility-sidecars.json"
   },
   "browserCurrentAudit": {
-    "actualTabIds": ["35"],
+    "actualTabIds": ["37"],
     "metaTabCount": 0,
-    "xComposerCount": 1,
+    "xComposerCount": 0,
+    "liveXStatusCount": 1,
     "appClearedPriorTabs": true,
     "terminalMetaScenesReopened": false,
     "noNewMetaSendPending": true,
     "ruleForNextOccurrence": "Before any new Meta Send, inspect the actual tab and require the visible Thinking control."
   },
   "xComposer": {
-    "tabId": "35",
+    "tabId": "37",
     "account": "@dogramaci",
-    "captionStaged": true,
+    "captionStaged": false,
     "sceneOrder": [1906, 1910, 1904],
     "mediaCount": 3,
     "altTextCount": 3,
-    "postEnabled": true,
-    "postAuthorized": false,
+    "postEnabled": false,
+    "postAuthorized": true,
     "postClicked": true,
     "postClickAttempts": 3,
-    "publicTransmissionCount": 0,
-    "xPostUrls": [],
+    "keyboardSubmitAttempts": 1,
+    "publicTransmissionCount": 1,
+    "xPostUrls": ["https://x.com/dogramaci/status/2094406003852734633"],
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json",
     "reservationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-reservation-checkpoint.json",
-    "browserRecovery": "The app removed all prior tabs twice; the exact saved X draft was restored in tab 34 through visible controls. Terminal Meta scenes were not reopened.",
+    "browserRecovery": "The app cleared all prior tabs again before the successful attempt; the exact saved X draft was restored in tab 37 through visible controls. Terminal Meta scenes were not reopened.",
     "firstClickOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
     "authorizedRetryOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
     "explicitUserOverrideOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
+    "keyboardSubmissionOutcome": "transmitted-once-live-verified",
     "firstClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
     "previousClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json",
-    "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json",
+    "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json",
+    "livePostUrl": "https://x.com/dogramaci/status/2094406003852734633",
+    "liveVerification": {
+      "exactCaption": true,
+      "photoEndpointCount": 3,
+      "exactAltTextCount": 3,
+      "madeWithAiLabelVisible": true,
+      "unavailableOrDeadLink": false,
+      "duplicateMediaTransmission": false
+    },
     "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json"
   },
   "remoteVerification": {
@@ -163,5 +175,5 @@
     "retryCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-retry-git-lfs-remote-verification-checkpoint.json",
     "explicitOverrideCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-git-lfs-remote-verification-checkpoint.json"
   },
-  "nextSafeAction": "Commit and remote-verify the explicit-override no-transmission checkpoint. Preserve the exact reopened composer for a manual user click and do not perform another agent Post click."
+  "nextSafeAction": "Commit and remote-verify the live X publication and evidence. Never resend the published assets; then resolve the next country from the newest guardian and repository authority."
 }

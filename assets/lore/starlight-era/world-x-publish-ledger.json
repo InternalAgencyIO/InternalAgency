@@ -8728,6 +8728,51 @@
       "mediaMode": "signed-in-in-app-browser",
       "verification": "Signed-in @dogramaci public status URL opened and verified live with the exact caption, one selected hashtag, exactly three photo endpoints in reserved order, descriptive alt text on all three images, and no unavailable or dead-link state.",
       "transmission": "user-action-time-confirmed-three-asset-two-country-captioned-publication"
+    },
+    {
+      "batch": 470,
+      "batches": [470, 469],
+      "sceneIds": [1906, 1910, 1904],
+      "postedAt": "2026-08-31T12:44:35.741Z",
+      "verifiedAt": "2026-08-31T12:46:36.4220900Z",
+      "postUrl": "https://x.com/dogramaci/status/2094406003852734633",
+      "supersededPostUrls": [],
+      "caption": "Andorra ❤️ Albania: a Pyrenean sunset, Sorteny’s flowered valley, and Llogara’s Ionian horizon frame three close four-woman reunions in short RAZE couture.\n\n#WorldXXXSeries",
+      "hashtags": ["#WorldXXXSeries"],
+      "imageNumbers": [1906, 1910, 1904],
+      "countries": ["Andorra", "Albania"],
+      "assets": [
+        {
+          "scene": 1906,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1906-andorra-pyrenean-overlook-raze-chatgpt-hemline-one-pass.png",
+          "sha256": "3B9C3BB9F504F4D1A3E038555D0896EBE17F929AF010E6FBAFE56C1ED5FDB987",
+          "alt": "Four fictional adult women in turquoise, blush, navy, and plum cropped RAZE jackets with short opaque skirts stand close at a golden Andorran mountain overlook, holding hands in knee-high hosiery and minimalist heels."
+        },
+        {
+          "scene": 1910,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1910-andorra-sorteny-raze-chatgpt-hemline-one-pass.png",
+          "sha256": "AEC69E260D57276B1A6D74F74CDA4F5E440B24D2CCB8BB9C378343BCB1C49666",
+          "alt": "Four fictional adult women in sapphire, copper, emerald, and plum short opaque RAZE outfits stand together on a flowered alpine deck in Sorteny Valley, wearing knee-high hosiery and heels."
+        },
+        {
+          "scene": 1904,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-469-albania/1904-albania-llogara-pass-chatgpt-hemline-one-pass.png",
+          "sha256": "E93F9096D5F395546B09D0BC6EC9E1AC6CAF96B8A6D8B832E2DC13A44C19752B",
+          "alt": "Four fictional adult women in strongly short opaque gold-blue, copper, silver, and cobalt couture link hands at Llogara Pass as the far-right woman kisses the third woman’s cheek."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2094406003852734633/photo/1",
+        "https://x.com/dogramaci/status/2094406003852734633/photo/2",
+        "https://x.com/dogramaci/status/2094406003852734633/photo/3"
+      ],
+      "mediaMode": "signed-in-in-app-browser-keyboard-submit",
+      "buttonClickAttemptsBeforeTransmission": 3,
+      "keyboardSubmitAttempts": 1,
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "verification": "Signed-in @dogramaci public status URL opened and verified live with the exact caption, #WorldXXXSeries, exactly three photo endpoints in reserved order, all three exact descriptive alt texts, Made with AI labeling, and no unavailable or dead-link state.",
+      "transmission": "fresh-user-authorized-keyboard-submit-after-three-confirmed-no-transmission-button-clicks"
     }
   ],
   "latestAssistedDrain": {
@@ -9845,7 +9890,7 @@
   },
   "latestBatch469AlbaniaPreparation": {
     "schemaVersion": 1,
-    "status": "closed-four-accepted-after-single-chatgpt-shortening-pass",
+    "status": "closed-four-accepted-after-single-chatgpt-shortening-pass-scene1904-published-with-batch470",
     "preparedAtUtc": "2026-08-31T08:59:53.7678221Z",
     "batch": 469,
     "country": "Albania",
@@ -9896,8 +9941,10 @@
     "relaxedAcceptance": "After the required one strong ChatGPT shortening pass, accept framing, choreography, location-detail, and public-safe wardrobe deviations; reject only corrupt, duplicate, unsafe, no-image, or materially wrong-cast results.",
     "freshMetaSendConfirmationReceived": true,
     "dispatchPermitted": false,
-    "xPostAuthorized": false,
-    "nextSafeAction": "Remote-verify the closed Albania archive, then prepare the user's five-still RAZE fashion run with independent deterministic 25 percent styling rolls and the existing camera-roll policy."
+    "xPostAuthorized": true,
+    "xPostUrls": ["https://x.com/dogramaci/status/2094406003852734633"],
+    "xPublicationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json",
+    "nextSafeAction": "Never resend scene 1904 in this published trio; resolve the next country from newest authority."
   },
   "latestBatch470AndorraRazeFiveStillsPreparation": {
     "schemaVersion": 1,
@@ -9926,8 +9973,9 @@
     "maximumMetaRetriesPerScene": 2,
     "freshMetaSendAuthorizationReceived": true,
     "metaDispatchPermittedAfterAllGates": false,
-    "xPostAuthorized": false,
-    "xPostUrls": [],
+    "xPostAuthorized": true,
+    "xPostUrls": ["https://x.com/dogramaci/status/2094406003852734633"],
+    "xPublicationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-raze-five-stills-prompts-prepared-checkpoint.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/provider-ledger.json",
     "remoteVerifiedCheckpointCommit": "e7855060ce892cabe5ffc76ceac26eb8e40dc5e8",
@@ -9975,11 +10023,11 @@
     "closureCheckpoint": "assets/lore/starlight-era/batch-470-andorra-five-stills-closed-qa-checkpoint.json",
     "xComposerCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json",
     "xCandidateSceneOrder": [1906, 1910, 1904],
-    "nextSafeAction": "Commit and remote-verify the Batch 470 closure and staged X composer, then stop before Post for fresh X-specific authorization."
+    "nextSafeAction": "Remote-verify the live Andorra-Albania X publication and never resend its media; then resolve the next country from newest authority."
   },
   "latestBatch470AndorraFiveStillsClosure": {
     "schemaVersion": 1,
-    "status": "closed-five-archive-accepted-two-clean-publication-candidates",
+    "status": "closed-five-archive-accepted-two-clean-publication-candidates-x-publication-live-verified",
     "closedAtUtc": "2026-08-31T11:18:26.9570740Z",
     "batch": 470,
     "country": "Andorra",
@@ -10003,14 +10051,15 @@
     "guardianReconciliationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-guardian-reconciliation-checkpoint.json",
     "xPairEligible": true,
     "xCandidateSceneOrder": [1906, 1910, 1904],
-    "xPostAuthorized": false,
-    "xPostUrls": [],
+    "xPostAuthorized": true,
+    "xPostUrls": ["https://x.com/dogramaci/status/2094406003852734633"],
+    "xPublicationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-five-stills-closed-qa-checkpoint.json",
-    "nextSafeAction": "Remote-verify the closure and preserve the staged X composer pending fresh X-specific authorization."
+    "nextSafeAction": "Remote-verify the live Andorra-Albania X publication and never resend its media."
   },
   "latestBatch470AndorraAlbaniaXComposer": {
     "schemaVersion": 1,
-    "status": "three-separately-authorized-post-clicks-confirmed-no-transmission-draft-preserved-manual-intervention-required",
+    "status": "published-live-verified-keyboard-submit-after-three-confirmed-no-transmission-button-clicks",
     "stagedAtUtc": "2026-08-31T11:18:26.9570740Z",
     "account": "@dogramaci",
     "caption": "Andorra ❤️ Albania: a Pyrenean sunset, Sorteny’s flowered valley, and Llogara’s Ionian horizon frame three close four-woman reunions in short RAZE couture.\n\n#WorldXXXSeries",
@@ -10024,29 +10073,37 @@
     "altTextCount": 3,
     "madeWithAiLabelVisible": true,
     "duplicateMediaCheckPassed": true,
-    "postEnabled": true,
-    "postAuthorized": false,
+    "postEnabled": false,
+    "postAuthorized": true,
     "postClicked": true,
     "postClickAttempts": 3,
-    "publicTransmissionCount": 0,
-    "xPostUrls": [],
+    "keyboardSubmitAttempts": 1,
+    "publicTransmissionCount": 1,
+    "xPostUrls": ["https://x.com/dogramaci/status/2094406003852734633"],
     "remoteVerifiedClosureCommit": "b956d28e21c451a5613146466582fcfa17c843c8",
     "gitLfsRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json",
     "xPostReservationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-reservation-checkpoint.json",
-    "currentXTabId": "35",
-    "browserRecovery": "The app cleared the prior tabs again. The exact saved draft was restored through visible X controls in the single current tab without reopening terminal Meta scenes.",
+    "currentXTabId": "37",
+    "browserRecovery": "The app cleared the prior tabs again. The exact saved draft was restored through visible X controls in tab 37 without reopening terminal Meta scenes; the authorized keyboard submit then transmitted once.",
     "firstClickOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
     "authorizedRetryOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
     "explicitUserOverrideOutcome": "confirmed-no-transmission-exact-draft-saved-and-reopened",
+    "keyboardSubmissionOutcome": "transmitted-once-live-verified",
     "firstClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
-    "previousClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json",
-    "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json",
+    "authorizedRetryOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json",
+    "previousClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json",
+    "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json",
     "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json",
     "remoteVerifiedRetryEvidenceCommit": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
     "retryRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-retry-git-lfs-remote-verification-checkpoint.json",
     "remoteVerifiedExplicitOverrideEvidenceCommit": "584ae32138210e26c072d27ae3385422a62c4c8d",
     "explicitOverrideRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-git-lfs-remote-verification-checkpoint.json",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json",
-    "nextSafeAction": "Remote-verify the authorized-retry no-transmission outcome. Keep the exact composer visible for one manual user click and do not perform another agent Post click."
+    "postedAtUtc": "2026-08-31T12:44:35.741Z",
+    "verifiedAtUtc": "2026-08-31T12:46:36.4220900Z",
+    "postUrl": "https://x.com/dogramaci/status/2094406003852734633",
+    "photoEndpointCount": 3,
+    "duplicateMediaTransmission": false,
+    "nextSafeAction": "Commit and remote-verify the live publication, preserve the X URL, and never resend its media. Then resolve the next country from newest authority."
   }
 }

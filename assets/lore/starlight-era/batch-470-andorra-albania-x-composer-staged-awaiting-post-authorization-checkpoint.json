@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "state": "x-composer-saved-and-reopened-after-three-authorized-no-transmission-clicks-manual-intervention-required",
+  "state": "published-live-verified-keyboard-submit-after-three-no-transmission-button-clicks",
   "stagedAtUtc": "2026-08-31T11:18:26.9570740Z",
   "accountVisible": "@dogramaci",
-  "xComposerTabId": "35",
+  "xComposerTabId": "37",
   "caption": "Andorra ❤️ Albania: a Pyrenean sunset, Sorteny’s flowered valley, and Llogara’s Ionian horizon frame three close four-woman reunions in short RAZE couture.\n\n#WorldXXXSeries",
   "sceneOrder": [1906, 1910, 1904],
   "assetPaths": [
@@ -24,17 +24,19 @@
   "attachmentCount": 3,
   "altTextCount": 3,
   "madeWithAiLabelVisible": true,
-  "duplicateMediaCheck": "No matching prior public X publication asset hash was found. The Albania scene-1904 hash appears only in its unpublished batch selection record.",
+  "duplicateMediaCheck": "Pre-submission checks found no matching public post. The three assets are now reserved by the single verified live status and must never be resent.",
   "browserVerification": {
-    "actualTabIds": ["35"],
+    "actualTabIds": ["37"],
     "metaTabCount": 0,
-    "xComposerCount": 1,
+    "xComposerCount": 0,
+    "liveStatusCount": 1,
     "signedInProfilePathVisible": "/dogramaci",
     "captionVisible": true,
     "mediaCount": 3,
     "allAltGroupsVisible": true,
-    "postEnabled": true,
-    "postClicked": false
+    "postEnabled": false,
+    "postClicked": true,
+    "livePostUrl": "https://x.com/dogramaci/status/2094406003852734633"
   },
   "evidence": {
     "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-composer-staged-before-post.png",
@@ -42,11 +44,12 @@
     "bytes": 99813,
     "dimensions": "804x1039"
   },
-  "postAuthorized": false,
+  "postAuthorized": true,
   "postClicked": true,
   "postClickAttempts": 3,
-  "publicTransmissionCount": 0,
-  "xPostUrls": [],
+  "keyboardSubmitAttempts": 1,
+  "publicTransmissionCount": 1,
+  "xPostUrls": ["https://x.com/dogramaci/status/2094406003852734633"],
   "recoveredComposer": {
     "recoveredAtUtc": "2026-08-31T11:49:12.6897278Z",
     "reason": "The app browser returned zero tabs after action-time authorization and X had not saved the staged media composer as a draft.",
@@ -82,6 +85,22 @@
     "reopenedTerminalMetaScenes": false,
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json"
   },
+  "keyboardSubmission": {
+    "authorizationText": "send authorized go",
+    "submittedAtUtc": "2026-08-31T12:44:35.741Z",
+    "verifiedAtUtc": "2026-08-31T12:46:36.4220900Z",
+    "currentTabId": "37",
+    "method": "Control+Enter in the visible X Post text box",
+    "exactGuardsPassed": true,
+    "liveProfileDuplicateCheckPassed": true,
+    "outcome": "transmitted-once-live-verified",
+    "postUrl": "https://x.com/dogramaci/status/2094406003852734633",
+    "photoEndpointCount": 3,
+    "altTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "unavailableOrDeadLink": false,
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json"
+  },
   "remoteVerification": {
     "verifiedClosureCommit": "b956d28e21c451a5613146466582fcfa17c843c8",
     "verifiedRetryEvidenceCommit": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
@@ -93,7 +112,7 @@
     "explicitOverrideCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-git-lfs-remote-verification-checkpoint.json"
   },
   "firstClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-first-post-click-no-transmission-checkpoint.json",
-  "previousClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-authorized-retry-no-transmission-checkpoint.json",
-  "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json",
-  "nextSafeAction": "Keep the exact composer visible for one manual user click and do not perform another agent Post click. After the user reports the manual click, verify the live @dogramaci status before recording any X URL."
+  "previousClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json",
+  "clickOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json",
+  "nextSafeAction": "Commit and remote-verify the live post, then never resend the three published media assets."
 }

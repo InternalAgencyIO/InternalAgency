@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "state": "three-authorizations-consumed-all-confirmed-no-transmission-draft-preserved",
+  "state": "published-live-verified-by-fresh-authorized-keyboard-submission",
   "authorizedAtUtc": "2026-08-31T11:49:12.6897278Z",
   "authorization": {
     "userText": "send authorized go",
@@ -38,7 +38,8 @@
     "madeWithAiLabelVisible": true,
     "dialogPostEnabled": true,
     "postClicks": 3,
-    "postAuthorized": false
+    "keyboardSubmitAttempts": 1,
+    "postAuthorized": true
   },
   "evidence": {
     "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-composer-recovered-final-authorized-before-post.png",
@@ -68,9 +69,21 @@
     "outcome": "confirmed-no-transmission",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json"
   },
+  "keyboardSubmission": {
+    "userText": "send authorized go",
+    "submittedAtUtc": "2026-08-31T12:44:35.741Z",
+    "verifiedAtUtc": "2026-08-31T12:46:36.4220900Z",
+    "currentXTabId": "37",
+    "method": "Control+Enter in the visible X Post text box",
+    "outcome": "transmitted-once-live-verified",
+    "postUrl": "https://x.com/dogramaci/status/2094406003852734633",
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-post-live-verified-checkpoint.json"
+  },
   "postClicks": 3,
-  "publicTransmissionCount": 0,
+  "keyboardSubmitAttempts": 1,
+  "publicTransmissionCount": 1,
   "authorizationConsumed": true,
   "mayClickPostAgain": false,
-  "nextSafeAction": "Remote-verify the explicit-override checkpoint and leave the exact composer visible for a manual user click. Do not perform another agent Post click."
+  "xPostUrls": ["https://x.com/dogramaci/status/2094406003852734633"],
+  "nextSafeAction": "Commit and remote-verify the live publication checkpoint and never resend these three media assets."
 }
