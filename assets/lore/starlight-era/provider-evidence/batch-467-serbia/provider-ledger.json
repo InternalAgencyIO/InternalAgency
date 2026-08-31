@@ -58,7 +58,16 @@
       "D1CA838503D195BA8E102C69A49317C1DC9F3E3D0B7D8C56E3E256AFCD36830F"
     ],
     "orderedIdentityAnchors": [938, 936, 937],
-    "sendClicked": false
+    "sendClicked": true,
+    "replacementTabsAfterExpiry": ["13", "14"],
+    "submittedAtUtc": [
+      "2026-08-31T06:56:57.962Z",
+      "2026-08-31T06:57:01.057Z"
+    ],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/facdb210-6b59-4fee-9932-775e24e2bf32",
+      "https://www.meta.ai/prompt/04f962c0-c92a-4a38-9933-9a31a57831b3"
+    ]
   },
-  "nextSafeAction": "After fresh action-time confirmation, re-inspect staged tabs 9 and 10 and click Send exactly once in each; preserve both second occurrences before any further retry."
+  "nextSafeAction": "Wait for the two first-retry provider URLs to reach terminal state and preserve both second occurrences before any further retry."
 }
