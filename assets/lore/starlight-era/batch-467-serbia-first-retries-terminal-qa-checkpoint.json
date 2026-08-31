@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "first_retries_terminal_archived_scene1896_second_retry_eligible_scene1897_closed",
+  "acceptedSceneIds": [1895],
+  "scene1896": {
+    "occurrence": 2,
+    "retryNumber": 1,
+    "providerUrl": "https://www.meta.ai/prompt/facdb210-6b59-4fee-9932-775e24e2bf32",
+    "rawAssetCount": 1,
+    "chatgptPassCount": 1,
+    "decision": "reject-face-mapping-and-choreography",
+    "remainingMetaRetries": 1
+  },
+  "scene1897": {
+    "occurrence": 2,
+    "retryNumber": 1,
+    "providerUrl": "https://www.meta.ai/prompt/04f962c0-c92a-4a38-9933-9a31a57831b3",
+    "rawAssetCount": 0,
+    "decision": "explicit-no-byte-refusal-terminal",
+    "remainingMetaRetries": 0
+  },
+  "xPairEligible": false,
+  "xPairReason": "Only scene 1895 is accepted; scene 1896 has one final retry and scene 1897 is terminal.",
+  "nextSafeAction": "Prepare a materially revised scene-1896 second-retry prompt using the exact primary-anchor left-to-right order Alia, Radiance, Ellie, ECE, stage a fresh chat with anchors 938, 936, 937, and stop before Send for fresh confirmation."
+}
