@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "batch": 474,
+  "country": "Denmark",
+  "state": "four-meta-thinking-lanes-exactly-staged-authorized-awaiting-staging-remote-verification",
+  "stagedAtUtc": "2026-08-31T19:34:18.9392138Z",
+  "authorization": "authorized for all go, authorized for all similar commands",
+  "authorizationCurrent": true,
+  "account": "leesha007",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "grokState": "paused-until-credits-return",
+  "xComposer": {
+    "tabId": "6",
+    "url": "https://x.com/compose/post",
+    "blank": true,
+    "postClicks": 0
+  },
+  "browserInventory": {
+    "tabCount": 5,
+    "metaTabIds": ["12", "13", "14", "15"],
+    "metaTabCount": 4,
+    "xComposerCount": 1,
+    "unexpectedTabs": []
+  },
+  "sceneMapping": [
+    {"scene": 1923, "tabId": "12", "promptSha256": "07F21BFD24A86D13DD76A3A17556EFC64F46A18115D92AA7D0FB6A9DF583E6D0"},
+    {"scene": 1924, "tabId": "13", "promptSha256": "7A0636D41777AB779D451F2B7C38AD933E715A166A8354AE5A3BBF4E1F0DF259"},
+    {"scene": 1925, "tabId": "14", "promptSha256": "ACB214E7BD6AD1C90D99BAE18977268FF5E6B5C06814D37A38B30CACB77BAF0F"},
+    {"scene": 1926, "tabId": "15", "promptSha256": "1143760E8223B1C14FF2AD193168856BD4F5092F6C9967867169F52F959D8696"}
+  ],
+  "visibleGateResults": {
+    "signedInAccountVisibleAllFour": true,
+    "thinkingButtonVisibleAllFour": true,
+    "thinkingMenuCheckedAllFour": true,
+    "instantMenuCheckedAny": false,
+    "exactPromptTextAllFour": true,
+    "anchorAttachmentCountEach": 3,
+    "anchorOrderAllFour": [938, 936, 937],
+    "sendButtonsEnabledAllFour": true
+  },
+  "sendClicks": 0,
+  "repeatSendClicks": 0,
+  "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/staging-evidence-manifest.json",
+  "preparationCheckpoint": "assets/lore/starlight-era/batch-474-denmark-europe-gap-fill-prompts-prepared-checkpoint.json",
+  "preflightCheckpoint": "assets/lore/starlight-era/batch-474-denmark-preflight-git-lfs-remote-verification-checkpoint.json",
+  "nextSafeAction": "Commit and push this exact staging state and evidence, fetch, verify local/remote/PR heads and targeted LFS parity, then re-inspect the same five actual tabs and send each scene exactly once only if every visible gate remains true."
+}
