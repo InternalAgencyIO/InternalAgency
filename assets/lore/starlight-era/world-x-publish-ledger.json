@@ -10573,7 +10573,7 @@
   },
   "latestBatch474DenmarkPreparation": {
     "schemaVersion": 1,
-    "status": "cyprus-denmark-x-reserved-awaiting-git-lfs-remote-verification",
+    "status": "cyprus-denmark-x-reservation-remote-verified-awaiting-visible-staging",
     "preparedAtUtc": "2026-08-31T19:16:11.4719054Z",
     "batch": 474,
     "country": "Denmark",
@@ -10677,6 +10677,9 @@
     "xVerifiedAccountUrl": "https://x.com/dogramaci",
     "xProfileEditControlVisible": true,
     "xReservationCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-post-reservation-checkpoint.json",
+    "xReservationRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-reservation-git-lfs-remote-verification-checkpoint.json",
+    "xReservationRemoteVerifiedCommit": "25b447574f896915b38131595deff97a3cbbefd0",
+    "xReservationRemoteVerifiedAtUtc": "2026-08-31T20:37:54.9369395Z",
     "xPublicationPreparationManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/x-publication-preparation-manifest.json",
     "xCandidateSceneOrder": [1920, 1924, 1926],
     "xCandidateAssetSha256": [
@@ -10689,6 +10692,6 @@
     "xPostAuthorized": true,
     "xPostClicks": 0,
     "xPublicTransmissionCount": 0,
-    "nextSafeAction": "Commit and push the reservation, live-X reconciliation and publication derivative, prove Git/LFS/remote/PR parity, then stage the exact three-media Cyprus-Denmark post in the single visible X composer."
+    "nextSafeAction": "Commit and push the reservation verification record, prove parity once more, then stage the exact three-media Cyprus-Denmark post in the single visible X composer."
   }
 }
