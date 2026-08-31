@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 473,
-  "state": "croatia-cyprus-x-composer-exactly-staged-remote-verified-awaiting-final-live-gate",
+  "state": "croatia-cyprus-x-publication-transmitted-once-live-verified",
   "stagedAtUtc": "2026-08-31T18:51:44.8481790Z",
   "account": "@dogramaci",
   "accountVerifiedInVisibleProfileUi": true,
@@ -29,8 +29,8 @@
   "postVisible": true,
   "postEnabled": true,
   "postClicks": 1,
-  "keyboardSubmitAttempts": 0,
-  "publicTransmissionCount": 0,
+  "keyboardSubmitAttempts": 1,
+  "publicTransmissionCount": 1,
   "currentAuthorization": "authorized for all go, authorized for all similar commands",
   "postAuthorized": true,
   "mayPost": false,
@@ -48,5 +48,8 @@
   "stagingRemoteVerifiedAtUtc": "2026-08-31T18:54:36.5268323Z",
   "firstPostClickOutcomeCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-first-post-click-no-transmission-checkpoint.json",
   "firstPostClickOutcome": "confirmed-no-transmission-exact-draft-retained",
-  "nextSafeAction": "Commit and remote-verify the first-click no-transmission evidence, then recheck the unchanged live draft and use one authorized Ctrl+Enter submission without another Post-button click."
+  "livePublicationCheckpoint": "assets/lore/starlight-era/batch-473-croatia-cyprus-x-post-live-verified-checkpoint.json",
+  "postedAtUtc": "2026-08-31T19:02:00.175Z",
+  "postUrl": "https://x.com/dogramaci/status/2094500984567279733",
+  "nextSafeAction": "Commit and remote-verify the live publication evidence, preserve the URL, and never resend its media."
 }
