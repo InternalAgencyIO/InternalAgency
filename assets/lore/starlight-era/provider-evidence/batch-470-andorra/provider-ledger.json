@@ -145,8 +145,10 @@
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json"
   },
   "remoteVerification": {
-    "status": "pending-final-closure-commit",
-    "lastVerifiedCheckpointCommit": "0dc961dab1ce49bcf1b9725f0641625ae0561764"
+    "status": "closure-commit-lfs-remote-and-pr-parity-verified",
+    "verifiedClosureCommit": "b956d28e21c451a5613146466582fcfa17c843c8",
+    "verifiedAtUtc": "2026-08-31T11:38:36.6624493Z",
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json"
   },
-  "nextSafeAction": "Commit and push the complete closure package, verify branch/PR parity and targeted LFS dry-run, then stop before X Post for fresh X-specific authorization."
+  "nextSafeAction": "Commit and push the verification checkpoint, reverify the resulting final branch/PR head and empty targeted LFS dry-run, then stop before X Post for fresh X-specific authorization."
 }
