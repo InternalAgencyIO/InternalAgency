@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "batch": 468,
+  "scene": 1898,
+  "country": "Bulgaria",
+  "provider": "Meta AI",
+  "occurrence": 1,
+  "status": "hard_unusable_retry1_eligible",
+  "submittedAtUtc": "2026-08-31T07:40:02.290Z",
+  "capturedAtUtc": "2026-08-31T07:56:21.9710048Z",
+  "providerChatUrl": "https://www.meta.ai/prompt/c00b128b-5104-43c4-a93b-bb736733f3ed",
+  "promptSource": "assets/lore/starlight-era/batch-468-bulgaria-europe-gap-fill-prompts-prepared-checkpoint.json#scene-1898",
+  "promptSha256": "D851CA43E359564477DD562FF8514CA01CB7D8370433D1A719AB29950D7E839B",
+  "orderedReferenceAnchors": [938, 936, 937],
+  "orderedReferenceSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "providerResponseSummary": "One image-bearing result appeared for the four-woman Varna Sea Garden scene with a visible Download control.",
+  "rawAsset": null,
+  "rawBytes": {
+    "available": false,
+    "status": "Visible Meta Download was invoked on the page and again in the visible media dialog, but neither attempt emitted a supported browser download event or produced a local file. No direct fetch was attempted.",
+    "browserRenderedEvidenceOnly": true
+  },
+  "browserRenderedEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-meta-browser-rendered-evidence.png",
+    "sha256": "B9653500DEF2D430D56244B56EA555DA38886B7336D9A7BD50BBE665D8751B22",
+    "byteLength": 316566,
+    "dimensions": "267x475",
+    "contentType": "image/png",
+    "acquisition": "Visible in-app Browser screenshot crop of the rendered media; not provider raw bytes."
+  },
+  "browserPageEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/scene-1898-meta-terminal-image-page.png",
+    "sha256": "F3D0E180F440B4747BB3E297F0C6E5260517F857D132CF090EF76EE32BDF203F",
+    "byteLength": 53081,
+    "dimensions": "737x950",
+    "contentType": "image/png"
+  },
+  "chatgptHemlineRefinement": {
+    "required": true,
+    "maximumPasses": 1,
+    "passesCompleted": 1,
+    "promptSource": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/chatgpt-hemline-one-pass-prompts.json#scene-1898",
+    "promptSha256": "0B1F8474E4924EDA11119E9C608A1DD11E5EE10FB30400C13F030DA83F8A26ED",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png",
+    "sha256": "155CC6057DFF51A74281EFE44341C5C88A9308EAC55759DB249E70CB2FF4D6AE",
+    "byteLength": 2038099,
+    "dimensions": "940x1672",
+    "contentType": "image/png"
+  },
+  "selection": {
+    "decision": "hard_unusable_retry1_eligible",
+    "selectedPath": null,
+    "unusedPaths": [
+      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-meta-browser-rendered-evidence.png",
+      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png"
+    ],
+    "reason": "The Meta occurrence has no captured provider raw bytes. The one permitted ChatGPT edit preserves the quartet and Varna location but widens the required knee crop and visibly includes lower legs, violating the strict INTERMEDIATE framing contract."
+  },
+  "retry": {
+    "eligible": true,
+    "nextRetryNumber": 1,
+    "remainingMetaRetries": 2,
+    "requiresFreshChatAndMateriallyRevisedPrompt": true
+  }
+}

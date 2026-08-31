@@ -9605,5 +9605,30 @@
     "xPostAuthorized": false,
     "dispatchPermitted": false,
     "xPostEligibleYet": false
+  },
+  "latestBatch468BulgariaFirstOccurrenceQa": {
+    "schemaVersion": 1,
+    "status": "one-accepted-three-retry1-eligible-no-x-pair-yet",
+    "qaAtUtc": "2026-08-31T08:12:16.0468088Z",
+    "acceptedSceneIds": [1900],
+    "acceptedAssets": [
+      {
+        "scene": 1900,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1900-bulgaria-melnik-chatgpt-hemline-one-pass.png",
+        "sha256": "06A2F63D48725182307D78A4A61B414230F9D25760F16141C6B52185C294C195"
+      }
+    ],
+    "retryEligibleSceneIds": [1898, 1899, 1901],
+    "providerRawAssetCount": 0,
+    "browserRenderedEvidenceCount": 4,
+    "chatgptRefinementCount": 4,
+    "xPairEligible": false,
+    "xPairReason": "Only one Bulgaria asset is accepted; together with Serbia scene 1895 this cannot satisfy the required two Bulgaria plus one Serbia image order.",
+    "xComposerMutated": false,
+    "xPostAuthorized": false,
+    "xPostUrls": [],
+    "canonicalContradictionResolved": "Full-size QA supersedes the provisional scene-1898 acceptance because its high-resolution edit shows lower legs below the strict knee crop.",
+    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-first-occurrence-refinements-qa-checkpoint.json",
+    "nextSafeAction": "Stage fresh materially revised retry1 prompts for scenes 1898, 1899, and 1901 with ordered anchors 938, 936, 937, retain scene 1900 as the fourth visible Meta lane and keep one blank X composer visible, then stop before Send and before Post for fresh confirmation."
   }
 }
