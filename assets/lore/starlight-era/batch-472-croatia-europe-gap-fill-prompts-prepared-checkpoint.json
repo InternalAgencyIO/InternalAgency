@@ -3,7 +3,7 @@
   "batch": 472,
   "country": "Croatia",
   "runType": "four-lane-RAZE-fashion-europe-gap-fill",
-  "state": "three-initial-media-one-initial-refusal-scene-1915-retry-1-dispatched-once-rendering",
+  "state": "closed-four-archive-accepted-three-clean-publication-candidates-one-archive-only",
   "preparedAtUtc": "2026-08-31T14:35:03.7971502Z",
   "authority": {
     "source": "Newest remote-verified Batch 471 closure, current user authorized-go message, Europe Meta image directive, Thinking-always directive, and relaxed acceptance rule.",
@@ -163,7 +163,7 @@
     "https://www.meta.ai/prompt/349bcb46-ada9-4e91-b9e5-7d412124c011",
     "https://www.meta.ai/prompt/442b1586-ed00-4342-9023-54e8b9ccd2d6"
   ],
-  "sendClicks": 4,
+  "sendClicks": 5,
   "repeatSendClicks": 0,
   "firstOccurrencesTerminalCheckpoint": "assets/lore/starlight-era/batch-472-croatia-first-occurrences-terminal-checkpoint.json",
   "initialTerminalMediaSceneIds": [1916, 1917, 1918],
@@ -174,15 +174,25 @@
   "scene1915Retry1DispatchedCheckpoint": "assets/lore/starlight-era/batch-472-croatia-scene-1915-first-retry-dispatched-checkpoint.json",
   "scene1915Retry1ClickedAtUtc": "2026-08-31T16:11:46.657Z",
   "scene1915Retry1SendClicks": 1,
+  "scene1915Retry1TerminalMedia": true,
+  "scene1915SecondRetryJustified": false,
   "chatgptOnePassProgressCheckpoint": "assets/lore/starlight-era/batch-472-croatia-chatgpt-one-pass-progress-checkpoint.json",
-  "metaTabIds": ["39", "40", "41", "42"],
-  "xComposerTabId": "43",
+  "chatgptPassRequestsIssued": 4,
+  "chatgptOutputsSaved": 3,
+  "chatgptOutputModerationBlockedSceneIds": [1917],
+  "additionalChatgptPassesPermitted": 0,
+  "acceptedArchiveSceneIds": [1915, 1916, 1917, 1918],
+  "cleanPublicationCandidateSceneIds": [1915, 1916, 1918],
+  "archiveOnlySceneIds": [1917],
+  "closureCheckpoint": "assets/lore/starlight-era/batch-472-croatia-four-stills-closed-qa-checkpoint.json",
+  "metaTabIds": ["1", "2", "3", "4"],
+  "xComposerTabId": "5",
   "preflightRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-472-croatia-preflight-git-lfs-remote-verification-checkpoint.json",
   "xComposer": {
     "requiredVisibleCount": 1,
     "requiredAccount": "@dogramaci",
-    "currentUse": "blank preparation lane only; do not attach media or transmit until Croatia produces a qualified candidate and the Bosnia-Croatia 2+1 duplicate-hash gate passes.",
+    "currentUse": "Croatia is closed and the Bosnia-Croatia 2+1 duplicate-hash gate passed for scenes 1913, 1914 and 1915. The existing composer may be staged, but final public transmission still requires the browser action-time confirmation gate.",
     "duplicateMediaRule": "Never attach or repost any media hash already present in the X ledger."
   },
-  "nextSafeAction": "Archive scene 1915 retry-1 terminal evidence without resending. If technically valid media, select it and issue the scene's one remaining ChatGPT shortening pass exactly once. Keep scenes 1916-1918 and X untouched."
+  "nextSafeAction": "Commit and remote-verify Batch 472 closure and LFS objects. Then stage exactly scenes 1913, 1914 and 1915 in the existing blank @dogramaci X composer with alt text, and stop immediately before final Post for action-time confirmation."
 }

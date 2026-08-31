@@ -6,7 +6,7 @@
   "account": "leesha007",
   "occurrences": [
     {"scene": 1915, "occurrence": 0, "providerUrl": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3", "status": "explicit-no-image-refusal", "providerRawBytes": "not-applicable-no-media", "retry": 1},
-    {"scene": 1915, "occurrence": 1, "providerUrl": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3", "status": "dispatched-once-rendering", "clickedAtUtc": "2026-08-31T16:11:46.657Z", "sendClicks": 1, "repeatSendClicks": 0},
+    {"scene": 1915, "occurrence": 1, "providerUrl": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3", "status": "media-technically-valid-selected", "clickedAtUtc": "2026-08-31T16:11:46.657Z", "sendClicks": 1, "repeatSendClicks": 0, "providerMediaName": "gallery/dubrovnik_fashion_friends.webp", "providerRawBytes": "unavailable-supported-download-and-page-asset-surfaces-did-not-produce-the-render", "chatgptPass": "saved"},
     {"scene": 1916, "occurrence": 0, "providerUrl": "https://www.meta.ai/prompt/d42e0b2c-7b11-4aec-a7a4-6a7f0edc889f", "status": "media-technically-valid-selected", "providerMediaName": "gallery/split_riva_fashion.webp", "visibleDownloadClicked": true, "providerRawBytes": "unavailable-no-supported-download-event", "chatgptPass": "saved"},
     {"scene": 1917, "occurrence": 0, "providerUrl": "https://www.meta.ai/prompt/349bcb46-ada9-4e91-b9e5-7d412124c011", "status": "media-technically-valid-selected", "providerMediaName": "gallery/plitvice_lakes_group.webp", "visibleDownloadClicked": true, "providerRawBytes": "unavailable-no-supported-download-event", "chatgptPass": "output-stage-moderation-blocked"},
     {"scene": 1918, "occurrence": 0, "providerUrl": "https://www.meta.ai/prompt/442b1586-ed00-4342-9023-54e8b9ccd2d6", "status": "media-technically-valid-selected", "providerMediaName": "gallery/rovinj_golden_hour.webp", "visibleDownloadClicked": true, "providerRawBytes": "unavailable-no-supported-download-event", "chatgptPass": "saved"}
@@ -14,9 +14,9 @@
   "sendClicks": 5,
   "repeatSendClicks": 0,
   "xPostClicks": 0,
-  "terminalMediaCount": 3,
+  "terminalMediaCount": 4,
   "explicitNoImageRefusalCount": 1,
   "providerRawAssetCount": 0,
-  "evidencePolicy": "Provider-native downloads were attempted only through the visible Download controls. No provider API, direct HTTP, CLI or hidden-state workaround was used when the supported download event did not arrive.",
-  "nextSafeAction": "Archive scene 1915 retry-1 terminal evidence without resending."
+  "evidencePolicy": "Provider-native downloads were attempted only through supported visible in-app Browser controls. No provider API, direct HTTP, CLI or hidden-state workaround was used. A page-asset surface returned an unrelated user asset instead of the render; that asset was immediately excluded and removed and is not present in the repository, manifests or publication candidates.",
+  "nextSafeAction": "Do not resend any Batch 472 scene. Preserve all selected, unused, blocked and UI-bearing evidence; close QA, accessibility, manifests and Git/LFS before staging X."
 }

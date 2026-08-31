@@ -4,7 +4,7 @@
   "country": "Croatia",
   "scene": 1915,
   "retry": 1,
-  "state": "meta-thinking-retry-1-dispatched-once-rendering",
+  "state": "meta-thinking-retry-1-terminal-media-accepted-no-second-retry",
   "preparedAtUtc": "2026-08-31T15:34:52.1284354Z",
   "providerUrl": "https://www.meta.ai/prompt/d1f79198-6bb2-4dc1-857d-491b125e0ca3",
   "tabId": "1",
@@ -50,5 +50,6 @@
   "retry1SendClicks": 1,
   "retry1RepeatSendClicks": 0,
   "authorization": {"freshUserActionTimeAuthorizationConsumed": true, "explicitFullTabResetAndReopenAuthorized": true, "mayClickSendAfterRemoteAndFreshLiveGate": false},
-  "nextSafeAction": "Archive the scene 1915 retry-1 terminal result without resending. If it is technically valid media, select it and issue the scene's one remaining ChatGPT shortening pass exactly once; if it meets a hard failure condition, evaluate whether the second and final Meta retry is justified."
+  "terminalOutcome": {"occurrence": 1, "status": "media-technically-valid-selected", "providerMediaName": "gallery/dubrovnik_fashion_friends.webp", "secondRetryJustified": false, "chatgptPassRequestsIssued": 1, "chatgptPassesRemaining": 0, "selectedOutputSha256": "A50B39628755EA37BE9B3314FC61CDA29FE18B202A8813BEA5A85FDA30D8F801"},
+  "nextSafeAction": "Do not resend scene 1915 or issue another ChatGPT pass. Preserve the retry terminal evidence and selected output in the Batch 472 closure."
 }
