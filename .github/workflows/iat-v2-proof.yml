@@ -14,6 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -85,6 +86,66 @@ jobs:
           cache: npm
           cache-dependency-path: projects/star-ascent/site/package-lock.json
       - run: npm ci
+      - name: Inspect the nonauthorizing Devnet program-ceremony binding
+        id: ceremony_binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from "node:fs";
+          import { parseIatV2DevnetProgramCeremonyBinding } from "./programs/iat_v2/ceremony-binding.mjs";
+
+          const binding = parseIatV2DevnetProgramCeremonyBinding(JSON.parse(
+            readFileSync("scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json", "utf8"),
+          ));
+          const output = [`status=${binding.status}`];
+          if (binding.status === "BOUND") {
+            const branch = `agent/iat-v2-devnet-ceremony-ci-${binding.sourceHeadCommit}`;
+            output.push(
+              `run_id=${binding.ciRunId}`,
+              `checkout_commit=${binding.checkoutCommit}`,
+              `checkout_branch=${branch}`,
+              `checkout_ref=refs/heads/${branch}`,
+            );
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `${output.join("\n")}\n`, "utf8");
+          NODE
+      - name: Fetch the exact public Devnet ceremony CI-checkout evidence ref
+        if: steps.ceremony_binding.outputs.status == 'BOUND'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin \
+            "+${{ steps.ceremony_binding.outputs.checkout_ref }}:refs/remotes/origin/${{ steps.ceremony_binding.outputs.checkout_branch }}"
+          observed="$(git rev-parse --verify "refs/remotes/origin/${{ steps.ceremony_binding.outputs.checkout_branch }}^{commit}")"
+          if [[ "$observed" != "${{ steps.ceremony_binding.outputs.checkout_commit }}" ]]; then
+            echo "Public Devnet ceremony CI-checkout evidence ref disagrees with the binding anchor" >&2
+            exit 1
+          fi
+      - name: Download the exact fresh Devnet ceremony public-CI evidence artifact
+        if: steps.ceremony_binding.outputs.status == 'BOUND'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          github-token: ${{ github.token }}
+          repository: InternalAgencyIO/InternalAgency
+          run-id: ${{ steps.ceremony_binding.outputs.run_id }}
+          name: iat-v2-b3-verifiable-sbf
+          path: projects/star-ascent/site/target/iat-v2-ceremony-ci-download
+      - name: Stage one exact fresh Devnet ceremony runtime evidence manifest
+        if: steps.ceremony_binding.outputs.status == 'BOUND'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' manifests < <(find target/iat-v2-ceremony-ci-download -type f \
+            -name iat-v2-build-evidence.json -print0)
+          if [[ "${#manifests[@]}" -ne 1 ]]; then
+            echo "Expected exactly one downloaded iat-v2-build-evidence.json, found ${#manifests[@]}" >&2
+            exit 1
+          fi
+          mkdir -p target/verifiable
+          cp --no-preserve=mode,ownership,timestamps -- \
+            "${manifests[0]}" \
+            target/verifiable/iat-v2-ceremony-runtime-build-evidence.json
       - name: Validate the Phase-A native containment source contract without execution
         run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs
       - name: Confirm the offline native containment preflight remains exact HOLD

@@ -60,6 +60,11 @@ import {
   parseV2ConfigAccount,
 } from "../../programs/iat_v2/instructions.mjs";
 import {
+  createIatV2DevnetProgramCeremonyEvidenceBinding,
+  parseIatV2DevnetProgramCeremonyBinding,
+} from "../../programs/iat_v2/ceremony-binding.mjs";
+import ceremonyRuntimeBindingJson from "../../scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json";
+import {
   SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
 } from "../../programs/iat_v2/client.mjs";
 import {
@@ -92,6 +97,9 @@ const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
 const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
 const COMMUNITY_CUSTODY = new PublicKey("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
+const ATTENDED_CEREMONY_BINDING = parseIatV2DevnetProgramCeremonyBinding(
+  ceremonyRuntimeBindingJson,
+);
 
 function signerRole(signer) {
   if (signer.equals(IAT_V2_PROGRAM_ADMIN) && signer.equals(COMMUNITY_CUSTODY)) {
@@ -119,19 +127,19 @@ const LEGACY_FEATURE_EVIDENCE_KEY_V2 =
 const LEGACY_FEATURE_EVIDENCE_KEY = "iat-v2-devnet-feature-action-evidence/v1";
 
 function exactFeatureStorageBinding(mint) {
-  return {
-    sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-    programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  return createIatV2DevnetProgramCeremonyEvidenceBinding({
+    binding: ATTENDED_CEREMONY_BINDING,
     mint: mint.toBase58(),
-  };
+  });
 }
 
 function featureSourceBoundStorageKey(namespace, mint, version) {
+  const exact = exactFeatureStorageBinding(mint);
   return [
     namespace,
-    IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-    IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
-    mint.toBase58(),
+    exact.sourceCommit,
+    exact.programArtifactSha256,
+    exact.mint,
     version,
   ].join("/");
 }
@@ -1581,11 +1589,7 @@ export default function FeatureRehearsal({
   }
 
   function evidenceBinding() {
-    return {
-      sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-      programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
-      mint: baseSnapshot.mint.toBase58(),
-    };
+    return exactFeatureStorageBinding(baseSnapshot.mint);
   }
 
   async function importReceiptSets(event) {
@@ -1696,9 +1700,12 @@ export default function FeatureRehearsal({
       <div className="address-grid">
         <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
         <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
-        <div><span>SOURCE COMMIT</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
-        <div><span>CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
-        <div><span>EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
+        <div><span>ATTENDED CEREMONY SOURCE</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code></div>
+        <div><span>CEREMONY CI RUN / ATTEMPT</span><code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code></div>
+        <div><span>CEREMONY RUNTIME EVIDENCE SHA-256</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code></div>
+        <div><span>IMMUTABLE ARTIFACT SOURCE</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
+        <div><span>ARTIFACT CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
+        <div><span>ARTIFACT EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
         <div><span>CI-BOUND ARTIFACT SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256}</code></div>
         <div><span>CI-BOUND ARTIFACT BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}</code></div>
       </div>

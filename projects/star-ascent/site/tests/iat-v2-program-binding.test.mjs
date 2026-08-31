@@ -5,6 +5,10 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { Keypair } from "@solana/web3.js";
 import {
+  IAT_V2_DEVNET_PROGRAM_CEREMONY_BINDING_SCHEMA,
+  parseIatV2DevnetProgramCeremonyBinding,
+} from "../programs/iat_v2/ceremony-binding.mjs";
+import {
   IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_CURRENT_REVIEWED_PROGRAM_ARTIFACT_SHA256,
@@ -191,13 +195,42 @@ test("Devnet tooling preserves the live V2 artifact while preflight binds curren
   assert.match(currentProgram, /pub struct Round \{[\s\S]*pub commit_slot: u64,[\s\S]*pub commit_timestamp: i64,/u);
 });
 
-test("attended consoles render complete exact migration evidence bindings", () => {
+test("attended consoles separate fresh ceremony provenance from the immutable artifact binding", () => {
   const bufferPreflight = readSiteSource("scripts/iat-v2-devnet-buffer-preflight.mjs");
   assert.match(
     bufferPreflight,
     /evidenceManifestSha256: IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256/u,
   );
   assert.doesNotMatch(bufferPreflight, /evidenceManifestSha256:\s*["'][0-9a-f]{64}["']/u);
+
+  const ceremonyAnchor = parseIatV2DevnetProgramCeremonyBinding(JSON.parse(readSiteSource(
+    "scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json",
+  )));
+  assert.equal(ceremonyAnchor.schema, IAT_V2_DEVNET_PROGRAM_CEREMONY_BINDING_SCHEMA);
+  assert.equal(ceremonyAnchor.network, "devnet");
+  assert.equal(ceremonyAnchor.mainnetStatus, "HOLD");
+  assert.equal(ceremonyAnchor.artifactSourceHeadCommit, IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD);
+  assert.equal(ceremonyAnchor.artifactBuildRunId, IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID);
+  assert.equal(ceremonyAnchor.artifactEvidenceManifestSha256, IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256);
+  assert.equal(ceremonyAnchor.artifactSha256, IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256);
+  assert.equal(ceremonyAnchor.artifactBytes, IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES);
+  if (ceremonyAnchor.status === "UNBOUND") {
+    assert.equal(ceremonyAnchor.sourceHeadCommit, null);
+    assert.equal(ceremonyAnchor.runtimeEvidenceManifestSha256, null);
+    assert.throws(
+      () => parseIatV2DevnetProgramCeremonyBinding(ceremonyAnchor, { requireBound: true }),
+      /not bound to fresh public CI/u,
+    );
+  } else {
+    assert.doesNotThrow(
+      () => parseIatV2DevnetProgramCeremonyBinding(ceremonyAnchor, { requireBound: true }),
+    );
+    assert.notEqual(ceremonyAnchor.sourceHeadCommit, ceremonyAnchor.artifactSourceHeadCommit);
+    assert.notEqual(
+      ceremonyAnchor.runtimeEvidenceManifestSha256,
+      ceremonyAnchor.artifactEvidenceManifestSha256,
+    );
+  }
 
   const consolePaths = [
     "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
@@ -207,6 +240,9 @@ test("attended consoles render complete exact migration evidence bindings", () =
   const exactVisibleValues = [
     '<code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code>',
     '<code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code>',
+    '<code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code>',
+    '<code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code>',
+    '<code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code>',
     '<code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code>',
     "<code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code>",
     '<code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code>',
@@ -216,6 +252,16 @@ test("attended consoles render complete exact migration evidence bindings", () =
 
   for (const path of consolePaths) {
     const source = readSiteSource(path);
+    assert.match(source, /parseIatV2DevnetProgramCeremonyBinding\([\s\S]*ceremonyRuntimeBindingJson/u);
+    assert.match(
+      source,
+      /createIatV2DevnetProgramCeremonyEvidenceBinding\(\{[\s\S]*binding: ATTENDED_CEREMONY_BINDING,[\s\S]*mint:/u,
+    );
+    assert.doesNotMatch(
+      source,
+      /sourceCommit:\s*IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD/u,
+      `${path} must not reuse immutable artifact source as the attended ceremony namespace`,
+    );
     for (const value of exactVisibleValues) {
       assert.ok(source.includes(value), `${path} must render ${value}`);
     }

@@ -24,6 +24,22 @@ const continuation54720Incident = readFileSync(
   "launch/IAT_V2_DEVNET_BUFFER_IN_PLACE_CONTINUATION_54720_INCIDENT_20260831.md",
   "utf8",
 );
+const upgradeExpiryIncident = readFileSync(
+  "launch/IAT_V2_ATTENDED_DEVNET_UPGRADE_EXPIRY_INCIDENT_20260831.md",
+  "utf8",
+);
+const programCeremonyBindingSource = readFileSync(
+  "programs/iat_v2/ceremony-binding.mjs",
+  "utf8",
+);
+const programCeremonyRuntimeSource = readFileSync(
+  "scripts/lib/iat-v2-devnet-program-ceremony-runtime-binding.mjs",
+  "utf8",
+);
+const programCeremonyAnchor = JSON.parse(readFileSync(
+  "scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json",
+  "utf8",
+));
 const upgrade = [
   "tools/iat-v2-admin-console/ProgramUpgrade.jsx",
   "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx",
@@ -50,14 +66,19 @@ test("post-CI runbook fixes localhost consoles and keeps Mainnet on hold", () =>
   assert.match(runbook, /After fresh exact-head CI succeeds, stop before starting or restarting the console/u);
   assert.match(runbook, /never update or rebind the immutable migration artifact\/evidence constants to the recovery source/u);
   assert.match(runbook, /create and verify the binding commit/u);
-  assert.match(runbook, /Do not open or reopen any attended page until that binding commit and clean verification both pass/u);
+  assert.match(runbook, /Do not open or reopen any attended page until the attended program-ceremony binding commit and clean verification pass/u);
+  assert.match(runbook, /agent\/iat-v2-devnet-ceremony-ci-\$SourceS/u);
+  assert.match(runbook, /target\/verifiable\/iat-v2-ceremony-runtime-build-evidence\.json/u);
+  assert.match(runbook, /verify-iat-v2-devnet-program-ceremony-runtime-binding\.mjs/u);
+  assert.match(runbook, /Public `B` CI independently fetches the exact evidence branch, downloads the exact artifact from `\$RunId`, stages the manifest at the canonical path, and executes the same full verifier/u);
+  assert.match(runbook, /`vite preview` is prohibited/u);
   assert.match(runbook, /Mainnet remains \*\*HOLD\*\*/u);
   assert.match(runbook, /does not authorize a Mainnet transaction/u);
   assert.match(runbook, new RegExp(IAT_V2_PROGRAM_ID.toBase58(), "u"));
   assert.doesNotMatch(runbook, /IATv2jRuKKmT41NKsb1iYwWba4wtviisFTcKMcpVR7X/u);
 });
 
-test("runbook keeps the immutable artifact lane independent from the recovery-runtime S/B lane", () => {
+test("runbook preserves completed recovery S/B as historical staging evidence instead of a current-HEAD gate", () => {
   for (const exact of [
     "a03fe71dd66cd1650b8d0353e486786df30b83e9",
     "ffe82fcf8fd3d851c09a937ebec945121137e546",
@@ -70,13 +91,26 @@ test("runbook keeps the immutable artifact lane independent from the recovery-ru
     assert.ok(runbook.includes(exact), `runbook must include independent binding pin: ${exact}`);
   }
   assert.match(runbook, /The immutable migration artifact\/evidence binding remains exactly/u);
-  assert.match(runbook, /The recovery-runtime binding is separate/u);
-  assert.match(runbook, /Implementation commit `S`[\s\S]*Direct one-parent successor commit `B` may change only/u);
-  assert.match(runbook, /`S` → `B` committed diff to contain only that data anchor/u);
+  assert.match(runbook, /recovery-runtime binding was a separate staging lane and is now immutable historical staging evidence/u);
+  assert.match(runbook, /historical `B` binds `S` and its tree/u);
+  assert.match(runbook, /cannot and must not also pass at the newer program-ceremony successor/u);
+  assert.match(runbook, /Preserve its anchor, evidence manifest, commits, and completed staging record without modification/u);
   assert.match(runbook, /does not replace the immutable migration artifact\/evidence lane/u);
-  assert.match(runbook, /verify-recovery --artifact[\s\S]*--runtime-evidence target\/verifiable\/iat-v2-recovery-runtime-build-evidence\.json/u);
+  assert.doesNotMatch(runbook, /^& \$NodeExe scripts\/iat-v2-devnet-buffer-preflight\.mjs verify-recovery/mu);
+  assert.match(runbook, /Do \*\*not\*\* run `verify-recovery` from the fresh program-ceremony successor `B`/u);
+  assert.match(runbook, /historical completed buffer staging and handoff — evidence only/iu);
+  assert.match(runbook, /not current commands, are not prerequisites to rerun at the fresh program-ceremony `B`/u);
   assert.match(runbook, /does not bind installed `node_modules` bytes/u);
   assert.match(runbook, /does not merge their source provenance/u);
+});
+
+test("runbook makes artifact, fresh ceremony binding, and finalized console observations the only current entry gates", () => {
+  assert.match(runbook, /current attended-entry gates are exactly the immutable migration artifact\/evidence preflight, the fresh attended program-ceremony runtime binding at its exact clean successor `B`, and fresh finalized in-console observations/u);
+  assert.match(runbook, /current runtime gate is the full attended program-ceremony binding verification performed before the local console can serve action UI/u);
+  assert.match(runbook, /freshly re-observe at finalized commitment the exact Program ID and ProgramData linkage/u);
+  assert.match(runbook, /independently re-observe buffer `564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH`/u);
+  assert.match(runbook, /649,680 payload bytes/u);
+  assert.match(runbook, /Any missing, stale, non-finalized, or mismatched observation keeps action UI on HOLD/u);
 });
 
 test("the incident preserves the consumed ceremony and requires a fresh source-bound replacement", () => {
@@ -93,6 +127,104 @@ test("the incident preserves the consumed ceremony and requires a fresh source-b
   assert.match(attendedIncident, /`m\/44'\/501'\/0'\/0'`/u);
   assert.match(attendedIncident, /preserve, rather than replace or bypass, the consumed\s+v1 incident latch/u);
   assert.match(attendedIncident, /not a transaction receipt, signature receipt, release,\s+deployment, or Mainnet authorization/u);
+});
+
+test("the 20260831 upgrade-expiry incident binds the exact pre-send HOLD without inventing transaction evidence", () => {
+  assert.match(upgradeExpiryIncident, /HOLD \/ SIGNED UPGRADE EXPIRED BEFORE BROADCAST/u);
+  assert.match(upgradeExpiryIncident, /Mainnet was not\s+accessed/u);
+  assert.match(upgradeExpiryIncident, /`Signed transaction blockhash is no longer valid`/u);
+  assert.match(upgradeExpiryIncident, /only inside the separate\s+broadcast control's exclusive `beforePersist` callback/u);
+  assert.match(upgradeExpiryIncident, /permanent broadcast-attempt reservation is created only after\s+that callback succeeds/u);
+  assert.match(upgradeExpiryIncident, /this exact failure\s+path is pre-reservation and pre-send/u);
+  assert.match(upgradeExpiryIncident, /does not identify\s+which of the finalized or processed validity checks returned false/u);
+
+  for (const exact of [
+    "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj",
+    "6DaESYUqB7th7kkfYAhsqiYfzmdnCFeFeoxDi5WkejTP",
+    "489333243",
+    "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "88d2a55973fd89245697d07e0e662cebdc3c0154bad4aa8f81e4c446beee34a3",
+    "634d95055b891e6b624a3f6996d10b66e2a7f4bbb1ab50711d6195f72c7772a7",
+    "564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH",
+    "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
+    "491084506",
+    "1db0e3eb84e70fc3301e5d233d0784a39547cc2169e59751b59e28a2b5fa41ca",
+  ]) {
+    assert.ok(upgradeExpiryIncident.includes(exact), `upgrade-expiry incident must retain exact evidence: ${exact}`);
+  }
+  assert.match(upgradeExpiryIncident, /No browser\s+storage was inspected/u);
+  assert.match(upgradeExpiryIncident, /does not claim a particular local\s+prompt-latch, tombstone, signed-pending, or broadcast-attempt record/u);
+  assert.match(upgradeExpiryIncident, /message hash, blockhash,\s+last-valid height, signed-wire hash, and local signature were not supplied and\s+must not be invented/u);
+  assert.match(upgradeExpiryIncident, /old source\/artifact\/mint\/action ceremony is terminal/u);
+  assert.match(upgradeExpiryIncident, /Do not retry the\s+Model T transaction signature, press broadcast, clear site data, change the\s+browser profile\/origin\/port, reconstruct or submit the expired wire, or erase\s+the old latch/u);
+  assert.match(upgradeExpiryIncident, /genuinely new reviewed ceremony\s+source binding, fresh exact-head public CI, authenticated artifact and runtime\s+evidence, and a binding-only successor/u);
+  assert.match(upgradeExpiryIncident, /must not be relabeled as recovery-source evidence/u);
+  assert.match(upgradeExpiryIncident, /not a transaction receipt, deployment receipt, release,\s+or Mainnet authorization/u);
+});
+
+test("fresh attended program ceremony binding remains a separate S-to-B source lane and preserves the immutable artifact lane", () => {
+  const nullUntilBound = [
+    "checkoutCommit",
+    "checkoutTree",
+    "ciRunAttempt",
+    "ciRunId",
+    "runtimeClosureSha256",
+    "runtimeEvidenceManifestSha256",
+    "sourceHeadCommit",
+    "sourceHeadTree",
+    "workflowRef",
+  ];
+  assert.equal(programCeremonyAnchor.schema, "iat-v2-devnet-program-ceremony-runtime-binding/v1");
+  assert.equal(programCeremonyAnchor.network, "devnet");
+  assert.equal(programCeremonyAnchor.mainnetStatus, "HOLD");
+  if (programCeremonyAnchor.status === "UNBOUND") {
+    for (const field of nullUntilBound) {
+      assert.equal(programCeremonyAnchor[field], null, `unbound ceremony anchor ${field} must remain null`);
+    }
+  } else {
+    for (const field of nullUntilBound) {
+      assert.notEqual(programCeremonyAnchor[field], null, `bound ceremony anchor ${field} must be populated`);
+    }
+    assert.notEqual(programCeremonyAnchor.sourceHeadCommit, programCeremonyAnchor.artifactSourceHeadCommit);
+    assert.notEqual(
+      programCeremonyAnchor.runtimeEvidenceManifestSha256,
+      programCeremonyAnchor.artifactEvidenceManifestSha256,
+    );
+  }
+  assert.equal(programCeremonyAnchor.artifactSourceHeadCommit, "a03fe71dd66cd1650b8d0353e486786df30b83e9");
+  assert.equal(programCeremonyAnchor.artifactBuildRunId, 33_161_771_816);
+  assert.equal(programCeremonyAnchor.artifactBuildRunAttempt, 1);
+  assert.equal(programCeremonyAnchor.artifactBytes, 649_680);
+  assert.equal(programCeremonyAnchor.artifactSha256, "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01");
+  assert.equal(programCeremonyAnchor.artifactEvidenceManifestSha256, "ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9");
+  assert.ok(programCeremonyAnchor.limitations.every((line) => /not|do not|Does not/u.test(line)));
+
+  assert.match(runbook, /attended program-ceremony runtime binding is also separate/u);
+  assert.match(runbook, /implementation commit `S` contains the console, expiry watcher, storage boundaries, tests, runbook, and canonical unbound `scripts\/data\/iat-v2-devnet-program-ceremony-runtime-binding\.json`/u);
+  assert.match(runbook, /Fresh exact-head public PR CI must run for that exact `S`/u);
+  assert.match(runbook, /direct one-parent successor `B` may change only that anchor/u);
+  assert.match(runbook, /binds the exact `S` commit\/tree, runtime closure, PR-merge checkout relation, CI run\/attempt\/workflow, runtime evidence-manifest SHA-256, and the unchanged immutable migration artifact tuple/u);
+  assert.match(runbook, /permanent storage namespace uses `S` as `sourceCommit`; it never uses `B`, a CI rerun, or a schema\/version bump to manufacture another prompt namespace/u);
+  assert.match(runbook, /old `a03fe71d…` latch and any tombstone remain preserved/u);
+  assert.match(runbook, /binding authorizes no prompt by itself and provides no evidence of a signature, broadcast, deployment, release, or Mainnet action/u);
+  assert.match(runbook, /Do not open or reopen any attended page until the attended program-ceremony binding commit and clean verification pass/u);
+  assert.match(runbook, /fresh ceremony source is the reviewed attended implementation commit `S`, while artifact provenance remains the immutable `a03fe71d…` source/u);
+  assert.match(runbook, /console must display both and must never relabel one as the other/u);
+
+  assert.match(programCeremonyRuntimeSource, /"launch\/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK\.md"/u);
+  assert.match(programCeremonyRuntimeSource, /IAT_V2_DEVNET_PROGRAM_CEREMONY_RUNTIME_BINDING_PATH/u);
+  assert.match(programCeremonyRuntimeSource, /current HEAD is not the direct one-parent binding successor B of source S/u);
+  assert.match(programCeremonyRuntimeSource, /ceremony binding successor changed paths beyond the one canonical anchor/u);
+  assert.match(programCeremonyRuntimeSource, /ceremony runtime closure changed in binding-only successor B/u);
+  assert.match(programCeremonyRuntimeSource, /validateSbfEvidence/u);
+  assert.match(programCeremonyRuntimeSource, /runtime CI evidence SHA-256 disagrees with the binding anchor/u);
+  assert.match(programCeremonyRuntimeSource, /public ceremony CI-checkout evidence ref disagrees with the binding anchor/u);
+  assert.match(programCeremonyBindingSource, /requireBound: true/u);
+  assert.match(programCeremonyBindingSource, /value\.sourceHeadCommit !== value\.artifactSourceHeadCommit/u);
+  assert.match(programCeremonyBindingSource, /sourceCommit: exact\.sourceHeadCommit/u);
+  assert.match(programCeremonyBindingSource, /programArtifactSha256: exact\.artifactSha256/u);
+  assert.match(upgrade, /ATTENDED CEREMONY SOURCE/u);
+  assert.match(upgrade, /IMMUTABLE ARTIFACT SOURCE/u);
 });
 
 test("only program actions gain durable signed recovery and permanent reconcile-only broadcast", () => {
@@ -116,6 +248,20 @@ test("only program actions gain durable signed recovery and permanent reconcile-
   assert.match(attendedIncident, /action is permanently reconcile-only/u);
   assert.match(attendedIncident, /never send again or delete\/reset the attempt/u);
   assert.match(attendedIncident, /keeps migration and feature signed-pending state memory-only/u);
+});
+
+test("program upgrade documents a read-only live blockhash window while preserving the locked send gate", () => {
+  assert.match(runbook, /read-only live window observes the signed blockhash at finalized and processed commitment/u);
+  assert.match(runbook, /reports an exact remaining-block countdown/u);
+  assert.match(runbook, /`CHECKING`, stale, background-tab, near-expiry, `RPC UNKNOWN`, or `EXPIRED` state disables broadcast/u);
+  assert.match(runbook, /watcher never refreshes the blockhash, signs, persists, reserves, discards, or sends/u);
+  assert.match(runbook, /display is advisory/u);
+  assert.match(runbook, /locked authoritative gate still requires blockhash validity at both finalized and processed commitment/u);
+  assert.match(runbook, /This click remains an explicit operator action/u);
+  assert.match(attendedBoundary, /observeSignedBlockhashWindow/u);
+  assert.match(upgrade, /MIN_BROADCAST_REMAINING_BLOCKS/u);
+  assert.match(upgrade, /BLOCKHASH_WINDOW_MAX_AGE_MS/u);
+  assert.match(upgrade, /!broadcastWindowReady/u);
 });
 
 test("attended runbook gates the runtime, shell, browser storage, and finalized buffer handoff", () => {
@@ -363,9 +509,10 @@ test("the base admin shell keeps artifact modes exact and initialization finaliz
   assert.match(admin, /ACTIVE_PROGRAM_ARTIFACT_BYTES = FEATURE_MODE/u);
   assert.match(
     admin,
-    /const FOOTER_SOURCE_COMMIT = FEATURE_MODE\s*\? IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD\s*: SOURCE_COMMIT;/u,
+    /const FOOTER_SOURCE_LABEL = CANONICAL_ACTION_MODE\s*\? "SOURCE \/\/ SEE ISOLATED ACTION BINDING"\s*: `SOURCE \$\{SOURCE_COMMIT\.slice\(0, 12\)\}`;/u,
   );
-  assert.match(admin, /<span>SOURCE \{FOOTER_SOURCE_COMMIT\.slice\(0, 12\)\}<\/span>/u);
+  assert.match(admin, /<span>\{FOOTER_SOURCE_LABEL\}<\/span>/u);
+  assert.doesNotMatch(admin, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD/u);
   assert.match(admin, /expectedArtifactBytes: ACTIVE_PROGRAM_ARTIFACT_BYTES/u);
   assert.match(admin, /expectedArtifactSha256: ACTIVE_PROGRAM_ARTIFACT_SHA256/u);
   assert.match(admin, /getMultipleAccountsInfoAndContext/u);

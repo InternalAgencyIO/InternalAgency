@@ -1,11 +1,45 @@
 # IAT V2 post-CI attended Devnet runbook
 
-Status: source-only operator procedure. Mainnet remains **HOLD**. Do not begin until both independent bindings below pass and the binding anchor plus runtime and artifact-input worktrees are clean.
+Status: source-only operator procedure. Mainnet remains **HOLD**. The current attended-entry gates are exactly the immutable migration artifact/evidence preflight, the fresh attended program-ceremony runtime binding at its exact clean successor `B`, and fresh finalized in-console observations of the reviewed buffer and program state. The older recovery-runtime `S`/`B` lane is immutable historical staging evidence already completed; it is not a current-HEAD gate and must not be rebased, rebound, or rerun from the fresh ceremony successor.
 
 1. The immutable migration artifact/evidence binding remains exactly the reviewed 649,680-byte artifact `771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01`, source `a03fe71dd66cd1650b8d0353e486786df30b83e9`, source tree `ffe82fcf8fd3d851c09a937ebec945121137e546`, public CI run `33161771816` attempt 1, and evidence-manifest SHA-256 `ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9`. These existing migration constants prove the retained binary/evidence tuple and remain tied to that source; never update or rebind the immutable migration artifact/evidence constants to the recovery source.
-2. The recovery-runtime binding is separate. Implementation commit `S` contains the exact recovery closure and an unbound anchor. Fresh exact-head public PR CI must run for `S`. Direct one-parent successor commit `B` may change only `scripts/data/iat-v2-devnet-buffer-runtime-binding.json`; it binds `S` and its tree, the exact runtime-closure digest, PR-merge checkout commit/tree/relation, CI run/attempt/workflow, runtime evidence-manifest SHA-256, and the same retained artifact tuple. Verification requires the checked-out HEAD to be exactly `B`, the `S` → `B` committed diff to contain only that data anchor, and the anchor plus entire runtime closure to be clean. This source/public-CI lane does not replace the immutable migration artifact/evidence lane and is not evidence of upload, signing, broadcast, authority handoff, deployment, or Mainnet authorization.
+2. The recovery-runtime binding was a separate staging lane and is now immutable historical staging evidence. Its implementation commit `S` contains the exact recovery closure and an unbound anchor, and its direct one-parent successor commit `B` changed only `scripts/data/iat-v2-devnet-buffer-runtime-binding.json`; that historical `B` binds `S` and its tree, the exact runtime-closure digest, PR-merge checkout commit/tree/relation, CI run/attempt/workflow, runtime evidence-manifest SHA-256, and the same retained artifact tuple. Its reviewed runtime manifest remains identified as `target/verifiable/iat-v2-recovery-runtime-build-evidence.json`. Its verifier correctly requires the checked-out HEAD to be that exact historical `B`, so it cannot and must not also pass at the newer program-ceremony successor. Preserve its anchor, evidence manifest, commits, and completed staging record without modification. This historical source/public-CI lane does not replace the immutable migration artifact/evidence lane and is not evidence of signing, program deployment, release, or Mainnet authorization.
+3. The attended program-ceremony runtime binding is also separate. Its implementation commit `S` contains the console, expiry watcher, storage boundaries, tests, runbook, and canonical unbound `scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json`. Fresh exact-head public PR CI must run for that exact `S`. Its direct one-parent successor `B` may change only that anchor and binds the exact `S` commit/tree, runtime closure, PR-merge checkout relation, CI run/attempt/workflow, runtime evidence-manifest SHA-256, and the unchanged immutable migration artifact tuple. The runtime closure includes the complete first-party console/build/verifier import graph and its entrypoint, aliases, stylesheet, and policy data. It deliberately excludes only the mutable ceremony anchor: verification binds that file separately to canonical exact HEAD bytes and proves that `S` contained its canonical `UNBOUND` predecessor. The ceremony's permanent storage namespace uses `S` as `sourceCommit`; it never uses `B`, a CI rerun, or a schema/version bump to manufacture another prompt namespace. The old `a03fe71d…` latch and any tombstone remain preserved. This binding authorizes no prompt by itself and provides no evidence of a signature, broadcast, deployment, release, or Mainnet action.
 
-After fresh exact-head CI succeeds, stop before starting or restarting the console. Review the downloaded recovery-runtime evidence manifest, leave the immutable migration constants unchanged, populate only the canonical runtime anchor in direct successor `B`, create and verify the binding commit, and rerun the combined read-only recovery preflight from clean runtime and artifact-input states. Do not open or reopen any attended page until that binding commit and clean verification both pass.
+After fresh exact-head CI succeeds, stop before starting or restarting the console. Review the downloaded attended program-ceremony runtime evidence manifest, leave both the immutable migration constants and historical recovery anchor unchanged, populate only the canonical program-ceremony runtime anchor in its direct successor `B`, create and verify the binding commit, and rerun the current immutable artifact preflight from a clean artifact-input state. Do not open or reopen any attended page until the attended program-ceremony binding commit and clean verification pass.
+
+### Fresh `S` to `B` public-evidence sequence
+
+Do not copy placeholders literally. Set `$SourceS`, `$CheckoutM`, `$RunId`, and `$RunAttempt` only from the reviewed exact-head public CI run and its downloaded canonical `iat-v2-build-evidence.json`:
+
+1. Confirm the run's source head is the exact implementation commit `S`, its checkout relation is `PR_MERGE_SECOND_PARENT`, and its second checkout parent is `S`. Download the run's exact `iat-v2-b3-verifiable-sbf` artifact. Copy its one `iat-v2-build-evidence.json` to `target/verifiable/iat-v2-ceremony-runtime-build-evidence.json` without editing it. Record that file's SHA-256 as `runtimeEvidenceManifestSha256`.
+2. Before the pull-request merge ref can advance, preserve the exact synthetic checkout object at the public non-release branch `agent/iat-v2-devnet-ceremony-ci-$SourceS`. The branch must point directly to `$CheckoutM`; it must not contain an additional commit. Fetch the current PR merge ref, compare it to `$CheckoutM`, push the exact object, fetch the new public branch to its remote-tracking ref, and compare it again:
+
+```powershell
+$EvidenceBranch = "agent/iat-v2-devnet-ceremony-ci-$SourceS"
+$PublicRemote = 'github'
+$AllowedPublicRemoteUrls = @('https://github.com/InternalAgencyIO/InternalAgency', 'https://github.com/InternalAgencyIO/InternalAgency.git', 'git@github.com:InternalAgencyIO/InternalAgency.git', 'ssh://git@github.com/InternalAgencyIO/InternalAgency.git')
+$RawPublicRemoteUrls = @(& git config --get-all "remote.${PublicRemote}.url")
+$ResolvedPublicFetchUrls = @(& git remote get-url --all $PublicRemote)
+$ResolvedPublicPushUrls = @(& git remote get-url --push --all $PublicRemote)
+if ($RawPublicRemoteUrls.Count -ne 1 -or $ResolvedPublicFetchUrls.Count -ne 1 -or $ResolvedPublicPushUrls.Count -ne 1 -or $RawPublicRemoteUrls[0] -notin $AllowedPublicRemoteUrls -or $ResolvedPublicFetchUrls[0] -notin $AllowedPublicRemoteUrls -or $ResolvedPublicPushUrls[0] -notin $AllowedPublicRemoteUrls) { throw 'public GitHub fetch/push remote identity mismatch or URL rewrite' }
+& git fetch --no-tags $PublicRemote "+refs/pull/14/merge:refs/remotes/$PublicRemote/$EvidenceBranch"
+if ((& git rev-parse --verify "refs/remotes/${PublicRemote}/${EvidenceBranch}^{commit}") -ne $CheckoutM) { throw 'PR merge ref is not the reviewed S checkout' }
+& git push $PublicRemote "${CheckoutM}:refs/heads/${EvidenceBranch}"
+& git fetch --no-tags $PublicRemote "+refs/heads/${EvidenceBranch}:refs/remotes/${PublicRemote}/${EvidenceBranch}"
+if ((& git rev-parse --verify "refs/remotes/${PublicRemote}/${EvidenceBranch}^{commit}") -ne $CheckoutM) { throw 'public ceremony CI evidence ref mismatch' }
+```
+
+3. Populate only `scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json` with the exact `S` source commit/tree, `$CheckoutM` commit/tree/relation, `$RunId`, `$RunAttempt`, workflow ref, closure digest, and downloaded-manifest digest. Commit only that anchor as the direct one-parent successor `B`; `git diff --name-status $SourceS HEAD` must print exactly one modified anchor path.
+4. At clean `B`, retain the downloaded manifest at the exact path above, establish the reviewed `$NodeExe` exactly as specified under **Fixed surfaces** below, and run the full local gate:
+
+```powershell
+& $NodeExe scripts/verify-iat-v2-devnet-program-ceremony-runtime-binding.mjs
+```
+
+The verifier requires the exact public remote-tracking evidence ref, authenticates the synthetic checkout object and its parent topology, atomically reads and hashes the downloaded manifest, runs the canonical CI-evidence validator, matches every source/checkout/run/workflow/runner/artifact field to the anchor, and remains nonauthorizing. A missing artifact, expired artifact, missing public ref, digest mismatch, or tuple mismatch is HOLD; never substitute operator-entered metadata.
+
+5. Push `B` only after the local full gate passes. Public `B` CI independently fetches the exact evidence branch, downloads the exact artifact from `$RunId`, stages the manifest at the canonical path, and executes the same full verifier. Do not serve the console until that exact `B` CI is green and the local full gate passes again. `vite preview` is prohibited for this attended console; only the verified development server is admitted.
 
 ## Fixed surfaces
 
@@ -26,7 +60,7 @@ $env:Path = "$(Split-Path -Parent $NodeExe);$env:Path"
 & $NodeExe $NpmCli run iat:v2-admin
 ```
 
-The `preiat:v2-admin` lifecycle gate repeats the version check before Vite or any console dependency can load. The recovery runtime closure binds the committed `package.json` and `package-lock.json` source bytes. This is a declared-dependency source binding only: it does not bind installed `node_modules` bytes, prove byte-for-byte local dependency integrity, or support a claim of installed dependency provenance. A stronger installed-dependency claim would require a separately reviewed byte-level installation manifest; this ceremony makes no such claim.
+The `preiat:v2-admin` lifecycle gate repeats the version check before Vite or any console dependency can load. The current attended program-ceremony runtime closure binds the committed `package.json` and `package-lock.json` source bytes. This is a declared-dependency source binding only: it does not bind installed `node_modules` bytes, prove byte-for-byte local dependency integrity, or support a claim of installed dependency provenance. A stronger installed-dependency claim would require a separately reviewed byte-level installation manifest; this ceremony makes no such claim.
 
 Use only these localhost URLs:
 
@@ -43,9 +77,9 @@ Never use a public host for these consoles. The reviewed Devnet program is `62Gt
 
 Every newly loaded or reloaded attended page must first use its memory-only on-device address-display gate and match the complete displayed address to `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`. This is a non-transaction device confirmation and is not one of the 17 Model T transaction-signature prompts. Navigation or reload may require another address-display confirmation, but it must never add or replay a transaction signature. If any action UI appears before the full on-device address match succeeds, stop without signing or broadcasting.
 
-The transaction-prompt latch is permanent for its exact source/artifact/mint/action binding: a rejected, failed, expired, or explicitly discarded signed action ends that ceremony. Do not retry that action, clear browser storage, change origin/profile, or attempt another transaction signature. Preserve the consumed old latch and stop on HOLD. Only a separately reviewed ceremony with fresh exact-head CI and a genuinely new source binding may expose another action; its distinct source-bound namespaces do not delete, reset, or continue the old ceremony.
+The transaction-prompt latch is permanent for its exact source/artifact/mint/action binding: a rejected, failed, expired, or explicitly discarded signed action ends that ceremony. Do not retry that action, clear browser storage, change origin/profile, or attempt another transaction signature. Preserve the consumed old latch and stop on HOLD. Only a separately reviewed ceremony with fresh exact-head CI and a genuinely new source binding may expose another action; its distinct source-bound namespaces do not delete, reset, or continue the old ceremony. The fresh ceremony source is the reviewed attended implementation commit `S`, while artifact provenance remains the immutable `a03fe71d…` source; the console must display both and must never relabel one as the other.
 
-The program-capacity/upgrade surface alone adds an exact source/artifact/mint/action-bound signed-pending record. The verified signed wire is persisted while the prompt latch is still entered and before the broadcast control is shown, but it is never auto-broadcast. Before a broadcast attempt exists, a reload may restore only a record that matches the retained entered/verified prompt latch and must still perform complete finalized-state, message, signature, and blockhash revalidation before the separate broadcast boundary. Immediately before reserving the sole send, blockhash validity must be true at both finalized and processed commitment against the fresh finalized minimum context slot. A consumed latch with missing, malformed, mismatched, or stale pending state remains HOLD and must never trigger another prompt.
+The program-capacity/upgrade surface alone adds an exact source/artifact/mint/action-bound signed-pending record. The verified signed wire is persisted while the prompt latch is still entered and before the broadcast control is shown, but it is never auto-broadcast. Before a broadcast attempt exists, a reload may restore only a record that matches the retained entered/verified prompt latch and must still perform complete finalized-state, message, signature, and blockhash revalidation before the separate broadcast boundary. A read-only live window observes the signed blockhash at finalized and processed commitment and reports an exact remaining-block countdown. `CHECKING`, stale, background-tab, near-expiry, `RPC UNKNOWN`, or `EXPIRED` state disables broadcast; the watcher never refreshes the blockhash, signs, persists, reserves, discards, or sends. Its display is advisory. Immediately before reserving the sole send, the locked authoritative gate still requires blockhash validity at both finalized and processed commitment against the fresh finalized minimum context slot. A consumed latch with missing, malformed, mismatched, or stale pending state remains HOLD and must never trigger another prompt.
 
 After all pre-send checks pass, the program broadcast boundary derives the exact Solana signature locally from the verified signed wire and atomically persists a permanent source/artifact/mint/action-bound broadcast-attempt reservation before the sole send. Only creation of that new reservation may reach the send method, and this program-only connection disables the client library's implicit HTTP-429 request retry as well as validator forwarding retries. Once the reservation exists—whether the RPC returns, throws, times out, or the page reloads—the action is permanently reconcile-only and no send method may ever be reached for it again. Poll only the retained local signature at finalized commitment; retrieve and compare the exact finalized wire, message, and signature; verify the exact action-specific finalized post-state; and only then persist the receipt and remove the signed-pending record under the same exclusive lock. Every retained program receipt must have its exact permanent attempt; attempt-without-signed-wire-and-receipt or receipt-without-attempt is HOLD. Never delete or reset the permanent attempt. A null, timeout, ambiguous result, or incomplete evidence remains HOLD and poll-only; never resend.
 
@@ -53,7 +87,7 @@ Signed-pending state on migration and feature surfaces remains memory-only. Thos
 
 The feature-mode shell must require the exact migration artifact before it exposes feature actions. The archived seven-stage initialization shell remains pinned to its exact pre-upgrade artifact and may only inspect chain state or export already-existing historical receipts; it cannot select, sign, or broadcast an initialization action. Mode switching must never turn “either reviewed artifact” into an acceptable deployment check.
 
-## 1. Bind and inspect the independent CI surfaces
+## 1. Bind and inspect the current ceremony surfaces
 
 Run the read-only artifact check:
 
@@ -61,13 +95,11 @@ Run the read-only artifact check:
 & $NodeExe scripts/iat-v2-devnet-buffer-preflight.mjs verify --artifact target/verifiable/iat_v2.so --evidence target/verifiable/iat-v2-build-evidence.json
 ```
 
-This first command verifies only the immutable migration artifact/evidence lane. It must continue to report source `a03fe71dd66cd1650b8d0353e486786df30b83e9`; a report that substitutes the recovery source is a stop. After `S` public CI and the data-only `B` binding commit are complete, run the combined read-only check:
+This command verifies only the immutable migration artifact/evidence lane. It must continue to report source `a03fe71dd66cd1650b8d0353e486786df30b83e9`; a report that substitutes either the historical recovery source or the fresh ceremony source is a stop. Matching artifact hash and byte count across those lanes does not merge their source provenance.
 
-```powershell
-& $NodeExe scripts/iat-v2-devnet-buffer-preflight.mjs verify-recovery --artifact target/verifiable/iat_v2.so --evidence target/verifiable/iat-v2-build-evidence.json --runtime-evidence target/verifiable/iat-v2-recovery-runtime-build-evidence.json
-```
+Do **not** run `verify-recovery` from the fresh program-ceremony successor `B`. That verifier belongs to the completed historical staging lane and correctly requires its own exact historical binding successor as HEAD. Failure of that historical verifier at the newer ceremony `B` is expected and is not a request to modify its anchor, verifier, closure, commits, or evidence.
 
-The combined result must independently pass the retained migration artifact/evidence tuple and the recovery-runtime `S`/`B` source, closure, public-CI, and manifest binding. Matching artifact hash and byte count across the lanes does not merge their source provenance.
+The current runtime gate is the full attended program-ceremony binding verification performed before the local console can serve action UI. It must authenticate the fresh ceremony `S`/`B`, downloaded runtime evidence, exact clean runtime closure, and unchanged immutable artifact tuple. After that gate passes, the console must freshly re-observe at finalized commitment the exact Program ID and ProgramData linkage, loader owner, upgrade authority `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`, current program capacity and bytes, and zero loader padding. With the reviewed buffer selected it must independently re-observe buffer `564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH`, the reviewed loader owner and buffer authority, 649,680 payload bytes, and SHA-256 `771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01`. Any missing, stale, non-finalized, or mismatched observation keeps action UI on HOLD.
 
 Copy the returned exact artifact byte count into this read-only capacity check:
 
@@ -88,7 +120,9 @@ If no extension is required, continue to buffer upload. If extension is required
 
 The capacity transaction must never auto-start buffer upload or program upgrade.
 
-## 2. Upload and hand off one fresh buffer
+## 2. Historical completed buffer staging and handoff — evidence only
+
+The recovery, continuation, and handoff commands retained in this section are an immutable operator record of the completed staging lane. They are not current commands, are not prerequisites to rerun at the fresh program-ceremony `B`, and must not be used to force the historical recovery-runtime verifier to accept a different HEAD. The only current use of the staged buffer is the fresh signer-free finalized observation performed by the bound upgrade console before any attended transaction prompt.
 
 The buffer operations use the reviewed Devnet deployer keypair, not the Model T. They are staging operations outside the attended action roster and therefore do not produce canonical aggregate transaction records. Each helper first verifies the CI binding and requires its own exact typed confirmation; stop before typing if any displayed address, hash, byte count, payer, or network differs.
 
@@ -132,7 +166,7 @@ wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC
 
 The rebuild has exactly two attended `/dev/tty` gates. First, after reviewing Devnet, artifact/evidence/source bindings, exact rent, the fixed 100,000,000-lamport upload-fee-headroom policy, balance, all exact tool identities, and the retained-old-buffer policy, type `REBUILD-DEVNET-FRESH`. The helper then atomically creates the fixed persistent `devnet-buffer-rebuild-v1/attempt-one-use` reservation; any existing reservation makes the original fresh entrypoint fail closed before tooling, network access, payer-key access, or a terminal prompt. It snapshots the exact reviewed artifact into that private namespace, binds the snapshot to an `O_NOFOLLOW` descriptor, durably records source/tool/target policy, and never uploads the mutable checkout pathname. After the helper creates and displays one fresh target address, review it and type the target-bound `UPLOAD-<FRESH_BUFFER_ADDRESS>` value exactly. Only the second gate admits the sole fresh-buffer write CLI invocation. That invocation uses `--max-sign-attempts 5`, which may re-sign or resend unconfirmed upload chunks across as many as five blockhash iterations; it is not a claim of one Solana transaction or one signature. The exact rent-plus-headroom floor is freshly reobserved immediately before upload. Record the finalized `BUFFER` printed by the helper. If either gate fails or final reconciliation is ambiguous, stop; do not rerun, and preserve the protected one-use recovery directory for separately reviewed recovery or read-only diagnosis.
 
-The 2026-08-28 descriptor incident consumed the current fresh entrypoint after it created the signer and artifact snapshot but before it derived a buffer address or invoked `program write-buffer`; the exact evidence boundary is recorded in `IAT_V2_DEVNET_BUFFER_FD_INCIDENT_20260828.md`. **Do not run the fresh command above again for the current reservation.** Only after the immutable migration artifact/evidence preflight and the separate recovery-runtime `S`/`B` preflight both pass from the clean binding successor, run this literal recovery entrypoint from an attached PowerShell console:
+The 2026-08-28 descriptor incident consumed the fresh entrypoint after it created the signer and artifact snapshot but before it derived a buffer address or invoked `program write-buffer`; the exact evidence boundary is recorded in `IAT_V2_DEVNET_BUFFER_FD_INCIDENT_20260828.md`. **Do not run the fresh command above again for the current reservation.** The literal recovery entrypoint below records the historical continuation that was admitted only after the immutable migration artifact/evidence preflight and the separate recovery-runtime `S`/`B` preflight passed at their own clean historical binding successor. **Do not rerun it from the fresh program-ceremony successor:**
 
 ```powershell
 wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-v1 /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/recover-iat-v2-devnet-buffer-pre-address.sh
@@ -179,14 +213,14 @@ The in-place design is source-audited against exact Agave commit `7bc9c805218ca0
 
 For an existing buffer, exact [`do_process_write_buffer`](https://github.com/anza-xyz/agave/blob/7bc9c805218ca06769956e2cb61601329f5a0f6c/cli/src/program.rs#L2620-L2718) emits no create instruction, compares each complete target chunk with the corresponding existing payload chunk, skips matching chunks, and queues every differing chunk in full. The buffer public key is an account address, while the fee payer and buffer authority sign the queued writes; there is no buffer-account signer on this path. These are pinned-source semantics only. They neither prove that this helper executed nor establish submitted/finalized chunk count, upload success, a transaction signature or receipt, a ready buffer, handoff, deployment, release, or any Mainnet authorization. All such claims remain **HOLD** until fresh signer-free finalized reconciliation proves the full 649,680-byte `771c…8a01` payload at `564X…1GHH`.
 
-The source below is a distinct continuation lane, not a retry. It is non-runnable
-unless its exact helper, signer-free reconciler, both incident records, runbook,
-package inputs, and transitive runtime source are commit `S`; fresh exact-head
-public PR CI succeeds for `S`; and checked-out HEAD is the direct data-only
-runtime-binding successor `B`. The source commit must contain the canonical
-`UNBOUND` runtime anchor. The direct successor may change only that anchor.
-After downloading the matching recovery-runtime evidence artifact and completing
-the binding, run only this literal command from an attached PowerShell console:
+The source below was a distinct continuation lane, not a retry. At its historical
+execution boundary it was non-runnable unless its exact helper, signer-free
+reconciler, both incident records, runbook, package inputs, and transitive runtime
+source were commit `S`; fresh exact-head public PR CI had succeeded for `S`; and
+checked-out HEAD was the direct data-only runtime-binding successor `B`. The source
+commit contained the canonical `UNBOUND` runtime anchor, and the direct successor
+changed only that anchor. The literal command below is retained only as the
+historical execution record; do not run it from the fresh ceremony successor:
 
 ```powershell
 wsl.exe -d Ubuntu-24.04 -u a --exec /usr/bin/env -i HOME=/home/a LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH=/usr/bin:/bin IAT_V2_CLEAN_ENVIRONMENT=iat-v2-devnet-buffer-in-place-continuation-from-54720-v1 /usr/bin/bash --noprofile --norc /mnt/c/Users/A/Documents/Codex/2026-08-13/can-you-take-over-b3-architecture-3/work/iat-b3-bpk00-package-bound-fd12-owner-root-public-key-anchor-clean/projects/star-ascent/site/scripts/continue-iat-v2-devnet-buffer-in-place-from-54720.sh
@@ -230,7 +264,7 @@ the integrity gate kept promotion on HOLD.”
 
 The historical buffer `Aarejf4n2vwDya7AuVVw2C21PPeoYHb1e8Rw3ukpi3L6` is retained. The rebuild helper never closes or mutates it, and it does not reclaim its lamports.
 
-Set only the exact address established by the completed recovery reconciliation as the dynamic handoff input, then run the exact handoff helper. For the current recovery lane that address is `564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH`. `BUFFER_ADDRESS` is admitted only on this handoff command and has no default:
+The completed handoff used only the exact address established by recovery reconciliation as its dynamic input. That address was `564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH`; `BUFFER_ADDRESS` is admitted only on this handoff command in the historical record and has no default. The command is retained as historical evidence and must not be rerun:
 
 ```powershell
 $BufferAddress = '564XrjVAyqXrChSe9sDJ68XFtNL7tVVLYdwFc9mh1GHH'
@@ -274,12 +308,12 @@ The source closure explicitly trusts, but does not individually SHA-256-bind, th
 
 ## 3. Upgrade as one attended transaction
 
-Open `http://127.0.0.1:4175/?mode=upgrade&buffer=<BUFFER_ADDRESS>` and verify the program, ProgramData linkage, current capacity, buffer owner, buffer authority, buffer hash, CI artifact hash, source commit, and zero loader padding.
+Open `http://127.0.0.1:4175/?mode=upgrade&buffer=<BUFFER_ADDRESS>` and verify the program, ProgramData linkage, current capacity, buffer owner, buffer authority, buffer hash, CI artifact hash, the distinct attended ceremony source and immutable artifact source, and zero loader padding.
 
 1. Press **CONNECT 7XZ MODEL T DIRECTLY + SIMULATE + SIGN**.
 2. Approve the exact upgrade on the Model T.
-3. Review the signed-but-not-broadcast message SHA-256 and confirm the exact signed-pending record is durably recoverable.
-4. Press the separate **BROADCAST SIGNED DEVNET UPGRADE** button once. The console must persist the exact locally derived signature in a permanent broadcast-attempt reservation before its sole send.
+3. Review the signed-but-not-broadcast message SHA-256, confirm the exact signed-pending record is durably recoverable, and watch the live blockhash window. `CHECKING`, stale, hidden-tab, near-expiry, `RPC UNKNOWN`, or `EXPIRED` means the broadcast button must remain disabled. Near-expiry or expiry ends this source-bound ceremony; do not refresh, re-sign, or clear storage.
+4. While the window is freshly `VALID` with the reviewed safety margin, press the separate **BROADCAST SIGNED DEVNET UPGRADE** button once without delay. This click remains an explicit operator action. The locked pre-send callback independently repeats both commitment checks and the console must persist the exact locally derived signature in a permanent broadcast-attempt reservation before its sole send.
 5. Once that reservation exists, continue only with **POLL FINALIZED SIGNATURE + COMPLETE EVIDENCE (NO SEND)**. Do not resend after any timeout, RPC error, reload, or ambiguous result. Export the source-bound receipt set containing `UPGRADE_PROGRAM` only after the retained signature, exact finalized transaction, and upgrade post-state all verify.
 
 Do not auto-chain into migration.

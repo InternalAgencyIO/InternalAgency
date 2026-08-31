@@ -64,9 +64,14 @@ test("retained randomness cannot shorten the source-bound attended roster", () =
     featureConsoleSource.indexOf("function exactFeatureStorageBinding"),
     featureConsoleSource.indexOf("function loadEvidence"),
   );
-  assert.match(keySource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD/u);
-  assert.match(keySource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256/u);
+  assert.match(keySource, /createIatV2DevnetProgramCeremonyEvidenceBinding\(\{/u);
+  assert.match(keySource, /binding: ATTENDED_CEREMONY_BINDING/u);
   assert.match(keySource, /mint\.toBase58\(\)/u);
+  assert.match(
+    keySource,
+    /const exact = exactFeatureStorageBinding\(mint\);[\s\S]*exact\.sourceCommit,[\s\S]*exact\.programArtifactSha256,[\s\S]*exact\.mint,/u,
+  );
+  assert.doesNotMatch(keySource, /IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD/u);
 
   const evidenceLoadSource = featureConsoleSource.slice(
     featureConsoleSource.indexOf("function loadEvidence"),
@@ -870,7 +875,7 @@ test("program upgrade serializes read-only inspection with attended sign and bro
   );
   assert.match(
     upgradeAttendedSource,
-    /onClick=\{broadcastSigned\} disabled=\{busy \|\| inspectionBusy \|\| broadcastBlocked\}/u,
+    /onClick=\{broadcastSigned\}[\s\S]*disabled=\{busy \|\| inspectionBusy \|\| broadcastBlocked \|\| !broadcastWindowReady\}/u,
   );
   assert.match(
     upgradeConsoleSource,
@@ -881,7 +886,7 @@ test("program upgrade serializes read-only inspection with attended sign and bro
   );
   assert.match(
     broadcastSource,
-    /loadBufferSnapshot\(pending\.finalizedContextSlot\)[\s\S]*upgradeActionBinding\(current\)[\s\S]*buildAttendedProgramTransaction\([\s\S]*assertExactTransactionMessage\([\s\S]*assertSignedLegacyTransaction\([\s\S]*assertFreshFinalizedBlockhash\([\s\S]*sendRawTransaction/u,
+    /loadBufferSnapshot\(pending\.finalizedContextSlot\)[\s\S]*upgradeActionBinding\(current\)[\s\S]*buildAttendedProgramTransaction\([\s\S]*assertExactTransactionMessage\([\s\S]*assertSignedLegacyTransaction\([\s\S]*observeSignedBlockhashWindow\([\s\S]*sendRawTransaction/u,
   );
   assert.match(
     broadcastSource,

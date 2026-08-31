@@ -13,6 +13,7 @@ import {
   assertFreshFinalizedBlockhash,
   assertSignedLegacyTransaction,
   exactVersionedSimulation,
+  observeSignedBlockhashWindow,
   simulateExactLegacyTransaction,
 } from "../tools/iat-v2-admin-console/attended-transaction-boundary.mjs";
 
@@ -176,4 +177,103 @@ test("versioned promotion itself preserves the exact legacy message", () => {
   const promoted = exactVersionedSimulation(reviewed);
   assert.ok(Buffer.from(promoted.messageBytes).equals(before));
   assert.ok(Buffer.from(promoted.simulationTransaction.message.serialize()).equals(before));
+});
+
+test("signed blockhash window observes both commitments and an exact remaining-block countdown", async () => {
+  const requests = [];
+  const result = await observeSignedBlockhashWindow({
+    blockhash: BLOCKHASH,
+    connection: {
+      async isBlockhashValid(blockhash, config) {
+        requests.push(["isBlockhashValid", blockhash, config]);
+        return {
+          context: { slot: config.commitment === "finalized" ? 501 : 507 },
+          value: true,
+        };
+      },
+      async getBlockHeight(config) {
+        requests.push(["getBlockHeight", config]);
+        return 900;
+      },
+    },
+    lastValidBlockHeight: 1_000,
+    minContextSlot: 500,
+  });
+
+  assert.deepEqual(result, {
+    status: "VALID",
+    finalizedContextSlot: 501,
+    processedContextSlot: 507,
+    observedBlockHeight: 900,
+    remainingBlocks: 100,
+    lastValidBlockHeight: 1_000,
+  });
+  assert.deepEqual(requests, [
+    ["isBlockhashValid", BLOCKHASH, { commitment: "finalized", minContextSlot: 500 }],
+    ["isBlockhashValid", BLOCKHASH, { commitment: "processed", minContextSlot: 501 }],
+    ["getBlockHeight", { commitment: "processed", minContextSlot: 507 }],
+  ]);
+});
+
+test("signed blockhash window is expired if either commitment rejects it or height passed", async () => {
+  for (const [finalizedValid, processedValid, height] of [
+    [false, true, 900],
+    [true, false, 900],
+    [true, true, 1_001],
+  ]) {
+    let call = 0;
+    const result = await observeSignedBlockhashWindow({
+      blockhash: BLOCKHASH,
+      connection: {
+        async isBlockhashValid() {
+          call += 1;
+          return { context: { slot: 600 + call }, value: call === 1 ? finalizedValid : processedValid };
+        },
+        async getBlockHeight() { return height; },
+      },
+      lastValidBlockHeight: 1_000,
+      minContextSlot: 600,
+    });
+    assert.equal(result.status, "EXPIRED");
+  }
+});
+
+test("signed blockhash window rejects malformed, stale, and indeterminate observations", async () => {
+  await assert.rejects(
+    observeSignedBlockhashWindow({
+      blockhash: BLOCKHASH,
+      connection: {
+        async isBlockhashValid(_blockhash, config) {
+          return { context: { slot: config.commitment === "finalized" ? 700 : 699 }, value: true };
+        },
+        async getBlockHeight() { throw new Error("must not read height"); },
+      },
+      lastValidBlockHeight: 1_000,
+      minContextSlot: 700,
+    }),
+    /monotonic finalized context slot/u,
+  );
+  await assert.rejects(
+    observeSignedBlockhashWindow({
+      blockhash: BLOCKHASH,
+      connection: {
+        async isBlockhashValid(_blockhash, config) {
+          return { context: { slot: config.commitment === "finalized" ? 701 : 702 }, value: true };
+        },
+        async getBlockHeight() { return Number.NaN; },
+      },
+      lastValidBlockHeight: 1_000,
+      minContextSlot: 700,
+    }),
+    /invalid block height/u,
+  );
+  await assert.rejects(
+    observeSignedBlockhashWindow({
+      blockhash: "",
+      connection: {},
+      lastValidBlockHeight: 1_000,
+      minContextSlot: 700,
+    }),
+    /exact blockhash/u,
+  );
 });

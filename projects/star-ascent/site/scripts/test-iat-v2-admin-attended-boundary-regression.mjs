@@ -53,16 +53,19 @@ try {
   copy("tools/iat-v2-admin-console/dist");
   copy("tools/iat-v2-admin-console/ProgramUpgrade.jsx");
   copy("tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx");
+  copy("programs/iat_v2/ceremony-binding.mjs");
+  copy("scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json");
   copy("public/audits/iat-v2-admin-lazy-boundary-20260805/policy.json");
   copy("public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json");
   copy("public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json");
   copy("public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json");
+  copy("public/audits/iat-v2-admin-lazy-boundary-20260831/policy.json");
 
   const baseline = run(fixtureRoot);
   assert.equal(baseline.status, 0, baseline.stderr || baseline.stdout);
 
   const manifestPath = "tools/iat-v2-admin-console/dist/.vite/manifest.json";
-  const policyPath = "public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json";
+  const policyPath = "public/audits/iat-v2-admin-lazy-boundary-20260831/policy.json";
   const sourcePath = "tools/iat-v2-admin-console/ProgramUpgrade.jsx";
   const aggregateMaximum = readJson(fixtureRoot, policyPath)
     .byteBudgets.programUpgradeIncrementalClosureMaximum;
@@ -72,6 +75,7 @@ try {
     attendedKey: Object.keys(manifest).find((key) => manifest[key].src === "ProgramUpgradeAttendedActions.jsx"),
     featureKey: Object.keys(manifest).find((key) => manifest[key].src === "FeatureRehearsal.jsx"),
     evidenceKey: Object.keys(manifest).find((key) => key.startsWith("_attended-prompt-coordinator-")),
+    ceremonyBindingKey: Object.keys(manifest).find((key) => key.startsWith("_iat-v2-devnet-program-ceremony-runtime-binding-")),
   });
 
   mutate("missing-attended-entry", (root) => {
@@ -80,6 +84,13 @@ try {
     delete manifest[attendedKey];
     writeJson(root, manifestPath, manifest);
   }, /expected one program upgrade attended actions manifest entry/u);
+
+  mutate("missing-ceremony-binding", (root) => {
+    const manifest = readJson(root, manifestPath);
+    const { ceremonyBindingKey } = locate(manifest);
+    delete manifest[ceremonyBindingKey];
+    writeJson(root, manifestPath, manifest);
+  }, /expected one attended ceremony binding manifest entry/u);
 
   mutate("duplicate-attended-entry", (root) => {
     const manifest = readJson(root, manifestPath);
@@ -108,6 +119,13 @@ try {
     writeJson(root, manifestPath, manifest);
   }, /inspection entry must not directly import attended program actions/u);
 
+  mutate("ceremony-binding-entry-leak", (root) => {
+    const manifest = readJson(root, manifestPath);
+    const { ceremonyBindingKey, entryKey } = locate(manifest);
+    manifest[entryKey].imports = [...(manifest[entryKey].imports ?? []), ceremonyBindingKey];
+    writeJson(root, manifestPath, manifest);
+  }, /inspection entry statically imports operator-only surface/u);
+
   mutate("extra-shell-dynamic-edge", (root) => {
     const manifest = readJson(root, manifestPath);
     const { featureKey, upgradeKey } = locate(manifest);
@@ -119,7 +137,7 @@ try {
     const policy = readJson(root, policyPath);
     delete policy.byteBudgets.programUpgradeAttendedMaximum;
     writeJson(root, policyPath, policy);
-  }, /missing byte budget for programUpgradeAttended/u);
+  }, /admin byte budgets fields are not exact/u);
 
   mutate("aggregate-overflow", (root) => {
     const manifest = readJson(root, manifestPath);
@@ -136,11 +154,26 @@ try {
     writeFileSync(path, source.replace("setAttendedLoaded(true)", "setAttendedLoaded(false)"));
   }, /setAttendedLoaded/u);
 
-  mutate("predecessor-tamper", (root) => {
-    appendFileSync(resolve(root, "public/audits/iat-v2-admin-lazy-boundary-20260827/policy.json"), "\n");
-  }, /immutable 20260827 predecessor policy bytes drifted/u);
+  mutate("artifact-source-prompt-bypass", (root) => {
+    const path = resolve(root, sourcePath);
+    const source = readFileSync(path, "utf8");
+    writeFileSync(
+      path,
+      `${source}\nconst forbiddenArtifactSourcePromptBinding = { sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD };\n`,
+    );
+  }, /reused immutable artifact source as ceremony source/u);
 
-  console.log("IAT V2 admin attended-boundary regression passed: baseline plus missing, duplicate, eager-action, eager-builder, direct, extra-edge, unbudgeted, aggregate-overflow, activation-bypass, and predecessor-tamper mutations fail closed.");
+  mutate("extra-policy-field", (root) => {
+    const policy = readJson(root, policyPath);
+    policy.unreviewed = true;
+    writeJson(root, policyPath, policy);
+  }, /admin lazy-boundary policy fields are not exact/u);
+
+  mutate("predecessor-tamper", (root) => {
+    appendFileSync(resolve(root, "public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json"), "\n");
+  }, /immutable 20260828 predecessor policy bytes drifted/u);
+
+  console.log("IAT V2 admin attended-boundary regression passed: baseline plus missing, duplicate, eager-action, eager-builder, direct, ceremony-binding leak, extra-edge, unbudgeted, aggregate-overflow, activation-bypass, source-bypass, extra-policy, and predecessor-tamper mutations fail closed.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

@@ -30,6 +30,40 @@ function assertBefore(source, first, second, label) {
   assert.ok(secondIndex > firstIndex, `${label}: ${second} does not follow ${first}`);
 }
 
+test("every canonical attended surface projects the fresh ceremony source while retaining artifact provenance", () => {
+  for (const [label, source] of [
+    ["program", programShellSource],
+    ["migration", migrationSource],
+    ["feature", featureSource],
+  ]) {
+    assert.match(
+      source,
+      /createIatV2DevnetProgramCeremonyEvidenceBinding/u,
+      `${label} surface does not project the reviewed ceremony binding`,
+    );
+    assert.match(source, /ATTENDED_CEREMONY_BINDING/u, `${label} surface lacks the bound ceremony anchor`);
+    assert.match(source, /ATTENDED CEREMONY SOURCE/u, `${label} surface does not display ceremony source`);
+    assert.match(source, /IMMUTABLE ARTIFACT SOURCE/u, `${label} surface does not display artifact source`);
+    assert.doesNotMatch(
+      source,
+      /sourceCommit:\s*IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD/u,
+      `${label} surface reused immutable artifact provenance as prompt namespace`,
+    );
+  }
+  assert.match(
+    featureSource,
+    /function featureSourceBoundStorageKey[\s\S]*const exact = exactFeatureStorageBinding\(mint\)[\s\S]*exact\.sourceCommit/u,
+  );
+  assert.match(
+    migrationSource,
+    /evidenceBinding: createIatV2DevnetProgramCeremonyEvidenceBinding\(\{/u,
+  );
+  assert.match(
+    programShellSource,
+    /const evidenceBinding = createIatV2DevnetProgramCeremonyEvidenceBinding\(\{/u,
+  );
+});
+
 test("each canonical surface owns one session coordinator and one verified hardware callback", () => {
   const surfaces = [
     [programSource, "async function requestProgramModelTSignature", "function errorText"],
@@ -154,6 +188,53 @@ test("program prompting refreshes the blockhash after read-only preflight and ex
   assert.match(programSource, /EXPIRY ENDS THIS CEREMONY\./u);
 });
 
+test("program broadcast requires a live exact signed-blockhash window and invalidates background observations", () => {
+  assert.match(
+    programSource,
+    /function pendingBlockhashWindowKey\(pending\) \{\s*return pending \? JSON\.stringify\(signedPendingRecord\(pending\)\) : null;\s*\}/u,
+    "the watcher key must bind the complete canonical signed-pending record",
+  );
+  const watcher = section(
+    programSource,
+    "useEffect(() => {\n    const bindingKey = pendingBlockhashWindowKey(pending);",
+    "const activeBlockhashBinding = pendingBlockhashWindowKey(pending);",
+  );
+  assert.match(watcher, /observeSignedBlockhashWindow\(\{/u);
+  assert.match(watcher, /blockhash: pending\.latest\.blockhash/u);
+  assert.match(watcher, /lastValidBlockHeight: pending\.latest\.lastValidBlockHeight/u);
+  assert.match(watcher, /minContextSlot: pending\.finalizedContextSlot/u);
+  assert.match(watcher, /document\.addEventListener\("visibilitychange", visibilityChanged\)/u);
+  assert.match(watcher, /document\.removeEventListener\("visibilitychange", visibilityChanged\)/u);
+  assert.match(watcher, /status: "CHECKING"/u);
+  assert.match(watcher, /status: "UNKNOWN"/u);
+  assert.match(watcher, /terminalBlockhashBinding === bindingKey/u);
+  assert.equal(count(watcher, "setTerminalBlockhashBinding(bindingKey);"), 2);
+  assert.match(watcher, /if \(!terminal && !cancelled && epoch === requestEpoch\) schedule\(\);/u);
+  assert.doesNotMatch(
+    watcher,
+    /getHardwareProvider|signTransaction|localStorage|persist|sendRawTransaction|withAttendedProgramBroadcastOnce/u,
+  );
+
+  const broadcast = section(programSource, "async function broadcastSigned()", "function discardSigned()");
+  assertBefore(
+    broadcast,
+    "!isFreshBroadcastWindow(pending, blockhashWindow)",
+    "withAttendedProgramBroadcastOnce({",
+    "live blockhash pre-gate",
+  );
+  assert.match(broadcast, /broadcastWindowTerminal[\s\S]*!isFreshBroadcastWindow\(pending, blockhashWindow\)/u);
+  assert.match(programSource, /remainingBlocks >= MIN_BROADCAST_REMAINING_BLOCKS/u);
+  assert.match(programSource, /BLOCKHASH_WINDOW_MAX_AGE_MS/u);
+  assert.match(programSource, /document\.visibilityState === "visible"/u);
+  assert.match(
+    programSource,
+    /disabled=\{busy \|\| inspectionBusy \|\| broadcastBlocked \|\| !broadcastWindowReady\}/u,
+  );
+  assert.match(programSource, /BLOCKHASH WINDOW \{blockhashWindowLabel\(blockhashWindow\)\}/u);
+  assert.match(programSource, /RPC UNKNOWN \/\/ BROADCAST DISABLED/u);
+  assert.match(programSource, /EXPIRED \/\/ CEREMONY TERMINAL/u);
+});
+
 test("a consumed or indeterminate program prompt blocks the same mounted recovery binding", () => {
   const handler = section(programSource, "async function simulateAndSign()", "async function broadcastSigned()");
   assert.match(handler, /let promptRecovery = null;/u);
@@ -255,17 +336,30 @@ test("program broadcast is one reserved send with exact local signature and poll
     "upgradeActionBinding",
     "assertExactTransactionMessage",
     "assertSignedLegacyTransaction",
-    "assertFreshFinalizedBlockhash",
+    "observeSignedBlockhashWindow",
     "assertAttemptMatchesPending",
     "loadAttendedProgramSignedPending",
     "signedPendingRecord",
   ]) {
     assert.match(beforePersist, new RegExp(required, "u"), `locked pre-reservation validation omits ${required}`);
   }
-  assert.equal(count(beforePersist, "await assertFreshFinalizedBlockhash({"), 2);
+  assert.equal(count(beforePersist, "await observeSignedBlockhashWindow({"), 1);
+  assert.doesNotMatch(beforePersist, /assertFreshFinalizedBlockhash/u);
+  assertBefore(
+    beforePersist,
+    "await assertSignedLegacyTransaction({",
+    "const preReservationWindow = await observeSignedBlockhashWindow({",
+    "authoritative pre-reservation window follows all signed-message checks",
+  );
   assert.match(
     beforePersist,
-    /commitment: finalizedCommitment,[\s\S]*commitment: "processed",/u,
+    /const preReservationWindow = await observeSignedBlockhashWindow\(\{[\s\S]*lastValidBlockHeight: pending\.latest\.lastValidBlockHeight,[\s\S]*minContextSlot: current\.finalizedContextSlot,[\s\S]*preReservationWindow\.status !== "VALID"[\s\S]*preReservationWindow\.remainingBlocks < MIN_BROADCAST_REMAINING_BLOCKS[\s\S]*throw new Error\("Signed transaction blockhash window is terminal before reservation"\)/u,
+  );
+  assertBefore(
+    beforePersist,
+    "const preReservationWindow = await observeSignedBlockhashWindow({",
+    "preSendSnapshot = current;",
+    "authoritative window is the final asynchronous pre-reservation observation",
   );
   assert.doesNotMatch(beforePersist, /sendRawTransaction|getSignatureStatuses|confirmTransaction/u);
   const attemptName = continuationMatch[1];

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { TextDecoder } from "node:util";
@@ -80,6 +81,7 @@ const exactArchitectureWorkCommand =
   "node scripts/test-iat-architecture-source-lineage-regression.mjs && node scripts/validate-iat-v2-architecture-work.mjs";
 const requiredActionPins = new Map([
   ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 5],
+  ["actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", 1],
   ["actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020", 4],
   ["actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02", 1],
 ]);
@@ -207,6 +209,8 @@ const exactPreLineageHistoryPlacement = [
   exactPreLineageWebSourceHistoryStep,
   "      - run: npm run check:iat-v2",
 ].join("\n");
+const exactCeremonyProvisioningBlockSha256 =
+  "5dfdb47bbcc66892a19069dcf3f7cce5e20ce4e666dc5b72d4c32067d8602b2e";
 const exactNonWindowsJobDefaultAnchors = [
   [
     "  web-and-policy:",
@@ -344,7 +348,7 @@ function validateConfiguration(workflowInput, scripts) {
     .filter(Boolean);
   const actionUses = workflowText
     .split("\n")
-    .map((line) => line.match(/^\s*- uses:\s+([^\s#]+)(?:\s+#.*)?$/)?.[1] ?? null)
+    .map((line) => line.match(/^\s+(?:-\s+)?uses:\s+([^\s#]+)(?:\s+#.*)?$/)?.[1] ?? null)
     .filter(Boolean);
   const orderedPositions = requiredOrderedCommands.map((command) => commandLines.indexOf(command));
   const nativeStructuralCommand =
@@ -494,8 +498,8 @@ function validateConfiguration(workflowInput, scripts) {
   if (commandLines.filter((command) => command === "npm run check:iat-v2-signoff").length !== 1) {
     fail("independent-signoff validation must occur exactly once in the web-and-policy job");
   }
-  if (!/^permissions:\n\s+contents:\s+read\s*$/m.test(workflowText)) {
-    fail("release-proof workflow must retain read-only repository permissions");
+  if (!/^permissions:\n  actions: read\n  contents: read\n\nconcurrency:/m.test(workflowText)) {
+    fail("release-proof workflow must retain exact read-only action-artifact and repository permissions");
   }
   if (!/concurrency:\n(?:\s+#.*\n)*\s+group:\s+iat-v2-proof-\$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}\n\s+cancel-in-progress:\s+true/m.test(workflowText)) {
     fail("release-proof workflow must deduplicate events for one exact source head without cancelling another published head");
@@ -520,6 +524,42 @@ function validateConfiguration(workflowInput, scripts) {
   }
   if (!workflowText.includes(exactPreLineageHistoryPlacement)) {
     fail("web audit must place the second exact source-history normalization between UI regression and the lineage-dependent gate");
+  }
+  const ceremonyProvisioningStart = workflowText.indexOf(
+    "      - name: Inspect the nonauthorizing Devnet program-ceremony binding\n",
+  );
+  const ceremonyProvisioningEnd = workflowText.indexOf(
+    "      - name: Validate the Phase-A native containment source contract without execution\n",
+    ceremonyProvisioningStart,
+  );
+  const ceremonyProvisioningBlock = ceremonyProvisioningStart >= 0
+    && ceremonyProvisioningEnd > ceremonyProvisioningStart
+    ? workflowText.slice(ceremonyProvisioningStart, ceremonyProvisioningEnd)
+    : "";
+  const ceremonyProvisioningBindings = [
+    "const branch = `agent/iat-v2-devnet-ceremony-ci-${binding.sourceHeadCommit}`;",
+    '"+${{ steps.ceremony_binding.outputs.checkout_ref }}:refs/remotes/origin/${{ steps.ceremony_binding.outputs.checkout_branch }}"',
+    'observed="$(git rev-parse --verify "refs/remotes/origin/${{ steps.ceremony_binding.outputs.checkout_branch }}^{commit}")"',
+    'if [[ "$observed" != "${{ steps.ceremony_binding.outputs.checkout_commit }}" ]]; then',
+    "repository: InternalAgencyIO/InternalAgency",
+    "run-id: ${{ steps.ceremony_binding.outputs.run_id }}",
+    "name: iat-v2-b3-verifiable-sbf",
+    "path: projects/star-ascent/site/target/iat-v2-ceremony-ci-download",
+    "target/verifiable/iat-v2-ceremony-runtime-build-evidence.json",
+  ];
+  const ceremonyVerifierPosition = workflowText.indexOf("      - run: npm run check:iat-v2\n");
+  if (
+    ceremonyProvisioningBlock.length === 0
+    || createHash("sha256").update(ceremonyProvisioningBlock).digest("hex")
+      !== exactCeremonyProvisioningBlockSha256
+    || ceremonyProvisioningBindings.some((binding) => !ceremonyProvisioningBlock.includes(binding))
+    || !(npmCiPosition >= 0
+      && ceremonyProvisioningStart > npmCiPosition
+      && ceremonyProvisioningEnd < ceremonyVerifierPosition)
+  ) {
+    fail(
+      "BOUND ceremony CI must exactly inspect, fetch-and-compare, download, and stage S evidence before the full verifier",
+    );
   }
   if (
     (workflowText.match(/^\s+IAT_V2_SOURCE_HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}\s*$/gm) ?? []).length !== 2
@@ -1077,6 +1117,67 @@ nativeWindowsMutationProbes.push(
   {
     name: "unknown column-zero workflow key injection",
     workflow: workflow.replace("\npermissions:\n", "\nunexpected: true\n\npermissions:\n"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "workflow write-permission injection",
+    workflow: workflow.replace(
+      "  contents: read\n\nconcurrency:",
+      "  contents: read\n  issues: write\n\nconcurrency:",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "ceremony evidence download action pin drift",
+    workflow: workflow.replace(
+      "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+      "actions/download-artifact@0000000000000000000000000000000000000000",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "ceremony evidence repository drift",
+    workflow: workflow.replace(
+      "repository: InternalAgencyIO/InternalAgency",
+      "repository: attacker/example",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "ceremony evidence artifact-name drift",
+    workflow: workflow.replace("name: iat-v2-b3-verifiable-sbf", "name: unreviewed-artifact"),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "ceremony evidence run-id drift",
+    workflow: workflow.replace(
+      "run-id: ${{ steps.ceremony_binding.outputs.run_id }}",
+      "run-id: ${{ github.run_id }}",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "ceremony evidence staging-path drift",
+    workflow: workflow.replace(
+      "target/verifiable/iat-v2-ceremony-runtime-build-evidence.json",
+      "target/verifiable/unreviewed-runtime-evidence.json",
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "ceremony checkout-ref equality weakened",
+    workflow: workflow.replace(
+      'if [[ "$observed" != "${{ steps.ceremony_binding.outputs.checkout_commit }}" ]]; then',
+      'if [[ "$observed" == "${{ steps.ceremony_binding.outputs.checkout_commit }}" ]]; then',
+    ),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "ceremony evidence provisioning after full verifier",
+    workflow: workflow.replace(
+      "      - name: Inspect the nonauthorizing Devnet program-ceremony binding\n",
+      "      - run: npm run check:iat-v2\n      - name: Inspect the nonauthorizing Devnet program-ceremony binding\n",
+    ),
     scripts: packageJson.scripts,
   },
   {

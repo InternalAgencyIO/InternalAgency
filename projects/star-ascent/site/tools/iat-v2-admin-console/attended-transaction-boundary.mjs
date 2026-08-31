@@ -106,3 +106,56 @@ export async function assertFreshFinalizedBlockhash({
   if (!result.value) throw new Error("Signed transaction blockhash is no longer valid");
   return contextSlot;
 }
+
+export async function observeSignedBlockhashWindow({
+  blockhash,
+  connection,
+  lastValidBlockHeight,
+  minContextSlot,
+}) {
+  if (typeof blockhash !== "string" || blockhash.length === 0) {
+    throw new Error("Signed transaction blockhash observation requires an exact blockhash");
+  }
+  if (!Number.isSafeInteger(lastValidBlockHeight) || lastValidBlockHeight <= 0) {
+    throw new Error("Signed transaction blockhash observation requires an exact last-valid height");
+  }
+  if (!Number.isSafeInteger(minContextSlot) || minContextSlot <= 0) {
+    throw new Error("Signed transaction blockhash observation requires a positive finalized minContextSlot");
+  }
+  const finalized = await connection.isBlockhashValid(blockhash, {
+    commitment: "finalized",
+    minContextSlot,
+  });
+  const finalizedSlot = finalizedContextSlot(
+    finalized,
+    "Finalized signed transaction blockhash observation",
+    minContextSlot,
+  );
+  const processed = await connection.isBlockhashValid(blockhash, {
+    commitment: "processed",
+    minContextSlot: finalizedSlot,
+  });
+  const processedSlot = finalizedContextSlot(
+    processed,
+    "Processed signed transaction blockhash observation",
+    finalizedSlot,
+  );
+  const observedBlockHeight = await connection.getBlockHeight({
+    commitment: "processed",
+    minContextSlot: processedSlot,
+  });
+  if (!Number.isSafeInteger(observedBlockHeight) || observedBlockHeight <= 0) {
+    throw new Error("Signed transaction blockhash observation returned an invalid block height");
+  }
+  const remainingBlocks = lastValidBlockHeight - observedBlockHeight;
+  return Object.freeze({
+    status: finalized.value === true && processed.value === true && remainingBlocks >= 0
+      ? "VALID"
+      : "EXPIRED",
+    finalizedContextSlot: finalizedSlot,
+    processedContextSlot: processedSlot,
+    observedBlockHeight,
+    remainingBlocks,
+    lastValidBlockHeight,
+  });
+}

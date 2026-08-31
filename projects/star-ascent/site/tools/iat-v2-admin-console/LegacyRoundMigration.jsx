@@ -35,6 +35,11 @@ import {
   parseUpgradeableProgramData,
 } from "../../programs/iat_v2/instructions.mjs";
 import {
+  createIatV2DevnetProgramCeremonyEvidenceBinding,
+  parseIatV2DevnetProgramCeremonyBinding,
+} from "../../programs/iat_v2/ceremony-binding.mjs";
+import ceremonyRuntimeBindingJson from "../../scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json";
+import {
   assertCanonicalAttendedNextActionFromReceiptSet,
   canonicalReceiptSet,
   clearAttendedReceipts,
@@ -60,6 +65,9 @@ const CCC_FIRST_SELECTION_DELAY_SECONDS = 86_400n;
 const CCC_REVEAL_TIMEOUT_SECONDS = 86_400n;
 const SECONDS_PER_WEEK = 604_800n;
 const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
+const ATTENDED_CEREMONY_BINDING = parseIatV2DevnetProgramCeremonyBinding(
+  ceremonyRuntimeBindingJson,
+);
 
 function roundPromptAction(kind, week) {
   const suffix = typeof week === "bigint" ? week.toString() : String(week);
@@ -528,11 +536,10 @@ async function loadMigrationSnapshot(sha256Hex, minContextSlot = 0) {
     legacy,
     hardened,
     recoveries,
-    evidenceBinding: {
-      sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-      programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+    evidenceBinding: createIatV2DevnetProgramCeremonyEvidenceBinding({
+      binding: ATTENDED_CEREMONY_BINDING,
       mint: mint.toBase58(),
-    },
+    }),
   };
 }
 
@@ -971,9 +978,12 @@ export default function LegacyRoundMigration({
             <div><span>PROGRAM</span><code>{IAT_V2_PROGRAM_ID.toBase58()}</code></div>
             <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
             <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
-            <div><span>SOURCE COMMIT</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
-            <div><span>CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
-            <div><span>EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
+            <div><span>ATTENDED CEREMONY SOURCE</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code></div>
+            <div><span>CEREMONY CI RUN / ATTEMPT</span><code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code></div>
+            <div><span>CEREMONY RUNTIME EVIDENCE SHA-256</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code></div>
+            <div><span>IMMUTABLE ARTIFACT SOURCE</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
+            <div><span>ARTIFACT CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
+            <div><span>ARTIFACT EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
             <div><span>CI-BOUND ARTIFACT SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256}</code></div>
             <div><span>CI-BOUND ARTIFACT BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}</code></div>
             <div><span>CONFIG</span><code>{snapshot?.config.toBase58() ?? "NOT VERIFIED"}</code></div>

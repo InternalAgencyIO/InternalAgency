@@ -24,9 +24,9 @@ import {
 } from "./attended-evidence.mjs";
 import {
   assertExactTransactionMessage,
-  assertFreshFinalizedBlockhash,
   assertSignedLegacyTransaction,
   finalizedContextSlot,
+  observeSignedBlockhashWindow,
   simulateExactLegacyTransaction,
 } from "./attended-transaction-boundary.mjs";
 import {
@@ -54,6 +54,9 @@ const DEVNET_DEPLOYER = new PublicKey("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc
 const SIGNABLE_ACTIONS = ["extend-program", "upgrade"];
 const PROGRAM_PROMPT_ACTIONS = ["EXTEND_PROGRAM_DATA", "UPGRADE_PROGRAM"];
 const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+const BLOCKHASH_WINDOW_POLL_MS = 1_500;
+const BLOCKHASH_WINDOW_MAX_AGE_MS = 5_000;
+const MIN_BROADCAST_REMAINING_BLOCKS = 40;
 
 function programPromptAction(action) {
   if (action === "extend-program") return "EXTEND_PROGRAM_DATA";
@@ -161,6 +164,34 @@ function programRecoveryBindingKey(snapshot) {
   return snapshot?.evidenceBinding
     ? JSON.stringify({ ...snapshot.evidenceBinding, snapshotAction: snapshot.action ?? null })
     : null;
+}
+
+function pendingBlockhashWindowKey(pending) {
+  return pending ? JSON.stringify(signedPendingRecord(pending)) : null;
+}
+
+function isFreshBroadcastWindow(pending, windowState) {
+  const bindingKey = pendingBlockhashWindowKey(pending);
+  return bindingKey !== null
+    && windowState?.bindingKey === bindingKey
+    && windowState.status === "VALID"
+    && Number.isSafeInteger(windowState.remainingBlocks)
+    && windowState.remainingBlocks >= MIN_BROADCAST_REMAINING_BLOCKS
+    && Number.isFinite(windowState.observedAtMonotonicMs)
+    && performance.now() - windowState.observedAtMonotonicMs <= BLOCKHASH_WINDOW_MAX_AGE_MS
+    && document.visibilityState === "visible";
+}
+
+function blockhashWindowLabel(windowState) {
+  if (windowState?.status === "VALID") {
+    if (windowState.remainingBlocks < MIN_BROADCAST_REMAINING_BLOCKS) {
+      return `TOO CLOSE // ${windowState.remainingBlocks} BLOCKS REMAINING // CEREMONY TERMINAL`;
+    }
+    return `VALID // ${windowState.remainingBlocks} BLOCKS REMAINING // LAST VALID HEIGHT ${windowState.lastValidBlockHeight}`;
+  }
+  if (windowState?.status === "EXPIRED") return "EXPIRED // CEREMONY TERMINAL";
+  if (windowState?.status === "UNKNOWN") return "RPC UNKNOWN // BROADCAST DISABLED";
+  return "CHECKING // BROADCAST DISABLED";
 }
 
 function shouldBlockProgramPromptRetry({ binding, action }) {
@@ -444,6 +475,8 @@ export default function ProgramUpgradeAttendedActions({
   const [hasProgramBroadcastReservation, setHasProgramBroadcastReservation] = useState(false);
   const [checkedPendingBinding, setCheckedPendingBinding] = useState(null);
   const [blockedPendingBinding, setBlockedPendingBinding] = useState(null);
+  const [blockhashWindow, setBlockhashWindow] = useState({ status: "INACTIVE" });
+  const [terminalBlockhashBinding, setTerminalBlockhashBinding] = useState(null);
   const recoveryBinding = snapshot && SIGNABLE_ACTIONS.includes(snapshot.action)
     ? signedPendingBinding(snapshot.evidenceBinding, snapshot.action)
     : null;
@@ -578,6 +611,85 @@ export default function ProgramUpgradeAttendedActions({
     return () => onLockChange(false);
   }, [busy, onLockChange, pending, pendingRecoveryBlocked, pendingRecoveryReady]);
 
+  useEffect(() => {
+    const bindingKey = pendingBlockhashWindowKey(pending);
+    if (bindingKey === null || broadcastAttempt !== null) {
+      setBlockhashWindow({ status: "INACTIVE" });
+      return undefined;
+    }
+    if (terminalBlockhashBinding === bindingKey) return undefined;
+    let cancelled = false;
+    let requestEpoch = 0;
+    let timer = null;
+    let terminal = false;
+
+    const schedule = () => {
+      if (terminal || cancelled || document.visibilityState !== "visible") return;
+      timer = window.setTimeout(observe, BLOCKHASH_WINDOW_POLL_MS);
+    };
+    const observe = async () => {
+      if (terminal || cancelled || document.visibilityState !== "visible") return;
+      const epoch = ++requestEpoch;
+      setBlockhashWindow({ status: "CHECKING", bindingKey });
+      try {
+        const observed = await observeSignedBlockhashWindow({
+          blockhash: pending.latest.blockhash,
+          connection,
+          lastValidBlockHeight: pending.latest.lastValidBlockHeight,
+          minContextSlot: pending.finalizedContextSlot,
+        });
+        if (cancelled || epoch !== requestEpoch || document.visibilityState !== "visible") return;
+        setBlockhashWindow({
+          ...observed,
+          bindingKey,
+          observedAtMonotonicMs: performance.now(),
+        });
+        if (observed.status === "EXPIRED") {
+          terminal = true;
+          setTerminalBlockhashBinding(bindingKey);
+          setStatus("HOLD // SIGNED BLOCKHASH EXPIRED; CEREMONY TERMINAL; NOTHING BROADCAST");
+        } else if (observed.remainingBlocks < MIN_BROADCAST_REMAINING_BLOCKS) {
+          terminal = true;
+          setTerminalBlockhashBinding(bindingKey);
+          setStatus("HOLD // SIGNED BLOCKHASH TOO CLOSE TO EXPIRY; CEREMONY TERMINAL; NOTHING BROADCAST");
+        }
+      } catch (caught) {
+        if (cancelled || epoch !== requestEpoch) return;
+        setBlockhashWindow({
+          status: "UNKNOWN",
+          bindingKey,
+          error: errorText(caught),
+        });
+        setStatus("HOLD // SIGNED BLOCKHASH WINDOW UNKNOWN; BROADCAST DISABLED");
+      } finally {
+        if (!terminal && !cancelled && epoch === requestEpoch) schedule();
+      }
+    };
+    const visibilityChanged = () => {
+      if (terminal) return;
+      requestEpoch += 1;
+      if (timer !== null) window.clearTimeout(timer);
+      timer = null;
+      setBlockhashWindow({ status: "CHECKING", bindingKey });
+      if (document.visibilityState === "visible") observe();
+    };
+
+    document.addEventListener("visibilitychange", visibilityChanged);
+    observe();
+    return () => {
+      cancelled = true;
+      requestEpoch += 1;
+      if (timer !== null) window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", visibilityChanged);
+    };
+  }, [broadcastAttempt, connection, pending, setStatus, terminalBlockhashBinding]);
+
+  const activeBlockhashBinding = pendingBlockhashWindowKey(pending);
+  const broadcastWindowTerminal = activeBlockhashBinding !== null
+    && terminalBlockhashBinding === activeBlockhashBinding;
+  const broadcastWindowReady = !broadcastWindowTerminal
+    && isFreshBroadcastWindow(pending, blockhashWindow);
+
   async function simulateAndSign() {
     if (
       !snapshot
@@ -708,6 +820,13 @@ export default function ProgramUpgradeAttendedActions({
 
   async function broadcastSigned() {
     if (!pending || broadcastAttempt || broadcastBlocked || busy || inspectionBusy) return;
+    if (
+      broadcastWindowTerminal
+      || !isFreshBroadcastWindow(pending, blockhashWindow)
+    ) {
+      setStatus("HOLD // FRESH SIGNED BLOCKHASH WINDOW REQUIRED; NOTHING BROADCAST");
+      return;
+    }
     setBusy(true);
     setError("");
     setStatus("EXCLUSIVE PRE-SEND GATE // NOTHING BROADCAST");
@@ -756,18 +875,19 @@ export default function ProgramUpgradeAttendedActions({
             sha256Hex,
             signed: pending.signed,
           });
-          await assertFreshFinalizedBlockhash({
+          const preReservationWindow = await observeSignedBlockhashWindow({
             blockhash: pending.latest.blockhash,
-            commitment: finalizedCommitment,
             connection,
+            lastValidBlockHeight: pending.latest.lastValidBlockHeight,
             minContextSlot: current.finalizedContextSlot,
           });
-          await assertFreshFinalizedBlockhash({
-            blockhash: pending.latest.blockhash,
-            commitment: "processed",
-            connection,
-            minContextSlot: current.finalizedContextSlot,
-          });
+          if (
+            preReservationWindow.status !== "VALID"
+            || preReservationWindow.remainingBlocks < MIN_BROADCAST_REMAINING_BLOCKS
+          ) {
+            setTerminalBlockhashBinding(pendingBlockhashWindowKey(pending));
+            throw new Error("Signed transaction blockhash window is terminal before reservation");
+          }
           preSendSnapshot = current;
         },
         afterPersist: async (retained) => {
@@ -1123,8 +1243,12 @@ export default function ProgramUpgradeAttendedActions({
             <div className="broadcast-panel">
               <code>MESSAGE {pending.messageSha256}</code>
               <code>VALID TO HEIGHT {pending.latest.lastValidBlockHeight}</code>
+              <code>BLOCKHASH WINDOW {blockhashWindowLabel(blockhashWindow)}</code>
               <p>EXPIRY ENDS THIS CEREMONY.</p>
-              <button onClick={broadcastSigned} disabled={busy || inspectionBusy || broadcastBlocked}>
+              <button
+                onClick={broadcastSigned}
+                disabled={busy || inspectionBusy || broadcastBlocked || !broadcastWindowReady}
+              >
                 {pending.action === "extend-program"
                   ? "BROADCAST SIGNED CAPACITY EXTENSION"
                   : pending.action === "upgrade"

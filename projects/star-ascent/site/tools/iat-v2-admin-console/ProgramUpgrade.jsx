@@ -18,6 +18,11 @@ import {
   DEVNET_FEATURE_MINT_SEED,
 } from "../../programs/iat_v2/instructions.mjs";
 import {
+  createIatV2DevnetProgramCeremonyEvidenceBinding,
+  parseIatV2DevnetProgramCeremonyBinding,
+} from "../../programs/iat_v2/ceremony-binding.mjs";
+import ceremonyRuntimeBindingJson from "../../scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json";
+import {
   EXTEND_PROGRAM_CHECKED_FEATURE_ID,
   computeProgramDataExtension,
   inspectExtendProgramCheckedFeature,
@@ -33,6 +38,9 @@ const connection = new Connection(DEVNET_RPC, {
 });
 const BUFFER_METADATA_BYTES = 37;
 const DEVNET_DEPLOYER = new PublicKey("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4");
+const ATTENDED_CEREMONY_BINDING = parseIatV2DevnetProgramCeremonyBinding(
+  ceremonyRuntimeBindingJson,
+);
 
 function errorText(error) {
   return error instanceof Error ? error.message : String(error);
@@ -104,11 +112,10 @@ export default function ProgramUpgrade({
     }
     const buffer = bufferInput.trim() ? new PublicKey(bufferInput.trim()) : null;
     const evidenceMint = await deriveDeterministicDevnetMint({ seed: DEVNET_FEATURE_MINT_SEED });
-    const evidenceBinding = {
-      sourceCommit: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
-      programArtifactSha256: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+    const evidenceBinding = createIatV2DevnetProgramCeremonyEvidenceBinding({
+      binding: ATTENDED_CEREMONY_BINDING,
       mint: evidenceMint.toBase58(),
-    };
+    });
     const addresses = [
       IAT_V2_PROGRAM_ID,
       IAT_V2_PROGRAM_DATA_ADDRESS,
@@ -349,9 +356,12 @@ export default function ProgramUpgrade({
             <div><span>PROGRAM</span><code>{IAT_V2_PROGRAM_ID.toBase58()}</code></div>
             <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
             <div><span>UPGRADE AUTHORITY / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
-            <div><span>SOURCE COMMIT</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
-            <div><span>CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
-            <div><span>EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
+            <div><span>ATTENDED CEREMONY SOURCE</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code></div>
+            <div><span>CEREMONY CI RUN / ATTEMPT</span><code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code></div>
+            <div><span>CEREMONY RUNTIME EVIDENCE SHA-256</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code></div>
+            <div><span>IMMUTABLE ARTIFACT SOURCE</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
+            <div><span>ARTIFACT CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
+            <div><span>ARTIFACT EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
             <div><span>BUFFER</span><code>{snapshot?.buffer?.toBase58() ?? "NOT PROVIDED"}</code></div>
             <div><span>FINALIZED BUFFER OWNER (OBSERVED)</span><code className="full-code">{snapshot?.bufferOwner?.toBase58() ?? "NOT VERIFIED"}</code></div>
             <div><span>FINALIZED BUFFER PROGRAM BYTES (OBSERVED)</span><code>{snapshot?.bufferProgramBytes ?? "NOT VERIFIED"}</code></div>
