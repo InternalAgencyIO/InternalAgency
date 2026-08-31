@@ -3,7 +3,7 @@
   "batch": 470,
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
-  "state": "five-prompts-prepared-awaiting-remote-verification-and-visible-browser-staging",
+  "state": "five-prompts-hash-and-remote-verified-awaiting-visible-browser-staging",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "authority": {
     "userDirectives": [
@@ -164,7 +164,10 @@
     }
   ],
   "dispatchGate": {
-    "remoteCheckpointVerified": false,
+    "remoteCheckpointVerified": true,
+    "remoteVerifiedCheckpointCommit": "e7855060ce892cabe5ffc76ceac26eb8e40dc5e8",
+    "remoteVerifiedAtUtc": "2026-08-31T10:07:59.8998319Z",
+    "remoteBranchAndPrHeadMatched": true,
     "actualBrowserTabsInspected": false,
     "signedInMetaAccountVerified": false,
     "anchorsVisibleInExactOrder": false,
@@ -173,5 +176,5 @@
     "freshAuthorizationCurrent": true,
     "mayClickSend": false
   },
-  "nextSafeAction": "Compute and verify exact prompt hashes, commit and push this authority, verify branch and PR head parity, then replace the four terminal Albania tabs in place with scenes 1906-1909, attach anchors 938, 936, 937 in order, and dispatch exactly once per lane under the current five-still authorization. Queue scene 1910 behind the first archived terminal lane."
+  "nextSafeAction": "Inspect the actual in-app Browser tabs, replace the four terminal Albania tabs in place with scenes 1906-1909, visibly verify account leesha007, exact prompts, Instant mode, and anchors 938, 936, 937 in order, then dispatch exactly once per lane under the current five-still authorization. Keep the X composer untouched and queue scene 1910 behind the first archived terminal lane."
 }
