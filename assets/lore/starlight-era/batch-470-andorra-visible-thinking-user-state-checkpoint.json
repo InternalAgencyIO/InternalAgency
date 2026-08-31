@@ -116,5 +116,16 @@
   "variantArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/visible-variant-archive-manifest.json",
   "variantArchiveFileCount": 36,
   "variantArchiveInventorySha256": "0F6EBAA2EE0E959CFD9D907797697AAF8378B90D834B0F37E7B98F98C7BBDDC4",
-  "nextSafeAction": "Commit and remote-verify the rendered variant archive. Preserve scene 1909's current blank Thinking composer, then reuse that lane for scene 1910 only after exact prompt and ordered-anchor verification."
+  "historicalSnapshot": true,
+  "supersededByCurrentState": {
+    "observedAtUtc": "2026-08-31T11:18:26.9570740Z",
+    "tab31Scene": 1910,
+    "tab31Url": "https://www.meta.ai/prompt/8b1c9f72-2a62-4d63-9e5b-0e35de588f8e",
+    "scene1910MetaMode": "Thinking",
+    "scene1910TerminalValid": true,
+    "futureRule": "Every new Meta occurrence must visibly show Thinking before Send; never duplicate scenes 1906-1910.",
+    "closureCheckpoint": "assets/lore/starlight-era/batch-470-andorra-five-stills-closed-qa-checkpoint.json",
+    "xComposerCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json"
+  },
+  "nextSafeAction": "Use this file only as the immutable 10:25Z historical browser snapshot. Follow the Batch 470 closure and staged X checkpoints for the current state."
 }

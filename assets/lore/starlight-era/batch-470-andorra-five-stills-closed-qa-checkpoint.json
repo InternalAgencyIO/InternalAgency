@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "state": "closed-five-archive-accepted-two-clean-publication-candidates",
+  "closedAtUtc": "2026-08-31T11:18:26.9570740Z",
+  "sceneIds": [1906, 1907, 1908, 1909, 1910],
+  "providerOccurrenceCount": 5,
+  "agentMetaSendClicks": 5,
+  "agentRepeatMetaSendClicks": 0,
+  "subsequentUserOwnedProviderVariants": true,
+  "providerRawAssetCount": 0,
+  "browserRenderedEvidenceFileCount": 39,
+  "chatgptPassRequestsIssued": 5,
+  "chatgptCleanOutputsSaved": 2,
+  "additionalChatgptPassesPermitted": 0,
+  "acceptedArchiveSceneIds": [1906, 1907, 1908, 1909, 1910],
+  "cleanPublicationCandidateSceneIds": [1906, 1910],
+  "archiveOnlySceneIds": [1907, 1908, 1909],
+  "retryEligibleSceneIds": [],
+  "selectedAssets": [
+    {
+      "scene": 1906,
+      "role": "clean-publication-candidate",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1906-andorra-pyrenean-overlook-raze-chatgpt-hemline-one-pass.png",
+      "sha256": "3B9C3BB9F504F4D1A3E038555D0896EBE17F929AF010E6FBAFE56C1ED5FDB987"
+    },
+    {
+      "scene": 1907,
+      "role": "archive-accepted-rendered-meta-evidence",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1907-visible-variant-08-meta-editor.png",
+      "sha256": "6CEC2CC8BF9FC99B4F0CD38399F243679296F5D259582B0CA3DE4673A059D79E"
+    },
+    {
+      "scene": 1908,
+      "role": "archive-accepted-rendered-meta-evidence",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1908-current-visible-85-percent-close-variant.png",
+      "sha256": "1014E7EABFA827AB694586CB2E9CEE6BD39451B62FA14C62D306B2AE56C5DACF"
+    },
+    {
+      "scene": 1909,
+      "role": "archive-accepted-rendered-meta-evidence",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1909-visible-variant-02-gallery-fashion-editorial-portrait-webp-viewer.png",
+      "sha256": "07DE2B8E17F045712F63477692711654B6D341647DCD804788EC4857B9B23412"
+    },
+    {
+      "scene": 1910,
+      "role": "clean-publication-candidate",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1910-andorra-sorteny-raze-chatgpt-hemline-one-pass.png",
+      "sha256": "AEC69E260D57276B1A6D74F74CDA4F5E440B24D2CCB8BB9C378343BCB1C49666"
+    }
+  ],
+  "qaAuthority": {
+    "directive": "Accept almost anything after one strong shortening pass.",
+    "hardUnusableOnly": ["corrupt", "duplicate", "unsafe or explicit", "no image", "materially wrong cast"],
+    "nonBlockingDeviations": ["framing", "choreography", "location detail", "public-safe wardrobe detail", "brand-text fidelity"],
+    "threeArchiveOnlyReason": "The one allowed edit request was issued for each scene, but the parallel invocation ended with one output-stage safety rejection and did not provide per-scene completion attribution. Retrying could violate the one-pass ceiling."
+  },
+  "metaModeReconciliation": {
+    "initialScenes1906To1909": "Submitted in Instant before the later Thinking-always directive; never reopen or resend.",
+    "scene1910": "Submitted once in Thinking after exact prompt and ordered-anchor verification.",
+    "futureRule": "Every new Meta occurrence must visibly show Thinking before Send."
+  },
+  "xPair": {
+    "eligible": true,
+    "sceneOrder": [1906, 1910, 1904],
+    "countries": ["Andorra", "Albania"],
+    "assetSha256": [
+      "3B9C3BB9F504F4D1A3E038555D0896EBE17F929AF010E6FBAFE56C1ED5FDB987",
+      "AEC69E260D57276B1A6D74F74CDA4F5E440B24D2CCB8BB9C378343BCB1C49666",
+      "E93F9096D5F395546B09D0BC6EC9E1AC6CAF96B8A6D8B832E2DC13A44C19752B"
+    ],
+    "duplicateMediaCheck": "No matching prior X publication asset hashes were found; the Albania hash appears only in its unpublished batch selection record.",
+    "postAuthorized": false,
+    "postClicked": false,
+    "xPostUrls": []
+  },
+  "canonicalContradictionResolved": "The initial Instant submissions for scenes 1906-1909 remain valid historical occurrences because they predate the Thinking-always directive. The directive governs scene 1910 and every future occurrence; it does not authorize duplicate sends.",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/provider-ledger.json",
+  "variantArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/visible-variant-archive-manifest.json",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/closure-evidence-manifest.json",
+  "onePassOutcomesCheckpoint": "assets/lore/starlight-era/batch-470-andorra-chatgpt-one-pass-outcomes-checkpoint.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/accessibility-sidecars.json",
+  "nextSafeAction": "Remote-verify the closure, then keep the fully prepared @dogramaci X composer visible and stop before Post for fresh X-specific authorization."
+}

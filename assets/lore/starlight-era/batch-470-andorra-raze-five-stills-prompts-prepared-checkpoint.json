@@ -3,14 +3,15 @@
   "batch": 470,
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
-  "state": "scene-1910-thinking-composer-staged-authorized-awaiting-remote-verification",
+  "state": "closed-five-archive-accepted-two-clean-x-composer-staged-awaiting-post-authorization",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
   "authority": {
     "userDirectives": [
       "HEELS STAR #RAZE fashion and knee-high socks or stockings with independent 25 percent rolls, plus split-star RAZE logo and type text.",
       "Add these while shortening a lot and preserve camera closeness rolls.",
       "Five close-up fetish-adjacent fashion stills with visible RAZE branding, tight skirts, tops and cocktail dresses, minimal heels except one non-minimal boot still.",
-      "5 stills go."
+      "5 stills go.",
+      "USE THINKING Enabled ON META ALWAYS NFOR BETTER RESULTS."
     ],
     "freshActionTimeDispatchAuthorization": true,
     "authorizedSceneIds": [1906, 1907, 1908, 1909, 1910],
@@ -174,12 +175,24 @@
     "anchorsVisibleInExactOrder": true,
     "exactPromptsVerified": true,
     "instantModeVerified": true,
-    "freshAuthorizationCurrent": true,
-    "mayClickSend": true
+    "freshAuthorizationCurrent": false,
+    "gateConsumed": true,
+    "mayClickSend": false
   },
   "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
   "dispatchedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-dispatched-checkpoint.json",
   "visibleThinkingStateCheckpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
   "scene1910StagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-scene-1910-thinking-staged-authorized-checkpoint.json",
-  "nextSafeAction": "Remote-verify the scene-1910 Thinking-mode staged checkpoint, then click Meta Send exactly once in tab 31. Keep X untouched."
+  "scene1910TerminalQaCheckpoint": "assets/lore/starlight-era/batch-470-andorra-scene-1910-thinking-dispatched-terminal-qa-checkpoint.json",
+  "onePassOutcomesCheckpoint": "assets/lore/starlight-era/batch-470-andorra-chatgpt-one-pass-outcomes-checkpoint.json",
+  "closureCheckpoint": "assets/lore/starlight-era/batch-470-andorra-five-stills-closed-qa-checkpoint.json",
+  "acceptedArchiveSceneIds": [1906, 1907, 1908, 1909, 1910],
+  "cleanPublicationCandidateSceneIds": [1906, 1910],
+  "additionalChatgptPassesPermitted": 0,
+  "xComposerCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json",
+  "xSceneOrder": [1906, 1910, 1904],
+  "xPostAuthorized": false,
+  "xPostClicked": false,
+  "xPostUrls": [],
+  "nextSafeAction": "Commit and push the complete closure package, verify branch/PR parity and targeted LFS dry-run, then stop before X Post for fresh X-specific authorization."
 }

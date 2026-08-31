@@ -4,11 +4,12 @@
   "country": "Andorra",
   "runType": "five-candidate-RAZE-fashion-country-gap-fill",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "scene-1910-thinking-composer-staged-authorized-awaiting-remote-verification",
+  "state": "closed-five-archive-accepted-two-clean-x-composer-staged-awaiting-post-authorization",
   "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
+  "closedAtUtc": "2026-08-31T11:18:26.9570740Z",
   "accountRequired": "leesha007",
   "authorizedSceneIds": [1906, 1907, 1908, 1909, 1910],
-  "sendCount": 4,
+  "sendCount": 5,
   "repeatSendCount": 0,
   "occurrences": [
     {
@@ -17,9 +18,14 @@
       "promptSha256": "C5C1C734912139EBC40D4D58FA738342D96BF70BA5C86C30921D084E65650E91",
       "clickedAtUtc": "2026-08-31T10:18:32.995Z",
       "url": "https://www.meta.ai/prompt/933aa21d-a65a-48aa-b8ab-c8cc9b315202",
-      "status": "terminal-provider-refusal",
+      "agentOccurrenceStatus": "terminal-provider-refusal",
+      "laterVisibleVariantsInitiatedByAgent": false,
+      "finalStatus": "accepted-selected-user-owned-visible-variant-after-one-chatgpt-pass",
+      "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1906-andorra-pyrenean-overlook-raze-chatgpt-hemline-one-pass.png",
+      "selectedAssetSha256": "3B9C3BB9F504F4D1A3E038555D0896EBE17F929AF010E6FBAFE56C1ED5FDB987",
       "retryCount": 0,
-      "neverResendExactPrompt": true
+      "neverResendExactPrompt": true,
+      "additionalChatgptPassesPermitted": 0
     },
     {
       "scene": 1907,
@@ -27,8 +33,12 @@
       "promptSha256": "EF0FFA7986155E47D428E51092741A3DE71B9C04084121E02AA62FA00F7CBE0E",
       "clickedAtUtc": "2026-08-31T10:18:37.506Z",
       "url": "https://www.meta.ai/prompt/77d2064e-40d3-4db5-ac40-e6070fa034ee",
-      "status": "rendering",
-      "retryCount": 0
+      "laterVisibleVariantsInitiatedByAgent": false,
+      "finalStatus": "archive-accepted-rendered-meta-evidence-chatgpt-pass-no-output-ambiguous-terminal",
+      "selectedEvidence": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1907-visible-variant-08-meta-editor.png",
+      "selectedEvidenceSha256": "6CEC2CC8BF9FC99B4F0CD38399F243679296F5D259582B0CA3DE4673A059D79E",
+      "retryCount": 0,
+      "additionalChatgptPassesPermitted": 0
     },
     {
       "scene": 1908,
@@ -36,8 +46,12 @@
       "promptSha256": "4C721124EF254C0558119D0C678B6E090C33D4D26F858A3C03AC1548EC217EF8",
       "clickedAtUtc": "2026-08-31T10:18:41.972Z",
       "url": "https://www.meta.ai/prompt/3aac1ad5-cb6f-491d-b7f7-f61bbeedde74",
-      "status": "rendering",
-      "retryCount": 0
+      "laterVisibleVariantsInitiatedByAgent": false,
+      "finalStatus": "archive-accepted-rendered-meta-evidence-chatgpt-pass-no-output-ambiguous-terminal",
+      "selectedEvidence": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1908-current-visible-85-percent-close-variant.png",
+      "selectedEvidenceSha256": "1014E7EABFA827AB694586CB2E9CEE6BD39451B62FA14C62D306B2AE56C5DACF",
+      "retryCount": 0,
+      "additionalChatgptPassesPermitted": 0
     },
     {
       "scene": 1909,
@@ -45,11 +59,30 @@
       "promptSha256": "EF638473244D206384945EDF6EB71291627C7FB8455B262EA1DA761AA562C42B",
       "clickedAtUtc": "2026-08-31T10:18:46.432Z",
       "url": "https://www.meta.ai/prompt/456929b6-34a9-4cd8-9c61-bfdd6513015e",
-      "status": "rendering",
-      "retryCount": 0
+      "laterVisibleVariantsInitiatedByAgent": false,
+      "finalStatus": "archive-accepted-rendered-meta-evidence-chatgpt-pass-no-output-ambiguous-terminal",
+      "selectedEvidence": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1909-visible-variant-02-gallery-fashion-editorial-portrait-webp-viewer.png",
+      "selectedEvidenceSha256": "07DE2B8E17F045712F63477692711654B6D341647DCD804788EC4857B9B23412",
+      "retryCount": 0,
+      "additionalChatgptPassesPermitted": 0
+    },
+    {
+      "scene": 1910,
+      "occurrence": 0,
+      "promptSha256": "3EAFACA857F9833110946D950C1DAEAAEB415238D57A92D739B23257930FFD07",
+      "clickedAtUtc": "2026-08-31T10:53:23.830Z",
+      "url": "https://www.meta.ai/prompt/8b1c9f72-2a62-4d63-9e5b-0e35de588f8e",
+      "metaMode": "Thinking",
+      "agentOccurrenceStatus": "terminal-valid",
+      "finalStatus": "accepted-selected-after-one-chatgpt-pass",
+      "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1910-andorra-sorteny-raze-chatgpt-hemline-one-pass.png",
+      "selectedAssetSha256": "AEC69E260D57276B1A6D74F74CDA4F5E440B24D2CCB8BB9C378343BCB1C49666",
+      "retryCount": 0,
+      "additionalChatgptPassesPermitted": 0
     }
   ],
   "orderedIdentityAnchors": [938, 936, 937],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
   "sceneIds": [1906, 1907, 1908, 1909, 1910],
   "promptSha256": [
     "C5C1C734912139EBC40D4D58FA738342D96BF70BA5C86C30921D084E65650E91",
@@ -58,22 +91,62 @@
     "EF638473244D206384945EDF6EB71291627C7FB8455B262EA1DA761AA562C42B",
     "3EAFACA857F9833110946D950C1DAEAAEB415238D57A92D739B23257930FFD07"
   ],
-  "visibleMetaLaneCount": 4,
-  "visibleXComposerCount": 1,
-  "fifthSceneQueued": true,
   "maximumMetaRetriesPerScene": 2,
   "chatgptHemlinePassesPerTechnicallyValidMetaImage": 1,
   "futureRequiredMetaMode": "Thinking",
   "futureMetaModeDirectiveObservedAtUtc": "2026-08-31T10:25:05.6371296Z",
-  "remoteVerifiedCheckpointCommit": "e7855060ce892cabe5ffc76ceac26eb8e40dc5e8",
-  "remoteVerifiedAtUtc": "2026-08-31T10:07:59.8998319Z",
-  "remoteBranchAndPrHeadMatched": true,
-  "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
-  "dispatchedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-dispatched-checkpoint.json",
-  "visibleThinkingStateCheckpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
-  "variantArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/visible-variant-archive-manifest.json",
-  "variantArchiveFileCount": 36,
-  "variantArchiveInventorySha256": "0F6EBAA2EE0E959CFD9D907797697AAF8378B90D834B0F37E7B98F98C7BBDDC4",
-  "scene1910StagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-scene-1910-thinking-staged-authorized-checkpoint.json",
-  "nextSafeAction": "Remote-verify the scene-1910 Thinking-mode staged checkpoint, then click Meta Send exactly once in tab 31."
+  "guardianReconciliationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-guardian-reconciliation-checkpoint.json",
+  "metaModeReconciliation": "Scenes 1906-1909 were submitted in Instant before the Thinking-always directive and must not be duplicated. Scene 1910 and every future new occurrence require Thinking visibly enabled before Send.",
+  "archive": {
+    "variantArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/visible-variant-archive-manifest.json",
+    "variantArchiveFileCount": 36,
+    "variantArchiveInventorySha256": "0F6EBAA2EE0E959CFD9D907797697AAF8378B90D834B0F37E7B98F98C7BBDDC4",
+    "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/closure-evidence-manifest.json",
+    "closureEvidenceInventorySha256": "20B8BA4322C2920A21E8F334071967BB648D803BCEF935CE4AA88EE5F32D5A6E",
+    "scene1910TerminalEvidenceCount": 3,
+    "providerRawAssetCount": 0,
+    "cleanChatgptAssetCount": 2
+  },
+  "qa": {
+    "acceptedArchiveSceneIds": [1906, 1907, 1908, 1909, 1910],
+    "cleanPublicationCandidateSceneIds": [1906, 1910],
+    "archiveOnlySceneIds": [1907, 1908, 1909],
+    "retryEligibleSceneIds": [],
+    "chatgptPassRequestsIssued": 5,
+    "chatgptOutputsSaved": 2,
+    "additionalChatgptPassesPermitted": 0,
+    "closureCheckpoint": "assets/lore/starlight-era/batch-470-andorra-five-stills-closed-qa-checkpoint.json",
+    "onePassOutcomesCheckpoint": "assets/lore/starlight-era/batch-470-andorra-chatgpt-one-pass-outcomes-checkpoint.json",
+    "scene1910Checkpoint": "assets/lore/starlight-era/batch-470-andorra-scene-1910-thinking-dispatched-terminal-qa-checkpoint.json",
+    "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/accessibility-sidecars.json"
+  },
+  "browserCurrentAudit": {
+    "actualTabIds": ["28", "29", "30", "31", "32"],
+    "metaTabCount": 4,
+    "xComposerCount": 1,
+    "tab28ThinkingControlVisible": true,
+    "tab29ModeControlExposedInCurrentEditorState": false,
+    "tab30ModeControlExposedInCurrentViewportState": false,
+    "tab31ThinkingControlVisible": true,
+    "noNewMetaSendPending": true,
+    "ruleForNextOccurrence": "Before any new Meta Send, inspect the actual tab and require the visible Thinking control."
+  },
+  "xComposer": {
+    "tabId": "32",
+    "account": "@dogramaci",
+    "captionStaged": true,
+    "sceneOrder": [1906, 1910, 1904],
+    "mediaCount": 3,
+    "altTextCount": 3,
+    "postEnabled": true,
+    "postAuthorized": false,
+    "postClicked": false,
+    "xPostUrls": [],
+    "checkpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json"
+  },
+  "remoteVerification": {
+    "status": "pending-final-closure-commit",
+    "lastVerifiedCheckpointCommit": "0dc961dab1ce49bcf1b9725f0641625ae0561764"
+  },
+  "nextSafeAction": "Commit and push the complete closure package, verify branch/PR parity and targeted LFS dry-run, then stop before X Post for fresh X-specific authorization."
 }

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "state": "existing-guardian-preserved-repository-policy-updated-no-duplicate-created",
+  "observedAtUtc": "2026-08-31T11:18:26.9570740Z",
+  "guardian": {
+    "automationId": "starlight-internalagency-24-7-guardian",
+    "viewResult": "The Codex automation surface confirmed the existing automation by rendering its card but did not expose its full editable fields in the model-visible response.",
+    "scheduleMutation": false,
+    "pauseResumeMutation": false,
+    "newAutomationCreated": false,
+    "newTaskThreadWorkerSubagentOrGuardianCreated": false,
+    "reasonNoAutomationPromptMutation": "A safe update requires the full existing fields so they can be preserved. Those fields were not exposed, and inventing them could overwrite the guardian's current pause/resume schedule."
+  },
+  "repositoryPolicyUpdate": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "key": "continuousMetaCandidatePipeline.currentMetaGuardianOverride20260831",
+    "metaMode": "Thinking",
+    "visibleMetaLanes": 4,
+    "visibleXComposers": 1,
+    "grokState": "paused-until-credits-return",
+    "orderedIdentityAnchors": [938, 936, 937],
+    "maximumMetaRetriesPerScene": 2,
+    "chatgptStrongShorteningPassesPerSelectedOccurrence": 1,
+    "xPostRequiresFreshSpecificAuthorization": true
+  },
+  "canonicalReconciliation": "The repository contract now carries the current Thinking-always Meta rule for the sole guardian without altering the guardian's hidden schedule. Older Instant occurrences remain historical and non-repeatable; every future occurrence requires a visible Thinking control before Send.",
+  "nextSafeAction": "Let the existing guardian follow its current pause/resume schedule. On its next authorized wake it must fetch remote authority, observe the repository override, inspect actual tabs, and never duplicate the current five scenes or staged X media."
+}
