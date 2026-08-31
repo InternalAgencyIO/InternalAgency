@@ -1326,18 +1326,34 @@ process.stdout.write("submitted once\\n");
     );
     if (process.platform !== "win32") {
       const productionFdUidComparison = '"$fd_uid" != "1000"';
+      const productionUidEquality = '"$uid" == "1000"';
+      const productionUidInequality = '"$uid" != "1000"';
       assert.equal(
         fixtureHandoff.split(productionFdUidComparison).length - 1,
         2,
         "generated handoff fixture must retain exactly the two reviewed FD UID comparisons",
+      );
+      assert.equal(
+        fixtureHandoff.split(productionUidEquality).length - 1,
+        4,
+        "generated handoff fixture must retain exactly the four reviewed UID equality comparisons",
+      );
+      assert.equal(
+        fixtureHandoff.split(productionUidInequality).length - 1,
+        1,
+        "generated handoff fixture must retain exactly the reviewed reserved-CAS UID inequality",
       );
       fixtureHandoff = fixtureHandoff.replaceAll(
         productionFdUidComparison,
         `"$fd_uid" != "${process.getuid()}"`,
       );
       fixtureHandoff = fixtureHandoff.replaceAll(
-        '"$uid" == "1000"',
+        productionUidEquality,
         `"$uid" == "${process.getuid()}"`,
+      );
+      fixtureHandoff = fixtureHandoff.replaceAll(
+        productionUidInequality,
+        `"$uid" != "${process.getuid()}"`,
       );
     }
     fixtureHandoff = fixtureHandoff.replaceAll("/usr/bin/sleep 10", ":");
