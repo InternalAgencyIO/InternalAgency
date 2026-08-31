@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 474,
-  "state": "cyprus-denmark-x-composer-staged-authorized-awaiting-git-lfs-remote-verification",
+  "state": "cyprus-denmark-x-composer-staged-remote-verified-authorized-ready-to-post",
   "stagedAtUtc": "2026-08-31T20:45:35.0989909Z",
   "account": "@dogramaci",
   "accountVerifiedInVisibleProfileUi": true,
@@ -34,7 +34,7 @@
   "publicTransmissionCount": 0,
   "currentAuthorization": "authorized for all go, authorized for all similar commands",
   "postAuthorized": true,
-  "mayPost": false,
+  "mayPost": true,
   "visibleScreenshot": {
     "path": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/cyprus-denmark-x-composer-staged-visible.jpg",
     "bytes": 52895,
@@ -44,5 +44,10 @@
   },
   "reservationCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-post-reservation-checkpoint.json",
   "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/x-publication-attempt-evidence-manifest.json",
-  "nextSafeAction": "Commit and remote-verify this exact staged composer evidence. After local, remote and draft PR heads match and the targeted LFS dry run is empty, click the visible Post control once under the standing authorization, then verify whether a public transmission occurred before any further submit action."
+  "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-staging-git-lfs-remote-verification-checkpoint.json",
+  "stagingRemoteVerifiedCommit": "ee13d0dbac388e4bb2b1b894050d8184b6fd9efa",
+  "stagingRemoteVerifiedAtUtc": "2026-08-31T20:49:14.9376391Z",
+  "stagingLocalRemoteAndPrHeadMatched": true,
+  "stagingTargetedLfsDryRunEmpty": true,
+  "nextSafeAction": "Commit and push the staging verification record, prove parity once more, then re-inspect the exact visible composer and click its Post control once under the standing authorization. Verify transmission or non-transmission before any further submit action."
 }

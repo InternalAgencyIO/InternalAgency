@@ -10573,7 +10573,7 @@
   },
   "latestBatch474DenmarkPreparation": {
     "schemaVersion": 1,
-    "status": "cyprus-denmark-x-composer-staged-authorized-awaiting-git-lfs-remote-verification",
+    "status": "cyprus-denmark-x-composer-staged-remote-verified-authorized-ready-to-post",
     "preparedAtUtc": "2026-08-31T19:16:11.4719054Z",
     "batch": 474,
     "country": "Denmark",
@@ -10699,6 +10699,9 @@
     "xStagedAltTextCount": 3,
     "xStagedMadeWithAiLabelVisible": true,
     "xStagedPostEnabled": true,
-    "nextSafeAction": "Commit and remote-verify the exact staged composer evidence. Then click the visible Post control once under the standing authorization and verify whether a public transmission occurred before any further submit action."
+    "xStagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-474-cyprus-denmark-x-staging-git-lfs-remote-verification-checkpoint.json",
+    "xStagingRemoteVerifiedCommit": "ee13d0dbac388e4bb2b1b894050d8184b6fd9efa",
+    "xStagingRemoteVerifiedAtUtc": "2026-08-31T20:49:14.9376391Z",
+    "nextSafeAction": "Commit and push the staging verification record, prove parity once more, then re-inspect the exact visible composer and click its Post control once under the standing authorization. Verify transmission or non-transmission before any further submit action."
   }
 }
