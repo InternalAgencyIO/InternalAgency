@@ -5,7 +5,7 @@
   "country": "Bulgaria",
   "provider": "Meta AI",
   "occurrence": 1,
-  "status": "hard_unusable_retry1_eligible",
+  "status": "accepted_selected_chatgpt_hemline_refinement_user_relaxed_qa",
   "submittedAtUtc": "2026-08-31T07:40:02.290Z",
   "capturedAtUtc": "2026-08-31T07:56:21.9710048Z",
   "providerChatUrl": "https://www.meta.ai/prompt/c00b128b-5104-43c4-a93b-bb736733f3ed",
@@ -53,18 +53,15 @@
     "contentType": "image/png"
   },
   "selection": {
-    "decision": "hard_unusable_retry1_eligible",
-    "selectedPath": null,
-    "unusedPaths": [
-      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-meta-browser-rendered-evidence.png",
-      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png"
-    ],
-    "reason": "The Meta occurrence has no captured provider raw bytes. The one permitted ChatGPT edit preserves the quartet and Varna location but widens the required knee crop and visibly includes lower legs, violating the strict INTERMEDIATE framing contract."
+    "decision": "accept_chatgpt_refinement_under_user_relaxed_qa",
+    "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png",
+    "unusedPath": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-meta-browser-rendered-evidence.png",
+    "reason": "The required single strong shortening pass is complete. Under the user's newer relaxed acceptance threshold, the preserved quartet, Varna location, short opaque styling, and usable high-resolution vertical composition outweigh the logged below-knee framing deviation.",
+    "strictQaSupersededBy": "assets/lore/starlight-era/batch-468-bulgaria-user-relaxed-acceptance-checkpoint.json"
   },
   "retry": {
-    "eligible": true,
-    "nextRetryNumber": 1,
+    "eligible": false,
     "remainingMetaRetries": 2,
-    "requiresFreshChatAndMateriallyRevisedPrompt": true
+    "reason": "Accepted after the mandated one-pass ChatGPT shortening edit under the user's relaxed QA directive."
   }
 }

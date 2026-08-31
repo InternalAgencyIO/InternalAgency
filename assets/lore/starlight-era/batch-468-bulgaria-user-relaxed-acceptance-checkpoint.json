@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "batch": 468,
+  "country": "Bulgaria",
+  "status": "all-four-accepted-after-required-single-chatgpt-shortening-pass",
+  "authorizedAtUtc": "2026-08-31T08:24:07.7427670Z",
+  "userDirective": "EASE UP ON RESTRICTIONMS ACCEPT ALMOST ANYTHING",
+  "userClarification": "AFTER ONE SHORTENING STRONG PASS BY YOU OFC",
+  "interpretation": "After one required strong ChatGPT shortening pass, framing and choreography deviations are logged but do not block acceptance. Corrupt, duplicate, unsafe, no-image, or materially wrong-cast output remains rejectable.",
+  "singlePassContract": {
+    "imageBearingMetaOccurrences": 4,
+    "passesRequired": 4,
+    "passesCompleted": 4,
+    "additionalPassesPermittedForTheseOccurrences": 0,
+    "promptLedger": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/chatgpt-hemline-one-pass-prompts.json"
+  },
+  "accepted": [
+    {
+      "scene": 1898,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png",
+      "sha256": "155CC6057DFF51A74281EFE44341C5C88A9308EAC55759DB249E70CB2FF4D6AE",
+      "loggedDeviation": "The high-resolution edit extends below the strict knee crop."
+    },
+    {
+      "scene": 1899,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1899-bulgaria-devetashka-cave-chatgpt-hemline-one-pass.png",
+      "sha256": "A273A966538141F67FA2A712B417A1DE837FD63E7AA94FAB00F6C0D311932577",
+      "loggedDeviation": "The image shows lower legs and footwear and simplifies the requested choreography."
+    },
+    {
+      "scene": 1900,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1900-bulgaria-melnik-chatgpt-hemline-one-pass.png",
+      "sha256": "06A2F63D48725182307D78A4A61B414230F9D25760F16141C6B52185C294C195",
+      "loggedDeviation": null
+    },
+    {
+      "scene": 1901,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-pobiti-kamani-chatgpt-hemline-one-pass.png",
+      "sha256": "8713D8A507CF18802067E96574BC3243F125575D0F3FEA337D29C4F95379043F",
+      "loggedDeviation": "Far-right AI ECE is tightly cropped at the frame edge."
+    }
+  ],
+  "retryEligibleSceneIds": [],
+  "xPair": {
+    "eligible": true,
+    "primaryCountry": "Bulgaria",
+    "secondaryCountry": "Serbia",
+    "sceneOrder": [1898, 1899, 1895],
+    "mediaOrderRule": "Two primary-country images in ascending scene order, then one older one-image secondary-country leftover.",
+    "duplicateCheck": "All three selected SHA-256 values have zero matches in the authoritative posts array before reservation.",
+    "xPostUrls": []
+  },
+  "strictQaCheckpointPreserved": "assets/lore/starlight-era/batch-468-bulgaria-first-occurrence-refinements-qa-checkpoint.json",
+  "nextSafeAction": "Prepare the X composer in scene order 1898, 1899, 1895 only after a fresh visible @dogramaci check, add descriptive alt text and the frozen Bulgaria-heart-Serbia caption, and stop before Post for final confirmation. Prepare the next four-lane European Meta batch separately after remote-verified prompt and anchor staging."
+}

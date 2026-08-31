@@ -3,7 +3,7 @@
   "batch": 468,
   "country": "Bulgaria",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "first_occurrences_archived_qa_complete_one_accepted_three_retry1_eligible",
+  "state": "all_four_accepted_after_required_one_pass_user_relaxed_qa",
   "preparedAtUtc": "2026-08-31T07:27:19.791Z",
   "accountRequired": "leesha007",
   "sendCount": 4,
@@ -12,7 +12,7 @@
     {
       "scene": 1898,
       "occurrence": 1,
-      "status": "hard_unusable_retry1_eligible",
+      "status": "accepted_selected_chatgpt_hemline_refinement_user_relaxed_qa",
       "submittedAtUtc": "2026-08-31T07:40:02.290Z",
       "providerUrl": "https://www.meta.ai/prompt/c00b128b-5104-43c4-a93b-bb736733f3ed",
       "promptSha256": "D851CA43E359564477DD562FF8514CA01CB7D8370433D1A719AB29950D7E839B",
@@ -20,13 +20,14 @@
       "providerRawAssetCount": 0,
       "browserRenderedEvidenceCount": 1,
       "chatgptRefinementCount": 1,
-      "retryPermittedAfterQa": true,
-      "remainingMetaRetries": 2
+      "retryPermittedAfterQa": false,
+      "remainingMetaRetries": 2,
+      "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png"
     },
     {
       "scene": 1899,
       "occurrence": 1,
-      "status": "hard_unusable_retry1_eligible",
+      "status": "accepted_selected_chatgpt_hemline_refinement_user_relaxed_qa",
       "submittedAtUtc": "2026-08-31T07:40:05.369Z",
       "providerUrl": "https://www.meta.ai/prompt/1c9ac269-ee34-46a4-92aa-b0cf43fc3797",
       "promptSha256": "DD7499BEDC9417DD616CAA71C231307E12D6D500384DEF2A94BB9880BA04E9AD",
@@ -34,8 +35,9 @@
       "providerRawAssetCount": 0,
       "browserRenderedEvidenceCount": 1,
       "chatgptRefinementCount": 1,
-      "retryPermittedAfterQa": true,
-      "remainingMetaRetries": 2
+      "retryPermittedAfterQa": false,
+      "remainingMetaRetries": 2,
+      "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1899-bulgaria-devetashka-cave-chatgpt-hemline-one-pass.png"
     },
     {
       "scene": 1900,
@@ -54,7 +56,7 @@
     {
       "scene": 1901,
       "occurrence": 1,
-      "status": "hard_unusable_retry1_eligible",
+      "status": "accepted_selected_chatgpt_hemline_refinement_user_relaxed_qa",
       "submittedAtUtc": "2026-08-31T07:40:11.573Z",
       "providerUrl": "https://www.meta.ai/prompt/fc6bf306-2419-423b-861f-29c1583f8b0b",
       "promptSha256": "96336F50BDCA807D37CDD4B999AA5ECCEFDA0B0AE1F2BDA01568E8486DA0FD60",
@@ -62,8 +64,9 @@
       "providerRawAssetCount": 0,
       "browserRenderedEvidenceCount": 1,
       "chatgptRefinementCount": 1,
-      "retryPermittedAfterQa": true,
-      "remainingMetaRetries": 2
+      "retryPermittedAfterQa": false,
+      "remainingMetaRetries": 2,
+      "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-pobiti-kamani-chatgpt-hemline-one-pass.png"
     }
   ],
   "orderedIdentityAnchors": [938, 936, 937],
@@ -93,7 +96,25 @@
     "additionalChatgptPassesPermittedForTheseOccurrences": 0,
     "acceptedSceneIds": [1900],
     "retryEligibleSceneIds": [1898, 1899, 1901],
-    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-first-occurrence-refinements-qa-checkpoint.json"
+    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-first-occurrence-refinements-qa-checkpoint.json",
+    "supersededForAcceptanceBy": "assets/lore/starlight-era/batch-468-bulgaria-user-relaxed-acceptance-checkpoint.json"
+  },
+  "userRelaxedAcceptance": {
+    "authorizedAtUtc": "2026-08-31T08:24:07.7427670Z",
+    "directive": "Ease restrictions and accept almost anything after one strong shortening pass by ChatGPT.",
+    "passesCompleted": 4,
+    "additionalPassesPermittedForTheseOccurrences": 0,
+    "acceptedSceneIds": [1898, 1899, 1900, 1901],
+    "selectedAssets": [
+      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1898-bulgaria-varna-sea-garden-chatgpt-hemline-one-pass.png",
+      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1899-bulgaria-devetashka-cave-chatgpt-hemline-one-pass.png",
+      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1900-bulgaria-melnik-chatgpt-hemline-one-pass.png",
+      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-pobiti-kamani-chatgpt-hemline-one-pass.png"
+    ],
+    "retryEligibleSceneIds": [],
+    "xPairEligible": true,
+    "xCandidateSceneOrder": [1898, 1899, 1895],
+    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-user-relaxed-acceptance-checkpoint.json"
   },
   "xPostUrls": [],
   "staging": {
@@ -107,5 +128,5 @@
     "sendClicked": true,
     "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-four-lanes-staged-authorized-checkpoint.json"
   },
-  "nextSafeAction": "Stage materially revised retry1 prompts for scenes 1898, 1899, and 1901 in three fresh Meta chats with anchors 938, 936, and 937 attached exactly once in that order; keep accepted scene 1900 as the fourth visible Meta lane and one blank X composer visible; stop before every Send and before X Post for fresh confirmation."
+  "nextSafeAction": "Prepare the exact Bulgaria scenes 1898 and 1899 plus Serbia scene 1895 X composer after a fresh visible @dogramaci check, preserve the exact 2+1 media order and alt text, and stop before Post for final confirmation. Separately prepare the next four-lane European Meta batch only after its checkpoint, account, prompt, and ordered-anchor checks pass."
 }

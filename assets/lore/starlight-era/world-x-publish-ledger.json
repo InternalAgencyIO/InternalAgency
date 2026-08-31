@@ -9630,5 +9630,27 @@
     "canonicalContradictionResolved": "Full-size QA supersedes the provisional scene-1898 acceptance because its high-resolution edit shows lower legs below the strict knee crop.",
     "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-first-occurrence-refinements-qa-checkpoint.json",
     "nextSafeAction": "Stage fresh materially revised retry1 prompts for scenes 1898, 1899, and 1901 with ordered anchors 938, 936, 937, retain scene 1900 as the fourth visible Meta lane and keep one blank X composer visible, then stop before Send and before Post for fresh confirmation."
+  },
+  "latestBatch468BulgariaUserRelaxedAcceptance": {
+    "schemaVersion": 1,
+    "status": "all-four-accepted-after-required-single-chatgpt-shortening-pass",
+    "authorizedAtUtc": "2026-08-31T08:24:07.7427670Z",
+    "acceptedSceneIds": [1898, 1899, 1900, 1901],
+    "selectedAssetSha256": [
+      "155CC6057DFF51A74281EFE44341C5C88A9308EAC55759DB249E70CB2FF4D6AE",
+      "A273A966538141F67FA2A712B417A1DE837FD63E7AA94FAB00F6C0D311932577",
+      "06A2F63D48725182307D78A4A61B414230F9D25760F16141C6B52185C294C195",
+      "8713D8A507CF18802067E96574BC3243F125575D0F3FEA337D29C4F95379043F"
+    ],
+    "chatgptPassesRequired": 4,
+    "chatgptPassesCompleted": 4,
+    "additionalPassesPermittedForTheseOccurrences": 0,
+    "retryEligibleSceneIds": [],
+    "xPairEligible": true,
+    "xCandidateSceneOrder": [1898, 1899, 1895],
+    "xPostUrls": [],
+    "xPostAuthorized": false,
+    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-user-relaxed-acceptance-checkpoint.json",
+    "nextSafeAction": "After fresh visible @dogramaci verification, prepare the exact three-image X composer in scene order 1898, 1899, 1895 with descriptive alt text and frozen caption; stop before Post for final confirmation. Prepare the next European four-lane Meta batch separately only after its authority and ordered-anchor preflight passes."
   }
 }

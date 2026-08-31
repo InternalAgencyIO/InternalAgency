@@ -5,7 +5,7 @@
   "country": "Bulgaria",
   "provider": "Meta AI",
   "occurrence": 1,
-  "status": "hard_unusable_retry1_eligible",
+  "status": "accepted_selected_chatgpt_hemline_refinement_user_relaxed_qa",
   "submittedAtUtc": "2026-08-31T07:40:11.573Z",
   "capturedAtUtc": "2026-08-31T07:56:22.0719755Z",
   "providerChatUrl": "https://www.meta.ai/prompt/fc6bf306-2419-423b-861f-29c1583f8b0b",
@@ -53,18 +53,15 @@
     "contentType": "image/png"
   },
   "selection": {
-    "decision": "hard_unusable_retry1_eligible",
-    "selectedPath": null,
-    "unusedPaths": [
-      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-meta-browser-rendered-evidence.png",
-      "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-pobiti-kamani-chatgpt-hemline-one-pass.png"
-    ],
-    "reason": "The Meta occurrence has no captured provider raw bytes. The one permitted ChatGPT edit crops away a substantial part of far-right AI ECE's face, violating the complete-four-faces and identity-lock requirements."
+    "decision": "accept_chatgpt_refinement_under_user_relaxed_qa",
+    "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-pobiti-kamani-chatgpt-hemline-one-pass.png",
+    "unusedPath": "assets/lore/starlight-era/provider-evidence/batch-468-bulgaria/1901-bulgaria-meta-browser-rendered-evidence.png",
+    "reason": "The required single strong shortening pass is complete. Under the user's newer relaxed acceptance threshold, the four-person scene, recognizable face-led arrangement, unmistakable Pobiti Kamani geology, safe styling, and high-resolution extreme-close image outweigh the logged far-right edge crop.",
+    "strictQaSupersededBy": "assets/lore/starlight-era/batch-468-bulgaria-user-relaxed-acceptance-checkpoint.json"
   },
   "retry": {
-    "eligible": true,
-    "nextRetryNumber": 1,
+    "eligible": false,
     "remainingMetaRetries": 2,
-    "requiresFreshChatAndMateriallyRevisedPrompt": true
+    "reason": "Accepted after the mandated one-pass ChatGPT shortening edit under the user's relaxed QA directive."
   }
 }
