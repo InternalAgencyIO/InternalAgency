@@ -10573,7 +10573,7 @@
   },
   "latestBatch474DenmarkPreparation": {
     "schemaVersion": 1,
-    "status": "four-meta-thinking-lanes-exactly-staged-authorized-staging-remote-verified",
+    "status": "four-meta-thinking-scenes-dispatched-exactly-once-rendering",
     "preparedAtUtc": "2026-08-31T19:16:11.4719054Z",
     "batch": 474,
     "country": "Denmark",
@@ -10624,12 +10624,19 @@
     "anchorsVisibleInExactOrderAllFour": true,
     "exactPromptsVerifiedAllFour": true,
     "sendButtonsEnabledAllFour": true,
-    "sendClicks": 0,
+    "sendClicks": 4,
     "repeatSendClicks": 0,
     "xPostClicks": 0,
     "stagingRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-474-denmark-staging-git-lfs-remote-verification-checkpoint.json",
     "stagingRemoteVerifiedCommit": "239ac3bc80f087589428a53237973f41c95ff428",
     "stagingRemoteVerifiedAtUtc": "2026-08-31T19:37:21.6828325Z",
+    "dispatchedCheckpoint": "assets/lore/starlight-era/batch-474-denmark-four-lanes-dispatched-checkpoint.json",
+    "providerUrls": [
+      "https://www.meta.ai/prompt/8679cdc1-cced-45ab-9408-791fdf7b8627",
+      "https://www.meta.ai/prompt/035d571a-ac32-4d26-98d6-e39098b121d8",
+      "https://www.meta.ai/prompt/b5f10b70-9300-4364-bac7-5ec12521b39a",
+      "https://www.meta.ai/prompt/8b319617-fad8-4f6e-bef2-585582a7c1c9"
+    ],
     "nextSafeAction": "Validate and commit the exact Denmark preparation, push and prove remote/PR/LFS parity, then open four fresh Meta lanes and stage Thinking, prompts and anchors 938, 936, 937 in exact order beside the one blank X composer."
   }
 }
