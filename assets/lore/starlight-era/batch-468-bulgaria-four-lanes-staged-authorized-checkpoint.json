@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "batch": 468,
+  "country": "Bulgaria",
+  "state": "four_meta_lanes_staged_and_currently_authorized_for_one_send_each",
+  "observedAtUtc": "2026-08-31T07:37:50.1947938Z",
+  "branch": "agent/starlight-progress-archive",
+  "remoteVerifiedAuthorityHead": "f8212cab015fe56fcf2b2542951f0c5d44ae00c0",
+  "preparedCheckpoint": "assets/lore/starlight-era/batch-468-bulgaria-europe-gap-fill-prompts-prepared-checkpoint.json",
+  "canonicalContradictionResolved": {
+    "field": "chatgptHemlineRefinement.invariants",
+    "staleValue": "Serbia location",
+    "correctedValue": "Bulgaria location",
+    "correctionCommit": "f8212cab015fe56fcf2b2542951f0c5d44ae00c0"
+  },
+  "browser": {
+    "surface": "in-app Browser only",
+    "actualTabsInspected": true,
+    "ambientTabIdsTrusted": false,
+    "metaLaneCount": 4,
+    "metaTabIds": ["17", "18", "19", "20"],
+    "metaUrls": ["https://www.meta.ai/", "https://www.meta.ai/", "https://www.meta.ai/", "https://www.meta.ai/"],
+    "metaTitles": ["Meta AI", "Meta AI", "Meta AI", "Meta AI"],
+    "signedInMetaAccountVisible": "leesha007",
+    "providerLimitTextVisibleInCurrentComposers": false,
+    "supportedVisibleChooserUsed": true,
+    "hiddenInputOrWorkaroundUsed": false,
+    "xComposerCount": 1,
+    "xTabId": "21",
+    "xUrl": "https://x.com/compose/post",
+    "signedInXHandleVisible": "@dogramaci",
+    "xComposerBlank": true,
+    "xPostEnabled": false,
+    "xMutationPerformed": false
+  },
+  "orderedIdentityAnchors": [
+    {
+      "scene": 938,
+      "filename": "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "filename": "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "filename": "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "hashMatch": true,
+    "primaryLeftToRight": ["Alia", "Radiance", "Ellie", "AI ECE"]
+  },
+  "lanes": [
+    {
+      "tabId": "17",
+      "scene": 1898,
+      "cameraRoll": 24,
+      "framing": "INTERMEDIATE",
+      "promptSha256": "D851CA43E359564477DD562FF8514CA01CB7D8370433D1A719AB29950D7E839B",
+      "exactPromptVisibleAfterTrimmingOnlyAttachmentNodeWhitespace": true,
+      "attachmentCounts": [1, 1, 1],
+      "attachmentOrder": [938, 936, 937],
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "tabId": "18",
+      "scene": 1899,
+      "cameraRoll": 62,
+      "framing": "INTERMEDIATE",
+      "promptSha256": "DD7499BEDC9417DD616CAA71C231307E12D6D500384DEF2A94BB9880BA04E9AD",
+      "exactPromptVisibleAfterTrimmingOnlyAttachmentNodeWhitespace": true,
+      "attachmentCounts": [1, 1, 1],
+      "attachmentOrder": [938, 936, 937],
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "tabId": "19",
+      "scene": 1900,
+      "cameraRoll": 5,
+      "framing": "EXTREME CLOSE",
+      "promptSha256": "F9F8FF8494D433F606B7DF3ABE1901981AE769A18E8B431590E3BB1F8FDA2AAA",
+      "exactPromptVisibleAfterTrimmingOnlyAttachmentNodeWhitespace": true,
+      "attachmentCounts": [1, 1, 1],
+      "attachmentOrder": [938, 936, 937],
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "tabId": "20",
+      "scene": 1901,
+      "cameraRoll": 15,
+      "framing": "EXTREME CLOSE",
+      "promptSha256": "96336F50BDCA807D37CDD4B999AA5ECCEFDA0B0AE1F2BDA01568E8486DA0FD60",
+      "exactPromptVisibleAfterTrimmingOnlyAttachmentNodeWhitespace": true,
+      "attachmentCounts": [1, 1, 1],
+      "attachmentOrder": [938, 936, 937],
+      "sendEnabled": true,
+      "sendClicked": false
+    }
+  ],
+  "duplicatePrevention": {
+    "oldBulgariaSceneIdsNeverOpened": [1886, 1887, 1888, 1889],
+    "serbiaTerminalSceneIdsNeverReopened": [1894, 1896, 1897],
+    "providerUrlsCreated": [],
+    "providerOccurrencesCreated": 0,
+    "confirmedPromptResent": false
+  },
+  "authorization": {
+    "directUserMessage": "send authorized go",
+    "scope": "one visible Meta Send click on each of scenes 1898, 1899, 1900, and 1901 while all recorded gates remain true",
+    "xPostAuthorized": false
+  },
+  "dispatchGate": {
+    "authorityVerified": true,
+    "remotePreparedCheckpointVerified": true,
+    "accountVerified": true,
+    "promptAndAnchorPreflightPassed": true,
+    "freshActionTimeConfirmationReceived": true,
+    "mayClickMetaSend": true,
+    "mayClickXPost": false,
+    "exactNextSafeAction": "Re-inspect the four live Meta composers once more, then click each visible Send button exactly once for scenes 1898, 1899, 1900, and 1901; immediately record submission timestamps and provider URLs or terminal visible outcomes before any retry, lane refill, ChatGPT edit, or X mutation."
+  }
+}

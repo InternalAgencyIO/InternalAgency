@@ -3,7 +3,7 @@
   "batch": 468,
   "country": "Bulgaria",
   "provider": "Meta AI through the in-app Browser only",
-  "state": "prepared_no_provider_occurrences",
+  "state": "four_lanes_staged_authorized_no_provider_occurrences_yet",
   "preparedAtUtc": "2026-08-31T07:27:19.791Z",
   "accountRequired": "leesha007",
   "sendCount": 0,
@@ -28,5 +28,16 @@
   "maximumMetaRetriesPerScene": 2,
   "chatgptHemlinePassesPerTechnicallyValidMetaImage": 1,
   "xPostUrls": [],
-  "nextSafeAction": "Remote-verify the prepared checkpoint, inspect four fresh signed-in Meta composers, attach anchors 938, 936, and 937 in that exact order, verify exact prompts and supported controls, then use the current direct send authorization only while every action-time gate remains true."
+  "staging": {
+    "observedAtUtc": "2026-08-31T07:37:50.1947938Z",
+    "tabIds": ["17", "18", "19", "20"],
+    "sceneIds": [1898, 1899, 1900, 1901],
+    "orderedIdentityAnchors": [938, 936, 937],
+    "exactPromptsVerified": true,
+    "signedInAccountVisible": "leesha007",
+    "sendButtonsEnabled": true,
+    "sendClicked": false,
+    "checkpoint": "assets/lore/starlight-era/batch-468-bulgaria-four-lanes-staged-authorized-checkpoint.json"
+  },
+  "nextSafeAction": "Re-inspect all four live composers and click each visible Meta Send exactly once under the current direct user authorization; capture every provider URL or terminal outcome immediately."
 }

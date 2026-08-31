@@ -9563,7 +9563,7 @@
   },
   "latestBatch468BulgariaPreparation": {
     "schemaVersion": 1,
-    "status": "prompts-prepared-remote-verified-awaiting-browser-preflight",
+    "status": "four-meta-lanes-staged-authorized-awaiting-one-send-each",
     "preparedAtUtc": "2026-08-31T07:27:19.791Z",
     "batch": 468,
     "country": "Bulgaria",
@@ -9586,7 +9586,14 @@
     "remoteVerifiedCheckpointCommit": "d7d31440c65a0adfbbfe99719854bc1119da4e32",
     "remoteVerifiedAtUtc": "2026-08-31T07:31:46.2885359Z",
     "browserVisibilityPolicy": "Keep exactly four visible Meta lanes plus one visible X composer; close stale or terminal provider tabs only after evidence capture.",
-    "dispatchPermitted": false,
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-468-bulgaria-four-lanes-staged-authorized-checkpoint.json",
+    "stagedAtUtc": "2026-08-31T07:37:50.1947938Z",
+    "metaTabIds": ["17", "18", "19", "20"],
+    "xComposerTabId": "21",
+    "liveXHandleVisible": "@dogramaci",
+    "xComposerMutated": false,
+    "xPostAuthorized": false,
+    "dispatchPermitted": true,
     "xPostEligibleYet": false
   }
 }
