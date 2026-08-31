@@ -166,14 +166,16 @@
     "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-publication-attempt-evidence-manifest.json"
   },
   "remoteVerification": {
-    "status": "closure-retry-and-explicit-override-evidence-commits-lfs-remote-and-pr-parity-verified",
+    "status": "closure-retry-override-and-live-publication-evidence-commits-lfs-remote-and-pr-parity-verified",
     "verifiedClosureCommit": "b956d28e21c451a5613146466582fcfa17c843c8",
     "verifiedRetryEvidenceCommit": "8fc70384f8dfa0b6a71ad0b963d8781d714097a7",
     "verifiedExplicitOverrideEvidenceCommit": "584ae32138210e26c072d27ae3385422a62c4c8d",
-    "verifiedAtUtc": "2026-08-31T12:38:08.6384193Z",
+    "verifiedLivePublicationCommit": "fddc7d3c8e283b102a1350d5306ceab0abb78eff",
+    "verifiedAtUtc": "2026-08-31T13:00:43.4822658Z",
     "checkpoint": "assets/lore/starlight-era/batch-470-andorra-git-lfs-remote-verification-checkpoint.json",
     "retryCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-retry-git-lfs-remote-verification-checkpoint.json",
-    "explicitOverrideCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-git-lfs-remote-verification-checkpoint.json"
+    "explicitOverrideCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-git-lfs-remote-verification-checkpoint.json",
+    "livePublicationCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-live-git-lfs-remote-verification-checkpoint.json"
   },
   "nextSafeAction": "Commit and remote-verify the live X publication and evidence. Never resend the published assets; then resolve the next country from the newest guardian and repository authority."
 }
