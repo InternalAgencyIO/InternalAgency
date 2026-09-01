@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 476,
-  "state": "duplicate-safe-estonia-finland-x-publication-reserved-awaiting-visible-staging",
+  "state": "duplicate-safe-estonia-finland-x-composer-staged-awaiting-action-time-confirmation",
   "reservedAtUtc": "2026-09-01T06:27:43.2076800Z",
   "userDirective": "clear x backlog before final pause",
   "accountVerification": {
@@ -145,5 +145,15 @@
   "remoteVerifiedHeadBeforeReservation": "a0bceb1f4ceec09569ec9926a78c1456bd70a6bf",
   "preparationManifest": "assets/lore/starlight-era/provider-evidence/batch-476-finland/x-publication-preparation-manifest.json",
   "reservationRemoteVerificationCheckpoint": "assets/lore/starlight-era/batch-476-estonia-finland-x-reservation-git-lfs-remote-verification-checkpoint.json",
-  "nextSafeAction": "Commit and push this reservation, verify Git/LFS/remote/PR parity, then stage the exact post visibly in the single X composer and stop before Post for action-time confirmation."
+  "reservationRemoteVerifiedCommit": "9ab2c0d756ce1e700049ba7c68d5eefee011f340",
+  "reservationVerificationRecordCommit": "6bde944919278d42e46309590508f5652f52ebf9",
+  "xComposerTabId": "1",
+  "xComposerBlank": false,
+  "stagedComposerCheckpoint": "assets/lore/starlight-era/batch-476-estonia-finland-x-composer-staged-awaiting-post-confirmation-checkpoint.json",
+  "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-476-finland/x-publication-attempt-evidence-manifest.json",
+  "stagedMediaCount": 3,
+  "stagedAltTextCount": 3,
+  "stagedMadeWithAiLabelVisible": true,
+  "stagedPostEnabled": true,
+  "nextSafeAction": "Commit and push the staged evidence, verify Git/LFS/remote/PR parity, preserve the visible composer for handoff, and request action-time confirmation for exactly one public Post submission."
 }
