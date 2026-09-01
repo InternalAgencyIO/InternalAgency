@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "batch": 476,
+  "country": "Finland",
+  "state": "user-requested-24-hour-global-pause-no-provider-or-x-actions",
+  "pauseAuthority": "pause everything wrap up 24 hour break",
+  "pausedAtUtc": "2026-09-01T06:17:04.6213911Z",
+  "pausedAtEuropeIstanbul": "2026-09-01T09:17:04.6213911+03:00",
+  "resumeNotBeforeUtc": "2026-09-02T06:17:04.6213911Z",
+  "resumeNotBeforeEuropeIstanbul": "2026-09-02T09:17:04.6213911+03:00",
+  "authorizationReconciliation": {
+    "effect": "This pause supersedes every earlier all-go or similar-command authorization for dispatch, generation, retry and posting during the hold window.",
+    "automaticResumeCreated": false,
+    "reason": "The standing authority forbids creation of another automation, task, thread, worker, subagent or guardian.",
+    "freshResumeRequired": true,
+    "freshResumeCondition": "At or after the not-before timestamp, the user must explicitly resume or send go before any provider, retry or X transmission action."
+  },
+  "guardian": {
+    "existingAutomationId": "guardian-x-assistant-mission",
+    "kind": "heartbeat",
+    "previousStatus": "ACTIVE",
+    "currentStatus": "PAUSED",
+    "pausedInPlace": true,
+    "newAutomationCreated": false,
+    "promptChanged": false,
+    "scheduleChanged": false,
+    "notificationPolicyChanged": false
+  },
+  "pipelineStateAtPause": {
+    "grok": "paused until credits return",
+    "meta": "no dispatch or retry permitted during hold",
+    "chatgptImage": "no generation or edit permitted during hold",
+    "x": "no composer mutation or posting permitted during hold",
+    "scene1931": "Meta raw selected after the single ChatGPT pass ended in output-stage moderation block.",
+    "scene1932": "Meta raw selected after the single ChatGPT pass ended in output-stage moderation block.",
+    "scene1933": "One clean ChatGPT strong-shortening output selected and archived.",
+    "scene1934": "No valid raw. Initial Meta occurrence refused; retry 1 ended at temporary media-credit exhaustion. The final allowed Meta retry remains unspent.",
+    "scene1934RemainingMetaRetries": 1,
+    "xTransmissionsForBatch": 0,
+    "estoniaFinlandPairPosted": false
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-476-finland/provider-ledger.json",
+    "interimManifest": "assets/lore/starlight-era/provider-evidence/batch-476-finland/interim-evidence-manifest.json",
+    "interimInventorySha256": "81D16D6A253F5C0F97F6705D5045596663B4E5859FEE8628A38EF29F0025B4F7",
+    "interimQaCheckpoint": "assets/lore/starlight-era/batch-476-finland-three-valid-stills-interim-qa-checkpoint.json",
+    "creditGateCheckpoint": "assets/lore/starlight-era/batch-476-finland-scene-1934-first-retry-terminal-no-credit-checkpoint.json"
+  },
+  "gitBeforePauseRecord": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "f9cedf2a1e3975fb078b6e2da9620e114a3d1ea0",
+    "remoteHead": "f9cedf2a1e3975fb078b6e2da9620e114a3d1ea0",
+    "draftPrHead": "f9cedf2a1e3975fb078b6e2da9620e114a3d1ea0",
+    "ahead": 0,
+    "behind": 0,
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrStillDraft": true,
+    "targetedLfsDryRunEmpty": true
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "exactNextSafeAction": "Do nothing before 2026-09-02T09:17:04.6213911+03:00. After that boundary and only after fresh user resume authorization, fetch and verify the newest branch and draft-PR authority; inspect the paused guardian, actual in-app Browser tabs, Meta account, Thinking mode and visible credit state; keep X blank; then restage the archived scene-1934 retry prompt with anchors 938, 936, 937 visibly attached in that exact order and consume the final Meta retry exactly once only if every gate passes."
+}
