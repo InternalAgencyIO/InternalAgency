@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "batch": 476,
+  "country": "Finland",
+  "state": "24-hour-pause-record-git-lfs-remote-and-draft-pr-parity-verified",
+  "verifiedAtUtc": "2026-09-01T06:18:04.5625069Z",
+  "pauseCheckpoint": "assets/lore/starlight-era/batch-476-finland-24-hour-user-pause-checkpoint.json",
+  "pauseRecordCommit": "185fc550b8ff7c92990eb4aaa6f4768d2f47e033",
+  "git": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "185fc550b8ff7c92990eb4aaa6f4768d2f47e033",
+    "remoteHead": "185fc550b8ff7c92990eb4aaa6f4768d2f47e033",
+    "draftPrHead": "185fc550b8ff7c92990eb4aaa6f4768d2f47e033",
+    "ahead": 0,
+    "behind": 0,
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "targetedLfsDryRunEmpty": true
+  },
+  "hold": {
+    "pausedAtUtc": "2026-09-01T06:17:04.6213911Z",
+    "resumeNotBeforeUtc": "2026-09-02T06:17:04.6213911Z",
+    "resumeNotBeforeEuropeIstanbul": "2026-09-02T09:17:04.6213911+03:00",
+    "freshResumeAuthorizationRequired": true,
+    "providerActionsPermittedDuringHold": false,
+    "xActionsPermittedDuringHold": false
+  },
+  "guardian": {
+    "automationId": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "newAutomationCreated": false
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "nextSafeAction": "Commit and push this verification record, prove the resulting head is again at local, remote and draft-PR parity, then perform no further action until the hold expires and the user explicitly resumes."
+}
