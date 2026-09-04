@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "state": "git-lfs-and-draft-pr-remote-parity-verified",
+  "verifiedAtUtc": "2026-09-04T18:10:03.4886915Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "closureCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-four-stills-closed-qa-checkpoint.json",
+    "closureCommit": "b6280520ca899e54f013799f3592d6309732e5b6"
+  },
+  "gitParity": {
+    "localHead": "b6280520ca899e54f013799f3592d6309732e5b6",
+    "originBranchHead": "b6280520ca899e54f013799f3592d6309732e5b6",
+    "draftPrHead": "b6280520ca899e54f013799f3592d6309732e5b6",
+    "allEqual": true
+  },
+  "lfs": {
+    "dryRunPendingUploads": 0,
+    "trackedPath": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1975-slovakia-bratislava-castle-danube-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png",
+    "filter": "lfs",
+    "diff": "lfs",
+    "merge": "lfs",
+    "text": "unset",
+    "objectPresentInLocalLfsStore": true,
+    "pointerOidSha256": "aa9b0a681c86835f53cc98d732b4481bf078c287e885bed8cc317c96ecc168ca",
+    "pointerSize": 2247431,
+    "workingTreeSha256": "AA9B0A681C86835F53CC98D732B4481BF078C287E885BED8CC317C96ECC168CA",
+    "workingTreeBytes": 2247431,
+    "pointerMatchesWorkingTree": true,
+    "broadFsckSkipped": true,
+    "broadFsckSkippedReason": "The earlier repository-wide scan reported noisy pre-existing missing-path errors unrelated to Batch 487. Batch-scoped tracking, pointer, object-presence, dry-run upload and remote-head checks passed."
+  },
+  "closureEvidence": {
+    "manifest": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/closure-evidence-manifest.json",
+    "fileCountBeforeManifestSelf": 9,
+    "totalBytesBeforeManifestSelf": 3446515,
+    "inventorySha256": "4F25E4C867E50CE07D0E0FEDD0673914182EC6620831B897203902ED6E2D6BD3",
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "repoImagesScanned": 4979
+  },
+  "publication": {
+    "slovakiaXPublications": 0,
+    "currentComposerCountryPair": ["Monaco", "North Macedonia"],
+    "xAccount": "@dogramaci",
+    "currentComposerRetainedIntact": true,
+    "visiblePostControlFailures": 2,
+    "knownTransmissions": 0,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "ACTIVE",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true,
+    "notStarlightAuthority": true
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "nextSafeAction": "Commit and push this verification checkpoint, reverify local, origin and Draft PR parity at the new head, then leave the four Meta lanes and the intact failed Monaco-North Macedonia X composer untouched. A new lane cannot safely replace the Scene 1976 residual draft until the user gives a fresh action-time instruction to discard it or manually clears it."
+}
