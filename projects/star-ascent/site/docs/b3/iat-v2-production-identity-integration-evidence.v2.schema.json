@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internalagency.io/schemas/iat-v2-production-identity-integration-evidence.v2.schema.json",
+  "title": "IAT V2 canonical-trust-pinned observer-signed nonproduction X and D1 integration evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "predicate",
+    "environment",
+    "sourceBinding",
+    "runBinding",
+    "trustBindingSha256",
+    "correlationNonceSha256",
+    "xObservation",
+    "d1Observation",
+    "scenarios",
+    "safety",
+    "observedAtUtc",
+    "expiresAtUtc",
+    "receiptUrls",
+    "mainnetStatus"
+  ],
+  "properties": {
+    "schema": {
+      "const": "iat-v2-production-identity-integration-evidence/v2"
+    },
+    "status": { "const": "DIRECT_EVIDENCE_COMPLETE" },
+    "predicate": { "const": "PRODUCTION_IDENTITY_INTEGRATION_REHEARSAL" },
+    "environment": { "const": "NONPRODUCTION_X_CLOUDFLARE_INTEGRATION" },
+    "sourceBinding": { "$ref": "#/$defs/sourceBinding" },
+    "runBinding": { "$ref": "#/$defs/runBinding" },
+    "trustBindingSha256": { "$ref": "#/$defs/sha256" },
+    "correlationNonceSha256": { "$ref": "#/$defs/sha256" },
+    "xObservation": { "$ref": "#/$defs/observation" },
+    "d1Observation": { "$ref": "#/$defs/observation" },
+    "scenarios": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/scenario" }
+    },
+    "safety": { "$ref": "#/$defs/safety" },
+    "observedAtUtc": { "type": "string", "format": "date-time" },
+    "expiresAtUtc": { "type": "string", "format": "date-time" },
+    "receiptUrls": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": { "type": "string", "format": "uri" },
+      "uniqueItems": true
+    },
+    "mainnetStatus": { "const": "HOLD" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "tree", "programArtifactSha256"],
+      "properties": {
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "tree": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "programArtifactSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "runBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "harnessSha256",
+        "environmentIdentitySha256",
+        "startedAtUtc",
+        "completedAtUtc"
+      ],
+      "properties": {
+        "harnessSha256": { "$ref": "#/$defs/sha256" },
+        "environmentIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "startedAtUtc": { "type": "string", "format": "date-time" },
+        "completedAtUtc": { "type": "string", "format": "date-time" }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "stateBefore",
+        "envelope",
+        "requestObservationBase64url",
+        "responseObservationBase64url",
+        "expectedRequestNonceSha256",
+        "verificationReceipt"
+      ],
+      "properties": {
+        "sourceId": { "type": "string" },
+        "stateBefore": { "type": "object" },
+        "envelope": { "type": "object" },
+        "requestObservationBase64url": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "responseObservationBase64url": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "expectedRequestNonceSha256": { "$ref": "#/$defs/sha256" },
+        "verificationReceipt": { "type": "object" }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "result", "evidenceSha256"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]{7,63}$" },
+        "result": { "const": "PASS" },
+        "evidenceSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentialMaterialIncluded",
+        "oauthTokenRetained",
+        "personalDataIncluded",
+        "walletAccessed",
+        "signingPerformed",
+        "simulationForSigningPerformed",
+        "broadcastingPerformed",
+        "mainnetRequestPerformed",
+        "productionResourceMutationPerformed",
+        "nonproductionNetworkRequestsPerformed",
+        "nonproductionD1MutationPerformed",
+        "authorizesMainnet"
+      ],
+      "properties": {
+        "credentialMaterialIncluded": { "const": false },
+        "oauthTokenRetained": { "const": false },
+        "personalDataIncluded": { "const": false },
+        "walletAccessed": { "const": false },
+        "signingPerformed": { "const": false },
+        "simulationForSigningPerformed": { "const": false },
+        "broadcastingPerformed": { "const": false },
+        "mainnetRequestPerformed": { "const": false },
+        "productionResourceMutationPerformed": { "const": false },
+        "nonproductionNetworkRequestsPerformed": { "const": true },
+        "nonproductionD1MutationPerformed": { "const": true },
+        "authorizesMainnet": { "const": false }
+      }
+    }
+  }
+}

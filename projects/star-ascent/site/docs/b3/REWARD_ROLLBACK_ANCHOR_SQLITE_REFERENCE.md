@@ -173,8 +173,9 @@ heads, and comparison results preserve these broader fields as false:
 
 Every artifact remains `mainnetStatus: "HOLD"`. The predecessor provider
 module also keeps provider identity, key ownership, registry authenticity,
-independent review, and activation claims false. Local storage of a valid
-signature projection does not strengthen any of those facts.
+source-bound automated direct evidence, and activation claims false. Local
+storage of a valid signature projection does not strengthen any of those
+facts.
 
 ## Remaining production work
 

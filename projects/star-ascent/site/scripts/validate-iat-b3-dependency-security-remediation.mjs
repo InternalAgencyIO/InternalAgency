@@ -7,9 +7,9 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const DEPENDENCY_SECURITY_REMEDIATION_SCHEMA =
-  "iat-b3-dependency-security-remediation/v1";
+  "iat-b3-dependency-security-remediation/v2";
 export const DEPENDENCY_SECURITY_REMEDIATION_STATUS =
-  "TECHNICAL_REMEDIATION_COMPLETE_INDEPENDENT_ACCEPTANCE_PENDING";
+  "TECHNICAL_REMEDIATION_COMPLETE_AUTOMATED_DIRECT_EVIDENCE_PENDING";
 export const REMEDIATION_COMMIT = "57478cd8e2dff3e91cccbf976895f93b63b2cc9b";
 export const REMEDIATION_PARENT = "1bc5155d0e3009b728e41b4b607113b0d253f210";
 
@@ -34,7 +34,7 @@ const TOP_LEVEL_KEYS = Object.freeze([
   "auditObservations",
   "remediations",
   "informationalFindings",
-  "independentReview",
+  "automatedDirectEvidence",
   "technicalRemediationComplete",
   "zeroKnownVulnerabilitiesObserved",
   "zeroUnacceptedDependencyFindings",
@@ -55,7 +55,7 @@ const CERTIFIES = Object.freeze([
 const DOES_NOT_CERTIFY = Object.freeze([
   "FUTURE_REGISTRY_OR_ADVISORY_DATABASE_STATE",
   "TRANSITIVE_UNMAINTAINED_DEPENDENCY_RISK_ACCEPTANCE",
-  "INDEPENDENT_SECURITY_REVIEW_ACCEPTANCE",
+  "SOURCE_BOUND_AUTOMATED_SECURITY_EVIDENCE_CLOSURE",
   "PRODUCTION_BINARY_DEVNET_RELEASE_OR_MAINNET_AUTHORIZATION",
 ]);
 
@@ -123,8 +123,22 @@ const EXPECTED_INFORMATIONAL = Object.freeze([Object.freeze({
   patchedVersions: [],
   unaffectedVersions: [],
   accepted: false,
-  disposition: "PENDING_INDEPENDENT_RISK_ACCEPTANCE",
+  disposition: "PENDING_EXPLICIT_OWNER_RISK_DECISION",
 })]);
+
+const EMPTY_AUTOMATED_DIRECT_EVIDENCE = Object.freeze({
+  schema: "iat-b3-dependency-security-automated-direct-evidence/v1",
+  status: "SOURCE_BOUND_RECEIPT_STATE_ENDPOINT_EVIDENCE_UNOBSERVED",
+  receiptSha256: null,
+  stateDigestSha256: null,
+  endpointEvidenceSha256: null,
+  observedAtUtc: null,
+  freshnessWindowSeconds: 900,
+  directEvidenceOnly: true,
+  packetMaySelectEvidenceSources: false,
+  noSelfAttestation: true,
+  humanReviewerRequired: false,
+});
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const exactJson = (left, right) => JSON.stringify(left) === JSON.stringify(right);
@@ -175,7 +189,7 @@ function result(violations) {
     zeroKnownVulnerabilitiesObserved: violations.length === 0,
     zeroUnacceptedDependencyFindings: false,
     completionPredicateSatisfied: false,
-    independentReviewAccepted: false,
+    automatedDirectEvidenceComplete: false,
     activationReady: false,
     releaseAuthorizationVerified: false,
     mainnetExecutionAuthorized: false,
@@ -219,12 +233,8 @@ export function validateDependencySecurityRemediationManifest(
     || !exactJson(manifest.informationalFindings, EXPECTED_INFORMATIONAL)) {
     violations.push("technical evidence: exact toolchain, before/after inventory, or finding ledger drifted");
   }
-  if (!exactKeys(manifest.independentReview, ["accepted", "reviewerIdentity", "reviewedAtUtc", "acceptanceReference"])
-    || manifest.independentReview.accepted !== false
-    || manifest.independentReview.reviewerIdentity !== null
-    || manifest.independentReview.reviewedAtUtc !== null
-    || manifest.independentReview.acceptanceReference !== null) {
-    violations.push("independentReview: packet must remain explicitly unaccepted");
+  if (!exactJson(manifest.automatedDirectEvidence, EMPTY_AUTOMATED_DIRECT_EVIDENCE)) {
+    violations.push("automatedDirectEvidence: exact source-bound receipt/state/endpoint evidence remains unobserved");
   }
   if (manifest.technicalRemediationComplete !== true
     || manifest.zeroKnownVulnerabilitiesObserved !== true

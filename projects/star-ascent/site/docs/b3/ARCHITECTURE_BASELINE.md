@@ -26,8 +26,12 @@ Architecture branch: `agent/iat-b3-architecture`
 7. A selected result rejects every public and confidential canonical IAT
    ownership transfer until the next fixed UTC+03:00 protocol-day boundary at
    00:01 and the next day is finalized open.
-8. The decision uses a canonically lagged Solana ancestor slot hash, with its
-   limited leader, scheduler, and finalizer-influence risks disclosed.
+8. The decision uses a canonically lagged Solana ancestor slot hash selected
+   relative to the invocation slot. A fixed lag does not remove timing
+   selection: a prospective finalizer can wait across eligible ancestor hashes
+   before submitting, while leaders and schedulers can also influence ordering.
+   This material influence is disclosed and must be explicitly owner-accepted
+   before the entropy input can freeze.
 9. The IAT law has no privileged transfer bypass, external oracle, result
    override, or reroll after finalization.
 10. Public read-only access continues during a selected lockdown.

@@ -1,16 +1,15 @@
 {
-  "handoffVersion": 1,
+  "handoffVersion": 2,
   "status": "HOLD",
   "network": "mainnet-beta",
-  "handoffScope": "Genesis approval handoff only; this file never authorizes a transaction or publication.",
+  "handoffScope": "Genesis automated evidence handoff only; this file never authorizes a transaction or publication.",
   "sourceArtifacts": {
     "manifestPath": "launch/genesis-manifest.template.json",
     "signingChecklistPath": "launch/genesis-signing-checklist.template.json",
     "devnetRehearsalPath": "launch/devnet-rehearsal.template.json"
   },
-  "approval": {
-    "releaseOwnerLabel": null,
-    "independentVerifierLabel": null,
+  "automatedClosure": {
+    "observationMode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
     "manifestDigest": null,
     "destinationDigest": null,
     "releaseSnapshotPath": "launch/release-snapshot.generated.json",
@@ -18,13 +17,16 @@
     "manifestSha256": null,
     "signingChecklistSha256": null,
     "devnetRehearsalSha256": null,
-    "approvedAtUtc": null
+    "observedAtUtc": null
   },
   "holdControls": {
     "noSecretsInHandoff": true,
     "noTransactionAuthorityGranted": true,
     "noPublicationBeforeEvidence": true,
     "returnToHoldOnAnyMismatch": true,
-    "correctionOwnerLabel": null
+    "automatedSourceReceiptStateOnly": true,
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true
   }
 }

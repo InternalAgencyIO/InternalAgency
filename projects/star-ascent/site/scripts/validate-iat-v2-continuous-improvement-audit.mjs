@@ -60,7 +60,7 @@ const signoffRecord = evidenceIndex.records.find(({ file }) => file === "v2-feat
 check(receipt?.status === ledger.publicEvidence.historicalFinalizedReceipt && receipt.transactions === 29, "historical 29-of-29 receipt mismatch");
 check(signoffRecord?.status.includes("PRIOR_ARTIFACT") && signoffRecord.status.includes("MAINNET_HOLD"), "historical signoff must remain prior-artifact HOLD evidence");
 check(evidenceIndex.currentRemediationState.freshSignedDevnetEvidence === "REQUIRED_NOT_COMPLETE", "current remediation signed Devnet requirement changed");
-check(evidenceIndex.currentRemediationState.independentReview === "REQUIRED_NOT_COMPLETE", "current remediation independent-review requirement changed");
+check(evidenceIndex.currentRemediationState.automatedDirectEvidence === "REQUIRED_NOT_COMPLETE", "current remediation automated direct-evidence requirement changed");
 check(evidenceIndex.currentIdentityHardeningState.actualXOAuthAndD1Integration === "REQUIRED_NOT_COMPLETE", "actual X OAuth/D1 requirement changed");
 
 const historicalSignoff = readJson(resolve(dirname(evidenceIndexPath), "v2-feature-independent-signoff-20260801T055736Z.json"));

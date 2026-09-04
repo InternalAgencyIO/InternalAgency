@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "iat-b3-owner-input/v1",
+  "title": "IAT B3 nonauthorizing owner input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "profile",
+    "status",
+    "inputSha256",
+    "scope",
+    "sourcePolicyBinding",
+    "standingPermissions",
+    "acceptSourceLockedDefaults",
+    "policyArtifacts",
+    "ownerChoices",
+    "transitPolicy",
+    "authorizationBoundary",
+    "truth"
+  ],
+  "properties": {
+    "$schema": { "const": "./iat-b3-owner-input.v1.schema.json" },
+    "schema": { "const": "iat-b3-owner-input/v1" },
+    "profile": { "const": "PRODUCTION" },
+    "status": { "const": "HOLD" },
+    "inputSha256": { "$ref": "#/$defs/sha256OrNull" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "canonicalOwnerChoiceFieldCount",
+        "ownerChoicesAreCryptographicSignatures",
+        "sensitiveMaterialAccepted",
+        "mayAuthorizeExecution"
+      ],
+      "properties": {
+        "contract": { "const": "NONAUTHORIZING_OWNER_POLICY_INPUT_ONLY" },
+        "canonicalOwnerChoiceFieldCount": { "const": 38 },
+        "ownerChoicesAreCryptographicSignatures": { "const": false },
+        "sensitiveMaterialAccepted": { "const": false },
+        "mayAuthorizeExecution": { "const": false }
+      }
+    },
+    "sourcePolicyBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "schema", "sha256", "byteLength", "status"],
+      "properties": {
+        "path": { "const": "docs/b3/iat-b3-owner-policy-freeze.v1.json" },
+        "schema": { "const": "iat-b3-owner-policy-freeze/v2" },
+        "sha256": { "const": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06" },
+        "byteLength": { "const": 12681 },
+        "status": { "const": "BLOCKED" }
+      }
+    },
+    "standingPermissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "localWslDockerInspection",
+        "offlineDerivedImageCreation",
+        "localContainerBuildsAndRehearsal",
+        "policyArtifactDrafting",
+        "cryptographicProof",
+        "mayAuthorizeSignaturesOrExternalExecution"
+      ],
+      "properties": {
+        "source": { "const": "EXPLICIT_USER_RESPONSE_IN_CURRENT_TASK" },
+        "localWslDockerInspection": { "const": true },
+        "offlineDerivedImageCreation": { "const": true },
+        "localContainerBuildsAndRehearsal": { "const": true },
+        "policyArtifactDrafting": { "const": true },
+        "cryptographicProof": { "const": false },
+        "mayAuthorizeSignaturesOrExternalExecution": { "const": false }
+      }
+    },
+    "acceptSourceLockedDefaults": { "enum": [null, true] },
+    "policyArtifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scoringPolicy",
+        "followerSnapshotPolicy",
+        "prizePolicy",
+        "canonicalAccountSet",
+        "fundingSourcePolicy",
+        "canonicalTransitDestinationManifest"
+      ],
+      "properties": {
+        "scoringPolicy": { "$ref": "#/$defs/artifactBinding" },
+        "followerSnapshotPolicy": { "$ref": "#/$defs/artifactBinding" },
+        "prizePolicy": { "$ref": "#/$defs/artifactBinding" },
+        "canonicalAccountSet": { "$ref": "#/$defs/artifactBinding" },
+        "fundingSourcePolicy": { "$ref": "#/$defs/artifactBinding" },
+        "canonicalTransitDestinationManifest": { "$ref": "#/$defs/artifactBinding" }
+      }
+    },
+    "ownerChoices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["core", "faction", "genesis", "productionIdentity", "authorityPublicKeys", "funding"],
+      "properties": {
+        "core": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fixedBeneficiary"],
+          "properties": { "fixedBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" } }
+        },
+        "faction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sybilPolicy",
+            "weeklyEpochAnchorUnixSeconds",
+            "communityCarveOutBaseUnits",
+            "weeklyEmissionBaseUnits",
+            "fundingHorizonWeeks",
+            "unusedBalanceDestination",
+            "nftPrizePolicy",
+            "claimExpirySeconds"
+          ],
+          "properties": {
+            "sybilPolicy": {
+              "enum": [null, "PRESERVED_WALLET_AND_IMMUTABLE_X_BINDING", "AUDITED_ONCHAIN_IDENTITY_COMMITMENT"]
+            },
+            "weeklyEpochAnchorUnixSeconds": { "type": ["integer", "null"], "minimum": 0 },
+            "communityCarveOutBaseUnits": { "$ref": "#/$defs/positiveDecimalOrNull" },
+            "weeklyEmissionBaseUnits": { "$ref": "#/$defs/positiveDecimalOrNull" },
+            "fundingHorizonWeeks": { "type": ["integer", "null"], "minimum": 1 },
+            "unusedBalanceDestination": { "$ref": "#/$defs/publicKeyOrNull" },
+            "nftPrizePolicy": { "enum": [null, "NFT_PRIZES_DISABLED", "NFT_PRIZES_DEFINED_IN_PRIZE_POLICY"] },
+            "claimExpirySeconds": { "type": ["integer", "null"], "minimum": 1 }
+          }
+        },
+        "genesis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "communityOwner",
+            "treasuryBeneficiary",
+            "ecosystemBeneficiary",
+            "coreBeneficiary",
+            "liquidityBeneficiary",
+            "factionCarveOutBaseUnits"
+          ],
+          "properties": {
+            "communityOwner": { "$ref": "#/$defs/publicKeyOrNull" },
+            "treasuryBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+            "ecosystemBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+            "coreBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+            "liquidityBeneficiary": { "$ref": "#/$defs/publicKeyOrNull" },
+            "factionCarveOutBaseUnits": { "$ref": "#/$defs/positiveDecimalOrNull" }
+          }
+        },
+        "productionIdentity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "publicKeyDisposition",
+            "lawProgramId",
+            "economyProgramId",
+            "canonicalMint",
+            "clusterIdentityPolicy",
+            "entropyLagSlots",
+            "entropyRiskAcceptance"
+          ],
+          "properties": {
+            "publicKeyDisposition": { "enum": ["UNSPECIFIED", "PUBLIC_KEYS_PROVIDED", "PUBLIC_KEYS_DEFERRED"] },
+            "lawProgramId": { "$ref": "#/$defs/publicKeyOrNull" },
+            "economyProgramId": { "$ref": "#/$defs/publicKeyOrNull" },
+            "canonicalMint": { "$ref": "#/$defs/publicKeyOrNull" },
+            "clusterIdentityPolicy": {
+              "enum": [
+                null,
+                "SAME_LAW_ECONOMY_AND_MINT_IDS_ACROSS_CLUSTERS",
+                "SAME_PROGRAM_IDS_DISTINCT_MINT_PER_CLUSTER",
+                "DISTINCT_PROGRAM_AND_MINT_IDS_PER_CLUSTER"
+              ]
+            },
+            "entropyLagSlots": { "type": ["integer", "null"], "minimum": 1, "maximum": 512 },
+            "entropyRiskAcceptance": {
+              "enum": [null, "ACCEPT_LAGGED_SLOT_HASH_WITH_FINALIZER_TIMING_INFLUENCE_AND_LIMITED_PROBABILITY_CLAIMS"]
+            }
+          }
+        },
+        "authorityPublicKeys": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ceremonySignerPublicKey",
+            "lawUpgradeAuthorityPublicKey",
+            "economyUpgradeAuthorityPublicKey",
+            "payerPublicKey"
+          ],
+          "properties": {
+            "ceremonySignerPublicKey": { "$ref": "#/$defs/publicKeyOrNull" },
+            "lawUpgradeAuthorityPublicKey": { "$ref": "#/$defs/publicKeyOrNull" },
+            "economyUpgradeAuthorityPublicKey": { "$ref": "#/$defs/publicKeyOrNull" },
+            "payerPublicKey": { "$ref": "#/$defs/publicKeyOrNull" }
+          }
+        },
+        "funding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ceremonyFloorLamports"],
+          "properties": {
+            "ceremonyFloorLamports": {
+              "anyOf": [
+                { "type": "null" },
+                { "type": "string", "pattern": "^(?:[3-9][0-9]{9}|[1-9][0-9]{10,})$" }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "transitPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selectedPolicyId", "ownerPublicKey"],
+      "properties": {
+        "selectedPolicyId": {
+          "enum": [null, "TREZOR_MODEL_T_CONTROLLED_FULL_SUPPLY_TRANSIT", "REJECT_ENGINEERING_RECOMMENDATION"]
+        },
+        "ownerPublicKey": { "$ref": "#/$defs/publicKeyOrNull" }
+      }
+    },
+    "authorizationBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalPolicyMutationAuthorized",
+        "networkDownloadAuthorized",
+        "systemProvisioningAuthorized",
+        "keyGenerationAuthorized",
+        "modelTSignatureAuthorized",
+        "rpcMutationAuthorized",
+        "publicDevnetAuthorized",
+        "deploymentAuthorized",
+        "fundingSpendAuthorized",
+        "activationAuthorized",
+        "authorityRevocationAuthorized",
+        "releaseAuthorized",
+        "mainnetExecutionAuthorized",
+        "mainnetStatus"
+      ],
+      "properties": {
+        "canonicalPolicyMutationAuthorized": { "const": false },
+        "networkDownloadAuthorized": { "const": false },
+        "systemProvisioningAuthorized": { "const": false },
+        "keyGenerationAuthorized": { "const": false },
+        "modelTSignatureAuthorized": { "const": false },
+        "rpcMutationAuthorized": { "const": false },
+        "publicDevnetAuthorized": { "const": false },
+        "deploymentAuthorized": { "const": false },
+        "fundingSpendAuthorized": { "const": false },
+        "activationAuthorized": { "const": false },
+        "authorityRevocationAuthorized": { "const": false },
+        "releaseAuthorized": { "const": false },
+        "mainnetExecutionAuthorized": { "const": false },
+        "mainnetStatus": { "const": "HOLD" }
+      }
+    },
+    "truth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chainTruthObserved",
+        "mainnetGenesisHashOwnerSupplied",
+        "externalEvidenceAccepted",
+        "modelTCapabilityObserved",
+        "modelTSignatureObserved",
+        "executionEvidenceObserved",
+        "ownerInputMayCloseEvidenceGates"
+      ],
+      "properties": {
+        "chainTruthObserved": { "const": false },
+        "mainnetGenesisHashOwnerSupplied": { "const": false },
+        "externalEvidenceAccepted": { "const": false },
+        "modelTCapabilityObserved": { "const": false },
+        "modelTSignatureObserved": { "const": false },
+        "executionEvidenceObserved": { "const": false },
+        "ownerInputMayCloseEvidenceGates": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "sha256OrNull": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      ]
+    },
+    "publicKeyOrNull": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$" }
+      ]
+    },
+    "positiveDecimalOrNull": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[1-9][0-9]*$" }
+      ]
+    },
+    "artifactBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "sha256"],
+      "properties": {
+        "status": { "enum": ["UNSPECIFIED", "NOT_YET_BOUND", "EXISTING_SHA256"] },
+        "sha256": { "$ref": "#/$defs/sha256OrNull" }
+      }
+    }
+  }
+}

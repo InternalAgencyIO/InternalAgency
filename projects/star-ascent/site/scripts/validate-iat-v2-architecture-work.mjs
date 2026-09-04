@@ -3,7 +3,11 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateArchitectureSourceLineage } from "./iat-architecture-source-lineage.mjs";
+import {
+  createArchitectureGitEnvironment,
+  inspectArchitectureSourceAncestry,
+  validateArchitectureSourceLineage,
+} from "./iat-architecture-source-lineage.mjs";
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const repositoryRoot = resolve(siteRoot, "..", "..", "..");
@@ -16,6 +20,8 @@ const proof = readJson("hydration-proof.json");
 const successorManifest = JSON.parse(readFileSync(join(successorAuditDir, "manifest.json"), "utf8"));
 const reviewedLocalizationPolicy = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "reviewed-localization-policy.json"), "utf8"));
 const currentPayloadContract = JSON.parse(readFileSync(join(siteRoot, "app", "i18n", "payload-contract.json"), "utf8"));
+const EXACT_COMMIT = /^[0-9a-f]{40}$/u;
+const architectureGitEnvironment = createArchitectureGitEnvironment();
 
 function fail(message) {
   throw new Error(`IAT V2 architecture work validation failed: ${message}`);
@@ -31,14 +37,31 @@ function git(args) {
     encoding: "utf8",
     maxBuffer: 32 * 1024 * 1024,
     windowsHide: true,
+    env: architectureGitEnvironment,
   }).trim();
 }
+
+function resolveDeclaredSourceHead(environment = process.env) {
+  const supplied = Object.hasOwn(environment, "IAT_V2_SOURCE_HEAD_SHA");
+  const value = supplied ? environment.IAT_V2_SOURCE_HEAD_SHA : undefined;
+  if (supplied) {
+    assert(EXACT_COMMIT.test(value ?? ""), "IAT_V2_SOURCE_HEAD_SHA must be an exact lowercase 40-character commit");
+    return value;
+  }
+  assert(environment.GITHUB_ACTIONS !== "true", "IAT_V2_SOURCE_HEAD_SHA is mandatory when GITHUB_ACTIONS=true");
+  const observedHead = git(["rev-parse", "--verify", "HEAD^{commit}"]);
+  assert(EXACT_COMMIT.test(observedHead), "locally derived HEAD is not an exact lowercase 40-character commit");
+  return observedHead;
+}
+
+const declaredSourceHead = resolveDeclaredSourceHead();
 
 function commitExists(commit) {
   return spawnSync("git", ["cat-file", "-e", `${commit}^{commit}`], {
     cwd: repositoryRoot,
     encoding: "utf8",
     windowsHide: true,
+    env: architectureGitEnvironment,
   }).status === 0;
 }
 
@@ -47,6 +70,7 @@ function isAncestor(ancestor, descendant) {
     cwd: repositoryRoot,
     encoding: "utf8",
     windowsHide: true,
+    env: architectureGitEnvironment,
   }).status === 0;
 }
 
@@ -83,7 +107,12 @@ const lineage = validateArchitectureSourceLineage({
   successorManifest,
   commitExists,
   treeForCommit: (commit) => git(["rev-parse", `${commit}^{tree}`]),
-  isAncestor,
+  inspectAncestry: (ancestor, descendant) => inspectArchitectureSourceAncestry({
+    repositoryRoot,
+    ancestor,
+    descendant,
+  }),
+  currentHead: declaredSourceHead,
 });
 assert(lineage.historicalSourceCommit === sourceCommit, "lineage historical source commit differs");
 

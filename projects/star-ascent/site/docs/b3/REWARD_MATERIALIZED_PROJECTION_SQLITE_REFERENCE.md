@@ -70,7 +70,9 @@ distinguish a self-consistent older file. An externally durable authenticated
 anchor remains required, and the separate anchor and projection databases do
 not share a transaction.
 
-No provider identity, production credential, trust root, external durability, independent review, deployment, activation, or Mainnet authorization is asserted here.
+No provider identity, production credential, trust root, external durability,
+source-bound automated direct evidence, deployment, activation, or Mainnet
+authorization is asserted here.
 
 ## Hostile verification
 

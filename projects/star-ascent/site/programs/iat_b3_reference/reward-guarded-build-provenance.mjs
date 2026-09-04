@@ -79,7 +79,7 @@ const RECEIPT_KEYS = Object.freeze([
   "rollbackProtectionVerified",
   "materializedProjectionStateVerified",
   "externalSideEffectsAuthorized",
-  "independentReviewAccepted",
+  "sourceBoundAutomatedDirectEvidenceVerified",
   "activationReady",
   "mainnetStatus",
   "receiptSha256",
@@ -406,7 +406,7 @@ export function validateRewardGuardedBuildProvenanceReceipt(receipt) {
     || receipt.rollbackProtectionVerified !== false
     || receipt.materializedProjectionStateVerified !== false
     || receipt.externalSideEffectsAuthorized !== false
-    || receipt.independentReviewAccepted !== false
+    || receipt.sourceBoundAutomatedDirectEvidenceVerified !== false
     || receipt.activationReady !== false
     || receipt.mainnetStatus !== REWARD_GUARDED_BUILD_PROVENANCE_MAINNET_STATUS) {
     throw new Error("INVALID_REWARD_GUARDED_BUILD_PROVENANCE_RECEIPT");
@@ -558,7 +558,7 @@ export function executeRewardGuardedBuildRecipe({ recipe, artifactRootDirectory 
     rollbackProtectionVerified: false,
     materializedProjectionStateVerified: false,
     externalSideEffectsAuthorized: false,
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     activationReady: false,
     mainnetStatus: REWARD_GUARDED_BUILD_PROVENANCE_MAINNET_STATUS,
   };

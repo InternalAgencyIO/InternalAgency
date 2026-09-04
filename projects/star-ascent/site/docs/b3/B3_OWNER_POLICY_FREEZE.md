@@ -12,7 +12,7 @@ The canonical manifest intentionally leaves every unresolved owner choice
 `null`. Its immutable assurance surface remains false with `mainnetStatus:
 "HOLD"`. A copy with every choice populated may be *structurally complete*, but
 the validator still returns false for owner authentication, external and
-engineering evidence, chain truth, reviewed binary bindings, Genesis
+engineering evidence, chain truth, source-bound binary bindings, Genesis
 conservation, ceremony funding, Devnet, activation, release, and Mainnet.
 
 ## Safe choice order
@@ -30,7 +30,11 @@ Choices are consumed only in this order:
    faction carve-out while retaining all V2 amounts, cliffs, and lane order.
 5. `PRODUCTION_IDENTITY_INPUT_FREEZE` supplies three distinct production
    identities plus cluster, entropy, metadata, and canonical seed-table
-   choices.
+   choices. Choosing an entropy lag alone is insufficient: the owner must
+   explicitly accept the lagged-slot-hash construction's finalizer-timing
+   influence and limit probability claims to the exact threshold for a
+   supplied hash. Otherwise the architecture must be redesigned before this
+   node can complete.
 6. `B3_COST_CEREMONY_FUNDING` supplies only public/accountable payer and funding
    policy inputs after final identity-dependent costs can be measured.
 
@@ -58,7 +62,10 @@ The packet repeats only constraints already fixed by V2 or B3 law, including:
   and treasury-to-ecosystem-to-liquidity reward order are retained exactly.
 - Identity inputs retain the Daily Law domain, Mainnet-only canonical scope,
   22 ordered seed roles, Token-2022, nine decimals, the exact two-extension
-  allowlist, and null/absent terminal authorities.
+  allowlist, and null/absent terminal authorities. The entropy construction
+  does not claim an unbiased or exact realized probability and requires
+  source-bound automated delayed-finalizer, grinding, and leader-influence
+  measurement.
 - The owner-frozen aggregate fresh-payer peak ceiling is 3,000,000,000
   lamports. Crossing it requires a new exact owner ceiling; it never permits a
   feature cut.
@@ -73,8 +80,9 @@ validated semantically in addition to the strict JSON schema.
 
 Each node lists two requirement inventories:
 
-- `external` names independent observations, provider/authentication work,
-  public-key control attestations, funding accountability, or owner acceptance;
+- `external` names source-bound automated receipt, state, and endpoint
+  observations, provider/authentication work, public-key control attestations,
+  funding accountability, or explicit owner choices;
 - `engineering` names native bytes, conservation, differential, adversarial,
   and rehearsal evidence that implementation must produce.
 
@@ -85,10 +93,23 @@ not authenticate its signer or treat self-attestation as external proof.
 Secrets, private keys, seed phrases, custom fields, and PEM private-key material
 are rejected. Secret material must never be placed in this packet.
 
-Independent reviewers must later bind accepted owner choices, chain state,
-reviewed binary hashes, Genesis conservation, and accountable funding in their
-own evidence contracts. Only those downstream contracts and the canonical
-release graph can determine node completion.
+Downstream evidence contracts must later bind accepted owner choices, chain
+state, source-bound binary hashes, Genesis conservation, and accountable
+funding through automated direct observations. Non-signature predicates have
+no human-review prerequisite; unobserved claims remain `HOLD`. The Trezor Model
+T physical-confirmation step is the sole human gate, and only for actual
+cryptographic signatures. Explicit owner policy choices remain owner decisions
+and are never synthesized from machine observations. Only those downstream
+contracts and the canonical release graph can determine node completion.
+
+The retained V2 policy field `publicRoles.independentVerifier` is an immutable
+compatibility name for the existing FDF Guard protocol identity and address. It
+is not a current reviewer, approver, signature source, or release predicate.
+Current ceremony and activation evidence explicitly requires automated
+source/receipt/state observation, `humanReviewerRequired: false`, and
+`noSelfAttestation: true`. Renaming or removing that retained identity would
+change the inherited V2 feature surface, so the compatibility field remains;
+no validator may infer human authorization from its legacy name.
 
 ## Validation
 

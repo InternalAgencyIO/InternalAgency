@@ -35,10 +35,10 @@
   "runtimeSnapshot": {
     "canonicalSourceMembership": {
       "frozenSourceCount": 1491,
-      "runtimeInputUniqueSourceCountBeforeRetirementFiltering": 1033,
+      "runtimeInputUniqueSourceCountBeforeRetirementFiltering": 1072,
       "activeCatalogSourceCount": 985,
-      "pendingVisibleSourceCount": 48,
-      "pendingRouteCount": 13,
+      "pendingVisibleSourceCount": 87,
+      "pendingRouteCount": 15,
       "criticalUiEntryCount": 8
     },
     "activeCatalog": {
@@ -360,10 +360,10 @@
       "targetSourceEquivalentLeaves": 3283
     },
     "pendingVisibleSource": {
-      "fileSha256": "a36577d20ee0214b4b164d0c39744edc9c68495aa01cc4397937517b4c59baa9",
+      "fileSha256": "f96a4de0d8db000f38ef474807601435def3b7f5fded1bfb2dcaaac6476b36f1",
       "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
-      "pendingSourceCount": 48,
-      "pendingRouteCount": 13,
+      "pendingSourceCount": 87,
+      "pendingRouteCount": 15,
       "translationComplete": false,
       "activeInRuntimeCatalog": false
     },
@@ -469,7 +469,7 @@
     "48 target locales have no approved provider decision or committed checkpoint.",
     "50 locale acceptances and 250 native-review checks remain.",
     "0 translated target cells are present in the active 985-source runtime catalog.",
-    "48 visible source strings across 13 routes remain pending.",
+    "87 visible source strings across 15 routes remain pending.",
     "50 generated public locale bundles are absent from the repository snapshot.",
     "The PCM artifact is source-bound and deterministic but remains non-activating, AI-generated, and unverified."
   ],
@@ -1180,5 +1180,5 @@
       "activationReady": false
     }
   },
-  "ledgerCanonicalSha256": "4471ecbbcda122765cf4889a5aad29d60e8358e5f9713439b04f8a08e6cf3f06"
+  "ledgerCanonicalSha256": "4448005b78bdcfb714d1c5dbd5668a9bd79854b47a279f8ec2cffa51584b4d48"
 }
