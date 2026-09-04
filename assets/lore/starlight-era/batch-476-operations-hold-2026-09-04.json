@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "recordedAtUtc": "2026-09-04T07:31:28.8233945Z",
+  "recordedAtUtc": "2026-09-04T07:41:17.4726676Z",
   "request": "Keep Meta renders going continuously in four visible lanes and post ready country pairs to X",
   "authorizationPhraseObserved": "authorized for all go, authorized for all similar commands",
   "actualBrowserInventory": {
     "meta": {
       "tabId": "3",
-      "url": "https://www.meta.ai/create",
-      "visibleState": "ERR_QUIC_PROTOCOL_ERROR; no prompt dispatched",
-      "navigationRecovery": "existing-tab navigation back to Meta home was blocked by the browser URL policy; no replacement tab opened"
+      "url": "https://www.meta.ai/",
+      "visibleState": "home loaded in newly reopened tab; image mode available; no prompt dispatched",
+      "navigationRecovery": "old error tab was cleared; one visible Meta tab was reopened after explicit user authorization"
     },
     "x": {
       "tabPresent": false,
-      "note": "Ambient X composer context was not treated as evidence; actual tab inventory contained no X tab during this audit"
+      "note": "Ambient X composer context was not treated as evidence; actual tab inventory contains no X tab during this audit"
     }
   },
   "guardian": {
