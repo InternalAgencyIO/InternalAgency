@@ -137,18 +137,38 @@ test("canonical ceremony anchor is fail-closed and preserves the immutable artif
 
 test("runbook derives the fresh PR merge ref from the exact runtime evidence manifest", () => {
   const runbook = readFileSync(RUNBOOK_PATH, "utf8");
-  assert.ok(runbook.includes(
+  const sectionStart = runbook.indexOf("### Fresh `S` to `B` public-evidence sequence\n");
+  const sectionEnd = runbook.indexOf("\n## Fixed surfaces\n", sectionStart);
+  assert.ok(sectionStart >= 0 && sectionEnd > sectionStart);
+  const section = runbook.slice(sectionStart, sectionEnd);
+  const powershellFences = [...section.matchAll(/```powershell\n([\s\S]*?)\n```/gu)];
+  const evidenceFences = powershellFences.filter((match) => (
+    match[1].includes("$RuntimeEvidencePath = 'target/verifiable/iat-v2-ceremony-runtime-build-evidence.json'")
+  ));
+  assert.equal(evidenceFences.length, 1);
+  const script = evidenceFences[0][1];
+  const exactDerivation = [
+    "$RuntimeEvidencePath = 'target/verifiable/iat-v2-ceremony-runtime-build-evidence.json'",
+    "$RuntimeEvidence = Get-Content -LiteralPath $RuntimeEvidencePath -Raw | ConvertFrom-Json",
     "$WorkflowRef = [string]$RuntimeEvidence.ciProvenance.workflowRef",
-  ));
-  assert.doesNotMatch(runbook, /\$RuntimeEvidence\.sourceBinding\.workflowRef/u);
-  assert.ok(runbook.includes(
     "$ExpectedWorkflowRefPattern = '^InternalAgencyIO/InternalAgency/\\.github/workflows/iat-v2-proof\\.yml@refs/pull/([1-9][0-9]*)/merge$'",
-  ));
-  assert.ok(runbook.includes("$PullRequestNumber = $Matches[1]"));
-  assert.ok(runbook.includes(
-    '"+refs/pull/${PullRequestNumber}/merge:refs/remotes/$PublicRemote/$EvidenceBranch"',
-  ));
-  assert.doesNotMatch(runbook, /\+refs\/pull\/[0-9]+\/merge:/u);
+    "if ($WorkflowRef -notmatch $ExpectedWorkflowRefPattern) { throw 'runtime evidence workflow ref is not the exact public IAT V2 pull-request merge ref' }",
+    "$PullRequestNumber = $Matches[1]",
+  ].join("\n");
+  const exactPullRequestFetch =
+    '& git fetch --no-tags $PublicRemote "+refs/pull/${PullRequestNumber}/merge:refs/remotes/$PublicRemote/$EvidenceBranch"';
+  assert.ok(script.includes(exactDerivation));
+  assert.deepEqual(
+    script.split("\n").filter((line) => line.includes("git fetch") && line.includes("refs/pull/")),
+    [exactPullRequestFetch],
+  );
+  assert.equal((script.match(/^\$WorkflowRef\s*=/gmu) ?? []).length, 1);
+  assert.equal((script.match(/^\$ExpectedWorkflowRefPattern\s*=/gmu) ?? []).length, 1);
+  assert.equal((script.match(/^\$PullRequestNumber\s*=/gmu) ?? []).length, 1);
+  assert.equal((script.match(/\$Matches\b/gu) ?? []).length, 1);
+  assert.equal((script.match(/\s-(?:not)?match\s/gu) ?? []).length, 1);
+  assert.doesNotMatch(script, /\$RuntimeEvidence\.sourceBinding\.workflowRef/u);
+  assert.doesNotMatch(runbook, /refs\/pull\/[1-9][0-9]*\/merge/u);
 });
 
 test("browser-safe validator projects only verified fresh source plus immutable artifact and mint", () => {
