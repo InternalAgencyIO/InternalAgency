@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import {
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+} from "../programs/iat_v2/ceremony-horizon.mjs";
 import { IAT_V2_PROGRAM_ID } from "../programs/iat_v2/instructions.mjs";
 
 const runbook = readFileSync("launch/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md", "utf8");
@@ -69,6 +75,13 @@ test("post-CI runbook fixes localhost consoles and keeps Mainnet on hold", () =>
   assert.match(runbook, /Do not open or reopen any attended page until the attended program-ceremony binding commit and clean verification pass/u);
   assert.match(runbook, /agent\/iat-v2-devnet-ceremony-ci-\$SourceS/u);
   assert.match(runbook, /target\/verifiable\/iat-v2-ceremony-runtime-build-evidence\.json/u);
+  assert.match(
+    runbook,
+    /finalize-iat-v2-current-source-devnet-evidence\.mjs --console-export <ATTENDED_BUNDLE_JSON> --staging-dir <NEW_EMPTY_STAGING_DIRECTORY>/u,
+  );
+  assert.doesNotMatch(runbook, /finalize-iat-v2-current-source-devnet-evidence\.mjs[^\n]*--ci-manifest/u);
+  assert.match(runbook, /finalizer has no operator-selectable manifest input/u);
+  assert.match(runbook, /independently verifies the canonical program binary bytes before observing Devnet/u);
   assert.match(runbook, /verify-iat-v2-devnet-program-ceremony-runtime-binding\.mjs/u);
   assert.match(runbook, /Public `B` CI independently fetches the exact evidence branch, downloads the exact artifact from `\$RunId`, stages the manifest at the canonical path, and executes the same full verifier/u);
   assert.match(runbook, /`vite preview` is prohibited/u);
@@ -429,16 +442,21 @@ test("operator sequence preserves conditional capacity, buffer, migration, backf
     "MIGRATE_LEGACY_ROUND_WEEK_8",
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
+    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11",
     "SETTLE_STANDARD_POSITION_WEEK_10",
     "SETTLE_STANDARD_POSITION_WEEK_11",
+    "SETTLE_STANDARD_POSITION_WEEK_12",
+    "SETTLE_STANDARD_POSITION_WEEK_13",
     "SETTLE_LINKED_POSITION_2_WEEK_9",
     "SETTLE_LINKED_POSITION_2_WEEK_10",
+    "SETTLE_LINKED_POSITION_2_WEEK_11",
     "SETTLE_LINKED_POSITION_3_WEEK_9",
     "SETTLE_LINKED_POSITION_3_WEEK_10",
-    "CREATE_SWITCHBOARD_RANDOMNESS",
-    "COMMIT_CCC_ROUND_11",
-    "SETTLE_LINKED_POSITION_2_WEEK_11",
     "SETTLE_LINKED_POSITION_3_WEEK_11",
+    "CREATE_SWITCHBOARD_RANDOMNESS",
+    "COMMIT_CCC_ROUND_12",
+    "SETTLE_LINKED_POSITION_2_WEEK_12",
+    "SETTLE_LINKED_POSITION_3_WEEK_12",
     "finalize-iat-v2-current-source-devnet-evidence.mjs",
   ];
   let cursor = -1;
@@ -536,9 +554,10 @@ test("post-upgrade feature evidence cannot reuse the legacy initialization expor
   assert.match(feature, /EXPORT COMPLETE ATTENDED BUNDLE/u);
 });
 
-test("17 prompts always include a fresh source-bound randomness creation", () => {
-  assert.match(runbook, /Plan for exactly \*\*17\*\* Model T transaction prompts/u);
-  assert.match(runbook, /15 fixed transaction prompts, one required capacity-extension prompt, and one required `CREATE_SWITCHBOARD_RANDOMNESS` prompt/u);
+test("21/22 prompts always include a fresh source-bound randomness creation", () => {
+  assert.match(runbook, /Plan for exactly \*\*21\*\* mandatory Model T transaction prompts/u);
+  assert.match(runbook, /one upgrade, two migrations, three historical neutral backfills, and the 15 feature actions above/u);
+  assert.match(runbook, /count becomes \*\*22\*\* only if the fresh finalized pre-upgrade capacity observation proves `EXTEND_PROGRAM_DATA` is required/u);
   assert.match(runbook, /DISCARD RETAINED ADDRESS \+ REQUIRE FRESH CREATE/u);
   assert.match(runbook, /versioned address\/CREATE-signature\/message-hash record stored under the key bound to the exact source commit, migration artifact SHA-256, and mint/u);
   assert.match(runbook, /preserves every receipt and performs no RPC read, signature request, broadcast, or chain mutation/u);
@@ -546,9 +565,46 @@ test("17 prompts always include a fresh source-bound randomness creation", () =>
   assert.match(runbook, /ComputeBudget-then-pinned-Switchboard instruction roster and message hash/u);
   assert.match(runbook, /retained account at finalized commitment under the pinned Switchboard owner/u);
   assert.match(runbook, /discard control remains disabled after any feature evidence or signed pending feature work exists/u);
-  assert.match(runbook, /supports no 16-prompt shortcut/u);
+  assert.match(runbook, /supports no retained-randomness prompt-count shortcut/u);
   assert.match(runbook, /memory-only on-device address-display gate/u);
-  assert.match(runbook, /non-transaction device confirmation and is not one of the 17 Model T transaction-signature prompts/u);
+  assert.match(runbook, /non-transaction device confirmation and is not one of the 21 mandatory Model T transaction-signature prompts/u);
   assert.match(runbook, /action UI appears before the full on-device address match succeeds, stop without signing or broadcasting/u);
-  assert.doesNotMatch(runbook, /may be \*\*16\*\*|verified reusable rehearsal randomness/u);
+  assert.doesNotMatch(runbook, /may be \*\*20\*\*|verified reusable rehearsal randomness/u);
+});
+
+test("runbook freezes policy week 13 and CCC round 12 until the absolute finalized-time close", () => {
+  assert.equal(IAT_V2_DEVNET_CEREMONY_POLICY_WEEK, 13);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_CCC_ROUND, 12);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP, 1_788_585_575);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC, "2026-09-05T05:19:35.000Z");
+  assert.match(runbook, /exactly policy week \*\*13\*\* and CCC round \*\*12\*\*/u);
+  assert.match(runbook, /absolute close is \*\*2026-09-05T05:19:35\.000Z\*\* \(`1788585575`\)/u);
+  assert.match(runbook, /Equality is already closed/u);
+  assert.match(runbook, /Any finalized policy\/CCC drift or timestamp at or after the close is a permanent HOLD/u);
+  assert.match(runbook, /new round-12 commit made during this ceremony cannot reach its 24-hour neutral-expiry timeout before the absolute close/u);
+  assert.match(runbook, /four-hour completion path depends on a successful Switchboard reveal/u);
+});
+
+test("runbook pins the exact horizon accounting and outcome-dependent conservation values", () => {
+  assert.match(runbook, /standard settled mask must be `63` \(weeks 8–13\), while both linked masks must be `31` \(weeks 8–12\)/u);
+  for (const exact of [
+    "115,384,615",
+    "161,538,461",
+    "76,923,076",
+    "134,615,384",
+    "96,153,846",
+    "188,461,538",
+    "57,692,307",
+    "199319230772",
+    "199326923079",
+    "199311538464",
+    "39119230772",
+    "39126923079",
+    "39111538464",
+    "470353846152",
+    "470346153845",
+    "470361538460",
+  ]) assert.ok(runbook.includes(exact), `runbook must pin exact horizon accounting value ${exact}`);
+  assert.match(runbook, /cumulative-difference `reward_for_week` rule, not a repeated floor-per-week approximation/u);
+  assert.match(runbook, /Any one-unit drift is HOLD/u);
 });

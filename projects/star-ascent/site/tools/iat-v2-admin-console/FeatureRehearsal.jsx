@@ -48,6 +48,12 @@ import {
   secondsUntilIatV2Week,
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  assertIatV2DevnetCeremonyHorizon,
+} from "../../programs/iat_v2/ceremony-horizon.mjs";
+import {
   DEVNET_FEATURE_MINT_SEED,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
   IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
@@ -309,6 +315,7 @@ function featureActionBinding(action, state) {
     ordinal: action.ordinal ?? null,
     roundAddress: action.roundAddress?.toBase58() ?? null,
     createsEphemeralProtocolSigner: action.createsEphemeralProtocolSigner === true,
+    ceremonyHorizon: state.ceremonyHorizon,
     transactionState: {
       coreDestination: state.coreDestination.toBase58(),
       liquidityDestination: state.liquidityDestination.toBase58(),
@@ -376,6 +383,11 @@ async function loadFeatureState(
   const configTimestamp = await finalizedBlockTimestamp(configSlot, "Feature config");
   const configWeek = currentIatV2Week(genesisTimestamp, configTimestamp);
   const configCccRound = currentIatV2CccRound(genesisTimestamp, configTimestamp);
+  assertIatV2DevnetCeremonyHorizon({
+    policyWeek: configWeek,
+    cccRound: configCccRound,
+    nowTimestamp: configTimestamp,
+  });
   const eligibilityAddress = deriveEligibilityAddress({
     config: plan.config,
     wallet: COMMUNITY_CUSTODY,
@@ -480,6 +492,11 @@ async function loadFeatureState(
   const stateTimestamp = await finalizedBlockTimestamp(stateSlot, "Feature state");
   const currentWeek = currentIatV2Week(genesisTimestamp, stateTimestamp);
   const currentCccRound = currentIatV2CccRound(genesisTimestamp, stateTimestamp);
+  assertIatV2DevnetCeremonyHorizon({
+    policyWeek: currentWeek,
+    cccRound: currentCccRound,
+    nowTimestamp: stateTimestamp,
+  });
   if (currentWeek !== configWeek || currentCccRound !== configCccRound) {
     throw new Error("Finalized Devnet time crossed a feature boundary; refresh before signing");
   }
@@ -580,6 +597,11 @@ async function loadFeatureState(
   ) {
     throw new Error("Finalized Devnet time crossed a feature boundary; refresh before signing");
   }
+  const ceremonyHorizon = assertIatV2DevnetCeremonyHorizon({
+    policyWeek: currentWeek,
+    cccRound: currentCccRound,
+    nowTimestamp,
+  });
 
   return {
     finalObservationSlot,
@@ -587,6 +609,7 @@ async function loadFeatureState(
     genesisTimestamp,
     currentWeek,
     currentCccRound,
+    ceremonyHorizon,
     agencyAddresses,
     agenciesRegistered: agencyInfos.filter(Boolean).length,
     participantBalanceLamports,
@@ -1701,6 +1724,8 @@ export default function FeatureRehearsal({
         <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
         <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
         <div><span>ATTENDED CEREMONY SOURCE</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code></div>
+        <div><span>SOURCE-BOUND CEREMONY HORIZON</span><code>POLICY {IAT_V2_DEVNET_CEREMONY_POLICY_WEEK} / CCC {IAT_V2_DEVNET_CEREMONY_CCC_ROUND}</code></div>
+        <div><span>CEREMONY HORIZON CLOSE</span><code>{IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC}</code></div>
         <div><span>CEREMONY CI RUN / ATTEMPT</span><code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code></div>
         <div><span>CEREMONY RUNTIME EVIDENCE SHA-256</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code></div>
         <div><span>IMMUTABLE ARTIFACT SOURCE</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>

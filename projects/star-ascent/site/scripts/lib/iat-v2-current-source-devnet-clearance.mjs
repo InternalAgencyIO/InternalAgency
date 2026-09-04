@@ -35,6 +35,13 @@ import {
   parseRoundAccount,
 } from "../../programs/iat_v2/feature-instructions.mjs";
 import {
+  IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  iatV2DevnetCeremonyTerminalActions,
+} from "../../programs/iat_v2/ceremony-horizon.mjs";
+import {
   BPF_UPGRADEABLE_LOADER_ID,
   DEVNET_FEATURE_MINT_SEED,
   IAT_V2_PROGRAM_ADMIN,
@@ -54,8 +61,16 @@ const FEATURE_AGENCY_OWNERS = [
 const FEATURE_GENESIS_TIMESTAMP = 1_780_636_775n;
 const REHEARSAL_SUPPLY = 1_000_000_000_000n;
 const POSITION_PRINCIPAL = 10_000_000_000n;
-const POSITION_SETTLED_MASK_THROUGH_WEEK_11 = 15n;
+const POSITION_FIRST_ACCRUAL_WEEK = 8;
+const STANDARD_POSITION_SETTLED_MASK =
+  (1n << BigInt(IAT_V2_DEVNET_CEREMONY_POLICY_WEEK - POSITION_FIRST_ACCRUAL_WEEK + 1)) - 1n;
+const LINKED_POSITION_SETTLED_MASK =
+  (1n << BigInt(IAT_V2_DEVNET_CEREMONY_CCC_ROUND - POSITION_FIRST_ACCRUAL_WEEK + 1)) - 1n;
 const CORE_WEEK_ZERO_PAID = 326_923_076n;
+const CCC_TERMINAL_ACTIONS = iatV2DevnetCeremonyTerminalActions();
+const CCC_COMMIT_ACTION = `COMMIT_CCC_ROUND_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`;
+const CCC_REVEAL_ACTION = `REVEAL_CCC_ROUND_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`;
+const CCC_EXPIRE_ACTION = `EXPIRE_CCC_ROUND_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`;
 const RANDOMNESS_INIT_DISCRIMINATOR = Buffer.from("0909cc213274710f", "hex");
 const RANDOMNESS_COMMIT_DISCRIMINATOR = Buffer.from("34aa98c9b385f28d", "hex");
 const RANDOMNESS_REVEAL_DISCRIMINATOR = Buffer.from("c5b5bb0a1e3a1449", "hex");
@@ -339,6 +354,17 @@ export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, co
     "COMPLETE_ROSTER_HOLD",
     "the canonical rehearsal requires a fresh source-bound Switchboard randomness creation receipt",
   );
+  check(
+    conditions?.policyWeek === IAT_V2_DEVNET_CEREMONY_POLICY_WEEK
+    && conditions?.cccRound === IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+    "COMPLETE_ROSTER_HOLD",
+    "the complete roster does not carry the exact source-frozen policy/CCC horizon",
+  );
+  check(
+    CCC_TERMINAL_ACTIONS.includes(conditions?.cccRoundTerminalAction),
+    "COMPLETE_ROSTER_HOLD",
+    `the complete roster requires exactly one reviewed round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} terminal action`,
+  );
   const signer = IAT_V2_PROGRAM_ADMIN;
   const mint = await deriveDeterministicDevnetMint({ seed: DEVNET_FEATURE_MINT_SEED });
   const plan = createIatV2DeploymentPlan({
@@ -400,7 +426,7 @@ export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, co
     } else if (action === "CREATE_SWITCHBOARD_RANDOMNESS") {
       assertCreateRandomness(transaction, context);
       context.randomnessCreated = true;
-    } else if (action === "COMMIT_CCC_ROUND_11") {
+    } else if (action === CCC_COMMIT_ACTION) {
       assertInstructionCount(transaction, 3, action);
       assertSignerSet(transaction, [context.signer], action);
       assertInstruction(transaction.instructions[0], computeBudgetInstruction(500_000), "commit compute budget");
@@ -410,21 +436,45 @@ export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, co
       if (context.randomness) check(context.randomness.equals(randomness), "WIRE_ACCOUNTS_HOLD", "created and committed randomness accounts differ");
       context.randomness = randomness;
       assertSwitchboardCommit(transaction.instructions[1], context);
-      const expected = buildCommitRoundInstruction({ payer: signer, mint, randomnessAccount: randomness, week: 11 });
+      const expected = buildCommitRoundInstruction({
+        payer: signer,
+        mint,
+        randomnessAccount: randomness,
+        week: IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+      });
       assertExpectedIatInstruction(iat, expected, action, { feePayer: signer, additionalWritable: [randomness] });
-    } else if (action === "REVEAL_CCC_ROUND_11") {
+    } else if (action === CCC_REVEAL_ACTION) {
+      check(
+        conditions.cccRoundTerminalAction === action,
+        "COMPLETE_ROSTER_HOLD",
+        "decoded reveal action disagrees with the declared CCC terminal branch",
+      );
       assertInstructionCount(transaction, 3, action);
       assertSignerSet(transaction, [context.signer], action);
       check(context.randomness && context.oracle, "WIRE_ACCOUNTS_HOLD", "reveal is not chained to the exact commit");
       assertInstruction(transaction.instructions[0], computeBudgetInstruction(600_000), "reveal compute budget");
       assertSwitchboardReveal(transaction.instructions[1], context);
-      const expected = buildSettleRoundInstruction({ mint, randomnessAccount: context.randomness, week: 11 });
+      const expected = buildSettleRoundInstruction({
+        mint,
+        randomnessAccount: context.randomness,
+        week: IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+      });
       assertExpectedIatInstruction(transaction.instructions[2], expected, action, {
         feePayer: signer,
         additionalWritable: [context.randomness],
       });
-    } else if (action === "EXPIRE_CCC_ROUND_11") {
-      assertOneIatInstruction(transaction, buildExpireRoundInstruction({ mint, week: 11 }), action, context);
+    } else if (action === CCC_EXPIRE_ACTION) {
+      check(
+        conditions.cccRoundTerminalAction === action,
+        "COMPLETE_ROSTER_HOLD",
+        "decoded expiry action disagrees with the declared CCC terminal branch",
+      );
+      assertOneIatInstruction(
+        transaction,
+        buildExpireRoundInstruction({ mint, week: IAT_V2_DEVNET_CEREMONY_CCC_ROUND }),
+        action,
+        context,
+      );
     } else {
       fail("ROSTER_ACTION_HOLD", `unreviewed complete-roster action: ${action}`);
     }
@@ -434,6 +484,8 @@ export async function decodeCompleteRehearsalRoster({ entries, artifactBytes, co
   return Object.freeze({
     mint: mint.toBase58(),
     config: plan.config.toBase58(),
+    policyWeek: IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+    cccRound: IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
     randomness: context.randomness.toBase58(),
     oracle: context.oracle?.toBase58() ?? null,
     buffer: context.buffer?.toBase58() ?? null,
@@ -508,14 +560,56 @@ function assertMigratedLegacyRoundPayload(round, week) {
   );
 }
 
-function paidOutcome(round11) {
-  if (round11.status === IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL) {
-    return { agent: 134_615_381n, associate: 57_692_307n };
+function maximumPositionReward(annualRateBps, accruedWeeks) {
+  return POSITION_PRINCIPAL
+    * BigInt(annualRateBps)
+    * BigInt(accruedWeeks)
+    / (10_000n * 52n);
+}
+
+function positionRewardForOrdinal(annualRateBps, ordinal) {
+  return maximumPositionReward(annualRateBps, ordinal + 1)
+    - maximumPositionReward(annualRateBps, ordinal);
+}
+
+function neutralTwoAgencyReward(fullReward) {
+  return fullReward / 2n;
+}
+
+function paidOutcome(round) {
+  const standard = maximumPositionReward(
+    1_000,
+    IAT_V2_DEVNET_CEREMONY_POLICY_WEEK - POSITION_FIRST_ACCRUAL_WEEK + 1,
+  );
+  const linkedHistoricalOrdinals = IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS
+    .map((week) => week - POSITION_FIRST_ACCRUAL_WEEK);
+  const agentBeforeCurrentRound = positionRewardForOrdinal(2_800, 0)
+    + linkedHistoricalOrdinals.reduce(
+      (sum, ordinal) => sum + neutralTwoAgencyReward(positionRewardForOrdinal(2_800, ordinal)),
+      0n,
+    );
+  const associateBeforeCurrentRound = linkedHistoricalOrdinals.reduce(
+    (sum, ordinal) => sum + neutralTwoAgencyReward(positionRewardForOrdinal(2_000, ordinal)),
+    0n,
+  );
+  const currentOrdinal = IAT_V2_DEVNET_CEREMONY_CCC_ROUND - POSITION_FIRST_ACCRUAL_WEEK;
+  const agentFull = positionRewardForOrdinal(2_800, currentOrdinal);
+  const associateFull = positionRewardForOrdinal(2_000, currentOrdinal);
+  if (round.status === IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL) {
+    return {
+      standard,
+      agent: agentBeforeCurrentRound + neutralTwoAgencyReward(agentFull),
+      associate: associateBeforeCurrentRound + neutralTwoAgencyReward(associateFull),
+    };
   }
-  check(round11.status === IAT_V2_ROUND_STATUS.SETTLED && [0, 1].includes(round11.selectedAgencyIndex), "POST_STATE_ROUND_HOLD", "round 11 terminal winner is invalid");
-  return round11.selectedAgencyIndex === 0
-    ? { agent: 107_692_305n, associate: 76_923_076n }
-    : { agent: 161_538_458n, associate: 38_461_538n };
+  check(
+    round.status === IAT_V2_ROUND_STATUS.SETTLED && [0, 1].includes(round.selectedAgencyIndex),
+    "POST_STATE_ROUND_HOLD",
+    `round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} terminal winner is invalid`,
+  );
+  return round.selectedAgencyIndex === 0
+    ? { standard, agent: agentBeforeCurrentRound, associate: associateBeforeCurrentRound + associateFull }
+    : { standard, agent: agentBeforeCurrentRound + agentFull, associate: associateBeforeCurrentRound };
 }
 
 function assertExactTwoAgencyTiebreak(round) {
@@ -531,7 +625,7 @@ function assertExactTwoAgencyTiebreak(round) {
   check(
     round.derivationCounter === 0 && round.selectedAgencyIndex === expectedIndex,
     "POST_STATE_ROUND_HOLD",
-    "round 11 selected agency does not replay the exact two-agency uniform tiebreak",
+    `round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} selected agency does not replay the exact two-agency uniform tiebreak`,
   );
 }
 
@@ -557,7 +651,11 @@ export async function observeCompleteRehearsalPostState({ rpcCall, decoded, cond
   const positionAddresses = [1, 2, 3].map((positionId) => derivePositionAddress({
     config: configAddress, programId: IAT_V2_PROGRAM_ID, owner: signer, positionId,
   }));
-  const roundAddresses = [7, 8, 9, 10, 11].map((week) => deriveRoundAddress({
+  const roundWeeks = Array.from(
+    { length: IAT_V2_DEVNET_CEREMONY_CCC_ROUND - 7 + 1 },
+    (_unused, index) => index + 7,
+  );
+  const roundAddresses = roundWeeks.map((week) => deriveRoundAddress({
     config: configAddress, programId: IAT_V2_PROGRAM_ID, week,
   }));
   const laneNames = ["treasury", "ecosystem", "coreTeam", "liquidity"];
@@ -585,9 +683,12 @@ export async function observeCompleteRehearsalPostState({ rpcCall, decoded, cond
       ...(minContextSlot === null ? {} : { minContextSlot }),
     },
   ]);
+  const contextSlot = Number.isSafeInteger(result?.context?.slot)
+    ? result.context.slot
+    : null;
   if (minContextSlot !== null) {
     check(
-      Number.isSafeInteger(result?.context?.slot) && result.context.slot >= minContextSlot,
+      contextSlot !== null && contextSlot >= minContextSlot,
       "POST_STATE_CONTEXT_HOLD",
       "finalized post-state context slot is absent or below minContextSlot",
     );
@@ -611,7 +712,12 @@ export async function observeCompleteRehearsalPostState({ rpcCall, decoded, cond
     const position = positions[index];
     check(position.config.equals(configAddress) && position.owner.equals(signer) && position.positionId === BigInt(index + 1), "POST_STATE_POSITION_HOLD", `position ${index + 1} identity drifted`);
     check(position.principal === POSITION_PRINCIPAL && position.acceptedWeek === 7n && position.firstAccrualWeek === 8n && position.termWeeks === 52n, "POST_STATE_POSITION_HOLD", `position ${index + 1} terms drifted`);
-    check(position.settledMask === POSITION_SETTLED_MASK_THROUGH_WEEK_11, "POST_STATE_POSITION_HOLD", `position ${index + 1} settled mask is not exactly 15`);
+    const expectedMask = index === 0 ? STANDARD_POSITION_SETTLED_MASK : LINKED_POSITION_SETTLED_MASK;
+    check(
+      position.settledMask === expectedMask,
+      "POST_STATE_POSITION_HOLD",
+      `position ${index + 1} settled mask is not exactly ${expectedMask}`,
+    );
     check(!position.principalReturned && !position.closed, "POST_STATE_POSITION_HOLD", `position ${index + 1} lifecycle drifted`);
   }
   check(positions[0].role === 0 && positions[0].agencyIndex === 0xffff_ffff && positions[0].annualRateBps === 1_000n, "POST_STATE_POSITION_HOLD", "standard position role/rate drifted");
@@ -628,7 +734,8 @@ export async function observeCompleteRehearsalPostState({ rpcCall, decoded, cond
   }));
   assertMigratedLegacyRoundPayload(rounds[0], 7);
   assertMigratedLegacyRoundPayload(rounds[1], 8);
-  for (const [index, week] of [[2, 9], [3, 10]]) {
+  for (const week of IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS) {
+    const index = week - 7;
     const round = rounds[index];
     const selectionTimestamp = FEATURE_GENESIS_TIMESTAMP + 86_400n + BigInt(week) * 604_800n;
     check(
@@ -644,16 +751,48 @@ export async function observeCompleteRehearsalPostState({ rpcCall, decoded, cond
     );
     check(round.agencyRegistryHashSnapshot.equals(rounds[index - 1].agencyRegistryHashSnapshot), "POST_STATE_ROUND_HOLD", `historical neutral round ${week} did not chain the prior snapshot`);
   }
-  const round11 = rounds[4];
-  check(round11.randomnessAccount.equals(new PublicKey(decoded.randomness)) && round11.commitSlot > 0n && round11.commitTimestamp > 0n, "POST_STATE_ROUND_HOLD", "round 11 commit identity/timing drifted");
-  if (conditions.cccRound11TerminalAction === "REVEAL_CCC_ROUND_11") {
-    check(round11.status === IAT_V2_ROUND_STATUS.SETTLED && round11.randomness.some((byte) => byte !== 0) && round11.derivationCounter < 16, "POST_STATE_ROUND_HOLD", "revealed round 11 is not exact terminal settled state");
-    assertExactTwoAgencyTiebreak(round11);
+  check(
+    conditions?.policyWeek === IAT_V2_DEVNET_CEREMONY_POLICY_WEEK
+    && conditions?.cccRound === IAT_V2_DEVNET_CEREMONY_CCC_ROUND
+    && CCC_TERMINAL_ACTIONS.includes(conditions?.cccRoundTerminalAction),
+    "POST_STATE_ROUND_HOLD",
+    "post-state conditions drifted from the exact source-frozen ceremony horizon",
+  );
+  const currentRound = rounds[IAT_V2_DEVNET_CEREMONY_CCC_ROUND - 7];
+  check(
+    currentRound.randomnessAccount.equals(new PublicKey(decoded.randomness))
+    && currentRound.commitSlot > 0n
+    && currentRound.commitTimestamp > 0n,
+    "POST_STATE_ROUND_HOLD",
+    `round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} commit identity/timing drifted`,
+  );
+  if (conditions.cccRoundTerminalAction === CCC_REVEAL_ACTION) {
+    check(
+      currentRound.status === IAT_V2_ROUND_STATUS.SETTLED
+      && currentRound.randomness.some((byte) => byte !== 0)
+      && currentRound.derivationCounter < 16,
+      "POST_STATE_ROUND_HOLD",
+      `revealed round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} is not exact terminal settled state`,
+    );
+    assertExactTwoAgencyTiebreak(currentRound);
   } else {
-    check(round11.status === IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL && round11.randomness.every((byte) => byte === 0) && round11.selectedAgencyIndex === 0xffff_ffff && round11.derivationCounter === 0xffff_ffff, "POST_STATE_ROUND_HOLD", "expired round 11 is not exact terminal neutral state");
+    check(
+      currentRound.status === IAT_V2_ROUND_STATUS.EXPIRED_NEUTRAL
+      && currentRound.randomness.every((byte) => byte === 0)
+      && currentRound.selectedAgencyIndex === 0xffff_ffff
+      && currentRound.derivationCounter === 0xffff_ffff,
+      "POST_STATE_ROUND_HOLD",
+      `expired round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} is not exact terminal neutral state`,
+    );
   }
-  const paid = paidOutcome(round11);
-  check(positions[0].paid === 76_923_076n && positions[1].paid === paid.agent && positions[2].paid === paid.associate, "POST_STATE_BALANCE_HOLD", "position paid balances do not match rounds 8-11 outcomes");
+  const paid = paidOutcome(currentRound);
+  check(
+    positions[0].paid === paid.standard
+    && positions[1].paid === paid.agent
+    && positions[2].paid === paid.associate,
+    "POST_STATE_BALANCE_HOLD",
+    `position paid balances do not match policy week ${IAT_V2_DEVNET_CEREMONY_POLICY_WEEK} / CCC round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} outcomes`,
+  );
   const maximumRewards = [1_000_000_000n, 2_800_000_000n, 2_000_000_000n];
   positions.forEach((position, index) => {
     check(
@@ -751,8 +890,11 @@ export async function observeCompleteRehearsalPostState({ rpcCall, decoded, cond
   check(observedSupply === mintSupply, "POST_STATE_BALANCE_HOLD", "reviewed custody balances do not conserve the fixed mint supply");
 
   return Object.freeze({
+    contextSlot,
     config: configAddress.toBase58(),
     mint: mint.toBase58(),
+    policyWeek: IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+    cccRound: IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
     mintSupply: mintSupply.toString(),
     genesisTimestamp: config.genesisTimestamp.toString(),
     agencyCount: config.agencyCount,

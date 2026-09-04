@@ -291,6 +291,10 @@ test("runtime closure covers Vite's complete first-party console, build, and ver
     "the npm lifecycle runtime gate executes before Vite and must remain in source S's closure",
   );
   for (const evidenceGate of [
+    "scripts/finalize-iat-v2-current-source-devnet-evidence.mjs",
+    "scripts/iat-v2-devnet-buffer-preflight.mjs",
+    "scripts/lib/iat-v2-current-source-devnet-clearance.mjs",
+    "scripts/lib/iat-v2-devnet-buffer-runtime-binding.mjs",
     "scripts/validate-iat-v2-ci-sbf-evidence.mjs",
     "scripts/verify-iat-v2-devnet-program-ceremony-runtime-binding.mjs",
   ]) {
@@ -800,6 +804,35 @@ test("runtime verifier rejects a successor that changes any path beyond the anch
       (error) => error?.code === "CEREMONY_BINDING_SUCCESSOR_HOLD"
         && /beyond the one canonical anchor/u.test(error.message),
     );
+  });
+});
+
+test("runtime verifier rejects working-byte drift in every explicit attended evidence gate", () => {
+  withRuntimeFixture((fixture) => {
+    bindFixture(fixture);
+    for (const gatePath of [
+      "scripts/finalize-iat-v2-current-source-devnet-evidence.mjs",
+      "scripts/iat-v2-devnet-buffer-preflight.mjs",
+      "scripts/lib/iat-v2-current-source-devnet-clearance.mjs",
+      "scripts/lib/iat-v2-devnet-buffer-runtime-binding.mjs",
+    ]) {
+      const absoluteGatePath = join(fixture.repositoryRoot, gatePath);
+      const original = readFileSync(absoluteGatePath, "utf8");
+      write(absoluteGatePath, `${original}uncommitted attended evidence-gate drift\n`);
+      assert.throws(
+        () => verifyIatV2DevnetProgramCeremonyRuntimeBinding({
+          projectRoot: fixture.repositoryRoot,
+          git: reviewedGit,
+        }),
+        (error) => error?.code === "CEREMONY_BINDING_CLOSURE_HOLD"
+          && error.message.includes(gatePath),
+      );
+      write(absoluteGatePath, original);
+    }
+    assert.doesNotThrow(() => verifyIatV2DevnetProgramCeremonyRuntimeBinding({
+      projectRoot: fixture.repositoryRoot,
+      git: reviewedGit,
+    }));
   });
 });
 

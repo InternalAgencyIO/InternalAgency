@@ -38,6 +38,17 @@ import {
   createIatV2DevnetProgramCeremonyEvidenceBinding,
   parseIatV2DevnetProgramCeremonyBinding,
 } from "../../programs/iat_v2/ceremony-binding.mjs";
+import {
+  IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  assertIatV2DevnetCeremonyHorizon,
+} from "../../programs/iat_v2/ceremony-horizon.mjs";
+import {
+  currentIatV2CccRound,
+  currentIatV2Week,
+} from "../../programs/iat_v2/feature-rehearsal.mjs";
 import ceremonyRuntimeBindingJson from "../../scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json";
 import {
   assertCanonicalAttendedNextActionFromReceiptSet,
@@ -60,7 +71,9 @@ import {
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const FINALIZED_COMMITMENT = "finalized";
-const HISTORICAL_NEUTRAL_WEEKS = Object.freeze([9n, 10n]);
+const HISTORICAL_NEUTRAL_WEEKS = Object.freeze(
+  IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS.map((week) => BigInt(week)),
+);
 const CCC_FIRST_SELECTION_DELAY_SECONDS = 86_400n;
 const CCC_REVEAL_TIMEOUT_SECONDS = 86_400n;
 const SECONDS_PER_WEEK = 604_800n;
@@ -130,11 +143,6 @@ export function canonicalCccSelectionTimestamp(genesisTimestamp, week) {
   return BigInt(genesisTimestamp)
     + CCC_FIRST_SELECTION_DELAY_SECONDS
     + BigInt(week) * SECONDS_PER_WEEK;
-}
-
-function currentCccRound(genesisTimestamp, nowTimestamp) {
-  const first = BigInt(genesisTimestamp) + CCC_FIRST_SELECTION_DELAY_SECONDS;
-  return BigInt(nowTimestamp) < first ? null : (BigInt(nowTimestamp) - first) / SECONDS_PER_WEEK;
 }
 
 function snapshotStatus(snapshot) {
@@ -232,6 +240,7 @@ function attendedRoundBinding(kind, snapshot, round) {
       vaultAuthorityBump: scalarText(config.vaultAuthorityBump),
     },
     legacyCount: snapshot.legacy.length,
+    ceremonyHorizon: snapshot.ceremonyHorizon,
     round: roundStateBinding(round),
   });
 }
@@ -441,8 +450,15 @@ async function loadMigrationSnapshot(sha256Hex, minContextSlot = 0) {
       `Legacy week ${unsafeLegacy.week} is not SETTLED; migration is intentionally unavailable`,
     );
   }
-  const liveRound = currentCccRound(configState.genesisTimestamp, chainTimestamp);
-  if (liveRound === null) throw new Error("The rehearsal CCC cadence has not opened");
+  const policyWeek = currentIatV2Week(configState.genesisTimestamp, chainTimestampValue);
+  const currentRound = currentIatV2CccRound(configState.genesisTimestamp, chainTimestampValue);
+  if (currentRound === null) throw new Error("The rehearsal CCC cadence has not opened");
+  const ceremonyHorizon = assertIatV2DevnetCeremonyHorizon({
+    policyWeek,
+    cccRound: currentRound,
+    nowTimestamp: chainTimestampValue,
+  });
+  const liveRound = BigInt(currentRound);
   const recoveries = HISTORICAL_NEUTRAL_WEEKS.map((week, index) => {
     const address = recoveryAddresses[index];
     const info = recoveryInfos[index];
@@ -529,7 +545,9 @@ async function loadMigrationSnapshot(sha256Hex, minContextSlot = 0) {
     config: plan.config,
     artifactSha256: artifact.artifactSha256,
     chainTimestamp,
+    policyWeek,
     currentRound: liveRound,
+    ceremonyHorizon,
     deploymentBinding,
     finalizedContextSlot: finalProgramSlot,
     configState,
@@ -979,6 +997,8 @@ export default function LegacyRoundMigration({
             <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
             <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
             <div><span>ATTENDED CEREMONY SOURCE</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code></div>
+            <div><span>SOURCE-BOUND CEREMONY HORIZON</span><code>POLICY {IAT_V2_DEVNET_CEREMONY_POLICY_WEEK} / CCC {IAT_V2_DEVNET_CEREMONY_CCC_ROUND}</code></div>
+            <div><span>CEREMONY HORIZON CLOSE</span><code>{IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC}</code></div>
             <div><span>CEREMONY CI RUN / ATTEMPT</span><code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code></div>
             <div><span>CEREMONY RUNTIME EVIDENCE SHA-256</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code></div>
             <div><span>IMMUTABLE ARTIFACT SOURCE</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>

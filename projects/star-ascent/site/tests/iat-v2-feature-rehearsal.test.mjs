@@ -392,6 +392,18 @@ test("feature action selection uses finalized account contexts and finalized cha
   );
   assert.match(loaderSource, /const continuityReadFloor = Math\.max\([\s\S]*configSlot,[\s\S]*randomnessContinuity\?\.accountContextSlot \?\? 0[\s\S]*getMultipleAccountsInfoAndContext\(addresses,[\s\S]*minContextSlot: continuityReadFloor[\s\S]*getBalanceAndContext\(COMMUNITY_CUSTODY,[\s\S]*minContextSlot: stateSlot[\s\S]*getMultipleAccountsInfoAndContext\(linkedRoundAddresses,[\s\S]*minContextSlot: participantBalanceSlot/u);
   assert.match(loaderSource, /finalObservationSlot = linkedRoundResult[\s\S]*finalizedBlockTimestamp\(finalObservationSlot, "Final feature observation"\)[\s\S]*currentIatV2Week\(genesisTimestamp, nowTimestamp\) !== currentWeek[\s\S]*return \{[\s\S]*finalObservationSlot/u);
+  assert.match(
+    loaderSource,
+    /configWeek = currentIatV2Week[\s\S]*configCccRound = currentIatV2CccRound[\s\S]*assertIatV2DevnetCeremonyHorizon\(\{[\s\S]*policyWeek: configWeek,[\s\S]*cccRound: configCccRound,[\s\S]*nowTimestamp: configTimestamp/u,
+  );
+  assert.match(
+    loaderSource,
+    /currentWeek = currentIatV2Week[\s\S]*currentCccRound = currentIatV2CccRound[\s\S]*assertIatV2DevnetCeremonyHorizon\(\{[\s\S]*policyWeek: currentWeek,[\s\S]*cccRound: currentCccRound,[\s\S]*nowTimestamp: stateTimestamp/u,
+  );
+  assert.match(
+    loaderSource,
+    /Final feature observation[\s\S]*const ceremonyHorizon = assertIatV2DevnetCeremonyHorizon\(\{[\s\S]*nowTimestamp,[\s\S]*return \{[\s\S]*ceremonyHorizon/u,
+  );
   assert.match(loaderSource, /Finalized Devnet time crossed a feature boundary; refresh before signing/u);
   assert.doesNotMatch(loaderSource, /Date\.now\(|["']confirmed["']/u);
 });
@@ -409,7 +421,7 @@ test("attended feature signing and broadcast reattest exact finalized deployment
     featureConsoleSource.indexOf("function featureActionBinding"),
     featureConsoleSource.indexOf("function sameBinding"),
   );
-  assert.match(actionBindingSource, /coreDestination: state\.coreDestination[\s\S]*liquidityDestination: state\.liquidityDestination[\s\S]*randomnessAddress: state\.randomnessAddress[\s\S]*currentRoundRandomnessAccount: state\.currentRound\?\.randomnessAccount/u);
+  assert.match(actionBindingSource, /ceremonyHorizon: state\.ceremonyHorizon[\s\S]*coreDestination: state\.coreDestination[\s\S]*liquidityDestination: state\.liquidityDestination[\s\S]*randomnessAddress: state\.randomnessAddress[\s\S]*currentRoundRandomnessAccount: state\.currentRound\?\.randomnessAccount/u);
 
   const boundarySource = featureConsoleSource.slice(
     featureConsoleSource.indexOf("async function loadFreshAttendedBoundary"),
@@ -701,7 +713,7 @@ test("legacy-round migration is localhost-only, CI-pinned, and requires separate
   );
 });
 
-test("historical weeks 9 and 10 use a fail-closed rehearsal-only neutral recovery", () => {
+test("source-bound historical weeks 9, 10, and 11 use fail-closed rehearsal-only neutral recovery", () => {
   const programSource = readFileSync("programs/iat_v2/src/lib.rs", "utf8");
   const policySource = readFileSync("programs/iat_v2/src/policy.rs", "utf8");
   assert.match(programSource, /pub fn backfill_historical_neutral_round/u);
@@ -727,7 +739,10 @@ test("historical weeks 9 and 10 use a fail-closed rehearsal-only neutral recover
   assert.match(programSource, /historical_neutral_denominator_requires_the_exact_previous_snapshot/u);
   assert.match(policySource, /pub fn ccc_round_selection_timestamp/u);
 
-  assert.match(migrationConsoleSource, /HISTORICAL_NEUTRAL_WEEKS = Object\.freeze\(\[9n, 10n\]\)/u);
+  assert.match(
+    migrationConsoleSource,
+    /HISTORICAL_NEUTRAL_WEEKS = Object\.freeze\([\s\S]*IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS\.map\(\(week\) => BigInt\(week\)\)/u,
+  );
   assert.match(migrationConsoleSource, /!configState\.rehearsalMode/u);
   assert.match(migrationConsoleSource, /round\.status === IAT_V2_ROUND_STATUS\.EXPIRED_NEUTRAL/u);
   assert.match(migrationConsoleSource, /round\.randomnessAccount\.equals\(SystemProgram\.programId\)/u);
@@ -742,6 +757,41 @@ test("historical weeks 9 and 10 use a fail-closed rehearsal-only neutral recover
     migrationConsoleSource.indexOf("async function simulateAndSignMigration"),
   );
   assert.doesNotMatch(effectSource, /(?:simulateAndSignBackfill|broadcastSigned)\s*\(/u);
+});
+
+test("migration and feature consoles enforce the policy-13 CCC-12 horizon before hardware", () => {
+  assert.match(featureConsoleSource, /IAT_V2_DEVNET_CEREMONY_POLICY_WEEK/u);
+  assert.match(featureConsoleSource, /IAT_V2_DEVNET_CEREMONY_CCC_ROUND/u);
+  assert.match(featureConsoleSource, /IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC/u);
+  assert.match(featureConsoleSource, /SOURCE-BOUND CEREMONY HORIZON/u);
+
+  const migrationLoader = migrationConsoleSource.slice(
+    migrationConsoleSource.indexOf("async function loadMigrationSnapshot"),
+    migrationConsoleSource.indexOf("export default function LegacyRoundMigration"),
+  );
+  const clock = migrationLoader.indexOf("const chainTimestampValue = await connection.getBlockTime");
+  const horizon = migrationLoader.indexOf("const ceremonyHorizon = assertIatV2DevnetCeremonyHorizon");
+  const recoveries = migrationLoader.indexOf("const recoveries = HISTORICAL_NEUTRAL_WEEKS.map");
+  assert.ok(clock >= 0, "migration horizon lacks finalized chain time");
+  assert.ok(horizon > clock, "migration horizon was checked before finalized chain time");
+  assert.ok(recoveries > horizon, "migration recovery inventory preceded the horizon gate");
+  assert.match(
+    migrationLoader,
+    /policyWeek = currentIatV2Week[\s\S]*currentRound = currentIatV2CccRound[\s\S]*assertIatV2DevnetCeremonyHorizon\(\{[\s\S]*policyWeek,[\s\S]*cccRound: currentRound,[\s\S]*nowTimestamp: chainTimestampValue/u,
+  );
+  assert.match(migrationConsoleSource, /ceremonyHorizon: snapshot\.ceremonyHorizon/u);
+  assert.match(migrationConsoleSource, /SOURCE-BOUND CEREMONY HORIZON/u);
+
+  for (const functionName of ["simulateAndSignMigration", "simulateAndSignBackfill"]) {
+    const start = migrationConsoleSource.indexOf(`async function ${functionName}`);
+    const next = migrationConsoleSource.indexOf("\n  async function ", start + 1);
+    const source = migrationConsoleSource.slice(start, next < 0 ? undefined : next);
+    assert.ok(source.indexOf("await loadMigrationSnapshot") >= 0, `${functionName} lacks a fresh horizon-bound snapshot`);
+    assert.ok(
+      source.indexOf("await getHardwareProvider") > source.indexOf("await loadMigrationSnapshot"),
+      `${functionName} loaded hardware before the horizon-bound snapshot`,
+    );
+  }
 });
 
 test("program upgrade and legacy migration share one CI artifact and finalized handoff", () => {

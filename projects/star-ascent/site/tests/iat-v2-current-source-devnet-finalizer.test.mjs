@@ -1,6 +1,15 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import {
+  existsSync,
+  linkSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -13,11 +22,15 @@ import {
 import {
   CANONICAL_DEVNET_GENESIS_HASH,
   CurrentSourceEvidenceError,
+  bindingFromCanonicalCeremony,
   createJsonRpcCaller,
   finalizeCurrentSourceDevnetEvidence,
   observeCompleteRehearsalLedgerProof,
   writeCurrentSourceEvidenceStage,
 } from "../scripts/finalize-iat-v2-current-source-devnet-evidence.mjs";
+import {
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
+} from "../programs/iat_v2/ceremony-horizon.mjs";
 
 const LOADER = "BPFLoaderUpgradeab1e11111111111111111111111";
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -112,13 +125,14 @@ function fixture() {
   const responses = {
     getGenesisHash: CANONICAL_DEVNET_GENESIS_HASH,
     getSlot: 650,
+    getBlockTime: 1_788_500_000,
     getSignatureStatuses: {
       context: { slot: 700 },
       value: [{ slot: 600, confirmations: null, err: null, confirmationStatus: "finalized" }],
     },
     getTransaction: {
       slot: 600,
-      blockTime: 1_777_111_111,
+      blockTime: 1_788_500_000,
       meta: { err: null },
       transaction: [transaction.serialize().toString("base64"), "base64"],
       version: "legacy",
@@ -219,7 +233,7 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
   const incompleteClaim = {
     schema: "iat-v2-current-source-attended-devnet-console-bundle/v1",
     status: "COMPLETE_PENDING_AUTOMATED_DIRECT_EVIDENCE",
-    rosterVersion: "IAT_V2_MIGRATION_BACKFILL_WEEK11_V1",
+    rosterVersion: "IAT_V2_MIGRATION_BACKFILL_POLICY13_CCC12_V1",
     sourceCommit: value.binding.sourceCommit,
     programArtifactSha256: value.binding.programArtifactSha256,
     network: "devnet",
@@ -231,7 +245,9 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
       programDataExtensionRequired: false,
       preUpgradeProgramDataCapacityBytes: value.binding.programArtifactBytes,
       switchboardRandomnessCreationRequired: true,
-      cccRound11TerminalAction: "REVEAL_CCC_ROUND_11",
+      policyWeek: 13,
+      cccRound: 12,
+      cccRoundTerminalAction: "REVEAL_CCC_ROUND_12",
     },
     transactions: value.consoleExport.transactions.map((item) => ({
       action: item.action,
@@ -286,6 +302,90 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
     }),
     (error) => error instanceof CurrentSourceEvidenceError && error.code === "CONSOLE_EXPORT_HOLD",
   );
+
+  for (const [label, mutate, code] of [
+    ["stale roster version", (claim) => { claim.rosterVersion = "IAT_V2_MIGRATION_BACKFILL_WEEK11_V1"; }, "COMPLETE_ROSTER_HOLD"],
+    ["stale policy week", (claim) => { claim.conditions.policyWeek = 12; }, "COMPLETE_ROSTER_HOLD"],
+    ["stale CCC round", (claim) => { claim.conditions.cccRound = 11; }, "COMPLETE_ROSTER_HOLD"],
+    ["stale CCC terminal", (claim) => { claim.conditions.cccRoundTerminalAction = "REVEAL_CCC_ROUND_11"; }, "COMPLETE_ROSTER_HOLD"],
+    ["old round-specific terminal field", (claim) => {
+      delete claim.conditions.cccRoundTerminalAction;
+      claim.conditions.cccRound11TerminalAction = "REVEAL_CCC_ROUND_11";
+    }, "INPUT_SCHEMA_HOLD"],
+  ]) {
+    const drifted = structuredClone(incompleteClaim);
+    mutate(drifted);
+    let rpcCalled = false;
+    await assert.rejects(
+      finalizeCurrentSourceDevnetEvidence({
+        consoleExport: drifted,
+        binding: value.binding,
+        rpcCall: async (...args) => {
+          rpcCalled = true;
+          return value.rpcCall(...args);
+        },
+        expectedProgramId: value.programId.toBase58(),
+        expectedSigner: value.signer.publicKey.toBase58(),
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === code,
+      label,
+    );
+    assert.equal(rpcCalled, false, `${label} reached RPC observation`);
+  }
+
+  for (const [label, finalizedBlockTime] of [
+    ["missing fresh finalized block time", null],
+    ["fresh finalized clock before policy week 13", 1_788_499_174],
+    ["fresh finalized clock at the CCC round 12 close", IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP],
+  ]) {
+    const rpcMethods = [];
+    await assert.rejects(
+      finalizeCurrentSourceDevnetEvidence({
+        consoleExport: incompleteClaim,
+        binding: value.binding,
+        rpcCall: async (method, params) => {
+          rpcMethods.push(method);
+          if (method === "getBlockTime") return finalizedBlockTime;
+          return value.rpcCall(method, params);
+        },
+        expectedProgramId: value.programId.toBase58(),
+        expectedSigner: value.signer.publicKey.toBase58(),
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === "CEREMONY_HORIZON_HOLD",
+      label,
+    );
+    assert.deepEqual(
+      rpcMethods,
+      ["getGenesisHash", "getSlot", "getBlockTime"],
+      `${label} reached transaction or poststate observation`,
+    );
+  }
+
+  for (const [label, transactionBlockTime] of [
+    ["finalized transaction before policy week 13", 1_788_499_174],
+    ["finalized transaction at the CCC round 12 close", IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP],
+  ]) {
+    const rpcMethods = [];
+    await assert.rejects(
+      finalizeCurrentSourceDevnetEvidence({
+        consoleExport: incompleteClaim,
+        binding: value.binding,
+        rpcCall: async (method, params) => {
+          rpcMethods.push(method);
+          if (method === "getTransaction") {
+            return { ...value.responses.getTransaction, blockTime: transactionBlockTime };
+          }
+          return value.rpcCall(method, params);
+        },
+        expectedProgramId: value.programId.toBase58(),
+        expectedSigner: value.signer.publicKey.toBase58(),
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === "CEREMONY_HORIZON_HOLD",
+      label,
+    );
+    assert.ok(rpcMethods.includes("getTransaction"), `${label} did not exercise transaction observation`);
+    assert.equal(rpcMethods.includes("getBlock"), false, `${label} reached ledger-proof observation`);
+  }
 });
 
 test("finalizer fails closed on wrong network, timeout, failed transaction, message drift, or deployed-byte drift", async (t) => {
@@ -504,7 +604,7 @@ test("ledger proof binds same-slot order, last ProgramData upgrade, and conditio
       assert.equal(params[0], 500);
       assert.equal(params[1].commitment, "finalized");
       return {
-        blockTime: 1_777_000_000,
+        blockTime: overrides.blockTime ?? 1_788_500_000,
         blockhash: Keypair.generate().publicKey.toBase58(),
         previousBlockhash: Keypair.generate().publicKey.toBase58(),
         transactions: transactions.map((item) => Array.isArray(item?.transaction) ? item : blockEntry(item)),
@@ -523,6 +623,14 @@ test("ledger proof binds same-slot order, last ProgramData upgrade, and conditio
 
   await t.test("same-slot roster reversal", async () => {
     await assert.rejects(invoke([feature, upgrade]), (error) => error instanceof CurrentSourceEvidenceError && error.code === "TRANSACTION_ORDER_HOLD");
+  });
+  await t.test("ledger block at the source-bound horizon close", async () => {
+    await assert.rejects(
+      invoke([upgrade, feature], {
+        blockTime: IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError && error.code === "CEREMONY_HORIZON_HOLD",
+    );
   });
   await t.test("later ProgramData upgrade in deployment slot", async () => {
     await assert.rejects(invoke([upgrade, feature, laterUpgrade]), (error) => error instanceof CurrentSourceEvidenceError && error.code === "DEPLOYMENT_ORDER_HOLD");
@@ -586,6 +694,99 @@ test("ledger proof binds same-slot order, last ProgramData upgrade, and conditio
   });
 });
 
+test("source finalizer derives only a bound ceremony tuple and authenticates the canonical local binary", () => {
+  const projectRoot = mkdtempSync(join(tmpdir(), "iat-v2-finalizer-binding-"));
+  try {
+    const binaryDirectory = join(projectRoot, "target", "verifiable");
+    const binaryPath = join(binaryDirectory, "iat_v2.so");
+    const hardlinkPath = join(projectRoot, "iat_v2-hardlink.so");
+    const programBytes = Buffer.from("reviewed-program-a", "utf8");
+    mkdirSync(binaryDirectory, { recursive: true });
+    writeFileSync(binaryPath, programBytes);
+    const verified = Object.freeze({
+      schema: "iat-v2-devnet-program-ceremony-runtime-verification/v1",
+      status: "BOUND",
+      network: "devnet",
+      mainnetStatus: "HOLD",
+      relation: "DIRECT_BINDING_ONLY_SUCCESSOR",
+      checkoutRelation: "PR_MERGE_SECOND_PARENT",
+      checkoutObjectVerified: true,
+      checkoutEvidenceRefVerified: true,
+      runtimeEvidenceVerified: true,
+      runtimeEvidencePath: "target/verifiable/iat-v2-ceremony-runtime-build-evidence.json",
+      transactionExecution: false,
+      signing: false,
+      broadcast: false,
+      mainnetAuthorized: false,
+      sourceHeadCommit: "1".repeat(40),
+      sourceHeadTree: "2".repeat(40),
+      artifactSha256: sha256(programBytes),
+      artifactBytes: programBytes.length,
+      runtimeEvidenceManifestSha256: "3".repeat(64),
+      ciRunId: 123456789,
+      ciRunAttempt: 2,
+    });
+    const verifyRuntimeBinding = () => verified;
+    const exact = bindingFromCanonicalCeremony({ projectRoot, verifyRuntimeBinding });
+    assert.equal(Object.isFrozen(exact), true);
+    assert.deepEqual(exact, {
+      sourceCommit: verified.sourceHeadCommit,
+      sourceTree: verified.sourceHeadTree,
+      programArtifactSha256: verified.artifactSha256,
+      programArtifactBytes: verified.artifactBytes,
+      ciBuildEvidenceSha256: verified.runtimeEvidenceManifestSha256,
+      ciRunUrl: "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/123456789/attempts/2",
+    });
+
+    writeFileSync(binaryPath, Buffer.from("reviewed-program-b", "utf8"));
+    assert.throws(
+      () => bindingFromCanonicalCeremony({ projectRoot, verifyRuntimeBinding }),
+      (error) => error instanceof CurrentSourceEvidenceError
+        && error.code === "SOURCE_BINDING_HOLD"
+        && /bytes or SHA-256 disagree/u.test(error.message),
+    );
+
+    writeFileSync(binaryPath, programBytes.subarray(0, programBytes.length - 1));
+    assert.throws(
+      () => bindingFromCanonicalCeremony({ projectRoot, verifyRuntimeBinding }),
+      (error) => error instanceof CurrentSourceEvidenceError
+        && error.code === "SOURCE_BINDING_HOLD"
+        && /bytes or SHA-256 disagree/u.test(error.message),
+    );
+
+    writeFileSync(binaryPath, programBytes);
+    linkSync(binaryPath, hardlinkPath);
+    assert.throws(
+      () => bindingFromCanonicalCeremony({ projectRoot, verifyRuntimeBinding }),
+      (error) => error instanceof CurrentSourceEvidenceError
+        && error.code === "SOURCE_BINDING_HOLD"
+        && /single-linked/u.test(error.message),
+    );
+    rmSync(hardlinkPath);
+
+    assert.throws(
+      () => bindingFromCanonicalCeremony({
+        projectRoot,
+        verifyRuntimeBinding: () => ({ ...verified, mainnetAuthorized: true }),
+      }),
+      (error) => error instanceof CurrentSourceEvidenceError
+        && error.code === "SOURCE_BINDING_HOLD"
+        && /exact non-authorizing bound Devnet result/u.test(error.message),
+    );
+
+    rmSync(binaryPath);
+    mkdirSync(binaryPath);
+    assert.throws(
+      () => bindingFromCanonicalCeremony({ projectRoot, verifyRuntimeBinding }),
+      (error) => error instanceof CurrentSourceEvidenceError
+        && error.code === "SOURCE_BINDING_HOLD"
+        && /regular non-symlink file/u.test(error.message),
+    );
+  } finally {
+    rmSync(projectRoot, { recursive: true, force: true });
+  }
+});
+
 test("source finalizer exposes no signing or broadcast operation and CLI is dry unless --write is explicit", () => {
   const source = readFileSync("scripts/finalize-iat-v2-current-source-devnet-evidence.mjs", "utf8");
   assert.doesNotMatch(source, /sendRawTransaction|sendTransaction|signTransaction|partialSign|\.sign\(/u);
@@ -594,4 +795,53 @@ test("source finalizer exposes no signing or broadcast operation and CLI is dry 
   assert.match(source, /commitment: "finalized"/u);
   assert.match(source, /redirect: "error"/u);
   assert.match(source, /canonicalCliRpcCallers\.has\(rpcCall\)/u);
+  assert.match(source, /verifyRuntimeBinding = verifyIatV2DevnetProgramCeremonyRuntimeBinding/u);
+  assert.match(source, /verified = verifyRuntimeBinding\(\{ projectRoot \}\)/u);
+  assert.match(source, /runtimeEvidencePath === IAT_V2_DEVNET_PROGRAM_CEREMONY_RUNTIME_EVIDENCE_PATH/u);
+  assert.match(source, /programBytes\.length === verified\.artifactBytes/u);
+  assert.match(source, /sha256\(programBytes\) === verified\.artifactSha256/u);
+  assert.doesNotMatch(source, /options\.ciManifest|bindingFromCiManifest/u);
+  assert.doesNotMatch(source, /tools\/iat-v2-admin-console\/attended-evidence/u);
+  assert.match(source, /IAT_V2_DEVNET_CEREMONY_ROSTER_VERSION/u);
+  assert.match(source, /"policyWeek",\s*"cccRound",\s*"cccRoundTerminalAction"/u);
+  assert.match(source, /IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC/u);
+  assert.match(source, /validateCeremonyHorizonTimestamp\(\{\s*slot: result\.slot,\s*timestamp: result\.blockTime/gu);
+  assert.match(source, /validateCeremonyHorizonTimestamp\(\{\s*slot,\s*timestamp: block\.blockTime/gu);
+  assert.match(
+    source,
+    /completePostState = await observeCompleteRehearsalPostState[\s\S]*final: await observeFreshCeremonyHorizon[\s\S]*clearingBlocker = null/u,
+  );
+  assert.match(
+    source,
+    /const observationFloor = Math\.max\(\s*minContextSlot,\s*statusContextSlot,\s*deployedProgram\.programContextSlot,\s*deployedProgram\.programDataContextSlot/u,
+  );
+  assert.match(
+    source,
+    /observeCompleteRehearsalPostState\(\{[\s\S]*minContextSlot: observationFloor,[\s\S]*observeFreshCeremonyHorizon\(\{[\s\S]*minContextSlot: Math\.max\(observationFloor, completePostState\.contextSlot\)/u,
+  );
+  assert.match(source, /ceremonyHorizonObservation\?\.final \? \[/u);
+  const runtimeVerifierSource = readFileSync(
+    "scripts/lib/iat-v2-devnet-program-ceremony-runtime-binding.mjs",
+    "utf8",
+  );
+  assert.match(runtimeVerifierSource, /verifyArtifactFiles: false/u);
+});
+
+test("source finalizer CLI rejects an operator-selected CI manifest before any observation", () => {
+  const result = spawnSync(process.execPath, [
+    "scripts/finalize-iat-v2-current-source-devnet-evidence.mjs",
+    "--console-export",
+    "not-read.json",
+    "--staging-dir",
+    "not-written",
+    "--ci-manifest",
+    "target/verifiable/iat-v2-build-evidence.json",
+  ], {
+    cwd: process.cwd(),
+    encoding: "utf8",
+  });
+  const output = `${result.stdout}\n${result.stderr}`;
+  assert.notEqual(result.status, 0);
+  assert.match(output, /"code"\s*:\s*"CLI_USAGE"/u);
+  assert.match(output, /unexpected option: --ci-manifest/u);
 });

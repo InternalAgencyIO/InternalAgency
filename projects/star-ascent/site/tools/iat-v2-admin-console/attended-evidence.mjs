@@ -1,42 +1,50 @@
+import {
+  IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_MIGRATION_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  IAT_V2_DEVNET_CEREMONY_ROSTER_VERSION,
+  IAT_V2_DEVNET_CEREMONY_STANDARD_SETTLEMENT_WEEKS,
+  iatV2DevnetCeremonyTerminalActions,
+} from "../../programs/iat_v2/ceremony-horizon.mjs";
+
 const RECEIPT_SET_SCHEMA = "iat-v2-current-source-attended-receipt-set/v1";
 const COMPLETE_BUNDLE_SCHEMA = "iat-v2-current-source-attended-devnet-console-bundle/v1";
-const COMPLETE_ROSTER_VERSION = "IAT_V2_MIGRATION_BACKFILL_WEEK11_V1";
+const COMPLETE_ROSTER_VERSION = IAT_V2_DEVNET_CEREMONY_ROSTER_VERSION;
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const hex40 = /^[0-9a-f]{40}$/u;
 const hex64 = /^[0-9a-f]{64}$/u;
 const base58 = /^[1-9A-HJ-NP-Za-km-z]+$/u;
 const base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-const ROUND_11_TERMINAL_ACTIONS = Object.freeze([
-  "REVEAL_CCC_ROUND_11",
-  "EXPIRE_CCC_ROUND_11",
-]);
+const CCC_ROUND_TERMINAL_ACTIONS = iatV2DevnetCeremonyTerminalActions();
 const ROSTER_BEFORE_RANDOMNESS = Object.freeze([
   "UPGRADE_PROGRAM",
-  "MIGRATE_LEGACY_ROUND_WEEK_7",
-  "MIGRATE_LEGACY_ROUND_WEEK_8",
-  "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
-  "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
-  "SETTLE_STANDARD_POSITION_WEEK_10",
-  "SETTLE_STANDARD_POSITION_WEEK_11",
-  "SETTLE_LINKED_POSITION_2_WEEK_9",
-  "SETTLE_LINKED_POSITION_2_WEEK_10",
-  "SETTLE_LINKED_POSITION_3_WEEK_9",
-  "SETTLE_LINKED_POSITION_3_WEEK_10",
+  ...IAT_V2_DEVNET_CEREMONY_MIGRATION_WEEKS
+    .map((week) => `MIGRATE_LEGACY_ROUND_WEEK_${week}`),
+  ...IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS
+    .map((week) => `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_${week}`),
+  ...IAT_V2_DEVNET_CEREMONY_STANDARD_SETTLEMENT_WEEKS
+    .map((week) => `SETTLE_STANDARD_POSITION_WEEK_${week}`),
+  ...IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS
+    .map((week) => `SETTLE_LINKED_POSITION_2_WEEK_${week}`),
+  ...IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS
+    .map((week) => `SETTLE_LINKED_POSITION_3_WEEK_${week}`),
 ]);
 const ROSTER_AFTER_RANDOMNESS = Object.freeze([
-  "COMMIT_CCC_ROUND_11",
-  ROUND_11_TERMINAL_ACTIONS,
-  "SETTLE_LINKED_POSITION_2_WEEK_11",
-  "SETTLE_LINKED_POSITION_3_WEEK_11",
+  `COMMIT_CCC_ROUND_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+  CCC_ROUND_TERMINAL_ACTIONS,
+  `SETTLE_LINKED_POSITION_2_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+  `SETTLE_LINKED_POSITION_3_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
 ]);
 const CANONICAL_ATTENDED_ACTIONS = new Set([
   "EXTEND_PROGRAM_DATA",
   ...ROSTER_BEFORE_RANDOMNESS,
   "CREATE_SWITCHBOARD_RANDOMNESS",
-  "COMMIT_CCC_ROUND_11",
-  ...ROUND_11_TERMINAL_ACTIONS,
-  "SETTLE_LINKED_POSITION_2_WEEK_11",
-  "SETTLE_LINKED_POSITION_3_WEEK_11",
+  `COMMIT_CCC_ROUND_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+  ...CCC_ROUND_TERMINAL_ACTIONS,
+  `SETTLE_LINKED_POSITION_2_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+  `SETTLE_LINKED_POSITION_3_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
 ]);
 
 function check(condition, message) {
@@ -245,7 +253,9 @@ export function clearAttendedReceipts(storage, expectedBinding) {
 export function completeAttendedRoster({
   programDataExtensionRequired,
   switchboardRandomnessCreationRequired = true,
-  cccRound11TerminalAction,
+  policyWeek = IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  cccRound = IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  cccRoundTerminalAction,
 } = {}) {
   check(typeof programDataExtensionRequired === "boolean", "Extension condition is required");
   check(
@@ -253,17 +263,25 @@ export function completeAttendedRoster({
     "Fresh Switchboard randomness creation is mandatory for the canonical attended roster",
   );
   check(
-    ROUND_11_TERMINAL_ACTIONS.includes(cccRound11TerminalAction),
-    "Round 11 terminal action is not reviewed",
+    policyWeek === IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+    "Policy week drifted from the source-bound attended roster",
+  );
+  check(
+    cccRound === IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+    "CCC round drifted from the source-bound attended roster",
+  );
+  check(
+    CCC_ROUND_TERMINAL_ACTIONS.includes(cccRoundTerminalAction),
+    `Round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} terminal action is not reviewed`,
   );
   return Object.freeze([
     ...(programDataExtensionRequired ? ["EXTEND_PROGRAM_DATA"] : []),
     ...ROSTER_BEFORE_RANDOMNESS,
     "CREATE_SWITCHBOARD_RANDOMNESS",
-    "COMMIT_CCC_ROUND_11",
-    cccRound11TerminalAction,
-    "SETTLE_LINKED_POSITION_2_WEEK_11",
-    "SETTLE_LINKED_POSITION_3_WEEK_11",
+    `COMMIT_CCC_ROUND_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+    cccRoundTerminalAction,
+    `SETTLE_LINKED_POSITION_2_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+    `SETTLE_LINKED_POSITION_3_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
   ]);
 }
 
@@ -294,12 +312,22 @@ export function canonicalAttendedNextActionPolicy({
   completedActions = [],
   programDataExtensionRequired,
   switchboardRandomnessCreationRequired = true,
+  policyWeek = IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  cccRound = IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
 } = {}) {
   const completed = exactCompletedActions(completedActions);
   check(typeof programDataExtensionRequired === "boolean", "Canonical extension condition is required");
   check(
     switchboardRandomnessCreationRequired === true,
     "Fresh Switchboard randomness creation is mandatory for canonical attended progress",
+  );
+  check(
+    policyWeek === IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+    "Canonical attended progress policy week drifted",
+  );
+  check(
+    cccRound === IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+    "Canonical attended progress CCC round drifted",
   );
 
   const beforeRandomness = [
@@ -452,9 +480,12 @@ export function buildCompleteAttendedBundle({
     switchboardRandomnessCreationRequired,
     "Aggregate evidence is missing mandatory receipt CREATE_SWITCHBOARD_RANDOMNESS",
   );
-  const terminalActions = ROUND_11_TERMINAL_ACTIONS
+  const terminalActions = CCC_ROUND_TERMINAL_ACTIONS
     .filter((action) => byAction.has(action));
-  check(terminalActions.length === 1, "Aggregate receipts require exactly one round 11 terminal action");
+  check(
+    terminalActions.length === 1,
+    `Aggregate receipts require exactly one round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} terminal action`,
+  );
   const capacities = [...new Set(sets
     .map((set) => set.preUpgradeProgramDataCapacityBytes)
     .filter((value) => value !== null))];
@@ -463,7 +494,9 @@ export function buildCompleteAttendedBundle({
     programDataExtensionRequired,
     preUpgradeProgramDataCapacityBytes: capacities[0],
     switchboardRandomnessCreationRequired,
-    cccRound11TerminalAction: terminalActions[0],
+    policyWeek: IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+    cccRound: IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+    cccRoundTerminalAction: terminalActions[0],
   });
   const roster = completeAttendedRoster(conditions);
   const extra = uniqueReceipts.find((receipt) => !roster.includes(receipt.action));

@@ -1,32 +1,16 @@
 const LATCH_SCHEMA = "iat-v2-current-source-model-t-transaction-prompt-latch/v1";
 const GLOBAL_LOCK_NAME = "iat-v2-current-source-model-t-transaction-prompt/global/v1";
 const LATCH_PREFIX = "iat-v2-current-source-model-t-transaction-prompt";
-const ROUND_11_TERMINAL_LATCH_SLOT = "CCC_ROUND_11_TERMINAL";
+const CEREMONY_TERMINAL_LATCH_SLOT = "CCC_ROUND_12_TERMINAL";
 const hex40 = /^[0-9a-f]{40}$/u;
 const hex64 = /^[0-9a-f]{64}$/u;
 const base58 = /^[1-9A-HJ-NP-Za-km-z]+$/u;
 const base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
-const CANONICAL_ACTIONS = new Set([
-  "EXTEND_PROGRAM_DATA",
-  "UPGRADE_PROGRAM",
-  "MIGRATE_LEGACY_ROUND_WEEK_7",
-  "MIGRATE_LEGACY_ROUND_WEEK_8",
-  "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
-  "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
-  "SETTLE_STANDARD_POSITION_WEEK_10",
-  "SETTLE_STANDARD_POSITION_WEEK_11",
-  "SETTLE_LINKED_POSITION_2_WEEK_9",
-  "SETTLE_LINKED_POSITION_2_WEEK_10",
-  "SETTLE_LINKED_POSITION_3_WEEK_9",
-  "SETTLE_LINKED_POSITION_3_WEEK_10",
-  "CREATE_SWITCHBOARD_RANDOMNESS",
-  "COMMIT_CCC_ROUND_11",
-  "REVEAL_CCC_ROUND_11",
-  "EXPIRE_CCC_ROUND_11",
-  "SETTLE_LINKED_POSITION_2_WEEK_11",
-  "SETTLE_LINKED_POSITION_3_WEEK_11",
-]);
+// Exact source-bound policy-13 / CCC-12 action roster. Numeric forms are
+// deliberately bounded so no future week or round is admitted implicitly.
+const CANONICAL_ACTION = /^(?:EXTEND_PROGRAM_DATA|UPGRADE_PROGRAM|MIGRATE_LEGACY_ROUND_WEEK_[78]|BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_(?:9|1[01])|SETTLE_STANDARD_POSITION_WEEK_1[0-3]|SETTLE_LINKED_POSITION_[23]_WEEK_(?:9|1[0-2])|CREATE_SWITCHBOARD_RANDOMNESS|(?:COMMIT|REVEAL|EXPIRE)_CCC_ROUND_12)$/u;
+const CEREMONY_TERMINAL_ACTION = /^(?:REVEAL|EXPIRE)_CCC_ROUND_12$/u;
 const LATCH_FIELDS = Object.freeze([
   "schema",
   "status",
@@ -67,13 +51,13 @@ function exactBinding({ sourceCommit, programArtifactSha256, mint } = {}) {
 }
 
 function exactAction(action) {
-  check(CANONICAL_ACTIONS.has(action), "Prompt coordination action is outside the canonical attended roster");
+  check(CANONICAL_ACTION.test(action), "Prompt coordination action is outside the canonical attended roster");
   return action;
 }
 
 function permanentLatchSlot(action) {
-  return action === "REVEAL_CCC_ROUND_11" || action === "EXPIRE_CCC_ROUND_11"
-    ? ROUND_11_TERMINAL_LATCH_SLOT
+  return CEREMONY_TERMINAL_ACTION.test(action)
+    ? CEREMONY_TERMINAL_LATCH_SLOT
     : action;
 }
 

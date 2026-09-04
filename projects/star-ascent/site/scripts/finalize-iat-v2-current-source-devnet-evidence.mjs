@@ -3,13 +3,19 @@
 import "./lib/iat-v2-attended-node-runtime.mjs";
 import { createHash } from "node:crypto";
 import {
+  closeSync,
+  constants,
   existsSync,
+  fstatSync,
+  lstatSync,
   mkdirSync,
+  openSync,
   readFileSync,
+  realpathSync,
   readdirSync,
   writeFileSync,
 } from "node:fs";
-import { isAbsolute, resolve } from "node:path";
+import { normalize, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 const { PublicKey, Transaction, VersionedTransaction } = await import("@solana/web3.js");
 const {
@@ -17,7 +23,29 @@ const {
   decodeCompleteRehearsalRoster,
   observeCompleteRehearsalPostState,
 } = await import("./lib/iat-v2-current-source-devnet-clearance.mjs");
-const { validateSbfEvidence } = await import("./validate-iat-v2-ci-sbf-evidence.mjs");
+const {
+  IAT_V2_DEVNET_PROGRAM_CEREMONY_RUNTIME_EVIDENCE_PATH,
+  verifyIatV2DevnetProgramCeremonyRuntimeBinding,
+} = await import("./lib/iat-v2-devnet-program-ceremony-runtime-binding.mjs");
+const {
+  IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_MIGRATION_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  IAT_V2_DEVNET_CEREMONY_ROSTER_VERSION,
+  IAT_V2_DEVNET_CEREMONY_STANDARD_SETTLEMENT_WEEKS,
+  assertIatV2DevnetCeremonyHorizon,
+  iatV2DevnetCeremonyTerminalActions,
+} = await import("../programs/iat_v2/ceremony-horizon.mjs");
+const {
+  IAT_V2_SECONDS_PER_DAY,
+  IAT_V2_SECONDS_PER_WEEK,
+  currentIatV2CccRound,
+  currentIatV2Week,
+} = await import("../programs/iat_v2/feature-rehearsal.mjs");
 
 export const CANONICAL_DEVNET_RPC = "https://api.devnet.solana.com";
 export const CANONICAL_DEVNET_GENESIS_HASH =
@@ -33,10 +61,14 @@ const SYSTEM_PROGRAM = "11111111111111111111111111111111";
 const PARTIAL_PREDICATE = "CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL_PARTIAL";
 const CLEARING_PREDICATE = "CURRENT_SOURCE_SIGNED_DEVNET_REHEARSAL";
 const COMPLETE_BUNDLE_SCHEMA = "iat-v2-current-source-attended-devnet-console-bundle/v1";
-const COMPLETE_ROSTER_VERSION = "IAT_V2_MIGRATION_BACKFILL_WEEK11_V1";
+const COMPLETE_ROSTER_VERSION = IAT_V2_DEVNET_CEREMONY_ROSTER_VERSION;
 const PARTIAL_DIRECT_FILENAME = "signed-devnet-rehearsal-partial.json";
 const CLEARING_DIRECT_FILENAME = "signed-devnet-rehearsal.json";
 const PUBLIC_ROOT = "public/evidence/iat-v2/current-source";
+const CANONICAL_PROGRAM_BINARY_PATH = "target/verifiable/iat_v2.so";
+const CEREMONY_GENESIS_TIMESTAMP = IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP
+  - IAT_V2_SECONDS_PER_DAY
+  - ((IAT_V2_DEVNET_CEREMONY_CCC_ROUND + 1) * IAT_V2_SECONDS_PER_WEEK);
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const hex40 = /^[0-9a-f]{40}$/u;
 const hex64 = /^[0-9a-f]{64}$/u;
@@ -44,6 +76,7 @@ const base58 = /^[1-9A-HJ-NP-Za-km-z]+$/u;
 const READ_ONLY_RPC_METHODS = new Set([
   "getAccountInfo",
   "getBlock",
+  "getBlockTime",
   "getGenesisHash",
   "getMultipleAccounts",
   "getSignatureStatuses",
@@ -66,6 +99,62 @@ function fail(code, message) {
 
 function check(condition, code, message) {
   if (!condition) fail(code, message);
+}
+
+function sameStableFile(left, right) {
+  return left.dev === right.dev
+    && left.ino === right.ino
+    && left.size === right.size
+    && left.nlink === right.nlink
+    && left.mtimeNs === right.mtimeNs
+    && left.ctimeNs === right.ctimeNs;
+}
+
+function readCanonicalRegularBytes({ projectRoot, repositoryPath, label }) {
+  const root = realpathSync(projectRoot);
+  const absolute = resolve(root, repositoryPath);
+  let descriptor;
+  try {
+    const pathBefore = lstatSync(absolute, { bigint: true });
+    check(
+      pathBefore.isFile() && !pathBefore.isSymbolicLink(),
+      "SOURCE_BINDING_HOLD",
+      `${label} must be a regular non-symlink file`,
+    );
+    check(pathBefore.nlink === 1n, "SOURCE_BINDING_HOLD", `${label} must be single-linked`);
+    check(
+      normalize(relative(root, realpathSync(absolute))) === normalize(repositoryPath),
+      "SOURCE_BINDING_HOLD",
+      `${label} does not resolve to its canonical project path`,
+    );
+    descriptor = openSync(absolute, constants.O_RDONLY | constants.O_NOFOLLOW);
+    const descriptorBefore = fstatSync(descriptor, { bigint: true });
+    check(
+      descriptorBefore.isFile() && sameStableFile(pathBefore, descriptorBefore),
+      "SOURCE_BINDING_HOLD",
+      `${label} changed while it was opened`,
+    );
+    const bytes = readFileSync(descriptor);
+    const descriptorAfter = fstatSync(descriptor, { bigint: true });
+    const pathAfter = lstatSync(absolute, { bigint: true });
+    check(
+      sameStableFile(descriptorBefore, descriptorAfter)
+        && sameStableFile(descriptorAfter, pathAfter)
+        && normalize(relative(root, realpathSync(absolute))) === normalize(repositoryPath),
+      "SOURCE_BINDING_HOLD",
+      `${label} changed while it was read`,
+    );
+    check(BigInt(bytes.length) === pathBefore.size, "SOURCE_BINDING_HOLD", `${label} byte length changed while it was read`);
+    return bytes;
+  } catch (error) {
+    if (error instanceof CurrentSourceEvidenceError) throw error;
+    fail(
+      "SOURCE_BINDING_HOLD",
+      `${label} could not be read safely: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  } finally {
+    if (descriptor !== undefined) closeSync(descriptor);
+  }
 }
 
 function exactKeys(value, expected, label) {
@@ -149,35 +238,99 @@ function validateBinding(binding) {
   check(/^https:\/\/github\.com\/InternalAgencyIO\/InternalAgency\/actions\/runs\/[1-9][0-9]*\/attempts\/[1-9][0-9]*$/u.test(binding.ciRunUrl), "SOURCE_BINDING_HOLD", "CI run receipt is not canonical");
 }
 
+function validateCeremonyHorizonTimestamp({ slot, timestamp, label }) {
+  check(Number.isSafeInteger(slot) && slot > 0, "CEREMONY_HORIZON_HOLD", `${label} slot is invalid`);
+  check(
+    Number.isSafeInteger(timestamp) && timestamp > 0,
+    "CEREMONY_HORIZON_HOLD",
+    `${label} block time is unavailable`,
+  );
+  const policyWeek = currentIatV2Week(CEREMONY_GENESIS_TIMESTAMP, timestamp);
+  const cccRound = currentIatV2CccRound(CEREMONY_GENESIS_TIMESTAMP, timestamp);
+  let horizon;
+  try {
+    horizon = assertIatV2DevnetCeremonyHorizon({
+      policyWeek,
+      cccRound,
+      nowTimestamp: timestamp,
+    });
+  } catch (error) {
+    fail(
+      "CEREMONY_HORIZON_HOLD",
+      `${label} is outside the source-bound ceremony horizon: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  return Object.freeze({
+    slot,
+    timestamp,
+    observedAtUtc: new Date(timestamp * 1_000).toISOString(),
+    policyWeek: horizon.policyWeek,
+    cccRound: horizon.cccRound,
+    closesAtTimestamp: horizon.closesAtTimestamp,
+    closesAtUtc: horizon.closesAtUtc,
+  });
+}
+
+async function observeCeremonyHorizonAtFinalizedSlot({ rpcCall, slot, label }) {
+  const timestamp = await rpcCall("getBlockTime", [slot]);
+  return validateCeremonyHorizonTimestamp({ slot, timestamp, label });
+}
+
+async function observeFreshCeremonyHorizon({ rpcCall, minContextSlot, label }) {
+  const slot = await rpcCall("getSlot", [{ commitment: "finalized", minContextSlot }]);
+  check(
+    Number.isSafeInteger(slot) && slot >= minContextSlot,
+    "CEREMONY_HORIZON_HOLD",
+    `${label} slot is absent or below minContextSlot`,
+  );
+  return observeCeremonyHorizonAtFinalizedSlot({ rpcCall, slot, label });
+}
+
 function completeRoster(conditions) {
   exactKeys(conditions, [
     "programDataExtensionRequired",
     "preUpgradeProgramDataCapacityBytes",
     "switchboardRandomnessCreationRequired",
-    "cccRound11TerminalAction",
+    "policyWeek",
+    "cccRound",
+    "cccRoundTerminalAction",
   ], "complete rehearsal conditions");
   check(typeof conditions.programDataExtensionRequired === "boolean", "COMPLETE_ROSTER_HOLD", "programDataExtensionRequired must be boolean");
   check(Number.isSafeInteger(conditions.preUpgradeProgramDataCapacityBytes) && conditions.preUpgradeProgramDataCapacityBytes > 0, "COMPLETE_ROSTER_HOLD", "pre-upgrade ProgramData capacity is invalid");
   check(conditions.switchboardRandomnessCreationRequired === true, "COMPLETE_ROSTER_HOLD", "the canonical rehearsal requires a fresh source-bound Switchboard randomness creation receipt");
-  check(["REVEAL_CCC_ROUND_11", "EXPIRE_CCC_ROUND_11"].includes(conditions.cccRound11TerminalAction), "COMPLETE_ROSTER_HOLD", "CCC round 11 terminal action is invalid");
+  check(
+    conditions.policyWeek === IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+    "COMPLETE_ROSTER_HOLD",
+    "complete rehearsal policy week drifted from the source-bound ceremony horizon",
+  );
+  check(
+    conditions.cccRound === IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+    "COMPLETE_ROSTER_HOLD",
+    `complete rehearsal CCC round drifted from the source-bound ceremony horizon closing ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC}`,
+  );
+  check(
+    iatV2DevnetCeremonyTerminalActions().includes(conditions.cccRoundTerminalAction),
+    "COMPLETE_ROSTER_HOLD",
+    `CCC round ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND} terminal action is invalid`,
+  );
   return [
     ...(conditions.programDataExtensionRequired ? ["EXTEND_PROGRAM_DATA"] : []),
     "UPGRADE_PROGRAM",
-    "MIGRATE_LEGACY_ROUND_WEEK_7",
-    "MIGRATE_LEGACY_ROUND_WEEK_8",
-    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
-    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
-    "SETTLE_STANDARD_POSITION_WEEK_10",
-    "SETTLE_STANDARD_POSITION_WEEK_11",
-    "SETTLE_LINKED_POSITION_2_WEEK_9",
-    "SETTLE_LINKED_POSITION_2_WEEK_10",
-    "SETTLE_LINKED_POSITION_3_WEEK_9",
-    "SETTLE_LINKED_POSITION_3_WEEK_10",
+    ...IAT_V2_DEVNET_CEREMONY_MIGRATION_WEEKS
+      .map((week) => `MIGRATE_LEGACY_ROUND_WEEK_${week}`),
+    ...IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS
+      .map((week) => `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_${week}`),
+    ...IAT_V2_DEVNET_CEREMONY_STANDARD_SETTLEMENT_WEEKS
+      .map((week) => `SETTLE_STANDARD_POSITION_WEEK_${week}`),
+    ...IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS
+      .map((week) => `SETTLE_LINKED_POSITION_2_WEEK_${week}`),
+    ...IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS
+      .map((week) => `SETTLE_LINKED_POSITION_3_WEEK_${week}`),
     "CREATE_SWITCHBOARD_RANDOMNESS",
-    "COMMIT_CCC_ROUND_11",
-    conditions.cccRound11TerminalAction,
-    "SETTLE_LINKED_POSITION_2_WEEK_11",
-    "SETTLE_LINKED_POSITION_3_WEEK_11",
+    `COMMIT_CCC_ROUND_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+    conditions.cccRoundTerminalAction,
+    `SETTLE_LINKED_POSITION_2_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
+    `SETTLE_LINKED_POSITION_3_WEEK_${IAT_V2_DEVNET_CEREMONY_CCC_ROUND}`,
   ];
 }
 
@@ -465,6 +618,11 @@ export async function observeCompleteRehearsalLedgerProof({
     }]);
     check(block && Array.isArray(block.transactions), "BLOCK_OBSERVATION_HOLD", `finalized block ${slot} is unavailable`);
     check(Number.isSafeInteger(block.blockTime) && block.blockTime > 0, "BLOCK_OBSERVATION_HOLD", `finalized block ${slot} has no block time`);
+    validateCeremonyHorizonTimestamp({
+      slot,
+      timestamp: block.blockTime,
+      label: `finalized rehearsal block ${slot}`,
+    });
     const decodedBlock = block.transactions.map((entry, index) => parseBlockTransaction(entry, slot, index));
     const signatureIndexes = new Map();
     decodedBlock.forEach((entry, index) => {
@@ -616,6 +774,17 @@ export async function finalizeCurrentSourceDevnetEvidence({
   check(genesisHash === CANONICAL_DEVNET_GENESIS_HASH, "NETWORK_BINDING_HOLD", "RPC genesis hash is not canonical Devnet");
   const minContextSlot = await rpcCall("getSlot", [{ commitment: "finalized" }]);
   check(Number.isSafeInteger(minContextSlot) && minContextSlot > 0, "RPC_CONTEXT_HOLD", "finalized minContextSlot anchor is invalid");
+  let ceremonyHorizonObservation = null;
+  if (validatedExport.completeBundle) {
+    ceremonyHorizonObservation = Object.freeze({
+      initial: await observeCeremonyHorizonAtFinalizedSlot({
+        rpcCall,
+        slot: minContextSlot,
+        label: "initial fresh finalized Devnet horizon",
+      }),
+      final: null,
+    });
+  }
   const deployedProgram = await observeDeployedProgram({
     rpcCall,
     binding,
@@ -633,6 +802,12 @@ export async function finalizeCurrentSourceDevnetEvidence({
     sleep,
   });
   const statusContextSlot = requireContextSlot(statusObservation, minContextSlot, "signature status");
+  const observationFloor = Math.max(
+    minContextSlot,
+    statusContextSlot,
+    deployedProgram.programContextSlot,
+    deployedProgram.programDataContextSlot,
+  );
   const transactionObservations = [];
   const decodedEntries = [];
   let previousSlot = -1;
@@ -659,6 +834,13 @@ export async function finalizeCurrentSourceDevnetEvidence({
     check(statusObservation.value[index].slot === result.slot, "TRANSACTION_SLOT_HOLD", `status and transaction slots differ: ${exported.signature}`);
     check(result.slot <= statusContextSlot, "RPC_CONTEXT_HOLD", `transaction slot exceeds the finalized status context: ${exported.signature}`);
     check(Number.isSafeInteger(result.blockTime) && result.blockTime > 0, "TRANSACTION_OBSERVATION_HOLD", `transaction block time is unavailable: ${exported.signature}`);
+    if (validatedExport.completeBundle) {
+      validateCeremonyHorizonTimestamp({
+        slot: result.slot,
+        timestamp: result.blockTime,
+        label: `finalized rehearsal transaction ${exported.signature}`,
+      });
+    }
     check(result.slot >= previousSlot, "TRANSACTION_ORDER_HOLD", `finalized slot order disagrees with the canonical action roster: ${exported.signature}`);
     previousSlot = result.slot;
     decodedEntries.push({ action: exported.action, transaction });
@@ -712,7 +894,15 @@ export async function finalizeCurrentSourceDevnetEvidence({
         rpcCall,
         decoded: decodedRoster,
         conditions: consoleExport.conditions,
-        minContextSlot,
+        minContextSlot: observationFloor,
+      });
+      ceremonyHorizonObservation = Object.freeze({
+        initial: ceremonyHorizonObservation.initial,
+        final: await observeFreshCeremonyHorizon({
+          rpcCall,
+          minContextSlot: Math.max(observationFloor, completePostState.contextSlot),
+          label: "final fresh finalized Devnet horizon",
+        }),
       });
       clearingBlocker = null;
     } catch (error) {
@@ -769,6 +959,15 @@ export async function finalizeCurrentSourceDevnetEvidence({
         transactionCount: transactions.length,
       },
     }),
+    ...(ceremonyHorizonObservation?.final ? [
+      makeCheck({
+        id: "SOURCE_FROZEN_CEREMONY_HORIZON",
+        observedAtUtc,
+        binding,
+        predicate,
+        details: ceremonyHorizonObservation,
+      }),
+    ] : []),
     makeCheck({
       id: "DEPLOYED_PROGRAM_ARTIFACT_BOUND",
       observedAtUtc,
@@ -909,7 +1108,6 @@ function parseCli(argv) {
     check(flag?.startsWith("--") && value !== undefined, "CLI_USAGE", "options must be --name value; --write is the only value-free flag");
     index += 1;
     if (flag === "--console-export") options.consoleExport = value;
-    else if (flag === "--ci-manifest") options.ciManifest = value;
     else if (flag === "--staging-dir") options.stagingDirectory = value;
     else if (flag === "--include-signature") options.includeSignatures.push(value);
     else if (flag === "--max-wait-ms") options.maxWaitMs = value;
@@ -920,25 +1118,66 @@ function parseCli(argv) {
   return options;
 }
 
-function bindingFromCiManifest({ projectRoot, manifestPath }) {
-  const requested = manifestPath ?? "target/verifiable/iat-v2-build-evidence.json";
-  const validated = validateSbfEvidence({ projectRoot, manifestPath: requested, allowDescendantCheckout: true });
-  const absolute = isAbsolute(requested) ? requested : resolve(projectRoot, requested);
-  const manifest = JSON.parse(readFileSync(absolute, "utf8"));
-  return {
-    sourceCommit: manifest.sourceBinding.sourceHeadCommit,
-    sourceTree: manifest.sourceBinding.sourceHeadTree,
-    programArtifactSha256: manifest.artifacts.programBinary.sha256,
-    programArtifactBytes: manifest.artifacts.programBinary.bytes,
-    ciBuildEvidenceSha256: validated.manifestSha256,
-    ciRunUrl: validated.runUrl,
-  };
+export function bindingFromCanonicalCeremony({
+  projectRoot,
+  verifyRuntimeBinding = verifyIatV2DevnetProgramCeremonyRuntimeBinding,
+}) {
+  check(typeof verifyRuntimeBinding === "function", "SOURCE_BINDING_HOLD", "ceremony runtime verifier is unavailable");
+  let verified;
+  try {
+    verified = verifyRuntimeBinding({ projectRoot });
+  } catch (error) {
+    const detail = error instanceof Error
+      ? `${typeof error.code === "string" ? `${error.code}: ` : ""}${error.message}`
+      : String(error);
+    fail(
+      "SOURCE_BINDING_HOLD",
+      `canonical ceremony runtime verification failed: ${detail}`,
+    );
+  }
+  check(
+    verified.schema === "iat-v2-devnet-program-ceremony-runtime-verification/v1"
+      && verified.status === "BOUND"
+      && verified.network === "devnet"
+      && verified.mainnetStatus === "HOLD"
+      && verified.relation === "DIRECT_BINDING_ONLY_SUCCESSOR"
+      && verified.checkoutRelation === "PR_MERGE_SECOND_PARENT"
+      && verified.checkoutObjectVerified === true
+      && verified.checkoutEvidenceRefVerified === true
+      && verified.runtimeEvidenceVerified === true
+      && verified.runtimeEvidencePath === IAT_V2_DEVNET_PROGRAM_CEREMONY_RUNTIME_EVIDENCE_PATH
+      && verified.transactionExecution === false
+      && verified.signing === false
+      && verified.broadcast === false
+      && verified.mainnetAuthorized === false,
+    "SOURCE_BINDING_HOLD",
+    "canonical ceremony runtime verification did not return the exact non-authorizing bound Devnet result",
+  );
+  const programBytes = readCanonicalRegularBytes({
+    projectRoot,
+    repositoryPath: CANONICAL_PROGRAM_BINARY_PATH,
+    label: "canonical IAT V2 program binary",
+  });
+  check(
+    programBytes.length === verified.artifactBytes
+      && sha256(programBytes) === verified.artifactSha256,
+    "SOURCE_BINDING_HOLD",
+    "canonical IAT V2 program binary bytes or SHA-256 disagree with the bound ceremony artifact",
+  );
+  return Object.freeze({
+    sourceCommit: verified.sourceHeadCommit,
+    sourceTree: verified.sourceHeadTree,
+    programArtifactSha256: verified.artifactSha256,
+    programArtifactBytes: verified.artifactBytes,
+    ciBuildEvidenceSha256: verified.runtimeEvidenceManifestSha256,
+    ciRunUrl: `https://github.com/InternalAgencyIO/InternalAgency/actions/runs/${verified.ciRunId}/attempts/${verified.ciRunAttempt}`,
+  });
 }
 
 async function main() {
   const options = parseCli(process.argv.slice(2));
   const projectRoot = resolve(fileURLToPath(new URL("..", import.meta.url)));
-  const binding = bindingFromCiManifest({ projectRoot, manifestPath: options.ciManifest });
+  const binding = bindingFromCanonicalCeremony({ projectRoot });
   const consoleExport = JSON.parse(readFileSync(resolve(options.consoleExport), "utf8"));
   const result = await finalizeCurrentSourceDevnetEvidence({
     consoleExport,
@@ -964,6 +1203,10 @@ async function main() {
     files: result.files.map((file) => ({ path: file.path, sha256: file.sha256, bytes: file.bytes.length })),
     stagingDirectory: stagedAt ?? resolve(options.stagingDirectory),
     wroteFiles: options.write,
+    sourceCommit: binding.sourceCommit,
+    ceremonyRuntimeEvidenceSha256: binding.ciBuildEvidenceSha256,
+    ceremonyRuntimeVerified: true,
+    localProgramBinaryVerified: true,
     signing: false,
     broadcast: false,
   }, null, 2));
