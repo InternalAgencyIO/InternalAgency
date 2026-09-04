@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "scene": 1976,
+  "state": "provider-safe-retry-1-visible-verified-no-send",
+  "stagedAtUtc": "2026-09-04T17:42:03.244Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preparedCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-scene-1976-meta-retry-1-prepared-checkpoint.json",
+    "preparedCheckpointCommit": "01d5fe1082c1ac670bb2e7554be7c95872425aa0",
+    "preparedCheckpointRemoteAndDraftPrParityVerified": true
+  },
+  "initialFailure": {
+    "providerUrl": "https://www.meta.ai/prompt/8477e594-1ff8-42be-ae8c-379d5e975e6d",
+    "outcome": "hard-failure-no-image",
+    "confirmedPromptResent": false,
+    "terminalPageReopened": false
+  },
+  "browser": {
+    "name": "Codex in-app Browser",
+    "visibleOnly": true,
+    "tabId": "25",
+    "freshComposerUrl": "https://www.meta.ai/",
+    "otherSuccessfulTerminalLanesLeftUntouched": [1975, 1977, 1978],
+    "xComposerLeftUntouched": true
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "accountVisible": true,
+    "mode": "Thinking",
+    "thinkingVisible": true,
+    "retryNumber": 1,
+    "retryPromptCharacters": 2987,
+    "retryPromptSha256": "B522F5F9DE2B08C2205C43F0EB0523B9DF6C8B90C8543448A9A57915CFEBC54A",
+    "promptExactBeforeAttachments": true,
+    "exactPromptPrefixAfterAttachments": true,
+    "composerCharactersAfterAttachments": 2990,
+    "attachmentPlaceholderCodePoints": [32, 32, 32],
+    "sendEnabled": true,
+    "sendActivations": 0
+  },
+  "attachmentVerification": {
+    "visibleSupportedControl": "Add attachment then Click to browse, or drag & drop here",
+    "orderedAnchorScenes": [938, 936, 937],
+    "orderedAnchorFilenamesExactAndVisible": true,
+    "attachmentCount": 3,
+    "removeImageControlCount": 3,
+    "hiddenInputUsed": false,
+    "directHttpUsed": false,
+    "providerApiUsed": false,
+    "chromeUsed": false,
+    "providerCliUsed": false
+  },
+  "xHold": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "account": "@dogramaci",
+    "composerRetainedIntact": true,
+    "visiblePostControlActivations": 2,
+    "publicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "ACTIVE",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true,
+    "notStarlightAuthority": true
+  },
+  "mayDispatchAfterRemoteParity": true,
+  "nextSafeAction": "Commit and remote-verify this no-send retry staging record. If local, origin and Draft PR heads match and the composer remains unchanged, click the visible Meta Send control exactly once, record the new provider URL, and never resend either confirmed Scene 1976 prompt."
+}
