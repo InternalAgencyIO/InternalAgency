@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "batch": 478,
+  "country": "Latvia",
+  "runType": "europe-gap-fill-four-stills-meta-thinking",
+  "state": "four-meta-thinking-scenes-prepared-no-send-awaiting-git-lfs-remote-preflight",
+  "preparedAtUtc": "2026-09-04T09:24:52Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "predecessorCommit": "93a9f17f2c0f638d186708eefe22c9e294e3eb87",
+    "predecessorCountry": "Ireland",
+    "policy": "Newer remote-verified checkpoints, manifests, ledgers, Git/LFS state and PR head supersede the handoff."
+  },
+  "providerSettings": {
+    "provider": "Meta",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "output": "one image per occurrence",
+    "aspectRatio": "9:16 vertical",
+    "visibleMetaLaneCount": 4,
+    "visibleXComposerCount": 1,
+    "grok": "paused until credits return",
+    "tabPolicy": "Use exactly four visible Meta lanes and one visible blank X composer. Inspect actual tabs before every action; never resend a confirmed prompt or reopen an older terminal scene."
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "orderedAnchors": [938, 936, 937],
+    "hardPositionLock": "viewer-left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE",
+    "neverSwap": "Ellie and AI ECE"
+  },
+  "orderedReferenceAnchors": [
+    {"scene": 938, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png", "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"},
+    {"scene": 936, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png", "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"},
+    {"scene": 937, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png", "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"}
+  ],
+  "retryAndRefinementPolicy": {
+    "metaRetryCapPerScene": 2,
+    "metaRetryTrigger": "hard failure only; accept nearly every public-safe, non-corrupt terminal still",
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedMetaImage": 1,
+    "archiveBlockedPrompts": true,
+    "retainUsedAndUnusedLocallyAndInGit": true
+  },
+  "deterministicRolls": {
+    "rollFamilies": [
+      {"name": "starHardware", "chancePercent": 25},
+      {"name": "kneeHighHosiery", "chancePercent": 25},
+      {"name": "splitStarEmblem", "chancePercent": 25},
+      {"name": "razeTypeBand", "chancePercent": 25},
+      {"name": "rainbowStockings", "chancePercent": 33},
+      {"name": "kneeHighRainbows", "chancePercent": 22},
+      {"name": "fictionalDistantRazedBackground", "chancePercent": 32},
+      {"name": "perCharacterRazeStarBranding", "chancePercent": 32, "tattooShareWithinAssignmentsPercent": 15, "otherwise": "stocking mark"}
+    ],
+    "cameraMapping": {"1-20": "tight hemline close", "21-60": "adjacent three-quarter", "61-100": "tight full-body"},
+    "statementBootScene": 1941,
+    "sceneAssignments": [
+      {"scene": 1939, "cameraRoll": 12, "starHardware": true, "kneeHighHosiery": false, "splitStarEmblem": false, "razeTypeBand": true, "rainbowStockings": true, "kneeHighRainbows": false, "fictionalDistantRazedBackgroundRoll": 18, "characterBranding": ["Alia-stocking", "ECE-stocking"]},
+      {"scene": 1940, "cameraRoll": 48, "starHardware": false, "kneeHighHosiery": true, "splitStarEmblem": false, "razeTypeBand": false, "rainbowStockings": false, "kneeHighRainbows": true, "fictionalDistantRazedBackgroundRoll": 74, "characterBranding": ["Radiance-upper-arm-tattoo", "Ellie-stocking"]},
+      {"scene": 1941, "cameraRoll": 67, "starHardware": false, "kneeHighHosiery": false, "splitStarEmblem": true, "razeTypeBand": false, "rainbowStockings": true, "kneeHighRainbows": false, "fictionalDistantRazedBackgroundRoll": 66, "characterBranding": ["Alia-stocking"]},
+      {"scene": 1942, "cameraRoll": 18, "starHardware": true, "kneeHighHosiery": true, "splitStarEmblem": false, "razeTypeBand": false, "rainbowStockings": false, "kneeHighRainbows": true, "fictionalDistantRazedBackgroundRoll": 9, "characterBranding": ["Radiance-stocking", "ECE-stocking"]}
+    ]
+  },
+  "scenes": [
+    {
+      "scene": 1939,
+      "cameraRoll": 12,
+      "framing": "TIGHT HEMLINE CLOSE",
+      "location": "Riga Art Nouveau Quarter",
+      "prompt": "SCENE 1939 - LATVIA, RIGA ART NOUVEAU QUARTER - CAMERA CLOSENESS ROLL 12/100, TIGHT HEMLINE CLOSE. Create one wholly new original photorealistic cinematic vertical 9:16 adult RAZE high-fashion still with aggressively shortened but secure opaque silhouettes, fully public-safe and non-explicit. Use the three attached identity anchors exactly once each in authoritative order 938, 936, 937 only for face identity. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Never swap Ellie and ECE; never clone, merge, replace or age-shift a face. Place the tightly adjacent quartet on broad dry level paving on empty Alberta iela, with ornate Riga Art Nouveau facades, sculpted windows and cool blue-evening stonework unmistakably readable. Use a low oblique tight full-length composition close enough for faces, hems and footwear to dominate while retaining every complete head, hand, leg and shoe. Alia wears a copper-black asymmetric fitted top with cobalt upper-thigh tailored skort; Radiance a pearl-lilac sleeveless fitted cocktail mini; Ellie a ruby-silver cropped jacket with ivory upper-thigh skirt over opaque shorts; ECE an emerald-bronze one-shoulder short romper. All are fully opaque, securely lined and non-revealing. The 25% star-hardware roll applies: integrate clean original split-star metal heel pins and waist buckles. The 25% RAZE type-band roll applies: one narrow exact readable RAZE band at each waist, spelled R-A-Z-E. The large split-star emblem roll did not apply. The 33% rainbow-stockings roll applies: all four wear sleek opaque gradient rainbow thigh-high stockings with sharp classic pumps and slim architectural stilettos; the separate knee-high-rainbows roll did not apply. The 32% per-character RAZE STAR branding roll selected Alia and ECE only: each has one clean original RAZE ★ split-star mark printed on one stocking; Radiance and Ellie have no character mark. Distant-background roll 18/100 applies: beyond the protected empty foreground, show a clearly fictional non-graphic far skyline with soft smoke plumes, controlled orange glow and one stylized mushroom-shaped smoke cloud; no victims, bodies, injuries, weapons, blast peril or emergency distress. The women remain calm and focused on each other without glorifying harm. Alia gives Radiance one brief cheek-only kiss, Ellie answers with a playful jealous brow, and ECE pulls Ellie into a linked-hand four-way reconciliation. No underwear, exposure, nudity, explicit sexuality, minors, real people, flags, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2781,
+      "promptSha256": "683C4EC2CEAB29764AC7D9F7CE8338F45220529E10DC8C004029F3A99BFEC9AA",
+      "archiveStem": "1939-latvia-riga-art-nouveau-raze-tight-hemline-close"
+    },
+    {
+      "scene": 1940,
+      "cameraRoll": 48,
+      "framing": "ADJACENT THREE-QUARTER",
+      "location": "Jurmala Dzintari Boardwalk",
+      "prompt": "SCENE 1940 - LATVIA, JURMALA DZINTARI BOARDWALK - CAMERA CLOSENESS ROLL 48/100, ADJACENT THREE-QUARTER. Create one wholly new original photorealistic cinematic vertical 9:16 adult RAZE high-fashion still with very short but secure opaque silhouettes, fully public-safe and non-explicit. Use the three attached identity anchors exactly once each in authoritative order 938, 936, 937 only for face identity. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Never swap Ellie and ECE; never clone, merge, replace or age-shift a face. Place the tightly adjacent quartet on a broad dry empty timber-and-stone boardwalk at Dzintari, with pale Baltic dunes, wind-shaped pines and cool pearl sunset unmistakably reading as Jurmala. Use a lively waist-low Dutch three-quarter camera close enough for faces, hems, stockings and shoes to dominate while retaining every complete head, hand, leg and shoe. Alia wears a teal-copper sleeveless mini dress; Radiance a gold-ivory cropped moto top with cobalt upper-thigh skirt over opaque shorts; Ellie a magenta-black fitted blazer with secure black tailored micro-shorts; ECE a sapphire-emerald asymmetric short romper. All garments are fully opaque, securely lined and non-revealing. Star hardware, large split-star emblem, RAZE type-band and general rainbow-stockings rolls did not apply. The 25% knee-high-hosiery roll and 22% knee-high-rainbows roll both apply: all four wear polished opaque knee-high rainbow socks or stockings with clean classic pumps and restrained stilettos. The 32% per-character RAZE STAR branding roll selected Radiance and Ellie: Radiance has one tiny original RAZE ★ split-star upper-arm fashion tattoo in a non-intimate location; Ellie has one clean RAZE ★ mark printed on one knee-high stocking. Alia and ECE have no character mark. No background-damage roll applies. Ellie gives ECE one brief cheek-only kiss, ECE steadies Ellie's cuff, Radiance answers with a playful jealous hand-to-heart, and Alia draws the group into a linked four-way reconciliation. No underwear, exposure, nudity, explicit sexuality, minors, real people, flags, sacred or political imagery, animals, bystanders, boats, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2397,
+      "promptSha256": "4EBA0B328F54CD2679E1D1C60137177867BD16CFCD89017BADE792E256F30708",
+      "archiveStem": "1940-latvia-jurmala-dzintari-raze-adjacent-three-quarter"
+    },
+    {
+      "scene": 1941,
+      "cameraRoll": 67,
+      "framing": "TIGHT FULL-BODY",
+      "location": "Sigulda Gauja Valley Overlook",
+      "prompt": "SCENE 1941 - LATVIA, SIGULDA GAUJA VALLEY OVERLOOK - CAMERA CLOSENESS ROLL 67/100, TIGHT FULL-BODY. Create one wholly new original photorealistic cinematic vertical 9:16 adult RAZE high-fashion still with decisively short but secure opaque silhouettes, fully public-safe and non-explicit. Use the three attached identity anchors exactly once each in authoritative order 938, 936, 937 only for face identity. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Never swap Ellie and ECE; never clone, merge, replace or age-shift a face. Place the tightly linked quartet on a broad dry empty secular timber overlook above the Gauja Valley, with layered forest, a river bend and light Baltic mist unmistakably readable. Use a low diagonal tight full-body camera that keeps every complete face, hand, upper-thigh hem, leg, statement boot and heel crisp. Alia wears a bronze-black fitted halter mini; Radiance a pale-rose sleeveless upper-thigh cocktail mini; Ellie a turquoise-black cropped jacket with ivory asymmetric micro-skirt over opaque shorts; ECE a plum-emerald high-neck short romper. All are fully opaque, securely lined and non-revealing. The 25% large split-star emblem roll applies: place one original geometric split-star panel on each waist, with no snake motif. The general 33% rainbow-stockings roll applies as narrow gradient bands just above the boots; star hardware, RAZE type-band and separate knee-high-rainbows rolls did not apply. The statement-boot selector applies exclusively to this scene: give all four distinct dramatic knee-high RAZE fashion boots in bronze, pearl, teal and plum, with architectural star heels and exact readable RAZE lettering, stable and complete. The 32% per-character RAZE STAR branding roll selected Alia only: one clean RAZE ★ split-star mark appears on her stocking band; the other three have no extra character mark. No background-damage roll applies. Radiance gives Alia one brief cheek-only kiss, Ellie shows a playful jealous smile, and ECE links hands with Ellie to complete a warm four-way reconciliation. No underwear, exposure, nudity, explicit sexuality, minors, real people, flags, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2427,
+      "promptSha256": "C24F7B8435175FA219A1602215794B741D50AD9ED36ADFF42C9BED70252EE4AA",
+      "archiveStem": "1941-latvia-sigulda-gauja-raze-tight-full-body-statement-boots"
+    },
+    {
+      "scene": 1942,
+      "cameraRoll": 18,
+      "framing": "TIGHT HEMLINE CLOSE",
+      "location": "Cesis Castle Park Terrace",
+      "prompt": "SCENE 1942 - LATVIA, CESIS CASTLE PARK TERRACE - CAMERA CLOSENESS ROLL 18/100, TIGHT HEMLINE CLOSE. Create one wholly new original photorealistic cinematic vertical 9:16 adult RAZE high-fashion still with aggressively shortened but secure opaque silhouettes, fully public-safe and non-explicit. Use the three attached identity anchors exactly once each in authoritative order 938, 936, 937 only for face identity. Show exactly four distinct fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Never swap Ellie and ECE; never clone, merge, replace or age-shift a face. Place the tightly adjacent quartet on broad dry level paving on an empty secular garden terrace beside the weathered stone walls of Cesis Castle Park, with autumn trees and soft amber Baltic light unmistakably readable. Use a low intimate oblique full-length camera close enough for faces, upper-thigh hems and footwear to dominate while retaining every complete head, hand, leg and shoe. Alia wears a bronze-teal one-shoulder fitted mini; Radiance a pearl-blue cropped top with copper upper-thigh skort; Ellie a ruby-black sleeveless fitted cocktail mini; ECE an emerald-silver cropped jacket with cobalt upper-thigh skirt over opaque shorts. All are fully opaque, securely lined and non-revealing. The 25% star-hardware roll applies through small original split-star buckles and heel pins. The 25% knee-high-hosiery roll and 22% knee-high-rainbows roll apply: all four wear sleek opaque rainbow knee-high socks or stockings with sharp classic pumps and slim stilettos. Large split-star emblem, RAZE type-band and general rainbow-stockings rolls did not apply. The 32% per-character RAZE STAR branding roll selected Radiance and ECE only: each has one clean original RAZE ★ split-star mark printed on one stocking; Alia and Ellie have no character mark. Distant-background roll 9/100 applies: beyond the protected empty foreground and historic terrace, show a clearly fictional non-graphic far modern skyline with soft smoke plumes, controlled orange glow, damaged unoccupied structures and one stylized mushroom-shaped smoke cloud; no victims, bodies, injuries, weapons, blast peril or emergency distress. The women remain calm and focused on each other without glorifying harm. ECE gives Ellie one brief cheek-only kiss, Radiance answers with a playful jealous brow, and Alia pulls Radiance inward to complete a linked four-way reconciliation. No underwear, exposure, nudity, explicit sexuality, minors, real people, flags, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2752,
+      "promptSha256": "9B7C878A0414CF789C0E3EF9578504E3E685C94C9D49803573328040E1120964",
+      "archiveStem": "1942-latvia-cesis-castle-park-raze-tight-hemline-close"
+    }
+  ],
+  "preDispatchGates": {
+    "actualTabsInspected": false,
+    "metaAccountVerifiedOnAllFourLanes": false,
+    "thinkingVerifiedOnAllFourLanes": false,
+    "xAccountVerified": false,
+    "xComposerBlankVerified": false,
+    "promptHashesVerifiedInComposer": false,
+    "anchorsAttachedExactOrder": false,
+    "gitLfsRemoteParityVerified": false
+  },
+  "sendClicks": 0,
+  "repeatSendClicks": 0,
+  "xPostClicks": 0,
+  "nextSafeAction": "Validate all prompt and anchor hashes, commit and push this preparation checkpoint, verify local/origin/PR parity, then rotate the four existing Meta tabs to new blank composers and stage prompts plus anchors 938, 936, 937 in exact order. Inspect every gate before one Send click per lane. Preserve one blank @dogramaci X composer; do not post until Latvia closes and fresh action-time confirmation is obtained."
+}
