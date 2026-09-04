@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 482,
   "country": "Moldova",
-  "state": "meta-hard-failure-prompts-archived-retry-in-progress",
+  "state": "meta-hard-failure-prompt-archived-retry-succeeded",
   "provider": "Meta AI through the visible in-app Browser only",
   "blocked": [
     {
@@ -25,6 +25,15 @@
       }
     }
   ],
+  "retryOutcome": {
+    "scene": 1956,
+    "occurrence": 2,
+    "promptSha256": "2EF3242D13311AEAE79DD2DDCDF4FF2E00403FD0B56BFCC69DF86EFE5063E6F5",
+    "providerUrl": "https://www.meta.ai/prompt/e78ab8c5-63f4-4fd2-a0ab-c8617ab88eab",
+    "artifactReturned": true,
+    "selected": true,
+    "furtherMetaRetryPermitted": false
+  },
   "originalPromptArchive": "assets/lore/starlight-era/batch-482-moldova-europe-gap-fill-prompts-prepared-checkpoint.json",
   "retryPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/meta-retry-prompts-and-outcomes.md"
 }
