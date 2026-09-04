@@ -10,20 +10,26 @@ After fresh exact-head CI succeeds, stop before starting or restarting the conso
 
 ### Fresh `S` to `B` public-evidence sequence
 
-Do not copy placeholders literally. Set `$SourceS`, `$CheckoutM`, `$RunId`, and `$RunAttempt` only from the reviewed exact-head public CI run and its downloaded canonical `iat-v2-build-evidence.json`:
+Do not copy placeholders literally. Set `$SourceS`, `$CheckoutM`, `$RunId`, and `$RunAttempt` only from the reviewed exact-head public CI run and its downloaded canonical `iat-v2-build-evidence.json`. Derive the pull-request number only from that manifest's exact `sourceBinding.workflowRef`; never reuse a historical pull-request number:
 
 1. Confirm the run's source head is the exact implementation commit `S`, its checkout relation is `PR_MERGE_SECOND_PARENT`, and its second checkout parent is `S`. Download the run's exact `iat-v2-b3-verifiable-sbf` artifact. Copy its one `iat-v2-build-evidence.json` to `target/verifiable/iat-v2-ceremony-runtime-build-evidence.json` without editing it. Record that file's SHA-256 as `runtimeEvidenceManifestSha256`.
 2. Before the pull-request merge ref can advance, preserve the exact synthetic checkout object at the public non-release branch `agent/iat-v2-devnet-ceremony-ci-$SourceS`. The branch must point directly to `$CheckoutM`; it must not contain an additional commit. Fetch the current PR merge ref, compare it to `$CheckoutM`, push the exact object, fetch the new public branch to its remote-tracking ref, and compare it again:
 
 ```powershell
 $EvidenceBranch = "agent/iat-v2-devnet-ceremony-ci-$SourceS"
+$RuntimeEvidencePath = 'target/verifiable/iat-v2-ceremony-runtime-build-evidence.json'
+$RuntimeEvidence = Get-Content -LiteralPath $RuntimeEvidencePath -Raw | ConvertFrom-Json
+$WorkflowRef = [string]$RuntimeEvidence.sourceBinding.workflowRef
+$ExpectedWorkflowRefPattern = '^InternalAgencyIO/InternalAgency/\.github/workflows/iat-v2-proof\.yml@refs/pull/([1-9][0-9]*)/merge$'
+if ($WorkflowRef -notmatch $ExpectedWorkflowRefPattern) { throw 'runtime evidence workflow ref is not the exact public IAT V2 pull-request merge ref' }
+$PullRequestNumber = $Matches[1]
 $PublicRemote = 'github'
 $AllowedPublicRemoteUrls = @('https://github.com/InternalAgencyIO/InternalAgency', 'https://github.com/InternalAgencyIO/InternalAgency.git', 'git@github.com:InternalAgencyIO/InternalAgency.git', 'ssh://git@github.com/InternalAgencyIO/InternalAgency.git')
 $RawPublicRemoteUrls = @(& git config --get-all "remote.${PublicRemote}.url")
 $ResolvedPublicFetchUrls = @(& git remote get-url --all $PublicRemote)
 $ResolvedPublicPushUrls = @(& git remote get-url --push --all $PublicRemote)
 if ($RawPublicRemoteUrls.Count -ne 1 -or $ResolvedPublicFetchUrls.Count -ne 1 -or $ResolvedPublicPushUrls.Count -ne 1 -or $RawPublicRemoteUrls[0] -notin $AllowedPublicRemoteUrls -or $ResolvedPublicFetchUrls[0] -notin $AllowedPublicRemoteUrls -or $ResolvedPublicPushUrls[0] -notin $AllowedPublicRemoteUrls) { throw 'public GitHub fetch/push remote identity mismatch or URL rewrite' }
-& git fetch --no-tags $PublicRemote "+refs/pull/14/merge:refs/remotes/$PublicRemote/$EvidenceBranch"
+& git fetch --no-tags $PublicRemote "+refs/pull/${PullRequestNumber}/merge:refs/remotes/$PublicRemote/$EvidenceBranch"
 if ((& git rev-parse --verify "refs/remotes/${PublicRemote}/${EvidenceBranch}^{commit}") -ne $CheckoutM) { throw 'PR merge ref is not the reviewed S checkout' }
 & git push $PublicRemote "${CheckoutM}:refs/heads/${EvidenceBranch}"
 & git fetch --no-tags $PublicRemote "+refs/heads/${EvidenceBranch}:refs/remotes/${PublicRemote}/${EvidenceBranch}"

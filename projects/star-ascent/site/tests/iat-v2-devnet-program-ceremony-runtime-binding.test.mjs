@@ -51,6 +51,10 @@ const SCHEMA_PATH = new URL(
   "../docs/b3/iat-v2-devnet-program-ceremony-runtime-binding.v1.schema.json",
   import.meta.url,
 );
+const RUNBOOK_PATH = new URL(
+  "../launch/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md",
+  import.meta.url,
+);
 const PROJECT_ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECT_ROOT_REAL = realpathSync(PROJECT_ROOT);
 
@@ -129,6 +133,21 @@ test("canonical ceremony anchor is fail-closed and preserves the immutable artif
       exact.sourceHeadCommit,
     );
   }
+});
+
+test("runbook derives the fresh PR merge ref from the exact runtime evidence manifest", () => {
+  const runbook = readFileSync(RUNBOOK_PATH, "utf8");
+  assert.ok(runbook.includes(
+    "$WorkflowRef = [string]$RuntimeEvidence.sourceBinding.workflowRef",
+  ));
+  assert.ok(runbook.includes(
+    "$ExpectedWorkflowRefPattern = '^InternalAgencyIO/InternalAgency/\\.github/workflows/iat-v2-proof\\.yml@refs/pull/([1-9][0-9]*)/merge$'",
+  ));
+  assert.ok(runbook.includes("$PullRequestNumber = $Matches[1]"));
+  assert.ok(runbook.includes(
+    '"+refs/pull/${PullRequestNumber}/merge:refs/remotes/$PublicRemote/$EvidenceBranch"',
+  ));
+  assert.doesNotMatch(runbook, /\+refs\/pull\/[0-9]+\/merge:/u);
 });
 
 test("browser-safe validator projects only verified fresh source plus immutable artifact and mint", () => {
