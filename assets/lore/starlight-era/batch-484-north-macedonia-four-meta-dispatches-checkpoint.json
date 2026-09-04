@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "batch": 484,
+  "country": "North Macedonia",
+  "scenes": [1963, 1964, 1965, 1966],
+  "state": "four-exact-meta-thinking-prompts-dispatched-once-outcomes-pending",
+  "authority": {
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-484-north-macedonia-four-meta-composers-staged-checkpoint.json",
+    "stagedCheckpointCommit": "d657632c4b7639af463d30e1fb285ecfe4cff9e8",
+    "stagedCheckpointRemoteAndDraftPrParityVerified": true,
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "thinkingEnabled": true,
+    "browser": "Codex in-app Browser",
+    "supportedVisibleControlsOnly": true,
+    "initialDispatchCount": 4,
+    "confirmedPromptResends": 0,
+    "terminalScenesReopened": 0
+  },
+  "dispatches": [
+    {
+      "scene": 1963,
+      "promptSha256": "14EA2F7B9E44A13EA67F4295998A75684AC7D7B92036FA7E43375D5C76AAC575",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "activatedAtUtc": "2026-09-04T14:57:48.416Z",
+      "providerUrl": "https://www.meta.ai/prompt/e6779ae2-edca-4976-a26f-5d47e950e131",
+      "outcome": "pending"
+    },
+    {
+      "scene": 1964,
+      "promptSha256": "2D6222AB491DA54FFEF51A46ADE9CBF4B7CED6390BCC7B7603A63F65873ACE82",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "activatedAtUtc": "2026-09-04T14:57:53.081Z",
+      "providerUrl": "https://www.meta.ai/prompt/9bc8fc2b-dc71-4468-92c2-b529c0e56f95",
+      "outcome": "pending"
+    },
+    {
+      "scene": 1965,
+      "promptSha256": "2C1215A5BDBD36773937BCDD275A776427CBFA959CBE52E88484AC5CDB985B94",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "activatedAtUtc": "2026-09-04T14:57:57.762Z",
+      "providerUrl": "https://www.meta.ai/prompt/ffe2c04d-5bb5-4a1f-b31b-28c046c2b805",
+      "outcome": "pending"
+    },
+    {
+      "scene": 1966,
+      "promptSha256": "63AE25ABA649C21E5FC1D7FECE44A97172243E9C2E35DB72770AF3DBE7C24969",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "activatedAtUtc": "2026-09-04T14:58:02.436Z",
+      "providerUrl": "https://www.meta.ai/prompt/803380fe-032f-4295-86b8-c086966da47a",
+      "outcome": "pending"
+    }
+  ],
+  "x": {
+    "account": "@dogramaci",
+    "composerState": "blank",
+    "postControlEnabled": false,
+    "postControlActivated": false,
+    "publicTransmissionCount": 0
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "leftUntouched": true
+  },
+  "nextSafeAction": "Persist and remote-verify this dispatch record, inspect each existing provider URL without reopening any other terminal scene, classify success versus hard failure, download successful raw bytes only through the visible Download control, and create at most one provider-safe retry composer for any hard failure. Never resend a confirmed provider URL."
+}
