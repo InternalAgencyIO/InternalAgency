@@ -26,3 +26,14 @@ with this exact provider-safe segment:
 - Attachments: exact anchors 938, 936 and 937, once each, in that order.
 - Retry Send clicks at staging: zero.
 - Staging screenshot: `assets/lore/starlight-era/provider-evidence/batch-483-monaco/scene-1961-meta-occurrence-2-staged-visible.jpg`
+
+### Occurrence 2 outcome
+
+- Sent once at `2026-09-04T14:21:35.029Z` after the staged retry checkpoint was remote-verified.
+- Provider URL: `https://www.meta.ai/prompt/677fc3e9-80f2-4295-ad1f-9a0a0d511301`
+- Result: terminal success; no second retry was required or permitted.
+- Meta DOM label: `gallery/monaco_fashion_group.webp`
+- The visible Download control delivered JPEG/JFIF bytes at `assets/lore/starlight-era/provider-evidence/batch-483-monaco/1961-monaco-larvotto-promenade-raze-adjacent-three-quarter-meta-occurrence-2-raw.jpg`.
+- Delivered-byte SHA-256: `5A69D6BFB95B18CDA92FED04E3AB9C5E0CA8BD4198D39FE979774BC9CEF43CB2`
+- Delivered bytes and dimensions: 303974 bytes, 1152x2048 RGB.
+- Terminal screenshot: `assets/lore/starlight-era/provider-evidence/batch-483-monaco/scene-1961-meta-occurrence-2-terminal-visible.jpg`
