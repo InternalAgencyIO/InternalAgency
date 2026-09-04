@@ -3,7 +3,7 @@
   "batch": 487,
   "country": "Slovakia",
   "scenes": [1975, 1976, 1977, 1978],
-  "state": "four-exact-meta-thinking-prompts-dispatched-once-outcomes-pending",
+  "state": "three-successful-downloads-archived-one-hard-failure-retry-1-prepared",
   "dispatchWindowObservedAtUtc": "2026-09-04T17:30:05.698Z",
   "authority": {
     "stagedCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-four-meta-composers-staged-checkpoint.json",
@@ -30,7 +30,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/c28afc8b-012b-4e5e-b2a9-199fb3f21e58",
-      "outcome": "pending"
+      "outcome": "success",
+      "providerDomMediaLabel": "gallery/bratislava_castle_chain.webp",
+      "visibleDownloadFilename": "bratislava_castle_chain.jpg"
     },
     {
       "scene": 1976,
@@ -38,7 +40,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/8477e594-1ff8-42be-ae8c-379d5e975e6d",
-      "outcome": "pending"
+      "outcome": "hard-failure-no-image",
+      "providerVisibleResponse": "Meta declined the distant-damage element and offered an intact serene Spis Castle version.",
+      "retry1PreparedCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-scene-1976-meta-retry-1-prepared-checkpoint.json"
     },
     {
       "scene": 1977,
@@ -46,7 +50,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/0daf1876-bea9-464d-9f37-0b51337156db",
-      "outcome": "pending"
+      "outcome": "success",
+      "providerDomMediaLabel": "gallery/strbske_pleso_fashion.webp",
+      "visibleDownloadFilename": "strbske_pleso_fashion.jpg"
     },
     {
       "scene": 1978,
@@ -54,7 +60,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/f0fb60ce-13c3-4f1e-a81b-a66ba58721bb",
-      "outcome": "pending"
+      "outcome": "success",
+      "providerDomMediaLabel": "gallery/orava_castle_group.webp",
+      "visibleDownloadFilename": "orava_castle_group.jpg"
     }
   ],
   "xHold": {
@@ -74,5 +82,5 @@
     "leftUntouched": true,
     "notStarlightAuthority": true
   },
-  "nextSafeAction": "Commit and remote-verify this dispatch record, inspect each existing provider URL in place without reopening any terminal scene, classify success versus hard failure, download successful raw bytes only through the visible Download control, and create at most one provider-safe retry composer for a hard failure. Never resend a confirmed provider URL."
+  "nextSafeAction": "Remote-verify the archived three successful first-occurrence raws and the exact provider-safe Scene 1976 retry-1 prompt. Replace only the failed Scene 1976 terminal page with a fresh Meta composer, stage the retry prompt and anchors 938, 936, 937 through visible supported controls, seal the no-send staging state, then click Send exactly once. Never resend the confirmed initial prompt."
 }
