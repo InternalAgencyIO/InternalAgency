@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "batch": 485,
+  "country": "Norway",
+  "scenes": [1967, 1968, 1969, 1970],
+  "state": "four-meta-thinking-composers-visible-verified-no-send",
+  "stagedAtUtc": "2026-09-04T15:47:49.3504953Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-485-norway-meta-dispatch-preflight-checkpoint.json",
+    "preflightCommit": "410697c6c7b95dc73454845008733c2c2852d65b",
+    "localHeadBeforeStagingRecord": "410697c6c7b95dc73454845008733c2c2852d65b",
+    "originHeadBeforeStagingRecord": "410697c6c7b95dc73454845008733c2c2852d65b"
+  },
+  "browser": {
+    "visibleInAppBrowserOnly": true,
+    "totalTabCount": 5,
+    "xComposerCount": 1,
+    "metaLaneCount": 4,
+    "grokTabCount": 0,
+    "metaTabIdsObservedAtStaging": ["24", "25", "26", "27"],
+    "metaComposerUrls": [
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/"
+    ]
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "accountVisibleInEveryLane": true,
+    "mode": "Thinking",
+    "thinkingVisibleInEveryLane": true,
+    "sendEnabledInEveryLane": true,
+    "sendActivations": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false
+  },
+  "promptVerification": [
+    {"scene": 1967, "characters": 3143, "sha256": "8E62EFE76381D887EA239238D69EBC732027D503EDE4CA2104EE69B19FA86179", "exactPromptPrefixVisible": true},
+    {"scene": 1968, "characters": 2903, "sha256": "0C8091240ED4AE304F507F6BCB554B73D268454833D192DA070AD0072B407F27", "exactPromptPrefixVisible": true, "unsentFocusGlitchCorrectedBeforeAttachments": true},
+    {"scene": 1969, "characters": 3043, "sha256": "C4E8F7B6C6C85C5351E8FDE47DD4E6B5AC55B572F6E5A0EF8099C38D60A93A0D", "exactPromptPrefixVisible": true},
+    {"scene": 1970, "characters": 2968, "sha256": "967F87E25AC3BF07ACB13E714EB48F54FF49DB6626F4D17473E6FB17FA5F2851", "exactPromptPrefixVisible": true}
+  ],
+  "attachmentVerification": {
+    "visibleSupportedControl": "Add attachment then Click to browse, or drag & drop here",
+    "attachmentCountPerLane": [3, 3, 3, 3],
+    "orderedAnchorScenesPerLane": [
+      [938, 936, 937],
+      [938, 936, 937],
+      [938, 936, 937],
+      [938, 936, 937]
+    ],
+    "orderedAnchorFilenamesPerLaneExact": true,
+    "hiddenInputUsed": false,
+    "directHttpUsed": false,
+    "providerApiUsed": false,
+    "chromeUsed": false,
+    "providerCliUsed": false
+  },
+  "composerBehaviorEvidence": {
+    "promptEnteredBeforeAttachments": true,
+    "metaTrailingAttachmentPlaceholder": "newline-space-newline-space-newline-space",
+    "placeholderCharactersExcludedFromPromptHash": true,
+    "scene1968FocusGlitch": "The first unsent fill attempt partially duplicated prompt text. The corruption was caught before any attachment or Send, the visible field was selected in full, and the exact sealed prompt was restored and reverified before anchors were added.",
+    "scene1968WasPubliclyTransmittedDuringCorrection": false
+  },
+  "xHold": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "composerRetainedIntact": true,
+    "visiblePostControlActivations": 2,
+    "visibleExplicitFailures": 2,
+    "exactCaptionLiveMatches": 0,
+    "publicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "mayDispatchAfterRemoteParity": true,
+  "nextSafeAction": "Commit and remote-verify this exact no-send staging record. If local, origin and Draft PR heads match and all four composers remain unchanged, click each visible Meta Send control exactly once, record the resulting prompt URLs, and never resend those confirmed prompts."
+}
