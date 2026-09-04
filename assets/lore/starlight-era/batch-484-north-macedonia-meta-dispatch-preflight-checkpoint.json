@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "batch": 484,
+  "country": "North Macedonia",
+  "scenes": [1963, 1964, 1965, 1966],
+  "state": "authority-account-prompts-anchors-browser-and-remote-preflight-passed-no-send",
+  "verifiedAtUtc": "2026-09-04T14:50:47Z",
+  "authority": {
+    "preparationCheckpoint": "assets/lore/starlight-era/batch-484-north-macedonia-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "preparationCommit": "4e63a57ded31a07a873753a1245cc82e94247d79",
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "4e63a57ded31a07a873753a1245cc82e94247d79",
+    "remoteHead": "4e63a57ded31a07a873753a1245cc82e94247d79",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrHead": "4e63a57ded31a07a873753a1245cc82e94247d79",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "lfsPushDryRunEmpty": true,
+    "worldXPostsCount": 194,
+    "northMacedoniaXPostCount": 0
+  },
+  "browser": {
+    "provider": "Codex in-app Browser",
+    "inspectedActualTabs": true,
+    "ambientTabIdsTrusted": false,
+    "visibleTabCount": 5,
+    "metaLaneCount": 4,
+    "metaLaneUrls": [
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/"
+    ],
+    "metaPriorTerminalPagesClosedByVisibleNewChatNavigation": true,
+    "terminalScenesReopened": false,
+    "xComposerCount": 1,
+    "xComposerUrl": "https://x.com/compose/post",
+    "xComposerBlank": true,
+    "xPostControlEnabled": false,
+    "xPostControlActivated": false,
+    "grokTabCount": 0
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "thinkingEnabled": true,
+    "allFourComposersFresh": true,
+    "submitControlsBeforeStaging": "disabled",
+    "supportedVisibleAttachmentControlsRequired": true,
+    "hiddenInputsOrWorkaroundsAllowed": false
+  },
+  "prompts": [
+    {"scene": 1963, "characters": 3079, "sha256": "14EA2F7B9E44A13EA67F4295998A75684AC7D7B92036FA7E43375D5C76AAC575", "priorConfirmedDispatches": 0},
+    {"scene": 1964, "characters": 2869, "sha256": "2D6222AB491DA54FFEF51A46ADE9CBF4B7CED6390BCC7B7603A63F65873ACE82", "priorConfirmedDispatches": 0},
+    {"scene": 1965, "characters": 2626, "sha256": "2C1215A5BDBD36773937BCDD275A776427CBFA959CBE52E88484AC5CDB985B94", "priorConfirmedDispatches": 0},
+    {"scene": 1966, "characters": 2956, "sha256": "63AE25ABA649C21E5FC1D7FECE44A97172243E9C2E35DB72770AF3DBE7C24969", "priorConfirmedDispatches": 0}
+  ],
+  "anchors": {
+    "requiredOrder": [938, 936, 937],
+    "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "files": [
+      {"scene": 938, "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"},
+      {"scene": 936, "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"},
+      {"scene": 937, "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"}
+    ],
+    "localBytesReverified": true,
+    "stagingState": "not-yet-attached"
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "canonicalContradictions": [
+    "The historical Batch 289 North Macedonia run produced no accepted assets and no X post. Batch 484 is a fresh run with new scene numbers, prompts and deterministic rolls.",
+    "The older Cuba-oriented automation instructions remain superseded by newer Tanzania preparation and later remote-verified authority. No automation was resumed, replaced or created.",
+    "Historical tab IDs were not reused as authority; the current four Meta pages and one X composer were inventoried directly before this checkpoint."
+  ],
+  "nextSafeAction": "Commit and remote-verify this preflight checkpoint, then stage each exact scene prompt in one fresh visible Meta Thinking composer using only the supported Add attachment control and exact anchor order 938, 936, 937. Verify the prompt hash and visible attachment order in every lane before activating any Send control."
+}
