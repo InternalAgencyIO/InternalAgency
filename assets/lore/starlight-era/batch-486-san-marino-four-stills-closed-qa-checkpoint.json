@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "batch": 486,
+  "country": "San Marino",
+  "scenes": [1971, 1972, 1973, 1974],
+  "state": "four-stills-closed-qa-and-archive-complete-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-04T16:56:08Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-486-san-marino-four-meta-dispatches-checkpoint.json",
+    "dispatchCheckpointCommit": "a6af93550219831457c9fd24f0c2e513bd8d5038"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulOccurrences": 4,
+    "hardFailures": 0,
+    "retries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "providerUrls": [
+      "https://www.meta.ai/prompt/7113c61e-f8d7-4b0a-9742-f8e13eee2622",
+      "https://www.meta.ai/prompt/102e0efa-b07a-43ae-9f9e-9bf1950f69a7",
+      "https://www.meta.ai/prompt/c2b693c7-9f7c-40e2-906b-72bea4e0cfb0",
+      "https://www.meta.ai/prompt/a58eb173-e3b9-406e-990b-61ea8ab485ce"
+    ]
+  },
+  "selectedAssets": [
+    {
+      "scene": 1971,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/1971-san-marino-guaita-first-tower-raze-tight-full-body-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "B06F01F230312086066E61DCFDCD36DA3712E832C0D21D51BA788D41FF9DB2C8",
+      "bytes": 2370415
+    },
+    {
+      "scene": 1972,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/1972-san-marino-cesta-second-tower-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "2A7A4A80A5F7B49C4E6BC9C647290394B5514F1E8506849BC25CA900786F000F",
+      "bytes": 2364724
+    },
+    {
+      "scene": 1973,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/1973-san-marino-piazza-della-liberta-raze-adjacent-three-quarter-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "8C7BEC72EA1E8E3F7A4E7B071EF6775D19D302F9C7C6F20E303ED8E07866BF43",
+      "bytes": 2291328
+    },
+    {
+      "scene": 1974,
+      "provider": "ChatGPT Image Generator",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/1974-san-marino-borgo-maggiore-cableway-raze-tight-full-body-statement-boots-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "E1A08377C686F48533BF97284FB147FA2D8BD6115ED6913B6727BD88916FCE57",
+      "bytes": 2417110
+    }
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableSanMarinoSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "scannedRepoImageCount": 4974
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassAttempts": 4,
+    "successfulOutputs": 4,
+    "blockedOutputs": 0,
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 4
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/provider-ledger.json",
+    "metaOutcomeArchive": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/meta-retry-prompts-and-outcomes.md",
+    "chatgptPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/chatgpt-one-pass-prompts-and-outcomes.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/accessibility-sidecars.json",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/closure-evidence-manifest.json",
+    "closureManifestFileCount": 12,
+    "closureManifestTotalBytes": 10651369,
+    "closureManifestInventorySha256": "207CD8BA514D77097D137DA1563BE9FFB3DA5F42B45AAD94BE0EDBEBD5A22B34"
+  },
+  "publication": {
+    "plannedCountryPair": ["Norway", "San Marino"],
+    "sanMarinoSelectedAssetPublicationCounts": [0, 0, 0, 0],
+    "xAccount": "@dogramaci",
+    "currentComposerCountryPair": ["Monaco", "North Macedonia"],
+    "currentComposerRetainedIntact": true,
+    "currentComposerVisiblePostControlFailures": 2,
+    "currentComposerPublicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true,
+    "freshActionTimeConfirmationRequiredAfterXRecovery": true
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradictions": [
+    "Historical Batch 416 contains one accepted but unpublished San Marino Scene 1685 and three unresolved scenes; those terminal scenes were neither resent nor reopened, and fresh Batch 486 is the current four-scene authority.",
+    "Meta labeled all four terminal images as WEBP in the visible DOM while visible Download controls delivered JPEG/JFIF bytes; the archived visible-control bytes are canonical.",
+    "All four single ChatGPT shortening passes succeeded and were selected; the four original Meta bytes remain archived as unused-but-preserved provider evidence.",
+    "The intact Monaco-North Macedonia X composer has two explicit Post errors and zero live transmission; a third blind click is forbidden despite the completed Norway-San Marino pair.",
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified checkpoints; the existing guardian stays paused and untouched."
+  ],
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "nextSafeAction": "Validate every prompt and asset hash plus the closure inventory, commit and push the complete Batch 486 evidence set, verify Git LFS and Draft PR parity, then keep the four existing Meta lanes available for the next remote-authorized country while preserving the failed Monaco-North Macedonia X composer without a third Post attempt."
+}
