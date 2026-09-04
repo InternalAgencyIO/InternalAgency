@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "batch": 485,
+  "country": "Norway",
+  "scenes": [1967, 1968, 1969, 1970],
+  "state": "four-exact-meta-thinking-prompts-dispatched-once-outcomes-pending",
+  "dispatchWindowObservedAtUtc": "2026-09-04T15:51:19.330Z",
+  "authority": {
+    "stagedCheckpoint": "assets/lore/starlight-era/batch-485-norway-four-meta-composers-staged-checkpoint.json",
+    "stagedCheckpointCommit": "6ac512881d6e96a4e64ce136c26daa85ec11e591",
+    "stagedCheckpointRemoteAndDraftPrParityVerified": true,
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "thinkingEnabled": true,
+    "browser": "Codex in-app Browser",
+    "supportedVisibleControlsOnly": true,
+    "initialDispatchCount": 4,
+    "confirmedPromptResends": 0,
+    "terminalScenesReopened": 0,
+    "providerRetries": 0
+  },
+  "dispatches": [
+    {
+      "scene": 1967,
+      "promptSha256": "8E62EFE76381D887EA239238D69EBC732027D503EDE4CA2104EE69B19FA86179",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/bc625b3f-7775-4c82-84d6-21e25fa0dc83",
+      "outcome": "pending"
+    },
+    {
+      "scene": 1968,
+      "promptSha256": "0C8091240ED4AE304F507F6BCB554B73D268454833D192DA070AD0072B407F27",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/86587295-c088-448c-9b5c-3725e46f467a",
+      "outcome": "pending"
+    },
+    {
+      "scene": 1969,
+      "promptSha256": "C4E8F7B6C6C85C5351E8FDE47DD4E6B5AC55B572F6E5A0EF8099C38D60A93A0D",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/7fe2ffb0-91df-46f9-bbbf-df267024d0e3",
+      "outcome": "pending"
+    },
+    {
+      "scene": 1970,
+      "promptSha256": "967F87E25AC3BF07ACB13E714EB48F54FF49DB6626F4D17473E6FB17FA5F2851",
+      "anchors": [938, 936, 937],
+      "sendControlActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/3a0b0a59-3492-41b3-8290-1776b2cc9e5c",
+      "outcome": "pending"
+    }
+  ],
+  "xHold": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "account": "@dogramaci",
+    "composerRetainedIntact": true,
+    "visiblePostControlActivations": 2,
+    "visibleExplicitFailures": 2,
+    "exactCaptionLiveMatches": 0,
+    "publicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "nextSafeAction": "Commit and remote-verify this dispatch record, inspect each existing provider URL without reopening any terminal scene, classify success versus hard failure, download successful raw bytes only through the visible Download control, and create at most one provider-safe retry composer for a hard failure. Never resend a confirmed provider URL."
+}
