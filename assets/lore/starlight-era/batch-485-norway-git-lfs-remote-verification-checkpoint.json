@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "batch": 485,
+  "country": "Norway",
+  "scenes": [1967, 1968, 1969, 1970],
+  "state": "four-stills-closed-commit-lfs-remote-and-draft-pr-parity-verified",
+  "verifiedAtUtc": "2026-09-04T16:17:22Z",
+  "verifiedClosureCommit": "f2dc145a4fead23109dccced4185f34e4725979e",
+  "git": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "f2dc145a4fead23109dccced4185f34e4725979e",
+    "remoteHead": "f2dc145a4fead23109dccced4185f34e4725979e",
+    "draftPrHead": "f2dc145a4fead23109dccced4185f34e4725979e",
+    "ahead": 0,
+    "behind": 0,
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "lfsPushDryRunEmpty": true
+  },
+  "lfs": {
+    "selectedChatgptPngCount": 4,
+    "selectedChatgptPngObjectsPresentLocally": true,
+    "selectedChatgptPngObjectHashesMatch": true,
+    "providerRawJpegCount": 4,
+    "providerRawJpegStorage": "regular Git objects",
+    "selectedHashes": [
+      "2B7A24729453AECE0DAB67CC88B41A89675EDDF238D0C8FB192C4ADBE6361DD2",
+      "89DE80B10D170379FCD5B70D1F877376007FA211819362F3004B1B935F5E0F03",
+      "ADB6D17AE33D9C7F9D7E8C94BC9CE8C6B95C261B08416E5478D725C40F88496A",
+      "344499F8A9AFADF05ED10E78F3DCC42DF43ABE005887B18216BD9890B2171337"
+    ],
+    "batchScopedVerification": "Each selected PNG's exact LFS object path exists locally, its stored bytes hash to its OID, and git lfs push --dry-run reports nothing pending. Historical missing worktree paths reported by a repository-wide fsck are outside Batch 485 and are not used as this batch's gate."
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "thinkingEnabled": true,
+    "visibleSupportedInAppBrowserOnly": true,
+    "anchorsAttachedInExactOrder": [938, 936, 937],
+    "successfulRawAssetCount": 4,
+    "metaRetries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false
+  },
+  "selection": {
+    "chatgptExactlyOneStrongShorteningPassAttemptPerSuccessfulOccurrence": true,
+    "successfulChatgptOutputs": 4,
+    "blockedChatgptOutputs": 0,
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 4,
+    "selectedMetaFallbacks": 0,
+    "selectedAssetCount": 4,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "publicationCountPerSelectedAsset": [0, 0, 0, 0]
+  },
+  "evidence": {
+    "closureCheckpoint": "assets/lore/starlight-era/batch-485-norway-four-stills-closed-qa-checkpoint.json",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-485-norway/closure-evidence-manifest.json",
+    "manifestFileCount": 12,
+    "manifestTotalBytes": 11238440,
+    "manifestInventorySha256": "0511CB4619A51AC0CDD987D3A2C090A5EA0C15D783CF4783E9BEC5450286B9CE",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-485-norway/provider-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-485-norway/accessibility-sidecars.json",
+    "onePassPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-485-norway/chatgpt-one-pass-prompts-and-outcomes.json"
+  },
+  "publication": {
+    "plannedCountryPair": ["Norway", "San Marino"],
+    "xAccount": "@dogramaci",
+    "currentComposerCountryPair": ["Monaco", "North Macedonia"],
+    "currentComposerRetainedIntact": true,
+    "currentComposerVisiblePostControlActivations": 2,
+    "currentComposerExplicitFailures": 2,
+    "publicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true,
+    "freshActionTimeConfirmationRequiredAfterRecovery": true
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradictions": [
+    "Historical Batch 290 Norway ended blocked with no accepted assets; fresh remote-verified Batch 485 supersedes it.",
+    "Scene 1967's named-real-place damage roll was declined by Meta and replaced with a peaceful Oslo background; the public-safe complete occurrence remained successful and was not aesthetically retried.",
+    "Meta's terminal DOM labeled all four provider images as WEBP while visible Download delivered JPEG/JFIF bytes; the archived visible-control bytes are canonical.",
+    "The current Monaco-North Macedonia X composer remains intact after two explicit X failures and zero transmission; it must not be replaced or clicked a third time blindly.",
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified authority; the existing guardian remains paused and untouched."
+  ],
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "nextSafeAction": "Commit and remote-verify this parity record. Then prepare fresh Batch 486 San Marino prompts under the same roll contract so the four existing Meta lanes can continue, while preserving the failed Monaco-North Macedonia X composer and making no third Post attempt until X recovery, a fresh live zero-match check, full composer revalidation and fresh action-time confirmation."
+}
