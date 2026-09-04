@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "batch": 482,
+  "country": "Moldova",
+  "state": "four-meta-thinking-lanes-staged-authorized-no-send",
+  "stagedAtUtc": "2026-09-04T12:59:47.391Z",
+  "authorization": "authorized for all go, authorized for all similar commands",
+  "account": "leesha007",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "grokState": "paused-until-credits-return",
+  "guardian": {
+    "path": "C:/Users/A/.codex/automations/guardian-x-assistant-mission/automation.toml",
+    "status": "PAUSED",
+    "changed": false
+  },
+  "xComposer": {
+    "tabId": "17",
+    "url": "https://x.com/compose/post",
+    "account": "@dogramaci",
+    "visiblyVerified": true,
+    "blank": true,
+    "postClicks": 0
+  },
+  "browserInventory": {
+    "tabCount": 5,
+    "metaTabIds": [
+      "19",
+      "20",
+      "21",
+      "22"
+    ],
+    "metaTabCount": 4,
+    "xComposerCount": 1,
+    "unexpectedTabs": []
+  },
+  "preparationCommit": "fa12ea515207872f6dc9c92041cfd508417a72f3",
+  "sceneMapping": [
+    {
+      "scene": 1955,
+      "tabId": "19",
+      "promptSha256": "19FA6C4AEA0BA5999CDB6CFAE63D0FB3AC13B8E993CB4E00E39F16440FE68E91"
+    },
+    {
+      "scene": 1956,
+      "tabId": "20",
+      "promptSha256": "D14DDBF713B234F099F284E8CA50277887AD300E09FF498BFDA9194EFED978D9"
+    },
+    {
+      "scene": 1957,
+      "tabId": "21",
+      "promptSha256": "66C2E33F1209DA822E9E19889A1FA25A60B2D08133421E465490429F1CD3E766"
+    },
+    {
+      "scene": 1958,
+      "tabId": "22",
+      "promptSha256": "10BCD468AB14C386335296A1D5213F9700A1C4A6F8D2CD2BC107170C966DAD71"
+    }
+  ],
+  "visibleGateResults": {
+    "signedInAccountVisibleAllFour": true,
+    "thinkingButtonVisibleAllFour": true,
+    "thinkingMenuCheckedAllFour": true,
+    "instantMenuCheckedAny": false,
+    "exactPromptTextAllFour": true,
+    "attachmentCountEach": 3,
+    "anchorOrderAllFour": [
+      938,
+      936,
+      937
+    ],
+    "sendButtonsEnabledAllFour": true
+  },
+  "sendClicks": 0,
+  "repeatSendClicks": 0,
+  "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/staging-evidence-manifest.json",
+  "preparationCheckpoint": "assets/lore/starlight-era/batch-482-moldova-europe-gap-fill-prompts-prepared-checkpoint.json",
+  "nextSafeAction": "Commit, push and verify Git/LFS and draft PR head parity for this exact staging state. Then inspect the same five visible tabs one final time; only if account, Thinking, prompt hashes, 938-936-937 attachment order, send-enabled state and blank @dogramaci X composer remain exact, click each Meta Send exactly once and record all four provider URLs and timestamps."
+}
