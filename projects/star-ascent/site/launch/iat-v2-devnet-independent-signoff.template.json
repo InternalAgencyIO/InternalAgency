@@ -1,5 +1,5 @@
 {
-  "schema": "iat-v2-devnet-independent-signoff/v1",
+  "schema": "iat-v2-devnet-automated-observation/v2",
   "status": "PENDING",
   "scope": "SEVEN_TRANSACTION_DEVNET_INITIALIZATION_AND_ACTIVATION_ONLY",
   "evidence": {
@@ -10,13 +10,11 @@
     "mint": "BTuhzdrH2vnMELbHZWPJ1FoFRoBhkMDAyCSCRRLew4GR",
     "transactionCount": 7
   },
-  "verifier": {
-    "accountabilityLabel": "FDF Guard",
-    "publicSolanaAddress": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja",
-    "independentOfOperator": null,
-    "didNotOperateModelT": null,
-    "reviewMethod": null,
-    "communicationReference": null
+  "observationPolicy": {
+    "mode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true
   },
   "checks": {
     "evidenceSha256Matched": false,
@@ -31,6 +29,5 @@
     "mainnetRemainedHold": false
   },
   "exceptions": [],
-  "attestation": null,
   "completedAtUtc": null
 }

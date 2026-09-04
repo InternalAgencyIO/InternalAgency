@@ -536,7 +536,7 @@ test("exact signed checkpoint composes durable anchor and local cursor without a
   assert.equal(receipt.materializedProjectionStateVerified, false);
   assert.equal(receipt.projectionEffectAtomicityVerified, false);
   assert.equal(receipt.externalSideEffectsAuthorized, false);
-  assert.equal(receipt.independentReviewAccepted, false);
+  assert.equal(receipt.sourceBoundAutomatedDirectEvidenceVerified, false);
   assertHoldBoundary(receipt);
   assert.equal(validateRewardAuthenticatedConsumerCompositionReceipt(receipt), receipt);
   assert.throws(
@@ -739,7 +739,7 @@ test("runtime binding is exact, content addressed, and never accepts production 
     "independentRollbackProtectionVerified",
     "runtimeConfinementVerified",
     "runtimeIntegrationVerified",
-    "independentReviewAccepted",
+    "sourceBoundAutomatedDirectEvidenceVerified",
     "activationReady",
     "mainnetStatus",
     "runtimeBindingSha256",
@@ -982,7 +982,7 @@ test("authenticated materialized runtime atomically commits canonical local stat
     "runtimeConfinementVerified",
     "runtimeIntegrationVerified",
     "externalSideEffectsAuthorized",
-    "independentReviewAccepted",
+    "sourceBoundAutomatedDirectEvidenceVerified",
     "activationReady",
   ]) assert.equal(receipt[flag], false, flag);
   assert.equal(
@@ -1049,7 +1049,7 @@ test("materialized runtime constructor rejects every unbranded adapter without c
       "independentRollbackProtectionVerified",
       "runtimeConfinementVerified",
       "runtimeIntegrationVerified",
-      "independentReviewAccepted",
+      "sourceBoundAutomatedDirectEvidenceVerified",
       "activationReady",
       "mainnetStatus",
       "runtimeBindingSha256",

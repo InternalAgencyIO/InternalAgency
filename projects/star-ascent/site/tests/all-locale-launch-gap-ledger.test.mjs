@@ -60,8 +60,8 @@ test("all-locale ledger records the exact current cell, review, provider, and ru
   assert.equal(ledger.runtimeSnapshot.activeCatalog.targetCells, 48_265);
   assert.equal(ledger.runtimeSnapshot.activeCatalog.targetTranslatedCells, 0);
   assert.equal(ledger.runtimeSnapshot.activeCatalog.targetSourceEquivalentCells, 48_265);
-  assert.equal(ledger.runtimeSnapshot.pendingVisibleSource.pendingSourceCount, 48);
-  assert.equal(ledger.runtimeSnapshot.pendingVisibleSource.pendingRouteCount, 13);
+  assert.equal(ledger.runtimeSnapshot.pendingVisibleSource.pendingSourceCount, 87);
+  assert.equal(ledger.runtimeSnapshot.pendingVisibleSource.pendingRouteCount, 15);
   assert.equal(ledger.claims.generatedPublicPayloadClaim, "OBSERVED_IF_PRESENT_NOT_REQUIRED_BUILD_OUTPUT");
   assert.equal(ledger.runtimeSnapshot.publicPayloads.bundleCount, 0);
   assert.equal(ledger.runtimeSnapshot.publicPayloads.missingBundleCount, 50);

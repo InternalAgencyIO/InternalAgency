@@ -1,0 +1,34 @@
+{
+  "schema": "iat-v2-current-source-clearance/v1",
+  "status": "HOLD",
+  "mainnetStatus": "HOLD",
+  "scope": "Current-source automated direct-evidence clearance only; this record never authorizes signing, broadcast, deployment, funding, scheduling, publication, or Mainnet execution.",
+  "sourceBinding": {
+    "commit": null,
+    "tree": null,
+    "programTree": null,
+    "programArtifactSha256": null,
+    "programArtifactBytes": null,
+    "ciBuildEvidenceSha256": null
+  },
+  "evidence": {
+    "currentSourceSbf": null,
+    "signedDevnetRehearsal": null,
+    "productionIdentityIntegration": null,
+    "automatedSecurityClosure": null
+  },
+  "clearance": {
+    "currentSourceSbfComplete": false,
+    "freshSignedDevnetComplete": false,
+    "productionIdentityIntegrationComplete": false,
+    "zeroUnacceptedCriticalOrHigh": false,
+    "automatedDirectEvidenceComplete": false
+  },
+  "observedAtUtc": null,
+  "limitations": [
+    "Historical pre-launch and remediation HOLD audits remain immutable evidence and are not rewritten into clearance records.",
+    "CLEAR requires four current-source public evidence files whose bytes, source commit, source tree, program artifact, receipts, and passing checks are validated directly.",
+    "A CLEAR source assessment permits only downstream attended preflight preparation while Mainnet remains HOLD.",
+    "Trezor Model T physical confirmation remains required separately for every actual cryptographic signature."
+  ]
+}

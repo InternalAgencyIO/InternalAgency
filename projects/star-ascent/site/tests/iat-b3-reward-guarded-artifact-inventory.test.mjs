@@ -65,7 +65,7 @@ test("exact clean artifact bytes bind to the enumerated source gate and remain n
   assert.equal(result.rollbackProtectionVerified, false);
   assert.equal(result.materializedProjectionStateVerified, false);
   assert.equal(result.externalSideEffectsAuthorized, false);
-  assert.equal(result.independentReviewAccepted, false);
+  assert.equal(result.sourceBoundAutomatedDirectEvidenceVerified, false);
   assert.equal(result.activationReady, false);
   assert.equal(result.mainnetStatus, REWARD_GUARDED_ARTIFACT_INVENTORY_MAINNET_STATUS);
   assert.equal(result.mainnetStatus, "HOLD");

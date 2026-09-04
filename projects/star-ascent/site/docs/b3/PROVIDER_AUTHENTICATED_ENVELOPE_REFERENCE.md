@@ -141,16 +141,18 @@ payment, transfer, mint, deployment, or activation.
 
 ## Required owner and external evidence
 
-The next production integration cannot proceed until the owner supplies and an
-independent reviewer accepts the exact provider identity, subject binding,
-receipt domain, Ed25519 public keys, key-registry resource, rotation schedule,
-revocation state, compromise policy, receipt timing bounds, and content-
-addressed approval evidence. Separate provider evidence must prove control of
-the corresponding private keys and the signed response semantics.
+The next production integration cannot proceed until the owner supplies the
+explicit provider-policy choices and source-bound automated direct evidence
+binds the exact provider identity, subject binding, receipt domain, Ed25519
+public keys, key-registry resource, rotation schedule, revocation state,
+compromise policy, receipt timing bounds, and content-addressed decision
+evidence. Separate provider evidence must prove control of the corresponding
+private keys and the signed response semantics.
 
 After those inputs exist, closing the runtime blocker still requires a
 credential-free verifier integration, atomic durable monotonic state, an
 external rollback anchor, semantic codecs for checkpoint and X responses,
-Daily-Law-first and every-consumer gating, outage/recovery drills, and
-independent security, privacy, legal, and operations review. No field in this
-reference substitutes for those facts.
+Daily-Law-first and every-consumer gating, outage/recovery drills, and exact
+source-bound automated security, privacy, legal, and operations evidence. No
+field in this reference substitutes for those facts. Unobserved claims remain
+`HOLD`; no human reviewer or observer is an authorization prerequisite.

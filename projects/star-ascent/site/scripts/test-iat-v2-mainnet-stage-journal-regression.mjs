@@ -20,6 +20,7 @@ const sandbox = mkdtempSync(join(tmpdir(), "iat-v2-stage-journal-"));
 const baseline = JSON.parse(readFileSync(join(root, journalPath), "utf8"));
 const clone = (value) => structuredClone(value);
 const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
+const sha256Bytes = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 const encodeBase58 = (bytes) => {
   let value = 0n;
@@ -74,7 +75,7 @@ function armedFixture() {
   readiness.funding.observedLamports = readiness.funding.ceremonyFloorLamports;
   readiness.funding.shortfallToCeremonyFloorLamports = "0";
   readiness.funding.ceremonyFloorSatisfied = true;
-  for (const field of ["mainnetFundingFloorSatisfied", "replacementUtcWindowPublished", "releaseArtifactsRegeneratedAfterFundingAndScheduling", "finalPreflightPassedAgainstRegeneratedArtifacts", "physicalModelTDevicePathReviewed", "physicalModelTReviewCompleted", "independentMainnetVerifierAssigned", "mainnetExecutionAuthorized"]) readiness.gates[field] = true;
+  for (const field of ["mainnetFundingFloorSatisfied", "replacementUtcWindowPublished", "releaseArtifactsRegeneratedAfterFundingAndScheduling", "finalPreflightPassedAgainstRegeneratedArtifacts", "physicalModelTDevicePathReviewed", "physicalModelTReviewCompleted", "automatedSourceReceiptStateObservationComplete", "mainnetExecutionAuthorized"]) readiness.gates[field] = true;
   writeJson("launch/iat-v2-mainnet-readiness-gate.json", readiness);
 
   const journal = clone(baseline);
@@ -101,16 +102,45 @@ function armedFixture() {
   return journal;
 }
 
-function matched(stage, index) {
+function writeObservationReceipt(stage, index, journal) {
+  const receiptPath = `launch/evidence/iat-v2-mainnet-stage-${index + 1}-observation.json`;
+  const receipt = {
+    schema: "iat-v2-stage-observation/v1",
+    observationMode: "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    network: journal.network,
+    sourceCommit: journal.identity.sourceCommit,
+    programId: journal.identity.programId,
+    stageIndex: stage.index,
+    stage: stage.stage,
+    reviewedIntentSha256: stage.reviewedIntentSha256,
+    signedMessageSha256: stage.signedMessageSha256,
+    expectedPostStateSha256: stage.expectedPostStateSha256,
+    signature: stage.signature,
+    confirmedAtUtc: stage.confirmedAtUtc,
+    observedPostStateSha256: stage.observedPostStateSha256,
+    mismatchCode: stage.mismatchCode,
+    observedAtUtc: stage.observedAtUtc,
+  };
+  writeJson(receiptPath, receipt);
+  stage.observationReceiptPath = receiptPath;
+  stage.observationReceiptSha256 = sha256(join(sandbox, receiptPath));
+}
+
+const receiptSetSha256 = (stages) => sha256Bytes(Buffer.from(
+  `${stages.map((stage) => stage.observationReceiptSha256).join("\n")}\n`,
+  "utf8",
+));
+
+function matched(stage, index, journal) {
   const signature = encodeBase58(Buffer.alloc(64, index + 1));
   stage.status = "FINALIZED_MATCHED";
   stage.signedMessageSha256 = createHash("sha256").update(`signed-message-stage-${index + 1}`).digest("hex");
   stage.signature = signature;
   stage.explorerUrl = `https://explorer.solana.com/tx/${signature}?cluster=mainnet-beta`;
   stage.confirmedAtUtc = `2026-08-01T00:${String(index).padStart(2, "0")}:00Z`;
-  stage.independentlyVerifiedAtUtc = `2026-08-01T00:${String(index).padStart(2, "0")}:30Z`;
-  stage.independentVerifierLabel = `independent-verifier-${index + 1}`;
+  stage.observedAtUtc = `2026-08-01T00:${String(index).padStart(2, "0")}:30Z`;
   stage.observedPostStateSha256 = stage.expectedPostStateSha256;
+  writeObservationReceipt(stage, index, journal);
 }
 
 try {
@@ -126,6 +156,14 @@ try {
   const compensating = clone(baseline);
   compensating.controls.noCompensatingTransaction = false;
   expectFail("compensating transaction authority", compensating, "controls.noCompensatingTransaction must be true");
+
+  const humanReviewer = clone(baseline);
+  humanReviewer.controls.humanReviewerRequired = true;
+  expectFail("human reviewer authorization gate", humanReviewer, "controls.humanReviewerRequired must be false");
+
+  const selfAttestation = clone(baseline);
+  selfAttestation.controls.noSelfAttestation = false;
+  expectFail("self-attestation", selfAttestation, "controls.noSelfAttestation must be true");
 
   const ambiguousIntentHash = clone(baseline);
   ambiguousIntentHash.hashContract.reviewedIntentExcludes = ["signatures"];
@@ -159,12 +197,12 @@ try {
 
   const reconciled = clone(armed);
   reconciled.status = "RECONCILED";
-  reconciled.stages.forEach(matched);
+  reconciled.stages.forEach((stage, index) => matched(stage, index, reconciled));
   Object.assign(reconciled.terminalDecision, {
     state: "RECONCILED",
     reasonCode: "ALL_STAGES_MATCHED",
-    reviewedAtUtc: "2026-08-01T00:09:00Z",
-    reviewerLabel: "independent-terminal-reviewer",
+    observationReceiptSetSha256: receiptSetSha256(reconciled.stages),
+    observedAtUtc: "2026-08-01T00:09:00Z",
   });
   expectPass("eight-stage RECONCILED", reconciled);
 
@@ -178,25 +216,29 @@ try {
   expectFail("shape-only Base58 signature", shapeOnlySignature, "requires a usable finalized signature");
 
   const earlyReconciledReview = clone(reconciled);
-  earlyReconciledReview.terminalDecision.reviewedAtUtc = "2026-08-01T00:06:00Z";
-  expectFail("terminal reconciliation before final stage review", earlyReconciledReview, "cannot predate any stage review");
+  earlyReconciledReview.terminalDecision.observedAtUtc = "2026-08-01T00:06:00Z";
+  expectFail("terminal reconciliation before final stage observation", earlyReconciledReview, "cannot predate any stage observation");
+
+  const alteredReceipt = clone(reconciled);
+  alteredReceipt.stages[0].observationReceiptSha256 = "a".repeat(64);
+  expectFail("altered observation receipt binding", alteredReceipt, "observationReceiptSha256 must bind the exact receipt bytes");
 
   const terminal = clone(armed);
   terminal.status = "TERMINAL_HOLD";
-  matched(terminal.stages[0], 0);
+  matched(terminal.stages[0], 0, terminal);
   Object.assign(terminal.stages[1], {
     status: "FAILED_OR_MISMATCH",
-    independentlyVerifiedAtUtc: "2026-08-01T00:03:00Z",
-    independentVerifierLabel: "independent-failure-reviewer",
+    observedAtUtc: "2026-08-01T00:03:00Z",
     mismatchCode: "POST_STATE_MISMATCH",
   });
+  writeObservationReceipt(terminal.stages[1], 1, terminal);
   for (const stage of terminal.stages.slice(2)) stage.status = "NOT_ATTEMPTED";
   Object.assign(terminal.terminalDecision, {
     state: "TERMINAL_HOLD",
     failedStage: terminal.stages[1].stage,
     reasonCode: "POST_STATE_MISMATCH",
-    reviewedAtUtc: "2026-08-01T00:04:00Z",
-    reviewerLabel: "independent-terminal-reviewer",
+    observationReceiptSetSha256: receiptSetSha256(terminal.stages.slice(0, 2)),
+    observedAtUtc: "2026-08-01T00:04:00Z",
     publicIncidentUrl: "https://status.internalagency.io/public-incidents/iat-v2-stage-2",
   });
   expectPass("terminal first-mismatch HOLD", terminal);
@@ -206,15 +248,15 @@ try {
   expectFail("divergent terminal reason", divergentReason, "reasonCode must equal the stopped stage mismatchCode");
 
   const earlyTerminalReview = clone(terminal);
-  earlyTerminalReview.terminalDecision.reviewedAtUtc = "2026-08-01T00:02:00Z";
-  expectFail("terminal review before stopped-stage review", earlyTerminalReview, "cannot predate the stopped-stage independent review");
+  earlyTerminalReview.terminalDecision.observedAtUtc = "2026-08-01T00:02:00Z";
+  expectFail("terminal observation before stopped-stage observation", earlyTerminalReview, "cannot predate the stopped-stage observation");
 
   const placeholderIncident = clone(terminal);
   placeholderIncident.terminalDecision.publicIncidentUrl = "https://example.com/incident";
   expectFail("placeholder incident URL", placeholderIncident, "publicIncidentUrl must be null or a public HTTPS URL");
 
   const continuedAfterFailure = clone(terminal);
-  matched(continuedAfterFailure.stages[2], 2);
+  matched(continuedAfterFailure.stages[2], 2, continuedAfterFailure);
   expectFail("continued execution after mismatch", continuedAfterFailure, "TERMINAL_HOLD stage 3 must be NOT_ATTEMPTED");
 
   const unresolved = clone(armed);
@@ -225,17 +267,17 @@ try {
     signedMessageSha256: createHash("sha256").update("unresolved-signed-message").digest("hex"),
     signature: unresolvedSignature,
     explorerUrl: `https://explorer.solana.com/tx/${unresolvedSignature}?cluster=mainnet-beta`,
-    independentlyVerifiedAtUtc: "2026-08-01T00:03:00Z",
-    independentVerifierLabel: "independent-unresolved-reviewer",
+    observedAtUtc: "2026-08-01T00:03:00Z",
     mismatchCode: "CONFIRMATION_UNKNOWN",
   });
+  writeObservationReceipt(unresolved.stages[0], 0, unresolved);
   for (const stage of unresolved.stages.slice(1)) stage.status = "NOT_ATTEMPTED";
   Object.assign(unresolved.terminalDecision, {
     state: "TERMINAL_HOLD",
     failedStage: unresolved.stages[0].stage,
     reasonCode: "CONFIRMATION_UNKNOWN",
-    reviewedAtUtc: "2026-08-01T00:04:00Z",
-    reviewerLabel: "independent-terminal-reviewer",
+    observationReceiptSetSha256: receiptSetSha256(unresolved.stages.slice(0, 1)),
+    observedAtUtc: "2026-08-01T00:04:00Z",
   });
   expectPass("submitted but unresolved terminal HOLD", unresolved);
 
@@ -253,7 +295,7 @@ try {
   expectFail("unresolved submission with confirmation claim", unresolvedWithConfirmationClaim, "cannot claim a confirmation time");
 
   const continuedAfterUnknown = clone(unresolved);
-  matched(continuedAfterUnknown.stages[1], 1);
+  matched(continuedAfterUnknown.stages[1], 1, continuedAfterUnknown);
   expectFail("continued execution after unresolved submission", continuedAfterUnknown, "TERMINAL_HOLD stage 2 must be NOT_ATTEMPTED");
 
   const duplicateSignature = clone(reconciled);
@@ -263,9 +305,9 @@ try {
 
   const alteredLimitations = clone(baseline);
   alteredLimitations.limitations[3] = "This altered statement is long but no longer preserves the reviewed publication boundary.";
-  expectFail("altered limitations", alteredLimitations, "limitations must retain the four exact reviewed non-authorizing statements");
+  expectFail("altered limitations", alteredLimitations, "limitations must retain the five exact reviewed non-authorizing statements");
 
-  console.log("IAT V2 stage-journal regression checks pass: HOLD hygiene, exact UTC ceremony scheduling, immutable order, source binding, eight matched stages, failure/mismatch/unresolved terminal stops, credential rejection, and replay resistance.");
+  console.log("IAT V2 stage-journal regression checks pass: HOLD hygiene, exact UTC ceremony scheduling, immutable order, automated source/receipt/state binding, Model T-only human signature confirmation, terminal stops, credential rejection, and replay resistance.");
 } finally {
   rmSync(sandbox, { recursive: true, force: true });
 }

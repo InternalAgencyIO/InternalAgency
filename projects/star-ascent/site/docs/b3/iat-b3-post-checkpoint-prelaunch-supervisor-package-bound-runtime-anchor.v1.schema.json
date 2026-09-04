@@ -1,0 +1,1117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internal.invalid/iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-runtime-anchor.v1.schema.json",
+  "title": "IAT-B3 package-bound prelaunch supervisor runtime anchor",
+  "description": "Strict externally authored runtime anchor. It binds identities and expectations but never authorizes a runtime result.",
+  "type": "object",
+  "required": [
+    "schema",
+    "invokerRequestSha256",
+    "descriptorBinding",
+    "runId",
+    "supervisorReleaseId",
+    "bootId",
+    "sessionId",
+    "windowControl",
+    "preDropHolder",
+    "principals",
+    "package",
+    "gitObjectProof",
+    "control",
+    "targets",
+    "k44",
+    "handoff",
+    "sourceTruth"
+  ],
+  "properties": {
+    "schema": {
+      "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-runtime-anchor/v1"
+    },
+    "invokerRequestSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "descriptorBinding": {
+      "$ref": "#/$defs/descriptorBinding"
+    },
+    "runId": {
+      "$ref": "#/$defs/pathComponent"
+    },
+    "supervisorReleaseId": {
+      "$ref": "#/$defs/pathComponent"
+    },
+    "bootId": {
+      "$ref": "#/$defs/bootId"
+    },
+    "sessionId": {
+      "$ref": "#/$defs/sha256"
+    },
+    "windowControl": {
+      "$ref": "#/$defs/windowControl"
+    },
+    "preDropHolder": {
+      "$ref": "#/$defs/preDropHolder"
+    },
+    "principals": {
+      "$ref": "#/$defs/principals"
+    },
+    "package": {
+      "$ref": "#/$defs/package"
+    },
+    "gitObjectProof": {
+      "$ref": "#/$defs/gitObjectProof"
+    },
+    "control": {
+      "$ref": "#/$defs/control"
+    },
+    "targets": {
+      "$ref": "#/$defs/targets"
+    },
+    "k44": {
+      "$ref": "#/$defs/k44"
+    },
+    "handoff": {
+      "$ref": "#/$defs/handoff"
+    },
+    "sourceTruth": {
+      "$ref": "#/$defs/sourceTruth"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "oid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "bootId": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "decimal18": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,18}|1[0-7][0-9]{18}|18[0-3][0-9]{17}|184[0-3][0-9]{16}|1844[0-5][0-9]{15}|18446[0-6][0-9]{14}|184467[0-3][0-9]{13}|1844674[0-3][0-9]{12}|184467440[0-6][0-9]{10}|1844674407[0-2][0-9]{9}|18446744073[0-6][0-9]{8}|1844674407370[0-8][0-9]{6}|18446744073709[0-4][0-9]{5}|184467440737095[0-4][0-9]{4}|18446744073709550[0-9]{3}|18446744073709551[0-5][0-9]{2}|1844674407370955160[0-9]|1844674407370955161[0-4]|18446744073709551615)$"
+    },
+    "positiveDecimal18": {
+      "allOf": [
+        { "$ref": "#/$defs/decimal18" },
+        { "not": { "const": "0" } }
+      ]
+    },
+    "pathComponent": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_-]{0,62}[A-Za-z0-9])?$"
+    },
+    "absoluteLinuxPath": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 4096,
+      "pattern": "^/(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*//)(?!.*[\\u0000-\\u001f\\u007f\\\\])[^\\u0000-\\u001f\\u007f\\\\]+(?<!/)$"
+    },
+    "repoPath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*//)(?!.*[\\u0000-\\u001f\\u007f\\\\])[^\\u0000-\\u001f\\u007f\\\\]+(?<!/)$"
+    },
+    "fileIdentity": {
+      "type": "object",
+      "required": [
+        "fd",
+        "path",
+        "sha256",
+        "byteLength",
+        "dev",
+        "ino",
+        "mountId",
+        "handleSha256",
+        "openFileDescriptionSha256",
+        "uid",
+        "gid",
+        "mode",
+        "nlink",
+        "regular",
+        "writable"
+      ],
+      "properties": {
+        "fd": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 4095
+        },
+        "path": {
+          "$ref": "#/$defs/absoluteLinuxPath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "byteLength": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "dev": {
+          "$ref": "#/$defs/decimal18"
+        },
+        "ino": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "mountId": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "handleSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "openFileDescriptionSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "mode": {
+          "pattern": "^0[0-7]{3}$",
+          "type": "string"
+        },
+        "nlink": {
+          "const": 1
+        },
+        "regular": {
+          "const": true
+        },
+        "writable": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "namespaceSet": {
+      "type": "object",
+      "required": [
+        "cgroup",
+        "ipc",
+        "mount",
+        "network",
+        "pid",
+        "user",
+        "uts"
+      ],
+      "properties": {
+        "cgroup": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "ipc": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "mount": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "network": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "pid": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "user": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "uts": {
+          "$ref": "#/$defs/positiveDecimal18"
+        }
+      },
+      "additionalProperties": false
+    },
+    "preDropHolder": {
+      "type": "object",
+      "required": [ "role", "phase", "pid", "ppid", "pidfd", "startTicks", "posixSessionId", "bootId", "sessionId", "peerIdentitySha256", "uid", "gid", "namespaces", "cgroupPath" ],
+      "properties": {
+        "role": { "const": "PRE_DROP_HOLDER" },
+        "phase": { "const": "HELD_BEFORE_NAMESPACE_UID_GID_CAPABILITY_DROP" },
+        "pid": { "type": "integer", "minimum": 1, "maximum": 4194304 },
+        "ppid": { "type": "integer", "minimum": 1, "maximum": 4194304 },
+        "pidfd": { "type": "integer", "minimum": 5, "maximum": 4095 },
+        "startTicks": { "$ref": "#/$defs/positiveDecimal18" },
+        "posixSessionId": { "$ref": "#/$defs/positiveDecimal18" },
+        "bootId": { "$ref": "#/$defs/bootId" },
+        "sessionId": { "$ref": "#/$defs/sha256" },
+        "peerIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "uid": { "const": 0 },
+        "gid": { "const": 0 },
+        "namespaces": { "$ref": "#/$defs/namespaceSet" },
+        "cgroupPath": { "$ref": "#/$defs/absoluteLinuxPath" }
+      },
+      "additionalProperties": false
+    },
+    "processBase": {
+      "type": "object",
+      "required": [
+        "role",
+        "pid",
+        "ppid",
+        "pidfd",
+        "startTicks",
+        "posixSessionId",
+        "bootId",
+        "sessionId",
+        "peerIdentitySha256",
+        "uid",
+        "gid",
+        "supplementaryGroups",
+        "permittedCapabilities",
+        "effectiveCapabilities",
+        "inheritableCapabilities",
+        "ambientCapabilities",
+        "noNewPrivileges",
+        "dumpable",
+        "namespaces",
+        "cgroupPath",
+        "securityLabelSha256",
+        "argvSha256",
+        "environmentSha256",
+        "executable",
+        "terminalAtArm"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "TRUSTED_INVOKER",
+            "SUPERVISOR",
+            "WATCHDOG",
+            "OBSERVER",
+            "WORKLOAD",
+            "EVIDENCE_CUSTODIAN"
+          ]
+        },
+        "pid": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4194304
+        },
+        "ppid": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4194304
+        },
+        "pidfd": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 4095
+        },
+        "startTicks": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "posixSessionId": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "bootId": {
+          "$ref": "#/$defs/bootId"
+        },
+        "sessionId": {
+          "$ref": "#/$defs/sha256"
+        },
+        "peerIdentitySha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "uid": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "gid": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "supplementaryGroups": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "permittedCapabilities": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "effectiveCapabilities": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "inheritableCapabilities": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "ambientCapabilities": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$"
+        },
+        "noNewPrivileges": {
+          "type": "boolean"
+        },
+        "dumpable": {
+          "type": "boolean"
+        },
+        "namespaces": {
+          "$ref": "#/$defs/namespaceSet"
+        },
+        "cgroupPath": {
+          "$ref": "#/$defs/absoluteLinuxPath"
+        },
+        "securityLabelSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "argvSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "environmentSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "executable": {
+          "$ref": "#/$defs/fileIdentity"
+        },
+        "terminalAtArm": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "principal": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/processBase"
+        }
+      ]
+    },
+    "principals": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "prefixItems": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/principal"
+            },
+            {
+              "properties": {
+                "role": {
+                  "const": "TRUSTED_INVOKER"
+                },
+                "uid": { "const": 0 },
+                "gid": { "const": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/principal"
+            },
+            {
+              "properties": {
+                "role": {
+                  "const": "SUPERVISOR"
+                },
+                "uid": { "const": 0 },
+                "gid": { "const": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/principal"
+            },
+            {
+              "properties": {
+                "role": {
+                  "const": "WATCHDOG"
+                },
+                "uid": { "const": 0 },
+                "gid": { "const": 0 }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/principal"
+            },
+            {
+              "properties": {
+                "role": {
+                  "const": "OBSERVER"
+                },
+                "permittedCapabilities": { "const": "0000000000000000" },
+                "effectiveCapabilities": { "const": "0000000000000000" },
+                "inheritableCapabilities": { "const": "0000000000000000" },
+                "ambientCapabilities": { "const": "0000000000000000" },
+                "noNewPrivileges": { "const": true },
+                "dumpable": { "const": false }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/principal"
+            },
+            {
+              "properties": {
+                "role": {
+                  "const": "WORKLOAD"
+                },
+                "permittedCapabilities": { "const": "0000000000000000" },
+                "effectiveCapabilities": { "const": "0000000000000000" },
+                "inheritableCapabilities": { "const": "0000000000000000" },
+                "ambientCapabilities": { "const": "0000000000000000" },
+                "noNewPrivileges": { "const": true },
+                "dumpable": { "const": false }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/principal"
+            },
+            {
+              "properties": {
+                "role": {
+                  "const": "EVIDENCE_CUSTODIAN"
+                },
+                "permittedCapabilities": { "const": "0000000000000000" },
+                "effectiveCapabilities": { "const": "0000000000000000" },
+                "inheritableCapabilities": { "const": "0000000000000000" },
+                "ambientCapabilities": { "const": "0000000000000000" },
+                "noNewPrivileges": { "const": true },
+                "dumpable": { "const": false }
+              }
+            }
+          ]
+        }
+      ],
+      "items": false
+    },
+    "packageEntryBase": {
+      "type": "object",
+      "required": [
+        "roleCode",
+        "role",
+        "path",
+        "mode",
+        "sha256",
+        "byteLength",
+        "blobOid",
+        "payloadFd"
+      ],
+      "properties": {
+        "roleCode": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "role": {
+          "type": "string"
+        },
+        "path": {
+          "$ref": "#/$defs/repoPath"
+        },
+        "mode": {
+          "const": "100644"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "byteLength": {
+          "$ref": "#/$defs/positiveDecimal18"
+        },
+        "blobOid": {
+          "$ref": "#/$defs/oid"
+        },
+        "payloadFd": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 26
+        }
+      },
+      "additionalProperties": false
+    },
+    "package": {
+      "type": "object",
+      "required": [
+        "commitSha",
+        "parentCommitSha",
+        "treeSha",
+        "rawDeltaSha256",
+        "manifestSha256",
+        "manifestByteLength",
+        "payloadByteLength",
+        "resolverEdgeMapSha256",
+        "entries",
+        "edges"
+      ],
+      "properties": {
+        "commitSha": {
+          "const": "11572110330c4b22aa89d629065574e567e9fea8"
+        },
+        "parentCommitSha": {
+          "const": "b1c65482aebb31395a763707b02224c38aa2da96"
+        },
+        "treeSha": {
+          "const": "22741ccba22f8f16663c745c0496d5c0be97d534"
+        },
+        "rawDeltaSha256": {
+          "const": "1be0fac74e365d480a2b83ac7452d9a399374b0ff5e0ec68b7c9ac37064ea235"
+        },
+        "manifestSha256": {
+          "const": "383960b7b04fd4c3afe66b27fa1ce8de74a870ce18f15d37a8069a5a0414b9d5"
+        },
+        "manifestByteLength": {
+          "const": "1334"
+        },
+        "payloadByteLength": {
+          "const": "123908"
+        },
+        "resolverEdgeMapSha256": {
+          "const": "78e901dd5ef6700530a592fef599facffb6628688d444f6c780d5f76610beec1"
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "prefixItems": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/packageEntryBase"
+                },
+                {
+                  "properties": {
+                    "roleCode": { "const": 1 },
+                    "role": { "const": "BPO_SCHEMA" },
+                    "path": { "const": "projects/star-ascent/site/docs/b3/iat-b3-post-checkpoint-observer-source-design.v1.schema.json" },
+                    "sha256": { "const": "75501ad2821d5c869d1a805ecb4764705069d9ee452f6438cab1febd7da9ecad" },
+                    "byteLength": { "const": "8182" },
+                    "blobOid": { "const": "27094a1d255c64bca81e98b14feece4a155b78e2" },
+                    "payloadFd": { "const": 20 }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/packageEntryBase"
+                },
+                {
+                  "properties": {
+                    "roleCode": { "const": 2 },
+                    "role": { "const": "BPO_CONTRACT" },
+                    "path": { "const": "projects/star-ascent/site/scripts/lib/iat-b3-post-checkpoint-observer-source-design-contract.mjs" },
+                    "sha256": { "const": "1a33cf1ca99a209abccabb1abc66ea7cb7f683b80d17201abdbc207bb8a6bcfe" },
+                    "byteLength": { "const": "13834" },
+                    "blobOid": { "const": "75f10c23908146e142af78854f09fa08ce5f4fed" },
+                    "payloadFd": { "const": 21 }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/packageEntryBase" },
+                {
+                  "properties": {
+                    "roleCode": { "const": 3 },
+                    "role": { "const": "BPO_TEST" },
+                    "path": { "const": "projects/star-ascent/site/tests/iat-b3-post-checkpoint-observer-source-design-contract.test.mjs" },
+                    "sha256": { "const": "85e400f30981cf433c7dc0c95b60d0018e82aaae62f208b5d48643804545035d" },
+                    "byteLength": { "const": "15817" },
+                    "blobOid": { "const": "9cf6e5b6c3c6bdb8690723c7bcc0359d3d90df37" },
+                    "payloadFd": { "const": 22 }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/packageEntryBase" },
+                {
+                  "properties": {
+                    "roleCode": { "const": 4 },
+                    "role": { "const": "FRESH_BPI_SCHEMA" },
+                    "path": { "const": "projects/star-ascent/site/docs/b3/iat-b3-post-checkpoint-supervised-toolchain-k44-observer-receipt.v1.schema.json" },
+                    "sha256": { "const": "cc1771e3fb6736d1887fd2523db15d0170eb59a5a125477498d71ea8ebc8bfb0" },
+                    "byteLength": { "const": "7776" },
+                    "blobOid": { "const": "f3c4398dbb06a028d6c92885387891ae766941d1" },
+                    "payloadFd": { "const": 23 }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/packageEntryBase" },
+                {
+                  "properties": {
+                    "roleCode": { "const": 5 },
+                    "role": { "const": "FRESH_BPI_CONTRACT" },
+                    "path": { "const": "projects/star-ascent/site/scripts/lib/iat-b3-post-checkpoint-supervised-toolchain-k44-observer-package-contract.mjs" },
+                    "sha256": { "const": "7f47b43f8104d3d542879a666866798cf90ada9578e5a6a7e84a61d6d8b5ba16" },
+                    "byteLength": { "const": "35319" },
+                    "blobOid": { "const": "fefc448c6324750191ac66a79ea92b398c8a5be0" },
+                    "payloadFd": { "const": 24 }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/packageEntryBase" },
+                {
+                  "properties": {
+                    "roleCode": { "const": 6 },
+                    "role": { "const": "FRESH_BPI_RUNNER_ENTRY" },
+                    "path": { "const": "projects/star-ascent/site/scripts/observe-iat-b3-post-checkpoint-supervised-toolchain-k44.mjs" },
+                    "sha256": { "const": "da595f511a5b2004b7a1ae91ed4f6d37d5f98c071abcb2f07592807de7993fc6" },
+                    "byteLength": { "const": "2691" },
+                    "blobOid": { "const": "ade3d46ffe5d595f2753a35b91f508d7c71c57d7" },
+                    "payloadFd": { "const": 25 }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/packageEntryBase" },
+                {
+                  "properties": {
+                    "roleCode": { "const": 7 },
+                    "role": { "const": "FRESH_BPI_TEST" },
+                    "path": { "const": "projects/star-ascent/site/tests/iat-b3-post-checkpoint-supervised-toolchain-k44-observer-package.test.mjs" },
+                    "sha256": { "const": "c9f7dd501e87b3077e73947e22e274a36a9e2344ebc507042ab1e11c64ca1396" },
+                    "byteLength": { "const": "40289" },
+                    "blobOid": { "const": "2ac9ea2408c8a8dcf54675db59b267d355e6b242" },
+                    "payloadFd": { "const": 26 }
+                  }
+                }
+              ]
+            }
+          ],
+          "items": false
+        },
+        "edges": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "prefixItems": [
+            {
+              "const": "2:BUILTIN:node:buffer:0"
+            },
+            {
+              "const": "2:BUILTIN:node:util:0"
+            },
+            {
+              "const": "6:RELATIVE_EXACT_REVIEWED_PATH_TO_ROLE:./lib/iat-b3-post-checkpoint-observer-source-design-contract.mjs:2"
+            },
+            {
+              "const": "6:RELATIVE_EXACT_REVIEWED_PATH_TO_ROLE:./lib/iat-b3-post-checkpoint-supervised-toolchain-k44-observer-package-contract.mjs:5"
+            }
+          ],
+          "items": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "descriptorBinding": {
+      "type": "object",
+      "required": [
+        "bootstrapSha256",
+        "bootstrapByteLength",
+        "evidenceSchemaSha256",
+        "evidenceSchemaByteLength",
+        "nodeStartupClosureSha256",
+        "nodeStartupClosureByteLength",
+        "nodeVersionReceiptSha256",
+        "nodeStartupSyscallReceiptSha256",
+        "nodeStartupSyscallAllowlistSha256",
+        "nodeStartupSyscallReceiptFile",
+        "inspectorCompiledOut",
+        "nodeExecutable",
+        "source",
+        "sameHandleVerified"
+      ],
+      "properties": {
+        "bootstrapSha256": { "$ref": "#/$defs/sha256" },
+        "bootstrapByteLength": { "$ref": "#/$defs/positiveDecimal18" },
+        "evidenceSchemaSha256": { "$ref": "#/$defs/sha256" },
+        "evidenceSchemaByteLength": { "$ref": "#/$defs/positiveDecimal18" },
+        "nodeStartupClosureSha256": { "$ref": "#/$defs/sha256" },
+        "nodeStartupClosureByteLength": { "$ref": "#/$defs/positiveDecimal18" },
+        "nodeVersionReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "nodeStartupSyscallReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "nodeStartupSyscallAllowlistSha256": { "$ref": "#/$defs/sha256" },
+        "nodeStartupSyscallReceiptFile": { "$ref": "#/$defs/fileIdentity" },
+        "inspectorCompiledOut": { "const": true },
+        "nodeExecutable": { "$ref": "#/$defs/fileIdentity" },
+        "source": { "const": "OUT_OF_BAND_TRUSTED_INVOKER_FIXED_FDS" },
+        "sameHandleVerified": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "windowControl": {
+      "type": "object",
+      "required": [
+        "armedMonotonicNs",
+        "operationDeadlineMonotonicNs",
+        "teardownDeadlineMonotonicNs",
+        "maximumOperationNanoseconds",
+        "maximumTeardownNanoseconds",
+        "deadlineMayReset",
+        "timerFirst"
+      ],
+      "properties": {
+        "armedMonotonicNs": { "$ref": "#/$defs/decimal18" },
+        "operationDeadlineMonotonicNs": { "$ref": "#/$defs/decimal18" },
+        "teardownDeadlineMonotonicNs": { "$ref": "#/$defs/decimal18" },
+        "maximumOperationNanoseconds": { "const": "150000000000" },
+        "maximumTeardownNanoseconds": { "const": "30000000000" },
+        "deadlineMayReset": { "const": false },
+        "timerFirst": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "gitObjectProof": {
+      "type": "object",
+      "required": [
+        "objectTableDigest",
+        "objectCount",
+        "requiredObjectOids",
+        "objects",
+        "alternatesPermitted",
+        "replaceRefsPermitted",
+        "graftsPermitted",
+        "shallowPermitted",
+        "promisorPermitted",
+        "externalGitPermitted",
+        "parser"
+      ],
+      "properties": {
+        "objectTableDigest": { "$ref": "#/$defs/sha256" },
+        "objectCount": { "type": "integer", "minimum": 9, "maximum": 100000 },
+        "requiredObjectOids": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "prefixItems": [
+            { "const": "11572110330c4b22aa89d629065574e567e9fea8" },
+            { "const": "22741ccba22f8f16663c745c0496d5c0be97d534" },
+            { "const": "27094a1d255c64bca81e98b14feece4a155b78e2" },
+            { "const": "75f10c23908146e142af78854f09fa08ce5f4fed" },
+            { "const": "9cf6e5b6c3c6bdb8690723c7bcc0359d3d90df37" },
+            { "const": "f3c4398dbb06a028d6c92885387891ae766941d1" },
+            { "const": "fefc448c6324750191ac66a79ea92b398c8a5be0" },
+            { "const": "ade3d46ffe5d595f2753a35b91f508d7c71c57d7" },
+            { "const": "2ac9ea2408c8a8dcf54675db59b267d355e6b242" }
+          ],
+          "items": false
+        },
+        "objects": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 100000,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": [ "fd", "oid", "type", "sha256", "byteLength", "openFileDescriptionSha256" ],
+            "properties": {
+              "fd": { "type": "integer", "minimum": 64, "maximum": 131071 },
+              "oid": { "$ref": "#/$defs/oid" },
+              "type": { "enum": [ "commit", "tree", "blob" ] },
+              "sha256": { "$ref": "#/$defs/sha256" },
+              "byteLength": { "$ref": "#/$defs/positiveDecimal18" },
+              "openFileDescriptionSha256": { "$ref": "#/$defs/sha256" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "alternatesPermitted": { "const": false },
+        "replaceRefsPermitted": { "const": false },
+        "graftsPermitted": { "const": false },
+        "shallowPermitted": { "const": false },
+        "promisorPermitted": { "const": false },
+        "externalGitPermitted": { "const": false },
+        "parser": {
+          "type": "object",
+          "required": [
+            "rawObjectHeaderRequired",
+            "exactDeclaredLengthRequired",
+            "sha1OidRecomputed",
+            "commitOneParentRequired",
+            "recursiveTreeModes",
+            "treeOrderingRequired",
+            "duplicateOidRejected",
+            "deltaDepthMaximum",
+            "allBytesCharged"
+          ],
+          "properties": {
+            "rawObjectHeaderRequired": { "const": true },
+            "exactDeclaredLengthRequired": { "const": true },
+            "sha1OidRecomputed": { "const": true },
+            "commitOneParentRequired": { "const": true },
+            "recursiveTreeModes": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "prefixItems": [ { "const": "040000" }, { "const": "100644" } ],
+              "items": false
+            },
+            "treeOrderingRequired": { "const": true },
+            "duplicateOidRejected": { "const": true },
+            "deltaDepthMaximum": { "const": 0 },
+            "allBytesCharged": { "const": true }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "control": {
+      "type": "object",
+      "required": [
+        "requestVersion",
+        "requestNonce",
+        "oneUseCapabilityDigest",
+        "fd3Identity",
+        "fd4Identity",
+        "cas",
+        "ledger",
+        "watchdog"
+      ],
+      "properties": {
+        "requestVersion": { "const": "IAT_B3_BPS05_FD3_REQUEST_WITH_EXACT_FD4_PACKAGE_V1" },
+        "requestNonce": { "$ref": "#/$defs/sha256" },
+        "oneUseCapabilityDigest": { "$ref": "#/$defs/sha256" },
+        "fd3Identity": {
+          "type": "object",
+          "required": [ "fd", "socketType", "openFileDescriptionSha256", "peerIdentitySha256", "soleChildReference", "nonblocking", "cloexecBeforeDup3" ],
+          "properties": {
+            "fd": { "const": 3 },
+            "socketType": { "const": "AF_UNIX_SOCK_SEQPACKET" },
+            "openFileDescriptionSha256": { "$ref": "#/$defs/sha256" },
+            "peerIdentitySha256": { "$ref": "#/$defs/sha256" },
+            "soleChildReference": { "const": true },
+            "nonblocking": { "const": true },
+            "cloexecBeforeDup3": { "const": true }
+          },
+          "additionalProperties": false
+        },
+        "fd4Identity": {
+          "type": "object",
+          "required": [ "fd", "dev", "ino", "openFileDescriptionSha256", "bundleSha256", "bundleByteLength", "offset", "seals", "soleChildReference", "writerPresent", "writableMappingPresent" ],
+          "properties": {
+            "fd": { "const": 4 },
+            "dev": { "$ref": "#/$defs/decimal18" },
+            "ino": { "$ref": "#/$defs/positiveDecimal18" },
+            "openFileDescriptionSha256": { "$ref": "#/$defs/sha256" },
+            "bundleSha256": { "$ref": "#/$defs/sha256" },
+            "bundleByteLength": { "$ref": "#/$defs/positiveDecimal18" },
+            "offset": { "const": "0" },
+            "seals": {
+              "type": "array",
+              "minItems": 5,
+              "maxItems": 5,
+              "prefixItems": [
+                { "const": "F_SEAL_SEAL" },
+                { "const": "F_SEAL_SHRINK" },
+                { "const": "F_SEAL_GROW" },
+                { "const": "F_SEAL_WRITE" },
+                { "const": "F_SEAL_FUTURE_WRITE" }
+              ],
+              "items": false
+            },
+            "soleChildReference": { "const": true },
+            "writerPresent": { "const": false },
+            "writableMappingPresent": { "const": false }
+          },
+          "additionalProperties": false
+        },
+        "cas": {
+          "type": "object",
+          "required": [ "ownerRole", "state", "reservationPrekeySha256", "consumed", "resetPermitted", "watchdogSurvivesSupervisor" ],
+          "properties": {
+            "ownerRole": { "const": "WATCHDOG" },
+            "state": { "const": "RESERVED" },
+            "reservationPrekeySha256": { "$ref": "#/$defs/sha256" },
+            "consumed": { "const": false },
+            "resetPermitted": { "const": false },
+            "watchdogSurvivesSupervisor": { "const": true }
+          },
+          "additionalProperties": false
+        },
+        "ledger": {
+          "type": "object",
+          "required": [ "ledgerId", "ownerRole", "chargedActualReadBytes", "chargedEntries", "maximumActualReadBytes", "maximumEntries", "overflow", "reservationBeforeRead" ],
+          "properties": {
+            "ledgerId": { "$ref": "#/$defs/sha256" },
+            "ownerRole": { "const": "WATCHDOG" },
+            "chargedActualReadBytes": { "$ref": "#/$defs/decimal18" },
+            "chargedEntries": { "$ref": "#/$defs/decimal18" },
+            "maximumActualReadBytes": { "const": "2147483648" },
+            "maximumEntries": { "const": "100000" },
+            "overflow": { "const": false },
+            "reservationBeforeRead": { "const": true }
+          },
+          "additionalProperties": false
+        },
+        "watchdog": {
+          "type": "object",
+          "required": [ "role", "pidfd", "timerfd", "operationDeadlineMonotonicNs", "teardownDeadlineMonotonicNs", "timerFirst", "survivesSupervisor", "outcomeWriteOnce" ],
+          "properties": {
+            "role": { "const": "WATCHDOG" },
+            "pidfd": { "type": "integer", "minimum": 5, "maximum": 4095 },
+            "timerfd": { "type": "integer", "minimum": 5, "maximum": 4095 },
+            "operationDeadlineMonotonicNs": { "$ref": "#/$defs/decimal18" },
+            "teardownDeadlineMonotonicNs": { "$ref": "#/$defs/decimal18" },
+            "timerFirst": { "const": true },
+            "survivesSupervisor": { "const": true },
+            "outcomeWriteOnce": { "const": true }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "targetBase": {
+      "type": "object",
+      "required": [ "target", "backend", "executableRole", "executable", "compilerClosureSha256", "sysrootClosureSha256", "linkerClosureSha256", "sharingMapSha256", "versionArgvSha256", "versionInvocationReceiptSha256", "observation", "accepted" ],
+      "properties": {
+        "target": { "type": "string" },
+        "backend": { "type": "string" },
+        "executableRole": { "type": "string", "pattern": "^[A-Z0-9_]+$" },
+        "executable": { "$ref": "#/$defs/fileIdentity" },
+        "compilerClosureSha256": { "$ref": "#/$defs/sha256" },
+        "sysrootClosureSha256": { "$ref": "#/$defs/sha256" },
+        "linkerClosureSha256": { "$ref": "#/$defs/sha256" },
+        "sharingMapSha256": { "$ref": "#/$defs/sha256" },
+        "versionArgvSha256": { "$ref": "#/$defs/sha256" },
+        "versionInvocationReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "observation": { "const": null },
+        "accepted": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        { "allOf": [ { "$ref": "#/$defs/targetBase" }, { "properties": { "target": { "const": "linux-x64-musl" }, "backend": { "const": "PINNED_ZIG_CC" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/targetBase" }, { "properties": { "target": { "const": "windows-x64-gnu" }, "backend": { "const": "PINNED_ZIG_CC" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/targetBase" }, { "properties": { "target": { "const": "native-wsl-linux-x64-musl" }, "backend": { "const": "OPTIONAL_NATIVE_WSL_COMPILER" } } } ] }
+      ],
+      "items": false
+    },
+    "k44": {
+      "type": "object",
+      "required": [ "checkpointHeadSha", "checkpointTreeSha", "b26RunnerPath", "b26RunnerSha256", "b26RunnerByteLength", "laneId", "knownFixtureLaneRejected", "genesis", "inputFileDigests", "productionInventoryDigest", "priorLaneInventoryDigest", "assessment", "directFlags", "accepted" ],
+      "properties": {
+        "checkpointHeadSha": { "const": "c73d01092c58152ac396dc580055d93511bf0644" },
+        "checkpointTreeSha": { "const": "fcfd4337cfa4ba35a10e4b65849b42d1f5659d3e" },
+        "b26RunnerPath": { "const": "projects/star-ascent/site/scripts/run-iat-b3-disposable-devnet-build-execution-provenance.mjs" },
+        "b26RunnerSha256": { "const": "c34b347b860d23679b39a0e6fdd5b704611b9de79638dde53db8b23dfa7129bf" },
+        "b26RunnerByteLength": { "const": "176939" },
+        "laneId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,63}$", "not": { "const": "iat-b3-build-only-a1" } },
+        "knownFixtureLaneRejected": { "const": true },
+        "genesis": {
+          "type": "object",
+          "required": [ "network", "rpcUrl", "genesisHash" ],
+          "properties": {
+            "network": { "const": "solana-devnet" },
+            "rpcUrl": { "const": "https://api.devnet.solana.com" },
+            "genesisHash": { "const": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG" }
+          },
+          "additionalProperties": false
+        },
+        "inputFileDigests": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [ { "$ref": "#/$defs/sha256" }, { "$ref": "#/$defs/sha256" } ],
+          "items": false
+        },
+        "productionInventoryDigest": { "$ref": "#/$defs/sha256" },
+        "priorLaneInventoryDigest": { "$ref": "#/$defs/sha256" },
+        "assessment": { "const": null },
+        "directFlags": {
+          "type": "object",
+          "required": [ "checkpointDirectlyObservedByThisModule", "inputFilesDirectlyObservedByThisModule", "priorLaneIdentityInventoryDirectlyObservedByThisModule", "productionIdentityInventoryDirectlyObservedByThisModule", "wallClockDirectlyObservedByThisModule" ],
+          "properties": {
+            "checkpointDirectlyObservedByThisModule": { "const": false },
+            "inputFilesDirectlyObservedByThisModule": { "const": false },
+            "priorLaneIdentityInventoryDirectlyObservedByThisModule": { "const": false },
+            "productionIdentityInventoryDirectlyObservedByThisModule": { "const": false },
+            "wallClockDirectlyObservedByThisModule": { "const": false }
+          },
+          "additionalProperties": false
+        },
+        "accepted": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "handoff": {
+      "type": "object",
+      "required": [ "producerRole", "observerRole", "custodianRole", "stagingDirectory", "expectedSealedObjectSha256", "expectedSealedObjectByteLength", "producerWriterFdsMustBeClosedBeforeFreeze", "cgroupPopulationMustBeZeroAtFreeze", "observerCanWriteProducerEvidence", "custodianSinkIdentity", "capabilityDigest", "capabilityConsumed" ],
+      "properties": {
+        "producerRole": { "const": "WORKLOAD" },
+        "observerRole": { "const": "OBSERVER" },
+        "custodianRole": { "const": "EVIDENCE_CUSTODIAN" },
+        "stagingDirectory": { "$ref": "#/$defs/absoluteLinuxPath" },
+        "expectedSealedObjectSha256": { "$ref": "#/$defs/sha256" },
+        "expectedSealedObjectByteLength": { "$ref": "#/$defs/positiveDecimal18" },
+        "producerWriterFdsMustBeClosedBeforeFreeze": { "const": true },
+        "cgroupPopulationMustBeZeroAtFreeze": { "const": true },
+        "observerCanWriteProducerEvidence": { "const": false },
+        "custodianSinkIdentity": { "$ref": "#/$defs/sha256" },
+        "capabilityDigest": { "$ref": "#/$defs/sha256" },
+        "capabilityConsumed": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "sourceTruth": {
+      "type": "object",
+      "required": [ "sourcePresent", "anchorObserved", "compiled", "installed", "runtimeObserved", "packageExecuted", "toolchainAccepted", "k44Accepted", "observationReceiptPresent", "teardownReceiptPresent", "decision", "authority" ],
+      "properties": {
+        "sourcePresent": { "const": true },
+        "anchorObserved": { "const": false },
+        "compiled": { "const": false },
+        "installed": { "const": false },
+        "runtimeObserved": { "const": false },
+        "packageExecuted": { "const": false },
+        "toolchainAccepted": { "const": false },
+        "k44Accepted": { "const": false },
+        "observationReceiptPresent": { "const": false },
+        "teardownReceiptPresent": { "const": false },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

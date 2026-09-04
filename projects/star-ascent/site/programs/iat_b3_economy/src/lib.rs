@@ -18,11 +18,17 @@ pub mod production_claim_lane_principal_executor;
 pub mod production_close_position;
 #[cfg(feature = "runtime-account-bridge")]
 pub mod production_dispatch;
+#[cfg(feature = "runtime-production-entrypoint")]
+pub mod production_entrypoint;
+#[cfg(feature = "runtime-production-dispatch")]
+pub mod production_initialization_policy_hold;
 pub mod production_instruction;
 #[cfg(feature = "runtime-production-open-position")]
 pub mod production_open_position;
 #[cfg(feature = "runtime-production-open-position-executor")]
 pub mod production_open_position_executor;
+#[cfg(feature = "runtime-production-dispatch")]
+pub mod production_round_disabled;
 #[cfg(feature = "runtime-account-lifecycle")]
 pub mod production_set_eligibility;
 #[cfg(feature = "runtime-production-settle-position-week")]
@@ -53,6 +59,15 @@ pub mod token_2022_runtime;
 
 #[cfg(feature = "sbf-preflight-entrypoint")]
 pub use sbf_preflight::process_instruction;
+
+#[cfg(all(
+    feature = "sbf-preflight-entrypoint",
+    feature = "runtime-production-entrypoint",
+    not(feature = "no-entrypoint")
+))]
+compile_error!(
+    "sbf-preflight-entrypoint and runtime-production-entrypoint cannot expose the same SBF artifact"
+);
 
 #[cfg(all(feature = "sbf-preflight-entrypoint", not(feature = "no-entrypoint")))]
 solana_program_entrypoint::entrypoint!(process_instruction);
@@ -2780,6 +2795,12 @@ mod tests {
         + (COMMIT_WEEK as i64 * SECONDS_PER_WEEK)
         + 123;
     const COMMIT_CLOCK_SLOT: u64 = 42;
+    // The B3 port intentionally froze the retained-V2 Genesis policy at the
+    // source snapshot where CCC was disabled. The independently amended IAT
+    // V2 migration artifact now enables CCC for its attended Devnet rehearsal;
+    // differential tests below must replay the frozen port input, not import
+    // that later artifact choice and silently change B3 production semantics.
+    const RETAINED_V2_CCC_DLC_GENESIS_ENABLED_AT_B3_PORT: bool = false;
 
     fn binding() -> CanonicalDailyLawBinding {
         CanonicalDailyLawBinding::new(LAW_PROGRAM, LAW_STATE, LAW_BUMP, MINT, NETWORK)
@@ -3944,7 +3965,7 @@ mod tests {
                     return Err(EconomyError::StandardCannotLinkAgency);
                 }
             } else {
-                if !iat_v2::CCC_DLC_GENESIS_ENABLED {
+                if !RETAINED_V2_CCC_DLC_GENESIS_ENABLED_AT_B3_PORT {
                     return Err(EconomyError::CccDlcNotActive);
                 }
                 if input.agency_index.is_none() {
@@ -4080,7 +4101,7 @@ mod tests {
                     return Err(EconomyError::StandardCannotLinkAgency);
                 }
             } else {
-                if !iat_v2::CCC_DLC_GENESIS_ENABLED {
+                if !RETAINED_V2_CCC_DLC_GENESIS_ENABLED_AT_B3_PORT {
                     return Err(EconomyError::CccDlcNotActive);
                 }
                 if input.eligibility.agency_index >= input.config.agency_count {
@@ -5506,7 +5527,14 @@ mod tests {
         assert_eq!(ECOSYSTEM, v2_policy::ECOSYSTEM);
         assert_eq!(CORE_TEAM, v2_policy::CORE_TEAM);
         assert_eq!(LIQUIDITY, v2_policy::LIQUIDITY);
-        assert_eq!(CCC_DLC_GENESIS_ENABLED, iat_v2::CCC_DLC_GENESIS_ENABLED);
+        assert_eq!(
+            CCC_DLC_GENESIS_ENABLED,
+            RETAINED_V2_CCC_DLC_GENESIS_ENABLED_AT_B3_PORT
+        );
+        assert!(
+            iat_v2::CCC_DLC_GENESIS_ENABLED,
+            "the separately amended IAT V2 migration artifact intentionally enables CCC"
+        );
         assert_eq!(
             RANDOMNESS_ADAPTER_VERIFIED,
             iat_v2::RANDOMNESS_ADAPTER_VERIFIED

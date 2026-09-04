@@ -11,8 +11,8 @@ The superseded four-transaction `/mint` page is read-only and must not be used.
 | --- | --- |
 | Signer | Reviews every authority-changing or value-moving action on the physical Model T. |
 | Builder | Builds only from the committed, program-ID-bound source and cannot substitute addresses. |
-| Verifier | Independently checks source/binary identity, every address, amount, authority, scenario, and Explorer result. |
-| Broadcaster | Publishes only text copied from the independently verified evidence packet. |
+| Automated evidence validator | Checks source/binary identity, every address, amount, authority, scenario, and Explorer result from bound receipts/state/endpoints. |
+| Broadcaster | Publishes only text copied from the source-bound automated evidence packet after explicit owner publication approval. |
 
 ## Canonical V2 gates
 
@@ -28,7 +28,7 @@ The superseded four-transaction `/mint` page is read-only and must not be used.
 4. Follow `launch/DEVNET_REHEARSAL_SCENARIO.md`. Deploy unfunded, transfer
    upgrade authority to hardware control, initialize, fund, activate, and test
    V2 on devnet.
-5. FDF Guard independently compares the complete devnet evidence and negative
+5. The automated evidence lane compares the complete Devnet evidence and negative
    cases against the source, policy, plan, program authority, and binary.
 6. Regenerate `launch/release-snapshot.generated.json` in `HOLD`. The legacy
    `launch/token-metadata.template.json`,
@@ -75,7 +75,7 @@ expiring messages can be frozen in advance.
 7. `REVOKE_FREEZE_AUTHORITY`
 8. `ACTIVATE_AFTER_RANDOMNESS_BUILD_AND_REVIEW_GATES`
 
-After each confirmed boundary, stop for independent reconciliation and record a
+After each confirmed boundary, stop for automated source/receipt/state reconciliation and record a
 direct Explorer URL plus the observed post-state digest. Continue only on an
 exact match. The first failure, mismatch, or submitted transaction whose
 confirmation remains unknown permanently changes this journal to
@@ -83,7 +83,7 @@ confirmation remains unknown permanently changes this journal to
 unknown signature, compensate, or improvise a repair transaction.
 
 After activation, complete every positive and adversarial scenario in the V2
-rehearsal template. Publication is a separate human-controlled action, not a
+rehearsal template. Publication is a separate explicit owner decision, not a
 transaction or protocol stage.
 
 ## Stop and return to HOLD if
@@ -114,5 +114,5 @@ eight boundaries `FINALIZED_MATCHED`.
 - Mint- and freeze-authority revocation evidence
 - Switchboard program/account, commit, reveal, derivation counter, winning
   index, and settlement evidence
-- Devnet scenario matrix, independent-verifier record, UTC timestamps, and
+- Devnet scenario matrix, automated evidence receipt, UTC timestamps, and
   clear remaining mainnet HOLD/GO decision

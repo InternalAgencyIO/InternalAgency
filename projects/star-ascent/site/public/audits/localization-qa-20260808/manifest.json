@@ -1,11 +1,11 @@
 {
   "schema": "iat-localization-active-artifact-evidence/v1",
-  "runId": "2026-08-08-pending-visible-source-refresh-v1",
-  "recordedAt": "2026-08-08T09:15:18Z",
+  "runId": "2026-08-28-proof-pending-visible-source-recapture-v1",
+  "recordedAt": "2026-08-28T02:32:07Z",
   "status": "GLOBAL_FAIL_CLOSED_NATIVE_REVIEW_HOLD",
   "mainnetStatus": "UNSCHEDULED_HOLD",
   "sourceBinding": {
-    "captureCommit": "d8c11aa852cfd678ce63816125214cd0db85e54e",
+    "captureCommit": "bd3b4a6aa70798924e6b196592bda6c83f9b0f1d",
     "evidenceMode": "APPEND_ONLY_ACTIVE_CONTENT_V1"
   },
   "localizationState": {
@@ -15,8 +15,8 @@
     "canonicalStrings": 985,
     "reviewedRuntimeCells": 0,
     "canonicalFallbackCells": 48265,
-    "pendingVisibleSourceStrings": 48,
-    "routesWithPendingVisibleSource": 13,
+    "pendingVisibleSourceStrings": 87,
+    "routesWithPendingVisibleSource": 15,
     "activatedTranslations": 0
   },
   "artifacts": [
@@ -27,8 +27,8 @@
     },
     {
       "path": "app/i18n/pending-visible-source.json",
-      "sha256": "a36577d20ee0214b4b164d0c39744edc9c68495aa01cc4397937517b4c59baa9",
-      "bytes": 13456
+      "sha256": "f96a4de0d8db000f38ef474807601435def3b7f5fded1bfb2dcaaac6476b36f1",
+      "bytes": 20183
     },
     {
       "path": "app/i18n/reviewed-localization-policy.json",
@@ -52,12 +52,12 @@
     },
     {
       "path": "public/audits/localization-qa-20260803/report.json",
-      "sha256": "4b8c92c449b3aebc1e2ee509370132ba9656b2729475882f66b3dd6d85a69ea6",
-      "bytes": 36920
+      "sha256": "e888fec5a87753675d8bab218fbf5e477e08614f56a5864144c68afe7bbd2473",
+      "bytes": 36928
     },
     {
       "path": "public/audits/localization-qa-20260803/README.md",
-      "sha256": "09dc9462fbb11bf9f622c30713eb61b2b2c8680aceb018775c9cee294f9915a3",
+      "sha256": "3b67322804727279261ebf1797b9b9f03063a1230a890ff3da2d0dbd17d738ca",
       "bytes": 6324
     },
     {
@@ -67,8 +67,8 @@
     },
     {
       "path": "public/audits/localization-qa-20260808/README.md",
-      "sha256": "4f795f5d68fa8cf4c97773af05b7bfc38c16bbae5a4a8af4e56ad16f68e07495",
-      "bytes": 1327
+      "sha256": "d511c2189531672eba02cfd91e167078394a87d2d6f04499afd49f469f572354",
+      "bytes": 1378
     },
     {
       "path": "scripts/check-localization-active-artifact-drift.mjs",
@@ -82,8 +82,8 @@
     },
     {
       "path": "scripts/generate-localization-qa-report.mjs",
-      "sha256": "2fc3ba283715a7b43cc2a47c41df4174d0d92c30daeebd24d59eef5d46a5b58e",
-      "bytes": 18697
+      "sha256": "bb6349bc02b6e299af55c94bc7ceef6a977f58e91503ffd16d1c662ac32e4518",
+      "bytes": 18705
     },
     {
       "path": "scripts/validate-localization-provenance.mjs",

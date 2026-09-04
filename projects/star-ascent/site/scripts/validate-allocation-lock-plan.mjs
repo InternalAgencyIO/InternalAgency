@@ -49,11 +49,6 @@ const isHttps = (value) => {
 const isUtc = (value) => typeof value === "string"
   && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)
   && Number.isFinite(Date.parse(value));
-const usableLabel = (value) => typeof value === "string"
-  && value === value.trim()
-  && value.length >= 3
-  && value.length <= 80
-  && !/^(reviewer|operator|pending|tbd|unknown)$/i.test(value);
 const planDigest = (record) => createHash("sha256").update(JSON.stringify({
   version: record.version,
   network: record.network,
@@ -70,12 +65,17 @@ try {
 }
 
 if (record) {
-  if (!exactKeys(record, ["version", "status", "network", "allocations", "independentReview"])) fail("lock plan must contain only canonical fields");
-  if (!exactKeys(record.independentReview, ["reviewedBy", "reviewedAtUtc", "planSha256"])) fail("independent review must contain only canonical fields");
-  if (record.version !== 1) fail("lock-plan version must be 1");
+  if (!exactKeys(record, ["version", "status", "network", "allocations", "automatedObservation"])) fail("lock plan must contain only canonical fields");
+  if (!exactKeys(record.automatedObservation, ["mode", "humanReviewerRequired", "noSelfAttestation", "planSha256", "observedAtUtc"])) fail("automated observation must contain only canonical fields");
+  if (record.version !== 2) fail("lock-plan version must be 2");
   if (!["HOLD", "READY"].includes(record.status)) fail("lock-plan status must be HOLD or READY");
   if (record.network !== "mainnet-beta") fail("lock-plan network must be mainnet-beta");
   if (!exactKeys(record.allocations, Object.keys(expected))) fail("lock plan must contain exactly the five canonical allocations");
+  if (record.automatedObservation?.mode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+    || record.automatedObservation?.humanReviewerRequired !== false
+    || record.automatedObservation?.noSelfAttestation !== true) {
+    fail("lock-plan observation must use the exact automated no-human/no-self-attestation policy");
+  }
 
   const owners = [];
   for (const [name, values] of Object.entries(expected)) {
@@ -107,7 +107,7 @@ if (record) {
     if (allocation.lockRequired) {
       if (!isOffCurve(allocation.ownerAddress)) fail(`READY locked allocation ${name} must be owned by an off-curve program-derived vault authority`);
       if (!usableAddress(allocation.lockProgramId) || [SYSTEM_PROGRAM, TOKEN_PROGRAM, METADATA_PROGRAM, MODEL_T].includes(allocation.lockProgramId)) {
-        fail(`READY locked allocation ${name} requires a reviewed external lock program`);
+        fail(`READY locked allocation ${name} requires a source-bound external lock program`);
       }
       if (!addressEvidence(allocation.programEvidence, allocation.lockProgramId)) fail(`READY requires direct lock-program Explorer evidence for ${name}`);
     } else if (allocation.lockProgramId !== null || allocation.programEvidence !== null) {
@@ -116,13 +116,12 @@ if (record) {
   }
 
   if (record.status === "HOLD") {
-    if (Object.values(record.independentReview ?? {}).some((value) => value !== null)) fail("HOLD lock plan must clear independent-review evidence");
+    if (record.automatedObservation?.planSha256 !== null || record.automatedObservation?.observedAtUtc !== null) fail("HOLD lock plan must clear automated-observation evidence");
   } else {
     if (owners.length === 5 && new Set(owners).size !== owners.length) fail("READY allocation owners must all be distinct");
-    if (!usableLabel(record.independentReview?.reviewedBy)) fail("READY lock plan requires an independent reviewer label");
-    if (!isUtc(record.independentReview?.reviewedAtUtc)) fail("READY lock plan requires a canonical UTC review time");
-    else if (Date.parse(record.independentReview.reviewedAtUtc) > Date.now() + 60_000) fail("lock-plan review time cannot be in the future");
-    if (record.independentReview?.planSha256 !== planDigest(record)) fail("READY lock plan must bind the exact reviewed plan digest");
+    if (!isUtc(record.automatedObservation?.observedAtUtc)) fail("READY lock plan requires a canonical UTC automated-observation time");
+    else if (Date.parse(record.automatedObservation.observedAtUtc) > Date.now() + 60_000) fail("lock-plan observation time cannot be in the future");
+    if (record.automatedObservation?.planSha256 !== planDigest(record)) fail("READY lock plan must bind the exact source-observed plan digest");
   }
 }
 
@@ -131,4 +130,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Allocation and lock gate passes in ${record.status}. Program-specific schedule verification remains an independent review duty.`);
+console.log(`Allocation and lock automated-observation gate passes in ${record.status}. Program-specific schedule evidence remains required.`);

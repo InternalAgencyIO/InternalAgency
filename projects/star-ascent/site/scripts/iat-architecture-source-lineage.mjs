@@ -1,5 +1,32 @@
+import { spawnSync } from "node:child_process";
+
 const EXPECTED_REPOSITORY = "InternalAgencyIO/InternalAgency";
 const EXPECTED_HISTORICAL_AUDIT_PATH = "public/audits/iat-v2-architecture-work-20260805/manifest.json";
+const LOCAL_GIT_ENVIRONMENT = new Set([
+  "GIT_ALTERNATE_OBJECT_DIRECTORIES",
+  "GIT_COMMON_DIR",
+  "GIT_CONFIG",
+  "GIT_CONFIG_COUNT",
+  "GIT_CONFIG_PARAMETERS",
+  "GIT_DIR",
+  "GIT_GRAFT_FILE",
+  "GIT_IMPLICIT_WORK_TREE",
+  "GIT_INDEX_FILE",
+  "GIT_NO_REPLACE_OBJECTS",
+  "GIT_OBJECT_DIRECTORY",
+  "GIT_PREFIX",
+  "GIT_REPLACE_REF_BASE",
+  "GIT_SHALLOW_FILE",
+  "GIT_WORK_TREE",
+]);
+
+export function createArchitectureGitEnvironment(environment = process.env) {
+  return Object.fromEntries([
+    ...Object.entries(environment)
+      .filter(([name]) => !LOCAL_GIT_ENVIRONMENT.has(name.toUpperCase())),
+    ["GIT_NO_REPLACE_OBJECTS", "1"],
+  ]);
+}
 
 function fail(message) {
   throw new Error(`IAT architecture source lineage validation failed: ${message}`);
@@ -25,6 +52,112 @@ function assertTree(value, label) {
   assert(/^[0-9a-f]{40}$/u.test(value ?? ""), `${label} is not a lowercase 40-character tree`);
 }
 
+function runGit(repositoryRoot, args) {
+  return spawnSync("git", args, {
+    cwd: repositoryRoot,
+    encoding: "utf8",
+    windowsHide: true,
+    env: createArchitectureGitEnvironment(),
+  });
+}
+
+function observation(result) {
+  return {
+    status: Number.isInteger(result?.status) ? result.status : null,
+    signal: typeof result?.signal === "string" ? result.signal : null,
+    stdout: typeof result?.stdout === "string" ? result.stdout.trim() : "",
+    stderr: typeof result?.stderr === "string" ? result.stderr.trim() : "",
+    error: result?.error instanceof Error ? result.error.message : null,
+  };
+}
+
+export function inspectArchitectureSourceAncestry({
+  repositoryRoot,
+  ancestor,
+  descendant = "HEAD",
+  executeGit = (args) => runGit(repositoryRoot, args),
+}) {
+  const head = observation(executeGit(["rev-parse", "--verify", "HEAD^{commit}"]));
+  const shallow = observation(executeGit(["rev-parse", "--is-shallow-repository"]));
+  const mergeBase = observation(executeGit(["merge-base", "--is-ancestor", ancestor, descendant]));
+  return {
+    observedHead: head.status === 0 && /^[0-9a-f]{40}$/u.test(head.stdout) ? head.stdout : null,
+    headStatus: head.status,
+    headSignal: head.signal,
+    headStderr: head.stderr,
+    headError: head.error,
+    shallowRepository: shallow.status === 0 && /^(?:true|false)$/u.test(shallow.stdout)
+      ? shallow.stdout === "true"
+      : null,
+    shallowStatus: shallow.status,
+    shallowSignal: shallow.signal,
+    shallowStderr: shallow.stderr,
+    shallowError: shallow.error,
+    status: mergeBase.status,
+    signal: mergeBase.signal,
+    stderr: mergeBase.stderr,
+    error: mergeBase.error,
+  };
+}
+
+function diagnosticValue(value) {
+  if (value === null || value === "") return "<none>";
+  return JSON.stringify(value);
+}
+
+function ancestryDiagnostic(inspection) {
+  const shallowState = inspection.shallowRepository === true
+    ? "shallow"
+    : inspection.shallowRepository === false
+      ? "full"
+      : "unknown";
+  return [
+    `observedHead=${diagnosticValue(inspection.observedHead)}`,
+    `headStatus=${diagnosticValue(inspection.headStatus)}`,
+    `headSignal=${diagnosticValue(inspection.headSignal)}`,
+    `headStderr=${diagnosticValue(inspection.headStderr)}`,
+    `headError=${diagnosticValue(inspection.headError)}`,
+    `shallowState=${shallowState}`,
+    `shallowStatus=${diagnosticValue(inspection.shallowStatus)}`,
+    `shallowSignal=${diagnosticValue(inspection.shallowSignal)}`,
+    `shallowStderr=${diagnosticValue(inspection.shallowStderr)}`,
+    `shallowError=${diagnosticValue(inspection.shallowError)}`,
+    `mergeBaseStatus=${diagnosticValue(inspection.status)}`,
+    `mergeBaseSignal=${diagnosticValue(inspection.signal)}`,
+    `mergeBaseStderr=${diagnosticValue(inspection.stderr)}`,
+    `mergeBaseError=${diagnosticValue(inspection.error)}`,
+  ].join(", ");
+}
+
+function assertFullHistoryAncestry(inspection, expectedHead) {
+  assert(inspection && typeof inspection === "object" && !Array.isArray(inspection), "B3 successor ancestry inspection is absent");
+  const diagnostic = ancestryDiagnostic(inspection);
+  if (
+    inspection.observedHead === null
+    || inspection.headStatus !== 0
+    || inspection.headSignal !== null
+    || inspection.headError !== null
+  ) {
+    fail(`B3 successor HEAD observation failed (${diagnostic})`);
+  }
+  if (/^[0-9a-f]{40}$/u.test(expectedHead) && inspection.observedHead !== expectedHead) {
+    fail(`B3 successor checkout HEAD does not match the declared source head ${expectedHead} (${diagnostic})`);
+  }
+  if (
+    inspection.shallowRepository !== false
+    || inspection.shallowStatus !== 0
+    || inspection.shallowSignal !== null
+    || inspection.shallowError !== null
+  ) {
+    fail(`B3 successor ancestry requires a complete Git history (${diagnostic})`);
+  }
+  if (inspection.status === 0 && inspection.error === null && inspection.signal === null) return;
+  if (inspection.status === 1 && inspection.error === null && inspection.signal === null) {
+    fail(`B3 successor source commit is not an ancestor of HEAD (${diagnostic})`);
+  }
+  fail(`B3 successor ancestry command failed (${diagnostic})`);
+}
+
 export function validateArchitectureSourceLineage({
   historicalManifest,
   historicalLedger,
@@ -32,9 +165,10 @@ export function validateArchitectureSourceLineage({
   successorManifest,
   commitExists,
   treeForCommit,
-  isAncestor,
+  inspectAncestry,
   currentHead = "HEAD",
 }) {
+  assert(currentHead === "HEAD" || /^[0-9a-f]{40}$/u.test(currentHead), "current source head is not HEAD or a lowercase 40-character commit");
   assertExactKeys(
     successorManifest,
     [
@@ -104,7 +238,7 @@ export function validateArchitectureSourceLineage({
   assert(successorBinding.commit !== historicalBinding.commit, "B3 successor cannot reuse the historical V2 source commit");
   assert(commitExists(successorBinding.commit), "B3 successor source commit is absent");
   assert(treeForCommit(successorBinding.commit) === successorBinding.gitTree, "B3 successor source tree differs");
-  assert(isAncestor(successorBinding.commit, currentHead), "B3 successor source commit is not an ancestor of HEAD");
+  assertFullHistoryAncestry(inspectAncestry(successorBinding.commit, currentHead), currentHead);
 
   const releaseBoundary = successorManifest.releaseBoundary;
   assertExactKeys(

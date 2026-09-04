@@ -5,9 +5,11 @@
 //! the production-ACTIVE Config, its administrator, the public wallet key, the
 //! exact wallet-scoped Eligibility PDA, and the retained V2 transition. It
 //! retains the nonexecuting opaque existing-CAS-or-init plan and also exposes
-//! one undispatched executor that performs pre-body lifecycle work, then the
-//! retained body, then the exact postimage write. It exposes no dispatcher or
-//! entrypoint and claims no complete handler or Devnet rollback proof.
+//! one source-complete, undispatched executor that performs pre-body lifecycle
+//! work, then the retained body, then the exact postimage write. The
+//! feature-gated production dispatcher/entrypoint now routes that executor;
+//! Devnet transaction-rollback evidence remains false, so Mainnet remains on
+//! hold.
 
 use crate::native_adapter::{
     derive_pda, NativeAdapterError, NativeEconomyBinding, PdaIdentity, StrictStateKind,
@@ -45,7 +47,7 @@ pub const PRODUCTION_SET_ELIGIBILITY_ACCOUNT_COUNT: usize = 5;
 pub const PRODUCTION_SET_ELIGIBILITY_STATUS: &str =
     "EXACT_V2_NONEXECUTING_COMPOSITION_SEALED_INIT_IF_NEEDED_PLAN_MAINNET_HOLD";
 pub const PRODUCTION_SET_ELIGIBILITY_EXECUTOR_STATUS: &str =
-    "EXACT_V2_THREE_PHASE_INIT_IF_NEEDED_EXECUTOR_NO_DISPATCH_NO_ENTRYPOINT_MAINNET_HOLD";
+    "EXACT_V2_THREE_PHASE_INIT_IF_NEEDED_HANDLER_COMPLETE_ROUTED_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionSetEligibilityTruth {
@@ -97,6 +99,7 @@ pub const PRODUCTION_SET_ELIGIBILITY_TRUTH: ProductionSetEligibilityTruth =
 pub struct ProductionSetEligibilityExecutorTruth {
     pub exact_five_account_graph_required: bool,
     pub production_program_identity_required: bool,
+    pub program_identity_rejected_before_instruction_or_account_access: bool,
     pub pre_cpi_constraints_execute_before_retained_body: bool,
     pub vacant_create_account_supported: bool,
     pub prefunded_transfer_allocate_assign_supported: bool,
@@ -114,15 +117,16 @@ pub const PRODUCTION_SET_ELIGIBILITY_EXECUTOR_TRUTH: ProductionSetEligibilityExe
     ProductionSetEligibilityExecutorTruth {
         exact_five_account_graph_required: true,
         production_program_identity_required: true,
+        program_identity_rejected_before_instruction_or_account_access: true,
         pre_cpi_constraints_execute_before_retained_body: true,
         vacant_create_account_supported: true,
         prefunded_transfer_allocate_assign_supported: true,
         post_cpi_checks_precede_retained_body: true,
         exact_postimage_write_follows_retained_success: true,
         transaction_rollback_required_after_cpi: true,
-        production_dispatcher_exposed: false,
-        production_entrypoint_exposed: false,
-        handler_complete: false,
+        production_dispatcher_exposed: true,
+        production_entrypoint_exposed: true,
+        handler_complete: true,
         devnet_transaction_rollback_proven: false,
         mainnet_hold: true,
     };
@@ -298,7 +302,9 @@ pub fn prepare_runtime_production_set_eligibility_account_infos(
 /// 1.0.2 order: account constraints and any System lifecycle CPI first, the
 /// retained handler body second, and the exact successful postimage write last.
 /// A returned error after the first CPI relies on Solana transaction rollback.
-/// This callable seam remains undispatched and has no program entrypoint.
+/// This source-complete callable seam is reached only through the feature-gated
+/// production dispatcher after runtime Daily-Law authentication. Devnet
+/// rollback evidence and Mainnet release authorization are separate held gates.
 #[inline(never)]
 pub fn execute_runtime_production_set_eligibility_account_infos(
     program_id: &Pubkey,
@@ -307,6 +313,9 @@ pub fn execute_runtime_production_set_eligibility_account_infos(
     instruction_data: &[u8],
     accounts: &[AccountInfo<'_>],
 ) -> Result<ProductionSetEligibilityExecutionReceipt, ProductionSetEligibilityError> {
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionSetEligibilityError::ProgramIdentityMismatch);
+    }
     let (role, agency_index) = require_set_eligibility_instruction(instruction_data)?;
     require_exact_account_count(accounts)?;
     let active_config =
@@ -830,6 +839,10 @@ mod tests {
             CLOCK_TIMESTAMP,
         )
         .unwrap()
+    }
+
+    fn runtime_law() -> RuntimeValidatedDailyLawWrite {
+        RuntimeValidatedDailyLawWrite::from_test_gate(open_gate(), LAW_STATE, LAW_PROGRAM)
     }
 
     fn open_decision(timestamp: i64) -> SolanaDailyDecision {
@@ -1502,6 +1515,21 @@ mod tests {
     }
 
     #[test]
+    fn runtime_program_identity_fails_before_instruction_decode_or_account_access() {
+        let binding = binding();
+        assert_eq!(
+            execute_runtime_production_set_eligibility_account_infos(
+                &Pubkey::new_from_array([0x99; 32]),
+                &runtime_law(),
+                &binding,
+                &[0xFF],
+                &[],
+            ),
+            Err(ProductionSetEligibilityError::ProgramIdentityMismatch)
+        );
+    }
+
+    #[test]
     fn existing_composition_binds_wallet_pda_and_executes_exact_v2_cas() {
         let binding = binding();
         let gate = open_gate();
@@ -1978,19 +2006,20 @@ mod tests {
     }
 
     #[test]
-    fn executor_truth_is_narrow_undispatched_and_unconditionally_held() {
+    fn executor_truth_is_source_complete_routed_and_unconditionally_held() {
         let truth = PRODUCTION_SET_ELIGIBILITY_EXECUTOR_TRUTH;
         assert!(truth.exact_five_account_graph_required);
         assert!(truth.production_program_identity_required);
+        assert!(truth.program_identity_rejected_before_instruction_or_account_access);
         assert!(truth.pre_cpi_constraints_execute_before_retained_body);
         assert!(truth.vacant_create_account_supported);
         assert!(truth.prefunded_transfer_allocate_assign_supported);
         assert!(truth.post_cpi_checks_precede_retained_body);
         assert!(truth.exact_postimage_write_follows_retained_success);
         assert!(truth.transaction_rollback_required_after_cpi);
-        assert!(!truth.production_dispatcher_exposed);
-        assert!(!truth.production_entrypoint_exposed);
-        assert!(!truth.handler_complete);
+        assert!(truth.production_dispatcher_exposed);
+        assert!(truth.production_entrypoint_exposed);
+        assert!(truth.handler_complete);
         assert!(!truth.devnet_transaction_rollback_proven);
         assert!(truth.mainnet_hold);
         assert!(PRODUCTION_SET_ELIGIBILITY_EXECUTOR_STATUS.contains("MAINNET_HOLD"));

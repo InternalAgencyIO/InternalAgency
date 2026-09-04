@@ -172,9 +172,11 @@ These are the only selected Solana-hosting relaxations:
 2. **Decision event:** the first successful permissionless `finalize_day`
    records the result, not the first Solana block after 00:01.
 3. **Randomness strength:** a lagged Solana ancestor hash replaces a threshold
-   VRF. Leaders, schedulers, and prospective finalizers may have limited
-   influence. The thresholds remain exact, but perfectly unbiased entropy and
-   an unconditional exact realized probability are not claimed.
+   VRF. Selection is invocation-relative; a prospective finalizer can wait
+   across eligible hashes before submitting, and leaders or schedulers can
+   influence ordering. A fixed lag does not remove this material timing
+   influence. The thresholds remain exact for a supplied hash, but unbiased
+   entropy and an unconditional exact realized probability are not claimed.
 4. **Liveness:** all IAT transfers fail closed until somebody finalizes the day.
 5. **Time:** the program uses Solana `Clock` with fixed `+03:00`, inheriting
    Solana clock drift and consensus behavior.

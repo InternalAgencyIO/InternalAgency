@@ -21,7 +21,7 @@ Its strict shape is fixed by
 and the stricter offline semantic audit is
 [`scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs`](../../scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs).
 
-This is a provider-selection and independent-review input contract. It is not a
+This is a provider-selection and automated direct-evidence input contract. It is not a
 provider integration, provider attestation verifier, runtime gate, credential
 loader, network client, Solana contract, Config codec, or authorization to
 publish, reserve, claim, transfer, pay, or mint rewards.
@@ -53,7 +53,7 @@ root, and key-registry resource.
 The local database, provider write plane, provider administration, credential
 custody, and backup custody must have five globally distinct identifiers. They
 must also be distinct from the provider tenant, resource, receipt registry, and
-independent observer. This is a required separation contract, not an assertion
+automated evidence source. This is a required separation contract, not an assertion
 that any current system satisfies it.
 
 Twelve ordered control packets are mandatory:
@@ -82,12 +82,12 @@ Twelve ordered control packets are mandatory:
 11. closed-database and provider backup-API restore drills, provider-outage
     recovery, sink-rollback detection without external rewind, and incident/DR
     evidence bound to the exact subject; and
-12. independent security, legal, retention, operations, and DR review with
-    reproducible evidence digests and reviewer separation of duties.
+12. automated source-bound security, legal, retention, operations, and DR evidence with
+    reproducible evidence digests and evidence-source failure-domain separation.
 
 Every completed packet must reference a unique lowercase SHA-256 evidence
 artifact. Its evidence descriptor binds the exact subject digest, the exact
-section/control/policy digest, a canonical independent observer identity and
+section/control/policy digest, a canonical automated evidence source identity and
 identity digest, the matching environment, and a bounded validity interval.
 Validation of any completed packet requires an explicit caller-supplied
 `evaluationUnixSeconds`; manifest timestamps cannot self-authorize freshness.
@@ -119,7 +119,7 @@ It intentionally exposes no `providerReadinessReady`, `providerVerified`,
 The focused suite can construct one conspicuous `TEST_FIXTURE` packet. It passes
 only with `allowTestFixture: true` and an explicit in-window evaluation time.
 Fixture provider/resource/failure-domain IDs, subject and trust-root digests,
-observer identities, policy bindings, evidence artifacts, and DR evidence are
+evidence-source identities, policy bindings, evidence artifacts, and DR evidence are
 known test values. A `PRODUCTION` profile containing any of them fails even when
 the caller supplies `allowTestFixture` or invented allow-like options. Missing,
 extra, hidden, symbol, accessor, sparse, cyclic, null-prototype, and
@@ -127,7 +127,7 @@ custom-prototype data also fail closed without invoking accessors. Obvious
 fixture/fake/mock/sample/synthetic identifiers, low-entropy repeated-character
 identifiers, and repeated-nibble digest placeholders are rejected. Plausible
 but invented provider identifiers or evidence digests cannot be disproved by an
-offline structural validator; independent operational verification remains
+offline structural validator; source-bound automated operational verification remains
 mandatory.
 
 ## Offline use
@@ -148,5 +148,5 @@ node scripts/validate-iat-b3-external-checkpoint-provider-readiness.mjs --manife
 
 The validator performs no network call and consumes no provider credential. A
 structurally complete packet remains only a prerequisite for separate provider
-verification, runtime implementation, independent sign-off, and Mainnet/release
+verification, runtime implementation, automated direct-evidence closure, and Mainnet/release
 gates.
