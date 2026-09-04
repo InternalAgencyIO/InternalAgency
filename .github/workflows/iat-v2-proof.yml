@@ -191,6 +191,7 @@ jobs:
       - run: npm run check:iat-v2-proof-workflow
       - run: npm run check:iat-b3-spec
       - run: node --test tests/iat-b3-combined-law-reproducible-build.test.mjs
+      - run: npm run check:mint-config
       - run: npm run check:release-surface
       - run: npm run check:ui-regression
       - name: Re-normalize and verify exact web source history before lineage gate
@@ -227,6 +228,12 @@ jobs:
           fi
           if ! git merge-base --is-ancestor "$b3_source" "$source_head"; then
             echo "Pinned B3 source is not an ancestor of the exact web source head" >&2
+            exit 1
+          fi
+          tracked_drift="$(git status --porcelain=v1 --untracked-files=no)"
+          if [[ -n "$tracked_drift" ]]; then
+            printf '%s\n' "$tracked_drift" >&2
+            echo "Web checks modified tracked source; regenerate and commit exact outputs before CI" >&2
             exit 1
           fi
       - run: npm run check:iat-v2

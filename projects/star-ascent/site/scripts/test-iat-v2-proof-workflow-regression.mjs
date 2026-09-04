@@ -40,6 +40,7 @@ const requiredOrderedCommands = [
   "npm run check:iat-v2-proof-workflow",
   "npm run check:iat-b3-spec",
   "node --test tests/iat-b3-combined-law-reproducible-build.test.mjs",
+  "npm run check:mint-config",
   "npm run check:release-surface",
   "npm run check:ui-regression",
   "npm run check:iat-v2",
@@ -79,6 +80,11 @@ const exactSignoffCommand =
   "node scripts/validate-iat-v2-independent-signoff.mjs && node scripts/validate-iat-v2-feature-signoff.mjs && node scripts/test-iat-v2-signoff-regression.mjs";
 const exactArchitectureWorkCommand =
   "node scripts/test-iat-architecture-source-lineage-regression.mjs && node scripts/validate-iat-v2-architecture-work.mjs";
+const exactMintConfigCheckCommand = "node scripts/test-mint-config-regression.mjs";
+const exactEarlyMintConfigPlacement = [
+  "      - run: npm run check:mint-config",
+  "      - run: npm run check:release-surface",
+].join("\n");
 const requiredActionPins = new Map([
   ["actions/checkout@11d5960a326750d5838078e36cf38b85af677262", 5],
   ["actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", 1],
@@ -200,10 +206,18 @@ const exactWebSourceHistoryStep = [
   "            exit 1",
   "          fi",
 ].join("\n");
-const exactPreLineageWebSourceHistoryStep = exactWebSourceHistoryStep.replace(
-  "Normalize and verify exact web source history",
-  "Re-normalize and verify exact web source history before lineage gate",
-);
+const exactPreLineageWebSourceHistoryStep = [
+  exactWebSourceHistoryStep.replace(
+    "Normalize and verify exact web source history",
+    "Re-normalize and verify exact web source history before lineage gate",
+  ),
+  '          tracked_drift="$(git status --porcelain=v1 --untracked-files=no)"',
+  '          if [[ -n "$tracked_drift" ]]; then',
+  '            printf \'%s\\n\' "$tracked_drift" >&2',
+  '            echo "Web checks modified tracked source; regenerate and commit exact outputs before CI" >&2',
+  "            exit 1",
+  "          fi",
+].join("\n");
 const exactPreLineageHistoryPlacement = [
   "      - run: npm run check:ui-regression",
   exactPreLineageWebSourceHistoryStep,
@@ -495,6 +509,14 @@ function validateConfiguration(workflowInput, scripts) {
   if (orderedPositions.some((position, index) => index > 0 && position <= orderedPositions[index - 1])) {
     fail("release-proof workflow gates are not in the required fail-closed order");
   }
+  if (
+    commandLines.filter((command) => command === "npm run check:mint-config").length !== 1
+    || !workflowText.includes(exactEarlyMintConfigPlacement)
+  ) {
+    fail(
+      "web audit must run the unique mint-configuration drift guard immediately before release-surface generation",
+    );
+  }
   if (commandLines.filter((command) => command === "npm run check:iat-v2-signoff").length !== 1) {
     fail("independent-signoff validation must occur exactly once in the web-and-policy job");
   }
@@ -668,6 +690,9 @@ function validateConfiguration(workflowInput, scripts) {
   }
   if (scripts["check:iat-v2-signoff"] !== exactSignoffCommand) {
     fail("signoff package script must retain both canonical validators in order");
+  }
+  if (scripts["check:mint-config"] !== exactMintConfigCheckCommand) {
+    fail("mint-configuration drift guard must remain bound to the canonical deterministic regression");
   }
 
   const actualLaunchGateScripts = typeof scripts["check:launch-gates"] === "string"
@@ -1330,6 +1355,19 @@ const phaseBWorkflowMutationProbes = [
 }));
 
 const mutationProbes = [
+  {
+    name: "early mint configuration drift guard omitted",
+    workflow: workflow.replace("      - run: npm run check:mint-config\n", ""),
+    scripts: packageJson.scripts,
+  },
+  {
+    name: "diluted early mint configuration drift guard",
+    workflow,
+    scripts: {
+      ...packageJson.scripts,
+      "check:mint-config": "node -e \"process.exit(0)\"",
+    },
+  },
   ...nativeWindowsMutationProbes,
   ...phaseBWorkflowMutationProbes,
   {
