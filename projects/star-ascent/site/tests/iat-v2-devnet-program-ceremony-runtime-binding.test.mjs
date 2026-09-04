@@ -138,8 +138,9 @@ test("canonical ceremony anchor is fail-closed and preserves the immutable artif
 test("runbook derives the fresh PR merge ref from the exact runtime evidence manifest", () => {
   const runbook = readFileSync(RUNBOOK_PATH, "utf8");
   assert.ok(runbook.includes(
-    "$WorkflowRef = [string]$RuntimeEvidence.sourceBinding.workflowRef",
+    "$WorkflowRef = [string]$RuntimeEvidence.ciProvenance.workflowRef",
   ));
+  assert.doesNotMatch(runbook, /\$RuntimeEvidence\.sourceBinding\.workflowRef/u);
   assert.ok(runbook.includes(
     "$ExpectedWorkflowRefPattern = '^InternalAgencyIO/InternalAgency/\\.github/workflows/iat-v2-proof\\.yml@refs/pull/([1-9][0-9]*)/merge$'",
   ));
