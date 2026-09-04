@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "batch": 480,
+  "countryPair": ["Liechtenstein", "Lithuania"],
+  "state": "single-confirmed-x-transmission-live-verified",
+  "destinationAccount": "@dogramaci",
+  "freshActionTimeConfirmationReceived": true,
+  "clickedAtUtc": "2026-09-04T11:43:24.884Z",
+  "verifiedAtUtc": "2026-09-04T11:44:59.1784920Z",
+  "postUrl": "https://x.com/dogramaci/status/2095840152757129448",
+  "photoEndpoints": [
+    "https://x.com/dogramaci/status/2095840152757129448/photo/1",
+    "https://x.com/dogramaci/status/2095840152757129448/photo/2",
+    "https://x.com/dogramaci/status/2095840152757129448/photo/3"
+  ],
+  "sceneOrder": [1945, 1948, 1949],
+  "assetSha256": [
+    "64321B7DE22F7F51981A6A3A94F3F74128F84DA216E3DC3BF49F7310190F9054",
+    "60574A95AB07B8B5395C6CF148E6A078BCC2B7828EA5472E024C7326EEC3B2F6",
+    "DE57F76437B98A6AF453ED08B0745F5D2437D14CBA3BC4B1FC9A2D229A86FB91"
+  ],
+  "captionSha256": "C4006DA923383F95AD3FA9DD27321C99696D21B08FAC1F949FD589A74C0B0506",
+  "captionExact": true,
+  "hashtagExact": true,
+  "mediaCount": 3,
+  "mediaOrderExact": true,
+  "altTextCount": 3,
+  "altTextsExact": true,
+  "madeWithAiLabelVisible": true,
+  "unavailableOrDeadLink": false,
+  "postClicks": 1,
+  "keyboardSubmitAttempts": 0,
+  "publicTransmissionCount": 1,
+  "duplicateMediaTransmission": false,
+  "stagedEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-480-lithuania/liechtenstein-lithuania-x-composer-staged-visible.png",
+    "sha256": "EBFC702719AC4A4DC4468E70535C4485B5D6DDA66FA59DF363F0576B88FFBF32",
+    "bytes": 109342,
+    "dimensions": "1280x720"
+  },
+  "liveEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-480-lithuania/liechtenstein-lithuania-x-live-status-2095840152757129448.png",
+    "sha256": "B56CFBBD4311715D9FF5AF365BCB0A671DA02A6FB7E48CCAEFAB4A0FE0233BB6",
+    "bytes": 77862,
+    "dimensions": "1253x705"
+  },
+  "verification": "The visible in-app Browser home timeline displayed the exact @dogramaci caption and #RAZE hashtag, three ordered photo endpoints, all three exact alt descriptions, Made with AI labeling and no unavailable or dead-link state.",
+  "transmission": "fresh-user-action-time-confirmed-single-visible-post-click",
+  "nextSafeAction": "Commit and remote-verify this manifest and the canonical X ledger update, preserve the status URL, never resend these media, retain one blank @dogramaci composer and advance the four Meta lanes."
+}
