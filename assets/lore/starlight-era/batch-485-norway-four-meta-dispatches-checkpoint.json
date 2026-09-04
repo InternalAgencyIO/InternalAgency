@@ -3,7 +3,7 @@
   "batch": 485,
   "country": "Norway",
   "scenes": [1967, 1968, 1969, 1970],
-  "state": "four-exact-meta-thinking-prompts-dispatched-once-outcomes-pending",
+  "state": "four-exact-meta-thinking-prompts-dispatched-once-all-successful-downloads-archived",
   "dispatchWindowObservedAtUtc": "2026-09-04T15:51:19.330Z",
   "authority": {
     "stagedCheckpoint": "assets/lore/starlight-era/batch-485-norway-four-meta-composers-staged-checkpoint.json",
@@ -30,7 +30,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/bc625b3f-7775-4c82-84d6-21e25fa0dc83",
-      "outcome": "pending"
+      "outcome": "success-safe-background-substitution",
+      "providerDomMediaLabel": "gallery/oslo_opera_fashion.webp",
+      "visibleDownloadFilename": "oslo_opera_fashion.jpg"
     },
     {
       "scene": 1968,
@@ -38,7 +40,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/86587295-c088-448c-9b5c-3725e46f467a",
-      "outcome": "pending"
+      "outcome": "success",
+      "providerDomMediaLabel": "gallery/bryggen_fashion_editorial.webp",
+      "visibleDownloadFilename": "bryggen_fashion_editorial.jpg"
     },
     {
       "scene": 1969,
@@ -46,7 +50,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/7fe2ffb0-91df-46f9-bbbf-df267024d0e3",
-      "outcome": "pending"
+      "outcome": "success",
+      "providerDomMediaLabel": "gallery/geirangerfjord_fashion_group.webp",
+      "visibleDownloadFilename": "geirangerfjord_fashion_group.jpg"
     },
     {
       "scene": 1970,
@@ -54,7 +60,9 @@
       "anchors": [938, 936, 937],
       "sendControlActivations": 1,
       "providerUrl": "https://www.meta.ai/prompt/3a0b0a59-3492-41b3-8290-1776b2cc9e5c",
-      "outcome": "pending"
+      "outcome": "success",
+      "providerDomMediaLabel": "gallery/henningsvaer_harbor_friends.webp",
+      "visibleDownloadFilename": "henningsvaer_harbor_friends.jpg"
     }
   ],
   "xHold": {
@@ -73,5 +81,5 @@
     "rrule": "FREQ=MINUTELY;INTERVAL=45",
     "leftUntouched": true
   },
-  "nextSafeAction": "Commit and remote-verify this dispatch record, inspect each existing provider URL without reopening any terminal scene, classify success versus hard failure, download successful raw bytes only through the visible Download control, and create at most one provider-safe retry composer for a hard failure. Never resend a confirmed provider URL."
+  "nextSafeAction": "Use the four archived successful raw occurrences for exactly one ChatGPT strong-shortening pass each, select the best public-safe output without a second pass, close QA and preserve all evidence. Never resend a confirmed provider URL."
 }
