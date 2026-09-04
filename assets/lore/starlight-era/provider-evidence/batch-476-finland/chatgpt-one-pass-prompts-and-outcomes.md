@@ -1,6 +1,6 @@
 # Batch 476 Finland — ChatGPT one-pass prompts and outcomes
 
-The exact three issued edit prompts are preserved in `assets/lore/starlight-era/batch-476-finland-chatgpt-one-pass-prompts-prepared-checkpoint.json`. Each prompt was issued exactly once against its one archived Meta raw reference. No blocked or failed request was retried. Scene 1934 has no technically valid raw and therefore received no ChatGPT edit request.
+The first three exact edit prompts are preserved in `assets/lore/starlight-era/batch-476-finland-chatgpt-one-pass-prompts-prepared-checkpoint.json`; the later Scene 1934 edit prompt is preserved below and in the final closure checkpoint. Each prompt was issued exactly once against its one archived Meta raw reference. No blocked or failed request was retried.
 
 ## Scene 1931
 
@@ -34,8 +34,14 @@ The exact three issued edit prompts are preserved in `assets/lore/starlight-era/
 
 ## Scene 1934
 
-- Meta raw: none yet.
-- ChatGPT request issued: none.
-- Reason: initial Meta occurrence was an explicit no-image refusal; Meta retry 1 then ended at a temporary media-credit gate. The final permitted Meta retry remains held until visible replenishment.
+- Prompt SHA-256: `C2944C32F1BF9552855EC7262851189F5FFC1C52FDDBB16E7B0BF72276AD856A`
+- Exact prompt: `Use case: identity-preserve. Asset type: final Starlight World Series 9:16 fashion still. Input image: the displayed Finland Scene 1934 Meta image is the sole edit target. Primary request: perform exactly one strong hemline-shortening fashion edit. Shorten the blonde second woman's pearl-gold fitted cocktail dress dramatically from below-knee to a secure opaque upper-thigh mini-dress hem; also ensure every other lower garment remains decisively upper-thigh-short, tailored, opaque, and public-safe. Preserve all four clearly adult fictional women, their exact left-to-right identities, faces, hair, skin tones, body proportions, expressions, affectionate linked pose, four distinct complete knee-high boots, the Koli timber terrace, railings, lake, forest, mist, vertical 9:16 framing, lighting, colors, and camera angle. Preserve the existing fictional RAZE tags without adding new tags or any other text. Do not change faces, cast count, hands, limbs, footwear, background, or composition. No nudity, underwear, exposure, transparency, sexual activity, minors, real people, weapons, injuries, victims, third-party logos, collage, border, caption, or watermark.`
+- Reference SHA-256: `995FDFC380E8C101C15A5309C2270BA3C5417E35757CB0D7F98FABDD6C81522C`
+- Outcome: one clean image returned.
+- Generated original retained at `C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-fb9de036-6ef4-4796-98b1-793f1349173d.png`.
+- Archived copy: `1934-finland-koli-raze-chatgpt-one-strong-shortening-pass.png`
+- Archived SHA-256: `426524F830687F5E86CF4BE2CA9E33B0320E321B920A667076A307A285BDF774`
+- Selection: accepted and selected over the Meta raw; public-safe, non-corrupt, exactly four distinct adults, the secure upper-thigh gold mini, all four complete knee-high boots, linked pose, RAZE tags, and Koli setting are preserved.
+- Retry: none; the one-pass boundary is consumed.
 
-Additional ChatGPT passes permitted for scenes 1931–1933: `0`.
+Additional ChatGPT passes permitted for scenes 1931–1934: `0`.

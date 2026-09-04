@@ -2,15 +2,15 @@
   "schemaVersion": 1,
   "batch": 476,
   "country": "Finland",
-  "state": "three-selected-assets-closed-scene-1934-final-meta-retry-held-at-credit-gate-x-not-posted",
-  "updatedAtUtc": "2026-08-31T23:11:41.1350804Z",
+  "state": "four-selected-assets-closed-scene-1934-final-meta-retry-and-one-strong-shortening-pass-complete-estonia-finland-x-published-verified",
+  "updatedAtUtc": "2026-09-04T08:29:05.8399561Z",
   "providerRouting": {
     "meta": "signed-in visible in-app Browser only",
     "metaAccount": "leesha007",
     "metaMode": "Thinking",
     "grok": "paused until credits return",
     "chatgpt": "built-in image generator, exactly one strong shortening edit per technically valid selected Meta occurrence",
-    "x": "visible in-app Browser composer only; blank and untouched",
+    "x": "visible in-app Browser only; Estonia-Finland country-pair post published once and visibly verified on @dogramaci",
     "directProviderApiOrHttp": false,
     "chromeOrComputerUse": false
   },
@@ -90,7 +90,7 @@
         "sha256": "AD2EAFE44FD1DE23BB031BCAB2AD9D0CCA66BACBC504CFDB84FA4A81A3537BC5",
         "publicSafe": true,
         "corrupt": false,
-        "priorXTransmission": false
+        "priorXTransmission": true
       }
     },
     {
@@ -127,44 +127,98 @@
         "sha256": "4E6DBE48C30451E2B22695137CB101066ED2A6A5EC4458AB02F5A724B4F7BF49",
         "publicSafe": true,
         "corrupt": false,
-        "priorXTransmission": false
+        "priorXTransmission": true
       }
     },
     {
       "scene": 1934,
-      "providerUrl": "https://www.meta.ai/prompt/3ebb6bb3-08c3-4e81-82a8-b3ff5a118ba4",
+      "providerUrl": "https://www.meta.ai/prompt/1b6988e4-15d2-4baf-a723-17870526490b",
+      "initialProviderUrl": "https://www.meta.ai/prompt/3ebb6bb3-08c3-4e81-82a8-b3ff5a118ba4",
       "initialMetaPromptSha256": "DC1F8FAA45A3CB1F0C5AE1BC43A702A25E155F1A4ACFAF004D03383BFA17DE14",
       "retryPromptSha256": "23A06F951F5D0FDAB79721CC2F3A758DE26DB84264C4314F7E0C125668645E2F",
       "initialSendClicks": 1,
-      "retrySendClicks": 1,
+      "retrySendClicks": 2,
+      "firstRetrySendClicks": 1,
+      "finalRetrySendClicks": 1,
       "repeatSendClicks": 0,
-      "terminalMedia": false,
+      "terminalMedia": true,
       "initialOutcome": "explicit-no-image-refusal",
       "retryOneOutcome": "temporary-provider-credit-exhaustion-no-image",
-      "rawBytes": 0,
-      "remainingMetaRetries": 1,
-      "finalRetryHeldUntilVisibleCreditReplenishment": true,
-      "chatgptOnePassRequestsIssued": 0,
-      "selected": null
+      "finalRetryOutcome": "terminal-media-accepted-with-logo-microfidelity-variance",
+      "raw": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/1934-finland-koli-raze-close-full-length-meta-final-retry-2-raw.webp",
+        "sha256": "995FDFC380E8C101C15A5309C2270BA3C5417E35757CB0D7F98FABDD6C81522C",
+        "bytes": 529416,
+        "width": 1152,
+        "height": 2048,
+        "format": "WEBP"
+      },
+      "visibleQa": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/scene-1934-meta-final-retry-2-visible-qa.png",
+        "sha256": "22C6AC1D8B133B49518FF9430AFE6D8C2F190E082020CC3B3FF99D56945F204B",
+        "bytes": 106285,
+        "publicSafe": true,
+        "corrupt": false,
+        "exactlyFourClearlyAdultWomen": true,
+        "completeFacesLimbsAndFootwear": true,
+        "nonblockingVariance": "More than one small RAZE tag appears on several looks; accepted under the relaxed brand-microfidelity rule."
+      },
+      "remainingMetaRetries": 0,
+      "finalRetryHeldUntilVisibleCreditReplenishment": false,
+      "chatgptOnePass": {
+        "promptSha256": "C2944C32F1BF9552855EC7262851189F5FFC1C52FDDBB16E7B0BF72276AD856A",
+        "requestsIssued": 1,
+        "outcome": "fulfilled-clean",
+        "outputSaved": true,
+        "generatedOriginal": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-fb9de036-6ef4-4796-98b1-793f1349173d.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/1934-finland-koli-raze-chatgpt-one-strong-shortening-pass.png",
+        "sha256": "426524F830687F5E86CF4BE2CA9E33B0320E321B920A667076A307A285BDF774",
+        "bytes": 2244886,
+        "width": 941,
+        "height": 1672,
+        "retryIssued": false
+      },
+      "selected": {
+        "source": "chatgpt-one-strong-shortening-pass",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/1934-finland-koli-raze-chatgpt-one-strong-shortening-pass.png",
+        "sha256": "426524F830687F5E86CF4BE2CA9E33B0320E321B920A667076A307A285BDF774",
+        "publicSafe": true,
+        "corrupt": false,
+        "priorXTransmission": false
+      }
     }
   ],
+  "xPublication": {
+    "state": "published-verified",
+    "account": "@dogramaci",
+    "countryPair": ["Estonia", "Finland"],
+    "sceneOrder": [1927, 1932, 1933],
+    "postUrl": "https://x.com/dogramaci/status/2095775486316073024",
+    "postClicks": 1,
+    "publicTransmissionCount": 1,
+    "mediaCount": 3,
+    "altTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "duplicateMediaTransmission": false,
+    "verifiedAtUtc": "2026-09-04T07:31:28.8233945Z"
+  },
   "duplicateGate": {
-    "targetHashesScannedAcrossRepositoryImagePayloads": 4,
+    "targetHashesScannedAcrossRepositoryImagePayloads": 5,
     "matchesOutsideOwnCanonicalPaths": 0,
     "priorXTransmissionMatches": false,
-    "passedForSelectedScenes": [1931, 1932, 1933]
+    "passedForSelectedScenes": [1931, 1932, 1933, 1934]
   },
   "totals": {
     "metaInitialOccurrences": 4,
-    "metaRetriesDispatched": 1,
-    "metaRetriesRemaining": 1,
-    "rawAssets": 3,
-    "chatgptRequestsIssued": 3,
-    "chatgptOutputsSaved": 1,
+    "metaRetriesDispatched": 2,
+    "metaRetriesRemaining": 0,
+    "rawAssets": 4,
+    "chatgptRequestsIssued": 4,
+    "chatgptOutputsSaved": 2,
     "chatgptOutputModerationBlocks": 2,
-    "selectedAssets": 3,
+    "selectedAssets": 4,
     "additionalChatgptPassesPermittedForConsumedOccurrences": 0,
-    "xTransmissions": 0
+    "xTransmissions": 1
   },
-  "nextSafeAction": "At or after Meta's visible 6:08 AM replenishment boundary, inspect existing tab 24. Only when the credit gate has cleared, restage the archived scene-1934 retry prompt with ordered anchors 938, 936, 937 and dispatch the final permitted Meta retry once after full remote and live gates. Do not post the Estonia-Finland pair until scene 1934 and the full Finland closure are complete."
+  "nextSafeAction": "Finalize the Finland closure manifest and remote parity, preserve the verified Estonia-Finland X URL and never resend its media, then prepare Ireland as the next alphabetical zero-post European country."
 }
