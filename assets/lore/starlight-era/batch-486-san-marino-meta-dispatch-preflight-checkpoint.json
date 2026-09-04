@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "batch": 486,
+  "country": "San Marino",
+  "scenes": [1971, 1972, 1973, 1974],
+  "state": "remote-authority-and-live-browser-preflight-passed-no-send",
+  "verifiedAtUtc": "2026-09-04T16:29:18.609Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "promptCheckpoint": "assets/lore/starlight-era/batch-486-san-marino-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "promptCheckpointCommit": "acf720cf65b26cd38462564f8b87f0e8d783921b",
+    "localHead": "acf720cf65b26cd38462564f8b87f0e8d783921b",
+    "originHead": "acf720cf65b26cd38462564f8b87f0e8d783921b",
+    "draftPrHead": "acf720cf65b26cd38462564f8b87f0e8d783921b",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "lfsPushDryRunEmpty": true
+  },
+  "canonicalQueue": {
+    "worldXPosts": 194,
+    "sanMarinoLiveMatches": 0,
+    "predecessor": "Norway Batch 485 closed and remote-verified",
+    "historicalContradiction": "Batch 416 San Marino has one accepted unpublished archive asset and three unresolved scenes; none of its confirmed or terminal scenes may be resent or reopened. Fresh Batch 486 is the current gap-fill authority."
+  },
+  "browser": {
+    "name": "Codex in-app Browser",
+    "visibleOnly": true,
+    "actualTabInventoryRefreshed": true,
+    "totalTabCount": 5,
+    "xComposerCount": 1,
+    "metaTerminalCount": 4,
+    "grokTabCount": 0,
+    "metaTerminalTabs": [
+      {"tabId": "24", "scene": 1967, "url": "https://www.meta.ai/prompt/bc625b3f-7775-4c82-84d6-21e25fa0dc83", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true},
+      {"tabId": "25", "scene": 1968, "url": "https://www.meta.ai/prompt/86587295-c088-448c-9b5c-3725e46f467a", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true},
+      {"tabId": "26", "scene": 1969, "url": "https://www.meta.ai/prompt/7fe2ffb0-91df-46f9-bbbf-df267024d0e3", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true},
+      {"tabId": "27", "scene": 1970, "url": "https://www.meta.ai/prompt/3a0b0a59-3492-41b3-8290-1776b2cc9e5c", "providerAccountVisible": true, "thinkingVisible": true, "terminalDownloadVisible": true}
+    ],
+    "replacementPolicy": "Navigate these four completed Norway terminal tabs to four fresh Meta composers only after this preflight record is remote-verified. Do not create extra lanes."
+  },
+  "xHold": {
+    "tabId": "17",
+    "url": "https://x.com/compose/post",
+    "account": "@dogramaci",
+    "verifiedAccountVisible": true,
+    "countryPair": ["Monaco", "North Macedonia"],
+    "exactCaptionOccurrencesInComposer": 1,
+    "mediaGroupsInComposer": 3,
+    "exactAccessibilityGroupNamesVisible": true,
+    "madeWithAiVisibleInComposer": true,
+    "visibleError": "Something went wrong, but don’t fret — let’s give it another shot.",
+    "visiblePostControlActivations": 2,
+    "publicTransmissionCount": 0,
+    "composerRetainedIntact": true,
+    "mustNotReplaceComposer": true,
+    "thirdBlindClickForbidden": true
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "promptHashesVerified": [
+      "8F45BB48F4CA72615F0A76C7CEB185751A53CC1FFB492BD3D9489D3C3E6BE8EB",
+      "6FF8E534FE56409C16AF77828968C7193ABE4117C5A2BF699D8EAFAD4B13430C",
+      "218D455E810DAD9BDEDA9D3978DB21170D38BD1D53BB5D913632B43C046F985C",
+      "91283961759D3CE654428B947E921B2B747FBD99BBBCCB0FF77157E9D4DE48A7"
+    ],
+    "orderedAnchorsVerified": [938, 936, 937],
+    "anchorHashesVerified": true,
+    "faceManifestHashVerified": true,
+    "sendActivations": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "providerRetries": 0
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "mayStageAfterRemoteParity": true,
+  "mayDispatchAfterStagingParity": true,
+  "nextSafeAction": "Commit and remote-verify this preflight. Navigate exactly the four completed Norway tabs to four fresh Meta composers, enter each exact sealed San Marino prompt first, attach exact anchors 938, 936 and 937 in that order through the visible supported chooser, and reverify leesha007, Thinking, prompt hash, three filenames and enabled Send. Persist and remote-verify the no-send staging state before clicking each Send exactly once."
+}
