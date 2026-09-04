@@ -2,14 +2,14 @@
   "schema": "iat-pending-visible-i18n-source/v1",
   "status": "DRAFT_TRANSLATION_AND_NATIVE_REVIEW_HOLD",
   "sourceBinding": {
-    "commit": "d8c11aa852cfd678ce63816125214cd0db85e54e",
+    "commit": "bd3b4a6aa70798924e6b196592bda6c83f9b0f1d",
     "activeCatalogSha256": "735a5035bcb914958b773e04c18134f336f60fe297aff57c26a9952117598e4f"
   },
   "capture": {
     "origin": "EPHEMERAL_LOOPBACK",
     "routeCount": 25,
-    "routesWithPendingSource": 13,
-    "pendingSourceCount": 48,
+    "routesWithPendingSource": 15,
+    "pendingSourceCount": 87,
     "byRoute": {
       "/": 24,
       "/dossier/read/authority-map": 2,
@@ -23,7 +23,9 @@
       "/dossier/read/technical-spec": 7,
       "/dossier/read/tokenomics": 7,
       "/dossier/read/white-dossier": 2,
-      "/launch": 4
+      "/launch": 4,
+      "/proof": 36,
+      "/verify": 3
     }
   },
   "localeWorkflow": {
@@ -87,6 +89,24 @@
   "interpretation": "Every source string below is captured in the 50-locale workflow, but is not activated at runtime. Non-English translation and accountable native review remain required.",
   "sources": [
     {
+      "source": "175759dce910b3b2a4e346267608aae2942eec02260fbf4e8340ff59169ce290",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "62e31b746e57ce9e29ec4fb44bbff6ce94821412f069707772b119b226fdb096",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "a17481693ee161b0497486cbeaa8b425c3965db45711b16c4d5eed47122bc045",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "AI ECE // RAINBOW KNEE-HIGH COSTUME STUDY // INERT STUDIO PROP",
       "routes": [
         "/"
@@ -147,9 +167,33 @@
       ]
     },
     {
+      "source": "BLOCKED",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "BUILD VERIFIED // LIVE HOLD",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "CHAIN-DERIVED LAW",
       "routes": [
         "/dossier/read/technical-spec"
+      ]
+    },
+    {
+      "source": "CURRENT BUILD VERIFIED. LIVE DEVNET PROOF HOLD.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "CURRENT PUBLIC CHECKPOINT",
+      "routes": [
+        "/proof"
       ]
     },
     {
@@ -189,15 +233,39 @@
       ]
     },
     {
+      "source": "Exact unsigned request later paired with an operator-reported physical device confirmation and later published separately for byte-level comparison.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "Exercise the IAT-wide law and every retained feature, then regenerate every bound release artifact; invalidate all stale approvals.",
       "routes": [
         "/launch"
       ]
     },
     {
+      "source": "FIELD GUIDE // VISUAL LOCK",
+      "routes": [
+        "/verify"
+      ]
+    },
+    {
       "source": "Four fictional adult women, four distinct looks, one playful Nightflight scene.",
       "routes": [
         "/"
+      ]
+    },
+    {
+      "source": "FROZEN SIGNING REQUEST",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "Historical off-chain signature proof remains independently verifiable at exact hashes. Current-source Rust and verifiable SBF build evidence are now public at an exact artifact hash; no current-source physical Devnet signature or transaction receipt is published. Mainnet is UNSCHEDULED HOLD until funding and every canonical gate clear.",
+      "routes": [
+        "/proof"
       ]
     },
     {
@@ -219,9 +287,33 @@
       ]
     },
     {
+      "source": "INDEPENDENT VERIFIER",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "INSPECT RECEIPT",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "MANDATORY LIVE-EVIDENCE GATE",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "NIGHTFLIGHT // VISUAL EDITORIAL",
       "routes": [
         "/"
+      ]
+    },
+    {
+      "source": "No mainnet IAT mint is represented by these Devnet records, and no Mainnet action was performed.",
+      "routes": [
+        "/proof"
       ]
     },
     {
@@ -237,15 +329,45 @@
       ]
     },
     {
+      "source": "OFF-CHAIN SIGNATURE PROOF",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "OPEN CRYPTOGRAPHIC PROOF",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "OPEN FROZEN REQUEST",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "Open retained IAT economic policy (V2)",
       "routes": [
         "/"
       ]
     },
     {
+      "source": "OPEN VERIFIER",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "Optional transfer privacy",
       "routes": [
         "/"
+      ]
+    },
+    {
+      "source": "PASS",
+      "routes": [
+        "/proof"
       ]
     },
     {
@@ -258,6 +380,36 @@
       "source": "PAWS, a fictional golden kitten, chasing a prismatic light across a dark star floor",
       "routes": [
         "/"
+      ]
+    },
+    {
+      "source": "Public verifier for the proof signature and request binding. It requires no wallet connection, private material, or transaction broadcast.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "RADIANCE // SIGNAL OPERATOR",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "RADIANCE VISUAL CI",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "Radiance, a fictional adult signal operator, beside the illuminated Devnet proof beacon",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "Radiance, a fictional adult signal operator, demonstrating the public verification route",
+      "routes": [
+        "/verify"
       ]
     },
     {
@@ -304,6 +456,30 @@
       ]
     },
     {
+      "source": "Run 32946810318 passed both the default and feature-gated Rust host suites at exact source ebf225ff.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "Run 32946810318 passed the hosted Windows source-contract checks and confirmed the exact nonauthorizing HOLD projection. This job is smoke coverage, not release evidence.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "Run 32946810318 reproduced the 649,680-byte IAT V2 binary at SHA-256 771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01 and uploaded artifact 9599245993. This is build evidence only, not a Devnet signature or transaction.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "RUST HOST TESTS",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "SIGNAL FOUR // DA LAT ARRIVAL",
       "routes": [
         "/dossier/read/broadcast-pack",
@@ -341,6 +517,18 @@
       ]
     },
     {
+      "source": "Source checks are separate from artifact proof. Preview and standalone media evidence remain blocked; no verified Radiance artifact is claimed.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "Source-bound live runtime receipts plus required direct observers are still absent. The canonical gate remains nonexecuting and nonauthorizing HOLD.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "The B3 architecture retains the V2 feature set while making the IAT-wide lockdown law and adverse outcomes visible before execution.",
       "routes": [
         "/dossier/read/tokenomics"
@@ -350,6 +538,18 @@
       "source": "The B3 law adapter and every retained V2 feature must be built, deployed unfunded, initialized, funded, and exercised on Devnet before any Mainnet decision can be considered.",
       "routes": [
         "/"
+      ]
+    },
+    {
+      "source": "The historical Ed25519 signature and frozen request binding verify independently at exact commit hashes. They are not a transaction receipt and do not independently prove the signing device.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "The historical off-chain signature artifacts are frozen at publication commit eb2e59c. The earlier initialization and feature exports describe separate Devnet rehearsal instances, so their mint and configuration addresses differ. None is a Mainnet mint or the current CI build artifact linked above.",
+      "routes": [
+        "/proof"
       ]
     },
     {
@@ -371,6 +571,12 @@
       ]
     },
     {
+      "source": "The published signature verifies against the bound public key and frozen request; it does not independently prove hardware provenance, a Devnet transaction, or launch authorization. Current-source Rust/SBF build evidence is public, but source-bound live receipts, required direct observers, final Mainnet preflight, funding, and ceremony scheduling are not complete. Mainnet remains UNSCHEDULED HOLD.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
       "source": "The second frame places AI ECE's rainbow knee-high costume beside an inert, non-operational RPG-shaped studio prop. It is editorial set dressing, not equipment.",
       "routes": [
         "/"
@@ -386,6 +592,36 @@
       "source": "THE SIGNAL FOUR.",
       "routes": [
         "/"
+      ]
+    },
+    {
+      "source": "This board separates completed verification from fail-closed HOLD conditions. A red gate is not relabeled as success.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "VERIFIABLE SBF BUILD",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "Verified Ed25519 signature, frozen request binding, signer public key, and publicly reproducible cryptographic verification. Embedded device and prompt fields are operator-reported and are not independently verified. The embedded LOCAL_ONLY_NOT_PUBLISHED value records creation-time state and was later superseded by publication; this artifact does not prove hardware provenance or a Devnet transaction.",
+      "routes": [
+        "/proof"
+      ]
+    },
+    {
+      "source": "VERIFY BEFORE AMPLIFY",
+      "routes": [
+        "/verify"
+      ]
+    },
+    {
+      "source": "WINDOWS NON-EVIDENCE SMOKE",
+      "routes": [
+        "/proof"
       ]
     }
   ]

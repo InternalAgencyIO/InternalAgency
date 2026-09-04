@@ -130,7 +130,7 @@ const BINDING_KEYS = Object.freeze([
   "independentRollbackProtectionVerified",
   "runtimeConfinementVerified",
   "runtimeIntegrationVerified",
-  "independentReviewAccepted",
+  "sourceBoundAutomatedDirectEvidenceVerified",
   "activationReady",
   "mainnetStatus",
   "runtimeBindingSha256",
@@ -152,7 +152,7 @@ const MATERIALIZED_BINDING_KEYS = Object.freeze([
   "independentRollbackProtectionVerified",
   "runtimeConfinementVerified",
   "runtimeIntegrationVerified",
-  "independentReviewAccepted",
+  "sourceBoundAutomatedDirectEvidenceVerified",
   "activationReady",
   "mainnetStatus",
   "runtimeBindingSha256",
@@ -217,7 +217,7 @@ const RECEIPT_KEYS = Object.freeze([
   "runtimeConfinementVerified",
   "runtimeIntegrationVerified",
   "externalSideEffectsAuthorized",
-  "independentReviewAccepted",
+  "sourceBoundAutomatedDirectEvidenceVerified",
   "activationReady",
   "mainnetStatus",
   "compositionReceiptSha256",
@@ -271,7 +271,7 @@ const MATERIALIZED_RECEIPT_KEYS = Object.freeze([
   "runtimeConfinementVerified",
   "runtimeIntegrationVerified",
   "externalSideEffectsAuthorized",
-  "independentReviewAccepted",
+  "sourceBoundAutomatedDirectEvidenceVerified",
   "activationReady",
   "mainnetStatus",
   "compositionReceiptSha256",
@@ -386,7 +386,7 @@ function falseBoundary() {
     independentRollbackProtectionVerified: false,
     runtimeConfinementVerified: false,
     runtimeIntegrationVerified: false,
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     activationReady: false,
     mainnetStatus: REWARD_AUTHENTICATED_CONSUMER_RUNTIME_MAINNET_STATUS,
   };
@@ -1081,7 +1081,7 @@ function createCompositionReceipt({
     runtimeConfinementVerified: false,
     runtimeIntegrationVerified: false,
     externalSideEffectsAuthorized: false,
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     activationReady: false,
     mainnetStatus: REWARD_AUTHENTICATED_CONSUMER_RUNTIME_MAINNET_STATUS,
   };
@@ -1177,7 +1177,7 @@ export function validateRewardAuthenticatedConsumerCompositionReceipt(candidate)
     "runtimeConfinementVerified",
     "runtimeIntegrationVerified",
     "externalSideEffectsAuthorized",
-    "independentReviewAccepted",
+    "sourceBoundAutomatedDirectEvidenceVerified",
     "activationReady",
   ]) {
     if (receipt[flag] !== false) throw new Error(`receipt.${flag} must remain false`);
@@ -1253,7 +1253,7 @@ function createMaterializedCompositionReceipt({
     runtimeConfinementVerified: false,
     runtimeIntegrationVerified: false,
     externalSideEffectsAuthorized: false,
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     activationReady: false,
     mainnetStatus: REWARD_AUTHENTICATED_MATERIALIZED_CONSUMER_RUNTIME_MAINNET_STATUS,
   };
@@ -1368,7 +1368,7 @@ export function validateRewardAuthenticatedMaterializedConsumerCompositionReceip
     "runtimeConfinementVerified",
     "runtimeIntegrationVerified",
     "externalSideEffectsAuthorized",
-    "independentReviewAccepted",
+    "sourceBoundAutomatedDirectEvidenceVerified",
     "activationReady",
   ]) {
     if (receipt[flag] !== false) {

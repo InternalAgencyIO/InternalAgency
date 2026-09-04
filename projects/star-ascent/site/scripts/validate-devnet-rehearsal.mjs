@@ -6,7 +6,6 @@ import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { PublicKey } from "@solana/web3.js";
 import { getAssociatedTokenAddressSync, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const canonicalPath = "launch/devnet-rehearsal.template.json";
 const requestedPath = process.argv[2] ?? canonicalPath;
@@ -113,8 +112,8 @@ try {
 }
 
 if (rehearsal) {
-  if (!exactKeys(rehearsal, ["version", "status", "network", "purpose", "signingRules", "mainnetPlan", "token", "allocations", "transactions", "device", "verifier"])) fail("rehearsal must contain only canonical fields");
-  if (rehearsal.version !== 2) fail("rehearsal version must be 2");
+  if (!exactKeys(rehearsal, ["version", "status", "network", "purpose", "signingRules", "mainnetPlan", "token", "allocations", "transactions", "device", "automatedObservation"])) fail("rehearsal must contain only canonical fields");
+  if (rehearsal.version !== 3) fail("rehearsal version must be 3");
   if (!["PLANNED", "COMPLETED"].includes(rehearsal.status)) fail("status must be PLANNED or COMPLETED");
   if (rehearsal.network !== "devnet") fail("rehearsal network must be devnet");
   if (rehearsal.purpose !== "Exact-shape Model T rehearsal for the four-transaction Genesis ceremony. No value, public allocation, or launch assertion.") fail("rehearsal purpose must be canonical");
@@ -144,6 +143,16 @@ if (rehearsal) {
     if (allocation?.share !== share || allocation?.baseUnitAmount !== amount) fail(`${name} rehearsal allocation does not match the exact test-supply ratio`);
   }
   if (!exactKeys(rehearsal.transactions, transactionFields)) fail("rehearsal transactions must contain exactly four canonical fields");
+  if (!exactKeys(rehearsal.automatedObservation, [
+    "mode", "humanReviewerRequired", "noSelfAttestation", "observedDevice", "observedMint",
+    "observedMetadataAddress", "observedAllocations", "observedActions",
+    "observedTransactionEvidence", "observedPlanSha256", "observedAtUtc",
+  ])) fail("automated observation must contain only canonical fields");
+  if (rehearsal.automatedObservation?.mode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+    || rehearsal.automatedObservation?.humanReviewerRequired !== false
+    || rehearsal.automatedObservation?.noSelfAttestation !== true) {
+    fail("rehearsal observation must use the exact automated no-human/no-self-attestation policy");
+  }
 
   if (rehearsal.status === "PLANNED") {
     if (Object.values(plan?.sourceDigests ?? {}).some((value) => value !== null) || plan?.planSha256 !== null) fail("PLANNED rehearsal must clear mainnet source bindings");
@@ -159,18 +168,16 @@ if (rehearsal) {
       confirmedActions: [], confirmedTransactionEvidence: [], confirmedPlanSha256: null, completedAtUtc: null,
     };
     if (rehearsal.device?.model !== "Trezor Model T" || Object.entries(plannedDevice).some(([field, value]) => JSON.stringify(rehearsal.device?.[field]) !== JSON.stringify(value))) fail("PLANNED rehearsal must clear device completion evidence");
-    if (rehearsal.verifier?.reviewedDevice?.model !== "Trezor Model T"
-      || rehearsal.verifier?.reviewedDevice?.firmwareVersion !== null
-      || rehearsal.verifier?.reviewedDevice?.suiteOrWalletInterface !== null
-      || rehearsal.verifier?.reviewedBy !== null
-      || rehearsal.verifier?.independentOfDeviceOperator !== false
-      || rehearsal.verifier?.reviewedMint !== null
-      || rehearsal.verifier?.reviewedMetadataAddress !== null
-      || !exactKeys(rehearsal.verifier?.reviewedAllocations, [])
-      || JSON.stringify(rehearsal.verifier?.reviewedActions) !== "[]"
-      || JSON.stringify(rehearsal.verifier?.reviewedTransactionEvidence) !== "[]"
-      || rehearsal.verifier?.reviewedPlanSha256 !== null
-      || rehearsal.verifier?.completedAtUtc !== null) fail("PLANNED rehearsal must clear verifier completion evidence");
+    if (rehearsal.automatedObservation?.observedDevice?.model !== "Trezor Model T"
+      || rehearsal.automatedObservation?.observedDevice?.firmwareVersion !== null
+      || rehearsal.automatedObservation?.observedDevice?.suiteOrWalletInterface !== null
+      || rehearsal.automatedObservation?.observedMint !== null
+      || rehearsal.automatedObservation?.observedMetadataAddress !== null
+      || !exactKeys(rehearsal.automatedObservation?.observedAllocations, [])
+      || JSON.stringify(rehearsal.automatedObservation?.observedActions) !== "[]"
+      || JSON.stringify(rehearsal.automatedObservation?.observedTransactionEvidence) !== "[]"
+      || rehearsal.automatedObservation?.observedPlanSha256 !== null
+      || rehearsal.automatedObservation?.observedAtUtc !== null) fail("PLANNED rehearsal must clear automated-observation completion evidence");
   }
 
   if (rehearsal.status === "COMPLETED") {
@@ -199,7 +206,7 @@ if (rehearsal) {
 
     const ownerAddresses = [];
     const tokenAccounts = [];
-    const allocationReview = {};
+    const allocationObservation = {};
     for (const name of Object.keys(allocations)) {
       const allocation = rehearsal.allocations[name];
       if (!usableAddress(allocation.ownerAddress)) fail(`COMPLETED rehearsal requires a usable ${name} owner`);
@@ -210,7 +217,7 @@ if (rehearsal) {
       if (allocation.tokenAccount !== expectedAta) fail(`COMPLETED rehearsal ${name} token account must be the canonical Original SPL ATA`);
       if (allocation.evidence !== addressUrl(allocation.tokenAccount)) fail(`COMPLETED rehearsal requires direct ${name} token-account evidence`);
       tokenAccounts.push(allocation.tokenAccount);
-      allocationReview[name] = {
+      allocationObservation[name] = {
         ownerAddress: allocation.ownerAddress,
         tokenAccount: allocation.tokenAccount,
         baseUnitAmount: allocation.baseUnitAmount,
@@ -226,24 +233,23 @@ if (rehearsal) {
     if (JSON.stringify(rehearsal.device?.confirmedActions) !== JSON.stringify(actions) || JSON.stringify(rehearsal.device?.confirmedTransactionEvidence) !== JSON.stringify(transactionEvidence)) fail("COMPLETED device evidence must bind the exact four actions and transactions");
     if (rehearsal.device?.confirmedPlanSha256 !== plan.planSha256) fail("COMPLETED device evidence must bind the mainnet plan digest");
 
-    if (
-      !label(rehearsal.verifier?.reviewedBy)
-      || normalizeAccountabilityLabel(rehearsal.verifier.reviewedBy)
-        === normalizeAccountabilityLabel(rehearsal.device.operatorLabel)
-    ) fail("COMPLETED rehearsal requires a distinct independent verifier after accountability-label normalization");
-    if (rehearsal.verifier?.independentOfDeviceOperator !== true) fail("COMPLETED rehearsal requires verifier independence");
-    if (JSON.stringify(rehearsal.verifier?.reviewedDevice) !== JSON.stringify({ model: rehearsal.device.model, firmwareVersion: rehearsal.device.firmwareVersion, suiteOrWalletInterface: rehearsal.device.suiteOrWalletInterface })) fail("COMPLETED verifier must review the same Model T environment");
-    if (rehearsal.verifier?.reviewedMint !== token.mint || rehearsal.verifier?.reviewedMetadataAddress !== token.metadataAddress) fail("COMPLETED verifier must review the exact mint and metadata addresses");
-    if (JSON.stringify(rehearsal.verifier?.reviewedAllocations) !== JSON.stringify(allocationReview)) fail("COMPLETED verifier must review all five allocation owners, ATAs, and amounts");
-    if (JSON.stringify(rehearsal.verifier?.reviewedActions) !== JSON.stringify(actions) || JSON.stringify(rehearsal.verifier?.reviewedTransactionEvidence) !== JSON.stringify(transactionEvidence)) fail("COMPLETED verifier evidence must bind the exact four actions and transactions");
-    if (rehearsal.verifier?.reviewedPlanSha256 !== plan.planSha256) fail("COMPLETED verifier evidence must bind the mainnet plan digest");
+    const observedDevice = {
+      model: rehearsal.device.model,
+      firmwareVersion: rehearsal.device.firmwareVersion,
+      suiteOrWalletInterface: rehearsal.device.suiteOrWalletInterface,
+    };
+    if (JSON.stringify(rehearsal.automatedObservation?.observedDevice) !== JSON.stringify(observedDevice)) fail("COMPLETED automated observation must bind the same Model T environment");
+    if (rehearsal.automatedObservation?.observedMint !== token.mint || rehearsal.automatedObservation?.observedMetadataAddress !== token.metadataAddress) fail("COMPLETED automated observation must bind the exact mint and metadata addresses");
+    if (JSON.stringify(rehearsal.automatedObservation?.observedAllocations) !== JSON.stringify(allocationObservation)) fail("COMPLETED automated observation must bind all five allocation owners, ATAs, and amounts");
+    if (JSON.stringify(rehearsal.automatedObservation?.observedActions) !== JSON.stringify(actions) || JSON.stringify(rehearsal.automatedObservation?.observedTransactionEvidence) !== JSON.stringify(transactionEvidence)) fail("COMPLETED automated observation must bind the exact four actions and transactions");
+    if (rehearsal.automatedObservation?.observedPlanSha256 !== plan.planSha256) fail("COMPLETED automated observation must bind the mainnet plan digest");
 
-    if (!isUtc(rehearsal.device?.completedAtUtc) || !isUtc(rehearsal.verifier?.completedAtUtc)) fail("COMPLETED rehearsal requires canonical UTC device and verifier times");
+    if (!isUtc(rehearsal.device?.completedAtUtc) || !isUtc(rehearsal.automatedObservation?.observedAtUtc)) fail("COMPLETED rehearsal requires canonical UTC device and automated-observation times");
     else {
       const deviceTime = Date.parse(rehearsal.device.completedAtUtc);
-      const verifierTime = Date.parse(rehearsal.verifier.completedAtUtc);
-      if (verifierTime <= deviceTime || verifierTime - deviceTime > 30 * 60_000) fail("independent review must follow the device ceremony within 30 minutes");
-      if (Date.now() - verifierTime > 24 * 60 * 60_000 || verifierTime > Date.now() + 60_000) fail("COMPLETED rehearsal evidence must be current for the 24-hour launch window");
+      const observationTime = Date.parse(rehearsal.automatedObservation.observedAtUtc);
+      if (observationTime < deviceTime || observationTime - deviceTime > 30 * 60_000) fail("automated observation must follow the Model T ceremony within 30 minutes");
+      if (Date.now() - observationTime > 24 * 60 * 60_000 || observationTime > Date.now() + 60_000) fail("COMPLETED rehearsal evidence must be current for the 24-hour launch window");
     }
   }
 }
@@ -253,4 +259,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Devnet rehearsal gate passes in ${rehearsal.status}. Mainnet signing remains a separate human action.`);
+console.log(`Devnet rehearsal automated-observation gate passes in ${rehearsal.status}. Model T physical confirmation remains the sole human signature gate.`);

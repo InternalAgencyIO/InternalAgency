@@ -25,7 +25,7 @@
   ],
   "properties": {
     "$schema": { "const": "./iat-b3-external-checkpoint-provider-readiness.v1.schema.json" },
-    "schema": { "const": "iat-b3-external-checkpoint-provider-readiness/v1" },
+    "schema": { "const": "iat-b3-external-checkpoint-provider-readiness/v2" },
     "profile": { "enum": ["PRODUCTION", "TEST_FIXTURE"] },
     "readiness": { "enum": ["BLOCKED", "READY_FOR_PROVIDER_REVIEW"] },
     "status": { "const": "NON_ACTIVATING_PROVIDER_READINESS_REVIEW_PACKET" },
@@ -86,8 +86,8 @@
         "artifactSha256",
         "subjectBindingSha256",
         "policySha256",
-        "independentObserverId",
-        "observerIdentitySha256",
+        "automatedEvidenceSourceId",
+        "evidenceSourceIdentitySha256",
         "capturedAtUnixSeconds",
         "validThroughUnixSeconds",
         "environment"
@@ -97,8 +97,8 @@
         "artifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "subjectBindingSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "policySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-        "independentObserverId": { "type": "string", "minLength": 8, "maxLength": 160 },
-        "observerIdentitySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "automatedEvidenceSourceId": { "type": "string", "minLength": 8, "maxLength": 160 },
+        "evidenceSourceIdentitySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "capturedAtUnixSeconds": { "type": "string", "pattern": "^[1-9][0-9]*$" },
         "validThroughUnixSeconds": { "type": "string", "pattern": "^[1-9][0-9]*$" },
         "environment": { "enum": ["PRODUCTION", "TEST_FIXTURE"] }
@@ -242,7 +242,7 @@
             "UNCERTAIN_RESPONSE_RECONCILIATION",
             "CREDENTIAL_ISOLATION",
             "BACKUP_INCIDENT_AND_DR",
-            "INDEPENDENT_AUDIT_AND_REVIEW"
+            "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE"
           ]
         },
         "status": { "$ref": "#/$defs/packetStatus" },

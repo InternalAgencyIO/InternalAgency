@@ -3,8 +3,10 @@
 //! This module composes the isolated standard settlement preflight with up to
 //! three ordered `transfer_checked` CPIs, exact post-CPI Token-2022 reloads,
 //! and one four-state existing-account CAS. Zero transfers are skipped exactly
-//! as retained V2 specifies. It exposes no dispatcher or entrypoint, and host
-//! tests do not attest validator transaction rollback.
+//! as retained V2 specifies. The feature-gated production dispatcher supplies
+//! one authenticated Daily-Law transaction prefix and reuses that AccountInfo
+//! at the executor's frozen hook slot. Host tests do not attest validator
+//! transaction rollback.
 
 extern crate alloc;
 
@@ -58,8 +60,10 @@ const HOOK_VALIDATION_INDEX: usize = 15;
 const LAW_STATE_INDEX: usize = 16;
 
 pub const PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_ACCOUNT_COUNT: usize = 17;
+pub const PRODUCTION_SETTLE_POSITION_STANDARD_DISPATCH_ACCOUNT_COUNT: usize =
+    PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_ACCOUNT_COUNT - 1;
 pub const PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_STATUS: &str =
-    "STANDARD_ORDERED_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_FOUR_STATE_CAS_NO_DISPATCHER_MAINNET_HOLD";
+    "STANDARD_ORDERED_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_FOUR_STATE_CAS_ROUTED_ONE_LAW_PREFIX_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionSettlePositionStandardExecutorTruth {
@@ -69,6 +73,7 @@ pub struct ProductionSettlePositionStandardExecutorTruth {
     pub runtime_daily_law_capability_rebound: bool,
     pub production_active_config_required: bool,
     pub exact_production_program_identity_required: bool,
+    pub program_identity_rejected_before_instruction_or_account_access: bool,
     pub canonical_confidential_hooked_mint_required: bool,
     pub exact_hook_validation_pda_required: bool,
     pub exact_resolved_readonly_law_meta_required: bool,
@@ -77,6 +82,8 @@ pub struct ProductionSettlePositionStandardExecutorTruth {
     pub vault_authority_invoke_signed_used: bool,
     pub retained_v2_post_cpi_reload_order_preserved: bool,
     pub exact_four_state_cas_executed: bool,
+    pub one_daily_law_transaction_prefix_reused: bool,
+    pub same_instruction_transaction_rollback_required_after_cpi: bool,
     pub dispatcher_exposed: bool,
     pub entrypoint_exposed: bool,
     pub handler_complete: bool,
@@ -92,6 +99,7 @@ pub const PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_TRUTH:
     runtime_daily_law_capability_rebound: true,
     production_active_config_required: true,
     exact_production_program_identity_required: true,
+    program_identity_rejected_before_instruction_or_account_access: true,
     canonical_confidential_hooked_mint_required: true,
     exact_hook_validation_pda_required: true,
     exact_resolved_readonly_law_meta_required: true,
@@ -100,9 +108,11 @@ pub const PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_TRUTH:
     vault_authority_invoke_signed_used: true,
     retained_v2_post_cpi_reload_order_preserved: true,
     exact_four_state_cas_executed: true,
-    dispatcher_exposed: false,
-    entrypoint_exposed: false,
-    handler_complete: false,
+    one_daily_law_transaction_prefix_reused: true,
+    same_instruction_transaction_rollback_required_after_cpi: true,
+    dispatcher_exposed: true,
+    entrypoint_exposed: true,
+    handler_complete: true,
     devnet_transaction_rollback_proven: false,
     mainnet_hold: true,
 };
@@ -110,6 +120,7 @@ pub const PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_TRUTH:
 #[derive(Debug, Eq, PartialEq)]
 pub enum ProductionSettlePositionStandardExecutorError {
     AccountCountMismatch,
+    DuplicateDailyLawAccount,
     ProgramIdentityMismatch,
     SupplementalAccountBindingMismatch,
     SupplementalAccountMetaMismatch,
@@ -248,9 +259,9 @@ impl SettleTransferCpi<'_> {
 /// 12 Token-2022 program, 13 ZK ElGamal proof program, 14 transfer-hook program,
 /// 15 transfer-hook validation PDA, 16 Daily-Law state.
 ///
-/// This executor remains undispatched and has no public program entrypoint.
-/// Final-binary adversarial Devnet must still prove validator rollback if a
-/// later CPI, reload, or CAS boundary returns an error.
+/// The feature-gated production dispatcher reaches this executor. Final-binary
+/// adversarial Devnet must still prove validator rollback if a later CPI,
+/// reload, or CAS boundary returns an error.
 #[inline(never)]
 pub fn execute_runtime_production_settle_position_week_standard_account_infos(
     program_id: &Pubkey,
@@ -262,6 +273,9 @@ pub fn execute_runtime_production_settle_position_week_standard_account_infos(
     ProductionSettlePositionStandardExecutionReceipt,
     ProductionSettlePositionStandardExecutorError,
 > {
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionSettlePositionStandardExecutorError::ProgramIdentityMismatch);
+    }
     require_account_count(accounts)?;
 
     // Reuse the frozen standard-only seam verbatim before executor-only
@@ -282,6 +296,49 @@ pub fn execute_runtime_production_settle_position_week_standard_account_infos(
         binding,
         accounts,
         prepared,
+    )
+}
+
+/// Reuse the production entrypoint's single authenticated Daily-Law prefix at
+/// executor slot 16. The transaction supplies exactly operation accounts
+/// 0..15; a second account with the Daily-Law key is rejected before
+/// instruction decoding or operation-account parsing.
+#[inline(never)]
+pub(crate) fn execute_runtime_production_settle_position_week_standard_with_daily_law_prefix_account_infos<
+    'info,
+>(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    instruction_data: &[u8],
+    daily_law_account: &AccountInfo<'info>,
+    operation_accounts: &[AccountInfo<'info>],
+) -> Result<
+    ProductionSettlePositionStandardExecutionReceipt,
+    ProductionSettlePositionStandardExecutorError,
+> {
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionSettlePositionStandardExecutorError::ProgramIdentityMismatch);
+    }
+    if operation_accounts.len() != PRODUCTION_SETTLE_POSITION_STANDARD_DISPATCH_ACCOUNT_COUNT {
+        return Err(ProductionSettlePositionStandardExecutorError::AccountCountMismatch);
+    }
+    if operation_accounts
+        .iter()
+        .any(|account| account.key == daily_law_account.key)
+    {
+        return Err(ProductionSettlePositionStandardExecutorError::DuplicateDailyLawAccount);
+    }
+    let mut executor_accounts =
+        Vec::with_capacity(PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_ACCOUNT_COUNT);
+    executor_accounts.extend(operation_accounts.iter().cloned());
+    executor_accounts.push(daily_law_account.clone());
+    execute_runtime_production_settle_position_week_standard_account_infos(
+        program_id,
+        runtime_law,
+        binding,
+        instruction_data,
+        &executor_accounts,
     )
 }
 
@@ -1390,24 +1447,113 @@ mod tests {
                 self.destination_tokens.data.clone(),
             ]
         }
+
+        fn token_amounts(&mut self) -> [u64; 4] {
+            [
+                token_amount(&self.treasury_tokens.info()),
+                token_amount(&self.ecosystem_tokens.info()),
+                token_amount(&self.liquidity_tokens.info()),
+                token_amount(&self.destination_tokens.info()),
+            ]
+        }
     }
 
     #[test]
-    fn truth_is_standard_only_undispatched_and_mainnet_held() {
+    fn truth_is_standard_only_routed_one_prefix_and_mainnet_held() {
         let truth = core::hint::black_box(PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_TRUTH);
         assert_eq!(
             PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_STATUS,
-            "STANDARD_ORDERED_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_FOUR_STATE_CAS_NO_DISPATCHER_MAINNET_HOLD"
+            "STANDARD_ORDERED_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_FOUR_STATE_CAS_ROUTED_ONE_LAW_PREFIX_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD"
         );
         assert!(truth.exact_seventeen_account_graph_required);
         assert!(truth.standard_round_omission_required);
         assert!(truth.treasury_ecosystem_liquidity_cpi_order_required);
         assert!(truth.zero_amount_cpi_skipped);
-        assert!(!truth.dispatcher_exposed);
-        assert!(!truth.entrypoint_exposed);
-        assert!(!truth.handler_complete);
+        assert!(truth.program_identity_rejected_before_instruction_or_account_access);
+        assert!(truth.one_daily_law_transaction_prefix_reused);
+        assert!(truth.same_instruction_transaction_rollback_required_after_cpi);
+        assert!(truth.dispatcher_exposed);
+        assert!(truth.entrypoint_exposed);
+        assert!(truth.handler_complete);
         assert!(!truth.devnet_transaction_rollback_proven);
         assert!(truth.mainnet_hold);
+    }
+
+    #[test]
+    fn dispatch_adapter_reuses_prefix_at_exact_law_slot_and_rejects_duplicates() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let program_id = Pubkey::new_from_array(ECONOMY_PROGRAM);
+        let mut fixture = Fixture::new(&binding);
+        let instruction = fixture.instruction();
+        let before = fixture.all_snapshot();
+        let result = fixture.with_infos(|accounts| {
+            execute_runtime_production_settle_position_week_standard_with_daily_law_prefix_account_infos(
+                &program_id,
+                &runtime_law,
+                &binding,
+                &instruction,
+                &accounts[LAW_STATE_INDEX],
+                &accounts[..LAW_STATE_INDEX],
+            )
+        });
+        assert_eq!(
+            result,
+            Err(ProductionSettlePositionStandardExecutorError::Settle(
+                ProductionSettlePositionError::TokenReloadAmountMismatch
+            ))
+        );
+        assert_eq!(fixture.all_snapshot(), before);
+
+        let mut fixture = Fixture::new(&binding);
+        fixture.with_infos(|accounts| {
+            let law_account = accounts[LAW_STATE_INDEX].clone();
+            let mut operation_accounts = accounts[..LAW_STATE_INDEX].to_vec();
+            operation_accounts[0] = law_account.clone();
+            assert_eq!(
+                execute_runtime_production_settle_position_week_standard_with_daily_law_prefix_account_infos(
+                    &program_id,
+                    &runtime_law,
+                    &binding,
+                    &[0xFF],
+                    &law_account,
+                    &operation_accounts,
+                ),
+                Err(ProductionSettlePositionStandardExecutorError::DuplicateDailyLawAccount)
+            );
+        });
+    }
+
+    #[test]
+    fn production_identity_precedes_instruction_and_account_access() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let wrong_program = Pubkey::new_from_array([0x99; 32]);
+        assert_eq!(
+            execute_runtime_production_settle_position_week_standard_account_infos(
+                &wrong_program,
+                &runtime_law,
+                &binding,
+                &[0xFF],
+                &[],
+            ),
+            Err(ProductionSettlePositionStandardExecutorError::ProgramIdentityMismatch)
+        );
+
+        let mut fixture = Fixture::new(&binding);
+        fixture.with_infos(|accounts| {
+            assert_eq!(
+                execute_runtime_production_settle_position_week_standard_with_daily_law_prefix_account_infos(
+                    &wrong_program,
+                    &runtime_law,
+                    &binding,
+                    &[0xFF],
+                    &accounts[LAW_STATE_INDEX],
+                    &[],
+                ),
+                Err(ProductionSettlePositionStandardExecutorError::ProgramIdentityMismatch)
+            );
+        });
     }
 
     #[test]
@@ -1645,6 +1791,7 @@ mod tests {
         let mut fixture = Fixture::new(&binding);
         let instruction = fixture.instruction();
         let state_before = fixture.state_snapshot();
+        let tokens_before = fixture.token_amounts();
         let result = fixture.with_infos(|accounts| {
             let position_info = accounts[POSITION_INDEX].clone();
             let mut held_position_borrow = None;
@@ -1672,6 +1819,16 @@ mod tests {
             ))
         );
         assert_eq!(fixture.state_snapshot(), state_before);
+        let tokens_after = fixture.token_amounts();
+        assert_eq!(tokens_after, [4_000, 7_000, 9_000, 10_100]);
+        assert_ne!(tokens_after, tokens_before);
+        assert!(
+            PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_TRUTH
+                .same_instruction_transaction_rollback_required_after_cpi
+        );
+        assert!(
+            !PRODUCTION_SETTLE_POSITION_STANDARD_EXECUTOR_TRUTH.devnet_transaction_rollback_proven
+        );
     }
 
     #[test]

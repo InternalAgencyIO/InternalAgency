@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { readFileSync } from "node:fs";
-import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const canonicalManifestPath = "launch/genesis-manifest.template.json";
 const canonicalPayloadPath = "launch/PUBLICATION_PAYLOAD.template.md";
@@ -142,13 +141,7 @@ const isNonFutureUtcMinute = (value) => {
   if (!isUtcMinute(value)) return false;
   return Date.parse(value.replace(" ", "T").replace(" UTC", ":00Z")) <= Date.now();
 };
-const isVerifierLabel = (value) => typeof value === "string"
-  && value === value.trim()
-  && value.length >= 3
-  && !/\p{C}/u.test(value)
-  && normalizeAccountabilityLabel(value).length >= 3
-  && !/^(pending|tbd|unknown|n\/a|none|unverified)$/i.test(value)
-  && !/[\[\]]/.test(value);
+const isSha256 = (value) => typeof value === "string" && /^[0-9a-f]{64}$/u.test(value);
 
 const manifestIsHold = manifest.status === "HOLD";
 const payloadStatus = valueFor("Status");
@@ -185,7 +178,7 @@ if (manifestIsHold) {
   // hide behind the template's first matching line.
   const holdOnlyPlaceholderLabels = [
     "Mint", "Explorer", "Mint authority evidence", "Freeze authority evidence",
-    "Allocation and lock evidence", "Checked at (UTC)", "Verified by",
+    "Allocation and lock evidence", "Checked at (UTC)", "Evidence packet SHA-256",
   ];
   for (const label of holdOnlyPlaceholderLabels) {
     if (occurrencesFor(label) !== 1 || !hasPlaceholder(valueFor(label))) {
@@ -204,7 +197,8 @@ if (manifestIsHold) {
   const releaseAssertionLabels = [
     "Network", "Mint", "Explorer", "Program", "Decimals", "Fixed supply", "Base units",
     "Mint authority", "Mint authority evidence", "Freeze authority", "Freeze authority evidence",
-    "Allocation and lock evidence", "Checked at (UTC)", "Verified by",
+    "Allocation and lock evidence", "Checked at (UTC)", "Evidence packet SHA-256",
+    "Evidence observation mode", "No self-attestation", "Human reviewer required",
   ];
   for (const label of releaseAssertionLabels) {
     if (occurrencesFor(label) !== 1) {
@@ -220,10 +214,14 @@ if (manifestIsHold) {
   } else {
     ok("verified publication payload has a canonical review timestamp");
   }
-  if (!isVerifierLabel(valueFor("Verified by"))) {
-    fail("verified publication payload requires a non-placeholder accountable Verified by label");
+  if (!isSha256(valueFor("Evidence packet SHA-256"))) {
+    fail("verified publication payload requires an exact lowercase evidence-packet SHA-256");
+  } else if (valueFor("Evidence observation mode") !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+    || valueFor("No self-attestation") !== "true"
+    || valueFor("Human reviewer required") !== "false") {
+    fail("verified publication payload must require automated source/receipt/state evidence with no self-attestation or human-review prerequisite");
   } else {
-    ok("verified publication payload has an accountable verifier label");
+    ok("verified publication payload binds automated source/receipt/state evidence");
   }
   // The machine-readable manifest and public payload deliberately use their
   // own canonical network spellings. Keep that mapping explicit so a valid

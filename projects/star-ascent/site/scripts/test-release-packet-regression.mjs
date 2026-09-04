@@ -135,9 +135,9 @@ try {
     "releaseControls.stopOnAnyMismatch must be true",
   );
   assertRejected(
-    "a HOLD packet that permits publication before independent evidence",
-    (fixture) => { fixture.releaseControls.noPublicationBeforeIndependentEvidence = false; },
-    "releaseControls.noPublicationBeforeIndependentEvidence must be true",
+    "a HOLD packet that permits publication before automated evidence",
+    (fixture) => { fixture.releaseControls.noPublicationBeforeAutomatedEvidence = false; },
+    "releaseControls.noPublicationBeforeAutomatedEvidence must be true",
   );
   assertRejected(
     "a non-canonical manifest source path",
@@ -145,40 +145,23 @@ try {
     "manifestPath must point to the canonical artifact",
   );
   assertRejected(
-    "a mnemonic-shaped correction owner label",
-    (fixture) => { fixture.releaseControls.correctionOwnerLabel = "amber bridge candle drift ember forest galaxy harbor island jungle kindle lantern"; },
-    "credential-bearing value at packet.releaseControls.correctionOwnerLabel",
+    "an injected human reviewer field",
+    (fixture) => { fixture.automatedClosure.humanReviewerLabel = "injected"; },
+    "release packet automatedClosure must contain only its exact canonical reviewed fields",
   );
-  for (const [index, path] of [
-    "releaseControls.correctionOwnerLabel",
-    "approval.releaseOwnerLabel",
-    "approval.independentVerifierLabel",
-  ].entries()) {
-    assertRejected(
-      `64-byte Base58 credential-shaped material at ${path}`,
-      (fixture) => {
-        const [section, field] = path.split(".");
-        fixture[section][field] = signature(index + 9);
-      },
-      `credential-bearing value at packet.${path}`,
-    );
-  }
   assertRejected(
     "an unreviewed extra packet assertion",
     (fixture) => { fixture.emergencyOverride = "not allowed"; },
     "release packet must contain only its exact canonical reviewed fields",
   );
-  // HOLD is a complete reset. Exercise every approval, review, and digest
+  // HOLD is a complete reset. Exercise every observation, closure, and digest
   // field so a future schema change cannot let a stale release decision look
   // usable after the packet returns to its stop state.
   for (const [path, staleValue, expectedMessage] of [
-    ["releaseControls.allOperatorsReviewedSameArtifactVersions", true, "HOLD requires releaseControls.allOperatorsReviewedSameArtifactVersions to be false so no prior approval can survive a reset"],
-    ["releaseControls.publicEvidenceCheckedAtUtc", "2026-07-28T18:00:00.000Z", "HOLD requires releaseControls.publicEvidenceCheckedAtUtc to be null so no prior approval can survive a reset"],
-    ["releaseControls.correctionOwnerLabel", "Previous correction owner", "HOLD requires releaseControls.correctionOwnerLabel to be null so no prior approval can survive a reset"],
-    ["approval.releaseOwnerLabel", "Previous release owner", "HOLD requires approval.releaseOwnerLabel to be null so no prior approval can survive a reset"],
-    ["approval.independentVerifierLabel", "Previous independent verifier", "HOLD requires approval.independentVerifierLabel to be null so no prior approval can survive a reset"],
-    ["approval.packetDigest", "a".repeat(64), "HOLD requires approval.packetDigest to be null so no prior approval can survive a reset"],
-    ["approval.approvedAtUtc", "2026-07-28T18:00:00.000Z", "HOLD requires approval.approvedAtUtc to be null so no prior approval can survive a reset"],
+    ["releaseControls.allArtifactVersionsObservedSame", true, "HOLD requires releaseControls.allArtifactVersionsObservedSame to be false so no prior closure can survive a reset"],
+    ["releaseControls.publicEvidenceObservedAtUtc", "2026-07-28T18:00:00.000Z", "HOLD requires releaseControls.publicEvidenceObservedAtUtc to be null so no prior closure can survive a reset"],
+    ["automatedClosure.packetDigest", "a".repeat(64), "HOLD requires automatedClosure.packetDigest to be null so no prior closure can survive a reset"],
+    ["automatedClosure.observedAtUtc", "2026-07-28T18:00:00.000Z", "HOLD requires automatedClosure.observedAtUtc to be null so no prior closure can survive a reset"],
   ]) {
     assertRejected(
       `a HOLD packet retaining stale ${path}`,
@@ -193,7 +176,7 @@ try {
     assertRejected(
       `a HOLD packet retaining stale artifactDigests.${field}`,
       (fixture) => { fixture.artifactDigests[field] = "a".repeat(64); },
-      `HOLD requires artifactDigests.${field} to be null so no prior approval digest can survive a reset`,
+      `HOLD requires artifactDigests.${field} to be null so no prior closure digest can survive a reset`,
     );
   }
 
@@ -254,10 +237,7 @@ try {
   const metadata = JSON.parse(readFileSync(metadataPath, "utf8"));
   metadata.status = "READY";
   metadata.metadataJsonSha256 = sha256File(join(sandboxRoot, "public", "metadata", "iat.json"));
-  metadata.review = {
-    reviewedBy: "Metadata reviewer",
-    reviewedAtUtc: new Date(Date.now() - (7 * 60 * 1000)).toISOString(),
-  };
+  metadata.automatedObservation.observedAtUtc = new Date(Date.now() - (7 * 60 * 1000)).toISOString();
   writeFileSync(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`, "utf8");
 
   const lockPlan = JSON.parse(readFileSync(lockPlanPath, "utf8"));
@@ -280,14 +260,14 @@ try {
     allocation.scheduleEvidence = `https://internalagency.io/token-locks/${name}.json`;
     lockOwners[name] = allocation.ownerAddress;
   }
-  lockPlan.independentReview = {
-    reviewedBy: "Independent lock reviewer",
-    reviewedAtUtc: new Date(Date.now() - (6 * 60 * 1000)).toISOString(),
+  lockPlan.automatedObservation = {
+    ...lockPlan.automatedObservation,
     planSha256: sha256Text(JSON.stringify({
       version: lockPlan.version,
       network: lockPlan.network,
       allocations: lockPlan.allocations,
     })),
+    observedAtUtc: new Date(Date.now() - (6 * 60 * 1000)).toISOString(),
   };
   writeFileSync(lockPlanPath, `${JSON.stringify(lockPlan, null, 2)}\n`, "utf8");
 
@@ -296,17 +276,12 @@ try {
   const signerAddress = address(1);
   checklist.participants.mintAuthoritySigner.publicAddress = signerAddress;
   checklist.participants.feePayerSigner.publicAddress = signerAddress;
-  checklist.participants.independentVerifier.publicAddress = address(2);
-  checklist.participants.publicationOperator.publicAddress = address(3);
   checklist.participants.mintAuthoritySigner.devicePathReviewed = true;
   checklist.participants.feePayerSigner.devicePathReviewed = true;
-  checklist.participants.independentVerifier.reviewedManifest = true;
-  checklist.participants.independentVerifier.reviewedDestinations = true;
-  checklist.participants.publicationOperator.reviewedHoldControls = true;
   Object.assign(checklist.ceremonyControls, {
     recipientAddressesCheckedAgainstManifest: true,
     signerAddressesCheckedAgainstManifest: true,
-    holdOwnerConfirmed: true,
+    mainnetHoldObserved: true,
     manifestSha256: sha256File(manifestPath),
     readyAtUtc: new Date(Date.now() - (4 * 60 * 1000)).toISOString(),
   });
@@ -350,7 +325,7 @@ try {
     mintEvidence: devnetAddressUrl(mint.toBase58()),
     metadataEvidence: devnetAddressUrl(metadataAddress.toBase58()),
   });
-  const allocationReview = {};
+  const allocationObservation = {};
   for (const [index, name] of Object.keys(rehearsal.allocations).entries()) {
     const owner = Keypair.fromSeed(new Uint8Array(32).fill(index + 81)).publicKey;
     const tokenAccount = getAssociatedTokenAddressSync(mint, owner, true, TOKEN_PROGRAM_ID);
@@ -359,7 +334,7 @@ try {
       tokenAccount: tokenAccount.toBase58(),
       evidence: devnetAddressUrl(tokenAccount.toBase58()),
     });
-    allocationReview[name] = {
+    allocationObservation[name] = {
       ownerAddress: owner.toBase58(),
       tokenAccount: tokenAccount.toBase58(),
       baseUnitAmount: rehearsal.allocations[name].baseUnitAmount,
@@ -379,17 +354,15 @@ try {
     confirmedTransactionEvidence: transactionEvidence,
     confirmedPlanSha256: rehearsal.mainnetPlan.planSha256,
   });
-  Object.assign(rehearsal.verifier, {
-    reviewedBy: "Devnet verifier",
-    independentOfDeviceOperator: true,
-    reviewedDevice: { model: rehearsal.device.model, firmwareVersion: rehearsal.device.firmwareVersion, suiteOrWalletInterface: rehearsal.device.suiteOrWalletInterface },
-    reviewedMint: rehearsal.token.mint,
-    reviewedMetadataAddress: rehearsal.token.metadataAddress,
-    reviewedAllocations: allocationReview,
-    reviewedActions: actions,
-    reviewedTransactionEvidence: transactionEvidence,
-    reviewedPlanSha256: rehearsal.mainnetPlan.planSha256,
-    completedAtUtc: new Date(Date.now() - (2 * 60 * 1000)).toISOString(),
+  Object.assign(rehearsal.automatedObservation, {
+    observedDevice: { model: rehearsal.device.model, firmwareVersion: rehearsal.device.firmwareVersion, suiteOrWalletInterface: rehearsal.device.suiteOrWalletInterface },
+    observedMint: rehearsal.token.mint,
+    observedMetadataAddress: rehearsal.token.metadataAddress,
+    observedAllocations: allocationObservation,
+    observedActions: actions,
+    observedTransactionEvidence: transactionEvidence,
+    observedPlanSha256: rehearsal.mainnetPlan.planSha256,
+    observedAtUtc: new Date(Date.now() - (2 * 60 * 1000)).toISOString(),
   });
   writeFileSync(rehearsalPath, `${JSON.stringify(rehearsal, null, 2)}\n`, "utf8");
 
@@ -405,44 +378,38 @@ try {
   // Use the recorded snapshot time, rather than wall-clock offsets, so this
   // causal fixture remains valid even on a slow CI worker.
   const snapshotMs = Date.parse(snapshot.generatedAtUtc);
-  const evidenceCheckedAtUtc = new Date(snapshotMs + 1000).toISOString();
-  Object.assign(handoff, { status: "APPROVED" });
-  Object.assign(handoff.approval, {
-    releaseOwnerLabel: "Release owner",
-    independentVerifierLabel: "Handoff verifier",
+  const evidenceObservedAtUtc = new Date(snapshotMs + 1000).toISOString();
+  Object.assign(handoff, { status: "READY" });
+  Object.assign(handoff.automatedClosure, {
     manifestDigest: handoffArtifactDigests.manifestSha256,
-    destinationDigest: sha256Text(JSON.stringify({ handoffVersion: 1, network: handoff.network, artifactDigests: handoffArtifactDigests })),
+    destinationDigest: sha256Text(JSON.stringify({ handoffVersion: 2, network: handoff.network, artifactDigests: handoffArtifactDigests })),
     releaseSnapshotDigest: digestRecord(snapshot.preApprovalArtifacts),
     ...handoffArtifactDigests,
-    approvedAtUtc: new Date(snapshotMs).toISOString(),
+    observedAtUtc: new Date(snapshotMs).toISOString(),
   });
-  handoff.holdControls.correctionOwnerLabel = "Correction owner";
   writeFileSync(handoffPath, `${JSON.stringify(handoff, null, 2)}\n`, "utf8");
 
   const simultaneousApprovalResult = runHandoffValidator();
   const simultaneousApprovalOutput = `${simultaneousApprovalResult.stdout}\n${simultaneousApprovalResult.stderr}`;
   if (simultaneousApprovalResult.error || simultaneousApprovalResult.status === 0) {
-    fail("mainnet handoff validator accepted approval simultaneous with its frozen snapshot");
-  } else if (!simultaneousApprovalOutput.includes("approval.approvedAtUtc must be after the frozen approval snapshot")) {
-    fail("mainnet handoff validator did not report approval simultaneous with its frozen snapshot");
+    fail("mainnet handoff validator accepted observation simultaneous with its frozen snapshot");
+  } else if (!simultaneousApprovalOutput.includes("automatedClosure.observedAtUtc must be after the frozen automated-closure snapshot")) {
+    fail("mainnet handoff validator did not report observation simultaneous with its frozen snapshot");
   } else {
-    console.log("OK: mainnet handoff validator rejects approval simultaneous with its frozen snapshot");
+    console.log("OK: mainnet handoff validator rejects observation simultaneous with its frozen snapshot");
   }
 
-  handoff.approval.approvedAtUtc = new Date(snapshotMs + 2000).toISOString();
+  handoff.automatedClosure.observedAtUtc = new Date(snapshotMs + 2000).toISOString();
   writeFileSync(handoffPath, `${JSON.stringify(handoff, null, 2)}\n`, "utf8");
 
   const readyPacket = JSON.parse(JSON.stringify(canonicalPacket));
   readyPacket.status = "READY";
   Object.assign(readyPacket.releaseControls, {
-    allOperatorsReviewedSameArtifactVersions: true,
-    publicEvidenceCheckedAtUtc: evidenceCheckedAtUtc,
-    correctionOwnerLabel: handoff.holdControls.correctionOwnerLabel,
+    allArtifactVersionsObservedSame: true,
+    publicEvidenceObservedAtUtc: evidenceObservedAtUtc,
   });
-  Object.assign(readyPacket.approval, {
-    releaseOwnerLabel: handoff.approval.releaseOwnerLabel,
-    independentVerifierLabel: handoff.approval.independentVerifierLabel,
-    approvedAtUtc: new Date(snapshotMs + 3000).toISOString(),
+  Object.assign(readyPacket.automatedClosure, {
+    observedAtUtc: new Date(snapshotMs + 3000).toISOString(),
   });
   Object.assign(readyPacket.artifactDigests, {
     manifestSha256: sha256File(manifestPath),
@@ -451,7 +418,7 @@ try {
     devnetRehearsalSha256: sha256File(rehearsalPath),
     mainnetHandoffSha256: sha256File(handoffPath),
   });
-  readyPacket.approval.packetDigest = sha256Text(JSON.stringify({ packetVersion: 1, artifactDigests: readyPacket.artifactDigests }));
+  readyPacket.automatedClosure.packetDigest = sha256Text(JSON.stringify({ packetVersion: 1, artifactDigests: readyPacket.artifactDigests }));
   writePacket(readyPacket);
   const readyResult = runValidator();
   if (readyResult.error || readyResult.status !== 0) fail(`release packet validator rejected a coherent READY ceremony: ${readyResult.stdout}\n${readyResult.stderr}`);
@@ -472,67 +439,67 @@ try {
     console.log("OK: coherent READY ceremony produces a valid pre-publication packet proof");
   }
 
-  // The final release approval must be a distinct recorded decision after
-  // the approved handoff; equal timestamps cannot establish that sequence.
-  readyPacket.approval.approvedAtUtc = handoff.approval.approvedAtUtc;
+  // The final release observation must be a distinct recorded decision after
+  // the observed handoff; equal timestamps cannot establish that sequence.
+  readyPacket.automatedClosure.observedAtUtc = handoff.automatedClosure.observedAtUtc;
   writePacket(readyPacket);
   const simultaneousPacketAndHandoffResult = runValidator();
   const simultaneousPacketAndHandoffOutput = `${simultaneousPacketAndHandoffResult.stdout}\n${simultaneousPacketAndHandoffResult.stderr}`;
   if (simultaneousPacketAndHandoffResult.error || simultaneousPacketAndHandoffResult.status === 0) {
-    fail("release packet validator accepted approval simultaneous with its approved handoff");
-  } else if (!simultaneousPacketAndHandoffOutput.includes("READY requires packet approval.approvedAtUtc to be strictly after the approved handoff")) {
-    fail("release packet validator did not report approval simultaneous with its approved handoff");
+    fail("release packet validator accepted observation simultaneous with its observed handoff");
+  } else if (!simultaneousPacketAndHandoffOutput.includes("READY requires packet automatedClosure.observedAtUtc to be strictly after the observed handoff")) {
+    fail("release packet validator did not report observation simultaneous with its observed handoff");
   } else {
-    console.log("OK: release packet validator rejects approval simultaneous with its approved handoff");
+    console.log("OK: release packet validator rejects observation simultaneous with its observed handoff");
   }
-  readyPacket.approval.approvedAtUtc = new Date(snapshotMs + 3000).toISOString();
+  readyPacket.automatedClosure.observedAtUtc = new Date(snapshotMs + 3000).toISOString();
   writePacket(readyPacket);
 
-  // Public evidence review and the independent handoff must be two distinct
+  // Public evidence observation and the automated handoff must be two distinct
   // recorded events. A shared timestamp cannot prove that the handoff saw the
   // evidence check, even when every artifact digest still matches.
-  handoff.approval.approvedAtUtc = evidenceCheckedAtUtc;
+  handoff.automatedClosure.observedAtUtc = evidenceObservedAtUtc;
   writeFileSync(handoffPath, `${JSON.stringify(handoff, null, 2)}\n`, "utf8");
   readyPacket.artifactDigests.mainnetHandoffSha256 = sha256File(handoffPath);
-  readyPacket.approval.packetDigest = sha256Text(JSON.stringify({ packetVersion: 1, artifactDigests: readyPacket.artifactDigests }));
+  readyPacket.automatedClosure.packetDigest = sha256Text(JSON.stringify({ packetVersion: 1, artifactDigests: readyPacket.artifactDigests }));
   writePacket(readyPacket);
   const simultaneousEvidenceAndHandoffResult = runValidator();
   const simultaneousEvidenceAndHandoffOutput = `${simultaneousEvidenceAndHandoffResult.stdout}\n${simultaneousEvidenceAndHandoffResult.stderr}`;
   if (simultaneousEvidenceAndHandoffResult.error || simultaneousEvidenceAndHandoffResult.status === 0) {
     fail("release packet validator accepted a handoff simultaneous with its public evidence check");
-  } else if (!simultaneousEvidenceAndHandoffOutput.includes("READY requires handoff approval.approvedAtUtc to be strictly after the public evidence check")) {
+  } else if (!simultaneousEvidenceAndHandoffOutput.includes("READY requires handoff automatedClosure.observedAtUtc to be strictly after the public evidence check")) {
     fail("release packet validator did not report a handoff simultaneous with its public evidence check");
   } else {
     console.log("OK: release packet validator rejects a handoff simultaneous with its public evidence check");
   }
 
-  handoff.approval.approvedAtUtc = new Date(snapshotMs + 2000).toISOString();
+  handoff.automatedClosure.observedAtUtc = new Date(snapshotMs + 2000).toISOString();
   writeFileSync(handoffPath, `${JSON.stringify(handoff, null, 2)}\n`, "utf8");
   readyPacket.artifactDigests.mainnetHandoffSha256 = sha256File(handoffPath);
-  readyPacket.approval.packetDigest = sha256Text(JSON.stringify({ packetVersion: 1, artifactDigests: readyPacket.artifactDigests }));
+  readyPacket.automatedClosure.packetDigest = sha256Text(JSON.stringify({ packetVersion: 1, artifactDigests: readyPacket.artifactDigests }));
   writePacket(readyPacket);
 
-  // Evidence review must happen after the immutable snapshot is created. A
-  // shared timestamp cannot establish that the reviewer saw the frozen packet.
-  readyPacket.releaseControls.publicEvidenceCheckedAtUtc = snapshot.generatedAtUtc;
+  // Evidence observation must happen after the immutable snapshot is created. A
+  // shared timestamp cannot establish that automation observed the frozen packet.
+  readyPacket.releaseControls.publicEvidenceObservedAtUtc = snapshot.generatedAtUtc;
   writePacket(readyPacket);
   const simultaneousEvidenceAndSnapshotResult = runValidator();
   const simultaneousEvidenceAndSnapshotOutput = `${simultaneousEvidenceAndSnapshotResult.stdout}\n${simultaneousEvidenceAndSnapshotResult.stderr}`;
   if (simultaneousEvidenceAndSnapshotResult.error || simultaneousEvidenceAndSnapshotResult.status === 0) {
     fail("release packet validator accepted public evidence simultaneous with the frozen snapshot");
-  } else if (!simultaneousEvidenceAndSnapshotOutput.includes("READY requires publicEvidenceCheckedAtUtc to be strictly after the frozen release snapshot")) {
+  } else if (!simultaneousEvidenceAndSnapshotOutput.includes("READY requires publicEvidenceObservedAtUtc to be strictly after the frozen release snapshot")) {
     fail("release packet validator did not report public evidence simultaneous with the frozen snapshot");
   } else {
     console.log("OK: release packet validator rejects public evidence simultaneous with the frozen snapshot");
   }
 
-  readyPacket.releaseControls.publicEvidenceCheckedAtUtc = new Date(Date.parse(snapshot.generatedAtUtc) - 1000).toISOString();
+  readyPacket.releaseControls.publicEvidenceObservedAtUtc = new Date(Date.parse(snapshot.generatedAtUtc) - 1000).toISOString();
   writePacket(readyPacket);
   const staleEvidenceResult = runValidator();
   const staleEvidenceOutput = `${staleEvidenceResult.stdout}\n${staleEvidenceResult.stderr}`;
   if (staleEvidenceResult.error || staleEvidenceResult.status === 0) {
     fail("release packet validator accepted public evidence checked before the frozen snapshot");
-  } else if (!staleEvidenceOutput.includes("READY requires publicEvidenceCheckedAtUtc to be strictly after the frozen release snapshot")) {
+  } else if (!staleEvidenceOutput.includes("READY requires publicEvidenceObservedAtUtc to be strictly after the frozen release snapshot")) {
     fail("release packet validator did not report public evidence checked before the frozen snapshot");
   } else {
     console.log("OK: release packet validator rejects public evidence checked before the frozen snapshot");

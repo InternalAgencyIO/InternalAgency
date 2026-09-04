@@ -26,9 +26,19 @@ check(
   exactKeys(gate.schedule?.priorWindow, ["scheduledAtUtc", "state"]),
   "prior window must contain only its canonical time and terminal state",
 );
-check(gate.schedule?.state === "UNSCHEDULED_HOLD", "schedule must remain UNSCHEDULED_HOLD");
-check(gate.schedule?.publishedAtUtc === null, "replacement UTC window must not be populated before publication");
-check(gate.schedule?.scheduledAtUtc === null, "replacement UTC ceremony time must not be populated before scheduling");
+check(["UNSCHEDULED_HOLD", "SCHEDULED_HOLD"].includes(gate.schedule?.state), "schedule must be UNSCHEDULED_HOLD or SCHEDULED_HOLD");
+const canonicalUtc = (value) => typeof value === "string"
+  && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(value)
+  && Number.isFinite(Date.parse(value));
+if (gate.schedule?.state === "UNSCHEDULED_HOLD") {
+  check(gate.schedule?.publishedAtUtc === null, "UNSCHEDULED_HOLD requires a null publication time");
+  check(gate.schedule?.scheduledAtUtc === null, "UNSCHEDULED_HOLD requires a null ceremony time");
+} else {
+  check(canonicalUtc(gate.schedule?.publishedAtUtc), "SCHEDULED_HOLD requires a canonical UTC publication time");
+  check(canonicalUtc(gate.schedule?.scheduledAtUtc), "SCHEDULED_HOLD requires a canonical UTC ceremony time");
+  check(Date.parse(gate.schedule?.publishedAtUtc) <= Date.now() + 60_000, "schedule publication time cannot be in the future");
+  check(Date.parse(gate.schedule?.scheduledAtUtc) > Date.parse(gate.schedule?.publishedAtUtc), "ceremony time must be later than publication time");
+}
 check(
   gate.schedule?.priorWindow?.state === "EXPIRED_SUPERSEDED_DO_NOT_USE",
   "prior window must be explicitly expired and non-actionable",
@@ -60,10 +70,26 @@ check(
   gate.gates?.mainnetFundingFloorSatisfied === gate.funding?.ceremonyFloorSatisfied,
   "mainnet funding gate must match the finalized read-only balance observation",
 );
-check(
-  gate.gates?.physicalModelTDevicePathReviewed === false,
-  "recorded readiness state must retain the attended Model T device-path blocker",
-);
+check(Object.values(gate.gates ?? {}).every((value) => typeof value === "boolean"), "every readiness gate must be Boolean");
+check(gate.gates?.replacementUtcWindowPublished === (gate.schedule?.state === "SCHEDULED_HOLD"), "replacement-window gate must match the schedule state");
+if (gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling) {
+  check(gate.gates?.mainnetFundingFloorSatisfied === true && gate.gates?.replacementUtcWindowPublished === true, "artifact regeneration requires funding and scheduling first");
+}
+if (gate.gates?.automatedSourceReceiptStateObservationComplete) {
+  check(gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true, "automated observation requires regenerated artifacts");
+}
+if (gate.gates?.physicalModelTReviewCompleted) {
+  check(gate.gates?.physicalModelTDevicePathReviewed === true, "completed Model T review requires the attended device path");
+}
+if (gate.gates?.finalPreflightPassedAgainstRegeneratedArtifacts) {
+  check(gate.gates?.releaseArtifactsRegeneratedAfterFundingAndScheduling === true
+    && gate.gates?.automatedSourceReceiptStateObservationComplete === true
+    && gate.gates?.physicalModelTDevicePathReviewed === true, "final preflight requires regenerated artifacts, automated observation, and device-path review");
+}
+if (gate.gates?.mainnetExecutionAuthorized) {
+  check(gate.gates?.finalPreflightPassedAgainstRegeneratedArtifacts === true
+    && gate.gates?.physicalModelTReviewCompleted === true, "Mainnet execution authorization requires final preflight and completed Model T review");
+}
 
 const proofPath = path.resolve(siteRoot, gate.timeGateEvidence?.path ?? "");
 check(proofPath.startsWith(`${siteRoot}${path.sep}`), "time-gate evidence path escapes site root");
@@ -79,12 +105,6 @@ check(
   "local time-gate limitations changed",
 );
 
-for (const [name, value] of Object.entries(gate.gates ?? {})) {
-  if (name === "mainnetFundingFloorSatisfied") continue;
-  if (name.endsWith("Satisfied") || name.endsWith("Published") || name.endsWith("RegeneratedAfterFundingAndScheduling") || name.endsWith("PassedAgainstRegeneratedArtifacts") || name.endsWith("Completed") || name.endsWith("Assigned") || name.endsWith("Authorized")) {
-    check(value === false, `pending mainnet gate became true without a new readiness record: ${name}`);
-  }
-}
 for (const [name, value] of Object.entries(gate.safety ?? {})) {
   if (name === "authorizesTransaction") check(value === false, "readiness file cannot authorize a transaction");
   else check(value === false, `unsafe action recorded in readiness gate: ${name}`);
@@ -95,9 +115,9 @@ const expectedOrder = [
   "RECORD_FRESH_READ_ONLY_BALANCE_OBSERVATION",
   "PUBLISH_ONE_NEW_EXACT_UTC_WINDOW",
   "REGENERATE_ALL_BOUND_RELEASE_ARTIFACTS",
-  "RUN_COMPLETE_PREFLIGHT_AND_INDEPENDENT_REVIEW",
-  "CONDUCT_HUMAN_CONTROLLED_HARDWARE_CEREMONY",
-  "BROADCAST_ONLY_AFTER_SEPARATE_EXPLICIT_APPROVAL",
+  "RUN_COMPLETE_PREFLIGHT_AND_AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+  "CONDUCT_MODEL_T_PHYSICAL_CONFIRMATION_FOR_EACH_SIGNATURE",
+  "BROADCAST_ONLY_AFTER_EXACT_SIGNED_MESSAGE_AND_PREFLIGHT_MATCH",
   "RECONCILE_CONFIRMED_CHAIN_STATE_BEFORE_PUBLICATION",
 ];
 check(JSON.stringify(gate.requiredOrder) === JSON.stringify(expectedOrder), "required launch order drift");

@@ -49,6 +49,50 @@ const economyProductionSetEligibilitySource = readFileSync(
   new URL("programs/iat_b3_economy/src/production_set_eligibility.rs", siteRoot),
   "utf8",
 );
+const economyProductionInstructionSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_instruction.rs", siteRoot),
+  "utf8",
+);
+const economyProductionDispatchSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_dispatch.rs", siteRoot),
+  "utf8",
+);
+const economyProductionEntrypointSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_entrypoint.rs", siteRoot),
+  "utf8",
+);
+const economyProductionInitializationHoldSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_initialization_policy_hold.rs", siteRoot),
+  "utf8",
+);
+const economyProductionOpenPositionExecutorSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_open_position_executor.rs", siteRoot),
+  "utf8",
+);
+const economyProductionSettlePositionExecutorSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_settle_position_week_executor.rs", siteRoot),
+  "utf8",
+);
+const economyProductionSettleCoreHoldSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_settle_position_week.rs", siteRoot),
+  "utf8",
+);
+const economyProductionClaimLaneExecutorSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_claim_lane_principal_executor.rs", siteRoot),
+  "utf8",
+);
+const economyProductionWithdrawExecutorSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_withdraw_position_executor.rs", siteRoot),
+  "utf8",
+);
+const economyProductionClosePositionSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_close_position.rs", siteRoot),
+  "utf8",
+);
+const economyProductionRoundDisabledSource = readFileSync(
+  new URL("programs/iat_b3_economy/src/production_round_disabled.rs", siteRoot),
+  "utf8",
+);
 const economyRehearsalAdapterSource = readFileSync(
   new URL("programs/iat_b3_economy/src/rehearsal_adapter.rs", siteRoot),
   "utf8",
@@ -109,8 +153,15 @@ const economyPureKernelCode = `${economyCodecSource}\n${economyStakeIngressSourc
   .replace(/\/\*[\s\S]*?\*\//gu, "");
 const workspaceManifest = readFileSync(new URL("Cargo.toml", siteRoot), "utf8");
 
-const sourceHandlers = [...v2Source.matchAll(/^    pub fn ([a-z0-9_]+)\(/gmu)].map(
+const allV2SourceHandlers = [...v2Source.matchAll(/^    pub fn ([a-z0-9_]+)\(/gmu)].map(
   (match) => match[1],
+);
+const MIGRATION_ONLY_V2_HANDLERS = Object.freeze([
+  "backfill_historical_neutral_round",
+  "migrate_legacy_round",
+]);
+const sourceHandlers = allV2SourceHandlers.filter(
+  (handler) => !MIGRATION_ONLY_V2_HANDLERS.includes(handler),
 );
 
 const TOKEN_TRANSFER_HANDLERS = Object.freeze([
@@ -160,12 +211,166 @@ function functionBody(source, name) {
 test("the B3 port matrix covers the exact retained V2 public write inventory", () => {
   assert.equal(matrix.schema, "iat-b3-economic-write-gate-matrix/v1");
   assert.equal(matrix.expectedHandlerCount, 15);
+  assert.equal(MIGRATION_ONLY_V2_HANDLERS.length, 2);
+  assert.deepEqual(
+    allV2SourceHandlers,
+    [...matrix.handlers.map((handler) => handler.name), ...MIGRATION_ONLY_V2_HANDLERS],
+  );
   assert.equal(sourceHandlers.length, matrix.expectedHandlerCount);
   assert.deepEqual(
     matrix.handlers.map((handler) => handler.name),
     sourceHandlers,
   );
   assert.equal(new Set(sourceHandlers).size, sourceHandlers.length);
+});
+
+test("the matrix binds the exact feature-gated fifteen-route production dispositions", () => {
+  const expectedRoutes = [
+    ["initialize_config", 0, "INITIALIZATION_POLICY_HOLD", false],
+    ["initialize_lane_vault", 1, "INITIALIZATION_POLICY_HOLD", false],
+    ["initialize_stake_vault", 2, "INITIALIZATION_POLICY_HOLD", false],
+    ["activate", 3, "INITIALIZATION_POLICY_HOLD", false],
+    ["register_agency", 4, "INITIALIZATION_POLICY_HOLD", false],
+    ["set_eligibility", 5, "ACTIVE", true],
+    ["open_position", 6, "ACTIVE", true],
+    ["settle_position_week", 7, "ACTIVE", true],
+    ["settle_core_week", 8, "CORE_CUSTODY_POLICY_HOLD", false],
+    [
+      "claim_lane_principal",
+      9,
+      "LANE_CONDITIONAL_ACTIVE_OR_CORE_CUSTODY_POLICY_HOLD",
+      true,
+    ],
+    ["withdraw_position_principal", 10, "ACTIVE", true],
+    ["close_position", 11, "ACTIVE", true],
+    ["commit_round", 12, "CCC_DISABLED", false],
+    ["settle_round", 13, "CCC_DISABLED", false],
+    ["expire_round", 14, "CCC_DISABLED", false],
+  ];
+  assert.deepEqual(
+    matrix.handlers.map((handler) => [
+      handler.name,
+      handler.opcode,
+      handler.productionDisposition,
+      handler.handlerComplete,
+    ]),
+    expectedRoutes,
+  );
+
+  assert.deepEqual(matrix.currentProductionSourceSurface, {
+    instructionSource: "programs/iat_b3_economy/src/production_instruction.rs",
+    dispatcherSource: "programs/iat_b3_economy/src/production_dispatch.rs",
+    entrypointSource: "programs/iat_b3_economy/src/production_entrypoint.rs",
+    dispatcherFeature: "runtime-production-dispatch",
+    entrypointFeature: "runtime-production-entrypoint",
+    featureGated: true,
+    productionInstructionAbiExposed: true,
+    productionDispatcherExposed: true,
+    productionSolanaEntrypointExposed: true,
+    exactDiscriminantCount: 15,
+    sourceDispositionCompleteCount: 15,
+    activeHandlerCount: 6,
+    initializationPolicyHoldCount: 5,
+    cccDisabledHandlerCount: 3,
+    coreCustodyPolicyHoldCount: 1,
+    unavailableHandlerCount: 0,
+    claimLanePrincipalLaneConditional: true,
+    claimLanePrincipalActiveLanes: [1, 2, 4],
+    claimLanePrincipalCorePolicyHoldLanes: [3],
+    handlerCompleteFieldMeaning:
+      "ACTIVE_SUCCESS_HANDLER_SOURCE_COMPLETE_NOT_RELEASE_READY",
+    all15HandlersActive: false,
+    all15HandlersComplete: false,
+    compiledIdentityInputsRequired: true,
+    productionIdentityEvidenceVerified: false,
+    devnetExecuted: false,
+    devnetTransactionRollbackProven: false,
+    releaseAuthorized: false,
+    mainnetHold: true,
+  });
+  assert.equal(
+    matrix.preparationRowScope,
+    "HISTORIC_OR_COMPONENT_SCOPED_NOT_CURRENT_PRODUCTION_SOURCE_EXPOSURE",
+  );
+
+  const active = matrix.handlers.filter((handler) => handler.handlerComplete);
+  assert.equal(active.length, 6);
+  assert.deepEqual(
+    active.map((handler) => handler.name),
+    [
+      "set_eligibility",
+      "open_position",
+      "settle_position_week",
+      "claim_lane_principal",
+      "withdraw_position_principal",
+      "close_position",
+    ],
+  );
+  for (const handler of matrix.handlers) {
+    assert.equal(handler.sourceDispositionComplete, true, handler.name);
+    assert.equal(handler.productionDispatcherExposed, true, handler.name);
+    assert.equal(handler.productionEntrypointExposed, true, handler.name);
+    assert.equal(handler.devnetExecuted, false, handler.name);
+    assert.equal(handler.releaseAuthorized, false, handler.name);
+    assert.equal(handler.mainnetHold, true, handler.name);
+  }
+
+  const claim = matrix.handlers[9];
+  assert.equal(claim.laneConditional, true);
+  assert.deepEqual(claim.activeLanes, [1, 2, 4]);
+  assert.deepEqual(claim.coreCustodyPolicyHoldLanes, [3]);
+  assert.equal(claim.invalidLanesRejected, true);
+
+  const rollbackBound = active.filter(
+    (handler) => handler.name !== "close_position",
+  );
+  assert.equal(rollbackBound.length, 5);
+  for (const handler of rollbackBound) {
+    assert.equal(handler.transactionRollbackRequiredAfterCpi, true, handler.name);
+    assert.equal(handler.devnetTransactionRollbackProven, false, handler.name);
+  }
+  assert.equal(matrix.handlers[11].transactionRollbackRequiredAfterCpi, false);
+
+  assert.match(economyManifest, /runtime-production-dispatch = \[/u);
+  assert.match(
+    economyManifest,
+    /runtime-production-entrypoint = \[[\s\S]+"runtime-production-dispatch"/u,
+  );
+  assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_COUNT: usize = 15/u);
+  assert.match(economyProductionInstructionSource, /production_dispatcher_exposed: true/u);
+  assert.match(economyProductionInstructionSource, /production_entrypoint_exposed: true/u);
+  assert.match(economyProductionDispatchSource, /PRODUCTION_ACTIVE_HANDLER_COUNT: usize = 6/u);
+  assert.match(economyProductionDispatchSource, /PRODUCTION_DISABLED_HANDLER_COUNT: usize = 3/u);
+  assert.match(economyProductionDispatchSource, /PRODUCTION_POLICY_HELD_HANDLER_COUNT: usize = 6/u);
+  assert.match(economyProductionDispatchSource, /initialization_policy_held_routes: 5/u);
+  assert.match(economyProductionDispatchSource, /settle_core_week_policy_held: true/u);
+  assert.match(economyProductionDispatchSource, /all_15_handlers_complete: false/u);
+  assert.match(economyProductionEntrypointSource, /routed_complete_handler_count: 15/u);
+  assert.match(economyProductionEntrypointSource, /routed_active_handler_count: 6/u);
+  assert.match(economyProductionEntrypointSource, /routed_disabled_handler_count: 3/u);
+  assert.match(economyProductionEntrypointSource, /routed_policy_held_handler_count: 6/u);
+  assert.match(economyProductionEntrypointSource, /production_identity_evidence_verified: false/u);
+  assert.match(economyProductionEntrypointSource, /devnet_executed: false/u);
+  assert.match(economyProductionEntrypointSource, /release_authorized: false/u);
+  assert.match(economyProductionEntrypointSource, /mainnet_hold: true/u);
+  assert.match(economyProductionInitializationHoldSource, /initialization_route_count: 5/u);
+  assert.match(economyProductionRoundDisabledSource, /source_complete_disabled_handlers: true/u);
+  assert.match(
+    economyProductionSettleCoreHoldSource,
+    /core_custody_destination_and_release_policy_accepted: false/u,
+  );
+
+  for (const source of [
+    economyProductionSetEligibilitySource,
+    economyProductionOpenPositionExecutorSource,
+    economyProductionSettlePositionExecutorSource,
+    economyProductionClaimLaneExecutorSource,
+    economyProductionWithdrawExecutorSource,
+    economyProductionClosePositionSource,
+  ]) {
+    assert.match(source, /handler_complete: true/u);
+    assert.match(source, /mainnet_hold: true/u);
+  }
 });
 
 test("every retained handler is fail-closed before mutation, lifecycle, or CPI", () => {
@@ -208,7 +413,7 @@ test("the two V2 core payout paths remain honestly blocked on custody semantics"
   );
 });
 
-test("the default Rust kernel stays host-only while the sole SBF entrypoint is structural", () => {
+test("the default feature set stays host-only and the structural SBF feature remains non-economic", () => {
   assert.deepEqual(matrix.firstSafeSlice, {
     crate: "programs/iat_b3_economy",
     crateType: "cdylib+lib",
@@ -893,10 +1098,10 @@ test("the local lifecycle fixture proves SBF CPI without becoming a production s
   }
 });
 
-test("the all-15 rehearsal preflight is exact-version read-only and cannot activate Devnet", () => {
+test("the current all-15 row exposes source handlers while the component preflight stays inert", () => {
   assert.deepEqual(matrix.all15RehearsalPreflight, {
-    stage: "FEATURE_GATED_READ_ONLY_ALL_15_ACCOUNT_GRAPH_PREFLIGHT_NO_DISPATCH",
-    feature: "runtime-account-bridge",
+    stage: "FEATURE_GATED_ALL_15_SOURCE_DISPOSITIONS_SIX_ACTIVE_NINE_HELD_OR_DISABLED_NO_DEVNET",
+    feature: "runtime-production-entrypoint",
     complete: false,
     expectedHandlerCount: 15,
     operationInventoryExact: true,
@@ -914,23 +1119,23 @@ test("the all-15 rehearsal preflight is exact-version read-only and cannot activ
     confidentialBalanceAccountsAccepted: false,
     strictStateAuthenticationReused: true,
     inertWriteBatchSealingReused: true,
-    mutableAccountBorrows: false,
-    accountWrites: false,
-    systemCpi: false,
-    tokenCpi: false,
+    mutableAccountBorrows: true,
+    accountWrites: true,
+    systemCpi: true,
+    tokenCpi: true,
     rpcUsed: false,
     transactionSigned: false,
     deploymentExecuted: false,
     devnetExecuted: false,
     publicDevnetDriverWired: false,
-    instructionAbiFrozen: false,
-    solanaEntrypoint: false,
-    publicDispatcher: false,
+    instructionAbiFrozen: true,
+    solanaEntrypoint: true,
+    publicDispatcher: true,
     productionIdentityBindingFrozen: false,
     configCodecSupported: false,
     ownerPolicyFrozen: false,
     cccGenesisEnabled: false,
-    anyHandlerComplete: false,
+    anyHandlerComplete: true,
     mainnetHold: true,
     publicExposure: false,
   });
@@ -1010,7 +1215,7 @@ test("the combined stake-ingress slice is production source without public execu
   );
 });
 
-test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI reloads without completing a handler", () => {
+test("the feature-gated OpenPosition handler executes exact Token-2022 CPI reloads and remains Devnet-false", () => {
   assert.match(
     economySource,
     /#\[cfg\(feature = "runtime-token-2022-stake-ingress"\)\]\s+pub mod stake_ingress_runtime;/u,
@@ -1095,14 +1300,14 @@ test("the feature-gated stake-ingress runtime executes exact Token-2022 CPI relo
     "completed_ingress_config_and_lanes_cas_executed",
     "callback_failure_requires_transaction_rollback",
     "retained_v2_post_cpi_persistence_complete",
-  ]) {
-    assert.match(economyStakeIngressRuntimeSource, new RegExp(`${trueFlag}: true`, "u"));
-  }
-  for (const falseFlag of [
     "instruction_abi_frozen",
     "entrypoint_exposed",
     "dispatcher_exposed",
     "any_handler_complete",
+  ]) {
+    assert.match(economyStakeIngressRuntimeSource, new RegExp(`${trueFlag}: true`, "u"));
+  }
+  for (const falseFlag of [
     "devnet_executed",
   ]) {
     assert.match(economyStakeIngressRuntimeSource, new RegExp(`${falseFlag}: false`, "u"));
@@ -1592,7 +1797,10 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const initializeConfig = matrix.handlers.find(
     (handler) => handler.name === "initialize_config",
   );
-  assert.equal(initializeConfig.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(
+    initializeConfig.implementationStage,
+    "SOURCE_COMPLETE_TYPED_POLICY_HOLD_NO_OPERATION_ACCOUNTS",
+  );
   assert.equal(initializeConfig.handlerComplete, false);
   assert.equal(initializeConfig.publicExposure, matrix.deploymentExposure);
   assert(initializeConfig.cpis.includes("system_program.create_account"));
@@ -1600,7 +1808,10 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const initializeLaneVault = matrix.handlers.find(
     (handler) => handler.name === "initialize_lane_vault",
   );
-  assert.equal(initializeLaneVault.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(
+    initializeLaneVault.implementationStage,
+    "SOURCE_COMPLETE_TYPED_POLICY_HOLD_NO_OPERATION_ACCOUNTS",
+  );
   assert.equal(initializeLaneVault.handlerComplete, false);
   assert.equal(initializeLaneVault.publicExposure, matrix.deploymentExposure);
   assert(initializeLaneVault.cpis.includes("token_2022.initialize_account"));
@@ -1608,13 +1819,19 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const initializeStakeVault = matrix.handlers.find(
     (handler) => handler.name === "initialize_stake_vault",
   );
-  assert.equal(initializeStakeVault.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(
+    initializeStakeVault.implementationStage,
+    "SOURCE_COMPLETE_TYPED_POLICY_HOLD_NO_OPERATION_ACCOUNTS",
+  );
   assert.equal(initializeStakeVault.handlerComplete, false);
   assert.equal(initializeStakeVault.publicExposure, matrix.deploymentExposure);
   assert(initializeStakeVault.cpis.includes("token_2022.initialize_account"));
 
   const activate = matrix.handlers.find((handler) => handler.name === "activate");
-  assert.equal(activate.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(
+    activate.implementationStage,
+    "SOURCE_COMPLETE_TYPED_POLICY_HOLD_NO_OPERATION_ACCOUNTS",
+  );
   assert.equal(activate.handlerComplete, false);
   assert.equal(activate.publicExposure, matrix.deploymentExposure);
   assert.equal(activate.parity, "PRESERVE");
@@ -1624,7 +1841,10 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
     (handler) => handler.name === "register_agency",
   );
   assert.equal(registerAgency.productionBehavior, "CCC_INACTIVE");
-  assert.equal(registerAgency.implementationStage, "PRE_LIFECYCLE_ONLY");
+  assert.equal(
+    registerAgency.implementationStage,
+    "SOURCE_COMPLETE_TYPED_POLICY_HOLD_NO_OPERATION_ACCOUNTS",
+  );
   assert.equal(registerAgency.handlerComplete, false);
   assert.equal(registerAgency.publicExposure, matrix.deploymentExposure);
   assert.equal(registerAgency.parity, "PRESERVE_COMPILE_TIME_INACTIVE");
@@ -1633,8 +1853,8 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const setEligibility = matrix.handlers.find(
     (handler) => handler.name === "set_eligibility",
   );
-  assert.equal(setEligibility.implementationStage, "PRE_LIFECYCLE_ONLY");
-  assert.equal(setEligibility.handlerComplete, false);
+  assert.equal(setEligibility.implementationStage, "SOURCE_COMPLETE_ACTIVE_HANDLER");
+  assert.equal(setEligibility.handlerComplete, true);
   assert.equal(setEligibility.publicExposure, matrix.deploymentExposure);
   assert.equal(
     setEligibility.parity,
@@ -1645,8 +1865,8 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const openPosition = matrix.handlers.find(
     (handler) => handler.name === "open_position",
   );
-  assert.equal(openPosition.implementationStage, "PRE_TOKEN_CPI_ONLY");
-  assert.equal(openPosition.handlerComplete, false);
+  assert.equal(openPosition.implementationStage, "SOURCE_COMPLETE_ACTIVE_HANDLER");
+  assert.equal(openPosition.handlerComplete, true);
   assert.equal(openPosition.publicExposure, matrix.deploymentExposure);
   assert.equal(openPosition.parity, "PRESERVE");
   assert.equal(openPosition.token2022Flow, "OWNER_TO_STAKE_VAULT");
@@ -1656,9 +1876,9 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   );
   assert.equal(
     withdrawPositionPrincipal.implementationStage,
-    "PRE_TOKEN_CPI_ONLY",
+    "SOURCE_COMPLETE_ACTIVE_HANDLER",
   );
-  assert.equal(withdrawPositionPrincipal.handlerComplete, false);
+  assert.equal(withdrawPositionPrincipal.handlerComplete, true);
   assert.equal(
     withdrawPositionPrincipal.publicExposure,
     matrix.deploymentExposure,
@@ -1672,8 +1892,11 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const settlePositionWeek = matrix.handlers.find(
     (handler) => handler.name === "settle_position_week",
   );
-  assert.equal(settlePositionWeek.implementationStage, "PRE_TOKEN_CPI_ONLY");
-  assert.equal(settlePositionWeek.handlerComplete, false);
+  assert.equal(
+    settlePositionWeek.implementationStage,
+    "SOURCE_COMPLETE_ACTIVE_HANDLER",
+  );
+  assert.equal(settlePositionWeek.handlerComplete, true);
   assert.equal(settlePositionWeek.publicExposure, matrix.deploymentExposure);
   assert.equal(settlePositionWeek.parity, "PRESERVE");
   assert.equal(
@@ -1684,7 +1907,10 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const settleCoreWeek = matrix.handlers.find(
     (handler) => handler.name === "settle_core_week",
   );
-  assert.equal(settleCoreWeek.implementationStage, "PRE_TOKEN_CPI_ONLY");
+  assert.equal(
+    settleCoreWeek.implementationStage,
+    "SOURCE_COMPLETE_TYPED_POLICY_HOLD_NO_OPERATION_ACCOUNTS",
+  );
   assert.equal(settleCoreWeek.handlerComplete, false);
   assert.equal(settleCoreWeek.publicExposure, matrix.deploymentExposure);
   assert.equal(
@@ -1699,8 +1925,11 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
   const claimLanePrincipal = matrix.handlers.find(
     (handler) => handler.name === "claim_lane_principal",
   );
-  assert.equal(claimLanePrincipal.implementationStage, "PRE_TOKEN_CPI_ONLY");
-  assert.equal(claimLanePrincipal.handlerComplete, false);
+  assert.equal(
+    claimLanePrincipal.implementationStage,
+    "SOURCE_COMPLETE_LANE_CONDITIONAL_ACTIVE_HANDLER",
+  );
+  assert.equal(claimLanePrincipal.handlerComplete, true);
   assert.equal(claimLanePrincipal.publicExposure, matrix.deploymentExposure);
   assert.equal(
     claimLanePrincipal.parity,
@@ -1718,15 +1947,17 @@ test("the host-only port contains exactly all fifteen gated kernels", () => {
     "release_reservations",
     "mark_closed",
   ]);
-  assert.equal(closePosition.nativeAdapterStage, "PARTIAL_STRICT_CODEC_ONLY");
-  assert.equal(closePosition.nativeAdapterComplete, false);
+  assert.equal(closePosition.implementationStage, "SOURCE_COMPLETE_ACTIVE_HANDLER");
+  assert.equal(closePosition.handlerComplete, true);
+  assert.equal(closePosition.nativeAdapterStage, "SOURCE_COMPLETE_ACTIVE_HANDLER");
+  assert.equal(closePosition.nativeAdapterComplete, true);
   assert.deepEqual(closePosition.strictCodecTypes, [
     "PositionState",
     "LaneState",
   ]);
   assert.equal(
     closePosition.configCodecStatus,
-    "BLOCKED_PENDING_GENESIS_STAGING_ACTIVE_CAP_PHASE_RULE",
+    "PRODUCTION_CONFIG_AUTHENTICATION_COMPLETE",
   );
 });
 

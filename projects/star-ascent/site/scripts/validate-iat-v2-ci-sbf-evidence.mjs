@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { lstatSync, readFileSync, realpathSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { isAbsolute, normalize, relative, resolve } from "node:path";
+import { isAbsolute, normalize, relative, resolve, sep } from "node:path";
 
 const expectedProgramId = "62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj";
 const expectedRepository = "InternalAgencyIO/InternalAgency";
@@ -32,8 +32,21 @@ const expectedLimitations = [
 const sha256Pattern = /^[0-9a-f]{64}$/;
 const commitPattern = /^[0-9a-f]{40}$/;
 
+// Exact tracked inputs capable of changing the IAT V2 SBF or generated IDL.
+// Runtime JavaScript bindings and workflow orchestration are intentionally not
+// part of this closure because neither is consumed by the verifiable build.
+export const IAT_V2_SBF_ARTIFACT_INPUT_PATHS = Object.freeze([
+  "Anchor.toml",
+  "Cargo.lock",
+  "Cargo.toml",
+  "rust-toolchain.toml",
+  "programs/iat_v2/Cargo.toml",
+  "programs/iat_v2/src",
+  "scripts/verify-iat-v2-sbf.sh",
+]);
+
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const git = (projectRoot, args) => execFileSync("git", args, {
+const defaultGit = (projectRoot, args) => execFileSync("git", args, {
   cwd: projectRoot,
   encoding: "utf8",
   stdio: ["ignore", "pipe", "pipe"],
@@ -60,14 +73,33 @@ function assertCanonicalRegularFile(root, candidate, expectedPath, label) {
   const entry = lstatSync(candidate);
   check(entry.isFile() && !entry.isSymbolicLink(), `${label} must be a regular non-symlink file`);
   const resolvedRelativePath = normalize(relative(realpathSync(root), realpathSync(candidate)));
+  check(
+    resolvedRelativePath !== ""
+      && resolvedRelativePath !== ".."
+      && !resolvedRelativePath.startsWith(`..${sep}`)
+      && !isAbsolute(resolvedRelativePath),
+    `${label} resolves outside the project root`,
+  );
   check(resolvedRelativePath === normalize(expectedPath), `${label} does not resolve to its canonical evidence path`);
 }
 
-export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath } = {}) {
+export function validateSbfEvidence({
+  projectRoot = process.cwd(),
+  manifestPath,
+  allowDescendantCheckout = false,
+  verifyArtifactFiles = true,
+  git: gitRunner = defaultGit,
+} = {}) {
+  check(typeof allowDescendantCheckout === "boolean", "allowDescendantCheckout must be boolean");
+  check(typeof verifyArtifactFiles === "boolean", "verifyArtifactFiles must be boolean");
+  const git = gitRunner;
   const root = resolve(projectRoot);
   const requestedManifest = manifestPath ?? expectedManifest;
   const resolvedManifest = isAbsolute(requestedManifest) ? requestedManifest : resolve(root, requestedManifest);
-  assertCanonicalRegularFile(root, resolvedManifest, expectedManifest, "manifest");
+  const expectedRelativeManifest = normalize(isAbsolute(requestedManifest)
+    ? relative(root, requestedManifest)
+    : requestedManifest);
+  assertCanonicalRegularFile(root, resolvedManifest, expectedRelativeManifest, "manifest");
   const manifestText = readFileSync(resolvedManifest, "utf8");
   const manifest = JSON.parse(manifestText);
   check(manifestText === `${JSON.stringify(sortJson(manifest), null, 2)}\n`, "manifest JSON is not canonical sorted-key UTF-8 JSON");
@@ -114,14 +146,46 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
   check(git(root, ["status", "--porcelain=v1", "--untracked-files=no"]) === "", "tracked worktree is not clean");
   git(root, ["cat-file", "-e", `${binding.sourceHeadCommit}^{commit}`]);
   check(git(root, ["rev-parse", `${binding.sourceHeadCommit}^{tree}`]) === binding.sourceHeadTree, "source-head tree does not match Git");
-  check(git(root, ["rev-parse", "HEAD"]) === binding.checkoutCommit, "checkout commit does not match Git HEAD");
-  check(git(root, ["rev-parse", "HEAD^{tree}"]) === binding.checkoutTree, "checkout tree does not match Git HEAD");
+  if (allowDescendantCheckout) {
+    try {
+      git(root, ["merge-base", "--is-ancestor", binding.sourceHeadCommit, "HEAD"]);
+    } catch {
+      check(false, "current checkout is not a descendant of the validated CI source head");
+    }
+    try {
+      git(root, [
+        "diff",
+        "--no-ext-diff",
+        "--no-textconv",
+        "--quiet",
+        binding.sourceHeadCommit,
+        "HEAD",
+        "--",
+        ...IAT_V2_SBF_ARTIFACT_INPUT_PATHS,
+      ]);
+    } catch {
+      check(false, "current successor checkout changed a CI-bound SBF artifact input");
+    }
+  } else {
+    check(git(root, ["rev-parse", "HEAD"]) === binding.checkoutCommit, "checkout commit does not match Git HEAD");
+    check(git(root, ["rev-parse", "HEAD^{tree}"]) === binding.checkoutTree, "checkout tree does not match Git HEAD");
+  }
 
   if (binding.workflowEvent === "pull_request") {
-    const parents = git(root, ["rev-list", "--parents", "-n", "1", "HEAD"]).split(/\s+/);
     check(binding.checkoutRelation === "PR_MERGE_SECOND_PARENT", "pull-request relation is not fail closed");
-    check(parents.length === 3, "pull-request checkout is not an exact two-parent merge");
-    check(parents[2] === binding.sourceHeadCommit, "pull-request source head is not merge parent 2");
+    let checkoutObjectAvailable = true;
+    try {
+      git(root, ["cat-file", "-e", `${binding.checkoutCommit}^{commit}`]);
+    } catch {
+      checkoutObjectAvailable = false;
+    }
+    if (!allowDescendantCheckout || checkoutObjectAvailable) {
+      check(checkoutObjectAvailable, "pull-request checkout commit is unavailable");
+      check(git(root, ["rev-parse", `${binding.checkoutCommit}^{tree}`]) === binding.checkoutTree, "pull-request checkout tree does not match Git");
+      const parents = git(root, ["rev-list", "--parents", "-n", "1", binding.checkoutCommit]).split(/\s+/);
+      check(parents.length === 3, "pull-request checkout is not an exact two-parent merge");
+      check(parents[2] === binding.sourceHeadCommit, "pull-request source head is not merge parent 2");
+    }
   } else {
     check(["push", "workflow_dispatch"].includes(binding.workflowEvent), "unsupported workflow event");
     check(binding.checkoutRelation === "IDENTICAL", "branch checkout relation is not IDENTICAL");
@@ -136,15 +200,19 @@ export function validateSbfEvidence({ projectRoot = process.cwd(), manifestPath 
     check(record.path === expectedPath, `artifacts.${name}.path drifted`);
     check(sha256Pattern.test(record.sha256), `artifacts.${name}.sha256 is malformed`);
     check(Number.isSafeInteger(record.bytes) && record.bytes > 0, `artifacts.${name}.bytes is invalid`);
-    const artifactPath = resolve(root, expectedPath);
-    assertCanonicalRegularFile(root, artifactPath, expectedPath, `artifacts.${name}`);
-    const bytes = readFileSync(artifactPath);
-    check(bytes.length === record.bytes, `artifacts.${name}.bytes does not match the file`);
-    check(sha256(bytes) === record.sha256, `artifacts.${name}.sha256 does not match the file`);
+    if (verifyArtifactFiles) {
+      const artifactPath = resolve(root, expectedPath);
+      assertCanonicalRegularFile(root, artifactPath, expectedPath, `artifacts.${name}`);
+      const bytes = readFileSync(artifactPath);
+      check(bytes.length === record.bytes, `artifacts.${name}.bytes does not match the file`);
+      check(sha256(bytes) === record.sha256, `artifacts.${name}.sha256 does not match the file`);
+    }
   }
 
-  const idl = JSON.parse(readFileSync(resolve(root, expectedArtifacts.programIdl), "utf8"));
-  check(idl.address === expectedProgramId, "generated IDL address does not match the reviewed program ID");
+  if (verifyArtifactFiles) {
+    const idl = JSON.parse(readFileSync(resolve(root, expectedArtifacts.programIdl), "utf8"));
+    check(idl.address === expectedProgramId, "generated IDL address does not match the reviewed program ID");
+  }
 
   return {
     status: "PASS",
