@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "batch": 482,
+  "country": "Moldova",
+  "state": "meta-hard-failure-prompts-archived-retry-in-progress",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "blocked": [
+    {
+      "scene": 1956,
+      "occurrence": 1,
+      "promptSha256": "D14DDBF713B234F099F284E8CA50277887AD300E09FF498BFDA9194EFED978D9",
+      "providerUrl": "https://www.meta.ai/prompt/0ab53fd7-2b7e-484f-a632-0f5255bf0181",
+      "providerMessage": "I wasn't able to create that exact image as described.",
+      "failureClass": "hard-failure-no-image",
+      "artifactReturned": false,
+      "retryAuthorized": true,
+      "retryReason": "The user-authorized policy allows up to two Meta retries only for a hard failure.",
+      "providerSuggestedChange": "Keep the quartet, Orheiul Vechi location, clothes, split-star panels, RAZE pumps and subtle Alia/Ellie marks; remove distant skyline effects and use modest tailoring.",
+      "screenshot": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/scene-1956-meta-occurrence-1-hard-failure-visible.jpg",
+        "sha256": "8AB25C5F12AA0FC082A74306FF7A10A61D1F48392B536A34EC1BE1E412FFF1F6",
+        "bytes": 101661,
+        "dimensions": "1280x720",
+        "rawFormat": "JPEG/JFIF"
+      }
+    }
+  ],
+  "originalPromptArchive": "assets/lore/starlight-era/batch-482-moldova-europe-gap-fill-prompts-prepared-checkpoint.json",
+  "retryPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/meta-retry-prompts-and-outcomes.md"
+}
