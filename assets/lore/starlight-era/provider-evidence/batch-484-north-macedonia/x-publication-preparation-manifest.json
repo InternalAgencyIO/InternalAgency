@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 484,
-  "state": "monaco-north-macedonia-x-composer-staged-awaiting-fresh-post-confirmation",
+  "state": "monaco-north-macedonia-x-confirmed-two-visible-clicks-explicitly-failed-composer-retained",
   "preparedAtUtc": "2026-09-04T15:30:01.2430239Z",
   "destination": {
     "platform": "X",
@@ -91,11 +91,20 @@
     "metaTerminalCount": 4,
     "grokTabCount": 0
   },
-  "postClicks": 0,
+  "postClicks": 2,
   "keyboardSubmitAttempts": 0,
   "publicTransmissionCount": 0,
-  "freshActionTimeConfirmationReceived": false,
+  "freshActionTimeConfirmationReceived": true,
   "mayPost": false,
+  "failedPublicationAttempts": {
+    "visiblePostControlActivations": 2,
+    "identicalVisibleErrorCount": 2,
+    "visibleError": "Something went wrong, but don’t fret — let’s give it another shot.",
+    "separateVisibleProfileChecks": 2,
+    "exactCaptionLiveMatchCountAfterFinalCheck": 0,
+    "composerRetainedIntact": true,
+    "verifiedAtUtc": "2026-09-04T15:37:27.4849559Z"
+  },
   "guardian": {
     "id": "guardian-x-assistant-mission",
     "status": "PAUSED",
@@ -107,5 +116,5 @@
     "The world X ledger's top-level browser, account and pending-post fields are stale, while its 194-entry posts array and the visible @dogramaci account are authoritative for duplicate checks.",
     "The old Cuba automation direction is stale relative to the newer Tanzania and later remote-verified checkpoints; the existing guardian remains paused and was not duplicated or altered."
   ],
-  "nextSafeAction": "After fresh action-time confirmation, click the visible Post button exactly once, verify the resulting @dogramaci status and photo/1 through photo/3 URLs, preserve every URL, update the X ledger, and never resend these media."
+  "nextSafeAction": "Do not make a third blind Post click or duplicate this draft. Keep the intact composer, advance Meta lanes, and only retry later after X recovery, a new live zero-match check, complete composer revalidation and fresh action-time confirmation."
 }
