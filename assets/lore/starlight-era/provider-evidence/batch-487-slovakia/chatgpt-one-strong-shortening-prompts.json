@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "batch": 487,
+  "country": "Slovakia",
+  "policy": "Exactly one strong ChatGPT clothing-shortening edit per accepted Meta occurrence. Preserve the Meta raw regardless of outcome. Never issue a second pass for aesthetic imperfections, logo geometry, or further shortening.",
+  "waveOutcome": {
+    "requestsIssued": 4,
+    "toolOrchestration": "four concurrent image edit requests",
+    "successfulAttributedOutputs": 1,
+    "outputStageModerationBlocks": 1,
+    "unattributedNoBytesAfterWaveTermination": 3,
+    "completedByUtc": "2026-09-04T17:58:46.9841610Z",
+    "moderationStage": "output",
+    "moderationCategory": "sexual",
+    "requestId": "386ec773-72ae-4e43-b83d-aaf7695ef329",
+    "attributionNote": "The concurrent wave returned one attributable Scene 1975 image and then rejected the aggregate await on one output-stage moderation block. No result metadata or bytes identified which of Scenes 1976-1978 owned the blocked request; the other sibling calls may have been canceled. All three are therefore recorded as attribution-uncertain consumed invocations and are not retried.",
+    "additionalPasses": 0
+  },
+  "prompts": [
+    {
+      "scene": 1975,
+      "source": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1975-slovakia-bratislava-castle-danube-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+      "prompt": "Edit only this supplied image. Keep the exact same four clearly adult fictional women, their left-to-right identities, faces, hair, skin tones, body proportions, affectionate public-safe pose, full-body vertical framing, Bratislava Castle and Danube setting, daylight, star hardware, large split-star garment panels, RAZE waist bands, classic minimal pumps, colors, photographic realism, and every complete hand, leg and shoe. Make one strong fashion alteration: dramatically shorten every blue, silver, navy and white skirt, dress, skort or shorts hem into secure opaque upper-thigh mini silhouettes, noticeably shorter than the source while keeping full coverage, lining, modesty and public-safe non-explicit styling. Do not add stockings, boots, people, text, logos, flags, smoke, fire, damage, nudity, exposure or sexualized emphasis. Do not crop any head or shoe. Preserve all other pixels and scene logic as closely as possible. Return one edited still only.",
+      "promptCharacters": 964,
+      "promptSha256": "BEF458EB190F46AF362A4E46B30A79EEAD0AC6982A881134DDED2ABC08431449",
+      "requestIssued": true,
+      "attemptCount": 1,
+      "status": "success",
+      "generatedOriginal": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-0962c65c-5f30-4dc8-8523-9b12408ff7f0.png",
+      "archivedOutput": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1975-slovakia-bratislava-castle-danube-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png",
+      "archivedOutputSha256": "AA9B0A681C86835F53CC98D732B4481BF078C287E885BED8CC317C96ECC168CA",
+      "archivedOutputBytes": 2247431,
+      "selected": true,
+      "additionalPasses": 0
+    },
+    {
+      "scene": 1976,
+      "source": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1976-slovakia-spis-castle-raze-adjacent-three-quarter-meta-retry-1-occurrence-1-raw.jpg",
+      "prompt": "Edit only this supplied image. Keep the exact same four clearly adult fictional women, their left-to-right identities, faces, hair, skin tones, body proportions, affectionate public-safe pose, full-body vertical framing, intact Spis Castle and basin setting, clear daylight, rainbow over-the-knee stockings, readable RAZE waist bands, classic minimal pumps, stocking star marks, colors, photographic realism, and every complete hand, leg and shoe. Make one strong fashion alteration: dramatically shorten the blue dress, white dress, silver skort and green romper hems into secure opaque upper-thigh mini silhouettes, noticeably shorter than the source while keeping full coverage, lining, modesty and public-safe non-explicit styling. Do not change the hosiery height or footwear. Do not add people, text, logos, flags, smoke, fire, damage, nudity, exposure or sexualized emphasis. Do not crop any head or shoe. Preserve all other pixels and scene logic as closely as possible. Return one edited still only.",
+      "promptCharacters": 1008,
+      "promptSha256": "D481FED57C02671F9C13086478244F872CE0E71FC986F4CA49DEAE922852E490",
+      "requestIssued": true,
+      "attemptCount": 1,
+      "status": "attribution-uncertain-no-bytes-wave-terminated-on-output-moderation",
+      "generatedOriginal": null,
+      "archivedOutput": null,
+      "selected": false,
+      "fallbackSelected": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1976-slovakia-spis-castle-raze-adjacent-three-quarter-meta-retry-1-occurrence-1-raw.jpg",
+      "additionalPasses": 0
+    },
+    {
+      "scene": 1977,
+      "source": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1977-slovakia-strbske-pleso-high-tatras-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+      "prompt": "Edit only this supplied image. Keep the exact same four clearly adult fictional women, their left-to-right identities, faces, hair, skin tones, body proportions, affectionate public-safe hand-linked pose, full-body vertical framing, Strbske Pleso lake and High Tatras setting, clear daylight, split-star garment and hosiery marks, red and cobalt over-the-knee stockings on the two right women, classic minimal pumps, colors, photographic realism, and every complete hand, leg and shoe. Make one strong fashion alteration: dramatically shorten the white and silver dresses plus the red and blue-green short silhouettes into secure opaque upper-thigh minis, noticeably shorter than the source while keeping full coverage, lining, modesty and public-safe non-explicit styling. Do not change the hosiery height or footwear. Do not add stockings to the two left women, people, text, logos, flags, smoke, fire, damage, nudity, exposure or sexualized emphasis. Do not crop any head or shoe. Preserve all other pixels and scene logic as closely as possible. Return one edited still only.",
+      "promptCharacters": 1079,
+      "promptSha256": "700237B22C59D633FBFF1D1216431A67193EC83EDC160069771D14932D2DAAE1",
+      "requestIssued": true,
+      "attemptCount": 1,
+      "status": "attribution-uncertain-no-bytes-wave-terminated-on-output-moderation",
+      "generatedOriginal": null,
+      "archivedOutput": null,
+      "selected": false,
+      "fallbackSelected": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1977-slovakia-strbske-pleso-high-tatras-raze-tight-hemline-close-meta-occurrence-1-raw.jpg",
+      "additionalPasses": 0
+    },
+    {
+      "scene": 1978,
+      "source": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1978-slovakia-orava-castle-raze-tight-full-body-statement-boots-meta-occurrence-1-raw.jpg",
+      "prompt": "Edit only this supplied image. Keep the exact same four clearly adult fictional women, their left-to-right identities, faces, hair, skin tones, body proportions, affectionate public-safe pose, full-body vertical framing, Orava Castle river-valley setting, clear daylight, rainbow knee-high hosiery, all four tall statement RAZE star boots with every boot fully visible, colors, photographic realism, and every complete hand, leg and shoe. Make one strong fashion alteration: dramatically shorten the blue dress, silver dress, cream wrap-skirt or shorts silhouette, and green romper hem into secure opaque upper-thigh mini silhouettes, noticeably shorter than the source while keeping full coverage, lining, modesty and public-safe non-explicit styling. Preserve the statement boots, their RAZE lettering, stars, heel shapes and hosiery exactly; never replace them with pumps. Do not add people, text beyond the existing RAZE boot branding, logos, flags, smoke, fire, damage, nudity, exposure or sexualized emphasis. Do not crop any head or boot. Preserve all other pixels and scene logic as closely as possible. Return one edited still only.",
+      "promptCharacters": 1141,
+      "promptSha256": "2C26321E5F1267B255369B7611D839C64D5373D70D254213169BDFA7AE390441",
+      "requestIssued": true,
+      "attemptCount": 1,
+      "status": "attribution-uncertain-no-bytes-wave-terminated-on-output-moderation",
+      "generatedOriginal": null,
+      "archivedOutput": null,
+      "selected": false,
+      "fallbackSelected": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1978-slovakia-orava-castle-raze-tight-full-body-statement-boots-meta-occurrence-1-raw.jpg",
+      "additionalPasses": 0
+    }
+  ]
+}
