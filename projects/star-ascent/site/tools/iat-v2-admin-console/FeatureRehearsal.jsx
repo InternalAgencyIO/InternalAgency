@@ -75,11 +75,11 @@ import {
 } from "../../programs/iat_v2/client.mjs";
 import {
   assertCanonicalAttendedNextActionFromReceiptSet,
-  buildCompleteAttendedBundle,
   loadAttendedReceiptSet,
   parseAttendedReceiptSet,
   persistAttendedReceipt,
 } from "./attended-evidence.mjs";
+import { buildCompleteAttendedBundle } from "./attended-evidence-bundle.mjs";
 import {
   IAT_V2_RANDOMNESS_CREATE_TITLE,
   canonicalRandomnessCreateJournal,

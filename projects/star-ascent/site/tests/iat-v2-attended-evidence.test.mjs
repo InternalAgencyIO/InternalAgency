@@ -2,12 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   IAT_V2_ATTENDED_RECEIPT_SET_SCHEMA,
-  IAT_V2_COMPLETE_BUNDLE_SCHEMA,
-  IAT_V2_COMPLETE_ROSTER_VERSION,
   assertCanonicalAttendedNextAction,
   assertCanonicalAttendedNextActionFromReceiptSet,
   attendedReceiptStorageKey,
-  buildCompleteAttendedBundle,
   canonicalAttendedActionClassification,
   canonicalAttendedNextActionPolicy,
   canonicalAttendedReceipt,
@@ -17,6 +14,11 @@ import {
   loadAttendedReceiptSet,
   persistAttendedReceipt,
 } from "../tools/iat-v2-admin-console/attended-evidence.mjs";
+import {
+  IAT_V2_COMPLETE_BUNDLE_SCHEMA,
+  IAT_V2_COMPLETE_ROSTER_VERSION,
+  buildCompleteAttendedBundle,
+} from "../tools/iat-v2-admin-console/attended-evidence-bundle.mjs";
 
 const expectedBinding = Object.freeze({
   sourceCommit: "a".repeat(40),

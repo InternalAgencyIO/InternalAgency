@@ -15,8 +15,10 @@ test("security overrides resolve to the exact reviewed dependency versions", asy
   const lock = JSON.parse(await readFile(path.join(siteRoot, "package-lock.json"), "utf8"));
 
   assert.deepEqual(manifest.overrides["@esbuild-kit/core-utils"], { esbuild: "0.25.12" });
+  assert.equal(manifest.overrides["fast-uri"], "3.1.6");
   assert.deepEqual(manifest.overrides.jayson, { uuid: "11.1.1" });
   assert.equal(lock.packages["node_modules/@esbuild-kit/core-utils/node_modules/esbuild"].version, "0.25.12");
+  assert.equal(lock.packages["node_modules/fast-uri"].version, "3.1.6");
   assert.equal(lock.packages["node_modules/uuid"].version, "11.1.1");
   assert.equal(lock.packages["node_modules/rpc-websockets/node_modules/uuid"].version, "14.0.1");
   assert.equal(
