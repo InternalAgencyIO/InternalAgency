@@ -3,7 +3,7 @@
   "batch": 487,
   "country": "Slovakia",
   "scenes": [1975, 1976, 1977, 1978],
-  "state": "three-successful-downloads-archived-one-hard-failure-retry-1-prepared",
+  "state": "four-successful-downloads-archived-one-initial-hard-failure-one-retry-1-success",
   "dispatchWindowObservedAtUtc": "2026-09-04T17:30:05.698Z",
   "authority": {
     "stagedCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-four-meta-composers-staged-checkpoint.json",
@@ -21,7 +21,7 @@
     "initialDispatchCount": 4,
     "confirmedPromptResends": 0,
     "terminalScenesReopened": 0,
-    "providerRetries": 0
+    "providerRetries": 1
   },
   "dispatches": [
     {
@@ -42,7 +42,20 @@
       "providerUrl": "https://www.meta.ai/prompt/8477e594-1ff8-42be-ae8c-379d5e975e6d",
       "outcome": "hard-failure-no-image",
       "providerVisibleResponse": "Meta declined the distant-damage element and offered an intact serene Spis Castle version.",
-      "retry1PreparedCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-scene-1976-meta-retry-1-prepared-checkpoint.json"
+      "retry1PreparedCheckpoint": "assets/lore/starlight-era/batch-487-slovakia-scene-1976-meta-retry-1-prepared-checkpoint.json",
+      "retry1": {
+        "promptSha256": "B522F5F9DE2B08C2205C43F0EB0523B9DF6C8B90C8543448A9A57915CFEBC54A",
+        "anchors": [938, 936, 937],
+        "sendControlActivations": 1,
+        "providerUrl": "https://www.meta.ai/prompt/38bb3e58-02cd-46ab-acc2-b7c5fb3216f5",
+        "outcome": "success",
+        "providerDomMediaLabel": "gallery/rainbow_stockings_correction.webp",
+        "visibleDownloadFilename": "rainbow_stockings_correction.jpg",
+        "rawArchivePath": "assets/lore/starlight-era/provider-evidence/batch-487-slovakia/1976-slovakia-spis-castle-raze-adjacent-three-quarter-meta-retry-1-occurrence-1-raw.jpg",
+        "rawBytes": 282218,
+        "rawSha256": "FE7A7F6FC5E9D73F7AF12E033C57C26588EFFCE85FAA00E639771924CD65EE0F",
+        "rawDimensions": "1152x2048"
+      }
     },
     {
       "scene": 1977,
@@ -82,5 +95,5 @@
     "leftUntouched": true,
     "notStarlightAuthority": true
   },
-  "nextSafeAction": "Remote-verify the archived three successful first-occurrence raws and the exact provider-safe Scene 1976 retry-1 prompt. Replace only the failed Scene 1976 terminal page with a fresh Meta composer, stage the retry prompt and anchors 938, 936, 937 through visible supported controls, seal the no-send staging state, then click Send exactly once. Never resend the confirmed initial prompt."
+  "nextSafeAction": "Commit and remote-verify the Scene 1976 one-send guard reconciliation and all four archived Meta raws. Then issue exactly one ChatGPT clothing-shortening pass for each accepted Meta occurrence, preserve both raw and edited bytes, and never resend either confirmed Scene 1976 prompt."
 }
