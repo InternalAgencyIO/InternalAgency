@@ -18,7 +18,13 @@ const run = () => {
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
   return readFileSync(output, "utf8");
 };
+const committed = readFileSync(output, "utf8");
 const first = run();
+assert.equal(
+  first,
+  committed,
+  "tracked mint ceremony configuration is stale; regenerate and commit exact output",
+);
 const second = run();
 assert.equal(second, first, "generated ceremony configuration must be deterministic");
 

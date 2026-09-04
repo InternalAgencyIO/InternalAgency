@@ -1,0 +1,32 @@
+{
+  "artifactBuildRunAttempt": 1,
+  "artifactBuildRunId": 33161771816,
+  "artifactBytes": 649680,
+  "artifactEvidenceManifestSha256": "ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9",
+  "artifactSha256": "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
+  "artifactSourceHeadCommit": "a03fe71dd66cd1650b8d0353e486786df30b83e9",
+  "checkoutCommit": "12523761b8a94b325a28a2fa16cfed60f420b9b6",
+  "checkoutRelation": "PR_MERGE_SECOND_PARENT",
+  "checkoutTree": "5b8585f6f573a0d643b5f09235fc512c5426b0bf",
+  "ciRunAttempt": 1,
+  "ciRunId": 33894804401,
+  "limitations": [
+    "Source and public-CI binding only; not a Devnet signature, transaction, broadcast, deployment, or release result.",
+    "Fresh ceremony source and runtime evidence do not replace the immutable migration artifact built from a03fe71dd66cd1650b8d0353e486786df30b83e9 in public run 33161771816.",
+    "Does not authorize signing, broadcast, funding, deployment, release, or Mainnet."
+  ],
+  "mainnetStatus": "HOLD",
+  "network": "devnet",
+  "repository": "InternalAgencyIO/InternalAgency",
+  "repositoryId": 1313660798,
+  "runnerArch": "X64",
+  "runnerOs": "Linux",
+  "runtimeClosureSha256": "610a32e638367b12d7e6d079ccb7926af229109d78d115da63801756fa8c3d60",
+  "runtimeEvidenceManifestSha256": "04ce0fe063c19edc5567c06eec58efd39ceb67427dc5bede747b3b1ecb8a3837",
+  "schema": "iat-v2-devnet-program-ceremony-runtime-binding/v1",
+  "sourceHeadCommit": "de291b37aa36a18923d9145d0b3a1fb0c56d2fb2",
+  "sourceHeadTree": "5b8585f6f573a0d643b5f09235fc512c5426b0bf",
+  "status": "BOUND",
+  "workflowEvent": "pull_request",
+  "workflowRef": "InternalAgencyIO/InternalAgency/.github/workflows/iat-v2-proof.yml@refs/pull/15/merge"
+}

@@ -18,6 +18,16 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-explicit-any": "warn",
     },
   },
+  {
+    // This historical package fixture is byte-frozen by downstream BPI01,
+    // BPS06, and FD12 source bindings. Keep lint active except for Next's
+    // reserved `module` identifier rule, which does not apply to its local VM
+    // module handles.
+    files: ["tests/iat-b3-post-checkpoint-supervised-toolchain-k44-observer-package.test.mjs"],
+    rules: {
+      "@next/next/no-assign-module-variable": "off",
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

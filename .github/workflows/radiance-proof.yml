@@ -10,24 +10,54 @@ permissions:
 
 jobs:
   source:
+    name: Source and contract tests (media evidence not claimed)
     runs-on: ubuntu-latest
+    env:
+      GIT_LFS_SKIP_SMUDGE: "1"
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source without Git LFS media
+        uses: actions/checkout@v4
         with:
-          lfs: true
+          lfs: false
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm test
+      - name: Run source and contract tests (media bytes not claimed)
+        run: npm test
 
   preview:
+    name: Preview build (requires Git LFS media)
     runs-on: windows-latest
+    env:
+      GIT_LFS_SKIP_SMUDGE: "1"
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source without Git LFS media
+        uses: actions/checkout@v4
         with:
-          lfs: true
+          lfs: false
+          sparse-checkout: |
+            assets
+            build
+            src
+          sparse-checkout-cone-mode: true
+      - name: Acquire required Git LFS media or preserve HOLD
+        shell: pwsh
+        env:
+          GIT_LFS_SKIP_SMUDGE: "0"
+        run: |
+          function Stop-LfsMediaHold([int]$exitCode) {
+            Write-Output "::error title=RADIANCE_LFS_MEDIA_EVIDENCE_HOLD::Git LFS media acquisition or integrity verification failed (including provider quota failures). Required media evidence remains HOLD; no artifact will be built or uploaded."
+            exit $exitCode
+          }
+
+          git lfs install --local
+          if ($LASTEXITCODE -ne 0) { Stop-LfsMediaHold $LASTEXITCODE }
+          git lfs pull
+          if ($LASTEXITCODE -ne 0) { Stop-LfsMediaHold $LASTEXITCODE }
+          git lfs fsck
+          if ($LASTEXITCODE -ne 0) { Stop-LfsMediaHold $LASTEXITCODE }
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -42,11 +72,39 @@ jobs:
           retention-days: 30
 
   standalone:
+    name: Standalone proof (requires verified Git LFS media)
     runs-on: windows-latest
+    env:
+      GIT_LFS_SKIP_SMUDGE: "1"
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source without Git LFS media
+        uses: actions/checkout@v4
         with:
-          lfs: true
+          lfs: false
+          sparse-checkout: |
+            .github/workflows
+            assets
+            build
+            scripts
+            src
+            test
+          sparse-checkout-cone-mode: true
+      - name: Acquire required Git LFS media or preserve HOLD
+        shell: pwsh
+        env:
+          GIT_LFS_SKIP_SMUDGE: "0"
+        run: |
+          function Stop-LfsMediaHold([int]$exitCode) {
+            Write-Output "::error title=RADIANCE_LFS_MEDIA_EVIDENCE_HOLD::Git LFS media acquisition or integrity verification failed (including provider quota failures). Required media evidence remains HOLD; no artifact will be built or uploaded."
+            exit $exitCode
+          }
+
+          git lfs install --local
+          if ($LASTEXITCODE -ne 0) { Stop-LfsMediaHold $LASTEXITCODE }
+          git lfs pull
+          if ($LASTEXITCODE -ne 0) { Stop-LfsMediaHold $LASTEXITCODE }
+          git lfs fsck
+          if ($LASTEXITCODE -ne 0) { Stop-LfsMediaHold $LASTEXITCODE }
       - name: Check for the standalone video manifest
         id: video_manifest
         shell: pwsh

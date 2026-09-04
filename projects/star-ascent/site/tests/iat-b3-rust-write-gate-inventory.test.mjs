@@ -93,6 +93,14 @@ const economyProductionDispatchSource = readFileSync(
   new URL("../programs/iat_b3_economy/src/production_dispatch.rs", import.meta.url),
   "utf8",
 );
+const economyProductionEntrypointSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/production_entrypoint.rs", import.meta.url),
+  "utf8",
+);
+const economyProductionRoundDisabledSource = readFileSync(
+  new URL("../programs/iat_b3_economy/src/production_round_disabled.rs", import.meta.url),
+  "utf8",
+);
 const economySource = readFileSync(
   new URL("../programs/iat_b3_economy/src/lib.rs", import.meta.url),
   "utf8",
@@ -105,6 +113,10 @@ const audit = readFileSync(
   new URL("../docs/b3/RUST_WRITE_GATE_AUDIT.md", import.meta.url),
   "utf8",
 );
+const economicWriteGateMatrix = JSON.parse(readFileSync(
+  new URL("../docs/b3/iat-b3-economic-write-gates.v1.json", import.meta.url),
+  "utf8",
+));
 const lawAdapter = readFileSync(
   new URL("../docs/b3/LAW_ADAPTER.md", import.meta.url),
   "utf8",
@@ -128,6 +140,10 @@ const EXPECTED_V2_HANDLERS = [
   "settle_round",
   "expire_round",
 ];
+const MIGRATION_ONLY_V2_HANDLERS = Object.freeze([
+  "backfill_historical_neutral_round",
+  "migrate_legacy_round",
+]);
 
 function anchorProgramBody(source) {
   const start = source.indexOf("#[program]");
@@ -180,7 +196,8 @@ function assertTokensInOrder(body, tokens, label) {
 test("the audit inventories every retained V2 Rust write handler", () => {
   const handlers = [...anchorProgramBody(v2Source).matchAll(/^\s+pub fn ([a-z0-9_]+)\s*\(/gmu)]
     .map((match) => match[1]);
-  assert.deepEqual(handlers, EXPECTED_V2_HANDLERS);
+  assert.equal(MIGRATION_ONLY_V2_HANDLERS.length, 2);
+  assert.deepEqual(handlers, [...EXPECTED_V2_HANDLERS, ...MIGRATION_ONLY_V2_HANDLERS]);
 
   for (const handler of EXPECTED_V2_HANDLERS) {
     const row = new RegExp(`\\| ${"`"}${handler}${"`"} \\|`, "u");
@@ -189,7 +206,7 @@ test("the audit inventories every retained V2 Rust write handler", () => {
   assert.match(audit, /All 15 of its public\s+write handlers omit/u);
 });
 
-test("the Rust workspace reports the sole structural economy entrypoint without exposing writes", () => {
+test("the structural SBF feature stays inert beside the separately held production feature", () => {
   const workspaceMembers = [...workspaceCargo.matchAll(/"(programs\/[a-z0-9_]+)"/gu)]
     .map((match) => match[1]);
   assert.deepEqual(workspaceMembers, [
@@ -887,7 +904,7 @@ test("production combined-hook build stays identity-gated and fail-closed", () =
   assert.match(economyStakeIngressRuntimeSource, /completed_ingress_position_lifecycle_executed: true/u);
   assert.match(economyStakeIngressRuntimeSource, /completed_ingress_config_and_lanes_cas_executed: true/u);
   assert.match(economyStakeIngressRuntimeSource, /callback_failure_requires_transaction_rollback: true/u);
-  assert.match(economyStakeIngressRuntimeSource, /any_handler_complete: false/u);
+  assert.match(economyStakeIngressRuntimeSource, /any_handler_complete: true/u);
   assert.match(economyStakeIngressRuntimeSource, /RuntimeProductionActiveConfig/u);
   assert.match(economyStakeIngressRuntimeSource, /ActiveConfigCapabilityMismatch/u);
   assert.match(economyStakeIngressRuntimeSource, /fn authenticate_daily_law/u);
@@ -936,15 +953,18 @@ test("production combined-hook build stays identity-gated and fail-closed", () =
   );
 });
 
-test("all fifteen production codecs are frozen without a dispatcher or entrypoint", () => {
+test("all fifteen codecs stay pure while truth reports the feature-gated held production surface", () => {
   assert.match(economySource, /pub mod production_instruction;/u);
   assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_NAMESPACE: &\[u8; 8\] = b"IATB3EC1"/u);
   assert.match(economyProductionInstructionSource, /OPEN_POSITION_OPCODE: u8 = 6/u);
   assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_LEN: usize = 32/u);
   assert.match(economyProductionInstructionSource, /PRODUCTION_INSTRUCTION_COUNT: usize = 15/u);
   assert.match(economyProductionInstructionSource, /all_15_instruction_abi_frozen: true/u);
-  assert.match(economyProductionInstructionSource, /production_dispatcher_exposed: false/u);
-  assert.match(economyProductionInstructionSource, /production_entrypoint_exposed: false/u);
+  assert.match(economyProductionInstructionSource, /production_surface_feature_gated: true/u);
+  assert.match(economyProductionInstructionSource, /production_dispatcher_exposed: true/u);
+  assert.match(economyProductionInstructionSource, /production_entrypoint_exposed: true/u);
+  assert.match(economyProductionInstructionSource, /any_handler_complete: true/u);
+  assert.match(economyProductionInstructionSource, /devnet_executed: false/u);
   assert.match(economyProductionInstructionSource, /mainnet_hold: true/u);
   assert.doesNotMatch(
     economyProductionInstructionSource,
@@ -952,7 +972,83 @@ test("all fifteen production codecs are frozen without a dispatcher or entrypoin
   );
 });
 
-test("production ABI routing requires the composed capability and stays nonexecuting", () => {
+test("authenticated production route counts and held release truth match the economic gate matrix", () => {
+  const surface = economicWriteGateMatrix.currentProductionSourceSurface;
+  assert.deepEqual(
+    {
+      discriminants: surface.exactDiscriminantCount,
+      dispositions: surface.sourceDispositionCompleteCount,
+      active: surface.activeHandlerCount,
+      initializationHold: surface.initializationPolicyHoldCount,
+      cccDisabled: surface.cccDisabledHandlerCount,
+      coreHold: surface.coreCustodyPolicyHoldCount,
+      unavailable: surface.unavailableHandlerCount,
+    },
+    {
+      discriminants: 15,
+      dispositions: 15,
+      active: 6,
+      initializationHold: 5,
+      cccDisabled: 3,
+      coreHold: 1,
+      unavailable: 0,
+    },
+  );
+  assert.equal(
+    economicWriteGateMatrix.handlers.filter(({ handlerComplete }) => handlerComplete).length,
+    6,
+  );
+  assert.equal(
+    economicWriteGateMatrix.handlers.filter(
+      ({ productionDisposition }) => productionDisposition === "INITIALIZATION_POLICY_HOLD",
+    ).length,
+    5,
+  );
+  assert.equal(
+    economicWriteGateMatrix.handlers.filter(
+      ({ productionDisposition }) => productionDisposition === "CCC_DISABLED",
+    ).length,
+    3,
+  );
+  assert.deepEqual(surface.claimLanePrincipalActiveLanes, [1, 2, 4]);
+  assert.deepEqual(surface.claimLanePrincipalCorePolicyHoldLanes, [3]);
+
+  assert.match(economyProductionDispatchSource, /PRODUCTION_ACTIVE_HANDLER_COUNT: usize = 6/u);
+  assert.match(economyProductionDispatchSource, /PRODUCTION_DISABLED_HANDLER_COUNT: usize = 3/u);
+  assert.match(economyProductionDispatchSource, /PRODUCTION_POLICY_HELD_HANDLER_COUNT: usize = 6/u);
+  assert.match(economyProductionDispatchSource, /initialization_policy_held_routes: 5/u);
+  assert.match(economyProductionDispatchSource, /claim_lane_principal_non_core_routed: true/u);
+  assert.match(economyProductionDispatchSource, /claim_lane_principal_core_policy_held: true/u);
+  assert.match(economyProductionDispatchSource, /all_15_handlers_complete: false/u);
+  assert.match(economyProductionDispatchSource, /production_identity_evidence_verified: false/u);
+  assert.match(economyProductionDispatchSource, /devnet_executed: false/u);
+  assert.match(economyProductionDispatchSource, /mainnet_hold: true/u);
+
+  assert.match(economyProductionEntrypointSource, /routed_complete_handler_count: 15/u);
+  assert.match(economyProductionEntrypointSource, /routed_active_handler_count: 6/u);
+  assert.match(economyProductionEntrypointSource, /routed_disabled_handler_count: 3/u);
+  assert.match(economyProductionEntrypointSource, /routed_policy_held_handler_count: 6/u);
+  assert.match(economyProductionEntrypointSource, /all_15_handlers_complete: false/u);
+  assert.match(economyProductionEntrypointSource, /production_identity_evidence_verified: false/u);
+  assert.match(economyProductionEntrypointSource, /devnet_executed: false/u);
+  assert.match(economyProductionEntrypointSource, /release_authorized: false/u);
+  assert.match(economyProductionEntrypointSource, /mainnet_hold: true/u);
+
+  for (const falseGate of [
+    "all15HandlersActive",
+    "all15HandlersComplete",
+    "productionIdentityEvidenceVerified",
+    "devnetExecuted",
+    "devnetTransactionRollbackProven",
+    "releaseAuthorized",
+  ]) {
+    assert.equal(surface[falseGate], false, falseGate);
+  }
+  assert.equal(surface.mainnetHold, true);
+  assert.equal(economicWriteGateMatrix.deploymentExposure, "DISABLED_UNTIL_ALL_15_PASS");
+});
+
+test("the component-scoped account-graph preflight stays nonexecuting", () => {
   assert.match(
     economySource,
     /#\[cfg\(feature = "runtime-account-bridge"\)\]\s+pub mod production_dispatch;/u,
@@ -981,6 +1077,50 @@ test("production ABI routing requires the composed capability and stays nonexecu
   assert.doesNotMatch(
     economyProductionDispatchSource,
     /try_borrow(?:_mut)?_(?:data|lamports)|invoke(?:_signed)?\s*\(|process_instruction|entrypoint!|RpcClient|send_and_confirm/u,
+  );
+});
+
+test("CCC round production routes call retained kernels and fail before accounts or effects", () => {
+  assert.match(economySource, /CCC_DLC_GENESIS_ENABLED: bool = false/u);
+  assert.match(
+    economySource,
+    /#\[cfg\(feature = "runtime-production-dispatch"\)\]\s+pub mod production_round_disabled;/u,
+  );
+  const execute = functionBody(
+    economyProductionRoundDisabledSource,
+    "execute_runtime_production_disabled_round_instruction",
+  );
+  assertTokensInOrder(
+    execute,
+    [
+      "program_id.to_bytes() != binding.program_id()",
+      "require_runtime_law_binding(runtime_law, binding)?",
+      "decode_production_instruction(instruction_data)?",
+      "ProductionInstruction::CommitRound",
+      "commit_round(",
+      "ProductionInstruction::SettleRound",
+      "settle_round(",
+      "ProductionInstruction::ExpireRound",
+      "expire_round(",
+    ],
+    "production CCC-disabled round boundary",
+  );
+  for (const fact of [
+    "ccc_dlc_genesis_enabled: CCC_DLC_GENESIS_ENABLED",
+    "ccc_dlc_not_active_returned: true",
+    "operation_accounts_accepted: false",
+    "account_borrows_executed: false",
+    "account_writes_executed: false",
+    "cpi_executed: false",
+    "active_feature_success_possible: false",
+    "source_complete_disabled_handlers: true",
+    "mainnet_hold: true",
+  ]) {
+    assert.ok(economyProductionRoundDisabledSource.includes(fact), fact);
+  }
+  assert.doesNotMatch(
+    economyProductionRoundDisabledSource,
+    /AccountInfo|try_borrow|invoke(?:_signed)?\s*\(|RpcClient|send_and_confirm/u,
   );
 });
 

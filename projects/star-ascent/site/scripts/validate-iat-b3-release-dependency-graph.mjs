@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { canonicalizeRfc8785 } from "./iat-v2-canonical-json.mjs";
 import { validateExternalCheckpointProviderReadinessManifest } from "./validate-iat-b3-external-checkpoint-provider-readiness.mjs";
 import {
-  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
+  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING,
   PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS,
   parseProductionIdentityAuthorityEvidenceJson,
   validateProductionIdentityAuthorityEvidenceManifest,
@@ -40,11 +40,11 @@ const DEFAULT_MANIFEST_PATH = resolve(
 );
 const V2_PARITY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
-  sha256: "5e783b6826da19e0d31c2e5bbccddb7875d362cc6b4072cc420161c85f69b6d6",
+  sha256: "4c19a7f250f0caa496476bc64e669e3bbcb46cac03092b3b272fc0c8b19037ba",
 });
 const OWNER_POLICY_SCOPED_PACKET = Object.freeze({
   path: "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-  sha256: "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+  sha256: "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
   bindingScope: "REFERENCE_CONTRACT_ONLY",
 });
 const PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET = Object.freeze({
@@ -85,8 +85,8 @@ export const RELEASE_DEPENDENCY_ARTIFACT_POLICY = Object.freeze({
   networkReadsAllowed: false,
   ownerPolicyFreezeBinding: OWNER_POLICY_SCOPED_PACKET,
   privacyVaultNativeInstructionPlanBinding: PRIVACY_VAULT_NATIVE_INSTRUCTION_SCOPED_PACKET,
-  productionIdentityAuthorityTrustBinding:
-    EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
+  productionIdentityAuthorityAutomatedEvidenceBinding:
+    EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING,
 });
 
 const artifact = (path, sha256) => Object.freeze({
@@ -106,7 +106,7 @@ const ARTIFACTS = Object.freeze({
   ),
   shielded: artifact(
     "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
-    "a9df9c5c976bba0ebdc5cbcbe9c77fe0de77b4949a3cc72b57c75717517c77df",
+    "d6c521476f7304359837bac545af0a4e68596ac67c74339e8ce7ec2909809b7b",
   ),
   tokenHost: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-token-2022-confidential-host-compatibility.v1.json",
@@ -122,15 +122,15 @@ const ARTIFACTS = Object.freeze({
   ),
   economyMatrix: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
-    "d73e68b031589c63cb126251aed20b79eac5a82402e41dfdafeb41292b54dd5a",
+    "47a5fdf56c18e8f377fc9721e0436be815d9fe518ae30ba1078d1c0a57925229",
   ),
   identityAuthorityEvidence: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
-    "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+    "94fc32f1380843ec31b2d94077061d7e788114d346d71f7c3a1001f2fcd980c5",
   ),
   law: artifact(
     "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
-    "cb885b7f05ac45cf907e33e9c4858f1d22b6995091d06269b7a7dda08e1191ec",
+    "d9b791db73eab062b7ec248dcddf72344350173dd16200f01ff8632d0ccde16d",
   ),
   localRehearsal: artifact(
     "projects/star-ascent/site/docs/b3/LOCAL_VALIDATOR_REHEARSAL.md",
@@ -146,11 +146,11 @@ const ARTIFACTS = Object.freeze({
   ),
   checkpointProvider: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-external-checkpoint-provider-readiness.v1.json",
-    "f36ed9746c756c16d5b517e3c26c5da592fcce01ee79facfa49141bc6753872d",
+    "24f1c1879942346be86d3d2c4ff2907de6f890940cc74d5d3ecdd2bf54555fb5",
   ),
   xProvider: artifact(
     "projects/star-ascent/site/docs/b3/iat-b3-x-social-evidence-provider-readiness.v1.json",
-    "4f1ef74e606be4436590e495492866d4b553bff6bed60d489ff425341168b87b",
+    "1067ce1277b8d8f995db85d772d495ff17b51c58bc5da43c68b2cb7bcc5a101b",
   ),
   cost: artifact(
     "projects/star-ascent/site/docs/b3/COST_FEASIBILITY.md",
@@ -162,7 +162,7 @@ const ARTIFACTS = Object.freeze({
   ),
   mainnetPath: artifact(
     "projects/star-ascent/site/docs/b3/MAINNET_PATH.md",
-    "e6c8bf20f713fb5c8fea7c5fadab09bea7d3c4cf8250c17d733a26c571600763",
+    "6dcf90bf6ceaf27ca9a5a95c4984c0dd53489202b0a09046211e0f6de4186672",
   ),
 });
 
@@ -174,7 +174,7 @@ const spec = (id, dependencies, completionPredicate, contractArtifact = null) =>
 });
 
 const RELEASE_DEPENDENCY_NONTERMINAL_NODE_SPECS = Object.freeze([
-  spec("LIVE_ESTATE_CANONICAL_MINT_DECISION", [], "SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET", ARTIFACTS.estate),
+  spec("LIVE_ESTATE_CANONICAL_MINT_DECISION", [], "TREZOR_MODEL_T_SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET", ARTIFACTS.estate),
   spec("V2_FEATURE_PARITY", [], "ZERO_UNAUTHORIZED_CUT_V2_PARITY_PACKET", ARTIFACTS.parity),
   spec("TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", [], "EXACT_TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY_PACKET", ARTIFACTS.tokenHost),
   spec("CORE_CUSTODY_POLICY_ADAPTER", ["V2_FEATURE_PARITY"], "SCOPED_CORE_CUSTODY_POLICY_AND_NATIVE_ADAPTER_PACKET", ARTIFACTS.core),
@@ -186,21 +186,21 @@ const RELEASE_DEPENDENCY_NONTERMINAL_NODE_SPECS = Object.freeze([
   spec("COMBINED_STAKE_INGRESS_HOOK", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CONFIG_GENESIS_PHASE_CODEC", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK"], "SAME_ARTIFACT_DAILY_LAW_AND_STAKE_INGRESS_PACKET", ARTIFACTS.localRehearsal),
   spec("REWARD_WATERFALL_PROOFS", ["V2_FEATURE_PARITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING"], "REWARD_WATERFALL_PROOF_CONTRACT_PACKET", ARTIFACTS.waterfall),
   spec("DURABLE_REWARD_CAS", ["DAILY_LAW_NATIVE_HOOK", "REWARD_WATERFALL_PROOFS"], "DURABLE_CAS_AND_ROLLBACK_BOUNDARY_PACKET", ARTIFACTS.cas),
-  spec("EXTERNAL_CHECKPOINT_PROVIDER", ["PRODUCTION_IDENTITY_INPUT_FREEZE", "DURABLE_REWARD_CAS"], "EXTERNAL_CHECKPOINT_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT", ARTIFACTS.checkpointProvider),
-  spec("X_SOCIAL_EVIDENCE_PROVIDER", ["PRODUCTION_IDENTITY_INPUT_FREEZE", "REWARD_WATERFALL_PROOFS", "DURABLE_REWARD_CAS", "EXTERNAL_CHECKPOINT_PROVIDER"], "X_SOCIAL_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT", ARTIFACTS.xProvider),
+  spec("EXTERNAL_CHECKPOINT_PROVIDER", ["PRODUCTION_IDENTITY_INPUT_FREEZE", "DURABLE_REWARD_CAS"], "EXTERNAL_CHECKPOINT_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT", ARTIFACTS.checkpointProvider),
+  spec("X_SOCIAL_EVIDENCE_PROVIDER", ["PRODUCTION_IDENTITY_INPUT_FREEZE", "REWARD_WATERFALL_PROOFS", "DURABLE_REWARD_CAS", "EXTERNAL_CHECKPOINT_PROVIDER"], "X_SOCIAL_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT", ARTIFACTS.xProvider),
   spec("ECONOMY_ALL_15_WRITE_ADAPTER", ["V2_FEATURE_PARITY", "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC", "GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "REWARD_WATERFALL_PROOFS"], "ALL_15_ECONOMY_WRITE_ADAPTER_SCOPED_OUTPUT", ARTIFACTS.economyMatrix),
   spec("REWARD_LOCAL_WRITE_CONSUMER_GATING", ["PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "REWARD_WATERFALL_PROOFS", "DURABLE_REWARD_CAS", "EXTERNAL_CHECKPOINT_PROVIDER", "X_SOCIAL_EVIDENCE_PROVIDER", "ECONOMY_ALL_15_WRITE_ADAPTER"], "REWARD_LOCAL_WRITE_AND_EVERY_CONSUMER_GATE_PACKET"),
-  spec("PRIVACY_VAULT_CLIENT", ["V2_FEATURE_PARITY", "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK"], "PRIVACY_VAULT_FULL_LIFECYCLE_REVIEW_PACKET", ARTIFACTS.shielded),
-  spec("DEPENDENCY_SECURITY_REMEDIATION", ["V2_FEATURE_PARITY"], "ZERO_UNACCEPTED_DEPENDENCY_FINDINGS_PACKET"),
+  spec("PRIVACY_VAULT_CLIENT", ["V2_FEATURE_PARITY", "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK"], "PRIVACY_VAULT_FULL_LIFECYCLE_AUTOMATED_DIRECT_EVIDENCE_PACKET", ARTIFACTS.shielded),
+  spec("DEPENDENCY_SECURITY_REMEDIATION", ["V2_FEATURE_PARITY"], "ZERO_UNRESOLVED_DEPENDENCY_FINDINGS_AUTOMATED_DIRECT_EVIDENCE_PACKET"),
   spec("PRODUCTION_BINARY_REPRODUCIBILITY", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "ECONOMY_ALL_15_WRITE_ADAPTER", "REWARD_LOCAL_WRITE_CONSUMER_GATING", "PRIVACY_VAULT_CLIENT", "DEPENDENCY_SECURITY_REMEDIATION"], "REPRODUCIBLE_FINAL_BINARIES_PACKET", ARTIFACTS.cost),
   spec("ADVERSARIAL_DEVNET_REHEARSAL", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "PRODUCTION_BINARY_REPRODUCIBILITY"], "FULL_SYSTEM_ADVERSARIAL_DEVNET_PACKET", ARTIFACTS.devnet),
   spec("DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL", "B3_COST_CEREMONY_FUNDING"], "DEPLOYED_BYTES_IDENTITIES_AND_AUTHORITY_SEAL_PACKET", ARTIFACTS.identityAuthorityEvidence),
   spec("B3_COST_CEREMONY_FUNDING", ["GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "PRODUCTION_BINARY_REPRODUCIBILITY"], "B3_COST_AND_CEREMONY_FUNDING_PACKET", ARTIFACTS.identityAuthorityEvidence),
-  spec("LOCALIZATION_EVIDENCE", ["V2_FEATURE_PARITY"], "ALL_50_LOCALES_ACCEPTED_NATIVE_REVIEW_PACKET"),
+  spec("LOCALIZATION_EVIDENCE", ["V2_FEATURE_PARITY"], "ALL_50_LOCALE_CLAIMS_AUTOMATED_DIRECT_EVIDENCE_PACKET"),
   spec("MEDIA_MASTER_COMPLETENESS", ["V2_FEATURE_PARITY"], "ALL_REQUIRED_MEDIA_MASTERS_PACKET"),
   spec("V2_LAUNCH_CEREMONY_BOUNDARY", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "V2_FEATURE_PARITY"], "V2_HOLD_AND_B3_SUPERSESSION_PACKET"),
   spec("RELEASE_SURFACE_PUBLIC_CLAIMS", ["LIVE_ESTATE_CANONICAL_MINT_DECISION", "V2_FEATURE_PARITY", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", "LOCALIZATION_EVIDENCE", "MEDIA_MASTER_COMPLETENESS", "V2_LAUNCH_CEREMONY_BOUNDARY"], "SOURCE_BOUND_RELEASE_SURFACE_CLAIMS_PACKET"),
-  spec("INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC", "GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "REWARD_WATERFALL_PROOFS", "DURABLE_REWARD_CAS", "EXTERNAL_CHECKPOINT_PROVIDER", "X_SOCIAL_EVIDENCE_PROVIDER", "ECONOMY_ALL_15_WRITE_ADAPTER", "REWARD_LOCAL_WRITE_CONSUMER_GATING", "PRIVACY_VAULT_CLIENT", "DEPENDENCY_SECURITY_REMEDIATION", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL", "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", "B3_COST_CEREMONY_FUNDING", "LOCALIZATION_EVIDENCE", "MEDIA_MASTER_COMPLETENESS", "RELEASE_SURFACE_PUBLIC_CLAIMS"], "INDEPENDENT_MULTI_DOMAIN_REVIEW_PACKET", ARTIFACTS.mainnetPath),
+  spec("AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE", ["TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY", "CORE_CUSTODY_POLICY_ADAPTER", "FACTION_ECONOMICS_FUNDING", "CONFIG_GENESIS_PHASE_CODEC", "GENESIS_ALLOCATIONS_CONSERVATION", "PRODUCTION_IDENTITY_INPUT_FREEZE", "DAILY_LAW_NATIVE_HOOK", "COMBINED_STAKE_INGRESS_HOOK", "REWARD_WATERFALL_PROOFS", "DURABLE_REWARD_CAS", "EXTERNAL_CHECKPOINT_PROVIDER", "X_SOCIAL_EVIDENCE_PROVIDER", "ECONOMY_ALL_15_WRITE_ADAPTER", "REWARD_LOCAL_WRITE_CONSUMER_GATING", "PRIVACY_VAULT_CLIENT", "DEPENDENCY_SECURITY_REMEDIATION", "PRODUCTION_BINARY_REPRODUCIBILITY", "ADVERSARIAL_DEVNET_REHEARSAL", "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", "B3_COST_CEREMONY_FUNDING", "LOCALIZATION_EVIDENCE", "MEDIA_MASTER_COMPLETENESS", "RELEASE_SURFACE_PUBLIC_CLAIMS"], "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE_PACKET", ARTIFACTS.mainnetPath),
 ]);
 
 const TERMINAL_ID = "TERMINAL_B3_REVIEW_PACKET";
@@ -305,7 +305,7 @@ const PLACEHOLDER = /(?:placeholder|example|sample|dummy|fake|mock|synthetic|tod
 const HEX_32 = /^[0-9a-f]{64}$/u;
 
 const CANONICAL_BLOCKERS = Object.freeze({
-  LIVE_ESTATE_CANONICAL_MINT_DECISION: "Signed canonical mint decision for every live Estate remains unresolved.",
+  LIVE_ESTATE_CANONICAL_MINT_DECISION: "Trezor Model T-signed canonical mint decision for every live Estate remains unresolved.",
   V2_FEATURE_PARITY: "Retained V2 feature parity and explicit supersession evidence remain incomplete.",
   TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY: "Exact Token-2022 confidential-transfer host compatibility evidence remains incomplete.",
   CORE_CUSTODY_POLICY_ADAPTER: "Core custody boundaries, native adapter behavior, and owner acceptance remain unresolved.",
@@ -317,21 +317,21 @@ const CANONICAL_BLOCKERS = Object.freeze({
   COMBINED_STAKE_INGRESS_HOOK: "Daily Law and stake ingress are not combined in the same production artifact.",
   REWARD_WATERFALL_PROOFS: "Reward waterfall proof coverage remains structural and nonactivating.",
   DURABLE_REWARD_CAS: "Durable reward CAS lacks externally verified rollback protection and activation authority.",
-  EXTERNAL_CHECKPOINT_PROVIDER: "External checkpoint provider review packet remains structurally blocked and unauthenticated.",
-  X_SOCIAL_EVIDENCE_PROVIDER: "X social evidence provider review packet remains structurally blocked and unauthenticated.",
+  EXTERNAL_CHECKPOINT_PROVIDER: "External checkpoint automated source-bound direct-evidence packet remains incomplete and unauthenticated.",
+  X_SOCIAL_EVIDENCE_PROVIDER: "X social automated source-bound direct-evidence packet remains incomplete and unauthenticated.",
   ECONOMY_ALL_15_WRITE_ADAPTER: "All 15 economy writes do not yet have production native adapter completion evidence.",
   REWARD_LOCAL_WRITE_CONSUMER_GATING: "Unanchored local reward writes and every downstream consumer are not yet gated.",
-  PRIVACY_VAULT_CLIENT: "Required Privacy Vault client lifecycle and native integration evidence remain incomplete.",
-  DEPENDENCY_SECURITY_REMEDIATION: "Dependency security findings lack accepted remediation and independent closure evidence.",
+  PRIVACY_VAULT_CLIENT: "Required Privacy Vault full-lifecycle automated direct evidence and native integration evidence remain incomplete.",
+  DEPENDENCY_SECURITY_REMEDIATION: "Dependency security findings lack resolved remediation backed by automated source-bound direct evidence.",
   PRODUCTION_BINARY_REPRODUCIBILITY: "The 154,952-byte local candidate is not production; reproducible final binaries remain unresolved.",
   ADVERSARIAL_DEVNET_REHEARSAL: "Full-system adversarial Devnet rehearsal against final binaries remains incomplete.",
   DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE: "Deployed bytes and authority seal evidence remain absent because there is no Mainnet deployment.",
   B3_COST_CEREMONY_FUNDING: "B3 cost model, ceremony funding, and accountable source evidence remain unresolved.",
-  LOCALIZATION_EVIDENCE: "All 50 required locales lack complete native review and immutable acceptance evidence.",
+  LOCALIZATION_EVIDENCE: "All 50 required locale claims lack complete automated source-bound direct evidence.",
   MEDIA_MASTER_COMPLETENESS: "All media are required; 14 full masters are missing and N/A is forbidden.",
   V2_LAUNCH_CEREMONY_BOUNDARY: "V2 remains HOLD; B3 supersession is unresolved and Original SPL cannot authorize launch.",
   RELEASE_SURFACE_PUBLIC_CLAIMS: "Public release claims cannot be enabled before identity, localization, media, and boundary closure.",
-  INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW: "Independent security, economic, privacy, and legal review remains incomplete.",
+  AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE: "Automated source-bound direct evidence for security, economic, privacy, and legal claims remains incomplete.",
   TERMINAL_B3_REVIEW_PACKET: "One or more required B3 dependency review packets remain blocked.",
 });
 
@@ -745,7 +745,7 @@ function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnix
       }
       // This packet is a source-bound prerequisite only. It deliberately does
       // not set PRIVACY_VAULT_CLIENT true; that node requires the full native,
-      // proof, runtime, recovery, Devnet, and independent-review lifecycle.
+      // proof, runtime, recovery, Devnet, and automated direct-evidence lifecycle.
     } catch (error) {
       violations.push(`PRIVACY_VAULT_CLIENT: native instruction prerequisite validator failed closed (${error.message})`);
     }
@@ -761,8 +761,8 @@ function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnix
         ARTIFACTS.identityAuthorityEvidence.path,
       );
       const result = validateProductionIdentityAuthorityEvidenceManifest(identityEvidence, {
-        trustBinding:
-          RELEASE_DEPENDENCY_ARTIFACT_POLICY.productionIdentityAuthorityTrustBinding,
+        automatedEvidenceBinding:
+          RELEASE_DEPENDENCY_ARTIFACT_POLICY.productionIdentityAuthorityAutomatedEvidenceBinding,
         identityInputBytes: bytesByPath.get(
           PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS.identityInputFreeze.path,
         ),
@@ -792,10 +792,13 @@ function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnix
   const checkpoint = stableArtifactJson("EXTERNAL_CHECKPOINT_PROVIDER", bytesByPath, violations);
   if (checkpoint) {
     try {
-      const result = validateExternalCheckpointProviderReadinessManifest(checkpoint, {
+      validateExternalCheckpointProviderReadinessManifest(checkpoint, {
         evaluationUnixSeconds,
       });
-      states.set("EXTERNAL_CHECKPOINT_PROVIDER", result.productionReviewPacketComplete === true);
+      // The legacy provider packet does not yet expose the migrated automated
+      // source-bound direct-evidence predicate. Parsing it can detect drift,
+      // but cannot complete this node.
+      states.set("EXTERNAL_CHECKPOINT_PROVIDER", false);
     } catch (error) {
       violations.push(`EXTERNAL_CHECKPOINT_PROVIDER: scoped validator failed closed (${error.message})`);
     }
@@ -804,13 +807,13 @@ function scopedProductionPredicateStates(bytesByPath, violations, evaluationUnix
   const xEvidence = stableArtifactJson("X_SOCIAL_EVIDENCE_PROVIDER", bytesByPath, violations);
   if (xEvidence) {
     try {
-      const result = validateXSocialEvidenceProviderReadinessManifest(xEvidence, {
+      validateXSocialEvidenceProviderReadinessManifest(xEvidence, {
         evaluationUnixSeconds,
       });
-      states.set(
-        "X_SOCIAL_EVIDENCE_PROVIDER",
-        result.productionXSocialEvidenceReviewPacketComplete === true,
-      );
+      // The legacy provider packet does not yet expose the migrated automated
+      // source-bound direct-evidence predicate. Parsing it can detect drift,
+      // but cannot complete this node.
+      states.set("X_SOCIAL_EVIDENCE_PROVIDER", false);
     } catch (error) {
       violations.push(`X_SOCIAL_EVIDENCE_PROVIDER: scoped validator failed closed (${error.message})`);
     }
@@ -970,7 +973,7 @@ function validateBlockerSpecificity(nodes, violations) {
   requireTerms("COMBINED_STAKE_INGRESS_HOOK", ["same production artifact", "not combined"]);
   requireTerms("PRODUCTION_BINARY_REPRODUCIBILITY", ["154,952", "not production"]);
   requireTerms("DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE", ["deployed bytes", "authority", "no Mainnet deployment"]);
-  requireTerms("LOCALIZATION_EVIDENCE", ["50", "native review", "required"]);
+  requireTerms("LOCALIZATION_EVIDENCE", ["50", "automated", "direct evidence", "required"]);
   requireTerms("MEDIA_MASTER_COMPLETENESS", ["14", "missing", "required", "N/A"]);
   requireTerms("V2_LAUNCH_CEREMONY_BOUNDARY", ["HOLD", "supersession", "Original SPL"]);
 }

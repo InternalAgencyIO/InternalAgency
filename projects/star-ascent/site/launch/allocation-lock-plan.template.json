@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "status": "HOLD",
   "network": "mainnet-beta",
   "allocations": {
@@ -74,9 +74,11 @@
       "scheduleEvidence": null
     }
   },
-  "independentReview": {
-    "reviewedBy": null,
-    "reviewedAtUtc": null,
-    "planSha256": null
+  "automatedObservation": {
+    "mode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "planSha256": null,
+    "observedAtUtc": null
   }
 }

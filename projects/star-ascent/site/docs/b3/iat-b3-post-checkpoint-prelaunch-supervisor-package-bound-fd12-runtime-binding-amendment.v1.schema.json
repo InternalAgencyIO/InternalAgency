@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-fd12-runtime-binding-amendment/v1",
+  "title": "IAT B3 FD12 runtime-binding amendment",
+  "description": "Source-only amendment for pre-FD3 peer identity, external one-use CAS, independent device/toolchain observation and protected identity-atomic recovery. It grants no compile, execution, device, transaction, broadcast, checkpoint or release authority.",
+  "x-iat-b3-fd-maps": {
+    "common": {
+      "watchdogChannel": 6,
+      "observerChannel": 7,
+      "custodianChannel": 8,
+      "anchorReceipt": 11,
+      "ownerRootKeyAnchor": 12,
+      "watchdogPidfd": 13,
+      "observerPidfd": 14,
+      "custodianPidfd": 15,
+      "oneShotCasToken": 16,
+      "runtimeBindingReceipt": 17
+    },
+    "compile": {
+      "sysrootDirectory": 18,
+      "launchCwdDirectory": 19,
+      "compiler": 20,
+      "linker": 21,
+      "archiver": 22,
+      "staticNode": 23,
+      "executorSource": 24,
+      "protectedDestinationParent": 25,
+      "recoveryQuarantineDirectory": 26,
+      "kernelBindingDescriptor": 27,
+      "runtimeBindingProviderExecutable": 28
+    },
+    "native": {
+      "installParent": 5,
+      "evidence": 20,
+      "selfImage": 21,
+      "recoveryQuarantineDirectory": 22,
+      "kernelBindingDescriptor": 23,
+      "runtimeBindingProviderExecutable": 24
+    },
+    "kernelDescriptorQuorum": {
+      "signingPreimage": "ASCII(IAT_B3_BPS08A_KERNEL_DESCRIPTOR_<ROLE>_V1)||00||DESCRIPTOR_BYTES_THROUGH_PRINCIPAL_DIGESTS",
+      "signatureAlgorithm": "Ed25519",
+      "roles": ["watchdog", "observer", "custodian"],
+      "bindsRuntimeReceiptSha256": true,
+      "bindsProviderExecutableSha256": true,
+      "pairwiseDistinctKeysRequired": true
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "attemptId",
+    "runId",
+    "sessionId",
+    "bootId",
+    "anchorReceiptSha256",
+    "ownerRootDescriptorSha256",
+    "runtimeBindingProviderSha256",
+    "kernelDescriptorSha256",
+    "expiresAtMonotonicNs",
+    "cas",
+    "peers",
+    "device",
+    "toolchain",
+    "recovery",
+    "signatures",
+    "decision",
+    "authority"
+  ],
+  "properties": {
+    "schema": { "const": "iat-b3-bps08a-runtime-binding-receipt/v1" },
+    "attemptId": { "$ref": "#/$defs/nonempty" },
+    "runId": { "$ref": "#/$defs/nonempty" },
+    "sessionId": { "$ref": "#/$defs/nonempty" },
+    "bootId": { "$ref": "#/$defs/nonempty" },
+    "anchorReceiptSha256": { "$ref": "#/$defs/sha256" },
+    "ownerRootDescriptorSha256": { "$ref": "#/$defs/sha256" },
+    "runtimeBindingProviderSha256": { "$ref": "#/$defs/sha256" },
+    "kernelDescriptorSha256": { "$ref": "#/$defs/sha256" },
+    "expiresAtMonotonicNs": { "$ref": "#/$defs/decimal" },
+    "cas": { "$ref": "#/$defs/cas" },
+    "peers": { "$ref": "#/$defs/peers" },
+    "device": { "$ref": "#/$defs/device" },
+    "toolchain": { "$ref": "#/$defs/toolchain" },
+    "recovery": { "$ref": "#/$defs/recovery" },
+    "signatures": { "$ref": "#/$defs/signatures" },
+    "decision": { "const": "RUNTIME_BOUND" },
+    "authority": { "const": "WATCHDOG_OBSERVER_CUSTODIAN_QUORUM" }
+  },
+  "$defs": {
+    "nonempty": { "type": "string", "minLength": 1, "maxLength": 512 },
+    "decimal": { "type": "string", "pattern": "^(0|[1-9][0-9]*)$", "maxLength": 32 },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "hex32": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "hex64": { "type": "string", "pattern": "^[0-9a-f]{128}$" },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dev", "ino", "mode", "mountId", "openFileDescriptionSha256"],
+      "properties": {
+        "dev": { "$ref": "#/$defs/decimal" },
+        "ino": { "$ref": "#/$defs/decimal" },
+        "mode": { "type": "string", "pattern": "^[0-7]{4,6}$" },
+        "mountId": { "$ref": "#/$defs/decimal" },
+        "openFileDescriptionSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "principal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "pid",
+        "uid",
+        "gid",
+        "startTicks",
+        "pidfdFd",
+        "pidfdDev",
+        "pidfdIno",
+        "executableSha256",
+        "securityLabelSha256",
+        "namespaceProjectionSha256",
+        "cgroupProjectionSha256",
+        "authorityProjectionSha256",
+        "channelOpenFileDescriptionSha256"
+      ],
+      "properties": {
+        "role": { "enum": ["watchdog", "observer", "custodian"] },
+        "pid": { "$ref": "#/$defs/decimal" },
+        "uid": { "$ref": "#/$defs/decimal" },
+        "gid": { "$ref": "#/$defs/decimal" },
+        "startTicks": { "$ref": "#/$defs/decimal" },
+        "pidfdFd": { "enum": ["13", "14", "15"] },
+        "pidfdDev": { "$ref": "#/$defs/decimal" },
+        "pidfdIno": { "$ref": "#/$defs/decimal" },
+        "executableSha256": { "$ref": "#/$defs/sha256" },
+        "securityLabelSha256": { "$ref": "#/$defs/sha256" },
+        "namespaceProjectionSha256": { "$ref": "#/$defs/sha256" },
+        "cgroupProjectionSha256": { "$ref": "#/$defs/sha256" },
+        "authorityProjectionSha256": { "$ref": "#/$defs/sha256" },
+        "channelOpenFileDescriptionSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "peers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["watchdog", "observer", "custodian"],
+      "properties": {
+        "watchdog": { "$ref": "#/$defs/principal" },
+        "observer": { "$ref": "#/$defs/principal" },
+        "custodian": { "$ref": "#/$defs/principal" }
+      }
+    },
+    "cas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keySha256", "tokenSha256", "ledgerIdentitySha256", "acquireReceiptSha256", "state"],
+      "properties": {
+        "keySha256": { "$ref": "#/$defs/sha256" },
+        "tokenSha256": { "$ref": "#/$defs/sha256" },
+        "ledgerIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "acquireReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "state": { "const": "ACQUIRED_ONCE_EXTERNAL_DURABLE" }
+      }
+    },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "firmwareVersion", "firmwareIdentitySha256", "derivationPath", "accountPublicKeyHex", "accountAddress", "deviceReceiptSha256", "physicalConfirmationReceiptSha256", "observedBy"],
+      "properties": {
+        "model": { "const": "T2T1" },
+        "firmwareVersion": { "type": "string", "pattern": "^2\\.(1[2-9]|[2-9][0-9])\\.[0-9]+$" },
+        "firmwareIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "derivationPath": { "$ref": "#/$defs/nonempty" },
+        "accountPublicKeyHex": { "$ref": "#/$defs/hex32" },
+        "accountAddress": { "$ref": "#/$defs/nonempty" },
+        "deviceReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "physicalConfirmationReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "observedBy": { "const": "observer" }
+      }
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifestSha256", "toolOpenFileDescriptionManifestSha256", "sysrootManifestSha256", "staticNodeIdentitySha256", "sysrootIdentity", "cwdIdentity", "observedBy"],
+      "properties": {
+        "manifestSha256": { "$ref": "#/$defs/sha256" },
+        "toolOpenFileDescriptionManifestSha256": { "$ref": "#/$defs/sha256" },
+        "sysrootManifestSha256": { "$ref": "#/$defs/sha256" },
+        "staticNodeIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "sysrootIdentity": { "$ref": "#/$defs/identity" },
+        "cwdIdentity": { "$ref": "#/$defs/identity" },
+        "observedBy": { "const": "observer" }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protectedParentIdentity", "quarantineIdentity", "exclusiveLeaseCasSha256", "targetNameSha256", "tombstoneNameSha256", "algorithm", "authorizedBy"],
+      "properties": {
+        "protectedParentIdentity": { "$ref": "#/$defs/identity" },
+        "quarantineIdentity": { "$ref": "#/$defs/identity" },
+        "exclusiveLeaseCasSha256": { "$ref": "#/$defs/sha256" },
+        "targetNameSha256": { "$ref": "#/$defs/sha256" },
+        "tombstoneNameSha256": { "$ref": "#/$defs/sha256" },
+        "algorithm": { "const": "HOLD_FD_RENAMEAT2_REOPEN_COMPARE_FSYNC_UNLINKAT_PROVE_ENOENT_NLINK0" },
+        "authorizedBy": { "const": "custodian" }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publicKeyHex", "signatureHex"],
+      "properties": {
+        "publicKeyHex": { "$ref": "#/$defs/hex32" },
+        "signatureHex": { "$ref": "#/$defs/hex64" }
+      }
+    },
+    "signatures": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["watchdog", "observer", "custodian"],
+      "properties": {
+        "watchdog": { "$ref": "#/$defs/signature" },
+        "observer": { "$ref": "#/$defs/signature" },
+        "custodian": { "$ref": "#/$defs/signature" }
+      }
+    }
+  }
+}

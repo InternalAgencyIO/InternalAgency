@@ -75,7 +75,7 @@ for (const path of [
     }
     previousIndex = matches[0].index;
   }
-  if (!/Publication is a separate human/i.test(content)) {
+  if (!/Publication (?:is|remains) a separate explicit owner decision/i.test(content)) {
     throw new Error(`${path} must separate publication from protocol execution`);
   }
 }

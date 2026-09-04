@@ -16,7 +16,7 @@ import { Keypair, PublicKey } from "@solana/web3.js";
 import { getAssociatedTokenAddressSync, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 
 const repositoryRoot = resolve(".");
-const sandboxRoot = mkdtempSync(join(tmpdir(), "iat-devnet-rehearsal-v2-"));
+const sandboxRoot = mkdtempSync(join(tmpdir(), "iat-devnet-rehearsal-v3-"));
 const fail = (message) => {
   console.error(`FAIL: ${message}`);
   process.exitCode = 1;
@@ -75,7 +75,7 @@ try {
     writeFileSync(rehearsalPath, canonicalPlanned);
   };
 
-  assertValid("canonical PLANNED v2 rehearsal");
+  assertValid("canonical PLANNED v3 rehearsal");
   reject(
     "mainnet allocation drift",
     (fixture) => { fixture.mainnetPlan.allocationBaseUnitAmounts.treasury = "1"; },
@@ -106,7 +106,7 @@ try {
   const metadata = JSON.parse(readFileSync(metadataPath, "utf8"));
   metadata.status = "READY";
   metadata.metadataJsonSha256 = sha256File(join(sandboxRoot, "public", "metadata", "iat.json"));
-  metadata.review = { reviewedBy: "Metadata reviewer", reviewedAtUtc: new Date(Date.now() - 180_000).toISOString() };
+  metadata.automatedObservation.observedAtUtc = new Date(Date.now() - 180_000).toISOString();
   writeFileSync(metadataPath, `${JSON.stringify(metadata, null, 2)}\n`);
 
   const lock = JSON.parse(readFileSync(lockPath, "utf8"));
@@ -128,10 +128,10 @@ try {
     allocation.vaultEvidence = `https://explorer.solana.com/address/${allocation.ownerAddress}`;
     allocation.scheduleEvidence = `https://internalagency.io/token-locks/${name}.json`;
   });
-  lock.independentReview = {
-    reviewedBy: "Independent lock reviewer",
-    reviewedAtUtc: new Date(Date.now() - 120_000).toISOString(),
+  lock.automatedObservation = {
+    ...lock.automatedObservation,
     planSha256: digestJson({ version: lock.version, network: lock.network, allocations: lock.allocations }),
+    observedAtUtc: new Date(Date.now() - 120_000).toISOString(),
   };
   writeFileSync(lockPath, `${JSON.stringify(lock, null, 2)}\n`);
 
@@ -170,7 +170,7 @@ try {
     mintEvidence: addressUrl(mint.toBase58()),
     metadataEvidence: addressUrl(metadataAddress.toBase58()),
   });
-  const allocationReview = {};
+  const allocationObservation = {};
   for (const [index, name] of Object.keys(completed.allocations).entries()) {
     const owner = Keypair.fromSeed(new Uint8Array(32).fill(index + 81)).publicKey;
     const tokenAccount = getAssociatedTokenAddressSync(mint, owner, true, TOKEN_PROGRAM_ID);
@@ -179,7 +179,7 @@ try {
       tokenAccount: tokenAccount.toBase58(),
       evidence: addressUrl(tokenAccount.toBase58()),
     });
-    allocationReview[name] = {
+    allocationObservation[name] = {
       ownerAddress: owner.toBase58(),
       tokenAccount: tokenAccount.toBase58(),
       baseUnitAmount: completed.allocations[name].baseUnitAmount,
@@ -190,7 +190,7 @@ try {
     Object.keys(completed.transactions).map((field, index) => [field, transactionEvidence[index]]),
   ));
   const deviceTime = new Date(Date.now() - 120_000).toISOString();
-  const reviewTime = new Date(Date.now() - 60_000).toISOString();
+  const observationTime = new Date(Date.now() - 60_000).toISOString();
   Object.assign(completed.device, {
     operatorLabel: "Device operator",
     firmwareVersion: "2.8.7",
@@ -200,21 +200,19 @@ try {
     confirmedPlanSha256: completed.mainnetPlan.planSha256,
     completedAtUtc: deviceTime,
   });
-  Object.assign(completed.verifier, {
-    reviewedBy: "Independent verifier",
-    independentOfDeviceOperator: true,
-    reviewedDevice: {
+  Object.assign(completed.automatedObservation, {
+    observedDevice: {
       model: completed.device.model,
       firmwareVersion: completed.device.firmwareVersion,
       suiteOrWalletInterface: completed.device.suiteOrWalletInterface,
     },
-    reviewedMint: completed.token.mint,
-    reviewedMetadataAddress: completed.token.metadataAddress,
-    reviewedAllocations: allocationReview,
-    reviewedActions: completed.mainnetPlan.transactionOrder,
-    reviewedTransactionEvidence: transactionEvidence,
-    reviewedPlanSha256: completed.mainnetPlan.planSha256,
-    completedAtUtc: reviewTime,
+    observedMint: completed.token.mint,
+    observedMetadataAddress: completed.token.metadataAddress,
+    observedAllocations: allocationObservation,
+    observedActions: completed.mainnetPlan.transactionOrder,
+    observedTransactionEvidence: transactionEvidence,
+    observedPlanSha256: completed.mainnetPlan.planSha256,
+    observedAtUtc: observationTime,
   });
   writeFileSync(rehearsalPath, `${JSON.stringify(completed, null, 2)}\n`);
   assertValid("complete exact-shape Model T rehearsal");
@@ -247,9 +245,9 @@ try {
     "canonical mainnet plan digest",
   );
   rejectCompleted(
-    "device operator reused as verifier through whitespace and format characters",
-    (fixture) => { fixture.verifier.reviewedBy = "  DEVICE\u200b   OPERATOR  "; },
-    "accountability-label normalization",
+    "human reviewer injected into automated observation",
+    (fixture) => { fixture.automatedObservation.humanReviewerRequired = true; },
+    "exact automated no-human/no-self-attestation policy",
   );
 } finally {
   rmSync(sandboxRoot, { recursive: true, force: true });

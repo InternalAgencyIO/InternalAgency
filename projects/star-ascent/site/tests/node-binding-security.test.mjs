@@ -120,22 +120,29 @@ test("the activation-first SQL gives exactly 1,000 slots and safely activates co
   db.close();
 });
 
-test("route source eliminates UUID bearer authorization and enforces one-time Premium activation", () => {
+test("route source eliminates UUID bearer authorization and isolates legacy writes behind the retained-V2 HOLD", () => {
   const verifyRoute = readFileSync(new URL("../app/api/nodes/verify-wallet/route.ts", import.meta.url), "utf8");
   const countryRoute = readFileSync(new URL("../app/api/nodes/select-country/route.ts", import.meta.url), "utf8");
   const authorizeRoute = readFileSync(new URL("../app/api/x/authorize/route.ts", import.meta.url), "utf8");
   const callbackRoute = readFileSync(new URL("../app/api/x/callback/route.ts", import.meta.url), "utf8");
+  const callbackHandler = readFileSync(new URL("../app/api/x/callback/retained-v2-callback-handler.mjs", import.meta.url), "utf8");
+  const runtimeBoundary = readFileSync(new URL("../app/api/x/callback/retained-v2-runtime-boundary.mjs", import.meta.url), "utf8");
   const bindingPolicy = readFileSync(new URL("../engagement/node-binding-policy.mjs", import.meta.url), "utf8");
   assert.doesNotMatch(verifyRoute, /nodeId:\s*binding\?\.id/);
   assert.doesNotMatch(countryRoute, /input\.nodeId/);
   assert.doesNotMatch(authorizeRoute, /searchParams\.get\("nodeId"\)/);
   assert.match(countryRoute, /verifyNodeSession/);
   assert.match(authorizeRoute, /oauth_nonce_hash/);
-  assert.match(callbackRoute, /user\.fields=created_at,subscription_type/);
-  assert.match(callbackRoute, /isAllowedXSubscriptionType/);
-  assert.match(callbackRoute, /normalizedEligibleXAccountCreatedAt/);
-  assert.match(callbackRoute, /x-account-too-new/);
-  assert.match(callbackRoute, /env\.DB\.batch/);
+  assert.match(callbackRoute, /createRetainedV2CallbackHandler/);
+  assert.doesNotMatch(callbackRoute, /NODE_ACTIVATION_SQL|GENESIS_SLOT_RESERVATION_SQL|env\.DB\.batch/u);
+  assert.match(callbackHandler, /user\.fields=created_at,subscription_type/);
+  assert.match(callbackHandler, /isRetainedV2SubscriptionType/);
+  assert.match(callbackHandler, /normalizedEligibleXAccountCreatedAt/);
+  assert.match(callbackHandler, /x-account-too-new/);
+  assert.match(callbackHandler, /runtimeBoundary\.runAuthorizedMutation/);
+  assert.doesNotMatch(callbackHandler, /NODE_ACTIVATION_SQL|GENESIS_SLOT_RESERVATION_SQL|\.DB\.batch/u);
+  assert.match(runtimeBoundary, /RUNTIME_VERIFIERS_UNAVAILABLE/);
+  assert.match(runtimeBoundary, /X_PREMIUM_UPGRADE_90/);
   assert.match(bindingPolicy, /oauth_nonce_hash = NULL/);
-  assert.doesNotMatch(callbackRoute, /[?&]node=/);
+  assert.doesNotMatch(`${callbackRoute}\n${callbackHandler}`, /[?&]node=/);
 });

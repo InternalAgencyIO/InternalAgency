@@ -11,6 +11,21 @@
 | **Radiance** | A living high-fashion AI desktop companion. | Source, scene manifest, local production flow, tests, and releases live in this repository. | Active |
 | **STAR ASCENT** | A bilingual public culture, launch, and evidence project. | [Live source](projects/star-ascent/site), [project guide](projects/star-ascent/README.md), [English site](https://internalagency.io), [Turkish site](https://ileriakil.com). | Live build |
 
+### Latest STAR ASCENT public proof
+
+The 25 August 2026 Devnet hardware rehearsal used a Trezor Model T on exact
+Universal firmware 2.12.4 to sign a frozen Solana OCMS-v1 HOLD message. No
+transaction was created, signed, or broadcast. The device-returned signed data
+matched the frozen 150-byte payload exactly; offline Ed25519 verification and a
+single-byte tamper rejection both passed.
+
+- [Signed proof](projects/star-ascent/site/docs/b3/evidence/IAT-B3-DEVNET-HW-PROOF-20260825.json)
+- [Frozen unsigned request](projects/star-ascent/site/docs/b3/evidence/IAT-B3-DEVNET-HW-UNSIGNED-20260825.json)
+- [Standalone verifier](projects/star-ascent/site/docs/b3/evidence/verify-IAT-B3-DEVNET-HW-PROOF-20260825.mjs)
+
+Run `node projects/star-ascent/site/docs/b3/evidence/verify-IAT-B3-DEVNET-HW-PROOF-20260825.mjs`
+from the repository root to reproduce the cryptographic verification.
+
 ## STAR ASCENT — live public build
 
 The complete, reproducible English and Turkish website source now lives in

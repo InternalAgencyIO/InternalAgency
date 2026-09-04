@@ -33,9 +33,30 @@ check(index.schema === "iat-public-evidence-index/v1", "unexpected index schema"
 check(index.license === "CC0-1.0", "public evidence must declare CC0-1.0");
 check(index.network === "devnet", "public evidence index must remain devnet-only");
 check(index.mainnetStatus === "HOLD", "public evidence must not clear mainnet HOLD");
-check(index.independentReviewRequired === true, "current remediation source must require independent review");
+check(
+  index.automatedDirectEvidenceRequired === true
+    && index.humanReviewerRequired === false
+    && index.noSelfAttestation === true,
+  "current remediation source must require automated direct evidence with no human-review prerequisite or self-attestation",
+);
 check(index.secretMaterialIncluded === false, "secret-material declaration must remain false");
 check(Array.isArray(index.records) && index.records.length === 17, "expected seventeen indexed records");
+const currentHardeningRecord = index.records?.find(
+  ({ file }) => file === "v2-local-time-gate-proof-hardening-20260802T130622Z.json",
+);
+const currentIdentityD1Record = index.records?.find(
+  ({ file }) => file === "v2-local-identity-d1-rehearsal-20260802T194419Z.json",
+);
+check(
+  currentHardeningRecord?.status
+    === "CURRENT_VERIFIED_LOCAL_HOST_ONLY_CURRENT_SBF_FRESH_SIGNED_DEVNET_AND_AUTOMATED_DIRECT_EVIDENCE_REQUIRED_MAINNET_HOLD",
+  "current hardening record must require automated direct evidence without an independent-review prerequisite",
+);
+check(
+  currentIdentityD1Record?.status
+    === "CURRENT_VERIFIED_CREDENTIAL_FREE_LOCAL_MODEL_ONLY_ACTUAL_INTEGRATION_AND_AUTOMATED_DIRECT_EVIDENCE_REQUIRED_MAINNET_HOLD",
+  "current identity/D1 record must require automated direct evidence without an independent-review prerequisite",
+);
 check(
   JSON.stringify(index.canonicalAtPublication) === JSON.stringify([
     "v2-initialization-20260730T074603Z.json",
@@ -64,7 +85,7 @@ check(
     && index.currentRemediationState?.verifiableSbf?.bytes === 579480
     && index.currentRemediationState?.verifiableSbf?.status === "VERIFIED_BUILD_ONLY_NOT_DEPLOYED"
     && index.currentRemediationState?.freshSignedDevnetEvidence === "REQUIRED_NOT_COMPLETE"
-    && index.currentRemediationState?.independentReview === "REQUIRED_NOT_COMPLETE"
+    && index.currentRemediationState?.automatedDirectEvidence === "REQUIRED_NOT_COMPLETE"
     && index.currentRemediationState?.mainnetStatus === "HOLD",
   "current remediation evidence boundary drift",
 );
@@ -79,7 +100,7 @@ check(
       === "REQUIRED_NOT_COMPLETE"
     && index.currentIdentityHardeningState?.freshSignedDevnetEvidence
       === "REQUIRED_NOT_COMPLETE"
-    && index.currentIdentityHardeningState?.independentReview
+    && index.currentIdentityHardeningState?.automatedDirectEvidence
       === "REQUIRED_NOT_COMPLETE"
     && index.currentIdentityHardeningState?.mainnetStatus === "HOLD",
   "current identity hardening evidence boundary drift",
@@ -232,19 +253,19 @@ check(
   signoff.schema === "iat-v2-devnet-feature-independent-signoff/v1"
     && signoff.status === "VERIFIED"
     && signoff.scope === "CORRECTED_PROGRAM_AND_EIGHTEEN_TRANSACTION_FEATURE_REHEARSAL",
-  "independent feature sign-off boundary drift",
+  "archival feature sign-off boundary drift",
 );
 check(
   signoff.evidence?.path === "public/evidence/iat-v2/v2-features-20260801T053340Z.json"
     && signoff.evidence?.sha256 === "7b460bee7a644452c6710cff7a5b81a3a3769a1d2daf4d3813913d7524a9b6f9"
     && signoff.evidence?.transactionCount === 18,
-  "independent feature sign-off evidence binding drift",
+  "archival feature sign-off evidence binding drift",
 );
 check(
   signoff.chainReceipt?.path === "public/evidence/iat-v2/chain-status-20260801T053947Z.json"
     && signoff.chainReceipt?.sha256 === "0a2e1f8ffeecffaf974e51f2d6e9abe020517a784c5cfa8b9c0f6af1f1efa4ce"
     && signoff.chainReceipt?.signatureCount === 29,
-  "independent feature sign-off receipt binding drift",
+  "archival feature sign-off receipt binding drift",
 );
 check(
   signoff.verifier?.accountabilityLabel === "FDF Guard"
@@ -253,7 +274,7 @@ check(
     && Object.values(signoff.checks ?? {}).every((value) => value === true)
     && signoff.exceptions?.length === 0
     && signoff.completedAtUtc === "2026-08-01T05:57:36Z",
-  "independent feature sign-off completion drift",
+  "archival feature sign-off completion drift",
 );
 check(
   timeGateProof.schema === "iat-v2-local-time-gate-proof/v1"
@@ -405,6 +426,5 @@ if (failures.length) {
 }
 
 console.log(
-  "Public evidence validation passed: seventeen indexed records, 29 historical finalized signatures, current source-bound local proofs and verifiable SBF, actual D1 integration, fresh signed Devnet, and independent review required, CC0, no secret-bearing fields, mainnet HOLD.",
+  "Public evidence validation passed: seventeen indexed records, 29 historical finalized signatures, current source-bound local proofs and verifiable SBF, actual D1 integration, fresh signed Devnet, and automated direct evidence required without a human-review prerequisite, CC0, no secret-bearing fields, mainnet HOLD.",
 );
-
