@@ -78,12 +78,31 @@
     "screenshotBytes": 123500,
     "screenshotDimensions": "1280x720"
   },
-  "postClicks": 0,
+  "postClicks": 2,
+  "confirmedNoTransmissionAttempts": 1,
   "keyboardSubmitAttempts": 0,
-  "publicTransmissionCount": 0,
-  "xPostUrls": [],
-  "freshActionTimeConfirmationReceived": false,
+  "publicTransmissionCount": 1,
+  "xPostUrls": ["https://x.com/dogramaci/status/2095873342066528376"],
+  "xPhotoEndpoints": [
+    "https://x.com/dogramaci/status/2095873342066528376/photo/1",
+    "https://x.com/dogramaci/status/2095873342066528376/photo/2",
+    "https://x.com/dogramaci/status/2095873342066528376/photo/3"
+  ],
+  "freshActionTimeConfirmationReceived": true,
   "duplicateMediaTransmission": false,
+  "firstControlActivation": {
+    "atUtc": "2026-09-04T13:52:53.952Z",
+    "outcome": "confirmed-no-transmission-no-op",
+    "proof": "The composer remained intact and a separately opened visible @dogramaci profile, followed by a propagation wait and reload, showed the exact target caption absent."
+  },
+  "successfulControlActivationAtUtc": "2026-09-04T13:55:17.625Z",
+  "liveVerifiedAtUtc": "2026-09-04T13:57:12.6237391Z",
+  "liveEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/luxembourg-moldova-x-live-status-2095873342066528376.jpg",
+    "sha256": "84ECEF5A015902327936E471AD205328CC98BC02A1AFA7182032CD9B22816B92",
+    "bytes": 136824,
+    "dimensions": "1280x720"
+  },
   "canonicalContradiction": "The world X ledger retains stale top-level account, Chrome-binding and pendingPost fields, while its 193-entry posts array, the Batch 480 live record and the visible in-app Browser establish the current @dogramaci account and this duplicate-safe reservation. Those stale fields neither block nor authorize the final Post action.",
-  "nextSafeAction": "Obtain fresh action-time confirmation for this exact staged composer. Then click the single visible Post button once, verify the new public @dogramaci status and photo/1 through photo/3 live, preserve every exact URL, update the world X ledger, and never resend these media."
+  "nextSafeAction": "Commit and remote-verify this live publication evidence and the canonical X ledger update. Preserve every URL, never resend these media, retain one blank @dogramaci composer, and advance four Meta Thinking lanes to Monaco."
 }
