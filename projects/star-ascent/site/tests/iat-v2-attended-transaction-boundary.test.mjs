@@ -11,6 +11,9 @@ import {
 import {
   assertExactTransactionMessage,
   assertFreshFinalizedBlockhash,
+  assertFreshProgramPromptBlockhashWindow,
+  IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS,
+  IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS,
   assertSignedLegacyTransaction,
   exactVersionedSimulation,
   observeSignedBlockhashWindow,
@@ -18,6 +21,76 @@ import {
 } from "../tools/iat-v2-admin-console/attended-transaction-boundary.mjs";
 
 const BLOCKHASH = "11111111111111111111111111111111";
+
+function promptWindow(overrides = {}) {
+  return {
+    blockhash: BLOCKHASH,
+    connection: {
+      async isBlockhashValid(_blockhash, config) {
+        return { context: { slot: config.minContextSlot + 1 }, value: true };
+      },
+      async getBlockHeight() { return 920; },
+    },
+    lastValidBlockHeight: 1_000,
+    minContextSlot: 500,
+    isVisible: () => true,
+    monotonicNow: () => 100,
+    ...overrides,
+  };
+}
+
+test("program prompt admits 80 or more blocks and rejects smaller or expired windows", async () => {
+  assert.equal(IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS, 80);
+  assert.equal(IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS, 5_000);
+  for (const remaining of [-1, 0, 3, 39, 40, 79, 80, 81]) {
+    const args = promptWindow();
+    args.connection.getBlockHeight = async () => 1_000 - remaining;
+    if (remaining < 80) {
+      await assert.rejects(assertFreshProgramPromptBlockhashWindow(args), /at least 80 remaining blocks/u);
+    } else {
+      assert.equal((await assertFreshProgramPromptBlockhashWindow(args)).remainingBlocks, remaining);
+    }
+  }
+});
+
+test("program prompt fails closed on hidden pages, stale elapsed time, and invalid clocks", async () => {
+  const initiallyHidden = promptWindow({ isVisible: () => false, connection: {
+    async isBlockhashValid() { assert.fail("hidden page cannot begin observation"); },
+  } });
+  await assert.rejects(assertFreshProgramPromptBlockhashWindow(initiallyHidden), /visible attended page/u);
+  let visibilityReads = 0;
+  await assert.rejects(assertFreshProgramPromptBlockhashWindow(promptWindow({
+    isVisible: () => ++visibilityReads === 1,
+  })), /page is hidden/u);
+  for (const times of [[100, 5_101], [100, 99], [Number.NaN, 100], [100, Infinity], [0, null], [0, "1"]]) {
+    const readings = [...times];
+    await assert.rejects(assertFreshProgramPromptBlockhashWindow(promptWindow({
+      monotonicNow: () => readings.shift(),
+    })), /observation is stale/u);
+  }
+  const boundary = [100, 5_100];
+  assert.equal((await assertFreshProgramPromptBlockhashWindow(promptWindow({
+    monotonicNow: () => boundary.shift(),
+  }))).remainingBlocks, 80);
+});
+
+test("program prompt rejects unknown validity, malformed heights, and stale context", async () => {
+  for (const validity of [false, null, "true", 1, undefined]) {
+    const args = promptWindow();
+    args.connection.isBlockhashValid = async (_blockhash, config) => ({
+      context: { slot: config.minContextSlot + 1 }, value: validity,
+    });
+    await assert.rejects(assertFreshProgramPromptBlockhashWindow(args), /at least 80 remaining blocks/u);
+  }
+  for (const height of [Number.NaN, 900.5, 0, -1, Number.MAX_SAFE_INTEGER + 1]) {
+    const args = promptWindow();
+    args.connection.getBlockHeight = async () => height;
+    await assert.rejects(assertFreshProgramPromptBlockhashWindow(args), /invalid block height/u);
+  }
+  const stale = promptWindow();
+  stale.connection.isBlockhashValid = async () => ({ context: { slot: 499 }, value: true });
+  await assert.rejects(assertFreshProgramPromptBlockhashWindow(stale), /finalized context slot/u);
+});
 const signer = Keypair.fromSeed(Uint8Array.from({ length: 32 }, (_, index) => index + 1));
 const destination = Keypair.fromSeed(Uint8Array.from({ length: 32 }, (_, index) => 255 - index));
 const sha256Hex = async (value) => createHash("sha256").update(value).digest("hex");

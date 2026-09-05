@@ -1,6 +1,11 @@
 import { Buffer } from "buffer";
 import { VersionedTransaction } from "@solana/web3.js";
 
+// Admission headroom for physical review plus the existing 40-block send margin.
+// This is not a guarantee of wall-clock signing time.
+export const IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS = 80;
+export const IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS = 5_000;
+
 export function sameBytes(left, right) {
   return Buffer.from(left).equals(Buffer.from(right));
 }
@@ -158,4 +163,44 @@ export async function observeSignedBlockhashWindow({
     remainingBlocks,
     lastValidBlockHeight,
   });
+}
+
+export async function assertFreshProgramPromptBlockhashWindow({
+  blockhash,
+  connection,
+  lastValidBlockHeight,
+  minContextSlot,
+  isVisible = () => globalThis.document?.visibilityState === "visible",
+  monotonicNow = () => performance.now(),
+}) {
+  if (typeof isVisible !== "function" || typeof monotonicNow !== "function" || isVisible() !== true) {
+    throw new Error("Program prompt requires a visible attended page before consuming its latch");
+  }
+  const started = monotonicNow();
+  const observed = await observeSignedBlockhashWindow({
+    blockhash,
+    connection,
+    lastValidBlockHeight,
+    minContextSlot,
+  });
+  const finished = monotonicNow();
+  const elapsed = finished - started;
+  if (
+    !Number.isFinite(started)
+    || !Number.isFinite(finished)
+    || !Number.isFinite(elapsed)
+    || elapsed < 0
+    || elapsed > IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS
+    || isVisible() !== true
+  ) {
+    throw new Error("Program prompt blockhash observation is stale or the page is hidden; no prompt latch consumed");
+  }
+  if (
+    observed.status !== "VALID"
+    || !Number.isSafeInteger(observed.remainingBlocks)
+    || observed.remainingBlocks < IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS
+  ) {
+    throw new Error(`Program prompt requires at least ${IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS} remaining blocks; observed ${observed.remainingBlocks}; no prompt latch consumed`);
+  }
+  return observed;
 }

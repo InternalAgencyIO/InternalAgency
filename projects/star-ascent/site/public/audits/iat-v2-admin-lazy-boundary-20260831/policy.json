@@ -49,7 +49,7 @@
     "switchboardOnDemandMaximum": 1000000,
     "trezorConnectMaximum": 180000,
     "programUpgradeMaximum": 15500,
-    "programUpgradeAttendedMaximum": 42500,
+    "programUpgradeAttendedMaximum": 43000,
     "programUpgradeIncrementalClosureMaximum": 81500
   },
   "assurance": {
@@ -65,6 +65,7 @@
     "The aggregate Program Upgrade budget counts the read-only shell, distinct attended-source binding, attended-actions entry, source-bound receipt evidence, permanent prompt coordination, durable signed-pending and permanent broadcast-attempt controls, and all static dependencies not already present in the inspection entry closure.",
     "The measured successor ceilings admit the 15,143-byte upgrade shell, 42,157-byte attended entry, and 81,050-byte aggregate lazy closure; only those three ceilings changed from the immutable 20260828 policy.",
     "The live blockhash window is read-only and advisory; the locked pre-reservation finalized and processed validity checks remain authoritative.",
+    "The signing-window amendment raises only the attended-entry ceiling from 42,500 to 43,000 bytes for pre-prompt admission and truthful terminal labels; the 81,500-byte aggregate ceiling is unchanged. Local source builds are not public CI or hardware evidence.",
     "The distinct ceremony source preserves the consumed old latch and does not change the immutable migration artifact provenance.",
     "The durable signed-pending and permanent broadcast-attempt modules are source controls only and do not prove a device prompt, signature, send, confirmation, or finalized receipt.",
     "The Switchboard and Trezor packages remain present as lazy operator surfaces and require independent review before use.",

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { assertFreshProgramPromptBlockhashWindow } from "../tools/iat-v2-admin-console/attended-transaction-boundary.mjs";
 import {
   IAT_V2_ATTENDED_PROMPT_GLOBAL_LOCK_NAME,
   IAT_V2_ATTENDED_PROMPT_LATCH_SCHEMA,
@@ -81,6 +82,107 @@ function request(value, overrides = {}) {
     ...overrides,
   });
 }
+
+function prepareWindow(height, overrides = {}) {
+  return () => assertFreshProgramPromptBlockhashWindow({
+    blockhash: "11111111111111111111111111111111",
+    connection: {
+      async isBlockhashValid(_blockhash, config) {
+        return { context: { slot: config.minContextSlot + 1 }, value: true };
+      },
+      async getBlockHeight() { return height; },
+    },
+    lastValidBlockHeight: 1_000,
+    minContextSlot: 500,
+    isVisible: () => true,
+    monotonicNow: () => 100,
+    ...overrides,
+  });
+}
+
+test("insufficient or indeterminate unsigned preparation writes no latch and invokes no prompt", async () => {
+  for (const prepare of [
+    prepareWindow(921),
+    prepareWindow(1_001),
+    prepareWindow(Number.NaN),
+    prepareWindow(900, { connection: {
+      async isBlockhashValid() { throw new Error("RPC unavailable"); },
+    } }),
+  ]) {
+    const { value, targetStorage } = coordinator();
+    let calls = 0;
+    await assert.rejects(request(value, {
+      prepare,
+      prompt: async () => { calls += 1; },
+    }));
+    assert.equal(calls, 0);
+    assert.equal(targetStorage.calls.filter(([method]) => method === "setItem").length, 0);
+    // A later explicit unsigned request remains possible without clearing state.
+    await request(value, { prepare: prepareWindow(920) });
+    const latch = loadAttendedModelTPromptLatch(targetStorage, {
+      binding, action: "UPGRADE_PROGRAM",
+    });
+    assert.equal(latch.status, "PROMPT_VERIFIED");
+  }
+});
+
+test("preparation precedes irreversible entry and a later hardware failure stays consumed", async () => {
+  const { value, targetStorage } = coordinator();
+  const key = attendedPromptLatchKey({ binding, action: "UPGRADE_PROGRAM" });
+  const events = [];
+  await assert.rejects(request(value, {
+    prepare: async () => {
+      assert.equal(targetStorage.value(key), null);
+      events.push("prepare-start");
+      await prepareWindow(920)();
+      assert.equal(targetStorage.value(key), null);
+      events.push("prepare-end");
+    },
+    prompt: async () => {
+      assert.equal(JSON.parse(targetStorage.value(key)).status, "PROMPT_ENTERED");
+      events.push("prompt-entered");
+      throw new Error("hardware rejected");
+    },
+  }), /hardware rejected/u);
+  assert.equal(JSON.parse(targetStorage.value(key)).status, "PROMPT_FAILED");
+  assert.deepEqual(events, ["prepare-start", "prepare-end", "prompt-entered"]);
+  await assert.rejects(request(value, {
+    messageSha256: "d".repeat(64),
+    prepare: async () => { assert.fail("consumed action must not prepare"); },
+    prompt: async () => { assert.fail("consumed action must not prompt"); },
+  }), /already consumed/u);
+});
+
+test("preparation holds the global lock and rejection releases it without reserving an action", async () => {
+  const locks = lockManager();
+  const targetStorage = storage();
+  const first = coordinator({ locks, targetStorage }).value;
+  const second = coordinator({ locks, targetStorage }).value;
+  let rejectPreparation;
+  const waiting = new Promise((_resolve, reject) => { rejectPreparation = reject; });
+  const pending = request(first, {
+    prepare: () => waiting,
+    prompt: async () => { assert.fail("failed preparation cannot prompt"); },
+  });
+  const rejected = assert.rejects(pending, /unsigned observation failed/u);
+  await assert.rejects(request(second, {
+    action: "EXTEND_PROGRAM_DATA",
+    prepare: async () => { assert.fail("contending preparation cannot run"); },
+  }), /global Web Lock/u);
+  assert.equal(targetStorage.calls.filter(([method]) => method === "setItem").length, 0);
+  rejectPreparation(new Error("unsigned observation failed"));
+  await rejected;
+  await request(second, { prepare: prepareWindow(919) });
+});
+
+test("malformed preparation is rejected without a lock or latch write", async () => {
+  for (const prepare of [null, false, 1, "prepare"]) {
+    const { value, targetStorage, locks } = coordinator();
+    await assert.rejects(request(value, { prepare }), /preparation callback is invalid/u);
+    assert.equal(locks.calls.length, 0);
+    assert.equal(targetStorage.calls.filter(([method]) => method === "setItem").length, 0);
+  }
+});
 
 test("global exclusive lock persists entered before the only callback and marks verified", async () => {
   const { value, targetStorage, locks } = coordinator();

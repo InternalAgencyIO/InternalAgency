@@ -24,6 +24,7 @@ import {
 } from "./attended-evidence.mjs";
 import {
   assertExactTransactionMessage,
+  assertFreshProgramPromptBlockhashWindow,
   assertSignedLegacyTransaction,
   finalizedContextSlot,
   observeSignedBlockhashWindow,
@@ -140,12 +141,14 @@ async function requestProgramModelTSignature({
   transaction,
   verifySigned,
   persistSigned,
+  prepare,
 }) {
   const result = await coordinator.request({
     binding,
     action,
     messageSha256,
     signer: signer.toBase58(),
+    prepare,
     prompt: async () => {
       const signed = await provider.signTransaction(transaction);
       await verifySigned(signed);
@@ -182,7 +185,14 @@ function isFreshBroadcastWindow(pending, windowState) {
     && document.visibilityState === "visible";
 }
 
-function blockhashWindowLabel(windowState) {
+function blockhashWindowLabel(windowState, terminal = false) {
+  if (terminal) {
+    return windowState?.status === "EXPIRED"
+      ? "EXPIRED // CEREMONY TERMINAL // COUNTDOWN STOPPED"
+      : Number.isSafeInteger(windowState?.remainingBlocks)
+        ? `CEREMONY TERMINAL // LAST OBSERVED ${windowState.remainingBlocks} BLOCKS REMAINING // COUNTDOWN STOPPED`
+        : "CEREMONY TERMINAL // OBSERVATION UNAVAILABLE // COUNTDOWN STOPPED";
+  }
   if (windowState?.status === "VALID") {
     if (windowState.remainingBlocks < MIN_BROADCAST_REMAINING_BLOCKS) {
       return `TOO CLOSE // ${windowState.remainingBlocks} BLOCKS REMAINING // CEREMONY TERMINAL`;
@@ -791,6 +801,15 @@ export default function ProgramUpgradeAttendedActions({
         provider,
         signer: publicKey,
         transaction: promptTransaction,
+        prepare: async () => {
+          await assertFreshProgramPromptBlockhashWindow({
+            blockhash: latest.blockhash,
+            connection,
+            lastValidBlockHeight: latest.lastValidBlockHeight,
+            minContextSlot: simulationSlot,
+          });
+          assertExactTransactionMessage(promptTransaction, messageBytes, "Program action before prompt entry");
+        },
         verifySigned: (candidate) => assertSignedLegacyTransaction({
           expectedBlockhash: latest.blockhash,
           expectedMessageBytes: messageBytes,
@@ -1212,6 +1231,7 @@ export default function ProgramUpgradeAttendedActions({
             <small>EXACT SIGNER</small>
             <strong>{IAT_V2_PROGRAM_ADMIN.toBase58()}</strong>
             <p>The first click simulates and asks the Model T to sign. It cannot broadcast. A separate second click broadcasts.</p>
+            <p>After signing, return here immediately to review and press the separate Broadcast button while it is enabled.</p>
           </div>
           {!pending ? (
             <button
@@ -1243,7 +1263,7 @@ export default function ProgramUpgradeAttendedActions({
             <div className="broadcast-panel">
               <code>MESSAGE {pending.messageSha256}</code>
               <code>VALID TO HEIGHT {pending.latest.lastValidBlockHeight}</code>
-              <code>BLOCKHASH WINDOW {blockhashWindowLabel(blockhashWindow)}</code>
+              <code>BLOCKHASH WINDOW {blockhashWindowLabel(blockhashWindow, broadcastWindowTerminal)}</code>
               <p>EXPIRY ENDS THIS CEREMONY.</p>
               <button
                 onClick={broadcastSigned}

@@ -188,6 +188,28 @@ test("program prompting refreshes the blockhash after read-only preflight and ex
   assert.match(programSource, /EXPIRY ENDS THIS CEREMONY\./u);
 });
 
+test("program preparation binds fresh lifetime and exact bytes before the coordinator prompt", () => {
+  const helper = section(programSource, "async function requestProgramModelTSignature", "function errorText");
+  assert.match(helper, /coordinator\.request\(\{[\s\S]*prepare,[\s\S]*prompt: async \(\) =>/u);
+  const handler = section(programSource, "async function simulateAndSign()", "async function broadcastSigned()");
+  const prepare = section(handler, "prepare: async () => {", "verifySigned:");
+  assert.match(prepare, /await assertFreshProgramPromptBlockhashWindow\(\{\s*blockhash: latest\.blockhash,\s*connection,\s*lastValidBlockHeight: latest\.lastValidBlockHeight,\s*minContextSlot: simulationSlot,/u);
+  assertBefore(prepare, "await assertFreshProgramPromptBlockhashWindow", "assertExactTransactionMessage(promptTransaction, messageBytes", "fresh admission followed by exact-byte assertion");
+  assert.equal(count(prepare, "await "), 1);
+  assert.doesNotMatch(prepare, /signTransaction|sendRawTransaction|persist|localStorage/u);
+});
+
+test("terminal blockhash labels report historical or unavailable observations, never a live countdown", () => {
+  const labelSource = section(programSource, "function blockhashWindowLabel(", "function shouldBlockProgramPromptRetry");
+  const label = new Function("MIN_BROADCAST_REMAINING_BLOCKS", labelSource + "; return blockhashWindowLabel;")(40);
+  assert.equal(label({ status: "VALID", remainingBlocks: 3 }, true), "CEREMONY TERMINAL // LAST OBSERVED 3 BLOCKS REMAINING // COUNTDOWN STOPPED");
+  assert.equal(label({ status: "EXPIRED", remainingBlocks: -1 }, true), "EXPIRED // CEREMONY TERMINAL // COUNTDOWN STOPPED");
+  for (const observation of [undefined, null, { status: "CHECKING" }, { status: "UNKNOWN" }]) {
+    assert.equal(label(observation, true), "CEREMONY TERMINAL // OBSERVATION UNAVAILABLE // COUNTDOWN STOPPED");
+  }
+  assert.equal(label({ status: "VALID", remainingBlocks: 81, lastValidBlockHeight: 1000 }, false), "VALID // 81 BLOCKS REMAINING // LAST VALID HEIGHT 1000");
+});
+
 test("program broadcast requires a live exact signed-blockhash window and invalidates background observations", () => {
   assert.match(
     programSource,
@@ -230,7 +252,7 @@ test("program broadcast requires a live exact signed-blockhash window and invali
     programSource,
     /disabled=\{busy \|\| inspectionBusy \|\| broadcastBlocked \|\| !broadcastWindowReady\}/u,
   );
-  assert.match(programSource, /BLOCKHASH WINDOW \{blockhashWindowLabel\(blockhashWindow\)\}/u);
+  assert.match(programSource, /BLOCKHASH WINDOW \{blockhashWindowLabel\(blockhashWindow, broadcastWindowTerminal\)\}/u);
   assert.match(programSource, /RPC UNKNOWN \/\/ BROADCAST DISABLED/u);
   assert.match(programSource, /EXPIRED \/\/ CEREMONY TERMINAL/u);
 });

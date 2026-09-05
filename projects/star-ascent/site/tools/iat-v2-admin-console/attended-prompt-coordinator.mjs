@@ -197,6 +197,7 @@ export function createAttendedModelTPromptCoordinator({
       action,
       messageSha256,
       signer,
+      prepare,
       prompt,
     } = {}) {
       const lockManager = resolvedLocks(locks);
@@ -206,6 +207,7 @@ export function createAttendedModelTPromptCoordinator({
       check(hex64.test(messageSha256 ?? ""), "Prompt coordination requires an exact message SHA-256");
       check(base58ByteLength(signer) === 32, "Prompt coordination requires an exact 32-byte signer");
       check(typeof prompt === "function", "Prompt coordination callback is required");
+      check(prepare === undefined || typeof prepare === "function", "Prompt preparation callback is invalid");
       const key = attendedPromptLatchKey({ binding: exact, action: canonicalAction });
 
       return lockManager.request(
@@ -219,6 +221,10 @@ export function createAttendedModelTPromptCoordinator({
             canonicalAction,
           );
           check(!existing, `Canonical action ${canonicalAction} already consumed its transaction-prompt latch`);
+
+          // Preparation runs under the same exclusive lock, but before the
+          // irreversible prompt boundary. A failed unsigned check writes no latch.
+          if (prepare !== undefined) await prepare();
 
           const entered = persistExactLatch(latchStorage, key, {
             schema: LATCH_SCHEMA,

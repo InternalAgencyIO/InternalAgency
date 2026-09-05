@@ -253,13 +253,14 @@ const measured = {
   programUpgradeAttended: size(attended.file),
   programUpgradeIncrementalClosure: upgradeIncrementalClosureBytes,
 };
+console.log("Measured admin bundle bytes:", JSON.stringify(measured));
 for (const [name, bytes] of Object.entries(measured)) {
   const maximum = budgets[`${name}Maximum`];
   assert.ok(Number.isSafeInteger(maximum), `missing byte budget for ${name}`);
   assert.ok(bytes <= maximum, `${name} is ${bytes} bytes; budget is ${maximum}`);
 }
 assert.equal(budgets.programUpgradeMaximum, 15_500, "upgrade-shell ceiling drifted");
-assert.equal(budgets.programUpgradeAttendedMaximum, 42_500, "attended-actions ceiling drifted");
+assert.equal(budgets.programUpgradeAttendedMaximum, 43_000, "attended-actions ceiling drifted");
 assert.equal(budgets.programUpgradeIncrementalClosureMaximum, 81_500, "upgrade incremental-closure ceiling drifted");
 
 const javascript = assetNames
