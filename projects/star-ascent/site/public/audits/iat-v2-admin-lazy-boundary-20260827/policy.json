@@ -1,0 +1,66 @@
+{
+  "schema": "iat-v2-admin-lazy-boundary-policy/v3",
+  "status": "DRAFT_PARTIAL_REMEDIATION_QA_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "predecessor": {
+    "path": "public/audits/iat-v2-admin-lazy-boundary-20260826/policy.json",
+    "sha256": "aaaed4a6d5fe47a1ed97592f201ca36b2f7482234f3f9c8363120c1750bf7ed8"
+  },
+  "buildManifestRequired": true,
+  "userActivationRequired": true,
+  "baseline": {
+    "priorCombinedFeatureChunkBytes": 912348
+  },
+  "boundaries": {
+    "inspectionEntryStaticClosureExcludes": [
+      "FEATURE_REHEARSAL",
+      "PROGRAM_UPGRADE",
+      "PROGRAM_UPGRADE_ATTENDED_ACTIONS",
+      "TREZOR_CONNECT",
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellStaticClosureExcludes": [
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellDynamicImports": [
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "programUpgradeShellDynamicImports": [
+      "PROGRAM_UPGRADE_ATTENDED_ACTIONS"
+    ],
+    "programUpgradeShellStaticClosureExcludes": [
+      "PROGRAM_EXTENSION_ATTENDED"
+    ],
+    "programUpgradeAttendedStaticClosureIncludes": [
+      "ATTENDED_EVIDENCE",
+      "ATTENDED_PROMPT_COORDINATOR",
+      "ATTENDED_PROGRAM_SIGNED_PENDING",
+      "ATTENDED_PROGRAM_BROADCAST_ONCE",
+      "PROGRAM_EXTENSION_ATTENDED"
+    ]
+  },
+  "byteBudgets": {
+    "initialEntryMaximum": 1100000,
+    "featureShellMaximum": 150000,
+    "switchboardOnDemandMaximum": 1000000,
+    "trezorConnectMaximum": 180000,
+    "programUpgradeMaximum": 15000,
+    "programUpgradeAttendedMaximum": 40000,
+    "programUpgradeIncrementalClosureMaximum": 72000
+  },
+  "assurance": {
+    "independentHardwareReviewComplete": false,
+    "signingApproved": false,
+    "broadcastApproved": false,
+    "deploymentApproved": false,
+    "mainnetApproved": false
+  },
+  "limitations": [
+    "The generated Vite manifest and browser checks prove local build and request boundaries only.",
+    "The attended-actions payload is loaded only after an explicit operator click, but that source boundary is not independent hardware or runtime evidence.",
+    "The aggregate Program Upgrade budget counts the read-only shell, attended-actions entry, source-bound receipt evidence, permanent prompt coordination, durable signed-pending and permanent broadcast-attempt controls, and all static dependencies not already present in the inspection entry closure.",
+    "The durable signed-pending and permanent broadcast-attempt modules are source controls only and do not prove a device prompt, signature, send, confirmation, or finalized receipt.",
+    "The Switchboard and Trezor packages remain present as lazy operator surfaces and require independent review before use.",
+    "No hardware, wallet, RPC, simulation, signing, broadcast, deployment, Devnet, or Mainnet action is authorized by this policy."
+  ]
+}

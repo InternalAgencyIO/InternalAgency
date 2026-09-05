@@ -160,8 +160,8 @@ if (!["HOLD", "COMPLETE"].includes(record.status)) fail("status must be HOLD or 
 if (record.scope !== "Post-Genesis public evidence reconciliation only; this file never authorizes a transaction, distribution, or claim.") fail("scope must retain the non-authorizing boundary");
 if (!hasExactKeys(record, ["status", "scope", "sourceArtifacts", "controls", "reconciliation"])) fail("record must contain exactly the reviewed reconciliation fields");
 if (!hasExactKeys(record.sourceArtifacts, Object.keys(requiredPaths))) fail("sourceArtifacts must contain exactly the canonical artifact paths");
-if (!hasExactKeys(record.controls, ["haltOnChannelMismatch", "haltOnExpiredEvidence", "haltOnUnresolvedCorrections", "maxChannelEvidenceAgeMinutes", "preserveCorrectionHistory", "noDistributionClaimsWithoutEvidence"])) fail("controls must contain exactly the reviewed gate fields");
-if (!hasExactKeys(record.reconciliation, ["checkedAtUtc", "archiveOwnerLabel", "independentReviewerLabel", "evidenceArchiveUrl", "publicChangelogUrl", "correctionStatus", "correctionRecords", "channelRecords"])) fail("reconciliation must contain exactly the reviewed archive fields");
+if (!hasExactKeys(record.controls, ["haltOnChannelMismatch", "haltOnExpiredEvidence", "haltOnUnresolvedCorrections", "maxChannelEvidenceAgeMinutes", "preserveCorrectionHistory", "noDistributionClaimsWithoutEvidence", "observationMode", "humanReviewerRequired", "noSelfAttestation"])) fail("controls must contain exactly the canonical gate fields");
+if (!hasExactKeys(record.reconciliation, ["checkedAtUtc", "evidenceArchiveUrl", "publicChangelogUrl", "correctionStatus", "correctionRecords", "channelRecords"])) fail("reconciliation must contain exactly the canonical archive fields");
 const unsafeRecordContent = findUnsafeRecordContent(record);
 if (unsafeRecordContent) fail(`reconciliation must not contain credential-bearing field names or values (${unsafeRecordContent})`);
 for (const [field, expected] of Object.entries(requiredPaths)) {
@@ -225,9 +225,9 @@ if (sourcesArePublished) {
   )?.status;
   // READY packet validation reads the snapshot directly. A HOLD packet also
   // reaches it through the canonical handoff validator when that handoff is
-  // already APPROVED, so both branches must keep the snapshot in the stable
+  // already READY, so both branches must keep the snapshot in the stable
   // dependency bundle.
-  if (releasePacketStatus === "READY" || mainnetHandoffStatus === "APPROVED") {
+  if (releasePacketStatus === "READY" || mainnetHandoffStatus === "READY") {
     const snapshotDependencyPaths = [...reviewedDependencyPaths, releaseSnapshotPath];
     const snapshotDependencyBundle = captureDependencyBundle(snapshotDependencyPaths);
     if (!dependencyBundlesMatch(reviewedDependencyBundle, snapshotDependencyBundle, reviewedDependencyPaths)) {
@@ -254,9 +254,14 @@ for (const field of ["haltOnChannelMismatch", "haltOnExpiredEvidence", "haltOnUn
 if (!isPositiveWholeMinutes(record.controls?.maxChannelEvidenceAgeMinutes)) {
   fail("controls.maxChannelEvidenceAgeMinutes must be a whole number from 1 to 1440");
 }
+if (record.controls?.observationMode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+  || record.controls?.humanReviewerRequired !== false
+  || record.controls?.noSelfAttestation !== true) {
+  fail("post-Genesis reconciliation must use the exact automated no-human/no-self-attestation policy");
+}
 
 if (record.status === "HOLD") {
-  for (const field of ["checkedAtUtc", "archiveOwnerLabel", "independentReviewerLabel", "evidenceArchiveUrl", "publicChangelogUrl"]) {
+  for (const field of ["checkedAtUtc", "evidenceArchiveUrl", "publicChangelogUrl"]) {
     if (record.reconciliation?.[field] !== null) fail(`HOLD requires reconciliation.${field} to be null so prior public evidence cannot survive a reset`);
   }
   if (record.reconciliation?.correctionStatus !== "NONE") {
@@ -273,15 +278,6 @@ if (record.status === "COMPLETE") {
   if (iatV2StageJournal.status !== "RECONCILED") fail("COMPLETE requires IAT V2 stage journal status RECONCILED");
   if (!Array.isArray(iatV2StageJournal.stages) || iatV2StageJournal.stages.length !== 8 || iatV2StageJournal.stages.some((stage) => stage.status !== "FINALIZED_MATCHED")) fail("COMPLETE requires all eight IAT V2 stage journal boundaries FINALIZED_MATCHED");
   if (iatV2StageJournal.terminalDecision?.state !== "RECONCILED" || iatV2StageJournal.terminalDecision?.reasonCode !== "ALL_STAGES_MATCHED") fail("COMPLETE requires the IAT V2 journal terminal ALL_STAGES_MATCHED decision");
-  // Reject ambiguous reviewer ownership before considering any external launch
-  // artifact. A truthful archive gate needs two independently attributable
-  // humans, even when another prerequisite is also incomplete.
-  for (const field of ["archiveOwnerLabel", "independentReviewerLabel"]) {
-    if (!isUsableLabel(record.reconciliation?.[field])) fail(`COMPLETE requires a trimmed, printable, non-placeholder reconciliation.${field}`);
-  }
-  if (normalizedLabel(record.reconciliation?.archiveOwnerLabel) === normalizedLabel(record.reconciliation?.independentReviewerLabel)) {
-    fail("COMPLETE requires genuinely distinct archive-owner and independent-reviewer labels");
-  }
   const packet = JSON.parse(reviewedDependencyBundle[requiredPaths.releasePacketPath].toString("utf8"));
   let packetProof = {};
   try {
@@ -297,14 +293,14 @@ if (record.status === "COMPLETE") {
     ok("publication payload is VERIFIED");
   }
   const payloadCheckedAt = payload.match(/^Checked at \(UTC\):\s*(\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC)$/m)?.[1];
-  const expectedPayloadCheckedAt = typeof packet.releaseControls?.publicEvidenceCheckedAtUtc === "string"
-    ? `${packet.releaseControls.publicEvidenceCheckedAtUtc.slice(0, 16).replace("T", " ")} UTC`
+  const expectedPayloadCheckedAt = typeof packet.releaseControls?.publicEvidenceObservedAtUtc === "string"
+    ? `${packet.releaseControls.publicEvidenceObservedAtUtc.slice(0, 16).replace("T", " ")} UTC`
     : null;
   const packetSealedAtMs = Date.parse(packetProof.sealedAtUtc);
   if (!payloadCheckedAt || payloadCheckedAt !== expectedPayloadCheckedAt) {
-    fail("COMPLETE requires publication payload Checked at (UTC) to match the sealed packet public-evidence review minute");
+    fail("COMPLETE requires publication payload Checked at (UTC) to match the sealed packet public-evidence observation minute");
   } else {
-    ok("publication payload Checked at (UTC) matches the sealed packet review");
+    ok("publication payload Checked at (UTC) matches the sealed packet observation");
   }
   const canonicalEvidence = {
     canonicalRoute: manifest.claimOrDistribution?.canonicalRoute,

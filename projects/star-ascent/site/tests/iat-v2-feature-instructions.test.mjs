@@ -7,10 +7,12 @@ import {
   IAT_V2_ROUND_ACCOUNT_DISCRIMINATOR,
   IAT_V2_ROUND_LAYOUT,
   IAT_V2_ROUND_STATUS,
+  buildBackfillHistoricalNeutralRoundInstruction,
   buildClaimLanePrincipalInstruction,
   buildClosePositionInstruction,
   buildCommitRoundInstruction,
   buildExpireRoundInstruction,
+  buildMigrateLegacyRoundInstruction,
   buildOpenPositionInstruction,
   buildRegisterAgencyInstruction,
   buildSetEligibilityInstruction,
@@ -164,6 +166,53 @@ test("feature instruction builders match the deployed Anchor account order and d
   assert.equal(expire.keys.length, 2);
   assert.equal(expire.keys[1].pubkey.toBase58(), round.toBase58());
   assert.deepEqual([...expire.data], [238, 222, 71, 141, 104, 222, 76, 248]);
+  const migrate = buildMigrateLegacyRoundInstruction({ mint, week: 8 });
+  assert.equal(migrate.keys.length, 4);
+  assert.equal(migrate.keys[0].pubkey.toBase58(), IAT_V2_PROGRAM_ADMIN.toBase58());
+  assert.equal(migrate.keys[0].isSigner, true);
+  assert.equal(migrate.keys[1].pubkey.toBase58(), derived.config.toBase58());
+  assert.equal(migrate.keys[2].pubkey.toBase58(), round.toBase58());
+  assert.deepEqual([...migrate.data], [138, 149, 12, 194, 129, 113, 158, 28]);
+
+  const backfill = buildBackfillHistoricalNeutralRoundInstruction({ mint, week: 9 });
+  assert.equal(backfill.keys.length, 6);
+  assert.equal(backfill.keys[0].pubkey.toBase58(), IAT_V2_PROGRAM_ADMIN.toBase58());
+  assert.equal(backfill.keys[0].isSigner, true);
+  assert.equal(backfill.keys[1].pubkey.toBase58(), derived.config.toBase58());
+  assert.equal(backfill.keys[3].pubkey.toBase58(), round.toBase58());
+  assert.equal(backfill.keys[4].pubkey.toBase58(), deriveRoundAddress({
+    config: derived.config,
+    programId: IAT_V2_PROGRAM_ID,
+    week: 9,
+  }).toBase58());
+  assert.deepEqual([...backfill.data.subarray(0, 8)], [167, 170, 28, 248, 5, 118, 93, 117]);
+  assert.equal(backfill.data.readBigUInt64LE(8), 9n);
+});
+
+test("legacy Round migration rejects any substitute administrator", () => {
+  assert.throws(
+    () => buildMigrateLegacyRoundInstruction({
+      admin: new PublicKey("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4"),
+      mint,
+      week: 8,
+    }),
+    /reviewed Model T administrator/,
+  );
+});
+
+test("historical neutral backfill rejects any substitute administrator", () => {
+  assert.throws(
+    () => buildBackfillHistoricalNeutralRoundInstruction({
+      admin: new PublicKey("DYURSZnNLak5YNt2vLJUnU5iWDUbAo53oUfzZ8dVc5d4"),
+      mint,
+      week: 9,
+    }),
+    /reviewed Model T administrator/,
+  );
+  assert.throws(
+    () => buildBackfillHistoricalNeutralRoundInstruction({ mint, week: 0 }),
+    /exact prior-week round/,
+  );
 });
 
 test("feature account parsers preserve every reviewed field offset", () => {

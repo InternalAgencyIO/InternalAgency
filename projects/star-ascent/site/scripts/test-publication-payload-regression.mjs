@@ -25,6 +25,7 @@ const encodeBase58 = (bytes) => {
 const mint = encodeBase58(Buffer.alloc(32, 7));
 const mintAuthorityTransaction = encodeBase58(Buffer.alloc(64, 8));
 const freezeAuthorityTransaction = encodeBase58(Buffer.alloc(64, 9));
+const evidencePacketSha256 = "ab".repeat(32);
 
 try {
   cpSync(join(repositoryRoot, "launch"), join(sandboxRoot, "launch"), { recursive: true });
@@ -52,7 +53,7 @@ try {
     .replace("Freeze authority evidence: [FULL EXPLORER URL]", `Freeze authority evidence: https://explorer.solana.com/tx/${freezeAuthorityTransaction}`)
     .replace("Allocation and lock evidence: [CANONICAL URL]", "Allocation and lock evidence: https://internalagency.io/proof")
     .replace(/Checked at \(UTC\): \[[^\n]+\]/, "Checked at (UTC): 2026-07-28 19:00 UTC")
-    .replace("Verified by: [ROLE / PUBLIC VERIFIER LABEL]", "Verified by: independent release verifier");
+    .replace(/Evidence packet SHA-256: \[[^\n]+\]/, `Evidence packet SHA-256: ${evidencePacketSha256}`);
   const assertRejected = (label, mutate, expectedMessage) => {
     writeFileSync(payloadPath, mutate(verifiedPayload()), "utf8");
     const result = runValidator();
@@ -144,19 +145,19 @@ try {
     "Allocation and lock evidence must be the canonical https://internalagency.io/proof route",
   );
   assertRejected(
-    "a mnemonic-shaped verifier label",
-    (payload) => payload.replace("Verified by: independent release verifier", "Verified by: amber bamboo canyon dolphin ember forest galaxy harbor ivory jungle kingdom lantern"),
-    "payload must not contain a 12-24-word mnemonic-shaped value",
+    "an invalid evidence packet digest",
+    (payload) => payload.replace(evidencePacketSha256, "0".repeat(63)),
+    "Evidence packet SHA-256 must be an exact lowercase digest",
   );
   assertRejected(
-    "a bare 64-byte Base58 credential-shaped verifier label",
-    (payload) => payload.replace("Verified by: independent release verifier", `Verified by: ${mintAuthorityTransaction}`),
-    "payload must not contain a bare 64-byte Base58 credential-shaped value at Verified by",
+    "self-attestation enabled",
+    (payload) => payload.replace("No self-attestation: true", "No self-attestation: false"),
+    "No self-attestation must be true",
   );
   assertRejected(
-    "a verifier label containing an invisible control character",
-    (payload) => payload.replace("Verified by: independent release verifier", "Verified by: independent\u200Brelease verifier"),
-    "Verified by must identify a non-placeholder verifier label",
+    "a human-review prerequisite",
+    (payload) => payload.replace("Human reviewer required: false", "Human reviewer required: true"),
+    "Human reviewer required must be false",
   );
   assertRejected(
     "a verification timestamp in the future",

@@ -1,5 +1,5 @@
 {
-  "schema": "iat-v2-allocation-plan/v1",
+  "schema": "iat-v2-allocation-plan/v2",
   "status": "HOLD",
   "network": "mainnet-beta",
   "policyPath": "engagement/iat-economic-policy.v2.json",
@@ -86,8 +86,9 @@
     "vaultFundingTransactions": [],
     "authorityRevocationTransactions": [],
     "devnetRehearsalEvidence": null,
-    "independentReviewerLabel": null,
-    "independentReviewerAddress": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja",
-    "reviewedAtUtc": null
+    "observationMode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "observedAtUtc": null
   }
 }

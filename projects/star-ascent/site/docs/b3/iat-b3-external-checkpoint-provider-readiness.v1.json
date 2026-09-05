@@ -1,6 +1,6 @@
 {
   "$schema": "./iat-b3-external-checkpoint-provider-readiness.v1.schema.json",
-  "schema": "iat-b3-external-checkpoint-provider-readiness/v1",
+  "schema": "iat-b3-external-checkpoint-provider-readiness/v2",
   "profile": "PRODUCTION",
   "readiness": "BLOCKED",
   "status": "NON_ACTIVATING_PROVIDER_READINESS_REVIEW_PACKET",
@@ -53,7 +53,7 @@
     "receiptTrustRootSha256": null,
     "keyRegistryResourceId": null,
     "evidence": null,
-    "blocker": "No production provider, service, tenant, resource, region policy, terms, retention policy, authenticated receipt format, trust root, or key registry has been selected or independently reviewed."
+    "blocker": "No production provider, service, tenant, resource, region policy, terms, retention policy, authenticated receipt format, trust root, or key registry has been selected or checked by source-bound automated evidence."
   },
   "failureDomainSeparation": {
     "status": "BLOCKED",
@@ -78,7 +78,7 @@
         "STALE_COMPARE_AND_SWAP_REJECTS_WITHOUT_MUTATION"
       ],
       "evidence": null,
-      "blocker": "No independently observed production evidence proves single-copy linearizable reads and exact revision-plus-digest compare-and-swap under concurrency."
+      "blocker": "No source-bound automated production evidence proves single-copy linearizable reads and exact revision-plus-digest compare-and-swap under concurrency."
     },
     {
       "id": "AUTHENTICATED_RECEIPTS_AND_KEY_LIFECYCLE",
@@ -92,7 +92,7 @@
         "COMPROMISE_CUTOFF_REJECTS_RECEIPTS_AT_OR_AFTER_CUTOFF"
       ],
       "evidence": null,
-      "blocker": "The receipt transcript, anti-replay rule, trust root, rotation overlap, revocation registry, and key-compromise response have not been frozen or independently tested."
+      "blocker": "The receipt transcript, anti-replay rule, trust root, rotation overlap, revocation registry, and key-compromise response have not been frozen or tested with source-bound automated receipts."
     },
     {
       "id": "MONOTONIC_SEQUENCE_AND_FORK_PREVENTION",
@@ -116,7 +116,7 @@
         "RECOVERY_TIME_AND_DATA_LOSS_OBJECTIVES_ARE_CONTRACTED"
       ],
       "evidence": null,
-      "blocker": "Outage, timeout, service restart, recovery consistency, retention, RTO, and RPO behavior are not contractually bound or independently exercised."
+      "blocker": "Outage, timeout, service restart, recovery consistency, retention, RTO, and RPO behavior are not contractually bound or exercised with source-bound automated receipts."
     },
     {
       "id": "SINK_ROLLBACK_AND_RESTORE_DETECTION",
@@ -128,7 +128,7 @@
         "ROLLBACK_DRILL_BINDS_PRE_AND_POST_STATE"
       ],
       "evidence": null,
-      "blocker": "No independent drill proves detection of whole-sink snapshot rollback, control-plane restore, or a decreasing monotonic checkpoint after disaster recovery."
+      "blocker": "No source-bound automated drill proves detection of whole-sink snapshot rollback, control-plane restore, or a decreasing monotonic checkpoint after disaster recovery."
     },
     {
       "id": "DAILY_LAW_AND_LOCAL_HEAD_BINDING",
@@ -204,17 +204,17 @@
       "blocker": "Content-addressed backup custody, restore drills, provider outage recovery, and incident runbooks for key, provider, and data compromise are absent."
     },
     {
-      "id": "INDEPENDENT_AUDIT_AND_REVIEW",
+      "id": "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE",
       "status": "BLOCKED",
       "requiredClaims": [
-        "SECURITY_REVIEW_IS_INDEPENDENT",
-        "LEGAL_TERMS_AND_RETENTION_ARE_REVIEWED",
-        "OPERATIONS_AND_DISASTER_RECOVERY_ARE_REVIEWED",
+        "SECURITY_FINDINGS_ARE_SOURCE_BOUND",
+        "LEGAL_TERMS_AND_RETENTION_STATE_IS_SOURCE_BOUND",
+        "OPERATIONS_AND_DISASTER_RECOVERY_STATE_IS_SOURCE_BOUND",
         "EVIDENCE_DIGESTS_ARE_REPRODUCIBLE",
-        "REVIEWERS_ARE_NOT_PROVIDER_ADMINS_OR_CHECKPOINT_OPERATORS"
+        "EVIDENCE_SOURCES_ARE_NOT_PROVIDER_ADMINS_OR_CHECKPOINT_OPERATORS"
       ],
       "evidence": null,
-      "blocker": "No content-addressed independent security, legal, retention, operations, disaster-recovery, and separation-of-duties review packet exists."
+      "blocker": "No content-addressed automated source-bound security, legal, retention, operations, disaster-recovery, and separation-of-duties review packet exists."
     }
   ],
   "terminalPredicate": {
@@ -234,10 +234,10 @@
       "UNCERTAIN_RESPONSE_RECONCILIATION",
       "CREDENTIAL_ISOLATION",
       "BACKUP_INCIDENT_AND_DR",
-      "INDEPENDENT_AUDIT_AND_REVIEW"
+      "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE"
     ],
     "evaluationRule": "ALL_REQUIRED_PACKETS_COMPLETE_ZERO_VIOLATIONS_ZERO_BLOCKERS",
-    "blocker": "The production subject, provider, independent failure domains, required control evidence, and independent review packet are incomplete; provider-readiness remains BLOCKED."
+    "blocker": "The production subject, provider, distinct automated evidence failure domains, required control evidence, and automated direct-evidence packet are incomplete; provider-readiness remains BLOCKED."
   },
   "runtimeAuthenticationVerified": false,
   "externalMonotonicityVerified": false,

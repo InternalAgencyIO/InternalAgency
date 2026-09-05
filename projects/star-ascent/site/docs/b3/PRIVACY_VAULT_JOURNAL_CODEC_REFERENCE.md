@@ -97,5 +97,5 @@ authorization. Those facts remain false or **HOLD**.
 journal store, authenticated account/program/finality observations, exact
 native instruction and proof adapters, secure key custody and recovery UX,
 uncertain-result reconciliation, proof-context cleanup, bypass prevention,
-final-binary adversarial Devnet evidence, independent review, and terminal
-authorization.
+final-binary adversarial Devnet evidence, source-bound automated direct
+evidence, and terminal authorization.

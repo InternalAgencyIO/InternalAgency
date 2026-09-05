@@ -1,28 +1,96 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 
-const siteRoot = process.cwd();
+const siteRoot = resolve(process.env.IAT_V2_ADMIN_BUNDLE_SITE_ROOT ?? process.cwd());
 const distRoot = resolve(siteRoot, "tools/iat-v2-admin-console/dist");
 const assetsRoot = resolve(distRoot, "assets");
 const manifest = JSON.parse(readFileSync(resolve(distRoot, ".vite/manifest.json"), "utf8"));
-const policy = JSON.parse(readFileSync(resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260805/policy.json"), "utf8"));
+const predecessorPolicyPath = resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json");
+const predecessorPolicySha256 = "a453b2e4bc7ebb020bf8524546a1a98dda7a9219849dd43b1f23b51fb1ef8cf5";
+const policy = JSON.parse(readFileSync(resolve(siteRoot, "public/audits/iat-v2-admin-lazy-boundary-20260831/policy.json"), "utf8"));
 const assetNames = readdirSync(assetsRoot);
 const normalize = (value) => value.replaceAll("\\", "/");
 const size = (file) => statSync(resolve(distRoot, file)).size;
+const exactKeys = (value, keys, label) => {
+  assert.deepEqual(Object.keys(value), keys, `${label} fields are not exact`);
+};
 
-assert.equal(policy.schema, "iat-v2-admin-lazy-boundary-policy/v1", "unexpected admin lazy-boundary policy schema");
+exactKeys(policy, [
+  "schema",
+  "status",
+  "mainnetStatus",
+  "predecessor",
+  "buildManifestRequired",
+  "userActivationRequired",
+  "baseline",
+  "boundaries",
+  "byteBudgets",
+  "assurance",
+  "limitations",
+], "admin lazy-boundary policy");
+exactKeys(policy.predecessor, ["path", "sha256"], "admin predecessor binding");
+exactKeys(policy.baseline, ["priorCombinedFeatureChunkBytes"], "admin bundle baseline");
+exactKeys(policy.boundaries, [
+  "inspectionEntryStaticClosureExcludes",
+  "featureShellStaticClosureExcludes",
+  "featureShellDynamicImports",
+  "programUpgradeShellDynamicImports",
+  "programUpgradeShellStaticClosureExcludes",
+  "programUpgradeShellStaticClosureIncludes",
+  "programUpgradeAttendedStaticClosureIncludes",
+], "admin lazy boundaries");
+exactKeys(policy.byteBudgets, [
+  "initialEntryMaximum",
+  "featureShellMaximum",
+  "switchboardOnDemandMaximum",
+  "trezorConnectMaximum",
+  "programUpgradeMaximum",
+  "programUpgradeAttendedMaximum",
+  "programUpgradeIncrementalClosureMaximum",
+], "admin byte budgets");
+exactKeys(policy.assurance, [
+  "independentHardwareReviewComplete",
+  "signingApproved",
+  "broadcastApproved",
+  "deploymentApproved",
+  "mainnetApproved",
+], "admin assurance");
+assert.equal(policy.schema, "iat-v2-admin-lazy-boundary-policy/v5", "unexpected admin lazy-boundary policy schema");
 assert.equal(policy.status, "DRAFT_PARTIAL_REMEDIATION_QA_HOLD", "admin lazy-boundary policy must remain QA HOLD");
 assert.equal(policy.mainnetStatus, "UNSCHEDULED_HOLD", "admin lazy-boundary policy must keep Mainnet unscheduled HOLD");
 assert.equal(policy.buildManifestRequired, true, "admin build manifest cannot be optional");
+assert.equal(policy.userActivationRequired, true, "attended actions must require explicit user activation");
+assert.equal(
+  createHash("sha256").update(readFileSync(predecessorPolicyPath)).digest("hex"),
+  predecessorPolicySha256,
+  "immutable 20260828 predecessor policy bytes drifted",
+);
+assert.deepEqual(policy.predecessor, {
+  path: "public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json",
+  sha256: predecessorPolicySha256,
+}, "successor policy must bind the immutable predecessor bytes");
 assert.deepEqual(policy.boundaries.inspectionEntryStaticClosureExcludes, [
   "FEATURE_REHEARSAL",
   "PROGRAM_UPGRADE",
+  "PROGRAM_UPGRADE_ATTENDED_ACTIONS",
+  "ATTENDED_CEREMONY_BINDING",
   "TREZOR_CONNECT",
   "SWITCHBOARD_ON_DEMAND",
 ], "inspection-entry exclusion policy drifted");
 assert.deepEqual(policy.boundaries.featureShellStaticClosureExcludes, ["SWITCHBOARD_ON_DEMAND"], "feature-shell exclusion policy drifted");
 assert.deepEqual(policy.boundaries.featureShellDynamicImports, ["SWITCHBOARD_ON_DEMAND"], "feature-shell dynamic policy drifted");
+assert.deepEqual(policy.boundaries.programUpgradeShellDynamicImports, ["PROGRAM_UPGRADE_ATTENDED_ACTIONS"], "program upgrade dynamic policy drifted");
+assert.deepEqual(policy.boundaries.programUpgradeShellStaticClosureExcludes, ["PROGRAM_EXTENSION_ATTENDED"], "program upgrade static-exclusion policy drifted");
+assert.deepEqual(policy.boundaries.programUpgradeShellStaticClosureIncludes, ["ATTENDED_CEREMONY_BINDING"], "program upgrade static-inclusion policy drifted");
+assert.deepEqual(policy.boundaries.programUpgradeAttendedStaticClosureIncludes, [
+  "ATTENDED_EVIDENCE",
+  "ATTENDED_PROMPT_COORDINATOR",
+  "ATTENDED_PROGRAM_SIGNED_PENDING",
+  "ATTENDED_PROGRAM_BROADCAST_ONCE",
+  "PROGRAM_EXTENSION_ATTENDED",
+], "attended static-closure policy drifted");
 assert.equal(policy.baseline.priorCombinedFeatureChunkBytes, 912_348, "feature baseline drifted");
 for (const value of Object.values(policy.assurance)) {
   assert.equal(value, false, "admin lazy-boundary policy cannot grant operational clearance");
@@ -38,10 +106,23 @@ const exactlyOneEntry = (predicate, label) => {
 const [entryKey, entry] = exactlyOneEntry((_key, value) => value.isEntry === true, "admin entry");
 const [featureKey, feature] = exactlyOneEntry((key) => key === "FeatureRehearsal.jsx", "feature shell");
 const [upgradeKey, upgrade] = exactlyOneEntry((key) => key === "ProgramUpgrade.jsx", "program upgrade");
+const [attendedKey, attended] = exactlyOneEntry((_key, value) => value.src === "ProgramUpgradeAttendedActions.jsx", "program upgrade attended actions");
+const [attendedSecurityKey, attendedSecurity] = exactlyOneEntry(
+  (key, value) => key.startsWith("_attended-prompt-coordinator-")
+    && key.endsWith(".js")
+    && value.name === "attended-prompt-coordinator",
+  "shared attended evidence/prompt-security chunk",
+);
+const [ceremonyBindingKey, ceremonyBinding] = exactlyOneEntry(
+  (key, value) => key.startsWith("_iat-v2-devnet-program-ceremony-runtime-binding-")
+    && key.endsWith(".js")
+    && value.name === "iat-v2-devnet-program-ceremony-runtime-binding",
+  "attended ceremony binding",
+);
 const [trezorKey, trezor] = exactlyOneEntry((key) => key.endsWith("/node_modules/@trezor/connect-web/lib/index.js"), "Trezor Connect");
 const [switchboardKey, switchboard] = exactlyOneEntry((key) => key.endsWith("/node_modules/@switchboard-xyz/on-demand/dist/esm/index.js"), "Switchboard on-demand");
 
-for (const [label, value] of [["feature shell", feature], ["program upgrade", upgrade], ["Trezor Connect", trezor], ["Switchboard on-demand", switchboard]]) {
+for (const [label, value] of [["feature shell", feature], ["program upgrade", upgrade], ["program upgrade attended actions", attended], ["Trezor Connect", trezor], ["Switchboard on-demand", switchboard]]) {
   assert.equal(value.isDynamicEntry, true, `${label} must remain a dynamic entry`);
 }
 
@@ -58,7 +139,14 @@ const staticClosure = (rootKey) => {
   return visited;
 };
 
-const operatorEntries = new Set([featureKey, upgradeKey, trezorKey, switchboardKey]);
+const operatorEntries = new Set([
+  featureKey,
+  upgradeKey,
+  attendedKey,
+  ceremonyBindingKey,
+  trezorKey,
+  switchboardKey,
+]);
 const entryStaticClosure = staticClosure(entryKey);
 for (const key of operatorEntries) {
   assert.equal(entryStaticClosure.has(key), false, `inspection entry statically imports operator-only surface ${key}`);
@@ -67,10 +155,93 @@ assert.ok(entry.dynamicImports?.includes(featureKey), "feature shell must be a d
 assert.ok(entry.dynamicImports?.includes(upgradeKey), "program upgrade must be a direct lazy entry");
 assert.ok(entry.dynamicImports?.includes(trezorKey), "Trezor Connect must be a direct lazy entry");
 assert.equal(entry.dynamicImports?.includes(switchboardKey), false, "inspection entry must not directly import Switchboard");
+assert.equal(entry.dynamicImports?.includes(attendedKey), false, "inspection entry must not directly import attended program actions");
 
 const featureStaticClosure = staticClosure(featureKey);
 assert.equal(featureStaticClosure.has(switchboardKey), false, "feature shell statically imports Switchboard");
 assert.ok(feature.dynamicImports?.includes(switchboardKey), "feature shell must defer Switchboard to a second dynamic boundary");
+
+const upgradeStaticClosure = staticClosure(upgradeKey);
+assert.equal(upgradeStaticClosure.has(attendedKey), false, "program upgrade shell statically imports attended actions");
+assert.equal(upgradeStaticClosure.has(ceremonyBindingKey), true, "program upgrade shell lacks the attended ceremony binding");
+assert.deepEqual(upgrade.dynamicImports, [attendedKey], "program upgrade shell must have exactly one attended-actions dynamic edge");
+const attendedStaticClosure = staticClosure(attendedKey);
+assert.equal(attendedStaticClosure.has(attendedSecurityKey), true, "attended actions must retain source-bound receipt and prompt security");
+const upgradeSource = readFileSync(resolve(siteRoot, "tools/iat-v2-admin-console/ProgramUpgrade.jsx"), "utf8");
+const attendedSource = readFileSync(resolve(siteRoot, "tools/iat-v2-admin-console/ProgramUpgradeAttendedActions.jsx"), "utf8");
+assert.match(upgradeSource, /lazy\(\(\) => import\("\.\/ProgramUpgradeAttendedActions\.jsx"\)\)/u);
+assert.match(upgradeSource, /onClick=\{\(\) => setAttendedLoaded\(true\)\}/u);
+assert.match(upgradeSource, /LOAD ATTENDED ACTIONS \+ RECEIPTS/u);
+assert.match(upgradeSource, /createIatV2DevnetProgramCeremonyEvidenceBinding/u);
+assert.match(upgradeSource, /ATTENDED CEREMONY SOURCE/u);
+assert.match(upgradeSource, /IMMUTABLE ARTIFACT SOURCE/u);
+assert.doesNotMatch(
+  upgradeSource,
+  /sourceCommit:\s*IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD/u,
+  "program upgrade reused immutable artifact source as ceremony source",
+);
+assert.doesNotMatch(upgradeSource, /program-extension-attended\.mjs/u, "program upgrade shell source imports attended transaction construction");
+assert.match(
+  attendedSource,
+  /import \{ buildProgramDataExtensionTransaction \} from "\.\/program-extension-attended\.mjs";/u,
+  "attended actions must retain the reviewed capacity-extension builder source edge",
+);
+assert.match(
+  attendedSource,
+  /from "\.\/attended-program-signed-pending\.mjs";/u,
+  "attended actions must retain the reviewed durable signed-pending source edge",
+);
+assert.match(
+  attendedSource,
+  /from "\.\/attended-program-broadcast-once\.mjs";/u,
+  "attended actions must retain the reviewed permanent broadcast-attempt source edge",
+);
+assert.ok(
+  upgradeSource.indexOf("setAttendedLoaded(true)") < upgradeSource.indexOf("<ProgramUpgradeAttendedActions"),
+  "attended actions must remain behind the explicit load control",
+);
+const upgradeBundle = readFileSync(resolve(distRoot, upgrade.file), "utf8");
+const attendedBundle = readFileSync(resolve(distRoot, attended.file), "utf8");
+const attendedSecurityBundle = readFileSync(resolve(distRoot, attendedSecurity.file), "utf8");
+const ceremonyBindingBundle = readFileSync(resolve(distRoot, ceremonyBinding.file), "utf8");
+assert.doesNotMatch(upgradeBundle, /ProgramData additional bytes/u, "read-only shell bundle contains attended transaction construction");
+assert.match(attendedBundle, /ProgramData additional bytes/u, "attended bundle must contain capacity-extension construction");
+assert.match(
+  attendedBundle,
+  /iat-v2-current-source-program-signed-pending\/v2/u,
+  "attended bundle lacks the durable signed-pending schema",
+);
+assert.match(
+  ceremonyBindingBundle,
+  /iat-v2-devnet-program-ceremony-runtime-binding\/v1/u,
+  "lazy ceremony binding chunk lacks its exact schema",
+);
+assert.match(
+  attendedBundle,
+  /iat-v2-current-source-program-broadcast-attempt\/v2/u,
+  "attended bundle lacks the permanent broadcast-attempt schema",
+);
+assert.match(
+  attendedSecurityBundle,
+  /iat-v2-current-source-attended-receipt-set\/v1/u,
+  "shared attended security chunk lacks exact receipt evidence",
+);
+assert.match(
+  attendedSecurityBundle,
+  /iat-v2-current-source-model-t-transaction-prompt-latch\/v1/u,
+  "shared attended security chunk lacks the permanent prompt latch",
+);
+
+const entryBaseline = new Set([entryKey, ...entryStaticClosure]);
+const upgradeIncrementalClosure = new Set([
+  upgradeKey,
+  attendedKey,
+  ...upgradeStaticClosure,
+  ...attendedStaticClosure,
+]);
+for (const key of entryBaseline) upgradeIncrementalClosure.delete(key);
+const upgradeIncrementalClosureBytes = [...upgradeIncrementalClosure]
+  .reduce((total, key) => total + size(manifest[key].file), 0);
 
 const budgets = policy.byteBudgets;
 const measured = {
@@ -79,12 +250,18 @@ const measured = {
   switchboardOnDemand: size(switchboard.file),
   trezorConnect: size(trezor.file),
   programUpgrade: size(upgrade.file),
+  programUpgradeAttended: size(attended.file),
+  programUpgradeIncrementalClosure: upgradeIncrementalClosureBytes,
 };
+console.log("Measured admin bundle bytes:", JSON.stringify(measured));
 for (const [name, bytes] of Object.entries(measured)) {
   const maximum = budgets[`${name}Maximum`];
   assert.ok(Number.isSafeInteger(maximum), `missing byte budget for ${name}`);
   assert.ok(bytes <= maximum, `${name} is ${bytes} bytes; budget is ${maximum}`);
 }
+assert.equal(budgets.programUpgradeMaximum, 15_500, "upgrade-shell ceiling drifted");
+assert.equal(budgets.programUpgradeAttendedMaximum, 43_000, "attended-actions ceiling drifted");
+assert.equal(budgets.programUpgradeIncrementalClosureMaximum, 81_500, "upgrade incremental-closure ceiling drifted");
 
 const javascript = assetNames
   .filter((name) => name.endsWith(".js"))
@@ -100,11 +277,18 @@ for (const marker of ["Unsupported hash algorithm", "nodejs.util.inspect.custom"
   assert.equal(switchboardSource.includes(marker), true, `Switchboard chunk lacks compatibility marker: ${marker}`);
 }
 assert.equal(entrySource.includes("Unsupported hash algorithm"), false, "SHA-256 compatibility code leaked into initial entry");
+assert.equal(
+  entrySource.includes("iat-v2-devnet-program-ceremony-runtime-binding/v1"),
+  false,
+  "attended ceremony binding leaked into the initial inspection entry",
+);
 
 const featureReductionPercent = ((1 - (measured.featureShell / policy.baseline.priorCombinedFeatureChunkBytes)) * 100).toFixed(2);
 console.log(
   `IAT V2 admin bundle regression passed: entry ${measured.initialEntry} bytes, feature shell ${measured.featureShell} bytes ` +
     `(${featureReductionPercent}% below the prior ${policy.baseline.priorCombinedFeatureChunkBytes}-byte combined feature chunk), ` +
     `Switchboard ${measured.switchboardOnDemand} bytes, ` +
-    `Trezor ${measured.trezorConnect} bytes, upgrade ${measured.programUpgrade} bytes; all operator surfaces remain outside the entry static closure.`,
+    `Trezor ${measured.trezorConnect} bytes, upgrade shell ${measured.programUpgrade} bytes, ` +
+    `attended actions ${measured.programUpgradeAttended} bytes, upgrade incremental closure ` +
+    `${measured.programUpgradeIncrementalClosure} bytes; all operator surfaces remain outside the entry static closure.`,
 );

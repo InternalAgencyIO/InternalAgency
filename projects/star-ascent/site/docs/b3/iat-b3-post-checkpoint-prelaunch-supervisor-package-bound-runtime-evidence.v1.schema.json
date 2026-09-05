@@ -1,0 +1,554 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internal.invalid/iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-runtime-evidence.v1.schema.json",
+  "title": "IAT-B3 package-bound prelaunch supervisor runtime evidence",
+  "description": "Strict two-artifact HOLD evidence. Observation is sealed before teardown; a separate watchdog/custodian artifact records terminal zero. No receipt authorizes a release.",
+  "type": "object",
+  "required": [ "schema", "runId" ],
+  "properties": {
+    "schema": { "enum": [ "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-runtime-evidence/v1", "iat-b3-post-checkpoint-prelaunch-supervisor-pre-anchor-failure-evidence/v1" ] },
+    "runId": { "$ref": "#/$defs/pathComponent" },
+    "supervisorReleaseId": { "$ref": "#/$defs/pathComponent" },
+    "bootId": { "$ref": "#/$defs/bootId" },
+    "sessionId": { "$ref": "#/$defs/sha256" },
+    "anchorIdentity": { "$ref": "#/$defs/externalIdentity" },
+    "nodeStartupClosureIdentity": { "$ref": "#/$defs/externalIdentity" },
+    "observationReceipt": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/observationReceipt" }
+      ]
+    },
+    "teardownReceipt": { "oneOf": [ { "$ref": "#/$defs/teardownReceipt" }, { "$ref": "#/$defs/preAnchorTeardownReceipt" } ] },
+    "custodianEnvelope": { "$ref": "#/$defs/custodianEnvelope" },
+    "finalComposite": { "$ref": "#/$defs/finalComposite" },
+    "sourceDesignTruth": { "$ref": "#/$defs/sourceDesignTruth" },
+    "prearmSessionId": { "$ref": "#/$defs/sha256" },
+    "bootstrapIdentity": { "$ref": "#/$defs/bootstrapEvidenceIdentity" },
+    "artifact": { "allOf": [ { "$ref": "#/$defs/artifactIdentity" }, { "properties": { "artifact": { "const": "TEARDOWN" } } } ] },
+    "failurePoint": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Z0-9_]+$" },
+    "decision": { "const": "HOLD" },
+    "authority": { "const": "NONE" }
+  },
+  "oneOf": [
+    {
+      "required": [ "schema", "runId", "supervisorReleaseId", "bootId", "sessionId", "anchorIdentity", "nodeStartupClosureIdentity", "observationReceipt", "teardownReceipt", "custodianEnvelope", "finalComposite", "sourceDesignTruth" ],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-runtime-evidence/v1" },
+        "observationReceipt": { "$ref": "#/$defs/observationReceipt" },
+        "teardownReceipt": {
+          "properties": {
+            "terminalCas": { "enum": [ "OBSERVATION_DURABLE_THEN_ZERO_HOLD", "FAILURE_AFTER_OBSERVATION_ZERO_HOLD", "TIMEOUT_AFTER_OBSERVATION_ZERO_HOLD" ] },
+            "observationReceiptSha256": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "custodianEnvelope": {
+          "properties": {
+            "observationArtifact": { "allOf": [ { "$ref": "#/$defs/artifactIdentity" }, { "properties": { "artifact": { "const": "OBSERVATION" } } } ] },
+            "writeOrder": { "const": "OBSERVATION_THEN_TEARDOWN" }
+          }
+        },
+        "finalComposite": {
+          "properties": {
+            "observationReceiptSha256": { "$ref": "#/$defs/sha256" },
+            "terminalCas": { "enum": [ "OBSERVATION_DURABLE_THEN_ZERO_HOLD", "FAILURE_AFTER_OBSERVATION_ZERO_HOLD", "TIMEOUT_AFTER_OBSERVATION_ZERO_HOLD" ] },
+            "observationAbsenceVerified": { "const": false }
+          }
+        }
+      }
+    },
+    {
+      "required": [ "schema", "runId", "supervisorReleaseId", "bootId", "sessionId", "anchorIdentity", "nodeStartupClosureIdentity", "observationReceipt", "teardownReceipt", "custodianEnvelope", "finalComposite", "sourceDesignTruth" ],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-package-bound-runtime-evidence/v1" },
+        "observationReceipt": { "const": null },
+        "teardownReceipt": {
+          "properties": {
+            "terminalCas": { "enum": [ "FAILURE_BEFORE_OBSERVATION_ZERO_HOLD", "TIMEOUT_BEFORE_OBSERVATION_ZERO_HOLD" ] },
+            "observationReceiptSha256": { "const": null }
+          }
+        },
+        "custodianEnvelope": {
+          "properties": {
+            "observationArtifact": { "const": null },
+            "writeOrder": { "const": "NO_OBSERVATION_THEN_TEARDOWN" }
+          }
+        },
+        "finalComposite": {
+          "properties": {
+            "observationReceiptSha256": { "const": null },
+            "terminalCas": { "enum": [ "FAILURE_BEFORE_OBSERVATION_ZERO_HOLD", "TIMEOUT_BEFORE_OBSERVATION_ZERO_HOLD" ] },
+            "observationAbsenceVerified": { "const": true }
+          }
+        }
+      }
+    },
+    {
+      "required": [ "schema", "runId", "prearmSessionId", "bootstrapIdentity", "observationReceipt", "teardownReceipt", "artifact", "failurePoint", "decision", "authority" ],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-pre-anchor-failure-evidence/v1" },
+        "observationReceipt": { "const": null },
+        "teardownReceipt": { "$ref": "#/$defs/preAnchorTeardownReceipt" },
+        "artifact": { "allOf": [ { "$ref": "#/$defs/artifactIdentity" }, { "properties": { "artifact": { "const": "TEARDOWN" } } } ] },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "oid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "bootId": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "canonicalU64": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,18}|1[0-7][0-9]{18}|18[0-3][0-9]{17}|184[0-3][0-9]{16}|1844[0-5][0-9]{15}|18446[0-6][0-9]{14}|184467[0-3][0-9]{13}|1844674[0-3][0-9]{12}|184467440[0-6][0-9]{10}|1844674407[0-2][0-9]{9}|18446744073[0-6][0-9]{8}|1844674407370[0-8][0-9]{6}|18446744073709[0-4][0-9]{5}|184467440737095[0-4][0-9]{4}|18446744073709550[0-9]{3}|18446744073709551[0-5][0-9]{2}|1844674407370955160[0-9]|1844674407370955161[0-4]|18446744073709551615)$"
+    },
+    "positiveCanonicalU64": {
+      "allOf": [
+        { "$ref": "#/$defs/canonicalU64" },
+        { "not": { "const": "0" } }
+      ]
+    },
+    "pathComponent": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_-]{0,62}[A-Za-z0-9])?$"
+    },
+    "absoluteLinuxPath": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 4096,
+      "pattern": "^/(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*//)(?!.*[\\u0000-\\u001f\\u007f\\\\])[^\\u0000-\\u001f\\u007f\\\\]+(?<!/)$"
+    },
+    "externalIdentity": {
+      "type": "object",
+      "required": [ "sha256", "byteLength", "source", "sameHandleVerified" ],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "source": { "enum": [ "OUT_OF_BAND_TRUSTED_INVOKER_FIXED_FD", "WATCHDOG_ATOMIC_SERVER", "EVIDENCE_CUSTODIAN_REOPEN" ] },
+        "sameHandleVerified": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "bootstrapEvidenceIdentity": {
+      "type": "object",
+      "required": [ "byteLength", "sha256" ],
+      "properties": {
+        "byteLength": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "window": {
+      "type": "object",
+      "required": [ "armedMonotonicNs", "observedMonotonicNs", "operationDeadlineMonotonicNs", "teardownDeadlineMonotonicNs", "maximumOperationNanoseconds", "maximumTeardownNanoseconds", "deadlineResetObserved", "timerWonTie" ],
+      "properties": {
+        "armedMonotonicNs": { "$ref": "#/$defs/canonicalU64" },
+        "observedMonotonicNs": { "$ref": "#/$defs/canonicalU64" },
+        "operationDeadlineMonotonicNs": { "$ref": "#/$defs/canonicalU64" },
+        "teardownDeadlineMonotonicNs": { "$ref": "#/$defs/canonicalU64" },
+        "maximumOperationNanoseconds": { "const": "150000000000" },
+        "maximumTeardownNanoseconds": { "const": "30000000000" },
+        "deadlineResetObserved": { "const": false },
+        "timerWonTie": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "required": [ "ledgerId", "chargedActualReadBytes", "chargedEntries", "maximumActualReadBytes", "maximumEntries", "overflow", "everyPassCharged", "watchdogOwned" ],
+      "properties": {
+        "ledgerId": { "$ref": "#/$defs/sha256" },
+        "chargedActualReadBytes": { "$ref": "#/$defs/canonicalU64" },
+        "chargedEntries": { "$ref": "#/$defs/canonicalU64" },
+        "maximumActualReadBytes": { "const": "2147483648" },
+        "maximumEntries": { "const": "100000" },
+        "overflow": { "const": false },
+        "everyPassCharged": { "const": true },
+        "watchdogOwned": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "livePrincipal": {
+      "type": "object",
+      "required": [ "role", "identitySha256", "pid", "ppid", "pidfd", "startTicks", "bootId", "sessionId", "uid", "gid", "cgroupSha256", "namespaceSetSha256", "executableSha256", "liveState" ],
+      "properties": {
+        "role": { "enum": [ "TRUSTED_INVOKER", "SUPERVISOR", "WATCHDOG", "OBSERVER", "WORKLOAD", "EVIDENCE_CUSTODIAN" ] },
+        "identitySha256": { "$ref": "#/$defs/sha256" },
+        "pid": { "type": "integer", "minimum": 1, "maximum": 4194304 },
+        "ppid": { "type": "integer", "minimum": 0, "maximum": 4194304 },
+        "pidfd": { "type": "integer", "minimum": 5, "maximum": 4095 },
+        "startTicks": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "bootId": { "$ref": "#/$defs/bootId" },
+        "sessionId": { "$ref": "#/$defs/sha256" },
+        "uid": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "gid": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "cgroupSha256": { "$ref": "#/$defs/sha256" },
+        "namespaceSetSha256": { "$ref": "#/$defs/sha256" },
+        "executableSha256": { "$ref": "#/$defs/sha256" },
+        "liveState": { "enum": [ "LIVE_AT_OBSERVATION", "ALREADY_TERMINAL_FAIL_HOLD" ] }
+      },
+      "additionalProperties": false
+    },
+    "livePrincipals": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "prefixItems": [
+        { "allOf": [ { "$ref": "#/$defs/livePrincipal" }, { "properties": { "role": { "const": "TRUSTED_INVOKER" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/livePrincipal" }, { "properties": { "role": { "const": "SUPERVISOR" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/livePrincipal" }, { "properties": { "role": { "const": "WATCHDOG" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/livePrincipal" }, { "properties": { "role": { "const": "OBSERVER" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/livePrincipal" }, { "properties": { "role": { "const": "WORKLOAD" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/livePrincipal" }, { "properties": { "role": { "const": "EVIDENCE_CUSTODIAN" } } } ] }
+      ],
+      "items": false
+    },
+    "fileEvidence": {
+      "type": "object",
+      "required": [ "role", "path", "sha256", "byteLength", "dev", "ino", "mountId", "handleSha256", "mode", "sameHandleReopened" ],
+      "properties": {
+        "role": { "type": "string", "pattern": "^[A-Z0-9_]+$" },
+        "path": { "$ref": "#/$defs/absoluteLinuxPath" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "dev": { "$ref": "#/$defs/canonicalU64" },
+        "ino": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "mountId": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "handleSha256": { "$ref": "#/$defs/sha256" },
+        "mode": { "type": "string", "pattern": "^0[0-7]{3}$" },
+        "sameHandleReopened": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "targetObservation": {
+      "type": "object",
+      "required": [ "anchorTargetBindingSha256", "target", "backend", "executable", "compilerClosure", "sysrootClosure", "linkerClosure", "sharingMapSha256", "versionArgvSha256", "versionInvocationReceiptSha256", "accepted" ],
+      "properties": {
+        "anchorTargetBindingSha256": { "$ref": "#/$defs/sha256" },
+        "target": { "enum": [ "linux-x64-musl", "windows-x64-gnu", "native-wsl-linux-x64-musl" ] },
+        "backend": { "enum": [ "PINNED_ZIG_CC", "OPTIONAL_NATIVE_WSL_COMPILER" ] },
+        "executable": { "$ref": "#/$defs/fileEvidence" },
+        "compilerClosure": { "type": "array", "minItems": 1, "maxItems": 100000, "uniqueItems": true, "items": { "$ref": "#/$defs/fileEvidence" } },
+        "sysrootClosure": { "type": "array", "minItems": 1, "maxItems": 100000, "uniqueItems": true, "items": { "$ref": "#/$defs/fileEvidence" } },
+        "linkerClosure": { "type": "array", "minItems": 1, "maxItems": 100000, "uniqueItems": true, "items": { "$ref": "#/$defs/fileEvidence" } },
+        "sharingMapSha256": { "$ref": "#/$defs/sha256" },
+        "versionArgvSha256": { "$ref": "#/$defs/sha256" },
+        "versionInvocationReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "accepted": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        { "allOf": [ { "$ref": "#/$defs/targetObservation" }, { "properties": { "target": { "const": "linux-x64-musl" }, "backend": { "const": "PINNED_ZIG_CC" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/targetObservation" }, { "properties": { "target": { "const": "windows-x64-gnu" }, "backend": { "const": "PINNED_ZIG_CC" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/targetObservation" }, { "properties": { "target": { "const": "native-wsl-linux-x64-musl" }, "backend": { "const": "OPTIONAL_NATIVE_WSL_COMPILER" } } } ] }
+      ],
+      "items": false
+    },
+    "k44Observation": {
+      "type": "object",
+      "required": [ "anchorK44BindingSha256", "checkpointHeadSha", "checkpointTreeSha", "b26RunnerSha256", "b26RunnerByteLength", "laneId", "knownFixtureLaneRejected", "genesisHash", "inputFileDigests", "productionInventoryDigest", "priorLaneInventoryDigest", "directFlags", "assessmentSha256", "accepted" ],
+      "properties": {
+        "anchorK44BindingSha256": { "$ref": "#/$defs/sha256" },
+        "checkpointHeadSha": { "const": "c73d01092c58152ac396dc580055d93511bf0644" },
+        "checkpointTreeSha": { "const": "fcfd4337cfa4ba35a10e4b65849b42d1f5659d3e" },
+        "b26RunnerSha256": { "const": "c34b347b860d23679b39a0e6fdd5b704611b9de79638dde53db8b23dfa7129bf" },
+        "b26RunnerByteLength": { "const": "176939" },
+        "laneId": { "type": "string", "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$", "not": { "const": "iat-b3-build-only-a1" } },
+        "knownFixtureLaneRejected": { "const": true },
+        "genesisHash": { "const": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG" },
+        "inputFileDigests": { "type": "array", "minItems": 2, "maxItems": 2, "prefixItems": [ { "$ref": "#/$defs/sha256" }, { "$ref": "#/$defs/sha256" } ], "items": false },
+        "productionInventoryDigest": { "$ref": "#/$defs/sha256" },
+        "priorLaneInventoryDigest": { "$ref": "#/$defs/sha256" },
+        "directFlags": {
+          "type": "object",
+          "required": [ "checkpoint", "inputs", "priorInventory", "productionInventory", "wallClock" ],
+          "properties": {
+            "checkpoint": { "const": true },
+            "inputs": { "const": true },
+            "priorInventory": { "const": true },
+            "productionInventory": { "const": true },
+            "wallClock": { "const": true }
+          },
+          "additionalProperties": false
+        },
+        "assessmentSha256": { "$ref": "#/$defs/sha256" },
+        "accepted": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "observationReceipt": {
+      "type": "object",
+      "required": [ "schema", "runId", "bootId", "sessionId", "anchorSha256", "window", "budget", "principals", "packageManifestSha256", "packageGraphTerminal", "fd3ResultSha256", "terminalTranscriptSha256", "targets", "k44", "handoffSha256", "persistenceState", "decision", "authority" ],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-observation-receipt/v1" },
+        "runId": { "$ref": "#/$defs/pathComponent" },
+        "bootId": { "$ref": "#/$defs/bootId" },
+        "sessionId": { "$ref": "#/$defs/sha256" },
+        "anchorSha256": { "$ref": "#/$defs/sha256" },
+        "window": { "$ref": "#/$defs/window" },
+        "budget": { "$ref": "#/$defs/budget" },
+        "principals": { "$ref": "#/$defs/livePrincipals" },
+        "packageManifestSha256": { "const": "383960b7b04fd4c3afe66b27fa1ce8de74a870ce18f15d37a8069a5a0414b9d5" },
+        "packageGraphTerminal": { "const": true },
+        "fd3ResultSha256": { "$ref": "#/$defs/sha256" },
+        "terminalTranscriptSha256": { "$ref": "#/$defs/sha256" },
+        "targets": { "$ref": "#/$defs/targets" },
+        "k44": { "$ref": "#/$defs/k44Observation" },
+        "handoffSha256": { "$ref": "#/$defs/sha256" },
+        "persistenceState": { "const": "SEALED_PRE_TEARDOWN_HOLD" },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      },
+      "additionalProperties": false
+    },
+    "terminalProcess": {
+      "type": "object",
+      "required": [ "role", "identitySha256", "pidfd", "startTicks", "terminal" ],
+      "properties": {
+        "role": { "enum": [ "TRUSTED_INVOKER", "SUPERVISOR", "WATCHDOG", "OBSERVER", "WORKLOAD", "EVIDENCE_CUSTODIAN" ] },
+        "identitySha256": { "$ref": "#/$defs/sha256" },
+        "pidfd": { "type": "integer", "minimum": 5, "maximum": 4095 },
+        "startTicks": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "terminal": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [ "kind", "exitCode" ],
+              "properties": { "kind": { "const": "EXITED" }, "exitCode": { "type": "integer", "minimum": 0, "maximum": 255 } },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [ "kind", "signal" ],
+              "properties": { "kind": { "const": "SIGNALED" }, "signal": { "type": "integer", "minimum": 1, "maximum": 64 } },
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "terminalProcesses": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        { "allOf": [ { "$ref": "#/$defs/terminalProcess" }, { "properties": { "role": { "const": "OBSERVER" } } } ] },
+        { "allOf": [ { "$ref": "#/$defs/terminalProcess" }, { "properties": { "role": { "const": "WORKLOAD" } } } ] }
+      ],
+      "items": false
+    },
+    "survivingControlRoles": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        { "const": "TRUSTED_INVOKER" },
+        { "const": "SUPERVISOR" },
+        { "const": "WATCHDOG" },
+        { "const": "EVIDENCE_CUSTODIAN" }
+      ],
+      "items": false
+    },
+    "zeroProof": {
+      "type": "object",
+      "required": [ "processes", "survivingControlRoles", "cgroupIdentityLedgerSha256", "allCgroupEventsPopulatedZero", "mountIdentityLedgerSha256", "allTemporaryMountsGone", "entryIdentityLedgerSha256", "fdIdentityLedgerSha256", "allTemporaryFdsClosed", "allTemporaryEntriesGone", "cleanupByIdentityNotNumericPath", "outerWatchdogObservedZero", "watchdogZeroTranscriptSha256" ],
+      "properties": {
+        "processes": { "$ref": "#/$defs/terminalProcesses" },
+        "survivingControlRoles": { "$ref": "#/$defs/survivingControlRoles" },
+        "cgroupIdentityLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "allCgroupEventsPopulatedZero": { "const": true },
+        "mountIdentityLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "allTemporaryMountsGone": { "const": true },
+        "entryIdentityLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "fdIdentityLedgerSha256": { "$ref": "#/$defs/sha256" },
+        "allTemporaryFdsClosed": { "const": true },
+        "allTemporaryEntriesGone": { "const": true },
+        "cleanupByIdentityNotNumericPath": { "const": true },
+        "outerWatchdogObservedZero": { "const": true },
+        "watchdogZeroTranscriptSha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "teardownReceipt": {
+      "type": "object",
+      "required": [ "schema", "runId", "bootId", "sessionId", "anchorSha256", "window", "budget", "terminalCas", "observationReceiptSha256", "failurePoint", "zeroProof", "decision", "authority" ],
+      "properties": {
+        "schema": { "const": "iat-b3-post-checkpoint-prelaunch-supervisor-teardown-receipt/v1" },
+        "runId": { "$ref": "#/$defs/pathComponent" },
+        "bootId": { "$ref": "#/$defs/bootId" },
+        "sessionId": { "$ref": "#/$defs/sha256" },
+        "anchorSha256": { "$ref": "#/$defs/sha256" },
+        "window": { "$ref": "#/$defs/window" },
+        "budget": { "$ref": "#/$defs/budget" },
+        "terminalCas": { "enum": [ "OBSERVATION_DURABLE_THEN_ZERO_HOLD", "FAILURE_BEFORE_OBSERVATION_ZERO_HOLD", "FAILURE_AFTER_OBSERVATION_ZERO_HOLD", "TIMEOUT_BEFORE_OBSERVATION_ZERO_HOLD", "TIMEOUT_AFTER_OBSERVATION_ZERO_HOLD" ] },
+        "observationReceiptSha256": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/sha256" } ] },
+        "failurePoint": { "oneOf": [ { "type": "null" }, { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Z0-9_]+$" } ] },
+        "zeroProof": { "$ref": "#/$defs/zeroProof" },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "terminalCas": { "const": "OBSERVATION_DURABLE_THEN_ZERO_HOLD" },
+            "observationReceiptSha256": { "$ref": "#/$defs/sha256" },
+            "failurePoint": { "const": null }
+          }
+        },
+        {
+          "properties": {
+            "terminalCas": { "enum": [ "FAILURE_BEFORE_OBSERVATION_ZERO_HOLD", "TIMEOUT_BEFORE_OBSERVATION_ZERO_HOLD" ] },
+            "observationReceiptSha256": { "const": null },
+            "failurePoint": { "type": "string", "minLength": 1 }
+          }
+        },
+        {
+          "properties": {
+            "terminalCas": { "enum": [ "FAILURE_AFTER_OBSERVATION_ZERO_HOLD", "TIMEOUT_AFTER_OBSERVATION_ZERO_HOLD" ] },
+            "observationReceiptSha256": { "$ref": "#/$defs/sha256" },
+            "failurePoint": { "type": "string", "minLength": 1 }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "preAnchorTeardownReceipt": {
+      "type": "object",
+      "required": [ "authority", "bootstrapSha256", "decision", "failurePoint", "observationReceiptSha256", "prearmSessionId", "resourceLedgers", "runId", "terminalCas", "watchdogZeroTranscriptSha256" ],
+      "properties": {
+        "authority": { "const": "NONE" },
+        "bootstrapSha256": { "$ref": "#/$defs/sha256" },
+        "decision": { "const": "HOLD" },
+        "failurePoint": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Z0-9_]+$" },
+        "observationReceiptSha256": { "const": null },
+        "prearmSessionId": { "$ref": "#/$defs/sha256" },
+        "resourceLedgers": {
+          "type": "object",
+          "required": [ "cgroupIdentityLedgerSha256", "entryIdentityLedgerSha256", "fdIdentityLedgerSha256", "mountIdentityLedgerSha256" ],
+          "properties": {
+            "cgroupIdentityLedgerSha256": { "$ref": "#/$defs/sha256" },
+            "entryIdentityLedgerSha256": { "$ref": "#/$defs/sha256" },
+            "fdIdentityLedgerSha256": { "$ref": "#/$defs/sha256" },
+            "mountIdentityLedgerSha256": { "$ref": "#/$defs/sha256" }
+          },
+          "additionalProperties": false
+        },
+        "runId": { "$ref": "#/$defs/pathComponent" },
+        "terminalCas": { "const": "PRE_ANCHOR_FAILURE_ZERO_HOLD" },
+        "watchdogZeroTranscriptSha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "artifactIdentity": {
+      "type": "object",
+      "required": [ "artifact", "writerRole", "writerUid", "writerGid", "destinationPath", "destinationParentIdentitySha256", "sha256", "byteLength", "dev", "ino", "mountId", "handleSha256", "generation", "mode", "oExcl", "singleWrite", "fsyncFile", "fsyncParent", "renameNoReplace", "reopenedSameObject", "writeOnce" ],
+      "properties": {
+        "artifact": { "enum": [ "OBSERVATION", "TEARDOWN" ] },
+        "writerRole": { "const": "EVIDENCE_CUSTODIAN" },
+        "writerUid": { "type": "integer", "minimum": 1, "maximum": 4294967295 },
+        "writerGid": { "type": "integer", "minimum": 1, "maximum": 4294967295 },
+        "destinationPath": { "$ref": "#/$defs/absoluteLinuxPath" },
+        "destinationParentIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "byteLength": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "dev": { "$ref": "#/$defs/canonicalU64" },
+        "ino": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "mountId": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "handleSha256": { "$ref": "#/$defs/sha256" },
+        "generation": { "$ref": "#/$defs/positiveCanonicalU64" },
+        "mode": { "const": "0440" },
+        "oExcl": { "const": true },
+        "singleWrite": { "const": true },
+        "fsyncFile": { "const": true },
+        "fsyncParent": { "const": true },
+        "renameNoReplace": { "const": true },
+        "reopenedSameObject": { "const": true },
+        "writeOnce": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "custodianEnvelope": {
+      "type": "object",
+      "required": [ "custodianIdentitySha256", "observationArtifact", "teardownArtifact", "writeOrder", "authenticatedEndpointSha256", "allCopyAndReopenReadsCharged" ],
+      "properties": {
+        "custodianIdentitySha256": { "$ref": "#/$defs/sha256" },
+        "observationArtifact": { "oneOf": [ { "type": "null" }, { "allOf": [ { "$ref": "#/$defs/artifactIdentity" }, { "properties": { "artifact": { "const": "OBSERVATION" } } } ] } ] },
+        "teardownArtifact": { "allOf": [ { "$ref": "#/$defs/artifactIdentity" }, { "properties": { "artifact": { "const": "TEARDOWN" } } } ] },
+        "writeOrder": { "enum": [ "OBSERVATION_THEN_TEARDOWN", "NO_OBSERVATION_THEN_TEARDOWN" ] },
+        "authenticatedEndpointSha256": { "$ref": "#/$defs/sha256" },
+        "allCopyAndReopenReadsCharged": { "const": true }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "observationArtifact": { "allOf": [ { "$ref": "#/$defs/artifactIdentity" }, { "properties": { "artifact": { "const": "OBSERVATION" } } } ] },
+            "writeOrder": { "const": "OBSERVATION_THEN_TEARDOWN" }
+          }
+        },
+        {
+          "properties": {
+            "observationArtifact": { "const": null },
+            "writeOrder": { "const": "NO_OBSERVATION_THEN_TEARDOWN" }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "finalComposite": {
+      "type": "object",
+      "required": [ "domain", "runId", "anchorSha256", "observationReceiptSha256", "teardownReceiptSha256", "terminalCas", "availableArtifactsReplayed", "observationAbsenceVerified", "identityAndWindowEqualityVerified", "decision", "authority" ],
+      "properties": {
+        "domain": { "const": "IAT_B3_BPS05_FINAL_COMPOSITE_V1" },
+        "runId": { "$ref": "#/$defs/pathComponent" },
+        "anchorSha256": { "$ref": "#/$defs/sha256" },
+        "observationReceiptSha256": { "oneOf": [ { "type": "null" }, { "$ref": "#/$defs/sha256" } ] },
+        "teardownReceiptSha256": { "$ref": "#/$defs/sha256" },
+        "terminalCas": { "enum": [ "OBSERVATION_DURABLE_THEN_ZERO_HOLD", "FAILURE_BEFORE_OBSERVATION_ZERO_HOLD", "FAILURE_AFTER_OBSERVATION_ZERO_HOLD", "TIMEOUT_BEFORE_OBSERVATION_ZERO_HOLD", "TIMEOUT_AFTER_OBSERVATION_ZERO_HOLD" ] },
+        "availableArtifactsReplayed": { "const": true },
+        "observationAbsenceVerified": { "type": "boolean" },
+        "identityAndWindowEqualityVerified": { "const": true },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      },
+      "additionalProperties": false
+    },
+    "sourceDesignTruth": {
+      "type": "object",
+      "required": [ "sourcePresent", "schemaInstanceObserved", "compiled", "installed", "runtimeObserved", "packageExecuted", "toolchainAccepted", "k44Accepted", "observationReceiptPresent", "teardownReceiptPresent", "decision", "authority" ],
+      "properties": {
+        "sourcePresent": { "const": true },
+        "schemaInstanceObserved": { "const": false },
+        "compiled": { "const": false },
+        "installed": { "const": false },
+        "runtimeObserved": { "const": false },
+        "packageExecuted": { "const": false },
+        "toolchainAccepted": { "const": false },
+        "k44Accepted": { "const": false },
+        "observationReceiptPresent": { "const": false },
+        "teardownReceiptPresent": { "const": false },
+        "decision": { "const": "HOLD" },
+        "authority": { "const": "NONE" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

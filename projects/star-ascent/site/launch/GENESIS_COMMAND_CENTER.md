@@ -13,7 +13,7 @@
    preflight is preparation-only and cannot open the ceremony.
 2. Open the live site, `/launch`, `/signal`, and `/dossier` in independent tabs.
 3. Confirm the Trezor Model T firmware, PIN, recovery material security, and the intended public address on the device screen. Do not type recovery words into a computer or browser.
-4. Keep the publication payload in **HOLD** until independently verified evidence exists. Do not infer an address, transaction, allocation, or authority state.
+4. Keep the publication payload in **HOLD** until source-bound automated evidence exists. Do not infer an address, transaction, allocation, or authority state.
 
 ## Window-opening sequence
 
@@ -31,12 +31,12 @@
 
 ## Evidence gate
 
-Publish nothing as verified until all of these are independently observable:
+Publish nothing as verified until all of these are directly observable from bound sources and endpoints:
 
 - Mint address, program, decimals, and exact supply.
 - Mint authority and freeze authority state.
 - Allocation wallets, percentages, amounts, and time-lock evidence.
-- UTC timestamp and independent verifier identity.
+- UTC timestamp, evidence-source identity, receipt digest, and state digest.
 
 ## First hour
 

@@ -53,11 +53,6 @@ const isUtc = (value) => typeof value === "string"
   && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(value)
   && Number.isFinite(Date.parse(value));
 const isCurrentOrPastUtc = (value) => isUtc(value) && Date.parse(value) <= Date.now() + 60_000;
-const isLabel = (value) => typeof value === "string"
-  && value === value.trim()
-  && value.length >= 3
-  && value.length <= 80
-  && !/[\p{Cc}\p{Cf}]/u.test(value);
 const isReasonCode = (value) => typeof value === "string" && /^[A-Z][A-Z0-9_]{2,63}$/u.test(value);
 const isPublicHttpsUrl = (value) => {
   try {
@@ -77,8 +72,9 @@ const nullableFields = [
   "signature",
   "explorerUrl",
   "confirmedAtUtc",
-  "independentlyVerifiedAtUtc",
-  "independentVerifierLabel",
+  "observationReceiptPath",
+  "observationReceiptSha256",
+  "observedAtUtc",
   "observedPostStateSha256",
   "mismatchCode",
 ];
@@ -112,9 +108,10 @@ const stageKeys = [
 ];
 const expectedLimitations = [
   "Explorer URLs and recorded digests are evidence references, not signatures or transaction authority.",
-  "A FINALIZED_MATCHED stage requires a separate independent read of confirmed state.",
-  "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new separately reviewed record and must never overwrite history.",
-  "RECONCILED permits evidence-first publication review only; it does not authorize publication or claims.",
+  "A finalized, failed, or unresolved stage requires an exact source-bound automated observation receipt; journal fields alone are not evidence.",
+  "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new source-bound record and must never overwrite history.",
+  "RECONCILED permits evidence-first publication observation only; it does not authorize publication or claims.",
+  "Trezor Model T physical confirmation is the sole human gate and applies only to actual cryptographic signatures.",
 ];
 const expectedHashContract = {
   algorithm: "SHA-256",
@@ -164,8 +161,90 @@ function unsafeContent(value, path = "journal") {
   return null;
 }
 
+const observationReceiptKeys = [
+  "schema",
+  "observationMode",
+  "network",
+  "sourceCommit",
+  "programId",
+  "stageIndex",
+  "stage",
+  "reviewedIntentSha256",
+  "signedMessageSha256",
+  "expectedPostStateSha256",
+  "signature",
+  "confirmedAtUtc",
+  "observedPostStateSha256",
+  "mismatchCode",
+  "observedAtUtc",
+];
+
+function validateStageObservation(stage, offset) {
+  const expectedPath = `launch/evidence/iat-v2-mainnet-stage-${offset + 1}-observation.json`;
+  if (stage.observationReceiptPath !== expectedPath) {
+    fail(`stages[${offset}].observationReceiptPath must be ${expectedPath}`);
+    return null;
+  }
+  if (!isDigest(stage.observationReceiptSha256)) {
+    fail(`stages[${offset}] requires a lowercase observation-receipt SHA-256`);
+    return null;
+  }
+  let bytes;
+  try {
+    bytes = readFileSync(resolve(expectedPath));
+  } catch {
+    fail(`stages[${offset}] observation receipt must exist at ${expectedPath}`);
+    return null;
+  }
+  if (sha256(bytes) !== stage.observationReceiptSha256) {
+    fail(`stages[${offset}] observationReceiptSha256 must bind the exact receipt bytes`);
+    return null;
+  }
+  let receipt;
+  try {
+    receipt = JSON.parse(bytes);
+  } catch {
+    fail(`stages[${offset}] observation receipt must be valid JSON`);
+    return null;
+  }
+  if (!exactKeys(receipt, observationReceiptKeys)) {
+    fail(`stages[${offset}] observation receipt must contain exactly the source/receipt/state fields`);
+    return null;
+  }
+  const expected = {
+    schema: "iat-v2-stage-observation/v1",
+    observationMode: "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    network: journal.network,
+    sourceCommit: journal.identity.sourceCommit,
+    programId: journal.identity.programId,
+    stageIndex: stage.index,
+    stage: stage.stage,
+    reviewedIntentSha256: stage.reviewedIntentSha256,
+    signedMessageSha256: stage.signedMessageSha256,
+    expectedPostStateSha256: stage.expectedPostStateSha256,
+    signature: stage.signature,
+    confirmedAtUtc: stage.confirmedAtUtc,
+    observedPostStateSha256: stage.observedPostStateSha256,
+    mismatchCode: stage.mismatchCode,
+    observedAtUtc: stage.observedAtUtc,
+  };
+  for (const [field, value] of Object.entries(expected)) {
+    if (receipt[field] !== value) fail(`stages[${offset}] observation receipt ${field} must match the journal`);
+  }
+  if (!isCurrentOrPastUtc(receipt.observedAtUtc)) fail(`stages[${offset}] observation receipt requires a non-future canonical UTC timestamp`);
+  if (isUtc(stage.confirmedAtUtc) && isUtc(receipt.observedAtUtc) && Date.parse(receipt.observedAtUtc) < Date.parse(stage.confirmedAtUtc)) {
+    fail(`stages[${offset}] automated observation cannot predate confirmation`);
+  }
+  return receipt;
+}
+
+const observationReceiptSetSha256 = (stages) => sha256(Buffer.from(
+  `${stages.map((stage) => stage.observationReceiptSha256).join("\n")}\n`,
+  "utf8",
+));
+
 if (!exactKeys(journal, ["schema", "status", "network", "scope", "hashContract", "sourceArtifacts", "artifactDigests", "identity", "controls", "stages", "terminalDecision", "limitations"])) fail("journal must contain exactly the reviewed top-level fields");
-if (journal.schema !== "iat-v2-mainnet-stage-journal/v2") fail("unexpected stage-journal schema");
+if (journal.schema !== "iat-v2-mainnet-stage-journal/v3") fail("unexpected stage-journal schema");
 if (!["HOLD", "ARMED", "TERMINAL_HOLD", "RECONCILED"].includes(journal.status)) fail("status must be HOLD, ARMED, TERMINAL_HOLD, or RECONCILED");
 if (journal.network !== "mainnet-beta") fail("stage journal must remain mainnet-beta");
 if (journal.scope !== "Non-authorizing V2 stage reconciliation journal; this file never signs, broadcasts, retries, repairs, compensates, publishes, or establishes on-chain truth.") fail("scope lost its non-authorizing boundary");
@@ -173,16 +252,31 @@ if (JSON.stringify(journal.hashContract) !== JSON.stringify(expectedHashContract
 if (!exactKeys(journal.sourceArtifacts, Object.keys(sourcePaths))) fail("sourceArtifacts must contain exactly the reviewed paths");
 if (!exactKeys(journal.artifactDigests, Object.keys(digestFields))) fail("artifactDigests must contain exactly the reviewed fields");
 if (!exactKeys(journal.identity, ["sourceCommit", "programId", "programDataAddress", "mint", "administrator"])) fail("identity must contain exactly the reviewed public fields");
-if (!exactKeys(journal.controls, ["stageOrderImmutable", "intentBoundBeforeCeremony", "signedMessageBoundBeforeSubmission", "stopAfterFirstNonMatch", "noAutomaticRetry", "noCompensatingTransaction", "noApprovalReuse", "independentVerificationPerFinalizedStage", "noPublicationBeforeFullReconciliation", "preserveTerminalHoldHistory"])) fail("controls must contain exactly the reviewed intent, message, and stop fields");
-if (!exactKeys(journal.terminalDecision, ["state", "failedStage", "reasonCode", "reviewedAtUtc", "reviewerLabel", "publicIncidentUrl"])) fail("terminalDecision must contain exactly the reviewed fields");
+if (!exactKeys(journal.controls, ["stageOrderImmutable", "intentBoundBeforeCeremony", "signedMessageBoundBeforeSubmission", "stopAfterFirstNonMatch", "noAutomaticRetry", "noCompensatingTransaction", "noApprovalReuse", "automatedSourceReceiptStateObservationPerFinalizedStage", "humanReviewerRequired", "noSelfAttestation", "trezorModelTPhysicalConfirmationIsSoleHumanGate", "noPublicationBeforeFullReconciliation", "preserveTerminalHoldHistory"])) fail("controls must contain exactly the reviewed intent, observation, signature, and stop fields");
+if (!exactKeys(journal.terminalDecision, ["state", "failedStage", "reasonCode", "observationReceiptSetSha256", "observedAtUtc", "publicIncidentUrl"])) fail("terminalDecision must contain exactly the automated observation fields");
 if (unsafeContent(journal)) fail(`journal contains credential-shaped content at ${unsafeContent(journal)}`);
 for (const [field, expected] of Object.entries(sourcePaths)) {
   if (journal.sourceArtifacts?.[field] !== expected) fail(`${field} must point to ${expected}`);
 }
-for (const [field, value] of Object.entries(journal.controls ?? {})) {
-  if (value !== true) fail(`controls.${field} must be true`);
+const expectedControls = {
+  stageOrderImmutable: true,
+  intentBoundBeforeCeremony: true,
+  signedMessageBoundBeforeSubmission: true,
+  stopAfterFirstNonMatch: true,
+  noAutomaticRetry: true,
+  noCompensatingTransaction: true,
+  noApprovalReuse: true,
+  automatedSourceReceiptStateObservationPerFinalizedStage: true,
+  humanReviewerRequired: false,
+  noSelfAttestation: true,
+  trezorModelTPhysicalConfirmationIsSoleHumanGate: true,
+  noPublicationBeforeFullReconciliation: true,
+  preserveTerminalHoldHistory: true,
+};
+for (const [field, expected] of Object.entries(expectedControls)) {
+  if (journal.controls?.[field] !== expected) fail(`controls.${field} must be ${expected}`);
 }
-if (JSON.stringify(journal.limitations) !== JSON.stringify(expectedLimitations)) fail("limitations must retain the four exact reviewed non-authorizing statements");
+if (JSON.stringify(journal.limitations) !== JSON.stringify(expectedLimitations)) fail("limitations must retain the five exact reviewed non-authorizing statements");
 if (!Array.isArray(journal.stages) || journal.stages.length !== V2_STAGE_ORDER.length) fail("journal must contain exactly eight V2 stages");
 let priorStageOffset = -1;
 for (const stage of V2_STAGE_ORDER) {
@@ -219,7 +313,7 @@ if (isHold) {
       || ceremonyScheduledAtMs <= schedulePublishedAtMs
   ) fail("non-HOLD journal requires one exact SCHEDULED_HOLD UTC ceremony time later than its publication time");
   if (readinessGate.funding?.ceremonyFloorSatisfied !== true || readinessGate.gates?.mainnetFundingFloorSatisfied !== true) fail("non-HOLD journal requires the recorded ceremony funding floor");
-  for (const field of ["replacementUtcWindowPublished", "releaseArtifactsRegeneratedAfterFundingAndScheduling", "finalPreflightPassedAgainstRegeneratedArtifacts", "physicalModelTDevicePathReviewed", "physicalModelTReviewCompleted", "independentMainnetVerifierAssigned", "mainnetExecutionAuthorized"]) {
+  for (const field of ["replacementUtcWindowPublished", "releaseArtifactsRegeneratedAfterFundingAndScheduling", "finalPreflightPassedAgainstRegeneratedArtifacts", "physicalModelTDevicePathReviewed", "physicalModelTReviewCompleted", "automatedSourceReceiptStateObservationComplete", "mainnetExecutionAuthorized"]) {
     if (readinessGate.gates?.[field] !== true) fail(`non-HOLD journal requires readinessGate.gates.${field}`);
   }
   for (const [field, value] of Object.entries(readinessGate.safety ?? {})) if (value !== false) fail(`non-HOLD journal requires readinessGate.safety.${field} to remain false`);
@@ -246,22 +340,21 @@ for (const [offset, stage] of (journal.stages ?? []).entries()) {
     if (!isSignature(stage.signature)) fail(`stages[${offset}] requires a usable finalized signature`);
     else if (signatures.has(stage.signature)) fail(`duplicate stage signature at index ${offset}`); else signatures.add(stage.signature);
     if (!explorerMatchesSignature(stage.explorerUrl, stage.signature)) fail(`stages[${offset}].explorerUrl must directly identify its mainnet signature`);
-    if (!isCurrentOrPastUtc(stage.confirmedAtUtc) || !isCurrentOrPastUtc(stage.independentlyVerifiedAtUtc)) fail(`stages[${offset}] requires non-future canonical confirmation and verification timestamps`);
-    else if (Date.parse(stage.independentlyVerifiedAtUtc) < Date.parse(stage.confirmedAtUtc)) fail(`stages[${offset}] verification cannot predate confirmation`);
-    if (!isLabel(stage.independentVerifierLabel)) fail(`stages[${offset}] requires an independent verifier label`);
+    if (!isCurrentOrPastUtc(stage.confirmedAtUtc) || !isCurrentOrPastUtc(stage.observedAtUtc)) fail(`stages[${offset}] requires non-future canonical confirmation and automated-observation timestamps`);
+    else if (Date.parse(stage.observedAtUtc) < Date.parse(stage.confirmedAtUtc)) fail(`stages[${offset}] automated observation cannot predate confirmation`);
     if (!isDigest(stage.observedPostStateSha256) || stage.observedPostStateSha256 !== stage.expectedPostStateSha256) fail(`stages[${offset}] observed post-state must match the precommitted expected digest`);
     if (stage.mismatchCode !== null) fail(`FINALIZED_MATCHED stage ${offset} cannot retain a mismatch code`);
   }
   if (stage.status === "FAILED_OR_MISMATCH") {
     if (firstStopIndex !== -1) fail("journal may contain only one first stop boundary"); else firstStopIndex = offset;
     if (!isReasonCode(stage.mismatchCode)) fail(`stages[${offset}] requires a portable mismatch code`);
-    if (!isCurrentOrPastUtc(stage.independentlyVerifiedAtUtc) || !isLabel(stage.independentVerifierLabel)) fail(`stages[${offset}] failure requires a non-future independent review record`);
+    if (!isCurrentOrPastUtc(stage.observedAtUtc)) fail(`stages[${offset}] failure requires a non-future automated observation`);
     if ((stage.signature === null) !== (stage.explorerUrl === null)) fail(`stages[${offset}] signature and Explorer URL must be both present or both null`);
     if (stage.signature !== null && (!isSignature(stage.signature) || !explorerMatchesSignature(stage.explorerUrl, stage.signature))) fail(`stages[${offset}] failure evidence must directly identify a usable mainnet signature`);
     else if (stage.signature !== null && signatures.has(stage.signature)) fail(`duplicate stage signature at index ${offset}`);
     else if (stage.signature !== null) signatures.add(stage.signature);
     if (stage.confirmedAtUtc !== null && !isCurrentOrPastUtc(stage.confirmedAtUtc)) fail(`stages[${offset}].confirmedAtUtc must be null or non-future canonical UTC`);
-    if (stage.confirmedAtUtc !== null && isUtc(stage.independentlyVerifiedAtUtc) && Date.parse(stage.independentlyVerifiedAtUtc) < Date.parse(stage.confirmedAtUtc)) fail(`stages[${offset}] failure verification cannot predate confirmation`);
+    if (stage.confirmedAtUtc !== null && isUtc(stage.observedAtUtc) && Date.parse(stage.observedAtUtc) < Date.parse(stage.confirmedAtUtc)) fail(`stages[${offset}] failure observation cannot predate confirmation`);
     if (stage.observedPostStateSha256 !== null && !isDigest(stage.observedPostStateSha256)) fail(`stages[${offset}].observedPostStateSha256 must be null or lowercase SHA-256`);
     if (stage.signedMessageSha256 !== null && !isDigest(stage.signedMessageSha256)) fail(`stages[${offset}].signedMessageSha256 must be null or lowercase SHA-256`);
     if (stage.signature !== null && !isDigest(stage.signedMessageSha256)) fail(`stages[${offset}] failure signature requires its signed-message digest`);
@@ -274,16 +367,17 @@ for (const [offset, stage] of (journal.stages ?? []).entries()) {
     if (!explorerMatchesSignature(stage.explorerUrl, stage.signature)) fail(`stages[${offset}] unresolved submission must directly identify its mainnet signature`);
     if (!isDigest(stage.signedMessageSha256)) fail(`stages[${offset}] unresolved submission requires its signed-message digest`);
     if (stage.confirmedAtUtc !== null) fail(`stages[${offset}] unresolved submission cannot claim a confirmation time`);
-    if (!isCurrentOrPastUtc(stage.independentlyVerifiedAtUtc) || !isLabel(stage.independentVerifierLabel)) fail(`stages[${offset}] unresolved submission requires a non-future independent review record`);
+    if (!isCurrentOrPastUtc(stage.observedAtUtc)) fail(`stages[${offset}] unresolved submission requires a non-future automated observation`);
     if (stage.observedPostStateSha256 !== null) fail(`stages[${offset}] unresolved submission cannot claim an observed post-state digest`);
     if (stage.mismatchCode !== "CONFIRMATION_UNKNOWN") fail(`stages[${offset}] unresolved submission requires CONFIRMATION_UNKNOWN`);
   }
+  if (["FINALIZED_MATCHED", "FAILED_OR_MISMATCH", "SUBMITTED_UNRESOLVED"].includes(stage.status)) validateStageObservation(stage, offset);
 }
 
 if (journal.status === "ARMED") {
   if (journal.stages?.some(({ status }) => status !== "PENDING")) fail("ARMED requires all stages PENDING");
   if (journal.terminalDecision?.state !== "HOLD" || journal.terminalDecision?.reasonCode !== "NOT_STARTED") fail("ARMED must retain terminal HOLD / NOT_STARTED");
-  for (const field of ["failedStage", "reviewedAtUtc", "reviewerLabel", "publicIncidentUrl"]) if (journal.terminalDecision?.[field] !== null) fail(`ARMED requires terminalDecision.${field} to be null`);
+  for (const field of ["failedStage", "observationReceiptSetSha256", "observedAtUtc", "publicIncidentUrl"]) if (journal.terminalDecision?.[field] !== null) fail(`ARMED requires terminalDecision.${field} to be null`);
 }
 if (journal.status === "TERMINAL_HOLD") {
   if (firstStopIndex === -1) fail("TERMINAL_HOLD requires one failed, mismatched, or unresolved stage");
@@ -292,20 +386,22 @@ if (journal.status === "TERMINAL_HOLD") {
     if (index === firstStopIndex && !["FAILED_OR_MISMATCH", "SUBMITTED_UNRESOLVED"].includes(journal.stages[index].status)) fail(`TERMINAL_HOLD stage ${index + 1} must be FAILED_OR_MISMATCH or SUBMITTED_UNRESOLVED`);
     if (index > firstStopIndex && journal.stages[index].status !== "NOT_ATTEMPTED") fail(`TERMINAL_HOLD stage ${index + 1} must be NOT_ATTEMPTED`);
   }
-  if (journal.terminalDecision?.state !== "TERMINAL_HOLD" || journal.terminalDecision?.failedStage !== V2_STAGE_ORDER[firstStopIndex] || !isReasonCode(journal.terminalDecision?.reasonCode) || !isCurrentOrPastUtc(journal.terminalDecision?.reviewedAtUtc) || !isLabel(journal.terminalDecision?.reviewerLabel)) fail("TERMINAL_HOLD decision must bind the first stopped stage and non-future independent review");
+  if (journal.terminalDecision?.state !== "TERMINAL_HOLD" || journal.terminalDecision?.failedStage !== V2_STAGE_ORDER[firstStopIndex] || !isReasonCode(journal.terminalDecision?.reasonCode) || !isCurrentOrPastUtc(journal.terminalDecision?.observedAtUtc)) fail("TERMINAL_HOLD decision must bind the first stopped stage and non-future automated observation");
   if (journal.terminalDecision?.reasonCode !== journal.stages?.[firstStopIndex]?.mismatchCode) fail("TERMINAL_HOLD reasonCode must equal the stopped stage mismatchCode");
-  if (isUtc(journal.terminalDecision?.reviewedAtUtc) && isUtc(journal.stages?.[firstStopIndex]?.independentlyVerifiedAtUtc) && Date.parse(journal.terminalDecision.reviewedAtUtc) < Date.parse(journal.stages[firstStopIndex].independentlyVerifiedAtUtc)) fail("TERMINAL_HOLD review cannot predate the stopped-stage independent review");
+  if (journal.terminalDecision?.observationReceiptSetSha256 !== observationReceiptSetSha256(journal.stages.slice(0, firstStopIndex + 1))) fail("TERMINAL_HOLD must bind the exact ordered observation-receipt set");
+  if (isUtc(journal.terminalDecision?.observedAtUtc) && isUtc(journal.stages?.[firstStopIndex]?.observedAtUtc) && Date.parse(journal.terminalDecision.observedAtUtc) < Date.parse(journal.stages[firstStopIndex].observedAtUtc)) fail("TERMINAL_HOLD observation cannot predate the stopped-stage observation");
   if (journal.terminalDecision?.publicIncidentUrl !== null && !isPublicHttpsUrl(journal.terminalDecision.publicIncidentUrl)) fail("TERMINAL_HOLD publicIncidentUrl must be null or a public HTTPS URL");
 }
 if (journal.status === "RECONCILED") {
   if (journal.stages?.some(({ status }) => status !== "FINALIZED_MATCHED")) fail("RECONCILED requires all eight stages FINALIZED_MATCHED");
-  if (journal.terminalDecision?.state !== "RECONCILED" || journal.terminalDecision?.failedStage !== null || journal.terminalDecision?.reasonCode !== "ALL_STAGES_MATCHED" || !isCurrentOrPastUtc(journal.terminalDecision?.reviewedAtUtc) || !isLabel(journal.terminalDecision?.reviewerLabel) || journal.terminalDecision?.publicIncidentUrl !== null) fail("RECONCILED decision must record ALL_STAGES_MATCHED without incident evidence");
-  const latestStageReview = Math.max(...(journal.stages ?? []).map((stage) => Date.parse(stage.independentlyVerifiedAtUtc)));
-  if (isUtc(journal.terminalDecision?.reviewedAtUtc) && Number.isFinite(latestStageReview) && Date.parse(journal.terminalDecision.reviewedAtUtc) < latestStageReview) fail("RECONCILED terminal review cannot predate any stage review");
+  if (journal.terminalDecision?.state !== "RECONCILED" || journal.terminalDecision?.failedStage !== null || journal.terminalDecision?.reasonCode !== "ALL_STAGES_MATCHED" || !isCurrentOrPastUtc(journal.terminalDecision?.observedAtUtc) || journal.terminalDecision?.publicIncidentUrl !== null) fail("RECONCILED decision must record ALL_STAGES_MATCHED without incident evidence");
+  if (journal.terminalDecision?.observationReceiptSetSha256 !== observationReceiptSetSha256(journal.stages)) fail("RECONCILED must bind the exact ordered observation-receipt set");
+  const latestStageObservation = Math.max(...(journal.stages ?? []).map((stage) => Date.parse(stage.observedAtUtc)));
+  if (isUtc(journal.terminalDecision?.observedAtUtc) && Number.isFinite(latestStageObservation) && Date.parse(journal.terminalDecision.observedAtUtc) < latestStageObservation) fail("RECONCILED terminal observation cannot predate any stage observation");
 }
 if (journal.status === "HOLD") {
   if (journal.terminalDecision?.state !== "HOLD" || journal.terminalDecision?.reasonCode !== "NOT_STARTED") fail("HOLD journal must retain terminal HOLD / NOT_STARTED");
-  for (const field of ["failedStage", "reviewedAtUtc", "reviewerLabel", "publicIncidentUrl"]) if (journal.terminalDecision?.[field] !== null) fail(`HOLD requires terminalDecision.${field} to be null`);
+  for (const field of ["failedStage", "observationReceiptSetSha256", "observedAtUtc", "publicIncidentUrl"]) if (journal.terminalDecision?.[field] !== null) fail(`HOLD requires terminalDecision.${field} to be null`);
 }
 
 if (failures.length) {
@@ -313,4 +409,4 @@ if (failures.length) {
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
-console.log(`IAT V2 mainnet stage journal passes in ${journal.status}: eight immutable boundaries, independent stage evidence, terminal HOLD on first failure, mismatch, or unresolved submission, no retry or compensating transaction authority.`);
+console.log(`IAT V2 mainnet stage journal passes in ${journal.status}: eight immutable boundaries, exact automated source/receipt/state evidence, Model T-only human signature confirmation, terminal HOLD on first failure, mismatch, or unresolved submission, and no retry or compensating transaction authority.`);

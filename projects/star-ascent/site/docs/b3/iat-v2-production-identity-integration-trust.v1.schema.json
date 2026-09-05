@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internalagency.io/schemas/iat-v2-production-identity-integration-trust.v1.schema.json",
+  "title": "IAT V2 production identity integration canonical observer trust",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema",
+    "status",
+    "sources",
+    "sourceSetSha256",
+    "expectedSubjectBindingSha256",
+    "expectedHarnessSha256",
+    "expectedEnvironmentIdentitySha256",
+    "expectedD1DeploymentIdentitySha256",
+    "packetMaySelectEvidenceSources",
+    "noSelfAttestation",
+    "mainnetStatus"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./iat-v2-production-identity-integration-trust.v1.schema.json"
+    },
+    "schema": {
+      "const": "iat-v2-production-identity-integration-trust/v1"
+    },
+    "status": {
+      "enum": [
+        "UNCONFIGURED_HOLD",
+        "CONFIGURED_CANONICAL_OBSERVERS"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "sourceSetSha256": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/sha256" }
+      ]
+    },
+    "expectedSubjectBindingSha256": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/sha256" }
+      ]
+    },
+    "expectedHarnessSha256": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/sha256" }
+      ]
+    },
+    "expectedEnvironmentIdentitySha256": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/sha256" }
+      ]
+    },
+    "expectedD1DeploymentIdentitySha256": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/sha256" }
+      ]
+    },
+    "packetMaySelectEvidenceSources": { "const": false },
+    "noSelfAttestation": { "const": true },
+    "mainnetStatus": { "const": "HOLD" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceId",
+        "role",
+        "failureDomainId",
+        "trustBinding"
+      ],
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._:/-]{7,127}$"
+        },
+        "role": {
+          "enum": [
+            "X_PROVIDER_OBSERVER",
+            "CLOUDFLARE_D1_OBSERVER"
+          ]
+        },
+        "failureDomainId": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._:/-]{7,127}$"
+        },
+        "trustBinding": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

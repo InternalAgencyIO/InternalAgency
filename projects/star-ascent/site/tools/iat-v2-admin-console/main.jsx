@@ -1,5 +1,5 @@
 import "./buffer-polyfill.mjs";
-import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Connection,
@@ -19,7 +19,10 @@ import {
   DEVNET_FEATURE_MINT_SEED,
   DEVNET_MINT_SEED,
   IAT_V2_ADMIN_STAGE_ORDER,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_PROGRAM_ADMIN,
+  IAT_V2_PROGRAM_ARTIFACT_BYTES,
   IAT_V2_PROGRAM_ARTIFACT_SHA256,
   IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
@@ -44,21 +47,36 @@ import {
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
   createTrezorTransactionProvider,
-  findTrezorSolanaAccount,
+  verifyTrezorSolanaAccountOnDevice,
 } from "./trezor-provider.mjs";
+import { assertTrezorPathSession } from "./trezor-path-session.mjs";
+import TrezorPathSessionGate from "./TrezorPathSessionGate.jsx";
 import {
   decodeOriginalTokenAccountInfo,
   decodeOriginalTokenMintInfo,
 } from "./original-token-decode.mjs";
+import {
+  assertFreshFinalizedBlockhash,
+  assertSignedLegacyTransaction,
+  finalizedContextSlot as finalizedAttendedContextSlot,
+  simulateExactLegacyTransaction,
+} from "./attended-transaction-boundary.mjs";
 import "./style.css";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
+const REVIEWED_MODEL_T_SOLANA_PATH = "m/44'/501'/0'/0'";
 const SOURCE_COMMIT = "ba88535036da3f3871b65100fc18b655ccfa1d57";
 const CONSOLE_PARAMS = new URLSearchParams(window.location.search);
 const FEATURE_MODE = CONSOLE_PARAMS.get("mode") === "features";
 const UPGRADE_MODE = CONSOLE_PARAMS.get("mode") === "upgrade";
 const INSPECTION_MODE = CONSOLE_PARAMS.get("mode") === "inspect";
 const ATTENDED_WEEK9_MODE = CONSOLE_PARAMS.get("mode") === "settle-week9";
+const MIGRATE_ROUNDS_MODE = CONSOLE_PARAMS.get("mode") === "migrate-rounds";
+const CANONICAL_ACTION_MODE = FEATURE_MODE || UPGRADE_MODE || MIGRATE_ROUNDS_MODE;
+const LEGACY_INITIALIZATION_SIGNING_DISABLED = true;
+const FOOTER_SOURCE_LABEL = CANONICAL_ACTION_MODE
+  ? "SOURCE // SEE ISOLATED ACTION BINDING"
+  : `SOURCE ${SOURCE_COMMIT.slice(0, 12)}`;
 const FEATURE_GENESIS_OVERRIDE = CONSOLE_PARAMS.get("genesis");
 const ACTIVE_MINT_SEED = FEATURE_MODE ? DEVNET_FEATURE_MINT_SEED : DEVNET_MINT_SEED;
 const STORAGE_KEY = FEATURE_MODE
@@ -67,14 +85,24 @@ const STORAGE_KEY = FEATURE_MODE
 const FEATURE_GENESIS_STORAGE_KEY = `iat-v2-feature-genesis-timestamp/${ACTIVE_MINT_SEED}/v3`;
 const SECONDS_PER_WEEK = 604_800;
 const FEATURE_BOUNDARY_LEAD_SECONDS = 7_200;
-const connection = new Connection(DEVNET_RPC, "confirmed");
+const FINALIZED_COMMITMENT = "finalized";
+const ACTIVE_PROGRAM_ARTIFACT_BYTES = FEATURE_MODE
+  ? IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES
+  : IAT_V2_PROGRAM_ARTIFACT_BYTES;
+const ACTIVE_PROGRAM_ARTIFACT_SHA256 = FEATURE_MODE
+  ? IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256
+  : IAT_V2_PROGRAM_ARTIFACT_SHA256;
+const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
 const FeatureRehearsal = lazy(() => import("./FeatureRehearsal.jsx"));
 const ProgramUpgrade = lazy(() => import("./ProgramUpgrade.jsx"));
 const AttendedWeek9Settlement = lazy(() => import("./AttendedWeek9Settlement.jsx"));
+const LegacyRoundMigration = lazy(() => import("./LegacyRoundMigration.jsx"));
 document.documentElement.dataset.iatAdminMode = INSPECTION_MODE
   ? "inspection"
   : UPGRADE_MODE
     ? "upgrade"
+    : MIGRATE_ROUNDS_MODE
+      ? "migrate-rounds"
     : ATTENDED_WEEK9_MODE
       ? "settle-week9"
       : FEATURE_MODE
@@ -83,7 +111,6 @@ document.documentElement.dataset.iatAdminMode = INSPECTION_MODE
 document.documentElement.dataset.iatTrezorConnect = "unloaded";
 let trezorConnect;
 let trezorConnectReady;
-const trezorAccounts = new Map();
 
 const STAGE_COPY = [
   {
@@ -137,6 +164,37 @@ function json(value) {
   }, 2);
 }
 
+function initializationSnapshotBinding(snapshot) {
+  return json({
+    nextStage: snapshot.nextStage,
+    complete: snapshot.complete,
+    active: snapshot.active,
+    mint: snapshot.mint,
+    plan: {
+      config: snapshot.plan.config,
+      vaultAuthority: snapshot.plan.vaultAuthority,
+      stakeTokenAccount: snapshot.plan.stakeTokenAccount,
+      coreReward: snapshot.plan.coreReward,
+      lanes: snapshot.plan.lanes,
+      allocationDestinations: snapshot.plan.allocationDestinations,
+    },
+    deployment: {
+      programId: snapshot.deployment.programId,
+      programDataAddress: snapshot.deployment.programDataAddress,
+      artifactSha256: snapshot.deployment.artifactSha256,
+      slot: snapshot.deployment.slot,
+      upgradeAuthority: snapshot.deployment.upgradeAuthority,
+      programBytes: snapshot.deployment.programBytes,
+      loaderRegionBytes: snapshot.deployment.loaderRegionBytes,
+      loaderZeroPaddingBytes: snapshot.deployment.loaderZeroPaddingBytes,
+    },
+    balanceLamports: snapshot.balanceLamports,
+    supply: snapshot.supply,
+    config: snapshot.config,
+    balances: snapshot.balances,
+  });
+}
+
 async function sha256Hex(value) {
   const bytes = value instanceof Uint8Array ? value : new Uint8Array(value);
   const digest = await crypto.subtle.digest("SHA-256", bytes);
@@ -177,48 +235,83 @@ async function initializeTrezorConnect() {
   return trezorConnect;
 }
 
-async function getHardwareProvider(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
+async function openVerifiedTrezorPathSession(expectedAddress = IAT_V2_PROGRAM_ADMIN) {
   const connect = await initializeTrezorConnect();
-  const cacheKey = expectedAddress.toBase58();
-  let account = trezorAccounts.get(cacheKey);
-  if (!account) {
-    account = await findTrezorSolanaAccount({
-      connect,
-      expectedAddress,
-    });
-    trezorAccounts.set(cacheKey, account);
-  }
-  const publicKey = account.publicKey;
-  const provider = createTrezorTransactionProvider({
+  const verifiedAccount = await verifyTrezorSolanaAccountOnDevice({
     connect,
-    path: account.path,
-    publicKey,
+    account: {
+      path: REVIEWED_MODEL_T_SOLANA_PATH,
+      publicKey: expectedAddress,
+    },
+    expectedAddress,
   });
-  return { provider, publicKey };
+  if (!verifiedAccount.publicKey.equals(expectedAddress)) {
+    throw new Error("Model T displayed an address other than the required Solana signer");
+  }
+  return verifiedAccount;
 }
 
-function getFeatureGenesisTimestamp() {
+async function getSessionHardwareProvider(session, expectedAddress = IAT_V2_PROGRAM_ADMIN) {
+  const verifiedSession = assertTrezorPathSession(session, expectedAddress);
+  const connect = await initializeTrezorConnect();
+  const provider = createTrezorTransactionProvider({
+    connect,
+    verification: verifiedSession.verification,
+    network: "devnet",
+    readGenesisHash: () => connection.getGenesisHash(),
+  });
+  return { provider, publicKey: provider.publicKey };
+}
+
+function finalizedContextSlot(result, label, minContextSlot = 0) {
+  const slot = result?.context?.slot;
+  if (!Number.isSafeInteger(slot) || slot < minContextSlot) {
+    throw new Error(`${label} did not return a valid finalized context slot`);
+  }
+  return slot;
+}
+
+async function finalizedBlockTimestamp(slot, label) {
+  const timestamp = await connection.getBlockTime(slot);
+  if (!Number.isSafeInteger(timestamp) || timestamp <= 0) {
+    throw new Error(`${label} did not return a valid finalized block time`);
+  }
+  return timestamp;
+}
+
+function getFeatureGenesisTimestamp(finalizedTimestamp) {
+  if (!Number.isSafeInteger(finalizedTimestamp) || finalizedTimestamp <= 0) {
+    throw new Error("Feature Genesis requires a valid finalized block time");
+  }
+  let timestamp;
   if (FEATURE_GENESIS_OVERRIDE !== null) {
     if (!/^\d+$/.test(FEATURE_GENESIS_OVERRIDE)) {
       throw new Error("Feature Genesis URL override must be an unsigned Unix timestamp");
     }
-    const timestamp = BigInt(FEATURE_GENESIS_OVERRIDE);
-    localStorage.setItem(FEATURE_GENESIS_STORAGE_KEY, timestamp.toString());
-    return timestamp;
+    timestamp = BigInt(FEATURE_GENESIS_OVERRIDE);
+  } else {
+    const stored = localStorage.getItem(FEATURE_GENESIS_STORAGE_KEY);
+    timestamp = stored && /^-?\d+$/.test(stored)
+      ? BigInt(stored)
+      : BigInt(finalizedTimestamp - (8 * SECONDS_PER_WEEK) + FEATURE_BOUNDARY_LEAD_SECONDS);
   }
-  const stored = localStorage.getItem(FEATURE_GENESIS_STORAGE_KEY);
-  if (stored && /^-?\d+$/.test(stored)) return BigInt(stored);
-  const now = Math.floor(Date.now() / 1000);
-  const timestamp = BigInt(now - (8 * SECONDS_PER_WEEK) + FEATURE_BOUNDARY_LEAD_SECONDS);
+  if (timestamp > BigInt(finalizedTimestamp)) {
+    throw new Error("Feature Genesis cannot be later than finalized Devnet time");
+  }
   localStorage.setItem(FEATURE_GENESIS_STORAGE_KEY, timestamp.toString());
   return timestamp;
 }
 
-async function verifyProgramDeployment() {
-  const [programInfo, programDataInfo] = await connection.getMultipleAccountsInfo(
+async function verifyProgramDeployment(minContextSlot = 0) {
+  const deploymentResult = await connection.getMultipleAccountsInfoAndContext(
     [IAT_V2_PROGRAM_ID, IAT_V2_PROGRAM_DATA_ADDRESS],
-    "confirmed",
+    {
+      commitment: FINALIZED_COMMITMENT,
+      minContextSlot,
+    },
   );
+  const contextSlot = finalizedContextSlot(deploymentResult, "Program deployment", minContextSlot);
+  const [programInfo, programDataInfo] = deploymentResult.value;
   if (!programInfo || !programDataInfo) throw new Error("Deployed V2 program accounts are missing");
   if (!programInfo.executable) throw new Error("V2 program account is not executable");
   if (
@@ -238,17 +331,24 @@ async function verifyProgramDeployment() {
   const artifact = await inspectReviewedUpgradeableProgramArtifact({
     programBytes: parsed.programBytes,
     sha256Hex,
+    expectedArtifactBytes: ACTIVE_PROGRAM_ARTIFACT_BYTES,
+    expectedArtifactSha256: ACTIVE_PROGRAM_ARTIFACT_SHA256,
   });
   if (!artifact.matchesReviewedArtifact) {
-    throw new Error("On-chain program bytes do not match the reviewed verifiable artifact");
+    throw new Error(FEATURE_MODE
+      ? "On-chain program bytes do not match the exact migration artifact required by feature mode"
+      : "On-chain program bytes do not match the exact pre-upgrade artifact required by initialization mode");
   }
   return {
+    programId: IAT_V2_PROGRAM_ID,
+    programDataAddress: IAT_V2_PROGRAM_DATA_ADDRESS,
     artifactSha256: artifact.artifactSha256,
     slot: parsed.slot,
     upgradeAuthority: parsed.upgradeAuthority,
     programBytes: artifact.artifactBytes,
     loaderRegionBytes: artifact.loaderRegionBytes,
     loaderZeroPaddingBytes: artifact.loaderPaddingBytes,
+    contextSlot,
   };
 }
 
@@ -264,8 +364,7 @@ function assertAuthority(actual, expected, label) {
   throw new Error(`${label} does not match the reviewed ceremony state`);
 }
 
-async function readTokenAccount(address, mint, owner, required) {
-  const info = await connection.getAccountInfo(address, "confirmed");
+function readTokenAccount(info, address, mint, owner, required) {
   if (!info) {
     if (required) throw new Error(`Required token account ${address.toBase58()} is missing`);
     return null;
@@ -280,7 +379,7 @@ async function readTokenAccount(address, mint, owner, required) {
   return account;
 }
 
-async function loadChainSnapshot() {
+async function loadChainSnapshot(minContextSlot = 0) {
   const mint = await deriveDeterministicDevnetMint({ seed: ACTIVE_MINT_SEED });
   const plan = createIatV2DeploymentPlan({
     network: "devnet",
@@ -289,7 +388,7 @@ async function loadChainSnapshot() {
     randomnessProgramId: SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
     rehearsal: true,
   });
-  const deployment = await verifyProgramDeployment();
+  const deployment = await verifyProgramDeployment(minContextSlot);
   const trackedAddresses = [
     mint,
     deriveMetadataAddress(mint),
@@ -298,7 +397,16 @@ async function loadChainSnapshot() {
     plan.stakeTokenAccount,
     plan.coreReward,
   ];
-  const tracked = await connection.getMultipleAccountsInfo(trackedAddresses, "confirmed");
+  const trackedResult = await connection.getMultipleAccountsInfoAndContext(trackedAddresses, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: deployment.contextSlot,
+  });
+  const trackedSlot = finalizedContextSlot(
+    trackedResult,
+    "Initialization state",
+    deployment.contextSlot,
+  );
+  const tracked = trackedResult.value;
   const [
     mintInfo,
     metadataInfo,
@@ -314,11 +422,33 @@ async function loadChainSnapshot() {
     stakeToken,
     coreReward,
   ] = tracked;
-  const balanceLamports = await connection.getBalance(IAT_V2_PROGRAM_ADMIN, "confirmed");
+  const balanceResult = await connection.getBalanceAndContext(IAT_V2_PROGRAM_ADMIN, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: trackedSlot,
+  });
+  let finalObservationSlot = finalizedContextSlot(balanceResult, "Administrator balance", trackedSlot);
+  const balanceLamports = balanceResult.value;
+  const finalizedSnapshot = async (fields) => {
+    const freshDeployment = await verifyProgramDeployment(finalObservationSlot);
+    finalObservationSlot = freshDeployment.contextSlot;
+    const finalizedTimestamp = await finalizedBlockTimestamp(
+      finalObservationSlot,
+      "Final initialization observation",
+    );
+    if (fields.config?.genesisTimestamp > BigInt(finalizedTimestamp)) {
+      throw new Error("Config genesis timestamp is in the future at the finalized observation slot");
+    }
+    return {
+      ...fields,
+      deployment: freshDeployment,
+      finalizedContextSlot: finalObservationSlot,
+      finalizedTimestamp,
+    };
+  };
   const dependentAccounts = tracked.slice(1).filter(Boolean).length;
   if (!mintInfo) {
     if (dependentAccounts !== 0) throw new Error("Dependent V2 accounts exist before the deterministic mint");
-    return {
+    return finalizedSnapshot({
       mint,
       plan,
       deployment,
@@ -329,7 +459,7 @@ async function loadChainSnapshot() {
       active: false,
       config: null,
       balances: null,
-    };
+    });
   }
   if (!mintInfo.owner.equals(TOKEN_PROGRAM_ID)) throw new Error("Deterministic mint is owned by the wrong program");
   if (!metadataInfo) throw new Error("Atomic immutable metadata is missing for the deterministic mint");
@@ -385,9 +515,6 @@ async function loadChainSnapshot() {
     if (!config.rehearsalMode || config.expectedSupply !== IAT_V2_REHEARSAL_SUPPLY) {
       throw new Error("Config is not the exact fixed-supply devnet rehearsal policy");
     }
-    if (config.genesisTimestamp > BigInt(Math.floor(Date.now() / 1000))) {
-      throw new Error("Config genesis timestamp is in the future");
-    }
   }
 
   const vaultsComplete = initializedLaneCount === 4 && Boolean(stakeToken);
@@ -398,7 +525,7 @@ async function loadChainSnapshot() {
     if (mintState.supply !== 0n) throw new Error("Mint has supply before V2 config initialization");
     assertAuthority(mintState.mintAuthority, IAT_V2_PROGRAM_ADMIN, "Mint authority");
     assertAuthority(mintState.freezeAuthority, IAT_V2_PROGRAM_ADMIN, "Freeze authority");
-    return {
+    return finalizedSnapshot({
       mint,
       plan,
       deployment,
@@ -409,7 +536,7 @@ async function loadChainSnapshot() {
       active: false,
       config: null,
       balances: null,
-    };
+    });
   }
   if (!vaultsComplete) {
     if (initializedLaneCount !== 0 || stakeToken) throw new Error("V2 vault initialization is incomplete");
@@ -419,7 +546,7 @@ async function loadChainSnapshot() {
     if (mintState.supply !== 0n) throw new Error("Mint has supply before V2 vault initialization");
     assertAuthority(mintState.mintAuthority, IAT_V2_PROGRAM_ADMIN, "Mint authority");
     assertAuthority(mintState.freezeAuthority, IAT_V2_PROGRAM_ADMIN, "Freeze authority");
-    return {
+    return finalizedSnapshot({
       mint,
       plan,
       deployment,
@@ -430,23 +557,38 @@ async function loadChainSnapshot() {
       active: false,
       config,
       balances: null,
-    };
+    });
   }
   if (config.laneMask !== 0b1_1110 || !config.stakeVaultInitialized) {
     throw new Error("Config vault mask does not match the complete on-chain vault inventory");
   }
   assertKey(config.stakeTokenAccount, plan.stakeTokenAccount, "Config stake vault");
 
+  const allocationEntries = Object.entries(plan.allocationDestinations);
+  const tokenResult = await connection.getMultipleAccountsInfoAndContext([
+    ...allocationEntries.map(([, allocation]) => allocation.tokenAccount),
+    plan.stakeTokenAccount,
+  ], {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: finalObservationSlot,
+  });
+  finalObservationSlot = finalizedContextSlot(
+    tokenResult,
+    "Allocation token accounts",
+    finalObservationSlot,
+  );
   const laneAccounts = {};
-  for (const [name, allocation] of Object.entries(plan.allocationDestinations)) {
-    laneAccounts[name] = await readTokenAccount(
+  for (const [index, [name, allocation]] of allocationEntries.entries()) {
+    laneAccounts[name] = readTokenAccount(
+      tokenResult.value[index],
       allocation.tokenAccount,
       mint,
       allocation.owner,
       mintState.supply !== 0n || name !== "community",
     );
   }
-  const stake = await readTokenAccount(
+  const stake = readTokenAccount(
+    tokenResult.value[allocationEntries.length],
     plan.stakeTokenAccount,
     mint,
     plan.vaultAuthority,
@@ -465,7 +607,7 @@ async function loadChainSnapshot() {
     }
     assertAuthority(mintState.mintAuthority, IAT_V2_PROGRAM_ADMIN, "Mint authority");
     assertAuthority(mintState.freezeAuthority, IAT_V2_PROGRAM_ADMIN, "Freeze authority");
-    return {
+    return finalizedSnapshot({
       mint,
       plan,
       deployment,
@@ -476,7 +618,7 @@ async function loadChainSnapshot() {
       active: false,
       config,
       balances,
-    };
+    });
   }
   if (mintState.supply !== IAT_V2_REHEARSAL_SUPPLY) {
     throw new Error(`Mint supply is ${mintState.supply}, not ${IAT_V2_REHEARSAL_SUPPLY}`);
@@ -490,7 +632,7 @@ async function loadChainSnapshot() {
     assertAuthority(mintState.mintAuthority, IAT_V2_PROGRAM_ADMIN, "Mint authority");
     assertAuthority(mintState.freezeAuthority, IAT_V2_PROGRAM_ADMIN, "Freeze authority");
     if (config.active || coreReward) throw new Error("V2 activated before authority revocation");
-    return {
+    return finalizedSnapshot({
       mint,
       plan,
       deployment,
@@ -501,12 +643,12 @@ async function loadChainSnapshot() {
       active: false,
       config,
       balances,
-    };
+    });
   }
   if (mintState.freezeAuthority) {
     assertAuthority(mintState.freezeAuthority, IAT_V2_PROGRAM_ADMIN, "Freeze authority");
     if (config.active || coreReward) throw new Error("V2 activated before freeze-authority revocation");
-    return {
+    return finalizedSnapshot({
       mint,
       plan,
       deployment,
@@ -517,11 +659,11 @@ async function loadChainSnapshot() {
       active: false,
       config,
       balances,
-    };
+    });
   }
   if (!config.active) {
     if (coreReward) throw new Error("Core reward exists before activation");
-    return {
+    return finalizedSnapshot({
       mint,
       plan,
       deployment,
@@ -532,12 +674,12 @@ async function loadChainSnapshot() {
       active: false,
       config,
       balances,
-    };
+    });
   }
   if (!coreReward || !coreReward.owner.equals(IAT_V2_PROGRAM_ID)) {
     throw new Error("Active config is missing the program-owned core reward record");
   }
-  return {
+  return finalizedSnapshot({
     mint,
     plan,
     deployment,
@@ -548,13 +690,24 @@ async function loadChainSnapshot() {
     active: true,
     config,
     balances,
-  };
+  });
 }
 
 async function buildStageTransaction(stage, snapshot) {
+  if (
+    !Number.isSafeInteger(snapshot.finalizedContextSlot)
+    || !Number.isSafeInteger(snapshot.finalizedTimestamp)
+    || snapshot.finalizedContextSlot <= 0
+    || snapshot.finalizedTimestamp <= 0
+  ) {
+    throw new Error("Stage construction requires a finalized context slot and block time");
+  }
   switch (stage) {
     case 0: {
-      const rentLamports = await connection.getMinimumBalanceForRentExemption(MINT_SIZE, "confirmed");
+      const rentLamports = await connection.getMinimumBalanceForRentExemption(
+        MINT_SIZE,
+        FINALIZED_COMMITMENT,
+      );
       return (await buildCreateMintAndMetadataTransaction({
         rentLamports,
         seed: ACTIVE_MINT_SEED,
@@ -564,8 +717,8 @@ async function buildStageTransaction(stage, snapshot) {
       return buildInitializeConfigTransaction({
         mint: snapshot.mint,
         rehearsalGenesisTimestamp: FEATURE_MODE
-          ? getFeatureGenesisTimestamp()
-          : BigInt(Math.floor(Date.now() / 1000) - 2),
+          ? getFeatureGenesisTimestamp(snapshot.finalizedTimestamp)
+          : BigInt(snapshot.finalizedTimestamp - 2),
       });
     case 2:
       return buildInitializeVaultsTransaction({ mint: snapshot.mint });
@@ -603,7 +756,7 @@ function loadEvidence() {
   }
 }
 
-function App() {
+function App({ getHardwareProvider }) {
   const local = isLocalOperatorHost(window.location.hostname);
   const [snapshot, setSnapshot] = useState(null);
   const [connected, setConnected] = useState("");
@@ -611,6 +764,7 @@ function App() {
   const [evidence, setEvidence] = useState(loadEvidence);
   const [logs, setLogs] = useState([]);
   const [busy, setBusy] = useState(false);
+  const signingInFlight = useRef(false);
   const [status, setStatus] = useState(
     INSPECTION_MODE
       ? "INSPECTION ONLY // NETWORK, HARDWARE, SIGNING, BROADCAST DISABLED"
@@ -627,7 +781,7 @@ function App() {
       const next = await loadChainSnapshot();
       setSnapshot(next);
       setStatus(next.complete
-        ? "DEVNET V2 ACTIVE // EXPORT EVIDENCE FOR INDEPENDENT REVIEW"
+        ? "DEVNET V2 ACTIVE // EXPORT ATTENDED RECEIPTS; AUTOMATED EVIDENCE STILL REQUIRED"
         : `READY // STAGE ${next.nextStage + 1} OF 7`);
       return next;
     } catch (caught) {
@@ -650,16 +804,16 @@ function App() {
   }, [evidence]);
 
   async function connect() {
-    if (INSPECTION_MODE) return;
+    if (INSPECTION_MODE || LEGACY_INITIALIZATION_SIGNING_DISABLED) return;
     setBusy(true);
     setError("");
-    setStatus("CONNECTING // CONFIRM THE MODEL T ADDRESS");
+    setStatus("OPENING VERIFIED MODEL T SESSION");
     try {
       const { publicKey } = await getHardwareProvider();
       setConnected(publicKey.toBase58());
       const next = await loadChainSnapshot();
       setSnapshot(next);
-      setStatus("HARDWARE MATCH // REVIEW THE NEXT STAGE");
+      setStatus("VERIFIED HARDWARE SESSION // REVIEW THE NEXT STAGE");
     } catch (caught) {
       setStatus("HOLD // WALLET CHECK FAILED");
       setError(errorText(caught));
@@ -669,7 +823,16 @@ function App() {
   }
 
   async function simulateAndSign() {
-    if (INSPECTION_MODE || !local || !connected || pending) return;
+    if (
+      INSPECTION_MODE
+      || LEGACY_INITIALIZATION_SIGNING_DISABLED
+      || !local
+      || !connected
+      || pending
+      || busy
+      || signingInFlight.current
+    ) return;
+    signingInFlight.current = true;
     setBusy(true);
     setError("");
     setLogs([]);
@@ -678,9 +841,20 @@ function App() {
       const current = await loadChainSnapshot();
       setSnapshot(current);
       if (current.complete) throw new Error("Devnet V2 is already active");
+      const stageIndex = current.nextStage;
+      const snapshotBinding = initializationSnapshotBinding(current);
       const { provider, publicKey } = await getHardwareProvider();
-      const transaction = await buildStageTransaction(current.nextStage, current);
-      const latest = await connection.getLatestBlockhash("confirmed");
+      const transaction = await buildStageTransaction(stageIndex, current);
+      const latestResult = await connection.getLatestBlockhashAndContext({
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: current.finalizedContextSlot,
+      });
+      const latestContextSlot = finalizedAttendedContextSlot(
+        latestResult,
+        "Initialization transaction blockhash",
+        current.finalizedContextSlot,
+      );
+      const latest = latestResult.value;
       transaction.feePayer = publicKey;
       transaction.recentBlockhash = latest.blockhash;
       const wireSize = transaction.serialize({
@@ -688,34 +862,58 @@ function App() {
         verifySignatures: false,
       }).length;
       if (wireSize > 1232) throw new Error(`Transaction is ${wireSize} bytes, above Solana's limit`);
-      const messageSha256 = await sha256Hex(transaction.serializeMessage());
-      const simulation = await connection.simulateTransaction(transaction);
+      const {
+        messageBytes,
+        messageSha256,
+        simulation,
+        simulationSlot,
+      } = await simulateExactLegacyTransaction({
+        commitment: FINALIZED_COMMITMENT,
+        connection,
+        minContextSlot: latestContextSlot,
+        sha256Hex,
+        transaction,
+      });
       setLogs(simulation.value.logs ?? []);
       if (simulation.value.err) {
         throw new Error(`Simulation failed: ${json(simulation.value.err)}`);
       }
+      const promptSnapshot = await loadChainSnapshot(simulationSlot);
+      if (
+        promptSnapshot.nextStage !== stageIndex
+        || initializationSnapshotBinding(promptSnapshot) !== snapshotBinding
+      ) {
+        setSnapshot(promptSnapshot);
+        throw new Error("Finalized initialization deployment or stage changed before the hardware prompt");
+      }
+      setSnapshot(promptSnapshot);
       setStatus("MODEL T // REVIEW AND SIGN; STILL NOT BROADCAST");
       const signed = await provider.signTransaction(transaction);
-      const signedMessageSha256 = await sha256Hex(signed.serializeMessage());
-      if (signedMessageSha256 !== messageSha256) {
-        throw new Error("Wallet changed the reviewed transaction message");
-      }
-      const walletSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
-      if (!walletSignature?.signature) throw new Error("Reviewed Model T signature is missing");
-      if (!signed.verifySignatures()) throw new Error("Hardware-signed transaction failed local verification");
-      setPending({
-        stageIndex: current.nextStage,
-        stage: IAT_V2_ADMIN_STAGE_ORDER[current.nextStage],
+      await assertSignedLegacyTransaction({
+        expectedBlockhash: latest.blockhash,
+        expectedMessageBytes: messageBytes,
+        expectedMessageSha256: messageSha256,
+        expectedSigner: publicKey,
+        sha256Hex,
         signed,
+      });
+      setPending({
+        stageIndex,
+        stage: IAT_V2_ADMIN_STAGE_ORDER[stageIndex],
+        signed,
+        messageBytes,
         messageSha256,
         latest,
         wireSize,
+        snapshotBinding,
+        finalObservationSlot: promptSnapshot.finalizedContextSlot,
       });
       setStatus("SIGNED // NOT BROADCAST — REVIEW THEN PRESS BROADCAST");
     } catch (caught) {
       setStatus("HOLD // SIGNING PREPARATION STOPPED");
       setError(errorText(caught));
     } finally {
+      signingInFlight.current = false;
       setBusy(false);
     }
   }
@@ -724,11 +922,36 @@ function App() {
     if (INSPECTION_MODE || !pending || busy) return;
     setBusy(true);
     setError("");
-    setStatus("BROADCASTING USER-APPROVED SIGNED TRANSACTION");
+    setStatus("REVERIFYING FINALIZED INITIALIZATION STATE // NOTHING BROADCAST");
+    let broadcastBoundaryValidated = false;
     try {
+      const current = await loadChainSnapshot(pending.finalObservationSlot);
+      if (
+        current.nextStage !== pending.stageIndex
+        || initializationSnapshotBinding(current) !== pending.snapshotBinding
+      ) {
+        throw new Error("Finalized initialization deployment or stage changed after hardware review");
+      }
+      await assertSignedLegacyTransaction({
+        expectedBlockhash: pending.latest.blockhash,
+        expectedMessageBytes: pending.messageBytes,
+        expectedMessageSha256: pending.messageSha256,
+        expectedSigner: IAT_V2_PROGRAM_ADMIN,
+        sha256Hex,
+        signed: pending.signed,
+      });
+      await assertFreshFinalizedBlockhash({
+        blockhash: pending.latest.blockhash,
+        commitment: FINALIZED_COMMITMENT,
+        connection,
+        minContextSlot: current.finalizedContextSlot,
+      });
+      setSnapshot(current);
+      broadcastBoundaryValidated = true;
+      setStatus("BROADCASTING USER-APPROVED SIGNED TRANSACTION");
       const signature = await connection.sendRawTransaction(pending.signed.serialize(), {
         skipPreflight: false,
-        preflightCommitment: "confirmed",
+        preflightCommitment: FINALIZED_COMMITMENT,
         maxRetries: 3,
       });
       const confirmation = await connection.confirmTransaction(
@@ -737,11 +960,16 @@ function App() {
           blockhash: pending.latest.blockhash,
           lastValidBlockHeight: pending.latest.lastValidBlockHeight,
         },
-        "confirmed",
+        FINALIZED_COMMITMENT,
       );
       if (confirmation.value.err) {
         throw new Error(`Confirmation failed: ${json(confirmation.value.err)}`);
       }
+      const confirmationSlot = finalizedAttendedContextSlot(
+        confirmation,
+        "Finalized initialization confirmation",
+        current.finalizedContextSlot,
+      );
       const record = {
         stage: pending.stage,
         stageIndex: pending.stageIndex,
@@ -755,13 +983,18 @@ function App() {
         record,
       ].sort((a, b) => a.stageIndex - b.stageIndex));
       setPending(null);
-      const next = await loadChainSnapshot();
+      const next = await loadChainSnapshot(confirmationSlot);
       setSnapshot(next);
       setStatus(next.complete
-        ? "DEVNET V2 ACTIVE // EXPORT AND INDEPENDENTLY VERIFY"
+        ? "DEVNET V2 ACTIVE // EXPORT ATTENDED RECEIPTS; AUTOMATED EVIDENCE STILL REQUIRED"
         : `CONFIRMED // NEXT IS STAGE ${next.nextStage + 1} OF 7`);
     } catch (caught) {
-      setStatus("HOLD // BROADCAST OR CONFIRMATION FAILED");
+      if (!broadcastBoundaryValidated) {
+        setPending(null);
+        setStatus("HOLD // SIGNED TRANSACTION DISCARDED BEFORE BROADCAST");
+      } else {
+        setStatus("HOLD // BROADCAST OR CONFIRMATION FAILED");
+      }
       setError(errorText(caught));
     } finally {
       setBusy(false);
@@ -774,10 +1007,15 @@ function App() {
   }
 
   function downloadEvidence() {
+    if (FEATURE_MODE) {
+      setStatus("HOLD // LEGACY SEVEN-STAGE EXPORT DISABLED IN POST-UPGRADE MODE");
+      setError("Use EXPORT COMPLETE ATTENDED BUNDLE in the feature rehearsal. Historical initialization receipts cannot be rebound to the migration artifact.");
+      return;
+    }
     if (!snapshot) return;
     const payload = {
       schema: "iat-v2-devnet-rehearsal-evidence/v1",
-      status: snapshot.complete ? "DEVNET_ACTIVE_PENDING_INDEPENDENT_REVIEW" : "INCOMPLETE",
+      status: snapshot.complete ? "DEVNET_ACTIVE_PENDING_AUTOMATED_DIRECT_EVIDENCE" : "INCOMPLETE",
       network: "devnet",
       rpc: DEVNET_RPC,
       sourceCommit: SOURCE_COMMIT,
@@ -790,7 +1028,7 @@ function App() {
       deploymentSlot: snapshot.deployment.slot,
       upgradeAuthority: snapshot.deployment.upgradeAuthority,
       expectedHardwareSigner: IAT_V2_PROGRAM_ADMIN,
-      rehearsalScope: FEATURE_MODE ? "BACKDATED_FEATURE_INSTANCE_INITIALIZATION" : "PRIMARY_INITIALIZATION",
+      rehearsalScope: "PRIMARY_INITIALIZATION",
       deterministicMintSeed: ACTIVE_MINT_SEED,
       mint: snapshot.mint,
       metadata: deriveMetadataAddress(snapshot.mint),
@@ -804,16 +1042,16 @@ function App() {
       transactions: evidence,
       exportedAtUtc: new Date().toISOString(),
       mainnetStatus: "HOLD",
-      independentReviewRequired: true,
+      automatedDirectEvidenceRequired: true,
+      humanReviewerRequired: false,
+      noSelfAttestation: true,
       secretMaterialIncluded: false,
     };
     const blob = new Blob([`${json(payload)}\n`], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = FEATURE_MODE
-      ? "iat-v2-devnet-feature-initialization-evidence.json"
-      : "iat-v2-devnet-rehearsal-evidence.json";
+    anchor.download = "iat-v2-devnet-rehearsal-evidence.json";
     anchor.click();
     URL.revokeObjectURL(url);
   }
@@ -882,7 +1120,7 @@ function App() {
           </div>
           <dl>
             <div><dt>PROGRAM</dt><dd>{short(IAT_V2_PROGRAM_ID.toBase58(), 8)}</dd></div>
-            <div><dt>ARTIFACT</dt><dd>{short(snapshot?.deployment.artifactSha256 ?? IAT_V2_PROGRAM_ARTIFACT_SHA256, 8)}</dd></div>
+            <div><dt>ARTIFACT</dt><dd>{short(snapshot?.deployment.artifactSha256 ?? ACTIVE_PROGRAM_ARTIFACT_SHA256, 8)}</dd></div>
             <div><dt>UPGRADE AUTHORITY</dt><dd>{short(snapshot?.deployment.upgradeAuthority?.toBase58() ?? IAT_V2_PROGRAM_ADMIN.toBase58(), 8)}</dd></div>
             <div><dt>MODEL T BALANCE</dt><dd>{snapshot ? `${(snapshot.balanceLamports / 1e9).toFixed(4)} SOL` : "—"}</dd></div>
           </dl>
@@ -905,8 +1143,12 @@ function App() {
                 <button className="quiet" onClick={() => refresh().catch(() => {})} disabled={busy || !local || INSPECTION_MODE}>
                   REFRESH CHAIN
                 </button>
-                <button className="connect" onClick={connect} disabled={busy || !local || INSPECTION_MODE}>
-                  {connected ? `MODEL T ${short(connected)}` : "CONNECT MODEL T DIRECTLY"}
+                <button
+                  className="connect"
+                  onClick={connect}
+                  disabled={busy || !local || INSPECTION_MODE || LEGACY_INITIALIZATION_SIGNING_DISABLED}
+                >
+                  {connected ? `MODEL T ${short(connected)}` : "USE VERIFIED MODEL T SESSION"}
                 </button>
               </>
             )}
@@ -955,9 +1197,20 @@ function App() {
               {!pending ? (
                 <button
                   onClick={simulateAndSign}
-                  disabled={busy || !local || !connected || !snapshot || INSPECTION_MODE}
+                  disabled={
+                    busy
+                    || !local
+                    || !connected
+                    || !snapshot
+                    || INSPECTION_MODE
+                    || LEGACY_INITIALIZATION_SIGNING_DISABLED
+                  }
                 >
-                  {busy ? "VERIFYING…" : "SIMULATE + REQUEST MODEL T SIGNATURE"}
+                  {LEGACY_INITIALIZATION_SIGNING_DISABLED
+                    ? "ARCHIVED INITIALIZATION SIGNING DISABLED"
+                    : busy
+                      ? "VERIFYING…"
+                      : "SIMULATE + REQUEST MODEL T SIGNATURE"}
                 </button>
               ) : (
                 <div className="broadcast-panel">
@@ -977,8 +1230,10 @@ function App() {
             explorer={explorer}
             getHardwareProvider={getHardwareProvider}
             json={json}
+            loadFeatureParentSnapshot={loadChainSnapshot}
             sha256Hex={sha256Hex}
             short={short}
+            verifyMigrationDeployment={verifyProgramDeployment}
           />
         )}
 
@@ -1013,43 +1268,78 @@ function App() {
           <div>
             <small>PUBLIC PROOF</small>
             <strong>{evidence.length} / 7 TRANSACTIONS RECORDED</strong>
-            <p>Export contains addresses, hashes, state, and Explorer links—never wallet secrets.</p>
+            <p>{FEATURE_MODE
+              ? "Legacy initialization receipts stay local. Export only the complete attended feature bundle above."
+              : "Export contains addresses, hashes, state, and Explorer links—never wallet secrets."}</p>
           </div>
-          <button onClick={downloadEvidence} disabled={!snapshot || evidence.length === 0}>
-            DOWNLOAD EVIDENCE JSON
-          </button>
+          {FEATURE_MODE ? (
+            <strong>LEGACY SEVEN-STAGE EXPORT DISABLED</strong>
+          ) : (
+            <button onClick={downloadEvidence} disabled={!snapshot || evidence.length === 0}>
+              DOWNLOAD EVIDENCE JSON
+            </button>
+          )}
         </section>
 
         <footer>
-          <span>SOURCE {SOURCE_COMMIT.slice(0, 12)}</span>
+          <span>{FOOTER_SOURCE_LABEL}</span>
           <span>{INSPECTION_MODE ? "RPC // DISABLED" : "RPC // DEVNET ONLY"}</span>
-          <span>INDEPENDENT REVIEW REQUIRED</span>
+          <span>AUTOMATED RECEIPT VERIFICATION REQUIRED</span>
         </footer>
       </section>
     </main>
   );
 }
 
-createRoot(document.getElementById("root")).render(
-  <Suspense fallback={<main className="console-shell"><strong>LOADING LOCAL CONSOLE...</strong></main>}>
-    {UPGRADE_MODE
+function renderActionConsole(session) {
+  const getHardwareProvider = (expectedAddress = IAT_V2_PROGRAM_ADMIN) => (
+    getSessionHardwareProvider(session, expectedAddress)
+  );
+  return UPGRADE_MODE
+    ? (
+        <ProgramUpgrade
+          getHardwareProvider={getHardwareProvider}
+          isLocalOperatorHost={isLocalOperatorHost}
+          sha256Hex={sha256Hex}
+          short={short}
+        />
+      )
+    : MIGRATE_ROUNDS_MODE
       ? (
-          <ProgramUpgrade
+          <LegacyRoundMigration
             getHardwareProvider={getHardwareProvider}
             isLocalOperatorHost={isLocalOperatorHost}
             sha256Hex={sha256Hex}
             short={short}
           />
         )
-      : ATTENDED_WEEK9_MODE
-        ? (
-            <AttendedWeek9Settlement
-              explorer={explorer}
-              getHardwareProvider={getHardwareProvider}
-              localOperator={isLocalOperatorHost(window.location.hostname)}
-              sha256Hex={sha256Hex}
-            />
-          )
-      : <App />}
+    : ATTENDED_WEEK9_MODE
+      ? (
+          <AttendedWeek9Settlement
+            explorer={explorer}
+            getHardwareProvider={getHardwareProvider}
+            localOperator={isLocalOperatorHost(window.location.hostname)}
+            sha256Hex={sha256Hex}
+          />
+        )
+    : <App getHardwareProvider={getHardwareProvider} />;
+}
+
+async function rejectInspectionHardwareProvider() {
+  throw new Error("Hardware loading is disabled in non-signing inspection mode");
+}
+
+createRoot(document.getElementById("root")).render(
+  <Suspense fallback={<main className="console-shell"><strong>LOADING LOCAL CONSOLE...</strong></main>}>
+    {INSPECTION_MODE || !CANONICAL_ACTION_MODE
+      ? <App getHardwareProvider={rejectInspectionHardwareProvider} />
+      : (
+          <TrezorPathSessionGate
+            expectedAddress={IAT_V2_PROGRAM_ADMIN.toBase58()}
+            localOperator={isLocalOperatorHost(window.location.hostname)}
+            openSession={() => openVerifiedTrezorPathSession(IAT_V2_PROGRAM_ADMIN)}
+            renderActionUi={renderActionConsole}
+          />
+        )}
   </Suspense>,
 );

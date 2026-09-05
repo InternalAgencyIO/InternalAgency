@@ -1,0 +1,77 @@
+{
+  "schema": "iat-b3-devnet-physical-rehearsal-proof/v1",
+  "attemptId": "iat-b3-devnet-hw-20260825-01",
+  "createdAtUtc": "2026-08-25T05:06:44.5053216Z",
+  "status": "PHYSICAL_TREZOR_SIGNATURE_VERIFIED",
+  "releaseStatus": "LOCAL_ONLY_NOT_PUBLISHED",
+  "scope": {
+    "network": "solana-devnet",
+    "action": "HOLD_NO_TRANSACTION_NO_BROADCAST",
+    "transactionCreated": false,
+    "transactionSigned": false,
+    "broadcast": false,
+    "mainnetAction": false
+  },
+  "requestArtifact": {
+    "path": "IAT-B3-DEVNET-HW-UNSIGNED-20260825.json",
+    "sha256": "62e31b746e57ce9e29ec4fb44bbff6ce94821412f069707772b119b226fdb096",
+    "byteLength": 4894
+  },
+  "subject": {
+    "schema": "iat-b3-devnet-physical-rehearsal/v1",
+    "subjectDomainAsciiWithNul": "IAT_B3_DEVNET_PHYSICAL_REHEARSAL_SUBJECT_V1\\u0000",
+    "subjectSha256": "233590e3ec27b937853903ecec08544e84a84821a84695d39010bf0705b0ca04",
+    "sourceSetSha256": "d7f5ee8aeb7c61358a76f47109e62b1275888e60f8b03ff19d1cf23501b17a5f",
+    "bpkCommit": "512b347ebf4de80bf5a50e0d8491f14eeef0f9f0",
+    "controllerSha256": "2a1b717b5938dd841e0ddce8bb383844b097adcc856396f4d1c1a22353a7a45b",
+    "providerNativeSha256": "353cac3f5a329b8edbbe0027a5f90aacc7f879e037d390988748202b2c5e3c80",
+    "providerCompileSha256": "bd1190f63ccdc9159ca5eccab645d32a2a141151672a5e55014718cdc42ba449",
+    "decision": "HOLD",
+    "authority": "NONE"
+  },
+  "deviceObservation": {
+    "vendor": "SatoshiLabs",
+    "model": "T2T1",
+    "firmwareVersion": "2.12.4",
+    "firmwareRevision": "30be4e8c9488eeab68f994af23b3d9c9b7334266",
+    "firmwarePackageSha256": "b89cb81cff6b20563671f6f3ed402d0add85b06ee251f0e7b4502decc083f845",
+    "safetyChecks": "Strict",
+    "solanaCapabilityObserved": true,
+    "derivationPath": "m/44h/501h/0h/0h",
+    "publicKeyHex": "60fa8f2c48a8bc6d2ad476b094bb2f569f020211bf834deb144d2e2958ac4230",
+    "address": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH",
+    "deviceIdentifierIncluded": false
+  },
+  "hostClientObservation": {
+    "sourceRepository": "https://github.com/trezor/trezor-firmware",
+    "sourceTag": "core/v2.12.4",
+    "sourceCommit": "30be4e8c9488eeab68f994af23b3d9c9b7334266",
+    "trezorlibVersion": "0.20.2",
+    "trezorctlExecutableSha256": "a554b979828a6d6ff518e96d17b1eae23cbfa9f3a70a1e0a71a21ef9ea6dae6d"
+  },
+  "hardwareMessage": {
+    "ascii": "IAT_B3_BPS08_COMPILE_PEER_ANCHOR_V1:233590e3ec27b937853903ecec08544e84a84821a84695d39010bf0705b0ca04",
+    "byteLength": 100,
+    "sha256": "dbeb98ae6e0b7332d490afa9c8088b3f99aa0b07052033921c0514d9410e3459"
+  },
+  "ocmsV1": {
+    "serializedHex": "ff736f6c616e61206f6666636861696e010160fa8f2c48a8bc6d2ad476b094bb2f569f020211bf834deb144d2e2958ac42304941545f42335f42505330385f434f4d50494c455f504545525f414e43484f525f56313a32333335393065336563323762393337383533393033656365633038353434653834613834383231613834363935643339303130626630373035623063613034",
+    "byteLength": 150,
+    "sha256": "bba9964be8503e6674cc88d9e5739f352fc52d38ea1c7e844d68197124a5eb98",
+    "deviceReturnedSignedDataByteEqual": true
+  },
+  "signature": {
+    "scheme": "Ed25519",
+    "hex": "cc31394e56f94c5b5c8d362b47db6a4c47f16748a75c671627e5d75acee6eab32fc9c3539287ad2309330587b516580ed21c7443b4f9318513c9eb39e1f56905",
+    "byteLength": 64,
+    "sha256": "8d8f68f9fbbe2dc41422a72c889bba4e6f41d308d6800e7e5d3d615a1d088736"
+  },
+  "verification": {
+    "physicalDevicePromptConfirmed": true,
+    "addressMatchesPinnedRoot": true,
+    "signedDataMatchesFrozenRequest": true,
+    "offlineEd25519Verified": true,
+    "singleByteTamperRejected": true,
+    "result": "PASS"
+  }
+}

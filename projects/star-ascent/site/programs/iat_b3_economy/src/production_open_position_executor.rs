@@ -4,13 +4,14 @@
 //! the supplemental stake-ingress, confidential-mint, hook, and Daily-Law
 //! accounts. Execution is delegated to the existing same-instruction runtime
 //! that performs approval, ingress transfer, delegate restoration, token
-//! reloads, Position lifecycle, and Config/lane CAS. No dispatcher or program
-//! entrypoint is exposed here. Final-binary transaction rollback still needs
-//! adversarial Devnet evidence.
+//! reloads, Position lifecycle, and Config/lane CAS. The feature-gated
+//! dispatcher/entrypoint routes this source-complete handler with one
+//! nonduplicated Daily-Law prefix. Final-binary transaction rollback still
+//! needs adversarial Devnet evidence, so Mainnet remains held.
 
 extern crate alloc;
 
-use alloc::{boxed::Box, vec};
+use alloc::{boxed::Box, vec, vec::Vec};
 
 use crate::native_adapter::NativeEconomyBinding;
 use crate::production_open_position::{
@@ -63,8 +64,12 @@ const PRIOR_DELEGATE_INDEX: usize = 17;
 
 pub const PRODUCTION_OPEN_POSITION_EXECUTOR_BASE_ACCOUNT_COUNT: usize = 17;
 pub const PRODUCTION_OPEN_POSITION_EXECUTOR_DELEGATE_ACCOUNT_COUNT: usize = 18;
+pub const PRODUCTION_OPEN_POSITION_DISPATCH_BASE_ACCOUNT_COUNT: usize =
+    PRODUCTION_OPEN_POSITION_EXECUTOR_BASE_ACCOUNT_COUNT - 1;
+pub const PRODUCTION_OPEN_POSITION_DISPATCH_DELEGATE_ACCOUNT_COUNT: usize =
+    PRODUCTION_OPEN_POSITION_EXECUTOR_DELEGATE_ACCOUNT_COUNT - 1;
 pub const PRODUCTION_OPEN_POSITION_EXECUTOR_STATUS: &str =
-    "EXACT_V2_PLUS_INGRESS_GRAPH_COMBINED_LAW_TOKEN_CPI_LIFECYCLE_LEDGER_CAS_NO_DISPATCH_MAINNET_HOLD";
+    "EXACT_V2_PLUS_INGRESS_HANDLER_COMPLETE_ROUTED_ONE_LAW_PREFIX_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionOpenPositionExecutorTruth {
@@ -74,11 +79,14 @@ pub struct ProductionOpenPositionExecutorTruth {
     pub preflight_and_runtime_plan_equivalence_required: bool,
     pub runtime_daily_law_capability_rebound: bool,
     pub production_active_writable_config_required: bool,
+    pub program_identity_rejected_before_instruction_or_account_access: bool,
     pub canonical_confidential_hooked_mint_required: bool,
     pub canonical_ingress_authority_required: bool,
     pub optional_prior_delegate_shape_exact: bool,
     pub exact_resolved_hook_cpi_graph_required: bool,
     pub combined_ingress_lifecycle_and_ledger_engine_called: bool,
+    pub one_daily_law_transaction_prefix_reused: bool,
+    pub same_instruction_transaction_rollback_required_after_cpi: bool,
     pub dispatcher_exposed: bool,
     pub entrypoint_exposed: bool,
     pub handler_complete: bool,
@@ -94,14 +102,17 @@ pub const PRODUCTION_OPEN_POSITION_EXECUTOR_TRUTH: ProductionOpenPositionExecuto
         preflight_and_runtime_plan_equivalence_required: true,
         runtime_daily_law_capability_rebound: true,
         production_active_writable_config_required: true,
+        program_identity_rejected_before_instruction_or_account_access: true,
         canonical_confidential_hooked_mint_required: true,
         canonical_ingress_authority_required: true,
         optional_prior_delegate_shape_exact: true,
         exact_resolved_hook_cpi_graph_required: true,
         combined_ingress_lifecycle_and_ledger_engine_called: true,
-        dispatcher_exposed: false,
-        entrypoint_exposed: false,
-        handler_complete: false,
+        one_daily_law_transaction_prefix_reused: true,
+        same_instruction_transaction_rollback_required_after_cpi: true,
+        dispatcher_exposed: true,
+        entrypoint_exposed: true,
+        handler_complete: true,
         devnet_transaction_rollback_proven: false,
         mainnet_hold: true,
     };
@@ -109,6 +120,7 @@ pub const PRODUCTION_OPEN_POSITION_EXECUTOR_TRUTH: ProductionOpenPositionExecuto
 #[derive(Debug)]
 pub enum ProductionOpenPositionExecutorError {
     AccountCountMismatch,
+    DuplicateDailyLawAccount,
     ProgramIdentityMismatch,
     SupplementalAccountBindingMismatch,
     SupplementalAccountMetaMismatch,
@@ -242,6 +254,9 @@ pub fn execute_runtime_production_open_position_account_infos(
     instruction_data: &[u8],
     accounts: &[AccountInfo<'_>],
 ) -> Result<ProductionOpenPositionExecutionReceipt, ProductionOpenPositionExecutorError> {
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionOpenPositionExecutorError::ProgramIdentityMismatch);
+    }
     let mut prepared = PreparedOpenPositionExecution::empty();
     prepare_execution_into(
         program_id,
@@ -261,6 +276,47 @@ pub fn execute_runtime_production_open_position_account_infos(
         &mut receipt,
     )?;
     receipt.ok_or(ProductionOpenPositionExecutorError::PlanMismatch)
+}
+
+/// Reuse the production entrypoint's single Daily-Law prefix account at the
+/// executor's frozen hook slot. Operation accounts contain indices 0..15 and,
+/// when present, the prior delegate as final dispatch index 16. A second Law
+/// key in the operation slice is rejected before decoding or account parsing.
+#[inline(never)]
+pub(crate) fn execute_runtime_production_open_position_with_daily_law_prefix_account_infos<
+    'info,
+>(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    instruction_data: &[u8],
+    daily_law_account: &AccountInfo<'info>,
+    operation_accounts: &[AccountInfo<'info>],
+) -> Result<ProductionOpenPositionExecutionReceipt, ProductionOpenPositionExecutorError> {
+    if operation_accounts.len() != PRODUCTION_OPEN_POSITION_DISPATCH_BASE_ACCOUNT_COUNT
+        && operation_accounts.len() != PRODUCTION_OPEN_POSITION_DISPATCH_DELEGATE_ACCOUNT_COUNT
+    {
+        return Err(ProductionOpenPositionExecutorError::AccountCountMismatch);
+    }
+    if operation_accounts
+        .iter()
+        .any(|account| account.key == daily_law_account.key)
+    {
+        return Err(ProductionOpenPositionExecutorError::DuplicateDailyLawAccount);
+    }
+    let mut executor_accounts = Vec::with_capacity(operation_accounts.len().saturating_add(1));
+    executor_accounts.extend(operation_accounts[..LAW_STATE_INDEX].iter().cloned());
+    executor_accounts.push(daily_law_account.clone());
+    if let Some(prior_delegate) = operation_accounts.get(LAW_STATE_INDEX) {
+        executor_accounts.push(prior_delegate.clone());
+    }
+    execute_runtime_production_open_position_account_infos(
+        program_id,
+        runtime_law,
+        binding,
+        instruction_data,
+        &executor_accounts,
+    )
 }
 
 #[inline(never)]
@@ -1282,7 +1338,7 @@ mod tests {
     }
 
     #[test]
-    fn truth_is_exact_undispatched_and_mainnet_held() {
+    fn truth_is_source_complete_routed_and_mainnet_held() {
         let truth = core::hint::black_box(PRODUCTION_OPEN_POSITION_EXECUTOR_TRUTH);
         assert!(truth.feature_gated);
         assert!(truth.exact_seventeen_or_eighteen_account_graph_required);
@@ -1290,14 +1346,17 @@ mod tests {
         assert!(truth.preflight_and_runtime_plan_equivalence_required);
         assert!(truth.runtime_daily_law_capability_rebound);
         assert!(truth.production_active_writable_config_required);
+        assert!(truth.program_identity_rejected_before_instruction_or_account_access);
         assert!(truth.canonical_confidential_hooked_mint_required);
         assert!(truth.canonical_ingress_authority_required);
         assert!(truth.optional_prior_delegate_shape_exact);
         assert!(truth.exact_resolved_hook_cpi_graph_required);
         assert!(truth.combined_ingress_lifecycle_and_ledger_engine_called);
-        assert!(!truth.dispatcher_exposed);
-        assert!(!truth.entrypoint_exposed);
-        assert!(!truth.handler_complete);
+        assert!(truth.one_daily_law_transaction_prefix_reused);
+        assert!(truth.same_instruction_transaction_rollback_required_after_cpi);
+        assert!(truth.dispatcher_exposed);
+        assert!(truth.entrypoint_exposed);
+        assert!(truth.handler_complete);
         assert!(!truth.devnet_transaction_rollback_proven);
         assert!(truth.mainnet_hold);
         assert!(PRODUCTION_OPEN_POSITION_EXECUTOR_STATUS.contains("MAINNET_HOLD"));
@@ -1376,6 +1435,70 @@ mod tests {
             ))
         ));
         assert_eq!(fixture.snapshot(), before);
+    }
+
+    #[test]
+    fn dispatch_mapping_reuses_one_law_prefix_for_both_delegate_shapes() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let program_id = Pubkey::new_from_array(ECONOMY_PROGRAM);
+
+        for prior_delegate in [false, true] {
+            let mut fixture = Fixture::new(&binding, prior_delegate);
+            let before = fixture.snapshot();
+            let result = fixture.with_infos(|accounts| {
+                let mut operation_accounts = accounts[..LAW_STATE_INDEX].to_vec();
+                if prior_delegate {
+                    operation_accounts.push(accounts[PRIOR_DELEGATE_INDEX].clone());
+                }
+                execute_runtime_production_open_position_with_daily_law_prefix_account_infos(
+                    &program_id,
+                    &runtime_law,
+                    &binding,
+                    &instruction(),
+                    &accounts[LAW_STATE_INDEX],
+                    &operation_accounts,
+                )
+            });
+            assert!(matches!(
+                result,
+                Err(ProductionOpenPositionExecutorError::StakeIngress(
+                    StakeIngressRuntimeError::DailyLawAccountRejected
+                ))
+            ));
+            assert_eq!(fixture.snapshot(), before);
+        }
+
+        let mut fixture = Fixture::new(&binding, false);
+        let result = fixture.with_infos(|accounts| {
+            execute_runtime_production_open_position_with_daily_law_prefix_account_infos(
+                &program_id,
+                &runtime_law,
+                &binding,
+                &instruction(),
+                &accounts[LAW_STATE_INDEX],
+                &accounts[1..=LAW_STATE_INDEX],
+            )
+        });
+        assert!(matches!(
+            result,
+            Err(ProductionOpenPositionExecutorError::DuplicateDailyLawAccount)
+        ));
+    }
+
+    #[test]
+    fn program_identity_fails_before_instruction_decode_or_account_access() {
+        let binding = binding();
+        assert!(matches!(
+            execute_runtime_production_open_position_account_infos(
+                &Pubkey::new_from_array([0x99; 32]),
+                &runtime_law(),
+                &binding,
+                &[0xFF],
+                &[],
+            ),
+            Err(ProductionOpenPositionExecutorError::ProgramIdentityMismatch)
+        ));
     }
 
     #[test]

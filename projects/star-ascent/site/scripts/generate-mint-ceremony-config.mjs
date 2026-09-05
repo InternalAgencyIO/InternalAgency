@@ -79,7 +79,7 @@ const requiredStates = [
   ["allocation lock plan", artifacts.lockPlan.status, "READY"],
   ["signing checklist", artifacts.checklist.status, "READY"],
   ["Model T devnet rehearsal", artifacts.rehearsal.status, "COMPLETED"],
-  ["mainnet handoff", artifacts.handoff.status, "APPROVED"],
+  ["mainnet handoff", artifacts.handoff.status, "READY"],
   ["release packet", artifacts.packet.status, "READY"],
 ];
 for (const [label, actual, expected] of requiredStates) {
@@ -112,7 +112,7 @@ for (const [field, expected] of [
 ]) {
   if (artifacts.packet.artifactDigests?.[field] !== expected) blockers.push(`Release packet ${field} does not bind the current source.`);
 }
-if (!canonicalDigest(artifacts.packet.approval?.packetDigest)) blockers.push("Release packet approval digest is absent.");
+if (!canonicalDigest(artifacts.packet.automatedClosure?.packetDigest)) blockers.push("Release packet automated-closure digest is absent.");
 
 const mainnetAllocations = allocationOrder.map((name) => {
   const lockAllocation = artifacts.lockPlan.allocations?.[name];

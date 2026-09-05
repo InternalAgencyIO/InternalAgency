@@ -89,8 +89,8 @@ if (!policy.program.noOperatorReroll || policy.ccc.operatorReroll) fail("CCC dra
 if (policy.ccc.firstSelectionDelaySeconds !== 86400 || policy.ccc.frequencyWeeks !== 1) {
   fail("CCC selection must open 24 hours after Genesis and then advance every seven days");
 }
-if (policy.ccc.genesisStatus !== "COMPILED_FAIL_CLOSED_FUTURE_DLC" || policy.ccc.genesisActivationInstruction !== null || !policy.ccc.activationRequiresNewReviewedUpgrade) {
-  fail("CCC Agent/Associate agency selection must remain a fail-closed future DLC at Genesis");
+if (policy.ccc.genesisStatus !== "COMPILED_REVIEWED_GENESIS_ACTIVE" || policy.ccc.genesisActivationInstruction !== null || policy.ccc.activationRequiresNewReviewedUpgrade) {
+  fail("CCC Agent/Associate agency selection must be compile-time active with no runtime activation instruction");
 }
 if (
   policy.tieResolution.scope !== "DEFAULT_FOR_EVERY_PROTOCOL_DECISION_WITH_TWO_OR_MORE_EXACTLY_EQUAL_CANDIDATES"
@@ -148,12 +148,29 @@ for (const address of [
   if (!usableAddress(address)) fail(`invalid public role address ${address}`);
 }
 if (new Set(Object.values(expectedBeneficiaries)).size !== 5) fail("beneficiaries must be distinct");
-if (plan.schema !== "iat-v2-allocation-plan/v1" || plan.status !== "HOLD") fail("allocation plan must remain canonical HOLD v1");
+if (plan.schema !== "iat-v2-allocation-plan/v2" || plan.status !== "HOLD") fail("allocation plan must remain canonical HOLD v2");
 if (plan.policyPath !== policyPath) fail("allocation plan must bind the canonical policy path");
 if (plan.mint !== null) {
   fail("HOLD allocation plan cannot assert a live mint");
 }
-if (Object.values(plan.activationEvidence).some((value) => Array.isArray(value) ? value.length > 0 : value !== null && value !== expectedBeneficiaries.community && value !== policy.publicRoles.independentVerifier.address)) {
+if (JSON.stringify(Object.keys(plan.activationEvidence)) !== JSON.stringify([
+  "policySha256", "programBinarySha256", "vaultFundingTransactions",
+  "authorityRevocationTransactions", "devnetRehearsalEvidence", "observationMode",
+  "humanReviewerRequired", "noSelfAttestation", "observedAtUtc",
+])) {
+  fail("allocation-plan activation evidence shape is not canonical");
+}
+if (plan.activationEvidence.observationMode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+  || plan.activationEvidence.humanReviewerRequired !== false
+  || plan.activationEvidence.noSelfAttestation !== true) {
+  fail("allocation-plan activation must use the exact automated no-human/no-self-attestation policy");
+}
+if (plan.activationEvidence.policySha256 !== null
+  || plan.activationEvidence.programBinarySha256 !== null
+  || plan.activationEvidence.vaultFundingTransactions.length !== 0
+  || plan.activationEvidence.authorityRevocationTransactions.length !== 0
+  || plan.activationEvidence.devnetRehearsalEvidence !== null
+  || plan.activationEvidence.observedAtUtc !== null) {
   fail("HOLD allocation plan contains premature activation evidence");
 }
 if (rehearsal.schema !== "iat-v2-devnet-rehearsal/v1" || rehearsal.status !== "PLANNED" || rehearsal.network !== "devnet") {
@@ -161,6 +178,15 @@ if (rehearsal.schema !== "iat-v2-devnet-rehearsal/v1" || rehearsal.status !== "P
 }
 if (rehearsal.safety.mainnetTransactionsAllowed || rehearsal.safety.automaticWalletSignaturesAllowed || rehearsal.safety.secretsAllowedInRepositoryOrEvidence) {
   fail("V2 rehearsal safety boundary is incorrect");
+}
+if (
+  rehearsal.safety.trezorModelTPhysicalConfirmationIsSoleHumanGate !== true
+  || rehearsal.safety.automatedSourceReceiptStateObservationRequired !== true
+  || rehearsal.safety.humanReviewerRequired !== false
+  || rehearsal.safety.noSelfAttestation !== true
+  || rehearsal.automatedObservation?.mode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"
+) {
+  fail("V2 rehearsal must use automated source/receipt/state observation and Model T-only human signature confirmation");
 }
 if (rehearsal.toolchain.compatibilityStatus !== "HOST_TESTS_PASS_BPF_AND_DEVNET_PENDING") {
   fail("randomness adapter status must distinguish host tests from pending BPF and devnet evidence");
@@ -205,7 +231,7 @@ if (declaredProgramId === sentinelProgramId) {
 
 for (const fragment of [
   "pub const RANDOMNESS_ADAPTER_VERIFIED: bool = true;",
-  "pub const CCC_DLC_GENESIS_ENABLED: bool = false;",
+  "pub const CCC_DLC_GENESIS_ENABLED: bool = true;",
   "IatV2Error::CccDlcNotActive",
   "RANDOMNESS_ADAPTER_VERIFIED,",
   "parse_randomness(&data)",
