@@ -80,19 +80,19 @@ const artifactDigests = Object.fromEntries(artifactDigestFields.map((field) => {
   return [field, digest];
 }));
 
-const approvalPacketDigest = packet.approval?.packetDigest;
-if (!isCanonicalDigest(approvalPacketDigest)) {
-  throw new Error("Cannot seal pre-publication packet proof: approval.packetDigest must be a lowercase SHA-256 digest.");
+const closurePacketDigest = packet.automatedClosure?.packetDigest;
+if (!isCanonicalDigest(closurePacketDigest)) {
+  throw new Error("Cannot seal pre-publication packet proof: automatedClosure.packetDigest must be a lowercase SHA-256 digest.");
 }
-const expectedApprovalPacketDigest = sha256(JSON.stringify({
+const expectedClosurePacketDigest = sha256(JSON.stringify({
   packetVersion: 1,
   artifactDigests,
 }));
-if (approvalPacketDigest !== expectedApprovalPacketDigest) {
-  throw new Error("Cannot seal pre-publication packet proof: approval.packetDigest does not bind the ordered canonical artifact digests.");
+if (closurePacketDigest !== expectedClosurePacketDigest) {
+  throw new Error("Cannot seal pre-publication packet proof: automatedClosure.packetDigest does not bind the ordered canonical artifact digests.");
 }
-if (!isUtcTimestamp(packet.approval?.approvedAtUtc)) {
-  throw new Error("Cannot seal pre-publication packet proof: approval.approvedAtUtc must be a canonical ISO-8601 UTC timestamp.");
+if (!isUtcTimestamp(packet.automatedClosure?.observedAtUtc)) {
+  throw new Error("Cannot seal pre-publication packet proof: automatedClosure.observedAtUtc must be a canonical ISO-8601 UTC timestamp.");
 }
 
 // Take a second stable read after extracting the reviewed fields. This catches
@@ -102,21 +102,21 @@ if (!sameObservedBundle(reviewedBundle, readObservedBundle())) {
 }
 
 const proof = {
-  version: 1,
+  version: 2,
   status: "SEALED",
-  scope: "Historical pre-publication READY-packet proof only; this record never authorizes signing, submission, publication, or a claim.",
+  scope: "Historical automated pre-publication READY-packet proof only; this record never authorizes signing, submission, publication, or a claim.",
   sealedAtUtc: new Date().toISOString(),
   releasePacketPath,
   releasePacketSha256: sha256(reviewedBundle[releasePacketPath]),
   releaseSnapshotPath,
   releaseSnapshotSha256: sha256(reviewedBundle[releaseSnapshotPath]),
-  approvalPacketDigest,
-  packetApprovedAtUtc: packet.approval.approvedAtUtc,
+  closurePacketDigest,
+  packetObservedAtUtc: packet.automatedClosure.observedAtUtc,
   artifactDigests,
 };
-const sealDelayMs = Date.parse(proof.sealedAtUtc) - Date.parse(proof.packetApprovedAtUtc);
+const sealDelayMs = Date.parse(proof.sealedAtUtc) - Date.parse(proof.packetObservedAtUtc);
 if (sealDelayMs < 0 || sealDelayMs > 30 * 60 * 1000) {
-  throw new Error("Cannot seal pre-publication packet proof: seal time must be at or within 30 minutes after packet approval.");
+  throw new Error("Cannot seal pre-publication packet proof: seal time must be at or within 30 minutes after packet observation.");
 }
 
 try {

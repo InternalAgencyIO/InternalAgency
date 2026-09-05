@@ -11,7 +11,15 @@ const copy = {
 export default function VerifyPage() {
   const t = copy;
   return <main className="verify-page"><div className="verify-orbit" aria-hidden="true" /><nav><a href="/">IA<span>///</span></a><a href="/proof">{t.proof} ↗</a></nav>
-    <header><p>{t.eyebrow}</p><h1>{t.title}</h1><strong>{t.lede}</strong></header>
+    <header className="verify-hero">
+      <div className="verify-hero-copy"><p>{t.eyebrow}</p><h1>{t.title}</h1><strong>{t.lede}</strong></div>
+      <figure className="verify-portrait">
+        {/* eslint-disable-next-line @next/next/no-img-element -- Vinext runtime does not safely support next/image; this local asset has exact intrinsic dimensions. */}
+        <img src="/images/radiance-proof-signal-v1.png" width={1120} height={1400} fetchPriority="high" alt="Radiance, a fictional adult signal operator, demonstrating the public verification route" />
+        <span className="verify-portrait-sweep" aria-hidden="true" />
+        <figcaption><span>FIELD GUIDE // VISUAL LOCK</span><b>VERIFY BEFORE AMPLIFY</b></figcaption>
+      </figure>
+    </header>
     <section className="verify-steps" aria-label={t.eyebrow}>{t.checks.map(([title, body], index) => <article key={title}><span>0{index + 1}</span><div><h2>{title}</h2><p>{body}</p></div><b>→</b></article>)}</section>
     <section className="verify-command"><p>{t.order}</p><h2>{t.rule}</h2><div><a href="/launch">{t.links[0]} ↗</a><a href="/proof">{t.links[1]} ↗</a><a href="/dossier">{t.links[2]} ↗</a></div></section><footer>{t.footer}</footer>
   </main>;

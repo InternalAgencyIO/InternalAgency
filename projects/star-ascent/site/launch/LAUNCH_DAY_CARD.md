@@ -19,7 +19,7 @@ wallet, signs, submits, or authorizes mainnet.
    `launch/DEVNET_REHEARSAL_SCENARIO.md`. Do not use `/mint`; it is a disabled
    archive of the superseded mint-only path.
 4. The signer confirms only reviewed authority or value actions on the physical
-   device. The verifier captures direct evidence before the next boundary.
+   Model T. Automated source/receipt/state capture must complete before the next boundary.
 5. Publish only fields that match the verified packet across `/proof`, the
    sites, the pinned announcement, and the broadcast.
 

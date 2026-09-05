@@ -1,11 +1,12 @@
 //! Hook-aware Token-2022 executor for retained-V2 principal withdrawal.
 //!
-//! This module composes the frozen withdraw preflight with one exact
-//! `transfer_checked` CPI, exact post-CPI token reloads, and an atomic
-//! Config/Position compare-and-swap boundary. It deliberately exposes no
-//! instruction dispatcher or entrypoint. Runtime transaction rollback still
-//! requires final-binary adversarial Devnet evidence; host tests cannot attest
-//! validator rollback behavior.
+//! This source-complete handler composes the frozen withdraw preflight with one
+//! exact `transfer_checked` CPI, exact post-CPI token reloads, and an atomic
+//! Config/Position compare-and-swap boundary. The feature-gated production
+//! dispatcher/entrypoint routes it with one nonduplicated Daily-Law prefix.
+//! Runtime transaction rollback still requires final-binary adversarial Devnet
+//! evidence; host tests cannot attest validator rollback behavior, so Mainnet
+//! remains on hold.
 
 extern crate alloc;
 
@@ -57,8 +58,12 @@ const HOOK_VALIDATION_INDEX: usize = 10;
 const LAW_STATE_INDEX: usize = 11;
 
 pub const PRODUCTION_WITHDRAW_POSITION_EXECUTOR_ACCOUNT_COUNT: usize = 12;
+/// Transaction-level operation accounts when the canonical Daily-Law account
+/// is supplied once as the production entrypoint prefix.
+pub const PRODUCTION_WITHDRAW_POSITION_DISPATCH_ACCOUNT_COUNT: usize =
+    PRODUCTION_WITHDRAW_POSITION_EXECUTOR_ACCOUNT_COUNT - 1;
 pub const PRODUCTION_WITHDRAW_POSITION_EXECUTOR_STATUS: &str =
-    "HOOK_AWARE_TOKEN_2022_CPI_RELOAD_CONFIG_POSITION_ATOMIC_CAS_NO_DISPATCHER_MAINNET_HOLD";
+    "HOOK_AWARE_TOKEN_2022_HANDLER_COMPLETE_ATOMIC_CAS_ROUTED_ONE_LAW_PREFIX_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionWithdrawPositionExecutorTruth {
@@ -74,6 +79,7 @@ pub struct ProductionWithdrawPositionExecutorTruth {
     pub zero_amount_cpi_skipped: bool,
     pub retained_v2_cpi_before_state_write_order_preserved: bool,
     pub exact_config_and_position_atomic_cas_executed: bool,
+    pub same_instruction_transaction_rollback_required_after_cpi: bool,
     pub dispatcher_exposed: bool,
     pub entrypoint_exposed: bool,
     pub handler_complete: bool,
@@ -95,9 +101,10 @@ pub const PRODUCTION_WITHDRAW_POSITION_EXECUTOR_TRUTH: ProductionWithdrawPositio
         zero_amount_cpi_skipped: true,
         retained_v2_cpi_before_state_write_order_preserved: true,
         exact_config_and_position_atomic_cas_executed: true,
-        dispatcher_exposed: false,
-        entrypoint_exposed: false,
-        handler_complete: false,
+        same_instruction_transaction_rollback_required_after_cpi: true,
+        dispatcher_exposed: true,
+        entrypoint_exposed: true,
+        handler_complete: true,
         devnet_transaction_rollback_proven: false,
         mainnet_hold: true,
     };
@@ -105,6 +112,7 @@ pub const PRODUCTION_WITHDRAW_POSITION_EXECUTOR_TRUTH: ProductionWithdrawPositio
 #[derive(Debug, Eq, PartialEq)]
 pub enum ProductionWithdrawPositionExecutorError {
     AccountCountMismatch,
+    DuplicateDailyLawAccount,
     ProgramIdentityMismatch,
     SupplementalAccountBindingMismatch,
     SupplementalAccountMetaMismatch,
@@ -267,9 +275,10 @@ struct PreparedWithdrawTokenReload {
 /// 7 Token-2022 program, 8 ZK ElGamal proof program, 9 transfer-hook program,
 /// 10 transfer-hook validation PDA, 11 Daily-Law state.
 ///
-/// This callable executor remains deliberately undispatched and has no public
-/// program entrypoint. A returned error after CPI relies on Solana transaction
-/// semantics for rollback; final-binary adversarial Devnet proof is outstanding.
+/// This source-complete callable executor is reached through the feature-gated
+/// production dispatcher. A returned error after CPI relies on Solana
+/// transaction semantics for rollback; final-binary adversarial Devnet proof
+/// is outstanding and Mainnet remains held.
 #[inline(never)]
 pub fn execute_runtime_production_withdraw_position_account_infos(
     program_id: &Pubkey,
@@ -285,6 +294,44 @@ pub fn execute_runtime_production_withdraw_position_account_infos(
         instruction_data,
         accounts,
         WithdrawTransferCpi::invoke,
+    )
+}
+
+/// Adapt the production entrypoint's one canonical Daily-Law prefix account to
+/// the executor's frozen hook-CPI order. The transaction supplies exactly
+/// eleven operation accounts; this function appends an internal AccountInfo
+/// handle for the already-authenticated prefix. A duplicated Law key in the
+/// operation slice is rejected before instruction or account parsing.
+#[inline(never)]
+pub(crate) fn execute_runtime_production_withdraw_position_with_daily_law_prefix_account_infos<
+    'info,
+>(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    instruction_data: &[u8],
+    daily_law_account: &AccountInfo<'info>,
+    operation_accounts: &[AccountInfo<'info>],
+) -> Result<ProductionWithdrawPositionExecutionReceipt, ProductionWithdrawPositionExecutorError> {
+    if operation_accounts.len() != PRODUCTION_WITHDRAW_POSITION_DISPATCH_ACCOUNT_COUNT {
+        return Err(ProductionWithdrawPositionExecutorError::AccountCountMismatch);
+    }
+    if operation_accounts
+        .iter()
+        .any(|account| account.key == daily_law_account.key)
+    {
+        return Err(ProductionWithdrawPositionExecutorError::DuplicateDailyLawAccount);
+    }
+    let mut executor_accounts =
+        Vec::with_capacity(PRODUCTION_WITHDRAW_POSITION_EXECUTOR_ACCOUNT_COUNT);
+    executor_accounts.extend(operation_accounts.iter().cloned());
+    executor_accounts.push(daily_law_account.clone());
+    execute_runtime_production_withdraw_position_account_infos(
+        program_id,
+        runtime_law,
+        binding,
+        instruction_data,
+        &executor_accounts,
     )
 }
 
@@ -1252,20 +1299,21 @@ mod tests {
     }
 
     #[test]
-    fn truth_is_narrow_zero_aware_undispatched_and_mainnet_held() {
+    fn truth_is_source_complete_zero_aware_routed_and_mainnet_held() {
         let truth = core::hint::black_box(PRODUCTION_WITHDRAW_POSITION_EXECUTOR_TRUTH);
         assert_eq!(
             PRODUCTION_WITHDRAW_POSITION_EXECUTOR_STATUS,
-            "HOOK_AWARE_TOKEN_2022_CPI_RELOAD_CONFIG_POSITION_ATOMIC_CAS_NO_DISPATCHER_MAINNET_HOLD"
+            "HOOK_AWARE_TOKEN_2022_HANDLER_COMPLETE_ATOMIC_CAS_ROUTED_ONE_LAW_PREFIX_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD"
         );
         assert!(truth.exact_twelve_account_graph_required);
         assert!(truth.production_active_writable_config_required);
         assert!(truth.zero_amount_cpi_skipped);
         assert!(truth.retained_v2_cpi_before_state_write_order_preserved);
         assert!(truth.exact_config_and_position_atomic_cas_executed);
-        assert!(!truth.dispatcher_exposed);
-        assert!(!truth.entrypoint_exposed);
-        assert!(!truth.handler_complete);
+        assert!(truth.same_instruction_transaction_rollback_required_after_cpi);
+        assert!(truth.dispatcher_exposed);
+        assert!(truth.entrypoint_exposed);
+        assert!(truth.handler_complete);
         assert!(!truth.devnet_transaction_rollback_proven);
         assert!(truth.mainnet_hold);
     }
@@ -1406,6 +1454,45 @@ mod tests {
     }
 
     #[test]
+    fn dispatch_mapping_reuses_one_law_prefix_and_rejects_duplicate_transaction_meta() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let mut fixture = Fixture::new(&binding);
+        let before = fixture.all_snapshot();
+        let result = fixture.with_infos(|accounts| {
+            execute_runtime_production_withdraw_position_with_daily_law_prefix_account_infos(
+                &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                &runtime_law,
+                &binding,
+                &instruction(),
+                &accounts[LAW_STATE_INDEX],
+                &accounts[..LAW_STATE_INDEX],
+            )
+        });
+        assert_eq!(
+            result,
+            Err(ProductionWithdrawPositionExecutorError::TokenReloadAmountMismatch)
+        );
+        assert_eq!(fixture.all_snapshot(), before);
+
+        let mut fixture = Fixture::new(&binding);
+        let result = fixture.with_infos(|accounts| {
+            execute_runtime_production_withdraw_position_with_daily_law_prefix_account_infos(
+                &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                &runtime_law,
+                &binding,
+                &instruction(),
+                &accounts[LAW_STATE_INDEX],
+                &accounts[1..],
+            )
+        });
+        assert_eq!(
+            result,
+            Err(ProductionWithdrawPositionExecutorError::DuplicateDailyLawAccount)
+        );
+    }
+
+    #[test]
     fn cpi_error_returns_before_reload_or_any_state_write() {
         let binding = binding();
         let runtime_law = runtime_law();
@@ -1539,7 +1626,7 @@ mod tests {
     }
 
     #[test]
-    fn late_position_borrow_conflict_writes_neither_config_nor_position() {
+    fn late_position_borrow_conflict_writes_neither_ledger_account_and_keeps_rollback_held() {
         let binding = binding();
         let runtime_law = runtime_law();
         let mut fixture = Fixture::new(&binding);
@@ -1567,6 +1654,18 @@ mod tests {
             Err(ProductionWithdrawPositionExecutorError::AccountBorrowFailed)
         );
         assert_eq!(fixture.state_snapshot(), state_before);
+        let source = fixture.stake_tokens.info();
+        assert_eq!(token_amount(&source), 0);
+        drop(source);
+        let destination = fixture.destination_tokens.info();
+        assert_eq!(
+            token_amount(&destination),
+            INITIAL_DESTINATION_AMOUNT + PRINCIPAL
+        );
+        drop(destination);
+        let truth = PRODUCTION_WITHDRAW_POSITION_EXECUTOR_TRUTH;
+        assert!(truth.same_instruction_transaction_rollback_required_after_cpi);
+        assert!(!truth.devnet_transaction_rollback_proven);
     }
 
     #[test]

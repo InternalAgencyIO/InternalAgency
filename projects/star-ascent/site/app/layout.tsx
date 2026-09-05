@@ -102,7 +102,15 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     robots: indexable ? { index: true, follow: true } : "noindex, nofollow, noarchive",
     openGraph: { type: "website", url: canonical, siteName: "Internal Agency", title, description, images: [{ url: "/og-star-ascent-v1.png", width: 1792, height: 1024, alt: localeMetadata?.imageAlt ?? "STAR ASCENT launch control" }] },
-    twitter: { card: "summary_large_image", title, description, images: ["/og-star-ascent-v1.png"] },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [{
+        url: "/og-star-ascent-v1.png",
+        alt: localeMetadata?.imageAlt ?? "STAR ASCENT launch control",
+      }],
+    },
   };
 }
 

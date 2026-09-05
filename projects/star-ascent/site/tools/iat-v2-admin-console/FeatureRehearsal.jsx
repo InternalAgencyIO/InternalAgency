@@ -6,6 +6,7 @@ import {
   PublicKey,
   SystemProgram,
   Transaction,
+  VersionedTransaction,
 } from "@solana/web3.js";
 import {
   createAssociatedTokenAccountIdempotentInstruction,
@@ -47,17 +48,64 @@ import {
   secondsUntilIatV2Week,
 } from "../../programs/iat_v2/feature-rehearsal.mjs";
 import {
+  IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
+  IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
+  assertIatV2DevnetCeremonyHorizon,
+} from "../../programs/iat_v2/ceremony-horizon.mjs";
+import {
   DEVNET_FEATURE_MINT_SEED,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
   IAT_V2_PROGRAM_ADMIN,
+  IAT_V2_PROGRAM_DATA_ADDRESS,
   IAT_V2_PROGRAM_ID,
+  parseV2ConfigAccount,
 } from "../../programs/iat_v2/instructions.mjs";
+import {
+  createIatV2DevnetProgramCeremonyEvidenceBinding,
+  parseIatV2DevnetProgramCeremonyBinding,
+} from "../../programs/iat_v2/ceremony-binding.mjs";
+import ceremonyRuntimeBindingJson from "../../scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json";
 import {
   SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
 } from "../../programs/iat_v2/client.mjs";
+import {
+  assertCanonicalAttendedNextActionFromReceiptSet,
+  loadAttendedReceiptSet,
+  parseAttendedReceiptSet,
+  persistAttendedReceipt,
+} from "./attended-evidence.mjs";
+import { buildCompleteAttendedBundle } from "./attended-evidence-bundle.mjs";
+import {
+  IAT_V2_RANDOMNESS_CREATE_TITLE,
+  canonicalRandomnessCreateJournal,
+  encodeSolanaSignature,
+  inspectCanonicalRandomnessDiscardEligibility,
+  loadRandomnessCreateJournal,
+  parseRandomnessContinuityRecord,
+  persistRandomnessCreateJournal,
+  randomnessCreateJournalStorageKey,
+  randomnessJournalContinuityRecord,
+  randomnessJournalReceiptStub,
+  reconcileVerifiedRandomnessCreateJournal,
+  verifyFinalizedRandomnessContinuity,
+} from "./feature-randomness-continuity.mjs";
+import {
+  attendedPromptLatchKey,
+  createAttendedModelTPromptCoordinator,
+} from "./attended-prompt-coordinator.mjs";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
-const connection = new Connection(DEVNET_RPC, "confirmed");
+const FINALIZED_COMMITMENT = "finalized";
+const connection = new Connection(DEVNET_RPC, FINALIZED_COMMITMENT);
 const COMMUNITY_CUSTODY = new PublicKey("7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH");
+const ATTENDED_CEREMONY_BINDING = parseIatV2DevnetProgramCeremonyBinding(
+  ceremonyRuntimeBindingJson,
+);
 
 function signerRole(signer) {
   if (signer.equals(IAT_V2_PROGRAM_ADMIN) && signer.equals(COMMUNITY_CUSTODY)) {
@@ -80,17 +128,47 @@ const FEATURE_AGENCY_OWNERS = Object.freeze([
 const FEATURE_POSITION_IDS = Object.freeze([1, 2, 3]);
 const FEATURE_POSITION_PRINCIPAL = 10_000_000_000n;
 const PARTICIPANT_RENT_TARGET_LAMPORTS = 30_000_000;
-const FEATURE_EVIDENCE_KEY =
+const LEGACY_FEATURE_EVIDENCE_KEY_V2 =
   `iat-v2-devnet-feature-action-evidence/${DEVNET_FEATURE_MINT_SEED}/v2`;
 const LEGACY_FEATURE_EVIDENCE_KEY = "iat-v2-devnet-feature-action-evidence/v1";
-const FEATURE_RANDOMNESS_KEY =
-  `iat-v2-devnet-switchboard-randomness-account/${DEVNET_FEATURE_MINT_SEED}/v2`;
 
-function loadEvidence() {
+function exactFeatureStorageBinding(mint) {
+  return createIatV2DevnetProgramCeremonyEvidenceBinding({
+    binding: ATTENDED_CEREMONY_BINDING,
+    mint: mint.toBase58(),
+  });
+}
+
+function featureSourceBoundStorageKey(namespace, mint, version) {
+  const exact = exactFeatureStorageBinding(mint);
+  return [
+    namespace,
+    exact.sourceCommit,
+    exact.programArtifactSha256,
+    exact.mint,
+    version,
+  ].join("/");
+}
+
+function featureEvidenceStorageKey(mint) {
+  return featureSourceBoundStorageKey(
+    "iat-v2-devnet-feature-action-evidence",
+    mint,
+    "v3",
+  );
+}
+
+function featureRandomnessStorageKey(mint) {
+  return featureSourceBoundStorageKey(
+    "iat-v2-devnet-switchboard-randomness-account",
+    mint,
+    "v4",
+  );
+}
+
+function loadEvidence(mint) {
   try {
-    const serialized = localStorage.getItem(FEATURE_EVIDENCE_KEY)
-      ?? localStorage.getItem(LEGACY_FEATURE_EVIDENCE_KEY)
-      ?? "[]";
+    const serialized = localStorage.getItem(featureEvidenceStorageKey(mint)) ?? "[]";
     const value = JSON.parse(serialized);
     return Array.isArray(value)
       ? value.filter((entry) => (
@@ -104,15 +182,58 @@ function loadEvidence() {
   }
 }
 
-function storedRandomnessAddress() {
-  const value = localStorage.getItem(FEATURE_RANDOMNESS_KEY);
-  if (!value) return null;
-  try {
-    return new PublicKey(value);
-  } catch {
-    localStorage.removeItem(FEATURE_RANDOMNESS_KEY);
-    return null;
+function storedRandomnessContinuity(mint) {
+  const binding = exactFeatureStorageBinding(mint);
+  const value = localStorage.getItem(featureRandomnessStorageKey(mint));
+  const retained = value ? parseRandomnessContinuityRecord(value, binding) : null;
+  const journal = loadRandomnessCreateJournal(localStorage, binding);
+  const journalContinuity = journal ? randomnessJournalContinuityRecord(journal) : null;
+  if (retained && journalContinuity && !sameBinding(retained, journalContinuity)) {
+    throw new Error("Retained randomness continuity conflicts with its CREATE recovery journal");
   }
+  return retained ?? journalContinuity;
+}
+
+function retainedRandomnessCreateInputs(mint, evidence) {
+  const binding = exactFeatureStorageBinding(mint);
+  const retained = storedRandomnessContinuity(mint);
+  const journal = loadRandomnessCreateJournal(localStorage, binding);
+  const evidenceReceipt = evidence.find(
+    ({ action }) => action === "CREATE_SWITCHBOARD_RANDOMNESS",
+  ) ?? null;
+  const retainedStub = journal
+    ? randomnessJournalReceiptStub(journal)
+    : retained
+      ? {
+          action: "CREATE_SWITCHBOARD_RANDOMNESS",
+          signature: retained.createSignature,
+          messageSha256: retained.createMessageSha256,
+        }
+      : null;
+  if (
+    evidenceReceipt
+    && retainedStub
+    && (
+      evidenceReceipt.signature !== retainedStub.signature
+      || evidenceReceipt.messageSha256 !== retainedStub.messageSha256
+    )
+  ) {
+    throw new Error("Source-bound feature CREATE receipt conflicts with retained randomness continuity");
+  }
+  if (!retained) {
+    return { retainedCreateReceipt: null, retainedCreatePredecessorReceipt: null };
+  }
+  const receiptSet = loadAttendedReceiptSet(localStorage, binding);
+  const createIndex = receiptSet.receipts.findIndex(
+    ({ action }) => action === "CREATE_SWITCHBOARD_RANDOMNESS",
+  );
+  const predecessorIndex = createIndex === -1
+    ? receiptSet.receipts.length - 1
+    : createIndex - 1;
+  return {
+    retainedCreateReceipt: evidenceReceipt ?? retainedStub,
+    retainedCreatePredecessorReceipt: receiptSet.receipts[predecessorIndex] ?? null,
+  };
 }
 
 function bitIsSet(value, ordinal) {
@@ -125,15 +246,148 @@ function roleMatches(eligibility, role, agencyIndex = null) {
   return eligibility.agencyIndex === agencyIndex;
 }
 
-async function loadFeatureState(baseSnapshot) {
-  const { mint, plan, config } = baseSnapshot;
+function finalizedContextSlot(result, label, minContextSlot = 0) {
+  const slot = result?.context?.slot;
+  if (!Number.isSafeInteger(slot) || slot < minContextSlot) {
+    throw new Error(`${label} did not return a valid finalized context slot`);
+  }
+  return slot;
+}
+
+async function finalizedBlockTimestamp(slot, label) {
+  const timestamp = await connection.getBlockTime(slot);
+  if (!Number.isSafeInteger(timestamp) || timestamp <= 0) {
+    throw new Error(`${label} did not return a valid finalized block time`);
+  }
+  return timestamp;
+}
+
+function finalizedParentSnapshotSlot(snapshot, label, minContextSlot = 0) {
+  const slot = snapshot?.finalizedContextSlot;
+  if (!Number.isSafeInteger(slot) || slot <= 0 || slot < minContextSlot) {
+    throw new Error(`${label} does not carry a monotonic finalized context slot`);
+  }
+  return slot;
+}
+
+function featureParentBinding(snapshot) {
+  return {
+    mint: snapshot.mint.toBase58(),
+    config: snapshot.plan.config.toBase58(),
+    communityTokenAccount: snapshot.plan.allocationDestinations.community.tokenAccount.toBase58(),
+    supply: String(snapshot.supply),
+    active: snapshot.active,
+    complete: snapshot.complete,
+  };
+}
+
+function migrationDeploymentObservation(deployment, minContextSlot) {
+  if (
+    !deployment?.programId?.equals(IAT_V2_PROGRAM_ID)
+    || !deployment?.programDataAddress?.equals(IAT_V2_PROGRAM_DATA_ADDRESS)
+    || !deployment?.upgradeAuthority?.equals(IAT_V2_PROGRAM_ADMIN)
+    || deployment?.artifactSha256 !== IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256
+    || deployment?.programBytes !== IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES
+    || !Number.isSafeInteger(deployment?.contextSlot)
+    || deployment.contextSlot < minContextSlot
+  ) {
+    throw new Error("Finalized deployment is not the exact reviewed migration Program/ProgramData artifact and authority");
+  }
+  return {
+    contextSlot: deployment.contextSlot,
+    binding: {
+      programId: deployment.programId.toBase58(),
+      programDataAddress: deployment.programDataAddress.toBase58(),
+      artifactSha256: deployment.artifactSha256,
+      programBytes: deployment.programBytes,
+      upgradeAuthority: deployment.upgradeAuthority.toBase58(),
+    },
+  };
+}
+
+function featureActionBinding(action, state) {
+  return {
+    id: action.id,
+    signer: action.signer.toBase58(),
+    lamports: action.lamports ?? null,
+    week: action.week ?? null,
+    positionIndex: action.positionIndex ?? null,
+    ordinal: action.ordinal ?? null,
+    roundAddress: action.roundAddress?.toBase58() ?? null,
+    createsEphemeralProtocolSigner: action.createsEphemeralProtocolSigner === true,
+    ceremonyHorizon: state.ceremonyHorizon,
+    transactionState: {
+      coreDestination: state.coreDestination.toBase58(),
+      liquidityDestination: state.liquidityDestination.toBase58(),
+      randomnessAddress: state.randomnessAddress?.toBase58() ?? null,
+      currentRoundAddress: state.currentRoundAddress?.toBase58() ?? null,
+      currentRoundLayoutVersion: state.currentRound?.layoutVersion ?? null,
+      currentRoundRandomnessAccount: state.currentRound?.randomnessAccount?.toBase58() ?? null,
+      currentRoundStatus: state.currentRound?.status ?? null,
+    },
+  };
+}
+
+function sameBinding(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function sameBytes(left, right) {
+  return left.length === right.length && left.every((byte, index) => byte === right[index]);
+}
+
+async function loadFeatureState(
+  baseSnapshot,
+  minimumFinalizedSlot = 0,
+  {
+    retainedCreateReceipt = null,
+    retainedCreatePredecessorReceipt = null,
+    sha256Hex = null,
+  } = {},
+) {
+  if (!Number.isSafeInteger(minimumFinalizedSlot) || minimumFinalizedSlot < 0) {
+    throw new Error("Feature state minimum finalized slot is invalid");
+  }
+  const parentSlot = finalizedParentSnapshotSlot(
+    baseSnapshot,
+    "Parent initialization snapshot",
+  );
+  const configReadFloor = Math.max(parentSlot, minimumFinalizedSlot);
+  const { mint, plan } = baseSnapshot;
+  const configResult = await connection.getAccountInfoAndContext(
+    plan.config,
+    {
+      commitment: FINALIZED_COMMITMENT,
+      minContextSlot: configReadFloor,
+    },
+  );
+  const configSlot = finalizedContextSlot(configResult, "Feature config", configReadFloor);
+  const configInfo = configResult.value;
+  if (!configInfo || !configInfo.owner.equals(IAT_V2_PROGRAM_ID)) {
+    throw new Error("Feature config is missing from finalized Devnet state or has the wrong owner");
+  }
+  const config = parseV2ConfigAccount(configInfo.data);
+  if (
+    !config.admin.equals(IAT_V2_PROGRAM_ADMIN)
+    || !config.mint.equals(mint)
+    || !config.randomnessProgram.equals(SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID)
+    || !config.rehearsalMode
+    || !config.active
+  ) {
+    throw new Error("Finalized feature config is not the reviewed active Devnet rehearsal");
+  }
   const genesisTimestamp = Number(config.genesisTimestamp);
   if (!Number.isSafeInteger(genesisTimestamp)) {
     throw new Error("Feature Genesis timestamp is outside the browser's safe range");
   }
-  const nowTimestamp = Math.floor(Date.now() / 1_000);
-  const currentWeek = currentIatV2Week(genesisTimestamp, nowTimestamp);
-  const currentCccRound = currentIatV2CccRound(genesisTimestamp, nowTimestamp);
+  const configTimestamp = await finalizedBlockTimestamp(configSlot, "Feature config");
+  const configWeek = currentIatV2Week(genesisTimestamp, configTimestamp);
+  const configCccRound = currentIatV2CccRound(genesisTimestamp, configTimestamp);
+  assertIatV2DevnetCeremonyHorizon({
+    policyWeek: configWeek,
+    cccRound: configCccRound,
+    nowTimestamp: configTimestamp,
+  });
   const eligibilityAddress = deriveEligibilityAddress({
     config: plan.config,
     wallet: COMMUNITY_CUSTODY,
@@ -151,15 +405,70 @@ async function loadFeatureState(baseSnapshot) {
   }));
   const coreDestination = getAssociatedTokenAddressSync(mint, CORE_BENEFICIARY);
   const liquidityDestination = getAssociatedTokenAddressSync(mint, LIQUIDITY_BENEFICIARY);
-  const currentRoundAddress = currentCccRound === null
+  const currentRoundAddress = configCccRound === null
     ? null
     : deriveRoundAddress({
-      config: plan.config,
-      programId: IAT_V2_PROGRAM_ID,
-      week: currentCccRound,
+        config: plan.config,
+        programId: IAT_V2_PROGRAM_ID,
+        week: configCccRound,
+      });
+  const retainedRandomness = storedRandomnessContinuity(mint);
+  let randomnessAddress = null;
+  let randomnessContinuity = null;
+  if (retainedRandomness) {
+    if (!retainedCreateReceipt) {
+      throw new Error(
+        "A retained source-bound randomness record has no exact CREATE receipt; use the pre-ceremony discard control",
+      );
+    }
+    const observedAddress = new PublicKey(retainedRandomness.address);
+    if (!retainedCreatePredecessorReceipt) {
+      throw new Error("A retained source-bound randomness record has no canonical predecessor receipt");
+    }
+    const [createTransaction, predecessorTransaction, randomnessAccountResult] = await Promise.all([
+      connection.getTransaction(retainedRandomness.createSignature, {
+        commitment: FINALIZED_COMMITMENT,
+        maxSupportedTransactionVersion: 0,
+      }),
+      connection.getTransaction(retainedCreatePredecessorReceipt.signature, {
+        commitment: FINALIZED_COMMITMENT,
+        maxSupportedTransactionVersion: 0,
+      }),
+      connection.getAccountInfoAndContext(observedAddress, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: configSlot,
+      }),
+    ]);
+    const randomnessAccountSlot = finalizedContextSlot(
+      randomnessAccountResult,
+      "Retained randomness account",
+      configSlot,
+    );
+    const sourceDeploymentSlot = baseSnapshot?.deployment?.slot;
+    const sourceDeploymentSlotIsExact = typeof sourceDeploymentSlot === "bigint"
+      ? sourceDeploymentSlot > 0n
+      : Number.isSafeInteger(sourceDeploymentSlot) && sourceDeploymentSlot > 0;
+    if (!sourceDeploymentSlotIsExact) {
+      throw new Error("Reviewed source deployment slot is unavailable for randomness continuity");
+    }
+    const continuity = await verifyFinalizedRandomnessContinuity({
+      record: retainedRandomness,
+      createReceipt: retainedCreateReceipt,
+      predecessorReceipt: retainedCreatePredecessorReceipt,
+      predecessorTransactionResponse: predecessorTransaction,
+      transactionResponse: createTransaction,
+      observedAddress,
+      accountInfo: randomnessAccountResult.value,
+      accountContextSlot: randomnessAccountSlot,
+      expectedAdmin: IAT_V2_PROGRAM_ADMIN,
+      expectedParticipant: COMMUNITY_CUSTODY,
+      expectedDestinationTokens: plan.allocationDestinations.community.tokenAccount,
+      minimumCreationSlot: sourceDeploymentSlot,
+      sha256Hex,
     });
-  const randomnessAddress = storedRandomnessAddress();
-  const participantBalanceLamports = await connection.getBalance(COMMUNITY_CUSTODY, "confirmed");
+    randomnessAddress = continuity.address;
+    randomnessContinuity = continuity;
+  }
   const addresses = [
     ...agencyAddresses,
     eligibilityAddress,
@@ -171,7 +480,37 @@ async function loadFeatureState(baseSnapshot) {
     ...(currentRoundAddress ? [currentRoundAddress] : []),
     ...(randomnessAddress ? [randomnessAddress] : []),
   ];
-  const infos = await connection.getMultipleAccountsInfo(addresses, "confirmed");
+  const continuityReadFloor = Math.max(
+    configSlot,
+    randomnessContinuity?.accountContextSlot ?? 0,
+  );
+  const stateResult = await connection.getMultipleAccountsInfoAndContext(addresses, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: continuityReadFloor,
+  });
+  const stateSlot = finalizedContextSlot(stateResult, "Feature state", continuityReadFloor);
+  const stateTimestamp = await finalizedBlockTimestamp(stateSlot, "Feature state");
+  const currentWeek = currentIatV2Week(genesisTimestamp, stateTimestamp);
+  const currentCccRound = currentIatV2CccRound(genesisTimestamp, stateTimestamp);
+  assertIatV2DevnetCeremonyHorizon({
+    policyWeek: currentWeek,
+    cccRound: currentCccRound,
+    nowTimestamp: stateTimestamp,
+  });
+  if (currentWeek !== configWeek || currentCccRound !== configCccRound) {
+    throw new Error("Finalized Devnet time crossed a feature boundary; refresh before signing");
+  }
+  const infos = stateResult.value;
+  const participantBalanceResult = await connection.getBalanceAndContext(COMMUNITY_CUSTODY, {
+    commitment: FINALIZED_COMMITMENT,
+    minContextSlot: stateSlot,
+  });
+  const participantBalanceSlot = finalizedContextSlot(
+    participantBalanceResult,
+    "Participant balance",
+    stateSlot,
+  );
+  const participantBalanceLamports = participantBalanceResult.value;
   let cursor = 0;
   const agencyInfos = infos.slice(cursor, cursor += agencyAddresses.length);
   const eligibilityInfo = infos[cursor++];
@@ -182,11 +521,29 @@ async function loadFeatureState(baseSnapshot) {
   const liquidityDestinationInfo = infos[cursor++];
   const currentRoundInfo = currentRoundAddress ? infos[cursor++] : null;
   const randomnessInfo = randomnessAddress ? infos[cursor++] : null;
+  if (currentRoundInfo && !currentRoundInfo.owner.equals(IAT_V2_PROGRAM_ID)) {
+    throw new Error("Current CCC round has the wrong owner");
+  }
+  const currentRound = currentRoundInfo ? parseRoundAccount(currentRoundInfo.data) : null;
+  if (currentRound && !randomnessAddress) {
+    throw new Error(
+      "An existing finalized CCC round has no verified source-bound randomness continuity",
+    );
+  }
   if (randomnessInfo && !randomnessInfo.owner.equals(SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID)) {
     throw new Error("Stored randomness account is not owned by the pinned Switchboard devnet program");
   }
   if (randomnessAddress && !randomnessInfo) {
-    localStorage.removeItem(FEATURE_RANDOMNESS_KEY);
+    throw new Error(
+      "The retained source-bound randomness account is absent; stop and use the pre-ceremony discard control",
+    );
+  }
+  if (
+    currentRound
+    && randomnessAddress
+    && !currentRound.randomnessAccount.equals(randomnessAddress)
+  ) {
+    throw new Error("Current CCC round randomness disagrees with verified source-bound continuity");
   }
   const positions = positionInfos.map((info) => {
     if (!info) return null;
@@ -217,21 +574,42 @@ async function loadFeatureState(baseSnapshot) {
     programId: IAT_V2_PROGRAM_ID,
     week,
   }));
-  const linkedRoundInfos = linkedRoundAddresses.length
-    ? await connection.getMultipleAccountsInfo(linkedRoundAddresses, "confirmed")
-    : [];
+  const linkedRoundResult = linkedRoundAddresses.length
+    ? await connection.getMultipleAccountsInfoAndContext(linkedRoundAddresses, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: participantBalanceSlot,
+      })
+    : null;
+  const finalObservationSlot = linkedRoundResult
+    ? finalizedContextSlot(linkedRoundResult, "Linked rounds", participantBalanceSlot)
+    : participantBalanceSlot;
+  const linkedRoundInfos = linkedRoundResult?.value ?? [];
   const linkedRounds = Object.fromEntries(linkedRoundWeeks.map((week, index) => {
     const info = linkedRoundInfos[index];
     if (!info) return [week, null];
     if (!info.owner.equals(IAT_V2_PROGRAM_ID)) throw new Error("CCC round has the wrong owner");
     return [week, parseRoundAccount(info.data)];
   }));
+  const nowTimestamp = await finalizedBlockTimestamp(finalObservationSlot, "Final feature observation");
+  if (
+    currentIatV2Week(genesisTimestamp, nowTimestamp) !== currentWeek
+    || currentIatV2CccRound(genesisTimestamp, nowTimestamp) !== currentCccRound
+  ) {
+    throw new Error("Finalized Devnet time crossed a feature boundary; refresh before signing");
+  }
+  const ceremonyHorizon = assertIatV2DevnetCeremonyHorizon({
+    policyWeek: currentWeek,
+    cccRound: currentCccRound,
+    nowTimestamp,
+  });
 
   return {
+    finalObservationSlot,
     nowTimestamp,
     genesisTimestamp,
     currentWeek,
     currentCccRound,
+    ceremonyHorizon,
     agencyAddresses,
     agenciesRegistered: agencyInfos.filter(Boolean).length,
     participantBalanceLamports,
@@ -246,8 +624,9 @@ async function loadFeatureState(baseSnapshot) {
     liquidityDestination,
     liquidityDestinationExists: Boolean(liquidityDestinationInfo),
     randomnessAddress: randomnessInfo ? randomnessAddress : null,
+    randomnessContinuity,
     currentRoundAddress,
-    currentRound: currentRoundInfo ? parseRoundAccount(currentRoundInfo.data) : null,
+    currentRound,
     linkedRounds,
   };
 }
@@ -453,18 +832,14 @@ function waitDescription(state) {
   return `CCC-linked settlement needs real round ${week}, opening in ${formatRehearsalWait(seconds)}.`;
 }
 
-function switchboardWallet(provider, publicKey) {
+function switchboardBuildOnlyWallet(publicKey) {
+  const rejectDirectSigning = async () => {
+    throw new Error("Switchboard transaction builders cannot invoke the Model T signing provider");
+  };
   return {
     publicKey,
-    signTransaction: (transaction) => provider.signTransaction(transaction),
-    signAllTransactions: async (transactions) => {
-      if (typeof provider.signAllTransactions === "function") {
-        return provider.signAllTransactions(transactions);
-      }
-      const signed = [];
-      for (const transaction of transactions) signed.push(await provider.signTransaction(transaction));
-      return signed;
-    },
+    signTransaction: rejectDirectSigning,
+    signAllTransactions: rejectDirectSigning,
   };
 }
 
@@ -475,17 +850,17 @@ function loadSwitchboardModule() {
   return switchboardModulePromise;
 }
 
-async function switchboardProgram(provider, publicKey) {
+async function switchboardProgram(publicKey) {
   const switchboard = await loadSwitchboardModule();
   const program = await switchboard.AnchorUtils.loadProgramFromConnection(
     connection,
-    switchboardWallet(provider, publicKey),
+    switchboardBuildOnlyWallet(publicKey),
     SWITCHBOARD_ON_DEMAND_DEVNET_PROGRAM_ID,
   );
   return { program, switchboard };
 }
 
-async function buildActionTransaction(action, state, baseSnapshot, provider) {
+async function buildActionTransaction(action, state, baseSnapshot) {
   const { mint, plan } = baseSnapshot;
   const transaction = new Transaction();
   let ephemeralKeypair = null;
@@ -583,7 +958,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
     case "CREATE_SWITCHBOARD_RANDOMNESS": {
       ephemeralKeypair = Keypair.generate();
       randomnessAddress = ephemeralKeypair.publicKey;
-      const { program, switchboard } = await switchboardProgram(provider, action.signer);
+      const { program, switchboard } = await switchboardProgram(action.signer);
       const [, initializeIx] = await switchboard.Randomness.create(
         program,
         ephemeralKeypair,
@@ -595,7 +970,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
     }
     default:
       if (action.id.startsWith("COMMIT_CCC_ROUND_")) {
-        const { program, switchboard } = await switchboardProgram(provider, action.signer);
+        const { program, switchboard } = await switchboardProgram(action.signer);
         const randomness = new switchboard.Randomness(program, state.randomnessAddress);
         const commitIx = await randomness.commitIx(
           switchboard.ON_DEMAND_DEVNET_QUEUE,
@@ -612,7 +987,7 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
           }),
         );
       } else if (action.id.startsWith("REVEAL_CCC_ROUND_")) {
-        const { program, switchboard } = await switchboardProgram(provider, action.signer);
+        const { program, switchboard } = await switchboardProgram(action.signer);
         const randomness = new switchboard.Randomness(program, state.randomnessAddress);
         const revealIx = await randomness.revealIx(action.signer);
         transaction.add(
@@ -652,50 +1027,264 @@ async function buildActionTransaction(action, state, baseSnapshot, provider) {
   return { transaction, ephemeralKeypair, randomnessAddress };
 }
 
+async function requestFeatureModelTSignature({
+  coordinator,
+  binding,
+  action,
+  messageSha256,
+  provider,
+  signer,
+  transaction,
+  verifySigned,
+}) {
+  const result = await coordinator.request({
+    binding,
+    action,
+    messageSha256,
+    signer: signer.toBase58(),
+    prompt: async () => {
+      const signed = await provider.signTransaction(transaction);
+      await verifySigned(signed);
+      return signed;
+    },
+  });
+  return result.value;
+}
+
+function assertFeaturePromptOrder(binding, nextAction) {
+  const receiptSet = loadAttendedReceiptSet(localStorage, binding);
+  const preUpgradeCapacity = receiptSet.preUpgradeProgramDataCapacityBytes;
+  if (
+    receiptSet.receipts.length === 0
+    || !Number.isSafeInteger(preUpgradeCapacity)
+    || preUpgradeCapacity <= 0
+  ) {
+    throw new Error(
+      "Canonical feature prompting requires prior receipts and the frozen pre-upgrade ProgramData capacity",
+    );
+  }
+  const programDataExtensionRequired =
+    preUpgradeCapacity < IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES;
+  const extensionReceiptPresent = receiptSet.receipts.some(
+    ({ action }) => action === "EXTEND_PROGRAM_DATA",
+  );
+  if (extensionReceiptPresent !== programDataExtensionRequired) {
+    throw new Error("Canonical extension receipt disagrees with the frozen pre-upgrade capacity");
+  }
+  return assertCanonicalAttendedNextActionFromReceiptSet({
+    receiptSet,
+    expectedBinding: binding,
+    programDataExtensionRequired,
+    nextAction,
+  });
+}
+
 export default function FeatureRehearsal({
   baseSnapshot,
   explorer,
   getHardwareProvider,
   json,
+  loadFeatureParentSnapshot,
   sha256Hex,
   short,
+  verifyMigrationDeployment,
 }) {
+  const exactStorageBinding = exactFeatureStorageBinding(baseSnapshot.mint);
+  const evidenceStorageKey = featureEvidenceStorageKey(baseSnapshot.mint);
+  const randomnessStorageKey = featureRandomnessStorageKey(baseSnapshot.mint);
+  const randomnessJournalKey = randomnessCreateJournalStorageKey(
+    exactStorageBinding,
+  );
+  const [promptCoordinator] = useState(createAttendedModelTPromptCoordinator);
   const [state, setState] = useState(null);
-  const [evidence, setEvidence] = useState(loadEvidence);
+  const [evidence, setEvidence] = useState(() => loadEvidence(baseSnapshot.mint));
+  const [operatorReceiptSets, setOperatorReceiptSets] = useState([]);
   const [pending, setPending] = useState(null);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("LOADING FEATURE STATE");
   const [error, setError] = useState("");
   const [logs, setLogs] = useState([]);
+  const [retainedRandomnessSerialized, setRetainedRandomnessSerialized] = useState(
+    () => localStorage.getItem(randomnessStorageKey),
+  );
+  const [retainedRandomnessJournalSerialized, setRetainedRandomnessJournalSerialized] = useState(
+    () => localStorage.getItem(randomnessJournalKey),
+  );
+  const randomnessCreationReceipt = evidence.find(
+    (record) => record.action === "CREATE_SWITCHBOARD_RANDOMNESS",
+  ) ?? null;
+  const retainedRandomnessExists = Boolean(
+    retainedRandomnessSerialized || retainedRandomnessJournalSerialized,
+  );
+  let canonicalRandomnessDiscardInspection = Object.freeze({
+    canonicalCreateRecorded: null,
+    discardEligible: false,
+  });
+  try {
+    canonicalRandomnessDiscardInspection = inspectCanonicalRandomnessDiscardEligibility({
+      storage: localStorage,
+      expectedBinding: exactStorageBinding,
+      programArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+    });
+  } catch {
+    // Malformed, incomplete, or unavailable strict receipt storage keeps discard fail-closed.
+  }
+  const randomnessDiscardEligible = Boolean(
+    retainedRandomnessSerialized
+      && !retainedRandomnessJournalSerialized
+      && state?.randomnessContinuity
+      && evidence.length === 0
+      && !busy
+      && !pending
+      && canonicalRandomnessDiscardInspection.discardEligible,
+  );
+  let retainedRandomnessSource = retainedRandomnessSerialized;
+  let retainedRandomnessDisplay = null;
+  try {
+    if (!retainedRandomnessSource && retainedRandomnessJournalSerialized) {
+      retainedRandomnessSource = JSON.stringify(randomnessJournalContinuityRecord(
+        loadRandomnessCreateJournal(
+          localStorage,
+          exactFeatureStorageBinding(baseSnapshot.mint),
+        ),
+      ));
+    }
+    if (retainedRandomnessSource) {
+      retainedRandomnessDisplay = parseRandomnessContinuityRecord(
+        retainedRandomnessSource,
+        exactFeatureStorageBinding(baseSnapshot.mint),
+      ).address;
+    }
+  } catch {
+    retainedRandomnessDisplay = "MALFORMED SOURCE-BOUND CONTINUITY OR RECOVERY JOURNAL";
+  }
 
   const action = useMemo(() => state ? nextFeatureAction(state) : null, [state]);
+
+  const recoverVerifiedRandomness = useCallback((verifiedState) => {
+    const verified = verifiedState.randomnessContinuity;
+    if (!verified) return null;
+    const exactBinding = exactFeatureStorageBinding(baseSnapshot.mint);
+    const receiptSet = loadAttendedReceiptSet(localStorage, exactBinding);
+    const canonicalCreate = receiptSet.receipts.find(
+      ({ action: receiptAction }) => receiptAction === "CREATE_SWITCHBOARD_RANDOMNESS",
+    ) ?? null;
+    const featureCreate = evidence.find(
+      ({ action: receiptAction }) => receiptAction === "CREATE_SWITCHBOARD_RANDOMNESS",
+    ) ?? null;
+    const retained = localStorage.getItem(randomnessStorageKey);
+    let journal = loadRandomnessCreateJournal(localStorage, exactBinding);
+    const complete = !journal
+      && retained !== null
+      && canonicalCreate?.signature === verified.record.createSignature
+      && canonicalCreate?.messageSha256 === verified.record.createMessageSha256
+      && featureCreate?.signature === verified.record.createSignature
+      && featureCreate?.messageSha256 === verified.record.createMessageSha256;
+    if (complete) return null;
+    if (!journal) {
+      journal = canonicalRandomnessCreateJournal({
+        sourceCommit: verified.record.sourceCommit,
+        programArtifactSha256: verified.record.programArtifactSha256,
+        mint: verified.record.mint,
+        address: verified.record.address,
+        createSignature: verified.record.createSignature,
+        createMessageSha256: verified.record.createMessageSha256,
+        title: IAT_V2_RANDOMNESS_CREATE_TITLE,
+      });
+      persistRandomnessCreateJournal(localStorage, journal);
+      setRetainedRandomnessJournalSerialized(JSON.stringify(journal));
+    }
+    const recovered = reconcileVerifiedRandomnessCreateJournal({
+      storage: localStorage,
+      expectedBinding: exactBinding,
+      journal,
+      verifiedContinuity: verified,
+      continuityStorageKey: randomnessStorageKey,
+      featureEvidenceKey: evidenceStorageKey,
+      programArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+    });
+    setRetainedRandomnessSerialized(JSON.stringify(recovered.continuity));
+    setRetainedRandomnessJournalSerialized(null);
+    setEvidence(recovered.featureEvidence);
+    return recovered;
+  }, [baseSnapshot.mint, evidence, evidenceStorageKey, randomnessStorageKey]);
+
+  async function loadFreshAttendedBoundary(minimumFinalizedSlot = 0) {
+    if (!Number.isSafeInteger(minimumFinalizedSlot) || minimumFinalizedSlot < 0) {
+      throw new Error("Attended boundary minimum finalized slot is invalid");
+    }
+    const baseSlot = finalizedParentSnapshotSlot(
+      baseSnapshot,
+      "Parent initialization snapshot",
+    );
+    const readFloor = Math.max(baseSlot, minimumFinalizedSlot);
+    const reviewedParentBinding = featureParentBinding(baseSnapshot);
+    const parentSnapshot = await loadFeatureParentSnapshot(readFloor);
+    const parentSlot = finalizedParentSnapshotSlot(
+      parentSnapshot,
+      "Fresh parent initialization snapshot",
+      readFloor,
+    );
+    const parentBinding = featureParentBinding(parentSnapshot);
+    if (
+      !parentSnapshot.complete
+      || !parentSnapshot.active
+      || !sameBinding(parentBinding, reviewedParentBinding)
+    ) {
+      throw new Error("Fresh finalized parent snapshot no longer matches the reviewed active deployment");
+    }
+    const retainedInputs = retainedRandomnessCreateInputs(baseSnapshot.mint, evidence);
+    const childState = await loadFeatureState(parentSnapshot, parentSlot, {
+      ...retainedInputs,
+      sha256Hex,
+    });
+    recoverVerifiedRandomness(childState);
+    const deployment = await verifyMigrationDeployment(childState.finalObservationSlot);
+    const deploymentObservation = migrationDeploymentObservation(
+      deployment,
+      childState.finalObservationSlot,
+    );
+    return {
+      parentSnapshot,
+      parentBinding,
+      state: childState,
+      deploymentBinding: deploymentObservation.binding,
+      finalObservationSlot: deploymentObservation.contextSlot,
+    };
+  }
 
   const refresh = useCallback(async () => {
     setBusy(true);
     setError("");
     setStatus("VERIFYING FEATURE ACCOUNTS");
     try {
-      const next = await loadFeatureState(baseSnapshot);
+      const retainedInputs = retainedRandomnessCreateInputs(baseSnapshot.mint, evidence);
+      const next = await loadFeatureState(baseSnapshot, 0, {
+        ...retainedInputs,
+        sha256Hex,
+      });
+      recoverVerifiedRandomness(next);
       setState(next);
       const nextAction = nextFeatureAction(next);
       setStatus(nextAction ? `READY // ${nextAction.id}` : "WAIT GATE // NO SAFE ACTION YET");
       return next;
     } catch (caught) {
+      setState(null);
       setStatus("HOLD // FEATURE VERIFICATION FAILED");
       setError(caught instanceof Error ? caught.message : String(caught));
       throw caught;
     } finally {
       setBusy(false);
     }
-  }, [baseSnapshot]);
+  }, [baseSnapshot, evidence, recoverVerifiedRandomness, sha256Hex]);
 
   useEffect(() => {
     refresh().catch(() => {});
   }, [refresh]);
 
   useEffect(() => {
-    localStorage.setItem(FEATURE_EVIDENCE_KEY, JSON.stringify(evidence));
-  }, [evidence]);
+    localStorage.setItem(evidenceStorageKey, JSON.stringify(evidence));
+  }, [evidence, evidenceStorageKey]);
 
   async function simulateAndRequestSignature() {
     if (!action || pending || busy) return;
@@ -705,17 +1294,47 @@ export default function FeatureRehearsal({
     setStatus("BUILDING + SIMULATING // NOTHING WILL BE BROADCAST");
     let ephemeralKeypair = null;
     try {
-      const current = await loadFeatureState(baseSnapshot);
+      const buildBoundary = await loadFreshAttendedBoundary(
+        finalizedParentSnapshotSlot(baseSnapshot, "Parent initialization snapshot"),
+      );
+      const current = buildBoundary.state;
       const currentAction = nextFeatureAction(current);
-      if (!currentAction || currentAction.id !== action.id) {
+      const reviewedActionBinding = featureActionBinding(action, state);
+      const currentActionBinding = currentAction ? featureActionBinding(currentAction, current) : null;
+      if (!currentAction || !sameBinding(currentActionBinding, reviewedActionBinding)) {
         setState(current);
         throw new Error("Chain state advanced; review the newly computed action");
       }
-      setStatus(`CONNECTING ${signerRole(action.signer)} // ${short(action.signer.toBase58(), 9)}`);
-      const { provider, publicKey } = await getHardwareProvider(action.signer);
-      const built = await buildActionTransaction(action, current, baseSnapshot, provider);
+      if (currentAction.id === "CREATE_SWITCHBOARD_RANDOMNESS" && current.currentRound) {
+        throw new Error(
+          "An existing finalized CCC round has no source-bound randomness continuity; fresh randomness creation is blocked",
+        );
+      }
+      const promptBinding = evidenceBinding();
+      attendedPromptLatchKey({ binding: promptBinding, action: currentAction.id });
+      assertFeaturePromptOrder(promptBinding, currentAction.id);
+      setState(current);
+      setStatus(`CONNECTING ${signerRole(currentAction.signer)} // ${short(currentAction.signer.toBase58(), 9)}`);
+      const { provider, publicKey } = await getHardwareProvider(currentAction.signer);
+      if (!publicKey.equals(currentAction.signer)) {
+        throw new Error("Connected hardware account is not the exact reviewed feature signer");
+      }
+      const built = await buildActionTransaction(
+        currentAction,
+        current,
+        buildBoundary.parentSnapshot,
+      );
       ephemeralKeypair = built.ephemeralKeypair;
-      const latest = await connection.getLatestBlockhash("confirmed");
+      const latestResult = await connection.getLatestBlockhashAndContext({
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: buildBoundary.finalObservationSlot,
+      });
+      const latestContextSlot = finalizedContextSlot(
+        latestResult,
+        "Transaction blockhash",
+        buildBoundary.finalObservationSlot,
+      );
+      const latest = latestResult.value;
       built.transaction.feePayer = publicKey;
       built.transaction.recentBlockhash = latest.blockhash;
       if (ephemeralKeypair) built.transaction.partialSign(ephemeralKeypair);
@@ -724,31 +1343,88 @@ export default function FeatureRehearsal({
         verifySignatures: false,
       }).length;
       if (wireSize > 1232) throw new Error(`Transaction is ${wireSize} bytes, above Solana's limit`);
-      const messageSha256 = await sha256Hex(built.transaction.serializeMessage());
-      // Legacy Transaction uses the signer-array overload in web3.js 1.x.
-      // Passing a VersionedTransaction-style config object throws "Invalid arguments".
-      const simulation = await connection.simulateTransaction(built.transaction);
+      const reviewedMessageBytes = built.transaction.serializeMessage();
+      const simulationTransaction = new VersionedTransaction(built.transaction.compileMessage());
+      if (!sameBytes(simulationTransaction.message.serialize(), reviewedMessageBytes)) {
+        throw new Error("Exact reviewed legacy message changed while preparing simulation");
+      }
+      const messageSha256 = await sha256Hex(reviewedMessageBytes);
+      const simulation = await connection.simulateTransaction(simulationTransaction, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: latestContextSlot,
+        replaceRecentBlockhash: false,
+        sigVerify: false,
+      });
+      const simulationSlot = finalizedContextSlot(
+        simulation,
+        "Transaction simulation",
+        latestContextSlot,
+      );
       setLogs(simulation.value.logs ?? []);
       if (simulation.value.err) {
         throw new Error(`Simulation failed: ${json(simulation.value.err)}`);
       }
-      setStatus("HARDWARE // REVIEW + SIGN; STILL NOT BROADCAST");
-      const signed = await provider.signTransaction(built.transaction);
-      const signedMessageSha256 = await sha256Hex(signed.serializeMessage());
-      if (signedMessageSha256 !== messageSha256) {
-        throw new Error("Wallet changed the reviewed transaction message");
+      const postSimulationMessageBytes = built.transaction.serializeMessage();
+      if (
+        !sameBytes(postSimulationMessageBytes, reviewedMessageBytes)
+        || await sha256Hex(postSimulationMessageBytes) !== messageSha256
+      ) {
+        throw new Error("Simulation changed the exact hardware-reviewed transaction message");
       }
-      const walletSignature = signed.signatures.find(({ publicKey: signer }) => signer.equals(publicKey));
-      if (!walletSignature?.signature) throw new Error("Required hardware signature is missing");
-      if (!signed.verifySignatures()) throw new Error("Signed transaction failed local signature verification");
+      const promptBoundary = await loadFreshAttendedBoundary(simulationSlot);
+      const promptAction = nextFeatureAction(promptBoundary.state);
+      const promptActionBinding = promptAction
+        ? featureActionBinding(promptAction, promptBoundary.state)
+        : null;
+      if (
+        !promptAction
+        || !sameBinding(promptActionBinding, currentActionBinding)
+        || !sameBinding(promptBoundary.parentBinding, buildBoundary.parentBinding)
+        || !sameBinding(promptBoundary.deploymentBinding, buildBoundary.deploymentBinding)
+      ) {
+        setState(promptBoundary.state);
+        throw new Error("Finalized deployment or action changed before the hardware prompt");
+      }
+      setState(promptBoundary.state);
+      setStatus("HARDWARE // REVIEW + SIGN; STILL NOT BROADCAST");
+      assertFeaturePromptOrder(promptBinding, promptAction.id);
+      const signed = await requestFeatureModelTSignature({
+        coordinator: promptCoordinator,
+        binding: promptBinding,
+        action: promptAction.id,
+        messageSha256,
+        provider,
+        signer: publicKey,
+        transaction: built.transaction,
+        verifySigned: async (candidate) => {
+          const signedMessageSha256 = await sha256Hex(candidate.serializeMessage());
+          if (signedMessageSha256 !== messageSha256) {
+            throw new Error("Wallet changed the reviewed transaction message");
+          }
+          const walletSignature = candidate.signatures.find(
+            ({ publicKey: signer }) => signer.equals(publicKey),
+          );
+          if (!walletSignature?.signature) {
+            throw new Error("Required hardware signature is missing");
+          }
+          if (!candidate.verifySignatures()) {
+            throw new Error("Signed transaction failed local signature verification");
+          }
+        },
+      });
       setPending({
-        action: action.id,
-        title: action.title,
+        action: currentAction.id,
+        actionBinding: promptActionBinding,
+        title: currentAction.title,
         signed,
         messageSha256,
         latest,
         wireSize,
+        parentBinding: promptBoundary.parentBinding,
+        deploymentBinding: promptBoundary.deploymentBinding,
+        finalObservationSlot: promptBoundary.finalObservationSlot,
         randomnessAddress: built.randomnessAddress,
+        week: Number.isSafeInteger(currentAction.week) ? currentAction.week : null,
       });
       setStatus("SIGNED // NOT BROADCAST — REVIEW THEN PRESS BROADCAST");
     } catch (caught) {
@@ -764,43 +1440,119 @@ export default function FeatureRehearsal({
     if (!pending || busy) return;
     setBusy(true);
     setError("");
-    setStatus("BROADCASTING USER-APPROVED DEVNET TRANSACTION");
+    setStatus("REVERIFYING FINALIZED DEPLOYMENT + ACTION // NOTHING BROADCAST");
+    let broadcastBoundaryValidated = false;
     try {
+      const boundary = await loadFreshAttendedBoundary(pending.finalObservationSlot);
+      const currentAction = nextFeatureAction(boundary.state);
+      const currentActionBinding = currentAction
+        ? featureActionBinding(currentAction, boundary.state)
+        : null;
+      if (
+        !currentAction
+        || currentAction.id !== pending.action
+        || !sameBinding(currentActionBinding, pending.actionBinding)
+      ) {
+        throw new Error("Finalized feature action no longer matches the signed transaction");
+      }
+      if (
+        !sameBinding(boundary.parentBinding, pending.parentBinding)
+        || !sameBinding(boundary.deploymentBinding, pending.deploymentBinding)
+      ) {
+        throw new Error("Finalized deployment binding changed after the hardware signature");
+      }
+      const signedMessageSha256 = await sha256Hex(pending.signed.serializeMessage());
+      if (signedMessageSha256 !== pending.messageSha256) {
+        throw new Error("Signed transaction message changed after hardware review");
+      }
+      if (
+        pending.signed.recentBlockhash !== pending.latest.blockhash
+        || !pending.signed.verifySignatures()
+      ) {
+        throw new Error("Signed transaction or blockhash no longer matches the reviewed payload");
+      }
+      const blockhashValidity = await connection.isBlockhashValid(pending.latest.blockhash, {
+        commitment: FINALIZED_COMMITMENT,
+        minContextSlot: boundary.finalObservationSlot,
+      });
+      finalizedContextSlot(
+        blockhashValidity,
+        "Signed transaction blockhash",
+        boundary.finalObservationSlot,
+      );
+      if (!blockhashValidity.value) {
+        throw new Error("Signed transaction blockhash is no longer valid");
+      }
+      let stagedCreateJournal = null;
+      if (pending.randomnessAddress) {
+        if (pending.action !== "CREATE_SWITCHBOARD_RANDOMNESS") {
+          throw new Error("Randomness signer material is attached to a non-CREATE action");
+        }
+        stagedCreateJournal = canonicalRandomnessCreateJournal({
+          ...exactFeatureStorageBinding(baseSnapshot.mint),
+          address: pending.randomnessAddress.toBase58(),
+          createSignature: encodeSolanaSignature(pending.signed.signature),
+          createMessageSha256: pending.messageSha256,
+          title: IAT_V2_RANDOMNESS_CREATE_TITLE,
+        });
+        persistRandomnessCreateJournal(localStorage, stagedCreateJournal);
+        setRetainedRandomnessJournalSerialized(JSON.stringify(stagedCreateJournal));
+      }
+      setState(boundary.state);
+      broadcastBoundaryValidated = true;
+      setStatus("BROADCASTING USER-APPROVED DEVNET TRANSACTION");
       const signature = await connection.sendRawTransaction(pending.signed.serialize(), {
         skipPreflight: false,
-        preflightCommitment: "confirmed",
+        preflightCommitment: FINALIZED_COMMITMENT,
         maxRetries: 3,
       });
+      if (stagedCreateJournal && signature !== stagedCreateJournal.createSignature) {
+        throw new Error("Broadcast randomness CREATE signature disagrees with the durable recovery journal");
+      }
       const confirmation = await connection.confirmTransaction({
         signature,
         blockhash: pending.latest.blockhash,
         lastValidBlockHeight: pending.latest.lastValidBlockHeight,
-      }, "confirmed");
+      }, FINALIZED_COMMITMENT);
       if (confirmation.value.err) {
         throw new Error(`Confirmation failed: ${json(confirmation.value.err)}`);
       }
-      if (pending.randomnessAddress) {
-        localStorage.setItem(FEATURE_RANDOMNESS_KEY, pending.randomnessAddress.toBase58());
+      const confirmationSlot = finalizedContextSlot(
+        confirmation,
+        "Finalized transaction confirmation",
+        boundary.finalObservationSlot,
+      );
+      if (!stagedCreateJournal) {
+        const record = {
+          action: pending.action,
+          title: pending.title,
+          signature,
+          messageSha256: pending.messageSha256,
+          explorerUrl: explorer("tx", signature),
+          finalizedAtUtc: new Date().toISOString(),
+          week: pending.week,
+        };
+        persistAttendedReceipt(localStorage, evidenceBinding(), {
+          ...record,
+          kind: "feature",
+        });
+        setEvidence((current) => [
+          ...current.filter((entry) => entry.action !== record.action),
+          record,
+        ]);
       }
-      const record = {
-        action: pending.action,
-        title: pending.title,
-        signature,
-        messageSha256: pending.messageSha256,
-        explorerUrl: explorer("tx", signature),
-        confirmedAtUtc: new Date().toISOString(),
-      };
-      setEvidence((current) => [
-        ...current.filter((entry) => entry.action !== record.action),
-        record,
-      ]);
+      const refreshedBoundary = await loadFreshAttendedBoundary(confirmationSlot);
       setPending(null);
-      const next = await loadFeatureState(baseSnapshot);
-      setState(next);
-      const nextAction = nextFeatureAction(next);
+      setState(refreshedBoundary.state);
+      const nextAction = nextFeatureAction(refreshedBoundary.state);
       setStatus(nextAction ? `CONFIRMED // NEXT ${nextAction.id}` : "CONFIRMED // WAIT GATE");
     } catch (caught) {
-      setStatus("HOLD // BROADCAST OR CONFIRMATION FAILED");
+      if (!broadcastBoundaryValidated) {
+        setPending(null);
+        setStatus("HOLD // SIGNED TRANSACTION DISCARDED BEFORE BROADCAST");
+      } else {
+        setStatus("HOLD // BROADCAST OR CONFIRMATION FAILED");
+      }
       setError(caught instanceof Error ? caught.message : String(caught));
     } finally {
       setBusy(false);
@@ -812,21 +1564,21 @@ export default function FeatureRehearsal({
     setStatus("SIGNED TRANSACTION DISCARDED // NOTHING BROADCAST");
   }
 
-  function downloadEvidence() {
+  function featureEvidencePayload() {
     if (!state) return;
-    const payload = {
+    return {
       schema: "iat-v2-devnet-on-chain-feature-rehearsal-evidence/v1",
-      status: "PARTIAL_PENDING_ALL_TIME_GATES_AND_INDEPENDENT_REVIEW",
+      status: "PARTIAL_PENDING_ALL_TIME_GATES_AND_AUTOMATED_DIRECT_EVIDENCE",
       network: "devnet",
       rpc: DEVNET_RPC,
-      programId: IAT_V2_PROGRAM_ID,
-      mint: baseSnapshot.mint,
+      programId: IAT_V2_PROGRAM_ID.toBase58(),
+      mint: baseSnapshot.mint.toBase58(),
       config: baseSnapshot.plan.config,
       genesisTimestamp: state.genesisTimestamp,
       currentWeek: state.currentWeek,
       currentCccRound: state.currentCccRound,
       agencies: FEATURE_AGENCY_OWNERS.map((owner, index) => ({ index, owner })),
-      participant: COMMUNITY_CUSTODY,
+      participant: COMMUNITY_CUSTODY.toBase58(),
       participantBalanceLamports: state.participantBalanceLamports,
       positions: state.positions,
       coreReward: state.coreReward,
@@ -836,16 +1588,117 @@ export default function FeatureRehearsal({
       transactions: evidence,
       exportedAtUtc: new Date().toISOString(),
       mainnetStatus: "HOLD",
-      independentReviewRequired: true,
+      automatedDirectEvidenceRequired: true,
+      humanReviewerRequired: false,
+      noSelfAttestation: true,
       secretMaterialIncluded: false,
     };
+  }
+
+  function downloadJson(payload, filename) {
     const blob = new Blob([`${json(payload)}\n`], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = "iat-v2-devnet-on-chain-feature-rehearsal-evidence.json";
+    anchor.download = filename;
     anchor.click();
     URL.revokeObjectURL(url);
+  }
+
+  function downloadEvidence() {
+    const payload = featureEvidencePayload();
+    if (!payload) return;
+    downloadJson(payload, "iat-v2-devnet-on-chain-feature-rehearsal-evidence.json");
+  }
+
+  function evidenceBinding() {
+    return exactFeatureStorageBinding(baseSnapshot.mint);
+  }
+
+  async function importReceiptSets(event) {
+    setError("");
+    try {
+      const files = [...(event.target.files ?? [])];
+      const imported = await Promise.all(files.map(async (file) => (
+        parseAttendedReceiptSet(await file.text(), evidenceBinding())
+      )));
+      setOperatorReceiptSets(imported);
+      setStatus(`IMPORTED ${imported.length} SOURCE-BOUND RECEIPT SET${imported.length === 1 ? "" : "S"}`);
+    } catch (caught) {
+      setOperatorReceiptSets([]);
+      setStatus("HOLD // RECEIPT IMPORT REJECTED");
+      setError(caught instanceof Error ? caught.message : String(caught));
+    } finally {
+      event.target.value = "";
+    }
+  }
+
+  function downloadAggregateEvidence() {
+    if (!state) return;
+    setError("");
+    try {
+      const exactBinding = evidenceBinding();
+      const localReceiptSet = loadAttendedReceiptSet(localStorage, exactBinding);
+      const payload = buildCompleteAttendedBundle({
+        receiptSets: [localReceiptSet, ...operatorReceiptSets],
+        featureExport: featureEvidencePayload(),
+        expectedBinding: exactBinding,
+        programId: IAT_V2_PROGRAM_ID.toBase58(),
+        participant: COMMUNITY_CUSTODY.toBase58(),
+      });
+      downloadJson(payload, "iat-v2-current-source-attended-devnet-console-bundle.json");
+      setStatus("COMPLETE ATTENDED BUNDLE EXPORTED // AUTOMATED DIRECT EVIDENCE STILL REQUIRED");
+    } catch (caught) {
+      setStatus("HOLD // COMPLETE BUNDLE NOT AVAILABLE");
+      setError(caught instanceof Error ? caught.message : String(caught));
+    }
+  }
+
+  function clearFeatureReceipts() {
+    if (retainedRandomnessExists) {
+      setStatus("HOLD // RETAINED RANDOMNESS CONTINUITY REQUIRES ITS CREATE RECEIPT");
+      return;
+    }
+    localStorage.removeItem(evidenceStorageKey);
+    localStorage.removeItem(LEGACY_FEATURE_EVIDENCE_KEY_V2);
+    localStorage.removeItem(LEGACY_FEATURE_EVIDENCE_KEY);
+    setEvidence([]);
+    setStatus("LOCAL FEATURE RECEIPTS CLEARED // ON-CHAIN STATE UNCHANGED");
+  }
+
+  function discardRetainedRandomnessAddress() {
+    let freshInspection;
+    try {
+      freshInspection = inspectCanonicalRandomnessDiscardEligibility({
+        storage: localStorage,
+        expectedBinding: exactStorageBinding,
+        programArtifactBytes: IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+      });
+    } catch (caught) {
+      setStatus("HOLD // STRICT CANONICAL RECEIPTS COULD NOT AUTHORIZE RANDOMNESS DISCARD");
+      setError(caught instanceof Error ? caught.message : String(caught));
+      return;
+    }
+    if (!randomnessDiscardEligible || !freshInspection.discardEligible) {
+      setStatus("HOLD // RANDOMNESS DISCARD IS NOT VERIFIED AS PRE-CEREMONY ELIGIBLE");
+      return;
+    }
+    try {
+      localStorage.removeItem(randomnessStorageKey);
+      if (localStorage.getItem(randomnessStorageKey) !== null) {
+        throw new Error("Retained randomness continuity remained after discard");
+      }
+    } catch (caught) {
+      setStatus("HOLD // RETAINED RANDOMNESS CONTINUITY COULD NOT BE DISCARDED");
+      setError(caught instanceof Error ? caught.message : String(caught));
+      return;
+    }
+    setRetainedRandomnessSerialized(null);
+    setState(null);
+    setError("");
+    setStatus(
+      "RETAINED RANDOMNESS ADDRESS DISCARDED // RECEIPTS PRESERVED // REFRESH TO REQUIRE FRESH CREATE_SWITCHBOARD_RANDOMNESS",
+    );
   }
 
   return (
@@ -866,6 +1719,47 @@ export default function FeatureRehearsal({
         <div><small>PARTICIPANT SOL</small><strong>{state ? (state.participantBalanceLamports / 1e9).toFixed(3) : "—"}</strong></div>
         <div><small>SWITCHBOARD</small><strong>{state?.randomnessAddress ? "BOUND" : "PENDING"}</strong></div>
       </div>
+
+      <div className="address-grid">
+        <div><span>PROGRAMDATA</span><code className="full-code">{IAT_V2_PROGRAM_DATA_ADDRESS.toBase58()}</code></div>
+        <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
+        <div><span>ATTENDED CEREMONY SOURCE</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code></div>
+        <div><span>SOURCE-BOUND CEREMONY HORIZON</span><code>POLICY {IAT_V2_DEVNET_CEREMONY_POLICY_WEEK} / CCC {IAT_V2_DEVNET_CEREMONY_CCC_ROUND}</code></div>
+        <div><span>CEREMONY HORIZON CLOSE</span><code>{IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC}</code></div>
+        <div><span>CEREMONY CI RUN / ATTEMPT</span><code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code></div>
+        <div><span>CEREMONY RUNTIME EVIDENCE SHA-256</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code></div>
+        <div><span>IMMUTABLE ARTIFACT SOURCE</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
+        <div><span>ARTIFACT CI RUN / ATTEMPT</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID} / 1</code></div>
+        <div><span>ARTIFACT EVIDENCE MANIFEST SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256}</code></div>
+        <div><span>CI-BOUND ARTIFACT SHA-256</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256}</code></div>
+        <div><span>CI-BOUND ARTIFACT BYTES</span><code>{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES}</code></div>
+      </div>
+
+      {retainedRandomnessExists && (
+        <div className="feature-command">
+          <div>
+            <small>PRE-CEREMONY RANDOMNESS CONTROL // LOCAL STORAGE ONLY</small>
+            <strong>{canonicalRandomnessDiscardInspection.canonicalCreateRecorded || randomnessCreationReceipt
+              ? "CURRENT CEREMONY RANDOMNESS LOCKED"
+              : randomnessDiscardEligible
+                ? "VERIFIED PRE-CEREMONY RETAINED ADDRESS MAY BE DISCARDED"
+                : "RANDOMNESS DISCARD LOCKED UNTIL STRICT PRE-CEREMONY VERIFICATION"}</strong>
+            <code className="full-code">{retainedRandomnessDisplay}</code>
+            <p>
+              The control removes only this source-bound continuity record, preserves receipts, and performs
+              no RPC, signature, broadcast, or chain action. After discard, refresh and complete a fresh
+              CREATE_SWITCHBOARD_RANDOMNESS action.
+            </p>
+          </div>
+          <button
+            className="discard"
+            onClick={discardRetainedRandomnessAddress}
+            disabled={!randomnessDiscardEligible}
+          >
+            DISCARD RETAINED ADDRESS + REQUIRE FRESH CREATE
+          </button>
+        </div>
+      )}
 
       <div className="feature-command">
         <div>
@@ -909,7 +1803,7 @@ export default function FeatureRehearsal({
             </button>
           ) : (
             <div className="broadcast-panel">
-              <code>MESSAGE {short(pending.messageSha256, 10)}</code>
+              <code className="full-code">MESSAGE {pending.messageSha256}</code>
               <code>{pending.wireSize} BYTES // SIGNATURES VERIFIED</code>
               <button onClick={broadcastSigned} disabled={busy}>BROADCAST SIGNED DEVNET TRANSACTION</button>
               <button className="discard" onClick={discardPending} disabled={busy}>DISCARD WITHOUT BROADCAST</button>
@@ -944,6 +1838,23 @@ export default function FeatureRehearsal({
         <p>Evidence contains public accounts, state, message hashes, signatures, and Explorer links. No secrets.</p>
         <button onClick={downloadEvidence} disabled={!state || evidence.length === 0}>
           DOWNLOAD FEATURE EVIDENCE
+        </button>
+        <label className="action-link">
+          IMPORT SOURCE-BOUND PROGRAM / MIGRATION RECEIPTS
+          <input type="file" accept="application/json" multiple onChange={importReceiptSets} hidden />
+        </label>
+        <button onClick={downloadAggregateEvidence} disabled={!state || evidence.length === 0}>
+          EXPORT COMPLETE ATTENDED BUNDLE
+        </button>
+        <button className="discard" onClick={() => setOperatorReceiptSets([])} disabled={operatorReceiptSets.length === 0}>
+          DISCARD IMPORTED RECEIPTS ({operatorReceiptSets.length})
+        </button>
+        <button
+          className="discard"
+          onClick={clearFeatureReceipts}
+          disabled={evidence.length === 0 || busy || Boolean(pending) || retainedRandomnessExists}
+        >
+          CLEAR LOCAL FEATURE RECEIPTS
         </button>
       </div>
     </section>

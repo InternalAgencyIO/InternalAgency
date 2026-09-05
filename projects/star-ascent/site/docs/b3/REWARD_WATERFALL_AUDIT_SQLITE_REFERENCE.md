@@ -117,15 +117,16 @@ This prerequisite does not complete `REWARD_WATERFALL_PROOFS` or
 
 1. authenticated source-kind, chronology, round-clock/completeness, CCC
    registry/randomness, and Daily-Law provenance;
-2. reviewed production account/instruction layouts and a native atomic bridge
+2. source-bound production account/instruction layout evidence and a native
+   atomic bridge
    that cannot bypass the allocator or its complete proof set;
 3. the durable CAS chain, consumer gate, and independently protected external
    monotonic head on exact production identities;
 4. provider credentials, key ownership, rotation/revocation, RPC and failure
-   drills, and accepted independent review packets;
+   drills, and accepted source-bound automated direct-evidence packets;
 5. reproducible final binaries and full adversarial Devnet evidence; and
 6. terminal authorization with a zero-blocker, zero-violation release graph.
 
 This file is documentation for a local reference prerequisite only. It is not
-a release packet, external-provider observation, independent review, Devnet
-result, deployment record, or Mainnet authorization.
+a release packet, external-provider observation, automated evidence receipt,
+Devnet result, deployment record, or Mainnet authorization.

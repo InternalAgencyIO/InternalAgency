@@ -197,18 +197,19 @@ fn encoder_failure_is_atomic_and_zero_principal_remains_semantic() {
 }
 
 #[test]
-fn truth_freezes_all_codecs_but_never_authorizes_execution() {
+fn truth_freezes_all_codecs_and_reports_only_the_feature_gated_held_surface() {
     let truth = std::hint::black_box(PRODUCTION_INSTRUCTION_TRUTH);
     assert!(truth.open_position_codec_exact);
     assert!(truth.all_15_instruction_abi_frozen);
-    assert!(!truth.production_dispatcher_exposed);
-    assert!(!truth.production_entrypoint_exposed);
-    assert!(!truth.account_data_read);
-    assert!(!truth.account_writes_executed);
-    assert!(!truth.cpi_executed);
+    assert!(truth.production_surface_feature_gated);
+    assert!(truth.production_dispatcher_exposed);
+    assert!(truth.production_entrypoint_exposed);
+    assert!(truth.account_data_read);
+    assert!(truth.account_writes_executed);
+    assert!(truth.cpi_executed);
     assert!(!truth.production_identities_frozen);
     assert!(!truth.devnet_executed);
-    assert!(!truth.any_handler_complete);
+    assert!(truth.any_handler_complete);
     assert!(truth.mainnet_hold);
     assert!(PRODUCTION_INSTRUCTION_STATUS.contains("MAINNET_HOLD"));
 }

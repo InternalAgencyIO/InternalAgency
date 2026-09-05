@@ -27,6 +27,13 @@ import {
   createIatV2DeploymentPlan,
   deriveIatV2Addresses,
 } from "./client.mjs";
+export {
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BUILD_RUN_ID,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_BYTES,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SHA256,
+  IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD,
+  IAT_V2_MIGRATION_PROGRAM_EVIDENCE_MANIFEST_SHA256,
+} from "./artifact-binding.mjs";
 
 export const IAT_V2_PROGRAM_ID = new PublicKey("62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj");
 export const IAT_V2_PROGRAM_DATA_ADDRESS = new PublicKey(

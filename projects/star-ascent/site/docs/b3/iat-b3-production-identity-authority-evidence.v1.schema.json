@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:iat:b3:production-identity-authority-evidence:v1",
+  "$id": "urn:iat:b3:production-identity-authority-evidence:v3",
   "title": "IAT B3 staged production identity, funding, and deployed-authority evidence",
-  "description": "Strict nonactivating evidence intake. Trust keys are supplied by the release graph, Gate 8 remains separate, and this schema never authorizes signing, deployment, spending, activation, release, or Mainnet execution.",
+  "description": "Strict nonactivating automated receipt/state/endpoint evidence intake. Owner decisions require an exact Solana OCMS v0/v1 envelope plus a separate source-bound Model T firmware/capability observation; Ed25519 bytes alone never prove hardware provenance. This schema never authorizes signing, deployment, spending, activation, release, or Mainnet execution.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -12,6 +12,7 @@
     "status",
     "scope",
     "sourceBindings",
+    "modelTCapabilityBoundary",
     "productionChoices",
     "phaseAProductionIdentityFreeze",
     "phaseBCeremonyFunding",
@@ -23,7 +24,7 @@
       "const": "./iat-b3-production-identity-authority-evidence.v1.schema.json"
     },
     "schema": {
-      "const": "iat-b3-production-identity-authority-evidence/v1"
+      "const": "iat-b3-production-identity-authority-evidence/v3"
     },
     "profile": {
       "enum": ["PRODUCTION", "TEST_FIXTURE"]
@@ -40,12 +41,14 @@
           "C_DEPLOYED_IDENTITY_AUTHORITY_SEAL"
         ],
         "doesNotCertify": [
-          "PACKET_SELECTED_TRUST_KEYS",
-          "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SIGNED_OBSERVATIONS",
+          "PACKET_SELECTED_AUTOMATED_EVIDENCE_SOURCES",
+          "LIVE_RPC_OR_CHAIN_TRUTH_WITHOUT_TWO_SOURCE_BOUND_ENDPOINT_RECEIPTS",
           "FINAL_BINARY_TRUTH_WITHOUT_EXACT_BINDINGS",
-          "OWNER_OR_REVIEWER_IDENTITY_WITHOUT_EXTERNAL_TRUST_CONFIGURATION",
+          "OWNER_DECISION_OR_AUTOMATED_CLOSURE_TRUTH_WITHOUT_EXTERNAL_SOURCE_CONFIGURATION",
+          "MODEL_T_SOLANA_OCMS_CAPABILITY_WITHOUT_SEPARATE_SOURCE_BOUND_DEVICE_OBSERVATION",
+          "MODEL_T_HARDWARE_PROVENANCE_FROM_ED25519_SIGNATURE_BYTES_ALONE",
           "TRANSACTION_SIGNING_DEPLOYMENT_FUNDING_OR_ACTIVATION_AUTHORITY",
-          "INDEPENDENT_GATE_8_ACCEPTANCE",
+          "AUTOMATED_GATE_8_EVIDENCE_COMPLETION",
           "RELEASE_OR_MAINNET_EXECUTION_AUTHORIZATION"
         ]
       }
@@ -54,12 +57,12 @@
       "const": {
         "ownerPolicyFreeze": {
           "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-          "sha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+          "sha256": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
           "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
         },
         "identityInputFreeze": {
           "path": "projects/star-ascent/site/docs/b3/iat-b3-identity-freeze.v1.json",
-          "sha256": "a6811b48c739ee4570e7f13793a9bb324a6e44598f7852105f4afa2f73acfa29",
+          "sha256": "17bcf00f97c5fd95bc39fa9eff120fd7f7678ed77f9bc333c36189f44633cacf",
           "bindingScope": "EXACT_COMMITTED_INPUT_ONLY"
         },
         "costFeasibilityReference": {
@@ -67,6 +70,20 @@
           "sha256": "44684ef17a173e01eb36e9e7a0de3297b62c5f7b6aa1035f0d1995641ba3c289",
           "bindingScope": "REFERENCE_ONLY_NEVER_COMPLETION_EVIDENCE"
         }
+      }
+    },
+    "modelTCapabilityBoundary": {
+      "const": {
+        "predicate": "MODEL_T_SOLANA_OCMS_CAPABILITY_OBSERVED",
+        "requiredDeviceModel": "Trezor Model T",
+        "acceptedOcmsVersions": ["OCMS_V0", "OCMS_V1"],
+        "ocmsV0FirmwareRange": ">=2.12.1 <2.12.4",
+        "ocmsV1FirmwareRange": ">=2.12.4",
+        "sourceRequirement": "SEPARATE_EXTERNAL_SOURCE_BOUND_DEVICE_OBSERVATION_RECEIPT",
+        "signerPathAndPublicKeyMustMatchObservation": true,
+        "signatureBytesProveHardwareProvenance": false,
+        "rawEd25519OwnerDecisionAllowed": false,
+        "packetSelfAttestedCapabilityObserved": false
       }
     },
     "productionChoices": {
@@ -100,23 +117,23 @@
         "status",
         "subjectSha256",
         "ownerDecisionPreimageSha256",
-        "ownerAcceptance",
-        "mainnetGenesisObservations",
-        "independentReview",
+        "ownerDecisionReceipt",
+        "mainnetGenesisEndpointReceipts",
+        "automatedClosureReceipt",
         "blocker"
       ],
       "properties": {
         "status": { "enum": ["PENDING", "EVIDENCE_COMPLETE"] },
         "subjectSha256": { "$ref": "#/$defs/nullableSha256" },
         "ownerDecisionPreimageSha256": { "$ref": "#/$defs/nullableSha256" },
-        "ownerAcceptance": { "$ref": "#/$defs/nullableAttestation" },
-        "mainnetGenesisObservations": {
+        "ownerDecisionReceipt": { "$ref": "#/$defs/nullableOwnerDecisionReceipt" },
+        "mainnetGenesisEndpointReceipts": {
           "type": "array",
           "minItems": 0,
           "maxItems": 2,
-          "items": { "$ref": "#/$defs/attestation" }
+          "items": { "$ref": "#/$defs/receipt" }
         },
-        "independentReview": { "$ref": "#/$defs/nullableAttestation" },
+        "automatedClosureReceipt": { "$ref": "#/$defs/nullableReceipt" },
         "blocker": { "$ref": "#/$defs/nullableBlocker" }
       }
     },
@@ -137,9 +154,9 @@
         "aggregateRecoverableBufferLamports",
         "aggregateFeeBudgetLamports",
         "expiresAtUnixSeconds",
-        "fundingApproval",
-        "payerBalanceObservations",
-        "independentReview",
+        "fundingDecisionReceipt",
+        "payerBalanceEndpointReceipts",
+        "automatedClosureReceipt",
         "blocker"
       ],
       "properties": {
@@ -164,14 +181,14 @@
         "aggregateRecoverableBufferLamports": { "$ref": "#/$defs/nullableU64" },
         "aggregateFeeBudgetLamports": { "$ref": "#/$defs/nullableU64" },
         "expiresAtUnixSeconds": { "$ref": "#/$defs/nullableU64" },
-        "fundingApproval": { "$ref": "#/$defs/nullableAttestation" },
-        "payerBalanceObservations": {
+        "fundingDecisionReceipt": { "$ref": "#/$defs/nullableOwnerDecisionReceipt" },
+        "payerBalanceEndpointReceipts": {
           "type": "array",
           "minItems": 0,
           "maxItems": 2,
-          "items": { "$ref": "#/$defs/attestation" }
+          "items": { "$ref": "#/$defs/receipt" }
         },
-        "independentReview": { "$ref": "#/$defs/nullableAttestation" },
+        "automatedClosureReceipt": { "$ref": "#/$defs/nullableReceipt" },
         "blocker": { "$ref": "#/$defs/nullableBlocker" }
       }
     },
@@ -183,8 +200,8 @@
         "subjectSha256",
         "journal",
         "terminalState",
-        "terminalEndpointObservations",
-        "independentReview",
+        "terminalEndpointReceipts",
+        "automatedClosureReceipt",
         "blocker"
       ],
       "properties": {
@@ -216,13 +233,13 @@
           "items": false
         },
         "terminalState": { "$ref": "#/$defs/terminalState" },
-        "terminalEndpointObservations": {
+        "terminalEndpointReceipts": {
           "type": "array",
           "minItems": 0,
           "maxItems": 2,
-          "items": { "$ref": "#/$defs/attestation" }
+          "items": { "$ref": "#/$defs/receipt" }
         },
-        "independentReview": { "$ref": "#/$defs/nullableAttestation" },
+        "automatedClosureReceipt": { "$ref": "#/$defs/nullableReceipt" },
         "blocker": { "$ref": "#/$defs/nullableBlocker" }
       }
     },
@@ -232,7 +249,7 @@
         "deploymentAuthorized": false,
         "fundingSpendAuthorized": false,
         "activationAuthorized": false,
-        "independentGate8Accepted": false,
+        "automatedGate8EvidenceComplete": false,
         "releaseAuthorized": false,
         "mainnetExecutionAuthorized": false,
         "mainnetStatus": "HOLD"
@@ -276,14 +293,14 @@
         { "type": "string", "minLength": 24 }
       ]
     },
-    "attestation": {
+    "receipt": {
       "type": "object",
       "additionalProperties": false,
       "required": [
         "schema",
         "kind",
         "stage",
-        "keyId",
+        "sourceId",
         "observedAtUnixSeconds",
         "endpointSha256",
         "subjectSha256",
@@ -292,21 +309,19 @@
         "signatureBase64url"
       ],
       "properties": {
-        "schema": { "const": "iat-b3-production-identity-authority-attestation/v1" },
+        "schema": { "const": "iat-b3-production-identity-authority-automated-receipt/v3" },
         "kind": {
           "enum": [
-            "OWNER_IDENTITY_DECISION_ACCEPTANCE",
-            "MAINNET_GENESIS_OBSERVATION",
-            "INDEPENDENT_IDENTITY_REVIEW",
-            "OWNER_FUNDING_SOURCE_ACCEPTANCE",
-            "PAYER_BALANCE_OBSERVATION",
-            "INDEPENDENT_FUNDING_REVIEW",
-            "TERMINAL_AUTHORITY_STATE_OBSERVATION",
-            "INDEPENDENT_DEPLOYED_SEAL_REVIEW"
+            "MAINNET_GENESIS_ENDPOINT_RECEIPT",
+            "AUTOMATED_IDENTITY_CLOSURE_RECEIPT",
+            "PAYER_BALANCE_ENDPOINT_RECEIPT",
+            "AUTOMATED_FUNDING_CLOSURE_RECEIPT",
+            "TERMINAL_AUTHORITY_STATE_ENDPOINT_RECEIPT",
+            "AUTOMATED_DEPLOYED_SEAL_CLOSURE_RECEIPT"
           ]
         },
         "stage": { "enum": ["A", "B", "C"] },
-        "keyId": {
+        "sourceId": {
           "type": "string",
           "pattern": "^[a-z0-9][a-z0-9._:/-]{7,127}$"
         },
@@ -321,11 +336,108 @@
         }
       }
     },
-    "nullableAttestation": {
+    "nullableReceipt": {
       "anyOf": [
         { "type": "null" },
-        { "$ref": "#/$defs/attestation" }
+        { "$ref": "#/$defs/receipt" }
       ]
+    },
+    "ownerDecisionReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "kind",
+        "stage",
+        "sourceId",
+        "observedAtUnixSeconds",
+        "endpointSha256",
+        "subjectSha256",
+        "observationValue",
+        "decision",
+        "signatureScheme",
+        "ocmsVersion",
+        "signerDerivationPath",
+        "signerSolanaPublicKey",
+        "capabilityObservationSha256",
+        "ocmsApplicationDomainBase64url",
+        "decisionPayloadBase64url",
+        "decisionPayloadSha256",
+        "ocmsMessageBase64url",
+        "ocmsMessageSha256",
+        "ocmsEnvelopeBase64url",
+        "ocmsEnvelopeSha256",
+        "signatureBase64url"
+      ],
+      "properties": {
+        "schema": { "const": "iat-b3-production-identity-authority-owner-decision-ocms-receipt/v1" },
+        "kind": { "enum": ["OWNER_IDENTITY_DECISION_RECEIPT", "OWNER_FUNDING_DECISION_RECEIPT"] },
+        "stage": { "enum": ["A", "B"] },
+        "sourceId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:/-]{7,127}$" },
+        "observedAtUnixSeconds": { "$ref": "#/$defs/u64" },
+        "endpointSha256": { "type": "null" },
+        "subjectSha256": { "$ref": "#/$defs/sha256" },
+        "observationValue": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "decision": { "const": "ACCEPT" },
+        "signatureScheme": { "const": "TREZOR_MODEL_T_SOLANA_OCMS" },
+        "ocmsVersion": { "enum": ["OCMS_V0", "OCMS_V1"] },
+        "signerDerivationPath": { "type": "string", "pattern": "^m/44'/501'/(0|[1-9][0-9]*)'/(0|[1-9][0-9]*)'$" },
+        "signerSolanaPublicKey": { "$ref": "#/$defs/base58" },
+        "capabilityObservationSha256": { "$ref": "#/$defs/sha256" },
+        "ocmsApplicationDomainBase64url": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[A-Za-z0-9_-]{43}$" }
+          ]
+        },
+        "decisionPayloadBase64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
+        "decisionPayloadSha256": { "$ref": "#/$defs/sha256" },
+        "ocmsMessageBase64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
+        "ocmsMessageSha256": { "$ref": "#/$defs/sha256" },
+        "ocmsEnvelopeBase64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
+        "ocmsEnvelopeSha256": { "$ref": "#/$defs/sha256" },
+        "signatureBase64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]{86}$" }
+      }
+    },
+    "nullableOwnerDecisionReceipt": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/ownerDecisionReceipt" }
+      ]
+    },
+    "modelTCapabilityObservationReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "sourceId",
+        "observedAtUnixSeconds",
+        "ownerDecisionSourceId",
+        "deviceModel",
+        "firmwareVersion",
+        "capabilityPredicate",
+        "ocmsVersion",
+        "derivationPath",
+        "solanaPublicKey",
+        "observationClass",
+        "observationValue",
+        "signatureBase64url"
+      ],
+      "properties": {
+        "schema": { "const": "iat-b3-production-identity-authority-model-t-capability-observation/v1" },
+        "sourceId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:/-]{7,127}$" },
+        "observedAtUnixSeconds": { "$ref": "#/$defs/u64" },
+        "ownerDecisionSourceId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:/-]{7,127}$" },
+        "deviceModel": { "const": "Trezor Model T" },
+        "firmwareVersion": { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" },
+        "capabilityPredicate": { "const": "MODEL_T_SOLANA_OCMS_CAPABILITY_OBSERVED" },
+        "ocmsVersion": { "enum": ["OCMS_V0", "OCMS_V1"] },
+        "derivationPath": { "type": "string", "pattern": "^m/44'/501'/(0|[1-9][0-9]*)'/(0|[1-9][0-9]*)'$" },
+        "solanaPublicKey": { "$ref": "#/$defs/base58" },
+        "observationClass": { "enum": ["PRODUCTION_SOURCE_BOUND_DEVICE_OBSERVATION", "SYNTHETIC_SOFTWARE_TEST_FIXTURE"] },
+        "observationValue": { "const": "CAPABILITY_PRESENT" },
+        "signatureBase64url": { "type": "string", "pattern": "^[A-Za-z0-9_-]{86}$" }
+      }
     },
     "binaryBinding": {
       "type": "object",

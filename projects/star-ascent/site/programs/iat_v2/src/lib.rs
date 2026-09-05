@@ -31,16 +31,19 @@ pub const LIQUIDITY_BENEFICIARY: Pubkey = pubkey!("2d41i3afUpWuo2LqpuKao5D1ToEU8
 // are compiled into this source. Mainnet authorization remains controlled by
 // the independent evidence and hardware-signing gates outside this constant.
 pub const RANDOMNESS_ADAPTER_VERIFIED: bool = true;
-// CCC Agent/Associate agency selection is a separately reviewed future DLC.
-// Genesis has no instruction that can change this compile-time fail-closed gate.
-pub const CCC_DLC_GENESIS_ENABLED: bool = false;
+// V2 requires the reviewed CCC Agent/Associate selection path. Legacy Devnet
+// rounds are migrated explicitly before this artifact is exercised; Mainnet
+// authorization remains controlled by the external ceremony gates.
+pub const CCC_DLC_GENESIS_ENABLED: bool = true;
 pub const ROUND_PENDING: u8 = 0;
 pub const ROUND_SETTLED: u8 = 1;
 pub const ROUND_EXPIRED_NEUTRAL: u8 = 2;
+pub const LEGACY_ROUND_ACCOUNT_BYTES: usize = 198;
+pub const HARDENED_ROUND_ACCOUNT_BYTES: usize = 206;
 
-// CCC entrypoints deliberately return the fail-closed error in the Genesis
-// build. Anchor's generated dispatcher therefore contains known-diverging
-// branches for those handlers.
+// Every CCC entrypoint still checks the compile-time policy constant. The
+// reviewed Genesis artifact fixes it true and exposes no runtime activation or
+// operator-toggle instruction.
 #[program]
 pub mod iat_v2 {
     use super::*;
@@ -895,6 +898,260 @@ pub mod iat_v2 {
         });
         Ok(())
     }
+
+    /// Creates a terminal neutral record for a historically absent CCC round
+    /// on the explicitly marked rehearsal configuration. It never supplies
+    /// randomness or selects a winner, and production configurations reject it.
+    pub fn backfill_historical_neutral_round(
+        ctx: Context<BackfillHistoricalNeutralRound>,
+        week: u64,
+    ) -> Result<()> {
+        require!(
+            ctx.accounts.config.rehearsal_mode,
+            IatV2Error::HistoricalNeutralBackfillProductionForbidden
+        );
+        require_keys_eq!(
+            ctx.accounts.admin.key(),
+            PROGRAM_ADMIN,
+            IatV2Error::WrongHardwareAdministrator
+        );
+        require!(CCC_DLC_GENESIS_ENABLED, IatV2Error::CccDlcNotActive);
+        require!(ctx.accounts.config.active, IatV2Error::NotActive);
+        require!(
+            ctx.accounts.config.agency_count > 0,
+            IatV2Error::NoEligibleAgencies
+        );
+        require_isolated_iat_instruction(&ctx.accounts.instructions.to_account_info())?;
+
+        let previous_week = week
+            .checked_sub(1)
+            .ok_or(IatV2Error::HistoricalNeutralBackfillPreviousRoundInvalid)?;
+        let previous_week_bytes = previous_week.to_le_bytes();
+        let (expected_previous_round, _) = Pubkey::find_program_address(
+            &[
+                b"round",
+                ctx.accounts.config.key().as_ref(),
+                &previous_week_bytes,
+            ],
+            &crate::ID,
+        );
+        require_keys_eq!(
+            ctx.accounts.previous_round.key(),
+            expected_previous_round,
+            IatV2Error::HistoricalNeutralBackfillPreviousRoundInvalid
+        );
+        require_eq!(
+            ctx.accounts.previous_round.week,
+            previous_week,
+            IatV2Error::HistoricalNeutralBackfillPreviousRoundInvalid
+        );
+        require!(
+            matches!(
+                ctx.accounts.previous_round.status,
+                ROUND_SETTLED | ROUND_EXPIRED_NEUTRAL
+            ),
+            IatV2Error::HistoricalNeutralBackfillPreviousRoundNotTerminal
+        );
+        require!(
+            historical_neutral_snapshot_matches(
+                ctx.accounts.previous_round.agency_count_snapshot,
+                ctx.accounts.previous_round.agency_registry_hash_snapshot,
+                ctx.accounts.config.agency_count,
+                ctx.accounts.config.agency_registry_hash,
+            ),
+            IatV2Error::HistoricalNeutralBackfillAgencySnapshotMismatch
+        );
+
+        let clock = Clock::get()?;
+        let current_round =
+            current_ccc_round(ctx.accounts.config.genesis_timestamp, clock.unix_timestamp)
+                .ok_or(IatV2Error::CccSelectionNotOpen)?;
+        require!(
+            week < current_round,
+            IatV2Error::HistoricalNeutralBackfillNotHistorical
+        );
+        let canonical_selection_timestamp =
+            ccc_round_selection_timestamp(ctx.accounts.config.genesis_timestamp, week)
+                .ok_or(IatV2Error::ArithmeticOverflow)?;
+        require!(
+            ccc_round_recovery_available(canonical_selection_timestamp, clock.unix_timestamp)
+                .ok_or(IatV2Error::ArithmeticOverflow)?,
+            IatV2Error::HistoricalNeutralBackfillTimeoutNotReached
+        );
+        let neutral_recovery_timestamp = canonical_selection_timestamp
+            .checked_add(CCC_REVEAL_TIMEOUT_SECONDS)
+            .ok_or(IatV2Error::ArithmeticOverflow)?;
+
+        let round = &mut ctx.accounts.round;
+        round.config = ctx.accounts.config.key();
+        round.randomness_account = Pubkey::default();
+        round.week = week;
+        round.commit_slot = 0;
+        round.commit_timestamp = canonical_selection_timestamp;
+        round.randomness = [0; 32];
+        round.agency_registry_hash_snapshot =
+            ctx.accounts.previous_round.agency_registry_hash_snapshot;
+        let config_bytes = ctx.accounts.config.key().to_bytes();
+        round.decision_context =
+            ccc_tiebreak_context(&config_bytes, week, round.agency_registry_hash_snapshot);
+        round.agency_count_snapshot = ctx.accounts.previous_round.agency_count_snapshot;
+        round.selected_agency_index = u32::MAX;
+        round.derivation_counter = u32::MAX;
+        round.status = ROUND_EXPIRED_NEUTRAL;
+        round.bump = ctx.bumps.round;
+
+        emit!(HistoricalNeutralRoundBackfilled {
+            config: round.config,
+            round: round.key(),
+            week,
+            canonical_selection_timestamp,
+            neutral_recovery_timestamp,
+            agency_count_snapshot: round.agency_count_snapshot,
+            agency_registry_hash_snapshot: round.agency_registry_hash_snapshot,
+            decision_context: round.decision_context,
+        });
+        Ok(())
+    }
+
+    pub fn migrate_legacy_round(ctx: Context<MigrateLegacyRound>) -> Result<()> {
+        let round_info = ctx.accounts.round.to_account_info();
+        require_keys_eq!(
+            *round_info.owner,
+            crate::ID,
+            IatV2Error::LegacyRoundWrongOwner
+        );
+
+        let (legacy_config, week, status, bump) = {
+            let data = round_info.try_borrow_data()?;
+            parse_legacy_round_header(&data)?
+        };
+        require_keys_eq!(
+            legacy_config,
+            ctx.accounts.config.key(),
+            IatV2Error::LegacyRoundWrongConfig
+        );
+        require_eq!(status, ROUND_SETTLED, IatV2Error::LegacyRoundMustBeSettled);
+        let week_bytes = week.to_le_bytes();
+        let (expected_round, expected_bump) = Pubkey::find_program_address(
+            &[b"round", ctx.accounts.config.key().as_ref(), &week_bytes],
+            &crate::ID,
+        );
+        require_keys_eq!(
+            expected_round,
+            round_info.key(),
+            IatV2Error::LegacyRoundWrongPda
+        );
+        require_eq!(bump, expected_bump, IatV2Error::LegacyRoundWrongPda);
+
+        let required_lamports = Rent::get()?.minimum_balance(HARDENED_ROUND_ACCOUNT_BYTES);
+        let current_lamports = round_info.lamports();
+        if current_lamports < required_lamports {
+            anchor_lang::system_program::transfer(
+                CpiContext::new(
+                    ctx.accounts.system_program.key(),
+                    anchor_lang::system_program::Transfer {
+                        from: ctx.accounts.admin.to_account_info(),
+                        to: round_info.clone(),
+                    },
+                ),
+                required_lamports - current_lamports,
+            )?;
+        }
+        round_info.resize(HARDENED_ROUND_ACCOUNT_BYTES)?;
+        {
+            let mut data = round_info.try_borrow_mut_data()?;
+            rewrite_legacy_round_data(&mut data)?;
+        }
+        Ok(())
+    }
+}
+
+fn parse_legacy_round_header(data: &[u8]) -> Result<(Pubkey, u64, u8, u8)> {
+    require_eq!(
+        data.len(),
+        LEGACY_ROUND_ACCOUNT_BYTES,
+        IatV2Error::LegacyRoundWrongSize
+    );
+    require!(
+        &data[..8] == Round::DISCRIMINATOR,
+        IatV2Error::LegacyRoundWrongDiscriminator
+    );
+    let config = Pubkey::new_from_array(
+        data[8..40]
+            .try_into()
+            .map_err(|_| IatV2Error::LegacyRoundWrongSize)?,
+    );
+    let week = u64::from_le_bytes(
+        data[72..80]
+            .try_into()
+            .map_err(|_| IatV2Error::LegacyRoundWrongSize)?,
+    );
+    Ok((config, week, data[196], data[197]))
+}
+
+fn rewrite_legacy_round_data(data: &mut [u8]) -> Result<()> {
+    require_eq!(
+        data.len(),
+        HARDENED_ROUND_ACCOUNT_BYTES,
+        IatV2Error::LegacyRoundWrongSize
+    );
+    require!(
+        &data[..8] == Round::DISCRIMINATOR,
+        IatV2Error::LegacyRoundWrongDiscriminator
+    );
+    data.copy_within(88..LEGACY_ROUND_ACCOUNT_BYTES, 96);
+    data[88..96].fill(0);
+    Ok(())
+}
+
+#[cfg(test)]
+mod legacy_round_migration_tests {
+    use super::*;
+
+    fn settled_legacy_round(config: Pubkey, week: u64, bump: u8) -> Vec<u8> {
+        let mut data = vec![0u8; LEGACY_ROUND_ACCOUNT_BYTES];
+        data[..8].copy_from_slice(&Round::DISCRIMINATOR);
+        data[8..40].copy_from_slice(config.as_ref());
+        data[40..72].fill(7);
+        data[72..80].copy_from_slice(&week.to_le_bytes());
+        data[80..88].copy_from_slice(&1234u64.to_le_bytes());
+        data[88..120].fill(11);
+        data[120..152].fill(13);
+        data[152..184].fill(17);
+        data[184..188].copy_from_slice(&2u32.to_le_bytes());
+        data[188..192].copy_from_slice(&1u32.to_le_bytes());
+        data[192..196].copy_from_slice(&0u32.to_le_bytes());
+        data[196] = ROUND_SETTLED;
+        data[197] = bump;
+        data
+    }
+
+    #[test]
+    fn settled_legacy_round_inserts_zero_timestamp_without_changing_fields() {
+        let config = Pubkey::new_unique();
+        let mut data = settled_legacy_round(config, 8, 253);
+        let original = data.clone();
+        assert_eq!(
+            parse_legacy_round_header(&data).unwrap(),
+            (config, 8, ROUND_SETTLED, 253)
+        );
+        data.resize(HARDENED_ROUND_ACCOUNT_BYTES, 0);
+        rewrite_legacy_round_data(&mut data).unwrap();
+        assert_eq!(&data[..88], &original[..88]);
+        assert_eq!(&data[88..96], &[0u8; 8]);
+        assert_eq!(&data[96..], &original[88..]);
+    }
+
+    #[test]
+    fn migration_parser_rejects_nonlegacy_size_and_discriminator() {
+        let config = Pubkey::new_unique();
+        let mut data = settled_legacy_round(config, 7, 251);
+        data[0] ^= 1;
+        assert!(parse_legacy_round_header(&data).is_err());
+        data[0] ^= 1;
+        data.push(0);
+        assert!(parse_legacy_round_header(&data).is_err());
+    }
 }
 
 fn beneficiary(lane: u8) -> Result<Pubkey> {
@@ -916,6 +1173,138 @@ fn week_for(config: &Config) -> Result<u64> {
 fn ccc_round_for(config: &Config) -> Result<u64> {
     current_ccc_round(config.genesis_timestamp, Clock::get()?.unix_timestamp)
         .ok_or_else(|| error!(IatV2Error::CccSelectionNotOpen))
+}
+
+fn require_isolated_iat_instruction(instructions: &AccountInfo<'_>) -> Result<()> {
+    let current_index = usize::from(
+        load_current_index_checked(instructions)
+            .map_err(|_| IatV2Error::HistoricalNeutralBackfillTransactionNotIsolated)?,
+    );
+    let current_instruction = load_instruction_at_checked(current_index, instructions)
+        .map_err(|_| IatV2Error::HistoricalNeutralBackfillTransactionNotIsolated)?;
+    require_keys_eq!(
+        current_instruction.program_id,
+        crate::ID,
+        IatV2Error::HistoricalNeutralBackfillTransactionNotIsolated
+    );
+    let mut index = 0usize;
+    loop {
+        let instruction = match load_instruction_at_checked(index, instructions) {
+            Ok(instruction) => instruction,
+            Err(_) => break,
+        };
+        require!(
+            instruction.program_id != crate::ID || index == current_index,
+            IatV2Error::HistoricalNeutralBackfillTransactionNotIsolated
+        );
+        index = index.checked_add(1).ok_or(IatV2Error::ArithmeticOverflow)?;
+    }
+    require!(
+        index > current_index,
+        IatV2Error::HistoricalNeutralBackfillTransactionNotIsolated
+    );
+    Ok(())
+}
+
+fn historical_neutral_snapshot_matches(
+    previous_count: u32,
+    previous_hash: [u8; 32],
+    current_count: u32,
+    current_hash: [u8; 32],
+) -> bool {
+    previous_count == current_count && previous_hash == current_hash
+}
+
+#[cfg(test)]
+mod isolated_backfill_instruction_tests {
+    use super::*;
+    use anchor_lang::solana_program::sysvar::instructions::{
+        construct_instructions_data, BorrowedInstruction,
+    };
+    use solana_instructions_sysvar::store_current_index_checked;
+
+    #[test]
+    fn wrapper_cpi_shape_and_second_iat_instruction_are_rejected() {
+        let wrapper = Pubkey::new_unique();
+        let compute_budget = Pubkey::new_unique();
+        let data = [167, 170, 28, 248, 5, 118, 93, 117];
+        let iat = BorrowedInstruction {
+            program_id: &crate::ID,
+            accounts: vec![],
+            data: &data,
+        };
+        let compute = BorrowedInstruction {
+            program_id: &compute_budget,
+            accounts: vec![],
+            data: &[],
+        };
+        let wrapper_call = BorrowedInstruction {
+            program_id: &wrapper,
+            accounts: vec![],
+            data: &data,
+        };
+        let key = INSTRUCTIONS_SYSVAR_ID;
+        let owner = Pubkey::new_unique();
+
+        let mut lamports = 0;
+        let mut direct_data = construct_instructions_data(&[compute, iat]);
+        store_current_index_checked(&mut direct_data, 1).unwrap();
+        let direct = AccountInfo::new(
+            &key,
+            false,
+            false,
+            &mut lamports,
+            &mut direct_data,
+            &owner,
+            false,
+        );
+        assert!(require_isolated_iat_instruction(&direct).is_ok());
+
+        let mut wrapper_lamports = 0;
+        let mut wrapper_data = construct_instructions_data(&[wrapper_call]);
+        store_current_index_checked(&mut wrapper_data, 0).unwrap();
+        let wrapper_current = AccountInfo::new(
+            &key,
+            false,
+            false,
+            &mut wrapper_lamports,
+            &mut wrapper_data,
+            &owner,
+            false,
+        );
+        assert!(require_isolated_iat_instruction(&wrapper_current).is_err());
+
+        let iat_first = BorrowedInstruction {
+            program_id: &crate::ID,
+            accounts: vec![],
+            data: &data,
+        };
+        let iat_again = BorrowedInstruction {
+            program_id: &crate::ID,
+            accounts: vec![],
+            data: &data,
+        };
+        let mut doubled_lamports = 0;
+        let mut doubled_data = construct_instructions_data(&[iat_first, iat_again]);
+        store_current_index_checked(&mut doubled_data, 0).unwrap();
+        let doubled = AccountInfo::new(
+            &key,
+            false,
+            false,
+            &mut doubled_lamports,
+            &mut doubled_data,
+            &owner,
+            false,
+        );
+        assert!(require_isolated_iat_instruction(&doubled).is_err());
+    }
+
+    #[test]
+    fn historical_neutral_denominator_requires_the_exact_previous_snapshot() {
+        assert!(historical_neutral_snapshot_matches(2, [7; 32], 2, [7; 32]));
+        assert!(!historical_neutral_snapshot_matches(1, [7; 32], 2, [7; 32]));
+        assert!(!historical_neutral_snapshot_matches(2, [6; 32], 2, [7; 32]));
+    }
 }
 
 fn verify_community_funding(
@@ -1645,6 +2034,43 @@ pub struct ExpireRound<'info> {
     pub round: Account<'info, Round>,
 }
 
+#[derive(Accounts)]
+#[instruction(week: u64)]
+pub struct BackfillHistoricalNeutralRound<'info> {
+    #[account(mut, address = config.admin)]
+    pub admin: Signer<'info>,
+    pub config: Account<'info, Config>,
+    /// CHECK: address is pinned to the canonical instructions sysvar. The
+    /// handler rejects any second IAT instruction in this transaction so each
+    /// historical round requires its own physical approval and transaction.
+    #[account(address = INSTRUCTIONS_SYSVAR_ID)]
+    pub instructions: UncheckedAccount<'info>,
+    #[account(has_one = config)]
+    pub previous_round: Account<'info, Round>,
+    #[account(
+        init,
+        payer = admin,
+        space = 8 + Round::INIT_SPACE,
+        seeds = [b"round", config.key().as_ref(), &week.to_le_bytes()],
+        bump
+    )]
+    pub round: Account<'info, Round>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct MigrateLegacyRound<'info> {
+    #[account(mut, address = config.admin)]
+    pub admin: Signer<'info>,
+    pub config: Account<'info, Config>,
+    /// CHECK: the handler requires the exact program owner, discriminator,
+    /// legacy byte length, settled status, config, PDA seeds, and bump before
+    /// reallocating and inserting the hardened commit timestamp field.
+    #[account(mut)]
+    pub round: UncheckedAccount<'info>,
+    pub system_program: Program<'info, System>,
+}
+
 #[account]
 #[derive(InitSpace)]
 pub struct Config {
@@ -1801,6 +2227,18 @@ pub struct RoundExpiredNeutral {
     pub decision_context: [u8; 32],
 }
 
+#[event]
+pub struct HistoricalNeutralRoundBackfilled {
+    pub config: Pubkey,
+    pub round: Pubkey,
+    pub week: u64,
+    pub canonical_selection_timestamp: i64,
+    pub neutral_recovery_timestamp: i64,
+    pub agency_count_snapshot: u32,
+    pub agency_registry_hash_snapshot: [u8; 32],
+    pub decision_context: [u8; 32],
+}
+
 #[error_code]
 pub enum IatV2Error {
     #[msg("The reviewed Model T administrator must sign this instruction.")]
@@ -1867,7 +2305,7 @@ pub enum IatV2Error {
     NoEligibleAgencies,
     #[msg("Unknown eligibility role.")]
     UnknownRole,
-    #[msg("CCC Agent/Associate agency selection is an inactive future DLC and is not available at Genesis.")]
+    #[msg("CCC Agent/Associate agency selection is not compiled active in this artifact.")]
     CccDlcNotActive,
     #[msg("A standard position cannot link a CCC agency.")]
     StandardCannotLinkAgency,
@@ -1925,6 +2363,32 @@ pub enum IatV2Error {
     CccSelectionNotOpen,
     #[msg("This CCC round was already settled; rerolls are forbidden.")]
     RoundAlreadySettled,
+    #[msg("The legacy CCC round account is not owned by this program.")]
+    LegacyRoundWrongOwner,
+    #[msg("The legacy CCC round account has an unexpected byte length.")]
+    LegacyRoundWrongSize,
+    #[msg("The legacy CCC round account discriminator is invalid.")]
+    LegacyRoundWrongDiscriminator,
+    #[msg("The legacy CCC round belongs to a different configuration.")]
+    LegacyRoundWrongConfig,
+    #[msg("Only terminal settled legacy CCC rounds may be migrated.")]
+    LegacyRoundMustBeSettled,
+    #[msg("The legacy CCC round PDA or bump is invalid.")]
+    LegacyRoundWrongPda,
+    #[msg("Historical neutral round backfill is forbidden on production configurations.")]
+    HistoricalNeutralBackfillProductionForbidden,
+    #[msg("Historical neutral round backfill requires a strictly earlier CCC round.")]
+    HistoricalNeutralBackfillNotHistorical,
+    #[msg("The historical round's canonical neutral-recovery timeout has not elapsed.")]
+    HistoricalNeutralBackfillTimeoutNotReached,
+    #[msg("A historical neutral backfill must be the only IAT instruction in its transaction.")]
+    HistoricalNeutralBackfillTransactionNotIsolated,
+    #[msg("Historical neutral backfill requires the exact prior-week round PDA.")]
+    HistoricalNeutralBackfillPreviousRoundInvalid,
+    #[msg("Historical neutral backfill requires a terminal prior-week round.")]
+    HistoricalNeutralBackfillPreviousRoundNotTerminal,
+    #[msg("The prior round snapshot does not prove the current append-only agency registry.")]
+    HistoricalNeutralBackfillAgencySnapshotMismatch,
     #[msg("The CCC reveal window has expired; only terminal neutral recovery is allowed.")]
     RoundRevealWindowExpired,
     #[msg("The CCC reveal timeout has not elapsed.")]

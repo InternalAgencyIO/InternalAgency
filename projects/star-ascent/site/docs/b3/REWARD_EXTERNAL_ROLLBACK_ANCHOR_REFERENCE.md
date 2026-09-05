@@ -113,7 +113,7 @@ of broader facts. Depending on the artifact, these fields remain false:
 - `externalMonotonicityVerified`;
 - `externalRollbackProtectionVerified`;
 - `runtimeIntegrationVerified`;
-- `independentReviewAccepted`; and
+- `sourceBoundAutomatedDirectEvidenceVerified`; and
 - `activationReady`.
 
 Every artifact remains `mainnetStatus: "HOLD"`. A configured public key and a
@@ -138,10 +138,11 @@ requires:
 
 1. owner-approved production provider, tenant, resource, namespace, trust
    roots, key registry, key custody, and revocation evidence;
-2. independently verified single-copy linearizable provider read/CAS semantics;
+2. source-bound automated verification of single-copy linearizable provider
+   read/CAS semantics;
 3. an external append-only or hardware-backed monotonic store that detects
    provider snapshot, backup, and control-plane rollback;
-4. atomic durable persistence of both next states, or a reviewed recovery
+4. atomic durable persistence of both next states, or a source-bound recovery
    protocol that cannot accept an old pair after partial commit;
 5. exact runtime bridging from the validated local checkpoint/snapshot into
    this signed request and from the receipt into the guarded local write and
@@ -151,8 +152,8 @@ requires:
 7. enforcement against direct-store and alternate-client bypasses;
 8. exact production identities and final-binary adversarial Devnet evidence;
    and
-9. independent security, operations, economic, privacy, legal, and disaster-
-   recovery review plus terminal authorization.
+9. source-bound automated security, operations, economic, privacy, legal, and
+   disaster-recovery evidence plus terminal authorization.
 
 No request, anchor, state, or receipt produced here is a provider credential,
 network observation, durable write, reward authorization, Devnet result,

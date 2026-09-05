@@ -48,8 +48,8 @@ function evidenceFor(manifest, sectionId) {
     artifactSha256: FIXTURE.evidenceArtifactSha256BySection[sectionId],
     subjectBindingSha256: providerReadinessSubjectBindingSha256(manifest),
     policySha256: providerReadinessEvidencePolicySha256(manifest, sectionId),
-    independentObserverId: FIXTURE.independentObserverId,
-    observerIdentitySha256: FIXTURE.observerIdentitySha256,
+    automatedEvidenceSourceId: FIXTURE.automatedEvidenceSourceId,
+    evidenceSourceIdentitySha256: FIXTURE.evidenceSourceIdentitySha256,
     capturedAtUnixSeconds: FIXTURE.capturedAtUnixSeconds,
     validThroughUnixSeconds: FIXTURE.validThroughUnixSeconds,
     environment: manifest.profile,
@@ -116,7 +116,7 @@ test("the production provider-readiness manifest is strict, honestly BLOCKED, nu
   assert.equal(result.mainnetOrReleaseReady, false);
   assert.equal("productionReady" in result, false);
   assert.equal(result.mainnetStatus, "HOLD");
-  assert.equal(PROVIDER_READINESS_SCHEMA, "iat-b3-external-checkpoint-provider-readiness/v1");
+  assert.equal(PROVIDER_READINESS_SCHEMA, "iat-b3-external-checkpoint-provider-readiness/v2");
   assert.equal(PROVIDER_READINESS_STATUS, "NON_ACTIVATING_PROVIDER_READINESS_REVIEW_PACKET");
   assert.equal(PROVIDER_READINESS_MAINNET_STATUS, "HOLD");
   for (const flag of [
@@ -177,7 +177,7 @@ test("a complete explicitly authorized fixture proves packet structure without p
   assert.match(unauthorized.violations.join("\n"), /requires explicit allowTestFixture/u);
 });
 
-test("fixture provider, subject, key, observer, policy, evidence, and DR values cannot be relabeled as production", () => {
+test("fixture provider, subject, key, evidence source, policy, evidence, and DR values cannot be relabeled as production", () => {
   const manifest = completeFixture();
   manifest.profile = "PRODUCTION";
   manifest.subjectBinding.environment = "PRODUCTION";
@@ -196,7 +196,7 @@ test("fixture provider, subject, key, observer, policy, evidence, and DR values 
     "providerLegalEntityId",
     "resourceId",
     "receiptTrustRootSha256",
-    "observerIdentitySha256",
+    "evidenceSourceIdentitySha256",
     "artifactSha256",
   ]) assert.match(result.violations.join("\n"), new RegExp(expected, "u"));
 });
@@ -250,7 +250,7 @@ test("the exact ordered controls and terminal predicate cannot be omitted, dupli
   }, /exact ordered control claims/u);
 });
 
-test("content-addressed evidence binds exact subject and policy, is unique and independently observed", () => {
+test("content-addressed evidence binds exact subject and policy, is unique and bound to an automated evidence source", () => {
   expectNotReady((value) => {
     value.controlRequirements[0].evidence.subjectBindingSha256 = "aa".repeat(32);
   }, /bind the exact subject/u);
@@ -261,10 +261,10 @@ test("content-addressed evidence binds exact subject and policy, is unique and i
     value.controlRequirements[2].evidence.artifactSha256 = value.controlRequirements[1].evidence.artifactSha256;
   }, /duplicate evidence artifact digest/u);
   expectNotReady((value) => {
-    value.controlRequirements[3].evidence.independentObserverId = value.providerBinding.resourceId;
-  }, /observer cannot be a provider/u);
+    value.controlRequirements[3].evidence.automatedEvidenceSourceId = value.providerBinding.resourceId;
+  }, /evidence source cannot be a provider/u);
   expectNotReady((value) => {
-    value.controlRequirements[4].evidence.independentObserverId = "https://generic.example/reviewer";
+    value.controlRequirements[4].evidence.automatedEvidenceSourceId = "https://generic.example/evidence source";
   }, /not a URL/u);
   expectNotReady((value) => {
     value.controlRequirements[5].evidence.artifactSha256 = value.controlRequirements[5].evidence.artifactSha256.toUpperCase();

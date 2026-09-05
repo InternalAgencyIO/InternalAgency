@@ -9,8 +9,8 @@ const root = process.cwd();
 const repoRoot = resolve(root, "../../..");
 const auditDir = join(root, "public", "audits", "localization-qa-20260803");
 const activeArtifactRun = {
-  id: "2026-08-08-pending-visible-source-refresh-v1",
-  recordedAt: "2026-08-08T09:15:18Z",
+  id: "2026-08-28-proof-pending-visible-source-recapture-v1",
+  recordedAt: "2026-08-28T02:32:07Z",
 };
 const trackedFiles = [
   "app/i18n/language-qa-checks.v1.json",

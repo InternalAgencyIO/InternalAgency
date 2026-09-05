@@ -90,8 +90,6 @@ const findCredentialBearingValue = (value, path = "checklist") => {
 const requiredRoles = {
   mintAuthoritySigner: "SIGNER",
   feePayerSigner: "SIGNER",
-  independentVerifier: "VERIFIER",
-  publicationOperator: "PUBLISHER",
 };
 const requiredAllocationNames = ["community", "treasury", "ecosystem", "coreTeam", "liquidity"];
 const hasExactKeys = (value, keys) => value && typeof value === "object" && !Array.isArray(value)
@@ -101,22 +99,12 @@ const hasExactKeys = (value, keys) => value && typeof value === "object" && !Arr
 if (!['HOLD', 'READY'].includes(checklist.status)) fail("status must be HOLD or READY");
 if (checklist.network !== "mainnet-beta") fail("network must be mainnet-beta"); else ok("mainnet-beta selected");
 if (checklist.manifestPath !== canonicalManifestPath) fail("manifestPath must point to the canonical Genesis manifest");
-// The publication operator is an accountability role, never an alternate
-// signer. Keep that separation explicit in every state so a READY ceremony
-// cannot silently weaken the authority boundary after HOLD review.
-if (checklist.participants?.publicationOperator?.hasNoSigningAuthority !== true) {
-  fail("publication operator must affirm hasNoSigningAuthority: true");
-} else {
-  ok("publication operator has no signing authority");
-}
 const canonicalRecordShapes = [
   ["checklist", checklist, ["status", "network", "manifestPath", "participants", "ceremonyControls"]],
-  ["participants", checklist.participants, ["mintAuthoritySigner", "feePayerSigner", "independentVerifier", "publicationOperator"]],
+  ["participants", checklist.participants, ["mintAuthoritySigner", "feePayerSigner"]],
   ["participants.mintAuthoritySigner", checklist.participants?.mintAuthoritySigner, ["role", "publicAddress", "physicalConfirmationRequired", "devicePathReviewed"]],
   ["participants.feePayerSigner", checklist.participants?.feePayerSigner, ["role", "publicAddress", "physicalConfirmationRequired", "devicePathReviewed"]],
-  ["participants.independentVerifier", checklist.participants?.independentVerifier, ["role", "publicAddress", "reviewedManifest", "reviewedDestinations"]],
-  ["participants.publicationOperator", checklist.participants?.publicationOperator, ["role", "publicAddress", "hasNoSigningAuthority", "reviewedHoldControls"]],
-  ["ceremonyControls", checklist.ceremonyControls, ["noSecretsInChecklist", "noBlindApproval", "recipientAddressesCheckedAgainstManifest", "signerAddressesCheckedAgainstManifest", "holdOwnerConfirmed", "reviewedRecipientDestinations", "manifestSha256", "readyAtUtc"]],
+  ["ceremonyControls", checklist.ceremonyControls, ["observationMode", "humanReviewerRequired", "noSelfAttestation", "trezorModelTPhysicalConfirmationIsSoleHumanGate", "automaticBroadcastPermitted", "noSecretsInChecklist", "noBlindApproval", "recipientAddressesCheckedAgainstManifest", "signerAddressesCheckedAgainstManifest", "mainnetHoldObserved", "reviewedRecipientDestinations", "manifestSha256", "readyAtUtc"]],
   ["ceremonyControls.reviewedRecipientDestinations", checklist.ceremonyControls?.reviewedRecipientDestinations, requiredAllocationNames],
   ...requiredAllocationNames.map((name) => [`ceremonyControls.reviewedRecipientDestinations.${name}`, checklist.ceremonyControls?.reviewedRecipientDestinations?.[name], ["publicAddress", "expectedBaseUnitAmount"]]),
 ];
@@ -161,11 +149,15 @@ for (const [name, role] of Object.entries(requiredRoles)) {
 
 if (checklist.ceremonyControls?.noSecretsInChecklist !== true) fail("checklist must explicitly prohibit secrets");
 if (checklist.ceremonyControls?.noBlindApproval !== true) fail("checklist must explicitly prohibit blind approval");
-if (checklist.participants?.publicationOperator?.hasNoSigningAuthority !== true) fail("publication operator must not have signing authority");
+if (checklist.ceremonyControls?.observationMode !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION") fail("checklist must use automated source/receipt/state observation");
+if (checklist.ceremonyControls?.humanReviewerRequired !== false) fail("checklist must not require a human reviewer");
+if (checklist.ceremonyControls?.noSelfAttestation !== true) fail("checklist must reject self-attestation");
+if (checklist.ceremonyControls?.trezorModelTPhysicalConfirmationIsSoleHumanGate !== true) fail("Model T physical confirmation must be the sole human gate");
+if (checklist.ceremonyControls?.automaticBroadcastPermitted !== false) fail("checklist must forbid automatic broadcast");
 // Physical confirmation is a standing ceremony boundary, not a READY-only
 // convenience. Requiring it while HOLD is active prevents a checklist from
 // retaining the right structure but silently dropping the required device
-// confirmation before reviewers move it to READY.
+// confirmation before automated observations can move it to READY.
 for (const name of ["mintAuthoritySigner", "feePayerSigner"]) {
   if (checklist.participants?.[name]?.physicalConfirmationRequired !== true) {
     fail(`checklist requires physical confirmation for ${name} in every state`);
@@ -190,15 +182,7 @@ if (checklist.status === "HOLD") {
       fail(`HOLD requires participants.${name}.devicePathReviewed to be false`);
     }
   }
-  for (const field of ["reviewedManifest", "reviewedDestinations"]) {
-    if (checklist.participants?.independentVerifier?.[field] !== false) {
-      fail(`HOLD requires participants.independentVerifier.${field} to be false`);
-    }
-  }
-  if (checklist.participants?.publicationOperator?.reviewedHoldControls !== false) {
-    fail("HOLD requires participants.publicationOperator.reviewedHoldControls to be false");
-  }
-  for (const field of ["recipientAddressesCheckedAgainstManifest", "signerAddressesCheckedAgainstManifest", "holdOwnerConfirmed", "manifestSha256", "readyAtUtc"]) {
+  for (const field of ["recipientAddressesCheckedAgainstManifest", "signerAddressesCheckedAgainstManifest", "mainnetHoldObserved", "manifestSha256", "readyAtUtc"]) {
     const expected = ["manifestSha256", "readyAtUtc"].includes(field) ? null : false;
     if (checklist.ceremonyControls?.[field] !== expected) {
       fail(`HOLD requires ceremonyControls.${field} to be ${JSON.stringify(expected)}`);
@@ -221,7 +205,7 @@ if (checklist.status === "READY") {
   } else {
     ok("canonical Genesis manifest remains HOLD for the pre-Genesis signing review");
   }
-  // A matching digest proves only that reviewers saw this byte sequence. The
+  // A matching digest proves only that automation observed this byte sequence. The
   // manifest must still clear its own canonical gate before that review can
   // authorize a signing ceremony; otherwise a freshly hashed malformed
   // manifest could inherit READY status from an otherwise complete checklist.
@@ -243,20 +227,10 @@ if (checklist.status === "READY") {
   }
   const mintAuthorityAddress = checklist.participants?.mintAuthoritySigner?.publicAddress;
   const feePayerAddress = checklist.participants?.feePayerSigner?.publicAddress;
-  const independentVerifierAddress = checklist.participants?.independentVerifier?.publicAddress;
-  const publicationOperatorAddress = checklist.participants?.publicationOperator?.publicAddress;
   if (isUsableSolanaAddress(mintAuthorityAddress)
     && isUsableSolanaAddress(feePayerAddress)
     && mintAuthorityAddress !== feePayerAddress) {
     fail("READY requires mintAuthoritySigner and feePayerSigner to share one reviewed physical signing address");
-  }
-  const accountableAddresses = [
-    mintAuthorityAddress,
-    independentVerifierAddress,
-    publicationOperatorAddress,
-  ].filter(isUsableSolanaAddress);
-  if (accountableAddresses.length === 3 && new Set(accountableAddresses).size !== accountableAddresses.length) {
-    fail("READY requires the shared signer, independent verifier, and publication operator addresses to be distinct");
   }
   // A mint account is a program-owned record, never a ceremony identity. Once
   // the manifest is published, make that separation explicit so a copied mint
@@ -294,13 +268,10 @@ if (checklist.status === "READY") {
     if (reviewedManifest.status === "PUBLISHED" && recipientAddresses.includes(reviewedManifest.token?.mint)) {
       fail("READY recipient review addresses must be separate from the published mint address");
     }
-    if (recipientAddresses.length === requiredAllocationNames.length && !process.exitCode) ok("every allocation recipient address is independently recorded and distinct");
+    if (recipientAddresses.length === requiredAllocationNames.length && !process.exitCode) ok("every allocation recipient address is source-bound and distinct");
     if (reviewedManifest.status === "PUBLISHED" && !process.exitCode) ok("reviewed recipient addresses match the published manifest destinations");
   }
-  if (checklist.participants?.independentVerifier?.reviewedManifest !== true) fail("READY requires independent manifest review");
-  if (checklist.participants?.independentVerifier?.reviewedDestinations !== true) fail("READY requires independent destination review");
-  if (checklist.participants?.publicationOperator?.reviewedHoldControls !== true) fail("READY requires the publication operator to review HOLD controls");
-  for (const field of ["recipientAddressesCheckedAgainstManifest", "signerAddressesCheckedAgainstManifest", "holdOwnerConfirmed"]) {
+  for (const field of ["recipientAddressesCheckedAgainstManifest", "signerAddressesCheckedAgainstManifest", "mainnetHoldObserved"]) {
     if (checklist.ceremonyControls?.[field] !== true) fail(`READY requires ${field}: true`);
   }
   if (!isCanonicalDigest(checklist.ceremonyControls?.manifestSha256)) {
@@ -326,4 +297,4 @@ if (checklist.status === "READY") {
 }
 
 if (process.exitCode) console.error("\nSigning checklist does not clear the Genesis gate.");
-else console.log("\nSigning checklist structure passes. It never signs, creates transactions, or verifies on-chain state.");
+else console.log("\nSigning checklist structure passes. Non-signature gates use exact automated source/state observations; Model T physical confirmation remains the sole human signature gate.");

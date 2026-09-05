@@ -33,7 +33,7 @@ const BOUND_FILES = new Map(DEPENDENCY_SECURITY_SOURCE_BINDINGS.map((binding) =>
 ]));
 const clone = (value) => structuredClone(value);
 
-test("canonical dependency packet proves technical remediation while retaining independent-review HOLD", () => {
+test("canonical dependency packet proves technical remediation while retaining automated-evidence HOLD", () => {
   const result = validateDependencySecurityRemediationManifest(MANIFEST, {
     boundFiles: BOUND_FILES,
   });
@@ -43,7 +43,7 @@ test("canonical dependency packet proves technical remediation while retaining i
   assert.equal(result.zeroKnownVulnerabilitiesObserved, true);
   assert.equal(result.zeroUnacceptedDependencyFindings, false);
   assert.equal(result.completionPredicateSatisfied, false);
-  assert.equal(result.independentReviewAccepted, false);
+  assert.equal(result.automatedDirectEvidenceComplete, false);
   assert.equal(result.activationReady, false);
   assert.equal(result.releaseAuthorizationVerified, false);
   assert.equal(result.mainnetExecutionAuthorized, false);
@@ -122,10 +122,13 @@ test("unmaintained transitive bincode finding cannot be erased, accepted, or sil
   }
 });
 
-test("packet rejects self-accepted review and every release or Mainnet overclaim", () => {
+test("packet rejects fabricated automated evidence and every release or Mainnet overclaim", () => {
   for (const mutate of [
-    (value) => { value.independentReview.accepted = true; },
-    (value) => { value.independentReview.reviewerIdentity = "SELF"; },
+    (value) => { value.automatedDirectEvidence.status = "COMPLETE"; },
+    (value) => { value.automatedDirectEvidence.receiptSha256 = "0".repeat(64); },
+    (value) => { value.automatedDirectEvidence.packetMaySelectEvidenceSources = true; },
+    (value) => { value.automatedDirectEvidence.noSelfAttestation = false; },
+    (value) => { value.automatedDirectEvidence.humanReviewerRequired = true; },
     (value) => { value.activationReady = true; },
     (value) => { value.releaseAuthorizationVerified = true; },
     (value) => { value.mainnetExecutionAuthorized = true; },
