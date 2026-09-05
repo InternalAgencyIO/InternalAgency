@@ -29,7 +29,7 @@ import {
   writeCurrentSourceEvidenceStage,
 } from "../scripts/finalize-iat-v2-current-source-devnet-evidence.mjs";
 import {
-  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_TIMESTAMP,
 } from "../programs/iat_v2/ceremony-horizon.mjs";
 
 const LOADER = "BPFLoaderUpgradeab1e11111111111111111111111";
@@ -125,14 +125,14 @@ function fixture() {
   const responses = {
     getGenesisHash: CANONICAL_DEVNET_GENESIS_HASH,
     getSlot: 650,
-    getBlockTime: 1_788_500_000,
+    getBlockTime: 1_788_600_000,
     getSignatureStatuses: {
       context: { slot: 700 },
       value: [{ slot: 600, confirmations: null, err: null, confirmationStatus: "finalized" }],
     },
     getTransaction: {
       slot: 600,
-      blockTime: 1_788_500_000,
+      blockTime: 1_788_600_000,
       meta: { err: null },
       transaction: [transaction.serialize().toString("base64"), "base64"],
       version: "legacy",
@@ -233,7 +233,7 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
   const incompleteClaim = {
     schema: "iat-v2-current-source-attended-devnet-console-bundle/v1",
     status: "COMPLETE_PENDING_AUTOMATED_DIRECT_EVIDENCE",
-    rosterVersion: "IAT_V2_MIGRATION_BACKFILL_POLICY13_CCC12_V1",
+    rosterVersion: "IAT_V2_MIGRATION_BACKFILL_POLICY13_CCC13_V1",
     sourceCommit: value.binding.sourceCommit,
     programArtifactSha256: value.binding.programArtifactSha256,
     network: "devnet",
@@ -246,8 +246,8 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
       preUpgradeProgramDataCapacityBytes: value.binding.programArtifactBytes,
       switchboardRandomnessCreationRequired: true,
       policyWeek: 13,
-      cccRound: 12,
-      cccRoundTerminalAction: "REVEAL_CCC_ROUND_12",
+      cccRound: 13,
+      cccRoundTerminalAction: "REVEAL_CCC_ROUND_13",
     },
     transactions: value.consoleExport.transactions.map((item) => ({
       action: item.action,
@@ -306,11 +306,11 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
   for (const [label, mutate, code] of [
     ["stale roster version", (claim) => { claim.rosterVersion = "IAT_V2_MIGRATION_BACKFILL_WEEK11_V1"; }, "COMPLETE_ROSTER_HOLD"],
     ["stale policy week", (claim) => { claim.conditions.policyWeek = 12; }, "COMPLETE_ROSTER_HOLD"],
-    ["stale CCC round", (claim) => { claim.conditions.cccRound = 11; }, "COMPLETE_ROSTER_HOLD"],
-    ["stale CCC terminal", (claim) => { claim.conditions.cccRoundTerminalAction = "REVEAL_CCC_ROUND_11"; }, "COMPLETE_ROSTER_HOLD"],
+    ["stale CCC round", (claim) => { claim.conditions.cccRound = 12; }, "COMPLETE_ROSTER_HOLD"],
+    ["stale CCC terminal", (claim) => { claim.conditions.cccRoundTerminalAction = "REVEAL_CCC_ROUND_12"; }, "COMPLETE_ROSTER_HOLD"],
     ["old round-specific terminal field", (claim) => {
       delete claim.conditions.cccRoundTerminalAction;
-      claim.conditions.cccRound11TerminalAction = "REVEAL_CCC_ROUND_11";
+      claim.conditions.cccRound12TerminalAction = "REVEAL_CCC_ROUND_12";
     }, "INPUT_SCHEMA_HOLD"],
   ]) {
     const drifted = structuredClone(incompleteClaim);
@@ -335,8 +335,8 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
 
   for (const [label, finalizedBlockTime] of [
     ["missing fresh finalized block time", null],
-    ["fresh finalized clock before policy week 13", 1_788_499_174],
-    ["fresh finalized clock at the CCC round 12 close", IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP],
+    ["fresh finalized clock before CCC round 13", 1_788_585_574],
+    ["fresh finalized clock at the policy-week horizon close", IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_TIMESTAMP],
   ]) {
     const rpcMethods = [];
     await assert.rejects(
@@ -362,8 +362,8 @@ test("subset and incomplete-roster bypasses cannot emit clearing evidence", asyn
   }
 
   for (const [label, transactionBlockTime] of [
-    ["finalized transaction before policy week 13", 1_788_499_174],
-    ["finalized transaction at the CCC round 12 close", IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP],
+    ["finalized transaction before CCC round 13", 1_788_585_574],
+    ["finalized transaction at the policy-week horizon close", IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_TIMESTAMP],
   ]) {
     const rpcMethods = [];
     await assert.rejects(
@@ -604,7 +604,7 @@ test("ledger proof binds same-slot order, last ProgramData upgrade, and conditio
       assert.equal(params[0], 500);
       assert.equal(params[1].commitment, "finalized");
       return {
-        blockTime: overrides.blockTime ?? 1_788_500_000,
+        blockTime: overrides.blockTime ?? 1_788_600_000,
         blockhash: Keypair.generate().publicKey.toBase58(),
         previousBlockhash: Keypair.generate().publicKey.toBase58(),
         transactions: transactions.map((item) => Array.isArray(item?.transaction) ? item : blockEntry(item)),
@@ -627,7 +627,7 @@ test("ledger proof binds same-slot order, last ProgramData upgrade, and conditio
   await t.test("ledger block at the source-bound horizon close", async () => {
     await assert.rejects(
       invoke([upgrade, feature], {
-        blockTime: IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
+        blockTime: IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_TIMESTAMP,
       }),
       (error) => error instanceof CurrentSourceEvidenceError && error.code === "CEREMONY_HORIZON_HOLD",
     );
@@ -804,7 +804,13 @@ test("source finalizer exposes no signing or broadcast operation and CLI is dry 
   assert.doesNotMatch(source, /tools\/iat-v2-admin-console\/attended-evidence/u);
   assert.match(source, /IAT_V2_DEVNET_CEREMONY_ROSTER_VERSION/u);
   assert.match(source, /"policyWeek",\s*"cccRound",\s*"cccRoundTerminalAction"/u);
-  assert.match(source, /IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC/u);
+  assert.match(source, /IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC/u);
+  assert.match(source, /nextPolicyBoundaryTimestamp: IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_TIMESTAMP/u);
+  assert.match(source, /nextPolicyBoundaryUtc: IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_UTC/u);
+  assert.match(source, /nextCccBoundaryTimestamp: IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_TIMESTAMP/u);
+  assert.match(source, /nextCccBoundaryUtc: IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_UTC/u);
+  assert.match(source, /closesOn: horizon\.closesOn/u);
+  assert.doesNotMatch(source, /CEREMONY_GENESIS_TIMESTAMP\s*=\s*IAT_V2_DEVNET_CEREMONY_.*CLOSE_TIMESTAMP/u);
   assert.match(source, /validateCeremonyHorizonTimestamp\(\{\s*slot: result\.slot,\s*timestamp: result\.blockTime/gu);
   assert.match(source, /validateCeremonyHorizonTimestamp\(\{\s*slot,\s*timestamp: block\.blockTime/gu);
   assert.match(

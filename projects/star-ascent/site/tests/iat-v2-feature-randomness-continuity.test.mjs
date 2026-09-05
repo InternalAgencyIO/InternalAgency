@@ -92,8 +92,8 @@ function signedCreateFixture({ extraInstruction = null, feePayer = null } = {}) 
     positionOwner: participant,
     positionId: 3,
     destinationTokens,
-    week: 10,
-    round: deriveRoundAddress({ config, programId: IAT_V2_PROGRAM_ID, week: 10 }),
+    week: 12,
+    round: deriveRoundAddress({ config, programId: IAT_V2_PROGRAM_ID, week: 12 }),
   }));
   predecessorTransaction.sign(admin);
   const predecessorMessage = predecessorTransaction.compileMessage();
@@ -132,7 +132,7 @@ function signedCreateFixture({ extraInstruction = null, feePayer = null } = {}) 
       transaction: { message, signatures },
     },
     predecessorReceipt: {
-      action: "SETTLE_LINKED_POSITION_3_WEEK_10",
+      action: "SETTLE_LINKED_POSITION_3_WEEK_12",
       signature: predecessorSignatures[0],
       messageSha256: predecessorMessageSha256,
     },
@@ -180,7 +180,7 @@ function signedPredecessorEvidence({
   const messageSha256 = createHash("sha256").update(message.serialize()).digest("hex");
   return {
     receipt: {
-      action: "SETTLE_LINKED_POSITION_3_WEEK_10",
+      action: "SETTLE_LINKED_POSITION_3_WEEK_12",
       signature: signatures[0],
       messageSha256,
     },
@@ -398,7 +398,7 @@ test("continuity requires the exact signed canonical predecessor and finalized o
     verifyFinalizedRandomnessContinuity(verificationInput(fixture, {
       predecessorReceipt: {
         ...fixture.predecessorReceipt,
-        action: "SETTLE_LINKED_POSITION_3_WEEK_9",
+        action: "SETTLE_LINKED_POSITION_3_WEEK_11",
       },
     })),
     /canonical predecessor receipt is missing/u,
@@ -491,6 +491,7 @@ const canonicalPreCreateActions = Object.freeze([
   "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
   "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
   "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11",
+  "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12",
   "SETTLE_STANDARD_POSITION_WEEK_10",
   "SETTLE_STANDARD_POSITION_WEEK_11",
   "SETTLE_STANDARD_POSITION_WEEK_12",
@@ -498,9 +499,11 @@ const canonicalPreCreateActions = Object.freeze([
   "SETTLE_LINKED_POSITION_2_WEEK_9",
   "SETTLE_LINKED_POSITION_2_WEEK_10",
   "SETTLE_LINKED_POSITION_2_WEEK_11",
+  "SETTLE_LINKED_POSITION_2_WEEK_12",
   "SETTLE_LINKED_POSITION_3_WEEK_9",
   "SETTLE_LINKED_POSITION_3_WEEK_10",
   "SETTLE_LINKED_POSITION_3_WEEK_11",
+  "SETTLE_LINKED_POSITION_3_WEEK_12",
 ]);
 
 function preCreateReceiptSet(binding) {

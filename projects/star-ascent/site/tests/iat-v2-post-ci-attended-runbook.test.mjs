@@ -3,8 +3,12 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
   IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
-  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
-  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_GENESIS_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_HORIZON_TRANSITION,
+  IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_TIMESTAMP,
   IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
 } from "../programs/iat_v2/ceremony-horizon.mjs";
 import { IAT_V2_PROGRAM_ID } from "../programs/iat_v2/instructions.mjs";
@@ -443,6 +447,7 @@ test("operator sequence preserves conditional capacity, buffer, migration, backf
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11",
+    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12",
     "SETTLE_STANDARD_POSITION_WEEK_10",
     "SETTLE_STANDARD_POSITION_WEEK_11",
     "SETTLE_STANDARD_POSITION_WEEK_12",
@@ -450,13 +455,17 @@ test("operator sequence preserves conditional capacity, buffer, migration, backf
     "SETTLE_LINKED_POSITION_2_WEEK_9",
     "SETTLE_LINKED_POSITION_2_WEEK_10",
     "SETTLE_LINKED_POSITION_2_WEEK_11",
+    "SETTLE_LINKED_POSITION_2_WEEK_12",
     "SETTLE_LINKED_POSITION_3_WEEK_9",
     "SETTLE_LINKED_POSITION_3_WEEK_10",
     "SETTLE_LINKED_POSITION_3_WEEK_11",
-    "CREATE_SWITCHBOARD_RANDOMNESS",
-    "COMMIT_CCC_ROUND_12",
-    "SETTLE_LINKED_POSITION_2_WEEK_12",
     "SETTLE_LINKED_POSITION_3_WEEK_12",
+    "CREATE_SWITCHBOARD_RANDOMNESS",
+    "COMMIT_CCC_ROUND_13",
+    "exactly one terminal action: `REVEAL_CCC_ROUND_13` or",
+    "EXPIRE_CCC_ROUND_13",
+    "SETTLE_LINKED_POSITION_2_WEEK_13",
+    "SETTLE_LINKED_POSITION_3_WEEK_13",
     "finalize-iat-v2-current-source-devnet-evidence.mjs",
   ];
   let cursor = -1;
@@ -554,10 +563,10 @@ test("post-upgrade feature evidence cannot reuse the legacy initialization expor
   assert.match(feature, /EXPORT COMPLETE ATTENDED BUNDLE/u);
 });
 
-test("21/22 prompts always include a fresh source-bound randomness creation", () => {
-  assert.match(runbook, /Plan for exactly \*\*21\*\* mandatory Model T transaction prompts/u);
-  assert.match(runbook, /one upgrade, two migrations, three historical neutral backfills, and the 15 feature actions above/u);
-  assert.match(runbook, /count becomes \*\*22\*\* only if the fresh finalized pre-upgrade capacity observation proves `EXTEND_PROGRAM_DATA` is required/u);
+test("24/25 prompts always include a fresh source-bound randomness creation", () => {
+  assert.match(runbook, /Plan for exactly \*\*24\*\* mandatory Model T transaction prompts/u);
+  assert.match(runbook, /one upgrade, two migrations, four historical neutral backfills, and the 17 feature actions above/u);
+  assert.match(runbook, /count becomes \*\*25\*\* only if the fresh finalized pre-upgrade capacity observation proves `EXTEND_PROGRAM_DATA` is required/u);
   assert.match(runbook, /DISCARD RETAINED ADDRESS \+ REQUIRE FRESH CREATE/u);
   assert.match(runbook, /versioned address\/CREATE-signature\/message-hash record stored under the key bound to the exact source commit, migration artifact SHA-256, and mint/u);
   assert.match(runbook, /preserves every receipt and performs no RPC read, signature request, broadcast, or chain mutation/u);
@@ -567,44 +576,79 @@ test("21/22 prompts always include a fresh source-bound randomness creation", ()
   assert.match(runbook, /discard control remains disabled after any feature evidence or signed pending feature work exists/u);
   assert.match(runbook, /supports no retained-randomness prompt-count shortcut/u);
   assert.match(runbook, /memory-only on-device address-display gate/u);
-  assert.match(runbook, /non-transaction device confirmation and is not one of the 21 mandatory Model T transaction-signature prompts/u);
+  assert.match(runbook, /non-transaction device confirmation and is not one of the 24 mandatory Model T transaction-signature prompts/u);
   assert.match(runbook, /action UI appears before the full on-device address match succeeds, stop without signing or broadcasting/u);
-  assert.doesNotMatch(runbook, /may be \*\*20\*\*|verified reusable rehearsal randomness/u);
+  assert.doesNotMatch(runbook, /may be \*\*23\*\*|verified reusable rehearsal randomness/u);
 });
 
-test("runbook freezes policy week 13 and CCC round 12 until the absolute finalized-time close", () => {
+test("runbook freezes the policy-13/CCC-13 pair until its strict POLICY_WEEK close", () => {
+  assert.equal(IAT_V2_DEVNET_CEREMONY_GENESIS_TIMESTAMP, 1_780_636_775);
   assert.equal(IAT_V2_DEVNET_CEREMONY_POLICY_WEEK, 13);
-  assert.equal(IAT_V2_DEVNET_CEREMONY_CCC_ROUND, 12);
-  assert.equal(IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP, 1_788_585_575);
-  assert.equal(IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC, "2026-09-05T05:19:35.000Z");
-  assert.match(runbook, /exactly policy week \*\*13\*\* and CCC round \*\*12\*\*/u);
-  assert.match(runbook, /absolute close is \*\*2026-09-05T05:19:35\.000Z\*\* \(`1788585575`\)/u);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_CCC_ROUND, 13);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_TIMESTAMP, 1_789_103_975);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_TIMESTAMP, 1_789_190_375);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_TIMESTAMP, 1_789_103_975);
+  assert.equal(IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC, "2026-09-11T05:19:35.000Z");
+  assert.equal(IAT_V2_DEVNET_CEREMONY_HORIZON_TRANSITION, "POLICY_WEEK");
+  assert.match(runbook, /source-refresh observation proved the exact cadence transition from CCC round 12 to CCC round 13/u);
+  assert.match(runbook, /With Genesis `1780636775`, this source permits exactly the fresh pair policy week \*\*13\*\* and CCC round \*\*13\*\*/u);
+  assert.match(runbook, /next policy boundary is \*\*2026-09-11T05:19:35\.000Z\*\* \(`1789103975`\)/u);
+  assert.match(runbook, /next CCC boundary is \*\*2026-09-12T05:19:35\.000Z\*\* \(`1789190375`\)/u);
+  assert.match(runbook, /strict close is the earlier \*\*POLICY_WEEK\*\* transition at \*\*2026-09-11T05:19:35\.000Z\*\* \(`1789103975`\)/u);
   assert.match(runbook, /Equality is already closed/u);
   assert.match(runbook, /Any finalized policy\/CCC drift or timestamp at or after the close is a permanent HOLD/u);
-  assert.match(runbook, /new round-12 commit made during this ceremony cannot reach its 24-hour neutral-expiry timeout before the absolute close/u);
-  assert.match(runbook, /four-hour completion path depends on a successful Switchboard reveal/u);
+  assert.match(runbook, /round-13 expiry contingency is valid only if `COMMIT_CCC_ROUND_13` finalizes at least 24 hours before the strict close/u);
+  assert.match(runbook, /Otherwise `REVEAL_CCC_ROUND_13` is required/u);
+  assert.match(runbook, /exactly one terminal action: `REVEAL_CCC_ROUND_13` or,[^\n]*`EXPIRE_CCC_ROUND_13`/u);
 });
 
 test("runbook pins the exact horizon accounting and outcome-dependent conservation values", () => {
-  assert.match(runbook, /standard settled mask must be `63` \(weeks 8–13\), while both linked masks must be `31` \(weeks 8–12\)/u);
+  assert.match(runbook, /standard and both linked settled masks must all be `63` \(weeks 8–13\)/u);
   for (const exact of [
     "115,384,615",
-    "161,538,461",
-    "76,923,076",
-    "134,615,384",
-    "96,153,846",
     "188,461,538",
-    "57,692,307",
-    "199319230772",
-    "199326923079",
-    "199311538464",
-    "39119230772",
-    "39126923079",
-    "39111538464",
-    "470353846152",
-    "470346153845",
-    "470361538460",
+    "96,153,845",
+    "161,538,461",
+    "115,384,614",
+    "215,384,615",
+    "76,923,076",
+    "326923076",
+    "726923074",
+    "719230766",
+    "734615382",
+    "39073076926",
+    "39080769234",
+    "39065384618",
+    "199273076926",
+    "199280769234",
+    "199265384618",
+    "470399999998",
+    "470392307690",
+    "470407692306",
   ]) assert.ok(runbook.includes(exact), `runbook must pin exact horizon accounting value ${exact}`);
+
+  const corePaid = 326_923_076n;
+  const coreReserved = 33_673_076_924n;
+  const maximumPositionRewards = 5_800_000_000n;
+  const outcomes = [
+    { positionPaid: [115_384_615n, 188_461_538n, 96_153_845n], lanePaid: 726_923_074n, reserved: 39_073_076_926n, token: 199_273_076_926n, community: 470_399_999_998n },
+    { positionPaid: [115_384_615n, 161_538_461n, 115_384_614n], lanePaid: 719_230_766n, reserved: 39_080_769_234n, token: 199_280_769_234n, community: 470_392_307_690n },
+    { positionPaid: [115_384_615n, 215_384_615n, 76_923_076n], lanePaid: 734_615_382n, reserved: 39_065_384_618n, token: 199_265_384_618n, community: 470_407_692_306n },
+  ];
+  for (const outcome of outcomes) {
+    const totalPositionPaid = outcome.positionPaid.reduce((sum, amount) => sum + amount, 0n);
+    assert.equal(outcome.lanePaid, corePaid + totalPositionPaid);
+    assert.equal(outcome.reserved, coreReserved + maximumPositionRewards - totalPositionPaid);
+    assert.equal(outcome.token, 200_000_000_000n - outcome.lanePaid);
+    assert.equal(outcome.community, 470_000_000_000n + totalPositionPaid);
+    assert.equal(
+      outcome.token + 150_000_000_000n + 100_000_000_000n + 37_500_000_000n
+        + 30_000_000_000n + outcome.community + corePaid + 12_500_000_000n,
+      1_000_000_000_000n,
+    );
+  }
   assert.match(runbook, /cumulative-difference `reward_for_week` rule, not a repeated floor-per-week approximation/u);
+  assert.match(runbook, /Each treasury token amount equals the fixed `200000000000` lane total minus its paid amount/u);
+  assert.match(runbook, /each outcome conserves the fixed `1000000000000` mint supply/u);
   assert.match(runbook, /Any one-unit drift is HOLD/u);
 });

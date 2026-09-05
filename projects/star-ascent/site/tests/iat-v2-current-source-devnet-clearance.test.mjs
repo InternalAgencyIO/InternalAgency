@@ -185,6 +185,7 @@ async function exactRoster({ createRandomness = true, reveal = false } = {}) {
     ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9", [buildBackfillHistoricalNeutralRoundInstruction({ mint, week: 9 })]],
     ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10", [buildBackfillHistoricalNeutralRoundInstruction({ mint, week: 10 })]],
     ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11", [buildBackfillHistoricalNeutralRoundInstruction({ mint, week: 11 })]],
+    ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12", [buildBackfillHistoricalNeutralRoundInstruction({ mint, week: 12 })]],
     ["SETTLE_STANDARD_POSITION_WEEK_10", [settle(1, 10)]],
     ["SETTLE_STANDARD_POSITION_WEEK_11", [settle(1, 11)]],
     ["SETTLE_STANDARD_POSITION_WEEK_12", [settle(1, 12)]],
@@ -192,27 +193,29 @@ async function exactRoster({ createRandomness = true, reveal = false } = {}) {
     ["SETTLE_LINKED_POSITION_2_WEEK_9", [settle(2, 9)]],
     ["SETTLE_LINKED_POSITION_2_WEEK_10", [settle(2, 10)]],
     ["SETTLE_LINKED_POSITION_2_WEEK_11", [settle(2, 11)]],
+    ["SETTLE_LINKED_POSITION_2_WEEK_12", [settle(2, 12)]],
     ["SETTLE_LINKED_POSITION_3_WEEK_9", [settle(3, 9)]],
     ["SETTLE_LINKED_POSITION_3_WEEK_10", [settle(3, 10)]],
     ["SETTLE_LINKED_POSITION_3_WEEK_11", [settle(3, 11)]],
+    ["SETTLE_LINKED_POSITION_3_WEEK_12", [settle(3, 12)]],
     ...(createRandomness ? [["CREATE_SWITCHBOARD_RANDOMNESS", [
       ComputeBudgetProgram.setComputeUnitLimit({ units: 500_000 }),
       switchboardInit,
     ], [randomness]]] : []),
-    ["COMMIT_CCC_ROUND_12", [
+    ["COMMIT_CCC_ROUND_13", [
       ComputeBudgetProgram.setComputeUnitLimit({ units: 500_000 }),
       switchboardCommit,
-      buildCommitRoundInstruction({ payer: IAT_V2_PROGRAM_ADMIN, mint, randomnessAccount: randomness, week: 12 }),
+      buildCommitRoundInstruction({ payer: IAT_V2_PROGRAM_ADMIN, mint, randomnessAccount: randomness, week: 13 }),
     ]],
     reveal
-      ? ["REVEAL_CCC_ROUND_12", [
+      ? ["REVEAL_CCC_ROUND_13", [
           ComputeBudgetProgram.setComputeUnitLimit({ units: 600_000 }),
           switchboardReveal,
-          buildSettleRoundInstruction({ mint, randomnessAccount: randomness, week: 12 }),
+          buildSettleRoundInstruction({ mint, randomnessAccount: randomness, week: 13 }),
         ]]
-      : ["EXPIRE_CCC_ROUND_12", [buildExpireRoundInstruction({ mint, week: 12 })]],
-    ["SETTLE_LINKED_POSITION_2_WEEK_12", [settle(2, 12)]],
-    ["SETTLE_LINKED_POSITION_3_WEEK_12", [settle(3, 12)]],
+      : ["EXPIRE_CCC_ROUND_13", [buildExpireRoundInstruction({ mint, week: 13 })]],
+    ["SETTLE_LINKED_POSITION_2_WEEK_13", [settle(2, 13)]],
+    ["SETTLE_LINKED_POSITION_3_WEEK_13", [settle(3, 13)]],
   ];
   return {
     artifactBytes: 200_000,
@@ -222,7 +225,7 @@ async function exactRoster({ createRandomness = true, reveal = false } = {}) {
       switchboardRandomnessCreationRequired: createRandomness,
       policyWeek: IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
       cccRound: IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
-      cccRoundTerminalAction: reveal ? "REVEAL_CCC_ROUND_12" : "EXPIRE_CCC_ROUND_12",
+      cccRoundTerminalAction: reveal ? "REVEAL_CCC_ROUND_13" : "EXPIRE_CCC_ROUND_13",
     },
     entries: raw.map(([action, instructions, extraSigners]) => ({ action, transaction: parsedTransaction(instructions, extraSigners) })),
   };
@@ -266,13 +269,13 @@ function randomnessForWinner(decisionContext, winner) {
 
 function expectedPositionPaid(outcome) {
   if (outcome === "expired") {
-    return [115_384_615n, 161_538_461n, 76_923_076n];
+    return [115_384_615n, 188_461_538n, 96_153_845n];
   }
   if (outcome === "winner0") {
-    return [115_384_615n, 134_615_384n, 96_153_846n];
+    return [115_384_615n, 161_538_461n, 115_384_614n];
   }
   if (outcome === "winner1") {
-    return [115_384_615n, 188_461_538n, 57_692_307n];
+    return [115_384_615n, 215_384_615n, 76_923_076n];
   }
   throw new Error(`unsupported terminal outcome ${outcome}`);
 }
@@ -335,15 +338,15 @@ async function exactPostState(decoded, { outcome = "expired" } = {}) {
     bytes.writeBigUInt64LE(rates[index], 112);
     bytes.writeBigUInt64LE(maximum[index] - paidAmount, 120);
     bytes.writeBigUInt64LE(paidAmount, 144);
-    bytes.writeBigUInt64LE(index === 0 ? 63n : 31n, 152);
+    bytes.writeBigUInt64LE(63n, 152);
     bytes.writeUInt32LE(index === 0 ? 0xffff_ffff : index - 1, 160);
     bytes[164] = index;
     return owned(IAT_V2_PROGRAM_ID, bytes);
   });
-  const rounds = [7, 8, 9, 10, 11, 12].map((week) => {
+  const rounds = [7, 8, 9, 10, 11, 12, 13].map((week) => {
     const migrated = MIGRATED_ROUND_PINS[week] ?? null;
     const bytes = Buffer.alloc(206);
-    const live = week === 12;
+    const live = week === 13;
     const liveDecisionContext = contextHash(configAddress, week, registry);
     const winner = outcome === "winner0" ? 0 : outcome === "winner1" ? 1 : null;
     const liveRandomness = winner === null
@@ -354,9 +357,9 @@ async function exactPostState(decoded, { outcome = "expired" } = {}) {
     (live ? randomness : (migrated ? HISTORICAL_RANDOMNESS : SystemProgram.programId)).toBuffer().copy(bytes, 40);
     bytes.writeBigUInt64LE(BigInt(week), 72);
     bytes.writeBigUInt64LE(live ? 999n : (migrated?.commitSlot ?? 0n), 80);
-    bytes.writeBigInt64LE(week >= 9 && week <= 11
+    bytes.writeBigInt64LE(week >= 9 && week <= 12
       ? 1_780_636_775n + 86_400n + BigInt(week) * 604_800n
-      : (live ? 1_788_000_000n : 0n), 88);
+      : (live ? 1_788_600_000n : 0n), 88);
     registry.copy(bytes, 128);
     liveDecisionContext.copy(bytes, 160);
     if (migrated) migrated.randomness.copy(bytes, 96);
@@ -427,9 +430,9 @@ async function exactPostState(decoded, { outcome = "expired" } = {}) {
 test("complete decoder admits the exact reviewed fresh-randomness expiry roster wire semantics", async () => {
   const value = await exactRoster();
   const decoded = await decodeCompleteRehearsalRoster(value);
-  assert.equal(decoded.transactionCount, 21);
+  assert.equal(decoded.transactionCount, 24);
   assert.equal(decoded.policyWeek, 13);
-  assert.equal(decoded.cccRound, 12);
+  assert.equal(decoded.cccRound, 13);
   assert.ok(decoded.oracle);
   assert.ok(decoded.randomness);
   assert.equal(decoded.wireSemantics, "EXACT_DISCRIMINATOR_DATA_ACCOUNT_METAS_AND_CANONICAL_IDENTITIES");
@@ -438,7 +441,7 @@ test("complete decoder admits the exact reviewed fresh-randomness expiry roster 
 test("complete decoder admits exact Switchboard creation and reveal wire semantics", async () => {
   const value = await exactRoster({ createRandomness: true, reveal: true });
   const decoded = await decodeCompleteRehearsalRoster(value);
-  assert.equal(decoded.transactionCount, 21);
+  assert.equal(decoded.transactionCount, 24);
   assert.ok(decoded.oracle);
   assert.ok(decoded.randomness);
 });
@@ -462,7 +465,7 @@ test("complete decoder rejects temporal-horizon and terminal-branch substitution
   });
   await t.test("CCC round drift", async () => {
     const value = await exactRoster();
-    value.conditions.cccRound = 13;
+    value.conditions.cccRound = 12;
     await assert.rejects(
       decodeCompleteRehearsalRoster(value),
       (error) => error instanceof CurrentSourceClearanceError && error.code === "COMPLETE_ROSTER_HOLD",
@@ -470,7 +473,7 @@ test("complete decoder rejects temporal-horizon and terminal-branch substitution
   });
   await t.test("declared reveal with expiry wire", async () => {
     const value = await exactRoster();
-    value.conditions.cccRoundTerminalAction = "REVEAL_CCC_ROUND_12";
+    value.conditions.cccRoundTerminalAction = "REVEAL_CCC_ROUND_13";
     await assert.rejects(
       decodeCompleteRehearsalRoster(value),
       (error) => error instanceof CurrentSourceClearanceError && error.code === "COMPLETE_ROSTER_HOLD",
@@ -481,7 +484,7 @@ test("complete decoder rejects temporal-horizon and terminal-branch substitution
 test("wire decoder rejects mislabeled actions and mutated discriminators/account identities", async (t) => {
   await t.test("mislabeled position semantics", async () => {
     const value = await exactRoster();
-    value.entries[10].action = "SETTLE_LINKED_POSITION_3_WEEK_9";
+    value.entries[11].action = "SETTLE_LINKED_POSITION_3_WEEK_9";
     await assert.rejects(decodeCompleteRehearsalRoster(value), (error) => error instanceof CurrentSourceClearanceError && error.code === "WIRE_ACCOUNTS_HOLD");
   });
   await t.test("backfill previous-round account", async () => {
@@ -496,7 +499,7 @@ test("wire decoder rejects mislabeled actions and mutated discriminators/account
   });
   await t.test("Switchboard commit discriminator", async () => {
     const value = await exactRoster();
-    const commit = value.entries.find((entry) => entry.action === "COMMIT_CCC_ROUND_12");
+    const commit = value.entries.find((entry) => entry.action === "COMMIT_CCC_ROUND_13");
     commit.transaction.instructions[1].data[0] ^= 0xff;
     await assert.rejects(decodeCompleteRehearsalRoster(value), (error) => error instanceof CurrentSourceClearanceError && error.code === "WIRE_DATA_HOLD");
   });
@@ -513,18 +516,18 @@ test("clearance reward oracle mirrors Rust cumulative-difference reward_for_week
   );
   assert.deepEqual(expectedPositionPaid("expired"), [
     115_384_615n,
-    161_538_461n,
-    76_923_076n,
+    188_461_538n,
+    96_153_845n,
   ]);
   assert.deepEqual(expectedPositionPaid("winner0"), [
     115_384_615n,
-    134_615_384n,
-    96_153_846n,
+    161_538_461n,
+    115_384_614n,
   ]);
   assert.deepEqual(expectedPositionPaid("winner1"), [
     115_384_615n,
-    188_461_538n,
-    57_692_307n,
+    215_384_615n,
+    76_923_076n,
   ]);
 });
 
@@ -555,10 +558,10 @@ test("post-state verifier admits only the complete exact finalized state and rej
   });
   const observed = await verify(accounts);
   assert.equal(observed.policyWeek, 13);
-  assert.equal(observed.cccRound, 12);
+  assert.equal(observed.cccRound, 13);
   assert.equal(observed.contextSlot, null);
-  assert.deepEqual(observed.positionSettledMasks, ["63", "31", "31"]);
-  assert.deepEqual(observed.positionPaid, ["115384615", "161538461", "76923076"]);
+  assert.deepEqual(observed.positionSettledMasks, ["63", "63", "63"]);
+  assert.deepEqual(observed.positionPaid, ["115384615", "188461538", "96153845"]);
   assert.equal(observed.mintSupply, "1000000000000");
 
   await t.test("revealed winner 0 accounting", async () => {
@@ -570,9 +573,9 @@ test("post-state verifier admits only the complete exact finalized state and rej
       conditions: revealValue.conditions,
       rpcCall: async () => ({ value: revealAccounts }),
     });
-    assert.deepEqual(result.positionPaid, ["115384615", "134615384", "96153846"]);
-    assert.equal(result.laneTokenAmounts[0], "199326923079");
-    assert.equal(result.communityAmount, "470346153845");
+    assert.deepEqual(result.positionPaid, ["115384615", "161538461", "115384614"]);
+    assert.equal(result.laneTokenAmounts[0], "199280769234");
+    assert.equal(result.communityAmount, "470392307690");
   });
 
   await t.test("revealed winner 1 accounting", async () => {
@@ -584,9 +587,9 @@ test("post-state verifier admits only the complete exact finalized state and rej
       conditions: revealValue.conditions,
       rpcCall: async () => ({ value: revealAccounts }),
     });
-    assert.deepEqual(result.positionPaid, ["115384615", "188461538", "57692307"]);
-    assert.equal(result.laneTokenAmounts[0], "199311538464");
-    assert.equal(result.communityAmount, "470361538460");
+    assert.deepEqual(result.positionPaid, ["115384615", "215384615", "76923076"]);
+    assert.equal(result.laneTokenAmounts[0], "199265384618");
+    assert.equal(result.communityAmount, "470407692306");
   });
 
   await t.test("position settled mask", async () => {
@@ -598,9 +601,9 @@ test("post-state verifier admits only the complete exact finalized state and rej
   });
   await t.test("lane token conservation", async () => {
     const mutated = structuredClone(accounts);
-    const token = Buffer.from(mutated[16].data[0], "base64");
+    const token = Buffer.from(mutated[17].data[0], "base64");
     token.writeBigUInt64LE(token.readBigUInt64LE(64) + 1n, 64);
-    mutated[16].data[0] = token.toString("base64");
+    mutated[17].data[0] = token.toString("base64");
     await assert.rejects(verify(mutated), (error) => error instanceof CurrentSourceClearanceError && error.code === "POST_STATE_BALANCE_HOLD");
   });
   await t.test("migrated week-7 commit slot", async () => {

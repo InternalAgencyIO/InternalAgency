@@ -61,6 +61,7 @@ const migrationActions = [
   ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9", "neutral-backfill", 9],
   ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10", "neutral-backfill", 10],
   ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11", "neutral-backfill", 11],
+  ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12", "neutral-backfill", 12],
 ];
 const featureActions = [
   ["SETTLE_STANDARD_POSITION_WEEK_10", 10],
@@ -70,14 +71,16 @@ const featureActions = [
   ["SETTLE_LINKED_POSITION_2_WEEK_9", 9],
   ["SETTLE_LINKED_POSITION_2_WEEK_10", 10],
   ["SETTLE_LINKED_POSITION_2_WEEK_11", 11],
+  ["SETTLE_LINKED_POSITION_2_WEEK_12", 12],
   ["SETTLE_LINKED_POSITION_3_WEEK_9", 9],
   ["SETTLE_LINKED_POSITION_3_WEEK_10", 10],
   ["SETTLE_LINKED_POSITION_3_WEEK_11", 11],
-  ["CREATE_SWITCHBOARD_RANDOMNESS", null],
-  ["COMMIT_CCC_ROUND_12", 12],
-  ["EXPIRE_CCC_ROUND_12", 12],
-  ["SETTLE_LINKED_POSITION_2_WEEK_12", 12],
   ["SETTLE_LINKED_POSITION_3_WEEK_12", 12],
+  ["CREATE_SWITCHBOARD_RANDOMNESS", null],
+  ["COMMIT_CCC_ROUND_13", 13],
+  ["EXPIRE_CCC_ROUND_13", 13],
+  ["SETTLE_LINKED_POSITION_2_WEEK_13", 13],
+  ["SETTLE_LINKED_POSITION_3_WEEK_13", 13],
 ];
 
 function completeFixture() {
@@ -221,7 +224,7 @@ test("complete aggregate is exact, ordered, and never fabricates a missing recei
     exportedAtUtc: "2026-08-26T13:00:00.000Z",
   });
   assert.equal(bundle.schema, IAT_V2_COMPLETE_BUNDLE_SCHEMA);
-  assert.equal(bundle.rosterVersion, "IAT_V2_MIGRATION_BACKFILL_POLICY13_CCC12_V1");
+  assert.equal(bundle.rosterVersion, "IAT_V2_MIGRATION_BACKFILL_POLICY13_CCC13_V1");
   assert.equal(bundle.rosterVersion, IAT_V2_COMPLETE_ROSTER_VERSION);
   assert.deepEqual(Object.keys(bundle), [
     "schema", "status", "rosterVersion", "sourceCommit", "programArtifactSha256",
@@ -235,10 +238,10 @@ test("complete aggregate is exact, ordered, and never fabricates a missing recei
     "cccRoundTerminalAction",
   ]);
   assert.equal(bundle.conditions.policyWeek, 13);
-  assert.equal(bundle.conditions.cccRound, 12);
-  assert.equal(bundle.conditions.cccRoundTerminalAction, "EXPIRE_CCC_ROUND_12");
+  assert.equal(bundle.conditions.cccRound, 13);
+  assert.equal(bundle.conditions.cccRoundTerminalAction, "EXPIRE_CCC_ROUND_13");
   assert.equal(bundle.transactions[0].action, "EXTEND_PROGRAM_DATA");
-  assert.equal(bundle.transactions.at(-1).action, "SETTLE_LINKED_POSITION_3_WEEK_12");
+  assert.equal(bundle.transactions.at(-1).action, "SETTLE_LINKED_POSITION_3_WEEK_13");
   assert.ok(bundle.transactions.every((entry) => Object.hasOwn(entry, "finalizedAtUtc")));
 
   fixture.featureExport.transactions = fixture.featureExport.transactions
@@ -303,10 +306,10 @@ test("complete aggregate rejects every extra receipt instead of silently droppin
   const hostile = [
     ["RETURN_BUFFER_AUTHORITY_TO_DEPLOYER", "program", null, "receipt-set"],
     ["MIGRATE_LEGACY_ROUND_WEEK_6", "migration", 6, "receipt-set"],
-    ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12", "neutral-backfill", 12, "receipt-set"],
+    ["BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_13", "neutral-backfill", 13, "receipt-set"],
     ["REGISTER_AGENCY_0", "feature", null, "feature-export"],
     ["SETTLE_STANDARD_POSITION_WEEK_9", "feature", 9, "feature-export"],
-    ["COMMIT_CCC_ROUND_10", "feature", 10, "feature-export"],
+    ["COMMIT_CCC_ROUND_12", "feature", 12, "feature-export"],
   ];
   hostile.forEach(([action, kind, week, location], index) => {
     const fixture = completeFixture();
@@ -333,12 +336,12 @@ test("complete aggregate rejects every extra receipt instead of silently droppin
   });
 });
 
-test("canonical next-action policy follows the mandatory fresh-randomness 22-prompt roster exactly", () => {
+test("canonical next-action policy follows the mandatory fresh-randomness 25-prompt roster exactly", () => {
   const roster = completeAttendedRoster({
     programDataExtensionRequired: true,
     policyWeek: 13,
-    cccRound: 12,
-    cccRoundTerminalAction: "EXPIRE_CCC_ROUND_12",
+    cccRound: 13,
+    cccRoundTerminalAction: "EXPIRE_CCC_ROUND_13",
   });
   assert.deepEqual(roster, [
     "EXTEND_PROGRAM_DATA",
@@ -348,6 +351,7 @@ test("canonical next-action policy follows the mandatory fresh-randomness 22-pro
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9",
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10",
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11",
+    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12",
     "SETTLE_STANDARD_POSITION_WEEK_10",
     "SETTLE_STANDARD_POSITION_WEEK_11",
     "SETTLE_STANDARD_POSITION_WEEK_12",
@@ -355,16 +359,18 @@ test("canonical next-action policy follows the mandatory fresh-randomness 22-pro
     "SETTLE_LINKED_POSITION_2_WEEK_9",
     "SETTLE_LINKED_POSITION_2_WEEK_10",
     "SETTLE_LINKED_POSITION_2_WEEK_11",
+    "SETTLE_LINKED_POSITION_2_WEEK_12",
     "SETTLE_LINKED_POSITION_3_WEEK_9",
     "SETTLE_LINKED_POSITION_3_WEEK_10",
     "SETTLE_LINKED_POSITION_3_WEEK_11",
-    "CREATE_SWITCHBOARD_RANDOMNESS",
-    "COMMIT_CCC_ROUND_12",
-    "EXPIRE_CCC_ROUND_12",
-    "SETTLE_LINKED_POSITION_2_WEEK_12",
     "SETTLE_LINKED_POSITION_3_WEEK_12",
+    "CREATE_SWITCHBOARD_RANDOMNESS",
+    "COMMIT_CCC_ROUND_13",
+    "EXPIRE_CCC_ROUND_13",
+    "SETTLE_LINKED_POSITION_2_WEEK_13",
+    "SETTLE_LINKED_POSITION_3_WEEK_13",
   ]);
-  assert.equal(roster.length, 22);
+  assert.equal(roster.length, 25);
   for (let index = 0; index < roster.length; index += 1) {
     const policy = assertCanonicalAttendedNextAction({
       completedActions: roster.slice(0, index),
@@ -372,7 +378,7 @@ test("canonical next-action policy follows the mandatory fresh-randomness 22-pro
       nextAction: roster[index],
     });
     assert.equal(policy.completedActionCount, index);
-    assert.equal(policy.totalActionCount, 22);
+    assert.equal(policy.totalActionCount, 25);
     assert.equal(policy.switchboardRandomnessCreationRequired, true);
   }
   const complete = canonicalAttendedNextActionPolicy({
@@ -380,7 +386,7 @@ test("canonical next-action policy follows the mandatory fresh-randomness 22-pro
     programDataExtensionRequired: true,
   });
   assert.equal(complete.complete, true);
-  assert.equal(complete.totalActionCount, 22);
+  assert.equal(complete.totalActionCount, 25);
   assert.deepEqual(complete.allowedNextActions, []);
 });
 
@@ -388,21 +394,21 @@ test("canonical roster and progress reject policy-week, CCC-round, and terminal 
   const conditions = {
     programDataExtensionRequired: false,
     policyWeek: 13,
-    cccRound: 12,
-    cccRoundTerminalAction: "REVEAL_CCC_ROUND_12",
+    cccRound: 13,
+    cccRoundTerminalAction: "REVEAL_CCC_ROUND_13",
   };
-  assert.equal(completeAttendedRoster(conditions).length, 21);
+  assert.equal(completeAttendedRoster(conditions).length, 24);
   assert.throws(
     () => completeAttendedRoster({ ...conditions, policyWeek: 12 }),
     /Policy week drifted/u,
   );
   assert.throws(
-    () => completeAttendedRoster({ ...conditions, cccRound: 11 }),
+    () => completeAttendedRoster({ ...conditions, cccRound: 12 }),
     /CCC round drifted/u,
   );
   assert.throws(
-    () => completeAttendedRoster({ ...conditions, cccRoundTerminalAction: "REVEAL_CCC_ROUND_11" }),
-    /Round 12 terminal action is not reviewed/u,
+    () => completeAttendedRoster({ ...conditions, cccRoundTerminalAction: "REVEAL_CCC_ROUND_12" }),
+    /Round 13 terminal action is not reviewed/u,
   );
   assert.throws(() => canonicalAttendedNextActionPolicy({
     completedActions: [],
@@ -412,7 +418,7 @@ test("canonical roster and progress reject policy-week, CCC-round, and terminal 
   assert.throws(() => canonicalAttendedNextActionPolicy({
     completedActions: [],
     programDataExtensionRequired: false,
-    cccRound: 13,
+    cccRound: 14,
   }), /CCC round drifted/u);
 });
 
@@ -420,7 +426,7 @@ test("canonical next-action policy requires fresh randomness and resolves only t
   assert.throws(() => completeAttendedRoster({
     programDataExtensionRequired: true,
     switchboardRandomnessCreationRequired: false,
-    cccRoundTerminalAction: "REVEAL_CCC_ROUND_12",
+    cccRoundTerminalAction: "REVEAL_CCC_ROUND_13",
   }), /Fresh Switchboard randomness creation is mandatory/u);
   assert.throws(() => canonicalAttendedNextActionPolicy({
     completedActions: [],
@@ -430,7 +436,7 @@ test("canonical next-action policy requires fresh randomness and resolves only t
 
   const roster = completeAttendedRoster({
     programDataExtensionRequired: true,
-    cccRoundTerminalAction: "REVEAL_CCC_ROUND_12",
+    cccRoundTerminalAction: "REVEAL_CCC_ROUND_13",
   });
   const createIndex = roster.indexOf("CREATE_SWITCHBOARD_RANDOMNESS");
   const beforeRandomness = roster.slice(0, createIndex);
@@ -448,23 +454,23 @@ test("canonical next-action policy requires fresh randomness and resolves only t
   assert.throws(() => assertCanonicalAttendedNextAction({
     completedActions: beforeRandomness,
     programDataExtensionRequired: true,
-    nextAction: "COMMIT_CCC_ROUND_12",
+    nextAction: "COMMIT_CCC_ROUND_13",
   }), /expected CREATE_SWITCHBOARD_RANDOMNESS/u);
 
-  const commitIndex = roster.indexOf("COMMIT_CCC_ROUND_12");
+  const commitIndex = roster.indexOf("COMMIT_CCC_ROUND_13");
   const throughCommit = roster.slice(0, commitIndex + 1);
   const terminal = canonicalAttendedNextActionPolicy({
     completedActions: throughCommit,
     programDataExtensionRequired: true,
   });
   assert.deepEqual(terminal.allowedNextActions, [
-    "REVEAL_CCC_ROUND_12",
-    "EXPIRE_CCC_ROUND_12",
+    "REVEAL_CCC_ROUND_13",
+    "EXPIRE_CCC_ROUND_13",
   ]);
   assert.doesNotThrow(() => assertCanonicalAttendedNextAction({
     completedActions: throughCommit,
     programDataExtensionRequired: true,
-    nextAction: "EXPIRE_CCC_ROUND_12",
+    nextAction: "EXPIRE_CCC_ROUND_13",
   }));
 });
 
@@ -547,20 +553,20 @@ test("canonical next-action policy rejects recovery, arbitrary weeks, skips, rep
   const roster = completeAttendedRoster({
     programDataExtensionRequired: true,
     switchboardRandomnessCreationRequired: true,
-    cccRoundTerminalAction: "REVEAL_CCC_ROUND_12",
+    cccRoundTerminalAction: "REVEAL_CCC_ROUND_13",
   });
   assert.throws(() => assertCanonicalAttendedNextAction({
     completedActions: roster,
     programDataExtensionRequired: true,
     switchboardRandomnessCreationRequired: true,
-    nextAction: "SETTLE_LINKED_POSITION_3_WEEK_12",
+    nextAction: "SETTLE_LINKED_POSITION_3_WEEK_13",
   }), /roster is already complete/u);
   assert.throws(() => canonicalAttendedNextActionPolicy({
     completedActions: [
-      ...roster.slice(0, roster.indexOf("REVEAL_CCC_ROUND_12") + 1),
-      "EXPIRE_CCC_ROUND_12",
+      ...roster.slice(0, roster.indexOf("REVEAL_CCC_ROUND_13") + 1),
+      "EXPIRE_CCC_ROUND_13",
     ],
     programDataExtensionRequired: true,
     switchboardRandomnessCreationRequired: true,
-  }), /expected SETTLE_LINKED_POSITION_2_WEEK_12/u);
+  }), /expected SETTLE_LINKED_POSITION_2_WEEK_13/u);
 });

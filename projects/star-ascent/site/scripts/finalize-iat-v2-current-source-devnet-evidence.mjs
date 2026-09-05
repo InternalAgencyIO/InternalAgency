@@ -30,10 +30,14 @@ const {
 const {
   IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS,
   IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
-  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP,
-  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_GENESIS_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC,
   IAT_V2_DEVNET_CEREMONY_LINKED_HISTORICAL_WEEKS,
   IAT_V2_DEVNET_CEREMONY_MIGRATION_WEEKS,
+  IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_UTC,
+  IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_TIMESTAMP,
+  IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_UTC,
+  IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_TIMESTAMP,
   IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
   IAT_V2_DEVNET_CEREMONY_ROSTER_VERSION,
   IAT_V2_DEVNET_CEREMONY_STANDARD_SETTLEMENT_WEEKS,
@@ -41,8 +45,6 @@ const {
   iatV2DevnetCeremonyTerminalActions,
 } = await import("../programs/iat_v2/ceremony-horizon.mjs");
 const {
-  IAT_V2_SECONDS_PER_DAY,
-  IAT_V2_SECONDS_PER_WEEK,
   currentIatV2CccRound,
   currentIatV2Week,
 } = await import("../programs/iat_v2/feature-rehearsal.mjs");
@@ -66,9 +68,7 @@ const PARTIAL_DIRECT_FILENAME = "signed-devnet-rehearsal-partial.json";
 const CLEARING_DIRECT_FILENAME = "signed-devnet-rehearsal.json";
 const PUBLIC_ROOT = "public/evidence/iat-v2/current-source";
 const CANONICAL_PROGRAM_BINARY_PATH = "target/verifiable/iat_v2.so";
-const CEREMONY_GENESIS_TIMESTAMP = IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_TIMESTAMP
-  - IAT_V2_SECONDS_PER_DAY
-  - ((IAT_V2_DEVNET_CEREMONY_CCC_ROUND + 1) * IAT_V2_SECONDS_PER_WEEK);
+const CEREMONY_GENESIS_TIMESTAMP = IAT_V2_DEVNET_CEREMONY_GENESIS_TIMESTAMP;
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const hex40 = /^[0-9a-f]{40}$/u;
 const hex64 = /^[0-9a-f]{64}$/u;
@@ -266,8 +266,13 @@ function validateCeremonyHorizonTimestamp({ slot, timestamp, label }) {
     observedAtUtc: new Date(timestamp * 1_000).toISOString(),
     policyWeek: horizon.policyWeek,
     cccRound: horizon.cccRound,
+    nextPolicyBoundaryTimestamp: IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_TIMESTAMP,
+    nextPolicyBoundaryUtc: IAT_V2_DEVNET_CEREMONY_NEXT_POLICY_BOUNDARY_UTC,
+    nextCccBoundaryTimestamp: IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_TIMESTAMP,
+    nextCccBoundaryUtc: IAT_V2_DEVNET_CEREMONY_NEXT_CCC_BOUNDARY_UTC,
     closesAtTimestamp: horizon.closesAtTimestamp,
     closesAtUtc: horizon.closesAtUtc,
+    closesOn: horizon.closesOn,
   });
 }
 
@@ -306,7 +311,7 @@ function completeRoster(conditions) {
   check(
     conditions.cccRound === IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
     "COMPLETE_ROSTER_HOLD",
-    `complete rehearsal CCC round drifted from the source-bound ceremony horizon closing ${IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC}`,
+    `complete rehearsal CCC round drifted from the source-bound ceremony horizon closing ${IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC}`,
   );
   check(
     iatV2DevnetCeremonyTerminalActions().includes(conditions.cccRoundTerminalAction),

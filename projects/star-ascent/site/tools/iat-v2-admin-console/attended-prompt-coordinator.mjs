@@ -1,16 +1,16 @@
 const LATCH_SCHEMA = "iat-v2-current-source-model-t-transaction-prompt-latch/v1";
 const GLOBAL_LOCK_NAME = "iat-v2-current-source-model-t-transaction-prompt/global/v1";
 const LATCH_PREFIX = "iat-v2-current-source-model-t-transaction-prompt";
-const CEREMONY_TERMINAL_LATCH_SLOT = "CCC_ROUND_12_TERMINAL";
+const CEREMONY_TERMINAL_LATCH_SLOT = "CCC_ROUND_13_TERMINAL";
 const hex40 = /^[0-9a-f]{40}$/u;
 const hex64 = /^[0-9a-f]{64}$/u;
 const base58 = /^[1-9A-HJ-NP-Za-km-z]+$/u;
 const base58Alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu;
-// Exact source-bound policy-13 / CCC-12 action roster. Numeric forms are
+// Exact source-bound policy-13 / CCC-13 action roster. Numeric forms are
 // deliberately bounded so no future week or round is admitted implicitly.
-const CANONICAL_ACTION = /^(?:EXTEND_PROGRAM_DATA|UPGRADE_PROGRAM|MIGRATE_LEGACY_ROUND_WEEK_[78]|BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_(?:9|1[01])|SETTLE_STANDARD_POSITION_WEEK_1[0-3]|SETTLE_LINKED_POSITION_[23]_WEEK_(?:9|1[0-2])|CREATE_SWITCHBOARD_RANDOMNESS|(?:COMMIT|REVEAL|EXPIRE)_CCC_ROUND_12)$/u;
-const CEREMONY_TERMINAL_ACTION = /^(?:REVEAL|EXPIRE)_CCC_ROUND_12$/u;
+const CANONICAL_ACTION = /^(?:EXTEND_PROGRAM_DATA|UPGRADE_PROGRAM|MIGRATE_LEGACY_ROUND_WEEK_[78]|BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_(?:9|1[0-2])|SETTLE_STANDARD_POSITION_WEEK_1[0-3]|SETTLE_LINKED_POSITION_[23]_WEEK_(?:9|1[0-3])|CREATE_SWITCHBOARD_RANDOMNESS|(?:COMMIT|REVEAL|EXPIRE)_CCC_ROUND_13)$/u;
+const CEREMONY_TERMINAL_ACTION = /^(?:REVEAL|EXPIRE)_CCC_ROUND_13$/u;
 const LATCH_FIELDS = Object.freeze([
   "schema",
   "status",

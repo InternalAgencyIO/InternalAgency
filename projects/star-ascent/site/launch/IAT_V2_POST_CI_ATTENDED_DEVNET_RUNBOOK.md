@@ -81,13 +81,13 @@ Use the same non-private browser profile, the same `127.0.0.1:4175` origin, and 
 
 Never use a public host for these consoles. The reviewed Devnet program is `62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj`; the attended Model T administrator is `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`.
 
-Every newly loaded or reloaded attended page must first use its memory-only on-device address-display gate and match the complete displayed address to `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`. This is a non-transaction device confirmation and is not one of the 21 mandatory Model T transaction-signature prompts (22 only if the fresh pre-upgrade capacity observation proves an extension is required). Navigation or reload may require another address-display confirmation, but it must never add or replay a transaction signature. If any action UI appears before the full on-device address match succeeds, stop without signing or broadcasting.
+Every newly loaded or reloaded attended page must first use its memory-only on-device address-display gate and match the complete displayed address to `7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH`. This is a non-transaction device confirmation and is not one of the 24 mandatory Model T transaction-signature prompts (25 only if the fresh pre-upgrade capacity observation proves an extension is required). Navigation or reload may require another address-display confirmation, but it must never add or replay a transaction signature. If any action UI appears before the full on-device address match succeeds, stop without signing or broadcasting.
 
 ### Source-frozen temporal horizon
 
-This source permits exactly policy week **13** and CCC round **12**. Both values must be derived from fresh finalized Devnet block time at every pre-sign and pre-broadcast boundary; operator wall time is never evidence. The absolute close is **2026-09-05T05:19:35.000Z** (`1788585575`), when CCC round 13 begins. Every mutation, terminal action, linked settlement, complete-bundle export, and automated finalization must finish while the greatest finalized observation still proves policy week 13, CCC round 12, and a timestamp strictly earlier than that close. Equality is already closed.
+The finalized source-refresh observation proved the exact cadence transition from CCC round 12 to CCC round 13. With Genesis `1780636775`, this source permits exactly the fresh pair policy week **13** and CCC round **13**. Both values must be derived from fresh finalized Devnet block time at every pre-sign and pre-broadcast boundary; operator wall time is never evidence. The next policy boundary is **2026-09-11T05:19:35.000Z** (`1789103975`), and the next CCC boundary is **2026-09-12T05:19:35.000Z** (`1789190375`). The strict close is the earlier **POLICY_WEEK** transition at **2026-09-11T05:19:35.000Z** (`1789103975`). Every mutation, terminal action, linked settlement, complete-bundle export, and automated finalization must finish while the greatest finalized observation still proves policy week 13, CCC round 13, and a timestamp strictly earlier than that close. Equality is already closed.
 
-Any finalized policy/CCC drift or timestamp at or after the close is a permanent HOLD for this source-bound ceremony. Do not substitute round 13, append another action, reuse the source namespace, or reinterpret an already consumed prompt. A new temporal horizon requires a new reviewed source `S`, fresh public CI/checkout evidence, and a new direct anchor-only `B`. Because a new round-12 commit made during this ceremony cannot reach its 24-hour neutral-expiry timeout before the absolute close, the four-hour completion path depends on a successful Switchboard reveal; an unavailable reveal cannot be routed around with a post-close expiry.
+Any finalized policy/CCC drift or timestamp at or after the close is a permanent HOLD for this source-bound ceremony. Do not substitute another round, append another action, reuse the source namespace, or reinterpret an already consumed prompt. A new temporal horizon requires a new reviewed source `S`, fresh public CI/checkout evidence, and a new direct anchor-only `B`. The round-13 expiry contingency is valid only if `COMMIT_CCC_ROUND_13` finalizes at least 24 hours before the strict close and the timeout plus terminal transaction can still finalize strictly before that close. Otherwise `REVEAL_CCC_ROUND_13` is required; an unavailable reveal cannot be routed around with a post-close expiry.
 
 The transaction-prompt latch is permanent for its exact source/artifact/mint/action binding: a rejected, failed, expired, or explicitly discarded signed action ends that ceremony. Do not retry that action, clear browser storage, change origin/profile, or attempt another transaction signature. Preserve the consumed old latch and stop on HOLD. Only a separately reviewed ceremony with fresh exact-head CI and a genuinely new source binding may expose another action; its distinct source-bound namespaces do not delete, reset, or continue the old ceremony. The fresh ceremony source is the reviewed attended implementation commit `S`, while artifact provenance remains the immutable `a03fe71d…` source; the console must display both and must never relabel one as the other.
 
@@ -346,11 +346,11 @@ For week 7, then separately for week 8:
 
 The receipt actions must be `MIGRATE_LEGACY_ROUND_WEEK_7` and `MIGRATE_LEGACY_ROUND_WEEK_8`.
 
-## 5. Backfill weeks 9, 10, and 11, one transaction each
+## 5. Backfill weeks 9, 10, 11, and 12, one transaction each
 
-Stay in `?mode=migrate-rounds`. Week 9 must prove exact terminal migrated week 8 as its previous-round snapshot. Week 10 must prove exact terminal backfilled week 9, and week 11 must prove exact terminal backfilled week 10. The target PDA must be absent, the round strictly historical and timed out, and the config rehearsal-only.
+Stay in `?mode=migrate-rounds`. Week 9 must prove exact terminal migrated week 8 as its previous-round snapshot. Week 10 must prove exact terminal backfilled week 9, week 11 must prove exact terminal backfilled week 10, and week 12 must prove exact terminal backfilled week 11. The target PDA must be absent, the round strictly historical and timed out, and the config rehearsal-only.
 
-For week 9, then separately for weeks 10 and 11:
+For week 9, then separately for weeks 10, 11, and 12:
 
 1. Press **SIMULATE + SIGN NEUTRAL WEEK N**.
 2. Approve that one terminal-neutral week on the Model T.
@@ -358,9 +358,9 @@ For week 9, then separately for weeks 10 and 11:
 4. Press the separate broadcast button.
 5. Wait for finalized confirmation and re-read the chained previous-round proof.
 
-The receipt actions must be `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9`, `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10`, and `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11`. Export the source-bound receipt set after all three finalize.
+The receipt actions must be `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_9`, `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_10`, `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11`, and `BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12`. Export the source-bound receipt set after all four finalize.
 
-## 6. Finish the policy-week-13 / CCC-round-12 feature roster
+## 6. Finish the policy-week-13 / CCC-round-13 feature roster
 
 Open `http://127.0.0.1:4175/?mode=features`. The selector must refresh its config and action accounts at finalized commitment, retain monotonic finalized context slots, and derive cadence only from finalized block time. After balance and linked-round reads, the greatest returned observation slot must still resolve to the same week and CCC round; a confirmed-only read, local workstation time, missing block time, regressing context, or boundary change during the observation is a stop. For every offered action, use the first button to build, simulate, and request the physical signature. Review the message hash, then use the separate broadcast button. Never approve the next action until the prior transaction is finalized and the console has refreshed chain state.
 
@@ -379,26 +379,28 @@ The remaining reviewed order is exact. It assumes the fresh finalized prestate p
 5. `SETTLE_LINKED_POSITION_2_WEEK_9`
 6. `SETTLE_LINKED_POSITION_2_WEEK_10`
 7. `SETTLE_LINKED_POSITION_2_WEEK_11`
-8. `SETTLE_LINKED_POSITION_3_WEEK_9`
-9. `SETTLE_LINKED_POSITION_3_WEEK_10`
-10. `SETTLE_LINKED_POSITION_3_WEEK_11`
-11. `CREATE_SWITCHBOARD_RANDOMNESS` using a freshly generated ephemeral protocol signer
-12. `COMMIT_CCC_ROUND_12`
-13. exactly one terminal action: `REVEAL_CCC_ROUND_12` or, only if its on-chain timeout occurs before the absolute close, `EXPIRE_CCC_ROUND_12`
-14. `SETTLE_LINKED_POSITION_2_WEEK_12`
-15. `SETTLE_LINKED_POSITION_3_WEEK_12`
+8. `SETTLE_LINKED_POSITION_2_WEEK_12`
+9. `SETTLE_LINKED_POSITION_3_WEEK_9`
+10. `SETTLE_LINKED_POSITION_3_WEEK_10`
+11. `SETTLE_LINKED_POSITION_3_WEEK_11`
+12. `SETTLE_LINKED_POSITION_3_WEEK_12`
+13. `CREATE_SWITCHBOARD_RANDOMNESS` using a freshly generated ephemeral protocol signer
+14. `COMMIT_CCC_ROUND_13`
+15. exactly one terminal action: `REVEAL_CCC_ROUND_13` or, only when the commit finalized at least 24 hours before the strict close and expiry can finalize before that close, `EXPIRE_CCC_ROUND_13`; otherwise reveal is required
+16. `SETTLE_LINKED_POSITION_2_WEEK_13`
+17. `SETTLE_LINKED_POSITION_3_WEEK_13`
 
-Plan for exactly **21** mandatory Model T transaction prompts: one upgrade, two migrations, three historical neutral backfills, and the 15 feature actions above. The count becomes **22** only if the fresh finalized pre-upgrade capacity observation proves `EXTEND_PROGRAM_DATA` is required. A retained randomness address never reduces the mandatory roster to 20. Before the first feature receipt or signed pending feature transaction exists, if the console reports a retained source-bound randomness record, press **DISCARD RETAINED ADDRESS + REQUIRE FRESH CREATE**. That deliberate local control removes only the versioned address/CREATE-signature/message-hash record stored under the key bound to the exact source commit, migration artifact SHA-256, and mint; it preserves every receipt and performs no RPC read, signature request, broadcast, or chain mutation. Then press **REFRESH FEATURE STATE** and complete the freshly offered `CREATE_SWITCHBOARD_RANDOMNESS` when the feature roster reaches item 11. Reload continuity is allowed only for the same source-bound CREATE receipt and record after the console independently reconstructs the exact successful finalized two-signer legacy message, verifies its ComputeBudget-then-pinned-Switchboard instruction roster and message hash, and observes the retained account at finalized commitment under the pinned Switchboard owner. The discard control remains disabled after any feature evidence or signed pending feature work exists. If that reconstruction or account observation fails, or any retained state is ambiguous, stop on HOLD; this runbook supports no retained-randomness prompt-count shortcut.
+Plan for exactly **24** mandatory Model T transaction prompts: one upgrade, two migrations, four historical neutral backfills, and the 17 feature actions above. The count becomes **25** only if the fresh finalized pre-upgrade capacity observation proves `EXTEND_PROGRAM_DATA` is required. A retained randomness address never reduces the mandatory roster to 23. Before the first feature receipt or signed pending feature transaction exists, if the console reports a retained source-bound randomness record, press **DISCARD RETAINED ADDRESS + REQUIRE FRESH CREATE**. That deliberate local control removes only the versioned address/CREATE-signature/message-hash record stored under the key bound to the exact source commit, migration artifact SHA-256, and mint; it preserves every receipt and performs no RPC read, signature request, broadcast, or chain mutation. Then press **REFRESH FEATURE STATE** and complete the freshly offered `CREATE_SWITCHBOARD_RANDOMNESS` when the feature roster reaches item 13. Reload continuity is allowed only for the same source-bound CREATE receipt and record after the console independently reconstructs the exact successful finalized two-signer legacy message, verifies its ComputeBudget-then-pinned-Switchboard instruction roster and message hash, and observes the retained account at finalized commitment under the pinned Switchboard owner. The discard control remains disabled after any feature evidence or signed pending feature work exists. If that reconstruction or account observation fails, or any retained state is ambiguous, stop on HOLD; this runbook supports no retained-randomness prompt-count shortcut.
 
-The final standard settled mask must be `63` (weeks 8–13), while both linked masks must be `31` (weeks 8–12). Payout verification mirrors the program's cumulative-difference `reward_for_week` rule, not a repeated floor-per-week approximation. The exact final `position.paid` amounts are:
+The final standard and both linked settled masks must all be `63` (weeks 8–13). Payout verification mirrors the program's cumulative-difference `reward_for_week` rule, not a repeated floor-per-week approximation. The exact final `position.paid` amounts are:
 
-| Round-12 terminal result | Standard | CCC agent (agency 0) | CCC associate (agency 1) |
+| Round-13 terminal result | Standard | CCC agent (agency 0) | CCC associate (agency 1) |
 | --- | ---: | ---: | ---: |
-| expired neutral | 115,384,615 | 161,538,461 | 76,923,076 |
-| winner 0 (agent paused) | 115,384,615 | 134,615,384 | 96,153,846 |
-| winner 1 (associate paused) | 115,384,615 | 188,461,538 | 57,692,307 |
+| expired neutral | 115,384,615 | 188,461,538 | 96,153,845 |
+| winner 0 (agent paused) | 115,384,615 | 161,538,461 | 115,384,614 |
+| winner 1 (associate paused) | 115,384,615 | 215,384,615 | 76,923,076 |
 
-The automated post-state verifier must also reconcile the outcome-dependent treasury lane, reservation ledger, community destination, stake principal, beneficiary balances, and fixed mint supply. For expired neutral / winner 0 / winner 1 respectively, treasury token amount is `199319230772` / `199326923079` / `199311538464`, treasury reserved is `39119230772` / `39126923079` / `39111538464`, and community amount is `470353846152` / `470346153845` / `470361538460`. Any one-unit drift is HOLD.
+The automated post-state verifier must also reconcile the outcome-dependent treasury lane, reservation ledger, community destination, stake principal, beneficiary balances, and fixed mint supply. The fixed core paid amount is `326923076`. For expired neutral / winner 0 / winner 1 respectively, total treasury-lane paid is `726923074` / `719230766` / `734615382`, treasury reserved is `39073076926` / `39080769234` / `39065384618`, treasury token amount is `199273076926` / `199280769234` / `199265384618`, and community amount is `470399999998` / `470392307690` / `470407692306`. Each treasury token amount equals the fixed `200000000000` lane total minus its paid amount, and each outcome conserves the fixed `1000000000000` mint supply together with the unchanged `30000000000` stake principal, `150000000000` ecosystem token amount, `100000000000` core-team token amount, `37500000000` liquidity token amount, `326923076` core beneficiary amount, and `12500000000` liquidity beneficiary amount. Any one-unit drift is HOLD.
 
 Do not warp Genesis or time, reroll randomness, fabricate a winner, or execute two attended actions in one transaction.
 
@@ -410,7 +412,7 @@ The consoles persist canonical records under a versioned local-storage key bound
 
 `finalizedAtUtc` is the observer-local UTC capture made after finalized confirmation; it is not claimed as the transaction's on-chain block time. The canonical finalizer independently re-observes and verifies finalized chain data. Keep the receipt field and schema unchanged.
 
-In the feature console, import any separately exported source-bound receipt sets only if the shared local browser storage does not already contain them. Press **EXPORT COMPLETE ATTENDED BUNDLE**. The exporter rejects missing actions, conflicting duplicates, a missing ProgramData capacity observation, a horizon other than policy week 13 / CCC round 12, and anything other than exactly one round-12 terminal action. It never creates a placeholder receipt.
+In the feature console, import any separately exported source-bound receipt sets only if the shared local browser storage does not already contain them. Press **EXPORT COMPLETE ATTENDED BUNDLE**. The exporter rejects missing actions, conflicting duplicates, a missing ProgramData capacity observation, a horizon other than policy week 13 / CCC round 13, and anything other than exactly one round-13 terminal action. It never creates a placeholder receipt.
 
 The legacy seven-stage evidence export is disabled in feature/post-upgrade mode. Its historical initialization receipts must remain separate and must never be rebound to, or combined with, the checked-in successor migration snapshot (`a03fe71d…` / `771c…8a01`). The pre-upgrade initialization shell retains its own legacy export. In the feature shell, **DOWNLOAD FEATURE EVIDENCE** is only a partial checkpoint; **EXPORT COMPLETE ATTENDED BUNDLE** is the canonical complete-roster export.
 
@@ -424,4 +426,4 @@ Only after the dry run reports complete wire decoding, finalized transactions, e
 
 ## Stop conditions
 
-Stop without another signature or broadcast if the finalized temporal horizon is not exactly policy week 13 / CCC round 12 or reaches `2026-09-05T05:19:35.000Z`; any exact binding drifts; the connected key is not `7XZ…fzPH`; simulation fails; the wallet changes the message; a prior transaction is not finalized; the next action differs from the roster; previous-round proof fails; a duplicate receipt conflicts; the finalizer cannot decode an exact action; the exact post-state does not pass; or Mainnet is presented as anything other than **HOLD**. This runbook authorizes Devnet rehearsal only and does not authorize a Mainnet transaction.
+Stop without another signature or broadcast if the finalized temporal horizon is not exactly policy week 13 / CCC round 13 or reaches the strict POLICY_WEEK close `2026-09-11T05:19:35.000Z`; any exact binding drifts; the connected key is not `7XZ…fzPH`; simulation fails; the wallet changes the message; a prior transaction is not finalized; the next action differs from the roster; previous-round proof fails; a duplicate receipt conflicts; the finalizer cannot decode an exact action; the exact post-state does not pass; or Mainnet is presented as anything other than **HOLD**. This runbook authorizes Devnet rehearsal only and does not authorize a Mainnet transaction.

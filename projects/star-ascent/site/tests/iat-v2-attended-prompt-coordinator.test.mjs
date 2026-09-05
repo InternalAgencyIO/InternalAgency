@@ -152,15 +152,15 @@ test("fresh blockhash message cannot bypass the source-bound canonical action la
   assert.match(firstKey, new RegExp(`${binding.sourceCommit}/${binding.programArtifactSha256}/${binding.mint}/UPGRADE_PROGRAM`, "u"));
 });
 
-test("source-bound round 12 reveal and expire share one permanent terminal-slot latch", async () => {
-  const revealKey = attendedPromptLatchKey({ binding, action: "REVEAL_CCC_ROUND_12" });
-  const expireKey = attendedPromptLatchKey({ binding, action: "EXPIRE_CCC_ROUND_12" });
+test("source-bound round 13 reveal and expire share one permanent terminal-slot latch", async () => {
+  const revealKey = attendedPromptLatchKey({ binding, action: "REVEAL_CCC_ROUND_13" });
+  const expireKey = attendedPromptLatchKey({ binding, action: "EXPIRE_CCC_ROUND_13" });
   assert.equal(revealKey, expireKey);
-  assert.match(revealKey, /\/CCC_ROUND_12_TERMINAL\/v1$/u);
+  assert.match(revealKey, /\/CCC_ROUND_13_TERMINAL\/v1$/u);
 
   for (const [firstAction, secondAction, firstOutcome] of [
-    ["REVEAL_CCC_ROUND_12", "EXPIRE_CCC_ROUND_12", "verified"],
-    ["EXPIRE_CCC_ROUND_12", "REVEAL_CCC_ROUND_12", "failed"],
+    ["REVEAL_CCC_ROUND_13", "EXPIRE_CCC_ROUND_13", "verified"],
+    ["EXPIRE_CCC_ROUND_13", "REVEAL_CCC_ROUND_13", "failed"],
   ]) {
     const { value, targetStorage } = coordinator();
     let firstCalls = 0;
@@ -190,29 +190,32 @@ test("source-bound round 12 reveal and expire share one permanent terminal-slot 
   }
 });
 
-test("prompt actions are limited to the exact policy-13 and CCC-12 ceremony horizon", () => {
+test("prompt actions are limited to the exact policy-13 and CCC-13 ceremony horizon", () => {
   for (const action of [
+    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12",
     "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_11",
     "SETTLE_STANDARD_POSITION_WEEK_12",
     "SETTLE_STANDARD_POSITION_WEEK_13",
     "SETTLE_LINKED_POSITION_2_WEEK_11",
     "SETTLE_LINKED_POSITION_3_WEEK_11",
-    "COMMIT_CCC_ROUND_12",
-    "REVEAL_CCC_ROUND_12",
-    "EXPIRE_CCC_ROUND_12",
+    "COMMIT_CCC_ROUND_13",
+    "REVEAL_CCC_ROUND_13",
+    "EXPIRE_CCC_ROUND_13",
     "SETTLE_LINKED_POSITION_2_WEEK_12",
     "SETTLE_LINKED_POSITION_3_WEEK_12",
+    "SETTLE_LINKED_POSITION_2_WEEK_13",
+    "SETTLE_LINKED_POSITION_3_WEEK_13",
   ]) {
     assert.doesNotThrow(() => attendedPromptLatchKey({ binding, action }));
   }
   for (const action of [
-    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_12",
+    "BACKFILL_HISTORICAL_NEUTRAL_ROUND_WEEK_13",
     "SETTLE_STANDARD_POSITION_WEEK_14",
-    "SETTLE_LINKED_POSITION_2_WEEK_13",
-    "COMMIT_CCC_ROUND_11",
-    "COMMIT_CCC_ROUND_13",
-    "REVEAL_CCC_ROUND_11",
-    "EXPIRE_CCC_ROUND_13",
+    "SETTLE_LINKED_POSITION_2_WEEK_14",
+    "COMMIT_CCC_ROUND_12",
+    "COMMIT_CCC_ROUND_14",
+    "REVEAL_CCC_ROUND_12",
+    "EXPIRE_CCC_ROUND_14",
   ]) {
     assert.throws(
       () => attendedPromptLatchKey({ binding, action }),

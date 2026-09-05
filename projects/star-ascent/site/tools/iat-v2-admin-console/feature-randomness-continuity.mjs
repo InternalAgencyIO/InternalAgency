@@ -470,7 +470,7 @@ export async function verifyFinalizedRandomnessContinuity({
     "Retained randomness CREATE message hash does not match its receipt",
   );
   check(
-    predecessorReceipt?.action === "SETTLE_LINKED_POSITION_3_WEEK_10",
+    predecessorReceipt?.action === "SETTLE_LINKED_POSITION_3_WEEK_12",
     "Randomness CREATE canonical predecessor receipt is missing",
   );
   check(
@@ -609,8 +609,8 @@ export async function verifyFinalizedRandomnessContinuity({
     positionOwner: participant,
     positionId: 3,
     destinationTokens,
-    week: 10,
-    round: deriveRoundAddress({ config, programId: IAT_V2_PROGRAM_ID, week: 10 }),
+    week: 12,
+    round: deriveRoundAddress({ config, programId: IAT_V2_PROGRAM_ID, week: 12 }),
   });
   check(
     predecessorTransaction.instructions[0].programId.equals(expectedPredecessorInstruction.programId)

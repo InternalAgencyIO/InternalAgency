@@ -713,7 +713,7 @@ test("legacy-round migration is localhost-only, CI-pinned, and requires separate
   );
 });
 
-test("source-bound historical weeks 9, 10, and 11 use fail-closed rehearsal-only neutral recovery", () => {
+test("source-bound historical weeks 9 through 12 use fail-closed rehearsal-only neutral recovery", () => {
   const programSource = readFileSync("programs/iat_v2/src/lib.rs", "utf8");
   const policySource = readFileSync("programs/iat_v2/src/policy.rs", "utf8");
   assert.match(programSource, /pub fn backfill_historical_neutral_round/u);
@@ -759,10 +759,10 @@ test("source-bound historical weeks 9, 10, and 11 use fail-closed rehearsal-only
   assert.doesNotMatch(effectSource, /(?:simulateAndSignBackfill|broadcastSigned)\s*\(/u);
 });
 
-test("migration and feature consoles enforce the policy-13 CCC-12 horizon before hardware", () => {
+test("migration and feature consoles enforce the policy-13 CCC-13 horizon before hardware", () => {
   assert.match(featureConsoleSource, /IAT_V2_DEVNET_CEREMONY_POLICY_WEEK/u);
   assert.match(featureConsoleSource, /IAT_V2_DEVNET_CEREMONY_CCC_ROUND/u);
-  assert.match(featureConsoleSource, /IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC/u);
+  assert.match(featureConsoleSource, /IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC/u);
   assert.match(featureConsoleSource, /SOURCE-BOUND CEREMONY HORIZON/u);
 
   const migrationLoader = migrationConsoleSource.slice(

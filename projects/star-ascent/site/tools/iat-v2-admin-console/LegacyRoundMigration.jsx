@@ -41,7 +41,7 @@ import {
 import {
   IAT_V2_DEVNET_CEREMONY_BACKFILL_WEEKS,
   IAT_V2_DEVNET_CEREMONY_CCC_ROUND,
-  IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC,
+  IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC,
   IAT_V2_DEVNET_CEREMONY_POLICY_WEEK,
   assertIatV2DevnetCeremonyHorizon,
 } from "../../programs/iat_v2/ceremony-horizon.mjs";
@@ -998,7 +998,7 @@ export default function LegacyRoundMigration({
             <div><span>ADMIN / ATTENDED SIGNER</span><code className="full-code">{IAT_V2_PROGRAM_ADMIN.toBase58()}</code></div>
             <div><span>ATTENDED CEREMONY SOURCE</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.sourceHeadCommit ?? "UNBOUND // HOLD"}</code></div>
             <div><span>SOURCE-BOUND CEREMONY HORIZON</span><code>POLICY {IAT_V2_DEVNET_CEREMONY_POLICY_WEEK} / CCC {IAT_V2_DEVNET_CEREMONY_CCC_ROUND}</code></div>
-            <div><span>CEREMONY HORIZON CLOSE</span><code>{IAT_V2_DEVNET_CEREMONY_CCC_ROUND_CLOSE_UTC}</code></div>
+            <div><span>CEREMONY HORIZON CLOSE</span><code>{IAT_V2_DEVNET_CEREMONY_HORIZON_CLOSE_UTC}</code></div>
             <div><span>CEREMONY CI RUN / ATTEMPT</span><code>{ATTENDED_CEREMONY_BINDING.ciRunId ?? "UNBOUND"} / {ATTENDED_CEREMONY_BINDING.ciRunAttempt ?? "HOLD"}</code></div>
             <div><span>CEREMONY RUNTIME EVIDENCE SHA-256</span><code className="full-code">{ATTENDED_CEREMONY_BINDING.runtimeEvidenceManifestSha256 ?? "UNBOUND // HOLD"}</code></div>
             <div><span>IMMUTABLE ARTIFACT SOURCE</span><code className="full-code">{IAT_V2_MIGRATION_PROGRAM_ARTIFACT_SOURCE_HEAD}</code></div>
