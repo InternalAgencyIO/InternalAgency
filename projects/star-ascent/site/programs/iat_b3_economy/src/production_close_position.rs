@@ -1,11 +1,13 @@
 //! Exact existing-state runtime handler for retained V2 `close_position`.
 //!
-//! This is one deliberately narrow handler path, not the all-fifteen
-//! dispatcher or a Solana entrypoint. It accepts only the frozen
-//! `ClosePosition` instruction, authenticates the open Daily-Law capability,
-//! production ACTIVE Config, signer meta, Position PDA, and three ordered Lane
-//! PDAs, executes the retained V2 transition, then commits all four strict
-//! postimages through the all-borrows-before-first-write CAS primitive.
+//! This is one deliberately narrow handler path. The feature-gated production
+//! dispatcher and entrypoint route this handler only; they reject the other
+//! fourteen operations until their handlers are complete. It accepts only the
+//! frozen `ClosePosition` instruction, authenticates the open Daily-Law
+//! capability, production ACTIVE Config, signer meta, Position PDA, and three
+//! ordered Lane PDAs, executes the retained V2 transition, then commits all
+//! four strict postimages through the all-borrows-before-first-write CAS
+//! primitive.
 //!
 //! The retained V2 account contract requires a signer but does not require the
 //! signer to own the Position; this handler preserves that behavior exactly.
@@ -37,7 +39,7 @@ use solana_account_info::AccountInfo;
 pub const PRODUCTION_CLOSE_POSITION_ACCOUNT_COUNT: usize = 6;
 pub const PRODUCTION_CLOSE_POSITION_WRITE_COUNT: usize = 4;
 pub const PRODUCTION_CLOSE_POSITION_STATUS: &str =
-    "ONE_OF_15_EXACT_ATOMIC_RUNTIME_HANDLER_NO_ENTRYPOINT_ALL_15_MAINNET_HOLD";
+    "ONE_OF_15_EXACT_ATOMIC_RUNTIME_HANDLER_ROUTED_ALL_15_FALSE_DEVNET_FALSE_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionClosePositionTruth {
@@ -73,8 +75,8 @@ pub const PRODUCTION_CLOSE_POSITION_TRUTH: ProductionClosePositionTruth =
         exact_four_account_atomic_cas_supported: true,
         token_cpi_executed: false,
         system_cpi_executed: false,
-        production_dispatcher_exposed: false,
-        production_entrypoint_exposed: false,
+        production_dispatcher_exposed: true,
+        production_entrypoint_exposed: true,
         handler_complete: true,
         all_15_handlers_complete: false,
         devnet_executed: false,

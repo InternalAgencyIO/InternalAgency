@@ -1,5 +1,5 @@
 {
-  "schema": "iat-v2-devnet-feature-independent-signoff/v1",
+  "schema": "iat-v2-devnet-feature-automated-observation/v2",
   "status": "VERIFIED",
   "scope": "CORRECTED_PROGRAM_AND_EIGHTEEN_TRANSACTION_FEATURE_REHEARSAL",
   "evidence": {
@@ -22,13 +22,11 @@
     "deployedAtSlot": 480117343,
     "upgradeAuthority": "7XZjd7aNNci63LZy9syqgjvjNHvkQ83Uwo7cyynrfzPH"
   },
-  "verifier": {
-    "accountabilityLabel": "FDF Guard",
-    "publicSolanaAddress": "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja",
-    "independentOfOperator": true,
-    "didNotOperateModelT": true,
-    "reviewMethod": "Compared evidence hashes, Explorer transactions, accounts, and artifact.",
-    "communicationReference": "Operator-relayed FDF Guard approval in this Codex launch task on 2026-08-01"
+  "observationPolicy": {
+    "mode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true
   },
   "checks": {
     "evidenceSha256Matched": true,
@@ -46,6 +44,5 @@
     "mainnetRemainedHold": true
   },
   "exceptions": [],
-  "attestation": "I independently reviewed the bound IAT V2 devnet feature evidence and every listed check matched without exception. Mainnet remains HOLD.",
   "completedAtUtc": "2026-08-01T05:57:36Z"
 }

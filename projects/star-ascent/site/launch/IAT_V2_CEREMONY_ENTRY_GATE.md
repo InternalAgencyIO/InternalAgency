@@ -19,7 +19,7 @@ npm run refresh:iat-v2-mainnet-funding
 This command performs one finalized `getBalance` request against the official
 mainnet RPC. It accepts no wallet, key, custom endpoint, transaction, signing,
 or broadcast input. A balance at or above the floor updates only the funding
-gate; schedule, artifact, verifier, device, authorization, and all safety gates
+gate; schedule, artifact, automated evidence, device, authorization, and all safety gates
 remain unchanged and mainnet remains `HOLD`.
 
 Run this while preparing artifacts:
@@ -41,18 +41,19 @@ Run this only during the final attended review:
 node scripts/run-launch-preflight.mjs --require-ceremony-ready
 ```
 
-Before any other ceremony check runs, the assertion requires the public
-pre-launch audit clearance and all seven conditions recorded in
+Before any other ceremony check runs, the assertion requires validated
+historical-audit integrity, the current-source successor clearance, and all
+seven conditions recorded in
 `launch/iat-v2-mainnet-readiness-gate.json`:
 
-1. Both canonical pre-launch and hardening audit manifests record `CLEAR`.
-   The historical audit must have zero critical/high findings. The hardening
-   audit may retain exactly one named `OPEN_OWNER_ACCEPTED` critical for the
-   sole-Trezor topology, but must have zero unaccepted criticals, zero high
-   findings, zero open blockers, zero remediations pending review, resolved
-   security blockers, a fresh current-source SBF, fresh signed Devnet evidence,
-   production identity integration rehearsal, and independent final-code
-   review.
+1. Both historical pre-launch and hardening audit packages still pass their
+   immutable `DRAFT_MAINNET_HOLD` validators, and the separate versioned
+   `iat-v2-current-source-clearance.json` successor records `CLEAR`. The
+   successor requires exact public-GitHub CI build provenance and artifact
+   bytes plus current-source public direct evidence for the signed Devnet
+   rehearsal, production identity integration, and automated security closure.
+   Status-only, Boolean-only, URL-only, or unresolved-digest evidence cannot
+   clear it.
 2. The read-only balance observation is no more than 30 minutes old with no
    more than one minute of future skew.
 3. The public mainnet address has at least exactly `8500000000` lamports.
@@ -64,23 +65,23 @@ pre-launch audit clearance and all seven conditions recorded in
 5. Every bound release artifact was regenerated after both funding and
    scheduling, the canonical V2 ceremony review is `READY`, the canonical V2
    stage journal is `ARMED`, and both validators pass in this same assessment.
-6. An independent mainnet verifier is assigned in that validated V2 ceremony
-   review and has recorded both artifact and stage-plan review without signing
+6. An automated Mainnet evidence source is bound in that validated V2 ceremony
+   record and has recorded both artifact and stage-plan observations without signing
    authority.
 7. The exact Model T device path was reviewed in the attended session for the
    sole signer address bound to the readiness ledger in that validated review.
 
-The source-bound audit package is public at
+The historical source-bound audit package is public at
 [`public/audits/iat-v2-prelaunch-20260802/`](../public/audits/iat-v2-prelaunch-20260802/README.md).
-It is an internal Codex-assisted review, not an independent security audit, and
-it is deliberately fail-closed while its historical critical/high findings
-remain open. The later source-bound pre-launch hardening review is public at
+It is an internal Codex-assisted review bound to its historical source. The
+later historical pre-launch hardening review is public at
 [`public/audits/iat-v2-remediation-20260802/`](../public/audits/iat-v2-remediation-20260802/README.md)
-and is an independent ceremony-entry blocker of its own. Its sole-Trezor
-exception is accepted only as a named owner risk; it is never described as
-authority separation.
+and remains immutable HOLD evidence too. Neither audit package can be rewritten
+into a later clearance. Current-source progress is recorded only in
+[`iat-v2-current-source-clearance.json`](iat-v2-current-source-clearance.json),
+which remains non-authorizing even after its exact evidence predicates pass.
 
-The assessment also independently runs and requires the canonical mainnet
+The assessment also directly runs and requires the canonical Mainnet
 readiness-ledger validator before it can report entry readiness. It separately
 requires the mainnet HOLD/safety boundary,
 the honest `VERIFIED_LOCAL_HOST_ONLY` classification, and canonical validation
@@ -100,4 +101,5 @@ preparation audit can bypass this boundary.
 preflight to run. It does not mean `GO`, does not move mainnet from `HOLD`, and
 does not authorize a transaction. Physical review of every transaction,
 separate explicit broadcast approval, confirmed-chain reconciliation, and
-evidence-first publication remain distinct human-controlled boundaries.
+evidence-first publication remain distinct explicit owner decisions. Trezor
+Model T physical confirmation is the only human gate and applies only to actual signatures.

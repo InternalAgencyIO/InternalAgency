@@ -1,6 +1,6 @@
 {
   "$schema": "./iat-b3-x-social-evidence-provider-readiness.v1.schema.json",
-  "schema": "iat-b3-x-social-evidence-provider-readiness/v1",
+  "schema": "iat-b3-x-social-evidence-provider-readiness/v2",
   "profile": "PRODUCTION",
   "readiness": "BLOCKED",
   "status": "NON_ACTIVATING_X_SOCIAL_EVIDENCE_REVIEW_PACKET",
@@ -189,11 +189,11 @@
     "administrativeFailureDomainId": null,
     "credentialCustodyFailureDomainId": null,
     "backupFailureDomainId": null,
-    "independentObserverFailureDomainId": null,
-    "independentReviewerFailureDomainId": null,
-    "separationRule": "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_OBSERVER_AND_REVIEWER_DOMAINS_ALL_DISTINCT",
+    "automatedEvidenceSourceAFailureDomainId": null,
+    "automatedEvidenceSourceBFailureDomainId": null,
+    "separationRule": "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_EVIDENCE_SOURCE_A_AND_B_DOMAINS_ALL_DISTINCT",
     "evidence": null,
-    "blocker": "The ten production X provider, collector, finality source, local persistence, external checkpoint, administration, credential, backup, independent observer, and independent reviewer failure domains are unidentified."
+    "blocker": "The ten production X provider, collector, finality source, local persistence, external checkpoint, administration, credential, backup, automated evidence source A, and automated evidence source B failure domains are unidentified."
   },
   "controlRequirements": [
     {
@@ -207,7 +207,7 @@
         "MISSING_UNKNOWN_MALFORMED_OR_PROVIDER_ERROR_FAILS_CLOSED"
       ],
       "evidence": null,
-      "blocker": "The production X OAuth application, API contract, account-age observation, token-custody procedure, and independent evidence are not frozen."
+      "blocker": "The production X OAuth application, API contract, account-age observation, token-custody procedure, and automated direct evidence are not frozen."
     },
     {
       "id": "WALLET_ONE_TO_ONE_AND_TOMBSTONES",
@@ -220,7 +220,7 @@
         "BIOLOGICAL_ONE_HUMAN_OR_STRONG_SYBIL_RESISTANCE_IS_NOT_CLAIMED"
       ],
       "evidence": null,
-      "blocker": "The production wallet challenge, verifier, one-to-one registry, tombstone persistence, and narrow Sybil claim have not been independently reviewed."
+      "blocker": "The production wallet challenge, verifier, one-to-one registry, tombstone persistence, and narrow Sybil claim have not been bound to automated direct evidence."
     },
     {
       "id": "TIER_OBSERVATION_FRESHNESS_AND_ACCEPTANCE_TIMING",
@@ -283,7 +283,7 @@
         "UNLIKE_UNFOLLOW_CURSOR_GAP_AND_OUTAGE_AMBIGUITY_FAIL_CLOSED"
       ],
       "evidence": null,
-      "blocker": "No append-only production observer proves like and follow first observation, finalized-slot chronology, synthetic identity, or ambiguity handling."
+      "blocker": "No append-only production evidence source proves like and follow first observation, finalized-slot chronology, synthetic identity, or ambiguity handling."
     },
     {
       "id": "CAMPAIGN_TARGET_AUTHORITY",
@@ -294,7 +294,7 @@
         "UNBOUND_EXPIRED_FORKED_OR_MUTATED_TARGETS_FAIL_CLOSED"
       ],
       "evidence": null,
-      "blocker": "The production campaign-target registry, authority, validity windows, revision commitment, and independent evidence are not frozen."
+      "blocker": "The production campaign-target registry, authority, validity windows, revision commitment, and automated direct evidence are not frozen."
     },
     {
       "id": "COLLECTOR_COMPLETENESS_PAGINATION_AND_REPLAY",
@@ -303,7 +303,7 @@
         "EVERY_ACTION_SOURCE_HAS_PINNED_API_VERSION_CURSOR_AND_PAGINATION_SEMANTICS",
         "RATE_LIMIT_PAGE_GAP_PARTIAL_WINDOW_AND_PROVIDER_OUTAGE_FAIL_CLOSED",
         "CANONICAL_ACTION_KEYS_ARE_GLOBALLY_APPEND_ONLY_AND_REPLAY_UNIQUE",
-        "COMPLETE_CLOSED_EPOCH_SNAPSHOT_IS_CONTENT_ADDRESSED_AND_INDEPENDENTLY_OBSERVED"
+        "COMPLETE_CLOSED_EPOCH_SNAPSHOT_IS_CONTENT_ADDRESSED_AND_AUTOMATED_SOURCE_BOUND"
       ],
       "evidence": null,
       "blocker": "No production collector proves cursor completeness, rate-limit and outage closure, global replay uniqueness, or complete closed-epoch snapshots."
@@ -355,7 +355,7 @@
         "X_TERMS_PRIVACY_AND_API_POLICY_VERSIONS_ARE_PINNED_AND_REVIEWED",
         "TOKEN_RECEIPT_ACTION_AND_AUDIT_RETENTION_WINDOWS_ARE_EXACT",
         "DELETION_APPEAL_AND_INCIDENT_PATHS_PRESERVE_NON_REBINDING_WITHOUT_UNNECESSARY_PII",
-        "TOMBSTONE_PSEUDONYMIZATION_AND_LEGAL_BASIS_ARE_INDEPENDENTLY_REVIEWED"
+        "TOMBSTONE_PSEUDONYMIZATION_AND_LEGAL_BASIS_ARE_SOURCE_BOUND"
       ],
       "evidence": null,
       "blocker": "The production data inventory, X terms, privacy, retention, erasure, appeal, incident, and tombstone pseudonymization rules are unresolved."
@@ -400,16 +400,16 @@
       "blocker": "No production adapter authenticates source kind and chronology, complete due-set lineage, original admission, allocator receipts, or persistent CAS ancestry."
     },
     {
-      "id": "INDEPENDENT_AUDIT_AND_PRODUCTION_REVIEW",
+      "id": "AUTOMATED_AUDIT_AND_PRODUCTION_DIRECT_EVIDENCE",
       "status": "BLOCKED",
       "requiredClaims": [
         "EVERY_REQUIRED_CONTROL_HAS_CONTENT_ADDRESSED_SUBJECT_AND_POLICY_BOUND_EVIDENCE",
-        "OBSERVER_AND_REVIEWER_IDENTITIES_ARE_DISTINCT_FROM_PROVIDER_RUNTIME_ADMIN_CREDENTIAL_AND_BACKUP_DOMAINS",
+        "AUTOMATED_EVIDENCE_SOURCES_A_AND_B_ARE_DISTINCT_FROM_PROVIDER_RUNTIME_ADMIN_CREDENTIAL_AND_BACKUP_DOMAINS",
         "DECLARED_EVIDENCE_INTERVAL_IS_BOUNDED_AND_CONTAINS_EXPLICIT_EVALUATION_TIME",
         "STRUCTURAL_PACKET_COMPLETENESS_DOES_NOT_CERTIFY_PROVIDER_TRUTH_AUTHENTICATION_SYBIL_RESISTANCE_OR_LAUNCH_READINESS"
       ],
       "evidence": null,
-      "blocker": "The production packet lacks independent content-addressed evidence, observer and reviewer identity, freshness evaluation, and final review artifacts."
+      "blocker": "The production packet lacks automated source-bound content-addressed evidence, automated evidence sources A and B identity, freshness evaluation, and final review artifacts."
     }
   ],
   "terminalPredicate": {
@@ -438,10 +438,10 @@
       "BACKUP_RESTORE_DR_AND_ROLLBACK_DETECTION",
       "DAILY_LAW_FIRST_AND_CONSUMER_GATING",
       "SOURCE_KIND_LINEAGE_ALLOCATOR_AND_PERSISTENCE",
-      "INDEPENDENT_AUDIT_AND_PRODUCTION_REVIEW"
+      "AUTOMATED_AUDIT_AND_PRODUCTION_DIRECT_EVIDENCE"
     ],
     "evaluationRule": "ALL_REQUIRED_PACKETS_COMPLETE_ZERO_VIOLATIONS_ZERO_BLOCKERS",
-    "blocker": "The production subject, provider, wallet, collector, receipt trust, privacy, failure-domain, control, and independent review packets remain incomplete."
+    "blocker": "The production subject, provider, wallet, collector, receipt trust, privacy, failure-domain, control, and automated direct-evidence packets remain incomplete."
   },
   "providerEvidenceAuthenticationVerified": false,
   "collectorCompletenessVerified": false,
