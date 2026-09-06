@@ -4,9 +4,10 @@ import test from "node:test";
 import { Connection } from "@solana/web3.js";
 
 const consoleRoot = new URL("../tools/iat-v2-admin-console/", import.meta.url);
-const [programShellSource, programSource, migrationSource, featureSource] = await Promise.all([
+const [programShellSource, programSource, programRecoverySource, migrationSource, featureSource] = await Promise.all([
   readFile(new URL("ProgramUpgrade.jsx", consoleRoot), "utf8"),
   readFile(new URL("ProgramUpgradeAttendedActions.jsx", consoleRoot), "utf8"),
+  readFile(new URL("attended-program-recovery.mjs", consoleRoot), "utf8"),
   readFile(new URL("LegacyRoundMigration.jsx", consoleRoot), "utf8"),
   readFile(new URL("FeatureRehearsal.jsx", consoleRoot), "utf8"),
 ]);
@@ -189,7 +190,11 @@ test("program prompting refreshes the blockhash after read-only preflight and ex
 });
 
 test("program preparation binds fresh lifetime and exact bytes before the coordinator prompt", () => {
-  const helper = section(programSource, "async function requestProgramModelTSignature", "function errorText");
+  const helper = section(
+    programSource,
+    "async function requestProgramModelTSignature",
+    "function errorText",
+  );
   assert.match(helper, /coordinator\.request\(\{[\s\S]*prepare,[\s\S]*prompt: async \(\) =>/u);
   const handler = section(programSource, "async function simulateAndSign()", "async function broadcastSigned()");
   const prepare = section(handler, "prepare: async () => {", "verifySigned:");
@@ -333,6 +338,15 @@ test("program reload probes permanent attempts and signed-pending state before a
     programSource,
     /pendingRecoveryReady[\s\S]*pendingRecoveryBlocked[\s\S]*SIMULATE \+ SIGN SEPARATE CAPACITY EXTENSION/u,
   );
+  assert.match(
+    programSource,
+    /classifyAttendedProgramRecovery\(\{[\s\S]*promptLatch,[\s\S]*signedPending: record,[\s\S]*\}\)/u,
+  );
+  assert.match(programSource, /attendedProgramRecoveryHold\(recovery\)/u);
+  assert.match(programSource, /attendedProgramHoldStatus\(caught\)/u);
+  assert.match(programRecoverySource, /PROMPT_ENTERED_WITHOUT_PENDING/u);
+  assert.match(programRecoverySource, /PROMPT_FAILED_WITHOUT_PENDING/u);
+  assert.match(programRecoverySource, /PROMPT_VERIFIED_WITHOUT_PENDING/u);
 });
 
 test("program broadcast is one reserved send with exact local signature and poll-only reconciliation", () => {

@@ -238,14 +238,9 @@ export function createAttendedModelTPromptCoordinator({
             finishedAtUtc: null,
           });
 
+          let value;
           try {
-            const value = await prompt();
-            const verified = persistExactLatch(latchStorage, key, {
-              ...entered,
-              status: "PROMPT_VERIFIED",
-              finishedAtUtc: nextTimestamp(now, "Prompt verified time"),
-            });
-            return Object.freeze({ value, latch: verified });
+            value = await prompt();
           } catch (error) {
             try {
               persistExactLatch(latchStorage, key, {
@@ -260,6 +255,18 @@ export function createAttendedModelTPromptCoordinator({
             }
             throw error;
           }
+
+          // A failure to durably promote the latch after the prompt callback
+          // returned must not rewrite the outcome as PROMPT_FAILED. Program
+          // prompting persists and verifies its recoverable signed wire inside
+          // that callback; retaining PROMPT_ENTERED keeps reload recovery both
+          // conservative and compatible with that exact durable record.
+          const verified = persistExactLatch(latchStorage, key, {
+            ...entered,
+            status: "PROMPT_VERIFIED",
+            finishedAtUtc: nextTimestamp(now, "Prompt verified time"),
+          });
+          return Object.freeze({ value, latch: verified });
         },
       );
     },

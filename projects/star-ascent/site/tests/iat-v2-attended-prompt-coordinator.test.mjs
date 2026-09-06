@@ -238,6 +238,42 @@ test("callback failure leaves a permanent failed latch and cannot reprompt", asy
   assert.equal(targetStorage.calls.some(([method]) => method === "removeItem"), false);
 });
 
+test("verified-latch persistence failure never rewrites a completed callback as prompt failed", async () => {
+  for (const writeThenThrow of [false, true]) {
+    const retained = storage();
+    let latchWrites = 0;
+    const targetStorage = {
+      calls: retained.calls,
+      getItem: retained.getItem.bind(retained),
+      setItem(key, serialized) {
+        latchWrites += 1;
+        if (latchWrites === 2) {
+          if (writeThenThrow) retained.setItem(key, serialized);
+          throw new Error("verified latch storage failed");
+        }
+        retained.setItem(key, serialized);
+      },
+      value: retained.value.bind(retained),
+    };
+    const { value } = coordinator({ targetStorage });
+    let callbackCalls = 0;
+    await assert.rejects(request(value, {
+      prompt: async () => {
+        callbackCalls += 1;
+        return "durable-signed-record";
+      },
+    }), /storage is unavailable or non-durable/u);
+    const key = attendedPromptLatchKey({ binding, action: "UPGRADE_PROGRAM" });
+    assert.equal(callbackCalls, 1);
+    assert.equal(latchWrites, 2, "no PROMPT_FAILED rewrite may follow a final-latch failure");
+    assert.equal(
+      JSON.parse(targetStorage.value(key)).status,
+      writeThenThrow ? "PROMPT_VERIFIED" : "PROMPT_ENTERED",
+    );
+    await assert.rejects(request(value), /already consumed/u);
+  }
+});
+
 test("fresh blockhash message cannot bypass the source-bound canonical action latch", async () => {
   const { value } = coordinator();
   await request(value);

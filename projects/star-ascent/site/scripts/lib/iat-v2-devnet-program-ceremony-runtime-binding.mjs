@@ -55,6 +55,7 @@ export const IAT_V2_DEVNET_PROGRAM_CEREMONY_RUNTIME_PATHS = Object.freeze([
   "tools/iat-v2-admin-console/attended-evidence-bundle.mjs",
   "tools/iat-v2-admin-console/attended-evidence.mjs",
   "tools/iat-v2-admin-console/attended-program-broadcast-once.mjs",
+  "tools/iat-v2-admin-console/attended-program-recovery.mjs",
   "tools/iat-v2-admin-console/attended-program-signed-pending.mjs",
   "tools/iat-v2-admin-console/attended-prompt-coordinator.mjs",
   "tools/iat-v2-admin-console/attended-settlement-browser.mjs",

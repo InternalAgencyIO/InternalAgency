@@ -42,6 +42,11 @@ import {
   removeAttendedProgramSignedPending,
 } from "./attended-program-signed-pending.mjs";
 import {
+  attendedProgramHoldStatus,
+  attendedProgramRecoveryHold,
+  classifyAttendedProgramRecovery,
+} from "./attended-program-recovery.mjs";
+import {
   IAT_V2_ATTENDED_PROGRAM_BROADCAST_ATTEMPT_SCHEMA,
   loadAttendedProgramBroadcastAttempt,
   withAttendedProgramBroadcastReconciliation,
@@ -578,19 +583,12 @@ export default function ProgramUpgradeAttendedActions({
           binding: snapshot.evidenceBinding,
           action: recoveryBinding.action,
         });
-        if (record === null) {
-          if (promptLatch !== null) {
-            throw new Error("Transaction prompt latch is consumed but no recoverable signed program record exists");
-          }
-        } else {
-          if (
-            promptLatch === null
-            || !["PROMPT_ENTERED", "PROMPT_VERIFIED"].includes(promptLatch.status)
-            || promptLatch.messageSha256 !== record.messageSha256
-            || promptLatch.signer !== record.signer
-          ) {
-            throw new Error("Persisted signed program record does not match its entered or verified prompt latch");
-          }
+        const recovery = classifyAttendedProgramRecovery({
+          promptLatch,
+          signedPending: record,
+        });
+        if (recovery.outcome === "HOLD") throw attendedProgramRecoveryHold(recovery);
+        if (recovery.outcome === "RECOVERABLE") {
           if (record.actionBinding !== upgradeActionBinding(snapshot)) {
             throw new Error("Persisted signed program action no longer matches finalized state");
           }
@@ -602,7 +600,7 @@ export default function ProgramUpgradeAttendedActions({
       setCheckedPendingBinding(recoveryBindingKey);
     } catch (caught) {
       setBlockedPendingBinding(recoveryBindingKey);
-      setStatus("HOLD // SIGNED PROGRAM RECOVERY FAILED");
+      setStatus(attendedProgramHoldStatus(caught) ?? "HOLD // SIGNED PROGRAM RECOVERY FAILED");
       setError(errorText(caught));
     }
   }, [
@@ -830,7 +828,7 @@ export default function ProgramUpgradeAttendedActions({
       if (promptRecovery !== null && shouldBlockProgramPromptRetry(promptRecovery)) {
         setBlockedPendingBinding(promptRecovery.key);
       }
-      setStatus("HOLD // ATTENDED PROGRAM STEP STOPPED");
+      setStatus(attendedProgramHoldStatus(caught) ?? "HOLD // ATTENDED PROGRAM STEP STOPPED");
       setError(errorText(caught));
     } finally {
       setBusy(false);
