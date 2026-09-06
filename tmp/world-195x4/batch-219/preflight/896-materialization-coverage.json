@@ -1,0 +1,280 @@
+{
+  "schema": "world-195x4-materialization-coverage-v2",
+  "batch": 219,
+  "country": "El Salvador",
+  "sceneNumber": 896,
+  "status": "passed-lossless",
+  "requiredCoveragePercent": 100,
+  "achievedCoveragePercent": 100,
+  "evidence": {
+    "canonical identity and relative height geometry": {
+      "status": "present",
+      "section": "CAST AND GEOMETRY",
+      "identityReferenceCount": 3
+    },
+    "country and exact recognizable location": {
+      "status": "present",
+      "section": "COUNTRY, LOCATION AND MISSION",
+      "location": "a broad empty temporary editorial deck beside the recognizable National Palace in San Salvador's historic center, with the San Salvador Volcano ridge clearly visible at cobalt-and-gold dusk and the set safely separated from streets, visitors and architecture"
+    },
+    "rotated aircrew roles and harmless completed mission": {
+      "status": "present",
+      "section": "AIRCREW ROLES",
+      "roles": {
+        "Radiance": "first officer",
+        "Ellie": "cabin host",
+        "Alia": "captain",
+        "AI ECE": "signal officer"
+      },
+      "missionState": "already-complete-secondary"
+    },
+    "original stored relationship pose or exact resolved pose beat": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "tableauSha256": "d812b8bfd3a7e9944da40fca822b533919df553f8c855556e741fdf53f95130f"
+    },
+    "closed Radiance-Ellie-Alia triangle geometry": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "primary closed Radiance-Ellie-Alia romantic triangle"
+    },
+    "ECE reciprocal relationship connection without displacing the original trio": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "ECE reciprocal and non-displacing"
+    },
+    "four distinct bold country-derived latex-and-lace silhouettes": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "distinctSilhouetteCount": 4
+    },
+    "intentional natural midriff and navel visibility": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "specifiedVisibleNavelCount": 4
+    },
+    "all deterministic appearance rolls with triggered outcomes": {
+      "status": "present",
+      "artifact": "896-roll-audit.json",
+      "evaluatedRollCount": 356
+    },
+    "all triggered tattoo, piercing, jewelry, hair, accessory, touch, expression and pose rules": {
+      "status": "present",
+      "section": "ALL TRIGGERED DETERMINISTIC DETAILS",
+      "triggeredCount": 8,
+      "tattooCount": 0
+    },
+    "all trio-static rolls and any triggered original tableau": {
+      "status": "present",
+      "artifact": "896-roll-audit.json",
+      "evaluatedTrioRollCount": 20,
+      "triggeredTrioCount": 1
+    },
+    "PAWS presence roll, resolved action roll, growth epoch and reciprocation": {
+      "status": "present",
+      "section": "PAWS CONTRACT",
+      "presenceRoll": 28,
+      "rawActionRoll": 5,
+      "resolvedActionIndex": 5,
+      "growthEpoch": 1,
+      "effectiveTriggered": true
+    },
+    "clean-face, anatomy, hands, complete footwear and technical invariants": {
+      "status": "present",
+      "section": "COMPOSITION AND VALIDATION",
+      "cleanFace": true,
+      "hands": 8,
+      "footwear": 8,
+      "portrait": "9:16 full-length"
+    }
+  },
+  "semanticDiff": {
+    "status": "passed",
+    "positiveInstructionDeletionCount": 0,
+    "generalizedTriggeredDetailCount": 0,
+    "expectedTriggeredIds": [
+      "Radiance.pairedWristCuffPose",
+      "Radiance.gloveTipRemovalAudience",
+      "Ellie.subtleTacticalWebbing",
+      "Alia.opaqueContrastEdge",
+      "Alia.playfulJealousSideEye",
+      "Alia.interlacedFingersBehindMissionProp",
+      "Alia.subtleTacticalWebbing",
+      "trio.trioHipLineLegPop"
+    ],
+    "materializedTriggeredIds": [
+      "Radiance.pairedWristCuffPose",
+      "Radiance.gloveTipRemovalAudience",
+      "Ellie.subtleTacticalWebbing",
+      "Alia.opaqueContrastEdge",
+      "Alia.playfulJealousSideEye",
+      "Alia.interlacedFingersBehindMissionProp",
+      "Alia.subtleTacticalWebbing",
+      "trio.trioHipLineLegPop"
+    ],
+    "exactTriggeredSetMatch": true,
+    "originalTableauSha256": "d812b8bfd3a7e9944da40fca822b533919df553f8c855556e741fdf53f95130f",
+    "finalPromptSha256": "bfaec241473014c9b340022d26a365005a14725c8562e8178ecbc99a04836967",
+    "blocklistSubstitutionCount": 0,
+    "blocklistSubstitutions": []
+  },
+  "transformations": {
+    "blockedCorpusSha256": "7f0ced957a48adfc4186457bb14ab4313884f82c9c903521014c4532da84e6e1",
+    "longestPhraseFirst": true,
+    "substitutions": []
+  },
+  "triggerMaterialization": [
+    {
+      "id": "Radiance.pairedWristCuffPose",
+      "scope": "Radiance",
+      "trait": "pairedWristCuffPose",
+      "seed": "896|Radiance|pairedWristCuffPose|mile-high-v1",
+      "firstEightHex": "054b9934",
+      "roll": 0,
+      "rollScale": 100,
+      "trigger": "roll 0 through 3 inclusive",
+      "probability": "4%",
+      "triggered": true,
+      "storedRule": "Two women may wear visually paired but separate sculptural wrist cuffs while linking hands. The cuffs are never connected, locked or used as restraints.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 01",
+      "materializedInstruction": "Radiance and Ellie wear paired but separate sculptural wrist cuffs and visibly link one pair of hands; no connector joins the cuffs.",
+      "storedRuleSha256": "30581f82db9c7bf74a62e247e5868064389289c4d4558e072efc0c742c755d2a",
+      "materializedInstructionSha256": "0c75e52ea799d30a5d7f51b15aa171df83ff448fb3b0055915608748e5756e1b",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Radiance.gloveTipRemovalAudience",
+      "scope": "Radiance",
+      "trait": "gloveTipRemovalAudience",
+      "seed": "896|Radiance|gloveTipRemovalAudience|mile-high-v1",
+      "firstEightHex": "173763d5",
+      "roll": 5,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 9 inclusive",
+      "probability": "1.0%",
+      "triggered": true,
+      "storedRule": "Show one woman catching the tip of her own leather fashion glove between her teeth and drawing it off with a playful flourish while the other two watch in captivated, absolute silence, their expressions carrying the entire charged beat.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 02",
+      "materializedInstruction": "Radiance catches the fingertip of her own fashion glove between her teeth and smoothly draws it from her own hand in one playful editorial flourish while Ellie and Alia watch in captivated silence.",
+      "storedRuleSha256": "1ac892f45e7ddb1d33145ad09ead6e4aae093d1504d76591cf886c1679a36b5c",
+      "materializedInstructionSha256": "1540c0edf545f800040bee041f38e7386aadfbbba0fc23ba28f0090d9bdcae84",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.subtleTacticalWebbing",
+      "scope": "Ellie",
+      "trait": "subtleTacticalWebbing",
+      "seed": "896|Ellie|subtleTacticalWebbing|mile-high-v1",
+      "firstEightHex": "e3c39a1e",
+      "roll": 6,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 17 inclusive",
+      "probability": "1.8%",
+      "triggered": true,
+      "storedRule": "Integrate intricate woven utility-webbing geometry subtly into the principal garment beneath one open-front lightweight trench-dress silhouette. The webbing is decorative, non-load-bearing and non-restraining; avoid military insignia, weapons and excess layers.",
+      "otherwise": null,
+      "rendererSafeAlias": "Ellie appearance beat 03",
+      "materializedInstruction": "Ellie's cropped open-front cobalt trench-dress uses intricate decorative woven geometry in lacquered trim; it is non-load-bearing, non-restraining and carries no insignia.",
+      "storedRuleSha256": "bf2aab182d193ff1b960b035025d3f1cdfbb75daf00005ea6a59c36de837379c",
+      "materializedInstructionSha256": "cb629dffc9ad114347fbca084d8516b85a89dd3c26b69339a1fd46c0a105a548",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.opaqueContrastEdge",
+      "scope": "Alia",
+      "trait": "opaqueContrastEdge",
+      "seed": "896|Alia|opaqueContrastEdge|mile-high-v1",
+      "firstEightHex": "fe4c684f",
+      "roll": 3,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Show a deliberately visible opaque contrast edge or integrated dancewear-style lining as part of the principal garment. It is not underwear, never transparent and never adds a redundant clothing layer.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 04",
+      "materializedInstruction": "Alia's principal outfit has a deliberately visible pearl opaque contrast edge integrated into the lacquered-and-guipure construction.",
+      "storedRuleSha256": "3b1589f3b6ca6fc21e5d4e3d2bb51cfc85a822a942be6eedfaa942141a3188da",
+      "materializedInstructionSha256": "bb0c21725665e4101d9703b599a77dab34d3cb602b70da983e6989f23f3ed8fe",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.playfulJealousSideEye",
+      "scope": "Alia",
+      "trait": "playfulJealousSideEye",
+      "seed": "896|Alia|playfulJealousSideEye|mile-high-v1",
+      "firstEightHex": "ea19c7d5",
+      "roll": 1,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Give the designated third woman a clearly playful jealous side-eye while keeping her affectionate, non-hostile and physically included through a visible linked hand, shoulder touch or side embrace.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 05",
+      "materializedInstruction": "Alia gives Radiance and Ellie a clearly playful jealous side-eye while remaining physically included through shoulder contact with Ellie and a welcoming waist connection with ECE.",
+      "storedRuleSha256": "65897ce16e9ed0c6679fe81a551d9fc2364d20603d31d8a322e871352c4cf928",
+      "materializedInstructionSha256": "cf930c78ecda2a2d4ab62e242313e4daefc3a07bf755f50d792bd1784315bef7",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.interlacedFingersBehindMissionProp",
+      "scope": "Alia",
+      "trait": "interlacedFingersBehindMissionProp",
+      "seed": "896|Alia|interlacedFingersBehindMissionProp|mile-high-v1",
+      "firstEightHex": "d270c7a6",
+      "roll": 2,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Let two adult partners discreetly interlace fingers behind or beside the mission prop while the objective, every hand and the third woman's connection remain readable.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 06",
+      "materializedInstruction": "Alia and Ellie visibly interlace fingers beside the already-completed passive route-light rail while every hand remains readable.",
+      "storedRuleSha256": "eef94573bb53dac9b8d739c3270118b254ac70be5e1a63cb20baa569fff86bdb",
+      "materializedInstructionSha256": "7a348e2954fbabc4be22a1e6fdaddd8fbd4d766a6fe7e47d92e12222d4541754",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.subtleTacticalWebbing",
+      "scope": "Alia",
+      "trait": "subtleTacticalWebbing",
+      "seed": "896|Alia|subtleTacticalWebbing|mile-high-v1",
+      "firstEightHex": "c75f13e9",
+      "roll": 1,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 17 inclusive",
+      "probability": "1.8%",
+      "triggered": true,
+      "storedRule": "Integrate intricate woven utility-webbing geometry subtly into the principal garment beneath one open-front lightweight trench-dress silhouette. The webbing is decorative, non-load-bearing and non-restraining; avoid military insignia, weapons and excess layers.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 07",
+      "materializedInstruction": "Alia's asymmetric open-front obsidian trench-dress uses sparse decorative woven lacquered geometry, non-load-bearing and non-restraining, in a visibly different cut from Ellie's.",
+      "storedRuleSha256": "bf2aab182d193ff1b960b035025d3f1cdfbb75daf00005ea6a59c36de837379c",
+      "materializedInstructionSha256": "6dd7f54610b8e321b14451a35568a78e063eb8ae68067bdd1aadcd56f3a2d51b",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "trio.trioHipLineLegPop",
+      "scope": "trio",
+      "trait": "trioHipLineLegPop",
+      "seed": "896|trio|trioHipLineLegPop|mile-high-v1",
+      "firstEightHex": "d08f3c4b",
+      "roll": 11,
+      "rollScale": 1000,
+      "trigger": "trio precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Set all three hip-to-hip in one clean fashion line with coordinated alternating leg pops, short secure hemlines and complete statement footwear, keeping their upper bodies linked through shoulders, waists and exchanged looks.",
+      "otherwise": null,
+      "rendererSafeAlias": "original trio tableau beat 08",
+      "materializedInstruction": "Radiance, Ellie and Alia execute the original stored hip-to-hip fashion line with coordinated alternating leg pops, short secure hems, complete statement footwear, linked shoulders and waists, and exchanged looks.",
+      "storedRuleSha256": "b201540202c6eed294be54f85f30172e4778e69883fd6b0425e89e32101e430a",
+      "materializedInstructionSha256": "d0a3420f88e67c3fcb98dae07e9cdc36386239d1a1a5ae11602265b0c9f4487e",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    }
+  ]
+}

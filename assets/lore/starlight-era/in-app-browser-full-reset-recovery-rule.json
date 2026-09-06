@@ -1,0 +1,28 @@
+{
+  "schemaVersion":1,
+  "createdAtUtc":"2026-08-26T06:22:00.000Z",
+  "ruleId":"starlight-in-app-browser-full-reset-v1",
+  "appliesTo":"sole Starlight guardian Meta render pipeline",
+  "triggers":[
+    "tab is uncontrollable or binding is stale",
+    "visible tab count diverges from eligible lane state",
+    "send returns to an empty home composer without prompt history",
+    "old tabs cannot be safely matched to confirmed provider occurrences"
+  ],
+  "procedure":[
+    "preserve every already-confirmed provider URL, response, refusal and raw output before reset",
+    "list every in-app browser tab id",
+    "rebind each id and close every old tab",
+    "create fresh controllable in-app Meta tabs",
+    "restore only checkpoint-eligible prompts",
+    "upload fictional face anchors in authoritative order 938 -> 936 -> 937",
+    "dispatch only an authorized initial attempt or single bounded retry",
+    "never resend a scene with an existing confirmed provider chat",
+    "mark rebuilt tabs visible to the user and continue production"
+  ],
+  "provenOnBatch":410,
+  "provenResult":"four stale tabs closed; four clean tabs opened; scene 1660 obtained a distinct provider chat while scenes 1661 and 1662 correctly remained no-confirmed occurrences",
+  "automationId":"starlight-internalagency-24-7-guardian",
+  "automationIntervalMinutes":10,
+  "immutable":true
+}

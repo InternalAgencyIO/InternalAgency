@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "provider": "Meta AI through the in-app Browser only",
+  "capturedAtUtc": "2026-08-31T06:35:14.5119082Z",
+  "state": "closed_one_accepted_no_x_pair",
+  "accountVisible": "leesha007",
+  "sendCount": 4,
+  "repeatSendCount": 0,
+  "occurrences": [
+    {
+      "scene": 1894,
+      "status": "explicit_no_byte_refusal_terminal",
+      "providerUrl": "https://www.meta.ai/prompt/24a04fc3-f2b5-4682-83f3-f714ab2539f3",
+      "rawAssetCount": 0,
+      "retryPermitted": false
+    },
+    {
+      "scene": 1895,
+      "status": "accepted_selected_chatgpt_hemline_refinement",
+      "providerUrl": "https://www.meta.ai/prompt/89807d2c-615c-4ccd-83d2-78f1b366b820",
+      "rawAssetCount": 1,
+      "retryPermittedAfterQa": false,
+      "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1895-serbia-djerdap-gorge-chatgpt-hemline-one-pass.png"
+    },
+    {
+      "scene": 1896,
+      "status": "hard_unusable_wrong_aspect_retry_eligible",
+      "providerUrl": "https://www.meta.ai/prompt/5ca1b7d7-b8ff-4014-9cb2-0f42b4115a5d",
+      "rawAssetCount": 1,
+      "retryPermittedAfterQa": true
+    },
+    {
+      "scene": 1897,
+      "status": "hard_unusable_face_mapping_retry_eligible",
+      "providerUrl": "https://www.meta.ai/prompt/0e8881a3-b765-4b50-ad41-50c9e49e2cfa",
+      "rawAssetCount": 2,
+      "retryPermittedAfterQa": true
+    }
+  ],
+  "rawAssetCount": 4,
+  "chatgptRefinementCount": 4,
+  "browserEvidenceCount": 4,
+  "explicitNoByteCount": 1,
+  "acceptedSceneIds": [1895],
+  "retryEligibleSceneIds": [1896, 1897],
+  "orderedIdentityAnchors": [938, 936, 937],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "stagedFirstRetries": {
+    "observedAtUtc": "2026-08-31T06:52:47.3720107Z",
+    "sceneIds": [1896, 1897],
+    "retryNumber": 1,
+    "occurrenceNumber": 2,
+    "tabIds": ["9", "10"],
+    "promptSha256": [
+      "6C205E497A5F6C62D547B7E57270684A6CB3291A3B0935D4AC3FB787B3D00EE1",
+      "D1CA838503D195BA8E102C69A49317C1DC9F3E3D0B7D8C56E3E256AFCD36830F"
+    ],
+    "orderedIdentityAnchors": [938, 936, 937],
+    "sendClicked": true,
+    "replacementTabsAfterExpiry": ["13", "14"],
+    "submittedAtUtc": [
+      "2026-08-31T06:56:57.962Z",
+      "2026-08-31T06:57:01.057Z"
+    ],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/facdb210-6b59-4fee-9932-775e24e2bf32",
+      "https://www.meta.ai/prompt/04f962c0-c92a-4a38-9933-9a31a57831b3"
+    ]
+  },
+  "firstRetryOutcomes": [
+    {
+      "scene": 1896,
+      "status": "image-bearing-hard-unusable",
+      "rawAssetCount": 1,
+      "chatgptRefinementCount": 1,
+      "remainingMetaRetries": 1
+    },
+    {
+      "scene": 1897,
+      "status": "explicit-no-byte-refusal-terminal",
+      "rawAssetCount": 0,
+      "remainingMetaRetries": 0
+    }
+  ],
+  "stagedSecondRetry": {
+    "scene": 1896,
+    "retryNumber": 2,
+    "occurrence": 3,
+    "tabId": "15",
+    "promptSha256": "D77D2496940908353A8AEA505FEC41BBE101C69DA7ACD64BCA00400E3922B4B1",
+    "orderedIdentityAnchors": [938, 936, 937],
+    "primaryIdentityOrder": ["Alia", "Radiance", "Ellie", "AI ECE"],
+    "sendEnabled": true,
+    "sendClicked": true,
+    "replacementTabAfterExpiry": "16",
+    "submittedAtUtc": "2026-08-31T07:11:49.548Z",
+    "providerUrl": "https://www.meta.ai/prompt/e4e17039-8dc9-4b9e-bd44-b26fe1235c41"
+  },
+  "secondRetryOutcome": {
+    "scene": 1896,
+    "status": "explicit-no-byte-refusal-terminal",
+    "rawAssetCount": 0,
+    "remainingMetaRetries": 0
+  },
+  "closure": {
+    "acceptedSceneIds": [1895],
+    "xPairEligible": false,
+    "checkpoint": "assets/lore/starlight-era/batch-467-serbia-closed-one-accepted-checkpoint.json"
+  },
+  "nextSafeAction": "Prepare wholly new Bulgaria Batch 468 scenes 1898-1901 without reopening scenes 1886-1889."
+}

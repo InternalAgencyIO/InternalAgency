@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "batch": 488,
+  "country": "Slovenia",
+  "state": "prepared-not-dispatched",
+  "authority": {
+    "verifiedBaseHead": "f563812dd9ef8fba8687d3f53f6841358ec5fca0",
+    "branch": "agent/starlight-progress-archive",
+    "pr": 13,
+    "currentUserAuthorization": "Ongoing authorized continuation; four visible Meta lanes and post ready country pairs to @dogramaci.",
+    "historicalSlovenia": "Batch297 scenes1208-1211 remain terminal; this is a new gap-fill occurrence, not a retry or reopening."
+  },
+  "guardian": {
+    "starlight": "absent; no replacement authorized",
+    "unrelatedXAssistant": "ACTIVE every45minutes; untouched"
+  },
+  "providerSettings": {
+    "provider": "Meta",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "ratio": "9:16",
+    "count": 1,
+    "metaLanes": 4,
+    "xTabs": 1
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "orderedAnchors": [
+      938,
+      936,
+      937
+    ],
+    "hardPositionLock": "viewer-left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE",
+    "neverSwap": "Ellie and AI ECE"
+  },
+  "orderedReferenceAnchors": [
+    {
+      "scene": 938,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "retryAndRefinementPolicy": {
+    "metaRetryCapPerScene": 2,
+    "metaRetryTrigger": "hard failure only; accept nearly every public-safe, non-corrupt terminal still",
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedMetaImage": 1,
+    "archiveBlockedPrompts": true,
+    "retainUsedAndUnusedLocallyAndInGit": true
+  },
+  "deterministicRolls": {
+    "algorithm": "SHA256 UTF8 key; skip bytes>=200; first accepted byte modulo100+1.",
+    "seed": "starlight|batch-488|slovenia",
+    "seedSelection": "Fixed batch-country seed chosen without outcome search. Supersedes prior seed-shopping method for this batch and onward.",
+    "cameraMapping": {
+      "1-20": "tight hemline close",
+      "21-60": "adjacent three-quarter",
+      "61-100": "tight full-body"
+    },
+    "thresholds": {
+      "starHardware": 25,
+      "kneeHighHosiery": 25,
+      "splitStarEmblem": 25,
+      "razeTypeBand": 25,
+      "rainbowStockings": 33,
+      "kneeHighRainbows": 22,
+      "fictionalDistantRazedBackground": 32,
+      "characterBranding": 32,
+      "tattooWithinSelectedCharacters": 15
+    },
+    "statementBootScene": 1982,
+    "sceneAssignments": [
+      {
+        "scene": 1979,
+        "cameraRoll": 67,
+        "starHardwareRoll": 63,
+        "kneeHighHosieryRoll": 25,
+        "splitStarEmblemRoll": 63,
+        "razeTypeBandRoll": 25,
+        "rainbowStockingsRoll": 93,
+        "kneeHighRainbowsRoll": 66,
+        "fictionalDistantRazedBackgroundRoll": 36,
+        "characters": [
+          {
+            "character": "Alia",
+            "brandRoll": 98,
+            "placementRoll": 57
+          },
+          {
+            "character": "Radiance",
+            "brandRoll": 34,
+            "placementRoll": 24
+          },
+          {
+            "character": "Ellie",
+            "brandRoll": 32,
+            "placementRoll": 7
+          },
+          {
+            "character": "ECE",
+            "brandRoll": 39,
+            "placementRoll": 77
+          }
+        ]
+      },
+      {
+        "scene": 1980,
+        "cameraRoll": 37,
+        "starHardwareRoll": 42,
+        "kneeHighHosieryRoll": 62,
+        "splitStarEmblemRoll": 88,
+        "razeTypeBandRoll": 11,
+        "rainbowStockingsRoll": 74,
+        "kneeHighRainbowsRoll": 98,
+        "fictionalDistantRazedBackgroundRoll": 37,
+        "characters": [
+          {
+            "character": "Alia",
+            "brandRoll": 36,
+            "placementRoll": 25
+          },
+          {
+            "character": "Radiance",
+            "brandRoll": 76,
+            "placementRoll": 15
+          },
+          {
+            "character": "Ellie",
+            "brandRoll": 28,
+            "placementRoll": 48
+          },
+          {
+            "character": "ECE",
+            "brandRoll": 76,
+            "placementRoll": 7
+          }
+        ]
+      },
+      {
+        "scene": 1981,
+        "cameraRoll": 78,
+        "starHardwareRoll": 77,
+        "kneeHighHosieryRoll": 21,
+        "splitStarEmblemRoll": 53,
+        "razeTypeBandRoll": 95,
+        "rainbowStockingsRoll": 85,
+        "kneeHighRainbowsRoll": 91,
+        "fictionalDistantRazedBackgroundRoll": 96,
+        "characters": [
+          {
+            "character": "Alia",
+            "brandRoll": 19,
+            "placementRoll": 14
+          },
+          {
+            "character": "Radiance",
+            "brandRoll": 5,
+            "placementRoll": 44
+          },
+          {
+            "character": "Ellie",
+            "brandRoll": 31,
+            "placementRoll": 77
+          },
+          {
+            "character": "ECE",
+            "brandRoll": 53,
+            "placementRoll": 63
+          }
+        ]
+      },
+      {
+        "scene": 1982,
+        "cameraRoll": 65,
+        "starHardwareRoll": 80,
+        "kneeHighHosieryRoll": 44,
+        "splitStarEmblemRoll": 81,
+        "razeTypeBandRoll": 82,
+        "rainbowStockingsRoll": 58,
+        "kneeHighRainbowsRoll": 96,
+        "fictionalDistantRazedBackgroundRoll": 27,
+        "characters": [
+          {
+            "character": "Alia",
+            "brandRoll": 78,
+            "placementRoll": 20
+          },
+          {
+            "character": "Radiance",
+            "brandRoll": 94,
+            "placementRoll": 99
+          },
+          {
+            "character": "Ellie",
+            "brandRoll": 59,
+            "placementRoll": 4
+          },
+          {
+            "character": "ECE",
+            "brandRoll": 2,
+            "placementRoll": 4
+          }
+        ]
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "scene": 1979,
+      "location": "Ljubljana Triple Bridge and riverside",
+      "stem": "1979-slovenia-ljubljana-triple-bridge-raze-tight-full-body",
+      "detail": "A dry empty riverside promenade beside Ljubljana's Triple Bridge, pale stone balustrades, river reflections and the hilltop castle in the distance. Warm late-afternoon light. Low oblique close head-to-toe framing, complete shoes and faces, no distant tiny figures.",
+      "wardrobe": "Alia: cobalt fitted mini dress; Radiance: pearl-white cocktail mini; Ellie: crimson fitted top and navy mini skort; ECE: emerald fitted top and white mini skirt. Opaque knee-high stockings in each outfit's color. A narrow exact RAZE waistband on each look. Ellie alone has a small RAZE star fashion tattoo on her upper arm. No other character marks, rainbow hosiery or extra star emblems.",
+      "love": "Alia and Radiance link hands with warm smiles; Ellie rests a hand on Radiance's shoulder while ECE leans cheek-to-cheek with Ellie.",
+      "cameraRoll": 67,
+      "promptCharacters": 1745,
+      "promptSha256": "03C3BD12BB277ADAF03B54CE86B6EA1C41BE6B9D127FDE424207AB4096708F25",
+      "prompt": "SCENE 1979 — SLOVENIA. Create one new photorealistic cinematic vertical 9:16 high-fashion travel still. Use the attached project-owned AI-fictional continuity art once each, in order 938, 936, 937, only for the four characters' facial continuity, not for clothing or pose. Exactly four distinct fictional adult women age 21, left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct. No extra people. A dry empty riverside promenade beside Ljubljana's Triple Bridge, pale stone balustrades, river reflections and the hilltop castle in the distance. Warm late-afternoon light. Low oblique close head-to-toe framing, complete shoes and faces, no distant tiny figures. Alia: cobalt fitted mini dress; Radiance: pearl-white cocktail mini; Ellie: crimson fitted top and navy mini skort; ECE: emerald fitted top and white mini skirt. Opaque knee-high stockings in each outfit's color. A narrow exact RAZE waistband on each look. Ellie alone has a small RAZE star fashion tattoo on her upper arm. No other character marks, rainbow hosiery or extra star emblems. Use distinct classic RAZE pumps and restrained minimal heels. No fires or smoke. Alia and Radiance link hands with warm smiles; Ellie rests a hand on Radiance's shoulder while ECE leans cheek-to-cheek with Ellie. Every outfit is opaque, securely lined, fitted and sharply short at the upper thigh while maintaining complete coverage. Natural anatomy, realistic fabric and skin. Confident fashion-editorial mood, not sexualized. No nudity, underwear exposure, upskirt angle, erotic pose, intimate touching, weapons, animals, sacred imagery, flags, official emblems, third-party logos, Razer snake mark, collage, caption, border or watermark."
+    },
+    {
+      "scene": 1980,
+      "location": "Lake Bled castle panorama",
+      "stem": "1980-slovenia-lake-bled-castle-raze-adjacent-three-quarter",
+      "detail": "A broad dry empty lakeside terrace at Lake Bled, blue-green water, the castle on its steep rock and the Alpine ridge readable behind the group. Soft dawn light. Close adjacent three-quarter camera viewpoint with the four complete heads, hands, legs and shoes inside the vertical frame.",
+      "wardrobe": "Alia: bronze fitted halter mini; Radiance: pale-gold cocktail mini; Ellie: turquoise fitted top and midnight mini skort; ECE: plum fitted mini dress. A narrow exact RAZE waistband on each outfit. Ellie alone wears opaque neutral stockings with one original RAZE star mark on the outer calf; the other three have bare legs. No rainbow hosiery, extra star emblems or tattoos.",
+      "love": "Radiance gives Alia a brief closed-mouth cheek greeting; Ellie and ECE share a warm linked-arm embrace, while Ellie holds Radiance's hand to connect the quartet.",
+      "cameraRoll": 37,
+      "promptCharacters": 1781,
+      "promptSha256": "56B4BF6088D9DFEBB0BEBCCBC46123DCB7E7EF42E3CB739D60D79AFAC97FF9DC",
+      "prompt": "SCENE 1980 — SLOVENIA. Create one new photorealistic cinematic vertical 9:16 high-fashion travel still. Use the attached project-owned AI-fictional continuity art once each, in order 938, 936, 937, only for the four characters' facial continuity, not for clothing or pose. Exactly four distinct fictional adult women age 21, left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct. No extra people. A broad dry empty lakeside terrace at Lake Bled, blue-green water, the castle on its steep rock and the Alpine ridge readable behind the group. Soft dawn light. Close adjacent three-quarter camera viewpoint with the four complete heads, hands, legs and shoes inside the vertical frame. Alia: bronze fitted halter mini; Radiance: pale-gold cocktail mini; Ellie: turquoise fitted top and midnight mini skort; ECE: plum fitted mini dress. A narrow exact RAZE waistband on each outfit. Ellie alone wears opaque neutral stockings with one original RAZE star mark on the outer calf; the other three have bare legs. No rainbow hosiery, extra star emblems or tattoos. Use distinct classic RAZE pumps and restrained minimal heels. No fires or smoke. Radiance gives Alia a brief closed-mouth cheek greeting; Ellie and ECE share a warm linked-arm embrace, while Ellie holds Radiance's hand to connect the quartet. Every outfit is opaque, securely lined, fitted and sharply short at the upper thigh while maintaining complete coverage. Natural anatomy, realistic fabric and skin. Confident fashion-editorial mood, not sexualized. No nudity, underwear exposure, upskirt angle, erotic pose, intimate touching, weapons, animals, sacred imagery, flags, official emblems, third-party logos, Razer snake mark, collage, caption, border or watermark."
+    },
+    {
+      "scene": 1981,
+      "location": "Piran Tartini Square",
+      "stem": "1981-slovenia-piran-tartini-square-raze-tight-full-body",
+      "detail": "Dry empty paving in Piran's Tartini Square, curved pastel Venetian facades and a glimpse of the Adriatic harbor behind the quartet. Warm blue-hour ambient light. Slightly elevated diagonal tight head-to-toe framing, all four complete faces, hands and shoes visible.",
+      "wardrobe": "Alia: terracotta fitted mini dress; Radiance: ivory fitted top and gold mini skirt; Ellie: sapphire cocktail mini; ECE: sea-green fitted top and plum mini skort. Opaque color-coordinated knee-high stockings on all four. Alia alone has a small RAZE star upper-arm tattoo; Radiance and Ellie each have a RAZE star outer-calf stocking mark; ECE has no character mark. No rainbow hosiery, waist type bands or extra star hardware.",
+      "love": "Alia and Radiance share a gentle side embrace; Ellie leans cheek-to-cheek with Radiance, and ECE clasps Ellie's hand with a joyful smile.",
+      "cameraRoll": 78,
+      "promptCharacters": 1789,
+      "promptSha256": "61397FAB156C5C20BC8C550E2D157FC2F977F428BA18934D8C58F43C9BC0DE93",
+      "prompt": "SCENE 1981 — SLOVENIA. Create one new photorealistic cinematic vertical 9:16 high-fashion travel still. Use the attached project-owned AI-fictional continuity art once each, in order 938, 936, 937, only for the four characters' facial continuity, not for clothing or pose. Exactly four distinct fictional adult women age 21, left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct. No extra people. Dry empty paving in Piran's Tartini Square, curved pastel Venetian facades and a glimpse of the Adriatic harbor behind the quartet. Warm blue-hour ambient light. Slightly elevated diagonal tight head-to-toe framing, all four complete faces, hands and shoes visible. Alia: terracotta fitted mini dress; Radiance: ivory fitted top and gold mini skirt; Ellie: sapphire cocktail mini; ECE: sea-green fitted top and plum mini skort. Opaque color-coordinated knee-high stockings on all four. Alia alone has a small RAZE star upper-arm tattoo; Radiance and Ellie each have a RAZE star outer-calf stocking mark; ECE has no character mark. No rainbow hosiery, waist type bands or extra star hardware. Use distinct classic RAZE pumps and restrained minimal heels. No fires or smoke. Alia and Radiance share a gentle side embrace; Ellie leans cheek-to-cheek with Radiance, and ECE clasps Ellie's hand with a joyful smile. Every outfit is opaque, securely lined, fitted and sharply short at the upper thigh while maintaining complete coverage. Natural anatomy, realistic fabric and skin. Confident fashion-editorial mood, not sexualized. No nudity, underwear exposure, upskirt angle, erotic pose, intimate touching, weapons, animals, sacred imagery, flags, official emblems, third-party logos, Razer snake mark, collage, caption, border or watermark."
+    },
+    {
+      "scene": 1982,
+      "location": "Predjama Castle cliff terrace",
+      "stem": "1982-slovenia-predjama-castle-raze-tight-full-body-statement-boots",
+      "detail": "A dry empty stone terrace facing Predjama Castle built into its dramatic pale limestone cliff. Golden sunset light. Tight low-oblique head-to-toe framing preserving every complete face, hand, leg and boot. Far beyond the terrace, a clearly fictional uninhabited distant landscape has small orange fires, drifting smoke and one mushroom-shaped smoke cloud; no victims or real news framing. The quartet remains relaxed and absorbed in its reunion.",
+      "wardrobe": "Alia: copper fitted mini dress; Radiance: pearl-silver cocktail mini; Ellie: teal fitted top and black mini skort; ECE: forest-green fitted mini dress. All four wear sculptural tall RAZE statement boots with substantial architectural heels, not minimal shoes. ECE alone has a small RAZE star fashion tattoo on her upper arm; no other character marks. No rainbow hosiery, knee socks, waist type bands or extra star hardware.",
+      "love": "Alia links arms with Radiance; Ellie gives ECE a brief closed-mouth cheek greeting, and Radiance holds Ellie's hand to complete a warm connected group.",
+      "cameraRoll": 65,
+      "promptCharacters": 1900,
+      "promptSha256": "47368A3B11164AA9CD4C6CBC4C99ACA24753089BDA6FA7FDB6A91B4EC72AB46A",
+      "prompt": "SCENE 1982 — SLOVENIA. Create one new photorealistic cinematic vertical 9:16 high-fashion travel still. Use the attached project-owned AI-fictional continuity art once each, in order 938, 936, 937, only for the four characters' facial continuity, not for clothing or pose. Exactly four distinct fictional adult women age 21, left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct. No extra people. A dry empty stone terrace facing Predjama Castle built into its dramatic pale limestone cliff. Golden sunset light. Tight low-oblique head-to-toe framing preserving every complete face, hand, leg and boot. Far beyond the terrace, a clearly fictional uninhabited distant landscape has small orange fires, drifting smoke and one mushroom-shaped smoke cloud; no victims or real news framing. The quartet remains relaxed and absorbed in its reunion. Alia: copper fitted mini dress; Radiance: pearl-silver cocktail mini; Ellie: teal fitted top and black mini skort; ECE: forest-green fitted mini dress. All four wear sculptural tall RAZE statement boots with substantial architectural heels, not minimal shoes. ECE alone has a small RAZE star fashion tattoo on her upper arm; no other character marks. No rainbow hosiery, knee socks, waist type bands or extra star hardware. Alia links arms with Radiance; Ellie gives ECE a brief closed-mouth cheek greeting, and Radiance holds Ellie's hand to complete a warm connected group. Every outfit is opaque, securely lined, fitted and sharply short at the upper thigh while maintaining complete coverage. Natural anatomy, realistic fabric and skin. Confident fashion-editorial mood, not sexualized. No nudity, underwear exposure, upskirt angle, erotic pose, intimate touching, weapons, animals, sacred imagery, flags, official emblems, third-party logos, Razer snake mark, collage, caption, border or watermark."
+    }
+  ],
+  "publicationPlan": {
+    "pair": "Slovakia–Slovenia",
+    "status": "await-render-closure",
+    "earlierReadyPairs": [
+      "Monaco–North Macedonia",
+      "Norway–San Marino"
+    ]
+  },
+  "canonicalContradictions": [
+    "Cuba/Tanzania instructions superseded by Europe Meta-only checkpoints.",
+    "Old Meta residue and failed X composer absent in fresh browser inventory; no historic prompt reopened.",
+    "Old X post holds require fresh live duplicate/account/media verification, not repeated user approval under current go.",
+    "No Starlight guardian currently exists; do not represent unrelated X Assistant guardian as rendering service."
+  ]
+}

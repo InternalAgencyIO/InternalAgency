@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "batch": 496,
+  "country": "Central African Republic",
+  "scene": 2012,
+  "occurrence": 2,
+  "state": "retry-one-visible-meta-composer-staged-no-send",
+  "stagedAtUtc": "2026-09-06T10:21:28.365Z",
+  "authority": {
+    "retryPreparedCheckpoint": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
+    "authorityCommit": "5eb0cf7985a9dd79fd205f960d977f53090c336d",
+    "localHeadBeforeStaging": "5eb0cf7985a9dd79fd205f960d977f53090c336d",
+    "originHeadBeforeStaging": "5eb0cf7985a9dd79fd205f960d977f53090c336d",
+    "directPrHeadBeforeStaging": "5eb0cf7985a9dd79fd205f960d977f53090c336d",
+    "githubPrHeadBeforeStaging": "5eb0cf7985a9dd79fd205f960d977f53090c336d",
+    "allHeadsEqualBeforeStaging": true,
+    "lfsPushDryRunEmptyBeforeStaging": true,
+    "scopedLfsFsckBeforeStaging": "OK"
+  },
+  "browser": {
+    "name": "Codex in-app Browser",
+    "visibleOnly": true,
+    "totalTabCount": 5,
+    "metaTabCount": 4,
+    "xComposerCount": 1,
+    "otherTabCount": 0,
+    "closedTerminalRefusalTab": {"tabId": "29", "scene": 2012, "occurrence": 1, "url": "https://www.meta.ai/prompt/010df7e2-0170-4456-a997-bfd4053ec4ce", "terminalEvidenceArchived": true, "reopened": false},
+    "preservedTerminalImageTabs": [
+      {"tabId": "28", "scene": 2011, "url": "https://www.meta.ai/prompt/ce7fe647-e2f5-4e68-b529-5a669acf83ce"},
+      {"tabId": "30", "scene": 2013, "url": "https://www.meta.ai/prompt/0d7ec59a-6c55-486d-b4c4-d1b93217cc72"},
+      {"tabId": "31", "scene": 2014, "url": "https://www.meta.ai/prompt/5e91e232-cd47-49cc-8ac6-199b59be05a1"}
+    ],
+    "retryMetaTab": {"tabId": "32", "url": "https://www.meta.ai/"},
+    "xComposerReplacement": {
+      "closedTabId": "6",
+      "newTabId": "33",
+      "reason": "The background tab retained a blank compose shell but its full signed-in composer DOM was not mounted. The blank state and zero media were reconciled before replacement.",
+      "url": "https://x.com/compose/post",
+      "signedInProfile": "@dogramaci",
+      "blank": true,
+      "mediaCount": 0,
+      "postButtonDisabled": true
+    }
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "accountVerified": true,
+    "thinkingVisible": true,
+    "promptEnteredBeforeAttachments": true,
+    "supportedVisibleAttachmentDialogUsed": true,
+    "visibleBrowseControlUsed": true,
+    "hiddenInputUsed": false,
+    "apiOrDirectHttpUsed": false,
+    "sendActivations": 0,
+    "retryNumber": 1,
+    "remainingHardFailureRetriesAfterThisOccurrenceIfItFails": 1,
+    "aestheticRetries": 0
+  },
+  "promptSha256": "2DE6D22978BCE99C530A1F9E2B6FBDAFE051689563FFA6B10B9803DA74551D40",
+  "promptCharacters": 3018,
+  "promptExactBeforeAttachments": true,
+  "promptExactAfterTrimmingAttachmentSpaces": true,
+  "trailingAttachmentPlaceholderSpaces": 3,
+  "attachmentOrder": [938, 936, 937],
+  "attachmentFilenames": [
+    "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "attachmentOrderExact": true,
+  "attachmentCount": 3,
+  "removeImageCount": 3,
+  "sendButtonCount": 1,
+  "sendEnabled": true,
+  "stopButtonCount": 0,
+  "visibleEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-retry-1-staging-evidence-manifest.json",
+  "duplicateGate": "Never click the terminal first-occurrence scene 2012 Send again. This retry-one composer is a distinct new prompt occurrence and may receive exactly one Send activation only after this no-send state reaches remote parity and passes a final no-reload audit.",
+  "canonicalContradiction": "The original X tab briefly lost its fully mounted composer DOM while in the background, despite retaining a blank compose shell and zero media. It was safely replaced through supported tab controls, and the new blank @dogramaci composer is authoritative. The old Cuba automation instruction remains superseded by Tanzania and later remote checkpoints.",
+  "nextSafeAction": "Commit and remote-verify this no-send retry staging checkpoint and three-file evidence manifest. Reinspect tab 32 without reload for exact prompt hash, exact ordered anchors, leesha007, Thinking, one enabled Send and no Stop, reverify tab 33 as a blank @dogramaci composer, then activate the retry Send exactly once."
+}

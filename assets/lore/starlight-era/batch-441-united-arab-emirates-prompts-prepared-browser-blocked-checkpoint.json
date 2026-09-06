@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "prompts_prepared",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 441,
+  "country": "United Arab Emirates",
+  "sourceBatchId": 370,
+  "status": "prompts_prepared_browser_blocked_before_upload",
+  "sceneIds": [
+    1784,
+    1785,
+    1786,
+    1787
+  ],
+  "lanes": [
+    {
+      "sceneId": 1784,
+      "sourceSceneId": 1500,
+      "location": "Dubai Downtown and Burj Khalifa overlook",
+      "cameraRoll": 32,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-441/scene-1784-prompt.txt",
+      "promptSha256": "28C3E9556A9B2D7E20EA1E20C82E024B5110141D46ED54917B3879D0202EAE9A",
+      "promptBytes": 7158,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1785,
+      "sourceSceneId": 1501,
+      "location": "Abu Dhabi Louvre dome and Gulf waterfront overlook",
+      "cameraRoll": 93,
+      "framing": "EXTREME WIDE",
+      "promptPath": "tmp/world-195x4/batch-441/scene-1785-prompt.txt",
+      "promptSha256": "86BAEC8D9973FE6FEDB2363BC68AD49475DEDE5A8F084FE21AE5F3D6A6ACC3D2",
+      "promptBytes": 7120,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1786,
+      "sourceSceneId": 1502,
+      "location": "Al Ain Oasis, falaj channels, and Jebel Hafeet overlook",
+      "cameraRoll": 2,
+      "framing": "EXTREME CLOSE",
+      "promptPath": "tmp/world-195x4/batch-441/scene-1786-prompt.txt",
+      "promptSha256": "8718D5A3F3B32D5407F6DABD249F6B084D500F8629BD7F8956BE306EFF814EA4",
+      "promptBytes": 6288,
+      "uploadComplete": false,
+      "sendClicked": false
+    },
+    {
+      "sceneId": 1787,
+      "sourceSceneId": 1503,
+      "location": "Jebel Jais and Hajar ridge overlook",
+      "cameraRoll": 46,
+      "framing": "INTERMEDIATE",
+      "promptPath": "tmp/world-195x4/batch-441/scene-1787-prompt.txt",
+      "promptSha256": "4AE8F1277EBAAFB3E4670F430656DBAA581E889547C31770EC6C8113CBD231EB",
+      "promptBytes": 7049,
+      "uploadComplete": false,
+      "sendClicked": false
+    }
+  ],
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "sanitization": {
+    "removed": [
+      "legacy male from source scene 1502",
+      "weapons and targeting",
+      "mascots and animals",
+      "odd props",
+      "literal flags and official symbols"
+    ],
+    "retained": [
+      "authoritative fictional quartet",
+      "United Arab Emirates geography",
+      "polar-airship couture",
+      "public-safe romance, jealousy, protection, and reconciliation"
+    ]
+  },
+  "cameraRollMethod": "SHA-256 first uint32 big-endian over batch441-united-arab-emirates-scene<id>-camera-roll, modulo 100 plus 1; stored rolls are authoritative.",
+  "xCadence": {
+    "completedCountryCyclesSinceReset": 0,
+    "due": false,
+    "lastOutcomeCheckpoint": "assets/lore/starlight-era/x-cadence-batches-431-440-one-eligible-no-qualified-pair-checkpoint.json"
+  },
+  "xBacklog": {
+    "eligibleUnpublishedSceneIds": [
+      1753
+    ],
+    "pairReady": false,
+    "reason": "Awaiting at least two accepted United Arab Emirates images; Burundi scene 1753 remains the only eligible unpublished backlog image."
+  },
+  "browserBlocker": {
+    "tabId": "43",
+    "title": "This site can't be reached",
+    "urlClass": "data:text/html ERR_NAME_NOT_RESOLVED for session-bound Meta CDN",
+    "closeBlockedByBrowserUrlPolicy": true,
+    "requiredUserAction": "Close the stranded error tab before fresh Meta upload tabs are created."
+  },
+  "nextAction": "After the stranded error tab is closed, create exactly four fresh signed-in Meta tabs, upload each exact prepared prompt with ordered anchors 938/936/937, verify hashes, and request fresh confirmation immediately before the four Send clicks.",
+  "preparedAtUtc": "2026-08-27T17:41:14.349Z"
+}

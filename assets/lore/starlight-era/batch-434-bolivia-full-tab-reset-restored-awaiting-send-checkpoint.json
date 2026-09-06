@@ -1,0 +1,162 @@
+{
+  "schema": "internalagency.starlight.meta-full-tab-reset-restored.v1",
+  "batchId": 434,
+  "country": "Bolivia",
+  "status": "restored_awaiting_initial_dispatch",
+  "recordedAtUtc": "2026-08-27T15:22:00.083Z",
+  "recoveryEvidence": "assets/lore/starlight-era/batch-434-bolivia-home-composer-no-occurrence-recovery-checkpoint.json",
+  "originalProviderOccurrenceConfirmed": false,
+  "userAuthorization": {
+    "scope": "Bolivia Batch 434 scenes 1756-1759, four ordered uploads and four one-time Sends",
+    "confirmation": "good go",
+    "confirmedAtUtc": "2026-08-27T15:18:41.627Z"
+  },
+  "dispatchClassification": "initial_after_full_tab_reset_with_no_confirmed_provider_occurrence",
+  "boundedRetry": false,
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "lanes": [
+    {
+      "lane": 1,
+      "sceneId": 1756,
+      "sourceSceneId": 1472,
+      "tabId": "6",
+      "promptPath": "tmp/world-195x4/batch-434/scene-1756-prompt.txt",
+      "preparedPromptSha256": "1505A806EB4B621BEF72FFFFBECEF177617A409876825A5CE756CE8018B70321",
+      "browserCanonicalPromptSha256": "3393A91103A29A2E463C0FF6BAF13F4758592B5DBC3212A5C0AF81FDF32E0A9F",
+      "cameraRoll": {
+        "scene": 1756,
+        "key": "batch434-bolivia-scene1756-camera-roll",
+        "fullHash": 3811499253,
+        "roll": 54,
+        "framing": "INTERMEDIATE"
+      },
+      "promptExact": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "lane": 2,
+      "sceneId": 1757,
+      "sourceSceneId": 1473,
+      "tabId": "7",
+      "promptPath": "tmp/world-195x4/batch-434/scene-1757-prompt.txt",
+      "preparedPromptSha256": "4B97F8759239C213D01416345BD402B89E5FBA1174EE153566FD5BE805CD369F",
+      "browserCanonicalPromptSha256": "8AFF579EA3153A327B054C7599B001361833387DDBD4A168B342ED8A605B93F1",
+      "cameraRoll": {
+        "scene": 1757,
+        "key": "batch434-bolivia-scene1757-camera-roll",
+        "fullHash": 1869979206,
+        "roll": 7,
+        "framing": "EXTREME CLOSE"
+      },
+      "promptExact": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "lane": 3,
+      "sceneId": 1758,
+      "sourceSceneId": 1474,
+      "tabId": "8",
+      "promptPath": "tmp/world-195x4/batch-434/scene-1758-prompt.txt",
+      "preparedPromptSha256": "9243D5EC48867C4A5422C1AEB19C5958797988EC761B113409EDBBC2E5D1C40C",
+      "browserCanonicalPromptSha256": "936DDD201C0FD595DF7BB593E26C3C8A79E2F6294521AD4C0ED5ABC070B0F3CC",
+      "cameraRoll": {
+        "scene": 1758,
+        "key": "batch434-bolivia-scene1758-camera-roll",
+        "fullHash": 4130345267,
+        "roll": 68,
+        "framing": "INTERMEDIATE"
+      },
+      "promptExact": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    },
+    {
+      "lane": 4,
+      "sceneId": 1759,
+      "sourceSceneId": 1475,
+      "tabId": "9",
+      "promptPath": "tmp/world-195x4/batch-434/scene-1759-prompt.txt",
+      "preparedPromptSha256": "E3A7937B4A7073A32E23983E3ACF848B8A9E5437B8825CEB4DD280E9F62ED872",
+      "browserCanonicalPromptSha256": "6BE5F9B98F8AABB86F3C95E942258BA40634D42522BD9594C5F0C26ED7F0E0C9",
+      "cameraRoll": {
+        "scene": 1759,
+        "key": "batch434-bolivia-scene1759-camera-roll",
+        "fullHash": 1061136772,
+        "roll": 73,
+        "framing": "INTERMEDIATE"
+      },
+      "promptExact": true,
+      "attachmentNames": [
+        "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "attachmentCounts": [
+        1,
+        1,
+        1
+      ],
+      "attachmentOrderVerified": true,
+      "attachmentControlCount": 3,
+      "sendEnabled": true,
+      "sendClicked": false
+    }
+  ]
+}

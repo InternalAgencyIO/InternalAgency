@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "runType": "five-candidate-RAZE-fashion-country-gap-fill",
+  "state": "closed-five-archive-accepted-two-clean-x-composer-staged-awaiting-post-authorization",
+  "preparedAtUtc": "2026-08-31T09:56:38.2126104Z",
+  "authority": {
+    "userDirectives": [
+      "HEELS STAR #RAZE fashion and knee-high socks or stockings with independent 25 percent rolls, plus split-star RAZE logo and type text.",
+      "Add these while shortening a lot and preserve camera closeness rolls.",
+      "Five close-up fetish-adjacent fashion stills with visible RAZE branding, tight skirts, tops and cocktail dresses, minimal heels except one non-minimal boot still.",
+      "5 stills go.",
+      "USE THINKING Enabled ON META ALWAYS NFOR BETTER RESULTS."
+    ],
+    "freshActionTimeDispatchAuthorization": true,
+    "authorizedSceneIds": [1906, 1907, 1908, 1909, 1910],
+    "brandInterpretation": "RAZE is the fictional campaign brand. Do not reproduce the third-party Razer snake logo or trade dress.",
+    "contentBoundary": "Adult age-21, fashion-editorial and fetish-adjacent only; fully opaque, securely lined, public-safe, non-explicit and non-nude.",
+    "remoteVerifiedBaseHead": "25212d5d1a8bd6ba234ecb57740d97b4469871d4",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+  },
+  "gapRationale": {
+    "continent": "Europe",
+    "selection": "Andorra follows Albania as the next zero-post European country in the current canonical priority order.",
+    "candidateCount": 5,
+    "publicationUse": "Retain all five as used or unused candidates; select the strongest non-duplicate subset for later country-pair posting only after separate X authorization."
+  },
+  "sceneRange": [1906, 1910],
+  "provider": "Meta AI through the in-app Browser only",
+  "providerSettings": {
+    "initialOccurrenceSpeed": "Instant",
+    "futureRequiredModeAfter2026-08-31T10-25ZUserDirective": "Thinking",
+    "output": "one image per occurrence",
+    "aspectRatio": "9:16 vertical",
+    "visibleMetaLaneCount": 4,
+    "visibleXComposerCount": 1,
+    "fifthScenePolicy": "Queue scene 1910 behind the first terminal initial lane; reuse that same tab only after its evidence and occurrence archive are captured. Never open a fifth Meta tab."
+  },
+  "cameraClosenessPolicy": {
+    "algorithm": "SHA-256 seed; scan digest bytes left-to-right for first byte below 200; roll=(byte mod 100)+1",
+    "fashionInsertMapping": {
+      "1-20": "TIGHT HEMLINE CLOSE - all four complete faces through upper thighs; short hemlines and upper hosiery visible; footwear remains below crop",
+      "21-80": "ADJACENT THREE-QUARTER - all four complete faces through lower calves; tight styling and hosiery visible; footwear may touch the lower frame edge",
+      "81-100": "TIGHT FULL-BODY - subject-proximate vertical group frame with faces, strongly short hemlines, hosiery and footwear all legible"
+    },
+    "supersessionScope": "This user-ordered RAZE fashion insert mapping supersedes the travel-scene crop labels only for scenes 1906-1910 because visible hemlines and footwear are material requirements. The roll algorithm itself is unchanged."
+  },
+  "stylingRollPolicy": {
+    "independentFeatures": ["star-hardware", "knee-high-hosiery", "split-star-emblem", "raze-type-band"],
+    "algorithm": "For each scene and feature, SHA-256 the recorded seed, scan digest bytes left-to-right for the first byte below 200, compute roll=(byte mod 100)+1, and apply on rolls 1-25.",
+    "baselineBrand": "Every still carries one subtle, exact, readable RAZE metal tag regardless of optional-feature rolls.",
+    "footwear": "Four stills use restrained minimalist heels. One deterministic exclusive still uses non-minimal statement boots.",
+    "statementBootSelector": {
+      "seed": "starlight|raze-footwear|batch-470|five-still-run|statement-boot",
+      "digestSha256": "D7F3F3763DE4A25BE03068817BBE9BFA054579254829BD8F3804A3B0F4812056",
+      "acceptedByte": 118,
+      "indexAmongFive": 3,
+      "scene": 1909
+    }
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "orderedAnchors": [938, 936, 937],
+    "hardPositionLock": "viewer-left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE",
+    "neverSwap": "Ellie and AI ECE"
+  },
+  "orderedReferenceAnchors": [
+    {"scene": 938, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png", "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"},
+    {"scene": 936, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png", "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"},
+    {"scene": 937, "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png", "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"}
+  ],
+  "retryAndRefinementPolicy": {
+    "maximumMetaRetriesPerScene": 2,
+    "retryOnlyFor": ["corrupt", "duplicate", "unsafe or explicit", "no image", "materially wrong cast"],
+    "chatgptStrongShorteningPassesPerTechnicallyValidMetaImage": 1,
+    "additionalPassesPerOccurrence": 0,
+    "postPassAcceptance": "Accept framing, choreography, location-detail, brand-text rendering and public-safe wardrobe deviations; preserve them in QA rather than retrying."
+  },
+  "scenes": [
+    {
+      "scene": 1906,
+      "cameraRollAudit": {"seed": "starlight|camera-roll|batch-470|scene-1906|counter-0", "digestSha256": "6B49679FF7493F3D84E1A64A901AC5EF603BF6A75907BFE795EE00EA59F82151", "acceptedByteIndex": 0, "acceptedByte": 107},
+      "cameraRoll": 8,
+      "framing": "TIGHT HEMLINE CLOSE",
+      "location": "Andorra la Vella Parc Central glass promenade",
+      "stylingRolls": {
+        "starHardware": {"roll": 38, "applied": false, "digestSha256": "255927F7A84F0E25925AE3A84C9695A73B812201DE6BD3F912F47874A96E2D74"},
+        "kneeHighHosiery": {"roll": 12, "applied": true, "digestSha256": "0B661C249B82C00F111D05908549F3C51AE89FCED467105CD5ED4160DEE7B992"},
+        "splitStarEmblem": {"roll": 82, "applied": false, "digestSha256": "51B93FDD77B2177D0EA7DE71FBDC749274F7BE4CF114BCEDD34E0C2F4401F66F"},
+        "razeTypeBand": {"roll": 51, "applied": false, "digestSha256": "32DA8912ED0B93B3D72CED8744F8BBE851F94FC07E23DBA8F0225636816628FF"}
+      },
+      "footwear": "restrained minimalist heels, intentionally below the tight crop",
+      "prompt": "SCENE 1906 - ANDORRA, ANDORRA LA VELLA PARC CENTRAL GLASS PROMENADE - CAMERA CLOSENESS ROLL 8/100, TIGHT HEMLINE CLOSE. Create one wholly new original photorealistic cinematic vertical 9:16 adult high-fashion still with bold fetish-adjacent polish but fully public-safe. Use the three attached images uploaded exactly once each in order 938, 936, 937 only as face-identity anchors. Show exactly four distinct fictional adult women, each exactly age 21, female-only, no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Never swap Ellie and ECE; never clone, merge, replace or age-shift a face. Place the adjacent shoulder-to-shoulder quartet on dry level secular glass-and-stone promenade paving, with Andorra la Vella's valley skyline, Parc Central trees, glass rail and Pyrenean ridges broad behind them. TIGHT HEMLINE CLOSE means show all four complete faces, fitted tops and strongly shortened upper-thigh hems in one subject-proximate crop from heads through upper thighs; hosiery begins clearly beneath every hem, but shoes stay below frame. Give all four secure opaque body-skimming RAZE couture: Alia a turquoise-copper sleeveless top and razor-clean mini skirt, Radiance a pearl-rose fitted cocktail mini, Ellie a cobalt-black cropped jacket and magenta divided micro-skort, ECE an emerald-plum fitted top and tailored upper-thigh shorts. Every lower silhouette is dramatically short but fully opaque, lined and non-revealing. The independent hosiery roll applies: all four wear polished knee-high sheer-to-opaque fashion stockings with clean top bands. Star hardware, a large split-star emblem and a repeated type band did not roll; omit them. Still include one subtle exact readable RAZE metal tag on each look, spelled R-A-Z-E, with no other text. Radiance adjusts Alia's lapel, Ellie gives a playful-jealous side glance, ECE gives Ellie a brief cheek-only kiss, and all four link hands at waist height. Their specified restrained minimalist heels remain unseen below crop. No underwear, lingerie exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptSha256": "C5C1C734912139EBC40D4D58FA738342D96BF70BA5C86C30921D084E65650E91",
+      "archiveStem": "1906-andorra-parc-central-raze-tight-hemline-close"
+    },
+    {
+      "scene": 1907,
+      "cameraRollAudit": {"seed": "starlight|camera-roll|batch-470|scene-1907|counter-0", "digestSha256": "EFE2C510305BADC1AC6754714DE9B6A92BFB6F1AD9DA6A8B56932DC4EBA2CF0D", "acceptedByteIndex": 2, "acceptedByte": 197},
+      "cameraRoll": 98,
+      "framing": "TIGHT FULL-BODY",
+      "location": "Roc del Quer fully guarded Pyrenees viewpoint",
+      "stylingRolls": {
+        "starHardware": {"roll": 16, "applied": true, "digestSha256": "733039D10E65B69B19FC05445266D70827B1DC6D186B8C67575DE51BD078320D"},
+        "kneeHighHosiery": {"roll": 1, "applied": true, "digestSha256": "ECD76469FB4935A91F00964F9509FC799C1A65898E16ABBD42CD94014FEC9692"},
+        "splitStarEmblem": {"roll": 86, "applied": false, "digestSha256": "55FCB7DD350254189F3CFA3B9906D5AB24DA9BAB08621E9C494F7E0DD92BBE7D"},
+        "razeTypeBand": {"roll": 11, "applied": true, "digestSha256": "D56E1902BE19D274C4986AC49187929CA02D1EDD14DF8494A76F0DD455F9EDC5"}
+      },
+      "footwear": "four restrained minimalist architectural heels",
+      "prompt": "SCENE 1907 - ANDORRA, ROC DEL QUER FULLY GUARDED PYRENEES VIEWPOINT - CAMERA CLOSENESS ROLL 98/100, TIGHT FULL-BODY. Create one wholly new original photorealistic cinematic vertical 9:16 adult high-fashion still, visually hot and fetish-adjacent but fully opaque, public-safe and non-explicit. Use the three attached images exactly once each in authoritative order 938, 936, 937 only as face-identity anchors. Show exactly four distinct fictional adult women, each exactly age 21, female-only, no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE. Place the adjacent quartet well inside a broad dry level fully guarded secular overlook platform, with Pyrenean ridges and the Andorran valley unmistakable. TIGHT FULL-BODY means a subject-proximate head-to-heel frame with complete faces, dramatically short upper-thigh hemlines, knee-high hosiery and footwear all crisp. Alia wears a sapphire-gold fitted top and opaque micro-skort; Radiance a copper-ivory body-skimming cocktail mini; Ellie an emerald-black cropped moto top and silver divided micro-skort; ECE a plum-cobalt fitted top and tailored upper-thigh shorts. Every garment is strongly shortened, lined, opaque and secure. The rolls apply small polished star hardware at collars and cuffs, knee-high semi-sheer stockings on all four, and one exact repeated RAZE type band at each waistband, spelled R-A-Z-E. The large split-star emblem did not roll; omit it. Each woman wears a restrained minimalist single-strap architectural heel. Alia fastens Radiance's cuff, Ellie gives a playful-jealous smile, ECE gives Ellie one cheek-only kiss, and all four maintain one linked-hand chain. No edge approach, underwear, exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptSha256": "EF0FFA7986155E47D428E51092741A3DE71B9C04084121E02AA62FA00F7CBE0E",
+      "archiveStem": "1907-andorra-roc-del-quer-raze-full-body"
+    },
+    {
+      "scene": 1908,
+      "cameraRollAudit": {"seed": "starlight|camera-roll|batch-470|scene-1908|counter-0", "digestSha256": "96F20FF99284F66942F6651990DAA3370C6C3BDEEF0A49DE45FE3943BEFF4613", "acceptedByteIndex": 0, "acceptedByte": 150},
+      "cameraRoll": 51,
+      "framing": "ADJACENT THREE-QUARTER",
+      "location": "Engolasters Lake guarded promenade",
+      "stylingRolls": {
+        "starHardware": {"roll": 44, "applied": false, "digestSha256": "2B0C3B99C6B51FF09A9E3C301A33322A71D3B987B7D068F5A208600BAAFC7E0A"},
+        "kneeHighHosiery": {"roll": 18, "applied": true, "digestSha256": "F575C460590406F64A0F511A86EB246D106207124A9483BBB94DF03BCED2E521"},
+        "splitStarEmblem": {"roll": 21, "applied": true, "digestSha256": "78D6BD1A06ABE45B2ED4B297ED065057D12E80AC244C3381DA39CDD0FEB91873"},
+        "razeTypeBand": {"roll": 71, "applied": false, "digestSha256": "F3AA3EFED1B7AA1D85FA2ECEFCC444F4FD8562355C10ECCDE4F6CCA5F3667DC0"}
+      },
+      "footwear": "restrained minimalist heels near the lower frame edge",
+      "prompt": "SCENE 1908 - ANDORRA, ENGOLASTERS LAKE GUARDED PROMENADE - CAMERA CLOSENESS ROLL 51/100, ADJACENT THREE-QUARTER. Create one wholly new original photorealistic cinematic vertical 9:16 adult high-fashion still with confident fetish-adjacent tailoring, fully public-safe and non-explicit. Use the attached anchors exactly once each in order 938, 936, 937 only for face identity. Show exactly four fictional adult women, each exactly age 21, female-only, no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE. Place them shoulder-to-shoulder on broad dry level secular paving inside a continuous guard rail, with Engolasters Lake, pine forest and Pyrenean slopes broad behind. ADJACENT THREE-QUARTER framing means complete faces through lower calves in a tight subject-proximate composition; strongly short upper-thigh hems and hosiery dominate, minimalist heels may touch the lower frame edge. Dress Alia in turquoise-gold fitted RAZE top and copper micro-skirt, Radiance in pearl-rose body-skimming cocktail mini, Ellie in cobalt-black cropped top and ivory divided micro-skort, ECE in emerald-plum fitted jacket and tailored upper-thigh shorts. All are dramatically shortened, securely lined, fully opaque and non-revealing. The rolls apply knee-high stockings on all four and one bold abstract split-star RAZE emblem across the shoulder blades or side panels. Star hardware and repeated type bands did not roll; omit them. Keep one exact readable RAZE metal tag per look, spelled R-A-Z-E. Use restrained minimalist heels. Ellie secures ECE's cuff, Radiance answers with a playful-jealous brow, Alia gives Radiance a brief cheek-only kiss, and all four link wrists. No water entry, edge approach, underwear, exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptSha256": "4C721124EF254C0558119D0C678B6E090C33D4D26F858A3C03AC1548EC217EF8",
+      "archiveStem": "1908-andorra-engolasters-raze-three-quarter"
+    },
+    {
+      "scene": 1909,
+      "cameraRollAudit": {"seed": "starlight|camera-roll|batch-470|scene-1909|counter-0", "digestSha256": "D5DFE4BD323F54767218AC10BA310ED235B0C4B6CFD3FD0EE7F22E541B708514", "acceptedByteIndex": 3, "acceptedByte": 189},
+      "cameraRoll": 90,
+      "framing": "TIGHT FULL-BODY",
+      "location": "Pas de la Casa broad snowy pedestrian terrace",
+      "stylingRolls": {
+        "starHardware": {"roll": 83, "applied": false, "digestSha256": "52CBA4B679E8671A24CC1F3DB9A0172F2F535C52C667E21ECCBC4591A24751B1"},
+        "kneeHighHosiery": {"roll": 16, "applied": true, "digestSha256": "0F3D8D29045A835997871BE3398B95363FD0006741CC4A89B6707EBDC2B5D684"},
+        "splitStarEmblem": {"roll": 9, "applied": true, "digestSha256": "CC6C9F3B903604CAD0FB281C53D4D278C8DB089D13D57B4D18742AC28E8B7363"},
+        "razeTypeBand": {"roll": 52, "applied": false, "digestSha256": "97851C7BEC3405F8F54302FDFF84E83F6A262124D4DCA26F0865E6CF699CB51E"}
+      },
+      "footwear": "exclusive non-minimal statement-boot still",
+      "prompt": "SCENE 1909 - ANDORRA, PAS DE LA CASA BROAD SNOWY PEDESTRIAN TERRACE - CAMERA CLOSENESS ROLL 90/100, TIGHT FULL-BODY, EXCLUSIVE STATEMENT-BOOT STILL. Create one wholly new original photorealistic cinematic vertical 9:16 adult high-fashion image, fetish-adjacent in silhouette and hardware but fully opaque, public-safe and non-explicit. Use the three attached anchors exactly once each in order 938, 936, 937 only for face identity. Show exactly four fictional adult women, each exactly age 21, female-only, no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE. Place the adjacent quartet on a broad dry salted level secular terrace far from every edge, with clean snow banks, Pas de la Casa lights and Pyrenean peaks; no skiers, vehicles or equipment. TIGHT FULL-BODY means heads through boots, with complete faces, dramatically short upper-thigh hems, hosiery and bold footwear all legible. Alia wears a turquoise-copper fitted top and opaque gold micro-skort, Radiance a pearl-rose long-sleeve cocktail mini, Ellie a cobalt-black cropped jacket and magenta divided micro-skort, ECE an emerald-plum fitted top and tailored upper-thigh shorts. All hems are strongly shortened, lined, opaque and secure. The rolls apply knee-high opaque stockings and a bold abstract split-star RAZE emblem on side panels; star hardware and repeated type bands did not roll. Keep one exact readable RAZE tag per look, spelled R-A-Z-E. This is the only non-minimal footwear still: give the quartet dramatic sculptural knee-high fashion boots with thick split-star heels, matched in four colors, powerful but practical on the dry terrace. ECE fastens Ellie's collar, Radiance gives a playful-jealous side glance, Alia kisses Radiance's cheek, and all four link hands. No underwear, exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptSha256": "EF638473244D206384945EDF6EB71291627C7FB8455B262EA1DA761AA562C42B",
+      "archiveStem": "1909-andorra-pas-de-la-casa-raze-statement-boots"
+    },
+    {
+      "scene": 1910,
+      "cameraRollAudit": {"seed": "starlight|camera-roll|batch-470|scene-1910|counter-0", "digestSha256": "86A78BA447921EE78459807E613D9A1C2E96532CFB37B2E717A00A377D4EC133", "acceptedByteIndex": 0, "acceptedByte": 134},
+      "cameraRoll": 35,
+      "framing": "ADJACENT THREE-QUARTER",
+      "location": "Sorteny Valley Nature Park level visitor deck",
+      "stylingRolls": {
+        "starHardware": {"roll": 3, "applied": true, "digestSha256": "6678B187A1A7811C753918410422E24C4A0AEC4A9BB930EE4CBF16137F320B75"},
+        "kneeHighHosiery": {"roll": 8, "applied": true, "digestSha256": "6BAC96CDEE544092797F8AB6B206154E4578DE6C74C3834A51F3C706C5A81E21"},
+        "splitStarEmblem": {"roll": 15, "applied": true, "digestSha256": "7242A37BBA34C8B87B4E3604DB17E24B0F335677C246165D2CF787C8EEFF36AA"},
+        "razeTypeBand": {"roll": 98, "applied": false, "digestSha256": "61C2E4A90D2D636D906666A8355B8FA8BDD18F495C17FFE33D6501B9190E427A"}
+      },
+      "footwear": "four restrained minimalist architectural heels",
+      "prompt": "SCENE 1910 - ANDORRA, SORTENY VALLEY NATURE PARK LEVEL VISITOR DECK - CAMERA CLOSENESS ROLL 35/100, ADJACENT THREE-QUARTER. Create one wholly new original photorealistic cinematic vertical 9:16 adult RAZE high-fashion still, confidently sensual and fetish-adjacent in design but fully opaque, public-safe and non-explicit. Use the attached anchors exactly once each in authoritative order 938, 936, 937 only for face identity. Show exactly four fictional adult women, each exactly age 21, female-only, no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE; never swap Ellie and ECE. Place the tightly adjacent quartet on a broad dry level secular visitor deck, with Sorteny's flower meadow, pine valley and Pyrenean ridge broad behind; no hikers, animals or sacred structures. ADJACENT THREE-QUARTER means complete faces through lower calves in one close subject-proximate composition, emphasizing fitted tops, dramatically short upper-thigh hems, hosiery and the upper shape of minimalist heels. Alia wears a sapphire-gold fitted top and turquoise micro-skirt, Radiance a pearl-copper body-skimming cocktail mini, Ellie an emerald-black cropped jacket and silver divided micro-skort, ECE a plum-rose fitted top and tailored upper-thigh shorts. Every garment is strongly shortened, securely lined, fully opaque and non-revealing. The rolls apply polished star hardware, knee-high stockings on all four, and one bold abstract split-star RAZE emblem on side panels. The repeated type band did not roll; omit it. Retain one subtle exact readable RAZE metal tag per look, spelled R-A-Z-E. Use restrained minimalist architectural heels. Radiance fastens Alia's collar, Ellie gives a playful-jealous glance, ECE gives Ellie one cheek-only kiss, and all four link hands. No underwear, exposure, nudity, explicit sexuality, minors, real people, flags, official emblems, sacred or political imagery, animals, bystanders, vehicles, extra limbs, duplicate bodies, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptSha256": "3EAFACA857F9833110946D950C1DAEAAEB415238D57A92D739B23257930FFD07",
+      "archiveStem": "1910-andorra-sorteny-raze-three-quarter"
+    }
+  ],
+  "dispatchGate": {
+    "remoteCheckpointVerified": true,
+    "remoteVerifiedCheckpointCommit": "e7855060ce892cabe5ffc76ceac26eb8e40dc5e8",
+    "remoteVerifiedAtUtc": "2026-08-31T10:07:59.8998319Z",
+    "remoteBranchAndPrHeadMatched": true,
+    "actualBrowserTabsInspected": true,
+    "signedInMetaAccountVerified": true,
+    "anchorsVisibleInExactOrder": true,
+    "exactPromptsVerified": true,
+    "instantModeVerified": true,
+    "freshAuthorizationCurrent": false,
+    "gateConsumed": true,
+    "mayClickSend": false
+  },
+  "stagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-staged-authorized-checkpoint.json",
+  "dispatchedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-four-lanes-dispatched-checkpoint.json",
+  "visibleThinkingStateCheckpoint": "assets/lore/starlight-era/batch-470-andorra-visible-thinking-user-state-checkpoint.json",
+  "scene1910StagedCheckpoint": "assets/lore/starlight-era/batch-470-andorra-scene-1910-thinking-staged-authorized-checkpoint.json",
+  "scene1910TerminalQaCheckpoint": "assets/lore/starlight-era/batch-470-andorra-scene-1910-thinking-dispatched-terminal-qa-checkpoint.json",
+  "onePassOutcomesCheckpoint": "assets/lore/starlight-era/batch-470-andorra-chatgpt-one-pass-outcomes-checkpoint.json",
+  "closureCheckpoint": "assets/lore/starlight-era/batch-470-andorra-five-stills-closed-qa-checkpoint.json",
+  "acceptedArchiveSceneIds": [1906, 1907, 1908, 1909, 1910],
+  "cleanPublicationCandidateSceneIds": [1906, 1910],
+  "additionalChatgptPassesPermitted": 0,
+  "xComposerCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-composer-staged-awaiting-post-authorization-checkpoint.json",
+  "xSceneOrder": [1906, 1910, 1904],
+  "xPostAuthorized": false,
+  "xPostClicked": false,
+  "xPostUrls": [],
+  "nextSafeAction": "Commit and push the complete closure package, verify branch/PR parity and targeted LFS dry-run, then stop before X Post for fresh X-specific authorization."
+}

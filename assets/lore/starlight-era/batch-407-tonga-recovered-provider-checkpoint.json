@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "recovered-provider-state-non-advancing",
+  "createdAtUtc": "2026-08-25T15:02:36.205Z",
+  "status": "batch-407-recovered-hard-unusable-authority-reconciliation-required",
+  "batch": 407,
+  "country": "Tonga",
+  "scenes": [1648, 1649, 1650, 1651],
+  "supersedesRemoteCheckpointForProviderOccurrenceRecoveryOnly": "assets/lore/starlight-era/batch-400-sao-tome-and-principe-orbital-spaceship-preflight-checkpoint.json",
+  "doesNotAuthorizeQueueAdvance": true,
+  "faceReferenceAuthority": {
+    "manifest": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "orderedScenes": [938, 936, 937],
+    "orderedSha256": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ]
+  },
+  "providerRecovery": {
+    "provider": "Meta AI",
+    "capturedRawScenes": [1648, 1649, 1651],
+    "explicitNoBytesScenes": [1650],
+    "acceptedCanonicalScenes": [],
+    "hardUnusableScenes": [1648, 1649, 1651],
+    "hardGate": "all captured media is landscape 1920x1280 rather than required vertical 9:16",
+    "occurrenceEvidence": [
+      "progress-reports/codex-generated-media/provider-occurrences/batch-407-tonga-recovery-authority-blocker.jsonl",
+      "progress-reports/codex-generated-media/provider-occurrences/batch-407-tonga-recovered-visual-qa.jsonl"
+    ]
+  },
+  "renderCadence": {
+    "observedFormalCountryCyclesSinceBatch400": 7,
+    "observedCountries": [
+      "Samoa",
+      "Saint Lucia",
+      "Kiribati",
+      "Seychelles",
+      "Grenada",
+      "Micronesia",
+      "Tonga"
+    ],
+    "fullyReconciledCountryCycles": 0,
+    "xCadenceReached": false,
+    "xActionAuthorizedNow": false,
+    "reason": "Ten genuinely completed and fully evidenced country cycles have not been established."
+  },
+  "blockingConditions": [
+    "Exact occurrence envelopes for batches 401 through 406 are absent from repository authority.",
+    "Batch 407 exact prompt hashes, ordered upload occurrence evidence, provider prose for all lanes, and duplicate relationships remain incomplete.",
+    "No unattended heartbeat may transmit face-anchor files or send Meta prompts without the required immediate browser confirmation."
+  ],
+  "requiredNextAction": "Reconcile missing batches 401 through 407 from live Meta history and provider bytes. Only then prepare a bounded Batch 408 Saint Vincent and the Grenadines checkpoint or close the authorized window with evidence.",
+  "immutable": true
+}

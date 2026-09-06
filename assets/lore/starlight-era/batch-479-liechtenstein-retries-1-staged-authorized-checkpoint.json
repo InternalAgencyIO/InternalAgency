@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "batch": 479,
+  "country": "Liechtenstein",
+  "state": "scenes-1943-and-1946-first-bounded-retries-staged-authorized-no-send",
+  "stagedAtUtc": "2026-09-04T10:35:18.567Z",
+  "provider": "Meta AI through the visible in-app Browser only",
+  "account": "leesha007",
+  "authorization": "authorized for all go, authorized for all similar commands",
+  "orderedAnchors": [938, 936, 937],
+  "lanes": [
+    {
+      "scene": 1943,
+      "tabId": "19",
+      "conversationUrl": "https://www.meta.ai/prompt/0118e93e-fa90-4b65-b164-1a5820445c40",
+      "retryOrdinal": 1,
+      "thinkingSelected": true,
+      "instantSelected": false,
+      "promptSha256": "73F109FE79B788BED2B7952912F24B054EA49F2C5A628F9892AD2F1C10424B5C",
+      "promptExact": true,
+      "anchorOrderExact": true,
+      "attachmentCount": 3,
+      "sendEnabled": true,
+      "sendClicks": 0,
+      "screenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/scene-1943-meta-retry-1-staged-visible.jpg", "bytes": 126961, "sha256": "D0E82BAF66B2CA0FAF4BA9C4EC8DF6C9861A4D95B99349B6ABCF9FACE0DE4260", "dimensions": "1280x720", "rawFormat": "JPEG/JFIF"}
+    },
+    {
+      "scene": 1946,
+      "tabId": "22",
+      "conversationUrl": "https://www.meta.ai/prompt/32b210dc-72b9-49ed-979e-36028357ee1e",
+      "retryOrdinal": 1,
+      "thinkingSelected": true,
+      "instantSelected": false,
+      "promptSha256": "A897377F67B8B9A5AFDF7F34853878ED8E4AD4A88CCF8B9CD07F94D0D9424143",
+      "promptExact": true,
+      "anchorOrderExact": true,
+      "attachmentCount": 3,
+      "sendEnabled": true,
+      "sendClicks": 0,
+      "screenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-479-liechtenstein/scene-1946-meta-retry-1-staged-visible.jpg", "bytes": 129593, "sha256": "E4D04C8B3FCF64512240B6946E54859FB73B311AADE2C8AC73E10011E33FA784", "dimensions": "1280x720", "rawFormat": "JPEG/JFIF"}
+    }
+  ],
+  "otherLanes": [
+    {"scene": 1944, "tabId": "20", "state": "rendering-existing-first-occurrence", "repeatSendClicks": 0},
+    {"scene": 1945, "tabId": "21", "state": "rendering-existing-first-occurrence", "repeatSendClicks": 0}
+  ],
+  "xComposer": {"tabId": "17", "url": "https://x.com/home", "account": "@dogramaci", "blank": true, "postClicks": 0},
+  "retryPromptCheckpoint": "assets/lore/starlight-era/batch-479-liechtenstein-first-refusals-and-retry-1-prepared-checkpoint.json",
+  "nextSafeAction": "Commit, push and verify local, origin and draft PR parity. Then recheck the active composer on tabs 19 and 22 only for account leesha007, Thinking checked, exact normalized retry prompt hashes, exact 938-936-937 attachment order and one enabled Send control; if all remain true, click each retry Send exactly once, record timestamps, and never resend either retry."
+}

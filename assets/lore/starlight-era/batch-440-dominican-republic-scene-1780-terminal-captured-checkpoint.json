@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "scene_terminal_capture",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 440,
+  "country": "Dominican Republic",
+  "sceneId": 1780,
+  "status": "closed_missing_bytes_browser_policy",
+  "accepted": false,
+  "providerUrl": "https://www.meta.ai/prompt/027b7203-e161-4c55-9ce0-5f1e68a77abc",
+  "promptSha256": "4F066D1193196A660D45B5116EDC8FF861F0D9E645667EF8C32026AFB66C3023",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRoll": 58,
+  "requiredFraming": "INTERMEDIATE",
+  "rawBytesAvailable": false,
+  "rawByteLength": 0,
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-440-scene-1780-terminal-image-no-bytes-browser-policy.jsonl",
+  "responsePath": "progress-reports/codex-generated-media/provider-responses/batch-440-scene-1780-meta-response.txt",
+  "mediaObserved": true,
+  "visualQa": {
+    "status": "not_performed_missing_bytes",
+    "accepted": false,
+    "reason": "Terminal gallery image was visible, but raw-byte and screenshot access were blocked by Browser Use URL policy."
+  },
+  "terminalObservedAtUtc": "2026-08-27T17:41:14.349Z",
+  "checkpointedAtUtc": "2026-08-27T17:41:14.349Z",
+  "noRetryAuthorized": true
+}

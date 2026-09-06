@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "batch": 413,
+  "country": "Liechtenstein",
+  "recorded_utc": "2026-08-26T07:12:37.948Z",
+  "status": "initial_no_bytes_one_bounded_retry_authorized",
+  "authority": {
+    "prepared_checkpoint": "assets/lore/starlight-era/batch-413-liechtenstein-prompts-prepared-checkpoint.json",
+    "prompt_commit": "939819e92cc10e7b9bc8b3ac54c9f246a0294b9d",
+    "scenes": [
+      1672,
+      1673,
+      1674,
+      1675
+    ]
+  },
+  "initial_outcomes": [
+    {
+      "scene": 1672,
+      "prompt_sha256": "61F03434411BBB2D1C5FCC5DBCD2304675510D2C28C907360AF66D840434C0C6",
+      "camera_roll": 91,
+      "provider_chat_url": null,
+      "provider_response_text": "Thinking",
+      "view_media_count": 0,
+      "raw_bytes": false
+    },
+    {
+      "scene": 1673,
+      "prompt_sha256": "D81CFF555CEA1F3D5F7EC464A06AFB98638B6C2145C0B15DD7AB0C3E8492995F",
+      "camera_roll": 30,
+      "provider_chat_url": null,
+      "provider_response_text": "Thinking",
+      "view_media_count": 0,
+      "raw_bytes": false
+    },
+    {
+      "scene": 1674,
+      "prompt_sha256": "3840C99880325C0A52B753D67CA77C21D10A37A32FAA4CA797E27B20E732A349",
+      "camera_roll": 47,
+      "provider_chat_url": null,
+      "provider_response_text": "Thinking",
+      "view_media_count": 0,
+      "raw_bytes": false
+    },
+    {
+      "scene": 1675,
+      "prompt_sha256": "1BB24F81889DAFC25B3B809B7D9709371AD7E1FFFF4F2E993B6BA6DF8619E9CC",
+      "camera_roll": 38,
+      "provider_chat_url": null,
+      "provider_response_text": "Thinking",
+      "view_media_count": 0,
+      "raw_bytes": false
+    }
+  ],
+  "bounded_retry": {
+    "maximum_additional_dispatches_per_scene": 1,
+    "method": "Reload the same four persistent in-app Meta tabs, verify exact prompt hashes and ordered 938 -> 936 -> 937 anchors, then dispatch each exact prompt once. No same-chat correction loops.",
+    "after_retry": "Archive every returned byte or explicit no-byte result, close Batch 413, and advance to Monaco. Never resend scenes 1672-1675 after this retry."
+  },
+  "x_cadence": {
+    "completed_cycles_since_last_x": 2,
+    "post_early": false
+  }
+}

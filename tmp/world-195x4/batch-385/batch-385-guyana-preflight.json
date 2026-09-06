@@ -1,0 +1,1628 @@
+{
+  "batch": 385,
+  "country": "Guyana",
+  "status": "render-preflight-stored-pass-1-not-launched",
+  "sourceCommit": "bb31b97d4b9d630649983b430850bfa495449699",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 0,
+    "pass2CandidatesConsumed": 0,
+    "automaticThirdPassAllowed": false
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-313-comoros-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/159"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation",
+      "assets/lore/starlight-era/batch-364-tunisia-moon-expedition-checkpoint.json#/nextCinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "rollMethod": "FNV-1a over recorded batch385-guyana keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "rollThresholds": {
+    "visibleMidriff": "0-49",
+    "straplessDress": "0-34",
+    "fullyOpenBack": "0-29",
+    "mascotState": "0-22 PAWS and MAX; 23-37 PAWS only; 38-52 MAX only; 53-99 neither",
+    "interestingProp": "0-31 active; 32-99 inactive",
+    "poleDanceTheme": "0-5",
+    "rainbowOnly": "0-3",
+    "rainbowHosiery": "0-24",
+    "missionPropPoseTarget": "0-34 paper target/backstop; 35-59 open-water marker; 60-74 wrist-guidance category at paper target/backstop; 75-87 completed-handoff category at open-water marker; 88-99 open-mechanism category at paper target/backstop"
+  },
+  "cinematicTheme": {
+    "active": "near-Sun solar-observation couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "sceneNumbers": [
+    1560,
+    1561,
+    1562,
+    1563
+  ],
+  "researchSources": [
+    {
+      "url": "https://tourismguyana.gy/the-kaieteur-and-orinduik-experience/",
+      "usedFor": "Orinduik Falls, Ireng River jasper terraces, and rolling Pakaraima grass-covered hills"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/kingston-seawall/",
+      "usedFor": "Kingston Seawall civil infrastructure, Round House, and coastal setting"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/seawall-bandstand/",
+      "usedFor": "Seawall Bandstand cast-iron ornament and public music history"
+    },
+    {
+      "url": "https://ntg.gov.gy/monument/lighthouse/",
+      "usedFor": "Georgetown Lighthouse octagonal brick form, red-white stripes, iron gallery, and maritime beacon role"
+    },
+    {
+      "url": "https://www.pac.gov.gy/",
+      "usedFor": "Shell Beach and Kanuku Mountains status in Guyana's national protected areas system"
+    },
+    {
+      "url": "https://dpi.gov.gy/shell-beach-protected-area-a-haven-for-marine-life-conservation-efforts/",
+      "usedFor": "Shell Beach coastline, multiple beaches, four marine-turtle species, and conservation monitoring"
+    },
+    {
+      "url": "https://www.pac.gov.gy/kanuku-mountains-protected-area/",
+      "usedFor": "Kanuku eastern and western ranges, rainforest and savannah, biodiversity, flagship species, and community management"
+    },
+    {
+      "url": "https://www.pac.gov.gy/our-work/",
+      "usedFor": "Guyana protected-area biodiversity, Kanuku bat diversity, and Shell Beach coastal-bird importance"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch385-guyana-male-model-scene",
+    "fullHash": 3087420340,
+    "roll": 40,
+    "position": 1,
+    "scene": 1560,
+    "emotion": {
+      "key": "batch385-guyana-scene1-male-emotion",
+      "roll": 27,
+      "result": "hope"
+    }
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Guyana flag, Golden Arrowhead, coat of arms, official seal or official emblem is copied onto clothing. Secular waterfall, river, mountain, seawall, lighthouse, shell-beach, mangrove, forest, savannah, wildlife and craft fields replace them in country-led scenes.",
+    "palette": "rainforest green, Demerara gold, pearl white, scarlet red, black, Atlantic blue, jasper rose, shell bronze, orchid violet, and savannah ochre",
+    "minimumCoverage": "Scenes 1560 and 1561 each foreground large Guyana motif fields on two or three looks and near-Sun construction on at least two. Scenes 1562 and 1563 use four distinct theme-led looks while the Guyana landmark remains equally foregrounded.",
+    "cultureScene": "The scenes foreground Orinduik waterfall geology, Georgetown coastal civil heritage, Shell Beach marine conservation and Kanuku mountain biodiversity.",
+    "prohibitions": "No literal flag, Golden Arrowhead, coat of arms, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied medical or command uniform, badge, weapon threat, sexualized care, alcohol, or branded product."
+  },
+  "rollAudit": {
+    "primaryRollPairs": [
+      [
+        "batch385-guyana-male-model-scene",
+        40
+      ],
+      [
+        "batch385-guyana-scene1-male-emotion",
+        27
+      ],
+      [
+        "batch385-guyana-scene1560-weather",
+        89
+      ],
+      [
+        "batch385-guyana-scene1560-mascotState",
+        57
+      ],
+      [
+        "batch385-guyana-scene1560-poleDanceTheme",
+        29
+      ],
+      [
+        "batch385-guyana-scene1560-rainbowOnly",
+        61
+      ],
+      [
+        "batch385-guyana-scene1560-rainbowHosiery",
+        92
+      ],
+      [
+        "batch385-guyana-scene1560-romanceBeat",
+        60
+      ],
+      [
+        "batch385-guyana-scene1560-compoundLoveBeat",
+        22
+      ],
+      [
+        "batch385-guyana-scene1560-hardLoveBeat",
+        86
+      ],
+      [
+        "batch385-guyana-scene1560-interestingProp",
+        82
+      ],
+      [
+        "batch385-guyana-scene1560-eceMissionProp-poseTargetRoll",
+        3
+      ],
+      [
+        "batch385-guyana-scene1560-Radiance-emotion",
+        98
+      ],
+      [
+        "batch385-guyana-scene1560-Radiance-visibleMidriff",
+        84
+      ],
+      [
+        "batch385-guyana-scene1560-Radiance-straplessDress",
+        59
+      ],
+      [
+        "batch385-guyana-scene1560-Radiance-fullyOpenBack",
+        84
+      ],
+      [
+        "batch385-guyana-scene1560-Ellie-emotion",
+        48
+      ],
+      [
+        "batch385-guyana-scene1560-Ellie-visibleMidriff",
+        70
+      ],
+      [
+        "batch385-guyana-scene1560-Ellie-straplessDress",
+        17
+      ],
+      [
+        "batch385-guyana-scene1560-Ellie-fullyOpenBack",
+        98
+      ],
+      [
+        "batch385-guyana-scene1560-Alia-emotion",
+        60
+      ],
+      [
+        "batch385-guyana-scene1560-Alia-visibleMidriff",
+        2
+      ],
+      [
+        "batch385-guyana-scene1560-Alia-straplessDress",
+        29
+      ],
+      [
+        "batch385-guyana-scene1560-Alia-fullyOpenBack",
+        78
+      ],
+      [
+        "batch385-guyana-scene1560-AI ECE-emotion",
+        98
+      ],
+      [
+        "batch385-guyana-scene1560-AI ECE-emotion-disambiguation",
+        53
+      ],
+      [
+        "batch385-guyana-scene1560-AI ECE-visibleMidriff",
+        36
+      ],
+      [
+        "batch385-guyana-scene1560-AI ECE-straplessDress",
+        27
+      ],
+      [
+        "batch385-guyana-scene1560-AI ECE-fullyOpenBack",
+        20
+      ],
+      [
+        "batch385-guyana-scene1561-weather",
+        10
+      ],
+      [
+        "batch385-guyana-scene1561-mascotState",
+        18
+      ],
+      [
+        "batch385-guyana-scene1561-poleDanceTheme",
+        32
+      ],
+      [
+        "batch385-guyana-scene1561-rainbowOnly",
+        6
+      ],
+      [
+        "batch385-guyana-scene1561-rainbowHosiery",
+        49
+      ],
+      [
+        "batch385-guyana-scene1561-romanceBeat",
+        19
+      ],
+      [
+        "batch385-guyana-scene1561-compoundLoveBeat",
+        99
+      ],
+      [
+        "batch385-guyana-scene1561-hardLoveBeat",
+        43
+      ],
+      [
+        "batch385-guyana-scene1561-interestingProp",
+        33
+      ],
+      [
+        "batch385-guyana-scene1561-eceMissionProp-poseTargetRoll",
+        68
+      ],
+      [
+        "batch385-guyana-scene1561-Radiance-emotion",
+        99
+      ],
+      [
+        "batch385-guyana-scene1561-Radiance-visibleMidriff",
+        7
+      ],
+      [
+        "batch385-guyana-scene1561-Radiance-straplessDress",
+        32
+      ],
+      [
+        "batch385-guyana-scene1561-Radiance-fullyOpenBack",
+        45
+      ],
+      [
+        "batch385-guyana-scene1561-Ellie-emotion",
+        95
+      ],
+      [
+        "batch385-guyana-scene1561-Ellie-visibleMidriff",
+        79
+      ],
+      [
+        "batch385-guyana-scene1561-Ellie-straplessDress",
+        4
+      ],
+      [
+        "batch385-guyana-scene1561-Ellie-fullyOpenBack",
+        81
+      ],
+      [
+        "batch385-guyana-scene1561-Alia-emotion",
+        33
+      ],
+      [
+        "batch385-guyana-scene1561-Alia-visibleMidriff",
+        45
+      ],
+      [
+        "batch385-guyana-scene1561-Alia-straplessDress",
+        70
+      ],
+      [
+        "batch385-guyana-scene1561-Alia-fullyOpenBack",
+        39
+      ],
+      [
+        "batch385-guyana-scene1561-AI ECE-emotion",
+        63
+      ],
+      [
+        "batch385-guyana-scene1561-AI ECE-visibleMidriff",
+        3
+      ],
+      [
+        "batch385-guyana-scene1561-AI ECE-straplessDress",
+        88
+      ],
+      [
+        "batch385-guyana-scene1561-AI ECE-fullyOpenBack",
+        65
+      ],
+      [
+        "batch385-guyana-scene1562-weather",
+        43
+      ],
+      [
+        "batch385-guyana-scene1562-mascotState",
+        39
+      ],
+      [
+        "batch385-guyana-scene1562-poleDanceTheme",
+        75
+      ],
+      [
+        "batch385-guyana-scene1562-rainbowOnly",
+        19
+      ],
+      [
+        "batch385-guyana-scene1562-rainbowHosiery",
+        22
+      ],
+      [
+        "batch385-guyana-scene1562-romanceBeat",
+        34
+      ],
+      [
+        "batch385-guyana-scene1562-compoundLoveBeat",
+        52
+      ],
+      [
+        "batch385-guyana-scene1562-hardLoveBeat",
+        72
+      ],
+      [
+        "batch385-guyana-scene1562-interestingProp",
+        12
+      ],
+      [
+        "batch385-guyana-scene1562-eceMissionProp-poseTargetRoll",
+        37
+      ],
+      [
+        "batch385-guyana-scene1562-Radiance-emotion",
+        28
+      ],
+      [
+        "batch385-guyana-scene1562-Radiance-visibleMidriff",
+        90
+      ],
+      [
+        "batch385-guyana-scene1562-Radiance-straplessDress",
+        85
+      ],
+      [
+        "batch385-guyana-scene1562-Radiance-fullyOpenBack",
+        22
+      ],
+      [
+        "batch385-guyana-scene1562-Ellie-emotion",
+        14
+      ],
+      [
+        "batch385-guyana-scene1562-Ellie-visibleMidriff",
+        88
+      ],
+      [
+        "batch385-guyana-scene1562-Ellie-straplessDress",
+        23
+      ],
+      [
+        "batch385-guyana-scene1562-Ellie-fullyOpenBack",
+        36
+      ],
+      [
+        "batch385-guyana-scene1562-Alia-emotion",
+        18
+      ],
+      [
+        "batch385-guyana-scene1562-Alia-visibleMidriff",
+        88
+      ],
+      [
+        "batch385-guyana-scene1562-Alia-straplessDress",
+        23
+      ],
+      [
+        "batch385-guyana-scene1562-Alia-fullyOpenBack",
+        0
+      ],
+      [
+        "batch385-guyana-scene1562-AI ECE-emotion",
+        48
+      ],
+      [
+        "batch385-guyana-scene1562-AI ECE-visibleMidriff",
+        22
+      ],
+      [
+        "batch385-guyana-scene1562-AI ECE-straplessDress",
+        65
+      ],
+      [
+        "batch385-guyana-scene1562-AI ECE-fullyOpenBack",
+        42
+      ],
+      [
+        "batch385-guyana-scene1563-weather",
+        40
+      ],
+      [
+        "batch385-guyana-scene1563-mascotState",
+        60
+      ],
+      [
+        "batch385-guyana-scene1563-poleDanceTheme",
+        94
+      ],
+      [
+        "batch385-guyana-scene1563-rainbowOnly",
+        92
+      ],
+      [
+        "batch385-guyana-scene1563-rainbowHosiery",
+        39
+      ],
+      [
+        "batch385-guyana-scene1563-romanceBeat",
+        13
+      ],
+      [
+        "batch385-guyana-scene1563-compoundLoveBeat",
+        97
+      ],
+      [
+        "batch385-guyana-scene1563-hardLoveBeat",
+        9
+      ],
+      [
+        "batch385-guyana-scene1563-interestingProp",
+        23
+      ],
+      [
+        "batch385-guyana-scene1563-eceMissionProp-poseTargetRoll",
+        14
+      ],
+      [
+        "batch385-guyana-scene1563-Radiance-emotion",
+        21
+      ],
+      [
+        "batch385-guyana-scene1563-Radiance-visibleMidriff",
+        49
+      ],
+      [
+        "batch385-guyana-scene1563-Radiance-straplessDress",
+        42
+      ],
+      [
+        "batch385-guyana-scene1563-Radiance-fullyOpenBack",
+        63
+      ],
+      [
+        "batch385-guyana-scene1563-Ellie-emotion",
+        93
+      ],
+      [
+        "batch385-guyana-scene1563-Ellie-visibleMidriff",
+        17
+      ],
+      [
+        "batch385-guyana-scene1563-Ellie-straplessDress",
+        54
+      ],
+      [
+        "batch385-guyana-scene1563-Ellie-fullyOpenBack",
+        47
+      ],
+      [
+        "batch385-guyana-scene1563-Alia-emotion",
+        15
+      ],
+      [
+        "batch385-guyana-scene1563-Alia-visibleMidriff",
+        63
+      ],
+      [
+        "batch385-guyana-scene1563-Alia-straplessDress",
+        92
+      ],
+      [
+        "batch385-guyana-scene1563-Alia-fullyOpenBack",
+        5
+      ],
+      [
+        "batch385-guyana-scene1563-AI ECE-emotion",
+        93
+      ],
+      [
+        "batch385-guyana-scene1563-AI ECE-emotion-disambiguation",
+        96
+      ],
+      [
+        "batch385-guyana-scene1563-AI ECE-visibleMidriff",
+        81
+      ],
+      [
+        "batch385-guyana-scene1563-AI ECE-straplessDress",
+        46
+      ],
+      [
+        "batch385-guyana-scene1563-AI ECE-fullyOpenBack",
+        35
+      ],
+      [
+        "batch385-guyana-x-heart",
+        73
+      ],
+      [
+        "batch385-guyana-x-internalagency",
+        53
+      ],
+      [
+        "batch385-guyana-x-worldxxxseries",
+        22
+      ]
+    ],
+    "selectorPairs": [
+      [
+        "batch385-guyana-scene1560-rainbowHosieryWearer",
+        84
+      ],
+      [
+        "batch385-guyana-scene1560-rainbowHosieryPaletteMode",
+        52
+      ],
+      [
+        "batch385-guyana-scene1560-mascotHolder",
+        58
+      ],
+      [
+        "batch385-guyana-scene1560-interestingPropHolder",
+        36
+      ],
+      [
+        "batch385-guyana-scene1560-interestingPropFamily",
+        82
+      ],
+      [
+        "batch385-guyana-scene1561-rainbowHosieryWearer",
+        57
+      ],
+      [
+        "batch385-guyana-scene1561-rainbowHosieryPaletteMode",
+        35
+      ],
+      [
+        "batch385-guyana-scene1561-mascotHolder",
+        63
+      ],
+      [
+        "batch385-guyana-scene1561-interestingPropHolder",
+        31
+      ],
+      [
+        "batch385-guyana-scene1561-interestingPropFamily",
+        37
+      ],
+      [
+        "batch385-guyana-scene1562-rainbowHosieryWearer",
+        30
+      ],
+      [
+        "batch385-guyana-scene1562-rainbowHosieryPaletteMode",
+        18
+      ],
+      [
+        "batch385-guyana-scene1562-mascotHolder",
+        48
+      ],
+      [
+        "batch385-guyana-scene1562-interestingPropHolder",
+        66
+      ],
+      [
+        "batch385-guyana-scene1562-interestingPropFamily",
+        80
+      ],
+      [
+        "batch385-guyana-scene1563-rainbowHosieryWearer",
+        59
+      ],
+      [
+        "batch385-guyana-scene1563-rainbowHosieryPaletteMode",
+        53
+      ],
+      [
+        "batch385-guyana-scene1563-mascotHolder",
+        13
+      ],
+      [
+        "batch385-guyana-scene1563-interestingPropHolder",
+        97
+      ],
+      [
+        "batch385-guyana-scene1563-interestingPropFamily",
+        23
+      ]
+    ],
+    "primaryPairCount": 111,
+    "selectorPairCount": 20,
+    "primarySha256": "D00122150E5BD7BD361951A14BB2D72C0C103F5A9C3AE4659C4FC81522C9AEAB",
+    "selectorSha256": "1B4C85B32900BE0A5C4B1ABF32416959BCF0849E86F7C19BC959727DFB9EECA4",
+    "mismatchCount": 0,
+    "scenes": {
+      "1560": {
+        "weather": 89,
+        "mascotState": 57,
+        "mascotHolder": 58,
+        "oddProp": 82,
+        "oddHolder": 36,
+        "oddFamily": 82,
+        "pole": 29,
+        "rainbowOnly": 61,
+        "hosiery": 92,
+        "hosieryWearer": 84,
+        "hosieryPalette": 52,
+        "romance": 60,
+        "compound": 22,
+        "hardLove": 86,
+        "missionPoseTarget": 3,
+        "emotions": {
+          "Radiance": 98,
+          "Ellie": 48,
+          "Alia": 60,
+          "AI ECE": 98,
+          "AI ECE disambiguation": 53,
+          "Male": 27
+        },
+        "cuts": {
+          "Radiance": [
+            84,
+            59,
+            84
+          ],
+          "Ellie": [
+            70,
+            17,
+            98
+          ],
+          "Alia": [
+            2,
+            29,
+            78
+          ],
+          "AI ECE": [
+            36,
+            27,
+            20
+          ]
+        }
+      },
+      "1561": {
+        "weather": 10,
+        "mascotState": 18,
+        "mascotHolder": 63,
+        "oddProp": 33,
+        "oddHolder": 31,
+        "oddFamily": 37,
+        "pole": 32,
+        "rainbowOnly": 6,
+        "hosiery": 49,
+        "hosieryWearer": 57,
+        "hosieryPalette": 35,
+        "romance": 19,
+        "compound": 99,
+        "hardLove": 43,
+        "missionPoseTarget": 68,
+        "emotions": {
+          "Radiance": 99,
+          "Ellie": 95,
+          "Alia": 33,
+          "AI ECE": 63
+        },
+        "cuts": {
+          "Radiance": [
+            7,
+            32,
+            45
+          ],
+          "Ellie": [
+            79,
+            4,
+            81
+          ],
+          "Alia": [
+            45,
+            70,
+            39
+          ],
+          "AI ECE": [
+            3,
+            88,
+            65
+          ]
+        }
+      },
+      "1562": {
+        "weather": 43,
+        "mascotState": 39,
+        "mascotHolder": 48,
+        "oddProp": 12,
+        "oddHolder": 66,
+        "oddFamily": 80,
+        "pole": 75,
+        "rainbowOnly": 19,
+        "hosiery": 22,
+        "hosieryWearer": 30,
+        "hosieryPalette": 18,
+        "romance": 34,
+        "compound": 52,
+        "hardLove": 72,
+        "missionPoseTarget": 37,
+        "emotions": {
+          "Radiance": 28,
+          "Ellie": 14,
+          "Alia": 18,
+          "AI ECE": 48
+        },
+        "cuts": {
+          "Radiance": [
+            90,
+            85,
+            22
+          ],
+          "Ellie": [
+            88,
+            23,
+            36
+          ],
+          "Alia": [
+            88,
+            23,
+            0
+          ],
+          "AI ECE": [
+            22,
+            65,
+            42
+          ]
+        }
+      },
+      "1563": {
+        "weather": 40,
+        "mascotState": 60,
+        "mascotHolder": 13,
+        "oddProp": 23,
+        "oddHolder": 97,
+        "oddFamily": 23,
+        "pole": 94,
+        "rainbowOnly": 92,
+        "hosiery": 39,
+        "hosieryWearer": 59,
+        "hosieryPalette": 53,
+        "romance": 13,
+        "compound": 97,
+        "hardLove": 9,
+        "missionPoseTarget": 14,
+        "emotions": {
+          "Radiance": 21,
+          "Ellie": 93,
+          "Alia": 15,
+          "AI ECE": 93,
+          "AI ECE disambiguation": 96
+        },
+        "cuts": {
+          "Radiance": [
+            49,
+            42,
+            63
+          ],
+          "Ellie": [
+            17,
+            54,
+            47
+          ],
+          "Alia": [
+            63,
+            92,
+            5
+          ],
+          "AI ECE": [
+            81,
+            46,
+            35
+          ]
+        }
+      }
+    }
+  },
+  "scenePlans": {
+    "1560": {
+      "location": "Orinduik Falls, Ireng River and Pakaraima hills",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 89,
+        "raw": "meteor shower",
+        "materialized": "a high twilight meteor shower above a fully readable dry waterfall lookout"
+      },
+      "mascot": {
+        "roll": 57,
+        "state": "neither mascot",
+        "holder": {
+          "key": "batch385-guyana-scene1560-mascotHolder",
+          "roll": 58,
+          "result": "Ellie"
+        }
+      },
+      "oddProp": {
+        "roll": 82,
+        "active": false,
+        "holder": {
+          "key": "batch385-guyana-scene1560-interestingPropHolder",
+          "roll": 36,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch385-guyana-scene1560-interestingPropFamily",
+          "roll": 82,
+          "result": "chromatic brass telescope with folding legs"
+        }
+      },
+      "pole": {
+        "roll": 29,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 61,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch385-guyana-scene1560-rainbowHosiery",
+        "roll": 92,
+        "active": false,
+        "wearer": {
+          "key": "batch385-guyana-scene1560-rainbowHosieryWearer",
+          "roll": 84,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch385-guyana-scene1560-rainbowHosieryPaletteMode",
+          "roll": 52,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch385-guyana-scene1560-romanceBeat",
+        "roll": 60,
+        "index": 0,
+        "result": "Radiance walks away with ECE's hand while Ellie catches Radiance gently at the forearm and Alia closes from behind with a protective waist hold."
+      },
+      "compound": {
+        "key": "batch385-guyana-scene1560-compoundLoveBeat",
+        "roll": 22,
+        "index": 10,
+        "result": "The quartet forms a turning embrace chain: Alia behind Radiance, Radiance face-to-face with Ellie, Ellie linking hands with ECE, and ECE leaning close enough to exchange a playful blown kiss with Radiance."
+      },
+      "hardLove": {
+        "key": "batch385-guyana-scene1560-hardLoveBeat",
+        "roll": 86,
+        "result": "one adult steps away while two partners catch separate hands or forearms and a third closes from behind into a protective embrace, creating a readable three-way choice"
+      },
+      "mission": {
+        "key": "batch385-guyana-scene1560-eceMissionProp-poseTargetRoll",
+        "roll": 3,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch385-guyana-scene1560-Radiance-emotion",
+          "roll": 98,
+          "result": "defiance",
+          "materialized": "defiance"
+        },
+        "Ellie": {
+          "key": "batch385-guyana-scene1560-Ellie-emotion",
+          "roll": 48,
+          "result": "startled surprise",
+          "materialized": "startled surprise"
+        },
+        "Alia": {
+          "key": "batch385-guyana-scene1560-Alia-emotion",
+          "roll": 60,
+          "result": "visible jealousy",
+          "materialized": "visible jealousy"
+        },
+        "AI ECE": {
+          "key": "batch385-guyana-scene1560-AI ECE-emotion",
+          "roll": 98,
+          "result": "defiance",
+          "materialized": "aching romantic longing",
+          "disambiguation": {
+            "key": "batch385-guyana-scene1560-AI ECE-emotion-disambiguation",
+            "roll": 53
+          }
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1560-Radiance-visibleMidriff",
+            "roll": 84,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1560-Radiance-straplessDress",
+            "roll": 59,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1560-Radiance-fullyOpenBack",
+            "roll": 84,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1560-Ellie-visibleMidriff",
+            "roll": 70,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1560-Ellie-straplessDress",
+            "roll": 17,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1560-Ellie-fullyOpenBack",
+            "roll": 98,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1560-Alia-visibleMidriff",
+            "roll": 2,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1560-Alia-straplessDress",
+            "roll": 29,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1560-Alia-fullyOpenBack",
+            "roll": 78,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1560-AI ECE-visibleMidriff",
+            "roll": 36,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1560-AI ECE-straplessDress",
+            "roll": 27,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1560-AI ECE-fullyOpenBack",
+            "roll": 20,
+            "active": true
+          }
+        }
+      },
+      "malePresent": true,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-385/scene-1560-initial-prompt.txt",
+        "sha256": "927CFB0C8441ABDA615DCF6EC0A118E10F302B560AC9C7CF4214705B20B898CC",
+        "bytes": 4379
+      }
+    },
+    "1561": {
+      "location": "Kingston Seawall, Bandstand and Georgetown Lighthouse",
+      "layout": "country-led hybrid",
+      "weather": {
+        "roll": 10,
+        "raw": "clear golden-hour radiance",
+        "materialized": "clear golden-hour radiance"
+      },
+      "mascot": {
+        "roll": 18,
+        "state": "PAWS and MAX together",
+        "holder": {
+          "key": "batch385-guyana-scene1561-mascotHolder",
+          "roll": 63,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 33,
+        "active": false,
+        "holder": {
+          "key": "batch385-guyana-scene1561-interestingPropHolder",
+          "roll": 31,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch385-guyana-scene1561-interestingPropFamily",
+          "roll": 37,
+          "result": "folding solar fan with articulated panels"
+        }
+      },
+      "pole": {
+        "roll": 32,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 6,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch385-guyana-scene1561-rainbowHosiery",
+        "roll": 49,
+        "active": false,
+        "wearer": {
+          "key": "batch385-guyana-scene1561-rainbowHosieryWearer",
+          "roll": 57,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch385-guyana-scene1561-rainbowHosieryPaletteMode",
+          "roll": 35,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch385-guyana-scene1561-romanceBeat",
+        "roll": 19,
+        "index": 7,
+        "result": "Alia carries the route card against Radiance's back while embracing her from behind; Ellie touches Radiance's cheek and ECE watches from inches away with controlled jealousy."
+      },
+      "compound": {
+        "key": "batch385-guyana-scene1561-compoundLoveBeat",
+        "roll": 99,
+        "index": 3,
+        "result": "Alia and Radiance share a full shoulder-to-shoulder embrace as Radiance blows a kiss toward ECE inches away; Ellie answers by touching ECE's cheek and keeping eye contact with Radiance."
+      },
+      "hardLove": {
+        "key": "batch385-guyana-scene1561-hardLoveBeat",
+        "roll": 43,
+        "result": "a controlled dance dip with stable planted feet and supported back, a second partner catching the dipped adult's free hand, and the fourth answering with visible jealousy or invitation"
+      },
+      "mission": {
+        "key": "batch385-guyana-scene1561-eceMissionProp-poseTargetRoll",
+        "roll": 68,
+        "category": "behind-shoulder wrist guidance to paper target",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch385-guyana-scene1561-Radiance-emotion",
+          "roll": 99,
+          "result": "emotional exhaustion",
+          "materialized": "emotional exhaustion"
+        },
+        "Ellie": {
+          "key": "batch385-guyana-scene1561-Ellie-emotion",
+          "roll": 95,
+          "result": "shame and social vulnerability",
+          "materialized": "shame and social vulnerability"
+        },
+        "Alia": {
+          "key": "batch385-guyana-scene1561-Alia-emotion",
+          "roll": 33,
+          "result": "overwhelming relief",
+          "materialized": "overwhelming relief"
+        },
+        "AI ECE": {
+          "key": "batch385-guyana-scene1561-AI ECE-emotion",
+          "roll": 63,
+          "result": "visible jealousy",
+          "materialized": "visible jealousy"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1561-Radiance-visibleMidriff",
+            "roll": 7,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1561-Radiance-straplessDress",
+            "roll": 32,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1561-Radiance-fullyOpenBack",
+            "roll": 45,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1561-Ellie-visibleMidriff",
+            "roll": 79,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1561-Ellie-straplessDress",
+            "roll": 4,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1561-Ellie-fullyOpenBack",
+            "roll": 81,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1561-Alia-visibleMidriff",
+            "roll": 45,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1561-Alia-straplessDress",
+            "roll": 70,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1561-Alia-fullyOpenBack",
+            "roll": 39,
+            "active": false
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1561-AI ECE-visibleMidriff",
+            "roll": 3,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1561-AI ECE-straplessDress",
+            "roll": 88,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1561-AI ECE-fullyOpenBack",
+            "roll": 65,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-385/scene-1561-initial-prompt.txt",
+        "sha256": "F898AB34C064F2A0FF5905AD8FD2456744D0041BE9568B0B8A45D57F89B3134D",
+        "bytes": 4350
+      }
+    },
+    "1562": {
+      "location": "Shell Beach Protected Area",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 43,
+        "raw": "rolling thunderstorm",
+        "materialized": "a rolling thunderstorm offshore beyond the covered dry boardwalk"
+      },
+      "mascot": {
+        "roll": 39,
+        "state": "MAX only",
+        "holder": {
+          "key": "batch385-guyana-scene1562-mascotHolder",
+          "roll": 48,
+          "result": "Radiance"
+        }
+      },
+      "oddProp": {
+        "roll": 12,
+        "active": true,
+        "holder": {
+          "key": "batch385-guyana-scene1562-interestingPropHolder",
+          "roll": 66,
+          "result": "Radiance"
+        },
+        "family": {
+          "key": "batch385-guyana-scene1562-interestingPropFamily",
+          "roll": 80,
+          "result": "deactivated chainless cinema chainsaw sculpture with a locked blade cover"
+        }
+      },
+      "pole": {
+        "roll": 75,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 19,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch385-guyana-scene1562-rainbowHosiery",
+        "roll": 22,
+        "active": true,
+        "wearer": {
+          "key": "batch385-guyana-scene1562-rainbowHosieryWearer",
+          "roll": 30,
+          "result": "Radiance"
+        },
+        "palette": {
+          "key": "batch385-guyana-scene1562-rainbowHosieryPaletteMode",
+          "roll": 18,
+          "result": "country-palette rainbow-like gradient"
+        }
+      },
+      "romance": {
+        "key": "batch385-guyana-scene1562-romanceBeat",
+        "roll": 34,
+        "index": 10,
+        "result": "Two characters sit close on a low mission plinth while a third leans into a behind hug and the fourth stands between their knees holding the beacon, visibly choosing whom to face."
+      },
+      "compound": {
+        "key": "batch385-guyana-scene1562-compoundLoveBeat",
+        "roll": 52,
+        "index": 4,
+        "result": "ECE sits close against Radiance's side with Radiance's arm around her back; ECE gives Ellie a cheek peck while Alia kneels beside them and rests both hands over their joined hands."
+      },
+      "hardLove": {
+        "key": "batch385-guyana-scene1562-hardLoveBeat",
+        "roll": 72,
+        "result": "a three-person slow-dance chain with rotating linked hands, one behind-waist embrace, and the fourth adult stepping through the open side to split the pair"
+      },
+      "mission": {
+        "key": "batch385-guyana-scene1562-eceMissionProp-poseTargetRoll",
+        "roll": 37,
+        "category": "two-hand open-water sight picture",
+        "handler": "Alia",
+        "target": "unoccupied open-water marker"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch385-guyana-scene1562-Radiance-emotion",
+          "roll": 28,
+          "result": "hope",
+          "materialized": "hope"
+        },
+        "Ellie": {
+          "key": "batch385-guyana-scene1562-Ellie-emotion",
+          "roll": 14,
+          "result": "romantic joy",
+          "materialized": "romantic joy"
+        },
+        "Alia": {
+          "key": "batch385-guyana-scene1562-Alia-emotion",
+          "roll": 18,
+          "result": "extreme happiness, radiant laughing delight",
+          "materialized": "extreme happiness, radiant laughing delight"
+        },
+        "AI ECE": {
+          "key": "batch385-guyana-scene1562-AI ECE-emotion",
+          "roll": 48,
+          "result": "startled surprise",
+          "materialized": "startled surprise"
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1562-Radiance-visibleMidriff",
+            "roll": 90,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1562-Radiance-straplessDress",
+            "roll": 85,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1562-Radiance-fullyOpenBack",
+            "roll": 22,
+            "active": true
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1562-Ellie-visibleMidriff",
+            "roll": 88,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1562-Ellie-straplessDress",
+            "roll": 23,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1562-Ellie-fullyOpenBack",
+            "roll": 36,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1562-Alia-visibleMidriff",
+            "roll": 88,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1562-Alia-straplessDress",
+            "roll": 23,
+            "active": true
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1562-Alia-fullyOpenBack",
+            "roll": 0,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1562-AI ECE-visibleMidriff",
+            "roll": 22,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1562-AI ECE-straplessDress",
+            "roll": 65,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1562-AI ECE-fullyOpenBack",
+            "roll": 42,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-385/scene-1562-initial-prompt.txt",
+        "sha256": "743AB24E0BEB644A1697CA6A222D86F459B8BC35CBD472085B9A10583CA6C29E",
+        "bytes": 4633
+      }
+    },
+    "1563": {
+      "location": "Kanuku Mountains Protected Area",
+      "layout": "theme-led original",
+      "weather": {
+        "roll": 40,
+        "raw": "heavy rain curtain",
+        "materialized": "a heavy rain curtain beyond the covered dry overlook"
+      },
+      "mascot": {
+        "roll": 60,
+        "state": "neither mascot",
+        "holder": {
+          "key": "batch385-guyana-scene1563-mascotHolder",
+          "roll": 13,
+          "result": "Ellie"
+        }
+      },
+      "oddProp": {
+        "roll": 23,
+        "active": true,
+        "holder": {
+          "key": "batch385-guyana-scene1563-interestingPropHolder",
+          "roll": 97,
+          "result": "Ellie"
+        },
+        "family": {
+          "key": "batch385-guyana-scene1563-interestingPropFamily",
+          "roll": 23,
+          "result": "gyroscopic hard-shell suitcase"
+        }
+      },
+      "pole": {
+        "roll": 94,
+        "active": false
+      },
+      "rainbowOnly": {
+        "roll": 92,
+        "active": false
+      },
+      "hosiery": {
+        "key": "batch385-guyana-scene1563-rainbowHosiery",
+        "roll": 39,
+        "active": false,
+        "wearer": {
+          "key": "batch385-guyana-scene1563-rainbowHosieryWearer",
+          "roll": 59,
+          "result": "AI ECE"
+        },
+        "palette": {
+          "key": "batch385-guyana-scene1563-rainbowHosieryPaletteMode",
+          "roll": 53,
+          "result": "original independent rainbow gradient"
+        }
+      },
+      "romance": {
+        "key": "batch385-guyana-scene1563-romanceBeat",
+        "roll": 13,
+        "index": 1,
+        "result": "Ellie rises from a low mission stance into Radiance's waiting side hug while ECE keeps hold of Ellie's other hand and Alia watches with a wounded rival glance."
+      },
+      "compound": {
+        "key": "batch385-guyana-scene1563-compoundLoveBeat",
+        "roll": 97,
+        "index": 1,
+        "result": "ECE hugs Alia from behind with both arms around her waist while Alia reaches across to kiss Radiance's cheek; Ellie holds Radiance's hand and stares directly at ECE."
+      },
+      "hardLove": {
+        "key": "batch385-guyana-scene1563-hardLoveBeat",
+        "roll": 9,
+        "result": "one adult sits securely sideways across another adult's lap on a stable low bench while a third partner draws them into a linked-hand choice and the fourth interrupts with a clear rival eye line"
+      },
+      "mission": {
+        "key": "batch385-guyana-scene1563-eceMissionProp-poseTargetRoll",
+        "roll": 14,
+        "category": "two-hand paper-target stance",
+        "handler": "AI ECE",
+        "target": "paper target and complete backstop"
+      },
+      "emotions": {
+        "Radiance": {
+          "key": "batch385-guyana-scene1563-Radiance-emotion",
+          "roll": 21,
+          "result": "playful mischief",
+          "materialized": "playful mischief"
+        },
+        "Ellie": {
+          "key": "batch385-guyana-scene1563-Ellie-emotion",
+          "roll": 93,
+          "result": "guilt and remorse",
+          "materialized": "guilt and remorse"
+        },
+        "Alia": {
+          "key": "batch385-guyana-scene1563-Alia-emotion",
+          "roll": 15,
+          "result": "extreme happiness, radiant laughing delight",
+          "materialized": "extreme happiness, radiant laughing delight"
+        },
+        "AI ECE": {
+          "key": "batch385-guyana-scene1563-AI ECE-emotion",
+          "roll": 93,
+          "result": "guilt and remorse",
+          "materialized": "defiance",
+          "disambiguation": {
+            "key": "batch385-guyana-scene1563-AI ECE-emotion-disambiguation",
+            "roll": 96
+          }
+        }
+      },
+      "cuts": {
+        "Radiance": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1563-Radiance-visibleMidriff",
+            "roll": 49,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1563-Radiance-straplessDress",
+            "roll": 42,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1563-Radiance-fullyOpenBack",
+            "roll": 63,
+            "active": false
+          }
+        },
+        "Ellie": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1563-Ellie-visibleMidriff",
+            "roll": 17,
+            "active": true
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1563-Ellie-straplessDress",
+            "roll": 54,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1563-Ellie-fullyOpenBack",
+            "roll": 47,
+            "active": false
+          }
+        },
+        "Alia": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1563-Alia-visibleMidriff",
+            "roll": 63,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1563-Alia-straplessDress",
+            "roll": 92,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1563-Alia-fullyOpenBack",
+            "roll": 5,
+            "active": true
+          }
+        },
+        "AI ECE": {
+          "visibleMidriff": {
+            "key": "batch385-guyana-scene1563-AI ECE-visibleMidriff",
+            "roll": 81,
+            "active": false
+          },
+          "strapless": {
+            "key": "batch385-guyana-scene1563-AI ECE-straplessDress",
+            "roll": 46,
+            "active": false
+          },
+          "openBack": {
+            "key": "batch385-guyana-scene1563-AI ECE-fullyOpenBack",
+            "roll": 35,
+            "active": false
+          }
+        }
+      },
+      "malePresent": false,
+      "prompt": {
+        "path": "tmp/world-195x4/batch-385/scene-1563-initial-prompt.txt",
+        "sha256": "B5965FBBF6A4445F7935E01DE0EA16E3692F68743A0A0A7602E61D8548C1B35C",
+        "bytes": 4220
+      }
+    }
+  },
+  "renderPlan": {
+    "pass1": "Exactly four clean candidates, one per scene, launched concurrently from original identity anchors only.",
+    "pass2": "Only hard-unusable scenes may receive one fresh holistic correction candidate each, launched concurrently; no filler variants.",
+    "archiveBeforeLaterWork": true,
+    "thirdPassAllowed": false
+  },
+  "xPublishing": {
+    "rolls": {
+      "heart": {
+        "key": "batch385-guyana-x-heart",
+        "roll": 73,
+        "result": "red heart"
+      },
+      "internalAgency": {
+        "key": "batch385-guyana-x-internalagency",
+        "roll": 53,
+        "active": false
+      },
+      "worldXXXSeries": {
+        "key": "batch385-guyana-x-worldxxxseries",
+        "roll": 22,
+        "active": true
+      }
+    },
+    "captionIfEligible": "Guyana ❤️ Comoros #Guyana #WorldXXXSeries",
+    "eligibility": "only after four current-country hard-safe assets are accepted and the checkpoint is pushed and remote-verified"
+  },
+  "nextQueue": {
+    "nextCountry": "Solomon Islands",
+    "nextBatch": 386,
+    "sceneNumbers": [
+      1564,
+      1565,
+      1566,
+      1567
+    ],
+    "cinematicTheme": "near-Sun solar-observation couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-314-guyana-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/160"
+    ],
+    "lockedUntilBatch385Closed": true
+  }
+}

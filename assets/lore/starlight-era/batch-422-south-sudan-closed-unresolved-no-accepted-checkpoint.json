@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "country-closed-unresolved-no-accepted",
+  "createdAtUtc": "2026-08-27T04:48:43.517Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 422,
+  "country": "South Sudan",
+  "status": "closed-unresolved",
+  "canonicalTarget": 4,
+  "acceptedCount": 0,
+  "acceptedScenes": [],
+  "terminalScenes": [
+    {
+      "scene": 1708,
+      "outcome": "output-hard-unusable",
+      "accepted": false,
+      "reopen": false,
+      "sha256": "788fcf835c12428bbf6427c94084cbd4bb55afde8e75d372c4c62c15711cabea"
+    },
+    {
+      "scene": 1709,
+      "outcome": "output-hard-unusable",
+      "accepted": false,
+      "reopen": false,
+      "sha256": "a8e6e83a2f6b28c494e5b51a7e27151051f6abf18be1b4fb5c41527fbc09b5f6"
+    },
+    {
+      "scene": 1710,
+      "outcome": "explicit-no-bytes-refusal",
+      "accepted": false,
+      "reopen": false
+    },
+    {
+      "scene": 1711,
+      "outcome": "explicit-no-bytes-refusal",
+      "accepted": false,
+      "reopen": false
+    }
+  ],
+  "identityGate": {
+    "anchorsUploadedInRequiredOrder": true,
+    "providerReportedReferencesUsed": true,
+    "hardUnusableScenes": [
+      1708,
+      1709
+    ],
+    "explicitNoByteRefusalScenes": [
+      1710,
+      1711
+    ]
+  },
+  "retry": {
+    "authorized": false,
+    "sentCount": 0
+  },
+  "noRepetition": {
+    "scenesClosed": [
+      1708,
+      1709,
+      1710,
+      1711
+    ],
+    "reopenAllowed": false
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastResetBefore": 1,
+    "completedCountryCyclesSinceLastResetAfter": 2,
+    "publishDue": false
+  },
+  "nextEligible": {
+    "batch": 423,
+    "country": "Somalia",
+    "scenes": [
+      1712,
+      1713,
+      1714,
+      1715
+    ],
+    "sourceBatch": 352,
+    "sourceScenes": [
+      1428,
+      1429,
+      1430,
+      1431
+    ],
+    "sourceCheckpoint": "assets/lore/starlight-era/batch-352-somalia-orbital-research-station-checkpoint.json",
+    "dispatchStatus": "not-yet-prepared"
+  }
+}

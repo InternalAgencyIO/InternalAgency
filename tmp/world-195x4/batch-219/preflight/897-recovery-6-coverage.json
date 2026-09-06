@@ -1,0 +1,35 @@
+{
+  "schema": "world-195x4-recovery-6-final-detail-lock-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-recovery-6.txt",
+  "promptSha256": "52d6b23bad1a6baea5777b7b092e8cc83d9dfa413a4aa7697cfe6232f0ce5290",
+  "blockedCorpusSha256": "1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-1edd85328cbd2f1bb2f52411f3a74acc7a7e914793ea7502b9b17f8da59d3768.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No new moderation block occurred in round 5; only visually rejected candidates were recorded.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "finalDetailLock": "FINAL DETAIL LOCK: Radiance uses her RIGHT OPERA-GLOVED HAND to visibly straighten Alia's left shoulder detail while Radiance's left hand keeps the decorative rhythm wand low beside her own boot. Alia uses only her left hand on Radiance's loose cape closure. Keep ECE-Ellie forehead contact, Ellie's other hand on Radiance's sleeve, PAWS on ECE's lap, and the two visible navels.",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-5/897-recovery-5-rejected.png",
+    "bytes": 2415359,
+    "sha256": "49c9daae1f69fb343d27792150e4eb8536a71ebe0192367dfae0ab4b655f420b",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Radiance's triggered opera-gloved shoulder-detail adjustment toward Alia remains missing",
+      "forehead contact, PAWS lap action, two navels and Alia-to-Radiance styling are strong"
+    ]
+  },
+  "preserved": {
+    "originalPose": true,
+    "allTriggeredRolls": true,
+    "requiredTattooOrJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalTriangleAndECE": true,
+    "pawsExactActionAndReciprocation": true
+  }
+}

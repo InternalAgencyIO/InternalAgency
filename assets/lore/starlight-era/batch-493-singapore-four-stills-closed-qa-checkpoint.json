@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "batch": 493,
+  "country": "Singapore",
+  "scenes": [1999, 2000, 2001, 2002],
+  "state": "four-stills-closed-qa-and-archive-complete-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-06T06:38:45.9508532Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preparationCheckpoint": "assets/lore/starlight-era/batch-493-singapore-editorial-prompts-prepared-checkpoint.json",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-493-singapore-meta-dispatch-preflight-checkpoint.json",
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-493-singapore-four-meta-composers-staged-checkpoint.json",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-493-singapore-four-lanes-dispatched-checkpoint.json",
+    "rawCaptureCheckpoint": "assets/lore/starlight-era/batch-493-singapore-meta-raw-capture-checkpoint.json",
+    "dispatchCommit": "ece2eed6fa27b18239d0cd44cc1b89bf26335b5d",
+    "rawCaptureCommit": "29307937d37d74b873c279c58cad94ace987f182"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulFinalOccurrences": 4,
+    "providerRawAssetCount": 6,
+    "dualOutputOccurrences": 2,
+    "hardFailures": 0,
+    "retries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "orderedAnchors": [938, 936, 937],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/6cfa5950-84eb-4941-8c0d-b24a32c25d66",
+      "https://www.meta.ai/prompt/2f57cdbf-9d5b-4177-819f-ed8397d76e01",
+      "https://www.meta.ai/prompt/fccf05df-9096-4099-b004-81663487afa0",
+      "https://www.meta.ai/prompt/d622731b-c492-4c09-8a04-6c7fee88c457"
+    ]
+  },
+  "selectedAssets": [
+    {"scene": 1999, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/1999-singapore-marina-bay-editorial-chatgpt-one-strong-shortening-pass.png", "sha256": "6B087C8CFC3761B01AD38E0A5E82EA3C9F326CDCCB76F81DCC07F4CA4B4D0CD9", "bytes": 2677879, "width": 941, "height": 1672},
+    {"scene": 2000, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/2000-singapore-supertree-grove-editorial-chatgpt-one-strong-shortening-pass.png", "sha256": "8217607086B37ED3F7DD34DA5E41977AA3431C6FD66982C77339B1F92C8954AC", "bytes": 2493580, "width": 941, "height": 1672},
+    {"scene": 2001, "provider": "Meta AI selected for the genuine close-camera roll", "path": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/scene-2001-meta-raw-b.jpg", "sha256": "A4879662AD3E134B843D39B7FAE7F4217A39E4E990A462ED1C207C492F41EF0C", "bytes": 257530, "width": 1152, "height": 2048},
+    {"scene": 2002, "provider": "Meta AI fallback after consumed ChatGPT invocation", "path": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/scene-2002-meta-raw-a.jpg", "sha256": "7DB693A9BFC553AB2333C6B0D6D26ED74C5B60F522CE477DAA87EE59C0A05754", "bytes": 303815, "width": 1152, "height": 2048}
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableSingaporeSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "selectedAssetRepoDuplicateCounts": [1, 1, 1, 1],
+    "selectedAssetMatchesOutsideBatch": [0, 0, 0, 0],
+    "scannedRepoImageCount": 5079,
+    "selectedAssetCanonicalXLedgerMatches": [0, 0, 0, 0],
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassRequestsIssued": 4,
+    "successfulOutputs": 3,
+    "outputModerationBlocks": 1,
+    "blockedScenes": [2002],
+    "blockedStage": "output",
+    "blockedCategory": "sexual",
+    "blockedRequestIds": ["24b2dda0-d8d4-4479-82f2-ed46aa525395"],
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 2,
+    "selectedMetaOriginalsOrFallbacks": 2,
+    "dualOutputOccurrencesCountedOnce": true
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/provider-ledger.json",
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/accessibility-sidecars.json",
+    "providerManifest": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/provider-evidence-manifest.json",
+    "providerManifestExact": true,
+    "providerManifestFileCount": 19,
+    "providerManifestTotalBytes": 3128731,
+    "providerManifestInventorySha256": "524031E71709C1EE97519CF992B76202FC1A972AAFC40DE177E1F300FF280FAB",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-493-singapore/closure-evidence-manifest.json",
+    "closureManifestFileCount": 26,
+    "closureManifestTotalBytes": 10691470,
+    "closureManifestInventorySha256": "AAA4CCFBD924F1D112B9FD32F2B80A28023560B1D770FC47BBA8728C3E95292F"
+  },
+  "publication": {
+    "plannedCountryPair": ["Singapore", "Lebanon"],
+    "singaporePriorPostCount": 0,
+    "lebanonPriorPostCount": 0,
+    "xAccount": "@dogramaci",
+    "canonicalXPostCountBeforePair": 199,
+    "composerBlank": true,
+    "composerMediaCount": 0,
+    "publicTransmissionCount": 0
+  },
+  "browserState": {
+    "verifiedAtUtc": "2026-09-06T06:38:45.9508532Z",
+    "metaRelatedTabCount": 4,
+    "metaTerminalPromptUrlCount": 4,
+    "metaTerminalDownloadButtonCounts": [2, 1, 2, 1],
+    "xTabCount": 1,
+    "otherTabCount": 0,
+    "terminalMetaThinkingVisible": true,
+    "terminalMetaStopVisibleCount": 0,
+    "xComposerUrl": "https://x.com/compose/post",
+    "xSignedInProfileHref": "/dogramaci",
+    "xComposerText": "",
+    "xPostDisabled": true,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradictions": [
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified checkpoints. No Cuba or Tanzania prompt was dispatched.",
+    "Scenes 1999 and 2001 each returned two valid images in one provider occurrence. All four raw byte streams are archived, but each occurrence consumed exactly one ChatGPT tailoring allowance.",
+    "The valid ChatGPT scene 2001 output contains the rolled fictional distant destruction, but Meta output B was selected because it materially better honors the genuine extreme-close camera roll. Both remain archived.",
+    "Scene 2002 used the valid Meta source after its single ChatGPT call was output-stage moderation-blocked. No second edit call was made.",
+    "No Starlight guardian exists. The unrelated X Assistant and IAT B3 guardians remain active on their own 45-minute schedules, untouched and outside Starlight authority."
+  ],
+  "automationInventory": [
+    {"id": "guardian-x-assistant-mission", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true},
+    {"id": "iat-b3-devnet-gate-guardian", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true}
+  ],
+  "starlightGuardianPresent": false,
+  "nextSafeAction": "Commit the complete Batch 493 closure with Git LFS, push and verify local, origin and Draft PR parity, then prepare fresh Lebanon scenes with unused scene numbers before replacing any terminal Singapore Meta tab. Keep one blank signed-in X composer open."
+}

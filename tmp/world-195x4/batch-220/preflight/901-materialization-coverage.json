@@ -1,0 +1,175 @@
+{
+  "schema": "world-195x4-materialization-coverage-v2",
+  "batch": 220,
+  "country": "Republic of the Congo",
+  "sceneNumber": 901,
+  "status": "passed-lossless",
+  "requiredCoveragePercent": 100,
+  "achievedCoveragePercent": 100,
+  "evidence": {
+    "canonical identity and relative height geometry": {
+      "status": "present",
+      "section": "CAST AND GEOMETRY",
+      "identityReferenceCount": 3
+    },
+    "country and exact recognizable location": {
+      "status": "present",
+      "section": "COUNTRY, LOCATION AND MISSION",
+      "location": "a private empty temporary signal salon deck above Pointe-Noire's recognizable Cote Sauvage shoreline and modern coastal skyline at luminous blue hour, safely separated from surf, roads and visitors"
+    },
+    "rotated aircrew roles and harmless completed mission": {
+      "status": "present",
+      "section": "AIRCREW ROLES",
+      "roles": {
+        "Radiance": "captain",
+        "Ellie": "first officer",
+        "Alia": "cabin host",
+        "AI ECE": "signal officer"
+      },
+      "missionState": "already-complete-secondary"
+    },
+    "original stored relationship pose or exact resolved pose beat": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "tableauSha256": "676f98c27f2a6154b0bcbe5afa62fc52b5c90ba79705b245522d826c77d149ae"
+    },
+    "closed Radiance-Ellie-Alia triangle geometry": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "primary closed Radiance-Ellie-Alia romantic triangle"
+    },
+    "ECE reciprocal relationship connection without displacing the original trio": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "ECE reciprocal and non-displacing"
+    },
+    "four distinct bold country-derived latex-and-lace silhouettes": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "distinctSilhouetteCount": 4
+    },
+    "intentional natural midriff and navel visibility": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "specifiedVisibleNavelCount": 4
+    },
+    "all deterministic appearance rolls with triggered outcomes": {
+      "status": "present",
+      "artifact": "901-roll-audit.json",
+      "evaluatedRollCount": 356
+    },
+    "all triggered tattoo, piercing, jewelry, hair, accessory, touch, expression and pose rules": {
+      "status": "present",
+      "section": "ALL TRIGGERED DETERMINISTIC DETAILS",
+      "triggeredCount": 3,
+      "tattooCount": 0
+    },
+    "all trio-static rolls and any triggered original tableau": {
+      "status": "present",
+      "artifact": "901-roll-audit.json",
+      "evaluatedTrioRollCount": 20,
+      "triggeredTrioCount": 0
+    },
+    "PAWS presence roll, resolved action roll, growth epoch and reciprocation": {
+      "status": "present",
+      "section": "PAWS CONTRACT",
+      "presenceRoll": 50,
+      "rawActionRoll": 3,
+      "resolvedActionIndex": 3,
+      "growthEpoch": 1,
+      "effectiveTriggered": false
+    },
+    "clean-face, anatomy, hands, complete footwear and technical invariants": {
+      "status": "present",
+      "section": "COMPOSITION AND VALIDATION",
+      "cleanFace": true,
+      "hands": 8,
+      "footwear": 8,
+      "portrait": "9:16 full-length"
+    }
+  },
+  "semanticDiff": {
+    "status": "passed",
+    "positiveInstructionDeletionCount": 0,
+    "generalizedTriggeredDetailCount": 0,
+    "expectedTriggeredIds": [
+      "Alia.backToBackChainBeltVictory",
+      "AI ECE.hat",
+      "AI ECE.whisperAndInterlacedHands"
+    ],
+    "materializedTriggeredIds": [
+      "Alia.backToBackChainBeltVictory",
+      "AI ECE.hat",
+      "AI ECE.whisperAndInterlacedHands"
+    ],
+    "exactTriggeredSetMatch": true,
+    "originalTableauSha256": "676f98c27f2a6154b0bcbe5afa62fc52b5c90ba79705b245522d826c77d149ae",
+    "finalPromptSha256": "a22be3280c384697968f99325e9cfbc4df162555974d571bd528d8c9fd859328",
+    "blocklistSubstitutionCount": 0,
+    "blocklistSubstitutions": []
+  },
+  "transformations": {
+    "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+    "longestPhraseFirst": true,
+    "substitutions": []
+  },
+  "triggerMaterialization": [
+    {
+      "id": "Alia.backToBackChainBeltVictory",
+      "scope": "Alia",
+      "trait": "backToBackChainBeltVictory",
+      "seed": "901|Alia|backToBackChainBeltVictory|mile-high-v1",
+      "firstEightHex": "d825b9aa",
+      "roll": 18,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Stage a synchronized back-to-back victory pose with each woman wearing her own short slack chain belt-loop accent. Keep the chains separate, the completed objective visible, and anatomy, hands and complete footwear clear.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 01",
+      "materializedInstruction": "Alia and ECE complete one synchronized back-to-back victory beat while each keeps her own short slack chain-belt accent separate, decorative and quick-release.",
+      "storedRuleSha256": "50f2aa0df45e40947f60cad1c9dbacd76cee5c840317e68f44db97cc9bb709a8",
+      "materializedInstructionSha256": "e54feac4f12b3abb30aaae4f5e5e9ab40e3722fc89e0075ccfcc8b9acba90b1f",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.hat",
+      "scope": "AI ECE",
+      "trait": "hat",
+      "seed": "901|AI ECE|hat|mile-high-v1",
+      "firstEightHex": "49b394c8",
+      "roll": 0,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Add one original role-coded sculptural runway hat or headpiece. At all other rolls, communicate the aircrew role through collar arcs, shoulder geometry, gloves, jewelry, case choreography or hair styling so hats stay rare.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 02",
+      "materializedInstruction": "ECE wears one small original coastal signal-officer runway headpiece integrated above her hairline, removable and identity-preserving.",
+      "storedRuleSha256": "5b8885e55080ced3ae1f7563f6df1db1cdafa2239e5b80bb6c46fabc3bcd2681",
+      "materializedInstructionSha256": "2d4a9a15380422129c3e4f79624d006cbf81143e9bb7d4e5ef00f5eb8cc1dc88",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.whisperAndInterlacedHands",
+      "scope": "AI ECE",
+      "trait": "whisperAndInterlacedHands",
+      "seed": "901|AI ECE|whisperAndInterlacedHands|mile-high-v1",
+      "firstEightHex": "25ac1aa2",
+      "roll": 2,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 17 inclusive",
+      "probability": "1.8%",
+      "triggered": true,
+      "storedRule": "Whisper a breath-soft mission secret directly beside one partner's ear while deliberately interlacing fingers with the other, making both connections unmistakable in the same instant and letting each woman visibly reciprocate.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 03",
+      "materializedInstruction": "ECE whispers one breath-soft mission secret beside Alia's ear while deliberately interlacing fingers with Radiance, making both reciprocal connections unmistakable in the same instant.",
+      "storedRuleSha256": "64378510fe2dbb916308db8c6abeed638bd856e764bcfecdcce3d82ac344a0df",
+      "materializedInstructionSha256": "b2ca1d5012ff0ec3157a0c86f4f5440638ae9d40b4b8af3b86f5c4762602fc3e",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    }
+  ]
+}

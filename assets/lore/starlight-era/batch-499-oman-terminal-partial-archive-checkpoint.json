@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "batch": 499,
+  "country": "Oman",
+  "atUtc": "2026-09-06 17:13:56 UTC",
+  "state": "terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete",
+  "sceneRange": [
+    2023,
+    2026
+  ],
+  "selectedSceneIds": [
+    2023,
+    2025,
+    2026
+  ],
+  "hardHeldSceneIds": [
+    2024
+  ],
+  "completeCountryBatch": false,
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "anchorOrder": [
+      938,
+      936,
+      937
+    ],
+    "initialSubmissions": 4,
+    "technicalRetries": 2,
+    "totalConfirmedSubmissions": 6,
+    "uniqueProviderUrls": 6,
+    "confirmedPromptsResent": 0,
+    "terminalPromptScenesReopened": 0,
+    "additionalMetaRetriesAllowed": 0,
+    "urls": [
+      "https://www.meta.ai/prompt/4fa9f94b-e38f-462c-a3a6-d809ce02578d",
+      "https://www.meta.ai/prompt/34c95705-2cdb-475c-a65d-cadb6d0a34e7",
+      "https://www.meta.ai/prompt/e83181f7-0384-4fd6-9533-849f8a9ef2f3",
+      "https://www.meta.ai/prompt/5aa2d996-ed7a-4d09-bdc0-587488c69f6e",
+      "https://www.meta.ai/prompt/b8b4522d-9a2b-4082-9945-f2739af38311",
+      "https://www.meta.ai/prompt/26b98a4e-fd5c-4e9f-b5a0-69a220c5a9a7"
+    ]
+  },
+  "chatgpt": {
+    "tool": "built-in image_gen",
+    "invocations": 3,
+    "returnedOutputs": 2,
+    "outputBlocked": 1,
+    "additionalCallsOnThoseOccurrencesAllowed": 0,
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-499-oman/chatgpt-one-strong-shortening-invocation-ledger.json"
+  },
+  "archive": {
+    "allMainReturnedFilesPreserved": true,
+    "fullArchiveComplete": false,
+    "metaMainAndAlternateFiles": 7,
+    "chatgptFiles": 2,
+    "missingInternalRawAudit": "assets/lore/starlight-era/provider-evidence/batch-499-oman/secondary-raw-browser-recovery-audit.json",
+    "lastRetryInternalMediaProvenance": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-2-terminal-media-provenance.json",
+    "rawAndQaPreserved": true,
+    "availableMediaManifest": "assets/lore/starlight-era/provider-evidence/batch-499-oman/available-media-evidence-manifest.json",
+    "returnedImageBytes": 9087991,
+    "uniqueReturnedImageHashes": 9
+  },
+  "qa": "Meta's visible completion text says identity locked and claims the required face order, but direct visual comparison against anchor 938 contradicts that claim.",
+  "selectedAssets": [
+    {
+      "scene": 2023,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-chatgpt-single-tailoring-pass.png",
+      "sha256": "36D39C517306669BA9690F64E20C461084B1927E63C1AAA1609D0FF80C066497",
+      "variant": "ChatGPT single pass",
+      "hardQaPassed": true,
+      "singleEditInvoked": true,
+      "xEligible": false,
+      "alt": "Four fictional adult women share side hugs on stepped seating above a curved harbor, white waterfront buildings and rocky hills. Cobalt, ivory and crimson, green, and copper short outfits pair with rainbow ankle boots, pumps, green RAZE boots and copper platforms. Star and IA tattoos are visible.",
+      "selectionReason": "Keeps four distinct faces and supported affection while improving the short fitted hems and bare-arm construction. Soft camera-scale and tattoo-assignment deviations retained without retry."
+    },
+    {
+      "scene": 2025,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-meta-primary-original.jpg",
+      "sha256": "5EF07AC6D65D966E5A45092CE433368EF86A4FA8A78D691C76A98BF30A69F81D",
+      "variant": "Meta original after one blocked ChatGPT call",
+      "hardQaPassed": true,
+      "singleEditInvoked": true,
+      "xEligible": false,
+      "alt": "Four fictional adult women lean together on cushioned seating above terraced mountain orchards. One rests against a blonde woman's shoulder while another crouches beside them. Copper, ivory, green and crimson short outfits, rainbow boots, silver platforms and star-marked stockings form the fashion scene.",
+      "selectionReason": "The source is technically usable and public-safe. ChatGPT blocked its single output, so the saved Meta original is retained. Shoulder-rest rather than lap-rest is a soft pose deviation."
+    },
+    {
+      "scene": 2026,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-meta-primary-original.jpg",
+      "sha256": "BCC1D43D123078C5CF01ED29A75A52D50CFB5597AAD8600B9881080CC361F549",
+      "variant": "Meta original after one returned ChatGPT edit",
+      "hardQaPassed": true,
+      "singleEditInvoked": true,
+      "xEligible": false,
+      "alt": "In a close fictional fashion scene beneath a desert pavilion, four adult women lean into a hand-clasp conversation with dunes behind them. Three outfits use Oman's red, white and green flag pattern; the fourth is a green sculpted dress. GRD lettering, a rose and IA tattoo are visible.",
+      "selectionReason": "The Meta original preserves the intended tight framing and contact layout. The one ChatGPT result widened the crop to expose shoes, so that returned variant is archived unused."
+    }
+  ],
+  "ledgers": {
+    "provider": "assets/lore/starlight-era/provider-evidence/batch-499-oman/provider-ledger.json",
+    "selection": "assets/lore/starlight-era/provider-evidence/batch-499-oman/selection-qa.json",
+    "accessibility": "assets/lore/starlight-era/provider-evidence/batch-499-oman/accessibility-sidecars.json"
+  },
+  "x": {
+    "account": "@dogramaci",
+    "freshAccountVerified": true,
+    "composerBlank": true,
+    "newPostsThisContinuation": 0,
+    "omanPublished": false,
+    "latestVerifiedPostUrl": "https://x.com/dogramaci/status/2096609769708519655",
+    "canonicalPostCount": 203,
+    "duplicateMediaSent": false
+  },
+  "browser": {
+    "tabs": [
+      {
+        "id": "1",
+        "providerTabId": "0bbe433a-e734-420b-9fdf-3b7f25513a03",
+        "title": "707406630_28464158943274785_3035742872792838914_n.webp (1152×2048)",
+        "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/707406630_28464158943274785_3035742872792838914_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=109&_nc_ohc=O2y5zOtG_rQQ7kNvwHwTZHz&sdl=0&ccb=14-4&oh=00_AQKdM1eyDzw1jd3U5ilxE5Cy1gIjWbYcblOQVf_JiFuL8g&oe=6A9F5E49&_nc_sid=a21977"
+      },
+      {
+        "id": "2",
+        "providerTabId": "browser-use:9bd6e7fc-92d2-48e2-9450-a2475f1eef40",
+        "title": "Meta AI",
+        "url": "https://www.meta.ai/prompt/26b98a4e-fd5c-4e9f-b5a0-69a220c5a9a7"
+      },
+      {
+        "id": "3",
+        "providerTabId": "browser-use:31f69551-0a9b-4d54-a3da-e8fb3a5b287d",
+        "title": "Meta AI",
+        "url": "https://www.meta.ai/"
+      },
+      {
+        "id": "4",
+        "providerTabId": "browser-use:d4d22c3f-837e-4156-bfd3-6c84f68c0c56",
+        "title": "Meta AI",
+        "url": "https://www.meta.ai/"
+      },
+      {
+        "id": "5",
+        "providerTabId": "browser-use:72dd01d6-dadc-49ff-a598-a4fafa870bef",
+        "title": "Home / X",
+        "url": "https://x.com/compose/post"
+      }
+    ],
+    "retainedWithMarkHandoff": true,
+    "layout": "Five total: one Meta native-image evidence page, one terminal Meta retry page, two blank Meta composers, one blank X composer. These are not four active render jobs.",
+    "nativeImageMustBePreservedForManualSave": true
+  },
+  "guardian": {
+    "starlightGuardianPresent": false,
+    "created": false,
+    "unrelatedExistingAutomationsUnchanged": true,
+    "unattended24HourOperationClaimed": false
+  },
+  "tests": {
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0,
+    "rollGeneratorModified": false,
+    "seedRerolled": false
+  },
+  "supersedes": "Earlier batch 499 in-progress and staged status pointers. Older Cuba/Tanzania handoff directives remain historical. All prior occurrence URLs, prompts, raw files and checkpoints are retained.",
+  "nextSafeAction": "Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."
+}

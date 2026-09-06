@@ -1,0 +1,113 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-27T03:16:31.6457026Z",
+  "authoritative_parent_commit": "7f531e2f72bf76b0b6929502ec4346a12df57cd0",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 420,
+  "country": "Vatican City",
+  "scene_range": [
+    1700,
+    1701,
+    1702,
+    1703
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-420-vatican-city-four-lanes-staged-checkpoint.json",
+  "completed_country_cycles_since_last_x_cycle": 10,
+  "accepted_canonical_count_for_country": 0,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": true,
+  "cycle_status": "closed-unresolved-no-accepted",
+  "scene_states": {
+    "1700": {
+      "status": "raw-output-hard-unusable-extra-people",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "E4E8071B3D90B321AC14BBE728009A1C008A2B8E570E8B7B7D055947D81FC462",
+      "camera_roll": 44,
+      "provider_url": "https://www.meta.ai/prompt/449adcd1-04fb-461b-a7b7-59f10e7170b8",
+      "raw_asset_path": "assets/lore/starlight-era/1700-vatican-city-courtyard-of-the-pinecone-meta-raw.webp",
+      "sha256": "3A78C84BC6E79FEA678B38C60D572FD70BF4C4E6CB27444BCF43018ACE05F655",
+      "width": 1152,
+      "height": 2048,
+      "qa_result": "rejected-hard-unusable-extra-people"
+    },
+    "1701": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "940C16DBB449C36BFB53A390996E2B8E9973E893E28F9C290DBBFFFF47E2D75C",
+      "camera_roll": 87,
+      "provider_url": "https://www.meta.ai/prompt/916536dc-4b13-4b84-ab18-cae0b2963fa3"
+    },
+    "1702": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "F230A8ADCF5E6D21C6AADE1E69104798EABA109F5878E8C9645901C3D2B44CCB",
+      "camera_roll": 6,
+      "provider_url": "https://www.meta.ai/prompt/3acd795f-f034-4767-825b-0c74319bfc00"
+    },
+    "1703": {
+      "status": "raw-output-hard-unusable-camera-roll-framing",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "2A59E223C66C8C5E48A224196BA72E72DE9D9A7D7F91D9A52A1F06AB1C0759DB",
+      "camera_roll": 13,
+      "provider_url": "https://www.meta.ai/prompt/2468cc2a-3486-4f92-9d81-33dd18d12750",
+      "raw_asset_path": "assets/lore/starlight-era/1703-vatican-city-belvedere-courtyard-meta-raw.webp",
+      "sha256": "6AB964B79A15F901506F31CA24DE2149D153E6E890830D9A22C01BD6B8979E80",
+      "width": 1152,
+      "height": 2048,
+      "qa_result": "rejected-hard-unusable-camera-roll-framing"
+    }
+  },
+  "closure": {
+    "all_scenes_terminal": true,
+    "resend_forbidden_for_all_scenes": true,
+    "accepted_scenes": [],
+    "unaccepted_scenes": [
+      1700,
+      1701,
+      1702,
+      1703
+    ],
+    "country_target_met": false
+  },
+  "x_cadence": {
+    "due_after_this_cycle": true,
+    "cadence_batches": [
+      411,
+      412,
+      413,
+      414,
+      415,
+      416,
+      417,
+      418,
+      419,
+      420
+    ],
+    "outcome": "completed-zero-eligible-backlog-no-post",
+    "outcome_checkpoint": "assets/lore/starlight-era/x-cadence-batches-411-420-zero-eligible-checkpoint.json",
+    "counter_reset_after_outcome_recorded": true,
+    "completed_country_cycles_after_reset": 0
+  },
+  "next_campaign_position": {
+    "batch": 421,
+    "country": "Djibouti",
+    "scene_range": [
+      1704,
+      1705,
+      1706,
+      1707
+    ],
+    "source_precedent_batch": 350,
+    "source_precedent_country": "Djibouti"
+  },
+  "next_action": "Prepare Batch 421 Djibouti scenes 1704-1707 from authoritative Batch 350 precedent. Never reopen or resend Vatican City scenes 1700-1703."
+}

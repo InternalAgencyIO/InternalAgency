@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "state": "explicit-override-evidence-commit-lfs-remote-and-pr-parity-verified",
+  "verifiedAtUtc": "2026-08-31T12:38:08.6384193Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+  "verifiedEvidenceCommit": "584ae32138210e26c072d27ae3385422a62c4c8d",
+  "gitParity": {
+    "localHead": "584ae32138210e26c072d27ae3385422a62c4c8d",
+    "remoteBranchHead": "584ae32138210e26c072d27ae3385422a62c4c8d",
+    "draftPrHead": "584ae32138210e26c072d27ae3385422a62c4c8d",
+    "ahead": 0,
+    "behind": 0,
+    "draftPrStillDraft": true
+  },
+  "lfs": {
+    "targetedPushDryRunEmpty": true,
+    "evidencePath": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-after-explicit-override-no-transmission.png",
+    "pointerOidSha256": "48c37b723c4ecfbeda29ee2b67f3017641daba83d587ca525a3ad5148d74cf39",
+    "rawBytes": 113656
+  },
+  "browserFinalAudit": {
+    "actualTabIds": ["35"],
+    "actualTabCount": 1,
+    "url": "https://x.com/compose/post",
+    "account": "@dogramaci",
+    "exactCaptionVisible": true,
+    "mediaCount": 3,
+    "altTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "postEnabled": true,
+    "sentAlertVisible": false,
+    "statusUrlVisible": false,
+    "terminalMetaScenesReopened": false
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "overrideOutcomeCheckpoint": "assets/lore/starlight-era/batch-470-andorra-albania-x-explicit-override-no-transmission-checkpoint.json",
+  "nextSafeAction": "The exact @dogramaci composer remains visible for a manual user click. The agent must not click Post again; after the user reports the manual click, verify the live status and record its X URL before any other dispatch."
+}

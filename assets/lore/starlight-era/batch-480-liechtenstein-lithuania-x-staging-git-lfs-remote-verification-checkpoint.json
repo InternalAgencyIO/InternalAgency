@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "batch": 480,
+  "countryPair": ["Liechtenstein", "Lithuania"],
+  "state": "x-composer-staging-git-lfs-remote-and-draft-pr-parity-verified",
+  "verifiedAtUtc": "2026-09-04T11:41:16.9351673Z",
+  "verifiedStagingCommit": "5642a51a7852168ffc256d8be0515b7e8c640c19",
+  "git": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "5642a51a7852168ffc256d8be0515b7e8c640c19",
+    "remoteHead": "5642a51a7852168ffc256d8be0515b7e8c640c19",
+    "draftPrHead": "5642a51a7852168ffc256d8be0515b7e8c640c19",
+    "ahead": 0,
+    "behind": 0,
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "targetedLfsDryRunEmpty": true
+  },
+  "composer": {
+    "checkpoint": "assets/lore/starlight-era/batch-480-liechtenstein-lithuania-x-composer-staged-awaiting-post-confirmation-checkpoint.json",
+    "evidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-480-lithuania/x-publication-preparation-manifest.json",
+    "screenshot": "assets/lore/starlight-era/provider-evidence/batch-480-lithuania/liechtenstein-lithuania-x-composer-staged-visible.png",
+    "xTabId": "17",
+    "account": "@dogramaci",
+    "sceneOrder": [1945, 1948, 1949],
+    "mediaCount": 3,
+    "altTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "captionSha256": "C4006DA923383F95AD3FA9DD27321C99696D21B08FAC1F949FD589A74C0B0506",
+    "postEnabled": true,
+    "postClicks": 0,
+    "publicTransmissionCount": 0
+  },
+  "browser": {
+    "visibleInAppBrowserOnly": true,
+    "tabCount": 5,
+    "xComposerCount": 1,
+    "metaTerminalTabIds": ["19", "20", "21", "22"],
+    "metaTerminalTabCount": 4,
+    "grokTabs": 0
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "leftUntouched": true
+  },
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradiction": "The world X ledger top-level account, Chrome profile binding and pendingPost fields are stale relative to the newer live-verified @dogramaci publication checkpoints, its 192-entry posts array and this visible in-app Browser staging record.",
+  "nextSafeAction": "Commit and remote-verify this staging-parity record, preserve the exact visible composer and wait for fresh action-time confirmation immediately before one Post submission."
+}

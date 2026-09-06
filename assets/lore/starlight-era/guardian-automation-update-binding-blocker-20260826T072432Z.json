@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-08-26T07:24:32.350Z",
+  "automation_id": "starlight-internalagency-24-7-guardian",
+  "operation": "update existing sole guardian snapshot to Batch 414 authority",
+  "outcome": "external_app_binding_blocker",
+  "evidence": {
+    "view_call": "Hung without response for more than two minutes and was terminated safely.",
+    "update_call": "Hung without response for more than ninety seconds and was terminated safely.",
+    "post_failure_file_check": {
+      "batch_414_snapshot_present": false,
+      "status": "ACTIVE",
+      "rrule": "RRULE:FREQ=MINUTELY;INTERVAL=10",
+      "updated_at_unchanged": 1787725437586
+    }
+  },
+  "safety": {
+    "duplicate_guardian_created": false,
+    "existing_guardian_remains_active": true,
+    "repository_first_rule_present": true,
+    "consequence": "Existing prompt snapshot is stale, but its first authority rule requires every wake to fetch and obey the newest remote-verified branch and checkpoint, which now place authority at Batch 414 Monaco."
+  },
+  "current_authority": {
+    "remote_head": "012bac72870739955dd2feae8b274ed515ac3eca",
+    "batch": 414,
+    "country": "Monaco",
+    "checkpoint": "assets/lore/starlight-era/batch-414-monaco-prompts-prepared-provider-blocked-checkpoint.json",
+    "provider_state": "dispatch blocked by evidenced Meta Thinking stall",
+    "x_cycle_count": 3
+  },
+  "next_safe_action": "Allow the active 10-minute guardian to wake; retry the app updater only when the automation binding responds. Never create another guardian."
+}

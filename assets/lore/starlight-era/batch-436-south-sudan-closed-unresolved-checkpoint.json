@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "batchId": 436,
+  "country": "South Sudan",
+  "state": "closed_unresolved",
+  "closedAtUtc": "2026-08-27T16:33:14.555Z",
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "outcomes": [
+    {
+      "sceneId": 1764,
+      "status": "explicit_no_byte_refusal",
+      "accepted": false,
+      "providerUrl": "https://www.meta.ai/prompt/a4427eac-6c1d-4798-ae25-bd54479c46e7",
+      "bytesPresent": false
+    },
+    {
+      "sceneId": 1765,
+      "status": "output_hard_unusable",
+      "accepted": false,
+      "providerUrl": "https://www.meta.ai/prompt/c5a662e1-2a77-41c3-b3a4-58ae64640dca",
+      "bytesPresent": true,
+      "sha256": "ca2c1ac86ad96fa1bda043113fd0f55b46eb0ba3ec6c9c4b4c6b9dcb8cb9fcdd"
+    },
+    {
+      "sceneId": 1766,
+      "status": "output_hard_unusable",
+      "accepted": false,
+      "providerUrl": "https://www.meta.ai/prompt/d5a67ff8-aa12-43f3-8cd7-1dc728792e0e",
+      "bytesPresent": true,
+      "sha256": "994f2a3bc13aeaf3b1d0d19ac54c396e54ed67844c7e2c041aa23ae05017be43"
+    },
+    {
+      "sceneId": 1767,
+      "status": "output_hard_unusable",
+      "accepted": false,
+      "providerUrl": "https://www.meta.ai/prompt/ee0ad541-059e-4665-9976-3b0ca1e0d367",
+      "bytesPresent": true,
+      "sha256": "c498620768d2f2213ccfe7987b1eb32a8d0c4953e0119da6535444dff67b9c75"
+    }
+  ],
+  "retryPolicy": {
+    "retriesAuthorized": false,
+    "allScenesClosed": true,
+    "neverReopen": [
+      1764,
+      1765,
+      1766,
+      1767
+    ]
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 6,
+    "cadenceDue": false,
+    "eligibleUnpublishedBacklog": [
+      {
+        "country": "Burundi",
+        "sceneId": 1753
+      }
+    ],
+    "postableTwoPlusOnePairs": 0,
+    "reason": "South Sudan produced no accepted images; Burundi scene 1753 remains the only eligible unpublished canonical image."
+  },
+  "nextAction": "prepare next authoritative country; do not reopen South Sudan"
+}

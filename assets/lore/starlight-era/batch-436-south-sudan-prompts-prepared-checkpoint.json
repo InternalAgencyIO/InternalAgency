@@ -1,0 +1,120 @@
+{
+  "schema": "internalagency.starlight.prompts-prepared-checkpoint.v1",
+  "batchId": 436,
+  "country": "South Sudan",
+  "status": "prompts_prepared_awaiting_browser_upload",
+  "preparedAtUtc": "2026-08-27T16:16:38.664Z",
+  "sourceBatchId": 365,
+  "sourceCheckpoint": "assets/lore/starlight-era/batch-365-south-sudan-solar-observation-checkpoint.json",
+  "sourceSceneIds": [
+    1480,
+    1481,
+    1482,
+    1483
+  ],
+  "sceneIds": [
+    1764,
+    1765,
+    1766,
+    1767
+  ],
+  "cinematicTheme": {
+    "active": "near-Sun solar-observation couture",
+    "batchOrdinalWithinTheme": 1,
+    "totalBatchesAtTheme": 2,
+    "sceneModes": [
+      "country-led hybrid",
+      "country-led hybrid",
+      "theme-led original",
+      "theme-led original"
+    ]
+  },
+  "safetyOverride": "Legacy weapon, target, mascot, and unsafe mission-prop language is excluded. Current contract uses one harmless four-ring civilian navigation beacon and no weapons.",
+  "cameraRollMethod": "cryptographic random integer stored once in the checkpoint before dispatch; 1-20 extreme close, 21-80 intermediate, 81-100 extreme wide",
+  "prompts": [
+    {
+      "sceneId": 1764,
+      "sourceSceneId": 1480,
+      "promptPath": "tmp/world-195x4/batch-436/scene-1764-prompt.txt",
+      "promptSha256": "606D834919D0AA6EC163508049127E8A926FFBD60DB646632CA71DCD0AC5E3AC",
+      "cameraRoll": 64,
+      "cameraBand": "INTERMEDIATE",
+      "razeKneeHighPair": [
+        "Radiance",
+        "Alia"
+      ]
+    },
+    {
+      "sceneId": 1765,
+      "sourceSceneId": 1481,
+      "promptPath": "tmp/world-195x4/batch-436/scene-1765-prompt.txt",
+      "promptSha256": "BBECB925B031D8E15DC1A0512B68E9D987CAAC310CAC044582D75A709A0C6488",
+      "cameraRoll": 42,
+      "cameraBand": "INTERMEDIATE",
+      "razeKneeHighPair": [
+        "Ellie",
+        "AI ECE"
+      ]
+    },
+    {
+      "sceneId": 1766,
+      "sourceSceneId": 1482,
+      "promptPath": "tmp/world-195x4/batch-436/scene-1766-prompt.txt",
+      "promptSha256": "6FD9A80CCD19265E751CE5D3C99A77DC335B08E30E9E6AF0723B2F3C123A3794",
+      "cameraRoll": 3,
+      "cameraBand": "EXTREME CLOSE",
+      "razeKneeHighPair": [
+        "Radiance",
+        "Ellie"
+      ]
+    },
+    {
+      "sceneId": 1767,
+      "sourceSceneId": 1483,
+      "promptPath": "tmp/world-195x4/batch-436/scene-1767-prompt.txt",
+      "promptSha256": "CF3F16E3DBAEF72A025385BEC976B09C94E802B25F0D5CA4703EFAD3437D879C",
+      "cameraRoll": 83,
+      "cameraBand": "EXTREME WIDE",
+      "razeKneeHighPair": [
+        "Alia",
+        "AI ECE"
+      ]
+    }
+  ],
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "acceptedCanonicalTarget": 4,
+  "retryPolicy": "No retry unless a later authoritative checkpoint explicitly authorizes one bounded retry.",
+  "browserPlan": {
+    "provider": "Meta AI",
+    "exclusive": true,
+    "laneCount": 4,
+    "uploadsPreauthorized": true,
+    "sendRequiresFreshImmediateConfirmation": true
+  },
+  "xPublishingPlan": {
+    "minimumCurrentCountryAcceptedAssets": 2,
+    "attachmentShape": "two South Sudan images plus one accepted Tunisia image",
+    "captionIfEligible": "South Sudan ❤️ Tunisia #SouthSudan #WorldXXXSeries",
+    "internalAgencyHashtagActive": false,
+    "worldXXXSeriesHashtagActive": true
+  }
+}

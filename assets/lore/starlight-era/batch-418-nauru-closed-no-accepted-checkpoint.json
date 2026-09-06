@@ -1,0 +1,83 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T14:47:07.1882459Z",
+  "authoritative_parent_commit": "10c0b98c3487729bdeca014769167d40c256d010",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 418,
+  "country": "Nauru",
+  "scene_range": [
+    1692,
+    1693,
+    1694,
+    1695
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-418-nauru-four-lanes-staged-checkpoint.json",
+  "completed_country_cycles_since_last_x_cycle": 8,
+  "accepted_canonical_count_for_country": 0,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "closed-unresolved-no-accepted",
+  "scene_states": {
+    "1692": {
+      "status": "raw-output-hard-unusable-camera-roll-framing",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "2432E17EE4D4F15EE5B950233ECACFF3153ECBE910C89BE78D041780619516B7",
+      "camera_roll": 7,
+      "provider_url": "https://www.meta.ai/prompt/204c4b8b-6a1d-423e-90a9-db9d97980d2a",
+      "raw_asset_path": "assets/lore/starlight-era/1692-nauru-anibare-bay-meta-raw.webp",
+      "sha256": "150F4A0E182B12070E59610A9CA9E61F54F94CB667FD1C254160DABA6E98C1BB",
+      "width": 1152,
+      "height": 2048,
+      "qa_result": "rejected-hard-unusable-camera-roll-framing"
+    },
+    "1693": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/1cdc535d-06e7-41c4-8218-2124046f8135"
+    },
+    "1694": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/ad6a5d20-d0c4-48d3-9304-648fc4a53126"
+    },
+    "1695": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "provider_url": "https://www.meta.ai/prompt/00e400bd-f20b-4220-962c-9fe48c7ec8f3"
+    }
+  },
+  "closure": {
+    "all_scenes_terminal": true,
+    "resend_forbidden_for_all_scenes": true,
+    "accepted_scenes": [],
+    "unaccepted_scenes": [
+      1692,
+      1693,
+      1694,
+      1695
+    ],
+    "country_target_met": false
+  },
+  "next_campaign_position": {
+    "batch": 419,
+    "country": "Tuvalu",
+    "scene_range": [
+      1696,
+      1697,
+      1698,
+      1699
+    ],
+    "source_precedent_batch": 348,
+    "source_precedent_country": "Tuvalu"
+  },
+  "next_action": "Prepare Batch 419 Tuvalu scenes 1696-1699 from authoritative Batch 348 Tuvalu precedent. Never reopen or resend Nauru scenes 1692-1695."
+}

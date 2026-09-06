@@ -1,0 +1,745 @@
+{
+  "schemaVersion": 1,
+  "batch": 394,
+  "country": "Brunei",
+  "status": "closed-4-of-4-remote-verified",
+  "preparedAtUtc": "2026-08-21T08:24:29.9145105Z",
+  "sourceCommit": "85cc40024db027a44c60a9d4a25faa3da9c62640",
+  "contract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC"
+  },
+  "queueAuthorization": {
+    "priorCountry": "Cabo Verde",
+    "priorBatch": 393,
+    "priorStatus": "closed-4-of-4",
+    "nextCountry": "Brunei",
+    "nextBatch": 394,
+    "scenes": [1596, 1597, 1598, 1599],
+    "cinematicTheme": "private-jet aviation couture",
+    "themePairPosition": "2 of 2",
+    "provider": "Meta AI"
+  },
+  "evidenceSnapshots": {
+    "generatedMediaManifest": {
+      "path": "progress-reports/codex-generated-media/manifest.jsonl",
+      "sha256": "59FC5762EA1B6B51146BD8A8ED827AE20D27A95434DDDA44847C86D389DE8942",
+      "rows": 4669
+    },
+    "rejectedPromptLedger": {
+      "path": "assets/lore/starlight-era/world-rejected-prompt-ledger.json",
+      "sha256": "F35144FF7EF2145ECB2F9C284789C3E25B9A6D46D4606CAEAD2CB723698106FD"
+    },
+    "xLedger": {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "sha256": "9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064",
+      "eligibleBacklogRemaining": 0,
+      "completedRenderRunsSinceLastX": 0
+    }
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "exactAge": 21,
+    "verifiedAtUtc": "2026-08-21T08:24:29.9145105Z",
+    "uploadOrder": [
+      {
+        "slot": 1,
+        "scene": 938,
+        "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "verified": true
+      },
+      {
+        "slot": 2,
+        "scene": 936,
+        "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "verified": true
+      },
+      {
+        "slot": 3,
+        "scene": 937,
+        "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+        "verified": true
+      }
+    ],
+    "binding": {
+      "Alia": "voluminous natural curls, Black woman, far left in scene 938",
+      "Radiance": "blonde, second from left in scene 938",
+      "Ellie": "dark-haired, third from left in scene 938",
+      "AI ECE": "dark-haired, far right in scene 938"
+    }
+  },
+  "activeSuppressionProfile": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_active_suppression_profile.json",
+    "sha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+    "termLimit": 20,
+    "postSuppressionPromptMatches": 0
+  },
+  "blockedLexiconSnapshot": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+    "sha256": "8462B31B0B0002693953F506ECB928C114ECA010937DE56516F57C8BAAD01E71",
+    "bytes": 317181
+  },
+  "fourTabBank": {
+    "bank": 1,
+    "requestedImagesPerPrompt": 1,
+    "concurrentTabs": 4,
+    "bolderPublicSafeScenes": [1596, 1598],
+    "dispatchState": "prepared-not-yet-sent",
+    "capturedOutputs": 0,
+    "completedRenderRunsSinceLastX": 0
+  },
+  "scenePlans": {
+    "1596": {
+      "scene": 1596,
+      "countryResearchGeometry": "Kampong Ayer stilt-grid, Brunei River bend, timber walkway, water route, mangrove roots, and footbridge geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1596",
+        "counter": 0,
+        "acceptedByte": 147,
+        "digestSha256": "935F5C7DED846B6186766478963552B35402934AC32E8E4B9CB4D79A6D088236",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light beyond the broad habitat window"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1596",
+        "counter": 0,
+        "acceptedByte": 114,
+        "digestSha256": "72926227B79E3F6760EC48037155A4620AFF01B4099A14DF7EDFEE4BC9E4980F",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1596",
+        "counter": 0,
+        "acceptedByte": 183,
+        "digestSha256": "B7A037865827407E54F581CB6A3DD034D55A1AC77495FA74D2F7F866F5B90E39",
+        "bucket": 0,
+        "name": "habitat interior",
+        "promptLanguage": "inside a speculative TOI-700 d research habitat with one broad fluffy couture daybed and a broad window to the sunset alien horizon"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Alia",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1596|knee-high-wearers",
+        "fnv1a32": 4215732640,
+        "pairIndex": 4,
+        "wearers": ["Ellie", "AI ECE"],
+        "uncoveredLowerLegCharacters": ["Radiance", "Alia"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1596-meta-bank-1-primary.txt",
+        "sha256": "CA086E2ACC76F0A1F8DFED998B894C15856D9DE2191B89AC67DB968BF4083B3B",
+        "bytes": 3902,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1596-meta-bank-1-fallback.txt",
+        "sha256": "9D4592203D13BE9D52FBE7B6A40C3DB65EF087F212E79BA120A11EC17FCF6CB1",
+        "bytes": 1811
+      }
+    },
+    "1597": {
+      "scene": 1597,
+      "countryResearchGeometry": "Ulu Temburong canopy, river bend, canopy-tower lattice, leaf-vein route, buttress roots, mist bands, and longboat-wake geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1597",
+        "counter": 0,
+        "acceptedByte": 132,
+        "digestSha256": "84126A15036A1383E5CD0126AD28850399B20F316D97D9A0084FEE5EC0A97846",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light beyond the broad habitat window"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1597",
+        "counter": 0,
+        "acceptedByte": 67,
+        "digestSha256": "43903FF806B6AEC35C7F77E46EAFCBD1BDB9219B5F6BB473634621F0BC23533E",
+        "bucket": 2,
+        "name": "Kepler-186 f"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1597",
+        "counter": 0,
+        "acceptedByte": 30,
+        "digestSha256": "1E7829A3C1BF4F278B790095435727B3DAFA21E2425239551D0CAD8959253659",
+        "bucket": 0,
+        "name": "habitat interior",
+        "promptLanguage": "inside a speculative Kepler-186 f research habitat with one deep padded couture daybed and a broad window to the sunset alien horizon"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "AI ECE",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1597|knee-high-wearers",
+        "fnv1a32": 4000783051,
+        "pairIndex": 1,
+        "wearers": ["Radiance", "Alia"],
+        "uncoveredLowerLegCharacters": ["Ellie", "AI ECE"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1597-meta-bank-1-primary.txt",
+        "sha256": "3C7F782D77658D81F30F095E99D45CD5EE28A7C102EC545308E51096BC534AFC",
+        "bytes": 3703,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1597-meta-bank-1-fallback.txt",
+        "sha256": "805F76DF8E9EC08F764405549257A53736D69983DBDE8523DA5ACC3545EB56FB",
+        "bytes": 1761
+      }
+    },
+    "1598": {
+      "scene": 1598,
+      "countryResearchGeometry": "Temburong Bridge span, Brunei Bay curve, mangrove-island, tidal-channel, structural-cable, and water-route geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1598",
+        "counter": 0,
+        "acceptedByte": 56,
+        "digestSha256": "383A4532458E1890D02736106972B1FF0CC82705F789E6F59FF0774423D40E65",
+        "bucket": 1,
+        "name": "golden-hour sunrise",
+        "promptLanguage": "golden-hour sunrise across the open alien sky"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1598",
+        "counter": 0,
+        "acceptedByte": 224,
+        "digestSha256": "E067E2BE8908257A629733D8786C0C9BE4A1BA18A9FF358C1467509D2B5867DD",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1598",
+        "counter": 0,
+        "acceptedByte": 172,
+        "digestSha256": "ACBDAB6D33BD1C478531EEAF395287C76FC2502B102E574A79589E148BC58D14",
+        "bucket": 1,
+        "name": "protected exterior surface",
+        "promptLanguage": "outdoors on the speculative TOI-700 d surface beneath a transparent pressure field and open-sided research shield, with dominant terrain, sky and horizon plus dry stable footing"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Ellie",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1598|knee-high-wearers",
+        "fnv1a32": 4000880642,
+        "pairIndex": 2,
+        "wearers": ["Radiance", "AI ECE"],
+        "uncoveredLowerLegCharacters": ["Ellie", "Alia"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1598-meta-bank-1-primary.txt",
+        "sha256": "A7575A69DF06C5E67EA865EE5FFDB2F3C3CFAA0E81FE76D2A373000CE7A96316",
+        "bytes": 3985,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1598-meta-bank-1-fallback.txt",
+        "sha256": "000B8A1BF9BB6907C38795A467331ECFEE283B217D0BD1A0881BD1EC7AC1C80D",
+        "bytes": 1919
+      }
+    },
+    "1599": {
+      "scene": 1599,
+      "countryResearchGeometry": "Tanjung Batu coastline, Muara wave bands, black-rock fan, mangrove edge, empty jetty, sunset cloud, and Brunei Bay geometry",
+      "environment": {
+        "key": "starlight|environment|batch-394|scene-1599",
+        "counter": 0,
+        "acceptedByte": 222,
+        "digestSha256": "DE8CD5B3171231F9B15A03AD7D279B1744A51E602FE769CDE3EB57B0F137796E",
+        "bucket": 2,
+        "name": "sunset",
+        "promptLanguage": "sunset light beyond the broad habitat window"
+      },
+      "planet": {
+        "key": "starlight|planet|batch-394|scene-1599",
+        "counter": 0,
+        "acceptedByte": 159,
+        "digestSha256": "9F4C1AFB2045478E271AF7371D2452A2B504126BD5DA8C328493B1AAAA52A7B9",
+        "bucket": 4,
+        "name": "TOI-700 d"
+      },
+      "setting": {
+        "key": "starlight|setting|batch-394|scene-1599",
+        "counter": 0,
+        "acceptedByte": 237,
+        "digestSha256": "ED671F83D35870DE36260F98BA3C8B3269EB3A32301A83F733736575EC6D8287",
+        "bucket": 0,
+        "name": "habitat interior",
+        "promptLanguage": "inside a speculative TOI-700 d research habitat with one broad fluffy couture lounge bed and a broad window to the sunset alien horizon"
+      },
+      "faceReferenceTable": [938, 936, 937],
+      "designatedJealousWoman": "Radiance",
+      "raze": {
+        "key": "RAZE|batch-394|scene-1599|knee-high-wearers",
+        "fnv1a32": 3403318541,
+        "pairIndex": 5,
+        "wearers": ["Alia", "AI ECE"],
+        "uncoveredLowerLegCharacters": ["Radiance", "Ellie"],
+        "wearerOneSides": "Split-Star left, RAZE wordmark right",
+        "wearerTwoSides": "RAZE wordmark left, Split-Star right",
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "primaryPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1599-meta-bank-1-primary.txt",
+        "sha256": "953C29E0E93329AB15610E1F3DFFC139415B6EA737D182F6E1B2CB167DC27B1F",
+        "bytes": 3776,
+        "dispatchMode": "text-only-after-reference-upload-previews-cleared"
+      },
+      "fallbackPrompt": {
+        "path": "tmp/world-195x4/batch-394/scene-1599-meta-bank-1-fallback.txt",
+        "sha256": "ADBDDAFFAC66E99F208083126740092071CAB2EF9B08B5F97E867E88E40DEB46",
+        "bytes": 1870
+      }
+    }
+  },
+  "browserEvidence": {
+    "referenceUploadAttempts": [
+      {
+        "utc": "2026-08-21T08:33:40.9298467Z",
+        "scope": "four persistent Meta tabs for scenes 1596 through 1599",
+        "orderedReferenceScenes": [938, 936, 937],
+        "outcome": "technical-failure-no-upload-confirmed",
+        "exactFailure": "Timed out after 3000ms waiting for file chooser.",
+        "rawMediaBytes": null,
+        "provenance": "The hidden file input did not emit a supported file chooser event during the first concurrent upload attempt. No reference upload is claimed. The browser runtime reset after the unhandled timeout."
+      },
+      {
+        "utc": "2026-08-21T08:39:36.5601154Z",
+        "scope": "four replacement Meta tabs for scenes 1596 through 1599",
+        "orderedReferenceScenes": [938, 936, 937],
+        "outcome": "upload-previews-cleared-before-dispatch-text-only-required",
+        "exactFailure": "All four tabs initially displayed three ordered local preview images, then all four cleared the filenames and blob previews before dispatch without a visible provider error.",
+        "rawMediaBytes": null,
+        "provenance": "The visible Meta attachment dropzone accepted the three ordered files in every lane and briefly exposed their exact filenames. A pre-dispatch DOM check then found no 938, 936, 937 filename and no Meta blob preview in any lane. No persisted upload is claimed. The dispatch must use the exact textual face and position map."
+      }
+    ]
+  },
+  "renderPipeline": {
+    "projectOccurrenceLedger": "progress-reports/codex-generated-media/provider-occurrences/batch-394-brunei-meta-bank-01-02.jsonl",
+    "bank1": {
+      "dispatchStartedUtc": "2026-08-21T08:41:05.717Z",
+      "dispatchCompletedUtc": "2026-08-21T08:41:08.814Z",
+      "mode": "four concurrent text-only Meta prompts after upload previews cleared",
+      "externalOccurrenceManifest": "outputs/meta5_batch_staging/brunei_batch394_manifest.jsonl",
+      "completedOutputs": [
+        {"scene":1596,"lane":1,"providerUrl":"https://www.meta.ai/prompt/a8ecd510-852c-437f-a816-94911b387da5","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-1/batch-394-bank-01-lane-1-scene-1596-output-1.webp","sha256":"974DD99545FBC9997164520D21E06FA8AB2B91B26565A95537A75C27627C6F82","bytes":560296,"width":1152,"height":2048,"qaDisposition":"rejected-hard-prop-safety-and-provider-primary-refusal","qaReason":"The four adult identities are distinct, but the rainbow large-frame object crosses the group without an unoccupied backstop and Meta's terminal response refused the exact requested combination."},
+        {"scene":1597,"lane":2,"providerUrl":"https://www.meta.ai/prompt/9f6c2e1e-248f-44f8-a68d-73701389da90","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-2/batch-394-bank-01-lane-2-scene-1597-output-1.webp","sha256":"6A8601CC5CC64A025FC6E8A43181D782389D074809E12503C676EA70B8B42C06","bytes":461062,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure","qaReason":"The intended Alia identity is replaced by a light-skinned blonde-curled face rather than the scene-938 Black face with voluminous natural curls."},
+        {"scene":1598,"lane":3,"providerUrl":"https://www.meta.ai/prompt/d67641fa-1565-4d65-b087-cf2e9f942a61","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-3/batch-394-bank-01-lane-3-scene-1598-output-1.webp","sha256":"AB5355A838260C3B3F83976C981E13DE21A2082C28E702342A73F27BE6BAD6BB","bytes":622890,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure","qaReason":"The intended Alia identity is replaced by a light-skinned blonde-curled face rather than the scene-938 Black face with voluminous natural curls."},
+        {"scene":1599,"lane":4,"providerUrl":"https://www.meta.ai/prompt/14d16731-fb10-41d9-8470-8d52570f2d3e","rawPath":"outputs/meta5_batch_staging/batch-394/bank-01/lane-4/batch-394-bank-01-lane-4-scene-1599-output-1.webp","sha256":"6EF71BE6A7022A1FB2BC2107937D478C1626D4C4BBF3D181D2CD540A494B1C27","bytes":550820,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-and-prop-safety-failure","qaReason":"The intended Alia identity is replaced by a light-skinned blonde-curled face, and the large-frame object crosses the group without a clearly unoccupied backstop."}
+      ],
+      "transientNoBytesOccurrences": 4,
+      "status": "four-outputs-captured-and-classified-rejected"
+    },
+    "bank2": {
+      "dispatchStartedUtc": "2026-08-21T08:54:09.709Z",
+      "dispatchCompletedUtc": "2026-08-21T08:54:10.001Z",
+      "prompts": [
+        {"scene":1596,"path":"tmp/world-195x4/batch-394/scene-1596-meta-bank-2-fallback-retry.txt","sha256":"6018556D2C069E1AE159F5452F6C5EC8111499D436C6EEE53A00F9166E8AD69F","role":"single allowed fallback after exact primary refusal"},
+        {"scene":1597,"path":"tmp/world-195x4/batch-394/scene-1597-meta-bank-1-fallback.txt","sha256":"805F76DF8E9EC08F764405549257A53736D69983DBDE8523DA5ACC3545EB56FB","role":"alternate candidate"},
+        {"scene":1598,"path":"tmp/world-195x4/batch-394/scene-1598-meta-bank-1-fallback.txt","sha256":"000B8A1BF9BB6907C38795A467331ECFEE283B217D0BD1A0881BD1EC7AC1C80D","role":"alternate candidate"},
+        {"scene":1599,"path":"tmp/world-195x4/batch-394/scene-1599-meta-bank-1-fallback.txt","sha256":"ADBDDAFFAC66E99F208083126740092071CAB2EF9B08B5F97E867E88E40DEB46","role":"alternate candidate"}
+      ],
+      "completedOutputs": [
+        {"scene":1596,"lane":1,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-1/batch-394-bank-02-lane-1-scene-1596-visible-1-778710499_3668885029934437_2103418159079199258_n.webp","sha256":"E4C39E993292A0810848F0BFECBB2F9E9DB524E1B491007E9AB5ABB1FEEB6693","bytes":573672,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1596,"lane":1,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-1/batch-394-bank-02-lane-1-scene-1596-visible-2-535156144_1813601490014943_7524014703653997513_n.webp","sha256":"15D9D01ACC189D18B834F38355659C4EC4DA8415EB5D7422F427E11E8135C8DF","bytes":573026,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1597,"lane":2,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-2/batch-394-bank-02-lane-2-scene-1597-visible-1-778793612_907293965336332_5264533491334445590_n.webp","sha256":"FEF98A54E2AD29432172FCCAB4BB7958721A9F5D60B1D30ABB623A4CB429DDA2","bytes":486846,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1597,"lane":2,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-2/batch-394-bank-02-lane-2-scene-1597-visible-2-780031735_2675762906152257_4143646534841604754_n.webp","sha256":"DA828906E3503EE01F3CDD326DFEE3111B8DD321A0661AEC9A6848BE9D10C321","bytes":560606,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1597,"lane":2,"output":3,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-2/batch-394-bank-02-lane-2-scene-1597-visible-3-586187793_1355750550053035_4691166618339656218_n.webp","sha256":"83DE59F6C88E21BA129D349279DCFA0E9A8CB5CD6799431E5DCDAFD2DAEB3057","bytes":473074,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-and-prop-isolation-failure"},
+        {"scene":1598,"lane":3,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-3/batch-394-bank-02-lane-3-scene-1598-visible-1-779975274_2006498513193070_2359518938282678271_n.webp","sha256":"48622DECB9C7ACE53FF3F71E7B51A4F85DDF844DF1EEA78DEB267DCB52970E0B","bytes":567960,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"},
+        {"scene":1598,"lane":3,"output":2,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-3/batch-394-bank-02-lane-3-scene-1598-visible-2-589947714_1375949728006076_8686384559870134722_n.webp","sha256":"A4B2315471D97637EB896771FB741CC023E12FA30905D24586573708166702AF","bytes":533094,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-and-prop-isolation-failure"},
+        {"scene":1599,"lane":4,"output":1,"rawPath":"outputs/meta5_batch_staging/batch-394/bank-02/lane-4/batch-394-bank-02-lane-4-scene-1599-visible-1-589510126_1417304233796378_3957773488176428834_n.webp","sha256":"D8BEC6D7808AE758638C3B428D2F3BD1DD11E5F11DE629A00199F18AFB43D051","bytes":560778,"width":1152,"height":2048,"qaDisposition":"rejected-hard-face-anchor-failure"}
+      ],
+      "exactProviderResponseCapturedUtc": "2026-08-21T09:10:41.745Z",
+      "status": "eight-visible-media-files-captured-and-classified-rejected"
+    },
+    "bank3Prepared": {
+      "activeSuppressionProfileMatches": 0,
+      "forbiddenDashMatches": 0,
+      "prompts": [
+        {"scene":1596,"primaryPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-3-primary.txt","primarySha256":"1A67EAA590C14D6834D7F6F25C7557A1FE02A01D176F6994974408D99987997C","fallbackPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-3-fallback.txt","fallbackSha256":"3B307F36C5CF9F87DA790530657F6129C918FCBBAA58B50A6B3B5775136257C1"},
+        {"scene":1597,"primaryPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-3-primary.txt","primarySha256":"CD598D775495CC518139D5D2496A908166E2982550BA7821A6934350AB22FCE9","fallbackPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-3-fallback.txt","fallbackSha256":"D36F71BE6878D5E9F02C0F4EBCD9D9614682EA4EB3CF011EE60BA28CC28535C4"},
+        {"scene":1598,"primaryPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-3-primary.txt","primarySha256":"32C62FD5730649D0F38B1854BE62E852806FD98C745F0D24DB75F7623EBDF61A","fallbackPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-3-fallback.txt","fallbackSha256":"967DFED416E67F7A3E54FEEDA4C286BF859876848995C0349412ADBCEB736356"},
+        {"scene":1599,"primaryPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-3-primary.txt","primarySha256":"D3FCE7BDFEED81402C0E8AE5F09F98E43E6C8E0C98F2B00B646C3571197F1B63","fallbackPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-3-fallback.txt","fallbackSha256":"4F7948B29C7F383AE26FCEE598004A0824AA889CE60B6D6AFA8FBB605AF860EC"}
+      ],
+      "status": "four-identity-first-primary-and-fallback-pairs-ready"
+    },
+    "bank3PreflightAudit": {
+      "auditedAtUtc": "2026-08-21T11:17:13.9463317Z",
+      "promptFiles": 8,
+      "promptHashMismatches": 0,
+      "activeSuppressionMatches": 0,
+      "forbiddenDashMatches": 0,
+      "deterministicRollRecords": 12,
+      "deterministicDigestMismatches": 0,
+      "acceptedByteMismatches": 0,
+      "bucketMismatches": 0
+    },
+    "bank3Dispatch": {
+      "dispatchUtc": "2026-08-21T21:18:13.796Z",
+      "provider": "Meta AI",
+      "persistentTabs": 4,
+      "concurrentPrompts": 4,
+      "requestedImagesPerPrompt": 1,
+      "immediateRefusals": 0,
+      "occurrenceLedgerPath": "progress-reports/codex-generated-media/provider-occurrences/batch-394-brunei-meta-bank-03.jsonl",
+      "scenes": [1596,1597,1598,1599],
+      "state": "four-media-captured-completed-unclassified",
+      "capturedMedia": 4,
+      "primaryRefusals": 1,
+      "fallbackDispatches": 1,
+      "fallbackMedia": 1,
+      "lastTerminalUtc": "2026-08-21T21:23:56.9326054Z"
+    },
+    "bank3CaptureAudit": {
+      "verifiedAtUtc": "2026-08-21T21:23:56.9326054Z",
+      "occurrenceRecords": 10,
+      "capturedMedia": 4,
+      "decodedMedia": 4,
+      "rawSha256Mismatches": 0,
+      "rawByteCountMismatches": 0,
+      "dimensionMismatches": 0,
+      "mediaTypeMismatches": 0,
+      "primaryRefusals": 1,
+      "fallbackDispatches": 1,
+      "fallbackMedia": 1,
+      "unclassifiedMedia": 0
+    },
+    "bank4Prepared": {
+      "preparedAtUtc": "2026-08-21T21:30:06.777Z",
+      "mode": "four-distinct-successor-prompts-four-persistent-tabs-one-image-each",
+      "prompts": [
+        {"scene":1596,"primaryPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-4-primary.txt","primarySha256":"86A9FF521A4114479839FC8E8E90991EAC38B787FB66B0E0089706161B878051","fallbackPath":"tmp/world-195x4/batch-394/scene-1596-meta-bank-4-fallback.txt","fallbackSha256":"F23B2A978F1A7B8B5FA307D2D8407DFB5CE3FFEDBDD423931C6AED414E338FCE"},
+        {"scene":1597,"primaryPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-4-primary.txt","primarySha256":"631E8BD7B88DBDAA0236723CB79FC0FC5DCFC0541D3A374C4108E8A7FFC2F14A","fallbackPath":"tmp/world-195x4/batch-394/scene-1597-meta-bank-4-fallback.txt","fallbackSha256":"DA8F65E7FEF17643DC0EB5F5611A187621B91333D124E22130460AF51F33559A"},
+        {"scene":1598,"primaryPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-4-primary.txt","primarySha256":"0698E99979F30FECB2411A7A3AF74D806F09003967CED1378009FB045223F7A8","fallbackPath":"tmp/world-195x4/batch-394/scene-1598-meta-bank-4-fallback.txt","fallbackSha256":"B5715F909D8957F9B14B520E78B3F4FDD06A2FC4B0CFEB36DC2B51581FD51AF9"},
+        {"scene":1599,"primaryPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-4-primary.txt","primarySha256":"49C85C4B2970AAFEAE3E350B3EF18095DB572CCC942E03FB5DF5B09372C03E29","fallbackPath":"tmp/world-195x4/batch-394/scene-1599-meta-bank-4-fallback.txt","fallbackSha256":"741B5492EE7109E2C345BA879DC66BE01ABA84AC51C0EF16F8852F1E5763F1A0"}
+      ]
+    },
+    "bank4PreflightAudit": {
+      "auditedAtUtc": "2026-08-21T21:31:02.939Z",
+      "promptFiles": 8,
+      "promptHashMismatches": 0,
+      "activeSuppressionTermLimit": 20,
+      "activeSuppressionMatches": 0,
+      "forbiddenDashMatches": 0,
+      "deterministicRollRecords": 12,
+      "deterministicDigestMismatches": 0,
+      "acceptedByteMismatches": 0,
+      "bucketMismatches": 0,
+      "authorityHashMismatches": 0
+    },
+    "bank4Dispatch": {
+      "dispatchUtc": "2026-08-21T21:31:59.778Z",
+      "provider": "Meta AI",
+      "persistentTabs": 4,
+      "concurrentPrompts": 4,
+      "requestedImagesPerPrompt": 1,
+      "immediateRefusals": 0,
+      "occurrenceLedgerPath": "progress-reports/codex-generated-media/provider-occurrences/batch-394-brunei-meta-bank-04.jsonl",
+      "scenes": [1596,1597,1598,1599],
+      "state": "four-media-captured-completed-unclassified",
+      "capturedMedia": 4,
+      "primaryRefusals": 0,
+      "lastTerminalUtc": "2026-08-21T21:34:01.3308647Z"
+    },
+    "bank4CaptureAudit": {
+      "verifiedAtUtc": "2026-08-21T21:34:01.3308647Z",
+      "occurrenceRecords": 8,
+      "capturedMedia": 4,
+      "decodedMedia": 4,
+      "rawSha256Mismatches": 0,
+      "rawByteCountMismatches": 0,
+      "dimensionMismatches": 0,
+      "mediaTypeMismatches": 0,
+      "primaryRefusals": 0,
+      "unclassifiedMedia": 4
+    },
+    "comparativeQa": {
+      "auditedAtUtc": "2026-08-21T21:38:00.000Z",
+      "faceAnchorManifestVerified": true,
+      "historicalFaceReferenceHashesVerified": 3,
+      "bank3MediaClassified": 4,
+      "bank4MediaClassified": 4,
+      "hardSafetyFailures": 0,
+      "invalidMedia": 0,
+      "grossAnatomyFailures": 0,
+      "clonedOrMergedIdentityFailures": 0,
+      "bank5Authorized": false,
+      "qaOccurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-394-brunei-meta-bank-03-04-qa.jsonl",
+      "selectedMetaSources": [
+        {"scene":1596,"bank":4,"sha256":"A690A3101B14DCFB2FD19DCEAA5347972C6228D6A9A90CE3762035E2DC8D1E61","path":"outputs/meta5_batch_staging/batch-394/bank-04/lane-1/batch-394-bank-04-lane-1-scene-1596-output-1.webp"},
+        {"scene":1597,"bank":4,"sha256":"D9412844DA682B41AB04D93D3F56F3F5188CF8E7372EC19C3A08E67A3E4561E8","path":"outputs/meta5_batch_staging/batch-394/bank-04/lane-2/batch-394-bank-04-lane-2-scene-1597-output-1.webp"},
+        {"scene":1598,"bank":4,"sha256":"1195EDD5AE48C63A8D3E401B7D38DF767DF6C4936ECB24F4DF19ECF08742B2CD","path":"outputs/meta5_batch_staging/batch-394/bank-04/lane-3/batch-394-bank-04-lane-3-scene-1598-output-1.webp"},
+        {"scene":1599,"bank":4,"sha256":"3270369FCAEBF23B0AA3ED6163A19B76E3A93D5C63B1C3D1B4513FA37D6FBB27","path":"outputs/meta5_batch_staging/batch-394/bank-04/lane-4/batch-394-bank-04-lane-4-scene-1599-output-1.webp"}
+      ]
+    },
+    "chatgptFinalHemRefinement": {
+      "completedAtUtc": "2026-08-21T22:01:58.707Z",
+      "provider": "built-in ChatGPT image generation",
+      "useCase": "identity-preserve clothing-only edit",
+      "blockedLexiconSnapshotSha256": "8462B31B0B0002693953F506ECB928C114ECA010937DE56516F57C8BAAD01E71",
+      "activeSuppressionProfileSha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+      "historicalFaceReferenceHashesVerified": 3,
+      "primaryCallsUsed": 4,
+      "conditionalRetriesUsed": 0,
+      "hardSafetyFailures": 0,
+      "faceAnchorFailures": 0,
+      "invalidMedia": 0,
+      "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-394-brunei-chatgpt-final-hem-refinement.jsonl",
+      "finalSelections": [
+        {"scene":1596,"sourceMetaSha256":"A690A3101B14DCFB2FD19DCEAA5347972C6228D6A9A90CE3762035E2DC8D1E61","finalSha256":"2C3A0898808E807FF9CF44C91628D27EF8AEA6F409DBDE08CA55416E63838204","canonicalPath":"assets/lore/starlight-era/1596-brunei-kampong-ayer-sunset-raze-close-love-chatgpt-final.png","qaDisposition":"accepted-chatgpt-final-primary-face-safe-hard-safe"},
+        {"scene":1597,"sourceMetaSha256":"D9412844DA682B41AB04D93D3F56F3F5188CF8E7372EC19C3A08E67A3E4561E8","finalSha256":"F7C973829B9E24D2644714DE7C7D54380D717584A6556178EE5FAA79D25B56A5","canonicalPath":"assets/lore/starlight-era/1597-brunei-ulu-temburong-sunset-raze-close-love-chatgpt-final.png","qaDisposition":"accepted-chatgpt-final-primary-face-safe-hard-safe"},
+        {"scene":1598,"sourceMetaSha256":"1195EDD5AE48C63A8D3E401B7D38DF767DF6C4936ECB24F4DF19ECF08742B2CD","finalSha256":"59F033FE423DD00451A352578187FCF8075E4C80DB1CD88FD60A38E6959ED743","canonicalPath":"assets/lore/starlight-era/1598-brunei-temburong-bridge-sunrise-raze-close-love-chatgpt-final.png","qaDisposition":"accepted-chatgpt-final-primary-face-safe-hard-safe-mission-weighted-relaxation"},
+        {"scene":1599,"sourceMetaSha256":"3270369FCAEBF23B0AA3ED6163A19B76E3A93D5C63B1C3D1B4513FA37D6FBB27","finalSha256":"D52583A49241BE414A017640878508DC9499D893F4B3B3D4CC930FAFA60EAB15","canonicalPath":"assets/lore/starlight-era/1599-brunei-tanjung-batu-sunset-raze-close-love-chatgpt-final.png","qaDisposition":"accepted-chatgpt-final-primary-face-safe-hard-safe"}
+      ],
+      "acceptanceState": "canonical-final-remote-verified",
+      "remoteParity": {
+        "verifiedAtUtc": "2026-08-21T22:04:42.000Z",
+        "evidenceCommitSha": "03159f88fa4e90dac0d00cd51a52f2aad9435153",
+        "remoteBranchSha": "03159f88fa4e90dac0d00cd51a52f2aad9435153",
+        "draftPr13HeadSha": "03159f88fa4e90dac0d00cd51a52f2aad9435153",
+        "pendingLfsObjects": 0,
+        "archiveDryRunNewManifestRows": 0,
+        "archiveDryRunNewBlobs": 0,
+        "rejectedPromptLedgerErrors": 0,
+        "failedPromptLedgerErrors": 0,
+        "worktreeChanges": 0
+      }
+    },
+    "remoteParityBlocker": {
+      "observedAtUtc": "2026-08-21T09:40:39.232Z",
+      "lastRetryAtUtc": "2026-08-21T21:14:39.8530830Z",
+      "localEvidenceCommit": "8f1e8c57",
+      "localHeadAtLastRetry": "657298ff381dde1401e472b99606faeb4f261f35",
+      "requiredPush": "git push origin HEAD:refs/heads/agent/starlight-progress-archive",
+      "remoteBranchShaBeforePush": "85cc40024db027a44c60a9d4a25faa3da9c62640",
+      "state": "remote-git-lfs-pr-parity-cleared",
+      "lastCommittedPushAttempt": {
+        "attemptedAtUtc": "2026-08-21T21:27:57.000Z",
+        "localHead": "657298ff381dde1401e472b99606faeb4f261f35",
+        "pendingLfsObjects": 0,
+        "outcome": "success",
+        "remoteBranchShaAfterSuccess": "657298ff381dde1401e472b99606faeb4f261f35",
+        "lastIndependentlyVerifiedRemoteBranchSha": "657298ff381dde1401e472b99606faeb4f261f35"
+      },
+      "evidence": [
+        "The first push reached Git LFS lock verification, but the remote does not support the locking API and the HTTPS connection failed.",
+        "The repository-local recommended locksverify setting was applied and the exact push was retried.",
+        "A later remote branch read succeeded, but the following exact push again failed to connect to github.com on port 443.",
+        "A separate authorized Git LFS upload made no progress for more than two minutes and was terminated without claiming upload success.",
+        "A 60 second git lfs push origin HEAD retry made no visible progress and was stopped without claiming upload success.",
+        "A 30 second noninteractive git lfs push origin HEAD retry also made no visible progress and was stopped without claiming upload success.",
+        "Git ls-remote and the GitHub PR connector confirm the remote branch and draft PR 13 head remain at 85cc40024db027a44c60a9d4a25faa3da9c62640 while the local head is 7bcedb8da66f2b14e00fbdca77dc9a65beefa95b.",
+        "At 2026-08-21T10:14Z the Git LFS client reported 11 of 12 objects and 5.9 MB transferred before the connection stopped advancing and the run was interrupted without claiming parity.",
+        "A second Git LFS retry made no visible progress for 60 seconds and was stopped without claiming success.",
+        "The exact authorized branch push then failed with: fatal: unable to access 'https://github.com/InternalAgencyIO/InternalAgency.git/': Failed to connect to github.com:443 after 21152 ms: Could not connect to server",
+        "After archive commit 07c04875, the exact authorized branch push failed again after 21141 ms with the same GitHub port 443 connection error, and a later git ls-remote confirmed the remote branch remained at 85cc40024db027a44c60a9d4a25faa3da9c62640.",
+        "At 2026-08-21T10:44Z a dry run confirmed all 37 LFS objects still require upload. A single object upload probe for 15d9d01acc189d18b834f38355659c4ec4da8415eb5d7422f427e11e8135c8df made no progress for 60 seconds and was stopped without claiming success.",
+        "The exact authorized push from local head 2d88058b then failed after 21141 ms with the same GitHub port 443 connection error.",
+        "At 2026-08-21T11:14Z a single object upload for 15d9d01acc189d18b834f38355659c4ec4da8415eb5d7422f427e11e8135c8df remained at zero bytes for 50 seconds even with one transfer, HTTP/1.1, and 15 second LFS activity, dial, and TLS timeouts. The run was stopped without claiming success.",
+        "The exact authorized push from local head 1caae959 then failed after 21133 ms with the same GitHub port 443 connection error.",
+        "At 2026-08-21T11:43Z the GitHub connector independently verified draft PR 13 is open with head branch agent/starlight-progress-archive at 85cc40024db027a44c60a9d4a25faa3da9c62640.",
+        "The exact authorized push from local head 2f66e1e2 failed after 21142 ms with the same GitHub port 443 connection error.",
+        "A direct transport diagnostic resolved github.com to 140.82.121.4 but could not establish TCP port 443. No Git http proxy, Git https proxy, GitHub-specific proxy, LFS URL override, remote LFS URL override, HTTP version override, or HTTP_PROXY, HTTPS_PROXY, or ALL_PROXY environment setting is active.",
+        "At 2026-08-21T13:39Z Git LFS trace reached credential fill and issued POST https://github.com/InternalAgencyIO/InternalAgency.git/info/lfs/objects/batch for one object. No HTTP response arrived during the next 36 seconds, so the trace was stopped without claiming upload success.",
+        "The exact authorized push from local head 3eb563d9 then failed after 21110 ms with the GitHub port 443 connection error.",
+        "At 2026-08-21T13:44Z the exact authorized push from local head 34c9f16c reached the Git LFS pre-push hook, then remained at zero of one object and zero bytes for the rest of a 60 second bounded attempt. The run was stopped without claiming success.",
+        "Windows WinHTTP reports direct access with no proxy. Current-user Internet Settings have proxy disabled, no proxy server, and no automatic configuration URL.",
+        "At 2026-08-21T14:13Z an unauthenticated GET probe and an empty unauthenticated LFS batch POST probe both timed out before TCP connection after 10 seconds, with HTTP code 000 and no remote IP.",
+        "The exact authorized push from local head f8998527 then failed after 21124 ms with the GitHub port 443 connection error.",
+        "A complete local integrity audit verified all 37 pending LFS files against the SHA-256 OID and byte size in each committed pointer: 37 OID matches, 37 size matches, zero failures, 55,802,339 total bytes.",
+        "The exact authorized push from local head 08927de5 then failed after 21122 ms with the GitHub port 443 connection error.",
+        "At 2026-08-21T15:14Z the exact authorized push from local head ffce5df2 reached Git LFS, then remained at zero of 37 objects and zero bytes for the full 60 second bounded attempt. The run was stopped without claiming success.",
+        "A full Git object database fsck completed successfully with only informational unreachable objects, and Git LFS pointer fsck reported OK.",
+        "The exact authorized push from local head 0d558757 then failed after 21137 ms with the GitHub port 443 connection error.",
+        "At 2026-08-21T16:17Z the exact authorized push from local head 26098ca4 failed after 21115 ms because github.com port 443 could not connect. A preceding remote read failed for the same reason, so no new remote SHA is claimed.",
+        "At 2026-08-21T16:45Z the exact authorized push from local head 983b387a failed after 21101 ms because github.com port 443 could not connect. A preceding remote read also failed after 21137 ms, so no new remote SHA or PR parity is claimed.",
+        "At 2026-08-21T17:15Z the exact authorized push from local head f67b8730 failed after 21100 ms because github.com port 443 could not connect. The GitHub connector then independently verified draft PR 13 remains open at remote head 85cc4002, confirming no branch update occurred.",
+        "At 2026-08-21T17:45Z the exact authorized push from local head be534118 first reached GitHub but reset the connection, then a bounded retry failed to connect to port 443 after 21276 ms. The GitHub connector subsequently verified draft PR 13 remains at remote head 85cc4002.",
+        "At 2026-08-21T18:14Z the exact authorized push from local head f4190722 failed after 21138 ms because github.com port 443 could not connect. The GitHub connector independently verified draft PR 13 still remains open at remote head 85cc4002.",
+        "At 2026-08-21T18:45Z the exact authorized push from local head f49f0685 failed after 21267 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
+        "At 2026-08-21T19:16Z the exact authorized push from local head b591a6e1 reached the Git LFS hook but remained at zero of 37 objects and zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity.",
+        "At 2026-08-21T19:45Z the exact authorized push from local head 94cbc658 reached the Git LFS hook but remained at zero bytes for sixty seconds. The bounded attempt was interrupted without claiming upload or branch parity.",
+        "At 2026-08-21T20:15Z the exact authorized push from local head f199fb0c failed after 21106 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
+        "At 2026-08-21T20:44Z the exact authorized push from local head cdd5f17c failed after 21130 ms because github.com port 443 could not connect. Draft PR 13 remained independently verified at remote head 85cc4002 before the attempt.",
+        "At 2026-08-21T21:14Z the exact authorized push uploaded all 37 pending LFS objects totaling 56 MB and advanced agent/starlight-progress-archive from 85cc4002 to 878d6ad7. Git ls-remote, the GitHub connector, a zero-object LFS dry run, and a clean worktree independently verified parity.",
+        "At 2026-08-21T21:27Z the exact authorized push uploaded four Bank 3 LFS objects totaling 2.1 MB and advanced agent/starlight-progress-archive to 657298ff. Git ls-remote, the GitHub connector, a zero-object LFS dry run, and a clean worktree independently verified parity."
+      ],
+      "gate": "Cleared for Bank 3 dispatch after Git branch SHA, LFS objects, and draft PR 13 head parity were remote verified."
+    },
+    "latestArchiveCollector": {
+      "appliedAtUtc": "2026-08-21T21:34:30.000Z",
+      "legacyRoot": "C:/Users/A/Documents/ChatGPT/RENDERS",
+      "occurrencesScanned": 4304,
+      "uniqueContents": 3058,
+      "newManifestRows": 4,
+      "newBlobs": 4,
+      "newBlobBytes": 2048426,
+      "postApplyDryRunNewManifestRows": 0,
+      "postApplyDryRunNewBlobs": 0
+    },
+    "latestGateAudit": {
+      "verifiedAtUtc": "2026-08-21T21:35:00.000Z",
+      "rejectedPromptLedgerErrors": 0,
+      "failedPromptLedgerErrors": 0,
+      "archiveDryRunNewManifestRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "pendingLfsObjects": 4
+    },
+    "latestBrowserLaneAudit": {
+      "verifiedAtUtc": "2026-08-21T21:13:40.9583210Z",
+      "provider": "Meta AI",
+      "persistentSceneTabs": 4,
+      "signedInAccount": "leesha007",
+      "sceneTabs": [
+        {
+          "scene": 1596,
+          "url": "https://www.meta.ai/prompt/a8ecd510-852c-437f-a816-94911b387da5"
+        },
+        {
+          "scene": 1597,
+          "url": "https://www.meta.ai/prompt/9f6c2e1e-248f-44f8-a68d-73701389da90"
+        },
+        {
+          "scene": 1598,
+          "url": "https://www.meta.ai/prompt/d67641fa-1565-4d65-b087-cf2e9f942a61"
+        },
+        {
+          "scene": 1599,
+          "url": "https://www.meta.ai/prompt/14d16731-fb10-41d9-8470-8d52570f2d3e"
+        }
+      ],
+      "visibleMediaControlsByScene": {
+        "1596": 1,
+        "1597": 2,
+        "1598": 2,
+        "1599": 2
+      },
+      "currentTerminalStateMatchesArchivedBanksOneAndTwo": true,
+      "newUnpreservedMediaDetected": false,
+      "tabsRestoredAfterCleanup": true,
+      "dispatchHeldForRemoteParity": false
+    },
+    "latestAuthoritativeSnapshotAudit": {
+      "verifiedAtUtc": "2026-08-21T21:24:52.000Z",
+      "contractSha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC",
+      "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+      "faceReferenceSha256": [
+        "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+        "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+        "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      ],
+      "generatedMediaManifestSha256": "59FC5762EA1B6B51146BD8A8ED827AE20D27A95434DDDA44847C86D389DE8942",
+      "rejectedPromptLedgerSha256": "F35144FF7EF2145ECB2F9C284789C3E25B9A6D46D4606CAEAD2CB723698106FD",
+      "xLedgerSha256": "9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064",
+      "xLedgerRootAccount": "@RaymondRR777",
+      "xLedgerLatestSignedInAccount": "@dogramaci",
+      "eligibleXBacklogRemaining": 0,
+      "completedRenderRunsSinceLastX": 0,
+      "bank3PromptFiles": 8,
+      "bank3PromptHashMismatches": 0,
+      "bank3PromptForbiddenDashMatches": 0
+    },
+    "latestDeterministicPreflightAudit": {
+      "verifiedAtUtc": "2026-08-21T21:15:51.872Z",
+      "sceneCount": 4,
+      "rollRecords": 12,
+      "digestMismatches": 0,
+      "acceptedByteMismatches": 0,
+      "bucketMismatches": 0,
+      "bank3PromptFiles": 8,
+      "activeSuppressionTermLimit": 20,
+      "activeSuppressionMatches": 0
+    },
+    "latestProviderOccurrenceIntegrityAudit": {
+      "verifiedAtUtc": "2026-08-21T20:15:22.1484127Z",
+      "records": 28,
+      "uniqueEventIds": 28,
+      "capturedMedia": 12,
+      "explicitNoBytesOccurrences": 4,
+      "missingRawFiles": 0,
+      "rawSha256Mismatches": 0,
+      "rawByteCountMismatches": 0,
+      "promptHashChecks": 16,
+      "promptHashMismatches": 0,
+      "referenceSetMismatches": 0
+    },
+    "latestCapturedMediaDecodeAudit": {
+      "verifiedAtUtc": "2026-08-21T20:45:56.4386417Z",
+      "capturedMedia": 12,
+      "decodedMedia": 12,
+      "decodeFailures": 0,
+      "dimensionMismatches": 0,
+      "mediaTypeMismatches": 0
+    },
+    "latestRemoteDiagnostic": {
+      "observedAtUtc": "2026-08-21T21:14:39.8530830Z",
+      "prNumber": 13,
+      "prState": "open-draft",
+      "prHeadBranch": "agent/starlight-progress-archive",
+      "prHeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "githubConnectorAvailable": true,
+      "gitHttpsPushSucceeded": true,
+      "githubResolvedAddress": "140.82.121.4",
+      "githubTcp443Succeeded": true,
+      "configuredProxyOrLfsUrlOverride": false,
+      "lfsTracePhase": "batch-post-sent-no-http-response",
+      "lfsBatchPostResponseReceived": false,
+      "winHttpProxy": "direct-no-proxy",
+      "internetSettingsProxyEnabled": false,
+      "internetSettingsAutoConfigUrl": null,
+      "unauthenticatedGetHttpCode": 0,
+      "emptyLfsBatchPostHttpCode": 0,
+      "endpointTcpConnectSucceeded": true
+    },
+    "latestLocalLfsIntegrityAudit": {
+      "verifiedAtUtc": "2026-08-21T20:15:22.1484127Z",
+      "objects": 37,
+      "oidMatches": 37,
+      "sizeMatches": 37,
+      "failures": 0,
+      "totalBytes": 55802339
+    },
+    "latestCommitDeltaAudit": {
+      "verifiedAtUtc": "2026-08-21T21:14:39.8530830Z",
+      "remoteBaseSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "localHeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "fastForward": true,
+      "aheadCommits": 0,
+      "changedFiles": 0,
+      "unexpectedPaths": 0
+    },
+    "latestRemoteParityVerification": {
+      "verifiedAtUtc": "2026-08-21T21:28:18.000Z",
+      "localHeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "remoteBranchSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "draftPr13HeadSha": "657298ff381dde1401e472b99606faeb4f261f35",
+      "pendingLfsObjects": 0,
+      "rejectedPromptLedgerErrors": 0,
+      "failedPromptLedgerErrors": 0,
+      "archiveDryRunNewManifestRows": 0,
+      "archiveDryRunNewBlobs": 0,
+      "worktreeChanges": 0
+    },
+    "latestRepositoryIntegrityAudit": {
+      "verifiedAtUtc": "2026-08-21T18:45:05.0611114Z",
+      "gitFsckExitCode": 0,
+      "gitObjectCorruptionDetected": false,
+      "lfsPointerFsck": "ok"
+    }
+  },
+  "nextAction": "Brunei Batch 394 is closed 4 of 4. Re-read the latest remote authoritative queue and history before preparing any later country. Never guess the next country, reopen Brunei, dispatch Bank 5, or generate filler."
+}

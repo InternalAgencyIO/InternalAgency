@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "batch": 471,
+  "country": "Bosnia and Herzegovina",
+  "state": "three-terminal-media-occurrences-one-explicit-no-image-refusal-first-retry-prepared",
+  "observedAtUtc": "2026-08-31T13:47:37.6141994Z",
+  "sendClicks": 4,
+  "repeatSendClicks": 0,
+  "occurrences": [
+    {
+      "scene": 1911,
+      "attempt": 0,
+      "providerUrl": "https://www.meta.ai/prompt/8cd5179b-cff5-4cd5-939c-8800e2a8a617",
+      "classification": "terminal-media-visible-raw-provider-bytes-not-yet-captured",
+      "visibleMediaAlt": "gallery/sarajevo_friends_promenade.webp",
+      "providerSummary": "Generated a new Scene 1911 tight-hemline-close Sarajevo promenade still and stated that the 938/936/937 anchors were used in order.",
+      "terminalScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1911-meta-thinking-occurrence-0-terminal-media.png", "sha256": "DC736E64C3D248F311494EB0DE6B948484C4E449D1651E52E5ECBCC6A35C7A5F", "bytes": 73502},
+      "rawByteAttempt": "Visible Download was clicked once through the in-app Browser; no supported download event arrived within ten seconds, so no provider raw file was claimed. Media-viewer capture remains pending."
+    },
+    {
+      "scene": 1912,
+      "attempt": 0,
+      "providerUrl": "https://www.meta.ai/prompt/e4bfe8e2-88cf-4a32-9d94-980a53896814",
+      "classification": "terminal-explicit-no-image-refusal",
+      "rawBytes": 0,
+      "exactRefusal": "I can't create that exact image as described — the combination of fetish-adjacent styling, very short upper-thigh hems with an emphasis on leg styling / bare-skin intervals, and the knee-high hosiery focus makes it overly sexualized, which I can't generate even when it's described as opaque and non-explicit.",
+      "terminalScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-occurrence-0-terminal-explicit-no-image-refusal.png", "sha256": "676B9BE61936685A569F0A757DD041A8846B159F70C7906D620AD5CA356BD8C7", "bytes": 106186},
+      "retryEligibility": "no-image hard condition; bounded moderation-compatible retry 1 prepared"
+    },
+    {
+      "scene": 1913,
+      "attempt": 0,
+      "providerUrl": "https://www.meta.ai/prompt/28ac9908-7055-47bc-ac74-0875a71c4b8e",
+      "classification": "terminal-media-visible-raw-provider-bytes-not-yet-captured",
+      "visibleMediaAlt": "gallery/kravica_fashion_group.webp",
+      "providerSummary": "Generated a new Scene 1913 Kravica statement-boot still and stated that the 938/936/937 anchors were used in order.",
+      "terminalScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1913-meta-thinking-occurrence-0-terminal-media.png", "sha256": "38B8ED2BC3DB3639495BCDB750AA70D0B1BD4F06F78D2E8398731AA0CFA087EB", "bytes": 72464},
+      "rawByteStatus": "media-viewer capture pending"
+    },
+    {
+      "scene": 1914,
+      "attempt": 0,
+      "providerUrl": "https://www.meta.ai/prompt/17c5b372-c08a-402b-85cb-3752ba9062f3",
+      "classification": "terminal-media-visible-raw-provider-bytes-not-yet-captured",
+      "visibleMediaAlt": "gallery/blidinje_lake_friends.webp",
+      "providerSummary": "Generated a new Scene 1914 Blidinje Lake tight-full-body still and stated that the 938/936/937 anchors were used in order.",
+      "terminalScreenshot": {"path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1914-meta-thinking-occurrence-0-terminal-media.png", "sha256": "1AB4E3F88771843FE1BFC2BF8F9C93C8A2CCAE790F9B80AAF43820003B5D1B11", "bytes": 71686},
+      "rawByteStatus": "media-viewer capture pending"
+    }
+  ],
+  "retryPreparedCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-scene-1912-first-retry-prepared-checkpoint.json",
+  "nextSafeAction": "Commit and push the four terminal screenshots, this terminal checkpoint and the exact retry prompt; verify remote/PR/LFS parity. Then stage only scene 1912 retry 1 in tab 40 with visible Thinking and ordered anchors 938, 936, 937, verify the exact prompt and click Send once. Never resend scenes 1911, 1913 or 1914."
+}

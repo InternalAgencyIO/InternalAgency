@@ -1,0 +1,171 @@
+{
+  "schema": "world-195x4-render-checkpoint-v1",
+  "batch": 210,
+  "country": "Egypt",
+  "updatedAt": "2026-08-04T23:33:55.5326334Z",
+  "status": "complete",
+  "preflight": {
+    "blockedCorpusSha256": "26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26",
+    "cache": "tmp/world-195x4/batch-210/preflight/blocklist-transform-26c0f2251ed253ec70b455a1cce10075851ea8fca73507bcf9c858d2fc6abb26.json",
+    "recompileRequired": false
+  },
+  "lanes": [
+    {
+      "scene": 860,
+      "file": "860-egypt-cairo-tower-nile-route-light-grid.png",
+      "status": "complete",
+      "attempts": 6,
+      "lastValidStage": "validation",
+      "lastValidAsset": "assets/lore/starlight-era/860-egypt-cairo-tower-nile-route-light-grid.png",
+      "bytes": 2398465,
+      "sha256": "cf945fe8b9ed7b2da60501c908ed619680bcae3032c8f3b5abce9c884119e01b",
+      "validation": {
+        "identity": "pass",
+        "exactlyThreeAdults": "pass",
+        "cleanFaces": "pass",
+        "PAWS": "pass",
+        "locationMission": "pass",
+        "anatomyFootwear": "pass",
+        "opacity": "pass"
+      },
+      "nextStage": null
+    },
+    {
+      "scene": 861,
+      "file": "861-egypt-alexandria-bibliotheca-cabin-signal-cipher.png",
+      "status": "complete",
+      "attempts": 6,
+      "lastValidStage": "validation",
+      "lastValidAsset": "assets/lore/starlight-era/861-egypt-alexandria-bibliotheca-cabin-signal-cipher.png",
+      "bytes": 2382695,
+      "sha256": "333d971bd6cd936ea13e2025498a943823495ca994634d608c00ea617f1058fa",
+      "validation": {
+        "identity": "pass",
+        "exactlyThreeAdults": "pass",
+        "cleanFaces": "pass",
+        "PAWS": "pass",
+        "locationMission": "pass",
+        "anatomyFootwear": "pass",
+        "opacity": "pass",
+        "relationship": "pass",
+        "triggeredDetails": "pass"
+      },
+      "nextStage": null
+    },
+    {
+      "scene": 862,
+      "file": "862-egypt-white-desert-star-map-relay.png",
+      "status": "complete",
+      "attempts": 1,
+      "lastValidStage": "validation",
+      "lastValidAsset": "assets/lore/starlight-era/862-egypt-white-desert-star-map-relay.png",
+      "bytes": 2429895,
+      "sha256": "3890ce8c02b19acbdf6e48fd402acf05c42f2b6fb4c3b505e0e515dc6b4b1758",
+      "validation": {
+        "identity": "pass",
+        "exactlyThreeAdults": "pass",
+        "cleanFaces": "pass",
+        "PAWS": "pass",
+        "locationMission": "pass",
+        "relationship": "pass",
+        "anatomyFootwear": "pass",
+        "opacity": "pass"
+      },
+      "nextStage": null
+    },
+    {
+      "scene": 863,
+      "file": "863-egypt-siwa-oasis-arrival-beacon-finale.png",
+      "status": "complete",
+      "attempts": 11,
+      "lastValidStage": "validation",
+      "lastValidAsset": "assets/lore/starlight-era/863-egypt-siwa-oasis-arrival-beacon-finale.png",
+      "bytes": 2318694,
+      "sha256": "c8a9a2f100cb56078b33af6221737ab6b87d1c2b80b5dc762daef00547cfffa7",
+      "validation": {
+        "identity": "pass",
+        "exactlyThreeAdults": "pass",
+        "cleanFaces": "pass",
+        "PAWS": "pass",
+        "locationMission": "pass",
+        "relationship": "pass",
+        "anatomyFootwear": "pass",
+        "opacity": "pass",
+        "triggeredDetails": "pass"
+      },
+      "nextStage": null
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "scene": 861,
+      "reason": "Literal Egypt map outline violated the abstract-only country-design rule."
+    },
+    {
+      "scene": 861,
+      "reason": "Radiance footwear was obscured by the front pair and service case."
+    },
+    {
+      "scene": 863,
+      "reason": "Ellie footwear was obscured by the mission plinth."
+    },
+    {
+      "scene": 863,
+      "reason": "Relationship edit assigned Radiance's forehead contact to Alia instead of Ellie; the accepted foundation was retained."
+    },
+    {
+      "scene": 863,
+      "reason": "Second relationship edit again assigned Radiance's forehead contact to Alia instead of Ellie; the accepted foundation was retained."
+    },
+    {
+      "scene": 863,
+      "reason": "First correct-pair spatial edit hid one of Alia's shoes; the accepted foundation was retained and the blocked geometry was not promoted."
+    },
+    {
+      "scene": 860,
+      "reason": "Final QA found the accepted foundation's central mission case obscured Ellie's complete footwear; the foundation remains frozen pending a geometry-only recovery."
+    },
+    {
+      "scene": 860,
+      "reason": "The first footwear recovery revealed Ellie's shoes but moved the case over Alia's second boot; the invalid recovery was not promoted."
+    },
+    {
+      "scene": 860,
+      "reason": "The second footwear recovery cleared the case but retained a stance that hid Radiance's rear shoe; the invalid recovery was not promoted."
+    }
+  ],
+  "publicBuild": {
+    "status": "pushed",
+    "commit": "2f2859c241e7a344048b100c98e4815fed4f1df2",
+    "assetCount": 10,
+    "rejectedMediaPublished": false
+  },
+  "moderationBlocks": [
+    {
+      "scene": 860,
+      "requestId": "67089d67-fd5f-436a-a070-b636fbd1f328",
+      "stage": "output"
+    },
+    {
+      "scene": 861,
+      "requestId": "38db1ebd-cfb1-4823-a5a4-e3509c966c30",
+      "stage": "output"
+    },
+    {
+      "scene": 863,
+      "requestId": "bf2ea579-10a8-4f51-b4f4-71035000d222",
+      "stage": "output"
+    },
+    {
+      "scene": 863,
+      "requestId": "fb9d75b2-b492-4e8d-b0c5-056f3828ef2a",
+      "stage": "output"
+    },
+    {
+      "scene": null,
+      "requestId": "a0067c6a-db1f-4bae-aea4-38302b1b84d7",
+      "stage": "output",
+      "note": "The aggregate renderer rejected before reporting which unresolved lane owned this block."
+    }
+  ]
+}

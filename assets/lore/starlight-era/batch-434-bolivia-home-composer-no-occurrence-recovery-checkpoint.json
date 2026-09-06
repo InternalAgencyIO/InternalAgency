@@ -1,0 +1,81 @@
+{
+  "schema": "internalagency.starlight.meta-full-tab-reset-recovery.v1",
+  "batchId": 434,
+  "country": "Bolivia",
+  "status": "full_tab_reset_required",
+  "recordedAtUtc": "2026-08-27T15:20:10.523Z",
+  "reason": "All four Send clicks were accepted by the UI but no provider chat URL, Today response section, Stop control, output, or refusal appeared; each lane remained at Meta home with the exact prompt and three anchors still attached and Send disabled.",
+  "uploadedCheckpoint": "assets/lore/starlight-era/batch-434-bolivia-four-lanes-uploaded-awaiting-send-checkpoint.json",
+  "userAuthorization": {
+    "scope": "Bolivia Batch 434 scenes 1756-1759, four ordered uploads and four one-time Sends",
+    "confirmation": "good go",
+    "confirmedAtUtc": "2026-08-27T15:18:41.627Z"
+  },
+  "recoveryOrdinal": 1,
+  "providerOccurrenceConfirmed": false,
+  "rawBytesAvailable": false,
+  "lanes": [
+    {
+      "sceneId": 1756,
+      "url": "https://www.meta.ai/",
+      "promptStillExact": true,
+      "browserSha256": "3393A91103A29A2E463C0FF6BAF13F4758592B5DBC3212A5C0AF81FDF32E0A9F",
+      "attachments": 3,
+      "sendButtons": 1,
+      "sendEnabled": false,
+      "stopButtons": 0,
+      "tabId": "2",
+      "sendClickStartedAtUtc": "2026-08-27T15:18:49.536Z",
+      "sendClickConfirmedAtUtc": "2026-08-27T15:18:49.846Z",
+      "confirmedProviderUrl": null,
+      "eligibleForFreshInitialDispatchAfterFullReset": true
+    },
+    {
+      "sceneId": 1757,
+      "url": "https://www.meta.ai/",
+      "promptStillExact": true,
+      "browserSha256": "8AFF579EA3153A327B054C7599B001361833387DDBD4A168B342ED8A605B93F1",
+      "attachments": 3,
+      "sendButtons": 1,
+      "sendEnabled": false,
+      "stopButtons": 0,
+      "tabId": "3",
+      "sendClickStartedAtUtc": "2026-08-27T15:18:49.537Z",
+      "sendClickConfirmedAtUtc": "2026-08-27T15:18:49.846Z",
+      "confirmedProviderUrl": null,
+      "eligibleForFreshInitialDispatchAfterFullReset": true
+    },
+    {
+      "sceneId": 1758,
+      "url": "https://www.meta.ai/",
+      "promptStillExact": true,
+      "browserSha256": "936DDD201C0FD595DF7BB593E26C3C8A79E2F6294521AD4C0ED5ABC070B0F3CC",
+      "attachments": 3,
+      "sendButtons": 1,
+      "sendEnabled": false,
+      "stopButtons": 0,
+      "tabId": "4",
+      "sendClickStartedAtUtc": "2026-08-27T15:18:49.537Z",
+      "sendClickConfirmedAtUtc": "2026-08-27T15:18:49.846Z",
+      "confirmedProviderUrl": null,
+      "eligibleForFreshInitialDispatchAfterFullReset": true
+    },
+    {
+      "sceneId": 1759,
+      "url": "https://www.meta.ai/",
+      "promptStillExact": true,
+      "browserSha256": "6BE5F9B98F8AABB86F3C95E942258BA40634D42522BD9594C5F0C26ED7F0E0C9",
+      "attachments": 3,
+      "sendButtons": 1,
+      "sendEnabled": false,
+      "stopButtons": 0,
+      "tabId": "5",
+      "sendClickStartedAtUtc": "2026-08-27T15:18:49.537Z",
+      "sendClickConfirmedAtUtc": "2026-08-27T15:18:49.847Z",
+      "confirmedProviderUrl": null,
+      "eligibleForFreshInitialDispatchAfterFullReset": true
+    }
+  ],
+  "closedSceneIds": [],
+  "retryAuthorizationUsed": false
+}

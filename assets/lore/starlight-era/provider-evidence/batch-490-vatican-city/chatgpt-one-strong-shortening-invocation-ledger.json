@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "batch": 490,
+  "country": "Vatican City",
+  "state": "all-four-allowances-consumed-three-completed-one-moderation-blocked",
+  "createdAtUtc": "2026-09-06T02:36:06.3300463Z",
+  "promptSource": "assets/lore/starlight-era/batch-490-vatican-city-editorial-prompts-prepared-checkpoint.json",
+  "policy": "Exactly one built-in ChatGPT image edit invocation per accepted Meta first occurrence. Never invoke a second edit for the same scene, even for aesthetics.",
+  "entries": [
+    {
+      "scene": 1987,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1987-vatican-city-pinecone-courtyard-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "68DE4D1B9B9CF415A40F1C78A5D4E4AD8822B6B300A74B626B68719B8565D183",
+      "singleEditPromptSha256": "36A32CF5AA0FC712A9B0187D336006222695F65C15E101E6F147B68B96244A74",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "invokedAtUtc": "2026-09-06T02:36:57.008Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-867bae72-9fe9-4f54-b675-7cdbc4243b29.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1987-vatican-city-pinecone-courtyard-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "49C168D62B708980575A359DFF4B15B78F8E21A313798787CF2B1697323FF9D8",
+      "outputBytes": 2467552,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted and archived: exact four-adult composition, coherent anatomy, Pinecone Courtyard, affectionate lap grouping, secure shortened silhouettes and varied footwear remain usable. Meta raw selected for stronger stocking-detail fidelity and tighter framing."
+    },
+    {
+      "scene": 1988,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1988-vatican-city-momo-spiral-staircase-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "26429768F9B92DC1DF2E687B38FDD2995B93273B5FEC8C094CFA8E321BEA5E01",
+      "singleEditPromptSha256": "A09D00FE03FF80B803FDDEFC4D6406240D39114C8278E80B81FF13977691F138",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "invokedAtUtc": "2026-09-06T02:36:57.011Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-2974e627-52e0-4c6f-a019-bb7b709f85cb.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1988-vatican-city-momo-spiral-staircase-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "259CEC91AB969C77EAC09AECB28D981A3345F4CA87ABB96305E37301B890B926",
+      "outputBytes": 2404287,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted and archived: exact four adults, intact anatomy, Momo staircase, side-hug, secure short silhouettes, rainbow knee-highs and varied boots remain usable. Meta raw selected for tighter relationship framing and identity fidelity."
+    },
+    {
+      "scene": 1989,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1989-vatican-city-gallery-of-maps-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "D8100427EFE6914E4F235CB32A173622116AD999A12F916E4D8546E983BE4172",
+      "singleEditPromptSha256": "99226B42B342C4DB2DB65592264BEC9C0E764B04B3C1C67C269180289764862F",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "invokedAtUtc": "2026-09-06T02:36:57.011Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-afaa7e97-d6e7-4a3d-bd72-c7c961e80079.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1989-vatican-city-gallery-of-maps-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "981C077BED38BE05B6DC0D8FB4725FB858AB4C993D9FBF71FACBFD428CC39132",
+      "outputBytes": 2428748,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted and selected: exact four adults, coherent hand contact and anatomy, Gallery of Maps context, secure shortened silhouettes, rainbow knee-highs and four distinct footwear treatments are clearly preserved."
+    },
+    {
+      "scene": 1990,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1990-vatican-city-gardens-fountain-terrace-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "3FFB20ED7F58CC3ADBF14F7BF07F5540E36844FBDF28FEF0ADC43283CD3BDE7F",
+      "singleEditPromptSha256": "3142D826B6CCB01ADC0F2A21F996C6C2CF385EF6B92AE713E84CF0EDF4AD3DD7",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "output-moderation-blocked-no-retry-meta-fallback",
+      "invokedAtUtc": "2026-09-06T02:36:57.011Z",
+      "failure": {
+        "stage": "output",
+        "category": "sexual",
+        "code": "moderation_blocked",
+        "requestId": "3c31b968-987f-4f3d-aabe-2bb1c2b952ed"
+      },
+      "outputPath": null,
+      "fallbackPath": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1990-vatican-city-gardens-fountain-terrace-editorial-meta-occurrence-1-raw.webp",
+      "additionalInvocationsAllowed": 0
+    }
+  ],
+  "completedAtUtc": "2026-09-06T02:43:11.000Z",
+  "totals": {
+    "allowances": 4,
+    "invocations": 4,
+    "completedOutputs": 3,
+    "moderationBlockedOutputs": 1,
+    "remainingAllowances": 0,
+    "additionalInvocationsAllowed": 0
+  }
+}

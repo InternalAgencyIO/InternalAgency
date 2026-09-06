@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "batch": 432,
+  "country": "Rwanda",
+  "status": "closed-unresolved",
+  "checkpointAtUtc": "2026-08-27T09:22:33.674Z",
+  "acceptedCount": 0,
+  "requiredAcceptedCount": 4,
+  "terminalSceneIds": [
+    1748,
+    1749,
+    1750,
+    1751
+  ],
+  "acceptedSceneIds": [],
+  "sceneDispositions": {
+    "1748": [
+      "hard-unusable-camera-and-beacon-ring-lock-fail"
+    ],
+    "1749": [
+      "hard-unusable-camera-beacon-hand-and-floating-lander-lock-fail"
+    ],
+    "1750": [
+      "explicit-no-byte-refusal"
+    ],
+    "1751": [
+      "hard-unusable-camera-beacon-and-hand-inventory-lock-fail"
+    ]
+  },
+  "providerChatUrls": {
+    "1748": "https://www.meta.ai/prompt/5d2ab308-a00d-443c-85cb-a4a90e1d0ee3",
+    "1749": "https://www.meta.ai/prompt/42592a4e-0a64-437e-b948-6dc05fd995a2",
+    "1750": "https://www.meta.ai/prompt/fb1a3717-c6d9-4613-aa08-e3c002671427",
+    "1751": "https://www.meta.ai/prompt/e98d3340-7cfd-474b-ad80-42a53bf4fc39"
+  },
+  "rawOutputCount": 3,
+  "explicitNoByteCount": 1,
+  "retryAuthorized": false,
+  "duplicateDispatchCount": 0,
+  "completedCountryCycleCountSinceLastXCadence": 2,
+  "xCadenceDue": false,
+  "nextCampaignCountry": "Burundi",
+  "nextBatch": 433,
+  "nextSceneIds": [
+    1752,
+    1753,
+    1754,
+    1755
+  ],
+  "nextDispatchState": "preparation-authorized-browser-upload-and-send-require-fresh-immediate-user-confirmation"
+}

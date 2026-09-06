@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "batch": 428,
+  "country": "Cambodia",
+  "status": "prepared-not-uploaded",
+  "preparedAtUtc": "2026-08-27T07:33:37.2055159Z",
+  "mission": "Starlight World Series formal new-country cycle toward 60 accepted canonical images",
+  "source": {
+    "batch": 357,
+    "country": "Cambodia",
+    "checkpointPath": "assets/lore/starlight-era/batch-357-cambodia-rescue-vessel-checkpoint.json",
+    "sourceSceneIds": [
+      1448,
+      1449,
+      1450,
+      1451
+    ],
+    "nextSourceCountry": "Zimbabwe",
+    "nextSourceBatch": 358,
+    "nextSourceSceneIds": [
+      1452,
+      1453,
+      1454,
+      1455
+    ]
+  },
+  "priorCycle": {
+    "batch": 427,
+    "country": "Netherlands",
+    "status": "closed-unresolved-no-accepted",
+    "acceptedCount": 0,
+    "previousConfirmationConsumedByBatch": 427
+  },
+  "orderedFaceAnchors": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "deterministicLocks": {
+    "hashAlgorithm": "FNV-1a-32",
+    "cameraBuckets": {
+      "1-20": "extreme-close",
+      "21-80": "intermediate",
+      "81-100": "extreme-wide"
+    },
+    "maleModelSelectionKey": "batch428-cambodia-male-model-scene",
+    "maleModelScenePositionZeroBased": 3,
+    "maleModelSceneId": 1735,
+    "razePairKeyFormat": "RAZE|batch-428|scene-{sceneId}|knee-high-wearers",
+    "jealousyKeyFormat": "batch428-cambodia-scene{sceneId}-jealous-adult"
+  },
+  "scenes": [
+    {
+      "sceneId": 1732,
+      "sourceSceneId": 1448,
+      "promptPath": "tmp/world-195x4/batch-428/scene-1732-prompt.txt",
+      "promptSha256": "6CD6DA0B5908943764246A9798D15D78F8EEB1C9CB3BF28589EF837F8C418630",
+      "promptLength": 7602,
+      "cameraRoll": 83,
+      "cameraClass": "extreme-wide",
+      "razeKneeHighWearers": [
+        "Ellie",
+        "AI ECE"
+      ],
+      "jealousAdult": "Ellie",
+      "romancePair": [
+        "Radiance",
+        "Alia"
+      ],
+      "protectiveAdult": "AI ECE",
+      "maleModelIncluded": false,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    },
+    {
+      "sceneId": 1733,
+      "sourceSceneId": 1449,
+      "promptPath": "tmp/world-195x4/batch-428/scene-1733-prompt.txt",
+      "promptSha256": "562FE95843234D40040D177F66E4E7E88CF20414B175D8F609E695E0DEE5EC2D",
+      "promptLength": 7571,
+      "cameraRoll": 72,
+      "cameraClass": "intermediate",
+      "razeKneeHighWearers": [
+        "Radiance",
+        "Alia"
+      ],
+      "jealousAdult": "Alia",
+      "romancePair": [
+        "Radiance",
+        "Ellie"
+      ],
+      "protectiveAdult": "AI ECE",
+      "maleModelIncluded": false,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    },
+    {
+      "sceneId": 1734,
+      "sourceSceneId": 1450,
+      "promptPath": "tmp/world-195x4/batch-428/scene-1734-prompt.txt",
+      "promptSha256": "E30AC5478460B24309CDE581464510BA960DB002F18907CBB84B350E4993838E",
+      "promptLength": 7591,
+      "cameraRoll": 1,
+      "cameraClass": "extreme-close",
+      "razeKneeHighWearers": [
+        "Radiance",
+        "AI ECE"
+      ],
+      "jealousAdult": "AI ECE",
+      "romancePair": [
+        "Radiance",
+        "Ellie"
+      ],
+      "protectiveAdult": "Alia",
+      "maleModelIncluded": false,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    },
+    {
+      "sceneId": 1735,
+      "sourceSceneId": 1451,
+      "promptPath": "tmp/world-195x4/batch-428/scene-1735-prompt.txt",
+      "promptSha256": "EAFA410172BD4B8CE5F0189DDBD24B1A983C7C56C0F465887C5907A1C5253FE3",
+      "promptLength": 7988,
+      "cameraRoll": 54,
+      "cameraClass": "intermediate",
+      "razeKneeHighWearers": [
+        "Alia",
+        "AI ECE"
+      ],
+      "jealousAdult": "Radiance",
+      "romancePair": [
+        "Ellie",
+        "Alia"
+      ],
+      "protectiveAdult": "AI ECE",
+      "maleModelIncluded": true,
+      "orderedReferenceSceneIds": [
+        938,
+        936,
+        937
+      ],
+      "providerChatUrl": null,
+      "status": "prepared-not-uploaded"
+    }
+  ],
+  "actionCounts": {
+    "providerChatCount": 0,
+    "uploadCount": 0,
+    "sendClickCount": 0,
+    "duplicateDispatchCount": 0
+  },
+  "standingUploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.069499Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.069499Z",
+    "activeAtPreparation": true
+  },
+  "actionGate": {
+    "freshActionTimeConfirmationRequired": true,
+    "uploadAndSendAuthorizedForThisBatch": false,
+    "previousConfirmationConsumedByBatch": 427,
+    "requiredUserConfirmation": "good authorized go"
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastX": 7,
+    "threshold": 10,
+    "publishDue": false,
+    "counterReset": false
+  },
+  "blockedBy": "Cambodia not yet rendered; Netherlands closed at zero accepted assets.",
+  "nextSafeAction": "After a fresh action-time user confirmation, open exactly four persistent signed-in Meta tabs, upload anchors 938, 936, 937 in order to each, verify exact prompt hashes, and Send each scene exactly once."
+}

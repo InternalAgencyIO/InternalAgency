@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "batch": 475,
+  "country": "Estonia",
+  "state": "four-lane-staging-git-lfs-remote-and-draft-pr-parity-verified",
+  "verifiedAtUtc": "2026-08-31T21:32:51.6369419Z",
+  "verifiedStagingCommit": "c437aadadb1443063c864d860016c375988e23c3",
+  "git": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "c437aadadb1443063c864d860016c375988e23c3",
+    "remoteHead": "c437aadadb1443063c864d860016c375988e23c3",
+    "draftPrHead": "c437aadadb1443063c864d860016c375988e23c3",
+    "ahead": 0,
+    "behind": 0,
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "targetedLfsDryRunEmpty": true
+  },
+  "staging": {
+    "checkpoint": "assets/lore/starlight-era/batch-475-estonia-four-lanes-staged-authorized-checkpoint.json",
+    "evidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-475-estonia/staging-evidence-manifest.json",
+    "sceneIds": [1927, 1928, 1929, 1930],
+    "metaTabIds": ["17", "18", "19", "20"],
+    "xComposerTabId": "6",
+    "account": "leesha007",
+    "thinkingVerifiedAllFour": true,
+    "promptHashesVerifiedAllFour": true,
+    "anchorOrderVerifiedAllFour": [938, 936, 937],
+    "sendEnabledAllFour": true,
+    "sendClicks": 0,
+    "xPostClicks": 0
+  },
+  "authorization": "authorized for all go, authorized for all similar commands",
+  "preservedUntrackedUserPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "nextSafeAction": "Commit and remote-verify this staging-parity record, then inspect the same five actual tabs one final time. If account leesha007, Thinking, exact prompt, exact 938-936-937 order, send-enabled state, four Meta lanes and one blank X composer all remain true, click each Meta Send exactly once and immediately record provider URLs and click timestamps."
+}

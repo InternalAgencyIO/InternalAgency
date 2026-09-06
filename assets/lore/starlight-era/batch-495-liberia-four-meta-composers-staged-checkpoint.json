@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "batch": 495,
+  "country": "Liberia",
+  "sceneIds": [2007, 2008, 2009, 2010],
+  "state": "four-visible-meta-composers-staged-no-send",
+  "stagedAtUtc": "2026-09-06T08:26:49.092Z",
+  "authority": {
+    "preflight": "assets/lore/starlight-era/batch-495-liberia-meta-dispatch-preflight-checkpoint.json",
+    "preflightCommit": "b85ba7a99cdb39201f9978e962a8c7edbe780af5",
+    "localHeadBeforeStaging": "b85ba7a99cdb39201f9978e962a8c7edbe780af5",
+    "originHeadBeforeStaging": "b85ba7a99cdb39201f9978e962a8c7edbe780af5",
+    "draftPrHeadBeforeStaging": "b85ba7a99cdb39201f9978e962a8c7edbe780af5",
+    "localOriginPrEqualBeforeStaging": true,
+    "lfsPushDryRunEmptyBeforeStaging": true,
+    "draftPrVerifiedThroughDirectRemoteAndGitHubHead": true,
+    "staleLocalPrRefNamespaceLeftUntouched": true
+  },
+  "browser": {
+    "name": "Codex in-app Browser",
+    "visibleOnly": true,
+    "totalTabCount": 5,
+    "xComposerCount": 1,
+    "metaComposerCount": 4,
+    "otherTabCount": 0,
+    "closedTerminalTabs": [
+      {"tabId": "19", "scene": 2003, "url": "https://www.meta.ai/prompt/690cda81-a998-471c-95b7-e55b9c036186"},
+      {"tabId": "20", "scene": 2004, "url": "https://www.meta.ai/prompt/03001618-49c4-4a0b-a9d5-17a109665beb"},
+      {"tabId": "21", "scene": 2005, "url": "https://www.meta.ai/prompt/50777bc3-af58-4501-86d7-15892bd6e2b3"},
+      {"tabId": "22", "scene": 2006, "url": "https://www.meta.ai/prompt/542d51c0-a0cc-4c31-aa52-05995a0ed103"}
+    ],
+    "newMetaTabs": ["24", "25", "26", "27"],
+    "terminalTabsReopened": false,
+    "xComposer": {
+      "tabId": "6",
+      "url": "https://x.com/compose/post",
+      "signedInProfile": "@dogramaci",
+      "blank": true,
+      "mediaCount": 0,
+      "postButtonDisabled": true
+    }
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "accountVerifiedInEveryLane": true,
+    "thinkingVisibleInEveryLane": true,
+    "promptEnteredBeforeAttachmentsInEveryLane": true,
+    "supportedVisibleAttachmentDialogUsed": true,
+    "visibleBrowseControlUsed": true,
+    "hiddenInputUsed": false,
+    "apiOrDirectHttpUsed": false,
+    "sendActivations": 0,
+    "providerRetries": 0
+  },
+  "attachmentOrder": [938, 936, 937],
+  "attachmentFilenames": [
+    "938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "attachmentInteractionNotes": [
+    "The visible Add attachment control opened Meta's supported Add media and files dialog. The file chooser belongs to its visible Click to browse control, so the initial bounded wait on the outer control timed out with no file attached.",
+    "On scene 2007, refilling the exact text after the first three chips removed those chips. No Send occurred. The exact prompt was retained and anchors 938, 936 and 937 were reattached through the visible browse control in that order."
+  ],
+  "lanes": [
+    {
+      "tabId": "24",
+      "scene": 2007,
+      "promptSha256": "5C61FA4EB6D292ECD5CE424B44F0035F27B7087AE9CFC78118609DFB89D560DF",
+      "promptCharacters": 3832,
+      "promptExactBeforeAttachments": true,
+      "promptExactAfterTrimmingAttachmentSpaces": true,
+      "trailingAttachmentPlaceholderSpaces": 3,
+      "attachmentOrderExact": true,
+      "attachmentCount": 3,
+      "sendButtonCount": 1,
+      "sendDisabledAttributeAbsent": true
+    },
+    {
+      "tabId": "25",
+      "scene": 2008,
+      "promptSha256": "41659974A16C581A9932371755852B0DA5C5B1923A61911F7CD025C63D546332",
+      "promptCharacters": 3799,
+      "promptExactBeforeAttachments": true,
+      "promptExactAfterTrimmingAttachmentSpaces": true,
+      "trailingAttachmentPlaceholderSpaces": 3,
+      "attachmentOrderExact": true,
+      "attachmentCount": 3,
+      "sendButtonCount": 1,
+      "sendDisabledAttributeAbsent": true
+    },
+    {
+      "tabId": "26",
+      "scene": 2009,
+      "promptSha256": "7BA8A41E0902CDAE18B148ADE00094ABDF64BDA61CB2E4CBCE0598A235C7AC2E",
+      "promptCharacters": 3781,
+      "promptExactBeforeAttachments": true,
+      "promptExactAfterTrimmingAttachmentSpaces": true,
+      "trailingAttachmentPlaceholderSpaces": 3,
+      "attachmentOrderExact": true,
+      "attachmentCount": 3,
+      "sendButtonCount": 1,
+      "sendDisabledAttributeAbsent": true
+    },
+    {
+      "tabId": "27",
+      "scene": 2010,
+      "promptSha256": "F943EBE15BFAD53A274EAFDF091C1CBAC6FC850A6015FFE71379A7EEF26BD77A",
+      "promptCharacters": 3889,
+      "promptExactBeforeAttachments": true,
+      "promptExactAfterTrimmingAttachmentSpaces": true,
+      "trailingAttachmentPlaceholderSpaces": 3,
+      "attachmentOrderExact": true,
+      "attachmentCount": 3,
+      "sendButtonCount": 1,
+      "sendDisabledAttributeAbsent": true
+    }
+  ],
+  "visibleEvidence": [
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2007-meta-composer-staged-no-send-visible.jpg", "bytes": 127760, "sha256": "71A49114045648AFFD1E1C644F65FF25DD565396D67240A5264031E994196D51"},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2008-meta-composer-staged-no-send-visible.jpg", "bytes": 128294, "sha256": "B47D09D081A5397E0AC5977C3AD46AAFBE012FF7561C17D0E6E194D78271523B"},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2009-meta-composer-staged-no-send-visible.jpg", "bytes": 126046, "sha256": "17887019E86FB19CC90C2BEC5D8E847766444FE318DC4AF964CCC966AB95BADB"},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2010-meta-composer-staged-no-send-visible.jpg", "bytes": 126141, "sha256": "9031C10F518E19315A81E3D4D88DA4F4B4FF5895E3DBB48523D84E7920F5421B"},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/x-composer-blank-visible-before-batch-495.jpg", "bytes": 100871, "sha256": "02EB67D5851A4777EC1475F6B104A249950F38A150F3CD9BB8D029311566925D"}
+  ],
+  "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/staging-evidence-manifest.json",
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and every later remote-verified checkpoint. Batch 495 Liberia is current, and no Cuba or Tanzania scene is reopened or dispatched.",
+  "nextSafeAction": "Commit and remote-verify this exact no-send staging checkpoint and visible evidence. Reinspect all four live composers without reload, then click each enabled Send button exactly once under standing authorization."
+}

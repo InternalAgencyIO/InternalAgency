@@ -1,0 +1,766 @@
+{
+  "batch": 388,
+  "country": "Luxembourg",
+  "status": "closed-three-of-four-after-cap-no-more-luxembourg-rendering",
+  "sourceCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+  "contractSha256": "4E207F9C78D29ED9858A3A9B873E35E861CCD16BCEFA4382264F54B43BD8265D",
+  "policy": {
+    "contractSection": "rapidConsolidatedRenderPolicy.boundedFoundationPassPolicy",
+    "passCeiling": 2,
+    "pass1CandidatesPrepared": 4,
+    "pass1CandidatesAuthorized": 4,
+    "pass1CandidatesConsumed": 4,
+    "pass2CandidatesAuthorized": 3,
+    "pass2CandidatesConsumed": 3,
+    "automaticThirdPassAllowed": false,
+    "authorizationCondition": "The exactly-three concurrent pass-2 bank is fully consumed. Scenes 1572 and 1573 are hard-safe accepted; scene 1575 ended failed with no bytes and no surfaced request ID or preserved runtime cause. The two-pass cap is closed and no more Luxembourg rendering is allowed."
+  },
+  "queueResolution": {
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json#/nextQueue",
+      "assets/lore/starlight-era/batch-316-bhutan-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/162"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/7",
+      "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json#/nextQueue/cinematicTheme"
+    ],
+    "notGuessed": true
+  },
+  "predecessorGate": {
+    "checkpointPath": "assets/lore/starlight-era/batch-387-bhutan-deep-sea-submersible-checkpoint.json",
+    "checkpointSha256": "CC5F392522D363A1CBB32C98C93331864B2D8A340E2DD59B2AB86A82832C9427",
+    "observedStatus": "complete-four-of-four-hard-safe-pass-2-accepted-no-more-bhutan-rendering",
+    "observedHardSafeAcceptedCount": 4,
+    "observedMissingSceneNumbers": [],
+    "authoritativeNextQueueMatches": true,
+    "predecessorClosed": true,
+    "remoteRef": "origin/agent/starlight-progress-archive",
+    "remoteCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+    "remoteCheckpointSha256": "CC5F392522D363A1CBB32C98C93331864B2D8A340E2DD59B2AB86A82832C9427",
+    "predecessorRemoteVerified": true,
+    "requiredRemoteCommit": "f9b1f6b5cad8382b4ee934d8dcf972038d4add97",
+    "requiredRemoteCommitMatches": true,
+    "preparationOnly": true,
+    "batch388RenderAuthorized": true,
+    "note": "This materialization records no render, publication, commit, push, or X-ledger change.",
+    "reason": "Batch 387 is closed at four of four and remote-verified at the required commit; exactly four concurrent Batch 388 pass-1 slots are prepared but not launched."
+  },
+  "rollMethod": "FNV-1a over recorded batch388-luxembourg keys, reduced modulo 100; male scene selection uses the full 32-bit hash modulo 4. Duplicate emotion labels use one stored deterministic disambiguation roll.",
+  "cinematicTheme": "deep-sea submersible couture",
+  "themePairPosition": 2,
+  "sceneNumbers": [
+    1572,
+    1573,
+    1574,
+    1575
+  ],
+  "researchSources": [
+    {
+      "url": "https://www.luxembourg-city.com/en/place/parc/the-petrusse-valley",
+      "usedFor": "Petrousse Valley, Adolphe Bridge, cliffs, stream, paths, and public recreation"
+    },
+    {
+      "url": "https://www.luxembourg-city.com/en/about-luxembourg-city/meng-stad-my-city/details/the-10-must-see-bridges-in-luxembourg-city",
+      "usedFor": "Adolphe Bridge double stone arch, suspended pedestrian deck, tram, and valley setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/blast-furnace-belval",
+      "usedFor": "Belval preserved blast furnaces and modern University of Luxembourg district"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/place/schiessentumpel-waterfalls",
+      "usedFor": "Schiessentumpel waterfall, sandstone bridge, and Black Ernz setting"
+    },
+    {
+      "url": "https://www.visitluxembourg.com/fr/attraction/le-lac-de-la-haute-sure",
+      "usedFor": "Upper-Sure Lake, reservoir, drinking water, electricity, solar boat, and recreation"
+    }
+  ],
+  "faceAnchors": [
+    {
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    },
+    {
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "file": "assets/lore/starlight-era/ece-canonical-identity-v1.png",
+      "sha256": "B22EF5CD9929D2A09F96DC0765434DB41C964B0F0390589E940EB085935C2315"
+    },
+    {
+      "file": "assets/lore/starlight-era/1136-italy-rome-lenticular-care-male-colosseum-route.png",
+      "sha256": "0030FD9FBBFA17FE4E08A64E99BF9A9583E2E7376F18E3A03BC99FCC54EFB94C"
+    }
+  ],
+  "maleModelSelection": {
+    "key": "batch388-luxembourg-male-model-scene",
+    "fullHash": 2589491082,
+    "position": 3,
+    "scene": 1574,
+    "emotionRoll": 43,
+    "emotion": "determination"
+  },
+  "countryMotifPolicy": {
+    "flagMotifDecision": "No literal Luxembourg flag, red lion, coat of arms, crown, or official emblem is copied onto clothing. Large researched secular bridge, valley, steel, science, lake, dam, waterfall, forest, mobility, and infrastructure fields replace them.",
+    "palette": "Grand-Duchy red, ice blue, steel silver, slate charcoal, vineyard green, Moselle teal, sandstone gold, forest emerald, lake cobalt, and clean white",
+    "minimumCoverage": "Scenes 1572 and 1573 each foreground large Luxembourg motif fields on two or three looks and deep-sea construction on at least two. Scenes 1574 and 1575 use four distinct theme-led looks while the Luxembourg landmark remains equally foregrounded.",
+    "cultureScene": "The four scenes foreground Luxembourg City's Adolphe Bridge and Petrousse Valley, Belval industrial heritage, Upper-Sure Lake, and the Schiessentumpel waterfall.",
+    "prohibitions": "No literal flag, red lion, coat of arms, crown, official seal, sacred symbol, religious architecture, copied ceremonial dress, copied runway or service uniform, badge, weapon threat, sexualized service, alcohol, political insignia, or branded product."
+  },
+  "rollAudit": {
+    "1572": {
+      "weather": 40,
+      "mascotState": 20,
+      "mascotHolder": 29,
+      "oddProp": 47,
+      "oddHolder": 17,
+      "oddFamily": 83,
+      "pole": 54,
+      "rainbowOnly": 4,
+      "hosiery": 63,
+      "hosieryWearer": 95,
+      "hosieryPalette": 25,
+      "romance": 93,
+      "compound": 37,
+      "hardLove": 1,
+      "missionPoseTarget": 10,
+      "emotions": {
+        "Radiance": 29,
+        "Ellie": 13,
+        "Alia": 19,
+        "AI ECE": 33
+      },
+      "cuts": {
+        "Radiance": [
+          89,
+          22,
+          59
+        ],
+        "Ellie": [
+          9,
+          18,
+          43
+        ],
+        "Alia": [
+          75,
+          64,
+          33
+        ],
+        "AI ECE": [
+          69,
+          6,
+          39
+        ]
+      }
+    },
+    "1573": {
+      "weather": 51,
+      "mascotState": 99,
+      "mascotHolder": 16,
+      "oddProp": 20,
+      "oddHolder": 82,
+      "oddFamily": 48,
+      "pole": 7,
+      "rainbowOnly": 11,
+      "hosiery": 78,
+      "hosieryWearer": 2,
+      "hosieryPalette": 78,
+      "romance": 38,
+      "compound": 68,
+      "hardLove": 40,
+      "missionPoseTarget": 1,
+      "emotions": {
+        "Radiance": 12,
+        "Ellie": 74,
+        "Alia": 98,
+        "AI ECE": 24
+      },
+      "cuts": {
+        "Radiance": [
+          2,
+          89,
+          74
+        ],
+        "Ellie": [
+          68,
+          7,
+          40
+        ],
+        "Alia": [
+          24,
+          23,
+          76
+        ],
+        "AI ECE": [
+          98,
+          21,
+          42
+        ]
+      }
+    },
+    "1574": {
+      "weather": 22,
+      "mascotState": 30,
+      "mascotHolder": 51,
+      "oddProp": 41,
+      "oddHolder": 75,
+      "oddFamily": 33,
+      "pole": 0,
+      "rainbowOnly": 74,
+      "hosiery": 1,
+      "hosieryWearer": 17,
+      "hosieryPalette": 39,
+      "romance": 3,
+      "compound": 59,
+      "hardLove": 91,
+      "missionPoseTarget": 32,
+      "emotions": {
+        "Radiance": 59,
+        "Ellie": 87,
+        "Alia": 81,
+        "AI ECE": 31,
+        "Male": 43
+      },
+      "cuts": {
+        "Radiance": [
+          59,
+          84,
+          93
+        ],
+        "Ellie": [
+          11,
+          12,
+          61
+        ],
+        "Alia": [
+          85,
+          46,
+          87
+        ],
+        "AI ECE": [
+          3,
+          52,
+          1
+        ]
+      }
+    },
+    "1575": {
+      "weather": 9,
+      "mascotState": 61,
+      "mascotHolder": 54,
+      "oddProp": 98,
+      "oddHolder": 28,
+      "oddFamily": 74,
+      "pole": 5,
+      "rainbowOnly": 77,
+      "hosiery": 4,
+      "hosieryWearer": 68,
+      "hosieryPalette": 0,
+      "romance": 32,
+      "compound": 2,
+      "hardLove": 66,
+      "missionPoseTarget": 7,
+      "emotions": {
+        "Radiance": 86,
+        "Ellie": 12,
+        "Alia": 40,
+        "AI ECE": 90
+      },
+      "cuts": {
+        "Radiance": [
+          80,
+          35,
+          28
+        ],
+        "Ellie": [
+          82,
+          65,
+          18
+        ],
+        "Alia": [
+          42,
+          25,
+          6
+        ],
+        "AI ECE": [
+          28,
+          59,
+          32
+        ]
+      }
+    }
+  },
+  "rollAuditHashes": {
+    "primaryPairCount": 109,
+    "primarySha256": "C52624F18C13D365A69407673E7E3D1EE4E44EA86BA080BA92C7F3539BFF40A5",
+    "selectorPairCount": 20,
+    "selectorSha256": "E626B689EC491178C1747B715391FCCD9245DB3C36247FEC83BE3D4E3F7AA02F"
+  },
+  "scenePlans": {
+    "1572": {
+      "location": "Adolphe Bridge and Petrousse Valley",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+      "promptSha256": "94968B89005654D7F09DE9ECC8A0C92D864569D3B0BF910F9F19B4686B9F3C78",
+      "promptBytes": 4480
+    },
+    "1573": {
+      "location": "Belval blast furnaces and university district",
+      "layout": "country-led hybrid",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
+      "promptSha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
+      "promptBytes": 4566
+    },
+    "1574": {
+      "location": "Upper-Sure Lake and dam solar-boat pavilion",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1574-initial-prompt.txt",
+      "promptSha256": "CBE8CFDF3F2738F6867F6F2C27066249FEB33927D34D6BBBE6113DE4BA9BDFE4",
+      "promptBytes": 5103
+    },
+    "1575": {
+      "location": "Schiessentumpel waterfall and Black Ernz",
+      "layout": "theme-led original",
+      "promptPath": "tmp/world-195x4/batch-388/scene-1575-initial-prompt.txt",
+      "promptSha256": "DDD3AF4435175F911C44316E467CA702E6D9E1F3BC648CD95E12DC846E05DF32",
+      "promptBytes": 4774
+    }
+  },
+  "renderPasses": {
+    "pass1": {
+      "status": "complete-one-hard-safe-three-output-moderation-no-byte-failures",
+      "allocation": {
+        "A": 1572,
+        "B": 1573,
+        "C": 1574,
+        "D": 1575
+      },
+      "candidatesPrepared": 4,
+      "candidatesAuthorized": 4,
+      "candidatesConsumed": 4,
+      "launchWhenUnlocked": "Pass 1 is closed; no further pass-1 launch is authorized.",
+      "sourceMode": "original identity anchors only; no prior country render input",
+      "events": [
+        {
+          "scene": 1572,
+          "callId": "exec-7f38554f-42dc-4b5e-8f49-9f998d13a31d",
+          "occurredAt": "2026-08-13T17:31:17.978Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "91d902cb-1e48-40d6-a4ef-a0850eeba891",
+          "moderationStage": "output",
+          "moderationCategories": [
+            "sexual"
+          ],
+          "promptPath": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+          "promptSha256": "94968B89005654D7F09DE9ECC8A0C92D864569D3B0BF910F9F19B4686B9F3C78",
+          "promptBytes": 4480,
+          "rawState": "no-bytes",
+          "rawPath": null,
+          "rawSha256": null,
+          "rawBytes": 0,
+          "pass2EligibleAfterPass1Closure": true
+        },
+        {
+          "scene": 1573,
+          "callId": "exec-df499b1b-e0fc-455e-a2cb-8a33bf0eb5e5",
+          "occurredAt": "2026-08-13T17:50:54.371Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "3874d063-f86a-4065-8955-7804c4847d64",
+          "moderationStage": "output",
+          "moderationCategories": [
+            "sexual"
+          ],
+          "promptPath": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
+          "promptSha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
+          "promptBytes": 4566,
+          "rawState": "no-bytes",
+          "rawPath": null,
+          "rawSha256": null,
+          "rawBytes": 0,
+          "pass2EligibleAfterPass1Closure": true
+        },
+        {
+          "scene": 1574,
+          "callId": "exec-0e5a8018-55de-4a50-a878-5b39eb21c4e4",
+          "occurredAt": "2026-08-13T18:00:05.854Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1574-initial-prompt.txt",
+          "promptSha256": "CBE8CFDF3F2738F6867F6F2C27066249FEB33927D34D6BBBE6113DE4BA9BDFE4",
+          "promptBytes": 5103,
+          "rawPath": "tmp/world-195x4/batch-388/raw/pass-1/scene-1574.png",
+          "rawSha256": "F49BDB399FE8B0CCE7691D5378822D9C9EC56EC71F4C32211001AF5DA54D1E81",
+          "rawBytes": 2608251,
+          "dimensions": [
+            941,
+            1672
+          ],
+          "hardGateAudit": "four anchored adult women plus the anchored adult man; opaque public-safe short looks; complete plausible gross anatomy and footwear; safe dog substitution for the PAWS roll is a soft quality variance; Alia is isolated side-on with two-hand inert-prop control toward a paper target on a complete earth backstop behind a transparent panel, with no person, animal, or camera in the lane; valid media",
+          "acceptedAsset": "assets/lore/starlight-era/1574-luxembourg-upper-sure-deep-sea-submersible-male-bounded-pass-1.png"
+        },
+        {
+          "scene": 1575,
+          "callId": "exec-20d67fa0-7dbc-46e4-b030-ec98f0832052",
+          "occurredAt": "2026-08-13T18:02:42.900Z",
+          "status": "failed-output-moderation-no-bytes",
+          "requestId": "f1ef2edb-6026-4320-8ecc-c17cab5433ab",
+          "moderationStage": "output",
+          "moderationCategories": [
+            "sexual"
+          ],
+          "promptPath": "tmp/world-195x4/batch-388/scene-1575-initial-prompt.txt",
+          "promptSha256": "DDD3AF4435175F911C44316E467CA702E6D9E1F3BC648CD95E12DC846E05DF32",
+          "promptBytes": 4774,
+          "rawState": "no-bytes",
+          "rawPath": null,
+          "rawSha256": null,
+          "rawBytes": 0,
+          "pass2EligibleAfterPass1Closure": true
+        }
+      ],
+      "submittedNoTerminal": [],
+      "continuationAuthorization": {
+        "status": "closed-all-four-pass-1-slots-terminal",
+        "sceneNumbers": [],
+        "candidatesAuthorized": 0,
+        "candidatesConsumed": 2,
+        "launchMode": "none; pass 1 is closed",
+        "scene1572RelaunchInPass1Allowed": false,
+        "scene1573RelaunchInPass1Allowed": false
+      }
+    },
+    "pass2": {
+      "status": "completed-two-hard-safe-one-runtime-failed-no-bytes-cap-closed",
+      "rule": "At most one fresh corrected candidate per hard-unusable scene; launch only those one to four calls concurrently.",
+      "sceneNumbers": [
+        1572,
+        1573,
+        1575
+      ],
+      "candidatesAuthorized": 3,
+      "candidatesConsumed": 3,
+      "launchMode": "exactly three concurrent fresh clean candidates from original identity anchors only",
+      "consolidatedCorrections": [
+        "use secure opaque sleeveless or one-shoulder upper-thigh mini, skort, or tailored shorts instead of repeated strapless or open-back construction",
+        "use simple separated noncontact full-body stances with complete visible gross anatomy and footwear",
+        "isolate the sole inert-prop handler side-on toward a plain non-humanoid marker on a complete visible backstop behind a transparent safety panel, with the full lane empty"
+      ],
+      "prompts": {
+        "1572": {
+          "path": "tmp/world-195x4/batch-388/scene-1572-pass-2-holistic-prompt.txt",
+          "sha256": "BDF1A0AFCAD37E7ECE9B2BC89F905C8FEC82A0FFAC838DBEBFA4B0B469322972",
+          "bytes": 2346
+        },
+        "1573": {
+          "path": "tmp/world-195x4/batch-388/scene-1573-pass-2-holistic-prompt.txt",
+          "sha256": "64683BC3862957414DAE13C133A58030625CB4A1EC97286DD2663D4E4463F9AA",
+          "bytes": 2406
+        },
+        "1575": {
+          "path": "tmp/world-195x4/batch-388/scene-1575-pass-2-holistic-prompt.txt",
+          "sha256": "384495258A306DCEB59DA1C0366A116CACAA98C0591685ADC9F949F7F1046138",
+          "bytes": 2426
+        }
+      },
+      "events": [
+        {
+          "scene": 1572,
+          "callId": "exec-dfcdc82f-d90b-4125-b362-59aa4b1ac0d0",
+          "occurredAt": "2026-08-13T18:11:46.298Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1572-pass-2-holistic-prompt.txt",
+          "promptSha256": "BDF1A0AFCAD37E7ECE9B2BC89F905C8FEC82A0FFAC838DBEBFA4B0B469322972",
+          "promptBytes": 2346,
+          "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1572.png",
+          "rawSha256": "04A226AA95982D72EF689A7AA7CC2953DBAE098E4D0BE6EBE0ACD50955D784F5",
+          "rawBytes": 2350224,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "four anchored adult women in opaque public-safe short looks with plausible complete gross anatomy and footwear; PAWS and MAX safe together on their lounge; isolated ECE side-on with two-hand inert-prop control toward a black diamond marker on a complete earth backstop behind a transparent panel, with no person, animal, or camera in the lane",
+          "acceptedAsset": "assets/lore/starlight-era/1572-luxembourg-adolphe-bridge-deep-sea-submersible-bounded-pass-2.png"
+        },
+        {
+          "scene": 1573,
+          "callId": "exec-0ae6cabb-8e23-44cf-aaf7-b6dfc60377e1",
+          "occurredAt": "2026-08-13T18:13:44.709Z",
+          "status": "completed-hard-safe-accepted",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1573-pass-2-holistic-prompt.txt",
+          "promptSha256": "64683BC3862957414DAE13C133A58030625CB4A1EC97286DD2663D4E4463F9AA",
+          "promptBytes": 2406,
+          "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1573.png",
+          "rawSha256": "33A3A4C7B6A2421223C876555D8277D44288544BA1AF79B5909B91A9EF3E2BE7",
+          "rawBytes": 2346540,
+          "dimensions": [941, 1672],
+          "hardGateAudit": "four anchored adult women in opaque public-safe short looks with plausible complete gross anatomy and footwear; no mascots; isolated ECE side-on with two-hand inert-prop control toward a black diamond marker on a complete backstop behind a transparent panel, with an empty lane",
+          "acceptedAsset": "assets/lore/starlight-era/1573-luxembourg-belval-deep-sea-submersible-bounded-pass-2.png"
+        },
+        {
+          "scene": 1575,
+          "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+          "occurredAt": "2026-08-13T18:15:03.577Z",
+          "status": "failed-no-bytes-cause-runtime-error-not-preserved",
+          "requestId": null,
+          "requestIdProvenance": "unknown-not-surfaced",
+          "promptPath": "tmp/world-195x4/batch-388/scene-1575-pass-2-holistic-prompt.txt",
+          "promptSha256": "384495258A306DCEB59DA1C0366A116CACAA98C0591685ADC9F949F7F1046138",
+          "promptBytes": 2426,
+          "rawState": "no-bytes",
+          "rawPath": null,
+          "rawSha256": null,
+          "rawBytes": 0,
+          "runtimeCause": "not-preserved"
+        }
+      ],
+      "thirdPassAllowed": false
+    }
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1572,
+      "file": "assets/lore/starlight-era/1572-luxembourg-adolphe-bridge-deep-sea-submersible-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1572.png",
+      "sha256": "04A226AA95982D72EF689A7AA7CC2953DBAE098E4D0BE6EBE0ACD50955D784F5",
+      "bytes": 2350224,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-2"
+    },
+    {
+      "scene": 1573,
+      "file": "assets/lore/starlight-era/1573-luxembourg-belval-deep-sea-submersible-bounded-pass-2.png",
+      "rawPath": "tmp/world-195x4/batch-388/raw/pass-2/scene-1573.png",
+      "sha256": "33A3A4C7B6A2421223C876555D8277D44288544BA1AF79B5909B91A9EF3E2BE7",
+      "bytes": 2346540,
+      "dimensions": [941, 1672],
+      "acceptance": "bounded-hard-safe-pass-2"
+    },
+    {
+      "scene": 1574,
+      "file": "assets/lore/starlight-era/1574-luxembourg-upper-sure-deep-sea-submersible-male-bounded-pass-1.png",
+      "rawPath": "tmp/world-195x4/batch-388/raw/pass-1/scene-1574.png",
+      "sha256": "F49BDB399FE8B0CCE7691D5378822D9C9EC56EC71F4C32211001AF5DA54D1E81",
+      "bytes": 2608251,
+      "dimensions": [
+        941,
+        1672
+      ],
+      "acceptance": "bounded-hard-safe-pass-1"
+    }
+  ],
+  "rejectedAssets": [
+    {
+      "scene": 1572,
+      "status": "failed-output-moderation-no-bytes",
+      "callId": "exec-7f38554f-42dc-4b5e-8f49-9f998d13a31d",
+      "requestId": "91d902cb-1e48-40d6-a4ef-a0850eeba891",
+      "occurredAt": "2026-08-13T17:31:17.978Z",
+      "rawState": "no-bytes",
+      "rawPath": null,
+      "sha256": null,
+      "bytes": 0
+    },
+    {
+      "scene": 1573,
+      "status": "failed-output-moderation-no-bytes",
+      "callId": "exec-df499b1b-e0fc-455e-a2cb-8a33bf0eb5e5",
+      "requestId": "3874d063-f86a-4065-8955-7804c4847d64",
+      "occurredAt": "2026-08-13T17:50:54.371Z",
+      "rawState": "no-bytes",
+      "rawPath": null,
+      "sha256": null,
+      "bytes": 0
+    },
+    {
+      "scene": 1575,
+      "status": "failed-output-moderation-no-bytes",
+      "callId": "exec-20d67fa0-7dbc-46e4-b030-ec98f0832052",
+      "requestId": "f1ef2edb-6026-4320-8ecc-c17cab5433ab",
+      "occurredAt": "2026-08-13T18:02:42.900Z",
+      "rawState": "no-bytes",
+      "rawPath": null,
+      "sha256": null,
+      "bytes": 0
+    },
+    {
+      "scene": 1575,
+      "phase": "pass-2",
+      "status": "failed-no-bytes-cause-runtime-error-not-preserved",
+      "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+      "requestId": null,
+      "requestIdProvenance": "unknown-not-surfaced",
+      "occurredAt": "2026-08-13T18:15:03.577Z",
+      "rawState": "no-bytes",
+      "rawPath": null,
+      "sha256": null,
+      "bytes": 0,
+      "runtimeCause": "not-preserved"
+    }
+  ],
+  "rejectedPromptLedger": {
+    "status": "four-no-byte-failures-exact-text-recorded",
+    "entries": [
+      {
+        "entryId": "batch388-scene1572-pass1-exec-7f38554f",
+        "scene": 1572,
+        "phase": "pass-1",
+        "status": "failed-output-moderation-no-bytes",
+        "callId": "exec-7f38554f-42dc-4b5e-8f49-9f998d13a31d",
+        "requestId": "91d902cb-1e48-40d6-a4ef-a0850eeba891",
+        "occurredAt": "2026-08-13T17:31:17.978Z",
+        "moderationStage": "output",
+        "moderationCategories": [
+          "sexual"
+        ],
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered public overlook beneath the complete double stone arch of Adolphe Bridge above the Petrousse Valley, with the full bridge span, suspended pedestrian deck, green cliffs, winding stream, modern tram and valley paths recognizable through a heavy rain curtain. Deep-sea submersible couture is fictional public fashion at this real Luxembourg location: pressure-shell facets, porthole rings, bathymetric lines, cool bioluminescent piping, ballast geometry and manipulator-joint seams. Nobody is underwater or inside a vehicle. Country-led hybrid: two or three looks carry large secular Adolphe-Bridge double-arch, suspended-walkway, Petrousse-cliff, tram-line, valley-stream, bicycle-path, rose-garden and city-topography fields; at least two also carry deep-sea construction. No literal Luxembourg flag, red lion, coat of arms, crown, official emblem or sacred symbol, religious architecture, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a secure strapless Grand-Duchy-red upper-thigh mini with covered waist and closed back, carrying broad double-arch and steel pressure-shell fields; Ellie wears a secure strapless ice-blue architectural top showing a narrow ordinary midriff over a steel-silver upper-thigh skort, closed back, with tram-line and porthole-ring geometry; Alia wears a vineyard-green sleeveless upper-thigh mini with covered waist and closed back, carrying Petrousse-cliff and bathymetric fields; ECE wears a secure strapless clean-white upper-thigh mini with covered waist and closed back, carrying valley-stream lines and slate ballast facets. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nExactly PAWS the tiny golden kitten and MAX the young golden-retriever pup rest together on one dry padded lounge in Alia's protected bay, outside every prop and mission lane; no adult hand is reassigned. The odd-prop roll is inactive; no odd prop appears. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Alia stands beside the protected mascot lounge with both hands open and visible. Radiance and Ellie remain in separate depth lanes; the stored seated-choice and embrace energy is resolved as eye lines after the movement has ended. There is no human contact and no hidden hand. Emotions: Radiance: hope; Ellie: romantic joy; Alia: playful mischief; AI ECE: overwhelming relief. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the stream and public paths. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nThe heavy rain remains beyond the covered overlook; dry footing, faces, bridge, target and complete backstop stay bright and readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "94968B89005654D7F09DE9ECC8A0C92D864569D3B0BF910F9F19B4686B9F3C78",
+          "encoding": "utf-8",
+          "bytes": 4480
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass1/events/0",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-388/scene-1572-initial-prompt.txt",
+          "rawPath": null
+        },
+        "immutable": true
+      },
+      {
+        "entryId": "batch388-scene1573-pass1-exec-df499b1b",
+        "scene": 1573,
+        "phase": "pass-1",
+        "status": "failed-output-moderation-no-bytes",
+        "callId": "exec-df499b1b-e0fc-455e-a2cb-8a33bf0eb5e5",
+        "requestId": "3874d063-f86a-4065-8955-7804c4847d64",
+        "occurredAt": "2026-08-13T17:50:54.371Z",
+        "moderationStage": "output",
+        "moderationCategories": [
+          "sexual"
+        ],
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry covered observation terrace in the complete Belval industrial district, with both preserved blast furnaces, rust-red steel gantries, former ore hall, modern university cubes, red-earth landscaping and a pale storm sky recognizable while distant lightning remains beyond the roof. Deep-sea submersible couture is fictional public fashion at this real Luxembourg location: pressure-shell facets, porthole rings, bathymetric lines, cool bioluminescent piping, ballast geometry and manipulator-joint seams. Nobody is underwater or inside a vehicle. Country-led hybrid: two or three looks carry large secular Belval blast-furnace, steel-gantry, ore-cart, red-earth, university-cube, science-grid, rail-line and industrial-light fields; at least two also carry deep-sea construction. No literal Luxembourg flag, red lion, coat of arms, crown, official emblem or sacred symbol, religious architecture, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a steel-silver sleeveless submersible top showing a narrow ordinary midriff over slate-charcoal tailored upper-thigh shorts, closed back, with red-earth bathymetric seams; Ellie wears a secure strapless Grand-Duchy-red upper-thigh mini with covered waist and closed back, carrying blast-furnace and pressure-shell fields; Alia wears a secure strapless ice-blue submersible top showing a narrow ordinary midriff over a vineyard-green upper-thigh skort, closed back, with gantry and porthole geometry; ECE wears a secure strapless clean-white upper-thigh mini with covered waist and closed back, carrying university-grid and steel ballast facets. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nNeither mascot appears. The active odd prop is Ellie's deactivated chainless cinema-chainsaw sculpture with its blade cover locked, fully enclosed inside a fixed sealed transparent display. Ellie touches only the exterior enclosure frame; nobody touches the sculpture. The pole roll is inactive; no pole appears. The rainbow-only roll is inactive. Rainbow hosiery is inactive; nobody wears stockings or knee socks.\n\nAnatomy-first relationship: ECE stands fully isolated at far right and uses both hands only on the inert mission prop. Ellie stands in a separate bay beside her secured odd-prop enclosure, with one hand on the exterior enclosure frame and her other hand open at her side. Radiance and Alia hold separated finished-turn poses. The stored dip and embrace energy is resolved as noncontact eye lines. There is no human contact and no hidden hand. Emotions: Radiance: romantic joy; Ellie: betrayal shock; Alia: defiance; AI ECE: calm contentment. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAI ECE alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick sand backstop behind a transparent safety panel on a closed dry service lane away from the furnaces, rails and public route. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nLightning remains distant beyond the covered terrace; the dry floor, faces, Belval structures, target and complete backstop remain readable. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "326B129CFCC381374C7ADC79121F9C9CBBF896CC0E6900B7D21EE39DCA70B4B1",
+          "encoding": "utf-8",
+          "bytes": 4566
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass1/events/1",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-388/scene-1573-initial-prompt.txt",
+          "rawPath": null
+        },
+        "immutable": true
+      },
+      {
+        "entryId": "batch388-scene1575-pass1-exec-20d67fa0",
+        "scene": 1575,
+        "phase": "pass-1",
+        "status": "failed-output-moderation-no-bytes",
+        "callId": "exec-20d67fa0-7dbc-46e4-b030-ec98f0832052",
+        "requestId": "f1ef2edb-6026-4320-8ecc-c17cab5433ab",
+        "occurredAt": "2026-08-13T18:02:42.900Z",
+        "moderationStage": "output",
+        "moderationCategories": [
+          "sexual"
+        ],
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image.\n\nImages 1-3 anchor the four women and Image 4 anchors ECE. Use these original identity references only, never an earlier country render. Exactly four fictional women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve distinct anchored adult faces and skin tones; no clone, merge, extra person or age shift.\n\nScene: a broad dry protected overlook beside the complete Schiessentumpel triple waterfall on the Black Ernz at clear golden hour, with the small sandstone bridge, three separate cascade streams, mossy boulders, layered sandstone formations, beech canopy and forest path recognizable. Deep-sea submersible couture is fictional public fashion at this real Luxembourg location: pressure-shell facets, porthole rings, bathymetric lines, cool bioluminescent piping, ballast geometry and manipulator-joint seams. Nobody is underwater or inside a vehicle. Theme-led original: the landmark remains the Luxembourg read while all four looks use distinct deep-sea pressure-shell, porthole, bathymetric, bioluminescent, ballast and manipulator-joint structures. No literal Luxembourg flag, red lion, coat of arms, crown, official emblem or sacred symbol, religious architecture, copied ceremonial dress or uniform, badge, logo, text or watermark.\n\nPermanent short foundation: four distinct secure opaque lined upper-thigh women's looks with full public-safe coverage. Radiance wears a sandstone-gold sleeveless upper-thigh submersible mini with covered waist and complete open back to the secure waist, no crossing straps, carrying clean-white porthole rings; Ellie wears a forest-emerald sleeveless upper-thigh skort look with covered waist and complete open back to the secure waist, no crossing straps, with lake-cobalt pressure facets; Alia wears a secure strapless lake-cobalt submersible top showing a narrow ordinary midriff and complete open back to the secure waist over clean-white tailored upper-thigh shorts, with sandstone bathymetric lines; ECE wears a Grand-Duchy-red sleeveless submersible top showing a narrow ordinary midriff over a steel-silver upper-thigh skort, closed back, with cool bioluminescent seams, plus the scene's only opaque Luxembourg-palette knee socks ending below both kneecaps. No long panels, trousers, leggings, jumpsuits, lower hems, sheer coverage or accidental exposure.\n\nNeither mascot appears. The odd-prop roll is inactive; no odd prop appears. The pole roll is active as public-safe adult athletics: ECE alone performs one simple upright two-hand static hold at a fixed beacon mast with both feet planted, fully clothed and non-explicit, in a separate bay from the mission lane. The rainbow-only roll is inactive. Rainbow hosiery is active: AI ECE alone wears the specified country-palette rainbow-like gradient; nobody else wears hosiery.\n\nAnatomy-first relationship: Alia stands fully isolated at far right and uses both hands only on the inert mission prop. ECE occupies a separate athletics bay at the fixed beacon mast. Radiance and Ellie remain in separate depth lanes with open visible hands. The stored slow-dance chain has already ended and is now expressed only through eye lines. There is no human contact and no hidden hand. Emotions: Radiance: full sobbing with tear-streaked face and shaking posture; Ellie: romantic joy; Alia: determination; AI ECE: anger. This simple topology is the bounded resolution of the stored movement rolls; never add a hidden hand.\n\nAlia alone handles one full-size polished rainbow-gradient large-frame inert cinema-training replica in an isolated side-on two-hand stance. Both hands stay on the grip; one index is straight on the upper frame outside the empty guard. The muzzle points horizontally away from every person, mascot, landmark, occupied object and camera toward one plain non-humanoid paper route symbol on a complete thick earth-and-sand backstop behind a transparent safety panel on an isolated dry lane away from the stream, waterfall and hiking path. No ammunition, firing, flash, threat, injury, combat or unsafe aim.\n\nGolden-hour light keeps the dry overlook, faces, waterfall, beacon mast, target and complete backstop clear while every public path remains outside the lane. Eye-level 50 mm full-body editorial. Render exactly eight arms, eight hands, eight legs and eight complete feet, two arms/hands and two legs/feet each. Keep every face, joint, hand, leg, foot, mascot, active odd prop and complete endpoint in frame. One role per hand, traceable limbs, separated silhouettes and complete footwear; no extra, missing, fused, grossly malformed, ownerless or impossible anatomy.\n",
+          "sha256": "DDD3AF4435175F911C44316E467CA702E6D9E1F3BC648CD95E12DC846E05DF32",
+          "encoding": "utf-8",
+          "bytes": 4774
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass1/events/3",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-388/scene-1575-initial-prompt.txt",
+          "rawPath": null
+        },
+        "immutable": true
+      },
+      {
+        "entryId": "batch388-scene1575-pass2-exec-86d493e8",
+        "scene": 1575,
+        "phase": "pass-2",
+        "status": "failed-no-bytes-cause-runtime-error-not-preserved",
+        "callId": "exec-86d493e8-2186-460d-b0e5-5c06d0aa867a",
+        "requestId": null,
+        "requestIdProvenance": "unknown-not-surfaced",
+        "occurredAt": "2026-08-13T18:15:03.577Z",
+        "prompt": {
+          "text": "Create one fresh photorealistic 9:16 full-length Starlight World Series public-fashion image from the original identity references only, never from a prior country render.\n\nExactly four fictional adult women visibly over 28: blonde Radiance, dark-haired Ellie, Black Alia with the only high sculptural braided ponytail, and brunette AI ECE. Preserve their distinct anchored faces and skin tones. No extra, merged, cloned, or younger-looking person.\n\nShow Luxembourg's complete Schiessentumpel triple waterfall and small sandstone bridge on the Black Ernz, with three cascade streams, mossy boulders, sandstone formations, beech canopy, and forest path visible beyond a broad dry protected overlook. Use deep-sea submersible couture details such as pressure-shell facets, porthole rings, bathymetric lines, and cool luminous seams. No flag, crest, official emblem, religious symbol, uniform, logo, or text.\n\nAll four wear secure opaque lined public-fashion looks with complete bust, seat, pelvic, and intimate coverage: Radiance a sandstone sleeveless upper-thigh mini; Ellie a green one-shoulder upper-thigh skort look; Alia a cobalt sleeveless top with covered waist and white upper-thigh shorts; ECE a red one-shoulder top with covered waist and silver upper-thigh skort. Use ordinary secure necklines, closed or securely covered backs, and complete footwear. No sheer fabric or accidental exposure.\n\nKeep all four in separate standing lanes with no contact. Radiance, Ellie, and ECE show both empty hands. A fixed beacon mast is locked behind a transparent guard in ECE's separate bay and nobody touches it. No mascots or odd props appear.\n\nAlia alone stands isolated at far right and holds one polished rainbow-gradient inert cinema-training frame in a simple side-on two-hand stance. One index lies straight along the outside of the frame. Its forward end points away from every person, animal, waterfall, path, occupied object, and camera toward one plain black diamond paper marker fixed to a complete thick earth-and-sand backstop behind a transparent safety panel. The full lane and space beyond it are empty. No ammunition, firing, flash, threat, injury, or combat.\n\nEye-level full-body editorial framing. Show exactly two plausible arms and hands and two complete legs and feet per woman, separated silhouettes, visible joints, one role per hand, and every face, limb, shoe, target, and complete backstop in frame.\n",
+          "sha256": "384495258A306DCEB59DA1C0366A116CACAA98C0591685ADC9F949F7F1046138",
+          "encoding": "utf-8",
+          "bytes": 2426
+        },
+        "rawOutput": {
+          "state": "no-bytes",
+          "path": null,
+          "sha256": null,
+          "bytes": 0
+        },
+        "runtimeCause": "not-preserved",
+        "auditRef": "assets/lore/starlight-era/batch-388-luxembourg-deep-sea-submersible-checkpoint.json#/renderPasses/pass2/events/2",
+        "source": {
+          "promptPath": "tmp/world-195x4/batch-388/scene-1575-pass-2-holistic-prompt.txt",
+          "rawPath": null
+        },
+        "immutable": true
+      }
+    ],
+    "appendBeforeLaterPassPublicationCommitOrPush": true
+  },
+  "hardSafeAcceptedCount": 3,
+  "missingSceneNumbers": [
+    1575
+  ],
+  "xPost": {
+    "status": "ineligible-closed-three-of-four-after-cap",
+    "caption": "Luxembourg 🤍 Bhutan #Luxembourg #WorldXXXSeries",
+    "url": null
+  },
+  "nextQueue": {
+    "nextCountry": "Suriname",
+    "nextBatch": 389,
+    "sceneNumbers": [
+      1576,
+      1577,
+      1578,
+      1579
+    ],
+    "cinematicTheme": "polar airship couture",
+    "themePairPosition": 1,
+    "countryEvidence": [
+      "assets/lore/starlight-era/batch-317-luxembourg-recovery-checkpoint.json#/nextQueueCountry",
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/163"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/8"
+    ],
+    "lockedUntilBatch388Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch388Closure": true
+  },
+  "preflight": {
+    "path": "tmp/world-195x4/batch-388/batch-388-luxembourg-preflight.json",
+    "sha256": "B5103000DF42BF0DB7605336DC20ACFEC9123EB890B82179C014CDD4408F3A0C",
+    "bytes": 47960
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "batchId": 436,
+  "country": "South Sudan",
+  "sceneId": 1765,
+  "state": "terminal_output_hard_unusable",
+  "terminalObservedAtUtc": "2026-08-27T16:31:49.520Z",
+  "provider": "Meta AI",
+  "providerUrl": "https://www.meta.ai/prompt/c5a662e1-2a77-41c3-b3a4-58ae64640dca",
+  "sendClickedAtUtc": "2026-08-27T16:23:15.651Z",
+  "promptPath": "tmp/world-195x4/batch-436/scene-1765-prompt.txt",
+  "promptSha256": "BBECB925B031D8E15DC1A0512B68E9D987CAAC310CAC044582D75A709A0C6488",
+  "cameraRoll": 42,
+  "framing": "INTERMEDIATE",
+  "requiredFraming": "strict vertical head-to-mid-shin",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-436-scene-1765-meta-response.txt",
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-436-scene-1765-output-hard-unusable.jsonl",
+  "rawAssetPath": "assets/lore/starlight-era/1765-south-sudan-sudd-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/ca/ca2c1ac86ad96fa1bda043113fd0f55b46eb0ba3ec6c9c4b4c6b9dcb8cb9fcdd.webp",
+  "bytesPresent": true,
+  "byteLength": 776270,
+  "sha256": "ca2c1ac86ad96fa1bda043113fd0f55b46eb0ba3ec6c9c4b4c6b9dcb8cb9fcdd",
+  "dimensions": {
+    "width": 1184,
+    "height": 2096
+  },
+  "accepted": false,
+  "qa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "subjectCount": 4,
+    "vertical": true,
+    "locationRead": "strong Sudd wetland and civilian observatory read",
+    "primaryFailure": "Camera framing is full head-to-toe, materially wider than the locked head-to-mid-shin intermediate crop.",
+    "additionalNotes": [
+      "Four adults are present and visibly distinct.",
+      "Complete footwear is shown although the locked crop should end at mid-shin.",
+      "Provider image is public-safe."
+    ]
+  },
+  "duplicateDispatches": 0,
+  "retryAuthorized": false,
+  "nextAction": "closed_no_resend"
+}

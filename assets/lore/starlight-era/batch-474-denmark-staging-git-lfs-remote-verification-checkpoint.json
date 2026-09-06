@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "batch": 474,
+  "country": "Denmark",
+  "state": "four-lane-staging-git-lfs-remote-and-draft-pr-parity-verified",
+  "verifiedAtUtc": "2026-08-31T19:37:21.6828325Z",
+  "verifiedStagingCommit": "239ac3bc80f087589428a53237973f41c95ff428",
+  "git": {
+    "branch": "agent/starlight-progress-archive",
+    "localHead": "239ac3bc80f087589428a53237973f41c95ff428",
+    "remoteHead": "239ac3bc80f087589428a53237973f41c95ff428",
+    "draftPrHead": "239ac3bc80f087589428a53237973f41c95ff428",
+    "ahead": 0,
+    "behind": 0,
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "targetedLfsDryRunEmpty": true
+  },
+  "staging": {
+    "checkpoint": "assets/lore/starlight-era/batch-474-denmark-four-lanes-staged-authorized-checkpoint.json",
+    "evidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/staging-evidence-manifest.json",
+    "sceneIds": [1923, 1924, 1925, 1926],
+    "metaTabIds": ["12", "13", "14", "15"],
+    "xComposerTabId": "6",
+    "account": "leesha007",
+    "thinkingVerifiedAllFour": true,
+    "promptHashesVerifiedAllFour": true,
+    "anchorOrderVerifiedAllFour": [938, 936, 937],
+    "sendEnabledAllFour": true,
+    "sendClicks": 0,
+    "xPostClicks": 0
+  },
+  "authorization": "authorized for all go, authorized for all similar commands",
+  "nextSafeAction": "Commit and remote-verify this staging-parity record, then inspect the same five actual tabs one final time. If account leesha007, Thinking, exact prompt, exact 938-936-937 order, send-enabled state, four Meta lanes and one blank X composer all remain true, click each Meta Send exactly once and immediately record provider URLs and click timestamps."
+}

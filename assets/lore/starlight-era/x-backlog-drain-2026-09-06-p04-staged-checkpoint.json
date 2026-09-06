@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "state": "four-media-staged-exactly-ready-before-single-post",
+  "stagedAtUtc": "2026-09-06T17:49:56.023Z",
+  "reservation": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p04-reservation.json",
+  "account": "@dogramaci",
+  "sceneIds": [
+    1991,
+    1992,
+    1994,
+    1995
+  ],
+  "mediaCount": 4,
+  "captionExact": true,
+  "captionVerification": "Visible composer text serialized by ordered DOM blocks exactly equals the frozen caption.",
+  "exactAltTextCount": 4,
+  "madeWithAiSwitchVerifiedChecked": true,
+  "visualOrderVerified": true,
+  "sourceHashesExact": true,
+  "sourceManifestFilesVerified": 42,
+  "postClicks": 0,
+  "uploadMethod": "Supported visible Choose File plus pre-armed filechooser.",
+  "evidence": {
+    "dom": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p04-staged-dom.txt",
+    "screenshot": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p04-staged-visible.jpg",
+    "screenshotBytes": 122483,
+    "screenshotSha256": "DD7A4A65C625C0A508807F42B9323F088B08B1372450B3079DFBCEB256608638",
+    "duplicateAudit": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p02-p03-older-timeline-audit.json"
+  },
+  "nextSafeAction": "Remote-verify this staging and activate the unique enabled Post once, then reconcile the exact live status before any repeat."
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "batch": 486,
+  "country": "San Marino",
+  "scenes": [1971, 1972, 1973, 1974],
+  "state": "four-meta-thinking-composers-visible-verified-no-send",
+  "stagedAtUtc": "2026-09-04T16:35:17.919Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "promptCheckpoint": "assets/lore/starlight-era/batch-486-san-marino-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "promptCheckpointCommit": "acf720cf65b26cd38462564f8b87f0e8d783921b",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-486-san-marino-meta-dispatch-preflight-checkpoint.json",
+    "preflightCommit": "9d2de9522ffe60344c59cf4aa3069ade4d6095d7",
+    "localHeadBeforeStagingRecord": "9d2de9522ffe60344c59cf4aa3069ade4d6095d7",
+    "originHeadBeforeStagingRecord": "9d2de9522ffe60344c59cf4aa3069ade4d6095d7"
+  },
+  "browser": {
+    "visibleInAppBrowserOnly": true,
+    "totalTabCount": 5,
+    "xComposerCount": 1,
+    "metaLaneCount": 4,
+    "grokTabCount": 0,
+    "metaTabIdsObservedAtPreflight": ["24", "25", "26", "27"],
+    "metaComposerUrls": [
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/",
+      "https://www.meta.ai/"
+    ]
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "accountVisibleInEveryLane": true,
+    "mode": "Thinking",
+    "thinkingVisibleInEveryLane": true,
+    "sendEnabledInEveryLane": true,
+    "sendActivations": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false
+  },
+  "promptVerification": [
+    {"scene": 1971, "characters": 2729, "sha256": "8F45BB48F4CA72615F0A76C7CEB185751A53CC1FFB492BD3D9489D3C3E6BE8EB", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 2735},
+    {"scene": 1972, "characters": 3053, "sha256": "6FF8E534FE56409C16AF77828968C7193ABE4117C5A2BF699D8EAFAD4B13430C", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 3059},
+    {"scene": 1973, "characters": 2709, "sha256": "218D455E810DAD9BDEDA9D3978DB21170D38BD1D53BB5D913632B43C046F985C", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 2715},
+    {"scene": 1974, "characters": 3294, "sha256": "91283961759D3CE654428B947E921B2B747FBD99BBBCCB0FF77157E9D4DE48A7", "exactPromptPrefixVisible": true, "composerCharactersAfterAttachments": 3300}
+  ],
+  "attachmentVerification": {
+    "visibleSupportedControl": "Add attachment then Click to browse, or drag & drop here",
+    "attachmentCountPerLane": [3, 3, 3, 3],
+    "removeImageControlCountPerLane": [3, 3, 3, 3],
+    "orderedAnchorScenesPerLane": [
+      [938, 936, 937],
+      [938, 936, 937],
+      [938, 936, 937],
+      [938, 936, 937]
+    ],
+    "orderedAnchorFilenamesPerLaneExactAndVisible": true,
+    "hiddenInputUsed": false,
+    "directHttpUsed": false,
+    "providerApiUsed": false,
+    "chromeUsed": false,
+    "providerCliUsed": false
+  },
+  "composerBehaviorEvidence": {
+    "promptEnteredBeforeAttachments": true,
+    "promptExactBeforeAttachmentsInEveryLane": true,
+    "metaTrailingAttachmentPlaceholder": "newline-space-newline-space-newline-space",
+    "placeholderCharacterCount": 6,
+    "placeholderCharactersExcludedFromPromptHash": true,
+    "unsentPromptCorruptionObserved": false
+  },
+  "xHold": {
+    "countryPair": ["Monaco", "North Macedonia"],
+    "account": "@dogramaci",
+    "composerRetainedIntact": true,
+    "exactCaptionOccurrences": 1,
+    "mediaCount": 3,
+    "madeWithAiVisible": true,
+    "visiblePostControlActivations": 2,
+    "visibleExplicitFailures": 2,
+    "exactCaptionLiveMatches": 0,
+    "publicTransmissionCount": 0,
+    "thirdBlindClickForbidden": true
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "ACTIVE",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "leftUntouched": true
+  },
+  "mayDispatchAfterRemoteParity": true,
+  "nextSafeAction": "Commit and remote-verify this exact no-send staging record. If local, origin and Draft PR heads match and all four composers remain unchanged, click each visible Meta Send control exactly once, record the resulting prompt URLs, and never resend those confirmed prompts."
+}

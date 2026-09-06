@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "batch": 471,
+  "country": "Bosnia and Herzegovina",
+  "state": "closed-four-archive-accepted-four-clean-meta-viewer-derived-publication-candidates",
+  "closedAtUtc": "2026-08-31T14:13:19.2142754Z",
+  "sceneIds": [1911, 1912, 1913, 1914],
+  "providerOccurrenceCount": 5,
+  "agentMetaSendClicks": 5,
+  "agentRepeatMetaSendClicks": 0,
+  "providerRawAssetCount": 0,
+  "chatgptPassRequestsIssued": 4,
+  "chatgptCleanOutputsSaved": 0,
+  "additionalChatgptPassesPermitted": 0,
+  "deterministicMetaViewerCleanCropsSaved": 4,
+  "acceptedArchiveSceneIds": [1911, 1912, 1913, 1914],
+  "cleanPublicationCandidateSceneIds": [1911, 1912, 1913, 1914],
+  "archiveOnlySceneIds": [],
+  "retryEligibleSceneIds": [],
+  "selectedAssets": [
+    {"scene": 1911, "role": "clean-publication-candidate-meta-viewer-derived", "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1911-bosnia-sarajevo-meta-viewer-clean-crop.png", "sha256": "F8A945EFB90D8062E8895940A02B24578A751BB66D9FF5086181718BFCD61653"},
+    {"scene": 1912, "role": "clean-publication-candidate-meta-viewer-derived", "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1912-bosnia-mostar-meta-viewer-clean-crop.png", "sha256": "78AE68270D45EBDC670E570931534C1578A04A49E284A2EBC41B8FCB88DF0A25"},
+    {"scene": 1913, "role": "clean-publication-candidate-meta-viewer-derived", "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1913-bosnia-kravica-meta-viewer-clean-crop.png", "sha256": "5DE4E0F2BE54EED32409368C3BA37DBCE801DE8863960AFE0EDD78E02C487CFA"},
+    {"scene": 1914, "role": "clean-publication-candidate-meta-viewer-derived", "path": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1914-bosnia-blidinje-meta-viewer-clean-crop.png", "sha256": "F7454E14418E0C86AF8FAF91542AB0C0EAA45BBB4993E372B5BBA501AAF6A4CF"}
+  ],
+  "qaAuthority": {
+    "directive": "Accept almost anything after one strong shortening pass.",
+    "hardUnusableOnly": ["corrupt", "duplicate", "unsafe or explicit", "no image", "materially wrong cast"],
+    "nonBlockingDeviations": ["framing", "choreography", "location detail", "public-safe wardrobe detail", "brand-text fidelity"],
+    "decision": "All four final Meta occurrences pass the hard checks. The one ChatGPT request per occurrence was consumed with no saved output, so the best Meta versions were selected and deterministically cropped from visible media evidence without content alteration."
+  },
+  "canonicalContradictionResolved": "The initial scene 1912 refusal did not authorize resending the exact prompt. One separately prepared moderation-compatible retry succeeded; the unused second-retry ceiling does not justify another send. The four ChatGPT requests consume the edit ceiling even though the parallel batch produced no saved output.",
+  "countryPair": {
+    "eligibleNow": false,
+    "primaryCountry": "Bosnia and Herzegovina",
+    "requiredSecondaryCountry": "Croatia",
+    "rule": "Use two non-duplicate Bosnia assets plus one future Croatia asset only after Croatia provider, QA, accessibility, manifest, Git/LFS and duplicate-hash gates pass."
+  },
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/provider-ledger.json",
+  "onePassOutcomesCheckpoint": "assets/lore/starlight-era/batch-471-bosnia-and-herzegovina-chatgpt-one-pass-outcomes-checkpoint.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/accessibility-sidecars.json",
+  "nextSafeAction": "Remote-verify this closure and its LFS objects, then prepare and dispatch wholly new Croatia scenes 1915-1918 only after prompt, account, visible Thinking, anchor-order, browser-tab, remote-head and authorization gates all pass. Keep X blank until a legitimate 2+1 pair exists."
+}

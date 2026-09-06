@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">RAZE asymmetric knee-high brand application</title>
+  <desc id="desc">Two rainbow-gradient knee-high pairs. Each pair uses the text-free Split-Star on one sock and the angular RAZE wordmark on the other, with the branded sides reversed.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#090b16"/>
+      <stop offset="0.55" stop-color="#151126"/>
+      <stop offset="1" stop-color="#071b22"/>
+    </linearGradient>
+    <linearGradient id="rainbow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff365d"/>
+      <stop offset="0.18" stop-color="#ff8a2b"/>
+      <stop offset="0.35" stop-color="#ffe247"/>
+      <stop offset="0.52" stop-color="#51e38b"/>
+      <stop offset="0.68" stop-color="#20d8df"/>
+      <stop offset="0.84" stop-color="#4478ff"/>
+      <stop offset="1" stop-color="#a84df4"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.44" stop-color="#fff" stop-opacity="0.28"/>
+      <stop offset="0.58" stop-color="#fff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-20%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+    <symbol id="sock" viewBox="0 0 250 640">
+      <path d="M39 20h171l-4 384c0 44 12 73 36 102l-6 54c-40 26-86 44-138 53H31c-18-12-24-31-18-57 10-42 38-70 84-86l-4-450Z" fill="url(#rainbow)" stroke="#fff" stroke-opacity="0.48" stroke-width="5"/>
+      <path d="M40 20h170l-1 61H39Z" fill="#f5f7ff" fill-opacity="0.22"/>
+      <path d="M62 26h40l-5 444c-30 14-52 30-67 50l8-482Z" fill="url(#shine)" opacity="0.82"/>
+      <path d="M98 470c31 4 67 0 108-12 8 20 20 38 36 55l-6 47c-40 26-86 44-138 53H31c-12-8-19-19-20-33 24-9 54-16 90-21Z" fill="#11182c" fill-opacity="0.12"/>
+    </symbol>
+    <symbol id="star" viewBox="0 0 512 512">
+      <path fill="currentColor" fill-rule="evenodd" d="M256 14 304 156 434 72 352 202 498 256 352 310 434 440 304 356 256 498 208 356 78 440 160 310 14 256 160 202 78 72 208 156Zm0 158-82 84 82 84 82-84Zm0 30 13 41 43-11-31 30 31 30-43-11-13 41-13-41-43 11 31-30-31-30 43 11Z"/>
+    </symbol>
+    <symbol id="wordmark" viewBox="0 0 1200 320">
+      <g fill="currentColor" transform="skewX(-8) translate(34 0)">
+        <path fill-rule="evenodd" d="M34 44h196l58 48v72l-58 43h-41l113 69h-91l-109-72v72H34Zm68 58v50h105l17-13v-25l-17-12Z"/>
+        <path fill-rule="evenodd" d="m320 276 85-232h94l85 232h-76l-17-51h-82l-17 51Zm108-109h44l-22-69Z"/>
+        <path d="M614 44h244v61L727 215h131v61H604v-61l132-110H614Z"/>
+        <path d="M896 44h270v61H970v31h171v53H970v26h196v61H896Z"/>
+      </g>
+    </symbol>
+  </defs>
+  <rect width="1600" height="1000" rx="64" fill="url(#background)"/>
+  <path d="M0 744 540 204l174 174L1260 0h340v1000H0Z" fill="#fff" opacity="0.025"/>
+  <text x="100" y="108" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800" letter-spacing="9">RAZE / SPLIT-STAR</text>
+  <text x="102" y="158" fill="#9ba6c7" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="4">ASYMMETRIC KNEE-HIGH BRAND SYSTEM</text>
+
+  <g filter="url(#shadow)">
+    <use href="#sock" x="130" y="230" width="250" height="640"/>
+    <use href="#sock" x="420" y="230" width="250" height="640"/>
+    <use href="#star" x="190" y="330" width="82" height="82" color="#091020"/>
+    <g transform="translate(600 340) rotate(90)">
+      <use href="#wordmark" width="128" height="34" color="#091020"/>
+    </g>
+  </g>
+  <text x="165" y="918" fill="#eaf0ff" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="3">STAR LEFT / WORDMARK RIGHT</text>
+
+  <g filter="url(#shadow)">
+    <use href="#sock" x="930" y="230" width="250" height="640"/>
+    <use href="#sock" x="1220" y="230" width="250" height="640"/>
+    <g transform="translate(994 468) rotate(-90)">
+      <use href="#wordmark" width="128" height="34" color="#091020"/>
+    </g>
+    <use href="#star" x="1350" y="330" width="82" height="82" color="#091020"/>
+  </g>
+  <text x="955" y="918" fill="#eaf0ff" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="3">WORDMARK LEFT / STAR RIGHT</text>
+
+  <circle cx="772" cy="467" r="7" fill="#ff4f79"/>
+  <circle cx="772" cy="500" r="7" fill="#ffe247"/>
+  <circle cx="772" cy="533" r="7" fill="#43dca2"/>
+  <circle cx="772" cy="566" r="7" fill="#4a83ff"/>
+</svg>

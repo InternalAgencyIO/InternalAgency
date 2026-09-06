@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "batch": 490,
+  "country": "Vatican City",
+  "state": "four-first-occurrences-dispatched-in-flight",
+  "provider": "Meta",
+  "accountVerified": "leesha007",
+  "modeVerifiedAllLanes": "Thinking",
+  "sceneOrder": [
+    1987,
+    1988,
+    1989,
+    1990
+  ],
+  "promptSha256": [
+    "443E9E8A9DF7B0079694E55651A11162F684BF62BC66D00073FE34EF0ECDEF08",
+    "1E1CCA21815AAE43DB609D1E860DD7DEF8E0FB5D4DA76D785DFE96ED8144F1E9",
+    "97684BA485FF6E0A9EF6544E69DE8EB45BB73DB864FF8A583AC5B23779303DE2",
+    "C8A1C7E8EE4CC382E8FF8375568BE3B3B5E1F94051C31932A46989A9BC3E39F8"
+  ],
+  "orderedIdentityAnchors": [
+    {
+      "scene": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "allPreSendGatesPassed": true,
+  "preSendRemoteParityCommit": "147c7410a23822620938ebdbf8199c7bf01a3197",
+  "sendClicks": 4,
+  "repeatSendClicks": 0,
+  "dispatches": [
+    {
+      "lane": 1,
+      "scene": 1987,
+      "clickedAtUtc": "2026-09-06T02:23:28.336Z",
+      "providerUrl": "https://www.meta.ai/prompt/efd38db4-dd50-4401-8bb9-ab4a695bfe53",
+      "stateObserved": "in-flight-stop-visible",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/scene-1987-meta-occurrence-1-in-flight-visible.jpg",
+      "evidenceBytes": 82890,
+      "evidenceSha256": "A1CC1EFCE857DC3EF4C0747EA865712E8AE80D448879BD864199B87626279356"
+    },
+    {
+      "lane": 2,
+      "scene": 1988,
+      "clickedAtUtc": "2026-09-06T02:23:32.039Z",
+      "providerUrl": "https://www.meta.ai/prompt/1721659e-81d9-4f08-b084-138c9a04b3ac",
+      "stateObserved": "in-flight-stop-visible",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/scene-1988-meta-occurrence-1-in-flight-visible.jpg",
+      "evidenceBytes": 81585,
+      "evidenceSha256": "6656389750AE25855C1A5DE7FCEFA61B80B4EF9DF95A0EC7430E4A5C2D125EBB"
+    },
+    {
+      "lane": 3,
+      "scene": 1989,
+      "clickedAtUtc": "2026-09-06T02:23:35.721Z",
+      "providerUrl": "https://www.meta.ai/prompt/4510b7b5-859c-4f59-84b7-2b18fd958962",
+      "stateObserved": "in-flight-stop-visible",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/scene-1989-meta-occurrence-1-in-flight-visible.jpg",
+      "evidenceBytes": 81599,
+      "evidenceSha256": "514A96F371BBC6C6B195DE58E25D06EE9C74E0FBDCB941B41F89106854E42FA5"
+    },
+    {
+      "lane": 4,
+      "scene": 1990,
+      "clickedAtUtc": "2026-09-06T02:23:39.422Z",
+      "providerUrl": "https://www.meta.ai/prompt/619f8453-99de-4548-9005-44ffa7383516",
+      "stateObserved": "in-flight-stop-visible",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/scene-1990-meta-occurrence-1-in-flight-visible.jpg",
+      "evidenceBytes": 82788,
+      "evidenceSha256": "74E98E71FB6D6F1975F5249FC72E073E2853156BCA373B3347A628FEB86AC4A1"
+    }
+  ],
+  "retryPolicy": {
+    "metaRetriesMaximumPerScene": 2,
+    "aestheticRetries": 0,
+    "currentRetryCounts": {
+      "1987": 0,
+      "1988": 0,
+      "1989": 0,
+      "1990": 0
+    }
+  },
+  "xState": {
+    "accountVerified": "@dogramaci",
+    "composerBlank": true,
+    "composerCount": 1,
+    "mediaCount": 0,
+    "postDisabled": true
+  },
+  "browserState": {
+    "metaLaneCount": 4,
+    "xComposerCount": 1,
+    "otherTabCount": 0,
+    "visibleInAppBrowserOnly": true
+  },
+  "nextSafeAction": "Monitor these exact four provider URLs to terminal state without resending. Save visible terminal evidence and unchanged provider download bytes. Retry only a hard provider failure, at most twice per scene. Accept technically usable first occurrences for exactly one ChatGPT clothing-only tailoring invocation each."
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "world-195x4-scene-897-clasp-pinch-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-pinch-13.txt",
+  "promptSha256": "2ac2effa9b5d515e0bf86264b305aba9f60329e402714bbb21f2a5bf6cf0fc33",
+  "blockedCorpusSha256": "e9b763ddca2158abd876e846fa331d11892c4254e09151080758ca187d6113ed",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-e9b763ddca2158abd876e846fa331d11892c4254e09151080758ca187d6113ed.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No moderation block; visual gesture correction only.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "gestureLock": {
+    "rightHand": "thumb and curled index finger contact opposite sides of Alia shoulder fastening",
+    "leftHand": "visible below cape holding vertical wand beside own boot",
+    "pointing": false
+  },
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-12/897-calm-12-rejected.png",
+    "bytes": 2483796,
+    "sha256": "c8a4a01b1472d0709cd7e1f0607da22bc7ab2a706009023d767f867105364422",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Radiance's raised right glove becomes an extended pointing finger rather than grasping and adjusting Alia's shoulder fastening",
+      "the decorative wand is not clearly visible in Radiance's other hand",
+      "all other scene-897 gates pass"
+    ]
+  },
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "foreheadContact": true,
+    "navelJewel": true,
+    "exactlyTwoVisibleNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalECEConnection": true,
+    "pawsLapCopilot": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

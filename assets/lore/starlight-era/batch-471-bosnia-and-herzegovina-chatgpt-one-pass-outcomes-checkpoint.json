@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "batch": 471,
+  "country": "Bosnia and Herzegovina",
+  "state": "single-pass-budget-terminal-no-chatgpt-output-four-meta-versions-selected",
+  "observedAtUtc": "2026-08-31T14:13:19.2142754Z",
+  "policy": {
+    "requiredPassesPerTechnicallyValidSelectedMetaOccurrence": 1,
+    "additionalPassesPermittedPerOccurrence": 0,
+    "uncertainInvocationHandling": "Treat every launched request as consuming its one allowed pass. Never retry an output-stage block, cancellation, or ambiguous terminal because that could create a second pass.",
+    "userRelaxedAcceptance": "After the one strong shortening request, accept every public-safe non-corrupt Meta version unless it is duplicate, no-image, unsafe, or materially wrong-cast."
+  },
+  "promptArchive": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/chatgpt-hemline-one-pass-prompts.json",
+  "outcomes": [
+    {
+      "scene": 1911,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1911-meta-thinking-occurrence-0-media-viewer.png",
+      "sourceSha256": "E6ED6FEF52B1FE02B0242431F9972317667D13001793D079D0AD7E2D30544295",
+      "sourceBytes": 59236,
+      "editPromptSha256": "32A034564A77A0B10B441612ED31BA08768D896C84B112368EA9C621ED9186D4",
+      "editPromptCharacters": 1481,
+      "passRequestIssued": true,
+      "outputSaved": false,
+      "terminalAttribution": "ambiguous-output-stage-safety-block-or-parallel-batch-cancellation",
+      "selectedMetaVersion": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1911-bosnia-sarajevo-meta-viewer-clean-crop.png",
+      "qaResult": "accepted-user-relaxed-clean-meta-viewer-derived-crop",
+      "additionalPassesPermitted": 0
+    },
+    {
+      "scene": 1912,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1912-meta-thinking-retry-1-media-viewer.png",
+      "sourceSha256": "B8019BCFA46B06CF25BE4A403BF3AB62EE28F0F6FB33299A32BF9C47369F86E9",
+      "sourceBytes": 60543,
+      "editPromptSha256": "DA4860642F1EAEEE8E100DBA408134F466FF4E29ABA0086BCF5D2B83A89BB6E5",
+      "editPromptCharacters": 1483,
+      "passRequestIssued": true,
+      "outputSaved": false,
+      "terminalAttribution": "ambiguous-output-stage-safety-block-or-parallel-batch-cancellation",
+      "selectedMetaVersion": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1912-bosnia-mostar-meta-viewer-clean-crop.png",
+      "qaResult": "accepted-user-relaxed-clean-meta-viewer-derived-crop",
+      "additionalPassesPermitted": 0
+    },
+    {
+      "scene": 1913,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1913-meta-thinking-occurrence-0-media-viewer.png",
+      "sourceSha256": "44A2F301F3DB4B2AC36C77D6BF157CBA4A8646B71B7CB4E42F627EF519F12F49",
+      "sourceBytes": 61121,
+      "editPromptSha256": "D0A7CC7B030A29E3DAF2ACF9DA3640757E3569CFFF22C111738A9D5E2258C5BF",
+      "editPromptCharacters": 1486,
+      "passRequestIssued": true,
+      "outputSaved": false,
+      "terminalAttribution": "ambiguous-output-stage-safety-block-or-parallel-batch-cancellation",
+      "selectedMetaVersion": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1913-bosnia-kravica-meta-viewer-clean-crop.png",
+      "qaResult": "accepted-user-relaxed-clean-meta-viewer-derived-crop",
+      "additionalPassesPermitted": 0
+    },
+    {
+      "scene": 1914,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/scene-1914-meta-thinking-occurrence-0-media-viewer.png",
+      "sourceSha256": "7F48551EFEF22345CE2CD74FDA79E7A9C1D97FDD8DE58B0E6749C314AE54CA25",
+      "sourceBytes": 57716,
+      "editPromptSha256": "2BF6D4FA4CBA0D9E0DD3FC977781406E74F5F1B775AF84F7EEAEA4A277E6364E",
+      "editPromptCharacters": 1526,
+      "passRequestIssued": true,
+      "outputSaved": false,
+      "terminalAttribution": "ambiguous-output-stage-safety-block-or-parallel-batch-cancellation",
+      "selectedMetaVersion": "assets/lore/starlight-era/provider-evidence/batch-471-bosnia-and-herzegovina/1914-bosnia-blidinje-meta-viewer-clean-crop.png",
+      "qaResult": "accepted-user-relaxed-clean-meta-viewer-derived-crop",
+      "additionalPassesPermitted": 0
+    }
+  ],
+  "parallelInvocationFailure": {
+    "affectedRequestSet": [1911, 1912, 1913, 1914],
+    "savedOutputSceneIds": [],
+    "unresolvedNoOutputSceneIds": [1911, 1912, 1913, 1914],
+    "httpStatus": 400,
+    "code": "moderation_blocked",
+    "safetyViolations": ["sexual"],
+    "stage": "output",
+    "requestId": "4177b1d1-0c07-49b7-a403-30f098802a7c",
+    "attributionLimitation": "The parallel batch surfaced one output-stage rejection and no saved output. It did not identify which scene was rejected versus canceled or unresolved.",
+    "retryDecision": "No ChatGPT retry for any Batch 471 occurrence."
+  },
+  "deterministicFallback": {
+    "operation": "Crop the central 247x437 portrait from each 1280x720 visible Meta media-viewer screenshot, then upscale 4x to 988x1748 with high-quality bicubic interpolation.",
+    "contentAltered": false,
+    "claim": "Viewer-derived clean publication candidate, not provider raw bytes and not a ChatGPT edit output."
+  },
+  "summary": {
+    "passRequestsIssued": 4,
+    "chatgptOutputsSaved": 0,
+    "selectedMetaVersions": 4,
+    "additionalPassesPermitted": 0,
+    "cleanPublicationCandidateSceneIds": [1911, 1912, 1913, 1914]
+  },
+  "nextSafeAction": "Never issue another ChatGPT pass for scenes 1911-1914. Preserve all four Meta viewer sources and derived clean crops, then complete provider, QA, accessibility, manifest, Git/LFS, remote and PR parity records before reusing the four Meta lanes."
+}

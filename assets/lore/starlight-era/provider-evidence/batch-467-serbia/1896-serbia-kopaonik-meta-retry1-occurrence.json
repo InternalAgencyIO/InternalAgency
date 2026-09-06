@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "scene": 1896,
+  "country": "Serbia",
+  "provider": "Meta AI",
+  "occurrence": 2,
+  "retryNumber": 1,
+  "status": "hard_unusable_meta_and_chatgpt_archived_second_retry_eligible",
+  "submittedAtUtc": "2026-08-31T06:56:57.962Z",
+  "providerChatUrl": "https://www.meta.ai/prompt/facdb210-6b59-4fee-9932-775e24e2bf32",
+  "promptSource": "assets/lore/starlight-era/batch-467-serbia-first-retries-prepared-checkpoint.json#scene-1896",
+  "promptSha256": "6C205E497A5F6C62D547B7E57270684A6CB3291A3B0935D4AC3FB787B3D00EE1",
+  "orderedReferenceAnchors": [938, 936, 937],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "providerResponseSummary": "Meta reported an exact 9:16 knee-cropped image with left-to-right Alia, ECE, Radiance, Ellie and exposed one visible Download control.",
+  "rawAsset": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1896-serbia-kopaonik-meta-retry1-provider-raw.png",
+    "sha256": "3D6576DFAB077BF0B27A151B3DD05BB7F7AC5A8F353B71582B875B30DDB23A85",
+    "byteLength": 2165088,
+    "dimensions": "1013x1802",
+    "contentType": "image/png",
+    "acquisition": "Visible Meta Download button through the in-app Browser; no direct fetch."
+  },
+  "browserEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/scene-1896-meta-retry1-terminal-image-page.jpg",
+    "sha256": "E1BA8604D3D1FCF2AB62E4B0E8372664432C53B8940C8D1F76867886722C3DB7",
+    "byteLength": 99273,
+    "dimensions": "1280x720",
+    "contentType": "image/jpeg"
+  },
+  "chatgptHemlineRefinement": {
+    "required": true,
+    "maximumPasses": 1,
+    "passesCompleted": 1,
+    "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1896-serbia-kopaonik-meta-retry1-chatgpt-hemline-one-pass.png",
+    "sha256": "922D41C1F5D341ED1F48F609A6ED80C89F57CFCB95A12D37C24F87025B515FF1",
+    "byteLength": 2301023,
+    "dimensions": "941x1672",
+    "contentType": "image/png"
+  },
+  "visualQa": {
+    "decision": "reject_both",
+    "orientation": "pass-near-exact-vertical-9:16",
+    "cast": "pass-exactly-four-adult-women",
+    "location": "pass-Kopaonik-plateau-and-layered-ridges-readable",
+    "faceMapping": "hard-fail; the prompt assigns ECE's far-right-anchor face to second position and Ellie's third-anchor face to fourth, but the fourth face remains the stronger ECE-like match while the second does not match ECE cleanly",
+    "choreography": "fail; Radiance leans toward the second-position ECE instead of reassuring fourth-position Ellie with the required cheek peck",
+    "styling": "pass-ChatGPT-edit-strongly-shortens-secure-opaque-silhouettes"
+  },
+  "retry": {
+    "permitted": true,
+    "remainingMetaRetries": 1,
+    "requiresFreshChat": true,
+    "requiresMateriallyRevisedPromptAndNewSha256": true,
+    "requiresFreshActionTimeConfirmation": true
+  }
+}

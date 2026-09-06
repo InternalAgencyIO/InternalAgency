@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "scene1896_second_and_final_retry_materially_revised_prepared",
+  "preparedAtUtc": "2026-08-31T07:06:14.9813943Z",
+  "scene": 1896,
+  "retryNumber": 2,
+  "occurrence": 3,
+  "remainingMetaRetriesAfterThisOccurrence": 0,
+  "sourceQaCheckpoint": "assets/lore/starlight-era/batch-467-serbia-first-retries-terminal-qa-checkpoint.json",
+  "priorProviderUrl": "https://www.meta.ai/prompt/facdb210-6b59-4fee-9932-775e24e2bf32",
+  "priorPromptSha256": "6C205E497A5F6C62D547B7E57270684A6CB3291A3B0935D4AC3FB787B3D00EE1",
+  "materialRevision": "Restore the exact scene-938 primary identity order left-to-right and move all relationship actions to adjacent pairs, eliminating the second/fourth face reassignment that failed retry one.",
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "primaryOrder": ["Alia", "Radiance", "Ellie", "AI ECE"],
+    "hardGate": "Each face must remain in the same left-to-right position as scene 938; do not reorder, swap, merge, clone, replace, or age-shift any face."
+  },
+  "orderedReferenceAnchors": [
+    {
+      "scene": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "prompt": "SCENE 1896 - SERBIA, KOPAONIK HIGH PLATEAU - SECOND AND FINAL RETRY - CAMERA ROLL 29/100 INTERMEDIATE. Create one wholly new photorealistic cinematic image in exact vertical 9:16 portrait only. The three attached images are uploaded exactly once each in authoritative order 938, 936, 937. Scene 938 is the primary face-and-position identity plate; scenes 936 and 937 only reinforce those same faces. Show exactly four distinct fictional adult women, every one exactly age 21 and female-only, with no other people. HARD IDENTITY AND POSITION LOCK: copy the exact scene-938 left-to-right order without any reordering: far-left Black Alia uses the far-left scene-938 face; second blonde Radiance uses the second scene-938 face; third dark-haired Ellie uses the third scene-938 face; far-right brunette AI ECE uses the far-right scene-938 face. Keep all four faces crisp, adult, recognizable, separate, and in those exact positions. Do not swap Ellie and ECE. Do not merge, clone, replace, or redesign a face. Place them on a broad dry level Kopaonik plateau terrace far from every edge, with silver grass, rounded forested ridges, layered blue mountain ranges, and a large late-afternoon sky broad and unmistakable; no lifts, towers, buildings, signs, flags, uniforms, weapons, sacred symbols, text, logos, animals, vehicles, or bystanders. Use adjacent-pair choreography that preserves the identity order: Radiance, standing second, fastens Alia's structured shoulder clasp; Ellie, standing third, gives their closeness a readable playful-jealous sideways smile; ECE, standing far right, reassures Ellie with one brief consensual cheek peck, cheek contact only; Alia reaches inward so all four complete one relaxed interlocked hand-linked arc. Wardrobes stay attached to these identities and positions: Alia in emerald-gold lacquered upper-thigh mini-dress with mountain facets; Radiance in moon-white metallic upper-thigh mini-dress with ruby contour piping; Ellie in cobalt-black cropped satin jacket over opaque magenta with a clearly divided silver upper-thigh skort; ECE in bronze-violet long-sleeve structured top with secure opaque ivory upper-thigh tailored shorts. Every lower silhouette must be strongly short, securely lined, fully opaque, and public-safe. INTERMEDIATE framing means crop all four exactly at the knees, show no lower legs or footwear, and preserve enough plateau and ridges to make Kopaonik legible. No nudity, explicit sexuality, minors, real people, duplicate bodies, extra limbs, split panels, collage, border, watermark, or caption.",
+  "promptSha256": "D77D2496940908353A8AEA505FEC41BBE101C69DA7ACD64BCA00400E3922B4B1",
+  "dispatchGate": {
+    "freshChatRequired": true,
+    "freshActionTimeConfirmationRequired": true,
+    "maySend": false
+  },
+  "nextSafeAction": "Compute and verify the new prompt hash, commit and remote-verify the checkpoint, stage one fresh Meta chat with anchors 938, 936, 937 in exact order, and stop before Send for fresh confirmation."
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T08:11:19.636Z",
+  "authoritative_parent_commit": "27c35e76d60a01295046cffd9c58d6e2c8664937",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 417,
+  "country": "Palau",
+  "scene_range": [
+    1688,
+    1689,
+    1690,
+    1691
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-417-palau-prompts-prepared-checkpoint.json",
+  "face_anchor_manifest_verified": true,
+  "ordered_face_references": [
+    {
+      "order": 1,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "order": 2,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "order": 3,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "completed_country_cycles_since_last_x_cycle": 6,
+  "accepted_canonical_count_for_country": 0,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "incomplete",
+  "scene_states": {
+    "1688": {
+      "status": "no-confirmed-provider-occurrence",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "58424C1919E931F14D5909575D78DB18794B792F25D68AA080DD40DF388307E8",
+      "camera_roll": 37,
+      "evidence": "progress-reports/codex-generated-media/provider-occurrences/batch-417-scene-1688-initial-dispatch-no-confirmed-occurrence.jsonl"
+    },
+    "1689": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "89429EC9A1A42F1F6A5A5A442E151C7F951CFAAED5496C03A3E17D6689F2906E",
+      "camera_roll": 80
+    },
+    "1690": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "CAA2F311DDB0A16D45578817E64EDCCD91A699505D2B41C11FD57DD9D6D0A4F0",
+      "camera_roll": 52
+    },
+    "1691": {
+      "status": "untouched-held",
+      "attempt_consumed": false,
+      "resend_forbidden": false,
+      "accepted_canonical": false,
+      "prompt_sha256": "D8ADE63F05BB45D7D51A2C29698FAE8ECF0B923F06657B27513CE932A71C872F",
+      "camera_roll": 11
+    }
+  },
+  "next_action": "On the next user-confirmed wake, dispatch untouched Palau scene 1689 once only. Never resend scene 1688."
+}

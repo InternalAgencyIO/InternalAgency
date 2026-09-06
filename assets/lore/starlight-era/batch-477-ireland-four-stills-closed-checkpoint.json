@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "batch": 477,
+  "country": "Ireland",
+  "state": "four-first-meta-occurrences-closed-one-chatgpt-pass-consumed-no-x-transmission",
+  "closedAtUtc": "2026-09-04T09:18:25.0405292Z",
+  "authority": {
+    "preparationCheckpoint": "assets/lore/starlight-era/batch-477-ireland-europe-gap-fill-prompts-prepared-checkpoint.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-477-ireland/provider-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-477-ireland/accessibility-sidecars.json",
+    "orderedAnchors": [938, 936, 937],
+    "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707"
+  },
+  "provider": {"name": "Meta", "account": "leesha007", "mode": "Thinking", "visibleInAppBrowserOnly": true, "lanes": 4},
+  "dispatch": {
+    "sendClicks": 4,
+    "repeatSendClicks": 0,
+    "urls": [
+      "https://www.meta.ai/prompt/c204a8b5-a7e1-4023-92f7-8ce102fa9acc",
+      "https://www.meta.ai/prompt/35ac2d01-387f-46fa-b459-df9cc6bdad1a",
+      "https://www.meta.ai/prompt/42becb88-ea4a-4347-bd8d-b1a28c686685",
+      "https://www.meta.ai/prompt/4aca1bf4-abba-4fe2-adc3-45174c73d590"
+    ]
+  },
+  "terminal": {"scenes": [1935, 1936, 1937, 1938], "allRendered": true, "allPublicSafe": true, "allNonCorrupt": true, "metaRetriesUsed": 0},
+  "chatgptOnePass": {"requestsIssued": 4, "outputsSaved": 0, "aggregateOutcome": "output-moderation-block-no-lane-attribution", "category": "sexual", "requestId": "00ead66f-29da-49f8-9221-d4cc809d0842", "retriesIssued": 0, "additionalPassesPermitted": 0},
+  "selectedScenes": [
+    {"scene": 1935, "sha256": "4F6CD6E8E0948CB3B8662D223263D8A03C1DBAA11807714BA62A1FD237684A86"},
+    {"scene": 1936, "sha256": "D4ED1A95A89EF2492C0C3F1E170F4AE8BD642EAB6B6F5E95D464FD4C3CD7B079"},
+    {"scene": 1937, "sha256": "429EE3AAF3EA40649AB308C358D1EA6F91E3F60F502D929434F3FB155CB91FC7"},
+    {"scene": 1938, "sha256": "B998476F873057959D98971EE6F95A563A2A6CFFBAAD04F2B9FE141B37C4C870"}
+  ],
+  "x": {"account": "@dogramaci", "composerBlankVerified": true, "postClicks": 0, "transmissions": 0},
+  "canonicalContradictions": [
+    "The visible Meta images report 1152x2048 WEBP originals, but the provider download control exposes only an ephemeral signed image view through the in-app Browser. Direct HTTP and hidden-state extraction are forbidden, so the local selected artifacts are lossless PNG pixel captures of the visibly rendered images rather than the original WEBP response bytes."
+  ],
+  "nextSafeAction": "Commit and push this Ireland closure with LFS and verify remote parity. Then prepare Latvia scenes 1939-1942 under the same current contracts, dispatch only after the exact prompt and anchor gates pass, and do not post the Ireland-Latvia pair until Latvia closes and a fresh action-time X confirmation is received."
+}

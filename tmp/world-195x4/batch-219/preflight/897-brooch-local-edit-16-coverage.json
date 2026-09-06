@@ -1,0 +1,39 @@
+{
+  "schema": "world-195x4-scene-897-local-brooch-edit-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "sourceImage": {
+    "file": "tmp/world-195x4/batch-219/staging/897-diamond-15-foundation.png",
+    "bytes": 2357244,
+    "sha256": "b1720dac669afd88eb18ca926d7e38a008431ebadb5ecfd602c1a67ca63a2b0a",
+    "width": 941,
+    "height": 1672
+  },
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-brooch-local-edit-16.txt",
+  "promptSha256": "03e06301266eb4bb27007306664c09e10c1ce623207d7d7169f4434500f3d818",
+  "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No new moderation block; first edit-stage call checked against current exact corpus.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "editScope": "relocate Alia shoulder brooch and bind Radiance closed glove to it",
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "foreheadContact": true,
+    "navelJewel": true,
+    "exactlyTwoVisibleNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalECEConnection": true,
+    "pawsLapCopilot": true,
+    "visibleLowWand": true,
+    "SantaAnaTheatre": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "batch": 476,
+  "recordedAtUtc": "2026-09-04T07:31:28.8233945Z",
+  "state": "requested-pending-authority-reconciliation",
+  "scope": "future Meta image prompts only; no provider dispatch performed",
+  "razeStarBranding": {
+    "characterCoveragePercent": 32,
+    "hotPlaceTattooPercentOfBrandingAssignments": 15,
+    "stockingsPercentOfBrandingAssignments": 85,
+    "constraints": [
+      "adult fictional characters only",
+      "one readable STAR mark per selected character",
+      "tattoo is tasteful non-explicit body art at a non-intimate visible placement",
+      "stocking mark remains opaque, clean, and on the stocking surface",
+      "never combine tattoo and stocking mark on the same selected character"
+    ],
+    "rollMethod": "deterministic SHA-256 rejection sampling; independent per character"
+  },
+  "razedBackground": {
+    "chancePercent": 32,
+    "rollMethod": "deterministic SHA-256 rejection sampling; independent per image",
+    "activeBranch": "distant non-graphic cinematic aftermath: smoke plumes, controlled orange glow, and damaged unoccupied structures behind the protected foreground cast; no casualties, bodies, injuries, weapons, blast peril, or emergency distress",
+    "inactiveBranch": "intact country/location backdrop",
+    "mushroomCloudHandling": "stylized distant cloud silhouette only if the provider accepts it; otherwise use the safe smoke-and-glow substitute",
+    "characterBeat": "characters remain calm, affectionate, and focused on one another without glorifying harm",
+    "gates": [
+      "preserve country landmark readability",
+      "do not depict real-world victims or ongoing attacks",
+      "do not let destruction erase required fashion, face, hosiery, footwear, or romance beats"
+    ]
+  },
+  "dispatch": {
+    "providerDispatch": false,
+    "xDispatch": false,
+    "guardian": "paused; unchanged"
+  }
+}

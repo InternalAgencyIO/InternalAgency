@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "prompts-prepared",
+  "createdAtUtc": "2026-08-27T05:47:59.757Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 425,
+  "country": "Guatemala",
+  "status": "prepared-not-uploaded",
+  "source": {
+    "batch": 354,
+    "scenes": [
+      1436,
+      1437,
+      1438,
+      1439
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-354-guatemala-private-jet-checkpoint.json",
+    "nextSourceCountry": "Ecuador",
+    "nextSourceBatch": 355
+  },
+  "eligibleScenes": [
+    1720,
+    1721,
+    1722,
+    1723
+  ],
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraPolicy": {
+    "extremeClose": "1-20",
+    "intermediate": "21-80",
+    "extremeWide": "81-100"
+  },
+  "maleSelection": {
+    "key": "batch425-guatemala-male-model-scene",
+    "fnv1a32": 3113574751,
+    "modulo4": 3,
+    "selectedScene": 1723
+  },
+  "sourceSanitization": {
+    "removed": [
+      "all weapon and inert-firearm language",
+      "ammunition and target mechanics",
+      "mascots",
+      "odd props",
+      "copied airline identity"
+    ],
+    "replacement": "one harmless polished gold navigation beacon with exactly four cyan light rings held only by AI ECE right hand",
+    "civilianAviationOnly": true
+  },
+  "prompts": [
+    {
+      "scene": 1720,
+      "sourceScene": 1436,
+      "promptFile": "tmp/world-195x4/batch-425/scene-1720-prompt.txt",
+      "promptSha256": "5213C2FFA4F92A7C05BF71751AE2D35A7C33DF29229C5002EE6115468CE771E8",
+      "promptLength": 6243,
+      "camera": {
+        "key": "batch425-guatemala-scene1720-camera-closeness",
+        "fnv1a32": 2181879623,
+        "roll": 24,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-425|scene-1720|knee-high-wearers",
+        "fnv1a32": 3038977884,
+        "modulo6": 0,
+        "wearers": [
+          "Radiance",
+          "Ellie"
+        ]
+      },
+      "jealousy": {
+        "key": "batch425-guatemala-scene1720-jealous-adult",
+        "fnv1a32": 2586569942,
+        "modulo4": 2,
+        "adult": "Alia"
+      },
+      "malePresent": false
+    },
+    {
+      "scene": 1721,
+      "sourceScene": 1437,
+      "promptFile": "tmp/world-195x4/batch-425/scene-1721-prompt.txt",
+      "promptSha256": "0393FDEB4A7B4E9C5AB7FB5FAC4C849122EFEDEDB89E653A4596A538B1E92566",
+      "promptLength": 6160,
+      "camera": {
+        "key": "batch425-guatemala-scene1721-camera-closeness",
+        "fnv1a32": 3994790582,
+        "roll": 83,
+        "framing": "extreme-wide"
+      },
+      "raze": {
+        "key": "RAZE|batch-425|scene-1721|knee-high-wearers",
+        "fnv1a32": 2190700519,
+        "modulo6": 1,
+        "wearers": [
+          "Radiance",
+          "Alia"
+        ]
+      },
+      "jealousy": {
+        "key": "batch425-guatemala-scene1721-jealous-adult",
+        "fnv1a32": 2590724305,
+        "modulo4": 1,
+        "adult": "Ellie"
+      },
+      "malePresent": false
+    },
+    {
+      "scene": 1722,
+      "sourceScene": 1438,
+      "promptFile": "tmp/world-195x4/batch-425/scene-1722-prompt.txt",
+      "promptSha256": "F6DA79B849D9AFE5D89D2A214C2033E665F6FB91203EF1D17337FF1841F06E77",
+      "promptLength": 5905,
+      "camera": {
+        "key": "batch425-guatemala-scene1722-camera-closeness",
+        "fnv1a32": 838798929,
+        "roll": 30,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-425|scene-1722|knee-high-wearers",
+        "fnv1a32": 3910892794,
+        "modulo6": 4,
+        "wearers": [
+          "Ellie",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch425-guatemala-scene1722-jealous-adult",
+        "fnv1a32": 2075152840,
+        "modulo4": 0,
+        "adult": "Radiance"
+      },
+      "malePresent": false
+    },
+    {
+      "scene": 1723,
+      "sourceScene": 1439,
+      "promptFile": "tmp/world-195x4/batch-425/scene-1723-prompt.txt",
+      "promptSha256": "4CF9D00C7DE9D7ECE4ABB3CE61504BEEBC799ED38B05DA04CC23041E1AD7CB59",
+      "promptLength": 6526,
+      "camera": {
+        "key": "batch425-guatemala-scene1723-camera-closeness",
+        "fnv1a32": 2221955776,
+        "roll": 77,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-425|scene-1723|knee-high-wearers",
+        "fnv1a32": 2938131557,
+        "modulo6": 5,
+        "wearers": [
+          "Alia",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch425-guatemala-scene1723-jealous-adult",
+        "fnv1a32": 5203211,
+        "modulo4": 3,
+        "adult": "AI ECE"
+      },
+      "malePresent": true
+    }
+  ],
+  "providerChatCount": 0,
+  "confirmedUploadCount": 0,
+  "sendClickCount": 0,
+  "duplicateDispatchCount": 0,
+  "boundedRetryAuthorized": false,
+  "standingUploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.069499Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.069499Z"
+  },
+  "xEligibility": {
+    "currentCountryAcceptedAssets": 0,
+    "requiredAcceptedAssets": 4,
+    "pairReady": false,
+    "blockedBy": "Guatemala not yet rendered; Senegal closed at zero accepted assets."
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 4,
+    "publishDue": false,
+    "threshold": 10
+  }
+}

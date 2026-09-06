@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "batch": 482,
+  "country": "Moldova",
+  "runType": "europe-gap-fill-four-stills-meta-thinking",
+  "state": "four-meta-thinking-scenes-prepared-no-send-awaiting-git-lfs-remote-preflight",
+  "preparedAtUtc": "2026-09-04T12:51:35.859Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "predecessorCommit": "beeb635c4f1763c5417c7f6d8d7543d4be5a1830",
+    "predecessorCountry": "Luxembourg",
+    "predecessorClosureCheckpoint": "assets/lore/starlight-era/batch-481-luxembourg-git-lfs-remote-verification-checkpoint.json",
+    "selection": "Luxembourg is complete. Malta already has one canonical live country-pair post at https://x.com/dogramaci/status/2090711986728239557; Moldova has zero canonical posts and is therefore the first remaining country after Luxembourg in the current canonical alphabetical Europe priority roster.",
+    "policy": "Newer remote-verified checkpoints, manifests, ledgers, Git/LFS state and PR head supersede the handoff."
+  },
+  "guardian": {
+    "id": "guardian-x-assistant-mission",
+    "status": "PAUSED",
+    "rrule": "FREQ=MINUTELY;INTERVAL=45",
+    "action": "Previously inspected and left untouched; it is not Starlight authority."
+  },
+  "providerSettings": {
+    "provider": "Meta",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "output": "one image per occurrence",
+    "aspectRatio": "9:16 vertical",
+    "visibleMetaLaneCount": 4,
+    "visibleXComposerCount": 1,
+    "grok": "paused until credits return",
+    "tabPolicy": "Reuse exactly the four existing visible Meta lanes and one visible blank @dogramaci X composer. Navigate completed terminal lanes to fresh composers; never resend a confirmed prompt or reopen an older terminal scene."
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "orderedAnchors": [
+      938,
+      936,
+      937
+    ],
+    "hardPositionLock": "viewer-left to right: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE",
+    "neverSwap": "Ellie and AI ECE"
+  },
+  "orderedReferenceAnchors": [
+    {
+      "scene": 938,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "retryAndRefinementPolicy": {
+    "metaRetryCapPerScene": 2,
+    "metaRetryTrigger": "hard failure only; accept nearly every public-safe, non-corrupt terminal still",
+    "chatgptStrongShorteningPassesPerTechnicallyValidSelectedMetaImage": 1,
+    "archiveBlockedPrompts": true,
+    "retainUsedAndUnusedLocallyAndInGit": true
+  },
+  "deterministicRolls": {
+    "algorithm": "For every roll key, SHA-256 the UTF-8 key, skip digest bytes 200 through 255, and map the first accepted byte to byte modulo 100 plus one.",
+    "keyForms": {
+      "sceneRoll": "<seed>|scene-<scene>|<rollFamily>",
+      "characterBrand": "<seed>|scene-<scene>|brand|<character>",
+      "characterPlacement": "<seed>|scene-<scene>|placement|<character>"
+    },
+    "seed": "starlight|batch-482|moldova|seed-1007",
+    "seedSelection": "First nonnegative salt yielding all three camera families, one or two background assignments, at least one realization of every requested roll family, at least one knee-high-rainbow overlap, four to six character-branding assignments and exactly one tattoo assignment.",
+    "rollFamilies": [
+      {
+        "name": "starHardware",
+        "chancePercent": 25
+      },
+      {
+        "name": "kneeHighHosiery",
+        "chancePercent": 25
+      },
+      {
+        "name": "splitStarEmblem",
+        "chancePercent": 25
+      },
+      {
+        "name": "razeTypeBand",
+        "chancePercent": 25
+      },
+      {
+        "name": "rainbowStockings",
+        "chancePercent": 33
+      },
+      {
+        "name": "kneeHighRainbows",
+        "chancePercent": 22
+      },
+      {
+        "name": "fictionalDistantRazedBackground",
+        "chancePercent": 32
+      },
+      {
+        "name": "perCharacterRazeStarBranding",
+        "chancePercent": 32,
+        "tattooShareWithinAssignmentsPercent": 15,
+        "otherwise": "stocking mark"
+      }
+    ],
+    "cameraMapping": {
+      "1-20": "tight hemline close",
+      "21-60": "adjacent three-quarter",
+      "61-100": "tight full-body"
+    },
+    "statementBootScene": 1958,
+    "perCharacterBrandingAssignmentCount": 5,
+    "perCharacterBrandingPopulation": 16,
+    "tattooAssignmentCount": 1,
+    "sceneAssignments": [
+      {
+        "scene": 1955,
+        "cameraRoll": 3,
+        "starHardwareRoll": 56,
+        "kneeHighHosieryRoll": 8,
+        "splitStarEmblemRoll": 16,
+        "razeTypeBandRoll": 48,
+        "rainbowStockingsRoll": 23,
+        "kneeHighRainbowsRoll": 1,
+        "fictionalDistantRazedBackgroundRoll": 63,
+        "characterBranding": []
+      },
+      {
+        "scene": 1956,
+        "cameraRoll": 37,
+        "starHardwareRoll": 39,
+        "kneeHighHosieryRoll": 77,
+        "splitStarEmblemRoll": 2,
+        "razeTypeBandRoll": 44,
+        "rainbowStockingsRoll": 25,
+        "kneeHighRainbowsRoll": 8,
+        "fictionalDistantRazedBackgroundRoll": 12,
+        "characterBranding": [
+          {
+            "character": "Alia",
+            "brandRoll": 17,
+            "placementRoll": 10,
+            "placement": "upper-arm tattoo"
+          },
+          {
+            "character": "Ellie",
+            "brandRoll": 31,
+            "placementRoll": 29,
+            "placement": "stocking mark"
+          }
+        ]
+      },
+      {
+        "scene": 1957,
+        "cameraRoll": 47,
+        "starHardwareRoll": 65,
+        "kneeHighHosieryRoll": 50,
+        "splitStarEmblemRoll": 79,
+        "razeTypeBandRoll": 21,
+        "rainbowStockingsRoll": 29,
+        "kneeHighRainbowsRoll": 24,
+        "fictionalDistantRazedBackgroundRoll": 29,
+        "characterBranding": [
+          {
+            "character": "ECE",
+            "brandRoll": 24,
+            "placementRoll": 67,
+            "placement": "stocking mark"
+          }
+        ]
+      },
+      {
+        "scene": 1958,
+        "cameraRoll": 98,
+        "starHardwareRoll": 15,
+        "kneeHighHosieryRoll": 1,
+        "splitStarEmblemRoll": 76,
+        "razeTypeBandRoll": 55,
+        "rainbowStockingsRoll": 49,
+        "kneeHighRainbowsRoll": 30,
+        "fictionalDistantRazedBackgroundRoll": 44,
+        "characterBranding": [
+          {
+            "character": "Alia",
+            "brandRoll": 20,
+            "placementRoll": 16,
+            "placement": "stocking mark"
+          },
+          {
+            "character": "ECE",
+            "brandRoll": 11,
+            "placementRoll": 18,
+            "placement": "stocking mark"
+          }
+        ]
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "scene": 1955,
+      "cameraRoll": 3,
+      "framing": "tight hemline close",
+      "location": "Chisinau Valea Morilor Lake and Cascade Stairs",
+      "prompt": "SCENE 1955 - MOLDOVA, CHISINAU VALEA MORILOR LAKE AND CASCADE STAIRS - CAMERA CLOSENESS ROLL 3/100, TIGHT HEMLINE CLOSE. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the tightly adjacent quartet on broad dry empty secular paving at Chisinau's Valea Morilor, with the long pale Cascade Stairs, rounded lake, tree-lined shore and city park terraces unmistakably readable, without flags, readable signs or sacred interiors. Use a low oblique close head-to-toe composition so faces, polished aggressively short upper-thigh silhouettes, colorful socks and heels dominate while every head, hand, leg and shoe remains complete. Alia wears a bronze-black asymmetric fitted top with a sapphire tailored skort; Radiance a pearl-rose sleeveless cocktail mini; Ellie a ruby-cobalt cropped jacket with an ivory skirt over opaque shorts; ECE an emerald-silver one-shoulder short romper. Every garment is fully opaque, securely lined and non-revealing. Knee-high-hosiery roll 8/100, split-star-emblem roll 16/100, rainbow-stockings roll 23/100 and knee-high-rainbows roll 1/100 apply: give all four polished opaque rainbow-gradient knee-high socks or stockings ending below both knees, one large original geometric split-star waist panel per look, sharp classic RAZE pumps and slim architectural stilettos. Star hardware and RAZE type-band rolls did not apply. No per-character RAZE STAR branding applies and no background-damage roll applies. Stage a close warm love beat with clear personal space: Alia and Radiance share a side embrace and touch cheeks without mouth contact, Ellie gives ECE a brief closed-mouth cheek greeting, and ECE smiles toward the group. No mouth-to-mouth kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, flags, crowns, coats of arms, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2653,
+      "promptSha256": "19FA6C4AEA0BA5999CDB6CFAE63D0FB3AC13B8E993CB4E00E39F16440FE68E91",
+      "archiveStem": "1955-moldova-chisinau-valea-morilor-raze-tight-hemline-close"
+    },
+    {
+      "scene": 1956,
+      "cameraRoll": 37,
+      "framing": "adjacent three-quarter",
+      "location": "Orheiul Vechi Raut River Limestone Gorge",
+      "prompt": "SCENE 1956 - MOLDOVA, ORHEIUL VECHI RAUT RIVER LIMESTONE GORGE - CAMERA CLOSENESS ROLL 37/100, ADJACENT THREE-QUARTER. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the adjacent quartet on broad dry level protected secular paving at an Orheiul Vechi landscape overlook, with the complete looping Raut River, pale limestone gorge, open grass ridges and distant village roofs unmistakably readable, while excluding monasteries, churches, crosses, flags and readable signs. Use a lively waist-low Dutch three-quarter camera close enough for faces, strongly shortened upper-thigh silhouettes, stockings and shoes to dominate while every head, hand, leg and shoe remains complete. Alia wears a deep teal-copper sleeveless fitted mini; Radiance a pearl-gold cropped moto top with a cobalt tailored skort; Ellie a magenta-black fitted blazer with secure black fashion shorts; ECE a sapphire-emerald asymmetric short romper. Every garment is fully opaque, securely lined and non-revealing. Split-star-emblem roll 2/100 and rainbow-stockings roll 25/100 apply: give all four sleek opaque rainbow-gradient thigh-high stockings, one large original geometric split-star waist panel per look, clean classic RAZE pumps and restrained stilettos. Star hardware, knee-high hosiery and RAZE type-band rolls did not apply; knee-high-rainbows roll 8/100 cannot materialize without the knee-high base. Per-character RAZE STAR branding selects Alia and Ellie only: Alia has one tiny original RAZE star upper-arm fashion tattoo in a non-intimate location, Ellie has one clean RAZE star split-star mark on one stocking, and Radiance and ECE have no character mark. Distant-background roll 12/100 applies: far beyond the protected natural overlook, show a clearly fictional non-graphic unoccupied modern skyline with soft smoke plumes, controlled orange glow, damaged empty structures and one stylized mushroom-shaped smoke cloud, with no victims, bodies, injuries, weapons, blast peril or emergency distress; the real gorge and river remain intact. The women remain calm and focused on each other without glorifying harm. Radiance gives Alia a brief closed-mouth cheek greeting, Ellie answers ECE's inviting gaze with a playful jealous side glance, and ECE offers Ellie a hand. No mouth-to-mouth kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, flags, crowns, coats of arms, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 3256,
+      "promptSha256": "D14DDBF713B234F099F284E8CA50277887AD300E09FF498BFDA9194EFED978D9",
+      "archiveStem": "1956-moldova-orheiul-vechi-raut-gorge-raze-adjacent-three-quarter"
+    },
+    {
+      "scene": 1957,
+      "cameraRoll": 47,
+      "framing": "adjacent three-quarter",
+      "location": "Soroca Fortress and Dniester River Promenade",
+      "prompt": "SCENE 1957 - MOLDOVA, SOROCA FORTRESS AND DNIESTER RIVER PROMENADE - CAMERA CLOSENESS ROLL 47/100, ADJACENT THREE-QUARTER. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the tightly grouped quartet on broad dry empty protected secular paving beside Soroca Fortress, with the complete round stone fortress and conical towers, broad Dniester River, green opposite bank and riverside promenade unmistakably readable, without flags, readable signs or sacred interiors. Use a low diagonal three-quarter full-length composition close enough for faces, polished short upper-thigh silhouettes, hosiery and footwear to dominate while every head, hand, leg and shoe remains complete. Alia wears a bronze-teal one-shoulder fitted mini; Radiance a pearl-blue cropped top with a copper tailored skort; Ellie a ruby-black sleeveless fitted cocktail mini; ECE an emerald-silver cropped jacket with a cobalt skirt over opaque shorts. Every garment is fully opaque, securely lined and non-revealing. RAZE type-band roll 21/100 and rainbow-stockings roll 29/100 apply: give all four sleek opaque rainbow-gradient thigh-high stockings with sharp classic RAZE pumps and slim stilettos, plus one narrow exact readable RAZE band at each waist, spelled R-A-Z-E. Star hardware, knee-high hosiery and large split-star-emblem rolls did not apply; knee-high-rainbows roll 24/100 did not apply. Per-character RAZE STAR branding selects ECE only: one clean original RAZE star split-star mark appears on one stocking; Alia, Radiance and Ellie have no character mark. Distant-background roll 29/100 applies: on the far horizon beyond the opposite bank, show a clearly fictional non-graphic unoccupied modern skyline with soft smoke plumes, controlled orange glow, damaged empty structures and one stylized mushroom-shaped smoke cloud, with no victims, bodies, injuries, weapons, blast peril or emergency distress; Soroca Fortress and the real riverside remain intact. The women remain calm and focused on each other without glorifying harm. Ellie and ECE stand cheek-to-cheek without mouth contact and link one hand pair, Radiance gives a playful rival side glance, and Alia gestures everyone inward. No kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, flags, crowns, coats of arms, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 3156,
+      "promptSha256": "66C2E33F1209DA822E9E19889A1FA25A60B2D08133421E465490429F1CD3E766",
+      "archiveStem": "1957-moldova-soroca-fortress-dniester-raze-adjacent-three-quarter"
+    },
+    {
+      "scene": 1958,
+      "cameraRoll": 98,
+      "framing": "tight full-body",
+      "location": "Lower Prut Beleu Lake Biosphere Reserve",
+      "prompt": "SCENE 1958 - MOLDOVA, LOWER PRUT BELEU LAKE BIOSPHERE RESERVE - CAMERA CLOSENESS ROLL 98/100, TIGHT FULL-BODY. Create one wholly new original photorealistic cinematic vertical 9:16 RAZE high-fashion travel still, fully public-safe and non-explicit. The three attached images are project-owned AI-generated fictional character continuity art, not photographs or likenesses of real or private people. Use each attachment exactly once in authoritative order 938, 936, 937 only as broad fictional character-design guidance, never to recreate a real person. Show exactly four distinct original fictional adult women, each exactly age 21, female-only, with no other people. HARD LEFT-TO-RIGHT FACE LOCK: Black Alia, blonde Radiance, dark-haired Ellie, brunette AI ECE. Keep Ellie and ECE distinct; never swap, clone, merge, replace or age-shift a character. Place the tightly linked quartet on a broad dry level protected observation deck at Moldova's Lower Prut Beleu Lake reserve, with open lake water, reed beds, low wetland islands and long golden-green horizon unmistakably readable, while showing no wildlife, boats, flags, signs or sacred structures. Use a low diagonal tight head-to-toe camera that keeps every face, hand, aggressively shortened upper-thigh silhouette, leg, dramatic boot and heel crisp and complete. Alia wears a bronze-black fitted halter mini; Radiance a pale-rose sleeveless cocktail mini; Ellie a turquoise-black cropped jacket with an ivory asymmetric skirt over opaque shorts; ECE a plum-emerald high-neck short romper. Every garment is fully opaque, securely lined and non-revealing. Star-hardware roll 15/100 and knee-high-hosiery roll 1/100 apply: add original split-star heel pins and waist clasps, plus sleek opaque monochrome knee-high hosiery visible as one clean cuff above each boot. Rainbow-stockings, knee-high-rainbows, large split-star-emblem and RAZE type-band rolls did not apply. The statement-boot selector applies exclusively to this scene: give all four distinct dramatic knee-high RAZE fashion boots in bronze, pearl, teal and plum, with readable RAZE lettering, stable architectural split-star heels and every boot fully visible. Per-character RAZE STAR branding selects Alia and ECE only: each has one clean original RAZE star split-star mark printed on one hosiery cuff; Radiance and Ellie have no character mark. No background-damage roll applies. Alia and Radiance stand cheek-to-cheek in a secure side embrace without mouth contact, Ellie and ECE link hands and share a warm close gaze, and the quartet remains a lively asymmetrical cluster rather than a lineup. No kissing, intimate contact, underwear, exposure, nudity, sexualized emphasis, explicit sexuality, minors, real people, flags, crowns, coats of arms, sacred or political imagery, animals, bystanders, vehicles, third-party logos, Razer snake mark, collage, border, watermark or caption.",
+      "promptCharacters": 2901,
+      "promptSha256": "10BCD468AB14C386335296A1D5213F9700A1C4A6F8D2CD2BC107170C966DAD71",
+      "archiveStem": "1958-moldova-lower-prut-beleu-lake-raze-tight-full-body-statement-boots"
+    }
+  ],
+  "preDispatchGates": {
+    "actualTabsInspected": true,
+    "metaAccountVerifiedOnAllFourLanes": false,
+    "thinkingVerifiedOnAllFourLanes": false,
+    "xAccountVerified": true,
+    "xComposerBlankVerified": true,
+    "promptHashesVerifiedInComposer": false,
+    "anchorsAttachedExactOrder": false,
+    "gitLfsRemoteParityVerified": false
+  },
+  "sendClicks": 0,
+  "repeatSendClicks": 0,
+  "xPostClicks": 0,
+  "nextSafeAction": "Verify the four exact prompt hashes and ordered anchor hashes, commit and push this preparation checkpoint, prove local, origin and draft PR parity, navigate the four completed Luxembourg Meta tabs to fresh visible composers alongside the blank @dogramaci X composer, verify account leesha007 and Thinking on every lane, fill each exact prompt, attach anchors 938, 936 and 937 exactly once in that order, capture visible staging evidence, commit and remote-verify, then dispatch each lane exactly once under the standing authorization."
+}

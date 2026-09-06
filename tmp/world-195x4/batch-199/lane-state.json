@@ -1,0 +1,72 @@
+{
+  "batch": 199,
+  "country": "India",
+  "status": "in_progress",
+  "lastUpdatedAt": "2026-08-02T20:10:00.000Z",
+  "blockedFoundationGroup": {
+    "requestId": "bcbe1b97-2546-477c-973b-9c666f01faad",
+    "outcome": "output_blocked",
+    "moderationCategory": "sexual",
+    "suspectedTermFamilyChanged": "loaded silhouette and exposed-skin wording",
+    "followupOutcome": "clean knee-length single-piece foundations succeeded in all four lanes"
+  },
+  "blockedAttempts": [
+    {
+      "sceneNumber": 817,
+      "stage": "silhouette_pass_1_on_relationship_source",
+      "outcome": "output_blocked",
+      "moderationCategory": "sexual",
+      "requestId": "22ff9349-2a9f-4c3b-944c-8914a2fea74c",
+      "suspectedTermFamily": "hem refinement applied to a visible celebration-kiss source",
+      "exactPrompt": "Silhouette-only precision edit of the supplied image. Change exactly one thing: lift the bottom edge of each of the three tailored opaque dresses by approximately two centimeters. Preserve every other visible detail unchanged, including the same three adult women, faces, hair, body proportions, poses, existing affectionate arrangement, hands, clothing above the bottom edges, colors, trim, props, Hawa Mahal setting, camera, lighting, anatomy, and complete footwear. Add nothing and remove nothing else."
+    },
+    {
+      "sceneNumber": 817,
+      "stage": "restore_relationship_after_silhouette_pass_3",
+      "outcome": "output_blocked",
+      "moderationCategory": "sexual",
+      "requestId": "bacbd246-e689-446f-bba8-57ab040ecb4a",
+      "suspectedTermFamily": "face-to-face celebration-kiss wording on shortened fashion source",
+      "exactPrompt": "Relationship-only precision edit of the supplied Jaipur fashion image. Keep the same three adult women, faces, hair, clothing, hemlines, role details, props, Hawa Mahal location, lighting, camera, anatomy, and complete footwear unchanged. Adjust only safe facial orientation and arm placement: the East Asian woman and Black woman exchange a brief closed-mouth celebration kiss with both profiles readable and one linked hand; the blonde woman remains beside them holding the wind disc, keeps her free hand linked into the trio, and gives a playful affectionate side-eye. Mainstream fashion editorial."
+    },
+    {
+      "sceneNumber": 817,
+      "stage": "triggered_details_composite",
+      "outcome": "output_blocked",
+      "moderationCategory": "sexual",
+      "requestId": "8c77a6b4-173a-4ce3-beb7-ca939a8b7ba8",
+      "suspectedTermFamily": "overloaded interaction wording combined with ribbon and chain accessories",
+      "exactPrompt": "Triggered-detail precision edit of the supplied Jaipur aircrew image. Change exactly one design family: make the stored deterministic rolled styling visibly readable. Radiance gains one small abstract thorn-rose line tattoo on the naturally visible outer shoulder and uses a feather quill as a harmless pointer over the unreadable wind-disc map; a broad silk signal ribbon remains visibly slack across all three visible hands. Radiance and one partner wear separate jeweled chain anklets whose loose tails merely align near their shoes. Ellie gains an identity-preserving sculptural indigo bob with a restrained saffron-glow underlayer, a fine secular collarbone chain, and glossy opaque opera gloves with decorative wrist-ring hardware. Alia gains a high dark-auburn braided ponytail flowing into her canonical curls. Preserve exactly the same three clearly adult identities, cheek kiss, playful side-eye, linked hands, open-waist navel-revealing opaque garments, hemlines, palette, aircrew roles, mission discs, Hawa Mahal, camera, light, anatomy, and complete shoes. Jewelry and ribbon stay loose and removable; no restraint. No text, logos, extra people, added garment layers, literal flags, sacred or official symbols."
+    }
+  ],
+  "lanes": [
+    {
+      "number": 816,
+      "status": "final_valid",
+      "nextPass": null,
+      "workingFile": "816-final.png",
+      "sha256": "9acdcd8a303c22d8093f89fe126f50bb3b2a240178debbfc51b651cb5083db77"
+    },
+    {
+      "number": 817,
+      "status": "final_valid",
+      "nextPass": null,
+      "workingFile": "817-final.png",
+      "sha256": "f384b3aae80be8fe3e29c0477e3c4551e6d3697abb98499d611fcb8cb5accc00"
+    },
+    {
+      "number": 818,
+      "status": "final_valid",
+      "nextPass": null,
+      "workingFile": "818-final.png",
+      "sha256": "d3b938bb855aec20aa11b978fda5aac0d350274a1d896487d0f2609c36956b07"
+    },
+    {
+      "number": 819,
+      "status": "final_valid",
+      "nextPass": null,
+      "workingFile": "819-final.png",
+      "sha256": "6d82f5a597a14981a5c7c8aba7fbeaba463d46db4759ba75f134762a9788c604"
+    }
+  ]
+}

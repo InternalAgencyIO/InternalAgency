@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "batch": 499,
+  "atUtc": "2026-09-06 17:06:00 UTC",
+  "state": "three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap",
+  "primaryResults": {
+    "2023": "ChatGPT output selected after visual QA",
+    "2024": "Original identity swap and first retry wrong Ellie face, final retry staged",
+    "2025": "Meta original selected after output-blocked ChatGPT pass",
+    "2026": "Meta original selected because ChatGPT widened the fixed close crop to add shoes"
+  },
+  "chatgptInvocations": 3,
+  "chatgptReturnedOutputs": 2,
+  "chatgptBlockedOutputs": 1,
+  "metaConfirmedSends": 5,
+  "metaRetriesUsed": 1,
+  "metaRetriesPrepared": 1,
+  "oldTerminalPromptUrlsReopened": 0,
+  "confirmedPromptsResent": 0,
+  "nativeVisibleMediaUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/707406630_28464158943274785_3035742872792838914_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=109&_nc_ohc=O2y5zOtG_rQQ7kNvwHwTZHz&sdl=0&ccb=14-4&oh=00_AQKdM1eyDzw1jd3U5ilxE5Cy1gIjWbYcblOQVf_JiFuL8g&oe=6A9F5E49&_nc_sid=a21977",
+  "nativeRawBytesMissing": true,
+  "metaEvidenceAndWorkTabs": [
+    {
+      "id": "1",
+      "providerTabId": "0bbe433a-e734-420b-9fdf-3b7f25513a03",
+      "title": "707406630_28464158943274785_3035742872792838914_n.webp (1152×2048)",
+      "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/707406630_28464158943274785_3035742872792838914_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=109&_nc_ohc=O2y5zOtG_rQQ7kNvwHwTZHz&sdl=0&ccb=14-4&oh=00_AQKdM1eyDzw1jd3U5ilxE5Cy1gIjWbYcblOQVf_JiFuL8g&oe=6A9F5E49&_nc_sid=a21977"
+    },
+    {
+      "id": "2",
+      "providerTabId": "browser-use:9bd6e7fc-92d2-48e2-9450-a2475f1eef40",
+      "title": "Meta AI",
+      "url": "https://www.meta.ai/"
+    },
+    {
+      "id": "3",
+      "providerTabId": "browser-use:31f69551-0a9b-4d54-a3da-e8fb3a5b287d",
+      "title": "Meta AI",
+      "url": "https://www.meta.ai/"
+    },
+    {
+      "id": "4",
+      "providerTabId": "browser-use:d4d22c3f-837e-4156-bfd3-6c84f68c0c56",
+      "title": "Meta AI",
+      "url": "https://www.meta.ai/"
+    }
+  ],
+  "xTab": {
+    "id": "5",
+    "providerTabId": "browser-use:72dd01d6-dadc-49ff-a598-a4fafa870bef",
+    "title": "(1) Home / X",
+    "url": "https://x.com/compose/post"
+  },
+  "tabsMarkedHandoff": true,
+  "archiveGapAudit": "assets/lore/starlight-era/provider-evidence/batch-499-oman/secondary-raw-browser-recovery-audit.json",
+  "xPublicationEligible": false,
+  "latestVerifiedXUrl": "https://x.com/dogramaci/status/2096609769708519655",
+  "nextSafeAction": "Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."
+}

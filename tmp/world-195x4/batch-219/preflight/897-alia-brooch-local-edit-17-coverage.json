@@ -1,0 +1,36 @@
+{
+  "schema": "world-195x4-scene-897-alia-brooch-edit-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "sourceImage": {
+    "file": "tmp/world-195x4/batch-219/staging/897-brooch-edit-16-stage.png",
+    "bytes": 2310909,
+    "sha256": "abf4d04dcb6dd52663fe1aa6a47a7e58b989c014dd4a3f497421c9df2ef4c08e",
+    "width": 941,
+    "height": 1672
+  },
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-alia-brooch-local-edit-17.txt",
+  "promptSha256": "a55db88c3a1394013de7ee55d8a368600bffad0fa83080769aea6994ee67284a",
+  "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No moderation block; second sequential local detail edit checked against current corpus.",
+  "positiveRequirementDeletionCount": 0,
+  "exactTarget": "gold starburst on dark-skinned rightmost Alia's inner left red shoulder beneath blonde Radiance's closed white glove",
+  "preserved": {
+    "allFourteenTriggeredRolls": true,
+    "originalTriangle": true,
+    "foreheadContact": true,
+    "twoVisibleNavels": true,
+    "boldWardrobes": true,
+    "pawsLapCopilot": true,
+    "visibleWand": true,
+    "SantaAnaTheatre": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

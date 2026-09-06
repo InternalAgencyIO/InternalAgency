@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "batch": 470,
+  "country": "Andorra",
+  "scene": 1910,
+  "state": "thinking-occurrence-dispatched-once-terminal-valid-and-one-pass-accepted",
+  "dispatchedAtUtc": "2026-08-31T10:53:23.830Z",
+  "provider": {
+    "name": "Meta AI through the in-app Browser only",
+    "tabId": "31",
+    "url": "https://www.meta.ai/prompt/8b1c9f72-2a62-4d63-9e5b-0e35de588f8e",
+    "signedInAccount": "leesha007",
+    "mode": "Thinking",
+    "promptSha256": "3EAFACA857F9833110946D950C1DAEAAEB415238D57A92D739B23257930FFD07",
+    "orderedIdentityAnchors": [938, 936, 937],
+    "anchorFilenameCount": [1, 1, 1],
+    "sendClicks": 1,
+    "repeatSendClicks": 0,
+    "terminalMediaAlt": "gallery/alpine_fashion_quartet.webp",
+    "visibleDownloadControlCount": 1,
+    "terminalRefusal": false,
+    "providerRawAssetCount": 0
+  },
+  "providerEvidence": [
+    {
+      "role": "rendering-after-dispatch",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1910-meta-thinking-rendering-after-dispatch.png",
+      "sha256": "66D222656DF1E537B4563C50972CD3984C7A8DE87336C5603B7D6053081CA8CA",
+      "bytes": 49458,
+      "dimensions": "804x1039"
+    },
+    {
+      "role": "terminal-page",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1910-meta-thinking-terminal-page.png",
+      "sha256": "B0988410A6A5FD16178BE3363DF708D3A9F506670B58FFFB57432F3DDEF27A52",
+      "bytes": 122075,
+      "dimensions": "804x1039"
+    },
+    {
+      "role": "terminal-media-viewer",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/scene-1910-meta-thinking-terminal-media-viewer.png",
+      "sha256": "240E740F8558BF87EE1AE91197C8BB11DD80EB65A24E0BF88310ACABAA89C87D",
+      "bytes": 105403,
+      "dimensions": "804x1039"
+    }
+  ],
+  "rawBytesObservation": "The visible provider Download control did not yield a supported browser download event. No provider API, direct HTTP, CLI, hidden-state access, or alternate browser was used; rendered page and media-viewer evidence are the preserved provider record.",
+  "technicalQa": {
+    "terminalImagePresent": true,
+    "exactlyFourAdultWomen": true,
+    "publicSafeOpaqueWardrobe": true,
+    "stronglyShortenedHems": true,
+    "kneeHighHosiery": true,
+    "razeBrandElementsVisible": true,
+    "splitStarElementsVisible": true,
+    "corruptOrDuplicate": false,
+    "unsafeOrExplicit": false,
+    "materiallyWrongCast": false,
+    "result": "technically-valid"
+  },
+  "chatgptOnePass": {
+    "passesRequested": 1,
+    "passesCompleted": 1,
+    "additionalPassesPermitted": 0,
+    "editPromptSha256": "7FFCE1088FA137EA4A726DA9EEA09E18AFB7F11356FCD26247E2745A19BF5430",
+    "editPromptCharacters": 1223,
+    "selectedAsset": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/1910-andorra-sorteny-raze-chatgpt-hemline-one-pass.png",
+    "selectedAssetSha256": "AEC69E260D57276B1A6D74F74CDA4F5E440B24D2CCB8BB9C378343BCB1C49666",
+    "selectedAssetBytes": 2494323,
+    "selectedAssetDimensions": "941x1672",
+    "qaResult": "accepted-user-relaxed-publication-clean"
+  },
+  "xStateAtDispatch": {
+    "tabId": "32",
+    "account": "@dogramaci",
+    "composerBlank": true,
+    "postButtonDisabled": true,
+    "mediaPreviewCount": 0,
+    "postClicked": false
+  },
+  "nextSafeAction": "Close Batch 470 QA, archive the one-pass outcomes and accessibility records, remote-verify Git/LFS parity, then stage but do not post the strongest non-duplicate Andorra-Albania trio pending fresh X-specific authorization."
+}

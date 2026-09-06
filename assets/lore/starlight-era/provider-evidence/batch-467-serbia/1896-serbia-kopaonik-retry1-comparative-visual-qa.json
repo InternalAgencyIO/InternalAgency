@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "scene": 1896,
+  "retryNumber": 1,
+  "candidates": [
+    {
+      "role": "meta_untouched_unused",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1896-serbia-kopaonik-meta-retry1-provider-raw.png",
+      "sha256": "3D6576DFAB077BF0B27A151B3DD05BB7F7AC5A8F353B71582B875B30DDB23A85",
+      "dimensions": "1013x1802"
+    },
+    {
+      "role": "chatgpt_hemline_one_pass_unused",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1896-serbia-kopaonik-meta-retry1-chatgpt-hemline-one-pass.png",
+      "sha256": "922D41C1F5D341ED1F48F609A6ED80C89F57CFCB95A12D37C24F87025B515FF1",
+      "dimensions": "941x1672"
+    }
+  ],
+  "orientationCheck": "pass-near-exact-vertical-9:16",
+  "castCheck": "pass-exactly-four-adult-women",
+  "faceManifestCheck": "hard-fail-second-and-fourth-identity-assignment",
+  "locationCheck": "pass-Kopaonik-readable",
+  "cameraCheck": "pass-intermediate-no-footwear",
+  "choreographyCheck": "fail-Radiance-directs-reassurance-toward-second-position-ECE-not-fourth-position-Ellie",
+  "stylingCheck": "pass-one-pass-edit-strongly-shortens-opaque-public-safe-silhouettes",
+  "safetyCheck": "pass-public-safe",
+  "decision": "reject-both-second-retry-eligible",
+  "accepted": false
+}

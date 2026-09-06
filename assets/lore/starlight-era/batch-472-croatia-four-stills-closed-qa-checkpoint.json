@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "batch": 472,
+  "country": "Croatia",
+  "state": "closed-four-archive-accepted-three-clean-publication-candidates-one-archive-only",
+  "closedAtUtc": "2026-08-31T16:33:41.6030730Z",
+  "sceneIds": [1915, 1916, 1917, 1918],
+  "providerOccurrenceCount": 5,
+  "agentMetaSendClicks": 5,
+  "agentRepeatMetaSendClicks": 0,
+  "providerRawAssetCount": 0,
+  "chatgptPassRequestsIssued": 4,
+  "chatgptCleanOutputsSaved": 3,
+  "chatgptOutputModerationBlockedSceneIds": [1917],
+  "additionalChatgptPassesPermitted": 0,
+  "acceptedArchiveSceneIds": [1915, 1916, 1917, 1918],
+  "cleanPublicationCandidateSceneIds": [1915, 1916, 1918],
+  "archiveOnlySceneIds": [1917],
+  "retryEligibleSceneIds": [],
+  "selectedAssets": [
+    {"scene": 1915, "role": "clean-publication-candidate-chatgpt-one-pass", "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1915-chatgpt-strong-shortening-pass-1.png", "sha256": "A50B39628755EA37BE9B3314FC61CDA29FE18B202A8813BEA5A85FDA30D8F801"},
+    {"scene": 1916, "role": "clean-publication-candidate-chatgpt-one-pass", "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1916-chatgpt-strong-shortening-pass-1.png", "sha256": "75CAE91814D06D51EEA00C23736C7DCD5C4B03FB3E6CFDA022BF7DF5BBE1F57D"},
+    {"scene": 1918, "role": "clean-publication-candidate-chatgpt-one-pass", "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1918-chatgpt-strong-shortening-pass-1.png", "sha256": "C103408D14A62F015EAB82C19FA10782038D9CB3587584D4E8BBD0ED4F660D95"}
+  ],
+  "archiveOnlyAssets": [
+    {"scene": 1917, "role": "archive-only-provider-viewer-evidence-after-one-pass-output-block", "path": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/scene-1917-meta-thinking-occurrence-0-media-viewer.png", "sha256": "935AD7082F39F3D9726FAE3C05EE486AD297F344C1BBEE124195F9F265FCE0A3"}
+  ],
+  "qaAuthority": {
+    "directive": "Accept almost anything after one strong shortening pass.",
+    "hardUnusableOnly": ["corrupt", "duplicate", "unsafe or explicit", "no image", "materially wrong cast"],
+    "nonBlockingDeviations": ["framing", "choreography", "location detail", "public-safe wardrobe detail", "brand-text fidelity"],
+    "decision": "All four selected Meta occurrences pass the hard checks. Scenes 1915, 1916 and 1918 have clean ChatGPT one-pass outputs. Scene 1917 consumed its single pass at the output-stage moderation block and remains archive-accepted from visible Meta viewer evidence, with no further pass or retry permitted."
+  },
+  "canonicalContradictionResolved": "Scene 1915's initial no-image refusal permitted one separately prepared public-safe retry; retry 1 produced technically valid media, so the second Meta retry is not justified. The supported Meta download surfaces did not return provider bytes, and an unrelated user asset returned by the page-asset surface was excluded and removed before Git staging. UI-bearing clip attempts remain unused evidence only.",
+  "countryPair": {
+    "eligibleNow": true,
+    "primaryCountry": "Bosnia and Herzegovina",
+    "secondaryCountry": "Croatia",
+    "candidateSceneOrder": [1913, 1914, 1915],
+    "candidateAssetSha256": [
+      "5DE4E0F2BE54EED32409368C3BA37DBCE801DE8863960AFE0EDD78E02C487CFA",
+      "F7454E14418E0C86AF8FAF91542AB0C0EAA45BBB4993E372B5BBA501AAF6A4CF",
+      "A50B39628755EA37BE9B3314FC61CDA29FE18B202A8813BEA5A85FDA30D8F801"
+    ],
+    "duplicateGate": "No candidate hash occurs in x-publish-ledger.json or x-draft-ledger.json. Bosnia hashes occur only as unpublished Batch 471 candidate metadata in world-x-publish-ledger.json.",
+    "rule": "Use exactly two Bosnia and Herzegovina assets plus one Croatia asset; verify @dogramaci, blank composer, media count, alt text and hash order again before final Post."
+  },
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/provider-ledger.json",
+  "onePassOutcomesCheckpoint": "assets/lore/starlight-era/batch-472-croatia-chatgpt-one-pass-progress-checkpoint.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/accessibility-sidecars.json",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-472-croatia/closure-evidence-manifest.json",
+  "nextSafeAction": "Commit and remote-verify this closure and its LFS objects, then stage exactly scenes 1913, 1914 and 1915 with their accessibility text in the existing blank @dogramaci X composer. Stop immediately before final Post for action-time confirmation."
+}

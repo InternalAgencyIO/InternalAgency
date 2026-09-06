@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "batch": 482,
+  "country": "Moldova",
+  "scene": 1956,
+  "state": "meta-occurrence-2-provider-safe-retry-staged-no-send",
+  "stagedAtUtc": "2026-09-04T13:11:37.354Z",
+  "retryPolicy": {
+    "maxMetaRetries": 2,
+    "hardFailureOnly": true,
+    "occurrence1WasHardFailure": true,
+    "retryOrdinal": 1,
+    "remainingRetriesAfterThisDispatch": 1
+  },
+  "occurrence1": {
+    "promptSha256": "D14DDBF713B234F099F284E8CA50277887AD300E09FF498BFDA9194EFED978D9",
+    "providerUrl": "https://www.meta.ai/prompt/0ab53fd7-2b7e-484f-a632-0f5255bf0181",
+    "sendClicks": 1,
+    "repeatSendClicks": 0,
+    "artifactReturned": false,
+    "failureClass": "hard-failure-no-image",
+    "providerMessage": "I wasn't able to create that exact image as described."
+  },
+  "occurrence2": {
+    "tabId": "20",
+    "freshComposer": true,
+    "promptSha256": "2EF3242D13311AEAE79DD2DDCDF4FF2E00403FD0B56BFCC69DF86EFE5063E6F5",
+    "promptCharacters": 3016,
+    "promptExact": true,
+    "attachmentPlaceholderSuffix": "three spaces",
+    "orderedAnchors": [
+      938,
+      936,
+      937
+    ],
+    "attachmentCount": 3,
+    "thinkingSelected": true,
+    "account": "leesha007",
+    "sendEnabled": true,
+    "sendClicks": 0,
+    "screenshot": {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/scene-1956-meta-occurrence-2-staged-visible.jpg",
+      "sha256": "60BC02689EC0E26106C473C2BE4C5A4D1A46C9A113CDC49588E141A8DC356F5A",
+      "bytes": 126498,
+      "dimensions": "1280x720",
+      "rawFormat": "JPEG/JFIF"
+    }
+  },
+  "providerSafeChanges": [
+    "strongly shortened upper-thigh silhouettes changed to polished mid-thigh silhouettes",
+    "Alia upper-arm tattoo changed to an upper-sleeve applique",
+    "distant skyline damage effects suppressed in favor of clean air, calm daylight and the natural landscape"
+  ],
+  "xComposer": {
+    "account": "@dogramaci",
+    "blank": true,
+    "postClicks": 0
+  },
+  "blockedPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/blocked-prompts.json",
+  "exactPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-482-moldova/meta-retry-prompts-and-outcomes.md",
+  "nextSafeAction": "Commit and remote-verify the occurrence-1 hard-failure evidence, three valid raw Meta downloads and this exact occurrence-2 staging state. Then recheck account leesha007, Thinking, exact prompt hash, ordered anchors 938-936-937, Send enabled and blank @dogramaci X composer; if unchanged, click the scene-1956 occurrence-2 Send control exactly once."
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "batch": 483,
+  "country": "Monaco",
+  "state": "four-stills-closed-qa-one-meta-hard-failure-one-safe-retry-four-chatgpt-one-passes-no-x-transmission",
+  "closedAtUtc": "2026-09-04T14:36:00Z",
+  "sceneIds": [1959, 1960, 1961, 1962],
+  "providerUrls": [
+    "https://www.meta.ai/prompt/d7c310ff-3569-4593-a88e-75c41f365a89",
+    "https://www.meta.ai/prompt/9a56c552-e355-45db-aff4-6c2677043c72",
+    "https://www.meta.ai/prompt/677fc3e9-80f2-4295-ad1f-9a0a0d511301",
+    "https://www.meta.ai/prompt/003c7a72-1f48-4410-a2da-0b21cd80929f"
+  ],
+  "initialFailedProviderUrl": "https://www.meta.ai/prompt/3aada520-8143-4e85-9658-67e39cb15926",
+  "orderedAnchors": [938, 936, 937],
+  "faceManifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+  "meta": {
+    "account": "leesha007",
+    "mode": "Thinking",
+    "initialOccurrences": 4,
+    "hardFailures": 1,
+    "retries": 1,
+    "successfulRawAssets": 4,
+    "rawFormats": ["JPEG/JFIF", "JPEG/JFIF", "JPEG/JFIF", "JPEG/JFIF"],
+    "domLabels": [
+      "gallery/four_women_marina_scene.webp",
+      "gallery/monte_carlo_fashion_group.webp",
+      "gallery/monaco_fashion_group.webp",
+      "gallery/fontvieille_harbor_terrace.webp"
+    ]
+  },
+  "selectedAssets": [
+    {"scene": 1959, "path": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/1959-monaco-port-hercule-raze-tight-full-body-chatgpt-one-strong-shortening-pass.png", "sha256": "303CC2FEEF42B7DFB16A8523062320AB177BC618133395531B99D766E1FF2192", "bytes": 2600800, "width": 941, "height": 1672},
+    {"scene": 1960, "path": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/1960-monaco-casino-square-raze-tight-hemline-close-chatgpt-one-strong-shortening-pass.png", "sha256": "D8C5D6CB693323BF96CF6D378A50E106BAB418EE8698D019ADCBF4EA908CF0C6", "bytes": 2433041, "width": 941, "height": 1672},
+    {"scene": 1961, "path": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/1961-monaco-larvotto-promenade-raze-adjacent-three-quarter-chatgpt-one-strong-shortening-pass.png", "sha256": "2573ABA622DAEE43C146A269281D29C54685B78CDFD3DB429A75D25B4A53D677", "bytes": 2608966, "width": 941, "height": 1672},
+    {"scene": 1962, "path": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/1962-monaco-fontvieille-harbor-raze-tight-full-body-statement-boots-chatgpt-one-strong-shortening-pass.png", "sha256": "D614543BBB8BA13F2F759729BE1862C891A8CFAB78AAA30B15383977A6B3489B", "bytes": 2503308, "width": 941, "height": 1672}
+  ],
+  "qa": {
+    "selectedAssetCount": 4,
+    "eachShowsExactlyFourFictionalAdultWomen": true,
+    "publicSafeAndNonExplicitAll": true,
+    "opaqueCoverageAll": true,
+    "fullFootwearVisibleAll": true,
+    "recognizableMonacoSettingAll": true,
+    "strongShorteningVisibleAll": true,
+    "corruptAssets": 0,
+    "materiallyWrongCastAssets": 0,
+    "archiveImagesScanned": 1922,
+    "selectedHashOccurrences": [1, 1, 1, 1],
+    "duplicatesOutsideCanonicalPaths": 0
+  },
+  "chatgpt": {
+    "builtInImageGenerator": true,
+    "requestsIssued": 4,
+    "completedOutputs": 4,
+    "strongShorteningPassesPerSelectedMetaOccurrence": 1,
+    "additionalPassesPermitted": 0
+  },
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/provider-ledger.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/accessibility-sidecars.json",
+  "blockedPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/blocked-prompts.json",
+  "chatgptPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/chatgpt-one-pass-prompts-and-outcomes.json",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-483-monaco/closure-evidence-manifest.json",
+  "closureEvidenceFileCount": 31,
+  "closureEvidenceTotalBytes": 12872647,
+  "closureEvidenceInventorySha256": "D9BEF3A2132961909966665B315219DCB36FF9B94B5AAD983F6D1517A18B0970",
+  "x": {"account": "@dogramaci", "composerBlank": true, "postClicks": 0, "monacoTransmissionCount": 0},
+  "guardian": {"id": "guardian-x-assistant-mission", "status": "PAUSED", "leftUntouched": true},
+  "canonicalContradictions": [
+    "Meta DOM labels the completed media as WEBP, while the visible Download controls delivered JPEG/JFIF bytes. The exact UI-delivered bytes are canonical.",
+    "Scene 1961 occurrence 1 hard-failed on the distant-damage formulation; occurrence 2 used a fresh composer, preserved the quartet, location, camera, fashion and love beat, suppressed the background effect, and succeeded. The terminal first occurrence was not resent.",
+    "The world X ledger's stale top-level account, Chrome-binding and pendingPost fields are superseded by the 194-entry posts array and visible @dogramaci authority."
+  ],
+  "nextSafeAction": "Commit only the Batch 483 closure records and media, push all required LFS objects, and verify local, origin and draft PR head parity plus an empty LFS push dry run. Preserve all four selected assets as unused for X; do not stage a Monaco post until the next zero-post country is completed under the 2+1 pairing contract."
+}

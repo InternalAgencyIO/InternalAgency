@@ -1,0 +1,43 @@
+{
+  "schema": "world-195x4-recovery-9-feasible-focal-action-v1",
+  "batch": 219,
+  "sceneNumber": 897,
+  "status": "passed-100-percent-meaning-preserved",
+  "promptFile": "tmp/world-195x4/batch-219/prompts/897-foundation-recovery-9.txt",
+  "promptSha256": "13a6e67e42507d8918785569eff1274906b2b6cd0fae7bd67ce5bf8a6edeae92",
+  "blockedCorpusSha256": "6b546f70fbc4c532e6cc8a268cef6d7714faeb3171ade33b4c78634f9c450ff8",
+  "cache": "tmp/world-195x4/batch-219/preflight/blocklist-transform-6b546f70fbc4c532e6cc8a268cef6d7714faeb3171ade33b4c78634f9c450ff8.json",
+  "cacheRecompiled": false,
+  "cacheReuseReason": "No new moderation block; one visual reject only.",
+  "blocklistSubstitutionCount": 0,
+  "positiveRequirementDeletionCount": 0,
+  "mainFocalAction": "MAIN FOCAL ACTION: blonde Radiance stands immediately beside dark-skinned Alia and is visibly ACTIVE, lifting her right white fashion glove across the small gap to adjust one large gold clasp on Alia's near red shoulder. The glove and clasp are centered and unobscured. Radiance's left hand holds the slim decorative wand low. Alia uses only one hand on Radiance's red cape edge and keeps her other hand relaxed at her own side. At left, Ellie uses one hand on Radiance's opposite cape edge while gently leaning her forehead beside seated ECE; PAWS stays safely on ECE's lap. Show Radiance adjusting Alia—not Alia using two hands on Radiance. Keep Radiance's navel jewel and Ellie's second visible navel, all four distinct bold outfits, clean faces, natural hands and complete shoes.",
+  "feasibleTableau": "ORIGINAL CONNECTION TABLEAU — this controls the pose, never replace it with pointing or a briefing lineup: left-to-right seated ECE with PAWS, leaning Ellie, center Radiance, right-side Alia. Ellie and ECE share the stored close forehead look. Ellie's one styling hand adjusts Radiance's left combined cape-and-shoulder edge. Alia's one styling hand adjusts Radiance's right cape edge. Radiance's raised right fashion glove adjusts Alia's prominent near-shoulder clasp. This creates the reciprocal Radiance-Ellie-Alia styling triangle while ECE remains warmly connected through Ellie and PAWS. Every other hand stays assigned exactly once.\n\nFOUR BOLD DISTINCT COUTURE SILHOUETTES:",
+  "priorCandidate": {
+    "file": "tmp/world-195x4/batch-219/rejected/attempt-8/897-recovery-8-rejected.png",
+    "bytes": 2407243,
+    "sha256": "10c04c962111870579b6b4c7b2663a62800d61a64dc427793209d3937d1dbc78",
+    "width": 941,
+    "height": 1672,
+    "reasons": [
+      "Radiance remains passive with both white-gloved hands down",
+      "Alia again performs both visible shoulder/cape adjustments",
+      "all other scene-897 gates pass"
+    ]
+  },
+  "preserved": {
+    "allTriggeredRolls": true,
+    "originalTriangleMeaning": true,
+    "foreheadLook": true,
+    "navelJewel": true,
+    "exactlyTwoIntentionalNavels": true,
+    "boldDistinctWardrobes": true,
+    "reciprocalECEConnection": true,
+    "pawsLapCopilotAndReciprocation": true,
+    "frozenAcceptedScenes": [
+      896,
+      898,
+      899
+    ]
+  }
+}

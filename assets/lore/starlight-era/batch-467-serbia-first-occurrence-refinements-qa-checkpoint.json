@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "batch": 467,
+  "country": "Serbia",
+  "state": "first_occurrences_archived_single_chatgpt_passes_complete_comparative_qa_complete",
+  "qaAtUtc": "2026-08-31T06:39:00.000Z",
+  "chatgptPassContract": {
+    "technicallyValidMetaAssetCount": 4,
+    "passesRequired": 4,
+    "passesCompleted": 4,
+    "additionalPassesPermitted": 0
+  },
+  "accepted": [
+    {
+      "scene": 1895,
+      "selectedProvider": "ChatGPT image generator one-pass edit",
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-467-serbia/1895-serbia-djerdap-gorge-chatgpt-hemline-one-pass.png",
+      "sha256": "D9A43F780EECC2617A2B18E545AAECAE1F796F7795029827AAFA1E94F1A1E2B4"
+    }
+  ],
+  "terminalNoRetry": [
+    {
+      "scene": 1894,
+      "reason": "explicit no-byte refusal"
+    }
+  ],
+  "firstRetryEligible": [
+    {
+      "scene": 1896,
+      "reason": "both untouched and one-pass assets are not 9:16; required ECE-to-Alia clasp is absent",
+      "remainingMetaRetries": 2
+    },
+    {
+      "scene": 1897,
+      "reason": "Ellie and ECE faces are swapped against the binding manifest across all archived variants",
+      "remainingMetaRetries": 2
+    }
+  ],
+  "xPairEligible": false,
+  "xPairReason": "Only one Serbia scene is accepted; at least two non-duplicate accepted assets are required.",
+  "nextSafeAction": "Create fresh chats for materially revised scene-1896 and scene-1897 first-retry prompts, attach anchors 938, 936, 937 exactly once in that order, verify the live account and composers, then stop before Send for fresh confirmation."
+}

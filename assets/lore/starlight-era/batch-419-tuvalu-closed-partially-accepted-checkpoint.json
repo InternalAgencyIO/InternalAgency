@@ -1,0 +1,100 @@
+{
+  "schema_version": "starlight-checkpoint-v1",
+  "created_at_utc": "2026-08-26T16:03:32.050Z",
+  "authoritative_parent_commit": "951524a3a4191955c99244a5572f82560852633e",
+  "branch": "agent/starlight-progress-archive",
+  "draft_pr": 13,
+  "batch": 419,
+  "country": "Tuvalu",
+  "scene_range": [
+    1696,
+    1697,
+    1698,
+    1699
+  ],
+  "supersedes": "assets/lore/starlight-era/batch-419-tuvalu-four-lanes-staged-checkpoint.json",
+  "completed_country_cycles_since_last_x_cycle": 9,
+  "accepted_canonical_count_for_country": 2,
+  "target_accepted_count_for_country": 4,
+  "x_backlog_cycle_due": false,
+  "cycle_status": "closed-partially-accepted",
+  "scene_states": {
+    "1696": {
+      "status": "accepted-canonical-with-soft-deviation-sock-wearer-swap",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "prompt_sha256": "C6AFA501C84C37568E9B642BEB5C50456563C1D37299129C9695660490A7863C",
+      "camera_roll": 53,
+      "provider_url": "https://www.meta.ai/prompt/504a133f-d450-4e0c-a074-3bdd29a96bff",
+      "raw_asset_path": "assets/lore/starlight-era/1696-tuvalu-funafuti-lagoon-meta-raw.webp",
+      "sha256": "B7E149532845EB858A89E5D28C98072AA80530D97D7EBD1D81B21BC9675C4A99",
+      "width": 1152,
+      "height": 2048,
+      "qa_result": "accepted-canonical-with-soft-deviation-sock-wearer-swap"
+    },
+    "1697": {
+      "status": "accepted-canonical",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": true,
+      "prompt_sha256": "505BF2DCC8652E565FB58D9A033F2BAD18AC89538F855BB94701FF001C99FCBE",
+      "camera_roll": 54,
+      "provider_url": "https://www.meta.ai/prompt/db7686c4-3079-4818-ad11-05475d5f793f",
+      "raw_asset_path": "assets/lore/starlight-era/1697-tuvalu-funafuti-conservation-area-meta-raw.webp",
+      "sha256": "50C6D7F448B4E05E4D40B2F095AEB1743329DE9C8AF3100E1B2CE4BF385F0E94",
+      "width": 1152,
+      "height": 2048,
+      "qa_result": "accepted-canonical"
+    },
+    "1698": {
+      "status": "raw-output-hard-unusable-missing-mandatory-relationship-choreography",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "758DD6A05EA4EFE4A82751401F04C383A5DED6EC9BCABE6976A2352D8415964C",
+      "camera_roll": 71,
+      "provider_url": "https://www.meta.ai/prompt/37a9a748-b262-4ee8-b65d-7523b888537c",
+      "raw_asset_path": "assets/lore/starlight-era/1698-tuvalu-nanumea-atoll-meta-raw.webp",
+      "sha256": "FDBE128C024D055856B08BDD0FE702114BE61CE266EC5E34FE8821F4F747BF30",
+      "width": 1152,
+      "height": 2048,
+      "qa_result": "rejected-hard-unusable-missing-mandatory-relationship-choreography"
+    },
+    "1699": {
+      "status": "explicit-no-byte-refusal",
+      "attempt_consumed": true,
+      "resend_forbidden": true,
+      "accepted_canonical": false,
+      "prompt_sha256": "7BA982D008449818AEF7DEFB99D8888F228105F39A5DD87FAFB1A92EF10382EF",
+      "camera_roll": 96,
+      "provider_url": "https://www.meta.ai/prompt/adacf3d7-ef5e-470c-8cf7-ab90943a30dd"
+    }
+  },
+  "closure": {
+    "all_scenes_terminal": true,
+    "resend_forbidden_for_all_scenes": true,
+    "accepted_scenes": [
+      1696,
+      1697
+    ],
+    "unaccepted_scenes": [
+      1698,
+      1699
+    ],
+    "country_target_met": false
+  },
+  "next_campaign_position": {
+    "batch": 420,
+    "country": "Vatican City",
+    "scene_range": [
+      1700,
+      1701,
+      1702,
+      1703
+    ],
+    "source_precedent_batch": 349,
+    "source_precedent_country": "Vatican City"
+  },
+  "next_action": "Prepare Batch 420 Vatican City scenes 1700-1703 from authoritative Batch 349 precedent. Never reopen or resend Tuvalu scenes 1696-1699."
+}

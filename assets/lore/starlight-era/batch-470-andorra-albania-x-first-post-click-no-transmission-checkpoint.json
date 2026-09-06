@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "state": "first-authorized-post-click-confirmed-no-transmission-draft-preserved",
+  "account": "@dogramaci",
+  "clickedAtUtc": "2026-08-31T11:52:35.896Z",
+  "clickAudit": {
+    "visibleFinalGuards": {
+      "signedInAccount": true,
+      "exactCaption": true,
+      "mediaCount": 3,
+      "altTextCount": 3,
+      "madeWithAiLabel": true,
+      "dialogPostEnabled": true,
+      "matchingPostButtonCount": 1
+    },
+    "postClicks": 1,
+    "repeatPostClicks": 0,
+    "immediateOutcome": "Composer remained complete and visible; no sent alert, View post link, status URL, or composer closure appeared.",
+    "boundedObservationOutcome": "After an additional 2.5 seconds the composer, exact caption, three media items, three alt texts, and enabled Post button remained unchanged.",
+    "publicTransmissionCount": 0,
+    "transmissionUncertainDuringObservation": false,
+    "finalClassification": "confirmed-no-transmission"
+  },
+  "liveProfileVerification": {
+    "url": "https://x.com/dogramaci",
+    "loaded": true,
+    "visibleAccount": "@dogramaci",
+    "matchingExactCaption": false,
+    "matchingCountryPair": false,
+    "observedStatusIds": ["2094305918104023336", "2094372520635863436", "2094372290192454008"],
+    "newXPostUrl": null
+  },
+  "draftPreservation": {
+    "savePromptUsed": true,
+    "savedDraftVerified": true,
+    "exactCaptionVisibleInDrafts": true,
+    "pyreneanTextVisibleInDrafts": true,
+    "worldSeriesHashtagVisibleInDrafts": true,
+    "draftReopened": true,
+    "currentTabId": "33",
+    "currentComposerCaption": true,
+    "currentMediaCount": 3,
+    "currentAltTextCount": 3,
+    "madeWithAiLabelVisible": true,
+    "currentPostEnabled": true
+  },
+  "evidence": [
+    {
+      "role": "composer-after-first-click-no-transmission",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-after-first-post-click-no-transmission.png",
+      "sha256": "985C885386578072EE00C8287647A40CC6B58708C5875C3A12BDE2687FD7B387",
+      "bytes": 111378,
+      "dimensions": "1280x720"
+    },
+    {
+      "role": "exact-saved-draft-after-no-transmission",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-470-andorra/x-andorra-albania-saved-draft-after-no-transmission.png",
+      "sha256": "7E7AE9CBE50205C5512B8DE5D2DB7955336CC6DC12CEFFBBFC9352DE844D87F5",
+      "bytes": 89682,
+      "dimensions": "1280x720"
+    }
+  ],
+  "authorization": {
+    "priorAuthorizationText": "send authorized go",
+    "consumedByClick": true,
+    "mayClickPostAgain": false,
+    "requiredForRetry": "Fresh explicit X-specific authorization after this exact no-transmission state is reported."
+  },
+  "xPostUrls": [],
+  "nextSafeAction": "Commit and remote-verify this no-transmission checkpoint and its two LFS evidence files. Leave the exact saved draft visible and do not click Post again until the user supplies fresh explicit X-specific retry authorization."
+}

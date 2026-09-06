@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "batch": 393,
+  "country": "Cabo Verde",
+  "mission": "private jet aviation couture",
+  "ordinal": "1/2",
+  "status": "closed-4-of-4-pending-commit-push-parity",
+  "providerPolicy": "Meta AI exclusive for country generation and scene correction",
+  "faceAnchorManifest": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+  "faceAnchorSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D",
+  "sceneSelections": [
+    {
+      "scene": 1592,
+      "environment": "sunset",
+      "planet": "TRAPPIST-1 e",
+      "setting": "habitat interior",
+      "selectedMetaBank": 4,
+      "selectedMetaSha256": "F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-04/batch393-bank04-lane1-scene1592-asset-783508016-actual.webp",
+      "promptSha256": "4FB198092095C5BA400AB4F68EFE57B6B6FCB13B633496BFFEA49405724282C3",
+      "disposition": "provisional-ready"
+    },
+    {
+      "scene": 1593,
+      "environment": "sunset",
+      "planet": "TRAPPIST-1 e",
+      "setting": "protected exterior surface",
+      "selectedMetaBank": 3,
+      "selectedMetaSha256": "9D19FF1B52B0D17845FC5DF4C33D002D7F3DEDAD5402DA6E25E6B08966060232",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-03/lane-2/batch-393-bank-03-lane-2-scene-1593-output-1.webp",
+      "promptSha256": "81F8356EC98257F03067ACCC5621BB6AF112D894343231C81F08A33D4965FE69",
+      "disposition": "provisional-ready"
+    },
+    {
+      "scene": 1594,
+      "environment": "sunset",
+      "planet": "Kepler-186 f",
+      "setting": "habitat interior",
+      "selectedMetaBank": 4,
+      "selectedMetaSha256": "FF0246007055F4DF4C9E0E49BC47CABE0D77742005A7DDF5E5B1352CB7BE8925",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-04/batch393-bank04-lane3-scene1594-asset-783012263-actual.webp",
+      "promptSha256": "F22E848919EBCD25F0B4BE7E144691DA61DA25C963A78BB29263FAA74C1FDB4C",
+      "disposition": "provisional-ready"
+    },
+    {
+      "scene": 1595,
+      "environment": "golden-hour sunrise",
+      "planet": "Kepler-186 f",
+      "setting": "protected exterior surface",
+      "selectedMetaBank": 4,
+      "selectedMetaSha256": "5ED8934315B50E385691B68B8DCB1653D500FED5D1FD7F158193D3FC63F84608",
+      "sourcePath": "tmp/world-195x4/batch-393/raw/bank-04/batch393-bank04-lane4-scene1595-asset-782905651-actual.webp",
+      "promptSha256": "7863EA60B3840EF28E6A14029BF3514E4AEBD8F31E701A16B89BE542C819571A",
+      "disposition": "provisional-ready"
+    }
+  ],
+  "chatgptFinalHemRefinement": {
+    "observedAtUtc": "2026-08-21T05:04:00.2626490Z",
+    "provider": "ChatGPT built-in image generation",
+    "blacklistSnapshotSha256": "54E4DBF4EB31115943F0868AA959663097AB7A2C1963144D4496BC8312AD2F6D",
+    "referenceImageShas": [
+      "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    ],
+    "scenes": [
+      {
+        "scene": 1592,
+        "sourceMetaSha256": "F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328",
+        "primaryPromptPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1592-primary-prompt.txt",
+        "primaryPromptSha256": "88B5A995D47EF1DF17B2A86A7FD6656BADAE55FCD55D23B8D943E283AFA876DF",
+        "primaryOutcome": "output-moderation-blocked-no-bytes",
+        "primaryExactResponse": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 2d8717cf-d9d2-4f80-a040-7f35f1cad798. safety_violations=[sexual].",
+        "fallbackPromptPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1592-fallback-prompt.txt",
+        "fallbackPromptSha256": "C92D43D18E74CB5DFBFD12E21E1A7A9A006C92034F9702ADBF395C4FE89E69D2",
+        "fallbackOutcome": "output-moderation-blocked-no-bytes",
+        "fallbackExactResponse": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 0fa6149b-a6c6-4b94-aef5-ce2b6c219030. safety_violations=[sexual].",
+        "qaDisposition": "chatgpt-edit-cap-exhausted-meta-fallback",
+        "finalSelectedSha256": "F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328"
+      },
+      {
+        "scene": 1593,
+        "sourceMetaSha256": "9D19FF1B52B0D17845FC5DF4C33D002D7F3DEDAD5402DA6E25E6B08966060232",
+        "primaryPromptPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1593-primary-prompt.txt",
+        "primaryPromptSha256": "090D51206C2D46E1DB4AB940EB78CB3272E8304AD97BB6769F30E505D0027EC1",
+        "primaryOutcome": "media-returned",
+        "rawPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1593-chatgpt-final-primary.png",
+        "rawSha256": "560368DF9BE6098D1D973F05C600B347175BA5F8E6CAE004B160C052EF89290C",
+        "bytes": 2531662,
+        "width": 887,
+        "height": 1774,
+        "qaDisposition": "accepted-canonical-first-primary-no-retry",
+        "qa": {
+          "validMedia": true,
+          "clearlyAdultPublicSafeOpaque": true,
+          "fourDistinctAnchoredFaces": true,
+          "noCloneOrMerge": true,
+          "anatomySafe": true,
+          "compellingFashionRelationshipMission": true
+        },
+        "finalSelectedSha256": "560368DF9BE6098D1D973F05C600B347175BA5F8E6CAE004B160C052EF89290C"
+      },
+      {
+        "scene": 1594,
+        "sourceMetaSha256": "FF0246007055F4DF4C9E0E49BC47CABE0D77742005A7DDF5E5B1352CB7BE8925",
+        "primaryPromptPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1594-primary-prompt.txt",
+        "primaryPromptSha256": "482D5E660C77FCE841D79CAF70A6BBBFB0DFB843A5233E9F86507DA4D6D3A938",
+        "primaryOutcome": "output-moderation-blocked-no-bytes",
+        "primaryExactResponse": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 7c9f35a5-f8e0-41d2-9b5e-f421bf53f4bd. safety_violations=[sexual].",
+        "fallbackPromptPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1594-fallback-prompt.txt",
+        "fallbackPromptSha256": "800BE547A0C675876189F22A790B24CC7006A3BE2AA508669CB98C290917C7A1",
+        "fallbackOutcome": "output-moderation-blocked-no-bytes",
+        "fallbackExactResponse": "Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 2e907915-8855-4a0b-b9d9-c888a2acace6. safety_violations=[sexual].",
+        "qaDisposition": "chatgpt-edit-cap-exhausted-meta-fallback",
+        "finalSelectedSha256": "FF0246007055F4DF4C9E0E49BC47CABE0D77742005A7DDF5E5B1352CB7BE8925"
+      },
+      {
+        "scene": 1595,
+        "sourceMetaSha256": "5ED8934315B50E385691B68B8DCB1653D500FED5D1FD7F158193D3FC63F84608",
+        "primaryPromptPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1595-primary-prompt.txt",
+        "primaryPromptSha256": "C365B3793B6EE891BCBA531852DFD0DEB35AD1B3CEA6B01C9DFF6488A5E9D4FD",
+        "primaryOutcome": "media-returned",
+        "rawPath": "tmp/world-195x4/batch-393/raw/chatgpt-final/scene-1595-chatgpt-final-primary.png",
+        "rawSha256": "75AEC9F7E05C4C1BCBF8D8BE87B6C0D18FCDA342E1CCE562DA54C63ED8B29212",
+        "bytes": 2614225,
+        "width": 887,
+        "height": 1773,
+        "qaDisposition": "accepted-canonical-first-primary-no-retry",
+        "qa": {
+          "validMedia": true,
+          "clearlyAdultPublicSafeOpaque": true,
+          "fourDistinctAnchoredFaces": true,
+          "noCloneOrMerge": true,
+          "anatomySafe": true,
+          "compellingFashionRelationshipMission": true
+        },
+        "finalSelectedSha256": "75AEC9F7E05C4C1BCBF8D8BE87B6C0D18FCDA342E1CCE562DA54C63ED8B29212"
+      }
+    ]
+  },
+  "acceptedAssets": [
+    {
+      "scene": 1592,
+      "path": "assets/lore/starlight-era/1592-cabo-verde-trappist-sunset-private-jet-close-love-meta-final.webp",
+      "sha256": "F91FE267CC3E48C32FEA7E52A6475866833BBA6DDA3E3C21645DAEC7E0215328",
+      "bytes": 628410,
+      "provider": "Meta AI",
+      "pass": "chatgpt-edit-cap-exhausted-meta-fallback",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    },
+    {
+      "scene": 1593,
+      "path": "assets/lore/starlight-era/1593-cabo-verde-trappist-sunset-private-jet-close-love-chatgpt-final.png",
+      "sha256": "560368DF9BE6098D1D973F05C600B347175BA5F8E6CAE004B160C052EF89290C",
+      "bytes": 2531662,
+      "width": 887,
+      "height": 1774,
+      "provider": "ChatGPT built-in image generation",
+      "sourceProvider": "Meta AI",
+      "sourceSha256": "9D19FF1B52B0D17845FC5DF4C33D002D7F3DEDAD5402DA6E25E6B08966060232",
+      "pass": "bounded-clothing-primary",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    },
+    {
+      "scene": 1594,
+      "path": "assets/lore/starlight-era/1594-cabo-verde-kepler-sunset-private-jet-close-love-meta-final.webp",
+      "sha256": "FF0246007055F4DF4C9E0E49BC47CABE0D77742005A7DDF5E5B1352CB7BE8925",
+      "bytes": 607104,
+      "provider": "Meta AI",
+      "pass": "chatgpt-edit-cap-exhausted-meta-fallback",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    },
+    {
+      "scene": 1595,
+      "path": "assets/lore/starlight-era/1595-cabo-verde-kepler-sunrise-private-jet-close-love-chatgpt-final.png",
+      "sha256": "75AEC9F7E05C4C1BCBF8D8BE87B6C0D18FCDA342E1CCE562DA54C63ED8B29212",
+      "bytes": 2614225,
+      "width": 887,
+      "height": 1773,
+      "provider": "ChatGPT built-in image generation",
+      "sourceProvider": "Meta AI",
+      "sourceSha256": "5ED8934315B50E385691B68B8DCB1653D500FED5D1FD7F158193D3FC63F84608",
+      "pass": "bounded-clothing-primary",
+      "hardSafe": true,
+      "missionWeightedAcceptance": true,
+      "immutable": true
+    }
+  ],
+  "evidence": {
+    "archiveManifest": "progress-reports/codex-generated-media/manifest.jsonl",
+    "qaFiles": [
+      "tmp/world-195x4/batch-393/raw/bank-01/preliminary-qa.jsonl",
+      "tmp/world-195x4/batch-393/raw/bank-02/preliminary-qa.jsonl",
+      "tmp/world-195x4/batch-393/raw/bank-03/preliminary-qa.jsonl",
+      "tmp/world-195x4/batch-393/raw/bank-04/preliminary-qa.jsonl"
+    ],
+    "noBytesProvenance": "tmp/world-195x4/batch-393/raw/no-bytes-provenance.jsonl",
+    "checksumInventory": "tmp/world-195x4/batch-393/raw/capture-checksums.tsv",
+    "rejectedPromptLedgerVerify": "pass",
+    "projectFailedPromptLedgerVerify": "pass"
+  },
+  "nextRequiredStage": "commit and explicitly push the closed checkpoint and canonical assets, then remote verify Git LFS and determine the next country only from authoritative queue history"
+}

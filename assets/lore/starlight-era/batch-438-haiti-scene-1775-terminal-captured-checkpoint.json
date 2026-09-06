@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "scene_terminal_capture",
+  "campaign": "InternalAgency Starlight World Series",
+  "batchId": 438,
+  "country": "Haiti",
+  "sceneId": 1775,
+  "status": "closed_hard_unusable",
+  "accepted": false,
+  "providerUrl": "https://www.meta.ai/prompt/8c75b06c-2df9-481c-a51f-59f2a6233a17",
+  "promptSha256": "F429AF2BF7FA5F53E4C3A543CB8F73D8F78CDF1C808F380F37DE15967871E328",
+  "orderedReferences": [
+    {
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraRoll": 89,
+  "requiredFraming": "EXTREME WIDE",
+  "mediaSha256": "5a5dc295b9fa631708fcb7f03496958990885799aa5150aac42e77e12785cbbd",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "occurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-438-scene-1775-output-hard-unusable.jsonl",
+  "rawPath": "assets/lore/starlight-era/1775-haiti-ile-a-vache-meta-raw.webp",
+  "blobPath": "progress-reports/codex-generated-media/blobs/5a/5a5dc295b9fa631708fcb7f03496958990885799aa5150aac42e77e12785cbbd.webp",
+  "responsePath": "progress-reports/codex-generated-media/provider-responses/batch-438-scene-1775-meta-response.txt",
+  "visualQa": {
+    "status": "hard_unusable",
+    "accepted": false,
+    "reason": "Camera and beacon failure: roll 89 required all four small figures entirely in the lower quarter with the environment dominating at least the upper three quarters; the quartet occupies roughly the lower third, and the legible beacon shows only three cyan rings instead of exactly four.",
+    "passes": [
+      "vertical 9:16",
+      "exactly four distinct adult women",
+      "Ile-a-Vache bay and storm read strongly",
+      "head-to-toe figures and footwear largely visible",
+      "public-safe opaque couture"
+    ],
+    "fails": [
+      "strict lower-quarter extreme-wide placement",
+      "exactly four cyan beacon rings"
+    ]
+  },
+  "terminalObservedAtUtc": "2026-08-27T17:04:51.880Z",
+  "checkpointedAtUtc": "2026-08-27T17:05:33.961Z",
+  "noRetryAuthorized": true
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "batch": 491,
+  "country": "El Salvador",
+  "sceneIds": [1991, 1992, 1993, 1994],
+  "state": "remote-authority-and-visible-browser-preflight-passed-no-send",
+  "verifiedAtUtc": "2026-09-06T03:48:30.7143129Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "promptCheckpoint": "assets/lore/starlight-era/batch-491-el-salvador-editorial-prompts-prepared-checkpoint.json",
+    "promptCheckpointSha256": "753C92144E2DA045E8F544D60BFEA790C6D07AC12F2CD15E5792CEDEF1D7D255",
+    "promptCheckpointBytes": 21766,
+    "brief": "assets/lore/starlight-era/batch-491-el-salvador-editorial-brief.json",
+    "briefSha256": "2A924A7A7062314E3591DDBF79DDBB9EFD7DDBD677530D1F6E387635DCEA4BDB",
+    "briefBytes": 3495,
+    "fixedRolls": "assets/lore/starlight-era/batch-491-el-salvador-fixed-rolls.json",
+    "fixedRollsSha256": "6F3912EF119033FFCC6780C54007EB48D3D71A954B558224639B6BBCA7BF321E",
+    "fixedRollsBytes": 6004,
+    "editorialRollContract": "assets/lore/starlight-era/starlight-editorial-rolls-2026-09-06.json",
+    "editorialRollContractSha256": "3E8F4979D92900ADEC7B3A72E9D91928D1525E6B41CD185741ACCF4F05AAAB7B",
+    "promptCheckpointCommit": "ca5674879339671686355d3f2045098ee05c1440",
+    "localHead": "ca5674879339671686355d3f2045098ee05c1440",
+    "originHead": "ca5674879339671686355d3f2045098ee05c1440",
+    "draftPrHead": "ca5674879339671686355d3f2045098ee05c1440",
+    "draftPrOpen": true,
+    "draftPrIsDraft": true,
+    "localOriginPrEqual": true,
+    "lfsPushDryRunEmpty": true
+  },
+  "canonicalQueue": {
+    "worldXPosts": 198,
+    "canonicalEuropeCountryCount": 44,
+    "zeroPostEuropeCountries": [],
+    "worldPriorityOrderFirstZeroPost": "El Salvador",
+    "elSalvadorPostMatches": 0,
+    "elSalvadorAcceptedCanonicalImages": 0,
+    "nextAfterElSalvador": "Republic of the Congo",
+    "historicalSceneRule": "Batch 466 scenes 1890 through 1893 are terminal explicit-no-byte provider-limit occurrences. Fresh scenes 1991 through 1994 were unused before Batch 491 preparation and are not retries."
+  },
+  "canonicalReconciliation": [
+    "Batch 466 named Republic of the Congo as the next country after closing El Salvador with zero accepted images. Batch 467 later explicitly superseded that field with the direct Europe gap-fill run. The newest binding contract says to refill from the next unposted country after Vatican City; the campaign priority order and 198-post ledger make El Salvador first, followed by Republic of the Congo.",
+    "The old Cuba automation instruction remains superseded by Tanzania preparation and later checkpoints. No Cuba or Tanzania scene is dispatched here.",
+    "No Starlight guardian exists. The active 45-minute X Assistant guardian contains its own temporary absence directive and belongs to a separate workspace; the active IAT guardian also belongs to another project. Neither was modified or repurposed."
+  ],
+  "promptBank": {
+    "fixedSeed": "starlight-editorial-rolls-2026-09-06|batch-491|el salvador",
+    "seedShopped": false,
+    "rollReproductionChecksPassed": 324,
+    "rollReproductionChecksFailed": 0,
+    "cameraCategories": ["extreme-close", "intermediate", "intermediate", "extreme-wide"],
+    "cameraRolls": [7, 45, 46, 98],
+    "promptSha256": [
+      "ECAC3BFCAD4E1781BFD1F79488F3E04927CF56CDC1D47D65CAEF05B27A32CA96",
+      "D6A93FE822ECE70B46D8AED5F4835CF6080CCDAF3F19C898F045393617BE145F",
+      "E2ADFF24D6ADA5F7068088E446179E517E431CC0AF480E0AF6B5264A96D4D799",
+      "3975AF9ABFCF05C4D2D955DB7B062BFCAEFCC3FE916A35806CC6DE561FB69604"
+    ],
+    "singleEditPromptSha256": [
+      "126F5B2CD95FF21FB63EF095F66883FBA955166BC268E81BFF2CF76FD3F8A14F",
+      "BFA0CB1A8708A526EB374AA24702FBE599A223E7BC0F880201E28B1AE1043552",
+      "AC824F40E196FB42CF6FE386777F8C4064CEAF302ECDA8AD9A6B97FCC09E46DA",
+      "084F799CB9A3058562F2289D3A6F8860D7FFEF9FA79A3CE4CB48C5EAE6F47569"
+    ]
+  },
+  "anchors": [
+    {
+      "scene": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "bytes": 2575103
+    },
+    {
+      "scene": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "bytes": 2495143
+    },
+    {
+      "scene": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "bytes": 2373808
+    }
+  ],
+  "browser": {
+    "name": "Codex in-app Browser",
+    "visibleOnly": true,
+    "actualTabInventoryRefreshed": true,
+    "totalTabCount": 5,
+    "xComposerCount": 1,
+    "metaTerminalCount": 4,
+    "otherTabCount": 0,
+    "xComposer": {
+      "tabId": "6",
+      "url": "https://x.com/compose/post",
+      "signedInProfile": "@dogramaci",
+      "blank": true,
+      "mediaCount": 0,
+      "postButtonDisabled": true
+    },
+    "metaTerminalTabs": [
+      {"tabId": "1", "scene": 1987, "url": "https://www.meta.ai/prompt/efd38db4-dd50-4401-8bb9-ab4a695bfe53", "terminal": true},
+      {"tabId": "3", "scene": 1988, "url": "https://www.meta.ai/prompt/1721659e-81d9-4f08-b084-138c9a04b3ac", "terminal": true},
+      {"tabId": "5", "scene": 1989, "url": "https://www.meta.ai/prompt/4510b7b5-859c-4f59-84b7-2b18fd958962", "terminal": true},
+      {"tabId": "7", "scene": 1990, "url": "https://www.meta.ai/prompt/619f8453-99de-4548-9005-44ffa7383516", "terminal": true}
+    ],
+    "replacementPolicy": "Navigate exactly these four completed Vatican City terminal tabs to four fresh Meta composers only after this preflight record is remote-verified. Never activate their terminal Send controls."
+  },
+  "provider": {
+    "name": "Meta AI",
+    "accountRequired": "leesha007",
+    "modeRequired": "Thinking",
+    "orderedAnchorsRequired": [938, 936, 937],
+    "anchorHashesVerified": true,
+    "sendActivations": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "providerRetries": 0
+  },
+  "automationInventory": [
+    {"id": "guardian-x-assistant-mission", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "workspace": "X assistant", "leftUntouched": true},
+    {"id": "iat-b3-devnet-gate-guardian", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "workspace": "IAT B3", "leftUntouched": true}
+  ],
+  "starlightGuardianPresent": false,
+  "mayStageAfterRemoteParity": true,
+  "mayDispatchAfterStagingParity": true,
+  "nextSafeAction": "Commit and remote-verify this preflight. Navigate exactly the four completed Vatican City tabs to four fresh Meta composers, enter each exact sealed El Salvador prompt first, attach exact anchors 938, 936 and 937 in that order through the visible supported chooser, and reverify leesha007, Thinking, prompt hash, three filenames and enabled Send. Preserve and remote-verify the no-send staging state before clicking each Send exactly once."
+}

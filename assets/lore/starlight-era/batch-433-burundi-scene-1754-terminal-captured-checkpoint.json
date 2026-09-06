@@ -1,0 +1,62 @@
+{
+  "schema": "internalagency.starlight.scene-terminal-checkpoint.v1",
+  "batchId": 433,
+  "country": "Burundi",
+  "sceneId": 1754,
+  "status": "closed_hard_unusable",
+  "recordedAtUtc": "2026-08-27T09:38:30.785Z",
+  "providerUrl": "https://www.meta.ai/prompt/6b861723-7cbe-4b52-9ff4-5828a8b1e143",
+  "providerResponsePath": "progress-reports/codex-generated-media/provider-responses/batch-433-scene-1754-meta-response.txt",
+  "providerOccurrencePath": "progress-reports/codex-generated-media/provider-occurrences/batch-433-scene-1754-output-hard-unusable.jsonl",
+  "rawBytesAvailable": true,
+  "rawByteLength": 626878,
+  "rawSha256": "fc15c4e688d1d53281541b3fed432cb3f3b1c055fe6717c0fabb7f75cc46c3d5",
+  "blobPath": "progress-reports/codex-generated-media/blobs/fc/fc15c4e688d1d53281541b3fed432cb3f3b1c055fe6717c0fabb7f75cc46c3d5.webp",
+  "mimeType": "image/webp",
+  "dimensions": {
+    "width": 1152,
+    "height": 2048
+  },
+  "duplicateRelationships": [],
+  "visualQa": {
+    "sceneId": 1754,
+    "status": "hard_unusable",
+    "accepted": false,
+    "cameraRoll": 56,
+    "framing": "extreme_wide_full_figure",
+    "summary": "Strong Kibira tea-field and montane-ridge location with four public-safe adults and a four-ring beacon, but the output shows complete footwear and the full figures, directly violating the locked head-to-mid-shin intermediate framing.",
+    "failures": [
+      "Full figures and complete footwear are visible.",
+      "Camera roll 56 strict intermediate framing is violated."
+    ],
+    "positives": [
+      "Vertical 9:16 output.",
+      "Strong Kibira/tea-field/montane-ridge geography.",
+      "Exactly four adult women with distinct silhouettes.",
+      "Single beacon visibly has four cyan rings."
+    ]
+  },
+  "acceptedCanonical": false,
+  "canonicalAssetPath": null,
+  "retryAuthorized": false,
+  "promptPath": "../../../../ChatGPT/RENDERS/tmp/world-195x4/batch-433/scene-1754-prompt.txt",
+  "preparedPromptSha256": "13801B8AE7B0B780F1A79B2DFEBD2F44BA391341E6E2295B3FB7396DA2267299",
+  "browserCanonicalPromptSha256": "4A045FB418961B1192953B6CD22278EB12AA007724E891E5F3599E5CDD0D6C0E",
+  "orderedReferences": [
+    {
+      "order": 1,
+      "sceneId": 938,
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png"
+    },
+    {
+      "order": 2,
+      "sceneId": 936,
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png"
+    },
+    {
+      "order": 3,
+      "sceneId": 937,
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+    }
+  ]
+}

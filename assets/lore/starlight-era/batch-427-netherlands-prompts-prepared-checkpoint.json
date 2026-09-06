@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "prompts-prepared",
+  "createdAtUtc": "2026-08-27T07:02:19.551Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 427,
+  "country": "Netherlands",
+  "status": "prepared-not-uploaded",
+  "source": {
+    "batch": 356,
+    "scenes": [
+      1444,
+      1445,
+      1446,
+      1447
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-356-netherlands-helicopter-checkpoint.json",
+    "nextSourceCountry": "Cambodia",
+    "nextSourceBatch": 357
+  },
+  "eligibleScenes": [
+    1728,
+    1729,
+    1730,
+    1731
+  ],
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "cameraPolicy": {
+    "extremeClose": "1-20",
+    "intermediate": "21-80",
+    "extremeWide": "81-100"
+  },
+  "maleSelection": {
+    "key": "batch427-netherlands-male-model-scene",
+    "fnv1a32": 3507308734,
+    "modulo4": 2,
+    "selectedScene": 1730
+  },
+  "sourceSanitization": {
+    "removed": [
+      "all positive weapon and inert-firearm content",
+      "ammunition and target mechanics",
+      "mascots and animal companions",
+      "odd props and secondary handheld objects",
+      "copied operator or military identity"
+    ],
+    "replacement": "one harmless polished gold civilian navigation beacon with exactly four cyan light rings held only by AI ECE right hand",
+    "civilianAviationOnly": true
+  },
+  "prompts": [
+    {
+      "scene": 1728,
+      "sourceScene": 1444,
+      "promptFile": "tmp/world-195x4/batch-427/scene-1728-prompt.txt",
+      "promptSha256": "B24869B2B02F110499B3E852B6989D98C3AB2FED78F88ED3D4B94CC086B59A53",
+      "promptLength": 8176,
+      "camera": {
+        "key": "batch427-netherlands-scene1728-camera-closeness",
+        "fnv1a32": 3968088982,
+        "roll": 83,
+        "framing": "extreme-wide"
+      },
+      "raze": {
+        "key": "RAZE|batch-427|scene-1728|knee-high-wearers",
+        "fnv1a32": 1279273330,
+        "modulo6": 4,
+        "wearers": [
+          "Ellie",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch427-netherlands-scene1728-jealous-adult",
+        "fnv1a32": 983965233,
+        "modulo4": 1,
+        "adult": "Ellie"
+      },
+      "malePresent": false
+    },
+    {
+      "scene": 1729,
+      "sourceScene": 1445,
+      "promptFile": "tmp/world-195x4/batch-427/scene-1729-prompt.txt",
+      "promptSha256": "26B8DECE836832E2FFB9F9DD98E077240F2CD270A414D2B5D20BBF5B0F6E230B",
+      "promptLength": 8234,
+      "camera": {
+        "key": "batch427-netherlands-scene1729-camera-closeness",
+        "fnv1a32": 3829382951,
+        "roll": 52,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-427|scene-1729|knee-high-wearers",
+        "fnv1a32": 2665254845,
+        "modulo6": 5,
+        "wearers": [
+          "Alia",
+          "AI ECE"
+        ]
+      },
+      "jealousy": {
+        "key": "batch427-netherlands-scene1729-jealous-adult",
+        "fnv1a32": 8371638,
+        "modulo4": 2,
+        "adult": "Alia"
+      },
+      "malePresent": false
+    },
+    {
+      "scene": 1730,
+      "sourceScene": 1446,
+      "promptFile": "tmp/world-195x4/batch-427/scene-1730-prompt.txt",
+      "promptSha256": "35F6D0A8512821683C54931DC9B8D616850F50EEAEC81020E79A5EDCD4AC8B71",
+      "promptLength": 8651,
+      "camera": {
+        "key": "batch427-netherlands-scene1730-camera-closeness",
+        "fnv1a32": 470065865,
+        "roll": 66,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-427|scene-1730|knee-high-wearers",
+        "fnv1a32": 3346958631,
+        "modulo6": 3,
+        "wearers": [
+          "Ellie",
+          "Alia"
+        ]
+      },
+      "jealousy": {
+        "key": "batch427-netherlands-scene1730-jealous-adult",
+        "fnv1a32": 1622874576,
+        "modulo4": 0,
+        "adult": "Radiance"
+      },
+      "malePresent": true
+    },
+    {
+      "scene": 1731,
+      "sourceScene": 1447,
+      "promptFile": "tmp/world-195x4/batch-427/scene-1731-prompt.txt",
+      "promptSha256": "AECADC3F2B087A3ED630F1F85CF40DE823DB2BED1EB83190C2FF3061189235B8",
+      "promptLength": 8188,
+      "camera": {
+        "key": "batch427-netherlands-scene1731-camera-closeness",
+        "fnv1a32": 781254520,
+        "roll": 21,
+        "framing": "intermediate"
+      },
+      "raze": {
+        "key": "RAZE|batch-427|scene-1731|knee-high-wearers",
+        "fnv1a32": 1711011996,
+        "modulo6": 0,
+        "wearers": [
+          "Radiance",
+          "Ellie"
+        ]
+      },
+      "jealousy": {
+        "key": "batch427-netherlands-scene1731-jealous-adult",
+        "fnv1a32": 446197843,
+        "modulo4": 3,
+        "adult": "AI ECE"
+      },
+      "malePresent": false
+    }
+  ],
+  "providerChatCount": 0,
+  "confirmedUploadCount": 0,
+  "sendClickCount": 0,
+  "duplicateDispatchCount": 0,
+  "boundedRetryAuthorized": false,
+  "standingUploadAuthorization": {
+    "grantedAtUtc": "2026-08-27T04:05:01.069499Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.069499Z"
+  },
+  "actionGate": {
+    "standingUploadAuthorizationValidAtPreparation": true,
+    "freshActionTimeConfirmationRequired": true,
+    "uploadAndSendAuthorizedForThisBatch": false,
+    "previousConfirmationConsumedByBatch": 426,
+    "nextRequiredUserAction": "fresh go for Batch 427 Netherlands uploads and Sends"
+  },
+  "xEligibility": {
+    "currentCountryAcceptedAssets": 0,
+    "requiredAcceptedAssets": 4,
+    "pairReady": false,
+    "blockedBy": "Netherlands not yet rendered; Ecuador closed at zero accepted assets."
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 6,
+    "publishDue": false,
+    "threshold": 10
+  }
+}

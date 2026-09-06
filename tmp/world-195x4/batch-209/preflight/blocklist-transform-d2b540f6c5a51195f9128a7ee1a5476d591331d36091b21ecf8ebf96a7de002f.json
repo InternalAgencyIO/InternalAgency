@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "wakeAt": "2026-08-04T16:07:03.483Z",
+  "blockedCorpusCount": 96,
+  "blockedCorpusSha256": "d2b540f6c5a51195f9128a7ee1a5476d591331d36091b21ecf8ebf96a7de002f",
+  "order": "longest-phrase-first",
+  "cachePolicy": "Reuse for this wake; rebuild only after a new blocked prompt is durably appended.",
+  "globalTransforms": [
+    {
+      "riskFamily": "combined final-silhouette and direct relationship-event vocabulary",
+      "safeEquivalent": "retain the accepted professional styling and contact geometry; edit only the isolated required object or accessory"
+    },
+    {
+      "riskFamily": "temporary body-art placement on exposed leg in cheek-close source pose",
+      "safeEquivalent": "one tiny abstract removable route mark on the outer lower leg; preserve the accepted pose"
+    },
+    {
+      "riskFamily": "crystal-rim collarbone handoff on cheek-close source pose",
+      "safeEquivalent": "reposition the existing faceted tumbler into a formal service-presentation hold at chest height"
+    },
+    {
+      "riskFamily": "paired wide cuffs with linked jewelry",
+      "safeEquivalent": "matching solid gold geometric wrist panels, independently fastened and unconnected"
+    },
+    {
+      "riskFamily": "rear-waist character mark with garment-placement drift",
+      "safeEquivalent": "one tiny abstract route mark visibly placed on Radiance at the outer rear waist, supported by a minimal three-quarter turn"
+    },
+    {
+      "riskFamily": "three-face cleanup and bright-speck removal vocabulary",
+      "safeEquivalent": "retain the accepted clean natural photographic complexions exactly"
+    }
+  ],
+  "lanes": [
+    {
+      "scene": 857,
+      "source": "tmp/world-195x4/batch-209/details/857-detail-04-paws.png",
+      "target": "Ellie.crystalRimCollarboneOffer",
+      "preflightedChange": "Move only the existing faceted tumbler from the console into Ellie's left hand in a formal service-presentation hold at chest height."
+    },
+    {
+      "scene": 858,
+      "source": "tmp/world-195x4/batch-209/details/858-detail-07-paws.png",
+      "target": "Ellie.chainAccentWideCuffDuo",
+      "preflightedChange": "Add matching solid gold geometric wrist panels to Ellie's two wrists, independently fastened and unconnected."
+    },
+    {
+      "scene": 859,
+      "source": "tmp/world-195x4/batch-209/details/859-detail-09-paws.png",
+      "target": "Radiance.lowerBackTattoo",
+      "preflightedChange": "Add one tiny abstract route mark visibly on Radiance at the outer rear waist, using only the minimal three-quarter turn needed to show it."
+    }
+  ]
+}

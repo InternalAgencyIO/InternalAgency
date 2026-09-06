@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "country-cycle-closed",
+  "createdAtUtc": "2026-08-27T05:59:55.837Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 425,
+  "country": "Guatemala",
+  "status": "closed-unresolved-no-accepted",
+  "terminalCheckpoint": "assets/lore/starlight-era/batch-425-guatemala-four-lanes-dispatched-terminal-captured-checkpoint.json",
+  "eligibleScenes": [
+    1720,
+    1721,
+    1722,
+    1723
+  ],
+  "orderedReferences": [
+    {
+      "position": 1,
+      "anchor": 938,
+      "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "position": 2,
+      "anchor": 936,
+      "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "position": 3,
+      "anchor": 937,
+      "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "acceptedAssets": [],
+  "rejectedAssets": [
+    {
+      "scene": 1720,
+      "outcome": "output-hard-unusable",
+      "providerUrl": "https://www.meta.ai/prompt/3dc57aa3-baaa-494f-bb5a-029f9ab927cf",
+      "sha256": "f3d0449bab990b92bef5c08aa08a1265b9272136b4010eaee474ff3df12e0549",
+      "qaDisposition": "hard-unusable-relationship-and-beacon-hand-lock-fail",
+      "reason": "The decisive relationship and beacon ownership locks fail, so this output cannot count."
+    },
+    {
+      "scene": 1721,
+      "outcome": "output-hard-unusable",
+      "providerUrl": "https://www.meta.ai/prompt/b5f854ad-fb56-4d54-8981-744a6937c9f8",
+      "sha256": "e1b49bba02f62645d8d9973caaa3e939ee589c1577b37dda843da07dd8b3b200",
+      "qaDisposition": "hard-unusable-relationship-and-beacon-ring-lock-fail",
+      "reason": "The decisive relationship and beacon ring locks fail, so this output cannot count."
+    },
+    {
+      "scene": 1722,
+      "outcome": "output-hard-unusable",
+      "providerUrl": "https://www.meta.ai/prompt/d6f0fb46-f6e0-413c-a20e-ccb3ec46f9be",
+      "sha256": "d65940faa9bea64d65b3b0e05a0ba3acb5542a8db62fa6585c53388044cbe5ec",
+      "qaDisposition": "hard-unusable-relationship-raze-and-beacon-ring-lock-fail",
+      "reason": "The gold beacon visibly resolves with about three cyan rings rather than exactly four, so this output cannot count."
+    },
+    {
+      "scene": 1723,
+      "outcome": "output-hard-unusable",
+      "providerUrl": "https://www.meta.ai/prompt/2aaa2496-fa0b-4fa4-8f71-f3ef90304de1",
+      "sha256": "c626897e855f2c37d76b763021f9ebb91919a6e84e4f87c1356cb1e0d7b936a4",
+      "qaDisposition": "hard-unusable-relationship-beacon-and-hand-inventory-lock-fail",
+      "reason": "The male's two empty relaxed hands and the complete ten-hand inventory are not decisively readable, so this output cannot count."
+    }
+  ],
+  "counts": {
+    "formalScenes": 4,
+    "confirmedProviderOccurrences": 4,
+    "rawImagesArchived": 4,
+    "hardUnusable": 4,
+    "accepted": 0
+  },
+  "retryState": {
+    "boundedRetryAuthorized": false,
+    "boundedRetryDispatched": false,
+    "scenesClosed": [
+      1720,
+      1721,
+      1722,
+      1723
+    ],
+    "instruction": "Never reopen or resend these scenes."
+  },
+  "campaign": {
+    "acceptedCanonicalTarget": 60,
+    "currentCountryAccepted": 0,
+    "requiredPerCountry": 4,
+    "countryPairReady": false
+  },
+  "xEligibility": {
+    "currentCountryAcceptedAssets": 0,
+    "requiredAcceptedAssets": 4,
+    "pairReady": false,
+    "blockedBy": "Guatemala closed at zero accepted assets; no four-image country set exists."
+  },
+  "xCadence": {
+    "completedCountryCyclesSinceLastReset": 5,
+    "publishDue": false,
+    "threshold": 10,
+    "resetPerformed": false
+  },
+  "nextQueue": {
+    "batch": 426,
+    "country": "Ecuador",
+    "scenes": [
+      1724,
+      1725,
+      1726,
+      1727
+    ],
+    "sourceCheckpoint": "assets/lore/starlight-era/batch-355-ecuador-helicopter-checkpoint.json",
+    "status": "prepare-only-until-fresh-action-time-confirmation"
+  }
+}

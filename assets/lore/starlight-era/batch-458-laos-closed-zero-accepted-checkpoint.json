@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "batch": 458,
+  "country": "Laos",
+  "state": "closed-zero-accepted",
+  "closedAtUtc": "2026-08-28T12:08:29.630Z",
+  "scenes": [
+    {
+      "scene": 1858,
+      "promptSha256": "9BFD3F08B13FFFC8D4E97E6728A597318756A14471B84CA9F00D9751E21CAFD2",
+      "terminalState": "raw-output-hard-unusable",
+      "rawOutputCount": 1,
+      "acceptedCount": 0,
+      "visualQaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-458-laos\\1858-laos-vientiane-mekong-promenade-visual-qa.json"
+    },
+    {
+      "scene": 1859,
+      "promptSha256": "89D1450A434C71E7C2EEFFAFDF6B268776DE98F37CFD1FE9F169DCF8CB1499A8",
+      "terminalState": "raw-output-hard-unusable",
+      "rawOutputCount": 1,
+      "acceptedCount": 0,
+      "visualQaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-458-laos\\1859-laos-kuang-si-falls-visual-qa.json"
+    },
+    {
+      "scene": 1860,
+      "promptSha256": "66F421D0545C2659E00BBC8F610ABCBCD849A35F7CF98CFDF4E79FE5060BAED6",
+      "terminalState": "explicit-no-bytes-refusal",
+      "rawOutputCount": 0,
+      "acceptedCount": 0,
+      "visualQaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-458-laos\\1860-laos-nong-khiaw-nam-ou-visual-qa.json"
+    },
+    {
+      "scene": 1861,
+      "promptSha256": "0A599F48BF01C0A76E0A5241B75A3BB21325883D2A7146CC6EB7048F7C977DA0",
+      "terminalState": "raw-output-hard-unusable",
+      "rawOutputCount": 1,
+      "acceptedCount": 0,
+      "visualQaPath": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era\\provider-evidence\\batch-458-laos\\1861-laos-bolaven-plateau-paksong-visual-qa.json"
+    }
+  ],
+  "acceptedSceneIds": [],
+  "unresolvedSceneIds": [
+    1858,
+    1859,
+    1860,
+    1861
+  ],
+  "rawOutputCount": 3,
+  "explicitNoBytesCount": 1,
+  "hardUnusableRawOutputCount": 3,
+  "generatedMediaManifestImageCount": 880,
+  "xReconciliation": {
+    "eligibleBacklogRemaining": 19,
+    "preparedPostQueueCount": 5,
+    "preparedAssetCount": 15,
+    "unreservedAcceptedSceneIds": [
+      1828,
+      1832,
+      1845,
+      1849
+    ],
+    "newLegalPairPrepared": false,
+    "publishingPerformed": false,
+    "destinationAccount": "@dogramaci"
+  },
+  "browserState": {
+    "completedMetaTabsClosed": true,
+    "activeEligibleTabs": 0
+  },
+  "nextCountry": {
+    "batch": 459,
+    "country": "Turkmenistan",
+    "scenes": [
+      1862,
+      1863,
+      1864,
+      1865
+    ],
+    "state": "authorized-for-immediate-four-lane-preparation"
+  },
+  "constraints": {
+    "noRetriesAuthorized": true,
+    "closedScenesMustNotReopen": [
+      1858,
+      1859,
+      1860,
+      1861
+    ]
+  }
+}

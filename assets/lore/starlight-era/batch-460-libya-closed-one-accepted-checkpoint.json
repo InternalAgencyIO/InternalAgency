@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "batch": 460,
+  "country": "Libya",
+  "state": "closed-one-accepted-three-terminal-nonaccepted",
+  "closedAtUtc": "2026-08-28T12:57:16.201Z",
+  "sceneRange": [
+    1866,
+    1869
+  ],
+  "acceptedSceneIds": [
+    1866
+  ],
+  "rejectedSceneIds": [
+    1868,
+    1869
+  ],
+  "refusedNoByteSceneIds": [
+    1867
+  ],
+  "acceptedCount": 1,
+  "requiredForCompletedCountry": 4,
+  "countryCompletedFourOfFour": false,
+  "eligibleForCountryCycleXPair": false,
+  "terminalEvidence": [
+    "provider-evidence/batch-460-libya/1866-libya-ghadames-residential-arcade-plaza-occurrence.json",
+    "provider-evidence/batch-460-libya/1867-libya-benghazi-mediterranean-corniche-explicit-no-byte-refusal.json",
+    "provider-evidence/batch-460-libya/1868-libya-tadrart-acacus-visitor-platform-occurrence.json",
+    "provider-evidence/batch-460-libya/1869-libya-gaberoun-oasis-observation-terrace-occurrence.json"
+  ],
+  "manifestCountBefore": 881,
+  "manifestCountAfter": 882,
+  "duplicatePrevention": "Never resend scenes 1866-1869. Scene 1866 is canonical; scenes 1868 and 1869 are archived hard-unusable; scene 1867 is an explicit no-byte refusal.",
+  "nextBatch": 461,
+  "nextCountry": "Kyrgyzstan",
+  "nextScenes": [
+    1870,
+    1871,
+    1872,
+    1873
+  ]
+}

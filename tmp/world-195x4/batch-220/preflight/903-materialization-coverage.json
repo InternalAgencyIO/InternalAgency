@@ -1,0 +1,322 @@
+{
+  "schema": "world-195x4-materialization-coverage-v2",
+  "batch": 220,
+  "country": "Republic of the Congo",
+  "sceneNumber": 903,
+  "status": "passed-lossless",
+  "requiredCoveragePercent": 100,
+  "achievedCoveragePercent": 100,
+  "evidence": {
+    "canonical identity and relative height geometry": {
+      "status": "present",
+      "section": "CAST AND GEOMETRY",
+      "identityReferenceCount": 3
+    },
+    "country and exact recognizable location": {
+      "status": "present",
+      "section": "COUNTRY, LOCATION AND MISSION",
+      "location": "a broad empty private temporary arrival deck above the recognizable red-earth cliffs and Atlantic horizon of Diosso Gorge at vivid sunset, safely separated from edges, roads and visitors"
+    },
+    "rotated aircrew roles and harmless completed mission": {
+      "status": "present",
+      "section": "AIRCREW ROLES",
+      "roles": {
+        "Radiance": "cabin host",
+        "Ellie": "captain",
+        "Alia": "first officer",
+        "AI ECE": "signal officer"
+      },
+      "missionState": "already-complete-secondary"
+    },
+    "original stored relationship pose or exact resolved pose beat": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "tableauSha256": "f7d988fb5bdfd16851bc5093032d205740ddbc0238c408d8e9f76accfad9a205"
+    },
+    "closed Radiance-Ellie-Alia triangle geometry": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "primary closed Radiance-Ellie-Alia romantic triangle"
+    },
+    "ECE reciprocal relationship connection without displacing the original trio": {
+      "status": "present",
+      "section": "PRIMARY RELATIONSHIP AND ORIGINAL POSE",
+      "geometry": "ECE reciprocal and non-displacing"
+    },
+    "four distinct bold country-derived latex-and-lace silhouettes": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "distinctSilhouetteCount": 4
+    },
+    "intentional natural midriff and navel visibility": {
+      "status": "present",
+      "section": "BOLD FOUR-SILHOUETTE WARDROBE",
+      "specifiedVisibleNavelCount": 4
+    },
+    "all deterministic appearance rolls with triggered outcomes": {
+      "status": "present",
+      "artifact": "903-roll-audit.json",
+      "evaluatedRollCount": 356
+    },
+    "all triggered tattoo, piercing, jewelry, hair, accessory, touch, expression and pose rules": {
+      "status": "present",
+      "section": "ALL TRIGGERED DETERMINISTIC DETAILS",
+      "triggeredCount": 10,
+      "tattooCount": 0
+    },
+    "all trio-static rolls and any triggered original tableau": {
+      "status": "present",
+      "artifact": "903-roll-audit.json",
+      "evaluatedTrioRollCount": 20,
+      "triggeredTrioCount": 1
+    },
+    "PAWS presence roll, resolved action roll, growth epoch and reciprocation": {
+      "status": "present",
+      "section": "PAWS CONTRACT",
+      "presenceRoll": 50,
+      "rawActionRoll": 5,
+      "resolvedActionIndex": 5,
+      "growthEpoch": 1,
+      "effectiveTriggered": false
+    },
+    "clean-face, anatomy, hands, complete footwear and technical invariants": {
+      "status": "present",
+      "section": "COMPOSITION AND VALIDATION",
+      "cleanFace": true,
+      "hands": 8,
+      "footwear": 8,
+      "portrait": "9:16 full-length"
+    }
+  },
+  "semanticDiff": {
+    "status": "passed",
+    "positiveInstructionDeletionCount": 0,
+    "generalizedTriggeredDetailCount": 0,
+    "expectedTriggeredIds": [
+      "Radiance.kneelingHeelBuckleAdjustment",
+      "Ellie.hairVariation",
+      "Alia.hairVariation",
+      "Alia.sculpturalCuff",
+      "Alia.foreheadToForeheadLook",
+      "Alia.featherFanThreeWayWhisper",
+      "Alia.layeredCollarNecklaceConnector",
+      "AI ECE.hairVariation",
+      "AI ECE.whisperAndInterlacedHands",
+      "trio.threeWayForeheadLean"
+    ],
+    "materializedTriggeredIds": [
+      "Radiance.kneelingHeelBuckleAdjustment",
+      "Ellie.hairVariation",
+      "Alia.hairVariation",
+      "Alia.sculpturalCuff",
+      "Alia.foreheadToForeheadLook",
+      "Alia.featherFanThreeWayWhisper",
+      "Alia.layeredCollarNecklaceConnector",
+      "AI ECE.hairVariation",
+      "AI ECE.whisperAndInterlacedHands",
+      "trio.threeWayForeheadLean"
+    ],
+    "exactTriggeredSetMatch": true,
+    "originalTableauSha256": "f7d988fb5bdfd16851bc5093032d205740ddbc0238c408d8e9f76accfad9a205",
+    "finalPromptSha256": "2dd281a6892ebe4daf7a26a75c34e3fc1c34009ad50a71a70f53e39321efb67d",
+    "blocklistSubstitutionCount": 0,
+    "blocklistSubstitutions": []
+  },
+  "transformations": {
+    "blockedCorpusSha256": "26657ff5e51a1e35ba5c6ebb2be73ece0996365d195716192cc9cdb9f05c069e",
+    "longestPhraseFirst": true,
+    "substitutions": []
+  },
+  "triggerMaterialization": [
+    {
+      "id": "Radiance.kneelingHeelBuckleAdjustment",
+      "scope": "Radiance",
+      "trait": "kneelingHeelBuckleAdjustment",
+      "seed": "903|Radiance|kneelingHeelBuckleAdjustment|mile-high-v1",
+      "firstEightHex": "89ce0bbb",
+      "roll": 11,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Show one woman kneeling in a practical styling pose to adjust an adult partner's harness-inspired heel strap or boot buckle. Keep hands on the footwear only, the standing partner stable, and the exchange reciprocal and non-subservient.",
+      "otherwise": null,
+      "rendererSafeAlias": "Radiance appearance beat 01",
+      "materializedInstruction": "Radiance kneels in one practical styling pose to adjust Alia's harness-inspired heel strap or boot buckle, hands on the footwear only and the exchange reciprocal rather than subservient.",
+      "storedRuleSha256": "643e15701e9b05166f23020986bfa3e92d7508475d46ab8ca0fd12c9c2913682",
+      "materializedInstructionSha256": "b81784e3312dc3914f42b59c1795c4d5538629e24c7101867669826fe55f025d",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Ellie.hairVariation",
+      "scope": "Ellie",
+      "trait": "hairVariation",
+      "seed": "903|Ellie|hairVariation|mile-high-v1",
+      "firstEightHex": "59a0e31c",
+      "roll": 24,
+      "rollScale": 100,
+      "trigger": "roll 0 through 33 inclusive",
+      "probability": "34%",
+      "triggered": true,
+      "storedRule": "When triggered, create one original hairstyle or fashion-color experiment for that character while preserving the canonical face, hairline, age read and identity. Rotate cuts, curls, braids, ponytails, updos, sculptural waves, wet-look styling and controlled luminous color accents; do not clone another character's hair. The user's 34/67 wording is treated as rounded guidance, with the exact deterministic roll totaling 100%.",
+      "otherwise": "66% canonical regular hair",
+      "rendererSafeAlias": "Ellie appearance beat 02",
+      "materializedInstruction": "Ellie keeps her canonical face and deep-brunette bob identity while wearing one distinct editorial hair variation that remains face-revealing and motion-readable.",
+      "storedRuleSha256": "b5e790dd9d811a953018e341657b3c591b13567d74c7c8dc6ff833606ad2c053",
+      "materializedInstructionSha256": "1bc93ff7ddc8439fdb947aad48bf71a2a29d0e1b047a2e25fc205dd75945dd6b",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.hairVariation",
+      "scope": "Alia",
+      "trait": "hairVariation",
+      "seed": "903|Alia|hairVariation|mile-high-v1",
+      "firstEightHex": "eab518d5",
+      "roll": 17,
+      "rollScale": 100,
+      "trigger": "roll 0 through 33 inclusive",
+      "probability": "34%",
+      "triggered": true,
+      "storedRule": "When triggered, create one original hairstyle or fashion-color experiment for that character while preserving the canonical face, hairline, age read and identity. Rotate cuts, curls, braids, ponytails, updos, sculptural waves, wet-look styling and controlled luminous color accents; do not clone another character's hair. The user's 34/67 wording is treated as rounded guidance, with the exact deterministic roll totaling 100%.",
+      "otherwise": "66% canonical regular hair",
+      "rendererSafeAlias": "Alia appearance beat 03",
+      "materializedInstruction": "Alia keeps her canonical face and dark-auburn curl identity while wearing one distinct editorial hair variation with controlled sculptural volume.",
+      "storedRuleSha256": "b5e790dd9d811a953018e341657b3c591b13567d74c7c8dc6ff833606ad2c053",
+      "materializedInstructionSha256": "8c062ccdb0a5992bccabd761084669d348a155f41926d31511549fb84bc2892c",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.sculpturalCuff",
+      "scope": "Alia",
+      "trait": "sculpturalCuff",
+      "seed": "903|Alia|sculpturalCuff|mile-high-v1",
+      "firstEightHex": "4ec8e394",
+      "roll": 8,
+      "rollScale": 100,
+      "trigger": "roll 0 through 9 inclusive",
+      "probability": "10%",
+      "triggered": true,
+      "storedRule": "Use one removable runway cuff, collar or harness-inspired seam accessory as fashion design only. It never restrains, locks, injures or controls a person.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 04",
+      "materializedInstruction": "Alia wears one removable runway sculptural cuff as fashion design only; it never restrains, locks or injures.",
+      "storedRuleSha256": "549d36b30192fe8aa24bd9f6e2de9df3dfd42883a253bb1522ebd7669f485da0",
+      "materializedInstructionSha256": "78fe13858796a8decf3303591b5dad265d2b9ffe7c72d90de4b043f4c185c54b",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.foreheadToForeheadLook",
+      "scope": "Alia",
+      "trait": "foreheadToForeheadLook",
+      "seed": "903|Alia|foreheadToForeheadLook|mile-high-v1",
+      "firstEightHex": "100e4b8c",
+      "roll": 0,
+      "rollScale": 100,
+      "trigger": "roll 0 through 2 inclusive",
+      "probability": "3%",
+      "triggered": true,
+      "storedRule": "Stage a close forehead-to-forehead mutual look between adult partners with warm eye contact, natural anatomy and the third woman still visibly connected to the triangle.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 05",
+      "materializedInstruction": "Alia shares one close forehead-to-forehead mutual look with Radiance while the third woman remains visibly connected to the triangle.",
+      "storedRuleSha256": "da9538f2db7fe548af6547eba5fe05fc879c5377aa9dbb4f17998c554605d4b0",
+      "materializedInstructionSha256": "bc0055493fe3939bcb7598f5cf1758ff7f79d9708554d2efe979803cd9783028",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.featherFanThreeWayWhisper",
+      "scope": "Alia",
+      "trait": "featherFanThreeWayWhisper",
+      "seed": "903|Alia|featherFanThreeWayWhisper|mile-high-v1",
+      "firstEightHex": "c7658c2a",
+      "roll": 2,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 13 inclusive",
+      "probability": "1.4%",
+      "triggered": true,
+      "storedRule": "Raise a delicate feather masquerade fan just high enough to shelter a shared intimate whisper, drawing all three women into one tightly huddled frame while their eyes and recognizable faces remain visible above and around the feathers.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 06",
+      "materializedInstruction": "Alia raises a delicate feather masquerade fan just high enough to shelter a shared intimate whisper among the trio while every recognizable face remains visible above and around the feathers.",
+      "storedRuleSha256": "218ae8986ba73dc7004752df5abc2b8a3f0906a36a928f6d1a11168e50100902",
+      "materializedInstructionSha256": "3f87e9ab1a8badb17ff6333dd21187c2a33de0b440aef9de0a68918f357fb8af",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "Alia.layeredCollarNecklaceConnector",
+      "scope": "Alia",
+      "trait": "layeredCollarNecklaceConnector",
+      "seed": "903|Alia|layeredCollarNecklaceConnector|mile-high-v1",
+      "firstEightHex": "e87ea572",
+      "roll": 2,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Build a lavish collar-necklace stack with one long connector chain cascading down the front of a sharply minimal opaque look, its wearer lifting the chain while holding a partner's gaze. Keep the jewelry lightweight, slack and quick-release.",
+      "otherwise": null,
+      "rendererSafeAlias": "Alia appearance beat 07",
+      "materializedInstruction": "Alia builds a lavish collar-necklace stack with one long connector chain cascading down the front of the sharply minimal opaque look, slack and clearly decorative.",
+      "storedRuleSha256": "1a899e7e53529b92a3002559acadf519e3ff1a00672b7fdfbafd1d3fddebdc44",
+      "materializedInstructionSha256": "71c530a514f6553c093d8036f01fbf9b72caf122922b5c7662f8d5c2b9310033",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.hairVariation",
+      "scope": "AI ECE",
+      "trait": "hairVariation",
+      "seed": "903|AI ECE|hairVariation|mile-high-v1",
+      "firstEightHex": "cd6c03a8",
+      "roll": 4,
+      "rollScale": 100,
+      "trigger": "roll 0 through 33 inclusive",
+      "probability": "34%",
+      "triggered": true,
+      "storedRule": "When triggered, create one original hairstyle or fashion-color experiment for that character while preserving the canonical face, hairline, age read and identity. Rotate cuts, curls, braids, ponytails, updos, sculptural waves, wet-look styling and controlled luminous color accents; do not clone another character's hair. The user's 34/67 wording is treated as rounded guidance, with the exact deterministic roll totaling 100%.",
+      "otherwise": "66% canonical regular hair",
+      "rendererSafeAlias": "AI ECE appearance beat 08",
+      "materializedInstruction": "ECE preserves her canonical face, chestnut-brunette identity and hairline while wearing one distinct editorial hair variation.",
+      "storedRuleSha256": "b5e790dd9d811a953018e341657b3c591b13567d74c7c8dc6ff833606ad2c053",
+      "materializedInstructionSha256": "a75a3d4b5c4cf06318c853bd39ba04877852a2344fa49e8e71d7b77c050cb8dc",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "AI ECE.whisperAndInterlacedHands",
+      "scope": "AI ECE",
+      "trait": "whisperAndInterlacedHands",
+      "seed": "903|AI ECE|whisperAndInterlacedHands|mile-high-v1",
+      "firstEightHex": "bb9898e9",
+      "roll": 9,
+      "rollScale": 1000,
+      "trigger": "precision roll 0 through 17 inclusive",
+      "probability": "1.8%",
+      "triggered": true,
+      "storedRule": "Whisper a breath-soft mission secret directly beside one partner's ear while deliberately interlacing fingers with the other, making both connections unmistakable in the same instant and letting each woman visibly reciprocate.",
+      "otherwise": null,
+      "rendererSafeAlias": "AI ECE appearance beat 09",
+      "materializedInstruction": "ECE whispers one breath-soft mission secret beside Ellie's ear while deliberately interlacing fingers with Alia, making both reciprocated connections unmistakable in the same instant.",
+      "storedRuleSha256": "64378510fe2dbb916308db8c6abeed638bd856e764bcfecdcce3d82ac344a0df",
+      "materializedInstructionSha256": "ab64f592408d750d3bb9dc308fd60ef5f671799dc6e22d24baedb77d9fd115cb",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    },
+    {
+      "id": "trio.threeWayForeheadLean",
+      "scope": "trio",
+      "trait": "threeWayForeheadLean",
+      "seed": "903|trio|threeWayForeheadLean|mile-high-v1",
+      "firstEightHex": "9ef6233e",
+      "roll": 6,
+      "rollScale": 1000,
+      "trigger": "trio precision roll 0 through 19 inclusive",
+      "probability": "2.0%",
+      "triggered": true,
+      "storedRule": "Bring all three foreheads and temples into one tight triangular lean-in, shoulders touching and smiles nearly shared, so the photograph reads as a private pact among lovers without hiding any canonical face.",
+      "otherwise": null,
+      "rendererSafeAlias": "original trio tableau beat 10",
+      "materializedInstruction": "Radiance, Ellie and Alia bring their foreheads and temples into one tight triangular lean-in so the finale reads as a private pact among lovers without hiding any canonical face.",
+      "storedRuleSha256": "a0f012aaf179ba1058c01cf92a87ef6db6d0bce64ea1d765d885a631de30feff",
+      "materializedInstructionSha256": "bfd9997aa70ae3df36b995597e6778445021d279b91511d33176ef05d05d687d",
+      "semanticStatus": "preserved-as-concrete-visible-direction"
+    }
+  ]
+}

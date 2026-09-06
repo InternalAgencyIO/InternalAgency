@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "checkpointType": "four-lanes-dispatched-terminal-captured",
+  "createdAtUtc": "2026-08-27T05:16:48.147Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPullRequest": 13,
+  "batch": 423,
+  "country": "Somalia",
+  "scenes": [
+    1712,
+    1713,
+    1714,
+    1715
+  ],
+  "orderedReferences": [
+    {
+      "anchor": 938,
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "anchor": 936,
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "anchor": 937,
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "uploadAuthorization": {
+    "standingAuthorizedAtUtc": "2026-08-27T04:05:01.0694990Z",
+    "expiresAtUtc": "2026-08-28T04:05:01.0694990Z"
+  },
+  "sendAuthorization": {
+    "actionTimeUserText": "good authorized go",
+    "granted": true,
+    "successfulClicksAtUtc": "2026-08-27T05:08:11.954Z"
+  },
+  "controllerRecovery": {
+    "priorFileChooserFailure": true,
+    "priorProviderOccurrenceCount": 0,
+    "fullTabResetCompleted": true,
+    "successfulDispatchCount": 4
+  },
+  "lanes": [
+    {
+      "scene": 1712,
+      "promptSha256": "5A66170ACE8E32F3787D0C326CECFCF49CC487CA6D98313D8F2824B9EEEE4917",
+      "providerUrl": "https://www.meta.ai/prompt/1e7c5601-1b68-4727-94a6-1d9b2748f749",
+      "terminalOutcome": "output-hard-unusable",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": "c466d46c3cad2bada6d9124fce80b71967e316fa4f925f6e4342c4eaf26da63a"
+    },
+    {
+      "scene": 1713,
+      "promptSha256": "60B5C9A72935134CDE5AED6E322DBE6E5723F8DA6452B50FCFB564856E018428",
+      "providerUrl": "https://www.meta.ai/prompt/5006f458-dc3e-4059-9265-2b13d0b75751",
+      "terminalOutcome": "output-hard-unusable",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": "da8845b926b529061128ac2ef578cd606b27cc674e7d80f37cc4defc3363cf7b"
+    },
+    {
+      "scene": 1714,
+      "promptSha256": "81757D2A10074A09F883C87D06642CD5ECB4D8F0849F658D8974CE66EFE8B1BF",
+      "providerUrl": "https://www.meta.ai/prompt/1edf8fa0-6a1e-4fd0-bd55-31d1a1f4bb65",
+      "terminalOutcome": "output-hard-unusable",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": "f4f088f941b6b8a21d089466c12818fd37dd9e1f7faa2c763aa4c679ea13f98d"
+    },
+    {
+      "scene": 1715,
+      "promptSha256": "0D609E93CF2AA749F6C3679C41AEFBEA894D12F6C8CBF821310F2021B6CE30EA",
+      "providerUrl": "https://www.meta.ai/prompt/1865ca8e-ea41-466b-894f-2b2fea25f540",
+      "terminalOutcome": "explicit-no-bytes-refusal",
+      "sendClickCount": 1,
+      "retrySent": false,
+      "sha256": null
+    }
+  ],
+  "confirmedProviderChatCount": 4,
+  "duplicateDispatchCount": 0,
+  "boundedRetryAuthorized": false,
+  "boundedRetryCount": 0
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUtc": "2026-09-05T23:39:25Z",
+  "state": "content-remote-verified-browser-dispatch-held",
+  "contentCommit": "692b7bb387b5e1225ad97b17bf987e723224e0ff",
+  "branch": "agent/starlight-progress-archive",
+  "remoteUrl": "https://github.com/InternalAgencyIO/InternalAgency.git",
+  "originHead": "692b7bb387b5e1225ad97b17bf987e723224e0ff",
+  "prHead": "692b7bb387b5e1225ad97b17bf987e723224e0ff",
+  "pr": {
+    "number": 13,
+    "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "state": "open",
+    "draft": true
+  },
+  "localOriginPrEqual": true,
+  "lfs": {
+    "newObjectsUploaded": 4,
+    "uploadBytesDisplay": "9.1 MB",
+    "newCommitObjectsFsck": "OK",
+    "dryRunPendingObjects": 0
+  },
+  "verification": {
+    "stagedFiles": 19,
+    "stagedJsonParsed": true,
+    "scopedPathsOnly": true,
+    "manifestIndexBytesOrLfsOidsExact": true,
+    "localManifestExact": true,
+    "noNewAbsoluteMachinePathsOrSecretLikeStrings": true,
+    "fixedBankReproducible": true,
+    "editorialTestsPassed": 5,
+    "editorialTestsFailed": 0,
+    "sloveniaManifestInventorySha256": "500052C7049C03DDD85A74E486C2C989F84D0B448C6E5A2FCFFB389F258302B0"
+  },
+  "closure": {
+    "sloveniaSelected": 4,
+    "sloveniaRawRetained": 4,
+    "sloveniaMetaRetries": 0,
+    "sloveniaOnePassEdits": 4,
+    "armeniaPromptsPrepared": 4,
+    "armeniaSends": 0,
+    "readyCountryPairPosts": 2,
+    "canonicalXPostCount": 195,
+    "latestXUrl": "https://x.com/dogramaci/status/2096357831981031573"
+  },
+  "preservedUntrackedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "browserGate": "Still no supported live in-app inspection/upload/click tool. The two UI opening requests were queued, not verified opened. No additional provider or X submission after disconnect. No credit exhaustion or account logout has been observed in this current state.",
+  "guardianGate": "No Starlight guardian exists in the current inventory. Unrelated guardians were not changed, and none was created. Continuous unattended rendering is not active.",
+  "nextSafeAction": "Deliver this verification-only record with an ordinary commit and push, then verify the new containing commit against local/origin/PR heads. Browser continuation must start from starlight-resume-2026-09-06-checkpoint.json and fresh visible tabs; it must not re-render Slovenia or repost Monaco-North Macedonia."
+}

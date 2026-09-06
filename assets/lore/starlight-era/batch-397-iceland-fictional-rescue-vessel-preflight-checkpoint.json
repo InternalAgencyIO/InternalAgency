@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "batch": 397,
+  "country": "Iceland",
+  "status": "closed-4-of-4-remote-verified",
+  "preparedAtUtc": "2026-08-22T01:55:20.1853399Z",
+  "lastWakeAuditAtUtc": "2026-08-22T04:42:16.4592950Z",
+  "sourceCommit": "6daa89c493cfa29f404de5d7fa0597a2827c564a",
+  "contract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "9251B3CC81CC0BB320279DE47AE615EF4C7732D193CCA7485BCAD3943201C1BC"
+  },
+  "queueAuthorization": {
+    "priorCountry": "Bahamas",
+    "priorBatch": 396,
+    "priorStatus": "closed-4-of-4-remote-verified",
+    "priorCommit": "37bba06a00996897b427445dad8df472e7a95c47",
+    "authoritativeOrderEvidence": "assets/lore/starlight-era/world-195x4-campaign.json",
+    "historicalIcelandEvidence": {
+      "path": "assets/lore/starlight-era/batch-326-iceland-relaxed-audit-checkpoint.json",
+      "countryMotifPolicy": "Reuse researched secular geometry only; never reopen historical Iceland media."
+    },
+    "nextCountry": "Iceland",
+    "nextBatch": 397,
+    "scenes": [1608, 1609, 1610, 1611],
+    "cinematicTheme": "fictional coast-guard rescue-vessel couture",
+    "themePairPosition": "1 of 2",
+    "provider": "Meta AI"
+  },
+  "countryResearch": {
+    "policy": "Iceland identity appears through large secular research installations and landmark-derived geology. No literal flag, coat of arms, official emblem, sacred symbol, religious building, copied ceremonial pattern, official uniform, badge, or political insignia.",
+    "sources": [
+      {"url":"https://visitreykjavik.is/service/harpa-concert-hall-and-conference-centre","use":"Harpa secular colored-glass waterfront geometry and Reykjavik harbor"},
+      {"url":"https://www.thingvellir.is/en/","use":"Thingvellir rift valley, Almannagja walls, lake, lava fields and public paths"},
+      {"url":"https://www.vatnajokulsthjodgardur.is/en/areas/jokulsarlon","use":"Jokulsarlon glacier lagoon, Breidamerkurjokull tongue, icebergs, black sand and open water"},
+      {"url":"https://www.south.is/en/place/reynisfjara-black-sand-beach","use":"Reynisfjara black sand, basalt columns, Reynisdrangar sea stacks and Atlantic surf"}
+    ],
+    "palette": ["glacier blue","basalt black","geothermal turquoise","moss green","lava red","aurora violet","snow white","silver mist","midnight navy","warm geothermal gold"]
+  },
+  "evidenceSnapshots": {
+    "generatedMediaManifest": {"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"85C29ADE0B172E70FE42BB9ED7A97D067835008DD59D79A99F2DE69E57EFE7AA","rows":4805},
+    "rejectedPromptLedger": {"path":"assets/lore/starlight-era/world-rejected-prompt-ledger.json","sha256":"C218E425A60D1CC9A093C46BE19F3E59C127808F29491E4D9C05B75A88B541EC"},
+    "xLedger": {"path":"assets/lore/starlight-era/world-x-publish-ledger.json","sha256":"9C0B1CCEB9E4B01D58DCF524D787973065D13F30A442C675E8BF675B3EE15064","eligibleBacklogRemaining":0,"completedRenderRunsSinceLastX":0,"mode":"render-first-after-backlog-clearance"}
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "exactAge": 21,
+    "verifiedAtUtc": "2026-08-22T04:35:57.5368873Z",
+    "uploadOrder": [
+      {"slot":1,"scene":938,"path":"assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png","sha256":"4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","verified":true},
+      {"slot":2,"scene":936,"path":"assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png","sha256":"0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","verified":true},
+      {"slot":3,"scene":937,"path":"assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png","sha256":"BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1","verified":true}
+    ]
+  },
+  "activeSuppressionProfile": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_active_suppression_profile.json",
+    "sha256": "15835E799CED6DE343FF54EB9BBA9F5AE2DAF9B73CCD9EC9554C6338D7346150",
+    "termLimit": 20,
+    "postSuppressionPromptMatches": 0
+  },
+  "blockedLexiconSnapshot": {"path":"C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl","sha256":"0E87E2341399DA8BBC5D1930D8551060C1FE83DE9E7A9B2EF3B1915129E0774F"},
+  "renderRunCadence": {
+    "completedRenderRunsSinceLastX": 0,
+    "completedBanksInCurrentRenderRun": 5,
+    "nextRenderRunBank": 6,
+    "countryBank": 3,
+    "requestedImagesPerPrompt": 1,
+    "concurrentTabs": 4
+  },
+  "scenePlans": {
+    "1608": {
+      "scene":1608,
+      "countryResearchGeometry":"Harpa honeycomb glass, Reykjavik harbor grid and Mount Esja profile",
+      "environment":{"key":"starlight|environment|batch-397|scene-1608","counter":0,"acceptedByte":122,"digestSha256":"7A1C550D8D845FE887CC74D9F401271A72647664E9FAB9DE40F16A528BD1D777","bucket":2,"name":"sunset","promptLanguage":"saturated sunset with a coral-gold horizon and readable faces"},
+      "planet":{"key":"starlight|planet|batch-397|scene-1608","counter":0,"acceptedByte":78,"digestSha256":"4E51B6842C5A771A13A56592E14C00DF6440717D64134C58EDB1C58D50CAF44B","bucket":3,"name":"LHS 1140 b"},
+      "setting":{"key":"starlight|setting|batch-397|scene-1608","counter":0,"acceptedByte":4,"digestSha256":"04F2330155E3F0DCE21DE99DF57BDF763A3E6F05EAB421C77142D07CF9996237","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
+      "raze":{"key":"RAZE|batch-397|scene-1608|knee-high-wearers","fnv1a32":4262359969,"pairIndex":1,"wearers":["Radiance","Alia"],"uncoveredLowerLegCharacters":["Ellie","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-01-primary.txt","sha256":"B18F126599FB5AE03C0561935A9145C220F3A70524322707B36FA21F0E314E7B","bytes":3361},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-02-correction.txt","sha256":"D7277AB73A662A36433117B8E8F7D19A782C7EB7B64E5CC8C672E7A433931DEE","bytes":2540,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0},
+      "bank3Prompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-03-comparison.txt","sha256":"BCE45D453EBEAB89218B0E611A70247CACA429FDF844008637ABB885ECE1ACA2","bytes":2599,"gate":"single N+1 comparison after provisional-ready Bank 2 occurrence","activeSuppressionMatches":0},
+      "bank3FallbackPrompt":{"path":"tmp/world-195x4/batch-397/scene-1608-meta-bank-03-fallback.txt","sha256":"140B580D8237CE9197304A034603743E69051C72306E6AE1FC96299E7A316527","bytes":2167,"gate":"moderation-compatible fallback prepared but not dispatched unless primary refuses","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":3,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-03/lane-1/batch-397-bank-03-lane-1-scene-1608-output-1-raw.webp","sha256":"C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48","bytes":681710,"dimensions":"1152x2048","classification":"provisional-ready-stronger-source-selected","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
+    },
+    "1609": {
+      "scene":1609,
+      "countryResearchGeometry":"Thingvellir Almannagja rift walls, lake bands, lava contours and public paths",
+      "environment":{"key":"starlight|environment|batch-397|scene-1609","counter":0,"acceptedByte":101,"digestSha256":"6569834B5FF2A9BE080A813ABD5D23EBE9C79CD86661F4CE8D8F4693D8D7A83B","bucket":1,"name":"golden-hour sunrise","promptLanguage":"golden-hour sunrise with long warm rays and readable faces"},
+      "planet":{"key":"starlight|planet|batch-397|scene-1609","counter":0,"acceptedByte":55,"digestSha256":"37548C9688FB475320D07A964B3DA134A234F661B4CF1ECD02AA2328C3D50C32","bucket":0,"name":"TRAPPIST-1 e"},
+      "setting":{"key":"starlight|setting|batch-397|scene-1609","counter":0,"acceptedByte":209,"digestSha256":"D18E87CAB479A95700782C41AED2651585B0C305C3EB6220DE79F841525878C7","bucket":2,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
+      "raze":{"key":"RAZE|batch-397|scene-1609|knee-high-wearers","fnv1a32":2476649142,"pairIndex":0,"wearers":["Radiance","Ellie"],"uncoveredLowerLegCharacters":["Alia","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-01-primary.txt","sha256":"0806B52E63E4F50D179DD3D777E6D32C3E114D73FF05E2ED2F10A1D9361353DC","bytes":3348},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-02-comparison.txt","sha256":"78C9080A4B641615E4B436B740EE80AF053022B3901B86086ECF93DDE75FA02D","bytes":2399,"gate":"single N+1 comparison after provisional-ready Bank 1 occurrence","activeSuppressionMatches":0},
+      "bank3Prompt":{"path":"tmp/world-195x4/batch-397/scene-1609-meta-bank-03-provider-fallback.txt","sha256":"01C3134152D8D594924759E618B0A5E72133798B70CC405AAC3C37FA3709EFC7","bytes":2308,"gate":"single moderation-compatible provider-shortfall fallback after Bank 2 N+1 refusal","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":1,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-01/lane-2/batch-397-bank-01-lane-2-scene-1609-output-1-raw.png","sha256":"A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7","bytes":1933312,"dimensions":"768x1360","classification":"provisional-ready-selected-after-N+1-refusal-and-provider-shortfall-fallback-failure","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
+    },
+    "1610": {
+      "scene":1610,
+      "countryResearchGeometry":"Jokulsarlon lagoon, Breidamerkurjokull glacier tongue, iceberg facets and black-sand bands",
+      "environment":{"key":"starlight|environment|batch-397|scene-1610","counter":0,"acceptedByte":227,"digestSha256":"E3517B3859CB36C7B7B793F47CBF8013D77448C8AF7F3C98104009CE9453B33F","bucket":2,"name":"sunset","promptLanguage":"saturated sunset with a coral-gold horizon and readable faces"},
+      "planet":{"key":"starlight|planet|batch-397|scene-1610","counter":0,"acceptedByte":136,"digestSha256":"8813D53D8110FAD26C47E7D5EED0A9B3CDD70ADFE30B86C0650986163B6722B3","bucket":1,"name":"Proxima Centauri b"},
+      "setting":{"key":"starlight|setting|batch-397|scene-1610","counter":0,"acceptedByte":53,"digestSha256":"35BD41F50B8809272487673D8D8F34649D5159F5F832441012AE109808D6EACA","bucket":2,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
+      "raze":{"key":"RAZE|batch-397|scene-1610|knee-high-wearers","fnv1a32":4203582084,"pairIndex":0,"wearers":["Radiance","Ellie"],"uncoveredLowerLegCharacters":["Alia","AI ECE"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"vertical on outer calf"},
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-01-primary.txt","sha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","bytes":3404},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1610-meta-bank-02-correction.txt","sha256":"D0F5082B06A179499C39A1EDC0997A33EBE3AF147036BE0535E8644F3A44A67C","bytes":2537,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":2,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-02/lane-3/batch-397-bank-02-lane-3-scene-1610-output-1-raw.webp","sha256":"011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083","bytes":620370,"dimensions":"1152x2048","classification":"provisional-ready-strongest-source-selected","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
+    },
+    "1611": {
+      "scene":1611,
+      "countryResearchGeometry":"Reynisfjara black sand, basalt columns, Reynisdrangar sea stacks and Dyrholaey profile",
+      "environment":{"key":"starlight|environment|batch-397|scene-1611","counter":0,"acceptedByte":21,"digestSha256":"15C8352CD16EB34AFE1D47CE628C2FCC3C237D5A6B01F84A35F7301C430911DB","bucket":1,"name":"golden-hour sunrise","promptLanguage":"golden-hour sunrise with long warm rays and readable faces"},
+      "planet":{"key":"starlight|planet|batch-397|scene-1611","counter":0,"acceptedByte":10,"digestSha256":"0A6F451397DA5AE591057FA1890444C6A63080F133370112C7414E1120E1416A","bucket":0,"name":"TRAPPIST-1 e"},
+      "setting":{"key":"starlight|setting|batch-397|scene-1611","counter":0,"acceptedByte":1,"digestSha256":"01CF126E0580860C4AAE03D2685BDBF5031C891EC317C40EDA82CD4502C14631","bucket":1,"name":"protected exterior surface","promptLanguage":"outdoors beneath a transparent pressure field and open shield perimeter with dry stable footing"},
+      "raze":{"key":"RAZE|batch-397|scene-1611|knee-high-wearers","fnv1a32":1667746703,"pairIndex":5,"wearers":["Alia","AI ECE"],"uncoveredLowerLegCharacters":["Radiance","Ellie"],"wearerOneSides":"Split-Star left, RAZE wordmark right","wearerTwoSides":"RAZE wordmark left, Split-Star right","wordmarkOrientation":"compact at outer upper calf"},
+      "primaryPrompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-01-primary.txt","sha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","bytes":3405},
+      "bank2Prompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-02-correction.txt","sha256":"D1D97A82B8F067914938E26BD9DF68C6283BB3A4ED688F90367B944C3EE40077","bytes":2541,"gate":"fresh correction after hard-unusable Bank 1 occurrence","activeSuppressionMatches":0},
+      "bank3Prompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-03-correction.txt","sha256":"2193095EAD176166B675F83C27CBB7616722FE8C23CFD356CD9B1DA651161670","bytes":2745,"gate":"fresh correction after hard-unusable Bank 2 occurrence; remove forbidden readable text","activeSuppressionMatches":0},
+      "bank3FallbackPrompt":{"path":"tmp/world-195x4/batch-397/scene-1611-meta-bank-03-fallback.txt","sha256":"1A9322DF0D5D824B1C9250277124EC15390066491ED51C64EB9A7B14EF64255F","bytes":2338,"gate":"moderation-compatible fallback prepared but not dispatched unless primary refuses","activeSuppressionMatches":0},
+      "selectedMetaSource":{"bank":3,"rawPath":"outputs/meta5_batch_staging/batch-397/bank-03/lane-4/batch-397-bank-03-lane-4-scene-1611-output-2-inline-regenerated-raw.webp","sha256":"48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45","bytes":523874,"dimensions":"1152x2048","classification":"provisional-ready-stronger-source-selected","nextGate":"remote archive barrier then one clothing-only ChatGPT final refinement"}
+    }
+  },
+  "browserEvidence": {
+    "persistentMetaTabsRequired":4,
+    "persistentMetaTabsObserved":4,
+    "referenceUploadOrder":[938,936,937],
+    "dispatchState":"bank-02-terminal-results-preserved-raw-parity-restored-qa-complete",
+    "providerRequestsSent":11,
+    "dispatchStartedUtc":"2026-08-22T02:01:30.879Z",
+    "occurrenceLedger":"progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-meta-bank-01.jsonl",
+    "lanes":[
+      {"lane":1,"scene":1608,"providerUrl":"https://www.meta.ai/prompt/270fe41b-e893-4fe6-a1e2-9a907086f566","primaryPromptSha256":"B18F126599FB5AE03C0561935A9145C220F3A70524322707B36FA21F0E314E7B","fallbackPromptSha256":"2BBAFAA5D5C67B9B341F42E4CF8BDA488C2D20DEDF9E6CD93E616405CD46AAB3","referenceUploadOrder":[938,936,937],"state":"fallback-media-hard-unusable-raw-export-recovered","rawMediaSha256":"8EF702F89A258C15159DEDDF2E0B47C1B0D09756E3812F775E09C9A8D561E26F","rawMediaBytes":730770,"dimensions":"1152x2048","rawClassification":"hard-unusable","browserPreviewSha256":"0037AC350C673F4EC3574A7CC58141CF9252E446C35509CDD5127D43881C1A6E"},
+      {"lane":2,"scene":1609,"providerUrl":"https://www.meta.ai/prompt/050ab99d-9e0e-443b-8027-2fa94f7459d6","primaryPromptSha256":"0806B52E63E4F50D179DD3D777E6D32C3E114D73FF05E2ED2F10A1D9361353DC","referenceUploadOrder":[938,936,937],"state":"primary-media-provisional-ready-raw-export-recovered","rawMediaSha256":"A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7","rawMediaBytes":1933312,"dimensions":"768x1360","rawClassification":"provisional-ready","browserPreviewSha256":"23FA1C642947AD83105DC889D43DB2D86013A7E690DBA69CD883FDA55C3AE7D7"},
+      {"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/ff9add6c-8eac-4d36-88a5-68519b10bf24","primaryPromptSha256":"485060348E949C10FABE59DC69B7D49B9B8041B2C71270B1687DCCB1EF44EF10","fallbackPromptSha256":"5402CE007AAE10670BCA6D531D6DC6B13B82978FD049C9FA37A00A2259D7C735","referenceUploadOrder":[938,936,937],"state":"fallback-media-hard-unusable-raw-export-recovered","rawMediaSha256":"A3FB5BCCFBC9CC8036B59083B84CFBDAA59D22C36E3A60664DA92E88031BCE1E","rawMediaBytes":645258,"dimensions":"1152x2048","rawClassification":"hard-unusable","browserPreviewSha256":"0D4B50B7F6AE98E48D7B5CAC4BB23B20735CF50C11E8AA5CC717EAB29136DAB5"},
+      {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/fb3025b6-6358-4e06-b1e0-16b5b857dd74","primaryPromptSha256":"42CD0288635CA0B5240382EB7745E843450E2EA7A29A5C68B4F57F11B81BDFE9","fallbackPromptSha256":"A4C21EA27733AF4F3811776F035FC525E9EF3F206D25178B134FB51E473B16F7","referenceUploadOrder":[938,936,937],"state":"fallback-media-hard-unusable-raw-export-recovered","rawMediaSha256":"E4479979D958F894DC8A7A1D33C092C81C5B80E6DFD7FF7109064EE9829F3952","rawMediaBytes":539792,"dimensions":"1152x2048","rawClassification":"hard-unusable","browserPreviewSha256":"AF95788D26914DE4CCB2733C9FA848A1F65CF63213E8204A8918E1AE2452E4F8"}
+    ],
+    "terminalEvidence":{"primaryRefusalsNoBytes":3,"completedMediaResults":4,"providerOfferedFallbacksUsed":3,"rawExportsPreserved":4,"rawExportsRemaining":0,"delayedDownloadsPreserved":5,"duplicateDelayedDownloads":1,"browserPreviewsPreserved":4,"rawExportBlocker":null,"rawExportParity":"restored","rawQaClassified":4,"rawQaRemaining":0,"provisionalReadyScenes":[1609],"hardUnusableScenes":[1608,1610,1611],"archiveManifestOccurrences":["96f9885de8f043e1c827a567f30530a90c9ff01d195f9669ce3bd8bfdcb1e402","c29cde46248b5aa2bad1706e30c71c3e3c65d6c7b3eb562c12f47b337efe0083","5454062df54b2f43c41926a14181e5501e9a6e0559300b9fbea290e567f5e6aa","8b79339f28f5894170b5661d5ae4b61990e03e947a3a2cf6760f5f345ec9e188","7f999870b4824883c1f47317ca639ca5e6edf1c2d8b96e9c581b4644f9806f4a","2e385da67738f92f75636bf5ee37d51c3f80b62fef1860b68ae9955cce9b5926"]},
+    "bank2Dispatch": {
+      "preflightAtUtc":"2026-08-22T03:16:11.341Z",
+      "observedAtUtc":"2026-08-22T03:16:17.001Z",
+      "provider":"Meta AI",
+      "persistentTabsObserved":4,
+      "requestedImagesPerPrompt":1,
+      "referenceUploadOrder":[938,936,937],
+      "referenceSha256":["4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"],
+      "lanes":[
+        {"lane":1,"scene":1608,"providerUrl":"https://www.meta.ai/prompt/09748f75-d3d8-4f46-8ba5-50d3373d760a","promptSha256":"D7277AB73A662A36433117B8E8F7D19A782C7EB7B64E5CC8C672E7A433931DEE","gate":"correction","state":"media-provisional-ready-raw-export-preserved","rawMediaSha256":"579B927A507CCA7C769B0E052AB81C7D07379ED5D92B0B659AF607F44100F721","rawMediaBytes":721304,"dimensions":"1152x2048"},
+        {"lane":2,"scene":1609,"providerUrl":"https://www.meta.ai/prompt/2e3bd35d-6dcd-436a-bb02-8fd0fda25605","promptSha256":"78C9080A4B641615E4B436B740EE80AF053022B3901B86086ECF93DDE75FA02D","gate":"N+1 comparison","state":"explicit-refusal-no-bytes-preserved"},
+        {"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/2f578ed2-ee5f-497e-b4bf-1a2f6ef17abe","promptSha256":"D0F5082B06A179499C39A1EDC0997A33EBE3AF147036BE0535E8644F3A44A67C","gate":"correction","state":"media-provisional-ready-raw-export-preserved","rawMediaSha256":"011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083","rawMediaBytes":620370,"dimensions":"1152x2048"},
+        {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/95693ff6-971b-4015-afb9-9cf6ea0081de","promptSha256":"D1D97A82B8F067914938E26BD9DF68C6283BB3A4ED688F90367B944C3EE40077","gate":"correction","state":"media-hard-unusable-raw-export-preserved","rawMediaSha256":"BA995C3E46ECDB12B62727190AAC7CB54F572CDBD46412EC22A531B23918C6A6","rawMediaBytes":621162,"dimensions":"1152x2048"}
+      ]
+    },
+    "bank3Preflight": {
+      "preparedAtUtc":"2026-08-22T03:44:54.0502165Z",
+      "provider":"Meta AI",
+      "persistentTabsObserved":4,
+      "requestedImagesPerPrompt":1,
+      "eligibleScenes":[1608,1609,1611],
+      "idleResolvedScenes":[1610],
+      "referenceUploadOrder":[938,936,937],
+      "referenceSha256":["4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6","0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB","BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"],
+      "activeSuppressionMatches":0,
+      "state":"evidence-authorized-prompts-dispatched-three-eligible-lanes"
+    },
+    "bank3Dispatch": {
+      "dispatchedAtUtc":"2026-08-22T03:46:43.828Z",
+      "provider":"Meta AI",
+      "persistentTabsObserved":4,
+      "requestedImagesPerPrompt":1,
+      "referenceUploadOrder":[938,936,937],
+      "resolvedIdleLane":{"lane":3,"scene":1610,"providerUrl":"https://www.meta.ai/prompt/2f578ed2-ee5f-497e-b4bf-1a2f6ef17abe","state":"resolved-idle-no-filler"},
+      "lanes":[
+        {"lane":1,"scene":1608,"providerUrl":"https://www.meta.ai/prompt/f76238df-dfa7-43cd-8d44-c17068d669f1","promptSha256":"BCE45D453EBEAB89218B0E611A70247CACA429FDF844008637ABB885ECE1ACA2","gate":"N+1 comparison","state":"selected-provisional-source-stop-meta-lane","rawMediaSha256":"C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48"},
+        {"lane":2,"scene":1609,"providerUrl":"https://www.meta.ai/prompt/fdcb669d-45be-452f-9738-73fff63128e8","promptSha256":"01C3134152D8D594924759E618B0A5E72133798B70CC405AAC3C37FA3709EFC7","gate":"single provider-shortfall fallback after N+1 refusal","state":"hard-unusable-stop-meta-lane-selected-bank-1-source","rawMediaSha256":"E9CA2A937FFC945666E21BF46AA0027F834A5164C0AC287FB0D29E9A9788DBB1"},
+        {"lane":4,"scene":1611,"providerUrl":"https://www.meta.ai/prompt/a3475cea-5f52-47af-b587-1e2207d6552b","promptSha256":"2193095EAD176166B675F83C27CBB7616722FE8C23CFD356CD9B1DA651161670","gate":"fresh correction after hard-unusable Bank 2 occurrence","state":"selected-provider-auto-regenerated-source-stop-meta-lane","rawMediaSha256":"48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45"}
+      ],
+      "occurrenceLedger":"progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-meta-bank-03.jsonl"
+    },
+    "terminalEvidenceBank3": {
+      "completedAtUtc":"2026-08-22T03:54:54.601Z",
+      "completedEligibleLanes":3,
+      "resolvedIdleLanes":1,
+      "completedMediaOccurrences":5,
+      "uniqueRawMedia":4,
+      "duplicateProviderExports":1,
+      "rawExportsPreserved":5,
+      "rawExportsRemaining":0,
+      "rawParity":"restored",
+      "rawQaClassified":4,
+      "rawQaRemaining":0,
+      "selectedMetaSourceScenes":[1608,1609,1610,1611],
+      "selectedMetaSourceSha256":["C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48","A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7","011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083","48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45"],
+      "archiveManifest":{"path":"progress-reports/codex-generated-media/manifest.jsonl","sha256":"97C63A9A9F0094A1F5A9BC54CC6206A07007C744C27E768DCC054D33214067D6","rows":4780,"occurrenceIds":["774040f6fc174b27e6d98a948eaa99230395d0c48e0108d5cbd0418e6244bb11","400c69c916e42b89c6b190da1ade1f34a87815e93f3b38a9ff0793397fd8c74f","3e8ff5000ca0108fcfae2b7547f60081d4b91a2ce6c96d612a9f2165f03f9417","4231debc1cdca21e67a6a40496ad6ceefbcbf2e8df581fe433a98e2096d2c967","9b9ab97d1ae2269e20757fe7b7dfa16a359d211e0b2c5ea3eb73b4cf4eb1f92c"]},
+      "rejectedPromptLedgerVerified":true,
+      "projectFailedPromptLedgerVerified":true,
+      "canonicalMediaCreated":0,
+      "bankCountIncremented":true,
+      "remoteBarrier":"passed at evidence commit 00aafc482805fd987af874f856ec2231732338a3",
+      "remoteParity":{"evidenceCommit":"00aafc482805fd987af874f856ec2231732338a3","branchHeadVerified":true,"draftPr13HeadVerified":true,"draftPr13Open":true,"lfsDryRunEmpty":true,"worktreeClean":true,"ledgerParityVerified":true,"archiveParityVerified":true}
+    },
+    "terminalEvidenceBank2": {
+      "completedMediaResults":3,
+      "explicitRefusalsNoBytes":1,
+      "rawExportsPreserved":3,
+      "rawExportsRemaining":0,
+      "rawParity":"restored",
+      "rawQaClassified":3,
+      "rawQaRemaining":0,
+      "provisionalReadyScenes":[1608,1610],
+      "hardUnusableScenes":[1611],
+      "refusedScenes":[1609],
+      "canonicalMediaCreated":0,
+      "bankCountIncremented":true,
+      "archiveManifestOccurrences":["116529481d0f1ff3c97182723f36f641859e4b5f872700e34d98d423dca492cd","b639bec60337c819904cf56b737eb946078618d7e6d4c7a3111ed65a770afae1","177431143123d9b885d26bb30e7127e7d03b353338e80811c053951a0e5b8e7d"],
+      "remoteParity":{"evidenceCommit":"6daa89c493cfa29f404de5d7fa0597a2827c564a","branchHeadVerified":true,"draftPr13HeadVerified":true,"lfsDryRunEmpty":true,"worktreeClean":true}
+    },
+    "rawExportRecoveryAudit": {
+      "auditedAtUtc":"2026-08-22T02:27:23.3352425Z",
+      "scene":1611,
+      "viewer":"Meta full-screen media viewer for gallery/trappist_sunrise_group.webp",
+      "attempts":[
+        {"method":"visible Download button plus download-event wait","timeoutMs":15000,"result":"timed out; no browser download event and no file materialized"},
+        {"method":"viewer development-log inspection","result":"empty log; no surfaced network or console error"},
+        {"method":"viewer image right-click","result":"no browser context menu or save-image path appeared"},
+        {"method":"viewer image focus plus Ctrl+C and browser clipboard read","result":"clipboard remained empty"},
+        {"method":"viewer More options","result":"only Good result and Bad result controls; no alternate export path"}
+      ],
+      "result":"raw-source export parity remains blocked; no prompt was dispatched while the parity gate is closed"
+    },
+    "previewQa": {
+      "ledger":"progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-meta-bank-01-preview-qa.jsonl",
+      "sha256":"CE27C42BEAC66D48975A8FEA8B5ED39E51C7925E6DB6200E75838AF035EA0754",
+      "auditedAtUtc":"2026-08-22T02:27:23.3352425Z",
+      "classifications":{"1608":"hard-unusable-preview","1609":"preview-pass-raw-required","1610":"preview-inconclusive-render-surface-occluded","1611":"hard-unusable-preview"},
+      "archiveManifestOccurrences":["0bb254c34478a25c17954bcfcd1a5d3468a2db660a1c1475e7f2438b10cf6fa2","6e8fac194037d20ff3396ecc08578b11f6b472dc4e753853a532ff70d071b7c9","2a09e21796a5f36ab5bbde4104cd9c16ea99668d053524e6529a829ae3ac67bd","67b6397eb42c875c78ee566fba9416c5e8e83cc95522bbf95b4206e8d5aafd88"],
+      "canonicalMediaCreated":0,
+      "bankCountIncremented":false
+    }
+  },
+  "chatgptFinalization": {
+    "useCase": "identity-preserving clothing-only final edit",
+    "sourceArchiveBarrierCommit": "15f3811ef01534ed3c717670961652852b73932f",
+    "primaryCallsUsed": 4,
+    "conditionalRetriesUsed": 0,
+    "hardSafetyFailures": 0,
+    "faceAnchorFailures": 0,
+    "occurrenceLedger": {
+      "path": "progress-reports/codex-generated-media/provider-occurrences/batch-397-iceland-chatgpt-clothing-final.jsonl",
+      "rows": 8,
+      "sha256": "11DD1E20C0768253E43F3A166DA0BDD046C7CA95451E79D3960F417AA15FBCBF"
+    },
+    "archiveManifest": {
+      "path": "progress-reports/codex-generated-media/manifest.jsonl",
+      "rows": 4805,
+      "sha256": "85C29ADE0B172E70FE42BB9ED7A97D067835008DD59D79A99F2DE69E57EFE7AA",
+      "postCommitSourceStateRowsAdded": 8,
+      "postApplyDryRunNewRows": 0,
+      "postApplyDryRunNewBlobs": 0
+    },
+    "finalSelections": [
+      {
+        "scene": 1608,
+        "sourceMetaSha256": "C203EFC344A94060F29A6305AAAFCFF2AE3F2ADDF0C706175D50C1845B01CF48",
+        "finalSha256": "C45E4636A5CF1E80AE98D15A32744945D696DE0C442F82B65673B276251810CE",
+        "canonicalPath": "assets/lore/starlight-era/1608-iceland-harpa-sunset-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "160c0bfe7921208c4838549025f7d1dd9bcd351f82794a430b943f22b39db0f3"
+      },
+      {
+        "scene": 1609,
+        "sourceMetaSha256": "A9E55267CFE250A8A238377C2AC00E790281879F208A50BD4911EEE8C6BF5FF7",
+        "finalSha256": "D9293F8F64BBED531B303D6AC8BDD3FEB465CF75C852754A8F8844614807288B",
+        "canonicalPath": "assets/lore/starlight-era/1609-iceland-thingvellir-sunrise-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "c31d26678312e5904ab9777ceeead4bda6cd6c62c2dceff7d4e51e629fed50ab"
+      },
+      {
+        "scene": 1610,
+        "sourceMetaSha256": "011DD1B5D03A14FC26A2AE1F0C33EAB5F6EC1D9A338A4E3B913B61258763B083",
+        "finalSha256": "8091970F0E4EB14320A016EBD2F224DC8D9E0A0D17234FCDC1390D0FD490BA87",
+        "canonicalPath": "assets/lore/starlight-era/1610-iceland-jokulsarlon-sunset-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "21c76d260ecc2eae15ea086b7100643c9a5360c4860b470e869279eacc6fdbb9"
+      },
+      {
+        "scene": 1611,
+        "sourceMetaSha256": "48AFD7A3FF3F6A2C1EF3D5E5D5C208BEFAA21165F93131F6C9E0C55F4C188A45",
+        "finalSha256": "138243E98873562C6558C749DE28767849B287CFD3A7AFBC905216E17AFB46C9",
+        "canonicalPath": "assets/lore/starlight-era/1611-iceland-reynisfjara-sunrise-raze-close-love-chatgpt-final.png",
+        "qaDisposition": "accepted-chatgpt-final-primary-face-safe-hard-safe",
+        "archiveOccurrenceId": "ace20b9877f9cfd8701fae3493d9ed2458cae3a60d01bf1a4b2a261860410e46"
+      }
+    ],
+    "acceptanceState": "canonical-final-remote-verified",
+    "remoteParity": {
+      "verifiedAtUtc": "2026-08-22T04:42:16.4592950Z",
+      "evidenceCommit": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "localHead": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "remoteBranchHead": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "draftPr13Head": "7e6dcd954365bcd7a5007ef733960bd436165281",
+      "draftPr13Open": true,
+      "draftPr13Draft": true,
+      "lfsDryRunPendingObjects": 0,
+      "rejectedPromptLedgerVerified": true,
+      "projectFailedPromptLedgerVerified": true,
+      "archiveParityVerified": true,
+      "worktreeCleanBeforeAuditSeal": true
+    }
+  },
+  "nextAction": "Keep Iceland closed. Advance to Vanuatu Batch 398, scenes 1612 through 1615, fictional coast-guard rescue-vessel couture ordinal 2 of 2. Preserve completedRenderRunsSinceLastX at 0 and completedBanksInCurrentRenderRun at 5; the next completed four-tab Meta bank is render-run bank 6. Never reopen Iceland, Bahamas, Belize, Brunei, Cabo Verde, Maldives, or Malta."
+}

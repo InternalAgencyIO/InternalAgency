@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-08-27T22:18:06.626Z",
+  "batch": 442,
+  "country": "Cuba",
+  "provider": "Grok Imagine",
+  "browserOnly": true,
+  "xAccount": "@dogramaci",
+  "xOutcome": {
+    "status": "externally-blocked",
+    "statusUrl": null,
+    "reason": "X returned SessionBindingUnavailableError after the single authorized Post click; authenticated account settings also returned HTTP 429 code 88.",
+    "retryPolicy": "No duplicate Post click. Preserve each complete draft until X restores a usable signed request binding."
+  },
+  "scenes": [
+    {
+      "scene": 1788,
+      "providerUrl": "https://grok.com/imagine/post/f43f22c5-a817-4937-a7e6-1044d1f8418d?conversation=91af46ef-95cd-4ec5-ba26-26bc67098aca",
+      "assetUrl": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/f43f22c5-a817-4937-a7e6-1044d1f8418d/generated_video.mp4?cache=1",
+      "promptSha256": "14A5B1F9A894A4FA3E92FB5A905DD2F886284267809DFCAA778F2085DE366D47",
+      "video": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1788-havana-malecon-orbital-love-grok-video.mp4",
+        "bytes": 9725349,
+        "sha256": "3CF55B7208B17D45F1B8F355F4ACFCC8C62EA5B78E39A6244B3B517F1C9FD82D",
+        "width": 720,
+        "height": 1280,
+        "durationSeconds": 15.041667
+      },
+      "englishCcPath": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1788-havana-malecon-orbital-love-grok-video.en.srt",
+      "xCaption": "Four 21-year-old Starlight researchers cross Havana's Malecon orbital deck as a jealous dance turn softens into protection and reconciliation beneath a rolling Cuban storm.",
+      "xPostAttemptsUtc": [
+        "2026-08-27T21:39:09.785Z",
+        "2026-08-27T21:40:02.697Z",
+        "2026-08-27T21:58:24.600Z"
+      ],
+      "xStatusUrl": null
+    },
+    {
+      "scene": 1791,
+      "dispatchUtc": "2026-08-27T22:11:29.518Z",
+      "initialProviderUrl": "https://grok.com/imagine/post/40cddc78-945a-43b4-909f-86f8fbccca60",
+      "providerUrl": "https://grok.com/imagine/post/e7681d50-4a95-40a1-946c-b8449688cc6c?conversation=6c07cc93-bba2-4765-8167-9c96a130104a",
+      "assetUrl": "https://assets.grok.com/users/efe6155f-181c-4c8e-9cd7-7c9a22f2b560/generated/e7681d50-4a95-40a1-946c-b8449688cc6c/generated_video.mp4?cache=1",
+      "promptSha256": "F994C091C691626CF2A790EF478937426955DF4DCCFD1AEE0B25FDD4395FBC70",
+      "orderedFaceAnchors": [
+        {
+          "file": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+          "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+        },
+        {
+          "file": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+          "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+        },
+        {
+          "file": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+          "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+        }
+      ],
+      "video": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1791-santiago-de-cuba-bay-orbital-love-grok-video.mp4",
+        "bytes": 13397173,
+        "sha256": "7827640BE68A85B7E6EA11ED2989F4F49CA9736A97221434502C2783C179DB29",
+        "width": 720,
+        "height": 1280,
+        "durationSeconds": 15.041667
+      },
+      "englishCc": {
+        "path": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1791-santiago-de-cuba-bay-orbital-love-grok-video.en.srt",
+        "bytes": 428,
+        "sha256": "316285B91155D45DA0D2C287DEB5587AF893F7368E22C60786BAA8366D3A9606",
+        "kind": "English machine captions and non-dialogue accessibility descriptions"
+      },
+      "captionPath": "progress-reports/codex-generated-media/blobs/starlight-world-series/batch-442-cuba/scene-1791-santiago-de-cuba-bay-orbital-love-grok-video.caption.txt",
+      "xCaption": "Four 21-year-old Starlight researchers circle Santiago de Cuba Bay at blue hour as a jealous partner turn becomes protection, choice, and reconciliation on a civilian orbital deck.",
+      "xPostAttemptUtc": "2026-08-27T22:18:04.950Z",
+      "xErrorUtc": "2026-08-27T22:18:06.626Z",
+      "xStatusUrl": null,
+      "xDraftState": "Ready MP4, English captions attached, descriptive caption intact"
+    }
+  ],
+  "browserRecovery": {
+    "grokDrawerIssue": "Grok rendered its upload toolbox behind the composer.",
+    "recovery": "Applied a temporary CDP viewport override and used a user-gesture file-input click solely to open the authorized chooser. No page content was altered.",
+    "temporaryViewportCleared": true
+  }
+}

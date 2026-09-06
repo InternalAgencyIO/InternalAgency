@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "batch": 461,
+  "country": "Kyrgyzstan",
+  "status": "closed-unresolved",
+  "closedAtUtc": "2026-08-28T15:54:41.644Z",
+  "provider": "Meta AI",
+  "sceneRange": [
+    1870,
+    1873
+  ],
+  "acceptedSceneIds": [],
+  "acceptedCount": 0,
+  "hardUnusableSceneIds": [
+    1870,
+    1871,
+    1873
+  ],
+  "missingByteSceneIds": [
+    1872
+  ],
+  "refusedSceneIds": [],
+  "providerUrls": [
+    "https://www.meta.ai/prompt/9f72d2f0-5d29-4e91-9a37-ccea78f2c4ea",
+    "https://www.meta.ai/prompt/1016918a-4b5b-411c-ab9e-3a98a688455e",
+    "https://www.meta.ai/prompt/7a0230d4-3653-4bfd-9e99-e1bf615dbba9",
+    "https://www.meta.ai/prompt/cc8ada85-d020-4b51-be71-11c70bd0a321"
+  ],
+  "rawFiles": [
+    {
+      "captured": true,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1870-kyrgyzstan-bishkek-erkindik-boulevard.jpg",
+      "byteLength": 716266,
+      "sha256": "5893EDCE8921443EDB60E37B2733E37C34916E08CC4A8D087B1C0124C3BCA531",
+      "width": 1013,
+      "height": 1802,
+      "mimeType": "image/jpeg"
+    },
+    {
+      "captured": true,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1871-kyrgyzstan-issyk-kul.jpg",
+      "byteLength": 685561,
+      "sha256": "D9E82C8D4CCE2A50B60A2C596E227456493FA366C605D6A0CB29338B2FA93EDB",
+      "width": 1152,
+      "height": 1740,
+      "mimeType": "image/jpeg"
+    },
+    {
+      "captured": true,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1873-kyrgyzstan-song-kul.jpg",
+      "byteLength": 219196,
+      "sha256": "B05A707BE231A883235779AA16D17FD851A264D2BB436177AB8FF7F277AFE60D",
+      "width": 1152,
+      "height": 2048,
+      "mimeType": "image/jpeg"
+    }
+  ],
+  "orderedReferenceAnchors": [
+    {
+      "scene": 938,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+    },
+    {
+      "scene": 936,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+    },
+    {
+      "scene": 937,
+      "path": "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+    }
+  ],
+  "result": "Three archived raw outputs failed visual contract QA; one visible provider result produced explicit no-capturable-byte evidence. No scene counts toward the 60-image goal.",
+  "noRetryAuthorized": true,
+  "browserRenderedEvidence": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-461-kyrgyzstan/1872-kyrgyzstan-jeti-oguz-browser-rendered-evidence.jpg",
+      "byteLength": 73874,
+      "sha256": "B85BD8C7E64B4F5D3CB2434B6F2A6C536FE31B3ED2C9B4C53A1049B1C3CE22EC",
+      "width": 737,
+      "height": 950,
+      "mimeType": "image/jpeg",
+      "evidenceClass": "browser-rendered-provider-page-screenshot-not-raw-media"
+    }
+  ]
+}

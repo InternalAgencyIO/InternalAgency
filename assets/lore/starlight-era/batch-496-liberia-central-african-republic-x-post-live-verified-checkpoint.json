@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "state": "liberia-central-african-republic-x-publication-live-verified",
+  "createdAtUtc": "2026-09-06T12:51:41.408Z",
+  "batches": [495, 496],
+  "countryPair": ["Liberia", "Central African Republic"],
+  "destinationAccount": "@dogramaci",
+  "accountVerifiedLive": true,
+  "postUrl": "https://x.com/dogramaci/status/2096581743327293620",
+  "photoEndpoints": [
+    "https://x.com/dogramaci/status/2096581743327293620/photo/1",
+    "https://x.com/dogramaci/status/2096581743327293620/photo/2",
+    "https://x.com/dogramaci/status/2096581743327293620/photo/3",
+    "https://x.com/dogramaci/status/2096581743327293620/photo/4"
+  ],
+  "postedAtUtc": "2026-09-06T12:50:14.871Z",
+  "postedAtDerivation": "Decoded from X status snowflake 2096581743327293620; the visible live status receipt is authoritative.",
+  "liveVerifiedAtUtc": "2026-09-06T12:51:41.408Z",
+  "sceneOrder": [2007, 2009, 2012, 2014],
+  "assetSha256": [
+    "883DAD2F1D4ED6D5C2CC3D799FA70C8276468B568F0CD570BEFC41ED46553D41",
+    "206A8C3EC7E232A98CB2DA3CC8E868966CC287BE3C063DBAD1D4CF1B61E5EC15",
+    "60CFD7B6A201120DDDF291E1ACA76B1686C54353FF27BF4B519947BCD4085C1C",
+    "137D98248555EDF632E483EC6A8696C3C4CE269DF1EDDC2FC874A4891E3FD84F"
+  ],
+  "captionSha256": "3696BC829CF5BE22400E846994A4B8C20A40991105BCCFA5CCA6F745FC5E23A0",
+  "prePublicationDuplicateGate": {
+    "canonicalWorldPostsChecked": 200,
+    "candidateHashPublicationCounts": [0, 0, 0, 0],
+    "candidateScenePublicationCounts": [0, 0, 0, 0],
+    "exactCaptionPublicationCount": 0,
+    "countryPublicationCounts": {"Liberia": 0, "Central African Republic": 0},
+    "priorUncertainSubmissionResolution": "confirmed-no-transmission",
+    "passed": true
+  },
+  "publication": {
+    "userReportedManualSubmission": true,
+    "assistantVisiblePostControlActivations": 0,
+    "assistantKeyboardSubmitAttempts": 0,
+    "publicTransmissionCount": 1,
+    "duplicateMediaTransmission": false,
+    "exactCaptionLive": true,
+    "orderedPhotoEndpointCount": 4,
+    "exactAltTextCount": 4,
+    "madeWithAiLabelLive": true
+  },
+  "liveEvidence": {
+    "structuredVisibleStatusReceipt": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/x-liberia-central-african-republic-live-status-2096581743327293620-visible-receipt.json",
+    "canonicalStatusScreenshot": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/x-liberia-central-african-republic-live-status-2096581743327293620-visible.jpg",
+    "blankComposerScreenshot": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/x-composer-blank-visible-after-2096581743327293620.jpg",
+    "prePublicationReservation": "assets/lore/starlight-era/batch-496-liberia-central-african-republic-x-ready-2026-09-06-checkpoint.json"
+  },
+  "composerRestored": {
+    "verifiedAtUtc": "2026-09-06T13:06:47.3011008Z",
+    "url": "https://x.com/compose/post",
+    "signedInProfileHref": "/dogramaci",
+    "textboxText": "",
+    "mediaControlCount": 0,
+    "postEnabled": false,
+    "visibleInAppBrowserOnly": true
+  },
+  "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/x-publication-evidence-manifest.json",
+  "remoteVerification": "assets/lore/starlight-era/batch-496-liberia-central-african-republic-x-publication-git-lfs-remote-verification-checkpoint.json",
+  "canonicalContradictions": [
+    "The world X ledger retains stale top-level account and pendingPost metadata. The 201-entry posts array after this closure, the visible @dogramaci status and its four exact photo endpoints are authoritative.",
+    "The earlier user report that the prior prepared composer was posted is superseded by current explicit no-transmission evidence. The fresh remote-verified reservation was transmitted once by the user and verified live.",
+    "No Starlight guardian exists. The unrelated active X Assistant and IAT guardians were not modified."
+  ],
+  "nextSafeAction": "Never resend scenes 2007, 2009, 2012 or 2014. The blank @dogramaci composer is restored. Commit and remote-verify this live receipt and the canonical 201st Starlight ledger append, then finish Batch 497 New Zealand evidence closure without reactivating any terminal Meta Send."
+}

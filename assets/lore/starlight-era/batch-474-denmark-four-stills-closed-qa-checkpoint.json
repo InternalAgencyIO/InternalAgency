@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "batch": 474,
+  "country": "Denmark",
+  "state": "four-stills-closed-relaxed-acceptance-three-chatgpt-one-meta-raw",
+  "closedAtUtc": "2026-08-31T20:05:15.6760599Z",
+  "acceptedSceneIds": [1923, 1924, 1925, 1926],
+  "selectedAssetSha256": [
+    "8ABE6B7C20781269E7541DC2D85D47466A15E0D716367F3461D638BECD73969E",
+    "8EAF7BB44AD69946D99320ADC44868F9444BE871FD663DEC38592AFCD6015662",
+    "69BB2FD9CF27A614A5F703F17E642C205BF4A2DFF226586270E6A476A802BF1C",
+    "90638F21FA080AA9529C839243483F2423459F6CC11F439C7AC5093CEF4EAB99"
+  ],
+  "selectedSources": ["meta-raw", "chatgpt-one-strong-shortening-pass", "chatgpt-one-strong-shortening-pass", "chatgpt-one-strong-shortening-pass"],
+  "qa": {
+    "publicSafeAllFour": true,
+    "nonCorruptAllFour": true,
+    "exactlyFourClearlyAdultWomenAllFour": true,
+    "materialCastFailureSceneIds": [],
+    "duplicateHashFailureSceneIds": [],
+    "metaRetries": 0,
+    "chatgptRequestsIssued": 4,
+    "chatgptOutputsSaved": 3,
+    "chatgptOutputModerationBlockedSceneIds": [1923],
+    "chatgptModerationRequestId": "51970b2e-8543-44aa-ad46-8bdfde6c3083",
+    "additionalChatgptPassesPermitted": 0,
+    "acceptanceRuleApplied": "After one strong shortening request, accept nearly every public-safe non-corrupt selected result. Framing, brand microtext, choreography, clothing detail and location drift remain nonblocking."
+  },
+  "publication": {
+    "priorXTransmissionForSelectedHashes": false,
+    "duplicateGatePassed": true,
+    "cyprusDenmarkPairEligible": true,
+    "xPostClicks": 0,
+    "xPostUrl": null
+  },
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/provider-ledger.json",
+  "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/accessibility-sidecars.json",
+  "chatgptOutcomes": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/chatgpt-one-pass-prompts-and-outcomes.md",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-474-denmark/closure-evidence-manifest.json",
+  "closureEvidenceFileCount": 15,
+  "closureEvidenceTotalBytes": 9946257,
+  "closureEvidenceInventorySha256": "7E9239FFF33DB0C9917063B201033B5129A08FE699889461C0F3410BBD551F7A",
+  "nextSafeAction": "Create and validate the closure evidence manifest, commit every used and unused artifact through Git/LFS, push and prove remote/PR parity. Then close the four completed Meta lanes, preserve one blank X composer, verify @dogramaci, choose one unused Cyprus candidate plus two duplicate-safe Denmark candidates, set exact alt text and Made with AI disclosure, and post exactly once under the current authorization."
+}

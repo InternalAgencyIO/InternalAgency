@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "batch": 491,
+  "country": "El Salvador",
+  "state": "all-four-allowances-consumed-two-completed-two-moderation-blocked",
+  "createdAtUtc": "2026-09-06T04:29:29.8283313Z",
+  "promptSource": "assets/lore/starlight-era/batch-491-el-salvador-editorial-prompts-prepared-checkpoint.json",
+  "policy": "Exactly one built-in ChatGPT image edit invocation per accepted Meta first occurrence. Never invoke a second edit for the same scene, even for aesthetics or moderation failure.",
+  "entries": [
+    {
+      "scene": 1991,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1991-el-salvador-suchitoto-lake-suchitlan-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "55FF95CAF45D8C12147A713947B64B1A28F0AA9F4E001863254866A533E170D9",
+      "singleEditPromptSha256": "126F5B2CD95FF21FB63EF095F66883FBA955166BC268E81BFF2CF76FD3F8A14F",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "output-moderation-blocked-no-retry-meta-fallback",
+      "failure": {"stage": "output", "category": "sexual", "code": "moderation_blocked", "requestId": "f670d706-80fd-49b8-8f0b-39ea0541c178"},
+      "outputPath": null,
+      "fallbackPath": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1991-el-salvador-suchitoto-lake-suchitlan-editorial-meta-occurrence-1-raw.webp",
+      "additionalInvocationsAllowed": 0
+    },
+    {
+      "scene": 1992,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1992-el-salvador-cerro-verde-izalco-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "B534EF6A9D65276269FBDCCDFE3A0276634038CFA834AC0E8F44C41412B5F926",
+      "singleEditPromptSha256": "BFA0CB1A8708A526EB374AA24702FBE599A223E7BC0F880201E28B1AE1043552",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "output-moderation-blocked-no-retry-meta-fallback",
+      "failure": {"stage": "output", "category": "sexual", "code": "moderation_blocked", "requestId": "51f89f85-fe3a-485e-9ab8-8d0efff6df3c"},
+      "outputPath": null,
+      "fallbackPath": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1992-el-salvador-cerro-verde-izalco-editorial-meta-occurrence-1-raw.webp",
+      "additionalInvocationsAllowed": 0
+    },
+    {
+      "scene": 1993,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1993-el-salvador-joya-de-ceren-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "585EDA467116BB4795A54D292E02D90F0C619DEEC0A841E2BF36C6030B9B7681",
+      "singleEditPromptSha256": "AC824F40E196FB42CF6FE386777F8C4064CEAF302ECDA8AD9A6B97FCC09E46DA",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "outputCreatedAtUtc": "2026-09-06T04:23:54.5230704Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-a513a88b-039a-4c97-9722-7b02ac6b8643.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1993-el-salvador-joya-de-ceren-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "A133817C99E8B2B9863D9B87D3D426CE6E456BEE5A8C952075BB2AB71A95C8C9",
+      "outputBytes": 2582668,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted and archived: exact four fictional adults, coherent anatomy, Joya de Ceren context, affectionate seated grouping, secure shortened silhouettes, rainbow hosiery and varied footwear remain usable. Meta raw selected for stronger native detail and identity fidelity."
+    },
+    {
+      "scene": 1994,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1994-el-salvador-conchagua-gulf-fonseca-editorial-meta-occurrence-1-raw.webp",
+      "editTargetSha256": "3052E150D23282282E3F678E4D9F4CCE3105DD58D325E54DBE5CE271B943B95C",
+      "singleEditPromptSha256": "084F799CB9A3058562F2289D3A6F8860D7FFEF9FA79A3CE4CB48C5EAE6F47569",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "outputCreatedAtUtc": "2026-09-06T04:24:52.1623321Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-60375f99-bf64-4e98-b33a-ff14488eb9b5.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-491-el-salvador/1994-el-salvador-conchagua-gulf-fonseca-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "C5FEACD9AA369F37C265D986D83EFAD5D384397934B085E5A4CFC91C26C24A77",
+      "outputBytes": 2474791,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted and selected: exact four fictional adults, coherent anatomy, Gulf of Fonseca context, side-hug chain, secure shortened silhouettes, rainbow knee-highs and varied footwear remain usable; the rolled Dutch angle is materially stronger than the Meta raw."
+    }
+  ],
+  "completedAtUtc": "2026-09-06T04:24:52.1623321Z",
+  "totals": {"allowances": 4, "invocations": 4, "completedOutputs": 2, "moderationBlockedOutputs": 2, "remainingAllowances": 0, "additionalInvocationsAllowed": 0}
+}

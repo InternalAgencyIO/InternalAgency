@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "batch": 495,
+  "country": "Liberia",
+  "scenes": [2007, 2008, 2009, 2010],
+  "state": "four-occurrences-closed-four-x-eligible-stills-awaiting-git-lfs-remote-verification",
+  "closedAtUtc": "2026-09-06T09:02:33.2335999Z",
+  "authority": {
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "preparationCheckpoint": "assets/lore/starlight-era/batch-495-liberia-editorial-prompts-prepared-checkpoint.json",
+    "preflightCheckpoint": "assets/lore/starlight-era/batch-495-liberia-meta-dispatch-preflight-checkpoint.json",
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-495-liberia-four-meta-composers-staged-checkpoint.json",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-495-liberia-four-meta-scenes-dispatched-checkpoint.json",
+    "stagingCommit": "47daaeb0e245725347272a772f7842abda1730db",
+    "dispatchCommit": "a0f7f5c19fc8bef586735bd780efc97d94aae0b1"
+  },
+  "provider": {
+    "name": "Meta AI",
+    "account": "leesha007",
+    "mode": "Thinking",
+    "visibleSupportedInAppBrowserOnly": true,
+    "initialDispatches": 4,
+    "successfulFinalOccurrences": 4,
+    "providerOriginalAssetCount": 5,
+    "hardGenerationFailures": 0,
+    "generationRetries": 0,
+    "confirmedPromptsResent": false,
+    "terminalScenesReopened": false,
+    "orderedAnchors": [938, 936, 937],
+    "providerUrls": [
+      "https://www.meta.ai/prompt/b68a10cb-b5fb-475b-a57b-2f3811707e29",
+      "https://www.meta.ai/prompt/bb4ffcaa-bbeb-452e-99e9-9f50b214642a",
+      "https://www.meta.ai/prompt/6cdd5f04-a921-4f0d-8faf-1b2dbbb85a47",
+      "https://www.meta.ai/prompt/05c33567-35f6-4b42-aee8-2dcd906d74a7"
+    ]
+  },
+  "selectedAssets": [
+    {"scene": 2007, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2007-chatgpt-single-tailoring-pass.png", "sha256": "883DAD2F1D4ED6D5C2CC3D799FA70C8276468B568F0CD570BEFC41ED46553D41", "bytes": 2532770, "width": 941, "height": 1672, "xEligible": true},
+    {"scene": 2008, "provider": "Meta AI fallback after consumed ChatGPT invocation", "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2008-meta-primary-original.jpg", "sha256": "BBEA816945D570F2E740C5495A2EC71BC4A68E6311F81E171D0A17105AD6479B", "bytes": 304248, "width": 1152, "height": 2048, "xEligible": true},
+    {"scene": 2009, "provider": "Meta AI primary fallback after consumed ChatGPT invocation", "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2009-meta-primary-original.jpg", "sha256": "206A8C3EC7E232A98CB2DA3CC8E868966CC287BE3C063DBAD1D4CF1B61E5EC15", "bytes": 231464, "width": 1152, "height": 2048, "xEligible": true},
+    {"scene": 2010, "provider": "ChatGPT Image Generator", "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2010-chatgpt-single-tailoring-pass.png", "sha256": "FEF97D962D6F45D48132450D61E82FD3D8F10BFA5924E52EF165C646A0FD774A", "bytes": 2420489, "width": 941, "height": 1672, "xEligible": true}
+  ],
+  "qa": {
+    "acceptedSceneCount": 4,
+    "publicSafeSceneCount": 4,
+    "xEligibleSelectedAssetCount": 4,
+    "exactFourFictionalAdultsPerScene": true,
+    "completeUsableCompositionPerScene": true,
+    "recognizableLiberiaSettingPerScene": true,
+    "metaAestheticOrRollVarianceRetried": false,
+    "providerSecondaryAssetsArchived": 1,
+    "providerSecondaryAssetsExcludedFromSelection": 1,
+    "selectedAssetMatchesOutsideBatchBeforeStage": [0, 0, 0, 0],
+    "selectedAssetRepoDuplicateCountsAfterStage": [1, 1, 1, 1],
+    "scannedTrackedRepoImageCountBeforeStage": 4963,
+    "indexedRepoImageCountAfterStage": 4974,
+    "selectedAssetCanonicalXLedgerMatches": [0, 0, 0, 0],
+    "editorialRollTestsPassed": 5,
+    "editorialRollTestsFailed": 0
+  },
+  "chatgptShortening": {
+    "eligibleMetaOccurrences": 4,
+    "exactlyOnePassRequestsIssued": 4,
+    "successfulOutputs": 2,
+    "outputModerationBlocks": 2,
+    "blockedScenes": [2008, 2009],
+    "blockedStage": "output",
+    "blockedCategory": "sexual",
+    "blockedRequestIds": ["b13b21fb-77f3-4612-9c91-1d85113db2fe", "524126b5-0aab-46af-9e6c-bc11e295bf1f"],
+    "additionalPasses": 0,
+    "selectedChatgptOutputs": 2,
+    "selectedMetaOriginals": 2,
+    "submittedPromptExact": true,
+    "semanticInstructionsChanged": false
+  },
+  "evidence": {
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/provider-ledger.json",
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/accessibility-sidecars.json",
+    "providerManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/provider-evidence-manifest.json",
+    "providerManifestExact": true,
+    "providerManifestFileCount": 20,
+    "providerManifestTotalBytes": 2982066,
+    "providerManifestInventorySha256": "1FA8896C3D3309D051CB58118EF209BC30465B46ED6F82B112F3860D8E5EC638",
+    "closureManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/closure-evidence-manifest.json",
+    "closureManifestFileCount": 26,
+    "closureManifestTotalBytes": 7960608,
+    "closureManifestInventorySha256": "7C91287BF4478EE2191A6832ECD270BCB885FF15452DC3D319BB51F1D82826A7"
+  },
+  "publication": {
+    "plannedCountryPair": ["Liberia", "Central African Republic"],
+    "liberiaPriorPostCount": 0,
+    "centralAfricanRepublicPriorPostCount": 0,
+    "xAccount": "@dogramaci",
+    "canonicalXPostCountBeforePair": 200,
+    "composerBlank": true,
+    "composerMediaCount": 0,
+    "publicTransmissionCount": 0,
+    "liberiaPostedAlone": false
+  },
+  "browserState": {
+    "verifiedAtUtc": "2026-09-06T09:02:33.2335999Z",
+    "metaRelatedTabCount": 4,
+    "metaTerminalPromptUrlCount": 4,
+    "metaTerminalDownloadButtonCounts": [1, 1, 2, 1],
+    "xTabCount": 1,
+    "otherTabCount": 0,
+    "terminalMetaThinkingVisibleEveryLane": true,
+    "terminalMetaAccountVisibleEveryLane": true,
+    "terminalMetaStopVisibleCount": 0,
+    "xComposerUrl": "https://x.com/compose/post",
+    "xSignedInProfile": "@dogramaci",
+    "xComposerText": "",
+    "xPostDisabled": true,
+    "visibleInAppBrowserOnly": true
+  },
+  "canonicalContradictions": [
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified checkpoints. No Cuba or Tanzania prompt was dispatched.",
+    "Scene 2007's visible Download click emitted canonical bytes even though the in-app download event waiter timed out. The new file was reconciled by path, timestamp, size and SHA-256, so the Download control was not clicked again.",
+    "Scene 2009's primary media label advertised WebP, while the supported visible Download emitted canonical JPEG bytes. Both the UI label and downloaded format are recorded.",
+    "Scene 2009 also emitted a rotated tight derivative with solid corner fill. It is archived as an unused provider output and excluded from selection without a Meta retry.",
+    "Scenes 2008 and 2009 use their valid Meta originals after each single ChatGPT call was output-moderation blocked. No second edit call was made.",
+    "No Starlight guardian exists. The unrelated X Assistant and IAT B3 guardians remain active on their own 45-minute schedules, untouched and outside Starlight authority."
+  ],
+  "automationInventory": [
+    {"id": "guardian-x-assistant-mission", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true},
+    {"id": "iat-b3-devnet-gate-guardian", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true}
+  ],
+  "starlightGuardianPresent": false,
+  "nextSafeAction": "Commit the complete Batch 495 closure with Git LFS, push and verify local, origin and Draft PR parity. Then close the four terminal Liberia Meta tabs and prepare Central African Republic in four fresh Meta Thinking lanes, preserving the blank @dogramaci composer and exact anchor order 938, 936 and 937."
+}

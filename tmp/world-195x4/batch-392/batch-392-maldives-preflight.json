@@ -1,0 +1,1250 @@
+{
+  "schemaVersion": 1,
+  "batch": 392,
+  "country": "Maldives",
+  "status": "ready-four-tab-meta-continuous-initial-bank",
+  "generatedAt": "2026-08-20T09:39:16.8994715Z",
+  "sourceCommit": "ba16b3839299ec182037eea54f0315335d462f52",
+  "contract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "C0CAF3ED848ACFBF8CE1E404578939E96C16B480CC1F8E54458FC06FA830361B"
+  },
+  "predecessor": {
+    "path": "assets/lore/starlight-era/batch-391-malta-orbital-research-station-checkpoint.json",
+    "sha256": "09B76BFB934D9A7683558F09A428E6149C9A312C5E41EFE62D733E232D6C6001",
+    "status": "complete-four-of-four-hard-safe-meta-ai-bounded-pass-2-accepted-no-more-malta-rendering"
+  },
+  "queueAuthorization": {
+    "nextCountry": "Maldives",
+    "nextBatch": 392,
+    "sceneNumbers": [
+      1588,
+      1589,
+      1590,
+      1591
+    ],
+    "cinematicTheme": "orbital research-station couture",
+    "themePairPosition": 2,
+    "countryEvidence": [
+      "assets/lore/starlight-era/world-195x4-campaign.json#/countryPriorityOrder/166"
+    ],
+    "themeEvidence": [
+      "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json#/cinematicThemeRotation/orderedThemes/9"
+    ],
+    "lockedUntilBatch391Closed": false,
+    "materializationAllowedAfterRemoteVerifiedBatch391Closure": true
+  },
+  "provider": "Meta AI country generation; bounded built-in ChatGPT clothing finalization after Meta selection",
+  "rollingPolicy": {
+    "tabs": 4,
+    "initialCandidates": 4,
+    "projectAttemptCeiling": "none-user-imposed",
+    "perLaneInFlightMaximum": 1,
+    "evidenceRule": "capture N before N+1; classify and append N before N+2",
+    "provisionalComparison": "compare first passing candidate with its already-running successor, then advance the lane"
+  },
+  "faceManifest": {
+    "path": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+    "sha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+    "exactAge": 21,
+    "uploadOrder": [
+      {
+        "slot": 1,
+        "role": "primary quartet face plate",
+        "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+      },
+      {
+        "slot": 2,
+        "role": "expression and three-quarter supplement",
+        "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+      },
+      {
+        "slot": 3,
+        "role": "pose-angle and relationship supplement",
+        "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+        "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+      }
+    ]
+  },
+  "lexiconSnapshot": {
+    "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
+    "sha256": "09A1149E2260E3B38629D7E074A03CD7836C3AFC8B5DE290FC7F44E43A1523E9",
+    "bytes": 63007
+  },
+  "suppressedCandidates": [
+    "16",
+    "16 full-length",
+    "9",
+    "9 16",
+    "anchors",
+    "anchors only",
+    "create",
+    "create one",
+    "editorial",
+    "editorial use",
+    "fresh",
+    "fresh photorealistic",
+    "full-length",
+    "full-length starlight",
+    "identity",
+    "identity anchors",
+    "one",
+    "one fresh",
+    "only",
+    "original",
+    "original identity",
+    "photorealistic",
+    "photorealistic 9",
+    "public-fashion",
+    "public-fashion editorial",
+    "series",
+    "series public-fashion",
+    "starlight",
+    "starlight world",
+    "use",
+    "use original",
+    "world",
+    "world series"
+  ],
+  "promptChecksPassed": 16,
+  "closeLoveBankMinimums": {
+    "closeCameraScenes": 4,
+    "lapSittingScenes": 2,
+    "visiblePeckScenes": 3,
+    "closeEmbraceScenes": 4,
+    "visibleJealousWomanScenes": 4,
+    "dutchAngleScenes": 3,
+    "safeLowHeelHemScenes": 1,
+    "highLookingDownScenes": 1,
+    "faceHairForegroundScenes": 2,
+    "sideHugScenes": 1,
+    "behindHugScenes": 1,
+    "staticLineupScenesAllowed": 0
+  },
+  "closeLoveBankActual": {
+    "closeCameraScenes": 4,
+    "lapSittingScenes": 2,
+    "visiblePeckScenes": 4,
+    "closeEmbraceScenes": 4,
+    "staticLineupScenes": 0
+  },
+  "cameraBankActual": {
+    "dutchAngleScenes": 3,
+    "safeLowHeelHemScenes": 1,
+    "highLookingDownScenes": 1,
+    "faceHairForegroundScenes": 2
+  },
+  "maleModel": {
+    "key": "batch392-maldives-male-model-scene",
+    "hash": 208874690,
+    "scene": 1590
+  },
+  "scenePlans": {
+    "1588": {
+      "scene": 1588,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-321/batch-321-maldives-preflight.json#/scenePlans/1304",
+      "location": {
+        "name": "Hanifaru Bay, Baa Atoll",
+        "landmark": "a close orbital research lounge above Hanifaru Bay in Baa Atoll, with the heart-shaped turquoise lagoon, faros, patch reefs, empty sand cays and distant manta silhouettes outside the calibration line",
+        "motifs": "Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs",
+        "target": "a complete thick coral-sand backstop behind a transparent safety screen in a dry empty calibration lane at far right"
+      },
+      "cinematicTheme": "orbital research-station couture",
+      "camera": "A fourteen-degree Dutch tilt places Ellie's exact face and hair near the left frame edge while the quartet remains head-to-shoe in staggered depth; complete heels and socks stay readable.",
+      "relationship": {
+        "action": "Radiance settles sideways across Ellie's lap on a stable low banquette while Alia gives Radiance a brief cheek peck. Ellie supports Radiance with a clear waist hand and watches Alia with a tightened jealous smile; ECE leans close from the side through a warm eye-line without touching the calibration equipment group.",
+        "designatedJealousWoman": "Ellie",
+        "closeCamera": true,
+        "lapSitting": true,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-392|scene-1588|knee-high-wearers",
+        "hash": 3734129437,
+        "pairIndex": 1,
+        "sockWearers": [
+          "Radiance",
+          "Alia"
+        ],
+        "bareLegCharacters": [
+          "Ellie",
+          "AI ECE"
+        ],
+        "sideAssignments": {
+          "Radiance": {
+            "left": "RAZE Split-Star",
+            "right": "RAZE angular wordmark",
+            "wordmarkOrientation": "vertical up the outer calf"
+          },
+          "Alia": {
+            "left": "RAZE angular wordmark",
+            "right": "RAZE Split-Star",
+            "wordmarkOrientation": "vertical up the outer calf"
+          }
+        },
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "maleModel": {
+        "key": "batch392-maldives-male-model-scene",
+        "hash": 208874690,
+        "present": false
+      },
+      "faceReferencePlan": {
+        "manifest": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+        "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+        "exactAge": 21,
+        "uploadOrder": [
+          {
+            "slot": 1,
+            "role": "primary quartet face plate",
+            "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+            "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+          },
+          {
+            "slot": 2,
+            "role": "expression and three-quarter supplement",
+            "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+            "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+          },
+          {
+            "slot": 3,
+            "role": "pose-angle and relationship supplement",
+            "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+            "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+          }
+        ],
+        "uploadState": "pending-browser-action; text-only continuation allowed after recorded upload failure or unavailable transfer"
+      },
+      "outfits": {
+        "Radiance": "Radiance: lagoon turquoise with sunset gold secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark vertical up the outer calf, low-vamp gold pumps",
+        "Ellie": "Ellie: reef cobalt with sand white secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front sand-white slingbacks",
+        "Alia": "Alia: coral pink with manta charcoal secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark vertical up the outer calf, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: mangrove jade with monsoon silver secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from Hanifaru lagoon curves, faro rings, manta-current arcs, patch reefs and orbital cupola ribs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1588,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1588-meta-initial-primary.txt",
+          "sha256": "6EF189B91C95A13BA1B7B7104E729AABB97EBE4F76E6137B405CA5117199CDC0",
+          "bytes": 6033,
+          "chars": 6033
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1588-meta-initial-fallback.txt",
+          "sha256": "6F80D447390319140A26F5D51E4E7647AE658A219E12E147EC2EE98A3EF85460",
+          "bytes": 1931,
+          "chars": 1931
+        }
+      },
+      "chatgptFinalization": {
+        "scene": 1588,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1588-chatgpt-final-primary.txt",
+          "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+          "bytes": 652,
+          "chars": 652
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1588-chatgpt-final-fallback.txt",
+          "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+          "bytes": 383,
+          "chars": 383
+        }
+      },
+      "planetaryEnvironment": {
+        "scene": 1588,
+        "environment": {
+          "index": 4,
+          "percent": 20,
+          "id": "extreme-weather-rain-storm",
+          "promptLanguage": "severe wind-driven rain and a distant thunderstorm beyond sealed habitat glass, with everyone dry, protected and calm"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1588",
+          "counter": 0,
+          "acceptedFirstByte": 39,
+          "bucketIndex": 4,
+          "digestSha256": "27E17FFB1977CC38F8CCBEFD53683DE641B575A8D817773774F0ABB09EA6F023"
+        },
+        "planet": {
+          "index": 0,
+          "name": "TRAPPIST-1 e",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/trappist-1-e/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1588",
+          "counter": 0,
+          "acceptedFirstByte": 190,
+          "bucketIndex": 0,
+          "digestSha256": "BEA4EDED2FF35388F6DE7CE3580A4EFC9F3617A755920E4A746F0C3F2A8CB16E"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      }
+    },
+    "1589": {
+      "scene": 1589,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-321/batch-321-maldives-preflight.json#/scenePlans/1305",
+      "location": {
+        "name": "Fuvahmulah and Thoondu",
+        "landmark": "a close orbital observation deck above Fuvahmulah, with the single-island atoll silhouette, Thoondu pebble beach, white surf, palm rim and inland kilhi wetland contours clearly readable",
+        "motifs": "Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings",
+        "target": "a complete thick inert sand backstop behind a clear safety screen in a dry empty calibration lane at far right"
+      },
+      "cinematicTheme": "orbital research-station couture",
+      "camera": "A floor-adjacent front-quarter fashion view looks toward complete heels, uncovered legs, opaque skort side seams, torsos and faces; the lens stays outside garment volume and away from the space between legs.",
+      "relationship": {
+        "action": "Ellie turns through Radiance's behind hug and gives Radiance a brief cheek peck. ECE closes into a shoulder-level side hug through eye-line and torso direction; Alia catches Ellie's free hand and answers the pair with a raised-brow jealous look.",
+        "designatedJealousWoman": "Alia",
+        "closeCamera": true,
+        "lapSitting": false,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-392|scene-1589|knee-high-wearers",
+        "hash": 3660904914,
+        "pairIndex": 0,
+        "sockWearers": [
+          "Radiance",
+          "Ellie"
+        ],
+        "bareLegCharacters": [
+          "Alia",
+          "AI ECE"
+        ],
+        "sideAssignments": {
+          "Radiance": {
+            "left": "RAZE Split-Star",
+            "right": "RAZE angular wordmark",
+            "wordmarkOrientation": "compact horizontal at the outer upper calf"
+          },
+          "Ellie": {
+            "left": "RAZE angular wordmark",
+            "right": "RAZE Split-Star",
+            "wordmarkOrientation": "compact horizontal at the outer upper calf"
+          }
+        },
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "maleModel": {
+        "key": "batch392-maldives-male-model-scene",
+        "hash": 208874690,
+        "present": false
+      },
+      "faceReferencePlan": {
+        "manifest": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+        "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+        "exactAge": 21,
+        "uploadOrder": [
+          {
+            "slot": 1,
+            "role": "primary quartet face plate",
+            "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+            "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+          },
+          {
+            "slot": 2,
+            "role": "expression and three-quarter supplement",
+            "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+            "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+          },
+          {
+            "slot": 3,
+            "role": "pose-angle and relationship supplement",
+            "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+            "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+          }
+        ],
+        "uploadState": "pending-browser-action; text-only continuation allowed after recorded upload failure or unavailable transfer"
+      },
+      "outfits": {
+        "Radiance": "Radiance: sand white with coral pink secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark compact horizontal at the outer upper calf, low-vamp gold pumps",
+        "Ellie": "Ellie: deep-ocean navy with lagoon turquoise secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark compact horizontal at the outer upper calf, open-front sand-white slingbacks",
+        "Alia": "Alia: sunset gold with reef cobalt secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, uncovered legs from the concise garment edge to complete footwear, with no hosiery, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: mangrove jade with pebble silver secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from Thoondu pebble fields, fringing reef arcs, kilhi wetland contours, mangrove fans and docking rings, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1589,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1589-meta-initial-primary.txt",
+          "sha256": "B4214DD45609FDA365C54DB720898FAB574B5717D5743FBB3FBE960DF830734F",
+          "bytes": 5889,
+          "chars": 5889
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1589-meta-initial-fallback.txt",
+          "sha256": "73987D6DA24221838E4494D340E4A48B4282FFA223C9DD120259C3A84EC9EDA4",
+          "bytes": 1895,
+          "chars": 1895
+        }
+      },
+      "chatgptFinalization": {
+        "scene": 1589,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1589-chatgpt-final-primary.txt",
+          "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+          "bytes": 652,
+          "chars": 652
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1589-chatgpt-final-fallback.txt",
+          "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+          "bytes": 383,
+          "chars": 383
+        }
+      },
+      "planetaryEnvironment": {
+        "scene": 1589,
+        "environment": {
+          "index": 0,
+          "percent": 20,
+          "id": "dusk",
+          "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1589",
+          "counter": 0,
+          "acceptedFirstByte": 240,
+          "bucketIndex": 0,
+          "digestSha256": "F086A48FC845F56FD926377AC0D5B29EA2A29D6A5192A4B830B0D74F10142133"
+        },
+        "planet": {
+          "index": 2,
+          "name": "Kepler-186 f",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/kepler-186-f/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1589",
+          "counter": 0,
+          "acceptedFirstByte": 227,
+          "bucketIndex": 2,
+          "digestSha256": "E30F3E7AF2C391420E1D300B6653CE7B9A397B9BF2E1AFF1A046956115F5E344"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      }
+    },
+    "1590": {
+      "scene": 1590,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-321/batch-321-maldives-preflight.json#/scenePlans/1306",
+      "location": {
+        "name": "Addu Atoll causeway",
+        "landmark": "a close research-station lounge beside Addu Atoll's linked-island causeway, with the horseshoe lagoon, reef passes, seagrass shallows, mangrove belts, low coral islands and empty causeway curve clearly visible",
+        "motifs": "Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets",
+        "target": "a marked empty-water calibration disk with a complete transparent catch screen behind it in a cordoned lagoon lane far from people, boats and wildlife"
+      },
+      "cinematicTheme": "orbital research-station couture",
+      "camera": "A high oblique close view with a mild Dutch roll looks down over the stable lap composition; diagonal foreshortening keeps faces, hands, socks or bare legs and complete heels readable.",
+      "relationship": {
+        "action": "Alia settles sideways across Radiance's lap on a stable station bench while Ellie gives Alia a brief temple peck. The established adult man stands behind ECE with his strongest gaze returning to her; ECE keeps the visibly jealous counter-beat from the isolated calibration edge.",
+        "designatedJealousWoman": "AI ECE",
+        "closeCamera": true,
+        "lapSitting": true,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-392|scene-1590|knee-high-wearers",
+        "hash": 3450636800,
+        "pairIndex": 2,
+        "sockWearers": [
+          "Radiance",
+          "AI ECE"
+        ],
+        "bareLegCharacters": [
+          "Ellie",
+          "Alia"
+        ],
+        "sideAssignments": {
+          "Radiance": {
+            "left": "RAZE Split-Star",
+            "right": "RAZE angular wordmark",
+            "wordmarkOrientation": "vertical up the outer calf"
+          },
+          "AI ECE": {
+            "left": "RAZE angular wordmark",
+            "right": "RAZE Split-Star",
+            "wordmarkOrientation": "vertical up the outer calf"
+          }
+        },
+        "wordmarkOrientation": "vertical up the outer calf"
+      },
+      "maleModel": {
+        "key": "batch392-maldives-male-model-scene",
+        "hash": 208874690,
+        "present": true
+      },
+      "faceReferencePlan": {
+        "manifest": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+        "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+        "exactAge": 21,
+        "uploadOrder": [
+          {
+            "slot": 1,
+            "role": "primary quartet face plate",
+            "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+            "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+          },
+          {
+            "slot": 2,
+            "role": "expression and three-quarter supplement",
+            "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+            "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+          },
+          {
+            "slot": 3,
+            "role": "pose-angle and relationship supplement",
+            "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+            "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+          }
+        ],
+        "uploadState": "pending-browser-action; text-only continuation allowed after recorded upload failure or unavailable transfer"
+      },
+      "outfits": {
+        "Radiance": "Radiance: reef cobalt with seagrass green secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark vertical up the outer calf, low-vamp gold pumps",
+        "Ellie": "Ellie: coral pink with sand white secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front sand-white slingbacks",
+        "Alia": "Alia: lagoon turquoise with sunset gold secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, uncovered legs from the concise garment edge to complete footwear, with no hosiery, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: manta charcoal with monsoon silver secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from Addu horseshoe geometry, causeway arcs, reef passes, seagrass channels and solar-array facets, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark vertical up the outer calf, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1590,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1590-meta-initial-primary.txt",
+          "sha256": "7BCA64039B891D9DCCBB83B58C0A7F1E35817CB23F9AF6BF91152AFD6D235DFB",
+          "bytes": 6198,
+          "chars": 6198
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1590-meta-initial-fallback.txt",
+          "sha256": "AFF039B539EAFDF07B6CE5E9A2D7CCF5EE479354C5192ECC10566649A32FE4EF",
+          "bytes": 2128,
+          "chars": 2128
+        }
+      },
+      "chatgptFinalization": {
+        "scene": 1590,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1590-chatgpt-final-primary.txt",
+          "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+          "bytes": 652,
+          "chars": 652
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1590-chatgpt-final-fallback.txt",
+          "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+          "bytes": 383,
+          "chars": 383
+        }
+      },
+      "planetaryEnvironment": {
+        "scene": 1590,
+        "environment": {
+          "index": 1,
+          "percent": 20,
+          "id": "golden-hour-sunrise",
+          "promptLanguage": "golden-hour sunrise with long warm rays and readable faces"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1590",
+          "counter": 0,
+          "acceptedFirstByte": 91,
+          "bucketIndex": 1,
+          "digestSha256": "5BFF5124F969BDA68417D388099F02DE7184970D21EC6978AF7A0250789D4EDF"
+        },
+        "planet": {
+          "index": 4,
+          "name": "TOI-700 d",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1590",
+          "counter": 0,
+          "acceptedFirstByte": 99,
+          "bucketIndex": 4,
+          "digestSha256": "639595F16709D03BA5754E58DAE68DA197D37B78E62A61F7AACB49AE618EDB4D"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      }
+    },
+    "1591": {
+      "scene": 1591,
+      "historicalSceneEvidence": "tmp/world-195x4/batch-321/batch-321-maldives-preflight.json#/scenePlans/1307",
+      "location": {
+        "name": "Baa Atoll micro-atolls",
+        "landmark": "a close orbital research banquette above Baa Atoll's micro-atolls, with complete faros, bright shallows, patch reefs, mangrove islets and empty sand cays clearly readable through the cupola",
+        "motifs": "micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs",
+        "target": "a marked empty-water calibration disk with a complete transparent catch screen behind it in a cordoned open-water lane away from people, boats, animals and reefs"
+      },
+      "cinematicTheme": "orbital research-station couture",
+      "camera": "A strong canted moving portrait places Radiance's exact face and blonde hair near the foreground edge with a foreground heel and opaque skirt-side seam; the other adults close through diagonal depth.",
+      "relationship": {
+        "action": "Ellie steps through Alia's behind hug while Alia gives Ellie a brief cheek peck. Radiance catches Alia's free hand and looks toward the affectionate pair with visible jealousy; ECE answers from inches away through a close inviting gaze while her equipment hands remain isolated.",
+        "designatedJealousWoman": "Radiance",
+        "closeCamera": true,
+        "lapSitting": false,
+        "visiblePeck": true,
+        "closeEmbrace": true,
+        "staticLineup": false
+      },
+      "raze": {
+        "key": "RAZE|batch-392|scene-1591|knee-high-wearers",
+        "hash": 31688235,
+        "pairIndex": 3,
+        "sockWearers": [
+          "Ellie",
+          "Alia"
+        ],
+        "bareLegCharacters": [
+          "Radiance",
+          "AI ECE"
+        ],
+        "sideAssignments": {
+          "Ellie": {
+            "left": "RAZE Split-Star",
+            "right": "RAZE angular wordmark",
+            "wordmarkOrientation": "compact horizontal at the outer upper calf"
+          },
+          "Alia": {
+            "left": "RAZE angular wordmark",
+            "right": "RAZE Split-Star",
+            "wordmarkOrientation": "compact horizontal at the outer upper calf"
+          }
+        },
+        "wordmarkOrientation": "compact horizontal at the outer upper calf"
+      },
+      "maleModel": {
+        "key": "batch392-maldives-male-model-scene",
+        "hash": 208874690,
+        "present": false
+      },
+      "faceReferencePlan": {
+        "manifest": "assets/lore/starlight-era/quartet-21-face-anchor-manifest.json",
+        "manifestSha256": "2D923F7E692AE3AF0874B02387B413CBA3138BAEBE389F02DDF37F2CF8778707",
+        "exactAge": 21,
+        "uploadOrder": [
+          {
+            "slot": 1,
+            "role": "primary quartet face plate",
+            "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+            "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6"
+          },
+          {
+            "slot": 2,
+            "role": "expression and three-quarter supplement",
+            "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+            "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB"
+          },
+          {
+            "slot": 3,
+            "role": "pose-angle and relationship supplement",
+            "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+            "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+          }
+        ],
+        "uploadState": "pending-browser-action; text-only continuation allowed after recorded upload failure or unavailable transfer"
+      },
+      "outfits": {
+        "Radiance": "Radiance: mangrove jade with lagoon turquoise secure folded single-shoulder upper-thigh cocktail romper with an open upper back, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, low-vamp gold pumps",
+        "Ellie": "Ellie: deep-ocean navy with coral pink secure strapless sequined upper-thigh skort dress with a completely open shoulder-blade back, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE Split-Star on the left sock and RAZE angular wordmark on the right sock; wordmark compact horizontal at the outer upper calf, open-front sand-white slingbacks",
+        "Alia": "Alia: sunset gold with sand white secure cropped asymmetric orbital top with tailored upper-thigh shorts and an open upper back, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, paired opaque rainbow-gradient knee-high socks directly on uncovered legs; RAZE angular wordmark on the left sock and RAZE Split-Star on the right sock; wordmark compact horizontal at the outer upper calf, low-vamp cobalt pumps",
+        "AI ECE": "AI ECE: reef cobalt with monsoon silver secure sculpted sleeveless sequined upper-thigh cocktail mini with a narrow ordinary waist opening, unique Maldives 1/1 print built from micro-atoll rings, lagoon shelves, reef chains, mangrove islets and navigation-light arcs, uncovered legs from the concise garment edge to complete footwear, with no hosiery, open-front turquoise heels"
+      },
+      "propHandler": "AI ECE",
+      "prompt": {
+        "scene": 1591,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1591-meta-initial-primary.txt",
+          "sha256": "6351700307BDAC333F7B3D235D1C4A3E5E592D186E58F811F3AD60BFB7F01FB9",
+          "bytes": 5925,
+          "chars": 5925
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1591-meta-initial-fallback.txt",
+          "sha256": "B3481D387AEB38BA64B5DD116D1EAF5309554BC5637621BDC8DD92620FB30A11",
+          "bytes": 1962,
+          "chars": 1962
+        }
+      },
+      "chatgptFinalization": {
+        "scene": 1591,
+        "primary": {
+          "file": "tmp/world-195x4/batch-392/scene-1591-chatgpt-final-primary.txt",
+          "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+          "bytes": 652,
+          "chars": 652
+        },
+        "fallback": {
+          "file": "tmp/world-195x4/batch-392/scene-1591-chatgpt-final-fallback.txt",
+          "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+          "bytes": 383,
+          "chars": 383
+        }
+      },
+      "planetaryEnvironment": {
+        "scene": 1591,
+        "environment": {
+          "index": 0,
+          "percent": 20,
+          "id": "dusk",
+          "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1591",
+          "counter": 0,
+          "acceptedFirstByte": 40,
+          "bucketIndex": 0,
+          "digestSha256": "286FC838443FE76482D451093510F7A74C991293CD6E9612967E4D9EDFD985AF"
+        },
+        "planet": {
+          "index": 4,
+          "name": "TOI-700 d",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1591",
+          "counter": 0,
+          "acceptedFirstByte": 84,
+          "bucketIndex": 4,
+          "digestSha256": "54EECCB2C8E5CFDE9DA9DE65D66FC936EDB5B0FCC61A523BC5721E5BFA32CEA9"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      }
+    }
+  },
+  "promptBank": [
+    {
+      "scene": 1588,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1588-meta-initial-primary.txt",
+        "sha256": "6EF189B91C95A13BA1B7B7104E729AABB97EBE4F76E6137B405CA5117199CDC0",
+        "bytes": 6033,
+        "chars": 6033
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1588-meta-initial-fallback.txt",
+        "sha256": "6F80D447390319140A26F5D51E4E7647AE658A219E12E147EC2EE98A3EF85460",
+        "bytes": 1931,
+        "chars": 1931
+      }
+    },
+    {
+      "scene": 1589,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1589-meta-initial-primary.txt",
+        "sha256": "B4214DD45609FDA365C54DB720898FAB574B5717D5743FBB3FBE960DF830734F",
+        "bytes": 5889,
+        "chars": 5889
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1589-meta-initial-fallback.txt",
+        "sha256": "73987D6DA24221838E4494D340E4A48B4282FFA223C9DD120259C3A84EC9EDA4",
+        "bytes": 1895,
+        "chars": 1895
+      }
+    },
+    {
+      "scene": 1590,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1590-meta-initial-primary.txt",
+        "sha256": "7BCA64039B891D9DCCBB83B58C0A7F1E35817CB23F9AF6BF91152AFD6D235DFB",
+        "bytes": 6198,
+        "chars": 6198
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1590-meta-initial-fallback.txt",
+        "sha256": "AFF039B539EAFDF07B6CE5E9A2D7CCF5EE479354C5192ECC10566649A32FE4EF",
+        "bytes": 2128,
+        "chars": 2128
+      }
+    },
+    {
+      "scene": 1591,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1591-meta-initial-primary.txt",
+        "sha256": "6351700307BDAC333F7B3D235D1C4A3E5E592D186E58F811F3AD60BFB7F01FB9",
+        "bytes": 5925,
+        "chars": 5925
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1591-meta-initial-fallback.txt",
+        "sha256": "B3481D387AEB38BA64B5DD116D1EAF5309554BC5637621BDC8DD92620FB30A11",
+        "bytes": 1962,
+        "chars": 1962
+      }
+    }
+  ],
+  "chatgptFinalizationBank": [
+    {
+      "scene": 1588,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1588-chatgpt-final-primary.txt",
+        "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+        "bytes": 652,
+        "chars": 652
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1588-chatgpt-final-fallback.txt",
+        "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+        "bytes": 383,
+        "chars": 383
+      }
+    },
+    {
+      "scene": 1589,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1589-chatgpt-final-primary.txt",
+        "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+        "bytes": 652,
+        "chars": 652
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1589-chatgpt-final-fallback.txt",
+        "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+        "bytes": 383,
+        "chars": 383
+      }
+    },
+    {
+      "scene": 1590,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1590-chatgpt-final-primary.txt",
+        "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+        "bytes": 652,
+        "chars": 652
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1590-chatgpt-final-fallback.txt",
+        "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+        "bytes": 383,
+        "chars": 383
+      }
+    },
+    {
+      "scene": 1591,
+      "primary": {
+        "file": "tmp/world-195x4/batch-392/scene-1591-chatgpt-final-primary.txt",
+        "sha256": "5FB9AFF38259A9A238990260B643B7A6CEC19F0F495B328823707A9E8E053B09",
+        "bytes": 652,
+        "chars": 652
+      },
+      "fallback": {
+        "file": "tmp/world-195x4/batch-392/scene-1591-chatgpt-final-fallback.txt",
+        "sha256": "E87E4D1946F5CF9C9F048FF80826A6C55664AE767B2C2B751EF982A75FA737E5",
+        "bytes": 383,
+        "chars": 383
+      }
+    }
+  ],
+  "currentContract": {
+    "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+    "sha256": "F718BA803030E6B4DFD7976F5EE7F472E1E16C4629D43826FC0C259C77274048",
+    "updatedAt": "2026-08-20T10:05:02.254Z"
+  },
+  "planetaryEnvironmentPolicy": {
+    "policy": {
+      "active": true,
+      "requestedAt": "2026-08-20T10:05:02.254Z",
+      "activeFromBatch": 392,
+      "userDirective": "Use an exact equal fifth chance of dusk, golden-hour sunrise, sunset, night, or severe rain/storm weather, and stage every scene on a distant real planet.",
+      "exactDistribution": [
+        {
+          "index": 0,
+          "percent": 20,
+          "id": "dusk",
+          "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+        },
+        {
+          "index": 1,
+          "percent": 20,
+          "id": "golden-hour-sunrise",
+          "promptLanguage": "golden-hour sunrise with long warm rays and readable faces"
+        },
+        {
+          "index": 2,
+          "percent": 20,
+          "id": "sunset",
+          "promptLanguage": "saturated sunset with a coral-gold horizon and readable faces"
+        },
+        {
+          "index": 3,
+          "percent": 20,
+          "id": "night",
+          "promptLanguage": "clear night with stars, habitat practical lights and readable faces"
+        },
+        {
+          "index": 4,
+          "percent": 20,
+          "id": "extreme-weather-rain-storm",
+          "promptLanguage": "severe wind-driven rain and a distant thunderstorm beyond sealed habitat glass, with everyone dry, protected and calm"
+        }
+      ],
+      "selectionAlgorithm": {
+        "name": "sha256-first-byte-rejection-sampling-equal-fifth",
+        "environmentKey": "starlight|environment|batch-{batch}|scene-{scene}",
+        "planetKey": "starlight|planet|batch-{batch}|scene-{scene}",
+        "method": "Hash key plus a zero-based counter with SHA-256. Reject first byte 255 and rehash with the next counter. For accepted bytes 0 through 254, take byte modulo 5. Each bucket receives exactly 51 accepted byte values, so every listed outcome has exactly 20 percent probability."
+      },
+      "realPlanetBank": {
+        "source": "NASA Exoplanet Catalog",
+        "verifiedAt": "2026-08-20",
+        "catalogUrl": "https://science.nasa.gov/exoplanets/exoplanet-catalog/",
+        "orderedPlanets": [
+          {
+            "index": 0,
+            "name": "TRAPPIST-1 e",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/trappist-1-e/"
+          },
+          {
+            "index": 1,
+            "name": "Proxima Centauri b",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/proxima-centauri-b/"
+          },
+          {
+            "index": 2,
+            "name": "Kepler-186 f",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/kepler-186-f/"
+          },
+          {
+            "index": 3,
+            "name": "LHS 1140 b",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/lhs-1140-b/"
+          },
+          {
+            "index": 4,
+            "name": "TOI-700 d",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+          }
+        ],
+        "rule": "Select from this fixed verified bank with the separate equal-fifth selector. Never invent, rename, blend or silently substitute a planet."
+      },
+      "literalSettingRule": "The named real exoplanet is the literal distant setting, shown through a protected surface habitat, sealed research structure, or safe orbital facility physically associated with that planet. The current country remains the cultural and couture identity through large motifs, archive projections, research installations and landmark-derived geometry; never falsely claim the Earth landmark physically exists on the exoplanet.",
+      "scientificHonestyRule": "Planet names and catalog status are factual. Surface appearance, human habitation, weather and atmospheric lighting are explicitly speculative cinematic art, not claims about measured conditions or habitability.",
+      "extremeWeatherSafety": "The extreme-weather bucket always reads as rain, wind and storm atmosphere outside sealed protection. Preserve dry stable footing, clear adult faces, complete anatomy, landmark-inspired country reads, mascot safety, and inert-prop isolation. No disaster victims, flooding peril, strikes near people, injury or emergency framing.",
+      "persistenceRule": "Materialize and store the environment roll, planet roll, keys, counters, accepted bytes, digest hashes, names and prompt language before every provider dispatch. Carry the result through Meta generation, comparison, final ChatGPT clothing edit, archive and publication without rerolling."
+    },
+    "sceneBindings": {
+      "1588": {
+        "scene": 1588,
+        "environment": {
+          "index": 4,
+          "percent": 20,
+          "id": "extreme-weather-rain-storm",
+          "promptLanguage": "severe wind-driven rain and a distant thunderstorm beyond sealed habitat glass, with everyone dry, protected and calm"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1588",
+          "counter": 0,
+          "acceptedFirstByte": 39,
+          "bucketIndex": 4,
+          "digestSha256": "27E17FFB1977CC38F8CCBEFD53683DE641B575A8D817773774F0ABB09EA6F023"
+        },
+        "planet": {
+          "index": 0,
+          "name": "TRAPPIST-1 e",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/trappist-1-e/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1588",
+          "counter": 0,
+          "acceptedFirstByte": 190,
+          "bucketIndex": 0,
+          "digestSha256": "BEA4EDED2FF35388F6DE7CE3580A4EFC9F3617A755920E4A746F0C3F2A8CB16E"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      },
+      "1589": {
+        "scene": 1589,
+        "environment": {
+          "index": 0,
+          "percent": 20,
+          "id": "dusk",
+          "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1589",
+          "counter": 0,
+          "acceptedFirstByte": 240,
+          "bucketIndex": 0,
+          "digestSha256": "F086A48FC845F56FD926377AC0D5B29EA2A29D6A5192A4B830B0D74F10142133"
+        },
+        "planet": {
+          "index": 2,
+          "name": "Kepler-186 f",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/kepler-186-f/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1589",
+          "counter": 0,
+          "acceptedFirstByte": 227,
+          "bucketIndex": 2,
+          "digestSha256": "E30F3E7AF2C391420E1D300B6653CE7B9A397B9BF2E1AFF1A046956115F5E344"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      },
+      "1590": {
+        "scene": 1590,
+        "environment": {
+          "index": 1,
+          "percent": 20,
+          "id": "golden-hour-sunrise",
+          "promptLanguage": "golden-hour sunrise with long warm rays and readable faces"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1590",
+          "counter": 0,
+          "acceptedFirstByte": 91,
+          "bucketIndex": 1,
+          "digestSha256": "5BFF5124F969BDA68417D388099F02DE7184970D21EC6978AF7A0250789D4EDF"
+        },
+        "planet": {
+          "index": 4,
+          "name": "TOI-700 d",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1590",
+          "counter": 0,
+          "acceptedFirstByte": 99,
+          "bucketIndex": 4,
+          "digestSha256": "639595F16709D03BA5754E58DAE68DA197D37B78E62A61F7AACB49AE618EDB4D"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      },
+      "1591": {
+        "scene": 1591,
+        "environment": {
+          "index": 0,
+          "percent": 20,
+          "id": "dusk",
+          "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+        },
+        "environmentRoll": {
+          "key": "starlight|environment|batch-392|scene-1591",
+          "counter": 0,
+          "acceptedFirstByte": 40,
+          "bucketIndex": 0,
+          "digestSha256": "286FC838443FE76482D451093510F7A74C991293CD6E9612967E4D9EDFD985AF"
+        },
+        "planet": {
+          "index": 4,
+          "name": "TOI-700 d",
+          "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+        },
+        "planetRoll": {
+          "key": "starlight|planet|batch-392|scene-1591",
+          "counter": 0,
+          "acceptedFirstByte": 84,
+          "bucketIndex": 4,
+          "digestSha256": "54EECCB2C8E5CFDE9DA9DE65D66FC936EDB5B0FCC61A523BC5721E5BFA32CEA9"
+        },
+        "lockedAt": "2026-08-20T10:05:02.254Z",
+        "rerollAllowed": false
+      }
+    },
+    "activePrompts": {
+      "1588": {
+        "phase": "successor-c",
+        "environmentBinding": {
+          "scene": 1588,
+          "environment": {
+            "index": 4,
+            "percent": 20,
+            "id": "extreme-weather-rain-storm",
+            "promptLanguage": "severe wind-driven rain and a distant thunderstorm beyond sealed habitat glass, with everyone dry, protected and calm"
+          },
+          "environmentRoll": {
+            "key": "starlight|environment|batch-392|scene-1588",
+            "counter": 0,
+            "acceptedFirstByte": 39,
+            "bucketIndex": 4,
+            "digestSha256": "27E17FFB1977CC38F8CCBEFD53683DE641B575A8D817773774F0ABB09EA6F023"
+          },
+          "planet": {
+            "index": 0,
+            "name": "TRAPPIST-1 e",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/trappist-1-e/"
+          },
+          "planetRoll": {
+            "key": "starlight|planet|batch-392|scene-1588",
+            "counter": 0,
+            "acceptedFirstByte": 190,
+            "bucketIndex": 0,
+            "digestSha256": "BEA4EDED2FF35388F6DE7CE3580A4EFC9F3617A755920E4A746F0C3F2A8CB16E"
+          },
+          "lockedAt": "2026-08-20T10:05:02.254Z",
+          "rerollAllowed": false
+        },
+        "primary": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-successor-c-primary-planetary.txt",
+          "text": "Render candidate C for Maldives Scene 1588 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nPlanet and environment lock: this scene literally takes place inside a protected research habitat associated with the real NASA-catalog exoplanet TRAPPIST-1 e. Render severe wind-driven rain and a distant thunderstorm beyond sealed habitat glass, with everyone dry, protected and calm. Maldives appears as a large cultural research installation and couture motif system derived from the named atoll or island geometry, not as a claim that the Earth location exists on TRAPPIST-1 e. The planet is real; its depicted surface, weather and habitation are speculative cinematic art.\n\nChoose a fourteen-degree Dutch tilt and close diagonal depth in an orbital lounge above Hanifaru Bay. Radiance sits sideways across Ellie's stable lap while Alia gives Radiance a brief closed-mouth cheek peck. Ellie supports Radiance and watches Alia with a calm jealous smile. ECE leans into the shared eye-line from the far edge. Show the heart-shaped lagoon, faro rings, manta-current arcs, cupola ribs, PAWS and MAX resting in a protected nook.\n\nRadiance and Alia wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Radiance has the text-free sixteen-point Split-Star on the left sock and angular RAZE wordmark vertically on the right outer calf; Alia reverses those sides. Ellie and ECE have bare lower legs. Their sequined strapless, cropped, open-back cocktail looks carry large Maldives lagoon and reef motifs with complete coverage and concise tailored hems. At the separated outer calibration edge, ECE alone holds a large open rectangular rainbow calibration frame with no barrel, muzzle, grip or trigger. It is visibly inert and points toward a complete thick sand backstop behind a clear safety screen, away from every person, animal and lens. No ammunition, firing, flash, threat, injury or combat.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "71991C6E261BA05225DCE2DC986C632A71267846C229D0579AF13D8890E267B6",
+          "encoding": "utf8",
+          "bytes": 2739,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "fallback": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1588-meta-successor-c-fallback-planetary.txt",
+          "text": "Render a simplified Maldives Scene 1588 fashion photograph with the supplied scene-938, 936 and 937 faces for Alia, Radiance, Ellie and ECE, all fictional adults exactly 21. Keep the Dutch tilt, Radiance sitting safely across Ellie's lap, Alia's brief cheek peck, Ellie's jealous eye-line, Hanifaru lagoon and complete bodies. Radiance and Alia wear paired rainbow RAZE knee-highs on uncovered legs; Ellie and ECE have bare lower legs. Keep opaque cocktail coverage. Omit calibration equipment.\n\nPlanet and environment lock: this scene literally takes place inside a protected research habitat associated with the real NASA-catalog exoplanet TRAPPIST-1 e. Render severe wind-driven rain and a distant thunderstorm beyond sealed habitat glass, with everyone dry, protected and calm. Maldives appears as a large cultural research installation and couture motif system derived from the named atoll or island geometry, not as a claim that the Earth location exists on TRAPPIST-1 e. The planet is real; its depicted surface, weather and habitation are speculative cinematic art.\n",
+          "sha256": "8207174FEB21C90807FA903E735F0E6D492141E60DBEBDCBEE39B488A25BCBD4",
+          "encoding": "utf8",
+          "bytes": 1074,
+          "fidelity": "runtime-launch-byte-exact"
+        }
+      },
+      "1589": {
+        "phase": "successor-c",
+        "environmentBinding": {
+          "scene": 1589,
+          "environment": {
+            "index": 0,
+            "percent": 20,
+            "id": "dusk",
+            "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+          },
+          "environmentRoll": {
+            "key": "starlight|environment|batch-392|scene-1589",
+            "counter": 0,
+            "acceptedFirstByte": 240,
+            "bucketIndex": 0,
+            "digestSha256": "F086A48FC845F56FD926377AC0D5B29EA2A29D6A5192A4B830B0D74F10142133"
+          },
+          "planet": {
+            "index": 2,
+            "name": "Kepler-186 f",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/kepler-186-f/"
+          },
+          "planetRoll": {
+            "key": "starlight|planet|batch-392|scene-1589",
+            "counter": 0,
+            "acceptedFirstByte": 227,
+            "bucketIndex": 2,
+            "digestSha256": "E30F3E7AF2C391420E1D300B6653CE7B9A397B9BF2E1AFF1A046956115F5E344"
+          },
+          "lockedAt": "2026-08-20T10:05:02.254Z",
+          "rerollAllowed": false
+        },
+        "primary": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-successor-c-primary-planetary.txt",
+          "text": "Render candidate C for Maldives Scene 1589 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nPlanet and environment lock: this scene literally takes place inside a protected research habitat associated with the real NASA-catalog exoplanet Kepler-186 f. Render deep violet dusk with a bright horizon band and readable faces. Maldives appears as a large cultural research installation and couture motif system derived from the named atoll or island geometry, not as a claim that the Earth location exists on Kepler-186 f. The planet is real; its depicted surface, weather and habitation are speculative cinematic art.\n\nFrame a safe floor-adjacent front-quarter fashion angle in an orbital observation deck above Fuvahmulah. Keep the lens outside garment volume and away from the space between legs. Ellie turns inside Radiance's behind hug and gives Radiance a brief closed-mouth cheek peck. Alia catches Ellie's free hand and shows a calm jealous raised brow; ECE joins through a shoulder-level side hug. Show Thoondu pebble beach, white surf, palm rim, kilhi wetland contours and station cupola ribs.\n\nRadiance and Ellie wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Radiance has the text-free sixteen-point Split-Star on the left sock and compact angular RAZE wordmark on the right outer calf; Ellie reverses those sides. Alia and ECE have bare lower legs. Their sequined strapless, cropped, open-back cocktail looks carry large Thoondu, reef, kilhi and mangrove motifs with complete coverage and concise tailored hems. At the separated outer calibration edge, ECE alone holds a large open rectangular rainbow calibration frame with no barrel, muzzle, grip or trigger. It is visibly inert and points toward a complete thick sand backstop behind a clear safety screen, away from every person, animal and lens. No ammunition, firing, flash, threat, injury or combat.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "4EE864093DA71EA7F597766FDC1C9A5040CC55070930998A2ED9E46B23B46C33",
+          "encoding": "utf8",
+          "bytes": 2726,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "fallback": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1589-meta-successor-c-fallback-planetary.txt",
+          "text": "Render a simplified Maldives Scene 1589 fashion photograph with the supplied scene-938, 936 and 937 faces for Alia, Radiance, Ellie and ECE, all fictional adults exactly 21. Keep a safe low front-quarter angle, Radiance's behind hug, Ellie's brief cheek peck, Alia's jealous eye-line, Fuvahmulah landmarks and complete bodies. Radiance and Ellie wear paired rainbow RAZE knee-highs on uncovered legs; Alia and ECE have bare lower legs. Keep opaque cocktail coverage. Omit calibration equipment.\n\nPlanet and environment lock: this scene literally takes place inside a protected research habitat associated with the real NASA-catalog exoplanet Kepler-186 f. Render deep violet dusk with a bright horizon band and readable faces. Maldives appears as a large cultural research installation and couture motif system derived from the named atoll or island geometry, not as a claim that the Earth location exists on Kepler-186 f. The planet is real; its depicted surface, weather and habitation are speculative cinematic art.\n",
+          "sha256": "93691681326777EC37F26A23A09E6B4C977C3FBC8A22A1D74F22061803559286",
+          "encoding": "utf8",
+          "bytes": 1019,
+          "fidelity": "runtime-launch-byte-exact"
+        }
+      },
+      "1590": {
+        "phase": "successor-b-fallback",
+        "environmentBinding": {
+          "scene": 1590,
+          "environment": {
+            "index": 1,
+            "percent": 20,
+            "id": "golden-hour-sunrise",
+            "promptLanguage": "golden-hour sunrise with long warm rays and readable faces"
+          },
+          "environmentRoll": {
+            "key": "starlight|environment|batch-392|scene-1590",
+            "counter": 0,
+            "acceptedFirstByte": 91,
+            "bucketIndex": 1,
+            "digestSha256": "5BFF5124F969BDA68417D388099F02DE7184970D21EC6978AF7A0250789D4EDF"
+          },
+          "planet": {
+            "index": 4,
+            "name": "TOI-700 d",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+          },
+          "planetRoll": {
+            "key": "starlight|planet|batch-392|scene-1590",
+            "counter": 0,
+            "acceptedFirstByte": 99,
+            "bucketIndex": 4,
+            "digestSha256": "639595F16709D03BA5754E58DAE68DA197D37B78E62A61F7AACB49AE618EDB4D"
+          },
+          "lockedAt": "2026-08-20T10:05:02.254Z",
+          "rerollAllowed": false
+        },
+        "fallback": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1590-meta-successor-b-fallback-planetary.txt",
+          "text": "Render candidate B fallback for Maldives Scene 1590 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nPlanet and environment lock: this scene literally takes place inside a protected research habitat associated with the real NASA-catalog exoplanet TOI-700 d. Render golden-hour sunrise with long warm rays and readable faces. Maldives appears as a large cultural research installation and couture motif system derived from the named atoll or island geometry, not as a claim that the Earth location exists on TOI-700 d. The planet is real; its depicted surface, weather and habitation are speculative cinematic art.\n\nShow a close standing group portrait with a strengthened high oblique view and mild Dutch roll in the orbital research lounge above Addu Atoll. Keep Addu's horseshoe lagoon, linked-island causeway, reef passes, seagrass channels and solar facets large. Ellie gives Alia a brief closed-mouth temple peck while Radiance supports Alia through a warm side hug. ECE shows the calm jealous eye-line toward them; the established bearded adult man stands behind ECE and returns his strongest gaze to her. ECE holds a small gold route lantern with both hands; omit calibration equipment.\n\nRadiance and ECE wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Radiance has the text-free sixteen-point Split-Star on the left sock and angular RAZE wordmark vertically on the right outer calf; ECE reverses those sides. Ellie and Alia have bare lower legs. Keep secure sequined strapless, cropped and open-back cocktail looks with complete coverage, concise tailored hems and large Addu motifs.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "B2C510BD60D2D8388F33011F4BF656AE42BB7922B4D50ECA91B39DD0E33A268D",
+          "encoding": "utf8",
+          "bytes": 2451,
+          "fidelity": "runtime-launch-byte-exact"
+        }
+      },
+      "1591": {
+        "phase": "successor-c",
+        "environmentBinding": {
+          "scene": 1591,
+          "environment": {
+            "index": 0,
+            "percent": 20,
+            "id": "dusk",
+            "promptLanguage": "deep violet dusk with a bright horizon band and readable faces"
+          },
+          "environmentRoll": {
+            "key": "starlight|environment|batch-392|scene-1591",
+            "counter": 0,
+            "acceptedFirstByte": 40,
+            "bucketIndex": 0,
+            "digestSha256": "286FC838443FE76482D451093510F7A74C991293CD6E9612967E4D9EDFD985AF"
+          },
+          "planet": {
+            "index": 4,
+            "name": "TOI-700 d",
+            "nasaCatalogUrl": "https://science.nasa.gov/exoplanet-catalog/toi-700-d/"
+          },
+          "planetRoll": {
+            "key": "starlight|planet|batch-392|scene-1591",
+            "counter": 0,
+            "acceptedFirstByte": 84,
+            "bucketIndex": 4,
+            "digestSha256": "54EECCB2C8E5CFDE9DA9DE65D66FC936EDB5B0FCC61A523BC5721E5BFA32CEA9"
+          },
+          "lockedAt": "2026-08-20T10:05:02.254Z",
+          "rerollAllowed": false
+        },
+        "primary": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-successor-c-primary-planetary.txt",
+          "text": "Render candidate C for Maldives Scene 1591 as a vertical 1152 by 2048 realistic cinematic fashion photograph. Radiance, Ellie, Alia and AI ECE are four distinct fictional adult women, each exactly age 21. Three supplied photographs govern their facial geometry and name ownership. Scene 938 maps Alia at far left with voluminous natural curls, blonde Radiance second, dark-haired Ellie third, and dark-haired ECE at far right. Scenes 936 and 937 reinforce those same faces. Keep four women with no substitution or duplicate.\n\nPlanet and environment lock: this scene literally takes place inside a protected research habitat associated with the real NASA-catalog exoplanet TOI-700 d. Render deep violet dusk with a bright horizon band and readable faces. Maldives appears as a large cultural research installation and couture motif system derived from the named atoll or island geometry, not as a claim that the Earth location exists on TOI-700 d. The planet is real; its depicted surface, weather and habitation are speculative cinematic art.\n\nMake a strong canted moving portrait in an orbital research banquette above Baa Atoll. Radiance's blonde face and hair fill the near foreground while a complete heel and opaque skirt side seam remain visible. Ellie steps through Alia's behind hug as Alia gives Ellie a brief closed-mouth cheek peck. Radiance catches Alia's free hand and looks toward the pair with calm jealousy; ECE answers from close diagonal depth. Show micro-atoll rings, lagoon shelves, reef chains, mangrove islets and cupola ribs.\n\nEllie and Alia wear paired opaque rainbow-gradient RAZE knee-high socks directly on uncovered legs. Ellie has the text-free sixteen-point Split-Star on the left sock and compact angular RAZE wordmark on the right outer calf; Alia reverses those sides. Radiance and ECE have bare lower legs. Their sequined strapless, cropped, open-back cocktail looks carry large micro-atoll and reef motifs with complete coverage and concise tailored hems. At the separated outer calibration edge, ECE alone holds a large open rectangular rainbow calibration frame with no barrel, muzzle, grip or trigger. It is visibly inert and points toward a complete thick sand backstop behind a clear safety screen, away from every person, animal and lens. No ammunition, firing, flash, threat, injury or combat.\n\nSecure opaque public fashion covers bust, seat, pelvis and intimate areas in every pose. Give every person two traceable arms and hands, two complete legs and feet, separated silhouettes, visible joints, clear hand roles and complete footwear. No accidental exposure, underwear view, coercion, sexual activity, gross anatomy defects, extra people, watermark or visible text beyond RAZE.\n",
+          "sha256": "8B5BD2CB39488826F4031C6D2245D1DA28A71C303E161E87694A5B9F8510D1F9",
+          "encoding": "utf8",
+          "bytes": 2724,
+          "fidelity": "runtime-launch-byte-exact"
+        },
+        "fallback": {
+          "sourcePath": "tmp/world-195x4/batch-392/scene-1591-meta-successor-c-fallback-planetary.txt",
+          "text": "Render a simplified Maldives Scene 1591 fashion photograph with the supplied scene-938, 936 and 937 faces for Alia, Radiance, Ellie and ECE, all fictional adults exactly 21. Keep the canted close view, Alia's behind hug and brief cheek peck to Ellie, Radiance's jealous eye-line, Baa micro-atolls and complete bodies. Ellie and Alia wear paired rainbow RAZE knee-highs on uncovered legs; Radiance and ECE have bare lower legs. Keep opaque cocktail coverage. Omit calibration equipment.\n\nPlanet and environment lock: this scene literally takes place inside a protected research habitat associated with the real NASA-catalog exoplanet TOI-700 d. Render deep violet dusk with a bright horizon band and readable faces. Maldives appears as a large cultural research installation and couture motif system derived from the named atoll or island geometry, not as a claim that the Earth location exists on TOI-700 d. The planet is real; its depicted surface, weather and habitation are speculative cinematic art.\n",
+          "sha256": "BBF795666337EB4E1CB215E9FB966B2390D17EC47BDB90C887007DB7D60B6C3B",
+          "encoding": "utf8",
+          "bytes": 1004,
+          "fidelity": "runtime-launch-byte-exact"
+        }
+      }
+    }
+  }
+}

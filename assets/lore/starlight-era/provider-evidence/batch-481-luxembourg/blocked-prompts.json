@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "batch": 481,
+  "country": "Luxembourg",
+  "state": "blocked-chatgpt-refinement-prompts-archived",
+  "provider": "built-in ChatGPT image generator",
+  "blocked": [
+    {
+      "scene": 1951,
+      "attempt": 1,
+      "promptSha256": "420B22D95EEB52DEBA90FDA80DEDFC3ED9F88B29724356E13E95E8336B45380D",
+      "requestId": "228eeb2b-8ab0-4321-97b4-30a794b0d4e9",
+      "code": "moderation_blocked",
+      "moderationStage": "output",
+      "categories": ["sexual"],
+      "artifactReturned": false
+    },
+    {
+      "scene": 1951,
+      "attempt": 2,
+      "promptSha256": "1BA04BE49CB60C17F5BB2EFE91C9A026CEE378A6282A83F8765ED72172838F1D",
+      "requestId": "91d68f2d-4d5f-434e-ac60-1aa76d594d3d",
+      "code": "moderation_blocked",
+      "moderationStage": "output",
+      "categories": ["sexual"],
+      "artifactReturned": false
+    }
+  ],
+  "exactPromptArchive": "assets/lore/starlight-era/provider-evidence/batch-481-luxembourg/chatgpt-one-pass-prompts-and-outcomes.md",
+  "fallbackUsed": false,
+  "furtherAttemptsPermitted": false
+}

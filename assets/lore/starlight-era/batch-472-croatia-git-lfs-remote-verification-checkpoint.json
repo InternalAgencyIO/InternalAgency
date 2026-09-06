@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "batch": 472,
+  "country": "Croatia",
+  "state": "closure-commit-lfs-remote-and-draft-pr-parity-verified",
+  "verifiedAtUtc": "2026-08-31T16:46:03.3530040Z",
+  "branch": "agent/starlight-progress-archive",
+  "closureCommit": "0b58260d7b4ac62df614c4800bf6f624065cf384",
+  "localHead": "0b58260d7b4ac62df614c4800bf6f624065cf384",
+  "remoteHead": "0b58260d7b4ac62df614c4800bf6f624065cf384",
+  "aheadBehind": {"ahead": 0, "behind": 0},
+  "draftPr": {
+    "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "isDraft": true,
+    "state": "OPEN",
+    "headRefName": "agent/starlight-progress-archive",
+    "headRefOid": "0b58260d7b4ac62df614c4800bf6f624065cf384"
+  },
+  "gitLfs": {
+    "closureObjectCountPushed": 7,
+    "closureObjectBytes": 2572675,
+    "postPushTargetedDryRun": "empty",
+    "remoteObjectsPending": 0
+  },
+  "preservedUserOwnedUntracked": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "xPairAudit": {
+    "countries": ["Bosnia and Herzegovina", "Croatia"],
+    "sceneOrder": [1913, 1914, 1915],
+    "candidateAssetSha256": [
+      "5DE4E0F2BE54EED32409368C3BA37DBCE801DE8863960AFE0EDD78E02C487CFA",
+      "F7454E14418E0C86AF8FAF91542AB0C0EAA45BBB4993E372B5BBA501AAF6A4CF",
+      "A50B39628755EA37BE9B3314FC61CDA29FE18B202A8813BEA5A85FDA30D8F801"
+    ],
+    "publishedOrDraftDuplicateHashMatches": 0
+  },
+  "nextSafeAction": "Inspect the actual five browser tabs, verify the existing X composer is blank and signed in as @dogramaci, then stage exactly scenes 1913, 1914 and 1915 with accessibility text. Stop immediately before final Post for action-time confirmation."
+}
