@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "currentXBacklogDrain20260906": {"state":"explicit-backlog-drain-in-progress","reservation":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-p01-reservation.json","manualPostReconciled":"https://x.com/dogramaci/status/2096574104090325016","canonicalPostCount":204,"reservedSceneIds":[2020,2022,2017],"excludedNewDuplicateSceneIds":[2018],"scope":"Drain selected, archived, hard-QA-passing, live-duplicate-cleared media only. Older terminal-publication reservations are not pending work.","omanState":"Oman remains incomplete and publication-ineligible. No provider retry or tailoring allowance changed."},
+  "currentXBacklogDrain20260906": {"state":"first-backlog-trio-live-older-candidates-under-audit","reservation":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-p01-reservation.json","manualPostReconciled":"https://x.com/dogramaci/status/2096574104090325016","canonicalPostCount":205,"reservedSceneIds":[],"excludedNewDuplicateSceneIds":[2018],"scope":"Drain selected, archived, hard-QA-passing, live-duplicate-cleared media only. Older terminal-publication reservations are not pending work.","omanState":"Oman remains incomplete and publication-ineligible. No provider retry or tailoring allowance changed.","publishedSceneIds":[2020,2022,2017],"latestPostUrl":"https://x.com/dogramaci/status/2096652596287058332","liveReceipt":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-p01-live-checkpoint.json"},
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},
   "currentMetaRecovery20260906Batch499": {"state":"four-primary-results-downloaded-three-usable-one-identity-failure-secondary-archive-gap","checkpoint":"assets/lore/starlight-era/batch-499-oman-tab-recovery-primary-qa-checkpoint.json","supersedes":"currentMetaDispatch20260906Batch499 status and old tabs only; confirmed occurrence URLs and hashes remain immutable","currentMetaTabs":["56","57","58","59"],"currentXTab":"60","xAccount":"@dogramaci","archiveGapBlocksOmanPublication":true,"confirmedPromptsMustNotBeResent":true},
@@ -9739,6 +9739,103 @@
         "screenshotBytes": 88916,
         "screenshotSha256": "8D2C9F83F5B580D8B8ACF88050A9FF8DEBCC2961C26E4774F581678408399627"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 498,
+      "batches": [
+        498,
+        497
+      ],
+      "countries": [
+        "Palestine",
+        "New Zealand"
+      ],
+      "sceneIds": [
+        2020,
+        2022,
+        2017
+      ],
+      "imageNumbers": [
+        2020,
+        2022,
+        2017
+      ],
+      "state": "terminal-published-live-verified",
+      "postUrl": "https://x.com/dogramaci/status/2096652596287058332",
+      "postedAt": "2026-09-06T17:31:47.533Z",
+      "verifiedAt": "2026-09-06T17:33:04.129Z",
+      "caption": "Palestine ❤️ New Zealand: Tell es-Sultan and Wadi Qelt meet Piha's black-sand coast. Close hugs, linked hands, short flag-cut looks, rainbow boots and RAZE platforms. Fictional AI fashion; the distant smoke is imagined.\n\n#WorldXXXSeries",
+      "captionSha256": "B8E8C45C30BF41FFAAD1B3BB4641B4458009D6D44162EDC3763DA1F03C495617",
+      "hashtags": [
+        "#WorldXXXSeries"
+      ],
+      "assets": [
+        {
+          "scene": 2020,
+          "sourceDownloadName": "intimate_archaeological_portrait.jpg",
+          "bytes": 229735,
+          "sha256": "0414F848DB5DA8F42E5A711546A95A240BBB23EA6245D6E16B121113AAF9A054",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-498-palestine/scene-2020-meta-primary-original.jpg",
+          "width": 1152,
+          "height": 2048,
+          "contentType": "image/jpeg",
+          "role": "canonical-visible-download-original",
+          "provider": "Meta AI",
+          "xEligible": true,
+          "selectionReason": "Meta selected after the single comparison because its RAZE band is retained; the edited comparison removes this detail and introduces an unrolled star tattoo. Both versions remain archived.",
+          "alt": "Four fictional adult women overlap in a close side hug beside the archaeological terraces of Tell es-Sultan, Jericho. Palestinian flag looks, a green top and black RAZE shorts frame an IA tattoo. A distant smoke cloud is part of this fictional AI scene, not a report of a real event.",
+          "country": "Palestine"
+        },
+        {
+          "scene": 2022,
+          "sourceDownloadName": "desert_canyon_group_portrait.jpg",
+          "bytes": 231534,
+          "sha256": "94B799C1ED4E8FCE0972C757EBCB526219F90DA55B3B974C1F3F7A9C6E054DCC",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-498-palestine/scene-2022-meta-primary-original.jpg",
+          "width": 1152,
+          "height": 2048,
+          "contentType": "image/jpeg",
+          "role": "canonical-visible-download-original",
+          "provider": "Meta AI",
+          "xEligible": true,
+          "selectionReason": "Meta original selected after the single ChatGPT output was moderation blocked. The failed allowance is consumed, with no retry or rephrased invocation.",
+          "alt": "Four fictional adult women lean together on a terrace above Wadi Qelt's pale canyon, with a supported head-on-shoulder rest and joined hands. Flag-patterned and green short looks pair with sheer star knee-highs, red heels, rainbow ankle boots and green boots.",
+          "country": "Palestine"
+        },
+        {
+          "scene": 2017,
+          "provider": "ChatGPT Image Generator",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2017-chatgpt-single-tailoring-pass.png",
+          "sha256": "01487F5792AD593890E1DBCC152B55BCF1395EDCB3277EEECFD82AE750D0904B",
+          "bytes": 2416115,
+          "width": 941,
+          "height": 1672,
+          "xEligible": true,
+          "country": "New Zealand",
+          "alt": "Four fictional adult women sit and lean into a linked-hand moment at a guarded Piha overlook above the black-sand beach and Lion Rock. Short black, white, red and New Zealand flag looks pair with rainbow boots, sculptural blue platforms and visible Silent King and star tattoos."
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2096652596287058332/photo/1",
+        "https://x.com/dogramaci/status/2096652596287058332/photo/2",
+        "https://x.com/dogramaci/status/2096652596287058332/photo/3"
+      ],
+      "mediaMode": "signed-in-visible-in-app-browser",
+      "buttonClickAttempts": 1,
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 3,
+      "stagingCommit": "f9330dbe85afede362bf973ea86f721aca8c9f7d",
+      "verification": "Direct live @dogramaci status confirms exact frozen caption and hashtag, three ordered photo endpoints, all three exact descriptions and Made with AI. Scene 2018 excluded after manual-post reconciliation.",
+      "evidence": {
+        "liveDom": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p01-live-2096652596287058332-dom.txt",
+        "screenshot": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p01-live-2096652596287058332-visible.jpg",
+        "screenshotBytes": 143651,
+        "screenshotSha256": "DD370A161BE4BC52045CB14F9EF312FEB9B3B3F1A1A923094E401C9DD82E0457"
+      },
+      "duplicateGate": "Never attach or publish scenes 2020, 2022 or 2017, or any alternate versions, again."
     }
   ],
   "latestAssistedDrain": {
