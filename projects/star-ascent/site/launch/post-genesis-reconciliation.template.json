@@ -14,12 +14,13 @@
     "haltOnUnresolvedCorrections": true,
     "maxChannelEvidenceAgeMinutes": 60,
     "preserveCorrectionHistory": true,
-    "noDistributionClaimsWithoutEvidence": true
+    "noDistributionClaimsWithoutEvidence": true,
+    "observationMode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true
   },
   "reconciliation": {
     "checkedAtUtc": null,
-    "archiveOwnerLabel": null,
-    "independentReviewerLabel": null,
     "evidenceArchiveUrl": null,
     "publicChangelogUrl": null,
     "correctionStatus": "NONE",

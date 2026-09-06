@@ -9,6 +9,9 @@
 #[cfg(feature = "runtime-account-lifecycle")]
 pub mod runtime_persistence;
 
+#[cfg(feature = "runtime-write-adapter")]
+pub(crate) mod runtime_staging_persistence;
+
 extern crate alloc;
 
 use alloc::boxed::Box;

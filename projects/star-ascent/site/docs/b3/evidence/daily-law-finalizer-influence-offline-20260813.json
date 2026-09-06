@@ -1,0 +1,109 @@
+{
+  "schema": "iat-b3-daily-law-finalizer-influence-evidence-v1",
+  "measuredAt": "2026-08-13T09:11:18+03:00",
+  "status": "OFFLINE_SYNTHETIC_MEASUREMENT_COMPLETE_EMPIRICAL_TRACE_PENDING_MAINNET_HOLD",
+  "sourceBinding": {
+    "head": "09ec025b5b301925d49bc24347bafc8a0c7f733d",
+    "clean": false,
+    "dirtyPathCountAtMeasurement": 16,
+    "reproducibleBuildClaimed": false,
+    "consensusSource": "programs/iat_b3_consensus/src/lib.rs",
+    "consensusSourceSha256": "20b26770c140c641d14f896327c0834e6959a8694f3d9b85192b272f79d51e61",
+    "lawSource": "programs/iat_b3_law/src/lib.rs",
+    "lawSourceSha256": "ba404c92cbe80c5952f1c525be486636e694ced2525a8dc2b8610f41adfd2cea",
+    "measurementSource": "scripts/measure-iat-b3-daily-law-finalizer-influence.mjs",
+    "measurementSourceSha256": "52181bfe8a7de86d640f4eaad4ac425941f22b41749312c3224773e83bd950ea"
+  },
+  "inputs": {
+    "localDay": 20672,
+    "isFriday": true,
+    "networkGenesisHash": "1111111111111111111111111111111111111111111111111111111111111111",
+    "mint": "2222222222222222222222222222222222222222222222222222222222222222",
+    "entropyLagSlots": 150,
+    "firstInvocationSlot": 1000001,
+    "candidateCount": 64,
+    "slotHashTraceKind": "DETERMINISTIC_SYNTHETIC_NOT_OBSERVED_SOLANA_HISTORY"
+  },
+  "crossLanguageVector": {
+    "localDay": 20672,
+    "entropySlot": 42424242,
+    "ancestorSlotHashHexByte": "33",
+    "networkGenesisHashHexByte": "11",
+    "mintHexByte": "22",
+    "drawCounter": 0,
+    "drawBucket": 151,
+    "locked": true,
+    "javascriptTest": "PASS",
+    "rustTest": "PASS"
+  },
+  "analyticUniformIndependentSuppliedHashModelOnly": {
+    "lockedNumerator": 6667,
+    "openNumerator": 3333,
+    "denominator": 10000,
+    "expectedCandidatesUntilOpen": 3.0003000300030003,
+    "probabilityAtLeastOneOpen": {
+      "1": 0.33330000000000004,
+      "2": 0.5555111100000001,
+      "3": 0.703659257037,
+      "6": 0.9121821640601372,
+      "12": 0.9922880276908393,
+      "64": 0.9999999999946105
+    }
+  },
+  "exactSyntheticMeasurements": {
+    "consecutiveInvocationSlots": {
+      "invocationCount": 64,
+      "distinctEntropySlotCount": 64,
+      "openCount": 22,
+      "lockedCount": 42,
+      "firstLockedInvocationIndex": 0,
+      "firstOpenInvocationIndex": 4,
+      "openOutcomeSelectableByWaitingWithinTrace": true
+    },
+    "skippedSlotTrace": {
+      "invocationCount": 64,
+      "distinctEntropySlotCount": 49,
+      "openCount": 14,
+      "lockedCount": 50,
+      "firstLockedInvocationIndex": 0,
+      "firstOpenInvocationIndex": 1,
+      "openOutcomeSelectableByWaitingWithinTrace": true
+    },
+    "congestedInvocationOpportunities": {
+      "invocationCount": 9,
+      "distinctEntropySlotCount": 9,
+      "openCount": 2,
+      "lockedCount": 7,
+      "firstLockedInvocationIndex": 0,
+      "firstOpenInvocationIndex": 6,
+      "openOutcomeSelectableByWaitingWithinTrace": true
+    },
+    "modeledForkAlternatives": {
+      "pairCount": 64,
+      "divergentOutcomePairCount": 26,
+      "leaderOrForkOutcomeInfluenceExistsInSyntheticTrace": true
+    }
+  },
+  "reproduction": {
+    "command": "node scripts/measure-iat-b3-daily-law-finalizer-influence.mjs",
+    "candidateRows": "The command emits every invocation slot, selected entropy slot, ancestor hash, draw counter, bucket, and locked result.",
+    "expectedExitCode": 2,
+    "reason": "Measurement is intentionally nonauthorizing and remains HOLD."
+  },
+  "findings": {
+    "invocationRelativeEntropyChangesAcrossConsecutiveSlots": true,
+    "delayedFinalizerCanObserveMultipleExactCandidateOutcomes": true,
+    "skippedSlotsReduceDistinctCandidateCount": true,
+    "permissionlessCompetitionEliminatesTimingInfluence": false,
+    "empiricalMainnetOrDevnetMeasurementComplete": false
+  },
+  "truth": {
+    "entropyRiskAcceptance": null,
+    "finalEntropyLagFrozen": false,
+    "productionEntropyClaimUnbiased": false,
+    "fullFeatureDevnetRehearsalComplete": false,
+    "activationReady": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

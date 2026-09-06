@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
@@ -118,6 +119,42 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.ok(result.scannedSourceFileCount >= 300);
   assert.match(result.sourceSetSha256, /^[0-9a-f]{64}$/u);
   assert.match(result.guardedSurfaceSha256, /^[0-9a-f]{64}$/u);
+  const privacyRuntimeFilenameMarker = result.markerInventory.find(({ markerSha256 }) => (
+    markerSha256 === createHash("sha256")
+      .update("privacy-vault-authenticated-recovery-runtime.mjs")
+      .digest("hex")
+  ));
+  assert.deepEqual(privacyRuntimeFilenameMarker?.locations, {
+    "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs": 1,
+  });
+  const providerEnvelopeFilenameMarker = result.markerInventory.find(({ markerSha256 }) => (
+    markerSha256 === createHash("sha256")
+      .update("provider-authenticated-envelope.mjs")
+      .digest("hex")
+  ));
+  assert.deepEqual(providerEnvelopeFilenameMarker?.locations, {
+    "programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs": 1,
+    "programs/iat_b3_reference/privacy-vault-external-rollback-anchor.mjs": 1,
+    "programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs": 1,
+    "programs/iat_b3_reference/reward-external-rollback-anchor.mjs": 1,
+    "programs/iat_b3_reference/reward-rollback-anchor-sqlite.mjs": 1,
+    "scripts/lib/iat-v2-production-identity-external-observer-capability.mjs": 1,
+    "scripts/lib/iat-v2-production-identity-integration-evidence.mjs": 1,
+    "scripts/validate-iat-b3-reward-provider-privacy-enforcement-closure.mjs": 1,
+  });
+  const providerVerifierMarker = result.markerInventory.find(({ markerSha256 }) => (
+    markerSha256 === createHash("sha256")
+      .update("verifyProviderSignedEnvelope")
+      .digest("hex")
+  ));
+  assert.equal(
+    providerVerifierMarker?.locations["scripts/lib/iat-v2-production-identity-external-observer-capability.mjs"],
+    2,
+  );
+  assert.equal(
+    providerVerifierMarker?.locations["scripts/lib/iat-v2-production-identity-integration-evidence.mjs"],
+    2,
+  );
 
   assert.equal(result.runtimeDirectStoreBypassPreventionVerified, false);
   assert.equal(result.providerAuthenticationVerified, false);
@@ -125,7 +162,7 @@ test("repository source inventory binds every current reward adapter edge and st
   assert.equal(result.materializedProjectionStateVerified, false);
   assert.equal(result.externalSideEffectsAuthorized, false);
   assert.equal(result.builtArtifactParityVerified, false);
-  assert.equal(result.independentReviewAccepted, false);
+  assert.equal(result.sourceBoundAutomatedDirectEvidenceVerified, false);
   assert.equal(result.activationReady, false);
   assert.equal(result.mainnetStatus, REWARD_GUARDED_SOURCE_INVENTORY_MAINNET_STATUS);
   assert.equal(result.mainnetStatus, "HOLD");
@@ -640,7 +677,7 @@ test("native reward proof bytes, exports, truth, and validators fail closed on d
   }
 });
 
-test("the reviewed privacy anchor provider import marker cannot drift to another source", () => {
+test("the source-bound privacy anchor provider import marker cannot drift to another source", () => {
   assert.throws(
     () => auditRewardGuardedSourceFiles(withSource(
       "worker/unreviewed-privacy-anchor-provider-import.mjs",

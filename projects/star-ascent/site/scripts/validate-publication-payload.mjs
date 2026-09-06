@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { readFileSync } from "node:fs";
-import { normalizeAccountabilityLabel } from "./normalize-accountability-label.mjs";
 
 const canonicalPayloadPath = "launch/PUBLICATION_PAYLOAD.template.md";
 const file = process.argv[2] ?? canonicalPayloadPath;
@@ -84,13 +83,7 @@ const isNonFutureUtcMinute = (value) => {
   if (!isUtcMinute(value)) return false;
   return Date.parse(value.replace(" ", "T").replace(" UTC", ":00Z")) <= Date.now();
 };
-const isVerifierLabel = (value) => typeof value === "string"
-  && value === value.trim()
-  && value.length >= 3
-  && !/\p{C}/u.test(value)
-  && normalizeAccountabilityLabel(value).length >= 3
-  && !/^(pending|tbd|unknown|n\/a|none|unverified)$/i.test(value)
-  && !/[\[\]]/.test(value);
+const isSha256 = (value) => typeof value === "string" && /^[0-9a-f]{64}$/u.test(value);
 const secretBearingFieldName = (name) => {
   const normalized = name.replace(/[^a-z0-9]/gi, "").toLowerCase();
   return /(?:seed(?:phrase|words)?|mnemonic|privatekey|secretkey|keypair|passphrase|devicepin|wallet(?:seed|export|backup)|recovery(?:phrase|words|material)?|derivationpath|accountpath)/.test(normalized);
@@ -122,7 +115,7 @@ if (mnemonicShapedValue) fail("payload must not contain a 12-24-word mnemonic-sh
 const credentialShapedField = credentialShapedPayloadField();
 if (credentialShapedField) fail(`payload must not contain a bare 64-byte Base58 credential-shaped value at ${credentialShapedField}`); else ok("no bare credential-shaped Base58 values are present");
 
-const required = ["Status", "Network", "Mint", "Explorer", "Program", "Decimals", "Fixed supply", "Base units", "Mint authority", "Mint authority evidence", "Freeze authority", "Freeze authority evidence", "Allocation and lock evidence", "Checked at (UTC)", "Verified by"];
+const required = ["Status", "Network", "Mint", "Explorer", "Program", "Decimals", "Fixed supply", "Base units", "Mint authority", "Mint authority evidence", "Freeze authority", "Freeze authority evidence", "Allocation and lock evidence", "Checked at (UTC)", "Evidence packet SHA-256", "Evidence observation mode", "No self-attestation", "Human reviewer required"];
 for (const label of required) {
   const occurrences = [...text.matchAll(new RegExp(`^${escapeRegExp(label)}:`, "gm"))].length;
   if (occurrences === 0) fail(`${label}: missing`);
@@ -133,7 +126,7 @@ for (const label of required) {
 const status = valueFor("Status");
 const releaseValueLabels = [
   "Mint", "Explorer", "Fixed supply", "Base units", "Mint authority evidence",
-  "Freeze authority evidence", "Allocation and lock evidence", "Checked at (UTC)", "Verified by",
+  "Freeze authority evidence", "Allocation and lock evidence", "Checked at (UTC)", "Evidence packet SHA-256",
 ];
 if (status === "**HOLD**") {
   // HOLD is a reset state. A copied payload must not retain a prior mint,
@@ -165,7 +158,10 @@ if (status === "**HOLD**") {
   }
   if (!isUtcMinute(valueFor("Checked at (UTC)"))) fail("Checked at (UTC) must be a real YYYY-MM-DD HH:MM UTC timestamp");
   else if (!isNonFutureUtcMinute(valueFor("Checked at (UTC)"))) fail("Checked at (UTC) must not be in the future");
-  if (!isVerifierLabel(valueFor("Verified by"))) fail("Verified by must identify a non-placeholder verifier label");
+  if (!isSha256(valueFor("Evidence packet SHA-256"))) fail("Evidence packet SHA-256 must be an exact lowercase digest");
+  if (valueFor("Evidence observation mode") !== "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION") fail("Evidence observation mode must require automated source/receipt/state evidence");
+  if (valueFor("No self-attestation") !== "true") fail("No self-attestation must be true");
+  if (valueFor("Human reviewer required") !== "false") fail("Human reviewer required must be false");
   const evidenceUrls = ["Explorer", "Mint authority evidence", "Freeze authority evidence", "Allocation and lock evidence"].map(valueFor);
   if (new Set(evidenceUrls).size !== evidenceUrls.length) fail("Explorer and evidence URLs must be distinct direct records");
   if (!isDirectMintExplorerRecord(valueFor("Explorer"), valueFor("Mint"))) {
@@ -179,4 +175,4 @@ if (status === "**HOLD**") {
 }
 
 if (process.exitCode) console.error("\nDo not publish this payload as verified Genesis evidence.");
-else console.log("\nPayload structure passes. Independent Explorer verification remains mandatory.");
+else console.log("\nPayload structure passes. Exact source-bound receipt/state/endpoint verification remains mandatory.");

@@ -44,9 +44,9 @@ node scripts/run-launch-preflight.mjs --require-ceremony-ready
 
 That mode fails before the full preflight unless a fresh read-only balance, the
 exact 8.5 SOL floor, one replacement UTC window,
-post-funding/post-scheduling artifact regeneration, an assigned independent
-verifier, and the reviewed Model T device path are all recorded. The artifact,
-verifier, and device-path summaries are accepted only when the canonical
+post-funding/post-scheduling artifact regeneration, source-bound automated
+evidence, and the reviewed Model T device path are all recorded. The artifact,
+evidence, and device-path observations are accepted only when the canonical
 `READY` V2 ceremony review and `ARMED` V2 stage journal pass their validators in
 that same assessment; flipping readiness-ledger booleans cannot clear them. See
 [`IAT_V2_CEREMONY_ENTRY_GATE.md`](IAT_V2_CEREMONY_ENTRY_GATE.md).
@@ -55,12 +55,12 @@ that same assessment; flipping readiness-ledger booleans cannot clear them. See
 It binds the readiness ledger, V2 stage journal, economic policy, V2 allocation
 plan, remediation audit, and local time-gate proof by SHA-256. While `HOLD`, it
 must contain no identities, digests, completed reviews, or readiness timestamp.
-`READY` requires a fresh attended review, the sole Model T signer address, a
-distinct evidence-only verifier with no signing authority, current SBF and
-signed-Devnet evidence review, an `ARMED` V2 stage journal, and separate
+`READY` requires a fresh source-bound observation, the sole Model T signer address,
+automated evidence sources with no signing authority, current SBF and
+signed-Devnet evidence, an `ARMED` V2 stage journal, and separate
 broadcast approval. It never stores a derivation path, PIN, seed, or key.
 
-`genesis-manifest.template.json` is a HOLD-state source of truth. Copy it to a non-template manifest only after the signer and verifier agree on every final value. Its primary validator also requires the fixed five-step Genesis order and all five evidence records to remain `null` while the manifest is `HOLD`, so stale transaction URLs cannot make a HOLD record look partly released.
+`genesis-manifest.template.json` is a HOLD-state source of truth. Copy it to a non-template manifest only after the signer confirms the signature intent and automated source/receipt/state evidence matches every final value. Its primary validator also requires the fixed five-step Genesis order and all five evidence records to remain `null` while the manifest is `HOLD`, so stale transaction URLs cannot make a HOLD record look partly released.
 
 Validate before public release:
 
@@ -68,7 +68,7 @@ Validate before public release:
 node scripts/validate-genesis-manifest.mjs launch/genesis-manifest.template.json
 ```
 
-The validator checks intended network, program, decimals, supply target, and the declared exact base-unit supply/allocation amounts using integer arithmetic. It also checks whether a PUBLISHED manifest has all mandatory evidence fields. Published evidence must be non-placeholder HTTPS URLs, while mint and allocation destinations must use Solana base58 address form. Each allocation must have its own destination and public evidence URL, preventing a single wallet or record from silently satisfying multiple allocation buckets. It does not sign a transaction, inspect a wallet, or replace independent Explorer verification.
+The validator checks intended network, program, decimals, supply target, and the declared exact base-unit supply/allocation amounts using integer arithmetic. It also checks whether a PUBLISHED manifest has all mandatory evidence fields. Published evidence must be non-placeholder HTTPS URLs, while mint and allocation destinations must use Solana base58 address form. Each allocation must have its own destination and public evidence URL, preventing a single wallet or record from silently satisfying multiple allocation buckets. It does not sign a transaction or inspect a wallet; direct Explorer endpoint observations remain required.
 
 ## Superseded V1 rehearsal record
 
@@ -86,7 +86,7 @@ node scripts/validate-iat-v2-policy.mjs
 Complete `launch/iat-v2-devnet-rehearsal.template.json` only after a bound,
 verifiable SBF build, unfunded deployment, hardware-control transfer, V2
 initialization, scaled funding, authority revocation, activation, full positive
-and adversarial scenario matrix, and independent verification.
+and adversarial scenario matrix, and source-bound automated verification.
 
 The mainnet handoff uses the same non-secret boundary: its validator rejects credential-bearing fields anywhere in the record, including nested or unused `walletSeedPhrase`, `privateKey`, recovery-material, PIN, and derivation/account-path aliases. An `APPROVED` handoff also reruns the canonical devnet rehearsal validator against its fixed source path; `COMPLETED` status alone cannot bypass missing, stale, malformed, or inconsistent rehearsal proof. Remove a secret-bearing field entirely; never replace a real secret with a redacted value in a launch artifact.
 
@@ -108,7 +108,7 @@ Before promoting a matched manifest and publication payload, check that their HO
 node scripts/validate-release-evidence-chain.mjs launch/genesis-manifest.template.json launch/PUBLICATION_PAYLOAD.template.md
 ```
 
-This local consistency check never contacts Solana or authorizes publication; independently verify every final on-chain value before release.
+This local consistency check never contacts Solana or authorizes publication; bind automated endpoint and state evidence for every final on-chain value before release.
 
 ## Transaction-order evidence
 
@@ -153,8 +153,8 @@ The schedule comparison is not localization review. Turkish remains on
 localization `HOLD` and the active web UI remains English fallback until
 accountable, source-bound review evidence is accepted. The scheduled time opens
 the broadcast window only. It never signs, submits, or authorizes a transaction.
-Mainnet remains on evidence HOLD until the exact devnet rehearsal and independent
-evidence chain pass.
+Mainnet remains on evidence HOLD until the exact Devnet rehearsal and automated
+source/receipt/state evidence chain pass.
 
 ## Fixed-supply arithmetic
 
@@ -170,7 +170,7 @@ Never place signing secrets, recovery material, device PINs, or private keys in 
 
 ## Signer and address gate
 
-`genesis-signing-checklist.template.json` is a HOLD-safe, non-secret ceremony roster. It separates the signing roles, independent verifier, and publication operator so an address or responsibility mismatch can stop the release before a transaction is approved.
+`genesis-signing-checklist.template.json` is a HOLD-safe, non-secret ceremony roster. It separates the sole Model T signature role from automated evidence and publication controls so an address or responsibility mismatch can stop the release before a transaction is approved.
 
 Validate it before changing its state to `READY`:
 
@@ -178,11 +178,11 @@ Validate it before changing its state to `READY`:
 node scripts/validate-genesis-signing-checklist.mjs launch/genesis-signing-checklist.template.json
 ```
 
-`READY` requires the mint-authority and fee-payer roles to share the one reviewed physical-signing address used by the Model T ceremony, while the independent verifier and publication operator must each use a different full Solana public address. It also requires physical device-path review for both signing responsibilities, independent manifest/destination review, a distinct reviewed recipient address for each allocation (with its exact intended base-unit amount), publication-operator review of the HOLD controls, an explicit HOLD owner confirmation, and a UTC readiness timestamp. The checklist rejects credential-bearing field names and credential-like values (including secret phrases and 12–24 word mnemonic-shaped text) anywhere in the record; remove such material entirely rather than redacting it. This keeps the broadcaster from treating a ceremony-ready record as permission to publish before independently checked evidence exists. It validates supplied checklist data only: it never creates keys, requests secrets, signs, or sends a transaction.
+`READY` requires the mint-authority and fee-payer roles to share the one reviewed physical-signing address used by the Model T ceremony. It also requires physical device-path review for both signing responsibilities, exact automated manifest/destination comparison, a distinct reviewed recipient address for each allocation (with its exact intended base-unit amount), observation of the HOLD controls, and a UTC readiness timestamp. The checklist rejects credential-bearing field names and credential-like values (including secret phrases and 12–24 word mnemonic-shaped text) anywhere in the record; remove such material entirely rather than redacting it. This keeps the broadcaster from treating a ceremony-ready record as permission to publish before source-bound evidence exists. It validates supplied checklist data only: it never creates keys, requests secrets, signs, or sends a transaction.
 
 ## Mainnet approval handoff
 
-`mainnet-handoff.template.json` records the final non-signing approval boundary between a completed devnet rehearsal and the mainnet ceremony. It keeps the canonical manifest in `HOLD` until independent public evidence exists and explicitly assigns a correction owner. For an `APPROVED` handoff, `manifestDigest` must repeat the verified canonical manifest SHA-256, while `destinationDigest` must be the SHA-256 of the compact JSON object `{ "handoffVersion": 1, "network": "mainnet-beta", "artifactDigests": { ... } }`, using the three displayed artifact digest fields in order and lowercase values. This makes approval invalid if the handoff's network or any source artifact drifts.
+`mainnet-handoff.template.json` records the final non-signing automated-evidence boundary between a completed Devnet rehearsal and the Mainnet ceremony. It keeps the canonical manifest in `HOLD` until source-bound public evidence exists. Its digests bind the current manifest, signing checklist, rehearsal, and release snapshot; any source or network drift returns the handoff to HOLD.
 
 Validate it before changing its state to `APPROVED`:
 
@@ -191,7 +191,7 @@ node scripts/validate-mainnet-handoff.mjs launch/mainnet-handoff.template.json
 npm run check:mainnet-handoff
 ```
 
-`APPROVED` requires a completed devnet rehearsal, a ready signer checklist, two immutable 64-character review digests, and SHA-256 values that exactly bind the approval to the current manifest, signer checklist, and rehearsal files. It also requires the generated HOLD release snapshot's pre-approval digest to match those same three files, so a stale ceremony snapshot cannot clear the handoff. It requires three distinct release, verifier, and correction-owner labels, a UTC approval time, and all four HOLD controls. The handoff rejects credential-bearing field names and credential-like values (including secret phrases and 12–24 word mnemonic-shaped text) anywhere in the record; remove them entirely rather than redacting them. The validator never approves a transaction, reads a wallet, creates keys, or contacts Solana.
+`APPROVED` requires a completed Devnet rehearsal, a ready signer checklist, exact SHA-256 bindings to the current inputs, a matching HOLD release snapshot, and an automated observation time. It requires source/receipt/state-only evidence, no self-attestation, no human reviewer prerequisite, and all HOLD controls. The handoff rejects credential-bearing field names and credential-like values (including secret phrases and 12–24 word mnemonic-shaped text) anywhere in the record; remove them entirely rather than redacting them. The validator never approves a transaction, reads a wallet, creates keys, or contacts Solana.
 
 `npm run check:mainnet-handoff` runs isolated HOLD fixtures for the non-authorizing authority control, canonical source paths, credential-shaped values, and closed reviewed schema. It changes only a temporary copy of the launch artifacts.
 
@@ -209,7 +209,7 @@ Validate it before changing its state to `READY`:
 node scripts/validate-release-packet.mjs launch/release-packet.template.json
 ```
 
-`READY` requires a completed rehearsal, ready signer checklist, approved handoff, and both public-facing artifacts still in `HOLD` until independent evidence exists. It reruns the canonical mainnet-handoff validator, then independently rechecks that the handoff points to the same manifest, signing checklist, and rehearsal as the packet, and that every handoff digest (including its deterministic destination digest) still matches those files. It also requires same-version review, three distinct release/verifier/correction owners, and exact continuity of those three labels from the approved handoff into the release packet, so accountability cannot change between approval and coordination. Fresh canonical UTC timestamps—the public-evidence check, approved handoff, and packet approval—must each be within 30 minutes (with no more than one minute of future skew) and occur in that order. SHA-256 digests must match each canonical source artifact. Its `packetDigest` must be the SHA-256 of the compact JSON object `{ "packetVersion": 1, "artifactDigests": { ... } }`, with the five artifact digest fields in the template's displayed order and lowercase values; this stops a READY approval from being reused after a packet artifact changes. This local consistency check never authorizes a transaction or publication.
+`READY` requires a completed rehearsal, ready signer checklist, approved handoff, and both public-facing artifacts still in `HOLD` until automated direct evidence exists. It reruns the canonical handoff validator and rechecks every exact path, digest, freshness window, and state transition from a captured dependency bundle. No human reviewer label can substitute for receipt, state, or endpoint evidence. This local consistency check never authorizes a transaction or publication.
 
 Immediately after the canonical packet reaches `READY`, and before changing the manifest to `PUBLISHED` or the publication payload to `VERIFIED`, seal that validated packet:
 
@@ -232,4 +232,4 @@ Validate it before changing its state to `COMPLETE`:
 node scripts/validate-post-genesis-reconciliation.mjs launch/post-genesis-reconciliation.template.json
 ```
 
-`COMPLETE` requires the manifest and publication payload to be published, the unchanged release packet and HOLD release snapshot to match their sealed pre-publication proof, separate archive/reviewer roles, a public evidence archive and changelog, plus at least two independently checked matching public channel records. The gate evaluates one captured dependency bundle and rejects any source, packet, proof, ceremony input, snapshot, or reconciliation edit that lands during validation. The payload's `Checked at (UTC)` minute must match the packet's reviewed public-evidence time, while the seal and every channel check must not postdate the reconciliation. It also requires an explicit correction state: `NONE` only when no correction records exist, or `RESOLVED` with a unique public notice, UTC report time, and UTC resolution time for every correction. The canonical publication payload and every channel record must repeat the canonical route, mint, mint-authority evidence, and freeze-authority evidence exactly as they appear in the canonical manifest; a `matched` label alone cannot clear the gate. Each channel check must fall within the declared 1 to 1,440 minute freshness window and cannot postdate the reconciliation. It validates supplied records only; it never contacts a chain, authorizes a distribution, or establishes on-chain truth.
+`COMPLETE` requires the manifest and publication payload to be published, the unchanged release packet and HOLD release snapshot to match their sealed pre-publication proof, a public evidence archive and changelog, and at least two matching automated channel observations. The gate evaluates one captured dependency bundle and rejects any source, packet, proof, ceremony input, snapshot, or reconciliation edit that lands during validation. The canonical publication payload and every channel record must repeat the canonical route, mint, mint-authority evidence, and freeze-authority evidence exactly as they appear in the canonical manifest; assertion-only labels cannot clear the gate. It validates supplied records only; it never contacts a chain, authorizes a distribution, or establishes on-chain truth.

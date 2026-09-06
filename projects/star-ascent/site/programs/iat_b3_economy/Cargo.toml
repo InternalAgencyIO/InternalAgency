@@ -62,6 +62,18 @@ runtime-production-withdraw-position = ["runtime-token-2022-stake-ingress"]
 runtime-production-withdraw-position-executor = [
     "runtime-production-withdraw-position",
 ]
+runtime-production-dispatch = [
+    "runtime-account-lifecycle",
+    "runtime-production-claim-lane-principal-executor",
+    "runtime-production-open-position-executor",
+    "runtime-production-settle-position-week-executor",
+    "runtime-production-withdraw-position-executor",
+]
+runtime-production-entrypoint = [
+    "runtime-production-dispatch",
+    "dep:solana-program-entrypoint",
+    "dep:solana-program-error",
+]
 sbf-preflight-entrypoint = [
     "runtime-account-bridge",
     "dep:solana-program-entrypoint",
@@ -88,6 +100,9 @@ spl-transfer-hook-interface = { version = "=2.1.0", optional = true }
 
 [dev-dependencies]
 iat-v2 = { path = "../iat_v2", features = ["no-entrypoint"] }
+
+[build-dependencies]
+solana-pubkey = { version = "=3.0.0", features = ["curve25519"] }
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }

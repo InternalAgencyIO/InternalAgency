@@ -56,7 +56,10 @@ test("settle-week9 is an isolated lazy route before App and preserves every exis
   const main = source(MAIN);
   assert.match(main, /CONSOLE_PARAMS\.get\("mode"\) === "settle-week9"/u);
   assert.match(main, /lazy\(\(\) => import\("\.\/AttendedWeek9Settlement\.jsx"\)\)/u);
-  assert.match(main, /ATTENDED_WEEK9_MODE[\s\S]*<AttendedWeek9Settlement[\s\S]*: <App \/>/u);
+  assert.match(
+    main,
+    /ATTENDED_WEEK9_MODE[\s\S]*<AttendedWeek9Settlement[\s\S]*: <App getHardwareProvider=\{getHardwareProvider\} \/>/u,
+  );
   assert.match(main, /INSPECTION_MODE[\s\S]*UPGRADE_MODE[\s\S]*ATTENDED_WEEK9_MODE[\s\S]*FEATURE_MODE/u);
 });
 

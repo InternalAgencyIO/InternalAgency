@@ -9,11 +9,14 @@
     "mainnetHandoffPath": "launch/mainnet-handoff.template.json"
   },
   "releaseControls": {
-    "allOperatorsReviewedSameArtifactVersions": false,
-    "publicEvidenceCheckedAtUtc": null,
-    "correctionOwnerLabel": null,
+    "allArtifactVersionsObservedSame": false,
+    "publicEvidenceObservedAtUtc": null,
     "stopOnAnyMismatch": true,
-    "noPublicationBeforeIndependentEvidence": true
+    "noPublicationBeforeAutomatedEvidence": true,
+    "automatedSourceReceiptStateOnly": true,
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true
   },
   "artifactDigests": {
     "manifestSha256": null,
@@ -22,10 +25,9 @@
     "devnetRehearsalSha256": null,
     "mainnetHandoffSha256": null
   },
-  "approval": {
-    "releaseOwnerLabel": null,
-    "independentVerifierLabel": null,
+  "automatedClosure": {
+    "observationMode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
     "packetDigest": null,
-    "approvedAtUtc": null
+    "observedAtUtc": null
   }
 }

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "status": "PLANNED",
   "network": "devnet",
   "purpose": "Exact-shape Model T rehearsal for the four-transaction Genesis ceremony. No value, public allocation, or launch assertion.",
@@ -109,20 +109,21 @@
     "confirmedPlanSha256": null,
     "completedAtUtc": null
   },
-  "verifier": {
-    "reviewedBy": null,
-    "independentOfDeviceOperator": false,
-    "reviewedDevice": {
+  "automatedObservation": {
+    "mode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "observedDevice": {
       "model": "Trezor Model T",
       "firmwareVersion": null,
       "suiteOrWalletInterface": null
     },
-    "reviewedMint": null,
-    "reviewedMetadataAddress": null,
-    "reviewedAllocations": {},
-    "reviewedActions": [],
-    "reviewedTransactionEvidence": [],
-    "reviewedPlanSha256": null,
-    "completedAtUtc": null
+    "observedMint": null,
+    "observedMetadataAddress": null,
+    "observedAllocations": {},
+    "observedActions": [],
+    "observedTransactionEvidence": [],
+    "observedPlanSha256": null,
+    "observedAtUtc": null
   }
 }

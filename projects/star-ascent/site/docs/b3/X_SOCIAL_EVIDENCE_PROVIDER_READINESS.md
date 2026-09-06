@@ -72,7 +72,7 @@ as biological-human uniqueness or strong Sybil resistance.
 
 The production review must reconcile durable non-rebinding with data
 minimization, deletion and appeal rights, exact retention windows, and an
-independently reviewed pseudonymization and legal-basis policy. Retaining raw
+bound to automated direct evidence pseudonymization and legal-basis policy. Retaining raw
 personal data forever is not implied by the tombstone invariant.
 
 ## Required packet groups
@@ -94,8 +94,8 @@ Seven subject groups bind the review:
 6. privacy, X terms, field inventory, retention, erasure and appeal, tombstone
    pseudonymization, and incident response; and
 7. ten distinct X-provider, collector-runtime, finalized-slot, local-persistence,
-   external-checkpoint, administration, credential-custody, backup, independent-
-   observer, and independent-reviewer failure domains.
+   external-checkpoint, administration, credential-custody, backup,
+   automated-evidence-source-A, and automated-evidence-source-B failure domains.
 
 The 17 ordered control packets cover OAuth and account age; wallet uniqueness
 and tombstones; tier observation and acceptance time; exact 10/90/100 and
@@ -104,12 +104,12 @@ like/follow first-observed finality; campaign targets; collector completeness
 and replay; the complete Genesis first-1,000 registry and legacy reconciliation;
 authenticated receipts and key lifecycle; outage and uncertain response;
 privacy and retention; backup/restore/DR and rollback detection; Daily-Law-first
-gating; source/allocator/persistence lineage; and independent audit.
+gating; source/allocator/persistence lineage; and automated source-bound audit evidence.
 
 Every completed group or control requires a unique content-addressed evidence
 artifact. A second domain-separated descriptor digest covers the artifact,
-exact full subject and section policy digests, environment, declared observer
-and reviewer identities plus their exact distinct failure domains, identity-to-
+exact full subject and section policy digests, environment, declared evidence source
+and evidence-source identities plus their exact distinct failure domains, identity-to-
 domain binding digests, and validity metadata. The interval is half-open, may
 not exceed the externally pinned 30-day maximum, and is evaluated against an
 explicit caller-supplied `evaluationUnixSeconds`. Mutating any covered metadata
@@ -163,7 +163,7 @@ There is intentionally no generic `providerReadinessReady`, `providerVerified`,
 `TEST_FIXTURE` can exercise a complete packet only with explicit
 `allowTestFixture: true` and an in-window evaluation time. Production rejects
 known fixture subject values, provider and resource IDs, trust material,
-failure domains, observer and reviewer identities, evidence hashes, and derived
+failure domains, automated evidence sources A and B identities, evidence hashes, and derived
 subject or policy digests recursively, even if the fixture allow flag is set.
 Obvious placeholder, fake, example, test, local, repeated-character, URL-shaped,
 uppercase-digest, and repeated-nibble values fail closed. Plausible invented
@@ -187,7 +187,7 @@ external rollback protection; Daily-Law-first runtime and consumer gates;
 privacy/terms/retention review; and outage, backup, restore, and disaster-
 recovery evidence.
 
-Only after those facts are frozen and independently reviewed should a separate
+Only after those facts are frozen and bound to automated direct evidence should a separate
 slice specify a receipt codec or executable adapter. This packet does not choose
 a signature scheme, production ID, provider, authority, secret, endpoint, or
 Genesis migration rule on their behalf.

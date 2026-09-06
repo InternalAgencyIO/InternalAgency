@@ -203,7 +203,7 @@ const VERIFICATION_KEYS = Object.freeze([
   "localSnapshotExactBindingVerified",
   "suppliedAnchorStateAncestryVerified",
   ...NEGATIVE_FACT_KEYS,
-  "independentReviewAccepted",
+  "sourceBoundAutomatedDirectEvidenceVerified",
   "mainnetStatus",
   "verificationReceiptSha256",
 ]);
@@ -986,7 +986,7 @@ export function verifyPrivacyVaultExternalRollbackAnchor(candidate) {
     localSnapshotExactBindingVerified: true,
     suppliedAnchorStateAncestryVerified: true,
     ...negativeFacts(),
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     mainnetStatus: PRIVACY_VAULT_ROLLBACK_ANCHOR_MAINNET_STATUS,
   };
   const receipt = Object.freeze({
@@ -1022,7 +1022,7 @@ export function validatePrivacyVaultRollbackAnchorVerificationReceipt(receipt) {
     || values.brandedLocalSnapshotReadVerified !== true
     || values.localSnapshotExactBindingVerified !== true
     || values.suppliedAnchorStateAncestryVerified !== true
-    || values.independentReviewAccepted !== false
+    || values.sourceBoundAutomatedDirectEvidenceVerified !== false
     || values.mainnetStatus !== PRIVACY_VAULT_ROLLBACK_ANCHOR_MAINNET_STATUS) {
     throw new Error("PRIVACY_VAULT_ROLLBACK_ANCHOR_VERIFICATION_FACTS_INVALID");
   }

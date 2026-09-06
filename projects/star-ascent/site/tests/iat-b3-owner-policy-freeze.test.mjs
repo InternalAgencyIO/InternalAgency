@@ -159,6 +159,7 @@ function fillAllOwnerChoices(manifest) {
     canonicalMint: fixturePublicKey(9),
     clusterIdentityPolicy: "DISTINCT_PROGRAM_AND_MINT_IDS_PER_CLUSTER",
     entropyLagSlots: 150,
+    entropyRiskAcceptance: "ACCEPT_LAGGED_SLOT_HASH_WITH_FINALIZER_TIMING_INFLUENCE_AND_LIMITED_PROBABILITY_CLAIMS",
     metadataPolicy: "NO_MINT_METADATA_EXTENSION_IMMUTABLE_EXTERNAL_RECORD",
     acceptCanonicalSeedTable: true,
   });
@@ -192,8 +193,9 @@ function assertTerminalHold(result) {
 }
 
 test("canonical owner-policy intake is valid, incomplete, nonactivating, and ordered", () => {
-  const result = validateB3OwnerPolicyFreezeManifest(canonicalManifest());
-  assert.equal(OWNER_POLICY_FREEZE_SCHEMA, "iat-b3-owner-policy-freeze/v1");
+  const manifest = canonicalManifest();
+  const result = validateB3OwnerPolicyFreezeManifest(manifest);
+  assert.equal(OWNER_POLICY_FREEZE_SCHEMA, "iat-b3-owner-policy-freeze/v2");
   assert.equal(OWNER_POLICY_FREEZE_MAINNET_STATUS, "HOLD");
   assert.equal(result.valid, true, result.violations.join("\n"));
   assert.equal(result.profile, "PRODUCTION");
@@ -205,6 +207,114 @@ test("canonical owner-policy intake is valid, incomplete, nonactivating, and ord
     eligibleInSafeOrder: true,
   });
   assert.equal(result.blockers.length, 6);
+  assert.deepEqual(
+    manifest.nodes.CONFIG_GENESIS_PHASE_CODEC.evidenceRequirements.external,
+    ["SOURCE_BOUND_AUTOMATED_BOOTSTRAP_AND_ACTIVATION_POLICY_DIRECT_EVIDENCE_PACKET"],
+  );
+  assert.deepEqual(
+    manifest.nodes.LIVE_ESTATE_CANONICAL_MINT_DECISION.evidenceRequirements.external,
+    [
+      "SOURCE_BOUND_AUTOMATED_LIVE_ESTATE_INVENTORY",
+      "CANDIDATE_MINT_CHAIN_STATE_AND_AUTHORITY_SNAPSHOT",
+      "CANONICAL_SUPPLY_RECONCILIATION",
+    ],
+  );
+  assert.deepEqual(
+    manifest.nodes.CORE_CUSTODY_POLICY_ADAPTER.evidenceRequirements.external,
+    [
+      "SOURCE_BOUND_AUTOMATED_CUSTODY_AND_RELEASE_POLICY_DIRECT_EVIDENCE",
+      "CORE_BENEFICIARY_PUBLIC_KEY_CONTROL_ATTESTATION",
+    ],
+  );
+  assert.deepEqual(
+    manifest.nodes.FACTION_ECONOMICS_FUNDING.evidenceRequirements.external,
+    [
+      "AUTHENTICATED_SCORING_AND_FOLLOWER_DATA_PROVIDERS",
+      "SOURCE_BOUND_AUTOMATED_SYBIL_AND_PRIZE_POLICY_DIRECT_EVIDENCE",
+      "ACCOUNTABLE_COMMUNITY_CARVE_OUT_FUNDING_SOURCE",
+    ],
+  );
+  assert.ok(
+    manifest.nodes.GENESIS_ALLOCATIONS_CONSERVATION.evidenceRequirements.external.includes(
+      "SOURCE_BOUND_AUTOMATED_GENESIS_MANIFEST_CONSERVATION_EVIDENCE",
+    ),
+  );
+  assert.ok(
+    manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.evidenceRequirements.external.includes(
+      "TWO_SOURCE_BOUND_AUTOMATED_MAINNET_GENESIS_HASH_ENDPOINT_RECEIPTS",
+    ),
+  );
+  assert.ok(
+    manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.evidenceRequirements.external.includes(
+      "SOURCE_BOUND_AUTOMATED_DAILY_LAW_ENTROPY_RISK_MEASUREMENT",
+    ),
+  );
+  assert.ok(
+    manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.evidenceRequirements.engineering.includes(
+      "SOURCE_BOUND_AUTOMATED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS",
+    ),
+  );
+  assert.ok(
+    manifest.nodes.B3_COST_CEREMONY_FUNDING.evidenceRequirements.external.includes(
+      "TWO_SOURCE_BOUND_AUTOMATED_PAYER_BALANCE_ENDPOINT_RECEIPTS",
+    ),
+  );
+  assert.deepEqual(
+    {
+      nonSignatureEvidenceRequiresAutomatedSourceBoundDirectEvidence:
+        manifest.invariants.nonSignatureEvidenceRequiresAutomatedSourceBoundDirectEvidence,
+      humanReviewPrerequisitePermitted: manifest.invariants.humanReviewPrerequisitePermitted,
+      trezorModelTPhysicalConfirmationIsSoleHumanGateForActualSignatures:
+        manifest.invariants.trezorModelTPhysicalConfirmationIsSoleHumanGateForActualSignatures,
+      unobservedClaimsRemainHold: manifest.invariants.unobservedClaimsRemainHold,
+    },
+    {
+      nonSignatureEvidenceRequiresAutomatedSourceBoundDirectEvidence: true,
+      humanReviewPrerequisitePermitted: false,
+      trezorModelTPhysicalConfirmationIsSoleHumanGateForActualSignatures: true,
+      unobservedClaimsRemainHold: true,
+    },
+  );
+  assert.deepEqual(manifest.evidenceBoundary, {
+    acceptsExternalEvidence: false,
+    acceptsEngineeringEvidence: false,
+    selfAttestationIsExternalProof: false,
+    automatedDirectEvidenceMayCloseNonSignaturePredicates: true,
+    humanReviewerRequired: false,
+    noSelfAttestation: true,
+    modelTRequiredOnlyForActualCryptographicSignatures: true,
+    unobservedEvidenceDisposition: "HOLD",
+    evidenceVerificationOutOfScope: true,
+  });
+  assert.equal(JSON.stringify(manifest).includes("INDEPENDENT_BOOTSTRAP_AND_ACTIVATION_POLICY_ACCEPTANCE"), false);
+  assert.equal(JSON.stringify(manifest).includes("INDEPENDENT_"), false);
+  assert.equal(JSON.stringify(manifest).includes("REVIEWED_BINARY_HASH_TO_PROGRAM_ID_BINDINGS"), false);
+  assert.equal(manifest.nodes.CONFIG_GENESIS_PHASE_CODEC.ownerChoices.acceptExactBootstrapPolicy, null);
+  assert.equal(manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.ownerChoices.entropyRiskAcceptance, null);
+  assertTerminalHold(result);
+});
+
+test("legacy human-review authorization predicates and policy drift fail closed", () => {
+  const legacyPredicate = canonicalManifest();
+  legacyPredicate.nodes.LIVE_ESTATE_CANONICAL_MINT_DECISION.evidenceRequirements.external[0] =
+    "INDEPENDENT_LIVE_ESTATE_INVENTORY";
+  let result = validateB3OwnerPolicyFreezeManifest(legacyPredicate);
+  assert.equal(result.valid, false);
+  assert.match(result.violations.join("\n"), /evidenceRequirements/iu);
+  assertTerminalHold(result);
+
+  const humanGate = canonicalManifest();
+  humanGate.evidenceBoundary.humanReviewerRequired = true;
+  result = validateB3OwnerPolicyFreezeManifest(humanGate);
+  assert.equal(result.valid, false);
+  assert.match(result.violations.join("\n"), /evidenceBoundary/iu);
+  assertTerminalHold(result);
+
+  const expandedModelTGate = canonicalManifest();
+  expandedModelTGate.evidenceBoundary.modelTRequiredOnlyForActualCryptographicSignatures = false;
+  result = validateB3OwnerPolicyFreezeManifest(expandedModelTGate);
+  assert.equal(result.valid, false);
+  assert.match(result.violations.join("\n"), /evidenceBoundary/iu);
   assertTerminalHold(result);
 });
 
@@ -223,6 +333,25 @@ test("all seven owner choices can be structurally complete without proving or au
   for (const state of Object.values(result.nodeChoiceState)) {
     assert.deepEqual(state, { structurallyComplete: true, eligibleInSafeOrder: true });
   }
+  assertTerminalHold(result);
+});
+
+test("an entropy lag cannot complete identity choices without explicit timing-risk acceptance", () => {
+  const manifest = fillAllOwnerChoices(canonicalManifest());
+  manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.ownerChoices.entropyRiskAcceptance = null;
+  const result = validateB3OwnerPolicyFreezeManifest(manifest);
+  assert.equal(result.valid, true, result.violations.join("\n"));
+  assert.equal(result.nodeChoiceState.PRODUCTION_IDENTITY_INPUT_FREEZE.structurallyComplete, false);
+  assert.equal(result.ownerChoicesStructurallyComplete, false);
+  assertTerminalHold(result);
+});
+
+test("entropy timing-risk acceptance is a closed enum and cannot overclaim unbiased probability", () => {
+  const manifest = fillAllOwnerChoices(canonicalManifest());
+  manifest.nodes.PRODUCTION_IDENTITY_INPUT_FREEZE.ownerChoices.entropyRiskAcceptance = "ACCEPT_EXACT_UNBIASED_6667_PROBABILITY";
+  const result = validateB3OwnerPolicyFreezeManifest(manifest);
+  assert.equal(result.valid, false);
+  assert.match(result.violations.join("\n"), /entropyRiskAcceptance: expected one of .* or null/iu);
   assertTerminalHold(result);
 });
 

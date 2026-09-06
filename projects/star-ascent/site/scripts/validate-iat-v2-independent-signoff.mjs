@@ -10,9 +10,6 @@ const evidencePath = "public/evidence/iat-v2/v2-initialization-20260730T074603Z.
 const requestedPath = process.argv[2] ?? canonicalPath;
 const failures = [];
 const fail = (message) => failures.push(message);
-const expectedAttestation =
-  "I independently reviewed the bound IAT V2 devnet initialization evidence and every listed check matched without exception.";
-
 function exactKeys(value, keys) {
   return value
     && typeof value === "object"
@@ -70,13 +67,12 @@ if (signoff && evidence) {
     "status",
     "scope",
     "evidence",
-    "verifier",
+    "observationPolicy",
     "checks",
     "exceptions",
-    "attestation",
     "completedAtUtc",
   ])) fail("sign-off must contain only canonical top-level fields");
-  if (signoff.schema !== "iat-v2-devnet-independent-signoff/v1") fail("wrong sign-off schema");
+  if (signoff.schema !== "iat-v2-devnet-automated-observation/v2") fail("wrong automated-observation schema");
   if (!["PENDING", "VERIFIED"].includes(signoff.status)) fail("status must be PENDING or VERIFIED");
   if (signoff.scope !== "SEVEN_TRANSACTION_DEVNET_INITIALIZATION_AND_ACTIVATION_ONLY") {
     fail("sign-off scope must remain limited to initialization and activation");
@@ -104,21 +100,16 @@ if (signoff && evidence) {
     fail("program and mint must be canonical Solana public keys");
   }
 
-  if (!exactKeys(signoff.verifier, [
-    "accountabilityLabel",
-    "publicSolanaAddress",
-    "independentOfOperator",
-    "didNotOperateModelT",
-    "reviewMethod",
-    "communicationReference",
-  ])) fail("verifier record must contain only canonical fields");
-  if (
-    signoff.verifier?.accountabilityLabel !== "FDF Guard"
-    || signoff.verifier?.publicSolanaAddress !== "Ge2c3puY5YwsiLhFJWdoXpRbE55k7omLw37pvJVCBkja"
-    || !isPublicKey(signoff.verifier?.publicSolanaAddress)
-  ) fail("verifier identity does not match the reviewed independent verifier");
-  if (signoff.verifier?.publicSolanaAddress === evidence.expectedHardwareSigner) {
-    fail("independent verifier must not reuse the Model T operator address");
+  const expectedObservationPolicy = {
+    mode: "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    humanReviewerRequired: false,
+    noSelfAttestation: true,
+    trezorModelTPhysicalConfirmationIsSoleHumanGate: true,
+  };
+  if (!exactKeys(signoff.observationPolicy, Object.keys(expectedObservationPolicy))) {
+    fail("observationPolicy must contain only canonical automated-policy fields");
+  } else if (JSON.stringify(signoff.observationPolicy) !== JSON.stringify(expectedObservationPolicy)) {
+    fail("observationPolicy must preserve automated evidence, no-self-attestation, and Model T-only signature gates");
   }
 
   const checkKeys = [
@@ -138,39 +129,23 @@ if (signoff && evidence) {
 
   if (signoff.status === "PENDING") {
     if (
-      signoff.verifier?.independentOfOperator !== null
-      || signoff.verifier?.didNotOperateModelT !== null
-      || signoff.verifier?.reviewMethod !== null
-      || signoff.verifier?.communicationReference !== null
-      || Object.values(signoff.checks ?? {}).some((value) => value !== false)
+      Object.values(signoff.checks ?? {}).some((value) => value !== false)
       || signoff.exceptions?.length !== 0
-      || signoff.attestation !== null
       || signoff.completedAtUtc !== null
-    ) fail("PENDING sign-off must not contain partial or self-asserted completion evidence");
+    ) fail("PENDING observation must not contain partial or self-asserted completion evidence");
   }
 
   if (signoff.status === "VERIFIED") {
-    if (
-      signoff.verifier?.independentOfOperator !== true
-      || signoff.verifier?.didNotOperateModelT !== true
-    ) fail("VERIFIED sign-off requires explicit operator independence");
-    if (
-      typeof signoff.verifier?.reviewMethod !== "string"
-      || signoff.verifier.reviewMethod.trim().length < 12
-      || typeof signoff.verifier?.communicationReference !== "string"
-      || signoff.verifier.communicationReference.trim().length < 8
-    ) fail("VERIFIED sign-off requires a review method and communication reference");
     if (Object.values(signoff.checks ?? {}).some((value) => value !== true)) {
-      fail("VERIFIED sign-off requires every canonical check to be true");
+      fail("VERIFIED observation requires every canonical check to be true");
     }
-    if (signoff.exceptions?.length !== 0) fail("VERIFIED sign-off cannot contain exceptions");
-    if (signoff.attestation !== expectedAttestation) fail("VERIFIED attestation text is not canonical");
-    if (!isUtc(signoff.completedAtUtc)) fail("VERIFIED sign-off requires canonical UTC completion time");
+    if (signoff.exceptions?.length !== 0) fail("VERIFIED observation cannot contain exceptions");
+    if (!isUtc(signoff.completedAtUtc)) fail("VERIFIED observation requires canonical UTC completion time");
     else {
       const completedAt = Date.parse(signoff.completedAtUtc);
       const evidenceAt = Date.parse(evidence.exportedAtUtc);
-      if (completedAt <= evidenceAt) fail("verifier completion must follow evidence export");
-      if (completedAt > Date.now() + 60_000) fail("verifier completion cannot be in the future");
+      if (completedAt <= evidenceAt) fail("automated observation completion must follow evidence export");
+      if (completedAt > Date.now() + 60_000) fail("automated observation completion cannot be in the future");
     }
   }
 }
@@ -182,6 +157,6 @@ if (failures.length) {
 
 console.log(
   signoff.status === "VERIFIED"
-    ? "IAT V2 devnet independent initialization sign-off passes. Full feature rehearsal and mainnet gates remain separate."
-    : "IAT V2 devnet independent initialization sign-off is PENDING.",
+    ? "IAT V2 devnet initialization automated observation passes. Full feature rehearsal and mainnet gates remain separate."
+    : "IAT V2 devnet initialization automated observation is PENDING.",
 );

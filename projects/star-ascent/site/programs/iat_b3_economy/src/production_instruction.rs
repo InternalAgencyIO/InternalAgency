@@ -1,6 +1,9 @@
 //! Strict production instruction representations for all fifteen retained B3
-//! economic operations. This module only canonicalizes bytes; it exposes no
-//! dispatcher, entrypoint, accounts, writes, CPI, identity, or release authority.
+//! economic operations. This module itself only canonicalizes bytes. Its truth
+//! record also reports the feature-gated production surface that now routes
+//! active handlers plus explicit disabled and owner-policy-HOLD dispositions;
+//! this still conveys no identity evidence, Devnet execution, or release
+//! authority.
 
 pub const PRODUCTION_INSTRUCTION_NAMESPACE: &[u8; 8] = b"IATB3EC1";
 pub const PRODUCTION_INSTRUCTION_VERSION: u8 = 1;
@@ -26,12 +29,13 @@ pub const EXPIRE_ROUND_OPCODE: u8 = 14;
 pub const OPEN_POSITION_INSTRUCTION_LEN: usize = PRODUCTION_INSTRUCTION_LEN;
 
 pub const PRODUCTION_INSTRUCTION_STATUS: &str =
-    "ALL_15_PRODUCTION_CODECS_EXACT_NO_DISPATCH_NO_ENTRYPOINT_MAINNET_HOLD";
+    "ALL_15_PRODUCTION_CODECS_EXACT_FEATURE_GATED_15_SOURCE_COMPLETE_ACTIVE_DISABLED_OR_POLICY_HELD_DISPOSITIONS_DEVNET_FALSE_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionInstructionTruth {
     pub open_position_codec_exact: bool,
     pub all_15_instruction_abi_frozen: bool,
+    pub production_surface_feature_gated: bool,
     pub production_dispatcher_exposed: bool,
     pub production_entrypoint_exposed: bool,
     pub account_data_read: bool,
@@ -46,14 +50,15 @@ pub struct ProductionInstructionTruth {
 pub const PRODUCTION_INSTRUCTION_TRUTH: ProductionInstructionTruth = ProductionInstructionTruth {
     open_position_codec_exact: true,
     all_15_instruction_abi_frozen: true,
-    production_dispatcher_exposed: false,
-    production_entrypoint_exposed: false,
-    account_data_read: false,
-    account_writes_executed: false,
-    cpi_executed: false,
+    production_surface_feature_gated: true,
+    production_dispatcher_exposed: true,
+    production_entrypoint_exposed: true,
+    account_data_read: true,
+    account_writes_executed: true,
+    cpi_executed: true,
     production_identities_frozen: false,
     devnet_executed: false,
-    any_handler_complete: false,
+    any_handler_complete: true,
     mainnet_hold: true,
 };
 

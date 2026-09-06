@@ -69,7 +69,7 @@ const scope = {
     "graphical Linux desktop and assistive-technology certification",
     "performance-lab and network-throttling certification",
     "native-speaker certification for non-English locales",
-    "independent third-party security or QA review",
+    "fresh source-bound automated security or QA receipt/state/endpoint evidence",
   ],
 };
 
@@ -87,7 +87,7 @@ const checks = {
     { id: "PRODUCTION_DEPENDENCY_AUDIT", result: "PASS", metrics: { total: 0, moderate: 0, high: 0, critical: 0 } },
     { id: "FULL_DEPENDENCY_AUDIT", result: "HOLD_REVIEW", metrics: { total: 22, moderate: 15, high: 7, critical: 0, productionReachable: false } },
     { id: "IAT_V2_VALIDATION", result: "PASS_IN_HOLD", metrics: { nodeTestsPassed: 65, nodeTestsFailed: 0, policy: "PASS_IN_HOLD", timeGateProof: "PASS_LOCAL_ONLY", publicEvidence: "PASS_WITH_CURRENT_REHEARSAL_REQUIREMENTS" } },
-    { id: "IAT_V2_SIGNOFF", result: "VALID_HOLD", metrics: { independentInitializationSignoff: "PENDING", historicalFeatureArtifact: "VALID_FOR_PRIOR_ARTIFACT", currentRemediationRequiresFreshSignedDevnet: true } },
+    { id: "IAT_V2_SIGNOFF", result: "VALID_HOLD", metrics: { automatedInitializationEvidence: "PENDING", historicalFeatureArtifact: "VALID_FOR_PRIOR_ARTIFACT", currentRemediationRequiresFreshSignedDevnet: true, humanReviewerRequired: false, noSelfAttestation: true } },
     { id: "LAUNCH_GATES", result: "PASS_IN_HOLD", metrics: { schedule: "UNSCHEDULED_HOLD", observedLamports: 2533659570, requiredLamports: 8500000000, fundingFloorSatisfied: false, fullGateCommand: "PASS", authorizesSigning: false, authorizesBroadcast: false } },
     { id: "LOCAL_ADMIN_BUILD", result: "PASS_WITH_WARNINGS", metrics: { built: true, largestChunkKb: 2148.15, largestChunkGzipKb: 487.84, browserExternalizedImports: ["util", "crypto"] } },
     { id: "FUTURE_TEASERS", result: "PASS_INACTIVE", metrics: { testsPassed: 4, testsFailed: 0, deployedAtGenesis: false, claimRoute: false } },
@@ -112,10 +112,10 @@ const findingList = [
   { id: "QA-L10N-HUMAN-001", severity: "MEDIUM", state: "OPEN", area: "localization-human-review", summary: "Non-English locales have no native-speaker certification", evidence: ["automated completeness is not fluency proof", "AI-assisted translations remain labelled as such"], remediation: "Obtain and publish accountable native-speaker review before making native-quality claims." },
   { id: "QA-ADMIN-001", severity: "MEDIUM", state: "OPEN", area: "local-admin-runtime", summary: "The isolated admin bundle retains browser-externalized Node imports and a large output chunk", evidence: ["Vite build completed", "util and crypto were browser-externalized", "largest chunk 2148.15 kB and 487.84 kB gzip"], remediation: "Prove the built localhost console in an isolated non-signing runtime and reduce or document the dependency surface before ceremony use." },
   { id: "QA-DEPS-001", severity: "MEDIUM", state: "OPEN", area: "development-dependencies", summary: "Development tooling retains upstream advisories while production dependencies are clear", evidence: ["production audit total 0", "full audit total 22", "15 moderate and 7 high, 0 critical"], remediation: "Review non-breaking upstream resolutions and reproduce every launch gate before accepting toolchain changes." },
-  { id: "QA-COVERAGE-001", severity: "INFO", state: "OPEN", area: "environment-coverage", summary: "Physical-device, graphical Linux, assistive-technology, performance-lab, and independent QA coverage is unavailable", evidence: ["mobile results are Playwright emulation", "no installed mobile Safari", "no independent reviewer session"], remediation: "Run and publish the missing environment matrix with independent review." },
-  { id: "QA-SIGNOFF-001", severity: "HIGH", state: "OPEN", area: "independent-devnet-signoff", summary: "Independent initialization signoff is pending and current remediation source requires a fresh signed Devnet rehearsal", evidence: ["historical feature artifact validates only for its prior artifact", "current source is not cleared by the historical rehearsal"], remediation: "Complete a fresh, source-bound signed Devnet rehearsal and independent review without reusing stale evidence." },
+  { id: "QA-COVERAGE-001", severity: "INFO", state: "OPEN", area: "environment-coverage", summary: "Physical-device, graphical Linux, assistive-technology, performance-lab, and source-bound QA evidence are unavailable", evidence: ["mobile results are Playwright emulation", "no installed mobile Safari", "required automated environment receipts are unobserved"], remediation: "Run and publish the missing source-bound automated environment matrix." },
+  { id: "QA-SIGNOFF-001", severity: "HIGH", state: "OPEN", area: "automated-devnet-evidence", summary: "Automated initialization evidence is pending and current remediation source requires a fresh signed Devnet rehearsal", evidence: ["historical feature artifact validates only for its prior artifact", "current source is not cleared by the historical rehearsal"], remediation: "Complete a fresh source-bound signed Devnet rehearsal and bind automated receipt/state/endpoint evidence without reusing stale evidence." },
   { id: "QA-FUNDING-001", severity: "HIGH", state: "OPEN", area: "mainnet-readiness", summary: "The reviewed mainnet address remains below the exact ceremony funding floor", evidence: ["observed 2,533,659,570 lamports", "required 8,500,000,000 lamports", "fundingFloorSatisfied=false"], remediation: "Fund through the separately authorized owner workflow, then rerun the read-only finalized balance gate." },
-  { id: "QA-AUTHORITY-001", severity: "CRITICAL", state: "OPEN", area: "authority-concentration", summary: "The sole-Trezor authority model is an owner-accepted concentration risk", evidence: ["single-hardware-authority policy is intentional", "the risk remains recorded in the remediation audit", "no independent authority separation exists"], remediation: "Retain explicit owner acceptance and independent ceremony verification; do not describe the concentration risk as remediated." },
+  { id: "QA-AUTHORITY-001", severity: "CRITICAL", state: "OPEN", area: "authority-concentration", summary: "The sole-Trezor authority model is an owner-accepted concentration risk", evidence: ["single-hardware-authority policy is intentional", "the risk remains recorded in the remediation audit", "no separate authority topology exists"], remediation: "Retain explicit owner acceptance and automated ceremony evidence; do not describe the concentration risk as remediated." },
 ];
 
 const findings = { schema: "iat-v2-launch-qa-findings/v1", status: "DRAFT_QA_HOLD", findings: findingList };
@@ -139,7 +139,7 @@ const environments = {
     { id: "ASSISTIVE_TECHNOLOGY", kind: "NOT_AVAILABLE", viewport: null, result: "NOT_TESTED", limitations: ["screen reader, switch control, and voice control not certified"] },
     { id: "PERFORMANCE_LAB", kind: "NOT_AVAILABLE", viewport: null, result: "NOT_TESTED", limitations: ["no throttled device laboratory"] },
     { id: "NATIVE_SPEAKER_REVIEW", kind: "NOT_AVAILABLE", viewport: null, result: "NOT_REVIEWED", limitations: ["all non-English locales remain human-review pending"] },
-    { id: "INDEPENDENT_QA_REVIEWER", kind: "NOT_AVAILABLE", viewport: null, result: "NOT_REVIEWED", limitations: ["internal Codex-assisted evidence only"] },
+    { id: "SOURCE_BOUND_AUTOMATED_QA_EVIDENCE", kind: "NOT_AVAILABLE", viewport: null, result: "NOT_OBSERVED", limitations: ["required receipt/state/endpoint evidence is absent"] },
   ],
 };
 
@@ -156,7 +156,7 @@ Audited at: ${auditedAtUtc}
 
 ## Decision
 
-Automated source, browser, localization, public-route, release-chain, and production-dependency checks pass. Mainnet remains **UNSCHEDULED_HOLD** because funding, fresh source-bound Devnet rehearsal and independent signoff, sole-authority risk handling, development-tooling review, and unavailable human/environment coverage remain open.
+Automated source, browser, localization, public-route, release-chain, and production-dependency checks pass. Mainnet remains **UNSCHEDULED_HOLD** because funding, fresh source-bound Devnet rehearsal and automated direct evidence, sole-authority risk handling, development-tooling evidence, and unavailable environment coverage remain open.
 
 This revision supersedes the observations in \`iat-v2-launch-qa-20260803\` without rewriting that historical package. In particular, the live public contract now passes 76/76 checks and lint passes with zero warnings.
 
@@ -200,7 +200,7 @@ const manifest = {
   status: "DRAFT_QA_HOLD",
   mainnetStatus: "HOLD",
   qaDecision: "HOLD",
-  assurance: "INTERNAL_CODEX_ASSISTED_NOT_INDEPENDENT",
+  assurance: "SOURCE_BOUND_AUTOMATED_DIRECT_EVIDENCE_UNOBSERVED",
   title: "IAT V2 launch QA consolidation — 2026-08-03 revision 2",
   auditedAtUtc,
   sourceBinding: { ...sourceBinding, scopePath: "public/audits/iat-v2-launch-qa-20260803-r2/scope.json" },
@@ -230,7 +230,7 @@ const manifest = {
   },
   artifactSha256,
   limitations: [
-    "This package is not an independent security, accessibility, localization, or physical-device certification.",
+    "This package has not observed the required fresh source-bound security, accessibility, localization, or physical-device evidence.",
     "Live public-route observations are timestamped read-only HTTP evidence and do not prove future availability.",
     "No wallet, key, hardware signer, secret, deployment, signing, transaction, transfer, DNS, mainnet, or devnet state was accessed or changed.",
   ],

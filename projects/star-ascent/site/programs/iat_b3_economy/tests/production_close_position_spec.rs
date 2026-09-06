@@ -526,8 +526,8 @@ fn truth_marks_exactly_one_handler_complete_and_keeps_all_15_on_hold() {
     assert!(truth.exact_four_account_atomic_cas_supported);
     assert!(!truth.token_cpi_executed);
     assert!(!truth.system_cpi_executed);
-    assert!(!truth.production_dispatcher_exposed);
-    assert!(!truth.production_entrypoint_exposed);
+    assert!(truth.production_dispatcher_exposed);
+    assert!(truth.production_entrypoint_exposed);
     assert!(truth.handler_complete);
     assert!(!truth.all_15_handlers_complete);
     assert!(!truth.devnet_executed);
