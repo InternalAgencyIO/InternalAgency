@@ -81,7 +81,7 @@
         "networkReadsAllowed": false,
         "ownerPolicyFreezeBinding": {
           "path": "projects/star-ascent/site/docs/b3/iat-b3-owner-policy-freeze.v1.json",
-          "sha256": "9bd866fa99735b1b53d3b99d8083397e1d734b0b80587ff9e513340d437efd6c",
+          "sha256": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
           "bindingScope": "REFERENCE_CONTRACT_ONLY"
         },
         "privacyVaultNativeInstructionPlanBinding": {
@@ -89,17 +89,19 @@
           "sha256": "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
           "bindingScope": "NONACTIVATING_PREREQUISITE_ONLY"
         },
-        "productionIdentityAuthorityTrustBinding": {
-          "schema": "iat-b3-production-identity-authority-trust-binding/v1",
-          "status": "EXTERNAL_ACCEPTANCE_REQUIRED",
-          "keys": [],
-          "trustRootSha256": null,
-          "packetMaySelectTrustKeys": false
+        "productionIdentityAuthorityAutomatedEvidenceBinding": {
+          "schema": "iat-b3-production-identity-authority-automated-evidence-binding/v3",
+          "status": "AUTOMATED_EVIDENCE_SOURCES_UNCONFIGURED",
+          "sources": [],
+          "modelTDeviceObservationReceipt": null,
+          "sourceSetSha256": null,
+          "packetMaySelectEvidenceSources": false,
+      "noSelfAttestation": true
         }
       }
     },
     "graphDefinitionSha256": {
-      "const": "f89309a25236a9c0a4b4640b45c5d6b8a850a35c6a40b0774ccd44928532c37e"
+      "const": "fd1c3648508e8ad72a933355b4b87a44d60466997bedce4e83693583f9996689"
     },
     "nodes": {
       "type": "array",
@@ -132,7 +134,7 @@
               ]
             },
             "completionPredicate": {
-              "const": "SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET"
+              "const": "TREZOR_MODEL_T_SIGNED_LIVE_ESTATE_CANONICAL_MINT_DECISION_PACKET"
             },
             "contractArtifact": {
               "const": {
@@ -427,7 +429,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
-                "sha256": "d73e68b031589c63cb126251aed20b79eac5a82402e41dfdafeb41292b54dd5a",
+                "sha256": "47a5fdf56c18e8f377fc9721e0436be815d9fe518ae30ba1078d1c0a57925229",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -539,7 +541,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
-                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+                "sha256": "94fc32f1380843ec31b2d94077061d7e788114d346d71f7c3a1001f2fcd980c5",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -597,7 +599,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/LAW_ADAPTER.md",
-                "sha256": "cb885b7f05ac45cf907e33e9c4858f1d22b6995091d06269b7a7dda08e1191ec",
+                "sha256": "d9b791db73eab062b7ec248dcddf72344350173dd16200f01ff8632d0ccde16d",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -824,12 +826,12 @@
               ]
             },
             "completionPredicate": {
-              "const": "EXTERNAL_CHECKPOINT_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT"
+              "const": "EXTERNAL_CHECKPOINT_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT"
             },
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-external-checkpoint-provider-readiness.v1.json",
-                "sha256": "f36ed9746c756c16d5b517e3c26c5da592fcce01ee79facfa49141bc6753872d",
+                "sha256": "24f1c1879942346be86d3d2c4ff2907de6f890940cc74d5d3ecdd2bf54555fb5",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -882,12 +884,12 @@
               ]
             },
             "completionPredicate": {
-              "const": "X_SOCIAL_PRODUCTION_REVIEW_PACKET_SCOPED_OUTPUT"
+              "const": "X_SOCIAL_AUTOMATED_DIRECT_EVIDENCE_PACKET_SCOPED_OUTPUT"
             },
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-x-social-evidence-provider-readiness.v1.json",
-                "sha256": "4f1ef74e606be4436590e495492866d4b553bff6bed60d489ff425341168b87b",
+                "sha256": "1067ce1277b8d8f995db85d772d495ff17b51c58bc5da43c68b2cb7bcc5a101b",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -945,7 +947,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-economic-write-gates.v1.json",
-                "sha256": "d73e68b031589c63cb126251aed20b79eac5a82402e41dfdafeb41292b54dd5a",
+                "sha256": "47a5fdf56c18e8f377fc9721e0436be815d9fe518ae30ba1078d1c0a57925229",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -1052,12 +1054,12 @@
               ]
             },
             "completionPredicate": {
-              "const": "PRIVACY_VAULT_FULL_LIFECYCLE_REVIEW_PACKET"
+              "const": "PRIVACY_VAULT_FULL_LIFECYCLE_AUTOMATED_DIRECT_EVIDENCE_PACKET"
             },
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/SHIELDED_TRANSFERS.md",
-                "sha256": "a9df9c5c976bba0ebdc5cbcbe9c77fe0de77b4949a3cc72b57c75717517c77df",
+                "sha256": "d6c521476f7304359837bac545af0a4e68596ac67c74339e8ce7ec2909809b7b",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -1110,7 +1112,7 @@
               ]
             },
             "completionPredicate": {
-              "const": "ZERO_UNACCEPTED_DEPENDENCY_FINDINGS_PACKET"
+              "const": "ZERO_UNRESOLVED_DEPENDENCY_FINDINGS_AUTOMATED_DIRECT_EVIDENCE_PACKET"
             },
             "contractArtifact": {
               "const": null
@@ -1285,7 +1287,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
-                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+                "sha256": "94fc32f1380843ec31b2d94077061d7e788114d346d71f7c3a1001f2fcd980c5",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -1343,7 +1345,7 @@
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/iat-b3-production-identity-authority-evidence.v1.json",
-                "sha256": "54c05360c359ba89e221eed717f150946af83bb6370aaffcdf0849e26711bb8f",
+                "sha256": "94fc32f1380843ec31b2d94077061d7e788114d346d71f7c3a1001f2fcd980c5",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -1396,7 +1398,7 @@
               ]
             },
             "completionPredicate": {
-              "const": "ALL_50_LOCALES_ACCEPTED_NATIVE_REVIEW_PACKET"
+              "const": "ALL_50_LOCALE_CLAIMS_AUTOMATED_DIRECT_EVIDENCE_PACKET"
             },
             "contractArtifact": {
               "const": null
@@ -1600,7 +1602,7 @@
           ],
           "properties": {
             "id": {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             },
             "applicability": {
               "const": "REQUIRED"
@@ -1612,12 +1614,12 @@
               ]
             },
             "completionPredicate": {
-              "const": "INDEPENDENT_MULTI_DOMAIN_REVIEW_PACKET"
+              "const": "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE_PACKET"
             },
             "contractArtifact": {
               "const": {
                 "path": "projects/star-ascent/site/docs/b3/MAINNET_PATH.md",
-                "sha256": "e6c8bf20f713fb5c8fea7c5fadab09bea7d3c4cf8250c17d733a26c571600763",
+                "sha256": "6dcf90bf6ceaf27ca9a5a95c4984c0dd53489202b0a09046211e0f6de4186672",
                 "bindingScope": "REFERENCE_CONTRACT_ONLY"
               }
             },
@@ -2891,7 +2893,7 @@
               "const": "TOKEN_2022_CONFIDENTIAL_HOST_COMPATIBILITY"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -2905,7 +2907,7 @@
               "const": "CORE_CUSTODY_POLICY_ADAPTER"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -2919,7 +2921,7 @@
               "const": "FACTION_ECONOMICS_FUNDING"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -2933,7 +2935,7 @@
               "const": "CONFIG_GENESIS_PHASE_CODEC"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -2947,7 +2949,7 @@
               "const": "GENESIS_ALLOCATIONS_CONSERVATION"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -2961,7 +2963,7 @@
               "const": "PRODUCTION_IDENTITY_INPUT_FREEZE"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -2975,7 +2977,7 @@
               "const": "DAILY_LAW_NATIVE_HOOK"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -2989,7 +2991,7 @@
               "const": "COMBINED_STAKE_INGRESS_HOOK"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3003,7 +3005,7 @@
               "const": "REWARD_WATERFALL_PROOFS"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3017,7 +3019,7 @@
               "const": "DURABLE_REWARD_CAS"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3031,7 +3033,7 @@
               "const": "EXTERNAL_CHECKPOINT_PROVIDER"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3045,7 +3047,7 @@
               "const": "X_SOCIAL_EVIDENCE_PROVIDER"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3059,7 +3061,7 @@
               "const": "ECONOMY_ALL_15_WRITE_ADAPTER"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3073,7 +3075,7 @@
               "const": "REWARD_LOCAL_WRITE_CONSUMER_GATING"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3087,7 +3089,7 @@
               "const": "PRIVACY_VAULT_CLIENT"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3101,7 +3103,7 @@
               "const": "DEPENDENCY_SECURITY_REMEDIATION"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3115,7 +3117,7 @@
               "const": "PRODUCTION_BINARY_REPRODUCIBILITY"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3129,7 +3131,7 @@
               "const": "ADVERSARIAL_DEVNET_REHEARSAL"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3143,7 +3145,7 @@
               "const": "DEPLOYED_IDENTITY_AUTHORITY_SEAL_EVIDENCE"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3157,7 +3159,7 @@
               "const": "B3_COST_CEREMONY_FUNDING"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3171,7 +3173,7 @@
               "const": "LOCALIZATION_EVIDENCE"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3185,7 +3187,7 @@
               "const": "MEDIA_MASTER_COMPLETENESS"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3199,7 +3201,7 @@
               "const": "RELEASE_SURFACE_PUBLIC_CLAIMS"
             },
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             }
           ],
           "items": false
@@ -3574,7 +3576,7 @@
           "maxItems": 2,
           "prefixItems": [
             {
-              "const": "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+              "const": "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
             },
             {
               "const": "TERMINAL_B3_REVIEW_PACKET"
@@ -3628,7 +3630,7 @@
             "MEDIA_MASTER_COMPLETENESS",
             "V2_LAUNCH_CEREMONY_BOUNDARY",
             "RELEASE_SURFACE_PUBLIC_CLAIMS",
-            "INDEPENDENT_SECURITY_ECONOMIC_PRIVACY_LEGAL_REVIEW"
+            "AUTOMATED_SECURITY_ECONOMIC_PRIVACY_LEGAL_EVIDENCE"
           ]
         },
         "blocker": {

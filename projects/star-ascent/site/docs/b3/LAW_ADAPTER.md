@@ -124,10 +124,11 @@ Token-2022 mint is unpublished. Accepting those facts from instruction bytes
 would substitute caller choice for immutable protocol law, so no such path
 exists.
 
-Before candidate acceptance, the owner and independent reviewers must freeze
-the three identities and seed domains, reproduce the exact feature-enabled SBF
-bytes, and execute both Daily Law and stake-ingress adversarial matrices against
-that one artifact. The current 160-byte law-state codec and one-entry extra-
+Before candidate acceptance, explicit owner identity choices and source-bound
+automated direct evidence must freeze the three identities and seed domains,
+reproduce the exact feature-enabled SBF bytes, and execute both Daily Law and
+stake-ingress adversarial matrices against that one artifact. The current
+160-byte law-state codec and one-entry extra-
 account-meta list remain unchanged. No design may add an account to every
 transfer merely for this rule, and no update, sweep, recovery, administrator,
 or caller-disposition instruction is exposed.
@@ -270,6 +271,7 @@ Before Devnet:
   local-validator/Devnet evidence, including Permanent Delegate, permissioned
   burn, mint-close, pausable, and representative unknown-extra rejection;
 - decide whether the 150-slot lag survives measurement;
-- independently review every error and authority transition.
+- bind automated source, receipt, and state evidence for every error and
+  authority transition.
 
 No deployment or mint operation is authorized by this prototype.

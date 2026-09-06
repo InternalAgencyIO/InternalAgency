@@ -1,16 +1,11 @@
 @echo off
-title IAT V2 - FRESH DEVNET BUFFER REBUILD
+title IAT V2 - LEGACY DEVNET LAUNCHER DISABLED
 echo.
-echo IAT V2 FRESH DEVNET BUFFER REBUILD
-echo CLOSES ONLY THE ABANDONED INCOMPLETE DEVNET BUFFER
-echo CREATES ONE FRESH BUFFER FROM THE REVIEWED BINARY
-echo MAINNET CANNOT BE TOUCHED
+echo HOLD: THIS LEGACY CLICKABLE LAUNCHER IS PERMANENTLY DISABLED.
 echo.
-wsl.exe -d Ubuntu-24.04 -- env IAT_FRESH_REBUILD_CONFIRM=REBUILD-DEVNET-FRESH bash -lc "cd /mnt/c/Users/A/Documents/Codex/2026-07-29/i/work/iat-deploy-0a6ee81 && bash scripts/rebuild-iat-v2-devnet-buffer-fresh.sh"
-echo.
-if errorlevel 1 (
-  echo FRESH REBUILD STOPPED. RETURN TO CODEX WITH THE ERROR ABOVE.
-) else (
-  echo FRESH REBUILD COMPLETE. RETURN TO CODEX.
-)
+echo It executes no shell, accesses no key, and sends no transaction.
+echo The only reviewed attended commands are printed in:
+echo launch\IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md
+echo Return to Codex before using any command from that runbook.
 pause
+exit /b 1

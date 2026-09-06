@@ -1,0 +1,40 @@
+{
+  "schema": "iat-b3-disposable-devnet-dual-build-evidence-state/v2",
+  "status": "HOLD",
+  "implementationBaseHeadSha": "21ad639a3a68d2352dcf53ba6097089f0418d236",
+  "contract": {
+    "runnerPath": "projects/star-ascent/site/scripts/validate-iat-b3-disposable-devnet-dual-build-evidence.mjs",
+    "preflightSchema": "iat-b3-disposable-devnet-structural-contract-preflight/v2",
+    "receiptSchema": "iat-b3-disposable-devnet-structural-contract-receipt/v2",
+    "scope": "DISPOSABLE_DEVNET_STRUCTURAL_CONTRACT_ONLY_NONAUTHORITATIVE",
+    "classification": "STRUCTURAL_CONTRACT_ONLY",
+    "authorizing": false,
+    "committedRunnerAtEvidenceHeadRequired": true
+  },
+  "evidence": {
+    "preflight": null,
+    "receipt": null
+  },
+  "truth": {
+    "structuralContractValidated": false,
+    "executionProvenanceObserved": false,
+    "buildExecutionObserved": false,
+    "behavioralDevnetEvidence": false,
+    "adversarialDevnetExecutionEvidence": false,
+    "productionFinalByteEvidence": false,
+    "devnetExecutionObserved": false,
+    "devnetRehearsalComplete": false,
+    "signingAuthorized": false,
+    "deploymentAuthorized": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  },
+  "blockers": [
+    "DISPOSABLE_DEVNET_STRUCTURAL_CONTRACT_INPUTS_UNAVAILABLE",
+    "DISPOSABLE_DEVNET_EXECUTION_PROVENANCE_UNAVAILABLE",
+    "DISPOSABLE_DEVNET_BUILD_EXECUTION_UNOBSERVED",
+    "DISPOSABLE_DEVNET_EXECUTION_UNOBSERVED",
+    "DISPOSABLE_DEVNET_REHEARSAL_INCOMPLETE"
+  ]
+}

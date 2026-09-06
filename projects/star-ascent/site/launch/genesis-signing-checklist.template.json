@@ -14,26 +14,19 @@
       "publicAddress": null,
       "physicalConfirmationRequired": true,
       "devicePathReviewed": false
-    },
-    "independentVerifier": {
-      "role": "VERIFIER",
-      "publicAddress": null,
-      "reviewedManifest": false,
-      "reviewedDestinations": false
-    },
-    "publicationOperator": {
-      "role": "PUBLISHER",
-      "publicAddress": null,
-      "hasNoSigningAuthority": true,
-      "reviewedHoldControls": false
     }
   },
   "ceremonyControls": {
+    "observationMode": "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true,
+    "automaticBroadcastPermitted": false,
     "noSecretsInChecklist": true,
     "noBlindApproval": true,
     "recipientAddressesCheckedAgainstManifest": false,
     "signerAddressesCheckedAgainstManifest": false,
-    "holdOwnerConfirmed": false,
+    "mainnetHoldObserved": false,
     "reviewedRecipientDestinations": {
       "community": { "publicAddress": null, "expectedBaseUnitAmount": "500000000000000000" },
       "treasury": { "publicAddress": null, "expectedBaseUnitAmount": "200000000000000000" },

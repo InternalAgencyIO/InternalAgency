@@ -133,9 +133,9 @@
     "latencyDisclosure": "INITIATED_IMMEDIATELY_AND_FINAL_ON_THE_SINGLE_COMMITTED_REVEAL_NOT_ZERO_NETWORK_LATENCY"
   },
   "ccc": {
-    "genesisStatus": "COMPILED_FAIL_CLOSED_FUTURE_DLC",
+    "genesisStatus": "COMPILED_REVIEWED_GENESIS_ACTIVE",
     "genesisActivationInstruction": null,
-    "activationRequiresNewReviewedUpgrade": true,
+    "activationRequiresNewReviewedUpgrade": false,
     "firstSelectionDelaySeconds": 86400,
     "frequencyWeeks": 1,
     "eligibleAgencyRegistry": "APPEND_ONLY_ON_CHAIN_INDEX",

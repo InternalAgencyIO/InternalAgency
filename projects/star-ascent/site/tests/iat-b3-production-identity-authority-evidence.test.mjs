@@ -10,17 +10,24 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import {
-  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING,
-  PRODUCTION_IDENTITY_AUTHORITY_ATTESTATION_SCHEMA,
+  EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING,
+  PRODUCTION_IDENTITY_AUTHORITY_RECEIPT_SCHEMA,
+  PRODUCTION_IDENTITY_AUTHORITY_OWNER_DECISION_RECEIPT_SCHEMA,
+  PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_OBSERVATION_SCHEMA,
+  PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_BOUNDARY,
   PRODUCTION_IDENTITY_AUTHORITY_EVIDENCE_SCHEMA,
   PRODUCTION_IDENTITY_AUTHORITY_MAINNET_STATUS,
   PRODUCTION_IDENTITY_AUTHORITY_SCOPE,
   PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS,
   ceremonyFundingEvidenceSubjectSha256,
-  createProductionIdentityAuthorityTrustBinding,
+  createProductionIdentityAuthorityAutomatedEvidenceBinding,
   deployedSealEvidenceSubjectSha256,
   parseProductionIdentityAuthorityEvidenceJson,
-  productionIdentityAuthorityAttestationSigningBytes,
+  productionIdentityAuthorityModelTObservationSigningBytes,
+  productionIdentityAuthorityOcmsEnvelopeBytes,
+  productionIdentityAuthorityOwnerDecisionOcmsSigningMaterial,
+  productionIdentityAuthorityReceiptSigningBytes,
+  productionIdentityAuthoritySerializeOcmsMessage,
   productionIdentityAuthorityTerminalStateSha256,
   productionIdentityFreezeEvidenceSubjectSha256,
   validateProductionIdentityAuthorityEvidenceManifest,
@@ -55,76 +62,156 @@ const clone = (value) => structuredClone(value);
 const digest = (label) => createHash("sha256").update(label, "utf8").digest("hex");
 const FIXTURE_EVALUATION_UNIX_SECONDS = "2001000025";
 
-function makeTrustContext() {
+const BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+
+function encodeBase58(bytes) {
+  let number = BigInt(`0x${bytes.toString("hex")}`);
+  let encoded = "";
+  while (number > 0n) {
+    encoded = BASE58_ALPHABET[Number(number % 58n)] + encoded;
+    number /= 58n;
+  }
+  let leadingZeroes = 0;
+  while (leadingZeroes < bytes.length && bytes[leadingZeroes] === 0) leadingZeroes += 1;
+  return "1".repeat(leadingZeroes) + (encoded || "1");
+}
+
+function makeEvidenceContext({ ocmsVersion = "OCMS_V0", firmwareVersion = "2.12.2" } = {}) {
   const roles = [
-    ["owner.decision.prod", "OWNER_DECISION"],
-    ["observer.alpha.prod", "ENDPOINT_OBSERVER"],
-    ["observer.beta.prod", "ENDPOINT_OBSERVER"],
-    ["independent.reviewer.prod", "INDEPENDENT_REVIEWER"],
+    ["owner.decision.prod", "OWNER_DECISION_SOURCE"],
+    ["endpoint.alpha.prod", "AUTOMATED_ENDPOINT_SOURCE"],
+    ["endpoint.beta.prod", "AUTOMATED_ENDPOINT_SOURCE"],
+    ["automated.closure.prod", "AUTOMATED_EVIDENCE_CLOSURE"],
+    ["device.observer.prod", "AUTOMATED_DEVICE_OBSERVATION_SOURCE"],
   ];
   const privateKeys = new Map();
-  const keys = roles.map(([keyId, role]) => {
+  const sources = roles.map(([sourceId, role]) => {
     const { privateKey, publicKey } = generateKeyPairSync("ed25519");
     const der = publicKey.export({ format: "der", type: "spki" });
-    privateKeys.set(keyId, privateKey);
-    return {
-      keyId,
+    privateKeys.set(sourceId, privateKey);
+    const common = {
+      sourceId,
       role,
       publicKeySpkiDerBase64url: der.toString("base64url"),
       publicKeySha256: createHash("sha256").update(der).digest("hex"),
+      signingScheme: role === "OWNER_DECISION_SOURCE"
+        ? "TREZOR_MODEL_T_SOLANA_OCMS"
+        : "RAW_ED25519_SOURCE_BOUND_RECEIPT_V3",
+    };
+    if (role !== "OWNER_DECISION_SOURCE") return common;
+    return {
+      ...common,
+      deviceModel: "Trezor Model T",
+      derivationPath: "m/44'/501'/0'/0'",
+      solanaPublicKey: encodeBase58(der.subarray(der.length - 32)),
+      capabilityPredicate: "MODEL_T_SOLANA_OCMS_CAPABILITY_OBSERVED",
     };
   });
+  const ownerSource = sources.find((source) => source.role === "OWNER_DECISION_SOURCE");
+  const observationSource = sources.find(
+    (source) => source.role === "AUTOMATED_DEVICE_OBSERVATION_SOURCE",
+  );
+  const unsignedObservation = {
+    schema: PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_OBSERVATION_SCHEMA,
+    sourceId: observationSource.sourceId,
+    observedAtUnixSeconds: "2000999999",
+    ownerDecisionSourceId: ownerSource.sourceId,
+    deviceModel: "Trezor Model T",
+    firmwareVersion,
+    capabilityPredicate: "MODEL_T_SOLANA_OCMS_CAPABILITY_OBSERVED",
+    ocmsVersion,
+    derivationPath: ownerSource.derivationPath,
+    solanaPublicKey: ownerSource.solanaPublicKey,
+    observationClass: "SYNTHETIC_SOFTWARE_TEST_FIXTURE",
+    observationValue: "CAPABILITY_PRESENT",
+  };
+  const modelTDeviceObservationReceipt = {
+    ...unsignedObservation,
+    signatureBase64url: sign(
+      null,
+      productionIdentityAuthorityModelTObservationSigningBytes(unsignedObservation),
+      privateKeys.get(observationSource.sourceId),
+    ).toString("base64url"),
+  };
   return {
-    trustBinding: createProductionIdentityAuthorityTrustBinding(keys),
+    automatedEvidenceBinding: createProductionIdentityAuthorityAutomatedEvidenceBinding(
+      sources,
+      modelTDeviceObservationReceipt,
+    ),
     privateKeys,
+    sources: new Map(sources.map((source) => [source.sourceId, source])),
+    modelTDeviceObservationReceipt,
   };
 }
 
-function signedAttestation(context, fields) {
+function signedReceipt(context, fields) {
   const unsigned = {
-    schema: PRODUCTION_IDENTITY_AUTHORITY_ATTESTATION_SCHEMA,
+    schema: fields.sourceId === "owner.decision.prod"
+      ? PRODUCTION_IDENTITY_AUTHORITY_OWNER_DECISION_RECEIPT_SCHEMA
+      : PRODUCTION_IDENTITY_AUTHORITY_RECEIPT_SCHEMA,
     kind: fields.kind,
     stage: fields.stage,
-    keyId: fields.keyId,
+    sourceId: fields.sourceId,
     observedAtUnixSeconds: fields.observedAtUnixSeconds,
     endpointSha256: fields.endpointSha256,
     subjectSha256: fields.subjectSha256,
     observationValue: fields.observationValue,
     decision: fields.decision,
   };
+  if (fields.sourceId === "owner.decision.prod") {
+    const material = productionIdentityAuthorityOwnerDecisionOcmsSigningMaterial(
+      unsigned,
+      context.sources.get(fields.sourceId),
+      context.modelTDeviceObservationReceipt,
+    );
+    const ocmsMessage = Buffer.from(material.ocmsMessageBase64url, "base64url");
+    const signature = sign(
+      null,
+      ocmsMessage,
+      context.privateKeys.get(fields.sourceId),
+    );
+    const envelope = productionIdentityAuthorityOcmsEnvelopeBytes(ocmsMessage, [signature]);
+    return {
+      ...unsigned,
+      ...material,
+      ocmsEnvelopeBase64url: envelope.toString("base64url"),
+      ocmsEnvelopeSha256: createHash("sha256").update(envelope).digest("hex"),
+      signatureBase64url: signature.toString("base64url"),
+    };
+  }
   return {
     ...unsigned,
     signatureBase64url: sign(
       null,
-      productionIdentityAuthorityAttestationSigningBytes(unsigned),
-      context.privateKeys.get(fields.keyId),
+      productionIdentityAuthorityReceiptSigningBytes(unsigned),
+      context.privateKeys.get(fields.sourceId),
     ).toString("base64url"),
   };
 }
 
-function resignAttestation(context, attestation, overrides = {}) {
-  const unsigned = { ...attestation };
+function resignReceipt(context, receipt, overrides = {}) {
+  const unsigned = { ...receipt };
   delete unsigned.signatureBase64url;
-  return signedAttestation(context, { ...unsigned, ...overrides });
+  return signedReceipt(context, { ...unsigned, ...overrides });
 }
 
-function rebindPhaseBAttestations(fixture) {
+function rebindPhaseBReceipts(fixture) {
   const phase = fixture.manifest.phaseBCeremonyFunding;
   phase.subjectSha256 = ceremonyFundingEvidenceSubjectSha256(fixture.manifest);
-  phase.fundingApproval = resignAttestation(fixture.context, phase.fundingApproval, {
+  phase.fundingDecisionReceipt = resignReceipt(fixture.context, phase.fundingDecisionReceipt, {
     subjectSha256: phase.subjectSha256,
   });
-  phase.payerBalanceObservations = phase.payerBalanceObservations.map((entry) => (
-    resignAttestation(fixture.context, entry, { subjectSha256: phase.subjectSha256 })
+  phase.payerBalanceEndpointReceipts = phase.payerBalanceEndpointReceipts.map((entry) => (
+    resignReceipt(fixture.context, entry, { subjectSha256: phase.subjectSha256 })
   ));
-  phase.independentReview = resignAttestation(fixture.context, phase.independentReview, {
+  phase.automatedClosureReceipt = resignReceipt(fixture.context, phase.automatedClosureReceipt, {
     subjectSha256: phase.subjectSha256,
     observationValue: phase.subjectSha256,
   });
 }
 
-function completeFixture() {
-  const context = makeTrustContext();
+function completeFixture(evidenceOptions = {}) {
+  const context = makeEvidenceContext(evidenceOptions);
   const manifest = clone(DRAFT);
   manifest.profile = "TEST_FIXTURE";
   manifest.status = "EVIDENCE_COMPLETE";
@@ -144,33 +231,33 @@ function completeFixture() {
   phaseA.ownerDecisionPreimageSha256 = digest("owner-identity-decision-preimage");
   phaseA.blocker = null;
   phaseA.subjectSha256 = productionIdentityFreezeEvidenceSubjectSha256(manifest);
-  phaseA.ownerAcceptance = signedAttestation(context, {
-    kind: "OWNER_IDENTITY_DECISION_ACCEPTANCE",
+  phaseA.ownerDecisionReceipt = signedReceipt(context, {
+    kind: "OWNER_IDENTITY_DECISION_RECEIPT",
     stage: "A",
-    keyId: "owner.decision.prod",
+    sourceId: "owner.decision.prod",
     observedAtUnixSeconds: "2001000000",
     endpointSha256: null,
     subjectSha256: phaseA.subjectSha256,
     observationValue: phaseA.ownerDecisionPreimageSha256,
     decision: "ACCEPT",
   });
-  phaseA.mainnetGenesisObservations = [
-    ["observer.alpha.prod", digest("rpc-mainnet-alpha"), "2001000001"],
-    ["observer.beta.prod", digest("rpc-mainnet-beta"), "2001000002"],
-  ].map(([keyId, endpointSha256, observedAtUnixSeconds]) => signedAttestation(context, {
-    kind: "MAINNET_GENESIS_OBSERVATION",
+  phaseA.mainnetGenesisEndpointReceipts = [
+    ["endpoint.alpha.prod", digest("rpc-mainnet-alpha"), "2001000001"],
+    ["endpoint.beta.prod", digest("rpc-mainnet-beta"), "2001000002"],
+  ].map(([sourceId, endpointSha256, observedAtUnixSeconds]) => signedReceipt(context, {
+    kind: "MAINNET_GENESIS_ENDPOINT_RECEIPT",
     stage: "A",
-    keyId,
+    sourceId,
     observedAtUnixSeconds,
     endpointSha256,
     subjectSha256: phaseA.subjectSha256,
     observationValue: manifest.productionChoices.mainnetGenesisHash,
     decision: "MATCHED",
   }));
-  phaseA.independentReview = signedAttestation(context, {
-    kind: "INDEPENDENT_IDENTITY_REVIEW",
+  phaseA.automatedClosureReceipt = signedReceipt(context, {
+    kind: "AUTOMATED_IDENTITY_CLOSURE_RECEIPT",
     stage: "A",
-    keyId: "independent.reviewer.prod",
+    sourceId: "automated.closure.prod",
     observedAtUnixSeconds: "2001000003",
     endpointSha256: null,
     subjectSha256: phaseA.subjectSha256,
@@ -204,33 +291,33 @@ function completeFixture() {
   phaseB.expiresAtUnixSeconds = "2001000100";
   phaseB.blocker = null;
   phaseB.subjectSha256 = ceremonyFundingEvidenceSubjectSha256(manifest);
-  phaseB.fundingApproval = signedAttestation(context, {
-    kind: "OWNER_FUNDING_SOURCE_ACCEPTANCE",
+  phaseB.fundingDecisionReceipt = signedReceipt(context, {
+    kind: "OWNER_FUNDING_DECISION_RECEIPT",
     stage: "B",
-    keyId: "owner.decision.prod",
+    sourceId: "owner.decision.prod",
     observedAtUnixSeconds: "2001000010",
     endpointSha256: null,
     subjectSha256: phaseB.subjectSha256,
     observationValue: phaseB.fundingSourceApprovalSha256,
     decision: "ACCEPT",
   });
-  phaseB.payerBalanceObservations = [
-    ["observer.alpha.prod", digest("rpc-payer-alpha"), "2200000000", "2001000011"],
-    ["observer.beta.prod", digest("rpc-payer-beta"), "2300000000", "2001000012"],
-  ].map(([keyId, endpointSha256, observationValue, observedAtUnixSeconds]) => signedAttestation(context, {
-    kind: "PAYER_BALANCE_OBSERVATION",
+  phaseB.payerBalanceEndpointReceipts = [
+    ["endpoint.alpha.prod", digest("rpc-payer-alpha"), "2200000000", "2001000011"],
+    ["endpoint.beta.prod", digest("rpc-payer-beta"), "2300000000", "2001000012"],
+  ].map(([sourceId, endpointSha256, observationValue, observedAtUnixSeconds]) => signedReceipt(context, {
+    kind: "PAYER_BALANCE_ENDPOINT_RECEIPT",
     stage: "B",
-    keyId,
+    sourceId,
     observedAtUnixSeconds,
     endpointSha256,
     subjectSha256: phaseB.subjectSha256,
     observationValue,
     decision: "MATCHED",
   }));
-  phaseB.independentReview = signedAttestation(context, {
-    kind: "INDEPENDENT_FUNDING_REVIEW",
+  phaseB.automatedClosureReceipt = signedReceipt(context, {
+    kind: "AUTOMATED_FUNDING_CLOSURE_RECEIPT",
     stage: "B",
-    keyId: "independent.reviewer.prod",
+    sourceId: "automated.closure.prod",
     observedAtUnixSeconds: "2001000013",
     endpointSha256: null,
     subjectSha256: phaseB.subjectSha256,
@@ -267,23 +354,23 @@ function completeFixture() {
     phaseC.terminalState,
   );
   phaseC.subjectSha256 = deployedSealEvidenceSubjectSha256(manifest);
-  phaseC.terminalEndpointObservations = [
-    ["observer.alpha.prod", digest("rpc-terminal-alpha"), "2001000020"],
-    ["observer.beta.prod", digest("rpc-terminal-beta"), "2001000021"],
-  ].map(([keyId, endpointSha256, observedAtUnixSeconds]) => signedAttestation(context, {
-    kind: "TERMINAL_AUTHORITY_STATE_OBSERVATION",
+  phaseC.terminalEndpointReceipts = [
+    ["endpoint.alpha.prod", digest("rpc-terminal-alpha"), "2001000020"],
+    ["endpoint.beta.prod", digest("rpc-terminal-beta"), "2001000021"],
+  ].map(([sourceId, endpointSha256, observedAtUnixSeconds]) => signedReceipt(context, {
+    kind: "TERMINAL_AUTHORITY_STATE_ENDPOINT_RECEIPT",
     stage: "C",
-    keyId,
+    sourceId,
     observedAtUnixSeconds,
     endpointSha256,
     subjectSha256: phaseC.subjectSha256,
     observationValue: phaseC.terminalState.stateSha256,
     decision: "MATCHED",
   }));
-  phaseC.independentReview = signedAttestation(context, {
-    kind: "INDEPENDENT_DEPLOYED_SEAL_REVIEW",
+  phaseC.automatedClosureReceipt = signedReceipt(context, {
+    kind: "AUTOMATED_DEPLOYED_SEAL_CLOSURE_RECEIPT",
     stage: "C",
-    keyId: "independent.reviewer.prod",
+    sourceId: "automated.closure.prod",
     observedAtUnixSeconds: "2001000022",
     endpointSha256: null,
     subjectSha256: phaseC.subjectSha256,
@@ -296,7 +383,7 @@ function completeFixture() {
 function fixtureResult(fixture) {
   return validateProductionIdentityAuthorityEvidenceManifest(fixture.manifest, {
     allowTestFixture: true,
-    trustBinding: fixture.context.trustBinding,
+    automatedEvidenceBinding: fixture.context.automatedEvidenceBinding,
     evaluationUnixSeconds: FIXTURE_EVALUATION_UNIX_SECONDS,
   });
 }
@@ -317,21 +404,30 @@ test("canonical production packet is structurally valid, owner-null, staged PEND
   assert.equal(DRAFT.status, "PENDING");
   assert.deepEqual(DRAFT.scope, PRODUCTION_IDENTITY_AUTHORITY_SCOPE);
   assert.deepEqual(DRAFT.sourceBindings, PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS);
-  assert.deepEqual(EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING.keys, []);
+  assert.deepEqual(
+    DRAFT.modelTCapabilityBoundary,
+    PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_BOUNDARY,
+  );
+  assert.deepEqual(EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING.sources, []);
+  assert.equal(
+    EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING.modelTDeviceObservationReceipt,
+    null,
+  );
   assert.equal(Object.values(DRAFT.productionChoices).every((value) => value === null), true);
   assert.equal(result.valid, true);
-  assert.equal(result.externalTrustConfigured, false);
+  assert.equal(result.automatedEvidenceSourcesConfigured, false);
   assert.equal(result.phaseAProductionIdentityFreezeComplete, false);
   assert.equal(result.phaseBCeremonyFundingComplete, false);
   assert.equal(result.phaseCDeployedIdentityAuthoritySealComplete, false);
-  assert.equal(result.blockers.length, 4);
+  assert.equal(result.modelTCapabilityObserved, false);
+  assert.equal(result.blockers.length, 5);
   assert.deepEqual(result.violations, []);
   for (const key of [
     "signingAuthorized",
     "deploymentAuthorized",
     "fundingSpendAuthorized",
     "activationAuthorized",
-    "independentGate8Accepted",
+    "automatedGate8EvidenceComplete",
     "releaseAuthorized",
     "mainnetExecutionAuthorized",
   ]) assert.equal(result[key], false);
@@ -341,6 +437,10 @@ test("canonical production packet is structurally valid, owner-null, staged PEND
 test("schema pins the three stages, source inputs, exact 17-step order, and immutable authorization boundary", () => {
   assert.deepEqual(SCHEMA.properties.scope.const, PRODUCTION_IDENTITY_AUTHORITY_SCOPE);
   assert.deepEqual(SCHEMA.properties.sourceBindings.const, PRODUCTION_IDENTITY_AUTHORITY_SOURCE_BINDINGS);
+  assert.deepEqual(
+    SCHEMA.properties.modelTCapabilityBoundary.const,
+    PRODUCTION_IDENTITY_AUTHORITY_MODEL_T_CAPABILITY_BOUNDARY,
+  );
   assert.equal(
     SCHEMA.properties.phaseCDeployedSeal.properties.journal.prefixItems.length,
     EXPECTED_SEAL_ORDER.length,
@@ -353,7 +453,7 @@ test("schema pins the three stages, source inputs, exact 17-step order, and immu
     (entry) => SCHEMA.$defs[entry.$ref.split("/").at(-1)].allOf[1].properties.step.const,
   );
   assert.deepEqual(schemaSteps, EXPECTED_SEAL_ORDER);
-  assert.equal(SCHEMA.properties.authorizationBoundary.const.independentGate8Accepted, false);
+  assert.equal(SCHEMA.properties.authorizationBoundary.const.automatedGate8EvidenceComplete, false);
   assert.equal(SCHEMA.properties.authorizationBoundary.const.mainnetExecutionAuthorized, false);
   assert.equal(SCHEMA.properties.authorizationBoundary.const.mainnetStatus, "HOLD");
 });
@@ -362,28 +462,154 @@ test("fully signed fixture proves staged mechanics without ever satisfying a pro
   const fixture = completeFixture();
   const result = fixtureResult(fixture);
   assert.equal(result.valid, true, result.violations.join("\n"));
-  assert.equal(result.externalTrustConfigured, true);
+  assert.equal(result.automatedEvidenceSourcesConfigured, true);
   assert.equal(result.phaseAProductionIdentityFreezeComplete, true);
   assert.equal(result.phaseBCeremonyFundingComplete, true);
   assert.equal(result.phaseCDeployedIdentityAuthoritySealComplete, true);
   assert.equal(result.productionIdentityFreezeEvidenceComplete, false);
   assert.equal(result.ceremonyFundingEvidenceComplete, false);
   assert.equal(result.deployedIdentityAuthoritySealEvidenceComplete, false);
+  assert.equal(result.modelTCapabilityObserved, false);
   assert.equal(result.mainnetExecutionAuthorized, false);
   assert.equal(result.mainnetStatus, "HOLD");
+});
+
+test("owner decisions use exact Solana OCMS v0 or v1 bytes while a separate source observes Model T capability", () => {
+  for (const [ocmsVersion, firmwareVersion] of [
+    ["OCMS_V0", "2.12.2"],
+    ["OCMS_V1", "2.12.4"],
+  ]) {
+    const fixture = completeFixture({ ocmsVersion, firmwareVersion });
+    const result = fixtureResult(fixture);
+    assert.equal(result.valid, true, result.violations.join("\n"));
+    const receipt = fixture.manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt;
+    const message = Buffer.from(receipt.ocmsMessageBase64url, "base64url");
+    const envelope = Buffer.from(receipt.ocmsEnvelopeBase64url, "base64url");
+    assert.equal(message[0], 0xff);
+    assert.equal(message.subarray(1, 16).toString("ascii"), "solana offchain");
+    assert.equal(message[16], ocmsVersion === "OCMS_V0" ? 0 : 1);
+    assert.equal(envelope[0], 1);
+    assert.deepEqual(envelope.subarray(65), message);
+    if (ocmsVersion === "OCMS_V0") {
+      assert.equal(receipt.ocmsApplicationDomainBase64url.length, 43);
+      assert.equal(message[49], 1);
+      assert.equal(message[50], 1);
+      assert.equal(message.readUInt16LE(83), Buffer.from(receipt.decisionPayloadBase64url, "base64url").length);
+    } else {
+      assert.equal(receipt.ocmsApplicationDomainBase64url, null);
+      assert.equal(message[17], 1);
+    }
+  }
+});
+
+test("OCMS v0 UTF8_SHORT enforces the exact Model T 1147-byte payload boundary", () => {
+  const context = makeEvidenceContext();
+  const signer = context.sources.get("owner.decision.prod");
+  const signerBytes = Buffer.from(signer.publicKeySpkiDerBase64url, "base64url").subarray(-32);
+  assert.doesNotThrow(() => productionIdentityAuthoritySerializeOcmsMessage(
+    "OCMS_V0",
+    signerBytes,
+    Buffer.alloc(1_147, 0x61),
+  ));
+  assert.throws(
+    () => productionIdentityAuthoritySerializeOcmsMessage(
+      "OCMS_V0",
+      signerBytes,
+      Buffer.alloc(1_148, 0x61),
+    ),
+    /1147 bytes.*1232/iu,
+  );
+  assert.doesNotThrow(() => productionIdentityAuthoritySerializeOcmsMessage(
+    "OCMS_V1",
+    signerBytes,
+    Buffer.alloc(1_148, 0x61),
+  ));
+});
+
+test("owner OCMS gate rejects raw-signature substitution, signer/path/domain/message drift, and software-only capability claims", () => {
+  for (const [mutate, pattern] of [
+    [({ manifest }) => {
+      manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt.signatureScheme =
+        "RAW_ED25519_SOURCE_BOUND_RECEIPT_V3";
+    }, /OCMS signing material mismatch/iu],
+    [({ manifest }) => {
+      manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt.signerDerivationPath =
+        "m/44'/501'/1'/0'";
+    }, /OCMS signing material mismatch/iu],
+    [({ manifest }) => {
+      manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt.ocmsApplicationDomainBase64url =
+        "A".repeat(43);
+    }, /OCMS signing material mismatch/iu],
+    [({ manifest }) => {
+      const receipt = manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt;
+      receipt.ocmsMessageBase64url = `${receipt.ocmsMessageBase64url.slice(0, -1)}A`;
+    }, /OCMS signing material mismatch|serialized OCMS|signature is invalid/iu],
+    [({ manifest, context }) => {
+      const ownerReceipt = manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt;
+      manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt = {
+        schema: PRODUCTION_IDENTITY_AUTHORITY_RECEIPT_SCHEMA,
+        kind: ownerReceipt.kind,
+        stage: ownerReceipt.stage,
+        sourceId: ownerReceipt.sourceId,
+        observedAtUnixSeconds: ownerReceipt.observedAtUnixSeconds,
+        endpointSha256: null,
+        subjectSha256: ownerReceipt.subjectSha256,
+        observationValue: ownerReceipt.observationValue,
+        decision: ownerReceipt.decision,
+        signatureBase64url: sign(
+          null,
+          Buffer.from("generic-software-owner-signature", "utf8"),
+          context.privateKeys.get(ownerReceipt.sourceId),
+        ).toString("base64url"),
+      };
+    }, /expected exact keys/iu],
+  ]) expectFixtureViolation(mutate, pattern);
+
+  assert.throws(
+    () => productionIdentityAuthorityReceiptSigningBytes({
+      schema: PRODUCTION_IDENTITY_AUTHORITY_RECEIPT_SCHEMA,
+      kind: "OWNER_IDENTITY_DECISION_RECEIPT",
+      stage: "A",
+      sourceId: "owner.decision.prod",
+      observedAtUnixSeconds: "2001000000",
+      endpointSha256: null,
+      subjectSha256: digest("subject"),
+      observationValue: digest("value"),
+      decision: "ACCEPT",
+    }),
+    /raw Ed25519 is forbidden/iu,
+  );
+});
+
+test("firmware-to-OCMS mapping and observation provenance fail closed", () => {
+  for (const evidenceOptions of [
+    { ocmsVersion: "OCMS_V0", firmwareVersion: "2.12.4" },
+    { ocmsVersion: "OCMS_V1", firmwareVersion: "2.12.2" },
+  ]) {
+    const fixture = completeFixture(evidenceOptions);
+    const result = fixtureResult(fixture);
+    assert.equal(result.valid, false);
+    assert.match(result.violations.join("\n"), /firmware and OCMS version are incompatible/iu);
+  }
+  const fixture = completeFixture();
+  fixture.context.automatedEvidenceBinding.modelTDeviceObservationReceipt.observationClass =
+    "PRODUCTION_SOURCE_BOUND_DEVICE_OBSERVATION";
+  const result = fixtureResult(fixture);
+  assert.equal(result.valid, false);
+  assert.match(result.violations.join("\n"), /TEST_FIXTURE requires SYNTHETIC_SOFTWARE_TEST_FIXTURE/iu);
 });
 
 test("fixture use requires explicit authority and production relabel cannot bypass source-bound identity readiness", () => {
   const fixture = completeFixture();
   const denied = validateProductionIdentityAuthorityEvidenceManifest(fixture.manifest, {
-    trustBinding: fixture.context.trustBinding,
+    automatedEvidenceBinding: fixture.context.automatedEvidenceBinding,
   });
   assert.equal(denied.valid, false);
   assert.match(denied.violations.join("\n"), /TEST_FIXTURE requires explicit/iu);
 
   fixture.manifest.profile = "PRODUCTION";
   const relabeled = validateProductionIdentityAuthorityEvidenceManifest(fixture.manifest, {
-    trustBinding: fixture.context.trustBinding,
+    automatedEvidenceBinding: fixture.context.automatedEvidenceBinding,
   });
   assert.equal(relabeled.valid, false);
   assert.equal(relabeled.productionIdentityFreezeEvidenceComplete, false);
@@ -393,46 +619,46 @@ test("fixture use requires explicit authority and production relabel cannot bypa
   );
 });
 
-test("packet cannot select trust keys and completion requires exact external role cardinality", () => {
+test("packet cannot select automated evidence sources and completion requires exact external role cardinality", () => {
   expectFixtureViolation(({ manifest }) => {
-    manifest.trustBinding = clone(EMPTY_PRODUCTION_IDENTITY_AUTHORITY_TRUST_BINDING);
+    manifest.automatedEvidenceBinding = clone(EMPTY_PRODUCTION_IDENTITY_AUTHORITY_AUTOMATED_EVIDENCE_BINDING);
   }, /expected exact keys/iu);
 
   const fixture = completeFixture();
-  const noTrust = validateProductionIdentityAuthorityEvidenceManifest(fixture.manifest, {
+  const noEvidenceSources = validateProductionIdentityAuthorityEvidenceManifest(fixture.manifest, {
     allowTestFixture: true,
   });
-  assert.equal(noTrust.valid, false);
-  assert.match(noTrust.violations.join("\n"), /key is absent from the external/iu);
+  assert.equal(noEvidenceSources.valid, false);
+  assert.match(noEvidenceSources.violations.join("\n"), /source is absent from the configured/iu);
 
   for (const mutate of [
-    (trust) => trust.keys.pop(),
-    (trust) => { trust.packetMaySelectTrustKeys = true; },
-    (trust) => { trust.trustRootSha256 = digest("substituted-root"); },
-    (trust) => { trust.keys[0].role = "OWNER_DECISION"; },
-    (trust) => { trust.keys[1].keyId = trust.keys[0].keyId; },
-    (trust) => { trust.keys[1].publicKeySpkiDerBase64url = trust.keys[0].publicKeySpkiDerBase64url; },
-    (trust) => { trust.keys[1].publicKeySha256 = trust.keys[0].publicKeySha256; },
+    (binding) => binding.sources.pop(),
+    (binding) => { binding.packetMaySelectEvidenceSources = true; },
+    (binding) => { binding.sourceSetSha256 = digest("substituted-root"); },
+    (binding) => { binding.sources[0].role = "OWNER_DECISION_SOURCE"; },
+    (binding) => { binding.sources[1].sourceId = binding.sources[0].sourceId; },
+    (binding) => { binding.sources[1].publicKeySpkiDerBase64url = binding.sources[0].publicKeySpkiDerBase64url; },
+    (binding) => { binding.sources[1].publicKeySha256 = binding.sources[0].publicKeySha256; },
   ]) {
     const hostile = completeFixture();
-    mutate(hostile.context.trustBinding);
+    mutate(hostile.context.automatedEvidenceBinding);
     assert.equal(fixtureResult(hostile).valid, false);
   }
 });
 
-test("every attestation class is cryptographically bound to kind, stage, subject, value, decision, key, and endpoint", () => {
+test("every receipt class is cryptographically bound to kind, stage, subject, value, decision, key, and endpoint", () => {
   const paths = [
-    ["phaseAProductionIdentityFreeze", "ownerAcceptance"],
-    ["phaseAProductionIdentityFreeze", "mainnetGenesisObservations", 0],
-    ["phaseAProductionIdentityFreeze", "independentReview"],
-    ["phaseBCeremonyFunding", "fundingApproval"],
-    ["phaseBCeremonyFunding", "payerBalanceObservations", 0],
-    ["phaseBCeremonyFunding", "independentReview"],
-    ["phaseCDeployedSeal", "terminalEndpointObservations", 0],
-    ["phaseCDeployedSeal", "independentReview"],
+    ["phaseAProductionIdentityFreeze", "ownerDecisionReceipt"],
+    ["phaseAProductionIdentityFreeze", "mainnetGenesisEndpointReceipts", 0],
+    ["phaseAProductionIdentityFreeze", "automatedClosureReceipt"],
+    ["phaseBCeremonyFunding", "fundingDecisionReceipt"],
+    ["phaseBCeremonyFunding", "payerBalanceEndpointReceipts", 0],
+    ["phaseBCeremonyFunding", "automatedClosureReceipt"],
+    ["phaseCDeployedSeal", "terminalEndpointReceipts", 0],
+    ["phaseCDeployedSeal", "automatedClosureReceipt"],
   ];
   for (const path of paths) {
-    for (const field of ["kind", "stage", "subjectSha256", "observationValue", "decision", "keyId", "observedAtUnixSeconds"]) {
+    for (const field of ["kind", "stage", "subjectSha256", "observationValue", "decision", "sourceId", "observedAtUnixSeconds"]) {
       expectFixtureViolation(({ manifest }) => {
         let target = manifest;
         for (const key of path) target = target[key];
@@ -442,17 +668,17 @@ test("every attestation class is cryptographically bound to kind, stage, subject
   }
 });
 
-test("two-observer requirements reject same key, same endpoint, wrong value, missing, extra, or unsigned observations", () => {
+test("two-endpoint requirements reject same key, same endpoint, wrong value, missing, extra, or unsigned observations", () => {
   const locations = [
-    ["phaseAProductionIdentityFreeze", "mainnetGenesisObservations"],
-    ["phaseBCeremonyFunding", "payerBalanceObservations"],
-    ["phaseCDeployedSeal", "terminalEndpointObservations"],
+    ["phaseAProductionIdentityFreeze", "mainnetGenesisEndpointReceipts"],
+    ["phaseBCeremonyFunding", "payerBalanceEndpointReceipts"],
+    ["phaseCDeployedSeal", "terminalEndpointReceipts"],
   ];
   for (const path of locations) {
     expectFixtureViolation(({ manifest }) => {
       const list = manifest[path[0]][path[1]];
-      list[1].keyId = list[0].keyId;
-    }, /observer key|observer keys|signature is invalid/iu);
+      list[1].sourceId = list[0].sourceId;
+    }, /endpoint source|automated sources|signature is invalid/iu);
     expectFixtureViolation(({ manifest }) => {
       const list = manifest[path[0]][path[1]];
       list[1].endpointSha256 = list[0].endpointSha256;
@@ -493,7 +719,7 @@ test("phase B binds two exact final binaries and fresh cost, funding, floor, buf
     [(manifest) => { manifest.phaseBCeremonyFunding.aggregateFreshPayerPeakLamports = "3000000001"; }, /exceeds frozen 3 SOL|subject commitment/iu],
     [(manifest) => { manifest.phaseBCeremonyFunding.aggregatePermanentRentLamports = "1900000000"; }, /permanent rent plus recoverable buffer|subject commitment/iu],
     [(manifest) => { manifest.phaseBCeremonyFunding.ceremonyFloorLamports = "2000000000"; }, /does not cover exact peak plus fee|subject commitment/iu],
-    [(manifest) => { manifest.phaseBCeremonyFunding.payerBalanceObservations[0].observationValue = "1"; }, /below ceremony floor|signature is invalid/iu],
+    [(manifest) => { manifest.phaseBCeremonyFunding.payerBalanceEndpointReceipts[0].observationValue = "1"; }, /below ceremony floor|signature is invalid/iu],
     [(manifest) => { manifest.sourceBindings.costFeasibilityReference.bindingScope = "COMPLETION_EVIDENCE"; }, /reference-only COST|sourceBindings/iu],
   ];
   for (const [mutate, pattern] of cases) {
@@ -507,47 +733,47 @@ test("completed evidence requires external evaluation time and rejects stale, fu
     noEvaluation.manifest,
     {
       allowTestFixture: true,
-      trustBinding: noEvaluation.context.trustBinding,
+      automatedEvidenceBinding: noEvaluation.context.automatedEvidenceBinding,
     },
   );
   assert.equal(noEvaluationResult.valid, false);
-  assert.match(noEvaluationResult.violations.join("\n"), /externally supplied trusted evaluation time/iu);
+  assert.match(noEvaluationResult.violations.join("\n"), /externally supplied evaluation time/iu);
 
   expectFixtureViolation((fixture) => {
     const phase = fixture.manifest.phaseBCeremonyFunding;
-    phase.payerBalanceObservations[0] = resignAttestation(
+    phase.payerBalanceEndpointReceipts[0] = resignReceipt(
       fixture.context,
-      phase.payerBalanceObservations[0],
+      phase.payerBalanceEndpointReceipts[0],
       { observedAtUnixSeconds: "2000999000" },
     );
   }, /live endpoint evidence is stale|bounded pair skew|evidence-review interval/iu);
 
   expectFixtureViolation((fixture) => {
     const phase = fixture.manifest.phaseBCeremonyFunding;
-    phase.payerBalanceObservations[1] = resignAttestation(
+    phase.payerBalanceEndpointReceipts[1] = resignReceipt(
       fixture.context,
-      phase.payerBalanceObservations[1],
+      phase.payerBalanceEndpointReceipts[1],
       { observedAtUnixSeconds: "2001000101" },
     );
   }, /future relative to externally supplied evaluation time|predates required signed evidence/iu);
 
   expectFixtureViolation((fixture) => {
     const phase = fixture.manifest.phaseBCeremonyFunding;
-    phase.payerBalanceObservations[1] = resignAttestation(
+    phase.payerBalanceEndpointReceipts[1] = resignReceipt(
       fixture.context,
-      phase.payerBalanceObservations[1],
+      phase.payerBalanceEndpointReceipts[1],
       { observedAtUnixSeconds: "2000999800" },
     );
   }, /bounded pair skew|live endpoint evidence is stale/iu);
 
   expectFixtureViolation((fixture) => {
     fixture.manifest.phaseBCeremonyFunding.expiresAtUnixSeconds = "2001000024";
-    rebindPhaseBAttestations(fixture);
+    rebindPhaseBReceipts(fixture);
   }, /funding evidence has expired/iu);
 
   expectFixtureViolation((fixture) => {
     fixture.manifest.phaseBCeremonyFunding.expiresAtUnixSeconds = "2001002000";
-    rebindPhaseBAttestations(fixture);
+    rebindPhaseBReceipts(fixture);
   }, /bounded post-observation funding evidence lifetime/iu);
 });
 
@@ -556,9 +782,9 @@ test("phase order is strict: B cannot complete before A and C cannot complete be
     manifest.phaseAProductionIdentityFreeze.status = "PENDING";
     manifest.phaseAProductionIdentityFreeze.subjectSha256 = null;
     manifest.phaseAProductionIdentityFreeze.ownerDecisionPreimageSha256 = null;
-    manifest.phaseAProductionIdentityFreeze.ownerAcceptance = null;
-    manifest.phaseAProductionIdentityFreeze.mainnetGenesisObservations = [];
-    manifest.phaseAProductionIdentityFreeze.independentReview = null;
+    manifest.phaseAProductionIdentityFreeze.ownerDecisionReceipt = null;
+    manifest.phaseAProductionIdentityFreeze.mainnetGenesisEndpointReceipts = [];
+    manifest.phaseAProductionIdentityFreeze.automatedClosureReceipt = null;
     manifest.phaseAProductionIdentityFreeze.blocker = "The exact phase A identity evidence remains deliberately pending.";
   }, /phase A must complete first|owner-null|EVIDENCE_COMPLETE requires/iu);
   expectFixtureViolation(({ manifest }) => {
@@ -572,9 +798,9 @@ test("phase order is strict: B cannot complete before A and C cannot complete be
       "freshCostMeasurementSha256", "fundingSourceApprovalSha256", "ceremonyFloorPolicySha256",
       "bufferRecoveryPlanSha256", "ceremonyFloorLamports", "aggregateFreshPayerPeakLamports",
       "aggregatePermanentRentLamports", "aggregateRecoverableBufferLamports", "aggregateFeeBudgetLamports",
-      "fundingApproval", "independentReview",
+      "fundingDecisionReceipt", "automatedClosureReceipt",
     ]) manifest.phaseBCeremonyFunding[key] = null;
-    manifest.phaseBCeremonyFunding.payerBalanceObservations = [];
+    manifest.phaseBCeremonyFunding.payerBalanceEndpointReceipts = [];
     manifest.phaseBCeremonyFunding.blocker = "The exact phase B cost and funding evidence remains deliberately pending.";
   }, /phase B must complete first|EVIDENCE_COMPLETE requires/iu);
 });
@@ -615,7 +841,7 @@ test("authorization, Gate 8, release, and Mainnet flags are immutable even after
     "deploymentAuthorized",
     "fundingSpendAuthorized",
     "activationAuthorized",
-    "independentGate8Accepted",
+    "automatedGate8EvidenceComplete",
     "releaseAuthorized",
     "mainnetExecutionAuthorized",
   ]) expectFixtureViolation(({ manifest }) => {
@@ -626,7 +852,7 @@ test("authorization, Gate 8, release, and Mainnet flags are immutable even after
   }, /authorizationBoundary/iu);
 });
 
-test("strict input rejects duplicate JSON keys, accessors, symbols, sparse arrays, cycles, and extra packet trust material", () => {
+test("strict input rejects duplicate JSON sources, accessors, symbols, sparse arrays, cycles, and extra packet evidence-source material", () => {
   assert.throws(
     () => parseProductionIdentityAuthorityEvidenceJson('{"alpha":1,"\\u0061lpha":2}'),
     /duplicate JSON member/iu,
@@ -643,7 +869,7 @@ test("strict input rejects duplicate JSON keys, accessors, symbols, sparse array
   cycle.scope.loop = cycle;
   cases.push(cycle);
   const extra = clone(DRAFT);
-  extra.trustKeys = [];
+  extra.evidenceSources = [];
   cases.push(extra);
   for (const malformed of cases) {
     const result = validateProductionIdentityAuthorityEvidenceManifest(malformed);
@@ -672,5 +898,5 @@ test("validator remains pure, host-only, network-free, nonexecuting, and nonauth
   assert.match(VALIDATOR_SOURCE, /canonicalizeRfc8785/iu);
   assert.match(VALIDATOR_SOURCE, /verifySignature/iu);
   assert.match(VALIDATOR_SOURCE, /mainnetExecutionAuthorized:\s*false/iu);
-  assert.match(VALIDATOR_SOURCE, /independentGate8Accepted:\s*false/iu);
+  assert.match(VALIDATOR_SOURCE, /automatedGate8EvidenceComplete:\s*false/iu);
 });

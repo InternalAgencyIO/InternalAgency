@@ -1,0 +1,132 @@
+name: IAT V2 independent security evidence
+
+on:
+  push:
+    branches:
+      - agent/iat-launch-window
+    paths:
+      - ".github/workflows/iat-v2-independent-security-evidence.yml"
+      - "projects/star-ascent/site/**"
+  pull_request:
+    paths:
+      - ".github/workflows/iat-v2-independent-security-evidence.yml"
+      - "projects/star-ascent/site/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: iat-v2-independent-security-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  security-evidence:
+    name: Independent IAT-surface current-source security evidence (Mainnet HOLD)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      IAT_V2_SECURITY_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      IAT_V2_SECURITY_PROGRAM_ARTIFACT_SHA256: 771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01
+    steps:
+      - name: Check out exact source head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up pinned Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+
+      - name: Install exact site dependencies
+        working-directory: projects/star-ascent/site
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Install pinned Cargo audit tool
+        run: cargo install cargo-audit --version 0.22.2 --locked
+
+      - name: Capture exact tool versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p projects/star-ascent/site/target/security/raw
+          node --version > projects/star-ascent/site/target/security/raw/node-version.txt
+          npm --version > projects/star-ascent/site/target/security/raw/npm-version.txt
+          cargo-audit --version > projects/star-ascent/site/target/security/raw/cargo-audit-version.txt
+
+      - name: Run site npm advisory audit
+        shell: bash
+        working-directory: projects/star-ascent/site
+        run: |
+          set -euo pipefail
+          npm audit --package-lock-only --audit-level=high --json \
+            > target/security/raw/npm-site-audit.json
+          printf '0\n' > target/security/raw/npm-site-audit.exit-code.txt
+
+      - name: Run Cargo advisory audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo audit --json --file projects/star-ascent/site/Cargo.lock \
+            > projects/star-ascent/site/target/security/raw/cargo-site-audit.json
+          printf '0\n' > projects/star-ascent/site/target/security/raw/cargo-site-audit.exit-code.txt
+          cargo audit --json \
+            --file projects/star-ascent/site/tests/fixtures/iat-b3-account-lifecycle/Cargo.lock \
+            > projects/star-ascent/site/target/security/raw/cargo-account-lifecycle-audit.json
+          printf '0\n' > projects/star-ascent/site/target/security/raw/cargo-account-lifecycle-audit.exit-code.txt
+          cargo audit --json \
+            --file projects/star-ascent/site/tests/fixtures/iat-b3-stake-ingress/Cargo.lock \
+            > projects/star-ascent/site/target/security/raw/cargo-stake-ingress-audit.json
+          printf '0\n' > projects/star-ascent/site/target/security/raw/cargo-stake-ingress-audit.exit-code.txt
+
+      - name: Run fixed security regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --test --test-reporter=tap \
+            projects/star-ascent/site/tests/iat-b3-dependency-security-overrides.test.mjs \
+            projects/star-ascent/site/tests/iat-b3-dependency-security-remediation.test.mjs \
+            projects/star-ascent/site/tests/iat-b3-safe-bigint-buffer.test.mjs \
+            projects/star-ascent/site/tests/iat-b3-safe-image-size.test.mjs \
+            projects/star-ascent/site/tests/node-binding-security.test.mjs \
+            projects/star-ascent/site/tests/daily-budget-security.test.mjs \
+            projects/star-ascent/site/tests/iat-v2-program-binding.test.mjs \
+            projects/star-ascent/site/tests/iat-v2-github-hosted-state-authenticator.test.mjs \
+            projects/star-ascent/site/tests/iat-v2-production-identity-external-observer-capability.test.mjs \
+            projects/star-ascent/site/tests/iat-v2-jit-automated-security-predicate.test.mjs \
+            | tee projects/star-ascent/site/target/security/raw/security-regression.tap
+          printf '0\n' > projects/star-ascent/site/target/security/raw/security-regression.exit-code.txt
+
+      - name: Assemble canonical security evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node projects/star-ascent/site/scripts/build-iat-v2-independent-security-evidence.mjs \
+            --node-version projects/star-ascent/site/target/security/raw/node-version.txt \
+            --npm-version projects/star-ascent/site/target/security/raw/npm-version.txt \
+            --cargo-audit-version projects/star-ascent/site/target/security/raw/cargo-audit-version.txt \
+            --npm-site-audit projects/star-ascent/site/target/security/raw/npm-site-audit.json \
+            --npm-site-exit-code projects/star-ascent/site/target/security/raw/npm-site-audit.exit-code.txt \
+            --cargo-site-audit projects/star-ascent/site/target/security/raw/cargo-site-audit.json \
+            --cargo-site-exit-code projects/star-ascent/site/target/security/raw/cargo-site-audit.exit-code.txt \
+            --cargo-account-lifecycle-audit projects/star-ascent/site/target/security/raw/cargo-account-lifecycle-audit.json \
+            --cargo-account-lifecycle-exit-code projects/star-ascent/site/target/security/raw/cargo-account-lifecycle-audit.exit-code.txt \
+            --cargo-stake-ingress-audit projects/star-ascent/site/target/security/raw/cargo-stake-ingress-audit.json \
+            --cargo-stake-ingress-exit-code projects/star-ascent/site/target/security/raw/cargo-stake-ingress-audit.exit-code.txt \
+            --security-regression-tap projects/star-ascent/site/target/security/raw/security-regression.tap \
+            --security-regression-exit-code projects/star-ascent/site/target/security/raw/security-regression.exit-code.txt \
+            --program-artifact-sha256 "$IAT_V2_SECURITY_PROGRAM_ARTIFACT_SHA256" \
+            --output projects/star-ascent/site/target/security/iat-v2-independent-security-evidence-v2.json
+
+      - name: Upload immutable security evidence artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: iat-v2-independent-security-evidence-v2
+          path: |
+            projects/star-ascent/site/target/security/iat-v2-independent-security-evidence-v2.json
+            projects/star-ascent/site/target/security/raw
+          if-no-files-found: error
+          retention-days: 30

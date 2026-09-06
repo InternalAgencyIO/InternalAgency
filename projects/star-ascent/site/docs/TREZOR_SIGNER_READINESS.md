@@ -17,7 +17,7 @@ Before mainnet:
 5. Confirm the device displays a comprehensible transaction for every required action.
 6. Rehearse the one-time local mint-account signer plus the Model T fee-payer signature in the same create-and-initialize-mint transaction. See `MINT_ACCOUNT_SIGNER_GATE.md`.
 
-If any transaction is unsupported, confusing, or cannot be independently checked on-device, stop. Do not improvise on mainnet.
+If any transaction is unsupported, confusing, or cannot be checked exactly on-device against the source-bound intent, stop. Do not improvise on Mainnet.
 
 ## Genesis implementation choice
 
@@ -45,7 +45,7 @@ The rehearsal must use the same wallet interface, computer, cable, Trezor device
 
 - Signer: physically controls the unlocked Trezor and confirms every address on-device.
 - Builder: prepares transactions only; cannot sign.
-- Verifier: independently checks recipient addresses, transaction summaries, Explorer records, and the public evidence packet.
+- Automated evidence lane: checks recipient addresses, transaction summaries, Explorer records, receipts, and state against the bound packet; it cannot sign.
 - Broadcaster: publishes only approved, verified information.
 
 Use a second screen or a printed manifest. Never rely on a clipboard value as the only address check.
@@ -71,7 +71,7 @@ Stop the launch and publish HOLD if any one of these is true:
 
 - The hardware device cannot display or approve the transaction clearly.
 - The tool asks for a recovery phrase, private key, or blind signing that cannot be explained.
-- A recipient address differs between the manifest, device confirmation, and independent verifier.
+- A recipient address differs between the manifest, device confirmation, and automated source/receipt/state evidence.
 - The executed supply, program, decimals, or authority state differs from the manifest.
 - Any time-lock or allocation evidence is incomplete.
 

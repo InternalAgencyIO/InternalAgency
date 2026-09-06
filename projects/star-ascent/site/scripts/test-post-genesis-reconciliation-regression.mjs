@@ -125,17 +125,15 @@ try {
     "a COMPLETE archive while the stage journal remains HOLD",
     (fixture) => {
       fixture.status = "COMPLETE";
-      fixture.reconciliation.archiveOwnerLabel = "Evidence archive owner";
-      fixture.reconciliation.independentReviewerLabel = "Independent evidence reviewer";
     },
     "COMPLETE requires IAT V2 stage journal status RECONCILED",
   );
   assertRejected(
-    "a credential-bearing archive owner label",
-    (fixture) => { fixture.reconciliation.archiveOwnerLabel = "amber bridge candle drift ember forest galaxy harbor island jungle kindle lantern"; },
+    "credential-bearing archive evidence",
+    (fixture) => { fixture.reconciliation.evidenceArchiveUrl = "amber bridge candle drift ember forest galaxy harbor island jungle kindle lantern"; },
     "reconciliation must not contain credential-bearing field names or values",
   );
-  for (const [index, field] of ["archiveOwnerLabel", "independentReviewerLabel"].entries()) {
+  for (const [index, field] of ["evidenceArchiveUrl", "publicChangelogUrl"].entries()) {
     assertRejected(
       `64-byte Base58 credential-shaped material at reconciliation.${field}`,
       (fixture) => { fixture.reconciliation[field] = credentialShapedKeypair(index + 9); },
@@ -159,29 +157,19 @@ try {
   );
 
   assertRejected(
-    "case-variant archive and reviewer labels",
-    (fixture) => {
-      fixture.status = "COMPLETE";
-      fixture.reconciliation.archiveOwnerLabel = "Archive owner";
-      fixture.reconciliation.independentReviewerLabel = "ARCHIVE OWNER";
-    },
-    "genuinely distinct archive-owner and independent-reviewer labels",
+    "a human-review requirement injected into the archive gate",
+    (fixture) => { fixture.controls.humanReviewerRequired = true; },
+    "exact automated no-human/no-self-attestation policy",
   );
   assertRejected(
-    "a Turkish dotted-I case-variant archive and reviewer label",
-    (fixture) => {
-      fixture.status = "COMPLETE";
-      fixture.reconciliation.archiveOwnerLabel = "Archive owner";
-      fixture.reconciliation.independentReviewerLabel = "ARCH\u0130VE OWNER";
-    },
-    "genuinely distinct archive-owner and independent-reviewer labels",
+    "self-attestation enabled for the archive gate",
+    (fixture) => { fixture.controls.noSelfAttestation = false; },
+    "exact automated no-human/no-self-attestation policy",
   );
   assertRejected(
     "a parseable but non-canonical reconciliation timestamp",
     (fixture) => {
       fixture.status = "COMPLETE";
-      fixture.reconciliation.archiveOwnerLabel = "Archive owner";
-      fixture.reconciliation.independentReviewerLabel = "Independent reviewer";
       fixture.reconciliation.checkedAtUtc = "2026-07-29T01:00:00.00Z";
     },
     "COMPLETE requires a canonical ISO-8601 UTC reconciliation.checkedAtUtc timestamp",
@@ -190,8 +178,6 @@ try {
     "a future-dated reconciliation review",
     (fixture) => {
       fixture.status = "COMPLETE";
-      fixture.reconciliation.archiveOwnerLabel = "Archive owner";
-      fixture.reconciliation.independentReviewerLabel = "Independent reviewer";
       fixture.reconciliation.checkedAtUtc = "2099-01-01T00:00:00.000Z";
     },
     "COMPLETE reconciliation.checkedAtUtc cannot be more than one minute in the future",
@@ -237,7 +223,7 @@ try {
   );
 
   // A HOLD packet still dispatches through the mainnet-handoff validator. When
-  // that handoff is APPROVED, the child validator reads the release snapshot;
+  // that handoff is READY, the child validator reads the release snapshot;
   // mutating it during validation must invalidate the reconciliation review.
   const snapshotSwapPacketPath = join(sandboxRoot, "launch", "release-packet.template.json");
   const snapshotSwapHandoffPath = join(sandboxRoot, "launch", "mainnet-handoff.template.json");
@@ -250,9 +236,9 @@ try {
     const holdPacket = JSON.parse(reviewedHoldPacketBytes.toString("utf8"));
     holdPacket.status = "HOLD";
     writeFileSync(snapshotSwapPacketPath, `${JSON.stringify(holdPacket, null, 2)}\n`, "utf8");
-    const approvedHandoff = JSON.parse(reviewedHandoffBytes.toString("utf8"));
-    approvedHandoff.status = "APPROVED";
-    writeFileSync(snapshotSwapHandoffPath, `${JSON.stringify(approvedHandoff, null, 2)}\n`, "utf8");
+    const readyHandoff = JSON.parse(reviewedHandoffBytes.toString("utf8"));
+    readyHandoff.status = "READY";
+    writeFileSync(snapshotSwapHandoffPath, `${JSON.stringify(readyHandoff, null, 2)}\n`, "utf8");
     writeFileSync(snapshotSwapPath, '{"version":1,"status":"HOLD"}\n', "utf8");
     writeFileSync(snapshotSwapValidatorPath, [
       'import { appendFileSync } from "node:fs";',
@@ -264,11 +250,11 @@ try {
     const snapshotSwapValidation = runValidator();
     const snapshotSwapOutput = `${snapshotSwapValidation.stdout}\n${snapshotSwapValidation.stderr}`;
     if (snapshotSwapValidation.error || snapshotSwapValidation.status === 0) {
-      fail("post-Genesis reconciliation accepted a release snapshot swapped through an APPROVED handoff while the packet remained HOLD");
+      fail("post-Genesis reconciliation accepted a release snapshot swapped through a READY handoff while the packet remained HOLD");
     } else if (!snapshotSwapOutput.includes("canonical launch dependencies changed during validation")) {
-      fail("post-Genesis reconciliation did not report the APPROVED-handoff/HOLD-packet snapshot swap");
+      fail("post-Genesis reconciliation did not report the READY-handoff/HOLD-packet snapshot swap");
     } else {
-      console.log("OK: post-Genesis reconciliation rejects snapshot swaps through an APPROVED handoff while the packet remains HOLD");
+      console.log("OK: post-Genesis reconciliation rejects snapshot swaps through a READY handoff while the packet remains HOLD");
     }
   } finally {
     writeFileSync(snapshotSwapPacketPath, reviewedHoldPacketBytes);
@@ -325,14 +311,14 @@ try {
     devnetRehearsalSha256: sha256(readFileSync(join(sandboxRoot, "launch", "devnet-rehearsal.template.json"))),
     mainnetHandoffSha256: sha256(readFileSync(join(sandboxRoot, "launch", "mainnet-handoff.template.json"))),
   };
-  const packetApprovedAtUtc = "2026-07-29T00:54:00.000Z";
+  const packetObservedAtUtc = "2026-07-29T00:54:00.000Z";
   const packet = {
     status: "READY",
-    releaseControls: { publicEvidenceCheckedAtUtc: "2026-07-29T00:50:00.000Z" },
+    releaseControls: { publicEvidenceObservedAtUtc: "2026-07-29T00:50:00.000Z" },
     artifactDigests,
-    approval: {
+    automatedClosure: {
       packetDigest: sha256(JSON.stringify({ packetVersion: 1, artifactDigests })),
-      approvedAtUtc: packetApprovedAtUtc,
+      observedAtUtc: packetObservedAtUtc,
     },
   };
   const releasePacketPath = join(sandboxRoot, "launch", "release-packet.template.json");
@@ -355,16 +341,16 @@ try {
   writeFileSync(
     join(sandboxRoot, "launch", "pre-publication-packet-proof.generated.json"),
     `${JSON.stringify({
-      version: 1,
+      version: 2,
       status: "SEALED",
-      scope: "Historical pre-publication READY-packet proof only; this record never authorizes signing, submission, publication, or a claim.",
+      scope: "Historical automated pre-publication READY-packet proof only; this record never authorizes signing, submission, publication, or a claim.",
       sealedAtUtc: "2026-07-29T00:55:00.000Z",
       releasePacketPath: "launch/release-packet.template.json",
       releasePacketSha256: sha256(readFileSync(releasePacketPath)),
       releaseSnapshotPath: "launch/release-snapshot.generated.json",
       releaseSnapshotSha256: sha256(readFileSync(releaseSnapshotPath)),
-      approvalPacketDigest: packet.approval.packetDigest,
-      packetApprovedAtUtc,
+      closurePacketDigest: packet.automatedClosure.packetDigest,
+      packetObservedAtUtc,
       artifactDigests,
     }, null, 2)}\n`,
     "utf8",
@@ -384,8 +370,6 @@ try {
   completeRecord.status = "COMPLETE";
   completeRecord.reconciliation = {
     checkedAtUtc: "2026-07-29T01:00:00.000Z",
-    archiveOwnerLabel: "Evidence archive owner",
-    independentReviewerLabel: "Independent evidence reviewer",
     evidenceArchiveUrl: "https://internalagency.io/proof/archive",
     publicChangelogUrl: "https://internalagency.io/proof/changelog",
     correctionStatus: "NONE",

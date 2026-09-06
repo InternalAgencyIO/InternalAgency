@@ -7,15 +7,15 @@ const policy = JSON.parse(readFileSync(new URL("../engagement/iat-economic-polic
 
 const handlerBody = (name, nextName) => source.slice(source.indexOf(`pub fn ${name}`), source.indexOf(`pub fn ${nextName}`));
 
-test("CCC has an immutable compile-time fail-closed Genesis gate and no activation instruction", () => {
-  assert.match(source, /pub const CCC_DLC_GENESIS_ENABLED: bool = false;/u);
+test("CCC has an immutable compile-time active Genesis policy and no activation instruction", () => {
+  assert.match(source, /pub const CCC_DLC_GENESIS_ENABLED: bool = true;/u);
   assert.doesNotMatch(source, /pub fn (?:activate|enable)_ccc/u);
-  assert.equal(policy.ccc.genesisStatus, "COMPILED_FAIL_CLOSED_FUTURE_DLC");
+  assert.equal(policy.ccc.genesisStatus, "COMPILED_REVIEWED_GENESIS_ACTIVE");
   assert.equal(policy.ccc.genesisActivationInstruction, null);
-  assert.equal(policy.ccc.activationRequiresNewReviewedUpgrade, true);
+  assert.equal(policy.ccc.activationRequiresNewReviewedUpgrade, false);
 });
 
-test("every CCC registry, eligibility, position, settlement, and randomness entry path rejects at Genesis", () => {
+test("every CCC registry, eligibility, position, settlement, and randomness entry path binds the compile-time policy", () => {
   for (const body of [
     handlerBody("register_agency", "set_eligibility"),
     handlerBody("commit_round", "settle_round"),

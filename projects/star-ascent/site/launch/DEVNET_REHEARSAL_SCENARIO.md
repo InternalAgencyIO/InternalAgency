@@ -11,9 +11,9 @@ read-only. It cannot initialize the V2 program, program vaults, reward
 reservations, weekly CCC assignment, or Switchboard randomness. Do not connect
 a wallet or sign from that page.
 
-This rehearsal is complete only when every phase below has direct devnet
-evidence and the independent verifier has compared the evidence against the
-exact public source.
+This rehearsal is complete only when every phase below has direct Devnet
+evidence and the automated evidence validator has compared source-bound
+receipts, state, and endpoint observations against the exact public source.
 
 ## Safety boundary
 
@@ -44,7 +44,7 @@ exact public source.
 4. Commit the exact bound source. Do not build from an uncommitted tree.
 5. Run `scripts/verify-iat-v2-sbf.sh`. Record the source commit, verifiable SBF
    hash, binary size, and tool versions.
-6. Independently compare the bound `declare_id!`, all `Anchor.toml` cluster
+6. Automatically compare the bound `declare_id!`, all `Anchor.toml` cluster
    entries, the policy, and the allocation plan.
 
 ## Phase 2 — deploy unfunded and transfer control
@@ -132,7 +132,7 @@ program source and cross-checks the JavaScript reference engine. It deliberately
 uses no validator transaction, signer, keypair, wallet, or network state and
 must never be described as signed Devnet evidence.
 
-## Phase 5 — export and independently verify
+## Phase 5 — export and verify with source-bound automated evidence
 
 Complete a copy of `launch/iat-v2-devnet-rehearsal.template.json` without adding
 secrets. It must include:
@@ -143,11 +143,11 @@ secrets. It must include:
 - deployment, upgrade-authority, initialization, funding, revocation,
   activation, positive-case, and negative-case transaction links;
 - operator device/interface versions and confirmed-action labels;
-- verifier comparison results and UTC completion times.
+- automated comparison results and UTC observation times.
 
-`FDF Guard` must independently compare the public addresses, program authority,
+The source-bound automated evidence lane must compare the public addresses, program authority,
 binary/source evidence, five destinations, mint authorities, policy behavior,
 Switchboard commit/reveal, and negative cases.
 
 Mainnet remains `HOLD` if any field is missing, any transaction failed, any
-source or binary hash differs, or any reviewer conclusion is conditional.
+source or binary hash differs, or any evidence result is conditional or unobserved.
