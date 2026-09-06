@@ -26,6 +26,8 @@ test("four varied poses and shoe families without seed hunting", () => {
     assert.equal(scene.promptSha256, sha256(scene.prompt));
     assert.equal(scene.prompt.length, scene.promptCharacters);
     assert.equal(scene.singleEditPromptSha256, sha256(scene.singleEditPrompt));
+    assert.doesNotMatch(scene.prompt, /[\u2013\u2014]/);
+    assert.doesNotMatch(scene.singleEditPrompt, /[\u2013\u2014]/);
     assert.match(scene.singleEditPrompt, /Apply these exact per-character styling rolls/);
     for (const c of scene.characters) { assert.equal(Object.keys(c.tattoos).length, 12); assert.equal(new Set(Object.values(c.tattoos).map(r => r.key)).size, 12); }
   }
