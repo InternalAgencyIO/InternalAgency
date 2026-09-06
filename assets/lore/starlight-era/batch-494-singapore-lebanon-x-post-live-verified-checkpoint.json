@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "state": "singapore-lebanon-x-publication-live-verified",
+  "createdAtUtc": "2026-09-06T07:59:41.9251307Z",
+  "batches": [493, 494],
+  "countryPair": ["Singapore", "Lebanon"],
+  "destinationAccount": "@dogramaci",
+  "accountVerifiedLive": true,
+  "postUrl": "https://x.com/dogramaci/status/2096506997134791067",
+  "photoEndpoints": [
+    "https://x.com/dogramaci/status/2096506997134791067/photo/1",
+    "https://x.com/dogramaci/status/2096506997134791067/photo/2",
+    "https://x.com/dogramaci/status/2096506997134791067/photo/3"
+  ],
+  "postedAtUtc": "2026-09-06T07:53:13.990Z",
+  "postedAtDerivation": "Decoded from X status snowflake 2096506997134791067; the visible live status receipt is authoritative.",
+  "liveVerifiedAtUtc": "2026-09-06T07:55:31.595Z",
+  "sceneOrder": [1999, 2001, 2004],
+  "assetSha256": [
+    "6B087C8CFC3761B01AD38E0A5E82EA3C9F326CDCCB76F81DCC07F4CA4B4D0CD9",
+    "A4879662AD3E134B843D39B7FAE7F4217A39E4E990A462ED1C207C492F41EF0C",
+    "534EAF4B32AA7255B94AC73EE1D46AA95A97DDA7231FFC10352288BAF6F0EFAE"
+  ],
+  "captionSha256": "3A3052324ACCDD45C4C2E15F7D88E75E69D61FF27504FEE68E654487A3024B6D",
+  "prePublicationDuplicateGate": {
+    "canonicalWorldPostsChecked": 199,
+    "candidateHashPublicationCounts": [0, 0, 0],
+    "candidateScenePublicationCounts": [0, 0, 0],
+    "exactCaptionPublicationCount": 0,
+    "countryPublicationCounts": {"Singapore": 0, "Lebanon": 0},
+    "visibleProfileSearchResultCounts": [0, 0],
+    "passed": true
+  },
+  "publication": {
+    "userReportedManualSubmission": true,
+    "assistantVisiblePostControlActivations": 0,
+    "assistantKeyboardSubmitAttempts": 0,
+    "publicTransmissionCount": 1,
+    "duplicateMediaTransmission": false,
+    "exactCaptionLive": true,
+    "orderedPhotoEndpointCount": 3,
+    "exactAltTextCount": 3,
+    "madeWithAiLabelLive": true
+  },
+  "liveEvidence": {
+    "structuredVisibleStatusReceipt": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/x-singapore-lebanon-live-status-2096506997134791067-visible-receipt.json",
+    "canonicalStatusScreenshot": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/x-singapore-lebanon-live-status-2096506997134791067-visible.jpg",
+    "homeFeedScreenshot": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/x-singapore-lebanon-home-live-card-2096506997134791067-visible.jpg",
+    "prePublicationReservation": "assets/lore/starlight-era/batch-494-singapore-lebanon-x-ready-2026-09-06-checkpoint.json"
+  },
+  "publicationEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-494-lebanon/x-publication-evidence-manifest.json",
+  "browserState": {
+    "visibleInAppBrowserOnly": true,
+    "xComposerRestoredBlank": true,
+    "xComposerPostButtonDisabled": true,
+    "xComposerCount": 1,
+    "metaLaneCount": 4,
+    "metaLaneState": "Lebanon terminal provider URLs; never resend",
+    "otherTabCount": 0
+  },
+  "canonicalContradictions": [
+    "The world X ledger retains stale top-level account @RaymondRR777 and stale pendingPost metadata. The 200-entry posts array after this closure, the visible @dogramaci status and its three exact photo endpoints are authoritative.",
+    "Immediately after the user's manual-post signal, one tab inventory and composer snapshot lagged on the already prepared draft. Before any assistant Post activation, a fresh visible profile search found the live canonical status, and the original X tab then resolved to the home feed with the same live post.",
+    "The live @dogramaci account contains unrelated posts outside the Starlight ledger. Exact live profile searches are required in addition to ledger hash checks.",
+    "No Starlight guardian exists. The unrelated active X Assistant and IAT guardians were not modified."
+  ],
+  "nextSafeAction": "Never resend scenes 1999, 2001 or 2004. Commit and remote-verify this live receipt and the canonical ledger append. Keep one blank @dogramaci composer and four terminal Lebanon Meta lanes, then resolve the next globally unposted country from current remote authority before preparing exact four-lane Meta Thinking prompts with ordered anchors 938, 936 and 937."
+}
