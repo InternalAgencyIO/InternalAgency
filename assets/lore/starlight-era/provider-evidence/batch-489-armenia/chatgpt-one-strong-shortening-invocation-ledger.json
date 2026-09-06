@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 489,
   "country": "Armenia",
-  "state": "four-single-edit-allowances-reserved-no-invocations-yet",
+  "state": "all-four-allowances-consumed-three-completed-one-moderation-blocked",
   "createdAtUtc": "2026-09-06T01:24:28.867Z",
   "promptSource": "assets/lore/starlight-era/batch-489-armenia-editorial-prompts-prepared-checkpoint.json",
   "policy": "Exactly one built-in ChatGPT image edit invocation per accepted Meta first occurrence. Never invoke a second edit for the same scene, even for aesthetics.",
@@ -13,8 +13,16 @@
       "editTargetSha256": "1C2BF7C64D30132B342FC395C75023A6769F33510152DEBC15AFE8500946E4A7",
       "singleEditPromptSha256": "F5B9F480C9F44C60706D1872196EC63EEEA448FABB01A4C22130FE39E1C1EAF2",
       "allowance": 1,
-      "invocationCount": 0,
-      "state": "reserved-not-invoked"
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "invokedAtUtc": "2026-09-06T01:26:53.358Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-c1b25a3c-9d9e-47b1-8757-67ff02ffba33.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1983-armenia-yerevan-cascade-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "6924618DCD5CCEA3F8ED6B004C28DBB6FF01E1B7CD98EFDDD65F5D5EE335C161",
+      "outputBytes": 2488337,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted: exact four-adult composition and identities retained, intact anatomy, secure shortened cocktail silhouettes, legwear and varied footwear preserved."
     },
     {
       "scene": 1984,
@@ -22,8 +30,18 @@
       "editTargetSha256": "BBFF4B0335E97C450E0DA5EA664A9BA70FC64E26188D89801F8EBBD3555A121A",
       "singleEditPromptSha256": "8162CB1F921AA653A460E264B5A47364E9FBBBF7FB3D0FDF6F3015A5E599BD6E",
       "allowance": 1,
-      "invocationCount": 0,
-      "state": "reserved-not-invoked"
+      "invocationCount": 1,
+      "state": "output-moderation-blocked-no-retry-meta-fallback",
+      "invokedAtUtc": "2026-09-06T01:28:30.527Z",
+      "failure": {
+        "stage": "output",
+        "category": "sexual",
+        "code": "moderation_blocked",
+        "requestId": "6271ee56-d413-4b52-8843-8c2e8fb345a2"
+      },
+      "outputPath": null,
+      "fallbackPath": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1984-armenia-garni-gorge-editorial-meta-occurrence-1-raw.webp",
+      "additionalInvocationsAllowed": 0
     },
     {
       "scene": 1985,
@@ -31,8 +49,16 @@
       "editTargetSha256": "2E4BC4BE48B101D10DC208383FC0A9BEBDC2B5E77B53E80F5C9C01035E4CEA25",
       "singleEditPromptSha256": "24DDBD2199D7483A21B5AF197CFBBABFE7889145195960429F12572E747E7B00",
       "allowance": 1,
-      "invocationCount": 0,
-      "state": "reserved-not-invoked"
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "invokedAtUtc": "2026-09-06T01:31:08.205Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-cef70ef8-fb40-4fbe-8458-2ee4ccbf5361.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1985-armenia-lake-sevan-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "509E98876ED853FBE3FCFCCFE178FACB47617B70846A1300E809F2F12C3D4E8D",
+      "outputBytes": 2301793,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted: exact four-adult group and identity order retained, anatomy and affectionate contact remain coherent, secure upper-thigh tailoring plus rainbow and branded footwear remain clear."
     },
     {
       "scene": 1986,
@@ -40,8 +66,25 @@
       "editTargetSha256": "2170AE966F686A724FA44B82EB14C8FE67131536D86ED3A49BCF6A4F29EDB545",
       "singleEditPromptSha256": "9FDF129BDB8EB5DBCF8280DD22550D79C116C93EFA59E2E8C3ED8656F6F42B81",
       "allowance": 1,
-      "invocationCount": 0,
-      "state": "reserved-not-invoked"
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "invokedAtUtc": "2026-09-06T01:33:55.837Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-f7c31701-5604-4e12-9203-c5dd8b1165bf.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-489-armenia/1986-armenia-dilijan-courtyard-editorial-chatgpt-one-strong-shortening-pass.png",
+      "outputSha256": "1EBDC6B64052B6813FCC4C88A99C894BB9E1FA0ABA5A358C5F9DD2DCE78FE886",
+      "outputBytes": 2192687,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted: exact four adults retained with coherent back-hug and linked-hand choreography, intact anatomy, shortened secure silhouettes, tattoos and footwear preserved."
     }
-  ]
+  ],
+  "completedAtUtc": "2026-09-06T01:33:55.837Z",
+  "totals": {
+    "allowances": 4,
+    "invocations": 4,
+    "completedOutputs": 3,
+    "moderationBlockedOutputs": 1,
+    "remainingAllowances": 0,
+    "additionalInvocationsAllowed": 0
+  }
 }
