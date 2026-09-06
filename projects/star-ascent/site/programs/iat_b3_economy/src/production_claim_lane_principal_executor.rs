@@ -2,9 +2,11 @@
 //!
 //! This module composes the already-isolated claim preflight with one exact
 //! `transfer_checked` CPI, post-CPI Token-2022 reloads, and one existing-state
-//! lane CAS. It deliberately exposes no instruction dispatcher or entrypoint.
-//! Runtime transaction rollback still requires final-binary adversarial Devnet
-//! evidence; host tests cannot attest validator rollback behavior.
+//! lane CAS. The feature-gated production dispatcher now routes this adapter:
+//! non-core lanes reach the executor, while the core lane remains a typed
+//! custody-policy HOLD before account reads. Runtime transaction rollback still
+//! requires final-binary adversarial Devnet evidence; host tests cannot attest
+//! validator rollback behavior.
 
 extern crate alloc;
 
@@ -16,6 +18,9 @@ use crate::production_claim_lane_principal::{
     prepare_runtime_production_claim_lane_principal_account_infos,
     PreparedProductionClaimLanePrincipal, ProductionClaimLanePrincipalError,
     PRODUCTION_CLAIM_LANE_PRINCIPAL_ACCOUNT_COUNT, PRODUCTION_CLAIM_LANE_PRINCIPAL_WRITE_COUNT,
+};
+use crate::production_instruction::{
+    decode_production_instruction, ProductionInstruction, ProductionInstructionError,
 };
 use crate::runtime_adapter::{
     authenticate_runtime_production_active_config, RuntimeAdapterError,
@@ -29,7 +34,7 @@ use crate::token_2022_runtime::{
     authenticate_canonical_economy_mint_account_info, CanonicalEconomyMintBinding,
     EconomyToken2022Error,
 };
-use crate::{MAINNET_SUPPLY, TOKEN_DECIMALS};
+use crate::{CORE_TEAM, ECOSYSTEM, LIQUIDITY, MAINNET_SUPPLY, TOKEN_DECIMALS, TREASURY};
 use sha2::{Digest, Sha256};
 use solana_account_info::AccountInfo;
 use solana_cpi::invoke_signed;
@@ -43,8 +48,10 @@ use spl_transfer_hook_interface::{
 };
 
 pub const PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_ACCOUNT_COUNT: usize = 12;
+pub const PRODUCTION_CLAIM_LANE_PRINCIPAL_DISPATCH_ACCOUNT_COUNT: usize =
+    PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_ACCOUNT_COUNT - 1;
 pub const PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_STATUS: &str =
-    "NON_CORE_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_ONE_STATE_CAS_NO_DISPATCHER_MAINNET_HOLD";
+    "NON_CORE_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_ONE_STATE_CAS_ROUTED_ONE_LAW_PREFIX_CORE_POLICY_HOLD_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD";
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct ProductionClaimLanePrincipalExecutorTruth {
@@ -60,6 +67,13 @@ pub struct ProductionClaimLanePrincipalExecutorTruth {
     pub retained_v2_post_cpi_reload_order_preserved: bool,
     pub exact_one_state_cas_executed: bool,
     pub non_core_only: bool,
+    pub production_dispatch_adapter_complete: bool,
+    pub program_identity_and_runtime_law_precede_decode: bool,
+    pub non_core_lane_filter_precedes_account_reads: bool,
+    pub core_team_policy_hold_precedes_account_reads: bool,
+    pub invalid_lane_rejected_before_account_reads: bool,
+    pub one_daily_law_transaction_prefix_reused: bool,
+    pub same_instruction_transaction_rollback_required_after_cpi: bool,
     pub dispatcher_exposed: bool,
     pub entrypoint_exposed: bool,
     pub handler_complete: bool,
@@ -81,9 +95,16 @@ pub const PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_TRUTH:
     retained_v2_post_cpi_reload_order_preserved: true,
     exact_one_state_cas_executed: true,
     non_core_only: true,
-    dispatcher_exposed: false,
-    entrypoint_exposed: false,
-    handler_complete: false,
+    production_dispatch_adapter_complete: true,
+    program_identity_and_runtime_law_precede_decode: true,
+    non_core_lane_filter_precedes_account_reads: true,
+    core_team_policy_hold_precedes_account_reads: true,
+    invalid_lane_rejected_before_account_reads: true,
+    one_daily_law_transaction_prefix_reused: true,
+    same_instruction_transaction_rollback_required_after_cpi: true,
+    dispatcher_exposed: true,
+    entrypoint_exposed: true,
+    handler_complete: true,
     devnet_transaction_rollback_proven: false,
     mainnet_hold: true,
 };
@@ -91,7 +112,13 @@ pub const PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_TRUTH:
 #[derive(Debug, Eq, PartialEq)]
 pub enum ProductionClaimLanePrincipalExecutorError {
     AccountCountMismatch,
+    DuplicateDailyLawAccount,
     ProgramIdentityMismatch,
+    DailyLawBindingMismatch,
+    Instruction(ProductionInstructionError),
+    WrongInstruction,
+    InvalidLane { lane: u8 },
+    CoreCustodyPolicyHold,
     SupplementalAccountBindingMismatch,
     SupplementalAccountMetaMismatch,
     LawCapabilityMismatch,
@@ -103,6 +130,12 @@ pub enum ProductionClaimLanePrincipalExecutorError {
     Mint(EconomyToken2022Error),
     Write(RuntimeWriteAdapterError),
     Program(ProgramError),
+}
+
+impl From<ProductionInstructionError> for ProductionClaimLanePrincipalExecutorError {
+    fn from(value: ProductionInstructionError) -> Self {
+        Self::Instruction(value)
+    }
 }
 
 impl From<ProductionClaimLanePrincipalError> for ProductionClaimLanePrincipalExecutorError {
@@ -222,6 +255,75 @@ pub fn execute_runtime_production_claim_lane_principal_account_infos(
         accounts,
         ClaimTransferCpi::invoke,
     )
+}
+
+/// Classify the exact opcode-9 lane before reading any operation account, then
+/// reuse the production entrypoint's one authenticated Daily-Law prefix at the
+/// executor's frozen slot 11 for supported non-core lanes only.
+///
+/// `CORE_TEAM` remains a typed owner-policy HOLD. `COMMUNITY` and unknown lane
+/// discriminants are invalid for the retained claim operation. This adapter is
+/// crate-private and is not yet connected to the production dispatcher.
+#[inline(never)]
+pub(crate) fn execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos<
+    'info,
+>(
+    program_id: &Pubkey,
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+    instruction_data: &[u8],
+    daily_law_account: &AccountInfo<'info>,
+    operation_accounts: &[AccountInfo<'info>],
+) -> Result<ProductionClaimLanePrincipalExecutionReceipt, ProductionClaimLanePrincipalExecutorError>
+{
+    if program_id.to_bytes() != binding.program_id() {
+        return Err(ProductionClaimLanePrincipalExecutorError::ProgramIdentityMismatch);
+    }
+    require_dispatch_runtime_law_binding(runtime_law, binding)?;
+    let lane = match decode_production_instruction(instruction_data)? {
+        ProductionInstruction::ClaimLanePrincipal { lane } => lane,
+        _ => return Err(ProductionClaimLanePrincipalExecutorError::WrongInstruction),
+    };
+    match lane {
+        TREASURY | ECOSYSTEM | LIQUIDITY => {}
+        CORE_TEAM => {
+            return Err(ProductionClaimLanePrincipalExecutorError::CoreCustodyPolicyHold);
+        }
+        _ => return Err(ProductionClaimLanePrincipalExecutorError::InvalidLane { lane }),
+    }
+    if operation_accounts.len() != PRODUCTION_CLAIM_LANE_PRINCIPAL_DISPATCH_ACCOUNT_COUNT {
+        return Err(ProductionClaimLanePrincipalExecutorError::AccountCountMismatch);
+    }
+    if operation_accounts
+        .iter()
+        .any(|account| account.key == daily_law_account.key)
+    {
+        return Err(ProductionClaimLanePrincipalExecutorError::DuplicateDailyLawAccount);
+    }
+    let mut executor_accounts =
+        Vec::with_capacity(PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_ACCOUNT_COUNT);
+    executor_accounts.extend(operation_accounts.iter().cloned());
+    executor_accounts.push(daily_law_account.clone());
+    execute_runtime_production_claim_lane_principal_account_infos(
+        program_id,
+        runtime_law,
+        binding,
+        instruction_data,
+        &executor_accounts,
+    )
+}
+
+fn require_dispatch_runtime_law_binding(
+    runtime_law: &RuntimeValidatedDailyLawWrite,
+    binding: &NativeEconomyBinding,
+) -> Result<(), ProductionClaimLanePrincipalExecutorError> {
+    if runtime_law.mint() != binding.mint()
+        || runtime_law.gate().law_program_id() != runtime_law.law_program_owner()
+        || runtime_law.gate().law_state_address() != runtime_law.law_account_key()
+    {
+        return Err(ProductionClaimLanePrincipalExecutorError::DailyLawBindingMismatch);
+    }
+    Ok(())
 }
 
 #[inline(never)]
@@ -1010,16 +1112,168 @@ mod tests {
         let truth = core::hint::black_box(PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_TRUTH);
         assert_eq!(
             PRODUCTION_CLAIM_LANE_PRINCIPAL_EXECUTOR_STATUS,
-            "NON_CORE_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_ONE_STATE_CAS_NO_DISPATCHER_MAINNET_HOLD"
+            "NON_CORE_HOOK_AWARE_TOKEN_2022_CPI_RELOAD_ONE_STATE_CAS_ROUTED_ONE_LAW_PREFIX_CORE_POLICY_HOLD_DEVNET_ROLLBACK_FALSE_MAINNET_HOLD"
         );
         assert!(truth.feature_gated);
         assert!(truth.exact_resolved_readonly_law_meta_required);
         assert!(truth.vault_authority_invoke_signed_used);
-        assert!(!truth.dispatcher_exposed);
-        assert!(!truth.entrypoint_exposed);
-        assert!(!truth.handler_complete);
+        assert!(truth.production_dispatch_adapter_complete);
+        assert!(truth.program_identity_and_runtime_law_precede_decode);
+        assert!(truth.non_core_lane_filter_precedes_account_reads);
+        assert!(truth.core_team_policy_hold_precedes_account_reads);
+        assert!(truth.invalid_lane_rejected_before_account_reads);
+        assert!(truth.one_daily_law_transaction_prefix_reused);
+        assert!(truth.same_instruction_transaction_rollback_required_after_cpi);
+        assert!(truth.dispatcher_exposed);
+        assert!(truth.entrypoint_exposed);
+        assert!(truth.handler_complete);
         assert!(!truth.devnet_transaction_rollback_proven);
         assert!(truth.mainnet_hold);
+    }
+
+    #[test]
+    fn dispatch_adapter_reuses_one_law_prefix_for_each_supported_non_core_lane() {
+        let binding = binding();
+        let program_id = Pubkey::new_from_array(ECONOMY_PROGRAM);
+        let runtime_law = runtime_law();
+        for lane in [TREASURY, ECOSYSTEM, LIQUIDITY] {
+            let mut fixture = Fixture::new(&binding, lane);
+            let instruction = fixture.instruction();
+            let before = fixture.all_snapshot();
+            let result = fixture.with_infos(|accounts| {
+                execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                    &program_id,
+                    &runtime_law,
+                    &binding,
+                    &instruction,
+                    &accounts[11],
+                    &accounts[..PRODUCTION_CLAIM_LANE_PRINCIPAL_DISPATCH_ACCOUNT_COUNT],
+                )
+            });
+            assert_eq!(
+                result,
+                Err(ProductionClaimLanePrincipalExecutorError::Claim(
+                    ProductionClaimLanePrincipalError::TokenReloadAmountMismatch
+                )),
+            );
+            assert_eq!(fixture.all_snapshot(), before);
+        }
+    }
+
+    #[test]
+    fn dispatch_adapter_rejects_duplicate_law_only_after_non_core_classification() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let mut fixture = Fixture::new(&binding, TREASURY);
+        let instruction = fixture.instruction();
+        fixture.with_infos(|accounts| {
+            let law_account = accounts[11].clone();
+            let mut operation_accounts =
+                accounts[..PRODUCTION_CLAIM_LANE_PRINCIPAL_DISPATCH_ACCOUNT_COUNT].to_vec();
+            operation_accounts[0] = law_account.clone();
+            assert_eq!(
+                execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                    &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                    &runtime_law,
+                    &binding,
+                    &instruction,
+                    &law_account,
+                    &operation_accounts,
+                ),
+                Err(ProductionClaimLanePrincipalExecutorError::DuplicateDailyLawAccount),
+            );
+        });
+    }
+
+    #[test]
+    fn identity_and_opaque_law_binding_precede_abi_and_account_shape() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let mut fixture = Fixture::new(&binding, TREASURY);
+        fixture.with_infos(|accounts| {
+            assert_eq!(
+                execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                    &Pubkey::new_from_array([0x99; 32]),
+                    &runtime_law,
+                    &binding,
+                    &[0xFF],
+                    &accounts[11],
+                    &[],
+                ),
+                Err(ProductionClaimLanePrincipalExecutorError::ProgramIdentityMismatch),
+            );
+
+            let wrong_binding = NativeEconomyBinding::new(ECONOMY_PROGRAM, [0x44; 32]).unwrap();
+            assert_eq!(
+                execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                    &Pubkey::new_from_array(ECONOMY_PROGRAM),
+                    &runtime_law,
+                    &wrong_binding,
+                    &[0xFF],
+                    &accounts[11],
+                    &[],
+                ),
+                Err(ProductionClaimLanePrincipalExecutorError::DailyLawBindingMismatch),
+            );
+        });
+    }
+
+    #[test]
+    fn exact_opcode_lane_policy_precedes_every_operation_account_read() {
+        let binding = binding();
+        let runtime_law = runtime_law();
+        let program_id = Pubkey::new_from_array(ECONOMY_PROGRAM);
+        let mut fixture = Fixture::new(&binding, CORE_TEAM);
+        fixture.with_infos(|accounts| {
+            assert_eq!(
+                execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                    &program_id,
+                    &runtime_law,
+                    &binding,
+                    &encoded(ProductionInstruction::ClaimLanePrincipal { lane: CORE_TEAM }),
+                    &accounts[11],
+                    &[],
+                ),
+                Err(ProductionClaimLanePrincipalExecutorError::CoreCustodyPolicyHold),
+            );
+            for lane in [0, LIQUIDITY + 1, u8::MAX] {
+                assert_eq!(
+                    execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                        &program_id,
+                        &runtime_law,
+                        &binding,
+                        &encoded(ProductionInstruction::ClaimLanePrincipal { lane }),
+                        &accounts[11],
+                        &[],
+                    ),
+                    Err(ProductionClaimLanePrincipalExecutorError::InvalidLane { lane }),
+                );
+            }
+            assert_eq!(
+                execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                    &program_id,
+                    &runtime_law,
+                    &binding,
+                    &encoded(ProductionInstruction::ClosePosition),
+                    &accounts[11],
+                    &[],
+                ),
+                Err(ProductionClaimLanePrincipalExecutorError::WrongInstruction),
+            );
+            assert_eq!(
+                execute_runtime_production_claim_lane_principal_with_daily_law_prefix_account_infos(
+                    &program_id,
+                    &runtime_law,
+                    &binding,
+                    &[0xFF],
+                    &accounts[11],
+                    &[],
+                ),
+                Err(ProductionClaimLanePrincipalExecutorError::Instruction(
+                    ProductionInstructionError::InvalidLength,
+                )),
+            );
+        });
     }
 
     #[test]

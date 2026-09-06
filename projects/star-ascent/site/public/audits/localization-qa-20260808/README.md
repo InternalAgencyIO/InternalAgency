@@ -1,9 +1,10 @@
-# Localization active-artifact evidence — 2026-08-08
+# Localization active-artifact evidence — 2026-08-28
 
 **GLOBAL FAIL CLOSED / 1 SOURCE / 49 HOLD / ZERO ACTIVATED TRANSLATIONS / MAINNET UNSCHEDULED_HOLD**
 
-This append-only evidence increment records the 48 English source strings newly
-captured from 13 public routes during the B3 website refresh. They remain in
+This append-only successor evidence increment records 87 English source strings
+captured from 15 public routes after the proof page source was recaptured following
+evidence-bound copy changes. They remain in
 `app/i18n/pending-visible-source.json`, outside the active localization catalog.
 No target-language value was generated, reviewed, activated, or published by
 this run.

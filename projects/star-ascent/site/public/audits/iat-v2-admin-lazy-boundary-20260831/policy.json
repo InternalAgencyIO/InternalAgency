@@ -1,0 +1,78 @@
+{
+  "schema": "iat-v2-admin-lazy-boundary-policy/v5",
+  "status": "DRAFT_PARTIAL_REMEDIATION_QA_HOLD",
+  "mainnetStatus": "UNSCHEDULED_HOLD",
+  "predecessor": {
+    "path": "public/audits/iat-v2-admin-lazy-boundary-20260828/policy.json",
+    "sha256": "a453b2e4bc7ebb020bf8524546a1a98dda7a9219849dd43b1f23b51fb1ef8cf5"
+  },
+  "buildManifestRequired": true,
+  "userActivationRequired": true,
+  "baseline": {
+    "priorCombinedFeatureChunkBytes": 912348
+  },
+  "boundaries": {
+    "inspectionEntryStaticClosureExcludes": [
+      "FEATURE_REHEARSAL",
+      "PROGRAM_UPGRADE",
+      "PROGRAM_UPGRADE_ATTENDED_ACTIONS",
+      "ATTENDED_CEREMONY_BINDING",
+      "TREZOR_CONNECT",
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellStaticClosureExcludes": [
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "featureShellDynamicImports": [
+      "SWITCHBOARD_ON_DEMAND"
+    ],
+    "programUpgradeShellDynamicImports": [
+      "PROGRAM_UPGRADE_ATTENDED_ACTIONS"
+    ],
+    "programUpgradeShellStaticClosureExcludes": [
+      "PROGRAM_EXTENSION_ATTENDED"
+    ],
+    "programUpgradeShellStaticClosureIncludes": [
+      "ATTENDED_CEREMONY_BINDING"
+    ],
+    "programUpgradeAttendedStaticClosureIncludes": [
+      "ATTENDED_EVIDENCE",
+      "ATTENDED_PROMPT_COORDINATOR",
+      "ATTENDED_PROGRAM_SIGNED_PENDING",
+      "ATTENDED_PROGRAM_BROADCAST_ONCE",
+      "PROGRAM_EXTENSION_ATTENDED"
+    ]
+  },
+  "byteBudgets": {
+    "initialEntryMaximum": 1100000,
+    "featureShellMaximum": 150000,
+    "switchboardOnDemandMaximum": 1000000,
+    "trezorConnectMaximum": 180000,
+    "programUpgradeMaximum": 15500,
+    "programUpgradeAttendedMaximum": 50000,
+    "programUpgradeIncrementalClosureMaximum": 88000
+  },
+  "assurance": {
+    "independentHardwareReviewComplete": false,
+    "signingApproved": false,
+    "broadcastApproved": false,
+    "deploymentApproved": false,
+    "mainnetApproved": false
+  },
+  "limitations": [
+    "The generated Vite manifest and browser checks prove local build and request boundaries only.",
+    "The attended-actions payload is loaded only after an explicit operator click, but that source boundary is not independent hardware or runtime evidence.",
+    "The aggregate Program Upgrade budget counts the read-only shell, distinct attended-source binding, attended-actions entry, source-bound receipt evidence, permanent prompt coordination, durable signed-pending and permanent broadcast-attempt controls, and all static dependencies not already present in the inspection entry closure.",
+    "The measured successor ceilings admit the 15,143-byte upgrade shell, 42,157-byte attended entry, and 81,050-byte aggregate lazy closure; only those three ceilings changed from the immutable 20260828 policy.",
+    "The live blockhash window is read-only and advisory; the locked pre-reservation finalized and processed validity checks remain authoritative.",
+    "The signing-window amendment raises only the attended-entry ceiling from 42,500 to 43,000 bytes for pre-prompt admission and truthful terminal labels; the 81,500-byte aggregate ceiling is unchanged. Local source builds are not public CI or hardware evidence.",
+    "The prompt-recovery amendment raises the attended-entry ceiling from 43,000 to 45,000 bytes and the aggregate ceiling from 81,500 to 82,500 bytes for explicit missing-record classification; the measured source build is 44,794 and 82,206 bytes respectively. Local source builds are not public CI or hardware evidence.",
+    "The binding-successor compatibility amendment raises only the aggregate ceiling from 82,500 to 83,000 bytes after exact-B public CI measured 82,567 bytes; the 45,000-byte attended-entry ceiling is unchanged. This bounded source policy does not authorize any attended or chain action.",
+    "The signing-headroom amendment raises the attended-entry ceiling from 45,000 to 46,000 bytes and the aggregate ceiling from 83,000 to 84,000 bytes after the local source build measured 45,498 and 82,910 bytes respectively. This source-only budget evidence is not public CI or hardware evidence and authorizes no device, RPC, signing, broadcast, deployment, Devnet, or Mainnet action.",
+    "The user-approved recovery-retention amendment raises only the attended-entry ceiling from 46,000 to 50,000 bytes and the aggregate ceiling from 84,000 to 88,000 bytes after the local repair build measured 48,914 and 86,735 bytes respectively. The 15,500-byte shell ceiling, lazy-load boundaries, immutable predecessor, assurance flags, and attended authorization gates are unchanged. This source-only size amendment is not public CI, runtime, hardware, signature, broadcast, deployment, or Mainnet clearance.",
+    "The distinct ceremony source preserves the consumed old latch and does not change the immutable migration artifact provenance.",
+    "The durable signed-pending and permanent broadcast-attempt modules are source controls only and do not prove a device prompt, signature, send, confirmation, or finalized receipt.",
+    "The Switchboard and Trezor packages remain present as lazy operator surfaces and require independent review before use.",
+    "No hardware, wallet, RPC, simulation, signing, broadcast, deployment, Devnet, or Mainnet action is authorized by this policy."
+  ]
+}

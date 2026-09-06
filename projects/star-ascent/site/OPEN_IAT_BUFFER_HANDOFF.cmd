@@ -1,10 +1,11 @@
 @echo off
-title IAT BUFFER HANDOFF - INCLUDED IN REPAIR
+title IAT BUFFER HANDOFF - LEGACY LAUNCHER DISABLED
 echo.
-echo HOLD: DO NOT RUN A STANDALONE HANDOFF.
+echo HOLD: THIS LEGACY CLICKABLE HANDOFF LAUNCHER IS DISABLED.
 echo.
-echo OPEN_IAT_DEVNET_FRESH_REBUILD.cmd verifies the exact program hash first
-echo and performs the authority handoff only after that verification passes.
-echo.
-echo Nothing was signed or broadcast.
+echo This launcher executes no shell, accesses no key, and sends no transaction.
+echo Rebuild and authority handoff are separate attended commands in:
+echo launch\IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md
+echo Return to Codex before using either command.
 pause
+exit /b 1

@@ -154,15 +154,19 @@ test("serialized final-slot contention yields one slot 1,000 winner and one acti
   db.close();
 });
 
-test("callback source keeps network deadlines and activation-first D1 ordering without token retention", () => {
+test("callback source keeps network deadlines but removes the legacy D1 writer without token retention", () => {
   const callback = readFileSync(new URL("../app/api/x/callback/route.ts", import.meta.url), "utf8");
+  const handler = readFileSync(new URL("../app/api/x/callback/retained-v2-callback-handler.mjs", import.meta.url), "utf8");
+  const boundary = readFileSync(new URL("../app/api/x/callback/retained-v2-runtime-boundary.mjs", import.meta.url), "utf8");
   const verifyWallet = readFileSync(new URL("../app/api/nodes/verify-wallet/route.ts", import.meta.url), "utf8");
-  const batch = callback.slice(callback.indexOf("env.DB.batch"), callback.indexOf("if (activation.meta.changes"));
-  assert.ok(batch.indexOf("NODE_ACTIVATION_SQL") < batch.indexOf("GENESIS_SLOT_RESERVATION_SQL"));
-  assert.equal((callback.match(/AbortSignal\.timeout\(5_000\)/gu) ?? []).length, 2);
-  assert.match(callback, /oauth-exchange-timeout/);
-  assert.match(callback, /oauth-profile-timeout/);
-  assert.doesNotMatch(callback, /console\.|access_token\s*=|INSERT[^\n]+access_token|UPDATE[^\n]+access_token/u);
+  assert.doesNotMatch(`${callback}\n${handler}`, /NODE_ACTIVATION_SQL|GENESIS_SLOT_RESERVATION_SQL|\.DB\.batch/u);
+  assert.match(callback, /createRetainedV2CallbackHandler/);
+  assert.equal((handler.match(/AbortSignal\.timeout\(5_000\)/gu) ?? []).length, 2);
+  assert.match(handler, /oauth-exchange-timeout/);
+  assert.match(handler, /oauth-profile-timeout/);
+  assert.match(handler, /runtimeBoundary\.runAuthorizedMutation/);
+  assert.match(boundary, /RUNTIME_EVIDENCE_REPLAYED/);
+  assert.doesNotMatch(handler, /console\.|access_token\s*=|INSERT[^\n]+access_token|UPDATE[^\n]+access_token/u);
   assert.match(verifyWallet, /LEFT JOIN genesis_slots/);
   assert.match(verifyWallet, /COALESCE\(genesis_slots\.slot_number, node_bindings\.genesis_slot\)/);
 });

@@ -33,19 +33,19 @@ try {
 
   const handoffPath = join(sandboxRoot, "launch", "mainnet-handoff.template.json");
   const handoff = JSON.parse(readFileSync(handoffPath, "utf8"));
-  handoff.status = "APPROVED";
-  handoff.approval.manifestDigest = "A".repeat(64);
+  handoff.status = "READY";
+  handoff.automatedClosure.manifestDigest = "A".repeat(64);
   writeFileSync(handoffPath, `${JSON.stringify(handoff, null, 2)}\n`, "utf8");
   assertRejected(
     "validate-mainnet-handoff.mjs",
-    "APPROVED requires a lowercase SHA-256 approval.manifestDigest",
+    "READY requires a lowercase SHA-256 automatedClosure.manifestDigest",
     "an uppercase mainnet-handoff digest",
   );
 
   const packetPath = join(sandboxRoot, "launch", "release-packet.template.json");
   const packet = JSON.parse(readFileSync(packetPath, "utf8"));
   packet.status = "READY";
-  packet.approval.packetDigest = "A".repeat(64);
+  packet.automatedClosure.packetDigest = "A".repeat(64);
   writeFileSync(packetPath, `${JSON.stringify(packet, null, 2)}\n`, "utf8");
   assertRejected(
     "validate-release-packet.mjs",
@@ -55,18 +55,18 @@ try {
 
   const canonicalHandoff = JSON.parse(readFileSync(handoffPath, "utf8"));
   const sha256File = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
-  canonicalHandoff.status = "APPROVED";
-  canonicalHandoff.approval.manifestSha256 = sha256File(join(sandboxRoot, "launch", "genesis-manifest.template.json"));
-  canonicalHandoff.approval.signingChecklistSha256 = sha256File(join(sandboxRoot, "launch", "genesis-signing-checklist.template.json"));
-  canonicalHandoff.approval.devnetRehearsalSha256 = sha256File(join(sandboxRoot, "launch", "devnet-rehearsal.template.json"));
-  canonicalHandoff.approval.manifestDigest = canonicalHandoff.approval.manifestSha256;
-  canonicalHandoff.approval.destinationDigest = createHash("sha256").update(JSON.stringify({
+  canonicalHandoff.status = "READY";
+  canonicalHandoff.automatedClosure.manifestSha256 = sha256File(join(sandboxRoot, "launch", "genesis-manifest.template.json"));
+  canonicalHandoff.automatedClosure.signingChecklistSha256 = sha256File(join(sandboxRoot, "launch", "genesis-signing-checklist.template.json"));
+  canonicalHandoff.automatedClosure.devnetRehearsalSha256 = sha256File(join(sandboxRoot, "launch", "devnet-rehearsal.template.json"));
+  canonicalHandoff.automatedClosure.manifestDigest = canonicalHandoff.automatedClosure.manifestSha256;
+  canonicalHandoff.automatedClosure.destinationDigest = createHash("sha256").update(JSON.stringify({
     handoffVersion: canonicalHandoff.handoffVersion,
     network: canonicalHandoff.network,
     artifactDigests: {
-      manifestSha256: canonicalHandoff.approval.manifestSha256,
-      signingChecklistSha256: canonicalHandoff.approval.signingChecklistSha256,
-      devnetRehearsalSha256: canonicalHandoff.approval.devnetRehearsalSha256,
+      manifestSha256: canonicalHandoff.automatedClosure.manifestSha256,
+      signingChecklistSha256: canonicalHandoff.automatedClosure.signingChecklistSha256,
+      devnetRehearsalSha256: canonicalHandoff.automatedClosure.devnetRehearsalSha256,
     },
   })).digest("hex").toUpperCase();
   writeFileSync(handoffPath, `${JSON.stringify(canonicalHandoff, null, 2)}\n`, "utf8");
@@ -76,7 +76,7 @@ try {
   writeFileSync(packetPath, `${JSON.stringify(readyPacket, null, 2)}\n`, "utf8");
   assertRejected(
     "validate-release-packet.mjs",
-    "READY requires a lowercase SHA-256 handoff.approval.destinationDigest",
+    "READY requires a lowercase SHA-256 handoff.automatedClosure.destinationDigest",
     "an uppercase handoff destination digest during READY packet review",
   );
 } finally {

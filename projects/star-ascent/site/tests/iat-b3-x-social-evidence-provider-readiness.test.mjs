@@ -69,21 +69,21 @@ function completeFixture() {
   const subjectBindingSha256 = xSocialEvidenceSubjectBindingSha256(manifest);
   const evidence = (sectionId) => {
     const descriptor = {
-      evidenceKind: `${sectionId}_INDEPENDENT_EVIDENCE`,
+      evidenceKind: `${sectionId}_AUTOMATED_DIRECT_EVIDENCE`,
       artifactSha256:
         TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceArtifactSha256BySection[sectionId],
       subjectBindingSha256,
       policySha256: xSocialEvidencePolicySha256(manifest, sectionId),
-      independentObserverId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.independentObserverId,
-      observerFailureDomainId:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.observerFailureDomainId,
-      observerIdentitySha256:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.observerIdentitySha256,
-      independentReviewerId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.independentReviewerId,
-      reviewerFailureDomainId:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.reviewerFailureDomainId,
-      reviewerIdentitySha256:
-        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.reviewerIdentitySha256,
+      automatedEvidenceSourceAId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.automatedEvidenceSourceAId,
+      evidenceSourceAFailureDomainId:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceAFailureDomainId,
+      evidenceSourceAIdentitySha256:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceAIdentitySha256,
+      automatedEvidenceSourceBId: TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.automatedEvidenceSourceBId,
+      evidenceSourceBFailureDomainId:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceBFailureDomainId,
+      evidenceSourceBIdentitySha256:
+        TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.evidenceSourceBIdentitySha256,
       capturedAtUnixSeconds:
         TEST_FIXTURE_X_SOCIAL_EVIDENCE_VALUES.capturedAtUnixSeconds,
       validThroughUnixSeconds:
@@ -182,12 +182,12 @@ test("the JSON Schema freezes the exact structural-only surface and immutable fa
     "artifactSha256",
     "subjectBindingSha256",
     "policySha256",
-    "independentObserverId",
-    "observerFailureDomainId",
-    "observerIdentitySha256",
-    "independentReviewerId",
-    "reviewerFailureDomainId",
-    "reviewerIdentitySha256",
+    "automatedEvidenceSourceAId",
+    "evidenceSourceAFailureDomainId",
+    "evidenceSourceAIdentitySha256",
+    "automatedEvidenceSourceBId",
+    "evidenceSourceBFailureDomainId",
+    "evidenceSourceBIdentitySha256",
     "capturedAtUnixSeconds",
     "validThroughUnixSeconds",
     "maximumAgeSeconds",
@@ -326,13 +326,13 @@ test("evidence descriptors are subject/policy bound, bounded, half-open, unique,
       value.controlRequirements[1].evidence.artifactSha256;
   }, /artifacts must be unique/u);
   expectIncomplete((value) => {
-    value.controlRequirements[3].evidence.independentReviewerId =
-      value.controlRequirements[3].evidence.independentObserverId;
-  }, /observer and reviewer identities must be distinct/u);
+    value.controlRequirements[3].evidence.automatedEvidenceSourceBId =
+      value.controlRequirements[3].evidence.automatedEvidenceSourceAId;
+  }, /automated evidence source A and B identities must be distinct/u);
   expectIncomplete((value) => {
-    value.controlRequirements[4].evidence.independentObserverId =
+    value.controlRequirements[4].evidence.automatedEvidenceSourceAId =
       value.xProviderBinding.applicationId;
-  }, /must be independent/u);
+  }, /must be distinct/u);
   expectIncomplete((value) => {
     value.controlRequirements[5].evidence.environment = "PRODUCTION";
   }, /must match manifest.profile/u);
@@ -350,10 +350,10 @@ test("evidence descriptors are subject/policy bound, bounded, half-open, unique,
   }, /exceeds the externally pinned maximum age/u);
   expectIncomplete((value) => {
     const evidence = value.controlRequirements[9].evidence;
-    evidence.observerFailureDomainId =
-      `${value.failureDomainSeparation.externalCheckpointFailureDomainId}-observer`;
+    evidence.evidenceSourceAFailureDomainId =
+      `${value.failureDomainSeparation.externalCheckpointFailureDomainId}-evidence-source`;
     evidence.evidenceDescriptorSha256 = xSocialEvidenceDescriptorSha256(evidence);
-  }, /exact independently reviewed failure domains|identity digests must bind/u);
+  }, /exact bound to automated direct evidence failure domains|identity digests must bind/u);
   const manifest = completeFixture();
   assert.match(
     fixtureResult(manifest, { evaluationUnixSeconds: "1999999999" }).violations.join("\n"),

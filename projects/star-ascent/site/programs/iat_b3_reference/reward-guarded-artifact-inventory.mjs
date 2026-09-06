@@ -201,7 +201,7 @@ export function auditRewardGuardedArtifactFiles({
     rollbackProtectionVerified: false,
     materializedProjectionStateVerified: false,
     externalSideEffectsAuthorized: false,
-    independentReviewAccepted: false,
+    sourceBoundAutomatedDirectEvidenceVerified: false,
     activationReady: false,
     mainnetStatus: REWARD_GUARDED_ARTIFACT_INVENTORY_MAINNET_STATUS,
   });
