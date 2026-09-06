@@ -931,15 +931,36 @@ test("program upgrade serializes read-only inspection with attended sign and bro
     upgradeConsoleSource,
     /loadBufferSnapshot\(minContextSlot = 0\)[\s\S]*getMultipleAccountsInfoAndContext\([\s\S]*minContextSlot[\s\S]*finalizedContextSlot/u,
   );
-  const broadcastSource = upgradeAttendedSource.slice(
-    upgradeAttendedSource.indexOf("async function broadcastSigned"),
-  );
+  const broadcastStart = upgradeAttendedSource.indexOf("async function broadcastSigned");
+  const broadcastEnd = upgradeAttendedSource.indexOf("async function reconcileFinalizedAttempt", broadcastStart);
+  assert.ok(broadcastStart >= 0 && broadcastEnd > broadcastStart);
+  const broadcastSource = upgradeAttendedSource.slice(broadcastStart, broadcastEnd);
   assert.match(
     broadcastSource,
     /loadBufferSnapshot\(pending\.finalizedContextSlot\)[\s\S]*upgradeActionBinding\(current\)[\s\S]*buildAttendedProgramTransaction\([\s\S]*assertExactTransactionMessage\([\s\S]*assertSignedLegacyTransaction\([\s\S]*observeSignedBlockhashWindow\([\s\S]*sendRawTransaction/u,
   );
   assert.match(
     broadcastSource,
-    /preSendEntered && storageError === null[\s\S]*withNoAttendedProgramBroadcastAttempts\(\{[\s\S]*"PRE_SEND_FAILURE"[\s\S]*setPending\(null\)[\s\S]*DISCARDED BEFORE BROADCAST/u,
+    /beforePersist: async \(candidateAttempt\) => withRetainedAttendedProgramPreSend\(\{\s*storage: localStorage,\s*record: signedPendingRecord\(pending\),\s*callback: async \(\) => \{/u,
+  );
+  const failureCallbackStart = broadcastSource.indexOf("onPreReservationFailure:");
+  const failureCallbackEnd = broadcastSource.indexOf("afterPersist:", failureCallbackStart);
+  assert.ok(failureCallbackStart >= 0 && failureCallbackEnd > failureCallbackStart);
+  const failureCallback = broadcastSource.slice(failureCallbackStart, failureCallbackEnd);
+  assert.match(
+    failureCallback,
+    /onPreReservationFailure: async \(\) => \{\s*terminalizeAttendedProgramSignedPending\(\s*localStorage,\s*signedPendingBinding\(pending\.evidenceBinding, pending\.action\),\s*"PRE_SEND_FAILURE",\s*\);/u,
+  );
+  const failureBranchStart = broadcastSource.indexOf("} else if (preSendEntered && storageError === null) {");
+  const failureBranchEnd = broadcastSource.indexOf("} else {", failureBranchStart);
+  assert.ok(failureBranchStart >= 0 && failureBranchEnd > failureBranchStart);
+  const failureBranch = broadcastSource.slice(failureBranchStart, failureBranchEnd);
+  assert.match(
+    failureBranch,
+    /setBroadcastBlocked\(true\);\s*setBlockedPendingBinding\(recoveryBindingKey\);\s*setStatus\("HOLD \/\/ PRE-SEND STOPPED; SIGNED EVIDENCE RETAINED; DO NOT RETRY"\);/u,
+  );
+  assert.doesNotMatch(
+    `${failureCallback}\n${failureBranch}`,
+    /setPending\s*\(|removeAttendedProgramSignedPending\s*\(|removeItem\s*\(|sendRawTransaction\s*\(|withNoAttendedProgramBroadcastAttempts\s*\(|DISCARDED BEFORE BROADCAST/u,
   );
 });
