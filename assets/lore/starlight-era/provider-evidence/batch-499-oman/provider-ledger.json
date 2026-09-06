@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 499,
   "country": "Oman",
-  "state": "four-confirmed-meta-occurrences-in-progress-do-not-resend",
+  "state": "four-primary-meta-results-downloaded-three-usable-one-hard-identity-failure",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -27,9 +27,26 @@
       "confirmed": true,
       "stopVisible": true,
       "occurrence": 1,
-      "status": "confirmed-in-progress",
+      "status": "terminal-primary-downloaded-usable-awaiting-single-pass",
       "metaRetryCount": 0,
-      "singleChatgptTailoringInvocationsCompleted": 0
+      "singleChatgptTailoringInvocationsCompleted": 0,
+      "terminalObserved": true,
+      "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-meta-terminal-dom.txt",
+      "raw": {
+        "scene": 2023,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-meta-primary-original.jpg",
+        "bytes": 306506,
+        "sha256": "C42A23F549D954B9D95C35C1BADD2A5F7217765F795A9617DF2DF72C6BDBF2F8",
+        "width": 1152,
+        "height": 2048,
+        "mediaType": "image/jpeg"
+      },
+      "download": {
+        "scene": 2023,
+        "clickedAtUtc": "2026-09-06T14:57:21.271Z",
+        "activationCount": 1
+      },
+      "currentTabAbsent": true
     },
     {
       "scene": 2024,
@@ -42,9 +59,26 @@
       "confirmed": true,
       "stopVisible": true,
       "occurrence": 1,
-      "status": "confirmed-in-progress",
+      "status": "terminal-hard-identity-failure",
       "metaRetryCount": 0,
-      "singleChatgptTailoringInvocationsCompleted": 0
+      "singleChatgptTailoringInvocationsCompleted": 0,
+      "terminalObserved": true,
+      "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-meta-terminal-dom.txt",
+      "raw": {
+        "scene": 2024,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-meta-primary-original.jpg",
+        "bytes": 245955,
+        "sha256": "D21DF83F0D084DDE5BE4F7D84671AB9530CF82861F05ACFCB5AAB13B15C17B2C",
+        "width": 1152,
+        "height": 2048,
+        "mediaType": "image/jpeg"
+      },
+      "download": {
+        "scene": 2024,
+        "clickedAtUtc": "2026-09-06T14:56:28.920Z",
+        "activationCount": 1
+      },
+      "currentTabAbsent": true
     },
     {
       "scene": 2025,
@@ -57,9 +91,26 @@
       "confirmed": true,
       "stopVisible": true,
       "occurrence": 1,
-      "status": "confirmed-in-progress",
+      "status": "terminal-primary-downloaded-usable-awaiting-single-pass",
       "metaRetryCount": 0,
-      "singleChatgptTailoringInvocationsCompleted": 0
+      "singleChatgptTailoringInvocationsCompleted": 0,
+      "terminalObserved": true,
+      "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-meta-terminal-dom.txt",
+      "raw": {
+        "scene": 2025,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-meta-primary-original.jpg",
+        "bytes": 314646,
+        "sha256": "5EF07AC6D65D966E5A45092CE433368EF86A4FA8A78D691C76A98BF30A69F81D",
+        "width": 1152,
+        "height": 2048,
+        "mediaType": "image/jpeg"
+      },
+      "download": {
+        "scene": 2025,
+        "clickedAtUtc": "2026-09-06T14:57:21.555Z",
+        "activationCount": 1
+      },
+      "currentTabAbsent": true
     },
     {
       "scene": 2026,
@@ -72,10 +123,43 @@
       "confirmed": true,
       "stopVisible": true,
       "occurrence": 1,
-      "status": "confirmed-in-progress",
+      "status": "terminal-primary-downloaded-usable-awaiting-single-pass",
       "metaRetryCount": 0,
-      "singleChatgptTailoringInvocationsCompleted": 0
+      "singleChatgptTailoringInvocationsCompleted": 0,
+      "terminalObserved": true,
+      "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-meta-terminal-dom.txt",
+      "raw": {
+        "scene": 2026,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-meta-primary-original.jpg",
+        "bytes": 212561,
+        "sha256": "BCC1D43D123078C5CF01ED29A75A52D50CFB5597AAD8600B9881080CC361F549",
+        "width": 1152,
+        "height": 2048,
+        "mediaType": "image/jpeg"
+      },
+      "download": {
+        "scene": 2026,
+        "clickedAtUtc": "2026-09-06T14:57:24.011Z",
+        "activationCount": 1
+      },
+      "currentTabAbsent": true
     }
   ],
-  "nextSafeAction": "Inspect only these existing four occurrence tabs. Archive terminal evidence and visible Download originals. Perform hard QA, reserve exactly one ChatGPT pass per usable occurrence, preserve all results. Never reopen or resend a confirmed terminal scene."
+  "nextSafeAction": "Use exactly one saved tailoring invocation on each of 2023,2025,2026. Stage and verify the first hard-identity retry for 2024 in the fresh lane. Keep Oman publication on hold and obtain missing secondary bytes without reopening a terminal scene.",
+  "updatedAtUtc": "2026-09-06 15:55:14 UTC",
+  "primaryQa": "assets/lore/starlight-era/provider-evidence/batch-499-oman/primary-hard-qa.json",
+  "archiveGap": [
+    {
+      "scene": 2023,
+      "observedInlineImages": 3,
+      "previewScreenshotsPreserved": 1,
+      "secondaryRawDownloads": 0
+    },
+    {
+      "scene": 2026,
+      "observedInlineImages": 4,
+      "previewScreenshotsPreserved": 1,
+      "secondaryRawDownloads": 0
+    }
+  ]
 }
