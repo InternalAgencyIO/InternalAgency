@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "batch": 496,
+  "country": "Central African Republic",
+  "sceneIds": [2011, 2012, 2013, 2014],
+  "state": "four-meta-scenes-dispatched-exactly-once-three-image-results-one-visible-refusal",
+  "createdAtUtc": "2026-09-06T09:51:32.8699115Z",
+  "authority": {
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-496-central-african-republic-four-meta-composers-staged-checkpoint.json",
+    "stagingCommit": "e2da3c17e700408e5f2279e038e1be8809903b79",
+    "localHeadBeforeDispatch": "e2da3c17e700408e5f2279e038e1be8809903b79",
+    "originHeadBeforeDispatch": "e2da3c17e700408e5f2279e038e1be8809903b79",
+    "directPrHeadBeforeDispatch": "e2da3c17e700408e5f2279e038e1be8809903b79",
+    "githubPrHeadBeforeDispatch": "e2da3c17e700408e5f2279e038e1be8809903b79",
+    "allHeadsEqualBeforeDispatch": true,
+    "lfsPushDryRunEmptyBeforeDispatch": true,
+    "scopedLfsFsckBeforeDispatch": "OK"
+  },
+  "actionTimeAudit": {
+    "visibleTabCount": 5,
+    "metaTabCount": 4,
+    "xComposerCount": 1,
+    "otherTabCount": 0,
+    "account": "leesha007",
+    "accountVerifiedEveryLane": true,
+    "mode": "Thinking",
+    "modeVerifiedEveryLane": true,
+    "exactPromptVerifiedEveryLane": true,
+    "orderedAnchorIds": [938, 936, 937],
+    "orderedAnchorsVerifiedEveryLane": true,
+    "sendButtonCountEveryLane": 1,
+    "sendEnabledEveryLane": true,
+    "stopButtonCountEveryLane": 0,
+    "xSignedInProfile": "@dogramaci",
+    "xComposerBlank": true,
+    "xMediaCount": 0,
+    "xPostEnabled": false
+  },
+  "dispatches": [
+    {
+      "scene": 2011,
+      "tabId": "28",
+      "promptSha256": "D1DD4E4D9EAC7718423EF7C605997E6D056B6C6693B186C2F572A1A1F54FBBC5",
+      "sentAtUtc": "2026-09-06T09:48:09.633Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/ce7fe647-e2f5-4e68-b529-5a669acf83ce",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtEvidenceCapture": "terminal-image-download-visible"
+    },
+    {
+      "scene": 2012,
+      "tabId": "29",
+      "promptSha256": "B114578492000C9BEAAB1EC59B9F5A67430A36B69CD515B2B105A131E792353C",
+      "sentAtUtc": "2026-09-06T09:48:12.720Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/010df7e2-0170-4456-a997-bfd4053ec4ce",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtEvidenceCapture": "terminal-visible-provider-refusal-no-image"
+    },
+    {
+      "scene": 2013,
+      "tabId": "30",
+      "promptSha256": "45C1BF6EE07179532FB5255FB1739B9205736A815B2EDFD47A031EB7DF89BA74",
+      "sentAtUtc": "2026-09-06T09:48:15.800Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/0d7ec59a-6c55-486d-b4c4-d1b93217cc72",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtEvidenceCapture": "terminal-image-download-visible"
+    },
+    {
+      "scene": 2014,
+      "tabId": "31",
+      "promptSha256": "86FEF24719D309839813EDEF1A452297D00DFD425EF663D0D4850E655DBD9FA2",
+      "sentAtUtc": "2026-09-06T09:48:18.871Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/5e91e232-cd47-49cc-8ac6-199b59be05a1",
+      "stateImmediatelyAfterActivation": "inflight-stop-visible",
+      "stateAtEvidenceCapture": "terminal-image-download-visible"
+    }
+  ],
+  "firstOccurrenceSummary": {
+    "sendActivations": 4,
+    "clickReturned": 4,
+    "canonicalProviderUrls": 4,
+    "terminalImageResults": 3,
+    "terminalProviderRefusals": 1,
+    "uncertainActivations": 0,
+    "providerRetries": 0,
+    "aestheticRetries": 0,
+    "chatgptEditInvocations": 0
+  },
+  "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/dispatch-evidence-manifest.json",
+  "duplicateGate": "All four first-occurrence provider URLs are confirmed and terminal. Never click Send again on scenes 2011, 2012, 2013 or 2014. Any bounded hard-failure retry for scene 2012 must be a separately staged new prompt occurrence with a new URL.",
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and every later remote-verified checkpoint. Batch 496 Central African Republic is current, and no Cuba, Tanzania or terminal Liberia scene was reopened or dispatched.",
+  "nextSafeAction": "Commit and remote-verify this dispatch receipt and visible evidence. Preserve raw bytes for scenes 2011, 2013 and 2014 through their supported visible Download controls, perform hard QA only, and invoke the sealed ChatGPT edit exactly once for each technically valid Meta occurrence. Separately prepare at most two bounded hard-failure retries for scene 2012 without resending its terminal first occurrence."
+}

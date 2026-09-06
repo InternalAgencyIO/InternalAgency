@@ -11808,7 +11808,7 @@
   },
   "latestBatch496CentralAfricanRepublicPreparation": {
     "schemaVersion": 1,
-    "status": "central-african-republic-four-visible-meta-composers-staged-no-send",
+    "status": "central-african-republic-four-first-occurrences-terminal-three-image-results-one-visible-refusal",
     "batch": 496,
     "country": "Central African Republic",
     "sceneIds": [2011, 2012, 2013, 2014],
@@ -11830,19 +11830,31 @@
     "maximumMetaRetriesPerScene": 2,
     "aestheticRetries": 0,
     "chatgptStrongShorteningPassesPerTechnicallyValidMetaOccurrence": 1,
-    "browserDispatchCount": 0,
+    "browserDispatchCount": 4,
     "editInvocationCount": 0,
     "brief": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-496-central-african-republic-fixed-rolls.json",
     "checkpoint": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-prompts-prepared-checkpoint.json",
     "preflight": "assets/lore/starlight-era/batch-496-central-african-republic-meta-dispatch-preflight-checkpoint.json",
     "staging": "assets/lore/starlight-era/batch-496-central-african-republic-four-meta-composers-staged-checkpoint.json",
+    "dispatch": "assets/lore/starlight-era/batch-496-central-african-republic-four-meta-scenes-dispatched-checkpoint.json",
+    "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/dispatch-evidence-manifest.json",
     "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/staging-evidence-manifest.json",
     "stagedMetaTabIds": ["28", "29", "30", "31"],
     "stagingEvidenceInventorySha256": "1E6BEEB48330B248A075A8DF4AD2F5AA954BC9B7A2E8D8454DF16B0F2F8F773A",
     "stagingEvidenceFileCount": 5,
     "stagingEvidenceTotalBytes": 607656,
+    "firstOccurrenceProviderUrls": [
+      "https://www.meta.ai/prompt/ce7fe647-e2f5-4e68-b529-5a669acf83ce",
+      "https://www.meta.ai/prompt/010df7e2-0170-4456-a997-bfd4053ec4ce",
+      "https://www.meta.ai/prompt/0d7ec59a-6c55-486d-b4c4-d1b93217cc72",
+      "https://www.meta.ai/prompt/5e91e232-cd47-49cc-8ac6-199b59be05a1"
+    ],
+    "terminalImageScenes": [2011, 2013, 2014],
+    "terminalVisibleProviderRefusalScenes": [2012],
+    "firstOccurrenceProviderRetries": 0,
+    "uncertainSendActivations": 0,
     "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and later remote-verified checkpoints. No Starlight guardian exists, and unrelated guardians remain untouched.",
-    "nextSafeAction": "Commit and remote-verify the exact no-send staging record. Reinspect all four unchanged Meta composers without reload, verify leesha007, Thinking, exact prompt hashes, exact anchor order, one enabled Send and no Stop, then activate each Send exactly once under standing authorization."
+    "nextSafeAction": "Commit and remote-verify the exact dispatch record. Preserve raw bytes for scenes 2011, 2013 and 2014 through supported visible Download controls, perform hard QA only, invoke the sealed ChatGPT edit exactly once for every technically valid Meta occurrence, and separately stage at most two bounded hard-failure retries for scene 2012."
   }
 }
