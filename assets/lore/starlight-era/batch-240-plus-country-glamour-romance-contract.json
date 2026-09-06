@@ -30,14 +30,14 @@
     "onePass": "Exactly one combined tailoring edit, never another call on an occurrence already edited."
   },
   "currentMetaDispatch20260906": {
-    "path": "assets/lore/starlight-era/batch-496-central-african-republic-four-meta-scenes-dispatched-checkpoint.json",
+    "path": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-dispatched-checkpoint.json",
     "qa": "assets/lore/starlight-era/batch-496-central-african-republic-three-valid-first-occurrences-qa-and-retry-1-prepared-checkpoint.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/provider-ledger.json",
     "chatgptInvocationLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/chatgpt-one-strong-shortening-invocation-ledger.json",
-    "scope": "Central African Republic scenes 2011 through 2014 were each dispatched exactly once from four remotely verified Meta Thinking composers. Scenes 2011, 2013 and 2014 are technically valid, raw-byte preserved and hard-QA accepted. Their three ChatGPT allowances were consumed as two completed outputs and one output moderation block. Scene 2012 reached a terminal visible provider refusal with no image.",
-    "duplicateGate": "The four first-occurrence provider URLs are terminal identities. Never click Send again on scenes 2011 through 2014. A bounded hard-failure retry for scene 2012 must be a separately staged new prompt occurrence and new provider URL.",
-    "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/dispatch-evidence-manifest.json",
-    "nextSafeAction": "Remote-verify the three accepted raw outputs, one-pass results, ledgers and exact scene 2012 retry-one prompt. Then replace only the terminal refused scene 2012 tab with one fresh Meta Thinking composer, stage the new retry prompt with anchors 938, 936 and 937, remote-verify a no-send receipt, and activate Send once."
+    "scope": "Central African Republic scenes 2011, 2013 and 2014 are technically valid, raw-byte preserved and hard-QA accepted. Scene 2012 first occurrence was refused. Its separately prepared and remotely staged retry one was dispatched exactly once and is in flight at its new canonical provider URL.",
+    "duplicateGate": "Never reactivate any of the four first-occurrence Sends or the scene 2012 retry-one Send. Any remaining retry-two action requires a separate prepared prompt, staging receipt and new provider URL after a confirmed hard failure.",
+    "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-retry-1-dispatch-evidence-manifest.json",
+    "nextSafeAction": "Remote-verify the scene 2012 retry-one dispatch receipt, monitor its canonical provider URL in place, and on terminal success preserve every raw output, hard-QA it and invoke exactly one sealed ChatGPT tailoring call."
   },
   "currentMetaPreparation20260906": {
     "path": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-prompts-prepared-checkpoint.json",
@@ -47,8 +47,9 @@
     "dispatch": "assets/lore/starlight-era/batch-496-central-african-republic-four-meta-scenes-dispatched-checkpoint.json",
     "scene2012RetryOne": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
     "scene2012RetryOneStaging": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-staged-checkpoint.json",
-    "scope": "Central African Republic Batch 496 has three hard-QA accepted first occurrences and one terminal refused first occurrence. The new scene 2012 retry-one prompt is visibly staged in fresh Meta tab 32 with exact anchors 938, 936 and 937. A restored blank @dogramaci composer is visible in tab 33.",
-    "dispatchGate": "Never reactivate any first-occurrence Send. Commit and remote-verify the retry-one no-send receipt, audit tab 32 in place without reload for exact prompt, exact ordered anchors, leesha007, Thinking, one enabled Send and no Stop, reverify tab 33 blank under @dogramaci, then activate the retry Send exactly once."
+    "scene2012RetryOneDispatch": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-dispatched-checkpoint.json",
+    "scope": "Central African Republic Batch 496 has three hard-QA accepted first occurrences and one terminal refused first occurrence. Scene 2012 retry one passed remote staging parity and was dispatched once at a new canonical provider URL. A restored blank @dogramaci composer remains visible in tab 33.",
+    "dispatchGate": "Consumed for retry one. Never reactivate its Send. Monitor the canonical URL in place and use the one remaining hard-failure retry only after a separately prepared and remote-verified new occurrence if retry one confirms another hard failure."
   },
   "cast": {
     "adultOnly": true,

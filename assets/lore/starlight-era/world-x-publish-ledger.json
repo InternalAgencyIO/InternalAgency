@@ -11808,7 +11808,7 @@
   },
   "latestBatch496CentralAfricanRepublicPreparation": {
     "schemaVersion": 1,
-    "status": "central-african-republic-three-valid-first-occurrences-qa-complete-scene-2012-retry-one-staged-no-send",
+    "status": "central-african-republic-three-valid-first-occurrences-qa-complete-scene-2012-retry-one-inflight",
     "batch": 496,
     "country": "Central African Republic",
     "sceneIds": [2011, 2012, 2013, 2014],
@@ -11830,7 +11830,7 @@
     "maximumMetaRetriesPerScene": 2,
     "aestheticRetries": 0,
     "chatgptStrongShorteningPassesPerTechnicallyValidMetaOccurrence": 1,
-    "browserDispatchCount": 4,
+    "browserDispatchCount": 5,
     "editInvocationCount": 3,
     "brief": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-496-central-african-republic-fixed-rolls.json",
@@ -11845,6 +11845,8 @@
     "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/accessibility-sidecars.json",
     "scene2012RetryOne": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
     "scene2012RetryOneStaging": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-staged-checkpoint.json",
+    "scene2012RetryOneDispatch": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-dispatched-checkpoint.json",
+    "scene2012RetryOneProviderUrl": "https://www.meta.ai/prompt/01aded8a-6c8d-44b5-a92c-8ed1a41708ec",
     "scene2012RetryOneStagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-retry-1-staging-evidence-manifest.json",
     "scene2012RetryOneMetaTabId": "32",
     "restoredBlankXComposerTabId": "33",
@@ -11867,9 +11869,9 @@
     "chatgptOutputModerationBlockedScenes": [2013],
     "scene2013ChatgptModerationRequestId": "3111ac3a-1bbf-4cd1-bbfe-5def8b929704",
     "scene2012RetryOnePromptSha256": "2DE6D22978BCE99C530A1F9E2B6FBDAFE051689563FFA6B10B9803DA74551D40",
-    "firstOccurrenceProviderRetries": 0,
+    "firstOccurrenceProviderRetries": 1,
     "uncertainSendActivations": 0,
     "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and later remote-verified checkpoints. No Starlight guardian exists, and unrelated guardians remain untouched.",
-    "nextSafeAction": "Commit and remote-verify the scene 2012 retry-one no-send staging receipt. Audit Meta tab 32 in place without reload for exact prompt, exact anchors, leesha007, Thinking, one enabled Send and no Stop, reverify X tab 33 blank under @dogramaci, then activate the retry Send exactly once."
+    "nextSafeAction": "Commit and remote-verify the scene 2012 retry-one dispatch receipt. Monitor its canonical provider URL in place without reload or resend. On terminal success, preserve raw bytes, perform hard QA and invoke exactly one sealed ChatGPT tailoring call."
   }
 }
