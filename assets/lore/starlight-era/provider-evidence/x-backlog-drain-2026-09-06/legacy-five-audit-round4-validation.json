@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-06T23:19:04.049Z",
+  "baselineCommit": "5f389087208ad1295557ee5b38e5a04234674f42",
+  "status": "pass-scoped-additive-audit-validation-publication-hold-retained",
+  "scope": "Validate additive audit evidence, immutable source files, all publication rows and controlling pointer parity. No legacy publication eligibility is granted, and the full rejected-prompt verifier is not reported as passing.",
+  "checks": {
+    "canonicalPostCount": 228,
+    "all228PublicationRowsUnchanged": true,
+    "ledgerOutsidePointerUnchanged": true,
+    "contractOutsidePointerUnchanged": true,
+    "pointerParity": true,
+    "browserManifestRows": 758,
+    "manifestErrors": [],
+    "uniqueNewScreenshots": true,
+    "newScreenshotsManifestedExactlyOnce": true,
+    "sourceHashesVerified": true,
+    "unrelatedUntrackedPreserved": true,
+    "clipReviewFlags": true,
+    "all54FrameRowsReviewed": true,
+    "allDocsParseAndEqual": true,
+    "checkpointParseAndEqual": true
+  },
+  "selectedDrain": {
+    "complete": true,
+    "newPosts": 16,
+    "newUniqueStillImages": 59,
+    "canonicalPostCount": 228,
+    "remainingSelectedSceneIds": [],
+    "latestPostUrl": "https://x.com/dogramaci/status/2096708532414398492",
+    "liveReceipt": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p16-live-checkpoint.json",
+    "p16Recovery": "The earlier unconfirmed activation is preserved. One freshly authorized recovery click produced one verified live publication. No attachment was uploaded twice during the recovery."
+  },
+  "actionsThisRound": {
+    "providerDispatches": 0,
+    "mediaUploads": 0,
+    "postActivations": 0,
+    "newPublications": 0,
+    "newAutomations": 0,
+    "terminalScenesReopened": 0
+  },
+  "legacySourceFiles": [
+    {
+      "scene": 1828,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-450-azerbaijan/1828-azerbaijan-gobustan-mud-volcanoes.webp",
+      "bytes": 648640,
+      "sha256": "9d2002ff23560a7b55c9d6c15a7c45180887cdc11e1a7efbff62ae88b683ab53",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1832,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-451-israel/1832-israel-makhtesh-ramon.webp",
+      "bytes": 570502,
+      "sha256": "d968d9967a1aba399698f79ea33443450d5766d6d4ff24f193b23c5f21f1e191",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1845,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-454-belarus/1845-belarus-soligorsk-salt-mountains.webp",
+      "bytes": 558866,
+      "sha256": "e0d96f27423e43fe2ef1080aa771696b2944fe2047d360f0eb8c70f3c799e186",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1849,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-455-switzerland/1849-switzerland-gornergrat-matterhorn.webp",
+      "bytes": 160854,
+      "sha256": "c09989e49521c47ce179661349bb3d5ad37c1aa0444704f58969b534f8679ded",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1865,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-459-turkmenistan/1865-turkmenistan-karakum-dune-observatory.webp",
+      "bytes": 531992,
+      "sha256": "ee5f2f98126057cb878710f3bb3849191534c88a7b5e5586f9e8b4009649d8ca",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    },
+    {
+      "scene": 1866,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-460-libya/1866-libya-ghadames-residential-arcade-plaza.webp",
+      "bytes": 1034512,
+      "sha256": "c02243db590b380f33a8a3d0d38e44a6270a737a8a05011a94e7f2ff43162f62",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "matchesPreflight": true
+    }
+  ],
+  "newAuditScreenshotsManifested": 61,
+  "archivalBrowserManifestRowsVerified": 758,
+  "manifestMismatches": [],
+  "videoAudit": {
+    "clips": 6,
+    "fullyReviewedCapturedSamples": 54,
+    "companionStills": 2,
+    "loopsObserved": 6,
+    "frameExhaustive": false,
+    "matchesToFiveSources": 0
+  },
+  "publicationReadiness": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-publication-readiness-round4.json",
+  "artifacts": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-video-round4-2095335198481076343-clip-1-playback.json",
+      "bytes": 76024,
+      "sha256": "bdc43ffa760b42ab0bf0c2484c1a0c1387021abe026c1afc9785f069d5439b2f"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-video-round4-2095335198481076343-clip-2-playback.json",
+      "bytes": 83489,
+      "sha256": "c6278d3da15aa25e394bae8bd5ac724936b9ec434cf6e9a0146d4038e4f26efd"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-video-round4-2095335198481076343-clip-3-playback.json",
+      "bytes": 86015,
+      "sha256": "c16066d4da7389aea2f3e934d7a6f95c6c1d8f82cf99f5e691181d24787dccd1"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-video-round4-2093570718466293799-clip-1-playback.json",
+      "bytes": 79512,
+      "sha256": "50d92884b5329d72aacd781b31ef54495efd8599cb930d81978e40c7075792db"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-video-round4-2093570718466293799-clip-2-playback.json",
+      "bytes": 87080,
+      "sha256": "ce9613a722bcf32f363bf16d85e3bfab32dbcf8f0abe39e78fa31285fd3b985a"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-video-round4-2093570718466293799-clip-3-playback.json",
+      "bytes": 89525,
+      "sha256": "c27a967abaf117a4b98eb68b9e2e5ed860a36ab88cf63d4f6305546e7bf0597c"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-mixed-video-audit-round4.json",
+      "bytes": 32860,
+      "sha256": "40d20a811afa40921ee9f24d79a90fef827eca70c8e9f87af6311b3d21185650"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-mixed-video-history-round4.json",
+      "bytes": 10303,
+      "sha256": "1299bf810c3f83df64e945b0e99d3878c355a489514998f2aea8f67a40ebdabf"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-latest-chronology-round4.json",
+      "bytes": 28221,
+      "sha256": "5649c554f1269d510a7bfff27ae20f002f47987111c36eb603a00c682e86bea9"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-publication-readiness-round4.json",
+      "bytes": 9669,
+      "sha256": "3e48615ba52ba52647a0f9409e4969ef9192d645c4ca607470dec376d18e6509"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-browser-handoff-round4.json",
+      "bytes": 31837,
+      "sha256": "ae15030e02c9f8944594b7f2187065ddeec1e2057b55b4961a1380dcf9619bbd"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-five-capture-index-round4.json",
+      "bytes": 44695,
+      "sha256": "d08ce8f0581cb54fdc71ff88dc61f0805bdbf6713fcaab29d6f43425b5024d0a"
+    },
+    {
+      "path": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-legacy-video-audit-complete-partial-country-hold-checkpoint.json",
+      "bytes": 9542,
+      "sha256": "ebb8b85f6cfa17d7d1ee0ef6f9a1491bf0950fae885d593ccec7e8adfb505d0a"
+    }
+  ],
+  "priorRoundArtifactsPreserved": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-historical-media-audit-round3.json",
+      "sha256": "99883fbd7e2577128f79eab204c8d83832b4b37a6ae7c55b8da63c3ed37d5de6",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-photo-edit-history-audit-round3.json",
+      "sha256": "6e728d3480e59dd3d6cef59581fb354a211594cfe4b1ef811c0fd61e02395278",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-video-scope-audit-round3.json",
+      "sha256": "9ab5c04f896940f0bb24832ff47d317d062a7613c4f47665b03fc215523c0fd1",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-swiss-source-provenance-round3.json",
+      "sha256": "2ad8762444196b602e3bcf55a07a9742607e249d8333aee8af56ff1a80a695da",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-browser-handoff-round3.json",
+      "sha256": "d84deced9b647f1e57516cbe7748ed0e3acb1b428e08fc028adeb64920def276",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-audit-round3-validation.json",
+      "sha256": "07539c178ea74f6f1fa671f85e55c1b80a6edc88d9f38241c8f79d03f8119cbc",
+      "unchangedFromBaseline": true
+    },
+    {
+      "path": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-legacy-photo-audit-complete-video-hold-checkpoint.json",
+      "sha256": "914a85543fc56ff542752b7660d03997dcce34f82f0ec76f599dca1bfa7a6cf6",
+      "unchangedFromBaseline": true
+    }
+  ],
+  "unrelatedUntrackedFilesPreserved": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1806-tanzania-dar-es-salaam-kivukoni-waterfront.webp",
+      "bytes": 652738,
+      "sha256": "a15f4dcfe4b1656ad4f2d164b976c4029e956fba162444b855c15f19f75f3ed7",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1808-tanzania-serengeti-naabi-hill.webp",
+      "bytes": 683466,
+      "sha256": "eefe17d8b95a33f4842425dca47290220b97b8b9a040241db1317e5304da1ed2",
+      "pass": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+      "bytes": 75027,
+      "sha256": "5789286c420c51705458e38433ed946c87457e362a6fadb96d0180c838ea9de5",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+      "bytes": 87756,
+      "sha256": "e0571c39a7a6e3a4571207ef322cc2f876e6707dc62ed15083fcf352e834c0d1",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+      "bytes": 59155,
+      "sha256": "2c39906adeaf921042d74b8c49061d224523f3174045905caf4eadbfd2aa3c9e",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+      "bytes": 46854,
+      "sha256": "e1186ba034e81335f9b022aede01531c40d45cc1f9dee23df87f29f7b6e1ebaf",
+      "pass": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png",
+      "bytes": 83080,
+      "sha256": "48991915cc10959c752490f68cc603ee7cfb69f325bad6ef62a794dedc296b84",
+      "pass": true
+    }
+  ],
+  "automation": {
+    "starlightGuardianPresent": false,
+    "newAutomationCreated": false,
+    "otherAutomationsChanged": false,
+    "unattended247ExecutionEstablished": false,
+    "inspectedAt": "2026-09-06T23:19:04.450Z",
+    "otherAutomationRecords": [
+      {
+        "id": "iat-b3-devnet-gate-guardian",
+        "path": "C:/Users/A/.codex/automations/iat-b3-devnet-gate-guardian/automation.toml",
+        "bytes": 28161,
+        "sha256": "537b771f89deddaebc2e273009d13ce6a4997313f9862f6d2a37b56b4fd40c5a",
+        "status": "\"ACTIVE\"",
+        "schedule": "\"DTSTART:20260907T015016Z\\nRRULE:FREQ=MINUTELY;INTERVAL=45\"",
+        "targetThread": "\"01a01d88-da54-7932-a86c-51f89cc04000\"",
+        "modifiedByThisTask": false,
+        "currentBytes": 28161,
+        "currentSha256": "537b771f89deddaebc2e273009d13ce6a4997313f9862f6d2a37b56b4fd40c5a",
+        "unchangedFromTurnStart": true
+      },
+      {
+        "id": "guardian-x-assistant-mission",
+        "path": "C:/Users/A/.codex/automations/guardian-x-assistant-mission/automation.toml",
+        "bytes": 7965,
+        "sha256": "53aabef60c4c732bf6b049f73b4f28d115c413e6d70dc585569c6899888cb79f",
+        "status": "\"ACTIVE\"",
+        "schedule": "\"FREQ=MINUTELY;INTERVAL=45\"",
+        "targetThread": "\"01a05632-87e7-7381-a2e7-3e8c24009df7\"",
+        "modifiedByThisTask": false,
+        "currentBytes": 7965,
+        "currentSha256": "53aabef60c4c732bf6b049f73b4f28d115c413e6d70dc585569c6899888cb79f",
+        "unchangedFromTurnStart": true
+      }
+    ]
+  },
+  "inheritedRejectedPromptVerifier": {
+    "exactHashesPassed": 139,
+    "rawEntries": 130,
+    "noByteEntries": 8,
+    "zeroByteEntries": 1,
+    "errors": [
+      "checkpoint contractSha256 mismatch",
+      "ledger contractPolicySha256 mismatch"
+    ],
+    "historicalSealProof": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/historical-contract-seal-resolved-1920.json",
+    "lastVerifiedAt": "2026-09-06T21:25:13.246Z",
+    "resultInheritedUntilRerun": true,
+    "allExactPromptHashesPassed": true,
+    "overallVerifierPassed": false,
+    "rerunThisTurn": false,
+    "sourceValidation": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/archive-validation-2125.json",
+    "note": "Two preexisting mutable-contract seal comparison errors remain documented. This archival check does not assert that the full rejected-prompt verifier passed."
+  },
+  "localGitChecks": {
+    "diffCheck": "",
+    "lfsPointerFsck": "Git LFS fsck OK",
+    "remoteRefs": "5f389087208ad1295557ee5b38e5a04234674f42\trefs/heads/agent/starlight-progress-archive\n5f389087208ad1295557ee5b38e5a04234674f42\trefs/pull/13/head",
+    "pr": {
+      "headRefName": "agent/starlight-progress-archive",
+      "headRefOid": "5f389087208ad1295557ee5b38e5a04234674f42",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/InternalAgencyIO/InternalAgency/pull/13"
+    },
+    "prVerifiedVia": "Authenticated PowerShell GitHub CLI; Node REPL child CLI had no auth context, no credential or configuration was changed."
+  },
+  "errors": []
+}
