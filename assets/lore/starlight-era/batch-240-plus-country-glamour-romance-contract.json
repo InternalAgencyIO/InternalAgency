@@ -31,13 +31,14 @@
   },
   "currentMetaDispatch20260906": {
     "path": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-dispatched-checkpoint.json",
+    "scene2012RetryOneTerminalQa": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-terminal-qa-checkpoint.json",
     "qa": "assets/lore/starlight-era/batch-496-central-african-republic-three-valid-first-occurrences-qa-and-retry-1-prepared-checkpoint.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/provider-ledger.json",
     "chatgptInvocationLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/chatgpt-one-strong-shortening-invocation-ledger.json",
-    "scope": "Central African Republic scenes 2011, 2013 and 2014 are technically valid, raw-byte preserved and hard-QA accepted. Scene 2012 first occurrence was refused. Its separately prepared and remotely staged retry one was dispatched exactly once and is in flight at its new canonical provider URL.",
+    "scope": "Central African Republic scenes 2011, 2013 and 2014 are technically valid, raw-byte preserved and hard-QA accepted. Scene 2012 first occurrence was refused. Its separately prepared retry one succeeded, and the raw 1152x2048 JPEG is preserved and hard-QA accepted. No second provider retry is needed.",
     "duplicateGate": "Never reactivate any of the four first-occurrence Sends or the scene 2012 retry-one Send. Any remaining retry-two action requires a separate prepared prompt, staging receipt and new provider URL after a confirmed hard failure.",
     "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-retry-1-dispatch-evidence-manifest.json",
-    "nextSafeAction": "Remote-verify the scene 2012 retry-one dispatch receipt, monitor its canonical provider URL in place, and on terminal success preserve every raw output, hard-QA it and invoke exactly one sealed ChatGPT tailoring call."
+    "nextSafeAction": "Remote-verify the scene 2012 retry-one raw output and hard-QA checkpoint, then invoke its exact sealed ChatGPT tailoring call once. Archive the output or record a moderation block without retry, select the best valid version, and close Batch 496."
   },
   "currentMetaPreparation20260906": {
     "path": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-prompts-prepared-checkpoint.json",
@@ -48,8 +49,8 @@
     "scene2012RetryOne": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
     "scene2012RetryOneStaging": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-staged-checkpoint.json",
     "scene2012RetryOneDispatch": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-dispatched-checkpoint.json",
-    "scope": "Central African Republic Batch 496 has three hard-QA accepted first occurrences and one terminal refused first occurrence. Scene 2012 retry one passed remote staging parity and was dispatched once at a new canonical provider URL. A restored blank @dogramaci composer remains visible in tab 33.",
-    "dispatchGate": "Consumed for retry one. Never reactivate its Send. Monitor the canonical URL in place and use the one remaining hard-failure retry only after a separately prepared and remote-verified new occurrence if retry one confirms another hard failure."
+    "scope": "Central African Republic Batch 496 now has four hard-QA accepted image-bearing occurrences. Scene 2012 succeeded on retry one, so its second hard-failure retry remains unused and unnecessary. A restored blank @dogramaci composer remains visible in tab 33.",
+    "dispatchGate": "Consumed. Never reactivate any Batch 496 provider Send. Complete the one sealed ChatGPT tailoring call for scene 2012, archive and select its result, then close the batch."
   },
   "cast": {
     "adultOnly": true,

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "batch": 496,
+  "country": "Central African Republic",
+  "scene": 2012,
+  "occurrence": 2,
+  "retryNumber": 1,
+  "state": "retry-one-terminal-image-hard-qa-accepted-chatgpt-one-pass-pending",
+  "verifiedAtUtc": "2026-09-06T10:39:28.000Z",
+  "providerUrl": "https://www.meta.ai/prompt/01aded8a-6c8d-44b5-a92c-8ed1a41708ec",
+  "promptSha256": "2DE6D22978BCE99C530A1F9E2B6FBDAFE051689563FFA6B10B9803DA74551D40",
+  "sendActivations": 1,
+  "rawAsset": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-meta-retry-1-original.jpg",
+    "sourceDownloadName": "boali_falls_friendship.jpg",
+    "bytes": 304165,
+    "dimensions": "1152x2048",
+    "contentType": "image/jpeg",
+    "sha256": "990B5CFFCD3F282F82C4B3805F7DF4FE453905BD66461E58F3F0D48FE443444F"
+  },
+  "terminalEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-retry-1-meta-terminal-visible.jpg",
+    "bytes": 75496,
+    "sha256": "C5F39CB18C5F3A84D609E8E08B6E072A42EC00AA452157A401EFD26506F1189D"
+  },
+  "hardQa": {
+    "decodable": true,
+    "orientation": "vertical-9:16",
+    "adultSubjectCount": 4,
+    "identityClasses": "Black Alia, blonde Radiance, dark-haired Ellie and brunette ECE are visibly distinct",
+    "locationRead": "Boali Falls, its broad stepped cascade, forest gorge and guarded overlook are unmistakable",
+    "relationshipBeat": "back hug, linked hands and staggered conversation read clearly",
+    "anatomy": "technically usable",
+    "publicSafeCoverage": true,
+    "softDeviations": ["The requested 22 degree Dutch tilt is mild.", "The frame is wider than the requested close three-quarter crop."],
+    "disposition": "accept-retry-one-and-invoke-the-sealed-chatgpt-tailoring-prompt-exactly-once"
+  },
+  "retryBudget": {
+    "hardFailureRetriesUsed": 1,
+    "hardFailureRetryTwoNeeded": false,
+    "aestheticRetriesUsed": 0
+  },
+  "chatgptOnePass": {
+    "state": "authorized-pending-single-invocation",
+    "editTargetSha256": "990B5CFFCD3F282F82C4B3805F7DF4FE453905BD66461E58F3F0D48FE443444F",
+    "sealedPromptSource": "assets/lore/starlight-era/batch-496-central-african-republic-fixed-rolls.json",
+    "sealedPromptSha256": "EA38C4506592E39CBF1C725C2BCFF09000921D233273A3B0BDC0ADAAE2331D6F",
+    "maximumInvocations": 1,
+    "completedInvocations": 0
+  },
+  "duplicateGate": "Never reactivate the retry-one Send. Do not make more than one ChatGPT edit call for this accepted occurrence, even if the output is blocked.",
+  "nextSafeAction": "Commit and remote-verify the raw retry-one output, terminal evidence and hard-QA checkpoint. Then invoke the exact sealed ChatGPT singleEditPrompt once against the preserved raw asset. Archive a successful output or record a moderation block without retry, choose the best technically valid Meta or ChatGPT version, and close Batch 496."
+}
