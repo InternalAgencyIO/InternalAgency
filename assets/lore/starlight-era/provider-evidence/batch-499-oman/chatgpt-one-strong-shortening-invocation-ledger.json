@@ -9,7 +9,7 @@
       "scene": 2023,
       "occurrence": 1,
       "id": "batch-499-scene-2023-occurrence-1-chatgpt-tailoring-1",
-      "state": "activation-reserved-invocation-pending",
+      "state": "successful-output-archived-allowance-consumed",
       "tool": "image_gen.imagegen",
       "inputPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-meta-primary-original.jpg",
       "inputSha256": "C42A23F549D954B9D95C35C1BADD2A5F7217765F795A9617DF2DF72C6BDBF2F8",
@@ -18,13 +18,26 @@
       "invocationCount": 1,
       "maximumInvocations": 1,
       "activationReservedAtUtc": "2026-09-06 15:59:49 UTC",
-      "doNotInvokeAgain": true
+      "doNotInvokeAgain": true,
+      "completedAtUtc": "2026-09-06 17:04:23 UTC",
+      "additionalInvocationsAllowed": 0,
+      "referenceInputPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-meta-primary-original.jpg"
+      ],
+      "result": {
+        "scene": 2023,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-chatgpt-single-tailoring-pass.png",
+        "sha256": "36D39C517306669BA9690F64E20C461084B1927E63C1AAA1609D0FF80C066497",
+        "bytes": 2487209,
+        "width": 941,
+        "height": 1672
+      }
     },
     {
       "scene": 2025,
       "occurrence": 1,
       "id": "batch-499-scene-2025-occurrence-1-chatgpt-tailoring-1",
-      "state": "activation-reserved-invocation-pending",
+      "state": "output-moderation-blocked-no-returned-bytes-allowance-consumed",
       "tool": "image_gen.imagegen",
       "inputPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-meta-primary-original.jpg",
       "inputSha256": "5EF07AC6D65D966E5A45092CE433368EF86A4FA8A78D691C76A98BF30A69F81D",
@@ -33,13 +46,19 @@
       "invocationCount": 1,
       "maximumInvocations": 1,
       "activationReservedAtUtc": "2026-09-06 15:59:49 UTC",
-      "doNotInvokeAgain": true
+      "doNotInvokeAgain": true,
+      "completedAtUtc": "2026-09-06 17:04:23 UTC",
+      "additionalInvocationsAllowed": 0,
+      "referenceInputPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-meta-primary-original.jpg"
+      ],
+      "blockedReceipt": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-chatgpt-output-blocked-receipt.json"
     },
     {
       "scene": 2026,
       "occurrence": 1,
       "id": "batch-499-scene-2026-occurrence-1-chatgpt-tailoring-1",
-      "state": "activation-reserved-invocation-pending",
+      "state": "successful-output-archived-allowance-consumed",
       "tool": "image_gen.imagegen",
       "inputPath": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-meta-primary-original.jpg",
       "inputSha256": "BCC1D43D123078C5CF01ED29A75A52D50CFB5597AAD8600B9881080CC361F549",
@@ -48,7 +67,21 @@
       "invocationCount": 1,
       "maximumInvocations": 1,
       "activationReservedAtUtc": "2026-09-06 15:59:49 UTC",
-      "doNotInvokeAgain": true
+      "doNotInvokeAgain": true,
+      "completedAtUtc": "2026-09-06 17:04:23 UTC",
+      "additionalInvocationsAllowed": 0,
+      "referenceInputPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-meta-primary-original.jpg"
+      ],
+      "result": {
+        "scene": 2026,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-chatgpt-single-tailoring-pass.png",
+        "sha256": "4B4A34F8CE69D9A8BC758B1025D0D76A4A27C2B52C4D0F379C7516D4BBB9519F",
+        "bytes": 2248478,
+        "width": 941,
+        "height": 1672
+      }
     }
-  ]
+  ],
+  "referenceInputDeviation": "These three invoked calls supplied only the selected Meta edit target, not the three supplemental historical anchor files. All Meta occurrences had the three exact anchors. Preserve the actual invocation inputs and verify identity visually; never issue a second call to retrofit references."
 }
