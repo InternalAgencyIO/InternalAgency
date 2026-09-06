@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "p16-recovery-r1",
   "parentId": "p16",
-  "state": "freshly-authorized-recovery-staged-not-clicked",
+  "state": "terminal-recovery-published-live-verified",
   "at": "2026-09-06T21:12:36.037Z",
   "authorization": "User renewed authorization after the prior unconfirmed attempt and explicitly authorized clicking Send now if ready. This permits one bounded recovery activation of the existing exact draft, not a duplicate media upload or further retries.",
   "account": "@dogramaci",
@@ -164,7 +164,7 @@
   ],
   "priorActivationReceipt": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p16-post-activation-receipt.json",
   "priorUnconfirmedButtonClickAttempts": 1,
-  "recoveryButtonClickAttempts": 0,
+  "recoveryButtonClickAttempts": 1,
   "maxRecoveryButtonClickAttempts": 1,
   "totalAttemptCeilingUnderThisAuthorization": 2,
   "confirmedPublicTransmissionsBefore": 0,
@@ -260,5 +260,9 @@
     "screenshotSha256": "3CEDCE5153BB7DB657FF9B995219DED27F6D0741CE3816D3F8699FECE91524DD",
     "screenshotBytes": 120442
   },
-  "nextSafeAction": "Commit this fresh recovery authorization and exact staged evidence, verify remote/PR/LFS parity, then activate Post once on this existing draft. Reconcile the result with no further automatic click."
+  "nextSafeAction": "Commit this fresh recovery authorization and exact staged evidence, verify remote/PR/LFS parity, then activate Post once on this existing draft. Reconcile the result with no further automatic click.",
+  "confirmedPublicTransmissions": 1,
+  "postUrl": "https://x.com/dogramaci/status/2096708532414398492",
+  "verifiedAt": "2026-09-06T21:15:22.967Z",
+  "liveCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p16-live-checkpoint.json"
 }

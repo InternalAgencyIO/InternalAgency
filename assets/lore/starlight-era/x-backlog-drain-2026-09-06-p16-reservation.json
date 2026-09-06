@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "p16",
-  "state": "fresh-user-authorized-recovery-staged-not-clicked",
+  "state": "consumed-terminal-published",
   "reservedAt": "2026-09-06T21:00:21.503Z",
   "account": "@dogramaci",
   "batch": 475,
@@ -260,8 +260,8 @@
     "localSceneAndHashMatches": 0,
     "allAlternateVersionsExcludedIfSceneEverPublished": true
   },
-  "buttonClickAttempts": 1,
-  "publicTransmissionCount": 0,
+  "buttonClickAttempts": 2,
+  "publicTransmissionCount": 1,
   "qa": {
     "reviewedLocallyThisTurn": true,
     "allClearlyFictionalAdults": true,
@@ -270,10 +270,12 @@
     "noRerendersOrEdits": true,
     "documentedRelaxedSoftDeviationsPreserved": true
   },
-  "nextSafeAction": "Commit this fresh recovery authorization and exact staged evidence, verify remote/PR/LFS parity, then activate Post once on this existing draft. Reconcile the result with no further automatic click.",
-  "actualTransmissionOutcome": "unconfirmed",
+  "nextSafeAction": "Never post any of these scene versions again. Complete archive and parity, then inspect only remaining eligible backlog.",
+  "actualTransmissionOutcome": "one-live-post-verified-after-authorized-recovery",
   "holdCheckpoint": "assets/lore/starlight-era/starlight-continuation-2026-09-06-2106-posts-and-unconfirmed-draft-checkpoint.json",
   "recoveryCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p16-authorized-recovery-r1-checkpoint.json",
-  "recoveryClickAttempts": 0,
-  "maxRecoveryClickAttempts": 1
+  "recoveryClickAttempts": 1,
+  "maxRecoveryClickAttempts": 1,
+  "postUrl": "https://x.com/dogramaci/status/2096708532414398492",
+  "priorUnconfirmedClickAttempts": 1
 }
