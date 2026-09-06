@@ -67,7 +67,7 @@ function statusForSnapshot(snapshot) {
     case "complete":
       return "VERIFIED // CORRECTED PROGRAM ALREADY DEPLOYED";
     case "extend-program":
-      return "CAPACITY EXTENSION REQUIRED // SEPARATE MODEL T SIGNATURE";
+      return "CAPACITY EXTENSION REQUIRED // SIGNING RECOVERY NOT CHECKED";
     case "buffer-required":
       return "CAPACITY READY // VERIFIED BUFFER ADDRESS REQUIRED";
     case "return-for-repair":
@@ -77,7 +77,7 @@ function statusForSnapshot(snapshot) {
     case "handoff-required":
       return "BUFFER VERIFIED // HAND AUTHORITY BACK TO 7XZ";
     default:
-      return "READY // ONE 7XZ MODEL T SIGNATURE REQUIRED";
+      return "BUFFER VERIFIED // SIGNING RECOVERY NOT CHECKED";
   }
 }
 
@@ -387,7 +387,7 @@ export default function ProgramUpgrade({
               <div>
                 <small>ATTENDED ACTION BOUNDARY</small>
                 <strong>NOT LOADED</strong>
-                <p>Load the isolated signer and broadcast controls only when you are present to review every device and network step.</p>
+                <p>Buffer verification is not signing clearance. Loading checks retained ceremony records first; it does not request a signature or broadcast.</p>
               </div>
               <button onClick={() => setAttendedLoaded(true)} disabled={busy || !snapshot}>
                 LOAD ATTENDED ACTIONS + RECEIPTS

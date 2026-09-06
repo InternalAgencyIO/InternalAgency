@@ -1,4 +1,6 @@
 import { PublicKey } from "@solana/web3.js";
+import { IAT_V2_ATTENDED_PROMPT_GLOBAL_LOCK_NAME } from "./attended-prompt-coordinator.mjs";
+import { assertAttendedProgramSignedPendingActive } from "./attended-program-signed-pending.mjs";
 
 const SCHEMA = "iat-v2-current-source-program-broadcast-attempt/v2";
 const STORAGE_PREFIX = "iat-v2-current-source-program-broadcast-attempt";
@@ -209,6 +211,23 @@ export function loadAttendedProgramBroadcastAttempt(storage, expectedBinding) {
   return serialized === null ? null : parseAttempt(serialized, expectedBinding);
 }
 
+// One read snapshot against both writers, without queuing behind a device prompt.
+export async function withAttendedProgramRecoveryRead({ locks, callback } = {}) {
+  check(typeof callback === "function", "Program recovery read callback is required");
+  const manager = resolvedLocks(locks);
+  return manager.request(
+    IAT_V2_ATTENDED_PROMPT_GLOBAL_LOCK_NAME,
+    { mode: "exclusive", ifAvailable: true },
+    async (promptLock) => {
+      check(promptLock, "Program recovery unavailable while a transaction prompt is active");
+      return manager.request(GLOBAL_LOCK_NAME, { mode: "exclusive", ifAvailable: true }, (broadcastLock) => {
+        check(broadcastLock, "Program recovery unavailable while a broadcast or disposition is active");
+        return callback();
+      });
+    },
+  );
+}
+
 export async function withNoAttendedProgramBroadcastAttempts({
   locks,
   storage,
@@ -264,6 +283,7 @@ export async function withAttendedProgramBroadcastOnce({
   storage,
   attempt,
   beforePersist,
+  onPreReservationFailure,
   afterPersist,
 } = {}) {
   const exact = canonicalAttempt(attempt);
@@ -272,6 +292,7 @@ export async function withAttendedProgramBroadcastOnce({
     "Program broadcast pre-reservation callback is invalid",
   );
   check(typeof afterPersist === "function", "Program broadcast continuation is required");
+  check(onPreReservationFailure === undefined || typeof onPreReservationFailure === "function", "Program pre-reservation failure callback is invalid");
   return resolvedLocks(locks).request(
     GLOBAL_LOCK_NAME,
     { mode: "exclusive", ifAvailable: true },
@@ -290,9 +311,21 @@ export async function withAttendedProgramBroadcastOnce({
           value: null,
         });
       }
-      if (beforePersist) await beforePersist(exact);
-      const reservation = persistAttempt(storage, exact);
-      check(reservation.created, "Program broadcast reservation was not newly created inside its lock");
+      let reservation;
+      try {
+        assertAttendedProgramSignedPendingActive(storage, binding);
+        if (beforePersist) await beforePersist(exact);
+        assertAttendedProgramSignedPendingActive(storage, binding);
+        reservation = persistAttempt(storage, exact);
+        check(reservation.created, "Program broadcast reservation was not newly created inside its lock");
+      } catch (error) {
+        // A failed/ambiguous reservation write can still have committed. Never
+        // terminalize or resend a retained attempt, including write-then-throw.
+        if (onPreReservationFailure && loadAttendedProgramBroadcastAttempt(storage, binding) === null) {
+          await onPreReservationFailure(error);
+        }
+        throw error;
+      }
       const value = await afterPersist(reservation.attempt);
       return Object.freeze({
         status: "RESERVED",

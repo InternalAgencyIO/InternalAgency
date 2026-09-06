@@ -8,10 +8,11 @@ const PROGRAM_ACTIONS = Object.freeze({
   EXTEND_PROGRAM_DATA: "extend-program",
   UPGRADE_PROGRAM: "upgrade",
 });
-const REMOVE_REASONS = new Set([
-  "EXPLICIT_DISCARD",
-  "PRE_SEND_FAILURE",
-  "FINALIZED_SUCCESS",
+const TERMINAL_SCHEMA = "iat-v2-current-source-program-signed-terminal/v1";
+const TERMINAL_REASONS = new Set(["EXPLICIT_DISCARD", "PRE_SEND_FAILURE"]);
+const TERMINAL_FIELDS = Object.freeze([
+  "schema", "sourceCommit", "programArtifactSha256", "mint", "action",
+  "pendingRecordSha256", "reason",
 ]);
 const RECORD_FIELDS = Object.freeze([
   "schema",
@@ -322,7 +323,8 @@ export function persistAttendedProgramSignedPending(storage, record) {
 }
 
 export function removeAttendedProgramSignedPending(storage, expectedBinding, reason) {
-  check(REMOVE_REASONS.has(reason), "Signed pending removal reason is not reviewed");
+  check(reason === "FINALIZED_SUCCESS", "Signed pending removal reason is not reviewed; retain terminal evidence");
+  assertAttendedProgramSignedPendingActive(storage, expectedBinding);
   const key = storageKey(expectedBinding);
   const serialized = readStored(storage, key);
   if (serialized === null) return null;
@@ -334,6 +336,99 @@ export function removeAttendedProgramSignedPending(storage, expectedBinding, rea
     throw new Error("Signed pending storage is unavailable for removal", { cause: error });
   }
   return current;
+}
+
+function pendingDigest(record) {
+  return Buffer.from(sha256(Buffer.from(JSON.stringify(record)))).toString("hex");
+}
+
+export function loadAttendedProgramSignedTerminal(storage, expectedBinding) {
+  const binding = exactExpectedBinding(expectedBinding);
+  let serialized;
+  try {
+    serialized = storage.getItem(`${storageKey(binding)}/terminal/v1`);
+  } catch (error) {
+    throw new Error("Signed terminal storage is unavailable for reading", { cause: error });
+  }
+  if (serialized === null) return null;
+  let terminal;
+  try {
+    terminal = JSON.parse(serialized);
+  } catch {
+    throw new Error("Signed terminal record is not valid JSON");
+  }
+  exactKeys(terminal, TERMINAL_FIELDS, "signed terminal record");
+  check(terminal.schema === TERMINAL_SCHEMA, "Signed terminal schema is not reviewed");
+  check(TERMINAL_REASONS.has(terminal.reason), "Signed terminal reason is not reviewed");
+  for (const field of EXPECTED_BINDING_FIELDS) {
+    check(terminal[field] === binding[field], `Signed terminal ${field} drifted`);
+  }
+  check(JSON.stringify(terminal) === serialized, "Signed terminal record is not canonical");
+  const pending = loadAttendedProgramSignedPending(storage, binding);
+  check(pending !== null, "Signed terminal record has no retained signed evidence");
+  check(terminal.pendingRecordSha256 === pendingDigest(pending), "Signed terminal evidence digest drifted");
+  return Object.freeze(terminal);
+}
+
+export function assertAttendedProgramSignedPendingActive(storage, expectedBinding) {
+  check(
+    loadAttendedProgramSignedTerminal(storage, expectedBinding) === null,
+    "Signed program transaction is terminal; evidence retained; do not broadcast",
+  );
+}
+
+// Caller holds the broadcast lock. Keep the exact v2 wire and permanent latch.
+// A sidecar records disposition, never a reconstructed signature or send result.
+export function terminalizeAttendedProgramSignedPending(storage, expectedBinding, reason) {
+  check(TERMINAL_REASONS.has(reason), "Signed terminal reason is not reviewed");
+  const binding = exactExpectedBinding(expectedBinding);
+  const pending = loadAttendedProgramSignedPending(storage, binding);
+  check(pending !== null, "Cannot terminalize missing signed evidence");
+  const terminal = {
+    schema: TERMINAL_SCHEMA,
+    ...binding,
+    pendingRecordSha256: pendingDigest(pending),
+    reason,
+  };
+  const retained = loadAttendedProgramSignedTerminal(storage, binding);
+  if (retained !== null) {
+    check(JSON.stringify(retained) === JSON.stringify(terminal), "Signed terminal disposition conflicts with retained state");
+    return retained;
+  }
+  const key = `${storageKey(binding)}/terminal/v1`;
+  const serialized = JSON.stringify(terminal);
+  try {
+    storage.setItem(key, serialized);
+    check(storage.getItem(key) === serialized, "Signed terminal storage readback disagrees with the write");
+  } catch (error) {
+    throw new Error("Signed terminal storage is unavailable or non-durable; preserve signed evidence", { cause: error });
+  }
+  const verified = loadAttendedProgramSignedTerminal(storage, binding);
+  check(verified !== null && JSON.stringify(verified) === serialized, "Signed terminal disposition was not retained after readback");
+  return verified;
+}
+
+// Run inside the existing exclusive pre-reservation callback. A failure must
+// retain evidence and commit its terminal disposition BEFORE that lock releases.
+export async function withRetainedAttendedProgramPreSend({ storage, record, callback }) {
+  const exact = canonicalRecord(record);
+  const binding = Object.fromEntries(EXPECTED_BINDING_FIELDS.map((field) => [field, exact[field]]));
+  const retained = loadAttendedProgramSignedPending(storage, binding);
+  check(JSON.stringify(retained) === JSON.stringify(exact), "Exclusive pre-send gate cannot prove the exact durable signed wire");
+  assertAttendedProgramSignedPendingActive(storage, binding);
+  check(typeof callback === "function", "Retained program pre-send callback is required");
+  try {
+    return await callback();
+  } catch (error) {
+    try {
+      terminalizeAttendedProgramSignedPending(storage, binding, "PRE_SEND_FAILURE");
+    } catch (terminalError) {
+      throw new Error("Pre-send stopped; terminal disposition could not be committed; preserve browser data", {
+        cause: new AggregateError([error, terminalError]),
+      });
+    }
+    throw error;
+  }
 }
 
 export const IAT_V2_ATTENDED_PROGRAM_SIGNED_PENDING_SCHEMA = SCHEMA;

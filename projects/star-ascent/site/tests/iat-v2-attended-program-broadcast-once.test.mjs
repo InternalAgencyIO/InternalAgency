@@ -13,6 +13,7 @@ import {
   loadAttendedProgramBroadcastAttempt,
   withAttendedProgramBroadcastReconciliation,
   withAttendedProgramBroadcastOnce,
+  withAttendedProgramRecoveryRead,
   withNoAttendedProgramBroadcastAttempts,
 } from "../tools/iat-v2-admin-console/attended-program-broadcast-once.mjs";
 
@@ -543,9 +544,35 @@ test("module exposes no remove/reset or network operation", async () => {
     "loadAttendedProgramBroadcastAttempt",
     "withAttendedProgramBroadcastOnce",
     "withAttendedProgramBroadcastReconciliation",
+    "withAttendedProgramRecoveryRead",
     "withNoAttendedProgramBroadcastAttempts",
   ]);
   for (const name of Object.keys(api)) {
     assert.doesNotMatch(name, /remove|reset|send|confirm|broadcastRaw/iu);
   }
+});
+
+test("recovery reads acquire both writer locks without queuing or mutating storage", async () => {
+  const { IAT_V2_ATTENDED_PROMPT_GLOBAL_LOCK_NAME } = await import("../tools/iat-v2-admin-console/attended-prompt-coordinator.mjs");
+  for (const unavailable of [null, "prompt", "broadcast"]) {
+    const held = new Set();
+    let callbacks = 0;
+    const locks = { async request(name, options, callback) {
+      assert.deepEqual(options, { mode: "exclusive", ifAvailable: true });
+      const kind = name === IAT_V2_ATTENDED_PROMPT_GLOBAL_LOCK_NAME ? "prompt" : "broadcast";
+      if (kind === unavailable) return callback(null);
+      held.add(kind);
+      try { return await callback({ name }); } finally { held.delete(kind); }
+    } };
+    const read = withAttendedProgramRecoveryRead({ locks, callback: () => {
+      callbacks += 1;
+      assert.deepEqual([...held], ["prompt", "broadcast"]);
+      return "read-only snapshot";
+    } });
+    if (unavailable) await assert.rejects(read, /recovery unavailable/u);
+    else assert.equal(await read, "read-only snapshot");
+    assert.equal(callbacks, unavailable ? 0 : 1);
+    assert.equal(held.size, 0);
+  }
+  await assert.rejects(withAttendedProgramRecoveryRead({ locks: {}, callback() {} }), /Web Locks are unavailable/u);
 });

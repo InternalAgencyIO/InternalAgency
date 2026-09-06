@@ -20,7 +20,12 @@ function hold(code, holdStatus, message) {
   return Object.freeze({ outcome: "HOLD", code, holdStatus, message });
 }
 
-export function classifyAttendedProgramRecovery({ promptLatch, signedPending } = {}) {
+export function classifyAttendedProgramRecovery({ promptLatch, signedPending, terminalDisposition = null } = {}) {
+  if (terminalDisposition !== null) return hold(
+    "TERMINAL_SIGNED_EVIDENCE_RETAINED",
+    "HOLD // TERMINAL TRANSACTION; SIGNED EVIDENCE RETAINED",
+    "This transaction is permanently excluded from sending. Preserve its signed evidence and prompt latch; do not retry or broadcast.",
+  );
   if (signedPending === null) {
     if (promptLatch === null) return Object.freeze({ outcome: "NONE" });
     const row = WITHOUT_PENDING[promptLatch?.status];

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Buffer } from "buffer";
 import {
   PublicKey,
@@ -38,8 +38,11 @@ import {
 import {
   IAT_V2_ATTENDED_PROGRAM_SIGNED_PENDING_SCHEMA,
   loadAttendedProgramSignedPending,
+  loadAttendedProgramSignedTerminal,
   persistAttendedProgramSignedPending,
   removeAttendedProgramSignedPending,
+  terminalizeAttendedProgramSignedPending,
+  withRetainedAttendedProgramPreSend,
 } from "./attended-program-signed-pending.mjs";
 import {
   attendedProgramHoldStatus,
@@ -50,6 +53,7 @@ import {
   IAT_V2_ATTENDED_PROGRAM_BROADCAST_ATTEMPT_SCHEMA,
   loadAttendedProgramBroadcastAttempt,
   withAttendedProgramBroadcastReconciliation,
+  withAttendedProgramRecoveryRead,
   withAttendedProgramBroadcastOnce,
   withNoAttendedProgramBroadcastAttempts,
 } from "./attended-program-broadcast-once.mjs";
@@ -508,18 +512,12 @@ export default function ProgramUpgradeAttendedActions({
   const [blockedPendingBinding, setBlockedPendingBinding] = useState(null);
   const [blockhashWindow, setBlockhashWindow] = useState({ status: "INACTIVE" });
   const [terminalBlockhashBinding, setTerminalBlockhashBinding] = useState(null);
-  const recoveryBinding = snapshot && SIGNABLE_ACTIONS.includes(snapshot.action)
+  const recoveryBinding = useMemo(() => snapshot && SIGNABLE_ACTIONS.includes(snapshot.action)
     ? signedPendingBinding(snapshot.evidenceBinding, snapshot.action)
-    : null;
+    : null, [snapshot]);
   const recoveryBindingKey = programRecoveryBindingKey(snapshot);
   const pendingRecoveryReady = recoveryBindingKey !== null && checkedPendingBinding === recoveryBindingKey;
   const pendingRecoveryBlocked = recoveryBindingKey !== null && blockedPendingBinding === recoveryBindingKey;
-
-  useEffect(() => {
-    setReceiptSet(snapshot?.evidenceBinding
-      ? loadAttendedReceiptSet(localStorage, snapshot.evidenceBinding)
-      : null);
-  }, [snapshot]);
 
   useEffect(() => {
     if (
@@ -528,8 +526,12 @@ export default function ProgramUpgradeAttendedActions({
       || checkedPendingBinding === recoveryBindingKey
       || blockedPendingBinding === recoveryBindingKey
     ) return;
-    try {
+    let cancelled = false;
+    setStatus("CHECKING RETAINED CEREMONY RECORDS // NO SIGNING OR BROADCAST");
+    withAttendedProgramRecoveryRead({ callback: () => {
+      if (cancelled) return;
       const currentReceiptSet = loadAttendedReceiptSet(localStorage, snapshot.evidenceBinding);
+      setReceiptSet(currentReceiptSet);
       const attempts = PROGRAM_PROMPT_ACTIONS
         .map((action) => loadAttendedProgramBroadcastAttempt(localStorage, {
           ...snapshot.evidenceBinding,
@@ -561,6 +563,9 @@ export default function ProgramUpgradeAttendedActions({
           throw new Error("Finalized program receipt conflicts with its permanent broadcast attempt");
         }
         const attemptBinding = { ...snapshot.evidenceBinding, action: attempt.action };
+        if (loadAttendedProgramSignedTerminal(localStorage, attemptBinding) !== null) {
+          throw new Error("Terminal signed evidence conflicts with a permanent broadcast attempt; preserve both records");
+        }
         const record = loadAttendedProgramSignedPending(localStorage, attemptBinding);
         if (record === null) {
           if (!completedReceipt) {
@@ -602,6 +607,7 @@ export default function ProgramUpgradeAttendedActions({
         const recovery = classifyAttendedProgramRecovery({
           promptLatch,
           signedPending: record,
+          terminalDisposition: loadAttendedProgramSignedTerminal(localStorage, recoveryBinding),
         });
         if (recovery.outcome === "HOLD") throw attendedProgramRecoveryHold(recovery);
         if (recovery.outcome === "RECOVERABLE") {
@@ -610,15 +616,23 @@ export default function ProgramUpgradeAttendedActions({
           }
           setPending(pendingFromRecord(record));
           setBroadcastBlocked(false);
-          setStatus("RECOVERED SIGNED // NOT BROADCAST — REVIEW THEN PRESS THE SEPARATE BROADCAST BUTTON");
+          setStatus("RECOVERED SIGNED // REVIEW REQUIRED BEFORE SEPARATE BROADCAST");
+        } else {
+          setStatus("READY // RECOVERY CHECK PASSED; SEPARATE MODEL T SIGNATURE REQUIRED");
         }
+      } else {
+        setStatus(snapshot.alreadyUpgraded
+          ? "VERIFIED // CORRECTED PROGRAM ALREADY DEPLOYED; REVIEW RECEIPTS"
+          : "RECOVERY CHECK COMPLETE // REVIEW PROGRAM STATE FOR THE NEXT STEP");
       }
       setCheckedPendingBinding(recoveryBindingKey);
-    } catch (caught) {
+    } }).catch((caught) => {
+      if (cancelled) return;
       setBlockedPendingBinding(recoveryBindingKey);
       setStatus(attendedProgramHoldStatus(caught) ?? "HOLD // SIGNED PROGRAM RECOVERY FAILED");
       setError(errorText(caught));
-    }
+    });
+    return () => { cancelled = true; };
   }, [
     blockedPendingBinding,
     checkedPendingBinding,
@@ -637,7 +651,7 @@ export default function ProgramUpgradeAttendedActions({
 
   useEffect(() => {
     const bindingKey = pendingBlockhashWindowKey(pending);
-    if (bindingKey === null || broadcastAttempt !== null) {
+    if (bindingKey === null || broadcastAttempt !== null || broadcastBlocked) {
       setBlockhashWindow({ status: "INACTIVE" });
       return undefined;
     }
@@ -706,7 +720,7 @@ export default function ProgramUpgradeAttendedActions({
       if (timer !== null) window.clearTimeout(timer);
       document.removeEventListener("visibilitychange", visibilityChanged);
     };
-  }, [broadcastAttempt, connection, pending, setStatus, terminalBlockhashBinding]);
+  }, [broadcastAttempt, broadcastBlocked, connection, pending, setStatus, terminalBlockhashBinding]);
 
   const activeBlockhashBinding = pendingBlockhashWindowKey(pending);
   const broadcastWindowTerminal = activeBlockhashBinding !== null
@@ -884,7 +898,10 @@ export default function ProgramUpgradeAttendedActions({
       const result = await withAttendedProgramBroadcastOnce({
         storage: localStorage,
         attempt: broadcastAttemptFromPending(pending),
-        beforePersist: async (candidateAttempt) => {
+        beforePersist: async (candidateAttempt) => withRetainedAttendedProgramPreSend({
+          storage: localStorage,
+          record: signedPendingRecord(pending),
+          callback: async () => {
           preSendEntered = true;
           assertAttemptMatchesPending(candidateAttempt, pending);
           const retainedPending = loadAttendedProgramSignedPending(
@@ -937,6 +954,14 @@ export default function ProgramUpgradeAttendedActions({
             throw new Error("Signed transaction blockhash window is terminal before reservation");
           }
           preSendSnapshot = current;
+          },
+        }),
+        onPreReservationFailure: async () => {
+          terminalizeAttendedProgramSignedPending(
+            localStorage,
+            signedPendingBinding(pending.evidenceBinding, pending.action),
+            "PRE_SEND_FAILURE",
+          );
         },
         afterPersist: async (retained) => {
           setBroadcastAttempt(retained);
@@ -982,38 +1007,12 @@ export default function ProgramUpgradeAttendedActions({
         setHasProgramBroadcastReservation(true);
         setStatus("HOLD // PERMANENT ATTEMPT RETAINED; POLL ONLY AND NEVER RESEND");
       } else if (preSendEntered && storageError === null) {
-        try {
-          const terminalBinding = signedPendingBinding(pending.evidenceBinding, pending.action);
-          await withNoAttendedProgramBroadcastAttempts({
-            storage: localStorage,
-            bindings: [terminalBinding],
-            callback: async () => {
-              const retainedPending = loadAttendedProgramSignedPending(localStorage, terminalBinding);
-              if (
-                retainedPending === null
-                || JSON.stringify(retainedPending) !== JSON.stringify(signedPendingRecord(pending))
-              ) {
-                throw new Error("Pre-send terminalization cannot prove the exact retained signed wire");
-              }
-              removeAttendedProgramSignedPending(
-                localStorage,
-                terminalBinding,
-                "PRE_SEND_FAILURE",
-              );
-            },
-          });
-          setPending(null);
-          setBlockedPendingBinding(recoveryBindingKey);
-          setStatus("HOLD // SIGNED PROGRAM TRANSACTION DISCARDED BEFORE BROADCAST");
-        } catch (removeError) {
-          setBroadcastBlocked(true);
-          setStatus("HOLD // PRE-SEND TERMINALIZATION COULD NOT PROVE THAT NO BROADCAST ATTEMPT EXISTS");
-          setError(`${errorText(caught)}; ${errorText(removeError)}`);
-          return;
-        }
+        setBroadcastBlocked(true);
+        setBlockedPendingBinding(recoveryBindingKey);
+        setStatus("HOLD // PRE-SEND STOPPED; SIGNED EVIDENCE RETAINED; DO NOT RETRY");
       } else {
         setBroadcastBlocked(true);
-        setStatus("HOLD // BROADCAST BOUNDARY COULD NOT BE PROVEN; RELOAD BEFORE ANY RETRY");
+        setStatus("HOLD // BROADCAST BOUNDARY COULD NOT BE PROVEN; PRESERVE DATA; DO NOT RETRY");
       }
       setError(storageError
         ? `${errorText(caught)}; ${errorText(storageError)}`
@@ -1195,16 +1194,16 @@ export default function ProgramUpgradeAttendedActions({
           ) {
             throw new Error("Explicit discard cannot prove the exact retained signed wire");
           }
-          removeAttendedProgramSignedPending(
+          terminalizeAttendedProgramSignedPending(
             localStorage,
             discardBinding,
             "EXPLICIT_DISCARD",
           );
         },
       });
-      setPending(null);
+      setBroadcastBlocked(true);
       setBlockedPendingBinding(recoveryBindingKey);
-      setStatus("SIGNED TRANSACTION DISCARDED // NOTHING BROADCAST; CEREMONY ACTION REMAINS LATCHED");
+      setStatus("HOLD // EXPLICIT DISCARD RECORDED; SIGNED EVIDENCE RETAINED; SEND DISABLED");
     } catch (caught) {
       setBroadcastBlocked(true);
       setStatus("HOLD // DISCARD BOUNDARY COULD NOT PROVE THAT NO BROADCAST ATTEMPT EXISTS");

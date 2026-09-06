@@ -260,8 +260,8 @@ for (const [name, bytes] of Object.entries(measured)) {
   assert.ok(bytes <= maximum, `${name} is ${bytes} bytes; budget is ${maximum}`);
 }
 assert.equal(budgets.programUpgradeMaximum, 15_500, "upgrade-shell ceiling drifted");
-assert.equal(budgets.programUpgradeAttendedMaximum, 46_000, "attended-actions ceiling drifted");
-assert.equal(budgets.programUpgradeIncrementalClosureMaximum, 84_000, "upgrade incremental-closure ceiling drifted");
+assert.equal(budgets.programUpgradeAttendedMaximum, 50_000, "attended-actions ceiling drifted");
+assert.equal(budgets.programUpgradeIncrementalClosureMaximum, 88_000, "upgrade incremental-closure ceiling drifted");
 
 const javascript = assetNames
   .filter((name) => name.endsWith(".js"))

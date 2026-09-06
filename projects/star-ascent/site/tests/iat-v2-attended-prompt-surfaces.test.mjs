@@ -4,6 +4,7 @@ import test from "node:test";
 import { Connection } from "@solana/web3.js";
 
 const consoleRoot = new URL("../tools/iat-v2-admin-console/", import.meta.url);
+const pendingSource = await readFile(new URL("attended-program-signed-pending.mjs", consoleRoot), "utf8");
 const [programShellSource, programSource, programRecoverySource, migrationSource, featureSource] = await Promise.all([
   readFile(new URL("ProgramUpgrade.jsx", consoleRoot), "utf8"),
   readFile(new URL("ProgramUpgradeAttendedActions.jsx", consoleRoot), "utf8"),
@@ -378,7 +379,7 @@ test("program broadcast is one reserved send with exact local signature and poll
   assert.match(broadcast, /attempt: broadcastAttemptFromPending\(pending\)/u);
   const guardedStart = broadcast.indexOf("withAttendedProgramBroadcastOnce({");
   const guarded = broadcast.slice(guardedStart);
-  const beforePersistMatch = /beforePersist:\s*async \((?:[A-Za-z_$][A-Za-z0-9_$]*)?\) => \{/u.exec(guarded);
+  const beforePersistMatch = /beforePersist:\s*async \((?:[A-Za-z_$][A-Za-z0-9_$]*)?\) => withRetainedAttendedProgramPreSend\(\{/u.exec(guarded);
   assert.ok(beforePersistMatch, "program broadcast has no locked pre-reservation validation callback");
   const continuationMatch = /afterPersist:\s*async \(([A-Za-z_$][A-Za-z0-9_$]*)\) => \{/u.exec(broadcast);
   assert.ok(continuationMatch, "program broadcast has no guarded post-persistence continuation");
@@ -491,13 +492,10 @@ test("program broadcast is one reserved send with exact local signature and poll
     "} else if (preSendEntered && storageError === null) {",
     "} else {",
   );
-  assertBefore(
-    preSendFailure,
-    "withNoAttendedProgramBroadcastAttempts({",
-    '"PRE_SEND_FAILURE"',
-    "program pre-send terminalization lock",
-  );
-  assert.match(preSendFailure, /loadAttendedProgramSignedPending[\s\S]*signedPendingRecord\(pending\)/u);
+  assert.match(beforePersist, /withRetainedAttendedProgramPreSend\(\{[\s\S]*record: signedPendingRecord\(pending\)/u);
+  assert.match(pendingSource, /await callback\(\)[\s\S]*catch \(error\)[\s\S]*terminalizeAttendedProgramSignedPending\(storage, binding, "PRE_SEND_FAILURE"\)/u);
+  assert.match(preSendFailure, /setBroadcastBlocked\(true\)/u);
+  assert.doesNotMatch(preSendFailure, /removeAttendedProgramSignedPending|setPending\(null\)|withNoAttendedProgramBroadcastAttempts/u);
   const discard = section(programSource, "async function discardSigned()", "function downloadReceiptSet()");
   assertBefore(
     discard,
@@ -506,6 +504,8 @@ test("program broadcast is one reserved send with exact local signature and poll
     "program explicit-discard lock",
   );
   assert.match(discard, /loadAttendedProgramSignedPending[\s\S]*signedPendingRecord\(pending\)/u);
+  assert.match(discard, /terminalizeAttendedProgramSignedPending/u);
+  assert.doesNotMatch(discard, /removeAttendedProgramSignedPending|setPending\(null\)/u);
   const clear = section(programSource, "async function clearReceiptSet()", "return (");
   assertBefore(
     clear,
@@ -520,6 +520,20 @@ test("program broadcast is one reserved send with exact local signature and poll
   );
   assert.doesNotMatch(programSource, /SIGNATURE NOT YET FINALIZED/u);
   assert.match(programSource, /FINALIZED RECONCILIATION INCOMPLETE/u);
+});
+
+test("chain inspection never advertises signing readiness before locked recovery completes", () => {
+  const inspectionStatus = section(programShellSource, "function statusForSnapshot", "export default function");
+  assert.match(inspectionStatus, /SIGNING RECOVERY NOT CHECKED/u);
+  assert.doesNotMatch(inspectionStatus, /READY \/\/ ONE|MODEL T SIGNATURE/u);
+  const recovery = section(programSource, "let cancelled = false;", "const bindingKey = pendingBlockhashWindowKey(pending);");
+  assertBefore(recovery, "withAttendedProgramRecoveryRead({", "loadAttendedReceiptSet", "locked recovery reads");
+  assertBefore(recovery, "classifyAttendedProgramRecovery({", "READY // RECOVERY CHECK PASSED", "readiness follows recovery classification");
+  assertBefore(recovery, 'if (recovery.outcome === "HOLD") throw', "READY // RECOVERY CHECK PASSED", "HOLD cannot transiently become READY");
+  assert.match(recovery, /terminalDisposition: loadAttendedProgramSignedTerminal/u);
+  assert.match(recovery, /if \(cancelled\) return/u);
+  assert.doesNotMatch(recovery, /requestProgramModelTSignature\(|sendRawTransaction\(|terminalizeAttendedProgramSignedPending\(|persistAttendedProgramSignedPending\(/u);
+  assert.match(programSource, /\[broadcastAttempt, broadcastBlocked, connection, pending, setStatus, terminalBlockhashBinding\]/u);
 });
 
 test("attended program transport disables implicit HTTP 429 transaction retries", async () => {
