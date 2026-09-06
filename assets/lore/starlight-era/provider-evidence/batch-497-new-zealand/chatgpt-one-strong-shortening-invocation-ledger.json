@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "batch": 497,
+  "country": "New Zealand",
+  "state": "four-allowances-reserved-zero-invocations",
+  "createdAtUtc": "2026-09-06T11:54:10.2003239Z",
+  "promptSource": "assets/lore/starlight-era/batch-497-new-zealand-fixed-rolls.json",
+  "policy": "Exactly one built-in ChatGPT image edit invocation per accepted Meta occurrence. A refusal, failed call or blocked output consumes the allowance and never receives a second edit call.",
+  "promptNormalization": "Submit every sealed singleEditPrompt exactly, without semantic or whitespace normalization.",
+  "entries": [
+    {
+      "scene": 2015,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2015-meta-primary-original.jpg",
+      "editTargetSha256": "E91E9B439F87D52C80C91DA5DEBEC36D61B2058F63F161BAD042EC2E3CCBA98B",
+      "sealedSingleEditPromptSha256": "CDD3E894B6F9A83C5D9FB7552666D1480912C1AB35E5C3C5C22DA6825771520E",
+      "allowance": 1,
+      "invocationCount": 0,
+      "state": "reserved-not-invoked",
+      "outputPath": null,
+      "additionalInvocationsAllowed": 1
+    },
+    {
+      "scene": 2016,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2016-meta-primary-original.png",
+      "editTargetSha256": "BEC0047D2A9DED370FED91D0A600C3E96B33E65AA99C1964C2CB2F4DF74CBEBD",
+      "sealedSingleEditPromptSha256": "E2F834FA4F1359FA54E47F9AC7337ADA2D393010303CD1BDEA74DDCD26B5A05D",
+      "allowance": 1,
+      "invocationCount": 0,
+      "state": "reserved-not-invoked",
+      "outputPath": null,
+      "additionalInvocationsAllowed": 1
+    },
+    {
+      "scene": 2017,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2017-meta-primary-original.jpg",
+      "editTargetSha256": "34DD527F9148EE0A9ED13A7B342802A120CD0D7F490FEE3CB074955A0DF53051",
+      "sealedSingleEditPromptSha256": "B7B6820DF813015E729AD7197988A54ECA6D37581DCC952F05354A0A908BBF7D",
+      "allowance": 1,
+      "invocationCount": 0,
+      "state": "reserved-not-invoked",
+      "outputPath": null,
+      "additionalInvocationsAllowed": 1
+    },
+    {
+      "scene": 2018,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2018-meta-primary-original.jpg",
+      "editTargetSha256": "FF6AFF6442673A81C9B16ED708E3C5B1F01466AFC9AAEE0F254DED2FD9DF1C56",
+      "sealedSingleEditPromptSha256": "C171EB8791A45BFE1391440EDFE0F27EF87882AFC361917EF369447BBF57DB99",
+      "allowance": 1,
+      "invocationCount": 0,
+      "state": "reserved-not-invoked",
+      "outputPath": null,
+      "additionalInvocationsAllowed": 1
+    }
+  ],
+  "totals": {"allowances": 4, "invocations": 0, "completedOutputs": 0, "failedOrBlockedOutputs": 0, "remainingAllowances": 4, "additionalInvocationsAllowed": 4},
+  "nextSafeAction": "Commit and remote-verify this reservation ledger. Then issue exactly one built-in ChatGPT image-generation edit call for each entry with its exact sealed prompt and editTarget. Record every success or failure before any further call."
+}

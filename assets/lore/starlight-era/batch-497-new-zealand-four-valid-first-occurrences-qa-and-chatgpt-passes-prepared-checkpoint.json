@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "batch": 497,
+  "country": "New Zealand",
+  "sceneIds": [2015, 2016, 2017, 2018],
+  "state": "four-meta-first-occurrences-hard-qa-accepted-four-chatgpt-one-passes-reserved",
+  "createdAtUtc": "2026-09-06T11:54:10.2003239Z",
+  "dispatch": "assets/lore/starlight-era/batch-497-new-zealand-four-meta-scenes-dispatched-checkpoint.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/provider-ledger.json",
+  "chatgptInvocationLedger": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/chatgpt-one-strong-shortening-invocation-ledger.json",
+  "providerUrls": [
+    "https://www.meta.ai/prompt/944ac44f-845a-4ca3-b4dd-ed0e7294090c",
+    "https://www.meta.ai/prompt/e083b12e-5cc6-4077-a6be-5e24e7430fc7",
+    "https://www.meta.ai/prompt/e6bcf460-eec4-4702-b6a1-510307f657b8",
+    "https://www.meta.ai/prompt/41f98a15-fdcb-4c14-9cdf-6c4d5ed8b696"
+  ],
+  "hardQa": [
+    {"scene": 2015, "result": "accepted", "adultSubjectCount": 4, "distinctAnchoredIdentityClasses": 4, "anatomy": "usable", "location": "Queenstown, Lake Wakatipu and Remarkables", "relationship": "side hug and hand reach", "rawSha256": "E91E9B439F87D52C80C91DA5DEBEC36D61B2058F63F161BAD042EC2E3CCBA98B"},
+    {"scene": 2016, "result": "accepted", "adultSubjectCount": 4, "distinctAnchoredIdentityClasses": 4, "anatomy": "usable", "location": "Rotorua geothermal boardwalk", "relationship": "tight back hug and overlapping faces", "rawSha256": "BEC0047D2A9DED370FED91D0A600C3E96B33E65AA99C1964C2CB2F4DF74CBEBD"},
+    {"scene": 2017, "result": "accepted", "adultSubjectCount": 4, "distinctAnchoredIdentityClasses": 4, "anatomy": "usable", "location": "Piha black-sand coast and Lion Rock", "relationship": "supported seated hand catch", "rawSha256": "34DD527F9148EE0A9ED13A7B342802A120CD0D7F490FEE3CB074955A0DF53051"},
+    {"scene": 2018, "result": "accepted", "adultSubjectCount": 4, "distinctAnchoredIdentityClasses": 4, "anatomy": "usable", "location": "Wellington harbor and Mount Victoria", "relationship": "supported clothed lap rest and joined hands", "rawSha256": "FF6AFF6442673A81C9B16ED708E3C5B1F01466AFC9AAEE0F254DED2FD9DF1C56"}
+  ],
+  "retryDecision": {
+    "hardFailureScenes": [],
+    "metaRetriesNeeded": 0,
+    "metaRetriesUsed": 0,
+    "aestheticRetries": 0,
+    "reason": "All four first occurrences are technically usable. Mild camera, wardrobe and provider safety substitutions are soft deviations and cannot trigger Meta retry."
+  },
+  "chatgptPasses": {
+    "eligibleScenes": [2015, 2016, 2017, 2018],
+    "sealedPromptSha256": [
+      "CDD3E894B6F9A83C5D9FB7552666D1480912C1AB35E5C3C5C22DA6825771520E",
+      "E2F834FA4F1359FA54E47F9AC7337ADA2D393010303CD1BDEA74DDCD26B5A05D",
+      "B7B6820DF813015E729AD7197988A54ECA6D37581DCC952F05354A0A908BBF7D",
+      "C171EB8791A45BFE1391440EDFE0F27EF87882AFC361917EF369447BBF57DB99"
+    ],
+    "allowances": 4,
+    "invocationsAtCheckpoint": 0,
+    "additionalCallAfterEachInvocation": false,
+    "failureFallback": "Use the technically valid Meta source and record the consumed allowance."
+  },
+  "terminalEvidence": [
+    {"scene": 2015, "path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2015-meta-terminal-visible.jpg", "bytes": 72665, "sha256": "1528A7D71F68291CF5C7214F9EA9E6D961AD334C4700E96512DD009B4EC6876E"},
+    {"scene": 2016, "path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2016-meta-terminal-visible.jpg", "bytes": 72366, "sha256": "7067C5FF583201851392C8CB0C675B7B652B4D319FB2E856DBEBCEF09156308F"},
+    {"scene": 2017, "path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2017-meta-terminal-visible.jpg", "bytes": 94763, "sha256": "460C302779137278FAA9C7A796E1C5B6EA19A9A691565BA71D82BEA7B9F4D223"},
+    {"scene": 2018, "path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2018-meta-terminal-visible.jpg", "bytes": 72858, "sha256": "A4ED3CF570C1AA5A2E05C40F4585C7071659F50E90237240D58558BFB5A84983"}
+  ],
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and every later remote-verified checkpoint. All four New Zealand first occurrences are terminal and valid. The user-reported Liberia and Central African Republic X submission still lacks a visible status receipt and remains non-resendable.",
+  "nextSafeAction": "Commit and remote-verify the dispatch, raw bytes, terminal QA and sealed invocation reservations. Then issue each exact built-in ChatGPT tailoring call once, record every outcome, select the stronger technically valid source without aesthetic retry, and close the country only after accessibility and evidence manifests are complete."
+}
