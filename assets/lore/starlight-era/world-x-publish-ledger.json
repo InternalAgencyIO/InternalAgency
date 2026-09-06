@@ -11752,7 +11752,7 @@
   },
   "latestBatch495LiberiaPreparation": {
     "schemaVersion": 1,
-    "status": "liberia-four-meta-scenes-dispatched-exactly-once-inflight",
+    "status": "liberia-four-occurrences-closed-four-x-eligible-stills",
     "batch": 495,
     "country": "Liberia",
     "sceneIds": [2007, 2008, 2009, 2010],
@@ -11774,7 +11774,7 @@
     "aestheticRetries": 0,
     "chatgptStrongShorteningPassesPerTechnicallyValidMetaOccurrence": 1,
     "browserDispatchCount": 4,
-    "editInvocationCount": 0,
+    "editInvocationCount": 4,
     "brief": "assets/lore/starlight-era/batch-495-liberia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-495-liberia-fixed-rolls.json",
     "checkpoint": "assets/lore/starlight-era/batch-495-liberia-editorial-prompts-prepared-checkpoint.json",
@@ -11783,6 +11783,19 @@
     "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/staging-evidence-manifest.json",
     "dispatchCheckpoint": "assets/lore/starlight-era/batch-495-liberia-four-meta-scenes-dispatched-checkpoint.json",
     "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/dispatch-evidence-manifest.json",
+    "closureCheckpoint": "assets/lore/starlight-era/batch-495-liberia-four-stills-closed-qa-checkpoint.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/provider-ledger.json",
+    "invocationLedger": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/accessibility-sidecars.json",
+    "providerEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/provider-evidence-manifest.json",
+    "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/closure-evidence-manifest.json",
+    "selectedXEligibleScenes": [2007, 2008, 2009, 2010],
+    "selectedSha256": [
+      "883DAD2F1D4ED6D5C2CC3D799FA70C8276468B568F0CD570BEFC41ED46553D41",
+      "BBEA816945D570F2E740C5495A2EC71BC4A68E6311F81E171D0A17105AD6479B",
+      "206A8C3EC7E232A98CB2DA3CC8E868966CC287BE3C063DBAD1D4CF1B61E5EC15",
+      "FEF97D962D6F45D48132450D61E82FD3D8F10BFA5924E52EF165C646A0FD774A"
+    ],
     "providerUrls": [
       "https://www.meta.ai/prompt/b68a10cb-b5fb-475b-a57b-2f3811707e29",
       "https://www.meta.ai/prompt/bb4ffcaa-bbeb-452e-99e9-9f50b214642a",
@@ -11790,6 +11803,6 @@
       "https://www.meta.ai/prompt/05c33567-35f6-4b42-aee8-2dcd906d74a7"
     ],
     "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and later remote-verified checkpoints. No Starlight guardian exists, and unrelated guardians remain untouched.",
-    "nextSafeAction": "Commit and remote-verify the exact dispatch receipt and visible evidence, then monitor the four canonical provider URLs in place without resending."
+    "nextSafeAction": "Commit and remote-verify the complete Liberia closure. Then close only the four terminal Liberia Meta tabs and prepare Central African Republic as the next zero-post country in four fresh Meta Thinking lanes."
   }
 }
