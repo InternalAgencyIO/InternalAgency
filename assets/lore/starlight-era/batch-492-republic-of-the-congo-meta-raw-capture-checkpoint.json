@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "batch": 492,
+  "country": "Republic of the Congo",
+  "state": "four-first-occurrences-terminal-all-provider-bytes-captured",
+  "capturedAtUtc": "2026-09-06T04:57:38.7187054Z",
+  "providerUrls": [
+    "https://www.meta.ai/prompt/36bd3560-0278-45a7-8af5-102e286116cf",
+    "https://www.meta.ai/prompt/c0660e98-0b3c-4acb-9140-20850894ddb2",
+    "https://www.meta.ai/prompt/af311c2b-e7fb-46e2-9b2b-9ae290cd7198",
+    "https://www.meta.ai/prompt/79f3833e-7c86-41b7-8480-a625c570df1e"
+  ],
+  "scenes": [
+    {
+      "scene": 1995,
+      "rawAssets": [{"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1995-republic-of-the-congo-brazzaville-corniche-editorial-meta-occurrence-1-raw.png", "bytes": 1486001, "width": 768, "height": 1360, "contentType": "image/png", "sha256": "EC7FF7E5EB7BF22D07812B63027F32EE308F2962A71021DAF5C0AF0414AF1A0E", "role": "sole-output-selected-for-single-tailoring-call"}],
+      "terminalEvidence": {"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/scene-1995-meta-occurrence-1-completed-visible.jpg", "bytes": 74620, "sha256": "827CE110F0862AD348D13724180F4FDC743F591324529E28DE620E78CD2D3224"},
+      "qa": "Technically usable: exactly four distinct fictional adults, supported clothed lap-rest relationship, genuine extreme-close crop, clean anatomy, and recognizable Brazzaville Corniche and Congo River context. Footwear is intentionally outside the crop."
+    },
+    {
+      "scene": 1996,
+      "rawAssets": [{"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1996-republic-of-the-congo-diosso-gorge-editorial-meta-occurrence-1-raw.webp", "bytes": 677988, "width": 1152, "height": 2048, "contentType": "image/webp", "sha256": "5D9F83C6B7C97E1468B846FC8834E2723783620CC7D018395E0D959E91D9090F", "role": "sole-output-selected-for-single-tailoring-call"}],
+      "terminalEvidence": {"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/scene-1996-meta-occurrence-1-completed-visible.jpg", "bytes": 90800, "sha256": "B0ECACC080F7DCE19FDB1E1E2FBB4A4150154AC62EE480F3063D8D9DB87A484A"},
+      "qa": "Technically usable: exactly four distinct fictional adults, affectionate asymmetric group action, clean anatomy, recognizable Diosso Gorge, secure short flag-cut looks, four varied footwear families and visible GRD mark."
+    },
+    {
+      "scene": 1997,
+      "providerOutputCount": 2,
+      "rawAssets": [
+        {"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1997-republic-of-the-congo-odzala-kokoua-editorial-meta-occurrence-1-output-a-raw.webp", "bytes": 460682, "width": 1152, "height": 2048, "contentType": "image/webp", "sha256": "707B96CD655FD12FB3EB0BCFC4E56B92ED9BD82C0EA83B9681FCA2E59536CF5C", "role": "selected-for-single-tailoring-call"},
+        {"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1997-republic-of-the-congo-odzala-kokoua-editorial-meta-occurrence-1-output-b-raw.webp", "bytes": 404940, "width": 1152, "height": 2048, "contentType": "image/webp", "sha256": "D20E10E8CDD6B4F96FC788BE2FBD8195E8D89021F4AFAA4A0864C83ED208D7D7", "role": "unused-preserved-provider-output"}
+      ],
+      "terminalEvidence": {"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/scene-1997-meta-occurrence-1-completed-visible.jpg", "bytes": 69614, "sha256": "642788C69225C345F589299901D95BB4A6B446BA4AAD1244AF2C882F31DF8EE5"},
+      "qa": "Both outputs are technically usable. Output A is the canonical occurrence source because it preserves the true extreme-close face-and-hand composition, four distinct adults, clean hand ownership, Odzala forest-bai context and visible RAZE type bands. Output B is wider and archived unused."
+    },
+    {
+      "scene": 1998,
+      "rawAssets": [{"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/1998-republic-of-the-congo-loufoulakari-falls-editorial-meta-occurrence-1-raw.webp", "bytes": 626028, "width": 1152, "height": 2048, "contentType": "image/webp", "sha256": "BD373DC6EB0632A2847415E18F2B30CAFE3777F68B45AC4F571B07040FAAA1E9", "role": "sole-output-selected-for-single-tailoring-call"}],
+      "terminalEvidence": {"path": "assets/lore/starlight-era/provider-evidence/batch-492-republic-of-the-congo/scene-1998-meta-occurrence-1-completed-visible.jpg", "bytes": 83665, "sha256": "406ECCA59046383A426385DA345D0A328C92C4BCBAE081D28822E6DA9E7F02DF"},
+      "qa": "Technically usable: exactly four distinct fictional adults, supported seated conversation with attributable contact, Loufoulakari Falls unmistakable, clean anatomy, flag-cut couture, RAZE waistbands, rainbow knee-highs and varied footwear."
+    }
+  ],
+  "providerSendCount": 4,
+  "providerRetryCount": 0,
+  "confirmedPromptResendCount": 0,
+  "terminalSceneReopenCount": 0,
+  "rawAssetCount": 5,
+  "technicalAcceptedSceneCount": 4,
+  "singleChatgptTailoringCallsNowDue": 4,
+  "nextSafeAction": "Commit and remote-verify this raw byte checkpoint, then issue exactly one built-in ChatGPT tailoring invocation for the selected raw source of each scene. Never issue a second invocation for the dual-output scene 1997 occurrence."
+}
