@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "batch": 493,
+  "country": "Singapore",
+  "state": "prepared-offline-not-dispatched",
+  "preparedAtUtc": "2026-09-06T05:50:33.1117039Z",
+  "authority": "assets/lore/starlight-era/batch-493-singapore-editorial-brief.json",
+  "contract": "starlight-editorial-rolls-2026-09-06",
+  "fixedRollsAndExactPrompts": "assets/lore/starlight-era/batch-493-singapore-fixed-rolls.json",
+  "fixedRollsBytes": 137006,
+  "fixedRollsSha256": "CB1C3857E6AE2732A0A5E68D6F974B76B0FC223F4A7882D477139A471C941295",
+  "deterministicRegenerationExact": true,
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-493|singapore",
+  "seedSelection": "Fixed; no outcome search, salt hunting or reroll",
+  "provider": "Meta",
+  "accountRequired": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [938, 936, 937],
+  "anchorPaths": [
+    "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "anchorSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "anchorBytes": [2575103, 2495143, 2373808],
+  "closedPredecessorScenes": [1995, 1996, 1997, 1998],
+  "closedPredecessorRule": "Never reopen, resend or retry any terminal Batch 492 provider occurrence. Close those tabs only after this prepared state reaches remote parity.",
+  "sceneRange": [1999, 2002],
+  "browserDispatchCount": 0,
+  "editInvocationCount": 0,
+  "retryPolicy": {
+    "maximumMetaRetriesPerScene": 2,
+    "eligibleOnlyFor": ["no image", "corrupt media", "wrong cast or duplicate face", "grossly malformed anatomy", "unsafe or explicit output"],
+    "neverFor": ["aesthetic preference", "camera nuance", "branding omission", "hemline nuance", "minor wardrobe deviation"],
+    "freshChatAndNewPromptHashRequired": true
+  },
+  "singleEditPolicy": {
+    "provider": "built-in ChatGPT image generator",
+    "callsPerTechnicallyValidMetaOccurrence": 1,
+    "allChangesInOneInvocation": true,
+    "blockedOrInterruptedCallConsumesAllowance": true,
+    "secondCallForbidden": true
+  },
+  "shoeDeck": ["sculptural-platform", "classic-pump", "ankle-boot", "knee-high-boot", "stiletto-sandal"],
+  "poseDeck": ["head-resting-on-clothed-lap", "side-hug-step", "back-hug-turn", "supported-seated-conversation"],
+  "angleDeck": ["high-oblique", "over-shoulder", "front-quarter-low", "side-level"],
+  "scenes": [
+    {
+      "scene": 1999,
+      "location": "Marina Bay waterfront and Helix Bridge",
+      "camera": {"roll": 90, "category": "extreme-wide", "angle": "high-oblique", "dutchDegrees": 12},
+      "pose": "head-resting-on-clothed-lap",
+      "activeImageRolls": ["starHardware", "splitStarEmblem"],
+      "activeCharacterRolls": {"Alia": ["rainbowShoes", "shoeBranding:original RAZE split-star", "visibleNavel"], "Radiance": ["rainbowShoes", "visibleNavel"], "Ellie": ["rainbowShoes", "stockingBranding"], "ECE": ["flagGarment"]},
+      "promptSha256": "C70349B72F951EECE15F78A3E09007BE866B7890816823899E29CC373C8043A4",
+      "promptCharacters": 3658,
+      "singleEditPromptSha256": "626D4EC6E9D979BB644C60150FA8C1DDC183871B9FF5DD3349C28955D4A67A9F"
+    },
+    {
+      "scene": 2000,
+      "location": "Gardens by the Bay Supertree Grove",
+      "camera": {"roll": 72, "category": "intermediate", "angle": "over-shoulder", "dutchDegrees": 11},
+      "pose": "side-hug-step",
+      "activeImageRolls": ["kneeHighHosiery", "splitStarEmblem", "rainbowStockings", "kneeHighRainbows"],
+      "activeCharacterRolls": {"Alia": ["shoeBranding:original RAZE split-star", "tattoo:raze-brand"], "Radiance": ["visibleNavel"], "Ellie": ["flagGarment"], "ECE": ["rainbowShoes", "flagGarment", "visibleNavel"]},
+      "promptSha256": "43ABBB99EAD4C18A33A58C99BC794EA0D4BA15BC5FA769C5DA3931F0DF194EA1",
+      "promptCharacters": 3770,
+      "singleEditPromptSha256": "31D7CE8A656E6CA5C19E0510375E220AAF9C0A64D1D7A778AB1EFF55ED3FDA83"
+    },
+    {
+      "scene": 2001,
+      "location": "Jewel Changi Rain Vortex",
+      "camera": {"roll": 2, "category": "extreme-close", "angle": "front-quarter-low", "dutchDegrees": 13},
+      "pose": "back-hug-turn",
+      "activeImageRolls": ["starHardware", "kneeHighHosiery", "splitStarEmblem", "rainbowStockings", "fictionalDistantRazedBackground"],
+      "activeCharacterRolls": {"Alia": ["rainbowShoes", "visibleNavel", "stockingBranding", "tattoo:GRD"], "Radiance": ["shoeBranding:RAZE text", "flagGarment", "visibleNavel"], "Ellie": ["rainbowShoes", "visibleNavel", "tattoo:country-death-motif", "tattoo:raze-split-star", "tattoo:scorpion"], "ECE": ["rainbowShoes", "flagGarment", "stockingBranding"]},
+      "promptSha256": "E0C23D98C84C990530DEFCB7BFA1B120DEDB1F65432B3F2E2B37562B776D6204",
+      "promptCharacters": 4325,
+      "singleEditPromptSha256": "2404791F067E1D7F67EA76BB664A35A737984C7333EBF6312EF7A9919227115A"
+    },
+    {
+      "scene": 2002,
+      "location": "Henderson Waves and Southern Ridges",
+      "camera": {"roll": 45, "category": "intermediate", "angle": "side-level", "dutchDegrees": 11},
+      "pose": "supported-seated-conversation",
+      "activeImageRolls": ["kneeHighHosiery", "razeTypeBand"],
+      "activeCharacterRolls": {"Alia": ["tattoo:agency"], "Radiance": ["tattoo:country-death-motif", "tattoo:country-love-motif", "tattoo:raze-split-star"], "Ellie": ["visibleNavel", "tattoo:country-love-motif"], "ECE": ["shoeBranding:RAZE text", "flagGarment", "stockingBranding"]},
+      "promptSha256": "D0107997BF55D8AB0A3C8B4C2DDAFCDAC9F611177BFD6C9FED12FFA9D812243E",
+      "promptCharacters": 3775,
+      "singleEditPromptSha256": "9BE6CDE77F9A5D6608E38DC85D59F2E59C7DB17C1021D95ADB6925EA20914759"
+    }
+  ],
+  "promptStorageRule": "The exact full Meta and single-edit prompt strings are stored only in fixedRollsAndExactPrompts under each scene. The hashes and character counts above were verified against those exact strings.",
+  "nextSafeAction": "Update the binding current pointers, run deterministic and contract tests, commit and verify local, origin and PR parity, then replace the four closed Batch 492 Meta tabs with four fresh blank Meta composers while keeping the blank X composer."
+}
