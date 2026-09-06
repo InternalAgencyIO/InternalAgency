@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 499,
   "country": "Oman",
-  "state": "three-selected-one-scene-awaiting-final-identity-retry",
+  "state": "terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete",
   "selected": [
     {
       "scene": 2023,
@@ -64,8 +64,14 @@
       "scene": 2024,
       "occurrence": 2,
       "reason": "Ellie replaced with an Alia-like face"
+    },
+    {
+      "scene": 2024,
+      "occurrence": 3,
+      "reason": "Ellie/ECE swap persists; alternate also crops Alia's face out"
     }
   ],
   "aestheticRetries": 0,
-  "rollsRegenerated": false
+  "rollsRegenerated": false,
+  "technicalRetryAllowanceExhausted": true
 }

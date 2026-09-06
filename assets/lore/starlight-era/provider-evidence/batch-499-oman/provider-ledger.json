@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 499,
   "country": "Oman",
-  "state": "final-identity-retry-confirmed-rendering-no-more-meta-retries",
+  "state": "terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -218,15 +218,40 @@
       "clickReturned": true,
       "providerUrl": "https://www.meta.ai/prompt/26b98a4e-fd5c-4e9f-b5a0-69a220c5a9a7",
       "confirmed": true,
-      "stopVisible": true,
-      "status": "confirmed-in-progress",
+      "stopVisible": false,
+      "status": "terminal-hard-failure-retry-ceiling-exhausted",
       "metaRetryCount": 2,
       "additionalMetaRetriesAllowed": 0,
       "singleChatgptTailoringInvocationsCompleted": 0,
-      "doNotResend": true
+      "doNotResend": true,
+      "terminalObserved": true,
+      "rawOutputs": [
+        {
+          "source": "C:/Users/A/Downloads/dutch_tilt_fashion_editorial.jpg",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-meta-identity-retry-2-original.jpg",
+          "bytes": 234540,
+          "sha256": "6B9DFE42BED4E6D7C7FBEDA16A3AD4DBE69827D860DCD17DFBA1E311925CF303",
+          "width": 1152,
+          "height": 2048,
+          "selected": false
+        },
+        {
+          "source": "C:/Users/A/Downloads/nizwa_fort_final_24deg_tilt_clean2.png",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-meta-identity-retry-2-alternate.png",
+          "bytes": 2794705,
+          "sha256": "C0E48D7A1814F5D97C0D261F2987846ABE97806696BC72A718D8FEC4E97BE555",
+          "width": 1080,
+          "height": 1920,
+          "selected": false
+        }
+      ],
+      "qa": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-2-hard-qa.json",
+      "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-2-terminal-dom.txt",
+      "visibleMediaProvenance": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-2-terminal-media-provenance.json",
+      "additionalChatgptInvocationsAllowed": 0
     }
   ],
-  "nextSafeAction": "Inspect only this existing last retry; preserve terminal result and bytes. No further Meta retry. If technically usable, reserve exactly one built-in ChatGPT clothing pass with all three identity-only references. Keep X hold until QA and missing internal bytes resolve.",
+  "nextSafeAction": "Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank.",
   "updatedAtUtc": "2026-09-06 15:55:14 UTC",
   "primaryQa": "assets/lore/starlight-era/provider-evidence/batch-499-oman/primary-hard-qa.json",
   "archiveGap": [
@@ -244,7 +269,18 @@
     }
   ],
   "archiveGapAudit": "assets/lore/starlight-era/provider-evidence/batch-499-oman/secondary-raw-browser-recovery-audit.json",
-  "currentCheckpoint": "assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json",
+  "currentCheckpoint": "assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json",
   "selectionQa": "assets/lore/starlight-era/provider-evidence/batch-499-oman/selection-qa.json",
-  "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-499-oman/accessibility-sidecars.json"
+  "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-499-oman/accessibility-sidecars.json",
+  "completedAtUtc": "2026-09-06 17:13:56 UTC",
+  "additionalMetaRetriesAllowed": 0,
+  "publicationEligible": false,
+  "acceptedScenes": [
+    2023,
+    2025,
+    2026
+  ],
+  "hardHeldScenes": [
+    2024
+  ]
 }
