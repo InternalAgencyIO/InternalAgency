@@ -1,8 +1,33 @@
 {
+  "currentAuthorityBatch500": {
+    "state": "four-exact-prompts-prepared-offline-zero-dispatch",
+    "batch": 500,
+    "country": "Mauritania",
+    "sceneIds": [
+      2027,
+      2028,
+      2029,
+      2030
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-500-mauritania-editorial-prompts-prepared-checkpoint.json",
+    "deferral": "assets/lore/starlight-era/batch-499-oman-explicit-deferral-and-batch-500-advance-checkpoint.json",
+    "anchorOrder": [
+      938,
+      936,
+      937
+    ],
+    "account": "leesha007",
+    "thinking": true,
+    "confirmedSubmissions": 0,
+    "maximumHardFailureRetriesPerScene": 2,
+    "oneChatgptEditPerUsableOccurrence": true,
+    "previousOmanRemainsHeld": true,
+    "nextSafeAction": "Remote-verify exact prepared prompts. Attach the unique 938,936,937 files in that order via visible supported controls and verify their cards plus exact prompt and Thinking in each lane. Archive staging, remote-verify and report before one Send per lane."
+  },
   "contract": "batch-240-plus-country-glamour-romance",
   "status": "binding-forward",
   "currentXBacklogDrain20260906": {
-    "state": "selected-backlog-and-authorized-legacy-partial-pairs-complete-swiss-oman-hold",
+    "state": "backlog-closed-explicit-oman-deferral-mauritania-prepared",
     "canonicalPostCount": 230,
     "manualPostsReconciled": [
       "https://x.com/dogramaci/status/2096574104090325016",
@@ -85,7 +110,7 @@
     "reservedSceneIds": [],
     "historicalContradiction": "Scenes 1985 and 1972 each have three preexisting public URLs; scene 1918 has two. Preserve all URLs and exclude all scene versions. This drain created none of those duplicates. Newly reconciled https://x.com/dogramaci/status/2093287922787070092 contains scenes 1826 and 1827, also published at https://x.com/dogramaci/status/2093364347196027381, and both final and nonselected provider-iteration-1 variants of scene 1828. All URLs, bytes and historical selections are preserved; these scenes and all versions are excluded.",
     "omanState": "Oman remains incomplete and publication-ineligible.",
-    "scope": "The original selected backlog is complete at 16 posts and 59 stills. The exact four-scene partial-country exception is consumed by two additional posts and four stills. Historical country completion and QA remain unchanged. Switzerland 1849 and Oman remain held; no publication-ready reserved media remains.",
+    "scope": "Original selected backlog and both authorized legacy partial-country pairs remain closed. Oman recovery is explicitly deferred without another retry or publication. Mauritania Batch500 is the next authorized render batch; Switzerland remains held.",
     "manualAuditCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-manual-reconciliation-round3.json",
     "progressCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-progress-and-browser-hold-checkpoint.json",
     "newPostCount": 18,
@@ -96,9 +121,9 @@
     ],
     "olderManualAuditComplete": true,
     "backlogFullyCleared": false,
-    "browserState": "Five visible in-app tabs retained for next-turn work: three blank Meta Thinking composers for leesha007, one protected native Oman evidence image and one empty @dogramaci X composer. All five received turn-scoped handoff marks. No active renders.",
-    "nextSafeAction": "Keep the two verified partial-country posts terminal and the X composer empty while no eligible media is reserved. Preserve the native Oman image for manual byte recovery. Obtain a specific disposition on deferring unresolved Oman recovery and advancing to the next authorized country without another Oman retry; the repeated generic authorization does not reset the exhausted retry or edit counters. No replacement guardian may be created. On every later browser turn, re-enumerate actual tabs, make the in-app Browser visible, and renew markHandoff on each needed lane, X composer and evidence tab before ending the turn.",
-    "continuationCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-tab-retention-repair-checkpoint.json",
+    "browserState": "Four Meta Thinking composers plus one X composer and one explicitly approved temporary protected native Oman evidence tab. Six total, all needed for authorized continuation.",
+    "nextSafeAction": "Remote-verify exact prepared prompts. Attach the unique 938,936,937 files in that order via visible supported controls and verify their cards plus exact prompt and Thinking in each lane. Archive staging, remote-verify and report before one Send per lane.",
+    "continuationCheckpoint": "assets/lore/starlight-era/batch-500-mauritania-editorial-prompts-prepared-checkpoint.json",
     "olderManualAuditReviewedPosts": 234,
     "olderManualAuditUnreviewedPosts": 0,
     "olderManualAuditNextUrl": null,
@@ -180,7 +205,11 @@
     "starlightGuardianPresent": false,
     "unattended247ExecutionEstablished": false,
     "browserRetentionRenewalRequiredEveryTurn": true,
-    "browserVisibilityCheckRequiredEveryTurn": true
+    "browserVisibilityCheckRequiredEveryTurn": true,
+    "omanRecoveryDeferral": "assets/lore/starlight-era/batch-499-oman-explicit-deferral-and-batch-500-advance-checkpoint.json",
+    "activeRenderBatch": 500,
+    "activeRenderCountry": "Mauritania",
+    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-500-mauritania-editorial-prompts-prepared-checkpoint.json"
   },
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},
