@@ -1,8 +1,41 @@
 const EVIDENCE_ROOT = "/evidence/iat-v2";
+const PUBLICATION_COMMIT = "eb2e59c2d41f9f716227887e54a5300d9b463dd0";
+const PUBLICATION_ROOT =
+  `https://github.com/InternalAgencyIO/InternalAgency/blob/${PUBLICATION_COMMIT}/projects/star-ascent/site/docs/b3/evidence`;
+const CI_RUN = "https://github.com/InternalAgencyIO/InternalAgency/actions/runs/32946810318";
 const GITHUB_EVIDENCE =
-  "https://github.com/InternalAgencyIO/InternalAgency/tree/agent/iat-launch-window/projects/star-ascent/site/public/evidence/iat-v2";
+  `https://github.com/InternalAgencyIO/InternalAgency/tree/${PUBLICATION_COMMIT}/projects/star-ascent/site/public/evidence/iat-v2`;
 
-const evidenceRecords = [
+type EvidenceRecord = {
+  file: string;
+  sha256: string | null;
+  en: [string, string];
+  href?: string;
+  action?: string;
+};
+
+const evidenceRecords: EvidenceRecord[] = [
+  {
+    file: "IAT-B3-DEVNET-HW-PROOF-20260825.json",
+    sha256: "175759dce910b3b2a4e346267608aae2942eec02260fbf4e8340ff59169ce290",
+    en: ["OFF-CHAIN SIGNATURE PROOF", "Verified Ed25519 signature, frozen request binding, signer public key, and publicly reproducible cryptographic verification. Embedded device and prompt fields are operator-reported and are not independently verified. The embedded LOCAL_ONLY_NOT_PUBLISHED value records creation-time state and was later superseded by publication; this artifact does not prove hardware provenance or a Devnet transaction."],
+    href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-PROOF-20260825.json`,
+    action: "OPEN CRYPTOGRAPHIC PROOF",
+  },
+  {
+    file: "IAT-B3-DEVNET-HW-UNSIGNED-20260825.json",
+    sha256: "62e31b746e57ce9e29ec4fb44bbff6ce94821412f069707772b119b226fdb096",
+    en: ["FROZEN SIGNING REQUEST", "Exact unsigned request later paired with an operator-reported physical device confirmation and later published separately for byte-level comparison."],
+    href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-UNSIGNED-20260825.json`,
+    action: "OPEN FROZEN REQUEST",
+  },
+  {
+    file: "verify-IAT-B3-DEVNET-HW-PROOF-20260825.mjs",
+    sha256: "a17481693ee161b0497486cbeaa8b425c3965db45711b16c4d5eed47122bc045",
+    en: ["INDEPENDENT VERIFIER", "Public verifier for the proof signature and request binding. It requires no wallet connection, private material, or transaction broadcast."],
+    href: `${PUBLICATION_ROOT}/verify-IAT-B3-DEVNET-HW-PROOF-20260825.mjs`,
+    action: "OPEN VERIFIER",
+  },
   {
     file: "v2-initialization-20260730T074603Z.json",
     sha256: "902f7608b1f001e238c6e7999f8424b9a0fd38a61ac08db6f6b7e5f785d37602",
@@ -35,14 +68,53 @@ const evidenceRecords = [
   },
 ];
 
+const progressRecords = [
+  {
+    state: "PASS",
+    label: "OFF-CHAIN SIGNATURE PROOF",
+    detail: "The historical Ed25519 signature and frozen request binding verify independently at exact commit hashes. They are not a transaction receipt and do not independently prove the signing device.",
+    href: `${PUBLICATION_ROOT}/IAT-B3-DEVNET-HW-PROOF-20260825.json`,
+  },
+  {
+    state: "PASS",
+    label: "RUST HOST TESTS",
+    detail: "Run 32946810318 passed both the default and feature-gated Rust host suites at exact source ebf225ff.",
+    href: `${CI_RUN}/job/98109188373`,
+  },
+  {
+    state: "PASS",
+    label: "VERIFIABLE SBF BUILD",
+    detail: "Run 32946810318 reproduced the 649,680-byte IAT V2 binary at SHA-256 771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01 and uploaded artifact 9599245993. This is build evidence only, not a Devnet signature or transaction.",
+    href: `${CI_RUN}/job/98109188370`,
+  },
+  {
+    state: "HOLD",
+    label: "MANDATORY LIVE-EVIDENCE GATE",
+    detail: "Source-bound live runtime receipts plus required direct observers are still absent. The canonical gate remains nonexecuting and nonauthorizing HOLD.",
+    href: `${CI_RUN}/job/98109188405`,
+  },
+  {
+    state: "PASS",
+    label: "WINDOWS NON-EVIDENCE SMOKE",
+    detail: "Run 32946810318 passed the hosted Windows source-contract checks and confirmed the exact nonauthorizing HOLD projection. This job is smoke coverage, not release evidence.",
+    href: `${CI_RUN}/job/98109188109`,
+  },
+  {
+    state: "BLOCKED",
+    label: "RADIANCE VISUAL CI",
+    detail: "Source checks are separate from artifact proof. Preview and standalone media evidence remain blocked; no verified Radiance artifact is claimed.",
+    href: "https://github.com/InternalAgencyIO/InternalAgency/pull/14/checks",
+  },
+];
+
 const copy = {
   en: {
     launch: "LAUNCH CONTROL",
     eyebrow: "STAR ASCENT // PUBLIC PROOF BOARD",
     title: <>NO CLAIM<br />WITHOUT PROOF.</>,
-    lede: "Every non-secret Devnet export and the separate local time-gate proof are public under CC0. The 18-transaction rehearsal and operator-relayed FDF Guard review are recorded; mainnet remains on hold for funding, final preflight, and scheduling.",
+    lede: "Historical off-chain signature proof remains independently verifiable at exact hashes. Current-source Rust and verifiable SBF build evidence are now public at an exact artifact hash; no current-source physical Devnet signature or transaction receipt is published. Mainnet is UNSCHEDULED HOLD until funding and every canonical gate clear.",
     fields: [
-      ["Mainnet mint", "Not published", "No mainnet IAT mint is represented by these devnet records."],
+      ["Mainnet mint", "HOLD", "No mainnet IAT mint is represented by these Devnet records, and no Mainnet action was performed."],
       ["V2 program", "Devnet live", "Program 62Gth5per9yCuLTG4tnvVDf8yszDvt6Undz3xDmtsnuj is named in both V2 rehearsal records."],
       ["Initialization", "7 / 7", "All seven recorded V2 initialization signatures were observed finalized on devnet."],
       ["Feature progress", "18 TX", "Three stake roles, standard and CCC-linked week-8 settlement outcomes, core APY, liquidity unlock, Switchboard randomness, and two settled CCC draws are recorded."],
@@ -52,14 +124,18 @@ const copy = {
     ],
     evidence: "CC0 PUBLIC EVIDENCE",
     evidenceTitle: "RAW BYTES. PUBLIC HASHES. NO SECRETS.",
-    evidenceLede: "The initialization and feature exports describe separate devnet rehearsal instances, so their mint and configuration addresses differ. Neither is a mainnet mint.",
+    evidenceLede: "The historical off-chain signature artifacts are frozen at publication commit eb2e59c. The earlier initialization and feature exports describe separate Devnet rehearsal instances, so their mint and configuration addresses differ. None is a Mainnet mint or the current CI build artifact linked above.",
     download: "OPEN JSON",
     hash: "SHA-256",
     github: "OPEN THE GITHUB EVIDENCE DIRECTORY",
     cc0: "CC0 1.0 PUBLIC-DOMAIN DEDICATION",
     scope: "WHAT THIS DOES NOT PROVE",
     scopeTitle: "Publication is not launch approval.",
-    scopeBody: "Every immediately available feature path, the independent feature review, and separate local time boundaries are recorded. The local proof is not a signed Devnet transaction. Mainnet funding, final packet regeneration, and replacement ceremony scheduling are not complete. Mainnet remains HOLD.",
+    scopeBody: "The published signature verifies against the bound public key and frozen request; it does not independently prove hardware provenance, a Devnet transaction, or launch authorization. Current-source Rust/SBF build evidence is public, but source-bound live receipts, required direct observers, final Mainnet preflight, funding, and ceremony scheduling are not complete. Mainnet remains UNSCHEDULED HOLD.",
+    progress: "CURRENT PUBLIC CHECKPOINT",
+    progressTitle: "CURRENT BUILD VERIFIED. LIVE DEVNET PROOF HOLD.",
+    progressLede: "This board separates completed verification from fail-closed HOLD conditions. A red gate is not relabeled as success.",
+    inspect: "INSPECT RECEIPT",
     order: "PUBLICATION ORDER",
     rule: "Sign physically. Verify independently. Publish everywhere together.",
     links: ["RUN OF SHOW", "GENESIS RECORD", "OFFICIAL SIGNAL"],
@@ -72,7 +148,22 @@ const copy = {
 export default function ProofPage() {
   const t = copy.en;
   return <main className="proof-page"><div className="proof-stars" aria-hidden="true" /><nav><a href="/">IA<span>///</span></a><a href="/launch">{t.launch} ↗</a></nav>
-    <section className="proof-hero"><p>{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lede}</p></section>
+    <section className="proof-hero">
+      <div className="proof-hero-copy"><p>{t.eyebrow}</p><h1>{t.title}</h1><p>{t.lede}</p></div>
+      <figure className="proof-portrait">
+        <div className="proof-portrait-frame">
+          {/* eslint-disable-next-line @next/next/no-img-element -- Vinext runtime does not safely support next/image; this local asset has exact intrinsic dimensions. */}
+          <img src="/images/radiance-proof-signal-v1.png" width={1120} height={1400} fetchPriority="high" alt="Radiance, a fictional adult signal operator, beside the illuminated Devnet proof beacon" />
+          <span className="proof-portrait-scan" aria-hidden="true" />
+          <span className="proof-portrait-reticle" aria-hidden="true" />
+        </div>
+        <figcaption><span>RADIANCE // SIGNAL OPERATOR</span><b>BUILD VERIFIED // LIVE HOLD</b></figcaption>
+      </figure>
+    </section>
+    <section className="proof-progress">
+      <p>{t.progress}</p><h2>{t.progressTitle}</h2><span>{t.progressLede}</span>
+      <div>{progressRecords.map((record)=><article key={record.label} data-state={record.state.toLowerCase()}><b>{record.state}</b><p>{record.label}</p><h3>{record.detail}</h3><a href={record.href} target="_blank" rel="noreferrer">{t.inspect} ↗</a></article>)}</div>
+    </section>
     <section className="proof-grid">{t.fields.map(([label,status,detail], index)=><article key={label}><span>0{index + 1}</span><div><p>{label}</p><strong>{status}</strong><small>{detail}</small></div></article>)}</section>
     <section className="proof-evidence">
       <p>{t.evidence}</p>
@@ -86,7 +177,7 @@ export default function ProofPage() {
             <p>{label}</p>
             <h3>{detail}</h3>
             {record.sha256 && <code><b>{t.hash}</b>{record.sha256}</code>}
-            <a href={`${EVIDENCE_ROOT}/${record.file}`}>{t.download} ↗</a>
+            <a href={record.href ?? `${EVIDENCE_ROOT}/${record.file}`} target={record.href ? "_blank" : undefined} rel={record.href ? "noreferrer" : undefined}>{record.action ?? t.download} ↗</a>
           </article>;
         })}
       </div>

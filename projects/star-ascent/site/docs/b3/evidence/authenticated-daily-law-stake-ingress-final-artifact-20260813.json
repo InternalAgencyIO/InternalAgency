@@ -1,0 +1,105 @@
+{
+  "schema": "iat-b3-authenticated-daily-law-stake-ingress-artifact-v1",
+  "status": "SOURCE_BOUND_LOCAL_EVIDENCE_COMPLETE_OWNER_ENTROPY_ACCEPTANCE_AND_FINAL_BINARY_DEVNET_PENDING_MAINNET_HOLD",
+  "assembledAt": "2026-08-13T09:11:18+03:00",
+  "sourceBinding": {
+    "head": "09ec025b5b301925d49bc24347bafc8a0c7f733d",
+    "clean": false,
+    "reproducibleBuildClaimed": false,
+    "lawLibSha256": "ba404c92cbe80c5952f1c525be486636e694ced2525a8dc2b8610f41adfd2cea",
+    "lawStakeIngressSha256": "7b75b63695a652f53da5597c4dc7cbe282471022f60acfd5807aafc7ae1121b8",
+    "economyStakeIngressRuntimeSha256": "a90be8d64d217d1d673c975e6f19402d6c411623d90e7122df1306a1d7b6c941",
+    "economyStakeIngressKernelSha256": "704444af0bfd46bf55c7aef2c40bc9a146c7febab562109276c06c8624b28404",
+    "combinedRehearsalDriverSha256": "0e687403a11b19dd2190fba4441306fc488a5cbff5c3dc6056e309eaa1d5ebe3",
+    "combinedRehearsalRunnerSha256": "51cda6b048648f6333bf530b76284bef047215b433e2fa58bb9aa325bb08b666",
+    "ownerPolicyFreezeSha256": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
+    "releaseGraphSha256": "68b22e29f555adb2f59fe5cf42e6a1bf7783a8c962195de6f7736ccd9b1ea843"
+  },
+  "evidenceInputs": {
+    "combinedLawStakeLocalValidator": {
+      "path": "docs/b3/evidence/local-validator-combined-law-stake-rehearsal-20260812.json",
+      "sha256": "48ff7f7d6094035676e1b8d772f8e39cf677edc3e1df40c8e90ead6476345ea2",
+      "canonicalHead": "66228315396321aa5e8a9d8589f83a81d332d160",
+      "status": "PASS_HOLD"
+    },
+    "stakeIngressProductionExecutor": {
+      "path": "docs/b3/evidence/local-validator-stake-ingress-production-executor-20260810.json",
+      "sha256": "b6f4934872eca7533cc58002dce8a71b54110381b12ec096cf1f7d1884718592",
+      "status": "PASS"
+    },
+    "finalizerInfluenceMeasurement": {
+      "path": "docs/b3/evidence/daily-law-finalizer-influence-offline-20260813.json",
+      "status": "OFFLINE_SYNTHETIC_MEASUREMENT_COMPLETE_EMPIRICAL_TRACE_PENDING_MAINNET_HOLD"
+    }
+  },
+  "authenticatedDailyLaw": {
+    "oneLawElfForFinalizerAndTransferHook": true,
+    "actualLawInitializationExecutedOnLoopback": true,
+    "actualPermissionlessFinalizerExecutedOnLoopback": true,
+    "actualDecisionRecomputed": true,
+    "actualSlotHashSelectionMatched": true,
+    "missingStaleLockedAndForgedStatesFailClosed": true,
+    "directHookBypassRejected": true,
+    "invocationRelativeEntropyMeasuredOffline": true,
+    "exactSyntheticConsecutiveCandidates": 64,
+    "exactSyntheticOpenCandidates": 22,
+    "exactSyntheticLockedCandidates": 42,
+    "firstSyntheticOpenAfterWaitingSlots": 4,
+    "modeledForkPairs": 64,
+    "modeledForkOutcomeDivergences": 26,
+    "unbiasedVrfClaimed": false,
+    "realizedFridayProbabilityClaimed": false
+  },
+  "authenticatedStakeIngress": {
+    "productionSourceExecutorInvokedOnLoopback": true,
+    "dailyLawAuthenticatedBeforeTokenParsing": true,
+    "ownerSignedExactApproveCheckedCpi": true,
+    "canonicalIngressPdaDerivedAndInvokeSigned": true,
+    "transferHookExtraAccountsResolvedFromTlv": true,
+    "directStakeVaultDonationRejected": true,
+    "noDelegateIngressAccepted": true,
+    "priorDelegateRestoredExactly": true,
+    "fundedStatelessIngressPdaGriefRejected": true,
+    "hookFailureRolledBackApproval": true,
+    "retainedV2PostCpiFinalizerExecuted": true,
+    "persistenceCallbackFailureRolledBackFullSequence": true,
+    "postCompletionCpiFailureRolledBackFullSequence": true
+  },
+  "ownerControl": {
+    "path": "docs/b3/iat-b3-owner-policy-freeze.v1.json",
+    "section": "PRODUCTION_IDENTITY_INPUT_FREEZE.ownerChoices.entropyRiskAcceptance",
+    "entropyRiskAcceptance": null,
+    "requiredDisposition": "OWNER_MUST_ACCEPT_TIMING_SELECTION_WITH_CLAIM_LIMITS_OR_AUTHORIZE_ENTROPY_REDESIGN",
+    "selectedByEngineering": false
+  },
+  "gatePolicy": {
+    "gate8Predicate": "SOURCE_BOUND_AUTOMATED_GATE_8_DIRECT_EVIDENCE_PACKET",
+    "gate8PredicateSatisfied": false,
+    "directEvidenceOnly": true,
+    "humanReviewerRequired": false,
+    "independentObserverRequired": false,
+    "soleHumanGate": "TREZOR_MODEL_T_PHYSICAL_CONFIRMATION",
+    "humanGateScope": "ACTUAL_CRYPTOGRAPHIC_SIGNATURES_ONLY"
+  },
+  "remainingGates": [
+    "OWNER_ENTROPY_RISK_ACCEPTANCE_OR_REDESIGN",
+    "EMPIRICAL_SKIPPED_SLOT_FORK_CONGESTION_AND_ORDERING_TRACE",
+    "FROZEN_PRODUCTION_LAW_ECONOMY_MINT_IDENTITIES",
+    "PRODUCTION_ECONOMY_ENTRYPOINT_AND_COMPLETE_ALL_15_DISPATCH",
+    "RETAINED_V2_PERSISTENCE_COMPLETION",
+    "EXACT_FINAL_BINARY_REPRODUCIBLE_BUILD",
+    "FINAL_BINARY_PUBLIC_DEVNET_ADVERSARIAL_REHEARSAL",
+    "SOURCE_BOUND_AUTOMATED_GATE_8_DIRECT_EVIDENCE_PACKET"
+  ],
+  "truth": {
+    "sourceBoundLocalLawStakeEvidencePresent": true,
+    "delayedFinalizerTimingInfluencePresent": true,
+    "ownerEntropyRiskAccepted": false,
+    "productionIdentityBindingFrozen": false,
+    "finalBinary": false,
+    "fullFeatureDevnetRehearsalComplete": false,
+    "activationReady": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

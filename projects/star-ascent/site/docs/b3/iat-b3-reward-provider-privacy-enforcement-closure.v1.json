@@ -1,0 +1,325 @@
+{
+  "schema": "iat-b3-reward-provider-privacy-enforcement-closure/v1",
+  "profile": "PRODUCTION",
+  "status": "HOLD_UNTIL_RUNTIME_AUTHENTICATED_ENFORCEMENT",
+  "scope": {
+    "predicate": "RETAINED_V2_REWARD_PROVIDER_PRIVACY_ENFORCEMENT_CLOSURE",
+    "retainedParityFeatureCount": 53,
+    "auditedFeatureOrdinals": [3, 7, 8, 9, 10, 31, 32, 33, 49, 51, 52, 53],
+    "doesNotCertify": [
+      "PRODUCTION_PROVIDER_IDENTITY_OR_KEY_OWNERSHIP",
+      "PROVIDER_OPERATIONAL_TRUTH_OR_COLLECTOR_COMPLETENESS",
+      "EXTERNAL_DURABILITY_MONOTONICITY_OR_ROLLBACK_PROTECTION",
+      "RUNTIME_CONSUMER_GATING_OR_REWARD_PUBLICATION",
+      "PRIVACY_VAULT_FULL_LIFECYCLE_OR_RUNTIME_DAILY_LAW_AUTHENTICATION",
+      "DEVNET_FINAL_BINARY_OR_MAINNET_AUTHORIZATION",
+      "THE_OTHER_RETAINED_V2_FEATURE_DOMAINS"
+    ]
+  },
+  "gatePolicy": {
+    "gate8Predicate": "SOURCE_BOUND_AUTOMATED_GATE_8_DIRECT_EVIDENCE_PACKET",
+    "gate8PredicateSatisfied": false,
+    "directEvidenceOnly": true,
+    "humanReviewerRequired": false,
+    "multipleAutomatedEvidenceSourcesRequired": true,
+    "noSelfAttestation": true,
+    "soleHumanGate": "TREZOR_MODEL_T_PHYSICAL_CONFIRMATION",
+    "humanGateScope": "ACTUAL_CRYPTOGRAPHIC_SIGNATURES_ONLY"
+  },
+  "sourceBindings": [
+    {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-v2-parity-claims-readiness.v1.json",
+      "sha256": "4c19a7f250f0caa496476bc64e669e3bbcb46cac03092b3b272fc0c8b19037ba",
+      "byteLength": 12841
+    },
+    {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-release-dependency-graph.v1.json",
+      "sha256": "68b22e29f555adb2f59fe5cf42e6a1bf7783a8c962195de6f7736ccd9b1ea843",
+      "byteLength": 31813
+    },
+    {
+      "path": "projects/star-ascent/site/engagement/reward-policy.v1.json",
+      "sha256": "3af08bde5d9b2723880e000a48e78471634edac0854f09f8f4e21c84150869cd",
+      "byteLength": 10464
+    },
+    {
+      "path": "projects/star-ascent/site/engagement/generate-epoch-manifest.mjs",
+      "sha256": "fea3502557002814755069a4788e894ed8d4c1d60acbbf9b3f9225460def263a",
+      "byteLength": 1645
+    },
+    {
+      "path": "projects/star-ascent/site/engagement/node-binding-policy.mjs",
+      "sha256": "6a80f9c12ebf18badc13bb479798238d40a83550528325a550850ac8f7f36d3a",
+      "byteLength": 2317
+    },
+    {
+      "path": "projects/star-ascent/site/app/api/x/callback/route.ts",
+      "sha256": "9f8f62088d6540223338166dea25be6a6ee5ed62b8b9505c4c3ce99a57441d34",
+      "byteLength": 658
+    },
+    {
+      "path": "projects/star-ascent/site/app/api/x/callback/retained-v2-callback-handler.mjs",
+      "sha256": "62523efc75c68f9bb44cf140081161e3ac297732f3ddbe6d187819f6f6ecd258",
+      "byteLength": 9710
+    },
+    {
+      "path": "projects/star-ascent/site/app/api/x/callback/retained-v2-runtime-boundary.mjs",
+      "sha256": "87bb53010cdcd7188950834b0110a645c60a1ed056d57559832755b4d6eee0f9",
+      "byteLength": 21696
+    },
+    {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-external-checkpoint-provider-readiness.v1.json",
+      "sha256": "24f1c1879942346be86d3d2c4ff2907de6f890940cc74d5d3ecdd2bf54555fb5",
+      "byteLength": 11060
+    },
+    {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-x-social-evidence-provider-readiness.v1.json",
+      "sha256": "1067ce1277b8d8f995db85d772d495ff17b51c58bc5da43c68b2cb7bcc5a101b",
+      "byteLength": 20847
+    },
+    {
+      "path": "projects/star-ascent/site/docs/b3/iat-b3-privacy-vault-native-instruction-plan.v1.json",
+      "sha256": "411d90449c69bff1d73017cbb04e84b71dbe0248502a30bc35e8cc38d779a248",
+      "byteLength": 5631
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_reference/provider-authenticated-envelope.mjs",
+      "sha256": "42b45111b527ecf4f570a77ad5ae977d9bf62ea8a0d6c6f9ed7f082b5bbc07b7",
+      "byteLength": 37061
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_reference/reward-authenticated-consumer-runtime.mjs",
+      "sha256": "10062c50567f1073f1fded1468f95a2b78fe763800f31be19dcdf72e67aa0188",
+      "byteLength": 68569
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_reference/privacy-vault-authenticated-recovery-runtime.mjs",
+      "sha256": "9140ffcf489dfd3b24a5e121214a92705c794d639934649dec8a9217a7468584",
+      "byteLength": 24118
+    },
+    {
+      "path": "projects/star-ascent/site/programs/iat_b3_reference/reward-capacity-waterfall.mjs",
+      "sha256": "71fb4cbb58feecebe524e5047e34db7b39a99870825bbcfd7f2fc1e95aaf00f3",
+      "byteLength": 99158
+    }
+  ],
+  "featureRows": [
+    {
+      "ordinal": 3,
+      "capability": "Optional Privacy Vault",
+      "domain": "PRIVACY",
+      "enforcementState": "NONACTIVATING_UNSIGNED_ACCOUNT_LOCAL_PREREQUISITE_ONLY",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "The native plan does not authenticate runtime Daily Law or transfer-hook accounts and does not sign, submit, execute CPI, or prove the full confidential lifecycle."
+    },
+    {
+      "ordinal": 7,
+      "capability": "Ordered reward lanes",
+      "domain": "REWARD",
+      "enforcementState": "REFERENCE_ONLY_PUBLICATION_DISABLED",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "The waterfall is reference-only and every downstream consumer lacks a production authenticated checkpoint gate."
+    },
+    {
+      "ordinal": 8,
+      "capability": "Full collateral reservation",
+      "domain": "REWARD",
+      "enforcementState": "REFERENCE_ONLY_PUBLICATION_DISABLED",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "Production allocator lineage, durable reservation CAS, and authenticated consumer enforcement are not proven."
+    },
+    {
+      "ordinal": 9,
+      "capability": "No reward debt",
+      "domain": "REWARD",
+      "enforcementState": "REFERENCE_ONLY_PUBLICATION_DISABLED",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "No production runtime proof binds full-or-null allocation to durable externally anchored state and every consumer."
+    },
+    {
+      "ordinal": 10,
+      "capability": "Existing-reservation priority",
+      "domain": "REWARD",
+      "enforcementState": "REFERENCE_ONLY_PUBLICATION_DISABLED",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "Existing-reservation ordering remains a nonactivating reference until production state, CAS, checkpoint, and consumer gates are authenticated."
+    },
+    {
+      "ordinal": 31,
+      "capability": "Wallet/X binding and uniqueness",
+      "domain": "PROVIDER",
+      "enforcementState": "RUNTIME_WRITE_IMMUTABLY_HELD_PENDING_AUTHENTICATED_PREREQUISITES",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "The shipped X callback cannot mutate D1; production provider-envelope, checkpoint/rollback, Daily Law, consumer, and exact write-adapter verifiers remain unavailable."
+    },
+    {
+      "ordinal": 32,
+      "capability": "X age/subscription checks",
+      "domain": "PROVIDER",
+      "enforcementState": "RETAINED_V2_10_90_100_BOUNDARY_PRESENT_RUNTIME_HELD",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "The boundary preserves None/Basic 10/90 and Premium/PremiumPlus 100 semantics, but no production-authenticated X provider or durable replay state is wired."
+    },
+    {
+      "ordinal": 33,
+      "capability": "Atomic D1 activation and cap semantics",
+      "domain": "PROVIDER",
+      "enforcementState": "LEGACY_D1_WRITER_REMOVED_EXACT_ATOMIC_ADAPTER_UNWIRED",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "No D1 mutation is possible until an exact source-bound automatically verified adapter and cross-bound mutation receipt exist; external restore and rollback proof remain absent."
+    },
+    {
+      "ordinal": 49,
+      "capability": "Weekly faction rewards",
+      "domain": "REWARD",
+      "enforcementState": "CREATION_POLICY_HOLD_REFERENCE_ONLY",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "Creation remains HOLD pending frozen scoring, Sybil, snapshot, tie, authorization, provider, durability, and consumer evidence."
+    },
+    {
+      "ordinal": 51,
+      "capability": "Genesis and X interaction eligibility",
+      "domain": "REWARD_PROVIDER",
+      "enforcementState": "NONPUBLISHING_REFERENCE_RUNTIME_WRITE_IMMUTABLY_HELD",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "The legacy Genesis binding writer is removed and reward publication is disabled; production provider, collector, checkpoint, rollback, and consumer evidence remain absent."
+    },
+    {
+      "ordinal": 52,
+      "capability": "X-bound reward tiering",
+      "domain": "REWARD_PROVIDER",
+      "enforcementState": "NONPUBLISHING_RETAINED_V2_BOUNDARY_RUNTIME_HELD",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "The runtime boundary preserves exact 10/90/100 plans, but provider authentication, durable replay, checkpoint, and persistence adapters are deliberately unwired."
+    },
+    {
+      "ordinal": 53,
+      "capability": "New-obligation reward-capacity waterfall",
+      "domain": "REWARD",
+      "enforcementState": "REFERENCE_CONTRACT_ONLY_PUBLICATION_DISABLED",
+      "runtimeAuthenticated": false,
+      "activationAuthorized": false,
+      "blocker": "The release graph marks waterfall proofs structural and nonactivating; durable CAS, provider anchoring, and every-consumer gates remain BLOCKED."
+    }
+  ],
+  "runtimeSurfaces": [
+    {
+      "id": "REWARD_PUBLICATION_SIGNING_AND_BROADCAST",
+      "state": "SOURCE_BOUND_DISABLED",
+      "present": true,
+      "writesRuntimeState": false,
+      "runtimeAuthenticated": false,
+      "sourceBoundDisableVerified": true,
+      "detail": "The exact reward policy forbids publication, server signing, and automatic broadcast; the legacy publisher rejects the current V2 policy."
+    },
+    {
+      "id": "RETAINED_V2_X_CALLBACK_WRITE_BOUNDARY",
+      "state": "SOURCE_BOUND_DISABLED_PENDING_UNAVAILABLE_RUNTIME_PREREQUISITES",
+      "present": true,
+      "writesRuntimeState": false,
+      "runtimeAuthenticated": false,
+      "sourceBoundDisableVerified": true,
+      "detail": "The route injects no runtime verifiers, evidence resolver, or write adapter and therefore returns HOLD before D1 or network access; legacy activation and reservation SQL are absent."
+    },
+    {
+      "id": "EXTERNAL_CHECKPOINT_PROVIDER",
+      "state": "INTEGRATION_ABSENT_BLOCKED",
+      "present": false,
+      "writesRuntimeState": false,
+      "runtimeAuthenticated": false,
+      "sourceBoundDisableVerified": true,
+      "detail": "The production readiness packet explicitly sets providerIntegrationPresent=false and every production control remains BLOCKED."
+    },
+    {
+      "id": "X_SOCIAL_EVIDENCE_PROVIDER",
+      "state": "INTEGRATION_ABSENT_BLOCKED",
+      "present": false,
+      "writesRuntimeState": false,
+      "runtimeAuthenticated": false,
+      "sourceBoundDisableVerified": true,
+      "detail": "The production readiness packet explicitly sets providerIntegrationPresent=false and all operational, collector, authentication, rollback, and consumer-gating claims remain false."
+    },
+    {
+      "id": "PRIVACY_VAULT_NATIVE_EXECUTION",
+      "state": "UNSIGNED_INERT_PREREQUISITE_RELEASE_HOLD",
+      "present": true,
+      "writesRuntimeState": false,
+      "runtimeAuthenticated": false,
+      "sourceBoundDisableVerified": true,
+      "detail": "Only six account-local unsigned builders are admitted; signing, RPC, CPI, submission, chain mutation, Devnet verification, release authorization, and Mainnet authorization are false."
+    },
+    {
+      "id": "REFERENCE_AUTHENTICATED_MECHANICS",
+      "state": "REFERENCE_PRESENT_NOT_PRODUCTION_WIRED",
+      "present": true,
+      "writesRuntimeState": false,
+      "runtimeAuthenticated": false,
+      "sourceBoundDisableVerified": true,
+      "detail": "Provider envelope, authenticated reward consumer, and authenticated privacy recovery mechanics exist only under iat_b3_reference and keep production/activation truth false."
+    }
+  ],
+  "dependencyNodes": [
+    {
+      "id": "REWARD_WATERFALL_PROOFS",
+      "status": "BLOCKED",
+      "completionEvidencePresent": false
+    },
+    {
+      "id": "DURABLE_REWARD_CAS",
+      "status": "BLOCKED",
+      "completionEvidencePresent": false
+    },
+    {
+      "id": "EXTERNAL_CHECKPOINT_PROVIDER",
+      "status": "BLOCKED",
+      "completionEvidencePresent": false
+    },
+    {
+      "id": "X_SOCIAL_EVIDENCE_PROVIDER",
+      "status": "BLOCKED",
+      "completionEvidencePresent": false
+    },
+    {
+      "id": "REWARD_LOCAL_WRITE_CONSUMER_GATING",
+      "status": "BLOCKED",
+      "completionEvidencePresent": false
+    },
+    {
+      "id": "PRIVACY_VAULT_CLIENT",
+      "status": "BLOCKED",
+      "completionEvidencePresent": false
+    }
+  ],
+  "terminalPredicate": {
+    "auditedFeatureCount": 12,
+    "runtimeAuthenticatedFeatureCount": 0,
+    "unresolvedRuntimeExposureIds": [],
+    "rewardPublicationDisabled": true,
+    "privacySubmissionDisabled": true,
+    "allRequiredProviderIntegrationsAbsent": true,
+    "closureComplete": false,
+    "evaluationRule": "GO_REQUIRES_EVERY_AUDITED_FEATURE_RUNTIME_AUTHENTICATED_NO_UNRESOLVED_RUNTIME_EXPOSURE_ALL_REQUIRED_DEPENDENCIES_VERIFIED_AND_EXPLICIT_RELEASE_AUTHORIZATION"
+  },
+  "runtimeAuthenticationVerified": false,
+  "providerOperationalTruthVerified": false,
+  "collectorCompletenessVerified": false,
+  "externalMonotonicityVerified": false,
+  "rollbackProtectionVerified": false,
+  "runtimeConsumerGatingVerified": false,
+  "privacyLifecycleVerified": false,
+  "activationReady": false,
+  "releaseAuthorizationVerified": false,
+  "mainnetExecutionAuthorized": false,
+  "mainnetStatus": "HOLD"
+}

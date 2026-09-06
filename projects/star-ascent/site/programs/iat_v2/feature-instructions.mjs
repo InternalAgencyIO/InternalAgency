@@ -53,6 +53,8 @@ export const IAT_V2_FEATURE_DISCRIMINATORS = Object.freeze({
   commitRound: [229, 102, 157, 34, 152, 217, 15, 70],
   settleRound: [40, 101, 18, 1, 31, 129, 52, 77],
   expireRound: [238, 222, 71, 141, 104, 222, 76, 248],
+  backfillHistoricalNeutralRound: [167, 170, 28, 248, 5, 118, 93, 117],
+  migrateLegacyRound: [138, 149, 12, 194, 129, 113, 158, 28],
 });
 
 function key(value, label) {
@@ -498,6 +500,76 @@ export function buildExpireRoundInstruction({
       account(round, false, true),
     ],
     data: discriminator("expireRound"),
+  });
+}
+
+export function buildBackfillHistoricalNeutralRoundInstruction({
+  admin = IAT_V2_PROGRAM_ADMIN,
+  mint,
+  week,
+  programId = IAT_V2_PROGRAM_ID,
+} = {}) {
+  const adminKey = key(admin, "Program administrator");
+  if (!adminKey.equals(IAT_V2_PROGRAM_ADMIN)) {
+    throw new Error("Historical neutral backfill requires the reviewed Model T administrator");
+  }
+  const derived = laneAccounts(mint, programId);
+  const normalizedWeek = unsigned(week, 53, "Historical CCC week");
+  if (normalizedWeek === 0n) {
+    throw new Error("Historical neutral backfill requires an exact prior-week round");
+  }
+  const previousRound = deriveRoundAddress({
+    config: derived.config,
+    programId: derived.programId,
+    week: Number(normalizedWeek - 1n),
+  });
+  const round = deriveRoundAddress({
+    config: derived.config,
+    programId: derived.programId,
+    week: Number(normalizedWeek),
+  });
+  return new TransactionInstruction({
+    programId: derived.programId,
+    keys: [
+      account(adminKey, true, true),
+      account(derived.config),
+      account(SYSVAR_INSTRUCTIONS_PUBKEY),
+      account(previousRound),
+      account(round, false, true),
+      account(SystemProgram.programId),
+    ],
+    data: Buffer.concat([
+      discriminator("backfillHistoricalNeutralRound"),
+      u64(week, "Historical CCC week"),
+    ]),
+  });
+}
+
+export function buildMigrateLegacyRoundInstruction({
+  admin = IAT_V2_PROGRAM_ADMIN,
+  mint,
+  week,
+  programId = IAT_V2_PROGRAM_ID,
+} = {}) {
+  const adminKey = key(admin, "Program administrator");
+  if (!adminKey.equals(IAT_V2_PROGRAM_ADMIN)) {
+    throw new Error("Legacy Round migration requires the reviewed Model T administrator");
+  }
+  const derived = laneAccounts(mint, programId);
+  const round = deriveRoundAddress({
+    config: derived.config,
+    programId: derived.programId,
+    week: Number(unsigned(week, 53, "CCC week")),
+  });
+  return new TransactionInstruction({
+    programId: derived.programId,
+    keys: [
+      account(adminKey, true, true),
+      account(derived.config),
+      account(round, false, true),
+      account(SystemProgram.programId),
+    ],
+    data: discriminator("migrateLegacyRound"),
   });
 }
 

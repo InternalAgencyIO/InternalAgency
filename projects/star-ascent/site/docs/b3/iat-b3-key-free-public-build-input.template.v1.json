@@ -1,0 +1,57 @@
+{
+  "schema": "iat-b3-key-free-public-build-input-template/v1",
+  "status": "HOLD",
+  "purpose": "KEY_FREE_BUILD_ONLY_NONDEPLOYABLE",
+  "templateIsExecutableInput": false,
+  "inputPaths": {
+    "identity": "inputs/build-only-identity.json",
+    "declaredGenesis": "inputs/declared-genesis.json"
+  },
+  "identityPayload": {
+    "schema": "iat-b3-disposable-devnet-public-identity-input/v1",
+    "generatedAtUtc": null,
+    "laneId": null,
+    "lawProgramId": null,
+    "economyProgramId": null,
+    "canonicalMint": null
+  },
+  "declaredGenesisPayload": {
+    "schema": "iat-b3-disposable-devnet-genesis-observation-input/v1",
+    "generatedAtUtc": null,
+    "laneId": null,
+    "network": "solana-devnet",
+    "rpcUrl": "https://api.devnet.solana.com",
+    "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+    "classification": "DECLARED_COMPILE_DOMAIN_ONLY_NOT_NETWORK_OBSERVATION"
+  },
+  "directObservationBoundary": {
+    "checkpointDirectlyObservedByThisModule": false,
+    "wallClockDirectlyObservedByThisModule": false,
+    "inputFilesDirectlyObservedByThisModule": false,
+    "productionIdentityInventoryDirectlyObservedByThisModule": false,
+    "priorLaneIdentityInventoryDirectlyObservedByThisModule": false,
+    "consumerMustSupplyDirectObservations": true
+  },
+  "truthBoundary": {
+    "keypairGenerated": false,
+    "privateKeyObserved": false,
+    "signerObserved": false,
+    "signatureObserved": false,
+    "payerObserved": false,
+    "payerBalanceObserved": false,
+    "fundingObserved": false,
+    "endpointUseAuthorized": false,
+    "networkContacted": false,
+    "rpcObserved": false,
+    "declaredGenesisNetworkObserved": false,
+    "deployable": false,
+    "deploymentAuthorized": false,
+    "releaseAuthorized": false,
+    "productionIdentityManifestSatisfied": false,
+    "executionAuthorized": false,
+    "signerBearingRehearsalAuthorized": false,
+    "publicDevnetAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

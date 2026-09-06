@@ -51,13 +51,13 @@ try {
   const artifactDigests = Object.fromEntries(Object.entries(artifactPaths).map(
     ([field, path]) => [field, sha256(readFileSync(join(sandboxRoot, path)))],
   ));
-  const packetApprovedAtUtc = new Date(Date.now() - 60_000).toISOString();
+  const packetObservedAtUtc = new Date(Date.now() - 60_000).toISOString();
   const packet = {
     status: "READY",
     artifactDigests,
-    approval: {
+    automatedClosure: {
       packetDigest: sha256(JSON.stringify({ packetVersion: 1, artifactDigests })),
-      approvedAtUtc: packetApprovedAtUtc,
+      observedAtUtc: packetObservedAtUtc,
     },
   };
   const packetPath = join(sandboxRoot, "launch", "release-packet.template.json");

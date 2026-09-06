@@ -155,10 +155,11 @@ transfer plan only when the persistent record is open.
 ### 3.3 Randomness limitation
 
 A Solana ancestor slot hash is inexpensive, public, and replayable, but it is
-not a consensus-native threshold VRF dedicated to B3. Leaders and transaction
-schedulers may have limited influence, and a prospective caller may choose when
-to submit finalization. Permissionless competition and a fixed lag reduce but do
-not remove that influence.
+not a consensus-native threshold VRF dedicated to B3. Selection is relative to
+the invocation slot, so a prospective finalizer can wait across eligible
+ancestor hashes and submit when a known candidate produces a preferred result.
+Leaders and transaction schedulers can also influence ordering. Permissionless
+competition and a fixed lag do not remove this material timing influence.
 
 Accordingly the protocol may claim exact bucket thresholds, not perfectly
 unbiased entropy or an unconditional exact realized probability. Recovering

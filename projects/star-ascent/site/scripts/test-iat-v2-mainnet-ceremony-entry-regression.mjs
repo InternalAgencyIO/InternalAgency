@@ -12,6 +12,7 @@ import {
 const gate = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-readiness-gate.json"), "utf8"));
 const audit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-prelaunch-20260802/manifest.json"), "utf8"));
 const remediationAudit = JSON.parse(readFileSync(resolve("public/audits/iat-v2-remediation-20260802/manifest.json"), "utf8"));
+const currentSourceClearance = JSON.parse(readFileSync(resolve("launch/iat-v2-current-source-clearance.json"), "utf8"));
 const ceremonyReview = JSON.parse(readFileSync(resolve("launch/iat-v2-ceremony-review.template.json"), "utf8"));
 const stageJournal = JSON.parse(readFileSync(resolve("launch/iat-v2-mainnet-stage-journal.template.json"), "utf8"));
 const currentNowMs = Date.parse("2026-08-01T08:18:04Z");
@@ -19,7 +20,8 @@ const canonicalValidation = { readiness: true, prelaunch: true, remediation: tru
 const canonicalCeremonyArtifacts = {
   ceremonyReview,
   stageJournal,
-  validation: { ceremonyReview: true, stageJournal: true },
+  currentSourceClearance,
+  validation: { ceremonyReview: true, stageJournal: true, currentSourceClearance: true },
 };
 const current = assessCeremonyEntry(
   gate,
@@ -33,13 +35,12 @@ const current = assessCeremonyEntry(
 assert.equal(current.state, "HOLD");
 assert.equal(current.mainnetStatus, "HOLD");
 assert.deepEqual(current.blockers, [
-  "PRELAUNCH_SECURITY_AUDIT_CLEARANCE",
-  "REMEDIATION_SECURITY_AUDIT_CLEARANCE",
+  "CURRENT_SOURCE_SUCCESSOR_CLEARANCE",
   "FRESH_READ_ONLY_FUNDING_OBSERVATION",
   "MAINNET_FUNDING_FLOOR",
   "REPLACEMENT_UTC_WINDOW",
   "BOUND_RELEASE_ARTIFACTS_REGENERATED",
-  "INDEPENDENT_MAINNET_VERIFIER_ASSIGNED",
+  "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION",
   "MODEL_T_DEVICE_PATH_REVIEWED",
 ]);
 assert.ok(current.limitations.every((value) => typeof value === "string" && value.length > 0));
@@ -58,10 +59,21 @@ const preflightResult = spawnSync(
 assert.equal(preflightResult.status, 1);
 assert.match(preflightResult.stderr, /CEREMONY ENTRY BLOCKED/);
 assert.doesNotMatch(preflightResult.stdout, /== test-accountability-label-normalization\.mjs ==/);
+const preflightSource = readFileSync(resolve("scripts/run-launch-preflight.mjs"), "utf8");
+assert.match(preflightSource, /validate-iat-v2-current-source-clearance\.mjs/u);
+for (const retiredGate of [
+  "validate-allocation-lock-plan.mjs",
+  "validate-devnet-rehearsal.mjs",
+  "validate-genesis-signing-checklist.mjs",
+  "validate-mainnet-handoff.mjs",
+  "validate-release-packet.mjs",
+  "mint-ceremony.test.mjs",
+]) assert.doesNotMatch(preflightSource, new RegExp(retiredGate.replaceAll(".", "\\."), "u"));
 
 const readyGate = structuredClone(gate);
 const readyAudit = structuredClone(audit);
 const readyRemediationAudit = structuredClone(remediationAudit);
+const readyCurrentSourceClearance = structuredClone(currentSourceClearance);
 const readyCeremonyReview = structuredClone(ceremonyReview);
 const readyStageJournal = structuredClone(stageJournal);
 readyGate.funding.ceremonyFloorSatisfied = true;
@@ -71,16 +83,17 @@ readyGate.schedule.state = "SCHEDULED_HOLD";
 readyGate.schedule.publishedAtUtc = "2099-01-01T00:00:00Z";
 readyGate.schedule.scheduledAtUtc = "2099-01-01T01:00:00Z";
 readyGate.gates.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
-readyGate.gates.independentMainnetVerifierAssigned = true;
+readyGate.gates.automatedSourceReceiptStateObservationComplete = true;
 readyGate.gates.physicalModelTDevicePathReviewed = true;
 readyCeremonyReview.status = "READY";
-readyCeremonyReview.review.releaseArtifactsRegeneratedAfterFundingAndScheduling = true;
-Object.assign(readyCeremonyReview.participants.independentVerifier, {
-  label: "Independent evidence verifier",
-  reviewedArtifacts: true,
-  reviewedStagePlan: true,
+Object.assign(readyCeremonyReview.observation, {
+  releaseArtifactsRegeneratedAfterFundingAndScheduling: true,
+  replacementUtcWindowObserved: true,
+  currentSbfDigestObserved: true,
+  currentSignedDevnetReceiptObserved: true,
+  stagePlanStateObserved: true,
 });
-Object.assign(readyCeremonyReview.participants.soleTrezorOperator, {
+Object.assign(readyCeremonyReview.signatureGate.soleTrezorOperator, {
   label: "Attended Model T operator",
   publicAddress: readyGate.funding.publicAddress,
   devicePathReviewed: true,
@@ -89,23 +102,11 @@ readyStageJournal.status = "ARMED";
 const readyCeremonyArtifacts = {
   ceremonyReview: readyCeremonyReview,
   stageJournal: readyStageJournal,
-  validation: { ceremonyReview: true, stageJournal: true },
+  currentSourceClearance: readyCurrentSourceClearance,
+  validation: { ceremonyReview: true, stageJournal: true, currentSourceClearance: true },
 };
-readyAudit.launchDecision = "CLEAR";
-readyAudit.findingSummary.openBySeverity.CRITICAL = 0;
-readyAudit.findingSummary.openBySeverity.HIGH = 0;
-readyAudit.clearance.securityBlockersResolved = true;
-readyAudit.clearance.independentAuditComplete = true;
-readyRemediationAudit.launchDecision = "CLEAR";
-readyRemediationAudit.findingSummary.openBySeverity.CRITICAL = 1;
-readyRemediationAudit.findingSummary.openBySeverity.HIGH = 0;
-readyRemediationAudit.findingSummary.remediatedPendingReview = 0;
-readyRemediationAudit.findingSummary.openBlockers = 0;
-readyRemediationAudit.clearance.securityBlockersResolved = true;
-readyRemediationAudit.clearance.independentAuditComplete = true;
-readyRemediationAudit.clearance.freshCurrentSourceSbfComplete = true;
-readyRemediationAudit.clearance.freshSignedDevnetComplete = true;
-readyRemediationAudit.clearance.productionIdentityIntegrationComplete = true;
+readyCurrentSourceClearance.status = "CLEAR";
+for (const field of Object.keys(readyCurrentSourceClearance.clearance)) readyCurrentSourceClearance.clearance[field] = true;
 const ready = assessCeremonyEntry(
   readyGate,
   "f".repeat(64),
@@ -122,16 +123,17 @@ assert.equal(ready.checks.MAINNET_HOLD_BOUNDARY, true);
 assert.equal(ready.checks.MAINNET_READINESS_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.LOCAL_TIME_GATE_CLASSIFICATION, true);
 assert.equal(ready.checks.PRELAUNCH_AUDIT_CANONICAL_VALIDATION, true);
-assert.equal(ready.checks.PRELAUNCH_SECURITY_AUDIT_CLEARANCE, true);
 assert.equal(ready.checks.REMEDIATION_AUDIT_CANONICAL_VALIDATION, true);
-assert.equal(ready.checks.REMEDIATION_SECURITY_AUDIT_CLEARANCE, true);
+assert.equal(ready.checks.HISTORICAL_AUDIT_HOLD_BOUNDARY, true);
+assert.equal(ready.checks.CURRENT_SOURCE_SUCCESSOR_CLEARANCE_VALIDATION, true);
+assert.equal(ready.checks.CURRENT_SOURCE_SUCCESSOR_CLEARANCE, true);
 assert.equal(ready.checks.FRESH_READ_ONLY_FUNDING_OBSERVATION, true);
 assert.equal(ready.checks.MAINNET_FUNDING_FLOOR, true);
 assert.equal(ready.checks.REPLACEMENT_UTC_WINDOW, true);
 assert.equal(ready.checks.V2_CEREMONY_REVIEW_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.V2_STAGE_JOURNAL_CANONICAL_VALIDATION, true);
 assert.equal(ready.checks.BOUND_RELEASE_ARTIFACTS_REGENERATED, true);
-assert.equal(ready.checks.INDEPENDENT_MAINNET_VERIFIER_ASSIGNED, true);
+assert.equal(ready.checks.AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION, true);
 assert.equal(ready.checks.MODEL_T_DEVICE_PATH_REVIEWED, true);
 
 for (const [name, scheduledAtUtc] of [
@@ -174,25 +176,40 @@ for (const [name, publishedAtUtc] of [
 }
 
 for (const mutate of [
-  (candidate) => { candidate.findingSummary.openBySeverity.CRITICAL = 2; },
-  (candidate) => { candidate.authorityDisposition.classifiedAsRoleSeparation = true; },
-  (candidate) => { candidate.clearance.freshCurrentSourceSbfComplete = false; },
+  (candidate) => { candidate.status = "HOLD"; },
+  (candidate) => { candidate.mainnetStatus = "READY"; },
+  (candidate) => { candidate.clearance.currentSourceSbfComplete = false; },
   (candidate) => { candidate.clearance.productionIdentityIntegrationComplete = false; },
 ]) {
-  const candidate = structuredClone(readyRemediationAudit);
+  const candidate = structuredClone(readyCurrentSourceClearance);
   mutate(candidate);
+  const artifacts = structuredClone(readyCeremonyArtifacts);
+  artifacts.currentSourceClearance = candidate;
   const rejected = assessCeremonyEntry(
     readyGate,
     "f".repeat(64),
     Date.parse("2099-01-01T00:15:00Z"),
     readyAudit,
-    candidate,
+    readyRemediationAudit,
     canonicalValidation,
-    readyCeremonyArtifacts,
+    artifacts,
   );
   assert.equal(rejected.state, "HOLD");
-  assert.ok(rejected.blockers.includes("REMEDIATION_SECURITY_AUDIT_CLEARANCE"));
+  assert.ok(rejected.blockers.includes("CURRENT_SOURCE_SUCCESSOR_CLEARANCE"));
 }
+
+const rewrittenHistoricalAudit = structuredClone(readyAudit);
+rewrittenHistoricalAudit.launchDecision = "CLEAR";
+const rewrittenHistorical = assessCeremonyEntry(
+  readyGate,
+  "f".repeat(64),
+  Date.parse("2099-01-01T00:15:00Z"),
+  rewrittenHistoricalAudit,
+  readyRemediationAudit,
+  canonicalValidation,
+  readyCeremonyArtifacts,
+);
+assert.ok(rewrittenHistorical.blockers.includes("HISTORICAL_AUDIT_HOLD_BOUNDARY"));
 
 for (const auditValidation of [
   { readiness: false, prelaunch: true, remediation: true },
@@ -221,12 +238,12 @@ for (const [name, mutate, blockers] of [
   [
     "V2 ceremony-review validator failure",
     (artifacts) => { artifacts.validation.ceremonyReview = false; },
-    ["V2_CEREMONY_REVIEW_CANONICAL_VALIDATION", "BOUND_RELEASE_ARTIFACTS_REGENERATED", "INDEPENDENT_MAINNET_VERIFIER_ASSIGNED", "MODEL_T_DEVICE_PATH_REVIEWED"],
+    ["V2_CEREMONY_REVIEW_CANONICAL_VALIDATION", "BOUND_RELEASE_ARTIFACTS_REGENERATED", "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION", "MODEL_T_DEVICE_PATH_REVIEWED"],
   ],
   [
     "HOLD V2 ceremony review with true readiness summaries",
     (artifacts) => { artifacts.ceremonyReview.status = "HOLD"; },
-    ["BOUND_RELEASE_ARTIFACTS_REGENERATED", "INDEPENDENT_MAINNET_VERIFIER_ASSIGNED", "MODEL_T_DEVICE_PATH_REVIEWED"],
+    ["BOUND_RELEASE_ARTIFACTS_REGENERATED", "AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION", "MODEL_T_DEVICE_PATH_REVIEWED"],
   ],
   [
     "V2 stage-journal validator failure",
@@ -239,18 +256,18 @@ for (const [name, mutate, blockers] of [
     ["BOUND_RELEASE_ARTIFACTS_REGENERATED"],
   ],
   [
-    "unreviewed V2 artifacts with a named verifier",
-    (artifacts) => { artifacts.ceremonyReview.participants.independentVerifier.reviewedArtifacts = false; },
-    ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED"],
+    "assertion-only V2 observation",
+    (artifacts) => { artifacts.ceremonyReview.observation.currentSbfDigestObserved = false; },
+    ["AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"],
   ],
   [
-    "operator reused through whitespace and format characters",
-    (artifacts) => { artifacts.ceremonyReview.participants.independentVerifier.label = "  ATTENDED\u200b   MODEL T OPERATOR  "; },
-    ["INDEPENDENT_MAINNET_VERIFIER_ASSIGNED"],
+    "human verifier injected into the signature gate",
+    (artifacts) => { artifacts.ceremonyReview.signatureGate.independentVerifier = { role: "INDEPENDENT_VERIFIER" }; },
+    ["AUTOMATED_SOURCE_RECEIPT_STATE_OBSERVATION"],
   ],
   [
     "operator address outside the sole-Trezor readiness record",
-    (artifacts) => { artifacts.ceremonyReview.participants.soleTrezorOperator.publicAddress = "Vote111111111111111111111111111111111111111"; },
+    (artifacts) => { artifacts.ceremonyReview.signatureGate.soleTrezorOperator.publicAddress = "Vote111111111111111111111111111111111111111"; },
     ["MODEL_T_DEVICE_PATH_REVIEWED"],
   ],
 ]) {
@@ -274,4 +291,4 @@ assert.equal(canonical.state, "HOLD");
 assert.equal(canonical.readinessValidatorExitCode, 0);
 assert.equal(canonical.checks.MAINNET_READINESS_CANONICAL_VALIDATION, true);
 
-console.log("IAT V2 ceremony-entry regression passed: the readiness ledger, audits, V2 ceremony review, and V2 stage journal require same-assessment canonical validation; synthetic ready state permits exactly one named owner-accepted Trezor risk while missing, expired, or impossible UTC windows, unaccepted criticals, stale artifacts, unreviewed verifier data, and an unbound Model T address remain blockers.");
+console.log("IAT V2 ceremony-entry regression passed: historical audits remain immutable HOLD evidence, the separately validated current-source successor is mandatory, retired /mint gates are absent, and missing UTC windows, stale artifacts, assertion-only observations, human-review injection, or an unbound Model T address remain blockers.");
