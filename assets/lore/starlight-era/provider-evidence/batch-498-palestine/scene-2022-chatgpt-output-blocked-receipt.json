@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "batch": 498,
+  "scene": 2022,
+  "provider": "ChatGPT Image Generator",
+  "invocationCount": 1,
+  "additionalInvocationsAllowed": 0,
+  "promptSource": "assets/lore/starlight-era/batch-498-palestine-fixed-rolls.json",
+  "exactPrompt": "One identity-preserving clothing-only tailoring pass for scene 2022: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=covered, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a fitted mini dress integrating the complete Palestine flag design (three equal horizontal bands of black above white above green, with a red triangle at the hoist) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; crimson suede sculptural platform without any branding. No tattoos. Radiance: an ivory asymmetric cocktail mini with emerald valley-ribbon panels and dark stone beadwork; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient ankle boot without any branding. No tattoos. Ellie: a black cropped architectural top with a secure green mini skort and red mineral-glass joints; secure open-back or side-back construction and bare arms, covered midriff; black volcanic gloss stiletto sandal with one subtle original RAZE split-star mark. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: an emerald strapless mini with dimensional pale canyon-ridge ribs over opaque lining and red seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; emerald satin knee high boot without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Use color-coordinated knee-high hosiery when legs are in frame.",
+  "promptSha256": "9C67B068487B6122B870DE6326A601FFF63470C64DC88897FD8CF0CAE3695167",
+  "input": {
+    "scene": 2022,
+    "sourceDownloadName": "desert_canyon_group_portrait.jpg",
+    "bytes": 231534,
+    "sha256": "94B799C1ED4E8FCE0972C757EBCB526219F90DA55B3B974C1F3F7A9C6E054DCC",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-498-palestine/scene-2022-meta-primary-original.jpg",
+    "width": 1152,
+    "height": 2048,
+    "contentType": "image/jpeg",
+    "role": "canonical-visible-download-original"
+  },
+  "state": "output-moderation-blocked-no-output-bytes",
+  "requestId": "432b792c-347a-4ac9-bc3d-526ff99284cd",
+  "rawError": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 432b792c-347a-4ac9-bc3d-526ff99284cd. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "disposition": "Preserve Meta original as selected. Do not rephrase or retry."
+}

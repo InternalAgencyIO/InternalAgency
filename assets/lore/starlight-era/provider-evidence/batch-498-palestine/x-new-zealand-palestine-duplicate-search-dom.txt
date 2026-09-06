@@ -1,0 +1,197 @@
+- heading "To view keyboard shortcuts, press question mark View keyboard shortcuts" [level=2]:
+  - generic: To view keyboard shortcuts, press question mark
+  - link "View keyboard shortcuts":
+    - /url: /i/keyboard_shortcuts
+- button "Grok":
+- button "Chat":
+- button "Skip to home timeline"
+- button "Skip to trending"
+- banner:
+  - heading "X" [level=1]:
+    - link "X":
+      - /url: /home
+  - navigation "Primary":
+    - link "Home":
+      - /url: /home
+      - generic: Home
+    - link "Search and explore":
+      - /url: /explore
+      - generic: Explore
+    - link "Notifications (1 unread notification)":
+      - /url: /notifications
+      - generic "1 unread items":
+        - generic: "1"
+      - generic: Notifications
+    - link "Direct Messages":
+      - /url: /i/chat
+      - generic: Chat
+    - link "SuperGrok":
+      - /url: /i/grok
+      - generic: SuperGrok
+    - link "Premium":
+      - /url: /i/premium
+      - generic: Premium+
+    - link "History":
+      - /url: /i/history
+      - generic: History
+    - link "Profile":
+      - /url: /dogramaci
+      - generic: Profile
+    - button "More menu items":
+      - generic: More
+  - link "Post":
+    - /url: /compose/post
+    - generic: Post
+  - button "Account menu":
+    - generic "Raymond R.":
+      - img "Raymond R."
+    - generic: Raymond R.
+    - img "Verified account"
+    - generic: "@dogramaci"
+- main:
+  - generic "Home timeline":
+    - button "Back":
+    - search "Search":
+      - combobox "Search query": from:dogramaci ("New Zealand" OR Palestine) filter:images
+    - button "More":
+    - navigation:
+      - button "Previous" [disabled]:
+      - tablist:
+        - tab "Top":
+          - generic: Top
+        - tab "Latest" [selected]:
+          - generic: Latest
+        - tab "People":
+          - generic: People
+        - tab "Media":
+          - generic: Media
+        - tab "Lists":
+          - generic: Lists
+      - button "Next" [disabled]:
+    - status:
+      - button:
+        - generic: See new posts
+    - generic: No results for "from:dogramaci ("New Zealand" OR Palestine) filter:images"
+    - text: Try searching for something else, or check your
+    - link "Search settings":
+      - /url: /settings/search
+    - text: to see if they’re protecting you from potentially sensitive content.
+  - generic "Trending":
+    - heading "Search filters" [level=2]:
+      - generic: Search filters
+    - radiogroup "People":
+      - generic: People
+      - generic: From anyone
+      - radio "From anyone" [checked]
+      - generic: People you follow
+      - radio "People you follow"
+    - radiogroup "Location":
+      - generic: Location
+      - generic: Anywhere
+      - radio "Anywhere" [checked]
+      - generic: Near you
+      - radio "Near you"
+    - link "Advanced search":
+      - /url: /search-advanced?f=live
+      - generic: Advanced search
+    - heading "Live on X" [level=2]:
+      - generic: Live on X
+    - button "Show more":
+      - generic: Show more
+    - heading "Today’s News Close" [level=2]:
+      - generic: Today’s News
+      - button "Close":
+    - 'link "Fable 5.1 vs GPT-6 Astra: Builders Test AI Models Head-to-Head Trending now · Other · 96 posts"':
+      - generic: "Fable 5.1 vs GPT-6 Astra: Builders Test AI Models Head-to-Head"
+      - generic: Trending now · Other · 96 posts
+    - link "Animations of Tiny Cell Workers Capture Hearts Online 1 day ago · News · 8,910 posts":
+      - generic: Animations of Tiny Cell Workers Capture Hearts Online
+      - generic: 1 day ago · News · 8,910 posts
+    - link "European Clubs Share Training Glimpses as 2026-27 Season Kicks Off Trending now · Sports · 514 posts":
+      - generic: European Clubs Share Training Glimpses as 2026-27 Season Kicks Off
+      - generic: Trending now · Sports · 514 posts
+    - region "Trending now":
+      - heading "Trending now" [level=1]
+      - 'generic "Timeline: Trending now"':
+        - heading "What’s happening" [level=2]:
+          - generic: What’s happening
+        - link "Haysiyet Haysiyetin pazarlığı olmaz! Promoted by Kanal D More":
+          - generic: Haysiyet
+          - generic: Haysiyetin pazarlığı olmaz!
+          - generic: Promoted by Kanal D
+          - button "More":
+        - 'link "News · Trending #kpss More"':
+          - generic: News · Trending
+          - generic: "#kpss"
+          - button "More":
+        - link "Trending Saurav Das More":
+          - generic: Trending
+          - generic: Saurav Das
+          - button "More":
+        - 'link "Politics · Trending #ilEmrindeAdalet More"':
+          - generic: Politics · Trending
+          - generic: "#ilEmrindeAdalet"
+          - button "More":
+        - link "Show more":
+          - /url: /explore/tabs/for-you
+          - generic: Show more
+    - complementary "Who to follow":
+      - heading "Who to follow" [level=2]:
+        - generic: Who to follow
+      - list:
+        - link:
+          - /url: /marmara1883
+        - link "Marmara Üniversitesi Verified account":
+          - /url: /marmara1883
+          - generic: Marmara Üniversitesi
+          - img "Verified account"
+        - link "@marmara1883":
+          - /url: /marmara1883
+          - generic: "@marmara1883"
+        - button "Follow @marmara1883":
+          - generic: Follow
+        - link:
+          - /url: /serdildara
+        - link "Av. Şerdil Dara Odabaşı Verified account":
+          - /url: /serdildara
+          - generic: Av. Şerdil Dara Odabaşı
+          - img "Verified account"
+        - link "@serdildara":
+          - /url: /serdildara
+          - generic: "@serdildara"
+        - button "Follow @serdildara":
+          - generic: Follow
+        - link:
+          - /url: /webrazzi
+        - link "Webrazzi Verified account":
+          - /url: /webrazzi
+          - generic: Webrazzi
+          - img "Verified account"
+        - link "@webrazzi":
+          - /url: /webrazzi
+          - generic: "@webrazzi"
+        - button "Follow @webrazzi":
+          - generic: Follow
+      - link "Show more":
+        - /url: /i/connect_people?user_id=2063542993303326720
+        - generic: Show more
+    - navigation "Footer":
+      - link "Terms":
+        - /url: https://x.com/tos
+      - generic: ·
+      - link "Privacy":
+        - /url: https://x.com/privacy
+      - generic: ·
+      - link "Cookies":
+        - /url: https://support.x.com/articles/20170514
+      - generic: ·
+      - link "Accessibility":
+        - /url: https://help.x.com/resources/accessibility
+      - generic: ·
+      - link "Ads Info":
+        - /url: https://business.x.com/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo
+      - generic: ·
+      - button "More":
+        - text: More
+      - generic: © 2026 X Corp.
+- region "Notifications alt+T"
