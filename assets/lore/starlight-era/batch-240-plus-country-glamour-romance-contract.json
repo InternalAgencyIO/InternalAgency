@@ -2,7 +2,7 @@
   "contract": "batch-240-plus-country-glamour-romance",
   "status": "binding-forward",
   "currentXBacklogDrain20260906": {
-    "state": "historical-audit-complete-two-manual-matches-four-pairs-draft",
+    "state": "p13-exact-staged-awaiting-parity-and-one-click",
     "canonicalPostCount": 223,
     "manualPostsReconciled": [
       "https://x.com/dogramaci/status/2096574104090325016",
@@ -63,7 +63,11 @@
     ],
     "latestPostUrl": "https://x.com/dogramaci/status/2096670436511678818",
     "liveReceipt": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p12-live-checkpoint.json",
-    "reservedSceneIds": [],
+    "reservedSceneIds": [
+      1900,
+      1901,
+      1905
+    ],
     "historicalContradiction": "Scenes 1985 and 1972 each have three preexisting public URLs; scene 1918 has two. Preserve all URLs and exclude all scene versions. This drain created none of those duplicates.",
     "omanState": "Oman remains incomplete and publication-ineligible.",
     "scope": "Only selected archived hard-QA-passing media after chronological live duplicate audit. Older backlog is not yet fully cleared.",
@@ -98,7 +102,7 @@
     "olderManualAuditComplete": true,
     "backlogFullyCleared": false,
     "browserState": "Five tabs retained. X recovered and the blank @dogramaci composer was verified at 2026-09-06T20:36:10.083Z. No post pending.",
-    "nextSafeAction": "After commit and remote parity, reserve and stage p13 Bulgaria/Albania scenes 1900, 1901 and 1905 with exact sources, alt text, caption and Made with AI. Perform fresh owner chronology, account, duplicate, Git/LFS and PR checks immediately before one authorized Post. Do not reuse manually published scenes 1902 or 1903. Follow the revised four-pair plan for the fourteen cleared selected images. Six older manifest-only residuals remain unproven. Oman raw recovery and scene 2024 retry-ceiling blockers remain unchanged; no provider dispatch or new guardian is allowed.",
+    "nextSafeAction": "Commit exact staged evidence and verify Git/LFS/remote/PR parity. Recheck the composer, then activate Post once and preserve the immediate receipt.",
     "continuationCheckpoint": "assets/lore/starlight-era/starlight-continuation-2026-09-06-2036-duplicate-audit-complete-checkpoint.json",
     "olderManualAuditReviewedPosts": 234,
     "olderManualAuditUnreviewedPosts": 0,
@@ -106,7 +110,9 @@
     "historicalSealProof": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/historical-contract-seal-resolved-1920.json",
     "selectedSourcePreflight": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/selected-backlog-source-preflight-1951.json",
     "localDraftPairPlan": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/selected-backlog-four-pairs-after-manual-reconciliation.json",
-    "draftPairPlanReserved": false
+    "draftPairPlanReserved": false,
+    "activeReservation": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p13-reservation.json",
+    "stagedCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p13-staged-checkpoint.json"
   },
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},
