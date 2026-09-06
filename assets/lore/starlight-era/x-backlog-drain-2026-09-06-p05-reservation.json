@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "id": "p05",
+  "state": "reserved-not-yet-staged",
+  "reservedAt": "2026-09-06T18:09:17.630Z",
+  "account": "@dogramaci",
+  "batch": 490,
+  "batches": [
+    490,
+    488
+  ],
+  "countries": [
+    "Vatican City",
+    "Slovenia"
+  ],
+  "sceneIds": [
+    1988,
+    1990,
+    1979,
+    1982
+  ],
+  "assets": [
+    {
+      "scene": 1988,
+      "provider": "Meta AI",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1988-vatican-city-momo-spiral-staircase-editorial-meta-occurrence-1-raw.webp",
+      "sha256": "26429768F9B92DC1DF2E687B38FDD2995B93273B5FEC8C094CFA8E321BEA5E01",
+      "bytes": 540794,
+      "width": 1152,
+      "height": 2048,
+      "country": "Vatican City",
+      "alt": "Four fictional adult women gather in a close side-hug and supported seated pose beneath the Momo double-helix staircase, wearing short yellow, white and bronze looks with Vatican key-and-tiara motifs, rainbow knee-highs and gold, ivory, blue RAZE and bronze heels.",
+      "sourceClosure": "assets/lore/starlight-era/batch-490-vatican-city-four-stills-closed-qa-checkpoint.json",
+      "xEligible": true
+    },
+    {
+      "scene": 1990,
+      "provider": "Meta AI fallback after consumed ChatGPT invocation",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1990-vatican-city-gardens-fountain-terrace-editorial-meta-occurrence-1-raw.webp",
+      "sha256": "3FFB20ED7F58CC3ADBF14F7BF07F5540E36844FBDF28FEF0ADC43283CD3BDE7F",
+      "bytes": 513796,
+      "width": 1152,
+      "height": 2048,
+      "country": "Vatican City",
+      "alt": "Four fictional adult women share a close overlapping embrace and linked hands in the Vatican Gardens beside clipped hedges and a fountain, wearing short bronze, pearl-gold, blue map-pattern and yellow-white flag looks with visible heart, silent king and GRD tattoos.",
+      "sourceClosure": "assets/lore/starlight-era/batch-490-vatican-city-four-stills-closed-qa-checkpoint.json",
+      "xEligible": true
+    },
+    {
+      "scene": 1979,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-488-slovenia/1979-slovenia-ljubljana-triple-bridge-raze-tight-full-body-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "88C4E98B581A4008A99D299C06E8C40D742087AE6BBEF8597F477B9551B3380F",
+      "bytes": 2157787,
+      "width": 941,
+      "height": 1672,
+      "provider": "ChatGPT",
+      "reason": "Single tailoring result retains identities and usable anatomy with visibly shorter hems; raw Meta alternative retained.",
+      "alt": "Four fictional adult women smile and link hands by Ljubljana's river beneath the hilltop castle, wearing shortened blue, pearl-white, navy-red and green-white outfits with RAZE waistbands, coordinated knee-high stockings and pumps.",
+      "country": "Slovenia",
+      "sourceClosure": "assets/lore/starlight-era/batch-488-slovenia-four-stills-closed-qa-checkpoint.json",
+      "xEligible": true
+    },
+    {
+      "scene": 1982,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-488-slovenia/1982-slovenia-predjama-castle-raze-tight-full-body-statement-boots-chatgpt-one-strong-shortening-pass.png",
+      "sha256": "299FBF277ECAF785D37BA7CAF3CFA708F74136D03E1DB46A44A13B50422249F6",
+      "bytes": 2372887,
+      "width": 941,
+      "height": 1672,
+      "provider": "ChatGPT",
+      "reason": "Single tailoring result retains identities and usable anatomy with visibly shorter hems; raw Meta alternative retained.",
+      "alt": "Four fictional adult women share a warm linked pose and cheek greeting before a stylized Slovenian clifftop castle, wearing shortened copper, silver, teal-black and green outfits with tall metallic platform boots; distant fictional fires and smoke fill the landscape.",
+      "country": "Slovenia",
+      "sourceClosure": "assets/lore/starlight-era/batch-488-slovenia-four-stills-closed-qa-checkpoint.json",
+      "xEligible": true
+    }
+  ],
+  "caption": "Vatican City ❤️ Slovenia: spiral stairs and garden hugs meet Ljubljana and a fantasy clifftop castle. Short couture, rainbow knee-highs, RAZE details and metallic boots. Fictional AI fashion; distant fires are imagined.\n\n#WorldXXXSeries #InternalAgency",
+  "captionSha256": "AD4A1BF3AF03C3C998F4999E17CA760A5EFF869D17700DE76F2084599EFB59A6",
+  "captionCharacters": 252,
+  "hashtagRolls": [
+    {
+      "tag": "#RAZE",
+      "seed": "starlight|x-hashtags|batch-490|scenes-1988-1990-1979-1982|2a352e256fcfab18ef945e30c0479f938d5751a9|#RAZE",
+      "digestSha256": "D4ED2EE7035497472985A48147372A840FE18E9D0B16847CB4AB500EE8E07640",
+      "acceptedByte": 46,
+      "roll": 47,
+      "passed": false
+    },
+    {
+      "tag": "#WorldXXXSeries",
+      "seed": "starlight|x-hashtags|batch-490|scenes-1988-1990-1979-1982|2a352e256fcfab18ef945e30c0479f938d5751a9|#WorldXXXSeries",
+      "digestSha256": "654F9067C0E4F4BD74BE2F8AB216396EB3164C699E3A000A1266C8B6A4C32BD4",
+      "acceptedByte": 101,
+      "roll": 2,
+      "passed": true
+    },
+    {
+      "tag": "#InternalAgency",
+      "seed": "starlight|x-hashtags|batch-490|scenes-1988-1990-1979-1982|2a352e256fcfab18ef945e30c0479f938d5751a9|#InternalAgency",
+      "digestSha256": "6E38D3A6C5775F98BA78AE8A3A258A160C135076197A887E10952F5C4952344B",
+      "acceptedByte": 110,
+      "roll": 11,
+      "passed": true
+    }
+  ],
+  "hashtags": [
+    "#WorldXXXSeries",
+    "#InternalAgency"
+  ],
+  "sourceParityCommit": "2a352e256fcfab18ef945e30c0479f938d5751a9",
+  "canonicalPostCountBefore": 213,
+  "sourceAuthority": "Current selected QA closures, manifest hash audit, live owner chronology and manual-photo-review-audit.json",
+  "duplicateAudit": {
+    "wholeOwnerTimeline": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/older-owner-timeline-audit.json",
+    "recentManualReview": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/manual-photo-review-audit.json",
+    "freshOwnerTop": [
+      {
+        "alts": [
+          "",
+          "Image",
+          "Image",
+          "Image",
+          "Image"
+        ],
+        "links": [
+          "/dogramaci/status/2095732755787030752",
+          "/dogramaci/status/2095732755787030752/photo/1",
+          "/dogramaci/status/2095732755787030752/photo/2",
+          "/dogramaci/status/2095732755787030752/photo/3",
+          "/dogramaci/status/2095732755787030752/photo/4",
+          "/dogramaci/status/2095732755787030752/analytics"
+        ],
+        "text": "Pinned\nRaymond R.\n@dogramaci\n·\nSep 4\nYou see the real fight is not against the safety filters of trillion dollar corporations, the real fight is within your own mind, a fight against the safety filters of fake morals, an absolutely broken and corrupt social construct, and a system designed to work and exploit you to\nShow more\n Made with AI\n1\n19",
+        "times": [
+          "2026-09-04T04:36:40.000Z"
+        ]
+      },
+      {
+        "alts": [
+          "",
+          "Four fictional adult women share a close back-hug on a bright terrace above Lake Suchitlan near Suchitoto. They wear secure short blue-and-white editorial looks with visible IA and scorpion tattoos; distant fictional smoke and fire appear across the water.",
+          "Four fictional adult women sit and crouch together at the Cerro Verde overlook with Izalco volcano behind them. Their secure short cobalt, white and metallic editorial outfits include El Salvador flag elements, varied heels and boots, and visible symbolic tattoos.",
+          "Four fictional adult women walk in a linked side-hug on a steeply tilted Conchagua overlook above the Gulf of Fonseca. Their secure short blue, white and metallic looks include rainbow knee-highs, varied heels and boots, and visible symbolic tattoos.",
+          "Four fictional adult women form a close affectionate cluster on the Brazzaville Corniche above the Congo River. A Black woman rests her head against a blonde woman's clothed lap while two dark-haired women lean in; green, yellow and red Republic of the Congo color blocking identifies the setting."
+        ],
+        "links": [
+          "/dogramaci/status/2096657302551974295",
+          "/dogramaci/status/2096657302551974295/photo/1",
+          "/dogramaci/status/2096657302551974295/photo/2",
+          "/dogramaci/status/2096657302551974295/photo/3",
+          "/dogramaci/status/2096657302551974295/photo/4",
+          "/dogramaci/status/2096657302551974295/analytics"
+        ],
+        "text": "Raymond R.\n@dogramaci\n·\n18m\nEl Salvador ❤️ Republic of the Congo: lake terraces, volcanic peaks and Brazzaville's riverfront. Close hugs, a lap rest and a tilted coastal view in short flag-cut looks, rainbow boots and varied heels. Fictional AI fashion; the fire is imagined.\nALT\nALT\nALT\nALT\n Made with AI\n1\n1\n14",
+        "times": [
+          "2026-09-06T17:50:29.000Z"
+        ]
+      },
+      {
+        "alts": [
+          "",
+          "Four fictional adult women share a seated handclasp and side hug at Gardens by the Bay's Supertree Grove. They wear short red, white and metallic Singapore-inspired outfits with red stilettos, white boots, silver knee-high boots and rainbow knee-high hosiery.",
+          "Four fictional adult women share a supported seated conversation and joined hands within Henderson Waves' timber ribs. Short burgundy, white and red looks, varied heels and boots, RAZE marks, stars and love tattoos accompany the affectionate group.",
+          "Four fictional adult women sit and lean together on a timber observation deck above the Dzanga Bai rainforest clearing. Central African Republic flag dresses, white and rainbow knee-high boots, gold heels and small arm tattoos frame their linked hands."
+        ],
+        "links": [
+          "/dogramaci/status/2096655911305580969",
+          "/dogramaci/status/2096655911305580969/photo/1",
+          "/dogramaci/status/2096655911305580969/photo/2",
+          "/dogramaci/status/2096655911305580969/photo/3",
+          "/dogramaci/status/2096655911305580969/analytics"
+        ],
+        "text": "Raymond R.\n@dogramaci\n·\n23m\nSingapore ❤️ Central African Republic: Supertree Grove and Henderson Waves meet Dzanga Bai's rainforest deck. Three quartet love beats in short flag-cut fashion, rainbow boots, RAZE details and varied heels. Fictional AI fashion.\n\n#WorldXXXSeries\nALT\nALT\nALT\n Made with AI\n11",
+        "times": [
+          "2026-09-06T17:44:57.000Z"
+        ]
+      },
+      {
+        "alts": [
+          ""
+        ],
+        "links": [
+          "/dogramaci/status/2096655449307086881",
+          "/dogramaci/status/2096655449307086881/analytics"
+        ],
+        "text": "Raymond R.\n@dogramaci\n·\n25m\nHe even won the most famous local cooking contest and started a burger franchise!\n\nI would call him a great success if it wasn't for his ego.\n\nYou haven't conquered the world just yet, son! haha\n14",
+        "times": [
+          "2026-09-06T17:43:07.000Z"
+        ]
+      },
+      {
+        "alts": [
+          "",
+          "Four fictional adult women sit close together beneath Jeita Grotto's dramatic limestone formations. They link hands and rest shoulders together in short Lebanon flag, white, bronze and ivory outfits with rainbow pumps, white boots, rainbow sandals and green knee-high boots.",
+          "Four fictional adult women exchange a side hug and raised handclasp beneath a monumental cedar in Lebanon's Chouf mountains. Short burgundy, white, red and green looks accompany brown boots, white pumps, rainbow knee-highs with red boots and green platform boots.",
+          "Four fictional adult women exchange linked hands and side hugs on a rainforest terrace in Sapo National Park. Short dark red, Liberia flag and ivory looks include white and red boots, rainbow RAZE knee-highs, green platforms and visible agency and RAZE tattoos."
+        ],
+        "links": [
+          "/dogramaci/status/2096654974767804902",
+          "/dogramaci/status/2096654974767804902/photo/1",
+          "/dogramaci/status/2096654974767804902/photo/2",
+          "/dogramaci/status/2096654974767804902/photo/3",
+          "/dogramaci/status/2096654974767804902/analytics"
+        ],
+        "text": "Raymond R.\n@dogramaci\n·\n27m\nLebanon ❤️ Liberia: Jeita's limestone chambers and Chouf's cedar shade meet Sapo's rainforest terrace. Close quartet hugs, linked hands, short flag-cut couture, rainbow knee-highs, RAZE boots and sculptural heels. Fictional AI fashion.\n\n#InternalAgency\nALT\nALT\nALT\n Made with AI\n13",
+        "times": [
+          "2026-09-06T17:41:14.000Z"
+        ]
+      }
+    ],
+    "localSceneAndHashMatches": 0,
+    "allAlternateVersionsExcludedIfSceneEverPublished": true
+  },
+  "buttonClickAttempts": 0,
+  "publicTransmissionCount": 0,
+  "qa": {
+    "reviewedLocallyThisTurn": true,
+    "allClearlyFictionalAdults": true,
+    "nonExplicitOpaqueFashion": true,
+    "corrupt": false,
+    "noRerendersOrEdits": true
+  },
+  "nextSafeAction": "Stage exact ordered assets, caption, individual alts and Made with AI in the single verified @dogramaci composer. Archive staged evidence, commit and prove parity before one Post click."
+}
