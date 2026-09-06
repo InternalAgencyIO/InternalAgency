@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-06T23:42:33.508Z",
+  "state": "selected-backlog-and-authorized-legacy-partial-pairs-complete-swiss-oman-hold",
+  "preCommitAuthority": {
+    "head": "d35a0bf38ad66e49808a573b4a3f43622380999e",
+    "originBranch": "d35a0bf38ad66e49808a573b4a3f43622380999e",
+    "prHead": "d35a0bf38ad66e49808a573b4a3f43622380999e",
+    "branch": "agent/starlight-progress-archive",
+    "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+    "note": "p18 staging parity was verified before its one authorized Post activation. Recheck all references after this archival commit."
+  },
+  "selectedBacklog": {
+    "complete": true,
+    "newPosts": 16,
+    "newUniqueStillImages": 59,
+    "canonicalPostCount": 228,
+    "remainingSelectedSceneIds": [],
+    "latestPostUrl": "https://x.com/dogramaci/status/2096708532414398492",
+    "liveReceipt": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p16-live-checkpoint.json",
+    "p16Recovery": "The earlier unconfirmed activation is preserved. One freshly authorized recovery click produced one verified live publication. No attachment was uploaded twice during the recovery."
+  },
+  "authorizedPartialPairs": {
+    "authorization": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-explicit-exception-authorization.json",
+    "complete": true,
+    "newPosts": 2,
+    "newUniqueStillImages": 4,
+    "sceneIds": [
+      1832,
+      1845,
+      1865,
+      1866
+    ],
+    "postUrls": [
+      "https://x.com/dogramaci/status/2096742886423323045",
+      "https://x.com/dogramaci/status/2096744477947838578"
+    ],
+    "checkpoints": [
+      "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p17-live-checkpoint.json",
+      "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p18-live-checkpoint.json"
+    ],
+    "onePostActivationEach": true,
+    "mediaReuploads": 0,
+    "exactAccessibilityDescriptions": 4,
+    "madeWithAiBoth": true,
+    "historicalCountryCompletionUnchanged": true
+  },
+  "cumulativeDrain": {
+    "newPosts": 18,
+    "newUniqueStillImages": 63,
+    "canonicalPostCount": 230,
+    "latestPostUrl": "https://x.com/dogramaci/status/2096744477947838578"
+  },
+  "remainingLegacy": {
+    "sceneIds": [
+      1849
+    ],
+    "publicationEligibleNow": 0,
+    "reservedSceneIds": [],
+    "uploadedSceneIds": [],
+    "sourceProvenanceAudit": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-six-swiss-source-provenance-round3.json",
+    "reason": "The separate pre-crop original claim is unverified. The known saved image is preserved, not silently replaced or rerendered."
+  },
+  "oman": {
+    "state": "terminal-partial-archive-not-publication-eligible",
+    "checkpoint": "assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json",
+    "scene2024": "Initial attempt plus two retries exhausted; cast QA remains failed.",
+    "rawRecovery": "Manual original-file recovery remains required after supported visible download controls failed to yield missing bytes. Preserve the native image and terminal evidence tabs.",
+    "newProviderDispatchesThisTurn": 0,
+    "extraRetriesAuthorized": false
+  },
+  "browser": {
+    "path": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-final-browser-handoff.json",
+    "visible": true,
+    "tabCount": 5,
+    "protectedNativeOmanEvidenceTabs": 1,
+    "blankMetaThinkingLanes": 3,
+    "emptyXComposer": true,
+    "activeRenders": false
+  },
+  "automation": {
+    "starlightGuardianPresent": false,
+    "newAutomationCreated": false,
+    "otherAutomationsModifiedByThisTask": false,
+    "unattended247ExecutionEstablished": false,
+    "inspectedAt": "2026-09-06T23:42:33.508Z",
+    "records": [
+      {
+        "id": "iat-b3-devnet-gate-guardian",
+        "path": "C:/Users/A/.codex/automations/iat-b3-devnet-gate-guardian/automation.toml",
+        "bytes": 28161,
+        "sha256": "537b771f89deddaebc2e273009d13ce6a4997313f9862f6d2a37b56b4fd40c5a",
+        "unchangedFromPriorAudit": true,
+        "modifiedByThisTask": false
+      },
+      {
+        "id": "guardian-x-assistant-mission",
+        "path": "C:/Users/A/.codex/automations/guardian-x-assistant-mission/automation.toml",
+        "bytes": 7965,
+        "sha256": "53aabef60c4c732bf6b049f73b4f28d115c413e6d70dc585569c6899888cb79f",
+        "unchangedFromPriorAudit": true,
+        "modifiedByThisTask": false
+      }
+    ]
+  },
+  "contradictions": {
+    "historicalDuplicatePublications": "Scenes 1985 and 1972 each have three preexisting public URLs; scene 1918 has two. Preserve all URLs and exclude all scene versions. This drain created none of those duplicates. Newly reconciled https://x.com/dogramaci/status/2093287922787070092 contains scenes 1826 and 1827, also published at https://x.com/dogramaci/status/2093364347196027381, and both final and nonselected provider-iteration-1 variants of scene 1828. All URLs, bytes and historical selections are preserved; these scenes and all versions are excluded.",
+    "oldHandoff": "Cuba and Tanzania handoff dispatch instructions are superseded by the current Oman terminal checkpoint and selected-backlog closure.",
+    "historicalSwitzerlandFraming": "The saved 1849 image includes upper torsos despite the historical strict shoulders-to-crown QA claim. Preserved acceptance, no rerender.",
+    "swissOriginalClaim": "One returned 1849 source is byte-identical to the first Git archive. A provider claim of a separate pre-crop original is not established by distinct local bytes; preserve the claim as unverified.",
+    "historicalRejectedPromptSeal": "The two current-contract seal comparison errors remain documented; historical prompt seals are not rewritten to match the mutable current contract.",
+    "partialCountryEligibility": "The newest explicit user approval resolves only publication of scenes 1832,1845,1865,1866 as two-image partial-country pairs. This exception is now consumed; old completion flags are preserved, not converted to full country-cycle success.",
+    "browserReadiness": "Five visible in-app tabs: one retained native Oman evidence image, three blank Meta Thinking composers for leesha007 and one empty X composer for @dogramaci. No active renders.",
+    "continuousRendering": "The only existing automations belong to unrelated tasks. No Starlight guardian exists and no unattended 24/7 execution was established."
+  },
+  "duplicateAuditScope": "Bounded original photo queue and six sampled playback loops complete, not a frame-exhaustive or timeless proof of nonpublication.",
+  "priorCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p18-staged-checkpoint.json",
+  "validation": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/legacy-partial-final-validation.json",
+  "nextSafeAction": "Keep both authorized partial-country pairs and the original selected backlog terminal and exclude all published scene versions. Switzerland 1849 remains held pending a decision on the unverified separate-original claim. Oman remains terminal partial archive: preserve its native evidence for manual missing-byte recovery; scene 2024 needs an anchor-correct user-supplied candidate or an explicit revised bounded repair workflow. Do not resend, reopen a terminal provider scene, retry, dispatch a new render or create a replacement guardian. Any later authorized dispatch still requires fresh authority, account, exact prompt, ordered 938/936/937 anchors and Meta Thinking checks.",
+  "actionsThisContinuation": {
+    "providerDispatches": 0,
+    "mediaUploadBatches": 2,
+    "mediaFilesUploaded": 4,
+    "postActivations": 2,
+    "newPublications": 2,
+    "publicMediaReuploads": 0,
+    "newAutomations": 0,
+    "terminalProviderScenesReopened": 0
+  },
+  "postCommitRequirement": "Commit only owned audit files and pointer/manifest updates. Push Git and LFS, then verify local HEAD, origin branch, PR 13 head ref, draft PR metadata and an empty LFS push dry-run. Preserve the seven unrelated untracked files."
+}
