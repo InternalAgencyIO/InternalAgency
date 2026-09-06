@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "p16",
-  "state": "exact-staged-awaiting-remote-parity-and-one-click",
+  "state": "held-after-single-unconfirmed-post-click",
   "reservedAt": "2026-09-06T21:00:21.503Z",
   "account": "@dogramaci",
   "batch": 475,
@@ -260,7 +260,7 @@
     "localSceneAndHashMatches": 0,
     "allAlternateVersionsExcludedIfSceneEverPublished": true
   },
-  "buttonClickAttempts": 0,
+  "buttonClickAttempts": 1,
   "publicTransmissionCount": 0,
   "qa": {
     "reviewedLocallyThisTurn": true,
@@ -270,5 +270,7 @@
     "noRerendersOrEdits": true,
     "documentedRelaxedSoftDeviationsPreserved": true
   },
-  "nextSafeAction": "Stage exact ordered assets, caption, individual alts and Made with AI. Archive staged evidence, commit and prove parity before one authorized Post."
+  "nextSafeAction": "Reconcile the preserved p16 draft against the live @dogramaci profile before any further transmission. Do not automatically click Post again. If the user completes or reports publication, verify its exact URL, media, caption and alts, then append the ledger. Recover missing Oman original bytes manually from the two preserved evidence tabs; no provider generation or terminal-scene reopening.",
+  "actualTransmissionOutcome": "unconfirmed",
+  "holdCheckpoint": "assets/lore/starlight-era/starlight-continuation-2026-09-06-2106-posts-and-unconfirmed-draft-checkpoint.json"
 }
