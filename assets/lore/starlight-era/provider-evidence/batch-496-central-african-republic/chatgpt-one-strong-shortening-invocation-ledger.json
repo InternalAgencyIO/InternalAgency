@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 496,
   "country": "Central African Republic",
-  "state": "three-valid-occurrence-allowances-consumed-two-completed-one-moderation-blocked-scene-2012-pending-valid-output",
+  "state": "all-four-valid-occurrence-allowances-consumed-three-completed-one-moderation-blocked",
   "createdAtUtc": "2026-09-06T10:07:43.785Z",
   "promptSource": "assets/lore/starlight-era/batch-496-central-african-republic-fixed-rolls.json",
   "policy": "Exactly one built-in ChatGPT image edit invocation per technically valid Meta occurrence. A blocked output consumes the allowance and never receives a second edit call.",
@@ -25,6 +25,24 @@
       "width": 941,
       "height": 1672,
       "visualQa": "Technically valid and archived, but not selected because it widens the fixed extreme-close composition. The Meta source better preserves camera roll 18."
+    },
+    {
+      "scene": 2012,
+      "editTarget": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-meta-retry-1-original.jpg",
+      "editTargetSha256": "990B5CFFCD3F282F82C4B3805F7DF4FE453905BD66461E58F3F0D48FE443444F",
+      "sealedSingleEditPromptSha256": "EA38C4506592E39CBF1C725C2BCFF09000921D233273A3B0BDC0ADAAE2331D6F",
+      "submittedPromptSha256": "EA38C4506592E39CBF1C725C2BCFF09000921D233273A3B0BDC0ADAAE2331D6F",
+      "allowance": 1,
+      "invocationCount": 1,
+      "state": "completed-no-further-invocation-allowed",
+      "outputCreatedAtUtc": "2026-09-06T10:47:30.5039169Z",
+      "builtInSourcePath": "generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-fcf7e136-21ec-43df-92b8-ddbd4395d169.png",
+      "outputPath": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-chatgpt-single-tailoring-pass.png",
+      "outputSha256": "60CFD7B6A201120DDDF291E1ACA76B1686C54353FF27BF4B519947BCD4085C1C",
+      "outputBytes": 2363872,
+      "width": 941,
+      "height": 1672,
+      "visualQa": "Accepted and selected: exactly four fictional adults, coherent anatomy, Boali Falls preserved, back hug and linked hands legible, secure shortened silhouettes and distinct footwear."
     },
     {
       "scene": 2013,
@@ -60,6 +78,7 @@
       "visualQa": "Accepted and selected: exactly four fictional adults, coherent anatomy, savanna terrace preserved, lap rest and linked hands legible, secure shortened silhouettes, rainbow hosiery and varied footwear."
     }
   ],
-  "pending": [{"scene": 2012, "reason": "No technically valid Meta image exists yet, so no ChatGPT invocation is authorized until a bounded Meta retry yields a valid occurrence."}],
-  "totals": {"allowancesAvailableForValidOccurrences": 3, "invocations": 3, "completedOutputs": 2, "moderationBlockedOutputs": 1, "remainingAllowancesForExistingValidOccurrences": 0, "pendingSceneWithoutValidOccurrence": 1, "additionalInvocationsAllowedForExistingValidOccurrences": 0}
+  "pending": [],
+  "completedAtUtc": "2026-09-06T10:47:30.5039169Z",
+  "totals": {"allowances": 4, "invocations": 4, "completedOutputs": 3, "moderationBlockedOutputs": 1, "remainingAllowances": 0, "additionalInvocationsAllowed": 0}
 }

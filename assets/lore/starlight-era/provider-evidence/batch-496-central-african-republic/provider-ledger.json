@@ -4,7 +4,7 @@
   "country": "Central African Republic",
   "provider": "Meta AI through the visible in-app Browser only",
   "capturedAtUtc": "2026-09-06T10:07:43.785Z",
-  "state": "four-scenes-image-bearing-accepted-scene-2012-retry-one-chatgpt-pass-pending",
+  "state": "closed-four-x-eligible-selected-stills-four-provider-raw-files",
   "accountVerified": "leesha007",
   "modeVerifiedAllLanes": "Thinking",
   "sendCount": 5,
@@ -24,7 +24,9 @@
     "rawAsset": {"path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-meta-retry-1-original.jpg", "sourceDownloadName": "boali_falls_friendship.jpg", "bytes": 304165, "dimensions": "1152x2048", "contentType": "image/jpeg", "sha256": "990B5CFFCD3F282F82C4B3805F7DF4FE453905BD66461E58F3F0D48FE443444F"},
     "terminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-retry-1-meta-terminal-visible.jpg",
     "visualQa": {"decodable": true, "orientation": "vertical-9:16", "adultSubjectCount": 4, "identityClasses": "Black Alia, blonde Radiance, dark-haired Ellie and brunette ECE are visibly distinct", "locationRead": "Boali Falls broad stepped cascade, forest gorge and guarded overlook are unmistakable", "relationshipBeat": "back hug, linked hands and staggered conversation read clearly", "anatomy": "technically usable", "softDeviations": ["The requested 22 degree Dutch tilt is mild.", "The frame is wider than the requested close three-quarter crop."], "disposition": "accept-retry-one-and-invoke-one-sealed-chatgpt-tailoring-pass"},
-    "singleChatgptTailoringInvocationsCompleted": 0
+    "singleChatgptTailoringInvocationsCompleted": 1,
+    "chatgptOnePass": {"status": "completed-and-archived", "invocations": 1, "additionalPassesAllowed": 0, "sealedPromptSha256": "EA38C4506592E39CBF1C725C2BCFF09000921D233273A3B0BDC0ADAAE2331D6F", "submittedPromptSha256": "EA38C4506592E39CBF1C725C2BCFF09000921D233273A3B0BDC0ADAAE2331D6F", "path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-chatgpt-single-tailoring-pass.png", "bytes": 2363872, "sha256": "60CFD7B6A201120DDDF291E1ACA76B1686C54353FF27BF4B519947BCD4085C1C", "width": 941, "height": 1672},
+    "selected": {"path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-chatgpt-single-tailoring-pass.png", "sha256": "60CFD7B6A201120DDDF291E1ACA76B1686C54353FF27BF4B519947BCD4085C1C", "bytes": 2363872, "width": 941, "height": 1672, "provider": "ChatGPT Image Generator", "xEligible": true, "reason": "The sole authorized tailoring output preserves Boali Falls and all four adult identities while delivering secure strong shortening and a cleaner garment read.", "alt": "Four fictional adult women exchange a back hug and linked hands at a guarded overlook beside the broad stepped cascades of Boali Falls. Ruby, white, cobalt, emerald and Central African Republic flag looks pair with red stilettos, gold pumps, green knee-high boots and white boots."}
   },
   "occurrences": [
     {
@@ -89,12 +91,13 @@
       "selected": {"path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2014-chatgpt-single-tailoring-pass.png", "sha256": "137D98248555EDF632E483EC6A8696C3C4CE269DF1EDDC2FC874A4891E3FD84F", "bytes": 2359361, "width": 941, "height": 1672, "provider": "ChatGPT Image Generator", "xEligible": true, "reason": "The sole authorized tailoring output preserves the affectionate savanna scene while delivering secure strong shortening, rainbow hosiery, RAZE boots, platforms and varied shoes.", "alt": "Four fictional adult women share a lap rest, hand clasp and shoulder embrace on a savanna terrace in Bamingui-Bangoran. Central African Republic flag looks, rainbow knee-highs, yellow platforms, burgundy RAZE boots and gold heels fill the close seated scene."}
     }
   ],
-  "selectedOccurrenceCount": 3,
-  "xEligibleSelectedStillCount": 3,
+  "selectedOccurrenceCount": 4,
+  "xEligibleSelectedStillCount": 4,
   "providerOriginalAssetCount": 4,
-  "chatgptEditInvocations": 3,
-  "chatgptCompletedOutputs": 2,
+  "chatgptEditInvocations": 4,
+  "chatgptCompletedOutputs": 3,
   "chatgptModerationBlockedOutputs": 1,
   "pendingHardFailureRetryScenes": [],
-  "nextSafeAction": "Remote-verify the preserved scene 2012 retry-one raw output and hard-QA checkpoint. Then invoke its exact sealed ChatGPT tailoring prompt once, archive the result or record a block without retry, select the best valid version, and close Batch 496."
+  "closedAtUtc": "2026-09-06T10:47:30.5039169Z",
+  "nextSafeAction": "Build exact provider and closure inventories, validate all four selected hashes and duplicate counts, create the Batch 496 closure checkpoint, then commit, push and verify Git LFS and Draft PR parity before pairing Central African Republic with Liberia for X."
 }

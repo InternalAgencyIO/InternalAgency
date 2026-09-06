@@ -5,7 +5,7 @@
   "scene": 2012,
   "occurrence": 2,
   "retryNumber": 1,
-  "state": "retry-one-terminal-image-hard-qa-accepted-chatgpt-one-pass-pending",
+  "state": "retry-one-terminal-image-hard-qa-accepted-chatgpt-one-pass-completed-selected",
   "verifiedAtUtc": "2026-09-06T10:39:28.000Z",
   "providerUrl": "https://www.meta.ai/prompt/01aded8a-6c8d-44b5-a92c-8ed1a41708ec",
   "promptSha256": "2DE6D22978BCE99C530A1F9E2B6FBDAFE051689563FFA6B10B9803DA74551D40",
@@ -41,13 +41,18 @@
     "aestheticRetriesUsed": 0
   },
   "chatgptOnePass": {
-    "state": "authorized-pending-single-invocation",
+    "state": "completed-and-selected-no-further-invocation-allowed",
     "editTargetSha256": "990B5CFFCD3F282F82C4B3805F7DF4FE453905BD66461E58F3F0D48FE443444F",
     "sealedPromptSource": "assets/lore/starlight-era/batch-496-central-african-republic-fixed-rolls.json",
     "sealedPromptSha256": "EA38C4506592E39CBF1C725C2BCFF09000921D233273A3B0BDC0ADAAE2331D6F",
     "maximumInvocations": 1,
-    "completedInvocations": 0
+    "completedInvocations": 1,
+    "outputPath": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-chatgpt-single-tailoring-pass.png",
+    "outputSha256": "60CFD7B6A201120DDDF291E1ACA76B1686C54353FF27BF4B519947BCD4085C1C",
+    "outputBytes": 2363872,
+    "width": 941,
+    "height": 1672
   },
   "duplicateGate": "Never reactivate the retry-one Send. Do not make more than one ChatGPT edit call for this accepted occurrence, even if the output is blocked.",
-  "nextSafeAction": "Commit and remote-verify the raw retry-one output, terminal evidence and hard-QA checkpoint. Then invoke the exact sealed ChatGPT singleEditPrompt once against the preserved raw asset. Archive a successful output or record a moderation block without retry, choose the best technically valid Meta or ChatGPT version, and close Batch 496."
+  "nextSafeAction": "Include this completed result in the exact Batch 496 provider and closure inventories, validate selection duplicate counts, then commit, push and verify Git LFS and Draft PR parity before X pairing."
 }
