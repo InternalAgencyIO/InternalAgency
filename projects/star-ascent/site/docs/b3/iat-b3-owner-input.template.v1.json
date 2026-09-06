@@ -1,0 +1,109 @@
+{
+  "$schema": "./iat-b3-owner-input.v1.schema.json",
+  "schema": "iat-b3-owner-input/v1",
+  "profile": "PRODUCTION",
+  "status": "HOLD",
+  "inputSha256": "44b16e870341aca7e3d154d36775abebbf323d06380c2da9525df55a2f16269a",
+  "scope": {
+    "contract": "NONAUTHORIZING_OWNER_POLICY_INPUT_ONLY",
+    "canonicalOwnerChoiceFieldCount": 38,
+    "ownerChoicesAreCryptographicSignatures": false,
+    "sensitiveMaterialAccepted": false,
+    "mayAuthorizeExecution": false
+  },
+  "sourcePolicyBinding": {
+    "path": "docs/b3/iat-b3-owner-policy-freeze.v1.json",
+    "schema": "iat-b3-owner-policy-freeze/v2",
+    "sha256": "95c508a47f9ccfed8d466851196cf4de0928027bebccc35b5842fb2c77449f06",
+    "byteLength": 12681,
+    "status": "BLOCKED"
+  },
+  "standingPermissions": {
+    "source": "EXPLICIT_USER_RESPONSE_IN_CURRENT_TASK",
+    "localWslDockerInspection": true,
+    "offlineDerivedImageCreation": true,
+    "localContainerBuildsAndRehearsal": true,
+    "policyArtifactDrafting": true,
+    "cryptographicProof": false,
+    "mayAuthorizeSignaturesOrExternalExecution": false
+  },
+  "acceptSourceLockedDefaults": true,
+  "policyArtifacts": {
+    "scoringPolicy": { "status": "NOT_YET_BOUND", "sha256": null },
+    "followerSnapshotPolicy": { "status": "NOT_YET_BOUND", "sha256": null },
+    "prizePolicy": { "status": "NOT_YET_BOUND", "sha256": null },
+    "canonicalAccountSet": { "status": "NOT_YET_BOUND", "sha256": null },
+    "fundingSourcePolicy": { "status": "NOT_YET_BOUND", "sha256": null },
+    "canonicalTransitDestinationManifest": { "status": "NOT_YET_BOUND", "sha256": null }
+  },
+  "ownerChoices": {
+    "core": {
+      "fixedBeneficiary": null
+    },
+    "faction": {
+      "sybilPolicy": null,
+      "weeklyEpochAnchorUnixSeconds": null,
+      "communityCarveOutBaseUnits": null,
+      "weeklyEmissionBaseUnits": null,
+      "fundingHorizonWeeks": null,
+      "unusedBalanceDestination": null,
+      "nftPrizePolicy": null,
+      "claimExpirySeconds": null
+    },
+    "genesis": {
+      "communityOwner": null,
+      "treasuryBeneficiary": null,
+      "ecosystemBeneficiary": null,
+      "coreBeneficiary": null,
+      "liquidityBeneficiary": null,
+      "factionCarveOutBaseUnits": null
+    },
+    "productionIdentity": {
+      "publicKeyDisposition": "PUBLIC_KEYS_DEFERRED",
+      "lawProgramId": null,
+      "economyProgramId": null,
+      "canonicalMint": null,
+      "clusterIdentityPolicy": null,
+      "entropyLagSlots": null,
+      "entropyRiskAcceptance": null
+    },
+    "authorityPublicKeys": {
+      "ceremonySignerPublicKey": null,
+      "lawUpgradeAuthorityPublicKey": null,
+      "economyUpgradeAuthorityPublicKey": null,
+      "payerPublicKey": null
+    },
+    "funding": {
+      "ceremonyFloorLamports": null
+    }
+  },
+  "transitPolicy": {
+    "selectedPolicyId": "TREZOR_MODEL_T_CONTROLLED_FULL_SUPPLY_TRANSIT",
+    "ownerPublicKey": null
+  },
+  "authorizationBoundary": {
+    "canonicalPolicyMutationAuthorized": false,
+    "networkDownloadAuthorized": false,
+    "systemProvisioningAuthorized": false,
+    "keyGenerationAuthorized": false,
+    "modelTSignatureAuthorized": false,
+    "rpcMutationAuthorized": false,
+    "publicDevnetAuthorized": false,
+    "deploymentAuthorized": false,
+    "fundingSpendAuthorized": false,
+    "activationAuthorized": false,
+    "authorityRevocationAuthorized": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  },
+  "truth": {
+    "chainTruthObserved": false,
+    "mainnetGenesisHashOwnerSupplied": false,
+    "externalEvidenceAccepted": false,
+    "modelTCapabilityObserved": false,
+    "modelTSignatureObserved": false,
+    "executionEvidenceObserved": false,
+    "ownerInputMayCloseEvidenceGates": false
+  }
+}

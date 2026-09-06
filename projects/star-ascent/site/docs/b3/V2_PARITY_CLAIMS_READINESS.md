@@ -66,7 +66,7 @@ into a production completion claim.
 | Slice | Current truthful state | Main remaining work |
 | --- | --- | --- |
 | Canonical asset and Privacy Vault | Blocked production asset/privacy | Signed mint and migration decision; exact-version native confidential lifecycle; privacy review |
-| V2 economy, rewards, and CCC | Partial native port | Production entrypoint/dispatcher/CPI; complete native handlers; Config/Genesis and end-to-end differential rehearsal |
+| V2 economy, rewards, and CCC | Feature-gated entrypoint/dispatcher with six active source handlers and CPI executors | All-15 active completion; production identities; final-binary Devnet/rollback evidence; rewards, CCC, core, and initialization policy closure; release authorization; end-to-end differential rehearsal |
 | Custody, ceremony, and reproducibility | Inherited transition boundary | Core/community custody policy, B3 supersession, final reproducible binaries, accountable ceremony funding |
 | Identity, social, and network | Partial references and application adapters | Production X/checkpoint providers, B3 identity adapter, rollback protection, network adapter, integration rehearsal |
 | Public domains and localization | Inherited runtime; review blocked | Native review and immutable acceptance for all 50 locales; production dual-host evidence |

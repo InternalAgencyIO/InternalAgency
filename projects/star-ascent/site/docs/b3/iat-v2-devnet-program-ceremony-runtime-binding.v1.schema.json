@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "iat-v2-devnet-program-ceremony-runtime-binding/v1",
+  "title": "IAT V2 Devnet program ceremony runtime binding",
+  "description": "Fail-closed source and public-CI provenance for a fresh attended Devnet program ceremony. This binding preserves the immutable migration artifact tuple and grants no transaction, signing, broadcast, deployment, release, funding, or Mainnet authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifactBuildRunAttempt",
+    "artifactBuildRunId",
+    "artifactBytes",
+    "artifactEvidenceManifestSha256",
+    "artifactSha256",
+    "artifactSourceHeadCommit",
+    "checkoutCommit",
+    "checkoutRelation",
+    "checkoutTree",
+    "ciRunAttempt",
+    "ciRunId",
+    "limitations",
+    "mainnetStatus",
+    "network",
+    "repository",
+    "repositoryId",
+    "runnerArch",
+    "runnerOs",
+    "runtimeClosureSha256",
+    "runtimeEvidenceManifestSha256",
+    "schema",
+    "sourceHeadCommit",
+    "sourceHeadTree",
+    "status",
+    "workflowEvent",
+    "workflowRef"
+  ],
+  "properties": {
+    "artifactBuildRunAttempt": { "const": 1 },
+    "artifactBuildRunId": { "const": 33161771816 },
+    "artifactBytes": { "const": 649680 },
+    "artifactEvidenceManifestSha256": { "const": "ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9" },
+    "artifactSha256": { "const": "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01" },
+    "artifactSourceHeadCommit": { "const": "a03fe71dd66cd1650b8d0353e486786df30b83e9" },
+    "checkoutCommit": { "anyOf": [{ "$ref": "#/$defs/commit" }, { "type": "null" }] },
+    "checkoutRelation": { "const": "PR_MERGE_SECOND_PARENT" },
+    "checkoutTree": { "anyOf": [{ "$ref": "#/$defs/commit" }, { "type": "null" }] },
+    "ciRunAttempt": { "anyOf": [{ "$ref": "#/$defs/positiveInteger" }, { "type": "null" }] },
+    "ciRunId": { "anyOf": [{ "$ref": "#/$defs/positiveInteger" }, { "type": "null" }] },
+    "limitations": {
+      "const": [
+        "Source and public-CI binding only; not a Devnet signature, transaction, broadcast, deployment, or release result.",
+        "Fresh ceremony source and runtime evidence do not replace the immutable migration artifact built from a03fe71dd66cd1650b8d0353e486786df30b83e9 in public run 33161771816.",
+        "Does not authorize signing, broadcast, funding, deployment, release, or Mainnet."
+      ]
+    },
+    "mainnetStatus": { "const": "HOLD" },
+    "network": { "const": "devnet" },
+    "repository": { "const": "InternalAgencyIO/InternalAgency" },
+    "repositoryId": { "const": 1313660798 },
+    "runnerArch": { "const": "X64" },
+    "runnerOs": { "const": "Linux" },
+    "runtimeClosureSha256": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+    "runtimeEvidenceManifestSha256": { "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+    "schema": { "const": "iat-v2-devnet-program-ceremony-runtime-binding/v1" },
+    "sourceHeadCommit": { "anyOf": [{ "$ref": "#/$defs/commit" }, { "type": "null" }] },
+    "sourceHeadTree": { "anyOf": [{ "$ref": "#/$defs/commit" }, { "type": "null" }] },
+    "status": { "enum": ["UNBOUND", "BOUND"] },
+    "workflowEvent": { "const": "pull_request" },
+    "workflowRef": { "anyOf": [{ "$ref": "#/$defs/workflowRef" }, { "type": "null" }] }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "checkoutCommit": { "type": "null" },
+        "checkoutTree": { "type": "null" },
+        "ciRunAttempt": { "type": "null" },
+        "ciRunId": { "type": "null" },
+        "runtimeClosureSha256": { "type": "null" },
+        "runtimeEvidenceManifestSha256": { "type": "null" },
+        "sourceHeadCommit": { "type": "null" },
+        "sourceHeadTree": { "type": "null" },
+        "status": { "const": "UNBOUND" },
+        "workflowRef": { "type": "null" }
+      }
+    },
+    {
+      "properties": {
+        "checkoutCommit": { "$ref": "#/$defs/commit" },
+        "checkoutTree": { "$ref": "#/$defs/commit" },
+        "ciRunAttempt": { "$ref": "#/$defs/positiveInteger" },
+        "ciRunId": { "$ref": "#/$defs/positiveInteger" },
+        "runtimeClosureSha256": { "$ref": "#/$defs/sha256" },
+        "runtimeEvidenceManifestSha256": {
+          "allOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "not": { "const": "ca19c4ebec300031528014e3d3373889a7b171589158ba366536e6200a3ac2a9" } }
+          ]
+        },
+        "sourceHeadCommit": {
+          "allOf": [
+            { "$ref": "#/$defs/commit" },
+            { "not": { "const": "a03fe71dd66cd1650b8d0353e486786df30b83e9" } }
+          ]
+        },
+        "sourceHeadTree": { "$ref": "#/$defs/commit" },
+        "status": { "const": "BOUND" },
+        "workflowRef": { "$ref": "#/$defs/workflowRef" }
+      }
+    }
+  ],
+  "$defs": {
+    "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "positiveInteger": { "type": "integer", "minimum": 1 },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "workflowRef": {
+      "type": "string",
+      "pattern": "^InternalAgencyIO/InternalAgency/\\.github/workflows/iat-v2-proof\\.yml@refs/pull/[1-9][0-9]*/merge$"
+    }
+  }
+}

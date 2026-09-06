@@ -1,0 +1,252 @@
+{
+  "schema": "iat-b3-x01-site-ops-local-rehearsal-evidence/v1",
+  "profile": "PRODUCTION",
+  "componentId": "X01_SITE_OPS_LOCAL_REHEARSAL",
+  "observationId": "W01_20260813",
+  "status": "HOLD",
+  "scope": {
+    "contract": "NONAUTHORIZING_READ_ONLY_POINT_IN_TIME_EVIDENCE",
+    "networkMutationPerformed": false,
+    "deploymentMutationPerformed": false,
+    "dnsMutationPerformed": false,
+    "signingPerformed": false,
+    "continuousMonitoringPerformed": false,
+    "doesNotCertify": [
+      "CONTINUOUS_DNS_OR_HTTPS_RELIABILITY",
+      "TAKEOVER_HEAD_HOSTED_CI",
+      "LIVE_B3_SOURCE_PARITY",
+      "DEPLOYMENT_IDENTITY_OR_ROLLBACK_READINESS",
+      "DEVNET_OR_MAINNET_AUTHORIZATION"
+    ]
+  },
+  "sourceBinding": {
+    "takeoverHeadSha": "09ec025b5b301925d49bc24347bafc8a0c7f733d",
+    "prHeadSha": "48dc882a1a9a70720910bc983323ceb1a6275ef2",
+    "homepagePath": "projects/star-ascent/site/app/page.tsx",
+    "takeoverHomepageGitBlobSha1": "4a670d3ccbdf6ce8fc4a03329c4cf38d77053250",
+    "prHomepageGitBlobSha1": "4a670d3ccbdf6ce8fc4a03329c4cf38d77053250",
+    "deployedReferenceHomepageGitBlobSha1": "10454324fcfedc6370089996779b7c63d21fd8d8",
+    "takeoverSiteTreeSha1": "74c1580cb5513f330c56b983983f2719ae51b608",
+    "prSiteTreeSha1": "5d9017cee5dd1b72ead1528669adc9065899dfdc",
+    "deployedReferenceTreeSha1": "6ed99cf7a473172325298cebf2bdd6ff796ad088",
+    "worktreeAtObservation": {
+      "clean": false,
+      "modifiedPathCount": 16,
+      "untrackedPathCount": 19,
+      "totalDirtyPathCount": 35
+    }
+  },
+  "observationWindow": {
+    "startedAtUtc": "2026-08-13T06:37:00Z",
+    "endedAtUtc": "2026-08-13T06:45:27Z",
+    "rehearsalEvaluationAtUtc": "2026-08-13T06:45:27Z",
+    "pointInTime": true,
+    "maximumFreshAgeSeconds": 600
+  },
+  "dnssecObservation": {
+    "state": "POINT_IN_TIME_PASS_CONTINUITY_HOLD",
+    "recursiveResolverMatrix": [
+      { "domain": "internalagency.io", "resolver": "1.1.1.1", "rcode": 0, "authenticatedData": true, "checkingDisabled": false, "aRecords": ["162.159.143.30", "172.66.3.26"] },
+      { "domain": "internalagency.io", "resolver": "8.8.8.8", "rcode": 0, "authenticatedData": true, "checkingDisabled": false, "aRecords": ["162.159.143.30", "172.66.3.26"] },
+      { "domain": "internalagency.io", "resolver": "9.9.9.9", "rcode": 0, "authenticatedData": true, "checkingDisabled": false, "aRecords": ["162.159.143.30", "172.66.3.26"] },
+      { "domain": "ileriakil.com", "resolver": "1.1.1.1", "rcode": 0, "authenticatedData": true, "checkingDisabled": false, "aRecords": ["162.159.143.30", "172.66.3.26"] },
+      { "domain": "ileriakil.com", "resolver": "8.8.8.8", "rcode": 0, "authenticatedData": true, "checkingDisabled": false, "aRecords": ["162.159.143.30", "172.66.3.26"] },
+      { "domain": "ileriakil.com", "resolver": "9.9.9.9", "rcode": 0, "authenticatedData": true, "checkingDisabled": false, "aRecords": ["162.159.143.30", "172.66.3.26"] }
+    ],
+    "dohValidation": {
+      "providers": ["CLOUDFLARE", "GOOGLE"],
+      "domains": ["internalagency.io", "ileriakil.com"],
+      "queryTypes": ["A", "DS", "DNSKEY"],
+      "allStatusZero": true,
+      "allAuthenticatedData": true
+    },
+    "zones": [
+      {
+        "domain": "internalagency.io",
+        "delegatedNameservers": ["launch1.spaceship.net", "launch2.spaceship.net"],
+        "nameserverAddresses": ["162.159.26.38", "162.159.27.32"],
+        "authoritiesEqual": true,
+        "aRecords": ["162.159.143.30", "172.66.3.26"],
+        "soaSerial": 1785462982,
+        "aRrsigKeyTag": 17470,
+        "dnskeyRrsigKeyTag": 3329,
+        "ds": "3329 13 2 627d74f447509dfb4d0d3509b7ff7cebbe81d3f2bba990f4849531498a0de2eb",
+        "rrsigInceptionUtc": "2026-08-06T00:00:00Z",
+        "rrsigExpirationUtc": "2026-08-27T00:00:00Z"
+      },
+      {
+        "domain": "ileriakil.com",
+        "delegatedNameservers": ["launch1.spaceship.net", "launch2.spaceship.net"],
+        "nameserverAddresses": ["162.159.26.38", "162.159.27.32"],
+        "authoritiesEqual": true,
+        "aRecords": ["162.159.143.30", "172.66.3.26"],
+        "soaSerial": 1785094577,
+        "aRrsigKeyTag": 27518,
+        "dnskeyRrsigKeyTag": 10880,
+        "ds": "10880 13 2 d3704f59caac5f0dbad75e26d745717da9a4e1a12c505ea4c5db33461569944c",
+        "rrsigInceptionUtc": "2026-08-06T00:00:00Z",
+        "rrsigExpirationUtc": "2026-08-27T00:00:00Z"
+      }
+    ],
+    "incidentBoundary": {
+      "earlierIntermittentServfailObserved": true,
+      "currentPersistentChainFailureObserved": false,
+      "persistentDsKeyOrDelegationMismatchObserved": false,
+      "providerRootCauseProven": false,
+      "continuousReliabilityVerified": false
+    }
+  },
+  "transportObservation": {
+    "state": "POINT_IN_TIME_PASS_POLICY_HOLD",
+    "hosts": [
+      {
+        "host": "internalagency.io",
+        "httpStatus": 302,
+        "httpRedirectLocation": "https://internalagency.io/",
+        "httpsStatus": 200,
+        "tlsValidated": true,
+        "tlsProtocol": "TLS_1_3",
+        "cipher": "AES256_256",
+        "certificateSubject": "CN=internalagency.io",
+        "certificateIssuer": "CN=WE1, O=Google Trust Services, C=US",
+        "certificateNotBeforeUtc": "2026-07-26T18:40:29Z",
+        "certificateNotAfterUtc": "2026-10-24T19:40:23Z",
+        "certificateThumbprintSha1": "D7A30E7F2AA494A41ED9A04A02B4EC32E10E498A",
+        "certificateSan": ["internalagency.io"],
+        "strictTransportSecurityObserved": false
+      },
+      {
+        "host": "ileriakil.com",
+        "httpStatus": 302,
+        "httpRedirectLocation": "https://ileriakil.com/",
+        "httpsStatus": 200,
+        "tlsValidated": true,
+        "tlsProtocol": "TLS_1_3",
+        "cipher": "AES256_256",
+        "certificateSubject": "CN=ileriakil.com",
+        "certificateIssuer": "CN=WE1, O=Google Trust Services, C=US",
+        "certificateNotBeforeUtc": "2026-07-26T18:46:05Z",
+        "certificateNotAfterUtc": "2026-10-24T19:46:01Z",
+        "certificateThumbprintSha1": "BC664888C77A002FAF472FDE8B9185A866B9F2B7",
+        "certificateSan": ["ileriakil.com"],
+        "strictTransportSecurityObserved": false
+      }
+    ]
+  },
+  "routeObservation": {
+    "state": "ROUTE_AND_INDEXING_CONTRACT_PASS",
+    "routes": [
+      { "url": "https://internalagency.io/", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": null, "metaRobots": "index, follow", "canonical": "https://internalagency.io/", "bodyBytes": 57623, "bodySha256": "57fcb06775260ed5854b47dc3dcd528dfeac27808eac657edb9f33a0903bf789", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://internalagency.io/network", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": null, "metaRobots": "index, follow", "canonical": "https://internalagency.io/network", "bodyBytes": 23847, "bodySha256": "e5efc2e55d80183ba1be56ff31b6c48072aca33cfc6e0069dfe28d75c52f0842", "b3Marker": false, "v2Marker": false, "holdMarker": true },
+      { "url": "https://internalagency.io/proof", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": null, "metaRobots": "index, follow", "canonical": "https://internalagency.io/proof", "bodyBytes": 38100, "bodySha256": "00132ab8d44181d0a7ac81d14743d8d221a066c4275163a796c5cf2f829577f6", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://internalagency.io/dossier", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": null, "metaRobots": "index, follow", "canonical": "https://internalagency.io/dossier", "bodyBytes": 35575, "bodySha256": "725ad8294aa3163cdf1519a3eb4faacdfa189d2ccfdc5d3572194a7cf16844b9", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://internalagency.io/launch", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": null, "metaRobots": "index, follow", "canonical": "https://internalagency.io/launch", "bodyBytes": 26504, "bodySha256": "4704e99cb1adcef1c0686456a58259e6155478f044d6570feb42a513a717f18e", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://internalagency.io/tr", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/", "bodyBytes": 57730, "bodySha256": "58e6d35885ff9abe2e12be7942d70b7ae6489b02f8f15110f618c44b54d17258", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://internalagency.io/fr", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/", "bodyBytes": 57729, "bodySha256": "c055af484ea68a7a82ae42419bae36b376fddc6680dfedafb511a44cb3e8d06a", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://ileriakil.com/", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/", "bodyBytes": 58864, "bodySha256": "407b2e4f4e74c9f697d5cffde27f32d3f3a35d5316a4c3c2b360bdd3633f539f", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://ileriakil.com/network", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/network", "bodyBytes": 25087, "bodySha256": "a6f8420fff18e5fe301cf545628fcc3418be0ec4195e7f81574bf0209d39a8e5", "b3Marker": false, "v2Marker": false, "holdMarker": true },
+      { "url": "https://ileriakil.com/proof", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/proof", "bodyBytes": 39340, "bodySha256": "6ae4b06a4797f6560743ffb58be858aae6816d3cff85c3cfb2d343715b0b696f", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://ileriakil.com/dossier", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/dossier", "bodyBytes": 36705, "bodySha256": "6c18fa466149865518927dd5056752e3075e8ba328a754265013f4e68bcd2019", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://ileriakil.com/launch", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/launch", "bodyBytes": 27744, "bodySha256": "15c7a925152087d6fe48e582d66b50c57ef21a89aca33750dc60f19f353f644c", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://ileriakil.com/tr", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/", "bodyBytes": 58864, "bodySha256": "2fdab1d6c14a5b4ae822b159e9c7303cd7fbef7faf2dd5b798cc7640c35181b0", "b3Marker": false, "v2Marker": true, "holdMarker": true },
+      { "url": "https://ileriakil.com/fr", "status": 200, "contentLanguage": "en", "htmlLang": "en", "xRobotsTag": "noindex, nofollow, noarchive", "metaRobots": "noindex, nofollow, noarchive", "canonical": "https://internalagency.io/", "bodyBytes": 58863, "bodySha256": "3cef35e00d827f9af5e0891a71e3fe01bbd84f8e16f49cedbae3bd445db4b1b1", "b3Marker": false, "v2Marker": true, "holdMarker": true }
+    ],
+    "discovery": {
+      "canonicalSitemapLocationCount": 25,
+      "internalagencyReferences": 75,
+      "ileriakilReferences": 0,
+      "holdLocaleReferences": 0,
+      "nonEnglishHreflangReferences": 0,
+      "bothRobotsFilesAdvertise": "https://internalagency.io/sitemap.xml"
+    }
+  },
+  "hostedCiObservation": {
+    "repository": "InternalAgencyIO/InternalAgency",
+    "pullRequestNumber": 10,
+    "pullRequestUrl": "https://github.com/InternalAgencyIO/InternalAgency/pull/10",
+    "state": "OPEN",
+    "isDraft": true,
+    "mergeable": "MERGEABLE",
+    "mergeStateStatus": "UNSTABLE",
+    "baseRefName": "agent/iat-launch-window",
+    "headRefName": "agent/iat-b3-architecture",
+    "headSha": "48dc882a1a9a70720910bc983323ceb1a6275ef2",
+    "checks": [
+      { "workflow": "IAT PCM evidence proof", "name": "Frozen non-activating PCM evidence", "runId": 31649911865, "conclusion": "SUCCESS" },
+      { "workflow": "IAT V2 release proof", "name": "Web, policy, and launch gates", "runId": 31649911886, "conclusion": "SUCCESS" },
+      { "workflow": "IAT V2 release proof", "name": "Rust host tests", "runId": 31649911886, "conclusion": "SUCCESS" },
+      { "workflow": "IAT V2 release proof", "name": "Verifiable Solana SBF build", "runId": 31649911886, "conclusion": "SUCCESS" },
+      { "workflow": "Radiance proof", "name": "source", "runId": 31649911841, "conclusion": "SUCCESS" },
+      { "workflow": "Radiance proof", "name": "source", "runId": 31649908543, "conclusion": "SUCCESS" },
+      { "workflow": "Radiance proof", "name": "preview", "runId": 31649911841, "conclusion": "SUCCESS" },
+      { "workflow": "Radiance proof", "name": "preview", "runId": 31649908543, "conclusion": "SUCCESS" },
+      { "workflow": "Radiance proof", "name": "standalone", "runId": 31649911841, "conclusion": "FAILURE" },
+      { "workflow": "Radiance proof", "name": "standalone", "runId": 31649908543, "conclusion": "FAILURE" }
+    ],
+    "latestStandaloneFailure": {
+      "runId": 31649911841,
+      "jobId": 94350090947,
+      "expectedFullMasterCount": 16,
+      "recomputedFullMasterCount": 2,
+      "missingFullMasterCount": 14,
+      "result": "FAILURE"
+    },
+    "takeoverHeadHostedChecks": {
+      "headSha": "09ec025b5b301925d49bc24347bafc8a0c7f733d",
+      "observed": false,
+      "apiStatus": 422,
+      "result": "NO_COMMIT_FOUND_FOR_SHA"
+    }
+  },
+  "sourceLiveDriftObservation": {
+    "state": "LIVE_PRE_B3_SOURCE_DRIFT",
+    "deploymentReference": {
+      "commitSha": "2e5e6e991210ec0296e873b79106317acacfa0c8",
+      "committedAt": "2026-08-05T15:20:35Z",
+      "subject": "Deploy GitHub cf1f557 site subtree"
+    },
+    "b3PublicArchitectureSourceCommit": {
+      "commitSha": "e1f217fa7304f292bb3562a3f0df81106228a027",
+      "committedAt": "2026-08-08T10:03:45Z",
+      "subject": "Build B3 law rehearsals and public architecture"
+    },
+    "liveHomepageMarkers": {
+      "v2ProgramRehearsal": true,
+      "openIatEconomicPolicyV2": true,
+      "b3LawAndRetainedV2Features": false,
+      "b3ArchitectureHold": false
+    },
+    "takeoverHomepageMarkers": {
+      "v2ProgramRehearsal": false,
+      "openIatEconomicPolicyV2": false,
+      "b3LawAndRetainedV2Features": true,
+      "b3ArchitectureHold": true
+    },
+    "liveMatchesTakeoverSource": false,
+    "deployedSourceIdentityVerified": false,
+    "rollbackRehearsalObserved": false
+  },
+  "freshnessPolicy": {
+    "staleObservationDisposition": "HOLD",
+    "unobservedClaimDisposition": "HOLD",
+    "livePreB3Disposition": "HOLD",
+    "failedHostedCheckDisposition": "HOLD",
+    "continuousReliabilityUnobservedDisposition": "HOLD"
+  },
+  "evidenceSetSha256": "859f0b4ef36ad13a839fd3dcd3abfd9c544ec1af8c291541a270df3aeab497b2",
+  "assurance": {
+    "dnssecPointInTimeObserved": true,
+    "tlsPointInTimeObserved": true,
+    "routeAndIndexingContractObserved": true,
+    "continuousDnssecReliabilityVerified": false,
+    "takeoverHeadHostedCiVerified": false,
+    "standaloneReleaseCiVerified": false,
+    "liveB3SourceParityVerified": false,
+    "deploymentIdentityVerified": false,
+    "siteOpsReady": false,
+    "devnetAuthorized": false,
+    "releaseAuthorized": false,
+    "mainnetExecutionAuthorized": false,
+    "mainnetStatus": "HOLD"
+  }
+}

@@ -139,6 +139,16 @@ pub fn current_ccc_round(genesis_timestamp: i64, now_timestamp: i64) -> Option<u
     .ok()
 }
 
+/// Returns the immutable policy timestamp at which a specific CCC round opens.
+/// This is also the only timestamp a rehearsal-only missing-round recovery may
+/// record; using the operator's current wall clock would rewrite history.
+pub fn ccc_round_selection_timestamp(genesis_timestamp: i64, week: u64) -> Option<i64> {
+    let week = i64::try_from(week).ok()?;
+    genesis_timestamp
+        .checked_add(CCC_FIRST_SELECTION_DELAY_SECONDS)?
+        .checked_add(week.checked_mul(SECONDS_PER_WEEK)?)
+}
+
 pub fn ccc_round_recovery_available(commit_timestamp: i64, now_timestamp: i64) -> Option<bool> {
     let recovery_timestamp = commit_timestamp.checked_add(CCC_REVEAL_TIMEOUT_SECONDS)?;
     Some(now_timestamp >= recovery_timestamp)
@@ -400,6 +410,40 @@ mod tests {
             Some(true)
         );
         assert_eq!(ccc_round_recovery_available(i64::MAX, i64::MAX), None);
+    }
+
+    #[test]
+    fn historical_round_selection_timestamp_is_canonical_and_checked() {
+        let genesis = 1_900_000_000;
+        assert_eq!(
+            ccc_round_selection_timestamp(genesis, 0),
+            Some(genesis + CCC_FIRST_SELECTION_DELAY_SECONDS)
+        );
+        assert_eq!(
+            ccc_round_selection_timestamp(genesis, 10),
+            Some(genesis + CCC_FIRST_SELECTION_DELAY_SECONDS + 10 * SECONDS_PER_WEEK)
+        );
+        assert_eq!(ccc_round_selection_timestamp(i64::MAX, 0), None);
+        assert_eq!(ccc_round_selection_timestamp(genesis, u64::MAX), None);
+    }
+
+    #[test]
+    fn a_missing_round_is_not_historical_until_a_later_round_opens_and_timeout_elapses() {
+        let genesis = 1_900_000_000;
+        let selection = ccc_round_selection_timestamp(genesis, 10).unwrap();
+        assert_eq!(current_ccc_round(genesis, selection), Some(10));
+        assert_eq!(
+            ccc_round_recovery_available(selection, selection + CCC_REVEAL_TIMEOUT_SECONDS - 1),
+            Some(false)
+        );
+        assert_eq!(
+            ccc_round_recovery_available(selection, selection + CCC_REVEAL_TIMEOUT_SECONDS),
+            Some(true)
+        );
+        assert_eq!(
+            current_ccc_round(genesis, ccc_round_selection_timestamp(genesis, 11).unwrap()),
+            Some(11)
+        );
     }
 
     #[test]

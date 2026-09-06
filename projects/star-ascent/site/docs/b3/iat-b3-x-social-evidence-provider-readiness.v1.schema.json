@@ -37,7 +37,7 @@
       "const": "./iat-b3-x-social-evidence-provider-readiness.v1.schema.json"
     },
     "schema": {
-      "const": "iat-b3-x-social-evidence-provider-readiness/v1"
+      "const": "iat-b3-x-social-evidence-provider-readiness/v2"
     },
     "profile": {
       "enum": [
@@ -207,12 +207,12 @@
         "artifactSha256",
         "subjectBindingSha256",
         "policySha256",
-        "independentObserverId",
-        "observerFailureDomainId",
-        "observerIdentitySha256",
-        "independentReviewerId",
-        "reviewerFailureDomainId",
-        "reviewerIdentitySha256",
+        "automatedEvidenceSourceAId",
+        "evidenceSourceAFailureDomainId",
+        "evidenceSourceAIdentitySha256",
+        "automatedEvidenceSourceBId",
+        "evidenceSourceBFailureDomainId",
+        "evidenceSourceBIdentitySha256",
         "capturedAtUnixSeconds",
         "validThroughUnixSeconds",
         "maximumAgeSeconds",
@@ -236,31 +236,31 @@
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
         },
-        "independentObserverId": {
+        "automatedEvidenceSourceAId": {
           "type": "string",
           "minLength": 8,
           "maxLength": 160
         },
-        "observerFailureDomainId": {
+        "evidenceSourceAFailureDomainId": {
           "type": "string",
           "minLength": 8,
           "maxLength": 160
         },
-        "observerIdentitySha256": {
+        "evidenceSourceAIdentitySha256": {
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
         },
-        "independentReviewerId": {
+        "automatedEvidenceSourceBId": {
           "type": "string",
           "minLength": 8,
           "maxLength": 160
         },
-        "reviewerFailureDomainId": {
+        "evidenceSourceBFailureDomainId": {
           "type": "string",
           "minLength": 8,
           "maxLength": 160
         },
-        "reviewerIdentitySha256": {
+        "evidenceSourceBIdentitySha256": {
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
         },
@@ -1107,8 +1107,8 @@
         "administrativeFailureDomainId",
         "credentialCustodyFailureDomainId",
         "backupFailureDomainId",
-        "independentObserverFailureDomainId",
-        "independentReviewerFailureDomainId",
+        "automatedEvidenceSourceAFailureDomainId",
+        "automatedEvidenceSourceBFailureDomainId",
         "separationRule",
         "evidence",
         "blocker"
@@ -1190,7 +1190,7 @@
           "minLength": 8,
           "maxLength": 160
         },
-        "independentObserverFailureDomainId": {
+        "automatedEvidenceSourceAFailureDomainId": {
           "type": [
             "string",
             "null"
@@ -1198,7 +1198,7 @@
           "minLength": 8,
           "maxLength": 160
         },
-        "independentReviewerFailureDomainId": {
+        "automatedEvidenceSourceBFailureDomainId": {
           "type": [
             "string",
             "null"
@@ -1207,7 +1207,7 @@
           "maxLength": 160
         },
         "separationRule": {
-          "const": "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_OBSERVER_AND_REVIEWER_DOMAINS_ALL_DISTINCT"
+          "const": "X_PROVIDER_COLLECTOR_FINALITY_LOCAL_DB_CHECKPOINT_ADMIN_CREDENTIAL_BACKUP_EVIDENCE_SOURCE_A_AND_B_DOMAINS_ALL_DISTINCT"
         },
         "evidence": {
           "$ref": "#/$defs/evidence"

@@ -84,7 +84,7 @@ const probes = [
     validator: independentValidator,
     fixtures: independentFixtures,
     expectedStatus: 0,
-    expectedMessage: /independent initialization sign-off is PENDING/u,
+    expectedMessage: /initialization automated observation is PENDING/u,
   },
   {
     name: "pending initialization signoff with a claimed completed check",
@@ -96,19 +96,19 @@ const probes = [
       (signoff) => { signoff.checks.evidenceSha256Matched = true; },
     ),
     expectedStatus: 1,
-    expectedMessage: /PENDING sign-off must not contain partial or self-asserted completion evidence/u,
+    expectedMessage: /PENDING observation must not contain partial or self-asserted completion evidence/u,
   },
   {
-    name: "pending initialization signoff with claimed operator independence",
+    name: "pending initialization observation with a human reviewer gate",
     validator: independentValidator,
     fixtures: independentFixtures,
     mutate: (root) => mutateJson(
       root,
       "launch/iat-v2-devnet-independent-signoff.template.json",
-      (signoff) => { signoff.verifier.independentOfOperator = true; },
+      (signoff) => { signoff.observationPolicy.humanReviewerRequired = true; },
     ),
     expectedStatus: 1,
-    expectedMessage: /PENDING sign-off must not contain partial or self-asserted completion evidence/u,
+    expectedMessage: /observationPolicy must preserve automated evidence/u,
   },
   {
     name: "initialization signoff credential-field injection",
@@ -117,10 +117,10 @@ const probes = [
     mutate: (root) => mutateJson(
       root,
       "launch/iat-v2-devnet-independent-signoff.template.json",
-      (signoff) => { signoff.verifier.seedPhrase = "forbidden"; },
+      (signoff) => { signoff.observationPolicy.seedPhrase = "forbidden"; },
     ),
     expectedStatus: 1,
-    expectedMessage: /forbidden credential field signoff\.verifier\.seedPhrase/u,
+    expectedMessage: /forbidden credential field signoff\.observationPolicy\.seedPhrase/u,
   },
   {
     name: "substituted initialization signoff path",
@@ -135,7 +135,7 @@ const probes = [
     validator: featureValidator,
     fixtures: featureFixtures,
     expectedStatus: 0,
-    expectedMessage: /historical corrected-program feature sign-off validates for its prior artifact/u,
+    expectedMessage: /historical corrected-program feature automated observation validates for its prior artifact/u,
   },
   {
     name: "feature signoff with a false canonical check",
@@ -147,7 +147,7 @@ const probes = [
       (signoff) => { signoff.checks.chainReceipt29Of29Finalized = false; },
     ),
     expectedStatus: 1,
-    expectedMessage: /VERIFIED sign-off requires every canonical check to be true/u,
+    expectedMessage: /VERIFIED observation requires every canonical check to be true/u,
   },
   {
     name: "feature signoff with a future completion time",
@@ -159,19 +159,19 @@ const probes = [
       (signoff) => { signoff.completedAtUtc = "2999-01-01T00:00:00Z"; },
     ),
     expectedStatus: 1,
-    expectedMessage: /verifier completion cannot be in the future/u,
+    expectedMessage: /automated observation completion cannot be in the future/u,
   },
   {
-    name: "feature signoff reusing the upgrade authority as verifier",
+    name: "feature observation permitting self-attestation",
     validator: featureValidator,
     fixtures: featureFixtures,
     mutate: (root) => mutateJson(
       root,
       "launch/iat-v2-devnet-feature-independent-signoff.template.json",
-      (signoff) => { signoff.verifier.publicSolanaAddress = signoff.programArtifact.upgradeAuthority; },
+      (signoff) => { signoff.observationPolicy.noSelfAttestation = false; },
     ),
     expectedStatus: 1,
-    expectedMessage: /verifier identity is not the pinned independent verifier/u,
+    expectedMessage: /observationPolicy must preserve automated evidence/u,
   },
   {
     name: "feature signoff evidence digest drift",
@@ -207,7 +207,7 @@ const probes = [
       (signoff) => { signoff.exceptions = ["unresolved"]; },
     ),
     expectedStatus: 1,
-    expectedMessage: /VERIFIED sign-off cannot contain exceptions/u,
+    expectedMessage: /VERIFIED observation cannot contain exceptions/u,
   },
   {
     name: "feature signoff credential-field injection",
@@ -216,10 +216,10 @@ const probes = [
     mutate: (root) => mutateJson(
       root,
       "launch/iat-v2-devnet-feature-independent-signoff.template.json",
-      (signoff) => { signoff.verifier.privateKey = "forbidden"; },
+      (signoff) => { signoff.observationPolicy.privateKey = "forbidden"; },
     ),
     expectedStatus: 1,
-    expectedMessage: /forbidden credential field signoff\.verifier\.privateKey/u,
+    expectedMessage: /forbidden credential field signoff\.observationPolicy\.privateKey/u,
   },
   {
     name: "feature signoff reclassified as current-source proof",
@@ -243,12 +243,12 @@ const probes = [
       (signoff) => { signoff.status = "PENDING"; },
     ),
     expectedStatus: 1,
-    expectedMessage: /PENDING sign-off must not contain partial or self-asserted completion evidence/u,
+    expectedMessage: /PENDING observation must not contain partial or self-asserted completion evidence/u,
   },
 ];
 
 for (const probe of probes) runProbe(probe);
 
 console.log(
-  `IAT V2 signoff regression passed: both canonical validators and ${probes.length - 2} adversarial mutations fail closed without changing canonical evidence. Historical feature evidence remains historical; current-source and Mainnet authorization remain HOLD.`,
+  `IAT V2 observation regression passed: both canonical validators and ${probes.length - 2} adversarial mutations fail closed without changing canonical evidence. Historical feature evidence remains historical; current-source and Mainnet authorization remain HOLD.`,
 );

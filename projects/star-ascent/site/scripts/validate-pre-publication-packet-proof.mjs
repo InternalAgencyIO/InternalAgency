@@ -16,11 +16,11 @@ const proofFields = [
   "releasePacketSha256",
   "releaseSnapshotPath",
   "releaseSnapshotSha256",
-  "approvalPacketDigest",
-  "packetApprovedAtUtc",
+  "closurePacketDigest",
+  "packetObservedAtUtc",
   "artifactDigests",
 ];
-const requiredScope = "Historical pre-publication READY-packet proof only; this record never authorizes signing, submission, publication, or a claim.";
+const requiredScope = "Historical automated pre-publication READY-packet proof only; this record never authorizes signing, submission, publication, or a claim.";
 const artifactDigestFields = [
   "manifestSha256",
   "publicationPayloadSha256",
@@ -71,7 +71,7 @@ let packet;
 if (proofWasRead) {
   const record = proof && typeof proof === "object" && !Array.isArray(proof) ? proof : {};
   if (!hasExactKeys(proof, proofFields)) fail("proof must contain only its exact canonical reviewed fields");
-  if (record.version !== 1) fail("proof version must be 1");
+  if (record.version !== 2) fail("proof version must be 2");
   if (record.status !== "SEALED") fail("proof status must be SEALED");
   if (record.scope !== requiredScope) fail("proof scope must retain the non-authorizing boundary");
   if (!isUtcTimestamp(record.sealedAtUtc)) {
@@ -134,35 +134,35 @@ if (proofWasRead) {
   }
 
   if (packet?.status !== "READY") fail("proof requires the sealed canonical release packet to remain READY");
-  if (!isCanonicalDigest(record.approvalPacketDigest)) {
-    fail("proof approvalPacketDigest must be a lowercase SHA-256 digest");
+  if (!isCanonicalDigest(record.closurePacketDigest)) {
+    fail("proof closurePacketDigest must be a lowercase SHA-256 digest");
   }
   const orderedArtifactDigests = Object.fromEntries(
     artifactDigestFields.map((field) => [field, record.artifactDigests?.[field] ?? null]),
   );
-  const expectedApprovalPacketDigest = sha256(JSON.stringify({
+  const expectedClosurePacketDigest = sha256(JSON.stringify({
     packetVersion: 1,
     artifactDigests: orderedArtifactDigests,
   }));
-  if (record.approvalPacketDigest !== expectedApprovalPacketDigest) {
-    fail("proof approvalPacketDigest does not bind the ordered canonical artifact digests");
-  } else if (packet?.approval?.packetDigest !== record.approvalPacketDigest) {
-    fail("proof approvalPacketDigest must match the sealed release packet");
+  if (record.closurePacketDigest !== expectedClosurePacketDigest) {
+    fail("proof closurePacketDigest does not bind the ordered canonical artifact digests");
+  } else if (packet?.automatedClosure?.packetDigest !== record.closurePacketDigest) {
+    fail("proof closurePacketDigest must match the sealed release packet");
   } else {
-    ok("proof approval packet digest binds the five canonical artifact digests");
+    ok("proof automated-closure packet digest binds the five canonical artifact digests");
   }
 
-  if (!isUtcTimestamp(record.packetApprovedAtUtc)) {
-    fail("proof packetApprovedAtUtc must be a canonical ISO-8601 UTC timestamp");
-  } else if (packet?.approval?.approvedAtUtc !== record.packetApprovedAtUtc) {
-    fail("proof packetApprovedAtUtc must match the sealed release packet");
+  if (!isUtcTimestamp(record.packetObservedAtUtc)) {
+    fail("proof packetObservedAtUtc must be a canonical ISO-8601 UTC timestamp");
+  } else if (packet?.automatedClosure?.observedAtUtc !== record.packetObservedAtUtc) {
+    fail("proof packetObservedAtUtc must match the sealed release packet");
   } else {
-    ok("proof retains the sealed packet approval time");
+    ok("proof retains the sealed packet observation time");
   }
-  if (isUtcTimestamp(record.sealedAtUtc) && isUtcTimestamp(record.packetApprovedAtUtc)) {
-    const sealDelayMs = Date.parse(record.sealedAtUtc) - Date.parse(record.packetApprovedAtUtc);
+  if (isUtcTimestamp(record.sealedAtUtc) && isUtcTimestamp(record.packetObservedAtUtc)) {
+    const sealDelayMs = Date.parse(record.sealedAtUtc) - Date.parse(record.packetObservedAtUtc);
     if (sealDelayMs < 0 || sealDelayMs > 30 * 60 * 1000) {
-      fail("proof sealedAtUtc must be at or within 30 minutes after packetApprovedAtUtc");
+      fail("proof sealedAtUtc must be at or within 30 minutes after packetObservedAtUtc");
     } else {
       ok("proof was sealed within the READY decision window");
     }

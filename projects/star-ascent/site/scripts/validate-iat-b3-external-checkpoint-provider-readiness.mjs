@@ -12,7 +12,7 @@ import {
 import { sha256CanonicalJson } from "./iat-v2-canonical-json.mjs";
 
 export const PROVIDER_READINESS_SCHEMA =
-  "iat-b3-external-checkpoint-provider-readiness/v1";
+  "iat-b3-external-checkpoint-provider-readiness/v2";
 export const PROVIDER_READINESS_STATUS =
   "NON_ACTIVATING_PROVIDER_READINESS_REVIEW_PACKET";
 export const PROVIDER_READINESS_MAINNET_STATUS = "HOLD";
@@ -23,7 +23,7 @@ const CANONICAL_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{7,159}$/u;
 const GENERIC_URL = /^[a-z][a-z0-9+.-]*:\/\//iu;
 const PLACEHOLDER = /^(?:blocked|change[-_ ]?me|none|null|pending|placeholder|replace[-_ ]?me|tbd|todo|unknown|x+|0+)$/iu;
 const NON_PRODUCTION_MARKER = /(?:^|[._:/-])(?:dev|dummy|example|fake|fixture|invalid|local|mock|sample|sandbox|staging|synthetic|test)(?:$|[._:/-])/iu;
-const OBVIOUS_NON_PRODUCTION_PREFIX = /^(?:dummy|example|fake|fixture|local|mock|sample|synthetic|test)(?:artifact|domain|evidence|key|observer|provider|resource|reviewer|service|tenant)/iu;
+const OBVIOUS_NON_PRODUCTION_PREFIX = /^(?:dummy|example|fake|fixture|local|mock|sample|synthetic|test)(?:artifact|domain|evidence|key|provider|resource|service|source|tenant)/iu;
 const LOW_ENTROPY_ID = /^(.)\1{7,}$/u;
 const REPEATED_NIBBLE_SHA256 = /^([0-9a-f])\1{63}$/u;
 
@@ -140,8 +140,8 @@ const EVIDENCE_KEYS = Object.freeze([
   "artifactSha256",
   "subjectBindingSha256",
   "policySha256",
-  "independentObserverId",
-  "observerIdentitySha256",
+  "automatedEvidenceSourceId",
+  "evidenceSourceIdentitySha256",
   "capturedAtUnixSeconds",
   "validThroughUnixSeconds",
   "environment",
@@ -251,13 +251,13 @@ export const CONTROL_SPECS = Object.freeze([
     ]),
   }),
   Object.freeze({
-    id: "INDEPENDENT_AUDIT_AND_REVIEW",
+    id: "AUTOMATED_MULTI_DOMAIN_DIRECT_EVIDENCE",
     claims: Object.freeze([
-      "SECURITY_REVIEW_IS_INDEPENDENT",
-      "LEGAL_TERMS_AND_RETENTION_ARE_REVIEWED",
-      "OPERATIONS_AND_DISASTER_RECOVERY_ARE_REVIEWED",
+      "SECURITY_FINDINGS_ARE_SOURCE_BOUND",
+      "LEGAL_TERMS_AND_RETENTION_STATE_IS_SOURCE_BOUND",
+      "OPERATIONS_AND_DISASTER_RECOVERY_STATE_IS_SOURCE_BOUND",
       "EVIDENCE_DIGESTS_ARE_REPRODUCIBLE",
-      "REVIEWERS_ARE_NOT_PROVIDER_ADMINS_OR_CHECKPOINT_OPERATORS",
+      "EVIDENCE_SOURCES_ARE_NOT_PROVIDER_ADMINS_OR_CHECKPOINT_OPERATORS",
     ]),
   }),
 ]);
@@ -308,8 +308,8 @@ export const TEST_FIXTURE_PROVIDER_READINESS_VALUES = Object.freeze({
     credentialFailureDomainId: "fixture-credential-custody-domain",
     backupFailureDomainId: "fixture-independent-backup-domain",
   }),
-  independentObserverId: "fixture-independent-reviewer",
-  observerIdentitySha256: fixtureSha256("independent-reviewer-identity"),
+  automatedEvidenceSourceId: "fixture-automated-evidence-source",
+  evidenceSourceIdentitySha256: fixtureSha256("automated-evidence-source-identity"),
   capturedAtUnixSeconds: "2000000000",
   validThroughUnixSeconds: "2100000000",
   evidenceArtifactSha256BySection: Object.freeze(Object.fromEntries(
@@ -686,18 +686,18 @@ function validateEvidence({
     violations.push(`${path}.policySha256: evidence must bind the exact section control and policy`);
   }
   canonicalIdentifier(
-    evidence.independentObserverId,
-    `${path}.independentObserverId`,
+    evidence.automatedEvidenceSourceId,
+    `${path}.automatedEvidenceSourceId`,
     true,
     manifest.profile,
     violations,
   );
-  canonicalSha256(evidence.observerIdentitySha256, `${path}.observerIdentitySha256`, true, violations);
+  canonicalSha256(evidence.evidenceSourceIdentitySha256, `${path}.evidenceSourceIdentitySha256`, true, violations);
   if (evidence.environment !== manifest.profile) {
     violations.push(`${path}.environment: must equal manifest.profile`);
   }
-  if (resourceIds.has(evidence.independentObserverId)) {
-    violations.push(`${path}.independentObserverId: observer cannot be a provider, admin, credential, backup, or local persistence resource`);
+  if (resourceIds.has(evidence.automatedEvidenceSourceId)) {
+    violations.push(`${path}.automatedEvidenceSourceId: evidence source cannot be a provider, admin, credential, backup, or local persistence resource`);
   }
   const captured = asPositiveU64(
     evidence.capturedAtUnixSeconds,

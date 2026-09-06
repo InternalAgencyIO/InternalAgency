@@ -14,6 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -24,61 +25,313 @@ concurrency:
   group: iat-v2-proof-${{ github.event.pull_request.head.sha || github.sha }}
   cancel-in-progress: true
 
-defaults:
-  run:
-    working-directory: projects/star-ascent/site
-
 jobs:
   web-and-policy:
-    name: Web, policy, and launch gates
+    name: Web/policy checks (launch remains HOLD)
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    defaults:
+      run:
+        working-directory: projects/star-ascent/site
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
           # The public pre-launch audit validator recomputes its historical
           # source commit, tree, and tracked-file inventory. A shallow checkout
           # cannot provide that source-bound assurance.
           fetch-depth: 0
+      - name: Normalize and verify exact web source history
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset GIT_ALTERNATE_OBJECT_DIRECTORIES GIT_COMMON_DIR GIT_CONFIG GIT_CONFIG_COUNT
+          unset GIT_CONFIG_PARAMETERS GIT_DIR GIT_GRAFT_FILE GIT_IMPLICIT_WORK_TREE GIT_INDEX_FILE
+          unset GIT_NO_REPLACE_OBJECTS GIT_OBJECT_DIRECTORY GIT_PREFIX GIT_REPLACE_REF_BASE
+          unset GIT_SHALLOW_FILE GIT_WORK_TREE
+          export GIT_NO_REPLACE_OBJECTS=1
+          source_head="$IAT_V2_SOURCE_HEAD_SHA"
+          b3_source="d8c11aa852cfd678ce63816125214cd0db85e54e"
+          if [[ ! "$source_head" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "IAT_V2_SOURCE_HEAD_SHA is not an exact lowercase commit" >&2
+            exit 1
+          fi
+          if [[ "$(git rev-parse --verify 'HEAD^{commit}')" != "$source_head" ]]; then
+            echo "Checkout HEAD does not match IAT_V2_SOURCE_HEAD_SHA" >&2
+            exit 1
+          fi
+          shallow_state="$(git rev-parse --is-shallow-repository)"
+          if [[ "$shallow_state" == "true" ]]; then
+            git fetch --unshallow --no-tags origin
+            shallow_state="$(git rev-parse --is-shallow-repository)"
+          fi
+          if [[ "$shallow_state" != "false" ]]; then
+            echo "Web source checkout does not have complete Git history" >&2
+            exit 1
+          fi
+          if [[ "$(git rev-parse --verify 'HEAD^{commit}')" != "$source_head" ]]; then
+            echo "Checkout HEAD changed while completing source history" >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$b3_source" "$source_head"; then
+            echo "Pinned B3 source is not an ancestor of the exact web source head" >&2
+            exit 1
+          fi
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 24
           cache: npm
           cache-dependency-path: projects/star-ascent/site/package-lock.json
       - run: npm ci
+      - name: Inspect the nonauthorizing Devnet program-ceremony binding
+        id: ceremony_binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from "node:fs";
+          import { parseIatV2DevnetProgramCeremonyBinding } from "./programs/iat_v2/ceremony-binding.mjs";
+
+          const binding = parseIatV2DevnetProgramCeremonyBinding(JSON.parse(
+            readFileSync("scripts/data/iat-v2-devnet-program-ceremony-runtime-binding.json", "utf8"),
+          ));
+          const output = [`status=${binding.status}`];
+          if (binding.status === "BOUND") {
+            const branch = `agent/iat-v2-devnet-ceremony-ci-${binding.sourceHeadCommit}`;
+            output.push(
+              `run_id=${binding.ciRunId}`,
+              `checkout_commit=${binding.checkoutCommit}`,
+              `checkout_branch=${branch}`,
+              `checkout_ref=refs/heads/${branch}`,
+            );
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `${output.join("\n")}\n`, "utf8");
+          NODE
+      - name: Fetch the exact public Devnet ceremony CI-checkout evidence ref
+        if: steps.ceremony_binding.outputs.status == 'BOUND'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin \
+            "+${{ steps.ceremony_binding.outputs.checkout_ref }}:refs/remotes/origin/${{ steps.ceremony_binding.outputs.checkout_branch }}"
+          observed="$(git rev-parse --verify "refs/remotes/origin/${{ steps.ceremony_binding.outputs.checkout_branch }}^{commit}")"
+          if [[ "$observed" != "${{ steps.ceremony_binding.outputs.checkout_commit }}" ]]; then
+            echo "Public Devnet ceremony CI-checkout evidence ref disagrees with the binding anchor" >&2
+            exit 1
+          fi
+      - name: Download the exact fresh Devnet ceremony public-CI evidence artifact
+        if: steps.ceremony_binding.outputs.status == 'BOUND'
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          github-token: ${{ github.token }}
+          repository: InternalAgencyIO/InternalAgency
+          run-id: ${{ steps.ceremony_binding.outputs.run_id }}
+          name: iat-v2-b3-verifiable-sbf
+          path: projects/star-ascent/site/target/iat-v2-ceremony-ci-download
+      - name: Stage one exact fresh Devnet ceremony runtime evidence manifest
+        if: steps.ceremony_binding.outputs.status == 'BOUND'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -d '' manifests < <(find target/iat-v2-ceremony-ci-download -type f \
+            -name iat-v2-build-evidence.json -print0)
+          if [[ "${#manifests[@]}" -ne 1 ]]; then
+            echo "Expected exactly one downloaded iat-v2-build-evidence.json, found ${#manifests[@]}" >&2
+            exit 1
+          fi
+          mkdir -p target/verifiable
+          cp --no-preserve=mode,ownership,timestamps -- \
+            "${manifests[0]}" \
+            target/verifiable/iat-v2-ceremony-runtime-build-evidence.json
+      - name: Validate the Phase-A native containment source contract without execution
+        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs
+      - name: Confirm the offline native containment preflight remains exact HOLD
+        shell: bash
+        run: |
+          set +e
+          output="$(node scripts/build-iat-b3-mandatory-ci-containment.mjs)"
+          status=$?
+          set -e
+          printf '%s\n' "$output"
+          if [[ "$status" -ne 2 ]]; then
+            echo "Expected containment preflight exit 2/HOLD, got $status" >&2
+            exit 1
+          fi
+          node -e '
+            const value = JSON.parse(process.argv[1]);
+            if (value.status !== "HOLD" || value.ready !== false || value.complete !== false ||
+                value.buildAuthorized !== false || value.buildExecuted !== false ||
+                value.outputRootTouched !== false || !Array.isArray(value.blockers) ||
+                !value.blockers.includes("PHASE_B_NATIVE_BUILD_HARD_DISABLED")) {
+              throw new Error("containment preflight did not return the exact fail-closed HOLD projection");
+            }
+          ' "$output"
+      - name: Assert mandatory B3 CI manifest remains exact nonauthorizing HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs ci-manifest
+      - name: Assert Economy build contract remains exact nonbuilding HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs economy-reproducible-build
+      - name: Assert native WSL build path remains exact hard-disabled HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs native-wsl-hard-disable
+      - name: Assert local-rehearsal readiness remains exact nonexecuting HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs local-rehearsal-readiness
+      - name: Assert production transaction builders remain exact nonexecuting HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs production-transaction-builders
+      - name: Assert production loopback plan remains exact nonauthorizing HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs production-local-rehearsal
+      - name: Assert official local-rehearsal evidence remains exact nonexecuting HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs production-official-local-rehearsal
+      - name: Assert pre/post Devnet readiness remains exact nonexecuting HOLD
+        run: node scripts/assert-iat-b3-mandatory-ci-hold.mjs all-feature-devnet-readiness
+      - name: Prove mandatory CI HOLD assertion rejects truth escalation
+        run: node --test tests/iat-b3-mandatory-ci-hold-wrapper.test.mjs
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run check:iat-v2-proof-workflow
       - run: npm run check:iat-b3-spec
       - run: node --test tests/iat-b3-combined-law-reproducible-build.test.mjs
+      - run: npm run check:mint-config
       - run: npm run check:release-surface
       - run: npm run check:ui-regression
+      - name: Re-normalize and verify exact web source history before lineage gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          unset GIT_ALTERNATE_OBJECT_DIRECTORIES GIT_COMMON_DIR GIT_CONFIG GIT_CONFIG_COUNT
+          unset GIT_CONFIG_PARAMETERS GIT_DIR GIT_GRAFT_FILE GIT_IMPLICIT_WORK_TREE GIT_INDEX_FILE
+          unset GIT_NO_REPLACE_OBJECTS GIT_OBJECT_DIRECTORY GIT_PREFIX GIT_REPLACE_REF_BASE
+          unset GIT_SHALLOW_FILE GIT_WORK_TREE
+          export GIT_NO_REPLACE_OBJECTS=1
+          source_head="$IAT_V2_SOURCE_HEAD_SHA"
+          b3_source="d8c11aa852cfd678ce63816125214cd0db85e54e"
+          if [[ ! "$source_head" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "IAT_V2_SOURCE_HEAD_SHA is not an exact lowercase commit" >&2
+            exit 1
+          fi
+          if [[ "$(git rev-parse --verify 'HEAD^{commit}')" != "$source_head" ]]; then
+            echo "Checkout HEAD does not match IAT_V2_SOURCE_HEAD_SHA" >&2
+            exit 1
+          fi
+          shallow_state="$(git rev-parse --is-shallow-repository)"
+          if [[ "$shallow_state" == "true" ]]; then
+            git fetch --unshallow --no-tags origin
+            shallow_state="$(git rev-parse --is-shallow-repository)"
+          fi
+          if [[ "$shallow_state" != "false" ]]; then
+            echo "Web source checkout does not have complete Git history" >&2
+            exit 1
+          fi
+          if [[ "$(git rev-parse --verify 'HEAD^{commit}')" != "$source_head" ]]; then
+            echo "Checkout HEAD changed while completing source history" >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$b3_source" "$source_head"; then
+            echo "Pinned B3 source is not an ancestor of the exact web source head" >&2
+            exit 1
+          fi
+          tracked_drift="$(git status --porcelain=v1 --untracked-files=no)"
+          if [[ -n "$tracked_drift" ]]; then
+            printf '%s\n' "$tracked_drift" >&2
+            echo "Web checks modified tracked source; regenerate and commit exact outputs before CI" >&2
+            exit 1
+          fi
       - run: npm run check:iat-v2
       - run: npm run check:launch-gates
       - run: npm run check:iat-v2-signoff
       - run: npm test
       - run: npm run lint
 
+  native-containment-windows:
+    name: HOSTED_CROSS_PLATFORM_SMOKE_ONLY (non-evidence)
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      - name: Enable repository long paths before checkout
+        shell: pwsh
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - name: Validate native containment structure (hosted smoke only; non-evidence)
+        run: node --test tests/iat-b3-mandatory-ci-containment.test.mjs
+        working-directory: projects/star-ascent/site
+      - name: Confirm native containment preflight HOLD (hosted smoke only; non-evidence)
+        shell: pwsh
+        run: |
+          $output = (& node scripts/build-iat-b3-mandatory-ci-containment.mjs 2>&1 | Out-String).Trim()
+          $status = $LASTEXITCODE
+          Write-Host $output
+          if ($status -ne 2) {
+            throw "Expected containment preflight exit 2/HOLD, got $status"
+          }
+          $value = $output | ConvertFrom-Json
+          if ($value.status -ne 'HOLD' -or $value.ready -ne $false -or
+              $value.complete -ne $false -or $value.buildAuthorized -ne $false -or
+              $value.buildExecuted -ne $false -or $value.outputRootTouched -ne $false -or
+              $value.blockers -notcontains 'PHASE_B_NATIVE_BUILD_HARD_DISABLED') {
+            throw 'containment preflight did not return the exact fail-closed HOLD projection'
+          }
+          exit 0
+        working-directory: projects/star-ascent/site
+
   rust-host:
     name: Rust host tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: projects/star-ascent/site
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Test default feature isolation
         run: cargo test --workspace --all-targets --locked
       - name: Test feature-gated runtime bridges
-        # Conspicuous host-test identities exercise the fail-closed combined
-        # hook build. They are not deployment, Devnet, or Mainnet identities.
+        # Conspicuous host-test identities and a public test-only Law domain
+        # exercise the fail-closed combined hook build. All four values are
+        # fixtures forbidden for production, deployment, Devnet, or Mainnet.
         env:
           IAT_B3_PRODUCTION_LAW_PROGRAM_ID: D6UucuMprPAYyCmr5UPU5h9YhRf2ZNtn23JTS32EjdjY
           IAT_B3_PRODUCTION_ECONOMY_PROGRAM_ID: GLb6VMiKEhRRfYnD1p3a3iCAR3kgtRr8qdHxEHAzbdDU
           IAT_B3_PRODUCTION_CANONICAL_MINT: 3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3
+          IAT_B3_PRODUCTION_MAINNET_GENESIS_HASH: 4zEL9HZwTFoanu5RbmGspF5a6uqVGP99xkJxToZoq3Pw
         run: cargo test --workspace --all-targets --all-features --locked
+
+  phase-b-hosted-smoke:
+    name: PHASE_B_HOSTED_SMOKE_ONLY_ALL_FALSE_HOLD (non-evidence)
+    # Ordering only: no output or receipt from hosted Phase-A is consumed.
+    needs: native-containment-windows
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      # Source-only Phase-B smoke: no cache/artifact download, helper/runtime
+      # execution, hosted-to-local provenance promotion, or release claim is admitted.
+      - name: Validate Phase-B source contracts (hosted smoke only; all-false HOLD; non-evidence)
+        run: npm --prefix projects/star-ascent/site run check:iat-b3-mandatory-ci-phase-b-structure
+        shell: bash
+        timeout-minutes: 5
+      - name: Confirm Phase-B canonical all-false HOLD (hosted smoke only; non-evidence)
+        run: npm --prefix projects/star-ascent/site run check:iat-b3-mandatory-ci-phase-b-hosted-smoke
+        shell: bash
+        timeout-minutes: 5
 
   verifiable-sbf:
     name: Verifiable Solana SBF build
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: projects/star-ascent/site
     env:
       IAT_V2_SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       IAT_V2_WORKFLOW_EVENT: ${{ github.event_name }}

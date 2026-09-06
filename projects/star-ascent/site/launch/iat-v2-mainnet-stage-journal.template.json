@@ -1,5 +1,5 @@
 {
-  "schema": "iat-v2-mainnet-stage-journal/v2",
+  "schema": "iat-v2-mainnet-stage-journal/v3",
   "status": "HOLD",
   "network": "mainnet-beta",
   "scope": "Non-authorizing V2 stage reconciliation journal; this file never signs, broadcasts, retries, repairs, compensates, publishes, or establishes on-chain truth.",
@@ -52,7 +52,10 @@
     "noAutomaticRetry": true,
     "noCompensatingTransaction": true,
     "noApprovalReuse": true,
-    "independentVerificationPerFinalizedStage": true,
+    "automatedSourceReceiptStateObservationPerFinalizedStage": true,
+    "humanReviewerRequired": false,
+    "noSelfAttestation": true,
+    "trezorModelTPhysicalConfirmationIsSoleHumanGate": true,
     "noPublicationBeforeFullReconciliation": true,
     "preserveTerminalHoldHistory": true
   },
@@ -67,8 +70,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     },
@@ -82,8 +86,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     },
@@ -97,8 +102,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     },
@@ -112,8 +118,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     },
@@ -127,8 +134,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     },
@@ -142,8 +150,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     },
@@ -157,8 +166,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     },
@@ -172,8 +182,9 @@
       "signature": null,
       "explorerUrl": null,
       "confirmedAtUtc": null,
-      "independentlyVerifiedAtUtc": null,
-      "independentVerifierLabel": null,
+      "observationReceiptPath": null,
+      "observationReceiptSha256": null,
+      "observedAtUtc": null,
       "observedPostStateSha256": null,
       "mismatchCode": null
     }
@@ -182,14 +193,15 @@
     "state": "HOLD",
     "failedStage": null,
     "reasonCode": "NOT_STARTED",
-    "reviewedAtUtc": null,
-    "reviewerLabel": null,
+    "observationReceiptSetSha256": null,
+    "observedAtUtc": null,
     "publicIncidentUrl": null
   },
   "limitations": [
     "Explorer URLs and recorded digests are evidence references, not signatures or transaction authority.",
-    "A FINALIZED_MATCHED stage requires a separate independent read of confirmed state.",
-    "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new separately reviewed record and must never overwrite history.",
-    "RECONCILED permits evidence-first publication review only; it does not authorize publication or claims."
+    "A finalized, failed, or unresolved stage requires an exact source-bound automated observation receipt; journal fields alone are not evidence.",
+    "TERMINAL_HOLD is permanent after the first failure, mismatch, or unresolved submission; recovery requires a new source-bound record and must never overwrite history.",
+    "RECONCILED permits evidence-first publication observation only; it does not authorize publication or claims.",
+    "Trezor Model T physical confirmation is the sole human gate and applies only to actual cryptographic signatures."
   ]
 }
