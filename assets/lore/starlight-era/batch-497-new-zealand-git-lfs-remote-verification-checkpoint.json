@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "batch": 497,
+  "country": "New Zealand",
+  "state": "closure-remote-verified",
+  "verifiedAtUtc": "2026-09-06T13:36:30.7414576Z",
+  "branch": "agent/starlight-progress-archive",
+  "draftPr": "https://github.com/InternalAgencyIO/InternalAgency/pull/13",
+  "closureCheckpoint": "assets/lore/starlight-era/batch-497-new-zealand-four-stills-closed-qa-checkpoint.json",
+  "closureEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/closure-evidence-manifest.json",
+  "closureCommit": "e8f06d69d7a48ee775fc047ef109451da221707f",
+  "localHead": "e8f06d69d7a48ee775fc047ef109451da221707f",
+  "originHead": "e8f06d69d7a48ee775fc047ef109451da221707f",
+  "directPrHead": "e8f06d69d7a48ee775fc047ef109451da221707f",
+  "githubPrHead": "e8f06d69d7a48ee775fc047ef109451da221707f",
+  "allHeadsEqual": true,
+  "prState": "open-draft",
+  "lfsPushDryRunEmpty": true,
+  "scopedLfsFsck": "OK",
+  "gitConnectivity": "OK; only pre-existing dangling unreachable objects were reported.",
+  "lfsObjects": [
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2015-chatgpt-single-tailoring-pass.png", "oid": "sha256:0124a8d10247144bf42b6e42af22bd2d1333da86ad571e83157a49d84d248fc9", "size": 2382702},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2016-chatgpt-single-tailoring-pass.png", "oid": "sha256:ee38eb2208b2fc5f549579cad2a922028f9927f98e2d7858d57cae7ebf43030b", "size": 2554814},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2017-chatgpt-single-tailoring-pass.png", "oid": "sha256:01487f5792ad593890e1dbcc152b55bcf1395edcb3277eeecfd82ae750d0904b", "size": 2416115},
+    {"path": "assets/lore/starlight-era/provider-evidence/batch-497-new-zealand/scene-2018-chatgpt-single-tailoring-pass.png", "oid": "sha256:183c84fc875be529c2ecd8e0008a99f29f5df3c7d57f3265b40df938db7d2939", "size": 2406995}
+  ],
+  "verification": {
+    "closureJsonParsed": true,
+    "providerManifestExact": true,
+    "providerManifestFileCount": 18,
+    "providerManifestTotalBytes": 3591548,
+    "providerManifestInventorySha256": "01B4A71EAE6D99977D5D2AA4DE41FFCEBF901D62FBDF6ED47A50A625812BE91F",
+    "closureManifestExact": true,
+    "closureManifestFileCount": 26,
+    "closureManifestTotalBytes": 13379111,
+    "closureManifestInventorySha256": "680ED04C79372BA7A8220EEA660E1333EAE27605FD336C61030E68C4AFCAFD76",
+    "selectedAssetLedgerCounts": [1, 1, 1, 1],
+    "selectedAssetCanonicalXPostCounts": [0, 0, 0, 0],
+    "selectedSceneCanonicalXPostCounts": [0, 0, 0, 0],
+    "metaSendCount": 4,
+    "metaRetryCount": 0,
+    "chatgptInvocationCount": 4,
+    "chatgptRemainingAllowances": 0,
+    "xEligibleSelectedStillCount": 4
+  },
+  "browserState": {
+    "metaTerminalCount": 4,
+    "metaStopButtonCounts": [0, 0, 0, 0],
+    "metaDownloadButtonCounts": [1, 1, 1, 1],
+    "metaThinkingVisibleEveryLane": true,
+    "metaAccountVisibleEveryLane": true,
+    "xBlankComposerCount": 1,
+    "xComposerPostDisabled": true,
+    "xComposerMediaCount": 0,
+    "xSignedInAccount": "@dogramaci",
+    "otherTabCount": 0,
+    "visibleInAppBrowserOnly": true
+  },
+  "guardianInventory": [
+    {"id": "guardian-x-assistant-mission", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true},
+    {"id": "iat-b3-devnet-gate-guardian", "status": "ACTIVE", "rrule": "FREQ=MINUTELY;INTERVAL=45", "leftUntouched": true}
+  ],
+  "starlightGuardianPresent": false,
+  "unrelatedUntrackedPathsPreserved": [
+    "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/",
+    "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+    "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+    "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png"
+  ],
+  "canonicalContradictions": [
+    "Older Cuba-oriented automation instructions remain superseded by Tanzania preparation and later remote-verified checkpoints. No Cuba or Tanzania prompt was dispatched.",
+    "The earlier Liberia and Central African Republic uncertainty is terminally resolved. Their four-media post is live once at https://x.com/dogramaci/status/2096581743327293620 and must never be resent.",
+    "Scene 2016 uses its Meta original because it preserves the fixed extreme-close camera roll better than the valid ChatGPT output. Both files are archived.",
+    "A broad Git connectivity check reports only pre-existing dangling unreachable objects. The Batch 497 scoped LFS check is clean and the branch, origin and PR heads match.",
+    "No Starlight guardian exists. The two unrelated guardians remain active on their existing 45-minute schedules and were not modified."
+  ],
+  "nextSafeAction": "Commit and remote-verify this receipt. Then close only the four terminal New Zealand Meta tabs, keep the blank @dogramaci composer, and report the verified current state and exact Palestine preparation action before any new Meta dispatch."
+}
