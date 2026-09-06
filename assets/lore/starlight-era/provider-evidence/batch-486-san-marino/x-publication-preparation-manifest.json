@@ -108,13 +108,34 @@
     "screenshotBytes": 113054,
     "screenshotDimensions": "894x1039"
   },
-  "postClicks": 0,
+  "postClicks": 1,
   "keyboardSubmitAttempts": 0,
-  "publicTransmissionCount": 0,
-  "xPostUrls": [],
-  "xPhotoEndpoints": [],
-  "freshActionTimeConfirmationReceived": false,
+  "publicTransmissionCount": 1,
+  "xPostUrls": [
+    "https://x.com/dogramaci/status/2096401582602506746"
+  ],
+  "xPhotoEndpoints": [
+    "https://x.com/dogramaci/status/2096401582602506746/photo/1",
+    "https://x.com/dogramaci/status/2096401582602506746/photo/2",
+    "https://x.com/dogramaci/status/2096401582602506746/photo/3"
+  ],
+  "freshActionTimeConfirmationReceived": true,
   "duplicateMediaTransmission": false,
+  "successfulControlActivationAtUtc": "2026-09-06T00:53:40.804Z",
+  "postedAtUtc": "2026-09-06T00:54:21.207Z",
+  "liveVerifiedAtUtc": "2026-09-06T00:55:15.9048665Z",
+  "liveEvidence": {
+    "path": "assets/lore/starlight-era/provider-evidence/batch-486-san-marino/x-norway-san-marino-live-status-2096401582602506746-2026-09-06.png",
+    "sha256": "69A6117FDCA11150183914FFF93F4C35F0ABB90CC5366AC248AD1473D60FA631",
+    "bytes": 126145,
+    "dimensions": "1253x705"
+  },
+  "postPublicationComposer": {
+    "url": "https://x.com/compose/post",
+    "blank": true,
+    "mediaCount": 0,
+    "postButtonDisabled": true
+  },
   "canonicalContradiction": "The world X ledger retains stale top-level account @RaymondRR777, while the newest canonical posts and the live visible profile establish @dogramaci. The posts array, fresh zero-match searches, and zero hash counts are authoritative for duplicate prevention.",
-  "nextSafeAction": "Remote-verify this exact staging evidence, then obtain fresh action-time confirmation for one visible Post click. After the click, verify the public @dogramaci status and all three photo endpoints, record every URL, update the canonical ledger, and never resend these media."
+  "nextSafeAction": "Never resend these media. Commit and remote-verify the live status receipt and canonical ledger append, retain one blank @dogramaci composer, then prepare the next duplicate-safe country pair without clicking Post until its own action-time gate is satisfied."
 }
