@@ -11808,7 +11808,7 @@
   },
   "latestBatch496CentralAfricanRepublicPreparation": {
     "schemaVersion": 1,
-    "status": "central-african-republic-three-valid-first-occurrences-qa-complete-scene-2012-retry-one-prepared",
+    "status": "central-african-republic-three-valid-first-occurrences-qa-complete-scene-2012-retry-one-staged-no-send",
     "batch": 496,
     "country": "Central African Republic",
     "sceneIds": [2011, 2012, 2013, 2014],
@@ -11844,6 +11844,10 @@
     "chatgptInvocationLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/chatgpt-one-strong-shortening-invocation-ledger.json",
     "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/accessibility-sidecars.json",
     "scene2012RetryOne": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
+    "scene2012RetryOneStaging": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-staged-checkpoint.json",
+    "scene2012RetryOneStagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-retry-1-staging-evidence-manifest.json",
+    "scene2012RetryOneMetaTabId": "32",
+    "restoredBlankXComposerTabId": "33",
     "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/staging-evidence-manifest.json",
     "stagedMetaTabIds": ["28", "29", "30", "31"],
     "stagingEvidenceInventorySha256": "1E6BEEB48330B248A075A8DF4AD2F5AA954BC9B7A2E8D8454DF16B0F2F8F773A",
@@ -11866,6 +11870,6 @@
     "firstOccurrenceProviderRetries": 0,
     "uncertainSendActivations": 0,
     "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and later remote-verified checkpoints. No Starlight guardian exists, and unrelated guardians remain untouched.",
-    "nextSafeAction": "Commit and remote-verify the three accepted raw outputs, one-pass results, ledgers and exact scene 2012 retry-one prompt. Replace only the terminal refused scene 2012 tab with one fresh Meta Thinking composer, stage retry one with anchors 938, 936 and 937, remote-verify a no-send receipt, then activate Send exactly once."
+    "nextSafeAction": "Commit and remote-verify the scene 2012 retry-one no-send staging receipt. Audit Meta tab 32 in place without reload for exact prompt, exact anchors, leesha007, Thinking, one enabled Send and no Stop, reverify X tab 33 blank under @dogramaci, then activate the retry Send exactly once."
   }
 }

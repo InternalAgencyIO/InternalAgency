@@ -4,7 +4,7 @@
   "country": "Central African Republic",
   "provider": "Meta AI through the visible in-app Browser only",
   "capturedAtUtc": "2026-09-06T10:07:43.785Z",
-  "state": "three-first-occurrence-images-accepted-one-first-occurrence-refused-retry-one-prepared",
+  "state": "three-first-occurrence-images-accepted-one-first-occurrence-refused-retry-one-staged-no-send",
   "accountVerified": "leesha007",
   "modeVerifiedAllLanes": "Thinking",
   "sendCount": 4,
@@ -39,6 +39,7 @@
       "metaRetryCount": 0,
       "singleChatgptTailoringInvocationsCompleted": 0,
       "retryOnePrepared": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
+      "retryOneStaging": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-retry-1-staged-checkpoint.json",
       "selected": null
     },
     {
@@ -79,5 +80,5 @@
   "chatgptCompletedOutputs": 2,
   "chatgptModerationBlockedOutputs": 1,
   "pendingHardFailureRetryScenes": [2012],
-  "nextSafeAction": "Remote-verify this evidence and the exact scene 2012 retry-one preparation. Then stage the retry in one fresh Meta Thinking composer with exact ordered anchors 938, 936 and 937 without reopening or resending any first occurrence."
+  "nextSafeAction": "Remote-verify the exact scene 2012 retry-one no-send staging receipt, audit it in place without reload, then activate its Send exactly once without reopening or resending any first occurrence."
 }
