@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "batch": 494,
+  "country": "Lebanon",
+  "state": "prepared-offline-not-dispatched",
+  "preparedAtUtc": "2026-09-06T06:48:41.7654711Z",
+  "authority": "assets/lore/starlight-era/batch-494-lebanon-editorial-brief.json",
+  "authorityBytes": 7106,
+  "authoritySha256": "DDA61F36DD711C68D3E3E4F9B6A62905D45437FB83B91ED7CE79766B6C973588",
+  "contract": "starlight-editorial-rolls-2026-09-06",
+  "fixedRollsAndExactPrompts": "assets/lore/starlight-era/batch-494-lebanon-fixed-rolls.json",
+  "fixedRollsBytes": 136990,
+  "fixedRollsSha256": "E02C691ADFFA898694D2342CEC0B2AE4EBB8C5A50592552EB6C9151C05D139A8",
+  "deterministicRegenerationExact": true,
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-494|lebanon",
+  "seedSelection": "Fixed; no outcome search, salt hunting or reroll",
+  "provider": "Meta",
+  "accountRequired": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [938, 936, 937],
+  "anchorPaths": [
+    "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "anchorSha256": [
+    "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+    "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+    "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
+  ],
+  "anchorBytes": [2575103, 2495143, 2373808],
+  "closedPredecessorScenes": [1999, 2000, 2001, 2002],
+  "closedPredecessorRule": "Never reopen, resend or retry any terminal Batch 493 provider occurrence. Close those tabs only after this prepared state reaches remote parity.",
+  "sceneRange": [2003, 2006],
+  "browserDispatchCount": 0,
+  "editInvocationCount": 0,
+  "editorialTests": {"passed": 5, "failed": 0, "deterministicRegenerationExact": true, "shapeExact": true, "allActiveFlagsMatchThresholds": true, "cameraMappingAndDistinctShoeFamilies": true, "promptAndEditHashesExact": true},
+  "retryPolicy": {
+    "maximumMetaRetriesPerScene": 2,
+    "eligibleOnlyFor": ["no image", "corrupt media", "wrong cast or duplicate face", "grossly malformed anatomy", "unsafe or explicit output"],
+    "neverFor": ["aesthetic preference", "camera nuance", "branding omission", "hemline nuance", "minor wardrobe deviation"],
+    "freshChatAndNewPromptHashRequired": true
+  },
+  "singleEditPolicy": {
+    "provider": "built-in ChatGPT image generator",
+    "callsPerTechnicallyValidMetaOccurrence": 1,
+    "allChangesInOneInvocation": true,
+    "blockedOrInterruptedCallConsumesAllowance": true,
+    "secondCallForbidden": true
+  },
+  "scenes": [
+    {
+      "scene": 2003,
+      "location": "Beirut Corniche and Raouche Pigeon Rocks",
+      "camera": {"roll": 61, "category": "intermediate", "angle": "high-oblique", "dutchDegrees": 10},
+      "pose": "back-hug-turn",
+      "activeImageRolls": ["rainbowStockings"],
+      "activeCharacterRolls": {"Alia": ["flagGarment", "visibleNavel", "stockingBranding", "tattoo:crescent", "tattoo:scorpion"], "Radiance": ["rainbowShoes", "shoeBranding", "flagGarment", "stockingBranding"], "Ellie": ["shoeBranding", "flagGarment", "visibleNavel", "tattoo:raze-split-star"], "ECE": ["rainbowShoes", "shoeBranding", "visibleNavel", "tattoo:country-love-motif"]},
+      "promptSha256": "DA160087B121A4B40119173C24F1FC9E93EEEE1DE80F709AEB99F185565D4FB9",
+      "promptCharacters": 4402,
+      "singleEditPromptSha256": "7DC15C7B7C61A92F25562B1B80D1036B82FB5265C9D0B52C462E49FEE0BB91E1"
+    },
+    {
+      "scene": 2004,
+      "location": "Byblos Old Harbour and castle ramparts",
+      "camera": {"roll": 84, "category": "extreme-wide", "angle": "front-quarter-low", "dutchDegrees": 16},
+      "pose": "supported-seated-conversation",
+      "activeImageRolls": ["kneeHighHosiery"],
+      "activeCharacterRolls": {"Alia": ["tattoo:country-love-motif", "tattoo:raze-brand"], "Radiance": ["rainbowShoes", "flagGarment", "visibleNavel", "tattoo:IA"], "Ellie": ["visibleNavel"], "ECE": ["rainbowShoes", "visibleNavel", "stockingBranding"]},
+      "promptSha256": "74E5F20E779CAE5791D66624C8100EDAD2352097915693496C4A38CCE09E2B5B",
+      "promptCharacters": 3755,
+      "singleEditPromptSha256": "241FBDF08ECA4CBD1618462D98AE439F8F14EE0193CA5CEFFE762E684D9CA7DE"
+    },
+    {
+      "scene": 2005,
+      "location": "Jeita Grotto guarded cave walkway",
+      "camera": {"roll": 21, "category": "intermediate", "angle": "side-level", "dutchDegrees": 15},
+      "pose": "head-resting-on-clothed-lap",
+      "activeImageRolls": ["starHardware"],
+      "activeCharacterRolls": {"Alia": ["rainbowShoes", "flagGarment", "visibleNavel", "stockingBranding"], "Radiance": ["shoeBranding", "tattoo:silent-king"], "Ellie": ["rainbowShoes"], "ECE": ["flagGarment", "tattoo:country-death-motif"]},
+      "promptSha256": "49BD46F39766A0F995608FDB37278953E7BB2616643A885681E94CE3D222E448",
+      "promptCharacters": 3877,
+      "singleEditPromptSha256": "6D9D3EE7A6770A79A42104D9BA0E3A42BEDFBB17991C511D301507C7D11EF8A1"
+    },
+    {
+      "scene": 2006,
+      "location": "Chouf Cedar Nature Reserve mountain terrace",
+      "camera": {"roll": 60, "category": "intermediate", "angle": "over-shoulder", "dutchDegrees": 17},
+      "pose": "side-hug-step",
+      "activeImageRolls": ["kneeHighHosiery", "razeTypeBand", "rainbowStockings", "kneeHighRainbows"],
+      "activeCharacterRolls": {"Alia": ["shoeBranding", "visibleNavel", "tattoo:IA"], "Radiance": ["shoeBranding", "flagGarment", "visibleNavel"], "Ellie": ["shoeBranding", "stockingBranding", "tattoo:scorpion", "tattoo:GRD"], "ECE": ["visibleNavel"]},
+      "promptSha256": "87E7D799C544824C0B95CE04939EB2577822C7B896ED147D9E6094058F053F5A",
+      "promptCharacters": 3786,
+      "singleEditPromptSha256": "51C5386C315375E2CB5C30911EACCCFC496A1A6BEB251D5DEDFC79C419D030F1"
+    }
+  ],
+  "promptStorageRule": "The exact full Meta and single-edit prompt strings are stored only in fixedRollsAndExactPrompts under each scene. The hashes and character counts above were verified against those exact strings.",
+  "nextSafeAction": "Update the binding current pointers, commit and verify local, origin and PR parity, then replace the four closed Batch 493 Meta tabs with four fresh blank Meta composers while keeping the blank X composer."
+}
