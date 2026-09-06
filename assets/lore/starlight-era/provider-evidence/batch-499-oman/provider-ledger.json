@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 499,
   "country": "Oman",
-  "state": "four-primary-meta-results-downloaded-three-usable-one-hard-identity-failure",
+  "state": "one-confirmed-identity-retry-rendering-three-single-tailoring-calls-invoked",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,10 +11,10 @@
     936,
     937
   ],
-  "providerSendActivations": 4,
-  "providerRetries": 0,
+  "providerSendActivations": 5,
+  "providerRetries": 1,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 3,
   "occurrences": [
     {
       "scene": 2023,
@@ -29,7 +29,7 @@
       "occurrence": 1,
       "status": "terminal-primary-downloaded-usable-awaiting-single-pass",
       "metaRetryCount": 0,
-      "singleChatgptTailoringInvocationsCompleted": 0,
+      "singleChatgptTailoringInvocationsCompleted": 1,
       "terminalObserved": true,
       "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2023-meta-terminal-dom.txt",
       "raw": {
@@ -93,7 +93,7 @@
       "occurrence": 1,
       "status": "terminal-primary-downloaded-usable-awaiting-single-pass",
       "metaRetryCount": 0,
-      "singleChatgptTailoringInvocationsCompleted": 0,
+      "singleChatgptTailoringInvocationsCompleted": 1,
       "terminalObserved": true,
       "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2025-meta-terminal-dom.txt",
       "raw": {
@@ -125,7 +125,7 @@
       "occurrence": 1,
       "status": "terminal-primary-downloaded-usable-awaiting-single-pass",
       "metaRetryCount": 0,
-      "singleChatgptTailoringInvocationsCompleted": 0,
+      "singleChatgptTailoringInvocationsCompleted": 1,
       "terminalObserved": true,
       "terminalDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2026-meta-terminal-dom.txt",
       "raw": {
@@ -143,6 +143,24 @@
         "activationCount": 1
       },
       "currentTabAbsent": true
+    },
+    {
+      "scene": 2024,
+      "occurrence": 2,
+      "retry": 1,
+      "tabId": "56",
+      "promptSha256": "6D8EA1BE52EA1D28735E06B5731DED1062F064CFA3F85266F39B4E6245FB0370",
+      "activationRequestedAtUtc": "2026-09-06T16:00:47.308Z",
+      "sendActivations": 1,
+      "clickReturned": true,
+      "providerUrl": "https://www.meta.ai/prompt/b8b4522d-9a2b-4082-9945-f2739af38311",
+      "confirmed": true,
+      "stopVisible": true,
+      "status": "confirmed-in-progress",
+      "metaRetryCount": 1,
+      "singleChatgptTailoringInvocationsCompleted": 0,
+      "postSendDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-1-post-send-dom.txt",
+      "doNotResend": true
     }
   ],
   "nextSafeAction": "Use exactly one saved tailoring invocation on each of 2023,2025,2026. Stage and verify the first hard-identity retry for 2024 in the fresh lane. Keep Oman publication on hold and obtain missing secondary bytes without reopening a terminal scene.",
