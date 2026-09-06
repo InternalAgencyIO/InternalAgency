@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "batch": 495,
+  "country": "Liberia",
+  "sceneIds": [2007, 2008, 2009, 2010],
+  "state": "four-meta-scenes-dispatched-exactly-once-inflight",
+  "createdAtUtc": "2026-09-06T08:37:43.6612192Z",
+  "authority": {
+    "stagingCheckpoint": "assets/lore/starlight-era/batch-495-liberia-four-meta-composers-staged-checkpoint.json",
+    "stagingCommit": "47daaeb0e245725347272a772f7842abda1730db",
+    "localHeadBeforeDispatch": "47daaeb0e245725347272a772f7842abda1730db",
+    "originHeadBeforeDispatch": "47daaeb0e245725347272a772f7842abda1730db",
+    "directPrHeadBeforeDispatch": "47daaeb0e245725347272a772f7842abda1730db",
+    "githubPrHeadBeforeDispatch": "47daaeb0e245725347272a772f7842abda1730db",
+    "allHeadsEqualBeforeDispatch": true,
+    "lfsPushDryRunEmptyBeforeDispatch": true,
+    "scopedLfsFsckBeforeDispatch": "OK"
+  },
+  "actionTimeAudit": {
+    "visibleTabCount": 5,
+    "metaTabCount": 4,
+    "xComposerCount": 1,
+    "otherTabCount": 0,
+    "account": "leesha007",
+    "accountVerifiedEveryLane": true,
+    "mode": "Thinking",
+    "modeVerifiedEveryLane": true,
+    "exactPromptVerifiedEveryLane": true,
+    "orderedAnchorIds": [938, 936, 937],
+    "orderedAnchorsVerifiedEveryLane": true,
+    "sendButtonCountEveryLane": 1,
+    "sendEnabledEveryLane": true,
+    "stopButtonCountEveryLane": 0,
+    "xSignedInProfile": "@dogramaci",
+    "xComposerBlank": true,
+    "xMediaCount": 0,
+    "xPostEnabled": false
+  },
+  "dispatches": [
+    {
+      "scene": 2007,
+      "tabId": "24",
+      "promptSha256": "5C61FA4EB6D292ECD5CE424B44F0035F27B7087AE9CFC78118609DFB89D560DF",
+      "sentAtUtc": "2026-09-06T08:35:55.030Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/b68a10cb-b5fb-475b-a57b-2f3811707e29",
+      "stateAfterEvidenceCapture": "inflight-stop-visible"
+    },
+    {
+      "scene": 2008,
+      "tabId": "25",
+      "promptSha256": "41659974A16C581A9932371755852B0DA5C5B1923A61911F7CD025C63D546332",
+      "sentAtUtc": "2026-09-06T08:35:59.031Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/bb4ffcaa-bbeb-452e-99e9-9f50b214642a",
+      "stateAfterEvidenceCapture": "inflight-stop-visible"
+    },
+    {
+      "scene": 2009,
+      "tabId": "26",
+      "promptSha256": "7BA8A41E0902CDAE18B148ADE00094ABDF64BDA61CB2E4CBCE0598A235C7AC2E",
+      "sentAtUtc": "2026-09-06T08:36:02.995Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/6cdd5f04-a921-4f0d-8faf-1b2dbbb85a47",
+      "stateAfterEvidenceCapture": "inflight-stop-visible"
+    },
+    {
+      "scene": 2010,
+      "tabId": "27",
+      "promptSha256": "F943EBE15BFAD53A274EAFDF091C1CBAC6FC850A6015FFE71379A7EEF26BD77A",
+      "sentAtUtc": "2026-09-06T08:36:06.967Z",
+      "sendActivations": 1,
+      "providerUrl": "https://www.meta.ai/prompt/05c33567-35f6-4b42-aee8-2dcd906d74a7",
+      "stateAfterEvidenceCapture": "inflight-stop-visible"
+    }
+  ],
+  "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/dispatch-evidence-manifest.json",
+  "duplicateGate": "All four Batch 495 provider URLs are confirmed first-occurrence identities. Never click Send again for scenes 2007 through 2010, including after a reload, stale composer state or an uncertain browser response.",
+  "canonicalContradiction": "The old Cuba automation instruction remains superseded by Tanzania preparation and every later remote-verified checkpoint. Batch 495 Liberia is current, and no Cuba, Tanzania or terminal Lebanon scene was reopened or dispatched.",
+  "nextSafeAction": "Commit and remote-verify this dispatch receipt and visible evidence, then monitor the four canonical provider URLs in place until terminal. Preserve every terminal output through supported visible Download controls, perform hard QA only, and invoke the sealed ChatGPT edit exactly once for each technically valid Meta occurrence."
+}

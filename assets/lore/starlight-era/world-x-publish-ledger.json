@@ -11752,7 +11752,7 @@
   },
   "latestBatch495LiberiaPreparation": {
     "schemaVersion": 1,
-    "status": "liberia-four-meta-composers-staged-no-send",
+    "status": "liberia-four-meta-scenes-dispatched-exactly-once-inflight",
     "batch": 495,
     "country": "Liberia",
     "sceneIds": [2007, 2008, 2009, 2010],
@@ -11773,7 +11773,7 @@
     "maximumMetaRetriesPerScene": 2,
     "aestheticRetries": 0,
     "chatgptStrongShorteningPassesPerTechnicallyValidMetaOccurrence": 1,
-    "browserDispatchCount": 0,
+    "browserDispatchCount": 4,
     "editInvocationCount": 0,
     "brief": "assets/lore/starlight-era/batch-495-liberia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-495-liberia-fixed-rolls.json",
@@ -11781,7 +11781,15 @@
     "preflight": "assets/lore/starlight-era/batch-495-liberia-meta-dispatch-preflight-checkpoint.json",
     "stagingCheckpoint": "assets/lore/starlight-era/batch-495-liberia-four-meta-composers-staged-checkpoint.json",
     "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/staging-evidence-manifest.json",
+    "dispatchCheckpoint": "assets/lore/starlight-era/batch-495-liberia-four-meta-scenes-dispatched-checkpoint.json",
+    "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/dispatch-evidence-manifest.json",
+    "providerUrls": [
+      "https://www.meta.ai/prompt/b68a10cb-b5fb-475b-a57b-2f3811707e29",
+      "https://www.meta.ai/prompt/bb4ffcaa-bbeb-452e-99e9-9f50b214642a",
+      "https://www.meta.ai/prompt/6cdd5f04-a921-4f0d-8faf-1b2dbbb85a47",
+      "https://www.meta.ai/prompt/05c33567-35f6-4b42-aee8-2dcd906d74a7"
+    ],
     "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and later remote-verified checkpoints. No Starlight guardian exists, and unrelated guardians remain untouched.",
-    "nextSafeAction": "Commit and remote-verify the exact no-send staging checkpoint and visible evidence. Reinspect all four live composers without reload, then activate each enabled Send exactly once under standing authorization."
+    "nextSafeAction": "Commit and remote-verify the exact dispatch receipt and visible evidence, then monitor the four canonical provider URLs in place without resending."
   }
 }
