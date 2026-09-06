@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "currentXBacklogDrain20260906": {"state":"backlog-post-p05-exact-staged-not-submitted","canonicalPostCount":213,"manualPostsReconciled":["https://x.com/dogramaci/status/2096574104090325016","https://x.com/dogramaci/status/2096434278221365747","https://x.com/dogramaci/status/2096411154650181866","https://x.com/dogramaci/status/2096411114858811685","https://x.com/dogramaci/status/2096360172591489502","https://x.com/dogramaci/status/2096388100377165953"],"publishedSceneIds":[2020,2022,2017,2005,2006,2010,2000,2002,2013,1991,1992,1994,1995],"latestPostUrl":"https://x.com/dogramaci/status/2096657302551974295","liveReceipt":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-p04-live-checkpoint.json","reservedSceneIds":[1988,1990,1979,1982],"historicalContradiction":"Scenes 1985 and 1972 each have three preexisting public URLs; scene 1918 has two. Preserve all URLs and exclude all scene versions. This drain created none of those duplicates.","omanState":"Oman remains incomplete and publication-ineligible.","scope":"Only selected archived hard-QA-passing media after chronological live duplicate audit. Older backlog is not yet fully cleared.","manualAuditCheckpoint":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-manual-reconciliation-round2.json","stagedCheckpoint":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-p05-staged-checkpoint.json"},
+  "currentXBacklogDrain20260906": {"state":"backlog-post-p05-live-older-selected-candidates-under-audit","canonicalPostCount":214,"manualPostsReconciled":["https://x.com/dogramaci/status/2096574104090325016","https://x.com/dogramaci/status/2096434278221365747","https://x.com/dogramaci/status/2096411154650181866","https://x.com/dogramaci/status/2096411114858811685","https://x.com/dogramaci/status/2096360172591489502","https://x.com/dogramaci/status/2096388100377165953"],"publishedSceneIds":[2020,2022,2017,2005,2006,2010,2000,2002,2013,1991,1992,1994,1995,1988,1990,1979,1982],"latestPostUrl":"https://x.com/dogramaci/status/2096662742056726538","liveReceipt":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-p05-live-checkpoint.json","reservedSceneIds":[],"historicalContradiction":"Scenes 1985 and 1972 each have three preexisting public URLs; scene 1918 has two. Preserve all URLs and exclude all scene versions. This drain created none of those duplicates.","omanState":"Oman remains incomplete and publication-ineligible.","scope":"Only selected archived hard-QA-passing media after chronological live duplicate audit. Older backlog is not yet fully cleared.","manualAuditCheckpoint":"assets/lore/starlight-era/x-backlog-drain-2026-09-06-manual-reconciliation-round2.json"},
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},
   "currentMetaRecovery20260906Batch499": {"state":"four-primary-results-downloaded-three-usable-one-identity-failure-secondary-archive-gap","checkpoint":"assets/lore/starlight-era/batch-499-oman-tab-recovery-primary-qa-checkpoint.json","supersedes":"currentMetaDispatch20260906Batch499 status and old tabs only; confirmed occurrence URLs and hashes remain immutable","currentMetaTabs":["56","57","58","59"],"currentXTab":"60","xAccount":"@dogramaci","archiveGapBlocksOmanPublication":true,"confirmedPromptsMustNotBeResent":true},
@@ -10412,6 +10412,117 @@
         }
       ],
       "duplicateGate": "Exclude every asset version of scenes 1918 from all future X attachments."
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 490,
+      "batches": [
+        490,
+        488
+      ],
+      "countries": [
+        "Vatican City",
+        "Slovenia"
+      ],
+      "sceneIds": [
+        1988,
+        1990,
+        1979,
+        1982
+      ],
+      "imageNumbers": [
+        1988,
+        1990,
+        1979,
+        1982
+      ],
+      "state": "terminal-published-live-verified",
+      "postUrl": "https://x.com/dogramaci/status/2096662742056726538",
+      "postedAt": "2026-09-06T18:12:06.000Z",
+      "verifiedAt": "2026-09-06T18:12:56.345Z",
+      "caption": "Vatican City ❤️ Slovenia: spiral stairs and garden hugs meet Ljubljana and a fantasy clifftop castle. Short couture, rainbow knee-highs, RAZE details and metallic boots. Fictional AI fashion; distant fires are imagined.\n\n#WorldXXXSeries #InternalAgency",
+      "captionSha256": "AD4A1BF3AF03C3C998F4999E17CA760A5EFF869D17700DE76F2084599EFB59A6",
+      "hashtags": [
+        "#WorldXXXSeries",
+        "#InternalAgency"
+      ],
+      "assets": [
+        {
+          "scene": 1988,
+          "provider": "Meta AI",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1988-vatican-city-momo-spiral-staircase-editorial-meta-occurrence-1-raw.webp",
+          "sha256": "26429768F9B92DC1DF2E687B38FDD2995B93273B5FEC8C094CFA8E321BEA5E01",
+          "bytes": 540794,
+          "width": 1152,
+          "height": 2048,
+          "country": "Vatican City",
+          "alt": "Four fictional adult women gather in a close side-hug and supported seated pose beneath the Momo double-helix staircase, wearing short yellow, white and bronze looks with Vatican key-and-tiara motifs, rainbow knee-highs and gold, ivory, blue RAZE and bronze heels.",
+          "sourceClosure": "assets/lore/starlight-era/batch-490-vatican-city-four-stills-closed-qa-checkpoint.json",
+          "xEligible": true
+        },
+        {
+          "scene": 1990,
+          "provider": "Meta AI fallback after consumed ChatGPT invocation",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-490-vatican-city/1990-vatican-city-gardens-fountain-terrace-editorial-meta-occurrence-1-raw.webp",
+          "sha256": "3FFB20ED7F58CC3ADBF14F7BF07F5540E36844FBDF28FEF0ADC43283CD3BDE7F",
+          "bytes": 513796,
+          "width": 1152,
+          "height": 2048,
+          "country": "Vatican City",
+          "alt": "Four fictional adult women share a close overlapping embrace and linked hands in the Vatican Gardens beside clipped hedges and a fountain, wearing short bronze, pearl-gold, blue map-pattern and yellow-white flag looks with visible heart, silent king and GRD tattoos.",
+          "sourceClosure": "assets/lore/starlight-era/batch-490-vatican-city-four-stills-closed-qa-checkpoint.json",
+          "xEligible": true
+        },
+        {
+          "scene": 1979,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-488-slovenia/1979-slovenia-ljubljana-triple-bridge-raze-tight-full-body-chatgpt-one-strong-shortening-pass.png",
+          "sha256": "88C4E98B581A4008A99D299C06E8C40D742087AE6BBEF8597F477B9551B3380F",
+          "bytes": 2157787,
+          "width": 941,
+          "height": 1672,
+          "provider": "ChatGPT",
+          "reason": "Single tailoring result retains identities and usable anatomy with visibly shorter hems; raw Meta alternative retained.",
+          "alt": "Four fictional adult women smile and link hands by Ljubljana's river beneath the hilltop castle, wearing shortened blue, pearl-white, navy-red and green-white outfits with RAZE waistbands, coordinated knee-high stockings and pumps.",
+          "country": "Slovenia",
+          "sourceClosure": "assets/lore/starlight-era/batch-488-slovenia-four-stills-closed-qa-checkpoint.json",
+          "xEligible": true
+        },
+        {
+          "scene": 1982,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-488-slovenia/1982-slovenia-predjama-castle-raze-tight-full-body-statement-boots-chatgpt-one-strong-shortening-pass.png",
+          "sha256": "299FBF277ECAF785D37BA7CAF3CFA708F74136D03E1DB46A44A13B50422249F6",
+          "bytes": 2372887,
+          "width": 941,
+          "height": 1672,
+          "provider": "ChatGPT",
+          "reason": "Single tailoring result retains identities and usable anatomy with visibly shorter hems; raw Meta alternative retained.",
+          "alt": "Four fictional adult women share a warm linked pose and cheek greeting before a stylized Slovenian clifftop castle, wearing shortened copper, silver, teal-black and green outfits with tall metallic platform boots; distant fictional fires and smoke fill the landscape.",
+          "country": "Slovenia",
+          "sourceClosure": "assets/lore/starlight-era/batch-488-slovenia-four-stills-closed-qa-checkpoint.json",
+          "xEligible": true
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2096662742056726538/photo/1",
+        "https://x.com/dogramaci/status/2096662742056726538/photo/2",
+        "https://x.com/dogramaci/status/2096662742056726538/photo/3",
+        "https://x.com/dogramaci/status/2096662742056726538/photo/4"
+      ],
+      "mediaMode": "signed-in-visible-in-app-browser",
+      "buttonClickAttempts": 1,
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 4,
+      "stagingCommit": "ae49cd48e080eed1afcf0eb2c34411db8f26338d",
+      "verification": "Direct live @dogramaci status confirms the frozen exact caption, ordered photo endpoints, every exact accessibility description, and Made with AI.",
+      "evidence": {
+        "liveDom": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p05-live-2096662742056726538-dom.txt",
+        "screenshot": "assets/lore/starlight-era/provider-evidence/x-backlog-drain-2026-09-06/p05-live-2096662742056726538-visible.jpg",
+        "screenshotBytes": 123345,
+        "screenshotSha256": "A5405415B6BFE7894440A22C978D1BD42F909A5BBA0D71A696B3337BCD05E3DB"
+      },
+      "duplicateGate": "Never attach scenes 1988, 1990, 1979, 1982 or any alternate versions again."
     }
   ],
   "latestAssistedDrain": {
