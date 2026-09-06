@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 499,
   "country": "Oman",
-  "state": "one-confirmed-identity-retry-rendering-three-single-tailoring-calls-invoked",
+  "state": "three-single-passes-terminal-first-identity-retry-hard-failed-final-retry-staged",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -156,14 +156,23 @@
       "providerUrl": "https://www.meta.ai/prompt/b8b4522d-9a2b-4082-9945-f2739af38311",
       "confirmed": true,
       "stopVisible": true,
-      "status": "confirmed-in-progress",
+      "status": "terminal-hard-identity-failure",
       "metaRetryCount": 1,
       "singleChatgptTailoringInvocationsCompleted": 0,
       "postSendDom": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-1-post-send-dom.txt",
-      "doNotResend": true
+      "doNotResend": true,
+      "qa": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-1-hard-qa.json",
+      "raw": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-meta-identity-retry-1-original.jpg",
+        "sha256": "F057FCDFB5875B84ACD2A56FEAA1882CB65ABDF4439F844E2DB866EBD8E8D78A",
+        "bytes": 243391,
+        "width": 1152,
+        "height": 2048
+      },
+      "currentTabAbsent": true
     }
   ],
-  "nextSafeAction": "Use exactly one saved tailoring invocation on each of 2023,2025,2026. Stage and verify the first hard-identity retry for 2024 in the fresh lane. Keep Oman publication on hold and obtain missing secondary bytes without reopening a terminal scene.",
+  "nextSafeAction": "Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication.",
   "updatedAtUtc": "2026-09-06 15:55:14 UTC",
   "primaryQa": "assets/lore/starlight-era/provider-evidence/batch-499-oman/primary-hard-qa.json",
   "archiveGap": [
@@ -179,5 +188,7 @@
       "previewScreenshotsPreserved": 1,
       "secondaryRawDownloads": 0
     }
-  ]
+  ],
+  "archiveGapAudit": "assets/lore/starlight-era/provider-evidence/batch-499-oman/secondary-raw-browser-recovery-audit.json",
+  "currentCheckpoint": "assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json"
 }
