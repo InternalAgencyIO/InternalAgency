@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 499,
   "country": "Oman",
-  "state": "three-single-passes-terminal-first-identity-retry-hard-failed-final-retry-staged",
+  "state": "final-identity-retry-confirmed-rendering-no-more-meta-retries",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,8 +11,8 @@
     936,
     937
   ],
-  "providerSendActivations": 5,
-  "providerRetries": 1,
+  "providerSendActivations": 6,
+  "providerRetries": 2,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 3,
   "occurrences": [
@@ -170,9 +170,27 @@
         "height": 2048
       },
       "currentTabAbsent": true
+    },
+    {
+      "scene": 2024,
+      "occurrence": 3,
+      "retry": 2,
+      "activationRequestedAtUtc": "2026-09-06T17:06:53.629Z",
+      "tabId": "2",
+      "promptSha256": "2DECC5C10F376AE4376DF3FBE913BF28FE3ADB38854A53724FC20C0B5B26A1A6",
+      "sendActivations": 1,
+      "clickReturned": true,
+      "providerUrl": "https://www.meta.ai/prompt/26b98a4e-fd5c-4e9f-b5a0-69a220c5a9a7",
+      "confirmed": true,
+      "stopVisible": true,
+      "status": "confirmed-in-progress",
+      "metaRetryCount": 2,
+      "additionalMetaRetriesAllowed": 0,
+      "singleChatgptTailoringInvocationsCompleted": 0,
+      "doNotResend": true
     }
   ],
-  "nextSafeAction": "Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication.",
+  "nextSafeAction": "Inspect only this existing last retry; preserve terminal result and bytes. No further Meta retry. If technically usable, reserve exactly one built-in ChatGPT clothing pass with all three identity-only references. Keep X hold until QA and missing internal bytes resolve.",
   "updatedAtUtc": "2026-09-06 15:55:14 UTC",
   "primaryQa": "assets/lore/starlight-era/provider-evidence/batch-499-oman/primary-hard-qa.json",
   "archiveGap": [
