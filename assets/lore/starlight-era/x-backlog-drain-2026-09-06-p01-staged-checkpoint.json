@@ -10,7 +10,8 @@
     2017
   ],
   "mediaCount": 3,
-  "captionExact": false,
+  "captionExact": true,
+  "captionVerification": "The visible composer has three text blocks: caption, empty block, hashtag. Joining their DOM text with LF exactly matches the frozen caption and hash. Generic innerText inserts an extra layout newline, so it was not used as the authoritative text serialization.",
   "exactAltTextCount": 3,
   "madeWithAiSwitchVerifiedChecked": true,
   "visualOrderVerified": true,
