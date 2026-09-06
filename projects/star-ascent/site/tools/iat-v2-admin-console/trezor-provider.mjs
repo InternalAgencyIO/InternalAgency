@@ -12,8 +12,10 @@ const SOLANA_NETWORK_GENESIS_HASHES = Object.freeze({
   devnet: "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
   "mainnet-beta": "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
 });
+export const IAT_V2_TREZOR_PREPARED_SIGNING_MAX_AGE_MS = 10_000;
 const trezorVerificationCapabilities = new WeakSet();
 const trezorVerificationBindings = new WeakMap();
+const trezorPreparedSigningBindings = new WeakMap();
 
 function numericDerivationPath(serializedPath) {
   if (typeof serializedPath !== "string" || !/^m(?:\/[0-9]+'?)+$/.test(serializedPath)) {
@@ -293,6 +295,7 @@ export function createTrezorTransactionProvider({
   verification,
   network,
   readGenesisHash,
+  monotonicNow = () => performance.now(),
 }) {
   if (!Object.hasOwn(SOLANA_NETWORK_GENESIS_HASHES, network)) {
     throw new Error("Direct Model T signing requires an explicit devnet or mainnet-beta network");
@@ -300,91 +303,156 @@ export function createTrezorTransactionProvider({
   if (typeof readGenesisHash !== "function") {
     throw new Error("Direct Model T signing requires a canonical network Genesis-hash reader");
   }
+  if (typeof monotonicNow !== "function") {
+    throw new Error("Direct Model T signing requires a monotonic clock");
+  }
   const verified = assertTrezorSolanaVerificationCapability({
     capability: verification,
     connect,
   });
   const path = verified.path;
   const signer = verified.publicKey;
-  return {
-    publicKey: signer,
-    isTrezor: true,
-    async signTransaction(transaction) {
-      if (!(transaction instanceof Transaction)) {
-        throw new Error("Direct Model T signing only accepts legacy Solana transactions");
-      }
-      const unsignedMessage = Buffer.from(transaction.serializeMessage());
-      const originalSignatures = transaction.signatures.map(({ publicKey: key, signature }) => ({
+  const providerIdentity = Object.freeze({});
+
+  function monotonicTimestamp(label) {
+    const value = monotonicNow();
+    if (!Number.isFinite(value) || value < 0) {
+      throw new Error(`${label} did not return a finite non-negative monotonic timestamp`);
+    }
+    return value;
+  }
+
+  function inspectUnsignedTransaction(transaction) {
+    if (!(transaction instanceof Transaction)) {
+      throw new Error("Direct Model T signing only accepts legacy Solana transactions");
+    }
+    return {
+      unsignedMessage: Buffer.from(transaction.serializeMessage()),
+      originalSignatures: transaction.signatures.map(({ publicKey: key, signature }) => ({
         publicKey: key,
         signature: signature === null ? null : Buffer.from(signature),
-      }));
-      const unsignedHex = Buffer.from(transaction.serialize({
+      })),
+      unsignedHex: Buffer.from(transaction.serialize({
         requireAllSignatures: false,
         verifySignatures: false,
-      })).toString("hex");
-      const observedGenesisHash = await readGenesisHash();
-      if (observedGenesisHash !== SOLANA_NETWORK_GENESIS_HASHES[network]) {
-        throw new Error(`Refusing Model T prompt: RPC Genesis hash does not identify canonical ${network}`);
+      })).toString("hex"),
+    };
+  }
+
+  async function assertCanonicalNetwork() {
+    const observedGenesisHash = await readGenesisHash();
+    if (observedGenesisHash !== SOLANA_NETWORK_GENESIS_HASHES[network]) {
+      throw new Error(`Refusing Model T prompt: RPC Genesis hash does not identify canonical ${network}`);
+    }
+  }
+
+  async function invokeTrezorSign({ unsignedMessage, originalSignatures, unsignedHex }) {
+    const result = await connect.solanaSignTransaction({
+      path,
+      serializedTx: unsignedHex,
+      additionalInfo: { isDevnet: network === "devnet" },
+      serialize: true,
+    });
+    if (!result?.success) throw resultError(result, "Model T transaction signing");
+    if (
+      typeof result.payload?.signature !== "string"
+      || !/^[0-9a-f]{128}$/i.test(result.payload.signature)
+    ) {
+      throw new Error("Model T returned an invalid Solana signature");
+    }
+    if (
+      typeof result.payload?.serializedTx !== "string"
+      || !/^[0-9a-f]+$/i.test(result.payload.serializedTx)
+    ) {
+      throw new Error("Model T did not return the signed Solana transaction");
+    }
+    const signed = Transaction.from(Buffer.from(result.payload.serializedTx, "hex"));
+    if (!Buffer.from(signed.serializeMessage()).equals(unsignedMessage)) {
+      throw new Error("Model T returned a signature for a different Solana transaction message");
+    }
+    if (!signed.verifySignatures(false)) {
+      throw new Error("Model T returned a Solana signature that failed cryptographic verification");
+    }
+    if (signed.signatures.length !== originalSignatures.length) {
+      throw new Error("Model T changed the Solana transaction signer set");
+    }
+    for (let index = 0; index < originalSignatures.length; index += 1) {
+      const before = originalSignatures[index];
+      const after = signed.signatures[index];
+      if (!after.publicKey.equals(before.publicKey)) {
+        throw new Error("Model T changed the Solana transaction signer order");
       }
-      const result = await connect.solanaSignTransaction({
-        path,
-        serializedTx: unsignedHex,
-        additionalInfo: { isDevnet: network === "devnet" },
-        serialize: true,
+      if (before.publicKey.equals(signer)) {
+        if (before.signature !== null && !Buffer.from(after.signature ?? []).equals(before.signature)) {
+          throw new Error("Model T replaced an existing signature in its signer slot");
+        }
+        continue;
+      }
+      const afterSignature = after.signature === null ? null : Buffer.from(after.signature);
+      if (
+        (before.signature === null) !== (afterSignature === null)
+        || (before.signature !== null && !afterSignature.equals(before.signature))
+      ) {
+        throw new Error("Model T changed a non-Trezor cosigner signature slot");
+      }
+    }
+    const signature = signed.signatures.find(({ publicKey: key }) => key.equals(signer));
+    if (
+      !signature?.signature
+      || !Buffer.from(signature.signature).equals(Buffer.from(result.payload.signature, "hex"))
+    ) {
+      throw new Error("Model T signature does not belong to the required signer");
+    }
+    return signed;
+  }
+
+  const provider = {
+    publicKey: signer,
+    isTrezor: true,
+    async prepareDevnetTransactionSigning(transaction) {
+      if (network !== "devnet") {
+        throw new Error("Prepared Model T transaction signing is restricted to Devnet");
+      }
+      const inspected = inspectUnsignedTransaction(transaction);
+      await assertCanonicalNetwork();
+      const capability = Object.freeze({});
+      trezorPreparedSigningBindings.set(capability, {
+        consumed: false,
+        inspected,
+        preparedAtMonotonicMs: monotonicTimestamp("Prepared Model T network verification"),
+        providerIdentity,
       });
-      if (!result?.success) throw resultError(result, "Model T transaction signing");
+      return capability;
+    },
+    async signPreparedDevnetTransaction(transaction, capability) {
+      const binding = trezorPreparedSigningBindings.get(capability);
+      if (!binding || binding.providerIdentity !== providerIdentity) {
+        throw new Error("Prepared Model T signing capability is unavailable or belongs to another provider");
+      }
+      if (binding.consumed) {
+        throw new Error("Prepared Model T signing capability is already consumed");
+      }
+      binding.consumed = true;
+      const age = monotonicTimestamp("Prepared Model T signing use") - binding.preparedAtMonotonicMs;
+      if (!Number.isFinite(age) || age < 0 || age > IAT_V2_TREZOR_PREPARED_SIGNING_MAX_AGE_MS) {
+        throw new Error("Prepared Model T signing capability is stale");
+      }
+      const current = inspectUnsignedTransaction(transaction);
       if (
-        typeof result.payload?.signature !== "string"
-        || !/^[0-9a-f]{128}$/i.test(result.payload.signature)
+        current.unsignedHex !== binding.inspected.unsignedHex
+        || !current.unsignedMessage.equals(binding.inspected.unsignedMessage)
       ) {
-        throw new Error("Model T returned an invalid Solana signature");
+        throw new Error("Prepared Model T signing capability is bound to a different transaction");
       }
-      if (
-        typeof result.payload?.serializedTx !== "string"
-        || !/^[0-9a-f]+$/i.test(result.payload.serializedTx)
-      ) {
-        throw new Error("Model T did not return the signed Solana transaction");
-      }
-      const signed = Transaction.from(Buffer.from(result.payload.serializedTx, "hex"));
-      if (!Buffer.from(signed.serializeMessage()).equals(unsignedMessage)) {
-        throw new Error("Model T returned a signature for a different Solana transaction message");
-      }
-      if (!signed.verifySignatures(false)) {
-        throw new Error("Model T returned a Solana signature that failed cryptographic verification");
-      }
-      if (signed.signatures.length !== originalSignatures.length) {
-        throw new Error("Model T changed the Solana transaction signer set");
-      }
-      for (let index = 0; index < originalSignatures.length; index += 1) {
-        const before = originalSignatures[index];
-        const after = signed.signatures[index];
-        if (!after.publicKey.equals(before.publicKey)) {
-          throw new Error("Model T changed the Solana transaction signer order");
-        }
-        if (before.publicKey.equals(signer)) {
-          if (before.signature !== null && !Buffer.from(after.signature ?? []).equals(before.signature)) {
-            throw new Error("Model T replaced an existing signature in its signer slot");
-          }
-          continue;
-        }
-        const afterSignature = after.signature === null ? null : Buffer.from(after.signature);
-        if (
-          (before.signature === null) !== (afterSignature === null)
-          || (before.signature !== null && !afterSignature.equals(before.signature))
-        ) {
-          throw new Error("Model T changed a non-Trezor cosigner signature slot");
-        }
-      }
-      const signature = signed.signatures.find(({ publicKey: key }) => key.equals(signer));
-      if (
-        !signature?.signature
-        || !Buffer.from(signature.signature).equals(Buffer.from(result.payload.signature, "hex"))
-      ) {
-        throw new Error("Model T signature does not belong to the required signer");
-      }
-      return signed;
+      return invokeTrezorSign(binding.inspected);
+    },
+    async signTransaction(transaction) {
+      const inspected = inspectUnsignedTransaction(transaction);
+      await assertCanonicalNetwork();
+      return invokeTrezorSign(inspected);
     },
   };
+  return Object.freeze(provider);
 }
 
 export const DEFAULT_TREZOR_SOLANA_PATHS = Object.freeze([...SOLANA_ACCOUNT_PATHS]);

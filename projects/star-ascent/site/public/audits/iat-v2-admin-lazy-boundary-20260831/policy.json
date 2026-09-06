@@ -49,8 +49,8 @@
     "switchboardOnDemandMaximum": 1000000,
     "trezorConnectMaximum": 180000,
     "programUpgradeMaximum": 15500,
-    "programUpgradeAttendedMaximum": 45000,
-    "programUpgradeIncrementalClosureMaximum": 83000
+    "programUpgradeAttendedMaximum": 46000,
+    "programUpgradeIncrementalClosureMaximum": 84000
   },
   "assurance": {
     "independentHardwareReviewComplete": false,
@@ -68,6 +68,7 @@
     "The signing-window amendment raises only the attended-entry ceiling from 42,500 to 43,000 bytes for pre-prompt admission and truthful terminal labels; the 81,500-byte aggregate ceiling is unchanged. Local source builds are not public CI or hardware evidence.",
     "The prompt-recovery amendment raises the attended-entry ceiling from 43,000 to 45,000 bytes and the aggregate ceiling from 81,500 to 82,500 bytes for explicit missing-record classification; the measured source build is 44,794 and 82,206 bytes respectively. Local source builds are not public CI or hardware evidence.",
     "The binding-successor compatibility amendment raises only the aggregate ceiling from 82,500 to 83,000 bytes after exact-B public CI measured 82,567 bytes; the 45,000-byte attended-entry ceiling is unchanged. This bounded source policy does not authorize any attended or chain action.",
+    "The signing-headroom amendment raises the attended-entry ceiling from 45,000 to 46,000 bytes and the aggregate ceiling from 83,000 to 84,000 bytes after the local source build measured 45,498 and 82,910 bytes respectively. This source-only budget evidence is not public CI or hardware evidence and authorizes no device, RPC, signing, broadcast, deployment, Devnet, or Mainnet action.",
     "The distinct ceremony source preserves the consumed old latch and does not change the immutable migration artifact provenance.",
     "The durable signed-pending and permanent broadcast-attempt modules are source controls only and do not prove a device prompt, signature, send, confirmation, or finalized receipt.",
     "The Switchboard and Trezor packages remain present as lazy operator surfaces and require independent review before use.",

@@ -3,8 +3,8 @@ import { VersionedTransaction } from "@solana/web3.js";
 
 // Admission headroom for physical review plus the existing 40-block send margin.
 // This is not a guarantee of wall-clock signing time.
-export const IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS = 80;
-export const IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS = 5_000;
+export const IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS = 100;
+export const IAT_V2_PROGRAM_MAX_PROMPT_PREPARATION_MS = 5_000;
 
 export function sameBytes(left, right) {
   return Buffer.from(left).equals(Buffer.from(right));
@@ -170,13 +170,16 @@ export async function assertFreshProgramPromptBlockhashWindow({
   connection,
   lastValidBlockHeight,
   minContextSlot,
+  preparationStartedAtMonotonicMs,
   isVisible = () => globalThis.document?.visibilityState === "visible",
   monotonicNow = () => performance.now(),
 }) {
   if (typeof isVisible !== "function" || typeof monotonicNow !== "function" || isVisible() !== true) {
     throw new Error("Program prompt requires a visible attended page before consuming its latch");
   }
-  const started = monotonicNow();
+  const started = preparationStartedAtMonotonicMs === undefined
+    ? monotonicNow()
+    : preparationStartedAtMonotonicMs;
   const observed = await observeSignedBlockhashWindow({
     blockhash,
     connection,
@@ -187,13 +190,14 @@ export async function assertFreshProgramPromptBlockhashWindow({
   const elapsed = finished - started;
   if (
     !Number.isFinite(started)
+    || started < 0
     || !Number.isFinite(finished)
     || !Number.isFinite(elapsed)
     || elapsed < 0
-    || elapsed > IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS
+    || elapsed > IAT_V2_PROGRAM_MAX_PROMPT_PREPARATION_MS
     || isVisible() !== true
   ) {
-    throw new Error("Program prompt blockhash observation is stale or the page is hidden; no prompt latch consumed");
+    throw new Error("Program prompt preparation is stale or the page is hidden; no prompt latch consumed");
   }
   if (
     observed.status !== "VALID"

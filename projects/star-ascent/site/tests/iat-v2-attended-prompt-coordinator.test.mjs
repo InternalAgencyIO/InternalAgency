@@ -118,7 +118,7 @@ test("insufficient or indeterminate unsigned preparation writes no latch and inv
     assert.equal(calls, 0);
     assert.equal(targetStorage.calls.filter(([method]) => method === "setItem").length, 0);
     // A later explicit unsigned request remains possible without clearing state.
-    await request(value, { prepare: prepareWindow(920) });
+    await request(value, { prepare: prepareWindow(900) });
     const latch = loadAttendedModelTPromptLatch(targetStorage, {
       binding, action: "UPGRADE_PROGRAM",
     });
@@ -134,7 +134,7 @@ test("preparation precedes irreversible entry and a later hardware failure stays
     prepare: async () => {
       assert.equal(targetStorage.value(key), null);
       events.push("prepare-start");
-      await prepareWindow(920)();
+      await prepareWindow(900)();
       assert.equal(targetStorage.value(key), null);
       events.push("prepare-end");
     },
@@ -172,7 +172,7 @@ test("preparation holds the global lock and rejection releases it without reserv
   assert.equal(targetStorage.calls.filter(([method]) => method === "setItem").length, 0);
   rejectPreparation(new Error("unsigned observation failed"));
   await rejected;
-  await request(second, { prepare: prepareWindow(919) });
+  await request(second, { prepare: prepareWindow(900) });
 });
 
 test("malformed preparation is rejected without a lock or latch write", async () => {

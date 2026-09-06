@@ -38,6 +38,10 @@ const upgradeExpiryIncident = readFileSync(
   "launch/IAT_V2_ATTENDED_DEVNET_UPGRADE_EXPIRY_INCIDENT_20260831.md",
   "utf8",
 );
+const signingHeadroomIncident = readFileSync(
+  "launch/IAT_V2_ATTENDED_DEVNET_SIGNING_HEADROOM_INCIDENT_20260906.md",
+  "utf8",
+);
 const programCeremonyBindingSource = readFileSync(
   "programs/iat_v2/ceremony-binding.mjs",
   "utf8",
@@ -58,6 +62,10 @@ const migration = readFileSync("tools/iat-v2-admin-console/LegacyRoundMigration.
 const feature = readFileSync("tools/iat-v2-admin-console/FeatureRehearsal.jsx", "utf8");
 const attendedBoundary = readFileSync(
   "tools/iat-v2-admin-console/attended-transaction-boundary.mjs",
+  "utf8",
+);
+const trezorProvider = readFileSync(
+  "tools/iat-v2-admin-console/trezor-provider.mjs",
   "utf8",
 );
 
@@ -179,6 +187,28 @@ test("the 20260831 upgrade-expiry incident binds the exact pre-send HOLD without
   assert.match(upgradeExpiryIncident, /not a transaction receipt, deployment receipt, release,\s+or Mainnet authorization/u);
 });
 
+test("the 20260906 signing-headroom incident preserves B2 and binds the source remediation without inventing a send", () => {
+  for (const exact of [
+    "6e631151de9b769916a8a7aad71cf35680216fdd17bc4229845f0b1206e24379",
+    "481719172",
+    "481720052",
+    "481720019",
+    "bd586056ed56da5530cedddef06cf415408c057e",
+    "584dfab53c78106ea19b67cd122b105363e2fed9",
+    "ba49525bb2fd21c04a797b17d042dce9b61540a1",
+    "771c87bcd9afacf7e8e6bf43cd7ba05915fceb11c45a6a89d8080f6b52778a01",
+  ]) {
+    assert.ok(signingHeadroomIncident.includes(exact), `signing-headroom incident lost exact evidence: ${exact}`);
+  }
+  assert.match(signingHeadroomIncident, /operator separately reported that nothing was broadcast/u);
+  assert.match(signingHeadroomIncident, /does not independently prove the absence of\s+a prior submission/u);
+  assert.match(signingHeadroomIncident, /signed wire,\s+its local Solana signature, and browser storage records were not supplied or\s+inspected/u);
+  assert.match(signingHeadroomIncident, /source-proven exposure, not proof that the Genesis RPC caused/u);
+  assert.match(signingHeadroomIncident, /at least 100 remaining blocks/u);
+  assert.match(signingHeadroomIncident, /40-block broadcast cutoff remains authoritative and unchanged/u);
+  assert.match(signingHeadroomIncident, /not a transaction receipt, deployment receipt, release, or Mainnet\s+authorization/u);
+});
+
 test("fresh attended program ceremony binding remains a separate S-to-B source lane and preserves the immutable artifact lane", () => {
   const nullUntilBound = [
     "checkoutCommit",
@@ -279,6 +309,14 @@ test("program upgrade documents a read-only live blockhash window while preservi
   assert.match(upgrade, /MIN_BROADCAST_REMAINING_BLOCKS/u);
   assert.match(upgrade, /BLOCKHASH_WINDOW_MAX_AGE_MS/u);
   assert.match(upgrade, /!broadcastWindowReady/u);
+  assert.match(runbook, /Admission requires at least \*\*100 remaining blocks\*\*/u);
+  assert.match(runbook, /No application RPC, blockhash refresh, simulation, timer, or storage mutation may occur between latch entry and that SDK invocation/u);
+  assert.match(runbook, /existing \*\*40-block broadcast cutoff\*\* is unchanged/u);
+  assert.match(attendedBoundary, /IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS = 100/u);
+  assert.match(attendedBoundary, /IAT_V2_PROGRAM_MAX_PROMPT_PREPARATION_MS = 5_000/u);
+  assert.match(trezorProvider, /prepareDevnetTransactionSigning/u);
+  assert.match(trezorProvider, /signPreparedDevnetTransaction/u);
+  assert.match(trezorProvider, /Prepared Model T transaction signing is restricted to Devnet/u);
 });
 
 test("attended runbook gates the runtime, shell, browser storage, and finalized buffer handoff", () => {
@@ -477,9 +515,13 @@ test("operator sequence preserves conditional capacity, buffer, migration, backf
 });
 
 test("each attended console separates simulation/signing from finalized broadcast and evidence", () => {
-  for (const source of [`${upgrade}\n${attendedBoundary}`, `${migration}\n${attendedBoundary}`, feature]) {
+  for (const [source, signPattern] of [
+    [`${upgrade}\n${attendedBoundary}`, /provider\.signPreparedDevnetTransaction/u],
+    [`${migration}\n${attendedBoundary}`, /provider\.signTransaction/u],
+    [feature, /provider\.signTransaction/u],
+  ]) {
     assert.match(source, /simulateTransaction/u);
-    assert.match(source, /provider\.signTransaction/u);
+    assert.match(source, signPattern);
     assert.match(source, /sendRawTransaction/u);
     assert.match(source, /FINALIZED_COMMITMENT/u);
     assert.match(source, /messageSha256/u);

@@ -148,14 +148,30 @@ async function requestProgramModelTSignature({
   persistSigned,
   prepare,
 }) {
+  if (
+    typeof provider?.prepareDevnetTransactionSigning !== "function"
+    || typeof provider?.signPreparedDevnetTransaction !== "function"
+    || typeof prepare !== "function"
+  ) {
+    throw new Error("Program signing requires prepared one-use Devnet Model T capability support");
+  }
+  let preparedSigningCapability = null;
   const result = await coordinator.request({
     binding,
     action,
     messageSha256,
     signer: signer.toBase58(),
-    prepare,
+    prepare: async () => {
+      preparedSigningCapability = await prepare();
+      if (preparedSigningCapability === null) {
+        throw new Error("Program signing preparation did not return a one-use Model T capability");
+      }
+    },
     prompt: async () => {
-      const signed = await provider.signTransaction(transaction);
+      const signed = await provider.signPreparedDevnetTransaction(
+        transaction,
+        preparedSigningCapability,
+      );
       await verifySigned(signed);
       await persistSigned(signed);
       return signed;
@@ -745,6 +761,16 @@ export default function ProgramUpgradeAttendedActions({
         setSnapshot(promptSnapshot);
         throw new Error("Finalized artifact, buffer, or program action changed before the hardware prompt");
       }
+      if (document.visibilityState !== "visible") {
+        throw new Error("Program prompt preparation requires a visible attended page");
+      }
+      const promptPreparationStartedAtMonotonicMs = performance.now();
+      if (
+        !Number.isFinite(promptPreparationStartedAtMonotonicMs)
+        || promptPreparationStartedAtMonotonicMs < 0
+      ) {
+        throw new Error("Program prompt preparation monotonic clock is unavailable");
+      }
       const {
         latest,
         messageBytes,
@@ -800,13 +826,18 @@ export default function ProgramUpgradeAttendedActions({
         signer: publicKey,
         transaction: promptTransaction,
         prepare: async () => {
+          const preparedSigningCapability = await provider.prepareDevnetTransactionSigning(
+            promptTransaction,
+          );
           await assertFreshProgramPromptBlockhashWindow({
             blockhash: latest.blockhash,
             connection,
             lastValidBlockHeight: latest.lastValidBlockHeight,
             minContextSlot: simulationSlot,
+            preparationStartedAtMonotonicMs: promptPreparationStartedAtMonotonicMs,
           });
           assertExactTransactionMessage(promptTransaction, messageBytes, "Program action before prompt entry");
+          return preparedSigningCapability;
         },
         verifySigned: (candidate) => assertSignedLegacyTransaction({
           expectedBlockhash: latest.blockhash,

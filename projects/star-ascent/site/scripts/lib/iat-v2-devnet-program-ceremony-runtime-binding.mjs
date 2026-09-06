@@ -26,6 +26,7 @@ export const IAT_V2_DEVNET_PROGRAM_CEREMONY_RUNTIME_PATHS = Object.freeze([
   "app/mint/ceremony.mjs",
   "docs/b3/iat-v2-devnet-program-ceremony-runtime-binding.v1.schema.json",
   "engagement/iat-economic-policy.v2.json",
+  "launch/IAT_V2_ATTENDED_DEVNET_SIGNING_HEADROOM_INCIDENT_20260906.md",
   "launch/IAT_V2_POST_CI_ATTENDED_DEVNET_RUNBOOK.md",
   "package-lock.json",
   "package.json",

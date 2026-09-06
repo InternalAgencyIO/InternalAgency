@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import test from "node:test";
 import { Buffer } from "buffer";
 import {
@@ -9,9 +10,20 @@ import {
 import {
   createTrezorTransactionProvider,
   findTrezorSolanaAccount,
+  IAT_V2_TREZOR_PREPARED_SIGNING_MAX_AGE_MS,
   TREZOR_SOLANA_NETWORK_GENESIS_HASHES,
   verifyTrezorSolanaAccountOnDevice,
 } from "../tools/iat-v2-admin-console/trezor-provider.mjs";
+import {
+  IAT_V2_ATTENDED_PROMPT_GLOBAL_LOCK_NAME,
+  attendedPromptLatchKey,
+  createAttendedModelTPromptCoordinator,
+  loadAttendedModelTPromptLatch,
+} from "../tools/iat-v2-admin-console/attended-prompt-coordinator.mjs";
+import {
+  assertExactTransactionMessage,
+  assertFreshProgramPromptBlockhashWindow,
+} from "../tools/iat-v2-admin-console/attended-transaction-boundary.mjs";
 
 const devnetGenesis = () => TREZOR_SOLANA_NETWORK_GENESIS_HASHES.devnet;
 const mainnetGenesis = () => TREZOR_SOLANA_NETWORK_GENESIS_HASHES["mainnet-beta"];
@@ -55,6 +67,7 @@ async function createMockVerifiedProvider({
   path = DEFAULT_PATH,
   network,
   readGenesisHash,
+  monotonicNow,
 }) {
   const verification = await createMockVerification({ connect, publicKey, path });
   return createTrezorTransactionProvider({
@@ -62,6 +75,7 @@ async function createMockVerifiedProvider({
     verification,
     network,
     readGenesisHash,
+    monotonicNow,
   });
 }
 
@@ -600,4 +614,347 @@ test("direct Trezor adapter rejects an RPC Genesis mismatch before the device pr
 
   await assert.rejects(provider.signTransaction(transaction), /canonical mainnet-beta/);
   assert.equal(promptCount, 0);
+});
+
+test("prepared Devnet signing verifies Genesis before the one-use device boundary", async () => {
+  const signer = Keypair.generate();
+  let genesisReads = 0;
+  let promptCount = 0;
+  const connect = {
+    async solanaSignTransaction(request) {
+      promptCount += 1;
+      const signed = Transaction.from(Buffer.from(request.serializedTx, "hex"));
+      signed.partialSign(signer);
+      const signature = signed.signatures.find(({ publicKey }) => publicKey.equals(signer.publicKey));
+      return {
+        success: true,
+        payload: {
+          signature: Buffer.from(signature.signature).toString("hex"),
+          serializedTx: Buffer.from(signed.serialize()).toString("hex"),
+        },
+      };
+    },
+  };
+  const times = [100, 101];
+  const provider = await createMockVerifiedProvider({
+    connect,
+    publicKey: signer.publicKey,
+    network: "devnet",
+    readGenesisHash: async () => {
+      genesisReads += 1;
+      return devnetGenesis();
+    },
+    monotonicNow: () => times.shift(),
+  });
+  const transaction = new Transaction({
+    feePayer: signer.publicKey,
+    recentBlockhash: Keypair.generate().publicKey.toBase58(),
+  }).add(SystemProgram.transfer({
+    fromPubkey: signer.publicKey,
+    toPubkey: Keypair.generate().publicKey,
+    lamports: 1,
+  }));
+
+  const capability = await provider.prepareDevnetTransactionSigning(transaction);
+  assert.equal(genesisReads, 1);
+  assert.equal(promptCount, 0);
+  const signed = await provider.signPreparedDevnetTransaction(transaction, capability);
+  assert.equal(signed.verifySignatures(), true);
+  assert.equal(genesisReads, 1, "prepared signing must not perform a post-admission Genesis read");
+  assert.equal(promptCount, 1);
+  await assert.rejects(
+    provider.signPreparedDevnetTransaction(transaction, capability),
+    /already consumed/u,
+  );
+  assert.equal(promptCount, 1);
+});
+
+test("prepared Devnet signing capability rejects substitution, cross-provider use, and staleness", async () => {
+  assert.equal(IAT_V2_TREZOR_PREPARED_SIGNING_MAX_AGE_MS, 10_000);
+  const signer = Keypair.generate();
+  let promptCount = 0;
+  const connect = {
+    async solanaSignTransaction() {
+      promptCount += 1;
+      throw new Error("must not prompt");
+    },
+  };
+  const verification = await createMockVerification({ connect, publicKey: signer.publicKey });
+  const makeProvider = (monotonicNow) => createTrezorTransactionProvider({
+    connect,
+    verification,
+    network: "devnet",
+    readGenesisHash: devnetGenesis,
+    monotonicNow,
+  });
+  const makeTransaction = () => new Transaction({
+    feePayer: signer.publicKey,
+    recentBlockhash: Keypair.generate().publicKey.toBase58(),
+  }).add(SystemProgram.transfer({
+    fromPubkey: signer.publicKey,
+    toPubkey: Keypair.generate().publicKey,
+    lamports: 1,
+  }));
+
+  const provider = makeProvider(() => 100);
+  const crossProvider = makeProvider(() => 100);
+  const original = makeTransaction();
+  const crossCapability = await provider.prepareDevnetTransactionSigning(original);
+  await assert.rejects(
+    crossProvider.signPreparedDevnetTransaction(original, crossCapability),
+    /belongs to another provider/u,
+  );
+  original.recentBlockhash = Keypair.generate().publicKey.toBase58();
+  await assert.rejects(
+    provider.signPreparedDevnetTransaction(original, crossCapability),
+    /bound to a different transaction/u,
+  );
+
+  const staleTimes = [0, IAT_V2_TREZOR_PREPARED_SIGNING_MAX_AGE_MS + 1];
+  const staleProvider = makeProvider(() => staleTimes.shift());
+  const staleTransaction = makeTransaction();
+  const staleCapability = await staleProvider.prepareDevnetTransactionSigning(staleTransaction);
+  await assert.rejects(
+    staleProvider.signPreparedDevnetTransaction(staleTransaction, staleCapability),
+    /capability is stale/u,
+  );
+  await assert.rejects(
+    provider.signPreparedDevnetTransaction(makeTransaction(), Object.freeze({})),
+    /capability is unavailable/u,
+  );
+  assert.equal(promptCount, 0);
+});
+
+test("prepared transaction signing is Devnet-only and Genesis mismatch never reaches the device", async () => {
+  const signer = Keypair.generate();
+  let promptCount = 0;
+  const connect = {
+    async solanaSignTransaction() {
+      promptCount += 1;
+      throw new Error("must not prompt");
+    },
+  };
+  const transaction = new Transaction({
+    feePayer: signer.publicKey,
+    recentBlockhash: Keypair.generate().publicKey.toBase58(),
+  }).add(SystemProgram.transfer({
+    fromPubkey: signer.publicKey,
+    toPubkey: Keypair.generate().publicKey,
+    lamports: 1,
+  }));
+  const mismatch = await createMockVerifiedProvider({
+    connect,
+    publicKey: signer.publicKey,
+    network: "devnet",
+    readGenesisHash: mainnetGenesis,
+    monotonicNow: () => 0,
+  });
+  await assert.rejects(
+    mismatch.prepareDevnetTransactionSigning(transaction),
+    /canonical devnet/u,
+  );
+  const mainnet = await createMockVerifiedProvider({
+    connect,
+    publicKey: signer.publicKey,
+    network: "mainnet-beta",
+    readGenesisHash: mainnetGenesis,
+    monotonicNow: () => 0,
+  });
+  await assert.rejects(
+    mainnet.prepareDevnetTransactionSigning(transaction),
+    /restricted to Devnet/u,
+  );
+  assert.equal(promptCount, 0);
+});
+
+test("real prepared provider and coordinator preserve unsigned admission and one-use SDK ordering offline", async (t) => {
+  const cases = [
+    { name: "Genesis mismatch", genesisMismatch: true, rejected: /canonical devnet/u },
+    { name: "99 remaining blocks", remainingBlocks: 99, rejected: /at least 100 remaining blocks/u },
+    { name: "5001 ms preparation", preparationMs: 5_001, rejected: /preparation is stale/u },
+    { name: "hidden completion", hideAtCompletion: true, rejected: /page is hidden/u },
+    { name: "exact 100 blocks and 5000 ms", preparationMs: 5_000 },
+    { name: "SDK rejection consumes latch and capability", preparationMs: 5_000, sdkFailure: true },
+  ];
+
+  for (const scenario of cases) {
+    await t.test(scenario.name, async () => {
+      // Deterministic software-only message/signature fixtures: no browser storage,
+      // network connection, device, loader instruction, or broadcast is involved.
+      const signer = Keypair.fromSeed(Buffer.alloc(32, 7));
+      const destination = Keypair.fromSeed(Buffer.alloc(32, 9)).publicKey;
+      const blockhash = Keypair.fromSeed(Buffer.alloc(32, 11)).publicKey.toBase58();
+      const transaction = new Transaction({ feePayer: signer.publicKey, recentBlockhash: blockhash })
+        .add(SystemProgram.transfer({ fromPubkey: signer.publicKey, toPubkey: destination, lamports: 1 }));
+      const messageBytes = Buffer.from(transaction.serializeMessage());
+      const messageSha256 = createHash("sha256").update(messageBytes).digest("hex");
+      const binding = Object.freeze({
+        sourceCommit: "a".repeat(40),
+        programArtifactSha256: "b".repeat(64),
+        mint: destination.toBase58(),
+      });
+      const action = "UPGRADE_PROGRAM";
+      const latchKey = attendedPromptLatchKey({ binding, action });
+      const values = new Map();
+      const latchWrites = [];
+      const events = [];
+      let sdkCalls = 0;
+      let monotonicMs = 0;
+      let visible = true;
+      let held = false;
+      let capability = null;
+      const storage = {
+        getItem(key) { return values.get(key) ?? null; },
+        setItem(key, value) {
+          assert.equal(key, latchKey);
+          const latch = JSON.parse(value);
+          events.push(`latch:${latch.status}`);
+          latchWrites.push(latch);
+          values.set(key, value);
+        },
+      };
+      const locks = {
+        async request(name, options, callback) {
+          assert.equal(name, IAT_V2_ATTENDED_PROMPT_GLOBAL_LOCK_NAME);
+          assert.deepEqual(options, { mode: "exclusive", ifAvailable: true });
+          if (held) return callback(null);
+          held = true;
+          try {
+            return await callback({ name });
+          } finally {
+            held = false;
+          }
+        },
+      };
+      const assertPreLatchRpc = () => {
+        assert.equal(held, true, "preparation must hold the real coordinator's global lock");
+        assert.equal(latchWrites.length, 0, "no application RPC may follow prompt entry");
+        assert.equal(sdkCalls, 0);
+      };
+      const connect = {
+        async solanaSignTransaction(request) {
+          sdkCalls += 1;
+          events.push("sdk");
+          assert.equal(held, true);
+          const latch = loadAttendedModelTPromptLatch(storage, { binding, action });
+          assert.equal(latch.status, "PROMPT_ENTERED");
+          assert.equal(latch.messageSha256, messageSha256);
+          assert.equal(latch.signer, signer.publicKey.toBase58());
+          assert.equal(request.path, DEFAULT_PATH);
+          assert.deepEqual(request.additionalInfo, { isDevnet: true });
+          assert.equal(request.serialize, true);
+          if (scenario.sdkFailure) throw new Error("injected offline SDK rejection");
+          const signed = Transaction.from(Buffer.from(request.serializedTx, "hex"));
+          assert.deepEqual(Buffer.from(signed.serializeMessage()), messageBytes);
+          signed.partialSign(signer);
+          const signature = signed.signatures.find(({ publicKey }) => publicKey.equals(signer.publicKey));
+          return {
+            success: true,
+            payload: {
+              signature: Buffer.from(signature.signature).toString("hex"),
+              serializedTx: Buffer.from(signed.serialize()).toString("hex"),
+            },
+          };
+        },
+      };
+      const provider = await createMockVerifiedProvider({
+        connect,
+        publicKey: signer.publicKey,
+        network: "devnet",
+        readGenesisHash: async () => {
+          assertPreLatchRpc();
+          events.push("genesis");
+          // Charge Genesis preparation before the final observation. An
+          // observation-only timer would incorrectly admit the 5001-ms case.
+          monotonicMs = 1_000;
+          return scenario.genesisMismatch ? mainnetGenesis() : devnetGenesis();
+        },
+        monotonicNow: () => monotonicMs,
+      });
+      const timestamps = ["2026-09-06T10:00:00.000Z", "2026-09-06T10:00:01.000Z"];
+      const coordinator = createAttendedModelTPromptCoordinator({
+        locks,
+        storage,
+        tabId: "123e4567-e89b-42d3-a456-426614174000",
+        now: () => timestamps.shift(),
+      });
+      const requestOnce = () => coordinator.request({
+        binding,
+        action,
+        messageSha256,
+        signer: signer.publicKey.toBase58(),
+        prepare: async () => {
+          capability = await provider.prepareDevnetTransactionSigning(transaction);
+          await assertFreshProgramPromptBlockhashWindow({
+            blockhash,
+            lastValidBlockHeight: 1_000,
+            minContextSlot: 500,
+            preparationStartedAtMonotonicMs: 0,
+            isVisible: () => visible,
+            monotonicNow: () => monotonicMs,
+            connection: {
+              async isBlockhashValid(requestedBlockhash, config) {
+                assertPreLatchRpc();
+                assert.equal(requestedBlockhash, blockhash);
+                events.push(`rpc:${config.commitment}`);
+                const finalized = config.commitment === "finalized";
+                assert.deepEqual(config, {
+                  commitment: finalized ? "finalized" : "processed",
+                  minContextSlot: finalized ? 500 : 501,
+                });
+                return { context: { slot: finalized ? 501 : 507 }, value: true };
+              },
+              async getBlockHeight(config) {
+                assertPreLatchRpc();
+                assert.deepEqual(config, { commitment: "processed", minContextSlot: 507 });
+                events.push("rpc:height");
+                monotonicMs = scenario.preparationMs ?? 2_000;
+                if (scenario.hideAtCompletion) visible = false;
+                return 1_000 - (scenario.remainingBlocks ?? 100);
+              },
+            },
+          });
+          assertExactTransactionMessage(transaction, messageBytes, "Offline prepared coordinator fixture");
+        },
+        prompt: () => provider.signPreparedDevnetTransaction(transaction, capability),
+      });
+
+      if (scenario.rejected) {
+        await assert.rejects(requestOnce(), scenario.rejected);
+        assert.equal(latchWrites.length, 0);
+        assert.equal(values.size, 0);
+        assert.equal(loadAttendedModelTPromptLatch(storage, { binding, action }), null);
+        assert.equal(sdkCalls, 0);
+        assert.deepEqual(events, scenario.genesisMismatch
+          ? ["genesis"]
+          : ["genesis", "rpc:finalized", "rpc:processed", "rpc:height"]);
+      } else {
+        if (scenario.sdkFailure) {
+          await assert.rejects(requestOnce(), /injected offline SDK rejection/u);
+        } else {
+          const result = await requestOnce();
+          assert.equal(result.value.verifySignatures(), true);
+          assert.deepEqual(Buffer.from(result.value.serializeMessage()), messageBytes);
+        }
+        const terminalStatus = scenario.sdkFailure ? "PROMPT_FAILED" : "PROMPT_VERIFIED";
+        assert.deepEqual(events, [
+          "genesis", "rpc:finalized", "rpc:processed", "rpc:height",
+          "latch:PROMPT_ENTERED", "sdk", `latch:${terminalStatus}`,
+        ]);
+        assert.equal(sdkCalls, 1);
+        assert.deepEqual(latchWrites.map(({ status }) => status), ["PROMPT_ENTERED", terminalStatus]);
+        assert.equal(loadAttendedModelTPromptLatch(storage, { binding, action }).status, terminalStatus);
+        const completedEvents = [...events];
+        await assert.rejects(requestOnce(), /already consumed its transaction-prompt latch/u);
+        await assert.rejects(
+          provider.signPreparedDevnetTransaction(transaction, capability),
+          /already consumed/u,
+        );
+        assert.deepEqual(events, completedEvents, "retry must reach neither preparation, latch writes, nor SDK");
+        assert.equal(sdkCalls, 1);
+        assert.equal(latchWrites.length, 2);
+      }
+      assert.equal(held, false, "every outcome must release the in-memory global lock");
+    });
+  }
 });

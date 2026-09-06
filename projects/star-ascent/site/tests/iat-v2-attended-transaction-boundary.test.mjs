@@ -13,7 +13,7 @@ import {
   assertFreshFinalizedBlockhash,
   assertFreshProgramPromptBlockhashWindow,
   IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS,
-  IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS,
+  IAT_V2_PROGRAM_MAX_PROMPT_PREPARATION_MS,
   assertSignedLegacyTransaction,
   exactVersionedSimulation,
   observeSignedBlockhashWindow,
@@ -29,7 +29,7 @@ function promptWindow(overrides = {}) {
       async isBlockhashValid(_blockhash, config) {
         return { context: { slot: config.minContextSlot + 1 }, value: true };
       },
-      async getBlockHeight() { return 920; },
+      async getBlockHeight() { return 900; },
     },
     lastValidBlockHeight: 1_000,
     minContextSlot: 500,
@@ -39,14 +39,14 @@ function promptWindow(overrides = {}) {
   };
 }
 
-test("program prompt admits 80 or more blocks and rejects smaller or expired windows", async () => {
-  assert.equal(IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS, 80);
-  assert.equal(IAT_V2_PROGRAM_MAX_PROMPT_OBSERVATION_MS, 5_000);
-  for (const remaining of [-1, 0, 3, 39, 40, 79, 80, 81]) {
+test("program prompt admits 100 or more blocks and rejects smaller or expired windows", async () => {
+  assert.equal(IAT_V2_PROGRAM_MIN_PROMPT_REMAINING_BLOCKS, 100);
+  assert.equal(IAT_V2_PROGRAM_MAX_PROMPT_PREPARATION_MS, 5_000);
+  for (const remaining of [-1, 0, 3, 39, 40, 80, 99, 100, 101]) {
     const args = promptWindow();
     args.connection.getBlockHeight = async () => 1_000 - remaining;
-    if (remaining < 80) {
-      await assert.rejects(assertFreshProgramPromptBlockhashWindow(args), /at least 80 remaining blocks/u);
+    if (remaining < 100) {
+      await assert.rejects(assertFreshProgramPromptBlockhashWindow(args), /at least 100 remaining blocks/u);
     } else {
       assert.equal((await assertFreshProgramPromptBlockhashWindow(args)).remainingBlocks, remaining);
     }
@@ -66,12 +66,31 @@ test("program prompt fails closed on hidden pages, stale elapsed time, and inval
     const readings = [...times];
     await assert.rejects(assertFreshProgramPromptBlockhashWindow(promptWindow({
       monotonicNow: () => readings.shift(),
-    })), /observation is stale/u);
+    })), /preparation is stale/u);
   }
   const boundary = [100, 5_100];
   assert.equal((await assertFreshProgramPromptBlockhashWindow(promptWindow({
     monotonicNow: () => boundary.shift(),
-  }))).remainingBlocks, 80);
+  }))).remainingBlocks, 100);
+  assert.equal((await assertFreshProgramPromptBlockhashWindow(promptWindow({
+    preparationStartedAtMonotonicMs: 100,
+    monotonicNow: () => 5_100,
+  }))).remainingBlocks, 100);
+  await assert.rejects(assertFreshProgramPromptBlockhashWindow(promptWindow({
+    preparationStartedAtMonotonicMs: 100,
+    monotonicNow: () => 5_101,
+  })), /preparation is stale/u);
+});
+
+test("program prompt rejects invalid explicit preparation-start timestamps", async () => {
+  for (const preparationStartedAtMonotonicMs of [
+    -1, Number.NaN, Infinity, -Infinity, "100", false, {}, 101,
+  ]) {
+    await assert.rejects(assertFreshProgramPromptBlockhashWindow(promptWindow({
+      preparationStartedAtMonotonicMs,
+      monotonicNow: () => 100,
+    })), /preparation is stale/u);
+  }
 });
 
 test("program prompt rejects unknown validity, malformed heights, and stale context", async () => {
@@ -80,7 +99,7 @@ test("program prompt rejects unknown validity, malformed heights, and stale cont
     args.connection.isBlockhashValid = async (_blockhash, config) => ({
       context: { slot: config.minContextSlot + 1 }, value: validity,
     });
-    await assert.rejects(assertFreshProgramPromptBlockhashWindow(args), /at least 80 remaining blocks/u);
+    await assert.rejects(assertFreshProgramPromptBlockhashWindow(args), /at least 100 remaining blocks/u);
   }
   for (const height of [Number.NaN, 900.5, 0, -1, Number.MAX_SAFE_INTEGER + 1]) {
     const args = promptWindow();

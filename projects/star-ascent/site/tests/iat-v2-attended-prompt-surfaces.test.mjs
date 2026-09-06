@@ -67,7 +67,6 @@ test("every canonical attended surface projects the fresh ceremony source while 
 
 test("each canonical surface owns one session coordinator and one verified hardware callback", () => {
   const surfaces = [
-    [programSource, "async function requestProgramModelTSignature", "function errorText"],
     [migrationSource, "async function requestRoundModelTSignature", "export function canonicalCccSelectionTimestamp"],
     [featureSource, "async function requestFeatureModelTSignature", "function assertFeaturePromptOrder"],
   ];
@@ -87,6 +86,18 @@ test("each canonical surface owns one session coordinator and one verified hardw
     programSource,
     "async function requestProgramModelTSignature",
     "function errorText",
+  );
+  assert.equal(count(programSource, "provider.signTransaction(transaction)"), 0);
+  assert.equal(count(programSource, "provider.signPreparedDevnetTransaction("), 1);
+  assert.match(
+    programHelper,
+    /coordinator\.request\(\{[\s\S]*prepare: async \(\) =>[\s\S]*prompt: async \(\) =>/u,
+  );
+  assertBefore(
+    programHelper,
+    "await provider.signPreparedDevnetTransaction(",
+    "await verifySigned(signed)",
+    "prepared program signing callback",
   );
   assertBefore(
     programHelper,
@@ -195,13 +206,25 @@ test("program preparation binds fresh lifetime and exact bytes before the coordi
     "async function requestProgramModelTSignature",
     "function errorText",
   );
-  assert.match(helper, /coordinator\.request\(\{[\s\S]*prepare,[\s\S]*prompt: async \(\) =>/u);
+  assert.match(helper, /coordinator\.request\(\{[\s\S]*prepare: async \(\) =>[\s\S]*prompt: async \(\) =>/u);
   const handler = section(programSource, "async function simulateAndSign()", "async function broadcastSigned()");
   const prepare = section(handler, "prepare: async () => {", "verifySigned:");
+  assert.match(handler, /const promptPreparationStartedAtMonotonicMs = performance\.now\(\)/u);
+  const candidateTimer = "const promptPreparationStartedAtMonotonicMs = performance.now()";
+  const finalCandidateBuild = "await buildAndSimulateFreshProgramTransaction({";
+  assert.equal(count(handler, candidateTimer), 1);
+  assert.ok(
+    handler.lastIndexOf(finalCandidateBuild) > handler.indexOf(candidateTimer),
+    "whole-candidate timer must begin before the final blockhash acquisition and exact simulation call",
+  );
+  assert.match(prepare, /await provider\.prepareDevnetTransactionSigning\(\s*promptTransaction/u);
   assert.match(prepare, /await assertFreshProgramPromptBlockhashWindow\(\{\s*blockhash: latest\.blockhash,\s*connection,\s*lastValidBlockHeight: latest\.lastValidBlockHeight,\s*minContextSlot: simulationSlot,/u);
+  assert.match(prepare, /preparationStartedAtMonotonicMs: promptPreparationStartedAtMonotonicMs/u);
+  assertBefore(prepare, "await provider.prepareDevnetTransactionSigning", "await assertFreshProgramPromptBlockhashWindow", "Genesis-ready capability precedes final admission");
   assertBefore(prepare, "await assertFreshProgramPromptBlockhashWindow", "assertExactTransactionMessage(promptTransaction, messageBytes", "fresh admission followed by exact-byte assertion");
-  assert.equal(count(prepare, "await "), 1);
+  assert.equal(count(prepare, "await "), 2);
   assert.doesNotMatch(prepare, /signTransaction|sendRawTransaction|persist|localStorage/u);
+  assert.match(prepare, /return preparedSigningCapability/u);
 });
 
 test("terminal blockhash labels report historical or unavailable observations, never a live countdown", () => {
