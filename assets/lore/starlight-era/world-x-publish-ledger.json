@@ -11808,7 +11808,7 @@
   },
   "latestBatch496CentralAfricanRepublicPreparation": {
     "schemaVersion": 1,
-    "status": "central-african-republic-four-first-occurrences-terminal-three-image-results-one-visible-refusal",
+    "status": "central-african-republic-three-valid-first-occurrences-qa-complete-scene-2012-retry-one-prepared",
     "batch": 496,
     "country": "Central African Republic",
     "sceneIds": [2011, 2012, 2013, 2014],
@@ -11831,7 +11831,7 @@
     "aestheticRetries": 0,
     "chatgptStrongShorteningPassesPerTechnicallyValidMetaOccurrence": 1,
     "browserDispatchCount": 4,
-    "editInvocationCount": 0,
+    "editInvocationCount": 3,
     "brief": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-496-central-african-republic-fixed-rolls.json",
     "checkpoint": "assets/lore/starlight-era/batch-496-central-african-republic-editorial-prompts-prepared-checkpoint.json",
@@ -11839,6 +11839,11 @@
     "staging": "assets/lore/starlight-era/batch-496-central-african-republic-four-meta-composers-staged-checkpoint.json",
     "dispatch": "assets/lore/starlight-era/batch-496-central-african-republic-four-meta-scenes-dispatched-checkpoint.json",
     "dispatchEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/dispatch-evidence-manifest.json",
+    "qaCheckpoint": "assets/lore/starlight-era/batch-496-central-african-republic-three-valid-first-occurrences-qa-and-retry-1-prepared-checkpoint.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/provider-ledger.json",
+    "chatgptInvocationLedger": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/chatgpt-one-strong-shortening-invocation-ledger.json",
+    "accessibilitySidecars": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/accessibility-sidecars.json",
+    "scene2012RetryOne": "assets/lore/starlight-era/batch-496-central-african-republic-scene-2012-hard-failure-retry-1-prepared-checkpoint.json",
     "stagingEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/staging-evidence-manifest.json",
     "stagedMetaTabIds": ["28", "29", "30", "31"],
     "stagingEvidenceInventorySha256": "1E6BEEB48330B248A075A8DF4AD2F5AA954BC9B7A2E8D8454DF16B0F2F8F773A",
@@ -11852,9 +11857,15 @@
     ],
     "terminalImageScenes": [2011, 2013, 2014],
     "terminalVisibleProviderRefusalScenes": [2012],
+    "hardQaAcceptedScenes": [2011, 2013, 2014],
+    "selectedScenes": [2011, 2013, 2014],
+    "chatgptCompletedOutputScenes": [2011, 2014],
+    "chatgptOutputModerationBlockedScenes": [2013],
+    "scene2013ChatgptModerationRequestId": "3111ac3a-1bbf-4cd1-bbfe-5def8b929704",
+    "scene2012RetryOnePromptSha256": "2DE6D22978BCE99C530A1F9E2B6FBDAFE051689563FFA6B10B9803DA74551D40",
     "firstOccurrenceProviderRetries": 0,
     "uncertainSendActivations": 0,
     "canonicalContradiction": "Older Cuba-oriented automation text remains superseded by Tanzania preparation and later remote-verified checkpoints. No Starlight guardian exists, and unrelated guardians remain untouched.",
-    "nextSafeAction": "Commit and remote-verify the exact dispatch record. Preserve raw bytes for scenes 2011, 2013 and 2014 through supported visible Download controls, perform hard QA only, invoke the sealed ChatGPT edit exactly once for every technically valid Meta occurrence, and separately stage at most two bounded hard-failure retries for scene 2012."
+    "nextSafeAction": "Commit and remote-verify the three accepted raw outputs, one-pass results, ledgers and exact scene 2012 retry-one prompt. Replace only the terminal refused scene 2012 tab with one fresh Meta Thinking composer, stage retry one with anchors 938, 936 and 937, remote-verify a no-send receipt, then activate Send exactly once."
   }
 }
