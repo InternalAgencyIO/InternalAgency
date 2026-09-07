@@ -8,7 +8,7 @@
     2053,
     2054
   ],
-  "state": "four-meta-initial-sends-confirmed-output-pending",
+  "state": "all-provider-originals-archived-four-single-edits-prepared",
   "preparedAtUtc": "2026-09-07T06:37:29.948Z",
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
   "baseRemoteVerifiedHead": "8bcbca43b61cdd9ce28fae169a1662f67d0a5d38",
@@ -63,7 +63,7 @@
     "Old Eritrea scenes, if present in prior campaign rounds, are historical and never reopened.",
     "Oman and Switzerland holds remain; neither is an eligible pair companion."
   ],
-  "nextSafeAction": "Inspect these existing four provider sessions for outputs. Never resend their confirmed initial prompts. Preserve all visible gallery and internal original bytes, QA, then one ChatGPT edit invocation per selected technically valid source.",
+  "nextSafeAction": "Verify remote raw bytes, anchors and exact edit intents, then invoke each prepared built-in edit exactly once. No Meta resend or aesthetic retry.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T06:44:27.620Z",
@@ -75,5 +75,14 @@
     "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc"
   ],
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-receipt.json",
-  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json"
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json",
+  "sourceArchiveComplete": true,
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 8,
+  "uniqueRawByteVersions": 4,
+  "missingObservedOriginals": 0,
+  "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/native-raw-archive-manifest.json",
+  "initialSourceQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-source-qa.json",
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-intents.json",
+  "terminalProviderEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/terminal-provider-evidence.json"
 }

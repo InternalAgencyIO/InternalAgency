@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 506,
   "country": "Eritrea",
-  "state": "four-initial-sends-confirmed-output-pending",
+  "state": "all-provider-originals-archived-four-single-edits-prepared",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -25,8 +25,12 @@
       "promptSha256": "7FD09E9104A7499506A1D109B1B4F5A8879C4BE23E9BDF36242AE93A31709980",
       "providerUrl": "https://www.meta.ai/prompt/78712a62-f13c-4786-be88-927aaa03775c",
       "submittedAtUtc": "2026-09-07T06:46:39.265Z",
-      "state": "confirmed-submitted-output-pending",
-      "additionalInitialSendsAllowed": 0
+      "state": "terminal-output-complete-all-exposed-originals-archived",
+      "additionalInitialSendsAllowed": 0,
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2051-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2051-meta-internal-1-original.webp"
+      ]
     },
     {
       "occurrenceId": "batch-506-scene-2052-initial",
@@ -37,8 +41,12 @@
       "promptSha256": "89190CC88441DB16053184DEFDC83B0762DB267E865FA9B38BFB5F778BCD5DAB",
       "providerUrl": "https://www.meta.ai/prompt/7566518f-4cf1-4bd6-9ef4-8962f17b4b14",
       "submittedAtUtc": "2026-09-07T06:46:39.448Z",
-      "state": "confirmed-submitted-output-pending",
-      "additionalInitialSendsAllowed": 0
+      "state": "terminal-output-complete-all-exposed-originals-archived",
+      "additionalInitialSendsAllowed": 0,
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2052-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2052-meta-internal-1-original.webp"
+      ]
     },
     {
       "occurrenceId": "batch-506-scene-2053-initial",
@@ -49,8 +57,12 @@
       "promptSha256": "1F05C51EC4DBD0C8E0D2CD7AE3FDBCCB74417FC516E2A12391959B26054B3CDA",
       "providerUrl": "https://www.meta.ai/prompt/e5e88c77-0278-4da2-9f14-ce24975bb084",
       "submittedAtUtc": "2026-09-07T06:46:39.628Z",
-      "state": "confirmed-submitted-output-pending",
-      "additionalInitialSendsAllowed": 0
+      "state": "terminal-output-complete-all-exposed-originals-archived",
+      "additionalInitialSendsAllowed": 0,
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-meta-internal-1-original.webp"
+      ]
     },
     {
       "occurrenceId": "batch-506-scene-2054-initial",
@@ -61,8 +73,12 @@
       "promptSha256": "C87938FBE82D97B9312E83CA1FA9ADF43B4F2FF80ADE96DE55F6EE48BCE7DD4B",
       "providerUrl": "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc",
       "submittedAtUtc": "2026-09-07T06:46:39.786Z",
-      "state": "confirmed-submitted-output-pending",
-      "additionalInitialSendsAllowed": 0
+      "state": "terminal-output-complete-all-exposed-originals-archived",
+      "additionalInitialSendsAllowed": 0,
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-internal-1-original.webp"
+      ]
     }
   ],
   "stagedScenes": [
@@ -116,9 +132,9 @@
   "fixedRolls": "assets/lore/starlight-era/batch-506-eritrea-fixed-rolls.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
-  "sourceArchiveComplete": false,
+  "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Inspect these existing four provider sessions for outputs. Never resend their confirmed initial prompts. Preserve all visible gallery and internal original bytes, QA, then one ChatGPT edit invocation per selected technically valid source.",
+  "nextSafeAction": "Verify remote raw bytes, anchors and exact edit intents, then invoke each prepared built-in edit exactly once. No Meta resend or aesthetic retry.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
   "confirmedSubmissions": 4,
@@ -129,5 +145,13 @@
     "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc"
   ],
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-receipt.json",
-  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json"
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json",
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 8,
+  "uniqueRawByteVersions": 4,
+  "missingObservedOriginals": 0,
+  "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/native-raw-archive-manifest.json",
+  "initialSourceQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-source-qa.json",
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-intents.json",
+  "terminalProviderEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/terminal-provider-evidence.json"
 }

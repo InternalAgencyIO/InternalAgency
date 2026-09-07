@@ -8,7 +8,7 @@
       2053,
       2054
     ],
-    "state": "four-initial-sends-confirmed-output-pending",
+    "state": "all-provider-originals-archived-four-single-edits-prepared",
     "checkpoint": "assets/lore/starlight-era/batch-506-eritrea-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-506-eritrea-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-506-eritrea-fixed-rolls.json",
@@ -25,7 +25,7 @@
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "previousWorkflowClosure": "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
-    "nextSafeAction": "Inspect these existing four provider sessions for outputs. Never resend their confirmed initial prompts. Preserve all visible gallery and internal original bytes, QA, then one ChatGPT edit invocation per selected technically valid source.",
+    "nextSafeAction": "Verify remote raw bytes, anchors and exact edit intents, then invoke each prepared built-in edit exactly once. No Meta resend or aesthetic retry.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -36,7 +36,13 @@
       "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc"
     ],
     "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-receipt.json",
-    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json"
+    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json",
+    "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/native-raw-archive-manifest.json",
+    "initialSourceQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-source-qa.json",
+    "editIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-intents.json",
+    "rawFilesSaved": 8,
+    "uniqueRawByteVersions": 4,
+    "rawArchiveComplete": true
   },
   "currentCroatiaGeorgiaPairReservations505": {
     "batch": 505,
