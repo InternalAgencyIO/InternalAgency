@@ -16,7 +16,7 @@
       2041,
       2042
     ],
-    "state": "staged-verified-no-send",
+    "state": "four-initial-occurrences-running-no-resend",
     "checkpoint": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-503-panama-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
@@ -28,12 +28,19 @@
     ],
     "account": "leesha007",
     "mode": "Thinking",
-    "providerSendActivations": 0,
+    "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "nextSafeAction": "After staging commit, remote LFS and PR parity, one authorized initial Send per scene, recording activation and URL immediately.",
-    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json"
+    "nextSafeAction": "Observe the four current provider occurrences, archive every original and exposed version, then QA and one built-in tailoring invocation per usable source. Never repeat these prompts.",
+    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json",
+    "confirmedSubmissions": 4,
+    "providerUrls": [
+      "https://www.meta.ai/prompt/2c11ada4-b743-4ea6-9972-11228bcb21bf",
+      "https://www.meta.ai/prompt/63430413-527b-4faf-b442-9c126eafa689",
+      "https://www.meta.ai/prompt/be93001e-573d-4265-981c-483bdcc293db",
+      "https://www.meta.ai/prompt/09abf862-8e18-457b-9c96-37b9992360e7"
+    ]
   },
   "currentXStaging20260907Batch501P2": {
     "state": "terminal-published-live-verified",
