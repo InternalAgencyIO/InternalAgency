@@ -66,10 +66,27 @@
       "promptBaseSha256": "9CB90D58E9BAF442E6CA1CB34D25EB908FBA5D535AC1D5D3DC1B7548959CD8E4",
       "executedPromptSha256": "d7470fb3553678fa4bb83b5bc289a6de7c75d67b01a2bb96f031fa1412bfed29",
       "maximumInvocations": 1,
-      "observedInvocations": 0,
-      "remainingAllowance": 1,
-      "state": "reserved-not-invoked",
-      "noSecondPass": true
+      "observedInvocations": 1,
+      "remainingAllowance": 0,
+      "state": "returned",
+      "noSecondPass": true,
+      "dispatchIntentAtUtc": "2026-09-07T01:42:38.889Z",
+      "completedAtUtc": "2026-09-07T01:44:24.047Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-chatgpt-single-tailoring-receipt.json",
+      "returnedFile": {
+        "scene": 2032,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-chatgpt-single-tailoring-pass.png",
+        "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-49e9cd7e-ec69-46c9-a61b-eb703d39eb49.png",
+        "sha256": "8149d5c4aa044d484d2b25408f40cbb58a63878366048c3966a8cdc0e8e95423",
+        "bytes": 2652011,
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "provider": "built-in ChatGPT image generator",
+        "invocation": 1
+      },
+      "error": null
     },
     {
       "scene": 2033,
