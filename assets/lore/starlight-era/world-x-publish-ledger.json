@@ -1,4 +1,21 @@
 {
+  "currentXPublication20260907Batch501": {
+    "state": "reserved-not-uploaded-not-submitted",
+    "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-reservation.json",
+    "countries": [
+      "Mauritania",
+      "Costa Rica"
+    ],
+    "sceneIds": [
+      2027,
+      2030,
+      2031,
+      2032
+    ],
+    "accountRequired": "@dogramaci",
+    "postClicks": 0,
+    "nextSafeAction": "Upload these four exact files once in the frozen order using the visible in-app X chooser. Save exact ALT on every attachment, enable Made with AI, verify visible media and caption, then commit and remotely verify staging. Only after those checks, activate Post once, record its exact live URL immediately and reconcile before any further transmission."
+  },
   "currentAuthorityBatch501": {
     "batch": 501,
     "country": "Costa Rica",
@@ -103,7 +120,7 @@
   },
   "version": 2,
   "currentXBacklogDrain20260906": {
-    "state": "mauritania-and-costa-rica-accepted-under-separate-explicit-exceptions-ready-for-pair-checks",
+    "state": "mauritania-costa-rica-first-four-reserved",
     "canonicalPostCount": 230,
     "manualPostsReconciled": [
       "https://x.com/dogramaci/status/2096574104090325016",
@@ -183,10 +200,15 @@
     ],
     "latestPostUrl": "https://x.com/dogramaci/status/2096744477947838578",
     "liveReceipt": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-p18-live-checkpoint.json",
-    "reservedSceneIds": [],
+    "reservedSceneIds": [
+      2027,
+      2030,
+      2031,
+      2032
+    ],
     "historicalContradiction": "Scenes 1985 and 1972 each have three preexisting public URLs; scene 1918 has two. Preserve all URLs and exclude all scene versions. This drain created none of those duplicates. Newly reconciled https://x.com/dogramaci/status/2093287922787070092 contains scenes 1826 and 1827, also published at https://x.com/dogramaci/status/2093364347196027381, and both final and nonselected provider-iteration-1 variants of scene 1828. All URLs, bytes and historical selections are preserved; these scenes and all versions are excluded.",
     "omanState": "Oman remains incomplete and publication-ineligible.",
-    "scope": "Older selected drain remains closed. Mauritania four selections accepted under its explicit internal-original archive exception and await normal companion publication. Costa Rica Batch501 is prepared with no archive exception. Oman and Switzerland remain excluded.",
+    "scope": "Older selected drain is closed. Mauritania and Costa Rica are accepted under separate explicit internal-original archive exceptions. Four distinct stills are reserved for the first normal two-country post. Oman and Switzerland remain excluded.",
     "manualAuditCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-manual-reconciliation-round3.json",
     "progressCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-progress-and-browser-hold-checkpoint.json",
     "newPostCount": 18,
@@ -198,7 +220,7 @@
     "olderManualAuditComplete": true,
     "backlogFullyCleared": false,
     "browserState": "Four current Meta recovery previews, one empty X composer, and one explicitly authorized protected Oman native-image tab.",
-    "nextSafeAction": "Treat the four saved Costa Rica selections as accepted under the explicit Costa Rica-only exception for three missing earlier internal originals. Keep those originals logged as unrecovered, preserve all nine available files and every provider URL, and do not rerender or edit scenes2031-2034. Prepare eligible nonduplicate Mauritania-Costa Rica country-pair media with the required caption, frozen hashtag rolls, exact ALT and Made with AI. Verify live @dogramaci and Git/LFS/origin/PR parity before one authorized Post activation, then record its live URL immediately. Continue only to the next authoritative country after publishing and recording the eligible pair; Oman and Switzerland remain excluded. No new automation, guardian, task, worker or subagent.",
+    "nextSafeAction": "Upload these four exact files once in the frozen order using the visible in-app X chooser. Save exact ALT on every attachment, enable Made with AI, verify visible media and caption, then commit and remotely verify staging. Only after those checks, activate Post once, record its exact live URL immediately and reconcile before any further transmission.",
     "continuationCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json",
     "olderManualAuditReviewedPosts": 234,
     "olderManualAuditUnreviewedPosts": 0,
@@ -292,7 +314,8 @@
     "activeRenderArchiveException": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
     "companionCandidateCountry": "Mauritania",
     "companionAcceptedSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
-    "companionCountryArchiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json"
+    "companionCountryArchiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+    "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-reservation.json"
   },
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},
