@@ -10,7 +10,7 @@
     "Panama"
   ],
   "part": 1,
-  "state": "visible-staged-ready-after-action-time-parity",
+  "state": "single-post-activation-intent-locked-reconcile-before-retry",
   "preparedAtUtc": "2026-09-07T04:15:04.413Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -237,5 +237,12 @@
     "method": "visible account menu Log out @dogramaci; live owned profile Edit profile also present",
     "profileUrl": "https://x.com/dogramaci"
   },
-  "remoteProof": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json"
+  "remoteProof": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
+  "activationIntent": {
+    "lockedAtUtc": "2026-09-07T04:25:01.598Z",
+    "method": "visible Post button keyboard Enter",
+    "maximumActivations": 1,
+    "confirmedActivations": 0,
+    "rule": "If interrupted or uncertain, inspect live profile, home and exact caption/media before any further action. Never infer failure from delayed navigation."
+  }
 }
