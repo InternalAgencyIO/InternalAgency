@@ -1,4 +1,34 @@
 {
+  "currentAuthorityBatch507": {
+    "batch": 507,
+    "country": "Mongolia",
+    "sceneIds": [
+      2055,
+      2056,
+      2057,
+      2058
+    ],
+    "state": "offline-prepared-not-staged-or-submitted",
+    "checkpoint": "assets/lore/starlight-era/batch-507-mongolia-prepared-checkpoint.json",
+    "brief": "assets/lore/starlight-era/batch-507-mongolia-editorial-brief.json",
+    "fixedRolls": "assets/lore/starlight-era/batch-507-mongolia-fixed-rolls.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/provider-ledger.json",
+    "orderedAnchors": [
+      938,
+      936,
+      937
+    ],
+    "account": "leesha007",
+    "mode": "Thinking",
+    "providerSendActivations": 0,
+    "chatgptEditInvocations": 0,
+    "archiveExceptionApplies": false,
+    "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+    "previousCountryClosure": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
+    "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
+    "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/accepted-selections.json",
+    "nextSafeAction": "After remote preparation parity, reuse reconciled archived Meta lanes for fresh composers. Verify leesha007 and Thinking, visibly attach938,936,937 once in that order, type exact frozen prompts, archive staging and reverify remote parity before one Send per lane."
+  },
   "currentAuthorityBatch506": {
     "batch": 506,
     "country": "Eritrea",
@@ -8,7 +38,7 @@
       2053,
       2054
     ],
-    "state": "four-stills-selected-closure-remote-verification-pending",
+    "state": "four-stills-remote-verified-closed-awaiting-Mongolia-companion",
     "checkpoint": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-506-eritrea-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-506-eritrea-fixed-rolls.json",
@@ -51,7 +81,8 @@
     "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
     "chatgptReturnedImages": 2,
     "chatgptBlockedInvocations": 2,
-    "allFourScenesTerminalNoMoreRendersOrEdits": true
+    "allFourScenesTerminalNoMoreRendersOrEdits": true,
+    "remotePayloadCommit": "bc0c267b75845f6269937088726ec7d3b69ebfdf"
   },
   "currentCroatiaGeorgiaPairReservations505": {
     "batch": 505,
