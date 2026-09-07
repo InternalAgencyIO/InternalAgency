@@ -1,33 +1,99 @@
 {
   "schemaVersion": 1,
   "batch": 500,
+  "checkedAtUtc": "2026-09-07T00:38:09.929Z",
   "provider": "built-in ChatGPT image generator",
   "maximumOneInvocationPerOccurrence": true,
-  "scene2030InvocationCount": 0,
   "attempts": [
     {
       "scene": 2027,
+      "startedAt": "2026-09-07T00:19:37.734Z",
+      "completedAt": "2026-09-07T00:21:38.398Z",
       "invocations": 1,
-      "state": "dispatched-awaiting-result",
-      "dispatchObservedAtUtc": "2026-09-07T00:20:48.159Z",
-      "toolCell": "1076",
-      "noRetry": true
+      "state": "returned",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-4d6313fe-dcaf-47a1-a4b1-926f9ad82e7c.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "keys": [
+          "image_url",
+          "output_hint"
+        ]
+      }
     },
     {
       "scene": 2028,
+      "startedAt": "2026-09-07T00:19:37.734Z",
+      "completedAt": "2026-09-07T00:23:39.280Z",
       "invocations": 1,
-      "state": "dispatched-awaiting-result",
-      "dispatchObservedAtUtc": "2026-09-07T00:20:48.159Z",
-      "toolCell": "1076",
-      "noRetry": true
+      "state": "returned",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-d2367d58-a896-4bf4-bf71-4681c35686af.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "keys": [
+          "image_url",
+          "output_hint"
+        ]
+      }
     },
     {
       "scene": 2029,
+      "startedAt": "2026-09-07T00:19:37.734Z",
+      "completedAt": "2026-09-07T00:25:40.243Z",
       "invocations": 1,
-      "state": "dispatched-awaiting-result",
-      "dispatchObservedAtUtc": "2026-09-07T00:20:48.159Z",
-      "toolCell": "1076",
+      "state": "failed-allowance-consumed",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID c754f232-4a25-4395-a0f4-cc4997b7aef1. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")"
+    },
+    {
+      "scene": 2030,
+      "startedAt": "2026-09-07T00:28:31.314Z",
+      "completedAt": "2026-09-07T00:30:25.347Z",
+      "invocations": 1,
+      "state": "returned",
+      "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-9a93227f-5b19-4767-b5e7-df00c1844faf.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
       "noRetry": true
     }
-  ]
+  ],
+  "returnedFiles": [
+    {
+      "scene": 2027,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-chatgpt-single-tailoring-pass.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-4d6313fe-dcaf-47a1-a4b1-926f9ad82e7c.png",
+      "sha256": "f4206c88dff2c26360c2e7e60254cbc500ab34883329227c457dc5c0489f1e00",
+      "bytes": 2382561,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "invocation": 1
+    },
+    {
+      "scene": 2028,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-chatgpt-single-tailoring-pass.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-d2367d58-a896-4bf4-bf71-4681c35686af.png",
+      "sha256": "0b8c646c1cf4d66209518d5e526dbae60db9a7695033d7fe7583ccd0c66b518f",
+      "bytes": 2360755,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "invocation": 1
+    },
+    {
+      "scene": 2030,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-chatgpt-single-tailoring-pass.png",
+      "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-9a93227f-5b19-4767-b5e7-df00c1844faf.png",
+      "sha256": "8c99a1e08595efba27bc13538a7c3e7e15a7efe82e82508b0a0b3afa5ebd768b",
+      "bytes": 2203557,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "invocation": 1
+    }
+  ],
+  "blockedReceipt": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-chatgpt-output-blocked-receipt.json",
+  "state": "all-four-allowances-consumed-three-returned-one-blocked",
+  "selectionQa": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/final-selection-qa.json",
+  "remainingInvocations": 0
 }

@@ -1,4 +1,15 @@
 {
+  "latestBatch500FailureEvidence": {
+    "state": "one-output-moderation-blocked-receipt-preserved",
+    "records": [
+      "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-chatgpt-output-blocked-receipt.json"
+    ],
+    "historicalEntriesUnchanged": true,
+    "scene": 2029,
+    "invocationCount": 1,
+    "remainingAllowance": 0,
+    "archiveOrderingException": "This receipt is being appended after the already-reserved2030 tailoring invocation began. The append-before-next-render ordering was not met for that one transition. No2029 retry occurred; future rendering remains held until evidence closure."
+  },
   "schemaVersion": 1,
   "appendOnly": true,
   "latestBatch499FinalFailureEvidence": {"scene":2024,"occurrence":3,"retry":2,"path":"assets/lore/starlight-era/provider-evidence/batch-499-oman/scene-2024-identity-retry-2-hard-qa.json","additionalRetriesAllowed":0,"priorFailureRecordsPreserved":true},

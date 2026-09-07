@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "batch": 500,
+  "country": "Mauritania",
+  "createdAtUtc": "2026-09-07T00:38:09.929Z",
+  "state": "four-selections-complete-eight-internal-originals-unarchived",
+  "supersedesCurrentStatusIn": "assets/lore/starlight-era/batch-500-mauritania-four-primary-originals-recovered-checkpoint.json",
+  "baseRemoteVerifiedHead": "133acc8e526dca7ace30bb28b445d8693be60cba",
+  "sceneIds": [
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "providerAccount": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "metaInitialSendActivations": 4,
+  "confirmedSubmissions": 4,
+  "metaRetries": 0,
+  "metaResends": 0,
+  "chatgptSingleEditInvocations": 4,
+  "chatgptReturnedImages": 3,
+  "chatgptBlockedInvocations": 1,
+  "additionalChatgptInvocationsAllowed": 0,
+  "nativePrimaryOriginalCount": 4,
+  "deliveredJpegCount": 3,
+  "selectedImageCount": 4,
+  "internalOriginalsMissing": 8,
+  "fullRawArchiveComplete": false,
+  "xEligible": false,
+  "xPostActivations": 0,
+  "canonicalXPostCount": 230,
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/initial-source-qa.json",
+  "selectionQa": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/final-selection-qa.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/provider-ledger.json",
+  "editProgress": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/single-chatgpt-edit-progress.json",
+  "availableEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/available-media-evidence-manifest.json",
+  "recoveryHold": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/internal-original-recovery-hold.json",
+  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/browser-final-handoff.json",
+  "validation": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/archive-closure-validation.json",
+  "canonicalContradictions": [
+    {
+      "kind": "archive-ordering-exception",
+      "detail": "This receipt is being appended after the already-reserved2030 tailoring invocation began. The append-before-next-render ordering was not met for that one transition. No2029 retry occurred; future rendering remains held until evidence closure."
+    },
+    {
+      "kind": "inherited-historical-mutable-contract-seal-warnings",
+      "detail": "Historical verifier still reports checkpoint contractSha256 and ledger contractPolicySha256 mismatches. No old seals are silently resealed; current batch checks are recorded separately."
+    }
+  ],
+  "previousOmanExplicitDeferral": "assets/lore/starlight-era/batch-499-oman-explicit-deferral-and-batch-500-advance-checkpoint.json",
+  "omanRetryAllowed": false,
+  "omanPublicationEligible": false,
+  "costaRicaDispatched": false,
+  "starlightGuardianPresent": false,
+  "unattended247ExecutionEstablished": false,
+  "nextSafeAction": "Recover the eight listed internal Meta image originals through supported visible in-app Browser controls or manual Save image from the existing previews. Preserve exact files, verify hashes and dimensions, complete manifests and Git/LFS/PR parity, then recheck @dogramaci and duplicate exclusions before any X post. Do not rerender these scenes or invoke another tailoring pass. Do not advance Costa Rica while this archive hold remains."
+}

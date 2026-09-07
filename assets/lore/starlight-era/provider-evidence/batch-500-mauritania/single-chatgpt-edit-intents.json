@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 500,
   "createdAtUtc": "2026-09-07T00:18:11.540Z",
-  "state": "three-invoked-fourth-source-recovered-and-reserved",
+  "state": "all-four-invocations-completed-no-remaining-allowance",
   "policy": "One built-in ChatGPT clothing-only tailoring call per technically usable occurrence. A blocked, failed or interrupted invocation consumes the allowance. No CLI/API fallback and no second edit.",
   "scenes": [
     {
@@ -23,7 +23,9 @@
       "executedPromptSha256": "a1d457a04e202436b3c4b92c3678dc0b04b532596756e90346c2d5878c0669df",
       "dispatchObservedAtUtc": "2026-09-07T00:20:48.160Z",
       "toolCell": "1076",
-      "remainingAllowance": 0
+      "remainingAllowance": 0,
+      "completedInvocations": 1,
+      "remainingInvocations": 0
     },
     {
       "scene": 2028,
@@ -43,7 +45,9 @@
       "executedPromptSha256": "d5e9fc5cad99e965dd8818487afe6e1ec0452928292c03475eb1fe5dda8ef5a7",
       "dispatchObservedAtUtc": "2026-09-07T00:20:48.160Z",
       "toolCell": "1076",
-      "remainingAllowance": 0
+      "remainingAllowance": 0,
+      "completedInvocations": 1,
+      "remainingInvocations": 0
     },
     {
       "scene": 2029,
@@ -63,7 +67,9 @@
       "executedPromptSha256": "582b69d3e111fd16db7843889c94a2ac4c9944c03150b258f3209d75bd9b9aeb",
       "dispatchObservedAtUtc": "2026-09-07T00:20:48.160Z",
       "toolCell": "1076",
-      "remainingAllowance": 0
+      "remainingAllowance": 0,
+      "completedInvocations": 1,
+      "remainingInvocations": 0
     },
     {
       "scene": 2030,
@@ -78,13 +84,21 @@
       "prompt": "Use case: identity-preserve. Input image1 is the only edit target: the saved Meta scene2030 with exactly four fictional adult women. Input images2,3,4 are project face-reference plates938,936,937, respectively; each contains the same four women in viewer-left-to-right order Alia, Radiance, Ellie, AI ECE. Use these plates for face continuity only. Do not copy their clothes, poses or backgrounds.\nOne identity-preserving clothing-only tailoring pass for scene 2030: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=covered, Ellie=visible navel, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a fitted mini dress integrating the complete Mauritania flag design (a green central field between red horizontal bands at the top and bottom, with a centered gold upward-opening crescent and gold five-pointed star above it; preserve the complete flag layout rather than isolated colors) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; sea-green enamel classic pump without any branding. No tattoos. Radiance: a fitted mini dress integrating the complete Mauritania flag design (a green central field between red horizontal bands at the top and bottom, with a centered gold upward-opening crescent and gold five-pointed star above it; preserve the complete flag layout rather than isolated colors) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient sculptural platform without any branding. Prominent crisp tattoos: an original non-graphic empty tide loop with a fading shell outline, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Ellie: a fitted mini dress integrating the complete Mauritania flag design (a green central field between red horizontal bands at the top and bottom, with a centered gold upward-opening crescent and gold five-pointed star above it; preserve the complete flag layout rather than isolated colors) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; indigo suede stiletto sandal with one subtle original RAZE split-star mark. No tattoos. ECE: a copper strapless fitted mini with sea-green glass beads and original ivory shoreline folds; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; copper satin knee high boot without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Visible hosiery uses rainbow stockings; this is independent of shoe color.",
       "promptBaseSha256": "2C219B213E13FF9F3BDCD1826D289F9932492520A749268D7E19978A9769C98E",
       "maximumInvocations": 1,
-      "observedInvocations": 0,
+      "observedInvocations": 1,
       "noSecondPass": true,
-      "executedPromptSha256": "b91fa9bb901514c0546468a9dd72070bd1f2b4422a5806b4ba76aa5500580cfe"
+      "executedPromptSha256": "b91fa9bb901514c0546468a9dd72070bd1f2b4422a5806b4ba76aa5500580cfe",
+      "remainingAllowance": 0,
+      "completedInvocations": 1,
+      "remainingInvocations": 0
     }
   ],
   "scene2030": {
-    "state": "reserved-original-recovered",
-    "observedInvocations": 0
-  }
+    "state": "returned-completed-allowance-consumed",
+    "observedInvocations": 1,
+    "toolCell": "1095",
+    "completedInvocations": 1,
+    "remainingInvocations": 0,
+    "noSecondPass": true
+  },
+  "finalProgress": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/single-chatgpt-edit-progress.json"
 }
