@@ -10,7 +10,7 @@
     "Panama"
   ],
   "part": 2,
-  "state": "reserved-final-remote-and-visible-staging-pending",
+  "state": "single-post-activation-intent-locked-reconcile-before-retry",
   "preparedAtUtc": "2026-09-07T04:15:04.413Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -205,7 +205,7 @@
   "madeWithAiRequired": true,
   "postClicks": 0,
   "publicTransmissionCount": 0,
-  "uploadCount": 0,
+  "uploadCount": 1,
   "archiveExceptions": [],
   "rawArchiveComplete": true,
   "missingInternalOriginalsByCountry": {
@@ -214,12 +214,14 @@
   },
   "duplicateCheck": {
     "checkedAtUtc": "2026-09-07T04:15:04.413Z",
-    "ledgerPosts": 232,
+    "ledgerPosts": 233,
     "allVersionsChecked": 40,
     "matchingPublishedScenesOrBytes": [],
     "liveProfileUrl": "https://x.com/dogramaci",
     "newestObservedPostUrl": "https://x.com/dogramaci/status/2096802166824382761",
-    "manualKuwaitPanamaPostObserved": false
+    "manualKuwaitPanamaPostObserved": false,
+    "recheckedAtUtc": "2026-09-07T04:32:34.483Z",
+    "part2FamilyVersions": 18
   },
   "currentAuthorization": "Latest direct user message authorizes ready in-scope renders and posts; one exact activation after live account, media, ALT, AI disclosure, duplicate and remote-parity checks.",
   "normalPairComposition": "two selected Kuwait images plus two selected Panama images; disjoint across both parts",
@@ -229,5 +231,19 @@
   ],
   "remoteParityCommitBeforeReservation": "5081ec352b470b7991f9065544b64e6692706c6f",
   "nextSafeAction": "After fresh remote byte verification and branch/PR parity, stage exactly these four images, exact caption and four ALTs, enable Made with AI, then one Post activation. Reconcile live URL before any repeat.",
-  "noRepostAnyVersion": true
+  "noRepostAnyVersion": true,
+  "staging": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p2-x-staging-proof.json",
+  "liveAccount": {
+    "handle": "@dogramaci",
+    "verifiedAtUtc": "2026-09-07T04:29:02.229Z",
+    "method": "visible account menu Log out @dogramaci"
+  },
+  "remoteProof": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
+  "activationIntent": {
+    "lockedAtUtc": "2026-09-07T04:32:34.483Z",
+    "method": "visible Post button keyboard Enter",
+    "maximumActivations": 1,
+    "confirmedActivations": 0,
+    "rule": "If interrupted or uncertain, reconcile actual profile and post URL before any repeat."
+  }
 }
