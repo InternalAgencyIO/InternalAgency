@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 505,
   "country": "Georgia",
-  "state": "four-meta-sources-archived-single-edit-intents-locked",
+  "state": "four-single-edit-invocations-issued-awaiting-results",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "occurrences": [
     {
       "scene": 2047,
@@ -102,7 +102,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": false,
-  "nextSafeAction": "After source, edit-intent, anchor and remote parity checks, execute each locked single built-in tailoring invocation once. Then archive all returned bytes or block receipts, compare with originals, select and write ALT. No further Meta generation for these terminal occurrences.",
+  "nextSafeAction": "Wait for the four already-issued built-in tailoring results and archive every returned image or error. No further invocation is allowed for2047-2050. Then compare safe outputs with Meta sources, write ALT and verify Croatia/Georgia publication gates.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-receipt.json",
@@ -120,5 +120,5 @@
   "missingObservedOriginals": 0,
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-source-qa.json",
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json",
-  "chatgptLockedDispatchIntents": 4
+  "chatgptLockedDispatchIntents": 0
 }

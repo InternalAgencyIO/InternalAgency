@@ -3,12 +3,12 @@
   "batch": 505,
   "createdAtUtc": "2026-09-07T05:43:53.960Z",
   "rule": "Exactly one built-in imagegen invocation per usable source. A block or interruption consumes it. No retry, no API or CLI.",
-  "state": "four-single-edit-dispatch-intents-locked",
+  "state": "four-single-edit-invocations-issued-awaiting-results",
   "scenes": [
     {
       "scene": 2047,
-      "state": "single-edit-dispatch-intent-locked-not-yet-invoked",
-      "invocationCount": 0,
+      "state": "single-edit-invocation-issued-no-repeat",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2047,
@@ -44,12 +44,14 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-chatgpt-single-tailoring-pass.png",
       "dispatchIntentLockedAtUtc": "2026-09-07T05:43:53.960Z",
       "additionalInvocationsAllowed": 0,
-      "safetyOverrides": []
+      "safetyOverrides": [],
+      "issuedAtUtc": "2026-09-07T05:47:16.604Z",
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
     },
     {
       "scene": 2048,
-      "state": "single-edit-dispatch-intent-locked-not-yet-invoked",
-      "invocationCount": 0,
+      "state": "single-edit-invocation-issued-no-repeat",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2048,
@@ -85,12 +87,14 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-chatgpt-single-tailoring-pass.png",
       "dispatchIntentLockedAtUtc": "2026-09-07T05:43:53.960Z",
       "additionalInvocationsAllowed": 0,
-      "safetyOverrides": []
+      "safetyOverrides": [],
+      "issuedAtUtc": "2026-09-07T05:47:16.604Z",
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
     },
     {
       "scene": 2049,
-      "state": "single-edit-dispatch-intent-locked-not-yet-invoked",
-      "invocationCount": 0,
+      "state": "single-edit-invocation-issued-no-repeat",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2049,
@@ -126,12 +130,14 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2049-chatgpt-single-tailoring-pass.png",
       "dispatchIntentLockedAtUtc": "2026-09-07T05:43:53.960Z",
       "additionalInvocationsAllowed": 0,
-      "safetyOverrides": []
+      "safetyOverrides": [],
+      "issuedAtUtc": "2026-09-07T05:47:16.604Z",
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
     },
     {
       "scene": 2050,
-      "state": "single-edit-dispatch-intent-locked-not-yet-invoked",
-      "invocationCount": 0,
+      "state": "single-edit-invocation-issued-no-repeat",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2050,
@@ -167,7 +173,9 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2050-chatgpt-single-tailoring-pass.png",
       "dispatchIntentLockedAtUtc": "2026-09-07T05:43:53.960Z",
       "additionalInvocationsAllowed": 0,
-      "safetyOverrides": []
+      "safetyOverrides": [],
+      "issuedAtUtc": "2026-09-07T05:47:16.604Z",
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
     }
   ]
 }

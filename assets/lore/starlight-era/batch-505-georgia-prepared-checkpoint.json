@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 505,
   "country": "Georgia",
-  "state": "four-meta-sources-archived-single-edit-intents-locked",
+  "state": "four-single-edit-invocations-issued-awaiting-results",
   "createdAtUtc": "2026-09-07T05:36:50.373Z",
   "baseRemoteVerifiedHead": "d8a827b1b873564e42bc0a01a0c23ad1768a2b49",
   "sceneIds": [
@@ -50,9 +50,9 @@
   "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
   "canonicalContradictionResolution": "The remote-verified Croatia504 closure places Georgia505 scenes2047-2050 next, before Eritrea. Fresh repository search found no505 batch, provider occurrence or prepared prompt for these scene ids. Historical Georgia, Cuba and Tanzania scenes remain terminal or superseded and must not be reopened.",
   "dispatchCount": 4,
-  "chatgptEditCount": 0,
+  "chatgptEditCount": 4,
   "xPostCount": 234,
-  "nextSafeAction": "After source, edit-intent, anchor and remote parity checks, execute each locked single built-in tailoring invocation once. Then archive all returned bytes or block receipts, compare with originals, select and write ALT. No further Meta generation for these terminal occurrences.",
+  "nextSafeAction": "Wait for the four already-issued built-in tailoring results and archive every returned image or error. No further invocation is allowed for2047-2050. Then compare safe outputs with Meta sources, write ALT and verify Croatia/Georgia publication gates.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-receipt.json",
@@ -69,5 +69,6 @@
   "rawFilesSaved": 8,
   "missingObservedOriginals": 0,
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-source-qa.json",
-  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json"
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json",
+  "chatgptEditInvocations": 4
 }
