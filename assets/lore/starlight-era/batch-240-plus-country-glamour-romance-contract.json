@@ -1,7 +1,7 @@
 {
   "currentCroatiaGeorgiaPairReservations505": {
     "batch": 505,
-    "state": "two-ready-pair-reservations-not-uploaded",
+    "state": "first-post-verified-second-reserved",
     "reservations": [
       "assets/lore/starlight-era/batch-505-croatia-georgia-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-505-croatia-georgia-p2-x-reservation.json"
@@ -20,12 +20,14 @@
         2050
       ]
     ],
-    "confirmedPosts": 0,
-    "postUrls": [],
+    "confirmedPosts": 1,
+    "postUrls": [
+      "https://x.com/dogramaci/status/2096842107671465997"
+    ],
     "accountRequired": "@dogramaci",
     "rawArchiveComplete": true,
     "noRepostAnyVersion": true,
-    "updatedAtUtc": "2026-09-07T05:59:48.954Z"
+    "updatedAtUtc": "2026-09-07T06:06:38.950Z"
   },
   "currentAuthorityBatch505": {
     "batch": 505,
@@ -36,7 +38,7 @@
       2049,
       2050
     ],
-    "state": "two-croatia-georgia-pair-reservations-prepared",
+    "state": "first-croatia-georgia-post-verified-second-reserved",
     "checkpoint": "assets/lore/starlight-era/batch-505-georgia-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-505-georgia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-505-georgia-fixed-rolls.json",
@@ -53,7 +55,7 @@
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-504-croatia-four-stills-closure-checkpoint.json",
-    "nextSafeAction": "Publish exact eligible Croatia/Georgia p1 thenp2 through the one visible X composer after full staging, account, duplicate, ALT, AI disclosure and Git/LFS/PR checks. No more generation for2043-2050.",
+    "nextSafeAction": "Only p2 remains:2045,2046,2049,2050. Repeat live account, all-version duplicate, ALT, AI disclosure and remote gates; never repost p1 or any saved version of its scenes.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -81,7 +83,11 @@
     "pairReservations": [
       "assets/lore/starlight-era/batch-505-croatia-georgia-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-505-croatia-georgia-p2-x-reservation.json"
-    ]
+    ],
+    "newXPostUrls": [
+      "https://x.com/dogramaci/status/2096842107671465997"
+    ],
+    "xPostCount": 235
   },
   "currentAuthorityBatch504": {
     "batch": 504,

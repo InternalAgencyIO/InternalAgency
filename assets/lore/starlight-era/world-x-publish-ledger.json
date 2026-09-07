@@ -1,7 +1,7 @@
 {
   "currentCroatiaGeorgiaPairReservations505": {
     "batch": 505,
-    "state": "two-ready-pair-reservations-not-uploaded",
+    "state": "first-post-verified-second-reserved",
     "reservations": [
       "assets/lore/starlight-era/batch-505-croatia-georgia-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-505-croatia-georgia-p2-x-reservation.json"
@@ -20,12 +20,14 @@
         2050
       ]
     ],
-    "confirmedPosts": 0,
-    "postUrls": [],
+    "confirmedPosts": 1,
+    "postUrls": [
+      "https://x.com/dogramaci/status/2096842107671465997"
+    ],
     "accountRequired": "@dogramaci",
     "rawArchiveComplete": true,
     "noRepostAnyVersion": true,
-    "updatedAtUtc": "2026-09-07T05:59:48.954Z"
+    "updatedAtUtc": "2026-09-07T06:06:38.950Z"
   },
   "currentAuthorityBatch505": {
     "batch": 505,
@@ -36,7 +38,7 @@
       2049,
       2050
     ],
-    "state": "two-croatia-georgia-pair-reservations-prepared",
+    "state": "first-croatia-georgia-post-verified-second-reserved",
     "checkpoint": "assets/lore/starlight-era/batch-505-georgia-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-505-georgia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-505-georgia-fixed-rolls.json",
@@ -53,7 +55,7 @@
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-504-croatia-four-stills-closure-checkpoint.json",
-    "nextSafeAction": "Publish exact eligible Croatia/Georgia p1 thenp2 through the one visible X composer after full staging, account, duplicate, ALT, AI disclosure and Git/LFS/PR checks. No more generation for2043-2050.",
+    "nextSafeAction": "Only p2 remains:2045,2046,2049,2050. Repeat live account, all-version duplicate, ALT, AI disclosure and remote gates; never repost p1 or any saved version of its scenes.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -81,7 +83,11 @@
     "pairReservations": [
       "assets/lore/starlight-era/batch-505-croatia-georgia-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-505-croatia-georgia-p2-x-reservation.json"
-    ]
+    ],
+    "newXPostUrls": [
+      "https://x.com/dogramaci/status/2096842107671465997"
+    ],
+    "xPostCount": 235
   },
   "currentAuthorityBatch504": {
     "batch": 504,
@@ -14076,6 +14082,298 @@
             "scene": 2042,
             "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2042-chatgpt-single-tailoring-pass.png",
             "sha256": "d81a4093deff7ebafb6eb3c9737ed6b406da64219671ea3b435eb635371648e6"
+          }
+        ],
+        "noRepostAnyVersion": true
+      },
+      "uploadCount": 1
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 505,
+      "batches": [
+        504,
+        505
+      ],
+      "countries": [
+        "Croatia",
+        "Georgia"
+      ],
+      "part": 1,
+      "sceneIds": [
+        2043,
+        2044,
+        2047,
+        2048
+      ],
+      "imageNumbers": [
+        2043,
+        2044,
+        2047,
+        2048
+      ],
+      "state": "posted-verified",
+      "postUrl": "https://x.com/dogramaci/status/2096842107671465997",
+      "postedAt": "2026-09-07T06:04:49.863Z",
+      "verifiedAt": "2026-09-07T06:06:38.950Z",
+      "caption": "Croatia ❤️ Georgia: courtyard hands and Adriatic side hugs meet Tbilisi warmth and Kakheti vines. Four friends, close glances and sculpted minis. AI fashion with imaginary fire, smoke and cloud scenery, not real events.",
+      "captionSha256": "8a4b5898c30ce722f1103367fcc6e95dd37826ca385bfd02215c683676d0d705",
+      "hashtags": [],
+      "assets": [
+        {
+          "scene": 2043,
+          "country": "Croatia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-chatgpt-single-tailoring-pass.png",
+          "sha256": "db6a88be5c225132edca2d4f928ca4a8212451e6ef0df897ad8d700e496f5ac1",
+          "bytes": 2343564,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "providerUrl": "https://www.meta.ai/prompt/b62e7543-2f95-4f58-a364-7861d5724a50",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "eligible-unpublished-companion",
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-accessibility.json",
+          "alt": "AI-generated fictional fashion editorial of four adult women smiling and clasping hands on cushioned seats in a tiled-roof stone courtyard. A braided woman in an ivory-and-red mini sits at left; the blonde and dark-haired women wear red, white and blue Croatian-flag outfits, and the fourth wears an ivory-and-blue mini. Rainbow boots and red or neutral sandals mix beneath the group. Distant fires, smoke and mushroom-shaped clouds are invented scenery, not a real event.",
+          "safetyOverrides": [],
+          "uploadIndex": 1
+        },
+        {
+          "scene": 2044,
+          "country": "Croatia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-meta-gallery-original.webp",
+          "sha256": "06abc61069f5004c3514a38b30f1a31e77890d974b1dceeaa8afd2e4613662c9",
+          "bytes": 538972,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/6794ff12-0236-4fa6-993b-cce2f4326110",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "blocked-no-bytes-original-retained",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "eligible-unpublished-companion",
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a pale stone lounge overlooking the Adriatic. A braided woman and a blonde woman share a side embrace while a seated woman reaches toward them and the fourth leans in for a temple greeting. Two wear Croatian-flag minis, alongside a pearl one-shoulder dress with a cobalt fold and a cobalt mini with pearl piping. Turquoise ankle boots, pearl sandals, copper knee-high boots and cobalt platforms vary across the group. IA, wave and star arm tattoos are visible.",
+          "safetyOverrides": [],
+          "uploadIndex": 2
+        },
+        {
+          "scene": 2047,
+          "country": "Georgia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-meta-gallery-original.webp",
+          "sha256": "b6b8c78da1beda9aa376f95928830988666a995f855d8782f2da390e3ff5c801",
+          "bytes": 496854,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/f72bd2b1-b7dd-40fe-9002-fd11a6362305",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "output-moderation-blocked-no-bytes-original-retained",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-accessibility.json",
+          "alt": "AI-generated fictional fashion portrait of four adult women grouped on cushioned seating above a river-view cityscape. A braided woman in an ivory mini leans her head toward a blonde woman in a copper top and blue skort. A woman in a wine-red pearl-trimmed mini clasps their hands, while a fourth in slate blue rests a hand on her shoulder. Pale and blue star-marked stockings, copper and wine-red boots, and one rainbow RAZE boot are visible. Distant fire, smoke and a mushroom-shaped cloud are imaginary scenery, not a real event.",
+          "safetyOverrides": [],
+          "uploadIndex": 3
+        },
+        {
+          "scene": 2048,
+          "country": "Georgia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-meta-gallery-original.webp",
+          "sha256": "d9b02f4624273e7c67ba673026b3cbf7598f02835a3f6f85a9792390bb86ff0a",
+          "bytes": 475044,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/57da4fad-7c0e-4ca6-99c7-73ae824a9c38",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned-unused-original-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a shaded timber lounge overlooking green vineyard rows. A blonde woman wearing a white mini with red Georgian-flag crosses hugs a seated braided woman in a plum vine-patterned dress from behind. Opposite them, a woman in an emerald top and copper skort reaches across to clasp hands. A fourth woman in a pearl-trimmed burgundy mini leans in from a higher bench. A scorpion tattoo is visible on the emerald-clad woman's upper arm.",
+          "safetyOverrides": [],
+          "uploadIndex": 4
+        }
+      ],
+      "photoEndpoints": [
+        {
+          "scene": 2043,
+          "index": 1,
+          "url": "https://x.com/dogramaci/status/2096842107671465997/photo/1",
+          "alt": "AI-generated fictional fashion editorial of four adult women smiling and clasping hands on cushioned seats in a tiled-roof stone courtyard. A braided woman in an ivory-and-red mini sits at left; the blonde and dark-haired women wear red, white and blue Croatian-flag outfits, and the fourth wears an ivory-and-blue mini. Rainbow boots and red or neutral sandals mix beneath the group. Distant fires, smoke and mushroom-shaped clouds are invented scenery, not a real event."
+        },
+        {
+          "scene": 2044,
+          "index": 2,
+          "url": "https://x.com/dogramaci/status/2096842107671465997/photo/2",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a pale stone lounge overlooking the Adriatic. A braided woman and a blonde woman share a side embrace while a seated woman reaches toward them and the fourth leans in for a temple greeting. Two wear Croatian-flag minis, alongside a pearl one-shoulder dress with a cobalt fold and a cobalt mini with pearl piping. Turquoise ankle boots, pearl sandals, copper knee-high boots and cobalt platforms vary across the group. IA, wave and star arm tattoos are visible."
+        },
+        {
+          "scene": 2047,
+          "index": 3,
+          "url": "https://x.com/dogramaci/status/2096842107671465997/photo/3",
+          "alt": "AI-generated fictional fashion portrait of four adult women grouped on cushioned seating above a river-view cityscape. A braided woman in an ivory mini leans her head toward a blonde woman in a copper top and blue skort. A woman in a wine-red pearl-trimmed mini clasps their hands, while a fourth in slate blue rests a hand on her shoulder. Pale and blue star-marked stockings, copper and wine-red boots, and one rainbow RAZE boot are visible. Distant fire, smoke and a mushroom-shaped cloud are imaginary scenery, not a real event."
+        },
+        {
+          "scene": 2048,
+          "index": 4,
+          "url": "https://x.com/dogramaci/status/2096842107671465997/photo/4",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a shaded timber lounge overlooking green vineyard rows. A blonde woman wearing a white mini with red Georgian-flag crosses hugs a seated braided woman in a plum vine-patterned dress from behind. Opposite them, a woman in an emerald top and copper skort reaches across to clasp hands. A fourth woman in a pearl-trimmed burgundy mini leans in from a higher bench. A scorpion tattoo is visible on the emerald-clad woman's upper arm."
+        }
+      ],
+      "mediaMode": "four-stills-two-countries-2-plus-2",
+      "buttonActivationAttempts": 1,
+      "successfulMethod": "Post.press(Enter)",
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 4,
+      "stagingCommit": "b5ad86500e88e59ce91fbabbf0c6cf30f04662ff",
+      "archiveExceptions": [],
+      "rawArchiveComplete": true,
+      "missingInternalOriginalsByCountry": {
+        "Croatia": 0,
+        "Georgia": 0
+      },
+      "evidence": [
+        "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p1-x-staging-proof.json",
+        "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p1-x-publication-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p1-x-published-visible.jpg",
+        "assets/lore/starlight-era/provider-evidence/batch-504-croatia/final-remote-closure-verification.json",
+        "assets/lore/starlight-era/provider-evidence/batch-505-georgia/final-remote-closure-verification.json"
+      ],
+      "duplicateGate": {
+        "allVersionsChecked": 29,
+        "noRepostSceneFamilies": [
+          2043,
+          2044,
+          2047,
+          2048
+        ],
+        "consumedVersions": [
+          {
+            "scene": 2043,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-meta-gallery-original.webp",
+            "sha256": "2195f6d1c3b7523a3dd220fb8a71cb2d86415965bea8af73b20d33f05c51721e"
+          },
+          {
+            "scene": 2043,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-meta-internal-1-original.webp",
+            "sha256": "df911b1c26aaf4bf91eb5654d606281dd7f778a6c8ee7aded4766cb7e6d42329"
+          },
+          {
+            "scene": 2043,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-meta-internal-2-original.webp",
+            "sha256": "2195f6d1c3b7523a3dd220fb8a71cb2d86415965bea8af73b20d33f05c51721e"
+          },
+          {
+            "scene": 2044,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-meta-gallery-original.webp",
+            "sha256": "06abc61069f5004c3514a38b30f1a31e77890d974b1dceeaa8afd2e4613662c9"
+          },
+          {
+            "scene": 2044,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-meta-internal-1-original.webp",
+            "sha256": "06abc61069f5004c3514a38b30f1a31e77890d974b1dceeaa8afd2e4613662c9"
+          },
+          {
+            "scene": 2044,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-meta-internal-2-original.webp",
+            "sha256": "45f28c3df6574e1d161a2b779470480780f70034abf02faee286acdb70af4884"
+          },
+          {
+            "scene": 2043,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-chatgpt-single-tailoring-pass.png",
+            "sha256": "db6a88be5c225132edca2d4f928ca4a8212451e6ef0df897ad8d700e496f5ac1"
+          },
+          {
+            "scene": 2047,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-meta-gallery-original.webp",
+            "sha256": "b6b8c78da1beda9aa376f95928830988666a995f855d8782f2da390e3ff5c801"
+          },
+          {
+            "scene": 2047,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-meta-internal-1-original.webp",
+            "sha256": "b6b8c78da1beda9aa376f95928830988666a995f855d8782f2da390e3ff5c801"
+          },
+          {
+            "scene": 2048,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-meta-gallery-original.webp",
+            "sha256": "d9b02f4624273e7c67ba673026b3cbf7598f02835a3f6f85a9792390bb86ff0a"
+          },
+          {
+            "scene": 2048,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-meta-internal-1-original.webp",
+            "sha256": "d9b02f4624273e7c67ba673026b3cbf7598f02835a3f6f85a9792390bb86ff0a"
+          },
+          {
+            "scene": 2048,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-chatgpt-single-tailoring-pass.png",
+            "sha256": "079a9978f3c20b8ad6acdbfb90269c0dc394022887d9954dece74c3a78f5defc"
           }
         ],
         "noRepostAnyVersion": true

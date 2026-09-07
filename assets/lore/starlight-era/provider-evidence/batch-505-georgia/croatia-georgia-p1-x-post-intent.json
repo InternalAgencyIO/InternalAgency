@@ -2,11 +2,19 @@
   "schemaVersion": 1,
   "batch": 505,
   "part": 1,
-  "state": "staged-not-activated",
+  "state": "posted-verified-terminal",
   "createdAtUtc": "2026-09-07T06:03:42.111Z",
   "reservation": "assets/lore/starlight-era/batch-505-croatia-georgia-p1-x-reservation.json",
   "staging": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p1-x-staging-proof.json",
   "permittedActivations": 1,
-  "activationCount": 0,
-  "retryPolicy": "Never repeat an ambiguous activation. Reconcile actual public permalink, exact caption and four photo endpoints before any subsequent action."
+  "activationCount": 1,
+  "retryPolicy": "Never repeat an ambiguous activation. Reconcile actual public permalink, exact caption and four photo endpoints before any subsequent action.",
+  "postUrl": "https://x.com/dogramaci/status/2096842107671465997",
+  "postClicks": 1,
+  "publicTransmissionCount": 1,
+  "publicationCheckpoint": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p1-x-publication-receipt.json",
+  "additionalActivationsAllowed": 0,
+  "postedAtUtc": "2026-09-07T06:04:49.863Z",
+  "verifiedAtUtc": "2026-09-07T06:06:38.950Z",
+  "nextSafeAction": "No further upload or Post for this reservation or any version of its four scene families. Continue only with the disjoint p2 reservation after parity."
 }
