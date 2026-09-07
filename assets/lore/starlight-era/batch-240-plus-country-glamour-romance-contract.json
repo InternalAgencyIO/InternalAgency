@@ -8,7 +8,7 @@
       2037,
       2038
     ],
-    "state": "four-initial-submissions-confirmed-no-resend",
+    "state": "three-usable-sources-fully-archived-one-refusal-safe-retry-prepared",
     "checkpoint": "assets/lore/starlight-era/batch-502-kuwait-editorial-prompts-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
@@ -23,9 +23,9 @@
     "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
-    "nextSafeAction": "Keep all four unique provider conversations open. Preserve available original bytes, internal preview evidence and provider responses; no rerun for crop or styling differences. After technical QA, make only the single authorized ChatGPT edit per usable scene.",
-    "updatedAtUtc": "2026-09-07T02:49:13.115Z",
-    "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-four-initial-submissions-checkpoint.json",
+    "nextSafeAction": "Remote-verify this archive and all raw LFS objects, then stage the bounded safe fallback in lane27. Run one built-in ChatGPT tailoring edit on each of the three selected provisional sources after source verification. Preserve all outputs and do not silently change source-camera scope.",
+    "updatedAtUtc": "2026-09-07T02:58:22.964Z",
+    "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-initial-source-archive-checkpoint.json",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/four-composers-staging-evidence.json",
     "providerRetries": 0,
     "scenes": [
@@ -49,7 +49,10 @@
         "providerUrl": "https://www.meta.ai/prompt/b07adec0-4d5d-4f8e-93c6-5b61efdd82ed",
         "status": "rendering"
       }
-    ]
+    ],
+    "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
+    "safeRetry": "assets/lore/starlight-era/batch-502-kuwait-2038-safe-retry-1-prepared-checkpoint.json",
+    "missingObservedRawOriginals": 0
   },
   "currentXPublication20260907Batch501": {
     "state": "first-four-published-live-verified",
