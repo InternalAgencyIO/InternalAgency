@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 503,
   "country": "Panama",
-  "state": "prepared-no-send",
+  "state": "staged-verified-no-send",
   "createdAtUtc": "2026-09-07T03:48:13.965Z",
   "baseRemoteVerifiedHead": "250ecb373ac883b499e62a4e1dc5bbfcfba1bc00",
   "sceneIds": [
@@ -52,5 +52,7 @@
   "dispatchCount": 0,
   "chatgptEditCount": 0,
   "xPostCount": 232,
-  "nextSafeAction": "Stage exact frozen prompt and anchors938,936,937 on four visible Thinking lanes; remote-verify staging and account before one Send each."
+  "nextSafeAction": "After staging commit, remote LFS and PR parity, one authorized initial Send per scene, recording activation and URL immediately.",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-send-intents.json"
 }

@@ -16,7 +16,7 @@
       2041,
       2042
     ],
-    "state": "prepared-no-send",
+    "state": "staged-verified-no-send",
     "checkpoint": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-503-panama-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
@@ -32,7 +32,8 @@
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "nextSafeAction": "Stage exact frozen prompt and anchors938,936,937 on four visible Thinking lanes; remote-verify staging and account before one Send each."
+    "nextSafeAction": "After staging commit, remote LFS and PR parity, one authorized initial Send per scene, recording activation and URL immediately.",
+    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json"
   },
   "currentXStaging20260907Batch501P2": {
     "state": "terminal-published-live-verified",
