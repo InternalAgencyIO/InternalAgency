@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 503,
   "country": "Panama",
-  "state": "four-initial-occurrences-running-no-resend",
+  "state": "four-terminal-originals-archived-one-edit-each-pending",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -22,7 +22,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-occurrence-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "providerUrl": "https://www.meta.ai/prompt/2c11ada4-b743-4ea6-9972-11228bcb21bf",
       "promptSha256": "E92DCD7B9B37B37B25DB668B791FDA77D8D9AA5BDA82165A2C8DBD2699EBDA8C"
     },
@@ -32,7 +32,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-occurrence-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "providerUrl": "https://www.meta.ai/prompt/63430413-527b-4faf-b442-9c126eafa689",
       "promptSha256": "A745BBB2A35BF11DBC93015A6D5F05490248BBDEA95849B3B2671D6DF43A0FAE"
     },
@@ -42,7 +42,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-occurrence-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "providerUrl": "https://www.meta.ai/prompt/be93001e-573d-4265-981c-483bdcc293db",
       "promptSha256": "1AE9CAA1CF68DF112D3F0F75E1778AC93021F089F6A518DB1A5E8F42CFE493A8"
     },
@@ -52,7 +52,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-occurrence-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "providerUrl": "https://www.meta.ai/prompt/09abf862-8e18-457b-9c96-37b9992360e7",
       "promptSha256": "5B7D88885D3ECC94A010CF298B5F8303E111753917857B9E4D4DFA87E0190349"
     }
@@ -88,11 +88,17 @@
   "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
-  "sourceArchiveComplete": false,
+  "sourceArchiveComplete": true,
   "archiveException": false,
-  "nextSafeAction": "Observe the four current provider occurrences, archive every original and exposed version, then QA and one built-in tailoring invocation per usable source. Never repeat these prompts.",
+  "nextSafeAction": "Remote-verify originals, then invoke each reserved built-in clothing-only edit exactly once. No further Meta prompt for these scenes. Preserve all outputs and blocked receipts, perform final QA and pair with eligible Kuwait only after full closure.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-send-intents.json",
   "confirmedSubmissions": 4,
-  "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-send-receipt.json"
+  "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-send-receipt.json",
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 19,
+  "missingObservedOriginals": 0,
+  "initialRawArchive": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-native-raw-archive-manifest.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-source-qa.json",
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-intents.json"
 }
