@@ -1,4 +1,31 @@
 {
+  "currentAuthorityBatch501": {
+    "batch": 501,
+    "country": "Costa Rica",
+    "sceneIds": [
+      2031,
+      2032,
+      2033,
+      2034
+    ],
+    "state": "four-exact-prompts-prepared-offline-zero-dispatch",
+    "checkpoint": "assets/lore/starlight-era/batch-501-costa-rica-editorial-prompts-prepared-checkpoint.json",
+    "brief": "assets/lore/starlight-era/batch-501-costa-rica-editorial-brief.json",
+    "fixedRolls": "assets/lore/starlight-era/batch-501-costa-rica-fixed-rolls.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/provider-ledger.json",
+    "orderedAnchors": [
+      938,
+      936,
+      937
+    ],
+    "account": "leesha007",
+    "mode": "Thinking",
+    "providerSendActivations": 0,
+    "chatgptEditInvocations": 0,
+    "archiveExceptionApplies": false,
+    "previousMauritaniaException": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+    "nextSafeAction": "Remote-verify the Costa Rica preparation, then reuse the four terminal Mauritania tabs as fresh Meta Thinking composers. Attach exact unique anchors938,936,937 in that order through visible supported controls, fill and hash-check each frozen prompt, preserve staging and remote-verify before exactly one Send per scene. The Mauritania archive exception does not apply to Costa Rica. Never resend Mauritania or Oman."
+  },
   "currentAuthorityBatch500": {
     "state": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
     "batch": 500,
@@ -43,7 +70,7 @@
   },
   "version": 2,
   "currentXBacklogDrain20260906": {
-    "state": "selected-backlog-closed-mauritania-exception-accepted-awaiting-companion",
+    "state": "selected-backlog-closed-mauritania-exception-accepted-costa-rica-prepared",
     "canonicalPostCount": 230,
     "manualPostsReconciled": [
       "https://x.com/dogramaci/status/2096574104090325016",
@@ -126,7 +153,7 @@
     "reservedSceneIds": [],
     "historicalContradiction": "Scenes 1985 and 1972 each have three preexisting public URLs; scene 1918 has two. Preserve all URLs and exclude all scene versions. This drain created none of those duplicates. Newly reconciled https://x.com/dogramaci/status/2093287922787070092 contains scenes 1826 and 1827, also published at https://x.com/dogramaci/status/2093364347196027381, and both final and nonselected provider-iteration-1 variants of scene 1828. All URLs, bytes and historical selections are preserved; these scenes and all versions are excluded.",
     "omanState": "Oman remains incomplete and publication-ineligible.",
-    "scope": "Original selected backlog and both authorized legacy partial-country pairs remain closed. Oman recovery is explicitly deferred without another retry or publication. Mauritania Batch500 is the next authorized render batch; Switzerland remains held.",
+    "scope": "Older selected drain remains closed. Mauritania four selections accepted under its explicit internal-original archive exception and await normal companion publication. Costa Rica Batch501 is prepared with no archive exception. Oman and Switzerland remain excluded.",
     "manualAuditCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-manual-reconciliation-round3.json",
     "progressCheckpoint": "assets/lore/starlight-era/x-backlog-drain-2026-09-06-progress-and-browser-hold-checkpoint.json",
     "newPostCount": 18,
@@ -138,8 +165,8 @@
     "olderManualAuditComplete": true,
     "backlogFullyCleared": false,
     "browserState": "Four current Meta recovery previews, one empty X composer, and one explicitly authorized protected Oman native-image tab.",
-    "nextSafeAction": "Treat the four saved Mauritania selections as accepted under the explicit Mauritania-only internal-original archive exception. Keep all eight missing originals and their URLs logged as unrecovered. Prepare the next authoritative Costa Rica Batch501 scenes2031-2034 as a normal companion country, with unchanged anchors, Thinking, hard-failure retry and single-edit limits. Publish only eligible nonduplicate country-pair media after live @dogramaci, caption, accessibility, Git/LFS and PR checks. Oman remains excluded. No further Mauritania generation or edit is allowed.",
-    "continuationCheckpoint": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+    "nextSafeAction": "Remote-verify the Costa Rica preparation, then reuse the four terminal Mauritania tabs as fresh Meta Thinking composers. Attach exact unique anchors938,936,937 in that order through visible supported controls, fill and hash-check each frozen prompt, preserve staging and remote-verify before exactly one Send per scene. The Mauritania archive exception does not apply to Costa Rica. Never resend Mauritania or Oman.",
+    "continuationCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-editorial-prompts-prepared-checkpoint.json",
     "olderManualAuditReviewedPosts": 234,
     "olderManualAuditUnreviewedPosts": 0,
     "olderManualAuditNextUrl": null,
@@ -223,13 +250,15 @@
     "browserRetentionRenewalRequiredEveryTurn": true,
     "browserVisibilityCheckRequiredEveryTurn": true,
     "omanRecoveryDeferral": "assets/lore/starlight-era/batch-499-oman-explicit-deferral-and-batch-500-advance-checkpoint.json",
-    "activeRenderBatch": 500,
-    "activeRenderCountry": "Mauritania",
-    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
-    "activeRenderState": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
-    "activeRenderSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
-    "activeRenderArchiveHold": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/internal-original-recovery-hold.json",
-    "activeRenderArchiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json"
+    "activeRenderBatch": 501,
+    "activeRenderCountry": "Costa Rica",
+    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-editorial-prompts-prepared-checkpoint.json",
+    "activeRenderState": "four-exact-prompts-prepared-offline-zero-dispatch",
+    "activeRenderSelection": null,
+    "activeRenderArchiveHold": null,
+    "activeRenderArchiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+    "companionCandidateCountry": "Mauritania",
+    "companionAcceptedSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json"
   },
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},
