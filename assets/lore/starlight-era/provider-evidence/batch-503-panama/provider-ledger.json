@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 503,
   "country": "Panama",
-  "state": "four-terminal-originals-archived-one-edit-each-pending",
+  "state": "terminal-four-stills-selected-raw-archive-complete",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "occurrences": [
     {
       "scene": 2039,
@@ -90,7 +90,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": false,
-  "nextSafeAction": "Remote-verify originals, then invoke each reserved built-in clothing-only edit exactly once. No further Meta prompt for these scenes. Preserve all outputs and blocked receipts, perform final QA and pair with eligible Kuwait only after full closure.",
+  "nextSafeAction": "Verify final closure remotely, then publish two reserved disjoint2+2 Kuwait-Panama posts with exact ALT and AI disclosure. No further rendering or editing for these scenes.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-send-intents.json",
   "confirmedSubmissions": 4,
@@ -101,6 +101,14 @@
   "initialRawArchive": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-native-raw-archive-manifest.json",
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-source-qa.json",
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-intents.json",
-  "chatgptLockedDispatchIntents": 4,
-  "singleEditRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-edit-preflight-remote-proof.json"
+  "chatgptLockedDispatchIntents": 0,
+  "singleEditRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-edit-preflight-remote-proof.json",
+  "chatgptReturnedFiles": 4,
+  "chatgptBlockedInvocations": 0,
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-results.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-503-panama/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-selection-qa.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
+  "noFurtherInvocations": true
 }

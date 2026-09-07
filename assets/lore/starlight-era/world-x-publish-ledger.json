@@ -1,4 +1,31 @@
 {
+  "currentKuwaitPanamaPairReservations503": {
+    "batch": 503,
+    "state": "two-disjoint-posts-reserved",
+    "reservations": [
+      "assets/lore/starlight-era/batch-503-kuwait-panama-p1-x-reservation.json",
+      "assets/lore/starlight-era/batch-503-kuwait-panama-p2-x-reservation.json"
+    ],
+    "sceneIds": [
+      [
+        2035,
+        2036,
+        2039,
+        2040
+      ],
+      [
+        2037,
+        2038,
+        2041,
+        2042
+      ]
+    ],
+    "confirmedPosts": 0,
+    "accountRequired": "@dogramaci",
+    "rawArchiveComplete": true,
+    "noRepostAnyVersion": true,
+    "updatedAtUtc": "2026-09-07T04:15:04.414Z"
+  },
   "currentGuardianAuthorization20260907": {
     "id": "starlight-pipeline-guardian",
     "status": "ACTIVE",
@@ -16,7 +43,7 @@
       2041,
       2042
     ],
-    "state": "four-terminal-originals-archived-one-edit-each-pending",
+    "state": "terminal-four-stills-selected-raw-archive-complete",
     "checkpoint": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-503-panama-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
@@ -29,10 +56,10 @@
     "account": "leesha007",
     "mode": "Thinking",
     "providerSendActivations": 4,
-    "chatgptEditInvocations": 0,
+    "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "nextSafeAction": "Remote-verify originals, then invoke each reserved built-in clothing-only edit exactly once. No further Meta prompt for these scenes. Preserve all outputs and blocked receipts, perform final QA and pair with eligible Kuwait only after full closure.",
+    "nextSafeAction": "Verify final closure remotely, then publish two reserved disjoint2+2 Kuwait-Panama posts with exact ALT and AI disclosure. No further rendering or editing for these scenes.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json",
     "confirmedSubmissions": 4,
     "providerUrls": [
@@ -44,7 +71,14 @@
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-native-raw-archive-manifest.json",
     "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-503-panama/initial-source-qa.json",
     "editIntents": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-intents.json",
-    "rawArchiveComplete": true
+    "rawArchiveComplete": true,
+    "chatgptReturnedFiles": 4,
+    "editResults": "assets/lore/starlight-era/provider-evidence/batch-503-panama/single-chatgpt-edit-results.json",
+    "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-503-panama/accepted-selections.json",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-selection-qa.json",
+    "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/closure-evidence-manifest.json",
+    "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
+    "noFurtherInvocations": true
   },
   "currentXStaging20260907Batch501P2": {
     "state": "terminal-published-live-verified",
