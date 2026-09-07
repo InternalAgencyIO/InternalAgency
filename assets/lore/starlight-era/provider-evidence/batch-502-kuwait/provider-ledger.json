@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 502,
   "country": "Kuwait",
-  "state": "all-meta-occurrences-terminal-three-edits-terminal-fourth-prepared",
+  "state": "three-edits-terminal-fourth-single-edit-in-flight",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 5,
   "providerRetries": 1,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 3,
+  "chatgptEditInvocations": 4,
   "occurrences": [
     {
       "scene": 2035,
@@ -245,7 +245,7 @@
       ],
       "sendActivations": 1,
       "retries": 1,
-      "chatgptEditInvocations": 0,
+      "chatgptEditInvocations": 1,
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-safe-retry-1-send-receipt.json",
       "doNotResend": true,
       "rawArchiveComplete": true,
@@ -567,7 +567,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Remote-verify all new raw bytes, then invoke the safe scene2038 tailoring exactly once. The second Mauritania/Costa Rica pair is separately reserved for verified X staging.",
+  "nextSafeAction": "Collect the single scene2038 edit result without resubmission, then finalize Kuwait selection and accessibility. The second Mauritania/Costa Rica X pair is staged separately.",
   "rawArchiveComplete": true,
   "missingObservedRawOriginals": 0,
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-source-qa.json",
@@ -575,7 +575,7 @@
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/single-chatgpt-edit-intents.json",
   "safeRetry": "assets/lore/starlight-era/batch-502-kuwait-2038-safe-retry-1-prepared-checkpoint.json",
   "safeRetryStaging": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-visible-staging.json",
-  "chatgptLockedDispatchIntents": 0,
+  "chatgptLockedDispatchIntents": 1,
   "retryRawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-native-raw-archive-manifest.json",
   "chatgptResults": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/first-three-chatgpt-single-edit-results.json"
 }

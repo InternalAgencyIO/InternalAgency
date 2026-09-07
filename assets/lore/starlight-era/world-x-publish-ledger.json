@@ -1,4 +1,17 @@
 {
+  "currentXStaging20260907Batch501P2": {
+    "state": "staged-not-posted-awaiting-final-remote-parity",
+    "checkpoint": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-staging-verification.json",
+    "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-reservation.json",
+    "sceneIds": [
+      2028,
+      2029,
+      2033,
+      2034
+    ],
+    "postActivations": 0,
+    "nextSafeAction": "Once branch and PR converge on this frozen staging, perform one authorized Post keyboard activation. Do not upload or activate again without reconciliation."
+  },
   "currentAuthorityBatch502": {
     "batch": 502,
     "country": "Kuwait",
@@ -8,7 +21,7 @@
       2037,
       2038
     ],
-    "state": "all-meta-occurrences-terminal-three-edits-terminal-fourth-prepared",
+    "state": "three-edits-terminal-fourth-single-edit-in-flight",
     "checkpoint": "assets/lore/starlight-era/batch-502-kuwait-edit-and-safe-retry-active-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
@@ -21,10 +34,10 @@
     "account": "leesha007",
     "mode": "Thinking",
     "providerSendActivations": 5,
-    "chatgptEditInvocations": 3,
+    "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
-    "nextSafeAction": "Remote-verify all new raw bytes, then invoke the safe scene2038 tailoring exactly once. The second Mauritania/Costa Rica pair is separately reserved for verified X staging.",
-    "updatedAtUtc": "2026-09-07T03:19:35.376Z",
+    "nextSafeAction": "Collect the single scene2038 edit result without resubmission, then finalize Kuwait selection and accessibility. The second Mauritania/Costa Rica X pair is staged separately.",
+    "updatedAtUtc": "2026-09-07T03:24:46.650Z",
     "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-edit-and-safe-retry-active-checkpoint.json",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/four-composers-staging-evidence.json",
     "providerRetries": 1,
@@ -68,7 +81,7 @@
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
     "safeRetry": "assets/lore/starlight-era/batch-502-kuwait-2038-safe-retry-1-prepared-checkpoint.json",
     "missingObservedRawOriginals": 0,
-    "lockedChatgptDispatchIntents": 0,
+    "lockedChatgptDispatchIntents": 1,
     "retryRawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-native-raw-archive-manifest.json"
   },
   "currentXPublication20260907Batch501": {

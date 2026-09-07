@@ -1,24 +1,20 @@
 {
   "schemaVersion": 1,
   "batch": 501,
-  "batches": [
-    500,
-    501
-  ],
-  "countries": [
-    "Mauritania",
-    "Costa Rica"
-  ],
+  "pair": 2,
   "state": "staged-not-posted-awaiting-final-remote-parity",
-  "preparedAtUtc": "2026-09-07T03:12:03.245Z",
-  "accountRequired": "@dogramaci",
-  "sceneIds": [
-    2028,
-    2029,
-    2033,
-    2034
+  "stagedAtUtc": "2026-09-07T03:24:46.650Z",
+  "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-reservation.json",
+  "account": "@dogramaci",
+  "accountVerifiedAtUtc": "2026-09-07T03:12:03.245Z",
+  "accountEvidence": [
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-account-verified-dom.txt",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-profile-before-staging-dom.txt",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-account-verified-visible.jpg"
   ],
-  "imageNumbers": [
+  "uploadCount": 1,
+  "uploadStartedAtUtc": "2026-09-07T03:22:08.521Z",
+  "orderedSceneIds": [
     2028,
     2029,
     2033,
@@ -145,137 +141,49 @@
     }
   ],
   "caption": "Mauritania ❤️ Costa Rica: Ouadane stone and Richat rings meet Manuel Antonio's green coast and Uvita's Pacific cliffs. Linked hands, shoulder rests and rainbow legwear. AI fashion with imaginary disaster scenery, not real events.",
+  "captionExact": true,
   "captionSha256": "79ca06f4b9e3581c2dc16ddccbca64a0d340056a64e7cf3c37817dd23ed3001a",
-  "captionCharacters": 229,
-  "hashtagContract": {
-    "seed": "starlight|x-hashtags|batch-501|scenes-2028-2029-2033-2034|8b407c985b7e42b669ddaa6e9d885295f7f0ee6c",
-    "method": "SHA256 rejection sampling, independent25percent, maximum two in fixed tag order",
-    "receipts": [
-      {
-        "tag": "#RAZE",
-        "key": "starlight|x-hashtags|batch-501|scenes-2028-2029-2033-2034|8b407c985b7e42b669ddaa6e9d885295f7f0ee6c|#RAZE",
-        "digestSha256": "1E102A0DD3F4455E582DEC5E3D2E2F121F34E645A666BEB4F285B70387EF0CC6",
-        "block": 0,
-        "byteIndex": 0,
-        "byte": 30,
-        "value": 31,
-        "selectedBeforeCap": false,
-        "selectedAfterCap": false
-      },
-      {
-        "tag": "#WorldXXXSeries",
-        "key": "starlight|x-hashtags|batch-501|scenes-2028-2029-2033-2034|8b407c985b7e42b669ddaa6e9d885295f7f0ee6c|#WorldXXXSeries",
-        "digestSha256": "3692C148E33BCC7C52B03594777FC7C23DC4B9EDCE2F363A9F7FE601106A3A1F",
-        "block": 0,
-        "byteIndex": 0,
-        "byte": 54,
-        "value": 55,
-        "selectedBeforeCap": false,
-        "selectedAfterCap": false
-      },
-      {
-        "tag": "#InternalAgency",
-        "key": "starlight|x-hashtags|batch-501|scenes-2028-2029-2033-2034|8b407c985b7e42b669ddaa6e9d885295f7f0ee6c|#InternalAgency",
-        "digestSha256": "49C9BAE7BF4F8603D49AE84F0D56A93D429FD5151F18ADCE08C0B5B84007196A",
-        "block": 0,
-        "byteIndex": 0,
-        "byte": 73,
-        "value": 74,
-        "selectedBeforeCap": false,
-        "selectedAfterCap": false
-      }
-    ],
-    "hashtags": []
-  },
-  "madeWithAiRequired": true,
-  "postClicks": 0,
-  "publicTransmissionCount": 0,
-  "archiveExceptions": [
-    "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
-    "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json"
+  "madeWithAI": true,
+  "disclosureToggleVerified": true,
+  "altCount": 4,
+  "allAltsExact": true,
+  "mediaOrderVerifiedByEditorSequenceAndRowMajorScreenshot": true,
+  "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-staged-visible.jpg",
+  "dom": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-staged-dom.txt",
+  "aiDisclosureDom": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-ai-disclosure-dom.txt",
+  "altEvidence": [
+    {
+      "scene": 2028,
+      "position": 1,
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-alt-2028-visible.jpg",
+      "sha256": "ad3473dd41baa958cad8d662cdd4592c85fe470306064e4af1dc0e5caae4c72e"
+    },
+    {
+      "scene": 2029,
+      "position": 2,
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-alt-2029-visible.jpg",
+      "sha256": "2c48cc65f6c11b0a2c1df1b5e3bbd948a6c414c5814a8a46cac011cbe8a63579"
+    },
+    {
+      "scene": 2033,
+      "position": 3,
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-alt-2033-visible.jpg",
+      "sha256": "466d00d5118171870e66b65566361d82972c4f730cf970c9f89508eefb059ce6"
+    },
+    {
+      "scene": 2034,
+      "position": 4,
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-alt-2034-visible.jpg",
+      "sha256": "1c9a70a971394ceb575bcc06ac15f8d4163134fc867c71c7fdc6967d79becf56"
+    }
   ],
-  "rawArchiveComplete": false,
-  "missingInternalOriginalsByCountry": {
-    "Mauritania": 8,
-    "Costa Rica": 3
-  },
   "duplicateCheck": {
     "canonicalPostCount": 231,
-    "selectedSceneIdsAbsent": true,
-    "allSavedVersionsCompared": [
-      {
-        "scene": 2028,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-chatgpt-single-tailoring-pass.png",
-        "sha256": "0b8c646c1cf4d66209518d5e526dbae60db9a7695033d7fe7583ccd0c66b518f"
-      },
-      {
-        "scene": 2028,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-meta-delivered.jpg",
-        "sha256": "0215538f4e5647b806d65f35b1f293de0c54c526a8d2f58d7e8144512a62620e"
-      },
-      {
-        "scene": 2028,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-meta-gallery-original.webp",
-        "sha256": "27e1bedfbec54fd1357e5e95f9c60c0723a955fa889b141031114146c0f9dece"
-      },
-      {
-        "scene": 2029,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-delivered.jpg",
-        "sha256": "d0938e9eef42459f5b519c90645d269abe5da20b43e194558f3f465565d73c07"
-      },
-      {
-        "scene": 2029,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-gallery-original.webp",
-        "sha256": "fe3a74d4330cfae106a5519f3863bed826f92669e2b589bcc51ec58efe20fc4c"
-      },
-      {
-        "scene": 2033,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-chatgpt-single-tailoring-pass.png",
-        "sha256": "12cd19beca1a50c0a4d8612db46ab0d168708101116d8514266709eab334bf20"
-      },
-      {
-        "scene": 2033,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-meta-delivered.jpg",
-        "sha256": "312455c03b731c41d971e93ee65311d2250bc841a66ba41f9a4f9391cef6d326"
-      },
-      {
-        "scene": 2033,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-meta-gallery-original.webp",
-        "sha256": "845a195d9ed7ba6e60b1d80e7743cea9e6e96f482bd8d24ec503b5b881688ee6"
-      },
-      {
-        "scene": 2034,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
-        "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05"
-      },
-      {
-        "scene": 2034,
-        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-meta-gallery-original.webp",
-        "sha256": "5ca9d482bb1effac6ceabe1e404a7e302aa2f42ecc351689f0bbfd230ef68a61"
-      }
-    ],
-    "allVersionDuplicateMatches": [],
-    "fieldSpecificAudit": true,
-    "nonSceneFilenameFalsePositiveResolved": "Historical Albania scenes1902/1903 used a comparison-sheet filename ending2029; neither depicts current scene2029.",
-    "liveAccountMenu": "Log out @dogramaci",
-    "liveProfile": "@dogramaci with Edit profile",
-    "newestPipelinePostUrl": "https://x.com/dogramaci/status/2096787307797852385",
-    "matchingSecondPairVisible": false,
-    "checkedAtUtc": "2026-09-07T03:12:03.245Z",
-    "evidence": [
-      "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-account-verified-dom.txt",
-      "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-profile-before-staging-dom.txt",
-      "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-account-verified-visible.jpg"
-    ]
+    "matchingPosts": 0,
+    "allSavedVersionsChecked": 10,
+    "checkedAtUtc": "2026-09-07T03:24:46.650Z"
   },
-  "currentAuthorization": "Latest user explicitly authorizes posts and clicking Send when all account/media/duplicate/archive checks pass.",
-  "normalPairComposition": "Four distinct previously unpublished stills, two per country.",
-  "excludedHeldCountries": [
-    "Oman",
-    "Switzerland"
-  ],
-  "remoteParityCommitBeforeReservation": "8b407c985b7e42b669ddaa6e9d885295f7f0ee6c",
-  "nextSafeAction": "Once branch and PR converge on this frozen staging, perform one authorized Post keyboard activation. Do not upload or activate again without reconciliation.",
-  "staging": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-staging-verification.json",
-  "uploadCount": 1
+  "postActivations": 0,
+  "publicTransmissionCount": 0,
+  "nextSafeAction": "Once branch and PR converge on this frozen staging, perform one authorized Post keyboard activation. Do not upload or activate again without reconciliation."
 }

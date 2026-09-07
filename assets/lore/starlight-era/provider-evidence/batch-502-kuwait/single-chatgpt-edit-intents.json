@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 502,
-  "state": "three-terminal-results-fourth-safe-edit-prepared",
+  "state": "three-terminal-results-fourth-dispatch-locked",
   "createdAtUtc": "2026-09-07T02:58:22.964Z",
   "sourceArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-source-qa.json",
@@ -109,10 +109,12 @@
         "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
         "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
       ],
-      "invocations": 0,
-      "state": "prepared-awaiting-remote-parity",
+      "invocations": 1,
+      "state": "dispatch-intent-locked-awaiting-tool-result",
       "noSecondInvocation": true,
-      "safetyFallbackRetained": true
+      "safetyFallbackRetained": true,
+      "dispatchLockedAtUtc": "2026-09-07T03:21:14.590Z",
+      "allowanceConsumed": true
     }
   ]
 }

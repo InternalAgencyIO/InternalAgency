@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "batch": 502,
-  "state": "all-meta-occurrences-terminal-three-edits-terminal-fourth-prepared",
-  "updatedAtUtc": "2026-09-07T03:19:35.376Z",
+  "state": "three-edits-terminal-fourth-single-edit-in-flight",
+  "updatedAtUtc": "2026-09-07T03:24:46.650Z",
   "baseRemoteVerifiedHead": "8b407c985b7e42b669ddaa6e9d885295f7f0ee6c",
   "sourceArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
   "sourceLfsVerification": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-raw-fresh-remote-lfs-verification.json",
@@ -11,15 +11,16 @@
   "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
   "providerSendActivations": 5,
   "providerRetries": 1,
-  "lockedChatgptDispatchIntents": 0,
+  "lockedChatgptDispatchIntents": 1,
   "chatgptResultsObserved": 3,
-  "nextSafeAction": "Remote-verify all new raw bytes, then invoke the safe scene2038 tailoring exactly once. The second Mauritania/Costa Rica pair is separately reserved for verified X staging.",
-  "chatgptEditInvocations": 3,
+  "nextSafeAction": "Collect the single scene2038 edit result without resubmission, then finalize Kuwait selection and accessibility. The second Mauritania/Costa Rica X pair is staged separately.",
+  "chatgptEditInvocations": 4,
   "chatgptBlocked": 2,
   "chatgptSuccessful": 1,
   "retryRawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-native-raw-archive-manifest.json",
   "retrySourceQa": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-source-qa.json",
   "fourthEditPrompt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-safe-chatgpt-exact-invocation-prompt.txt",
   "rawFilesSaved": 15,
-  "missingObservedRawOriginals": 0
+  "missingObservedRawOriginals": 0,
+  "fourthEditStartedAtUtc": "2026-09-07T03:21:29.239Z"
 }
