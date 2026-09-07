@@ -4,7 +4,7 @@
   "scene": 2045,
   "occurrence": 2,
   "retry": 1,
-  "state": "exact-safe-retry-staged-reserved-one-activation",
+  "state": "confirmed-provider-session-no-resend",
   "preparedAtUtc": "2026-09-07T05:04:50.796Z",
   "initialRefusal": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-initial-refusal-evidence.json",
   "authority": "Current user authorization and maximum two hard-failure retries; this is first retry and explicitly relaxes content, not an aesthetic retry or a repeat of the original.",
@@ -28,8 +28,11 @@
   ],
   "account": "leesha007",
   "mode": "Thinking",
-  "activationCount": 0,
+  "activationCount": 1,
   "maximumActivationCount": 1,
   "noRetryOnAmbiguousActivation": true,
-  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-safe-retry-1-staging.json"
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-safe-retry-1-staging.json",
+  "safeRetryReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-safe-retry-1-send-receipt.json",
+  "nextSafeAction": "Preserve all completed2043/2044/2046 originals and the safe2045 retry output without another Send; QA each source and use exactly one built-in tailoring invocation per usable scene.",
+  "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935"
 }

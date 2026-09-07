@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "batch": 504,
   "country": "Croatia",
-  "updatedAtUtc": "2026-09-07T05:04:50.796Z",
-  "state": "partial-archive-provider2046-still-running-safe2045-retry-not-sent",
-  "rawArchiveComplete": false,
-  "rawFilesSaved": 11,
-  "uniqueRawByteVersions": 9,
+  "updatedAtUtc": "2026-09-07T05:09:59.213Z",
+  "state": "all-four-usable-scenes-native-originals-archived",
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 17,
+  "uniqueRawByteVersions": 14,
   "missingObservedOriginals": 0,
-  "assistantSendActivations": 4,
-  "assistantRetries": 0,
+  "assistantSendActivations": 5,
+  "assistantRetries": 1,
   "providerAutonomousVariants": "Exposed internal variants within the initial provider occurrence; not additional assistant activations.",
   "files": [
     {
@@ -187,6 +187,107 @@
       "height": 2048,
       "observedAtUtc": "2026-09-07T05:03:45.750Z",
       "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+    },
+    {
+      "scene": 2046,
+      "batch": 504,
+      "occurrence": 1,
+      "kind": "gallery",
+      "providerUrl": "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/524957000_902927209274394_7461749258596806607_n.png?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=67oiqkZi_owQ7kNvwEV1tIx&sdl=0&ccb=14-4&oh=00_AQLbq8OvZdEWLYEVnL6jhm-3qGt8SG2kgEtfKrnbW6Spgw&oe=6AA00AF5&_nc_sid=a21977",
+      "downloadPath": "C:\\Users\\A\\Downloads\\524957000_902927209274394_7461749258596806607_n.png",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2046-meta-gallery-original.png",
+      "sha256": "1ebd78e1c3eac7266dd16066d6347f62d40d713641fd611807fd8fc39cf097bb",
+      "bytes": 1675206,
+      "width": 768,
+      "height": 1360,
+      "observedAtUtc": "2026-09-07T05:08:05.562Z",
+      "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+    },
+    {
+      "scene": 2045,
+      "batch": 504,
+      "occurrence": 2,
+      "retry": 1,
+      "kind": "retry-1-gallery",
+      "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799427875_1765089661277586_7774206698397764248_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=ZFVZ-29E7R4Q7kNvwGV8fZA&sdl=0&ccb=14-4&oh=00_AQKe8IA6Z4rcaW_MYNtr6uARPTEJLqmPbHaUdkHpKOzN4g&oe=6AA42DFC&_nc_sid=a21977",
+      "downloadPath": "C:\\Users\\A\\Downloads\\799427875_1765089661277586_7774206698397764248_n.webp",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-meta-retry-1-gallery-original.webp",
+      "sha256": "5f3507967e69a983e67ba89acbff4d9e78be989e69069188c634edec16fc07cc",
+      "bytes": 623924,
+      "width": 1152,
+      "height": 2048,
+      "observedAtUtc": "2026-09-07T05:10:49.806Z",
+      "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+    },
+    {
+      "scene": 2045,
+      "batch": 504,
+      "occurrence": 2,
+      "retry": 1,
+      "kind": "retry-1-internal-1",
+      "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/460713141_1844255576951137_4717812278610208945_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=101&_nc_ohc=sb_58_ZDESkQ7kNvwGoEabJ&sdl=0&ccb=14-4&oh=00_AQK5NFM3SwHFVf7SM9hs_A7E-5O7axmu5rBH7vYGHsJ2dA&oe=6AA03605&_nc_sid=a21977",
+      "downloadPath": "C:\\Users\\A\\Downloads\\460713141_1844255576951137_4717812278610208945_n.webp",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-meta-retry-1-internal-1-original.webp",
+      "sha256": "16aeb8fc5ccba9e79fa6800fd7ff85aea50682a8e253ff16a67194e49de89b90",
+      "bytes": 663028,
+      "width": 1152,
+      "height": 2048,
+      "observedAtUtc": "2026-09-07T05:10:50.254Z",
+      "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+    },
+    {
+      "scene": 2045,
+      "batch": 504,
+      "occurrence": 2,
+      "retry": 1,
+      "kind": "retry-1-internal-2",
+      "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/704226987_1065815966267696_4265516528945980265_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=108&_nc_ohc=G3zivFdaz-QQ7kNvwEn8AEC&sdl=0&ccb=14-4&oh=00_AQKZW2a4T_oTbFaIEQopAwvVet4KEL9UsQIp5CcjIinC0w&oe=6AA01FBF&_nc_sid=a21977",
+      "downloadPath": "C:\\Users\\A\\Downloads\\704226987_1065815966267696_4265516528945980265_n.webp",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-meta-retry-1-internal-2-original.webp",
+      "sha256": "2df4ad9843aaa383b3f6574b3d09626cc6cf6d200265f8a9713adf38ecb48ae6",
+      "bytes": 674054,
+      "width": 1152,
+      "height": 2048,
+      "observedAtUtc": "2026-09-07T05:10:50.749Z",
+      "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+    },
+    {
+      "scene": 2045,
+      "batch": 504,
+      "occurrence": 2,
+      "retry": 1,
+      "kind": "retry-1-internal-3",
+      "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/739597168_915946878259334_132258542519077489_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=sUXLIKPQM0oQ7kNvwHRl6U6&sdl=0&ccb=14-4&oh=00_AQLYpDNbc_TXMxZ7C01ndczalqOFhB9wAJwVIeveRjCs9w&oe=6AA00933&_nc_sid=a21977",
+      "downloadPath": "C:\\Users\\A\\Downloads\\739597168_915946878259334_132258542519077489_n.webp",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-meta-retry-1-internal-3-original.webp",
+      "sha256": "dfa527bdd127b4ef016e859b5e445a85190bd294491032ff200099d33f273680",
+      "bytes": 660460,
+      "width": 1152,
+      "height": 2048,
+      "observedAtUtc": "2026-09-07T05:10:51.190Z",
+      "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+    },
+    {
+      "scene": 2045,
+      "batch": 504,
+      "occurrence": 2,
+      "retry": 1,
+      "kind": "retry-1-internal-4",
+      "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/738465813_1725831958702891_4203387066620180591_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=107&_nc_ohc=ru73oxhC3dYQ7kNvwF4eX18&sdl=0&ccb=14-4&oh=00_AQJot5hLW8bxzAEB8cS-ixocGr3kgA2zMREdm2E_fdBZOg&oe=6AA01142&_nc_sid=a21977",
+      "downloadPath": "C:\\Users\\A\\Downloads\\738465813_1725831958702891_4203387066620180591_n.webp",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-meta-retry-1-internal-4-original.webp",
+      "sha256": "5f3507967e69a983e67ba89acbff4d9e78be989e69069188c634edec16fc07cc",
+      "bytes": 623924,
+      "width": 1152,
+      "height": 2048,
+      "observedAtUtc": "2026-09-07T05:10:51.658Z",
+      "downloadMethod": "supported visible image downloadMedia with prearmed download event"
     }
   ],
   "observed": [
@@ -266,10 +367,101 @@
       "label": "Inline image",
       "index": 4,
       "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/703563732_898743419720285_8362839569704537657_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=105&_nc_ohc=wHEWi9IFKTAQ7kNvwGYqxuE&sdl=0&ccb=14-4&oh=00_AQLJkkVZXZRKMOh2lRqGiWqh9dBJlRRUPwoPt1POiPpoWg&oe=6AA0308D&_nc_sid=a21977"
+    },
+    {
+      "scene": 2046,
+      "kind": "gallery",
+      "label": "gallery/image.png",
+      "index": 0,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/524957000_902927209274394_7461749258596806607_n.png?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=67oiqkZi_owQ7kNvwEV1tIx&sdl=0&ccb=14-4&oh=00_AQLbq8OvZdEWLYEVnL6jhm-3qGt8SG2kgEtfKrnbW6Spgw&oe=6AA00AF5&_nc_sid=a21977"
+    },
+    {
+      "scene": 2045,
+      "occurrence": 2,
+      "kind": "retry-1-gallery",
+      "label": "gallery/woodland_lake_lounge_1.webp",
+      "index": 0,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799427875_1765089661277586_7774206698397764248_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=ZFVZ-29E7R4Q7kNvwGV8fZA&sdl=0&ccb=14-4&oh=00_AQKe8IA6Z4rcaW_MYNtr6uARPTEJLqmPbHaUdkHpKOzN4g&oe=6AA42DFC&_nc_sid=a21977"
+    },
+    {
+      "scene": 2045,
+      "occurrence": 2,
+      "kind": "retry-1-internal-1",
+      "label": "Inline image",
+      "index": 0,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/460713141_1844255576951137_4717812278610208945_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=101&_nc_ohc=sb_58_ZDESkQ7kNvwGoEabJ&sdl=0&ccb=14-4&oh=00_AQK5NFM3SwHFVf7SM9hs_A7E-5O7axmu5rBH7vYGHsJ2dA&oe=6AA03605&_nc_sid=a21977"
+    },
+    {
+      "scene": 2045,
+      "occurrence": 2,
+      "kind": "retry-1-internal-2",
+      "label": "Inline image",
+      "index": 1,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/704226987_1065815966267696_4265516528945980265_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=108&_nc_ohc=G3zivFdaz-QQ7kNvwEn8AEC&sdl=0&ccb=14-4&oh=00_AQKZW2a4T_oTbFaIEQopAwvVet4KEL9UsQIp5CcjIinC0w&oe=6AA01FBF&_nc_sid=a21977"
+    },
+    {
+      "scene": 2045,
+      "occurrence": 2,
+      "kind": "retry-1-internal-3",
+      "label": "Inline image",
+      "index": 2,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/739597168_915946878259334_132258542519077489_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=sUXLIKPQM0oQ7kNvwHRl6U6&sdl=0&ccb=14-4&oh=00_AQLYpDNbc_TXMxZ7C01ndczalqOFhB9wAJwVIeveRjCs9w&oe=6AA00933&_nc_sid=a21977"
+    },
+    {
+      "scene": 2045,
+      "occurrence": 2,
+      "kind": "retry-1-internal-4",
+      "label": "Inline image",
+      "index": 3,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/738465813_1725831958702891_4203387066620180591_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=107&_nc_ohc=ru73oxhC3dYQ7kNvwF4eX18&sdl=0&ccb=14-4&oh=00_AQJot5hLW8bxzAEB8cS-ixocGr3kgA2zMREdm2E_fdBZOg&oe=6AA01142&_nc_sid=a21977"
     }
   ],
   "downloadFailures": [],
   "blockedOccurrences": [
     "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-initial-refusal-evidence.json"
-  ]
+  ],
+  "terminalProviderSnapshots": [
+    {
+      "scene": 2043,
+      "occurrence": 1,
+      "providerUrl": "https://www.meta.ai/prompt/b62e7543-2f95-4f58-a364-7861d5724a50",
+      "observedImages": 3,
+      "stopVisible": false,
+      "checkedAtUtc": "2026-09-07T05:12:15.703Z",
+      "domPath": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2043-archive-complete-dom.txt",
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2043-archive-complete.jpg"
+    },
+    {
+      "scene": 2044,
+      "occurrence": 1,
+      "providerUrl": "https://www.meta.ai/prompt/6794ff12-0236-4fa6-993b-cce2f4326110",
+      "observedImages": 3,
+      "stopVisible": false,
+      "checkedAtUtc": "2026-09-07T05:12:15.811Z",
+      "domPath": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2044-archive-complete-dom.txt",
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2044-archive-complete.jpg"
+    },
+    {
+      "scene": 2045,
+      "occurrence": 2,
+      "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935",
+      "observedImages": 5,
+      "stopVisible": false,
+      "checkedAtUtc": "2026-09-07T05:12:15.908Z",
+      "domPath": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-archive-complete-dom.txt",
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-archive-complete.jpg"
+    },
+    {
+      "scene": 2046,
+      "occurrence": 1,
+      "providerUrl": "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865",
+      "observedImages": 6,
+      "stopVisible": false,
+      "checkedAtUtc": "2026-09-07T05:12:16.010Z",
+      "domPath": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2046-archive-complete-dom.txt",
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2046-archive-complete.jpg"
+    }
+  ],
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-source-qa.json",
+  "completedAtUtc": "2026-09-07T05:12:16.048Z"
 }
