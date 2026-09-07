@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 504,
   "country": "Croatia",
-  "state": "four-initial-Meta-sessions-confirmed-awaiting-output",
+  "state": "three-output-lanes-one-safe-hard-failure-retry-prepared",
   "createdAtUtc": "2026-09-07T04:55:50.002Z",
   "baseRemoteVerifiedHead": "2944a9cb86b1264fd68b32118e89e85111b1d90e",
   "sceneIds": [
@@ -52,7 +52,7 @@
   "dispatchCount": 4,
   "chatgptEditCount": 0,
   "xPostCount": 234,
-  "nextSafeAction": "Inspect the four existing provider sessions, archive every visible original and internal version through supported downloads, then QA sources before the one permitted tailoring invocation per usable scene. Never Send again on a confirmed or ambiguous occurrence.",
+  "nextSafeAction": "After remote parity, prepare and verify the one safely relaxed2045 retry with exact anchors and Thinking. Keep2046 running and archive all exposed originals. Never resend original2045 or completed2043/2044.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-intents.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-receipt.json",
@@ -62,5 +62,10 @@
     "https://www.meta.ai/prompt/6794ff12-0236-4fa6-993b-cce2f4326110",
     "https://www.meta.ai/prompt/eeb3b801-afee-4a6c-aa55-b9c73ec68860",
     "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865"
-  ]
+  ],
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/native-raw-archive-manifest.json",
+  "blockedOccurrences": [
+    "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-initial-refusal-evidence.json"
+  ],
+  "safeRetryPlan": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-safe-retry-1-plan.json"
 }

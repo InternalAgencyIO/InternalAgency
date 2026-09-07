@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 504,
   "country": "Croatia",
-  "state": "four-initial-Meta-sessions-confirmed-awaiting-output",
+  "state": "three-output-lanes-one-safe-hard-failure-retry-prepared",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -22,7 +22,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-session-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "promptSha256": "4999E01B8ED15D2E753CA6E76EE9A6913E66EC2DE1BC10EF9A2A01B4D68250AB",
       "providerUrl": "https://www.meta.ai/prompt/b62e7543-2f95-4f58-a364-7861d5724a50",
       "exactSceneVisible": true
@@ -33,7 +33,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-session-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "promptSha256": "EEDC8A50E219D47BF1BA70ED25A09ACB960750676FD77DBC1F902040C4DE9E62",
       "providerUrl": "https://www.meta.ai/prompt/6794ff12-0236-4fa6-993b-cce2f4326110",
       "exactSceneVisible": true
@@ -44,7 +44,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-session-no-resend",
+      "state": "refused-zero-images-no-resend-original",
       "promptSha256": "37BE2D680B60942663A45CDE687D987A9893F2EF5629F3BA24F81FF3B490EE27",
       "providerUrl": "https://www.meta.ai/prompt/eeb3b801-afee-4a6c-aa55-b9c73ec68860",
       "exactSceneVisible": true
@@ -55,7 +55,7 @@
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
       "occurrence": 1,
-      "state": "confirmed-provider-session-no-resend",
+      "state": "confirmed-running-archive-incrementally",
       "promptSha256": "DFDF51675B2381D9EE967224561870480AB0179B9A8D9E585C591DDEA6153759",
       "providerUrl": "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865",
       "exactSceneVisible": true
@@ -94,9 +94,14 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": false,
-  "nextSafeAction": "Inspect the four existing provider sessions, archive every visible original and internal version through supported downloads, then QA sources before the one permitted tailoring invocation per usable scene. Never Send again on a confirmed or ambiguous occurrence.",
+  "nextSafeAction": "After remote parity, prepare and verify the one safely relaxed2045 retry with exact anchors and Thinking. Keep2046 running and archive all exposed originals. Never resend original2045 or completed2043/2044.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-intents.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-receipt.json",
-  "confirmedSubmissions": 4
+  "confirmedSubmissions": 4,
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/native-raw-archive-manifest.json",
+  "blockedOccurrences": [
+    "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-initial-refusal-evidence.json"
+  ],
+  "safeRetryPlan": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-safe-retry-1-plan.json"
 }

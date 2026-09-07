@@ -8,7 +8,7 @@
       2045,
       2046
     ],
-    "state": "four-initial-Meta-sessions-confirmed-awaiting-output",
+    "state": "three-output-lanes-one-safe-hard-failure-retry-prepared",
     "checkpoint": "assets/lore/starlight-era/batch-504-croatia-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-504-croatia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-504-croatia-fixed-rolls.json",
@@ -24,7 +24,7 @@
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "nextSafeAction": "Inspect the four existing confirmed sessions and preserve every exposed native original before single-pass edits. Never resend the confirmed prompts.",
+    "nextSafeAction": "Stage one provider-offered safely relaxed2045 hard-failure retry after preserving its refusal; keep other completed scenes terminal and archive2046 internal variants.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json",
     "confirmedSubmissions": 4,
     "providerUrls": [
@@ -32,7 +32,9 @@
       "https://www.meta.ai/prompt/6794ff12-0236-4fa6-993b-cce2f4326110",
       "https://www.meta.ai/prompt/eeb3b801-afee-4a6c-aa55-b9c73ec68860",
       "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865"
-    ]
+    ],
+    "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/native-raw-archive-manifest.json",
+    "safeRetryPlan": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-safe-retry-1-plan.json"
   },
   "currentGuardianAuthorization20260907": {
     "id": "starlight-pipeline-guardian",
