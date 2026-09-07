@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 501,
   "country": "Costa Rica",
-  "state": "four-native-finals-archived-three-internal-gaps-single-edits-reserved",
+  "state": "single-tailoring-in-progress",
   "provider": "Meta",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 1,
   "occurrences": [
     {
       "scene": 2031,
@@ -41,9 +41,10 @@
         "sourceUrl": "https://scontent-arn2-1.xx.fbcdn.net/v/t39.105495-0/799334054_1043751881772901_4622784665163347113_n.webp?_nc_cat=109&ccb=1-7&_nc_sid=5b3566&_nc_ohc=XQE5lvry5rQQ7kNvwGefVm2&_nc_oc=Ado1EPHEQBUUKQ61Fk7Jeupa82AKvMOb7l1lvWkQH4OpSjIIUF2OeQcDfZkhtnEvL2E&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_gid=buu2Tt0xnC-GFZ6pxXoKCQ&_nc_ss=7a289&oh=00_AQIYeTkIGY0pPzefnNbKbLD3dk5hxnqfCk3nuOdHJ26pGQ&oe=6AA3CA91",
         "providerUrl": "https://www.meta.ai/prompt/691f401f-c7f5-4a52-8d50-5271ec6a9045"
       },
-      "chatgptEditInvocations": 0,
-      "remainingTailoringInvocations": 1,
-      "xEligible": false
+      "chatgptEditInvocations": 1,
+      "remainingTailoringInvocations": 0,
+      "xEligible": false,
+      "tailoringState": "returned"
     },
     {
       "scene": 2032,
@@ -72,7 +73,8 @@
       },
       "chatgptEditInvocations": 0,
       "remainingTailoringInvocations": 1,
-      "xEligible": false
+      "xEligible": false,
+      "tailoringState": "reserved-not-invoked"
     },
     {
       "scene": 2033,
@@ -101,7 +103,8 @@
       },
       "chatgptEditInvocations": 0,
       "remainingTailoringInvocations": 1,
-      "xEligible": false
+      "xEligible": false,
+      "tailoringState": "reserved-not-invoked"
     },
     {
       "scene": 2034,
@@ -130,7 +133,8 @@
       },
       "chatgptEditInvocations": 0,
       "remainingTailoringInvocations": 1,
-      "xEligible": false
+      "xEligible": false,
+      "tailoringState": "reserved-not-invoked"
     }
   ],
   "stagedScenes": [
@@ -214,5 +218,6 @@
   "rawArchiveComplete": false,
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/initial-source-qa.json",
   "recoveryHold": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
-  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-intents.json"
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-intents.json",
+  "singleEditProgress": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-progress.json"
 }
