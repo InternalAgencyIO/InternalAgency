@@ -1,4 +1,39 @@
 {
+  "currentGuardianAuthorization20260907": {
+    "id": "starlight-pipeline-guardian",
+    "status": "ACTIVE",
+    "checkpoint": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+    "cadenceMinutes": 10,
+    "auditIntervalMinutes": 45,
+    "noFurtherCreation": true
+  },
+  "currentAuthorityBatch503": {
+    "batch": 503,
+    "country": "Panama",
+    "sceneIds": [
+      2039,
+      2040,
+      2041,
+      2042
+    ],
+    "state": "prepared-no-send",
+    "checkpoint": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
+    "brief": "assets/lore/starlight-era/batch-503-panama-editorial-brief.json",
+    "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-503-panama/provider-ledger.json",
+    "orderedAnchors": [
+      938,
+      936,
+      937
+    ],
+    "account": "leesha007",
+    "mode": "Thinking",
+    "providerSendActivations": 0,
+    "chatgptEditInvocations": 0,
+    "archiveExceptionApplies": false,
+    "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+    "nextSafeAction": "Stage exact frozen prompt and anchors938,936,937 on four visible Thinking lanes; remote-verify staging and account before one Send each."
+  },
   "currentXStaging20260907Batch501P2": {
     "state": "terminal-published-live-verified",
     "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-live-checkpoint.json",

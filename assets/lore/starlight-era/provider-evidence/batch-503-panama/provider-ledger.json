@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "batch": 503,
+  "country": "Panama",
+  "state": "prepared-no-send",
+  "provider": "Meta AI",
+  "account": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "providerSendActivations": 0,
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "occurrences": [],
+  "stagedScenes": [
+    {
+      "scene": 2039,
+      "state": "prepared-not-yet-staged",
+      "promptSha256": "E92DCD7B9B37B37B25DB668B791FDA77D8D9AA5BDA82165A2C8DBD2699EBDA8C"
+    },
+    {
+      "scene": 2040,
+      "state": "prepared-not-yet-staged",
+      "promptSha256": "A745BBB2A35BF11DBC93015A6D5F05490248BBDEA95849B3B2671D6DF43A0FAE"
+    },
+    {
+      "scene": 2041,
+      "state": "prepared-not-yet-staged",
+      "promptSha256": "1AE9CAA1CF68DF112D3F0F75E1778AC93021F089F6A518DB1A5E8F42CFE493A8"
+    },
+    {
+      "scene": 2042,
+      "state": "prepared-not-yet-staged",
+      "promptSha256": "5B7D88885D3ECC94A010CF298B5F8303E111753917857B9E4D4DFA87E0190349"
+    }
+  ],
+  "currentCheckpoint": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-503-panama-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
+  "maximumHardFailureRetriesPerScene": 2,
+  "aestheticRetries": 0,
+  "sourceArchiveComplete": false,
+  "archiveException": false,
+  "nextSafeAction": "Stage exact frozen prompt and anchors938,936,937 on four visible Thinking lanes; remote-verify staging and account before one Send each."
+}
