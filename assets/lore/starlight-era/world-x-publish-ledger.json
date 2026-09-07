@@ -8,7 +8,7 @@
       2045,
       2046
     ],
-    "state": "four-visible-composers-staged-pending-one-initial-Send",
+    "state": "four-initial-Meta-sessions-confirmed-awaiting-output",
     "checkpoint": "assets/lore/starlight-era/batch-504-croatia-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-504-croatia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-504-croatia-fixed-rolls.json",
@@ -20,12 +20,19 @@
     ],
     "account": "leesha007",
     "mode": "Thinking",
-    "providerSendActivations": 0,
+    "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "nextSafeAction": "After final parity and unchanged visible preflight, one initial Send per scene2043-2046, then immediate receipt archival.",
-    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json"
+    "nextSafeAction": "Inspect the four existing confirmed sessions and preserve every exposed native original before single-pass edits. Never resend the confirmed prompts.",
+    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json",
+    "confirmedSubmissions": 4,
+    "providerUrls": [
+      "https://www.meta.ai/prompt/b62e7543-2f95-4f58-a364-7861d5724a50",
+      "https://www.meta.ai/prompt/6794ff12-0236-4fa6-993b-cce2f4326110",
+      "https://www.meta.ai/prompt/eeb3b801-afee-4a6c-aa55-b9c73ec68860",
+      "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865"
+    ]
   },
   "currentKuwaitPanamaPairReservations503": {
     "batch": 503,

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 504,
   "country": "Croatia",
-  "state": "four-visible-composers-staged-pending-one-initial-Send",
+  "state": "four-initial-Meta-sessions-confirmed-awaiting-output",
   "createdAtUtc": "2026-09-07T04:55:50.002Z",
   "baseRemoteVerifiedHead": "2944a9cb86b1264fd68b32118e89e85111b1d90e",
   "sceneIds": [
@@ -49,10 +49,18 @@
   "previousCountryClosure": "assets/lore/starlight-era/batch-503-kuwait-panama-full-workflow-closure-checkpoint.json",
   "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
   "canonicalContradictionResolution": "Current countryPriorityOrder and remote-verified Batch503 closure place Croatia after Panama and before Georgia. Scenes2043-2046 have no provider occurrence or prepared prompt. Historical Croatia472, Cuba and Tanzania instructions do not dispatch or reopen.",
-  "dispatchCount": 0,
+  "dispatchCount": 4,
   "chatgptEditCount": 0,
   "xPostCount": 234,
-  "nextSafeAction": "Verify final HEAD/origin/PR parity and unchanged exact visible composers, then activate initial Send once in each scene2043-2046. Immediately preserve provider URLs and do not repeat any confirmed or ambiguous activation.",
+  "nextSafeAction": "Inspect the four existing provider sessions, archive every visible original and internal version through supported downloads, then QA sources before the one permitted tailoring invocation per usable scene. Never Send again on a confirmed or ambiguous occurrence.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json",
-  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-intents.json"
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-intents.json",
+  "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-receipt.json",
+  "confirmedSubmissions": 4,
+  "providerUrls": [
+    "https://www.meta.ai/prompt/b62e7543-2f95-4f58-a364-7861d5724a50",
+    "https://www.meta.ai/prompt/6794ff12-0236-4fa6-993b-cce2f4326110",
+    "https://www.meta.ai/prompt/eeb3b801-afee-4a6c-aa55-b9c73ec68860",
+    "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865"
+  ]
 }
