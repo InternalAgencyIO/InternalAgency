@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 505,
   "country": "Georgia",
-  "state": "prepared-offline-not-dispatched",
+  "state": "four-staged-remote-verification-pending",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -16,7 +16,32 @@
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
   "occurrences": [],
-  "stagedScenes": [],
+  "stagedScenes": [
+    {
+      "scene": 2047,
+      "tabId": "24",
+      "state": "visible-exact-prompt-three-anchors-Thinking",
+      "promptSha256": "C5EB3B1E4FDDECD008E0289BD6C0A79510BCBCF5B59D1B0B15C13FE79C0A41A2"
+    },
+    {
+      "scene": 2048,
+      "tabId": "25",
+      "state": "visible-exact-prompt-three-anchors-Thinking",
+      "promptSha256": "9F627520C5085478793B19244E494DDE9B56D07AB03D03091183627CD1C1EA35"
+    },
+    {
+      "scene": 2049,
+      "tabId": "26",
+      "state": "visible-exact-prompt-three-anchors-Thinking",
+      "promptSha256": "706B1CA9EBABFB208294B2E38501E850853CA66B67C44D918E6709D06AF40DB9"
+    },
+    {
+      "scene": 2050,
+      "tabId": "27",
+      "state": "visible-exact-prompt-three-anchors-Thinking",
+      "promptSha256": "822122DE0104B751E571B6E7D3F3BE32DF7AC659793CD2584765A54F9934241A"
+    }
+  ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-505-georgia-prepared-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-505-georgia-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-505-georgia-fixed-rolls.json",
@@ -24,5 +49,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": false,
-  "nextSafeAction": "Visibly attach exact938,936,937 in order and verify each frozen scene prompt, leesha007 and Thinking in four lanes. Archive and remote-verify staging, then one initial Send per scene. No Georgia send yet; no X reservation before complete Georgia closure."
+  "nextSafeAction": "Verify staging evidence, exact prompts and anchor bytes against the remote branch and PR, then recheck four visible composers and perform one initial Send each.",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json"
 }

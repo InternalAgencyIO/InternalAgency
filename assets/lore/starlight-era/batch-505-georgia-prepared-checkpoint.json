@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 505,
   "country": "Georgia",
-  "state": "prepared-offline-not-dispatched",
+  "state": "four-staged-remote-verification-pending",
   "createdAtUtc": "2026-09-07T05:36:50.373Z",
   "baseRemoteVerifiedHead": "d8a827b1b873564e42bc0a01a0c23ad1768a2b49",
   "sceneIds": [
@@ -52,5 +52,7 @@
   "dispatchCount": 0,
   "chatgptEditCount": 0,
   "xPostCount": 234,
-  "nextSafeAction": "Visibly attach exact938,936,937 in order and verify each frozen scene prompt, leesha007 and Thinking in four lanes. Archive and remote-verify staging, then one initial Send per scene. No Georgia send yet; no X reservation before complete Georgia closure."
+  "nextSafeAction": "Verify staging evidence, exact prompts and anchor bytes against the remote branch and PR, then recheck four visible composers and perform one initial Send each.",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json"
 }
