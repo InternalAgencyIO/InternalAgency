@@ -1,6 +1,6 @@
 {
   "currentXPublication20260907Batch501": {
-    "state": "reserved-not-uploaded-not-submitted",
+    "state": "staged-verified-await-final-remote-parity",
     "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-reservation.json",
     "countries": [
       "Mauritania",
@@ -14,7 +14,8 @@
     ],
     "accountRequired": "@dogramaci",
     "postClicks": 0,
-    "nextSafeAction": "Upload these four exact files once in the frozen order using the visible in-app X chooser. Save exact ALT on every attachment, enable Made with AI, verify visible media and caption, then commit and remotely verify staging. Only after those checks, activate Post once, record its exact live URL immediately and reconcile before any further transmission."
+    "nextSafeAction": "After staging commit, verify local HEAD equals origin and PR13 head, verify the unchanged exact composer, then activate the one enabled Post button once under the current user authorization. Record the resulting URL immediately and verify exact media, ALT, caption and Made with AI before any further publication.",
+    "staging": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p1-visible-staging-evidence.json"
   },
   "currentAuthorityBatch501": {
     "batch": 501,
