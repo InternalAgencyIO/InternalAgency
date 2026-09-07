@@ -112,7 +112,12 @@
       "technicalQa": "pass",
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-accessibility.json",
       "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
-      "eligibleForNormalCountryPairing": true
+      "eligibleForNormalCountryPairing": true,
+      "xPublicationConsumed": true,
+      "postUrl": "https://x.com/dogramaci/status/2096787307797852385",
+      "photoIndex": 1,
+      "publicationVerifiedAtUtc": "2026-09-07T02:30:38.454Z",
+      "noRepostAnyVersion": true
     },
     {
       "scene": 2028,
@@ -384,7 +389,12 @@
       "technicalQa": "pass",
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-accessibility.json",
       "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
-      "eligibleForNormalCountryPairing": true
+      "eligibleForNormalCountryPairing": true,
+      "xPublicationConsumed": true,
+      "postUrl": "https://x.com/dogramaci/status/2096787307797852385",
+      "photoIndex": 2,
+      "publicationVerifiedAtUtc": "2026-09-07T02:30:38.454Z",
+      "noRepostAnyVersion": true
     }
   ],
   "stagedScenes": [
@@ -627,5 +637,17 @@
   "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
   "archiveGateSatisfiedByExplicitException": true,
   "acceptedSelectionManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
-  "currentEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/archive-exception-current-manifest.json"
+  "currentEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/archive-exception-current-manifest.json",
+  "currentPublication": {
+    "postUrl": "https://x.com/dogramaci/status/2096787307797852385",
+    "publishedSceneIds": [
+      2027,
+      2030
+    ],
+    "remainingAcceptedUnpublishedSceneIds": [
+      2028,
+      2029
+    ],
+    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-live-checkpoint.json"
+  }
 }
