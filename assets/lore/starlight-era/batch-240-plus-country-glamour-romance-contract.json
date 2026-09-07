@@ -8,7 +8,7 @@
       2037,
       2038
     ],
-    "state": "four-prompts-prepared-offline-not-dispatched",
+    "state": "four-visible-composers-verified-not-sent",
     "checkpoint": "assets/lore/starlight-era/batch-502-kuwait-editorial-prompts-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
@@ -23,7 +23,10 @@
     "providerSendActivations": 0,
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
-    "nextSafeAction": "Remote-verify exact prepared prompts; attach unique anchors938,936,937 in order through visible controls and verify cards, exact prompt and Thinking. Archive and remote-verify staging, report the next safe action, then one initial Send per lane."
+    "nextSafeAction": "After this staging record is remote-verified, activate the visible Send button once per lane, record its result immediately, and never retry an uncertain or confirmed submission without reconciliation.",
+    "updatedAtUtc": "2026-09-07T02:45:55.084Z",
+    "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-four-composers-staged-checkpoint.json",
+    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/four-composers-staging-evidence.json"
   },
   "currentXPublication20260907Batch501": {
     "state": "first-four-published-live-verified",

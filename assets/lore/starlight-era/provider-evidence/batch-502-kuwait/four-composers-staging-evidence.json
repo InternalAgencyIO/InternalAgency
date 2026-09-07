@@ -3,7 +3,9 @@
   "batch": 502,
   "country": "Kuwait",
   "state": "four-visible-composers-verified-not-sent",
-  "provider": "Meta AI",
+  "verifiedAtUtc": "2026-09-07T02:45:55.084Z",
+  "baseRemoteVerifiedHead": "96dfe021a390027790337c86727bd3c97b827bdd",
+  "preparedCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-editorial-prompts-prepared-checkpoint.json",
   "account": "leesha007",
   "mode": "Thinking",
   "anchorOrder": [
@@ -11,12 +13,45 @@
     936,
     937
   ],
-  "providerSendActivations": 0,
-  "providerRetries": 0,
-  "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
-  "occurrences": [],
-  "stagedScenes": [
+  "anchors": [
+    {
+      "slot": 1,
+      "role": "primary quartet face plate",
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "bytes": 2575103,
+      "actualSha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "hashMatches": true,
+      "verifiedAtUtc": "2026-09-07T02:36:43.122Z"
+    },
+    {
+      "slot": 2,
+      "role": "expression and three-quarter supplement",
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "bytes": 2495143,
+      "actualSha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "hashMatches": true,
+      "verifiedAtUtc": "2026-09-07T02:36:43.122Z"
+    },
+    {
+      "slot": 3,
+      "role": "pose-angle and relationship supplement",
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "bytes": 2373808,
+      "actualSha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "hashMatches": true,
+      "verifiedAtUtc": "2026-09-07T02:36:43.122Z"
+    }
+  ],
+  "visibleAnchorImagesConfirmed": true,
+  "rollTests": {
+    "command": "node --test scripts/starlight/editorial-rolls.test.cjs",
+    "passed": 5,
+    "failed": 0
+  },
+  "scenes": [
     {
       "scene": 2035,
       "tabId": "24",
@@ -178,12 +213,6 @@
       "verifiedAtUtc": "2026-09-07T02:45:23.196Z"
     }
   ],
-  "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-four-composers-staged-checkpoint.json",
-  "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
-  "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
-  "maximumHardFailureRetriesPerScene": 2,
-  "aestheticRetries": 0,
-  "sourceArchiveComplete": false,
-  "archiveException": null,
+  "providerSendActivations": 0,
   "nextSafeAction": "After this staging record is remote-verified, activate the visible Send button once per lane, record its result immediately, and never retry an uncertain or confirmed submission without reconciliation."
 }

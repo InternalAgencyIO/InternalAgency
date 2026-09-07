@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "batch": 502,
+  "country": "Kuwait",
+  "sceneIds": [
+    2035,
+    2036,
+    2037,
+    2038
+  ],
+  "state": "four-visible-composers-verified-not-sent",
+  "preparedAtUtc": "2026-09-07T02:36:43.122Z",
+  "baseRemoteVerifiedHead": "96dfe021a390027790337c86727bd3c97b827bdd",
+  "priorPublication": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-live-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
+  "prompts": [
+    {
+      "scene": 2035,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-meta-initial-prompt.txt",
+      "sha256": "50DE0C297710CF6509958FF3E8D571DC8EF30B3382455320ABCBAEFDDF2A1A3D",
+      "characters": 4822,
+      "editPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-chatgpt-single-tailoring-prompt.txt",
+      "editSha256": "AC119A41325EBBF4DCD4AE4C6E47D29BCD542AE0F21B3871B2D21779BB3C26A8"
+    },
+    {
+      "scene": 2036,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-meta-initial-prompt.txt",
+      "sha256": "CE7D11C39B9C340128115B14104E9DE0447E5D887278873C1DEAEA622565D822",
+      "characters": 4202,
+      "editPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-chatgpt-single-tailoring-prompt.txt",
+      "editSha256": "C68FFB029B4A81DA32445BDF102A004547F77607FFB935BAA61F44EAE8D4BE02"
+    },
+    {
+      "scene": 2037,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-meta-initial-prompt.txt",
+      "sha256": "70C8FD15F51C9507892AB2DA74C0FA4F313CB2E09D5CCCD68CDE073E78B399F0",
+      "characters": 5108,
+      "editPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-chatgpt-single-tailoring-prompt.txt",
+      "editSha256": "6284E9E63FA962069660773CB116D6185D6A575B993A2A47F71E53B938AF94E5"
+    },
+    {
+      "scene": 2038,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-meta-initial-prompt.txt",
+      "sha256": "2794835CCDAAFDC4225DD61A0F4194BA65E565E989CAD0C1D537B361BDD49C1D",
+      "characters": 5086,
+      "editPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-chatgpt-single-tailoring-prompt.txt",
+      "editSha256": "C32A397646FA9809A4C70BB04FF90CD4A26792DB2B2F8131F22C199C23DDBF62"
+    }
+  ],
+  "anchors": [
+    {
+      "slot": 1,
+      "role": "primary quartet face plate",
+      "path": "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+      "sha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "bytes": 2575103,
+      "actualSha256": "4161C9A5A8F745DF3A976112B6CA539E210DFA4E88E7873760E5CD0FF3F58FF6",
+      "hashMatches": true,
+      "verifiedAtUtc": "2026-09-07T02:36:43.122Z"
+    },
+    {
+      "slot": 2,
+      "role": "expression and three-quarter supplement",
+      "path": "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+      "sha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "bytes": 2495143,
+      "actualSha256": "0F330D7FF46E226340E5C94261752E73A22B895891E83B72EB8445E4618FCEEB",
+      "hashMatches": true,
+      "verifiedAtUtc": "2026-09-07T02:36:43.122Z"
+    },
+    {
+      "slot": 3,
+      "role": "pose-angle and relationship supplement",
+      "path": "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png",
+      "sha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "bytes": 2373808,
+      "actualSha256": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1",
+      "hashMatches": true,
+      "verifiedAtUtc": "2026-09-07T02:36:43.122Z"
+    }
+  ],
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "mode": "Thinking",
+  "account": "leesha007",
+  "browserDispatchCount": 0,
+  "editInvocationCount": 0,
+  "legacyCampaignCursorSuperseded": true,
+  "archiveExceptionsDoNotTransfer": true,
+  "sourceContractSha256": "3e8f4979d92900adec7b3a72e9d91928d1525e6b41cd185741accf4f05aaab7b",
+  "rollGeneratorSha256": "ec9ed109e1683558b2cadfcbc339809fa4adaee26f4b90633153f6ed976ff6f7",
+  "nextSafeAction": "After this staging record is remote-verified, activate the visible Send button once per lane, record its result immediately, and never retry an uncertain or confirmed submission without reconciliation.",
+  "verifiedAtUtc": "2026-09-07T02:45:55.084Z",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/four-composers-staging-evidence.json",
+  "initialSendIntents": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-send-intents.json"
+}
