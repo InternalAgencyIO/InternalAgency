@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "batch": 504,
+  "auditedAtUtc": "2026-09-07T05:27:13.159Z",
+  "requestedCadenceMinutes": 45,
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-503-panama/continuation-log-audit-2026-09-07.json",
+  "scope": "Croatia continuation from preparation through final selection. Audit was due05:24:43UTC and is completed at the media-closure boundary.",
+  "metrics": {
+    "metaInitialSends": 4,
+    "metaAssistantHardFailureRetries": 1,
+    "metaConfirmedSessions": 5,
+    "metaRefusals": 1,
+    "metaObservedFiles": 17,
+    "uniqueMetaRawBytes": 14,
+    "missingObservedOriginals": 0,
+    "chatgptInvocations": 4,
+    "chatgptReturnedImages": 3,
+    "chatgptOutputBlocks": 1,
+    "totalSavedProviderAndEditFiles": 20,
+    "xPostActivations": 0,
+    "readyUnpublishedCountryStills": 4,
+    "duplicateMediaMatchesAgainst234Posts": 0,
+    "probabilityTestsPassed": 5
+  },
+  "findings": [
+    {
+      "kind": "camera-drift",
+      "severity": "soft",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/final-selection-qa.json",
+      "observation": "The fixed intermediate33/70/40 frames are still wider than requested, and the wide88 scene is closer than its environmental target. Dutch angles remain weak. Moving frozen camera clauses earlier did not fully solve provider adherence.",
+      "action": "Keep the exact rolls and accepted sources. Future unsubmitted prompts should explicitly explain that each reference is a whole-quartet plate and that off-frame wardrobe rolls must not widen the crop. No seed search, probability change or completed-scene regeneration."
+    },
+    {
+      "kind": "provider-safety",
+      "severity": "handled",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-initial-refusal-evidence.json",
+      "observation": "Meta refused the initial2045 scene and offered a serene, upright seated, closed-back, covered-midriff alternative. One documented retry produced usable outputs.",
+      "action": "Retain the transparent safety overrides through selection and future publication. Never restore excluded content through another provider."
+    },
+    {
+      "kind": "single-edit-block",
+      "severity": "handled",
+      "evidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-chatgpt-single-edit-result.json",
+      "observation": "The2044 one-pass edit was blocked at output safety and returned no image.",
+      "action": "Allowance is consumed. Keep the technically usable original; no second edit."
+    },
+    {
+      "kind": "reference-interpretation",
+      "severity": "preparation-clarification",
+      "observation": "Some visible Meta planning text interpreted three quartet plates as one face per file. The safe2045 prompt explicitly clarified whole-quartet references.",
+      "action": "Retain all three exact anchor files and repeat the whole-quartet explanation in future prompts, without changing faces or anchor order."
+    },
+    {
+      "kind": "lfs-local-path",
+      "severity": "fixed",
+      "observation": "A relative custom lfs.storage resolved under the Git directory twice. Reading LocalMediaDir identified the actual fresh store and all anchors passed; subsequent source verification used an explicit absolute in-repository storage path.",
+      "action": "Use resolved absolute task-scoped LFS stores. No deletion, global changes or full-repository scans."
+    },
+    {
+      "kind": "manifest-schema",
+      "severity": "fixed-owned-records",
+      "observation": "The first11 new raw rows were normalized to the existing canonicalPath, recordType, sourceKind, status and occurrenceId schema before closure.",
+      "action": "Use the established generated-media schema for further rows and preserve unrelated history."
+    }
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newWorkersCreated": false,
+  "nextAuditAfterUtc": "2026-09-07T06:12:13.159Z"
+}

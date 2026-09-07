@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "batch": 504,
+  "state": "four-single-edit-allowances-consumed-terminal",
+  "recordedAtUtc": "2026-09-07T05:25:23.673Z",
+  "rule": "Exactly one invocation each for2043-2046. Output-stage block for2044 returned no image and consumes its allowance. No additional render or edit invocations.",
+  "invocationCount": 4,
+  "returnedFiles": 3,
+  "blockedInvocations": 1,
+  "additionalInvocationsAllowed": 0,
+  "results": [
+    {
+      "scene": 2043,
+      "batch": 504,
+      "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-02b2ac6d-ac4c-4c4b-9ffa-b351afe8fa42.png",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-chatgpt-single-tailoring-pass.png",
+      "bytes": 2343564,
+      "sha256": "db6a88be5c225132edca2d4f928ca4a8212451e6ef0df897ad8d700e496f5ac1",
+      "width": 941,
+      "height": 1672,
+      "startedAtUtc": "2026-09-07T05:14:38.647Z",
+      "completedAtUtc": "2026-09-07T05:16:57.462Z",
+      "invocations": 1,
+      "receipt": {
+        "scene": 2043,
+        "state": "returned",
+        "startedAtUtc": "2026-09-07T05:14:38.647Z",
+        "completedAtUtc": "2026-09-07T05:16:57.462Z",
+        "invocations": 1,
+        "outputHint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-02b2ac6d-ac4c-4c4b-9ffa-b351afe8fa42.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "responseKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "source": {
+        "scene": 2043,
+        "batch": 504,
+        "occurrence": 1,
+        "kind": "gallery",
+        "providerUrl": "https://www.meta.ai/prompt/b62e7543-2f95-4f58-a364-7861d5724a50",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799392546_1095657192898743_2944512559328358922_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=103&_nc_ohc=ZQ3wPE5B0r8Q7kNvwFno2ax&sdl=0&ccb=14-4&oh=00_AQLK9Fpx3VYU56HvHmtIWQozWYUpiiqI9cu-DEt2Kv4e3g&oe=6AA428A4&_nc_sid=a21977",
+        "downloadPath": "C:\\Users\\A\\Downloads\\799392546_1095657192898743_2944512559328358922_n.webp",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-meta-gallery-original.webp",
+        "sha256": "2195f6d1c3b7523a3dd220fb8a71cb2d86415965bea8af73b20d33f05c51721e",
+        "bytes": 548102,
+        "width": 1152,
+        "height": 2048,
+        "observedAtUtc": "2026-09-07T05:02:11.580Z",
+        "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+      },
+      "exactPromptIntent": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/single-chatgpt-edit-intents.json"
+    },
+    {
+      "scene": 2045,
+      "batch": 504,
+      "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-10144a78-7986-4cf2-bf6d-7a77d6bf56ec.png",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-chatgpt-single-tailoring-pass.png",
+      "bytes": 2523178,
+      "sha256": "af7b2a1701b8f200d560318cb53c4b5c42a70283d04686ea23668686f3618dbd",
+      "width": 941,
+      "height": 1672,
+      "startedAtUtc": "2026-09-07T05:14:38.647Z",
+      "completedAtUtc": "2026-09-07T05:20:24.521Z",
+      "invocations": 1,
+      "receipt": {
+        "scene": 2045,
+        "state": "returned",
+        "startedAtUtc": "2026-09-07T05:14:38.647Z",
+        "completedAtUtc": "2026-09-07T05:20:24.521Z",
+        "invocations": 1,
+        "outputHint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-10144a78-7986-4cf2-bf6d-7a77d6bf56ec.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "responseKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "source": {
+        "scene": 2045,
+        "batch": 504,
+        "occurrence": 2,
+        "retry": 1,
+        "kind": "retry-1-gallery",
+        "providerUrl": "https://www.meta.ai/prompt/4277c401-6e65-4312-b3e4-b3e3f5145935",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799427875_1765089661277586_7774206698397764248_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=ZFVZ-29E7R4Q7kNvwGV8fZA&sdl=0&ccb=14-4&oh=00_AQKe8IA6Z4rcaW_MYNtr6uARPTEJLqmPbHaUdkHpKOzN4g&oe=6AA42DFC&_nc_sid=a21977",
+        "downloadPath": "C:\\Users\\A\\Downloads\\799427875_1765089661277586_7774206698397764248_n.webp",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-meta-retry-1-gallery-original.webp",
+        "sha256": "5f3507967e69a983e67ba89acbff4d9e78be989e69069188c634edec16fc07cc",
+        "bytes": 623924,
+        "width": 1152,
+        "height": 2048,
+        "observedAtUtc": "2026-09-07T05:10:49.806Z",
+        "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+      },
+      "exactPromptIntent": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/single-chatgpt-edit-intents.json"
+    },
+    {
+      "scene": 2046,
+      "batch": 504,
+      "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-6655904f-9ae0-4543-9584-04dab1fa91de.png",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2046-chatgpt-single-tailoring-pass.png",
+      "bytes": 2398665,
+      "sha256": "7772fdffbf72dff29ff956645953ef20ecdd5a421febe4a90dcab557886b212f",
+      "width": 941,
+      "height": 1672,
+      "startedAtUtc": "2026-09-07T05:14:38.647Z",
+      "completedAtUtc": "2026-09-07T05:21:30.203Z",
+      "invocations": 1,
+      "receipt": {
+        "scene": 2046,
+        "state": "returned",
+        "startedAtUtc": "2026-09-07T05:14:38.647Z",
+        "completedAtUtc": "2026-09-07T05:21:30.203Z",
+        "invocations": 1,
+        "outputHint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-6655904f-9ae0-4543-9584-04dab1fa91de.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "responseKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "source": {
+        "scene": 2046,
+        "batch": 504,
+        "occurrence": 1,
+        "kind": "internal-5",
+        "providerUrl": "https://www.meta.ai/prompt/2e0b2f54-0d1d-4ced-86d4-7f120ca3c865",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/703563732_898743419720285_8362839569704537657_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=105&_nc_ohc=wHEWi9IFKTAQ7kNvwGYqxuE&sdl=0&ccb=14-4&oh=00_AQLJkkVZXZRKMOh2lRqGiWqh9dBJlRRUPwoPt1POiPpoWg&oe=6AA0308D&_nc_sid=a21977",
+        "downloadPath": "C:\\Users\\A\\Downloads\\703563732_898743419720285_8362839569704537657_n.webp",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2046-meta-internal-5-original.webp",
+        "sha256": "43d2852c4bf56b008b2c45ab58374fb6793f47ef77262d8888fd7a7add6bc37f",
+        "bytes": 546086,
+        "width": 1152,
+        "height": 2048,
+        "observedAtUtc": "2026-09-07T05:03:45.750Z",
+        "downloadMethod": "supported visible image downloadMedia with prearmed download event"
+      },
+      "exactPromptIntent": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/single-chatgpt-edit-intents.json"
+    }
+  ],
+  "blocked": [
+    {
+      "scene": 2044,
+      "state": "blocked-output-safety-no-image-returned",
+      "startedAtUtc": "2026-09-07T05:14:38.647Z",
+      "completedAtUtc": "2026-09-07T05:19:09.974Z",
+      "invocations": 1,
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 0d88de35-1ff6-4aa4-b230-13ce95acbd51. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "noRetry": true,
+      "outputFiles": 0
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "scene": 2044,
+  "state": "blocked-output-safety-no-image-returned",
+  "startedAtUtc": "2026-09-07T05:14:38.647Z",
+  "completedAtUtc": "2026-09-07T05:19:09.974Z",
+  "invocations": 1,
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 0d88de35-1ff6-4aa4-b230-13ce95acbd51. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "noRetry": true,
+  "outputFiles": 0
+}

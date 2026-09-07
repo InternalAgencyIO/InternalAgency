@@ -3,12 +3,12 @@
   "batch": 504,
   "createdAtUtc": "2026-09-07T05:12:16.046Z",
   "rule": "Exactly one built-in imagegen clothing-only invocation per selected usable source; blocked or interrupted call consumes it. Preserve every returned file. Never retry an edit. Retain the2045 safety exclusions.",
-  "state": "four-exact-one-pass-edit-intents-locked-before-dispatch",
+  "state": "all-four-edit-allowances-consumed-terminal",
   "scenes": [
     {
       "scene": 2043,
-      "state": "dispatch-intent-locked-not-yet-called",
-      "invocationCount": 0,
+      "state": "single-edit-returned-terminal",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2043,
@@ -37,12 +37,13 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-chatgpt-single-tailoring-pass.png",
       "dispatchIntentLockedAtUtc": "2026-09-07T05:12:16.047Z",
       "additionalInvocationsAllowed": 0,
-      "safetyOverrides": []
+      "safetyOverrides": [],
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2043-chatgpt-single-edit-result.json"
     },
     {
       "scene": 2044,
-      "state": "dispatch-intent-locked-not-yet-called",
-      "invocationCount": 0,
+      "state": "single-edit-blocked-terminal-no-retry",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2044,
@@ -71,12 +72,13 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-chatgpt-single-tailoring-pass.png",
       "dispatchIntentLockedAtUtc": "2026-09-07T05:12:16.047Z",
       "additionalInvocationsAllowed": 0,
-      "safetyOverrides": []
+      "safetyOverrides": [],
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2044-chatgpt-single-edit-result.json"
     },
     {
       "scene": 2045,
-      "state": "dispatch-intent-locked-not-yet-called",
-      "invocationCount": 0,
+      "state": "single-edit-returned-terminal",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2045,
@@ -111,12 +113,13 @@
         "Upright supported seated contact replaces the head-on-lap pose.",
         "All four closed-back sleeveless garments and covered midriffs; original navel assignment is suppressed.",
         "Single tailoring invocation must retain all safety exclusions."
-      ]
+      ],
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2045-chatgpt-single-edit-result.json"
     },
     {
       "scene": 2046,
-      "state": "dispatch-intent-locked-not-yet-called",
-      "invocationCount": 0,
+      "state": "single-edit-returned-terminal",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2046,
@@ -145,7 +148,8 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2046-chatgpt-single-tailoring-pass.png",
       "dispatchIntentLockedAtUtc": "2026-09-07T05:12:16.048Z",
       "additionalInvocationsAllowed": 0,
-      "safetyOverrides": []
+      "safetyOverrides": [],
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/2046-chatgpt-single-edit-result.json"
     }
   ]
 }

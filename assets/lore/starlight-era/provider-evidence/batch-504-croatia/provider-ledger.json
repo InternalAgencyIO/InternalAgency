@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 504,
   "country": "Croatia",
-  "state": "four-usable-sources-archived-single-edit-intents-locked",
+  "state": "four-selected-stills-closed-pending-final-remote-proof",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 5,
   "providerRetries": 1,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "occurrences": [
     {
       "scene": 2043,
@@ -107,7 +107,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": false,
-  "nextSafeAction": "Verify fresh remote original bytes and HEAD/origin/PR parity, then invoke each of the four locked one-pass edits exactly once. Preserve the2045 safer exclusions and actual source framing. No further Meta Send for2043-2046.",
+  "nextSafeAction": "Verify the completed media and metadata archive remotely, then prepare the next unrendered Georgia country from fresh authority. Croatia awaits a new eligible two-country pairing; none of scenes2035-2042 may be reused.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-intents.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-receipt.json",
@@ -123,5 +123,13 @@
   "missingObservedOriginals": 0,
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-source-qa.json",
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/single-chatgpt-edit-intents.json",
-  "chatgptLockedDispatchIntents": 4
+  "chatgptLockedDispatchIntents": 0,
+  "chatgptReturnedFiles": 3,
+  "chatgptBlockedInvocations": 1,
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/single-chatgpt-edit-results.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/final-selection-qa.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/final-remote-closure-verification.json",
+  "noFurtherInvocations": true
 }

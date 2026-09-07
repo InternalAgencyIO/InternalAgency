@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "batch": 504,
+  "country": "Croatia",
+  "sceneIds": [
+    2043,
+    2044,
+    2045,
+    2046
+  ],
+  "state": "four-stills-closed-awaiting-final-remote-proof-and-companion",
+  "closedAtUtc": "2026-09-07T05:27:13.159Z",
+  "previousCountryClosure": "assets/lore/starlight-era/batch-503-kuwait-panama-full-workflow-closure-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-504-croatia-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-504-croatia-fixed-rolls.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/provider-ledger.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/native-raw-archive-manifest.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/accepted-selections.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-source-qa.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/final-selection-qa.json",
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/single-chatgpt-edit-results.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/final-remote-closure-verification.json",
+  "providerSendActivations": 5,
+  "providerHardFailureRetries": 1,
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 17,
+  "uniqueRawByteVersions": 14,
+  "missingObservedOriginals": 0,
+  "chatgptInvocations": 4,
+  "chatgptReturnedFiles": 3,
+  "chatgptBlockedInvocations": 1,
+  "totalSavedProviderAndEditedFiles": 20,
+  "allFourScenesTerminalNoMoreRendersOrEdits": true,
+  "archiveException": null,
+  "xPostCount": 234,
+  "newXPostUrls": [],
+  "publicationState": "four-unpublished-country-stills-awaiting-new-eligible-companion",
+  "next": {
+    "country": "Georgia",
+    "proposedBatch": 505,
+    "proposedScenes": [
+      2047,
+      2048,
+      2049,
+      2050
+    ],
+    "sequence": [
+      "Panama",
+      "Croatia",
+      "Georgia",
+      "Eritrea"
+    ],
+    "preparationExists": false,
+    "requiresFreshAuthorityPromptRollAnchorAndRemoteChecks": true
+  },
+  "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+  "logAudit": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/continuation-log-audit-2026-09-07.json",
+  "canonicalContradictionResolution": [
+    "Historical Cuba/Tanzania and older Croatia scenes remain superseded by the verified504 cursor.",
+    "Original2045 rolls remain immutable; its explicit provider-offered safety overrides govern the accepted alternative.",
+    "The2044 blocked edit consumes its one-pass allowance; original selection is not permission for another edit.",
+    "Oman and Switzerland remain held; protected Oman tab stays open."
+  ],
+  "nextSafeAction": "Finish remote media and closure parity, then prepare fresh Georgia505 scenes2047-2050 with the unchanged roll contract and exact anchors. Pair eligible Croatia/Georgia stills only after all originals, single edit allowances, QA, ALT, live @dogramaci, duplicate checks and one-shot publication staging are complete."
+}
