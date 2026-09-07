@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 501,
   "country": "Costa Rica",
-  "state": "four-meta-thinking-composers-staged-zero-send",
+  "state": "four-confirmed-meta-occurrences-in-progress-do-not-resend",
   "provider": "Meta",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,11 +11,52 @@
     936,
     937
   ],
-  "providerSendActivations": 0,
+  "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
-  "occurrences": [],
+  "occurrences": [
+    {
+      "scene": 2031,
+      "occurrence": 1,
+      "promptSha256": "1002CA2D17CB841B200103E14B72DB36D51F1D6F03A9AE29F9C81B7D8DCB3276",
+      "providerUrl": "https://www.meta.ai/prompt/691f401f-c7f5-4a52-8d50-5271ec6a9045",
+      "state": "confirmed-submission-response-in-progress",
+      "sendActivations": 1,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-initial-send-receipt.json",
+      "doNotResend": true
+    },
+    {
+      "scene": 2032,
+      "occurrence": 1,
+      "promptSha256": "8A3FEC627D28F0078450AEEBE7A55AC89300ED89C27706F734F92A1361316882",
+      "providerUrl": "https://www.meta.ai/prompt/d7c8a644-3b28-4b3f-be24-bf859dd1f3ef",
+      "state": "confirmed-submission-response-in-progress",
+      "sendActivations": 1,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-initial-send-receipt.json",
+      "doNotResend": true
+    },
+    {
+      "scene": 2033,
+      "occurrence": 1,
+      "promptSha256": "5BDEEEFE9FBE24F06D29669E4855078ED78661BE1EBE6D2B979B11AC76FBAB0D",
+      "providerUrl": "https://www.meta.ai/prompt/d52784e6-f57a-447e-bcb3-5c7a10c47494",
+      "state": "confirmed-submission-response-in-progress",
+      "sendActivations": 1,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-initial-send-receipt.json",
+      "doNotResend": true
+    },
+    {
+      "scene": 2034,
+      "occurrence": 1,
+      "promptSha256": "F6C77365B6A35E710BA118A7F220008A40D1C73FAA89D46FA2321DCFCA11C2D4",
+      "providerUrl": "https://www.meta.ai/prompt/07d358b3-c4cc-4b5e-8539-a9bd6f6c3946",
+      "state": "confirmed-submission-response-in-progress",
+      "sendActivations": 1,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-initial-send-receipt.json",
+      "doNotResend": true
+    }
+  ],
   "stagedScenes": [
     {
       "scene": 2031,
@@ -82,11 +123,13 @@
       "sendEnabled": true
     }
   ],
-  "currentCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-meta-composers-staged-checkpoint.json",
+  "currentCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-meta-sends-confirmed-checkpoint.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
   "archiveExceptionApplies": false,
-  "nextSafeAction": "After fresh remote branch/PR parity and exact live account, Thinking, prompt and ordered-anchor checks, activate Send once in each of the four staged Costa Rica lanes. Capture each unique provider URL and immutable receipt immediately. Never repeat an uncertain activation. Preserve every returned version, QA and single-edit allowance before normal country-pair publication.",
+  "nextSafeAction": "Observe only the four confirmed Costa Rica occurrences. Never resend them or reuse their lanes until every visible output version and raw final is archived or its explicit recovery hold recorded. Perform technical and identity QA, then reserve exactly one built-in ChatGPT tailoring invocation per usable occurrence. Preserve unused and blocked results, accessibility, manifests, Git/LFS and PR parity before normal Costa Rica-Mauritania country-pair publication.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/four-composers-staging-evidence.json",
-  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/initial-send-intents.json"
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/initial-send-intents.json",
+  "confirmedSubmissions": 4,
+  "stagedScenesEvidenceIsPreSendSnapshot": true
 }
