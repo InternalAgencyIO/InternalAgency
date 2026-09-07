@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "batch": 501,
+  "country": "Costa Rica",
+  "updatedAtUtc": "2026-09-07T01:35:25.567Z",
+  "state": "four-native-finals-archived-three-internal-gaps-single-edits-reserved",
+  "sceneIds": [
+    2031,
+    2032,
+    2033,
+    2034
+  ],
+  "confirmedSubmissions": 4,
+  "providerSendActivations": 4,
+  "providerRetries": 0,
+  "providerVersionsObserved": 7,
+  "deliveredFinalsSaved": 4,
+  "additionalNativeDownloadFilesSaved": 1,
+  "missingInternalRawOriginals": 3,
+  "chatgptEditInvocations": 0,
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-intents.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/initial-source-qa.json",
+  "evidence": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/meta-output-and-retrieval-evidence.json",
+  "availableManifest": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/available-media-evidence-manifest.json",
+  "recoveryHold": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
+  "rawArchiveComplete": false,
+  "archiveExceptionApplies": false,
+  "xEligible": false,
+  "previousCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-meta-sends-confirmed-checkpoint.json",
+  "previousMauritaniaException": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+  "noResend": true,
+  "noAestheticRetry": true,
+  "nextSafeAction": "Four confirmed Costa Rica occurrences are terminal and must not be resent. Run the one reserved built-in ChatGPT tailoring invocation per saved usable final, preserving every returned or blocked receipt before starting the next edit. Complete source-versus-edit QA and accessibility. Keep Costa Rica publication and next-country rendering held until the three recorded internal originals are recovered through supported visible browser controls or an explicit Costa Rica-specific archive exception is authorized. Mauritania approval does not apply to Costa Rica or Oman.",
+  "canonicalCorrections": [
+    {
+      "field": "currentXBacklogDrain20260906.activeRenderArchiveException",
+      "oldValue": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "newValue": null,
+      "reason": "Active country is Costa Rica; only Mauritania has an approved exception. Preserve it separately as companionCountryArchiveException."
+    }
+  ],
+  "historicalWarnings": [
+    "Historical contractSha256 and contractPolicySha256 seals remain historical mismatches, not rewritten.",
+    "Repository-wide LFS fsck reported historical local-cache objects missing; current-batch checks and freshly fetched anchor objects passed. No claim of globally complete local LFS cache."
+  ]
+}

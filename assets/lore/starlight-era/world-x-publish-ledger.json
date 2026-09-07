@@ -8,8 +8,8 @@
       2033,
       2034
     ],
-    "state": "four-confirmed-meta-occurrences-in-progress-do-not-resend",
-    "checkpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-meta-sends-confirmed-checkpoint.json",
+    "state": "four-native-finals-archived-three-internal-gaps-single-edits-reserved",
+    "checkpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-finals-archived-single-edit-ready-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-501-costa-rica-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-501-costa-rica-fixed-rolls.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/provider-ledger.json",
@@ -24,7 +24,7 @@
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
     "previousMauritaniaException": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
-    "nextSafeAction": "Observe only the four confirmed Costa Rica occurrences. Never resend them or reuse their lanes until every visible output version and raw final is archived or its explicit recovery hold recorded. Perform technical and identity QA, then reserve exactly one built-in ChatGPT tailoring invocation per usable occurrence. Preserve unused and blocked results, accessibility, manifests, Git/LFS and PR parity before normal Costa Rica-Mauritania country-pair publication.",
+    "nextSafeAction": "Four confirmed Costa Rica occurrences are terminal and must not be resent. Run the one reserved built-in ChatGPT tailoring invocation per saved usable final, preserving every returned or blocked receipt before starting the next edit. Complete source-versus-edit QA and accessibility. Keep Costa Rica publication and next-country rendering held until the three recorded internal originals are recovered through supported visible browser controls or an explicit Costa Rica-specific archive exception is authorized. Mauritania approval does not apply to Costa Rica or Oman.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -34,7 +34,14 @@
       "https://www.meta.ai/prompt/d52784e6-f57a-447e-bcb3-5c7a10c47494",
       "https://www.meta.ai/prompt/07d358b3-c4cc-4b5e-8539-a9bd6f6c3946"
     ],
-    "noResend": true
+    "noResend": true,
+    "deliveredFinalsSaved": 4,
+    "providerVersionsObserved": 7,
+    "missingInternalRawOriginals": 3,
+    "rawArchiveComplete": false,
+    "recoveryHold": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
+    "editIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-intents.json",
+    "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/initial-source-qa.json"
   },
   "currentAuthorityBatch500": {
     "state": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
@@ -80,7 +87,7 @@
   },
   "version": 2,
   "currentXBacklogDrain20260906": {
-    "state": "selected-backlog-closed-mauritania-exception-accepted-costa-rica-prepared",
+    "state": "selected-backlog-closed-mauritania-exception-accepted-costa-rica-raw-gap-held",
     "canonicalPostCount": 230,
     "manualPostsReconciled": [
       "https://x.com/dogramaci/status/2096574104090325016",
@@ -175,8 +182,8 @@
     "olderManualAuditComplete": true,
     "backlogFullyCleared": false,
     "browserState": "Four current Meta recovery previews, one empty X composer, and one explicitly authorized protected Oman native-image tab.",
-    "nextSafeAction": "Observe only the four confirmed Costa Rica occurrences. Never resend them or reuse their lanes until every visible output version and raw final is archived or its explicit recovery hold recorded. Perform technical and identity QA, then reserve exactly one built-in ChatGPT tailoring invocation per usable occurrence. Preserve unused and blocked results, accessibility, manifests, Git/LFS and PR parity before normal Costa Rica-Mauritania country-pair publication.",
-    "continuationCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-meta-sends-confirmed-checkpoint.json",
+    "nextSafeAction": "Four confirmed Costa Rica occurrences are terminal and must not be resent. Run the one reserved built-in ChatGPT tailoring invocation per saved usable final, preserving every returned or blocked receipt before starting the next edit. Complete source-versus-edit QA and accessibility. Keep Costa Rica publication and next-country rendering held until the three recorded internal originals are recovered through supported visible browser controls or an explicit Costa Rica-specific archive exception is authorized. Mauritania approval does not apply to Costa Rica or Oman.",
+    "continuationCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-finals-archived-single-edit-ready-checkpoint.json",
     "olderManualAuditReviewedPosts": 234,
     "olderManualAuditUnreviewedPosts": 0,
     "olderManualAuditNextUrl": null,
@@ -262,13 +269,14 @@
     "omanRecoveryDeferral": "assets/lore/starlight-era/batch-499-oman-explicit-deferral-and-batch-500-advance-checkpoint.json",
     "activeRenderBatch": 501,
     "activeRenderCountry": "Costa Rica",
-    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-meta-sends-confirmed-checkpoint.json",
-    "activeRenderState": "four-confirmed-meta-occurrences-in-progress-do-not-resend",
+    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-finals-archived-single-edit-ready-checkpoint.json",
+    "activeRenderState": "four-native-finals-archived-three-internal-gaps-single-edits-reserved",
     "activeRenderSelection": null,
-    "activeRenderArchiveHold": null,
-    "activeRenderArchiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+    "activeRenderArchiveHold": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
+    "activeRenderArchiveException": null,
     "companionCandidateCountry": "Mauritania",
-    "companionAcceptedSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json"
+    "companionAcceptedSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
+    "companionCountryArchiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json"
   },
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},
