@@ -8,7 +8,7 @@
     2053,
     2054
   ],
-  "state": "four-composers-staged-verified-not-sent",
+  "state": "four-meta-initial-sends-confirmed-output-pending",
   "preparedAtUtc": "2026-09-07T06:37:29.948Z",
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
   "baseRemoteVerifiedHead": "8bcbca43b61cdd9ce28fae169a1662f67d0a5d38",
@@ -49,7 +49,7 @@
       "localHash": "BA256D750840F38C67E737FAB64BF646E606761DE71AEC9E5374AA0324B1EED1"
     }
   ],
-  "providerSendActivations": 0,
+  "providerSendActivations": 4,
   "chatgptEditInvocations": 0,
   "maximumMetaHardFailureRetriesPerScene": 2,
   "maximumChatgptInvocationsPerScene": 1,
@@ -63,8 +63,17 @@
     "Old Eritrea scenes, if present in prior campaign rounds, are historical and never reopened.",
     "Oman and Switzerland holds remain; neither is an eligible pair companion."
   ],
-  "nextSafeAction": "Remote-verify frozen preparation. In each actual fresh leesha007 Thinking lane, attach938,936,937 once in order, type the exact scene prompt, reverify cards and prompt hash, archive staging and one-shot Send intents, push and verify parity, then one initial Send per lane.",
+  "nextSafeAction": "Inspect these existing four provider sessions for outputs. Never resend their confirmed initial prompts. Preserve all visible gallery and internal original bytes, QA, then one ChatGPT edit invocation per selected technically valid source.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
-  "stagedAtUtc": "2026-09-07T06:44:27.620Z"
+  "stagedAtUtc": "2026-09-07T06:44:27.620Z",
+  "confirmedSubmissions": 4,
+  "providerUrls": [
+    "https://www.meta.ai/prompt/78712a62-f13c-4786-be88-927aaa03775c",
+    "https://www.meta.ai/prompt/7566518f-4cf1-4bd6-9ef4-8962f17b4b14",
+    "https://www.meta.ai/prompt/e5e88c77-0278-4da2-9f14-ce24975bb084",
+    "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc"
+  ],
+  "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-receipt.json",
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json"
 }

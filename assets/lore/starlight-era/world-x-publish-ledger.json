@@ -8,7 +8,7 @@
       2053,
       2054
     ],
-    "state": "four-composers-verified-not-sent",
+    "state": "four-initial-sends-confirmed-output-pending",
     "checkpoint": "assets/lore/starlight-era/batch-506-eritrea-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-506-eritrea-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-506-eritrea-fixed-rolls.json",
@@ -20,14 +20,23 @@
     ],
     "account": "leesha007",
     "mode": "Thinking",
-    "providerSendActivations": 0,
+    "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "previousWorkflowClosure": "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
-    "nextSafeAction": "Remote-verify frozen preparation. In each actual fresh leesha007 Thinking lane, attach938,936,937 once in order, type the exact scene prompt, reverify cards and prompt hash, archive staging and one-shot Send intents, push and verify parity, then one initial Send per lane.",
+    "nextSafeAction": "Inspect these existing four provider sessions for outputs. Never resend their confirmed initial prompts. Preserve all visible gallery and internal original bytes, QA, then one ChatGPT edit invocation per selected technically valid source.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
-    "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json"
+    "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
+    "confirmedSubmissions": 4,
+    "providerUrls": [
+      "https://www.meta.ai/prompt/78712a62-f13c-4786-be88-927aaa03775c",
+      "https://www.meta.ai/prompt/7566518f-4cf1-4bd6-9ef4-8962f17b4b14",
+      "https://www.meta.ai/prompt/e5e88c77-0278-4da2-9f14-ce24975bb084",
+      "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc"
+    ],
+    "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-receipt.json",
+    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json"
   },
   "currentCroatiaGeorgiaPairReservations505": {
     "batch": 505,

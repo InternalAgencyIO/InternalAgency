@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 506,
   "country": "Eritrea",
-  "state": "four-composers-staged-not-submitted",
+  "state": "four-initial-sends-confirmed-output-pending",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,11 +11,60 @@
     936,
     937
   ],
-  "providerSendActivations": 0,
+  "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
-  "occurrences": [],
+  "occurrences": [
+    {
+      "occurrenceId": "batch-506-scene-2051-initial",
+      "scene": 2051,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/scene-2051-initial-prompt.txt",
+      "promptSha256": "7FD09E9104A7499506A1D109B1B4F5A8879C4BE23E9BDF36242AE93A31709980",
+      "providerUrl": "https://www.meta.ai/prompt/78712a62-f13c-4786-be88-927aaa03775c",
+      "submittedAtUtc": "2026-09-07T06:46:39.265Z",
+      "state": "confirmed-submitted-output-pending",
+      "additionalInitialSendsAllowed": 0
+    },
+    {
+      "occurrenceId": "batch-506-scene-2052-initial",
+      "scene": 2052,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/scene-2052-initial-prompt.txt",
+      "promptSha256": "89190CC88441DB16053184DEFDC83B0762DB267E865FA9B38BFB5F778BCD5DAB",
+      "providerUrl": "https://www.meta.ai/prompt/7566518f-4cf1-4bd6-9ef4-8962f17b4b14",
+      "submittedAtUtc": "2026-09-07T06:46:39.448Z",
+      "state": "confirmed-submitted-output-pending",
+      "additionalInitialSendsAllowed": 0
+    },
+    {
+      "occurrenceId": "batch-506-scene-2053-initial",
+      "scene": 2053,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/scene-2053-initial-prompt.txt",
+      "promptSha256": "1F05C51EC4DBD0C8E0D2CD7AE3FDBCCB74417FC516E2A12391959B26054B3CDA",
+      "providerUrl": "https://www.meta.ai/prompt/e5e88c77-0278-4da2-9f14-ce24975bb084",
+      "submittedAtUtc": "2026-09-07T06:46:39.628Z",
+      "state": "confirmed-submitted-output-pending",
+      "additionalInitialSendsAllowed": 0
+    },
+    {
+      "occurrenceId": "batch-506-scene-2054-initial",
+      "scene": 2054,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/scene-2054-initial-prompt.txt",
+      "promptSha256": "C87938FBE82D97B9312E83CA1FA9ADF43B4F2FF80ADE96DE55F6EE48BCE7DD4B",
+      "providerUrl": "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc",
+      "submittedAtUtc": "2026-09-07T06:46:39.786Z",
+      "state": "confirmed-submitted-output-pending",
+      "additionalInitialSendsAllowed": 0
+    }
+  ],
   "stagedScenes": [
     {
       "scene": 2051,
@@ -69,7 +118,16 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": null,
-  "nextSafeAction": "Remote-verify frozen preparation. In each actual fresh leesha007 Thinking lane, attach938,936,937 once in order, type the exact scene prompt, reverify cards and prompt hash, archive staging and one-shot Send intents, push and verify parity, then one initial Send per lane.",
+  "nextSafeAction": "Inspect these existing four provider sessions for outputs. Never resend their confirmed initial prompts. Preserve all visible gallery and internal original bytes, QA, then one ChatGPT edit invocation per selected technically valid source.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
-  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json"
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
+  "confirmedSubmissions": 4,
+  "providerUrls": [
+    "https://www.meta.ai/prompt/78712a62-f13c-4786-be88-927aaa03775c",
+    "https://www.meta.ai/prompt/7566518f-4cf1-4bd6-9ef4-8962f17b4b14",
+    "https://www.meta.ai/prompt/e5e88c77-0278-4da2-9f14-ce24975bb084",
+    "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc"
+  ],
+  "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-receipt.json",
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-remote-preflight.json"
 }
