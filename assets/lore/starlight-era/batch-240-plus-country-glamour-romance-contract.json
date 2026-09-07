@@ -16,8 +16,8 @@
       2041,
       2042
     ],
-    "state": "kuwait-panama-eight-stills-published-terminal",
-    "checkpoint": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
+    "state": "eight-stills-two-publications-closed-next-country-ready",
+    "checkpoint": "assets/lore/starlight-era/batch-503-kuwait-panama-full-workflow-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-503-panama-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-503-panama/provider-ledger.json",
@@ -64,7 +64,10 @@
       2044,
       2045,
       2046
-    ]
+    ],
+    "browserHandoff": "assets/lore/starlight-era/batch-503-panama-visible-browser-handoff.json",
+    "logAudit": "assets/lore/starlight-era/provider-evidence/batch-503-panama/continuation-log-audit-2026-09-07.json",
+    "allSceneVersionsConsumed": true
   },
   "currentXStaging20260907Batch501P2": {
     "state": "terminal-published-live-verified",
@@ -385,8 +388,8 @@
     "olderManualAuditComplete": true,
     "backlogFullyCleared": false,
     "browserState": "Four current Meta recovery previews, one empty X composer, and one explicitly authorized protected Oman native-image tab.",
-    "nextSafeAction": "Remote-verify exact prepared prompts; attach unique anchors938,936,937 in order through visible controls and verify cards, exact prompt and Thinking. Archive and remote-verify staging, report the next safe action, then one initial Send per lane.",
-    "continuationCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json",
+    "nextSafeAction": "After final closure parity, reconcile current countryPriorityOrder and all existing scene ledgers, then prepare the next unrendered Croatia batch with immutable rolls, exact938/936/937 anchors and Thinking in the four visible Meta lanes. Do not reuse historical Croatia scenes or any version of scenes2035-2042.",
+    "continuationCheckpoint": "assets/lore/starlight-era/batch-503-kuwait-panama-full-workflow-closure-checkpoint.json",
     "olderManualAuditReviewedPosts": 234,
     "olderManualAuditUnreviewedPosts": 0,
     "olderManualAuditNextUrl": null,
@@ -461,7 +464,7 @@
       "https://x.com/dogramaci/status/2096742886423323045",
       "https://x.com/dogramaci/status/2096744477947838578"
     ],
-    "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/browser-final-handoff.json",
+    "browserHandoff": "assets/lore/starlight-era/batch-503-panama-visible-browser-handoff.json",
     "legacyPartialExceptionFullyConsumed": true,
     "legacyPartialPublishedPostCount": 2,
     "legacyPartialPublishedStillCount": 4,
@@ -472,7 +475,7 @@
     "omanRecoveryDeferral": "assets/lore/starlight-era/batch-499-oman-explicit-deferral-and-batch-500-advance-checkpoint.json",
     "activeRenderBatch": 502,
     "activeRenderCountry": "Kuwait",
-    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-editorial-prompts-prepared-checkpoint.json",
+    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-503-kuwait-panama-full-workflow-closure-checkpoint.json",
     "activeRenderState": "four-prompts-prepared-offline-not-dispatched",
     "activeRenderSelection": null,
     "activeRenderArchiveHold": null,
@@ -486,7 +489,12 @@
       2029,
       2033,
       2034
-    ]
+    ],
+    "latestVerifiedXUrls": [
+      "https://x.com/dogramaci/status/2096817272954274251",
+      "https://x.com/dogramaci/status/2096819256474153115"
+    ],
+    "renderDispatchHintsSupersededBy": "currentAuthorityBatch503"
   },
   "currentTerminalAuthority20260906Batch499": {"state":"terminal-retry-ceiling-exhausted-three-selected-one-hard-held-archive-incomplete","path":"assets/lore/starlight-era/batch-499-oman-terminal-partial-archive-checkpoint.json","selectedSceneIds":[2023,2025,2026],"hardHeldSceneIds":[2024],"retryAllowanceExhausted":true,"publicationEligible":false,"latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","nextSafeAction":"Stop provider retry and X publication for Oman. Preserve the native media and terminal page for manual recovery of internal image bytes. User must supply an anchor-correct 2024 candidate or explicitly revise the bounded repair workflow before further attempts. Keep pending X composer blank."},
   "currentMetaFinalRetry20260906Batch499": {"checkpoint":"assets/lore/starlight-era/batch-499-oman-final-identity-retry-preflight-checkpoint.json","state":"three-single-passes-consumed-final-identity-retry-staged-secondary-raw-gap","latestVerifiedXUrl":"https://x.com/dogramaci/status/2096609769708519655","xPublicationEligible":false,"nextSafeAction":"Remote-verify the final retry staging and activate Send once after a fresh exact account/prompt/anchor check. Preserve the result, no third retry. Obtain missing internal Meta bytes through supported manual download before Oman publication."},

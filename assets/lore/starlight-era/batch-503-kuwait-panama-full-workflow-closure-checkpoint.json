@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "batch": 503,
+  "batches": [
+    502,
+    503
+  ],
+  "countries": [
+    "Kuwait",
+    "Panama"
+  ],
+  "closedAtUtc": "2026-09-07T04:42:18.709Z",
+  "state": "eight-stills-two-publications-closed-next-country-ready",
+  "sceneIds": [
+    2035,
+    2036,
+    2037,
+    2038,
+    2039,
+    2040,
+    2041,
+    2042
+  ],
+  "xPostCount": 234,
+  "postUrls": [
+    "https://x.com/dogramaci/status/2096817272954274251",
+    "https://x.com/dogramaci/status/2096819256474153115"
+  ],
+  "xReceipts": [
+    "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-publication-receipt.json",
+    "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p2-x-publication-receipt.json"
+  ],
+  "reservations": [
+    "assets/lore/starlight-era/batch-503-kuwait-panama-p1-x-reservation.json",
+    "assets/lore/starlight-era/batch-503-kuwait-panama-p2-x-reservation.json"
+  ],
+  "selectedManifests": [
+    "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/accepted-selections.json",
+    "assets/lore/starlight-era/provider-evidence/batch-503-panama/accepted-selections.json"
+  ],
+  "providerLedgers": [
+    "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
+    "assets/lore/starlight-era/provider-evidence/batch-503-panama/provider-ledger.json"
+  ],
+  "rawArchiveComplete": true,
+  "missingObservedOriginals": 0,
+  "totalSavedProviderAndEditFiles": 40,
+  "uniqueSavedMediaHashes": 32,
+  "panama": {
+    "metaSends": 4,
+    "assistantRetries": 0,
+    "metaRawFiles": 19,
+    "uniqueMetaRawHashes": 15,
+    "chatgptInvocations": 4,
+    "chatgptReturnedFiles": 4,
+    "totalSavedMediaFiles": 23
+  },
+  "kuwait": {
+    "terminal": true,
+    "noMoreEditsOrRenders": true,
+    "savedMediaFiles": 17
+  },
+  "archiveExceptions": [],
+  "allSceneVersionsConsumed": true,
+  "exactAltDescriptionsVerified": 8,
+  "madeWithAiVerifiedBothPosts": true,
+  "remoteMediaVerification": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
+  "closureSnapshots": [
+    "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/closure-evidence-manifest.json",
+    "assets/lore/starlight-era/provider-evidence/batch-503-panama/closure-evidence-manifest.json"
+  ],
+  "browserHandoff": "assets/lore/starlight-era/batch-503-panama-visible-browser-handoff.json",
+  "guardianAuthorization": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+  "logAudit": "assets/lore/starlight-era/provider-evidence/batch-503-panama/continuation-log-audit-2026-09-07.json",
+  "rollTests": {
+    "command": "node --test scripts/starlight/editorial-rolls.test.cjs",
+    "passed": 5,
+    "failed": 0,
+    "probabilitiesChanged": false
+  },
+  "next": {
+    "country": "Croatia",
+    "proposedBatch": 504,
+    "proposedScenes": [
+      2043,
+      2044,
+      2045,
+      2046
+    ],
+    "countryQueueVerifiedFrom": "assets/lore/starlight-era/world-195x4-campaign.json",
+    "sequence": [
+      "Kuwait",
+      "Panama",
+      "Croatia",
+      "Georgia",
+      "Eritrea"
+    ],
+    "preparationExists": false,
+    "requiresFreshAuthorityAccountPromptRollAnchorAndRemoteChecks": true
+  },
+  "canonicalContradictionResolution": [
+    "Historical Cuba/Tanzania dispatch hints are superseded by current remote-verified country checkpoints.",
+    "Older absent-guardian and no-new-guardian records remain historical; the newest narrow explicit authorization permits exactly the existing single Starlight guardian.",
+    "Oman and Switzerland remain held; the extra Oman native tab is a specific preserved-evidence exception, not permission for general tab clutter.",
+    "Old unpublished Kuwait/Panama selection flags have been reconciled to consumed in both accepted manifests and provider ledgers."
+  ],
+  "nextSafeAction": "After final closure parity, reconcile current countryPriorityOrder and all existing scene ledgers, then prepare the next unrendered Croatia batch with immutable rolls, exact938/936/937 anchors and Thinking in the four visible Meta lanes. Do not reuse historical Croatia scenes or any version of scenes2035-2042."
+}
