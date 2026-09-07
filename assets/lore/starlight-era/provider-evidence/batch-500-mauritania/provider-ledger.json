@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "batch": 500,
+  "country": "Mauritania",
+  "state": "four-composers-staged-zero-submission",
+  "provider": "Meta AI",
+  "account": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "providerSendActivations": 0,
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "occurrences": [],
+  "stagedScenes": [
+    {
+      "scene": 2027,
+      "tabId": "24",
+      "occurrence": 1,
+      "promptSha256": "739E2CF141B79EB24F6671D5675DB9F945E0142565DAE3A1F682A8824D4AFD99",
+      "maximumInitialSendActivations": 1,
+      "observedSendActivations": 0,
+      "doNotRepeatIfUncertain": true
+    },
+    {
+      "scene": 2028,
+      "tabId": "25",
+      "occurrence": 1,
+      "promptSha256": "DFCB289EF518C67ACCD911A3EC69E2E16E44A910510132204E795B10C24DCD01",
+      "maximumInitialSendActivations": 1,
+      "observedSendActivations": 0,
+      "doNotRepeatIfUncertain": true
+    },
+    {
+      "scene": 2029,
+      "tabId": "26",
+      "occurrence": 1,
+      "promptSha256": "7865E6A3D2B5109EF75370429B0BFFCA4AFD18BED6FBF3C16806EA5C78D84A79",
+      "maximumInitialSendActivations": 1,
+      "observedSendActivations": 0,
+      "doNotRepeatIfUncertain": true
+    },
+    {
+      "scene": 2030,
+      "tabId": "27",
+      "occurrence": 1,
+      "promptSha256": "B5E3DCB55DF054B2C8D140B6E6132D8550C6F679DC7DC1FB6241056081942204",
+      "maximumInitialSendActivations": 1,
+      "observedSendActivations": 0,
+      "doNotRepeatIfUncertain": true
+    }
+  ],
+  "currentCheckpoint": "assets/lore/starlight-era/batch-500-mauritania-four-meta-composers-staged-checkpoint.json",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/four-composers-staging-evidence.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/initial-send-intents.json",
+  "maximumHardFailureRetriesPerScene": 2,
+  "aestheticRetries": 0,
+  "nextSafeAction": "After fresh branch, origin and PR13 equality, report verified state and activate exactly one Send on each currently staged scene2027-2030 composer. Record each activation immediately, never repeat an uncertain or confirmed send. Oman remains terminal and deferred; no X post until source, QA, single-edit, accessibility and duplicate gates pass."
+}
