@@ -10,7 +10,7 @@
     "Georgia"
   ],
   "part": 2,
-  "state": "staged-ready-awaiting-remote-parity",
+  "state": "posted-verified-terminal",
   "preparedAtUtc": "2026-09-07T05:59:48.953Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -213,8 +213,8 @@
     ]
   },
   "madeWithAiRequired": true,
-  "postClicks": 0,
-  "publicTransmissionCount": 0,
+  "postClicks": 1,
+  "publicTransmissionCount": 1,
   "uploadCount": 1,
   "archiveExceptions": [],
   "rawArchiveComplete": true,
@@ -359,9 +359,14 @@
     "assets/lore/starlight-era/provider-evidence/batch-504-croatia/final-remote-closure-verification.json",
     "assets/lore/starlight-era/provider-evidence/batch-505-georgia/final-remote-closure-verification.json"
   ],
-  "nextSafeAction": "Verify staging commit, branch and PR parity, then exactly one Post activation. Immediately reconcile and preserve the actual public URL; no reupload or blind retry.",
+  "nextSafeAction": "No further upload or Post for this reservation or any version of its four scene families. Both Croatia/Georgia posts are terminal; use the full workflow closure checkpoint.",
   "noRepostAnyVersion": true,
   "stagedAtUtc": "2026-09-07T06:13:59.787Z",
   "staging": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p2-x-staging-proof.json",
-  "oneShotIntent": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p2-x-post-intent.json"
+  "oneShotIntent": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p2-x-post-intent.json",
+  "postUrl": "https://x.com/dogramaci/status/2096844847223095525",
+  "publicationCheckpoint": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/croatia-georgia-p2-x-publication-receipt.json",
+  "additionalActivationsAllowed": 0,
+  "postedAtUtc": "2026-09-07T06:15:43.092Z",
+  "verifiedAtUtc": "2026-09-07T06:16:56.377Z"
 }
