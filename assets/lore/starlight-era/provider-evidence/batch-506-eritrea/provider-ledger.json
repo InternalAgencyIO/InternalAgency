@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 506,
   "country": "Eritrea",
-  "state": "prepared-not-submitted",
+  "state": "four-composers-staged-not-submitted",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -16,7 +16,52 @@
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
   "occurrences": [],
-  "stagedScenes": [],
+  "stagedScenes": [
+    {
+      "scene": 2051,
+      "tabId": "24",
+      "promptSha256": "7FD09E9104A7499506A1D109B1B4F5A8879C4BE23E9BDF36242AE93A31709980",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 0
+    },
+    {
+      "scene": 2052,
+      "tabId": "25",
+      "promptSha256": "89190CC88441DB16053184DEFDC83B0762DB267E865FA9B38BFB5F778BCD5DAB",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 0
+    },
+    {
+      "scene": 2053,
+      "tabId": "26",
+      "promptSha256": "1F05C51EC4DBD0C8E0D2CD7AE3FDBCCB74417FC516E2A12391959B26054B3CDA",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 0
+    },
+    {
+      "scene": 2054,
+      "tabId": "27",
+      "promptSha256": "C87938FBE82D97B9312E83CA1FA9ADF43B4F2FF80ADE96DE55F6EE48BCE7DD4B",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 0
+    }
+  ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-506-eritrea-prepared-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-506-eritrea-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-506-eritrea-fixed-rolls.json",
@@ -24,5 +69,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": null,
-  "nextSafeAction": "Remote-verify frozen preparation. In each actual fresh leesha007 Thinking lane, attach938,936,937 once in order, type the exact scene prompt, reverify cards and prompt hash, archive staging and one-shot Send intents, push and verify parity, then one initial Send per lane."
+  "nextSafeAction": "Remote-verify frozen preparation. In each actual fresh leesha007 Thinking lane, attach938,936,937 once in order, type the exact scene prompt, reverify cards and prompt hash, archive staging and one-shot Send intents, push and verify parity, then one initial Send per lane.",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json"
 }

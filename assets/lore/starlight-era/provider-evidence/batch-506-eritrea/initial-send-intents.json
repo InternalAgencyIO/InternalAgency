@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "batch": 506,
+  "state": "staged-awaiting-remote-parity-then-one-send-each",
+  "createdAtUtc": "2026-09-07T06:44:27.620Z",
+  "staging": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
+  "maximumInitialActivationsPerScene": 1,
+  "additionalBlindActivationsAllowed": 0,
+  "scenes": [
+    {
+      "scene": 2051,
+      "tabId": "24",
+      "promptSha256": "7FD09E9104A7499506A1D109B1B4F5A8879C4BE23E9BDF36242AE93A31709980",
+      "activationCount": 0,
+      "state": "not-activated",
+      "providerUrl": null
+    },
+    {
+      "scene": 2052,
+      "tabId": "25",
+      "promptSha256": "89190CC88441DB16053184DEFDC83B0762DB267E865FA9B38BFB5F778BCD5DAB",
+      "activationCount": 0,
+      "state": "not-activated",
+      "providerUrl": null
+    },
+    {
+      "scene": 2053,
+      "tabId": "26",
+      "promptSha256": "1F05C51EC4DBD0C8E0D2CD7AE3FDBCCB74417FC516E2A12391959B26054B3CDA",
+      "activationCount": 0,
+      "state": "not-activated",
+      "providerUrl": null
+    },
+    {
+      "scene": 2054,
+      "tabId": "27",
+      "promptSha256": "C87938FBE82D97B9312E83CA1FA9ADF43B4F2FF80ADE96DE55F6EE48BCE7DD4B",
+      "activationCount": 0,
+      "state": "not-activated",
+      "providerUrl": null
+    }
+  ],
+  "retryPolicy": "Only a confirmed hard failure can receive a separately frozen and documented safe retry, maximum two per scene. Never repeat a confirmed or uncertain initial Send."
+}
