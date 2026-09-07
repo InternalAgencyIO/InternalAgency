@@ -1,7 +1,7 @@
 {
   "currentKuwaitPanamaPairReservations503": {
     "batch": 503,
-    "state": "two-disjoint-posts-reserved",
+    "state": "part1-published-part2-reserved",
     "reservations": [
       "assets/lore/starlight-era/batch-503-kuwait-panama-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-503-kuwait-panama-p2-x-reservation.json"
@@ -20,11 +20,14 @@
         2042
       ]
     ],
-    "confirmedPosts": 0,
+    "confirmedPosts": 1,
+    "postUrls": [
+      "https://x.com/dogramaci/status/2096817272954274251"
+    ],
     "accountRequired": "@dogramaci",
     "rawArchiveComplete": true,
     "noRepostAnyVersion": true,
-    "updatedAtUtc": "2026-09-07T04:15:04.414Z"
+    "updatedAtUtc": "2026-09-07T04:28:13.858Z"
   },
   "currentGuardianAuthorization20260907": {
     "id": "starlight-pipeline-guardian",
@@ -43,7 +46,7 @@
       2041,
       2042
     ],
-    "state": "terminal-four-stills-selected-raw-archive-complete",
+    "state": "part1-published-part2-reserved",
     "checkpoint": "assets/lore/starlight-era/batch-503-panama-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-503-panama-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-503-panama-fixed-rolls.json",
@@ -59,7 +62,7 @@
     "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "nextSafeAction": "Verify final closure remotely, then publish two reserved disjoint2+2 Kuwait-Panama posts with exact ALT and AI disclosure. No further rendering or editing for these scenes.",
+    "nextSafeAction": "Stage and publish disjoint part2 after live account, four ALT, AI disclosure, duplicate and action-time Git/PR parity checks. All rendering and edits remain terminal.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/four-composers-staging-evidence.json",
     "confirmedSubmissions": 4,
     "providerUrls": [
@@ -78,7 +81,11 @@
     "finalQa": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-selection-qa.json",
     "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-503-panama/closure-evidence-manifest.json",
     "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json",
-    "noFurtherInvocations": true
+    "noFurtherInvocations": true,
+    "xPostCount": 233,
+    "publishedXUrls": [
+      "https://x.com/dogramaci/status/2096817272954274251"
+    ]
   },
   "currentXStaging20260907Batch501P2": {
     "state": "terminal-published-live-verified",
@@ -13253,6 +13260,344 @@
         "activation": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-post-activation-receipt.json"
       },
       "duplicateGate": "Never attach or publish scenes2028,2029,2033,2034 or any alternate versions again.",
+      "uploadCount": 1
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 503,
+      "batches": [
+        502,
+        503
+      ],
+      "countries": [
+        "Kuwait",
+        "Panama"
+      ],
+      "part": 1,
+      "sceneIds": [
+        2035,
+        2036,
+        2039,
+        2040
+      ],
+      "imageNumbers": [
+        2035,
+        2036,
+        2039,
+        2040
+      ],
+      "state": "posted-verified",
+      "postUrl": "https://x.com/dogramaci/status/2096817272954274251",
+      "postedAt": "2026-09-07T04:26:08.145Z",
+      "verifiedAt": "2026-09-07T04:28:13.858Z",
+      "caption": "Kuwait ❤️ Panama: waterfront lights and courtyard warmth meet Casco Antiguo and the Canal. Linked hands, close glances, flag minis and sculptural heels. Fictional AI fashion. #RAZE #WorldXXXSeries",
+      "captionSha256": "f562bbbe37e073d38640c59383bad5ea46d622f0a39f43ada48087a9c2c681f9",
+      "hashtags": [
+        "#RAZE",
+        "#WorldXXXSeries"
+      ],
+      "assets": [
+        {
+          "scene": 2035,
+          "country": "Kuwait",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-meta-internal-1-original.webp",
+          "sha256": "95f7874b2f73ee84687c3fbdf14bde26df59594161560e08da74ba6e48068b4e",
+          "bytes": 485732,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/f0a471a2-ad43-489f-94bc-dedcd5934fe8",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "output-moderation-blocked-no-bytes",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "eligible-unpublished-companion",
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women seated closely on blue cushions beside a waterfront at dusk, with the Kuwait Towers in the background. A braided woman in a pearl-white outfit with turquoise circular panels rests her head near a blonde woman's shoulder. Two women wear green, white, red and black cropped outfits; the fourth wears a copper beaded mini. Small star tattoos and RAZE marks appear, with white boots, blue pumps and rainbow platform heels partly visible.",
+          "uploadIndex": 1
+        },
+        {
+          "scene": 2036,
+          "country": "Kuwait",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-meta-gallery-original.webp",
+          "sha256": "6aef51299ed6563dd0c9290a4a5b975557da877fb65710fd7f704ec2a255e9c7",
+          "bytes": 544442,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/04c62bdb-cc5e-4596-a8fe-ce030473f5d1",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "output-moderation-blocked-no-bytes",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "eligible-unpublished-companion",
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women sharing a hand clasp on staggered cushioned seats in a pale stone courtyard with carved wooden doors and pointed arches. A braided woman in an emerald mini faces a blonde woman in an ivory one-shoulder outfit. The other two lean toward them in a violet top with a black skirt and a bronze mini with blue geometric seams. Rose, GRD and scorpion tattoos, rainbow pumps and platforms, and bronze knee-high boots add variety.",
+          "uploadIndex": 2
+        },
+        {
+          "scene": 2039,
+          "country": "Panama",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-chatgpt-single-tailoring-pass.png",
+          "sha256": "a5d0deae83b67dc96637abd9cce05f4c312a7712958eb92eb516919195720644",
+          "bytes": 2280701,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "providerUrl": "https://www.meta.ai/prompt/2c11ada4-b743-4ea6-9972-11228bcb21bf",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-2-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women smiling and clasping hands on cushioned seats in a pale stone courtyard overlooking a bay with boats. A braided woman wears an ivory mini with coral seams and a waist cutout. Beside her, a blonde woman wears a cobalt cropped top, white mini skort and blue knee-high boots. A woman in a coral mini leans over them, and a fourth wears a red, white and blue quartered Panama flag dress with two stars and turquoise boots.",
+          "uploadIndex": 3
+        },
+        {
+          "scene": 2040,
+          "country": "Panama",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-chatgpt-single-tailoring-pass.png",
+          "sha256": "fa3c4a62867d0d93239c93dd4a7bbe19298e7abe1048f8a2ac70129c4603949a",
+          "bytes": 2300252,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "providerUrl": "https://www.meta.ai/prompt/63430413-527b-4faf-b442-9c126eafa689",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-4-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women grouped closely on green cushions above canal locks in a diagonally framed view. A braided woman in a teal open-back mini faces a blonde woman in an ivory pearl-trimmed one-shoulder outfit with blue folds and a waist cutout. Another wears a quartered Panama flag mini, while the fourth leans in wearing copper with teal zigzag trim. Outstretched hands, shoulder contact, star tattoos and small agency and RAZE marks are visible.",
+          "uploadIndex": 4
+        }
+      ],
+      "photoEndpoints": [
+        {
+          "scene": 2035,
+          "index": 1,
+          "url": "https://x.com/dogramaci/status/2096817272954274251/photo/1",
+          "alt": "AI-generated fashion editorial of four fictional adult women seated closely on blue cushions beside a waterfront at dusk, with the Kuwait Towers in the background. A braided woman in a pearl-white outfit with turquoise circular panels rests her head near a blonde woman's shoulder. Two women wear green, white, red and black cropped outfits; the fourth wears a copper beaded mini. Small star tattoos and RAZE marks appear, with white boots, blue pumps and rainbow platform heels partly visible."
+        },
+        {
+          "scene": 2036,
+          "index": 2,
+          "url": "https://x.com/dogramaci/status/2096817272954274251/photo/2",
+          "alt": "AI-generated fashion editorial of four fictional adult women sharing a hand clasp on staggered cushioned seats in a pale stone courtyard with carved wooden doors and pointed arches. A braided woman in an emerald mini faces a blonde woman in an ivory one-shoulder outfit. The other two lean toward them in a violet top with a black skirt and a bronze mini with blue geometric seams. Rose, GRD and scorpion tattoos, rainbow pumps and platforms, and bronze knee-high boots add variety."
+        },
+        {
+          "scene": 2039,
+          "index": 3,
+          "url": "https://x.com/dogramaci/status/2096817272954274251/photo/3",
+          "alt": "AI-generated fashion editorial of four fictional adult women smiling and clasping hands on cushioned seats in a pale stone courtyard overlooking a bay with boats. A braided woman wears an ivory mini with coral seams and a waist cutout. Beside her, a blonde woman wears a cobalt cropped top, white mini skort and blue knee-high boots. A woman in a coral mini leans over them, and a fourth wears a red, white and blue quartered Panama flag dress with two stars and turquoise boots."
+        },
+        {
+          "scene": 2040,
+          "index": 4,
+          "url": "https://x.com/dogramaci/status/2096817272954274251/photo/4",
+          "alt": "AI-generated fashion editorial of four fictional adult women grouped closely on green cushions above canal locks in a diagonally framed view. A braided woman in a teal open-back mini faces a blonde woman in an ivory pearl-trimmed one-shoulder outfit with blue folds and a waist cutout. Another wears a quartered Panama flag mini, while the fourth leans in wearing copper with teal zigzag trim. Outstretched hands, shoulder contact, star tattoos and small agency and RAZE marks are visible."
+        }
+      ],
+      "mediaMode": "four-stills-two-countries-2-plus-2",
+      "buttonActivationAttempts": 1,
+      "successfulMethod": "Post.press(Enter)",
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 4,
+      "stagingCommit": "5ed5bdff497328c5eba0f55d8f2012f034fe155a",
+      "archiveExceptions": [],
+      "rawArchiveComplete": true,
+      "missingInternalOriginalsByCountry": {
+        "Kuwait": 0,
+        "Panama": 0
+      },
+      "evidence": [
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-staging-proof.json",
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-publication-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-published-visible.jpg",
+        "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json"
+      ],
+      "duplicateGate": {
+        "allVersionsChecked": 40,
+        "noRepostSceneFamilies": [
+          2035,
+          2036,
+          2039,
+          2040
+        ],
+        "consumedVersions": [
+          {
+            "scene": 2035,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-meta-gallery-original.webp",
+            "sha256": "d381a23c1f8090b21fff71c23abf7a436cf73d2f1a92eb186299d8b46d24a066"
+          },
+          {
+            "scene": 2036,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-meta-gallery-original.webp",
+            "sha256": "6aef51299ed6563dd0c9290a4a5b975557da877fb65710fd7f704ec2a255e9c7"
+          },
+          {
+            "scene": 2035,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-meta-internal-1-original.webp",
+            "sha256": "95f7874b2f73ee84687c3fbdf14bde26df59594161560e08da74ba6e48068b4e"
+          },
+          {
+            "scene": 2035,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-meta-internal-2-original.webp",
+            "sha256": "d381a23c1f8090b21fff71c23abf7a436cf73d2f1a92eb186299d8b46d24a066"
+          },
+          {
+            "scene": 2036,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-meta-internal-1-original.webp",
+            "sha256": "6aef51299ed6563dd0c9290a4a5b975557da877fb65710fd7f704ec2a255e9c7"
+          },
+          {
+            "scene": 2039,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-1-original.webp",
+            "sha256": "ecdffea3fdd098da8bc2381f9fb3ae30c75761cdf9d9b3519ad656a327871d9e"
+          },
+          {
+            "scene": 2039,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-2-original.webp",
+            "sha256": "d43c246d5bcc31c54efb93a950f009434f5bee58affea588f34a81dd4514e9ec"
+          },
+          {
+            "scene": 2039,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-3-original.webp",
+            "sha256": "28bf446d5ae21c3ecfc64276b865a004c4d95e8dcc14f968df2f5d945c56bd80"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-1-original.webp",
+            "sha256": "2dcf4278d9755af1e36904fd61fdec064b96ff22f407b617add8e418024ede31"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-2-original.webp",
+            "sha256": "d2415e58cf1387972baad781652beea8bca08a35eeb2133aec57d39dfa714422"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-3-original.webp",
+            "sha256": "e209c1d012d989738712b848c5b200715ec42e23e79c3ff1ed7e42f469e05f6c"
+          },
+          {
+            "scene": 2039,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-gallery-original.webp",
+            "sha256": "c5042dff12ef4676a1bf6a751709b89e1ca8f2d8c85b57a83f82d22820f0b332"
+          },
+          {
+            "scene": 2039,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-4-original.webp",
+            "sha256": "1316e0f3e3ab3730f9ca4aec2590c85d9cc1a5a358216cab2523530a8a18ccef"
+          },
+          {
+            "scene": 2039,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-meta-internal-5-original.webp",
+            "sha256": "c5042dff12ef4676a1bf6a751709b89e1ca8f2d8c85b57a83f82d22820f0b332"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-gallery-original.jpg",
+            "sha256": "e90aa2377d162eff2dd7c3b2d58f3d3ceea206b747f978a20186a43288724719"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-4-original.webp",
+            "sha256": "984ece09c3f69a9bf91ebcb6195ccb641c602bbc369d6a7bb48d9ac92680a787"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-5-original.webp",
+            "sha256": "d2ef5822cbeb406c1315f1e3b1112344539794cd6d9d40e6d994af147d30a9c3"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-6-original.jpg",
+            "sha256": "e29ed390d42e8efc02683fba12230c54163aa5d7ab9018fa5cba28144531ac2e"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-7-original.jpg",
+            "sha256": "802cffba7d2fe3e7730d04a9af1bc8d32067d48fe66b3606363a1362ca39f587"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-meta-internal-8-original.jpg",
+            "sha256": "e90aa2377d162eff2dd7c3b2d58f3d3ceea206b747f978a20186a43288724719"
+          },
+          {
+            "scene": 2039,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2039-chatgpt-single-tailoring-pass.png",
+            "sha256": "a5d0deae83b67dc96637abd9cce05f4c312a7712958eb92eb516919195720644"
+          },
+          {
+            "scene": 2040,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-503-panama/2040-chatgpt-single-tailoring-pass.png",
+            "sha256": "fa3c4a62867d0d93239c93dd4a7bbe19298e7abe1048f8a2ac70129c4603949a"
+          }
+        ],
+        "noRepostAnyVersion": true
+      },
       "uploadCount": 1
     }
   ],

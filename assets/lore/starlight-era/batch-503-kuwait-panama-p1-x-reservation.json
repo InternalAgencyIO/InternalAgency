@@ -10,7 +10,7 @@
     "Panama"
   ],
   "part": 1,
-  "state": "single-post-activation-intent-locked-reconcile-before-retry",
+  "state": "published-verified-terminal-no-repost",
   "preparedAtUtc": "2026-09-07T04:15:04.413Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -203,8 +203,8 @@
     ]
   },
   "madeWithAiRequired": true,
-  "postClicks": 0,
-  "publicTransmissionCount": 0,
+  "postClicks": 1,
+  "publicTransmissionCount": 1,
   "uploadCount": 1,
   "archiveExceptions": [],
   "rawArchiveComplete": true,
@@ -228,7 +228,7 @@
     "Switzerland"
   ],
   "remoteParityCommitBeforeReservation": "5081ec352b470b7991f9065544b64e6692706c6f",
-  "nextSafeAction": "After fresh remote byte verification and branch/PR parity, stage exactly these four images, exact caption and four ALTs, enable Made with AI, then one Post activation. Reconcile live URL before any repeat.",
+  "nextSafeAction": "Never resend this post or any version of its four scenes. Continue disjoint part2 only.",
   "noRepostAnyVersion": true,
   "staging": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-staging-proof.json",
   "liveAccount": {
@@ -242,7 +242,11 @@
     "lockedAtUtc": "2026-09-07T04:25:01.598Z",
     "method": "visible Post button keyboard Enter",
     "maximumActivations": 1,
-    "confirmedActivations": 0,
+    "confirmedActivations": 1,
     "rule": "If interrupted or uncertain, inspect live profile, home and exact caption/media before any further action. Never infer failure from delayed navigation."
-  }
+  },
+  "postUrl": "https://x.com/dogramaci/status/2096817272954274251",
+  "postedAtUtc": "2026-09-07T04:26:08.145Z",
+  "verifiedAtUtc": "2026-09-07T04:28:13.858Z",
+  "publicationCheckpoint": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-publication-receipt.json"
 }
