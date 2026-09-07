@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 502,
-  "state": "three-single-edits-prepared-not-invoked",
+  "state": "three-terminal-results-fourth-safe-edit-prepared",
   "createdAtUtc": "2026-09-07T02:58:22.964Z",
   "sourceArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-source-qa.json",
@@ -27,8 +27,15 @@
         "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
         "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
       ],
-      "invocations": 0,
-      "state": "prepared-not-invoked"
+      "invocations": 1,
+      "state": "moderation-blocked-terminal-no-retry",
+      "dispatchLockedAtUtc": "2026-09-07T03:03:37.293Z",
+      "noSecondInvocation": true,
+      "invocationStartedAtUtc": "2026-09-07T03:04:14.078Z",
+      "invocationCompletedAtUtc": "2026-09-07T03:06:39.486Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/first-three-chatgpt-single-edit-results.json",
+      "allowanceConsumed": true,
+      "output": null
     },
     {
       "scene": 2036,
@@ -44,8 +51,15 @@
         "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
         "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
       ],
-      "invocations": 0,
-      "state": "prepared-not-invoked"
+      "invocations": 1,
+      "state": "moderation-blocked-terminal-no-retry",
+      "dispatchLockedAtUtc": "2026-09-07T03:03:37.293Z",
+      "noSecondInvocation": true,
+      "invocationStartedAtUtc": "2026-09-07T03:04:14.078Z",
+      "invocationCompletedAtUtc": "2026-09-07T03:08:57.521Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/first-three-chatgpt-single-edit-results.json",
+      "allowanceConsumed": true,
+      "output": null
     },
     {
       "scene": 2037,
@@ -61,8 +75,44 @@
         "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
         "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
       ],
+      "invocations": 1,
+      "state": "image-returned-terminal-no-retry",
+      "dispatchLockedAtUtc": "2026-09-07T03:03:37.293Z",
+      "noSecondInvocation": true,
+      "invocationStartedAtUtc": "2026-09-07T03:04:14.078Z",
+      "invocationCompletedAtUtc": "2026-09-07T03:11:09.642Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/first-three-chatgpt-single-edit-results.json",
+      "allowanceConsumed": true,
+      "output": {
+        "scene": 2037,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-chatgpt-single-tailoring-pass.png",
+        "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-b407d2f5-c8b8-4a32-aac2-8f8d2aa765b7.png",
+        "bytes": 2205107,
+        "sha256": "b417936d99bf3f4ed0ed05a3be0970ceec4ff53e57e99ba7887e3122b6739196",
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        }
+      }
+    },
+    {
+      "scene": 2038,
+      "occurrence": 2,
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-meta-internal-4-original.webp",
+      "sourceSha256": "ec75849a6eff1e50f9848f7f5e61f68d9a284c05571e55a0665660d8061e576c",
+      "invocationPromptPath": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-safe-chatgpt-exact-invocation-prompt.txt",
+      "prompt": "Use case: identity-preserve. Image 1 is the only edit target. Images 2, 3 and 4 are the project-owned fictional face continuity references 938, 936 and 937, not clothing or pose targets. All four subjects are fictional adults age 21. Make one restrained, clothing-only editorial tailoring edit to the existing image: shorten the existing skirt and dress hems by about 2 to 3 centimetres, keeping them wearable at mid-thigh with secure opaque coverage in their existing seated and standing poses. Preserve the high necklines, closed backs and fully covered midriffs. Keep all four faces, hairstyles, skin tones, adult proportions, expressions, affectionate side hug and hand contacts exactly as in the source. Preserve the existing camera crop, perspective, natural diagonal composition, wetland setting, light, dress color blocking, pearl details, agency and silent king arm tattoos, and visible footwear. Do not recreate a complete flag, add branding, reveal a back or midriff, add a disaster scene, turn the bodies, change the crop, or add border wedges. This is a nonsexual fashion catalogue edit with no nudity or exposure. Output one image only.",
+      "promptSha256": "CB5314CFC04B5B52650D46302E16124ED794B9872A7E95994E6844DD8E89D020",
+      "referencePaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-meta-internal-4-original.webp",
+        "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
       "invocations": 0,
-      "state": "prepared-not-invoked"
+      "state": "prepared-awaiting-remote-parity",
+      "noSecondInvocation": true,
+      "safetyFallbackRetained": true
     }
   ]
 }

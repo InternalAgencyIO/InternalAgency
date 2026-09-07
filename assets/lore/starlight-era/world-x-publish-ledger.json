@@ -8,8 +8,8 @@
       2037,
       2038
     ],
-    "state": "three-usable-sources-fully-archived-one-refusal-safe-retry-prepared",
-    "checkpoint": "assets/lore/starlight-era/batch-502-kuwait-editorial-prompts-prepared-checkpoint.json",
+    "state": "all-meta-occurrences-terminal-three-edits-terminal-fourth-prepared",
+    "checkpoint": "assets/lore/starlight-era/batch-502-kuwait-edit-and-safe-retry-active-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
@@ -20,39 +20,56 @@
     ],
     "account": "leesha007",
     "mode": "Thinking",
-    "providerSendActivations": 4,
-    "chatgptEditInvocations": 0,
+    "providerSendActivations": 5,
+    "chatgptEditInvocations": 3,
     "archiveExceptionApplies": false,
-    "nextSafeAction": "Remote-verify this archive and all raw LFS objects, then stage the bounded safe fallback in lane27. Run one built-in ChatGPT tailoring edit on each of the three selected provisional sources after source verification. Preserve all outputs and do not silently change source-camera scope.",
-    "updatedAtUtc": "2026-09-07T02:58:22.964Z",
-    "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-initial-source-archive-checkpoint.json",
+    "nextSafeAction": "Remote-verify all new raw bytes, then invoke the safe scene2038 tailoring exactly once. The second Mauritania/Costa Rica pair is separately reserved for verified X staging.",
+    "updatedAtUtc": "2026-09-07T03:19:35.376Z",
+    "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-edit-and-safe-retry-active-checkpoint.json",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/four-composers-staging-evidence.json",
-    "providerRetries": 0,
+    "providerRetries": 1,
     "scenes": [
       {
         "scene": 2035,
+        "occurrence": 1,
         "providerUrl": "https://www.meta.ai/prompt/f0a471a2-ad43-489f-94bc-dedcd5934fe8",
-        "status": "visible-result-awaiting-byte-archive-and-QA"
+        "status": "terminal-initial-output-preserved-no-resend",
+        "chatgptState": "moderation-blocked-terminal-no-retry"
       },
       {
         "scene": 2036,
+        "occurrence": 1,
         "providerUrl": "https://www.meta.ai/prompt/04c62bdb-cc5e-4596-a8fe-ce030473f5d1",
-        "status": "rendering"
+        "status": "terminal-initial-output-preserved-no-resend",
+        "chatgptState": "moderation-blocked-terminal-no-retry"
       },
       {
         "scene": 2037,
+        "occurrence": 1,
         "providerUrl": "https://www.meta.ai/prompt/a4395588-65ad-40ca-a932-66e6cf0a9457",
-        "status": "rendering"
+        "status": "terminal-initial-output-preserved-no-resend",
+        "chatgptState": "image-returned-terminal-no-retry"
       },
       {
         "scene": 2038,
+        "occurrence": 1,
         "providerUrl": "https://www.meta.ai/prompt/b07adec0-4d5d-4f8e-93c6-5b61efdd82ed",
-        "status": "rendering"
+        "status": "provider-refusal-no-media-retry-eligible",
+        "chatgptState": "not-invoked"
+      },
+      {
+        "scene": 2038,
+        "occurrence": 2,
+        "providerUrl": "https://www.meta.ai/prompt/42dd669b-8814-4284-9392-adb19b38d31d",
+        "status": "terminal-safe-retry-output-preserved-no-resend",
+        "chatgptState": "not-invoked"
       }
     ],
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
     "safeRetry": "assets/lore/starlight-era/batch-502-kuwait-2038-safe-retry-1-prepared-checkpoint.json",
-    "missingObservedRawOriginals": 0
+    "missingObservedRawOriginals": 0,
+    "lockedChatgptDispatchIntents": 0,
+    "retryRawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-native-raw-archive-manifest.json"
   },
   "currentXPublication20260907Batch501": {
     "state": "first-four-published-live-verified",
