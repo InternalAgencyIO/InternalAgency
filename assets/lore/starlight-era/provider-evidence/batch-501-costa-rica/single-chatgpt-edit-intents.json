@@ -3,7 +3,7 @@
   "batch": 501,
   "country": "Costa Rica",
   "createdAtUtc": "2026-09-07T01:35:25.567Z",
-  "state": "single-tailoring-in-progress",
+  "state": "all-four-allowances-consumed-four-returned-none-blocked",
   "policy": "Exactly one built-in ChatGPT image-generation invocation per usable occurrence. A failure or block consumes the one allowance. No API, CLI, Meta retry, second edit or aesthetic reroll. Archive each receipt before next invocation.",
   "scenes": [
     {
@@ -30,7 +30,7 @@
       "state": "returned",
       "noSecondPass": true,
       "dispatchIntentAtUtc": "2026-09-07T01:38:33.750Z",
-      "completedAtUtc": "2026-09-07T01:41:44.435Z",
+      "completedAtUtc": "2026-09-07T01:41:00.481Z",
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-chatgpt-single-tailoring-receipt.json",
       "returnedFile": {
         "scene": 2031,
@@ -45,7 +45,8 @@
         "provider": "built-in ChatGPT image generator",
         "invocation": 1
       },
-      "error": null
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:41:44.435Z"
     },
     {
       "scene": 2032,
@@ -71,7 +72,7 @@
       "state": "returned",
       "noSecondPass": true,
       "dispatchIntentAtUtc": "2026-09-07T01:42:38.889Z",
-      "completedAtUtc": "2026-09-07T01:44:24.047Z",
+      "completedAtUtc": "2026-09-07T01:43:56.847Z",
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-chatgpt-single-tailoring-receipt.json",
       "returnedFile": {
         "scene": 2032,
@@ -86,7 +87,8 @@
         "provider": "built-in ChatGPT image generator",
         "invocation": 1
       },
-      "error": null
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:44:24.047Z"
     },
     {
       "scene": 2033,
@@ -112,7 +114,7 @@
       "state": "returned",
       "noSecondPass": true,
       "dispatchIntentAtUtc": "2026-09-07T01:45:02.216Z",
-      "completedAtUtc": "2026-09-07T01:46:43.549Z",
+      "completedAtUtc": "2026-09-07T01:46:20.508Z",
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-chatgpt-single-tailoring-receipt.json",
       "returnedFile": {
         "scene": 2033,
@@ -127,7 +129,8 @@
         "provider": "built-in ChatGPT image generator",
         "invocation": 1
       },
-      "error": null
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:46:43.549Z"
     },
     {
       "scene": 2034,
@@ -148,13 +151,32 @@
       "promptBaseSha256": "6631D8C06AEDA704335F4F11E53A942122F39A24D036D9FC6B6D73CE841CB9AE",
       "executedPromptSha256": "e9ce03fb3584c6a8e4fbdbdb4001cbbb18fd3baf4b7826cfb1b099e0dcc3821f",
       "maximumInvocations": 1,
-      "observedInvocations": 0,
-      "remainingAllowance": 1,
-      "state": "reserved-not-invoked",
-      "noSecondPass": true
+      "observedInvocations": 1,
+      "remainingAllowance": 0,
+      "state": "returned",
+      "noSecondPass": true,
+      "dispatchIntentAtUtc": "2026-09-07T01:47:20.140Z",
+      "completedAtUtc": "2026-09-07T01:49:56.105Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-receipt.json",
+      "returnedFile": {
+        "scene": 2034,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
+        "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-72c00339-4daf-454e-83b8-91908d61fd29.png",
+        "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05",
+        "bytes": 2337998,
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "provider": "built-in ChatGPT image generator",
+        "invocation": 1
+      },
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:50:13.167Z"
     }
   ],
   "publicationHeld": true,
   "recoveryHold": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
-  "progress": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-progress.json"
+  "progress": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-progress.json",
+  "finalProgress": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-progress.json"
 }

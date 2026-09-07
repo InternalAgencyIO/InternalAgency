@@ -3,11 +3,11 @@
   "batch": 501,
   "country": "Costa Rica",
   "createdAtUtc": "2026-09-07T01:35:25.567Z",
-  "state": "four-native-finals-preserved-three-internal-originals-held",
+  "state": "all-nine-available-media-files-preserved-three-internal-originals-held",
   "rawArchiveComplete": false,
   "nativePrimaryOriginals": 4,
   "deliveredJpegOriginals": 1,
-  "chatgptReturnedImages": 3,
+  "chatgptReturnedImages": 4,
   "missingInternalRawOriginals": 3,
   "media": [
     {
@@ -112,6 +112,19 @@
       "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-82b16c6e-92fd-4dc0-a911-51f09b82063d.png",
       "sha256": "12cd19beca1a50c0a4d8612db46ab0d168708101116d8514266709eab334bf20",
       "bytes": 2256581,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "invocation": 1
+    },
+    {
+      "scene": 2034,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
+      "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-72c00339-4daf-454e-83b8-91908d61fd29.png",
+      "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05",
+      "bytes": 2337998,
       "dimensions": {
         "width": 941,
         "height": 1672
@@ -275,5 +288,16 @@
   "prompts": "assets/lore/starlight-era/batch-501-costa-rica-fixed-rolls.json",
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/single-chatgpt-edit-intents.json",
   "publicationEligible": false,
-  "nextSafeAction": "Four confirmed Costa Rica occurrences are terminal and must not be resent. Run the one reserved built-in ChatGPT tailoring invocation per saved usable final, preserving every returned or blocked receipt before starting the next edit. Complete source-versus-edit QA and accessibility. Keep Costa Rica publication and next-country rendering held until the three recorded internal originals are recovered through supported visible browser controls or an explicit Costa Rica-specific archive exception is authorized. Mauritania approval does not apply to Costa Rica or Oman."
+  "nextSafeAction": "Do not send another Costa Rica prompt, retry, edit or X post. Recover the three first internal Meta originals for scenes2031,2032,2034 using a supported visible-browser save/download control and import exact bytes with provenance and hashes. If that cannot be done, obtain a new explicit Costa Rica-only exception for these three originals before normal Mauritania-Costa Rica publication or next-country rendering. Keep both source and edit versions, all signed URLs and the existing Oman evidence tab. Before any later Post, reverify @dogramaci, nonduplicate scene/media hashes, exact ALT, AI disclosure, caption/hashtag rolls and local/origin/PR/LFS parity.",
+  "updatedAtUtc": "2026-09-07T01:54:39.649Z",
+  "chatgptBlockedNoByteReceipts": 0,
+  "selectionQa": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/final-selection-qa.json",
+  "accessibilitySidecars": [
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-accessibility.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-accessibility.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-accessibility.json",
+    "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-accessibility.json"
+  ],
+  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/browser-final-handoff.json",
+  "rollConformanceReview": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/editorial-roll-conformance-review.json"
 }

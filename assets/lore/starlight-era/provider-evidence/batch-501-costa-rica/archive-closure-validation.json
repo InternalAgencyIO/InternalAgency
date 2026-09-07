@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "batch": 501,
+  "country": "Costa Rica",
+  "checkedAtUtc": "2026-09-07T01:58:28.883Z",
+  "scope": "All available current-batch media, prompts, receipts, selected ALT, local duplicate ledger and protected unrelated files; not proof of missing internal raw bytes or exhaustive live X history.",
+  "checks": {
+    "jsonParseAllCurrentEvidence": true,
+    "availableMediaCount": 9,
+    "allAvailableMediaHashesAndDimensions": true,
+    "oneImmutableManifestImportPerMedia": true,
+    "promptHashesMatch": true,
+    "sendReceiptsUniqueAndCorrect": true,
+    "fourEditReceipts": true,
+    "eachReceiptBeforeNextEdit": true,
+    "remainingTailoringInvocationsZero": true,
+    "anchorHashesCorrect": true,
+    "selectedSourcesAndAltHashes": true,
+    "selectedFourHashesDistinct": true,
+    "selectedHashesAbsentFromLocalPostedRows": true,
+    "all230PriorPostRowsUnchanged": true,
+    "authorityPointersAgree": true,
+    "activeCountryHasNoException": true,
+    "allSevenProtectedUntrackedFilesUnchanged": true
+  },
+  "availableEvidenceClosurePassed": true,
+  "rawArchiveComplete": false,
+  "missingInternalRawOriginals": 3,
+  "canonicalAccepted": false,
+  "xEligible": false,
+  "missing": [
+    {
+      "scene": 2031,
+      "index": 0,
+      "providerUrl": "https://www.meta.ai/prompt/691f401f-c7f5-4a52-8d50-5271ec6a9045",
+      "observedMediaUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/742096573_2515217975612926_4714079222667517757_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=110&_nc_ohc=lG8bwaQjergQ7kNvwHmb_Of&sdl=0&ccb=14-4&oh=00_AQJVY4O1ffUQZxZZNuMSOQfuSzbH331iNoucPgMpAngPFA&oe=6A9FE507&_nc_sid=a21977",
+      "mediaFilename": "742096573_2515217975612926_4714079222667517757_n.webp",
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-internal-version-1-visible.jpg",
+      "rawRecovered": false,
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "scene": 2032,
+      "index": 0,
+      "providerUrl": "https://www.meta.ai/prompt/d7c8a644-3b28-4b3f-be24-bf859dd1f3ef",
+      "observedMediaUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/739201094_29484456231154476_2031306704277350619_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=P3SidydG0NEQ7kNvwGIAYy7&sdl=0&ccb=14-4&oh=00_AQLGeJkegRQ2W8C9EBRksHmjn7mqtnR1rUYZypGdlgUPTA&oe=6A9FEE4F&_nc_sid=a21977",
+      "mediaFilename": "739201094_29484456231154476_2031306704277350619_n.webp",
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-internal-version-1-visible.jpg",
+      "rawRecovered": false,
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "scene": 2034,
+      "index": 0,
+      "providerUrl": "https://www.meta.ai/prompt/07d358b3-c4cc-4b5e-8539-a9bd6f6c3946",
+      "observedMediaUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/739201117_1758173671891434_5884403761718715856_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=LPe14GjU3t4Q7kNvwGipLZJ&sdl=0&ccb=14-4&oh=00_AQKe0mW6K-4pgLElRzuLDhaa9EoU3xWBsyg9CPKjkBuhgQ&oe=6A9FFD17&_nc_sid=a21977",
+      "mediaFilename": "739201117_1758173671891434_5884403761718715856_n.webp",
+      "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-internal-version-1-visible.jpg",
+      "rawRecovered": false,
+      "sha256": null,
+      "bytes": null
+    }
+  ],
+  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/browser-final-handoff.json",
+  "nextSafeAction": "Do not send another Costa Rica prompt, retry, edit or X post. Recover the three first internal Meta originals for scenes2031,2032,2034 using a supported visible-browser save/download control and import exact bytes with provenance and hashes. If that cannot be done, obtain a new explicit Costa Rica-only exception for these three originals before normal Mauritania-Costa Rica publication or next-country rendering. Keep both source and edit versions, all signed URLs and the existing Oman evidence tab. Before any later Post, reverify @dogramaci, nonduplicate scene/media hashes, exact ALT, AI disclosure, caption/hashtag rolls and local/origin/PR/LFS parity."
+}

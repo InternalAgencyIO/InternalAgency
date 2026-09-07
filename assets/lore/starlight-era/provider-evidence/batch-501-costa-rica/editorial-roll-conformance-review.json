@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "batch": 501,
+  "reviewedAtUtc": "2026-09-07T01:54:39.649Z",
+  "scope": "Current four-scene log review and rendered-output conformance, not a new provider dispatch or a generator change.",
+  "fixedRollBank": "assets/lore/starlight-era/batch-501-costa-rica-fixed-rolls.json",
+  "seed": "starlight-editorial-rolls-2026-09-06|batch-501|costa rica",
+  "rollsUnchanged": true,
+  "cameraOutcomes": [
+    {
+      "scene": 2031,
+      "rolledValue": 100,
+      "rolledCategory": "extreme-wide",
+      "rolledAngle": "high-oblique",
+      "rolledDutchDegrees": 16,
+      "observed": "Composition wider and tilt weaker than prescribed; retained as technically usable",
+      "aestheticRetry": false
+    },
+    {
+      "scene": 2032,
+      "rolledValue": 79,
+      "rolledCategory": "intermediate",
+      "rolledAngle": "over-shoulder",
+      "rolledDutchDegrees": 15,
+      "observed": "Composition wider and tilt weaker than prescribed; retained as technically usable",
+      "aestheticRetry": false
+    },
+    {
+      "scene": 2033,
+      "rolledValue": 74,
+      "rolledCategory": "intermediate",
+      "rolledAngle": "side-level",
+      "rolledDutchDegrees": 18,
+      "observed": "Composition wider and tilt weaker than prescribed; retained as technically usable",
+      "aestheticRetry": false
+    },
+    {
+      "scene": 2034,
+      "rolledValue": 64,
+      "rolledCategory": "intermediate",
+      "rolledAngle": "front-quarter-low",
+      "rolledDutchDegrees": 14,
+      "observed": "Composition wider and tilt weaker than prescribed; retained as technically usable",
+      "aestheticRetry": false
+    }
+  ],
+  "providerBehavior": {
+    "initialSends": 4,
+    "promptRequestedOneCandidate": true,
+    "returnedVisibleVersions": 7,
+    "internalExtraVersions": 3,
+    "thinkingSettingRetained": true
+  },
+  "lessons": [
+    "Preserve the original fixed camera category and measured Dutch-angle instruction, but do not claim the model realized it when QA does not show it.",
+    "Compare sources and edits without automatically preferring edited output; higher native detail can outweigh limited styling changes.",
+    "Do not disable required Thinking to suppress provider revisions. Earlier internal variants may be visible but absent from native gallery export inventory. Archive any such gap explicitly and keep publication held.",
+    "No salt-shopping, probability change, extra prompt, extra edit or generator source change was made."
+  ],
+  "tattooAndFlagDeviations": [
+    {
+      "scene": 2031,
+      "notes": [
+        "Requested extreme-wide environmental crop and 16-degree Dutch tilt were not realized; output is closer full-body. No aesthetic retry.",
+        "Star tattoo is rendered as the word star rather than a star motif. Some flag stripe and footwear-brand details differ from fixed rolls."
+      ]
+    },
+    {
+      "scene": 2032,
+      "notes": [
+        "Requested over-shoulder intermediate crop and 15-degree Dutch tilt are weakly realized; more of the bodies are shown.",
+        "Alia has several star marks rather than a single motif. Some flag stripe and selected navel details differ from fixed rolls.",
+        "Handclasp is between Alia and Ellie rather than the exact Ellie-ECE assignment. Radiance navel and some flag proportions remain imperfect."
+      ]
+    },
+    {
+      "scene": 2033,
+      "notes": [
+        "Head is supported against Radiance upper chest or shoulder rather than fully on her lap.",
+        "Crop is wider and tilt weaker than the fixed roll. Alia braid-to-ponytail transition differs; garment and tiny footwear details remain approximate.",
+        "Some covered-midriff and cropped garment assignments remain approximate; no further edit."
+      ]
+    },
+    {
+      "scene": 2034,
+      "notes": [
+        "Staggered face positions place Ellie slightly left of Radiance, without swapping face identities or garment ownership. Exact horizontal face-order specification was not achieved.",
+        "Dutch tilt is weak; selected navel details are missing. Split-star tattoo and distant whale-tail-like coastal form are approximate.",
+        "Distant fire, smoke and cloud are fictional effects on invented terrain, not documentary evidence of an actual event.",
+        "Alia selected navel is not visible in the preserved pose; do not turn her body. Ellie copper pump is largely occluded after the edit."
+      ]
+    }
+  ],
+  "nextSafeAction": "Do not send another Costa Rica prompt, retry, edit or X post. Recover the three first internal Meta originals for scenes2031,2032,2034 using a supported visible-browser save/download control and import exact bytes with provenance and hashes. If that cannot be done, obtain a new explicit Costa Rica-only exception for these three originals before normal Mauritania-Costa Rica publication or next-country rendering. Keep both source and edit versions, all signed URLs and the existing Oman evidence tab. Before any later Post, reverify @dogramaci, nonduplicate scene/media hashes, exact ALT, AI disclosure, caption/hashtag rolls and local/origin/PR/LFS parity."
+}

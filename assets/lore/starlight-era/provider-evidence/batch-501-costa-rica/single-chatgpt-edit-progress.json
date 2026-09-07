@@ -10,7 +10,7 @@
       "invocations": 1,
       "state": "returned",
       "promptSha256": "452fcfc09943834ef8341e3de7ebbfb66b642ae188a6d9ab478323f0d8ca09d2",
-      "completedAt": "2026-09-07T01:41:44.435Z",
+      "completedAt": "2026-09-07T01:41:00.481Z",
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2031-chatgpt-single-tailoring-receipt.json",
       "returnedFile": {
         "scene": 2031,
@@ -25,7 +25,9 @@
         "provider": "built-in ChatGPT image generator",
         "invocation": 1
       },
-      "error": null
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:41:44.435Z",
+      "archiveBeforeNextEditVerified": true
     },
     {
       "scene": 2032,
@@ -33,7 +35,7 @@
       "invocations": 1,
       "state": "returned",
       "promptSha256": "d7470fb3553678fa4bb83b5bc289a6de7c75d67b01a2bb96f031fa1412bfed29",
-      "completedAt": "2026-09-07T01:44:24.047Z",
+      "completedAt": "2026-09-07T01:43:56.847Z",
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2032-chatgpt-single-tailoring-receipt.json",
       "returnedFile": {
         "scene": 2032,
@@ -48,7 +50,9 @@
         "provider": "built-in ChatGPT image generator",
         "invocation": 1
       },
-      "error": null
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:44:24.047Z",
+      "archiveBeforeNextEditVerified": true
     },
     {
       "scene": 2033,
@@ -56,7 +60,7 @@
       "invocations": 1,
       "state": "returned",
       "promptSha256": "7e72dab97ec969348d2cc34bc830ce0e2f0ecfaf9de8eb4d0324fcb4c09173b5",
-      "completedAt": "2026-09-07T01:46:43.549Z",
+      "completedAt": "2026-09-07T01:46:20.508Z",
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-chatgpt-single-tailoring-receipt.json",
       "returnedFile": {
         "scene": 2033,
@@ -71,7 +75,34 @@
         "provider": "built-in ChatGPT image generator",
         "invocation": 1
       },
-      "error": null
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:46:43.549Z",
+      "archiveBeforeNextEditVerified": true
+    },
+    {
+      "scene": 2034,
+      "startedAt": "2026-09-07T01:47:20.140Z",
+      "invocations": 1,
+      "state": "returned",
+      "promptSha256": "e9ce03fb3584c6a8e4fbdbdb4001cbbb18fd3baf4b7826cfb1b099e0dcc3821f",
+      "completedAt": "2026-09-07T01:49:56.105Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-receipt.json",
+      "returnedFile": {
+        "scene": 2034,
+        "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
+        "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-72c00339-4daf-454e-83b8-91908d61fd29.png",
+        "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05",
+        "bytes": 2337998,
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "provider": "built-in ChatGPT image generator",
+        "invocation": 1
+      },
+      "error": null,
+      "receiptRecordedAtUtc": "2026-09-07T01:50:13.167Z",
+      "archiveBeforeNextEditVerified": true
     }
   ],
   "returnedFiles": [
@@ -113,10 +144,24 @@
       },
       "provider": "built-in ChatGPT image generator",
       "invocation": 1
+    },
+    {
+      "scene": 2034,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
+      "sourcePath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-72c00339-4daf-454e-83b8-91908d61fd29.png",
+      "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05",
+      "bytes": 2337998,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "invocation": 1
     }
   ],
-  "remainingInvocations": 1,
-  "state": "single-tailoring-in-progress",
+  "remainingInvocations": 0,
+  "state": "all-four-allowances-consumed-four-returned-none-blocked",
   "publicationHeld": true,
-  "checkedAtUtc": "2026-09-07T01:46:43.549Z"
+  "checkedAtUtc": "2026-09-07T01:50:13.167Z",
+  "selectionQa": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/final-selection-qa.json"
 }
