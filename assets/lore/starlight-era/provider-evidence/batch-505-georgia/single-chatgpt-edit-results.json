@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "batch": 505,
+  "completedAtUtc": "2026-09-07T05:54:39.668Z",
+  "invocations": 4,
+  "returnedImages": 1,
+  "blockedNoBytes": 3,
+  "additionalInvocationsAllowed": 0,
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json",
+  "returnedFiles": [
+    {
+      "scene": 2048,
+      "batch": 505,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-chatgpt-single-tailoring-pass.png",
+      "toolOutputPath": "C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-c5d183c1-ec4f-4eba-a742-bd5ac279b4b5.png",
+      "bytes": 2433209,
+      "sha256": "079a9978f3c20b8ad6acdbfb90269c0dc394022887d9954dece74c3a78f5defc",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-meta-gallery-original.webp",
+      "providerUrl": "https://www.meta.ai/prompt/57da4fad-7c0e-4ca6-99c7-73ae824a9c38",
+      "observedAtUtc": "2026-09-07T05:53:14.230Z"
+    }
+  ],
+  "results": [
+    {
+      "scene": 2047,
+      "completedAtUtc": "2026-09-07T05:53:14.224Z",
+      "outcome": "output-moderation-blocked-no-bytes",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 19f736d3-993c-4da0-b0b9-a2ef767e21cd. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "output_hint": null
+    },
+    {
+      "scene": 2048,
+      "completedAtUtc": "2026-09-07T05:53:14.230Z",
+      "outcome": "image-returned",
+      "error": null,
+      "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-c5d183c1-ec4f-4eba-a742-bd5ac279b4b5.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "scene": 2049,
+      "completedAtUtc": "2026-09-07T05:53:14.230Z",
+      "outcome": "output-moderation-blocked-no-bytes",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 204cc06b-51ee-49e2-a4e6-e66434f3ffec. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "output_hint": null
+    },
+    {
+      "scene": 2050,
+      "completedAtUtc": "2026-09-07T05:53:14.230Z",
+      "outcome": "output-moderation-blocked-no-bytes",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 4874f3c0-2b01-4ec0-a430-78cc13890294. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "output_hint": null
+    }
+  ]
+}

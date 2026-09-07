@@ -8,8 +8,8 @@
       2049,
       2050
     ],
-    "state": "four-single-edit-invocations-issued-awaiting-results",
-    "checkpoint": "assets/lore/starlight-era/batch-505-georgia-prepared-checkpoint.json",
+    "state": "four-stills-selected-final-remote-verification-pending",
+    "checkpoint": "assets/lore/starlight-era/batch-505-georgia-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-505-georgia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-505-georgia-fixed-rolls.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/provider-ledger.json",
@@ -25,7 +25,7 @@
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-504-croatia-four-stills-closure-checkpoint.json",
-    "nextSafeAction": "Wait for four already-issued single-edit results; no repeat. Preserve all bytes/errors, compare with originals, write ALT, then validate Croatia/Georgia pair for X.",
+    "nextSafeAction": "Remotely verify this complete Georgia closure, then reserve two Croatia/Georgia posts with2043,2044,2047,2048 and2045,2046,2049,2050. Verify every version, live @dogramaci, exact ALT and AI disclosure before each one-time Post. Only after pair closure advance the queue to Eritrea.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -40,7 +40,16 @@
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/native-raw-archive-manifest.json",
     "rawArchiveComplete": true,
     "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-source-qa.json",
-    "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json"
+    "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json",
+    "chatgptReturnedFiles": 1,
+    "chatgptBlockedInvocations": 3,
+    "editResults": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-results.json",
+    "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/accepted-selections.json",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/final-selection-qa.json",
+    "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/closure-evidence-manifest.json",
+    "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/final-remote-closure-verification.json",
+    "noFurtherInvocations": true,
+    "captionPlan": "assets/lore/starlight-era/batch-505-croatia-georgia-caption-roll-plan.json"
   },
   "currentAuthorityBatch504": {
     "batch": 504,

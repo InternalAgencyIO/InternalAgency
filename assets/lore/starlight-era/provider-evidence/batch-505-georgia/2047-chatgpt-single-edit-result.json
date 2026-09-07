@@ -1,0 +1,36 @@
+{
+  "scene": 2047,
+  "completedAtUtc": "2026-09-07T05:53:14.224Z",
+  "outcome": "output-moderation-blocked-no-bytes",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 19f736d3-993c-4da0-b0b9-a2ef767e21cd. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "output_hint": null,
+  "prompt": "Use case: identity-preserve. Edit target Image1 is the saved Meta still for scene 2047. Images2,3,4 are the ordered project-owned AI-fictional quartet continuity plates938,936,937, each contains all four women, not one face per file. They support facial continuity only; never copy their clothes, props, pose or background. Preserve Image1's exact four adult faces, framing, body geometry, gestures, contact, setting, lighting and complete opaque coverage. One identity-preserving clothing-only tailoring pass for scene 2047: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=visible navel, Ellie=covered, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: an ivory sculpted cocktail mini with ruby arch seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; ivory enamel classic pump without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Radiance: a copper cropped architectural shell and secure slate-blue mini skort; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; copper mirror ankle boot without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a wine-red asymmetric fitted mini with pearl geometric ribs; secure open-back or side-back construction and bare arms, covered midriff; wine-red lacquer knee high boot without any branding. No tattoos. ECE: a slate-blue side-back mini with ivory river-curve panels; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient stiletto sandal with one subtle RAZE text mark. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Visible hosiery uses knee-high rainbow gradients; this image roll is independent of shoe color. Preserve the actual source camera unchanged even if Meta missed its requested crop. Do not zoom, recrop, tilt, rotate, extend, straighten or fill empty corners; this invocation edits clothes only. Do not add bodies, duplicates or new off-frame details. Hem changes apply only where a hem is already visible and remain securely lined for the existing pose. Output exactly one still.",
+  "promptSha256": "C489D976887F832D178183730C2CC46FF1E22F94E8FB46ADC95C2CB9F24ED4CA",
+  "source": {
+    "scene": 2047,
+    "label": "gallery/tbillisi_lounge_portrait.webp",
+    "labelIndex": 0,
+    "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799383588_1133858749362036_1449700767183273701_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=48eV8Ea6A6oQ7kNvwGVz6XU&sdl=0&ccb=14-4&oh=00_AQIrtmNCVICfJl9M7yigE3fw7105-MPZTAuXayHj8zIwkw&oe=6AA41E36&_nc_sid=a21977",
+    "providerUrl": "https://www.meta.ai/prompt/f72bd2b1-b7dd-40fe-9002-fd11a6362305",
+    "observedAtUtc": "2026-09-07T05:41:37.738Z",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-meta-gallery-original.webp",
+    "downloadPath": "C:\\Users\\A\\Downloads\\799383588_1133858749362036_1449700767183273701_n.webp",
+    "bytes": 496854,
+    "sha256": "b6b8c78da1beda9aa376f95928830988666a995f855d8782f2da390e3ff5c801",
+    "dimensions": {
+      "width": 1152,
+      "height": 2048
+    },
+    "kind": "gallery",
+    "archiveMethod": "visible browser downloadMedia and download event",
+    "status": "archived-original-pending-qa-unused-until-selected",
+    "batch": 505,
+    "occurrence": 1,
+    "width": 1152,
+    "height": 2048
+  },
+  "invocationCount": 1,
+  "maximumInvocations": 1,
+  "additionalInvocationsAllowed": 0,
+  "returnedFile": null
+}

@@ -3,11 +3,11 @@
   "batch": 505,
   "createdAtUtc": "2026-09-07T05:43:53.960Z",
   "rule": "Exactly one built-in imagegen invocation per usable source. A block or interruption consumes it. No retry, no API or CLI.",
-  "state": "four-single-edit-invocations-issued-awaiting-results",
+  "state": "four-single-edits-terminal-no-further-invocations",
   "scenes": [
     {
       "scene": 2047,
-      "state": "single-edit-invocation-issued-no-repeat",
+      "state": "single-edit-output-blocked-terminal",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -46,11 +46,12 @@
       "additionalInvocationsAllowed": 0,
       "safetyOverrides": [],
       "issuedAtUtc": "2026-09-07T05:47:16.604Z",
-      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2047-chatgpt-single-edit-result.json"
     },
     {
       "scene": 2048,
-      "state": "single-edit-invocation-issued-no-repeat",
+      "state": "single-edit-returned-unused-terminal",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -89,11 +90,12 @@
       "additionalInvocationsAllowed": 0,
       "safetyOverrides": [],
       "issuedAtUtc": "2026-09-07T05:47:16.604Z",
-      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2048-chatgpt-single-edit-result.json"
     },
     {
       "scene": 2049,
-      "state": "single-edit-invocation-issued-no-repeat",
+      "state": "single-edit-output-blocked-terminal",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -132,11 +134,12 @@
       "additionalInvocationsAllowed": 0,
       "safetyOverrides": [],
       "issuedAtUtc": "2026-09-07T05:47:16.604Z",
-      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2049-chatgpt-single-edit-result.json"
     },
     {
       "scene": 2050,
-      "state": "single-edit-invocation-issued-no-repeat",
+      "state": "single-edit-output-blocked-terminal",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -175,7 +178,8 @@
       "additionalInvocationsAllowed": 0,
       "safetyOverrides": [],
       "issuedAtUtc": "2026-09-07T05:47:16.604Z",
-      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json"
+      "preflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-edit-preflight-remote-proof.json",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2050-chatgpt-single-edit-result.json"
     }
   ]
 }

@@ -1,0 +1,36 @@
+{
+  "scene": 2049,
+  "completedAtUtc": "2026-09-07T05:53:14.230Z",
+  "outcome": "output-moderation-blocked-no-bytes",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 204cc06b-51ee-49e2-a4e6-e66434f3ffec. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "output_hint": null,
+  "prompt": "Use case: identity-preserve. Edit target Image1 is the saved Meta still for scene 2049. Images2,3,4 are the ordered project-owned AI-fictional quartet continuity plates938,936,937, each contains all four women, not one face per file. They support facial continuity only; never copy their clothes, props, pose or background. Preserve Image1's exact four adult faces, framing, body geometry, gestures, contact, setting, lighting and complete opaque coverage. One identity-preserving clothing-only tailoring pass for scene 2049: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=covered, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a midnight-blue sculpted mini with silver ridge-fold seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; midnight-blue lacquer knee high boot with one subtle original RAZE split-star mark. No tattoos. Radiance: a fitted mini dress integrating the complete Georgia flag design (a complete Georgian national flag design: a white rectangular field with one large red upright cross reaching all four edges, and one small red Bolnur-Katskhuri cross in each of the four white quadrants; exactly five crosses total, with unrelated branding outside the emblem) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; pearl polished leather stiletto sandal without any branding. No tattoos. Ellie: a silver fitted cocktail mini with midnight contour embroidery; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient sculptural platform without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: a fitted mini dress integrating the complete Georgia flag design (a complete Georgian national flag design: a white rectangular field with one large red upright cross reaching all four edges, and one small red Bolnur-Katskhuri cross in each of the four white quadrants; exactly five crosses total, with unrelated branding outside the emblem) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient classic pump with one subtle original RAZE split-star mark. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Visible hosiery uses rainbow stockings; this is independent of shoe color. Preserve the actual source camera unchanged even if Meta missed its requested crop. Do not zoom, recrop, tilt, rotate, extend, straighten or fill empty corners; this invocation edits clothes only. Do not add bodies, duplicates or new off-frame details. Hem changes apply only where a hem is already visible and remain securely lined for the existing pose. Output exactly one still.",
+  "promptSha256": "60A6E09CCE8F609EB8A72CFE793E421EA5883D01B44AD456F173CCFF91B13723",
+  "source": {
+    "scene": 2049,
+    "label": "gallery/mountain_lounge_fashion.webp",
+    "labelIndex": 0,
+    "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799263713_1785514736226588_7633373530589821035_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=hDDSFGloQfcQ7kNvwGPwyiz&sdl=0&ccb=14-4&oh=00_AQJ7CdUCzMd4xFNkRIoO1NyC1JC06tuyiQcZRuhMO7I1FA&oe=6AA429B6&_nc_sid=a21977",
+    "providerUrl": "https://www.meta.ai/prompt/1aa247f5-58ef-4f5c-8db8-5ec5145ec7a6",
+    "observedAtUtc": "2026-09-07T05:41:39.578Z",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/2049-meta-gallery-original.webp",
+    "downloadPath": "C:\\Users\\A\\Downloads\\799263713_1785514736226588_7633373530589821035_n.webp",
+    "bytes": 596944,
+    "sha256": "d87846494bf7b56a1b5c87559e660e960520035e201511d51f3502228c2e8dfd",
+    "dimensions": {
+      "width": 1152,
+      "height": 2048
+    },
+    "kind": "gallery",
+    "archiveMethod": "visible browser downloadMedia and download event",
+    "status": "archived-original-pending-qa-unused-until-selected",
+    "batch": 505,
+    "occurrence": 1,
+    "width": 1152,
+    "height": 2048
+  },
+  "invocationCount": 1,
+  "maximumInvocations": 1,
+  "additionalInvocationsAllowed": 0,
+  "returnedFile": null
+}
