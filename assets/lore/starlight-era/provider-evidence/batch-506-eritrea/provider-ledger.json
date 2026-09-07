@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 506,
   "country": "Eritrea",
-  "state": "all-provider-originals-archived-four-single-edits-prepared",
+  "state": "four-single-edit-invocations-issued-result-pending",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "occurrences": [
     {
       "occurrenceId": "batch-506-scene-2051-initial",
@@ -134,7 +134,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Verify remote raw bytes, anchors and exact edit intents, then invoke each prepared built-in edit exactly once. No Meta resend or aesthetic retry.",
+  "nextSafeAction": "Collect the four issued one-pass edit outcomes, including blocks or interruptions. Never invoke any of these scene edits again.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
   "confirmedSubmissions": 4,
@@ -153,5 +153,6 @@
   "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/native-raw-archive-manifest.json",
   "initialSourceQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-source-qa.json",
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-intents.json",
-  "terminalProviderEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/terminal-provider-evidence.json"
+  "terminalProviderEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/terminal-provider-evidence.json",
+  "editPreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-edit-preflight-remote-proof.json"
 }

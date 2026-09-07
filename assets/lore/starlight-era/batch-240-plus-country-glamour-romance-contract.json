@@ -8,7 +8,7 @@
       2053,
       2054
     ],
-    "state": "all-provider-originals-archived-four-single-edits-prepared",
+    "state": "four-single-edit-invocations-issued-result-pending",
     "checkpoint": "assets/lore/starlight-era/batch-506-eritrea-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-506-eritrea-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-506-eritrea-fixed-rolls.json",
@@ -21,11 +21,11 @@
     "account": "leesha007",
     "mode": "Thinking",
     "providerSendActivations": 4,
-    "chatgptEditInvocations": 0,
+    "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "previousWorkflowClosure": "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
-    "nextSafeAction": "Verify remote raw bytes, anchors and exact edit intents, then invoke each prepared built-in edit exactly once. No Meta resend or aesthetic retry.",
+    "nextSafeAction": "Collect the four issued one-pass edit outcomes, including blocks or interruptions. Never invoke any of these scene edits again.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -42,7 +42,8 @@
     "editIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-intents.json",
     "rawFilesSaved": 8,
     "uniqueRawByteVersions": 4,
-    "rawArchiveComplete": true
+    "rawArchiveComplete": true,
+    "editPreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-edit-preflight-remote-proof.json"
   },
   "currentCroatiaGeorgiaPairReservations505": {
     "batch": 505,

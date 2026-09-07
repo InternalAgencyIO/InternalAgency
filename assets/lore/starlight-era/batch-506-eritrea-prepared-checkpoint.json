@@ -8,7 +8,7 @@
     2053,
     2054
   ],
-  "state": "all-provider-originals-archived-four-single-edits-prepared",
+  "state": "four-single-edit-invocations-issued-result-pending",
   "preparedAtUtc": "2026-09-07T06:37:29.948Z",
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-505-croatia-georgia-full-workflow-closure-checkpoint.json",
   "baseRemoteVerifiedHead": "8bcbca43b61cdd9ce28fae169a1662f67d0a5d38",
@@ -50,7 +50,7 @@
     }
   ],
   "providerSendActivations": 4,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "maximumMetaHardFailureRetriesPerScene": 2,
   "maximumChatgptInvocationsPerScene": 1,
   "archiveException": null,
@@ -63,7 +63,7 @@
     "Old Eritrea scenes, if present in prior campaign rounds, are historical and never reopened.",
     "Oman and Switzerland holds remain; neither is an eligible pair companion."
   ],
-  "nextSafeAction": "Verify remote raw bytes, anchors and exact edit intents, then invoke each prepared built-in edit exactly once. No Meta resend or aesthetic retry.",
+  "nextSafeAction": "Collect the four issued one-pass edit outcomes, including blocks or interruptions. Never invoke any of these scene edits again.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T06:44:27.620Z",
@@ -84,5 +84,6 @@
   "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/native-raw-archive-manifest.json",
   "initialSourceQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/initial-source-qa.json",
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-chatgpt-edit-intents.json",
-  "terminalProviderEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/terminal-provider-evidence.json"
+  "terminalProviderEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/terminal-provider-evidence.json",
+  "editPreflight": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/single-edit-preflight-remote-proof.json"
 }
