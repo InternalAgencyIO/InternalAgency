@@ -4,7 +4,7 @@
   "scene": 2045,
   "occurrence": 2,
   "retry": 1,
-  "state": "safe-alternative-prepared-not-dispatched",
+  "state": "exact-safe-retry-staged-reserved-one-activation",
   "preparedAtUtc": "2026-09-07T05:04:50.796Z",
   "initialRefusal": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-initial-refusal-evidence.json",
   "authority": "Current user authorization and maximum two hard-failure retries; this is first retry and explicitly relaxes content, not an aesthetic retry or a repeat of the original.",
@@ -30,5 +30,6 @@
   "mode": "Thinking",
   "activationCount": 0,
   "maximumActivationCount": 1,
-  "noRetryOnAmbiguousActivation": true
+  "noRetryOnAmbiguousActivation": true,
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/scene-2045-safe-retry-1-staging.json"
 }
