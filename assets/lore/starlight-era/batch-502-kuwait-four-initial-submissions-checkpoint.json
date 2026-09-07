@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "batch": 502,
+  "country": "Kuwait",
+  "state": "four-initial-submissions-confirmed-no-resend",
+  "confirmedAtUtc": "2026-09-07T02:49:13.115Z",
+  "baseRemoteVerifiedHead": "bf2eacd7457685a8b233f4c4e9965e44d53cac4c",
+  "stagingCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-four-composers-staged-checkpoint.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
+  "initialSendIntents": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-send-intents.json",
+  "account": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "providerSendActivations": 4,
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "scenes": [
+    {
+      "scene": 2035,
+      "tabId": "24",
+      "providerUrl": "https://www.meta.ai/prompt/f0a471a2-ad43-489f-94bc-dedcd5934fe8",
+      "promptSha256": "50DE0C297710CF6509958FF3E8D571DC8EF30B3382455320ABCBAEFDDF2A1A3D",
+      "sendActivations": 1,
+      "activatedAtUtc": "2026-09-07T02:47:02.822Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-initial-send-receipt.json",
+      "firstResultDom": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-provider-first-result-dom.txt",
+      "firstResultScreenshot": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-provider-first-result-visible.jpg",
+        "bytes": 112828,
+        "sha256": "6dc15dc1b6c217f84009c8add6487941199b86ccc510731c7e4db55817873c8f"
+      },
+      "state": "visible-result-awaiting-byte-archive-and-QA"
+    },
+    {
+      "scene": 2036,
+      "tabId": "25",
+      "providerUrl": "https://www.meta.ai/prompt/04c62bdb-cc5e-4596-a8fe-ce030473f5d1",
+      "promptSha256": "CE7D11C39B9C340128115B14104E9DE0447E5D887278873C1DEAEA622565D822",
+      "sendActivations": 1,
+      "activatedAtUtc": "2026-09-07T02:47:59.388Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-initial-send-receipt.json",
+      "firstResultDom": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-provider-first-result-dom.txt",
+      "firstResultScreenshot": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-provider-first-result-visible.jpg",
+        "bytes": 107432,
+        "sha256": "a80afe33561c0da0521e2fe2561359805db8d8cab7eb2a9f07cbdd03d36c69a1"
+      },
+      "state": "rendering"
+    },
+    {
+      "scene": 2037,
+      "tabId": "26",
+      "providerUrl": "https://www.meta.ai/prompt/a4395588-65ad-40ca-a932-66e6cf0a9457",
+      "promptSha256": "70C8FD15F51C9507892AB2DA74C0FA4F313CB2E09D5CCCD68CDE073E78B399F0",
+      "sendActivations": 1,
+      "activatedAtUtc": "2026-09-07T02:48:05.496Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-initial-send-receipt.json",
+      "firstResultDom": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-provider-first-result-dom.txt",
+      "firstResultScreenshot": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-provider-first-result-visible.jpg",
+        "bytes": 105653,
+        "sha256": "f2d9aaf55a08bbba4ecdda461bea995ce55f681ce552937f89323a5ead7c6f5c"
+      },
+      "state": "rendering"
+    },
+    {
+      "scene": 2038,
+      "tabId": "27",
+      "providerUrl": "https://www.meta.ai/prompt/b07adec0-4d5d-4f8e-93c6-5b61efdd82ed",
+      "promptSha256": "2794835CCDAAFDC4225DD61A0F4194BA65E565E989CAD0C1D537B361BDD49C1D",
+      "sendActivations": 1,
+      "activatedAtUtc": "2026-09-07T02:48:12.271Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-initial-send-receipt.json",
+      "firstResultDom": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-provider-first-result-dom.txt",
+      "firstResultScreenshot": {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-provider-first-result-visible.jpg",
+        "bytes": 112505,
+        "sha256": "688d12f9943f6c5049107fa5ed379f1c8511cbccb95539b76e5758ba39c6495a"
+      },
+      "state": "rendering"
+    }
+  ],
+  "archiveExceptionsDoNotTransfer": true,
+  "nextSafeAction": "Keep all four unique provider conversations open. Preserve available original bytes, internal preview evidence and provider responses; no rerun for crop or styling differences. After technical QA, make only the single authorized ChatGPT edit per usable scene."
+}

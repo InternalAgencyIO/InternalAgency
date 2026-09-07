@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 502,
   "country": "Kuwait",
-  "state": "four-visible-composers-verified-not-sent",
+  "state": "four-initial-submissions-confirmed-no-resend",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,11 +11,92 @@
     936,
     937
   ],
-  "providerSendActivations": 0,
+  "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
-  "occurrences": [],
+  "occurrences": [
+    {
+      "scene": 2035,
+      "provider": "Meta AI",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "providerUrl": "https://www.meta.ai/prompt/f0a471a2-ad43-489f-94bc-dedcd5934fe8",
+      "status": "submission-confirmed-do-not-resend",
+      "promptSha256": "50DE0C297710CF6509958FF3E8D571DC8EF30B3382455320ABCBAEFDDF2A1A3D",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 1,
+      "retries": 0,
+      "chatgptEditInvocations": 0,
+      "activatedAtUtc": "2026-09-07T02:47:02.822Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2035-initial-send-receipt.json",
+      "rawArchiveComplete": false
+    },
+    {
+      "scene": 2036,
+      "provider": "Meta AI",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "providerUrl": "https://www.meta.ai/prompt/04c62bdb-cc5e-4596-a8fe-ce030473f5d1",
+      "status": "submission-confirmed-do-not-resend",
+      "promptSha256": "CE7D11C39B9C340128115B14104E9DE0447E5D887278873C1DEAEA622565D822",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 1,
+      "retries": 0,
+      "chatgptEditInvocations": 0,
+      "activatedAtUtc": "2026-09-07T02:47:59.388Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2036-initial-send-receipt.json",
+      "rawArchiveComplete": false
+    },
+    {
+      "scene": 2037,
+      "provider": "Meta AI",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "providerUrl": "https://www.meta.ai/prompt/a4395588-65ad-40ca-a932-66e6cf0a9457",
+      "status": "submission-confirmed-do-not-resend",
+      "promptSha256": "70C8FD15F51C9507892AB2DA74C0FA4F313CB2E09D5CCCD68CDE073E78B399F0",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 1,
+      "retries": 0,
+      "chatgptEditInvocations": 0,
+      "activatedAtUtc": "2026-09-07T02:48:05.496Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2037-initial-send-receipt.json",
+      "rawArchiveComplete": false
+    },
+    {
+      "scene": 2038,
+      "provider": "Meta AI",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "providerUrl": "https://www.meta.ai/prompt/b07adec0-4d5d-4f8e-93c6-5b61efdd82ed",
+      "status": "submission-confirmed-do-not-resend",
+      "promptSha256": "2794835CCDAAFDC4225DD61A0F4194BA65E565E989CAD0C1D537B361BDD49C1D",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivations": 1,
+      "retries": 0,
+      "chatgptEditInvocations": 0,
+      "activatedAtUtc": "2026-09-07T02:48:12.271Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-initial-send-receipt.json",
+      "rawArchiveComplete": false
+    }
+  ],
   "stagedScenes": [
     {
       "scene": 2035,
@@ -178,12 +259,12 @@
       "verifiedAtUtc": "2026-09-07T02:45:23.196Z"
     }
   ],
-  "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-four-composers-staged-checkpoint.json",
+  "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-four-initial-submissions-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": null,
-  "nextSafeAction": "After this staging record is remote-verified, activate the visible Send button once per lane, record its result immediately, and never retry an uncertain or confirmed submission without reconciliation."
+  "nextSafeAction": "Keep all four unique provider conversations open. Preserve available original bytes, internal preview evidence and provider responses; no rerun for crop or styling differences. After technical QA, make only the single authorized ChatGPT edit per usable scene."
 }
