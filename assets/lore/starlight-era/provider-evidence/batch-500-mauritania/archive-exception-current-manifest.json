@@ -1,0 +1,741 @@
+{
+  "schemaVersion": 1,
+  "batch": 500,
+  "createdAtUtc": "2026-09-07T01:02:57.076Z",
+  "state": "available-archive-verified-explicit-Mauritania-only-exception",
+  "authorization": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+  "checkpoint": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+  "rawArchiveComplete": false,
+  "missingOriginalCount": 8,
+  "archiveGateSatisfiedByExplicitException": true,
+  "previousAvailableManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/available-media-evidence-manifest.json",
+  "previousManifestSnapshotCommit": "17ce0a962f8a2fcfcfeb9fcc7577504dc1e2badd",
+  "historicalSealHandling": "Prior manifests retain their historical bytes and hashes. Current mutable metadata hashes below supersede the previous live-metadata snapshot after the explicit user exception; no historical record is resealed.",
+  "media": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-chatgpt-single-tailoring-pass.png",
+      "bytes": 2382561,
+      "sha256": "f4206c88dff2c26360c2e7e60254cbc500ab34883329227c457dc5c0489f1e00",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "role": "chatgpt-single-tailoring-return",
+      "scene": 2027,
+      "selectedByQa": true,
+      "selectionStatus": "technically-selected-publication-held",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-final-media-viewer.jpg",
+      "bytes": 64116,
+      "sha256": "d42c586f54e3deff0cade7189ec83c6a0d12d94bb7f3faece70f2083e8129b35",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-inline-3-preview.jpg",
+      "bytes": 61493,
+      "sha256": "0f84ee8f6bb170f250ba83775c578e445b75765c205b300f5dedf89ea95660fc",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-inline-4-preview.jpg",
+      "bytes": 65258,
+      "sha256": "fd3f01bb736bf9844f3df84e18469ae4a92497a16a25eff28725397c62d1a19d",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-meta-delivered.jpg",
+      "bytes": 277317,
+      "sha256": "5c245fd9af0c9102fed1121a38c82a6ee6ae9425a448170d26f4fbf7e84031d2",
+      "dimensions": {
+        "height": 2048,
+        "width": 1152
+      },
+      "role": "meta-original-download-delivery",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-meta-gallery-original.webp",
+      "bytes": 565218,
+      "sha256": "9834148811ebb94e1ca1d812fa96d03e1592be132cc73058238bf20c5ba4b71c",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "role": "meta-native-primary-original",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-native-download-navigation.jpg",
+      "bytes": 70522,
+      "sha256": "68f0f7bfb9f844ad4a81ac54113c273192863f0fba7c701739d6efdeb22d85b1",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-staged-exact-anchors.jpg",
+      "bytes": 127793,
+      "sha256": "7f8e703267aa86b9836f0ab33267fb585a7aa04418b821fd4a3708b1e2fe272e",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-staged-reference-cards.jpg",
+      "bytes": 124803,
+      "sha256": "ffa756591f61cbaddbd842848563c922270de88985d0aeb8445d49c8fe6abe5e",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2027,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-chatgpt-single-tailoring-pass.png",
+      "bytes": 2360755,
+      "sha256": "0b8c646c1cf4d66209518d5e526dbae60db9a7695033d7fe7583ccd0c66b518f",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "role": "chatgpt-single-tailoring-return",
+      "scene": 2028,
+      "selectedByQa": true,
+      "selectionStatus": "technically-selected-publication-held",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-final-media-viewer.jpg",
+      "bytes": 56872,
+      "sha256": "f21cd80b33d0a3e80e02d3c82c75b82914529620fcf145ca52f860c79a000b67",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2028,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-inline-preview.jpg",
+      "bytes": 65682,
+      "sha256": "4efe7a9efc9d1dedc9283fa6eb43fc52b7ea016fe10df99711e8012b06400aa3",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2028,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-meta-delivered.jpg",
+      "bytes": 270758,
+      "sha256": "0215538f4e5647b806d65f35b1f293de0c54c526a8d2f58d7e8144512a62620e",
+      "dimensions": {
+        "height": 2048,
+        "width": 1152
+      },
+      "role": "meta-original-download-delivery",
+      "scene": 2028,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-meta-gallery-original.webp",
+      "bytes": 530016,
+      "sha256": "27e1bedfbec54fd1357e5e95f9c60c0723a955fa889b141031114146c0f9dece",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "role": "meta-native-primary-original",
+      "scene": 2028,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-staged-exact-anchors.jpg",
+      "bytes": 127495,
+      "sha256": "f22f5cf89b61cf69c7cd66bdd1a2a10ddc9fc14bb715dfb934a9a5181a77a866",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2028,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-staged-reference-cards.jpg",
+      "bytes": 117458,
+      "sha256": "d051b997a44b8adcea42b92a2da919f04efa9aa0d587d20df47bb7a3eb20d8be",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2028,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-final-media-viewer.jpg",
+      "bytes": 58897,
+      "sha256": "ea9d5f3460b1e2af1f490edfa490d7a640c1773a8e29aa12c21c0e90eed6a832",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2029,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-inline-0-preview.jpg",
+      "bytes": 65332,
+      "sha256": "74c46e58b2f1645e0e063ae111c4fe5568776a45bef7362581caec1ee393a309",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2029,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-inline-1-preview.jpg",
+      "bytes": 62495,
+      "sha256": "41611ae033aaaa42a3d2190b9451a6324f2f3da8865d0bc7918eee66f8e8f780",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2029,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-delivered.jpg",
+      "bytes": 257475,
+      "sha256": "d0938e9eef42459f5b519c90645d269abe5da20b43e194558f3f465565d73c07",
+      "dimensions": {
+        "height": 2048,
+        "width": 1152
+      },
+      "role": "meta-original-download-delivery",
+      "scene": 2029,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-gallery-original.webp",
+      "bytes": 584930,
+      "sha256": "fe3a74d4330cfae106a5519f3863bed826f92669e2b589bcc51ec58efe20fc4c",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "role": "meta-native-primary-original",
+      "scene": 2029,
+      "selectedByQa": true,
+      "selectionStatus": "technically-selected-publication-held",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-staged-exact-anchors.jpg",
+      "bytes": 131359,
+      "sha256": "7719591f97b4eb43bb2e4c9a6a69ea4586cd888ad3ba95771717c1adf812a57f",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2029,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-staged-reference-cards.jpg",
+      "bytes": 127270,
+      "sha256": "661d04865c21f378d0c85954627123f44403b475aa4f9a98a98214a10dd6c3bd",
+      "dimensions": {
+        "height": 720,
+        "width": 1280
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2029,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-chatgpt-single-tailoring-pass.png",
+      "bytes": 2203557,
+      "sha256": "8c99a1e08595efba27bc13538a7c3e7e15a7efe82e82508b0a0b3afa5ebd768b",
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "role": "chatgpt-single-tailoring-return",
+      "scene": 2030,
+      "selectedByQa": true,
+      "selectionStatus": "technically-selected-publication-held",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-final-media-viewer.jpg",
+      "bytes": 92006,
+      "sha256": "ada77ea9b01437bc68f24e4829442531a901dadfa2561029f1d3682b124788d8",
+      "dimensions": {
+        "height": 1039,
+        "width": 985
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2030,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-inline-0-preview.jpg",
+      "bytes": 95166,
+      "sha256": "e9a497df4cc654e65efcae9ebdb52a779484072a9f41ccbd4d3baac74eb10d48",
+      "dimensions": {
+        "height": 1039,
+        "width": 985
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2030,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-inline-1-preview.jpg",
+      "bytes": 100967,
+      "sha256": "4f32418c1402db3a890ea5f186e871f9068b76f9e82c75f56ad551cf8b199bec",
+      "dimensions": {
+        "height": 1039,
+        "width": 985
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2030,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-inline-2-preview.jpg",
+      "bytes": 103051,
+      "sha256": "cecbe44b78d190dc136284d0773bb372895682c5b97ae987b5cf09388438d8d6",
+      "dimensions": {
+        "height": 1039,
+        "width": 985
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2030,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-meta-gallery-original.webp",
+      "bytes": 474812,
+      "sha256": "281bde438f1a5b4035432da6555f9e7c19988135ec05b782063f4c32dbb760dd",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "role": "meta-native-primary-original",
+      "scene": 2030,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-staged-exact-anchors.jpg",
+      "bytes": 139619,
+      "sha256": "3c8f1db14eda8a739a146b082796342ce4cab9a2045dd3cc8ad3f39f05e2c105",
+      "dimensions": {
+        "height": 1039,
+        "width": 985
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2030,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-staged-reference-cards.jpg",
+      "bytes": 133709,
+      "sha256": "0a71132e18fc009de7d0293f60b04a5a218b4db6d2f22509af15e87fe145337c",
+      "dimensions": {
+        "height": 1039,
+        "width": 985
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": 2030,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/creations-gallery-recovery-visible.jpg",
+      "bytes": 109784,
+      "sha256": "ddce4b9f9727e8d4c92c04aa385f491d9234554cde428cb176f222b637865520",
+      "dimensions": {
+        "height": 1039,
+        "width": 985
+      },
+      "role": "browser-evidence-not-original-media",
+      "scene": null,
+      "selectedByQa": false,
+      "selectionStatus": "preserved-not-selected",
+      "xEligible": false
+    }
+  ],
+  "metadata": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-accessibility.json",
+      "bytes": 1081,
+      "sha256": "ea08e46b9a62e9fd4630721e405eec03b384f9009791a4a4456aae473ed4a9ba"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-initial-send-receipt.json",
+      "bytes": 22244,
+      "sha256": "9ed388fb5949b328ec5d276987773dc6d3194f0db4da54bfe96e216dadbe9f1b"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-accessibility.json",
+      "bytes": 1088,
+      "sha256": "4b977f21c13d9cd333ff5a3198d9a0ff31edfd020d73a48ca2a70a91449d097e"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-initial-send-receipt.json",
+      "bytes": 28688,
+      "sha256": "9a933ee1f44696802d7c4c1cccf21944bad1618715d42b27ddd626f660472c97"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-accessibility.json",
+      "bytes": 1046,
+      "sha256": "9e3a19623a5a8efab03549dd219e3133e77fd43d5abd99323fa38fd76b0eb9dd"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-chatgpt-output-blocked-receipt.json",
+      "bytes": 4899,
+      "sha256": "3b8bf0573beac91cddd411336dce17b22a4a20d7484c95dee696ed766a28daab"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-initial-send-receipt.json",
+      "bytes": 32589,
+      "sha256": "77981640904513720f103ad1fce155fad3cfc3a249dd11f13adc329cbd5c4966"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-accessibility.json",
+      "bytes": 1046,
+      "sha256": "d073c3971b44751cff5c7b636d8665d99636953a49326822dde3334e66095e48"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-initial-send-receipt.json",
+      "bytes": 37720,
+      "sha256": "e77715a958f24a98c4d3ff552a7635ce07a88589788c0761f7ab6acfab5315a9"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
+      "bytes": 5779,
+      "sha256": "b2f196da994626302e454a776e131b6060d836826b57a5eac3c4b5087eb5a939"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/archive-closure-validation.json",
+      "bytes": 18936,
+      "sha256": "cff9d247decd563903ba70f1ea5ed2dd15b40eff85337209ecb78b2286af76d0"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/available-media-evidence-manifest.json",
+      "bytes": 35206,
+      "sha256": "9c16ee8b9935b56d9105f26a54fd40ecb47cf0bfbe91ea9441c8cc4f0f2cde4c"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/browser-final-handoff.json",
+      "bytes": 83246,
+      "sha256": "e1eefa2c5700ed8afb0e70ad9c5cc7a5389b5f044fd951543fbe8403621a9539"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/creations-gallery-final-audit.json",
+      "bytes": 4534,
+      "sha256": "75fd95be4f46dddbdc5b1b6b510a13b07d61bc97ad6dcbc654be69c107a786f4"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/creations-gallery-native-export-evidence.json",
+      "bytes": 16936,
+      "sha256": "4cd1ad401795279ca9b2acf6f70591864222a1f51d994efeb401edc366f3f05b"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "bytes": 7146,
+      "sha256": "8dfa3311ebc4cde74146ccdf5f5dab361d30babd5ae5aed4d005a5ceb2700062"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/final-selection-qa.json",
+      "bytes": 9087,
+      "sha256": "2068a17c1887667227e1ffb48364f5b46fc4b75252a90642e66402cef6159b7c"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/four-composers-staging-evidence.json",
+      "bytes": 67604,
+      "sha256": "499abcc1f9790aa0838f4d566305bb0334db15ba3da69835fe4f59053feb1a59"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/initial-send-intents.json",
+      "bytes": 1564,
+      "sha256": "dc88d11de57b659df091c8c721c56c3b2db40359126adb301d8aa06a998b4a2d"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/initial-source-qa.json",
+      "bytes": 4164,
+      "sha256": "b525c4d12f45a98a941d55baa722ac4d8533adcbfac86737645b423c2db2162e"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/internal-original-recovery-hold.json",
+      "bytes": 9043,
+      "sha256": "e9e0ac695b1a38822ac76ced4dbd3f7229eddfa106e6745abfe41f81d046b157"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/meta-output-and-retrieval-evidence.json",
+      "bytes": 269387,
+      "sha256": "8da8d34a51b7fdb869afc4c81682c2bbf86e0e534f8655e622f48a392e9a42c1"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/provider-ledger.json",
+      "bytes": 36860,
+      "sha256": "3c522311675f7f1dbd8ebb7f0d7ddd8c21c2a4becd76d8dcdefc7c4c979bc75f"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/recovery-recheck-2026-09-07T00-52-20Z.json",
+      "bytes": 14028,
+      "sha256": "e33f8bfdca021eca742dfb5c15d42cd5bbf46b7b1a68be7fd5b3e8d5cf134b71"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/remote-parity-after-selection.json",
+      "bytes": 2919,
+      "sha256": "36969b220e1de0cb9c7d31a4a1068d58d4dca2b15fb09c542f6cbf54642ec217"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/single-chatgpt-edit-intents.json",
+      "bytes": 18202,
+      "sha256": "9ccd7c258646fa931321aa0beea99bf5853ad1160789a5892b976b2c7be45b7f"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/single-chatgpt-edit-progress.json",
+      "bytes": 5503,
+      "sha256": "f91dfb2db3b207989df8505dad2a6fc19651913a20f4acbcbc929c5f0cb9a627"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+      "bytes": 3396,
+      "sha256": "46e5bdc3acce8c243488d4ffa33f8c365ff0f49784ceb9049bec909f4860506b"
+    },
+    {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "bytes": 682452,
+      "sha256": "6d9ade5f752017f766ba8dffe348106f9a7a67e122184757c32e2af910718a1c"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+      "bytes": 166087,
+      "sha256": "e85e85fe90d8bd511bf52799ab7b2c33c0b528aa147b4cf62477da2a6e5447b2"
+    }
+  ],
+  "acceptedSelections": [
+    {
+      "scene": 2027,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-chatgpt-single-tailoring-pass.png",
+      "sha256": "f4206c88dff2c26360c2e7e60254cbc500ab34883329227c457dc5c0489f1e00",
+      "bytes": 2382561,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    },
+    {
+      "scene": 2028,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-chatgpt-single-tailoring-pass.png",
+      "sha256": "0b8c646c1cf4d66209518d5e526dbae60db9a7695033d7fe7583ccd0c66b518f",
+      "bytes": 2360755,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    },
+    {
+      "scene": 2029,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-gallery-original.webp",
+      "sha256": "fe3a74d4330cfae106a5519f3863bed826f92669e2b589bcc51ec58efe20fc4c",
+      "bytes": 584930,
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "provider": "Meta AI native gallery export",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    },
+    {
+      "scene": 2030,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-chatgpt-single-tailoring-pass.png",
+      "sha256": "8c99a1e08595efba27bc13538a7c3e7e15a7efe82e82508b0a0b3afa5ebd768b",
+      "bytes": 2203557,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    }
+  ],
+  "rootPreservation": [
+    {
+      "path": "assets/lore/starlight-era/world-x-publish-ledger.json",
+      "unchangedOutsideCurrentPointers": true
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-240-plus-country-glamour-romance-contract.json",
+      "unchangedOutsideCurrentPointers": true
+    }
+  ],
+  "canonicalPostCount": 230,
+  "xPostRowsUnchanged": true,
+  "noNewProviderOrImagegenCalls": true,
+  "normalPairingAndLiveChecksStillRequired": true,
+  "exceptionsDoNotApplyToOtherCountries": true
+}

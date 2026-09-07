@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "batch": 500,
+  "country": "Mauritania",
+  "acceptedAtUtc": "2026-09-07T01:01:38.282Z",
+  "state": "four-saved-selections-accepted-under-explicit-archive-exception",
+  "authorization": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+  "technicalQa": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/final-selection-qa.json",
+  "archiveGateSatisfiedByExplicitException": true,
+  "fullRawArchiveComplete": false,
+  "missingInternalOriginals": 8,
+  "accepted": [
+    {
+      "scene": 2027,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-chatgpt-single-tailoring-pass.png",
+      "sha256": "f4206c88dff2c26360c2e7e60254cbc500ab34883329227c457dc5c0489f1e00",
+      "bytes": 2382561,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    },
+    {
+      "scene": 2028,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-chatgpt-single-tailoring-pass.png",
+      "sha256": "0b8c646c1cf4d66209518d5e526dbae60db9a7695033d7fe7583ccd0c66b518f",
+      "bytes": 2360755,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    },
+    {
+      "scene": 2029,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-gallery-original.webp",
+      "sha256": "fe3a74d4330cfae106a5519f3863bed826f92669e2b589bcc51ec58efe20fc4c",
+      "bytes": 584930,
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "provider": "Meta AI native gallery export",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    },
+    {
+      "scene": 2030,
+      "country": "Mauritania",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-chatgpt-single-tailoring-pass.png",
+      "sha256": "8c99a1e08595efba27bc13538a7c3e7e15a7efe82e82508b0a0b3afa5ebd768b",
+      "bytes": 2203557,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "provider": "built-in ChatGPT image generator",
+      "technicalQa": "pass",
+      "canonicalAccepted": true,
+      "eligibleForNormalCountryPairing": true,
+      "xEligible": false,
+      "xEligibilityPending": [
+        "eligible-unpublished-companion",
+        "live-account-check",
+        "all-version-duplicate-check",
+        "frozen-caption-media-alt-and-AI-disclosure",
+        "final-remote-parity"
+      ],
+      "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2030-accessibility.json",
+      "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptEditsAllowed": 0
+    }
+  ],
+  "missingOriginalRecoveryStillOutstanding": true,
+  "notPublished": true,
+  "nextSafeAction": "Treat the four saved Mauritania selections as accepted under the explicit Mauritania-only internal-original archive exception. Keep all eight missing originals and their URLs logged as unrecovered. Prepare the next authoritative Costa Rica Batch501 scenes2031-2034 as a normal companion country, with unchanged anchors, Thinking, hard-failure retry and single-edit limits. Publish only eligible nonduplicate country-pair media after live @dogramaci, caption, accessibility, Git/LFS and PR checks. Oman remains excluded. No further Mauritania generation or edit is allowed."
+}

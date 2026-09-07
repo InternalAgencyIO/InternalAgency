@@ -1,3 +1,11 @@
+# Current disposition: Mauritania-only exception approved
+
+The user approved an explicit exception for these eight unavailable internal originals on 2026-09-07T01:01:38.282Z. They remain unrecovered, with no invented bytes or hashes. The four saved QA-passed selections may proceed through normal country-pairing and final X checks. This exception does not apply to Oman or future countries and does not authorize another render or edit of Mauritania.
+
+Current authority: batch-500-mauritania-explicit-archive-exception-checkpoint.json and explicit-archive-exception-authorization.json. Manual recovery remains an outstanding follow-up, not a current Mauritania queue-advance blocker.
+
+## Historical recovery instructions and exact targets
+
 # Mauritania Batch 500: original-file recovery hold
 
 Four final Meta originals and all three returned ChatGPT edits are preserved. The four selected images passed technical QA, but this batch is not publication-eligible until eight internal Meta originals are archived. Preview screenshots are evidence only, not replacements for original bytes.
