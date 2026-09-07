@@ -215,7 +215,11 @@
       "technicalQa": "pass",
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-accessibility.json",
       "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
-      "eligibleForNormalCountryPairing": true
+      "eligibleForNormalCountryPairing": true,
+      "xPublicationConsumed": true,
+      "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+      "photoIndex": 1,
+      "noRepostAnyVersion": true
     },
     {
       "scene": 2029,
@@ -313,7 +317,11 @@
       "technicalQa": "pass",
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-accessibility.json",
       "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
-      "eligibleForNormalCountryPairing": true
+      "eligibleForNormalCountryPairing": true,
+      "xPublicationConsumed": true,
+      "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+      "photoIndex": 2,
+      "noRepostAnyVersion": true
     },
     {
       "scene": 2030,
@@ -440,7 +448,7 @@
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/initial-send-intents.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
-  "nextSafeAction": "Treat the four saved Mauritania selections as accepted under the explicit Mauritania-only internal-original archive exception. Keep all eight missing originals and their URLs logged as unrecovered. Prepare the next authoritative Costa Rica Batch501 scenes2031-2034 as a normal companion country, with unchanged anchors, Thinking, hard-failure retry and single-edit limits. Publish only eligible nonduplicate country-pair media after live @dogramaci, caption, accessibility, Git/LFS and PR checks. Oman remains excluded. No further Mauritania generation or edit is allowed.",
+  "nextSafeAction": "All eight Mauritania/Costa Rica scenes are published once across the two recorded posts. Never reuse them. Finalize Kuwait Batch502 and remote-verify closure, then prepare authoritative Panama Batch503 as the next companion. Oman and Switzerland remain held. No new automation, guardian, task, worker or subagent.",
   "confirmedSubmissions": 4,
   "outputEvidence": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/meta-output-and-retrieval-evidence.json",
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/initial-source-qa.json",
@@ -639,15 +647,18 @@
   "acceptedSelectionManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
   "currentEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/archive-exception-current-manifest.json",
   "currentPublication": {
-    "postUrl": "https://x.com/dogramaci/status/2096787307797852385",
+    "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+    "postUrls": [
+      "https://x.com/dogramaci/status/2096787307797852385",
+      "https://x.com/dogramaci/status/2096802166824382761"
+    ],
     "publishedSceneIds": [
       2027,
+      2028,
+      2029,
       2030
     ],
-    "remainingAcceptedUnpublishedSceneIds": [
-      2028,
-      2029
-    ],
-    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-live-checkpoint.json"
+    "remainingAcceptedUnpublishedSceneIds": [],
+    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-live-checkpoint.json"
   }
 }

@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "batch": 502,
+  "scene": 2038,
+  "occurrence": 2,
+  "startedAtUtc": "2026-09-07T03:21:29.239Z",
+  "completedAtUtc": "2026-09-07T03:22:36.157Z",
+  "invocations": 1,
+  "state": "image-returned-terminal-no-retry",
+  "exactToolResult": {
+    "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-c5fd36dc-3465-4509-bff8-57d598e5ecb9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+  },
+  "output": {
+    "scene": 2038,
+    "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-chatgpt-single-tailoring-pass.png",
+    "sourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-c5fd36dc-3465-4509-bff8-57d598e5ecb9.png",
+    "bytes": 2309694,
+    "sha256": "9ca5f24d818cf8d5c2d32ab1c469e6996df6224ea251581d76b0990fe8bcd273",
+    "dimensions": {
+      "width": 941,
+      "height": 1672
+    }
+  },
+  "invocationPrompt": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-safe-chatgpt-exact-invocation-prompt.txt",
+  "source": {
+    "scene": 2038,
+    "occurrence": 2,
+    "kind": "native-internal-preview-original",
+    "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/738512125_2271436756992051_3235495269424058418_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=103&_nc_ohc=gBwcZCKRa7IQ7kNvwHEivVw&sdl=0&ccb=14-4&oh=00_AQJYcY-Znso2aUpfnWz853Lat5hpVCvLMfL4jl9TkEngqQ&oe=6AA00E30&_nc_sid=a21977",
+    "providerUrl": "https://www.meta.ai/prompt/42dd669b-8814-4284-9392-adb19b38d31d",
+    "attemptedAtUtc": "2026-09-07T03:08:57.048Z",
+    "method": "supported visible image locator downloadMedia",
+    "downloadedPath": "C:\\Users\\A\\Downloads\\738512125_2271436756992051_3235495269424058418_n.webp",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-meta-internal-4-original.webp",
+    "bytes": 549168,
+    "sha256": "ec75849a6eff1e50f9848f7f5e61f68d9a284c05571e55a0665660d8061e576c",
+    "dimensions": {
+      "width": 1152,
+      "height": 2048
+    },
+    "status": "original-bytes-saved"
+  },
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "safetyFallbackRetained": true,
+  "noSecondInvocation": true,
+  "review": {
+    "technicalPass": true,
+    "publicSafe": true,
+    "opaqueCoverage": true,
+    "fourFictionalAdults": true,
+    "closedBacksAndCoveredMidriffs": true,
+    "calmBackdrop": true,
+    "noArtificialBorders": true,
+    "sourceContactPreserved": true,
+    "selection": "ChatGPT version",
+    "reason": "Usable once-only garment tailoring retains the calm composition and secure opaque coverage.",
+    "softDrift": [
+      "Small expression and facial-rendering differences from the source.",
+      "Camera and shoe-family differences already present in Meta remain."
+    ]
+  }
+}

@@ -9,7 +9,7 @@
     "Mauritania",
     "Costa Rica"
   ],
-  "state": "staged-not-posted-awaiting-final-remote-parity",
+  "state": "terminal-published-live-verified",
   "preparedAtUtc": "2026-09-07T03:12:03.245Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -188,8 +188,8 @@
     "hashtags": []
   },
   "madeWithAiRequired": true,
-  "postClicks": 0,
-  "publicTransmissionCount": 0,
+  "postClicks": 1,
+  "publicTransmissionCount": 1,
   "archiveExceptions": [
     "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
     "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json"
@@ -275,7 +275,12 @@
     "Switzerland"
   ],
   "remoteParityCommitBeforeReservation": "8b407c985b7e42b669ddaa6e9d885295f7f0ee6c",
-  "nextSafeAction": "Once branch and PR converge on this frozen staging, perform one authorized Post keyboard activation. Do not upload or activate again without reconciliation.",
+  "nextSafeAction": "All eight Mauritania/Costa Rica scenes are published once across the two recorded posts. Never reuse them. Finalize Kuwait Batch502 and remote-verify closure, then prepare authoritative Panama Batch503 as the next companion. Oman and Switzerland remain held. No new automation, guardian, task, worker or subagent.",
   "staging": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-staging-verification.json",
-  "uploadCount": 1
+  "uploadCount": 1,
+  "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+  "postedAtUtc": "2026-09-07T03:26:07.066Z",
+  "verifiedAtUtc": "2026-09-07T03:29:54.329Z",
+  "publicationCheckpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-live-checkpoint.json",
+  "noRepostAnyVersion": true
 }

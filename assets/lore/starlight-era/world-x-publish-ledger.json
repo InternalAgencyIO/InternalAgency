@@ -1,7 +1,7 @@
 {
   "currentXStaging20260907Batch501P2": {
-    "state": "staged-not-posted-awaiting-final-remote-parity",
-    "checkpoint": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-staging-verification.json",
+    "state": "terminal-published-live-verified",
+    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-live-checkpoint.json",
     "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-reservation.json",
     "sceneIds": [
       2028,
@@ -9,8 +9,9 @@
       2033,
       2034
     ],
-    "postActivations": 0,
-    "nextSafeAction": "Once branch and PR converge on this frozen staging, perform one authorized Post keyboard activation. Do not upload or activate again without reconciliation."
+    "postActivations": 1,
+    "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+    "nextSafeAction": "All eight Mauritania/Costa Rica scenes are published once across the two recorded posts. Never reuse them. Finalize Kuwait Batch502 and remote-verify closure, then prepare authoritative Panama Batch503 as the next companion. Oman and Switzerland remain held. No new automation, guardian, task, worker or subagent."
   },
   "currentAuthorityBatch502": {
     "batch": 502,
@@ -21,8 +22,8 @@
       2037,
       2038
     ],
-    "state": "three-edits-terminal-fourth-single-edit-in-flight",
-    "checkpoint": "assets/lore/starlight-era/batch-502-kuwait-edit-and-safe-retry-active-checkpoint.json",
+    "state": "terminal-four-stills-selected-complete-raw-archive",
+    "checkpoint": "assets/lore/starlight-era/batch-502-kuwait-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-502-kuwait-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-502-kuwait-fixed-rolls.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/provider-ledger.json",
@@ -36,78 +37,82 @@
     "providerSendActivations": 5,
     "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
-    "nextSafeAction": "Collect the single scene2038 edit result without resubmission, then finalize Kuwait selection and accessibility. The second Mauritania/Costa Rica X pair is staged separately.",
-    "updatedAtUtc": "2026-09-07T03:24:46.650Z",
-    "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-edit-and-safe-retry-active-checkpoint.json",
+    "nextSafeAction": "After final remote verification, prepare Panama Batch503 with exact fixed rolls, face anchors and Thinking. Do not post Kuwait alone or reuse any published country scene.",
+    "updatedAtUtc": "2026-09-07T03:29:54.329Z",
+    "currentCheckpoint": "assets/lore/starlight-era/batch-502-kuwait-four-stills-closure-checkpoint.json",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/four-composers-staging-evidence.json",
     "providerRetries": 1,
     "scenes": [
       {
         "scene": 2035,
         "occurrence": 1,
+        "status": "terminal-selected-no-further-send-or-edit",
         "providerUrl": "https://www.meta.ai/prompt/f0a471a2-ad43-489f-94bc-dedcd5934fe8",
-        "status": "terminal-initial-output-preserved-no-resend",
         "chatgptState": "moderation-blocked-terminal-no-retry"
       },
       {
         "scene": 2036,
         "occurrence": 1,
+        "status": "terminal-selected-no-further-send-or-edit",
         "providerUrl": "https://www.meta.ai/prompt/04c62bdb-cc5e-4596-a8fe-ce030473f5d1",
-        "status": "terminal-initial-output-preserved-no-resend",
         "chatgptState": "moderation-blocked-terminal-no-retry"
       },
       {
         "scene": 2037,
         "occurrence": 1,
+        "status": "terminal-selected-no-further-send-or-edit",
         "providerUrl": "https://www.meta.ai/prompt/a4395588-65ad-40ca-a932-66e6cf0a9457",
-        "status": "terminal-initial-output-preserved-no-resend",
         "chatgptState": "image-returned-terminal-no-retry"
       },
       {
         "scene": 2038,
         "occurrence": 1,
-        "providerUrl": "https://www.meta.ai/prompt/b07adec0-4d5d-4f8e-93c6-5b61efdd82ed",
-        "status": "provider-refusal-no-media-retry-eligible",
-        "chatgptState": "not-invoked"
+        "status": "terminal-initial-refusal-superseded-by-accepted-safe-retry",
+        "providerUrl": "https://www.meta.ai/prompt/b07adec0-4d5d-4f8e-93c6-5b61efdd82ed"
       },
       {
         "scene": 2038,
         "occurrence": 2,
+        "status": "terminal-selected-no-further-send-or-edit",
         "providerUrl": "https://www.meta.ai/prompt/42dd669b-8814-4284-9392-adb19b38d31d",
-        "status": "terminal-safe-retry-output-preserved-no-resend",
-        "chatgptState": "not-invoked"
+        "chatgptState": "image-returned-terminal-no-retry"
       }
     ],
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/initial-native-raw-archive-manifest.json",
     "safeRetry": "assets/lore/starlight-era/batch-502-kuwait-2038-safe-retry-1-prepared-checkpoint.json",
     "missingObservedRawOriginals": 0,
-    "lockedChatgptDispatchIntents": 1,
-    "retryRawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-native-raw-archive-manifest.json"
+    "lockedChatgptDispatchIntents": 0,
+    "retryRawArchive": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/2038-retry-1-native-raw-archive-manifest.json",
+    "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-502-kuwait/accepted-selections.json",
+    "rawArchiveComplete": true
   },
   "currentXPublication20260907Batch501": {
-    "state": "first-four-published-live-verified",
-    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-live-checkpoint.json",
-    "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-reservation.json",
+    "state": "both-four-image-posts-live-verified-eight-scenes-consumed",
+    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-live-checkpoint.json",
+    "reservation": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-reservation.json",
     "countries": [
       "Mauritania",
       "Costa Rica"
     ],
     "sceneIds": [
       2027,
-      2030,
-      2031,
-      2032
-    ],
-    "postUrl": "https://x.com/dogramaci/status/2096787307797852385",
-    "postClicks": 2,
-    "publicTransmissionCount": 1,
-    "remainingUnpublishedSceneIds": [
       2028,
       2029,
+      2030,
+      2031,
+      2032,
       2033,
       2034
     ],
-    "nextSafeAction": "After publication evidence reaches origin and PR parity, restore the four visible Meta lanes and materialize the next authoritative Kuwait Batch502 scenes2035-2038 once. Preserve the remaining accepted Mauritania/Costa Rica stills as unpublished candidates; they may be paired without reuse after a separate exact reservation. Oman and Switzerland remain excluded. No new automation, guardian, task, worker or subagent."
+    "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+    "postUrls": [
+      "https://x.com/dogramaci/status/2096787307797852385",
+      "https://x.com/dogramaci/status/2096802166824382761"
+    ],
+    "postClicksThisPair": 1,
+    "publicTransmissionCountThisPair": 1,
+    "remainingUnpublishedSceneIds": [],
+    "nextSafeAction": "All eight Mauritania/Costa Rica scenes are published once across the two recorded posts. Never reuse them. Finalize Kuwait Batch502 and remote-verify closure, then prepare authoritative Panama Batch503 as the next companion. Oman and Switzerland remain held. No new automation, guardian, task, worker or subagent."
   },
   "currentAuthorityBatch501": {
     "batch": 501,
@@ -12995,6 +13000,179 @@
         "activation": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p1-post-activation-receipt.json"
       },
       "duplicateGate": "Never attach or publish scenes 2027,2030,2031,2032 or any alternate versions again."
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 501,
+      "batches": [
+        500,
+        501
+      ],
+      "countries": [
+        "Mauritania",
+        "Costa Rica"
+      ],
+      "sceneIds": [
+        2028,
+        2029,
+        2033,
+        2034
+      ],
+      "imageNumbers": [
+        2028,
+        2029,
+        2033,
+        2034
+      ],
+      "state": "terminal-published-live-verified",
+      "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+      "postedAt": "2026-09-07T03:26:07.066Z",
+      "verifiedAt": "2026-09-07T03:29:54.329Z",
+      "caption": "Mauritania ❤️ Costa Rica: Ouadane stone and Richat rings meet Manuel Antonio's green coast and Uvita's Pacific cliffs. Linked hands, shoulder rests and rainbow legwear. AI fashion with imaginary disaster scenery, not real events.",
+      "captionSha256": "79ca06f4b9e3581c2dc16ddccbca64a0d340056a64e7cf3c37817dd23ed3001a",
+      "hashtags": [],
+      "assets": [
+        {
+          "scene": 2028,
+          "country": "Mauritania",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-chatgpt-single-tailoring-pass.png",
+          "sha256": "0b8c646c1cf4d66209518d5e526dbae60db9a7695033d7fe7583ccd0c66b518f",
+          "bytes": 2360755,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-accessibility.json",
+          "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "alt": "AI-generated fictional fashion editorial of four adult women leaning together on a shaded stone terrace above a desert settlement. Their outfits include a red cutout mini, a white one-shoulder mini, a green-and-red crescent-and-star dress, and an emerald patterned two-piece. Rainbow legwear and varied red, rainbow, dark and metallic-green footwear accent the group. Distant fires, smoke columns and a mushroom-shaped cloud are invented dramatic scenery, not a record of a real event.",
+          "width": 941,
+          "height": 1672,
+          "xPublicationConsumed": true,
+          "providerUrl": "https://www.meta.ai/prompt/c7b4cc4c-db5b-47c6-a15a-2729096549f8",
+          "photoIndex": 1
+        },
+        {
+          "scene": 2029,
+          "country": "Mauritania",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-gallery-original.webp",
+          "sha256": "fe3a74d4330cfae106a5519f3863bed826f92669e2b589bcc51ec58efe20fc4c",
+          "bytes": 584930,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI native gallery export",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-accessibility.json",
+          "archiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "alt": "AI-generated fashion editorial of four adult women seated close together in a shaded open-air desert pavilion. A woman in a green-and-red crescent-and-star dress rests her head against a blonde woman in a crimson outfit. The other two lean toward their joined hands, with one placing a hand on the other shoulder. Rainbow knee-high legwear and colorful platform boots and heels contrast with the cream cushions and layered desert ridges behind them.",
+          "width": 1152,
+          "height": 2048,
+          "xPublicationConsumed": true,
+          "providerUrl": "https://www.meta.ai/prompt/7304e36c-0e1d-41ec-bb1b-7625358c299c",
+          "photoIndex": 2
+        },
+        {
+          "scene": 2033,
+          "country": "Costa Rica",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-meta-gallery-original.webp",
+          "sha256": "845a195d9ed7ba6e60b1d80e7743cea9e6e96f482bd8d24ec503b5b881688ee6",
+          "bytes": 493930,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-accessibility.json",
+          "archiveException": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "alt": "AI-generated fashion editorial of four fictional adult women sitting closely together on staggered cushioned benches above a leafy tropical beach. The woman at left rests her head against a blonde woman's upper chest and shoulder. A woman in a cream cropped top and navy mini skirt leans in to touch their hands, while the fourth rests a hand on her shoulder. Two outfits have blue-white-red flag stripes; the blonde wears coral. Rainbow knee-high legwear, varied shoes, small star clasps and a large outlined upper-arm star complete the styling.",
+          "width": 1152,
+          "height": 2048,
+          "xPublicationConsumed": true,
+          "providerUrl": "https://www.meta.ai/prompt/d52784e6-f57a-447e-bcb3-5c7a10c47494",
+          "photoIndex": 3
+        },
+        {
+          "scene": 2034,
+          "country": "Costa Rica",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-chatgpt-single-tailoring-pass.png",
+          "sha256": "98c2cf7b7cf22d65c8eacba1b272c41db3ecf06b1e212852ecab06fddbbbcf05",
+          "bytes": 2337998,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-accessibility.json",
+          "archiveException": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "alt": "AI-generated fictional fashion scene of four adult women gathered on wooden cushioned seating above a green coastal bay. Two seated women clasp hands while the other two lean toward them. They wear an ivory mini with green fan panels, a blue-white-red striped cropped outfit, a copper cropped mini outfit and a green pearl-trimmed mini dress, with varied metallic heels and green knee-high boots. Distant fires, smoke and a mushroom-shaped cloud are imaginary background effects, not evidence of a real disaster.",
+          "width": 941,
+          "height": 1672,
+          "xPublicationConsumed": true,
+          "providerUrl": "https://www.meta.ai/prompt/07d358b3-c4cc-4b5e-8539-a9bd6f6c3946",
+          "photoIndex": 4
+        }
+      ],
+      "photoEndpoints": [
+        "https://x.com/dogramaci/status/2096802166824382761/photo/1",
+        "https://x.com/dogramaci/status/2096802166824382761/photo/2",
+        "https://x.com/dogramaci/status/2096802166824382761/photo/3",
+        "https://x.com/dogramaci/status/2096802166824382761/photo/4"
+      ],
+      "mediaMode": "signed-in-visible-in-app-browser",
+      "buttonActivationAttempts": 1,
+      "successfulMethod": "keyboard Enter on the enabled Post button",
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 4,
+      "stagingCommit": "6b72ae278bc7711096fea1eb7a0d4411c36200ad",
+      "archiveExceptions": [
+        "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+        "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json"
+      ],
+      "rawArchiveComplete": false,
+      "missingInternalOriginalsByCountry": {
+        "Mauritania": 8,
+        "Costa Rica": 3
+      },
+      "evidence": {
+        "live": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-live-checkpoint.json",
+        "dom": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-live-2096802166824382761-dom.txt",
+        "screenshot": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-live-post-visible.jpg",
+        "staging": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-staging-verification.json",
+        "activation": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/x-p2-post-activation-receipt.json"
+      },
+      "duplicateGate": "Never attach or publish scenes2028,2029,2033,2034 or any alternate versions again.",
+      "uploadCount": 1
     }
   ],
   "latestAssistedDrain": {

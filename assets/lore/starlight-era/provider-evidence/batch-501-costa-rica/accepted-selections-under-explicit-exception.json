@@ -3,7 +3,7 @@
   "batch": 501,
   "country": "Costa Rica",
   "acceptedAtUtc": "2026-09-07T02:06:48.633Z",
-  "state": "four-saved-selections-accepted-under-explicit-archive-exception",
+  "state": "all-four-selected-scenes-published-once-under-explicit-archive-exception",
   "authorization": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
   "technicalQa": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/final-selection-qa.json",
   "archiveGateSatisfiedByExplicitException": true,
@@ -87,16 +87,16 @@
       "canonicalAccepted": true,
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
-      "xEligibilityPending": [
-        "live-account-check",
-        "all-version-duplicate-check",
-        "frozen-caption-media-alt-and-AI-disclosure",
-        "final-remote-parity"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2033-accessibility.json",
       "archiveException": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
       "additionalMetaSendsAllowed": 0,
-      "additionalChatgptEditsAllowed": 0
+      "additionalChatgptEditsAllowed": 0,
+      "xPublicationConsumed": true,
+      "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+      "photoIndex": 3,
+      "publicationVerifiedAtUtc": "2026-09-07T03:29:54.329Z",
+      "noRepostAnyVersion": true
     },
     {
       "scene": 2034,
@@ -113,31 +113,34 @@
       "canonicalAccepted": true,
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
-      "xEligibilityPending": [
-        "live-account-check",
-        "all-version-duplicate-check",
-        "frozen-caption-media-alt-and-AI-disclosure",
-        "final-remote-parity"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-accessibility.json",
       "archiveException": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
       "additionalMetaSendsAllowed": 0,
-      "additionalChatgptEditsAllowed": 0
+      "additionalChatgptEditsAllowed": 0,
+      "xPublicationConsumed": true,
+      "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+      "photoIndex": 4,
+      "publicationVerifiedAtUtc": "2026-09-07T03:29:54.329Z",
+      "noRepostAnyVersion": true
     }
   ],
   "missingOriginalRecoveryStillOutstanding": true,
   "notPublished": false,
-  "nextSafeAction": "Treat the four saved Costa Rica selections as accepted under the explicit Costa Rica-only exception for three missing earlier internal originals. Keep those originals logged as unrecovered, preserve all nine available files and every provider URL, and do not rerender or edit scenes2031-2034. Prepare eligible nonduplicate Mauritania-Costa Rica country-pair media with the required caption, frozen hashtag rolls, exact ALT and Made with AI. Verify live @dogramaci and Git/LFS/origin/PR parity before one authorized Post activation, then record its live URL immediately. Continue only to the next authoritative country after publishing and recording the eligible pair; Oman and Switzerland remain excluded. No new automation, guardian, task, worker or subagent.",
+  "nextSafeAction": "All eight Mauritania/Costa Rica scenes are published once across the two recorded posts. Never reuse them. Finalize Kuwait Batch502 and remote-verify closure, then prepare authoritative Panama Batch503 as the next companion. Oman and Switzerland remain held. No new automation, guardian, task, worker or subagent.",
   "currentPublication": {
-    "postUrl": "https://x.com/dogramaci/status/2096787307797852385",
+    "postUrl": "https://x.com/dogramaci/status/2096802166824382761",
+    "postUrls": [
+      "https://x.com/dogramaci/status/2096787307797852385",
+      "https://x.com/dogramaci/status/2096802166824382761"
+    ],
     "publishedSceneIds": [
       2031,
-      2032
-    ],
-    "remainingAcceptedUnpublishedSceneIds": [
+      2032,
       2033,
       2034
     ],
-    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p1-x-live-checkpoint.json"
+    "remainingAcceptedUnpublishedSceneIds": [],
+    "checkpoint": "assets/lore/starlight-era/batch-501-mauritania-costa-rica-p2-x-live-checkpoint.json"
   }
 }
