@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 505,
   "country": "Georgia",
-  "state": "four-confirmed-submitted-generating-no-resend",
+  "state": "four-meta-sources-archived-single-edit-intents-locked",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -24,7 +24,7 @@
       "activationAtUtc": "2026-09-07T05:40:12.639Z",
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
-      "state": "confirmed-submitted-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "promptSha256": "C5EB3B1E4FDDECD008E0289BD6C0A79510BCBCF5B59D1B0B15C13FE79C0A41A2",
       "providerUrl": "https://www.meta.ai/prompt/f72bd2b1-b7dd-40fe-9002-fd11a6362305",
       "exactSceneVisible": true
@@ -37,7 +37,7 @@
       "activationAtUtc": "2026-09-07T05:40:12.806Z",
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
-      "state": "confirmed-submitted-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "promptSha256": "9F627520C5085478793B19244E494DDE9B56D07AB03D03091183627CD1C1EA35",
       "providerUrl": "https://www.meta.ai/prompt/57da4fad-7c0e-4ca6-99c7-73ae824a9c38",
       "exactSceneVisible": true
@@ -50,7 +50,7 @@
       "activationAtUtc": "2026-09-07T05:40:12.971Z",
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
-      "state": "confirmed-submitted-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "promptSha256": "706B1CA9EBABFB208294B2E38501E850853CA66B67C44D918E6709D06AF40DB9",
       "providerUrl": "https://www.meta.ai/prompt/1aa247f5-58ef-4f5c-8db8-5ec5145ec7a6",
       "exactSceneVisible": true
@@ -63,7 +63,7 @@
       "activationAtUtc": "2026-09-07T05:40:13.121Z",
       "method": "visible Send keyboard Enter",
       "activationCount": 1,
-      "state": "confirmed-submitted-no-resend",
+      "state": "terminal-originals-archived-no-resend",
       "promptSha256": "822122DE0104B751E571B6E7D3F3BE32DF7AC659793CD2584765A54F9934241A",
       "providerUrl": "https://www.meta.ai/prompt/e224f832-3234-4bde-bd7a-3da2946936a0",
       "exactSceneVisible": true
@@ -100,9 +100,9 @@
   "fixedRolls": "assets/lore/starlight-era/batch-505-georgia-fixed-rolls.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
-  "sourceArchiveComplete": false,
+  "sourceArchiveComplete": true,
   "archiveException": false,
-  "nextSafeAction": "Inspect the four current confirmed Georgia provider URLs without resending. Preserve every exposed original through visible downloads, then technical QA and exactly one built-in tailoring invocation per usable source. Do not post Croatia/Georgia until both countries are eligible and all X gates pass.",
+  "nextSafeAction": "After source, edit-intent, anchor and remote parity checks, execute each locked single built-in tailoring invocation once. Then archive all returned bytes or block receipts, compare with originals, select and write ALT. No further Meta generation for these terminal occurrences.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-receipt.json",
@@ -113,5 +113,12 @@
     "https://www.meta.ai/prompt/57da4fad-7c0e-4ca6-99c7-73ae824a9c38",
     "https://www.meta.ai/prompt/1aa247f5-58ef-4f5c-8db8-5ec5145ec7a6",
     "https://www.meta.ai/prompt/e224f832-3234-4bde-bd7a-3da2946936a0"
-  ]
+  ],
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/native-raw-archive-manifest.json",
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 8,
+  "missingObservedOriginals": 0,
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-source-qa.json",
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json",
+  "chatgptLockedDispatchIntents": 4
 }

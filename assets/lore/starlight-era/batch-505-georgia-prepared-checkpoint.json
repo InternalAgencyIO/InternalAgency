@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 505,
   "country": "Georgia",
-  "state": "four-confirmed-submitted-generating-no-resend",
+  "state": "four-meta-sources-archived-single-edit-intents-locked",
   "createdAtUtc": "2026-09-07T05:36:50.373Z",
   "baseRemoteVerifiedHead": "d8a827b1b873564e42bc0a01a0c23ad1768a2b49",
   "sceneIds": [
@@ -52,7 +52,7 @@
   "dispatchCount": 4,
   "chatgptEditCount": 0,
   "xPostCount": 234,
-  "nextSafeAction": "Inspect the four current confirmed Georgia provider URLs without resending. Preserve every exposed original through visible downloads, then technical QA and exactly one built-in tailoring invocation per usable source. Do not post Croatia/Georgia until both countries are eligible and all X gates pass.",
+  "nextSafeAction": "After source, edit-intent, anchor and remote parity checks, execute each locked single built-in tailoring invocation once. Then archive all returned bytes or block receipts, compare with originals, select and write ALT. No further Meta generation for these terminal occurrences.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-receipt.json",
@@ -63,5 +63,11 @@
     "https://www.meta.ai/prompt/57da4fad-7c0e-4ca6-99c7-73ae824a9c38",
     "https://www.meta.ai/prompt/1aa247f5-58ef-4f5c-8db8-5ec5145ec7a6",
     "https://www.meta.ai/prompt/e224f832-3234-4bde-bd7a-3da2946936a0"
-  ]
+  ],
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/native-raw-archive-manifest.json",
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 8,
+  "missingObservedOriginals": 0,
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-source-qa.json",
+  "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json"
 }

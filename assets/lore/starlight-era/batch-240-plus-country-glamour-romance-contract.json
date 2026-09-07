@@ -8,7 +8,7 @@
       2049,
       2050
     ],
-    "state": "four-confirmed-submitted-generating-no-resend",
+    "state": "four-meta-sources-archived-single-edit-intents-locked",
     "checkpoint": "assets/lore/starlight-era/batch-505-georgia-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-505-georgia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-505-georgia-fixed-rolls.json",
@@ -25,7 +25,7 @@
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-504-croatia-four-stills-closure-checkpoint.json",
-    "nextSafeAction": "Inspect the four current confirmed Georgia provider URLs without resending. Preserve every exposed original through visible downloads, then technical QA and exactly one built-in tailoring invocation per usable source. Do not post Croatia/Georgia until both countries are eligible and all X gates pass.",
+    "nextSafeAction": "After source, edit-intent, anchor and remote parity checks, execute each locked single built-in tailoring invocation once. Then archive all returned bytes or block receipts, compare with originals, select and write ALT. No further Meta generation for these terminal occurrences.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -36,7 +36,11 @@
       "https://www.meta.ai/prompt/e224f832-3234-4bde-bd7a-3da2946936a0"
     ],
     "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-receipt.json",
-    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-remote-preflight.json"
+    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-send-remote-preflight.json",
+    "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/native-raw-archive-manifest.json",
+    "rawArchiveComplete": true,
+    "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/initial-source-qa.json",
+    "editIntents": "assets/lore/starlight-era/provider-evidence/batch-505-georgia/single-chatgpt-edit-intents.json"
   },
   "currentAuthorityBatch504": {
     "batch": 504,
