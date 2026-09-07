@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "batch": 500,
+  "country": "Mauritania",
+  "reviewedAtUtc": "2026-09-07T00:18:11.540Z",
+  "method": "Local full-resolution delivered files viewed with view_image, compared to three freshly viewed quartet anchors. Visual continuity assessment, not biometric identity or age verification.",
+  "scenes": [
+    {
+      "scene": 2027,
+      "source": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2027-meta-delivered.jpg",
+      "sha256": "5c245fd9af0c9102fed1121a38c82a6ee6ae9425a448170d26f4fbf7e84031d2",
+      "width": 1152,
+      "height": 2048,
+      "exactFourDistinctAdultCharacters": true,
+      "anchorFaceOrder": "Alia,Radiance,Ellie,AI ECE",
+      "faceContinuity": "visually consistent with project-fictional quartet",
+      "publicSafeCoverage": true,
+      "noMajorAnatomicalFailure": true,
+      "technicalQa": "pass",
+      "softDeviations": [
+        "Camera tilt weaker than requested and crop wider than rolled close view.",
+        "Flag layout has surplus symbols or dark panel; editable wardrobe detail.",
+        "Back-hug and hand-catch action differ from exact contact assignments."
+      ],
+      "retryAuthorized": false,
+      "singleTailoringInvocationAllowed": 1,
+      "xEligible": false
+    },
+    {
+      "scene": 2028,
+      "source": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2028-meta-delivered.jpg",
+      "sha256": "0215538f4e5647b806d65f35b1f293de0c54c526a8d2f58d7e8144512a62620e",
+      "width": 1152,
+      "height": 2048,
+      "exactFourDistinctAdultCharacters": true,
+      "anchorFaceOrder": "Alia,Radiance,Ellie,AI ECE",
+      "faceContinuity": "visually consistent with project-fictional quartet",
+      "publicSafeCoverage": true,
+      "noMajorAnatomicalFailure": true,
+      "technicalQa": "pass",
+      "softDeviations": [
+        "High-oblique and Dutch tilt weaker than requested; framing wider.",
+        "Flag layout repeats symbols; wardrobe-only correction within single pass.",
+        "Tattoo, hosiery and footwear small details differ from fixed rolls."
+      ],
+      "retryAuthorized": false,
+      "singleTailoringInvocationAllowed": 1,
+      "xEligible": false
+    },
+    {
+      "scene": 2029,
+      "source": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/2029-meta-delivered.jpg",
+      "sha256": "d0938e9eef42459f5b519c90645d269abe5da20b43e194558f3f465565d73c07",
+      "width": 1152,
+      "height": 2048,
+      "exactFourDistinctAdultCharacters": true,
+      "anchorFaceOrder": "Alia,Radiance,Ellie,AI ECE",
+      "faceContinuity": "visually consistent with project-fictional quartet",
+      "publicSafeCoverage": true,
+      "noMajorAnatomicalFailure": true,
+      "technicalQa": "pass",
+      "softDeviations": [
+        "Head is supported beside Radiance rather than fully resting on her lap.",
+        "Camera view is wider and tilt weaker than the fixed roll.",
+        "Some garment and footwear details differ."
+      ],
+      "retryAuthorized": false,
+      "singleTailoringInvocationAllowed": 1,
+      "xEligible": false
+    }
+  ],
+  "scene2030": {
+    "state": "visible-final-and-three-intermediate-previews-preserved-but-local-original-unavailable",
+    "fullResolutionLocalQa": "pending",
+    "singleTailoringInvocations": 0,
+    "remainingAllowance": 1,
+    "xEligible": false
+  },
+  "noAestheticRerender": true
+}
