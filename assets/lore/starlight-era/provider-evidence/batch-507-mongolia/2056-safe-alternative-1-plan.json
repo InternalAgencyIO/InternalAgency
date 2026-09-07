@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "batch": 507,
+  "scene": 2056,
+  "attempt": "safe-alternative-1",
+  "state": "offline-prepared-not-staged-or-submitted",
+  "createdAtUtc": "2026-09-07T07:29:19.791Z",
+  "initialReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-initial-no-image-receipt.json",
+  "initialProviderUrl": "https://www.meta.ai/prompt/40521cb0-e987-45a5-82e6-b2498ae25bff",
+  "originalPromptPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-initial-prompt.txt",
+  "originalPromptSha256": "27E736B7715E8A6F976D7CE708120A417237F438A9B3F369DF76138EFF28F528",
+  "retryPromptPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-safe-alternative-1-prompt.txt",
+  "retryPromptSha256": "A63F3E835CBB057728CB9983E04B83EE85552F1235DA455C213D02C746B3B68C",
+  "reason": "Initial Meta response returned no image and explicitly offered the same cast, pose, clothing and location with a calm uninhabited valley and no distant effects.",
+  "safetyOverrides": [
+    {
+      "field": "fictionalDistantRazedBackground",
+      "originalRoll": {
+        "key": "starlight-editorial-rolls-2026-09-06|batch-507|mongolia|scene-2056|image|fictionalDistantRazedBackground",
+        "block": 0,
+        "byteIndex": 0,
+        "byte": 129,
+        "value": 30,
+        "percent": 32,
+        "active": true
+      },
+      "renderedOverride": false,
+      "reason": "Adopt provider-offered safer calm background, remove actual effect content rather than disguising it.",
+      "mustCarryThroughSingleEditAndCaption": true
+    }
+  ],
+  "fixedRollBankUnchanged": true,
+  "allOtherPromptClausesUnchanged": true,
+  "maximumHardFailureRetries": 2,
+  "hardFailureRetriesUsed": 0,
+  "retrySendActivations": 0,
+  "additionalInitialSendsAllowed": 0,
+  "orderedAnchors": [
+    938,
+    936,
+    937
+  ],
+  "freshComposerRequired": true,
+  "account": "leesha007",
+  "mode": "Thinking",
+  "nextSafeAction": "Remote-verify original no-image receipt, complete initial raw archive and this exact safer prompt. Reuse only the archived2056lane as a fresh composer, attach938,936,937 in order, verify exact text/Thinking/account and stage remotely before one safe-alternative Send. Never reopen or repeat the original provider occurrence."
+}
