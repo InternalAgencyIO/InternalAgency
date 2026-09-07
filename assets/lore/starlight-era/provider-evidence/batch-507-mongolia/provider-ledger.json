@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 507,
   "country": "Mongolia",
-  "state": "offline-prepared-not-staged-or-submitted",
+  "state": "four-exact-composers-staged-not-submitted",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -23,5 +23,54 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": null,
-  "nextSafeAction": "After remote preparation parity, reuse reconciled archived Meta lanes for fresh composers. Verify leesha007 and Thinking, visibly attach938,936,937 once in that order, type exact frozen prompts, archive staging and reverify remote parity before one Send per lane."
+  "nextSafeAction": "Remote-verify exact staging and repeat action-time hash, anchor, account and Thinking checks, then activate Send once per distinct fresh lane.",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
+  "stagedAtUtc": "2026-09-07T07:19:53.157Z",
+  "stagedScenes": [
+    {
+      "scene": 2055,
+      "tabId": "24",
+      "promptSha256": "85FFAB3AB92857DFED62D84A658C087ED77EC0C5D4658844A5C4F0C29B9DD228",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivationsAtStaging": 0
+    },
+    {
+      "scene": 2056,
+      "tabId": "25",
+      "promptSha256": "27E736B7715E8A6F976D7CE708120A417237F438A9B3F369DF76138EFF28F528",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivationsAtStaging": 0
+    },
+    {
+      "scene": 2057,
+      "tabId": "26",
+      "promptSha256": "450EA5D8E79F7C94F8680D11B83D4DC0448F3DA7234CE610E916B8AC3F0777EE",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivationsAtStaging": 0
+    },
+    {
+      "scene": 2058,
+      "tabId": "27",
+      "promptSha256": "C6A7C270E077864F8EF9271477EA8E50B187B0F3931A20FA53FE1545D25E0A0C",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sendActivationsAtStaging": 0
+    }
+  ]
 }
