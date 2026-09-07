@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 504,
   "country": "Croatia",
-  "state": "prepared-offline-not-dispatched",
+  "state": "four-visible-composers-staged-pending-one-initial-Send",
   "createdAtUtc": "2026-09-07T04:55:50.002Z",
   "baseRemoteVerifiedHead": "2944a9cb86b1264fd68b32118e89e85111b1d90e",
   "sceneIds": [
@@ -52,5 +52,7 @@
   "dispatchCount": 0,
   "chatgptEditCount": 0,
   "xPostCount": 234,
-  "nextSafeAction": "Remote-verify Croatia504 preparation, attach exact938/936/937 anchors in four visible Meta Thinking composers, verify exact prompt hashes and account, then preserve staging and recheck parity before one initial Send per scene2043-2046. Do not reuse any terminal scene."
+  "nextSafeAction": "Verify final HEAD/origin/PR parity and unchanged exact visible composers, then activate initial Send once in each scene2043-2046. Immediately preserve provider URLs and do not repeat any confirmed or ambiguous activation.",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/four-composers-staging-evidence.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-504-croatia/initial-send-intents.json"
 }
