@@ -8,8 +8,8 @@
       2033,
       2034
     ],
-    "state": "four-visual-selections-complete-three-internal-originals-held",
-    "checkpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-selections-raw-archive-hold-checkpoint.json",
+    "state": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
+    "checkpoint": "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-501-costa-rica-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-501-costa-rica-fixed-rolls.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/provider-ledger.json",
@@ -22,9 +22,9 @@
     "mode": "Thinking",
     "providerSendActivations": 4,
     "chatgptEditInvocations": 4,
-    "archiveExceptionApplies": false,
+    "archiveExceptionApplies": true,
     "previousMauritaniaException": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
-    "nextSafeAction": "Do not send another Costa Rica prompt, retry, edit or X post. Recover the three first internal Meta originals for scenes2031,2032,2034 using a supported visible-browser save/download control and import exact bytes with provenance and hashes. If that cannot be done, obtain a new explicit Costa Rica-only exception for these three originals before normal Mauritania-Costa Rica publication or next-country rendering. Keep both source and edit versions, all signed URLs and the existing Oman evidence tab. Before any later Post, reverify @dogramaci, nonduplicate scene/media hashes, exact ALT, AI disclosure, caption/hashtag rolls and local/origin/PR/LFS parity.",
+    "nextSafeAction": "Treat the four saved Costa Rica selections as accepted under the explicit Costa Rica-only exception for three missing earlier internal originals. Keep those originals logged as unrecovered, preserve all nine available files and every provider URL, and do not rerender or edit scenes2031-2034. Prepare eligible nonduplicate Mauritania-Costa Rica country-pair media with the required caption, frozen hashtag rolls, exact ALT and Made with AI. Verify live @dogramaci and Git/LFS/origin/PR parity before one authorized Post activation, then record its live URL immediately. Continue only to the next authoritative country after publishing and recording the eligible pair; Oman and Switzerland remain excluded. No new automation, guardian, task, worker or subagent.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -53,7 +53,11 @@
       "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/2034-accessibility.json"
     ],
     "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/browser-final-handoff.json",
-    "availableManifest": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/available-media-evidence-manifest.json"
+    "availableManifest": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/available-media-evidence-manifest.json",
+    "archiveException": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
+    "archiveGateSatisfiedByExplicitException": true,
+    "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/accepted-selections-under-explicit-exception.json",
+    "eligibleForNormalCountryPairing": true
   },
   "currentAuthorityBatch500": {
     "state": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
@@ -99,7 +103,7 @@
   },
   "version": 2,
   "currentXBacklogDrain20260906": {
-    "state": "selected-backlog-closed-mauritania-exception-accepted-costa-rica-raw-gap-held",
+    "state": "mauritania-and-costa-rica-accepted-under-separate-explicit-exceptions-ready-for-pair-checks",
     "canonicalPostCount": 230,
     "manualPostsReconciled": [
       "https://x.com/dogramaci/status/2096574104090325016",
@@ -194,8 +198,8 @@
     "olderManualAuditComplete": true,
     "backlogFullyCleared": false,
     "browserState": "Four current Meta recovery previews, one empty X composer, and one explicitly authorized protected Oman native-image tab.",
-    "nextSafeAction": "Do not send another Costa Rica prompt, retry, edit or X post. Recover the three first internal Meta originals for scenes2031,2032,2034 using a supported visible-browser save/download control and import exact bytes with provenance and hashes. If that cannot be done, obtain a new explicit Costa Rica-only exception for these three originals before normal Mauritania-Costa Rica publication or next-country rendering. Keep both source and edit versions, all signed URLs and the existing Oman evidence tab. Before any later Post, reverify @dogramaci, nonduplicate scene/media hashes, exact ALT, AI disclosure, caption/hashtag rolls and local/origin/PR/LFS parity.",
-    "continuationCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-selections-raw-archive-hold-checkpoint.json",
+    "nextSafeAction": "Treat the four saved Costa Rica selections as accepted under the explicit Costa Rica-only exception for three missing earlier internal originals. Keep those originals logged as unrecovered, preserve all nine available files and every provider URL, and do not rerender or edit scenes2031-2034. Prepare eligible nonduplicate Mauritania-Costa Rica country-pair media with the required caption, frozen hashtag rolls, exact ALT and Made with AI. Verify live @dogramaci and Git/LFS/origin/PR parity before one authorized Post activation, then record its live URL immediately. Continue only to the next authoritative country after publishing and recording the eligible pair; Oman and Switzerland remain excluded. No new automation, guardian, task, worker or subagent.",
+    "continuationCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json",
     "olderManualAuditReviewedPosts": 234,
     "olderManualAuditUnreviewedPosts": 0,
     "olderManualAuditNextUrl": null,
@@ -281,11 +285,11 @@
     "omanRecoveryDeferral": "assets/lore/starlight-era/batch-499-oman-explicit-deferral-and-batch-500-advance-checkpoint.json",
     "activeRenderBatch": 501,
     "activeRenderCountry": "Costa Rica",
-    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-four-selections-raw-archive-hold-checkpoint.json",
-    "activeRenderState": "four-visual-selections-complete-three-internal-originals-held",
-    "activeRenderSelection": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/final-selection-qa.json",
+    "activeRenderCheckpoint": "assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json",
+    "activeRenderState": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
+    "activeRenderSelection": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/accepted-selections-under-explicit-exception.json",
     "activeRenderArchiveHold": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
-    "activeRenderArchiveException": null,
+    "activeRenderArchiveException": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
     "companionCandidateCountry": "Mauritania",
     "companionAcceptedSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
     "companionCountryArchiveException": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/explicit-archive-exception-authorization.json"

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "batch": 501,
+  "country": "Costa Rica",
+  "createdAtUtc": "2026-09-07T02:06:48.633Z",
+  "state": "explicit-archive-exception-approved-four-selections-await-normal-pairing",
+  "baseRemoteVerifiedHead": "45291e32266e42a8c38142e716eafd58b788b258",
+  "supersedesArchiveHoldOnlyIn": "assets/lore/starlight-era/batch-501-costa-rica-four-selections-raw-archive-hold-checkpoint.json",
+  "authorization": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/explicit-archive-exception-authorization.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/accepted-selections-under-explicit-exception.json",
+  "currentEvidenceManifest": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/archive-exception-current-manifest.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/provider-ledger.json",
+  "internalOriginalRecovery": "assets/lore/starlight-era/provider-evidence/batch-501-costa-rica/internal-original-recovery-hold.json",
+  "sceneIds": [
+    2031,
+    2032,
+    2033,
+    2034
+  ],
+  "acceptedCount": 4,
+  "availableMediaFiles": 9,
+  "metaInitialSends": 4,
+  "metaRetries": 0,
+  "chatgptEditsInvoked": 4,
+  "chatgptReturnedImages": 4,
+  "additionalCostaRicaSendsAllowed": 0,
+  "additionalCostaRicaEditsAllowed": 0,
+  "fullRawArchiveComplete": false,
+  "missingInternalOriginals": 3,
+  "archiveGateSatisfiedByExplicitException": true,
+  "eligibleForNormalCountryPairing": true,
+  "xEligible": false,
+  "companionCountry": "Mauritania",
+  "companionAcceptedSelection": "assets/lore/starlight-era/provider-evidence/batch-500-mauritania/accepted-selections-under-explicit-exception.json",
+  "companionException": "assets/lore/starlight-era/batch-500-mauritania-explicit-archive-exception-checkpoint.json",
+  "xPostActivationsThisTurn": 0,
+  "canonicalXPostCount": 230,
+  "omanRemainsDeferredUnpublished": true,
+  "switzerland1849StillHeld": true,
+  "starlightGuardianPresent": false,
+  "newAutomationsAllowed": false,
+  "canonicalContradictionsResolved": [
+    {
+      "field": "currentAuthorityBatch501.archiveExceptionApplies",
+      "resolution": "Now true only because the direct current user approved the Costa Rica-specific exception. The separate Mauritania exception is not inherited."
+    }
+  ],
+  "nextSafeAction": "Treat the four saved Costa Rica selections as accepted under the explicit Costa Rica-only exception for three missing earlier internal originals. Keep those originals logged as unrecovered, preserve all nine available files and every provider URL, and do not rerender or edit scenes2031-2034. Prepare eligible nonduplicate Mauritania-Costa Rica country-pair media with the required caption, frozen hashtag rolls, exact ALT and Made with AI. Verify live @dogramaci and Git/LFS/origin/PR parity before one authorized Post activation, then record its live URL immediately. Continue only to the next authoritative country after publishing and recording the eligible pair; Oman and Switzerland remain excluded. No new automation, guardian, task, worker or subagent."
+}

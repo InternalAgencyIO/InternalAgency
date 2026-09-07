@@ -1,3 +1,9 @@
+# Current status: Costa Rica-only exception approved
+
+On 2026-09-07T02:06:48.633Z, the user explicitly approved an exception for the three missing earlier internal originals described below. All nine available media files remain saved; the missing originals are still not recovered. The approval allows normal pairing and X checks, not rerendering, re-editing, duplicate publication or extension to any other country. Current authority: assets/lore/starlight-era/batch-501-costa-rica-explicit-archive-exception-checkpoint.json.
+
+## Historical recovery hold, retained as evidence
+
 # Costa Rica Batch 501 raw-original recovery hold
 
 The four delivered Meta originals are saved unchanged. Three earlier provider-internal originals are still missing. Screenshots and signed source URLs are evidence, not substitute raw files. No Costa Rica archive exception has been approved.
