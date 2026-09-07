@@ -10,7 +10,7 @@
     "Panama"
   ],
   "part": 1,
-  "state": "reserved-final-remote-and-visible-staging-pending",
+  "state": "visible-staged-ready-after-action-time-parity",
   "preparedAtUtc": "2026-09-07T04:15:04.413Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -205,7 +205,7 @@
   "madeWithAiRequired": true,
   "postClicks": 0,
   "publicTransmissionCount": 0,
-  "uploadCount": 0,
+  "uploadCount": 1,
   "archiveExceptions": [],
   "rawArchiveComplete": true,
   "missingInternalOriginalsByCountry": {
@@ -229,5 +229,13 @@
   ],
   "remoteParityCommitBeforeReservation": "5081ec352b470b7991f9065544b64e6692706c6f",
   "nextSafeAction": "After fresh remote byte verification and branch/PR parity, stage exactly these four images, exact caption and four ALTs, enable Made with AI, then one Post activation. Reconcile live URL before any repeat.",
-  "noRepostAnyVersion": true
+  "noRepostAnyVersion": true,
+  "staging": "assets/lore/starlight-era/provider-evidence/batch-503-panama/kuwait-panama-p1-x-staging-proof.json",
+  "liveAccount": {
+    "handle": "@dogramaci",
+    "verifiedAtUtc": "2026-09-07T04:17:01.392Z",
+    "method": "visible account menu Log out @dogramaci; live owned profile Edit profile also present",
+    "profileUrl": "https://x.com/dogramaci"
+  },
+  "remoteProof": "assets/lore/starlight-era/provider-evidence/batch-503-panama/final-remote-closure-verification.json"
 }
