@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "batch": 504,
+  "country": "Croatia",
+  "state": "prepared-offline-not-dispatched",
+  "provider": "Meta AI",
+  "account": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "providerSendActivations": 0,
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "occurrences": [],
+  "stagedScenes": [
+    {
+      "scene": 2043,
+      "state": "offline-only",
+      "promptSha256": "4999E01B8ED15D2E753CA6E76EE9A6913E66EC2DE1BC10EF9A2A01B4D68250AB"
+    },
+    {
+      "scene": 2044,
+      "state": "offline-only",
+      "promptSha256": "EEDC8A50E219D47BF1BA70ED25A09ACB960750676FD77DBC1F902040C4DE9E62"
+    },
+    {
+      "scene": 2045,
+      "state": "offline-only",
+      "promptSha256": "37BE2D680B60942663A45CDE687D987A9893F2EF5629F3BA24F81FF3B490EE27"
+    },
+    {
+      "scene": 2046,
+      "state": "offline-only",
+      "promptSha256": "DFDF51675B2381D9EE967224561870480AB0179B9A8D9E585C591DDEA6153759"
+    }
+  ],
+  "currentCheckpoint": "assets/lore/starlight-era/batch-504-croatia-prepared-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-504-croatia-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-504-croatia-fixed-rolls.json",
+  "maximumHardFailureRetriesPerScene": 2,
+  "aestheticRetries": 0,
+  "sourceArchiveComplete": false,
+  "archiveException": false,
+  "nextSafeAction": "Remote-verify Croatia504 preparation, attach exact938/936/937 anchors in four visible Meta Thinking composers, verify exact prompt hashes and account, then preserve staging and recheck parity before one initial Send per scene2043-2046. Do not reuse any terminal scene."
+}
