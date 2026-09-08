@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 507,
   "country": "Mongolia",
-  "state": "2056-safe-alternative-1-staged-not-submitted",
+  "state": "2056-safe-alternative-1-confirmed-in-progress",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,8 +11,8 @@
     936,
     937
   ],
-  "providerSendActivations": 4,
-  "providerRetries": 0,
+  "providerSendActivations": 5,
+  "providerRetries": 1,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
   "occurrences": [
@@ -114,6 +114,33 @@
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-9-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-10-original.webp"
       ]
+    },
+    {
+      "schemaVersion": 1,
+      "occurrenceId": "batch-507-scene-2056-safe-alternative-1",
+      "batch": 507,
+      "scene": 2056,
+      "kind": "safe-alternative-1",
+      "preparedAtUtc": "2026-09-08T01:43:47.147Z",
+      "state": "confirmed-submission-in-progress",
+      "activationCount": 1,
+      "maximumActivationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-safe-alternative-1-prompt.txt",
+      "promptSha256": "A63F3E835CBB057728CB9983E04B83EE85552F1235DA455C213D02C746B3B68C",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "tabId": "28",
+      "providerUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
+      "plan": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-plan.json",
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-staging-evidence.json",
+      "maximumHardFailureRetries": 2,
+      "retryOrdinal": 1,
+      "submittedAtUtc": "2026-09-08T01:46:34.913Z",
+      "additionalSendsAllowed": 0,
+      "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json"
     }
   ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-507-mongolia-prepared-checkpoint.json",
@@ -123,7 +150,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": null,
-  "nextSafeAction": "Verify staging commit, all initial original bytes and exact anchors against fresh remote LFS and PR parity, repeat action-time prompt/card/account/Thinking checks, then activate Send exactly once for2056safe-alternative1. Three other original scenes await QA and one built-in edit each; no initial resend.",
+  "nextSafeAction": "Observe confirmed2056safe-alternative1 without resending; preserve every exposed output. QA archived2055,2057,2058 sources and invoke exactly one built-in tailoring edit per selected usable source. Keep calm-background exclusion for2056. No X posting until country closure and duplicate-safe pair reservation.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T07:19:53.157Z",
@@ -173,12 +200,13 @@
       "sendActivationsAtStaging": 0
     }
   ],
-  "confirmedSubmissions": 4,
+  "confirmedSubmissions": 5,
   "providerUrls": [
     "https://www.meta.ai/prompt/6ed0b411-3561-4102-a294-befaf7aefa5a",
     "https://www.meta.ai/prompt/40521cb0-e987-45a5-82e6-b2498ae25bff",
     "https://www.meta.ai/prompt/076c455d-8a86-43d9-80a2-814b14804361",
-    "https://www.meta.ai/prompt/1fecb156-c970-466d-9db1-15dec5a9bf7e"
+    "https://www.meta.ai/prompt/1fecb156-c970-466d-9db1-15dec5a9bf7e",
+    "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f"
   ],
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-receipt.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-remote-preflight.json",
@@ -204,5 +232,8 @@
     "30",
     "31"
   ],
-  "liveXComposerTabId": "32"
+  "liveXComposerTabId": "32",
+  "safeAlternativeReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json",
+  "safeAlternativeProviderUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
+  "remoteSafeAlternativePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-remote-preflight.json"
 }

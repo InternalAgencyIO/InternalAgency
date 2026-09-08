@@ -3,7 +3,7 @@
   "batch": 507,
   "scene": 2056,
   "attempt": "safe-alternative-1",
-  "state": "2056-safe-alternative-1-staged-not-submitted",
+  "state": "2056-safe-alternative-1-confirmed-in-progress",
   "createdAtUtc": "2026-09-07T07:29:19.791Z",
   "initialReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-initial-no-image-receipt.json",
   "initialProviderUrl": "https://www.meta.ai/prompt/40521cb0-e987-45a5-82e6-b2498ae25bff",
@@ -32,8 +32,8 @@
   "fixedRollBankUnchanged": true,
   "allOtherPromptClausesUnchanged": true,
   "maximumHardFailureRetries": 2,
-  "hardFailureRetriesUsed": 0,
-  "retrySendActivations": 0,
+  "hardFailureRetriesUsed": 1,
+  "retrySendActivations": 1,
   "additionalInitialSendsAllowed": 0,
   "orderedAnchors": [
     938,
@@ -43,7 +43,7 @@
   "freshComposerRequired": true,
   "account": "leesha007",
   "mode": "Thinking",
-  "nextSafeAction": "Verify staging commit, all initial original bytes and exact anchors against fresh remote LFS and PR parity, repeat action-time prompt/card/account/Thinking checks, then activate Send exactly once for2056safe-alternative1. Three other original scenes await QA and one built-in edit each; no initial resend.",
+  "nextSafeAction": "Observe confirmed2056safe-alternative1 without resending; preserve every exposed output. QA archived2055,2057,2058 sources and invoke exactly one built-in tailoring edit per selected usable source. Keep calm-background exclusion for2056. No X posting until country closure and duplicate-safe pair reservation.",
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08.json",
   "safeAlternativeStaging": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-staging-evidence.json",
   "safeAlternativeSendIntent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-intent.json",
@@ -53,5 +53,9 @@
     "30",
     "31"
   ],
-  "liveXComposerTabId": "32"
+  "liveXComposerTabId": "32",
+  "safeAlternativeReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json",
+  "safeAlternativeProviderUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
+  "remoteSafeAlternativePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-remote-preflight.json",
+  "additionalSendsForThisAttemptAllowed": 0
 }
