@@ -10,24 +10,24 @@
       "Eritrea",
       "Mongolia"
     ],
-    "state": "part1-posted-verified-part2-reserved",
-    "updatedAtUtc": "2026-09-08T02:32:13.220Z",
-    "postCount": 237,
+    "state": "both-parts-posted-verified-pending-workflow-remote-proof",
+    "updatedAtUtc": "2026-09-08T02:41:48.638Z",
+    "postCount": 238,
     "newPostUrls": [
-      "https://x.com/dogramaci/status/2097150739436933540"
+      "https://x.com/dogramaci/status/2097150739436933540",
+      "https://x.com/dogramaci/status/2097153131444318437"
     ],
     "postedSceneIds": [
       2051,
       2052,
       2055,
-      2056
-    ],
-    "remainingSceneIds": [
+      2056,
       2053,
       2054,
       2057,
       2058
     ],
+    "remainingSceneIds": [],
     "parts": [
       {
         "part": 1,
@@ -39,6 +39,17 @@
           2056
         ],
         "publicTransmissionCount": 1
+      },
+      {
+        "part": 2,
+        "url": "https://x.com/dogramaci/status/2097153131444318437",
+        "scenes": [
+          2053,
+          2054,
+          2057,
+          2058
+        ],
+        "publicTransmissionCount": 1
       }
     ],
     "reservations": [
@@ -48,7 +59,7 @@
     "rawArchiveComplete": true,
     "totalSavedMediaFiles": 35,
     "uniqueSavedByteVersions": 27,
-    "consumedSceneFamilyFiles": 12,
+    "consumedSceneFamilyFiles": 35,
     "allConsumedVersionsNoRepost": true,
     "closureProofs": [
       "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
@@ -56,7 +67,7 @@
     ],
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08-0229.json",
-    "nextSafeAction": "Remote-close this posted scene family before staging reserved part2. Never repost any version.",
+    "nextSafeAction": "Both pair posts terminal. Seal full workflow and reconcile next unused country cursor. Never repost any version.",
     "checkpoint": "assets/lore/starlight-era/batch-507-eritrea-mongolia-x-publication-checkpoint.json"
   },
   "currentAuthorityBatch507": {
@@ -68,7 +79,7 @@
       2057,
       2058
     ],
-    "state": "part1-posted-verified-part2-staged-visible",
+    "state": "both-parts-posted-verified-pending-workflow-remote-proof",
     "checkpoint": "assets/lore/starlight-era/batch-507-mongolia-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-507-mongolia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-507-mongolia-fixed-rolls.json",
@@ -87,7 +98,7 @@
     "previousCountryClosure": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/accepted-selections.json",
-    "nextSafeAction": "P2visiblystaged; final refs/dups then onePostactivation. Immediately log URL and seal full pair workflow before next unused country. No scene rerenders.",
+    "nextSafeAction": "Both pair posts terminal. Seal full workflow and reconcile next unused country cursor. Never repost any version.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
     "confirmedSubmissions": 5,
@@ -144,9 +155,10 @@
       "assets/lore/starlight-era/batch-507-eritrea-mongolia-p2-x-reservation.json"
     ],
     "publicationCheckpoint": "assets/lore/starlight-era/batch-507-eritrea-mongolia-x-publication-checkpoint.json",
-    "xPostCount": 237,
+    "xPostCount": 238,
     "newXPostUrls": [
-      "https://x.com/dogramaci/status/2097150739436933540"
+      "https://x.com/dogramaci/status/2097150739436933540",
+      "https://x.com/dogramaci/status/2097153131444318437"
     ]
   },
   "currentAuthorityBatch506": {
@@ -15207,6 +15219,357 @@
             "scene": 2055,
             "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-chatgpt-single-tailoring-pass.png",
             "sha256": "fabd1b6ad03589c4ec95f6982bd853b26cb95842895510966c55e4056c7c93e6"
+          }
+        ],
+        "noRepostAnyVersion": true
+      },
+      "uploadCount": 1
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 507,
+      "batches": [
+        506,
+        507
+      ],
+      "countries": [
+        "Eritrea",
+        "Mongolia"
+      ],
+      "part": 2,
+      "sceneIds": [
+        2053,
+        2054,
+        2057,
+        2058
+      ],
+      "imageNumbers": [
+        2053,
+        2054,
+        2057,
+        2058
+      ],
+      "state": "posted-verified",
+      "postUrl": "https://x.com/dogramaci/status/2097153131444318437",
+      "postedAt": "2026-09-08T02:40:43.982Z",
+      "verifiedAt": "2026-09-08T02:41:48.638Z",
+      "caption": "Eritrea ❤️ Mongolia: coastal glances meet desert handclasps and a mountain-lake lounge. Short couture, rainbow legwear and close friendship. AI fashion; Eritrea's fire, smoke and cloud scenery are imaginary, not real events. #RAZE #WorldXXXSeries",
+      "captionSha256": "484a168e050b58349ca3dda92b4c24bc4deb08bfcd181f056a0d91a7e31ac301",
+      "hashtags": [
+        "#RAZE",
+        "#WorldXXXSeries"
+      ],
+      "assets": [
+        {
+          "scene": 2053,
+          "country": "Eritrea",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-chatgpt-single-tailoring-pass.png",
+          "sha256": "58d75116b3ad81f6b1014eb2a3f2d5b52197d516b8d859ba5ca6e0ea7f035b8a",
+          "bytes": 2422055,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "providerUrl": "https://www.meta.ai/prompt/e5e88c77-0278-4da2-9f14-ce24975bb084",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "complete-unposted-Mongolia-companion",
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women in an ochre courtyard lounge. A blonde woman in a pale cropped top and teal skort hugs a seated braided woman in rust red from behind. Opposite them, a woman in an Eritrea-inspired red, green and blue flag mini clasps hands, while a fourth in midnight blue leans in from a higher bench. Jade boots, rainbow ankle boots, varied heels and an IA upper-arm tattoo are visible.",
+          "safetyOverrides": [],
+          "uploadIndex": 1
+        },
+        {
+          "scene": 2054,
+          "country": "Eritrea",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-gallery-original.webp",
+          "sha256": "650efe8c9ddd96c3f6158f035d024e3b1d39092477046966c4138a4f5369ac25",
+          "bytes": 515756,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/0ad46915-ae1d-43a6-afa0-996f118577cc",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "output-moderation-blocked-no-bytes-original-retained",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "complete-unposted-Mongolia-companion",
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-accessibility.json",
+          "alt": "AI-generated fashion portrait of four fictional adult women leaning together in a close seated conversation beside blue coastal water. A braided woman in sea blue clasps the hands of a blonde woman in ivory. Two companions in jade and an Eritrea-inspired flag mini lean in at different heights. Star clasps, agency, scorpion and silent king tattoos decorate the fashion scene. Distant fires and mushroom-shaped smoke clouds are imaginary scenery, not a real event.",
+          "safetyOverrides": [],
+          "uploadIndex": 2
+        },
+        {
+          "scene": 2057,
+          "country": "Mongolia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-tailoring-pass.png",
+          "sha256": "b1c66226c7a8b92001ab968e5f8550ea2798d9001a22755e57fa447f849a9af9",
+          "bytes": 2443031,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "providerUrl": "https://www.meta.ai/prompt/076c455d-8a86-43d9-80a2-814b14804361",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a sheltered desert lounge. A blonde woman in a red-and-blue flag-inspired mini embraces a seated braided companion from behind. Two women in copper and terracotta lean in and clasp hands at different heights. Rainbow-gradient legwear, metallic platform boots, glossy heels and fine line compass-and-heart tattoos complete the outfits. The dunes and lounge are fictional scenery.",
+          "safetyOverrides": [],
+          "uploadIndex": 3
+        },
+        {
+          "scene": 2058,
+          "country": "Mongolia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png",
+          "sha256": "65ea8fc4d466a9f5225f959a83d1ac3a918ae5a6f9b01d7148bb850f641ad83d",
+          "bytes": 2378344,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image generator",
+          "providerUrl": "https://www.meta.ai/prompt/1fecb156-c970-466d-9db1-15dec5a9bf7e",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "live-account-check",
+            "all-version-duplicate-check",
+            "frozen-caption-media-alt-and-AI-disclosure",
+            "final-remote-parity"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a diagonal lake-window lounge composition. A braided woman in cobalt holds hands with a blonde woman in a red-and-blue flag-inspired cropped outfit and mini skirt. A green-clad companion leans over the bench, while a silver-and-cobalt-clad woman touches a shoulder from a separate seat. White RAZE boots, rainbow platform sandals and crescent tattoos are visible. The calm mountain lake setting is fictional.",
+          "safetyOverrides": [],
+          "uploadIndex": 4
+        }
+      ],
+      "photoEndpoints": [
+        {
+          "scene": 2053,
+          "index": 1,
+          "url": "https://x.com/dogramaci/status/2097153131444318437/photo/1",
+          "alt": "AI-generated fashion editorial of four fictional adult women in an ochre courtyard lounge. A blonde woman in a pale cropped top and teal skort hugs a seated braided woman in rust red from behind. Opposite them, a woman in an Eritrea-inspired red, green and blue flag mini clasps hands, while a fourth in midnight blue leans in from a higher bench. Jade boots, rainbow ankle boots, varied heels and an IA upper-arm tattoo are visible."
+        },
+        {
+          "scene": 2054,
+          "index": 2,
+          "url": "https://x.com/dogramaci/status/2097153131444318437/photo/2",
+          "alt": "AI-generated fashion portrait of four fictional adult women leaning together in a close seated conversation beside blue coastal water. A braided woman in sea blue clasps the hands of a blonde woman in ivory. Two companions in jade and an Eritrea-inspired flag mini lean in at different heights. Star clasps, agency, scorpion and silent king tattoos decorate the fashion scene. Distant fires and mushroom-shaped smoke clouds are imaginary scenery, not a real event."
+        },
+        {
+          "scene": 2057,
+          "index": 3,
+          "url": "https://x.com/dogramaci/status/2097153131444318437/photo/3",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a sheltered desert lounge. A blonde woman in a red-and-blue flag-inspired mini embraces a seated braided companion from behind. Two women in copper and terracotta lean in and clasp hands at different heights. Rainbow-gradient legwear, metallic platform boots, glossy heels and fine line compass-and-heart tattoos complete the outfits. The dunes and lounge are fictional scenery."
+        },
+        {
+          "scene": 2058,
+          "index": 4,
+          "url": "https://x.com/dogramaci/status/2097153131444318437/photo/4",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a diagonal lake-window lounge composition. A braided woman in cobalt holds hands with a blonde woman in a red-and-blue flag-inspired cropped outfit and mini skirt. A green-clad companion leans over the bench, while a silver-and-cobalt-clad woman touches a shoulder from a separate seat. White RAZE boots, rainbow platform sandals and crescent tattoos are visible. The calm mountain lake setting is fictional."
+        }
+      ],
+      "mediaMode": "four-stills-two-countries-2-plus-2",
+      "buttonActivationAttempts": 1,
+      "successfulMethod": "Post.press(Enter)",
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 4,
+      "stagingCommit": "0fc7eef59988bf0ed7387fdae4d7ded9da485bd1",
+      "archiveExceptions": [],
+      "rawArchiveComplete": true,
+      "missingInternalOriginalsByCountry": {
+        "Eritrea": 0,
+        "Mongolia": 0
+      },
+      "evidence": [
+        "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/eritrea-mongolia-p2-x-staging-evidence.json",
+        "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/eritrea-mongolia-p2-x-send-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/eritrea-mongolia-p2-x-publication-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/eritrea-mongolia-p2-x-published-visible.jpg",
+        "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
+        "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/final-remote-closure-verification.json"
+      ],
+      "duplicateGate": {
+        "allVersionsChecked": 23,
+        "noRepostSceneFamilies": [
+          2053,
+          2054,
+          2057,
+          2058
+        ],
+        "consumedVersions": [
+          {
+            "scene": 2053,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-meta-gallery-original.webp",
+            "sha256": "84f09b81d63eac0259ff53384495ce921f5a627c8a103d3b000900830b236079"
+          },
+          {
+            "scene": 2053,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-meta-internal-1-original.webp",
+            "sha256": "84f09b81d63eac0259ff53384495ce921f5a627c8a103d3b000900830b236079"
+          },
+          {
+            "scene": 2054,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-gallery-original.webp",
+            "sha256": "650efe8c9ddd96c3f6158f035d024e3b1d39092477046966c4138a4f5369ac25"
+          },
+          {
+            "scene": 2054,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2054-meta-internal-1-original.webp",
+            "sha256": "650efe8c9ddd96c3f6158f035d024e3b1d39092477046966c4138a4f5369ac25"
+          },
+          {
+            "scene": 2053,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/2053-chatgpt-single-tailoring-pass.png",
+            "sha256": "58d75116b3ad81f6b1014eb2a3f2d5b52197d516b8d859ba5ca6e0ea7f035b8a"
+          },
+          {
+            "scene": 2057,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-gallery-original.webp",
+            "sha256": "e1de365e8e7b6acc43053d1b2ef68443eb00197f223442d2f7c5b37032c88fb5"
+          },
+          {
+            "scene": 2057,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-1-original.webp",
+            "sha256": "2b15709a303779420e03d5c7817b741ce5967f4532b31e3c797dd527bca01aff"
+          },
+          {
+            "scene": 2057,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-2-original.webp",
+            "sha256": "d3ca331342d30204c7bbb0e95dfc4ed9a5447418c98f7fdec1e9ec072e48dc20"
+          },
+          {
+            "scene": 2057,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-3-original.webp",
+            "sha256": "4d6923be2bd3c0e1c5dac44b2290f13b5010d2033de608a77f362019a1d6db83"
+          },
+          {
+            "scene": 2057,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-4-original.webp",
+            "sha256": "e1de365e8e7b6acc43053d1b2ef68443eb00197f223442d2f7c5b37032c88fb5"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-gallery-original.webp",
+            "sha256": "43c1c993c99a708501357b0303f1070c2ea8e6b73d7e21a83cb05dc9b540c106"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-1-original.webp",
+            "sha256": "645971b3bfe2016f5fbe1bbf84ab0ae09672e2f23657a8ddf9562a1a6e2fb868"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-2-original.webp",
+            "sha256": "02044755800df847b5e2c0935261bbaf8f48aeff7db7f6c342d23df1c99e9ed6"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-3-original.webp",
+            "sha256": "cdadbd10907b25f322d49c14508b4def9db64da31d9573d3aa599012c788ee8f"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-4-original.webp",
+            "sha256": "bb1918b5b2bdde5a763d8833303636f6c4a01f17dbf9d14caeb67507a1bce61d"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-5-original.webp",
+            "sha256": "61c1fdac94c56da0a0203c92cbbf459b6146c9078951dd4daad85cb25e383eca"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-6-original.webp",
+            "sha256": "40e11dc887fa3866b6ad4338b4c9b534ce5ff6b97d70092c2e9e37d1720f9a65"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-7-original.webp",
+            "sha256": "028551649a095a6a2bbfd101bc668130c146a20ad05bcfa7eaa6c304d9aa87fd"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-8-original.webp",
+            "sha256": "a1a67de3c45421d297023dd1fafe272c053a559794a6597d0e7203cecf0610cf"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-9-original.webp",
+            "sha256": "c3da6684c657cf47732eb050df8de1e637b3125ab91ff395cfe6010243f9db63"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-10-original.webp",
+            "sha256": "43c1c993c99a708501357b0303f1070c2ea8e6b73d7e21a83cb05dc9b540c106"
+          },
+          {
+            "scene": 2057,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-tailoring-pass.png",
+            "sha256": "b1c66226c7a8b92001ab968e5f8550ea2798d9001a22755e57fa447f849a9af9"
+          },
+          {
+            "scene": 2058,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png",
+            "sha256": "65ea8fc4d466a9f5225f959a83d1ac3a918ae5a6f9b01d7148bb850f641ad83d"
           }
         ],
         "noRepostAnyVersion": true

@@ -10,24 +10,24 @@
       "Eritrea",
       "Mongolia"
     ],
-    "state": "part1-posted-verified-part2-reserved",
-    "updatedAtUtc": "2026-09-08T02:32:13.220Z",
-    "postCount": 237,
+    "state": "both-parts-posted-verified-pending-workflow-remote-proof",
+    "updatedAtUtc": "2026-09-08T02:41:48.638Z",
+    "postCount": 238,
     "newPostUrls": [
-      "https://x.com/dogramaci/status/2097150739436933540"
+      "https://x.com/dogramaci/status/2097150739436933540",
+      "https://x.com/dogramaci/status/2097153131444318437"
     ],
     "postedSceneIds": [
       2051,
       2052,
       2055,
-      2056
-    ],
-    "remainingSceneIds": [
+      2056,
       2053,
       2054,
       2057,
       2058
     ],
+    "remainingSceneIds": [],
     "parts": [
       {
         "part": 1,
@@ -39,6 +39,17 @@
           2056
         ],
         "publicTransmissionCount": 1
+      },
+      {
+        "part": 2,
+        "url": "https://x.com/dogramaci/status/2097153131444318437",
+        "scenes": [
+          2053,
+          2054,
+          2057,
+          2058
+        ],
+        "publicTransmissionCount": 1
       }
     ],
     "reservations": [
@@ -48,7 +59,7 @@
     "rawArchiveComplete": true,
     "totalSavedMediaFiles": 35,
     "uniqueSavedByteVersions": 27,
-    "consumedSceneFamilyFiles": 12,
+    "consumedSceneFamilyFiles": 35,
     "allConsumedVersionsNoRepost": true,
     "closureProofs": [
       "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
@@ -56,7 +67,7 @@
     ],
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08-0229.json",
-    "nextSafeAction": "Remote-close this posted scene family before staging reserved part2. Never repost any version.",
+    "nextSafeAction": "Both pair posts terminal. Seal full workflow and reconcile next unused country cursor. Never repost any version.",
     "checkpoint": "assets/lore/starlight-era/batch-507-eritrea-mongolia-x-publication-checkpoint.json"
   },
   "currentAuthorityBatch507": {
@@ -68,7 +79,7 @@
       2057,
       2058
     ],
-    "state": "part1-posted-verified-part2-staged-visible",
+    "state": "both-parts-posted-verified-pending-workflow-remote-proof",
     "checkpoint": "assets/lore/starlight-era/batch-507-mongolia-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-507-mongolia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-507-mongolia-fixed-rolls.json",
@@ -87,7 +98,7 @@
     "previousCountryClosure": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/accepted-selections.json",
-    "nextSafeAction": "P2visiblystaged; final refs/dups then onePostactivation. Immediately log URL and seal full pair workflow before next unused country. No scene rerenders.",
+    "nextSafeAction": "Both pair posts terminal. Seal full workflow and reconcile next unused country cursor. Never repost any version.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
     "confirmedSubmissions": 5,
@@ -144,9 +155,10 @@
       "assets/lore/starlight-era/batch-507-eritrea-mongolia-p2-x-reservation.json"
     ],
     "publicationCheckpoint": "assets/lore/starlight-era/batch-507-eritrea-mongolia-x-publication-checkpoint.json",
-    "xPostCount": 237,
+    "xPostCount": 238,
     "newXPostUrls": [
-      "https://x.com/dogramaci/status/2097150739436933540"
+      "https://x.com/dogramaci/status/2097150739436933540",
+      "https://x.com/dogramaci/status/2097153131444318437"
     ]
   },
   "currentAuthorityBatch506": {
