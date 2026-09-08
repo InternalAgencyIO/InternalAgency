@@ -10,7 +10,7 @@
     "Namibia"
   ],
   "part": 2,
-  "state": "prepared-unposted",
+  "state": "fully-staged-zero-post-activations",
   "preparedAtUtc": "2026-09-08T08:35:46.955Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -214,7 +214,7 @@
   "madeWithAiRequired": true,
   "postClicks": 0,
   "publicTransmissionCount": 0,
-  "uploadCount": 0,
+  "uploadCount": 1,
   "archiveExceptions": [],
   "rawArchiveComplete": true,
   "missingInternalOriginalsByCountry": {
@@ -404,5 +404,8 @@
     "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
     "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json"
   ],
-  "nextSafeAction": "Commit and push the frozen reservation. Use the one visible X composer, verify @dogramaci, upload the four exact selected files once in listed order, set each exact ALT and Made with AI, then preserve staging and remote-verify before one final Post under current authorization."
+  "nextSafeAction": "Commit and push staging, verify exact composer/account/duplicate/remote gates, then issue one Post press under current user authorization.",
+  "staging": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p2-x-staging-evidence.json",
+  "activationIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p2-x-activation-intent.json",
+  "stagedAtUtc": "2026-09-08T09:01:03.071Z"
 }
