@@ -2,19 +2,18 @@
   "schemaVersion": 1,
   "batch": 510,
   "country": "Armenia",
-  "updatedAtUtc": "2026-09-08T06:03:06.214Z",
-  "state": "partial-batch-raw-archive-three-terminal-scenes-one-in-flight",
-  "allOriginalsArchived": false,
+  "updatedAtUtc": "2026-09-08T06:09:39.582Z",
+  "state": "all-four-terminal-source-sets-archived",
+  "allOriginalsArchived": true,
   "allCurrentlyExposedImagesArchived": true,
   "sourceCompleteScenes": [
     2067,
     2068,
+    2069,
     2070
   ],
-  "inFlightScenes": [
-    2069
-  ],
-  "savedFiles": 15,
+  "inFlightScenes": [],
+  "savedFiles": 16,
   "uniqueSavedImageVersions": 12,
   "providerContextReferenceFiles": 0,
   "files": [
@@ -340,8 +339,8 @@
       "altPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-01-original.webp.alt.txt",
       "qaPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-01-original.webp.qa.json",
       "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
-      "sourceQaDecision": "archived-while-occurrence-in-flight",
-      "sourceQaReviewedAtUtc": "2026-09-08T06:01:55.409Z"
+      "sourceQaDecision": "unused-existing-variant",
+      "sourceQaReviewedAtUtc": "2026-09-08T06:09:39.580Z"
     },
     {
       "scene": 2069,
@@ -365,8 +364,8 @@
       "altPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-02-original.webp.alt.txt",
       "qaPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-02-original.webp.qa.json",
       "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
-      "sourceQaDecision": "archived-while-occurrence-in-flight",
-      "sourceQaReviewedAtUtc": "2026-09-08T06:01:55.409Z"
+      "sourceQaDecision": "unused-existing-variant",
+      "sourceQaReviewedAtUtc": "2026-09-08T06:09:39.580Z"
     },
     {
       "scene": 2069,
@@ -390,8 +389,33 @@
       "altPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-03-original.webp.alt.txt",
       "qaPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-03-original.webp.qa.json",
       "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
-      "sourceQaDecision": "archived-while-occurrence-in-flight",
-      "sourceQaReviewedAtUtc": "2026-09-08T06:01:55.409Z"
+      "sourceQaDecision": "unused-existing-variant",
+      "sourceQaReviewedAtUtc": "2026-09-08T06:09:39.580Z"
+    },
+    {
+      "scene": 2069,
+      "label": "gallery/cozy_lounge_editorial.webp",
+      "labelIndex": 0,
+      "kind": "gallery",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800421881_28596340169996822_4541906138955112268_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=g49RGecwOUcQ7kNvwFYvzc4&sdl=0&ccb=14-4&oh=00_AQI4zc9vCfa_Wl0ltpEet8e2E1YqeVUvk-o6Rpuhp9h2uA&oe=6AA565EC&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/9eacf0a7-b3ac-4efe-9267-d6cc8afe83c0",
+      "downloadPath": "C:/Users/A/Downloads/800421881_28596340169996822_4541906138955112268_n.webp",
+      "observedAtUtc": "2026-09-08T06:07:20.727Z",
+      "bytes": 557424,
+      "sha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "archiveMethod": "Visible in-app Browser downloadMedia with pre-armed download event; exact local download file resolved and byte-verified",
+      "status": "archived-original-pending-source-qa",
+      "contentRole": "generated-scene-image",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp.alt.txt",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp.qa.json",
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
+      "sourceQaDecision": "selected-usable-source",
+      "sourceQaReviewedAtUtc": "2026-09-08T06:09:39.580Z"
     }
   ],
   "downloadAttempts": [
@@ -617,5 +641,6 @@
     }
   ],
   "audit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0555.json",
-  "archiveException": null
+  "archiveException": null,
+  "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json"
 }

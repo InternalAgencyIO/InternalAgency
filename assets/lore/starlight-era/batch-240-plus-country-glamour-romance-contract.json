@@ -9,7 +9,7 @@
       2069,
       2070
     ],
-    "state": "three-sources-qa-ready-one-original-occurrence-in-flight",
+    "state": "all-four-sources-qa-ready-zero-edits",
     "preparedAtUtc": "2026-09-08T05:29:36.414Z",
     "brief": "assets/lore/starlight-era/batch-510-armenia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-510-armenia-fixed-rolls.json",
@@ -43,11 +43,11 @@
       "https://x.com/dogramaci/status/2097189559310156192",
       "https://x.com/dogramaci/status/2097191849538588895"
     ],
-    "nextSafeAction": "Verify the saved 2067, 2068 and 2070 source bytes, exact edit intents and HEAD/origin/PR parity, then invoke one built-in source-preserving tailoring edit each, once only. Independently inspect the existing 2069 occurrence for terminal output and archive every newly exposed variant. Do not resend any initial prompt, use an aesthetic retry, publish Armenia, or replace these lanes before evidence closure.",
+    "nextSafeAction": "After current HEAD/origin/PR and exact source, anchor and prompt byte verification, make one and only one built-in ChatGPT tailoring invocation for each scene 2067-2070. A block, error or interruption consumes that scene allowance. Preserve all results, select the best usable version and perform final QA/ALT/media closure before preparing the next country or X reservation. Never resend initial prompts or request aesthetic Meta variations.",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "5ce323215659d28eff6b12e991ddc82dfa0f212a",
     "preflightVerifiedAtUtc": "2026-09-08T05:36:40.606Z",
-    "updatedAtUtc": "2026-09-08T06:03:06.214Z",
+    "updatedAtUtc": "2026-09-08T06:09:39.580Z",
     "dispatchAuthorityCommit": "2863beab8015aadb1127125e4a372f8a66d766f1",
     "providerRetries": 0,
     "uncertainActivations": 0,
@@ -86,24 +86,24 @@
       }
     ],
     "outputObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-dispatch-observations.json",
-    "sourceArchiveComplete": false,
+    "sourceArchiveComplete": true,
     "archiveException": null,
     "currentCheckpoint": "assets/lore/starlight-era/batch-510-armenia-source-qa-checkpoint.json",
     "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/native-raw-archive-manifest.json",
     "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-intents.json",
-    "savedMediaFiles": 15,
+    "savedMediaFiles": 16,
     "uniqueMediaVersions": 12,
     "sourceReadyScenes": [
       2067,
       2068,
+      2069,
       2070
     ],
-    "inFlightScenes": [
-      2069
-    ],
-    "allFourOccurrencesTerminal": false,
+    "inFlightScenes": [],
+    "allFourOccurrencesTerminal": true,
     "guardianNextAuditNotBeforeUtc": "2026-09-08T06:40:49.170Z",
+    "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json",
     "checkpoint": "assets/lore/starlight-era/batch-510-armenia-source-qa-checkpoint.json"
   },
   "currentUruguayBosniaPairPublication509": {

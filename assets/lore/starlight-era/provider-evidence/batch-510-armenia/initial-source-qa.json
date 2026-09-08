@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "batch": 510,
   "country": "Armenia",
-  "reviewedAtUtc": "2026-09-08T06:01:55.409Z",
+  "reviewedAtUtc": "2026-09-08T06:09:39.580Z",
   "reviewMethod": "Main agent directly viewed all 12 unique local byte versions with view_image. Three additional records are byte-identical duplicate exposures. The three exact identity anchor plates were directly reviewed earlier in this logical continuation.",
-  "savedFiles": 15,
+  "savedFiles": 16,
   "uniqueSavedImageVersions": 12,
   "providerContextReferenceFiles": 0,
   "allExposedBytesSavedAtObservation": true,
-  "allFourOccurrencesTerminal": false,
-  "allFourSourcesTechnicallyUsable": false,
+  "allFourOccurrencesTerminal": true,
+  "allFourSourcesTechnicallyUsable": true,
   "selectedSources": [
     {
       "scene": 2067,
@@ -62,6 +62,31 @@
       "sourceQaReviewedAtUtc": "2026-09-08T06:01:55.409Z"
     },
     {
+      "scene": 2069,
+      "label": "gallery/cozy_lounge_editorial.webp",
+      "labelIndex": 0,
+      "kind": "gallery",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800421881_28596340169996822_4541906138955112268_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=g49RGecwOUcQ7kNvwFYvzc4&sdl=0&ccb=14-4&oh=00_AQI4zc9vCfa_Wl0ltpEet8e2E1YqeVUvk-o6Rpuhp9h2uA&oe=6AA565EC&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/9eacf0a7-b3ac-4efe-9267-d6cc8afe83c0",
+      "downloadPath": "C:/Users/A/Downloads/800421881_28596340169996822_4541906138955112268_n.webp",
+      "observedAtUtc": "2026-09-08T06:07:20.727Z",
+      "bytes": 557424,
+      "sha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "archiveMethod": "Visible in-app Browser downloadMedia with pre-armed download event; exact local download file resolved and byte-verified",
+      "status": "archived-original-pending-source-qa",
+      "contentRole": "generated-scene-image",
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp.alt.txt",
+      "qaPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp.qa.json",
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
+      "sourceQaDecision": "selected-usable-source",
+      "sourceQaReviewedAtUtc": "2026-09-08T06:09:39.580Z"
+    },
+    {
       "scene": 2070,
       "label": "gallery/editorial_portrait_cluster.webp",
       "labelIndex": 0,
@@ -87,12 +112,7 @@
       "sourceQaReviewedAtUtc": "2026-09-08T06:01:55.409Z"
     }
   ],
-  "deferredScenes": [
-    {
-      "scene": 2069,
-      "reason": "Original occurrence remains in flight. No source selection until terminal response and final variant inventory."
-    }
-  ],
+  "deferredScenes": [],
   "hardUnusableScenes": [],
   "variants": [
     {
@@ -219,32 +239,43 @@
       "scene": 2069,
       "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-01-original.webp",
       "sha256": "046dd362a8b5a55f94d2c3168b407ea766223c87ed9344af84ec265857612896",
-      "decision": "archived-while-occurrence-in-flight",
+      "decision": "unused-existing-variant",
       "notes": [
-        "Three currently exposed generated quartet variants show opaque clothing, a woodland-window lounge, supported hugs or hand reaches and distinct faces.",
-        "The original occurrence is still generating. No source is selected and no edit is allowed until its terminal response and all exposed outputs are reconciled. Flag geometry, shoe assignments and camera tilt vary, with no aesthetic retry authorized."
+        "Four distinct fictional adult faces, supported side hug and reaching hands, opaque garments, plausible anatomy and complete usable source bytes. The final gallery matches directly viewed internal variant 03 byte-for-byte.",
+        "Actual crop is wider and more upright than the intermediate 19-degree Dutch brief. Flag bands repeat across garment sections and Ellie has green rather than silver boots. These are recorded soft styling deviations, not a Meta retry. Preserve pose and frame in the single tailoring pass."
       ]
     },
     {
       "scene": 2069,
       "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-02-original.webp",
       "sha256": "ba024a7c57c985f4366087c1f041d2503449af17ba7e204ae0423697dab42596",
-      "decision": "archived-while-occurrence-in-flight",
+      "decision": "unused-existing-variant",
       "notes": [
-        "Three currently exposed generated quartet variants show opaque clothing, a woodland-window lounge, supported hugs or hand reaches and distinct faces.",
-        "The original occurrence is still generating. No source is selected and no edit is allowed until its terminal response and all exposed outputs are reconciled. Flag geometry, shoe assignments and camera tilt vary, with no aesthetic retry authorized."
+        "Four distinct fictional adult faces, supported side hug and reaching hands, opaque garments, plausible anatomy and complete usable source bytes. The final gallery matches directly viewed internal variant 03 byte-for-byte.",
+        "Actual crop is wider and more upright than the intermediate 19-degree Dutch brief. Flag bands repeat across garment sections and Ellie has green rather than silver boots. These are recorded soft styling deviations, not a Meta retry. Preserve pose and frame in the single tailoring pass."
       ]
     },
     {
       "scene": 2069,
       "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-03-original.webp",
       "sha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
-      "decision": "archived-while-occurrence-in-flight",
+      "decision": "unused-existing-variant",
       "notes": [
-        "Three currently exposed generated quartet variants show opaque clothing, a woodland-window lounge, supported hugs or hand reaches and distinct faces.",
-        "The original occurrence is still generating. No source is selected and no edit is allowed until its terminal response and all exposed outputs are reconciled. Flag geometry, shoe assignments and camera tilt vary, with no aesthetic retry authorized."
+        "Four distinct fictional adult faces, supported side hug and reaching hands, opaque garments, plausible anatomy and complete usable source bytes. The final gallery matches directly viewed internal variant 03 byte-for-byte.",
+        "Actual crop is wider and more upright than the intermediate 19-degree Dutch brief. Flag bands repeat across garment sections and Ellie has green rather than silver boots. These are recorded soft styling deviations, not a Meta retry. Preserve pose and frame in the single tailoring pass."
+      ]
+    },
+    {
+      "scene": 2069,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp",
+      "sha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "decision": "selected-usable-source",
+      "notes": [
+        "Four distinct fictional adult faces, supported side hug and reaching hands, opaque garments, plausible anatomy and complete usable source bytes. The final gallery matches directly viewed internal variant 03 byte-for-byte.",
+        "Actual crop is wider and more upright than the intermediate 19-degree Dutch brief. Flag bands repeat across garment sections and Ellie has green rather than silver boots. These are recorded soft styling deviations, not a Meta retry. Preserve pose and frame in the single tailoring pass."
       ]
     }
   ],
-  "policy": "Maximum two Meta hard-failure recoveries only, no aesthetic retry or initial-prompt resend. One source-preserving built-in ChatGPT tailoring invocation only after usable source selection and remote raw-byte verification."
+  "policy": "Maximum two Meta hard-failure recoveries only, no aesthetic retry or initial-prompt resend. One source-preserving built-in ChatGPT tailoring invocation only after usable source selection and remote raw-byte verification.",
+  "allExposedBytesSaved": true
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 510,
   "country": "Armenia",
-  "state": "three-sources-qa-ready-one-original-occurrence-in-flight",
+  "state": "all-four-sources-qa-ready-zero-edits",
   "preparedAtUtc": "2026-09-08T05:29:36.414Z",
   "accountRequired": "leesha007",
   "mode": "Thinking",
@@ -126,11 +126,11 @@
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-composers-staging-evidence.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
-  "sourceArchiveComplete": false,
+  "sourceArchiveComplete": true,
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-full-workflow-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/full-workflow-remote-verification.json",
-  "nextSafeAction": "Verify the saved 2067, 2068 and 2070 source bytes, exact edit intents and HEAD/origin/PR parity, then invoke one built-in source-preserving tailoring edit each, once only. Independently inspect the existing 2069 occurrence for terminal output and archive every newly exposed variant. Do not resend any initial prompt, use an aesthetic retry, publish Armenia, or replace these lanes before evidence closure.",
+  "nextSafeAction": "After current HEAD/origin/PR and exact source, anchor and prompt byte verification, make one and only one built-in ChatGPT tailoring invocation for each scene 2067-2070. A block, error or interruption consumes that scene allowance. Preserve all results, select the best usable version and perform final QA/ALT/media closure before preparing the next country or X reservation. Never resend initial prompts or request aesthetic Meta variations.",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "5ce323215659d28eff6b12e991ddc82dfa0f212a",
   "preflightVerifiedAtUtc": "2026-09-08T05:36:40.606Z",
@@ -142,11 +142,11 @@
   "sourceReadyScenes": [
     2067,
     2068,
+    2069,
     2070
   ],
-  "inFlightScenes": [
-    2069
-  ],
-  "savedMediaFiles": 15,
-  "uniqueMediaVersions": 12
+  "inFlightScenes": [],
+  "savedMediaFiles": 16,
+  "uniqueMediaVersions": 12,
+  "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json"
 }
