@@ -3,7 +3,7 @@
   "batch": 511,
   "country": "Namibia",
   "acceptedAtUtc": "2026-09-08T08:22:16.624Z",
-  "state": "four-stills-remote-verified-accepted-unpublished",
+  "state": "two-of-four-scenes-posted-verified",
   "accepted": [
     {
       "scene": 2071,
@@ -28,20 +28,22 @@
       "additionalChatgptEditsAllowed": 0,
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
-      "xEligibilityPending": [
-        "fresh live staging and one public Post under exact frozen reservation"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-accessibility.json",
       "alt": "AI-generated fictional Namibia fashion editorial: four adult women share a handclasp and shoulder touch around cobalt seating in a windowed atelier. A flag-inspired mini, ivory dress, cobalt top with sand skort, and emerald dress pair with varied heels and rainbow legwear. A crescent arm tattoo is visible. Distant smoke and a mushroom-shaped cloud are imaginary, not a real event.",
       "safetyOverrides": [
         "Disclose distant smoke and mushroom-shaped clouds as imaginary synthetic effects."
       ],
-      "state": "remote-verified-accepted-unpublished",
-      "sceneFamilyConsumed": false,
+      "state": "posted-verified",
+      "sceneFamilyConsumed": true,
       "remoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
       "remotePayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
       "xReservation": "assets/lore/starlight-era/batch-511-armenia-namibia-p1-x-reservation.json",
-      "sceneFamilyReserved": true
+      "sceneFamilyReserved": false,
+      "postUrl": "https://x.com/dogramaci/status/2097246369526214887",
+      "postedAtUtc": "2026-09-08T08:51:13.568Z",
+      "xPublicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-publication-receipt.json",
+      "noRepostAnyVersion": true
     },
     {
       "scene": 2072,
@@ -66,18 +68,20 @@
       "additionalChatgptEditsAllowed": 0,
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
-      "xEligibilityPending": [
-        "fresh live staging and one public Post under exact frozen reservation"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-accessibility.json",
       "alt": "AI-generated fictional Namibia fashion editorial: four adult women smile in a close diagonal embrace beside a coastal window. Coral and slate-blue tailoring, a pearl one-shoulder dress, a white mini skort and a blue flag-inspired bodice frame the group. Split-star and crescent arm tattoos are visible.",
       "safetyOverrides": [],
-      "state": "remote-verified-accepted-unpublished",
-      "sceneFamilyConsumed": false,
+      "state": "posted-verified",
+      "sceneFamilyConsumed": true,
       "remoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
       "remotePayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
       "xReservation": "assets/lore/starlight-era/batch-511-armenia-namibia-p1-x-reservation.json",
-      "sceneFamilyReserved": true
+      "sceneFamilyReserved": false,
+      "postUrl": "https://x.com/dogramaci/status/2097246369526214887",
+      "postedAtUtc": "2026-09-08T08:51:13.568Z",
+      "xPublicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-publication-receipt.json",
+      "noRepostAnyVersion": true
     },
     {
       "scene": 2073,
@@ -177,10 +181,14 @@
   "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/closure-evidence-manifest.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "After reservations are committed, pushed and verified, stage part1 once in the existing visible X composer. Set four exact ALT texts and Made with AI, verify account, caption, media, all-version duplicate and remote gates, then Post once. Part2 follows only after part1 is publicly verified and archived.",
+  "nextSafeAction": "Only the two unposted scenes in part2 remain eligible under their frozen reservation; never reopen accepted scenes or repost any consumed version.",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json",
   "finalPayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
   "finalRemoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
   "allFinalPayloadByteChecksPassed": true,
-  "countryPairReservation": "assets/lore/starlight-era/batch-511-armenia-namibia-x-reservation-checkpoint.json"
+  "countryPairReservation": "assets/lore/starlight-era/batch-511-armenia-namibia-x-reservation-checkpoint.json",
+  "publishedSceneIds": [
+    2071,
+    2072
+  ]
 }

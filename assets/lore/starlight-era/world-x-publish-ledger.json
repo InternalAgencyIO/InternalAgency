@@ -10,9 +10,9 @@
       "Armenia",
       "Namibia"
     ],
-    "state": "two-four-photo-posts-reserved-unposted",
+    "state": "part1-posted-verified-part2-reserved-unposted",
     "preparedAtUtc": "2026-09-08T08:35:46.955Z",
-    "postCount": 240,
+    "postCount": 241,
     "reservations": [
       "assets/lore/starlight-era/batch-511-armenia-namibia-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-511-armenia-namibia-p2-x-reservation.json"
@@ -26,8 +26,10 @@
           2071,
           2072
         ],
-        "state": "prepared-unposted",
-        "captionSha256": "5ff16eaf9d8b5fefb3b700c2c2fd4d094bbc0532cee081ef3fdc3739333a9325"
+        "state": "posted-verified",
+        "captionSha256": "5ff16eaf9d8b5fefb3b700c2c2fd4d094bbc0532cee081ef3fdc3739333a9325",
+        "postUrl": "https://x.com/dogramaci/status/2097246369526214887",
+        "publication": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-publication-receipt.json"
       },
       {
         "part": 2,
@@ -345,7 +347,8 @@
     "legacyPendingRecordNotResubmittable": true,
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0820.json",
     "guardianNextAuditNotBeforeUtc": "2026-09-08T09:07:16.624Z",
-    "nextSafeAction": "After reservations are committed, pushed and verified, stage part1 once in the existing visible X composer. Set four exact ALT texts and Made with AI, verify account, caption, media, all-version duplicate and remote gates, then Post once. Part2 follows only after part1 is publicly verified and archived.",
+    "nextSafeAction": "After part1 publication evidence is committed, pushed and verified, stage and publish part2 once using its distinct four files, exact ALT, frozen caption, Made with AI and live @dogramaci verification.",
+    "updatedAtUtc": "2026-09-08T08:53:54.142Z",
     "checkpoint": "assets/lore/starlight-era/batch-511-armenia-namibia-x-reservation-checkpoint.json"
   },
   "legacyPendingPostReconciliation511": {
@@ -10523,14 +10526,23 @@
     },
     {
       "batch": 468,
-      "batches": [468, 467],
-      "sceneIds": [1898, 1899, 1895],
+      "batches": [
+        468,
+        467
+      ],
+      "sceneIds": [
+        1898,
+        1899,
+        1895
+      ],
       "postedAt": "2026-08-31T08:45:18.972Z",
       "verifiedAt": "2026-08-31T08:46:52.7329289Z",
       "postUrl": "https://x.com/dogramaci/status/2094345779376726102",
       "supersededPostUrls": [],
       "caption": "Bulgaria ❤️ Serbia: Varna's Black Sea blue hour, Devetashka Cave daylight, and the Danube at Đerdap frame three warm four-woman reunions in bold metallic couture.\n\n#WorldXXXSeries",
-      "hashtags": ["#WorldXXXSeries"],
+      "hashtags": [
+        "#WorldXXXSeries"
+      ],
       "hashtagSelection": {
         "rule": "Each of #RAZE, #WorldXXXSeries, and #InternalAgency independently rolled at 25%; at most two selected; zero permitted.",
         "rolls": [
@@ -10548,8 +10560,15 @@
           }
         ]
       },
-      "imageNumbers": [1898, 1899, 1895],
-      "countries": ["Bulgaria", "Serbia"],
+      "imageNumbers": [
+        1898,
+        1899,
+        1895
+      ],
+      "countries": [
+        "Bulgaria",
+        "Serbia"
+      ],
       "assets": [
         {
           "scene": 1898,
@@ -10581,16 +10600,32 @@
     },
     {
       "batch": 470,
-      "batches": [470, 469],
-      "sceneIds": [1906, 1910, 1904],
+      "batches": [
+        470,
+        469
+      ],
+      "sceneIds": [
+        1906,
+        1910,
+        1904
+      ],
       "postedAt": "2026-08-31T12:44:35.741Z",
       "verifiedAt": "2026-08-31T12:46:36.4220900Z",
       "postUrl": "https://x.com/dogramaci/status/2094406003852734633",
       "supersededPostUrls": [],
       "caption": "Andorra ❤️ Albania: a Pyrenean sunset, Sorteny’s flowered valley, and Llogara’s Ionian horizon frame three close four-woman reunions in short RAZE couture.\n\n#WorldXXXSeries",
-      "hashtags": ["#WorldXXXSeries"],
-      "imageNumbers": [1906, 1910, 1904],
-      "countries": ["Andorra", "Albania"],
+      "hashtags": [
+        "#WorldXXXSeries"
+      ],
+      "imageNumbers": [
+        1906,
+        1910,
+        1904
+      ],
+      "countries": [
+        "Andorra",
+        "Albania"
+      ],
       "assets": [
         {
           "scene": 1906,
@@ -10626,16 +10661,33 @@
     },
     {
       "batch": 472,
-      "batches": [471, 472],
-      "sceneIds": [1913, 1914, 1915],
+      "batches": [
+        471,
+        472
+      ],
+      "sceneIds": [
+        1913,
+        1914,
+        1915
+      ],
       "postedAt": "2026-08-31T17:11:23.699Z",
       "verifiedAt": "2026-08-31T17:16:44.7151040Z",
       "postUrl": "https://x.com/dogramaci/status/2094473140004929917",
       "supersededPostUrls": [],
       "caption": "Bosnia and Herzegovina ❤️ Croatia: Kravica’s waterfall spray, Blidinje’s mountain lake, and Dubrovnik’s stone Stradun frame three close four-woman reunions in sharply short RAZE couture, statement boots, and knee-highs.\n\n#WorldXXXSeries #RAZE",
-      "hashtags": ["#WorldXXXSeries", "#RAZE"],
-      "imageNumbers": [1913, 1914, 1915],
-      "countries": ["Bosnia and Herzegovina", "Croatia"],
+      "hashtags": [
+        "#WorldXXXSeries",
+        "#RAZE"
+      ],
+      "imageNumbers": [
+        1913,
+        1914,
+        1915
+      ],
+      "countries": [
+        "Bosnia and Herzegovina",
+        "Croatia"
+      ],
       "assets": [
         {
           "scene": 1913,
@@ -10671,16 +10723,33 @@
     },
     {
       "batch": 473,
-      "batches": [472, 473],
-      "sceneIds": [1918, 1919, 1921],
+      "batches": [
+        472,
+        473
+      ],
+      "sceneIds": [
+        1918,
+        1919,
+        1921
+      ],
       "postedAt": "2026-08-31T19:02:00.175Z",
       "verifiedAt": "2026-08-31T19:03:58.7808084Z",
       "postUrl": "https://x.com/dogramaci/status/2094500984567279733",
       "supersededPostUrls": [],
       "caption": "Croatia ❤️ Cyprus: Rovinj’s harbor light, Nicosia’s curving civic stone, and Paphos Fort at copper sunset frame three close four-woman reunions in sharply short RAZE couture, star hardware, and sculptural statement boots.\n\n#WorldXXXSeries #RAZE",
-      "hashtags": ["#WorldXXXSeries", "#RAZE"],
-      "imageNumbers": [1918, 1919, 1921],
-      "countries": ["Croatia", "Cyprus"],
+      "hashtags": [
+        "#WorldXXXSeries",
+        "#RAZE"
+      ],
+      "imageNumbers": [
+        1918,
+        1919,
+        1921
+      ],
+      "countries": [
+        "Croatia",
+        "Cyprus"
+      ],
       "assets": [
         {
           "scene": 1918,
@@ -10716,16 +10785,33 @@
     },
     {
       "batch": 474,
-      "batches": [473, 474],
-      "sceneIds": [1920, 1924, 1926],
+      "batches": [
+        473,
+        474
+      ],
+      "sceneIds": [
+        1920,
+        1924,
+        1926
+      ],
       "postedAt": "2026-08-31T20:57:34.961Z",
       "verifiedAt": "2026-08-31T20:58:44.0492666Z",
       "postUrl": "https://x.com/dogramaci/status/2094530060388536630",
       "supersededPostUrls": [],
       "caption": "Cyprus ❤️ Denmark: Limassol’s sculpture-lined seafront, Aarhus’s harbor geometry, and Møns Klint’s chalk coast frame three close four-woman reunions in sharply short RAZE couture, colorful knee-highs, and sculptural statement boots.\n\n#WorldXXXSeries #RAZE",
-      "hashtags": ["#WorldXXXSeries", "#RAZE"],
-      "imageNumbers": [1920, 1924, 1926],
-      "countries": ["Cyprus", "Denmark"],
+      "hashtags": [
+        "#WorldXXXSeries",
+        "#RAZE"
+      ],
+      "imageNumbers": [
+        1920,
+        1924,
+        1926
+      ],
+      "countries": [
+        "Cyprus",
+        "Denmark"
+      ],
       "assets": [
         {
           "scene": 1920,
@@ -10761,16 +10847,33 @@
     },
     {
       "batch": 476,
-      "batches": [475, 476],
-      "sceneIds": [1927, 1932, 1933],
+      "batches": [
+        475,
+        476
+      ],
+      "sceneIds": [
+        1927,
+        1932,
+        1933
+      ],
       "postedAt": "2026-09-04T07:31:28.8233945Z",
       "verifiedAt": "2026-09-04T07:31:28.8233945Z",
       "postUrl": "https://x.com/dogramaci/status/2095775486316073024",
       "supersededPostUrls": [],
       "caption": "Estonia ❤️ Finland: Tallinn’s Rotermann quarter, Turku’s Aura River dawn, and Tampere’s Finlayson brickwork frame three close four-woman reunions in sharply short RAZE couture, colorful knee-highs, and sculptural statement boots.\n\n#WorldXXXSeries #RAZE",
-      "hashtags": ["#WorldXXXSeries", "#RAZE"],
-      "imageNumbers": [1927, 1932, 1933],
-      "countries": ["Estonia", "Finland"],
+      "hashtags": [
+        "#WorldXXXSeries",
+        "#RAZE"
+      ],
+      "imageNumbers": [
+        1927,
+        1932,
+        1933
+      ],
+      "countries": [
+        "Estonia",
+        "Finland"
+      ],
       "assets": [
         {
           "scene": 1927,
@@ -10806,16 +10909,33 @@
     },
     {
       "batch": 478,
-      "batches": [477, 478],
-      "sceneIds": [1935, 1939, 1941],
+      "batches": [
+        477,
+        478
+      ],
+      "sceneIds": [
+        1935,
+        1939,
+        1941
+      ],
       "postedAt": "2026-09-04T10:12:10.789Z",
       "verifiedAt": "2026-09-04T10:13:27.4473446Z",
       "postUrl": "https://x.com/dogramaci/status/2095817193875288348",
       "supersededPostUrls": [],
       "caption": "Ireland ❤️ Latvia: Dublin’s Grand Canal Dock, Riga’s Alberta iela, and the Gauja Valley frame three close four-woman reunions in sharply short RAZE couture, rainbow stockings, and sculptural statement boots.\n\n#WorldXXXSeries #RAZE",
-      "hashtags": ["#WorldXXXSeries", "#RAZE"],
-      "imageNumbers": [1935, 1939, 1941],
-      "countries": ["Ireland", "Latvia"],
+      "hashtags": [
+        "#WorldXXXSeries",
+        "#RAZE"
+      ],
+      "imageNumbers": [
+        1935,
+        1939,
+        1941
+      ],
+      "countries": [
+        "Ireland",
+        "Latvia"
+      ],
       "assets": [
         {
           "scene": 1935,
@@ -10852,16 +10972,32 @@
     },
     {
       "batch": 480,
-      "batches": [479, 480],
-      "sceneIds": [1945, 1948, 1949],
+      "batches": [
+        479,
+        480
+      ],
+      "sceneIds": [
+        1945,
+        1948,
+        1949
+      ],
       "postedAt": "2026-09-04T11:43:24.884Z",
       "verifiedAt": "2026-09-04T11:44:59.1784920Z",
       "postUrl": "https://x.com/dogramaci/status/2095840152757129448",
       "supersededPostUrls": [],
       "caption": "Liechtenstein ❤️ Lithuania: Gutenberg Castle, Kaunas’s Laisvės Alėja, and Trakai Island Castle frame three close four-woman reunions in sharply short RAZE couture, rainbow hosiery, and sculptural statement boots.\n\n#RAZE",
-      "hashtags": ["#RAZE"],
-      "imageNumbers": [1945, 1948, 1949],
-      "countries": ["Liechtenstein", "Lithuania"],
+      "hashtags": [
+        "#RAZE"
+      ],
+      "imageNumbers": [
+        1945,
+        1948,
+        1949
+      ],
+      "countries": [
+        "Liechtenstein",
+        "Lithuania"
+      ],
       "assets": [
         {
           "scene": 1945,
@@ -10898,16 +11034,32 @@
     },
     {
       "batch": 482,
-      "batches": [481, 482],
-      "sceneIds": [1954, 1956, 1958],
+      "batches": [
+        481,
+        482
+      ],
+      "sceneIds": [
+        1954,
+        1956,
+        1958
+      ],
       "postedAt": "2026-09-04T13:55:17.625Z",
       "verifiedAt": "2026-09-04T13:57:12.6237391Z",
       "postUrl": "https://x.com/dogramaci/status/2095873342066528376",
       "supersededPostUrls": [],
       "caption": "Luxembourg ❤️ Moldova: Esch-Belval’s blast furnaces, Orheiul Vechi’s winding Raut gorge, and Lake Beleu’s wetlands frame three close four-woman reunions in sharply short RAZE couture, rainbow hosiery, and sculptural statement boots.\n\n#RAZE",
-      "hashtags": ["#RAZE"],
-      "imageNumbers": [1954, 1956, 1958],
-      "countries": ["Luxembourg", "Moldova"],
+      "hashtags": [
+        "#RAZE"
+      ],
+      "imageNumbers": [
+        1954,
+        1956,
+        1958
+      ],
+      "countries": [
+        "Luxembourg",
+        "Moldova"
+      ],
       "assets": [
         {
           "scene": 1954,
@@ -11200,8 +11352,15 @@
     },
     {
       "batch": 492,
-      "batches": [491, 492],
-      "sceneIds": [1993, 1996, 1997],
+      "batches": [
+        491,
+        492
+      ],
+      "sceneIds": [
+        1993,
+        1996,
+        1997
+      ],
       "postedAt": "2026-09-06T05:33:27.221Z",
       "postedAtPrecision": "visible in-app Browser Post click and success receipt",
       "verifiedAt": "2026-09-06T05:34:20.2449662Z",
@@ -11209,8 +11368,15 @@
       "supersededPostUrls": [],
       "caption": "El Salvador ❤️ Republic of the Congo: Joya de Cerén meets Diosso Gorge and Odzala-Kokoua in three affectionate quartet moments, with short flag-cut looks, rainbow RAZE knee-highs, varied heels, platforms and a misty hand-linked close-up.",
       "hashtags": [],
-      "imageNumbers": [1993, 1996, 1997],
-      "countries": ["El Salvador", "Republic of the Congo"],
+      "imageNumbers": [
+        1993,
+        1996,
+        1997
+      ],
+      "countries": [
+        "El Salvador",
+        "Republic of the Congo"
+      ],
       "assets": [
         {
           "scene": 1993,
@@ -11249,17 +11415,33 @@
     },
     {
       "batch": 494,
-      "batches": [493, 494],
-      "sceneIds": [1999, 2001, 2004],
+      "batches": [
+        493,
+        494
+      ],
+      "sceneIds": [
+        1999,
+        2001,
+        2004
+      ],
       "postedAt": "2026-09-06T07:53:13.990Z",
       "postedAtPrecision": "derived from X status snowflake; visible live status receipt authoritative",
       "verifiedAt": "2026-09-06T07:55:31.595Z",
       "postUrl": "https://x.com/dogramaci/status/2096506997134791067",
       "supersededPostUrls": [],
       "caption": "Singapore ❤️ Lebanon: Marina Bay and Jewel Changi meet Byblos harbor in three affectionate quartet moments, with sharply short flag-cut couture, rainbow knee-highs, RAZE platforms, metallic boots and colorful heels.\n\n#WorldXXXSeries",
-      "hashtags": ["#WorldXXXSeries"],
-      "imageNumbers": [1999, 2001, 2004],
-      "countries": ["Singapore", "Lebanon"],
+      "hashtags": [
+        "#WorldXXXSeries"
+      ],
+      "imageNumbers": [
+        1999,
+        2001,
+        2004
+      ],
+      "countries": [
+        "Singapore",
+        "Lebanon"
+      ],
       "assets": [
         {
           "scene": 1999,
@@ -11299,22 +11481,60 @@
     },
     {
       "batch": 496,
-      "batches": [495, 496],
-      "sceneIds": [2007, 2009, 2012, 2014],
+      "batches": [
+        495,
+        496
+      ],
+      "sceneIds": [
+        2007,
+        2009,
+        2012,
+        2014
+      ],
       "postedAt": "2026-09-06T12:50:14.871Z",
       "postedAtPrecision": "derived from X status snowflake; visible live status receipt authoritative",
       "verifiedAt": "2026-09-06T12:51:41.408Z",
       "postUrl": "https://x.com/dogramaci/status/2096581743327293620",
       "supersededPostUrls": [],
       "caption": "Liberia ❤️ Central African Republic: Monrovia's Atlantic curve and Kpatawee Falls meet Boali Falls and Bamingui-Bangoran in four close quartet love beats, with short flag-cut couture, rainbow heels, knee-highs, RAZE boots and platforms.\n\n#InternalAgency",
-      "hashtags": ["#InternalAgency"],
-      "imageNumbers": [2007, 2009, 2012, 2014],
-      "countries": ["Liberia", "Central African Republic"],
+      "hashtags": [
+        "#InternalAgency"
+      ],
+      "imageNumbers": [
+        2007,
+        2009,
+        2012,
+        2014
+      ],
+      "countries": [
+        "Liberia",
+        "Central African Republic"
+      ],
       "assets": [
-        {"scene": 2007, "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2007-chatgpt-single-tailoring-pass.png", "sha256": "883DAD2F1D4ED6D5C2CC3D799FA70C8276468B568F0CD570BEFC41ED46553D41", "alt": "Four fictional adult women share a back hug and linked hands on a stone terrace above Monrovia's Atlantic waterfront. Short Liberia flag, cobalt and ivory looks pair with rainbow ankle boots, white platforms, rainbow pumps and silver stilettos."},
-        {"scene": 2009, "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2009-meta-primary-original.jpg", "sha256": "206A8C3EC7E232A98CB2DA3CC8E868966CC287BE3C063DBAD1D4CF1B61E5EC15", "alt": "Four fictional adult women lean into a close side hug at Kpatawee Waterfall, smiling across an overlapping diagonal. Burgundy and Liberia flag fashion fills the tight portrait, with a star tattoo visible on Alia's shoulder."},
-        {"scene": 2012, "path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-chatgpt-single-tailoring-pass.png", "sha256": "60CFD7B6A201120DDDF291E1ACA76B1686C54353FF27BF4B519947BCD4085C1C", "alt": "Four fictional adult women exchange a back hug and linked hands at a guarded overlook beside the broad stepped cascades of Boali Falls. Ruby, white, cobalt, emerald and Central African Republic flag looks pair with red stilettos, gold pumps, green knee-high boots and white boots."},
-        {"scene": 2014, "path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2014-chatgpt-single-tailoring-pass.png", "sha256": "137D98248555EDF632E483EC6A8696C3C4CE269DF1EDDC2FC874A4891E3FD84F", "alt": "Four fictional adult women share a lap rest, hand clasp and shoulder embrace on a savanna terrace in Bamingui-Bangoran. Central African Republic flag looks, rainbow knee-highs, yellow platforms, burgundy RAZE boots and gold heels fill the close seated scene."}
+        {
+          "scene": 2007,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2007-chatgpt-single-tailoring-pass.png",
+          "sha256": "883DAD2F1D4ED6D5C2CC3D799FA70C8276468B568F0CD570BEFC41ED46553D41",
+          "alt": "Four fictional adult women share a back hug and linked hands on a stone terrace above Monrovia's Atlantic waterfront. Short Liberia flag, cobalt and ivory looks pair with rainbow ankle boots, white platforms, rainbow pumps and silver stilettos."
+        },
+        {
+          "scene": 2009,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-495-liberia/scene-2009-meta-primary-original.jpg",
+          "sha256": "206A8C3EC7E232A98CB2DA3CC8E868966CC287BE3C063DBAD1D4CF1B61E5EC15",
+          "alt": "Four fictional adult women lean into a close side hug at Kpatawee Waterfall, smiling across an overlapping diagonal. Burgundy and Liberia flag fashion fills the tight portrait, with a star tattoo visible on Alia's shoulder."
+        },
+        {
+          "scene": 2012,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2012-chatgpt-single-tailoring-pass.png",
+          "sha256": "60CFD7B6A201120DDDF291E1ACA76B1686C54353FF27BF4B519947BCD4085C1C",
+          "alt": "Four fictional adult women exchange a back hug and linked hands at a guarded overlook beside the broad stepped cascades of Boali Falls. Ruby, white, cobalt, emerald and Central African Republic flag looks pair with red stilettos, gold pumps, green knee-high boots and white boots."
+        },
+        {
+          "scene": 2014,
+          "path": "assets/lore/starlight-era/provider-evidence/batch-496-central-african-republic/scene-2014-chatgpt-single-tailoring-pass.png",
+          "sha256": "137D98248555EDF632E483EC6A8696C3C4CE269DF1EDDC2FC874A4891E3FD84F",
+          "alt": "Four fictional adult women share a lap rest, hand clasp and shoulder embrace on a savanna terrace in Bamingui-Bangoran. Central African Republic flag looks, rainbow knee-highs, yellow platforms, burgundy RAZE boots and gold heels fill the close seated scene."
+        }
       ],
       "photoEndpoints": [
         "https://x.com/dogramaci/status/2096581743327293620/photo/1",
@@ -17170,6 +17390,510 @@
             "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-chatgpt-single-tailoring-pass.png",
             "sha256": "3dd7c851649f9e1a3e8663b16e35edbf2cf6f2e46d81a29325358337b54f8a54",
             "contentRole": "generated-scene-media"
+          }
+        ],
+        "noRepostAnyVersion": true
+      },
+      "uploadCount": 1
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 511,
+      "batches": [
+        510,
+        511
+      ],
+      "countries": [
+        "Armenia",
+        "Namibia"
+      ],
+      "part": 1,
+      "sceneIds": [
+        2067,
+        2068,
+        2071,
+        2072
+      ],
+      "imageNumbers": [
+        2067,
+        2068,
+        2071,
+        2072
+      ],
+      "state": "posted-verified",
+      "postUrl": "https://x.com/dogramaci/status/2097246369526214887",
+      "postedAt": "2026-09-08T08:51:13.568Z",
+      "verifiedAt": "2026-09-08T08:53:54.142Z",
+      "caption": "Armenia ❤️ Namibia: atelier handclasps, couch embraces and coastal-window closeness. Four fictional adult friends in sculpted minis and varied heels. AI fashion; distant smoke and mushroom-shaped clouds are imaginary, not real events.",
+      "captionSha256": "5ff16eaf9d8b5fefb3b700c2c2fd4d094bbc0532cee081ef3fdc3739333a9325",
+      "hashtags": [],
+      "assets": [
+        {
+          "scene": 2067,
+          "country": "Armenia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+          "sha256": "a84b9105cb0bbd3de6b91e238ab61c98d41829ea5d1db1dc4d18968daa2911fb",
+          "bytes": 2266341,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in image_gen",
+          "providerUrl": "https://www.meta.ai/prompt/7625f457-5a4f-407c-9ca9-46a003615ef5",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "returned-edit-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "exact country-pair duplicate and live publication gates"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-accessibility.json",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a warm pink-stone window atelier. A braided Black woman sits left while a blonde woman hugs her from behind; two dark-haired women lean in around a handclasp. Garnet, ivory, red-blue-orange and navy mini dresses are paired with varied heels, rainbow footwear and visible arm tattoos. The opaque mini dresses have a closer, shorter tailored fit.",
+          "safetyOverrides": [],
+          "state": "remote-verified-accepted-unpublished",
+          "sceneFamilyConsumed": false,
+          "remoteVerifiedAtUtc": "2026-09-08T06:39:41.255Z",
+          "remotePayloadCommit": "f193a0f48d6b6fcd38bb6380b004a80e06d36d74",
+          "uploadOrder": 1
+        },
+        {
+          "scene": 2068,
+          "country": "Armenia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp",
+          "sha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+          "bytes": 455462,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/a26f9094-bf33-4b65-ad79-41bc48fb46e7",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "attributed-output-moderation-block-original-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "exact country-pair duplicate and live publication gates"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-accessibility.json",
+          "alt": "AI-generated portrait of four fictional adult women gathered closely on an apricot couch beside tall city-facing windows. The braided woman reclines against cushions while the blonde and two dark-haired women lean toward her, exchanging a shoulder touch and hand contact. Charcoal, apricot, pearl and plum garments, rainbow hosiery and RAZE, GRD and scorpion arm motifs are visible.",
+          "safetyOverrides": [],
+          "state": "remote-verified-accepted-unpublished",
+          "sceneFamilyConsumed": false,
+          "remoteVerifiedAtUtc": "2026-09-08T06:39:41.255Z",
+          "remotePayloadCommit": "f193a0f48d6b6fcd38bb6380b004a80e06d36d74",
+          "uploadOrder": 2
+        },
+        {
+          "scene": 2071,
+          "country": "Namibia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp",
+          "sha256": "d20f970a1dc2e1f277f2ffedb6adca10e14a1c69e418bcafe00b26363b86d2f6",
+          "bytes": 497592,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/64682848-7d28-411a-9ef7-3d066abf7591",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "attributed-output-moderation-block-original-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "exact country-pair duplicate and live publication gates"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-accessibility.json",
+          "alt": "AI-generated fictional Namibia fashion editorial: four adult women share a handclasp and shoulder touch around cobalt seating in a windowed atelier. A flag-inspired mini, ivory dress, cobalt top with sand skort, and emerald dress pair with varied heels and rainbow legwear. A crescent arm tattoo is visible. Distant smoke and a mushroom-shaped cloud are imaginary, not a real event.",
+          "safetyOverrides": [
+            "Disclose distant smoke and mushroom-shaped clouds as imaginary synthetic effects."
+          ],
+          "state": "remote-verified-accepted-unpublished",
+          "sceneFamilyConsumed": false,
+          "remoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
+          "remotePayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
+          "uploadOrder": 3
+        },
+        {
+          "scene": 2072,
+          "country": "Namibia",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp",
+          "sha256": "e4916f10f90d7179a74a1e6a409f90496a7413b6fe2002c01c6e98266b64f669",
+          "bytes": 409304,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/14f3e5bd-6a93-4818-b7dc-bcdc5db95fe0",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "returned-edit-archived-unused-crop-expansion-original-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "exact country-pair duplicate and live publication gates"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-accessibility.json",
+          "alt": "AI-generated fictional Namibia fashion editorial: four adult women smile in a close diagonal embrace beside a coastal window. Coral and slate-blue tailoring, a pearl one-shoulder dress, a white mini skort and a blue flag-inspired bodice frame the group. Split-star and crescent arm tattoos are visible.",
+          "safetyOverrides": [],
+          "state": "remote-verified-accepted-unpublished",
+          "sceneFamilyConsumed": false,
+          "remoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
+          "remotePayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
+          "uploadOrder": 4
+        }
+      ],
+      "photoEndpoints": [
+        {
+          "scene": 2067,
+          "index": 1,
+          "url": "https://x.com/dogramaci/status/2097246369526214887/photo/1",
+          "alt": "AI-generated fashion editorial of four fictional adult women in a warm pink-stone window atelier. A braided Black woman sits left while a blonde woman hugs her from behind; two dark-haired women lean in around a handclasp. Garnet, ivory, red-blue-orange and navy mini dresses are paired with varied heels, rainbow footwear and visible arm tattoos. The opaque mini dresses have a closer, shorter tailored fit."
+        },
+        {
+          "scene": 2068,
+          "index": 2,
+          "url": "https://x.com/dogramaci/status/2097246369526214887/photo/2",
+          "alt": "AI-generated portrait of four fictional adult women gathered closely on an apricot couch beside tall city-facing windows. The braided woman reclines against cushions while the blonde and two dark-haired women lean toward her, exchanging a shoulder touch and hand contact. Charcoal, apricot, pearl and plum garments, rainbow hosiery and RAZE, GRD and scorpion arm motifs are visible."
+        },
+        {
+          "scene": 2071,
+          "index": 3,
+          "url": "https://x.com/dogramaci/status/2097246369526214887/photo/3",
+          "alt": "AI-generated fictional Namibia fashion editorial: four adult women share a handclasp and shoulder touch around cobalt seating in a windowed atelier. A flag-inspired mini, ivory dress, cobalt top with sand skort, and emerald dress pair with varied heels and rainbow legwear. A crescent arm tattoo is visible. Distant smoke and a mushroom-shaped cloud are imaginary, not a real event."
+        },
+        {
+          "scene": 2072,
+          "index": 4,
+          "url": "https://x.com/dogramaci/status/2097246369526214887/photo/4",
+          "alt": "AI-generated fictional Namibia fashion editorial: four adult women smile in a close diagonal embrace beside a coastal window. Coral and slate-blue tailoring, a pearl one-shoulder dress, a white mini skort and a blue flag-inspired bodice frame the group. Split-star and crescent arm tattoos are visible."
+        }
+      ],
+      "mediaMode": "four-stills-two-countries-2-plus-2",
+      "buttonActivationAttempts": 1,
+      "successfulMethod": "Post.press(Enter)",
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 4,
+      "stagingCommit": "17a05a0acb1aca7c3555c99fe503fdbcfd80ca4e",
+      "archiveExceptions": [],
+      "rawArchiveComplete": true,
+      "missingInternalOriginalsByCountry": {
+        "Armenia": 0,
+        "Namibia": 0
+      },
+      "evidence": [
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-staging-evidence.json",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-activation-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-publication-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-published-visible.jpg",
+        "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json"
+      ],
+      "duplicateGate": {
+        "allVersionsChecked": [
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp",
+            "sha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+            "bytes": 480900,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-download-button-jpeg.jpg",
+            "sha256": "78dc37ce7736a51995cb7547e55cd0589046187428356b587e106054339008d6",
+            "bytes": 244986,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2068,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp",
+            "sha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+            "bytes": 455462,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2068,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-internal-01-original.webp",
+            "sha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+            "bytes": 455462,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-internal-01-original.webp",
+            "sha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+            "bytes": 480900,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+            "sha256": "a84b9105cb0bbd3de6b91e238ab61c98d41829ea5d1db1dc4d18968daa2911fb",
+            "bytes": 2266341,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp",
+            "sha256": "e4916f10f90d7179a74a1e6a409f90496a7413b6fe2002c01c6e98266b64f669",
+            "bytes": 409304,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-01-original.webp",
+            "sha256": "5d7561e51cf6f7ea85b735c8df430f377a63c49d723c222e5114349aa4f93b12",
+            "bytes": 369436,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-02-original.webp",
+            "sha256": "c4035895780cbad7eabea26155338ff1180ec393f2ffc0604fd24282d710e254",
+            "bytes": 388644,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-03-original.webp",
+            "sha256": "e4916f10f90d7179a74a1e6a409f90496a7413b6fe2002c01c6e98266b64f669",
+            "bytes": 409304,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2071,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp",
+            "sha256": "d20f970a1dc2e1f277f2ffedb6adca10e14a1c69e418bcafe00b26363b86d2f6",
+            "bytes": 497592,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2071,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-internal-01-original.webp",
+            "sha256": "b6a1a25ca1dc2b0eb465acf20b64e08eb63d1c945ef8a76e7df63eae42b6c1e8",
+            "bytes": 440856,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2071,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-internal-02-original.webp",
+            "sha256": "d20f970a1dc2e1f277f2ffedb6adca10e14a1c69e418bcafe00b26363b86d2f6",
+            "bytes": 497592,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-chatgpt-single-tailoring-pass.png",
+            "sha256": "6d44b3202a4f9ed6749b671cbcbf20d464cf35858e752a18c1e9f2d5a31eba43",
+            "bytes": 2138592,
+            "postedHashMatch": false,
+            "postedSceneFamilyMatch": false,
+            "localBytesPass": true
+          }
+        ],
+        "noRepostSceneFamilies": [
+          2067,
+          2068,
+          2071,
+          2072
+        ],
+        "consumedVersions": [
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp",
+            "sha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+            "bytes": 480900,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-download-button-jpeg.jpg",
+            "sha256": "78dc37ce7736a51995cb7547e55cd0589046187428356b587e106054339008d6",
+            "bytes": 244986,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2068,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp",
+            "sha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+            "bytes": 455462,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2068,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-internal-01-original.webp",
+            "sha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+            "bytes": 455462,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-internal-01-original.webp",
+            "sha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+            "bytes": 480900,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2067,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+            "sha256": "a84b9105cb0bbd3de6b91e238ab61c98d41829ea5d1db1dc4d18968daa2911fb",
+            "bytes": 2266341,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp",
+            "sha256": "e4916f10f90d7179a74a1e6a409f90496a7413b6fe2002c01c6e98266b64f669",
+            "bytes": 409304,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-01-original.webp",
+            "sha256": "5d7561e51cf6f7ea85b735c8df430f377a63c49d723c222e5114349aa4f93b12",
+            "bytes": 369436,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-02-original.webp",
+            "sha256": "c4035895780cbad7eabea26155338ff1180ec393f2ffc0604fd24282d710e254",
+            "bytes": 388644,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-03-original.webp",
+            "sha256": "e4916f10f90d7179a74a1e6a409f90496a7413b6fe2002c01c6e98266b64f669",
+            "bytes": 409304,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2071,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-gallery-original.webp",
+            "sha256": "d20f970a1dc2e1f277f2ffedb6adca10e14a1c69e418bcafe00b26363b86d2f6",
+            "bytes": 497592,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2071,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-internal-01-original.webp",
+            "sha256": "b6a1a25ca1dc2b0eb465acf20b64e08eb63d1c945ef8a76e7df63eae42b6c1e8",
+            "bytes": 440856,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2071,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-meta-internal-02-original.webp",
+            "sha256": "d20f970a1dc2e1f277f2ffedb6adca10e14a1c69e418bcafe00b26363b86d2f6",
+            "bytes": 497592,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
+          },
+          {
+            "scene": 2072,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-chatgpt-single-tailoring-pass.png",
+            "sha256": "6d44b3202a4f9ed6749b671cbcbf20d464cf35858e752a18c1e9f2d5a31eba43",
+            "bytes": 2138592,
+            "contentRole": "generated-scene-media",
+            "sceneFamilyConsumed": true,
+            "noRepostAnyVersion": true,
+            "postUrl": "https://x.com/dogramaci/status/2097246369526214887"
           }
         ],
         "noRepostAnyVersion": true

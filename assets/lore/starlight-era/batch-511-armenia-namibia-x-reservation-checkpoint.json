@@ -9,9 +9,9 @@
     "Armenia",
     "Namibia"
   ],
-  "state": "two-four-photo-posts-reserved-unposted",
+  "state": "part1-posted-verified-part2-reserved-unposted",
   "preparedAtUtc": "2026-09-08T08:35:46.955Z",
-  "postCount": 240,
+  "postCount": 241,
   "reservations": [
     "assets/lore/starlight-era/batch-511-armenia-namibia-p1-x-reservation.json",
     "assets/lore/starlight-era/batch-511-armenia-namibia-p2-x-reservation.json"
@@ -25,8 +25,10 @@
         2071,
         2072
       ],
-      "state": "prepared-unposted",
-      "captionSha256": "5ff16eaf9d8b5fefb3b700c2c2fd4d094bbc0532cee081ef3fdc3739333a9325"
+      "state": "posted-verified",
+      "captionSha256": "5ff16eaf9d8b5fefb3b700c2c2fd4d094bbc0532cee081ef3fdc3739333a9325",
+      "postUrl": "https://x.com/dogramaci/status/2097246369526214887",
+      "publication": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-publication-receipt.json"
     },
     {
       "part": 2,
@@ -344,5 +346,6 @@
   "legacyPendingRecordNotResubmittable": true,
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0820.json",
   "guardianNextAuditNotBeforeUtc": "2026-09-08T09:07:16.624Z",
-  "nextSafeAction": "After reservations are committed, pushed and verified, stage part1 once in the existing visible X composer. Set four exact ALT texts and Made with AI, verify account, caption, media, all-version duplicate and remote gates, then Post once. Part2 follows only after part1 is publicly verified and archived."
+  "nextSafeAction": "After part1 publication evidence is committed, pushed and verified, stage and publish part2 once using its distinct four files, exact ALT, frozen caption, Made with AI and live @dogramaci verification.",
+  "updatedAtUtc": "2026-09-08T08:53:54.142Z"
 }
