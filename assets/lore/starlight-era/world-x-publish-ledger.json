@@ -1,4 +1,47 @@
 {
+  "currentAuthorityBatch516": {
+    "schemaVersion": 1,
+    "batch": 516,
+    "country": "Gabon",
+    "state": "prepared-offline-not-dispatched",
+    "createdAtUtc": "2026-09-08T15:36:11.745Z",
+    "sceneRange": [
+      2091,
+      2092,
+      2093,
+      2094
+    ],
+    "priorityIndex": 139,
+    "checkpoint": "assets/lore/starlight-era/batch-516-gabon-four-lane-preparation-checkpoint.json",
+    "brief": "assets/lore/starlight-era/batch-516-gabon-editorial-brief.json",
+    "fixedRolls": "assets/lore/starlight-era/batch-516-gabon-fixed-rolls.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/provider-ledger.json",
+    "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-intents.json",
+    "previousClosure": "assets/lore/starlight-era/batch-515-gambia-four-stills-closure-checkpoint.json",
+    "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
+    "baseRemoteVerifiedHead": "be2eed5303b6640b42c56dd2ca1d40ffcd20e971",
+    "providerSendActivations": 0,
+    "chatgptEditInvocations": 0,
+    "publicationState": "not-ready-waiting-for-Gabon-closure",
+    "xPostCount": 244,
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1505.json",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T15:50:50.413Z",
+    "allPreviousConsumedVersionsRemainTerminal": true,
+    "heldCountries": [
+      "Qatar513",
+      "Oman499",
+      "Switzerland455"
+    ],
+    "eligibleCompanionCountry": "Gambia",
+    "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/accepted-selections.json",
+    "companionSceneIds": [
+      2087,
+      2088,
+      2089,
+      2090
+    ],
+    "nextSafeAction": "After committing and remotely verifying preparation, attach exact938/936/937 once each in order through visible controls in all four clean Meta lanes. Verify account, Thinking, prompt text, hashes and ordered cards after typing. Archive staging and verify remote parity before one initial Send per lane."
+  },
   "currentAuthorityBatch515": {
     "schemaVersion": 1,
     "batch": 515,

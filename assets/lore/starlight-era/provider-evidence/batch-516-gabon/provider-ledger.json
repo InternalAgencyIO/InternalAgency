@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "batch": 516,
+  "country": "Gabon",
+  "state": "prepared-offline-not-dispatched",
+  "createdAtUtc": "2026-09-08T15:36:11.745Z",
+  "occurrences": [
+    {
+      "occurrenceId": "batch-516-scene-2091-meta-initial",
+      "scene": 2091,
+      "provider": "Meta AI",
+      "state": "prepared-offline-not-dispatched",
+      "promptSha256": "CC84F7DC917E49E9CF57A80F4CBCA83C0624653C13CE1A047953B1A1F5400119",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    },
+    {
+      "occurrenceId": "batch-516-scene-2092-meta-initial",
+      "scene": 2092,
+      "provider": "Meta AI",
+      "state": "prepared-offline-not-dispatched",
+      "promptSha256": "58FEE5E2BCD4B299C94CDE17F8377CC2FE27BECE26A68E46D1E8581AB8F614B2",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    },
+    {
+      "occurrenceId": "batch-516-scene-2093-meta-initial",
+      "scene": 2093,
+      "provider": "Meta AI",
+      "state": "prepared-offline-not-dispatched",
+      "promptSha256": "F2A52780A58114061B324953269209659A133453F0EEEC861D6D646D5EED255D",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    },
+    {
+      "occurrenceId": "batch-516-scene-2094-meta-initial",
+      "scene": 2094,
+      "provider": "Meta AI",
+      "state": "prepared-offline-not-dispatched",
+      "promptSha256": "D2D46F9A6B3BEEB22F225A26D6C4B7A706334658FFD0CF39332B4F6A2265DE93",
+      "providerSendActivations": 0,
+      "retryCount": 0,
+      "providerUrl": null,
+      "neverResendAfterConfirmationOrUncertainty": true
+    }
+  ],
+  "providerSendActivations": 0,
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "currentCheckpoint": "assets/lore/starlight-era/batch-516-gabon-four-lane-preparation-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-516-gabon-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-516-gabon-fixed-rolls.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-intents.json",
+  "maximumHardFailureRetriesPerScene": 2,
+  "aestheticRetries": 0,
+  "sourceArchiveComplete": false,
+  "archiveException": null,
+  "previousWorkflowClosure": "assets/lore/starlight-era/batch-515-gambia-four-stills-closure-checkpoint.json",
+  "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1505.json",
+  "nextSafeAction": "After committing and remotely verifying preparation, attach exact938/936/937 once each in order through visible controls in all four clean Meta lanes. Verify account, Thinking, prompt text, hashes and ordered cards after typing. Archive staging and verify remote parity before one initial Send per lane."
+}
