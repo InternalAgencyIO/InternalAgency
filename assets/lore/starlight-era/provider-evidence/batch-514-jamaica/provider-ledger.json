@@ -150,7 +150,7 @@
       "Lithuania",
       "Jamaica"
     ],
-    "state": "two-posts-eight-scenes-published-verified",
+    "state": "two-posts-eight-scenes-published-and-remote-verified",
     "verifiedAtUtc": "2026-09-08T13:35:24.736Z",
     "postCount": 244,
     "parts": [
@@ -215,7 +215,7 @@
     "normalPairBacklogRemaining": 0,
     "publicationClosure": "assets/lore/starlight-era/batch-514-lithuania-jamaica-pair-publication-closure-checkpoint.json",
     "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/after-pair-browser-continuation-handoff.json",
-    "finalRemoteProofPending": true,
+    "finalRemoteProofPending": false,
     "nextCountryCandidate": {
       "country": "Gambia",
       "priorityIndex": 138,
@@ -230,7 +230,12 @@
       "allocated": false,
       "dispatchCount": 0,
       "requires": "Fresh authoritative occurrence search, brief and fixed rolls, exact anchors938/936/937 in order, live leesha007 plus Thinking, raw/archive/QA capability and remote parity before each new dispatch."
-    }
+    },
+    "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/pair-final-remote-publication-verification.json",
+    "finalPayloadCommit": "032b1140eba65dcb863f1c391d46b7eec529e158",
+    "finalVerifiedAtUtc": "2026-09-08T13:47:09.094Z",
+    "allFinalByteChecksPassed": true,
+    "immutablePublicationManifest": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/pair-publication-evidence-manifest.json"
   },
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json"
 }
