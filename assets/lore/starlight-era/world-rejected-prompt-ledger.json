@@ -1,4 +1,40 @@
 {
+  "latestBatch513FailureEvidence": {
+    "updatedAtUtc": "2026-09-08T10:49:33.900Z",
+    "batch": 513,
+    "policy": "Terminal Meta refusal, no automatic changed-background suggestion or reopen.",
+    "entries": [
+      {
+        "scene": 2080,
+        "provider": "Meta AI",
+        "state": "terminal-provider-refusal-no-image",
+        "providerUrl": "https://www.meta.ai/prompt/b561c937-873a-465d-bd35-4e58ce43fc1a",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2080-initial-provider-refusal.json",
+        "promptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/scene-2080-initial-exact-prompt.txt",
+        "promptSha256": "280DB33273290733627B1B85CC5BCD4E1ADE91FE208DA27314CA2D10B33F2FA3",
+        "returnedImageFiles": 0,
+        "providerSendActivations": 1,
+        "additionalAutomaticActivations": 0
+      }
+    ]
+  },
+  "latestBatch512FailureEvidence": {
+    "updatedAtUtc": "2026-09-08T10:49:33.900Z",
+    "batch": 512,
+    "policy": "Single output-stage block consumes edit allowance; no retry.",
+    "entries": [
+      {
+        "scene": 2075,
+        "provider": "built-in image_gen",
+        "state": "output-moderation-block-allowance-consumed",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-chatgpt-single-tailoring-blocked.json",
+        "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2075-single-edit-exact-prompt.txt",
+        "promptSha256": "3678747CF68D4EBE22B5D8244811FDF617A2B0AE72EB2918B3A9919631D2422E",
+        "returnedImageFiles": 0,
+        "originalSelected": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-meta-gallery-original.webp"
+      }
+    ]
+  },
   "latestBatch510FailureEvidence": {
     "updatedAtUtc": "2026-09-08T06:29:45.925Z",
     "batch": 510,

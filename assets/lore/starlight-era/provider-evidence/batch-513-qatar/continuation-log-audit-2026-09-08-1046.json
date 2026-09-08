@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "batch": 513,
+  "auditCompletedAtUtc": "2026-09-08T10:49:33.900Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/continuation-log-audit-2026-09-08-0958.json",
+  "scheduledNotBeforeUtc": "2026-09-08T10:46:14.510Z",
+  "nextAuditNotBeforeUtc": "2026-09-08T11:34:33.900Z",
+  "scope": "45-minute local ledger, browser, pipeline, preservation and duplicate-safety review",
+  "observations": {
+    "lithuania512": "4selected,16saved files12unique,4single-edit attempts3PNGs1block,remote verified and unposted",
+    "qatar513": "4initial Meta activations once each,0retries;2079/2081/2082usable sources and2080terminal refusal;8saved files5unique;0ChatGPT invocations so far",
+    "xPostCount": 242,
+    "xArrayUnchanged": true,
+    "guardian": "Existing starlight-pipeline-guardian ACTIVE10min schedule unchanged",
+    "guardianConfigSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+    "browser": "4Meta tabs33-36 plusX37blank; protected user-owned Oman1exception unchanged",
+    "rollTargets": "Qatar camera draw59intermediate,76intermediate,8extreme-close,99extreme-wide. Actual output2081broader than target; no aesthetic retry.",
+    "protectedUntrackedFiles": [
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1806-tanzania-dar-es-salaam-kivukoni-waterfront.webp",
+        "sha256": "a15f4dcfe4b1656ad4f2d164b976c4029e956fba162444b855c15f19f75f3ed7",
+        "bytes": 652738,
+        "currentBytes": 652738,
+        "currentSha256": "a15f4dcfe4b1656ad4f2d164b976c4029e956fba162444b855c15f19f75f3ed7",
+        "unchanged": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1808-tanzania-serengeti-naabi-hill.webp",
+        "sha256": "eefe17d8b95a33f4842425dca47290220b97b8b9a040241db1317e5304da1ed2",
+        "bytes": 683466,
+        "currentBytes": 683466,
+        "currentSha256": "eefe17d8b95a33f4842425dca47290220b97b8b9a040241db1317e5304da1ed2",
+        "unchanged": true
+      },
+      {
+        "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+        "sha256": "5789286c420c51705458e38433ed946c87457e362a6fadb96d0180c838ea9de5",
+        "bytes": 75027,
+        "currentBytes": 75027,
+        "currentSha256": "5789286c420c51705458e38433ed946c87457e362a6fadb96d0180c838ea9de5",
+        "unchanged": true
+      },
+      {
+        "path": "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+        "sha256": "e0571c39a7a6e3a4571207ef322cc2f876e6707dc62ed15083fcf352e834c0d1",
+        "bytes": 87756,
+        "currentBytes": 87756,
+        "currentSha256": "e0571c39a7a6e3a4571207ef322cc2f876e6707dc62ed15083fcf352e834c0d1",
+        "unchanged": true
+      },
+      {
+        "path": "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+        "sha256": "2c39906adeaf921042d74b8c49061d224523f3174045905caf4eadbfd2aa3c9e",
+        "bytes": 59155,
+        "currentBytes": 59155,
+        "currentSha256": "2c39906adeaf921042d74b8c49061d224523f3174045905caf4eadbfd2aa3c9e",
+        "unchanged": true
+      },
+      {
+        "path": "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+        "sha256": "e1186ba034e81335f9b022aede01531c40d45cc1f9dee23df87f29f7b6e1ebaf",
+        "bytes": 46854,
+        "currentBytes": 46854,
+        "currentSha256": "e1186ba034e81335f9b022aede01531c40d45cc1f9dee23df87f29f7b6e1ebaf",
+        "unchanged": true
+      },
+      {
+        "path": "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png",
+        "sha256": "48991915cc10959c752490f68cc603ee7cfb69f325bad6ef62a794dedc296b84",
+        "bytes": 83080,
+        "currentBytes": 83080,
+        "currentSha256": "48991915cc10959c752490f68cc603ee7cfb69f325bad6ef62a794dedc296b84",
+        "unchanged": true
+      }
+    ]
+  },
+  "boundedCorrections": [
+    {
+      "finding": "Text patch serialization adds one trailing LF to exact-prompt text files.",
+      "change": "Record raw file hash and bytes separately from prompt hash; verify exactly one delimiter and use exact frozen bank prompt in UI. No internal text change."
+    },
+    {
+      "finding": "Filechooser belongs under tab.playwright, not directly on tab.",
+      "change": "Read current upload documentation; first invalid method caused no upload or Send. All4supported uploads then completed once each."
+    },
+    {
+      "finding": "GitHub CLI authentication differs between persistent Node and shell environments.",
+      "change": "Use the existing authenticated PowerShell gh command for read-only PR checks. No login, credential change or token disclosure."
+    },
+    {
+      "finding": "Full imagegen result logging can emit base64 payloads.",
+      "change": "Future result logs should contain compact metadata and file-path receipts only; preserve actual native image bytes separately."
+    },
+    {
+      "finding": "Provider refused2080and proposed background changes.",
+      "change": "Preserve exact refusal and prompt, do not click suggestion, do not classify it as a transient capacity error or auto-reopen terminal scene."
+    }
+  ],
+  "probabilityPolicyChanged": false,
+  "retryCeilingsChanged": false,
+  "newAutomations": 0,
+  "newWorkers": 0,
+  "newSubagents": 0,
+  "nextSafeAction": "Remote-verify Qatar source archive and3frozen single-edit intents; only then reserve the3one-use imagegen allowances. Keep terminal2080closed and unpublished, and re-evaluate country-pair eligibility after all remaining edit outcomes are archived."
+}
