@@ -3,7 +3,7 @@
     "schemaVersion": 1,
     "batch": 515,
     "country": "Gambia",
-    "state": "all-four-terminal-sources-archived-single-edits-not-invoked",
+    "state": "source-proof-verified-single-edits-reserved-not-invoked",
     "createdAtUtc": "2026-09-08T14:14:52.500Z",
     "sceneRange": [
       2087,
@@ -32,7 +32,7 @@
       "Oman499",
       "Switzerland455"
     ],
-    "nextSafeAction": "Commit and remotely verify every original, QA/ALT and frozen edit intent, then reserve and consume exactly one built-in imagegen tailoring invocation for each selected usable source. No provider retries or reopening terminal scenes.",
+    "nextSafeAction": "Reach full proof-carrier HEAD/origin/branch/PR parity. Then journal and invoke exactly one built-in imagegen call per reserved usable source, sourcefirst plus exact938/936/937identity-only references. A block or interruption consumes allowance.",
     "stagedAtUtc": "2026-09-08T14:20:15.216Z",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-remote-preflight.json",
@@ -42,7 +42,10 @@
     "sourceArchiveComplete": true,
     "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/native-raw-archive-manifest.json",
     "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-source-qa.json",
-    "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/single-chatgpt-edit-intents.json"
+    "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/single-chatgpt-edit-intents.json",
+    "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/source-and-edit-preflight-remote-verification.json",
+    "sourcePayloadCommit": "0b84ad7421a7dabfe7066027884317b8f6f06b75",
+    "sourceVerifiedAtUtc": "2026-09-08T14:42:45.724Z"
   },
   "currentLithuaniaJamaicaPairPublication514": {
     "schemaVersion": 1,

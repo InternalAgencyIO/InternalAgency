@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 515,
-  "state": "single-edit-intents-not-invoked",
+  "state": "four-single-edit-reservations-not-invoked",
   "maximumInvocationsPerScene": 1,
   "blockOrInterruptionConsumesAllowance": true,
   "noSecondEdit": true,
@@ -15,7 +15,9 @@
       "invocationCount": 0,
       "allowanceConsumed": false,
       "state": "not-invoked",
-      "additionalInvocationsAllowed": 1
+      "additionalInvocationsAllowed": 1,
+      "reserved": true,
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2088,
@@ -26,7 +28,9 @@
       "invocationCount": 0,
       "allowanceConsumed": false,
       "state": "not-invoked",
-      "additionalInvocationsAllowed": 1
+      "additionalInvocationsAllowed": 1,
+      "reserved": true,
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2089,
@@ -37,7 +41,9 @@
       "invocationCount": 0,
       "allowanceConsumed": false,
       "state": "not-invoked",
-      "additionalInvocationsAllowed": 1
+      "additionalInvocationsAllowed": 1,
+      "reserved": true,
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2090,
@@ -48,7 +54,11 @@
       "invocationCount": 0,
       "allowanceConsumed": false,
       "state": "not-invoked",
-      "additionalInvocationsAllowed": 1
+      "additionalInvocationsAllowed": 1,
+      "reserved": true,
+      "neverAutomaticallyReissueReservation": true
     }
-  ]
+  ],
+  "reservedAtUtc": "2026-09-08T14:42:45.724Z",
+  "sourcePreflight": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/source-and-edit-preflight-remote-verification.json"
 }

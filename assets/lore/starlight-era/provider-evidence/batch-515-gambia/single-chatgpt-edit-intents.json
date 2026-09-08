@@ -3,7 +3,7 @@
   "batch": 515,
   "country": "Gambia",
   "preparedAtUtc": "2026-09-08T14:39:31.430Z",
-  "state": "four-single-edit-intents-frozen-not-invoked",
+  "state": "four-single-edit-reservations-not-invoked",
   "intents": [
     {
       "scene": 2087,
@@ -56,7 +56,9 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": false,
+      "reservedAtUtc": "2026-09-08T14:42:45.724Z",
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2088,
@@ -109,7 +111,9 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": false,
+      "reservedAtUtc": "2026-09-08T14:42:45.724Z",
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2089,
@@ -162,7 +166,9 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": false,
+      "reservedAtUtc": "2026-09-08T14:42:45.724Z",
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2090,
@@ -215,7 +221,10 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": false,
+      "reservedAtUtc": "2026-09-08T14:42:45.724Z",
+      "neverAutomaticallyReissueReservation": true
     }
-  ]
+  ],
+  "reservedAtUtc": "2026-09-08T14:42:45.724Z"
 }
