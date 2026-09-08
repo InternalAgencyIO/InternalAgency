@@ -9,7 +9,7 @@
       2073,
       2074
     ],
-    "state": "four-composers-staged-not-dispatched",
+    "state": "four-composers-remote-verified-ready-for-single-initial-send",
     "preparedAtUtc": "2026-09-08T07:03:47.722Z",
     "brief": "assets/lore/starlight-era/batch-511-namibia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-511-namibia-fixed-rolls.json",
@@ -47,8 +47,11 @@
     ],
     "eligibleCompanionCountry": "Armenia",
     "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
-    "nextSafeAction": "Commit and remotely verify exact staging, prompt files and ordered anchors before one initial Send per lane.",
+    "nextSafeAction": "After this proof carrier is committed, pushed and HEAD/origin/PR match, recheck the current account, Thinking, exact prompt and three ordered anchor cards. Activate each of the four reserved initial Meta sends once. Record every attempted activation and resulting occurrence immediately; never repeat a confirmed or uncertain Send.",
     "stagedAtUtc": "2026-09-08T07:11:31.898Z",
+    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-remote-preflight.json",
+    "preflightPayloadCommit": "cb54f5e100e748dcbe328c51601443567fb85b91",
+    "preflightVerifiedAtUtc": "2026-09-08T07:14:22.191Z",
     "checkpoint": "assets/lore/starlight-era/batch-511-namibia-prepared-checkpoint.json"
   },
   "currentAuthorityBatch510": {
