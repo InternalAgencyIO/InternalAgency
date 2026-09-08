@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 507,
   "country": "Mongolia",
-  "state": "2056-safe-alternative-1-confirmed-in-progress",
+  "state": "all-sources-qa-complete-four-single-edits-prepared",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -122,7 +122,7 @@
       "scene": 2056,
       "kind": "safe-alternative-1",
       "preparedAtUtc": "2026-09-08T01:43:47.147Z",
-      "state": "confirmed-submission-in-progress",
+      "state": "terminal-usable-output-all-originals-archived",
       "activationCount": 1,
       "maximumActivationCount": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-safe-alternative-1-prompt.txt",
@@ -140,7 +140,11 @@
       "retryOrdinal": 1,
       "submittedAtUtc": "2026-09-08T01:46:34.913Z",
       "additionalSendsAllowed": 0,
-      "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json"
+      "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json",
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-internal-1-original.webp"
+      ]
     }
   ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-507-mongolia-prepared-checkpoint.json",
@@ -148,9 +152,9 @@
   "fixedRolls": "assets/lore/starlight-era/batch-507-mongolia-fixed-rolls.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
-  "sourceArchiveComplete": false,
+  "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Observe confirmed2056safe-alternative1 without resending; preserve every exposed output. QA archived2055,2057,2058 sources and invoke exactly one built-in tailoring edit per selected usable source. Keep calm-background exclusion for2056. No X posting until country closure and duplicate-safe pair reservation.",
+  "nextSafeAction": "Remote-verify all22originals, four selected sources, exact one-edit prompts and anchors; then issue exactly one built-in tailoring invocation per scene2055-2058. Preserve calm-background exclusion2056 and every returned image or block. No further Meta send or X publication before closure.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T07:19:53.157Z",
@@ -212,10 +216,10 @@
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-remote-preflight.json",
   "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/native-raw-archive-manifest.json",
   "initialTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-terminal-provider-evidence.json",
-  "rawFilesSaved": 20,
-  "uniqueRawByteVersions": 17,
+  "rawFilesSaved": 22,
+  "uniqueRawByteVersions": 18,
   "sourceArchiveCompleteForInitialOccurrences": true,
-  "countryRawArchiveComplete": false,
+  "countryRawArchiveComplete": true,
   "missingObservedOriginals": 0,
   "noImageInitialScenes": [
     2056
@@ -235,5 +239,9 @@
   "liveXComposerTabId": "32",
   "safeAlternativeReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json",
   "safeAlternativeProviderUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
-  "remoteSafeAlternativePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-remote-preflight.json"
+  "remoteSafeAlternativePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-remote-preflight.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json",
+  "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json",
+  "safeAlternativeTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-evidence.json",
+  "additionalMetaSendsAllowedForCurrentScenes": 0
 }

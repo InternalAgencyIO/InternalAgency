@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "batch": 507,
   "country": "Mongolia",
-  "updatedAtUtc": "2026-09-07T07:29:19.791Z",
-  "state": "all-initial-exposed-originals-archived-one-initial-no-image",
-  "scope": "Four initial submitted provider occurrences only; any future safe alternative requires separate original-byte reconciliation.",
+  "updatedAtUtc": "2026-09-08T01:53:55.288Z",
+  "state": "all-initial-and-safe-alternative-originals-archived-source-qa-complete",
+  "scope": "All exposed original files from four initial sessions and2056safe-alternative1.",
   "rawArchiveCompleteForInitialOccurrences": true,
-  "countryRawArchiveComplete": false,
-  "rawFilesSaved": 20,
-  "uniqueRawByteVersions": 17,
+  "countryRawArchiveComplete": true,
+  "rawFilesSaved": 22,
+  "uniqueRawByteVersions": 18,
   "missingObservedOriginals": 0,
   "assistantInitialSendActivations": 4,
-  "assistantRetries": 0,
+  "assistantRetries": 1,
   "providerAutonomousUniqueAdditionalVersions": 14,
   "providerAutonomousVersionCountIsNotAssistantRetryCount": true,
   "files": [
@@ -394,6 +394,46 @@
       "kind": "internal",
       "archiveMethod": "visible browser downloadMedia and download event",
       "status": "archived-original-pending-qa-unused-until-selected"
+    },
+    {
+      "scene": 2056,
+      "attempt": "safe-alternative-1",
+      "label": "gallery/valley_lounge_candid.webp",
+      "labelIndex": 0,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800259624_1761713341699221_4982925519567462277_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=109&_nc_ohc=ZXVLSmkcWfIQ7kNvwEcF2RU&sdl=0&ccb=14-4&oh=00_AQLj0-DjyAFijilh33cfKfxXdJPXaoBssmU_Oz2naybH4Q&oe=6AA541B7&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
+      "observedAtUtc": "2026-09-08T01:51:08.688Z",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-gallery-original.webp",
+      "downloadPath": "C:\\Users\\A\\Downloads\\800259624_1761713341699221_4982925519567462277_n.webp",
+      "bytes": 517366,
+      "sha256": "92291c65d7a414b919943637533ba56eaaed838f5d8cbac86a84111b136ef4ef",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "kind": "gallery",
+      "archiveMethod": "visible browser downloadMedia and download event",
+      "status": "archived-original-pending-qa-unused-until-selected"
+    },
+    {
+      "scene": 2056,
+      "attempt": "safe-alternative-1",
+      "label": "Inline image",
+      "labelIndex": 0,
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t58.90637-1/738512127_1112462144470734_894294091143350146_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=E2aPZBePGK4Q7kNvwEquAsR&sdl=0&ccb=14-4&oh=00_AQJgXamL-erX5cqb-7ZJ5Btk55YMb7o8TCHkODfpaXkeCg&oe=6AA13C85&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
+      "observedAtUtc": "2026-09-08T01:51:09.133Z",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-internal-1-original.webp",
+      "downloadPath": "C:\\Users\\A\\Downloads\\738512127_1112462144470734_894294091143350146_n.webp",
+      "bytes": 517366,
+      "sha256": "92291c65d7a414b919943637533ba56eaaed838f5d8cbac86a84111b136ef4ef",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "kind": "internal-1",
+      "archiveMethod": "visible browser downloadMedia and download event",
+      "status": "archived-original-pending-qa-unused-until-selected"
     }
   ],
   "observed": [
@@ -561,5 +601,7 @@
   "noImageScenes": [
     2056
   ],
-  "safeAlternativePlan": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-plan.json"
+  "safeAlternativePlan": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-plan.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json",
+  "safeAlternativeTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-evidence.json"
 }

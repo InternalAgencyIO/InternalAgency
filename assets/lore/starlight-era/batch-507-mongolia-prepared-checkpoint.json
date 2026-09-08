@@ -8,7 +8,7 @@
     2057,
     2058
   ],
-  "state": "2056-safe-alternative-1-confirmed-in-progress",
+  "state": "all-sources-qa-complete-four-single-edits-prepared",
   "preparedAtUtc": "2026-09-07T07:14:46.093Z",
   "previousCountryClosure": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
   "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
@@ -66,7 +66,7 @@
     "Four intermediate camera rolls78,69,80,71 are the fixed draw, not a lost probability mapping; four angles and poses differ.",
     "Oman and Switzerland remain held."
   ],
-  "nextSafeAction": "Observe confirmed2056safe-alternative1 without resending; preserve every exposed output. QA archived2055,2057,2058 sources and invoke exactly one built-in tailoring edit per selected usable source. Keep calm-background exclusion for2056. No X posting until country closure and duplicate-safe pair reservation.",
+  "nextSafeAction": "Remote-verify all22originals, four selected sources, exact one-edit prompts and anchors; then issue exactly one built-in tailoring invocation per scene2055-2058. Preserve calm-background exclusion2056 and every returned image or block. No further Meta send or X publication before closure.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T07:19:53.157Z",
@@ -128,11 +128,11 @@
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-remote-preflight.json",
   "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/native-raw-archive-manifest.json",
   "initialTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-terminal-provider-evidence.json",
-  "rawFilesSaved": 20,
-  "uniqueRawByteVersions": 17,
+  "rawFilesSaved": 22,
+  "uniqueRawByteVersions": 18,
   "sourceArchiveCompleteForInitialOccurrences": true,
-  "sourceArchiveComplete": false,
-  "countryRawArchiveComplete": false,
+  "sourceArchiveComplete": true,
+  "countryRawArchiveComplete": true,
   "missingObservedOriginals": 0,
   "noImageInitialScenes": [
     2056
@@ -152,5 +152,9 @@
   "safeAlternativeReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-send-receipt.json",
   "safeAlternativeProviderUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
   "remoteSafeAlternativePreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-remote-preflight.json",
-  "providerRetries": 1
+  "providerRetries": 1,
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json",
+  "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json",
+  "safeAlternativeTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-evidence.json",
+  "additionalMetaSendsAllowedForCurrentScenes": 0
 }
