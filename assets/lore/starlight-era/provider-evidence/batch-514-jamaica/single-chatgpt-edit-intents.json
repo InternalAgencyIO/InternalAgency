@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "batch": 514,
+  "country": "Jamaica",
+  "preparedAtUtc": "2026-09-08T12:14:26.780Z",
+  "state": "prepared-unused-awaiting-source-remote-verification",
+  "intents": [
+    {
+      "scene": 2083,
+      "occurrenceId": "batch-514-scene-2083-chatgpt-single-tailoring",
+      "state": "prepared-unused",
+      "invocationCount": 0,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2083,
+        "label": "gallery/kingston_harbour_editorial.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800469597_1610023974160716_6386466117336381724_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=0SwhBF-FLZQQ7kNvwFWt6W-&sdl=0&ccb=14-4&oh=00_AQK1-6NkhWUcyGv0D_hu35eGQyAYbx-As4Ax4DQrnmq8_A&oe=6AA5B8C7&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/6c67a533-263e-4560-bf83-68877e89a93c",
+        "downloadPath": "C:/Users/A/Downloads/800469597_1610023974160716_6386466117336381724_n.webp",
+        "observedAtUtc": "2026-09-08T11:58:51.910Z",
+        "bytes": 652224,
+        "sha256": "3ba7b80bc4e04b3bf2be02032fb7f6048b96ac237e34a27041f2b45d596a0a33",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia; confirmed download event and attributable native local file; bytes copied unchanged",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp.alt.txt",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp.qa.json",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T12:14:26.780Z"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2083-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2083-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four characters are original fictional adult women, each age21.\nSource-specific invariants: Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.\n\nOne identity-preserving clothing-only tailoring pass for scene 2083: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=visible navel, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: an emerald asymmetric mini with graphite folded seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient sculptural platform with one subtle original RAZE split-star mark. Prominent crisp tattoos: an original pair of harbour curves sheltering a tiny heart, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Radiance: a coral fitted cocktail mini with gold ribs; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; coral satin knee high boot without any branding. Prominent crisp tattoos: agency, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a fitted mini dress integrating the complete Jamaica flag design (the complete Jamaican national flag design in a horizontal rectangle: a gold diagonal saltire forms an X dividing four triangular fields, emerald-green triangles above and below and black triangles at the left and right; no emblem, text or added symbol) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; ivory ceramic classic pump with one subtle RAZE text mark. No tattoos. ECE: a turquoise side-back mini with pearl curved piping; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; turquoise mirror ankle boot without any branding. No tattoos. Use color-coordinated knee-high hosiery when legs are in frame.\n\nFinal priority: preserve the exact actual source composition and safe opaque wearable coverage. Correct only visible garment, footwear and recorded decorative tattoo/brand assignments in this single invocation. Missing or offscreen styling does not justify body movement or reframing. Preserve existing fictional distant background effects without intensifying them or adding victims. Output one image, no further pass.",
+      "promptSha256": "EA5FF88B79758D9EA76DB9A65EEFA3B5609A024482376652EA106EC3FC5BB84D",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": false
+    },
+    {
+      "scene": 2084,
+      "occurrenceId": "batch-514-scene-2084-chatgpt-single-tailoring",
+      "state": "prepared-unused",
+      "invocationCount": 0,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2084,
+        "label": "gallery/editorial_group_hug.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799843849_1122998513393834_901617950844625303_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=haetCatr2dEQ7kNvwHMK8q9&sdl=0&ccb=14-4&oh=00_AQLf_uihG0uWHSxY87gLkh12JlIf92AnY6Z9bD77lwFzsQ&oe=6AA5B385&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/56d82656-593e-4c85-828b-35efadf9d5aa",
+        "downloadPath": "C:/Users/A/Downloads/799843849_1122998513393834_901617950844625303_n.webp",
+        "observedAtUtc": "2026-09-08T11:59:21.598Z",
+        "bytes": 436676,
+        "sha256": "4d127d8e8fc9429fa38aee4a2025a1546c5b56bc843029dfc83f78f49ea19ed6",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia; confirmed download event and attributable native local file; bytes copied unchanged",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp.alt.txt",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp.qa.json",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T12:14:26.780Z"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2084-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2084-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four characters are original fictional adult women, each age21.\nSource-specific invariants: Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.\n\nOne identity-preserving clothing-only tailoring pass for scene 2084: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=covered, Radiance=covered, Ellie=visible navel, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: an indigo sculpted mini with ivory contour folds; secure open-back or side-back construction and bare arms, covered midriff; indigo patent knee high boot without any branding. No tattoos. Radiance: a fitted mini dress integrating the complete Jamaica flag design (the complete Jamaican national flag design in a horizontal rectangle: a gold diagonal saltire forms an X dividing four triangular fields, emerald-green triangles above and below and black triangles at the left and right; no emblem, text or added symbol) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; ivory enamel classic pump without any branding. Prominent crisp tattoos: IA, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Ellie: a graphite cropped shell and secure emerald mini skort; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; graphite polished leather ankle boot with one subtle RAZE text mark. No tattoos. ECE: a fitted mini dress integrating the complete Jamaica flag design (the complete Jamaican national flag design in a horizontal rectangle: a gold diagonal saltire forms an X dividing four triangular fields, emerald-green triangles above and below and black triangles at the left and right; no emblem, text or added symbol) across the garment with correct layout; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; copper mirror stiletto sandal with one subtle original RAZE split-star mark. No tattoos. Visible hosiery uses rainbow stockings; this is independent of shoe color.\n\nFinal priority: preserve the exact actual source composition and safe opaque wearable coverage. Correct only visible garment, footwear and recorded decorative tattoo/brand assignments in this single invocation. Missing or offscreen styling does not justify body movement or reframing. Preserve existing fictional distant background effects without intensifying them or adding victims. Output one image, no further pass.",
+      "promptSha256": "619E3403F79A20C452C6E7B9C46AB510211D1706E6AAF0C15C0E9EA169D41B86",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": false
+    },
+    {
+      "scene": 2085,
+      "occurrenceId": "batch-514-scene-2085-chatgpt-single-tailoring",
+      "state": "prepared-unused",
+      "invocationCount": 0,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2085,
+        "label": "gallery/dutch_tilt_photo.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799869140_915167041268090_6645554228098228653_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=jCl2_7uq6fAQ7kNvwFngRwe&sdl=0&ccb=14-4&oh=00_AQJ41J2g9_K3m51lAAjd3hRXDavVbpuTUnC8kXplsHzj1w&oe=6AA5B36A&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/e2bd4614-d26b-4674-93ac-15e8c3728d62",
+        "downloadPath": "C:/Users/A/Downloads/799869140_915167041268090_6645554228098228653_n.webp",
+        "observedAtUtc": "2026-09-08T11:59:22.463Z",
+        "bytes": 510670,
+        "sha256": "c2cb2d2548da9d17dc0efef0bc076b48fb759a09b37b15d1b3fe68d3d0b2466f",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia; confirmed download event and attributable native local file; bytes copied unchanged",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp.alt.txt",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp.qa.json",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T12:14:26.780Z"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2085-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2085-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four characters are original fictional adult women, each age21.\nSource-specific invariants: Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses. In this source, Alia is seated at viewer-left, Ellie leans from behind at upper-left, Radiance is blonde in the center, and ECE is seated at right. Preserve these actual positions.\n\nOne identity-preserving clothing-only tailoring pass for scene 2085: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=covered, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a sea-green structured mini with sand-gold seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; sea-green enamel classic pump without any branding. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Radiance: a fitted mini dress integrating the complete Jamaica flag design (the complete Jamaican national flag design in a horizontal rectangle: a gold diagonal saltire forms an X dividing four triangular fields, emerald-green triangles above and below and black triangles at the left and right; no emblem, text or added symbol) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; pearl satin ankle boot without any branding. No tattoos. Ellie: a coral cropped shell and secure ivory mini skort; secure open-back or side-back construction and bare arms, covered midriff; coral lacquer stiletto sandal without any branding. Prominent crisp tattoos: GRD, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. ECE: a graphite side-back mini with turquoise contour piping; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient sculptural platform with one subtle RAZE text mark. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. No general hosiery assignment; only individual stocking marks may call for a neutral stocking.\n\nFinal priority: preserve the exact actual source composition and safe opaque wearable coverage. Correct only visible garment, footwear and recorded decorative tattoo/brand assignments in this single invocation. Missing or offscreen styling does not justify body movement or reframing. Preserve existing fictional distant background effects without intensifying them or adding victims. Output one image, no further pass.",
+      "promptSha256": "E9FE7CC7992889D7E5DA925F85427D4974E098D3034D5E648DC9D94AD7FAEBB9",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": false
+    },
+    {
+      "scene": 2086,
+      "occurrenceId": "batch-514-scene-2086-chatgpt-single-tailoring",
+      "state": "prepared-unused",
+      "invocationCount": 0,
+      "maximumInvocations": 1,
+      "source": {
+        "scene": 2086,
+        "label": "gallery/jamaica_conservatory_group.webp",
+        "labelIndex": 0,
+        "kind": "gallery",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp",
+        "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800066041_1582072840282590_1997704113148419168_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=T1k0cxuwu6sQ7kNvwEiOw41&sdl=0&ccb=14-4&oh=00_AQKvQj2QM3lSq2uss9tqWhEs8xNeykeSXY355EMzPdKWHA&oe=6AA5BE73&_nc_sid=a21977",
+        "providerUrl": "https://www.meta.ai/prompt/6191b327-0d1a-4b71-9c28-7e364714c2ed",
+        "downloadPath": "C:/Users/A/Downloads/800066041_1582072840282590_1997704113148419168_n.webp",
+        "observedAtUtc": "2026-09-08T11:59:24.745Z",
+        "bytes": 545888,
+        "sha256": "3288c448b7ed847504852695fcf00bfddcf7b017bb2f2f0bdd550e157dba05cc",
+        "dimensions": {
+          "width": 1152,
+          "height": 2048
+        },
+        "archiveMethod": "Supported visible in-app Browser downloadMedia; confirmed download event and attributable native local file; bytes copied unchanged",
+        "status": "archived-original-source-qa-complete",
+        "contentRole": "generated-scene-image",
+        "altPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp.alt.txt",
+        "qaPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp.qa.json",
+        "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+        "sourceQaDecision": "selected-usable-source",
+        "sourceQaReviewedAtUtc": "2026-09-08T12:14:26.780Z"
+      },
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
+      "basePromptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2086-single-edit-base-prompt.txt",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2086-single-edit-exact-prompt.txt",
+      "prompt": "Use case: identity-preserve. Asset type: non-explicit adult couture editorial. All four characters are original fictional adult women, each age21.\nSource-specific invariants: Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.\n\nOne identity-preserving clothing-only tailoring pass for scene 2086: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=covered, Ellie=covered, ECE=visible navel. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: a plum sculpted mini with mint contour seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient ankle boot with one subtle RAZE text mark. No tattoos. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Radiance: a fitted mini dress integrating the complete Jamaica flag design (the complete Jamaican national flag design in a horizontal rectangle: a gold diagonal saltire forms an X dividing four triangular fields, emerald-green triangles above and below and black triangles at the left and right; no emblem, text or added symbol) across the garment with correct layout; secure open-back or side-back construction and bare arms, covered midriff; mint enamel stiletto sandal with one subtle RAZE text mark. Prominent crisp tattoos: GRD, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. Ellie: a pearl cropped shell and secure turquoise mini skort; secure open-back or side-back construction and bare arms, covered midriff; pearl lacquer sculptural platform without any branding. No tattoos. ECE: an emerald side-back mini with ivory folded panels; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; rainbow-gradient knee high boot without any branding. No tattoos. No general hosiery assignment; only individual stocking marks may call for a neutral stocking.\n\nFinal priority: preserve the exact actual source composition and safe opaque wearable coverage. Correct only visible garment, footwear and recorded decorative tattoo/brand assignments in this single invocation. Missing or offscreen styling does not justify body movement or reframing. Preserve the clean lagoon background; add no destruction. Output one image, no further pass.",
+      "promptSha256": "653642D90C126FB117C8EAE1E149B6AE8C790A5B3604AD88848DDC561B46524D",
+      "referencePaths": [
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+        "C:/Users/A/Documents/Codex/2026-07-27/hatch-pet-c-users-a-codex/InternalAgency/assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+      ],
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
+      "neverRetry": true,
+      "maximumOutputImages": 1,
+      "allowanceConsumed": false
+    }
+  ]
+}
