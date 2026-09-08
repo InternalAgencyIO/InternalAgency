@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 516,
   "country": "Gabon",
-  "state": "initial-source-closure-three-usable-one-identity-held",
+  "state": "source-remote-proof-pass-three-edits-reserved-and-one-recovery-staged",
   "createdAtUtc": "2026-09-08T15:36:11.745Z",
   "occurrences": [
     {
@@ -105,7 +105,7 @@
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-515-gambia-four-stills-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/continuation-log-audit-2026-09-08-1601.json",
-  "nextSafeAction": "Remote-verify12 initial Meta originals and3 anchors plus ordinary QA and prompts. Then reserve and invoke exactly one clothing edit for2091,2092,2093; stage one bounded2094 identity recovery in a new verified composer, without reopening its initial terminal session. Gambia515 waits until Gabon has four accepted remotely closed scenes.",
+  "nextSafeAction": "Verify this proof carrier and recovery staging against remote HEAD/origin/PR, then fresh exact account/Thinking/ordered-anchor/prompt checks before the sole2094 recovery Send. Invoke exactly the three reserved built-in clothing edits; never reissue an uncertain call.",
   "stagedAtUtc": "2026-09-08T15:45:00.849Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-remote-preflight.json",
@@ -131,5 +131,9 @@
   ],
   "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-chatgpt-edit-intents.json",
   "singleEditGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-edit-dispatch-guard.json",
-  "identityRecoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-hard-failure-recovery-1-intent.json"
+  "identityRecoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-hard-failure-recovery-1-intent.json",
+  "sourceRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json",
+  "sourcePayloadCommit": "d42fc34dc53a340489fd03cab4fcb3e399299921",
+  "identityRecoveryStaging": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-staging-evidence.json",
+  "identityRecoveryGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json"
 }

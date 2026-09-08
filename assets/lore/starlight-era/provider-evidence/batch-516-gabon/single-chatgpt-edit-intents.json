@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 516,
   "country": "Gabon",
-  "state": "three-source-edit-intents-prepared-one-source-identity-held",
+  "state": "three-edit-invocations-reserved-not-issued",
   "createdAtUtc": "2026-09-08T16:08:09.342Z",
   "maximumInvocationsPerScene": 1,
   "blockOrInterruptionConsumesAllowance": true,
@@ -13,7 +13,7 @@
     {
       "scene": 2091,
       "occurrenceId": "batch-516-scene-2091-chatgpt-single-tailoring",
-      "state": "prepared-not-dispatched",
+      "state": "reserved-not-dispatched",
       "invocationCount": 0,
       "maximumInvocations": 1,
       "source": {
@@ -62,12 +62,14 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, four distinct anchored faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": false,
+      "reservedAtUtc": "2026-09-08T16:20:28.569Z",
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2092,
       "occurrenceId": "batch-516-scene-2092-chatgpt-single-tailoring",
-      "state": "prepared-not-dispatched",
+      "state": "reserved-not-dispatched",
       "invocationCount": 0,
       "maximumInvocations": 1,
       "source": {
@@ -116,12 +118,14 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, four distinct anchored faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": false,
+      "reservedAtUtc": "2026-09-08T16:20:28.569Z",
+      "neverAutomaticallyReissueReservation": true
     },
     {
       "scene": 2093,
       "occurrenceId": "batch-516-scene-2093-chatgpt-single-tailoring",
-      "state": "prepared-not-dispatched",
+      "state": "reserved-not-dispatched",
       "invocationCount": 0,
       "maximumInvocations": 1,
       "source": {
@@ -170,7 +174,10 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, four distinct anchored faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": false,
+      "reservedAtUtc": "2026-09-08T16:20:28.569Z",
+      "neverAutomaticallyReissueReservation": true
     }
-  ]
+  ],
+  "reservedAtUtc": "2026-09-08T16:20:28.569Z"
 }

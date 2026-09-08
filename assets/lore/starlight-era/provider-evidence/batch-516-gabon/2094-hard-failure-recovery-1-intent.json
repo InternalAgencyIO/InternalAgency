@@ -7,7 +7,7 @@
   "kind": "hard-failure-identity-recovery",
   "recoveryNumber": 1,
   "maximumRecoveriesPerScene": 2,
-  "state": "prepared-not-staged-not-dispatched",
+  "state": "staged-reserved-not-dispatched",
   "activationCount": 0,
   "maximumActivationsThisOccurrence": 1,
   "initialOccurrenceId": "batch-516-scene-2094-meta-initial",
@@ -30,5 +30,11 @@
   "newComposerRequired": true,
   "neverResendConfirmedOrUncertain": true,
   "noAestheticReroll": true,
-  "nextSafeAction": "After current originals and intent remote verification, release only the terminal2094 tab into a blank New chat, verify account and Thinking, attach938,936,937 once each in order, stage exact recovery prompt, save and remote-verify staging, then one Send after fresh gates."
+  "nextSafeAction": "After current originals and intent remote verification, release only the terminal2094 tab into a blank New chat, verify account and Thinking, attach938,936,937 once each in order, stage exact recovery prompt, save and remote-verify staging, then one Send after fresh gates.",
+  "tabId": "36",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-staging-evidence.json",
+  "stagedAtUtc": "2026-09-08T16:20:28.569Z",
+  "reservedAtUtc": "2026-09-08T16:20:28.569Z",
+  "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json",
+  "sourceRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json"
 }

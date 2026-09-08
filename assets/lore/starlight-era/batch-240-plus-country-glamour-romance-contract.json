@@ -3,7 +3,7 @@
     "schemaVersion": 1,
     "batch": 516,
     "country": "Gabon",
-    "state": "initial-source-closure-three-usable-one-identity-held",
+    "state": "source-remote-proof-pass-three-edits-reserved-and-one-recovery-staged",
     "createdAtUtc": "2026-09-08T15:36:11.745Z",
     "sceneRange": [
       2091,
@@ -66,7 +66,11 @@
     ],
     "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-chatgpt-edit-intents.json",
     "singleEditGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-edit-dispatch-guard.json",
-    "identityRecoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-hard-failure-recovery-1-intent.json"
+    "identityRecoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-hard-failure-recovery-1-intent.json",
+    "sourceRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json",
+    "sourcePayloadCommit": "d42fc34dc53a340489fd03cab4fcb3e399299921",
+    "identityRecoveryStaging": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-staging-evidence.json",
+    "identityRecoveryGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json"
   },
   "currentAuthorityBatch515": {
     "schemaVersion": 1,
