@@ -3,7 +3,7 @@
     "schemaVersion": 1,
     "batch": 516,
     "country": "Gabon",
-    "state": "prepared-offline-not-dispatched",
+    "state": "all-four-staged-awaiting-remote-preflight",
     "createdAtUtc": "2026-09-08T15:36:11.745Z",
     "sceneRange": [
       2091,
@@ -40,7 +40,9 @@
       2089,
       2090
     ],
-    "nextSafeAction": "After committing and remotely verifying preparation, attach exact938/936/937 once each in order through visible controls in all four clean Meta lanes. Verify account, Thinking, prompt text, hashes and ordered cards after typing. Archive staging and verify remote parity before one initial Send per lane."
+    "nextSafeAction": "Commit staging, fresh remote exact-anchor LFS proof and normal payload checks, HEAD/origin/PR parity, then a final action-time UI check and at most one initial Send per lane.",
+    "stagedAtUtc": "2026-09-08T15:45:00.849Z",
+    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json"
   },
   "currentAuthorityBatch515": {
     "schemaVersion": 1,
