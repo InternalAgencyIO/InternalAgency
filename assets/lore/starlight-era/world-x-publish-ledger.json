@@ -1,4 +1,67 @@
 {
+  "currentUruguayBosniaPairPublication509": {
+    "schemaVersion": 1,
+    "batch": 509,
+    "batches": [
+      508,
+      509
+    ],
+    "countries": [
+      "Uruguay",
+      "Bosnia and Herzegovina"
+    ],
+    "state": "part-one-posted-verified-part-two-reserved",
+    "updatedAtUtc": "2026-09-08T05:07:22.786Z",
+    "postCount": 239,
+    "newPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ],
+    "postedSceneIds": [
+      2059,
+      2060,
+      2063,
+      2064
+    ],
+    "remainingSceneIds": [
+      2061,
+      2062,
+      2065,
+      2066
+    ],
+    "parts": [
+      {
+        "part": 1,
+        "url": "https://x.com/dogramaci/status/2097189559310156192",
+        "scenes": [
+          2059,
+          2060,
+          2063,
+          2064
+        ],
+        "publicTransmissionCount": 1
+      }
+    ],
+    "reservations": [
+      "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p1-x-reservation.json",
+      "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p2-x-reservation.json"
+    ],
+    "rawArchiveComplete": true,
+    "totalSavedMediaFiles": 37,
+    "uniqueSavedByteVersions": 29,
+    "generatedSceneMediaFiles": 31,
+    "contextReferenceFiles": 6,
+    "contextReferencesNeverUpload": true,
+    "consumedSceneFamilyFiles": 14,
+    "allConsumedVersionsNoRepost": true,
+    "closureProofs": [
+      "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
+      "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
+    ],
+    "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
+    "checkpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json"
+  },
   "currentUruguayBosniaPairReservations509": {
     "schemaVersion": 1,
     "batch": 509,
@@ -10,36 +73,57 @@
       "Uruguay",
       "Bosnia and Herzegovina"
     ],
-    "state": "two-exact-parts-reserved-awaiting-X-staging",
-    "sceneIds": [
+    "state": "part-one-posted-verified-part-two-reserved",
+    "updatedAtUtc": "2026-09-08T05:07:22.786Z",
+    "postCount": 239,
+    "newPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ],
+    "postedSceneIds": [
       2059,
       2060,
+      2063,
+      2064
+    ],
+    "remainingSceneIds": [
       2061,
       2062,
-      2063,
-      2064,
       2065,
       2066
+    ],
+    "parts": [
+      {
+        "part": 1,
+        "url": "https://x.com/dogramaci/status/2097189559310156192",
+        "scenes": [
+          2059,
+          2060,
+          2063,
+          2064
+        ],
+        "publicTransmissionCount": 1
+      }
     ],
     "reservations": [
       "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p2-x-reservation.json"
     ],
+    "rawArchiveComplete": true,
+    "totalSavedMediaFiles": 37,
+    "uniqueSavedByteVersions": 29,
+    "generatedSceneMediaFiles": 31,
+    "contextReferenceFiles": 6,
+    "contextReferencesNeverUpload": true,
+    "consumedSceneFamilyFiles": 14,
+    "allConsumedVersionsNoRepost": true,
     "closureProofs": [
       "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
       "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
     ],
-    "rawArchiveComplete": true,
-    "allSavedMediaFiles": 37,
-    "uniqueSavedImageVersions": 29,
-    "generatedSceneMediaFiles": 31,
-    "contextReferenceFiles": 6,
-    "contextReferencesNeverUpload": true,
-    "postCount": 238,
-    "newPostUrls": [],
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
-    "nextSafeAction": "Reserve the two exact Uruguay/Bosnia 2+2 X posts, verify current @dogramaci, all family duplicates, ordered media, ALT and Made with AI, then one Post activation per reservation. No more renders or edits for scenes 2059-2066."
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
+    "checkpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json"
   },
   "currentAuthorityBatch509": {
     "batch": 509,
@@ -50,7 +134,7 @@
       2065,
       2066
     ],
-    "state": "four-stills-remote-verified-closed-ready-for-country-pair",
+    "state": "part-one-posted-verified-part-two-reserved",
     "checkpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-fixed-rolls.json",
@@ -70,8 +154,8 @@
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/accepted-selections.json",
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
-    "nextSafeAction": "Reserve the two exact Uruguay/Bosnia 2+2 X posts, verify current @dogramaci, all family duplicates, ordered media, ALT and Made with AI, then one Post activation per reservation. No more renders or edits for scenes 2059-2066.",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
     "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
     "confirmedSubmissions": 6,
@@ -134,7 +218,12 @@
     "allArchivedImageFiles": 24,
     "additionalMetaSendsAllowed": 0,
     "remotePayloadCommit": "189616409e510f6a65778b68a23f7d1f70470b2d",
-    "remoteVerifiedAtUtc": "2026-09-08T04:49:54.928Z"
+    "remoteVerifiedAtUtc": "2026-09-08T04:49:54.928Z",
+    "publicationCheckpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json",
+    "xPostCount": 239,
+    "newXPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ]
   },
   "currentAuthorityBatch508": {
     "batch": 508,
@@ -145,7 +234,7 @@
       2061,
       2062
     ],
-    "state": "four-stills-remote-verified-closed-ready-for-country-pair",
+    "state": "part-one-posted-verified-part-two-reserved",
     "checkpoint": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
@@ -161,10 +250,10 @@
     "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/full-workflow-remote-verification.json",
-    "nextSafeAction": "Reserve the two exact Uruguay/Bosnia 2+2 X posts, verify current @dogramaci, all family duplicates, ordered media, ALT and Made with AI, then one Post activation per reservation. No more renders or edits for scenes 2059-2066.",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -236,7 +325,12 @@
     "allFourScenesTerminalNoMoreRendersOrEdits": true,
     "remotePayloadCommit": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/accepted-selections.json",
-    "companionRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
+    "companionRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json",
+    "publicationCheckpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json",
+    "xPostCount": 239,
+    "newXPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ]
   },
   "currentEritreaMongoliaPairPublication507": {
     "schemaVersion": 1,
@@ -15818,6 +15912,316 @@
             "scene": 2058,
             "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png",
             "sha256": "65ea8fc4d466a9f5225f959a83d1ac3a918ae5a6f9b01d7148bb850f641ad83d"
+          }
+        ],
+        "noRepostAnyVersion": true
+      },
+      "uploadCount": 1
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 509,
+      "batches": [
+        508,
+        509
+      ],
+      "countries": [
+        "Uruguay",
+        "Bosnia and Herzegovina"
+      ],
+      "part": 1,
+      "sceneIds": [
+        2059,
+        2060,
+        2063,
+        2064
+      ],
+      "imageNumbers": [
+        2059,
+        2060,
+        2063,
+        2064
+      ],
+      "state": "posted-verified",
+      "postUrl": "https://x.com/dogramaci/status/2097189559310156192",
+      "postedAt": "2026-09-08T05:05:28.729Z",
+      "verifiedAt": "2026-09-08T05:07:22.786Z",
+      "caption": "Uruguay ❤️ Bosnia and Herzegovina: waterfront hugs, warm courtyards, copper ateliers and river-window embraces. Four fictional adult friends in sculpted minis, varied heels and rainbow accents. AI fashion. #WorldXXXSeries #InternalAgency",
+      "captionSha256": "5da08ed79f99a4d739bd72055403fea3adb1c69755d9b5ca17745880588a5a80",
+      "hashtags": [
+        "#WorldXXXSeries",
+        "#InternalAgency"
+      ],
+      "assets": [
+        {
+          "scene": 2059,
+          "country": "Uruguay",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-meta-gallery-original.webp",
+          "sha256": "1fe0356bf4e61f07827da02fdd43de951f6d7f890b21686fb5eccdb69bf82333",
+          "bytes": 507810,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/76bc893b-fb5d-41a8-9346-49c6b0e612c6",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned-unused-framing-drift",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "Exact reserved pair, account, duplicate, ordered media, ALT and AI disclosure checks"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-accessibility.json",
+          "alt": "AI-generated Uruguay-inspired fashion editorial of four fictional adult women sharing a gentle hug and handclasp in a waterfront window lounge. The seated braided woman wears a pearl-white mini with blue seams; a blonde companion wears a blue-and-white sun-motif dress. Two companions wear navy with pearl lines and silver with turquoise piping. A GRD upper-arm tattoo and rainbow legwear are visible. The water and skyline are fictional scenery.",
+          "safetyOverrides": [],
+          "state": "remote-closed-awaiting-exact-country-pair-reservation",
+          "uploadIndex": 1
+        },
+        {
+          "scene": 2060,
+          "country": "Uruguay",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-internal-1-original.webp",
+          "sha256": "8af18cd6e0cd5d1513c355264fb99780f0b7aed6059fe19092bd02bbe5deb5dd",
+          "bytes": 592048,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/1d3eeeff-48f6-489a-95e7-80db5e666ba9",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-internal-1-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned-unused-style-regression",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "Exact reserved pair, account, duplicate, ordered media, ALT and AI disclosure checks"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-accessibility.json",
+          "alt": "AI-generated Uruguay-inspired fashion editorial of four fictional adult women in a warm stone courtyard lounge. A braided woman and a blonde woman share a smiling side hug; one companion sits on a padded stone bench while another leans in beside her. Blue-and-white sun-motif garments contrast with ivory and copper and deep teal. Visible footwear includes terracotta sandals, ivory boots and dark green platform boots. Tattoos and a strip of rainbow hosiery complete the styling.",
+          "safetyOverrides": [],
+          "state": "remote-closed-awaiting-exact-country-pair-reservation",
+          "uploadIndex": 2
+        },
+        {
+          "scene": 2063,
+          "country": "Bosnia and Herzegovina",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-gallery-original.webp",
+          "sha256": "a3bc66b9ace636ab036b1de8ef1858b58bbc6c0e37ef4d7d023e2efb822c52d0",
+          "bytes": 511660,
+          "dimensions": {
+            "width": 1152,
+            "height": 2048
+          },
+          "provider": "Meta AI",
+          "providerUrl": "https://www.meta.ai/prompt/447a6e8c-5538-4a23-be8f-8f6e438318a8",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "batched-output-block-or-interruption-unattributed-original-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "Exact reserved pair, account, duplicate, ordered media, ALT and AI disclosure checks"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-accessibility.json",
+          "alt": "AI-generated Bosnia and Herzegovina-inspired fashion editorial of four fictional adult women in a window atelier. A blonde woman in ivory and copper gives a smiling back hug to a seated braided woman in metallic copper. A cobalt-clad companion reaches for her hand while a fourth in navy with gold seams leans forward. Copper pumps, ivory platforms, blue ankle boots, rainbow hosiery and a GRD upper-arm tattoo are visible. Tiled market roofs beyond the glass are fictional scenery.",
+          "safetyOverrides": [],
+          "state": "remote-closed-awaiting-exact-country-pair-reservation",
+          "uploadIndex": 3
+        },
+        {
+          "scene": 2064,
+          "country": "Bosnia and Herzegovina",
+          "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-chatgpt-single-tailoring-pass.png",
+          "sha256": "0519fbc549258fab0564750590f66f8a3ba22f0c0e1fcb18180d2cea7eb283b2",
+          "bytes": 2215067,
+          "dimensions": {
+            "width": 941,
+            "height": 1672
+          },
+          "provider": "built-in ChatGPT image_gen",
+          "providerUrl": "https://www.meta.ai/prompt/c353df84-a487-421c-899e-9d14f45358cc",
+          "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-recovery-1-gallery-original.webp",
+          "technicalQa": "pass",
+          "canonicalAccepted": true,
+          "rawArchiveComplete": true,
+          "archiveException": null,
+          "chatgptInvocations": 1,
+          "chatgptOutcome": "image-returned-selected",
+          "additionalMetaSendsAllowed": 0,
+          "additionalChatgptEditsAllowed": 0,
+          "eligibleForNormalCountryPairing": true,
+          "xEligible": false,
+          "xEligibilityPending": [
+            "Exact reserved pair, account, duplicate, ordered media, ALT and AI disclosure checks"
+          ],
+          "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-accessibility.json",
+          "alt": "AI-generated Bosnia and Herzegovina-inspired fashion scene with four fictional adult women in a river-window lounge. A braided woman in a blue, yellow and white star-patterned mini reclines against a blonde companion in pale gold and blue. A woman in pearl and teal crouches beside them, while a fourth in deep teal sits on a higher padded seat. Rainbow ankle boots, teal knee-high boots and varied heels complete the styling. A stone-arch bridge and turquoise river outside form an imagined backdrop.",
+          "safetyOverrides": [],
+          "state": "remote-closed-awaiting-exact-country-pair-reservation",
+          "uploadIndex": 4
+        }
+      ],
+      "photoEndpoints": [
+        {
+          "scene": 2059,
+          "index": 1,
+          "url": "https://x.com/dogramaci/status/2097189559310156192/photo/1",
+          "alt": "AI-generated Uruguay-inspired fashion editorial of four fictional adult women sharing a gentle hug and handclasp in a waterfront window lounge. The seated braided woman wears a pearl-white mini with blue seams; a blonde companion wears a blue-and-white sun-motif dress. Two companions wear navy with pearl lines and silver with turquoise piping. A GRD upper-arm tattoo and rainbow legwear are visible. The water and skyline are fictional scenery."
+        },
+        {
+          "scene": 2060,
+          "index": 2,
+          "url": "https://x.com/dogramaci/status/2097189559310156192/photo/2",
+          "alt": "AI-generated Uruguay-inspired fashion editorial of four fictional adult women in a warm stone courtyard lounge. A braided woman and a blonde woman share a smiling side hug; one companion sits on a padded stone bench while another leans in beside her. Blue-and-white sun-motif garments contrast with ivory and copper and deep teal. Visible footwear includes terracotta sandals, ivory boots and dark green platform boots. Tattoos and a strip of rainbow hosiery complete the styling."
+        },
+        {
+          "scene": 2063,
+          "index": 3,
+          "url": "https://x.com/dogramaci/status/2097189559310156192/photo/3",
+          "alt": "AI-generated Bosnia and Herzegovina-inspired fashion editorial of four fictional adult women in a window atelier. A blonde woman in ivory and copper gives a smiling back hug to a seated braided woman in metallic copper. A cobalt-clad companion reaches for her hand while a fourth in navy with gold seams leans forward. Copper pumps, ivory platforms, blue ankle boots, rainbow hosiery and a GRD upper-arm tattoo are visible. Tiled market roofs beyond the glass are fictional scenery."
+        },
+        {
+          "scene": 2064,
+          "index": 4,
+          "url": "https://x.com/dogramaci/status/2097189559310156192/photo/4",
+          "alt": "AI-generated Bosnia and Herzegovina-inspired fashion scene with four fictional adult women in a river-window lounge. A braided woman in a blue, yellow and white star-patterned mini reclines against a blonde companion in pale gold and blue. A woman in pearl and teal crouches beside them, while a fourth in deep teal sits on a higher padded seat. Rainbow ankle boots, teal knee-high boots and varied heels complete the styling. A stone-arch bridge and turquoise river outside form an imagined backdrop."
+        }
+      ],
+      "mediaMode": "four-stills-two-countries-2-plus-2",
+      "buttonActivationAttempts": 1,
+      "successfulMethod": "Post.press(Enter)",
+      "publicTransmissionCount": 1,
+      "duplicateMediaTransmission": false,
+      "madeWithAi": true,
+      "exactAltTextCount": 4,
+      "stagingCommit": "d930c0462cbd531d28eee257bb20929b8e24f055",
+      "archiveExceptions": [],
+      "rawArchiveComplete": true,
+      "missingInternalOriginalsByCountry": {
+        "Uruguay": 0,
+        "Bosnia and Herzegovina": 0
+      },
+      "evidence": [
+        "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/uruguay-bosnia-p1-x-staging-evidence.json",
+        "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/uruguay-bosnia-p1-x-activation-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/uruguay-bosnia-p1-x-publication-receipt.json",
+        "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/uruguay-bosnia-p1-x-published-visible.jpg",
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
+        "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
+      ],
+      "duplicateGate": {
+        "allVersionsChecked": 14,
+        "noRepostSceneFamilies": [
+          2059,
+          2060,
+          2063,
+          2064
+        ],
+        "consumedVersions": [
+          {
+            "scene": 2059,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-meta-gallery-original.webp",
+            "sha256": "1fe0356bf4e61f07827da02fdd43de951f6d7f890b21686fb5eccdb69bf82333",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2059,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-meta-internal-1-original.webp",
+            "sha256": "1fe0356bf4e61f07827da02fdd43de951f6d7f890b21686fb5eccdb69bf82333",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2060,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-gallery-original.webp",
+            "sha256": "76b6b5afa759a672eda6d7a07e30d3296b8ef1a691ec4f0d6ff3f25f31b9ac18",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2060,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-internal-1-original.webp",
+            "sha256": "8af18cd6e0cd5d1513c355264fb99780f0b7aed6059fe19092bd02bbe5deb5dd",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2060,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-internal-2-original.webp",
+            "sha256": "76b6b5afa759a672eda6d7a07e30d3296b8ef1a691ec4f0d6ff3f25f31b9ac18",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2059,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-chatgpt-single-tailoring-pass.png",
+            "sha256": "0f57288e46236cfd54707bd41657cf5900eb1c9b816a7daccd3c0bc060fc23ba",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2060,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-chatgpt-single-tailoring-pass.png",
+            "sha256": "28bab716e89fb0451e3947129099ba85769daf873b6efe94319b2695314add33",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2063,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-gallery-original.webp",
+            "sha256": "a3bc66b9ace636ab036b1de8ef1858b58bbc6c0e37ef4d7d023e2efb822c52d0",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2063,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-internal-1-original.webp",
+            "sha256": "7a52655cecacd4f47764bb913b886944a768da3f19566ea198759cd50a8880f9",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2063,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-internal-2-original.webp",
+            "sha256": "a3bc66b9ace636ab036b1de8ef1858b58bbc6c0e37ef4d7d023e2efb822c52d0",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2064,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-gallery-original.webp",
+            "sha256": "1bae8a07786c839e26698cf9ab4e50e127ac1195ae021596c4413d5783f100ba",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2064,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-recovery-1-gallery-original.webp",
+            "sha256": "3a7a44615fb1c2a04897fbc484132d82c469e2ea6f113a2b0402f5b3d7b7807f",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2064,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-recovery-1-internal-1-original.webp",
+            "sha256": "3a7a44615fb1c2a04897fbc484132d82c469e2ea6f113a2b0402f5b3d7b7807f",
+            "contentRole": "generated-scene-media"
+          },
+          {
+            "scene": 2064,
+            "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-chatgpt-single-tailoring-pass.png",
+            "sha256": "0519fbc549258fab0564750590f66f8a3ba22f0c0e1fcb18180d2cea7eb283b2",
+            "contentRole": "generated-scene-media"
           }
         ],
         "noRepostAnyVersion": true

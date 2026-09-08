@@ -1,4 +1,67 @@
 {
+  "currentUruguayBosniaPairPublication509": {
+    "schemaVersion": 1,
+    "batch": 509,
+    "batches": [
+      508,
+      509
+    ],
+    "countries": [
+      "Uruguay",
+      "Bosnia and Herzegovina"
+    ],
+    "state": "part-one-posted-verified-part-two-reserved",
+    "updatedAtUtc": "2026-09-08T05:07:22.786Z",
+    "postCount": 239,
+    "newPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ],
+    "postedSceneIds": [
+      2059,
+      2060,
+      2063,
+      2064
+    ],
+    "remainingSceneIds": [
+      2061,
+      2062,
+      2065,
+      2066
+    ],
+    "parts": [
+      {
+        "part": 1,
+        "url": "https://x.com/dogramaci/status/2097189559310156192",
+        "scenes": [
+          2059,
+          2060,
+          2063,
+          2064
+        ],
+        "publicTransmissionCount": 1
+      }
+    ],
+    "reservations": [
+      "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p1-x-reservation.json",
+      "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p2-x-reservation.json"
+    ],
+    "rawArchiveComplete": true,
+    "totalSavedMediaFiles": 37,
+    "uniqueSavedByteVersions": 29,
+    "generatedSceneMediaFiles": 31,
+    "contextReferenceFiles": 6,
+    "contextReferencesNeverUpload": true,
+    "consumedSceneFamilyFiles": 14,
+    "allConsumedVersionsNoRepost": true,
+    "closureProofs": [
+      "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
+      "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
+    ],
+    "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
+    "checkpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json"
+  },
   "currentUruguayBosniaPairReservations509": {
     "schemaVersion": 1,
     "batch": 509,
@@ -10,36 +73,57 @@
       "Uruguay",
       "Bosnia and Herzegovina"
     ],
-    "state": "two-exact-parts-reserved-awaiting-X-staging",
-    "sceneIds": [
+    "state": "part-one-posted-verified-part-two-reserved",
+    "updatedAtUtc": "2026-09-08T05:07:22.786Z",
+    "postCount": 239,
+    "newPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ],
+    "postedSceneIds": [
       2059,
       2060,
+      2063,
+      2064
+    ],
+    "remainingSceneIds": [
       2061,
       2062,
-      2063,
-      2064,
       2065,
       2066
+    ],
+    "parts": [
+      {
+        "part": 1,
+        "url": "https://x.com/dogramaci/status/2097189559310156192",
+        "scenes": [
+          2059,
+          2060,
+          2063,
+          2064
+        ],
+        "publicTransmissionCount": 1
+      }
     ],
     "reservations": [
       "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p1-x-reservation.json",
       "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p2-x-reservation.json"
     ],
+    "rawArchiveComplete": true,
+    "totalSavedMediaFiles": 37,
+    "uniqueSavedByteVersions": 29,
+    "generatedSceneMediaFiles": 31,
+    "contextReferenceFiles": 6,
+    "contextReferencesNeverUpload": true,
+    "consumedSceneFamilyFiles": 14,
+    "allConsumedVersionsNoRepost": true,
     "closureProofs": [
       "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
       "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
     ],
-    "rawArchiveComplete": true,
-    "allSavedMediaFiles": 37,
-    "uniqueSavedImageVersions": 29,
-    "generatedSceneMediaFiles": 31,
-    "contextReferenceFiles": 6,
-    "contextReferencesNeverUpload": true,
-    "postCount": 238,
-    "newPostUrls": [],
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
-    "nextSafeAction": "Reserve the two exact Uruguay/Bosnia 2+2 X posts, verify current @dogramaci, all family duplicates, ordered media, ALT and Made with AI, then one Post activation per reservation. No more renders or edits for scenes 2059-2066."
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
+    "checkpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json"
   },
   "currentAuthorityBatch509": {
     "batch": 509,
@@ -50,7 +134,7 @@
       2065,
       2066
     ],
-    "state": "four-stills-remote-verified-closed-ready-for-country-pair",
+    "state": "part-one-posted-verified-part-two-reserved",
     "checkpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-fixed-rolls.json",
@@ -70,8 +154,8 @@
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/accepted-selections.json",
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
-    "nextSafeAction": "Reserve the two exact Uruguay/Bosnia 2+2 X posts, verify current @dogramaci, all family duplicates, ordered media, ALT and Made with AI, then one Post activation per reservation. No more renders or edits for scenes 2059-2066.",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
     "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
     "confirmedSubmissions": 6,
@@ -134,7 +218,12 @@
     "allArchivedImageFiles": 24,
     "additionalMetaSendsAllowed": 0,
     "remotePayloadCommit": "189616409e510f6a65778b68a23f7d1f70470b2d",
-    "remoteVerifiedAtUtc": "2026-09-08T04:49:54.928Z"
+    "remoteVerifiedAtUtc": "2026-09-08T04:49:54.928Z",
+    "publicationCheckpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json",
+    "xPostCount": 239,
+    "newXPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ]
   },
   "currentAuthorityBatch508": {
     "batch": 508,
@@ -145,7 +234,7 @@
       2061,
       2062
     ],
-    "state": "four-stills-remote-verified-closed-ready-for-country-pair",
+    "state": "part-one-posted-verified-part-two-reserved",
     "checkpoint": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
@@ -161,10 +250,10 @@
     "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/full-workflow-remote-verification.json",
-    "nextSafeAction": "Reserve the two exact Uruguay/Bosnia 2+2 X posts, verify current @dogramaci, all family duplicates, ordered media, ALT and Made with AI, then one Post activation per reservation. No more renders or edits for scenes 2059-2066.",
+    "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -236,7 +325,12 @@
     "allFourScenesTerminalNoMoreRendersOrEdits": true,
     "remotePayloadCommit": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/accepted-selections.json",
-    "companionRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
+    "companionRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json",
+    "publicationCheckpoint": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-x-publication-checkpoint.json",
+    "xPostCount": 239,
+    "newXPostUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192"
+    ]
   },
   "currentEritreaMongoliaPairPublication507": {
     "schemaVersion": 1,

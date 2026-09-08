@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 509,
   "part": 1,
-  "state": "one-final-Post-authorized-awaiting-remote-staging-parity",
+  "state": "activation-consumed-posted-verified",
   "reservation": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-p1-x-reservation.json",
   "staging": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/uruguay-bosnia-p1-x-staging-evidence.json",
   "sceneIds": [
@@ -20,6 +20,10 @@
     "tabId": "37"
   },
   "maximumActivations": 1,
-  "activations": 0,
-  "rule": "Recheck exact composer, account continuity, ledger duplicates, branch/origin/PR parity. One Post press only. Record any outcome immediately; never re-upload or blindly repeat an uncertain activation."
+  "activations": 1,
+  "rule": "Recheck exact composer, account continuity, ledger duplicates, branch/origin/PR parity. One Post press only. Record any outcome immediately; never re-upload or blindly repeat an uncertain activation.",
+  "activationCount": 1,
+  "activatedAtUtc": "2026-09-08T05:05:28.729Z",
+  "postUrl": "https://x.com/dogramaci/status/2097189559310156192",
+  "additionalActivationsAllowed": 0
 }
