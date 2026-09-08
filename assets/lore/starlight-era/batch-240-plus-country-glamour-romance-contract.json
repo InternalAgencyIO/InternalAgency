@@ -1,4 +1,56 @@
 {
+  "currentAuthorityBatch511": {
+    "schemaVersion": 1,
+    "batch": 511,
+    "country": "Namibia",
+    "sceneIds": [
+      2071,
+      2072,
+      2073,
+      2074
+    ],
+    "state": "four-composers-staged-not-dispatched",
+    "preparedAtUtc": "2026-09-08T07:03:47.722Z",
+    "brief": "assets/lore/starlight-era/batch-511-namibia-editorial-brief.json",
+    "fixedRolls": "assets/lore/starlight-era/batch-511-namibia-fixed-rolls.json",
+    "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/provider-ledger.json",
+    "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-intents.json",
+    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
+    "previousWorkflowClosure": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json",
+    "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
+    "baseRemoteVerifiedHead": "d973d3d7f31648b8ce2376737d462881bca1ba6c",
+    "providerSendActivations": 0,
+    "chatgptEditInvocations": 0,
+    "account": "leesha007",
+    "mode": "Thinking",
+    "orderedAnchors": [
+      938,
+      936,
+      937
+    ],
+    "actualMetaTabs": [
+      "33",
+      "34",
+      "35",
+      "36"
+    ],
+    "actualXTab": "37",
+    "protectedOmanTab": "1",
+    "guardian": "starlight-pipeline-guardian",
+    "guardianStatus": "ACTIVE",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0642.json",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T07:29:04.474Z",
+    "xPostCount": 240,
+    "latestXUrls": [
+      "https://x.com/dogramaci/status/2097189559310156192",
+      "https://x.com/dogramaci/status/2097191849538588895"
+    ],
+    "eligibleCompanionCountry": "Armenia",
+    "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
+    "nextSafeAction": "Commit and remotely verify exact staging, prompt files and ordered anchors before one initial Send per lane.",
+    "stagedAtUtc": "2026-09-08T07:11:31.898Z",
+    "checkpoint": "assets/lore/starlight-era/batch-511-namibia-prepared-checkpoint.json"
+  },
   "currentAuthorityBatch510": {
     "schemaVersion": 1,
     "batch": 510,

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "batch": 511,
+  "country": "Namibia",
+  "state": "four-composers-staged-not-dispatched",
+  "preparedAtUtc": "2026-09-08T07:03:47.722Z",
+  "accountRequired": "leesha007",
+  "mode": "Thinking",
+  "anchorOrder": [
+    938,
+    936,
+    937
+  ],
+  "occurrences": [
+    {
+      "scene": 2071,
+      "occurrenceId": "batch-511-scene-2071-meta-initial",
+      "kind": "initial",
+      "state": "staged-not-activated",
+      "activationCount": 0,
+      "maximumInitialActivations": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2071-initial-prompt.txt",
+      "promptSha256": "C5B98934A60AE5F0D82B73FEADCC4BED1157E4F9CDF374512F11139833F15287",
+      "promptFileSha256": "DA0EFDB8B223F4EAF89BD93CC4B46AE43A25BC42220F5A4A009B9226FCA59ACD",
+      "fileToComposerRule": "Omit the single archival terminal LF only; otherwise match the bank prompt exactly.",
+      "tabId": "33",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+    },
+    {
+      "scene": 2072,
+      "occurrenceId": "batch-511-scene-2072-meta-initial",
+      "kind": "initial",
+      "state": "staged-not-activated",
+      "activationCount": 0,
+      "maximumInitialActivations": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2072-initial-prompt.txt",
+      "promptSha256": "B6409E87E02DEACC1FFCD62176DE7B817A6DFE9259A268243D4C1165DCD70844",
+      "promptFileSha256": "9FBE293C27125972D45CC66FAECB772CD4DA4D69C518B690724602CC83438C48",
+      "fileToComposerRule": "Omit the single archival terminal LF only; otherwise match the bank prompt exactly.",
+      "tabId": "34",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+    },
+    {
+      "scene": 2073,
+      "occurrenceId": "batch-511-scene-2073-meta-initial",
+      "kind": "initial",
+      "state": "staged-not-activated",
+      "activationCount": 0,
+      "maximumInitialActivations": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2073-initial-prompt.txt",
+      "promptSha256": "4615188E70C9800396E41319068F1ACA843EC343E99C7815A964C77E3CD3A5E9",
+      "promptFileSha256": "40CCDF74C80FA59FD651BE9B00D0CC8F8EA7E2E1C8A8D57D20AEF923DF04C243",
+      "fileToComposerRule": "Omit the single archival terminal LF only; otherwise match the bank prompt exactly.",
+      "tabId": "35",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+    },
+    {
+      "scene": 2074,
+      "occurrenceId": "batch-511-scene-2074-meta-initial",
+      "kind": "initial",
+      "state": "staged-not-activated",
+      "activationCount": 0,
+      "maximumInitialActivations": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2074-initial-prompt.txt",
+      "promptSha256": "F07EA39F820EE8B9B6A662AF67B1781C864C58EE8CBB47184CF18DC0FE24C805",
+      "promptFileSha256": "952920C78EBFF99E50F909CB7628D2A765CBC15519387B12804293D6D5E41864",
+      "fileToComposerRule": "Omit the single archival terminal LF only; otherwise match the bank prompt exactly.",
+      "tabId": "36",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+    }
+  ],
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
+  "nextSafeAction": "Commit and remotely verify exact staging, prompt files and ordered anchors before one initial Send per lane.",
+  "provider": "Meta AI",
+  "account": "leesha007",
+  "providerSendActivations": 0,
+  "providerRetries": 0,
+  "uncertainActivations": 0,
+  "chatgptEditInvocations": 0,
+  "currentCheckpoint": "assets/lore/starlight-era/batch-511-namibia-prepared-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-511-namibia-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-511-namibia-fixed-rolls.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-intents.json",
+  "maximumHardFailureRetriesPerScene": 2,
+  "aestheticRetries": 0,
+  "sourceArchiveComplete": false,
+  "archiveException": null,
+  "previousWorkflowClosure": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json",
+  "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
+  "stagedAtUtc": "2026-09-08T07:11:31.898Z"
+}
