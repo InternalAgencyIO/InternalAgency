@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "batch": 508,
+  "country": "Uruguay",
+  "sceneIds": [
+    2059,
+    2060,
+    2061,
+    2062
+  ],
+  "state": "four-stills-closed-pending-final-remote-verification",
+  "closedAtUtc": "2026-09-08T03:31:42.202Z",
+  "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
+  "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/provider-ledger.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/native-raw-archive-manifest.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/accepted-selections.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-selection-qa.json",
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-results.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
+  "providerSendActivations": 4,
+  "providerHardFailureRetries": 0,
+  "rawArchiveComplete": true,
+  "rawFilesSaved": 10,
+  "uniqueRawByteVersions": 6,
+  "missingObservedOriginals": [],
+  "chatgptInvocations": 4,
+  "chatgptReturnedFiles": 3,
+  "chatgptBlockedInvocations": [
+    2062
+  ],
+  "totalSavedProviderAndEditedFiles": 13,
+  "uniqueSavedByteVersions": 9,
+  "allFourScenesTerminalNoMoreRendersOrEdits": true,
+  "archiveException": null,
+  "xPostCount": 238,
+  "newXPostUrls": [],
+  "publicationState": "awaiting-complete-Bosnia-and-Herzegovina-companion",
+  "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
+  "canonicalContradictionResolution": [
+    "508is current; historical Cuba/Tanzania and older campaign counters are not dispatch authority.",
+    "All four edit allowances consumed. Original wins for2059/2060, edited2061wins, blocked2062retains independent safe original.",
+    "Exact frozen camera outputs drifted; documented, not rerolled."
+  ],
+  "nextSafeAction": "Remote-verify all13saved media and closure files. Then dispatch the four independently staged Bosnia and Herzegovina scenes once each; no more Uruguay renders or edits."
+}

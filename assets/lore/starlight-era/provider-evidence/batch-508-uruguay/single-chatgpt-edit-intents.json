@@ -7,7 +7,7 @@
   "intents": [
     {
       "scene": 2059,
-      "state": "invoked-awaiting-result",
+      "state": "terminal-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -43,11 +43,13 @@
       "additionalInvocationsAllowed": 0,
       "issuedAtUtc": "2026-09-08T03:16:53.161Z",
       "tool": "built-in image_gen",
-      "execCell": "1983"
+      "execCell": "1983",
+      "outcome": "image-returned-unused-framing-drift",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-results.json"
     },
     {
       "scene": 2060,
-      "state": "invoked-awaiting-result",
+      "state": "terminal-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -83,11 +85,13 @@
       "additionalInvocationsAllowed": 0,
       "issuedAtUtc": "2026-09-08T03:16:53.161Z",
       "tool": "built-in image_gen",
-      "execCell": "1983"
+      "execCell": "1983",
+      "outcome": "image-returned-unused-style-regression",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-results.json"
     },
     {
       "scene": 2061,
-      "state": "invoked-awaiting-result",
+      "state": "terminal-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -123,11 +127,13 @@
       "additionalInvocationsAllowed": 0,
       "issuedAtUtc": "2026-09-08T03:16:53.161Z",
       "tool": "built-in image_gen",
-      "execCell": "1983"
+      "execCell": "1983",
+      "outcome": "image-returned-selected",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-results.json"
     },
     {
       "scene": 2062,
-      "state": "invoked-awaiting-result",
+      "state": "terminal-no-further-invocations",
       "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
@@ -163,7 +169,9 @@
       "additionalInvocationsAllowed": 0,
       "issuedAtUtc": "2026-09-08T03:16:53.161Z",
       "tool": "built-in image_gen",
-      "execCell": "1983"
+      "execCell": "1983",
+      "outcome": "output-blocked-original-selected",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-results.json"
     }
   ],
   "invokedAtUtc": "2026-09-08T03:16:53.161Z"
