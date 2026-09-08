@@ -8,7 +8,7 @@
       2065,
       2066
     ],
-    "state": "four-composers-staged-awaiting-remote-preflight",
+    "state": "four-composers-remote-verified-ready-for-one-initial-send-each",
     "checkpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-fixed-rolls.json",
@@ -29,7 +29,9 @@
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/accepted-selections.json",
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
-    "nextSafeAction": "Remote-verify Uruguay final closure and this exact staging; recheck live composers unchanged, then Send each scene2063-2066 once."
+    "nextSafeAction": "After proof-carrier parity and fresh live checks, Send each2063-2066 once; preserve activation time and actual distinct provider URLs immediately.",
+    "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
+    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json"
   },
   "currentAuthorityBatch508": {
     "batch": 508,
@@ -40,7 +42,7 @@
       2061,
       2062
     ],
-    "state": "four-stills-closed-pending-final-remote-verification",
+    "state": "four-stills-remote-verified-closed-awaiting-Bosnia-and-Herzegovina",
     "checkpoint": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
@@ -59,7 +61,7 @@
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/full-workflow-remote-verification.json",
-    "nextSafeAction": "Remote-verify all13saved media and closure files. Then dispatch the four independently staged Bosnia and Herzegovina scenes once each; no more Uruguay renders or edits.",
+    "nextSafeAction": "No further Uruguay renders or edits. Await complete Bosnia and Herzegovina companion.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -128,7 +130,8 @@
     "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
     "totalSavedProviderAndEditedFiles": 13,
     "uniqueSavedByteVersions": 9,
-    "allFourScenesTerminalNoMoreRendersOrEdits": true
+    "allFourScenesTerminalNoMoreRendersOrEdits": true,
+    "remotePayloadCommit": "2e9a9504ecada1681fc2d7449f81ae1cc6882356"
   },
   "currentEritreaMongoliaPairPublication507": {
     "schemaVersion": 1,

@@ -3,7 +3,7 @@
   "batch": 508,
   "country": "Uruguay",
   "acceptedAtUtc": "2026-09-08T03:31:42.202Z",
-  "state": "four-selected-pending-final-remote-verification-and-country-pair",
+  "state": "four-stills-remote-verified-closed-awaiting-Bosnia-and-Herzegovina",
   "accepted": [
     {
       "scene": 2059,
@@ -29,7 +29,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "Remote closure verification",
         "Complete Bosnia and Herzegovina companion and exact 2+2 reservation"
       ],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-accessibility.json",
@@ -61,7 +60,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "Remote closure verification",
         "Complete Bosnia and Herzegovina companion and exact 2+2 reservation"
       ],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-accessibility.json",
@@ -93,7 +91,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "Remote closure verification",
         "Complete Bosnia and Herzegovina companion and exact 2+2 reservation"
       ],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2061-accessibility.json",
@@ -125,7 +122,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "Remote closure verification",
         "Complete Bosnia and Herzegovina companion and exact 2+2 reservation"
       ],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2062-accessibility.json",
@@ -150,5 +146,6 @@
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/closure-evidence-manifest.json",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "Remote-verify all13saved media and closure files. Then dispatch the four independently staged Bosnia and Herzegovina scenes once each; no more Uruguay renders or edits."
+  "nextSafeAction": "Uruguay closed. Dispatch fresh staged Bosnia and Herzegovina2063-2066 once after current parity gates; never reopen or re-edit2059-2062. Pair only after Bosnia closure.",
+  "remotePayloadCommit": "2e9a9504ecada1681fc2d7449f81ae1cc6882356"
 }
