@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 514,
   "createdAtUtc": "2026-09-08T11:41:49.804Z",
-  "state": "four-frozen-initial-intents-not-sent",
+  "state": "four-exact-intents-staged-zero-dispatch",
   "maximumInitialActivationsPerScene": 1,
   "orderedAnchors": [
     {
@@ -49,10 +49,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "staged-not-sent",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
       "fileSha256": "7da0635641828502193af162aaa67cd6ea7d9ba0087caea8984939010d7691a7",
-      "fileBytes": 5297
+      "fileBytes": 5297,
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json"
     },
     {
       "occurrenceId": "batch-514-scene-2084-meta-initial",
@@ -69,10 +70,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "staged-not-sent",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
       "fileSha256": "b4e6cc5b028cbae523563a78051514b7141a6ae7434309dcf8963d4154bb1f0c",
-      "fileBytes": 5252
+      "fileBytes": 5252,
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json"
     },
     {
       "occurrenceId": "batch-514-scene-2085-meta-initial",
@@ -89,10 +91,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "staged-not-sent",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
       "fileSha256": "1fd2de5ae6e30e56fc6ab861815c42e6028edbc6421f270d520ee54ab67b4cde",
-      "fileBytes": 5348
+      "fileBytes": 5348,
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json"
     },
     {
       "occurrenceId": "batch-514-scene-2086-meta-initial",
@@ -109,10 +112,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "staged-not-sent",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
       "fileSha256": "5464b66fac707b7cd133a76740fceb0a9eaf3d8dd2d34dc20fdf53b4f708698b",
-      "fileBytes": 4999
+      "fileBytes": 4999,
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json"
     }
   ],
   "promptTextFileConvention": "UTF-8 exact prompt plus one archival LF delimiter. Prompt hash excludes the delimiter; file hash includes all bytes."
