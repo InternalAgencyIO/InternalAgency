@@ -3,7 +3,7 @@
     "schemaVersion": 1,
     "batch": 516,
     "country": "Gabon",
-    "state": "four-staged-remotely-verified-awaiting-proof-carrier-parity",
+    "state": "initial-source-closure-three-usable-one-identity-held",
     "createdAtUtc": "2026-09-08T15:36:11.745Z",
     "sceneRange": [
       2091,
@@ -20,12 +20,12 @@
     "previousClosure": "assets/lore/starlight-era/batch-515-gambia-four-stills-closure-checkpoint.json",
     "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
     "baseRemoteVerifiedHead": "be2eed5303b6640b42c56dd2ca1d40ffcd20e971",
-    "providerSendActivations": 0,
+    "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "publicationState": "not-ready-waiting-for-Gabon-closure",
     "xPostCount": 244,
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1505.json",
-    "guardianNextAuditNotBeforeUtc": "2026-09-08T15:50:50.413Z",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/continuation-log-audit-2026-09-08-1601.json",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T16:46:36.116Z",
     "allPreviousConsumedVersionsRemainTerminal": true,
     "heldCountries": [
       "Qatar513",
@@ -40,13 +40,33 @@
       2089,
       2090
     ],
-    "nextSafeAction": "Commit and verify proof-carrier HEAD/origin/remote branch/PR parity. Then recheck each exact staged prompt, leesha007, Thinking and3ordered anchors, journal one initial activation and click Send once. Confirm its provider URL before progressing; never repeat a confirmed or uncertain activation.",
+    "nextSafeAction": "Remote-verify12 initial Meta originals and3 anchors plus ordinary QA and prompts. Then reserve and invoke exactly one clothing edit for2091,2092,2093; stage one bounded2094 identity recovery in a new verified composer, without reopening its initial terminal session. Gambia515 waits until Gabon has four accepted remotely closed scenes.",
     "stagedAtUtc": "2026-09-08T15:45:00.849Z",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "0ad0f4907ccae67c4afb3fad64185579ed5e516c",
     "preflightVerifiedAtUtc": "2026-09-08T15:47:58.623Z",
-    "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-dispatch-guard.json"
+    "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-dispatch-guard.json",
+    "providerUrls": [
+      "https://www.meta.ai/prompt/7cec5e4e-7418-43ea-b000-d0ae876e42a0",
+      "https://www.meta.ai/prompt/be22c3d4-120c-4a92-9a20-68641e5c55a3",
+      "https://www.meta.ai/prompt/38c7318e-e681-4f7a-8cfc-6418774857d0",
+      "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2"
+    ],
+    "sourceArchiveComplete": true,
+    "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/native-raw-archive-manifest.json",
+    "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-source-qa.json",
+    "hardSafeSourceScenes": [
+      2091,
+      2092,
+      2093
+    ],
+    "identityHeldScenes": [
+      2094
+    ],
+    "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-chatgpt-edit-intents.json",
+    "singleEditGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-edit-dispatch-guard.json",
+    "identityRecoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-hard-failure-recovery-1-intent.json"
   },
   "currentAuthorityBatch515": {
     "schemaVersion": 1,

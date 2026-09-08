@@ -3,7 +3,7 @@
   "batch": 516,
   "country": "Gabon",
   "createdAtUtc": "2026-09-08T15:36:11.745Z",
-  "state": "all-four-staged-awaiting-remote-preflight",
+  "state": "all-four-initial-activations-confirmed-no-replay",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -22,7 +22,7 @@
       "promptCharacters": 5503,
       "fileSha256": "5057a45b78d2ce655de73038bd57063832cf454955a3d628617e1bcd91b49319",
       "fileBytes": 5504,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -30,9 +30,12 @@
         936,
         937
       ],
-      "state": "staged-exact-prompt-and-three-ordered-anchors-not-dispatched",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
+      "providerUrl": "https://www.meta.ai/prompt/7cec5e4e-7418-43ea-b000-d0ae876e42a0",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2091-initial-send-receipt.json",
+      "neverResend": true
     },
     {
       "occurrenceId": "batch-516-scene-2092-meta-initial",
@@ -43,7 +46,7 @@
       "promptCharacters": 5006,
       "fileSha256": "d7ad1962b458c8436a391a1e244f327298ec5117b30e1b22f91c47fd3418e226",
       "fileBytes": 5007,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -51,9 +54,13 @@
         936,
         937
       ],
-      "state": "staged-exact-prompt-and-three-ordered-anchors-not-dispatched",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
+      "initiatedAtUtc": "2026-09-08T15:52:03.796Z",
+      "neverResend": true,
+      "providerUrl": "https://www.meta.ai/prompt/be22c3d4-120c-4a92-9a20-68641e5c55a3",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2092-initial-send-receipt.json"
     },
     {
       "occurrenceId": "batch-516-scene-2093-meta-initial",
@@ -64,7 +71,7 @@
       "promptCharacters": 5056,
       "fileSha256": "186103885b271a9bb6bb2d74db2d62e7fb8be6134556099329292d7335c1a61d",
       "fileBytes": 5057,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -72,9 +79,13 @@
         936,
         937
       ],
-      "state": "staged-exact-prompt-and-three-ordered-anchors-not-dispatched",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
+      "initiatedAtUtc": "2026-09-08T15:52:15.993Z",
+      "neverResend": true,
+      "providerUrl": "https://www.meta.ai/prompt/38c7318e-e681-4f7a-8cfc-6418774857d0",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2093-initial-send-receipt.json"
     },
     {
       "occurrenceId": "batch-516-scene-2094-meta-initial",
@@ -85,7 +96,7 @@
       "promptCharacters": 4925,
       "fileSha256": "671a7691f9d3019879aa91837f7a75b10462b41f8a0e0b16747fc9fb24f79629",
       "fileBytes": 4926,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -93,9 +104,13 @@
         936,
         937
       ],
-      "state": "staged-exact-prompt-and-three-ordered-anchors-not-dispatched",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
+      "initiatedAtUtc": "2026-09-08T15:52:28.294Z",
+      "neverResend": true,
+      "providerUrl": "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-initial-send-receipt.json"
     }
   ],
   "maximumHardFailureRetriesPerScene": 2,
