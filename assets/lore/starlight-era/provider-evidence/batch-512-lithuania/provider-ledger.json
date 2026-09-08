@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 512,
   "country": "Lithuania",
-  "state": "staged-exact-anchors-and-prompts-no-send",
+  "state": "four-initial-sends-issued-collecting",
   "preparedAtUtc": "2026-09-08T09:43:44.482Z",
   "provider": "Meta AI",
   "accountRequired": "leesha007",
@@ -18,8 +18,8 @@
       "scene": 2075,
       "occurrenceId": "batch-512-scene-2075-meta-initial",
       "kind": "initial",
-      "state": "prepared-not-submitted",
-      "activationCount": 0,
+      "state": "initial-send-issued-never-resend",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2075-initial-prompt.txt",
       "promptSha256": "F85F8C61C5E3512F25DA0FCF84F7AAC8EEE9ADF454472B955683B7D52F4E7F93",
@@ -31,14 +31,18 @@
         936,
         937
       ],
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "initiatedAtUtc": "2026-09-08T09:52:47.724Z",
+      "providerUrl": "https://www.meta.ai/prompt/fd403cb9-71d5-48c4-932d-68ecae34bf23",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-initial-send-receipt.json",
+      "neverResend": true
     },
     {
       "scene": 2076,
       "occurrenceId": "batch-512-scene-2076-meta-initial",
       "kind": "initial",
-      "state": "prepared-not-submitted",
-      "activationCount": 0,
+      "state": "initial-send-issued-never-resend",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2076-initial-prompt.txt",
       "promptSha256": "B6172736117BC17D89718F6DA4F5700FAD001E0B5D123AAD31371AAF68FE906C",
@@ -50,14 +54,18 @@
         936,
         937
       ],
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "initiatedAtUtc": "2026-09-08T09:52:50.867Z",
+      "providerUrl": "https://www.meta.ai/prompt/05e17db1-1345-4044-8663-609adc40aacb",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-initial-send-receipt.json",
+      "neverResend": true
     },
     {
       "scene": 2077,
       "occurrenceId": "batch-512-scene-2077-meta-initial",
       "kind": "initial",
-      "state": "prepared-not-submitted",
-      "activationCount": 0,
+      "state": "initial-send-issued-never-resend",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2077-initial-prompt.txt",
       "promptSha256": "C1BF3762CC18D24519751CF9EC7ED47A4D2CB6C2739DE505F7CC5DCB3A271119",
@@ -69,14 +77,18 @@
         936,
         937
       ],
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "initiatedAtUtc": "2026-09-08T09:52:54.032Z",
+      "providerUrl": "https://www.meta.ai/prompt/0c679a60-9bdb-4308-bb23-4231c5c5c95a",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2077-initial-send-receipt.json",
+      "neverResend": true
     },
     {
       "scene": 2078,
       "occurrenceId": "batch-512-scene-2078-meta-initial",
       "kind": "initial",
-      "state": "prepared-not-submitted",
-      "activationCount": 0,
+      "state": "initial-send-issued-never-resend",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/scene-2078-initial-prompt.txt",
       "promptSha256": "BA17E2D8D8F030585D2CAD39FF5BC9BFAF0D7A072264279D5C2D304BD1D9B380",
@@ -88,10 +100,14 @@
         936,
         937
       ],
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "initiatedAtUtc": "2026-09-08T09:52:57.185Z",
+      "providerUrl": "https://www.meta.ai/prompt/cde6f8f5-4ab1-421e-9646-27750790d4dc",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2078-initial-send-receipt.json",
+      "neverResend": true
     }
   ],
-  "providerSendActivations": 0,
+  "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
@@ -111,5 +127,6 @@
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "12e1aab3b166194048654c34c140575ad44aed2d",
   "preflightVerifiedAtUtc": "2026-09-08T09:49:53.598Z",
-  "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-dispatch-guard.json"
+  "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-dispatch-guard.json",
+  "updatedAtUtc": "2026-09-08T09:53:00.309Z"
 }
