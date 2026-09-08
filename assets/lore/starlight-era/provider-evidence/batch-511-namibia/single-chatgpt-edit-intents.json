@@ -4,7 +4,7 @@
   "country": "Namibia",
   "createdAtUtc": "2026-09-08T07:33:34.445Z",
   "policy": "Exactly one built-in image_gen invocation per selected usable scene. A block, failure or interruption consumes it. No retry, API or CLI fallback. Preserve raw source and every result with independent attribution.",
-  "state": "three-source-edits-prepared-pending-source-remote-proof",
+  "state": "three-single-edits-remote-verified-ready",
   "invocations": 0,
   "deferredScenes": [
     {
@@ -185,5 +185,9 @@
         "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
       }
     }
-  ]
+  ],
+  "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
+  "sourcePayloadCommit": "e69013b2a04bc17d1937ecb058841a007e1b8b66",
+  "sourceVerifiedAtUtc": "2026-09-08T07:40:08.992Z",
+  "nextSafeAction": "After this proof carrier is pushed and HEAD/origin/PR match, issue each of the three frozen built-in tailoring edits once. Record allowance reservation before calls and each result independently. Never retry a blocked, failed or interrupted edit. Do not resend Meta2071 or publish the incomplete country."
 }
