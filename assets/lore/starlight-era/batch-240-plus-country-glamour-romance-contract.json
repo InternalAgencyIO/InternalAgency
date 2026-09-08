@@ -8,7 +8,7 @@
       2065,
       2066
     ],
-    "state": "remote-verified-ready-for-two-recoveries-and-two-single-edits",
+    "state": "two-recoveries-confirmed-two-source-edits-prepared",
     "checkpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-source-qa-recovery-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-fixed-rolls.json",
@@ -22,22 +22,24 @@
     ],
     "account": "leesha007",
     "mode": "Thinking",
-    "providerSendActivations": 4,
+    "providerSendActivations": 6,
     "chatgptEditInvocations": 0,
     "previousCountryClosure": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/accepted-selections.json",
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0418.json",
-    "nextSafeAction": "Seal source QA, immutable recovery prompts, exact staged ordered anchors and single-edit intents to remote parity. Then one Meta recovery activation each for2064 cast-count repair and2066 explicit safer alternative; invoke built-in imagegen once each only for selected2063 and2065. No X publication until all four scenes close.",
+    "nextSafeAction": "Await2064 and2066 first-recovery outputs without resending. Invoke one built-in edit each for remote-verified selected2063 and2065. Archive new terminal outputs and review before preparing the remaining two one-edit intents. No country-pair X reservation yet.",
     "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
-    "confirmedSubmissions": 4,
+    "confirmedSubmissions": 6,
     "providerUrls": [
       "https://www.meta.ai/prompt/447a6e8c-5538-4a23-be8f-8f6e438318a8",
       "https://www.meta.ai/prompt/47266126-b2b8-48ad-a560-11c7e8ec080e",
       "https://www.meta.ai/prompt/bf50b110-b4c6-467d-b0ce-b41308198d63",
-      "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3"
+      "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3",
+      "https://www.meta.ai/prompt/c353df84-a487-421c-899e-9d14f45358cc",
+      "https://www.meta.ai/prompt/25252d65-d70d-460c-b517-2809a763c819"
     ],
     "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-activation-receipt.json",
     "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-receipt.json",
@@ -55,7 +57,7 @@
     ],
     "rawArchivePayloadCommit": "964247b676cd8e64d19a593bc6a7156ab3d2fe14",
     "rawArchiveRemoteVerifiedAtUtc": "2026-09-08T03:51:20.804Z",
-    "allProviderSessionsTerminal": true,
+    "allProviderSessionsTerminal": false,
     "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-source-qa.json",
     "editIntents": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-intents.json",
     "recoveryIntents": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-send-intents.json",
@@ -68,7 +70,9 @@
     "recoveryStagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-staging-evidence.json",
     "recoveryRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/recovery-and-first-two-edits-remote-preflight.json",
     "preflightPayloadCommit": "9211b99fd83a184e73e75ea525056c8a531e2bd3",
-    "preflightVerifiedAtUtc": "2026-09-08T04:24:14.750Z"
+    "preflightVerifiedAtUtc": "2026-09-08T04:24:14.750Z",
+    "assistantMetaRetries": 2,
+    "recoverySendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-send-receipt.json"
   },
   "currentAuthorityBatch508": {
     "batch": 508,

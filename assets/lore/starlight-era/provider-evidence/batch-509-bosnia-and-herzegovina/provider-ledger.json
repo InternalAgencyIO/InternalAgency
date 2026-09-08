@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 509,
   "country": "Bosnia and Herzegovina",
-  "state": "remote-verified-ready-for-two-recoveries-and-two-single-edits",
+  "state": "two-recoveries-confirmed-two-source-edits-prepared",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,8 +11,8 @@
     936,
     937
   ],
-  "providerSendActivations": 4,
-  "providerRetries": 0,
+  "providerSendActivations": 6,
+  "providerRetries": 2,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
   "occurrences": [
@@ -133,6 +133,71 @@
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-12-original.webp"
       ],
       "sourceQaDecision": "safer-alternative-recovery-prepared"
+    },
+    {
+      "scene": 2064,
+      "kind": "recovery-1",
+      "state": "confirmed-submitted-awaiting-terminal",
+      "activationCount": 1,
+      "maximumActivationsForThisExactPrompt": 1,
+      "maximumSceneRecoveries": 2,
+      "sceneRecoveriesUsed": 1,
+      "reason": "five-person cast hard failure",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2064-recovery-1-prompt.txt",
+      "promptSha256": "3BCEF2D541BCF4E36F45744868C47824A755F4AA2E8AF3726FBB01FFBD05CF55",
+      "tabId": "33",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "originalOccurrenceUrl": "https://www.meta.ai/prompt/47266126-b2b8-48ad-a560-11c7e8ec080e",
+      "fixedRolls": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-fixed-rolls.json",
+      "rollsRerolled": false,
+      "safetyOverrides": [],
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-staging-evidence.json",
+      "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/recovery-and-first-two-edits-remote-preflight.json",
+      "additionalActivationsOfThisPromptAllowed": 0,
+      "issuedAtUtc": "2026-09-08T04:25:33.582Z",
+      "providerUrl": "https://www.meta.ai/prompt/c353df84-a487-421c-899e-9d14f45358cc",
+      "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-send-receipt.json",
+      "occurrenceId": "batch-509-scene-2064-meta-recovery-1",
+      "provider": "Meta AI"
+    },
+    {
+      "scene": 2066,
+      "kind": "recovery-1",
+      "state": "confirmed-submitted-awaiting-terminal",
+      "activationCount": 1,
+      "maximumActivationsForThisExactPrompt": 1,
+      "maximumSceneRecoveries": 2,
+      "sceneRecoveriesUsed": 1,
+      "reason": "terminal no-final-gallery safer-alternative response",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2066-recovery-1-prompt.txt",
+      "promptSha256": "6F6F18B9CC56ACCDE26951BB1903B742BFFC74BD95C800F0BF290BE34ECFF2B5",
+      "tabId": "34",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "originalOccurrenceUrl": "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3",
+      "fixedRolls": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-fixed-rolls.json",
+      "rollsRerolled": false,
+      "safetyOverrides": [
+        "Flag-inspired color blocking, no exact flag print.",
+        "Fully opaque lined garments, covered midriffs, no waist cutouts.",
+        "Face-and-shoulder crop only, no lower bodies, hems or shoes.",
+        "Relaxed supported grouping with no temple lean."
+      ],
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-staging-evidence.json",
+      "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/recovery-and-first-two-edits-remote-preflight.json",
+      "additionalActivationsOfThisPromptAllowed": 0,
+      "issuedAtUtc": "2026-09-08T04:25:33.739Z",
+      "providerUrl": "https://www.meta.ai/prompt/25252d65-d70d-460c-b517-2809a763c819",
+      "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-send-receipt.json",
+      "occurrenceId": "batch-509-scene-2066-meta-recovery-1",
+      "provider": "Meta AI"
     }
   ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-source-qa-recovery-checkpoint.json",
@@ -149,12 +214,14 @@
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
   "previousCountryClosure": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
   "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
-  "confirmedSubmissions": 4,
+  "confirmedSubmissions": 6,
   "providerUrls": [
     "https://www.meta.ai/prompt/447a6e8c-5538-4a23-be8f-8f6e438318a8",
     "https://www.meta.ai/prompt/47266126-b2b8-48ad-a560-11c7e8ec080e",
     "https://www.meta.ai/prompt/bf50b110-b4c6-467d-b0ce-b41308198d63",
-    "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3"
+    "https://www.meta.ai/prompt/975e2869-0423-4e3b-bbc8-6833a1f7bde3",
+    "https://www.meta.ai/prompt/c353df84-a487-421c-899e-9d14f45358cc",
+    "https://www.meta.ai/prompt/25252d65-d70d-460c-b517-2809a763c819"
   ],
   "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-activation-receipt.json",
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-receipt.json",
@@ -172,7 +239,7 @@
   ],
   "rawArchivePayloadCommit": "964247b676cd8e64d19a593bc6a7156ab3d2fe14",
   "rawArchiveRemoteVerifiedAtUtc": "2026-09-08T03:51:20.804Z",
-  "allProviderSessionsTerminal": true,
+  "allProviderSessionsTerminal": false,
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-source-qa.json",
   "editIntents": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/single-chatgpt-edit-intents.json",
   "recoveryIntents": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-send-intents.json",
@@ -182,5 +249,6 @@
   "recoveryStagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-staging-evidence.json",
   "recoveryRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/recovery-and-first-two-edits-remote-preflight.json",
   "preflightPayloadCommit": "9211b99fd83a184e73e75ea525056c8a531e2bd3",
-  "preflightVerifiedAtUtc": "2026-09-08T04:24:14.750Z"
+  "preflightVerifiedAtUtc": "2026-09-08T04:24:14.750Z",
+  "recoverySendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-send-receipt.json"
 }
