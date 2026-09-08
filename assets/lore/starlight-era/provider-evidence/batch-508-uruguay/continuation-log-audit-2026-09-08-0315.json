@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "auditedAtUtc": "2026-09-08T03:15:37.208Z",
+  "nextAuditAfterUtc": "2026-09-08T04:00:37.208Z",
+  "scope": "Starlight continuation and existing guardian audit",
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "state": "ACTIVE",
+    "schedule": "existing ten-minute heartbeat unchanged",
+    "newAutomationCreated": false,
+    "inspectionNote": "Existing guardian configuration was reread completely earlier in this continuation; schedule and authority precedence remain unchanged."
+  },
+  "latestPublishedXUrls": [
+    "https://x.com/dogramaci/status/2097150739436933540",
+    "https://x.com/dogramaci/status/2097153131444318437"
+  ],
+  "publishedLedgerCount": 238,
+  "consumedPairMediaFiles": 35,
+  "consumedPairUniqueVersions": 27,
+  "uruguay": {
+    "confirmedMetaSends": 4,
+    "terminalScenes": [
+      2059,
+      2060,
+      2061,
+      2062
+    ],
+    "savedOriginalFiles": 10,
+    "uniqueOriginalVersions": 6,
+    "sourceQaComplete": true,
+    "singleEditInvocations": 0,
+    "remoteRawAndAnchorFilesVerified": 13,
+    "remoteBlobsVerified": 39
+  },
+  "issues": [
+    {
+      "finding": "Meta camera output differs from frozen close/wide rolls",
+      "decision": "Record as soft deviation; no seed hunting and no aesthetic retry. Preserve actual source crop in the single authorized edit."
+    },
+    {
+      "finding": "Protected Oman native image remains browser tab1",
+      "decision": "Preserve explicit exception; four Meta lanes and one X composer otherwise maintained."
+    }
+  ],
+  "safeImprovements": [
+    "Archive every exposed internal variant with provenance before choosing a source.",
+    "Always prefer the source if an edit worsens identity or composition.",
+    "No repetitive Send clicks after a confirmed or ambiguous provider submission."
+  ],
+  "nextSafeAction": "Exactly one built-in ChatGPT invocation for each prepared scene2059-2062 using its selected source and identity anchors938,936,937. Never resend Meta."
+}
