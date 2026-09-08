@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "batch": 513,
+  "state": "all-three-invocations-terminal-one-png-two-output-blocks",
+  "invocations": 3,
+  "returnedImages": 1,
+  "outputBlockedScenes": [
+    2081,
+    2082
+  ],
+  "scene2080NoSourceNoEdit": true,
+  "results": [
+    {
+      "schemaVersion": 1,
+      "batch": 513,
+      "scene": 2079,
+      "startedAtUtc": "2026-09-08T11:16:13.159Z",
+      "completedAtUtc": "2026-09-08T11:18:17.768Z",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "additionalInvocationsAllowed": 0,
+      "promptSha256": "FA1652EA58427AF6C645220F9E3464CBE8BA89F4E77F1C7EAB09FFCA2F79687D",
+      "sourceSha256": "bedb0553e8a05b175e52a9d1e3ad32ac636bd60194873e53994000e2bbd66fcd",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-19f304bf-41a9-4c17-a8f3-459651b01c72.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "imageReturned": true,
+        "imageDataOmittedFromTextReceipt": "Image bytes preserved separately in the native returned PNG; no image data string repeated in text evidence."
+      },
+      "state": "returned-pending-final-qa",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-meta-gallery-original.webp",
+      "exactPromptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/scene-2079-single-edit-exact-prompt.txt",
+      "returnedImage": {
+        "scene": 2079,
+        "generatedOriginalPath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-19f304bf-41a9-4c17-a8f3-459651b01c72.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-chatgpt-single-tailoring-pass.png",
+        "sha256": "c9a2c78aa19281b0303b80885292410c8cb624d547899ba7e425ba1c81c3bf42",
+        "bytes": 2083352,
+        "width": 941,
+        "height": 1672,
+        "copiedAtUtc": "2026-09-08T11:21:59.445Z",
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        }
+      },
+      "receivedImageBytes": true,
+      "noFurtherInvocation": true,
+      "receiptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 513,
+      "scene": 2081,
+      "startedAtUtc": "2026-09-08T11:16:13.159Z",
+      "completedAtUtc": "2026-09-08T11:19:32.154Z",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "additionalInvocationsAllowed": 0,
+      "promptSha256": "E79F5F38BB7625656D9E2BC1D08AC1F1723EE2E67B5F9991A94D3B1193DD569B",
+      "sourceSha256": "d16164b39b56d4748a97f7fc9f2707c42ec7d7231b5bb26ebf1d5a23a77b635a",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID ab4e8d45-8ec0-4d55-805e-2c8e4e51f203. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "errorName": null,
+      "state": "terminal-output-moderation-block-no-image",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-meta-gallery-original.webp",
+      "exactPromptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/scene-2081-single-edit-exact-prompt.txt",
+      "returnedImage": null,
+      "receivedImageBytes": false,
+      "noFurtherInvocation": true,
+      "receiptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-chatgpt-single-tailoring-blocked.json"
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 513,
+      "scene": 2082,
+      "startedAtUtc": "2026-09-08T11:16:13.160Z",
+      "completedAtUtc": "2026-09-08T11:21:37.719Z",
+      "invocationCount": 1,
+      "allowanceConsumed": true,
+      "additionalInvocationsAllowed": 0,
+      "promptSha256": "475457E475FD93A4EA6E296C7E30AF56ED07973DC2A4298A2488D787FE15A5E4",
+      "sourceSha256": "ba96fa31676000f22e41648adfcdec55a0e5d9dd5a0b7a8f8e1ed699a26e9aa6",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 1c60b61c-9997-4d62-ac29-5a7392cff78b. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "errorName": null,
+      "state": "terminal-output-moderation-block-no-image",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2082-meta-gallery-original.webp",
+      "exactPromptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/scene-2082-single-edit-exact-prompt.txt",
+      "returnedImage": null,
+      "receivedImageBytes": false,
+      "noFurtherInvocation": true,
+      "receiptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2082-chatgpt-single-tailoring-blocked.json"
+    }
+  ]
+}

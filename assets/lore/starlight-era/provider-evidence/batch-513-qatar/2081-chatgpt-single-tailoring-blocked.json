@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "batch": 513,
+  "scene": 2081,
+  "startedAtUtc": "2026-09-08T11:16:13.159Z",
+  "completedAtUtc": "2026-09-08T11:19:32.154Z",
+  "invocationCount": 1,
+  "allowanceConsumed": true,
+  "additionalInvocationsAllowed": 0,
+  "promptSha256": "E79F5F38BB7625656D9E2BC1D08AC1F1723EE2E67B5F9991A94D3B1193DD569B",
+  "sourceSha256": "d16164b39b56d4748a97f7fc9f2707c42ec7d7231b5bb26ebf1d5a23a77b635a",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID ab4e8d45-8ec0-4d55-805e-2c8e4e51f203. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "errorName": null,
+  "state": "terminal-output-moderation-block-no-image",
+  "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-meta-gallery-original.webp",
+  "exactPromptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/scene-2081-single-edit-exact-prompt.txt",
+  "returnedImage": null,
+  "receivedImageBytes": false,
+  "noFurtherInvocation": true,
+  "receiptPath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-chatgpt-single-tailoring-blocked.json"
+}

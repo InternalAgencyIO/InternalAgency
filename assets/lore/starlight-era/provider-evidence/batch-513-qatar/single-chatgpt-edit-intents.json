@@ -3,13 +3,13 @@
   "batch": 513,
   "country": "Qatar",
   "preparedAtUtc": "2026-09-08T10:48:08.544Z",
-  "state": "three-prepared-not-invoked",
+  "state": "all-three-consumed-terminal",
   "intents": [
     {
       "scene": 2079,
       "occurrenceId": "batch-513-scene-2079-chatgpt-single-tailoring",
-      "state": "prepared-not-invoked",
-      "invocationCount": 0,
+      "state": "returned-pending-final-qa",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2079,
@@ -55,13 +55,15 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, viewer-left-to-right identities, hair, expressions, bodies, exact seated/standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": true,
+      "reservedAtUtc": "2026-09-08T11:11:13.210Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-chatgpt-single-tailoring-pass.png.receipt.json"
     },
     {
       "scene": 2081,
       "occurrenceId": "batch-513-scene-2081-chatgpt-single-tailoring",
-      "state": "prepared-not-invoked",
-      "invocationCount": 0,
+      "state": "terminal-output-moderation-block-no-image",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2081,
@@ -107,13 +109,15 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, viewer-left-to-right identities, hair, expressions, bodies, exact seated/standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": true,
+      "reservedAtUtc": "2026-09-08T11:11:13.210Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-chatgpt-single-tailoring-blocked.json"
     },
     {
       "scene": 2082,
       "occurrenceId": "batch-513-scene-2082-chatgpt-single-tailoring",
-      "state": "prepared-not-invoked",
-      "invocationCount": 0,
+      "state": "terminal-output-moderation-block-no-image",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2082,
@@ -159,11 +163,15 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, viewer-left-to-right identities, hair, expressions, bodies, exact seated/standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false
+      "allowanceConsumed": true,
+      "reservedAtUtc": "2026-09-08T11:11:13.210Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2082-chatgpt-single-tailoring-blocked.json"
     }
   ],
   "blockedSceneWithoutSource": 2080,
   "maximumInvocationsPerUsableScene": 1,
   "blockOrInterruptionConsumesAllowance": true,
-  "additionalMetaSendsAllowed": 0
+  "additionalMetaSendsAllowed": 0,
+  "reservedAtUtc": "2026-09-08T11:11:13.210Z",
+  "results": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/single-chatgpt-edit-results.json"
 }
