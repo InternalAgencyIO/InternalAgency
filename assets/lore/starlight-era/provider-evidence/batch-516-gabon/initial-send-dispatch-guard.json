@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "batch": 516,
+  "country": "Gabon",
+  "state": "preflight-verified-reserved-not-activated",
+  "reservedAtUtc": "2026-09-08T15:47:58.623Z",
+  "preflight": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-remote-preflight.json",
+  "stagingPayloadCommit": "0ad0f4907ccae67c4afb3fad64185579ed5e516c",
+  "noBlindReplay": true,
+  "occurrences": [
+    {
+      "occurrenceId": "batch-516-scene-2091-meta-initial",
+      "scene": 2091,
+      "promptSha256": "CC84F7DC917E49E9CF57A80F4CBCA83C0624653C13CE1A047953B1A1F5400119",
+      "tabId": "33",
+      "providerSendActivations": 0,
+      "reserved": true,
+      "state": "reserved-not-activated",
+      "onAnyActivation": "Journal activation before clicking. Any confirmed or uncertain activation must never be resent automatically.",
+      "onPreparedRecovery": "Read actual composer, provider history and latest ledger. Do not infer a missing receipt means no Send."
+    },
+    {
+      "occurrenceId": "batch-516-scene-2092-meta-initial",
+      "scene": 2092,
+      "promptSha256": "58FEE5E2BCD4B299C94CDE17F8377CC2FE27BECE26A68E46D1E8581AB8F614B2",
+      "tabId": "34",
+      "providerSendActivations": 0,
+      "reserved": true,
+      "state": "reserved-not-activated",
+      "onAnyActivation": "Journal activation before clicking. Any confirmed or uncertain activation must never be resent automatically.",
+      "onPreparedRecovery": "Read actual composer, provider history and latest ledger. Do not infer a missing receipt means no Send."
+    },
+    {
+      "occurrenceId": "batch-516-scene-2093-meta-initial",
+      "scene": 2093,
+      "promptSha256": "F2A52780A58114061B324953269209659A133453F0EEEC861D6D646D5EED255D",
+      "tabId": "35",
+      "providerSendActivations": 0,
+      "reserved": true,
+      "state": "reserved-not-activated",
+      "onAnyActivation": "Journal activation before clicking. Any confirmed or uncertain activation must never be resent automatically.",
+      "onPreparedRecovery": "Read actual composer, provider history and latest ledger. Do not infer a missing receipt means no Send."
+    },
+    {
+      "occurrenceId": "batch-516-scene-2094-meta-initial",
+      "scene": 2094,
+      "promptSha256": "D2D46F9A6B3BEEB22F225A26D6C4B7A706334658FFD0CF39332B4F6A2265DE93",
+      "tabId": "36",
+      "providerSendActivations": 0,
+      "reserved": true,
+      "state": "reserved-not-activated",
+      "onAnyActivation": "Journal activation before clicking. Any confirmed or uncertain activation must never be resent automatically.",
+      "onPreparedRecovery": "Read actual composer, provider history and latest ledger. Do not infer a missing receipt means no Send."
+    }
+  ],
+  "maximumInitialActivationsPerScene": 1,
+  "maximumHardFailureRetriesPerScene": 2,
+  "aestheticRetries": 0
+}
