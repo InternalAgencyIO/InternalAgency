@@ -158,7 +158,7 @@
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-511-armenia-namibia-full-workflow-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-final-workflow-remote-verification.json",
-  "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted.",
+  "nextSafeAction": "After final pair publication closure and proof-carrier HEAD/origin/PR parity, the same existing guardian may reconcile and prepare Gambia at countryPriorityOrder index138 as a fresh occurrence. Inspect current tabs and all occurrence ledgers; verify exact new prompts, fixed rolls, leesha007, Thinking and anchors938/936/937 in order before each Send. Never reopen terminal scenes or republish any consumed version. Qatar513,Oman499andSwitzerland455remain held.",
   "stagedAtUtc": "2026-09-08T09:48:27.306Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-remote-preflight.json",
@@ -197,9 +197,9 @@
       "Lithuania",
       "Jamaica"
     ],
-    "state": "part1-posted-verified-part2-reserved",
-    "verifiedAtUtc": "2026-09-08T13:12:31.968Z",
-    "postCount": 243,
+    "state": "two-posts-eight-scenes-published-verified",
+    "verifiedAtUtc": "2026-09-08T13:35:24.736Z",
+    "postCount": 244,
     "parts": [
       {
         "part": 1,
@@ -217,7 +217,7 @@
       },
       {
         "part": 2,
-        "state": "reserved-unsubmitted-awaiting-live-staging",
+        "state": "posted-verified",
         "sceneIds": [
           2077,
           2078,
@@ -226,30 +226,57 @@
         ],
         "caption": "Lithuania ❤️ Jamaica: geometric-studio hugs, coastal handclasps and quiet lagoon cuddles. Four fictional adult friends in AI fashion. Distant smoke and mushroom-shaped clouds are imaginary, not real events. #WorldXXXSeries",
         "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p2-x-reservation.json",
-        "postUrl": null
+        "postUrl": "https://x.com/dogramaci/status/2097317299204083976",
+        "staging": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p2-x-staging-evidence.json",
+        "publicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p2-x-publication-receipt.json"
       }
     ],
     "postUrls": [
-      "https://x.com/dogramaci/status/2097309826321678451"
+      "https://x.com/dogramaci/status/2097309826321678451",
+      "https://x.com/dogramaci/status/2097317299204083976"
     ],
     "consumedSceneFamilies": [
       2075,
       2076,
-      2083,
-      2084
-    ],
-    "remainingSceneFamilies": [
       2077,
       2078,
+      2083,
+      2084,
       2085,
       2086
     ],
+    "remainingSceneFamilies": [],
     "noRepostAnyVersion": true,
     "rawArchiveComplete": true,
     "partialCountryQatar513XEligible": false,
     "checkpoint": "assets/lore/starlight-era/batch-514-lithuania-jamaica-x-reservation-checkpoint.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json",
     "guardianNextAuditNotBeforeUtc": "2026-09-08T14:03:22.179Z",
-    "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted."
+    "nextSafeAction": "After final pair publication closure and proof-carrier HEAD/origin/PR parity, the same existing guardian may reconcile and prepare Gambia at countryPriorityOrder index138 as a fresh occurrence. Inspect current tabs and all occurrence ledgers; verify exact new prompts, fixed rolls, leesha007, Thinking and anchors938/936/937 in order before each Send. Never reopen terminal scenes or republish any consumed version. Qatar513,Oman499andSwitzerland455remain held.",
+    "firstPublicationRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-remote-verification.json",
+    "firstPublicationPayloadCommit": "b31a643d8c9f40dd19bfe9ebe3773f3e12e3e897",
+    "firstPublicationVerifiedAtUtc": "2026-09-08T13:21:39.153Z",
+    "allSavedImageFiles": 31,
+    "uniqueSavedImageVersions": 23,
+    "allVersionsConsumed": true,
+    "normalPairBacklogRemaining": 0,
+    "publicationClosure": "assets/lore/starlight-era/batch-514-lithuania-jamaica-pair-publication-closure-checkpoint.json",
+    "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/after-pair-browser-continuation-handoff.json",
+    "finalRemoteProofPending": true,
+    "nextCountryCandidate": {
+      "country": "Gambia",
+      "priorityIndex": 138,
+      "source": "assets/lore/starlight-era/world-195x4-campaign.json",
+      "newBatchCandidate": 515,
+      "newSceneCandidates": [
+        2087,
+        2088,
+        2089,
+        2090
+      ],
+      "allocated": false,
+      "dispatchCount": 0,
+      "requires": "Fresh authoritative occurrence search, brief and fixed rolls, exact anchors938/936/937 in order, live leesha007 plus Thinking, raw/archive/QA capability and remote parity before each new dispatch."
+    }
   }
 }
