@@ -9,7 +9,7 @@
       2085,
       2086
     ],
-    "state": "four-scenes-closed-selected-pending-final-remote-verification",
+    "state": "four-scenes-remote-verified-accepted-unpublished",
     "preparedAtUtc": "2026-09-08T11:41:49.804Z",
     "brief": "assets/lore/starlight-era/batch-514-jamaica-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-514-jamaica-fixed-rolls.json",
@@ -51,12 +51,12 @@
     "eligibleCompanionCountry": "Lithuania",
     "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/accepted-selections.json",
     "qatarHold": "assets/lore/starlight-era/batch-513-qatar-terminal-three-stills-closure-checkpoint.json",
-    "nextSafeAction": "After full final-payload and proof-carrier parity, reserve two Lithuania512 plus Jamaica514 posts with two images from each country per post. Preserve all versions and never reopen these render or edit occurrences.",
+    "nextSafeAction": "After proof-carrier HEAD/origin/PR parity, reserve two exact2+2 Lithuania512 plus Jamaica514 four-still posts. Check all original, edited and unused version hashes and scene families, freeze captions and25-percent tag rolls, verify ALT, Made with AI and live @dogramaci before one activation each. Do not reopen any render or edit.",
     "stagedAtUtc": "2026-09-08T11:50:49.717Z",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "2609cc8fe49653de2709b64fba549b58b06a2988",
     "preflightVerifiedAtUtc": "2026-09-08T11:52:36.935Z",
-    "updatedAtUtc": "2026-09-08T12:31:04.300Z",
+    "updatedAtUtc": "2026-09-08T12:35:30.732Z",
     "providerUrls": [
       "https://www.meta.ai/prompt/6c67a533-263e-4560-bf83-68877e89a93c",
       "https://www.meta.ai/prompt/56d82656-593e-4c85-828b-35efadf9d5aa",
@@ -109,7 +109,11 @@
     "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/closure-evidence-manifest.json",
     "singleEditResults": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-chatgpt-edit-results.json",
     "normalFourSceneCountryComplete": true,
-    "xEligible": false
+    "xEligible": false,
+    "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/final-remote-closure-verification.json",
+    "finalPayloadCommit": "4992e014e88f57ef45c440bfef013aaedd74243b",
+    "finalRemoteVerifiedAtUtc": "2026-09-08T12:35:30.732Z",
+    "allFinalPayloadByteChecksPassed": true
   },
   "currentAuthorityBatch513": {
     "schemaVersion": 1,
