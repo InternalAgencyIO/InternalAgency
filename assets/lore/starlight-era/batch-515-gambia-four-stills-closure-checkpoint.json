@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 515,
   "country": "Gambia",
-  "state": "four-qa-accepted-awaiting-final-remote-proof",
+  "state": "four-accepted-remote-verified-unpublished-waiting-for-companion",
   "createdAtUtc": "2026-09-08T14:14:52.500Z",
   "sceneRange": [
     2087,
@@ -21,7 +21,7 @@
   "baseRemoteVerifiedHead": "b2dc2b4e1442c34645947c3a933544d8ad596fc0",
   "providerSendActivations": 4,
   "chatgptEditInvocations": 4,
-  "publicationState": "unpublished-waiting-for-final-proof-and-complete-companion",
+  "publicationState": "ready-country-unpublished-no-eligible-complete-companion",
   "xPostCount": 244,
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1505.json",
   "guardianNextAuditNotBeforeUtc": "2026-09-08T15:50:50.413Z",
@@ -31,7 +31,7 @@
     "Oman499",
     "Switzerland455"
   ],
-  "nextSafeAction": "Finish fresh remote verification of the immutable Gambia closure payload and proof carrier. Once parity passes, release only the four fully archived terminal Meta conversations into clean visible Thinking composers, leave X empty, and let the same existing guardian reconcile Gabon at priority index139 as a fresh candidate. Do not reopen Gambia or post it without an eligible complete companion.",
+  "nextSafeAction": "After verifying the final proof-carrier HEAD, origin tracking ref, remote branch, PR ref and GitHub PR head agree, continue with a fresh authoritative occurrence search for Gabon at priority index139. Candidate Batch516 scenes2091-2094 are not allocated or sent. Prepare exact new prompts with unchanged fixed roll policy, live leesha007 and Thinking, and verified anchors938,936,937 attached once in order before any Send. Gambia515 is complete and unpublished; preserve it for a complete eligible companion and future four-still2+2 X reservations. Never reopen a terminal scene, resend a confirmed prompt or republish any saved version of a consumed scene family.",
   "stagedAtUtc": "2026-09-08T14:20:15.216Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-remote-preflight.json",
@@ -65,7 +65,7 @@
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/closure-evidence-manifest.json",
   "finalTerminalInventory": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-terminal-inventory-before-release.json",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
-  "allFinalPayloadByteChecksPassed": false,
+  "allFinalPayloadByteChecksPassed": true,
   "normalFourSceneCountryComplete": true,
   "eligibleCompanionCountry": null,
   "normalReadyPairBacklog": 0,
@@ -136,32 +136,41 @@
   ],
   "actualMetaTabs": [
     {
-      "scene": 2087,
       "tabId": "33",
-      "providerUrl": "https://www.meta.ai/prompt/d224ca06-befd-4dd2-a0e8-5da4bf6aa853",
-      "terminal": true
+      "url": "https://www.meta.ai/",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "composerEmpty": true,
+      "sendDisabled": true
     },
     {
-      "scene": 2088,
       "tabId": "34",
-      "providerUrl": "https://www.meta.ai/prompt/c844906d-3c76-42d7-bd38-79e21e89d0b8",
-      "terminal": true
+      "url": "https://www.meta.ai/",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "composerEmpty": true,
+      "sendDisabled": true
     },
     {
-      "scene": 2089,
       "tabId": "35",
-      "providerUrl": "https://www.meta.ai/prompt/ca2820b9-1373-487f-91bd-32c3b4d1b36c",
-      "terminal": true
+      "url": "https://www.meta.ai/",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "composerEmpty": true,
+      "sendDisabled": true
     },
     {
-      "scene": 2090,
       "tabId": "36",
-      "providerUrl": "https://www.meta.ai/prompt/5365c73a-2fab-41fd-a5b6-a4256833a221",
-      "terminal": true
+      "url": "https://www.meta.ai/",
+      "account": "leesha007",
+      "mode": "Thinking",
+      "composerEmpty": true,
+      "sendDisabled": true
     }
   ],
   "actualXTab": {
     "tabId": "37",
+    "url": "https://x.com/compose/post",
     "account": "@dogramaci",
     "composerEmpty": true
   },
@@ -190,5 +199,12 @@
     "https://www.meta.ai/prompt/ca2820b9-1373-487f-91bd-32c3b4d1b36c",
     "https://www.meta.ai/prompt/5365c73a-2fab-41fd-a5b6-a4256833a221"
   ],
-  "xEligible": false
+  "xEligible": true,
+  "finalPayloadCommit": "f675ac4cf5779cef2b47750aa0873b9fd90739d6",
+  "finalRemoteVerifiedAtUtc": "2026-09-08T15:12:34.367Z",
+  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/after-closure-browser-continuation-handoff.json",
+  "readyUnpublishedCountryCount": 1,
+  "readyUnpublishedSceneCount": 4,
+  "eligibleForNormalCountryPairing": true,
+  "finalProofCarrierParityMustBeCheckedBeforeNextDispatch": true
 }
