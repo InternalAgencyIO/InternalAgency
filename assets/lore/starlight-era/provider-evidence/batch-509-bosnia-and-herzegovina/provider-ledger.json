@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 509,
   "country": "Bosnia and Herzegovina",
-  "state": "four-stills-accepted-awaiting-final-remote-proof",
+  "state": "four-stills-remote-verified-closed-ready-for-country-pair",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -19,7 +19,7 @@
     {
       "scene": 2063,
       "kind": "initial",
-      "state": "terminal-gallery-and-originals-archived-awaiting-qa",
+      "state": "terminal-archived-qa-closed",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2063-initial-prompt.txt",
@@ -42,12 +42,13 @@
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-internal-1-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-internal-2-original.webp"
       ],
-      "sourceQaDecision": "usable-source-selected-edit-pending"
+      "sourceQaDecision": "closed-see-final-selection-qa",
+      "additionalMetaSendsAllowed": 0
     },
     {
       "scene": 2064,
       "kind": "initial",
-      "state": "terminal-gallery-and-originals-archived-awaiting-qa",
+      "state": "terminal-five-person-original-archived-unused",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2064-initial-prompt.txt",
@@ -68,12 +69,13 @@
       "rawPaths": [
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-gallery-original.webp"
       ],
-      "sourceQaDecision": "hard-unusable-five-person-cast"
+      "sourceQaDecision": "hard-unusable-five-person-cast",
+      "additionalMetaSendsAllowed": 0
     },
     {
       "scene": 2065,
       "kind": "initial",
-      "state": "terminal-gallery-and-originals-archived-awaiting-qa",
+      "state": "terminal-archived-qa-closed",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2065-initial-prompt.txt",
@@ -95,12 +97,13 @@
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2065-meta-gallery-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2065-meta-internal-1-original.webp"
       ],
-      "sourceQaDecision": "usable-source-selected-edit-pending"
+      "sourceQaDecision": "closed-see-final-selection-qa",
+      "additionalMetaSendsAllowed": 0
     },
     {
       "scene": 2066,
       "kind": "initial",
-      "state": "terminal-alternative-response-internal-images-awaiting-qa",
+      "state": "terminal-alternative-and-context-archive-superseded-by-safer-recovery",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/scene-2066-initial-prompt.txt",
@@ -132,12 +135,13 @@
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-11-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-12-original.webp"
       ],
-      "sourceQaDecision": "safer-alternative-recovery-prepared"
+      "sourceQaDecision": "unused-safer-recovery-selected",
+      "additionalMetaSendsAllowed": 0
     },
     {
       "scene": 2064,
       "kind": "recovery-1",
-      "state": "terminal-usable-no-additional-meta-sends",
+      "state": "terminal-archived-qa-closed",
       "activationCount": 1,
       "maximumActivationsForThisExactPrompt": 1,
       "maximumSceneRecoveries": 2,
@@ -168,12 +172,13 @@
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-recovery-1-gallery-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-recovery-1-internal-1-original.webp"
       ],
-      "additionalMetaSendsAllowed": 0
+      "additionalMetaSendsAllowed": 0,
+      "sourceQaDecision": "closed-see-final-selection-qa"
     },
     {
       "scene": 2066,
       "kind": "recovery-1",
-      "state": "terminal-usable-no-additional-meta-sends",
+      "state": "terminal-archived-qa-closed",
       "activationCount": 1,
       "maximumActivationsForThisExactPrompt": 1,
       "maximumSceneRecoveries": 2,
@@ -209,7 +214,8 @@
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-recovery-1-gallery-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-recovery-1-internal-1-original.webp"
       ],
-      "additionalMetaSendsAllowed": 0
+      "additionalMetaSendsAllowed": 0,
+      "sourceQaDecision": "closed-see-final-selection-qa"
     }
   ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-509-bosnia-and-herzegovina-four-stills-closure-checkpoint.json",
@@ -221,7 +227,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Remote-close this four-scene batch and reserve exactly two Uruguay/Bosnia2+2 X posts. No new render or edit for2063-2066.",
+  "nextSafeAction": "Reserve the two exact Uruguay/Bosnia 2+2 X posts, verify current @dogramaci, all family duplicates, ordered media, ALT and Made with AI, then one Post activation per reservation. No more renders or edits for scenes 2059-2066.",
   "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
   "previousCountryClosure": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
@@ -277,5 +283,7 @@
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json",
   "returnedPngFiles": 2,
   "allArchivedImageFiles": 24,
-  "additionalMetaSendsAllowed": 0
+  "additionalMetaSendsAllowed": 0,
+  "remotePayloadCommit": "189616409e510f6a65778b68a23f7d1f70470b2d",
+  "remoteVerifiedAtUtc": "2026-09-08T04:49:54.928Z"
 }
