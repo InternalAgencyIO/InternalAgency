@@ -9,24 +9,24 @@
     "Uruguay",
     "Bosnia and Herzegovina"
   ],
-  "state": "part-one-posted-verified-part-two-reserved",
-  "updatedAtUtc": "2026-09-08T05:07:22.786Z",
-  "postCount": 239,
+  "state": "both-parts-posted-verified-pending-workflow-remote-proof",
+  "updatedAtUtc": "2026-09-08T05:15:44.850Z",
+  "postCount": 240,
   "newPostUrls": [
-    "https://x.com/dogramaci/status/2097189559310156192"
+    "https://x.com/dogramaci/status/2097189559310156192",
+    "https://x.com/dogramaci/status/2097191849538588895"
   ],
   "postedSceneIds": [
     2059,
     2060,
     2063,
-    2064
-  ],
-  "remainingSceneIds": [
+    2064,
     2061,
     2062,
     2065,
     2066
   ],
+  "remainingSceneIds": [],
   "parts": [
     {
       "part": 1,
@@ -36,6 +36,17 @@
         2060,
         2063,
         2064
+      ],
+      "publicTransmissionCount": 1
+    },
+    {
+      "part": 2,
+      "url": "https://x.com/dogramaci/status/2097191849538588895",
+      "scenes": [
+        2061,
+        2062,
+        2065,
+        2066
       ],
       "publicTransmissionCount": 1
     }
@@ -50,7 +61,7 @@
   "generatedSceneMediaFiles": 31,
   "contextReferenceFiles": 6,
   "contextReferencesNeverUpload": true,
-  "consumedSceneFamilyFiles": 14,
+  "consumedSceneFamilyFiles": 37,
   "allConsumedVersionsNoRepost": true,
   "closureProofs": [
     "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/final-remote-closure-verification.json",
@@ -58,5 +69,5 @@
   ],
   "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/continuation-log-audit-2026-09-08-0507.json",
-  "nextSafeAction": "Remote-close the first posted scene families, then stage and publish only reserved part two after fresh account, duplicate, ALT, AI and parity gates. Never repost any version."
+  "nextSafeAction": "Both Uruguay/Bosnia posts are terminal. Seal the full remote workflow and prepare unused Armenia batch 510 scenes 2067-2070. Never repost or re-render scenes 2059-2066."
 }
