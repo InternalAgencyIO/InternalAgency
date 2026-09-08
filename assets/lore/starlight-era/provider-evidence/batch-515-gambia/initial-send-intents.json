@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 515,
   "createdAtUtc": "2026-09-08T14:14:52.500Z",
-  "state": "frozen-offline-no-provider-activation",
+  "state": "all-four-staged-not-sent",
   "maximumInitialActivationsPerScene": 1,
   "orderedAnchors": [
     {
@@ -55,7 +55,8 @@
         937
       ],
       "state": "prepared-not-sent",
-      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first."
+      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
     },
     {
       "occurrenceId": "batch-515-scene-2088-meta-initial",
@@ -75,7 +76,8 @@
         937
       ],
       "state": "prepared-not-sent",
-      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first."
+      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
     },
     {
       "occurrenceId": "batch-515-scene-2089-meta-initial",
@@ -95,7 +97,8 @@
         937
       ],
       "state": "prepared-not-sent",
-      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first."
+      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
     },
     {
       "occurrenceId": "batch-515-scene-2090-meta-initial",
@@ -115,7 +118,8 @@
         937
       ],
       "state": "prepared-not-sent",
-      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first."
+      "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
     }
   ],
   "promptTextFileConvention": "UTF-8 no BOM. Exactly the dispatched prompt plus one archival final LF; prompt hash excludes that LF."

@@ -3,7 +3,7 @@
     "schemaVersion": 1,
     "batch": 515,
     "country": "Gambia",
-    "state": "prepared-offline-no-dispatch",
+    "state": "all-four-staged-no-send",
     "createdAtUtc": "2026-09-08T14:14:52.500Z",
     "sceneRange": [
       2087,
@@ -32,7 +32,9 @@
       "Oman499",
       "Switzerland455"
     ],
-    "nextSafeAction": "Freeze and remotely verify exact prompts and anchors. Attach938,936,937 once each in order through visible controls, verify cards after typing and Thinking/account, archive staging and verify remote parity before one initial Send per lane."
+    "nextSafeAction": "Commit and verify staged exact prompts, local and remote anchor bytes, current HEAD/origin/branch/PR parity; then recheck all four live composers immediately before exactly one initial Send per new occurrence.",
+    "stagedAtUtc": "2026-09-08T14:20:15.216Z",
+    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
   },
   "currentLithuaniaJamaicaPairPublication514": {
     "schemaVersion": 1,
