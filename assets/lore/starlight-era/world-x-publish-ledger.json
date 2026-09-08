@@ -8,7 +8,7 @@
       2061,
       2062
     ],
-    "state": "four-initial-provider-submissions-confirmed-awaiting-outputs",
+    "state": "all-four-sources-archived-qa-complete-single-edits-prepared",
     "checkpoint": "assets/lore/starlight-era/batch-508-uruguay-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
@@ -27,7 +27,7 @@
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08-0229.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/full-workflow-remote-verification.json",
-    "nextSafeAction": "Observe already-confirmed Uruguay2059-2062 without resending. Preserve all terminal originals/variants, QA every unique byte, apply one single tailoring call per usable source, close remotely and then continue to Bosnia and Herzegovina.",
+    "nextSafeAction": "Remote-verify all10raworiginals and exact edit intents, then one built-in single tailoring call per2059-2062source. Preserve all results and block receipts; no more Meta sends for these scenes.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -39,8 +39,13 @@
     ],
     "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-receipt.json",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-remote-preflight.json",
-    "rawFilesSaved": 0,
-    "sourceArchiveComplete": false
+    "rawFilesSaved": 10,
+    "sourceArchiveComplete": true,
+    "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/native-raw-archive-manifest.json",
+    "initialTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-terminal-provider-evidence.json",
+    "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json",
+    "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-intents.json",
+    "uniqueRawByteVersions": 6
   },
   "currentEritreaMongoliaPairPublication507": {
     "schemaVersion": 1,

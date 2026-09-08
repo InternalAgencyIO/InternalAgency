@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 508,
   "country": "Uruguay",
-  "state": "four-initial-provider-submissions-confirmed-awaiting-outputs",
+  "state": "all-four-sources-archived-qa-complete-single-edits-prepared",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -29,11 +29,16 @@
         936,
         937
       ],
-      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "state": "terminal-originals-archived-source-qa-complete",
       "providerUrl": "https://www.meta.ai/prompt/76bc893b-fb5d-41a8-9346-49c6b0e612c6",
       "additionalInitialSendsAllowed": 0,
       "submittedAtUtc": "2026-09-08T02:59:05.960Z",
-      "confirmedAtUtc": "2026-09-08T02:59:36.412Z"
+      "confirmedAtUtc": "2026-09-08T02:59:36.412Z",
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2059-meta-internal-1-original.webp"
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json"
     },
     {
       "occurrenceId": "batch-508-scene-2060-meta-initial",
@@ -48,11 +53,17 @@
         936,
         937
       ],
-      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "state": "terminal-originals-archived-source-qa-complete",
       "providerUrl": "https://www.meta.ai/prompt/1d3eeeff-48f6-489a-95e7-80db5e666ba9",
       "additionalInitialSendsAllowed": 0,
       "submittedAtUtc": "2026-09-08T02:59:06.149Z",
-      "confirmedAtUtc": "2026-09-08T02:59:36.464Z"
+      "confirmedAtUtc": "2026-09-08T02:59:36.464Z",
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-internal-1-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2060-meta-internal-2-original.webp"
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json"
     },
     {
       "occurrenceId": "batch-508-scene-2061-meta-initial",
@@ -67,11 +78,17 @@
         936,
         937
       ],
-      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "state": "terminal-originals-archived-source-qa-complete",
       "providerUrl": "https://www.meta.ai/prompt/3b6f0c7e-3884-491a-a4da-db935d16c33f",
       "additionalInitialSendsAllowed": 0,
       "submittedAtUtc": "2026-09-08T02:59:06.367Z",
-      "confirmedAtUtc": "2026-09-08T02:59:36.526Z"
+      "confirmedAtUtc": "2026-09-08T02:59:36.526Z",
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2061-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2061-meta-internal-1-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2061-meta-internal-2-original.webp"
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json"
     },
     {
       "occurrenceId": "batch-508-scene-2062-meta-initial",
@@ -86,11 +103,16 @@
         936,
         937
       ],
-      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "state": "terminal-originals-archived-source-qa-complete",
       "providerUrl": "https://www.meta.ai/prompt/78485fd2-c48f-468c-b4c5-f13d040977a3",
       "additionalInitialSendsAllowed": 0,
       "submittedAtUtc": "2026-09-08T02:59:06.571Z",
-      "confirmedAtUtc": "2026-09-08T02:59:36.583Z"
+      "confirmedAtUtc": "2026-09-08T02:59:36.583Z",
+      "rawPaths": [
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2062-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/2062-meta-internal-1-original.webp"
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json"
     }
   ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-508-uruguay-prepared-checkpoint.json",
@@ -98,9 +120,9 @@
   "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
-  "sourceArchiveComplete": false,
+  "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Inspect the four already-confirmed Uruguay sessions without another Send. When terminal, preserve every exposed original/internal variant and exact provider evidence via supported visible downloads. QA all unique bytes, then exactly one built-in ChatGPT tailoring invocation per usable scene source; blocks consume allowance. Close country remotely before pairing with a fresh complete Bosnia and Herzegovina companion.",
+  "nextSafeAction": "Remote-verify all10originals plus anchors and exact single-edit intents, then exactly one built-in imagegen invocation per selected source. Archive every returned PNG or block receipt; do not generate additional Meta variants. Select/ALT/close before pairing with Bosnia and Herzegovina.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
   "stagedAtUtc": "2026-09-08T02:56:45.629Z",
@@ -159,7 +181,14 @@
   ],
   "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-receipt.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-remote-preflight.json",
-  "rawFilesSaved": 0,
-  "missingObservedOriginals": null,
-  "terminalOutputInventoryPending": true
+  "rawFilesSaved": 10,
+  "missingObservedOriginals": 0,
+  "terminalOutputInventoryPending": false,
+  "rawArchiveManifest": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/native-raw-archive-manifest.json",
+  "initialTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-terminal-provider-evidence.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json",
+  "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-intents.json",
+  "uniqueRawByteVersions": 6,
+  "countryRawArchiveComplete": true,
+  "additionalMetaSendsAllowedForCurrentScenes": 0
 }
