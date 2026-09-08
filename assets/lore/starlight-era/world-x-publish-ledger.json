@@ -8,7 +8,7 @@
       2057,
       2058
     ],
-    "state": "four-stills-closed-pending-final-remote-proof",
+    "state": "four-stills-remote-verified-closed-awaiting-Eritrea-Mongolia-publication",
     "checkpoint": "assets/lore/starlight-era/batch-507-mongolia-four-stills-closure-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-507-mongolia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-507-mongolia-fixed-rolls.json",
@@ -27,7 +27,7 @@
     "previousCountryClosure": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
     "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/accepted-selections.json",
-    "nextSafeAction": "Seal and remote-verify all Mongolia originals, edits, block receipts, QA and ALT; then reserve exact Eritrea/Mongolia 2+2 pairs after live account and duplicate gates.",
+    "nextSafeAction": "Freeze exact Eritrea/Mongolia P1[2051,2052,2055,2056] and P2[2053,2054,2057,2058] captions/ALT/AI disclosure, then fresh live-account, duplicate and ref gates before one activation each.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
     "confirmedSubmissions": 5,
@@ -77,7 +77,8 @@
     "chatgptReturnedFiles": 3,
     "chatgptBlockedInvocations": 1,
     "totalSavedProviderAndEditedFiles": 25,
-    "allFourScenesTerminalNoMoreRendersOrEdits": true
+    "allFourScenesTerminalNoMoreRendersOrEdits": true,
+    "remotePayloadCommit": "ab5894642ad0b1b81896d2a714932819a9fbfd6c"
   },
   "currentAuthorityBatch506": {
     "batch": 506,

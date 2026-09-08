@@ -3,7 +3,7 @@
   "batch": 507,
   "country": "Mongolia",
   "acceptedAtUtc": "2026-09-08T02:18:24.888Z",
-  "state": "four-stills-selected-pending-final-remote-proof",
+  "state": "four-stills-remote-verified-closed-awaiting-Eritrea-Mongolia-publication",
   "accepted": [
     {
       "scene": 2055,
@@ -156,5 +156,6 @@
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/closure-evidence-manifest.json",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/final-remote-closure-verification.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "Seal and remote-verify all Mongolia originals, edits, block receipts, QA and ALT; then reserve exact Eritrea/Mongolia 2+2 pairs after live account and duplicate gates."
+  "nextSafeAction": "Freeze exact Eritrea/Mongolia P1[2051,2052,2055,2056] and P2[2053,2054,2057,2058] captions/ALT/AI disclosure, then fresh live-account, duplicate and ref gates before one activation each.",
+  "remotePayloadCommit": "ab5894642ad0b1b81896d2a714932819a9fbfd6c"
 }

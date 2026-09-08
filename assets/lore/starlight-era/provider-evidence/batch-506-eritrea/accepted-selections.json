@@ -3,7 +3,7 @@
   "batch": 506,
   "country": "Eritrea",
   "acceptedAtUtc": "2026-09-07T07:10:25.396Z",
-  "state": "four-stills-remote-verified-closed-awaiting-Mongolia-companion",
+  "state": "four-stills-remote-verified-closed-complete-Mongolia-companion-reserved",
   "accepted": [
     {
       "scene": 2051,
@@ -29,7 +29,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "complete-unposted-Mongolia-companion",
         "live-account-check",
         "all-version-duplicate-check",
         "frozen-caption-media-alt-and-AI-disclosure",
@@ -63,7 +62,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "complete-unposted-Mongolia-companion",
         "live-account-check",
         "all-version-duplicate-check",
         "frozen-caption-media-alt-and-AI-disclosure",
@@ -97,7 +95,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "complete-unposted-Mongolia-companion",
         "live-account-check",
         "all-version-duplicate-check",
         "frozen-caption-media-alt-and-AI-disclosure",
@@ -131,7 +128,6 @@
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
       "xEligibilityPending": [
-        "complete-unposted-Mongolia-companion",
         "live-account-check",
         "all-version-duplicate-check",
         "frozen-caption-media-alt-and-AI-disclosure",
@@ -152,10 +148,10 @@
   "archiveException": null,
   "technicalQa": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-selection-qa.json",
   "companionCountry": "Mongolia",
-  "companionAccepted": null,
+  "companionAccepted": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/accepted-selections.json",
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/closure-evidence-manifest.json",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "Verify complete Eritrea closure remotely, then prepare fresh Mongolia507scenes2055-2058. Eritrea remains unpublished until a complete eligible Mongolia companion and all action-time X gates pass.",
+  "nextSafeAction": "Eritrea/Mongolia complete. Fulfill frozen exact2+2Xreservations only after action-time gates; no new render or edit of2051-2058.",
   "remotePayloadCommit": "bc0c267b75845f6269937088726ec7d3b69ebfdf"
 }
