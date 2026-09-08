@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "batch": 511,
+  "country": "Namibia",
+  "authorityCommit": "fd80c959d91037856cd5da65d1b4fbbb2084bae1",
+  "preflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-remote-preflight.json",
+  "maximumInitialActivationsPerScene": 1,
+  "rule": "Any reserved, issued or uncertain activation requires live reconciliation. Never repeat a confirmed or uncertain Send.",
+  "attempts": [
+    {
+      "scene": 2071,
+      "occurrenceId": "batch-511-scene-2071-meta-initial",
+      "tabId": "33",
+      "reservedAtUtc": "2026-09-08T07:18:45.752Z",
+      "state": "submitted-provider-occurrence-confirmed",
+      "callIssued": true,
+      "promptSha256": "C5B98934A60AE5F0D82B73FEADCC4BED1157E4F9CDF374512F11139833F15287",
+      "initiatedAtUtc": "2026-09-08T07:18:50.241Z",
+      "providerUrl": "https://www.meta.ai/prompt/64682848-7d28-411a-9ef7-3d066abf7591",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-initial-send-receipt.json"
+    },
+    {
+      "scene": 2072,
+      "occurrenceId": "batch-511-scene-2072-meta-initial",
+      "tabId": "34",
+      "reservedAtUtc": "2026-09-08T07:18:57.882Z",
+      "state": "submitted-provider-occurrence-confirmed",
+      "callIssued": true,
+      "promptSha256": "B6409E87E02DEACC1FFCD62176DE7B817A6DFE9259A268243D4C1165DCD70844",
+      "initiatedAtUtc": "2026-09-08T07:19:02.868Z",
+      "providerUrl": "https://www.meta.ai/prompt/14f3e5bd-6a93-4818-b7dc-bcdc5db95fe0",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-initial-send-receipt.json"
+    },
+    {
+      "scene": 2073,
+      "occurrenceId": "batch-511-scene-2073-meta-initial",
+      "tabId": "35",
+      "reservedAtUtc": "2026-09-08T07:19:34.594Z",
+      "state": "submitted-provider-occurrence-confirmed",
+      "callIssued": true,
+      "promptSha256": "4615188E70C9800396E41319068F1ACA843EC343E99C7815A964C77E3CD3A5E9",
+      "initiatedAtUtc": "2026-09-08T07:19:40.204Z",
+      "providerUrl": "https://www.meta.ai/prompt/35bd6f4f-0210-4478-b230-cb7a60939445",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-initial-send-receipt.json"
+    },
+    {
+      "scene": 2074,
+      "occurrenceId": "batch-511-scene-2074-meta-initial",
+      "tabId": "36",
+      "reservedAtUtc": "2026-09-08T07:19:49.702Z",
+      "state": "submitted-provider-occurrence-confirmed",
+      "callIssued": true,
+      "promptSha256": "F07EA39F820EE8B9B6A662AF67B1781C864C58EE8CBB47184CF18DC0FE24C805",
+      "initiatedAtUtc": "2026-09-08T07:19:55.908Z",
+      "providerUrl": "https://www.meta.ai/prompt/ad139e3d-5190-4648-8591-1e246683e321",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-initial-send-receipt.json"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 511,
   "country": "Namibia",
-  "state": "four-composers-remote-verified-ready-for-single-initial-send",
+  "state": "all-four-initial-activations-confirmed-terminal",
   "preparedAtUtc": "2026-09-08T07:03:47.722Z",
   "accountRequired": "leesha007",
   "mode": "Thinking",
@@ -16,8 +16,8 @@
       "scene": 2071,
       "occurrenceId": "batch-511-scene-2071-meta-initial",
       "kind": "initial",
-      "state": "staged-not-activated",
-      "activationCount": 0,
+      "state": "terminal-initial-capacity-failure-no-image",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2071-initial-prompt.txt",
       "promptSha256": "C5B98934A60AE5F0D82B73FEADCC4BED1157E4F9CDF374512F11139833F15287",
@@ -30,14 +30,23 @@
         937
       ],
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "attemptReservedAtUtc": "2026-09-08T07:18:45.752Z",
+      "initiatedAtUtc": "2026-09-08T07:18:50.241Z",
+      "providerUrl": "https://www.meta.ai/prompt/64682848-7d28-411a-9ef7-3d066abf7591",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-initial-send-receipt.json",
+      "neverResend": true,
+      "additionalActivations": 0,
+      "terminalObservation": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/all-four-terminal-source-observations.json",
+      "rawFiles": [],
+      "sourceQa": null
     },
     {
       "scene": 2072,
       "occurrenceId": "batch-511-scene-2072-meta-initial",
       "kind": "initial",
-      "state": "staged-not-activated",
-      "activationCount": 0,
+      "state": "terminal-image-returned-source-archived",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2072-initial-prompt.txt",
       "promptSha256": "B6409E87E02DEACC1FFCD62176DE7B817A6DFE9259A268243D4C1165DCD70844",
@@ -50,14 +59,28 @@
         937
       ],
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "attemptReservedAtUtc": "2026-09-08T07:18:57.882Z",
+      "initiatedAtUtc": "2026-09-08T07:19:02.868Z",
+      "providerUrl": "https://www.meta.ai/prompt/14f3e5bd-6a93-4818-b7dc-bcdc5db95fe0",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-initial-send-receipt.json",
+      "neverResend": true,
+      "additionalActivations": 0,
+      "terminalObservation": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/all-four-terminal-source-observations.json",
+      "rawFiles": [
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-01-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-02-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-meta-internal-03-original.webp"
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json"
     },
     {
       "scene": 2073,
       "occurrenceId": "batch-511-scene-2073-meta-initial",
       "kind": "initial",
-      "state": "staged-not-activated",
-      "activationCount": 0,
+      "state": "terminal-image-returned-source-archived",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2073-initial-prompt.txt",
       "promptSha256": "4615188E70C9800396E41319068F1ACA843EC343E99C7815A964C77E3CD3A5E9",
@@ -70,14 +93,26 @@
         937
       ],
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "attemptReservedAtUtc": "2026-09-08T07:19:34.594Z",
+      "initiatedAtUtc": "2026-09-08T07:19:40.204Z",
+      "providerUrl": "https://www.meta.ai/prompt/35bd6f4f-0210-4478-b230-cb7a60939445",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-initial-send-receipt.json",
+      "neverResend": true,
+      "additionalActivations": 0,
+      "terminalObservation": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/all-four-terminal-source-observations.json",
+      "rawFiles": [
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-meta-internal-01-original.webp"
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json"
     },
     {
       "scene": 2074,
       "occurrenceId": "batch-511-scene-2074-meta-initial",
       "kind": "initial",
-      "state": "staged-not-activated",
-      "activationCount": 0,
+      "state": "terminal-image-returned-source-archived",
+      "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/scene-2074-initial-prompt.txt",
       "promptSha256": "F07EA39F820EE8B9B6A662AF67B1781C864C58EE8CBB47184CF18DC0FE24C805",
@@ -90,13 +125,27 @@
         937
       ],
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
-      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences."
+      "rule": "Exactly one initial Send after fresh remote parity and exact account, Thinking, prompt and ordered visible anchors. Never resend confirmed or uncertain occurrences.",
+      "attemptReservedAtUtc": "2026-09-08T07:19:49.702Z",
+      "initiatedAtUtc": "2026-09-08T07:19:55.908Z",
+      "providerUrl": "https://www.meta.ai/prompt/ad139e3d-5190-4648-8591-1e246683e321",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-initial-send-receipt.json",
+      "neverResend": true,
+      "additionalActivations": 0,
+      "terminalObservation": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/all-four-terminal-source-observations.json",
+      "rawFiles": [
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-meta-gallery-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-meta-internal-01-original.webp"
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-source-qa.json"
     }
   ],
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/four-composers-staging-evidence.json",
-  "nextSafeAction": "After this proof carrier is committed, pushed and HEAD/origin/PR match, recheck the current account, Thinking, exact prompt and three ordered anchor cards. Activate each of the four reserved initial Meta sends once. Record every attempted activation and resulting occurrence immediately; never repeat a confirmed or uncertain Send.",
+  "nextSafeAction": "Commit, push and verify this complete initial-source payload and exact single-edit intents. Then invoke the built-in image editor once each for usable scenes2072-2074, preserving source framing and all three face plates. Scene2071 is a terminal initial capacity failure with no source and no verified automatic job. Do not resend its initial occurrence or reduce anchors; revisit only after a respectful cooldown and fresh visible reconciliation before any separately numbered authorized hard-failure recovery. No X post until all four Namibia scenes are closed and paired with Armenia.",
   "stagedAtUtc": "2026-09-08T07:11:31.898Z",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "cb54f5e100e748dcbe328c51601443567fb85b91",
-  "preflightVerifiedAtUtc": "2026-09-08T07:14:22.191Z"
+  "preflightVerifiedAtUtc": "2026-09-08T07:14:22.191Z",
+  "providerSendActivations": 4,
+  "updatedAtUtc": "2026-09-08T07:33:34.445Z"
 }
