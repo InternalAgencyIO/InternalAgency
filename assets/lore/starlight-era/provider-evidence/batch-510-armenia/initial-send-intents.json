@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 510,
   "country": "Armenia",
-  "state": "prepared-zero-initial-sends",
+  "state": "four-fully-staged-composers-zero-sends",
   "preparedAtUtc": "2026-09-08T05:29:36.414Z",
   "accountRequired": "leesha007",
   "mode": "Thinking",
@@ -16,7 +16,7 @@
       "scene": 2067,
       "occurrenceId": "batch-510-scene-2067-meta-initial",
       "kind": "initial",
-      "state": "prepared-awaiting-staging",
+      "state": "staged-awaiting-remote-preflight",
       "activationCount": 0,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2067-initial-prompt.txt",
@@ -36,7 +36,7 @@
       "scene": 2068,
       "occurrenceId": "batch-510-scene-2068-meta-initial",
       "kind": "initial",
-      "state": "prepared-awaiting-staging",
+      "state": "staged-awaiting-remote-preflight",
       "activationCount": 0,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-initial-prompt.txt",
@@ -56,7 +56,7 @@
       "scene": 2069,
       "occurrenceId": "batch-510-scene-2069-meta-initial",
       "kind": "initial",
-      "state": "prepared-awaiting-staging",
+      "state": "staged-awaiting-remote-preflight",
       "activationCount": 0,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-initial-prompt.txt",
@@ -76,7 +76,7 @@
       "scene": 2070,
       "occurrenceId": "batch-510-scene-2070-meta-initial",
       "kind": "initial",
-      "state": "prepared-awaiting-staging",
+      "state": "staged-awaiting-remote-preflight",
       "activationCount": 0,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2070-initial-prompt.txt",
@@ -92,5 +92,7 @@
       "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-composers-staging-evidence.json",
       "rule": "Exactly one initial Send only after fresh remote parity and exact account, Thinking, prompt and visible ordered-anchor verification. Never resend confirmed or uncertain occurrence."
     }
-  ]
+  ],
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-composers-staging-evidence.json",
+  "nextSafeAction": "Remote-verify this staging then recheck each exact account, Thinking, prompt and ordered anchors before one initial Send per lane."
 }
