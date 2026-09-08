@@ -1,4 +1,13 @@
 {
+  "legacyPendingPostReconciliation511": {
+    "observedAtUtc": "2026-09-08T08:31:29.152Z",
+    "field": "pendingPost",
+    "postUrl": "https://x.com/dogramaci/status/2094345779376726102",
+    "state": "historical-published-record-not-resubmittable",
+    "postsArrayMatches": 1,
+    "preparedPostQueueLength": 0,
+    "rule": "Preserve this historical field unchanged. Its published URL is already in the ledger; do not treat the pending field name as a new posting instruction."
+  },
   "currentAuthorityBatch511": {
     "schemaVersion": 1,
     "batch": 511,
@@ -9,7 +18,7 @@
       2073,
       2074
     ],
-    "state": "four-scenes-selected-all-occurrences-and-edits-terminal-pending-remote-closure",
+    "state": "four-scenes-remote-verified-accepted-unpublished",
     "preparedAtUtc": "2026-09-08T07:03:47.722Z",
     "brief": "assets/lore/starlight-era/batch-511-namibia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-511-namibia-fixed-rolls.json",
@@ -47,7 +56,7 @@
     ],
     "eligibleCompanionCountry": "Armenia",
     "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
-    "nextSafeAction": "Seal and remotely verify complete Namibia closure with all sources, edits, output block, QA and accessibility. Then prepare two nonduplicate Armenia/Namibia four-photo country-pair posts, with fresh @dogramaci, media, exact captions, ALT, Made with AI and Git/LFS/PR gates before one Post each.",
+    "nextSafeAction": "After this proof carrier is pushed and HEAD/origin/PR match, reserve two Armenia/Namibia four-photo posts in fixed2+2 order. Check every saved scene-family version against posted media, freeze captions and independent25-percent hashtag rolls, set all ALT and Made with AI, verify @dogramaci and exact staging, then Post each once under current explicit authorization. No scene or edit may reopen.",
     "stagedAtUtc": "2026-09-08T07:11:31.898Z",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "cb54f5e100e748dcbe328c51601443567fb85b91",
@@ -84,7 +93,7 @@
       2074
     ],
     "missingScenes": [],
-    "allCountryScenesAccepted": false,
+    "allCountryScenesAccepted": true,
     "savedImageFiles": 14,
     "uniqueImageVersions": 10,
     "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json",
@@ -105,6 +114,9 @@
     "chatgptOutputBlocks": [
       2071
     ],
+    "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json",
+    "finalPayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
+    "finalRemoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
     "checkpoint": "assets/lore/starlight-era/batch-511-namibia-four-stills-closure-checkpoint.json"
   },
   "currentAuthorityBatch510": {
