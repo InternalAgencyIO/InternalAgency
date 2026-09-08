@@ -9,7 +9,7 @@
       2069,
       2070
     ],
-    "state": "four-fully-staged-composers-zero-sends",
+    "state": "four-initial-submissions-confirmed-output-collection-in-progress",
     "preparedAtUtc": "2026-09-08T05:29:36.414Z",
     "brief": "assets/lore/starlight-era/batch-510-armenia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-510-armenia-fixed-rolls.json",
@@ -19,7 +19,7 @@
     "previousWorkflowClosure": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-full-workflow-closure-checkpoint.json",
     "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/full-workflow-remote-verification.json",
     "baseRemoteVerifiedHead": "84af01b55b808b72b41bb763482358c6001503c7",
-    "providerSendActivations": 0,
+    "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "account": "leesha007",
     "mode": "Thinking",
@@ -43,11 +43,52 @@
       "https://x.com/dogramaci/status/2097189559310156192",
       "https://x.com/dogramaci/status/2097191849538588895"
     ],
-    "nextSafeAction": "One initial Send per exact verified composer after final live recheck. Record every outcome and actual occurrence URL immediately. Never repeat a confirmed or uncertain prompt.",
-    "checkpoint": "assets/lore/starlight-era/batch-510-armenia-prepared-checkpoint.json",
+    "nextSafeAction": "Preserve all exposed originals and internal variants from these four existing Meta occurrences, inspect exact bytes and source QA, then make at most the one authorized source-preserving built-in ChatGPT tailoring invocation per usable scene. Do not resend initial prompts, aesthetic-reroll, force offscreen details into the frame, or publish before full raw archive, QA, single-edit accounting, duplicate checks and remote closure. Namibia is the next country cursor only after current authority is closed.",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "5ce323215659d28eff6b12e991ddc82dfa0f212a",
-    "preflightVerifiedAtUtc": "2026-09-08T05:36:40.606Z"
+    "preflightVerifiedAtUtc": "2026-09-08T05:36:40.606Z",
+    "updatedAtUtc": "2026-09-08T05:49:12.607Z",
+    "dispatchAuthorityCommit": "2863beab8015aadb1127125e4a372f8a66d766f1",
+    "providerRetries": 0,
+    "uncertainActivations": 0,
+    "occurrences": [
+      {
+        "scene": 2067,
+        "occurrenceId": "batch-510-scene-2067-meta-initial",
+        "activationCount": 1,
+        "providerUrl": "https://www.meta.ai/prompt/7625f457-5a4f-407c-9ca9-46a003615ef5",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-initial-send-receipt.json",
+        "neverResend": true
+      },
+      {
+        "scene": 2068,
+        "occurrenceId": "batch-510-scene-2068-meta-initial",
+        "activationCount": 1,
+        "providerUrl": "https://www.meta.ai/prompt/a26f9094-bf33-4b65-ad79-41bc48fb46e7",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-initial-send-receipt.json",
+        "neverResend": true
+      },
+      {
+        "scene": 2069,
+        "occurrenceId": "batch-510-scene-2069-meta-initial",
+        "activationCount": 1,
+        "providerUrl": "https://www.meta.ai/prompt/9eacf0a7-b3ac-4efe-9267-d6cc8afe83c0",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-initial-send-receipt.json",
+        "neverResend": true
+      },
+      {
+        "scene": 2070,
+        "occurrenceId": "batch-510-scene-2070-meta-initial",
+        "activationCount": 1,
+        "providerUrl": "https://www.meta.ai/prompt/4509fe50-e166-413e-bb9d-c18defa3b199",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-initial-send-receipt.json",
+        "neverResend": true
+      }
+    ],
+    "outputObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-dispatch-observations.json",
+    "sourceArchiveComplete": false,
+    "archiveException": null,
+    "checkpoint": "assets/lore/starlight-era/batch-510-armenia-initial-dispatch-checkpoint.json"
   },
   "currentUruguayBosniaPairPublication509": {
     "schemaVersion": 1,
