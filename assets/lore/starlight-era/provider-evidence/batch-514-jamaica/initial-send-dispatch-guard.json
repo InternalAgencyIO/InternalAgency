@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "batch": 514,
+  "state": "all-four-initial-activations-confirmed",
+  "reservedAtUtc": "2026-09-08T11:54:33.806Z",
+  "proofCarrierCommit": "b5c92d05b26c8fef235f725071d63aad596c5ace",
+  "actionTimeRemoteRefs": "b5c92d05b26c8fef235f725071d63aad596c5ace\trefs/heads/agent/starlight-progress-archive\nb5c92d05b26c8fef235f725071d63aad596c5ace\trefs/pull/13/head\n",
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-remote-preflight.json",
+  "maximumInitialActivationsPerScene": 1,
+  "neverResendConfirmedOrUncertain": true,
+  "initialActivations": [
+    {
+      "scene": 2083,
+      "occurrenceId": "batch-514-scene-2083-meta-initial",
+      "promptSha256": "BDC1FCF4E65BBFA94166581F0C271C1F3BD64A07AA6BE0ED177693E121681344",
+      "activationAllowanceReserved": true,
+      "clickIssued": true,
+      "activationAttempts": 1,
+      "state": "confirmed-awaiting-terminal-result",
+      "begunAtUtc": "2026-09-08T11:55:23.349Z",
+      "providerUrl": "https://www.meta.ai/prompt/6c67a533-263e-4560-bf83-68877e89a93c",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-initial-send-receipt.json",
+      "confirmedAtUtc": "2026-09-08T11:55:26.445Z",
+      "additionalInitialActivationsAllowed": 0
+    },
+    {
+      "scene": 2084,
+      "occurrenceId": "batch-514-scene-2084-meta-initial",
+      "promptSha256": "B891CC2F3B428D47D1DF8289B6EAC183E58C6DC9F57375EC5870888FC6DDFBFF",
+      "activationAllowanceReserved": true,
+      "clickIssued": true,
+      "activationAttempts": 1,
+      "state": "confirmed-awaiting-terminal-result",
+      "begunAtUtc": "2026-09-08T11:55:26.452Z",
+      "providerUrl": "https://www.meta.ai/prompt/56d82656-593e-4c85-828b-35efadf9d5aa",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-initial-send-receipt.json",
+      "confirmedAtUtc": "2026-09-08T11:55:29.560Z",
+      "additionalInitialActivationsAllowed": 0
+    },
+    {
+      "scene": 2085,
+      "occurrenceId": "batch-514-scene-2085-meta-initial",
+      "promptSha256": "80493164A685CAB30DF6305AED6E875C0F6B76EFD1D406856F34166B5AABF1F2",
+      "activationAllowanceReserved": true,
+      "clickIssued": true,
+      "activationAttempts": 1,
+      "state": "confirmed-awaiting-terminal-result",
+      "begunAtUtc": "2026-09-08T11:55:29.568Z",
+      "providerUrl": "https://www.meta.ai/prompt/e2bd4614-d26b-4674-93ac-15e8c3728d62",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-initial-send-receipt.json",
+      "confirmedAtUtc": "2026-09-08T11:55:32.661Z",
+      "additionalInitialActivationsAllowed": 0
+    },
+    {
+      "scene": 2086,
+      "occurrenceId": "batch-514-scene-2086-meta-initial",
+      "promptSha256": "6A20DBE6D4005928C16E565EF7E8F62B30BC495A42F8E8CB27CD037DE3A1CA3D",
+      "activationAllowanceReserved": true,
+      "clickIssued": true,
+      "activationAttempts": 1,
+      "state": "confirmed-awaiting-terminal-result",
+      "begunAtUtc": "2026-09-08T11:55:32.667Z",
+      "providerUrl": "https://www.meta.ai/prompt/6191b327-0d1a-4b71-9c28-7e364714c2ed",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-initial-send-receipt.json",
+      "confirmedAtUtc": "2026-09-08T11:55:35.775Z",
+      "additionalInitialActivationsAllowed": 0
+    }
+  ],
+  "actionTimeChecks": [
+    {
+      "scene": 2083,
+      "checkedAtUtc": "2026-09-08T11:54:33.653Z",
+      "promptExact": true,
+      "anchorsPass": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    },
+    {
+      "scene": 2084,
+      "checkedAtUtc": "2026-09-08T11:54:33.700Z",
+      "promptExact": true,
+      "anchorsPass": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    },
+    {
+      "scene": 2085,
+      "checkedAtUtc": "2026-09-08T11:54:33.747Z",
+      "promptExact": true,
+      "anchorsPass": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    },
+    {
+      "scene": 2086,
+      "checkedAtUtc": "2026-09-08T11:54:33.794Z",
+      "promptExact": true,
+      "anchorsPass": true,
+      "thinking": true,
+      "account": true,
+      "sendEnabled": true
+    }
+  ]
+}
