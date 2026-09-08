@@ -63,7 +63,10 @@
     "checkpoint": "assets/lore/starlight-era/batch-514-lithuania-jamaica-x-reservation-checkpoint.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json",
     "guardianNextAuditNotBeforeUtc": "2026-09-08T14:03:22.179Z",
-    "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted."
+    "nextSafeAction": "Verify the proof-carrier commit reaches HEAD/origin/PR parity, then stage the frozen part2 reservation. No more part1 activations or uploads.",
+    "firstPublicationRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-remote-verification.json",
+    "firstPublicationPayloadCommit": "b31a643d8c9f40dd19bfe9ebe3773f3e12e3e897",
+    "firstPublicationVerifiedAtUtc": "2026-09-08T13:21:39.153Z"
   },
   "currentLithuaniaJamaicaPairReservations514": {
     "schemaVersion": 1,
@@ -408,7 +411,7 @@
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json",
     "guardianNextAuditNotBeforeUtc": "2026-09-08T14:03:22.179Z",
     "checkpoint": "assets/lore/starlight-era/batch-514-lithuania-jamaica-x-reservation-checkpoint.json",
-    "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted.",
+    "nextSafeAction": "Verify the proof-carrier commit reaches HEAD/origin/PR parity, then stage the frozen part2 reservation. No more part1 activations or uploads.",
     "updatedAtUtc": "2026-09-08T13:12:31.968Z",
     "consumedSceneFamilies": [
       2075,
@@ -563,7 +566,10 @@
       2078,
       2085,
       2086
-    ]
+    ],
+    "firstPublicationRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-remote-verification.json",
+    "firstPublicationPayloadCommit": "b31a643d8c9f40dd19bfe9ebe3773f3e12e3e897",
+    "firstPublicationVerifiedAtUtc": "2026-09-08T13:21:39.153Z"
   },
   "currentAuthorityBatch514": {
     "schemaVersion": 1,
