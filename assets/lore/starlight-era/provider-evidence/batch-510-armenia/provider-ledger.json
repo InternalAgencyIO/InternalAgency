@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 510,
   "country": "Armenia",
-  "state": "four-initial-submissions-confirmed-output-collection-in-progress",
+  "state": "three-sources-qa-ready-one-original-occurrence-in-flight",
   "preparedAtUtc": "2026-09-08T05:29:36.414Z",
   "accountRequired": "leesha007",
   "mode": "Thinking",
@@ -119,7 +119,7 @@
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
-  "currentCheckpoint": "assets/lore/starlight-era/batch-510-armenia-initial-dispatch-checkpoint.json",
+  "currentCheckpoint": "assets/lore/starlight-era/batch-510-armenia-source-qa-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-510-armenia-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-510-armenia-fixed-rolls.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-intents.json",
@@ -130,9 +130,23 @@
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-full-workflow-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/full-workflow-remote-verification.json",
-  "nextSafeAction": "Preserve all exposed originals and internal variants from these four existing Meta occurrences, inspect exact bytes and source QA, then make at most the one authorized source-preserving built-in ChatGPT tailoring invocation per usable scene. Do not resend initial prompts, aesthetic-reroll, force offscreen details into the frame, or publish before full raw archive, QA, single-edit accounting, duplicate checks and remote closure. Namibia is the next country cursor only after current authority is closed.",
+  "nextSafeAction": "Verify the saved 2067, 2068 and 2070 source bytes, exact edit intents and HEAD/origin/PR parity, then invoke one built-in source-preserving tailoring edit each, once only. Independently inspect the existing 2069 occurrence for terminal output and archive every newly exposed variant. Do not resend any initial prompt, use an aesthetic retry, publish Armenia, or replace these lanes before evidence closure.",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "5ce323215659d28eff6b12e991ddc82dfa0f212a",
   "preflightVerifiedAtUtc": "2026-09-08T05:36:40.606Z",
-  "updatedAtUtc": "2026-09-08T05:44:24.611Z"
+  "updatedAtUtc": "2026-09-08T05:44:24.611Z",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/native-raw-archive-manifest.json",
+  "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-intents.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0555.json",
+  "sourceReadyScenes": [
+    2067,
+    2068,
+    2070
+  ],
+  "inFlightScenes": [
+    2069
+  ],
+  "savedMediaFiles": 15,
+  "uniqueMediaVersions": 12
 }
