@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 509,
   "country": "Bosnia and Herzegovina",
-  "state": "all-sources-remotely-verified-two-edits-in-flight-two-ready",
+  "state": "all-four-single-edits-in-flight-no-additional-allowances",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 6,
   "providerRetries": 2,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 2,
+  "chatgptEditInvocations": 4,
   "occurrences": [
     {
       "scene": 2063,
@@ -221,7 +221,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Wait for the two confirmed Meta first-recoveries and built-in edit cell2052. Do not resend or reissue. Preserve all returned original media and tool PNGs, directly review2064 and2066 recovery sources, then prepare only their remaining single-edit allowances. No X post is ready yet.",
+  "nextSafeAction": "Wait for built-in edit cells2052 and2060, no further invocations. Archive every returned PNG or exact block receipt, compare with the four selected sources, write final QA and ALT, verify full remote closure, then reserve and publish the two Uruguay/Bosnia posts with fresh @dogramaci and all-family duplicate checks.",
   "baseRemoteVerifiedHead": "2e9a9504ecada1681fc2d7449f81ae1cc6882356",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/initial-send-remote-preflight.json",
   "previousCountryClosure": "assets/lore/starlight-era/batch-508-uruguay-four-stills-closure-checkpoint.json",
@@ -263,10 +263,11 @@
   "preflightPayloadCommit": "9211b99fd83a184e73e75ea525056c8a531e2bd3",
   "preflightVerifiedAtUtc": "2026-09-08T04:24:14.750Z",
   "recoverySendReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-send-receipt.json",
-  "singleEditActivationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-two-single-edit-activation-receipt.json",
+  "singleEditActivationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/all-four-single-edit-activation-receipt.json",
   "recoverySourceQa": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/recovery-source-qa.json",
   "recoveryTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/first-recovery-terminal-evidence.json",
   "remainingEditsRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/remaining-two-edits-remote-preflight.json",
   "remainingEditsPreflightPayload": "ae9ffdf8a582ed7895c5e3aea535ebcf68d3b3d5",
-  "remainingEditsRemoteVerifiedAtUtc": "2026-09-08T04:33:50.497Z"
+  "remainingEditsRemoteVerifiedAtUtc": "2026-09-08T04:33:50.497Z",
+  "additionalChatgptInvocationsAllowed": 0
 }

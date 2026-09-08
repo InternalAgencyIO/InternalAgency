@@ -89,8 +89,8 @@
     },
     {
       "scene": 2064,
-      "state": "prepared-uninvoked",
-      "invocationCount": 0,
+      "state": "invoked-awaiting-tool-result",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2064,
@@ -124,12 +124,17 @@
       "plannedOutput": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-chatgpt-single-tailoring-pass.png",
       "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/recovery-source-qa.json",
       "safetyOverrides": [],
-      "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/remaining-two-edits-remote-preflight.json"
+      "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/remaining-two-edits-remote-preflight.json",
+      "additionalInvocationsAllowed": 0,
+      "issuedAtUtc": "2026-09-08T04:35:17.497Z",
+      "execCell": "2060",
+      "tool": "built-in image_gen",
+      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/all-four-single-edit-activation-receipt.json"
     },
     {
       "scene": 2066,
-      "state": "prepared-uninvoked",
-      "invocationCount": 0,
+      "state": "invoked-awaiting-tool-result",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2066,
@@ -168,7 +173,12 @@
         "Keep actual close source frame; no lower-body reveals, hems or shoes.",
         "No new temple greeting or intensified contact."
       ],
-      "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/remaining-two-edits-remote-preflight.json"
+      "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/remaining-two-edits-remote-preflight.json",
+      "additionalInvocationsAllowed": 0,
+      "issuedAtUtc": "2026-09-08T04:35:17.498Z",
+      "execCell": "2060",
+      "tool": "built-in image_gen",
+      "activationReceipt": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/all-four-single-edit-activation-receipt.json"
     }
   ],
   "deferredScenes": []
