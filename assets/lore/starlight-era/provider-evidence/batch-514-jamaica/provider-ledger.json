@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 514,
   "country": "Jamaica",
-  "state": "four-single-edit-allowances-consumed-in-flight",
+  "state": "four-scenes-closed-selected-pending-final-remote-verification",
   "createdAtUtc": "2026-09-08T11:41:49.804Z",
   "occurrences": [
     {
@@ -102,7 +102,7 @@
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 4,
-  "currentCheckpoint": "assets/lore/starlight-era/batch-514-jamaica-prepared-checkpoint.json",
+  "currentCheckpoint": "assets/lore/starlight-era/batch-514-jamaica-four-stills-closure-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-514-jamaica-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-514-jamaica-fixed-rolls.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-intents.json",
@@ -112,13 +112,13 @@
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-513-qatar-terminal-three-stills-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/final-remote-closure-verification.json",
-  "nextSafeAction": "Await the four original built-in imagegen calls started at12:19:33UTC. Never reissue them. Preserve every returned result or exact error, perform final comparison QA, then close all four scenes before any X reservation.",
+  "nextSafeAction": "After full final-payload and proof-carrier parity, reserve two Lithuania512 plus Jamaica514 posts with two images from each country per post. Preserve all versions and never reopen these render or edit occurrences.",
   "stagedAtUtc": "2026-09-08T11:50:49.717Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "2609cc8fe49653de2709b64fba549b58b06a2988",
   "preflightVerifiedAtUtc": "2026-09-08T11:52:36.935Z",
-  "updatedAtUtc": "2026-09-08T12:21:03.712Z",
+  "updatedAtUtc": "2026-09-08T12:31:04.300Z",
   "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-dispatch-guard.json",
   "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/native-raw-archive-manifest.json",
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-source-qa.json",
@@ -126,5 +126,13 @@
   "singleEditDispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-edit-dispatch-guard.json",
   "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "cff5c9c5749561d937f9df72b90427844438e721",
-  "sourceVerifiedAtUtc": "2026-09-08T12:17:19.079Z"
+  "sourceVerifiedAtUtc": "2026-09-08T12:17:19.079Z",
+  "chatgptReturnedPngs": 3,
+  "chatgptOutputBlockedScenes": [
+    2086
+  ],
+  "allSceneRenderAndEditAllowancesTerminal": true,
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/final-selection-qa.json",
+  "singleEditResults": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-chatgpt-edit-results.json"
 }

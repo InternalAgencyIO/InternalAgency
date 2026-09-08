@@ -8,14 +8,14 @@
     2085,
     2086
   ],
-  "state": "superseded-by-final-four-stills-closure",
+  "state": "four-scenes-closed-selected-pending-final-remote-verification",
   "preparedAtUtc": "2026-09-08T11:41:49.804Z",
   "brief": "assets/lore/starlight-era/batch-514-jamaica-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-514-jamaica-fixed-rolls.json",
   "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/provider-ledger.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-intents.json",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json",
-  "checkpoint": "assets/lore/starlight-era/batch-514-jamaica-prepared-checkpoint.json",
+  "checkpoint": "assets/lore/starlight-era/batch-514-jamaica-four-stills-closure-checkpoint.json",
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-513-qatar-terminal-three-stills-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/final-remote-closure-verification.json",
   "baseRemoteVerifiedHead": "2f43378d72f5fb4b553322c5b09fe43df13c6d7f",
@@ -55,7 +55,7 @@
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "2609cc8fe49653de2709b64fba549b58b06a2988",
   "preflightVerifiedAtUtc": "2026-09-08T11:52:36.935Z",
-  "updatedAtUtc": "2026-09-08T12:21:03.712Z",
+  "updatedAtUtc": "2026-09-08T12:31:04.300Z",
   "providerUrls": [
     "https://www.meta.ai/prompt/6c67a533-263e-4560-bf83-68877e89a93c",
     "https://www.meta.ai/prompt/56d82656-593e-4c85-828b-35efadf9d5aa",
@@ -77,10 +77,36 @@
   "noImageScenes": [],
   "allProviderSessionsTerminal": true,
   "allExposedOriginalsArchived": true,
-  "savedImageFiles": 12,
-  "uniqueImageVersions": 8,
+  "savedImageFiles": 15,
+  "uniqueImageVersions": 11,
   "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "cff5c9c5749561d937f9df72b90427844438e721",
   "sourceVerifiedAtUtc": "2026-09-08T12:17:19.079Z",
-  "supersededBy": "assets/lore/starlight-era/batch-514-jamaica-four-stills-closure-checkpoint.json"
+  "closedAtUtc": "2026-09-08T12:31:04.300Z",
+  "preparedCheckpoint": "assets/lore/starlight-era/batch-514-jamaica-prepared-checkpoint.json",
+  "chatgptReturnedPngs": 3,
+  "chatgptOutputBlockedScenes": [
+    2086
+  ],
+  "acceptedSceneIds": [
+    2083,
+    2084,
+    2085,
+    2086
+  ],
+  "terminalSceneIds": [
+    2083,
+    2084,
+    2085,
+    2086
+  ],
+  "allRenderAndEditAllowancesTerminal": true,
+  "additionalMetaSendsAllowed": 0,
+  "additionalChatgptEditsAllowed": 0,
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/final-selection-qa.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/closure-evidence-manifest.json",
+  "singleEditResults": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-chatgpt-edit-results.json",
+  "normalFourSceneCountryComplete": true,
+  "xEligible": false
 }

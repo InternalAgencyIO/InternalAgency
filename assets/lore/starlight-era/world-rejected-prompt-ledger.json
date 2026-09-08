@@ -1,4 +1,26 @@
 {
+  "latestBatch514FailureEvidence": {
+    "updatedAtUtc": "2026-09-08T12:31:04.300Z",
+    "batch": 514,
+    "policy": "Preserve the exact attributed output moderation block. No retry, rewrite, resend or second edit.",
+    "entries": [
+      {
+        "scene": 2086,
+        "provider": "built-in image_gen",
+        "state": "terminal-output-moderation-block-no-image",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-chatgpt-single-tailoring-blocked.json",
+        "promptPath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/scene-2086-single-edit-exact-prompt.txt",
+        "promptSha256": "653642D90C126FB117C8EAE1E149B6AE8C790A5B3604AD88848DDC561B46524D",
+        "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-meta-gallery-original.webp",
+        "sourceSha256": "3288c448b7ed847504852695fcf00bfddcf7b017bb2f2f0bdd550e157dba05cc",
+        "returnedImageFiles": 0,
+        "invocationCount": 1,
+        "allowanceConsumed": true,
+        "additionalAutomaticActivations": 0,
+        "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID c89633a7-d257-4618-9419-7fb4db48359b. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")"
+      }
+    ]
+  },
   "latestBatch513FailureEvidence": {
     "updatedAtUtc": "2026-09-08T11:28:15.392Z",
     "batch": 513,

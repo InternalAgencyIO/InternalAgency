@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "batch": 514,
-  "state": "four-single-edit-allowances-consumed-in-flight",
+  "state": "all-four-single-edit-allowances-consumed-terminal",
   "maximumInvocationsPerScene": 1,
   "blockOrInterruptionConsumesAllowance": true,
   "noSecondEdit": true,
@@ -14,11 +14,13 @@
       "promptSha256": "EA5FF88B79758D9EA76DB9A65EEFA3B5609A024482376652EA106EC3FC5BB84D",
       "invocationCount": 1,
       "allowanceConsumed": true,
-      "state": "invoked-awaiting-result",
+      "state": "returned-final-qa-selected",
       "additionalInvocationsAllowed": 0,
       "reserved": true,
       "neverAutomaticallyReissueReservation": true,
-      "initiatedAtUtc": "2026-09-08T12:19:33Z"
+      "initiatedAtUtc": "2026-09-08T12:19:33Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-chatgpt-single-tailoring-pass.png.receipt.json",
+      "completedAtUtc": "2026-09-08 12:21:40 UTC"
     },
     {
       "scene": 2084,
@@ -28,11 +30,13 @@
       "promptSha256": "619E3403F79A20C452C6E7B9C46AB510211D1706E6AAF0C15C0E9EA169D41B86",
       "invocationCount": 1,
       "allowanceConsumed": true,
-      "state": "invoked-awaiting-result",
+      "state": "returned-final-qa-selected",
       "additionalInvocationsAllowed": 0,
       "reserved": true,
       "neverAutomaticallyReissueReservation": true,
-      "initiatedAtUtc": "2026-09-08T12:19:33Z"
+      "initiatedAtUtc": "2026-09-08T12:19:33Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-chatgpt-single-tailoring-pass.png.receipt.json",
+      "completedAtUtc": "2026-09-08 12:23:46 UTC"
     },
     {
       "scene": 2085,
@@ -42,11 +46,13 @@
       "promptSha256": "E9FE7CC7992889D7E5DA925F85427D4974E098D3034D5E648DC9D94AD7FAEBB9",
       "invocationCount": 1,
       "allowanceConsumed": true,
-      "state": "invoked-awaiting-result",
+      "state": "returned-final-qa-selected",
       "additionalInvocationsAllowed": 0,
       "reserved": true,
       "neverAutomaticallyReissueReservation": true,
-      "initiatedAtUtc": "2026-09-08T12:19:33Z"
+      "initiatedAtUtc": "2026-09-08T12:19:33Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2085-chatgpt-single-tailoring-pass.png.receipt.json",
+      "completedAtUtc": "2026-09-08 12:24:58 UTC"
     },
     {
       "scene": 2086,
@@ -56,11 +62,13 @@
       "promptSha256": "653642D90C126FB117C8EAE1E149B6AE8C790A5B3604AD88848DDC561B46524D",
       "invocationCount": 1,
       "allowanceConsumed": true,
-      "state": "invoked-awaiting-result",
+      "state": "terminal-output-moderation-block-no-image",
       "additionalInvocationsAllowed": 0,
       "reserved": true,
       "neverAutomaticallyReissueReservation": true,
-      "initiatedAtUtc": "2026-09-08T12:19:33Z"
+      "initiatedAtUtc": "2026-09-08T12:19:33Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2086-chatgpt-single-tailoring-blocked.json",
+      "completedAtUtc": "2026-09-08 12:27:10 UTC"
     }
   ],
   "reservedAtUtc": "2026-09-08T12:17:19.079Z",
@@ -110,5 +118,7 @@
       "localBlob": "c1c3b23dae35955dabb399fe0ba078a3944171c4",
       "pass": true
     }
-  ]
+  ],
+  "completedAtUtc": "2026-09-08T12:31:04.300Z",
+  "results": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/single-chatgpt-edit-results.json"
 }
