@@ -10,7 +10,7 @@
     "Bosnia and Herzegovina"
   ],
   "part": 2,
-  "state": "reserved-awaiting-visible-X-staging",
+  "state": "fully-staged-awaiting-remote-parity",
   "preparedAtUtc": "2026-09-08T04:58:44.448Z",
   "accountRequired": "@dogramaci",
   "sceneIds": [
@@ -205,7 +205,7 @@
   "madeWithAiRequired": true,
   "postClicks": 0,
   "publicTransmissionCount": 0,
-  "uploadCount": 0,
+  "uploadCount": 1,
   "archiveExceptions": [],
   "rawArchiveComplete": true,
   "missingInternalOriginalsByCountry": {
@@ -213,12 +213,12 @@
     "Bosnia and Herzegovina": 0
   },
   "duplicateCheck": {
-    "checkedAtUtc": "2026-09-08T04:58:44.443Z",
-    "ledgerPostCount": 238,
-    "candidateFiles": 37,
-    "uniqueCandidateHashes": 29,
-    "method": "Exact recursive primitive equality against every posted scene id, SHA256 and repository media path. No substring matching.",
-    "matches": []
+    "checkedAtUtc": "2026-09-08T05:10:50.257Z",
+    "ledgerPostCount": 239,
+    "candidateFiles": 23,
+    "uniqueCandidateHashes": 19,
+    "matches": [],
+    "method": "Exact recursive primitive equality across every saved version of the four remaining scene families."
   },
   "currentAuthorization": "Latest user explicitly authorizes ready posts, renders and supported visible tab recovery. Existing guardian only. Verify all gates before one final activation.",
   "normalPairComposition": "exactly-four-stills-two-countries-two-plus-two",
@@ -232,5 +232,14 @@
     "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/final-remote-closure-verification.json"
   ],
   "nextSafeAction": "Verify live @dogramaci, upload the four reserved media once in listed order, set exact caption and four ALT descriptions, enable Made with AI, seal staging and final parity, then one Post activation.",
-  "additionalActivationsAllowed": 1
+  "additionalActivationsAllowed": 1,
+  "staging": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/uruguay-bosnia-p2-x-staging-evidence.json",
+  "liveAccount": {
+    "account": "@dogramaci",
+    "verified": true,
+    "verifiedAtUtc": "2026-09-08T05:10:16.336Z",
+    "evidence": "Live Account menu exposes Log out @dogramaci",
+    "tabId": "37"
+  },
+  "activationIntent": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/uruguay-bosnia-p2-x-activation-intent.json"
 }
