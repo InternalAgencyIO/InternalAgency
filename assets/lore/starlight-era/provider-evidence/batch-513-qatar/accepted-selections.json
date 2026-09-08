@@ -3,7 +3,7 @@
   "batch": 513,
   "country": "Qatar",
   "acceptedAtUtc": "2026-09-08T11:26:01.424Z",
-  "state": "three-safe-selections-partial-country-pending-remote-closure",
+  "state": "three-stills-remote-verified-partial-country-held-from-x",
   "accepted": [
     {
       "scene": 2079,
@@ -19,7 +19,7 @@
       "providerUrl": "https://www.meta.ai/prompt/87f11aec-e75f-4b29-90bf-20c5826e59b4",
       "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2079-meta-gallery-original.webp",
       "technicalQa": "pass",
-      "canonicalAccepted": false,
+      "canonicalAccepted": true,
       "rawArchiveComplete": true,
       "archiveException": null,
       "chatgptInvocations": 1,
@@ -42,8 +42,10 @@
         "Returned resolution is941x1672 rather than the requested1152x2048; the original composition is retained without local resampling.",
         "An unrolled Ellie waist gap and extra star tattoo remain; exact flag points and ECE platform-boot styling remain approximate."
       ],
-      "state": "selected-partial-country-pending-remote-closure",
-      "sceneFamilyConsumed": false
+      "state": "accepted-partial-country-unpublished",
+      "sceneFamilyConsumed": false,
+      "remoteVerifiedAtUtc": "2026-09-08T11:33:00.465Z",
+      "remotePayloadCommit": "e5b2cc886ab4ff32f39c253e36a4aed3b043ff20"
     },
     {
       "scene": 2081,
@@ -59,7 +61,7 @@
       "providerUrl": "https://www.meta.ai/prompt/a9606cce-ede9-45fd-b57b-1b918351f0b6",
       "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2081-meta-gallery-original.webp",
       "technicalQa": "pass",
-      "canonicalAccepted": false,
+      "canonicalAccepted": true,
       "rawArchiveComplete": true,
       "archiveException": null,
       "chatgptInvocations": 1,
@@ -80,8 +82,10 @@
         "One attributed output moderation block consumed the edit allowance. The hard-safe original is retained unchanged.",
         "Actual medium seated-group framing remains broader than the extreme-close face-and-shoulder roll; star duplication, extra RAZE armbands and Ellie waist exposure are soft deviations."
       ],
-      "state": "selected-partial-country-pending-remote-closure",
-      "sceneFamilyConsumed": false
+      "state": "accepted-partial-country-unpublished",
+      "sceneFamilyConsumed": false,
+      "remoteVerifiedAtUtc": "2026-09-08T11:33:00.465Z",
+      "remotePayloadCommit": "e5b2cc886ab4ff32f39c253e36a4aed3b043ff20"
     },
     {
       "scene": 2082,
@@ -97,7 +101,7 @@
       "providerUrl": "https://www.meta.ai/prompt/7c2a876e-e944-4c04-9b0b-9d5b1ba1ec1f",
       "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/2082-meta-gallery-original.webp",
       "technicalQa": "pass",
-      "canonicalAccepted": false,
+      "canonicalAccepted": true,
       "rawArchiveComplete": true,
       "archiveException": null,
       "chatgptInvocations": 1,
@@ -122,8 +126,10 @@
         "The supported recline is beside a friend rather than a true head-on-clothed-lap pose; actual crop is closer than extreme-wide and flag point counts are approximate.",
         "Fire appears beyond the window and closer than the intended distant background. Any publication must disclose all disaster imagery as imaginary synthetic effects."
       ],
-      "state": "selected-partial-country-pending-remote-closure",
-      "sceneFamilyConsumed": false
+      "state": "accepted-partial-country-unpublished",
+      "sceneFamilyConsumed": false,
+      "remoteVerifiedAtUtc": "2026-09-08T11:33:00.465Z",
+      "remotePayloadCommit": "e5b2cc886ab4ff32f39c253e36a4aed3b043ff20"
     }
   ],
   "rawArchiveComplete": true,
@@ -158,5 +164,9 @@
   "companionState": "Lithuania512 complete and unposted; Qatar is not an eligible partner",
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/closure-evidence-manifest.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "After this partial-country closure and proof carrier reach HEAD/origin/PR parity, keep Qatar513 scenes2079-2082 terminal. No further Meta request or ChatGPT edit for these occurrences. Qatar has3 accepted scenes and no fourth image; it is X-ineligible without explicit partial-country authorization or a separately authorized safe completion workflow. Advance the fresh render queue to Jamaica514 scenes2083-2086 at campaign index137, using unchanged deterministic rolls, exact938,936,937 anchors, leesha007 and Thinking. Fully archived terminal tabs may be reused only after fresh live inspection. Lithuania512 remains ready-unpublished and may pair with a future complete eligible country. X242 and every recorded URL are unchanged. No new automation, worker, task, subagent or guardian."
+  "nextSafeAction": "After this partial-country closure and proof carrier reach HEAD/origin/PR parity, keep Qatar513 scenes2079-2082 terminal. No further Meta request or ChatGPT edit for these occurrences. Qatar has3 accepted scenes and no fourth image; it is X-ineligible without explicit partial-country authorization or a separately authorized safe completion workflow. Advance the fresh render queue to Jamaica514 scenes2083-2086 at campaign index137, using unchanged deterministic rolls, exact938,936,937 anchors, leesha007 and Thinking. Fully archived terminal tabs may be reused only after fresh live inspection. Lithuania512 remains ready-unpublished and may pair with a future complete eligible country. X242 and every recorded URL are unchanged. No new automation, worker, task, subagent or guardian.",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/final-remote-closure-verification.json",
+  "finalPayloadCommit": "e5b2cc886ab4ff32f39c253e36a4aed3b043ff20",
+  "finalRemoteVerifiedAtUtc": "2026-09-08T11:33:00.465Z",
+  "allFinalPayloadByteChecksPassed": true
 }
