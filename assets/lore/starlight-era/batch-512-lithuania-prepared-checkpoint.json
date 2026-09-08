@@ -53,6 +53,10 @@
     1949,
     1950
   ],
-  "nextSafeAction": "Commit staging, verify remote payload and PR parity, persist one-initial-occurrence dispatch guard and activate each Send once only.",
-  "stagedAtUtc": "2026-09-08T09:48:27.306Z"
+  "nextSafeAction": "Verify proof carrier HEAD/origin/PR and actual composer state, reserve each initial activation durably, then click Send once and immediately preserve each receipt. No additional activation for an uncertain result.",
+  "stagedAtUtc": "2026-09-08T09:48:27.306Z",
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-remote-preflight.json",
+  "preflightPayloadCommit": "12e1aab3b166194048654c34c140575ad44aed2d",
+  "preflightVerifiedAtUtc": "2026-09-08T09:49:53.598Z",
+  "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-dispatch-guard.json"
 }
