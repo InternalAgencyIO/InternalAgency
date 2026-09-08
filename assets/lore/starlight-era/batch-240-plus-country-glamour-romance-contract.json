@@ -3,7 +3,7 @@
     "schemaVersion": 1,
     "batch": 515,
     "country": "Gambia",
-    "state": "preflight-verified-awaiting-proof-carrier-parity",
+    "state": "all-four-terminal-sources-archived-single-edits-not-invoked",
     "createdAtUtc": "2026-09-08T14:14:52.500Z",
     "sceneRange": [
       2087,
@@ -20,7 +20,7 @@
     "previousClosure": "assets/lore/starlight-era/batch-514-lithuania-jamaica-pair-publication-closure-checkpoint.json",
     "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/pair-final-remote-publication-verification.json",
     "baseRemoteVerifiedHead": "b2dc2b4e1442c34645947c3a933544d8ad596fc0",
-    "providerSendActivations": 0,
+    "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "publicationState": "not-ready-no-eligible-companion",
     "xPostCount": 244,
@@ -32,13 +32,17 @@
       "Oman499",
       "Switzerland455"
     ],
-    "nextSafeAction": "Commit and verify staged exact prompts, local and remote anchor bytes, current HEAD/origin/branch/PR parity; then recheck all four live composers immediately before exactly one initial Send per new occurrence.",
+    "nextSafeAction": "Commit and remotely verify every original, QA/ALT and frozen edit intent, then reserve and consume exactly one built-in imagegen tailoring invocation for each selected usable source. No provider retries or reopening terminal scenes.",
     "stagedAtUtc": "2026-09-08T14:20:15.216Z",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "a369c5b8f9502d50242eb4912385c3edd5671981",
     "preflightVerifiedAtUtc": "2026-09-08T14:22:57.706Z",
-    "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-dispatch-guard.json"
+    "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-dispatch-guard.json",
+    "sourceArchiveComplete": true,
+    "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/native-raw-archive-manifest.json",
+    "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-source-qa.json",
+    "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/single-chatgpt-edit-intents.json"
   },
   "currentLithuaniaJamaicaPairPublication514": {
     "schemaVersion": 1,

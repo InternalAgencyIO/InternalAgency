@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 515,
   "createdAtUtc": "2026-09-08T14:14:52.500Z",
-  "state": "all-four-staged-not-sent",
+  "state": "four-initial-activations-issued-awaiting-source-closure",
   "maximumInitialActivationsPerScene": 1,
   "orderedAnchors": [
     {
@@ -46,7 +46,7 @@
       "promptCharacters": 5032,
       "fileSha256": "f17ad2f811ebfda1b2cc895d69ee150d6bdf2b860bd7fd71c48f2466d4c769c3",
       "fileBytes": 5033,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -54,9 +54,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
+      "providerUrl": "https://www.meta.ai/prompt/d224ca06-befd-4dd2-a0e8-5da4bf6aa853",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2087-initial-send-receipt.json"
     },
     {
       "occurrenceId": "batch-515-scene-2088-meta-initial",
@@ -67,7 +69,7 @@
       "promptCharacters": 5567,
       "fileSha256": "460dfdbe1797e0c59160c96542b823f67e4e94b5a8e0c1619261dd25775d611a",
       "fileBytes": 5568,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -75,9 +77,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
+      "providerUrl": "https://www.meta.ai/prompt/c844906d-3c76-42d7-bd38-79e21e89d0b8",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2088-initial-send-receipt.json"
     },
     {
       "occurrenceId": "batch-515-scene-2089-meta-initial",
@@ -88,7 +92,7 @@
       "promptCharacters": 5163,
       "fileSha256": "58e5e958c4cb3baf341e47d736d55cf0d7f1d895209691ee474e082e28c8685e",
       "fileBytes": 5164,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -96,9 +100,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
+      "providerUrl": "https://www.meta.ai/prompt/ca2820b9-1373-487f-91bd-32c3b4d1b36c",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2089-initial-send-receipt.json"
     },
     {
       "occurrenceId": "batch-515-scene-2090-meta-initial",
@@ -109,7 +115,7 @@
       "promptCharacters": 5547,
       "fileSha256": "b3f527b83dddd3d9fc76609ccafd471c77b9c1cee20b7327723a2a6e860aabcc",
       "fileBytes": 5548,
-      "providerSendActivations": 0,
+      "providerSendActivations": 1,
       "account": "leesha007",
       "mode": "Thinking",
       "anchorOrder": [
@@ -117,9 +123,11 @@
         936,
         937
       ],
-      "state": "prepared-not-sent",
+      "state": "confirmed-provider-conversation-created-do-not-resend",
       "onUncertain": "Do not repeat. Reconcile actual provider history and ledger first.",
-      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json"
+      "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
+      "providerUrl": "https://www.meta.ai/prompt/5365c73a-2fab-41fd-a5b6-a4256833a221",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2090-initial-send-receipt.json"
     }
   ],
   "promptTextFileConvention": "UTF-8 no BOM. Exactly the dispatched prompt plus one archival final LF; prompt hash excludes that LF.",
