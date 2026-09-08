@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 510,
   "country": "Armenia",
-  "state": "all-four-sources-qa-ready-zero-edits",
+  "state": "four-stills-accepted-unpublished-pending-final-remote-proof",
   "preparedAtUtc": "2026-09-08T05:29:36.414Z",
   "accountRequired": "leesha007",
   "mode": "Thinking",
@@ -16,7 +16,7 @@
       "scene": 2067,
       "occurrenceId": "batch-510-scene-2067-meta-initial",
       "kind": "initial",
-      "state": "submitted-provider-occurrence-confirmed",
+      "state": "terminal-source-archived-scene-accepted",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2067-initial-prompt.txt",
@@ -41,7 +41,7 @@
       "scene": 2068,
       "occurrenceId": "batch-510-scene-2068-meta-initial",
       "kind": "initial",
-      "state": "submitted-provider-occurrence-confirmed",
+      "state": "terminal-source-archived-scene-accepted",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-initial-prompt.txt",
@@ -66,7 +66,7 @@
       "scene": 2069,
       "occurrenceId": "batch-510-scene-2069-meta-initial",
       "kind": "initial",
-      "state": "submitted-provider-occurrence-confirmed",
+      "state": "terminal-source-archived-scene-accepted",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-initial-prompt.txt",
@@ -91,7 +91,7 @@
       "scene": 2070,
       "occurrenceId": "batch-510-scene-2070-meta-initial",
       "kind": "initial",
-      "state": "submitted-provider-occurrence-confirmed",
+      "state": "terminal-source-archived-scene-accepted",
       "activationCount": 1,
       "maximumInitialActivations": 1,
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2070-initial-prompt.txt",
@@ -118,8 +118,8 @@
   "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
-  "currentCheckpoint": "assets/lore/starlight-era/batch-510-armenia-source-qa-checkpoint.json",
+  "chatgptEditInvocations": 4,
+  "currentCheckpoint": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-510-armenia-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-510-armenia-fixed-rolls.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-intents.json",
@@ -130,7 +130,7 @@
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-full-workflow-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/full-workflow-remote-verification.json",
-  "nextSafeAction": "After current HEAD/origin/PR and exact source, anchor and prompt byte verification, make one and only one built-in ChatGPT tailoring invocation for each scene 2067-2070. A block, error or interruption consumes that scene allowance. Preserve all results, select the best usable version and perform final QA/ALT/media closure before preparing the next country or X reservation. Never resend initial prompts or request aesthetic Meta variations.",
+  "nextSafeAction": "Verify final raw/edit bytes, sidecars, ledgers and closure manifest against origin and PR13. Once final remote parity passes, inspect the current country cursor and prepare Namibia in the same four visible Meta lanes, using new immutable rolls, Thinking on leesha007 and the exact anchors 938,936,937. Never reopen accepted Armenia scenes or repeat any edit. Publish Armenia only after an eligible companion country is accepted, all-version duplicate checks and @dogramaci/ALT/AI-label/staging gates pass.",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/source-and-edit-preflight-remote-verification.json",
   "preflightPayloadCommit": "b300ee53c19017eecd083028fe1f505b445511fb",
   "preflightVerifiedAtUtc": "2026-09-08T06:12:26.732Z",
@@ -146,7 +146,125 @@
     2070
   ],
   "inFlightScenes": [],
-  "savedMediaFiles": 16,
-  "uniqueMediaVersions": 12,
-  "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json"
+  "savedMediaFiles": 18,
+  "uniqueMediaVersions": 14,
+  "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json",
+  "chatgptEdits": [
+    {
+      "scene": 2067,
+      "state": "tool-returned",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:17:02.449Z",
+      "invocationCount": 1,
+      "promptSha256": "63599EBFC9C678C917A0579A8DF4620763CE806CA4610A60D37DC15FD9A42E25",
+      "sourceSha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-8988e530-981b-4068-aa68-2cc25dd624db.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "image_url_type": "string",
+        "keys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "allowanceConsumed": true,
+      "neverRetry": true,
+      "savedOutput": {
+        "scene": 2067,
+        "provider": "built-in image_gen",
+        "kind": "single-tailoring-pass",
+        "generatedSourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-8988e530-981b-4068-aa68-2cc25dd624db.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+        "bytes": 2266341,
+        "sha256": "a84b9105cb0bbd3de6b91e238ab61c98d41829ea5d1db1dc4d18968daa2911fb",
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "preservedAtUtc": "2026-09-08T06:21:44.161Z",
+        "invocationCount": 1,
+        "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp",
+        "state": "saved-pending-final-qa"
+      },
+      "blockReceipt": null,
+      "choice": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png"
+    },
+    {
+      "scene": 2068,
+      "state": "blocked-or-failed-allowance-consumed",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:18:14.801Z",
+      "invocationCount": 1,
+      "promptSha256": "6622BC3D910C9951F28E194E9CB5A1AC481C08E8F302B5EAB3469627FA65C68A",
+      "sourceSha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 042c40e3-3ad0-4352-b31f-f5fd8553a811. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "neverRetry": true,
+      "allowanceConsumed": true,
+      "savedOutput": null,
+      "blockReceipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block.json",
+      "choice": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp"
+    },
+    {
+      "scene": 2069,
+      "state": "blocked-or-failed-allowance-consumed",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:20:44.043Z",
+      "invocationCount": 1,
+      "promptSha256": "FBDB24CF0AB15E9F03B9B7B25FC4E798CBBDAB24A3D3F8BDFB60AC338F1296D4",
+      "sourceSha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 2c95280b-d44e-47d2-a511-3d309c23923b. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "neverRetry": true,
+      "allowanceConsumed": true,
+      "savedOutput": null,
+      "blockReceipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block.json",
+      "choice": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp"
+    },
+    {
+      "scene": 2070,
+      "state": "tool-returned",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:21:48.648Z",
+      "invocationCount": 1,
+      "promptSha256": "CDB775BFD844F28B8FE0663F002B3B87CA15840C90E7E5BFF489A7E73D5FCE8E",
+      "sourceSha256": "310eea7a6f26eb538f0aa37f021a10d1a1e4e935c50294adbe2d887e02f2663f",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-ae10c90f-60cd-4d35-abba-aefb0a2584c3.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "image_url_type": "string",
+        "keys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "allowanceConsumed": true,
+      "neverRetry": true,
+      "savedOutput": {
+        "scene": 2070,
+        "provider": "built-in image_gen",
+        "kind": "single-tailoring-pass",
+        "generatedSourcePath": "C:/Users/A/.codex/generated_images/01a05628-8ac9-70a2-8da9-eaa61cabf43f/exec-ae10c90f-60cd-4d35-abba-aefb0a2584c3.png",
+        "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png",
+        "bytes": 2317232,
+        "sha256": "c895677899790e4aa7ed4f31166297cc3d9f5de49397f7cfd3a11f9bbdcd8d1a",
+        "dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "preservedAtUtc": "2026-09-08T06:24:07.327Z",
+        "invocationCount": 1,
+        "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-gallery-original.webp",
+        "state": "saved-unused-frame-invariant-deviation"
+      },
+      "blockReceipt": null,
+      "choice": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-gallery-original.webp"
+    }
+  ],
+  "chatgptReturnedImages": 2,
+  "chatgptBlockedScenes": [
+    2068,
+    2069
+  ],
+  "allAllowancesTerminal": true,
+  "additionalMetaSendsAllowed": 0,
+  "additionalChatgptEditsAllowed": 0,
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-selection-qa.json"
 }

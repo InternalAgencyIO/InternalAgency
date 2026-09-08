@@ -8,8 +8,8 @@
     {
       "scene": 2067,
       "occurrenceId": "batch-510-scene-2067-chatgpt-single-tailoring",
-      "state": "prepared-awaiting-remote-source-preflight",
-      "invocationCount": 0,
+      "state": "tool-returned",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2067,
@@ -54,13 +54,18 @@
       ],
       "sourceSpecificLimits": "Source-specific limit: retain the actual 1152x2048 full rectangle, all four exact faces, poses, hands and background. Shorten visible mini hems only within secure fully opaque wearable tailoring. Keep every midriff covered. Use the first image as the sole edit target; the following three plates are face-identity references only in order 938,936,937. Do not restage or rotate the finished image.",
       "neverRetry": true,
-      "maximumOutputImages": 1
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:17:02.449Z",
+      "additionalInvocationsAllowed": 0,
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png.receipt.json"
     },
     {
       "scene": 2068,
       "occurrenceId": "batch-510-scene-2068-chatgpt-single-tailoring",
-      "state": "prepared-awaiting-remote-source-preflight",
-      "invocationCount": 0,
+      "state": "blocked-or-failed-allowance-consumed",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2068,
@@ -105,13 +110,18 @@
       ],
       "sourceSpecificLimits": "Source-specific limit: retain the actual 1152x2048 couch crop, four exact faces, reclined supported pose, hands, rainbow legwear and background. Do not force a head-on-lap pose or manufacture a closer camera. Keep footwear and concealed garment backs offscreen. Shorten only visible opaque hems within secure coverage and cover the small gap at the blonde woman Radiance midriff, as her immutable roll requires. Never uncover an intimate area. The first image is the sole edit target; the next three plates are identity references only in order 938,936,937.",
       "neverRetry": true,
-      "maximumOutputImages": 1
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:18:14.801Z",
+      "additionalInvocationsAllowed": 0,
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block.json"
     },
     {
       "scene": 2069,
       "occurrenceId": "batch-510-scene-2069-chatgpt-single-tailoring",
-      "state": "prepared-awaiting-remote-source-preflight",
-      "invocationCount": 0,
+      "state": "blocked-or-failed-allowance-consumed",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2069,
@@ -156,13 +166,18 @@
       ],
       "sourceSpecificLimits": "Source-specific limit: retain the actual 1152x2048 full rectangle, all four exact faces, supported standing-and-seated hug/reach poses, hands, furniture and forest-window background. Tailor the visible opaque mini hems to a shorter secure wearable silhouette without exposing underwear or an intimate area. Keep the naturally varied shoes and restore the recorded silver finish only on Ellie visible boots if feasible in this one clothing pass. Do not restage or rotate the finished image. Image 1 is the sole edit target; Images 2-4 are face-identity references only in order 938,936,937.",
       "neverRetry": true,
-      "maximumOutputImages": 1
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:20:44.043Z",
+      "additionalInvocationsAllowed": 0,
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block.json"
     },
     {
       "scene": 2070,
       "occurrenceId": "batch-510-scene-2070-chatgpt-single-tailoring",
-      "state": "prepared-awaiting-remote-source-preflight",
-      "invocationCount": 0,
+      "state": "tool-returned",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2070,
@@ -207,13 +222,22 @@
       ],
       "sourceSpecificLimits": "Source-specific limit overrides offscreen base instructions: retain the actual 1152x2048 close gallery rectangle, all four exact faces, hands, expressions, garments and background. Only tailor fabric already visible in this crop, with sharper seams and a shorter visible hem only if it already appears. Hidden hems, legs, shoes, navels and backs must remain hidden. Do not outpaint, move the camera, introduce new skin exposure or add any new contact. Preserve the subtle distant imaginary smoke, not a real disaster. The first image is the sole edit target; the next three plates are identity references only in order 938,936,937.",
       "neverRetry": true,
-      "maximumOutputImages": 1
+      "maximumOutputImages": 1,
+      "allowanceConsumed": true,
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:21:48.648Z",
+      "additionalInvocationsAllowed": 0,
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png.receipt.json"
     }
   ],
   "deferredScenes": [],
-  "invocations": 0,
+  "invocations": 4,
   "updatedAtUtc": "2026-09-08T06:09:39.580Z",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/source-and-edit-preflight-remote-verification.json",
   "preflightPayloadCommit": "b300ee53c19017eecd083028fe1f505b445511fb",
-  "preflightVerifiedAtUtc": "2026-09-08T06:12:26.732Z"
+  "preflightVerifiedAtUtc": "2026-09-08T06:12:26.732Z",
+  "state": "all-four-single-edit-allowances-terminal",
+  "executionCell": "2196",
+  "executionCellComplete": true,
+  "results": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-results.json"
 }

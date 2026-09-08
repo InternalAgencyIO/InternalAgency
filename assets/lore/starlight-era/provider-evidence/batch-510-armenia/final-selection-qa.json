@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "batch": 510,
+  "country": "Armenia",
+  "reviewedAtUtc": "2026-09-08T06:29:45.925Z",
+  "policy": "Accept usable public-safe output with recorded soft deviations. One single edit invocation per scene only. No aesthetic retries, repeat edits or reopening terminal scenes.",
+  "perScene": [
+    {
+      "scene": 2067,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+      "selectedSha256": "a84b9105cb0bbd3de6b91e238ab61c98d41829ea5d1db1dc4d18968daa2911fb",
+      "technicalQa": "pass",
+      "fourFictionalAdults": true,
+      "opaqueCoverage": true,
+      "sourceFrameDecision": "Source framing retained by selected edit",
+      "notes": [
+        "Four distinct fictional adult faces, supported back hug and handclasp, opaque dresses, plausible seated anatomy and usable source bytes.",
+        "Source is a broad seated/full-height editorial, not the exact intermediate over-shoulder 17-degree tilt. Garment geometry and stocking text are imperfect. Keep actual framing; no aesthetic retry."
+      ],
+      "metaInitialSends": 1,
+      "metaRetries": 0,
+      "chatgptInvocations": 1,
+      "chatgptOutcome": "returned-edit-selected",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptInvocationsAllowed": 0
+    },
+    {
+      "scene": 2068,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp",
+      "selectedSha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+      "technicalQa": "pass",
+      "fourFictionalAdults": true,
+      "opaqueCoverage": true,
+      "sourceFrameDecision": "Original source retained after blocked edit",
+      "notes": [
+        "Four distinct fictional adult faces, affectionate couch cluster, opaque garments and no intimate-area aim. Usable source bytes.",
+        "Source includes torsos, legs and rainbow hosiery rather than the extreme-close requested crop; the head rests against cushions rather than fully on a lap. Preserve the actual pose and crop. Radiance has a small unrolled midriff gap to cover in the single tailoring pass."
+      ],
+      "metaInitialSends": 1,
+      "metaRetries": 0,
+      "chatgptInvocations": 1,
+      "chatgptOutcome": "attributed-output-moderation-block-original-selected",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptInvocationsAllowed": 0
+    },
+    {
+      "scene": 2069,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp",
+      "selectedSha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "technicalQa": "pass",
+      "fourFictionalAdults": true,
+      "opaqueCoverage": true,
+      "sourceFrameDecision": "Original source retained after blocked edit",
+      "notes": [
+        "Four distinct fictional adult faces, supported side hug and reaching hands, opaque garments, plausible anatomy and complete usable source bytes. The final gallery matches directly viewed internal variant 03 byte-for-byte.",
+        "Actual crop is wider and more upright than the intermediate 19-degree Dutch brief. Flag bands repeat across garment sections and Ellie has green rather than silver boots. These are recorded soft styling deviations, not a Meta retry. Preserve pose and frame in the single tailoring pass."
+      ],
+      "metaInitialSends": 1,
+      "metaRetries": 0,
+      "chatgptInvocations": 1,
+      "chatgptOutcome": "attributed-output-moderation-block-original-selected",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptInvocationsAllowed": 0
+    },
+    {
+      "scene": 2070,
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-gallery-original.webp",
+      "selectedSha256": "310eea7a6f26eb538f0aa37f021a10d1a1e4e935c50294adbe2d887e02f2663f",
+      "technicalQa": "pass",
+      "fourFictionalAdults": true,
+      "opaqueCoverage": true,
+      "sourceFrameDecision": "Closer Meta source retained; expanded edit unused",
+      "notes": [
+        "All six exposed versions show four fictional adults, affectionate shoulder touches or handclasp, opaque fashion and a lake-window set. The gallery is the closest face-led grouping and is a usable source.",
+        "The final gallery is still wider than face-and-shoulder-only and has a subtler tilt. Preserve that actual crop; do not invent offscreen shoes, hems, navels or extra skin. Distant mushroom-shaped smoke is imaginary and requires synthetic-disaster disclosure."
+      ],
+      "metaInitialSends": 1,
+      "metaRetries": 0,
+      "chatgptInvocations": 1,
+      "chatgptOutcome": "returned-edit-archived-unused-crop-expansion-original-selected",
+      "additionalMetaSendsAllowed": 0,
+      "additionalChatgptInvocationsAllowed": 0
+    }
+  ],
+  "returnedEditQa": [
+    {
+      "schemaVersion": 1,
+      "batch": 510,
+      "scene": 2067,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+      "sha256": "a84b9105cb0bbd3de6b91e238ab61c98d41829ea5d1db1dc4d18968daa2911fb",
+      "bytes": 2266341,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "reviewedAtUtc": "2026-09-08T06:22:49.346Z",
+      "reviewMethod": "Main agent directly reviewed the full returned native image shown by the built-in tool and compared it with the previously viewed exact Meta source.",
+      "fourFictionalAdults": true,
+      "opaqueCoverage": true,
+      "sourceFramePreserved": true,
+      "identityContinuity": "Four distinct adult faces and braided/blonde/dark-haired/brunette order preserved; small render-texture differences are accepted.",
+      "anatomy": "Supported seated and standing positions, handclasp and back hug remain plausible. No extra or missing person.",
+      "tailoring": "Visible opaque minis are shorter and more sharply fitted, with covered midriffs, existing side-back construction, legwear and varied footwear retained.",
+      "softDeviations": [
+        "The source broad crop and subtle rather than rolled Dutch tilt are retained.",
+        "Not every small tattoo or stocking-lettering detail is exact. No second edit or aesthetic render is authorized."
+      ],
+      "decision": "preferred-usable-version-pending-remote-closure",
+      "publicEligibility": false,
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png.alt.txt",
+      "sourcePath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp",
+      "singleEditIntent": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-intents.json",
+      "invocationCount": 1
+    },
+    {
+      "schemaVersion": 1,
+      "batch": 510,
+      "scene": 2070,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png",
+      "sha256": "c895677899790e4aa7ed4f31166297cc3d9f5de49397f7cfd3a11f9bbdcd8d1a",
+      "bytes": 2317232,
+      "dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "reviewedAtUtc": "2026-09-08T06:27:42.746Z",
+      "reviewMethod": "Main agent directly reviewed the returned native image and compared it with the exact local Meta gallery source.",
+      "fourFictionalAdults": true,
+      "opaqueCoverage": true,
+      "sourceFramePreserved": false,
+      "decision": "unused-source-crop-invariant-deviation",
+      "notes": [
+        "The edit introduces clearly visible knees, rainbow boots/legwear and lower-body details beyond the original close gallery crop.",
+        "The invariant explicitly required hidden lower-body details to remain hidden. The original closer Meta gallery is selected.",
+        "Keep this returned PNG as unused evidence. The single edit allowance is spent; no second pass or aesthetic render."
+      ],
+      "altPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png.alt.txt",
+      "publicEligibility": false
+    }
+  ],
+  "rawFilesSaved": 16,
+  "returnedEditFiles": 2,
+  "allSavedFiles": 18,
+  "uniqueSavedByteVersions": 14,
+  "generatedSceneFiles": 18,
+  "providerContextReferenceFiles": 0,
+  "missingObservedOriginals": [],
+  "attributedOutputBlocks": [
+    {
+      "scene": 2068,
+      "requestId": "042c40e3-3ad0-4352-b31f-f5fd8553a811",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block.json",
+      "prompt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-single-edit-exact-prompt.txt"
+    },
+    {
+      "scene": 2069,
+      "requestId": "2c95280b-d44e-47d2-a511-3d309c23923b",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block.json",
+      "prompt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-single-edit-exact-prompt.txt"
+    }
+  ],
+  "archiveException": null,
+  "duplicateCheck": {
+    "checkedAtUtc": "2026-09-08T06:29:45.925Z",
+    "ledger": "assets/lore/starlight-era/world-x-publish-ledger.json",
+    "postCount": 240,
+    "allSavedVersionsChecked": 18,
+    "hits": []
+  },
+  "allFourSceneAllowancesTerminal": true
+}

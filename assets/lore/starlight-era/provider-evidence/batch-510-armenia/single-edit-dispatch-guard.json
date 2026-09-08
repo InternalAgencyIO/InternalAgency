@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "batch": 510,
+  "country": "Armenia",
+  "state": "four-invocations-terminal",
+  "reservedAtUtc": "2026-09-08T06:15:14.029Z",
+  "authorityHead": "3e3b3cd1c3aa7e9022a23a38f90556819cced0f7",
+  "sourcePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/source-and-edit-preflight-remote-verification.json",
+  "plannedInvocations": 4,
+  "confirmedResults": 4,
+  "rule": "Each listed occurrence may be invoked once in this execution boundary. If interrupted, conservatively treat the allowance as consumed until actual tool outcomes are reconciled. Never automatically repeat it.",
+  "occurrences": [
+    {
+      "scene": 2067,
+      "state": "tool-returned",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:17:02.449Z",
+      "invocationCount": 1,
+      "promptSha256": "63599EBFC9C678C917A0579A8DF4620763CE806CA4610A60D37DC15FD9A42E25",
+      "sourceSha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-8988e530-981b-4068-aa68-2cc25dd624db.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "image_url_type": "string",
+        "keys": [
+          "image_url",
+          "output_hint"
+        ]
+      }
+    },
+    {
+      "scene": 2068,
+      "state": "blocked-or-failed-allowance-consumed",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:18:14.801Z",
+      "invocationCount": 1,
+      "promptSha256": "6622BC3D910C9951F28E194E9CB5A1AC481C08E8F302B5EAB3469627FA65C68A",
+      "sourceSha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 042c40e3-3ad0-4352-b31f-f5fd8553a811. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "neverRetry": true
+    },
+    {
+      "scene": 2069,
+      "state": "blocked-or-failed-allowance-consumed",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:20:44.043Z",
+      "invocationCount": 1,
+      "promptSha256": "FBDB24CF0AB15E9F03B9B7B25FC4E798CBBDAB24A3D3F8BDFB60AC338F1296D4",
+      "sourceSha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 2c95280b-d44e-47d2-a511-3d309c23923b. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "neverRetry": true
+    },
+    {
+      "scene": 2070,
+      "state": "tool-returned",
+      "startedAtUtc": "2026-09-08T06:15:40.432Z",
+      "completedAtUtc": "2026-09-08T06:21:48.648Z",
+      "invocationCount": 1,
+      "promptSha256": "CDB775BFD844F28B8FE0663F002B3B87CA15840C90E7E5BFF489A7E73D5FCE8E",
+      "sourceSha256": "310eea7a6f26eb538f0aa37f021a10d1a1e4e935c50294adbe2d887e02f2663f",
+      "result": {
+        "output_hint": "Generated images are saved to C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f as C:\\Users\\A\\.codex\\generated_images\\01a05628-8ac9-70a2-8da9-eaa61cabf43f\\exec-ae10c90f-60cd-4d35-abba-aefb0a2584c3.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+        "image_url_type": "string",
+        "keys": [
+          "image_url",
+          "output_hint"
+        ]
+      }
+    }
+  ],
+  "actualInvocations": 4,
+  "executionCell": "2196",
+  "executionCellComplete": true,
+  "results": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-results.json",
+  "additionalInvocationsAllowed": 0
+}

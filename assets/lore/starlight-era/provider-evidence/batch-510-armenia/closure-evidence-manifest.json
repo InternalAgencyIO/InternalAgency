@@ -1,0 +1,853 @@
+{
+  "schemaVersion": 1,
+  "batch": 510,
+  "country": "Armenia",
+  "sealedAtUtc": "2026-09-08T06:30:45.232Z",
+  "state": "immutable-final-payload-snapshot",
+  "snapshotSemantics": "Hashes describe archived local bytes in this final payload. Later remote-proof carriers and publication-state changes do not rewrite this snapshot. Resolve snapshot files at the recorded final payload commit.",
+  "providerFiles": 16,
+  "returnedEditFiles": 2,
+  "totalSavedImageFiles": 18,
+  "generatedSceneFiles": 18,
+  "providerContextReferenceFiles": 0,
+  "uniqueSavedByteVersions": 14,
+  "acceptedFiles": 4,
+  "attributedOutputBlocks": [
+    {
+      "scene": 2068,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block.json",
+      "prompt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-single-edit-exact-prompt.txt",
+      "error": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block-error.txt"
+    },
+    {
+      "scene": 2069,
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block.json",
+      "prompt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-single-edit-exact-prompt.txt",
+      "error": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block-error.txt"
+    }
+  ],
+  "missingObservedOriginals": [],
+  "files": [
+    {
+      "path": "assets/lore/starlight-era/batch-510-armenia-editorial-brief.json",
+      "bytes": 13079,
+      "sha256": "176d8a36a8170c4f5fde82eafd85a1d537a58c6d25b4d65af9eff2af6b1da5b8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-510-armenia-fixed-rolls.json",
+      "bytes": 140725,
+      "sha256": "412e3305606c2e1d3edfac8a54a317693f276fafee2e5a4c3cc11eb01ab86cb1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json",
+      "bytes": 3487,
+      "sha256": "a4942c3618e7ac9c0afc9bcbfd3212f5e52fd8074254cdde5a03a76b455f0492",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-510-armenia-initial-dispatch-checkpoint.json",
+      "bytes": 4337,
+      "sha256": "129ccc31427a32948bfdb5a551c2c93768d4dd2c47b7e4ed8672d7269b6ad701",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-510-armenia-prepared-checkpoint.json",
+      "bytes": 4440,
+      "sha256": "d9e80059796bbbd826cb9b9d2206d0340170027ba93302712103c7a5626e4197",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-510-armenia-single-edit-inflight-checkpoint.json",
+      "bytes": 7599,
+      "sha256": "9c274a5df37b49487cdf6911138a4160d719b24290a6865341089af5c0c32ef6",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/batch-510-armenia-source-qa-checkpoint.json",
+      "bytes": 5060,
+      "sha256": "8d20dd9307d74e62c9ee3f49e230ec07a1a738214bd96869cb38c2fbef78ab65",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-accessibility.json",
+      "bytes": 954,
+      "sha256": "8be804bb8d158ba651e9f29106a4b7b73e39e71ec18e3637f87b5852528896da",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+      "bytes": 2266341,
+      "sha256": "a84b9105cb0bbd3de6b91e238ab61c98d41829ea5d1db1dc4d18968daa2911fb",
+      "selected": true,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png.alt.txt",
+      "bytes": 417,
+      "sha256": "ad90d4de869e25b81dab0dc94519340f9f871658c15b633965162a3de10faba5",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png.qa.json",
+      "bytes": 1797,
+      "sha256": "926dad5204f7a515eb0f8d27e377c09e9fd2ee91f11c33222f5e930235d62ddc",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png.receipt.json",
+      "bytes": 733,
+      "sha256": "5ceb8bdd86c4b3eb3673bb9c7548b91730b15f141bae6d25971926c06b6467f4",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-exact-prompt-ordered-anchors-visible.jpg",
+      "bytes": 125462,
+      "sha256": "bca20a97e09930c08d54cd20e75f08268fc0d5a0895116b197f7dd1543a5e2e3",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-initial-response-visible.jpg",
+      "bytes": 112351,
+      "sha256": "5ab7609f0b925568c0afdaf53d6fea7554027a206e1976bbf4a61c2f64837baa",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-initial-send-receipt.json",
+      "bytes": 25339,
+      "sha256": "4e216a395b44a5ecd732d63c7c225f87982fcfda612a2c4721d92def401bad4e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-download-button-jpeg.jpg",
+      "bytes": 244986,
+      "sha256": "78dc37ce7736a51995cb7547e55cd0589046187428356b587e106054339008d6",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-download-button-jpeg.jpg.alt.txt",
+      "bytes": 348,
+      "sha256": "5709198553db67cfc03d489f743d3745a217efe88f032ed5da6559880b70b320",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-download-button-jpeg.jpg.qa.json",
+      "bytes": 1311,
+      "sha256": "7d85c251819e057d6816f875b3c735d00576d1bde313bceed4ddb88f4fd09fcb",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp",
+      "bytes": 480900,
+      "sha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp.alt.txt",
+      "bytes": 348,
+      "sha256": "5709198553db67cfc03d489f743d3745a217efe88f032ed5da6559880b70b320",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp.qa.json",
+      "bytes": 1270,
+      "sha256": "8f2a4aa15016647b525854d4ac8e3789ab70c92d1827c430ddb0f9fee79eaf0e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-internal-01-original.webp",
+      "bytes": 480900,
+      "sha256": "4d475033ff4469a3700b8654e90b652cb87899d4564bba407e10e8f276496751",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-internal-01-original.webp.alt.txt",
+      "bytes": 348,
+      "sha256": "5709198553db67cfc03d489f743d3745a217efe88f032ed5da6559880b70b320",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-internal-01-original.webp.qa.json",
+      "bytes": 1301,
+      "sha256": "d39e76c64413d6df472b7250427021b490363ded7862a7d70f1098fd7e4bb242",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-terminal-source-response-visible.jpg",
+      "bytes": 111309,
+      "sha256": "2b644417658b98137516c4db0949df7b0098caba64206dff5595b49117b7c1b7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-accessibility.json",
+      "bytes": 921,
+      "sha256": "07db09bfc93fd0904618fb58b1e4a219a44cfd50271be9696e6597960634a8f7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-exact-prompt-ordered-anchors-visible.jpg",
+      "bytes": 126757,
+      "sha256": "61a87be5c4fa622700c984aceebdcdf498b2596b76f2ddd5493d2cfe55ebc231",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-initial-response-visible.jpg",
+      "bytes": 113339,
+      "sha256": "22deb1bbd01246e8996e0741d172a71ebe6fc228a8e78b5c0cc4be633e95fdac",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-initial-send-receipt.json",
+      "bytes": 30121,
+      "sha256": "a5583debaa8e104d5226bd2d057280ef6c616cbe7946e1963529dc307fb3a211",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp",
+      "bytes": 455462,
+      "sha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+      "selected": true,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp.alt.txt",
+      "bytes": 383,
+      "sha256": "20d7868e55ed750b491073d5ea35d6049d0feedde5a2e7f8948dee36f9df629e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp.qa.json",
+      "bytes": 1336,
+      "sha256": "55eabb9f3cf34122259860a42a6761139db206b2364658cad187756246e84aa1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-internal-01-original.webp",
+      "bytes": 455462,
+      "sha256": "7e9dafa621458eb1a82826c5fd2cceb478810b757cdb1ee047e9b169fbc0d618",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-internal-01-original.webp.alt.txt",
+      "bytes": 383,
+      "sha256": "20d7868e55ed750b491073d5ea35d6049d0feedde5a2e7f8948dee36f9df629e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-internal-01-original.webp.qa.json",
+      "bytes": 1367,
+      "sha256": "6c9fb3b477b2b20ee6e668643758cb479d58eb810b58c234dded3f4a593e1be6",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block-error.txt",
+      "bytes": 550,
+      "sha256": "5777975baaa3b6d2012d6bd65a0cff01008589f10e073dc8f57df9eca39d135b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block.json",
+      "bytes": 5857,
+      "sha256": "ac07ce55c5bc959bca36ccae27216d767d8f489447831e208e68301c278edd54",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-terminal-source-response-visible.jpg",
+      "bytes": 104097,
+      "sha256": "076be8625bcd93339a8e36554c2bb97eaf32aa45de73bf01714cee23f4ac85a3",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-accessibility.json",
+      "bytes": 892,
+      "sha256": "85c5ac93224c431a78ddc851d788e30b775703ecca536a583fa9af6d5df6be22",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-exact-prompt-ordered-anchors-visible.jpg",
+      "bytes": 126696,
+      "sha256": "b95114b5fee3c63efc7f60b95469d8f0abd1afdb8c2c15d7a42aa9119d119b2c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-initial-response-visible.jpg",
+      "bytes": 105287,
+      "sha256": "c239b7f9bd1d7a0cfcd7bc5e73a70520235ea7766d9497174987dc10f56d1ea7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-initial-send-receipt.json",
+      "bytes": 35946,
+      "sha256": "e4d66f22da109d18d9eb3636d42f3f0154408b5c94caf056db1b63fbfa89527e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp",
+      "bytes": 557424,
+      "sha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "selected": true,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp.alt.txt",
+      "bytes": 354,
+      "sha256": "c9b1f402936db0cfcc3672fa75f91eb356719e173357991224d2bbb95057337c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp.qa.json",
+      "bytes": 1428,
+      "sha256": "2e84dc6ed2644ffb296cdcdfd51e2854b23be925bb97980a14fa0292ed4c6da8",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-01-original.webp",
+      "bytes": 518956,
+      "sha256": "046dd362a8b5a55f94d2c3168b407ea766223c87ed9344af84ec265857612896",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-01-original.webp.alt.txt",
+      "bytes": 354,
+      "sha256": "c9b1f402936db0cfcc3672fa75f91eb356719e173357991224d2bbb95057337c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-01-original.webp.qa.json",
+      "bytes": 1437,
+      "sha256": "f44f9e11b36a03bcec7849a782c05ae58f958347ab3af9ec0fef4c09e00a460d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-02-original.webp",
+      "bytes": 524688,
+      "sha256": "ba024a7c57c985f4366087c1f041d2503449af17ba7e204ae0423697dab42596",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-02-original.webp.alt.txt",
+      "bytes": 354,
+      "sha256": "c9b1f402936db0cfcc3672fa75f91eb356719e173357991224d2bbb95057337c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-02-original.webp.qa.json",
+      "bytes": 1437,
+      "sha256": "f221fe19ee7458d6d27cdf8888b4d1e77948ffe73a02811e8466c7a68c27dc5f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-03-original.webp",
+      "bytes": 557424,
+      "sha256": "243fd21d3228aaf065ed23a27249306775c2d92257feedf17a7eb05a84289fbb",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-03-original.webp.alt.txt",
+      "bytes": 354,
+      "sha256": "c9b1f402936db0cfcc3672fa75f91eb356719e173357991224d2bbb95057337c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-03-original.webp.qa.json",
+      "bytes": 1437,
+      "sha256": "ea61220078729f45b646961d713965bdf6c96879a23abbd5a986a9c18ae02f4a",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block-error.txt",
+      "bytes": 550,
+      "sha256": "ac81755c38411842829deab165f7517a2fd7ec7408ab00350c687324c3104121",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block.json",
+      "bytes": 6122,
+      "sha256": "19c96c85c1a29a932a632bb08d9f6fb2144c237cc4b819a62881756fe4519c0b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-terminal-source-response-visible.jpg",
+      "bytes": 97100,
+      "sha256": "8b93a308c87b41399ab1b1f58ad375c92ca172eb611335f37b86ec535d5b18bf",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-accessibility.json",
+      "bytes": 1024,
+      "sha256": "9c957872abef3e2534b0a0b6384aacff37428baae91f100a7a9ca0af33a8a9fd",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png",
+      "bytes": 2317232,
+      "sha256": "c895677899790e4aa7ed4f31166297cc3d9f5de49397f7cfd3a11f9bbdcd8d1a",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png.alt.txt",
+      "bytes": 386,
+      "sha256": "83052efedb2b3926235b907a35b1ba66c748206801e37c65423b13120050929f",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png.qa.json",
+      "bytes": 1219,
+      "sha256": "2a56882434961eb9800612f68225591bcd739758235b7c318d26454d22d7d9cf",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png.receipt.json",
+      "bytes": 749,
+      "sha256": "85ebdbcefeb83d12fdbeb2333b7f6c9d197a24855a1c3b88769fcfd5fb9d987c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-exact-prompt-ordered-anchors-visible.jpg",
+      "bytes": 126201,
+      "sha256": "ca83333ea0b6c88d5eca5dc66231588b5a65f49a22f470c647e1f1ac3cdd8a17",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-initial-response-visible.jpg",
+      "bytes": 101270,
+      "sha256": "053472eaa245eb3ad59e30c8716e5e7dfed09d7373541e3fee23a604facf2441",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-initial-send-receipt.json",
+      "bytes": 40933,
+      "sha256": "a84924cd3c0d9c4d36adf945d1f1c49130b845c1f4df81222a5fe5824428330b",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-gallery-original.webp",
+      "bytes": 442042,
+      "sha256": "310eea7a6f26eb538f0aa37f021a10d1a1e4e935c50294adbe2d887e02f2663f",
+      "selected": true,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-gallery-original.webp.alt.txt",
+      "bytes": 418,
+      "sha256": "9f91b3d78ba9a06110e78752431ec097b48f11488a60c9243740960f006662a2",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-gallery-original.webp.qa.json",
+      "bytes": 1399,
+      "sha256": "3aa2040b0a9471971cae0e8a3c4b2550d6eb9e4a991e077bd73e2be808aaacc6",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-01-original.webp",
+      "bytes": 427312,
+      "sha256": "4bbd751874da565429884378161995bc44f5c17f3aaf0dcbb6aefb1a2081668b",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-01-original.webp.alt.txt",
+      "bytes": 418,
+      "sha256": "9f91b3d78ba9a06110e78752431ec097b48f11488a60c9243740960f006662a2",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-01-original.webp.qa.json",
+      "bytes": 1430,
+      "sha256": "9a1d0c88ed9fe847cbc94ce58d18221d8fafb298e656fabe348b35c0d4dd019d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-02-original.webp",
+      "bytes": 454432,
+      "sha256": "c558ea116fa8feadbc33eb99857caf21146658e27aeb77d003814b822bd5c7dd",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-02-original.webp.alt.txt",
+      "bytes": 418,
+      "sha256": "9f91b3d78ba9a06110e78752431ec097b48f11488a60c9243740960f006662a2",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-02-original.webp.qa.json",
+      "bytes": 1430,
+      "sha256": "76222c4bd46abe166d89c39555a2856b59b65b89d337dedbb384fe29812ac3f3",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-03-original.webp",
+      "bytes": 397078,
+      "sha256": "2c810005eb5ecd2bb5b756b5357da228aa023522d945a2e6385618a9a702c9a7",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-03-original.webp.alt.txt",
+      "bytes": 418,
+      "sha256": "9f91b3d78ba9a06110e78752431ec097b48f11488a60c9243740960f006662a2",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-03-original.webp.qa.json",
+      "bytes": 1430,
+      "sha256": "f2d730f7e94bf6bf31bfb76e5ebe1f8d3babcc196e8699fd471eeb68f7ac563c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-04-original.webp",
+      "bytes": 432144,
+      "sha256": "2b04adc20281edd518c58b23f279064a119f783fe0affeeeeeda8a1df01c6d1a",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-04-original.webp.alt.txt",
+      "bytes": 418,
+      "sha256": "9f91b3d78ba9a06110e78752431ec097b48f11488a60c9243740960f006662a2",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-04-original.webp.qa.json",
+      "bytes": 1430,
+      "sha256": "f2a915c73b6a1a21190e4e26732dbd404c3d703f65dfaf97cc70d14c11bd8e0c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-05-original.webp",
+      "bytes": 416000,
+      "sha256": "226e4ed1b436f30a6b6618676c01e7ea6d83044e2d54ba7b786c3273c1ecd18f",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-05-original.webp.alt.txt",
+      "bytes": 418,
+      "sha256": "9f91b3d78ba9a06110e78752431ec097b48f11488a60c9243740960f006662a2",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-05-original.webp.qa.json",
+      "bytes": 1430,
+      "sha256": "5b021cbbba730ff47b120e56542b7c5a9528dafc43c786f41be6c5e32e18f2a0",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-06-original.webp",
+      "bytes": 442042,
+      "sha256": "310eea7a6f26eb538f0aa37f021a10d1a1e4e935c50294adbe2d887e02f2663f",
+      "selected": false,
+      "recordType": "generated-media"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-06-original.webp.alt.txt",
+      "bytes": 418,
+      "sha256": "9f91b3d78ba9a06110e78752431ec097b48f11488a60c9243740960f006662a2",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-06-original.webp.qa.json",
+      "bytes": 1430,
+      "sha256": "6a31c60ff5160c4053e49de815b3a63f457466234d592f1232febf1175ced6a5",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-terminal-source-response-visible.jpg",
+      "bytes": 103599,
+      "sha256": "a8e4120936234aab59caa8b0db005468e485983e5fb1b4fd58f4de343d58c2ee",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
+      "bytes": 8645,
+      "sha256": "61eafab53d51d12ea1d42574d22d41e584b9b7e9777aef12246855f656d40a9e",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json",
+      "bytes": 113647,
+      "sha256": "bdc92707187b02d2fdb9dee93fdb37d1fd443f60dab9f744a36d5aa621601a82",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0555.json",
+      "bytes": 2909,
+      "sha256": "f1907215c21e4b2cfd188ff6ce1bdbb6aa7accf25bea296436deaece6e92f259",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-selection-qa.json",
+      "bytes": 9312,
+      "sha256": "4da9fc5474f999235557070548bb78ca10ec8dd2ec83fcb80da3609b96ee7877",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-composers-staging-evidence.json",
+      "bytes": 38258,
+      "sha256": "64ee17fb6e4cbc34202821ea0fdfc3baed0ccc2fa0975f08cfc7fd93ae285623",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-dispatch-observations.json",
+      "bytes": 130394,
+      "sha256": "3c4773dc9fd01e5a06697d8763a38647bb0c02e03ef4be094e2cc3590ef03f61",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-intents.json",
+      "bytes": 7629,
+      "sha256": "6947217a82e196e2257afbfe483a68f8b395357e77f1ca086c8e13c119ddc082",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-remote-preflight.json",
+      "bytes": 10657,
+      "sha256": "ecd2bade58a0466552e66887897a0656bbf849ab318c7436042e4ce9ed623539",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
+      "bytes": 20071,
+      "sha256": "cde5823b2880447067aa47ad6bdd28c6ad57bbea3b97c7b58ce9ffb13574ca22",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/native-raw-archive-manifest.json",
+      "bytes": 40558,
+      "sha256": "58019a09e3c82c9f8eccffcde6c011b7e53b718840ff2a4db979f1967a0b7fe1",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/provider-ledger.json",
+      "bytes": 15958,
+      "sha256": "29023724f95592502aba7dcacfdc875adbed4802d3a11d6276563018fa2be296",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2067-initial-prompt.txt",
+      "bytes": 4876,
+      "sha256": "8eaf2cfc72763b5db8d2dc3e5dfae46f30d1b12f8506decc683eb711658aa0d4",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2067-single-edit-base-prompt.txt",
+      "bytes": 3291,
+      "sha256": "c55db777dcad551ef946043ab6a9b936e83cbf24c14501ed48851032aacf9346",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2067-single-edit-exact-prompt.txt",
+      "bytes": 3826,
+      "sha256": "eabfded7d2356832eeb8006b259661df609b50c0b5f79da0f7405135edeccff7",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-initial-prompt.txt",
+      "bytes": 4813,
+      "sha256": "e16a0fc9c3c78377db5bc3b3ebfc95a1225445497a49d775befebabd9dd75419",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-single-edit-base-prompt.txt",
+      "bytes": 3213,
+      "sha256": "95d68dc62f66c3e982388a0d2a6d28e4d334608ad2acfd99fd544bdb5962f5ab",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-single-edit-exact-prompt.txt",
+      "bytes": 3909,
+      "sha256": "61ad62fbd9ef0701bc75352278ed0f75a72f4c83ff43091067f7b4d3552b5887",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-initial-prompt.txt",
+      "bytes": 4986,
+      "sha256": "056768b981a26d049654f8f0ebc84d293b2bc32daf8c3960d2c746eec0fc5732",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-single-edit-base-prompt.txt",
+      "bytes": 3446,
+      "sha256": "12ca282d61c41e084fa48439e3000af72707d24a682cc82fae58ffdb34affd79",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-single-edit-exact-prompt.txt",
+      "bytes": 4174,
+      "sha256": "b5b8c67029f434e591d3de730adbfc1b605f358197fb6cb4cc61b2baccf08c99",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2070-initial-prompt.txt",
+      "bytes": 4966,
+      "sha256": "e04c7fec8fdc25dba22469df94c92a9ccaabbb904192f77f0743cf866bbb3940",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2070-single-edit-base-prompt.txt",
+      "bytes": 3192,
+      "sha256": "c69e4e872708111e54c561d2c06bb352f258a2d1c24e61f57369d13d25a7835c",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2070-single-edit-exact-prompt.txt",
+      "bytes": 3962,
+      "sha256": "5bbc350cfd7c9c8c8a4c431b12c476b743548dbe98bb36c9de38d8a2fed14574",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-intents.json",
+      "bytes": 33634,
+      "sha256": "83c90e43e17ab7222899b41b1b2932ddc3d6e05964495ea9a0820bc0b672c6ca",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-results.json",
+      "bytes": 7635,
+      "sha256": "8244762f705ca8424f6c9d671870a0a0f05f375743a2e79986cef02bcbf21cc0",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-edit-dispatch-guard.json",
+      "bytes": 5142,
+      "sha256": "8edb759fa33ceea9b57c4d5c34e991a27af2dc37b567a3d11f91bed2913b1a7d",
+      "selected": false,
+      "recordType": "evidence"
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/source-and-edit-preflight-remote-verification.json",
+      "bytes": 42671,
+      "sha256": "0e6a55928dd05db8a2912649c9ea2e7a5e7e12092505d54a81f024f86364a039",
+      "selected": false,
+      "recordType": "evidence"
+    }
+  ],
+  "selectedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-chatgpt-single-tailoring-pass.png",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-gallery-original.webp"
+  ],
+  "unusedPaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-gallery-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-download-button-jpeg.jpg",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-02-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-03-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-04-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-05-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-meta-internal-06-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-01-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-02-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-internal-03-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-chatgpt-single-tailoring-pass.png"
+  ],
+  "allSceneRenderAndEditAllowancesTerminal": true
+}

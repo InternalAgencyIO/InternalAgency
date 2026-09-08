@@ -1,4 +1,44 @@
 {
+  "latestBatch510FailureEvidence": {
+    "updatedAtUtc": "2026-09-08T06:29:45.925Z",
+    "batch": 510,
+    "policy": "Two individually attributed output-stage blocks. Each single edit allowance is consumed. No second request or moderation bypass.",
+    "entries": [
+      {
+        "scene": 2068,
+        "provider": "built-in image_gen",
+        "requestId": "042c40e3-3ad0-4352-b31f-f5fd8553a811",
+        "state": "output-moderation-block-allowance-consumed",
+        "moderationStage": "output",
+        "categories": [
+          "sexual"
+        ],
+        "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2068-single-edit-exact-prompt.txt",
+        "promptSha256": "6622BC3D910C9951F28E194E9CB5A1AC481C08E8F302B5EAB3469627FA65C68A",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block.json",
+        "error": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-single-edit-output-block-error.txt",
+        "returnedImageFiles": 0,
+        "originalSelected": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-meta-gallery-original.webp"
+      },
+      {
+        "scene": 2069,
+        "provider": "built-in image_gen",
+        "requestId": "2c95280b-d44e-47d2-a511-3d309c23923b",
+        "state": "output-moderation-block-allowance-consumed",
+        "moderationStage": "output",
+        "categories": [
+          "sexual"
+        ],
+        "promptPath": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/scene-2069-single-edit-exact-prompt.txt",
+        "promptSha256": "FBDB24CF0AB15E9F03B9B7B25FC4E798CBBDAB24A3D3F8BDFB60AC338F1296D4",
+        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block.json",
+        "error": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-single-edit-output-block-error.txt",
+        "returnedImageFiles": 0,
+        "originalSelected": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-meta-gallery-original.webp"
+      }
+    ],
+    "results": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-results.json"
+  },
   "latestBatch502FailureEvidence": {
     "updatedAtUtc": "2026-09-07T02:58:22.964Z",
     "batch": 502,

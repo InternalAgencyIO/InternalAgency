@@ -9,102 +9,63 @@
       2069,
       2070
     ],
-    "state": "all-four-sources-qa-ready-zero-edits",
-    "preparedAtUtc": "2026-09-08T05:29:36.414Z",
-    "brief": "assets/lore/starlight-era/batch-510-armenia-editorial-brief.json",
-    "fixedRolls": "assets/lore/starlight-era/batch-510-armenia-fixed-rolls.json",
+    "state": "four-stills-accepted-unpublished-pending-final-remote-proof",
+    "recordedAtUtc": "2026-09-08T06:29:45.925Z",
+    "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
+    "finalQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-selection-qa.json",
+    "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/native-raw-archive-manifest.json",
+    "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/closure-evidence-manifest.json",
+    "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
     "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/provider-ledger.json",
-    "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-send-intents.json",
-    "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-composers-staging-evidence.json",
-    "previousWorkflowClosure": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-full-workflow-closure-checkpoint.json",
-    "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/full-workflow-remote-verification.json",
-    "baseRemoteVerifiedHead": "84af01b55b808b72b41bb763482358c6001503c7",
+    "editResults": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-results.json",
     "providerSendActivations": 4,
-    "chatgptEditInvocations": 0,
-    "account": "leesha007",
-    "mode": "Thinking",
-    "orderedAnchors": [
-      938,
-      936,
-      937
-    ],
-    "actualMetaTabs": [
-      "33",
-      "34",
-      "35",
-      "36"
-    ],
-    "actualXTab": "37",
-    "protectedOmanTab": "1",
-    "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
+    "initialSends": 4,
+    "hardFailureRecoveries": 0,
+    "chatgptInvocations": 4,
+    "returnedPngFiles": 2,
+    "attributedEditOutputBlocks": 2,
+    "additionalMetaSendsAllowed": 0,
+    "additionalChatgptInvocationsAllowed": 0,
+    "rawImageFiles": 16,
+    "allArchivedImageFiles": 18,
+    "uniqueArchivedImageVersions": 14,
+    "generatedSceneFiles": 18,
+    "contextReferenceFiles": 0,
+    "allFourAccepted": true,
+    "allRawBytesSaved": true,
+    "allKnownReturnedPngsSaved": true,
+    "archiveException": null,
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0555.json",
-    "xPostCount": 240,
-    "latestXUrls": [
+    "guardian": "starlight-pipeline-guardian",
+    "guardianStatus": "ACTIVE",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T06:40:49.170Z",
+    "providerUrls": [
+      "https://www.meta.ai/prompt/7625f457-5a4f-407c-9ca9-46a003615ef5",
+      "https://www.meta.ai/prompt/a26f9094-bf33-4b65-ad79-41bc48fb46e7",
+      "https://www.meta.ai/prompt/9eacf0a7-b3ac-4efe-9267-d6cc8afe83c0",
+      "https://www.meta.ai/prompt/4509fe50-e166-413e-bb9d-c18defa3b199"
+    ],
+    "newXPostUrls": [],
+    "previousPairXUrls": [
       "https://x.com/dogramaci/status/2097189559310156192",
       "https://x.com/dogramaci/status/2097191849538588895"
     ],
-    "nextSafeAction": "After current HEAD/origin/PR and exact source, anchor and prompt byte verification, make one and only one built-in ChatGPT tailoring invocation for each scene 2067-2070. A block, error or interruption consumes that scene allowance. Preserve all results, select the best usable version and perform final QA/ALT/media closure before preparing the next country or X reservation. Never resend initial prompts or request aesthetic Meta variations.",
-    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/source-and-edit-preflight-remote-verification.json",
-    "preflightPayloadCommit": "b300ee53c19017eecd083028fe1f505b445511fb",
-    "preflightVerifiedAtUtc": "2026-09-08T06:12:26.732Z",
-    "updatedAtUtc": "2026-09-08T06:09:39.580Z",
-    "dispatchAuthorityCommit": "2863beab8015aadb1127125e4a372f8a66d766f1",
-    "providerRetries": 0,
-    "uncertainActivations": 0,
-    "occurrences": [
-      {
-        "scene": 2067,
-        "occurrenceId": "batch-510-scene-2067-meta-initial",
-        "activationCount": 1,
-        "providerUrl": "https://www.meta.ai/prompt/7625f457-5a4f-407c-9ca9-46a003615ef5",
-        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2067-initial-send-receipt.json",
-        "neverResend": true
-      },
-      {
-        "scene": 2068,
-        "occurrenceId": "batch-510-scene-2068-meta-initial",
-        "activationCount": 1,
-        "providerUrl": "https://www.meta.ai/prompt/a26f9094-bf33-4b65-ad79-41bc48fb46e7",
-        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2068-initial-send-receipt.json",
-        "neverResend": true
-      },
-      {
-        "scene": 2069,
-        "occurrenceId": "batch-510-scene-2069-meta-initial",
-        "activationCount": 1,
-        "providerUrl": "https://www.meta.ai/prompt/9eacf0a7-b3ac-4efe-9267-d6cc8afe83c0",
-        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2069-initial-send-receipt.json",
-        "neverResend": true
-      },
-      {
-        "scene": 2070,
-        "occurrenceId": "batch-510-scene-2070-meta-initial",
-        "activationCount": 1,
-        "providerUrl": "https://www.meta.ai/prompt/4509fe50-e166-413e-bb9d-c18defa3b199",
-        "receipt": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/2070-initial-send-receipt.json",
-        "neverResend": true
-      }
+    "xPostCount": 240,
+    "canonicalContradictions": [
+      "2068 and 2069 single edits were individually blocked at output stage. Each allowance is consumed; original usable sources are retained.",
+      "2070 returned edit expands beyond the close source crop and introduces offscreen lower-body details. It is saved unused; the closer Meta source is selected.",
+      "The provider described exact Dutch/close crops that the actual images do not fully implement. Visual QA, not provider prose, determines the recorded soft deviations."
     ],
-    "outputObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-dispatch-observations.json",
-    "sourceArchiveComplete": true,
-    "archiveException": null,
-    "currentCheckpoint": "assets/lore/starlight-era/batch-510-armenia-source-qa-checkpoint.json",
-    "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/initial-source-qa.json",
-    "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/native-raw-archive-manifest.json",
-    "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/single-chatgpt-edit-intents.json",
-    "savedMediaFiles": 16,
-    "uniqueMediaVersions": 12,
-    "sourceReadyScenes": [
-      2067,
-      2068,
-      2069,
-      2070
+    "nextCountry": "Namibia",
+    "nextBatchHint": 511,
+    "nextSceneHint": [
+      2071,
+      2072,
+      2073,
+      2074
     ],
-    "inFlightScenes": [],
-    "allFourOccurrencesTerminal": true,
-    "guardianNextAuditNotBeforeUtc": "2026-09-08T06:40:49.170Z",
-    "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/all-four-terminal-source-observations.json",
-    "checkpoint": "assets/lore/starlight-era/batch-510-armenia-source-qa-checkpoint.json"
+    "nextSafeAction": "Verify final raw/edit bytes, sidecars, ledgers and closure manifest against origin and PR13. Once final remote parity passes, inspect the current country cursor and prepare Namibia in the same four visible Meta lanes, using new immutable rolls, Thinking on leesha007 and the exact anchors 938,936,937. Never reopen accepted Armenia scenes or repeat any edit. Publish Armenia only after an eligible companion country is accepted, all-version duplicate checks and @dogramaci/ALT/AI-label/staging gates pass.",
+    "checkpoint": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json"
   },
   "currentUruguayBosniaPairPublication509": {
     "schemaVersion": 1,
