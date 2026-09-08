@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 516,
   "country": "Gabon",
-  "state": "source-remote-proof-pass-three-edits-reserved-and-one-recovery-staged",
+  "state": "three-single-edits-running-identity-recovery-confirmed",
   "createdAtUtc": "2026-09-08T15:36:11.745Z",
   "occurrences": [
     {
@@ -88,12 +88,28 @@
         "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-meta-inline-2-original.webp"
       ],
       "terminal": true
+    },
+    {
+      "occurrenceId": "batch-516-scene-2094-meta-hard-failure-recovery-1",
+      "scene": 2094,
+      "provider": "Meta AI",
+      "kind": "hard-failure-identity-recovery",
+      "state": "confirmed-provider-conversation-do-not-resend",
+      "promptSha256": "693FD58A73EEE94597E3AFF6D643BA845D6A691601D8D2D3A7A2274D14FD3FC3",
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/scene-2094-hard-failure-recovery-1-exact-prompt.txt",
+      "providerSendActivations": 1,
+      "retryCount": 1,
+      "providerUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
+      "initialProviderUrl": "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2",
+      "initiatedAtUtc": "2026-09-08T16:23:00.335Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json",
+      "neverResend": true
     }
   ],
-  "providerSendActivations": 4,
-  "providerRetries": 0,
+  "providerSendActivations": 5,
+  "providerRetries": 1,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 3,
   "currentCheckpoint": "assets/lore/starlight-era/batch-516-gabon-four-lane-preparation-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-516-gabon-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-516-gabon-fixed-rolls.json",
@@ -105,7 +121,7 @@
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-515-gambia-four-stills-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/continuation-log-audit-2026-09-08-1601.json",
-  "nextSafeAction": "Verify this proof carrier and recovery staging against remote HEAD/origin/PR, then fresh exact account/Thinking/ordered-anchor/prompt checks before the sole2094 recovery Send. Invoke exactly the three reserved built-in clothing edits; never reissue an uncertain call.",
+  "nextSafeAction": "Observe three issued built-in edits and the single2094 identity recovery without repeating any activation; archive exact results and terminal evidence.",
   "stagedAtUtc": "2026-09-08T15:45:00.849Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-remote-preflight.json",
@@ -116,7 +132,8 @@
     "https://www.meta.ai/prompt/7cec5e4e-7418-43ea-b000-d0ae876e42a0",
     "https://www.meta.ai/prompt/be22c3d4-120c-4a92-9a20-68641e5c55a3",
     "https://www.meta.ai/prompt/38c7318e-e681-4f7a-8cfc-6418774857d0",
-    "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2"
+    "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2",
+    "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b"
   ],
   "guardianNextAuditNotBeforeUtc": "2026-09-08T16:46:36.116Z",
   "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/native-raw-archive-manifest.json",
@@ -135,5 +152,7 @@
   "sourceRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "d42fc34dc53a340489fd03cab4fcb3e399299921",
   "identityRecoveryStaging": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-staging-evidence.json",
-  "identityRecoveryGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json"
+  "identityRecoveryGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json",
+  "identityRecoveryProviderUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
+  "identityRecoveryReceipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json"
 }

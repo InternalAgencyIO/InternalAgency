@@ -7,8 +7,8 @@
   "kind": "hard-failure-identity-recovery",
   "recoveryNumber": 1,
   "maximumRecoveriesPerScene": 2,
-  "state": "staged-reserved-not-dispatched",
-  "activationCount": 0,
+  "state": "confirmed-provider-conversation-do-not-resend",
+  "activationCount": 1,
   "maximumActivationsThisOccurrence": 1,
   "initialOccurrenceId": "batch-516-scene-2094-meta-initial",
   "initialProviderUrl": "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2",
@@ -36,5 +36,10 @@
   "stagedAtUtc": "2026-09-08T16:20:28.569Z",
   "reservedAtUtc": "2026-09-08T16:20:28.569Z",
   "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json",
-  "sourceRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json"
+  "sourceRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json",
+  "callIssued": true,
+  "initiatedAtUtc": "2026-09-08T16:23:00.335Z",
+  "providerUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
+  "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json",
+  "neverResend": true
 }

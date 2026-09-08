@@ -3,9 +3,9 @@
   "batch": 516,
   "scene": 2094,
   "occurrenceId": "batch-516-scene-2094-meta-hard-failure-recovery-1",
-  "state": "reserved-not-dispatched",
+  "state": "confirmed-provider-conversation-do-not-resend",
   "reservedAtUtc": "2026-09-08T16:20:28.569Z",
-  "activationCount": 0,
+  "activationCount": 1,
   "maximumActivations": 1,
   "maximumHardFailureRetriesPerScene": 2,
   "recoveryNumber": 1,
@@ -13,5 +13,30 @@
   "staging": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-staging-evidence.json",
   "sourceRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json",
   "neverAutomaticallyReissueReservation": true,
-  "neverResendConfirmedOrUncertain": true
+  "neverResendConfirmedOrUncertain": true,
+  "callIssued": true,
+  "initiatedAtUtc": "2026-09-08T16:23:00.335Z",
+  "actionTimeGates": {
+    "observedAtUtc": "2026-09-08T16:22:09.290Z",
+    "head": "75bf6c10128efa3af7cd8cb4931b9c941fa8a586",
+    "sourceProofCarrier": "75bf6c10128efa3af7cd8cb4931b9c941fa8a586",
+    "allCarrierBlobsPass": true,
+    "account": true,
+    "thinking": true,
+    "exactPrompt": true,
+    "promptHash": "693FD58A73EEE94597E3AFF6D643BA845D6A691601D8D2D3A7A2274D14FD3FC3",
+    "anchorOrder": [
+      938,
+      936,
+      937
+    ],
+    "removeControls": 3,
+    "noStop": true,
+    "sendEnabled": true,
+    "guardianSha": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67"
+  },
+  "proofCarrierCommit": "75bf6c10128efa3af7cd8cb4931b9c941fa8a586",
+  "providerUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
+  "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json",
+  "neverResend": true
 }

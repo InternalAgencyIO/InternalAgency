@@ -3,7 +3,7 @@
     "schemaVersion": 1,
     "batch": 516,
     "country": "Gabon",
-    "state": "source-remote-proof-pass-three-edits-reserved-and-one-recovery-staged",
+    "state": "three-single-edits-running-identity-recovery-confirmed",
     "createdAtUtc": "2026-09-08T15:36:11.745Z",
     "sceneRange": [
       2091,
@@ -20,8 +20,8 @@
     "previousClosure": "assets/lore/starlight-era/batch-515-gambia-four-stills-closure-checkpoint.json",
     "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
     "baseRemoteVerifiedHead": "be2eed5303b6640b42c56dd2ca1d40ffcd20e971",
-    "providerSendActivations": 4,
-    "chatgptEditInvocations": 0,
+    "providerSendActivations": 5,
+    "chatgptEditInvocations": 3,
     "publicationState": "not-ready-waiting-for-Gabon-closure",
     "xPostCount": 244,
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/continuation-log-audit-2026-09-08-1601.json",
@@ -70,7 +70,10 @@
     "sourceRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json",
     "sourcePayloadCommit": "d42fc34dc53a340489fd03cab4fcb3e399299921",
     "identityRecoveryStaging": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-staging-evidence.json",
-    "identityRecoveryGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json"
+    "identityRecoveryGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json",
+    "providerRetries": 1,
+    "identityRecoveryProviderUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
+    "identityRecoveryReceipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json"
   },
   "currentAuthorityBatch515": {
     "schemaVersion": 1,
