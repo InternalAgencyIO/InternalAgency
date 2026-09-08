@@ -8,7 +8,7 @@
     2077,
     2078
   ],
-  "state": "four-initial-sends-issued-collecting",
+  "state": "all-originals-archived-source-qa-complete-single-edits-pending",
   "preparedAtUtc": "2026-09-08T09:43:44.482Z",
   "brief": "assets/lore/starlight-era/batch-512-lithuania-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-512-lithuania-fixed-rolls.json",
@@ -39,8 +39,8 @@
   "protectedOmanTab": "1",
   "guardian": "starlight-pipeline-guardian",
   "guardianStatus": "ACTIVE",
-  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0907.json",
-  "guardianNextAuditNotBeforeUtc": "2026-09-08T09:57:53.355Z",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/continuation-log-audit-2026-09-08-0958.json",
+  "guardianNextAuditNotBeforeUtc": "2026-09-08T10:46:14.510Z",
   "xPostCount": 242,
   "latestXUrls": [
     "https://x.com/dogramaci/status/2097246369526214887",
@@ -53,10 +53,20 @@
     1949,
     1950
   ],
-  "nextSafeAction": "Observe these four confirmed initial occurrences and preserve every exposed output or explicit no-byte result. No repeat Send. Archive raw bytes, QA and one eligible single-edit intent before ChatGPT tailoring.",
+  "nextSafeAction": "Remote-verify all original bytes,QA,ALT and exact single-edit intents. Consume one built-in tailoring invocation per selected usable source, then archive every result and block without retry.",
   "stagedAtUtc": "2026-09-08T09:48:27.306Z",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-remote-preflight.json",
   "preflightPayloadCommit": "12e1aab3b166194048654c34c140575ad44aed2d",
   "preflightVerifiedAtUtc": "2026-09-08T09:49:53.598Z",
-  "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-dispatch-guard.json"
+  "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-send-dispatch-guard.json",
+  "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/native-raw-archive-manifest.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/initial-source-qa.json",
+  "terminalObservations": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/all-four-terminal-source-observations.json",
+  "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/single-chatgpt-edit-intents.json",
+  "sourceReadyScenes": [
+    2075,
+    2076,
+    2077,
+    2078
+  ]
 }

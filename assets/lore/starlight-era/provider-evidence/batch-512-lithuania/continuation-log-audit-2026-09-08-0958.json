@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "auditStartedAtUtc": "2026-09-08T09:58:07.601Z",
+  "auditedAtUtc": "2026-09-08T10:01:14.510Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0907.json",
+  "previousAuditDueUtc": "2026-09-08T09:57:53.355Z",
+  "scope": "Fresh Lithuania512 authority, deterministic preparation, ordered uploads,4initial Meta activations,13 exposed original files and source QA.",
+  "findings": [
+    {
+      "kind": "throughput",
+      "detail": "All4Meta occurrences completed with one external Send each. Meta2076 exposed5internal image versions within its single Thinking occurrence; these are provider-internal iterations, not assistant retries. All13 exposed files,9unique byte versions saved."
+    },
+    {
+      "kind": "roll-drift",
+      "detail": "Frozen camera38,90,33,83. Provider crops and poses are approximate, no seed hunting or aesthetic retries.2078gallery has swapped central face order; earlier internal01 is usable and selected. Retain every variant."
+    },
+    {
+      "kind": "local-serialization",
+      "detail": "A mixed human-readable plus JSON tool result prevented one guard patch from parsing before any provider action. Re-emitted only the same patch as JSON and applied it. No double Send or upload occurred."
+    },
+    {
+      "kind": "authority",
+      "detail": "Cuba/Tanzania and old campaign counters superseded by verified512 cursor. Older Lithuania flag1:2 text is not used; current Seimas3:5 description used. Lithuania480 families remain consumed."
+    },
+    {
+      "kind": "protected-state",
+      "detail": "Protected7files unchanged; Oman tab1 retained. Existing guardian remainsACTIVE, config unchanged. X242posts unchanged; blank composer, no ready partner reserved."
+    }
+  ],
+  "boundedFixes": [
+    "Use JSON-only patch transport rather than mixing object inspection and machine-readable patch.",
+    "Keep explicit raw-record collection parameter to avoid stale helper closures.",
+    "Prefer an already-generated identity-correct source over repeating a completed scene."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newAutomationsOrWorkers": 0,
+  "guardianConfigSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+  "guardianStatus": "ACTIVE",
+  "protectedChecks": [
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1806-tanzania-dar-es-salaam-kivukoni-waterfront.webp",
+      "sha256": "a15f4dcfe4b1656ad4f2d164b976c4029e956fba162444b855c15f19f75f3ed7",
+      "bytes": 652738,
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-445-tanzania/1808-tanzania-serengeti-naabi-hill.webp",
+      "sha256": "eefe17d8b95a33f4842425dca47290220b97b8b9a040241db1317e5304da1ed2",
+      "bytes": 683466,
+      "unchanged": true
+    },
+    {
+      "path": "assets/lore/starlight-era/provider-evidence/batch-476-finland/estonia-finland-x-composer-staged-reopened-visible.png",
+      "sha256": "5789286c420c51705458e38433ed946c87457e362a6fadb96d0180c838ea9de5",
+      "bytes": 75027,
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1784-browser-rendered-qa.png",
+      "sha256": "e0571c39a7a6e3a4571207ef322cc2f876e6707dc62ed15083fcf352e834c0d1",
+      "bytes": 87756,
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1785-browser-rendered-qa.png",
+      "sha256": "2c39906adeaf921042d74b8c49061d224523f3174045905caf4eadbfd2aa3c9e",
+      "bytes": 59155,
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1786-browser-rendered-qa.png",
+      "sha256": "e1186ba034e81335f9b022aede01531c40d45cc1f9dee23df87f29f7b6e1ebaf",
+      "bytes": 46854,
+      "unchanged": true
+    },
+    {
+      "path": "tmp/world-195x4/batch-441/scene-1787-browser-rendered-qa.png",
+      "sha256": "48991915cc10959c752490f68cc603ee7cfb69f325bad6ef62a794dedc296b84",
+      "bytes": 83080,
+      "unchanged": true
+    }
+  ],
+  "nextAuditNotBeforeUtc": "2026-09-08T10:46:14.510Z",
+  "nextSafeAction": "Remote-verify all original bytes,QA,ALT and exact single-edit intents. Consume one built-in tailoring invocation per selected usable source, then archive every result and block without retry."
+}
