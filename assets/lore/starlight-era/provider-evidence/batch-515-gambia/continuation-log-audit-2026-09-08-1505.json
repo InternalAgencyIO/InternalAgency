@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "batch": 515,
+  "auditedAtUtc": "2026-09-08T15:05:50.413Z",
+  "since": "2026-09-08T14:14:52.500Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/continuation-log-audit-2026-09-08-1414.json",
+  "nextAuditNotBeforeUtc": "2026-09-08T15:50:50.413Z",
+  "scope": "Gambia preparation, four initial Meta sends, terminal raw archive, source QA, source remote proof, four single tailoring invocations and final candidate review.",
+  "evidence": [
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/four-composers-staging-evidence.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-send-remote-preflight.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/provider-ledger.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/native-raw-archive-manifest.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/initial-source-qa.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/source-and-edit-preflight-remote-verification.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/single-edit-dispatch-guard.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/single-chatgpt-edit-results.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-selection-qa.json",
+    "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-terminal-inventory-before-release.json"
+  ],
+  "findings": [
+    {
+      "topic": "Single occurrence safety",
+      "result": "Four initial Meta Send activations, zero retries and no uncertain sends. All four provider sessions terminal. Additional internal variants were provider-produced within the existing sessions, not new assistant submissions."
+    },
+    {
+      "topic": "Complete native inventory",
+      "result": "17 Meta file exposures represent12 unique originals. All are saved unchanged, including rotated and edge-cropped JPEG variants. Three returned native PNGs bring the total to20 saved image files and15 unique image versions. No missing original or archive exception."
+    },
+    {
+      "topic": "Single edit ceiling",
+      "result": "Exactly four built-in tailoring invocations:2087,2088,2089 returned PNGs;2090 was output-moderation blocked with no bytes. All allowances are consumed. The independently reviewed safe2090 Meta original is retained; no further call or safety-bypass rewrite."
+    },
+    {
+      "topic": "Evidence over narration",
+      "result": "Meta prose incorrectly described the three quartet plates as three faces and claimed crops or poses not present in pixels. Direct visual inspection controls QA. Soft angle, pose, tattoo and styling deviations are documented, not hidden by aesthetic retries."
+    },
+    {
+      "topic": "Browser correctness",
+      "result": "A screenshot immediately after Control+Home can capture an unsettled scroll. A subsequent fresh observation was required for anchor evidence. Inventory refresh functions must return and explicitly assign their fresh arrays; do not rely on stale outer closure bindings."
+    },
+    {
+      "topic": "Native format",
+      "result": "An initially misnamed owned JPEG archive path was corrected to.jpg without changing bytes. A batch-scoped.gitattributes rule routes native JPEG originals to LFS without changing unrelated screenshot or historical handling."
+    },
+    {
+      "topic": "Public queue and authority",
+      "result": "X remains244 verified posts. Composer is empty and account@dogramaci is visible. Gambia has no eligible complete companion; Qatar513 partial3 remains X-ineligible. Old Cuba/Tanzania instructions and terminal historical Gambia379 do not authorize dispatch."
+    }
+  ],
+  "boundedImprovements": [
+    "Retain complete inventory closure before releasing a terminal provider tab.",
+    "Keep exact frozen rolls and actual source composition during the single edit; do not add cosmetic retries.",
+    "Use explicit returned inventory assignment and settled visible screenshots.",
+    "Keep native format-aware archive paths and scoped LFS attributes."
+  ],
+  "probabilitiesChanged": false,
+  "retryCeilingsChanged": false,
+  "newWorkersCreated": 0,
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "status": "ACTIVE",
+    "configSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67",
+    "scheduleChanged": false
+  },
+  "dispatchesThisAudit": 4,
+  "chatgptInvocationsThisAudit": 4,
+  "publicPostsThisAudit": 0
+}

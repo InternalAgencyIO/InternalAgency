@@ -3,13 +3,13 @@
   "batch": 515,
   "country": "Gambia",
   "preparedAtUtc": "2026-09-08T14:39:31.430Z",
-  "state": "four-single-edit-reservations-not-invoked",
+  "state": "all-four-single-edit-allowances-terminal-final-qa-complete",
   "intents": [
     {
       "scene": 2087,
       "occurrenceId": "batch-515-scene-2087-chatgpt-single-tailoring",
-      "state": "frozen-not-invoked",
-      "invocationCount": 0,
+      "state": "returned-edit-selected-final-qa-pass",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2087,
@@ -56,15 +56,21 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "reservedAtUtc": "2026-09-08T14:42:45.724Z",
-      "neverAutomaticallyReissueReservation": true
+      "neverAutomaticallyReissueReservation": true,
+      "initiatedAtUtc": "2026-09-08T14:44:50.066Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2087-chatgpt-single-tailoring-pass.png.receipt.json",
+      "completedAtUtc": "2026-09-08T14:47:06.159Z",
+      "additionalInvocationsAllowed": 0,
+      "finalQa": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-selection-qa.json",
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2087-chatgpt-single-tailoring-pass.png"
     },
     {
       "scene": 2088,
       "occurrenceId": "batch-515-scene-2088-chatgpt-single-tailoring",
-      "state": "frozen-not-invoked",
-      "invocationCount": 0,
+      "state": "returned-edit-selected-final-qa-pass",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2088,
@@ -111,15 +117,21 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "reservedAtUtc": "2026-09-08T14:42:45.724Z",
-      "neverAutomaticallyReissueReservation": true
+      "neverAutomaticallyReissueReservation": true,
+      "initiatedAtUtc": "2026-09-08T14:44:50.066Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2088-chatgpt-single-tailoring-pass.png.receipt.json",
+      "completedAtUtc": "2026-09-08T14:49:34.693Z",
+      "additionalInvocationsAllowed": 0,
+      "finalQa": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-selection-qa.json",
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2088-chatgpt-single-tailoring-pass.png"
     },
     {
       "scene": 2089,
       "occurrenceId": "batch-515-scene-2089-chatgpt-single-tailoring",
-      "state": "frozen-not-invoked",
-      "invocationCount": 0,
+      "state": "returned-edit-selected-final-qa-pass",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2089,
@@ -166,15 +178,21 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "reservedAtUtc": "2026-09-08T14:42:45.724Z",
-      "neverAutomaticallyReissueReservation": true
+      "neverAutomaticallyReissueReservation": true,
+      "initiatedAtUtc": "2026-09-08T14:44:50.066Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2089-chatgpt-single-tailoring-pass.png.receipt.json",
+      "completedAtUtc": "2026-09-08T14:52:04.476Z",
+      "additionalInvocationsAllowed": 0,
+      "finalQa": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-selection-qa.json",
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2089-chatgpt-single-tailoring-pass.png"
     },
     {
       "scene": 2090,
       "occurrenceId": "batch-515-scene-2090-chatgpt-single-tailoring",
-      "state": "frozen-not-invoked",
-      "invocationCount": 0,
+      "state": "output-moderation-blocked-original-selected-allowance-consumed",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2090,
@@ -221,10 +239,17 @@
       "sourceSpecificLimits": "Image1 is the sole edit target. Keep its actual1152x2048 rectangle, all four faces, their actual positions, hair, expressions, bodies, seated and standing positions, contact ownership, camera position, perspective, background and existing edges unchanged. Do not crop, outpaint, widen, rotate bodies or restage to chase the earlier roll. Images2-4 are identity-only quartet face plates in order938,936,937. Each plate contains all four identities. Do not import reference outfits or poses.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "reservedAtUtc": "2026-09-08T14:42:45.724Z",
-      "neverAutomaticallyReissueReservation": true
+      "neverAutomaticallyReissueReservation": true,
+      "initiatedAtUtc": "2026-09-08T14:44:50.066Z",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2090-chatgpt-single-tailoring-blocked.json",
+      "completedAtUtc": "2026-09-08T14:54:37.321Z",
+      "additionalInvocationsAllowed": 0,
+      "finalQa": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-selection-qa.json",
+      "selectedPath": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/2090-meta-gallery-original.webp"
     }
   ],
-  "reservedAtUtc": "2026-09-08T14:42:45.724Z"
+  "reservedAtUtc": "2026-09-08T14:42:45.724Z",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-selection-qa.json"
 }
