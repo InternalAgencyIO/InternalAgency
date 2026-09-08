@@ -3,7 +3,7 @@
   "batch": 511,
   "country": "Namibia",
   "acceptedAtUtc": "2026-09-08T08:22:16.624Z",
-  "state": "four-stills-posted-verified",
+  "state": "four-stills-posted-and-workflow-remote-verified",
   "accepted": [
     {
       "scene": 2071,
@@ -185,7 +185,7 @@
   "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/closure-evidence-manifest.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "All four scene families are consumed across the two public posts. Never reopen or repost any version. Remote-verify publication closure, then advance only from the current country cursor.",
+  "nextSafeAction": "All four current scene families and all saved versions are consumed. Continue only at the newest full-workflow checkpoint; never reopen or repost these scenes.",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json",
   "finalPayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
   "finalRemoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
@@ -200,5 +200,7 @@
   "publishedPostUrls": [
     "https://x.com/dogramaci/status/2097246369526214887",
     "https://x.com/dogramaci/status/2097249345301107095"
-  ]
+  ],
+  "publicationRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-final-workflow-remote-verification.json",
+  "publicationPayloadCommit": "536adfacd859ffe70149f2a51804e5f6aa6c75e9"
 }

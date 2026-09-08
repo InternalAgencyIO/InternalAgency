@@ -3,7 +3,7 @@
   "batch": 510,
   "country": "Armenia",
   "acceptedAtUtc": "2026-09-08T06:29:45.925Z",
-  "state": "four-stills-posted-verified",
+  "state": "four-stills-posted-and-workflow-remote-verified",
   "accepted": [
     {
       "scene": 2067,
@@ -185,7 +185,7 @@
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/closure-evidence-manifest.json",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "All four scene families are consumed across the two public posts. Never reopen or repost any version. Remote-verify publication closure, then advance only from the current country cursor.",
+  "nextSafeAction": "All four current scene families and all saved versions are consumed. Continue only at the newest full-workflow checkpoint; never reopen or repost these scenes.",
   "finalPayloadCommit": "f193a0f48d6b6fcd38bb6380b004a80e06d36d74",
   "finalRemoteVerifiedAtUtc": "2026-09-08T06:39:41.255Z",
   "allFinalPayloadByteChecksPassed": true,
@@ -201,5 +201,7 @@
   "publishedPostUrls": [
     "https://x.com/dogramaci/status/2097246369526214887",
     "https://x.com/dogramaci/status/2097249345301107095"
-  ]
+  ],
+  "publicationRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-final-workflow-remote-verification.json",
+  "publicationPayloadCommit": "536adfacd859ffe70149f2a51804e5f6aa6c75e9"
 }
