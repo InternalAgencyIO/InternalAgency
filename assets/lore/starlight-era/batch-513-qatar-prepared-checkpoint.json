@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "batch": 513,
+  "country": "Qatar",
+  "sceneIds": [
+    2079,
+    2080,
+    2081,
+    2082
+  ],
+  "state": "four-composers-exact-prompts-and-ordered-anchors-staged-not-sent",
+  "preparedAtUtc": "2026-09-08T10:32:39.350Z",
+  "brief": "assets/lore/starlight-era/batch-513-qatar-editorial-brief.json",
+  "fixedRolls": "assets/lore/starlight-era/batch-513-qatar-fixed-rolls.json",
+  "providerLedger": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/provider-ledger.json",
+  "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/initial-send-intents.json",
+  "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/four-composers-staging-evidence.json",
+  "checkpoint": "assets/lore/starlight-era/batch-513-qatar-prepared-checkpoint.json",
+  "previousWorkflowClosure": "assets/lore/starlight-era/batch-512-lithuania-four-stills-closure-checkpoint.json",
+  "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/final-remote-closure-verification.json",
+  "baseRemoteVerifiedHead": "9e4f223be2ff9664fba0d07cd024f80444054ddc",
+  "providerSendActivations": 0,
+  "providerRetries": 0,
+  "chatgptEditInvocations": 0,
+  "account": "leesha007",
+  "mode": "Thinking",
+  "orderedAnchors": [
+    938,
+    936,
+    937
+  ],
+  "actualMetaTabs": [
+    "33",
+    "34",
+    "35",
+    "36"
+  ],
+  "actualXTab": "37",
+  "protectedOmanTab": "1",
+  "guardian": "starlight-pipeline-guardian",
+  "guardianStatus": "ACTIVE",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/continuation-log-audit-2026-09-08-0958.json",
+  "guardianNextAuditNotBeforeUtc": "2026-09-08T10:46:14.510Z",
+  "xPostCount": 242,
+  "latestXUrls": [
+    "https://x.com/dogramaci/status/2097246369526214887",
+    "https://x.com/dogramaci/status/2097249345301107095"
+  ],
+  "archiveException": null,
+  "eligibleCompanionCountry": "Lithuania",
+  "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/accepted-selections.json",
+  "nextSafeAction": "Stage exact new prompts with ordered938,936,937 anchors through visible upload controls, verify account and Thinking and unchanged content after typing. Archive staging, push and verify HEAD/origin/PR before one initial Send per lane.",
+  "stagedAtUtc": "2026-09-08T10:35:56.286Z"
+}
