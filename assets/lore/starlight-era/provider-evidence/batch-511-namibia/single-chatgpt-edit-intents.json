@@ -197,7 +197,7 @@
     {
       "scene": 2071,
       "occurrenceId": "batch-511-scene-2071-chatgpt-single-tailoring",
-      "state": "prepared-not-invoked",
+      "state": "remote-verified-ready-for-one-edit",
       "invocationCount": 0,
       "maximumInvocations": 1,
       "source": {
@@ -260,7 +260,7 @@
   "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "e69013b2a04bc17d1937ecb058841a007e1b8b66",
   "sourceVerifiedAtUtc": "2026-09-08T07:40:08.992Z",
-  "nextSafeAction": "After the recovery source payload is remote-verified, invoke only the2071 single edit once. The other three allowances remain terminal.",
+  "nextSafeAction": "After this carrier is committed, pushed and HEAD/origin/PR match, reserve and issue only the2071 built-in tailoring invocation once. Record result or block, preserve all output bytes, compare against the original, then close all four Namibia scenes. Do not repeat any Meta Send or existing edit.",
   "reservedAtUtc": "2026-09-08T07:42:07.563Z",
   "actionTimeCheck": {
     "observedAtUtc": "2026-09-08T07:41:22.210Z",
@@ -339,5 +339,7 @@
   "executionCell": "2283",
   "executionCellComplete": true,
   "results": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-results.json",
-  "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json"
+  "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json",
+  "scene2071EditRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-remote-preflight.json",
+  "scene2071SourcePayloadCommit": "eeadd0de497bd0f10aa36ed72219d4eeea313b06"
 }
