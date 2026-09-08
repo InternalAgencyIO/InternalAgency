@@ -7,7 +7,7 @@
   "kind": "hard-failure-identity-recovery",
   "recoveryNumber": 1,
   "maximumRecoveriesPerScene": 2,
-  "state": "confirmed-provider-conversation-do-not-resend",
+  "state": "terminal-recovery1-identity-hard-held-originals-archived",
   "activationCount": 1,
   "maximumActivationsThisOccurrence": 1,
   "initialOccurrenceId": "batch-516-scene-2094-meta-initial",
@@ -41,5 +41,11 @@
   "initiatedAtUtc": "2026-09-08T16:23:00.335Z",
   "providerUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
   "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json",
-  "neverResend": true
+  "neverResend": true,
+  "terminalObservation": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-terminal-observation.json",
+  "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-source-qa.json",
+  "rawFiles": [
+    "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-meta-gallery-1-original.webp",
+    "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-meta-inline-1-original.webp"
+  ]
 }

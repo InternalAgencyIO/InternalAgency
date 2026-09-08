@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 516,
   "country": "Gabon",
-  "state": "three-single-edits-running-identity-recovery-confirmed",
+  "state": "three-edits-running-final-identity-recovery-prepared",
   "createdAtUtc": "2026-09-08T15:36:11.745Z",
   "occurrences": [
     {
@@ -94,7 +94,7 @@
       "scene": 2094,
       "provider": "Meta AI",
       "kind": "hard-failure-identity-recovery",
-      "state": "confirmed-provider-conversation-do-not-resend",
+      "state": "terminal-recovery1-identity-hard-held-originals-archived",
       "promptSha256": "693FD58A73EEE94597E3AFF6D643BA845D6A691601D8D2D3A7A2274D14FD3FC3",
       "promptPath": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/scene-2094-hard-failure-recovery-1-exact-prompt.txt",
       "providerSendActivations": 1,
@@ -103,7 +103,13 @@
       "initialProviderUrl": "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2",
       "initiatedAtUtc": "2026-09-08T16:23:00.335Z",
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json",
-      "neverResend": true
+      "neverResend": true,
+      "terminal": true,
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-source-qa.json",
+      "rawFiles": [
+        "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-meta-gallery-1-original.webp",
+        "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-meta-inline-1-original.webp"
+      ]
     }
   ],
   "providerSendActivations": 5,
@@ -121,7 +127,7 @@
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-515-gambia-four-stills-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-515-gambia/final-remote-closure-verification.json",
   "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/continuation-log-audit-2026-09-08-1601.json",
-  "nextSafeAction": "Observe three issued built-in edits and the single2094 identity recovery without repeating any activation; archive exact results and terminal evidence.",
+  "nextSafeAction": "Remote-verify all recovery1 originals, source QA and this final identity recovery intent; then stage a new blank composer with938,936,937 ordered and Thinking. Save and remote-verify staging before a single final recovery Send.",
   "stagedAtUtc": "2026-09-08T15:45:00.849Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/initial-send-remote-preflight.json",
@@ -148,11 +154,12 @@
   ],
   "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-chatgpt-edit-intents.json",
   "singleEditGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/single-edit-dispatch-guard.json",
-  "identityRecoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-hard-failure-recovery-1-intent.json",
+  "identityRecoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-hard-failure-recovery-2-intent.json",
   "sourceRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "d42fc34dc53a340489fd03cab4fcb3e399299921",
   "identityRecoveryStaging": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-staging-evidence.json",
   "identityRecoveryGuard": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-dispatch-guard.json",
   "identityRecoveryProviderUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
-  "identityRecoveryReceipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json"
+  "identityRecoveryReceipt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-send-receipt.json",
+  "previousRecoveryQa": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-source-qa.json"
 }

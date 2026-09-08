@@ -2,7 +2,7 @@
   "latestBatch516FailureEvidence": {
     "batch": 516,
     "country": "Gabon",
-    "updatedAtUtc": "2026-09-08T16:08:09.342Z",
+    "updatedAtUtc": "2026-09-08T16:34:34.647Z",
     "entries": [
       {
         "scene": 2094,
@@ -11,6 +11,32 @@
         "prompt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/scene-2094-initial-exact-prompt.txt",
         "providerUrl": "https://www.meta.ai/prompt/0089089d-29eb-4cb2-88cd-fff5d41070d2",
         "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/native-raw-archive-manifest.json"
+      },
+      {
+        "scene": 2094,
+        "type": "recovery1-anchored-identity-hard-hold",
+        "evidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2094-recovery1-source-qa.json",
+        "prompt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/scene-2094-hard-failure-recovery-1-exact-prompt.txt",
+        "providerUrl": "https://www.meta.ai/prompt/08c064be-f47d-42bf-959d-b03ae3d5d58b",
+        "rawArchive": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/native-raw-archive-manifest.json"
+      },
+      {
+        "scene": 2091,
+        "type": "single-chatgpt-output-moderation-block",
+        "evidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2091-chatgpt-single-tailoring-blocked.json",
+        "exactPrompt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/scene-2091-single-edit-exact-prompt.txt",
+        "noBytes": true,
+        "allowanceConsumed": true,
+        "noRetry": true
+      },
+      {
+        "scene": 2092,
+        "type": "single-chatgpt-output-moderation-block",
+        "evidence": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/2092-chatgpt-single-tailoring-blocked.json",
+        "exactPrompt": "assets/lore/starlight-era/provider-evidence/batch-516-gabon/scene-2092-single-edit-exact-prompt.txt",
+        "noBytes": true,
+        "allowanceConsumed": true,
+        "noRetry": true
       }
     ],
     "allOriginalEvidencePreserved": true
