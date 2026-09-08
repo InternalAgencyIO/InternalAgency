@@ -8,7 +8,7 @@
     2057,
     2058
   ],
-  "state": "all-sources-qa-complete-four-single-edits-prepared",
+  "state": "four-single-tailoring-edits-invoked-awaiting-results",
   "preparedAtUtc": "2026-09-07T07:14:46.093Z",
   "previousCountryClosure": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
   "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
@@ -51,7 +51,7 @@
     }
   ],
   "providerSendActivations": 5,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "maximumMetaHardFailureRetriesPerScene": 2,
   "maximumChatgptInvocationsPerScene": 1,
   "archiveException": null,
@@ -66,7 +66,7 @@
     "Four intermediate camera rolls78,69,80,71 are the fixed draw, not a lost probability mapping; four angles and poses differ.",
     "Oman and Switzerland remain held."
   ],
-  "nextSafeAction": "Remote-verify all22originals, four selected sources, exact one-edit prompts and anchors; then issue exactly one built-in tailoring invocation per scene2055-2058. Preserve calm-background exclusion2056 and every returned image or block. No further Meta send or X publication before closure.",
+  "nextSafeAction": "Collect every result from the four issued built-in single-edit calls; no retry even for a block or unattributed/interrupted result. Preserve PNG bytes or block receipts, select best technically usable versions, write ALT and final QA, then remote-verify Mongolia closure and reserve exact Eritrea/Mongolia X pairs.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T07:19:53.157Z",
@@ -156,5 +156,7 @@
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json",
   "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json",
   "safeAlternativeTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-evidence.json",
-  "additionalMetaSendsAllowedForCurrentScenes": 0
+  "additionalMetaSendsAllowedForCurrentScenes": 0,
+  "additionalChatgptInvocationsAllowed": 0,
+  "singleEditPreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-edit-preflight-remote-proof.json"
 }

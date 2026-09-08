@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 507,
   "country": "Mongolia",
-  "state": "all-sources-qa-complete-four-single-edits-prepared",
+  "state": "four-single-tailoring-edits-invoked-awaiting-results",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -14,7 +14,7 @@
   "providerSendActivations": 5,
   "providerRetries": 1,
   "uncertainActivations": 0,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "occurrences": [
     {
       "occurrenceId": "batch-507-scene-2055-initial",
@@ -29,7 +29,7 @@
         936,
         937
       ],
-      "state": "initial-output-terminal-all-exposed-originals-archived-pending-qa",
+      "state": "terminal-originals-archived-source-qa-complete",
       "providerUrl": "https://www.meta.ai/prompt/6ed0b411-3561-4102-a294-befaf7aefa5a",
       "additionalInitialSendsAllowed": 0,
       "submittedAtUtc": "2026-09-07T07:22:00.916Z",
@@ -38,7 +38,8 @@
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-1-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-2-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-meta-internal-3-original.webp"
-      ]
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json"
     },
     {
       "occurrenceId": "batch-507-scene-2056-initial",
@@ -72,7 +73,7 @@
         936,
         937
       ],
-      "state": "initial-output-terminal-all-exposed-originals-archived-pending-qa",
+      "state": "terminal-originals-archived-source-qa-complete",
       "providerUrl": "https://www.meta.ai/prompt/076c455d-8a86-43d9-80a2-814b14804361",
       "additionalInitialSendsAllowed": 0,
       "submittedAtUtc": "2026-09-07T07:22:01.235Z",
@@ -82,7 +83,8 @@
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-2-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-3-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-meta-internal-4-original.webp"
-      ]
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json"
     },
     {
       "occurrenceId": "batch-507-scene-2058-initial",
@@ -97,7 +99,7 @@
         936,
         937
       ],
-      "state": "initial-output-terminal-all-exposed-originals-archived-pending-qa",
+      "state": "terminal-originals-archived-source-qa-complete",
       "providerUrl": "https://www.meta.ai/prompt/1fecb156-c970-466d-9db1-15dec5a9bf7e",
       "additionalInitialSendsAllowed": 0,
       "submittedAtUtc": "2026-09-07T07:22:01.415Z",
@@ -113,7 +115,8 @@
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-8-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-9-original.webp",
         "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-meta-internal-10-original.webp"
-      ]
+      ],
+      "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json"
     },
     {
       "schemaVersion": 1,
@@ -154,7 +157,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Remote-verify all22originals, four selected sources, exact one-edit prompts and anchors; then issue exactly one built-in tailoring invocation per scene2055-2058. Preserve calm-background exclusion2056 and every returned image or block. No further Meta send or X publication before closure.",
+  "nextSafeAction": "Collect every result from the four issued built-in single-edit calls; no retry even for a block or unattributed/interrupted result. Preserve PNG bytes or block receipts, select best technically usable versions, write ALT and final QA, then remote-verify Mongolia closure and reserve exact Eritrea/Mongolia X pairs.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T07:19:53.157Z",
@@ -243,5 +246,45 @@
   "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-source-qa.json",
   "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json",
   "safeAlternativeTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-evidence.json",
-  "additionalMetaSendsAllowedForCurrentScenes": 0
+  "additionalMetaSendsAllowedForCurrentScenes": 0,
+  "additionalChatgptInvocationsAllowed": 0,
+  "singleEditPreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-edit-preflight-remote-proof.json",
+  "chatgptEditOccurrences": [
+    {
+      "scene": 2055,
+      "issuedAtUtc": "2026-09-08T01:57:16.308Z",
+      "invocationCount": 1,
+      "state": "issued-awaiting-result",
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+    },
+    {
+      "scene": 2056,
+      "issuedAtUtc": "2026-09-08T01:57:16.308Z",
+      "invocationCount": 1,
+      "state": "issued-awaiting-result",
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+    },
+    {
+      "scene": 2057,
+      "issuedAtUtc": "2026-09-08T01:57:16.308Z",
+      "invocationCount": 1,
+      "state": "issued-awaiting-result",
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+    },
+    {
+      "scene": 2058,
+      "issuedAtUtc": "2026-09-08T01:57:16.308Z",
+      "invocationCount": 1,
+      "state": "issued-awaiting-result",
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+    }
+  ]
 }
