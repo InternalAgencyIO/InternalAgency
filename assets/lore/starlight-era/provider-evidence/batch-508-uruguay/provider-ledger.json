@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 508,
   "country": "Uruguay",
-  "state": "four-composers-staged-exact-prompts-anchors-Thinking-not-sent",
+  "state": "four-initial-provider-submissions-confirmed-awaiting-outputs",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -11,11 +11,88 @@
     936,
     937
   ],
-  "providerSendActivations": 0,
+  "providerSendActivations": 4,
   "providerRetries": 0,
   "uncertainActivations": 0,
   "chatgptEditInvocations": 0,
-  "occurrences": [],
+  "occurrences": [
+    {
+      "occurrenceId": "batch-508-scene-2059-meta-initial",
+      "scene": 2059,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/scene-2059-initial-prompt.txt",
+      "promptSha256": "C1AF3473E28D6811A632149F92C68F8612AC3FF83EE1E751BB02790D7C1566FB",
+      "tabId": "28",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "providerUrl": "https://www.meta.ai/prompt/76bc893b-fb5d-41a8-9346-49c6b0e612c6",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T02:59:05.960Z",
+      "confirmedAtUtc": "2026-09-08T02:59:36.412Z"
+    },
+    {
+      "occurrenceId": "batch-508-scene-2060-meta-initial",
+      "scene": 2060,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/scene-2060-initial-prompt.txt",
+      "promptSha256": "840B1BAA20B5A1412B7BDC1B135265BB1BE29BA7B62A436A7821666246BB92A1",
+      "tabId": "29",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "providerUrl": "https://www.meta.ai/prompt/1d3eeeff-48f6-489a-95e7-80db5e666ba9",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T02:59:06.149Z",
+      "confirmedAtUtc": "2026-09-08T02:59:36.464Z"
+    },
+    {
+      "occurrenceId": "batch-508-scene-2061-meta-initial",
+      "scene": 2061,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/scene-2061-initial-prompt.txt",
+      "promptSha256": "2AF0C33F1218E857B1A4AAB7FC33E03D38EC832014F65ED0DDDB5A0A60C02E7C",
+      "tabId": "30",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "providerUrl": "https://www.meta.ai/prompt/3b6f0c7e-3884-491a-a4da-db935d16c33f",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T02:59:06.367Z",
+      "confirmedAtUtc": "2026-09-08T02:59:36.526Z"
+    },
+    {
+      "occurrenceId": "batch-508-scene-2062-meta-initial",
+      "scene": 2062,
+      "kind": "initial",
+      "activationCount": 1,
+      "promptPath": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/scene-2062-initial-prompt.txt",
+      "promptSha256": "FAA20B8FC705B353661C0469A6DDECBC9441F50233AD911AF0E069343A5BD840",
+      "tabId": "31",
+      "anchorOrder": [
+        938,
+        936,
+        937
+      ],
+      "state": "confirmed-initial-submission-awaiting-terminal-output",
+      "providerUrl": "https://www.meta.ai/prompt/78485fd2-c48f-468c-b4c5-f13d040977a3",
+      "additionalInitialSendsAllowed": 0,
+      "submittedAtUtc": "2026-09-08T02:59:06.571Z",
+      "confirmedAtUtc": "2026-09-08T02:59:36.583Z"
+    }
+  ],
   "currentCheckpoint": "assets/lore/starlight-era/batch-508-uruguay-prepared-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
@@ -23,7 +100,7 @@
   "aestheticRetries": 0,
   "sourceArchiveComplete": false,
   "archiveException": null,
-  "nextSafeAction": "Remote-verify frozen staging, account, exact prompts and all three anchor bytes. Recheck live composers and zero sends, then one initial Send per lane. Preserve confirmed URLs immediately and never resend.",
+  "nextSafeAction": "Inspect the four already-confirmed Uruguay sessions without another Send. When terminal, preserve every exposed original/internal variant and exact provider evidence via supported visible downloads. QA all unique bytes, then exactly one built-in ChatGPT tailoring invocation per usable scene source; blocks consume allowance. Close country remotely before pairing with a fresh complete Bosnia and Herzegovina companion.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
   "stagedAtUtc": "2026-09-08T02:56:45.629Z",
@@ -72,5 +149,17 @@
       ],
       "sendActivationsAtStaging": 0
     }
-  ]
+  ],
+  "confirmedSubmissions": 4,
+  "providerUrls": [
+    "https://www.meta.ai/prompt/76bc893b-fb5d-41a8-9346-49c6b0e612c6",
+    "https://www.meta.ai/prompt/1d3eeeff-48f6-489a-95e7-80db5e666ba9",
+    "https://www.meta.ai/prompt/3b6f0c7e-3884-491a-a4da-db935d16c33f",
+    "https://www.meta.ai/prompt/78485fd2-c48f-468c-b4c5-f13d040977a3"
+  ],
+  "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-receipt.json",
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-remote-preflight.json",
+  "rawFilesSaved": 0,
+  "missingObservedOriginals": null,
+  "terminalOutputInventoryPending": true
 }

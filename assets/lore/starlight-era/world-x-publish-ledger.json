@@ -8,7 +8,7 @@
       2061,
       2062
     ],
-    "state": "four-composers-staged-exact-prompts-anchors-Thinking-not-sent",
+    "state": "four-initial-provider-submissions-confirmed-awaiting-outputs",
     "checkpoint": "assets/lore/starlight-era/batch-508-uruguay-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
@@ -20,16 +20,27 @@
     ],
     "account": "leesha007",
     "mode": "Thinking",
-    "providerSendActivations": 0,
+    "providerSendActivations": 4,
     "chatgptEditInvocations": 0,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
     "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08-0229.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/full-workflow-remote-verification.json",
-    "nextSafeAction": "Remote-verify staging and fresh live zero-send gates, then one initial Send per Uruguay lane. Preserve every URL and output; no duplicate or aesthetic resends.",
+    "nextSafeAction": "Observe already-confirmed Uruguay2059-2062 without resending. Preserve all terminal originals/variants, QA every unique byte, apply one single tailoring call per usable source, close remotely and then continue to Bosnia and Herzegovina.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
-    "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json"
+    "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
+    "confirmedSubmissions": 4,
+    "providerUrls": [
+      "https://www.meta.ai/prompt/76bc893b-fb5d-41a8-9346-49c6b0e612c6",
+      "https://www.meta.ai/prompt/1d3eeeff-48f6-489a-95e7-80db5e666ba9",
+      "https://www.meta.ai/prompt/3b6f0c7e-3884-491a-a4da-db935d16c33f",
+      "https://www.meta.ai/prompt/78485fd2-c48f-468c-b4c5-f13d040977a3"
+    ],
+    "sendReceipt": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-receipt.json",
+    "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-remote-preflight.json",
+    "rawFilesSaved": 0,
+    "sourceArchiveComplete": false
   },
   "currentEritreaMongoliaPairPublication507": {
     "schemaVersion": 1,
