@@ -8,7 +8,7 @@
     2085,
     2086
   ],
-  "state": "four-composers-staged-exact-anchors-zero-dispatch",
+  "state": "four-staged-composers-remotely-verified-awaiting-single-send",
   "preparedAtUtc": "2026-09-08T11:41:49.804Z",
   "brief": "assets/lore/starlight-era/batch-514-jamaica-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-514-jamaica-fixed-rolls.json",
@@ -50,6 +50,9 @@
   "eligibleCompanionCountry": "Lithuania",
   "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/accepted-selections.json",
   "qatarHold": "assets/lore/starlight-era/batch-513-qatar-terminal-three-stills-closure-checkpoint.json",
-  "nextSafeAction": "Remote-verify this staging and all prompt/anchor bytes. Recheck actual live composers, then one initial Send per scene. Never resend any uncertain or confirmed occurrence.",
-  "stagedAtUtc": "2026-09-08T11:50:49.717Z"
+  "nextSafeAction": "This preflight carrier must reach HEAD/origin/PR parity, then recheck all exact live prompts, anchors, Thinking and account immediately before one Send per lane.",
+  "stagedAtUtc": "2026-09-08T11:50:49.717Z",
+  "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-remote-preflight.json",
+  "preflightPayloadCommit": "2609cc8fe49653de2709b64fba549b58b06a2988",
+  "preflightVerifiedAtUtc": "2026-09-08T11:52:36.935Z"
 }
