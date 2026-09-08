@@ -8,7 +8,7 @@
     2061,
     2062
   ],
-  "state": "all-four-sources-archived-qa-complete-single-edits-prepared",
+  "state": "four-single-edits-invoked-awaiting-results",
   "preparedAtUtc": "2026-09-08T02:50:57.214Z",
   "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
   "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/full-workflow-remote-verification.json",
@@ -51,7 +51,7 @@
     }
   ],
   "providerSendActivations": 4,
-  "chatgptEditInvocations": 0,
+  "chatgptEditInvocations": 4,
   "maximumMetaHardFailureRetriesPerScene": 2,
   "maximumChatgptInvocationsPerScene": 1,
   "archiveException": null,
@@ -59,13 +59,13 @@
   "newXPostUrls": [],
   "nextCompanionCountry": "Bosnia and Herzegovina",
   "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08-0229.json",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
   "canonicalContradictionResolution": [
     "Newest507workflow closed all eight scene families; Uruguay508 is fresh and does not reuse published media.",
     "Current2026-09-06roll contract supersedes historical camera and tattoo mappings.",
     "Oman and Switzerland remain held."
   ],
-  "nextSafeAction": "Remote-verify all10originals plus anchors and exact single-edit intents, then exactly one built-in imagegen invocation per selected source. Archive every returned PNG or block receipt; do not generate additional Meta variants. Select/ALT/close before pairing with Bosnia and Herzegovina.",
+  "nextSafeAction": "Await the four already-issued built-in single edits, archive each PNG or block receipt, select against the preserved source, write ALT and final QA, then remote-close Uruguay. Do not issue any further Meta render or ChatGPT edit for2059-2062.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
   "stagedAtUtc": "2026-09-08T02:56:45.629Z",
@@ -134,5 +134,48 @@
   "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-intents.json",
   "uniqueRawByteVersions": 6,
   "countryRawArchiveComplete": true,
-  "additionalMetaSendsAllowedForCurrentScenes": 0
+  "additionalMetaSendsAllowedForCurrentScenes": 0,
+  "singleEditInvocations": [
+    {
+      "scene": 2059,
+      "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "state": "invoked-awaiting-result",
+      "tool": "built-in image_gen",
+      "execCell": "1983"
+    },
+    {
+      "scene": 2060,
+      "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "state": "invoked-awaiting-result",
+      "tool": "built-in image_gen",
+      "execCell": "1983"
+    },
+    {
+      "scene": 2061,
+      "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "state": "invoked-awaiting-result",
+      "tool": "built-in image_gen",
+      "execCell": "1983"
+    },
+    {
+      "scene": 2062,
+      "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+      "invocationCount": 1,
+      "maximumInvocations": 1,
+      "additionalInvocationsAllowed": 0,
+      "state": "invoked-awaiting-result",
+      "tool": "built-in image_gen",
+      "execCell": "1983"
+    }
+  ],
+  "singleEditRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-edit-remote-preflight.json"
 }

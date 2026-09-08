@@ -8,7 +8,7 @@
       2061,
       2062
     ],
-    "state": "all-four-sources-archived-qa-complete-single-edits-prepared",
+    "state": "four-single-edits-invoked-awaiting-results",
     "checkpoint": "assets/lore/starlight-era/batch-508-uruguay-prepared-checkpoint.json",
     "brief": "assets/lore/starlight-era/batch-508-uruguay-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-508-uruguay-fixed-rolls.json",
@@ -21,13 +21,13 @@
     "account": "leesha007",
     "mode": "Thinking",
     "providerSendActivations": 4,
-    "chatgptEditInvocations": 0,
+    "chatgptEditInvocations": 4,
     "archiveExceptionApplies": false,
     "guardian": "assets/lore/starlight-era/starlight-guardian-explicit-authorization-2026-09-07.json",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/continuation-log-audit-2026-09-08-0229.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/continuation-log-audit-2026-09-08-0315.json",
     "previousCountryClosure": "assets/lore/starlight-era/batch-507-eritrea-mongolia-full-workflow-closure-checkpoint.json",
     "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/full-workflow-remote-verification.json",
-    "nextSafeAction": "Remote-verify all10raworiginals and exact edit intents, then one built-in single tailoring call per2059-2062source. Preserve all results and block receipts; no more Meta sends for these scenes.",
+    "nextSafeAction": "Await the four already-issued built-in single edits, archive each PNG or block receipt, select against the preserved source, write ALT and final QA, then remote-close Uruguay. Do not issue any further Meta render or ChatGPT edit for2059-2062.",
     "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/four-composers-staging-evidence.json",
     "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-send-intents.json",
     "confirmedSubmissions": 4,
@@ -45,7 +45,50 @@
     "initialTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-terminal-provider-evidence.json",
     "sourceQa": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/initial-source-qa.json",
     "singleEditIntents": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-chatgpt-edit-intents.json",
-    "uniqueRawByteVersions": 6
+    "uniqueRawByteVersions": 6,
+    "singleEditInvocations": [
+      {
+        "scene": 2059,
+        "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+        "invocationCount": 1,
+        "maximumInvocations": 1,
+        "additionalInvocationsAllowed": 0,
+        "state": "invoked-awaiting-result",
+        "tool": "built-in image_gen",
+        "execCell": "1983"
+      },
+      {
+        "scene": 2060,
+        "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+        "invocationCount": 1,
+        "maximumInvocations": 1,
+        "additionalInvocationsAllowed": 0,
+        "state": "invoked-awaiting-result",
+        "tool": "built-in image_gen",
+        "execCell": "1983"
+      },
+      {
+        "scene": 2061,
+        "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+        "invocationCount": 1,
+        "maximumInvocations": 1,
+        "additionalInvocationsAllowed": 0,
+        "state": "invoked-awaiting-result",
+        "tool": "built-in image_gen",
+        "execCell": "1983"
+      },
+      {
+        "scene": 2062,
+        "issuedAtUtc": "2026-09-08T03:16:53.161Z",
+        "invocationCount": 1,
+        "maximumInvocations": 1,
+        "additionalInvocationsAllowed": 0,
+        "state": "invoked-awaiting-result",
+        "tool": "built-in image_gen",
+        "execCell": "1983"
+      }
+    ],
+    "singleEditRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-508-uruguay/single-edit-remote-preflight.json"
   },
   "currentEritreaMongoliaPairPublication507": {
     "schemaVersion": 1,
