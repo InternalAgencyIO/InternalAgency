@@ -3,7 +3,7 @@
   "batch": 512,
   "country": "Lithuania",
   "acceptedAtUtc": "2026-09-08T10:23:14.179Z",
-  "state": "four-stills-reserved-unsubmitted",
+  "state": "part1-posted-verified-part2-reserved",
   "accepted": [
     {
       "scene": 2075,
@@ -28,9 +28,7 @@
       "additionalChatgptEditsAllowed": 0,
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
-      "xEligibilityPending": [
-        "live staging and final public-submission guards"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-accessibility.json",
       "alt": "AI-generated fashion image of four fictional adult women in a warm rooftop-window atelier. Three wear yellow, green and red horizontal-striped minis; the fourth wears dark green. A standing pair embraces beside a seated friend while another leans in and touches her hair. Braided and high-ponytail hairstyles, varied heels, a crescent arm tattoo, brass seating and terracotta roofs are visible.",
       "safetyOverrides": [],
@@ -39,12 +37,16 @@
         "Approximate shoe branding and additional faint tattoo detail are retained.",
         "The single tailoring invocation was output-blocked; the usable opaque Meta original is selected without retry."
       ],
-      "state": "reserved-unsubmitted",
-      "sceneFamilyConsumed": false,
+      "state": "posted-verified",
+      "sceneFamilyConsumed": true,
       "remoteVerifiedAtUtc": "2026-09-08T10:28:31.067Z",
       "remotePayloadCommit": "18608660fa8e2343678e185e9585ae3a0bfbf909",
-      "sceneFamilyReserved": true,
-      "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json"
+      "sceneFamilyReserved": false,
+      "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json",
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451",
+      "noRepostAnyVersion": true,
+      "publishedAtUtc": "2026-09-08T13:03:22.795Z",
+      "publicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-publication-receipt.json"
     },
     {
       "scene": 2076,
@@ -69,9 +71,7 @@
       "additionalChatgptEditsAllowed": 0,
       "eligibleForNormalCountryPairing": true,
       "xEligible": false,
-      "xEligibilityPending": [
-        "live staging and final public-submission guards"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-accessibility.json",
       "alt": "AI-generated fictional Lithuania fashion editorial: four adult women lean together around pale-blue seating and a coral stool beside a lake window. Blue wave-patterned, yellow-green-red flag-inspired and silver mini outfits pair with varied heels and rainbow footwear. Rose and scorpion tattoos are visible. Distant fire and mushroom-shaped smoke are imaginary effects, not real events.",
       "safetyOverrides": [
@@ -82,12 +82,16 @@
         "Some flag geometry, tattoo duplication and navel visibility differ from frozen rolls.",
         "The edit preserves composition and improves garment tailoring; no additional edit is allowed."
       ],
-      "state": "reserved-unsubmitted",
-      "sceneFamilyConsumed": false,
+      "state": "posted-verified",
+      "sceneFamilyConsumed": true,
       "remoteVerifiedAtUtc": "2026-09-08T10:28:31.067Z",
       "remotePayloadCommit": "18608660fa8e2343678e185e9585ae3a0bfbf909",
-      "sceneFamilyReserved": true,
-      "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json"
+      "sceneFamilyReserved": false,
+      "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json",
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451",
+      "noRepostAnyVersion": true,
+      "publishedAtUtc": "2026-09-08T13:03:22.795Z",
+      "publicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-publication-receipt.json"
     },
     {
       "scene": 2077,
@@ -196,7 +200,7 @@
   "companionState": "fully closed eligible country, exact2+2 reservations frozen",
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/closure-evidence-manifest.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "After reservation commit parity, stage this exact caption and four ordered files in the sole X composer with all four exact ALT descriptions and Made with AI. Verify live @dogramaci and final guards before a single Post activation. Never duplicate an uncertain or confirmed submission.",
+  "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted.",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/final-remote-closure-verification.json",
   "finalPayloadCommit": "18608660fa8e2343678e185e9585ae3a0bfbf909",
   "finalRemoteVerifiedAtUtc": "2026-09-08T10:28:31.067Z",
@@ -204,5 +208,71 @@
   "currentXReservations": [
     "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json",
     "assets/lore/starlight-era/batch-514-lithuania-jamaica-p2-x-reservation.json"
-  ]
+  ],
+  "currentXPublication": {
+    "schemaVersion": 1,
+    "batch": 514,
+    "batches": [
+      512,
+      514
+    ],
+    "countries": [
+      "Lithuania",
+      "Jamaica"
+    ],
+    "state": "part1-posted-verified-part2-reserved",
+    "verifiedAtUtc": "2026-09-08T13:12:31.968Z",
+    "postCount": 243,
+    "parts": [
+      {
+        "part": 1,
+        "state": "posted-verified",
+        "sceneIds": [
+          2075,
+          2076,
+          2083,
+          2084
+        ],
+        "caption": "Lithuania ❤️ Jamaica: rooftop embraces, lake-window handclasps and harbour-to-mountain closeness. Four fictional adult friends in AI fashion. Distant fires, smoke and mushroom-shaped clouds are imaginary, not real events. #WorldXXXSeries",
+        "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json",
+        "postUrl": "https://x.com/dogramaci/status/2097309826321678451",
+        "publicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-publication-receipt.json"
+      },
+      {
+        "part": 2,
+        "state": "reserved-unsubmitted-awaiting-live-staging",
+        "sceneIds": [
+          2077,
+          2078,
+          2085,
+          2086
+        ],
+        "caption": "Lithuania ❤️ Jamaica: geometric-studio hugs, coastal handclasps and quiet lagoon cuddles. Four fictional adult friends in AI fashion. Distant smoke and mushroom-shaped clouds are imaginary, not real events. #WorldXXXSeries",
+        "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p2-x-reservation.json",
+        "postUrl": null
+      }
+    ],
+    "postUrls": [
+      "https://x.com/dogramaci/status/2097309826321678451"
+    ],
+    "consumedSceneFamilies": [
+      2075,
+      2076,
+      2083,
+      2084
+    ],
+    "remainingSceneFamilies": [
+      2077,
+      2078,
+      2085,
+      2086
+    ],
+    "noRepostAnyVersion": true,
+    "rawArchiveComplete": true,
+    "partialCountryQatar513XEligible": false,
+    "checkpoint": "assets/lore/starlight-era/batch-514-lithuania-jamaica-x-reservation-checkpoint.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T14:03:22.179Z",
+    "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted."
+  }
 }

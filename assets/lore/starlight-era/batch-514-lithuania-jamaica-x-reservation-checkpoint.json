@@ -9,9 +9,9 @@
     "Lithuania",
     "Jamaica"
   ],
-  "state": "p1-staged-p2-reserved",
+  "state": "part1-posted-verified-part2-reserved",
   "preparedAtUtc": "2026-09-08T12:39:38.342Z",
-  "postCount": 242,
+  "postCount": 243,
   "reservations": [
     "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json",
     "assets/lore/starlight-era/batch-514-lithuania-jamaica-p2-x-reservation.json"
@@ -19,7 +19,7 @@
   "parts": [
     {
       "part": 1,
-      "state": "staged-ready-pending-staging-remote-parity",
+      "state": "posted-verified",
       "sceneIds": [
         2075,
         2076,
@@ -28,7 +28,8 @@
       ],
       "caption": "Lithuania ❤️ Jamaica: rooftop embraces, lake-window handclasps and harbour-to-mountain closeness. Four fictional adult friends in AI fashion. Distant fires, smoke and mushroom-shaped clouds are imaginary, not real events. #WorldXXXSeries",
       "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json",
-      "postUrl": null
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451",
+      "publicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-publication-receipt.json"
     },
     {
       "part": 2,
@@ -337,8 +338,163 @@
   "mediaRule": "Four stills per post: two Lithuania followed by two Jamaica, in frozen order.",
   "legacyPendingRecord": "https://x.com/dogramaci/status/2094345779376726102",
   "legacyPendingRecordNotResubmittable": true,
-  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1223.json",
-  "guardianNextAuditNotBeforeUtc": "2026-09-08T13:09:31.287Z",
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json",
+  "guardianNextAuditNotBeforeUtc": "2026-09-08T14:03:22.179Z",
   "checkpoint": "assets/lore/starlight-era/batch-514-lithuania-jamaica-x-reservation-checkpoint.json",
-  "nextSafeAction": "After this staging payload reaches HEAD/origin/PR parity and all ordinary evidence bytes match, recheck live @dogramaci, exact caption, four descriptions, media count, Made with AI, hashes and post ledger, then activate Post once. Capture and log the public URL before any other submission."
+  "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted.",
+  "updatedAtUtc": "2026-09-08T13:12:31.968Z",
+  "consumedSceneFamilies": [
+    2075,
+    2076,
+    2083,
+    2084
+  ],
+  "consumedVersions": [
+    {
+      "scene": 2075,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-meta-gallery-original.webp",
+      "sha256": "405c6e78a2c08c9b9333be6d511d624daab031e7af9aee26a39e2e9174c3e4ee",
+      "bytes": 477072,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2075,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2075-meta-internal-01-original.webp",
+      "sha256": "405c6e78a2c08c9b9333be6d511d624daab031e7af9aee26a39e2e9174c3e4ee",
+      "bytes": 477072,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-01-original.webp",
+      "sha256": "ac7374f652a111dcb2d7a6f1862953050a12c7890a32d83549b6adf22d4a6292",
+      "bytes": 490172,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-02-original.webp",
+      "sha256": "e8ec5be0caa2328de48b20ecb0fd219976305d35f2e868b44055c63ee4cfbea2",
+      "bytes": 482624,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-03-original.webp",
+      "sha256": "8b3f974eedefd9fbe289fc9c562ae9105cb537956a1be003c0d96ecea4d33370",
+      "bytes": 562206,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-04-original.webp",
+      "sha256": "5481bc97ac4ff53a83b0383eb4d5a7d538d9bc0dae11130f4be0955afe99a0d9",
+      "bytes": 567116,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-internal-05-original.webp",
+      "sha256": "a2f2ac320c94bc8d0632101b67654193ac86165d62c0d053b5a632950d22abfa",
+      "bytes": 496146,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-meta-gallery-original.webp",
+      "sha256": "a2f2ac320c94bc8d0632101b67654193ac86165d62c0d053b5a632950d22abfa",
+      "bytes": 496146,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2076,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-512-lithuania/2076-chatgpt-single-tailoring-pass.png",
+      "sha256": "ba690750a2df64f29b25c7dbdcd9688f8710305d81b0da710b86df0107b1239f",
+      "bytes": 2229522,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2083,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-meta-gallery-original.webp",
+      "sha256": "3ba7b80bc4e04b3bf2be02032fb7f6048b96ac237e34a27041f2b45d596a0a33",
+      "bytes": 652224,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2084,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-gallery-original.webp",
+      "sha256": "4d127d8e8fc9429fa38aee4a2025a1546c5b56bc843029dfc83f78f49ea19ed6",
+      "bytes": 436676,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2084,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-meta-internal-01-original.webp",
+      "sha256": "4d127d8e8fc9429fa38aee4a2025a1546c5b56bc843029dfc83f78f49ea19ed6",
+      "bytes": 436676,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2083,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2083-chatgpt-single-tailoring-pass.png",
+      "sha256": "af15e907dcbb86f68aa5002e3313755d8b14c37eeaa6654766cdf559ab0249bf",
+      "bytes": 2332852,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    },
+    {
+      "scene": 2084,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/2084-chatgpt-single-tailoring-pass.png",
+      "sha256": "1dc4329cc84b18bbc15ad327ad21c1ec69b1f2ab59564773b06a88d454093431",
+      "bytes": 2097219,
+      "contentRole": "generated-scene-media",
+      "sceneFamilyConsumed": true,
+      "noRepostAnyVersion": true,
+      "postUrl": "https://x.com/dogramaci/status/2097309826321678451"
+    }
+  ],
+  "remainingReservedSceneFamilies": [
+    2077,
+    2078,
+    2085,
+    2086
+  ]
 }

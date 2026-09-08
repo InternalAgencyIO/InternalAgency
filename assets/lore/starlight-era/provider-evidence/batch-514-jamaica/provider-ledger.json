@@ -112,7 +112,7 @@
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-513-qatar-terminal-three-stills-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-513-qatar/final-remote-closure-verification.json",
-  "nextSafeAction": "After proof-carrier HEAD/origin/PR parity, reserve two exact2+2 Lithuania512 plus Jamaica514 four-still posts. Check all original, edited and unused version hashes and scene families, freeze captions and25-percent tag rolls, verify ALT, Made with AI and live @dogramaci before one activation each. Do not reopen any render or edit.",
+  "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted.",
   "stagedAtUtc": "2026-09-08T11:50:49.717Z",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/four-composers-staging-evidence.json",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/initial-send-remote-preflight.json",
@@ -138,5 +138,72 @@
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/final-remote-closure-verification.json",
   "finalPayloadCommit": "4992e014e88f57ef45c440bfef013aaedd74243b",
   "finalRemoteVerifiedAtUtc": "2026-09-08T12:35:30.732Z",
-  "allFinalPayloadByteChecksPassed": true
+  "allFinalPayloadByteChecksPassed": true,
+  "currentXPublication": {
+    "schemaVersion": 1,
+    "batch": 514,
+    "batches": [
+      512,
+      514
+    ],
+    "countries": [
+      "Lithuania",
+      "Jamaica"
+    ],
+    "state": "part1-posted-verified-part2-reserved",
+    "verifiedAtUtc": "2026-09-08T13:12:31.968Z",
+    "postCount": 243,
+    "parts": [
+      {
+        "part": 1,
+        "state": "posted-verified",
+        "sceneIds": [
+          2075,
+          2076,
+          2083,
+          2084
+        ],
+        "caption": "Lithuania ❤️ Jamaica: rooftop embraces, lake-window handclasps and harbour-to-mountain closeness. Four fictional adult friends in AI fashion. Distant fires, smoke and mushroom-shaped clouds are imaginary, not real events. #WorldXXXSeries",
+        "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p1-x-reservation.json",
+        "postUrl": "https://x.com/dogramaci/status/2097309826321678451",
+        "publicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/lithuania-jamaica-p1-x-publication-receipt.json"
+      },
+      {
+        "part": 2,
+        "state": "reserved-unsubmitted-awaiting-live-staging",
+        "sceneIds": [
+          2077,
+          2078,
+          2085,
+          2086
+        ],
+        "caption": "Lithuania ❤️ Jamaica: geometric-studio hugs, coastal handclasps and quiet lagoon cuddles. Four fictional adult friends in AI fashion. Distant smoke and mushroom-shaped clouds are imaginary, not real events. #WorldXXXSeries",
+        "reservation": "assets/lore/starlight-era/batch-514-lithuania-jamaica-p2-x-reservation.json",
+        "postUrl": null
+      }
+    ],
+    "postUrls": [
+      "https://x.com/dogramaci/status/2097309826321678451"
+    ],
+    "consumedSceneFamilies": [
+      2075,
+      2076,
+      2083,
+      2084
+    ],
+    "remainingSceneFamilies": [
+      2077,
+      2078,
+      2085,
+      2086
+    ],
+    "noRepostAnyVersion": true,
+    "rawArchiveComplete": true,
+    "partialCountryQatar513XEligible": false,
+    "checkpoint": "assets/lore/starlight-era/batch-514-lithuania-jamaica-x-reservation-checkpoint.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T14:03:22.179Z",
+    "nextSafeAction": "Verify the first-post closure at HEAD/origin/PR parity, then stage the frozen part2 reservation only. Part1 is terminal and no version may be reposted."
+  },
+  "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1318.json"
 }

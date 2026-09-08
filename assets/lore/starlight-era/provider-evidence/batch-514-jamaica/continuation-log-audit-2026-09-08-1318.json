@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "batch": 514,
+  "auditedAtUtc": "2026-09-08T13:18:22.179Z",
+  "previousAudit": "assets/lore/starlight-era/provider-evidence/batch-514-jamaica/continuation-log-audit-2026-09-08-1223.json",
+  "previousAuditAtUtc": "2026-09-08T12:24:31.287Z",
+  "nextAuditNotBeforeUtc": "2026-09-08T14:03:22.179Z",
+  "scope": "Jamaica final tailoring and remote closure, Lithuania-Jamaica pair reservation, first X staging and single public activation, raw-exposure and duplicate-lock audit.",
+  "state": "audit-complete-no-probability-or-ceiling-change",
+  "remoteVerifiedHead": "df2f153d094ba55addca66e408d50ddcfd64317d",
+  "findings": [
+    {
+      "category": "throughput",
+      "finding": "Jamaica has four accepted stills, three returned tailoring PNGs and one safe Meta original after scene2086 output moderation. All four single-use edit allowances are terminal. Fifteen saved image files contain eleven unique versions.",
+      "action": "No extra edit invocation, no aesthetic Meta retry, retain all used and unused originals and the exact blocked response."
+    },
+    {
+      "category": "x-media-order",
+      "finding": "Composer DOM media groups are column-major while the visual grid, ALT editor Next image sequence and public photo endpoints use row-major upload order. All four descriptions matched their actual images after direct review.",
+      "action": "Do not swap media or ALT based only on composer DOM order. Verify editor photo content and all four public endpoints."
+    },
+    {
+      "category": "x-alt-editor",
+      "finding": "Keyboard Enter on Next or Previous image can insert a newline into the newly focused ALT textbox. Visible click plus exact fill and the displayed character count resolved this before publication.",
+      "action": "Use clicks for editor navigation and Save. Verify text and exact visible counter, not a snapshot parser alone."
+    },
+    {
+      "category": "x-recovery",
+      "finding": "The existing first draft briefly returned to the underlying timeline during ALT work. Visible Profile/account inspection and the ordinary Post navigation link restored the same caption, four uploaded files and ALT without reupload. After one final Post activation, profile refresh revealed the public result.",
+      "action": "Archive activation immediately, never activate Post again after an uncertain transition, and inspect the public profile with supported read-only controls."
+    },
+    {
+      "category": "publication",
+      "finding": "Lithuania-Jamaica part1 is public at https://x.com/dogramaci/status/2097309826321678451 with exact caption, four ordered photos, four ALT descriptions and Made with AI. Part2 remains separately reserved and has not been uploaded or activated.",
+      "action": "Consume every part1 scene-family version and close this evidence remotely before staging part2."
+    },
+    {
+      "category": "authority",
+      "finding": "Qatar513 remains terminal partial with three accepted scenes and no normal-country X eligibility. Legacy Cuba, Tanzania and historical2+1 scheduling are superseded by current four-scene country and2+2 publication authority.",
+      "action": "No partial-country exception, no terminal reopening, no replacement guardian or probability change."
+    }
+  ],
+  "checks": {
+    "metaInitialSends": 4,
+    "metaRetries": 0,
+    "chatgptInvocations": 4,
+    "returnedPngScenes": [
+      2083,
+      2084,
+      2085
+    ],
+    "blockedEditScenes": [
+      2086
+    ],
+    "savedSourceImageFiles": 12,
+    "uniqueSourceVersions": 8,
+    "allSavedImageFiles": 15,
+    "uniqueSavedVersions": 11,
+    "lfsPaths": 18,
+    "lfsUniqueObjects": 14,
+    "lfsAllPass": true,
+    "ordinaryPayloadBlobs": 113,
+    "ordinaryAllPass": true,
+    "proofCarrierBlobs": 7,
+    "proofCarrierAllPass": true,
+    "xStagingOrdinaryBlobs": 13,
+    "xStagingAllPass": true,
+    "protected7FilesUnchanged": true,
+    "xLedgerPostCountBeforeClosure": 242,
+    "xNewPublicPostsVerified": 1,
+    "part1PostActivations": 1,
+    "part1Uploads": 1,
+    "part2PostActivations": 0,
+    "part2Uploads": 0,
+    "allCurrentlyExposedMetaImageUrlsArchived": true,
+    "newAutomations": 0,
+    "newWorkers": 0,
+    "newSubagents": 0,
+    "rollContractChanged": false,
+    "retryCeilingsChanged": false
+  },
+  "browserReuseChecks": [
+    {
+      "scene": 2083,
+      "tab": "33",
+      "thinking": true,
+      "account": true,
+      "composerExactInnerText": "\n",
+      "sendDisabled": true,
+      "responseImageUrls": [
+        "https://scontent.xx.fbcdn.net/v/t39.105495-1/800469597_1610023974160716_6386466117336381724_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=0SwhBF-FLZQQ7kNvwFWt6W-&sdl=0&ccb=14-4&oh=00_AQK1-6NkhWUcyGv0D_hu35eGQyAYbx-As4Ax4DQrnmq8_A&oe=6AA5B8C7&_nc_sid=a21977"
+      ],
+      "unarchivedResponseImageUrls": [],
+      "newChatVisible": true,
+      "responseImages": [
+        {
+          "label": "gallery/kingston_harbour_editorial.webp",
+          "url": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800469597_1610023974160716_6386466117336381724_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=0SwhBF-FLZQQ7kNvwFWt6W-&sdl=0&ccb=14-4&oh=00_AQK1-6NkhWUcyGv0D_hu35eGQyAYbx-As4Ax4DQrnmq8_A&oe=6AA5B8C7&_nc_sid=a21977"
+        }
+      ]
+    },
+    {
+      "scene": 2084,
+      "tab": "34",
+      "thinking": true,
+      "account": true,
+      "composerExactInnerText": "\n",
+      "sendDisabled": true,
+      "responseImageUrls": [
+        "https://scontent.xx.fbcdn.net/v/t39.105495-1/799843849_1122998513393834_901617950844625303_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=haetCatr2dEQ7kNvwHMK8q9&sdl=0&ccb=14-4&oh=00_AQLf_uihG0uWHSxY87gLkh12JlIf92AnY6Z9bD77lwFzsQ&oe=6AA5B385&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t58.90637-1/706811320_1309108781150088_6705126305038548231_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=n9T27SDInoMQ7kNvwH4nw3W&sdl=0&ccb=14-4&oh=00_AQJpnZEwc-BuaYtDR9Ha02kjATRk20jfSQ8e2drhuBf4rw&oe=6AA1BA12&_nc_sid=a21977"
+      ],
+      "unarchivedResponseImageUrls": [],
+      "newChatVisible": true,
+      "responseImages": [
+        {
+          "label": "gallery/editorial_group_hug.webp",
+          "url": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799843849_1122998513393834_901617950844625303_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=haetCatr2dEQ7kNvwHMK8q9&sdl=0&ccb=14-4&oh=00_AQLf_uihG0uWHSxY87gLkh12JlIf92AnY6Z9bD77lwFzsQ&oe=6AA5B385&_nc_sid=a21977"
+        },
+        {
+          "label": "Inline image",
+          "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/706811320_1309108781150088_6705126305038548231_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=n9T27SDInoMQ7kNvwH4nw3W&sdl=0&ccb=14-4&oh=00_AQJpnZEwc-BuaYtDR9Ha02kjATRk20jfSQ8e2drhuBf4rw&oe=6AA1BA12&_nc_sid=a21977"
+        }
+      ]
+    },
+    {
+      "scene": 2085,
+      "tab": "35",
+      "thinking": true,
+      "account": true,
+      "composerExactInnerText": "\n",
+      "sendDisabled": true,
+      "responseImageUrls": [
+        "https://scontent.xx.fbcdn.net/v/t39.105495-1/799869140_915167041268090_6645554228098228653_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=jCl2_7uq6fAQ7kNvwFngRwe&sdl=0&ccb=14-4&oh=00_AQJ41J2g9_K3m51lAAjd3hRXDavVbpuTUnC8kXplsHzj1w&oe=6AA5B36A&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t58.90637-1/526355856_1545823704250870_1284579649206634991_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=110&_nc_ohc=ZuilDdhWlXcQ7kNvwF-GPzb&sdl=0&ccb=14-4&oh=00_AQLm2_j5jWvZ703sYd5SVqcVT15diGG9vTQsUBA222XULA&oe=6AA1DBEA&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t58.90637-1/708632796_1068684482535972_7847674904211278574_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=qB1Z159sNJAQ7kNvwEws498&sdl=0&ccb=14-4&oh=00_AQKTP9zOUVvPFIGuB5G9igHq8aixEGbA2DXd3L5tYymUpg&oe=6AA1E5CA&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t58.90637-1/708441786_1393501178846143_4672484575562572022_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=107&_nc_ohc=6i12IhOCsz4Q7kNvwHsV57c&sdl=0&ccb=14-4&oh=00_AQIupEFOiEENeRGL611QCe7q72oa_xXpRmIurslYhhr2sA&oe=6AA1D09B&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t58.90637-1/706880021_1108661608401070_6060285922713930448_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=110&_nc_ohc=7yAsHaj7jpUQ7kNvwHQvwpS&sdl=0&ccb=14-4&oh=00_AQIrUaK0ZkUlK2ZdIprq7JMNHNxd-tZtG3ZT3XMIrgi1Lw&oe=6AA1E8DA&_nc_sid=a21977"
+      ],
+      "unarchivedResponseImageUrls": [],
+      "newChatVisible": true,
+      "responseImages": [
+        {
+          "label": "gallery/dutch_tilt_photo.webp",
+          "url": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799869140_915167041268090_6645554228098228653_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=jCl2_7uq6fAQ7kNvwFngRwe&sdl=0&ccb=14-4&oh=00_AQJ41J2g9_K3m51lAAjd3hRXDavVbpuTUnC8kXplsHzj1w&oe=6AA5B36A&_nc_sid=a21977"
+        },
+        {
+          "label": "Inline image",
+          "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/526355856_1545823704250870_1284579649206634991_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=110&_nc_ohc=ZuilDdhWlXcQ7kNvwF-GPzb&sdl=0&ccb=14-4&oh=00_AQLm2_j5jWvZ703sYd5SVqcVT15diGG9vTQsUBA222XULA&oe=6AA1DBEA&_nc_sid=a21977"
+        },
+        {
+          "label": "Inline image",
+          "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/708632796_1068684482535972_7847674904211278574_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=qB1Z159sNJAQ7kNvwEws498&sdl=0&ccb=14-4&oh=00_AQKTP9zOUVvPFIGuB5G9igHq8aixEGbA2DXd3L5tYymUpg&oe=6AA1E5CA&_nc_sid=a21977"
+        },
+        {
+          "label": "Inline image",
+          "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/708441786_1393501178846143_4672484575562572022_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=107&_nc_ohc=6i12IhOCsz4Q7kNvwHsV57c&sdl=0&ccb=14-4&oh=00_AQIupEFOiEENeRGL611QCe7q72oa_xXpRmIurslYhhr2sA&oe=6AA1D09B&_nc_sid=a21977"
+        },
+        {
+          "label": "Inline image",
+          "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/706880021_1108661608401070_6060285922713930448_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=110&_nc_ohc=7yAsHaj7jpUQ7kNvwHQvwpS&sdl=0&ccb=14-4&oh=00_AQIrUaK0ZkUlK2ZdIprq7JMNHNxd-tZtG3ZT3XMIrgi1Lw&oe=6AA1E8DA&_nc_sid=a21977"
+        }
+      ]
+    },
+    {
+      "scene": 2086,
+      "tab": "36",
+      "thinking": true,
+      "account": true,
+      "composerExactInnerText": "\n",
+      "sendDisabled": true,
+      "responseImageUrls": [
+        "https://scontent.xx.fbcdn.net/v/t39.105495-1/800066041_1582072840282590_1997704113148419168_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=T1k0cxuwu6sQ7kNvwEiOw41&sdl=0&ccb=14-4&oh=00_AQKvQj2QM3lSq2uss9tqWhEs8xNeykeSXY355EMzPdKWHA&oe=6AA5BE73&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t39.105495-1/800642800_2613142345814508_3667195908693075538_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=WcC_DUfxfx8Q7kNvwEXpDZD&sdl=0&ccb=14-4&oh=00_AQL1SUwN0qdt0PDfanHxmOOETWf1Gqch6SiP7MbHEgcg-g&oe=6AA5E57F&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t58.90637-1/800512527_28250312334611308_4554787294907166458_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=104&_nc_ohc=CzK_fvotdtMQ7kNvwFbAx93&sdl=0&ccb=14-4&oh=00_AQLhAU_LkBinoDXIWoFxnAZ1MwPkIkLRrUDFgewzJRZLZw&oe=6AA1E903&_nc_sid=a21977",
+        "https://scontent.xx.fbcdn.net/v/t58.90637-1/703473557_977692594731218_4248109060074462806_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=gmbe7LCC8V8Q7kNvwH-K5ct&sdl=0&ccb=14-4&oh=00_AQKAzCZnKuiM05XsHorthz5kSke-mukcw621zXazhsPnlw&oe=6AA1BC63&_nc_sid=a21977"
+      ],
+      "unarchivedResponseImageUrls": [],
+      "newChatVisible": true,
+      "responseImages": [
+        {
+          "label": "gallery/jamaica_conservatory_group.webp",
+          "url": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800066041_1582072840282590_1997704113148419168_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=106&_nc_ohc=T1k0cxuwu6sQ7kNvwEiOw41&sdl=0&ccb=14-4&oh=00_AQKvQj2QM3lSq2uss9tqWhEs8xNeykeSXY355EMzPdKWHA&oe=6AA5BE73&_nc_sid=a21977"
+        },
+        {
+          "label": "gallery/conservatory_group_portrait.webp",
+          "url": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800642800_2613142345814508_3667195908693075538_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=100&_nc_ohc=WcC_DUfxfx8Q7kNvwEXpDZD&sdl=0&ccb=14-4&oh=00_AQL1SUwN0qdt0PDfanHxmOOETWf1Gqch6SiP7MbHEgcg-g&oe=6AA5E57F&_nc_sid=a21977"
+        },
+        {
+          "label": "Inline image",
+          "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/800512527_28250312334611308_4554787294907166458_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=104&_nc_ohc=CzK_fvotdtMQ7kNvwFbAx93&sdl=0&ccb=14-4&oh=00_AQLhAU_LkBinoDXIWoFxnAZ1MwPkIkLRrUDFgewzJRZLZw&oe=6AA1E903&_nc_sid=a21977"
+        },
+        {
+          "label": "Inline image",
+          "url": "https://scontent.xx.fbcdn.net/v/t58.90637-1/703473557_977692594731218_4248109060074462806_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=102&_nc_ohc=gmbe7LCC8V8Q7kNvwH-K5ct&sdl=0&ccb=14-4&oh=00_AQKAzCZnKuiM05XsHorthz5kSke-mukcw621zXazhsPnlw&oe=6AA1BC63&_nc_sid=a21977"
+        }
+      ]
+    }
+  ],
+  "guardian": {
+    "id": "starlight-pipeline-guardian",
+    "status": "ACTIVE",
+    "cadenceMinutes": 10,
+    "scheduleChanged": false,
+    "sha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67"
+  },
+  "nextSafeAction": "Publish the first-post closure and verify HEAD/origin/PR parity. Then stage the unchanged part2 reservation with exact media, ALT, disclosure and live account checks before one Post activation."
+}
