@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "batch": 509,
+  "country": "Bosnia and Herzegovina",
+  "reviewedAtUtc": "2026-09-08T04:18:14.201Z",
+  "reviewMethod": "Main agent directly inspected all16 unique local image byte versions using view_image, plus all three identity anchor plates.",
+  "savedFiles": 18,
+  "uniqueSavedImageVersions": 16,
+  "generatedSceneFiles": 12,
+  "uniqueGeneratedSceneVersions": 10,
+  "providerContextReferenceFiles": 6,
+  "allExposedBytesSaved": true,
+  "allFourSourcesTechnicallyUsable": false,
+  "selectedSources": [
+    {
+      "scene": 2063,
+      "label": "gallery/fashion_atelier_lounge.webp",
+      "labelIndex": 0,
+      "kind": "gallery",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-gallery-original.webp",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800115110_2192866941281359_896098095825401107_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=107&_nc_ohc=bOze88UAsbsQ7kNvwHT4ZcF&sdl=0&ccb=14-4&oh=00_AQJe3vs39kVW13rrs_OKdHdPFzeYCeajc9rJgCrjqnRN1Q&oe=6AA54E7A&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/447a6e8c-5538-4a23-be8f-8f6e438318a8",
+      "downloadPath": "C:\\Users\\A\\Downloads\\800115110_2192866941281359_896098095825401107_n.webp",
+      "observedAtUtc": "2026-09-08T03:42:20.141Z",
+      "bytes": 511660,
+      "sha256": "a3bc66b9ace636ab036b1de8ef1858b58bbc6c0e37ef4d7d023e2efb822c52d0",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "archiveMethod": "Visible browser downloadMedia and download event",
+      "status": "archived-original-pending-source-qa"
+    },
+    {
+      "scene": 2065,
+      "label": "gallery/four_women_editorial.webp",
+      "labelIndex": 0,
+      "kind": "gallery",
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2065-meta-gallery-original.webp",
+      "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/799948485_2231832617735588_730395145764948492_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=108&_nc_ohc=loGmV_Gj25sQ7kNvwHnj3SG&sdl=0&ccb=14-4&oh=00_AQLPwSE2eD19NhbO2BPEYTSZ2bafobPl0QTPgQBbNsBuiQ&oe=6AA53A8C&_nc_sid=a21977",
+      "providerUrl": "https://www.meta.ai/prompt/bf50b110-b4c6-467d-b0ce-b41308198d63",
+      "downloadPath": "C:\\Users\\A\\Downloads\\799948485_2231832617735588_730395145764948492_n.webp",
+      "observedAtUtc": "2026-09-08T03:42:22.217Z",
+      "bytes": 518702,
+      "sha256": "8d4d4d0d4726edad8b7926bfe5d0c6771e2d335fa3e3dbed92e8908dc3d08668",
+      "dimensions": {
+        "width": 1152,
+        "height": 2048
+      },
+      "archiveMethod": "Visible browser downloadMedia and download event",
+      "status": "archived-original-pending-source-qa"
+    }
+  ],
+  "hardUnusableScenes": [
+    2064
+  ],
+  "saferRecoveryScenes": [
+    2066
+  ],
+  "variants": [
+    {
+      "scene": 2063,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-internal-2-original.webp",
+      "sha256": "a3bc66b9ace636ab036b1de8ef1858b58bbc6c0e37ef4d7d023e2efb822c52d0",
+      "decision": "selected-usable-source",
+      "notes": [
+        "Four fictional adult characters, supported back hug and handclasp, opaque clothing, distinguishable faces and plausible anatomy pass.",
+        "Full-body crop and mild tilt differ from the closer rolled camera. Shoe and stocking details vary. Preserve the actual crop; no aesthetic retry."
+      ]
+    },
+    {
+      "scene": 2063,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2063-meta-internal-1-original.webp",
+      "sha256": "7a52655cecacd4f47764bb913b886944a768da3f19566ea198759cd50a8880f9",
+      "decision": "unused-usable-source-variant",
+      "notes": [
+        "Four fictional adult characters, supported back hug and handclasp, opaque clothing, distinguishable faces and plausible anatomy pass.",
+        "Full-body crop and mild tilt differ from the closer rolled camera. Shoe and stocking details vary. Preserve the actual crop; no aesthetic retry."
+      ]
+    },
+    {
+      "scene": 2064,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2064-meta-gallery-original.webp",
+      "sha256": "1bae8a07786c839e26698cf9ab4e50e127ac1195ae021596c4413d5783f100ba",
+      "decision": "hard-unusable-five-person-cast",
+      "notes": [
+        "Direct image review shows five women, including an extra dark-haired character in the upper-seat grouping. Four-person identity gate fails. No clothing-only edit is permitted on this source. First bounded Meta technical recovery is prepared; no identical prompt resend."
+      ]
+    },
+    {
+      "scene": 2065,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2065-meta-internal-1-original.webp",
+      "sha256": "8d4d4d0d4726edad8b7926bfe5d0c6771e2d335fa3e3dbed92e8908dc3d08668",
+      "decision": "selected-usable-source",
+      "notes": [
+        "Four recognizable fictional adult characters in an affectionate supported handclasp and shoulder-touch grouping. Opaque coverage, plausible anatomy and usable original dimensions pass.",
+        "Crop reaches knees rather than the requested closer oblique frame. Preserve actual source crop in the single edit and record styling deviations without a Meta aesthetic retry.",
+        "Distant fire and mushroom-shaped smoke are imaginary scenery. Any publication must disclose that the scene is fictional."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-1-original.webp",
+      "sha256": "b838c95fa31136b1eb06214425bf6648668dad535057ef2fb370e985ac3f13fa",
+      "decision": "archived-unselected-prior-to-provider-safer-alternative",
+      "notes": [
+        "Four distinct fictional adult faces and opaque clothing are visible. No publication selection is made from the six generated internal variants because the terminal response declined the exact version and offered narrower safer constraints.",
+        "The saved images do not implement the complete offered safer package: waist cutouts or wider-than-face crop and temple contact persist. Prepare only the explicit safer alternative in one first recovery; no declined-prompt replay and no built-in edit of these initial images.",
+        "Tattoo ownership, extra branding and flag geometry vary. All bytes and exact response remain archived."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-2-original.webp",
+      "sha256": "43883e0e198bd0009d65cf55019705a2fea8b6bcb6e897eda94b210110eb6047",
+      "decision": "archived-unselected-prior-to-provider-safer-alternative",
+      "notes": [
+        "Four distinct fictional adult faces and opaque clothing are visible. No publication selection is made from the six generated internal variants because the terminal response declined the exact version and offered narrower safer constraints.",
+        "The saved images do not implement the complete offered safer package: waist cutouts or wider-than-face crop and temple contact persist. Prepare only the explicit safer alternative in one first recovery; no declined-prompt replay and no built-in edit of these initial images.",
+        "Tattoo ownership, extra branding and flag geometry vary. All bytes and exact response remain archived."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-3-original.webp",
+      "sha256": "17990638f1ecad524367035db04a0f7867abf6b8d28882528db5653c9486ef6b",
+      "decision": "archived-unselected-prior-to-provider-safer-alternative",
+      "notes": [
+        "Four distinct fictional adult faces and opaque clothing are visible. No publication selection is made from the six generated internal variants because the terminal response declined the exact version and offered narrower safer constraints.",
+        "The saved images do not implement the complete offered safer package: waist cutouts or wider-than-face crop and temple contact persist. Prepare only the explicit safer alternative in one first recovery; no declined-prompt replay and no built-in edit of these initial images.",
+        "Tattoo ownership, extra branding and flag geometry vary. All bytes and exact response remain archived."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-4-original.webp",
+      "sha256": "2b55613c3e102b389ed03237bad3758ca59cad79a3af6056854975b3a8b50254",
+      "decision": "archived-unselected-prior-to-provider-safer-alternative",
+      "notes": [
+        "Four distinct fictional adult faces and opaque clothing are visible. No publication selection is made from the six generated internal variants because the terminal response declined the exact version and offered narrower safer constraints.",
+        "The saved images do not implement the complete offered safer package: waist cutouts or wider-than-face crop and temple contact persist. Prepare only the explicit safer alternative in one first recovery; no declined-prompt replay and no built-in edit of these initial images.",
+        "Tattoo ownership, extra branding and flag geometry vary. All bytes and exact response remain archived."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-5-original.webp",
+      "sha256": "2706660047c8543e42dc4c7f6be17ea41956506e8d96de13eb3904f6326a8fcb",
+      "decision": "archived-unselected-prior-to-provider-safer-alternative",
+      "notes": [
+        "Four distinct fictional adult faces and opaque clothing are visible. No publication selection is made from the six generated internal variants because the terminal response declined the exact version and offered narrower safer constraints.",
+        "The saved images do not implement the complete offered safer package: waist cutouts or wider-than-face crop and temple contact persist. Prepare only the explicit safer alternative in one first recovery; no declined-prompt replay and no built-in edit of these initial images.",
+        "Tattoo ownership, extra branding and flag geometry vary. All bytes and exact response remain archived."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-6-original.webp",
+      "sha256": "e1d5f1b5ecf86508b39af027ca8271353532c28865ba9afde496d814cf622d89",
+      "decision": "archived-unselected-prior-to-provider-safer-alternative",
+      "notes": [
+        "Four distinct fictional adult faces and opaque clothing are visible. No publication selection is made from the six generated internal variants because the terminal response declined the exact version and offered narrower safer constraints.",
+        "The saved images do not implement the complete offered safer package: waist cutouts or wider-than-face crop and temple contact persist. Prepare only the explicit safer alternative in one first recovery; no declined-prompt replay and no built-in edit of these initial images.",
+        "Tattoo ownership, extra branding and flag geometry vary. All bytes and exact response remain archived."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-7-original.webp",
+      "sha256": "218b639de3c0abc70fa72ce459e42ede2f49a4ea2bcc19b6ab361c87cf2b442d",
+      "decision": "non-render-provider-context-reference",
+      "notes": [
+        "Flag-only illustration or photograph. No cast. This is provider-exposed context evidence, not a generated quartet scene."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-8-original.webp",
+      "sha256": "f48bea3ccdb9d16499f76afad21b0e5978bf5cb7d49911e3109ff02ac6be21b0",
+      "decision": "non-render-provider-context-reference",
+      "notes": [
+        "Flag-only illustration or photograph. No cast. This is provider-exposed context evidence, not a generated quartet scene."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-9-original.webp",
+      "sha256": "ae6995b33ccbc7f930da2de8cb86d5f7c639a41bec5e89fec97fe4d13867a90f",
+      "decision": "non-render-provider-context-reference",
+      "notes": [
+        "Flag-only illustration or photograph. No cast. This is provider-exposed context evidence, not a generated quartet scene."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-10-original.webp",
+      "sha256": "e56264e02e173c6f37d81d73a81024e06ec130daeaf91a74349159736028acca",
+      "decision": "non-render-provider-context-reference",
+      "notes": [
+        "Landscape or building context photograph. No cast. This is provider-exposed context evidence, not a generated quartet scene."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-11-original.webp",
+      "sha256": "40a2b79cb8dbbbc60a2bf6032cf329a2362f758bb04939effd11c6a1357162cd",
+      "decision": "non-render-provider-context-reference",
+      "notes": [
+        "Landscape or building context photograph. No cast. This is provider-exposed context evidence, not a generated quartet scene."
+      ]
+    },
+    {
+      "scene": 2066,
+      "path": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/2066-meta-internal-12-original.webp",
+      "sha256": "f6b015a0086743bc5497ec4688d1c714076b201a948f98d81b170fe9081f7e41",
+      "decision": "non-render-provider-context-reference",
+      "notes": [
+        "Landscape or building context photograph. No cast. This is provider-exposed context evidence, not a generated quartet scene."
+      ]
+    }
+  ],
+  "policy": "One initial occurrence per scene, no duplicate resend. Maximum two hard-failure recovery Sends per scene. Exactly one built-in tailoring invocation only after a usable source is selected. No aesthetic retry.",
+  "canonicalCorrections": [
+    "2064 final gallery contains five women and fails the four-character hard gate.",
+    "2066 initial archive contains six generated quartet images and six provider context references, not twelve generated variants.",
+    "2066 has no final gallery; terminal safer-alternative response remains authoritative."
+  ]
+}
