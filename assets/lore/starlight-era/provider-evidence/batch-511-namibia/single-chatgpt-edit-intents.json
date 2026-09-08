@@ -4,8 +4,8 @@
   "country": "Namibia",
   "createdAtUtc": "2026-09-08T07:33:34.445Z",
   "policy": "Exactly one built-in image_gen invocation per selected usable scene. A block, failure or interruption consumes it. No retry, API or CLI fallback. Preserve raw source and every result with independent attribution.",
-  "state": "three-terminal-edits-one2071-source-edit-prepared",
-  "invocations": 3,
+  "state": "all-four-single-edit-allowances-terminal",
+  "invocations": 4,
   "deferredScenes": [],
   "intents": [
     {
@@ -197,8 +197,8 @@
     {
       "scene": 2071,
       "occurrenceId": "batch-511-scene-2071-chatgpt-single-tailoring",
-      "state": "remote-verified-ready-for-one-edit",
-      "invocationCount": 0,
+      "state": "blocked-or-failed-allowance-consumed",
+      "invocationCount": 1,
       "maximumInvocations": 1,
       "source": {
         "scene": 2071,
@@ -248,19 +248,25 @@
       "sourceSpecificLimits": "Source-specific invariant: Image1 is the sole edit target. Preserve its actual 1152x2048 filled rectangle, oblique camera, four exact adult faces, sculptural braids, body proportions, seated arrangement, handclasp and shoulder-contact ownership, shoe positions, cobalt seating, brass windows and scenery. Do not restage, rotate, widen, outpaint or reveal offscreen anatomy. Make visible mini hems substantially more concise using stable lined opaque wearable tailoring; keep all four midriffs covered, including closing the small gap on Ellie in the cobalt top. Preserve existing rainbow legwear and the crescent upper-arm tattoo. The distant smoke is fictional, not an actual disaster. Images2-4 are face-identity-only quartet plates in order938,936,937, and every plate contains all four characters.",
       "neverRetry": true,
       "maximumOutputImages": 1,
-      "allowanceConsumed": false,
+      "allowanceConsumed": true,
       "historicalLexiconSnapshot": {
         "path": "C:/Users/A/Documents/ChatGPT/RENDERS/outputs/meta5_blocked_prompt_lexicon.jsonl",
         "sha256": "3d4ec36c57c8da6434bda58cab21387ee2628340d1b96ad156473cac7c8d8f17",
         "purpose": "Historical provenance only. No evasion, obfuscation or automated refusal-word substitution is used for these original safe clothing-edit requests."
       },
-      "sourceRecoveryOccurrence": "batch-511-scene-2071-meta-hard-failure-recovery-1"
+      "sourceRecoveryOccurrence": "batch-511-scene-2071-meta-hard-failure-recovery-1",
+      "reservedAtUtc": "2026-09-08T08:15:29.680Z",
+      "dispatchGuard": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-dispatch-guard.json",
+      "additionalInvocationsAllowed": 0,
+      "startedAtUtc": "2026-09-08T08:15:57.054Z",
+      "completedAtUtc": "2026-09-08T08:16:58.468Z",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-output-block.json"
     }
   ],
   "sourceRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/source-and-edit-preflight-remote-verification.json",
   "sourcePayloadCommit": "e69013b2a04bc17d1937ecb058841a007e1b8b66",
   "sourceVerifiedAtUtc": "2026-09-08T07:40:08.992Z",
-  "nextSafeAction": "After this carrier is committed, pushed and HEAD/origin/PR match, reserve and issue only the2071 built-in tailoring invocation once. Record result or block, preserve all output bytes, compare against the original, then close all four Namibia scenes. Do not repeat any Meta Send or existing edit.",
+  "nextSafeAction": "Seal and remotely verify complete Namibia closure with all sources, edits, output block, QA and accessibility. Then prepare two nonduplicate Armenia/Namibia four-photo country-pair posts, with fresh @dogramaci, media, exact captions, ALT, Made with AI and Git/LFS/PR gates before one Post each.",
   "reservedAtUtc": "2026-09-08T07:42:07.563Z",
   "actionTimeCheck": {
     "observedAtUtc": "2026-09-08T07:41:22.210Z",
@@ -336,10 +342,28 @@
       }
     ]
   },
-  "executionCell": "2283",
+  "executionCell": "2324",
   "executionCellComplete": true,
   "results": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/single-chatgpt-edit-results.json",
   "recoveryIntent": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-hard-failure-recovery-1-intent.json",
   "scene2071EditRemotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-remote-preflight.json",
-  "scene2071SourcePayloadCommit": "eeadd0de497bd0f10aa36ed72219d4eeea313b06"
+  "scene2071SourcePayloadCommit": "eeadd0de497bd0f10aa36ed72219d4eeea313b06",
+  "executionCells": [
+    {
+      "cell": "2283",
+      "scenes": [
+        2072,
+        2073,
+        2074
+      ],
+      "complete": true
+    },
+    {
+      "cell": "2324",
+      "scenes": [
+        2071
+      ],
+      "complete": true
+    }
+  ]
 }

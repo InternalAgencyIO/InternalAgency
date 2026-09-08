@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "batch": 511,
   "country": "Namibia",
-  "completedAtUtc": "2026-09-08T07:49:53.755Z",
-  "executionCell": "2283",
+  "completedAtUtc": "2026-09-08T08:22:16.624Z",
+  "executionCell": "2324",
   "executionCellComplete": true,
-  "invocations": 3,
+  "invocations": 4,
   "returnedPngs": 3,
-  "blocks": 0,
+  "blocks": 1,
   "errors": 0,
   "allAllowancesConsumed": true,
   "additionalInvocationsAllowedForTheseScenes": 0,
@@ -98,7 +98,33 @@
         "receiptPath": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-chatgpt-single-tailoring-pass.png.receipt.json"
       },
       "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-chatgpt-single-tailoring-pass.png.receipt.json"
+    },
+    {
+      "scene": 2071,
+      "startedAtUtc": "2026-09-08T08:15:57.054Z",
+      "completedAtUtc": "2026-09-08T08:16:58.468Z",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID da9f91b7-6b8d-4f03-b6a3-868765d8267a. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "state": "failed-or-blocked-allowance-consumed",
+      "receipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-single-edit-output-block.json",
+      "rawMedia": null
     }
   ],
-  "deferredScene2071": "No source exists, no ChatGPT invocation prepared or issued."
+  "executionCells": [
+    {
+      "cell": "2283",
+      "scenes": [
+        2072,
+        2073,
+        2074
+      ],
+      "complete": true
+    },
+    {
+      "cell": "2324",
+      "scenes": [
+        2071
+      ],
+      "complete": true
+    }
+  ]
 }
