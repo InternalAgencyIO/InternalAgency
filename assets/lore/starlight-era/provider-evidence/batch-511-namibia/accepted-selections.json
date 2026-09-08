@@ -3,7 +3,7 @@
   "batch": 511,
   "country": "Namibia",
   "acceptedAtUtc": "2026-09-08T08:22:16.624Z",
-  "state": "two-of-four-scenes-posted-verified",
+  "state": "four-stills-posted-verified",
   "accepted": [
     {
       "scene": 2071,
@@ -26,7 +26,7 @@
       "chatgptOutcome": "attributed-output-moderation-block-original-selected",
       "additionalMetaSendsAllowed": 0,
       "additionalChatgptEditsAllowed": 0,
-      "eligibleForNormalCountryPairing": true,
+      "eligibleForNormalCountryPairing": false,
       "xEligible": false,
       "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2071-accessibility.json",
@@ -66,7 +66,7 @@
       "chatgptOutcome": "returned-edit-archived-unused-crop-expansion-original-selected",
       "additionalMetaSendsAllowed": 0,
       "additionalChatgptEditsAllowed": 0,
-      "eligibleForNormalCountryPairing": true,
+      "eligibleForNormalCountryPairing": false,
       "xEligible": false,
       "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2072-accessibility.json",
@@ -104,22 +104,24 @@
       "chatgptOutcome": "returned-edit-selected",
       "additionalMetaSendsAllowed": 0,
       "additionalChatgptEditsAllowed": 0,
-      "eligibleForNormalCountryPairing": true,
+      "eligibleForNormalCountryPairing": false,
       "xEligible": false,
-      "xEligibilityPending": [
-        "fresh live staging and one public Post under exact frozen reservation"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2073-accessibility.json",
       "alt": "AI-generated fictional Namibia fashion editorial: four adult women share a back hug and handclasp around a pale daybed in a dune-window studio. Orange, ivory, graphite, ochre and teal tailoring pair with rainbow boots and stockings. RAZE and IA arm tattoos are visible. Distant mushroom-shaped smoke is imaginary, not a real event.",
       "safetyOverrides": [
         "Disclose distant smoke and mushroom-shaped clouds as imaginary synthetic effects."
       ],
-      "state": "remote-verified-accepted-unpublished",
-      "sceneFamilyConsumed": false,
+      "state": "posted-verified",
+      "sceneFamilyConsumed": true,
       "remoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
       "remotePayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
       "xReservation": "assets/lore/starlight-era/batch-511-armenia-namibia-p2-x-reservation.json",
-      "sceneFamilyReserved": true
+      "sceneFamilyReserved": false,
+      "postUrl": "https://x.com/dogramaci/status/2097249345301107095",
+      "noRepostAnyVersion": true,
+      "postedAtUtc": "2026-09-08T09:03:03.074Z",
+      "xPublicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p2-x-publication-receipt.json"
     },
     {
       "scene": 2074,
@@ -142,20 +144,22 @@
       "chatgptOutcome": "returned-edit-selected",
       "additionalMetaSendsAllowed": 0,
       "additionalChatgptEditsAllowed": 0,
-      "eligibleForNormalCountryPairing": true,
+      "eligibleForNormalCountryPairing": false,
       "xEligible": false,
-      "xEligibilityPending": [
-        "fresh live staging and one public Post under exact frozen reservation"
-      ],
+      "xEligibilityPending": [],
       "accessibilitySidecar": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/2074-accessibility.json",
       "alt": "AI-generated fictional Namibia fashion editorial: four adult women lean together on a pink couch beside a lagoon window. One rests against her friend while another reaches toward her hand. Sea-green and aqua tailoring mix with two Namibia-flag outfits, rainbow hosiery and varied heels. An agency arm tattoo is visible.",
       "safetyOverrides": [],
-      "state": "remote-verified-accepted-unpublished",
-      "sceneFamilyConsumed": false,
+      "state": "posted-verified",
+      "sceneFamilyConsumed": true,
       "remoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
       "remotePayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
       "xReservation": "assets/lore/starlight-era/batch-511-armenia-namibia-p2-x-reservation.json",
-      "sceneFamilyReserved": true
+      "sceneFamilyReserved": false,
+      "postUrl": "https://x.com/dogramaci/status/2097249345301107095",
+      "noRepostAnyVersion": true,
+      "postedAtUtc": "2026-09-08T09:03:03.074Z",
+      "xPublicationReceipt": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p2-x-publication-receipt.json"
     }
   ],
   "rawArchiveComplete": true,
@@ -177,11 +181,11 @@
   "archiveException": null,
   "technicalQa": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-selection-qa.json",
   "companionCountry": "Armenia",
-  "companionState": "four-stills-remote-verified-accepted-unpublished",
+  "companionState": "four-stills-posted-verified",
   "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
   "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/closure-evidence-manifest.json",
   "requireRemoteProofBeforeNextDispatch": true,
-  "nextSafeAction": "Only the two unposted scenes in part2 remain eligible under their frozen reservation; never reopen accepted scenes or repost any consumed version.",
+  "nextSafeAction": "All four scene families are consumed across the two public posts. Never reopen or repost any version. Remote-verify publication closure, then advance only from the current country cursor.",
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json",
   "finalPayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
   "finalRemoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
@@ -189,6 +193,12 @@
   "countryPairReservation": "assets/lore/starlight-era/batch-511-armenia-namibia-x-reservation-checkpoint.json",
   "publishedSceneIds": [
     2071,
-    2072
+    2072,
+    2073,
+    2074
+  ],
+  "publishedPostUrls": [
+    "https://x.com/dogramaci/status/2097246369526214887",
+    "https://x.com/dogramaci/status/2097249345301107095"
   ]
 }

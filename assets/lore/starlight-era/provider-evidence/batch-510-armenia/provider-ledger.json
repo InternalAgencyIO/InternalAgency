@@ -130,7 +130,7 @@
   "archiveException": null,
   "previousWorkflowClosure": "assets/lore/starlight-era/batch-509-uruguay-bosnia-and-herzegovina-full-workflow-closure-checkpoint.json",
   "previousRemoteProof": "assets/lore/starlight-era/provider-evidence/batch-509-bosnia-and-herzegovina/full-workflow-remote-verification.json",
-  "nextSafeAction": "Inspect the latest country cursor, then prepare Namibia Batch511 scenes2071-2074 in the same four visible Meta lanes with new immutable rolls, leesha007, Thinking and exact anchors 938,936,937. Never reopen accepted Armenia scenes or repeat any edit. Armenia can be posted only after an eligible companion country is accepted and all publication gates pass.",
+  "nextSafeAction": "All current country scene families are terminal and published. Never reopen or repost any version. Follow the full workflow closure checkpoint for remote verification and next-country preparation.",
   "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/source-and-edit-preflight-remote-verification.json",
   "preflightPayloadCommit": "b300ee53c19017eecd083028fe1f505b445511fb",
   "preflightVerifiedAtUtc": "2026-09-08T06:12:26.732Z",
@@ -270,5 +270,19 @@
   "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
   "finalPayloadCommit": "f193a0f48d6b6fcd38bb6380b004a80e06d36d74",
   "finalRemoteVerifiedAtUtc": "2026-09-08T06:39:41.255Z",
-  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-meta-lanes-and-x-ready-handoff.json"
+  "browserHandoff": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/four-meta-lanes-and-x-ready-handoff.json",
+  "xPublication": {
+    "state": "four-scenes-posted-verified",
+    "postUrls": [
+      "https://x.com/dogramaci/status/2097246369526214887",
+      "https://x.com/dogramaci/status/2097249345301107095"
+    ],
+    "publicationReceipts": [
+      "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-publication-receipt.json",
+      "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p2-x-publication-receipt.json"
+    ],
+    "allSceneFamiliesConsumed": true,
+    "noRepostAnyVersion": true,
+    "workflowClosure": "assets/lore/starlight-era/batch-511-armenia-namibia-full-workflow-closure-checkpoint.json"
+  }
 }

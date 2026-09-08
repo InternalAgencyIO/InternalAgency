@@ -1,4 +1,116 @@
 {
+  "currentArmeniaNamibiaPairPublication511": {
+    "schemaVersion": 1,
+    "batch": 511,
+    "batches": [
+      510,
+      511
+    ],
+    "countries": [
+      "Armenia",
+      "Namibia"
+    ],
+    "state": "both-posts-publicly-verified-awaiting-final-remote-closure",
+    "closedLocallyAtUtc": "2026-09-08T09:12:53.355Z",
+    "publicPostUrls": [
+      "https://x.com/dogramaci/status/2097246369526214887",
+      "https://x.com/dogramaci/status/2097249345301107095"
+    ],
+    "postCount": 242,
+    "sceneIds": [
+      2067,
+      2068,
+      2069,
+      2070,
+      2071,
+      2072,
+      2073,
+      2074
+    ],
+    "allSceneFamiliesConsumed": true,
+    "consumedImageFiles": 32,
+    "uniqueConsumedImageByteVersions": 24,
+    "rawArchiveComplete": true,
+    "archiveExceptions": [],
+    "countryClosures": [
+      "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json",
+      "assets/lore/starlight-era/batch-511-namibia-four-stills-closure-checkpoint.json"
+    ],
+    "rawRemoteProofs": [
+      "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-remote-closure-verification.json",
+      "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json"
+    ],
+    "publicationReceipts": [
+      "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p1-x-publication-receipt.json",
+      "assets/lore/starlight-era/provider-evidence/batch-511-namibia/armenia-namibia-p2-x-publication-receipt.json"
+    ],
+    "reservationCheckpoint": "assets/lore/starlight-era/batch-511-armenia-namibia-x-reservation-checkpoint.json",
+    "providerCounters": {
+      "Namibia": {
+        "initialActivations": 4,
+        "hardFailureRecoveries": 1,
+        "totalMetaActivations": 5,
+        "chatgptInvocations": 4,
+        "returnedPngs": 3,
+        "outputBlocks": 1
+      },
+      "Armenia": {
+        "initialActivations": 4,
+        "hardFailureRecoveries": 0,
+        "totalMetaActivations": 4,
+        "chatgptInvocations": 4,
+        "returnedPngs": 2,
+        "outputBlocks": 2
+      }
+    },
+    "xCounters": {
+      "uploads": 2,
+      "postActivations": 2,
+      "publicPosts": 2,
+      "photos": 8,
+      "exactAltTexts": 8,
+      "madeWithAiPosts": 2,
+      "duplicateMedia": false
+    },
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0907.json",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T09:57:53.355Z",
+    "guardian": {
+      "id": "starlight-pipeline-guardian",
+      "status": "ACTIVE",
+      "newAutomationCreated": false,
+      "configSha256": "4537e8542a080f9160be9cb2a6d22a27ec45beaa7e2c5873d26d21068c684b67"
+    },
+    "browser": {
+      "metaTabs": [
+        "33",
+        "34",
+        "35",
+        "36"
+      ],
+      "xTab": "37",
+      "protectedOmanTab": "1"
+    },
+    "nextCursor": {
+      "batch": 512,
+      "country": "Lithuania",
+      "sceneIds": [
+        2075,
+        2076,
+        2077,
+        2078
+      ],
+      "source": "Current verified Namibia511 closure plus countryPriorityOrder, following the newer fresh-numbered sequential-pass authority used by Croatia504; old campaign counters are not dispatch authority.",
+      "historicalLithuaniaScenesConsumed": [
+        1947,
+        1948,
+        1949,
+        1950
+      ],
+      "noHistoricalSceneReopen": true,
+      "state": "not-prepared-or-dispatched"
+    },
+    "nextSafeAction": "Push and verify both publication closures at HEAD/origin/PR13 with complete evidence and LFS continuity. Then reset only fully archived terminal Meta lanes and prepare the fresh Lithuania512 plan2075-2078. Freeze rolls and exact prompts, verify leesha007 and Thinking, attach938,936,937 in order, and pass remote gates before one initial Send per scene."
+  },
   "currentAuthorityBatch511": {
     "schemaVersion": 1,
     "batch": 511,
@@ -9,7 +121,7 @@
       2073,
       2074
     ],
-    "state": "four-scenes-remote-verified-accepted-unpublished",
+    "state": "four-scenes-posted-verified-awaiting-publication-remote-closure",
     "preparedAtUtc": "2026-09-08T07:03:47.722Z",
     "brief": "assets/lore/starlight-era/batch-511-namibia-editorial-brief.json",
     "fixedRolls": "assets/lore/starlight-era/batch-511-namibia-fixed-rolls.json",
@@ -38,16 +150,16 @@
     "protectedOmanTab": "1",
     "guardian": "starlight-pipeline-guardian",
     "guardianStatus": "ACTIVE",
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0820.json",
-    "guardianNextAuditNotBeforeUtc": "2026-09-08T09:07:16.624Z",
-    "xPostCount": 240,
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0907.json",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T09:57:53.355Z",
+    "xPostCount": 242,
     "latestXUrls": [
-      "https://x.com/dogramaci/status/2097189559310156192",
-      "https://x.com/dogramaci/status/2097191849538588895"
+      "https://x.com/dogramaci/status/2097246369526214887",
+      "https://x.com/dogramaci/status/2097249345301107095"
     ],
     "eligibleCompanionCountry": "Armenia",
     "companionAcceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
-    "nextSafeAction": "After this proof carrier is pushed and HEAD/origin/PR match, reserve two Armenia/Namibia four-photo posts in fixed2+2 order. Check every saved scene-family version against posted media, freeze captions and independent25-percent hashtag rolls, set all ALT and Made with AI, verify @dogramaci and exact staging, then Post each once under current explicit authorization. No scene or edit may reopen.",
+    "nextSafeAction": "Push and verify both publication closures at HEAD/origin/PR13 with complete evidence and LFS continuity. Then reset only fully archived terminal Meta lanes and prepare the fresh Lithuania512 plan2075-2078. Freeze rolls and exact prompts, verify leesha007 and Thinking, attach938,936,937 in order, and pass remote gates before one initial Send per scene.",
     "stagedAtUtc": "2026-09-08T07:11:31.898Z",
     "remotePreflight": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/initial-send-remote-preflight.json",
     "preflightPayloadCommit": "cb54f5e100e748dcbe328c51601443567fb85b91",
@@ -108,7 +220,12 @@
     "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/final-remote-closure-verification.json",
     "finalPayloadCommit": "194f055dba299d5b23f15983f7f9a9ebdc591b8c",
     "finalRemoteVerifiedAtUtc": "2026-09-08T08:31:29.152Z",
-    "checkpoint": "assets/lore/starlight-era/batch-511-namibia-four-stills-closure-checkpoint.json"
+    "checkpoint": "assets/lore/starlight-era/batch-511-armenia-namibia-full-workflow-closure-checkpoint.json",
+    "publishedPostUrls": [
+      "https://x.com/dogramaci/status/2097246369526214887",
+      "https://x.com/dogramaci/status/2097249345301107095"
+    ],
+    "allSceneFamiliesConsumed": true
   },
   "currentAuthorityBatch510": {
     "schemaVersion": 1,
@@ -120,7 +237,7 @@
       2069,
       2070
     ],
-    "state": "four-stills-remote-verified-accepted-unpublished",
+    "state": "four-scenes-posted-verified-awaiting-publication-remote-closure",
     "recordedAtUtc": "2026-09-08T06:29:45.925Z",
     "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/accepted-selections.json",
     "finalQa": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/final-selection-qa.json",
@@ -146,10 +263,10 @@
     "allRawBytesSaved": true,
     "allKnownReturnedPngsSaved": true,
     "archiveException": null,
-    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-510-armenia/continuation-log-audit-2026-09-08-0642.json",
+    "latestAudit": "assets/lore/starlight-era/provider-evidence/batch-511-namibia/continuation-log-audit-2026-09-08-0907.json",
     "guardian": "starlight-pipeline-guardian",
     "guardianStatus": "ACTIVE",
-    "guardianNextAuditNotBeforeUtc": "2026-09-08T07:29:04.474Z",
+    "guardianNextAuditNotBeforeUtc": "2026-09-08T09:57:53.355Z",
     "providerUrls": [
       "https://www.meta.ai/prompt/7625f457-5a4f-407c-9ca9-46a003615ef5",
       "https://www.meta.ai/prompt/a26f9094-bf33-4b65-ad79-41bc48fb46e7",
@@ -161,7 +278,7 @@
       "https://x.com/dogramaci/status/2097189559310156192",
       "https://x.com/dogramaci/status/2097191849538588895"
     ],
-    "xPostCount": 240,
+    "xPostCount": 242,
     "canonicalContradictions": [
       "2068 and 2069 single edits were individually blocked at output stage. Each allowance is consumed; original usable sources are retained.",
       "2070 returned edit expands beyond the close source crop and introduces offscreen lower-body details. It is saved unused; the closer Meta source is selected.",
@@ -175,7 +292,7 @@
       2073,
       2074
     ],
-    "nextSafeAction": "Inspect the latest country cursor, then prepare Namibia Batch511 scenes2071-2074 in the same four visible Meta lanes with new immutable rolls, leesha007, Thinking and exact anchors 938,936,937. Never reopen accepted Armenia scenes or repeat any edit. Armenia can be posted only after an eligible companion country is accepted and all publication gates pass.",
+    "nextSafeAction": "Armenia510 and Namibia511 are fully published. No accepted scene or saved version may be reused. Follow the newest two-country workflow closure for remote parity and next-country preparation.",
     "finalPayloadCommit": "f193a0f48d6b6fcd38bb6380b004a80e06d36d74",
     "finalRemoteVerifiedAtUtc": "2026-09-08T06:39:41.255Z",
     "allFinalPayloadByteChecksPassed": true,
@@ -189,7 +306,13 @@
     ],
     "currentActualXTab": "37",
     "renderInFlight": false,
-    "checkpoint": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json"
+    "checkpoint": "assets/lore/starlight-era/batch-510-armenia-four-stills-closure-checkpoint.json",
+    "publishedPostUrls": [
+      "https://x.com/dogramaci/status/2097246369526214887",
+      "https://x.com/dogramaci/status/2097249345301107095"
+    ],
+    "allSceneFamiliesConsumed": true,
+    "workflowClosure": "assets/lore/starlight-era/batch-511-armenia-namibia-full-workflow-closure-checkpoint.json"
   },
   "currentUruguayBosniaPairPublication509": {
     "schemaVersion": 1,
