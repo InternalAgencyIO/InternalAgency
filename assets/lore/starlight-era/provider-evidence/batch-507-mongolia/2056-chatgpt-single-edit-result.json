@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "batch": 507,
+  "scene": 2056,
+  "issuedAtUtc": "2026-09-08T01:57:16.308Z",
+  "resultObservedAtUtc": "2026-09-08T02:18:24.888Z",
+  "outcome": "output-blocked",
+  "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 613e77eb-ef49-4d2d-b536-d986f3539cd8. safety_violations=[sexual].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"output\\\",\\n      \\\"categories\\\": [\\n        \\\"sexual\\\"\\n      ]\\n    }\\n  }\\n}\")",
+  "output_hint": null,
+  "prompt": "One identity-preserving clothing-only tailoring pass for scene 2056: substantially shorten mini hems to a wearable upper-thigh silhouette with secure opaque coverage; open the back or side-back garment construction where visible, bare the arms, and preserve legwear and independently rolled shoes. Midriff assignments: Alia=visible navel, Radiance=covered, Ellie=covered, ECE=covered. Preserve the recorded complete flag garment designs, tattoo motif assignments, all four faces and adult ages, body proportions, expressions, poses, contact ownership, camera crop and perspective, lighting and location. Do not widen an extreme-close crop to show shoes or turn bodies to reveal hidden backs. Keep existing correct details; no nudity, exposure or erotic framing. Output one image, no further pass. Apply these exact per-character styling rolls in this same one invocation, retaining correct details and realizing missing selected garment, shoe or tattoo details without altering anatomy: Alia: an emerald fitted mini with gold river-curve seams; secure open-back or side-back construction and bare arms, a tasteful cropped or waist-cutout section revealing the navel; emerald lacquer stiletto sandal with one subtle RAZE text mark. No tattoos. Radiance: a warm-ivory one-shoulder cocktail mini with copper folds; secure open-back or side-back construction and bare arms, covered midriff; rainbow-gradient sculptural platform with one subtle original RAZE split-star mark. Prominent crisp tattoos: crescent, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. Ellie: a jade cropped shell and secure sand-colored mini skort; secure open-back or side-back construction and bare arms, covered midriff; jade ceramic ankle boot without any branding. No tattoos. ECE: a deep-teal side-back mini with pale-gold contour piping; secure open-back or side-back construction and bare arms, covered midriff; deep-teal enamel knee high boot without any branding. Prominent crisp tattoos: original split-star, separated on visible non-intimate upper arm, shoulder or outer calf; prioritize a visible upper arm or shoulder in a close crop. If stockings are visible, place one small original RAZE star stocking mark; this is not a tattoo. No general hosiery assignment; only individual stocking marks may call for a neutral stocking. Preserve the actual input rectangle, crop, camera position and all face locations exactly, even if the source differs from the requested camera roll. No zoom, recrop, outpainting, body repositioning, image rotation or extra feet. Keep any documented safer source exclusions. Image1 is the edit target; anchors938,936,937 are identity-only references, not replacement compositions. Explicit scene2056 safer-source exclusion: retain the calm uninhabited valley exactly, with no fire, smoke, explosion, mushroom cloud, conflict or disaster effects. Do not restore the original active background-effects roll. All four subjects are fictional adults age21.",
+  "promptPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/scene-2056-single-edit-prompt.txt",
+  "promptSha256": "39E43A1F6E958D1A2A900043F7E5E28D44B15150AE0495AB094C94DDD5C488E2",
+  "source": {
+    "scene": 2056,
+    "attempt": "safe-alternative-1",
+    "label": "gallery/valley_lounge_candid.webp",
+    "labelIndex": 0,
+    "sourceUrl": "https://scontent.xx.fbcdn.net/v/t39.105495-1/800259624_1761713341699221_4982925519567462277_n.webp?_nc_ht=scontent.xx.fbcdn.net&_nc_cat=109&_nc_ohc=ZXVLSmkcWfIQ7kNvwEcF2RU&sdl=0&ccb=14-4&oh=00_AQLj0-DjyAFijilh33cfKfxXdJPXaoBssmU_Oz2naybH4Q&oe=6AA541B7&_nc_sid=a21977",
+    "providerUrl": "https://www.meta.ai/prompt/9553f834-c376-4352-8216-c632f292db2f",
+    "observedAtUtc": "2026-09-08T01:51:08.688Z",
+    "path": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-gallery-original.webp",
+    "downloadPath": "C:\\Users\\A\\Downloads\\800259624_1761713341699221_4982925519567462277_n.webp",
+    "bytes": 517366,
+    "sha256": "92291c65d7a414b919943637533ba56eaaed838f5d8cbac86a84111b136ef4ef",
+    "dimensions": {
+      "width": 1152,
+      "height": 2048
+    },
+    "kind": "gallery",
+    "archiveMethod": "visible browser downloadMedia and download event",
+    "status": "archived-original-pending-qa-unused-until-selected"
+  },
+  "referencePaths": [
+    "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-meta-gallery-original.webp",
+    "assets/lore/starlight-era/938-central-african-republic-boali-falls-rainbow-star-map-relay.png",
+    "assets/lore/starlight-era/936-central-african-republic-bangui-oubangui-rainbow-route-grid.png",
+    "assets/lore/starlight-era/937-central-african-republic-dzanga-sangha-rainbow-clinic-signal-cipher.png"
+  ],
+  "invocationCount": 1,
+  "maximumInvocations": 1,
+  "additionalInvocationsAllowed": 0,
+  "blockStage": "output",
+  "blockCategory": "sexual",
+  "retryAllowed": false,
+  "sourceDisposition": "Independently reviewed non-explicit calm-background Meta source retained. No replacement edit or provider retry."
+}

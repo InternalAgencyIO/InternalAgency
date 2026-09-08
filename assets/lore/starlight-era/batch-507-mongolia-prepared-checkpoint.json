@@ -8,7 +8,7 @@
     2057,
     2058
   ],
-  "state": "four-single-tailoring-edits-invoked-awaiting-results",
+  "state": "four-stills-closed-pending-final-remote-proof",
   "preparedAtUtc": "2026-09-07T07:14:46.093Z",
   "previousCountryClosure": "assets/lore/starlight-era/batch-506-eritrea-four-stills-closure-checkpoint.json",
   "previousCountryClosureProof": "assets/lore/starlight-era/provider-evidence/batch-506-eritrea/final-remote-closure-verification.json",
@@ -66,7 +66,7 @@
     "Four intermediate camera rolls78,69,80,71 are the fixed draw, not a lost probability mapping; four angles and poses differ.",
     "Oman and Switzerland remain held."
   ],
-  "nextSafeAction": "Collect every result from the four issued built-in single-edit calls; no retry even for a block or unattributed/interrupted result. Preserve PNG bytes or block receipts, select best technically usable versions, write ALT and final QA, then remote-verify Mongolia closure and reserve exact Eritrea/Mongolia X pairs.",
+  "nextSafeAction": "Seal and remote-verify all Mongolia originals, edits, block receipts, QA and ALT; then reserve exact Eritrea/Mongolia 2+2 pairs after live account and duplicate gates.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T07:19:53.157Z",
@@ -158,5 +158,15 @@
   "safeAlternativeTerminalEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2056-safe-alternative-1-terminal-evidence.json",
   "additionalMetaSendsAllowedForCurrentScenes": 0,
   "additionalChatgptInvocationsAllowed": 0,
-  "singleEditPreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-edit-preflight-remote-proof.json"
+  "singleEditPreflight": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-edit-preflight-remote-proof.json",
+  "closureCheckpoint": "assets/lore/starlight-era/batch-507-mongolia-four-stills-closure-checkpoint.json",
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-results.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/final-selection-qa.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/final-remote-closure-verification.json",
+  "chatgptReturnedFiles": 3,
+  "chatgptBlockedInvocations": 1,
+  "totalSavedProviderAndEditedFiles": 25,
+  "allFourScenesTerminalNoMoreRendersOrEdits": true
 }

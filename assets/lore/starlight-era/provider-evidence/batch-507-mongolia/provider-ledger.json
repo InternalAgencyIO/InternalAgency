@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "batch": 507,
   "country": "Mongolia",
-  "state": "four-single-tailoring-edits-invoked-awaiting-results",
+  "state": "four-stills-closed-pending-final-remote-proof",
   "provider": "Meta AI",
   "account": "leesha007",
   "mode": "Thinking",
@@ -150,14 +150,14 @@
       ]
     }
   ],
-  "currentCheckpoint": "assets/lore/starlight-era/batch-507-mongolia-prepared-checkpoint.json",
+  "currentCheckpoint": "assets/lore/starlight-era/batch-507-mongolia-four-stills-closure-checkpoint.json",
   "brief": "assets/lore/starlight-era/batch-507-mongolia-editorial-brief.json",
   "fixedRolls": "assets/lore/starlight-era/batch-507-mongolia-fixed-rolls.json",
   "maximumHardFailureRetriesPerScene": 2,
   "aestheticRetries": 0,
   "sourceArchiveComplete": true,
   "archiveException": null,
-  "nextSafeAction": "Collect every result from the four issued built-in single-edit calls; no retry even for a block or unattributed/interrupted result. Preserve PNG bytes or block receipts, select best technically usable versions, write ALT and final QA, then remote-verify Mongolia closure and reserve exact Eritrea/Mongolia X pairs.",
+  "nextSafeAction": "Seal and remote-verify all Mongolia originals, edits, block receipts, QA and ALT; then reserve exact Eritrea/Mongolia 2+2 pairs after live account and duplicate gates.",
   "stagingEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/four-composers-staging-evidence.json",
   "dispatchIntents": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/initial-send-intents.json",
   "stagedAtUtc": "2026-09-07T07:19:53.157Z",
@@ -254,37 +254,47 @@
       "scene": 2055,
       "issuedAtUtc": "2026-09-08T01:57:16.308Z",
       "invocationCount": 1,
-      "state": "issued-awaiting-result",
-      "maximumInvocations": 1,
-      "additionalInvocationsAllowed": 0,
-      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+      "state": "image-returned",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-results.json",
+      "returnedPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2055-chatgpt-single-tailoring-pass.png",
+      "additionalInvocationsAllowed": 0
     },
     {
       "scene": 2056,
       "issuedAtUtc": "2026-09-08T01:57:16.308Z",
       "invocationCount": 1,
-      "state": "issued-awaiting-result",
-      "maximumInvocations": 1,
-      "additionalInvocationsAllowed": 0,
-      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+      "state": "output-blocked",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-results.json",
+      "returnedPath": null,
+      "additionalInvocationsAllowed": 0
     },
     {
       "scene": 2057,
       "issuedAtUtc": "2026-09-08T01:57:16.308Z",
       "invocationCount": 1,
-      "state": "issued-awaiting-result",
-      "maximumInvocations": 1,
-      "additionalInvocationsAllowed": 0,
-      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+      "state": "image-returned",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-results.json",
+      "returnedPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2057-chatgpt-single-tailoring-pass.png",
+      "additionalInvocationsAllowed": 0
     },
     {
       "scene": 2058,
       "issuedAtUtc": "2026-09-08T01:57:16.308Z",
       "invocationCount": 1,
-      "state": "issued-awaiting-result",
-      "maximumInvocations": 1,
-      "additionalInvocationsAllowed": 0,
-      "intent": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-intents.json"
+      "state": "image-returned",
+      "resultReceipt": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-results.json",
+      "returnedPath": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/2058-chatgpt-single-tailoring-pass.png",
+      "additionalInvocationsAllowed": 0
     }
-  ]
+  ],
+  "editResults": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/single-chatgpt-edit-results.json",
+  "acceptedSelections": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/accepted-selections.json",
+  "finalQa": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/final-selection-qa.json",
+  "closureEvidence": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/closure-evidence-manifest.json",
+  "finalRemoteVerification": "assets/lore/starlight-era/provider-evidence/batch-507-mongolia/final-remote-closure-verification.json",
+  "chatgptReturnedFiles": 3,
+  "chatgptBlockedInvocations": 1,
+  "totalSavedProviderAndEditedFiles": 25,
+  "uniqueSavedByteVersions": 21,
+  "allFourScenesTerminalNoMoreRendersOrEdits": true
 }
